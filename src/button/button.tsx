@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {Text} from '../text'
 import {Theme} from '../theme'
 
-export type ButtonTone = 'brand'
+export type ButtonTone = 'default' | 'brand'
 
 interface ButtonProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
