@@ -11,10 +11,9 @@ npm install @sanity/ui react styled-components
 ## Usage
 
 ```jsx
-import {Button, studioTheme} from '@sanity/ui'
+import {Button, studioTheme, ThemeProvider} from '@sanity/ui'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {ThemeProvider} from 'styled-components'
 
 ReactDOM.render(
   <ThemeProvider theme={studioTheme}>
