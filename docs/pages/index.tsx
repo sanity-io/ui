@@ -31,7 +31,7 @@ function IndexPage() {
       </Box>
 
       <Box as="footer" padding={4} style={{borderTop: '1px solid #ccc'}}>
-        Sanity &copy; 2017–2020
+        <Text size={1}>Sanity &copy; 2017–2020</Text>
       </Box>
     </>
   )
