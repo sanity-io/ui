@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {Text} from '../text'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
@@ -12,12 +12,14 @@ interface ButtonProps {
 
 const Root = styled.button(buttonBaseStyles, buttonColorStyles)
 
-export function Button(props: React.HTMLProps<HTMLButtonElement> & ButtonProps) {
+export const Button = forwardRef((props: React.HTMLProps<HTMLButtonElement> & ButtonProps, ref) => {
   const {children, ...restProps} = props
 
   return (
-    <Root data-ui="Button" {...restProps}>
+    <Root data-ui="Button" {...restProps} ref={ref}>
       {children && <Text>{children}</Text>}
     </Root>
   )
-}
+})
+
+Button.displayName = 'Button'

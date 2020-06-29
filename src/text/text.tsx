@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {textBaseStyles, textSizeStyles} from './styles'
 
@@ -9,12 +9,14 @@ interface TextProps {
 
 const Root = styled.div(textBaseStyles, textSizeStyles)
 
-export function Text(props: React.HTMLProps<HTMLDivElement> & TextProps) {
+export const Text = forwardRef((props: React.HTMLProps<HTMLDivElement> & TextProps, ref) => {
   const {children, size, ...restProps} = props
 
   return (
-    <Root data-ui="Text" {...restProps} size={size}>
+    <Root data-ui="Text" {...restProps} ref={ref} size={size}>
       {children}
     </Root>
   )
-}
+})
+
+Text.displayName = 'Text'
