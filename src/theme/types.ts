@@ -32,11 +32,12 @@ interface ThemeColor {
 
 export interface Theme {
   color: ThemeColor
-  space: number[]
   fonts: {
     code: ThemeFont
     heading: ThemeFont
     label: ThemeFont
     text: ThemeFont
   }
+  media: number[]
+  space: number[]
 }
