@@ -1,9 +1,8 @@
 import React from 'react'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import {Text} from '../text'
-import {Theme} from '../theme'
-
-export type ButtonTone = 'default' | 'brand'
+import {buttonBaseStyles, buttonColorStyles} from './styles'
+import {ButtonTone} from './types'
 
 interface ButtonProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
@@ -11,25 +10,7 @@ interface ButtonProps {
   type?: 'button' | 'reset' | 'submit'
 }
 
-function buttonColorCss(props: {theme: Theme; tone?: ButtonTone}) {
-  const tone = props.theme.color.button.tones[props.tone || 'default']
-
-  return css`
-    background: ${tone.enabled.bg};
-    color: ${tone.enabled.fg};
-  `
-}
-
-const Root = styled.button`
-  -webkit-appearance: none;
-  appearance: none;
-  font: inherit;
-  border: 0;
-  padding: 1em;
-  border-radius: 3px;
-
-  ${buttonColorCss}
-`
+const Root = styled.button(buttonBaseStyles, buttonColorStyles)
 
 export function Button(props: React.HTMLProps<HTMLButtonElement> & ButtonProps) {
   const {children, ...restProps} = props
