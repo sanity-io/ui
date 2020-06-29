@@ -23,6 +23,7 @@
     "@sanity/color": "1.0.0-alpha.0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "5.3.19",
     "@storybook/addon-info": "5.3.19",
     "@storybook/addon-knobs": "5.3.19",
     "@storybook/addon-links": "5.3.19",
