@@ -1,4 +1,4 @@
-import {Button} from '@sanity/ui'
+import {Box, Button} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -10,8 +10,12 @@ function IndexPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>Sanity Design</h1>
+      <Box as="header" padding={4} style={{borderBottom: '1px solid #ccc'}}>
+        <div>Sanity Design</div>
+      </Box>
+
+      <Box as="main" padding={4}>
+        <h1>Sanity UI documention</h1>
 
         <div>
           <h2>Button example</h2>
@@ -24,12 +28,11 @@ function IndexPage() {
 <Button tone="brand">Test</Button>`}</code>
           </pre>
         </div>
-      </main>
+      </Box>
 
-      <footer>
-        <hr />
+      <Box as="footer" padding={4} style={{borderTop: '1px solid #ccc'}}>
         Sanity &copy; 2017–2020
-      </footer>
+      </Box>
     </>
   )
 }
