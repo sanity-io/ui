@@ -1,4 +1,4 @@
-import {Box, Button} from '@sanity/ui'
+import {Box, Button, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,7 +11,7 @@ function IndexPage() {
       </Head>
 
       <Box as="header" padding={4} style={{borderBottom: '1px solid #ccc'}}>
-        <div>Sanity Design</div>
+        <Text>Sanity Design</Text>
       </Box>
 
       <Box as="main" padding={4}>
