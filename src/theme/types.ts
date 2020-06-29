@@ -19,9 +19,17 @@ interface ThemeColor {
           bg: string
           fg: string
         }
+        hovered: {
+          bg: string
+          fg: string
+        }
       }
       brand: {
         enabled: {
+          bg: string
+          fg: string
+        }
+        hovered: {
           bg: string
           fg: string
         }

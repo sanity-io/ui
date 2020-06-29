@@ -10,6 +10,8 @@ export function buttonBaseStyles() {
     border: 0;
     padding: 1em;
     border-radius: 3px;
+    outline: none;
+    user-select: none;
   `
 }
 
@@ -19,5 +21,16 @@ export function buttonColorStyles(props: {theme: Theme; tone?: ButtonTone}) {
   return css`
     background: ${tone.enabled.bg};
     color: ${tone.enabled.fg};
+
+    &:focus {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #4e91fc;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: ${tone.hovered.bg};
+        color: ${tone.hovered.fg};
+      }
+    }
   `
 }

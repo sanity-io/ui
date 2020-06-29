@@ -17,7 +17,7 @@ export const Button = forwardRef((props: React.HTMLProps<HTMLButtonElement> & Bu
 
   return (
     <Root data-ui="Button" {...restProps} ref={ref}>
-      {children && <Text>{children}</Text>}
+      {children && <Text as="span">{children}</Text>}
     </Root>
   )
 })

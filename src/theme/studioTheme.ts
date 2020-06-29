@@ -10,10 +10,18 @@ export const studioTheme: Theme = {
             bg: color.gray['500'].hex,
             fg: color.white.hex,
           },
+          hovered: {
+            bg: color.gray['600'].hex,
+            fg: color.white.hex,
+          },
         },
         brand: {
           enabled: {
             bg: color.blue['500'].hex,
+            fg: color.white.hex,
+          },
+          hovered: {
+            bg: color.blue['600'].hex,
             fg: color.white.hex,
           },
         },
