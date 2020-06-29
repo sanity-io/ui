@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.dist.json",
+  "include": [
+    "./src/**/*.stories.ts",
+    "./src/**/*.stories.tsx",
+    "./typings/*.d.ts"
+  ],
+  "files": ["./src/index.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@sanity/ui": ["./src"]
+    }
+  }
+}

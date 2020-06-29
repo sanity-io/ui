@@ -1,0 +1,68 @@
+{
+  "name": "@sanity/ui",
+  "version": "1.0.0-alpha.0",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "files": [
+    "/dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "run-p build-*",
+    "build-cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
+    "build-es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
+    "clean": "rimraf dist",
+    "dev": "start-storybook --quiet -c storybook",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sanity/color": "1.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-info": "5.3.19",
+    "@storybook/addon-knobs": "5.3.19",
+    "@storybook/addon-links": "5.3.19",
+    "@storybook/preset-typescript": "3.0.0",
+    "@storybook/react": "5.3.19",
+    "@types/react": "16.9.41",
+    "@types/styled-components": "5.1.0",
+    "@typescript-eslint/eslint-plugin": "3.4.0",
+    "@typescript-eslint/parser": "3.4.0",
+    "babel-eslint": "10.1.0",
+    "babel-loader": "8.1.0",
+    "eslint": "7.3.1",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-react": "7.20.1",
+    "eslint-plugin-react-hooks": "4.0.4",
+    "npm-run-all": "4.1.5",
+    "prettier": "^2.0.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "rimraf": "3.0.2",
+    "styled-components": "5.1.1",
+    "typescript": "3.9.5"
+  },
+  "peerDependencies": {
+    "react": "^16.9",
+    "styled-components": "^5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/color.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sanity-io/color/issues"
+  },
+  "keywords": [
+    "sanity",
+    "color",
+    "palette"
+  ],
+  "author": "Sanity.io <hello@sanity.io>",
+  "homepage": "https://www.sanity.io/"
+}

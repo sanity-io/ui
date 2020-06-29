@@ -1,0 +1,17 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  font: 100%/1.25 -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  -webkit-font-smoothing: antialiased;
+}
