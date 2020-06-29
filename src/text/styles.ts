@@ -18,7 +18,7 @@ export function textBaseStyles(props: {theme: Theme}) {
     }
 
     & code {
-      font-family: ${({theme}) => theme.fonts.code.family};
+      font-family: ${theme.fonts.code.family};
       border-radius: 2px;
     }
 
