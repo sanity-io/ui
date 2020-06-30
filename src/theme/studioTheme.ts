@@ -27,6 +27,22 @@ export const studioTheme: Theme = {
         },
       },
     },
+    card: {
+      tones: {
+        default: {
+          bg: color.white.hex,
+          fg: color.black.hex,
+        },
+        transparent: {
+          bg: color.gray['100'].hex,
+          fg: color.black.hex,
+        },
+        contrast: {
+          bg: color.black.hex,
+          fg: color.white.hex,
+        },
+      },
+    },
   },
   container: [320, 640, 960, 1280, 1600, 1920],
   fonts: {
