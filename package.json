@@ -23,7 +23,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/color": "1.0.0-alpha.0"
+    "@sanity/color": "1.0.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "5.3.19",

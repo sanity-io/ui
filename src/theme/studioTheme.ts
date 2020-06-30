@@ -1,4 +1,4 @@
-import color from '@sanity/color'
+import {color} from '@sanity/color'
 import {Theme} from './types'
 
 export const studioTheme: Theme = {

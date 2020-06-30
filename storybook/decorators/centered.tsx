@@ -1,4 +1,4 @@
-import color from '@sanity/color'
+import {color} from '@sanity/color'
 import React from 'react'
 import styled from 'styled-components'
 
