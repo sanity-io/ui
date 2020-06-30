@@ -4,9 +4,9 @@ import {ButtonTone} from './types'
 
 export function buttonBaseStyles() {
   return css`
-    -webkit-appearance: none;
-    display: inline-block;
+    -webkit-font-smoothing: inherit;
     appearance: none;
+    display: inline-block;
     font: inherit;
     border: 0;
     padding: 1em;
