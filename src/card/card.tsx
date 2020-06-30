@@ -1,29 +1,20 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {BoxPaddingProps, boxFlexStyles, boxPaddingStyles} from '../box'
 import {getResponsiveProp} from '../helpers'
-import {boxFlexStyles, boxPaddingStyles} from './styles'
+import {cardColorStyles} from './styles'
 
-export interface BoxPaddingProps {
-  padding?: number | number[]
-  paddingX?: number | number[]
-  paddingY?: number | number[]
-  paddingTop?: number | number[]
-  paddingBottom?: number | number[]
-  paddingLeft?: number | number[]
-  paddingRight?: number | number[]
-}
-
-interface BoxBaseProps {
+interface CardBaseProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   flex?: number | number[]
 }
 
-type BoxProps = BoxPaddingProps & BoxBaseProps
+type CardProps = BoxPaddingProps & CardBaseProps
 
 // @todo: Figure out typings
-const Root = styled.div(boxFlexStyles as any, boxPaddingStyles)
+const Root = styled.div(boxFlexStyles as any, boxPaddingStyles, cardColorStyles)
 
-export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps, ref) => {
+export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardProps, ref) => {
   const {
     as: asProp = 'div',
     flex: flexProp,
@@ -49,11 +40,7 @@ export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps
 
   const flex = getResponsiveProp(flexProp, [])
 
-  return (
-    <Root data-ui="Box" {...restProps} {...paddingProps} as={asProp} flex={flex} ref={ref}>
-      {props.children}
-    </Root>
-  )
+  return <Root data-ui="Card" {...restProps} {...paddingProps} as={asProp} flex={flex} ref={ref} />
 })
 
-Box.displayName = 'Box'
+Card.displayName = 'Card'

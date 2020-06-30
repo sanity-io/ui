@@ -40,6 +40,7 @@ interface ThemeColor {
 
 export interface Theme {
   color: ThemeColor
+  container: number[]
   fonts: {
     code: ThemeFont
     heading: ThemeFont

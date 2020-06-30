@@ -110,3 +110,20 @@ export function boxPaddingStyles(props: {
     })}
   `
 }
+
+export function boxFlexStyles(props: {flex: number[]; theme: Theme}) {
+  return css`
+    ${props.flex.map((flex, mqIndex) => {
+      if (mqIndex === 0)
+        return css`
+          flex: ${flex};
+        `
+
+      return css`
+        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
+          flex: ${flex};
+        }
+      `
+    })}
+  `
+}

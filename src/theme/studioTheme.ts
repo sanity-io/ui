@@ -28,6 +28,7 @@ export const studioTheme: Theme = {
       },
     },
   },
+  container: [320, 640, 960, 1280, 1600, 1920],
   fonts: {
     code: {
       family: '-apple-system-ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
