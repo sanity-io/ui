@@ -1,3 +1,4 @@
+import {AppHeader} from '~/components'
 import {Box, Card, Container, Flex, Inline, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
@@ -6,13 +7,11 @@ function LayoutPage() {
   return (
     <>
       <Head>
-        <title>Sanity Design – Sanity.io</title>
+        <title>Layout – Sanity UI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box as="header" padding={4} style={{borderBottom: '1px solid #ccc'}}>
-        <Text>Sanity Design</Text>
-      </Box>
+      <AppHeader />
 
       <Box as="main" padding={4}>
         <h1>Layout</h1>
@@ -150,13 +149,17 @@ function LayoutPage() {
 
           <Card padding={2} tone="transparent">
             <Container width={0}>
-              <Text>Contained text</Text>
+              <Card padding={4}>
+                <Text>Contained text</Text>
+              </Card>
             </Container>
           </Card>
 
           <Card as="pre" padding={2} tone="contrast">
             <code>{`<Container width={0}>
-  <Text>Contained text</Text>
+  <Card padding={4}>
+    <Text>Contained text</Text>
+  </Card>
 </Container>`}</code>
           </Card>
         </Box>

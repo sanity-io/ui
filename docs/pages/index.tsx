@@ -1,3 +1,4 @@
+import {AppHeader} from '~/components'
 import {Box, Button, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
@@ -6,13 +7,11 @@ function IndexPage() {
   return (
     <>
       <Head>
-        <title>Sanity Design – Sanity.io</title>
+        <title>Sanity UI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box as="header" padding={4} style={{borderBottom: '1px solid #ccc'}}>
-        <Text>Sanity Design</Text>
-      </Box>
+      <AppHeader />
 
       <Box as="main" padding={4}>
         <h1>Sanity UI documention</h1>
