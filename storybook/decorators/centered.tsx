@@ -1,13 +1,16 @@
-import {color} from '@sanity/color'
+import {Card} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
 
-const Root = styled.div`
-  background: ${color.gray['200'].hex};
+const Root = styled(Card)`
+  background: ${({theme}) => theme.color.card.tones.transparent.bg};
+  color: ${({theme}) => theme.color.card.tones.transparent.fg};
   display: flex;
-  height: 100%;
   align-items: center;
   justify-content: center;
+  height: 100%;
 `
 
-export const withCentered = (storyFn: () => JSX.Element) => <Root>{storyFn()}</Root>
+export const withCentered = (storyFn: () => JSX.Element) => (
+  <Root tone="transparent">{storyFn()}</Root>
+)
