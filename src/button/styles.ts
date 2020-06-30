@@ -5,6 +5,7 @@ import {ButtonTone} from './types'
 export function buttonBaseStyles() {
   return css`
     -webkit-appearance: none;
+    display: inline-block;
     appearance: none;
     font: inherit;
     border: 0;
@@ -12,6 +13,7 @@ export function buttonBaseStyles() {
     border-radius: 3px;
     outline: none;
     user-select: none;
+    text-decoration: none;
   `
 }
 
