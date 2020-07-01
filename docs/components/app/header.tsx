@@ -1,25 +1,74 @@
-import {Box, Button, Text, Flex, Inline} from '@sanity/ui'
+import {Box, Container, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
 import React from 'react'
+import styled from 'styled-components'
+
+const Root = styled(Box)`
+  height: 100%;
+`
 
 export function AppHeader() {
   return (
-    <Box as="header" style={{borderBottom: '1px solid #ccc'}}>
-      <Flex>
-        <Box as="a" flex={1} padding={4}>
-          <Link href="/" passHref>
-            <Text as="a">Sanity UI</Text>
-          </Link>
-        </Box>
+    <Root forwardedAs="header">
+      <Container>
+        <Box padding={4}>
+          <Stack space={2}>
+            <Text>
+              <Link href="/" passHref>
+                <a>Sanity UI</a>
+              </Link>
+            </Text>
 
-        <Box padding={1}>
-          <Inline space={2}>
-            <Link href="/layout" passHref>
-              <Button as="a">Layout</Button>
-            </Link>
-          </Inline>
+            <Text>
+              <Link href="/box" passHref>
+                <a>Box</a>
+              </Link>
+            </Text>
+
+            <Text>
+              <Link href="/button" passHref>
+                <a>Button</a>
+              </Link>
+            </Text>
+
+            <Text>
+              <Link href="/card" passHref>
+                <a>Card</a>
+              </Link>
+            </Text>
+
+            <Text>
+              <Link href="/container" passHref>
+                <a>Container</a>
+              </Link>
+            </Text>
+
+            <Text>
+              <Link href="/flex" passHref>
+                <a>Flex</a>
+              </Link>
+            </Text>
+
+            <Text>
+              <Link href="/inline" passHref>
+                <a>Inline</a>
+              </Link>
+            </Text>
+
+            <Text>
+              <Link href="/stack" passHref>
+                <a>Stack</a>
+              </Link>
+            </Text>
+
+            <Text>
+              <Link href="/text" passHref>
+                <a>Text</a>
+              </Link>
+            </Text>
+          </Stack>
         </Box>
-      </Flex>
-    </Box>
+      </Container>
+    </Root>
   )
 }
