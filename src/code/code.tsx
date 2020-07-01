@@ -7,7 +7,7 @@ interface CodeProps {
   size?: number
 }
 
-const Root = styled.div(codeBaseStyles, codeSizeStyles)
+const Root = styled.pre(codeBaseStyles, codeSizeStyles)
 
 export const Code = forwardRef((props: React.HTMLProps<HTMLDivElement> & CodeProps, ref) => {
   const {children, size, ...restProps} = props
