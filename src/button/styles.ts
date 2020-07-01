@@ -4,19 +4,21 @@ import {ButtonTone} from './types'
 
 export function buttonBaseStyles() {
   return css`
-    -webkit-appearance: none;
+    -webkit-font-smoothing: inherit;
     appearance: none;
+    display: inline-block;
     font: inherit;
     border: 0;
-    padding: 1em;
+    margin: 0;
     border-radius: 3px;
     outline: none;
     user-select: none;
+    text-decoration: none;
   `
 }
 
-export function buttonColorStyles(props: {theme: Theme; tone?: ButtonTone}) {
-  const tone = props.theme.color.button.tones[props.tone || 'default']
+export function buttonColorStyles(props: {theme: Theme; tone: ButtonTone}) {
+  const tone = props.theme.color.button.tones[props.tone]
 
   return css`
     background: ${tone.enabled.bg};

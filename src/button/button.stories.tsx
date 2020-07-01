@@ -9,11 +9,44 @@ export default {
   decorators: [withCentered, withKnobs],
 }
 
-export const plain = () => (
-  <Button
-    onClick={action('onClick')}
-    tone={select('Tone', {Default: undefined, Brand: 'brand'}, undefined, 'Props')}
-  >
-    Plain
-  </Button>
-)
+export const plain = () => {
+  const paddingX = select(
+    'Padding X',
+    {
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+    },
+    3,
+    'Props'
+  )
+
+  const paddingY = select(
+    'Padding Y',
+    {
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+    },
+    3,
+    'Props'
+  )
+
+  const tone = select('Tone', {Default: undefined, Brand: 'brand'}, undefined, 'Props')
+
+  return (
+    <Button onClick={action('onClick')} paddingX={paddingX} paddingY={paddingY} tone={tone}>
+      Plain
+    </Button>
+  )
+}

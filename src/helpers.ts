@@ -10,3 +10,12 @@ export function getResponsiveProp(
 export function rem(pixelValue: number): string {
   return `${pixelValue / 16}rem`
 }
+
+export function getChildrenArray(prop: React.ReactNode | React.ReactNode[]) {
+  const children = Array.isArray(prop) ? prop : [prop]
+
+  return children.reduce((acc: React.ReactNode[], x) => {
+    if (Array.isArray(x)) return acc.concat(x)
+    return acc.concat([x])
+  }, [])
+}

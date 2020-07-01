@@ -1,11 +1,11 @@
 import {withCentered} from '~/storybook/decorators'
-import {Box, Text} from '@sanity/ui'
+import {Card, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 
 export default {
-  title: 'Box',
+  title: 'Card',
   decorators: [withCentered, withKnobs],
 }
 
@@ -26,11 +26,22 @@ export const plain = () => {
     'Props'
   )
 
+  const tone = select(
+    'Tone',
+    {
+      Default: 'default',
+      Transparent: 'transparent',
+      Contrast: 'contrast',
+    },
+    'default',
+    'Props'
+  )
+
   return (
-    <Box onClick={action('onClick')} padding={padding} style={{background: '#fff'}}>
+    <Card onClick={action('onClick')} padding={padding} tone={tone}>
       <Text>
-        Box with <code>padding={padding}</code>
+        Card with <code>padding={padding}</code> and <code>tone={tone}</code>
       </Text>
-    </Box>
+    </Card>
   )
 }
