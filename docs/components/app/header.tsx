@@ -1,7 +1,8 @@
-import {Box, Container, Stack, Text} from '@sanity/ui'
+import {Box, Code, Container, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import pkg from '../../../package.json'
 
 const Root = styled(Box)`
   height: 100%;
@@ -11,7 +12,7 @@ export function AppHeader() {
   return (
     <Root forwardedAs="header">
       <Container>
-        <Box padding={4}>
+        <Box padding={5}>
           <Stack space={5}>
             <Stack as="ul" space={3}>
               <Text as="li">
@@ -78,6 +79,10 @@ export function AppHeader() {
             </Stack>
 
             <Stack as="ul" space={3}>
+              <Code as="li" size={1}>
+                <strong>@sanity/ui</strong> v{pkg.version}
+              </Code>
+
               <Text as="li">
                 <a href="https://github.com/sanity-io/ui" rel="noreferrer" target="_blank">
                   GitHub &#8599;

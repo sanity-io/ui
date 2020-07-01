@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
+import {Card, Flex, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,22 +11,21 @@ function FlexPage() {
       </Head>
 
       <AppLayout>
-        <Box as="main" padding={4}>
-          <h1>Flex</h1>
+        <h1>Flex</h1>
 
-          <Stack space={4}>
-            <Card padding={3} radius={2} tone="transparent">
-              <Flex>
-                <Card flex={1}>
-                  <Text>hello</Text>
-                </Card>
-                <Card flex={[1, 2, 3]}>
-                  <Text>world</Text>
-                </Card>
-              </Flex>
-            </Card>
+        <Stack space={4}>
+          <Card padding={3} radius={2} tone="transparent">
+            <Flex>
+              <Card flex={1}>
+                <Text>hello</Text>
+              </Card>
+              <Card flex={[1, 2, 3]}>
+                <Text>world</Text>
+              </Card>
+            </Flex>
+          </Card>
 
-            <CodeBlock>{`<Flex>
+          <CodeBlock>{`<Flex>
   <Card flex={1}>
     <Text>hello</Text>
   </Card>
@@ -35,18 +34,18 @@ function FlexPage() {
   </Card>
 </Flex>`}</CodeBlock>
 
-            <Card padding={3} radius={2} tone="transparent">
-              <Flex direction="column">
-                <Card flex={1}>
-                  <Text>hello</Text>
-                </Card>
-                <Card flex={1}>
-                  <Text>world</Text>
-                </Card>
-              </Flex>
-            </Card>
+          <Card padding={3} radius={2} tone="transparent">
+            <Flex direction="column">
+              <Card flex={1}>
+                <Text>hello</Text>
+              </Card>
+              <Card flex={1}>
+                <Text>world</Text>
+              </Card>
+            </Flex>
+          </Card>
 
-            <CodeBlock>{`<Flex direction="column">
+          <CodeBlock>{`<Flex direction="column">
   <Card flex={1}>
     <Text>hello</Text>
   </Card>
@@ -54,8 +53,7 @@ function FlexPage() {
     <Text>world</Text>
   </Card>
 </Flex>`}</CodeBlock>
-          </Stack>
-        </Box>
+        </Stack>
       </AppLayout>
     </>
   )

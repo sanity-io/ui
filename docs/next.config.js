@@ -1,6 +1,9 @@
 'use strict'
 
 const path = require('path')
+const resolve = require('resolve')
+
+const ROOT_PATH = path.dirname(__dirname)
 
 module.exports = {
   webpack: (config) => {
@@ -9,10 +12,9 @@ module.exports = {
 
     // Aliases
     Object.assign(config.resolve.alias, {
-      '@sanity/ui': path.resolve(__dirname, '../src'),
-      react: require.resolve('react'),
-      'react-dom': require.resolve('react-dom'),
-      'styled-components': require.resolve('styled-components'),
+      '@sanity/ui': path.resolve(ROOT_PATH, 'src'),
+      react: resolve.sync('react', {basedir: ROOT_PATH}),
+      'react-dom': resolve.sync('react-dom', {basedir: ROOT_PATH}),
     })
 
     return config
