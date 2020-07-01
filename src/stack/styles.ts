@@ -1,6 +1,10 @@
 import {css} from 'styled-components'
 import {Theme} from '../theme'
 
+function rem(px: number) {
+  return `${px / 16}rem`
+}
+
 export function stackBaseStyles() {
   return css`
     display: grid;
@@ -10,18 +14,18 @@ export function stackBaseStyles() {
 }
 
 export function stackSpaceStyles(props: {space: number[]; theme: Theme}) {
-  const {space} = props.theme
-
   return css`
     ${props.space.map((spaceIndex, mqIndex) => {
+      const space = rem(props.theme.space[spaceIndex])
+
       if (mqIndex === 0) {
         return css`
-          grid-gap: ${space[spaceIndex]}px;
+          grid-gap: ${space};
         `
       }
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          grid-gap: ${space[spaceIndex]}px;
+        @media (min-width: ${props.theme.media[mqIndex - 1] / 16}rem) {
+          grid-gap: ${space};
         }
       `
     })}
