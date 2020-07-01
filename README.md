@@ -25,6 +25,14 @@ ReactDOM.render(
 
 ## Contributing
 
+### Prerequisites
+
+Install the `vercel` CLI order to run the UI Docs dev server locally (uses `vercel dev`).
+
+```sh
+npm install -g vercel
+```
+
 ### Getting started
 
 ```sh

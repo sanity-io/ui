@@ -13,7 +13,7 @@
     "build-es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
     "clean": "rimraf dist",
     "dev": "run-p dev:*",
-    "dev:docs": "now dev",
+    "dev:docs": "vercel dev",
     "dev:storybook": "start-storybook --quiet -c storybook",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "postinstall": "(cd docs && npm i)",
