@@ -8,28 +8,28 @@ function StackPage() {
     <>
       <Head>
         <title>Stack – Sanity UI</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <AppLayout>
         <Box as="main" padding={4}>
           <h1>Stack</h1>
 
-          <Card padding={2} tone="transparent">
-            <Stack space={4}>
-              <Card>
-                <Text>foo</Text>
-              </Card>
-              <Card>
-                <Text>bar</Text>
-              </Card>
-              <Card>
-                <Text>baz</Text>
-              </Card>
-            </Stack>
-          </Card>
+          <Stack space={4}>
+            <Card padding={3} radius={2} tone="transparent">
+              <Stack space={4}>
+                <Card>
+                  <Text>foo</Text>
+                </Card>
+                <Card>
+                  <Text>bar</Text>
+                </Card>
+                <Card>
+                  <Text>baz</Text>
+                </Card>
+              </Stack>
+            </Card>
 
-          <CodeBlock>{`<Stack space={4}>
+            <CodeBlock>{`<Stack space={4}>
   <Card>
     <Text>foo</Text>
   </Card>
@@ -40,6 +40,7 @@ function StackPage() {
     <Text>baz</Text>
   </Card>
 </Stack>`}</CodeBlock>
+          </Stack>
         </Box>
       </AppLayout>
     </>

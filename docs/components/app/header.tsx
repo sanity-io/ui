@@ -12,63 +12,65 @@ export function AppHeader() {
     <Root forwardedAs="header">
       <Container>
         <Box padding={4}>
-          <Stack space={2}>
+          <Stack space={3}>
             <Text>
-              <Link href="/" passHref>
-                <a>Sanity UI</a>
+              <Link href="/">
+                <a>
+                  <strong>Sanity UI</strong>
+                </a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/box" passHref>
+              <Link href="/box">
                 <a>Box</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/button" passHref>
+              <Link href="/button">
                 <a>Button</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/card" passHref>
+              <Link href="/card">
                 <a>Card</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/code" passHref>
+              <Link href="/code">
                 <a>Code</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/container" passHref>
+              <Link href="/container">
                 <a>Container</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/flex" passHref>
+              <Link href="/flex">
                 <a>Flex</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/inline" passHref>
+              <Link href="/inline">
                 <a>Inline</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/stack" passHref>
+              <Link href="/stack">
                 <a>Stack</a>
               </Link>
             </Text>
 
             <Text>
-              <Link href="/text" passHref>
+              <Link href="/text">
                 <a>Text</a>
               </Link>
             </Text>

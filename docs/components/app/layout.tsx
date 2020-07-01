@@ -12,7 +12,9 @@ const Content = styled(Flex)`
 `
 
 const HeaderContainer = styled(Box)`
-  max-width: 12rem;
+  max-width: 10rem;
+  min-width: 7rem !important;
+  width: 100%;
 `
 
 export function AppLayout(props: {children: React.ReactNode}) {
@@ -20,9 +22,7 @@ export function AppLayout(props: {children: React.ReactNode}) {
     <Root>
       <Content>
         <HeaderContainer flex={1}>
-          <div style={{overflow: 'auto', position: 'sticky', top: 0, height: '100%'}}>
-            <AppHeader />
-          </div>
+          <AppHeader />
         </HeaderContainer>
 
         <Box flex={3}>
