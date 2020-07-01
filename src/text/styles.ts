@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {Theme} from '../theme'
+import {rem} from '../helpers'
 
 export function textBaseStyles(props: {theme: Theme}) {
   const {theme} = props
@@ -34,13 +35,13 @@ export function textSizeStyles(props: {size?: number; theme: Theme}) {
   const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
 
   return css`
-    font-size: ${size.fontSize}px;
-    line-height: ${size.lineHeight}px;
-    letter-spacing: ${size.letterSpacing}px;
-    transform: translateY(${size.descenderHeight}px);
+    font-size: ${rem(size.fontSize)};
+    line-height: ${rem(size.lineHeight)};
+    letter-spacing: ${rem(size.letterSpacing)};
+    transform: translateY(${rem(size.descenderHeight)});
 
     &:before {
-      margin-top: ${-1 - size.ascenderHeight - size.descenderHeight}px;
+      margin-top: ${rem(-1 - size.ascenderHeight - size.descenderHeight)};
     }
   `
 }
