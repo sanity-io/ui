@@ -10,6 +10,8 @@ export function stackBaseStyles() {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     grid-auto-rows: min-content;
+    margin: 0;
+    padding: 0;
   `
 }
 
