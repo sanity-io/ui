@@ -1,6 +1,10 @@
 import {css} from 'styled-components'
 import {Theme} from '../theme'
 
+function rem(px: number) {
+  return `${px / 16}rem`
+}
+
 export function containerBaseStyles() {
   return css`
     margin: 0 auto;
@@ -14,12 +18,12 @@ export function containerWidthStyles(props: {theme: Theme; width: number[]}) {
     ${props.width.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          max-width: ${container[spaceIndex] / 16}rem;
+          max-width: ${rem(container[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          max-width: ${container[spaceIndex] / 16}rem;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          max-width: ${rem(container[spaceIndex])};
         }
       `
     })}
