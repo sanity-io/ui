@@ -12,68 +12,78 @@ export function AppHeader() {
     <Root forwardedAs="header">
       <Container>
         <Box padding={4}>
-          <Stack space={3}>
-            <Text>
-              <Link href="/">
-                <a>
-                  <strong>Sanity UI</strong>
+          <Stack space={5}>
+            <Stack as="ul" space={3}>
+              <Text as="li">
+                <Link href="/">
+                  <a>
+                    <strong>Sanity UI</strong>
+                  </a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/box">
+                  <a>Box</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/button">
+                  <a>Button</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/card">
+                  <a>Card</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/code">
+                  <a>Code</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/container">
+                  <a>Container</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/flex">
+                  <a>Flex</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/inline">
+                  <a>Inline</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/stack">
+                  <a>Stack</a>
+                </Link>
+              </Text>
+
+              <Text as="li">
+                <Link href="/text">
+                  <a>Text</a>
+                </Link>
+              </Text>
+            </Stack>
+
+            <Stack as="ul" space={3}>
+              <Text as="li">
+                <a href="https://github.com/sanity-io/ui" rel="noreferrer" target="_blank">
+                  GitHub &#8599;
                 </a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/box">
-                <a>Box</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/button">
-                <a>Button</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/card">
-                <a>Card</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/code">
-                <a>Code</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/container">
-                <a>Container</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/flex">
-                <a>Flex</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/inline">
-                <a>Inline</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/stack">
-                <a>Stack</a>
-              </Link>
-            </Text>
-
-            <Text>
-              <Link href="/text">
-                <a>Text</a>
-              </Link>
-            </Text>
+              </Text>
+            </Stack>
           </Stack>
         </Box>
       </Container>
