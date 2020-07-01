@@ -1,4 +1,4 @@
-import {AppLayout} from '~/components'
+import {AppLayout, CodeBlock} from '~/components'
 import {Box, Card, Inline, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
@@ -29,8 +29,7 @@ function InlinePage() {
             </Inline>
           </Card>
 
-          <Card as="pre" padding={2} tone="contrast">
-            <code>{`<Inline space={4} style={{textAlign: 'center'}}>
+          <CodeBlock>{`<Inline space={4} style={{textAlign: 'center'}}>
   <Card padding={1}>
     <Text>foo</Text>
   </Card>
@@ -40,8 +39,7 @@ function InlinePage() {
   <Card padding={3}>
     <Text>baz</Text>
   </Card>
-</Inline>`}</code>
-          </Card>
+</Inline>`}</CodeBlock>
         </Box>
       </AppLayout>
     </>

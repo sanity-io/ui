@@ -1,4 +1,4 @@
-import {AppLayout} from '~/components'
+import {AppLayout, CodeBlock} from '~/components'
 import {Box, Card, Code, Stack} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
@@ -35,8 +35,7 @@ function CodePage() {
             </Stack>
           </Card>
 
-          <Card as="pre" padding={2} tone="contrast">
-            <code>{`<Stack space={4}>
+          <CodeBlock>{`<Stack space={4}>
   <Card>
     <Code size={0}>Code 0</Code>
   </Card>
@@ -52,8 +51,7 @@ function CodePage() {
   <Card>
     <Code size={4}>Code 4</Code>
   </Card>
-</Stack>`}</code>
-          </Card>
+</Stack>`}</CodeBlock>
         </Box>
       </AppLayout>
     </>

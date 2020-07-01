@@ -1,4 +1,4 @@
-import {AppLayout} from '~/components'
+import {AppLayout, CodeBlock} from '~/components'
 import {Box, Card, Flex, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
@@ -26,16 +26,14 @@ function FlexPage() {
             </Flex>
           </Card>
 
-          <Card as="pre" padding={2} tone="contrast">
-            <code>{`<Flex>
+          <CodeBlock>{`<Flex>
   <Card flex={1}>
     <Text>hello</Text>
   </Card>
   <Card flex={[1, 2, 3]}>
     <Text>world</Text>
   </Card>
-</Flex>`}</code>
-          </Card>
+</Flex>`}</CodeBlock>
 
           <Card padding={2} tone="transparent">
             <Flex direction="column">
@@ -48,16 +46,14 @@ function FlexPage() {
             </Flex>
           </Card>
 
-          <Card as="pre" padding={2} tone="contrast">
-            <code>{`<Flex direction="column">
+          <CodeBlock>{`<Flex direction="column">
   <Card flex={1}>
     <Text>hello</Text>
   </Card>
   <Card flex={1}>
     <Text>world</Text>
   </Card>
-</Flex>`}</code>
-          </Card>
+</Flex>`}</CodeBlock>
         </Box>
       </AppLayout>
     </>
