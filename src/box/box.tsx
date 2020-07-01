@@ -13,12 +13,13 @@ export interface BoxPaddingProps {
   paddingRight?: number | number[]
 }
 
-interface BoxBaseProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+export interface BoxFlexProps {
   flex?: number | number[]
 }
 
-type BoxProps = BoxPaddingProps & BoxBaseProps
+export interface BoxProps extends BoxPaddingProps, BoxFlexProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
+}
 
 // @todo: Figure out typings
 const Root = styled.div(boxFlexStyles as any, boxPaddingStyles)

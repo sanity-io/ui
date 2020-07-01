@@ -1,6 +1,10 @@
 import {css} from 'styled-components'
 import {Theme} from '../theme'
 
+function rem(px: number) {
+  return `${px / 16}rem`
+}
+
 export function boxPaddingStyles(props: {
   padding: number[]
   paddingX: number[]
@@ -17,12 +21,12 @@ export function boxPaddingStyles(props: {
     ${props.padding.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          padding: ${space[spaceIndex]}px;
+          padding: ${rem(space[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          padding: ${space[spaceIndex]}px;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          padding: ${rem(space[spaceIndex])};
         }
       `
     })}
@@ -30,14 +34,14 @@ export function boxPaddingStyles(props: {
     ${props.paddingX.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          padding-left: ${space[spaceIndex]}px;
-          padding-right: ${space[spaceIndex]}px;
+          padding-left: ${rem(space[spaceIndex])};
+          padding-right: ${rem(space[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          padding-left: ${space[spaceIndex]}px;
-          padding-right: ${space[spaceIndex]}px;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          padding-left: ${rem(space[spaceIndex])};
+          padding-right: ${rem(space[spaceIndex])};
         }
       `
     })}
@@ -45,14 +49,14 @@ export function boxPaddingStyles(props: {
     ${props.paddingY.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          padding-top: ${space[spaceIndex]}px;
-          padding-bottom: ${space[spaceIndex]}px;
+          padding-top: ${rem(space[spaceIndex])};
+          padding-bottom: ${rem(space[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          padding-top: ${space[spaceIndex]}px;
-          padding-bottom: ${space[spaceIndex]}px;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          padding-top: ${rem(space[spaceIndex])};
+          padding-bottom: ${rem(space[spaceIndex])};
         }
       `
     })}
@@ -60,12 +64,12 @@ export function boxPaddingStyles(props: {
     ${props.paddingTop.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          padding-top: ${space[spaceIndex]}px;
+          padding-top: ${rem(space[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          padding-top: ${space[spaceIndex]}px;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          padding-top: ${rem(space[spaceIndex])};
         }
       `
     })}
@@ -73,12 +77,12 @@ export function boxPaddingStyles(props: {
     ${props.paddingBottom.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          padding-bottom: ${space[spaceIndex]}px;
+          padding-bottom: ${rem(space[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          padding-bottom: ${space[spaceIndex]}px;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          padding-bottom: ${rem(space[spaceIndex])};
         }
       `
     })}
@@ -86,12 +90,12 @@ export function boxPaddingStyles(props: {
     ${props.paddingLeft.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          padding-left: ${space[spaceIndex]}px;
+          padding-left: ${rem(space[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          padding-left: ${space[spaceIndex]}px;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          padding-left: ${rem(space[spaceIndex])};
         }
       `
     })}
@@ -99,12 +103,12 @@ export function boxPaddingStyles(props: {
     ${props.paddingRight.map((spaceIndex, mqIndex) => {
       if (mqIndex === 0)
         return css`
-          padding-right: ${space[spaceIndex]}px;
+          padding-right: ${rem(space[spaceIndex])};
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
-          padding-right: ${space[spaceIndex]}px;
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          padding-right: ${rem(space[spaceIndex])};
         }
       `
     })}
@@ -120,7 +124,7 @@ export function boxFlexStyles(props: {flex: number[]; theme: Theme}) {
         `
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1]}px) {
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
           flex: ${flex};
         }
       `
