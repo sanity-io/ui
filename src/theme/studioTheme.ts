@@ -48,7 +48,43 @@ export const studioTheme: Theme = {
   fonts: {
     code: {
       family: '-apple-system-ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
-      sizes: [],
+      sizes: [
+        {
+          ascenderHeight: 3,
+          descenderHeight: 3,
+          fontSize: 10,
+          lineHeight: 13,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 4,
+          descenderHeight: 4,
+          fontSize: 13,
+          lineHeight: 17,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 5,
+          descenderHeight: 5,
+          fontSize: 16,
+          lineHeight: 21,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 6,
+          descenderHeight: 6,
+          fontSize: 19,
+          lineHeight: 25,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 7,
+          descenderHeight: 7,
+          fontSize: 22,
+          lineHeight: 29,
+          letterSpacing: 0,
+        },
+      ],
     },
     heading: {
       family:
