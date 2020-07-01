@@ -36,10 +36,28 @@ interface ThemeColor {
       }
     }
   }
+
+  card: {
+    tones: {
+      default: {
+        bg: string
+        fg: string
+      }
+      transparent: {
+        bg: string
+        fg: string
+      }
+      contrast: {
+        bg: string
+        fg: string
+      }
+    }
+  }
 }
 
 export interface Theme {
   color: ThemeColor
+  container: number[]
   fonts: {
     code: ThemeFont
     heading: ThemeFont

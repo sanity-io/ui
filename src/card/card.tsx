@@ -1,30 +1,22 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {BoxPaddingProps, boxFlexStyles, boxPaddingStyles} from '../box'
 import {getResponsiveProp} from '../helpers'
-import {boxFlexStyles, boxPaddingStyles} from './styles'
+import {cardColorStyles} from './styles'
+import {CardTone} from './types'
 
-export interface BoxPaddingProps {
-  padding?: number | number[]
-  paddingX?: number | number[]
-  paddingY?: number | number[]
-  paddingTop?: number | number[]
-  paddingBottom?: number | number[]
-  paddingLeft?: number | number[]
-  paddingRight?: number | number[]
-}
-
-export interface BoxFlexProps {
-  flex?: number | number[]
-}
-
-export interface BoxProps extends BoxPaddingProps, BoxFlexProps {
+interface CardBaseProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  flex?: number | number[]
+  tone?: CardTone
 }
+
+type CardProps = BoxPaddingProps & CardBaseProps
 
 // @todo: Figure out typings
-const Root = styled.div(boxFlexStyles as any, boxPaddingStyles)
+const Root = styled.div(boxFlexStyles as any, boxPaddingStyles as any, cardColorStyles)
 
-export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps, ref) => {
+export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardProps, ref) => {
   const {
     as: asProp = 'div',
     flex: flexProp,
@@ -35,6 +27,7 @@ export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps
     paddingBottom,
     paddingLeft,
     paddingRight,
+    tone = 'default',
     ...restProps
   } = props
 
@@ -51,10 +44,16 @@ export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps
   const flex = getResponsiveProp(flexProp, [])
 
   return (
-    <Root data-ui="Box" {...restProps} {...paddingProps} as={asProp} flex={flex} ref={ref}>
-      {props.children}
-    </Root>
+    <Root
+      data-ui="Card"
+      {...restProps}
+      {...paddingProps}
+      as={asProp}
+      flex={flex}
+      ref={ref}
+      tone={tone}
+    />
   )
 })
 
-Box.displayName = 'Box'
+Card.displayName = 'Card'

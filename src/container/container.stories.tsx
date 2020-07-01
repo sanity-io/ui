@@ -1,17 +1,17 @@
 import {withCentered} from '~/storybook/decorators'
-import {Box, Text} from '@sanity/ui'
+import {Card, Container, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 
 export default {
-  title: 'Box',
+  title: 'Container',
   decorators: [withCentered, withKnobs],
 }
 
 export const plain = () => {
-  const padding = select(
-    'Padding',
+  const width = select(
+    'Width',
     {
       '0': 0,
       '1': 1,
@@ -19,18 +19,20 @@ export const plain = () => {
       '3': 3,
       '4': 4,
       '5': 5,
-      '6': 6,
-      '7': 7,
     },
     0,
     'Props'
   )
 
   return (
-    <Box onClick={action('onClick')} padding={padding} style={{background: '#fff'}}>
-      <Text>
-        Box with <code>padding={padding}</code>
-      </Text>
-    </Box>
+    <div style={{width: '100%'}}>
+      <Container onClick={action('onClick')} width={width}>
+        <Card padding={4}>
+          <Text>
+            Container with <code>max-width={width}</code>
+          </Text>
+        </Card>
+      </Container>
+    </div>
   )
 }
