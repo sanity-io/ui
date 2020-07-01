@@ -38,6 +38,12 @@ export function AppHeader() {
             </Text>
 
             <Text>
+              <Link href="/code" passHref>
+                <a>Code</a>
+              </Link>
+            </Text>
+
+            <Text>
               <Link href="/container" passHref>
                 <a>Container</a>
               </Link>
