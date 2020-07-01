@@ -1,5 +1,5 @@
-import {AppHeader} from '~/components'
-import {Box, Button, Text} from '@sanity/ui'
+import {AppLayout} from '~/components'
+import {Box, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,27 +11,16 @@ function IndexPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppHeader />
+      <AppLayout>
+        <Box as="main" padding={4}>
+          <h1>Sanity UI</h1>
 
-      <Box as="main" padding={4}>
-        <h1>Sanity UI documention</h1>
-
-        <div>
-          <h2>Button example</h2>
-
-          <Button tone="brand">Test</Button>
-
-          <pre>
-            <code>{`import {Button} from '@sanity/ui'
-
-<Button tone="brand">Test</Button>`}</code>
-          </pre>
-        </div>
-      </Box>
-
-      <Box as="footer" padding={4} style={{borderTop: '1px solid #ccc'}}>
-        <Text size={1}>Sanity &copy; 2017–2020</Text>
-      </Box>
+          <Text>
+            Sanity UI is a kit for building web applications, that is used by the design and tech
+            teams at Sanity to build and maintain the Studio and Manage applications.
+          </Text>
+        </Box>
+      </AppLayout>
     </>
   )
 }
