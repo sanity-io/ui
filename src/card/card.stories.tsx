@@ -26,6 +26,21 @@ export const plain = () => {
     'Props'
   )
 
+  const radius = select(
+    'Radius',
+    {
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+    },
+    0,
+    'Props'
+  )
+
   const tone = select(
     'Tone',
     {
@@ -38,7 +53,7 @@ export const plain = () => {
   )
 
   return (
-    <Card onClick={action('onClick')} padding={padding} tone={tone}>
+    <Card onClick={action('onClick')} padding={padding} radius={radius} tone={tone}>
       <Text>
         Card with <code>padding={padding}</code> and <code>tone={tone}</code>
       </Text>

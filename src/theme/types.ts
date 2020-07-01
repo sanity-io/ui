@@ -65,5 +65,6 @@ export interface Theme {
     text: ThemeFont
   }
   media: number[]
+  radius: number[]
   space: number[]
 }

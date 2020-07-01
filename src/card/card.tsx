@@ -2,19 +2,25 @@ import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {BoxPaddingProps, boxFlexStyles, boxPaddingStyles} from '../box'
 import {getResponsiveProp} from '../helpers'
-import {cardColorStyles} from './styles'
+import {cardColorStyles, cardRadiusStyles} from './styles'
 import {CardTone} from './types'
 
 interface CardBaseProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   flex?: number | number[]
+  radius?: number | number[]
   tone?: CardTone
 }
 
 type CardProps = BoxPaddingProps & CardBaseProps
 
 // @todo: Figure out typings
-const Root = styled.div(boxFlexStyles as any, boxPaddingStyles as any, cardColorStyles)
+const Root = styled.div(
+  boxFlexStyles as any,
+  boxPaddingStyles as any,
+  cardColorStyles,
+  cardRadiusStyles as any
+)
 
 export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardProps, ref) => {
   const {
@@ -27,6 +33,7 @@ export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardPro
     paddingBottom,
     paddingLeft,
     paddingRight,
+    radius: radiusProp,
     tone = 'default',
     ...restProps
   } = props
@@ -42,6 +49,7 @@ export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardPro
   }
 
   const flex = getResponsiveProp(flexProp, [])
+  const radius = getResponsiveProp(radiusProp, [0])
 
   return (
     <Root
@@ -50,6 +58,7 @@ export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardPro
       {...paddingProps}
       as={asProp}
       flex={flex}
+      radius={radius}
       ref={ref}
       tone={tone}
     />
