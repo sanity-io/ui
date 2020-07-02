@@ -46,11 +46,12 @@ export function textBaseStyles(props: {theme: Theme}) {
   `
 }
 
-export function textSizeStyles(props: {size?: number; weight?: number, theme: Theme}) {
+export function textSizeStyles(props: {size?: number; weight?: number; theme: Theme}) {
   const {sizes} = props.theme.fonts.text
   const {weights} = props.theme.fonts.text
   const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
-  const weight = props.weight === undefined ? weights.regular : weights[props.weight] || weights.regular
+  const weight =
+    props.weight === undefined ? weights.regular : weights[props.weight] || weights.regular
 
   return css`
     font-size: ${rem(size.fontSize)};
