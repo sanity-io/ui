@@ -2,10 +2,10 @@ import React, {forwardRef, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 import {
   switchBaseStyles,
-  wrapperStyles,
-  thumbStyles,
-  trackStyles,
-  inputElementStyles,
+  switchRepresentationStyles,
+  switchThumbStyles,
+  switchTrackStyles,
+  switchInputStyles,
 } from './styles'
 
 interface SwitchProps {
@@ -13,10 +13,10 @@ interface SwitchProps {
 }
 
 const Root = styled.span(switchBaseStyles)
-const InputElement = styled.input(inputElementStyles)
-const Wrapper = styled.div(wrapperStyles)
-const Thumb = styled.div(thumbStyles)
-const Track = styled.div(trackStyles)
+const Input = styled.input(switchInputStyles)
+const Representation = styled.span(switchRepresentationStyles)
+const Track = styled.span(switchTrackStyles)
+const Thumb = styled.span<{checked?: boolean}>(switchThumbStyles)
 
 export const Switch = forwardRef(
   ({checked, ...restProps}: React.HTMLProps<HTMLInputElement> & SwitchProps, ref) => {
@@ -41,11 +41,11 @@ export const Switch = forwardRef(
 
     return (
       <Root data-ui="Switch">
-        <InputElement {...restProps} checked={checked} type="checkbox" ref={setRef} />
-        <Wrapper className="wrapper">
-          <Track className="track" />
-          <Thumb className="thumb" />
-        </Wrapper>
+        <Input {...restProps} checked={checked} type="checkbox" ref={setRef} />
+        <Representation aria-hidden data-name="representation">
+          <Track />
+          <Thumb checked={checked} />
+        </Representation>
       </Root>
     )
   }
