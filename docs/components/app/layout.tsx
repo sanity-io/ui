@@ -3,7 +3,7 @@ import React from 'react'
 import styled, {css} from 'styled-components'
 import {AppHeader} from './header'
 
-const Root = styled.div`
+const Root = styled(Card)`
   ${({theme}) => css`
     @media (min-width: ${rem(theme.media[1])}) {
       display: flex;
@@ -26,11 +26,12 @@ const SideMenu = styled(Card)`
       transform: translate3d(-100%, 0, 0);
       transition: transform 200ms;
       width: 10rem;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 0 1px var(--card-shadow-outline-color);
 
       &[data-open='true'] {
         transform: translate3d(0, 0, 0);
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 9999px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 0 1px var(--card-shadow-outline-color),
+          0 0 0 9999px var(--card-shadow-umbra-color);
       }
     }
 
@@ -38,7 +39,7 @@ const SideMenu = styled(Card)`
       flex: 1;
       max-width: 20rem;
       min-width: 10rem;
-      border-right: 1px solid #ccc;
+      border-right: 1px solid var(--card-shadow-outline-color);
       position: sticky;
       top: 0;
     }

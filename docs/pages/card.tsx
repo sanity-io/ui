@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Card, Stack, Text} from '@sanity/ui'
+import {Button, Card, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -16,12 +16,62 @@ function CardPage() {
         <Stack space={4}>
           <Card padding={3} radius={2} tone="transparent">
             <Card padding={4}>
-              <Text>Text</Text>
+              <Stack space={3}>
+                <Text>
+                  Text with <a href="#">link</a>
+                </Text>
+                <Button>Button</Button>
+                <Card padding={3} tone="transparent">
+                  <Stack space={3}>
+                    <Text>
+                      Text with <a href="#">link</a>
+                    </Text>
+                    <Button>Button</Button>
+                    <Card padding={3} tone="contrast">
+                      <Stack space={3}>
+                        <Text>
+                          Text with <a href="#">link</a>
+                        </Text>
+                        <Button>Button</Button>
+                        <Card padding={3}>
+                          <Stack space={3}>
+                            <Text>
+                              Text with <a href="#">link</a>
+                            </Text>
+                            <Button>Button</Button>
+                          </Stack>
+                        </Card>
+                      </Stack>
+                    </Card>
+                  </Stack>
+                </Card>
+              </Stack>
             </Card>
           </Card>
 
           <CodeBlock>{`<Card padding={4}>
-  <Text>Text</Text>
+  <Stack space={3}>
+    <Text>Text</Text>
+    <Button>Button</Button>
+    <Card padding={3} tone="transparent">
+      <Stack space={3}>
+        <Text>Text</Text>
+        <Button>Button</Button>
+        <Card padding={3} tone="contrast">
+          <Stack space={3}>
+            <Text>Text</Text>
+            <Button>Button</Button>
+            <Card padding={3}>
+              <Stack space={3}>
+                <Text>Text</Text>
+                <Button>Button</Button>
+              </Stack>
+            </Card>
+          </Stack>
+        </Card>
+      </Stack>
+    </Card>
+  </Stack>
 </Card>`}</CodeBlock>
         </Stack>
       </AppLayout>

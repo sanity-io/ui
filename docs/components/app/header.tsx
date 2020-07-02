@@ -1,5 +1,6 @@
 import {Box, Code, Container, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
+import {useRouter} from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 import pkg from '../../../package.json'
@@ -8,6 +9,24 @@ const Root = styled(Box)`
   height: 100%;
 `
 
+function NavListItemLink(props: {children: React.ReactNode; href: string}) {
+  const router = useRouter()
+
+  console.log('NavListItemLink', router.pathname)
+
+  if (props.href === router.pathname) {
+    return <Text as="li">{props.children}</Text>
+  }
+
+  return (
+    <Text as="li">
+      <Link href={props.href}>
+        <a>{props.children}</a>
+      </Link>
+    </Text>
+  )
+}
+
 export function AppHeader() {
   return (
     <Root forwardedAs="header">
@@ -15,67 +34,18 @@ export function AppHeader() {
         <Box padding={5}>
           <Stack space={5}>
             <Stack as="ul" space={3}>
-              <Text as="li">
-                <Link href="/">
-                  <a>
-                    <strong>Sanity UI</strong>
-                  </a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/box">
-                  <a>Box</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/button">
-                  <a>Button</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/card">
-                  <a>Card</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/code">
-                  <a>Code</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/container">
-                  <a>Container</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/flex">
-                  <a>Flex</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/inline">
-                  <a>Inline</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/stack">
-                  <a>Stack</a>
-                </Link>
-              </Text>
-
-              <Text as="li">
-                <Link href="/text">
-                  <a>Text</a>
-                </Link>
-              </Text>
+              <NavListItemLink href="/">
+                <strong>Sanity UI</strong>
+              </NavListItemLink>
+              <NavListItemLink href="/box">Box</NavListItemLink>
+              <NavListItemLink href="/button">Button</NavListItemLink>
+              <NavListItemLink href="/card">Card</NavListItemLink>
+              <NavListItemLink href="/code">Code</NavListItemLink>
+              <NavListItemLink href="/container">Container</NavListItemLink>
+              <NavListItemLink href="/flex">Flex</NavListItemLink>
+              <NavListItemLink href="/inline">Inline</NavListItemLink>
+              <NavListItemLink href="/stack">Stack</NavListItemLink>
+              <NavListItemLink href="/text">Text</NavListItemLink>
             </Stack>
 
             <Stack as="ul" space={3}>
