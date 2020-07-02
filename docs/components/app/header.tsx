@@ -12,8 +12,6 @@ const Root = styled(Box)`
 function NavListItemLink(props: {children: React.ReactNode; href: string}) {
   const router = useRouter()
 
-  console.log('NavListItemLink', router.pathname)
-
   if (props.href === router.pathname) {
     return <Text as="li">{props.children}</Text>
   }
