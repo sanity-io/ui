@@ -126,11 +126,49 @@ export const studioTheme: Theme = {
           lineHeight: 45,
           letterSpacing: 0,
         },
+      ],
     },
     label: {
       family:
         'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-      sizes: [],
+      weight: 500,
+      sizes: [
+        {
+          ascenderHeight: 2,
+          descenderHeight: 2,
+          fontSize: 8.5,
+          lineHeight: 10,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 2,
+          descenderHeight: 2,
+          fontSize: 10,
+          lineHeight: 11,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 2,
+          descenderHeight: 2,
+          fontSize: 11,
+          lineHeight: 12,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 3,
+          descenderHeight: 3,
+          fontSize: 13,
+          lineHeight: 15,
+          letterSpacing: 0,
+        },
+        {
+          ascenderHeight: 4,
+          descenderHeight: 3,
+          fontSize: 14,
+          lineHeight: 17,
+          letterSpacing: 0,
+        },
+      ],
     },
     text: {
       family:
