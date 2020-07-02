@@ -6,9 +6,13 @@ interface ThemeFontSize {
   lineHeight: number
 }
 
+interface ThemeFontWeight {
+  [key: string]: number
+}
+
 interface ThemeFont {
   family: string
-  weights: number[]
+  weights: ThemeFontWeight
   sizes: ThemeFontSize[]
 }
 

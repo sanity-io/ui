@@ -18,7 +18,7 @@ export const plain = () => {
 
   const weight = select(
     'Weight',
-    {'Regular (default)': undefined, 'Semibold': 1, 'Bold': 2},
+    {'Regular (default)': undefined, 'Semibold': 'semibold', 'Bold': 'bold'},
     undefined,
     'Props'
   )
