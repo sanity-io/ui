@@ -1,51 +1,59 @@
+import {color} from '@sanity/color'
 import {css} from 'styled-components'
 // import {Theme} from '../theme'
-import {color} from '@sanity/color'
+import {rem} from '../helpers'
 
-/* TODO 
-  - Get colors from theme
-  - Get transition from global transitions
-*/
-
-const inputColor = {
-  enabled: {
-    bg: color.white.hex,
-    fg: color.black.hex,
-    border: color.gray[200].hex,
-    focused: color.blue[400].hex,
+// @todo: Move these values to the theme context
+const theme = {
+  color: {
+    switch: {
+      tones: {
+        default: {
+          enabled: {
+            thumb: color.white.hex,
+            off: {
+              bg: color.gray['500'].hex,
+            },
+            on: {
+              bg: color.green['500'].hex,
+            },
+          },
+          disabled: {
+            thumb: color.gray['50'].hex,
+            off: {
+              bg: color.gray['200'].hex,
+            },
+            on: {
+              bg: color.green['200'].hex,
+            },
+          },
+        },
+      },
+    },
   },
-  disabled: {
-    bg: color.gray[50].hex,
-    fg: color.gray[500].hex,
-    border: color.gray[200].hex,
+
+  switch: {
+    width: 33,
+    height: 17,
+    padding: 4,
+    transitionDurationMs: 150,
+    transitionTimingFunction: 'ease-out',
   },
 }
 
-const TRACK = {
-  on: color.green[500].hex,
-  off: inputColor.disabled.fg,
-  disabled: inputColor.disabled.border,
-  focused: inputColor.enabled.focused,
-  width: '2.5em',
-  height: '1.3em',
-}
-
-const THUMB = {
-  size: `calc(${TRACK.height} * 0.45)`, // used for height, width, and border radius of the thumb
-  offset: `calc(${TRACK.height} * 0.25)`,
-  color: inputColor.enabled.bg,
-  disabled: inputColor.disabled.bg,
-}
-
+/* Root */
 export function switchBaseStyles() {
   return css`
     position: relative;
-    display: flex;
+    display: inline-block;
   `
 }
 
-export function inputElementStyles() {
-  // Hide the input element, while still making it respond to focus
+/* Input */
+export function switchInputStyles() {
+  const tone = theme.color.switch.tones.default
+
+  // Visually hide the input element while keeping it interactive
   return css`
     position: absolute;
     top: 0;
@@ -56,91 +64,93 @@ export function inputElementStyles() {
     height: 100%;
     width: 100%;
     outline: none;
-    z-index: 1;
     padding: 0;
     margin: 0;
 
+    /* Place the input element above the representation element */
+    z-index: 1;
+
+    & + [data-name='representation'] {
+      --switch-thumb-color: ${tone.enabled.thumb};
+      --switch-bg-color: ${tone.enabled.off.bg};
+    }
+
+    &:checked + [data-name='representation'] {
+      --switch-bg-color: ${tone.enabled.on.bg};
+    }
+
+    &:disabled + [data-name='representation'] {
+      --switch-thumb-color: ${tone.disabled.thumb};
+      --switch-bg-color: ${tone.disabled.off.bg};
+    }
+
     /* Focus styles */
-    &:focus + .wrapper {
-      border-color: ${TRACK.focused};
-    }
-
-    &:checked + .wrapper {
-      /* Track styles when input is checked */
-      .track {
-        background: ${TRACK.on};
-      }
-      /* Thumb styles when input is checked */
-      .thumb {
-        transform: translate3d(calc(${TRACK.width} - ${THUMB.size} - (${THUMB.offset} * 2)), 0, 0);
-      }
-    }
-
-    &:disabled + .wrapper {
-      /* Track styles when input is disabled */
-      .track {
-        background: ${TRACK.disabled};
-      }
-      /* Thumb styles when input is disabled */
-      .thumb {
-        background: ${THUMB.disabled};
-      }
-    }
-
-    &:indeterminate + .wrapper {
-      .thumb {
-        transform: translate3d(
-          calc((${TRACK.width} - ${THUMB.size} - (${THUMB.offset} * 2)) / 2),
-          0,
-          0
-        );
-      }
+    &:focus + [data-name='representation'] {
+      /* @todo: Use focus ring color from card theme */
+      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #4e91fc;
     }
   `
 }
 
-export function wrapperStyles() {
-  /* Styles for the track and thumb wrapper */
+/* Representation */
+export function switchRepresentationStyles() {
   return css`
-    flex-shrink: 0;
+    display: block;
     position: relative;
-    height: ${TRACK.height};
-    width: ${TRACK.width};
-    border-radius: ${TRACK.width};
-    border: 2px solid transparent;
+    width: ${rem(theme.switch.width)};
+    height: ${rem(theme.switch.height)};
+    border-radius: ${rem(theme.switch.height / 2)};
+
+    /* Make sure it’s not possible to interact with the wrapper element */
+    pointer-events: none;
   `
 }
 
-export function trackStyles() {
-  /* Base track styles */
+/* Track */
+export function switchTrackStyles() {
   return css`
-    background: ${TRACK.off};
+    display: block;
+    background: var(--switch-bg-color);
     position: absolute;
     left: 0;
     top: 0;
-    height: ${TRACK.height};
-    width: ${TRACK.width};
-    border-radius: ${TRACK.width};
-    cursor: default;
-    border: 1px solid white;
-    box-sizing: border-box;
+    width: ${rem(theme.switch.width)};
+    height: ${rem(theme.switch.height)};
+    border-radius: ${rem(theme.switch.height / 2)};
   `
 }
 
-export function thumbStyles() {
-  /* Base thumb styles */
+/* Thumb */
+export function switchThumbStyles(props: {checked?: boolean}) {
+  const trackWidth = theme.switch.width
+  const trackHeight = theme.switch.height
+  const trackPadding = theme.switch.padding
+  const size = trackHeight - theme.switch.padding * 2
+  const checkedOffset = trackWidth - trackPadding * 2 - size
+  const indeterminateOffset = trackWidth / 2 - size / 2 - trackPadding
+
   return css`
-    background: ${THUMB.color};
+    display: block;
     position: absolute;
-    left: ${THUMB.offset};
-    top: calc((100% - ${THUMB.size}) / 2);
-    height: ${THUMB.size};
-    width: ${THUMB.size};
-    border-radius: ${THUMB.size};
-    cursor: default;
-    transform-origin: left;
+    left: ${rem(trackPadding)};
+    top: ${rem(trackPadding)};
+    height: ${rem(size)};
+    width: ${rem(size)};
+    border-radius: ${rem(size / 2)};
     transition-property: transform;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
+    transition-duration: ${theme.switch.transitionDurationMs}ms;
+    transition-timing-function: ${theme.switch.transitionTimingFunction};
+    background: var(--switch-thumb-color);
+    transform: translate3d(0, 0, 0);
+
+    ${props.checked === true &&
+    css`
+      transform: translate3d(${checkedOffset}px, 0, 0);
+    `}
+
+    ${typeof props.checked !== 'boolean' &&
+    css`
+      transform: translate3d(${indeterminateOffset}px, 0, 0);
+    `}
   `
 }
