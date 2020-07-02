@@ -8,7 +8,7 @@ export function headingBaseStyles(props: {theme: Theme}) {
   return css`
     position: relative;
     font-family: ${theme.fonts.heading.family};
-    font-weight: ${theme.fonts.heading.weight};
+    font-weight: ${theme.fonts.heading.weights};
     display: block;
     padding: 1px 0 0;
     margin: 0 -0.05em;
