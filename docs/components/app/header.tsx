@@ -29,7 +29,7 @@ export function AppHeader() {
   return (
     <Root forwardedAs="header">
       <Container>
-        <Box padding={5}>
+        <Box paddingX={5} paddingY={[4, 5, 6, 7, 8]}>
           <Stack space={5}>
             <Stack as="ul" space={3}>
               <NavListItemLink href="/">

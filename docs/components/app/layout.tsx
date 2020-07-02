@@ -82,7 +82,7 @@ export function AppLayout(props: {children: React.ReactNode}) {
         </NarrowDeviceMenu>
 
         <Container as="main" width={1}>
-          <Box as="main" padding={[4, 5]}>
+          <Box as="main" padding={[4, 5]} paddingY={[4, 5, 6, 7, 8]}>
             {props.children}
           </Box>
         </Container>

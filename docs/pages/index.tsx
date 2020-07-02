@@ -12,7 +12,7 @@ function IndexPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={4}>
+        <Stack space={[4, 5, 6]}>
           <Heading as="h1" size={3}>
             Sanity UI
           </Heading>
