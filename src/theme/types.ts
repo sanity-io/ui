@@ -25,6 +25,19 @@ interface ThemeButtonColor {
 interface ThemeCardColor {
   bg: string
   fg: string
+  hairline: {
+    soft: string
+    hard: string
+  }
+  focusRing: string
+  link: string
+  shadow: {
+    outline: string
+    umbra: string
+    penumbra: string
+    // antumbra: string
+    ambient: string
+  }
 }
 
 interface ThemeColor {
@@ -44,6 +57,15 @@ interface ThemeColor {
   }
 }
 
+// offsetX, offsetY, blurRadius, spreadRadius
+type BoxShadow = [number, number, number, number]
+
+interface ThemeShadow {
+  umbra: BoxShadow
+  penumbra: [number, number, number, number]
+  ambient: [number, number, number, number]
+}
+
 export interface Theme {
   color: ThemeColor
   container: number[]
@@ -55,5 +77,6 @@ export interface Theme {
   }
   media: number[]
   radius: number[]
+  shadows: Array<ThemeShadow | null>
   space: number[]
 }

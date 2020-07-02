@@ -25,7 +25,7 @@ export function buttonColorStyles(props: {theme: Theme; tone: ButtonTone}) {
     color: ${tone.enabled.fg};
 
     &:focus {
-      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #4e91fc;
+      box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
     }
 
     @media (hover: hover) {
