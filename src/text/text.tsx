@@ -5,7 +5,7 @@ import {textBaseStyles, textSizeStyles} from './styles'
 interface TextProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   size?: number
-  weight?: number
+  weight?: string
 }
 
 const Root = styled.div(textBaseStyles, textSizeStyles)

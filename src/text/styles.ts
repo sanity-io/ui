@@ -27,6 +27,10 @@ export function textBaseStyles(props: {theme: Theme}) {
       text-decoration: none;
       border-radius: 1px;
     }
+
+    & strong {
+      font-weight: ${theme.fonts.text.weights.bold};
+    }
   `
 }
 
@@ -34,7 +38,7 @@ export function textSizeStyles(props: {size?: number; weight?: number, theme: Th
   const {sizes} = props.theme.fonts.text
   const {weights} = props.theme.fonts.text
   const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
-  const weight = props.weight === undefined ? weights[0] : weights[props.weight] || weights[0]
+  const weight = props.weight === undefined ? weights.regular : weights[props.weight] || weights.regular
 
   return css`
     font-size: ${rem(size.fontSize)};
