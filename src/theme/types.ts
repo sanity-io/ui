@@ -11,46 +11,35 @@ interface ThemeFont {
   sizes: ThemeFontSize[]
 }
 
+interface ThemeButtonColor {
+  enabled: {
+    bg: string
+    fg: string
+  }
+  hovered: {
+    bg: string
+    fg: string
+  }
+}
+
+interface ThemeCardColor {
+  bg: string
+  fg: string
+}
+
 interface ThemeColor {
   button: {
     tones: {
-      default: {
-        enabled: {
-          bg: string
-          fg: string
-        }
-        hovered: {
-          bg: string
-          fg: string
-        }
-      }
-      brand: {
-        enabled: {
-          bg: string
-          fg: string
-        }
-        hovered: {
-          bg: string
-          fg: string
-        }
-      }
+      default: ThemeButtonColor
+      brand: ThemeButtonColor
     }
   }
 
   card: {
     tones: {
-      default: {
-        bg: string
-        fg: string
-      }
-      transparent: {
-        bg: string
-        fg: string
-      }
-      contrast: {
-        bg: string
-        fg: string
-      }
+      default: ThemeCardColor
+      transparent: ThemeCardColor
+      contrast: ThemeCardColor
     }
   }
 }
