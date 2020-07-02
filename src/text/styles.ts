@@ -39,6 +39,10 @@ export function textBaseStyles(props: {theme: Theme}) {
         box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
       }
     }
+
+    & strong {
+      font-weight: ${theme.fonts.text.weights.bold};
+    }
   `
 }
 
@@ -46,7 +50,7 @@ export function textSizeStyles(props: {size?: number; weight?: number, theme: Th
   const {sizes} = props.theme.fonts.text
   const {weights} = props.theme.fonts.text
   const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
-  const weight = props.weight === undefined ? weights[0] : weights[props.weight] || weights[0]
+  const weight = props.weight === undefined ? weights.regular : weights[props.weight] || weights.regular
 
   return css`
     font-size: ${rem(size.fontSize)};

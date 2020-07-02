@@ -8,6 +8,7 @@ export function codeBaseStyles(props: {theme: Theme}) {
   return css`
     position: relative;
     font-family: ${theme.fonts.code.family};
+    font-weight: ${theme.fonts.code.weights.regular};
     display: block;
     padding: ${rem(1)} 0 0;
     margin: 0 -0.05em;
