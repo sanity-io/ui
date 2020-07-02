@@ -85,6 +85,7 @@ export const studioTheme: Theme = {
   fonts: {
     code: {
       family: '-apple-system-ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
+      weights: [400],
       sizes: [
         {
           ascenderHeight: 3,
@@ -126,7 +127,7 @@ export const studioTheme: Theme = {
     heading: {
       family:
         'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-      weight: 600,
+      weights: [600],
       sizes: [
         {
           ascenderHeight: 3,
@@ -168,7 +169,7 @@ export const studioTheme: Theme = {
     label: {
       family:
         'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-      weight: 500,
+      weights: [500],
       sizes: [
         {
           ascenderHeight: 2,
@@ -210,6 +211,7 @@ export const studioTheme: Theme = {
     text: {
       family:
         'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+      weights: [400,500,600],
       sizes: [
         {
           ascenderHeight: 3,

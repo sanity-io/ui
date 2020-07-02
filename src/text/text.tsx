@@ -5,15 +5,16 @@ import {textBaseStyles, textSizeStyles} from './styles'
 interface TextProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   size?: number
+  weight?: number
 }
 
 const Root = styled.div(textBaseStyles, textSizeStyles)
 
 export const Text = forwardRef((props: React.HTMLProps<HTMLDivElement> & TextProps, ref) => {
-  const {children, size, ...restProps} = props
+  const {children, size, weight, ...restProps} = props
 
   return (
-    <Root data-ui="Text" {...restProps} ref={ref} size={size}>
+    <Root data-ui="Text" {...restProps} ref={ref} size={size} weight={weight}>
       {children}
     </Root>
   )

@@ -8,7 +8,7 @@ interface ThemeFontSize {
 
 interface ThemeFont {
   family: string
-  weight: number
+  weights: number[]
   sizes: ThemeFontSize[]
 }
 

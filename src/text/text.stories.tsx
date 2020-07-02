@@ -16,11 +16,18 @@ export const plain = () => {
     'Props'
   )
 
+  const weight = select(
+    'Weight',
+    {'Regular (default)': undefined, 'Semibold': 1, 'Bold': 2},
+    undefined,
+    'Props'
+  )
+
   return (
     <div style={{background: '#fff'}}>
-      <Text size={size}>Hello, world</Text>
-      <Text size={size}>Hello, world</Text>
-      <Text size={size}>Hello, world</Text>
+      <Text size={size} weight={weight}>Hello, world</Text>
+      <Text size={size} weight={weight}>Hello, world</Text>
+      <Text size={size} weight={weight}>Hello, world</Text>
     </div>
   )
 }
