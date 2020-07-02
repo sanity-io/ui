@@ -42,6 +42,7 @@ export function AppHeader() {
               <NavListItemLink href="/container">Container</NavListItemLink>
               <NavListItemLink href="/flex">Flex</NavListItemLink>
               <NavListItemLink href="/inline">Inline</NavListItemLink>
+              <NavListItemLink href="/popover">Popover</NavListItemLink>
               <NavListItemLink href="/stack">Stack</NavListItemLink>
               <NavListItemLink href="/text">Text</NavListItemLink>
             </Stack>

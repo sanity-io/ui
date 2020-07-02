@@ -23,9 +23,11 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/color": "1.0.0"
+    "@sanity/color": "1.0.0",
+    "polished": "3.6.5"
   },
   "devDependencies": {
+    "@popperjs/core": "2.4.3",
     "@storybook/addon-actions": "5.3.19",
     "@storybook/addon-info": "5.3.19",
     "@storybook/addon-knobs": "5.3.19",
@@ -47,12 +49,15 @@
     "prettier": "^2.0.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-popper": "2.2.3",
     "rimraf": "3.0.2",
     "styled-components": "5.1.1",
     "typescript": "3.9.6"
   },
   "peerDependencies": {
+    "@popperjs/core": "^2.4",
     "react": "^16.9",
+    "react-popper": "^2.2",
     "styled-components": "^5.1"
   },
   "repository": {
