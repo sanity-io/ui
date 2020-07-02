@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Card, Inline, Stack, Text} from '@sanity/ui'
+import {Card, Inline, Heading, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,9 +11,11 @@ function InlinePage() {
       </Head>
 
       <AppLayout>
-        <h1>Inline</h1>
-
         <Stack space={4}>
+          <Heading as="h1" size={3}>
+            Inline
+          </Heading>
+
           <Card padding={3} radius={2} tone="transparent">
             <Inline space={4} style={{textAlign: 'center'}}>
               <Card padding={1}>

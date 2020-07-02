@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Box, Card, Stack, Text} from '@sanity/ui'
+import {Box, Card, Heading, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,9 +11,11 @@ function BoxPage() {
       </Head>
 
       <AppLayout>
-        <h1>Box</h1>
-
         <Stack space={4}>
+          <Heading as="h1" size={3}>
+            Box
+          </Heading>
+
           <Card padding={3} radius={2} tone="transparent">
             <Box padding={4} style={{outline: '1px solid red'}}>
               <Text>Text</Text>

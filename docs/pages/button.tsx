@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Button, Card, Inline, Stack} from '@sanity/ui'
+import {Button, Card, Heading, Inline, Stack} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,9 +11,11 @@ function ButtonPage() {
       </Head>
 
       <AppLayout>
-        <h1>Button</h1>
-
         <Stack space={4}>
+          <Heading as="h1" size={3}>
+            Button
+          </Heading>
+
           <Card padding={3} radius={2} tone="transparent">
             <Inline space={2}>
               <Button padding={4}>Button</Button>

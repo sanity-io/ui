@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Button, Card, Popover, Stack, Text} from '@sanity/ui'
+import {Button, Card, Heading, Popover, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React, {useState} from 'react'
 
@@ -13,9 +13,11 @@ function PopoverPage() {
       </Head>
 
       <AppLayout>
-        <h1>Popover</h1>
-
         <Stack space={4}>
+          <Heading as="h1" size={3}>
+            Popover
+          </Heading>
+
           <Card padding={3} radius={2} tone="transparent" style={{textAlign: 'center'}}>
             <Popover content={<Text>Hello, world</Text>} padding={4} open={open}>
               <Button onClick={() => setOpen(!open)}>Toggle popover</Button>

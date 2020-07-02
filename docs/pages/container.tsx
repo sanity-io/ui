@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Card, Container, Stack, Text} from '@sanity/ui'
+import {Card, Container, Heading, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,9 +11,11 @@ function ContainerPage() {
       </Head>
 
       <AppLayout>
-        <h1>Container</h1>
-
         <Stack space={4}>
+          <Heading as="h1" size={3}>
+            Container
+          </Heading>
+
           <Card padding={3} radius={2} tone="transparent">
             <Container width={0}>
               <Card padding={4}>

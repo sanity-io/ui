@@ -1,5 +1,5 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Card, Flex, Stack, Text} from '@sanity/ui'
+import {Card, Flex, Heading, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 
@@ -11,9 +11,11 @@ function FlexPage() {
       </Head>
 
       <AppLayout>
-        <h1>Flex</h1>
-
         <Stack space={4}>
+          <Heading as="h1" size={3}>
+            Flex
+          </Heading>
+
           <Card padding={3} radius={2} tone="transparent">
             <Flex>
               <Card flex={1}>
