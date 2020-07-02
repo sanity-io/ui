@@ -9,13 +9,21 @@ export default {
   decorators: [withCentered, withKnobs],
 }
 
-const switchProps = () => ({
-  id: 'switchStory',
-  isChecked: boolean('Checked?', false),
-  disabled: boolean('Disabled?', false),
-  onChange: action('onChange'),
-  onFocus: action('onFocus'),
-  onBlur: action('onBlur'),
-})
+const switchProps = () => {
+  const indeterminate = boolean('Indeterminate', false, 'Props')
+  const checked = boolean('Checked', false, 'Props')
 
-export const plain = () => <Switch {...switchProps()} />
+  return {
+    checked: indeterminate ? undefined : checked,
+    disabled: boolean('Disabled', false, 'Props'),
+    onChange: action('onChange'),
+    onFocus: action('onFocus'),
+    onBlur: action('onBlur'),
+  }
+}
+
+export const plain = () => {
+  const props = switchProps()
+
+  return <Switch {...props} />
+}
