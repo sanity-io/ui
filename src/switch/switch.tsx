@@ -19,7 +19,10 @@ const Track = styled.span(switchTrackStyles)
 const Thumb = styled.span<{checked?: boolean}>(switchThumbStyles)
 
 export const Switch = forwardRef(
-  ({checked, ...restProps}: React.HTMLProps<HTMLInputElement> & SwitchProps, ref) => {
+  (
+    {checked, className, style, ...restProps}: React.HTMLProps<HTMLInputElement> & SwitchProps,
+    ref
+  ) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
@@ -40,7 +43,7 @@ export const Switch = forwardRef(
     }
 
     return (
-      <Root data-ui="Switch">
+      <Root className={className} data-ui="Switch" style={style}>
         <Input {...restProps} checked={checked} type="checkbox" ref={setRef} />
         <Representation aria-hidden data-name="representation">
           <Track />
