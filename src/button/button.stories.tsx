@@ -10,6 +10,17 @@ export default {
 }
 
 export const plain = () => {
+  const mode = select(
+    'Mode',
+    {
+      Default: 'default',
+      Ghost: 'ghost',
+      Bleed: 'bleed',
+    },
+    'default',
+    'Props'
+  )
+
   const paddingX = select(
     'Padding X',
     {
@@ -42,10 +53,27 @@ export const plain = () => {
     'Props'
   )
 
-  const tone = select('Tone', {Default: undefined, Brand: 'brand'}, undefined, 'Props')
+  const tone = select(
+    'Tone',
+    {
+      Default: 'default',
+      Brand: 'brand',
+      Positive: 'positive',
+      Caution: 'caution',
+      Critical: 'critical',
+    },
+    'default',
+    'Props'
+  )
 
   return (
-    <Button onClick={action('onClick')} paddingX={paddingX} paddingY={paddingY} tone={tone}>
+    <Button
+      mode={mode}
+      onClick={action('onClick')}
+      paddingX={paddingX}
+      paddingY={paddingY}
+      tone={tone}
+    >
       Plain
     </Button>
   )

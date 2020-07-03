@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {Theme} from '../theme'
-import {ButtonTone} from './types'
+import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
   return css`
@@ -9,29 +9,47 @@ export function buttonBaseStyles() {
     display: inline-block;
     font: inherit;
     border: 0;
-    margin: 0;
     border-radius: 3px;
     outline: none;
     user-select: none;
     text-decoration: none;
+    border: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    & > span {
+      border-radius: inherit;
+    }
   `
 }
 
-export function buttonColorStyles(props: {theme: Theme; tone: ButtonTone}) {
-  const tone = props.theme.color.button.tones[props.tone]
+export function buttonColorStyles(props: {mode: ButtonMode; theme: Theme; tone: ButtonTone}) {
+  const tone = props.theme.color.button.tones[props.tone || 'default']
+  const mode = tone.modes[props.mode || 'default']
 
   return css`
-    background: ${tone.enabled.bg};
-    color: ${tone.enabled.fg};
+    &:not([data-disabled='true']) {
+      background: ${mode.enabled.bg};
+      color: ${mode.enabled.fg};
 
-    &:focus {
-      box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
-    }
+      & > span {
+        box-shadow: inset 0 0 0 1px ${mode.enabled.border};
+      }
 
-    @media (hover: hover) {
-      &:hover {
-        background: ${tone.hovered.bg};
-        color: ${tone.hovered.fg};
+      &:focus {
+        box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          background: ${mode.hovered.bg};
+          color: ${mode.hovered.fg};
+
+          & > span {
+            box-shadow: inset 0 0 0 1px ${mode.hovered.border};
+          }
+        }
       }
     }
   `

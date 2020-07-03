@@ -7,23 +7,203 @@ export const studioTheme: Theme = {
     button: {
       tones: {
         default: {
-          enabled: {
-            bg: color.gray['500'].hex,
-            fg: color.white.hex,
-          },
-          hovered: {
-            bg: color.gray['600'].hex,
-            fg: color.white.hex,
+          modes: {
+            default: {
+              enabled: {
+                bg: color.gray['500'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.gray['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            ghost: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.gray['600'].hex,
+                border: color.gray['200'].hex,
+              },
+              hovered: {
+                bg: color.gray['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            bleed: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.gray['600'].hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.gray['100'].hex,
+                fg: color.black.hex,
+                border: 'transparent',
+              },
+            },
           },
         },
         brand: {
-          enabled: {
-            bg: color.blue['500'].hex,
-            fg: color.white.hex,
+          modes: {
+            default: {
+              enabled: {
+                bg: color.blue['500'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.blue['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            ghost: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.blue['600'].hex,
+                border: color.gray['200'].hex,
+              },
+              hovered: {
+                bg: color.blue['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            bleed: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.blue['600'].hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.blue['100'].hex,
+                fg: color.black.hex,
+                border: 'transparent',
+              },
+            },
           },
-          hovered: {
-            bg: color.blue['600'].hex,
-            fg: color.white.hex,
+        },
+        positive: {
+          modes: {
+            default: {
+              enabled: {
+                bg: color.green['500'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.green['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            ghost: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.green['600'].hex,
+                border: color.gray['200'].hex,
+              },
+              hovered: {
+                bg: color.green['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            bleed: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.green['600'].hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.green['100'].hex,
+                fg: color.black.hex,
+                border: 'transparent',
+              },
+            },
+          },
+        },
+        caution: {
+          modes: {
+            default: {
+              enabled: {
+                bg: color.yellow['500'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.yellow['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            ghost: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.yellow['600'].hex,
+                border: color.gray['200'].hex,
+              },
+              hovered: {
+                bg: color.yellow['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            bleed: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.yellow['600'].hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.yellow['100'].hex,
+                fg: color.black.hex,
+                border: 'transparent',
+              },
+            },
+          },
+        },
+        critical: {
+          modes: {
+            default: {
+              enabled: {
+                bg: color.red['500'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.red['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            ghost: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.red['600'].hex,
+                border: color.gray['200'].hex,
+              },
+              hovered: {
+                bg: color.red['600'].hex,
+                fg: color.white.hex,
+                border: 'transparent',
+              },
+            },
+            bleed: {
+              enabled: {
+                bg: 'transparent',
+                fg: color.red['600'].hex,
+                border: 'transparent',
+              },
+              hovered: {
+                bg: color.red['100'].hex,
+                fg: color.black.hex,
+                border: 'transparent',
+              },
+            },
           },
         },
       },

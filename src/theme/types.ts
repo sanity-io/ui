@@ -17,13 +17,43 @@ interface ThemeFont {
 }
 
 interface ThemeButtonColor {
-  enabled: {
-    bg: string
-    fg: string
-  }
-  hovered: {
-    bg: string
-    fg: string
+  modes: {
+    default: {
+      enabled: {
+        bg: string
+        fg: string
+        border: string
+      }
+      hovered: {
+        bg: string
+        fg: string
+        border: string
+      }
+    }
+    ghost: {
+      enabled: {
+        bg: string
+        fg: string
+        border: string
+      }
+      hovered: {
+        bg: string
+        fg: string
+        border: string
+      }
+    }
+    bleed: {
+      enabled: {
+        bg: string
+        fg: string
+        border: string
+      }
+      hovered: {
+        bg: string
+        fg: string
+        border: string
+      }
+    }
   }
 }
 
@@ -50,6 +80,9 @@ interface ThemeColor {
     tones: {
       default: ThemeButtonColor
       brand: ThemeButtonColor
+      positive: ThemeButtonColor
+      caution: ThemeButtonColor
+      critical: ThemeButtonColor
     }
   }
 
