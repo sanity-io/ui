@@ -136,12 +136,12 @@ export function codeBaseStyles(props: {theme: Theme}) {
       height: 0;
     }
 
-    & > code {
+    & code {
       font-family: ${theme.fonts.code.family};
       border-radius: 2px;
     }
 
-    & > code.refractor {
+    & code.refractor {
       ${codeSyntaxHighlightingStyles}
     }
 
