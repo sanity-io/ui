@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {getResponsiveProp} from '../helpers'
-import {boxFlexStyles, boxPaddingStyles} from './styles'
+import {boxBaseStyles, boxFlexStyles, boxPaddingStyles} from './styles'
 
 export interface BoxPaddingProps {
   padding?: number | number[]
@@ -22,7 +22,7 @@ export interface BoxProps extends BoxPaddingProps, BoxFlexProps {
 }
 
 // @todo: Figure out typings
-const Root = styled.div(boxFlexStyles as any, boxPaddingStyles)
+const Root = styled.div(boxBaseStyles, boxFlexStyles as any, boxPaddingStyles)
 
 export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps, ref) => {
   const {

@@ -5,6 +5,14 @@ function rem(px: number) {
   return `${px / 16}rem`
 }
 
+export function boxBaseStyles() {
+  return css`
+    display: block;
+    padding: 0;
+    margin: 0;
+  `
+}
+
 export function boxPaddingStyles(props: {
   padding: number[]
   paddingX: number[]
