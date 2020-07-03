@@ -7,15 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  html {
-    font: 100%/1.25 -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-
   body {
-    margin: 0;
-  }
-
-  #__next {
     -webkit-font-smoothing: antialiased;
+    margin: 0;
   }
 `
