@@ -62,6 +62,9 @@ export function AppHeader() {
                 <NavLink href="/card">Card</NavLink>
               </Text>
               <Text as="li">
+                <NavLink href="/checkbox">Checkbox</NavLink>
+              </Text>
+              <Text as="li">
                 <NavLink href="/code">Code</NavLink>
               </Text>
               <Text as="li">
@@ -77,19 +80,16 @@ export function AppHeader() {
                 <NavLink href="/popover">Popover</NavLink>
               </Text>
               <Text as="li">
-                <NavLink href="/stack">Stack</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/text">Text</NavLink>
-              </Text>
-              <Text as="li">
                 <NavLink href="/radio">Radio</NavLink>
+              </Text>
+              <Text as="li">
+                <NavLink href="/stack">Stack</NavLink>
               </Text>
               <Text as="li">
                 <NavLink href="/switch">Switch</NavLink>
               </Text>
               <Text as="li">
-                <NavLink href="/checkbox">Checkbox</NavLink>
+                <NavLink href="/text">Text</NavLink>
               </Text>
             </Stack>
           </Stack>
