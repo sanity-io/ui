@@ -1,69 +1,53 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Flex, Card, Stack, Checkbox} from '@sanity/ui'
+import {Card, Checkbox, Heading, Inline, Stack} from '@sanity/ui'
 import Head from 'next/head'
 import React, {useState} from 'react'
-function CheckboxPage() {
-  const [items, setItems] = useState([
-    {
-      value: 'hello',
-      checked: false,
-    },
-    {
-      value: 'world',
-      checked: undefined,
-    },
-    {
-      value: 'hei',
-      checked: false,
-    },
-    {
-      value: 'verden',
-      checked: undefined,
-    },
-  ])
-  const handleChange = (index) => {
-    const newItems = [...items]
-    const item = newItems[index]
-    item.checked = !item.checked
-    setItems(newItems)
+
+function CheckboxExample(props: {checked?: boolean; value?: string}) {
+  const [checked, setChecked] = useState(props.checked)
+
+  const handleChange = () => {
+    setChecked(!checked)
   }
+
+  return (
+    <Checkbox
+      checked={checked}
+      onChange={handleChange}
+      value={props.value}
+      style={{verticalAlign: 'top'}}
+    />
+  )
+}
+
+function CheckboxPage() {
   return (
     <>
       <Head>
         <title>Checkbox – Sanity UI</title>
       </Head>
+
       <AppLayout>
-        <h1>Checkbox</h1>
         <Stack space={4}>
-          <Card padding={3} radius={2} tone="transparent">
-            <Flex>
-              {items.map((item, index) => (
-                <Card key={index} flex={1} tone="transparent">
-                  <Checkbox
-                    value={item.value}
-                    checked={item.checked}
-                    onChange={() => handleChange(index)}
-                    name="checkbox-page"
-                  />
-                </Card>
-              ))}
-            </Flex>
+          <Heading>Checkbox</Heading>
+
+          <Card padding={3} radius={2} tone="transparent" style={{textAlign: 'center'}}>
+            <Inline space={2}>
+              <CheckboxExample checked />
+              <CheckboxExample checked={false} />
+              <CheckboxExample />
+            </Inline>
           </Card>
-          <CodeBlock>{`<Flex>
-  {items.map((item, index) => (
-    <Card key={index} flex={1} tone="transparent">
-      <Checkbox
-        value={item.value}
-        checked={item.checked}
-        onChange={() => handleChange(index)}
-        name="checkbox-page"
-      />
-    </Card>
-  ))}
-</Flex>`}</CodeBlock>
+
+          <CodeBlock>{`<Inline space={2}>
+  <Checkbox checked />
+  <Checkbox checked={false} />
+  <Checkbox />
+</Inline>`}</CodeBlock>
         </Stack>
       </AppLayout>
     </>
   )
 }
+
 export default CheckboxPage
