@@ -1,45 +1,6 @@
-import {color} from '@sanity/color'
 import {css} from 'styled-components'
-// import {Theme} from '../theme'
+import {Theme} from '../theme'
 import {rem} from '../helpers'
-
-// @todo: Move these values to the theme context
-const theme = {
-  color: {
-    switch: {
-      tones: {
-        default: {
-          enabled: {
-            thumb: color.white.hex,
-            off: {
-              bg: color.gray['500'].hex,
-            },
-            on: {
-              bg: color.green['500'].hex,
-            },
-          },
-          disabled: {
-            thumb: color.gray['50'].hex,
-            off: {
-              bg: color.gray['200'].hex,
-            },
-            on: {
-              bg: color.green['200'].hex,
-            },
-          },
-        },
-      },
-    },
-  },
-
-  switch: {
-    width: 33,
-    height: 17,
-    padding: 4,
-    transitionDurationMs: 150,
-    transitionTimingFunction: 'ease-out',
-  },
-}
 
 /* Root */
 export function switchBaseStyles() {
@@ -50,7 +11,8 @@ export function switchBaseStyles() {
 }
 
 /* Input */
-export function switchInputStyles() {
+export function switchInputStyles(props: {theme: Theme}) {
+  const {theme} = props
   const tone = theme.color.switch.tones.default
 
   // Visually hide the input element while keeping it interactive
@@ -93,13 +55,14 @@ export function switchInputStyles() {
 }
 
 /* Representation */
-export function switchRepresentationStyles() {
+export function switchRepresentationStyles(props: {theme: Theme}) {
+  const {switch: switchInput} = props.theme.input
   return css`
     display: block;
     position: relative;
-    width: ${rem(theme.switch.width)};
-    height: ${rem(theme.switch.height)};
-    border-radius: ${rem(theme.switch.height / 2)};
+    width: ${rem(switchInput.width)};
+    height: ${rem(switchInput.height)};
+    border-radius: ${rem(switchInput.height / 2)};
 
     /* Make sure it’s not possible to interact with the wrapper element */
     pointer-events: none;
@@ -107,25 +70,27 @@ export function switchRepresentationStyles() {
 }
 
 /* Track */
-export function switchTrackStyles() {
+export function switchTrackStyles(props: {theme: Theme}) {
+  const {switch: switchInput} = props.theme.input
   return css`
     display: block;
     background: var(--switch-bg-color);
     position: absolute;
     left: 0;
     top: 0;
-    width: ${rem(theme.switch.width)};
-    height: ${rem(theme.switch.height)};
-    border-radius: ${rem(theme.switch.height / 2)};
+    width: ${rem(switchInput.width)};
+    height: ${rem(switchInput.height)};
+    border-radius: ${rem(switchInput.height / 2)};
   `
 }
 
 /* Thumb */
-export function switchThumbStyles(props: {checked?: boolean}) {
-  const trackWidth = theme.switch.width
-  const trackHeight = theme.switch.height
-  const trackPadding = theme.switch.padding
-  const size = trackHeight - theme.switch.padding * 2
+export function switchThumbStyles(props: {checked?: boolean; theme: Theme}) {
+  const {switch: switchInput} = props.theme.input
+  const trackWidth = switchInput.width
+  const trackHeight = switchInput.height
+  const trackPadding = switchInput.padding
+  const size = trackHeight - switchInput.padding * 2
   const checkedOffset = trackWidth - trackPadding * 2 - size
   const indeterminateOffset = trackWidth / 2 - size / 2 - trackPadding
 
@@ -138,8 +103,8 @@ export function switchThumbStyles(props: {checked?: boolean}) {
     width: ${rem(size)};
     border-radius: ${rem(size / 2)};
     transition-property: transform;
-    transition-duration: ${theme.switch.transitionDurationMs}ms;
-    transition-timing-function: ${theme.switch.transitionTimingFunction};
+    transition-duration: ${switchInput.transitionDurationMs}ms;
+    transition-timing-function: ${switchInput.transitionTimingFunction};
     background: var(--switch-thumb-color);
     transform: translate3d(0, 0, 0);
 

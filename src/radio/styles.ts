@@ -1,46 +1,16 @@
 import {css} from 'styled-components'
-// import {Theme} from '../theme'
-import {color} from '@sanity/color'
-
-/* TODO 
-  - Get colors from theme
-*/
-
-const inputColor = {
-  enabled: {
-    bg: color.white.hex,
-    fg: color.black.hex,
-    border: color.gray[200].hex,
-    focused: color.blue[400].hex,
-  },
-  disabled: {
-    bg: color.gray[50].hex,
-    fg: color.gray[500].hex,
-    border: color.gray[200].hex,
-  },
-}
-
-const RADIO = {
-  size: '1em',
-  bg: inputColor.enabled.bg,
-  fg: inputColor.enabled.fg,
-  border: inputColor.disabled.border,
-  focused: inputColor.enabled.focused,
-  disabled: {
-    bg: inputColor.disabled.bg,
-    fg: inputColor.disabled.fg,
-    border: inputColor.disabled.border,
-  },
-}
+import {Theme} from '../theme'
+import {rem} from '../helpers'
 
 export function radioBaseStyles() {
   return css`
     position: relative;
-    display: flex;
+    display: inline-block;
   `
 }
 
-export function inputElementStyles() {
+export function inputElementStyles(props: {theme: Theme}) {
+  const {input} = props.theme.color
   // Hide the input element, while still making it respond to focus
   return css`
     position: absolute;
@@ -57,62 +27,50 @@ export function inputElementStyles() {
     margin: 0;
 
     /* Checkbox focus styles */
-    &:focus + .radio {
-      border-color: transparent;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        height: calc(100% + 4px);
-        width: calc(100% + 4px);
-        border: 2px solid ${RADIO.focused};
-        border-radius: 100%;
-        box-sizing: border-box;
-        background: ${RADIO.bg};
-      }
+    &:focus + [data-name='representation'] {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #4e91fc;
     }
 
-    &:checked + .radio::after {
+    &:checked + [data-name='representation']::after {
       opacity: 1;
-      transform: scale(0.55);
     }
 
-    &:disabled + .radio {
-      border-color: ${RADIO.disabled.border};
-      background: ${RADIO.disabled.bg};
+    &:disabled + [data-name='representation'] {
+      box-shadow: 0 0 0 1px ${input.tones.default.disabled.border};
+      background: ${input.tones.default.disabled.bg};
       &::after {
-        background: ${RADIO.disabled.fg};
+        background: ${input.tones.default.disabled.fg};
       }
     }
   `
 }
 
-export function radioStyles() {
+export function representationStyles(props: {theme: Theme}) {
+  const {radio} = props.theme.input
+  const {input} = props.theme.color
+
   return css`
     flex-shrink: 0;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: ${RADIO.size};
-    width: ${RADIO.size};
-    border: 1px solid ${RADIO.border};
-    border-radius: ${RADIO.size};
+    height: ${rem(radio.size)};
+    width: ${rem(radio.size)};
+    box-shadow: 0 0 0 1px ${input.tones.default.enabled.border};
+    border-radius: ${rem(radio.size)};
     line-height: 1;
-    background: ${RADIO.bg};
+    background: ${input.tones.default.enabled.bg};
 
     &::after {
       position: absolute;
       content: '';
       height: 100%;
       width: 100%;
-      box-sizing: border-box;
-      background: ${RADIO.fg};
+      background: ${input.tones.default.enabled.fg};
       border-radius: 100%;
       opacity: 0;
-      transform: scale(0.4);
+      transform: scale(0.5);
     }
   `
 }

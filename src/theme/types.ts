@@ -138,6 +138,48 @@ interface ThemeColor {
       default: ThemeSyntaxColor
     }
   }
+
+  switch: {
+    tones: {
+      default: {
+        enabled: {
+          thumb: string
+          off: {
+            bg: string
+          }
+          on: {
+            bg: string
+          }
+        }
+        disabled: {
+          thumb: string
+          off: {
+            bg: string
+          }
+          on: {
+            bg: string
+          }
+        }
+      }
+    }
+  }
+
+  input: {
+    tones: {
+      default: {
+        enabled: {
+          bg: string
+          fg: string
+          border: string
+        }
+        disabled: {
+          bg: string
+          fg: string
+          border: string
+        }
+      }
+    }
+  }
 }
 
 // offsetX, offsetY, blurRadius, spreadRadius
@@ -162,4 +204,19 @@ export interface Theme {
   radius: number[]
   shadows: Array<ThemeShadow | null>
   space: number[]
+  input: {
+    checkbox: {
+      size: number
+    }
+    radio: {
+      size: number
+    }
+    switch: {
+      width: number
+      height: number
+      padding: number
+      transitionDurationMs: number
+      transitionTimingFunction: string
+    }
+  }
 }

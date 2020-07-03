@@ -302,6 +302,46 @@ export const studioTheme: Theme = {
         },
       },
     },
+    switch: {
+      tones: {
+        default: {
+          enabled: {
+            thumb: color.white.hex,
+            off: {
+              bg: color.gray['500'].hex,
+            },
+            on: {
+              bg: color.green['500'].hex,
+            },
+          },
+          disabled: {
+            thumb: color.gray['50'].hex,
+            off: {
+              bg: color.gray['200'].hex,
+            },
+            on: {
+              bg: color.green['200'].hex,
+            },
+          },
+        },
+      },
+    },
+    input: {
+      tones: {
+        default: {
+          enabled: {
+            bg: color.white.hex,
+            fg: color.black.hex,
+            border: color.gray[200].hex,
+          },
+          disabled: {
+            bg: color.gray[50].hex,
+            fg: color.gray[500].hex,
+            border: color.gray[200].hex,
+          },
+        },
+      },
+    },
   },
   container: [320, 640, 960, 1280, 1600, 1920],
   fonts: {
@@ -493,4 +533,19 @@ export const studioTheme: Theme = {
     {umbra: [0, 11, 15, -7], penumbra: [0, 24, 38, 3], ambient: [0, 9, 46, 8]},
   ],
   space: [0, 4, 8, 12, 20, 32, 52, 84, 136, 220],
+  input: {
+    checkbox: {
+      size: 17,
+    },
+    radio: {
+      size: 17,
+    },
+    switch: {
+      width: 33,
+      height: 17,
+      padding: 4,
+      transitionDurationMs: 150,
+      transitionTimingFunction: 'ease-out',
+    },
+  },
 }

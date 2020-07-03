@@ -12,7 +12,7 @@ export default {
 const radioProps = () => ({
   id: 'radioStory',
   name: 'radioStory',
-  isChecked: boolean('Checked?', false),
+  checked: boolean('Checked?', false),
   disabled: boolean('Disabled?', false),
   onChange: action('onChange'),
   onFocus: action('onFocus'),

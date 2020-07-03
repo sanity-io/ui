@@ -9,13 +9,20 @@ export default {
   decorators: [withCentered, withKnobs],
 }
 
-const checkboxProps = () => ({
-  id: 'checkboxStory',
-  isChecked: boolean('Checked?', false),
-  disabled: boolean('Disabled?', false),
-  onChange: action('onChange'),
-  onFocus: action('onFocus'),
-  onBlur: action('onBlur'),
-})
+const checkboxProps = () => {
+  const indeterminate = boolean('Indeterminate', false, 'Props')
+  const checked = boolean('Checked', false, 'Props')
 
-export const plain = () => <Checkbox {...checkboxProps()} />
+  return {
+    checked: indeterminate ? undefined : checked,
+    disabled: boolean('Disabled', false, 'Props'),
+    onChange: action('onChange'),
+    onFocus: action('onFocus'),
+    onBlur: action('onBlur'),
+  }
+}
+
+export const plain = () => {
+  const props = checkboxProps()
+  return <Checkbox {...props} />
+}

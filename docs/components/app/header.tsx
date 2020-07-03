@@ -82,6 +82,15 @@ export function AppHeader() {
               <Text as="li">
                 <NavLink href="/text">Text</NavLink>
               </Text>
+              <Text as="li">
+                <NavLink href="/radio">Radio</NavLink>
+              </Text>
+              <Text as="li">
+                <NavLink href="/switch">Switch</NavLink>
+              </Text>
+              <Text as="li">
+                <NavLink href="/checkbox">Checkbox</NavLink>
+              </Text>
             </Stack>
           </Stack>
         </Stack>

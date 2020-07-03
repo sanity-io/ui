@@ -1,59 +1,41 @@
-import React, {forwardRef, useEffect} from 'react'
+import React, {forwardRef, useEffect, useRef} from 'react'
 import styled from 'styled-components'
-import {checkboxBaseStyles, wrapperStyles, inputElementStyles, markStyles} from './styles'
+import {checkboxBaseStyles, representationStyles, inputElementStyles, markStyles} from './styles'
 
 interface CheckboxProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  id: string
-  isChecked: boolean | undefined
-  disabled?: boolean
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
-  onBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void
 }
 
 const Root = styled.div(checkboxBaseStyles)
-const InputElement = styled.input(inputElementStyles)
-const Wrapper = styled.div(wrapperStyles)
+const Input = styled.input(inputElementStyles)
+const Representation = styled.div(representationStyles)
 const Svg = styled.svg(markStyles)
 
 export const Checkbox = forwardRef(
-  (
-    {
-      id,
-      disabled,
-      isChecked,
-      onFocus,
-      onBlur,
-      onChange,
-      ...restProps
-    }: React.HTMLProps<HTMLInputElement> & CheckboxProps,
-    ref: any
-  ) => {
+  ({checked, ...restProps}: React.HTMLProps<HTMLInputElement> & CheckboxProps, ref) => {
+    const inputRef = useRef<HTMLInputElement | null>(null)
+
     useEffect(() => {
       // Set the indeterminate state if checked value is undefined
-      if (typeof isChecked === 'undefined' && ref?.current) {
-        ref.current.indeterminate = true
+      if (inputRef.current) {
+        inputRef.current.indeterminate = checked === undefined
       }
-    })
+    }, [checked])
+
+    const setRef = (inputElement: HTMLInputElement | null) => {
+      if (typeof ref === 'function') {
+        ref(inputElement)
+      } else if (ref) {
+        ref.current = inputElement
+      }
+
+      inputRef.current = inputElement
+    }
 
     return (
       <Root data-ui="Checkbox">
-        <InputElement
-          // ID used to link this input to the appropriate label
-          id={id}
-          // ID used to link this input to the appropriate description, if any
-          aria-describedby={`${id}-description`}
-          type="checkbox"
-          disabled={disabled}
-          checked={isChecked}
-          ref={ref}
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          {...restProps}
-        />
-        <Wrapper className="wrapper">
+        <Input {...restProps} checked={checked} type="checkbox" ref={setRef} />
+        <Representation data-name="representation">
           <Svg
             className="checkmark"
             viewBox="0 0 12 10"
@@ -70,7 +52,7 @@ export const Checkbox = forwardRef(
           >
             <path d="M0.0799561 1.5H8.91996" stroke="currentColor" strokeWidth="2" />
           </Svg>
-        </Wrapper>
+        </Representation>
       </Root>
     )
   }
