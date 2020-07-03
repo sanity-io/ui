@@ -12,7 +12,8 @@ const Representation = styled.div(representationStyles)
 const Svg = styled.svg(markStyles)
 
 export const Checkbox = forwardRef(
-  ({checked, ...restProps}: React.HTMLProps<HTMLInputElement> & CheckboxProps, ref) => {
+  (props: React.HTMLProps<HTMLInputElement> & CheckboxProps, ref) => {
+    const {checked, className, style, ...restProps} = props
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export const Checkbox = forwardRef(
     }
 
     return (
-      <Root data-ui="Checkbox">
+      <Root className={className} data-ui="Checkbox" style={style}>
         <Input {...restProps} checked={checked} type="checkbox" ref={setRef} />
         <Representation data-name="representation">
           <Svg
