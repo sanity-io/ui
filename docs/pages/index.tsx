@@ -18,8 +18,8 @@ function IndexPage() {
           </Heading>
 
           <Text>
-            Sanity UI is a kit for building web applications, that is used by the design and tech
-            teams at Sanity to build and maintain the Studio and Manage applications.
+            Sanity UI is a React-based library for building web applications. It is used by the
+            design and tech teams at Sanity, as well as by third party developers.
           </Text>
         </Stack>
       </AppLayout>

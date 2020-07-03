@@ -37,7 +37,7 @@ const SideMenu = styled(Card)`
 
     @media (min-width: ${rem(theme.media[1])}) {
       flex: 1;
-      max-width: 20rem;
+      max-width: 15rem;
       min-width: 10rem;
       border-right: 1px solid var(--card-shadow-outline-color);
       position: sticky;
@@ -58,7 +58,7 @@ const ContentContainer = styled.div`
 const NarrowDeviceMenu = styled(Box)`
   ${({theme}) => css`
     @media (min-width: ${rem(theme.media[1])}) {
-      display: none;
+      display: none !important;
     }
   `}
 `
@@ -77,12 +77,14 @@ export function AppLayout(props: {children: React.ReactNode}) {
       </SideMenu>
 
       <ContentContainer>
-        <NarrowDeviceMenu padding={[4, 5]}>
-          <Button onClick={handleMenuOpenClick}>Menu</Button>
+        <NarrowDeviceMenu padding={[2, 4]}>
+          <Button mode="bleed" onClick={handleMenuOpenClick}>
+            Menu
+          </Button>
         </NarrowDeviceMenu>
 
         <Container as="main" width={1}>
-          <Box as="main" padding={[4, 5]} paddingY={[4, 5, 6, 7, 8]}>
+          <Box as="main" padding={[4, 5]} paddingY={[5, 5, 6, 7, 8]}>
             {props.children}
           </Box>
         </Container>
