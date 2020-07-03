@@ -137,12 +137,11 @@ export function codeBaseStyles(props: {theme: Theme}) {
     }
 
     & code {
-      font-family: ${theme.fonts.code.family};
-      border-radius: 2px;
-    }
+      font-family: inherit;
 
-    & code.refractor {
-      ${codeSyntaxHighlightingStyles}
+      &.refractor {
+        ${codeSyntaxHighlightingStyles}
+      }
     }
 
     & a {
