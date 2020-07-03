@@ -1,47 +1,63 @@
 import {AppLayout, CodeBlock} from '~/components'
-import {Flex, Card, Stack, Radio} from '@sanity/ui'
+import {Card, Heading, Inline, Radio, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React, {useState} from 'react'
+
 function RadioPage() {
-  const [value, setValue] = useState('hello')
-  const items = ['hello', 'world', 'hei', 'verden']
-  const handleChange = (e) => {
+  const [value, setValue] = useState('Hello, world')
+  const items = ['Hello, world!', 'Hei, verden!', 'Witaj świecie!']
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
   }
+
   return (
     <>
       <Head>
         <title>Radio – Sanity UI</title>
       </Head>
+
       <AppLayout>
-        <h1>Radio</h1>
         <Stack space={4}>
+          <Heading>Radio</Heading>
+
           <Card padding={3} radius={2} tone="transparent">
-            <Flex>
+            <Stack space={3}>
               {items.map((item, index) => (
-                <Card key={index} flex={1} tone="transparent">
+                <Inline as="label" key={index} space={3}>
                   <Radio
-                    value={item}
                     checked={item === value}
+                    name="greeting"
                     onChange={handleChange}
-                    name="radio-page"
+                    style={{verticalAlign: 'top'}}
+                    value={item}
                   />
-                </Card>
+                  <Text>{item}</Text>
+                </Inline>
               ))}
-            </Flex>
+
+              <Text>
+                <strong>Current value</strong>: <code>{value}</code>
+              </Text>
+            </Stack>
           </Card>
-          <CodeBlock>{`<Flex>
-  {items.map((item, index) => (
-    <Card key={index} flex={1} tone="transparent">
-      <Radio
-        value={item}
-        checked={item === value}
-        onChange={handleChange}
-        name="radio-page"
-      />
-    </Card>
-  ))}
-</Flex>`}</CodeBlock>
+
+          <CodeBlock>{`{items.map((item, index) => (
+  <Inline as="label" key={index} space={3}>
+    <Radio
+      checked={item === value}
+      name="greeting"
+      onChange={handleChange}
+      style={{verticalAlign: 'top'}}
+      value={item}
+    />
+    <Text>{item}</Text>
+  </Inline>
+))}
+
+<Text>
+  <strong>Current value</strong>: <code>{value}</code>
+</Text>`}</CodeBlock>
         </Stack>
       </AppLayout>
     </>
