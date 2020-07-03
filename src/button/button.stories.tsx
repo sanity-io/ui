@@ -1,5 +1,5 @@
 import {withCentered} from '~/storybook/decorators'
-import {Button} from '@sanity/ui'
+import {Button, Stack } from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -67,14 +67,26 @@ export const plain = () => {
   )
 
   return (
-    <Button
-      mode={mode}
-      onClick={action('onClick')}
-      paddingX={paddingX}
-      paddingY={paddingY}
-      tone={tone}
-    >
-      Plain
-    </Button>
+    <Stack space={2}>
+      <Button
+        mode={mode}
+        onClick={action('onClick')}
+        paddingX={paddingX}
+        paddingY={paddingY}
+        tone={tone}
+      >
+        Button
+      </Button>
+      <Button
+        mode={mode}
+        onClick={action('onClick')}
+        paddingX={paddingX}
+        paddingY={paddingY}
+        tone={tone}
+        icon="add-circle"
+      >
+        Button with an icon
+      </Button>
+    </Stack>
   )
 }

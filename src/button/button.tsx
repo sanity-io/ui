@@ -2,6 +2,7 @@ import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {Box, BoxPaddingProps} from '../box'
 import {Text} from '../text'
+import {Icon, IconSymbol} from '../icon'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 import {ButtonMode, ButtonTone} from './types'
 
@@ -9,6 +10,7 @@ interface ButtonProps extends BoxPaddingProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: ButtonMode
   tone?: ButtonTone
+  icon?: IconSymbol
   type?: 'button' | 'reset' | 'submit'
 }
 
@@ -28,6 +30,7 @@ export const Button = forwardRef((props: React.HTMLProps<HTMLButtonElement> & Bu
     paddingLeft,
     paddingRight,
     tone = 'default',
+    icon,
     ...restProps
   } = props
 
@@ -50,9 +53,13 @@ export const Button = forwardRef((props: React.HTMLProps<HTMLButtonElement> & Bu
       mode={mode}
       ref={ref}
       tone={tone}
+      icon={icon}
     >
       <Box as="span" {...boxProps}>
-        {children && <Text as="span">{children}</Text>}
+        {children && <Text as="span">
+          {icon && <Icon symbol={icon}/>}
+          {children}
+        </Text>}
       </Box>
     </Root>
   )
