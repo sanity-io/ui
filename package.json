@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@popperjs/core": "2.4.4",
-    "@storybook/addon-actions": "5.3.19",
+    "@storybook/addon-actions": "6.0.16",
     "@storybook/addon-info": "5.3.19",
     "@storybook/addon-knobs": "5.3.19",
     "@storybook/addon-links": "5.3.19",
