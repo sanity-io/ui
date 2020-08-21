@@ -54,7 +54,7 @@
     "react-refractor": "^2.1.0",
     "rimraf": "3.0.2",
     "styled-components": "5.1.1",
-    "typescript": "3.9.6"
+    "typescript": "4.0.2"
   },
   "peerDependencies": {
     "@popperjs/core": "^2.4",
