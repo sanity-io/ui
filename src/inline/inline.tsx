@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {getChildrenArray, getResponsiveProp} from '../helpers'
+import {childrenToElementArray, getResponsiveProp} from '../helpers'
 import {inlineBaseStyles, inlineSpaceStyles} from './styles'
 
 interface InlineProps {
@@ -12,7 +12,7 @@ const Root = styled.div(inlineBaseStyles, inlineSpaceStyles)
 
 export const Inline = forwardRef((props: React.HTMLProps<HTMLDivElement> & InlineProps, ref) => {
   const {children: childrenProp, space: spaceProp, ...restProps} = props
-  const children = getChildrenArray(childrenProp).filter(Boolean)
+  const children = childrenToElementArray(childrenProp).filter(Boolean)
   const space = getResponsiveProp(spaceProp, [])
 
   return (

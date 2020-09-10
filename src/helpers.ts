@@ -1,3 +1,5 @@
+import {isElement, isFragment} from 'react-is'
+
 export function getResponsiveProp(
   val: number | number[] | undefined,
   defaultVal: number[]
@@ -11,11 +13,12 @@ export function rem(pixelValue: number): string {
   return `${pixelValue / 16}rem`
 }
 
-export function getChildrenArray(prop: React.ReactNode | React.ReactNode[]) {
-  const children = Array.isArray(prop) ? prop : [prop]
+export function childrenToElementArray(
+  children: React.ReactNode
+): Array<React.ReactElement | string> {
+  const childrenArray = Array.isArray(children) ? children : [children]
 
-  return children.reduce((acc: React.ReactNode[], x) => {
-    if (Array.isArray(x)) return acc.concat(x)
-    return acc.concat([x])
-  }, [])
+  return childrenArray.filter(
+    (node) => isElement(node) || isFragment(node) || typeof node === 'string'
+  ) as Array<React.ReactElement | string>
 }

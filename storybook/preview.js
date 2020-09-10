@@ -10,3 +10,5 @@ addDecorator(withTheme)
 
 // Refractor.registerLanguage(json)
 // Refractor.registerLanguage(php)
+
+export const parameters = {layout: 'fullscreen'}

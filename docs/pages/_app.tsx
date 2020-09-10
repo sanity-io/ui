@@ -1,6 +1,7 @@
 import {GlobalStyle} from '~/components'
 import {studioTheme, ThemeProvider} from '@sanity/ui'
 import {AppProps} from 'next/app'
+import Head from 'next/head'
 import React from 'react'
 import Refractor from 'react-refractor'
 import javascript from 'refractor/lang/javascript'
@@ -17,6 +18,12 @@ function App({Component, pageProps}: AppProps) {
   return (
     <ThemeProvider theme={studioTheme}>
       <GlobalStyle />
+      <Head>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+        />
+      </Head>
       <Component {...pageProps} />
     </ThemeProvider>
   )

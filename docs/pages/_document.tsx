@@ -34,10 +34,6 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
       <html>
         <Head>
           <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-          />
           <link rel="icon" href="/favicon.ico" />
           {this.props.styleTags}
         </Head>
