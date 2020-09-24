@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "sanity-ui-docs",
+  "version": "1.0.0-alpha.0",
+  "scripts": {
+    "build": "next build",
+    "clean": "rimraf .next",
+    "dev": "next dev",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "prebuild": "npm run clean",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sanity/ui": "1.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "@types/node": "14.6.4",
+    "babel-plugin-styled-components": "1.11.1",
+    "typescript": "4.0.2"
+  }
+}

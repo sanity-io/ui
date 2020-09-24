@@ -27,7 +27,5 @@
 
     // JSX
     "jsx": "react"
-  },
-  "include": ["./typings/*.d.ts"],
-  "files": ["./src/index.ts"]
+  }
 }

@@ -14,8 +14,8 @@ module.exports = {
   webpackFinal: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '~': ROOT_PATH,
-      '@sanity/ui': path.resolve(ROOT_PATH, 'src'),
+      '~/storybook': path.resolve(ROOT_PATH, 'ui-storybook'),
+      '@sanity/ui': path.resolve(ROOT_PATH, 'ui/src'),
     }
 
     return config
