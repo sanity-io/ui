@@ -19,7 +19,7 @@
     "polished": "3.6.6"
   },
   "devDependencies": {
-    "@popperjs/core": "2.4.4",
+    "@popperjs/core": "2.5.2",
     "@storybook/addon-actions": "6.0.21",
     "@storybook/addon-info": "5.3.21",
     "@storybook/addon-knobs": "6.0.21",
