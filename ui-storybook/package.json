@@ -16,7 +16,7 @@
   "dependencies": {
     "@sanity/color": "1.0.0",
     "@sanity/ui": "1.0.0-alpha.0",
-    "polished": "3.6.6"
+    "polished": "3.6.7"
   },
   "devDependencies": {
     "@popperjs/core": "2.4.4",
