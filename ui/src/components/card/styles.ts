@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../helpers'
-import {Theme} from '../theme'
+import {Theme} from '../../theme'
 import {CardTone} from './types'
 
 export function cardColorStyles(props: {theme: Theme; tone: CardTone}) {

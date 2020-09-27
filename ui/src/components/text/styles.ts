@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../theme'
+import {Theme} from '../../theme'
 import {rem} from '../helpers'
 
 export function textBaseStyles(props: {theme: Theme}) {

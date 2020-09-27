@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../theme'
+import {Theme} from '../../theme'
 
 function rem(px: number) {
   return `${px / 16}rem`

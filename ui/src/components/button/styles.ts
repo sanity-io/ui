@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../theme'
+import {Theme} from '../../theme'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
