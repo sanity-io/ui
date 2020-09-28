@@ -1,15 +1,27 @@
 import {withCentered} from '~/storybook/decorators'
-import {Button, Stack } from '@sanity/ui'
+import icons from '@sanity/icons'
+import {Button, IconSymbol, Stack} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+
+// const a = 0 - (25 - (21 - 11)) / 2 // = 7
+// calc(0 - (var(--text-icon-size) - (var(--text-line-height) - var(--text-cap-height))) / 2)
+// calc(0 - (var(--text-icon-size) - (var(--text-line-height) - var(--text-cap-height))) / 2);
 
 export default {
   title: 'Button',
   decorators: [withCentered, withKnobs],
 }
 
+const iconOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, key) => {
+  acc[key] = key
+  return acc
+}, {})
+
 export const plain = () => {
+  const icon = select('Symbol', iconOptions, 'add-circle', 'Props') as IconSymbol
+
   const mode = select(
     'Mode',
     {
@@ -69,6 +81,7 @@ export const plain = () => {
   return (
     <Stack space={2}>
       <Button
+        icon={icon}
         mode={mode}
         onClick={action('onClick')}
         paddingX={paddingX}
@@ -76,16 +89,6 @@ export const plain = () => {
         tone={tone}
       >
         Button
-      </Button>
-      <Button
-        mode={mode}
-        onClick={action('onClick')}
-        paddingX={paddingX}
-        paddingY={paddingY}
-        tone={tone}
-        icon="add-circle"
-      >
-        Button with an icon
       </Button>
     </Stack>
   )

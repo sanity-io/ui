@@ -15,6 +15,7 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '~/storybook': path.resolve(ROOT_PATH, 'ui-storybook'),
+      '@sanity/icons': path.resolve(ROOT_PATH, 'icons/src'),
       '@sanity/ui': path.resolve(ROOT_PATH, 'ui/src'),
     }
 

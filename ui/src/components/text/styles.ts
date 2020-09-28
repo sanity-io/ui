@@ -52,16 +52,24 @@ export function textSizeStyles(props: {size?: number; weight?: number; theme: Th
   const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
   const weight =
     props.weight === undefined ? weights.regular : weights[props.weight] || weights.regular
+  const capHeight = size.lineHeight - size.ascenderHeight - size.descenderHeight
 
   return css`
     font-size: ${rem(size.fontSize)};
-    font-weight: ${weight};
     line-height: ${rem(size.lineHeight)};
+
+    font-weight: ${weight};
     letter-spacing: ${rem(size.letterSpacing)};
     transform: translateY(${rem(size.descenderHeight)});
 
     &:before {
       margin-top: ${rem(-1 - size.ascenderHeight - size.descenderHeight)};
+    }
+
+    & svg {
+      vertical-align: baseline;
+      font-size: ${rem(size.iconSize)};
+      margin: ${rem((capHeight - size.iconSize) / 2)};
     }
   `
 }

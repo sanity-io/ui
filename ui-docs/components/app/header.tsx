@@ -74,6 +74,9 @@ export function AppHeader() {
                 <NavLink href="/flex">Flex</NavLink>
               </Text>
               <Text as="li">
+                <NavLink href="/icon">Icon</NavLink>
+              </Text>
+              <Text as="li">
                 <NavLink href="/inline">Inline</NavLink>
               </Text>
               <Text as="li">

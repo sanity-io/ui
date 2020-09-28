@@ -1,0 +1,45 @@
+{
+  "name": "@sanity/icons",
+  "version": "1.0.0-alpha.0",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "files": [
+    "/dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "run-p build-*",
+    "build-cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
+    "build-es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
+    "clean": "rimraf dist src",
+    "generate": "ts-node --files scripts/generateIcons.ts",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "prebuild": "npm run clean && npm run generate",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sanity/color": "1.0.0",
+    "polished": "3.6.6"
+  },
+  "devDependencies": {
+    "@svgr/core": "^5.4.0",
+    "@types/mkdirp": "^1.0.1",
+    "@types/prettier": "^2.1.1",
+    "camelcase": "^6.0.0",
+    "glob": "^7.1.6",
+    "mkdirp": "^1.0.4",
+    "react": "16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.9"
+  },
+  "keywords": [
+    "sanity",
+    "ui",
+    "icons"
+  ],
+  "author": "Sanity.io <hello@sanity.io>",
+  "homepage": "https://www.sanity.io/"
+}

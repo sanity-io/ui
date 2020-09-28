@@ -18,58 +18,74 @@ function ButtonPage() {
 
           <Card padding={3} radius={2} tone="transparent">
             <Inline space={2}>
-              <Button padding={4}>Button</Button>
-              <Button padding={4} tone="brand">
-                Button
+              <Button icon="publish" padding={4}>
+                Label
+              </Button>
+              <Button icon="publish" padding={4} tone="brand">
+                Label
               </Button>
             </Inline>
           </Card>
 
           <CodeBlock>{`<Inline space={2}>
-  <Button padding={4}>Button</Button>
-  <Button padding={4} tone="brand">
-    Button
+  <Button icon="publish" padding={4}>
+    Label
+  </Button>
+  <Button icon="publish" padding={4} tone="brand">
+  Label
   </Button>
 </Inline>`}</CodeBlock>
 
           <Stack space={2}>
             <Inline space={2}>
-              <Button>Button</Button>
-              <Button tone="brand">Button</Button>
-              <Button tone="positive">Button</Button>
-              <Button tone="caution">Button</Button>
-              <Button tone="critical">Button</Button>
-            </Inline>
-
-            <Inline space={2}>
-              <Button mode="ghost">Button</Button>
-              <Button mode="ghost" tone="brand">
-                Button
+              <Button icon="publish">Label</Button>
+              <Button icon="publish" tone="brand">
+                Label
               </Button>
-              <Button mode="ghost" tone="positive">
-                Button
+              <Button icon="publish" tone="positive">
+                Label
               </Button>
-              <Button mode="ghost" tone="caution">
-                Button
+              <Button icon="publish" tone="caution">
+                Label
               </Button>
-              <Button mode="ghost" tone="critical">
-                Button
+              <Button icon="publish" tone="critical">
+                Label
               </Button>
             </Inline>
 
             <Inline space={2}>
-              <Button mode="bleed">Button</Button>
-              <Button mode="bleed" tone="brand">
-                Button
+              <Button icon="publish" mode="ghost">
+                Label
               </Button>
-              <Button mode="bleed" tone="positive">
-                Button
+              <Button icon="publish" mode="ghost" tone="brand">
+                Label
               </Button>
-              <Button mode="bleed" tone="caution">
-                Button
+              <Button icon="publish" mode="ghost" tone="positive">
+                Label
               </Button>
-              <Button mode="bleed" tone="critical">
-                Button
+              <Button icon="publish" mode="ghost" tone="caution">
+                Label
+              </Button>
+              <Button icon="publish" mode="ghost" tone="critical">
+                Label
+              </Button>
+            </Inline>
+
+            <Inline space={2}>
+              <Button icon="publish" mode="bleed">
+                Label
+              </Button>
+              <Button icon="publish" mode="bleed" tone="brand">
+                Label
+              </Button>
+              <Button icon="publish" mode="bleed" tone="positive">
+                Label
+              </Button>
+              <Button icon="publish" mode="bleed" tone="caution">
+                Label
+              </Button>
+              <Button icon="publish" mode="bleed" tone="critical">
+                Label
               </Button>
             </Inline>
           </Stack>

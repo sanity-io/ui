@@ -34,6 +34,7 @@ export function headingBaseStyles(props: {theme: Theme}) {
 export function headingSizeStyles(props: {size?: number; theme: Theme}) {
   const {sizes} = props.theme.fonts.heading
   const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
+  const capHeight = size.lineHeight - size.ascenderHeight - size.descenderHeight
 
   return css`
     font-size: ${rem(size.fontSize)};
@@ -43,6 +44,12 @@ export function headingSizeStyles(props: {size?: number; theme: Theme}) {
 
     &:before {
       margin-top: ${rem(-1 - size.ascenderHeight - size.descenderHeight)};
+    }
+
+    & svg {
+      vertical-align: baseline;
+      font-size: ${rem(size.iconSize)};
+      margin: ${rem((capHeight - size.iconSize) / 2)};
     }
   `
 }

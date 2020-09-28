@@ -2,6 +2,7 @@ interface ThemeFontSize {
   ascenderHeight: number
   descenderHeight: number
   fontSize: number
+  iconSize: number
   letterSpacing: number
   lineHeight: number
 }

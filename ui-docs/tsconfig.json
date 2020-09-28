@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["*"],
+      "@sanity/icons": ["../icons/src"],
       "@sanity/ui": ["../ui/src"]
     }
   },

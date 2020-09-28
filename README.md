@@ -2,6 +2,7 @@
 
 The Sanity Design System consists of:
 
+- [`@sanity/icons`](icons)
 - [`@sanity/color`](https://github.com/sanity-io/color)
 - [`@sanity/ui`](ui)
 - [`sanity-ui-docs`](ui-docs)

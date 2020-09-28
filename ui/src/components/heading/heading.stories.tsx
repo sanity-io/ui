@@ -1,5 +1,5 @@
 import {withCentered} from '~/storybook/decorators'
-import {Heading} from '@sanity/ui'
+import {Heading, Icon} from '@sanity/ui'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 
@@ -18,9 +18,11 @@ export const plain = () => {
 
   return (
     <div style={{background: '#fff'}}>
-      <Heading size={size}>Hello, world</Heading>
-      <Heading size={size}>Hello, world</Heading>
-      <Heading size={size}>Hello, world</Heading>
+      <Heading size={size}>
+        <Icon symbol="add" /> Hello, world
+      </Heading>
+      {/* <Heading size={size}>Hello, world</Heading>
+      <Heading size={size}>Hello, world</Heading> */}
     </div>
   )
 }

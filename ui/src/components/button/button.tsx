@@ -14,8 +14,13 @@ interface ButtonProps extends BoxPaddingProps {
   type?: 'button' | 'reset' | 'submit'
 }
 
-// @todo: Figure out typings
 const Root = styled.button(buttonBaseStyles, buttonColorStyles)
+
+const TextContainer = styled.span`
+  svg + & {
+    margin-left: 0.75em;
+  }
+`
 
 export const Button = forwardRef((props: React.HTMLProps<HTMLButtonElement> & ButtonProps, ref) => {
   const {
@@ -53,13 +58,14 @@ export const Button = forwardRef((props: React.HTMLProps<HTMLButtonElement> & Bu
       mode={mode}
       ref={ref}
       tone={tone}
-      icon={icon}
     >
       <Box as="span" {...boxProps}>
-        {children && <Text as="span">
-          {icon && <Icon symbol={icon}/>}
-          {children}
-        </Text>}
+        {children && (
+          <Text as="span">
+            {icon && <Icon symbol={icon} />}
+            <TextContainer>{children}</TextContainer>
+          </Text>
+        )}
       </Box>
     </Root>
   )
