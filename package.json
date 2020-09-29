@@ -6,8 +6,8 @@
   "scripts": {
     "build": "lerna run build",
     "dev": "lerna run --parallel --stream dev",
-    "dev:docs": "lerna run --stream --scope @sanity/ui-docs dev",
-    "dev:storybook": "lerna run --stream --scope @sanity/ui-storybook dev",
+    "dev:docs": "lerna run --stream --scope sanity-ui-docs dev",
+    "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "type-check": "lerna run type-check"
