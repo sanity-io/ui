@@ -12,6 +12,7 @@ export function cardColorStyles(props: {theme: Theme; tone: CardTone}) {
 
     /* Custom properties that may be used by other atoms */
     --card-bg-color: ${tone.bg};
+    --card-fg-color: ${tone.fg};
     --card-focus-ring-color: ${tone.focusRing};
     --card-hairline-soft-color: ${tone.hairline.soft};
     --card-hairline-hard-color: ${tone.hairline.hard};
