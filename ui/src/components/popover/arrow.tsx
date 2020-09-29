@@ -6,100 +6,53 @@ const Root = styled.div<{tone: CardTone}>`
   position: absolute;
   pointer-events: none;
   width: 27px;
-  height: 12px;
-  transform-origin: 0 0;
+  height: 27px;
+  fill: none;
+
+  :empty + & {
+    display: none;
+  }
+
   & > svg {
     display: block;
-    color: ${(props) => {
-      const {tone, theme} = props
-      return theme.color.card.tones[tone].bg
-    }};
+    transform-origin: 13.5px 13.5px;
   }
 
-  &[data-placement='top'] {
-    transform-origin: left bottom;
-    bottom: 1px;
-    left: 50%;
-    transform: rotate(180deg) translate(-50%);
+  [data-popper-placement^='top'] > & {
+    bottom: -27px;
   }
 
-  &[data-placement='top-end'] {
-    transform-origin: left bottom;
-    bottom: 1px;
-    left: calc(100% - 4px);
-    transform: rotate(180deg);
+  [data-popper-placement^='right'] > & {
+    left: -27px;
+
+    & > svg {
+      transform: rotate(90deg);
+    }
   }
 
-  &[data-placement='top-start'] {
-    transform-origin: left bottom;
-    bottom: 1px;
-    left: 1px;
-    transform: rotate(180deg) translateX(-100%);
+  [data-popper-placement^='left'] > & {
+    right: -27px;
+
+    & > svg {
+      transform: rotate(-90deg);
+    }
   }
 
-  &[data-placement='right'] {
-    transform-origin: left bottom;
-    transform: rotate(-90deg) translateX(-50%);
-    bottom: 50%;
-    left: 1px;
-  }
+  [data-popper-placement^='bottom'] > & {
+    top: -27px;
 
-  &[data-placement='right-end'] {
-    transform-origin: left bottom;
-    transform: rotate(-90deg);
-    bottom: 1px;
-    left: 1px;
-  }
-
-  &[data-placement='right-start'] {
-    transform-origin: left bottom;
-    transform: rotate(-90deg) translateX(-100%);
-    bottom: calc(100% - 1px);
-    left: 1px;
-  }
-
-  &[data-placement='left'] {
-    transform-origin: right bottom;
-    right: 1px;
-    transform: rotate(90deg);
-    top: calc(50% + 2px);
-  }
-  &[data-placement='left-start'] {
-    transform-origin: right bottom;
-    right: 1px;
-    transform: rotate(90deg) translateX(50%);
-    top: 2px;
-  }
-
-  &[data-placement='left-end'] {
-    transform-origin: right bottom;
-    right: 1px;
-    transform: rotate(90deg) translateX(-50%);
-    top: calc(100% + 1px);
-  }
-
-  &[data-placement='bottom'] {
-    top: -11px;
-    left: calc(50% + 1px);
-    transform: translateX(-50%);
-  }
-
-  &[data-placement='bottom-end'] {
-    top: -11px;
-    left: calc(100% - 4px);
-    transform: translateX(-100%);
-  }
-
-  &[data-placement='bottom-start'] {
-    top: -11px;
-    left: 4px;
+    & > svg {
+      transform: rotate(180deg);
+    }
   }
 `
 
-const ArrowBorderGroup = styled.g`
-  & > path {
-    fill: var(--card-shadow-outline-color);
-  }
+const BorderPath = styled.path`
+  fill: var(--card-shadow-outline-color);
+`
+
+const ShapePath = styled.path`
+  fill: ${({theme}) => theme.color.card.tones.default.bg};
 `
 
 export const PopoverArrow = forwardRef(
@@ -119,13 +72,8 @@ export const PopoverArrow = forwardRef(
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <ArrowBorderGroup>
-            <path d="M1.18359 10.0001C3.2959 10.0001 5.29525 9.04623 6.62431 7.40445L11.1684 1.79112C12.3691 0.307911 14.6312 0.307907 15.8319 1.79112L20.376 7.40445C21.7051 9.04622 23.7044 10.0001 25.8167 10.0001H21.9437C21.0534 9.50751 20.2547 8.84388 19.5988 8.03364L15.0547 2.42031C14.2542 1.43151 12.7461 1.43151 11.9457 2.42032L7.40155 8.03365C6.74565 8.84388 5.9469 9.50751 5.05659 10.0001H1.18359Z" />
-          </ArrowBorderGroup>
-          <path
-            d="M19.5986 8.03365L15.0545 2.42031C14.254 1.43151 12.746 1.43151 11.9455 2.42031L7.40138 8.03365C5.88246 9.90996 3.59749 11.0001 1.18342 11.0001H0H27H25.8166C23.4025 11.0001 21.1175 9.90996 19.5986 8.03365Z"
-            fill="currentColor"
-          />
+          <BorderPath d="M1.18708 1C3.29803 1.0011 5.29585 1.95479 6.62414 3.59561L11.1683 9.20895C12.369 10.6922 14.631 10.6922 15.8317 9.20894L20.3759 3.59561C21.7042 1.95478 23.702 1.0011 25.8129 1H21.9436C21.0533 1.49255 20.2545 2.15618 19.5986 2.96641L15.0545 8.57975C14.254 9.56855 12.746 9.56855 11.9455 8.57975L7.40139 2.96642C6.74548 2.15618 5.94673 1.49255 5.05643 1H1.18708Z" />
+          <ShapePath d="M1.18342 0C3.59749 0 5.88246 1.0901 7.40138 2.96642L11.9455 8.57975C12.746 9.56855 14.254 9.56855 15.0545 8.57975L19.5986 2.96641C21.1175 1.0901 23.4025 0 25.8166 0H27H0H1.18342Z" />
         </svg>
       </Root>
     )
