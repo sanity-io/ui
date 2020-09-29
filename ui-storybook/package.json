@@ -3,7 +3,6 @@
   "name": "sanity-ui-storybook",
   "version": "1.0.0-alpha.0",
   "main": "package.json",
-  "license": "MIT",
   "scripts": {
     "build": "build-storybook --quiet --config-dir . --output-dir public",
     "clean": "rimraf public",
@@ -46,19 +45,5 @@
     "react-popper": "^2.2",
     "react-refractor": "^2.1",
     "styled-components": "^5.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/ui.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/ui/issues"
-  },
-  "keywords": [
-    "sanity",
-    "ui",
-    "components"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "homepage": "https://www.sanity.io/"
+  }
 }

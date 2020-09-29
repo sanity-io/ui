@@ -48,10 +48,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanity-io/ui.git"
+    "url": "git+https://github.com/sanity-io/design-system.git"
   },
   "bugs": {
-    "url": "https://github.com/sanity-io/ui/issues"
+    "url": "https://github.com/sanity-io/design-system/issues"
   },
   "keywords": [
     "sanity",
