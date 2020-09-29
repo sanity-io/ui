@@ -5,7 +5,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled(Box)`
-  height: 100%;
+  overflow: auto;
+  height: 100vh;
   position: sticky;
   top: 0;
 `
@@ -26,7 +27,7 @@ function NavLink(props: {children: React.ReactNode; href: string}) {
 
 export function AppHeader() {
   return (
-    <Root forwardedAs="header">
+    <Root data-name="AppHeader" forwardedAs="header">
       <Box as="nav" paddingX={[5]} paddingY={[5, 5, 6, 7, 8]}>
         <Stack space={5}>
           <Stack space={3}>

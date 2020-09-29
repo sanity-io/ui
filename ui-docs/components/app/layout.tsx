@@ -6,15 +6,15 @@ import {AppHeader} from './header'
 const Root = styled(Card)`
   ${({theme}) => css`
     @media (min-width: ${rem(theme.media[1])}) {
-      display: flex;
+      display: grid;
       height: 100%;
+      grid-template-columns: minmax(10rem, 15rem) 3fr;
     }
   `};
 `
 
 const SideMenu = styled(Card)`
-  height: 100vh;
-  overflow: auto;
+  /* height: 100vh; */
 
   ${({theme}) => css`
     @media (max-width: ${rem(theme.media[1] - 1)}) {
@@ -37,8 +37,8 @@ const SideMenu = styled(Card)`
 
     @media (min-width: ${rem(theme.media[1])}) {
       flex: 1;
-      max-width: 15rem;
-      min-width: 10rem;
+      /* max-width: 15rem; */
+      /* min-width: 10rem; */
       border-right: 1px solid var(--card-shadow-outline-color);
       position: sticky;
       top: 0;
@@ -83,7 +83,7 @@ export function AppLayout(props: {children: React.ReactNode}) {
           </Button>
         </NarrowDeviceMenu>
 
-        <Container as="main" width={1}>
+        <Container as="main" width={2}>
           <Box as="main" padding={[4, 5]} paddingY={[5, 5, 6, 7, 8]}>
             {props.children}
           </Box>
