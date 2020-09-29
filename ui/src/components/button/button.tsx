@@ -6,7 +6,7 @@ import {Icon, IconSymbol} from '../icon'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 import {ButtonMode, ButtonTone} from './types'
 
-interface ButtonProps extends BoxPaddingProps {
+export interface ButtonProps extends BoxPaddingProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: ButtonMode
   tone?: ButtonTone
