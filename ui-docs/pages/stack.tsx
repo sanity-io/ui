@@ -11,34 +11,34 @@ function StackPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Stack
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
-            <Stack space={4}>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
+            <Stack space={[3, 3, 4, 5]}>
               <Card>
-                <Text>foo</Text>
+                <Text size={[2, 2, 3, 4]}>foo</Text>
               </Card>
               <Card>
-                <Text>bar</Text>
+                <Text size={[2, 2, 3, 4]}>bar</Text>
               </Card>
               <Card>
-                <Text>baz</Text>
+                <Text size={[2, 2, 3, 4]}>baz</Text>
               </Card>
             </Stack>
           </Card>
 
-          <CodeBlock>{`<Stack space={4}>
+          <CodeBlock>{`<Stack space={[3, 3, 4, 5]}>
   <Card>
-    <Text>foo</Text>
+    <Text size={[2, 2, 3, 4]}>foo</Text>
   </Card>
   <Card>
-    <Text>bar</Text>
+    <Text size={[2, 2, 3, 4]}>bar</Text>
   </Card>
   <Card>
-    <Text>baz</Text>
+    <Text size={[2, 2, 3, 4]}>baz</Text>
   </Card>
 </Stack>`}</CodeBlock>
         </Stack>

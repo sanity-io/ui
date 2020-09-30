@@ -88,7 +88,7 @@ export const plain = () => {
         paddingY={paddingY}
         tone={tone}
       >
-        Button
+        {/* Button */}
       </Button>
     </Stack>
   )

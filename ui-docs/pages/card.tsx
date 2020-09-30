@@ -11,33 +11,33 @@ function CardPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Card
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
-            <Card padding={4}>
-              <Stack space={3}>
-                <Text>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
+            <Card padding={[3, 3, 4, 5]}>
+              <Stack space={[3, 3, 4, 5]}>
+                <Text size={[2, 2, 3, 4]}>
                   Text with <a href="#">link</a>
                 </Text>
                 <Button>Button</Button>
-                <Card padding={3} tone="transparent">
-                  <Stack space={3}>
-                    <Text>
+                <Card padding={[3, 3, 4, 5]} tone="transparent">
+                  <Stack space={[3, 3, 4, 5]}>
+                    <Text size={[2, 2, 3, 4]}>
                       Text with <a href="#">link</a>
                     </Text>
                     <Button>Button</Button>
-                    <Card padding={3} tone="contrast">
-                      <Stack space={3}>
-                        <Text>
+                    <Card padding={[3, 3, 4, 5]} tone="contrast">
+                      <Stack space={[3, 3, 4, 5]}>
+                        <Text size={[2, 2, 3, 4]}>
                           Text with <a href="#">link</a>
                         </Text>
                         <Button>Button</Button>
-                        <Card padding={3}>
-                          <Stack space={3}>
-                            <Text>
+                        <Card padding={[3, 3, 4, 5]}>
+                          <Stack space={[3, 3, 4, 5]}>
+                            <Text size={[2, 2, 3, 4]}>
                               Text with <a href="#">link</a>
                             </Text>
                             <Button>Button</Button>
@@ -51,21 +51,29 @@ function CardPage() {
             </Card>
           </Card>
 
-          <CodeBlock>{`<Card padding={4}>
-  <Stack space={3}>
-    <Text>Text</Text>
+          <CodeBlock>{`<Card padding={[3, 3, 4, 5]}>
+  <Stack space={[3, 3, 4, 5]}>
+    <Text size={[2, 2, 3, 4]}>
+      Text with <a href="#">link</a>
+    </Text>
     <Button>Button</Button>
-    <Card padding={3} tone="transparent">
-      <Stack space={3}>
-        <Text>Text</Text>
+    <Card padding={[3, 3, 4, 5]} tone="transparent">
+      <Stack space={[3, 3, 4, 5]}>
+        <Text size={[2, 2, 3, 4]}>
+          Text with <a href="#">link</a>
+        </Text>
         <Button>Button</Button>
-        <Card padding={3} tone="contrast">
-          <Stack space={3}>
-            <Text>Text</Text>
+        <Card padding={[3, 3, 4, 5]} tone="contrast">
+          <Stack space={[3, 3, 4, 5]}>
+            <Text size={[2, 2, 3, 4]}>
+              Text with <a href="#">link</a>
+            </Text>
             <Button>Button</Button>
-            <Card padding={3}>
-              <Stack space={3}>
-                <Text>Text</Text>
+            <Card padding={[3, 3, 4, 5]}>
+              <Stack space={[3, 3, 4, 5]}>
+                <Text size={[2, 2, 3, 4]}>
+                  Text with <a href="#">link</a>
+                </Text>
                 <Button>Button</Button>
               </Stack>
             </Card>

@@ -18,11 +18,13 @@ function RadioPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={4}>
-          <Heading>Radio</Heading>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
+            Radio
+          </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
-            <Stack space={3}>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
+            <Stack space={[3, 3, 4, 5]}>
               {items.map((item, index) => (
                 <Inline as="label" key={index} space={3}>
                   <Radio
@@ -32,11 +34,11 @@ function RadioPage() {
                     style={{verticalAlign: 'top'}}
                     value={item}
                   />
-                  <Text>{item}</Text>
+                  <Text size={[2, 2, 3, 4]}>{item}</Text>
                 </Inline>
               ))}
 
-              <Text>
+              <Text size={[2, 2, 3, 4]}>
                 <strong>Current value</strong>: <code>{value}</code>
               </Text>
             </Stack>

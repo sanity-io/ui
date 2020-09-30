@@ -11,13 +11,13 @@ function CodePage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Code
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
-            <Stack space={4}>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
+            <Stack space={[3, 3, 4, 5]}>
               <Card>
                 <Code size={0}>Code 0</Code>
               </Card>

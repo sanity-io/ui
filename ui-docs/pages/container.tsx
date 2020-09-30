@@ -11,15 +11,15 @@ function ContainerPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Container
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
             <Container width={0}>
-              <Card padding={4}>
-                <Text>Contained text</Text>
+              <Card padding={[3, 3, 4, 5]}>
+                <Text size={[2, 2, 3, 4]}>Contained text</Text>
               </Card>
             </Container>
           </Card>

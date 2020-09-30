@@ -1,4 +1,4 @@
-import {Box, Heading, Label, Stack, Text} from '@sanity/ui'
+import {Box, Code, Label, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
@@ -25,15 +25,23 @@ function NavLink(props: {children: React.ReactNode; href: string}) {
   )
 }
 
+function AppHeaderLink({children, href}: {children: React.ReactNode; href: string}) {
+  return (
+    <Text as="li" size={[2, 2, 3, 4]}>
+      <NavLink href={href}>{children}</NavLink>
+    </Text>
+  )
+}
+
 export function AppHeader() {
   return (
     <Root data-name="AppHeader" forwardedAs="header">
-      <Box as="nav" paddingX={[5]} paddingY={[5, 5, 6, 7, 8]}>
+      <Box as="nav" paddingX={[5]} paddingY={[5, 5, 6, 7]}>
         <Stack space={5}>
           <Stack space={3}>
-            <Heading size={1}>
-              <code>@sanity/ui</code>
-            </Heading>
+            <Code as="h1" size={[2, 2, 3, 4]}>
+              <strong>@sanity/ui</strong>
+            </Code>
 
             <a href="https://www.npmjs.com/package/@sanity/ui">
               <img src="https://img.shields.io/npm/v/@sanity/ui.svg?style=flat-square" />
@@ -42,59 +50,35 @@ export function AppHeader() {
 
           <Stack space={3}>
             <Stack as="ul" space={3}>
-              <Text as="li">
-                <NavLink href="/">Introduction</NavLink>
+              <AppHeaderLink href="/">Introduction</AppHeaderLink>
+              <Text as="li" size={[2, 2, 3, 4]}>
+                Concepts
               </Text>
-              <Text as="li">Concepts</Text>
-              <Text as="li">Theme</Text>
+              <Text as="li" size={[2, 2, 3, 4]}>
+                Theme
+              </Text>
             </Stack>
           </Stack>
 
           <Stack space={3}>
-            <Label as="h2">Atoms</Label>
+            <Label as="h2" size={[2, 2, 3, 4]}>
+              Atoms
+            </Label>
             <Stack as="ul" space={3}>
-              <Text as="li">
-                <NavLink href="/box">Box</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/button">Button</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/card">Card</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/checkbox">Checkbox</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/code">Code</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/container">Container</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/flex">Flex</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/icon">Icon</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/inline">Inline</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/popover">Popover</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/radio">Radio</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/stack">Stack</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/switch">Switch</NavLink>
-              </Text>
-              <Text as="li">
-                <NavLink href="/text">Text</NavLink>
-              </Text>
+              <AppHeaderLink href="/box">Box</AppHeaderLink>
+              <AppHeaderLink href="/button">Button</AppHeaderLink>
+              <AppHeaderLink href="/card">Card</AppHeaderLink>
+              <AppHeaderLink href="/checkbox">Checkbox</AppHeaderLink>
+              <AppHeaderLink href="/code">Code</AppHeaderLink>
+              <AppHeaderLink href="/container">Container</AppHeaderLink>
+              <AppHeaderLink href="/flex">Flex</AppHeaderLink>
+              <AppHeaderLink href="/icon">Icon</AppHeaderLink>
+              <AppHeaderLink href="/inline">Inline</AppHeaderLink>
+              <AppHeaderLink href="/popover">Popover</AppHeaderLink>
+              <AppHeaderLink href="/radio">Radio</AppHeaderLink>
+              <AppHeaderLink href="/stack">Stack</AppHeaderLink>
+              <AppHeaderLink href="/switch">Switch</AppHeaderLink>
+              <AppHeaderLink href="/text">Text</AppHeaderLink>
             </Stack>
           </Stack>
         </Stack>

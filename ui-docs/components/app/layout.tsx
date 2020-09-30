@@ -78,13 +78,17 @@ export function AppLayout(props: {children: React.ReactNode}) {
 
       <ContentContainer>
         <NarrowDeviceMenu padding={[2, 4]}>
-          <Button mode="bleed" onClick={handleMenuOpenClick}>
-            Menu
-          </Button>
+          <Button
+            aria-label="Menu"
+            icon="menu"
+            mode="bleed"
+            onClick={handleMenuOpenClick}
+            size={[2, 3, 4]}
+          />
         </NarrowDeviceMenu>
 
         <Container as="main" width={2}>
-          <Box as="main" padding={[4, 5]} paddingY={[5, 5, 6, 7, 8]}>
+          <Box as="main" padding={[4, 5]} paddingY={[5, 5, 6, 7]}>
             {props.children}
           </Box>
         </Container>

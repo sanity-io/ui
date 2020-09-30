@@ -13,14 +13,16 @@ function PopoverPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Popover
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent" style={{textAlign: 'center'}}>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent" style={{textAlign: 'center'}}>
             <Popover content={<Text>Hello, world</Text>} padding={4} open={open}>
-              <Button onClick={() => setOpen(!open)}>Toggle popover</Button>
+              <Button onClick={() => setOpen(!open)} padding={[3, 3, 4]} size={[2, 2, 3, 4]}>
+                Toggle popover
+              </Button>
             </Popover>
           </Card>
 

@@ -11,6 +11,7 @@ export interface ButtonProps extends BoxPaddingProps {
   mode?: ButtonMode
   tone?: ButtonTone
   icon?: IconSymbol
+  size?: number | number[]
   type?: 'button' | 'reset' | 'submit'
 }
 
@@ -22,53 +23,56 @@ const TextContainer = styled.span`
   }
 `
 
-export const Button = forwardRef((props: React.HTMLProps<HTMLButtonElement> & ButtonProps, ref) => {
-  const {
-    children,
-    disabled,
-    mode = 'default',
-    padding = 3,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    tone = 'default',
-    icon,
-    ...restProps
-  } = props
+export const Button = forwardRef(
+  (props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'size'>, ref) => {
+    const {
+      children,
+      disabled,
+      mode = 'default',
+      padding = 3,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+      size,
+      tone = 'default',
+      icon,
+      ...restProps
+    } = props
 
-  const boxProps = {
-    padding,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
+    const boxProps = {
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+    }
+
+    return (
+      <Root
+        data-ui="Button"
+        {...restProps}
+        data-disabled={disabled}
+        disabled={disabled}
+        mode={mode}
+        ref={ref}
+        tone={tone}
+      >
+        <Box as="span" {...boxProps}>
+          {(icon || children) && (
+            <Text as="span" size={size}>
+              {icon && <Icon symbol={icon} />}
+              {children && <TextContainer>{children}</TextContainer>}
+            </Text>
+          )}
+        </Box>
+      </Root>
+    )
   }
-
-  return (
-    <Root
-      data-ui="Button"
-      {...restProps}
-      data-disabled={disabled}
-      disabled={disabled}
-      mode={mode}
-      ref={ref}
-      tone={tone}
-    >
-      <Box as="span" {...boxProps}>
-        {children && (
-          <Text as="span">
-            {icon && <Icon symbol={icon} />}
-            <TextContainer>{children}</TextContainer>
-          </Text>
-        )}
-      </Box>
-    </Root>
-  )
-})
+)
 
 Button.displayName = 'Button'

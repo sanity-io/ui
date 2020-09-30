@@ -2,7 +2,7 @@ import {isElement, isFragment} from 'react-is'
 
 export function getResponsiveProp(
   val: number | number[] | undefined,
-  defaultVal: number[]
+  defaultVal: number[] = []
 ): number[] {
   if (val === undefined) return defaultVal
 

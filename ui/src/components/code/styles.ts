@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {Theme, ThemeFontSize} from '../../theme'
 import {rem} from '../helpers'
 
 function codeSyntaxHighlightingStyles({theme}: {theme: Theme}) {
@@ -128,7 +128,7 @@ export function codeBaseStyles(props: {theme: Theme}) {
     font-weight: ${theme.fonts.code.weights.regular};
     display: block;
     padding: ${rem(1)} 0 0;
-    margin: 0 -0.05em;
+    margin: 0;
 
     &:before {
       content: '';
@@ -148,12 +148,14 @@ export function codeBaseStyles(props: {theme: Theme}) {
       text-decoration: none;
       border-radius: 1px;
     }
+
+    & svg {
+      vertical-align: baseline;
+    }
   `
 }
 
-export function codeSizeStyles(props: {size?: number; theme: Theme}) {
-  const {sizes} = props.theme.fonts.code
-  const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
+function _codeSizeStyles(size: ThemeFontSize) {
   const capHeight = size.lineHeight - size.ascenderHeight - size.descenderHeight
 
   return css`
@@ -167,9 +169,26 @@ export function codeSizeStyles(props: {size?: number; theme: Theme}) {
     }
 
     & svg {
-      vertical-align: baseline;
       font-size: ${rem(size.iconSize)};
       margin: ${rem((capHeight - size.iconSize) / 2)};
     }
+  `
+}
+
+export function codeSizeStyles(props: {size: number[]; theme: Theme}) {
+  const {sizes} = props.theme.fonts.code
+
+  return css`
+    ${props.size.map((spaceIndex, mqIndex) => {
+      if (mqIndex === 0) {
+        return _codeSizeStyles(sizes[spaceIndex])
+      }
+
+      return css`
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          ${_codeSizeStyles(sizes[spaceIndex])}
+        }
+      `
+    })}
   `
 }

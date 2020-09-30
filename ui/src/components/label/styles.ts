@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {Theme, ThemeFontSize} from '../../theme'
 import {rem} from '../helpers'
 
 export function labelBaseStyles(props: {theme: Theme}) {
@@ -11,7 +11,7 @@ export function labelBaseStyles(props: {theme: Theme}) {
     font-weight: ${theme.fonts.label.weights.semibold};
     display: block;
     padding: 1px 0 0;
-    margin: 0 -0.05em;
+    margin: 0;
 
     &:before {
       content: '';
@@ -28,12 +28,14 @@ export function labelBaseStyles(props: {theme: Theme}) {
       text-decoration: none;
       border-radius: 1px;
     }
+
+    & svg {
+      vertical-align: baseline;
+    }
   `
 }
 
-export function labelSizeStyles(props: {size?: number; theme: Theme}) {
-  const {sizes} = props.theme.fonts.label
-  const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
+function _labelSizeStyles(size: ThemeFontSize) {
   const capHeight = size.lineHeight - size.ascenderHeight - size.descenderHeight
 
   return css`
@@ -48,9 +50,26 @@ export function labelSizeStyles(props: {size?: number; theme: Theme}) {
     }
 
     & svg {
-      vertical-align: baseline;
       font-size: ${rem(size.iconSize)};
       margin: ${rem((capHeight - size.iconSize) / 2)};
     }
+  `
+}
+
+export function labelSizeStyles(props: {size: number[]; theme: Theme}) {
+  const {sizes} = props.theme.fonts.label
+
+  return css`
+    ${props.size.map((spaceIndex, mqIndex) => {
+      if (mqIndex === 0) {
+        return _labelSizeStyles(sizes[spaceIndex])
+      }
+
+      return css`
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          ${_labelSizeStyles(sizes[spaceIndex])}
+        }
+      `
+    })}
   `
 }

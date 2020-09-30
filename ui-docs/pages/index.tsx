@@ -12,12 +12,12 @@ function IndexPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Sanity UI
           </Heading>
 
-          <Text>
+          <Text size={[2, 2, 3, 4]}>
             Sanity UI is a React-based library for building web applications. It is used by the
             design and tech teams at Sanity, as well as by third party developers.
           </Text>

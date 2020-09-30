@@ -14,15 +14,15 @@ function IconPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Icon
           </Heading>
 
           <Stack>
             {ICON_SYMBOLS.map((symbol) => (
-              <Card key={symbol} padding={[3, 4]} shadow={1}>
-                <Code>
+              <Card key={symbol} padding={[3, 3, 4, 5]} shadow={1}>
+                <Code size={[2, 2, 3, 4]}>
                   <Icon symbol={symbol} />
                   &nbsp;&nbsp;{symbol}
                 </Code>

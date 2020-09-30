@@ -11,19 +11,19 @@ function BoxPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Box
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
-            <Box padding={4} style={{outline: '1px solid red'}}>
-              <Text>Text</Text>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
+            <Box padding={[3, 3, 4, 5]} style={{outline: '1px solid red'}}>
+              <Text size={[2, 2, 3, 4]}>Text</Text>
             </Box>
           </Card>
 
-          <CodeBlock>{`<Box padding={4} style={{outline: '1px solid red'}}>
-  <Text>Text</Text>
+          <CodeBlock>{`<Box padding={[3, 3, 4, 5]} style={{outline: '1px solid red'}}>
+  <Text size={[2, 2, 3, 4]}>Text</Text>
 </Box>`}</CodeBlock>
         </Stack>
       </AppLayout>

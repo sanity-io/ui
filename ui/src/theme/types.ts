@@ -1,4 +1,4 @@
-interface ThemeFontSize {
+export interface ThemeFontSize {
   ascenderHeight: number
   descenderHeight: number
   fontSize: number
@@ -7,17 +7,17 @@ interface ThemeFontSize {
   lineHeight: number
 }
 
-interface ThemeFontWeight {
+export interface ThemeFontWeight {
   [key: string]: number
 }
 
-interface ThemeFont {
+export interface ThemeFont {
   family: string
   weights: ThemeFontWeight
   sizes: ThemeFontSize[]
 }
 
-interface ThemeButtonColor {
+export interface ThemeButtonColor {
   modes: {
     default: {
       enabled: {
@@ -58,7 +58,7 @@ interface ThemeButtonColor {
   }
 }
 
-interface ThemeCardColor {
+export interface ThemeCardColor {
   bg: string
   fg: string
   hairline: {
@@ -76,7 +76,7 @@ interface ThemeCardColor {
   }
 }
 
-interface ThemeSyntaxColor {
+export interface ThemeSyntaxColor {
   atrule: string
   attrName: string
   attrValue: string
@@ -115,7 +115,7 @@ interface ThemeSyntaxColor {
   variable: string
 }
 
-interface ThemeColor {
+export interface ThemeColor {
   button: {
     tones: {
       default: ThemeButtonColor
@@ -184,9 +184,9 @@ interface ThemeColor {
 }
 
 // offsetX, offsetY, blurRadius, spreadRadius
-type BoxShadow = [number, number, number, number]
+export type BoxShadow = [number, number, number, number]
 
-interface ThemeShadow {
+export interface ThemeShadow {
   umbra: BoxShadow
   penumbra: [number, number, number, number]
   ambient: [number, number, number, number]

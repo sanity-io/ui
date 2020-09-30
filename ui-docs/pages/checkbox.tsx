@@ -28,11 +28,13 @@ function CheckboxPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={4}>
-          <Heading>Checkbox</Heading>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
+            Checkbox
+          </Heading>
 
-          <Card padding={3} radius={2} tone="transparent" style={{textAlign: 'center'}}>
-            <Inline space={2}>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent" style={{textAlign: 'center'}}>
+            <Inline space={[3, 3, 4, 5]}>
               <CheckboxExample checked />
               <CheckboxExample checked={false} />
               <CheckboxExample />

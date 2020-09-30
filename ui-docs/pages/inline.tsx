@@ -11,21 +11,27 @@ function InlinePage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Inline
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
-            <Inline space={4} style={{textAlign: 'center'}}>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
+            <Inline space={[3, 3, 4, 5]} style={{textAlign: 'center'}}>
               <Card padding={1}>
-                <Text>foo</Text>
+                <Text size={[2, 2, 3, 4]}>foo</Text>
               </Card>
               <Card padding={2}>
-                <Text>bar</Text>
+                <Text size={[2, 2, 3, 4]}>bar</Text>
               </Card>
               <Card padding={3}>
-                <Text>baz</Text>
+                <Text size={[2, 2, 3, 4]}>baz</Text>
+              </Card>
+              <Card padding={4}>
+                <Text size={[2, 2, 3, 4]}>baz</Text>
+              </Card>
+              <Card padding={5}>
+                <Text size={[2, 2, 3, 4]}>baz</Text>
               </Card>
             </Inline>
           </Card>

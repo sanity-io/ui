@@ -44,7 +44,7 @@ export const Switch = forwardRef(
 
     return (
       <Root className={className} data-ui="Switch" style={style}>
-        <Input {...restProps} checked={checked} type="checkbox" ref={setRef} />
+        <Input {...restProps} checked={checked || false} type="checkbox" ref={setRef} />
         <Representation aria-hidden data-name="representation">
           <Track />
           <Thumb checked={checked} />

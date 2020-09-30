@@ -1,16 +1,19 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {Theme, ThemeFontSize} from '../../theme'
 import {rem} from '../helpers'
 
-export function textBaseStyles(props: {theme: Theme}) {
+export function textBaseStyles(props: {theme: Theme; weight?: string}) {
   const {theme} = props
+  const {weights} = props.theme.fonts.text
+  const weight = weights[props.weight || 'regular']
 
   return css`
     position: relative;
     font-family: ${theme.fonts.text.family};
+    font-weight: ${weight};
     display: block;
     padding: 1px 0 0;
-    margin: 0 -0.05em;
+    margin: 0;
 
     &:before {
       content: '';
@@ -41,24 +44,21 @@ export function textBaseStyles(props: {theme: Theme}) {
     }
 
     & strong {
-      font-weight: ${theme.fonts.text.weights.bold};
+      font-weight: ${weights.bold};
+    }
+
+    & svg {
+      vertical-align: baseline;
     }
   `
 }
 
-export function textSizeStyles(props: {size?: number; weight?: number; theme: Theme}) {
-  const {sizes} = props.theme.fonts.text
-  const {weights} = props.theme.fonts.text
-  const size = props.size === undefined ? sizes[2] : sizes[props.size] || sizes[2]
-  const weight =
-    props.weight === undefined ? weights.regular : weights[props.weight] || weights.regular
+function _textSizeStyles(size: ThemeFontSize) {
   const capHeight = size.lineHeight - size.ascenderHeight - size.descenderHeight
 
   return css`
     font-size: ${rem(size.fontSize)};
     line-height: ${rem(size.lineHeight)};
-
-    font-weight: ${weight};
     letter-spacing: ${rem(size.letterSpacing)};
     transform: translateY(${rem(size.descenderHeight)});
 
@@ -67,9 +67,26 @@ export function textSizeStyles(props: {size?: number; weight?: number; theme: Th
     }
 
     & svg {
-      vertical-align: baseline;
       font-size: ${rem(size.iconSize)};
       margin: ${rem((capHeight - size.iconSize) / 2)};
     }
+  `
+}
+
+export function textSizeStyles(props: {size: number[]; theme: Theme}) {
+  const {sizes} = props.theme.fonts.text
+
+  return css`
+    ${props.size.map((spaceIndex, mqIndex) => {
+      if (mqIndex === 0) {
+        return _textSizeStyles(sizes[spaceIndex])
+      }
+
+      return css`
+        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+          ${_textSizeStyles(sizes[spaceIndex])}
+        }
+      `
+    })}
   `
 }

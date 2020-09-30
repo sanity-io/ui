@@ -11,80 +11,130 @@ function ButtonPage() {
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 5, 6]}>
-          <Heading as="h1" size={3}>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
             Button
           </Heading>
 
-          <Card padding={3} radius={2} tone="transparent">
-            <Inline space={2}>
-              <Button icon="publish" padding={4}>
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
+            <Inline space={[3, 3, 4, 5]}>
+              <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]}>
                 Label
               </Button>
-              <Button icon="publish" padding={4} tone="brand">
+              <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]} tone="brand">
                 Label
               </Button>
             </Inline>
           </Card>
 
-          <CodeBlock>{`<Inline space={2}>
-  <Button icon="publish" padding={4}>
+          <CodeBlock>{`<Inline space={[3, 3, 4, 5]}>
+  <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]}>
     Label
   </Button>
-  <Button icon="publish" padding={4} tone="brand">
-  Label
+  <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]} tone="brand">
+    Label
   </Button>
 </Inline>`}</CodeBlock>
 
-          <Stack space={2}>
-            <Inline space={2}>
-              <Button icon="publish">Label</Button>
-              <Button icon="publish" tone="brand">
+          <Stack space={[3, 3, 4, 5]}>
+            <Inline space={[3, 3, 4, 5]}>
+              <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]}>
                 Label
               </Button>
-              <Button icon="publish" tone="positive">
+              <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]} tone="brand">
                 Label
               </Button>
-              <Button icon="publish" tone="caution">
+              <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]} tone="positive">
                 Label
               </Button>
-              <Button icon="publish" tone="critical">
+              <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]} tone="caution">
                 Label
               </Button>
-            </Inline>
-
-            <Inline space={2}>
-              <Button icon="publish" mode="ghost">
-                Label
-              </Button>
-              <Button icon="publish" mode="ghost" tone="brand">
-                Label
-              </Button>
-              <Button icon="publish" mode="ghost" tone="positive">
-                Label
-              </Button>
-              <Button icon="publish" mode="ghost" tone="caution">
-                Label
-              </Button>
-              <Button icon="publish" mode="ghost" tone="critical">
+              <Button icon="publish" padding={[3, 3, 4]} size={[2, 2, 3, 4]} tone="critical">
                 Label
               </Button>
             </Inline>
 
-            <Inline space={2}>
-              <Button icon="publish" mode="bleed">
+            <Inline space={[3, 3, 4, 5]}>
+              <Button icon="publish" mode="ghost" padding={[3, 3, 4]} size={[2, 2, 3, 4]}>
                 Label
               </Button>
-              <Button icon="publish" mode="bleed" tone="brand">
+              <Button
+                icon="publish"
+                mode="ghost"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="brand"
+              >
                 Label
               </Button>
-              <Button icon="publish" mode="bleed" tone="positive">
+              <Button
+                icon="publish"
+                mode="ghost"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="positive"
+              >
                 Label
               </Button>
-              <Button icon="publish" mode="bleed" tone="caution">
+              <Button
+                icon="publish"
+                mode="ghost"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="caution"
+              >
                 Label
               </Button>
-              <Button icon="publish" mode="bleed" tone="critical">
+              <Button
+                icon="publish"
+                mode="ghost"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="critical"
+              >
+                Label
+              </Button>
+            </Inline>
+
+            <Inline space={[3, 3, 4, 5]}>
+              <Button icon="publish" mode="bleed" padding={[3, 3, 4]} size={[2, 2, 3, 4]}>
+                Label
+              </Button>
+              <Button
+                icon="publish"
+                mode="bleed"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="brand"
+              >
+                Label
+              </Button>
+              <Button
+                icon="publish"
+                mode="bleed"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="positive"
+              >
+                Label
+              </Button>
+              <Button
+                icon="publish"
+                mode="bleed"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="caution"
+              >
+                Label
+              </Button>
+              <Button
+                icon="publish"
+                mode="bleed"
+                padding={[3, 3, 4]}
+                size={[2, 2, 3, 4]}
+                tone="critical"
+              >
                 Label
               </Button>
             </Inline>
