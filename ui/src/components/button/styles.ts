@@ -37,7 +37,7 @@ export function buttonColorStyles(props: {mode: ButtonMode; theme: Theme; tone: 
         box-shadow: inset 0 0 0 1px ${mode.enabled.border};
       }
 
-      &:focus {
+      &:focus-visible {
         box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
       }
 
