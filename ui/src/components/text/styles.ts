@@ -38,7 +38,7 @@ export function textBaseStyles(props: {theme: Theme; weight?: string}) {
         }
       }
 
-      &:focus {
+      &:focus-visible {
         box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
       }
     }
