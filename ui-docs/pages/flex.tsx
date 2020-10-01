@@ -36,7 +36,7 @@ function FlexPage() {
   </Card>
 </Flex>`}</CodeBlock>
 
-          <Card padding={3} radius={2} tone="transparent">
+          <Card padding={[3, 3, 4, 5]} radius={2} tone="transparent">
             <Flex direction="column">
               <Card flex={1}>
                 <Text size={[2, 2, 3, 4]}>hello</Text>

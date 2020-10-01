@@ -22,25 +22,33 @@ function CardPage() {
                 <Text size={[2, 2, 3, 4]}>
                   Text with <a href="#">link</a>
                 </Text>
-                <Button>Button</Button>
+                <Button padding={[2, 2, 3, 4]} size={[2, 2, 3, 4]}>
+                  Button
+                </Button>
                 <Card padding={[3, 3, 4, 5]} tone="transparent">
                   <Stack space={[3, 3, 4, 5]}>
                     <Text size={[2, 2, 3, 4]}>
                       Text with <a href="#">link</a>
                     </Text>
-                    <Button>Button</Button>
+                    <Button padding={[2, 2, 3, 4]} size={[2, 2, 3, 4]}>
+                      Button
+                    </Button>
                     <Card padding={[3, 3, 4, 5]} tone="contrast">
                       <Stack space={[3, 3, 4, 5]}>
                         <Text size={[2, 2, 3, 4]}>
                           Text with <a href="#">link</a>
                         </Text>
-                        <Button>Button</Button>
+                        <Button padding={[2, 2, 3, 4]} size={[2, 2, 3, 4]}>
+                          Button
+                        </Button>
                         <Card padding={[3, 3, 4, 5]}>
                           <Stack space={[3, 3, 4, 5]}>
                             <Text size={[2, 2, 3, 4]}>
                               Text with <a href="#">link</a>
                             </Text>
-                            <Button>Button</Button>
+                            <Button padding={[2, 2, 3, 4]} size={[2, 2, 3, 4]}>
+                              Button
+                            </Button>
                           </Stack>
                         </Card>
                       </Stack>

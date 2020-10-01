@@ -14,8 +14,6 @@ const Root = styled(Card)`
 `
 
 const SideMenu = styled(Card)`
-  /* height: 100vh; */
-
   ${({theme}) => css`
     @media (max-width: ${rem(theme.media[1] - 1)}) {
       z-index: 1;
@@ -36,9 +34,6 @@ const SideMenu = styled(Card)`
     }
 
     @media (min-width: ${rem(theme.media[1])}) {
-      flex: 1;
-      /* max-width: 15rem; */
-      /* min-width: 10rem; */
       border-right: 1px solid var(--card-shadow-outline-color);
       position: sticky;
       top: 0;
@@ -49,7 +44,6 @@ const SideMenu = styled(Card)`
 const ContentContainer = styled.div`
   ${({theme}) => css`
     @media (min-width: ${rem(theme.media[1])}) {
-      flex: 3;
       min-width: 30rem;
     }
   `}

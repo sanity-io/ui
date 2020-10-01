@@ -27,7 +27,7 @@ function NavLink(props: {children: React.ReactNode; href: string}) {
 
 function AppHeaderLink({children, href}: {children: React.ReactNode; href: string}) {
   return (
-    <Text as="li" size={[2, 2, 3, 4]}>
+    <Text as="li" size={[2, 2, 3]}>
       <NavLink href={href}>{children}</NavLink>
     </Text>
   )
@@ -39,7 +39,7 @@ export function AppHeader() {
       <Box as="nav" paddingX={[5]} paddingY={[5, 5, 6, 7]}>
         <Stack space={5}>
           <Stack space={3}>
-            <Code as="h1" size={[2, 2, 3, 4]}>
+            <Code as="h1" size={[2, 2, 3]}>
               <strong>@sanity/ui</strong>
             </Code>
 
@@ -51,17 +51,17 @@ export function AppHeader() {
           <Stack space={3}>
             <Stack as="ul" space={3}>
               <AppHeaderLink href="/">Introduction</AppHeaderLink>
-              <Text as="li" size={[2, 2, 3, 4]}>
+              <Text as="li" size={[2, 2, 3]}>
                 Concepts
               </Text>
-              <Text as="li" size={[2, 2, 3, 4]}>
+              <Text as="li" size={[2, 2, 3]}>
                 Theme
               </Text>
             </Stack>
           </Stack>
 
           <Stack space={3}>
-            <Label as="h2" size={[2, 2, 3, 4]}>
+            <Label as="h2" size={[2, 2, 3]}>
               Atoms
             </Label>
             <Stack as="ul" space={3}>
