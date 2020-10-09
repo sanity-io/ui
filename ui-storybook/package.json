@@ -16,7 +16,7 @@
     "@sanity/color": "^1.0.0",
     "@sanity/icons": "1.0.0-alpha.0",
     "@sanity/ui": "1.0.0-alpha.0",
-    "polished": "^3.6.6"
+    "polished": "^4.0.2"
   },
   "devDependencies": {
     "@popperjs/core": "^2.4.4",
