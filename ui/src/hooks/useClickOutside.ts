@@ -4,7 +4,8 @@ type ClickOutsideListener = (event: Event) => void
 
 export function useClickOutside(
   listener: ClickOutsideListener,
-  elementsArg: Array<HTMLElement | null> = []
+  elementsArg: Array<HTMLElement | null> = [],
+  boundaryElement?: HTMLElement | null
 ) {
   const [element, setElement] = useState<HTMLElement | null>(null)
   const elements = [element, ...elementsArg]
@@ -16,6 +17,10 @@ export function useClickOutside(
       const target = evt.target
 
       if (!target) {
+        return
+      }
+
+      if (boundaryElement && !boundaryElement.contains(target as Node)) {
         return
       }
 
@@ -37,7 +42,9 @@ export function useClickOutside(
     return () => {
       window.removeEventListener('mousedown', handleWindowMouseDown)
     }
-  }, [listener, ...elements])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [boundaryElement, listener, ...elements])
 
   return setElement
 }

@@ -65,20 +65,20 @@ export function AppHeader() {
               Atoms
             </Label>
             <Stack as="ul" space={3}>
-              <AppHeaderLink href="/box">Box</AppHeaderLink>
-              <AppHeaderLink href="/button">Button</AppHeaderLink>
-              <AppHeaderLink href="/card">Card</AppHeaderLink>
-              <AppHeaderLink href="/checkbox">Checkbox</AppHeaderLink>
-              <AppHeaderLink href="/code">Code</AppHeaderLink>
-              <AppHeaderLink href="/container">Container</AppHeaderLink>
-              <AppHeaderLink href="/flex">Flex</AppHeaderLink>
-              <AppHeaderLink href="/icon">Icon</AppHeaderLink>
-              <AppHeaderLink href="/inline">Inline</AppHeaderLink>
-              <AppHeaderLink href="/popover">Popover</AppHeaderLink>
-              <AppHeaderLink href="/radio">Radio</AppHeaderLink>
-              <AppHeaderLink href="/stack">Stack</AppHeaderLink>
-              <AppHeaderLink href="/switch">Switch</AppHeaderLink>
-              <AppHeaderLink href="/text">Text</AppHeaderLink>
+              <AppHeaderLink href="/atoms/box">Box</AppHeaderLink>
+              <AppHeaderLink href="/atoms/button">Button</AppHeaderLink>
+              <AppHeaderLink href="/atoms/card">Card</AppHeaderLink>
+              <AppHeaderLink href="/atoms/checkbox">Checkbox</AppHeaderLink>
+              <AppHeaderLink href="/atoms/code">Code</AppHeaderLink>
+              <AppHeaderLink href="/atoms/container">Container</AppHeaderLink>
+              <AppHeaderLink href="/atoms/flex">Flex</AppHeaderLink>
+              <AppHeaderLink href="/atoms/icon">Icon</AppHeaderLink>
+              <AppHeaderLink href="/atoms/inline">Inline</AppHeaderLink>
+              <AppHeaderLink href="/atoms/popover">Popover</AppHeaderLink>
+              <AppHeaderLink href="/atoms/radio">Radio</AppHeaderLink>
+              <AppHeaderLink href="/atoms/stack">Stack</AppHeaderLink>
+              <AppHeaderLink href="/atoms/switch">Switch</AppHeaderLink>
+              <AppHeaderLink href="/atoms/text">Text</AppHeaderLink>
             </Stack>
           </Stack>
 
@@ -87,7 +87,7 @@ export function AppHeader() {
               Hooks
             </Label>
             <Stack as="ul" space={3}>
-              <AppHeaderLink href="/use-click-outside">useClickOutside</AppHeaderLink>
+              <AppHeaderLink href="/hooks/use-click-outside">useClickOutside</AppHeaderLink>
             </Stack>
           </Stack>
 
