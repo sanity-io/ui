@@ -1,4 +1,4 @@
-import {Box, Card, Container, rem, Button} from '@sanity/ui'
+import {Box, Button, Card, Container, rem, useClickOutside} from '@sanity/ui'
 import React from 'react'
 import styled, {css} from 'styled-components'
 import {AppHeader} from './header'
@@ -23,7 +23,7 @@ const SideMenu = styled(Card)`
       bottom: 0;
       transform: translate3d(-100%, 0, 0);
       transition: transform 200ms;
-      width: 10rem;
+      width: 12rem;
       box-shadow: 0 0 0 1px var(--card-shadow-outline-color);
 
       &[data-open='true'] {
@@ -59,14 +59,17 @@ const NarrowDeviceMenu = styled(Box)`
 
 export function AppLayout(props: {children: React.ReactNode}) {
   const [menuOpen, setMenuOpen] = React.useState(false)
+  const [sideMenuElement, setSideMenuElement] = React.useState<HTMLDivElement | null>(null)
 
   const handleMenuOpenClick = () => {
     setMenuOpen(true)
   }
 
+  useClickOutside(() => setMenuOpen(false), [sideMenuElement])
+
   return (
     <Root>
-      <SideMenu data-open={menuOpen} forwardedAs="aside">
+      <SideMenu data-open={menuOpen} forwardedAs="aside" ref={setSideMenuElement as any}>
         <AppHeader />
       </SideMenu>
 

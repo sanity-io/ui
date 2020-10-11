@@ -81,6 +81,25 @@ export function AppHeader() {
               <AppHeaderLink href="/text">Text</AppHeaderLink>
             </Stack>
           </Stack>
+
+          <Stack space={3}>
+            <Label as="h2" size={[2, 2, 3]}>
+              Hooks
+            </Label>
+            <Stack as="ul" space={3}>
+              <AppHeaderLink href="/use-click-outside">useClickOutside</AppHeaderLink>
+            </Stack>
+          </Stack>
+
+          <Stack space={3}>
+            <Label as="h2" size={[2, 2, 3]}>
+              Utils
+            </Label>
+            <Stack as="ul" space={3}>
+              <AppHeaderLink href="/utils/layer">Layer</AppHeaderLink>
+              <AppHeaderLink href="/utils/portal">Portal</AppHeaderLink>
+            </Stack>
+          </Stack>
         </Stack>
       </Box>
     </Root>
