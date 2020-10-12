@@ -10,7 +10,7 @@ import React from 'react'
 // calc(0 - (var(--text-icon-size) - (var(--text-line-height) - var(--text-cap-height))) / 2);
 
 export default {
-  title: 'Button',
+  title: 'Atoms/Button',
   decorators: [withCentered, withKnobs],
 }
 

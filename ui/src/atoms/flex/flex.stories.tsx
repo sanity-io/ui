@@ -5,7 +5,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 export default {
-  title: 'Flex',
+  title: 'Atoms/Flex',
   decorators: [withCentered, withKnobs],
 }
 

@@ -5,7 +5,7 @@ import {boolean, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 
 export default {
-  title: 'Radio',
+  title: 'Atoms/Radio',
   decorators: [withCentered, withKnobs],
 }
 

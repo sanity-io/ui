@@ -4,7 +4,7 @@ import {boolean, withKnobs, select} from '@storybook/addon-knobs'
 import React from 'react'
 
 export default {
-  title: 'Popover',
+  title: 'Atoms/Popover',
   decorators: [withCentered, withKnobs],
 }
 

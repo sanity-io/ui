@@ -11,12 +11,14 @@ export function LayerProvider({children}: {children: React.ReactNode}) {
   }, [])
 
   const layer = useMemo(() => {
-    const depth = parentLayer ? parentLayer.depth + 1 : 0
+    const layerDepth = parentLayer ? parentLayer.depth + 1 : 0
+    const layerSize = parentLayer ? parentLayer.size : size
 
     return {
-      depth,
+      depth: layerDepth,
+      isTopLayer: layerDepth === layerSize,
       mount: parentLayer?.mount || mount,
-      size: parentLayer?.size || size,
+      size: layerSize,
     }
   }, [mount, parentLayer, size])
 

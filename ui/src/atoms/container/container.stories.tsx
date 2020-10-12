@@ -5,7 +5,7 @@ import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 
 export default {
-  title: 'Container',
+  title: 'Atoms/Container',
   decorators: [withCentered, withKnobs],
 }
 

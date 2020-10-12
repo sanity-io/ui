@@ -5,7 +5,7 @@ import {withKnobs, boolean} from '@storybook/addon-knobs'
 import React from 'react'
 
 export default {
-  title: 'Switch',
+  title: 'Atoms/Switch',
   decorators: [withCentered, withKnobs],
 }
 

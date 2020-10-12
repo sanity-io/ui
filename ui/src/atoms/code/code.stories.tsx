@@ -14,7 +14,7 @@ Refractor.registerLanguage(jsx as any)
 Refractor.registerLanguage(typescript as any)
 
 export default {
-  title: 'Code',
+  title: 'Atoms/Code',
   decorators: [
     withCentered,
     withKnobs({

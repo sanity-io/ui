@@ -4,7 +4,7 @@ import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 
 export default {
-  title: 'Label',
+  title: 'Atoms/Label',
   decorators: [withCentered, withKnobs],
 }
 

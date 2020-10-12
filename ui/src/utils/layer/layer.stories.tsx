@@ -4,7 +4,7 @@ import React, {useCallback, useState} from 'react'
 import {LayerProvider} from './provider'
 
 export default {
-  title: 'Layer',
+  title: 'Utils/Layer',
   decorators: [withCentered],
 }
 
