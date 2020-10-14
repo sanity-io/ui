@@ -1,12 +1,16 @@
-import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
+import {color} from '@sanity/color'
+import {rgba} from 'polished'
+import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Box, Button, Card, Container, Flex, Text} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
+import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Layer, Portal, useLayer} from '../../utils'
 
 interface DialogProps {
   cardRadius?: number
   cardShadow?: number
+  footer?: React.ReactNode
   header?: React.ReactNode
   id: string
   onClose?: () => void
@@ -19,20 +23,23 @@ const Root = styled(Layer)`
   justify-content: center;
   padding: 1.25em;
   outline: none;
+  background: ${rgba(color.gray[500].hex, 0.1)};
 `
 
 const DialogContainer = styled(Container)`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `
 
 const DialogCardRoot = styled(Card)`
-  overflow: hidden;
   width: 100%;
-  max-height: 50%;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
   display: flex;
 `
 
@@ -50,12 +57,17 @@ const DialogContent = styled(Box)`
   outline: none;
 `
 
+const DialogFooter = styled(Box)`
+  border-top: 1px solid var(--card-hairline-soft-color);
+`
+
 const DialogCard = forwardRef(
   (
     {
       cardRadius,
       cardShadow,
       children,
+      footer,
       header,
       id,
       onClose,
@@ -64,6 +76,7 @@ const DialogCard = forwardRef(
       cardRadius: number
       cardShadow: number
       children: React.ReactNode
+      footer: React.ReactNode
       header: React.ReactNode
       id: string
       onClose?: () => void
@@ -71,9 +84,10 @@ const DialogCard = forwardRef(
     },
     ref
   ) => {
+    const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
     const contentRef = useRef<HTMLDivElement | null>(null)
-    const layer = useLayer()
-    const {isTopLayer} = layer
+    const {isTopLayer} = useLayer()
+    const labelId = `${id}_label`
 
     useEffect(() => {
       // On mount: focus the first interactive element in the contents
@@ -82,36 +96,48 @@ const DialogCard = forwardRef(
       }
     }, [])
 
-    useEffect(() => {
-      if (!isTopLayer) return undefined
+    useGlobalKeyDown(
+      useCallback(
+        (event: KeyboardEvent) => {
+          if (!isTopLayer) return
 
-      const handleWindowKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
-          event.preventDefault()
-          event.stopPropagation()
-          if (onClose) onClose()
-        }
-      }
+          if (event.key === 'Escape') {
+            event.preventDefault()
+            event.stopPropagation()
+            if (onClose) onClose()
+          }
+        },
+        [isTopLayer, onClose]
+      )
+    )
 
-      window.addEventListener('keydown', handleWindowKeyDown)
+    useClickOutside(
+      useCallback(() => {
+        if (!isTopLayer) return
+        if (onClose) onClose()
+      }, [isTopLayer, onClose]),
+      [rootElement]
+    )
 
-      return () => {
-        window.removeEventListener('keydown', handleWindowKeyDown)
-      }
-    }, [isTopLayer, onClose])
-
-    const labelId = `${id}_label`
+    const setRef = useCallback(
+      (el: HTMLDivElement | null) => {
+        setRootElement(el)
+        if (typeof ref === 'function') ref(el)
+        else if (ref) ref.current = el
+      },
+      [ref]
+    )
 
     return (
       <DialogContainer width={width}>
-        <DialogCardRoot radius={cardRadius} ref={ref} shadow={cardShadow}>
+        <DialogCardRoot radius={cardRadius} ref={setRef} shadow={cardShadow}>
           <DialogLayout direction="column">
             <DialogHeader>
               <Flex>
                 <Box flex={1} padding={4}>
                   {header && (
-                    <Text id={labelId}>
-                      <strong>{header}</strong>
+                    <Text id={labelId} weight="semibold">
+                      {header}
                     </Text>
                   )}
                 </Box>
@@ -129,6 +155,7 @@ const DialogCard = forwardRef(
             <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
               {children}
             </DialogContent>
+            {footer && <DialogFooter>{footer}</DialogFooter>}
           </DialogLayout>
         </DialogCardRoot>
       </DialogContainer>
@@ -144,6 +171,7 @@ export const Dialog = forwardRef(
       cardRadius = 2,
       cardShadow = 4,
       children,
+      footer,
       header,
       id,
       onClose,
@@ -191,6 +219,7 @@ export const Dialog = forwardRef(
           <DialogCard
             cardRadius={cardRadius}
             cardShadow={cardShadow}
+            footer={footer}
             header={header}
             id={id}
             onClose={onClose}

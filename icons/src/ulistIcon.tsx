@@ -6,7 +6,15 @@ import React from 'react'
 
 function UlistIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <circle cx={6.5} cy={7.5} r={1.5} fill="currentColor" />
       <circle cx={6.5} cy={12.5} r={1.5} fill="currentColor" />
       <circle cx={6.5} cy={17.5} r={1.5} fill="currentColor" />

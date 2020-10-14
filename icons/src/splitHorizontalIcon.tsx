@@ -9,7 +9,15 @@ function SplitHorizontalIcon(
   svgRef?: React.Ref<SVGSVGElement>
 ) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path d="M19.5 12.5H5.5V6.5H19.5V12.5Z" stroke="currentColor" strokeWidth={1.2} />
       <path d="M19.5 18.5H5.5V12.5H19.5V18.5Z" stroke="currentColor" strokeWidth={1.2} />
     </svg>

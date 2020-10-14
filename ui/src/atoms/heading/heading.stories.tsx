@@ -1,7 +1,7 @@
-import {withCentered} from '~/storybook/decorators'
 import {Heading, Icon} from '@sanity/ui'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
   title: 'Atoms/Heading',

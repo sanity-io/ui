@@ -1,13 +1,13 @@
 // @todo: Make this code readable!
 
+import fs from 'fs'
+import path from 'path'
+import util from 'util'
 import svgr from '@svgr/core'
 import camelCase from 'camelcase'
-import fs from 'fs'
 import glob from 'glob'
 import mkdirp from 'mkdirp'
-import path from 'path'
 import {format} from 'prettier'
-import util from 'util'
 
 const _glob = util.promisify(glob)
 const readFile = util.promisify(fs.readFile)
@@ -48,7 +48,10 @@ async function generateIcon(filePath: string) {
   const targetPath = path.resolve(DIST_PATH, `${fileBasename}.tsx`)
   const tsxCode = format(
     `${GENERATED_BANNER}\n\n` +
-      svgrJsx.replace('* as React', 'React').replace(/"#121923"/g, '"currentColor"'),
+      svgrJsx
+        .replace('* as React', 'React')
+        .replace(/"#121923"/g, '"currentColor"')
+        .replace('<svg ', '<svg data-sanity-icon="" '),
     {
       filepath: targetPath,
       ...prettierConfig,
@@ -83,7 +86,9 @@ async function generateIcons() {
   const typesExports = `export type IconSymbol = \n${files.map((f) => `| '${f.name}'`).join('\n')};`
   const indexPath = path.resolve(DIST_PATH, `index.ts`)
   const indexTsCode = format(
-    `${GENERATED_BANNER}\n\n${iconImports}\n\n${typesExports}\n\n${iconExports}\n\n${defaultExport}`,
+    `${GENERATED_BANNER}\n\n` +
+      `/* eslint-disable import/order */\n\n` +
+      `${iconImports}\n\n${typesExports}\n\n${iconExports}\n\n${defaultExport}`,
     {
       filepath: indexPath,
       ...prettierConfig,

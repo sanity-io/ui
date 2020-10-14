@@ -1,0 +1,34 @@
+{
+  "root": true,
+  "project": {
+    "name": "Sanity Design"
+  },
+  "api": {
+    "projectId": "mos42crl",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/production-preview",
+    "@sanity/code-input"
+  ],
+  "env": {
+    "development": {
+      "plugins": ["@sanity/vision"]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./base/schema"
+    },
+    {
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "./production-preview/resolve-production-url"
+    }
+  ]
+}

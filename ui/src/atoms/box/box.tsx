@@ -1,7 +1,18 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {space} from '../../styles'
 import {getResponsiveProp} from '../helpers'
-import {boxBaseStyles, boxFlexStyles, boxPaddingStyles} from './styles'
+import {boxBaseStyles, boxFlexStyles} from './styles'
+
+export interface BoxMarginProps {
+  margin?: number | number[]
+  marginX?: number | number[]
+  marginY?: number | number[]
+  marginTop?: number | number[]
+  marginBottom?: number | number[]
+  marginLeft?: number | number[]
+  marginRight?: number | number[]
+}
 
 export interface BoxPaddingProps {
   padding?: number | number[]
@@ -17,17 +28,24 @@ export interface BoxFlexProps {
   flex?: number | number[]
 }
 
-export interface BoxProps extends BoxPaddingProps, BoxFlexProps {
+export interface BoxProps extends BoxMarginProps, BoxPaddingProps, BoxFlexProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
 // @todo: Figure out typings
-const Root = styled.div(boxBaseStyles, boxFlexStyles as any, boxPaddingStyles)
+const Root = styled.div(boxBaseStyles, boxFlexStyles as any, space)
 
 export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps, ref) => {
   const {
     as: asProp = 'div',
     flex: flexProp,
+    margin,
+    marginX,
+    marginY,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
     padding,
     paddingX,
     paddingY,
@@ -38,20 +56,27 @@ export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps
     ...restProps
   } = props
 
-  const paddingProps = {
-    padding: getResponsiveProp(padding, [0]),
-    paddingX: getResponsiveProp(paddingX, []),
-    paddingY: getResponsiveProp(paddingY, []),
-    paddingTop: getResponsiveProp(paddingTop, []),
-    paddingBottom: getResponsiveProp(paddingBottom, []),
-    paddingLeft: getResponsiveProp(paddingLeft, []),
-    paddingRight: getResponsiveProp(paddingRight, []),
+  const spaceProps = {
+    margin: getResponsiveProp(margin),
+    marginX: getResponsiveProp(marginX),
+    marginY: getResponsiveProp(marginY),
+    marginTop: getResponsiveProp(marginTop),
+    marginBottom: getResponsiveProp(marginBottom),
+    marginLeft: getResponsiveProp(marginLeft),
+    marginRight: getResponsiveProp(marginRight),
+    padding: getResponsiveProp(padding),
+    paddingX: getResponsiveProp(paddingX),
+    paddingY: getResponsiveProp(paddingY),
+    paddingTop: getResponsiveProp(paddingTop),
+    paddingBottom: getResponsiveProp(paddingBottom),
+    paddingLeft: getResponsiveProp(paddingLeft),
+    paddingRight: getResponsiveProp(paddingRight),
   }
 
-  const flex = getResponsiveProp(flexProp, [])
+  const flex = getResponsiveProp(flexProp)
 
   return (
-    <Root data-ui="Box" {...restProps} {...paddingProps} as={asProp} flex={flex} ref={ref}>
+    <Root data-ui="Box" {...restProps} {...spaceProps} as={asProp} flex={flex} ref={ref}>
       {props.children}
     </Root>
   )

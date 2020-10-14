@@ -1,8 +1,15 @@
-import {isHTMLElement} from './element'
+import {
+  isHTMLElement,
+  isHTMLAnchorElement,
+  isHTMLInputElement,
+  isHTMLButtonElement,
+  isHTMLSelectElement,
+  isHTMLTextAreaElement,
+} from './element'
 
-export const focusState = {
-  IgnoreUtilFocusChanges: false,
-}
+// export const globalFocusState = {
+//   IgnoreUtilFocusChanges: false,
+// }
 
 export function isFocusable(element: HTMLElement) {
   if (
@@ -12,25 +19,23 @@ export function isFocusable(element: HTMLElement) {
     return true
   }
 
-  if ((element as any).disabled) {
-    return false
+  if (isHTMLAnchorElement(element)) {
+    return Boolean(element.href) && element.rel !== 'ignore'
   }
 
-  switch (element.nodeName) {
-    case 'A':
-      return !!(element as any).href && (element as any).rel != 'ignore'
-
-    case 'INPUT':
-      return (element as any).type != 'hidden' && (element as any).type != 'file'
-
-    case 'BUTTON':
-    case 'SELECT':
-    case 'TEXTAREA':
-      return true
-
-    default:
-      return false
+  if (isHTMLInputElement(element)) {
+    return element.type !== 'hidden' && element.type !== 'file' && !element.disabled
   }
+
+  if (
+    isHTMLButtonElement(element) ||
+    isHTMLSelectElement(element) ||
+    isHTMLTextAreaElement(element)
+  ) {
+    return !element.disabled
+  }
+
+  return false
 }
 
 export function attemptFocus(element: HTMLElement) {
@@ -38,7 +43,7 @@ export function attemptFocus(element: HTMLElement) {
     return false
   }
 
-  focusState.IgnoreUtilFocusChanges = true
+  // globalFocusState.IgnoreUtilFocusChanges = true
 
   try {
     element.focus()
@@ -46,7 +51,7 @@ export function attemptFocus(element: HTMLElement) {
     // ignore
   }
 
-  focusState.IgnoreUtilFocusChanges = false
+  // globalFocusState.IgnoreUtilFocusChanges = false
 
   return document.activeElement === element
 }

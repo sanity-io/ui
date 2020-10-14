@@ -1,3 +1,5 @@
+export type ColorSchemeKey = 'brand' | 'dark' | 'light'
+
 export interface ThemeFontSize {
   ascenderHeight: number
   descenderHeight: number
@@ -17,50 +19,48 @@ export interface ThemeFont {
   sizes: ThemeFontSize[]
 }
 
-export interface ThemeButtonColor {
-  modes: {
-    default: {
-      enabled: {
-        bg: string
-        fg: string
-        border: string
-      }
-      hovered: {
-        bg: string
-        fg: string
-        border: string
-      }
-    }
-    ghost: {
-      enabled: {
-        bg: string
-        fg: string
-        border: string
-      }
-      hovered: {
-        bg: string
-        fg: string
-        border: string
-      }
-    }
-    bleed: {
-      enabled: {
-        bg: string
-        fg: string
-        border: string
-      }
-      hovered: {
-        bg: string
-        fg: string
-        border: string
-      }
-    }
+export interface ThemeButtonColorMode {
+  enabled: {
+    bg: string
+    fg: string
+    border: string
+  }
+  disabled: {
+    bg: string
+    fg: string
+    border: string
+  }
+  hovered: {
+    bg: string
+    fg: string
+    border: string
+  }
+  pressed: {
+    bg: string
+    fg: string
+    border: string
+  }
+  selected: {
+    bg: string
+    fg: string
+    border: string
   }
 }
 
-export interface ThemeCardColor {
+export interface ThemeButtonColor {
+  modes: {
+    default: ThemeButtonColorMode
+    ghost: ThemeButtonColorMode
+    bleed: ThemeButtonColorMode
+  }
+}
+
+export interface ThemeCardCStateColor {
   bg: string
   fg: string
+  muted: {
+    fg: string
+  }
   hairline: {
     soft: string
     hard: string
@@ -74,6 +74,14 @@ export interface ThemeCardColor {
     // antumbra: string
     ambient: string
   }
+}
+
+export interface ThemeCardColor {
+  enabled: ThemeCardCStateColor
+  disabled: ThemeCardCStateColor
+  hovered: ThemeCardCStateColor
+  pressed: ThemeCardCStateColor
+  selected: ThemeCardCStateColor
 }
 
 export interface ThemeSyntaxColor {
@@ -116,6 +124,18 @@ export interface ThemeSyntaxColor {
 }
 
 export interface ThemeColor {
+  avatar: {
+    gray: string
+    blue: string
+    cyan: string
+    green: string
+    yellow: string
+    orange: string
+    red: string
+    magenta: string
+    purple: string
+  }
+
   button: {
     tones: {
       default: ThemeButtonColor
@@ -130,7 +150,6 @@ export interface ThemeColor {
     tones: {
       default: ThemeCardColor
       transparent: ThemeCardColor
-      contrast: ThemeCardColor
     }
   }
 
@@ -172,11 +191,19 @@ export interface ThemeColor {
           bg: string
           fg: string
           border: string
+          placeholder: string
         }
         disabled: {
           bg: string
           fg: string
           border: string
+          placeholder: string
+        }
+        hovered: {
+          bg: string
+          fg: string
+          border: string
+          placeholder: string
         }
       }
     }
@@ -192,32 +219,44 @@ export interface ThemeShadow {
   ambient: [number, number, number, number]
 }
 
-export interface Theme {
-  color: ThemeColor
-  container: number[]
-  fonts: {
-    code: ThemeFont
-    heading: ThemeFont
-    label: ThemeFont
-    text: ThemeFont
+export interface ThemeFonts {
+  code: ThemeFont
+  heading: ThemeFont
+  label: ThemeFont
+  text: ThemeFont
+}
+
+export interface ThemeInput {
+  checkbox: {
+    size: number
   }
+  radio: {
+    size: number
+  }
+  switch: {
+    width: number
+    height: number
+    padding: number
+    transitionDurationMs: number
+    transitionTimingFunction: string
+  }
+}
+
+export interface Theme {
+  avatar: {
+    distance: number[]
+    size: number[]
+  }
+  color: {
+    brand: ThemeColor
+    dark: ThemeColor
+    light: ThemeColor
+  }
+  container: number[]
+  fonts: ThemeFonts
   media: number[]
   radius: number[]
   shadows: Array<ThemeShadow | null>
   space: number[]
-  input: {
-    checkbox: {
-      size: number
-    }
-    radio: {
-      size: number
-    }
-    switch: {
-      width: number
-      height: number
-      padding: number
-      transitionDurationMs: number
-      transitionTimingFunction: string
-    }
-  }
+  input: ThemeInput
 }

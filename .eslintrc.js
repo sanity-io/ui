@@ -6,15 +6,24 @@ const common = {
     es6: true,
     node: true,
   },
-  parser: 'babel-eslint',
-  plugins: ['react', 'react-hooks', 'prettier'],
   extends: ['plugin:react/recommended', 'eslint:recommended', 'plugin:prettier/recommended'],
-  settings: {react: {version: 'detect'}},
+  parser: 'babel-eslint',
+  plugins: ['import', 'react', 'react-hooks', 'prettier'],
   rules: {
-    'react/no-unescaped-entities': 0,
-    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'import/order': [
+      'error',
+      {
+        alphabetize: {
+          caseInsensitive: true,
+          order: 'asc',
+        },
+      },
+    ],
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react/no-unescaped-entities': 0,
   },
+  settings: {react: {version: 'detect'}},
 }
 
 module.exports = {
@@ -45,6 +54,9 @@ module.exports = {
         '@typescript-eslint/interface-name-prefix': 0,
         '@typescript-eslint/member-delimiter-style': 0,
         '@typescript-eslint/no-empty-interface': 0,
+
+        // @todo: remove this
+        '@typescript-eslint/no-explicit-any': 0,
       },
     },
   ],

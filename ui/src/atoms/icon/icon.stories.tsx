@@ -1,8 +1,8 @@
-import {withCentered} from '~/storybook/decorators'
 import icons from '@sanity/icons'
 import {Card, Icon, IconSymbol} from '@sanity/ui'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
   title: 'Atoms/Icon',

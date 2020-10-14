@@ -1,0 +1,35 @@
+{
+  "name": "sanity-design-example-studio",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --port 3001",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "prebuild": "rimraf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.5.3",
+    "@sanity/icons": "1.0.0-alpha.0",
+    "@sanity/ui": "1.0.0-alpha.0",
+    "is-hotkey": "^0.1.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-popper": "^2.2.3",
+    "react-refractor": "^2.1.2",
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {
+    "@hot-loader/react-dom": "^17.0.0-rc.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.5.0",
+    "react-hot-loader": "^4.13.0",
+    "ts-loader": "^8.0.5",
+    "tsconfig-paths-webpack-plugin": "^3.3.0",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

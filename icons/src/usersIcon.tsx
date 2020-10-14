@@ -6,7 +6,15 @@ import React from 'react'
 
 function UsersIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path
         d="M17.5 18.5H21.5C21.5 15 20.8416 14.1708 19.5 13.5C18.5 13 16.5 12.5 16.5 11C16.5 9.5 17.5 9 17.5 7C17.5 5 16.5 4 15 4C13.6628 4 12.723 4.79472 12.5347 6.38415"
         stroke="currentColor"

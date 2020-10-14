@@ -1,7 +1,7 @@
-import {withCentered} from '~/storybook/decorators'
 import {Button, Popover, Text} from '@sanity/ui'
 import {boolean, withKnobs, select} from '@storybook/addon-knobs'
 import React from 'react'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
   title: 'Atoms/Popover',

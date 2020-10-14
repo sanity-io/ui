@@ -6,7 +6,15 @@ import React from 'react'
 
 function PackageIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path
         d="M12.5 3L4.5 8V17L12.5 22L20.5 17V8L12.5 3Z"
         stroke="currentColor"

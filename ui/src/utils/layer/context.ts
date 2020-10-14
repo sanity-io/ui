@@ -1,9 +1,10 @@
 import {createContext} from 'react'
 
 export interface LayerContextValue {
+  currentId: string
   depth: number
   isTopLayer: boolean
-  mount: () => () => void
+  mount: (id: string) => () => void
   size: number
 }
 

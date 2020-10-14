@@ -9,7 +9,15 @@ function EllipsisHorizontalIcon(
   svgRef?: React.Ref<SVGSVGElement>
 ) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path
         d="M6.5 11C7.32843 11 8 11.6716 8 12.5C8 13.3284 7.32843 14 6.5 14C5.67157 14 5 13.3284 5 12.5C5 11.6716 5.67157 11 6.5 11Z"
         fill="currentColor"

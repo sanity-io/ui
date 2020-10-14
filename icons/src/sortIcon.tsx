@@ -6,7 +6,15 @@ import React from 'react'
 
 function SortIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path d="M16.5 19V7" stroke="currentColor" strokeWidth={1.2} />
       <path d="M8.5 18V6" stroke="currentColor" strokeWidth={1.2} />
       <path d="M12 15L8.5 18.5L5 15" stroke="currentColor" strokeWidth={1.2} />

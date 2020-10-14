@@ -6,7 +6,15 @@ import React from 'react'
 
 function ControlsIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path
         d="M6.5 5V7.5M6.5 11.5V20M12.5 5V13.5M12.5 17.5V20M18.5 5V7.5M18.5 11.5V20"
         stroke="currentColor"

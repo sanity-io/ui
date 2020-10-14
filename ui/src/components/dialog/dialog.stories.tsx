@@ -1,21 +1,39 @@
-import {withCentered} from '~/storybook/decorators'
-import {Box, Button, Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Dialog,
+  LayerProvider,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import React, {useCallback, useRef, useState} from 'react'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
-  title: 'Components/Dialog',
   decorators: [withCentered],
+  title: 'Components/Dialog',
 }
 
 export const plain = () => {
   return (
     <LayerProvider>
-      <DialogExample />
+      <PlainExample />
     </LayerProvider>
   )
 }
 
-function DialogExample() {
+export const nested = () => {
+  return (
+    <LayerProvider>
+      <NestedExample />
+    </LayerProvider>
+  )
+}
+
+function PlainExample() {
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -62,6 +80,49 @@ function DialogExample() {
               </Text>
             </Stack>
           </Box>
+        </Dialog>
+      )}
+    </>
+  )
+}
+
+function NestedExample() {
+  const [open1] = useState(true)
+  const [open2, setOpen2] = useState(false)
+  const [open3, setOpen3] = useState(false)
+
+  return (
+    <>
+      {open1 && (
+        <Dialog cardShadow={0} id="dialog1">
+          <Box padding={4}>
+            <Button onClick={() => setOpen2(true)}>Open Dialog 2</Button>
+          </Box>
+
+          {open2 && (
+            <Dialog cardShadow={2} id="dialog2" onClose={() => setOpen2(false)}>
+              <Box padding={4}>
+                <Button onClick={() => setOpen3(true)}>Open Dialog 3</Button>
+              </Box>
+
+              {open3 && (
+                <Dialog cardShadow={4} id="dialog3" onClose={() => setOpen3(false)}>
+                  <Box padding={4}>
+                    <MenuButton
+                      button={<Button>Test</Button>}
+                      id="menu3"
+                      menu={
+                        <Menu>
+                          <MenuItem text="Test" />
+                          <MenuItem text="Test" />
+                        </Menu>
+                      }
+                    />
+                  </Box>
+                </Dialog>
+              )}
+            </Dialog>
+          )}
         </Dialog>
       )}
     </>

@@ -1,5 +1,4 @@
-import {GlobalStyle} from '~/components'
-import {studioTheme, ThemeProvider} from '@sanity/ui'
+import {LayerProvider, studioTheme, ThemeProvider} from '@sanity/ui'
 import {AppProps} from 'next/app'
 import Head from 'next/head'
 import React from 'react'
@@ -8,24 +7,29 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
+import {AppProvider} from '../components'
 
-Refractor.registerLanguage(javascript as any)
-Refractor.registerLanguage(json as any)
-Refractor.registerLanguage(jsx as any)
-Refractor.registerLanguage(typescript as any)
+Refractor.registerLanguage(javascript)
+Refractor.registerLanguage(json)
+Refractor.registerLanguage(jsx)
+Refractor.registerLanguage(typescript)
 
 function App({Component, pageProps}: AppProps) {
   return (
-    <ThemeProvider theme={studioTheme}>
-      <GlobalStyle />
-      <Head>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-        />
-      </Head>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <AppProvider>
+      <LayerProvider id="root">
+        <ThemeProvider theme={studioTheme}>
+          <Head>
+            <meta
+              name="viewport"
+              content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+            />
+          </Head>
+
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </LayerProvider>
+    </AppProvider>
   )
 }
 

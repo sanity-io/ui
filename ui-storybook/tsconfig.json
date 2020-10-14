@@ -1,4 +1,4 @@
 {
   "extends": "../tsconfig",
-  "include": ["./decorators/*.ts", "./decorators/*.tsx"]
+  "include": ["./decorators/*.ts", "./decorators/*.tsx", "./typings/*.d.ts"]
 }

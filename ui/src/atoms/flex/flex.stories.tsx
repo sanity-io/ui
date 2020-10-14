@@ -1,8 +1,8 @@
-import {withCentered} from '~/storybook/decorators'
 import {Card, Flex, Text} from '@sanity/ui'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import styled from 'styled-components'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
   title: 'Atoms/Flex',

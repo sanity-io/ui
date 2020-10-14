@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
+import {rem} from '../../styles'
 import {Theme} from '../../theme'
-import {rem} from '../helpers'
 
 export function radioBaseStyles() {
   return css`
@@ -10,7 +10,7 @@ export function radioBaseStyles() {
 }
 
 export function inputElementStyles(props: {theme: Theme}) {
-  const {input} = props.theme.color
+  const {input} = props.theme.color.light
   // Hide the input element, while still making it respond to focus
   return css`
     position: absolute;
@@ -47,7 +47,7 @@ export function inputElementStyles(props: {theme: Theme}) {
 
 export function representationStyles(props: {theme: Theme}) {
   const {radio} = props.theme.input
-  const {input} = props.theme.color
+  const {input} = props.theme.color.light
 
   return css`
     flex-shrink: 0;

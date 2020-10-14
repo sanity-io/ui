@@ -1,7 +1,7 @@
-import {withCentered} from '~/storybook/decorators'
 import {Box, Button, Card, Code, Flex, Layer, Stack, Text, useLayer} from '@sanity/ui'
 import React, {useCallback, useState} from 'react'
 import {LayerProvider} from './provider'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
   title: 'Utils/Layer',

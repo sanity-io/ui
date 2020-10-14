@@ -1,14 +1,16 @@
 import {css} from 'styled-components'
 import {FlexDirection} from './types'
 
-export function flexBaseStyles() {
+export function flexBaseStyles(props: {align?: 'center'; justify?: 'center'}) {
   return css`
     display: flex;
+    align-items: ${props.align || 'initial'};
+    justify-content: ${props.justify || 'initial'};
   `
 }
 
-export function flexColumnStyles(props: {direction: FlexDirection}) {
-  if (props.direction === 'column') {
+export function flexColumnStyles(props: {uiDirection: FlexDirection}) {
+  if (props.uiDirection === 'column') {
     return css`
       flex-direction: column;
 

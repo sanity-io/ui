@@ -1,12 +1,14 @@
 import {createContext} from 'react'
 
 export interface PortalContextInterface {
+  boundaryElement: HTMLElement | null
   element: HTMLElement
 }
 
 let globalElement: HTMLDivElement | null = null
 
 export const defaultContextValue = {
+  boundaryElement: null,
   get element() {
     if (globalElement) return globalElement
 

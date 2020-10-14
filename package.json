@@ -6,8 +6,12 @@
   "scripts": {
     "build": "lerna run build",
     "dev": "lerna run --parallel --stream dev",
-    "dev:docs": "lerna run --stream --scope sanity-ui-docs dev",
+    "dev:docs": "run-p dev:ui-docs dev:studio",
+    "dev:ui-docs": "lerna run --stream --scope sanity-ui-docs dev",
+    "dev:manage": "lerna run --stream --scope sanity-design-example-manage dev",
     "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
+    "dev:example-studio": "lerna run --stream --scope sanity-design-example-studio dev",
+    "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "type-check": "lerna run type-check"
@@ -18,6 +22,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
@@ -29,7 +34,9 @@
     "typescript": "^4.0.2"
   },
   "workspaces": [
+    "examples/*",
     "icons",
+    "studio",
     "ui",
     "ui-docs",
     "ui-storybook"

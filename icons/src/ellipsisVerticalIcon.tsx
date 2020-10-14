@@ -9,7 +9,15 @@ function EllipsisVerticalIcon(
   svgRef?: React.Ref<SVGSVGElement>
 ) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <circle cx={12.5} cy={6.5} r={1.5} fill="currentColor" />
       <circle cx={12.5} cy={12.5} r={1.5} fill="currentColor" />
       <circle cx={12.5} cy={18.5} r={1.5} fill="currentColor" />

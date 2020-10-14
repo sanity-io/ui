@@ -1,8 +1,10 @@
-import {Box, Code, Label, Stack, Text} from '@sanity/ui'
+import {Box, Code, Label, Stack, Switch, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
+import {atomRoutes} from '../../routes'
+import {useApp} from './hooks'
 
 const Root = styled(Box)`
   overflow: auto;
@@ -14,7 +16,7 @@ const Root = styled(Box)`
 function NavLink(props: {children: React.ReactNode; href: string}) {
   const router = useRouter()
 
-  if (props.href === router.pathname) {
+  if (props.href === router.asPath) {
     return <>{props.children}</>
   }
 
@@ -34,6 +36,8 @@ function AppHeaderLink({children, href}: {children: React.ReactNode; href: strin
 }
 
 export function AppHeader() {
+  const {setThemeMode, themeMode} = useApp()
+
   return (
     <Root data-name="AppHeader" forwardedAs="header">
       <Box as="nav" paddingX={[5]} paddingY={[5, 5, 6, 7]}>
@@ -51,12 +55,8 @@ export function AppHeader() {
           <Stack space={3}>
             <Stack as="ul" space={3}>
               <AppHeaderLink href="/">Introduction</AppHeaderLink>
-              <Text as="li" size={[2, 2, 3]}>
-                Concepts
-              </Text>
-              <Text as="li" size={[2, 2, 3]}>
-                Theme
-              </Text>
+              <AppHeaderLink href="/concepts">Concepts</AppHeaderLink>
+              <AppHeaderLink href="/theme">Theme</AppHeaderLink>
             </Stack>
           </Stack>
 
@@ -65,20 +65,20 @@ export function AppHeader() {
               Atoms
             </Label>
             <Stack as="ul" space={3}>
-              <AppHeaderLink href="/atoms/box">Box</AppHeaderLink>
-              <AppHeaderLink href="/atoms/button">Button</AppHeaderLink>
-              <AppHeaderLink href="/atoms/card">Card</AppHeaderLink>
-              <AppHeaderLink href="/atoms/checkbox">Checkbox</AppHeaderLink>
-              <AppHeaderLink href="/atoms/code">Code</AppHeaderLink>
-              <AppHeaderLink href="/atoms/container">Container</AppHeaderLink>
-              <AppHeaderLink href="/atoms/flex">Flex</AppHeaderLink>
-              <AppHeaderLink href="/atoms/icon">Icon</AppHeaderLink>
-              <AppHeaderLink href="/atoms/inline">Inline</AppHeaderLink>
-              <AppHeaderLink href="/atoms/popover">Popover</AppHeaderLink>
-              <AppHeaderLink href="/atoms/radio">Radio</AppHeaderLink>
-              <AppHeaderLink href="/atoms/stack">Stack</AppHeaderLink>
-              <AppHeaderLink href="/atoms/switch">Switch</AppHeaderLink>
-              <AppHeaderLink href="/atoms/text">Text</AppHeaderLink>
+              {atomRoutes.map((route) => (
+                <AppHeaderLink href={`/atoms/${route.slug}`} key={route.slug}>
+                  {route.title}
+                </AppHeaderLink>
+              ))}
+            </Stack>
+          </Stack>
+
+          <Stack space={3}>
+            <Label as="h2" size={[2, 2, 3]}>
+              Components
+            </Label>
+            <Stack as="ul" space={3}>
+              <AppHeaderLink href="/components/dialog">Dialog</AppHeaderLink>
             </Stack>
           </Stack>
 
@@ -100,6 +100,19 @@ export function AppHeader() {
               <AppHeaderLink href="/utils/portal">Portal</AppHeaderLink>
             </Stack>
           </Stack>
+
+          <div>
+            <Switch
+              checked={themeMode === 'dark'}
+              onChange={(event) => {
+                if (event.currentTarget.checked) {
+                  setThemeMode('dark')
+                } else {
+                  setThemeMode('light')
+                }
+              }}
+            />
+          </div>
         </Stack>
       </Box>
     </Root>

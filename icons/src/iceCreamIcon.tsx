@@ -6,7 +6,15 @@ import React from 'react'
 
 function IceCreamIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path d="M9.5 13.5L12.5 20.5L15.5 13.5" stroke="black" strokeWidth={1.2} />
       <path
         d="M15.5 7.5C15.5 5.84315 14.1569 4.5 12.5 4.5C10.8431 4.5 9.5 5.84315 9.5 7.5"

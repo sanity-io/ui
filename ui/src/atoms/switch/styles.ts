@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
-import {rem} from '../helpers'
+import {rem} from '../../styles'
+import {ColorSchemeKey, Theme} from '../../theme'
 
 /* Root */
 export function switchBaseStyles() {
@@ -11,10 +11,7 @@ export function switchBaseStyles() {
 }
 
 /* Input */
-export function switchInputStyles(props: {theme: Theme}) {
-  const {theme} = props
-  const tone = theme.color.switch.tones.default
-
+export function switchInputStyles() {
   // Visually hide the input element while keeping it interactive
   return css`
     position: absolute;
@@ -31,33 +28,19 @@ export function switchInputStyles(props: {theme: Theme}) {
 
     /* Place the input element above the representation element */
     z-index: 1;
-
-    & + [data-name='representation'] {
-      --switch-thumb-color: ${tone.enabled.thumb};
-      --switch-bg-color: ${tone.enabled.off.bg};
-    }
-
-    &:checked + [data-name='representation'] {
-      --switch-bg-color: ${tone.enabled.on.bg};
-    }
-
-    &:disabled + [data-name='representation'] {
-      --switch-thumb-color: ${tone.disabled.thumb};
-      --switch-bg-color: ${tone.disabled.off.bg};
-    }
-
-    /* Focus styles */
-    &:focus + [data-name='representation'] {
-      /* @todo: Use focus ring color from card theme */
-      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #4e91fc;
-    }
   `
 }
 
 /* Representation */
-export function switchRepresentationStyles(props: {theme: Theme}) {
-  const {switch: switchInput} = props.theme.input
+export function switchRepresentationStyles(props: {scheme: ColorSchemeKey; theme: Theme}) {
+  const {scheme, theme} = props
+  const {switch: switchInput} = theme.input
+  const tone = theme.color[scheme].switch.tones.default
+
   return css`
+    --switch-thumb-color: ${tone.enabled.thumb};
+    --switch-bg-color: ${tone.enabled.off.bg};
+
     display: block;
     position: relative;
     width: ${rem(switchInput.width)};
@@ -66,12 +49,28 @@ export function switchRepresentationStyles(props: {theme: Theme}) {
 
     /* Make sure it’s not possible to interact with the wrapper element */
     pointer-events: none;
+
+    /* Focus styles */
+    input:focus-visible + & {
+      /* @todo: Use focus ring color from card theme */
+      box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+    }
+
+    input:checked + & {
+      --switch-bg-color: ${tone.enabled.on.bg};
+    }
+
+    input:disabled + & {
+      --switch-thumb-color: ${tone.disabled.thumb};
+      --switch-bg-color: ${tone.disabled.off.bg};
+    }
   `
 }
 
 /* Track */
 export function switchTrackStyles(props: {theme: Theme}) {
   const {switch: switchInput} = props.theme.input
+
   return css`
     display: block;
     background: var(--switch-bg-color);

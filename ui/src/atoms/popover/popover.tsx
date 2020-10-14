@@ -1,5 +1,6 @@
 import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
+import {Layer, Portal, usePortal} from '../../utils'
 import {Card} from '../card'
 import {PopoverArrow} from './arrow'
 
@@ -30,7 +31,7 @@ interface PopoverProps {
 export const Popover = forwardRef(
   (props: PopoverProps & Omit<React.HTMLProps<HTMLDivElement>, 'children' | 'content'>, ref) => {
     const {
-      boundaryElement,
+      boundaryElement: boundaryElementProp,
       children: child,
       content,
       disabled,
@@ -42,6 +43,8 @@ export const Popover = forwardRef(
       style = {},
       ...restProps
     } = props
+    const portal = usePortal()
+    const boundaryElement = boundaryElementProp || portal.boundaryElement
     const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
     const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
     const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
@@ -106,18 +109,21 @@ export const Popover = forwardRef(
         {child && !referenceElementProp ? cloneElement(child, {ref: setRef}) : child || <></>}
 
         {open && (
-          <div
-            {...restProps}
-            ref={setRootRef}
-            style={{...style, ...styles.popper}}
-            {...attributes.popper}
-          >
-            <Card padding={padding} radius={radius} shadow={3}>
-              {content}
-            </Card>
-
-            <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
-          </div>
+          <Portal>
+            <Layer style={{pointerEvents: 'none'}}>
+              <div
+                {...restProps}
+                ref={setRootRef}
+                style={{...style, ...styles.popper, pointerEvents: 'all'}}
+                {...attributes.popper}
+              >
+                <Card data-ui="PopoverCard" padding={padding} radius={radius} shadow={3}>
+                  <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
+                  {content}
+                </Card>
+              </div>
+            </Layer>
+          </Portal>
         )}
       </>
     )

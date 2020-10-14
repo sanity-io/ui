@@ -6,7 +6,15 @@ import React from 'react'
 
 function LinkIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path
         d="M11 12.5L12.5 14C13.281 14.7811 14.719 14.7811 15.5 14L18.5 11C19.281 10.219 19.281 8.78105 18.5 8L18 7.50001C17.2189 6.71896 15.781 6.71896 15 7.5L13 9.5"
         stroke="currentColor"

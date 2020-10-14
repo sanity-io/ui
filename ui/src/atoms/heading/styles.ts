@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
+import {rem} from '../../styles'
 import {Theme, ThemeFontSize} from '../../theme'
-import {rem} from '../helpers'
 
 export function headingBaseStyles(props: {theme: Theme}) {
   const {theme} = props

@@ -1,1 +1,1 @@
-export type CardTone = 'default' | 'transparent' | 'contrast'
+export type CardTone = 'default' | 'transparent'

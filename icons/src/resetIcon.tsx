@@ -6,7 +6,15 @@ import React from 'react'
 
 function ResetIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 25 25" fill="none" ref={svgRef} {...props}>
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
       <path d="M9.50001 15.5L15.5 9.5" stroke="currentColor" strokeWidth={1.2} />
       <path d="M9.5 9.5L15.5 15.5" stroke="currentColor" strokeWidth={1.2} />
       <path

@@ -1,6 +1,5 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {Portal} from '../portal'
 import {useLayer} from './hooks'
 import {LayerProvider} from './provider'
 
@@ -22,10 +21,8 @@ const Root = styled.div<{depth: number}>`
 
 export const Layer = forwardRef((props: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
   return (
-    <LayerProvider>
-      <Portal>
-        <LayerChildren {...props} ref={ref} />
-      </Portal>
+    <LayerProvider id={props.id}>
+      <LayerChildren {...props} ref={ref} />
     </LayerProvider>
   )
 })
@@ -37,7 +34,7 @@ const LayerChildren = forwardRef(
     const layer = useLayer() || {depth: 0}
 
     return (
-      <Root {...restProps} depth={layer.depth} ref={ref as any}>
+      <Root data-ui="Layer" {...restProps} depth={layer.depth} ref={ref as any}>
         {children}
       </Root>
     )

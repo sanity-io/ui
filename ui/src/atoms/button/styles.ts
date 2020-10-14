@@ -1,15 +1,15 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {ColorSchemeKey, Theme} from '../../theme'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
   return css`
     -webkit-font-smoothing: inherit;
     appearance: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font: inherit;
     border: 0;
-    border-radius: 3px;
     outline: none;
     user-select: none;
     text-decoration: none;
@@ -17,21 +17,39 @@ export function buttonBaseStyles() {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
 
     & > span {
+      display: block;
+      flex: 1;
+      min-width: 0;
       border-radius: inherit;
+    }
+
+    &::-moz-focus-inner {
+      border: 0;
+      padding: 0;
     }
   `
 }
 
-export function buttonColorStyles(props: {mode: ButtonMode; theme: Theme; tone: ButtonTone}) {
-  const tone = props.theme.color.button.tones[props.tone || 'default']
-  const mode = tone.modes[props.mode || 'default']
+export function buttonColorStyles(props: {
+  uiMode: ButtonMode
+  scheme: ColorSchemeKey
+  theme: Theme
+  tone: ButtonTone
+}) {
+  const {scheme, theme, uiMode} = props
+  const tone = theme.color[scheme].button.tones[props.tone || 'default']
+  const mode = tone.modes[uiMode || 'default']
 
   return css`
     &:not([data-disabled='true']) {
-      background: ${mode.enabled.bg};
-      color: ${mode.enabled.fg};
+      --card-bg-color: ${mode.enabled.bg};
+      --card-fg-color: ${mode.enabled.fg};
+
+      background-color: var(--card-bg-color);
+      color: var(--card-fg-color);
 
       & > span {
         box-shadow: inset 0 0 0 1px ${mode.enabled.border};
@@ -43,11 +61,30 @@ export function buttonColorStyles(props: {mode: ButtonMode; theme: Theme; tone: 
 
       @media (hover: hover) {
         &:hover {
-          background: ${mode.hovered.bg};
-          color: ${mode.hovered.fg};
+          --card-bg-color: ${mode.hovered.bg};
+          --card-fg-color: ${mode.hovered.fg};
+          text-decoration: none;
 
           & > span {
             box-shadow: inset 0 0 0 1px ${mode.hovered.border};
+          }
+        }
+
+        &:active {
+          --card-bg-color: ${mode.pressed.bg};
+          --card-fg-color: ${mode.pressed.fg};
+
+          & > span {
+            box-shadow: inset 0 0 0 1px ${mode.pressed.border};
+          }
+        }
+
+        &[data-selected] {
+          --card-bg-color: ${mode.selected.bg};
+          --card-fg-color: ${mode.selected.fg};
+
+          & > span {
+            box-shadow: inset 0 0 0 1px ${mode.selected.border};
           }
         }
       }

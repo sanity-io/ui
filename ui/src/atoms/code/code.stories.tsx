@@ -1,4 +1,3 @@
-import {withCentered} from '~/storybook/decorators'
 import {Card, Code} from '@sanity/ui'
 import {select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -7,6 +6,7 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
+import {withCentered} from '~/storybook/decorators'
 
 Refractor.registerLanguage(javascript as any)
 Refractor.registerLanguage(json as any)

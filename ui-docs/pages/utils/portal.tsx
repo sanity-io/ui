@@ -1,10 +1,10 @@
-import {AppLayout, CodeBlock} from '~/components'
 import {color} from '@sanity/color'
 import {Button, Card, Heading, Portal, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import {rgba} from 'polished'
 import React, {useState} from 'react'
 import styled from 'styled-components'
+import {AppLayout, CodeBlock} from '~/components'
 
 const Backdrop = styled.div`
   position: fixed;

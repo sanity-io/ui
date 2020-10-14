@@ -7,6 +7,7 @@ function rem(px: number) {
 
 export function containerBaseStyles() {
   return css`
+    width: 100%;
     margin: 0 auto;
   `
 }

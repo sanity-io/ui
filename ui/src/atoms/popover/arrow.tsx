@@ -18,11 +18,11 @@ const Root = styled.div<{tone: CardTone}>`
     transform-origin: 13.5px 13.5px;
   }
 
-  [data-popper-placement^='top'] > & {
+  [data-popper-placement^='top'] > div > & {
     bottom: -27px;
   }
 
-  [data-popper-placement^='right'] > & {
+  [data-popper-placement^='right'] > div > & {
     left: -27px;
 
     & > svg {
@@ -30,7 +30,7 @@ const Root = styled.div<{tone: CardTone}>`
     }
   }
 
-  [data-popper-placement^='left'] > & {
+  [data-popper-placement^='left'] > div > & {
     right: -27px;
 
     & > svg {
@@ -38,7 +38,7 @@ const Root = styled.div<{tone: CardTone}>`
     }
   }
 
-  [data-popper-placement^='bottom'] > & {
+  [data-popper-placement^='bottom'] > div > & {
     top: -27px;
 
     & > svg {
@@ -52,7 +52,7 @@ const BorderPath = styled.path`
 `
 
 const ShapePath = styled.path`
-  fill: ${({theme}) => theme.color.card.tones.default.bg};
+  fill: var(--card-bg-color);
 `
 
 export const PopoverArrow = forwardRef(
@@ -64,7 +64,7 @@ export const PopoverArrow = forwardRef(
     ref
   ) => {
     return (
-      <Root {...props} ref={ref}>
+      <Root data-ui="PopoverArrow" {...props} ref={ref}>
         <svg
           width="27"
           height="11"

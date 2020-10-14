@@ -2,6 +2,8 @@
  * AUTO-GENERATED, DO NOT EDIT
  */
 
+/* eslint-disable import/order */
+
 import {default as AddCircleIcon} from './addCircleIcon'
 import {default as AddIcon} from './addIcon'
 import {default as ArrowDownIcon} from './arrowDownIcon'

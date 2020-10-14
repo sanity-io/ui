@@ -1,8 +1,8 @@
-import {withCentered} from '~/storybook/decorators'
 import {Card, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
   title: 'Atoms/Card',
@@ -60,7 +60,6 @@ export const plain = () => {
     {
       Default: 'default',
       Transparent: 'transparent',
-      Contrast: 'contrast',
     },
     'default',
     'Props'

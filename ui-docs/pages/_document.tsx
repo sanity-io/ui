@@ -35,6 +35,7 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
         <Head>
           <meta charSet="utf-8" />
           <link rel="icon" href="/favicon.ico" />
+          <script src="https://unpkg.com/@babel/standalone/babel.min.js" />
           {this.props.styleTags}
         </Head>
         <body>

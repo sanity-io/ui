@@ -1,8 +1,8 @@
-import {withCentered} from '~/storybook/decorators'
 import {Box, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+import {withCentered} from '~/storybook/decorators'
 
 export default {
   title: 'Atoms/Box',

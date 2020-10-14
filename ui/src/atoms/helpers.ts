@@ -9,10 +9,6 @@ export function getResponsiveProp(
   return Array.isArray(val) ? val : [val]
 }
 
-export function rem(pixelValue: number): string {
-  return `${pixelValue / 16}rem`
-}
-
 export function childrenToElementArray(
   children: React.ReactNode
 ): Array<React.ReactElement | string> {
