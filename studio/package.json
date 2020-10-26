@@ -7,7 +7,7 @@
   "author": "Sanity.io <hello@sanity.io>",
   "license": "MIT",
   "scripts": {
-    "build": "sanity build",
+    "build": "sanity build public -y",
     "dev": "sanity start",
     "deploy": "sanity deploy",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "@sanity/base": "^2.0.6",
+    "@sanity/cli": "^2.0.5",
     "@sanity/components": "^2.0.6",
     "@sanity/code-input": "^2.0.5",
     "@sanity/core": "^2.0.5",
