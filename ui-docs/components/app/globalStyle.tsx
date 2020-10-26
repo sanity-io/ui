@@ -1,10 +1,10 @@
-import {Theme} from '@sanity/ui'
+import {ColorSchemeKey, Theme} from '@sanity/ui'
 import {createGlobalStyle, css} from 'styled-components'
 
-export const GlobalStyle = createGlobalStyle<{themeMode: 'dark' | 'light'}>(
-  (props: {theme: Theme; themeMode: 'dark' | 'light'}) => {
-    const {theme, themeMode} = props
-    const color = theme.color[themeMode]
+export const GlobalStyle = createGlobalStyle<{scheme: ColorSchemeKey}>(
+  (props: {scheme: ColorSchemeKey; theme: Theme}) => {
+    const {scheme, theme} = props
+    const color = theme.color[scheme]
 
     return css`
       html,

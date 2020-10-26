@@ -1,9 +1,7 @@
-import {Box, Button, Card, CardProvider, Container, rem, useClickOutside} from '@sanity/ui'
+import {Box, Button, Card, Container, rem, useClickOutside} from '@sanity/ui'
 import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
-import {GlobalStyle} from './globalStyle'
 import {AppHeader} from './header'
-import {useApp} from './hooks'
 
 const Root = styled(Card)`
   ${({theme}) => css`
@@ -68,45 +66,38 @@ const NarrowDeviceMenu = styled(Box)`
 `
 
 export function AppLayout(props: {children: React.ReactNode}) {
-  const {themeMode} = useApp()
   const [menuOpen, setMenuOpen] = useState(false)
   const [sideMenuElement, setSideMenuElement] = useState<HTMLDivElement | null>(null)
 
-  const handleMenuOpenClick = () => {
-    setMenuOpen(true)
-  }
+  const handleMenuOpenClick = () => setMenuOpen(true)
 
   useClickOutside(() => setMenuOpen(false), [sideMenuElement])
 
   return (
-    <CardProvider scheme={themeMode}>
-      <GlobalStyle themeMode={themeMode} />
+    <Root>
+      <SideMenu data-open={menuOpen} forwardedAs="aside" ref={setSideMenuElement as any}>
+        <AppHeader />
+      </SideMenu>
 
-      <Root>
-        <SideMenu data-open={menuOpen} forwardedAs="aside" ref={setSideMenuElement as any}>
-          <AppHeader />
-        </SideMenu>
+      <ContentContainer>
+        <NarrowDeviceMenu padding={[2, 4]}>
+          <Button
+            aria-label="Menu"
+            icon="menu"
+            mode="bleed"
+            onClick={handleMenuOpenClick}
+            size={[2, 3, 4]}
+          />
+        </NarrowDeviceMenu>
 
-        <ContentContainer>
-          <NarrowDeviceMenu padding={[2, 4]}>
-            <Button
-              aria-label="Menu"
-              icon="menu"
-              mode="bleed"
-              onClick={handleMenuOpenClick}
-              size={[2, 3, 4]}
-            />
-          </NarrowDeviceMenu>
-
-          <ContentCard>
-            <Container as="main" width={2} style={{height: '100%'}}>
-              <Box as="main" padding={[4, 5]} paddingY={[5, 5, 6, 7]}>
-                {props.children}
-              </Box>
-            </Container>
-          </ContentCard>
-        </ContentContainer>
-      </Root>
-    </CardProvider>
+        <ContentCard>
+          <Container as="main" width={2} style={{height: '100%'}}>
+            <Box as="main" padding={[4, 5]} paddingY={[5, 5, 6, 7]}>
+              {props.children}
+            </Box>
+          </Container>
+        </ContentCard>
+      </ContentContainer>
+    </Root>
   )
 }

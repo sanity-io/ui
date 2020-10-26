@@ -23,12 +23,7 @@ export async function getStaticProps({preview = true}) {
 }
 
 function ConceptsPage({data: initialData, params, preview}: any) {
-  const {data} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
-
-  if (!data) {
-    return <div>Loading...</div>
-  }
-
+  const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
   const {article = {}} = data
 
   return (

@@ -36,7 +36,7 @@ function AppHeaderLink({children, href}: {children: React.ReactNode; href: strin
 }
 
 export function AppHeader() {
-  const {setThemeMode, themeMode} = useApp()
+  const {colorScheme, setColorScheme} = useApp()
 
   return (
     <Root data-name="AppHeader" forwardedAs="header">
@@ -113,12 +113,12 @@ export function AppHeader() {
           </Stack>
 
           <Switch
-            checked={themeMode === 'dark'}
+            checked={colorScheme === 'dark'}
             onChange={(event) => {
               if (event.currentTarget.checked) {
-                setThemeMode('dark')
+                setColorScheme('dark')
               } else {
-                setThemeMode('light')
+                setColorScheme('light')
               }
             }}
           />

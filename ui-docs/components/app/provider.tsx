@@ -1,11 +1,27 @@
+import {
+  CardProvider,
+  ColorSchemeKey,
+  LayerProvider,
+  studioTheme,
+  ThemeProvider,
+  usePrefersDark,
+} from '@sanity/ui'
 import React, {useState} from 'react'
 import {AppContext} from './context'
+import {GlobalStyle} from './globalStyle'
 
-const PREFERS_DARK_MODE =
-  typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)').matches : false
+export function AppProvider({children}: {children?: React.ReactNode}) {
+  const prefersDark = usePrefersDark()
+  const [colorScheme, setColorScheme] = useState<ColorSchemeKey>(prefersDark ? 'dark' : 'light')
 
-export function AppProvider({children}: {children: React.ReactNode}) {
-  const [themeMode, setThemeMode] = useState<'light' | 'dark'>(PREFERS_DARK_MODE ? 'dark' : 'light')
-
-  return <AppContext.Provider value={{setThemeMode, themeMode}}>{children}</AppContext.Provider>
+  return (
+    <ThemeProvider theme={studioTheme}>
+      <CardProvider scheme={colorScheme}>
+        <GlobalStyle scheme={colorScheme} />
+        <AppContext.Provider value={{colorScheme, setColorScheme}}>
+          <LayerProvider id="root">{children}</LayerProvider>
+        </AppContext.Provider>
+      </CardProvider>
+    </ThemeProvider>
+  )
 }

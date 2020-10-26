@@ -1,8 +1,9 @@
+import {ColorSchemeKey} from '@sanity/ui'
 import {createContext} from 'react'
 
 export interface AppContextValue {
-  setThemeMode: (mode: 'dark' | 'light') => void
-  themeMode: 'dark' | 'light'
+  colorScheme: ColorSchemeKey
+  setColorScheme: (mode: ColorSchemeKey) => void
 }
 
 export const AppContext = createContext<AppContextValue | null>(null)

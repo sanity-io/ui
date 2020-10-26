@@ -9,7 +9,7 @@ export function CodeExample(props: {code: string; language: string}) {
 
   return (
     <Card marginY={[2, 2, 3, 4]} radius={2} shadow={1} style={{overflow: 'hidden'}}>
-      <div style={{overflow: 'auto'}}>
+      <Card style={{overflow: 'auto'}} tone="transparent">
         {result.type === 'success' && <Box padding={[3, 3, 4, 5]}>{result.node}</Box>}
         {result.type === 'error' && (
           <Card padding={[3, 3, 4, 5]}>
@@ -18,8 +18,8 @@ export function CodeExample(props: {code: string; language: string}) {
             </Code>
           </Card>
         )}
-      </div>
-      <Card padding={[3, 3, 4, 5]} tone="transparent" style={{overflow: 'auto'}}>
+      </Card>
+      <Card padding={[3, 3, 4, 5]} style={{overflow: 'auto'}}>
         <Code language={language} size={[2, 2, 3]}>
           {code}
         </Code>
