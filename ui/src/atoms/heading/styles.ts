@@ -27,9 +27,21 @@ export function headingBaseStyles(props: {theme: Theme}) {
     & a {
       text-decoration: none;
       border-radius: 1px;
+      color: var(--card-link-color);
+      outline: none;
+
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+      }
     }
 
-    & svg {
+    & > svg {
       vertical-align: baseline;
     }
   `
