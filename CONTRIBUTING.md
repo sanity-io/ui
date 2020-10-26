@@ -4,8 +4,8 @@
 
 ```sh
 # clone and install dependencies
-git clone git@github.com:sanity-io/design-system.git
-cd design-system
+git clone git@github.com:sanity-io/design.git
+cd design
 npm install
 
 # To run the ui-storybook dev server
