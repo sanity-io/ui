@@ -1,4 +1,11 @@
-import NextDocument, {DocumentContext, DocumentProps, Head, Main, NextScript} from 'next/document'
+import NextDocument, {
+  DocumentContext,
+  DocumentProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document'
 import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
 
@@ -31,7 +38,7 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
 
   render() {
     return (
-      <html>
+      <Html>
         <Head>
           <meta charSet="utf-8" />
           <link rel="icon" href="/favicon.ico" />
@@ -42,7 +49,7 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }
