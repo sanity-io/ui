@@ -12,6 +12,7 @@
     "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
     "dev:example-studio": "lerna run --stream --scope sanity-design-example-studio dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
+    "release": "lerna publish --no-private",
     "lint": "lerna run lint",
     "test": "lerna run test",
     "type-check": "lerna run type-check"

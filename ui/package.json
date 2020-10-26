@@ -66,5 +66,8 @@
     "components"
   ],
   "author": "Sanity.io <hello@sanity.io>",
-  "homepage": "https://www.sanity.io/"
+  "homepage": "https://www.sanity.io/",
+  "publishConfig": {
+    "access": "restricted"
+  }
 }
