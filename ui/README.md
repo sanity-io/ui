@@ -3,7 +3,10 @@
 The Sanity UI components.
 
 ```sh
-npm install @sanity/ui react styled-components
+npm install @sanity/ui
+
+# Install peer dependencies
+npm install @popperjs/core react react-popper react-refractor styled-components
 ```
 
 [![npm version](https://img.shields.io/npm/v/@sanity/ui.svg?style=flat-square)](https://www.npmjs.com/package/@sanity/ui)
