@@ -6,16 +6,16 @@
 # clone and install dependencies
 git clone git@github.com:sanity-io/design.git
 cd design
-npm install
+yarn
 
 # To run the ui-storybook dev server
-npm run dev:storybook
+yarn dev:storybook
 
 # To run the ui-docs dev server
-npm run dev:docs
+yarn dev:docs
 
 # To run all servers
-npm run dev
+yarn dev
 ```
 
 ## Testing
@@ -23,8 +23,8 @@ npm run dev
 There are currently no unit tests or integration tests, although there are checks to lint and type check the source code.
 
 ```sh
-npm run lint
-npm run type-check
+yarn lint
+yarn type-check
 ```
 
 ## Git workflow
@@ -38,4 +38,8 @@ If you’re adding an urgent bug fix, then code review is not required.
 
 ## Publishing
 
-TBD.
+To release updated packages, run this command:
+
+```sh
+yarn release
+```
