@@ -1,4 +1,3 @@
-import {text} from '@storybook/addon-knobs'
 import React, {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {rem, margin, padding, radius} from '../../styles'
@@ -176,15 +175,12 @@ export const TextInput = forwardRef(
 
     const uiRadius = getResponsiveProp(radius)
 
-    const placeholder = text('Placeholder', '', 'Props')
-
     return (
       <Root {...marginProps} disabled={disabled} scheme={card.scheme} uiRadius={uiRadius}>
         <Input
           {...restProps}
           {...paddingProps}
           disabled={disabled}
-          placeholder={placeholder}
           ref={ref}
           type="text"
           uiSize={uiSize}
