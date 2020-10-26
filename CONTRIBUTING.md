@@ -1,20 +1,26 @@
-# Contributing to Sanity Design System
+# Contributing to Sanity Design
 
 ## Getting started
 
 ```sh
-# clone and install dependencies
+# Clone and install dependencies
 git clone git@github.com:sanity-io/design.git
 cd design
 yarn
 
-# To run the ui-storybook dev server
-yarn dev:storybook
-
-# To run the ui-docs dev server
+# Run the docs dev servers (Studio and Next.js app)
 yarn dev:docs
 
-# To run all servers
+# Run the Studio example
+yarn dev:example-studio
+
+# Run the Manage example
+yarn dev:manage-studio
+
+# Run the Storybook dev server
+yarn dev:storybook
+
+# Run all servers
 yarn dev
 ```
 
