@@ -19,7 +19,7 @@
     "@sanity/ui": "1.0.0-alpha.2",
     "next": "^9.5.5",
     "next-sanity": "^0.1.5",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-dom": "^16.14.0",
     "react-popper": "^2.2.3",
     "react-refractor": "^2.1.2",
