@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
-import {atomRoutes} from '../../routes'
+import {atomRoutes, componentRoutes, hookRoutes, utilRoutes} from '../../routes'
 import {useApp} from './hooks'
 
 const Root = styled(Box)`
@@ -47,7 +47,7 @@ export function AppHeader() {
               <strong>@sanity/ui</strong>
             </Code>
 
-            <a href="https://www.npmjs.com/package/@sanity/ui">
+            <a href="https://www.npmjs.com/package/@sanity/ui" rel="noreferrer" target="_blank">
               <img src="https://img.shields.io/npm/v/@sanity/ui.svg?style=flat-square" />
             </a>
           </Stack>
@@ -66,7 +66,7 @@ export function AppHeader() {
             </Label>
             <Stack as="ul" space={3}>
               {atomRoutes.map((route) => (
-                <AppHeaderLink href={`/atoms/${route.slug}`} key={route.slug}>
+                <AppHeaderLink href={`/atom/${route.slug}`} key={route.slug}>
                   {route.title}
                 </AppHeaderLink>
               ))}
@@ -78,7 +78,11 @@ export function AppHeader() {
               Components
             </Label>
             <Stack as="ul" space={3}>
-              <AppHeaderLink href="/components/dialog">Dialog</AppHeaderLink>
+              {componentRoutes.map((route) => (
+                <AppHeaderLink href={`/component/${route.slug}`} key={route.slug}>
+                  {route.title}
+                </AppHeaderLink>
+              ))}
             </Stack>
           </Stack>
 
@@ -87,7 +91,11 @@ export function AppHeader() {
               Hooks
             </Label>
             <Stack as="ul" space={3}>
-              <AppHeaderLink href="/hooks/use-click-outside">useClickOutside</AppHeaderLink>
+              {hookRoutes.map((route) => (
+                <AppHeaderLink href={`/hook/${route.slug}`} key={route.slug}>
+                  {route.title}
+                </AppHeaderLink>
+              ))}
             </Stack>
           </Stack>
 
@@ -96,23 +104,24 @@ export function AppHeader() {
               Utils
             </Label>
             <Stack as="ul" space={3}>
-              <AppHeaderLink href="/utils/layer">Layer</AppHeaderLink>
-              <AppHeaderLink href="/utils/portal">Portal</AppHeaderLink>
+              {utilRoutes.map((route) => (
+                <AppHeaderLink href={`/util/${route.slug}`} key={route.slug}>
+                  {route.title}
+                </AppHeaderLink>
+              ))}
             </Stack>
           </Stack>
 
-          <div>
-            <Switch
-              checked={themeMode === 'dark'}
-              onChange={(event) => {
-                if (event.currentTarget.checked) {
-                  setThemeMode('dark')
-                } else {
-                  setThemeMode('light')
-                }
-              }}
-            />
-          </div>
+          <Switch
+            checked={themeMode === 'dark'}
+            onChange={(event) => {
+              if (event.currentTarget.checked) {
+                setThemeMode('dark')
+              } else {
+                setThemeMode('light')
+              }
+            }}
+          />
         </Stack>
       </Box>
     </Root>

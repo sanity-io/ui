@@ -21,3 +21,23 @@ export const atomRoutes = [
   {slug: 'text', title: 'Text'},
   {slug: 'tooltip', title: 'Tooltip'},
 ]
+
+export const componentRoutes = [
+  {slug: 'autocomplete', title: 'Autocomplete'},
+  {slug: 'dialog', title: 'Dialog'},
+  {slug: 'hotkeys', title: 'Hotkeys'},
+  {slug: 'menu', title: 'Menu'},
+]
+
+export const hookRoutes = [
+  {slug: 'use-click-outside', title: 'useClickOutside'},
+  {slug: 'use-global-key-down', title: 'useGlobalKeyDown'},
+  {slug: 'use-prefers-dark', title: 'usePrefersDark'},
+]
+
+export const utilRoutes = [
+  {slug: 'element-query', title: 'ElementQuery'},
+  {slug: 'layer', title: 'Layer'},
+  {slug: 'portal', title: 'Portal'},
+  {slug: 'resize-observer', title: 'ResizeObserver'},
+]
