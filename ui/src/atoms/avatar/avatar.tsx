@@ -20,7 +20,6 @@ export interface AvatarProps {
   animateArrowFrom?: AvatarPosition
   status?: AvatarStatus
   size?: AvatarSize
-  // tone?: 'navbar'
 }
 
 const Root = styled.div<{uiColor: string; size: AvatarSize}>`
@@ -142,7 +141,6 @@ export const Avatar = forwardRef(
       animateArrowFrom,
       status = 'online',
       size = 0,
-      // tone,
       ...restProps
     } = props
 
@@ -188,7 +186,6 @@ export const Avatar = forwardRef(
         aria-label={title}
         data-arrow-position={arrowPosition}
         data-status={status}
-        // data-tone={tone}
         ref={ref}
         size={size}
         title={title}

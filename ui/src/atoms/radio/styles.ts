@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {Theme} from '../../theme'
+import {ColorSchemeKey, Theme} from '../../theme'
 
 export function radioBaseStyles() {
   return css`
@@ -9,14 +9,15 @@ export function radioBaseStyles() {
   `
 }
 
-export function inputElementStyles(props: {theme: Theme}) {
-  const {input} = props.theme.color.light
-  // Hide the input element, while still making it respond to focus
+export function inputElementStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
+  const tone = theme.color[scheme].input.tones.default
+  const {markSize, size} = theme.input.radio
+  const dist = (size - markSize) / 2
+
   return css`
+    appearance: none;
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
     opacity: 0;
     height: 100%;
@@ -25,52 +26,45 @@ export function inputElementStyles(props: {theme: Theme}) {
     z-index: 1;
     padding: 0;
     margin: 0;
+    border-radius: ${rem(size / 2)};
 
-    /* Checkbox focus styles */
-    &:focus + [data-name='representation'] {
-      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #4e91fc;
+    & + span {
+      display: block;
+      position: relative;
+      height: ${rem(size)};
+      width: ${rem(size)};
+      border-radius: ${rem(size / 2)};
+      background: ${tone.enabled.bg};
+      box-shadow: 0 0 0 1px ${tone.enabled.border};
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: ${rem(dist)};
+        left: ${rem(dist)};
+        height: ${rem(markSize)};
+        width: ${rem(markSize)};
+        border-radius: ${rem(markSize / 2)};
+        background: ${tone.enabled.fg};
+        opacity: 0;
+      }
     }
 
-    &:checked + [data-name='representation']::after {
+    &:focus + span {
+      box-shadow: 0 0 0 2px var(--card-focus-ring-color);
+    }
+
+    &:checked + span::after {
       opacity: 1;
     }
 
-    &:disabled + [data-name='representation'] {
-      box-shadow: 0 0 0 1px ${input.tones.default.disabled.border};
-      background: ${input.tones.default.disabled.bg};
+    &:disabled + span {
+      box-shadow: 0 0 0 1px ${tone.disabled.border};
+      background: ${tone.disabled.bg};
+
       &::after {
-        background: ${input.tones.default.disabled.fg};
+        background: ${tone.disabled.fg};
       }
-    }
-  `
-}
-
-export function representationStyles(props: {theme: Theme}) {
-  const {radio} = props.theme.input
-  const {input} = props.theme.color.light
-
-  return css`
-    flex-shrink: 0;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: ${rem(radio.size)};
-    width: ${rem(radio.size)};
-    box-shadow: 0 0 0 1px ${input.tones.default.enabled.border};
-    border-radius: ${rem(radio.size)};
-    line-height: 1;
-    background: ${input.tones.default.enabled.bg};
-
-    &::after {
-      position: absolute;
-      content: '';
-      height: 100%;
-      width: 100%;
-      background: ${input.tones.default.enabled.fg};
-      border-radius: 100%;
-      opacity: 0;
-      transform: scale(0.5);
     }
   `
 }

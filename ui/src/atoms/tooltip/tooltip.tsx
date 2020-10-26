@@ -97,12 +97,8 @@ export function Tooltip(
     >
       <Card radius={2} shadow={3}>
         {content}
+        <TooltipArrow ref={setArrowElement} style={popper.styles.arrow} />
       </Card>
-      <TooltipArrow
-        ref={setArrowElement}
-        style={popper.styles.arrow}
-        // tone={tone}
-      />
     </Root>
   )
 

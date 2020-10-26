@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {Theme} from '../../theme'
+import {ColorSchemeKey, Theme} from '../../theme'
 
 export function checkboxBaseStyles() {
   return css`
@@ -9,80 +9,65 @@ export function checkboxBaseStyles() {
   `
 }
 
-export function inputElementStyles(props: {theme: Theme}) {
-  const {input} = props.theme.color.light
-  // Hide the input element, while still making it respond to focus
+export function inputElementStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
+  const color = theme.color[scheme].input
+  const tone = color.tones.default
+  const {checkbox} = theme.input
+
   return css`
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    opacity: 0;
-    height: 100%;
     width: 100%;
+    height: 100%;
     outline: none;
+    opacity: 0;
     z-index: 1;
     padding: 0;
     margin: 0;
 
-    /* Checkbox focus styles */
-    &:focus + [data-name='representation'] {
-      /* @todo: Use focus ring color from card theme */
-      box-shadow: 0 0 0 1px #fff, 0 0 0 3px #4e91fc;
-    }
+    & + span {
+      position: relative;
+      display: block;
+      height: ${rem(checkbox.size)};
+      width: ${rem(checkbox.size)};
+      box-sizing: border-box;
+      box-shadow: 0 0 0 1px ${tone.enabled.border};
+      border-radius: 3px;
+      line-height: 1;
+      background: ${tone.enabled.bg};
 
-    &:checked + [data-name='representation'] {
-      /* Checkmark styles when checkbox is checked */
-      .checkmark {
-        opacity: 1;
-      }
-    }
-
-    &:disabled + [data-name='representation'] {
-      /* Checkbox styles when checkbox is disabled */
-      background: ${input.tones.default.disabled.bg};
-      box-shadow: 0 0 0 1px ${input.tones.default.disabled.border};
-      color: ${input.tones.default.disabled.fg};
-    }
-
-    &:indeterminate + [data-name='representation'] {
-      /* Checkmark style when checkbox has no value */
-      .indeterminate {
+      & > svg {
         display: block;
-        opacity: 1;
-        transform: scale(0.6);
+        position: absolute;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        /* transition: 100ms opacity; */
+
+        & > path {
+          vector-effect: non-scaling-stroke;
+          stroke-width: 2 !important;
+        }
       }
     }
-  `
-}
 
-export function representationStyles(props: {theme: Theme}) {
-  const {checkbox} = props.theme.input
-  const {input} = props.theme.color.light
-  /* Styles for the checkbox wrapper */
-  return css`
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: ${rem(checkbox.size)};
-    width: ${rem(checkbox.size)};
-    box-sizing: border-box;
-    box-shadow: 0 0 0 1px ${input.tones.default.enabled.border};
-    border-radius: 3px;
-    line-height: 1;
-    background: ${input.tones.default.enabled.bg};
-  `
-}
+    &:focus + span {
+      box-shadow: 0 0 0 2px var(--card-focus-ring-color);
+    }
 
-export function markStyles() {
-  return css`
-    position: absolute;
-    transform: scale(0.8);
-    opacity: 0;
-    flex: 1;
-    height: 100%;
-    width: 100%;
+    &:checked + span > svg:first-child {
+      opacity: 1;
+    }
+
+    &:disabled + span {
+      background: ${tone.disabled.bg};
+      box-shadow: 0 0 0 1px ${tone.disabled.border};
+      color: ${tone.disabled.fg};
+    }
+
+    &:indeterminate + span > svg:last-child {
+      opacity: 1;
+    }
   `
 }

@@ -1,4 +1,4 @@
-export type ColorSchemeKey = 'brand' | 'dark' | 'light'
+export type ColorSchemeKey = 'dark' | 'light'
 
 export interface ThemeFontSize {
   ascenderHeight: number
@@ -76,12 +76,19 @@ export interface ThemeCardCStateColor {
   }
 }
 
-export interface ThemeCardColor {
+export interface ThemeCardToneColor {
   enabled: ThemeCardCStateColor
   disabled: ThemeCardCStateColor
   hovered: ThemeCardCStateColor
   pressed: ThemeCardCStateColor
   selected: ThemeCardCStateColor
+}
+
+export interface ThemeCardColor {
+  tones: {
+    default: ThemeCardToneColor
+    transparent: ThemeCardToneColor
+  }
 }
 
 export interface ThemeSyntaxColor {
@@ -146,12 +153,7 @@ export interface ThemeColor {
     }
   }
 
-  card: {
-    tones: {
-      default: ThemeCardColor
-      transparent: ThemeCardColor
-    }
-  }
+  card: ThemeCardColor
 
   syntax: {
     tones: {
@@ -232,6 +234,7 @@ export interface ThemeInput {
   }
   radio: {
     size: number
+    markSize: number
   }
   switch: {
     width: number
@@ -248,7 +251,6 @@ export interface Theme {
     size: number[]
   }
   color: {
-    brand: ThemeColor
     dark: ThemeColor
     light: ThemeColor
   }

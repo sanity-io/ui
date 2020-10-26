@@ -16,11 +16,11 @@ const Root = styled.div`
     transform-origin: 7.5px 7.5px;
   }
 
-  [data-popper-placement^='top'] > & {
+  [data-popper-placement^='top'] > div > & {
     bottom: -15px;
   }
 
-  [data-popper-placement^='right'] > & {
+  [data-popper-placement^='right'] > div > & {
     left: -15px;
 
     & > svg {
@@ -28,7 +28,7 @@ const Root = styled.div`
     }
   }
 
-  [data-popper-placement^='left'] > & {
+  [data-popper-placement^='left'] > div > & {
     right: -15px;
 
     & > svg {
@@ -36,7 +36,7 @@ const Root = styled.div`
     }
   }
 
-  [data-popper-placement^='bottom'] > & {
+  [data-popper-placement^='bottom'] > div > & {
     top: -15px;
 
     & > svg {
