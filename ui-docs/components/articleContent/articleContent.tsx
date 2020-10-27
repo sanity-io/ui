@@ -14,8 +14,16 @@ export function ArticleContent({blocks, toc}: {blocks: any[]; toc: any}) {
 function buildSerializers(toc: any) {
   function CodeSerializer(props: any) {
     return (
-      <Card padding={3} radius={2}>
-        <Code language={props.node.language}>{props.node.code}</Code>
+      <Card
+        marginY={[2, 2, 3, 4]}
+        padding={[3, 3, 4, 5]}
+        radius={2}
+        shadow={1}
+        style={{overflow: 'auto'}}
+      >
+        <Code language={props.node.language} size={[2, 2, 3, 4]}>
+          {props.node.code}
+        </Code>
       </Card>
     )
   }
