@@ -1,29 +1,6 @@
 import BlockContent from '@sanity/block-content-to-react'
-import {Box, Card, Code, Heading, Text} from '@sanity/ui'
+import {Box, Heading, Text} from '@sanity/ui'
 import React from 'react'
-import {CodeExample, PropertyTable} from '..'
-
-function CodeSerializer(props: any) {
-  return (
-    <Card padding={3} radius={2}>
-      <Code language={props.node.language}>{props.node.code}</Code>
-    </Card>
-  )
-}
-
-function CodeExampleSerializer(props: any) {
-  if (!props.node || !props.node.code) return null
-
-  return <CodeExample code={props.node.code.code} language={props.node.code.language} />
-}
-
-function PropertyTableSerializer(props: any) {
-  const {node} = props
-
-  if (!node) return null
-
-  return <PropertyTable caption={node.caption} properties={node.properties || []} />
-}
 
 const headingProps = {
   h2: {
@@ -85,12 +62,9 @@ function BlockSerializer(props: any) {
 const serializers = {
   types: {
     block: BlockSerializer,
-    code: CodeSerializer,
-    codeExample: CodeExampleSerializer,
-    propertyTable: PropertyTableSerializer,
   },
 }
 
-export function ArticleContent({blocks}: {blocks: any[]}) {
+export function PropertyDescription({blocks}: {blocks: any[]}) {
   return <BlockContent blocks={blocks} serializers={serializers} />
 }
