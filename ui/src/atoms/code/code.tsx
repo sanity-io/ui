@@ -7,10 +7,11 @@ import {codeBaseStyles, codeSizeStyles} from './styles'
 interface CodeProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   language?: string
+  muted?: boolean
   size?: number | number[]
 }
 
-const Root = styled.pre(codeBaseStyles, codeSizeStyles)
+const Root = styled.pre<{size: number[]}>(codeBaseStyles, codeSizeStyles)
 
 export const Code = forwardRef(
   (props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {

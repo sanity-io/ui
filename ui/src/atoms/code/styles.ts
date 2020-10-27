@@ -119,8 +119,8 @@ function codeSyntaxHighlightingStyles({theme}: {theme: Theme}) {
   `
 }
 
-export function codeBaseStyles(props: {theme: Theme}) {
-  const {theme} = props
+export function codeBaseStyles(props: {muted?: boolean; theme: Theme}) {
+  const {muted, theme} = props
 
   return css`
     position: relative;
@@ -129,6 +129,11 @@ export function codeBaseStyles(props: {theme: Theme}) {
     display: block;
     padding: ${rem(1)} 0 0;
     margin: 0;
+
+    ${muted &&
+    css`
+      color: var(--card-muted-fg-color);
+    `}
 
     &:before {
       content: '';
