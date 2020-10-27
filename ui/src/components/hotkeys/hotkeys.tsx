@@ -1,58 +1,47 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {Card, Inline, Text} from '../../atoms'
+import {Inline, KBD} from '../../atoms'
 
 interface HotkeysProps {
+  padding?: number | number[]
+  radius?: number | number[]
   size?: number | number[]
+  space?: number | number[]
   keys?: string[]
 }
 
-const Root = styled.span`
-  display: inline-flex;
-  align-items: center;
+const Root = styled.kbd`
+  display: block;
+  font: inherit;
 `
 
-const KeyCard = styled(Card)`
-  min-width: 1em;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
+const Key = styled(KBD)`
+  display: block;
+`
 
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: inset 0 0 0 1px currentColor;
-    opacity: 0.25;
-    pointer-events: none;
+export const Hotkeys = forwardRef(
+  (
+    props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref'>,
+    ref: React.Ref<HTMLElement>
+  ) => {
+    const {keys, padding, radius, size, space = 1, ...restProps} = props
+
+    if (!keys || keys.length === 0) {
+      return <span />
+    }
+
+    return (
+      <Root {...restProps} ref={ref}>
+        <Inline as="span" space={space}>
+          {keys.map((key, i) => (
+            <Key key={i} padding={padding} radius={radius} size={size}>
+              {key}
+            </Key>
+          ))}
+        </Inline>
+      </Root>
+    )
   }
-`
+)
 
-const KeyText = styled(Text)`
-  color: inherit;
-  text-transform: capitalize;
-`
-
-export function Hotkeys(props: HotkeysProps) {
-  const {keys, size} = props
-
-  if (!keys || keys.length === 0) {
-    return <span />
-  }
-
-  return (
-    <Root>
-      <Inline>
-        {keys.map((key, i) => (
-          <KeyCard key={i} padding={2} radius={2}>
-            <KeyText size={size}>{key}</KeyText>
-          </KeyCard>
-        ))}
-      </Inline>
-    </Root>
-  )
-}
+Hotkeys.displayName = 'Hotkeys'
