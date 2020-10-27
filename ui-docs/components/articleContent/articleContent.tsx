@@ -23,7 +23,13 @@ function buildSerializers(toc: any) {
   function CodeExampleSerializer(props: any) {
     if (!props.node || !props.node.code) return null
 
-    return <CodeExample code={props.node.code.code} language={props.node.code.language} />
+    return (
+      <CodeExample
+        code={props.node.code.code}
+        hookCode={props.node.hook?.code}
+        language={props.node.code.language}
+      />
+    )
   }
 
   function PropertyTableSerializer(props: any) {

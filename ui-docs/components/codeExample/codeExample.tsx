@@ -1,11 +1,13 @@
 import * as ui from '@sanity/ui'
 import {Box, Card, Code} from '@sanity/ui'
 import React from 'react'
-import {renderCode} from './helpers'
+import {renderCode, renderHooks} from './helpers'
 
-export function CodeExample(props: {code: string; language: string}) {
-  const {code, language} = props
-  const result = renderCode(code, {React, ...ui})
+export function CodeExample(props: {code: string; hookCode?: string; language: string}) {
+  const {code, hookCode, language} = props
+  const hook = renderHooks(hookCode || '', {React})
+  const hooksState = hook.fn ? hook.fn() : {}
+  const result = renderCode(code, {React, ...hooksState, ...ui})
 
   return (
     <Card marginY={[2, 2, 3, 4]} radius={2} shadow={1} style={{overflow: 'hidden'}}>

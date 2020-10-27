@@ -12,7 +12,7 @@ export function Article({article, slug}: {article?: any; slug: string}) {
     )
   }
 
-  const toc = getTOC(article.content)
+  const toc = article.content ? getTOC(article.content) : []
 
   return (
     <article>
