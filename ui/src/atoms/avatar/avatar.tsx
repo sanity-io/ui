@@ -9,16 +9,17 @@ import {avatarTheme} from './theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from './types'
 
 export interface AvatarProps {
+  // alt?: string
+  animateArrowFrom?: AvatarPosition
+  arrowPosition?: AvatarPosition
   as?: React.ElementType | keyof JSX.IntrinsicElements
   color?: AvatarColorKey
-  src?: string
-  title?: string
   initials?: string
   onImageLoadError?: (event: Error) => void
-  arrowPosition?: AvatarPosition
-  animateArrowFrom?: AvatarPosition
-  status?: AvatarStatus
   size?: AvatarSize
+  src?: string
+  status?: AvatarStatus
+  title?: string
 }
 
 const Root = styled.div<{uiColor: string; size: AvatarSize}>`
