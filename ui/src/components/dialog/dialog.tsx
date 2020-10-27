@@ -16,19 +16,21 @@ interface DialogProps {
   width?: number
 }
 
-const Root = styled(Layer)(({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
-  const tone = theme.color[scheme].card.tones.default
+const Root = styled(Layer)<{scheme: ColorSchemeKey}>(
+  ({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
+    const tone = theme.color[scheme].card.tones.default
 
-  return css`
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.25em;
-    outline: none;
-    background: ${tone.enabled.shadow.penumbra};
-  `
-})
+    return css`
+      position: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25em;
+      outline: none;
+      background: ${tone.enabled.shadow.penumbra};
+    `
+  }
+)
 
 const DialogContainer = styled(Container)`
   width: 100%;
