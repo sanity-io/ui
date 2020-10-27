@@ -16,6 +16,7 @@
     "@popperjs/core": "^2.4.4",
     "@sanity/ui": "^1.0.0-alpha.7",
     "@storybook/addon-actions": "^6.0.27",
+    "@storybook/addon-a11y": "^6.0.27",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^6.0.27",
     "@storybook/addon-links": "^6.0.27",

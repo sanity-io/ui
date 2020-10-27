@@ -3,8 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled(Card)`
-  background: ${({theme}) => theme.color.light.card.tones.transparent.enabled.bg};
-  color: ${({theme}) => theme.color.light.card.tones.transparent.enabled.fg};
   display: flex;
   align-items: center;
   justify-content: center;
