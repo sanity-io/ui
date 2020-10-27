@@ -1,5 +1,4 @@
 import {black, hues, white} from '@sanity/color'
-import {color} from '@storybook/addon-knobs'
 import {ThemeColor} from '../../../types'
 import {buildSyntaxColor} from '../../buildSyntaxColor'
 import {card} from './card'
