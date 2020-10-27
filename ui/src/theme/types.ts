@@ -1,3 +1,14 @@
+export type AvatarColorKey =
+  | 'gray'
+  | 'blue'
+  | 'purple'
+  | 'magenta'
+  | 'red'
+  | 'orange'
+  | 'yellow'
+  | 'green'
+  | 'cyan'
+
 export type ColorSchemeKey = 'dark' | 'light'
 
 export interface ThemeFontSize {

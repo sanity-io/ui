@@ -1,9 +1,8 @@
 import {useId} from '@reach/auto-id'
-import {ColorHueKey} from '@sanity/color'
 import React, {forwardRef, useCallback, useEffect, useState} from 'react'
 import styled, {css} from 'styled-components'
 import {rem} from '../../styles'
-import {ColorSchemeKey, Theme, useTheme} from '../../theme'
+import {AvatarColorKey, ColorSchemeKey, Theme, useTheme} from '../../theme'
 import {useCard} from '../card'
 import {Text} from '../text'
 import {avatarTheme} from './theme'
@@ -11,7 +10,7 @@ import {AvatarPosition, AvatarSize, AvatarStatus} from './types'
 
 export interface AvatarProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  color?: ColorHueKey
+  color?: AvatarColorKey
   src?: string
   title?: string
   initials?: string
