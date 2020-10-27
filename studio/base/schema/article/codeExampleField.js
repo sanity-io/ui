@@ -16,6 +16,11 @@ export const codeExampleField = {
       name: 'code',
       title: 'Code',
     },
+    {
+      type: 'code',
+      name: 'hook',
+      title: 'React hook code',
+    },
   ],
   preview: {
     select: {
