@@ -25,6 +25,7 @@
     "react-dom": "^16.14.0",
     "react-popper": "^2.2.3",
     "react-refractor": "^2.1.2",
+    "slugify": "^1.4.5",
     "styled-components": "^5.2.0"
   },
   "devDependencies": {

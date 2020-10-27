@@ -1,15 +1,14 @@
-import {Heading, Stack, Text} from '@sanity/ui'
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
-import {getClient, usePreviewSubscription} from '../sanity'
-import {AppLayout, ArticleContent, TimeAgo} from '~/components'
+import {AppLayout, Article} from '~/components'
+import {getClient, usePreviewSubscription} from '~/sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 
 const PAGE_QUERY = groq`
   {
-    "article": *[_type == "article" && slug.current == "intro"] {
+    "article": *[_type == "article" && slug.current == $slug] {
       _updatedAt,
       title,
       content
@@ -17,39 +16,27 @@ const PAGE_QUERY = groq`
   }
 `
 
-export async function getStaticProps(arg: any) {
-  const {preview = __DEV__} = arg
-  const params = {}
+export async function getStaticProps({preview = __DEV__}) {
+  const params = {slug: 'intro'}
   const data = await getClient(preview).fetch(PAGE_QUERY, params)
 
   return {props: {data, params, preview}}
 }
 
-function IndexPage({data: initialData, params, preview}: any) {
+function IndexPage({data: initialData, params = {}, preview}: any) {
   const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
-  const {article = {}} = data
+
+  const {article} = data
 
   return (
     <>
       <Head>
-        <title>{article.title || 'Sanity UI'}</title>
-        <link rel="icon" href="/favicon.ico" />
+        {article && <title>{article.title} – Sanity UI</title>}
+        {!article && 'Missing article – Sanity UI'}
       </Head>
 
       <AppLayout>
-        <Stack space={[4, 4, 5, 6]}>
-          <Heading as="h1" size={[3, 3, 4, 5]}>
-            {article.title || <>Sanity UI</>}
-          </Heading>
-
-          {article.content && <ArticleContent blocks={article.content} />}
-
-          {article._updatedAt && (
-            <Text muted size={[0, 1, 2]}>
-              Updated <TimeAgo date={article._updatedAt} />
-            </Text>
-          )}
-        </Stack>
+        <Article article={article} slug={params.slug} />
       </AppLayout>
     </>
   )

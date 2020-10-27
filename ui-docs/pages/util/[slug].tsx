@@ -1,9 +1,8 @@
-import {Heading, Stack, Text} from '@sanity/ui'
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
 import {utilRoutes} from '../../routes'
-import {AppLayout, ArticleContent, TimeAgo} from '~/components'
+import {AppLayout, Article} from '~/components'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
@@ -43,27 +42,7 @@ function UtilPage({data: initialData, params = {}, preview}: any) {
       </Head>
 
       <AppLayout>
-        {!article && (
-          <Text>
-            Missing article with slug <code>{params.slug}</code>!
-          </Text>
-        )}
-
-        {article && (
-          <Stack space={[4, 4, 5, 6]}>
-            <Heading as="h1" size={[2, 2, 3, 4]}>
-              {article.title}
-            </Heading>
-
-            {article.content && <ArticleContent blocks={article.content} />}
-
-            {article._updatedAt && (
-              <Text muted size={[0, 1, 2]}>
-                Updated <TimeAgo date={article._updatedAt} />
-              </Text>
-            )}
-          </Stack>
-        )}
+        <Article article={article} slug={params.slug} />
       </AppLayout>
     </>
   )
