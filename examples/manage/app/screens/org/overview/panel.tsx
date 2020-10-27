@@ -69,9 +69,7 @@ export function OverviewPanel() {
                         <Avatar color="yellow" size={1} />
                         <Avatar color="orange" size={1} />
                       </Inline>
-                      <Button icon="add" mode="ghost">
-                        Invite new members
-                      </Button>
+                      <Button icon="add" mode="ghost" text="Invite new members" />
                     </Stack>
                   </Card>
                 </Stack>

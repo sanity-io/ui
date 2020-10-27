@@ -14,9 +14,8 @@ export function OrganizationTabs() {
         mode="bleed"
         onClick={handleLinkClick}
         selected={!segments[2]}
-      >
-        Overview
-      </Button>
+        text="Overview"
+      />
       <Button
         as="a"
         href="/org/sanity/projects"
@@ -24,9 +23,8 @@ export function OrganizationTabs() {
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'projects'}
-      >
-        Projects
-      </Button>
+        text="Projects"
+      />
       <Button
         as="a"
         href="/org/sanity/members"
@@ -34,9 +32,8 @@ export function OrganizationTabs() {
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'members'}
-      >
-        Members
-      </Button>
+        text="Members"
+      />
       <Button
         as="a"
         href="/org/sanity/activity"
@@ -44,9 +41,8 @@ export function OrganizationTabs() {
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'activity'}
-      >
-        Activity
-      </Button>
+        text="Activity"
+      />
       <Button
         as="a"
         href="/org/sanity/usage"
@@ -54,9 +50,8 @@ export function OrganizationTabs() {
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'usage'}
-      >
-        Usage
-      </Button>
+        text="Usage"
+      />
       <Button
         as="a"
         href="/org/sanity/billing"
@@ -64,9 +59,8 @@ export function OrganizationTabs() {
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'billing'}
-      >
-        Billing
-      </Button>
+        text="Billing"
+      />
       <Button
         as="a"
         href="/org/sanity/settings"
@@ -74,9 +68,8 @@ export function OrganizationTabs() {
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'settings'}
-      >
-        Settings
-      </Button>
+        text="Settings"
+      />
     </Inline>
   )
 }

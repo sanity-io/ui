@@ -35,7 +35,7 @@ export function Navbar() {
             </Box>
             <Box flex={1}>
               <MenuButton
-                button={<Button mode="bleed">Sanity.io</Button>}
+                button={<Button mode="bleed" text="Sanity.io" />}
                 id="select-org"
                 menu={
                   <Menu>
