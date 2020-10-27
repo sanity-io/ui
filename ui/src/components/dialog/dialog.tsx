@@ -1,8 +1,9 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
-import styled from 'styled-components'
-import {Box, Button, Card, Container, Flex, Text} from '../../atoms'
+import styled, {css} from 'styled-components'
+import {Box, Button, Card, Container, Flex, Text, useCard} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
+import {ColorSchemeKey, Theme} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
 
 interface DialogProps {
@@ -15,14 +16,19 @@ interface DialogProps {
   width?: number
 }
 
-const Root = styled(Layer)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25em;
-  outline: none;
-  background: var(--card-shadow-umbra-color);
-`
+const Root = styled(Layer)(({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
+  const tone = theme.color[scheme].card.tones.default
+
+  return css`
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25em;
+    outline: none;
+    background: ${tone.enabled.shadow.penumbra};
+  `
+})
 
 const DialogContainer = styled(Container)`
   width: 100%;
@@ -176,7 +182,7 @@ export const Dialog = forwardRef(
       width = 0,
       ...restProps
     } = props
-
+    const card = useCard()
     const preDivRef = useRef<HTMLDivElement | null>(null)
     const postDivRef = useRef<HTMLDivElement | null>(null)
     const cardRef = useRef<HTMLDivElement | null>(null)
@@ -212,6 +218,7 @@ export const Dialog = forwardRef(
           onFocus={handleFocus}
           ref={ref}
           role="dialog"
+          scheme={card.scheme}
         >
           <div ref={preDivRef} tabIndex={0} />
           <DialogCard
