@@ -12,7 +12,7 @@ const Root = styled(Card)`
     @media (min-width: ${rem(theme.media[1])}) {
       display: grid;
       height: 100%;
-      grid-template-columns: minmax(10rem, 15rem) 3fr;
+      grid-template-columns: minmax(10rem, 18rem) 3fr;
     }
   `};
 `
@@ -25,7 +25,7 @@ const SideMenu = styled(Card)`
       top: 0;
       left: 0;
       bottom: 0;
-      transform: translate3d(-100%, 0, 0);
+      transform: translate3d(calc(-100% - 1px), 0, 0);
       transition: transform 200ms;
       width: 12rem;
       box-shadow: 0 0 0 1px var(--card-shadow-outline-color);
@@ -92,7 +92,7 @@ export function AppLayout(props: {children: React.ReactNode}) {
 
         <ContentCard>
           <Container as="main" width={2} style={{height: '100%'}}>
-            <Box as="main" padding={[4, 5]} paddingY={[5, 5, 6, 7]}>
+            <Box as="main" paddingX={[4, 5, 6, 7]} paddingY={[5, 6, 7, 8]}>
               {props.children}
             </Box>
           </Container>

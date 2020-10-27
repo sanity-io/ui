@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.dist",
+  "include": ["./typings/*.d.ts"],
+  "files": ["./src/index.ts"]
+}

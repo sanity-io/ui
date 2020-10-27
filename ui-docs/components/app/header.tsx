@@ -40,7 +40,7 @@ export function AppHeader() {
 
   return (
     <Root data-name="AppHeader" forwardedAs="header">
-      <Box as="nav" paddingX={[5]} paddingY={[5, 5, 6, 7]}>
+      <Box as="nav" paddingX={[4, 5, 6]} paddingY={[5, 6, 7, 8]}>
         <Stack space={5}>
           <Stack space={3}>
             <Code as="h1" size={[2, 2, 3]}>
