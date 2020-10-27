@@ -1,3 +1,4 @@
 .DS_Store
 /.vscode
+/lerna-debug.log
 /node_modules
