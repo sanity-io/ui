@@ -19,7 +19,7 @@
     "@sanity/icons": "^1.0.0-alpha.3",
     "@sanity/ui": "^1.0.0-alpha.7",
     "date-fns": "^2.16.1",
-    "next": "^9.5.5",
+    "next": "^10.0.0",
     "next-sanity": "^0.1.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
