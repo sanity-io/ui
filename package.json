@@ -13,9 +13,6 @@
     "dev:ui-docs": "lerna run --stream --scope sanity-ui-docs dev",
     "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
-    "postinstall": "run-p postinstall:husky",
-    "postinstall:husky": "node node_modules/husky/lib/installer/bin install",
-    "pre-commit": "run-p lint type-check",
     "release": "lerna publish --no-private",
     "lint": "lerna run lint",
     "test": "lerna run test",
@@ -47,5 +44,10 @@
     "ui",
     "ui-docs",
     "ui-storybook"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "run-p lint type-check"
+    }
+  }
 }
