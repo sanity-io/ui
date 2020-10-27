@@ -70,7 +70,7 @@ export const plain = () => {
       placement={placement}
       radius={radius}
     >
-      <Button>Hello</Button>
+      <Button text="Hello" />
     </Popover>
   )
 }

@@ -22,12 +22,12 @@ const themeColor: ThemeColor = {
         modes: {
           default: {
             bg: hues.gray[200].hex,
-            fg: hues.gray[700].hex,
+            fg: hues.gray[800].hex,
             border: hues.gray[200].hex,
           },
           outline: {
             bg: 'transparent',
-            fg: hues.gray[600].hex,
+            fg: hues.gray[700].hex,
             border: hues.gray[200].hex,
           },
         },
@@ -36,12 +36,12 @@ const themeColor: ThemeColor = {
         modes: {
           default: {
             bg: hues.blue[200].hex,
-            fg: hues.blue[700].hex,
+            fg: hues.blue[800].hex,
             border: hues.blue[200].hex,
           },
           outline: {
             bg: 'transparent',
-            fg: hues.blue[600].hex,
+            fg: hues.blue[700].hex,
             border: hues.blue[200].hex,
           },
         },
@@ -50,12 +50,12 @@ const themeColor: ThemeColor = {
         modes: {
           default: {
             bg: hues.green[200].hex,
-            fg: hues.green[700].hex,
+            fg: hues.green[800].hex,
             border: hues.green[200].hex,
           },
           outline: {
             bg: 'transparent',
-            fg: hues.green[600].hex,
+            fg: hues.green[700].hex,
             border: hues.green[200].hex,
           },
         },
@@ -64,12 +64,12 @@ const themeColor: ThemeColor = {
         modes: {
           default: {
             bg: hues.yellow[200].hex,
-            fg: hues.yellow[700].hex,
+            fg: hues.yellow[800].hex,
             border: hues.yellow[200].hex,
           },
           outline: {
             bg: 'transparent',
-            fg: hues.yellow[600].hex,
+            fg: hues.yellow[700].hex,
             border: hues.yellow[200].hex,
           },
         },
@@ -78,12 +78,12 @@ const themeColor: ThemeColor = {
         modes: {
           default: {
             bg: hues.red[200].hex,
-            fg: hues.red[700].hex,
+            fg: hues.red[800].hex,
             border: hues.red[200].hex,
           },
           outline: {
             bg: 'transparent',
-            fg: hues.red[600].hex,
+            fg: hues.red[700].hex,
             border: hues.red[200].hex,
           },
         },
@@ -156,7 +156,7 @@ const themeColor: ThemeColor = {
   },
   syntax: {
     tones: {
-      default: buildSyntaxColor('600', '500'),
+      default: buildSyntaxColor('700', '500'),
     },
   },
   switch: {

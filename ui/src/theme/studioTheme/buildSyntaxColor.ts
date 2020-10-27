@@ -2,8 +2,8 @@ import {hues, ColorTintKey} from '@sanity/color'
 import {ThemeSyntaxColor} from '../types'
 
 export function buildSyntaxColor(
-  mainShade: ColorTintKey = '200',
-  secondaryShade: ColorTintKey = '700'
+  mainShade: ColorTintKey,
+  secondaryShade: ColorTintKey
 ): ThemeSyntaxColor {
   return {
     atrule: hues.purple[mainShade].hex,

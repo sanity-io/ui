@@ -1,31 +1,28 @@
-import icons from '@sanity/icons'
-import {Button, IconSymbol, Stack} from '@sanity/ui'
+// import icons from '@sanity/icons'
+import {Badge, Stack} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
-import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
+import {select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
-  title: 'Atoms/Button',
+  title: 'Atoms/Badge',
   decorators: [withCentered, withKnobs],
 }
 
-const iconOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, key) => {
-  acc[key] = key
-  return acc
-}, {})
+// const iconOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, key) => {
+//   acc[key] = key
+//   return acc
+// }, {})
 
 export const plain = () => {
-  const disabled = boolean('Disabled', false, 'Props')
-
-  const icon = select('Symbol', iconOptions, 'add-circle', 'Props') as IconSymbol
+  // const icon = select('Symbol', iconOptions, 'add-circle', 'Props') as IconSymbol
 
   const mode = select(
     'Mode',
     {
       Default: 'default',
-      Ghost: 'ghost',
-      Bleed: 'bleed',
+      Outline: 'outline',
     },
     'default',
     'Props'
@@ -63,8 +60,6 @@ export const plain = () => {
     'Props'
   )
 
-  const selected = boolean('Selected', false, 'Props')
-
   const tone = select(
     'Tone',
     {
@@ -82,17 +77,17 @@ export const plain = () => {
 
   return (
     <Stack space={2}>
-      <Button
-        disabled={disabled}
-        icon={icon}
+      <Badge
+        // icon={icon}
         mode={mode}
         onClick={action('onClick')}
         paddingX={paddingX}
         paddingY={paddingY}
-        selected={selected}
-        text={textProp}
+        // text={textProp}
         tone={tone}
-      />
+      >
+        {textProp}
+      </Badge>
     </Stack>
   )
 }

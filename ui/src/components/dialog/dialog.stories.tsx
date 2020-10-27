@@ -44,9 +44,7 @@ function PlainExample() {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} ref={buttonRef}>
-        Open dialog
-      </Button>
+      <Button onClick={() => setOpen(true)} ref={buttonRef} text="Open dialog" />
 
       {open && (
         <Dialog header={<>Example</>} id="dialog1" onClose={handleClose}>
@@ -56,25 +54,25 @@ function PlainExample() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et orci vitae diam
                 aliquet imperdiet.
               </Text>
-              <Button>Focus test</Button>
+              <Button text="Focus test" />
               <Text>
                 Sed in hendrerit metus. Sed sapien neque, imperdiet eu justo sed, vestibulum mollis
                 dolor.
               </Text>
-              <Button>Focus test</Button>
+              <Button text="Focus test" />
               <Text>
                 Nulla sit amet ipsum ligula. Duis sit amet velit tempor, ultricies mauris dignissim,
                 mollis enim.
               </Text>
-              <Button>Focus test</Button>
+              <Button text="Focus test" />
               <Text>Cras quis elit non mauris faucibus molestie non non augue. </Text>
               <Text>
                 Proin suscipit gravida sodales. Morbi vel purus molestie, rhoncus augue sit amet,
                 auctor justo.
               </Text>
-              <Button>Focus test</Button>
+              <Button text="Focus test" />
               <Text>Proin lobortis nunc a tellus condimentum, a ultrices arcu egestas.</Text>
-              <Button>Focus test</Button>
+              <Button text="Focus test" />
               <Text>
                 Suspendisse augue nibh, euismod sit amet sapien nec, molestie dignissim magna.
               </Text>
@@ -96,20 +94,20 @@ function NestedExample() {
       {open1 && (
         <Dialog cardShadow={0} id="dialog1">
           <Box padding={4}>
-            <Button onClick={() => setOpen2(true)}>Open Dialog 2</Button>
+            <Button onClick={() => setOpen2(true)} text="Open Dialog 2" />
           </Box>
 
           {open2 && (
             <Dialog cardShadow={2} id="dialog2" onClose={() => setOpen2(false)}>
               <Box padding={4}>
-                <Button onClick={() => setOpen3(true)}>Open Dialog 3</Button>
+                <Button onClick={() => setOpen3(true)} text="Open Dialog 3" />
               </Box>
 
               {open3 && (
                 <Dialog cardShadow={4} id="dialog3" onClose={() => setOpen3(false)}>
                   <Box padding={4}>
                     <MenuButton
-                      button={<Button>Test</Button>}
+                      button={<Button text="Test" />}
                       id="menu3"
                       menu={
                         <Menu>

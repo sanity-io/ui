@@ -1,4 +1,4 @@
-import {Switch} from '@sanity/ui'
+import {Box, Card, Container, Flex, Switch, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {withKnobs, boolean} from '@storybook/addon-knobs'
 import React from 'react'
@@ -25,5 +25,18 @@ const switchProps = () => {
 export const plain = () => {
   const props = switchProps()
 
-  return <Switch {...props} />
+  return (
+    <Container width={0}>
+      <Card as="label" padding={4} radius={2} shadow={2}>
+        <Flex align="center">
+          <Box flex={1} marginRight={3}>
+            <Text>Click here to toggle</Text>
+          </Box>
+          <Box>
+            <Switch {...props} style={{verticalAlign: 'top'}} />
+          </Box>
+        </Flex>
+      </Card>
+    </Container>
+  )
 }

@@ -118,7 +118,7 @@ const Initials = styled.div<{scheme: ColorSchemeKey}>(
     return css`
       width: 100%;
       height: 100%;
-      color: ${tone.enabled.bg};
+      color: ${tone.enabled.fg};
       display: flex;
       align-items: center;
       justify-content: center;

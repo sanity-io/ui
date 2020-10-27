@@ -6,29 +6,29 @@ export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMod
 
   return {
     enabled: {
-      bg: hue[500].hex,
-      fg: white.hex,
-      border: hue[500].hex,
-    },
-    disabled: {
-      bg: hue[500].hex,
-      fg: white.hex,
-      border: hue[500].hex,
-    },
-    hovered: {
       bg: hue[600].hex,
       fg: white.hex,
       border: hue[600].hex,
     },
-    pressed: {
+    disabled: {
+      bg: hue[200].hex,
+      fg: white.hex,
+      border: hue[200].hex,
+    },
+    hovered: {
       bg: hue[700].hex,
       fg: white.hex,
       border: hue[700].hex,
     },
-    selected: {
+    pressed: {
       bg: hue[800].hex,
       fg: white.hex,
       border: hue[800].hex,
+    },
+    selected: {
+      bg: hue[900].hex,
+      fg: white.hex,
+      border: hue[900].hex,
     },
   }
 }

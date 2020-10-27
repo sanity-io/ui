@@ -34,9 +34,7 @@ function Example() {
           <Code>
             depth={layer.depth}, size={layer.size}
           </Code>
-          <Button mode="ghost" onClick={handleOpen}>
-            Open layer 1
-          </Button>
+          <Button mode="ghost" onClick={handleOpen} text="Open layer 1" />
           {open && (
             <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <Layer1 onClose={handleClose} />
@@ -71,9 +69,7 @@ function Layer1({onClose}: {onClose: () => void}) {
           <Code>
             depth={layer.depth}, size={layer.size}
           </Code>
-          <Button mode="ghost" onClick={handleOpen}>
-            Open layer 2
-          </Button>
+          <Button mode="ghost" onClick={handleOpen} text="Open layer 2" />
           {open && (
             <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <Layer2 onClose={handleClose} />

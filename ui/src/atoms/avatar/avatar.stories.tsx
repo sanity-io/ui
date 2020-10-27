@@ -1,5 +1,5 @@
 import {Avatar, AvatarCounter, AvatarStack, Card} from '@sanity/ui'
-import {withKnobs} from '@storybook/addon-knobs'
+import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {withCentered} from '~/storybook/decorators'
 
@@ -9,9 +9,11 @@ export default {
 }
 
 export const plain = () => {
+  const size = select('Size', {'0 (default)': 0, '1': 1, '2': 2}, 0, 'Props')
+
   return (
     <Card padding={4}>
-      <AvatarStack>
+      <AvatarStack size={size}>
         <AvatarCounter count={2} />
         <Avatar color="red" initials="uq" />
         <Avatar
