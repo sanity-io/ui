@@ -31,7 +31,7 @@ export function getStaticPaths() {
   }
 }
 
-function HookPage({data: initialData, params, preview}: any) {
+function HookPage({data: initialData, params = {}, preview}: any) {
   const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
   const {article} = data
 

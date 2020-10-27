@@ -31,7 +31,7 @@ export function getStaticPaths() {
   }
 }
 
-function AtomPage({data: initialData, params, preview}: any) {
+function AtomPage({data: initialData, params = {}, preview}: any) {
   const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
   const {article} = data
 
