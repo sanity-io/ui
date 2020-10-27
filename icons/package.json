@@ -16,7 +16,6 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "npm run clean && npm run generate",
     "prepublishOnly": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

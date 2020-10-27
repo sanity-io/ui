@@ -9,7 +9,6 @@
     "dev": "start-storybook --quiet --config-dir .",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "npm run clean",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

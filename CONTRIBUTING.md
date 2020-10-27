@@ -26,11 +26,10 @@ yarn dev
 
 ## Testing
 
-There are currently no unit tests or integration tests, although there are checks to lint and type check the source code.
-
 ```sh
 yarn lint
 yarn type-check
+yarn test
 ```
 
 ## Git workflow
