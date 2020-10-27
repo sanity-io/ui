@@ -7,6 +7,7 @@ const ROOT_PATH = path.dirname(__dirname, '..')
 module.exports = {
   webpack: (config) => {
     // Add monorepo sibling packages to includes
+    config.module.rules[0].include.push(path.join(ROOT_PATH, 'color/src'))
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'icons/src'))
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'ui/src'))
 
@@ -15,6 +16,7 @@ module.exports = {
 
     // Aliases
     Object.assign(config.resolve.alias, {
+      '@sanity/color': path.join(ROOT_PATH, 'color/src'),
       '@sanity/icons': path.join(ROOT_PATH, 'icons/src'),
       '@sanity/ui': path.join(ROOT_PATH, 'ui/src'),
 
