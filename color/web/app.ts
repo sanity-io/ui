@@ -1,9 +1,9 @@
-import {color, COLOR_HUES, COLOR_TINTS} from '../src'
+import {COLOR_HUES, COLOR_TINTS, hues} from '../src'
 
 const rootElement = document.getElementById('root')
 
 for (const hueKey of COLOR_HUES) {
-  const hue = color[hueKey]
+  const hue = hues[hueKey]
 
   // Create hue element
   const hueElement = document.createElement('div')

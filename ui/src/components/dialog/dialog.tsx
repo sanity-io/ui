@@ -1,5 +1,3 @@
-import {color} from '@sanity/color'
-import {rgba} from 'polished'
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Box, Button, Card, Container, Flex, Text} from '../../atoms'
@@ -23,7 +21,7 @@ const Root = styled(Layer)`
   justify-content: center;
   padding: 1.25em;
   outline: none;
-  background: ${rgba(color.gray[500].hex, 0.1)};
+  background: var(--card-shadow-umbra-color);
 `
 
 const DialogContainer = styled(Container)`

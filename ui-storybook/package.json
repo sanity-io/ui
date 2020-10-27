@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.4.4",
-    "@sanity/color": "^1.0.0",
+    "@sanity/color": "2.0.0",
     "@sanity/icons": "1.0.0-alpha.1",
     "@sanity/ui": "1.0.0-alpha.2",
     "@storybook/addon-actions": "^6.0.27",

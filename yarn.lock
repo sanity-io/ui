@@ -3275,6 +3275,11 @@
     lodash "^4.17.15"
     react-ace "^5.0.1"
 
+"@sanity/color@1.0.0", "@sanity/color@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@sanity/color/-/color-1.0.0.tgz#6cc44d4a8f6da4567828f52f141deed4d17aa31e"
+  integrity sha512-npFZKld7K/F4vAe4SZNyx4W6R/3z5iH/CuIDFJTn6CRQbDgsrJTCPtVAF1nx76wMa3BYCTs4YFfIVkRRx2Jz9A==
+
 "@sanity/components@2.0.5":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@sanity/components/-/components-2.0.5.tgz#c3dfd788557f90cb0fb4fbffe14d2fbfe21803c3"

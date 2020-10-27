@@ -63,6 +63,6 @@ ${COLOR_HUES.map(buildExport).join('\n\n')}
 `
 
 // Format generated file with prettier so it can be commited without us being ashamed
-const prettierConfig = JSON.parse(readFileSync(join(__dirname, '..', '.prettierrc'), 'utf8'))
-const filepath = join(__dirname, '..', 'src', 'colorPalette.ts')
+const prettierConfig = JSON.parse(readFileSync(join(__dirname, '..', '..', '.prettierrc'), 'utf8'))
+const filepath = join(__dirname, '..', 'src', 'hues.ts')
 writeFileSync(filepath, format(tpl, {filepath, ...prettierConfig}))

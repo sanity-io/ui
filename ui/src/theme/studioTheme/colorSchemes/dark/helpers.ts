@@ -1,40 +1,40 @@
-import {color, ColorHueKey} from '@sanity/color'
+import {hues, white, ColorHueKey} from '@sanity/color'
 import {ThemeButtonColorMode} from '../../../types'
 
 export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMode {
-  const hue = color[hueKey]
+  const hue = hues[hueKey]
 
   return {
     enabled: {
       bg: hue[500].hex,
-      fg: color.white.hex,
+      fg: white.hex,
       border: 'transparent',
     },
     disabled: {
       bg: hue[500].hex,
-      fg: color.white.hex,
+      fg: white.hex,
       border: 'transparent',
     },
     hovered: {
       bg: hue[400].hex,
-      fg: color.white.hex,
+      fg: white.hex,
       border: 'transparent',
     },
     pressed: {
       bg: hue[500].hex,
-      fg: color.white.hex,
+      fg: white.hex,
       border: 'transparent',
     },
     selected: {
       bg: hue[500].hex,
-      fg: color.white.hex,
+      fg: white.hex,
       border: 'transparent',
     },
   }
 }
 
 export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode {
-  const hue = color[hueKey]
+  const hue = hues[hueKey]
 
   return {
     enabled: {
@@ -49,7 +49,7 @@ export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode 
     },
     hovered: {
       bg: hue[400].hex,
-      fg: color.white.hex,
+      fg: white.hex,
       border: 'transparent',
     },
     pressed: {
@@ -66,7 +66,7 @@ export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode 
 }
 
 export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode {
-  const hue = color[hueKey]
+  const hue = hues[hueKey]
 
   return {
     enabled: {
@@ -90,8 +90,8 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
       border: 'transparent',
     },
     selected: {
-      bg: color.blue[900].hex,
-      fg: color.blue[300].hex,
+      bg: hues.blue[900].hex,
+      fg: hues.blue[300].hex,
       border: 'transparent',
     },
   }

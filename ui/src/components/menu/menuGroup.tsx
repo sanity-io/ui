@@ -1,37 +1,47 @@
-import {color} from '@sanity/color'
 import React, {useEffect, useRef, useState} from 'react'
-import styled from 'styled-components'
-import {Box, Icon, Popover, Text} from '../../atoms'
+import styled, {css} from 'styled-components'
+import {Box, Icon, Popover, Text, useCard} from '../../atoms'
+import {ColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
 import {Menu} from './menu'
 
-const Root = styled.button`
-  -webkit-font-smoothing: inherit;
-  appearance: none;
-  font: inherit;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  color: inherit;
-  text-align: left;
-  margin: 0;
-  padding: 0;
-  outline: none;
+const Root = styled.button<{scheme: ColorSchemeKey}>(
+  (props: {scheme: ColorSchemeKey; theme: Theme}) => {
+    const {scheme, theme} = props
+    const tone = theme.color[scheme].card.tones.default
 
-  &:not(:disabled):focus {
-    background-color: ${color.blue[500].hex};
-    color: ${color.white.hex};
-  }
+    return css`
+      -webkit-font-smoothing: inherit;
+      appearance: none;
+      font: inherit;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      color: inherit;
+      text-align: left;
+      margin: 0;
+      padding: 0;
+      outline: none;
+      background-color: var(--card-bg-color);
+      color: var(--card-fg-color);
 
-  &:not(:disabled):active {
-    background-color: ${color.blue[600].hex};
-    color: ${color.white.hex};
-  }
+      &:not(:disabled):focus {
+        --card-bg-color: ${tone.selected.bg} !important;
+        --card-fg-color: ${tone.selected.fg} !important;
+      }
 
-  &:disabled {
-    color: ${color.gray[200].hex};
+      &:not(:disabled):active {
+        --card-bg-color: ${tone.pressed.bg};
+        --card-fg-color: ${tone.pressed.fg};
+      }
+
+      &:disabled {
+        --card-bg-color: ${tone.disabled.bg};
+        --card-fg-color: ${tone.disabled.fg};
+      }
+    `
   }
-`
+)
 
 const TextContainer = styled.span`
   display: flex;
@@ -43,6 +53,7 @@ const TextContainer = styled.span`
 `
 
 export function MenuGroup({children, title}: {children: React.ReactNode; title: string}) {
+  const card = useCard()
   const [open, setOpen] = useState(false)
   const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
   const rootRef = useRef<HTMLButtonElement | null>(null)
@@ -101,6 +112,7 @@ export function MenuGroup({children, title}: {children: React.ReactNode; title: 
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={rootRef}
+        scheme={card.scheme}
       >
         <Box padding={3}>
           <TextContainer>

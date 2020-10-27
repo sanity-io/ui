@@ -6,6 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "dev": "lerna run --parallel --stream dev",
+    "dev:color": "lerna run --stream --scope @sanity/color dev",
     "dev:docs": "run-p dev:ui-docs dev:studio",
     "dev:example-manage": "lerna run --stream --scope sanity-design-example-manage dev",
     "dev:example-studio": "lerna run --stream --scope sanity-design-example-studio dev",

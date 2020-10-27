@@ -1,6 +1,6 @@
 {
   "name": "@sanity/color",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "The Sanity color palette.",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -43,7 +43,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanity-io/color.git"
+    "url": "git+https://github.com/sanity/design.git"
   },
   "keywords": [
     "sanity",
@@ -53,7 +53,10 @@
   "author": "Sanity.io <hello@sanity.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sanity-io/color/issues"
+    "url": "https://github.com/sanity/design/issues"
   },
-  "homepage": "https://www.sanity.io/"
+  "homepage": "https://www.sanity.io/",
+  "publishConfig": {
+    "access": "public"
+  }
 }

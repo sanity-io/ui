@@ -1,4 +1,4 @@
-import {color} from '@sanity/color'
+import {black, hues, white} from '@sanity/color'
 import {ThemeColor} from '../../../types'
 import {buildSyntaxColor} from '../../buildSyntaxColor'
 import {card} from './card'
@@ -6,15 +6,15 @@ import {buildButtonDefaultMode, buildButtonGhostMode, buildButtonBleedMode} from
 
 const themeColor: ThemeColor = {
   avatar: {
-    gray: color.gray[400].hex,
-    blue: color.blue[400].hex,
-    cyan: color.cyan[400].hex,
-    green: color.green[400].hex,
-    yellow: color.yellow[400].hex,
-    orange: color.orange[400].hex,
-    red: color.red[400].hex,
-    magenta: color.magenta[400].hex,
-    purple: color.purple[400].hex,
+    gray: hues.gray[400].hex,
+    blue: hues.blue[400].hex,
+    cyan: hues.cyan[400].hex,
+    green: hues.green[400].hex,
+    yellow: hues.yellow[400].hex,
+    orange: hues.orange[400].hex,
+    red: hues.red[400].hex,
+    magenta: hues.magenta[400].hex,
+    purple: hues.purple[400].hex,
   },
   button: {
     tones: {
@@ -60,22 +60,22 @@ const themeColor: ThemeColor = {
     tones: {
       default: {
         enabled: {
-          bg: color.white.hex,
-          fg: color.black.hex,
-          border: color.gray[200].hex,
-          placeholder: color.gray[400].hex,
+          bg: white.hex,
+          fg: black.hex,
+          border: hues.gray[200].hex,
+          placeholder: hues.gray[400].hex,
         },
         disabled: {
-          bg: color.gray[50].hex,
-          fg: color.gray[200].hex,
-          border: color.gray[200].hex,
+          bg: hues.gray[50].hex,
+          fg: hues.gray[200].hex,
+          border: hues.gray[200].hex,
           placeholder: 'transparent',
         },
         hovered: {
-          bg: color.white.hex,
-          fg: color.black.hex,
-          border: color.gray[300].hex,
-          placeholder: color.gray[500].hex,
+          bg: white.hex,
+          fg: black.hex,
+          border: hues.gray[300].hex,
+          placeholder: hues.gray[500].hex,
         },
       },
     },
@@ -89,21 +89,21 @@ const themeColor: ThemeColor = {
     tones: {
       default: {
         enabled: {
-          thumb: color.white.hex,
+          thumb: white.hex,
           off: {
-            bg: color.gray['500'].hex,
+            bg: hues.gray['500'].hex,
           },
           on: {
-            bg: color.green['500'].hex,
+            bg: hues.green['500'].hex,
           },
         },
         disabled: {
-          thumb: color.gray['50'].hex,
+          thumb: hues.gray['50'].hex,
           off: {
-            bg: color.gray['200'].hex,
+            bg: hues.gray['200'].hex,
           },
           on: {
-            bg: color.green['200'].hex,
+            bg: hues.green['200'].hex,
           },
         },
       },
