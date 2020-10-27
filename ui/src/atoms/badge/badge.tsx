@@ -29,7 +29,11 @@ function badge({
   theme: Theme
   tone: BadgeTone
 }) {
-  const color = theme.color[scheme]?.badge.tones[tone]?.modes[mode] || {}
+  const color = theme.color[scheme]?.badge.tones[tone]?.modes[mode] || {
+    bg: '#000',
+    fg: '#fff',
+    border: '#000',
+  }
 
   return css`
     display: inline-block;
