@@ -15,9 +15,9 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["*"],
-      "@sanity/icons": ["../icons/src"],
-      "@sanity/ui": ["../ui/src"]
+      "~/*": ["*"]
+      // "@sanity/icons": ["../icons/src"],
+      // "@sanity/ui": ["../ui/src"]
     }
   },
   "exclude": ["node_modules"],
