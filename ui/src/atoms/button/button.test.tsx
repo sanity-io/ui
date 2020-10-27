@@ -1,3 +1,4 @@
+import {screen} from '@testing-library/react'
 import {axe} from 'jest-axe'
 import React from 'react'
 import {render} from '../../../test'
@@ -8,5 +9,11 @@ describe('atoms/button', () => {
     const result = render(<Button icon="add" text="Label" tone="positive" />)
 
     expect(await axe(result.container.outerHTML)).toHaveNoViolations()
+  })
+
+  it('should render text', () => {
+    render(<Button text="Button text" />)
+
+    expect(screen.getByText('Button text')).toBeInTheDocument()
   })
 })

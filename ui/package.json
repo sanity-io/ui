@@ -35,6 +35,7 @@
     "@storybook/addon-knobs": "^6.0.27",
     "@storybook/addon-links": "^6.0.27",
     "@storybook/react": "^6.0.27",
+    "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
     "@types/jest": "^26.0.15",
     "@types/jest-axe": "^3.5.1",
