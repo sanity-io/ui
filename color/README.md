@@ -21,7 +21,7 @@ console.log(black.hex)
 console.log(hues.red['500'].title)
 // "Red 500"
 console.log(hues.red['500'].hex)
-// "#f03E2f"
+// "#f03e2f"
 
 console.log(COLOR_HUES)
 // ["gray", "blue", "purple", "magenta", "red", "orange", "yellow", "green", "cyan"]
