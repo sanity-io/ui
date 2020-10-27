@@ -19,6 +19,19 @@ export interface ThemeFont {
   sizes: ThemeFontSize[]
 }
 
+export interface ThemeBadgeColorMode {
+  bg: string
+  fg: string
+  border: string
+}
+
+export interface ThemeBadgeColor {
+  modes: {
+    default: ThemeBadgeColorMode
+    outline: ThemeBadgeColorMode
+  }
+}
+
 export interface ThemeButtonColorMode {
   enabled: {
     bg: string
@@ -141,6 +154,16 @@ export interface ThemeColor {
     red: string
     magenta: string
     purple: string
+  }
+
+  badge: {
+    tones: {
+      default: ThemeBadgeColor
+      brand: ThemeBadgeColor
+      positive: ThemeBadgeColor
+      caution: ThemeBadgeColor
+      critical: ThemeBadgeColor
+    }
   }
 
   button: {
