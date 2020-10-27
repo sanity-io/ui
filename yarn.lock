@@ -3275,7 +3275,7 @@
     lodash "^4.17.15"
     react-ace "^5.0.1"
 
-"@sanity/color@1.0.0", "@sanity/color@^1.0.0":
+"@sanity/color@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@sanity/color/-/color-1.0.0.tgz#6cc44d4a8f6da4567828f52f141deed4d17aa31e"
   integrity sha512-npFZKld7K/F4vAe4SZNyx4W6R/3z5iH/CuIDFJTn6CRQbDgsrJTCPtVAF1nx76wMa3BYCTs4YFfIVkRRx2Jz9A==
@@ -3603,11 +3603,6 @@
     split2 "^3.2.2"
     throttle-debounce "^2.3.0"
 
-"@sanity/icons@1.0.0-alpha.1":
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@sanity/icons/-/icons-1.0.0-alpha.1.tgz#b89f44e83476360f50931f9ce2579389df273447"
-  integrity sha512-xaClkf9iWkuOdl9+u36MmCbQRlBvoS2wIgit8cOyJoSGjze8bTHrNjtIJwc+h/3/ExyF0fctxNAIr1akvI8N7A==
-
 "@sanity/image-url@^0.140.15", "@sanity/image-url@^0.140.19":
   version "0.140.19"
   resolved "https://registry.yarnpkg.com/@sanity/image-url/-/image-url-0.140.19.tgz#6adfea7b7768a1708eba6bdcfe9eb0746d2bb1f9"
@@ -3879,17 +3874,6 @@
   integrity sha512-Y+885hBOeo0nZJ/cVpPDkmWKE7zqkSMX96hms02RyUCA1hfBSrYV4uF/OCgM2hBYRwHN+Zep/FWto4q8LLMIDw==
   dependencies:
     "@types/react" "^16.9.49"
-
-"@sanity/ui@1.0.0-alpha.2":
-  version "1.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-1.0.0-alpha.2.tgz#a4596c583ffed75f34e5374db5cccce2a377d722"
-  integrity sha512-YUsnaNU8qZVN2Bifi1cdMHCdIdHHVHrBTzKoVchZp4Qd9O+dsLei9MZY3ULR24OrQRZ9tkuc+Ef5uC/9dsHinA==
-  dependencies:
-    "@juggle/resize-observer" "^3.2.0"
-    "@reach/auto-id" "^0.11.2"
-    "@sanity/color" "1.0.0"
-    "@sanity/icons" "^1.0.0-alpha.1"
-    polished "^4.0.3"
 
 "@sanity/util@2.0.1":
   version "2.0.1"

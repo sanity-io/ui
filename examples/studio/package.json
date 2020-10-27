@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.3",
-    "@sanity/icons": "1.0.0-alpha.1",
-    "@sanity/ui": "1.0.0-alpha.2",
+    "@sanity/icons": "1.0.0-alpha.3",
+    "@sanity/ui": "1.0.0-alpha.6",
     "is-hotkey": "^0.1.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
