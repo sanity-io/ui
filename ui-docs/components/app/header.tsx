@@ -41,8 +41,8 @@ export function AppHeader() {
   return (
     <Root data-name="AppHeader" forwardedAs="header">
       <Box as="nav" padding={[4, 5, 6]}>
-        <Stack space={5}>
-          <Stack space={3}>
+        <Stack space={[5, 5, 6]}>
+          <Stack space={[3, 3, 4]}>
             <Code as="h1" size={[2, 2, 3]}>
               <strong>@sanity/ui</strong>
             </Code>
@@ -52,19 +52,19 @@ export function AppHeader() {
             </a>
           </Stack>
 
-          <Stack space={3}>
-            <Stack as="ul" space={3}>
+          <Stack space={[3, 3, 4]}>
+            <Stack as="ul" space={[3, 3, 4]}>
               <AppHeaderLink href="/">Introduction</AppHeaderLink>
               <AppHeaderLink href="/concepts">Concepts</AppHeaderLink>
               <AppHeaderLink href="/theme">Theme</AppHeaderLink>
             </Stack>
           </Stack>
 
-          <Stack space={3}>
+          <Stack space={[3, 3, 4]}>
             <Label as="h2" size={[2, 2, 3]}>
               Atoms
             </Label>
-            <Stack as="ul" space={3}>
+            <Stack as="ul" space={[3, 3, 4]}>
               {atomRoutes.map((route) => (
                 <AppHeaderLink href={`/atom/${route.slug}`} key={route.slug}>
                   {route.title}
@@ -73,11 +73,11 @@ export function AppHeader() {
             </Stack>
           </Stack>
 
-          <Stack space={3}>
+          <Stack space={[3, 3, 4]}>
             <Label as="h2" size={[2, 2, 3]}>
               Components
             </Label>
-            <Stack as="ul" space={3}>
+            <Stack as="ul" space={[3, 3, 4]}>
               {componentRoutes.map((route) => (
                 <AppHeaderLink href={`/component/${route.slug}`} key={route.slug}>
                   {route.title}
@@ -86,11 +86,11 @@ export function AppHeader() {
             </Stack>
           </Stack>
 
-          <Stack space={3}>
+          <Stack space={[3, 3, 4]}>
             <Label as="h2" size={[2, 2, 3]}>
               Hooks
             </Label>
-            <Stack as="ul" space={3}>
+            <Stack as="ul" space={[3, 3, 4]}>
               {hookRoutes.map((route) => (
                 <AppHeaderLink href={`/hook/${route.slug}`} key={route.slug}>
                   {route.title}
@@ -99,11 +99,11 @@ export function AppHeader() {
             </Stack>
           </Stack>
 
-          <Stack space={3}>
+          <Stack space={[3, 3, 4]}>
             <Label as="h2" size={[2, 2, 3]}>
               Utils
             </Label>
-            <Stack as="ul" space={3}>
+            <Stack as="ul" space={[3, 3, 4]}>
               {utilRoutes.map((route) => (
                 <AppHeaderLink href={`/util/${route.slug}`} key={route.slug}>
                   {route.title}

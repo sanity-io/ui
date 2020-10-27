@@ -3,7 +3,7 @@ import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
 import {componentRoutes} from '../../routes'
-import {AppLayout, ArticleContent} from '~/components'
+import {AppLayout, ArticleContent, TimeAgo} from '~/components'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
@@ -58,8 +58,8 @@ function ComponentPage({data: initialData, params = {}, preview}: any) {
             {article.content && <ArticleContent blocks={article.content} />}
 
             {article._updatedAt && (
-              <Text size={[0, 1, 2]}>
-                <strong>Updated</strong>: {article._updatedAt}
+              <Text muted size={[0, 1, 2]}>
+                Updated <TimeAgo date={article._updatedAt} />
               </Text>
             )}
           </Stack>
