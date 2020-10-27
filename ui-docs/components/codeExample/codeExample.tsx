@@ -22,7 +22,7 @@ export function CodeExample(props: {code: string; hookCode?: string; language: s
         )}
       </Card>
       <Card padding={[3, 3, 4, 5]} style={{overflow: 'auto'}}>
-        <Code language={language} size={[2, 2, 3]}>
+        <Code language={language} muted size={[2, 2, 3]}>
           {code}
         </Code>
       </Card>

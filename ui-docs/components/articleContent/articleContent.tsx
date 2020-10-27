@@ -21,7 +21,7 @@ function buildSerializers(toc: any) {
         shadow={1}
         style={{overflow: 'auto'}}
       >
-        <Code language={props.node.language} size={[2, 2, 3, 4]}>
+        <Code language={props.node.language} muted size={[2, 2, 3, 4]}>
           {props.node.code}
         </Code>
       </Card>
