@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "~/storybook/*": ["./ui-storybook/*"],
+      "@sanity/color": ["./color/src"],
       "@sanity/icons": ["./icons/src"],
       "@sanity/ui": ["./ui/src"]
     }

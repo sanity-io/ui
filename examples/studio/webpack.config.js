@@ -23,7 +23,12 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        include: [__dirname, path.join(ROOT_PATH, 'icons/src'), path.join(ROOT_PATH, 'ui/src')],
+        include: [
+          __dirname,
+          path.join(ROOT_PATH, 'color/src'),
+          path.join(ROOT_PATH, 'icons/src'),
+          path.join(ROOT_PATH, 'ui/src'),
+        ],
         options: {
           configFile: path.resolve(__dirname, 'tsconfig.build.json'),
         },
