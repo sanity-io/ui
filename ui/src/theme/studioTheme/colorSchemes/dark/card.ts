@@ -1,4 +1,4 @@
-import {black, hues, white} from '@sanity/color'
+import {black, hues} from '@sanity/color'
 import {rgba} from 'polished'
 import {ThemeCardColor} from '../../../types'
 
@@ -7,18 +7,18 @@ export const card: ThemeCardColor = {
     default: {
       enabled: {
         bg: black.hex,
-        fg: white.hex,
+        fg: hues.gray[100].hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[800].hex,
-          hard: hues.gray[700].hex,
+          soft: hues.gray[900].hex,
+          hard: hues.gray[800].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.4),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
@@ -26,18 +26,18 @@ export const card: ThemeCardColor = {
       },
       disabled: {
         bg: black.hex,
-        fg: white.hex,
+        fg: hues.gray[100].hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
@@ -45,18 +45,18 @@ export const card: ThemeCardColor = {
       },
       hovered: {
         bg: hues.gray[950].hex,
-        fg: white.hex,
+        fg: hues.gray[100].hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
@@ -64,18 +64,18 @@ export const card: ThemeCardColor = {
       },
       pressed: {
         bg: hues.gray[900].hex,
-        fg: white.hex,
+        fg: hues.gray[100].hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
@@ -104,37 +104,37 @@ export const card: ThemeCardColor = {
     transparent: {
       enabled: {
         bg: hues.gray[950].hex,
-        fg: white.hex,
+        fg: hues.gray[100].hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
         },
       },
       disabled: {
-        bg: white.hex,
+        bg: hues.gray[50].hex,
         fg: black.hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
@@ -147,32 +147,32 @@ export const card: ThemeCardColor = {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
         },
       },
       pressed: {
-        bg: white.hex,
+        bg: hues.gray[50].hex,
         fg: black.hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),
@@ -180,18 +180,18 @@ export const card: ThemeCardColor = {
       },
       selected: {
         bg: hues.blue[500].hex,
-        fg: white.hex,
+        fg: hues.gray[100].hex,
         muted: {
           fg: hues.gray[400].hex,
         },
         hairline: {
-          soft: hues.gray[900].hex,
-          hard: hues.gray[800].hex,
+          soft: hues.gray[950].hex,
+          hard: hues.gray[900].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[400].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.2),
+          outline: rgba(hues.gray[500].hex, 0.25),
           umbra: rgba(black.hex, 0.2),
           penumbra: rgba(black.hex, 0.14),
           ambient: rgba(black.hex, 0.12),

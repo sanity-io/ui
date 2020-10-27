@@ -1,9 +1,9 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {Theme, ThemeFontSize} from '../../theme'
+import {ColorSchemeKey, Theme, ThemeFontSize} from '../../theme'
 
-function codeSyntaxHighlightingStyles({theme}: {theme: Theme}) {
-  const tone = theme.color.light.syntax.tones.default
+function codeSyntaxHighlightingStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
+  const tone = theme.color[scheme].syntax.tones.default
 
   return css`
     & .token {

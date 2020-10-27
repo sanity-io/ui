@@ -1,4 +1,4 @@
-import {hues, white, ColorHueKey} from '@sanity/color'
+import {hues, ColorHueKey} from '@sanity/color'
 import {ThemeButtonColorMode} from '../../../types'
 
 export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMode {
@@ -7,27 +7,27 @@ export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMod
   return {
     enabled: {
       bg: hue[500].hex,
-      fg: white.hex,
+      fg: hues.gray[50].hex,
       border: 'transparent',
     },
     disabled: {
       bg: hue[500].hex,
-      fg: white.hex,
+      fg: hues.gray[50].hex,
       border: 'transparent',
     },
     hovered: {
       bg: hue[400].hex,
-      fg: white.hex,
+      fg: hues.gray[50].hex,
       border: 'transparent',
     },
     pressed: {
       bg: hue[500].hex,
-      fg: white.hex,
+      fg: hues.gray[50].hex,
       border: 'transparent',
     },
     selected: {
       bg: hue[500].hex,
-      fg: white.hex,
+      fg: hues.gray[50].hex,
       border: 'transparent',
     },
   }
@@ -49,7 +49,7 @@ export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode 
     },
     hovered: {
       bg: hue[400].hex,
-      fg: white.hex,
+      fg: hues.gray[50].hex,
       border: 'transparent',
     },
     pressed: {

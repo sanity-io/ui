@@ -1,4 +1,4 @@
-import {black, hues, white} from '@sanity/color'
+import {black, hues} from '@sanity/color'
 import {ThemeColor} from '../../../types'
 import {buildSyntaxColor} from '../../buildSyntaxColor'
 import {card} from './card'
@@ -138,7 +138,7 @@ const themeColor: ThemeColor = {
       default: {
         enabled: {
           bg: black.hex,
-          fg: white.hex,
+          fg: hues.gray[50].hex,
           border: hues.gray[800].hex,
           placeholder: hues.gray[600].hex,
         },
@@ -150,7 +150,7 @@ const themeColor: ThemeColor = {
         },
         hovered: {
           bg: black.hex,
-          fg: white.hex,
+          fg: hues.gray[50].hex,
           border: hues.gray[700].hex,
           placeholder: hues.gray[600].hex,
         },
@@ -159,7 +159,7 @@ const themeColor: ThemeColor = {
   },
   syntax: {
     tones: {
-      default: buildSyntaxColor('100', '100'),
+      default: buildSyntaxColor('400', '600'),
     },
   },
   switch: {
