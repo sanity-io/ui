@@ -8,27 +8,27 @@ export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMod
     enabled: {
       bg: hue[300].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hue[300].hex,
     },
     disabled: {
       bg: hue[800].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hue[800].hex,
     },
     hovered: {
       bg: hue[400].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hue[400].hex,
     },
     pressed: {
       bg: hue[500].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hue[500].hex,
     },
     selected: {
-      bg: hue[600].hex,
+      bg: hues.blue[600].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hues.blue[600].hex,
     },
   }
 }
@@ -38,29 +38,29 @@ export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode 
 
   return {
     enabled: {
-      bg: 'transparent',
+      bg: black.hex,
       fg: hue[400].hex,
       border: hue[800].hex,
     },
     disabled: {
-      bg: 'transparent',
+      bg: black.hex,
       fg: hue[400].hex,
       border: hue[800].hex,
     },
     hovered: {
       bg: hue[400].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hue[400].hex,
     },
     pressed: {
       bg: hue[500].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hue[500].hex,
     },
     selected: {
-      bg: hue[600].hex,
+      bg: hues.blue[400].hex,
       fg: black.hex,
-      border: 'transparent',
+      border: hues.blue[400].hex,
     },
   }
 }
@@ -70,29 +70,29 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
 
   return {
     enabled: {
-      bg: 'transparent',
+      bg: black.hex,
       fg: hue[400].hex,
-      border: 'transparent',
+      border: black.hex,
     },
     disabled: {
-      bg: 'transparent',
+      bg: black.hex,
       fg: hue[400].hex,
-      border: 'transparent',
+      border: black.hex,
     },
     hovered: {
       bg: hue[900].hex,
       fg: hue[200].hex,
-      border: 'transparent',
+      border: hue[900].hex,
     },
     pressed: {
       bg: hue[950].hex,
       fg: hue[200].hex,
-      border: 'transparent',
+      border: hue[950].hex,
     },
     selected: {
       bg: hues.blue[900].hex,
       fg: hues.blue[300].hex,
-      border: 'transparent',
+      border: hues.blue[900].hex,
     },
   }
 }
