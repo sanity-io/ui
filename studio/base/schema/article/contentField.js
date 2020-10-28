@@ -1,5 +1,7 @@
 import {codeExampleField} from './codeExampleField'
+import {npmPackageBadgeField} from './npmPackageBadgeField'
 import {propertyTableField} from './propertyTableField'
+
 const codeField = {
   type: 'code',
   name: 'code',
@@ -10,5 +12,5 @@ export const contentField = {
   type: 'array',
   name: 'content',
   title: 'Content',
-  of: [{type: 'block'}, codeField, codeExampleField, propertyTableField],
+  of: [{type: 'block'}, codeField, codeExampleField, npmPackageBadgeField, propertyTableField],
 }
