@@ -8,7 +8,7 @@ const common = {
   },
   extends: ['plugin:react/recommended', 'eslint:recommended', 'plugin:prettier/recommended'],
   parser: 'babel-eslint',
-  plugins: ['import', 'react', 'react-hooks', 'prettier'],
+  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', 'prettier'],
   rules: {
     'import/order': [
       'error',
