@@ -45,7 +45,7 @@
     "@types/refractor": "^3.0.0",
     "@types/resize-observer-browser": "^0.1.4",
     "@types/styled-components": "^5.1.4",
-    "jest": "26.4.2",
+    "jest": "26.6.1",
     "jest-axe": "^4.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
