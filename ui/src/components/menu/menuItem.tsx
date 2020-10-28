@@ -1,11 +1,13 @@
 import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
 import styled, {css} from 'styled-components'
-import {Box, Icon, IconSymbol, Text, useCard} from '../../atoms'
+import {Box, Flex, Icon, IconSymbol, Text, useCard} from '../../atoms'
 import {ColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
 
 interface MenuItemProps {
   icon?: IconSymbol
+  iconRight?: IconSymbol
+  space?: number | number[]
   text?: React.ReactNode
 }
 
@@ -15,8 +17,8 @@ const Root = styled.button<{scheme: ColorSchemeKey}>(
     const tone = theme.color[scheme].card.tones.default
 
     return css`
-      --card-bg-color: ${tone.enabled.bg} !important;
-      --card-fg-color: ${tone.enabled.fg} !important;
+      --card-bg-color: ${tone.enabled.bg};
+      --card-fg-color: ${tone.enabled.fg};
 
       -webkit-font-smoothing: inherit;
       appearance: none;
@@ -33,8 +35,8 @@ const Root = styled.button<{scheme: ColorSchemeKey}>(
       color: var(--card-fg-color);
 
       &:not(:disabled):focus {
-        --card-bg-color: ${tone.selected.bg} !important;
-        --card-fg-color: ${tone.selected.fg} !important;
+        --card-bg-color: ${tone.selected.bg};
+        --card-fg-color: ${tone.selected.fg};
       }
 
       &:not(:disabled):active {
@@ -50,16 +52,10 @@ const Root = styled.button<{scheme: ColorSchemeKey}>(
   }
 )
 
-const TextContainer = styled.span`
-  svg + & {
-    margin-left: 0.75em;
-  }
-`
-
 export const MenuItem = forwardRef(
   (props: MenuItemProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as'>, ref) => {
     const card = useCard()
-    const {children, icon, onClick, text, ...restProps} = props
+    const {children, icon, iconRight, onClick, space = 3, text, ...restProps} = props
     const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
     const rootRef = useRef<HTMLButtonElement | null>(null)
 
@@ -93,11 +89,30 @@ export const MenuItem = forwardRef(
         type="button"
       >
         {(icon || text) && (
-          <Box paddingX={4} paddingY={3}>
-            <Text as="span">
-              {icon && <Icon symbol={icon} />}
-              {text && <TextContainer>{text}</TextContainer>}
-            </Text>
+          <Box as="span" paddingX={4} paddingY={3}>
+            <Flex as="span">
+              {icon && (
+                <Text>
+                  <Icon symbol={icon} />
+                </Text>
+              )}
+
+              {text && (
+                <Box
+                  flex={1}
+                  marginLeft={icon ? space : undefined}
+                  marginRight={iconRight ? space : undefined}
+                >
+                  <Text>{text}</Text>
+                </Box>
+              )}
+
+              {iconRight && (
+                <Text>
+                  <Icon symbol={iconRight} />
+                </Text>
+              )}
+            </Flex>
           </Box>
         )}
 

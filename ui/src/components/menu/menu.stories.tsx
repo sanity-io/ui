@@ -24,7 +24,7 @@ export const menu = () => (
         <MenuItem icon="add" text="Foo" />
         <MenuItem icon="add" text="Bar" />
         <MenuDivider />
-        <MenuItem icon="add" text="Baz" />
+        <MenuItem icon="add" iconRight="checkmark" text="Baz" />
       </Menu>
     </Card>
   </LayerProvider>

@@ -3,13 +3,14 @@ import styled from 'styled-components'
 import {boxFlexStyles} from '../box'
 import {getResponsiveProp} from '../helpers'
 import {flexBaseStyles, flexColumnStyles} from './styles'
-import {FlexDirection} from './types'
+import {FlexAlign, FlexDirection, FlexJustify} from './types'
 
 interface FlexProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  align?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
+  align?: FlexAlign
   direction?: FlexDirection
   flex?: number | number[]
+  justify?: FlexJustify
 }
 
 const Root = styled.div(boxFlexStyles as any, flexBaseStyles as any, flexColumnStyles)

@@ -1,5 +1,5 @@
 import icons from '@sanity/icons'
-import {Button, IconSymbol, Stack} from '@sanity/ui'
+import {Button, Card, IconSymbol} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -18,7 +18,14 @@ const iconOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, key
 export const plain = () => {
   const disabled = boolean('Disabled', false, 'Props')
 
-  const icon = select('Symbol', iconOptions, 'add-circle', 'Props') as IconSymbol
+  const icon = select('Icon', {'(none)': '', ...iconOptions}, 'add-circle', 'Props') as IconSymbol
+
+  const iconRight = select(
+    'Icon (right)',
+    {'(none)': '', ...iconOptions},
+    '',
+    'Props'
+  ) as IconSymbol
 
   const mode = select(
     'Mode',
@@ -65,6 +72,22 @@ export const plain = () => {
 
   const selected = boolean('Selected', false, 'Props')
 
+  const space = select(
+    'Space',
+    {
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+    },
+    3,
+    'Props'
+  )
+
   const tone = select(
     'Tone',
     {
@@ -81,18 +104,20 @@ export const plain = () => {
   const textProp = text('Text', 'Label', 'Props')
 
   return (
-    <Stack space={2}>
+    <Card padding={4}>
       <Button
         disabled={disabled}
         icon={icon}
+        iconRight={iconRight}
         mode={mode}
         onClick={action('onClick')}
         paddingX={paddingX}
         paddingY={paddingY}
         selected={selected}
+        space={space}
         text={textProp}
         tone={tone}
       />
-    </Stack>
+    </Card>
   )
 }

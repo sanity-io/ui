@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
-import {FlexDirection} from './types'
+import {FlexAlign, FlexDirection, FlexJustify} from './types'
 
-export function flexBaseStyles(props: {align?: 'center'; justify?: 'center'}) {
+export function flexBaseStyles(props: {align?: FlexAlign; justify?: FlexJustify}) {
   return css`
     display: flex;
     align-items: ${props.align || 'initial'};

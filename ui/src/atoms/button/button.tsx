@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {radius} from '../../styles'
 import {Box, BoxMarginProps, BoxPaddingProps} from '../box'
 import {useCard} from '../card'
+import {Flex} from '../flex'
 import {getResponsiveProp} from '../helpers'
 import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
@@ -14,26 +15,24 @@ export interface ButtonProps extends BoxPaddingProps {
   mode?: ButtonMode
   tone?: ButtonTone
   icon?: IconSymbol | React.FC
+  iconRight?: IconSymbol | React.FC
   radius?: number | number[]
   selected?: boolean
   size?: number | number[]
+  space?: number | number[]
   text?: React.ReactNode
   type?: 'button' | 'reset' | 'submit'
 }
 
 const Root = styled.button(radius as any, buttonBaseStyles, buttonColorStyles)
 
-const TextContainer = styled.span`
-  svg + & {
-    margin-left: 0.75em;
-  }
-`
-
 export const Button = forwardRef(
   (props: BoxMarginProps & ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'size'>, ref) => {
     const {
       children,
       disabled,
+      icon,
+      iconRight,
       mode = 'default',
       margin,
       marginX,
@@ -52,9 +51,9 @@ export const Button = forwardRef(
       radius: radiusProp = 2,
       selected,
       size,
+      space = 3,
       text,
       tone = 'default',
-      icon,
       ...restProps
     } = props
 
@@ -92,13 +91,32 @@ export const Button = forwardRef(
         uiMode={mode}
         uiRadius={uiRadius}
       >
-        {(icon || text) && (
+        {(icon || text || iconRight) && (
           <Box as="span" {...boxProps}>
-            <Text as="span" size={size}>
-              {typeof icon === 'function' && createElement(icon)}
-              {typeof icon === 'string' && <Icon symbol={icon} />}
-              {text && <TextContainer>{text}</TextContainer>}
-            </Text>
+            <Flex as="span" justify="center">
+              {icon && (
+                <Text size={size}>
+                  {typeof icon === 'function' && createElement(icon)}
+                  {typeof icon === 'string' && <Icon symbol={icon} />}
+                </Text>
+              )}
+
+              {text && (
+                <Box
+                  marginLeft={icon ? space : undefined}
+                  marginRight={iconRight ? space : undefined}
+                >
+                  <Text size={size}>{text}</Text>
+                </Box>
+              )}
+
+              {iconRight && (
+                <Text size={size}>
+                  {typeof iconRight === 'function' && createElement(iconRight)}
+                  {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
+                </Text>
+              )}
+            </Flex>
           </Box>
         )}
 
