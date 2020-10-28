@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
+    "build:packages": "lerna run --scope @sanity/* build",
     "dev": "lerna run --parallel --stream dev",
     "dev:color": "lerna run --stream --scope @sanity/color dev",
     "dev:docs": "run-p dev:ui-docs dev:studio",
@@ -14,9 +15,9 @@
     "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
     "release": "lerna publish --no-private",
-    "lint": "lerna run lint",
-    "test": "lerna run test",
-    "type-check": "lerna run type-check"
+    "lint": "lerna run --stream --parallel lint",
+    "test": "lerna run --stream --parallel test",
+    "type-check": "lerna run --stream --parallel type-check"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.6.0",
@@ -47,7 +48,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "run-p lint type-check test"
+      "pre-commit": "run-s build:packages lint test type-check"
     }
   }
 }
