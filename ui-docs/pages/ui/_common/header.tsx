@@ -1,10 +1,9 @@
-import {Box, Code, Label, Stack, Switch, Text} from '@sanity/ui'
+import {Box, Code, Label, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
-import {atomRoutes, componentRoutes, hookRoutes, utilRoutes} from '../../routes'
-import {useApp} from './hooks'
+import {atomRoutes, componentRoutes, hookRoutes, utilRoutes} from '../../../routes'
 
 const Root = styled(Box)`
   overflow: auto;
@@ -27,7 +26,7 @@ function NavLink(props: {children: React.ReactNode; href: string}) {
   )
 }
 
-function AppHeaderLink({children, href}: {children: React.ReactNode; href: string}) {
+function UIPageHeaderLink({children, href}: {children: React.ReactNode; href: string}) {
   return (
     <Text as="li" size={[2, 2, 3]}>
       <NavLink href={href}>{children}</NavLink>
@@ -35,28 +34,16 @@ function AppHeaderLink({children, href}: {children: React.ReactNode; href: strin
   )
 }
 
-export function AppHeader() {
-  const {colorScheme, setColorScheme} = useApp()
-
+export function UIPageHeader() {
   return (
-    <Root data-name="AppHeader" forwardedAs="header">
-      <Box as="nav" padding={[4, 5, 6]}>
+    <Root data-name="UIPageHeader" forwardedAs="header">
+      <Box as="nav" padding={[3, 4, 5]}>
         <Stack space={[5, 5, 6]}>
           <Stack space={[3, 3, 4]}>
-            <Code as="h1" size={[2, 2, 3]}>
-              <strong>@sanity/ui</strong>
-            </Code>
-
-            <a href="https://www.npmjs.com/package/@sanity/ui" rel="noreferrer" target="_blank">
-              <img src="https://img.shields.io/npm/v/@sanity/ui.svg?style=flat-square" />
-            </a>
-          </Stack>
-
-          <Stack space={[3, 3, 4]}>
             <Stack as="ul" space={[3, 3, 4]}>
-              <AppHeaderLink href="/">Introduction</AppHeaderLink>
-              <AppHeaderLink href="/concepts">Concepts</AppHeaderLink>
-              <AppHeaderLink href="/theme">Theme</AppHeaderLink>
+              <UIPageHeaderLink href="/ui">Introduction</UIPageHeaderLink>
+              <UIPageHeaderLink href="/ui/concepts">Concepts</UIPageHeaderLink>
+              <UIPageHeaderLink href="/ui/theme">Theme</UIPageHeaderLink>
             </Stack>
           </Stack>
 
@@ -66,9 +53,9 @@ export function AppHeader() {
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
               {atomRoutes.map((route) => (
-                <AppHeaderLink href={`/atom/${route.slug}`} key={route.slug}>
+                <UIPageHeaderLink href={`/ui/atom/${route.slug}`} key={route.slug}>
                   {route.title}
-                </AppHeaderLink>
+                </UIPageHeaderLink>
               ))}
             </Stack>
           </Stack>
@@ -79,9 +66,9 @@ export function AppHeader() {
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
               {componentRoutes.map((route) => (
-                <AppHeaderLink href={`/component/${route.slug}`} key={route.slug}>
+                <UIPageHeaderLink href={`/ui/component/${route.slug}`} key={route.slug}>
                   {route.title}
-                </AppHeaderLink>
+                </UIPageHeaderLink>
               ))}
             </Stack>
           </Stack>
@@ -92,9 +79,9 @@ export function AppHeader() {
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
               {hookRoutes.map((route) => (
-                <AppHeaderLink href={`/hook/${route.slug}`} key={route.slug}>
+                <UIPageHeaderLink href={`/ui/hook/${route.slug}`} key={route.slug}>
                   {route.title}
-                </AppHeaderLink>
+                </UIPageHeaderLink>
               ))}
             </Stack>
           </Stack>
@@ -105,23 +92,12 @@ export function AppHeader() {
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
               {utilRoutes.map((route) => (
-                <AppHeaderLink href={`/util/${route.slug}`} key={route.slug}>
+                <UIPageHeaderLink href={`/ui/util/${route.slug}`} key={route.slug}>
                   {route.title}
-                </AppHeaderLink>
+                </UIPageHeaderLink>
               ))}
             </Stack>
           </Stack>
-
-          <Switch
-            checked={colorScheme === 'dark'}
-            onChange={(event) => {
-              if (event.currentTarget.checked) {
-                setColorScheme('dark')
-              } else {
-                setColorScheme('light')
-              }
-            }}
-          />
         </Stack>
       </Box>
     </Root>

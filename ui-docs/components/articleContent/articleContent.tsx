@@ -3,12 +3,17 @@ import {Box, Card, Code, Heading, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
 import {CodeExample, PropertyTable} from '..'
 import {blocksToText} from '../article/helpers'
+import {NpmPackageBadge} from '../npmPackageBadge'
 import {LinkIcon} from '~/../icons/src'
 
 export function ArticleContent({blocks, toc}: {blocks: any[]; toc: any}) {
   const serializers = useMemo(() => buildSerializers(toc), [toc])
 
   return <BlockContent blocks={blocks} serializers={serializers} />
+}
+
+const CODE_LANGUAGES = {
+  sh: 'bash',
 }
 
 function buildSerializers(toc: any) {
@@ -21,7 +26,11 @@ function buildSerializers(toc: any) {
         shadow={1}
         style={{overflow: 'auto'}}
       >
-        <Code language={props.node.language} muted size={[2, 2, 3]}>
+        <Code
+          language={CODE_LANGUAGES[props.node.language] || props.node.language}
+          muted
+          size={[2, 2, 3]}
+        >
           {props.node.code}
         </Code>
       </Card>
@@ -35,9 +44,15 @@ function buildSerializers(toc: any) {
       <CodeExample
         code={props.node.code.code}
         hookCode={props.node.hook?.code}
-        language={props.node.code.language}
+        language={CODE_LANGUAGES[props.node.code.language] || props.node.code.language}
       />
     )
+  }
+
+  function NpmPackageBadgeSerializer(props: any) {
+    if (!props.node || !props.node.name) return null
+
+    return <NpmPackageBadge name={props.node.name} />
   }
 
   function PropertyTableSerializer(props: any) {
@@ -123,6 +138,7 @@ function buildSerializers(toc: any) {
       block: BlockSerializer,
       code: CodeSerializer,
       codeExample: CodeExampleSerializer,
+      npmPackageBadge: NpmPackageBadgeSerializer,
       propertyTable: PropertyTableSerializer,
     },
   }

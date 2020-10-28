@@ -2,12 +2,14 @@ import {AppProps} from 'next/app'
 import Head from 'next/head'
 import React from 'react'
 import Refractor from 'react-refractor'
+import bash from 'refractor/lang/bash'
 import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
-import {AppProvider} from '../components'
+import {AppProvider} from '~/components'
 
+Refractor.registerLanguage(bash)
 Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)

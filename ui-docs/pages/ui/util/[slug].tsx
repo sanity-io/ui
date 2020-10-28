@@ -1,7 +1,9 @@
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
+import {UIPageLayout} from '../_common/layout'
 import {AppLayout, Article} from '~/components'
+import {utilRoutes} from '~/routes'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
@@ -16,16 +18,21 @@ const PAGE_QUERY = groq`
   }
 `
 
-export async function getStaticProps({preview = __DEV__}) {
-  const params = {slug: 'theme'}
+export async function getStaticProps({params, preview = __DEV__}) {
   const data = await getClient(preview).fetch(PAGE_QUERY, params)
 
   return {props: {data, params, preview}}
 }
 
-function ThemePage({data: initialData, params = {}, preview}: any) {
-  const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
+export function getStaticPaths() {
+  return {
+    paths: utilRoutes.map((route) => ({params: {slug: route.slug}})),
+    fallback: true,
+  }
+}
 
+function UtilPage({data: initialData, params = {}, preview}: any) {
+  const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
   const {article} = data
 
   return (
@@ -36,10 +43,12 @@ function ThemePage({data: initialData, params = {}, preview}: any) {
       </Head>
 
       <AppLayout>
-        <Article article={article} slug={params.slug} />
+        <UIPageLayout>
+          <Article article={article} slug={params.slug} />
+        </UIPageLayout>
       </AppLayout>
     </>
   )
 }
 
-export default ThemePage
+export default UtilPage

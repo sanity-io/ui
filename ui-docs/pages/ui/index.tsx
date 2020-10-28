@@ -1,6 +1,7 @@
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
+import {UIPageLayout} from './_common/layout'
 import {AppLayout, Article} from '~/components'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
@@ -17,13 +18,13 @@ const PAGE_QUERY = groq`
 `
 
 export async function getStaticProps({preview = __DEV__}) {
-  const params = {slug: 'concepts'}
+  const params = {slug: 'intro'}
   const data = await getClient(preview).fetch(PAGE_QUERY, params)
 
   return {props: {data, params, preview}}
 }
 
-function ConceptsPage({data: initialData, params = {}, preview}: any) {
+function IndexPage({data: initialData, params = {}, preview}: any) {
   const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
 
   const {article} = data
@@ -36,10 +37,12 @@ function ConceptsPage({data: initialData, params = {}, preview}: any) {
       </Head>
 
       <AppLayout>
-        <Article article={article} slug={params.slug} />
+        <UIPageLayout>
+          <Article article={article} slug={params.slug} />
+        </UIPageLayout>
       </AppLayout>
     </>
   )
 }
 
-export default ConceptsPage
+export default IndexPage

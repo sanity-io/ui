@@ -1,7 +1,7 @@
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
-import {utilRoutes} from '../../routes'
+import {UIPageLayout} from './_common/layout'
 import {AppLayout, Article} from '~/components'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
@@ -17,21 +17,16 @@ const PAGE_QUERY = groq`
   }
 `
 
-export async function getStaticProps({params, preview = __DEV__}) {
+export async function getStaticProps({preview = __DEV__}) {
+  const params = {slug: 'concepts'}
   const data = await getClient(preview).fetch(PAGE_QUERY, params)
 
   return {props: {data, params, preview}}
 }
 
-export function getStaticPaths() {
-  return {
-    paths: utilRoutes.map((route) => ({params: {slug: route.slug}})),
-    fallback: true,
-  }
-}
-
-function AtomPage({data: initialData, params = {}, preview}: any) {
+function ConceptsPage({data: initialData, params = {}, preview}: any) {
   const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
+
   const {article} = data
 
   return (
@@ -42,10 +37,12 @@ function AtomPage({data: initialData, params = {}, preview}: any) {
       </Head>
 
       <AppLayout>
-        <Article article={article} slug={params.slug} />
+        <UIPageLayout>
+          <Article article={article} slug={params.slug} />
+        </UIPageLayout>
       </AppLayout>
     </>
   )
 }
 
-export default AtomPage
+export default ConceptsPage

@@ -1,8 +1,9 @@
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
-import {utilRoutes} from '../../routes'
+import {UIPageLayout} from '../_common/layout'
 import {AppLayout, Article} from '~/components'
+import {utilRoutes} from '~/routes'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
@@ -30,7 +31,7 @@ export function getStaticPaths() {
   }
 }
 
-function HookPage({data: initialData, params = {}, preview}: any) {
+function ComponentPage({data: initialData, params = {}, preview}: any) {
   const {data = {}} = usePreviewSubscription(PAGE_QUERY, {params, initialData, enabled: preview})
   const {article} = data
 
@@ -42,10 +43,12 @@ function HookPage({data: initialData, params = {}, preview}: any) {
       </Head>
 
       <AppLayout>
-        <Article article={article} slug={params.slug} />
+        <UIPageLayout>
+          <Article article={article} slug={params.slug} />
+        </UIPageLayout>
       </AppLayout>
     </>
   )
 }
 
-export default HookPage
+export default ComponentPage
