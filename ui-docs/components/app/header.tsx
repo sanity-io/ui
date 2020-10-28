@@ -61,7 +61,7 @@ export function AppHeader() {
           </Stack>
 
           <Stack space={[3, 3, 4]}>
-            <Label as="h2" size={[2, 2, 3]}>
+            <Label as="h2" muted size={[2, 2, 3]}>
               Atoms
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
@@ -74,7 +74,7 @@ export function AppHeader() {
           </Stack>
 
           <Stack space={[3, 3, 4]}>
-            <Label as="h2" size={[2, 2, 3]}>
+            <Label as="h2" muted size={[2, 2, 3]}>
               Components
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
@@ -87,7 +87,7 @@ export function AppHeader() {
           </Stack>
 
           <Stack space={[3, 3, 4]}>
-            <Label as="h2" size={[2, 2, 3]}>
+            <Label as="h2" muted size={[2, 2, 3]}>
               Hooks
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
@@ -100,7 +100,7 @@ export function AppHeader() {
           </Stack>
 
           <Stack space={[3, 3, 4]}>
-            <Label as="h2" size={[2, 2, 3]}>
+            <Label as="h2" muted size={[2, 2, 3]}>
               Utils
             </Label>
             <Stack as="ul" space={[3, 3, 4]}>
