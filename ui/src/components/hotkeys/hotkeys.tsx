@@ -16,7 +16,10 @@ const Root = styled.kbd`
 `
 
 const Key = styled(KBD)`
-  display: block;
+  /* See: https://github.com/styled-components/styled-components/issues/1816 */
+  && {
+    display: block;
+  }
 `
 
 export const Hotkeys = forwardRef(
