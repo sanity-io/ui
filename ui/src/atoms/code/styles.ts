@@ -119,8 +119,8 @@ function codeSyntaxHighlightingStyles({scheme, theme}: {scheme: ColorSchemeKey; 
   `
 }
 
-export function codeBaseStyles(props: {muted?: boolean; theme: Theme}) {
-  const {muted, theme} = props
+export function codeBaseStyles(props: {theme: Theme; uiMuted?: boolean}) {
+  const {uiMuted, theme} = props
 
   return css`
     position: relative;
@@ -130,7 +130,7 @@ export function codeBaseStyles(props: {muted?: boolean; theme: Theme}) {
     padding: ${rem(1)} 0 0;
     margin: 0;
 
-    ${muted &&
+    ${uiMuted &&
     css`
       color: var(--card-muted-fg-color);
     `}

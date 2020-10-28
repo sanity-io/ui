@@ -2,8 +2,8 @@ import {css} from 'styled-components'
 import {rem} from '../../styles'
 import {Theme, ThemeFontSize} from '../../theme'
 
-export function labelBaseStyles(props: {theme: Theme}) {
-  const {theme} = props
+export function labelBaseStyles(props: {theme: Theme; uiMuted?: boolean}) {
+  const {theme, uiMuted} = props
 
   return css`
     position: relative;
@@ -12,6 +12,11 @@ export function labelBaseStyles(props: {theme: Theme}) {
     display: block;
     padding: 1px 0 0;
     margin: 0;
+
+    ${uiMuted &&
+    css`
+      color: var(--card-muted-fg-color);
+    `}
 
     &:before {
       content: '';
