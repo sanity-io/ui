@@ -1,5 +1,5 @@
 import {useLocation, useStudioToolPlugins} from '@sanity/base'
-import {Button} from '@sanity/ui'
+import {Box, Button, Text, Tooltip} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
 import {useResponsiveMenu} from './hooks'
@@ -38,16 +38,29 @@ export function ToolMenu(props: {onHide: () => void; onShow: () => void}) {
         {!hidden && (
           <>
             {tools.map((tool: any, toolIndex: number) => (
-              <Button
-                as="a"
-                icon={tool.icon}
-                href={toolIndex === 0 ? '/' : `/${tool.name}`}
+              <Tooltip
+                content={
+                  <Box padding={2}>
+                    <Text muted size={1}>
+                      {tool.title}
+                    </Text>
+                  </Box>
+                }
+                disabled={!collapsed}
                 key={tool.name}
-                mode="bleed"
-                onClick={handleLinkClick}
-                selected={activeToolName === tool.name}
-                text={collapsed ? undefined : <>{tool.title}</>}
-              />
+                placement="bottom"
+                portal
+              >
+                <Button
+                  as="a"
+                  icon={tool.icon}
+                  href={toolIndex === 0 ? '/' : `/${tool.name}`}
+                  mode="bleed"
+                  onClick={handleLinkClick}
+                  selected={activeToolName === tool.name}
+                  text={collapsed ? undefined : <>{tool.title}</>}
+                />
+              </Tooltip>
             ))}
           </>
         )}

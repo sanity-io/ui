@@ -104,9 +104,9 @@ export function DocumentPanel({onChangeOpen}: {onChangeOpen: () => void}) {
                       }}
                       text="Review changes"
                     />
-                    <MenuItem icon="earth-americas" text="Preview on site" />
+                    <MenuItem icon="binary-document" text="Inspect JSON" />
                     <MenuDivider />
-                    <MenuItem icon="binary-document" text="Inspect" />
+                    <MenuItem icon="earth-americas" text="Preview on site" />
                   </Menu>
                 }
                 placement="bottom"

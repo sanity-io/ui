@@ -15,6 +15,7 @@ import {
 import React, {useCallback, useState} from 'react'
 import styled, {css} from 'styled-components'
 import {ComposeDialog} from './composeDialog'
+import {DatasetSelect} from './datasetSelect'
 import {NavDrawer} from './navDrawer'
 import {Search} from './search'
 import {ToolMenu} from './toolMenu'
@@ -113,10 +114,7 @@ export function Navbar({projectName}: {projectName: string}) {
   return (
     <>
       <ElementQuery className="sanity-navbar">
-        <Root
-          padding={1}
-          // scheme="dark"
-        >
+        <Root padding={1} scheme="dark">
           <Flex align="center">
             <ToggleMenuButtonBox padding={1} visible={toolMenuVisible}>
               <Button icon="menu" mode="bleed" onClick={handleMenuShow} />
@@ -140,6 +138,10 @@ export function Navbar({projectName}: {projectName: string}) {
                 text={<strong style={{color: 'var(--card-fg-color)'}}>{projectName}</strong>}
               />
             </BrandingBox>
+
+            <Box padding={1}>
+              <DatasetSelect />
+            </Box>
 
             <WideComposeBox padding={1}>
               <Button

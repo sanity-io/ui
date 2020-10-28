@@ -45,10 +45,13 @@ export function DocumentTypeListPane() {
                 id="pane-context-menu"
                 menu={
                   <Menu>
-                    <MenuItem icon="earth-americas" text="Preview on site" />
-                    <MenuItem icon="restore" text="Review changes" />
+                    <MenuItem space={4} text="Sort by title" />
+                    <MenuItem space={4} text="Sort by slug" />
+                    <MenuItem iconRight="arrow-down" space={4} text="Sort by last edited" />
+                    <MenuItem space={4} text="Sort by created" />
                     <MenuDivider />
-                    <MenuItem icon="binary-document" text="Inspect" />
+                    <MenuItem icon="stack-compact" iconRight="checkmark" text="Compact view" />
+                    <MenuItem icon="split-horizontal" text="Detailed view" />
                   </Menu>
                 }
                 placement="bottom"
