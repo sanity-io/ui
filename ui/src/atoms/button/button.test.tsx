@@ -6,9 +6,15 @@ import {Button} from './button'
 
 describe('atoms/button', () => {
   it('should have no violations (axe)', async () => {
-    const result = render(<Button icon="add" text="Label" tone="positive" />)
+    const lightResult = render(<Button icon="add" text="Label" tone="positive" />, {
+      scheme: 'light',
+    })
+    expect(await axe(lightResult.container.outerHTML)).toHaveNoViolations()
 
-    expect(await axe(result.container.outerHTML)).toHaveNoViolations()
+    const darkResult = render(<Button icon="add" text="Label" tone="positive" />, {
+      scheme: 'dark',
+    })
+    expect(await axe(darkResult.container.outerHTML)).toHaveNoViolations()
   })
 
   it('should render text', () => {
