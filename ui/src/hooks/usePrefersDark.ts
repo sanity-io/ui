@@ -1,23 +1,22 @@
-import {useEffect, useMemo, useState} from 'react'
+import {useEffect, useState} from 'react'
 
 export function usePrefersDark() {
-  const match = useMemo(
-    () =>
-      typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null,
-    []
-  )
-
-  const [dark, setDark] = useState(match ? match.matches : false)
+  const [dark, setDark] = useState(false)
 
   useEffect(() => {
-    if (!match) return undefined
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
 
-    const handleChange = () => setDark(match.matches)
+    setDark(mq.matches)
 
-    match.addListener(handleChange)
+    const handleChange = () => {
+      console.log('change', mq.matches)
+      setDark(mq.matches)
+    }
 
-    return () => match.removeListener(handleChange)
-  }, [match])
+    mq.addListener(handleChange)
+
+    return () => mq.removeListener(handleChange)
+  }, [])
 
   return dark
 }
