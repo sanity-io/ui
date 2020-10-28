@@ -113,7 +113,7 @@ export const fonts: ThemeFonts = {
         fontSize: 8.5,
         iconSize: 15,
         lineHeight: 10,
-        letterSpacing: 0,
+        letterSpacing: 0.5,
       },
       {
         ascenderHeight: 2,
@@ -121,7 +121,7 @@ export const fonts: ThemeFonts = {
         fontSize: 10,
         iconSize: 17,
         lineHeight: 11,
-        letterSpacing: 0,
+        letterSpacing: 0.5,
       },
       {
         ascenderHeight: 2,
@@ -129,7 +129,7 @@ export const fonts: ThemeFonts = {
         fontSize: 11,
         iconSize: 19,
         lineHeight: 12,
-        letterSpacing: 0,
+        letterSpacing: 0.5,
       },
       {
         ascenderHeight: 3,
@@ -137,7 +137,7 @@ export const fonts: ThemeFonts = {
         fontSize: 13,
         iconSize: 21,
         lineHeight: 15,
-        letterSpacing: 0,
+        letterSpacing: 0.5,
       },
       {
         ascenderHeight: 4,
@@ -145,7 +145,7 @@ export const fonts: ThemeFonts = {
         fontSize: 14,
         iconSize: 23,
         lineHeight: 17,
-        letterSpacing: 0,
+        letterSpacing: 0.5,
       },
     ],
   },
