@@ -5,8 +5,6 @@ import {CardTone} from './types'
 
 export function cardBaseStyles() {
   return css`
-    display: block;
-
     &:is(button) {
       -webkit-font-smoothing: inherit;
       appearance: none;
