@@ -6,15 +6,15 @@ import {buildButtonDefaultMode, buildButtonGhostMode, buildButtonBleedMode} from
 
 const themeColor: ThemeColor = {
   avatar: {
-    gray: hues.gray[500].hex,
-    blue: hues.blue[500].hex,
-    cyan: hues.cyan[500].hex,
-    green: hues.green[500].hex,
-    yellow: hues.yellow[500].hex,
-    orange: hues.orange[500].hex,
-    red: hues.red[500].hex,
-    magenta: hues.magenta[500].hex,
-    purple: hues.purple[500].hex,
+    gray: hues.gray[600].hex,
+    blue: hues.blue[600].hex,
+    cyan: hues.cyan[600].hex,
+    green: hues.green[600].hex,
+    yellow: hues.yellow[600].hex,
+    orange: hues.orange[600].hex,
+    red: hues.red[600].hex,
+    magenta: hues.magenta[600].hex,
+    purple: hues.purple[600].hex,
   },
 
   // todo

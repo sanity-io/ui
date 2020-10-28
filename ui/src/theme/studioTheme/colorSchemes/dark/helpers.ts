@@ -1,4 +1,4 @@
-import {hues, ColorHueKey} from '@sanity/color'
+import {black, hues, ColorHueKey} from '@sanity/color'
 import {ThemeButtonColorMode} from '../../../types'
 
 export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMode {
@@ -6,28 +6,28 @@ export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMod
 
   return {
     enabled: {
-      bg: hue[500].hex,
-      fg: hues.gray[50].hex,
+      bg: hue[300].hex,
+      fg: black.hex,
       border: 'transparent',
     },
     disabled: {
-      bg: hue[500].hex,
-      fg: hues.gray[50].hex,
+      bg: hue[800].hex,
+      fg: black.hex,
       border: 'transparent',
     },
     hovered: {
       bg: hue[400].hex,
-      fg: hues.gray[50].hex,
+      fg: black.hex,
       border: 'transparent',
     },
     pressed: {
       bg: hue[500].hex,
-      fg: hues.gray[50].hex,
+      fg: black.hex,
       border: 'transparent',
     },
     selected: {
-      bg: hue[500].hex,
-      fg: hues.gray[50].hex,
+      bg: hue[600].hex,
+      fg: black.hex,
       border: 'transparent',
     },
   }
@@ -49,18 +49,18 @@ export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode 
     },
     hovered: {
       bg: hue[400].hex,
-      fg: hues.gray[50].hex,
+      fg: black.hex,
       border: 'transparent',
     },
     pressed: {
-      bg: 'transparent',
-      fg: hue[400].hex,
-      border: hue[800].hex,
+      bg: hue[500].hex,
+      fg: black.hex,
+      border: 'transparent',
     },
     selected: {
-      bg: 'transparent',
-      fg: hue[400].hex,
-      border: hue[800].hex,
+      bg: hue[600].hex,
+      fg: black.hex,
+      border: 'transparent',
     },
   }
 }

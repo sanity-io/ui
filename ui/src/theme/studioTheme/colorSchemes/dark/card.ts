@@ -15,7 +15,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[900].hex,
           hard: hues.gray[800].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -34,7 +34,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -53,7 +53,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -72,7 +72,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -91,7 +91,7 @@ export const card: ThemeCardColor = {
           soft: hues.blue[900].hex,
           hard: hues.blue[800].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[700].hex,
         shadow: {
           outline: rgba(hues.blue[600].hex, 0.2),
@@ -112,7 +112,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -131,7 +131,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -150,7 +150,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -169,7 +169,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
@@ -188,7 +188,7 @@ export const card: ThemeCardColor = {
           soft: hues.gray[950].hex,
           hard: hues.gray[900].hex,
         },
-        focusRing: hues.blue[500].hex,
+        focusRing: hues.blue[400].hex,
         link: hues.blue[400].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.25),
