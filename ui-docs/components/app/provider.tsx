@@ -6,13 +6,15 @@ import {
   ThemeProvider,
   usePrefersDark,
 } from '@sanity/ui'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'
 
 export function AppProvider({children}: {children?: React.ReactNode}) {
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ColorSchemeKey>(prefersDark ? 'dark' : 'light')
+
+  useEffect(() => setColorScheme(prefersDark ? 'dark' : 'light'), [prefersDark])
 
   return (
     <ThemeProvider theme={studioTheme}>
