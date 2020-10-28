@@ -5,7 +5,7 @@ Sanity Design consists of:
 - [`@sanity/color`](color)
 - [`@sanity/icons`](icons)
 - [`@sanity/ui`](ui)
-- [`sanity-ui-docs`](ui-docs)
+- [`sanity-design-docs`](ui-docs)
 - [`sanity-ui-storybook`](ui-storybook)
 
 ## Contributing

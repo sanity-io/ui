@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "sanity-ui-docs",
+  "name": "sanity-design-docs",
   "version": "1.0.0-alpha.0",
   "scripts": {
     "build": "next build",

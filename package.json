@@ -8,10 +8,9 @@
     "build:packages": "lerna run --scope @sanity/* build",
     "dev": "lerna run --parallel --stream dev",
     "dev:color": "lerna run --stream --scope @sanity/color dev",
-    "dev:docs": "run-p dev:ui-docs dev:studio",
+    "dev:docs": "lerna run --stream --scope 'sanity-design-{docs,studio}' dev",
     "dev:example-manage": "lerna run --stream --scope sanity-design-example-manage dev",
     "dev:example-studio": "lerna run --stream --scope sanity-design-example-studio dev",
-    "dev:ui-docs": "lerna run --stream --scope sanity-ui-docs dev",
     "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
     "release": "lerna publish --no-private",
@@ -40,11 +39,11 @@
   },
   "workspaces": [
     "color",
+    "docs",
     "examples/*",
     "icons",
     "studio",
     "ui",
-    "ui-docs",
     "ui-storybook"
   ],
   "husky": {
