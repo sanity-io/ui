@@ -1,6 +1,6 @@
 import {render as tlRender, RenderOptions as TLRenderOptions} from '@testing-library/react'
 import React from 'react'
-import {CardProvider} from '../src/atoms/card'
+import {Card} from '../src/atoms/card'
 import {ColorSchemeKey, studioTheme, ThemeProvider} from '../src/theme'
 
 interface RenderOptions extends TLRenderOptions {
@@ -24,7 +24,9 @@ export function render(element: React.ReactElement<any>, options: RenderOptions 
       <Mode>
         <InnerWrapper>
           <ThemeProvider theme={studioTheme}>
-            <CardProvider scheme={scheme}>{children}</CardProvider>
+            <Card padding={4} scheme={scheme}>
+              {children}
+            </Card>
           </ThemeProvider>
         </InnerWrapper>
       </Mode>
