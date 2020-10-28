@@ -1,9 +1,9 @@
-import {Box, Code, Label, Stack, Text} from '@sanity/ui'
+import {Box, Label, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
-import {atomRoutes, componentRoutes, hookRoutes, utilRoutes} from '../../../routes'
+import {atomRoutes, componentRoutes, hookRoutes, utilRoutes} from '~/routes'
 
 const Root = styled(Box)`
   overflow: auto;

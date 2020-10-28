@@ -1,8 +1,8 @@
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
-import {UIPageLayout} from '../_common/layout'
 import {AppLayout, Article} from '~/components'
+import {UIPageLayout} from '~/components/_uiPage/layout'
 import {utilRoutes} from '~/routes'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
