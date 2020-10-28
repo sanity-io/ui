@@ -1,12 +1,12 @@
 import {css} from 'styled-components'
 import {Theme} from '../../theme'
 
-export function textBaseStyles(props: {muted?: boolean; theme: Theme}) {
-  const {muted, theme} = props
+export function textBaseStyles(props: {theme: Theme; uiMuted?: boolean}) {
+  const {uiMuted, theme} = props
   const {weights} = props.theme.fonts.text
 
   return css`
-    ${muted &&
+    ${uiMuted &&
     css`
       color: var(--card-muted-fg-color);
     `}
@@ -26,6 +26,7 @@ export function textBaseStyles(props: {muted?: boolean; theme: Theme}) {
     & code {
       font-family: ${theme.fonts.code.family};
       border-radius: 2px;
+      background: rgba(127, 127, 127, 0.1);
     }
 
     & a {
