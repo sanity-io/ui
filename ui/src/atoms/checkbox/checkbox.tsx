@@ -5,15 +5,13 @@ import {ColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 
-interface CheckboxProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
-}
+interface CheckboxProps {}
 
 const Root = styled.div(checkboxBaseStyles)
 const Input = styled.input<{scheme: ColorSchemeKey}>(inputElementStyles)
 
 export const Checkbox = forwardRef(
-  (props: React.HTMLProps<HTMLInputElement> & CheckboxProps, ref) => {
+  (props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & CheckboxProps, ref) => {
     const {checked, className, style, ...restProps} = props
     const inputRef = useRef<HTMLInputElement | null>(null)
     const card = useCard()
