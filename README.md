@@ -5,8 +5,12 @@ Sanity Design consists of:
 - [`@sanity/color`](color)
 - [`@sanity/icons`](icons)
 - [`@sanity/ui`](ui)
-- [`sanity-design-docs`](ui-docs)
+- [`sanity-design-docs`](docs)
 - [`sanity-ui-storybook`](ui-storybook)
+
+## Documentation
+
+See [sanity-design-docs.vercel.app](https://sanity-design-docs.vercel.app/).
 
 ## Contributing
 
