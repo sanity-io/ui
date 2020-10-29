@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-alpha.16",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "files": [
@@ -25,7 +25,7 @@
     "@juggle/resize-observer": "^3.2.0",
     "@reach/auto-id": "^0.11.2",
     "@sanity/color": "^2.0.5",
-    "@sanity/icons": "^1.0.0-alpha.5",
+    "@sanity/icons": "^1.0.0-alpha.6",
     "polished": "^4.0.3"
   },
   "devDependencies": {
