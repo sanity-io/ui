@@ -12,13 +12,14 @@ export const atomRoutes = [
   {slug: 'icon', title: 'Icon'},
   {slug: 'inline', title: 'Inline'},
   {slug: 'kbd', title: 'KBD'},
+  {slug: 'label', title: 'Label'},
   {slug: 'popover', title: 'Popover'},
   {slug: 'radio', title: 'Radio'},
   {slug: 'stack', title: 'Stack'},
   {slug: 'switch', title: 'Switch'},
+  {slug: 'text', title: 'Text'},
   {slug: 'text-area', title: 'TextArea'},
   {slug: 'text-input', title: 'TextInput'},
-  {slug: 'text', title: 'Text'},
   {slug: 'tooltip', title: 'Tooltip'},
 ]
 
@@ -27,6 +28,7 @@ export const componentRoutes = [
   {slug: 'dialog', title: 'Dialog'},
   {slug: 'hotkeys', title: 'Hotkeys'},
   {slug: 'menu', title: 'Menu'},
+  {slug: 'menu-button', title: 'MenuButton'},
 ]
 
 export const hookRoutes = [
