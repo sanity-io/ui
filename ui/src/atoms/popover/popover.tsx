@@ -1,3 +1,4 @@
+import {Placement} from '@popperjs/core'
 import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import {Layer, Portal, usePortal} from '../../utils'
@@ -11,19 +12,7 @@ interface PopoverProps {
   disabled?: boolean
   open?: boolean
   padding?: number | number[]
-  placement?:
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'right'
-    | 'right-start'
-    | 'right-end'
-    | 'left'
-    | 'left-start'
-    | 'left-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end'
+  placement?: Placement
   radius?: number | number[]
   referenceElement?: HTMLElement | null
 }

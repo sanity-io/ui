@@ -7,7 +7,6 @@ import {useCard} from '../card'
 import {getResponsiveProp} from '../helpers'
 
 interface TextInputProps extends BoxMarginProps, BoxPaddingProps {
-  muted?: boolean
   radius?: number | number[]
   size?: number | number[]
   weight?: string

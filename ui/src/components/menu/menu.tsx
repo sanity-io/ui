@@ -66,6 +66,8 @@ export const Menu = forwardRef(
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'ArrowUp') {
+          event.preventDefault()
+
           const nextIndex = (activeIndex + itemsRef.current.length - 1) % itemsRef.current.length
           const element = itemsRef.current[nextIndex]
 
@@ -76,6 +78,8 @@ export const Menu = forwardRef(
         }
 
         if (event.key === 'ArrowDown') {
+          event.preventDefault()
+
           const nextIndex = (activeIndex + 1) % itemsRef.current.length
           const element = itemsRef.current[nextIndex]
 

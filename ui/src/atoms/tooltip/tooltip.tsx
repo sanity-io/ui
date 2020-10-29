@@ -6,17 +6,13 @@ import {Portal} from '../../utils'
 import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
 
-// import styles from './tooltip.css'
-
 export interface TooltipProps {
   boundaryElement?: HTMLElement | null
   children: React.ReactElement
-  className?: string
   content: React.ReactNode
   disabled?: boolean
   placement?: Placement
   portal?: boolean
-  // tone?: 'navbar'
   allowedAutoPlacements?: Placement[]
   fallbackPlacements?: Placement[]
 }

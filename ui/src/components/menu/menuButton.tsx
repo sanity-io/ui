@@ -10,7 +10,7 @@ export interface MenuButtonProps {
   placement?: Placement
 }
 
-export function MenuButton({button: buttonProp, id, menu: menuProp}: MenuButtonProps) {
+export function MenuButton({button: buttonProp, id, menu: menuProp, placement}: MenuButtonProps) {
   const [open, setOpen] = useState(false)
   const [focusLast, setFocusLast] = useState(false)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
@@ -23,12 +23,14 @@ export function MenuButton({button: buttonProp, id, menu: menuProp}: MenuButtonP
 
   const handleButtonKeyDown = useCallback((event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'ArrowDown') {
+      event.preventDefault()
       setOpen(true)
       setFocusLast(false)
       return
     }
 
     if (event.key === 'ArrowUp') {
+      event.preventDefault()
       setOpen(true)
       setFocusLast(true)
       return
@@ -75,7 +77,7 @@ export function MenuButton({button: buttonProp, id, menu: menuProp}: MenuButtonP
   const button = buttonProp ? cloneElement(buttonProp, buttonProps) : null
 
   return (
-    <Popover content={menu} data-ui="MenuButton" open={open} radius={2}>
+    <Popover content={menu} data-ui="MenuButton" open={open} placement={placement} radius={2}>
       {button || <></>}
     </Popover>
   )
