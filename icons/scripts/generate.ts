@@ -1,5 +1,3 @@
-// @todo: Make this code readable!
-
 import fs from 'fs'
 import path from 'path'
 import util from 'util'
@@ -24,81 +22,101 @@ const prettierConfig = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../../.prettierrc'), 'utf8')
 )
 
-async function generateIcon(filePath: string) {
+async function readIcon(filePath: string) {
   const relativePath = path.relative(IMPORT_PATH, filePath)
-  const parts = relativePath.split('/')
-  const filename = parts.pop()
+  const nameSegments = relativePath.split('/')
+  const filename = nameSegments.pop()
 
   if (!filename) throw new Error('no filename')
 
-  const filenameParts = filename.split('.')
+  // Add name to segments
+  nameSegments.push(...filename.split('.').slice(0, -1))
 
-  filenameParts.pop()
-  parts.push(...filenameParts)
-
-  const name = parts.slice(1).join('-')
+  const name = nameSegments.join('-')
   const componentName = camelCase(`${name}-icon`, {pascalCase: true})
-  const fileBasename = camelCase(name) + 'Icon'
+  const basename = camelCase(name) + 'Icon'
   const contents = await readFile(filePath)
   const svgrJsx = await svgr(
     contents.toString(),
     {icon: true, ref: true, typescript: true},
     {componentName}
   )
-  const targetPath = path.resolve(DIST_PATH, `${fileBasename}.tsx`)
-  const tsxCode = format(
-    `${GENERATED_BANNER}\n\n` +
+  const targetPath = path.resolve(DIST_PATH, `${basename}.tsx`)
+  const code = format(
+    [
+      GENERATED_BANNER,
       svgrJsx
         .replace('* as React', 'React')
         .replace(/"#121923"/g, '"currentColor"')
         .replace('<svg ', '<svg data-sanity-icon="" '),
+    ].join('\n\n'),
     {
-      filepath: targetPath,
       ...prettierConfig,
+      filepath: targetPath,
     }
   )
 
-  await writeFile(targetPath, tsxCode)
-
   return {
-    contents,
+    basename,
+    code,
+    componentName,
+    name,
+    relativePath,
     sourcePath: filePath,
     targetPath,
-    name,
-    basename: fileBasename,
-    componentName,
-    tsxCode,
   }
 }
 
-async function generateIcons() {
+async function writeIcon(file: any) {
+  await writeFile(file.targetPath, file.code)
+}
+
+async function generate() {
   await mkdirp(DIST_PATH)
 
   const filePaths = (await _glob(path.join(IMPORT_PATH, '**/*.svg'))) as any[]
-  const files = await Promise.all(filePaths.map(generateIcon))
+  const files = await Promise.all(filePaths.map(readIcon))
+
+  files.sort((a, b) => {
+    if (a.componentName < b.componentName) {
+      return -1
+    }
+
+    if (a.componentName > b.componentName) {
+      return 1
+    }
+
+    return 0
+  })
+
+  await Promise.all(files.map(writeIcon))
+
   const iconImports = files
     .map((f) => `import {default as ${f.componentName}} from './${f.basename}';`)
     .join('\n')
+
   const iconExports = `export {${files.map((f) => f.componentName).join(',')}}`
+
   const defaultExport = `export default {${files
     .map((f) => `'${f.name}': ${f.componentName}`)
     .join(',')}}`
+
   const typesExports = `export type IconSymbol = \n${files.map((f) => `| '${f.name}'`).join('\n')};`
+
   const indexPath = path.resolve(DIST_PATH, `index.ts`)
+
   const indexTsCode = format(
-    `${GENERATED_BANNER}\n\n` +
-      `/* eslint-disable import/order */\n\n` +
-      `${iconImports}\n\n${typesExports}\n\n${iconExports}\n\n${defaultExport}`,
+    [GENERATED_BANNER, iconImports, typesExports, iconExports, defaultExport].join('\n\n'),
     {
-      filepath: indexPath,
       ...prettierConfig,
+      filepath: indexPath,
     }
   )
 
   await writeFile(indexPath, indexTsCode)
 }
 
-generateIcons().catch((err) => {
+generate().catch((err) => {
   console.log(err)
   process.exit(1)
 })

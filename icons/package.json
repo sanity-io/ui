@@ -12,7 +12,7 @@
     "build-cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
     "build-es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
     "clean": "rimraf dist src",
-    "generate": "ts-node --files scripts/generateIcons.ts",
+    "generate": "ts-node --files scripts/generate.ts",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "npm run clean && npm run generate",
     "prepublishOnly": "npm run build",

@@ -1,0 +1,29 @@
+/*
+ * AUTO-GENERATED, DO NOT EDIT
+ */
+
+import React from 'react'
+
+function RevertIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+  return (
+    <svg
+      data-sanity-icon=""
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      ref={svgRef}
+      {...props}
+    >
+      <path
+        d="M5 9L14.5 9C16.9853 9 19 11.0147 19 13.5V13.5C19 15.9853 16.9853 18 14.5 18L5 18"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
+      <path d="M9 13L5 9L9 5" stroke="currentColor" strokeWidth={1.2} />
+    </svg>
+  )
+}
+
+const ForwardRef = React.forwardRef(RevertIcon)
+export default ForwardRef

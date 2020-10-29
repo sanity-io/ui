@@ -2,20 +2,22 @@
  * AUTO-GENERATED, DO NOT EDIT
  */
 
-/* eslint-disable import/order */
-
+import {default as ActivityIcon} from './activityIcon'
 import {default as AddCircleIcon} from './addCircleIcon'
 import {default as AddIcon} from './addIcon'
+import {default as ArchiveIcon} from './archiveIcon'
 import {default as ArrowDownIcon} from './arrowDownIcon'
 import {default as ArrowLeftIcon} from './arrowLeftIcon'
 import {default as ArrowRightIcon} from './arrowRightIcon'
 import {default as ArrowUpIcon} from './arrowUpIcon'
 import {default as BellIcon} from './bellIcon'
+import {default as BillIcon} from './billIcon'
 import {default as BinaryDocumentIcon} from './binaryDocumentIcon'
 import {default as BlockElementIcon} from './blockElementIcon'
 import {default as BlockquoteIcon} from './blockquoteIcon'
 import {default as BoldIcon} from './boldIcon'
 import {default as BookIcon} from './bookIcon'
+import {default as BottleIcon} from './bottleIcon'
 import {default as BulbFilledIcon} from './bulbFilledIcon'
 import {default as BulbOutlineIcon} from './bulbOutlineIcon'
 import {default as CalendarIcon} from './calendarIcon'
@@ -27,8 +29,8 @@ import {default as ChevronLeftIcon} from './chevronLeftIcon'
 import {default as ChevronRightIcon} from './chevronRightIcon'
 import {default as ChevronUpIcon} from './chevronUpIcon'
 import {default as CircleIcon} from './circleIcon'
-import {default as ClipboardImageIcon} from './clipboardImageIcon'
 import {default as ClipboardIcon} from './clipboardIcon'
+import {default as ClipboardImageIcon} from './clipboardImageIcon'
 import {default as ClockIcon} from './clockIcon'
 import {default as CloseCircleIcon} from './closeCircleIcon'
 import {default as CloseIcon} from './closeIcon'
@@ -43,6 +45,7 @@ import {default as ControlsIcon} from './controlsIcon'
 import {default as DashboardIcon} from './dashboardIcon'
 import {default as DatabaseIcon} from './databaseIcon'
 import {default as DocumentIcon} from './documentIcon'
+import {default as DocumentRemoveIcon} from './documentRemoveIcon'
 import {default as DocumentsIcon} from './documentsIcon'
 import {default as DownloadIcon} from './downloadIcon'
 import {default as DragHandleIcon} from './dragHandleIcon'
@@ -52,6 +55,7 @@ import {default as EarthGlobeIcon} from './earthGlobeIcon'
 import {default as EditIcon} from './editIcon'
 import {default as EllipsisHorizontalIcon} from './ellipsisHorizontalIcon'
 import {default as EllipsisVerticalIcon} from './ellipsisVerticalIcon'
+import {default as EqualIcon} from './equalIcon'
 import {default as ErrorFilledIcon} from './errorFilledIcon'
 import {default as ErrorOutlineIcon} from './errorOutlineIcon'
 import {default as ExpandIcon} from './expandIcon'
@@ -64,6 +68,7 @@ import {default as HelpCircleIcon} from './helpCircleIcon'
 import {default as HomeIcon} from './homeIcon'
 import {default as IceCreamIcon} from './iceCreamIcon'
 import {default as ImageIcon} from './imageIcon'
+import {default as ImageRemoveIcon} from './imageRemoveIcon'
 import {default as ImagesIcon} from './imagesIcon'
 import {default as InfoFilledIcon} from './infoFilledIcon'
 import {default as InfoOutlineIcon} from './infoOutlineIcon'
@@ -72,7 +77,9 @@ import {default as ItalicIcon} from './italicIcon'
 import {default as JoystickIcon} from './joystickIcon'
 import {default as LaunchIcon} from './launchIcon'
 import {default as LeaveIcon} from './leaveIcon'
+import {default as LemonIcon} from './lemonIcon'
 import {default as LinkIcon} from './linkIcon'
+import {default as LinkRemovedIcon} from './linkRemovedIcon'
 import {default as LockIcon} from './lockIcon'
 import {default as MasterDetailIcon} from './masterDetailIcon'
 import {default as MenuIcon} from './menuIcon'
@@ -82,6 +89,8 @@ import {default as OkHandIcon} from './okHandIcon'
 import {default as OlistIcon} from './olistIcon'
 import {default as PackageIcon} from './packageIcon'
 import {default as PauseIcon} from './pauseIcon'
+import {default as PinIcon} from './pinIcon'
+import {default as PinRemovedIcon} from './pinRemovedIcon'
 import {default as PlayIcon} from './playIcon'
 import {default as PlugIcon} from './plugIcon'
 import {default as PublishIcon} from './publishIcon'
@@ -89,20 +98,26 @@ import {default as RemoveCircleIcon} from './removeCircleIcon'
 import {default as RemoveIcon} from './removeIcon'
 import {default as ResetIcon} from './resetIcon'
 import {default as RestoreIcon} from './restoreIcon'
-import {default as RocketIcon} from './rocketIcon'
+import {default as RevertIcon} from './revertIcon'
+import {default as RobotIcon} from './robotIcon'
 import {default as SearchIcon} from './searchIcon'
+import {default as SelectIcon} from './selectIcon'
 import {default as SortIcon} from './sortIcon'
 import {default as SpinnerIcon} from './spinnerIcon'
 import {default as SplitHorizontalIcon} from './splitHorizontalIcon'
 import {default as SplitVerticalIcon} from './splitVerticalIcon'
 import {default as SquareIcon} from './squareIcon'
 import {default as StackCompactIcon} from './stackCompactIcon'
+import {default as StarIcon} from './starIcon'
 import {default as StrikethroughIcon} from './strikethroughIcon'
 import {default as SunIcon} from './sunIcon'
 import {default as SyncIcon} from './syncIcon'
+import {default as ThLargeIcon} from './thLargeIcon'
+import {default as ThListIcon} from './thListIcon'
 import {default as ToggleArrowRightIcon} from './toggleArrowRightIcon'
 import {default as TokenIcon} from './tokenIcon'
 import {default as TrashIcon} from './trashIcon'
+import {default as TrendUpwardIcon} from './trendUpwardIcon'
 import {default as TriangleOutlineIcon} from './triangleOutlineIcon'
 import {default as TruncateIcon} from './truncateIcon'
 import {default as UlistIcon} from './ulistIcon'
@@ -118,18 +133,22 @@ import {default as WarningFilledIcon} from './warningFilledIcon'
 import {default as WarningOutlineIcon} from './warningOutlineIcon'
 
 export type IconSymbol =
+  | 'activity'
   | 'add-circle'
   | 'add'
+  | 'archive'
   | 'arrow-down'
   | 'arrow-left'
   | 'arrow-right'
   | 'arrow-up'
   | 'bell'
+  | 'bill'
   | 'binary-document'
   | 'block-element'
   | 'blockquote'
   | 'bold'
   | 'book'
+  | 'bottle'
   | 'bulb-filled'
   | 'bulb-outline'
   | 'calendar'
@@ -141,8 +160,8 @@ export type IconSymbol =
   | 'chevron-right'
   | 'chevron-up'
   | 'circle'
-  | 'clipboard-image'
   | 'clipboard'
+  | 'clipboard-image'
   | 'clock'
   | 'close-circle'
   | 'close'
@@ -157,6 +176,7 @@ export type IconSymbol =
   | 'dashboard'
   | 'database'
   | 'document'
+  | 'document-remove'
   | 'documents'
   | 'download'
   | 'drag-handle'
@@ -166,6 +186,7 @@ export type IconSymbol =
   | 'edit'
   | 'ellipsis-horizontal'
   | 'ellipsis-vertical'
+  | 'equal'
   | 'error-filled'
   | 'error-outline'
   | 'expand'
@@ -178,6 +199,7 @@ export type IconSymbol =
   | 'home'
   | 'ice-cream'
   | 'image'
+  | 'image-remove'
   | 'images'
   | 'info-filled'
   | 'info-outline'
@@ -186,7 +208,9 @@ export type IconSymbol =
   | 'joystick'
   | 'launch'
   | 'leave'
+  | 'lemon'
   | 'link'
+  | 'link-removed'
   | 'lock'
   | 'master-detail'
   | 'menu'
@@ -196,6 +220,8 @@ export type IconSymbol =
   | 'olist'
   | 'package'
   | 'pause'
+  | 'pin'
+  | 'pin-removed'
   | 'play'
   | 'plug'
   | 'publish'
@@ -203,20 +229,26 @@ export type IconSymbol =
   | 'remove'
   | 'reset'
   | 'restore'
-  | 'rocket'
+  | 'revert'
+  | 'robot'
   | 'search'
+  | 'select'
   | 'sort'
   | 'spinner'
   | 'split-horizontal'
   | 'split-vertical'
   | 'square'
   | 'stack-compact'
+  | 'star'
   | 'strikethrough'
   | 'sun'
   | 'sync'
+  | 'th-large'
+  | 'th-list'
   | 'toggle-arrow-right'
   | 'token'
   | 'trash'
+  | 'trend-upward'
   | 'triangle-outline'
   | 'truncate'
   | 'ulist'
@@ -232,18 +264,22 @@ export type IconSymbol =
   | 'warning-outline'
 
 export {
+  ActivityIcon,
   AddCircleIcon,
   AddIcon,
+  ArchiveIcon,
   ArrowDownIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
   ArrowUpIcon,
   BellIcon,
+  BillIcon,
   BinaryDocumentIcon,
   BlockElementIcon,
   BlockquoteIcon,
   BoldIcon,
   BookIcon,
+  BottleIcon,
   BulbFilledIcon,
   BulbOutlineIcon,
   CalendarIcon,
@@ -255,8 +291,8 @@ export {
   ChevronRightIcon,
   ChevronUpIcon,
   CircleIcon,
-  ClipboardImageIcon,
   ClipboardIcon,
+  ClipboardImageIcon,
   ClockIcon,
   CloseCircleIcon,
   CloseIcon,
@@ -271,6 +307,7 @@ export {
   DashboardIcon,
   DatabaseIcon,
   DocumentIcon,
+  DocumentRemoveIcon,
   DocumentsIcon,
   DownloadIcon,
   DragHandleIcon,
@@ -280,6 +317,7 @@ export {
   EditIcon,
   EllipsisHorizontalIcon,
   EllipsisVerticalIcon,
+  EqualIcon,
   ErrorFilledIcon,
   ErrorOutlineIcon,
   ExpandIcon,
@@ -292,6 +330,7 @@ export {
   HomeIcon,
   IceCreamIcon,
   ImageIcon,
+  ImageRemoveIcon,
   ImagesIcon,
   InfoFilledIcon,
   InfoOutlineIcon,
@@ -300,7 +339,9 @@ export {
   JoystickIcon,
   LaunchIcon,
   LeaveIcon,
+  LemonIcon,
   LinkIcon,
+  LinkRemovedIcon,
   LockIcon,
   MasterDetailIcon,
   MenuIcon,
@@ -310,6 +351,8 @@ export {
   OlistIcon,
   PackageIcon,
   PauseIcon,
+  PinIcon,
+  PinRemovedIcon,
   PlayIcon,
   PlugIcon,
   PublishIcon,
@@ -317,20 +360,26 @@ export {
   RemoveIcon,
   ResetIcon,
   RestoreIcon,
-  RocketIcon,
+  RevertIcon,
+  RobotIcon,
   SearchIcon,
+  SelectIcon,
   SortIcon,
   SpinnerIcon,
   SplitHorizontalIcon,
   SplitVerticalIcon,
   SquareIcon,
   StackCompactIcon,
+  StarIcon,
   StrikethroughIcon,
   SunIcon,
   SyncIcon,
+  ThLargeIcon,
+  ThListIcon,
   ToggleArrowRightIcon,
   TokenIcon,
   TrashIcon,
+  TrendUpwardIcon,
   TriangleOutlineIcon,
   TruncateIcon,
   UlistIcon,
@@ -347,18 +396,22 @@ export {
 }
 
 export default {
+  activity: ActivityIcon,
   'add-circle': AddCircleIcon,
   add: AddIcon,
+  archive: ArchiveIcon,
   'arrow-down': ArrowDownIcon,
   'arrow-left': ArrowLeftIcon,
   'arrow-right': ArrowRightIcon,
   'arrow-up': ArrowUpIcon,
   bell: BellIcon,
+  bill: BillIcon,
   'binary-document': BinaryDocumentIcon,
   'block-element': BlockElementIcon,
   blockquote: BlockquoteIcon,
   bold: BoldIcon,
   book: BookIcon,
+  bottle: BottleIcon,
   'bulb-filled': BulbFilledIcon,
   'bulb-outline': BulbOutlineIcon,
   calendar: CalendarIcon,
@@ -370,8 +423,8 @@ export default {
   'chevron-right': ChevronRightIcon,
   'chevron-up': ChevronUpIcon,
   circle: CircleIcon,
-  'clipboard-image': ClipboardImageIcon,
   clipboard: ClipboardIcon,
+  'clipboard-image': ClipboardImageIcon,
   clock: ClockIcon,
   'close-circle': CloseCircleIcon,
   close: CloseIcon,
@@ -386,6 +439,7 @@ export default {
   dashboard: DashboardIcon,
   database: DatabaseIcon,
   document: DocumentIcon,
+  'document-remove': DocumentRemoveIcon,
   documents: DocumentsIcon,
   download: DownloadIcon,
   'drag-handle': DragHandleIcon,
@@ -395,6 +449,7 @@ export default {
   edit: EditIcon,
   'ellipsis-horizontal': EllipsisHorizontalIcon,
   'ellipsis-vertical': EllipsisVerticalIcon,
+  equal: EqualIcon,
   'error-filled': ErrorFilledIcon,
   'error-outline': ErrorOutlineIcon,
   expand: ExpandIcon,
@@ -407,6 +462,7 @@ export default {
   home: HomeIcon,
   'ice-cream': IceCreamIcon,
   image: ImageIcon,
+  'image-remove': ImageRemoveIcon,
   images: ImagesIcon,
   'info-filled': InfoFilledIcon,
   'info-outline': InfoOutlineIcon,
@@ -415,7 +471,9 @@ export default {
   joystick: JoystickIcon,
   launch: LaunchIcon,
   leave: LeaveIcon,
+  lemon: LemonIcon,
   link: LinkIcon,
+  'link-removed': LinkRemovedIcon,
   lock: LockIcon,
   'master-detail': MasterDetailIcon,
   menu: MenuIcon,
@@ -425,6 +483,8 @@ export default {
   olist: OlistIcon,
   package: PackageIcon,
   pause: PauseIcon,
+  pin: PinIcon,
+  'pin-removed': PinRemovedIcon,
   play: PlayIcon,
   plug: PlugIcon,
   publish: PublishIcon,
@@ -432,20 +492,26 @@ export default {
   remove: RemoveIcon,
   reset: ResetIcon,
   restore: RestoreIcon,
-  rocket: RocketIcon,
+  revert: RevertIcon,
+  robot: RobotIcon,
   search: SearchIcon,
+  select: SelectIcon,
   sort: SortIcon,
   spinner: SpinnerIcon,
   'split-horizontal': SplitHorizontalIcon,
   'split-vertical': SplitVerticalIcon,
   square: SquareIcon,
   'stack-compact': StackCompactIcon,
+  star: StarIcon,
   strikethrough: StrikethroughIcon,
   sun: SunIcon,
   sync: SyncIcon,
+  'th-large': ThLargeIcon,
+  'th-list': ThListIcon,
   'toggle-arrow-right': ToggleArrowRightIcon,
   token: TokenIcon,
   trash: TrashIcon,
+  'trend-upward': TrendUpwardIcon,
   'triangle-outline': TriangleOutlineIcon,
   truncate: TruncateIcon,
   ulist: UlistIcon,
