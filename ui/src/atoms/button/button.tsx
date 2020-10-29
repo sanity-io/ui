@@ -13,7 +13,6 @@ import {ButtonMode, ButtonTone} from './types'
 export interface ButtonProps extends BoxPaddingProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: ButtonMode
-  tone?: ButtonTone
   icon?: IconSymbol | React.FC
   iconRight?: IconSymbol | React.FC
   radius?: number | number[]
@@ -21,6 +20,7 @@ export interface ButtonProps extends BoxPaddingProps {
   size?: number | number[]
   space?: number | number[]
   text?: React.ReactNode
+  tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
 }
 
