@@ -3,7 +3,7 @@ import Head from 'next/head'
 import React from 'react'
 import {AppLayout, Article} from '~/components'
 import {UIPageLayout} from '~/components/_uiPage/layout'
-import {utilRoutes} from '~/routes'
+import {atomRoutes} from '~/routes'
 import {getClient, usePreviewSubscription} from '~/sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
@@ -26,7 +26,7 @@ export async function getStaticProps({params, preview = __DEV__}) {
 
 export function getStaticPaths() {
   return {
-    paths: utilRoutes.map((route) => ({params: {slug: route.slug}})),
+    paths: atomRoutes.map((route) => ({params: {slug: route.slug}})),
     fallback: true,
   }
 }
