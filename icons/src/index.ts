@@ -100,6 +100,7 @@ import {default as ResetIcon} from './resetIcon'
 import {default as RestoreIcon} from './restoreIcon'
 import {default as RevertIcon} from './revertIcon'
 import {default as RobotIcon} from './robotIcon'
+import {default as RocketIcon} from './rocketIcon'
 import {default as SearchIcon} from './searchIcon'
 import {default as SelectIcon} from './selectIcon'
 import {default as SortIcon} from './sortIcon'
@@ -231,6 +232,7 @@ export type IconSymbol =
   | 'restore'
   | 'revert'
   | 'robot'
+  | 'rocket'
   | 'search'
   | 'select'
   | 'sort'
@@ -362,6 +364,7 @@ export {
   RestoreIcon,
   RevertIcon,
   RobotIcon,
+  RocketIcon,
   SearchIcon,
   SelectIcon,
   SortIcon,
@@ -494,6 +497,7 @@ export default {
   restore: RestoreIcon,
   revert: RevertIcon,
   robot: RobotIcon,
+  rocket: RocketIcon,
   search: SearchIcon,
   select: SelectIcon,
   sort: SortIcon,
