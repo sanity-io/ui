@@ -39,12 +39,12 @@ export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode 
   return {
     enabled: {
       bg: white.hex,
-      fg: hue[600].hex,
+      fg: hue[700].hex,
       border: hue[200].hex,
     },
     disabled: {
       bg: white.hex,
-      fg: hue[600].hex,
+      fg: hue[300].hex,
       border: hue[200].hex,
     },
     hovered: {
@@ -71,13 +71,13 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
   return {
     enabled: {
       bg: white.hex,
-      fg: hue[600].hex,
+      fg: hue[700].hex,
       border: white.hex,
     },
     disabled: {
       bg: white.hex,
-      fg: hue[600].hex,
-      border: hue[200].hex,
+      fg: hue[300].hex,
+      border: white.hex,
     },
     hovered: {
       bg: hue[50].hex,
