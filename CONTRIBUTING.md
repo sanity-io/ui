@@ -8,7 +8,7 @@ git clone git@github.com:sanity-io/design.git
 cd design
 yarn
 
-# Run the docs dev servers (Studio and Next.js app)
+# Run the docs dev servers (Studio and Next.js apps)
 yarn dev:docs
 
 # Run the Studio example
