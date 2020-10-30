@@ -9,6 +9,8 @@ export default {
 }
 
 export const plain = () => {
+  const border = boolean('Border?', true, 'Props')
+
   const disabled = boolean('Disabled?', false, 'Props')
 
   const margin = select(
@@ -86,6 +88,7 @@ export const plain = () => {
     <Container width={0}>
       <Card padding={4}>
         <TextInput
+          border={border}
           disabled={disabled}
           margin={margin}
           padding={padding}

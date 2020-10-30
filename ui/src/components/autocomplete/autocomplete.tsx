@@ -10,6 +10,7 @@ export interface AutocompleteOption {
 }
 
 export interface AutocompleteProps {
+  border?: boolean
   id: string
   onChange?: (value: string) => void
   onSelect?: (value: string) => void
@@ -43,7 +44,16 @@ const ClearButtonBox = styled(Box)`
 `
 
 export function Autocomplete(props: Props) {
-  const {id, onChange, onSelect, options, renderOption, value: valueProp = '', ...restProps} = props
+  const {
+    border = true,
+    id,
+    onChange,
+    onSelect,
+    options,
+    renderOption,
+    value: valueProp = '',
+    ...restProps
+  } = props
   const card = useCard()
   const [value, setValue] = useState(valueProp)
   const valueRef = useRef(value)
@@ -147,11 +157,7 @@ export function Autocomplete(props: Props) {
     const selectedItemElement = listElement.childNodes[selectedIndex] as HTMLLIElement | undefined
 
     if (selectedItemElement) {
-      const result = focusFirstDescendant(selectedItemElement)
-
-      if (!result) {
-        console.log('could not focus', selectedItemElement)
-      }
+      focusFirstDescendant(selectedItemElement)
     }
   }, [selectedIndex])
 
@@ -167,6 +173,7 @@ export function Autocomplete(props: Props) {
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
+          border={border}
           id={inputId}
           onBlur={handleInputBlur}
           onChange={handleInputChange}

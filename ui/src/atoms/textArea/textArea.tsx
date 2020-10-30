@@ -7,17 +7,18 @@ import {useCard} from '../card'
 import {getResponsiveProp} from '../helpers'
 
 interface TextInputProps extends BoxMarginProps, BoxPaddingProps {
+  border?: boolean
   radius?: number | number[]
   size?: number | number[]
   weight?: string
 }
 
-const Root = styled.span<{disabled?: boolean; scheme: ColorSchemeKey; uiRadius: number[]}>(
-  margin,
-  radius as any,
-  textInput.base,
-  textInput.color as any
-)
+const Root = styled.span<{
+  border: boolean
+  disabled?: boolean
+  scheme: ColorSchemeKey
+  uiRadius: number[]
+}>(margin, radius as any, textInput.base, textInput.color as any)
 
 const Input = styled.textarea<{uiSize: number[]; weight?: string}>`
   ${padding}
@@ -31,6 +32,7 @@ export const TextArea = forwardRef(
     ref: React.Ref<HTMLTextAreaElement>
   ) => {
     const {
+      border = true,
       disabled,
       margin,
       marginX,
@@ -78,7 +80,13 @@ export const TextArea = forwardRef(
     const uiRadius = getResponsiveProp(radius)
 
     return (
-      <Root {...marginProps} disabled={disabled} scheme={card.scheme} uiRadius={uiRadius}>
+      <Root
+        {...marginProps}
+        border={border}
+        disabled={disabled}
+        scheme={card.scheme}
+        uiRadius={uiRadius}
+      >
         <Input {...restProps} {...paddingProps} disabled={disabled} ref={ref} uiSize={uiSize} />
       </Root>
     )

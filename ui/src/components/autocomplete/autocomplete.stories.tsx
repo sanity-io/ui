@@ -1,4 +1,5 @@
 import {Autocomplete, Box, Label, Stack} from '@sanity/ui'
+import {boolean} from '@storybook/addon-knobs'
 import Chance from 'chance'
 import React, {useCallback, useState} from 'react'
 import styled from 'styled-components'
@@ -19,13 +20,15 @@ function generateData(): DataItem[] {
 
 export default {
   decorators: [withCentered],
-  title: 'Components/Autosuggest',
+  title: 'Components/Autocomplete',
 }
 
 export const plain = () => {
   const data = generateData()
 
-  return <PlainExample data={data} />
+  const border = boolean('Border?', false, 'Props')
+
+  return <PlainExample border={border} data={data} />
 }
 
 const OptionCard = styled.a`
@@ -47,7 +50,7 @@ const OptionCard = styled.a`
   }
 `
 
-function PlainExample({data}: {data: DataItem[]}) {
+function PlainExample({border, data}: {border: boolean; data: DataItem[]}) {
   const [query, setQuery] = useState('')
 
   const renderOption = useCallback(
@@ -69,6 +72,8 @@ function PlainExample({data}: {data: DataItem[]}) {
     .filter((item) => item.title.toLowerCase().indexOf(query.toLowerCase()) > -1)
     .map((item) => ({value: item.value}))
 
+  console.log('border', border)
+
   return (
     <Stack space={3}>
       <Label as="label" htmlFor="plain" id="plain-label">
@@ -76,6 +81,7 @@ function PlainExample({data}: {data: DataItem[]}) {
       </Label>
       <Autocomplete
         aria-describedby="plain-label"
+        border={border}
         id="plain"
         onChange={setQuery}
         options={options}

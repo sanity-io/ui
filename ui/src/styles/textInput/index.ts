@@ -15,10 +15,12 @@ function textInputBase() {
 }
 
 function textInputColor({
+  border,
   disabled,
   scheme,
   theme,
 }: {
+  border: boolean
   disabled: boolean
   scheme: ColorSchemeKey
   theme: Theme
@@ -28,7 +30,11 @@ function textInputColor({
   if (disabled) {
     return css`
       background-color: ${tone.disabled.bg};
-      box-shadow: inset 0 0 0 1px ${tone.disabled.border};
+
+      ${border &&
+      css`
+        box-shadow: inset 0 0 0 1px ${tone.disabled.border};
+      `}
 
       & > input,
       & > textarea {
@@ -43,7 +49,11 @@ function textInputColor({
 
   return css`
     background-color: ${tone.enabled.bg};
-    box-shadow: inset 0 0 0 1px ${tone.enabled.border};
+
+    ${border &&
+    css`
+      box-shadow: inset 0 0 0 1px ${tone.enabled.border};
+    `}
 
     & > input,
     & > textarea {
@@ -57,7 +67,11 @@ function textInputColor({
     @media (hover: hover) {
       &:hover {
         background-color: ${tone.hovered.bg};
-        box-shadow: inset 0 0 0 1px ${tone.hovered.border};
+
+        ${border &&
+        css`
+          box-shadow: inset 0 0 0 1px ${tone.hovered.border};
+        `}
 
         & > input,
         & > textarea {
