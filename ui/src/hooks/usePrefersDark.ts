@@ -9,13 +9,12 @@ export function usePrefersDark() {
     setDark(mq.matches)
 
     const handleChange = () => {
-      console.log('change', mq.matches)
       setDark(mq.matches)
     }
 
-    mq.addListener(handleChange)
+    mq.addEventListener('change', handleChange)
 
-    return () => mq.removeListener(handleChange)
+    return () => mq.removeEventListener('change', handleChange)
   }, [])
 
   return dark
