@@ -72,8 +72,6 @@ function PlainExample({border, data}: {border: boolean; data: DataItem[]}) {
     .filter((item) => item.title.toLowerCase().indexOf(query.toLowerCase()) > -1)
     .map((item) => ({value: item.value}))
 
-  console.log('border', border)
-
   return (
     <Stack space={3}>
       <Label as="label" htmlFor="plain" id="plain-label">
