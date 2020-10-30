@@ -1,5 +1,5 @@
 import {Autocomplete, Box, Label, Stack} from '@sanity/ui'
-import {boolean} from '@storybook/addon-knobs'
+import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import Chance from 'chance'
 import React, {useCallback, useState} from 'react'
 import styled from 'styled-components'
@@ -19,7 +19,7 @@ function generateData(): DataItem[] {
 }
 
 export default {
-  decorators: [withCentered],
+  decorators: [withCentered, withKnobs],
   title: 'Components/Autocomplete',
 }
 
@@ -28,7 +28,37 @@ export const plain = () => {
 
   const border = boolean('Border?', false, 'Props')
 
-  return <PlainExample border={border} data={data} />
+  const radius = Number(
+    select(
+      'Radius',
+      {
+        '0': '0',
+        '1': '1',
+        '2 (default)': '2',
+        '3': '3',
+        '4': '4',
+      },
+      '2',
+      'Props'
+    )
+  )
+
+  const size = Number(
+    select(
+      'Size',
+      {
+        '0': '0',
+        '1': '1',
+        '2 (default)': '2',
+        '3': '3',
+        '4': '4',
+      },
+      '2',
+      'Props'
+    )
+  )
+
+  return <PlainExample border={border} data={data} radius={radius} size={size} />
 }
 
 const OptionCard = styled.a`
@@ -50,7 +80,17 @@ const OptionCard = styled.a`
   }
 `
 
-function PlainExample({border, data}: {border: boolean; data: DataItem[]}) {
+function PlainExample({
+  border,
+  data,
+  radius,
+  size,
+}: {
+  border: boolean
+  data: DataItem[]
+  radius: number
+  size: number
+}) {
   const [query, setQuery] = useState('')
 
   const renderOption = useCallback(
@@ -83,7 +123,9 @@ function PlainExample({border, data}: {border: boolean; data: DataItem[]}) {
         id="plain"
         onChange={setQuery}
         options={options}
+        radius={radius}
         renderOption={renderOption}
+        size={size}
         value={query}
       />
     </Stack>

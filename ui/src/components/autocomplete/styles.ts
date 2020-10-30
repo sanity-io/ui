@@ -1,33 +1,9 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import {Card} from '../../atoms'
-import {ColorSchemeKey, Theme} from '../../theme'
 
 export const Root = styled.div`
   position: relative;
 `
-
-export const SearchField = styled.div<{
-  radius?: number
-  scheme: ColorSchemeKey
-  shadow: number
-}>((props: {scheme: ColorSchemeKey; theme: Theme}) => {
-  const {scheme, theme} = props
-  const tone = theme.color[scheme].input.tones.default
-
-  return css`
-    background-color: ${tone.enabled.bg};
-    color: ${tone.enabled.fg};
-    box-shadow: inset 0 0 0 1px ${tone.enabled.border};
-    border-radius: ${theme.radius[2]}px;
-
-    @media (hover: hover) {
-      &:hover {
-        background-color: ${tone.hovered.bg};
-        box-shadow: inset 0 0 0 1px ${tone.hovered.border};
-      }
-    }
-  `
-})
 
 export const ListBoxContainer = styled.div`
   position: relative;

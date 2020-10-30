@@ -1,9 +1,9 @@
 import {SearchIcon} from '@sanity/icons'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Button, Text, TextInput, useCard} from '../../atoms'
+import {Box, Button, Text, TextInput} from '../../atoms'
 import {focusFirstDescendant} from '../../helpers'
-import {Root, SearchField, ListBoxContainer, ListBoxCard} from './styles'
+import {Root, ListBoxContainer, ListBoxCard} from './styles'
 
 export interface AutocompleteOption {
   value: string
@@ -15,15 +15,30 @@ export interface AutocompleteProps {
   onChange?: (value: string) => void
   onSelect?: (value: string) => void
   options: AutocompleteOption[]
+  radius?: number | number[]
   renderOption: (option: AutocompleteOption) => React.ReactNode
+  size?: number | number[]
   value?: string
 }
 
-type Props = AutocompleteProps &
-  Omit<
-    React.HTMLProps<HTMLInputElement>,
-    'as' | 'autoComplete' | 'autoComplete' | 'id' | 'onChange' | 'ref' | 'type' | 'value'
-  >
+type OverriddenInputAttrKey =
+  | 'aria-activedescendant'
+  | 'aria-autocomplete'
+  | 'aria-expanded'
+  | 'aria-owns'
+  | 'as'
+  | 'autoCapitalize'
+  | 'autoComplete'
+  | 'autoCorrect'
+  | 'id'
+  | 'onChange'
+  | 'ref'
+  | 'role'
+  | 'spellCheck'
+  | 'type'
+  | 'value'
+
+type Props = AutocompleteProps & Omit<React.HTMLProps<HTMLInputElement>, OverriddenInputAttrKey>
 
 const SearchIconBox = styled(Box)`
   position: absolute;
@@ -50,11 +65,12 @@ export function Autocomplete(props: Props) {
     onChange,
     onSelect,
     options,
+    radius = 2,
     renderOption,
+    size = 2,
     value: valueProp = '',
     ...restProps
   } = props
-  const card = useCard()
   const [value, setValue] = useState(valueProp)
   const valueRef = useRef(value)
   const [focused, setFocused] = useState(false)
@@ -163,47 +179,48 @@ export function Autocomplete(props: Props) {
 
   return (
     <Root onKeyDown={handleInputKeyDown}>
-      <SearchField radius={2} scheme={card.scheme} shadow={1}>
-        <TextInput
-          {...restProps}
-          aria-activedescendant={activeItemId}
-          aria-autocomplete="list"
-          aria-expanded={expanded}
-          aria-owns={listboxId}
-          autoCapitalize="off"
-          autoComplete="off"
-          autoCorrect="off"
-          border={border}
-          id={inputId}
-          onBlur={handleInputBlur}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
-          paddingX={5}
-          paddingY={3}
-          ref={inputRef}
-          role="combobox"
-          spellCheck={false}
-          value={value}
-        />
+      <TextInput
+        {...restProps}
+        aria-activedescendant={activeItemId}
+        aria-autocomplete="list"
+        aria-expanded={expanded}
+        aria-owns={listboxId}
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        border={border}
+        id={inputId}
+        onBlur={handleInputBlur}
+        onChange={handleInputChange}
+        onFocus={handleInputFocus}
+        paddingX={5}
+        paddingY={3}
+        radius={radius}
+        ref={inputRef}
+        role="combobox"
+        size={size}
+        spellCheck={false}
+        value={value}
+      />
 
-        <SearchIconBox margin={3}>
-          <Text>
-            <SearchIcon aria-hidden="true" focusable={false} />
-          </Text>
-        </SearchIconBox>
+      <SearchIconBox margin={3}>
+        <Text size={size}>
+          <SearchIcon aria-hidden="true" focusable={false} />
+        </Text>
+      </SearchIconBox>
 
-        {value.length > 0 && (
-          <ClearButtonBox margin={2}>
-            <Button
-              aria-label="Clear"
-              icon="close"
-              mode="bleed"
-              onClick={handleClearButtonClick}
-              padding={1}
-            />
-          </ClearButtonBox>
-        )}
-      </SearchField>
+      {value.length > 0 && (
+        <ClearButtonBox margin={2}>
+          <Button
+            aria-label="Clear"
+            icon="close"
+            mode="bleed"
+            onClick={handleClearButtonClick}
+            padding={1}
+            size={size}
+          />
+        </ClearButtonBox>
+      )}
 
       <ListBoxContainer
         hidden={!expanded}
