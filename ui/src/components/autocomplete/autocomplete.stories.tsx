@@ -1,8 +1,7 @@
-import {Autocomplete, Box, Label, Stack} from '@sanity/ui'
+import {Autocomplete, Card, Label, Stack, Text} from '@sanity/ui'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import Chance from 'chance'
 import React, {useCallback, useState} from 'react'
-import styled from 'styled-components'
 import {withCentered} from '~/storybook/decorators'
 
 interface DataItem {
@@ -61,25 +60,6 @@ export const plain = () => {
   return <PlainExample border={border} data={data} radius={radius} size={size} />
 }
 
-const OptionCard = styled.a`
-  outline: none;
-  background-color: var(--card-bg-color);
-  color: var(--card-fg-color);
-  width: 100%;
-  display: block;
-
-  @media (hover: hover) {
-    &:hover {
-      --card-bg-color: #eee;
-    }
-  }
-
-  [aria-selected='true'] > & {
-    --card-bg-color: #06f;
-    --card-fg-color: #fff;
-  }
-`
-
 function PlainExample({
   border,
   data,
@@ -100,9 +80,9 @@ function PlainExample({
       if (!item) return null
 
       return (
-        <OptionCard href="#" key={item.value} role="option">
-          <Box padding={3}>{item.title}</Box>
-        </OptionCard>
+        <Card as="a" href="#" key={item.value} padding={3}>
+          <Text>{item.title}</Text>
+        </Card>
       )
     },
     [data]
