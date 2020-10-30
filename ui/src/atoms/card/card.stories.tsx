@@ -11,6 +11,8 @@ export default {
 }
 
 export const plain = () => {
+  const border = boolean('Border', false, 'Props')
+
   const as = select(
     'As',
     {
@@ -82,6 +84,7 @@ export const plain = () => {
   return (
     <Card
       as={as}
+      border={border}
       onClick={action('onClick')}
       padding={padding}
       radius={radius}

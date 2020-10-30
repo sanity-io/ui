@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {radius, space} from '../../styles'
+import {border, BorderProps, radius, space} from '../../styles'
 import {ColorSchemeKey} from '../../theme'
 import {BoxMarginProps, BoxPaddingProps, boxFlexStyles} from '../box'
 import {getResponsiveProp} from '../helpers'
@@ -9,7 +9,7 @@ import {useCard} from './hooks'
 import {cardBaseStyles, cardColorStyles, cardShadowStyles} from './styles'
 import {CardTone} from './types'
 
-export interface CardBaseProps {
+export interface CardBaseProps extends BorderProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   flex?: number | number[]
   radius?: number | number[]
@@ -21,11 +21,12 @@ export interface CardBaseProps {
 export type CardProps = BoxMarginProps & BoxPaddingProps & CardBaseProps
 
 // @todo: Figure out typings
-const Root = styled.div(
+const Root = styled.div<BorderProps>(
+  border,
   boxFlexStyles as any,
   space as any,
   cardBaseStyles,
-  cardColorStyles,
+  cardColorStyles as any,
   radius as any,
   cardShadowStyles as any
 )
