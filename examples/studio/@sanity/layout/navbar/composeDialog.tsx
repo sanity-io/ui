@@ -1,4 +1,4 @@
-import {Box, Card, Dialog, Flex, Stack, Text} from '@sanity/ui'
+import {Box, Card, CardProvider, Dialog, Flex, Stack, Text} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -10,29 +10,31 @@ const Grid = styled.div`
 
 export function ComposeDialog({onClose}: {onClose: () => void}) {
   return (
-    <Dialog header="New document" id="compose-dialog" onClose={onClose} width={2}>
-      <Box padding={4}>
-        <Grid>
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-          <TemplatePreview />
-        </Grid>
-      </Box>
-    </Dialog>
+    <CardProvider scheme="light">
+      <Dialog header="New document" id="compose-dialog" onClose={onClose} width={2}>
+        <Box padding={4}>
+          <Grid>
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+            <TemplatePreview />
+          </Grid>
+        </Box>
+      </Dialog>
+    </CardProvider>
   )
 }
 

@@ -1,6 +1,15 @@
 import {useLocation} from '@sanity/base'
 import {Preview} from '@sanity/components'
-import {Autocomplete, AutocompleteOption, Box, ColorSchemeKey, Theme, useCard} from '@sanity/ui'
+import {
+  Autocomplete,
+  AutocompleteOption,
+  Box,
+  CardProvider,
+  ColorSchemeKey,
+  SrOnly,
+  Theme,
+  useCard,
+} from '@sanity/ui'
 import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
 
@@ -86,24 +95,24 @@ export function Search() {
 
   return (
     <>
-      <label
-        aria-hidden
-        htmlFor="navbar-search"
-        id="navbar-search-label"
-        style={{display: 'block', overflow: 'hidden', height: 0}}
-      >
-        Search for documents
-      </label>
+      <SrOnly>
+        <label htmlFor="navbar-search" id="navbar-search-label">
+          Search for documents
+        </label>
+      </SrOnly>
 
-      <Autocomplete
-        aria-describedby="navbar-search-label"
-        id="navbar-search"
-        onChange={handleInputChange}
-        options={options}
-        placeholder="Search documents…"
-        renderOption={renderOption}
-        value={value}
-      />
+      <CardProvider scheme="light">
+        <Autocomplete
+          aria-describedby="navbar-search-label"
+          border={false}
+          id="navbar-search"
+          onChange={handleInputChange}
+          options={options}
+          placeholder="Search documents…"
+          renderOption={renderOption}
+          value={value}
+        />
+      </CardProvider>
     </>
   )
 }
