@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {radius} from '../../styles'
 import {Box, BoxMarginProps, BoxPaddingProps} from '../box'
 import {useCard} from '../card'
-import {Flex} from '../flex'
+import {Flex, FlexJustify} from '../flex'
 import {getResponsiveProp} from '../helpers'
 import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
@@ -15,6 +15,7 @@ export interface ButtonProps extends BoxPaddingProps {
   mode?: ButtonMode
   icon?: IconSymbol | React.FC
   iconRight?: IconSymbol | React.FC
+  justify?: FlexJustify
   radius?: number | number[]
   selected?: boolean
   size?: number | number[]
@@ -33,6 +34,7 @@ export const Button = forwardRef(
       disabled,
       icon,
       iconRight,
+      justify = 'center',
       mode = 'default',
       margin,
       marginX,
@@ -93,7 +95,7 @@ export const Button = forwardRef(
       >
         {(icon || text || iconRight) && (
           <Box as="span" {...boxProps}>
-            <Flex as="span" justify="center">
+            <Flex as="span" justify={justify}>
               {icon && (
                 <Text size={size}>
                   {typeof icon === 'function' && createElement(icon)}

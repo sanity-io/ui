@@ -27,6 +27,13 @@ export const plain = () => {
     'Props'
   ) as IconSymbol
 
+  const justify = select(
+    'Justify',
+    ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'],
+    'center',
+    'Props'
+  )
+
   const mode = select(
     'Mode',
     {
@@ -109,12 +116,14 @@ export const plain = () => {
         disabled={disabled}
         icon={icon}
         iconRight={iconRight}
+        justify={justify}
         mode={mode}
         onClick={action('onClick')}
         paddingX={paddingX}
         paddingY={paddingY}
         selected={selected}
         space={space}
+        style={{width: '10rem'}}
         text={textProp}
         tone={tone}
       />
