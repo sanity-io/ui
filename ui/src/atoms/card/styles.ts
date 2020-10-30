@@ -5,12 +5,18 @@ import {CardTone} from './types'
 
 export function cardBaseStyles() {
   return css`
+    display: block;
+
     &:is(button) {
       -webkit-font-smoothing: inherit;
       appearance: none;
       border: 0;
       text-align: inherit;
       outline: none;
+    }
+
+    &:is(pre) {
+      font: inherit;
     }
   `
 }
