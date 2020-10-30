@@ -13,6 +13,7 @@ interface PopoverProps {
   open?: boolean
   padding?: number | number[]
   placement?: Placement
+  portal?: boolean
   radius?: number | number[]
   referenceElement?: HTMLElement | null
 }
@@ -27,6 +28,7 @@ export const Popover = forwardRef(
       open,
       padding,
       placement = 'bottom',
+      portal: portalProp = true,
       radius = 2,
       referenceElement: referenceElementProp,
       style = {},
@@ -93,26 +95,34 @@ export const Popover = forwardRef(
       else if (ref) ref.current = el
     }
 
+    const node = (
+      <div
+        {...restProps}
+        ref={setRootRef}
+        style={{...style, ...styles.popper, pointerEvents: 'all'}}
+        {...attributes.popper}
+      >
+        <Card data-ui="PopoverCard" padding={padding} radius={radius} shadow={3}>
+          <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
+          {content}
+        </Card>
+      </div>
+    )
+
     return (
       <>
         {child && !referenceElementProp ? cloneElement(child, {ref: setRef}) : child || <></>}
 
         {open && (
-          <Portal>
-            <Layer style={{pointerEvents: 'none'}}>
-              <div
-                {...restProps}
-                ref={setRootRef}
-                style={{...style, ...styles.popper, pointerEvents: 'all'}}
-                {...attributes.popper}
-              >
-                <Card data-ui="PopoverCard" padding={padding} radius={radius} shadow={3}>
-                  <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
-                  {content}
-                </Card>
-              </div>
-            </Layer>
-          </Portal>
+          <>
+            {portalProp && (
+              <Portal>
+                <Layer style={{pointerEvents: 'none'}}>{node}</Layer>
+              </Portal>
+            )}
+
+            {!portalProp && node}
+          </>
         )}
       </>
     )
