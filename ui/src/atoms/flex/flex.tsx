@@ -1,7 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {boxFlexStyles} from '../box'
-import {getResponsiveProp} from '../helpers'
+import {flexItem, FlexItemProps} from '../../styles'
 import {flexBaseStyles, flexColumnStyles} from './styles'
 import {FlexAlign, FlexDirection, FlexJustify} from './types'
 
@@ -13,13 +12,14 @@ interface FlexProps {
   justify?: FlexJustify
 }
 
-const Root = styled.div(boxFlexStyles as any, flexBaseStyles as any, flexColumnStyles)
+const Root = styled.div<
+  FlexItemProps & {align?: FlexAlign; justify?: FlexJustify; uiDirection: FlexDirection}
+>(flexItem, flexBaseStyles, flexColumnStyles)
 
 export const Flex = forwardRef((props: React.HTMLProps<HTMLDivElement> & FlexProps, ref) => {
-  const {direction = 'row', flex: flexProp, ...restProps} = props
-  const flex = getResponsiveProp(flexProp)
+  const {direction = 'row', ...restProps} = props
 
-  return <Root data-ui="Flex" {...restProps} uiDirection={direction} flex={flex} ref={ref} />
+  return <Root data-ui="Flex" {...restProps} uiDirection={direction} ref={ref} />
 })
 
 Flex.displayName = 'Flex'

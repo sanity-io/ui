@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {getResponsiveProp} from '../helpers'
+import {getResponsiveProp} from '../../styles'
 import {stackBaseStyles, stackSpaceStyles} from './styles'
 
 interface StackProps {

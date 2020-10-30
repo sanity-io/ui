@@ -1,24 +1,30 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {margin, padding, radius, textInput} from '../../styles'
+import {
+  getResponsiveProp,
+  margin,
+  MarginProps,
+  padding,
+  PaddingProps,
+  radius,
+  RadiusProps,
+  textInput,
+} from '../../styles'
 import {ColorSchemeKey} from '../../theme'
-import {BoxMarginProps, BoxPaddingProps} from '../box'
 import {useCard} from '../card'
-import {getResponsiveProp} from '../helpers'
 
-interface TextInputProps extends BoxMarginProps, BoxPaddingProps {
+interface TextInputProps extends MarginProps, PaddingProps, RadiusProps {
   border?: boolean
-  radius?: number | number[]
   size?: number | number[]
   weight?: string
 }
 
 const Root = styled.span<{
   border: boolean
-  disabled?: boolean
+  disabled: boolean
   scheme: ColorSchemeKey
-  uiRadius: number[]
-}>(margin, radius as any, textInput.base, textInput.color as any)
+  radius?: number | number[]
+}>(margin, radius, textInput.base, textInput.color)
 
 const Input = styled.textarea<{uiSize: number[]; weight?: string}>`
   ${padding}
@@ -33,7 +39,7 @@ export const TextArea = forwardRef(
   ) => {
     const {
       border = true,
-      disabled,
+      disabled = false,
       margin,
       marginX,
       marginY,
@@ -56,28 +62,26 @@ export const TextArea = forwardRef(
     const card = useCard()
 
     const marginProps = {
-      margin: getResponsiveProp(margin),
-      marginX: getResponsiveProp(marginX),
-      marginY: getResponsiveProp(marginY),
-      marginTop: getResponsiveProp(marginTop),
-      marginBottom: getResponsiveProp(marginBottom),
-      marginLeft: getResponsiveProp(marginLeft),
-      marginRight: getResponsiveProp(marginRight),
+      margin,
+      marginX,
+      marginY,
+      marginTop,
+      marginBottom,
+      marginLeft,
+      marginRight,
     }
 
     const paddingProps = {
-      padding: getResponsiveProp(padding),
-      paddingX: getResponsiveProp(paddingX),
-      paddingY: getResponsiveProp(paddingY),
-      paddingTop: getResponsiveProp(paddingTop),
-      paddingBottom: getResponsiveProp(paddingBottom),
-      paddingLeft: getResponsiveProp(paddingLeft),
-      paddingRight: getResponsiveProp(paddingRight),
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
     }
 
     const uiSize = getResponsiveProp(sizeProp)
-
-    const uiRadius = getResponsiveProp(radius)
 
     return (
       <Root
@@ -85,7 +89,7 @@ export const TextArea = forwardRef(
         border={border}
         disabled={disabled}
         scheme={card.scheme}
-        uiRadius={uiRadius}
+        radius={radius}
       >
         <Input {...restProps} {...paddingProps} disabled={disabled} ref={ref} uiSize={uiSize} />
       </Root>

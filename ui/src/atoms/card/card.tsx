@@ -1,96 +1,70 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {border, BorderProps, radius, space} from '../../styles'
+import {
+  border,
+  BorderProps,
+  flexItem,
+  FlexItemProps,
+  margin,
+  MarginProps,
+  padding,
+  PaddingProps,
+  radius,
+  RadiusProps,
+  shadow,
+  ShadowProps,
+} from '../../styles'
 import {ColorSchemeKey} from '../../theme'
-import {BoxMarginProps, BoxPaddingProps, boxFlexStyles} from '../box'
-import {getResponsiveProp} from '../helpers'
 import {CardProvider} from './cardProvider'
 import {useCard} from './hooks'
-import {cardBaseStyles, cardColorStyles, cardShadowStyles} from './styles'
-import {CardTone} from './types'
+import {card} from './styles'
+import {CardColorProps, CardTone} from './types'
 
-export interface CardBaseProps extends BorderProps {
+export interface CardBaseProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  flex?: number | number[]
-  radius?: number | number[]
   scheme?: ColorSchemeKey
-  shadow?: number | number[]
   tone?: CardTone
 }
 
-export type CardProps = BoxMarginProps & BoxPaddingProps & CardBaseProps
+export type CardProps = BorderProps &
+  FlexItemProps &
+  MarginProps &
+  PaddingProps &
+  RadiusProps &
+  ShadowProps &
+  CardBaseProps
 
-// @todo: Figure out typings
-const Root = styled.div<BorderProps>(
-  border,
-  boxFlexStyles as any,
-  space as any,
-  cardBaseStyles,
-  cardColorStyles as any,
-  radius as any,
-  cardShadowStyles as any
-)
+const Root = styled.div<
+  BorderProps &
+    FlexItemProps &
+    MarginProps &
+    PaddingProps &
+    CardColorProps &
+    RadiusProps &
+    ShadowProps
+>(border, flexItem, margin, padding, radius, shadow, card)
 
 export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardProps, ref) => {
+  const parentCard = useCard()
   const {
-    as: asProp = 'div',
-    flex: flexProp,
     margin = 0,
-    marginX,
-    marginY,
-    marginTop,
-    marginBottom,
-    marginLeft,
-    marginRight,
     padding = 0,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    radius: radiusProp = 0,
-    scheme,
-    shadow: shadowProp,
+    radius = 0,
+    scheme = parentCard.scheme,
     tone = 'default',
     ...restProps
   } = props
 
-  const parentCard = useCard()
-
-  const spaceProps = {
-    margin: getResponsiveProp(margin),
-    marginX: getResponsiveProp(marginX),
-    marginY: getResponsiveProp(marginY),
-    marginTop: getResponsiveProp(marginTop),
-    marginBottom: getResponsiveProp(marginBottom),
-    marginLeft: getResponsiveProp(marginLeft),
-    marginRight: getResponsiveProp(marginRight),
-    padding: getResponsiveProp(padding),
-    paddingX: getResponsiveProp(paddingX),
-    paddingY: getResponsiveProp(paddingY),
-    paddingTop: getResponsiveProp(paddingTop),
-    paddingBottom: getResponsiveProp(paddingBottom),
-    paddingLeft: getResponsiveProp(paddingLeft),
-    paddingRight: getResponsiveProp(paddingRight),
-  }
-
-  const flex = getResponsiveProp(flexProp)
-  const uiRadius = getResponsiveProp(radiusProp)
-  const shadow = getResponsiveProp(shadowProp)
-
   return (
-    <CardProvider scheme={scheme || parentCard.scheme} tone={tone}>
+    <CardProvider scheme={scheme} tone={tone}>
       <Root
         data-ui="Card"
         {...restProps}
-        {...spaceProps}
-        as={asProp}
-        flex={flex}
-        uiRadius={uiRadius}
+        margin={margin}
+        padding={padding}
+        radius={radius}
         ref={ref}
-        shadow={shadow}
-        scheme={scheme || parentCard.scheme}
+        scheme={scheme}
         tone={tone}
       />
     </CardProvider>

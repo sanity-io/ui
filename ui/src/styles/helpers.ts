@@ -8,7 +8,9 @@ export function createObject(props: string[], value: any) {
   }, {})
 }
 
-export function rem(pixelValue: number): string {
+export function rem(pixelValue: number): string | 0 {
+  if (pixelValue === 0) return 0
+
   return `${pixelValue / 16}rem`
 }
 
@@ -22,4 +24,28 @@ export function responsive(theme: Theme, statements: any[]) {
       [mediaKey]: statement,
     }
   })
+}
+
+export function getResponsiveProp(
+  val: number | number[] | undefined,
+  defaultVal: number[] = []
+): number[] {
+  if (val === undefined) return defaultVal
+
+  return Array.isArray(val) ? val : [val]
+}
+
+export function getResponsiveSpace(theme: Theme, props: string[], spaceIndexes: number[] = []) {
+  if (!Array.isArray(spaceIndexes)) {
+    throw new Error('the property must be array of numbers')
+  }
+
+  if (spaceIndexes.length === 0) {
+    return null
+  }
+
+  return responsive(
+    theme,
+    spaceIndexes.map((spaceIndex) => createObject(props, rem(theme.space[spaceIndex])))
+  )
 }

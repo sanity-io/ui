@@ -1,8 +1,13 @@
 import {css} from 'styled-components'
 import {ColorSchemeKey, Theme} from '../../theme'
-import {rem} from '../helpers'
+import {getResponsiveProp, rem} from '../helpers'
 
-export const textInput = {base: textInputBase, color: textInputColor, inputBase, inputSize}
+export const textInput = {
+  base: textInputBase,
+  color: textInputColor,
+  inputBase,
+  inputSize,
+}
 
 function textInputBase() {
   return css`
@@ -90,7 +95,7 @@ function textInputColor({
   `
 }
 
-function inputBase(props: {uiSize: number[]; theme: Theme; weight?: string}) {
+function inputBase(props: {theme: Theme; weight?: string}) {
   const {theme, weight} = props
   const font = theme.fonts.text
 
@@ -110,9 +115,10 @@ function inputBase(props: {uiSize: number[]; theme: Theme; weight?: string}) {
   `
 }
 
-function inputSize(props: {uiSize: number[]; theme: Theme}) {
+function inputSize(props: {theme: Theme; uiSize: number | number[]}) {
   const {theme} = props
-  const size = theme.fonts.text.sizes[props.uiSize[0]]
+  const uiSize = getResponsiveProp(props.uiSize)
+  const size = theme.fonts.text.sizes[uiSize[0]]
 
   return css`
     margin-top: ${rem(0 - size.ascenderHeight - 1)};

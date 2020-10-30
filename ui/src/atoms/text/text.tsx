@@ -1,7 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {textFont} from '../../styles'
-import {getResponsiveProp} from '../helpers'
+import {FontProps, textFont} from '../../styles'
 import {textBaseStyles} from './styles'
 
 interface TextProps {
@@ -11,16 +10,14 @@ interface TextProps {
   weight?: string
 }
 
-// @todo: Figure out typings
-const Root = styled.div<{size: number[]; uiMuted?: boolean}>(textBaseStyles, textFont as any)
+const Root = styled.div<FontProps & {muted: boolean}>(textBaseStyles, textFont)
 
 export const Text = forwardRef(
   (props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {
-    const {children, muted, size: sizeProp = 2, weight, ...restProps} = props
-    const size = getResponsiveProp(sizeProp)
+    const {children, muted = false, size = 2, weight, ...restProps} = props
 
     return (
-      <Root data-ui="Text" {...restProps} uiMuted={muted} ref={ref} uiSize={size} weight={weight}>
+      <Root data-ui="Text" {...restProps} muted={muted} ref={ref} size={size} weight={weight}>
         {children}
       </Root>
     )

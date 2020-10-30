@@ -79,7 +79,7 @@ export interface ThemeButtonColor {
   }
 }
 
-export interface ThemeCardCStateColor {
+export interface ThemeCardStateColor {
   bg: string
   fg: string
   muted: {
@@ -101,11 +101,11 @@ export interface ThemeCardCStateColor {
 }
 
 export interface ThemeCardToneColor {
-  enabled: ThemeCardCStateColor
-  disabled: ThemeCardCStateColor
-  hovered: ThemeCardCStateColor
-  pressed: ThemeCardCStateColor
-  selected: ThemeCardCStateColor
+  enabled: ThemeCardStateColor
+  disabled: ThemeCardStateColor
+  hovered: ThemeCardStateColor
+  pressed: ThemeCardStateColor
+  selected: ThemeCardStateColor
 }
 
 export interface ThemeCardColor {

@@ -77,17 +77,17 @@ const Arrow = styled.div`
     transform: translateX(-50%);
   }
 
-  ${Root}[data-arrow-position='inside'] & {
+  [data-arrow-position='inside'] > & {
     transform: rotate(-90deg) translate3d(0, 6px, 0);
     opacity: 0;
   }
 
-  ${Root}[data-arrow-position='top'] & {
+  [data-arrow-position='top'] > & {
     opacity: 1;
     transform: rotate(0deg);
   }
 
-  ${Root}[data-arrow-position='bottom'] & {
+  [data-arrow-position='bottom'] > & {
     opacity: 1;
     transform: rotate(-180deg);
   }

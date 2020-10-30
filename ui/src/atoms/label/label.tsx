@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {getResponsiveProp} from '../helpers'
-import {labelBaseStyles, labelSizeStyles} from './styles'
+import {labelFont} from '../../styles'
+import {labelBaseStyles} from './styles'
 
 interface LabelProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
@@ -9,15 +9,14 @@ interface LabelProps {
   size?: number | number[]
 }
 
-const Root = styled.div<{uiMuted?: boolean; size: number[]}>(labelBaseStyles, labelSizeStyles)
+const Root = styled.div<{muted: boolean; size: number[]}>(labelBaseStyles, labelFont)
 
 export const Label = forwardRef(
   (props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {
-    const {children, muted, size: sizeProp = 2, ...restProps} = props
-    const size = getResponsiveProp(sizeProp)
+    const {children, muted = false, size = 2, ...restProps} = props
 
     return (
-      <Root data-ui="Label" {...restProps} uiMuted={muted} ref={ref} size={size}>
+      <Root data-ui="Label" {...restProps} muted={muted} ref={ref} size={size}>
         {children}
       </Root>
     )

@@ -1,6 +1,7 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {childrenToElementArray, getResponsiveProp} from '../helpers'
+import {getResponsiveProp} from '../../styles'
+import {childrenToElementArray} from '../helpers'
 import {inlineBaseStyles, inlineSpaceStyles} from './styles'
 
 interface InlineProps {

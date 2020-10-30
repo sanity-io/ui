@@ -1,22 +1,21 @@
 import React, {createElement, forwardRef} from 'react'
 import styled from 'styled-components'
 import {radius} from '../../styles'
-import {Box, BoxMarginProps, BoxPaddingProps} from '../box'
+import {MarginProps, PaddingProps, RadiusProps} from '../../styles'
+import {Box} from '../box'
 import {useCard} from '../card'
 import {Flex, FlexJustify} from '../flex'
-import {getResponsiveProp} from '../helpers'
 import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 import {ButtonMode, ButtonTone} from './types'
 
-export interface ButtonProps extends BoxPaddingProps {
+export interface ButtonProps extends MarginProps, PaddingProps, RadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: ButtonMode
   icon?: IconSymbol | React.FC
   iconRight?: IconSymbol | React.FC
   justify?: FlexJustify
-  radius?: number | number[]
   selected?: boolean
   size?: number | number[]
   space?: number | number[]
@@ -28,7 +27,7 @@ export interface ButtonProps extends BoxPaddingProps {
 const Root = styled.button(radius as any, buttonBaseStyles, buttonColorStyles)
 
 export const Button = forwardRef(
-  (props: BoxMarginProps & ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'size'>, ref) => {
+  (props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'size'>, ref) => {
     const {
       children,
       disabled,
@@ -50,7 +49,7 @@ export const Button = forwardRef(
       paddingBottom,
       paddingLeft,
       paddingRight,
-      radius: radiusProp = 2,
+      radius = 2,
       selected,
       size,
       space = 3,
@@ -78,8 +77,6 @@ export const Button = forwardRef(
       paddingRight,
     }
 
-    const uiRadius = getResponsiveProp(radiusProp)
-
     return (
       <Root
         data-ui="Button"
@@ -87,11 +84,11 @@ export const Button = forwardRef(
         data-disabled={disabled}
         data-selected={selected ? '' : undefined}
         disabled={disabled}
+        radius={radius}
         ref={ref}
         scheme={card.scheme}
         tone={tone}
         uiMode={mode}
-        uiRadius={uiRadius}
       >
         {(icon || text || iconRight) && (
           <Box as="span" {...boxProps}>

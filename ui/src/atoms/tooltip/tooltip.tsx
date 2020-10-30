@@ -31,7 +31,6 @@ export function Tooltip(
     disabled,
     placement = 'bottom',
     portal: portalProp,
-    // tone,
     ...restProps
   } = props
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
@@ -86,7 +85,6 @@ export function Tooltip(
   const popperNode = (
     <Root
       {...restProps}
-      // data-tone={tone}
       ref={setPopperElement}
       style={popper.styles.popper}
       {...popper.attributes.popper}

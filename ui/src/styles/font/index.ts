@@ -1,31 +1,32 @@
-import {Theme, ThemeFontSize} from '../../theme'
-import {rem, responsive} from '../helpers'
+import {ThemeFontSize} from '../../theme'
+import {getResponsiveProp, rem, responsive} from '../helpers'
+import {ThemeProps} from '../types'
 
-type FontKey = 'code' | 'heading' | 'label' | 'text'
+export type FontKey = 'code' | 'heading' | 'label' | 'text'
+export type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
 
-interface FontProps {
-  uiSize?: number[]
-  theme: Theme
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
+export interface FontProps extends ThemeProps {
+  size?: number | number[]
+  weight?: FontWeight
 }
 
 export function font(fontKey: FontKey, props: FontProps) {
-  const {uiSize = [], theme} = props
-  const {family: fontFamily, weights} = theme.fonts[fontKey]
+  const {size, theme} = props
+  const {family, sizes, weights} = theme.fonts[fontKey]
   const fontWeight = weights[props.weight || 'regular']
 
   const ret = [
     {
       position: 'relative',
-      fontFamily,
+      fontFamily: family,
       fontWeight,
       display: 'block',
       padding: '1px 0',
       margin: 0,
     },
-    responsive(
+    ...responsive(
       theme,
-      uiSize.map((sizeIndex) => fontSize(theme.fonts.text.sizes[sizeIndex]))
+      getResponsiveProp(size).map((sizeIndex) => fontSize(sizes[sizeIndex]))
     ),
   ]
 
@@ -49,17 +50,17 @@ export function labelFont(props: FontProps) {
 }
 
 export function fontSize(size: ThemeFontSize) {
-  const capHeight = size.lineHeight - size.ascenderHeight - size.descenderHeight
+  const negHeight = size.ascenderHeight + size.descenderHeight
+  const capHeight = size.lineHeight - negHeight
 
   return {
     fontSize: rem(size.fontSize),
     lineHeight: rem(size.lineHeight),
     letterSpacing: rem(size.letterSpacing),
     transform: `translateY(${rem(size.descenderHeight)})`,
-    // margin: '0 -0.06em',
 
     '&:before': {
-      marginTop: rem(0 - size.ascenderHeight - size.descenderHeight - 1),
+      marginTop: `calc(${rem(0 - negHeight)} - 1px)`,
     },
 
     '&:after': {

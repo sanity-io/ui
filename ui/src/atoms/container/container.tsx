@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {getResponsiveProp} from '../helpers'
+import {getResponsiveProp} from '../../styles'
 import {containerBaseStyles, containerWidthStyles} from './styles'
 
 interface ContainerProps {

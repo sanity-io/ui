@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
-import {rem} from '../../styles'
-import {ColorSchemeKey, Theme, ThemeFontSize} from '../../theme'
+import {ColorSchemeKey, Theme} from '../../theme'
 
 function codeSyntaxHighlightingStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
   const tone = theme.color[scheme].syntax.tones.default
@@ -119,18 +118,11 @@ function codeSyntaxHighlightingStyles({scheme, theme}: {scheme: ColorSchemeKey; 
   `
 }
 
-export function codeBaseStyles(props: {theme: Theme; uiMuted?: boolean}) {
-  const {uiMuted, theme} = props
+export function codeBaseStyles(props: {muted: boolean; theme: Theme}) {
+  const {muted} = props
 
   return css`
-    position: relative;
-    font-family: ${theme.fonts.code.family};
-    font-weight: ${theme.fonts.code.weights.regular};
-    display: block;
-    padding: ${rem(1)} 0 0;
-    margin: 0;
-
-    ${uiMuted &&
+    ${muted &&
     css`
       color: var(--card-muted-fg-color);
     `}
@@ -157,43 +149,5 @@ export function codeBaseStyles(props: {theme: Theme; uiMuted?: boolean}) {
     & svg {
       vertical-align: baseline;
     }
-  `
-}
-
-function _codeSizeStyles(size: ThemeFontSize) {
-  const capHeight = size.lineHeight - size.ascenderHeight - size.descenderHeight
-
-  return css`
-    font-size: ${rem(size.fontSize)};
-    line-height: ${rem(size.lineHeight)};
-    letter-spacing: ${rem(size.letterSpacing)};
-    transform: translateY(${rem(size.descenderHeight)});
-
-    &:before {
-      margin-top: ${rem(-1 - size.ascenderHeight - size.descenderHeight)};
-    }
-
-    & svg {
-      font-size: ${rem(size.iconSize)};
-      margin: ${rem((capHeight - size.iconSize) / 2)};
-    }
-  `
-}
-
-export function codeSizeStyles(props: {size: number[]; theme: Theme}) {
-  const {sizes} = props.theme.fonts.code
-
-  return css`
-    ${props.size.map((spaceIndex, mqIndex) => {
-      if (mqIndex === 0) {
-        return _codeSizeStyles(sizes[spaceIndex])
-      }
-
-      return css`
-        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
-          ${_codeSizeStyles(sizes[spaceIndex])}
-        }
-      `
-    })}
   `
 }

@@ -88,8 +88,8 @@ export const card: ThemeCardColor = {
           fg: hues.blue[100].hex,
         },
         hairline: {
-          soft: hues.gray[200].hex,
-          hard: hues.gray[300].hex,
+          soft: hues.blue[400].hex,
+          hard: hues.blue[300].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[600].hex,
@@ -183,7 +183,7 @@ export const card: ThemeCardColor = {
         bg: hues.blue[500].hex,
         fg: white.hex,
         muted: {
-          fg: hues.gray[700].hex,
+          fg: hues.blue[100].hex,
         },
         hairline: {
           soft: hues.gray[200].hex,

@@ -1,7 +1,10 @@
 import {css} from 'styled-components'
-import {rem} from '../../styles'
-import {BoxShadow, ColorSchemeKey, Theme} from '../../theme'
-import {CardTone} from './types'
+import {Theme, ThemeCardStateColor} from '../../theme'
+import {CardColorProps} from './types'
+
+export function card(props: CardColorProps & {theme: Theme}) {
+  return [cardBaseStyles, cardColorStyles(props)]
+}
 
 export function cardBaseStyles() {
   return css`
@@ -10,9 +13,15 @@ export function cardBaseStyles() {
     &:is(button) {
       -webkit-font-smoothing: inherit;
       appearance: none;
-      border: 0;
-      text-align: inherit;
       outline: none;
+      font: inherit;
+      text-align: inherit;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    &:is(a) {
+      text-decoration: none;
     }
 
     &:is(pre) {
@@ -21,138 +30,86 @@ export function cardBaseStyles() {
   `
 }
 
-export function cardColorStyles(props: {theme: Theme; tone: CardTone; scheme: ColorSchemeKey}) {
+function vars(color: ThemeCardStateColor) {
+  // Custom properties that may be used by other atoms
+  return css`
+    --card-bg-color: ${color.bg};
+    --card-fg-color: ${color.fg};
+    --card-focus-ring-color: ${color.focusRing};
+    --card-muted-fg-color: ${color.muted.fg};
+    --card-hairline-soft-color: ${color.hairline.soft};
+    --card-hairline-hard-color: ${color.hairline.hard};
+    --card-link-color: ${color.link};
+    --card-shadow-outline-color: ${color.shadow.outline};
+    --card-shadow-umbra-color: ${color.shadow.umbra};
+    --card-shadow-penumbra-color: ${color.shadow.penumbra};
+    --card-shadow-ambient-color: ${color.shadow.ambient};
+  `
+}
+
+export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
   const {scheme, theme} = props
   const tone = theme.color[scheme].card.tones[props.tone]
 
   return css`
-    /* Custom properties that may be used by other atoms */
-    --card-bg-color: ${tone.enabled.bg};
-    --card-fg-color: ${tone.enabled.fg};
-    --card-muted-fg-color: ${tone.enabled.muted.fg};
-    --card-focus-ring-color: ${tone.enabled.focusRing};
-    --card-hairline-soft-color: ${tone.enabled.hairline.soft};
-    --card-hairline-hard-color: ${tone.enabled.hairline.hard};
-    --card-link-color: ${tone.enabled.link};
-    --card-shadow-outline-color: ${tone.enabled.shadow.outline};
-    --card-shadow-umbra-color: ${tone.enabled.shadow.umbra};
-    --card-shadow-penumbra-color: ${tone.enabled.shadow.penumbra};
-    --card-shadow-ambient-color: ${tone.enabled.shadow.ambient};
+    ${vars(tone.enabled)}
 
+    /* border: 0; */
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
 
-    &:is(button):not(:disabled) {
-      @media (hover: hover) {
-        &:hover {
-          --card-bg-color: ${tone.hovered.bg};
-          --card-fg-color: ${tone.hovered.fg};
-          --card-muted-fg-color: ${tone.hovered.muted.fg};
-          --card-focus-ring-color: ${tone.hovered.focusRing};
-          --card-hairline-soft-color: ${tone.hovered.hairline.soft};
-          --card-hairline-hard-color: ${tone.hovered.hairline.hard};
-          --card-link-color: ${tone.hovered.link};
-          --card-shadow-outline-color: ${tone.hovered.shadow.outline};
-          --card-shadow-umbra-color: ${tone.hovered.shadow.umbra};
-          --card-shadow-penumbra-color: ${tone.hovered.shadow.penumbra};
-          --card-shadow-ambient-color: ${tone.hovered.shadow.ambient};
-        }
-
-        &:active {
-          --card-bg-color: ${tone.pressed.bg};
-          --card-fg-color: ${tone.pressed.fg};
-          --card-muted-fg-color: ${tone.pressed.muted.fg};
-          --card-focus-ring-color: ${tone.pressed.focusRing};
-          --card-hairline-soft-color: ${tone.pressed.hairline.soft};
-          --card-hairline-hard-color: ${tone.pressed.hairline.hard};
-          --card-link-color: ${tone.pressed.link};
-          --card-shadow-outline-color: ${tone.pressed.shadow.outline};
-          --card-shadow-umbra-color: ${tone.pressed.shadow.umbra};
-          --card-shadow-penumbra-color: ${tone.pressed.shadow.penumbra};
-          --card-shadow-ambient-color: ${tone.pressed.shadow.ambient};
-        }
+    &:is(button) {
+      &:disabled {
+        ${vars(tone.disabled)}
       }
-    }
 
-    &:is(a):not([data-disabled]) {
-      @media (hover: hover) {
-        outline: none;
-        text-decoration: none;
+      &:not(:disabled) {
+        @media (hover: hover) {
+          &:hover {
+            ${vars(tone.hovered)}
+          }
 
-        &:hover {
-          --card-bg-color: ${tone.hovered.bg};
-          --card-fg-color: ${tone.hovered.fg};
-          --card-muted-fg-color: ${tone.hovered.muted.fg};
-          --card-focus-ring-color: ${tone.hovered.focusRing};
-          --card-hairline-soft-color: ${tone.hovered.hairline.soft};
-          --card-hairline-hard-color: ${tone.hovered.hairline.hard};
-          --card-link-color: ${tone.hovered.link};
-          --card-shadow-outline-color: ${tone.hovered.shadow.outline};
-          --card-shadow-umbra-color: ${tone.hovered.shadow.umbra};
-          --card-shadow-penumbra-color: ${tone.hovered.shadow.penumbra};
-          --card-shadow-ambient-color: ${tone.hovered.shadow.ambient};
+          &:active {
+            ${vars(tone.pressed)}
+          }
         }
 
-        &:active {
-          --card-bg-color: ${tone.pressed.bg};
-          --card-fg-color: ${tone.pressed.fg};
-          --card-muted-fg-color: ${tone.pressed.muted.fg};
-          --card-focus-ring-color: ${tone.pressed.focusRing};
-          --card-hairline-soft-color: ${tone.pressed.hairline.soft};
-          --card-hairline-hard-color: ${tone.pressed.hairline.hard};
-          --card-link-color: ${tone.pressed.link};
-          --card-shadow-outline-color: ${tone.pressed.shadow.outline};
-          --card-shadow-umbra-color: ${tone.pressed.shadow.umbra};
-          --card-shadow-penumbra-color: ${tone.pressed.shadow.penumbra};
-          --card-shadow-ambient-color: ${tone.pressed.shadow.ambient};
-        }
-
-        [aria-selected='true'] > &,
         &:focus-visible {
-          --card-bg-color: ${tone.selected.bg};
-          --card-fg-color: ${tone.selected.fg};
-          --card-muted-fg-color: ${tone.selected.muted.fg};
-          --card-focus-ring-color: ${tone.selected.focusRing};
-          --card-hairline-soft-color: ${tone.selected.hairline.soft};
-          --card-hairline-hard-color: ${tone.selected.hairline.hard};
-          --card-link-color: ${tone.selected.link};
-          --card-shadow-outline-color: ${tone.selected.shadow.outline};
-          --card-shadow-umbra-color: ${tone.selected.shadow.umbra};
-          --card-shadow-penumbra-color: ${tone.selected.shadow.penumbra};
-          --card-shadow-ambient-color: ${tone.selected.shadow.ambient};
+          ${vars(tone.selected)}
+        }
+
+        [aria-selected='true'] > & {
+          ${vars(tone.selected)}
+        }
+      }
+    }
+
+    &:is(a) {
+      &[data-disabled] {
+        ${vars(tone.disabled)}
+      }
+
+      &:not([data-disabled]) {
+        @media (hover: hover) {
+          outline: none;
+
+          &:hover {
+            ${vars(tone.hovered)}
+          }
+
+          &:active {
+            ${vars(tone.pressed)}
+          }
+        }
+
+        &:focus-visible {
+          ${vars(tone.selected)}
+        }
+
+        [aria-selected='true'] > & {
+          ${vars(tone.selected)}
         }
       }
     }
   `
-}
-
-function toBoxShadow(shadow: BoxShadow, color: string) {
-  return `${shadow.map((v) => `${v}px`).join(' ')} ${color}`
-}
-
-function _shadowStyles(theme: Theme, shadowIndex: number) {
-  const shadow = theme.shadows[shadowIndex]
-
-  if (!shadow) return null
-
-  const outline = `0 0 0 1px var(--card-shadow-outline-color)`
-  const umbra = toBoxShadow(shadow.umbra, 'var(--card-shadow-umbra-color)')
-  const penumbra = toBoxShadow(shadow.penumbra, 'var(--card-shadow-penumbra-color)')
-  const ambient = toBoxShadow(shadow.ambient, 'var(--card-shadow-ambient-color)')
-
-  return css`
-    box-shadow: ${outline}, ${umbra}, ${penumbra}, ${ambient};
-  `
-}
-
-export function cardShadowStyles(props: {shadow: number[]; theme: Theme}) {
-  return props.shadow.map((shadowIndex, mqIndex) => {
-    if (mqIndex === 0) return _shadowStyles(props.theme, shadowIndex)
-
-    return css`
-      @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
-        ${_shadowStyles(props.theme, shadowIndex)}
-      }
-    `
-  })
 }

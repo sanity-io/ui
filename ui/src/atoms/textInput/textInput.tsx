@@ -1,39 +1,41 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {margin, padding, radius, textInput} from '../../styles'
+import {
+  margin,
+  MarginProps,
+  padding,
+  PaddingProps,
+  radius,
+  RadiusProps,
+  textInput,
+} from '../../styles'
 import {ColorSchemeKey} from '../../theme'
-import {BoxMarginProps, BoxPaddingProps} from '../box'
 import {useCard} from '../card'
-import {getResponsiveProp} from '../helpers'
 
-interface TextInputProps extends BoxMarginProps, BoxPaddingProps {
+interface TextInputProps extends MarginProps, PaddingProps, RadiusProps {
   border?: boolean
-  radius?: number | number[]
   size?: number | number[]
   weight?: string
 }
 
-const Root = styled.span<{
-  border: boolean
-  disabled?: boolean
-  scheme: ColorSchemeKey
-  uiRadius: number[]
-}>(margin, radius as any, textInput.base, textInput.color as any)
+const Root = styled.span<
+  {border: boolean; disabled: boolean; scheme: ColorSchemeKey} & RadiusProps
+>(margin, radius, textInput.base, textInput.color)
 
-const Input = styled.input<{uiSize: number[]; weight?: string}>`
+const Input = styled.input<{uiSize: number | number[]; weight?: string}>`
   ${padding}
   ${textInput.inputBase}
-  ${textInput.inputSize as any}
+  ${textInput.inputSize}
 `
 
 export const TextInput = forwardRef(
   (
-    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'>,
+    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'size' | 'type'>,
     ref: React.Ref<HTMLInputElement>
   ) => {
     const {
       border = true,
-      disabled,
+      disabled = false,
       margin,
       marginX,
       marginY,
@@ -41,43 +43,39 @@ export const TextInput = forwardRef(
       marginBottom,
       marginLeft,
       marginRight,
-      padding = [3],
+      padding = 3,
       paddingX,
       paddingY,
       paddingTop,
       paddingBottom,
       paddingLeft,
       paddingRight,
-      radius = [1],
-      size: sizeProp = [2],
+      radius = 1,
+      size = 2,
       ...restProps
     } = props
 
     const card = useCard()
 
     const marginProps = {
-      margin: getResponsiveProp(margin),
-      marginX: getResponsiveProp(marginX),
-      marginY: getResponsiveProp(marginY),
-      marginTop: getResponsiveProp(marginTop),
-      marginBottom: getResponsiveProp(marginBottom),
-      marginLeft: getResponsiveProp(marginLeft),
-      marginRight: getResponsiveProp(marginRight),
+      margin,
+      marginX,
+      marginY,
+      marginTop,
+      marginBottom,
+      marginLeft,
+      marginRight,
     }
 
     const paddingProps = {
-      padding: getResponsiveProp(padding),
-      paddingX: getResponsiveProp(paddingX),
-      paddingY: getResponsiveProp(paddingY),
-      paddingTop: getResponsiveProp(paddingTop),
-      paddingBottom: getResponsiveProp(paddingBottom),
-      paddingLeft: getResponsiveProp(paddingLeft),
-      paddingRight: getResponsiveProp(paddingRight),
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
     }
-
-    const uiSize = getResponsiveProp(sizeProp)
-
-    const uiRadius = getResponsiveProp(radius)
 
     return (
       <Root
@@ -85,7 +83,7 @@ export const TextInput = forwardRef(
         border={border}
         disabled={disabled}
         scheme={card.scheme}
-        uiRadius={uiRadius}
+        radius={radius}
       >
         <Input
           {...restProps}
@@ -93,7 +91,7 @@ export const TextInput = forwardRef(
           disabled={disabled}
           ref={ref}
           type="text"
-          uiSize={uiSize}
+          uiSize={size}
         />
       </Root>
     )
