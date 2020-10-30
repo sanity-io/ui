@@ -73,6 +73,56 @@ export function cardColorStyles(props: {theme: Theme; tone: CardTone; scheme: Co
         }
       }
     }
+
+    &:is(a):not([data-disabled]) {
+      @media (hover: hover) {
+        outline: none;
+        text-decoration: none;
+
+        &:hover {
+          --card-bg-color: ${tone.hovered.bg};
+          --card-fg-color: ${tone.hovered.fg};
+          --card-muted-fg-color: ${tone.hovered.muted.fg};
+          --card-focus-ring-color: ${tone.hovered.focusRing};
+          --card-hairline-soft-color: ${tone.hovered.hairline.soft};
+          --card-hairline-hard-color: ${tone.hovered.hairline.hard};
+          --card-link-color: ${tone.hovered.link};
+          --card-shadow-outline-color: ${tone.hovered.shadow.outline};
+          --card-shadow-umbra-color: ${tone.hovered.shadow.umbra};
+          --card-shadow-penumbra-color: ${tone.hovered.shadow.penumbra};
+          --card-shadow-ambient-color: ${tone.hovered.shadow.ambient};
+        }
+
+        &:active {
+          --card-bg-color: ${tone.pressed.bg};
+          --card-fg-color: ${tone.pressed.fg};
+          --card-muted-fg-color: ${tone.pressed.muted.fg};
+          --card-focus-ring-color: ${tone.pressed.focusRing};
+          --card-hairline-soft-color: ${tone.pressed.hairline.soft};
+          --card-hairline-hard-color: ${tone.pressed.hairline.hard};
+          --card-link-color: ${tone.pressed.link};
+          --card-shadow-outline-color: ${tone.pressed.shadow.outline};
+          --card-shadow-umbra-color: ${tone.pressed.shadow.umbra};
+          --card-shadow-penumbra-color: ${tone.pressed.shadow.penumbra};
+          --card-shadow-ambient-color: ${tone.pressed.shadow.ambient};
+        }
+
+        [aria-selected='true'] > &,
+        &:focus-visible {
+          --card-bg-color: ${tone.selected.bg};
+          --card-fg-color: ${tone.selected.fg};
+          --card-muted-fg-color: ${tone.selected.muted.fg};
+          --card-focus-ring-color: ${tone.selected.focusRing};
+          --card-hairline-soft-color: ${tone.selected.hairline.soft};
+          --card-hairline-hard-color: ${tone.selected.hairline.hard};
+          --card-link-color: ${tone.selected.link};
+          --card-shadow-outline-color: ${tone.selected.shadow.outline};
+          --card-shadow-umbra-color: ${tone.selected.shadow.umbra};
+          --card-shadow-penumbra-color: ${tone.selected.shadow.penumbra};
+          --card-shadow-ambient-color: ${tone.selected.shadow.ambient};
+        }
+      }
+    }
   `
 }
 

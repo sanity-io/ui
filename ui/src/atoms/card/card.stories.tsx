@@ -1,6 +1,6 @@
 import {Card, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
-import {select, withKnobs} from '@storybook/addon-knobs'
+import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import styled from 'styled-components'
 import {withCentered} from '~/storybook/decorators'
@@ -103,5 +103,19 @@ export const styledCard = () => {
     <StyledCard>
       <Text as="li">Styled</Text>
     </StyledCard>
+  )
+}
+
+export const interactiveCard = () => {
+  const selected = boolean('Selected?', false, 'Props')
+
+  return (
+    <Card padding={4}>
+      <div aria-selected={selected}>
+        <Card as="a" padding={3} tabIndex={0}>
+          <Text>Interactive</Text>
+        </Card>
+      </div>
+    </Card>
   )
 }
