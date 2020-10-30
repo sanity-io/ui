@@ -14,7 +14,7 @@ const Content = styled(Card)`
 export function ChangesPanel({onClose}: {onClose: () => void}) {
   return (
     <Root direction="column">
-      <Card style={{borderBottom: '1px solid var(--card-hairline-soft-color)'}}>
+      <Card borderBottom>
         <Flex>
           <Box flex={1} padding={4}>
             <Text weight="semibold">Review changes</Text>
