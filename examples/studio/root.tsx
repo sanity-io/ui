@@ -2,14 +2,7 @@ import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} fro
 import dashboardTool from '@sanity/dashboard/plugin'
 import deskTool from '@sanity/desk-tool/plugin'
 import {Layout} from '@sanity/layout'
-import {
-  CardProvider,
-  LayerProvider,
-  studioTheme,
-  Theme,
-  ThemeProvider,
-  usePrefersDark,
-} from '@sanity/ui'
+import {CardProvider, LayerProvider, studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import visionTool from '@sanity/vision/plugin'
 import React, {createElement} from 'react'
 import {hot} from 'react-hot-loader/root'
@@ -55,8 +48,7 @@ function ActiveTool() {
 }
 
 function RootComponent() {
-  const prefersDark = usePrefersDark()
-  const themeMode = prefersDark ? 'dark' : 'light'
+  const themeMode = 'light'
 
   return (
     <StudioProvider dataset="production" plugins={plugins} projectId="foo">

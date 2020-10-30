@@ -27,21 +27,25 @@ export function Navbar() {
         <Box paddingX={2} paddingY={4}>
           <Flex align="center">
             <Box padding={3}>
-              <Text>
-                <a href="/" onClick={handleLinkClick}>
-                  Manage
-                </a>
-              </Text>
+              <Button
+                as="a"
+                href="/"
+                mode="bleed"
+                onClick={handleLinkClick}
+                text={<strong>Manage</strong>}
+              />
             </Box>
             <Box flex={1}>
               <MenuButton
-                button={<Button mode="bleed" text="Sanity.io" />}
+                button={
+                  <Button icon="users" iconRight="chevron-down" mode="ghost" text="Sanity.io" />
+                }
                 id="select-org"
                 menu={
                   <Menu>
-                    <MenuItem text="Sanity.io" />
-                    <MenuItem text="GROQ" />
-                    <MenuItem text="Portable Text" />
+                    <MenuItem icon="users" iconRight="checkmark" text="Sanity.io" />
+                    <MenuItem icon="users" text="GROQ" />
+                    <MenuItem icon="users" text="Portable Text" />
                   </Menu>
                 }
               />

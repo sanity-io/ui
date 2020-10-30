@@ -4,7 +4,7 @@ import React from 'react'
 export function DatasetSelect() {
   return (
     <MenuButton
-      button={<Button iconRight="chevron-down" mode="ghost" text="Production" />}
+      button={<Button icon="database" iconRight="chevron-down" mode="ghost" text="Production" />}
       id="dataset-menu"
       menu={
         <Menu>

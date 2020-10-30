@@ -19,7 +19,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/projects"
-        icon="circle"
+        icon="rocket"
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'projects'}
@@ -55,7 +55,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/billing"
-        icon="document"
+        icon="bill"
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'billing'}
