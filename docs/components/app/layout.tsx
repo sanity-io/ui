@@ -15,7 +15,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
 
   return (
     <RootRoot direction="column">
-      <Card padding={[2, 3, 4]} style={{borderBottom: '1px solid var(--card-hairline-soft-color)'}}>
+      <Card padding={[2, 3, 4]} borderBottom>
         <Flex align="center">
           <Box flex={1}>
             <Flex>

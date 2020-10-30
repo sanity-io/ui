@@ -7,13 +7,8 @@ const Root = styled(Card)`
   ${({theme}) => css`
     position: relative;
 
-    @media (max-width: ${rem(theme.media[1])}) {
-      /* min-height: 100%; */
-    }
-
     @media (min-width: ${rem(theme.media[1])}) {
       display: grid;
-      /* height: 100%; */
       grid-template-columns: minmax(10rem, 18rem) 3fr;
     }
   `};
