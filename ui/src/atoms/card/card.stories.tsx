@@ -2,6 +2,7 @@ import {Card, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+import styled from 'styled-components'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -10,6 +11,19 @@ export default {
 }
 
 export const plain = () => {
+  const as = select(
+    'As',
+    {
+      'DIV (default)': 'div',
+      SPAN: 'span',
+      OL: 'ol',
+      PRE: 'pre',
+      UL: 'ul',
+    },
+    'div',
+    'Props'
+  )
+
   const padding = select(
     'Padding',
     {
@@ -66,11 +80,28 @@ export const plain = () => {
   )
 
   return (
-    <Card onClick={action('onClick')} padding={padding} radius={radius} shadow={shadow} tone={tone}>
+    <Card
+      as={as}
+      onClick={action('onClick')}
+      padding={padding}
+      radius={radius}
+      shadow={shadow}
+      tone={tone}
+    >
       <Text>
         Card with <code>padding={padding}</code>, <code>tone={tone}</code>, and{' '}
         <code>shadow={shadow}</code>
       </Text>
     </Card>
+  )
+}
+
+const StyledCard = styled(Card).attrs({forwardedAs: 'ol'})``
+
+export const styledCard = () => {
+  return (
+    <StyledCard>
+      <Text as="li">Styled</Text>
+    </StyledCard>
   )
 }
