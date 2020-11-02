@@ -13,6 +13,7 @@ interface DialogProps {
   header?: React.ReactNode
   id: string
   onClose?: () => void
+  scheme?: ColorSchemeKey
   width?: number
 }
 
@@ -84,6 +85,7 @@ const DialogCard = forwardRef(
       header,
       id,
       onClose,
+      scheme,
       width,
     }: {
       cardRadius: number
@@ -93,6 +95,7 @@ const DialogCard = forwardRef(
       header: React.ReactNode
       id: string
       onClose?: () => void
+      scheme: ColorSchemeKey
       width: number
     },
     ref
@@ -143,7 +146,7 @@ const DialogCard = forwardRef(
 
     return (
       <DialogContainer width={width}>
-        <DialogCardRoot radius={cardRadius} ref={setRef} shadow={cardShadow}>
+        <DialogCardRoot radius={cardRadius} ref={setRef} scheme={scheme} shadow={cardShadow}>
           <DialogLayout direction="column">
             <DialogHeader>
               <Flex>
@@ -180,6 +183,7 @@ DialogCard.displayName = 'DialogCard'
 
 export const Dialog = forwardRef(
   (props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id'>, ref) => {
+    const card = useCard()
     const {
       cardRadius = 2,
       cardShadow = 4,
@@ -188,10 +192,10 @@ export const Dialog = forwardRef(
       header,
       id,
       onClose,
+      scheme = card.scheme,
       width = 0,
       ...restProps
     } = props
-    const card = useCard()
     const preDivRef = useRef<HTMLDivElement | null>(null)
     const postDivRef = useRef<HTMLDivElement | null>(null)
     const cardRef = useRef<HTMLDivElement | null>(null)
@@ -227,7 +231,7 @@ export const Dialog = forwardRef(
           onFocus={handleFocus}
           ref={ref}
           role="dialog"
-          scheme={card.scheme}
+          scheme={scheme}
         >
           <div ref={preDivRef} tabIndex={0} />
           <DialogCard
@@ -238,6 +242,7 @@ export const Dialog = forwardRef(
             id={id}
             onClose={onClose}
             ref={cardRef}
+            scheme={scheme}
             width={width}
           >
             {children}
