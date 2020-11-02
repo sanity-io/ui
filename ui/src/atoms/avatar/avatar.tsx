@@ -1,5 +1,6 @@
 import {useId} from '@reach/auto-id'
 import React, {forwardRef, useCallback, useEffect, useState} from 'react'
+import ReactIs from 'react-is'
 import styled, {css} from 'styled-components'
 import {rem} from '../../styles'
 import {AvatarColorKey, ColorSchemeKey, Theme, useTheme} from '../../theme'
@@ -132,6 +133,7 @@ const Initials = styled.div<{scheme: ColorSchemeKey}>(
 export const Avatar = forwardRef(
   (props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>, ref) => {
     const {
+      as: asProp,
       color: colorKey = 'gray',
       src,
       title,
@@ -143,7 +145,7 @@ export const Avatar = forwardRef(
       size = 0,
       ...restProps
     } = props
-
+    const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
     const theme = useTheme()
     const card = useCard()
     const color = theme.color[card.scheme].avatar[colorKey]
@@ -181,6 +183,7 @@ export const Avatar = forwardRef(
 
     return (
       <Root
+        as={as}
         data-ui="Avatar"
         {...restProps}
         aria-label={title}
