@@ -1,7 +1,7 @@
 import {SearchIcon} from '@sanity/icons'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Button, Text, TextInput} from '../../atoms'
+import {Box, Button, Card, Text, TextInput} from '../../atoms'
 import {focusFirstDescendant} from '../../helpers'
 import {Root, ListBoxContainer, ListBoxCard} from './styles'
 
@@ -16,7 +16,7 @@ export interface AutocompleteProps {
   onSelect?: (value: string) => void
   options: AutocompleteOption[]
   radius?: number | number[]
-  renderOption: (option: AutocompleteOption) => React.ReactNode
+  renderOption?: (option: AutocompleteOption) => React.ReactNode
   size?: number | number[]
   value?: string
 }
@@ -58,15 +58,21 @@ const ClearButtonBox = styled(Box)`
   }
 `
 
+const defaultRenderOption = ({value}: {value: string}) => (
+  <Card as="button" padding={3}>
+    <Text>{value}</Text>
+  </Card>
+)
+
 export function Autocomplete(props: Props) {
   const {
     border = true,
     id,
     onChange,
     onSelect,
-    options,
+    options: optionsProp,
     radius = 2,
-    renderOption,
+    renderOption = defaultRenderOption,
     size = 2,
     value: valueProp = '',
     ...restProps
@@ -77,6 +83,7 @@ export function Autocomplete(props: Props) {
   const [listHovered, setListHovered] = useState(false)
   const inputId = `${id}-input`
   const listboxId = `${id}-listbox`
+  const options = Array.isArray(optionsProp) ? optionsProp : []
   const optionsLen = options.length
   const expanded = focused && optionsLen > 0
   const [selectedIndex, setSelectedIndex] = useState(-1)
