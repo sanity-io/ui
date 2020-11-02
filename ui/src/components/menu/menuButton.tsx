@@ -1,5 +1,6 @@
 import {Placement} from '@popperjs/core'
 import React, {cloneElement, useCallback, useState} from 'react'
+import ReactIs from 'react-is'
 import {Popover} from '../../atoms'
 import {useClickOutside} from '../../hooks'
 
@@ -81,7 +82,7 @@ export function MenuButton({
   }
 
   // @todo: check if the `button` property is a Button component?
-  const button = buttonProp ? cloneElement(buttonProp, buttonProps) : null
+  const button = ReactIs.isElement(buttonProp) ? cloneElement(buttonProp, buttonProps) : null
 
   return (
     <Popover
