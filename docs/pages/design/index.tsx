@@ -1,15 +1,18 @@
+import {Heading, Stack} from '@sanity/ui'
 import React from 'react'
-import {Card, Heading} from '~/../ui/src'
 import {AppLayout} from '~/components'
+import {DesignPageLayout} from '~/components/_designPage/layout'
 
 function DesignPage() {
   return (
     <AppLayout>
-      <Card flex={1} paddingX={[3, 4, 5]} paddingY={[6, 7, 8, 9]}>
-        <Heading size={[2, 3, 4, 5]} style={{textAlign: 'center'}}>
-          Design
-        </Heading>
-      </Card>
+      <DesignPageLayout>
+        <Stack space={[4, 4, 5, 6]}>
+          <Heading as="h1" size={[2, 2, 3, 4]}>
+            Design
+          </Heading>
+        </Stack>
+      </DesignPageLayout>
     </AppLayout>
   )
 }
