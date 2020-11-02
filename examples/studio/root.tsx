@@ -2,7 +2,7 @@ import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} fro
 import dashboardTool from '@sanity/dashboard/plugin'
 import deskTool from '@sanity/desk-tool/plugin'
 import {Layout} from '@sanity/layout'
-import {CardProvider, LayerProvider, studioTheme, Theme, ThemeProvider} from '@sanity/ui'
+import {CardProvider, studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import visionTool from '@sanity/vision/plugin'
 import React, {createElement} from 'react'
 import {hot} from 'react-hot-loader/root'
@@ -54,14 +54,12 @@ function RootComponent() {
     <StudioProvider dataset="production" plugins={plugins} projectId="foo">
       <LocationProvider>
         <ThemeProvider theme={studioTheme}>
-          <LayerProvider>
-            <CardProvider scheme={themeMode}>
-              <GlobalStyle mode={themeMode} />
-              <Layout projectName="Sanity.io">
-                <ActiveTool />
-              </Layout>
-            </CardProvider>
-          </LayerProvider>
+          <CardProvider scheme={themeMode}>
+            <GlobalStyle mode={themeMode} />
+            <Layout projectName="Sanity.io">
+              <ActiveTool />
+            </Layout>
+          </CardProvider>
         </ThemeProvider>
       </LocationProvider>
     </StudioProvider>

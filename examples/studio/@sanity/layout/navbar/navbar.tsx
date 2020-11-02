@@ -11,6 +11,7 @@ import {
   MenuButton,
   MenuItem,
   Text,
+  useLayer,
 } from '@sanity/ui'
 import React, {useCallback, useState} from 'react'
 import styled, {css} from 'styled-components'
@@ -21,6 +22,7 @@ import {Search} from './search'
 import {ToolMenu} from './toolMenu'
 
 const Root = styled(Card)`
+  position: relative;
   /* border-bottom: 1px solid var(--card-hairline-soft-color); */
   white-space: nowrap;
 `
@@ -98,6 +100,7 @@ const SearchButtonBox = styled(Box)`
 
 export function Navbar({projectName}: {projectName: string}) {
   const {handleLinkClick} = useLocation()
+  const layer = useLayer()
 
   const [toolMenuVisible, setToolMenuVisible] = useState(false)
   const handleToolMenuHide = useCallback(() => setToolMenuVisible(false), [])
@@ -114,7 +117,7 @@ export function Navbar({projectName}: {projectName: string}) {
   return (
     <>
       <ElementQuery className="sanity-navbar">
-        <Root borderBottom padding={1} scheme="dark">
+        <Root borderBottom padding={1} scheme="dark" style={{zIndex: layer.depth}}>
           <Flex align="center">
             <ToggleMenuButtonBox padding={1} visible={toolMenuVisible}>
               <Button icon="menu" mode="bleed" onClick={handleMenuShow} />

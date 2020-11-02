@@ -1,5 +1,5 @@
 import {useCommands} from '@sanity/base'
-import {Card, useGlobalKeyDown} from '@sanity/ui'
+import {Card, LayerProvider, useGlobalKeyDown} from '@sanity/ui'
 import isHotkey from 'is-hotkey'
 import React, {useState} from 'react'
 import styled from 'styled-components'
@@ -47,9 +47,18 @@ export function Layout(props: LayoutProps) {
 
   return (
     <Root>
-      <Navbar projectName={projectName} />
-      <Main>{children}</Main>
-      {commmandPaletteOpen && <CommandPaletteDialog onClose={() => setCommandPaletteOpen(false)} />}
+      <LayerProvider baseDepth={10000} id="layour/navbar">
+        <Navbar projectName={projectName} />
+      </LayerProvider>
+
+      <LayerProvider baseDepth={100} id="layout/main">
+        <Main>
+          {children}
+          {commmandPaletteOpen && (
+            <CommandPaletteDialog onClose={() => setCommandPaletteOpen(false)} />
+          )}
+        </Main>
+      </LayerProvider>
     </Root>
   )
 }

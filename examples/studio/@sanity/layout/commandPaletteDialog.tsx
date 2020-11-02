@@ -1,5 +1,5 @@
 import {useCommands} from '@sanity/base'
-import {Box, Dialog, Flex, Menu, KBD, MenuItem, Text, Inline} from '@sanity/ui'
+import {Box, Card, Dialog, Flex, Hotkeys, Menu, Text} from '@sanity/ui'
 import React from 'react'
 
 export function CommandPaletteDialog({onClose}: {onClose: () => void}) {
@@ -11,26 +11,23 @@ export function CommandPaletteDialog({onClose}: {onClose: () => void}) {
 
       <Menu>
         {commands.map((command, commandIndex) => (
-          <MenuItem
+          <Card
+            as="button"
             key={commandIndex}
             onClick={() => {
               command.handle()
               onClose()
             }}
+            padding={4}
           >
             <Flex align="center">
-              <Box flex={1} paddingX={4} paddingY={3}>
+              <Box flex={1} marginRight={4}>
                 <Text>{command.title}</Text>
               </Box>
-              <Box paddingX={4} paddingY={3}>
-                <Inline space={1}>
-                  {command.shortcut.map((key, keyIndex) => (
-                    <KBD key={keyIndex}>{key}</KBD>
-                  ))}
-                </Inline>
-              </Box>
+
+              <Hotkeys keys={command.shortcut} />
             </Flex>
-          </MenuItem>
+          </Card>
         ))}
       </Menu>
     </Dialog>
