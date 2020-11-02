@@ -7,16 +7,8 @@ interface LayerProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-// @todo: move to theme object
-const INITIAL_Z_INDEX = 1060
-
 const Root = styled.div<{depth: number}>`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  z-index: ${({depth}) => INITIAL_Z_INDEX + depth};
+  position: relative;
 `
 
 export const Layer = forwardRef((props: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
@@ -30,11 +22,11 @@ export const Layer = forwardRef((props: LayerProps & React.HTMLProps<HTMLDivElem
 Layer.displayName = 'Layer'
 
 const LayerChildren = forwardRef(
-  ({children, ...restProps}: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
+  ({children, style = {}, ...restProps}: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
     const layer = useLayer() || {depth: 0}
 
     return (
-      <Root data-ui="Layer" {...restProps} depth={layer.depth} ref={ref as any}>
+      <Root data-ui="Layer" {...restProps} ref={ref as any} style={{...style, zIndex: layer.depth}}>
         {children}
       </Root>
     )

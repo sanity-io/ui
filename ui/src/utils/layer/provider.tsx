@@ -2,7 +2,14 @@ import {useId} from '@reach/auto-id'
 import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react'
 import {LayerContext} from './context'
 
-export function LayerProvider({children, id: idProp}: {children: React.ReactNode; id?: string}) {
+interface LayerProviderProps {
+  baseDepth?: number
+  children: React.ReactNode
+  id?: string
+}
+
+export function LayerProvider(props: LayerProviderProps) {
+  const {baseDepth = 0, children, id: idProp} = props
   const parentLayer = useContext(LayerContext)
   const [size, setSize] = useState(-1)
   const idsRef = useRef<string[]>([])
@@ -35,12 +42,12 @@ export function LayerProvider({children, id: idProp}: {children: React.ReactNode
 
     return {
       currentId: _currentId,
-      depth: layerDepth,
+      depth: baseDepth + layerDepth,
       isTopLayer: currentId === _currentId,
       mount: parentLayer?.mount || mount,
       size: layerSize,
     }
-  }, [currentId, mount, parentLayer, size])
+  }, [baseDepth, currentId, mount, parentLayer, size])
 
   const mountFn = layer.mount
 
