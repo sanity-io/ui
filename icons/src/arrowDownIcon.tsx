@@ -15,11 +15,8 @@ function ArrowDownIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<
       ref={svgRef}
       {...props}
     >
-      <path
-        d="M18 13L12.5 18.5M12.5 18.5L7 13M12.5 18.5V6"
-        stroke="currentColor"
-        strokeWidth={1.2}
-      />
+      <path d="M12.5 18.5V6" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M18 13L12.5 18.5L7 13" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 }
