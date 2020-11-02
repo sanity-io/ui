@@ -5,6 +5,7 @@ import {ColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
 
 interface MenuItemProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
   icon?: IconSymbol
   iconRight?: IconSymbol
   space?: number | number[]
@@ -34,6 +35,11 @@ const Root = styled.button<{scheme: ColorSchemeKey}>(
       background-color: var(--card-bg-color);
       color: var(--card-fg-color);
 
+      &:is(a) {
+        text-decoration: none;
+        display: block;
+      }
+
       &:not(:disabled):focus {
         --card-bg-color: ${tone.selected.bg};
         --card-fg-color: ${tone.selected.fg};
@@ -53,7 +59,7 @@ const Root = styled.button<{scheme: ColorSchemeKey}>(
 )
 
 export const MenuItem = forwardRef(
-  (props: MenuItemProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as'>, ref) => {
+  (props: MenuItemProps & Omit<React.HTMLProps<HTMLButtonElement>, 'ref'>, ref) => {
     const card = useCard()
     const {children, icon, iconRight, onClick, space = 3, text, ...restProps} = props
     const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()

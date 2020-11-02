@@ -22,7 +22,7 @@ export const menu = () => (
   <LayerProvider>
     <Card>
       <Menu>
-        <MenuItem icon="add" text="Foo" />
+        <MenuItem as="a" href="#" icon="add" text="Foo" />
         <MenuItem icon="add" text="Bar" />
         <MenuDivider />
         <MenuItem icon="add" iconRight="checkmark" text="Baz" />
