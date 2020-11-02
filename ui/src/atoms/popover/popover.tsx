@@ -2,6 +2,7 @@ import {Placement} from '@popperjs/core'
 import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
+import {ColorSchemeKey} from '../../theme'
 import {Layer, Portal, usePortal} from '../../utils'
 import {Card} from '../card'
 import {PopoverArrow} from './arrow'
@@ -17,6 +18,7 @@ interface PopoverProps {
   portal?: boolean
   radius?: number | number[]
   referenceElement?: HTMLElement | null
+  scheme?: ColorSchemeKey
 }
 
 const Root = styled(Layer)``
@@ -37,6 +39,7 @@ export const Popover = forwardRef(
       portal: portalProp = true,
       radius = 2,
       referenceElement: referenceElementProp,
+      scheme,
       style = {},
       ...restProps
     } = props
@@ -110,7 +113,7 @@ export const Popover = forwardRef(
         style={{...style, ...styles.popper, pointerEvents: 'all'}}
         {...attributes.popper}
       >
-        <Card data-ui="PopoverCard" padding={padding} radius={radius} shadow={3}>
+        <Card data-ui="PopoverCard" padding={padding} radius={radius} scheme={scheme} shadow={3}>
           <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
           {content}
         </Card>

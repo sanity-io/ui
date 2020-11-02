@@ -3,12 +3,14 @@ import React, {cloneElement, useCallback, useState} from 'react'
 import ReactIs from 'react-is'
 import {Popover} from '../../atoms'
 import {useClickOutside} from '../../hooks'
+import {ColorSchemeKey} from '../../theme'
 
 export interface MenuButtonProps {
   button: React.ReactElement
   id: string
   menu?: React.ReactElement
   placement?: Placement
+  popoverScheme?: ColorSchemeKey
   portal?: boolean
 }
 
@@ -17,6 +19,7 @@ export function MenuButton({
   id,
   menu: menuProp,
   placement,
+  popoverScheme,
   portal,
 }: MenuButtonProps) {
   const [open, setOpen] = useState(false)
@@ -92,6 +95,7 @@ export function MenuButton({
       placement={placement}
       portal={portal}
       radius={2}
+      scheme={popoverScheme}
     >
       {button || <></>}
     </Popover>
