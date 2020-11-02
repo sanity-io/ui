@@ -15,6 +15,9 @@ export function font(fontKey: FontKey, props: FontProps) {
   const {family, sizes, weights} = theme.fonts[fontKey]
   const fontWeight = weights[props.weight || 'regular']
 
+  // @todo: make this configurable
+  const defaultSize = sizes[2]
+
   const ret = [
     {
       position: 'relative',
@@ -26,7 +29,7 @@ export function font(fontKey: FontKey, props: FontProps) {
     },
     ...responsive(
       theme,
-      getResponsiveProp(size).map((sizeIndex) => fontSize(sizes[sizeIndex]))
+      getResponsiveProp(size).map((sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))
     ),
   ]
 
