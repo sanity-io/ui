@@ -1,4 +1,5 @@
 export * from './elementQuery'
+export * from './errorBoundary'
 export * from './layer'
 export * from './portal'
 export * from './resizeObserver'
