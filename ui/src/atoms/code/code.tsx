@@ -21,13 +21,18 @@ const Root = styled.pre<{muted: boolean; scheme: ColorSchemeKey; size: number[]}
 
 export const Code = forwardRef(
   (props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {
-    const {children, language, muted = false, size = 2, ...restProps} = props
+    const {children, language: languageProp, muted = false, size = 2, ...restProps} = props
     const card = useCard()
+    const language = typeof languageProp === 'string' ? languageProp : undefined
+    const registered = language ? Refractor.hasLanguage(language as any) : false
 
     return (
       <Root data-ui="Code" {...restProps} ref={ref} scheme={card.scheme} size={size} muted={muted}>
-        {!language && <code>{children}</code>}
-        {language && <Refractor inline language={language} value={String(children)} />}
+        {(!language || (language && !registered)) && <code>{children}</code>}
+
+        {language && registered && (
+          <Refractor inline language={language} value={String(children)} />
+        )}
       </Root>
     )
   }
