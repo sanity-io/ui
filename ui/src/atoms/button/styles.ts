@@ -40,8 +40,9 @@ export function buttonColorStyles(props: {
   tone: ButtonTone
 }) {
   const {scheme, theme, uiMode} = props
-  const tone = theme.color[scheme].button.tones[props.tone || 'default']
-  const mode = tone.modes[uiMode || 'default']
+  const _scheme = theme.color[scheme]
+  const _tone = _scheme.button.tones[props.tone] || _scheme.button.tones.default
+  const mode = _tone.modes[uiMode] || _tone.modes.default
 
   return css`
     &:not([data-disabled='true']) {

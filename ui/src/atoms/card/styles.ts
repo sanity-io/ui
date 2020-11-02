@@ -50,44 +50,44 @@ function vars(color: ThemeCardStateColor) {
 
 export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
   const {scheme, theme} = props
-  const tone = theme.color[scheme].card.tones[props.tone]
+  const _scheme = theme.color[scheme] || theme.color.light
+  const _tone = _scheme.card.tones[props.tone] || _scheme.card.tones.default
 
   return css`
-    ${vars(tone.enabled)}
+    ${vars(_tone.enabled)}
 
-    /* border: 0; */
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
 
     &:is(button) {
       &:disabled {
-        ${vars(tone.disabled)}
+        ${vars(_tone.disabled)}
       }
 
       &:not(:disabled) {
         @media (hover: hover) {
           &:hover {
-            ${vars(tone.hovered)}
+            ${vars(_tone.hovered)}
           }
 
           &:active {
-            ${vars(tone.pressed)}
+            ${vars(_tone.pressed)}
           }
         }
 
         &:focus-visible {
-          ${vars(tone.selected)}
+          ${vars(_tone.selected)}
         }
 
         [aria-selected='true'] > & {
-          ${vars(tone.selected)}
+          ${vars(_tone.selected)}
         }
       }
     }
 
     &:is(a) {
       &[data-disabled] {
-        ${vars(tone.disabled)}
+        ${vars(_tone.disabled)}
       }
 
       &:not([data-disabled]) {
@@ -95,20 +95,20 @@ export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
           outline: none;
 
           &:hover {
-            ${vars(tone.hovered)}
+            ${vars(_tone.hovered)}
           }
 
           &:active {
-            ${vars(tone.pressed)}
+            ${vars(_tone.pressed)}
           }
         }
 
         &:focus-visible {
-          ${vars(tone.selected)}
+          ${vars(_tone.selected)}
         }
 
         [aria-selected='true'] > & {
-          ${vars(tone.selected)}
+          ${vars(_tone.selected)}
         }
       }
     }

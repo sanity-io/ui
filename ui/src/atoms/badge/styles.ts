@@ -13,12 +13,14 @@ export function badge({
   theme: Theme
   tone: BadgeTone
 }) {
-  const color = theme.color[scheme].badge.tones[tone].modes[mode]
+  const _color = theme.color[scheme].badge
+  const _tone = _color.tones[tone] || _color.tones.default
+  const _mode = _tone.modes[mode] || _tone.modes.default
 
   return css`
     display: inline-block;
-    background-color: ${color.bg};
-    color: ${color.fg};
-    box-shadow: inset 0 0 0 1px ${color.border};
+    background-color: ${_mode.bg};
+    color: ${_mode.fg};
+    box-shadow: inset 0 0 0 1px ${_mode.border};
   `
 }
