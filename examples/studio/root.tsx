@@ -50,8 +50,27 @@ function ActiveTool() {
 function RootComponent() {
   const themeMode = 'light'
 
+  const commands = [
+    {
+      name: 'log-active-element',
+      shortcut: ['mod', 'shift', 'f'],
+      title: 'Log active element',
+      handle() {
+        console.log(document.activeElement)
+      },
+    },
+    {
+      name: 'sign-out',
+      shortcut: ['mod', 'shift', 'l'],
+      title: 'Sign out',
+      handle() {
+        console.log('@todo: sign out')
+      },
+    },
+  ]
+
   return (
-    <StudioProvider dataset="production" plugins={plugins} projectId="foo">
+    <StudioProvider commands={commands} dataset="production" plugins={plugins} projectId="foo">
       <LocationProvider>
         <ThemeProvider theme={studioTheme}>
           <CardProvider scheme={themeMode}>

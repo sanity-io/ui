@@ -37,7 +37,7 @@ export function Layout(props: LayoutProps) {
     }
 
     for (const command of commands) {
-      if (isHotkey(command.shortcut.join('+'))(event)) {
+      if (command.shortcut && isHotkey(command.shortcut.join('+'))(event)) {
         event.preventDefault()
         command.handle()
         return

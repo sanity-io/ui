@@ -1,15 +1,14 @@
 import {useStudioToolPlugins} from '@sanity/base'
-import {Avatar, Box, Button, Card, Flex, Stack, Text, Theme} from '@sanity/ui'
+import {Avatar, Box, Button, Card, Flex, Layer, Stack, Text, Theme} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
 
-const Root = styled.div<{open: boolean}>`
+const Root = styled(Layer)<{open: boolean}>`
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 1000;
   pointer-events: ${({open}) => (open ? 'all' : 'none')};
 `
 

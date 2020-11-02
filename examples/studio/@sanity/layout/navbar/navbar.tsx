@@ -7,6 +7,7 @@ import {
   Card,
   ElementQuery,
   Flex,
+  LayerProvider,
   Menu,
   MenuButton,
   MenuItem,
@@ -172,6 +173,7 @@ export function Navbar({projectName}: {projectName: string}) {
                     <MenuItem icon="package" text="10 updates" />
                   </Menu>
                 }
+                popoverScheme="light"
               ></MenuButton>
             </NotificationsButtonBox>
 
@@ -223,6 +225,7 @@ export function Navbar({projectName}: {projectName: string}) {
                     </MenuItem>
                   </Menu>
                 }
+                popoverScheme="light"
               />
             </MembersMenuBox>
 
@@ -235,6 +238,7 @@ export function Navbar({projectName}: {projectName: string}) {
                     <MenuItem icon="leave" text="Sign out" />
                   </Menu>
                 }
+                popoverScheme="light"
               />
             </UserMenuBox>
 
@@ -247,7 +251,9 @@ export function Navbar({projectName}: {projectName: string}) {
 
       {composeDialogOpen && <ComposeDialog onClose={handleComposeDialogClose} />}
 
-      <NavDrawer onHide={handleMenuHide} open={drawerOpen} />
+      <LayerProvider baseDepth={1000}>
+        <NavDrawer onHide={handleMenuHide} open={drawerOpen} />
+      </LayerProvider>
     </>
   )
 }

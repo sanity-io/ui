@@ -1,21 +1,23 @@
-import React, {createContext} from 'react'
+import React from 'react'
+import {StudioContext} from './context'
 import {PluginProvider} from './plugin'
-
-const StudioContext = createContext<any>(null)
+import {StudioCommand} from './types'
 
 export function StudioProvider({
   children,
+  commands = [],
   dataset,
   plugins,
   projectId,
 }: {
   children?: React.ReactNode
+  commands?: StudioCommand[]
   dataset: string
   plugins: any[]
   projectId: string
 }) {
   return (
-    <StudioContext.Provider value={{dataset, projectId}}>
+    <StudioContext.Provider value={{commands, dataset, projectId}}>
       <PluginProvider plugins={plugins}>{children}</PluginProvider>
     </StudioContext.Provider>
   )

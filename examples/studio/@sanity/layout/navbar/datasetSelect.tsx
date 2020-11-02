@@ -13,6 +13,7 @@ export function DatasetSelect() {
           <MenuItem icon="database" text="Development" />
         </Menu>
       }
+      popoverScheme="light"
     />
   )
 }
