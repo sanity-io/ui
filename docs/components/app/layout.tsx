@@ -20,7 +20,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
           <Box flex={1}>
             <Flex>
               <Box marginRight={2}>
-                <Link href="/">
+                <Link href="/" passHref>
                   <Button
                     as="a"
                     mode="bleed"
@@ -30,7 +30,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                 </Link>
               </Box>
               <Inline space={2}>
-                <Link href="/design">
+                <Link href="/design" passHref>
                   <Button
                     as="a"
                     mode="bleed"
@@ -39,7 +39,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     text="Design"
                   />
                 </Link>
-                <Link href="/ui">
+                <Link href="/ui" passHref>
                   <Button
                     as="a"
                     mode="bleed"
@@ -48,7 +48,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     text="UI"
                   />
                 </Link>
-                <Link href="/arcade">
+                <Link href="/arcade" passHref>
                   <Button
                     as="a"
                     mode="bleed"
@@ -57,7 +57,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     text="Arcade"
                   />
                 </Link>
-                <Link href="/resources">
+                <Link href="/resources" passHref>
                   <Button
                     as="a"
                     mode="bleed"

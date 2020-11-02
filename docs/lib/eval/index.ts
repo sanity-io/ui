@@ -1,3 +1,15 @@
+export interface EvalSuccessResult {
+  type: 'success'
+  node: React.ReactNode
+}
+
+export interface EvalErrorResult {
+  type: 'error'
+  error: Error
+}
+
+export type EvalResult = EvalSuccessResult | EvalErrorResult
+
 export function renderHooks(code: string, scope: Record<string, any>) {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -10,7 +22,7 @@ export function renderHooks(code: string, scope: Record<string, any>) {
   }
 }
 
-export function renderCode(code: string, scope: Record<string, any>) {
+export function renderCode(code: string, scope: Record<string, any>): EvalResult {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = (window as any).Babel.transform(`<>${code}</>`, {presets: ['env', 'react']})

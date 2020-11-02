@@ -20,7 +20,7 @@ function NavLink(props: {children: React.ReactNode; href: string}) {
   }
 
   return (
-    <Link href={props.href}>
+    <Link href={props.href} passHref>
       <a>{props.children}</a>
     </Link>
   )

@@ -1,15 +1,13 @@
+import dynamic from 'next/dynamic'
 import React from 'react'
-import {Card, Heading} from '~/../ui/src'
 import {AppLayout} from '~/components'
+
+const ArcadeApp = dynamic(import('~/components/arcade/app'), {ssr: false})
 
 function ArcadePage() {
   return (
     <AppLayout>
-      <Card flex={1} paddingX={[3, 4, 5]} paddingY={[6, 7, 8, 9]}>
-        <Heading size={[2, 3, 4, 5]} style={{textAlign: 'center'}}>
-          Arcade
-        </Heading>
-      </Card>
+      <ArcadeApp />
     </AppLayout>
   )
 }

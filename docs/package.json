@@ -17,10 +17,12 @@
     "@sanity/color": "^2.0.2",
     "@sanity/icons": "^1.0.0-alpha.3",
     "@sanity/ui": "^1.0.0-alpha.7",
+    "codemirror": "^5.58.2",
     "date-fns": "^2.16.1",
     "next": "^10.0.0",
     "next-sanity": "^0.1.7",
     "react": "^16.14.0",
+    "react-codemirror2": "^7.2.1",
     "react-dom": "^16.14.0",
     "react-is": "16.13.1",
     "react-popper": "^2.2.3",
@@ -29,6 +31,7 @@
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
+    "@types/codemirror": "^0.0.56",
     "@types/node": "^14.14.6",
     "babel-plugin-styled-components": "^1.11.1"
   }
