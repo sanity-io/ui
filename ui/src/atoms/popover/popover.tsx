@@ -1,6 +1,7 @@
 import {Placement} from '@popperjs/core'
 import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
+import styled from 'styled-components'
 import {Layer, Portal, usePortal} from '../../utils'
 import {Card} from '../card'
 import {PopoverArrow} from './arrow'
@@ -18,8 +19,13 @@ interface PopoverProps {
   referenceElement?: HTMLElement | null
 }
 
+const Root = styled(Layer)``
+
 export const Popover = forwardRef(
-  (props: PopoverProps & Omit<React.HTMLProps<HTMLDivElement>, 'children' | 'content'>, ref) => {
+  (
+    props: PopoverProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
+    ref
+  ) => {
     const {
       boundaryElement: boundaryElementProp,
       children: child,
@@ -97,7 +103,8 @@ export const Popover = forwardRef(
     }
 
     const node = (
-      <div
+      <Root
+        data-ui="Popover"
         {...restProps}
         ref={setRootRef}
         style={{...style, ...styles.popper, pointerEvents: 'all'}}
@@ -107,7 +114,7 @@ export const Popover = forwardRef(
           <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
           {content}
         </Card>
-      </div>
+      </Root>
     )
 
     return (
@@ -116,11 +123,7 @@ export const Popover = forwardRef(
 
         {open && (
           <>
-            {portalProp && (
-              <Portal>
-                <Layer style={{pointerEvents: 'none'}}>{node}</Layer>
-              </Portal>
-            )}
+            {portalProp && <Portal>{node}</Portal>}
 
             {!portalProp && node}
           </>

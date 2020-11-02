@@ -2,14 +2,14 @@ import {Placement} from '@popperjs/core'
 import React, {useCallback, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
-import {Portal} from '../../utils'
+import {Layer, Portal} from '../../utils'
 import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
 
 export interface TooltipProps {
   boundaryElement?: HTMLElement | null
-  children: React.ReactElement
-  content: React.ReactNode
+  children?: React.ReactElement
+  content?: React.ReactNode
   disabled?: boolean
   placement?: Placement
   portal?: boolean
@@ -17,7 +17,7 @@ export interface TooltipProps {
   fallbackPlacements?: Placement[]
 }
 
-const Root = styled.div`
+const Root = styled(Layer)`
   pointer-events: none;
 `
 
@@ -79,7 +79,7 @@ export function Tooltip(
   }, [forceUpdate, content])
 
   if (disabled) {
-    return children
+    return children || <span />
   }
 
   const popperNode = (
@@ -95,6 +95,10 @@ export function Tooltip(
       </Card>
     </Root>
   )
+
+  if (!children) {
+    return <span />
+  }
 
   return (
     <>

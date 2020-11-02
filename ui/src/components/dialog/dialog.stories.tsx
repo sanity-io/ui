@@ -9,11 +9,12 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
+import {withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useRef, useState} from 'react'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
-  decorators: [withCentered],
+  decorators: [withCentered, withKnobs],
   title: 'Components/Dialog',
 }
 
