@@ -27,13 +27,14 @@ export const Popover = forwardRef(
       disabled,
       open,
       padding,
-      placement = 'bottom',
+      placement: placementProp,
       portal: portalProp = true,
       radius = 2,
       referenceElement: referenceElementProp,
       style = {},
       ...restProps
     } = props
+    const placement = typeof placementProp === 'string' ? placementProp : 'bottom'
     const portal = usePortal()
     const boundaryElement = boundaryElementProp || portal.boundaryElement
     const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
