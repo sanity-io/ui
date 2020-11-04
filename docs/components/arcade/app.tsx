@@ -1,6 +1,8 @@
 import * as ui from '@sanity/ui'
 import {Box, Card, Code, ErrorBoundary, Flex} from '@sanity/ui'
+import base64url from 'base64-url'
 import isHotkey from 'is-hotkey'
+import {useRouter} from 'next/router'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {CodeEditor} from './codeEditor'
@@ -34,29 +36,26 @@ const DEFAULT_CODE = `<Card
 `
 
 export default function ArcadeApp() {
-  const [code, setCode] = useState(DEFAULT_CODE)
+  const router = useRouter()
+  const [code, setCode] = useState('')
   const [result, setResult] = useState<EvalResult | null>(null)
   const codeRef = useRef(code)
   const [cursor, setCursor] = useState<Cursor>({line: 0, column: 0})
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const cachedCode = window.localStorage.getItem('__code')
-
+      const cachedCode = router.query.code ? base64url.decode(router.query.code) : DEFAULT_CODE
       if (cachedCode) setCode(cachedCode)
     }
-  }, [])
+  }, [router])
 
   useEffect(() => {
-    codeRef.current = code
-  }, [code])
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('__code', code)
+    if (code !== codeRef.current) {
+      codeRef.current = code
+      router.replace({pathname: '/arcade', query: {code: base64url.encode(code)}})
       setResult(renderCode(code, {React, ...ui}))
     }
-  }, [code])
+  }, [code, router])
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
