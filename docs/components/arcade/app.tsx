@@ -1,11 +1,12 @@
 import * as ui from '@sanity/ui'
 import {Box, Card, Code, ErrorBoundary, Flex} from '@sanity/ui'
-import base64url from 'base64-url'
 import isHotkey from 'is-hotkey'
 import {useRouter} from 'next/router'
+import pako from 'pako'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {CodeEditor} from './codeEditor'
+import {bytesToString} from './util'
 import {EvalResult, renderCode} from '~/lib/eval'
 import {runPrettier} from '~/lib/prettier'
 
@@ -35,6 +36,21 @@ const DEFAULT_CODE = `<Card
 </Card>
 `
 
+const decodeCode = (base64: string) => {
+  const data = atob(base64)
+  const inflated = bytesToString(pako.inflateRaw(data))
+  return decodeURIComponent(inflated)
+}
+
+const encodeCode = (code: string) => {
+  if (!code.length) {
+    return ''
+  }
+  const data = encodeURIComponent(code)
+  const deflated = pako.deflateRaw(data)
+  return btoa(bytesToString(deflated))
+}
+
 export default function ArcadeApp() {
   const router = useRouter()
   const [code, setCode] = useState('')
@@ -44,7 +60,7 @@ export default function ArcadeApp() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const cachedCode = router.query.code ? base64url.decode(router.query.code) : DEFAULT_CODE
+      const cachedCode = router.query.code ? decodeCode(router.query.code as string) : DEFAULT_CODE
       if (cachedCode) setCode(cachedCode)
     }
   }, [router])
@@ -52,7 +68,7 @@ export default function ArcadeApp() {
   useEffect(() => {
     if (code !== codeRef.current) {
       codeRef.current = code
-      router.replace({pathname: '/arcade', query: {code: base64url.encode(code)}})
+      router.replace({pathname: '/arcade', query: {code: encodeCode(code)}})
       setResult(renderCode(code, {React, ...ui}))
     }
   }, [code, router])
