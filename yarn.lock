@@ -3439,9 +3439,9 @@
     object-assign "^4.1.1"
 
 "@sanity/code-input@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@sanity/code-input/-/code-input-2.0.5.tgz#a86785c5f0bfe588c0e983c1b647f823343325fd"
-  integrity sha512-vfFrg3ofLdWUCvNrV+COy6G7LQtUmCUsIRlqFL/Nx+lMmppcSEAJ+hpxxv/VWe5d+foL3YGSxpC7teZoBHjjbA==
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@sanity/code-input/-/code-input-2.0.9.tgz#078d76effef365bc5701272f44ffaa8dff7197f3"
+  integrity sha512-qAE3hQ4wPTtL6LybJ+bE6YN6zUb+dfkg+7g9fDaODYR2LJeQKNJr7WQfnTadDRwC/sU6JBm6x670EKlR6plCcw==
   dependencies:
     lodash "^4.17.15"
     react-ace "^5.0.1"
