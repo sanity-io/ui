@@ -23,7 +23,7 @@ const Root = styled(Layer)<{scheme: ColorSchemeKey}>(
 
     return css`
       && {
-        position: fixed;
+        position: absolute;
       }
 
       top: 0;
