@@ -13,8 +13,8 @@ import {ButtonMode, ButtonTone} from './types'
 export interface ButtonProps extends MarginProps, PaddingProps, RadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: ButtonMode
-  icon?: IconSymbol | React.FC
-  iconRight?: IconSymbol | React.FC
+  icon?: IconSymbol | React.ComponentType
+  iconRight?: IconSymbol | React.ComponentType
   justify?: FlexJustify
   selected?: boolean
   size?: number | number[]
