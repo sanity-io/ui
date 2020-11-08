@@ -6,6 +6,7 @@ import {useClickOutside} from '../../hooks'
 import {ColorSchemeKey} from '../../theme'
 
 export interface MenuButtonProps {
+  boundaryElement?: HTMLElement
   button: React.ReactElement
   id: string
   menu?: React.ReactElement
@@ -15,6 +16,7 @@ export interface MenuButtonProps {
 }
 
 export function MenuButton({
+  boundaryElement,
   button: buttonProp,
   id,
   menu: menuProp,
@@ -89,6 +91,7 @@ export function MenuButton({
 
   return (
     <Popover
+      boundaryElement={boundaryElement}
       content={menu}
       data-ui="MenuButton"
       open={open}
