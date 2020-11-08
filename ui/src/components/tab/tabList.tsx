@@ -5,7 +5,7 @@ import {Inline} from '../../atoms'
 interface TabListProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   children: React.ReactElement[]
-  space: number | number[]
+  space?: number | number[]
 }
 
 const Root = styled.div``
