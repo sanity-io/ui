@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
+import React, {createElement, forwardRef, useCallback, useEffect, useRef} from 'react'
 import styled, {css} from 'styled-components'
 import {Box, Flex, Icon, IconSymbol, Text, useCard} from '../../atoms'
 import {ColorSchemeKey, Theme} from '../../theme'
@@ -6,8 +6,8 @@ import {useMenu} from './hooks'
 
 interface MenuItemProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  icon?: IconSymbol
-  iconRight?: IconSymbol
+  icon?: IconSymbol | React.ComponentType
+  iconRight?: IconSymbol | React.ComponentType
   space?: number | number[]
   text?: React.ReactNode
 }
@@ -99,7 +99,8 @@ export const MenuItem = forwardRef(
             <Flex as="span">
               {icon && (
                 <Text>
-                  <Icon symbol={icon} />
+                  {typeof icon === 'string' && <Icon symbol={icon} />}
+                  {typeof icon !== 'string' && createElement(icon)}
                 </Text>
               )}
 
@@ -115,7 +116,8 @@ export const MenuItem = forwardRef(
 
               {iconRight && (
                 <Text>
-                  <Icon symbol={iconRight} />
+                  {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
+                  {typeof iconRight !== 'string' && createElement(iconRight)}
                 </Text>
               )}
             </Flex>
