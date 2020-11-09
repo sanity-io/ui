@@ -3681,20 +3681,20 @@
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.140.0.tgz#f60ab75be5fdc346b9f0d1c2a0858aa3c2870109"
   integrity sha512-H/G/WA9S22TXcXST52CIiTsHx3S2hH0gvK7LnI5w76vfKS0obnDPh8jrPg4xeNRYGPuV9MHYRlyERGpRGoo4Qw==
 
-"@sanity/groq-store@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@sanity/groq-store/-/groq-store-0.1.2.tgz#6428a29e79d184491eb54962f6cda7e416da658e"
-  integrity sha512-r+fIvR8Vz7nSe9X9g91M/UaNCKuVXtPqvtIQFKz0mXj10k7Z60zIEyWhsQAiThLAyIonAdEud/Pyr+yzGw2jYw==
+"@sanity/groq-store@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@sanity/groq-store/-/groq-store-0.1.3.tgz#5521368c7d713a43156149c013092cd3b852f439"
+  integrity sha512-0XPm2imLvcT0M9RVHhM5dDqSEl1PvrOu3RGDnTYtLV3XQVwy5hyPFaQpNZ7dLlhRal9b3KWSNcBLQPdhAtZUFg==
   dependencies:
     "@sanity/types" "^2.0.1"
     eventsource "^1.0.7"
     fast-deep-equal "^3.1.3"
-    groq "^2.0.1"
+    groq "^2.0.9"
     groq-js "^0.2.0"
-    mendoza "^2.0.1"
+    mendoza "^2.1.1"
     simple-get "^4.0.0"
     split2 "^3.2.2"
-    throttle-debounce "^2.3.0"
+    throttle-debounce "^3.0.1"
 
 "@sanity/image-url@0.140.19", "@sanity/image-url@^0.140.15", "@sanity/image-url@^0.140.19":
   version "0.140.19"
@@ -11200,10 +11200,10 @@ groq-js@^0.2.0:
   resolved "https://registry.yarnpkg.com/groq-js/-/groq-js-0.2.0.tgz#abd4870014a1ccdf0936d5d75a78063aff9197c0"
   integrity sha512-qJeuEgziddryH1ClsJvMoZM9aXNQbBViNZZrJwhHKr2wU8HGGM7uNWNVFglWXMX60MMaa2SClX3UohP76Ut68g==
 
-groq@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/groq/-/groq-2.0.1.tgz#b95b151a1c50be0d63b34f1a54975713100ede79"
-  integrity sha512-rPRhMaCsJidjx9CMZqVwEVNLbQbhljWrxAcsOxIVAcjLUzeaypQwXu/0YxEruKzhi8dRgoAY6+rHLy8OAuByaw==
+groq@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/groq/-/groq-2.0.9.tgz#c7edaf56ce1b045299c5391cc14aca013852b28b"
+  integrity sha512-Ed9YFs4B7DMmVAzAwDMnC/6FjRnwrIbpNpBbAep2zWR5L+4hcXgRV5C/2L6DDaEqYfrJUdRKf6jRipVnDzIaQA==
 
 growly@^1.3.0:
   version "1.3.0"
@@ -14163,10 +14163,15 @@ memorystream@^0.3.1:
   resolved "https://registry.yarnpkg.com/memorystream/-/memorystream-0.3.1.tgz#86d7090b30ce455d63fbae12dda51a47ddcaf9b2"
   integrity sha1-htcJCzDORV1j+64S3aUaR93K+bI=
 
-mendoza@2.0.9, mendoza@^2.0.1:
+mendoza@2.0.9:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/mendoza/-/mendoza-2.0.9.tgz#c945c4477916e579be5644d95364a97321d7b02d"
   integrity sha512-fzMms61YY3zGFTmd3rfeafZ7XVvdgAtqF9TlYPnPNm3V3x66qCrSgnywMmj+bvCIMgmRc41xOlALa8yiIGtdjQ==
+
+mendoza@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/mendoza/-/mendoza-2.1.1.tgz#19ad4efc3f424439d895e1f1841818a4e268af55"
+  integrity sha512-8f3Se8HDfobXCsdESXZBSSYcVzIRi+cMIEmz/SR4bjgFEjHJaXzrsBYr+vyrFGEtK5xTpCcU+DiwxWJV6hCuhQ==
 
 meow@^3.3.0:
   version "3.7.0"
@@ -14679,14 +14684,14 @@ nested-object-assign@^1.0.3:
   integrity sha512-kgq1CuvLyUcbcIuTiCA93cQ2IJFSlRwXcN+hLcb2qLJwC2qrePHGZZa7IipyWqaWF6tQjdax2pQnVxdq19Zzwg==
 
 next-sanity@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/next-sanity/-/next-sanity-0.1.7.tgz#043fd29f04991177ff1a9644268dc4756e0da05e"
-  integrity sha512-J3T49yTCQrn+Mqjof9462YEq8Xb6oDr6XIBXjqSAYPCMDOMmA5GQ8x7GRSrp4/+CgzedQvTnvjAXd8JW1tMivA==
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/next-sanity/-/next-sanity-0.1.8.tgz#aa5a32d6452fca835d72d16fbf587e4d5fec5d5d"
+  integrity sha512-AmNNyNVl8WVSj270OOrXr8X3KNMTSVh+FB8Aelkx/ICGZbXV3jr1qVwNjNlYWsd4JwUrd/Itrec9JirhknOYjg==
   dependencies:
     "@sanity/block-content-to-react" "^2.0.7"
-    "@sanity/groq-store" "^0.1.2"
+    "@sanity/groq-store" "^0.1.3"
     "@sanity/image-url" "0.140.19"
-    groq "^2.0.1"
+    groq "^2.0.9"
     picosanity "^2.1.2"
     use-deep-compare-effect "^1.4.0"
 
@@ -20013,10 +20018,15 @@ throat@^5.0.0:
   resolved "https://registry.yarnpkg.com/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
 
-throttle-debounce@^2.1.0, throttle-debounce@^2.3.0:
+throttle-debounce@^2.1.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-2.3.0.tgz#fd31865e66502071e411817e241465b3e9c372e2"
   integrity sha512-H7oLPV0P7+jgvrk+6mwwwBDmxTaxnu9HMXmloNLXwnNO0ZxZ31Orah2n8lU1eMPvsaowP2CX+USCgyovXfdOFQ==
+
+throttle-debounce@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-3.0.1.tgz#32f94d84dfa894f786c9a1f290e7a645b6a19abb"
+  integrity sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==
 
 through2@^2.0.0, through2@^2.0.2, through2@^2.0.3, through2@~2.0.3:
   version "2.0.5"
