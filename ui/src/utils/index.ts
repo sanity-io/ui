@@ -1,3 +1,4 @@
+export * from './boundaryElement'
 export * from './elementQuery'
 export * from './errorBoundary'
 export * from './layer'
