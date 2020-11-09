@@ -3,7 +3,7 @@ import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
 import {ColorSchemeKey} from '../../theme'
-import {Layer, Portal, usePortal} from '../../utils'
+import {Layer, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {PopoverArrow} from './arrow'
 
@@ -28,8 +28,9 @@ export const Popover = forwardRef(
     props: PopoverProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
     ref
   ) => {
+    const boundaryElementContext = useBoundaryElement()
     const {
-      boundaryElement: boundaryElementProp,
+      boundaryElement: boundaryElementProp = boundaryElementContext,
       children: child,
       content,
       disabled,

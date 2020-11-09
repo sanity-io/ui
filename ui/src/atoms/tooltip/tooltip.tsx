@@ -2,7 +2,7 @@ import {Placement} from '@popperjs/core'
 import React, {useCallback, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
-import {Layer, Portal} from '../../utils'
+import {Layer, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
 
@@ -24,8 +24,9 @@ const Root = styled(Layer)`
 export function Tooltip(
   props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>
 ) {
+  const boundaryElementContext = useBoundaryElement()
   const {
-    boundaryElement,
+    boundaryElement = boundaryElementContext,
     children,
     content,
     disabled,
@@ -33,6 +34,7 @@ export function Tooltip(
     portal: portalProp,
     ...restProps
   } = props
+
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
   const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
