@@ -5,7 +5,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {useApp} from './hooks'
 
-const RootRoot = styled(Flex)`
+const Root = styled(Flex)`
   height: 100%;
 `
 
@@ -14,7 +14,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
   const router = useRouter()
 
   return (
-    <RootRoot direction="column">
+    <Root direction="column">
       <Card padding={[2, 3, 4]} borderBottom>
         <Flex align="center">
           <Box flex={1}>
@@ -87,6 +87,6 @@ export function AppLayout({children}: {children: React.ReactNode}) {
       </Card>
 
       {children}
-    </RootRoot>
+    </Root>
   )
 }
