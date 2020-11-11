@@ -5,7 +5,7 @@ import {renderCode, renderHooks} from '~/lib/eval'
 
 export function CodeExample(props: {code: string; hookCode?: string; language: string}) {
   const {code, hookCode, language} = props
-  const hook = renderHooks(hookCode || '', {React})
+  const hook = renderHooks(hookCode || '', {React, ...ui})
   const hooksState = hook.fn ? hook.fn() : {}
   const result = renderCode(code, {React, ...hooksState, ...ui})
 
