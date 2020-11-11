@@ -29,6 +29,7 @@ export const componentRoutes = [
   {slug: 'hotkeys', title: 'Hotkeys'},
   {slug: 'menu', title: 'Menu'},
   {slug: 'menu-button', title: 'MenuButton'},
+  {slug: 'toast', title: 'Toast'},
 ]
 
 export const hookRoutes = [
