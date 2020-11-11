@@ -4,6 +4,7 @@ import {
   LayerProvider,
   studioTheme,
   ThemeProvider,
+  ToastProvider,
   usePrefersDark,
 } from '@sanity/ui'
 import React, {useEffect, useState} from 'react'
@@ -21,7 +22,9 @@ export function AppProvider({children}: {children?: React.ReactNode}) {
       <CardProvider scheme={colorScheme}>
         <GlobalStyle scheme={colorScheme} />
         <AppContext.Provider value={{colorScheme, setColorScheme}}>
-          <LayerProvider id="root">{children}</LayerProvider>
+          <LayerProvider id="root">
+            <ToastProvider>{children}</ToastProvider>
+          </LayerProvider>
         </AppContext.Provider>
       </CardProvider>
     </ThemeProvider>
