@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "1.0.0-alpha.26",
+  "version": "1.0.0-alpha.27",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "files": [
