@@ -16,7 +16,7 @@ export function cardBaseStyles() {
       outline: none;
       font: inherit;
       text-align: inherit;
-      width: 100%;
+      width: auto;
       box-sizing: border-box;
       border: 0;
     }
