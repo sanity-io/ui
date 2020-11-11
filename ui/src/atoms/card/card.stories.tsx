@@ -3,6 +3,7 @@ import {action} from '@storybook/addon-actions'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import styled from 'styled-components'
+import {Stack} from '../stack'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -120,5 +121,27 @@ export const interactiveCard = () => {
         </Card>
       </div>
     </Card>
+  )
+}
+
+export const allTones = () => {
+  return (
+    <Stack space={3}>
+      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="default">
+        <Text>Default</Text>
+      </Card>
+      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="transparent">
+        <Text>Transparent</Text>
+      </Card>
+      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="positive">
+        <Text>Positive</Text>
+      </Card>
+      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="caution">
+        <Text>Caution</Text>
+      </Card>
+      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="critical">
+        <Text>Critical</Text>
+      </Card>
+    </Stack>
   )
 }

@@ -81,7 +81,7 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
     },
     hovered: {
       bg: hue[900].hex,
-      fg: hue[200].hex,
+      fg: hue[300].hex,
       border: hue[900].hex,
     },
     pressed: {
@@ -91,7 +91,7 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
     },
     selected: {
       bg: hues.blue[900].hex,
-      fg: hues.blue[300].hex,
+      fg: hues.blue[400].hex,
       border: hues.blue[900].hex,
     },
   }

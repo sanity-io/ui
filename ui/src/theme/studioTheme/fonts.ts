@@ -154,6 +154,7 @@ export const fonts: ThemeFonts = {
       'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     weights: {
       regular: 400,
+      medium: 500,
       semibold: 600,
       bold: 700,
     },

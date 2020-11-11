@@ -6,9 +6,9 @@ export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMod
 
   return {
     enabled: {
-      bg: hue[600].hex,
+      bg: hue[500].hex,
       fg: white.hex,
-      border: hue[600].hex,
+      border: hue[500].hex,
     },
     disabled: {
       bg: hue[200].hex,
@@ -16,19 +16,19 @@ export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMod
       border: hue[200].hex,
     },
     hovered: {
+      bg: hue[600].hex,
+      fg: white.hex,
+      border: hue[600].hex,
+    },
+    pressed: {
       bg: hue[700].hex,
       fg: white.hex,
       border: hue[700].hex,
     },
-    pressed: {
+    selected: {
       bg: hue[800].hex,
       fg: white.hex,
       border: hue[800].hex,
-    },
-    selected: {
-      bg: hue[900].hex,
-      fg: white.hex,
-      border: hue[900].hex,
     },
   }
 }
@@ -71,7 +71,7 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
   return {
     enabled: {
       bg: white.hex,
-      fg: hue[700].hex,
+      fg: hue[600].hex,
       border: white.hex,
     },
     disabled: {
@@ -81,7 +81,7 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
     },
     hovered: {
       bg: hue[50].hex,
-      fg: hue[800].hex,
+      fg: hue[700].hex,
       border: hue[50].hex,
     },
     pressed: {

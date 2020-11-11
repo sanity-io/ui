@@ -112,6 +112,10 @@ export interface ThemeCardColor {
   tones: {
     default: ThemeCardToneColor
     transparent: ThemeCardToneColor
+    positive: ThemeCardToneColor
+    caution: ThemeCardToneColor
+    critical: ThemeCardToneColor
+    brand: ThemeCardToneColor
   }
 }
 
