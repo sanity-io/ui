@@ -97,7 +97,7 @@ export function ToastProvider({children}: {children?: React.ReactNode}) {
       {children}
 
       <Root>
-        <ToastContainer padding={3}>
+        <ToastContainer padding={4}>
           <AnimatePresence initial={false}>
             {state.toasts.map(({dismiss, id, params}) => (
               <motion.div

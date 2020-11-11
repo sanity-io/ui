@@ -24,7 +24,7 @@ export function Toast(
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
 
   return (
-    <Card {...restProps} marginTop={2} padding={1} radius={2} shadow={2} tone={cardTone}>
+    <Card {...restProps} marginTop={3} padding={1} radius={2} shadow={2} tone={cardTone}>
       <Flex>
         <Box flex={1} padding={2}>
           <Stack space={3}>
