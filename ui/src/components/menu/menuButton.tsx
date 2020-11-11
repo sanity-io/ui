@@ -1,9 +1,9 @@
-import {Placement} from '@popperjs/core'
 import React, {cloneElement, useCallback, useState} from 'react'
 import ReactIs from 'react-is'
 import {Popover} from '../../atoms'
 import {useClickOutside} from '../../hooks'
 import {ColorSchemeKey} from '../../theme'
+import {Placement} from '../../types'
 
 export interface MenuButtonProps {
   boundaryElement?: HTMLElement

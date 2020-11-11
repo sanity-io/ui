@@ -1,7 +1,7 @@
-import {Placement} from '@popperjs/core'
 import React, {useCallback, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
+import {Placement} from '../../types'
 import {Layer, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
