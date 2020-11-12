@@ -10,7 +10,8 @@ export function checkboxBaseStyles() {
 }
 
 export function inputElementStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
-  const color = theme.color[scheme].input
+  const _scheme = theme.color[scheme] || theme.color.light
+  const color = _scheme.input
   const tone = color.tones.default
   const {checkbox} = theme.input
 

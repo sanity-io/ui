@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
-import {getResponsiveProp, radius} from '../../styles'
+import {responsiveRadiusStyle} from '../../styles'
 import {Box} from '../box'
 import {Code} from '../code'
 
@@ -19,15 +19,17 @@ function kbd() {
   `
 }
 
-const Root = styled.kbd<{radius: number[]}>(radius, kbd)
+const Root = styled.kbd<{radius?: number | number[]}>(responsiveRadiusStyle, kbd)
 
 export const KBD = forwardRef(
-  (props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>, ref) => {
-    const {children, padding = 1, radius: radiusProp = 2, size = 1, ...restProps} = props
-    const radius = getResponsiveProp(radiusProp)
+  (
+    props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
+    ref: React.Ref<HTMLElement>
+  ) => {
+    const {children, padding = 1, radius = 2, size = 1, ...restProps} = props
 
     return (
-      <Root {...restProps} radius={radius} ref={ref as any}>
+      <Root {...restProps} radius={radius} ref={ref}>
         <Box as="span" padding={padding}>
           <Code as="span" muted size={size}>
             {children}

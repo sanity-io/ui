@@ -1,3 +1,3 @@
-export interface RadiusProps {
+export interface ResponsiveRadiusProps {
   radius?: number | number[]
 }

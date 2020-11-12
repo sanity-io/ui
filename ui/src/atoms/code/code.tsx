@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import styled from 'styled-components'
-import {codeFont} from '../../styles'
+import {responsiveCodeFontStyle} from '../../styles'
 import {ColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {codeBaseStyles} from './styles'
@@ -16,7 +16,7 @@ interface CodeProps {
 
 const Root = styled.pre<{muted: boolean; scheme: ColorSchemeKey; size: number[]}>(
   codeBaseStyles,
-  codeFont
+  responsiveCodeFontStyle
 )
 
 export const Code = forwardRef(

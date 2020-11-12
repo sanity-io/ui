@@ -35,7 +35,8 @@ export function switchInputStyles() {
 export function switchRepresentationStyles(props: {scheme: ColorSchemeKey; theme: Theme}) {
   const {scheme, theme} = props
   const {switch: switchInput} = theme.input
-  const tone = theme.color[scheme].switch.tones.default
+  const _scheme = theme.color[scheme] || theme.color.light
+  const tone = _scheme.switch.tones.default
 
   return css`
     --switch-thumb-color: ${tone.enabled.thumb};

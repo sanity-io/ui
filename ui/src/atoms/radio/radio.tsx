@@ -10,13 +10,16 @@ const Root = styled.div(radioBaseStyles)
 const Input = styled.input<{scheme: ColorSchemeKey}>(inputElementStyles)
 
 export const Radio = forwardRef(
-  (props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps, ref) => {
+  (
+    props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps,
+    ref: React.Ref<HTMLInputElement>
+  ) => {
     const {className, style, ...restProps} = props
     const card = useCard()
 
     return (
       <Root className={className} data-ui="Radio" style={style}>
-        <Input type="radio" {...restProps} ref={ref as any} scheme={card.scheme} />
+        <Input type="radio" {...restProps} ref={ref} scheme={card.scheme} />
         <span />
       </Root>
     )

@@ -1,8 +1,8 @@
 import {getResponsiveProp, getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
-import {PaddingProps} from './types'
+import {ResponsivePaddingStyleProps} from './types'
 
-export function padding(props: PaddingProps & ThemeProps) {
+export function responsivePaddingStyle(props: ResponsivePaddingStyleProps & ThemeProps) {
   const {theme} = props
 
   return [

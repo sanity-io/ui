@@ -1,4 +1,4 @@
-export interface PaddingProps {
+export interface ResponsivePaddingStyleProps {
   padding?: number | number[]
   paddingX?: number | number[]
   paddingY?: number | number[]

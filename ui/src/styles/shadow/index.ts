@@ -1,2 +1,2 @@
-export * from './shadow'
+export * from './shadowStyle'
 export * from './types'

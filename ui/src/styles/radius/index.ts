@@ -1,2 +1,2 @@
-export * from './radius'
+export * from './radiusStyle'
 export * from './types'

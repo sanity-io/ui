@@ -1,25 +1,17 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {flexItem, FlexItemProps} from '../../styles'
-import {flexBaseStyles, flexColumnStyles} from './styles'
-import {FlexAlign, FlexDirection, FlexJustify} from './types'
+import {flexStyle, FlexStyleProps, flexItemStyle, FlexItemStyleProps} from '../../styles'
 
-interface FlexProps {
+interface FlexProps extends FlexStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  align?: FlexAlign
-  direction?: FlexDirection
-  flex?: number | number[]
-  justify?: FlexJustify
 }
 
-const Root = styled.div<
-  FlexItemProps & {align?: FlexAlign; justify?: FlexJustify; uiDirection: FlexDirection}
->(flexItem, flexBaseStyles, flexColumnStyles)
+const Root = styled.div<FlexStyleProps & FlexItemStyleProps>(flexStyle, flexItemStyle)
 
 export const Flex = forwardRef((props: React.HTMLProps<HTMLDivElement> & FlexProps, ref) => {
-  const {direction = 'row', ...restProps} = props
+  const {direction, ...restProps} = props
 
-  return <Root data-ui="Flex" {...restProps} uiDirection={direction} ref={ref} />
+  return <Root data-ui="Flex" {...restProps} direction={direction} ref={ref} />
 })
 
 Flex.displayName = 'Flex'

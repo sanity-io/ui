@@ -1,3 +1,3 @@
-export interface ShadowProps {
+export interface ResponsiveShadowStyleProps {
   shadow?: number | number[]
 }

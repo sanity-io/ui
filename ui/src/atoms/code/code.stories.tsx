@@ -8,10 +8,10 @@ import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
 import {withCentered} from '~/storybook/decorators'
 
-Refractor.registerLanguage(javascript as any)
-Refractor.registerLanguage(json as any)
-Refractor.registerLanguage(jsx as any)
-Refractor.registerLanguage(typescript as any)
+Refractor.registerLanguage(javascript)
+Refractor.registerLanguage(json)
+Refractor.registerLanguage(jsx)
+Refractor.registerLanguage(typescript)
 
 export default {
   title: 'Atoms/Code',

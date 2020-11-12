@@ -1,8 +1,8 @@
-import {BorderProps} from './types'
+import {BorderStyleProps} from './types'
 
 const BORDER_VALUE = '1px solid var(--card-hairline-soft-color)'
 
-export function border(props: BorderProps) {
+export function borderStyle(props: BorderStyleProps) {
   return [
     props.border && {'&&': {border: BORDER_VALUE}},
     props.borderTop && {'&&': {borderTop: BORDER_VALUE}},

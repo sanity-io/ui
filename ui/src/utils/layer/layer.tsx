@@ -26,7 +26,7 @@ const LayerChildren = forwardRef(
     const layer = useLayer() || {depth: 0}
 
     return (
-      <Root data-ui="Layer" {...restProps} ref={ref as any} style={{...style, zIndex: layer.depth}}>
+      <Root data-ui="Layer" {...restProps} ref={ref} style={{...style, zIndex: layer.depth}}>
         {children}
       </Root>
     )

@@ -2,18 +2,16 @@ import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {
   getResponsiveProp,
-  margin,
-  MarginProps,
-  padding,
-  PaddingProps,
-  radius,
-  RadiusProps,
-  textInput,
+  responsivePaddingStyle,
+  ResponsivePaddingStyleProps,
+  responsiveRadiusStyle,
+  ResponsiveRadiusProps,
+  textInputStyle,
 } from '../../styles'
 import {ColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 
-interface TextInputProps extends MarginProps, PaddingProps, RadiusProps {
+interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   border?: boolean
   size?: number | number[]
   weight?: string
@@ -24,13 +22,13 @@ const Root = styled.span<{
   disabled: boolean
   scheme: ColorSchemeKey
   radius?: number | number[]
-}>(margin, radius, textInput.base, textInput.color)
+}>(responsiveRadiusStyle, textInputStyle.root, textInputStyle.color)
 
-const Input = styled.textarea<{uiSize: number[]; weight?: string}>`
-  ${padding}
-  ${textInput.inputBase}
-  ${textInput.inputSize as any}
-`
+const Input = styled.textarea<{uiSize: number[]; weight?: string}>(
+  responsivePaddingStyle,
+  textInputStyle.inputBase,
+  textInputStyle.inputSize
+)
 
 export const TextArea = forwardRef(
   (
@@ -40,13 +38,6 @@ export const TextArea = forwardRef(
     const {
       border = true,
       disabled = false,
-      margin,
-      marginX,
-      marginY,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
       padding = [3],
       paddingX,
       paddingY,
@@ -61,16 +52,6 @@ export const TextArea = forwardRef(
 
     const card = useCard()
 
-    const marginProps = {
-      margin,
-      marginX,
-      marginY,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
-    }
-
     const paddingProps = {
       padding,
       paddingX,
@@ -84,13 +65,7 @@ export const TextArea = forwardRef(
     const uiSize = getResponsiveProp(sizeProp)
 
     return (
-      <Root
-        {...marginProps}
-        border={border}
-        disabled={disabled}
-        scheme={card.scheme}
-        radius={radius}
-      >
+      <Root border={border} disabled={disabled} scheme={card.scheme} radius={radius}>
         <Input {...restProps} {...paddingProps} disabled={disabled} ref={ref} uiSize={uiSize} />
       </Root>
     )

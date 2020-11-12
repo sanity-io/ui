@@ -10,7 +10,8 @@ export function radioBaseStyles() {
 }
 
 export function inputElementStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
-  const tone = theme.color[scheme].input.tones.default
+  const _scheme = theme.color[scheme] || theme.color.light
+  const tone = _scheme.input.tones.default
   const {markSize, size} = theme.input.radio
   const dist = (size - markSize) / 2
 

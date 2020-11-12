@@ -1,25 +1,20 @@
-import {css} from 'styled-components'
+import {css, CSSObject} from 'styled-components'
 import {ColorSchemeKey, Theme} from '../../theme'
-import {getResponsiveProp, rem} from '../helpers'
+import {getResponsiveProp, rem, responsive} from '../helpers'
 
-export const textInput = {
-  base: textInputBase,
-  color: textInputColor,
+const root = (): CSSObject => ({
+  display: 'block',
+  position: 'relative',
+})
+
+export const textInputStyle = {
+  root,
+  color: textInputColorStyle,
   inputBase,
   inputSize,
 }
 
-function textInputBase() {
-  return css`
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    padding: ${rem(1)} 0;
-    overflow: hidden;
-  `
-}
-
-function textInputColor({
+function textInputColorStyle({
   border,
   disabled,
   scheme,
@@ -30,7 +25,8 @@ function textInputColor({
   scheme: ColorSchemeKey
   theme: Theme
 }) {
-  const tone = theme.color[scheme].input.tones.default
+  const _scheme = theme.color[scheme] || theme.color.light
+  const tone = _scheme.input.tones.default
 
   if (disabled) {
     return css`
@@ -112,22 +108,25 @@ function inputBase(props: {theme: Theme; weight?: string}) {
     font-family: ${font.family};
     font-weight: ${font.weights[weight || 'regular']};
     margin: 0;
-  `
-}
-
-function inputSize(props: {theme: Theme; uiSize: number | number[]}) {
-  const {theme} = props
-  const uiSize = getResponsiveProp(props.uiSize)
-  const size = theme.fonts.text.sizes[uiSize[0]]
-
-  return css`
-    margin-top: ${rem(0 - size.ascenderHeight - 1)};
-    margin-bottom: ${rem(0 - size.descenderHeight - 1)};
-    font-size: ${rem(size.fontSize)};
-    line-height: ${size.lineHeight / size.fontSize};
 
     &:is(textarea) {
       resize: none;
     }
   `
+}
+
+function inputSize(props: {theme: Theme; uiSize: number | number[]}) {
+  const {theme} = props
+
+  return responsive(
+    theme.media,
+    getResponsiveProp(props.uiSize, [2]).map((sizeIndex) => {
+      const size = theme.fonts.text.sizes[sizeIndex]
+
+      return {
+        fontSize: rem(size.fontSize),
+        lineHeight: size.lineHeight / size.fontSize,
+      }
+    })
+  )
 }

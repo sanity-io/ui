@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {labelFont} from '../../styles'
+import {responsiveLabelFont} from '../../styles'
 import {labelBaseStyles} from './styles'
 
 interface LabelProps {
@@ -9,7 +9,7 @@ interface LabelProps {
   size?: number | number[]
 }
 
-const Root = styled.div<{muted: boolean; size: number[]}>(labelBaseStyles, labelFont)
+const Root = styled.div<{muted: boolean; size: number[]}>(labelBaseStyles, responsiveLabelFont)
 
 export const Label = forwardRef(
   (props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {

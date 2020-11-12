@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
 import {Theme} from '../../theme'
 
-export function textBaseStyles(props: {theme: Theme; muted: boolean}) {
+export function textBaseStyles(props: {theme: Theme; muted?: boolean}) {
   const {muted, theme} = props
   const {weights} = props.theme.fonts.text
 

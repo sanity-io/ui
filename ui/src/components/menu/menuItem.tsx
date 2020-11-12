@@ -1,13 +1,15 @@
 import React, {createElement, forwardRef, useCallback, useEffect, useRef} from 'react'
 import styled, {css} from 'styled-components'
 import {Box, Flex, Icon, IconSymbol, Text, useCard} from '../../atoms'
+import {ResponsivePaddingStyleProps} from '../../styles'
 import {ColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
 
-interface MenuItemProps {
+interface MenuItemProps extends ResponsivePaddingStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   icon?: IconSymbol | React.ComponentType
   iconRight?: IconSymbol | React.ComponentType
+  size?: number | number[]
   space?: number | number[]
   text?: React.ReactNode
 }
@@ -61,7 +63,23 @@ const Root = styled.button<{scheme: ColorSchemeKey}>(
 export const MenuItem = forwardRef(
   (props: MenuItemProps & Omit<React.HTMLProps<HTMLButtonElement>, 'ref'>, ref) => {
     const card = useCard()
-    const {children, icon, iconRight, onClick, space = 3, text, ...restProps} = props
+    const {
+      children,
+      icon,
+      iconRight,
+      onClick,
+      padding = 3,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+      size = 2,
+      space = 3,
+      text,
+      ...restProps
+    } = props
     const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
     const rootRef = useRef<HTMLButtonElement | null>(null)
 
@@ -81,6 +99,16 @@ export const MenuItem = forwardRef(
       [onClick, onItemClick]
     )
 
+    const paddingProps = {
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+    }
+
     return (
       <Root
         data-ui="MenuItem"
@@ -95,10 +123,10 @@ export const MenuItem = forwardRef(
         type="button"
       >
         {(icon || text) && (
-          <Box as="span" paddingX={4} paddingY={3}>
+          <Box as="span" {...paddingProps}>
             <Flex as="span">
               {icon && (
-                <Text>
+                <Text size={size}>
                   {typeof icon === 'string' && <Icon symbol={icon} />}
                   {typeof icon !== 'string' && createElement(icon)}
                 </Text>
@@ -110,12 +138,12 @@ export const MenuItem = forwardRef(
                   marginLeft={icon ? space : undefined}
                   marginRight={iconRight ? space : undefined}
                 >
-                  <Text>{text}</Text>
+                  <Text size={size}>{text}</Text>
                 </Box>
               )}
 
               {iconRight && (
-                <Text>
+                <Text size={size}>
                   {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
                   {typeof iconRight !== 'string' && createElement(iconRight)}
                 </Text>

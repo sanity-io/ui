@@ -1,15 +1,15 @@
 import {studioTheme as theme} from '../../theme'
-import {padding} from './padding'
+import {responsivePaddingStyle} from './paddingStyle'
 
 describe('styles/padding', () => {
   it('should', () => {
-    const styles = padding({padding: 0, theme})
+    const styles = responsivePaddingStyle({padding: 0, theme})
 
     expect(styles).toEqual([[{padding: 0}]])
   })
 
   it('should', () => {
-    const styles = padding({padding: [0, 1, 2], theme})
+    const styles = responsivePaddingStyle({padding: [0, 1, 2], theme})
 
     expect(styles).toEqual([
       [

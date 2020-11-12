@@ -135,7 +135,7 @@ const themeColor: ThemeColor = {
       default: {
         enabled: {
           bg: white.hex,
-          fg: black.hex,
+          fg: hues.gray[600].hex,
           border: hues.gray[200].hex,
           placeholder: hues.gray[400].hex,
         },

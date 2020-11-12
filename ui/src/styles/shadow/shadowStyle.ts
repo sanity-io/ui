@@ -1,0 +1,32 @@
+import {CSSObject} from 'styled-components'
+import {getResponsiveProp} from '..'
+import {BoxShadow, ThemeShadow} from '../../theme'
+import {rem, responsive} from '../helpers'
+import {ThemeProps} from '../types'
+import {ResponsiveShadowStyleProps} from './types'
+
+function toBoxShadow(shadow: BoxShadow, color: string) {
+  return `${shadow.map(rem).join(' ')} ${color}`
+}
+
+function shadowStyle(shadow: ThemeShadow | null): CSSObject | null {
+  if (!shadow) return null
+
+  const outline = `0 0 0 ${rem(1)} var(--card-shadow-outline-color)`
+  const umbra = toBoxShadow(shadow.umbra, 'var(--card-shadow-umbra-color)')
+  const penumbra = toBoxShadow(shadow.penumbra, 'var(--card-shadow-penumbra-color)')
+  const ambient = toBoxShadow(shadow.ambient, 'var(--card-shadow-ambient-color)')
+
+  return {
+    boxShadow: `${outline}, ${umbra}, ${penumbra}, ${ambient}`,
+  }
+}
+
+export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps) {
+  return responsive(
+    props.theme.media,
+    getResponsiveProp(props.shadow).map((shadowIndex) =>
+      shadowStyle(props.theme.shadows[shadowIndex])
+    )
+  )
+}

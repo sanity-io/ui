@@ -1,13 +1,18 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {padding, PaddingProps, radius, RadiusProps} from '../../styles'
+import {
+  responsivePaddingStyle,
+  ResponsivePaddingStyleProps,
+  responsiveRadiusStyle,
+  ResponsiveRadiusProps,
+} from '../../styles'
 import {ColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {Label} from '../label'
 import {badge} from './styles'
 import {BadgeMode, BadgeTone} from './types'
 
-export interface BadgeProps extends PaddingProps, RadiusProps {
+export interface BadgeProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: BadgeMode
   size?: number | number[]
@@ -19,7 +24,7 @@ const Root = styled.div<{
   scheme: ColorSchemeKey
   tone: BadgeTone
   radius: number[]
-}>(padding, radius, badge)
+}>(responsivePaddingStyle, responsiveRadiusStyle, badge)
 
 export const Badge = forwardRef((props: BadgeProps & React.HTMLProps<HTMLDivElement>, ref) => {
   const {

@@ -1,5 +1,5 @@
 import icons from '@sanity/icons'
-import {Button, Card, IconSymbol} from '@sanity/ui'
+import {Button, Card, Container, IconSymbol} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -111,22 +111,23 @@ export const plain = () => {
   const textProp = text('Text', 'Label', 'Props')
 
   return (
-    <Card padding={4}>
-      <Button
-        disabled={disabled}
-        icon={icon}
-        iconRight={iconRight}
-        justify={justify}
-        mode={mode}
-        onClick={action('onClick')}
-        paddingX={paddingX}
-        paddingY={paddingY}
-        selected={selected}
-        space={space}
-        style={{width: '10rem'}}
-        text={textProp}
-        tone={tone}
-      />
-    </Card>
+    <Container width={1} style={{textAlign: 'center'}}>
+      <Card padding={4}>
+        <Button
+          disabled={disabled}
+          icon={icon}
+          iconRight={iconRight}
+          justify={justify}
+          mode={mode}
+          onClick={action('onClick')}
+          paddingX={paddingX}
+          paddingY={paddingY}
+          selected={selected}
+          space={space}
+          text={textProp}
+          tone={tone}
+        />
+      </Card>
+    </Container>
   )
 }

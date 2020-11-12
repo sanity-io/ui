@@ -1,2 +1,2 @@
-export * from './margin'
+export * from './marginStyle'
 export * from './types'

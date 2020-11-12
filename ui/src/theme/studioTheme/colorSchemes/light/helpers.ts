@@ -39,7 +39,7 @@ export function buildButtonGhostMode(hueKey: ColorHueKey): ThemeButtonColorMode 
   return {
     enabled: {
       bg: white.hex,
-      fg: hue[700].hex,
+      fg: hue[600].hex,
       border: hue[200].hex,
     },
     disabled: {

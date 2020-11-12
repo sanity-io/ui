@@ -1,31 +1,83 @@
-import React, {forwardRef} from 'react'
-import styled from 'styled-components'
+import React, {createElement, forwardRef} from 'react'
+import {isValidElementType} from 'react-is'
+import styled, {css} from 'styled-components'
 import {
-  margin,
-  MarginProps,
-  padding,
-  PaddingProps,
-  radius,
-  RadiusProps,
-  textInput,
+  responsiveRadiusStyle,
+  ResponsiveRadiusProps,
+  responsiveInputPaddingStyle,
+  textInputStyle,
 } from '../../styles'
-import {ColorSchemeKey} from '../../theme'
+import {ColorSchemeKey, Theme} from '../../theme'
+import {Box} from '../box'
 import {useCard} from '../card'
+import {Icon, IconSymbol} from '../icon'
+import {Text} from '../text'
 
-interface TextInputProps extends MarginProps, PaddingProps, RadiusProps {
+interface TextInputProps extends ResponsiveRadiusProps {
   border?: boolean
+  icon?: IconSymbol | React.ComponentType
+  iconRight?: IconSymbol | React.ComponentType
+  padding?: number | number[]
   size?: number | number[]
+  space?: number | number[]
   weight?: string
 }
 
 const Root = styled.span<
-  {border: boolean; disabled: boolean; scheme: ColorSchemeKey} & RadiusProps
->(margin, radius, textInput.base, textInput.color)
+  {
+    border: boolean
+    disabled: boolean
+    scheme: ColorSchemeKey
+  } & ResponsiveRadiusProps
+>(responsiveRadiusStyle, textInputStyle.root, textInputStyle.color)
 
-const Input = styled.input<{uiSize: number | number[]; weight?: string}>`
-  ${padding}
-  ${textInput.inputBase}
-  ${textInput.inputSize}
+const Input = styled.input<{
+  padding?: number | number[]
+  iconLeft?: boolean
+  iconRight?: boolean
+  space?: number | number[]
+  uiSize: number | number[]
+  weight?: string
+}>`
+  ${responsiveInputPaddingStyle}
+  ${textInputStyle.inputBase}
+  ${textInputStyle.inputSize}
+`
+
+const IconContainer = styled.div(({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
+  const _scheme = theme.color[scheme] || theme.color.light
+  const tone = _scheme.input.tones.default
+
+  return css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    color: ${tone.enabled.fg};
+
+    @media (hover: hover) {
+      input:not(:disabled):hover + & {
+        color: ${tone.hovered.fg};
+      }
+    }
+
+    input:disabled + & {
+      color: ${tone.disabled.fg};
+    }
+  `
+})
+
+const IconLeftBox = styled(Box)`
+  position: absolute;
+  top: 0;
+  left: 0;
+`
+
+const IconRightBox = styled(Box)`
+  position: absolute;
+  top: 0;
+  right: 0;
 `
 
 export const TextInput = forwardRef(
@@ -36,63 +88,53 @@ export const TextInput = forwardRef(
     const {
       border = true,
       disabled = false,
-      margin,
-      marginX,
-      marginY,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
+      icon,
+      iconRight,
       padding = 3,
-      paddingX,
-      paddingY,
-      paddingTop,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
       radius = 1,
       size = 2,
+      space = 3,
       ...restProps
     } = props
-
-    const card = useCard()
-
-    const marginProps = {
-      margin,
-      marginX,
-      marginY,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
-    }
-
-    const paddingProps = {
-      padding,
-      paddingX,
-      paddingY,
-      paddingTop,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-    }
+    const {scheme} = useCard()
 
     return (
-      <Root
-        {...marginProps}
-        border={border}
-        disabled={disabled}
-        scheme={card.scheme}
-        radius={radius}
-      >
+      <Root border={border} disabled={disabled} scheme={scheme} radius={radius}>
         <Input
           {...restProps}
-          {...paddingProps}
           disabled={disabled}
+          iconLeft={Boolean(icon)}
+          iconRight={Boolean(iconRight)}
+          padding={padding}
           ref={ref}
+          space={space}
           type="text"
           uiSize={size}
         />
+
+        {(icon || iconRight) && (
+          <IconContainer scheme={scheme}>
+            {icon && (
+              <IconLeftBox padding={padding}>
+                <Text size={size}>
+                  {typeof icon === 'string' && <Icon symbol={icon} />}
+                  {typeof icon !== 'string' && isValidElementType(icon) && createElement(icon)}
+                </Text>
+              </IconLeftBox>
+            )}
+
+            {iconRight && (
+              <IconRightBox padding={padding}>
+                <Text size={size}>
+                  {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
+                  {typeof iconRight !== 'string' &&
+                    isValidElementType(iconRight) &&
+                    createElement(iconRight)}
+                </Text>
+              </IconRightBox>
+            )}
+          </IconContainer>
+        )}
       </Root>
     )
   }

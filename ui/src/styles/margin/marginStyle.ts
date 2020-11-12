@@ -1,8 +1,8 @@
 import {getResponsiveProp, getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
-import {MarginProps} from './types'
+import {ResponsiveMarginStyleProps} from './types'
 
-export function margin(props: MarginProps & ThemeProps) {
+export function responsiveMarginStyle(props: ResponsiveMarginStyleProps & ThemeProps) {
   const {theme} = props
 
   return [

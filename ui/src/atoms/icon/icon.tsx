@@ -8,14 +8,17 @@ interface IconProps {
 }
 
 export const Icon = forwardRef(
-  (props: IconProps & Omit<React.SVGProps<SVGElement>, 'ref'>, ref) => {
+  (
+    props: IconProps & Omit<React.SVGProps<SVGSVGElement>, 'ref'>,
+    ref: React.Ref<SVGSVGElement>
+  ) => {
     const {symbol, ...restProps} = props
 
     if (!icons[symbol]) {
       return null
     }
 
-    return createElement(icons[symbol], {...restProps, ref: ref as any})
+    return createElement(icons[symbol], {...restProps, ref})
   }
 )
 

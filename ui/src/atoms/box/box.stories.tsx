@@ -1,4 +1,4 @@
-import {Box, Text} from '@sanity/ui'
+import {Box, Card, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -27,10 +27,12 @@ export const plain = () => {
   )
 
   return (
-    <Box onClick={action('onClick')} padding={padding} style={{background: '#fff'}}>
-      <Text>
-        Box with <code>padding={padding}</code>
-      </Text>
-    </Box>
+    <Card border>
+      <Box onClick={action('onClick')} padding={padding}>
+        <Text>
+          Box with <code>padding={padding}</code>
+        </Text>
+      </Box>
+    </Card>
   )
 }

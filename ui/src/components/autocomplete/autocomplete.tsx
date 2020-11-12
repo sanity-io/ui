@@ -1,8 +1,8 @@
-import {SearchIcon} from '@sanity/icons'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Box, Button, Card, Text, TextInput} from '../../atoms'
 import {focusFirstDescendant} from '../../helpers'
+import {getResponsiveProp} from '../../styles'
 import {Root, ListBoxContainer, ListBoxCard} from './styles'
 
 export interface AutocompleteOption {
@@ -15,6 +15,7 @@ export interface AutocompleteProps {
   onChange?: (value: string) => void
   onSelect?: (value: string) => void
   options: AutocompleteOption[]
+  padding?: number | number[]
   radius?: number | number[]
   renderOption?: (option: AutocompleteOption) => React.ReactNode
   size?: number | number[]
@@ -40,13 +41,6 @@ type OverriddenInputAttrKey =
 
 type Props = AutocompleteProps & Omit<React.HTMLProps<HTMLInputElement>, OverriddenInputAttrKey>
 
-const SearchIconBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`
-
 const ClearButtonBox = styled(Box)`
   position: absolute;
   top: 0;
@@ -71,12 +65,15 @@ export function Autocomplete(props: Props) {
     onChange,
     onSelect,
     options: optionsProp,
+    padding: paddingProp = 3,
     radius = 2,
-    renderOption = defaultRenderOption,
+    renderOption: renderOptionProp,
     size = 2,
     value: valueProp = '',
     ...restProps
   } = props
+  const renderOption =
+    typeof renderOptionProp === 'function' ? renderOptionProp : defaultRenderOption
   const [value, setValue] = useState(valueProp)
   const valueRef = useRef(value)
   const [focused, setFocused] = useState(false)
@@ -91,6 +88,7 @@ export function Autocomplete(props: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const activeItemId = selectedIndex ? `${id}-option-${selectedIndex}` : undefined
   // const activeValue = (selectedIndex && options[selectedIndex]?.value) || null
+  const padding = getResponsiveProp(paddingProp)
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -196,12 +194,12 @@ export function Autocomplete(props: Props) {
         autoComplete="off"
         autoCorrect="off"
         border={border}
+        icon="search"
         id={inputId}
         onBlur={handleInputBlur}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
-        paddingX={5}
-        paddingY={3}
+        padding={padding}
         radius={radius}
         ref={inputRef}
         role="combobox"
@@ -210,20 +208,20 @@ export function Autocomplete(props: Props) {
         value={value}
       />
 
-      <SearchIconBox margin={3}>
+      {/* <SearchIconBox margin={padding}>
         <Text size={size}>
           <SearchIcon aria-hidden="true" focusable={false} />
         </Text>
-      </SearchIconBox>
+      </SearchIconBox> */}
 
       {value.length > 0 && (
-        <ClearButtonBox margin={2}>
+        <ClearButtonBox margin={padding.map((v) => v - 1)}>
           <Button
             aria-label="Clear"
             icon="close"
             mode="bleed"
             onClick={handleClearButtonClick}
-            padding={1}
+            padding={padding.map((v) => v - 2)}
             size={size}
           />
         </ClearButtonBox>

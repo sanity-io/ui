@@ -1,13 +1,34 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {flexItem, FlexItemProps, margin, MarginProps, padding, PaddingProps} from '../../styles'
-import {box} from './styles'
+import {
+  boxStyle,
+  BoxStyleProps,
+  flexItemStyle,
+  FlexItemStyleProps,
+  gridItemStyle,
+  GridItemProps,
+  responsivePaddingStyle,
+  ResponsivePaddingStyleProps,
+  responsiveMarginStyle,
+  ResponsiveMarginStyleProps,
+} from '../../styles'
 
-export interface BoxProps extends MarginProps, PaddingProps, FlexItemProps {
+export interface BoxProps
+  extends BoxStyleProps,
+    GridItemProps,
+    ResponsiveMarginStyleProps,
+    ResponsivePaddingStyleProps,
+    FlexItemStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div<MarginProps & PaddingProps & FlexItemProps>(flexItem, margin, padding, box)
+const Root = styled.div<
+  BoxStyleProps &
+    GridItemProps &
+    ResponsiveMarginStyleProps &
+    ResponsivePaddingStyleProps &
+    FlexItemStyleProps
+>(boxStyle, gridItemStyle, flexItemStyle, responsiveMarginStyle, responsivePaddingStyle)
 
 export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps, ref) => {
   const {as: asProp = 'div', margin = 0, padding = 0, ...restProps} = props

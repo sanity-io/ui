@@ -18,6 +18,8 @@ export function buttonBaseStyles() {
     padding: 0;
     margin: 0;
     white-space: nowrap;
+    text-align: left;
+    /* width: stretch; */
 
     & > span {
       display: block;
@@ -40,7 +42,7 @@ export function buttonColorStyles(props: {
   tone: ButtonTone
 }) {
   const {scheme, theme, uiMode} = props
-  const _scheme = theme.color[scheme]
+  const _scheme = theme.color[scheme] || theme.color.light
   const _tone = _scheme.button.tones[props.tone] || _scheme.button.tones.default
   const mode = _tone.modes[uiMode] || _tone.modes.default
 

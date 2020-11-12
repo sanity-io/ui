@@ -1,2 +1,2 @@
-export * from './padding'
+export * from './paddingStyle'
 export * from './types'

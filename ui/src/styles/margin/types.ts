@@ -1,4 +1,4 @@
-export interface MarginProps {
+export interface ResponsiveMarginStyleProps {
   margin?: number | number[]
   marginX?: number | number[]
   marginY?: number | number[]

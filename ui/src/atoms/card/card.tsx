@@ -1,18 +1,23 @@
 import React, {forwardRef} from 'react'
+import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {
-  border,
-  BorderProps,
-  flexItem,
-  FlexItemProps,
-  margin,
-  MarginProps,
-  padding,
-  PaddingProps,
-  radius,
-  RadiusProps,
-  shadow,
-  ShadowProps,
+  borderStyle,
+  BorderStyleProps,
+  boxStyle,
+  BoxStyleProps,
+  flexItemStyle,
+  FlexItemStyleProps,
+  gridItemStyle,
+  GridItemProps,
+  responsiveMarginStyle,
+  ResponsiveMarginStyleProps,
+  responsivePaddingStyle,
+  ResponsivePaddingStyleProps,
+  responsiveRadiusStyle,
+  ResponsiveRadiusProps,
+  responsiveShadowStyle,
+  ResponsiveShadowStyleProps,
 } from '../../styles'
 import {ColorSchemeKey} from '../../theme'
 import {CardProvider} from './cardProvider'
@@ -26,27 +31,42 @@ export interface CardBaseProps {
   tone?: CardTone
 }
 
-export type CardProps = BorderProps &
-  FlexItemProps &
-  MarginProps &
-  PaddingProps &
-  RadiusProps &
-  ShadowProps &
+export type CardProps = BoxStyleProps &
+  BorderStyleProps &
+  GridItemProps &
+  FlexItemStyleProps &
+  ResponsiveMarginStyleProps &
+  ResponsivePaddingStyleProps &
+  ResponsiveRadiusProps &
+  ResponsiveShadowStyleProps &
   CardBaseProps
 
 const Root = styled.div<
-  BorderProps &
-    FlexItemProps &
-    MarginProps &
-    PaddingProps &
+  BoxStyleProps &
+    BorderStyleProps &
+    GridItemProps &
+    FlexItemStyleProps &
+    ResponsiveMarginStyleProps &
+    ResponsivePaddingStyleProps &
     CardColorProps &
-    RadiusProps &
-    ShadowProps
->(border, flexItem, margin, padding, radius, shadow, card)
+    ResponsiveRadiusProps &
+    ResponsiveShadowStyleProps
+>(
+  boxStyle,
+  borderStyle,
+  gridItemStyle,
+  flexItemStyle,
+  responsiveMarginStyle,
+  responsivePaddingStyle,
+  responsiveRadiusStyle,
+  responsiveShadowStyle,
+  card
+)
 
 export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardProps, ref) => {
   const parentCard = useCard()
   const {
+    as: asProp,
     margin = 0,
     padding = 0,
     radius = 0,
@@ -54,12 +74,14 @@ export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardPro
     tone = 'default',
     ...restProps
   } = props
+  const as = isValidElementType(asProp) ? asProp : 'div'
 
   return (
     <CardProvider scheme={scheme} tone={tone}>
       <Root
         data-ui="Card"
         {...restProps}
+        as={as}
         margin={margin}
         padding={padding}
         radius={radius}

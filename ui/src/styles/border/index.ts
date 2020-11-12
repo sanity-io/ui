@@ -1,2 +1,2 @@
-export * from './border'
+export * from './borderStyle'
 export * from './types'

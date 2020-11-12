@@ -1,16 +1,21 @@
 import React, {createElement, forwardRef} from 'react'
 import styled from 'styled-components'
-import {radius} from '../../styles'
-import {MarginProps, PaddingProps, RadiusProps} from '../../styles'
+import {
+  FlexJustify,
+  ResponsivePaddingStyleProps,
+  responsiveRadiusStyle,
+  ResponsiveRadiusProps,
+} from '../../styles'
+import {ColorSchemeKey, Theme} from '../../theme'
 import {Box} from '../box'
 import {useCard} from '../card'
-import {Flex, FlexJustify} from '../flex'
+import {Flex} from '../flex'
 import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 import {ButtonMode, ButtonTone} from './types'
 
-export interface ButtonProps extends MarginProps, PaddingProps, RadiusProps {
+export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: ButtonMode
   icon?: IconSymbol | React.ComponentType
@@ -24,7 +29,12 @@ export interface ButtonProps extends MarginProps, PaddingProps, RadiusProps {
   type?: 'button' | 'reset' | 'submit'
 }
 
-const Root = styled.button(radius as any, buttonBaseStyles, buttonColorStyles)
+const Root = styled.button<{
+  uiMode: ButtonMode
+  scheme: ColorSchemeKey
+  theme: Theme
+  tone: ButtonTone
+}>(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
 
 export const Button = forwardRef(
   (props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'size'>, ref) => {
@@ -35,13 +45,6 @@ export const Button = forwardRef(
       iconRight,
       justify = 'center',
       mode = 'default',
-      margin,
-      marginX,
-      marginY,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
       padding = 3,
       paddingX,
       paddingY,
@@ -61,13 +64,6 @@ export const Button = forwardRef(
     const card = useCard()
 
     const boxProps = {
-      margin,
-      marginX,
-      marginY,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
       padding,
       paddingX,
       paddingY,
@@ -102,6 +98,7 @@ export const Button = forwardRef(
 
               {text && (
                 <Box
+                  flex={iconRight ? 1 : undefined}
                   marginLeft={icon ? space : undefined}
                   marginRight={iconRight ? space : undefined}
                 >

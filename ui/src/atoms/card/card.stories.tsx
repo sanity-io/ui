@@ -142,6 +142,9 @@ export const allTones = () => {
       <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="critical">
         <Text>Critical</Text>
       </Card>
+      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="brand">
+        <Text>Brand</Text>
+      </Card>
     </Stack>
   )
 }
