@@ -2,7 +2,7 @@ export interface GridStyleProps {
   autoRows?: 'auto' | 'min' | 'max' | 'fr'
   autoCols?: 'auto' | 'min' | 'max' | 'fr'
   autoFlow?: 'row' | 'column' | 'row dense' | 'column dense'
-  cols?: number | number[]
+  columns?: number | number[]
   gap?: number | number[]
   rows?: number | number[]
 }

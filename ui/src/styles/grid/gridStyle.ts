@@ -24,16 +24,16 @@ export function gridStyle({autoCols, autoFlow, autoRows}: GridStyleProps & {them
       gridAutoColumns: autoCols && GRID_AUTO_COLUMS[autoCols],
       gridAutoRows: autoRows && GRID_AUTO_ROWS[autoRows],
     },
-    responsiveGridColsStyle,
+    responsiveGridColumnsStyle,
     responsiveGridRowsStyle,
     responsiveGridGapStyle,
   ]
 }
 
-function responsiveGridColsStyle({cols, theme}: GridStyleProps & {theme: Theme}) {
+function responsiveGridColumnsStyle({columns, theme}: GridStyleProps & {theme: Theme}) {
   return responsive(
     theme.media,
-    getResponsiveProp(cols).map((val) => ({
+    getResponsiveProp(columns).map((val) => ({
       gridTemplateColumns: val && `repeat(${val}, minmax(0, 1fr));`,
     }))
   )
