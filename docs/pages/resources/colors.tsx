@@ -1,16 +1,9 @@
 import {COLOR_HUES, COLOR_TINTS, hues} from '@sanity/color'
-import {Box, Button, Code, Flex, Heading, Stack, Text, useToast} from '@sanity/ui'
+import {Box, Button, Code, Flex, Grid, Heading, Stack, Text, useToast} from '@sanity/ui'
 import {readableColor} from 'polished'
 import React from 'react'
-import styled from 'styled-components'
 import {AppLayout} from '$components'
 import {ResourcesPageLayout} from '$components/_resourcesPage/layout'
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2em 1.25em;
-`
 
 function ColorsPage() {
   const toast = useToast()
@@ -28,7 +21,7 @@ function ColorsPage() {
               Hues
             </Heading>
 
-            <Grid>
+            <Grid columns={[1, 1, 1, 3]} gap={5}>
               {COLOR_HUES.map((hueKey) => (
                 <Stack key={hueKey} space={3}>
                   <Heading as="h2" size={[0, 0, 1, 2]}>
@@ -53,7 +46,7 @@ function ColorsPage() {
                               <Code size={1}>{tint.hex}</Code>
                             </Flex>
                           </Box>
-                          <Box paddingLeft={1}>
+                          <Box marginLeft={2}>
                             <Button
                               icon="clipboard"
                               mode="bleed"
