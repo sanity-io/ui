@@ -13,6 +13,7 @@ const Input = styled.select<{
   padding?: number | number[]
   radius?: number | number[]
   scheme: ColorSchemeKey
+  space?: number | number[]
   uiSize?: number | number[]
 }>(select.input)
 
@@ -22,6 +23,7 @@ interface SelectProps {
   padding?: number | number[]
   radius?: number | number[]
   size?: number | number[]
+  space?: number | number[]
 }
 
 export const Select = forwardRef(
@@ -29,7 +31,7 @@ export const Select = forwardRef(
     props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as' | 'size'>,
     ref: React.Ref<HTMLSelectElement>
   ) => {
-    const {children, padding = 3, radius: radiusProp = 1, size, ...restProps} = props
+    const {children, padding = 3, radius: radiusProp = 1, size = 2, space = 3, ...restProps} = props
     const {scheme} = useCard()
 
     return (
@@ -37,10 +39,11 @@ export const Select = forwardRef(
         <Input
           data-ui="Select"
           {...restProps}
-          scheme={scheme}
           padding={padding}
           radius={radiusProp}
           ref={ref}
+          scheme={scheme}
+          space={space}
           uiSize={size}
         >
           {children}
