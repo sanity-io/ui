@@ -2,7 +2,7 @@ import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {
   getResponsiveProp,
-  responsivePaddingStyle,
+  responsiveInputPaddingStyle,
   ResponsivePaddingStyleProps,
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
@@ -25,7 +25,7 @@ const Root = styled.span<{
 }>(responsiveRadiusStyle, textInputStyle.root, textInputStyle.color)
 
 const Input = styled.textarea<{uiSize: number[]; weight?: string}>(
-  responsivePaddingStyle,
+  responsiveInputPaddingStyle,
   textInputStyle.inputBase,
   textInputStyle.inputSize
 )
