@@ -1,10 +1,11 @@
 import * as ui from '@sanity/ui'
-import {Box, Card, Code, ErrorBoundary, Flex} from '@sanity/ui'
+import {Box, Card, Flex} from '@sanity/ui'
 import isHotkey from 'is-hotkey'
 import {debounce} from 'lodash'
 import {useRouter} from 'next/router'
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
+import {Canvas} from './canvas'
 import {CodeEditor} from './codeEditor'
 import {DEFAULT_CODE} from './constants'
 import {encodeCode, decodeCode, getCursor, getCursorOffset} from './helpers'
@@ -88,19 +89,9 @@ export default function ArcadeApp() {
   return (
     <Root onKeyDown={handleKeyDown}>
       <Flex style={{height: '100%'}}>
-        {result && result.type === 'success' && (
-          <Card flex={1} style={{overflow: 'auto'}} tone="transparent">
-            <ErrorBoundary onCatch={handleCatch}>{result.node}</ErrorBoundary>
-          </Card>
-        )}
-
-        {result && result.type === 'error' && (
-          <Card flex={1} style={{overflow: 'auto'}} tone="critical">
-            <Box padding={4}>
-              <Code>{result.error.message}</Code>
-            </Box>
-          </Card>
-        )}
+        <Box flex={1}>
+          <Canvas onCatch={handleCatch} result={result} />
+        </Box>
 
         <Card borderLeft flex={1}>
           <CodeEditor
