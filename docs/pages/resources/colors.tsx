@@ -1,5 +1,5 @@
 import {COLOR_HUES, COLOR_TINTS, hues} from '@sanity/color'
-import {Box, Button, Code, Flex, Heading, Stack, Text} from '@sanity/ui'
+import {Box, Button, Code, Flex, Heading, Stack, Text, useToast} from '@sanity/ui'
 import {readableColor} from 'polished'
 import React from 'react'
 import styled from 'styled-components'
@@ -13,6 +13,8 @@ const Grid = styled.div`
 `
 
 function ColorsPage() {
+  const toast = useToast()
+
   return (
     <AppLayout>
       <ResourcesPageLayout>
@@ -55,7 +57,17 @@ function ColorsPage() {
                             <Button
                               icon="clipboard"
                               mode="bleed"
-                              onClick={() => navigator.clipboard.writeText(tint.hex)}
+                              onClick={() => {
+                                navigator.clipboard.writeText(tint.hex)
+                                toast.push({
+                                  title: (
+                                    <>
+                                      Copied <em>{tint.title}</em> to clipboard
+                                    </>
+                                  ),
+                                  status: 'info',
+                                })
+                              }}
                               padding={2}
                               size={1}
                               title="Copy hex value"
