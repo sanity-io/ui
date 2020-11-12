@@ -20,7 +20,7 @@ export function responsiveFont(fontKey: FontKey, props: ResponsiveFontProps & Th
       display: 'block',
       padding: '1px 0',
       margin: 0,
-    },
+    } as CSSObject,
     ...responsive(
       theme.media,
       getResponsiveProp(size).map((sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))

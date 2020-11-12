@@ -158,6 +158,13 @@ export interface ThemeSyntaxColor {
   variable: string
 }
 
+export interface ThemeInputStateColor {
+  bg: string
+  fg: string
+  border: string
+  placeholder: string
+}
+
 export interface ThemeColor {
   avatar: {
     gray: string
@@ -227,24 +234,9 @@ export interface ThemeColor {
   input: {
     tones: {
       default: {
-        enabled: {
-          bg: string
-          fg: string
-          border: string
-          placeholder: string
-        }
-        disabled: {
-          bg: string
-          fg: string
-          border: string
-          placeholder: string
-        }
-        hovered: {
-          bg: string
-          fg: string
-          border: string
-          placeholder: string
-        }
+        enabled: ThemeInputStateColor
+        disabled: ThemeInputStateColor
+        hovered: ThemeInputStateColor
       }
     }
   }

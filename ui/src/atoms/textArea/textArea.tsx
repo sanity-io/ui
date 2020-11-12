@@ -22,12 +22,11 @@ const Root = styled.span<{
   disabled: boolean
   scheme: ColorSchemeKey
   radius?: number | number[]
-}>(responsiveRadiusStyle, textInputStyle.root, textInputStyle.color)
+}>(responsiveRadiusStyle, textInputStyle.root)
 
 const Input = styled.textarea<{uiSize: number[]; weight?: string}>(
   responsiveInputPaddingStyle,
-  textInputStyle.inputBase,
-  textInputStyle.inputSize
+  textInputStyle.input
 )
 
 export const TextArea = forwardRef(

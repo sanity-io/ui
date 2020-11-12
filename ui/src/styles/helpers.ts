@@ -1,3 +1,4 @@
+import {CSSObject} from 'styled-components'
 import {Theme} from '../theme'
 
 // @todo: invent better name
@@ -14,7 +15,7 @@ export function rem(pixelValue: number): string | 0 {
   return `${pixelValue / 16}rem`
 }
 
-export function responsive(media: number[], statements: any[]) {
+export function responsive(media: number[], statements: CSSObject[]): CSSObject[] {
   return statements.map((statement, mediaIndex) => {
     if (mediaIndex === 0) return statement
 

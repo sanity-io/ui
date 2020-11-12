@@ -1,5 +1,7 @@
 export type FlexAlign = 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
+
 export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
+
 export type FlexJustify =
   | 'flex-start'
   | 'flex-end'
@@ -7,6 +9,7 @@ export type FlexJustify =
   | 'space-between'
   | 'space-around'
   | 'space-evenly'
+
 export type FlexWrap = 'wrap' | 'wrap-reverse' | 'nowrap'
 
 export interface FlexStyleProps {

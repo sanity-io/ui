@@ -29,7 +29,7 @@ const Root = styled.span<
     disabled: boolean
     scheme: ColorSchemeKey
   } & ResponsiveRadiusProps
->(responsiveRadiusStyle, textInputStyle.root, textInputStyle.color)
+>(responsiveRadiusStyle, textInputStyle.root)
 
 const Input = styled.input<{
   padding?: number | number[]
@@ -38,11 +38,7 @@ const Input = styled.input<{
   space?: number | number[]
   uiSize: number | number[]
   weight?: string
-}>`
-  ${responsiveInputPaddingStyle}
-  ${textInputStyle.inputBase}
-  ${textInputStyle.inputSize}
-`
+}>(responsiveInputPaddingStyle, textInputStyle.input)
 
 const IconContainer = styled.div(({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
   const _scheme = theme.color[scheme] || theme.color.light

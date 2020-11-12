@@ -9,17 +9,15 @@ function toBoxShadow(shadow: BoxShadow, color: string) {
   return `${shadow.map(rem).join(' ')} ${color}`
 }
 
-function shadowStyle(shadow: ThemeShadow | null): CSSObject | null {
-  if (!shadow) return null
+function shadowStyle(shadow: ThemeShadow | null): CSSObject {
+  if (!shadow) return {}
 
   const outline = `0 0 0 ${rem(1)} var(--card-shadow-outline-color)`
   const umbra = toBoxShadow(shadow.umbra, 'var(--card-shadow-umbra-color)')
   const penumbra = toBoxShadow(shadow.penumbra, 'var(--card-shadow-penumbra-color)')
   const ambient = toBoxShadow(shadow.ambient, 'var(--card-shadow-ambient-color)')
 
-  return {
-    boxShadow: `${outline}, ${umbra}, ${penumbra}, ${ambient}`,
-  }
+  return {boxShadow: `${outline}, ${umbra}, ${penumbra}, ${ambient}`}
 }
 
 export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps) {
