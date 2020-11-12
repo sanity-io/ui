@@ -40,7 +40,7 @@ export default function ArcadeApp() {
   const router = useRouter()
   const [code, setCode] = useState('')
   const [result, setResult] = useState<EvalResult | null>(null)
-  const codeRef = useRef(code)
+  const codeRef = useRef<string | null>(null)
   const [cursor, setCursor] = useState<Cursor>({line: 0, column: 0})
 
   const saveCode = useMemo(
@@ -53,7 +53,8 @@ export default function ArcadeApp() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const cachedCode = router.query.code ? decodeCode(router.query.code as string) : DEFAULT_CODE
+      const cachedCode =
+        typeof router.query.code === 'string' ? decodeCode(router.query.code) : DEFAULT_CODE
       if (cachedCode) setCode(cachedCode)
     }
   }, [router])
@@ -71,7 +72,7 @@ export default function ArcadeApp() {
       if (isSaveHotkey(event.nativeEvent)) {
         event.preventDefault()
 
-        const lines = codeRef.current.split('\n')
+        const lines = (codeRef.current || '').split('\n')
 
         const lenBefore = lines
           .slice(0, cursor.line)
@@ -126,27 +127,27 @@ export default function ArcadeApp() {
     <Root onKeyDown={handleKeyDown}>
       <Flex style={{height: '100%'}}>
         {result && result.type === 'success' && (
-          <Card borderRight flex={1} style={{overflow: 'auto'}} tone="transparent">
+          <Card flex={1} style={{overflow: 'auto'}} tone="transparent">
             <ErrorBoundary onCatch={handleCatch}>{result.node}</ErrorBoundary>
           </Card>
         )}
 
         {result && result.type === 'error' && (
-          <Card borderRight flex={1}>
+          <Card flex={1} style={{overflow: 'auto'}} tone="critical">
             <Box padding={4}>
               <Code>{result.error.message}</Code>
             </Box>
           </Card>
         )}
 
-        <Box flex={1}>
+        <Card borderLeft flex={1}>
           <CodeEditor
             code={code}
             cursor={cursor}
             onCodeChange={setCode}
             onCursorChange={handleCursorChange}
           />
-        </Box>
+        </Card>
       </Flex>
     </Root>
   )

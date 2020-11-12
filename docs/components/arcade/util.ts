@@ -14,10 +14,14 @@ export const bytesToString = (arr: Uint8Array) => {
 }
 
 export const decodeCode = (base64: string) => {
-  const data = atob(base64)
-  const inflated = bytesToString(pako.inflateRaw(data))
+  try {
+    const data = atob(base64)
+    const inflated = bytesToString(pako.inflateRaw(data))
 
-  return decodeURIComponent(inflated)
+    return decodeURIComponent(inflated)
+  } catch (err) {
+    return null
+  }
 }
 
 export const encodeCode = (code: string) => {
