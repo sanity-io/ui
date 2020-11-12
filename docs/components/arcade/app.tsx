@@ -6,7 +6,7 @@ import {useRouter} from 'next/router'
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {CodeEditor} from './codeEditor'
-import {encodeCode, decodeCode} from './util'
+import {encodeCode, decodeCode} from './helpers'
 import {EvalResult, renderCode} from '$lib/eval'
 import {runPrettier} from '$lib/prettier'
 
