@@ -1,7 +1,7 @@
 import {Box, Container, Heading, Stack} from '@sanity/ui'
 import React from 'react'
-import {AppLayout} from '~/components'
-import {ResourcesPageLayout} from '~/components/_resourcesPage/layout'
+import {AppLayout} from '$components'
+import {ResourcesPageLayout} from '$components/_resourcesPage/layout'
 
 function ResourcesPage() {
   return (

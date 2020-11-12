@@ -7,7 +7,7 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
-import {AppProvider} from '~/components'
+import {AppProvider} from '$components'
 
 Refractor.registerLanguage(bash)
 Refractor.registerLanguage(javascript)

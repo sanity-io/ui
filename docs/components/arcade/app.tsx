@@ -1,14 +1,14 @@
 import * as ui from '@sanity/ui'
 import {Box, Card, Code, ErrorBoundary, Flex} from '@sanity/ui'
 import isHotkey from 'is-hotkey'
+import {debounce} from 'lodash'
 import {useRouter} from 'next/router'
-import pako from 'pako'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {CodeEditor} from './codeEditor'
-import {bytesToString} from './util'
-import {EvalResult, renderCode} from '~/lib/eval'
-import {runPrettier} from '~/lib/prettier'
+import {encodeCode, decodeCode} from './util'
+import {EvalResult, renderCode} from '$lib/eval'
+import {runPrettier} from '$lib/prettier'
 
 const isSaveHotkey = isHotkey('mod+s')
 
@@ -36,27 +36,20 @@ const DEFAULT_CODE = `<Card
 </Card>
 `
 
-const decodeCode = (base64: string) => {
-  const data = atob(base64)
-  const inflated = bytesToString(pako.inflateRaw(data))
-  return decodeURIComponent(inflated)
-}
-
-const encodeCode = (code: string) => {
-  if (!code.length) {
-    return ''
-  }
-  const data = encodeURIComponent(code)
-  const deflated = pako.deflateRaw(data)
-  return btoa(bytesToString(deflated))
-}
-
 export default function ArcadeApp() {
   const router = useRouter()
   const [code, setCode] = useState('')
   const [result, setResult] = useState<EvalResult | null>(null)
   const codeRef = useRef(code)
   const [cursor, setCursor] = useState<Cursor>({line: 0, column: 0})
+
+  const saveCode = useMemo(
+    () =>
+      debounce((code: string) => {
+        router.replace({pathname: '/arcade', query: {code: encodeCode(code)}})
+      }, 200),
+    [router]
+  )
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -68,10 +61,10 @@ export default function ArcadeApp() {
   useEffect(() => {
     if (code !== codeRef.current) {
       codeRef.current = code
-      router.replace({pathname: '/arcade', query: {code: encodeCode(code)}})
+      saveCode(code)
       setResult(renderCode(code, {React, ...ui}))
     }
-  }, [code, router])
+  }, [code, router, saveCode])
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {

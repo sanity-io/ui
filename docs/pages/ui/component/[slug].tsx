@@ -1,10 +1,10 @@
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
-import {AppLayout, Article} from '~/components'
-import {UIPageLayout} from '~/components/_uiPage/layout'
-import {utilRoutes} from '~/routes'
-import {getClient, usePreviewSubscription} from '~/sanity'
+import {AppLayout, Article} from '$components'
+import {UIPageLayout} from '$components/_uiPage/layout'
+import {utilRoutes} from '$routes'
+import {getClient, usePreviewSubscription} from '$sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 
@@ -18,7 +18,13 @@ const PAGE_QUERY = groq`
   }
 `
 
-export async function getStaticProps({params, preview = __DEV__}) {
+export async function getStaticProps({
+  params,
+  preview = __DEV__,
+}: {
+  params: Record<string, any>
+  preview?: boolean
+}) {
   const data = await getClient(preview).fetch(PAGE_QUERY, params)
 
   return {props: {data, params, preview}}

@@ -1,9 +1,9 @@
 import {groq} from 'next-sanity'
 import Head from 'next/head'
 import React from 'react'
-import {AppLayout, Article} from '~/components'
-import {UIPageLayout} from '~/components/_uiPage/layout'
-import {getClient, usePreviewSubscription} from '~/sanity'
+import {AppLayout, Article} from '$components'
+import {UIPageLayout} from '$components/_uiPage/layout'
+import {getClient, usePreviewSubscription} from '$sanity'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 

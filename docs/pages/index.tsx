@@ -1,6 +1,6 @@
+import {Card, Heading} from '@sanity/ui'
 import React from 'react'
-import {Card, Heading} from '~/../ui/src'
-import {AppLayout} from '~/components'
+import {AppLayout} from '$components'
 
 function IndexPage() {
   return (

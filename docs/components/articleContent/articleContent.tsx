@@ -1,10 +1,10 @@
 import BlockContent from '@sanity/block-content-to-react'
+import {LinkIcon} from '@sanity/icons'
 import {Box, Card, Code, Heading, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
 import {CodeExample, PropertyTable} from '..'
 import {blocksToText} from '../article/helpers'
 import {NpmPackageBadge} from '../npmPackageBadge'
-import {LinkIcon} from '~/../icons/src'
 
 export function ArticleContent({blocks, toc}: {blocks: any[]; toc: any}) {
   const serializers = useMemo(() => buildSerializers(toc), [toc])
@@ -18,6 +18,8 @@ const CODE_LANGUAGES = {
 
 function buildSerializers(toc: any) {
   function CodeSerializer(props: any) {
+    const language: 'sh' = props.node.language
+
     return (
       <Card
         marginY={[2, 2, 3, 4]}
@@ -26,11 +28,7 @@ function buildSerializers(toc: any) {
         shadow={1}
         style={{overflow: 'auto'}}
       >
-        <Code
-          language={CODE_LANGUAGES[props.node.language] || props.node.language}
-          muted
-          size={[2, 2, 3]}
-        >
+        <Code language={CODE_LANGUAGES[language] || language} muted size={[2, 2, 3]}>
           {props.node.code}
         </Code>
       </Card>
@@ -40,11 +38,13 @@ function buildSerializers(toc: any) {
   function CodeExampleSerializer(props: any) {
     if (!props.node || !props.node.code) return null
 
+    const language: 'sh' = props.node.code.language
+
     return (
       <CodeExample
         code={props.node.code.code}
         hookCode={props.node.hook?.code}
-        language={CODE_LANGUAGES[props.node.code.language] || props.node.code.language}
+        language={CODE_LANGUAGES[language] || language}
       />
     )
   }
@@ -63,7 +63,7 @@ function buildSerializers(toc: any) {
     return <PropertyTable caption={node.caption} properties={node.properties || []} />
   }
 
-  const headingProps = {
+  const headingProps: any = {
     h2: {
       box: {
         paddingTop: [4, 4, 5, 6],
@@ -94,7 +94,7 @@ function buildSerializers(toc: any) {
 
     if (HEADER_RE.test(style)) {
       const text = blocksToText([props.node])
-      const heading = toc && toc.find((t) => t.text === text)
+      const heading = toc && toc.find((t: any) => t.text === text)
 
       // const level = style.replace(/[^\d]/g, '')
       return (

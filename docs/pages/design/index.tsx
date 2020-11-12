@@ -1,7 +1,7 @@
 import {Heading, Stack} from '@sanity/ui'
 import React from 'react'
-import {AppLayout} from '~/components'
-import {DesignPageLayout} from '~/components/_designPage/layout'
+import {AppLayout} from '$components'
+import {DesignPageLayout} from '$components/_designPage/layout'
 
 function DesignPage() {
   return (

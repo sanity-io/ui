@@ -1,5 +1,5 @@
 import {hues} from '@sanity/color'
-import {codeFont, ColorSchemeKey, Theme} from '@sanity/ui'
+import {responsiveCodeFontStyle, ColorSchemeKey, Theme} from '@sanity/ui'
 import {rgba} from 'polished'
 import {css} from 'styled-components'
 
@@ -12,9 +12,7 @@ export function codeEditor() {
     }
 
     & > .react-codemirror2 {
-      /* background: rgba(255, 0, 0, 0.1); */
-      /* outline: 1px solid red; */
-      ${codeFont}
+      ${responsiveCodeFontStyle}
       height: 100%;
     }
 
@@ -23,7 +21,6 @@ export function codeEditor() {
       font: inherit;
       color: inherit;
       height: 100%;
-      /* background-color: rgba(0, 255, 0, 0.1); */
     }
 
     .CodeMirror-scroll {

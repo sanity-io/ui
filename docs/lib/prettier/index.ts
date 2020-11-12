@@ -13,7 +13,6 @@ export function runPrettier({code, cursorOffset}: {code: string; cursorOffset: n
       singleQuote: true,
     })
   } catch (err) {
-    // console.error(err)
     // Just a formatting error so we pass
     return null
   }

@@ -2,7 +2,7 @@ import BlockContent from '@sanity/block-content-to-react'
 import {Box, Heading, Text} from '@sanity/ui'
 import React from 'react'
 
-const headingProps = {
+const headingProps: any = {
   h2: {
     box: {
       paddingTop: [4, 4, 5, 6],

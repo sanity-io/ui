@@ -47,6 +47,7 @@ export function CodeEditor(props: React.HTMLProps<HTMLDivElement> & BoxProps & C
   }, [code])
 
   useEffect(() => {
+    if (!editorRef.current) return
     if (cursor.line !== cursorRef.current.line || cursor.column !== cursorRef.current.column) {
       editorRef.current.getDoc().setCursor({line: cursor.line, ch: cursor.column})
     }

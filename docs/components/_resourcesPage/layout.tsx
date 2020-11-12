@@ -14,7 +14,7 @@ const Root = styled(Card)`
   `};
 `
 
-const SideMenu = styled(Card)`
+const SideMenu = styled(Card).attrs({forwardedAs: 'aside'})`
   ${({theme}) => css`
     @media (max-width: ${rem(theme.media[1] - 1)}) {
       z-index: 1;
@@ -72,7 +72,7 @@ export function ResourcesPageLayout({children}: {children: React.ReactNode}) {
 
   return (
     <Root flex={1}>
-      <SideMenu data-open={menuOpen} forwardedAs="aside" ref={setSideMenuElement as any}>
+      <SideMenu data-open={menuOpen} ref={setSideMenuElement}>
         <ResourcesPageHeader />
       </SideMenu>
 

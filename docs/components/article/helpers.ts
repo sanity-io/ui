@@ -13,7 +13,7 @@ export function blocksToText(blocks: any[], opts: any = {}) {
         return options.nonTextBehavior === 'remove' ? '' : `[${block._type} block]`
       }
 
-      return block.children.map((child) => child.text).join('')
+      return block.children.map((child: any) => child.text).join('')
     })
     .join('\n\n')
 }

@@ -3,8 +3,8 @@ import {Box, Button, Code, Flex, Heading, Stack, Text} from '@sanity/ui'
 import {readableColor} from 'polished'
 import React from 'react'
 import styled from 'styled-components'
-import {AppLayout} from '~/components'
-import {ResourcesPageLayout} from '~/components/_resourcesPage/layout'
+import {AppLayout} from '$components'
+import {ResourcesPageLayout} from '$components/_resourcesPage/layout'
 
 const Grid = styled.div`
   display: grid;

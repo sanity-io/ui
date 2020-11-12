@@ -25,6 +25,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     as="a"
                     mode="bleed"
                     padding={[1, 2, 3]}
+                    size={[2, 2, 3]}
                     text={<strong>Sanity Design</strong>}
                   />
                 </Link>
@@ -36,6 +37,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     mode="bleed"
                     padding={[1, 2, 3]}
                     selected={router.asPath.startsWith('/design')}
+                    size={[2, 2, 3]}
                     text="Design"
                   />
                 </Link>
@@ -45,6 +47,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     mode="bleed"
                     padding={[1, 2, 3]}
                     selected={router.asPath.startsWith('/ui')}
+                    size={[2, 2, 3]}
                     text="UI"
                   />
                 </Link>
@@ -54,6 +57,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     mode="bleed"
                     padding={[1, 2, 3]}
                     selected={router.asPath.startsWith('/arcade')}
+                    size={[2, 2, 3]}
                     text="Arcade"
                   />
                 </Link>
@@ -63,6 +67,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     mode="bleed"
                     padding={[1, 2, 3]}
                     selected={router.asPath.startsWith('/resources')}
+                    size={[2, 2, 3]}
                     text="Resources"
                   />
                 </Link>

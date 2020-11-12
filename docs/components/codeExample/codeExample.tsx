@@ -1,7 +1,7 @@
 import * as ui from '@sanity/ui'
 import {Box, Card, Code} from '@sanity/ui'
 import React from 'react'
-import {renderCode, renderHooks} from '~/lib/eval'
+import {renderCode, renderHooks} from '$lib/eval'
 
 export function CodeExample(props: {code: string; hookCode?: string; language: string}) {
   const {code, hookCode, language} = props

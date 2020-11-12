@@ -1,7 +1,7 @@
 import {Box, Heading, Stack, Text} from '@sanity/ui'
 import React from 'react'
 import {getTOC} from './helpers'
-import {ArticleContent, TimeAgo} from '~/components'
+import {ArticleContent, TimeAgo} from '$components'
 
 export function Article({article, slug}: {article?: any; slug: string}) {
   if (!article) {
