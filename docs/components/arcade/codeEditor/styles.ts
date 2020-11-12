@@ -14,6 +14,7 @@ export function codeEditor() {
     & > .react-codemirror2 {
       ${responsiveCodeFontStyle}
       height: 100%;
+      box-sizing: border-box;
     }
 
     .CodeMirror {
