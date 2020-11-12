@@ -6,7 +6,9 @@ import {useRouter} from 'next/router'
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {CodeEditor} from './codeEditor'
-import {encodeCode, decodeCode} from './helpers'
+import {DEFAULT_CODE} from './constants'
+import {encodeCode, decodeCode, getCursor, getCursorOffset} from './helpers'
+import {Cursor} from './types'
 import {EvalResult, renderCode} from '$lib/eval'
 import {runPrettier} from '$lib/prettier'
 
@@ -14,26 +16,6 @@ const isSaveHotkey = isHotkey('mod+s')
 
 const Root = styled(Card)`
   height: 100%;
-`
-
-interface Cursor {
-  line: number
-  column: number
-}
-
-const DEFAULT_CODE = `<Card
-  padding={6}
-  style={{
-    boxSizing: 'border-box',
-    minHeight: '100%',
-  }}
-  >
-  <Inline space={2}>
-    <Button icon="compose" text="Compose" tone="brand" />
-    <Button icon="play" mode="ghost" text="Run" />
-    <Button icon="robot" mode="ghost" text="Automate" />
-  </Inline>
-</Card>
 `
 
 export default function ArcadeApp() {
@@ -46,10 +28,46 @@ export default function ArcadeApp() {
   const saveCode = useMemo(
     () =>
       debounce((code: string) => {
-        router.replace({pathname: '/arcade', query: {code: encodeCode(code)}})
+        router.replace({
+          pathname: '/arcade',
+          query: {code: encodeCode(code)},
+        })
       }, 200),
     [router]
   )
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (isSaveHotkey(event.nativeEvent)) {
+        event.preventDefault()
+
+        const cursorOffset = getCursorOffset(codeRef.current || '', cursor)
+        const result = runPrettier({code, cursorOffset})
+
+        if (result) {
+          let newVal = result.formatted
+          let offset = result.cursorOffset
+
+          if (newVal[0] === ';') {
+            newVal = newVal.slice(1)
+            offset -= 1
+          }
+
+          setCursor(getCursor(newVal, offset))
+          setCode(newVal)
+        }
+      }
+    },
+    [code, cursor]
+  )
+
+  const handleCursorChange = useCallback((line: number, column: number) => {
+    setCursor({line, column})
+  }, [])
+
+  const handleCatch = (params: {error: Error; info: React.ErrorInfo}) => {
+    console.log(params)
+  }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -66,62 +84,6 @@ export default function ArcadeApp() {
       setResult(renderCode(code, {React, ...ui}))
     }
   }, [code, router, saveCode])
-
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (isSaveHotkey(event.nativeEvent)) {
-        event.preventDefault()
-
-        const lines = (codeRef.current || '').split('\n')
-
-        const lenBefore = lines
-          .slice(0, cursor.line)
-          .map((l) => l.length + 1)
-          .reduce((acc, l) => (acc += l), 0)
-
-        const cursorOffset = lenBefore + cursor.column
-
-        const result = runPrettier({code, cursorOffset})
-
-        if (result) {
-          let newVal = result.formatted
-          let offset = result.cursorOffset
-
-          if (newVal[0] === ';') {
-            newVal = newVal.slice(1)
-            offset -= 1
-          }
-
-          const _lines = newVal.split('\n')
-
-          let line = 0
-          let column = 0
-
-          for (let i = 0; i < _lines.length; i += 1) {
-            if (offset <= _lines[i].length) {
-              line = i
-              column = offset
-              break
-            }
-
-            offset -= _lines[i].length + 1
-          }
-
-          setCursor({line, column})
-          setCode(newVal)
-        }
-      }
-    },
-    [code, cursor]
-  )
-
-  const handleCursorChange = useCallback((line: number, column: number) => {
-    setCursor({line, column})
-  }, [])
-
-  const handleCatch = (params: {error: Error; info: React.ErrorInfo}) => {
-    console.log(params)
-  }
 
   return (
     <Root onKeyDown={handleKeyDown}>
