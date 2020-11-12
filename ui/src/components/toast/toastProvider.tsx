@@ -1,7 +1,7 @@
 import {AnimatePresence, motion} from 'framer-motion'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box} from '../../atoms'
+import {Box, Container} from '../../atoms'
 import {Layer} from '../../utils'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
@@ -24,14 +24,12 @@ const Root = styled(Layer)`
   pointer-events: none;
 `
 
-const ToastContainer = styled(Box)`
+const ToastContainer = styled(Container)`
   pointer-events: all;
   box-sizing: border-box;
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 100%;
-  max-width: 300px;
 `
 
 let toastId = 0
@@ -97,27 +95,29 @@ export function ToastProvider({children}: {children?: React.ReactNode}) {
       {children}
 
       <Root>
-        <ToastContainer padding={4}>
-          <AnimatePresence initial={false}>
-            {state.toasts.map(({dismiss, id, params}) => (
-              <motion.div
-                animate={{opacity: 1, y: 0, scale: 1}}
-                exit={{opacity: 0, scale: 0.5, transition: {duration: 0.2}}}
-                initial={{opacity: 0, y: 32, scale: 0.25}}
-                key={id}
-                layout="position"
-                transition={{type: 'spring', damping: 30, stiffness: 400}}
-              >
-                <Toast
-                  closable={params.closable}
-                  description={params.description}
-                  onClose={dismiss}
-                  status={params.status}
-                  title={params.title}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+        <ToastContainer width={1}>
+          <Box padding={4}>
+            <AnimatePresence initial={false}>
+              {state.toasts.map(({dismiss, id, params}) => (
+                <motion.div
+                  animate={{opacity: 1, y: 0, scale: 1}}
+                  exit={{opacity: 0, scale: 0.5, transition: {duration: 0.2}}}
+                  initial={{opacity: 0, y: 32, scale: 0.25}}
+                  key={id}
+                  layout="position"
+                  transition={{type: 'spring', damping: 30, stiffness: 400}}
+                >
+                  <Toast
+                    closable={params.closable}
+                    description={params.description}
+                    onClose={dismiss}
+                    status={params.status}
+                    title={params.title}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </Box>
         </ToastContainer>
       </Root>
     </ToastContext.Provider>
