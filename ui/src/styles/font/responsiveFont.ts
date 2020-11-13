@@ -48,7 +48,7 @@ export function fontSize(size: ThemeFontSize): CSSObject {
       marginBottom: '-1px',
     },
 
-    '& > svg': {
+    '& [data-sanity-icon]': {
       fontSize: rem(size.iconSize),
       margin: rem((capHeight - size.iconSize) / 2),
     },
