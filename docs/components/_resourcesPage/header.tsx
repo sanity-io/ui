@@ -41,9 +41,9 @@ export function ResourcesPageHeader() {
           <Stack space={[3, 3, 4]}>
             <Stack as="ul" space={[3, 3, 4]}>
               <ResourcesPageHeaderLink href="/resources">Introduction</ResourcesPageHeaderLink>
+              <ResourcesPageHeaderLink href="/resources/logos">Logos</ResourcesPageHeaderLink>
               <ResourcesPageHeaderLink href="/resources/colors">Colors</ResourcesPageHeaderLink>
               <ResourcesPageHeaderLink href="/resources/icons">Icons</ResourcesPageHeaderLink>
-              <ResourcesPageHeaderLink href="/resources/logo">Logo</ResourcesPageHeaderLink>
             </Stack>
           </Stack>
         </Stack>
