@@ -1,4 +1,4 @@
-import {Checkbox} from '@sanity/ui'
+import {Box, Checkbox, Flex, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -24,5 +24,12 @@ const checkboxProps = () => {
 
 export const plain = () => {
   const props = checkboxProps()
-  return <Checkbox {...props} />
+  return (
+    <Flex align="center">
+      <Checkbox {...props} />
+      <Box marginLeft={3}>
+        <Text>Text</Text>
+      </Box>
+    </Flex>
+  )
 }
