@@ -9,9 +9,7 @@ interface TabProps {
   id: string
   icon?: React.ComponentType
   focused?: boolean
-  label: React.ReactNode
-  onClick?: () => void
-  onFocus?: () => void
+  label?: React.ReactNode
   selected?: boolean
 }
 
@@ -29,10 +27,13 @@ export const Tab = forwardRef(
       focusedRef.current = false
     }, [])
 
-    const handleFocus = useCallback(() => {
-      focusedRef.current = true
-      if (onFocus) onFocus()
-    }, [onFocus])
+    const handleFocus = useCallback(
+      (event: React.FocusEvent<HTMLButtonElement>) => {
+        focusedRef.current = true
+        if (onFocus) onFocus(event)
+      },
+      [onFocus]
+    )
 
     const setRef = useCallback(
       (el: HTMLButtonElement | null) => {
