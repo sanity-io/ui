@@ -31,6 +31,7 @@ export const componentRoutes = [
   {slug: 'hotkeys', title: 'Hotkeys'},
   {slug: 'menu', title: 'Menu'},
   {slug: 'menu-button', title: 'MenuButton'},
+  {slug: 'tab', title: 'Tab'},
   {slug: 'toast', title: 'Toast'},
 ]
 
