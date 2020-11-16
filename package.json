@@ -11,6 +11,7 @@
     "dev:docs": "lerna run --stream --scope 'sanity-design-{docs,studio}' dev",
     "dev:example-manage": "lerna run --stream --scope sanity-design-example-manage dev",
     "dev:example-studio": "lerna run --stream --scope sanity-design-example-studio dev",
+    "dev:example-web": "lerna run --stream --scope sanity-design-example-web dev",
     "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
     "release": "lerna publish --no-private --dist-tag latest",
