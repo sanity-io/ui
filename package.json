@@ -13,8 +13,8 @@
     "dev:example-studio": "lerna run --stream --scope sanity-design-example-studio dev",
     "dev:storybook": "lerna run --stream --scope sanity-ui-storybook dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
-    "release": "lerna publish --no-private --npm-tag latest",
-    "release:beta": "lerna publish --no-private --npm-tag next",
+    "release": "lerna publish --no-private --dist-tag latest",
+    "release:beta": "lerna publish --no-private --dist-tag next",
     "lint": "lerna run --stream --parallel lint",
     "test": "lerna run --stream --parallel test",
     "type-check": "lerna run --stream --parallel type-check"
