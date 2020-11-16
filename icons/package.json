@@ -19,7 +19,7 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@svgr/core": "^5.4.0",
+    "@svgr/core": "^5.5.0",
     "@types/mkdirp": "^1.0.1",
     "@types/prettier": "^2.1.5",
     "camelcase": "^6.2.0",
