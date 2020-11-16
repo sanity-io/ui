@@ -48,7 +48,7 @@ async function readIcon(filePath: string) {
       svgrJsx
         .replace('* as React', 'React')
         .replace(/"#121923"/g, '"currentColor"')
-        .replace('<svg ', '<svg data-sanity-icon="" '),
+        .replace('<svg ', `<svg data-sanity-icon="${name}" `),
     ].join('\n\n'),
     {
       ...prettierConfig,

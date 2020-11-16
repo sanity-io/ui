@@ -10,11 +10,12 @@ function EllipsisVerticalIcon(
 ) {
   return (
     <svg
-      data-sanity-icon=""
+      data-sanity-icon="ellipsis-vertical"
       width="1em"
       height="1em"
       viewBox="0 0 25 25"
       fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       ref={svgRef}
       {...props}
     >
