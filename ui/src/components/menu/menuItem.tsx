@@ -1,6 +1,7 @@
 import React, {createElement, forwardRef, useCallback, useEffect, useRef} from 'react'
 import styled, {css} from 'styled-components'
 import {Box, Flex, Icon, IconSymbol, Text, useCard} from '../../atoms'
+import {useForwardedRef} from '../../hooks'
 import {ResponsivePaddingStyleProps} from '../../styles'
 import {ColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
@@ -61,7 +62,10 @@ const Root = styled.button<{scheme: ColorSchemeKey}>(
 )
 
 export const MenuItem = forwardRef(
-  (props: MenuItemProps & Omit<React.HTMLProps<HTMLButtonElement>, 'ref'>, ref) => {
+  (
+    props: MenuItemProps & Omit<React.HTMLProps<HTMLButtonElement>, 'ref'>,
+    forwardedRef: React.ForwardedRef<HTMLButtonElement>
+  ) => {
     const card = useCard()
     const {
       children,
@@ -85,11 +89,7 @@ export const MenuItem = forwardRef(
 
     useEffect(() => mount(rootRef.current), [mount])
 
-    const setRef = (el: HTMLButtonElement | null) => {
-      rootRef.current = el
-      if (typeof ref === 'function') ref(el)
-      else if (ref) ref.current = el
-    }
+    const ref = useForwardedRef(forwardedRef)
 
     const handleClick = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -116,7 +116,7 @@ export const MenuItem = forwardRef(
         onClick={restProps.disabled ? undefined : handleClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        ref={setRef}
+        ref={ref}
         role="menuitem"
         scheme={card.scheme}
         tabIndex={-1}
