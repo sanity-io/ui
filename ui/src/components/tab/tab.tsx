@@ -1,5 +1,6 @@
 import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
 import {Button} from '../../atoms'
+import {useForwardedRef} from '../../hooks'
 
 interface TabProps {
   /**
@@ -17,7 +18,7 @@ export const Tab = forwardRef(
   (
     props: TabProps &
       Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'type'>,
-    ref
+    forwardedRef: React.ForwardedRef<HTMLButtonElement>
   ) => {
     const {icon, id, focused, label, onClick, onFocus, selected, ...restProps} = props
     const elementRef = useRef<HTMLButtonElement | null>(null)
@@ -35,18 +36,7 @@ export const Tab = forwardRef(
       [onFocus]
     )
 
-    const setRef = useCallback(
-      (el: HTMLButtonElement | null) => {
-        elementRef.current = el
-
-        if (typeof ref === 'function') {
-          ref(el)
-        } else if (ref) {
-          ref.current = el
-        }
-      },
-      [ref]
-    )
+    const ref = useForwardedRef(forwardedRef)
 
     useEffect(() => {
       if (focused && !focusedRef.current) {
@@ -67,7 +57,7 @@ export const Tab = forwardRef(
         onBlur={handleBlur}
         onFocus={handleFocus}
         padding={2}
-        ref={setRef}
+        ref={ref}
         role="tab"
         selected={selected}
         tabIndex={selected ? 0 : -1}

@@ -1,5 +1,6 @@
-import React, {forwardRef, useEffect, useRef} from 'react'
+import React, {forwardRef, useEffect} from 'react'
 import styled from 'styled-components'
+import {useForwardedRef} from '../../hooks'
 import {ColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {
@@ -21,27 +22,21 @@ const Track = styled.span(switchTrackStyles)
 const Thumb = styled.span<{checked?: boolean; indeterminate?: boolean}>(switchThumbStyles)
 
 export const Switch = forwardRef(
-  (props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps, ref) => {
+  (
+    props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
+    forwardedRef: React.ForwardedRef<HTMLInputElement>
+  ) => {
     const {checked, className, indeterminate, style, ...restProps} = props
     const card = useCard()
-    const inputRef = useRef<HTMLInputElement | null>(null)
+
+    const ref = useForwardedRef(forwardedRef)
 
     useEffect(() => {
-      if (inputRef.current) {
+      if (ref.current) {
         // Set the indeterminate state
-        inputRef.current.indeterminate = indeterminate || false
+        ref.current.indeterminate = indeterminate || false
       }
-    }, [indeterminate])
-
-    const setRef = (inputElement: HTMLInputElement | null) => {
-      if (typeof ref === 'function') {
-        ref(inputElement)
-      } else if (ref) {
-        ref.current = inputElement
-      }
-
-      inputRef.current = inputElement
-    }
+    }, [indeterminate, ref])
 
     return (
       <Root className={className} data-ui="Switch" style={style} scheme={card.scheme}>
@@ -50,7 +45,7 @@ export const Switch = forwardRef(
           checked={indeterminate !== true && checked}
           scheme={card.scheme}
           type="checkbox"
-          ref={setRef}
+          ref={ref}
         />
         <Representation aria-hidden data-name="representation" scheme={card.scheme}>
           <Track />
