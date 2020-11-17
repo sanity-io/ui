@@ -10,34 +10,28 @@ import {
   switchInputStyles,
 } from './styles'
 
-interface SwitchProps {}
+interface SwitchProps {
+  indeterminate?: boolean
+}
 
 const Root = styled.span<{scheme: ColorSchemeKey}>(switchBaseStyles)
 const Input = styled.input<{scheme: ColorSchemeKey}>(switchInputStyles)
 const Representation = styled.span<{scheme: ColorSchemeKey}>(switchRepresentationStyles)
 const Track = styled.span(switchTrackStyles)
-const Thumb = styled.span<{checked?: boolean}>(switchThumbStyles)
+const Thumb = styled.span<{checked?: boolean; indeterminate?: boolean}>(switchThumbStyles)
 
 export const Switch = forwardRef(
-  (
-    {
-      checked,
-      className,
-      style,
-      ...restProps
-    }: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
-    ref
-  ) => {
+  (props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps, ref) => {
+    const {checked, className, indeterminate, style, ...restProps} = props
     const card = useCard()
-
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
-      // Set the indeterminate state if checked value is undefined
       if (inputRef.current) {
-        inputRef.current.indeterminate = checked === undefined
+        // Set the indeterminate state
+        inputRef.current.indeterminate = indeterminate || false
       }
-    }, [checked])
+    }, [indeterminate])
 
     const setRef = (inputElement: HTMLInputElement | null) => {
       if (typeof ref === 'function') {
@@ -53,14 +47,14 @@ export const Switch = forwardRef(
       <Root className={className} data-ui="Switch" style={style} scheme={card.scheme}>
         <Input
           {...restProps}
-          checked={checked || false}
+          checked={indeterminate !== true && checked}
           scheme={card.scheme}
           type="checkbox"
           ref={setRef}
         />
         <Representation aria-hidden data-name="representation" scheme={card.scheme}>
           <Track />
-          <Thumb checked={checked} />
+          <Thumb checked={checked} indeterminate={indeterminate} />
         </Representation>
       </Root>
     )

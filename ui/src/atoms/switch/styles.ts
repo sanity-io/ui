@@ -85,7 +85,12 @@ export function switchTrackStyles(props: {theme: Theme}) {
 }
 
 /* Thumb */
-export function switchThumbStyles(props: {checked?: boolean; theme: Theme}) {
+export function switchThumbStyles(props: {
+  checked?: boolean
+  indeterminate?: boolean
+  theme: Theme
+}) {
+  const {indeterminate} = props
   const {switch: switchInput} = props.theme.input
   const trackWidth = switchInput.width
   const trackHeight = switchInput.height
@@ -93,6 +98,7 @@ export function switchThumbStyles(props: {checked?: boolean; theme: Theme}) {
   const size = trackHeight - switchInput.padding * 2
   const checkedOffset = trackWidth - trackPadding * 2 - size
   const indeterminateOffset = trackWidth / 2 - size / 2 - trackPadding
+  const checked = indeterminate !== true && props.checked === true
 
   return css`
     display: block;
@@ -108,12 +114,12 @@ export function switchThumbStyles(props: {checked?: boolean; theme: Theme}) {
     background: var(--switch-thumb-color);
     transform: translate3d(0, 0, 0);
 
-    ${props.checked === true &&
+    ${checked &&
     css`
       transform: translate3d(${checkedOffset}px, 0, 0);
     `}
 
-    ${typeof props.checked !== 'boolean' &&
+    ${indeterminate &&
     css`
       transform: translate3d(${indeterminateOffset}px, 0, 0);
     `}
