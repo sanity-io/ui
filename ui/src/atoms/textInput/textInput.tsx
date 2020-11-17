@@ -1,6 +1,7 @@
-import React, {createElement, forwardRef} from 'react'
+import React, {createElement, forwardRef, useEffect} from 'react'
 import {isValidElementType} from 'react-is'
 import styled, {css} from 'styled-components'
+import {useForwardedRef} from '../../hooks'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
@@ -32,6 +33,7 @@ interface TextInputProps extends ResponsiveRadiusProps {
     | 'text'
     | 'week'
   weight?: string
+  customValidity?: string
 }
 
 const Root = styled.span<
@@ -90,7 +92,7 @@ const IconRightBox = styled(Box)`
 export const TextInput = forwardRef(
   (
     props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'size' | 'type'>,
-    ref: React.Ref<HTMLInputElement>
+    forwardedRef: React.Ref<HTMLInputElement>
   ) => {
     const {
       border = true,
@@ -101,10 +103,19 @@ export const TextInput = forwardRef(
       radius = 1,
       size = 2,
       space = 3,
+      customValidity,
       type = 'text',
       ...restProps
     } = props
     const {scheme} = useCard()
+
+    const ref = useForwardedRef(forwardedRef)
+
+    useEffect(() => {
+      if (customValidity && ref.current) {
+        ref.current.setCustomValidity(customValidity)
+      }
+    }, [customValidity, ref])
 
     return (
       <Root border={border} disabled={disabled} scheme={scheme} radius={radius}>
