@@ -1,13 +1,14 @@
 import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
 import React, {forwardRef, useEffect} from 'react'
 import styled from 'styled-components'
-import {useForwardedRef} from '../../hooks'
+import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {ColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 
 interface CheckboxProps {
   indeterminate?: boolean
+  customValidity?: string
 }
 
 const Root = styled.div(checkboxBaseStyles)
@@ -18,9 +19,11 @@ export const Checkbox = forwardRef(
     props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & CheckboxProps,
     forwardedRef: React.ForwardedRef<HTMLInputElement>
   ) => {
-    const {checked, className, indeterminate, style, ...restProps} = props
+    const {checked, className, indeterminate, customValidity, style, ...restProps} = props
     const card = useCard()
     const ref = useForwardedRef(forwardedRef)
+
+    useCustomValidity(ref, customValidity)
 
     useEffect(() => {
       if (ref.current) {

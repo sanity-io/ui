@@ -1,7 +1,7 @@
-import React, {createElement, forwardRef, useEffect} from 'react'
+import React, {createElement, forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import styled, {css} from 'styled-components'
-import {useForwardedRef} from '../../hooks'
+import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
@@ -112,12 +112,7 @@ export const TextInput = forwardRef(
 
     const ref = useForwardedRef(forwardedRef)
 
-    useEffect(() => {
-      if (ref.current) {
-        // Set custom validity message
-        ref.current.setCustomValidity(customValidity || '')
-      }
-    }, [customValidity, ref])
+    useCustomValidity(ref, customValidity)
 
     return (
       <Root border={border} disabled={disabled} scheme={scheme} radius={radius}>

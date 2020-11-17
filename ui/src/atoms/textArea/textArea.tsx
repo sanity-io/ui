@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {
   getResponsiveProp,
   responsiveInputPaddingStyle,
@@ -15,6 +16,7 @@ interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusPr
   border?: boolean
   size?: number | number[]
   weight?: string
+  customValidity?: string
 }
 
 const Root = styled.span<{
@@ -32,13 +34,14 @@ const Input = styled.textarea<{uiSize: number[]; weight?: string}>(
 export const TextArea = forwardRef(
   (
     props: TextInputProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
-    ref: React.Ref<HTMLTextAreaElement>
+    forwardedRef: React.ForwardedRef<HTMLTextAreaElement>
   ) => {
     const {
       border = true,
       disabled = false,
       padding = [3],
       paddingX,
+      customValidity,
       paddingY,
       paddingTop,
       paddingBottom,
@@ -60,6 +63,10 @@ export const TextArea = forwardRef(
       paddingLeft,
       paddingRight,
     }
+
+    const ref = useForwardedRef(forwardedRef)
+
+    useCustomValidity(ref, customValidity)
 
     const uiSize = getResponsiveProp(sizeProp)
 
