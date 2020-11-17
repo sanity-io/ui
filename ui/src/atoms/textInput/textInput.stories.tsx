@@ -1,8 +1,7 @@
 import icons, {IconSymbol} from '@sanity/icons'
 import {Card, Container, Stack, Text, TextInput} from '@sanity/ui'
-import {boolean, select, withKnobs} from '@storybook/addon-knobs'
-import React, {useState} from 'react'
-import {useCallback} from 'react'
+import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
+import React, {useCallback, useState} from 'react'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -15,6 +14,18 @@ const symbolOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, k
 
   return acc
 }, {})
+
+export const customValidity = () => {
+  const customValidity = text('Custom validity', 'Invalid value')
+
+  return (
+    <Container width={0}>
+      <Card padding={4}>
+        <TextInput customValidity={customValidity} />
+      </Card>
+    </Container>
+  )
+}
 
 export const plain = () => {
   const border = boolean('Border?', true, 'Props')
