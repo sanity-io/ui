@@ -1,39 +1,42 @@
 import pako from 'pako'
 import {Cursor} from './types'
 
-/**
- * Convert an array of bytes to a string.
- */
-export const bytesToString = (arr: Uint8Array) => {
+export const uint8ArrayToBase64 = (uint8array: Uint8Array) => {
   let str = ''
 
-  for (let i = 0; i < arr.length; i++) {
-    str += String.fromCharCode(arr[i])
+  for (let i = 0, {length} = uint8array; i < length; i++) {
+    str += String.fromCharCode(uint8array[i])
   }
 
-  return str
+  return btoa(str)
 }
 
-export function decodeCode(str: string) {
-  try {
-    const data = atob(str)
-    const inflated = bytesToString(pako.inflateRaw(data))
+function base64ToUint8Array(base64: string) {
+  const binStr = atob(base64)
+  const len = binStr.length
+  const bytes = new Uint8Array(len)
 
-    return decodeURIComponent(inflated)
-  } catch (err) {
-    return null
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binStr.charCodeAt(i)
   }
+
+  return bytes
 }
 
-export function encodeCode(code: string) {
-  if (!code.length) {
-    return ''
-  }
+export function decode(input: string) {
+  if (input.length === 0) return ''
 
-  const data = encodeURIComponent(code)
-  const deflated = pako.deflateRaw(data)
+  const arr = base64ToUint8Array(input)
 
-  return btoa(bytesToString(deflated))
+  return pako.inflate(arr, {to: 'string'})
+}
+
+export function encode(input: string) {
+  if (input.length === 0) return ''
+
+  const arr = pako.deflate(input)
+
+  return uint8ArrayToBase64(arr)
 }
 
 export function getCursorOffset(code: string, cursor: Cursor) {
