@@ -23,11 +23,13 @@ export function useResponsiveMenu(props: {onHide: () => void; onShow: () => void
 
       if (widths.current < widths.wrapper) {
         setCollapsed(true)
+
         return
       }
 
       // @todo: make sure this is wise/performant
       onShow()
+
       return
     }
 
@@ -42,12 +44,14 @@ export function useResponsiveMenu(props: {onHide: () => void; onShow: () => void
 
       if (expandedWidthRef.current < widths.current) {
         setCollapsed(false)
+
         return
       }
 
       if (widths.current < widths.wrapper) {
         onHide()
         setHidden(true)
+
         return
       }
 
@@ -64,6 +68,7 @@ export function useResponsiveMenu(props: {onHide: () => void; onShow: () => void
 
       if (expandedWidthRef.current < widths.current) {
         setCollapsed(false)
+
         return
       }
     }

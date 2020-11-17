@@ -39,6 +39,7 @@ export function MenuButton({
       event.preventDefault()
       setOpen(true)
       setFocusLast(false)
+
       return
     }
 
@@ -46,6 +47,7 @@ export function MenuButton({
       event.preventDefault()
       setOpen(true)
       setFocusLast(true)
+
       return
     }
   }, [])

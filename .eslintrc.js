@@ -19,6 +19,17 @@ const common = {
         },
       },
     ],
+    'padding-line-between-statements': [
+      'warn',
+      {blankLine: 'always', prev: '*', next: 'block'},
+      {blankLine: 'always', prev: '*', next: 'block-like'},
+      {blankLine: 'always', prev: 'const', next: 'expression'},
+      {blankLine: 'always', prev: 'let', next: 'expression'},
+      {blankLine: 'always', prev: 'var', next: 'expression'},
+      {blankLine: 'always', prev: 'block', next: '*'},
+      {blankLine: 'always', prev: 'block-like', next: '*'},
+      {blankLine: 'always', prev: '*', next: 'return'},
+    ],
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react/no-unescaped-entities': 0,

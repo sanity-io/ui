@@ -8,6 +8,7 @@ async function migrate() {
   return Promise.all(
     docs.map(({_id: prevId, ...doc}) => {
       console.log('previous id', prevId)
+
       return client.create({...doc, _type: 'article'})
     })
   )

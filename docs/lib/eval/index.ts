@@ -16,6 +16,7 @@ export function renderHooks(code: string, scope: Record<string, any>) {
     const result = (window as any).Babel.transform(`() => {${code}}`, {
       presets: ['env', 'react'],
     })
+
     return {type: 'success', fn: scopeEval(result.code, scope)}
   } catch (error) {
     return {type: 'error', error}
@@ -26,6 +27,7 @@ export function renderCode(code: string, scope: Record<string, any>): EvalResult
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = (window as any).Babel.transform(`<>${code}</>`, {presets: ['env', 'react']})
+
     return {type: 'success', node: scopeEval(result.code, scope)}
   } catch (error) {
     return {type: 'error', error}

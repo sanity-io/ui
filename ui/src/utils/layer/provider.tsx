@@ -27,6 +27,7 @@ export function LayerProvider(props: LayerProviderProps) {
     return () => {
       setSize((val) => val - 1)
       const idx = idsRef.current.indexOf(id)
+
       if (idx > -1) {
         idsRef.current.splice(idx, 1)
       }
@@ -53,6 +54,7 @@ export function LayerProvider(props: LayerProviderProps) {
 
   useEffect(() => {
     if (!currentId) return undefined
+
     return mountFn(currentId)
   }, [currentId, mountFn])
 

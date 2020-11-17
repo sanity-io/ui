@@ -46,6 +46,7 @@ function buildExport(hue: ColorHueKey) {
       title: `${hue.slice(0, 1).toUpperCase()}${hue.slice(1)} ${tint}`,
       hex: getColorHex(colors[hue], tint),
     }
+
     return acc
   }, initial)
 
@@ -65,4 +66,5 @@ ${COLOR_HUES.map(buildExport).join('\n\n')}
 // Format generated file with prettier so it can be commited without us being ashamed
 const prettierConfig = JSON.parse(readFileSync(join(__dirname, '..', '..', '.prettierrc'), 'utf8'))
 const filepath = join(__dirname, '..', 'src', 'hues.ts')
+
 writeFileSync(filepath, format(tpl, {filepath, ...prettierConfig}))

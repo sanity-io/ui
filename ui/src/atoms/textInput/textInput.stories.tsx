@@ -11,6 +11,7 @@ export default {
 
 const symbolOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, key) => {
   acc[key] = key
+
   return acc
 }, {})
 

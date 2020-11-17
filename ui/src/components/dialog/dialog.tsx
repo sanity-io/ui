@@ -210,11 +210,13 @@ export const Dialog = forwardRef(
 
       if (target === preDivRef.current) {
         focusLastDescendant(cardElement)
+
         return
       }
 
       if (target === postDivRef.current) {
         focusFirstDescendant(cardElement)
+
         return
       }
     }, [])

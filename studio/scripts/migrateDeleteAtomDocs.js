@@ -8,6 +8,7 @@ async function migrate() {
   return Promise.all(
     docs.map(({_id: prevId}) => {
       console.log('deleting previous id', prevId)
+
       return client.delete(prevId)
     })
   )

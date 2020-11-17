@@ -5,6 +5,7 @@ import {Theme} from '../theme'
 export function createObject(props: string[], value: any) {
   return props.reduce((acc: {[key: string]: any}, prop) => {
     acc[prop] = value
+
     return acc
   }, {})
 }

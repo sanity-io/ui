@@ -9,11 +9,13 @@ describe('atoms/button', () => {
     const lightResult = render(<Button icon="add" text="Label" tone="positive" />, {
       scheme: 'light',
     })
+
     expect(await axe(lightResult.container.outerHTML)).toHaveNoViolations()
 
     const darkResult = render(<Button icon="add" text="Label" tone="positive" />, {
       scheme: 'dark',
     })
+
     expect(await axe(darkResult.container.outerHTML)).toHaveNoViolations()
   })
 

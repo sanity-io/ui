@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 
 export function useForwardedRef<T>(ref: React.ForwardedRef<T>): React.MutableRefObject<T | null> {
-  const innerRef = React.useRef<T | null>(null)
-  React.useEffect(() => {
+  const innerRef = useRef<T | null>(null)
+
+  useEffect(() => {
     if (!ref) return
+
     if (typeof ref === 'function') {
       ref(innerRef.current)
     } else {

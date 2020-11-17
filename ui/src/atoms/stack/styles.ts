@@ -25,6 +25,7 @@ export function stackSpaceStyles(props: {space: number[]; theme: Theme}) {
           grid-gap: ${space};
         `
       }
+
       return css`
         @media (min-width: ${props.theme.media[mqIndex - 1] / 16}rem) {
           grid-gap: ${space};

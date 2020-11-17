@@ -137,6 +137,7 @@ export function Autocomplete(props: Props) {
         setSelectedIndex((index) => {
           return (index + 1) % optionsLen
         })
+
         return
       }
 
@@ -147,6 +148,7 @@ export function Autocomplete(props: Props) {
         setSelectedIndex((index) => {
           return index === -1 ? optionsLen - 1 : (optionsLen + index - 1) % optionsLen
         })
+
         return
       }
 

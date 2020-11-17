@@ -74,6 +74,7 @@ export const Menu = forwardRef(
           setActiveIndex(nextIndex)
 
           if (element) element.focus()
+
           return
         }
 
@@ -86,6 +87,7 @@ export const Menu = forwardRef(
           setActiveIndex(nextIndex)
 
           if (element) element.focus()
+
           return
         }
       },
@@ -117,6 +119,7 @@ export const Menu = forwardRef(
       useCallback(
         (event) => {
           if (!isTopLayer) return
+
           if (event.key === 'Escape') {
             event.stopPropagation()
             if (onEscape) onEscape()

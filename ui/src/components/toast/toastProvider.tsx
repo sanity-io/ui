@@ -47,11 +47,15 @@ export function ToastProvider({children}: {children?: React.ReactNode}) {
 
       setState((prevState) => {
         const idx = prevState.toasts.findIndex((t) => t.id === id)
+
         if (idx > -1) {
           const toasts = prevState.toasts.slice(0)
+
           toasts.splice(idx, 1)
+
           return {...prevState, toasts}
         }
+
         return prevState
       })
 
