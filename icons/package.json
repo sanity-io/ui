@@ -22,11 +22,10 @@
   "devDependencies": {
     "@svgr/core": "^5.5.0",
     "@types/mkdirp": "^1.0.1",
-    "@types/prettier": "^2.1.5",
     "camelcase": "^6.2.0",
     "glob": "^7.1.6",
     "mkdirp": "^1.0.4",
-    "react": "17.0.1"
+    "react": "^17.0.1"
   },
   "peerDependencies": {
     "react": "^16.9 || ^17"

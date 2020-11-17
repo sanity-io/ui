@@ -13,24 +13,19 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@popperjs/core": "^2.4.4",
-    "@sanity/ui": "^1.0.0-alpha.7",
-    "@storybook/addon-actions": "^6.0.27",
-    "@storybook/addon-a11y": "^6.0.27",
+    "@sanity/icons": "^1.0.0-beta.2",
+    "@sanity/ui": "^1.0.0-beta.8",
+    "@storybook/addon-actions": "^6.1.5",
+    "@storybook/addon-a11y": "^6.1.5",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-knobs": "^6.0.27",
-    "@storybook/addon-links": "^6.0.27",
-    "@storybook/react": "^6.0.27",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-is": "^16.13.1",
-    "react-popper": "^2.2.3",
-    "react-refractor": "^2.1.2",
-    "styled-components": "^5.2.0"
+    "@storybook/addon-knobs": "^6.1.5",
+    "@storybook/addon-links": "^6.1.5",
+    "@storybook/react": "^6.1.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "@types/chance": "^1.1.0",
-    "@types/react-is": "^16.7.1",
     "@types/refractor": "^3.0.0",
     "@types/styled-components": "^5.1.4"
   }

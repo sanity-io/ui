@@ -16,20 +16,18 @@ module.exports = {
     // config.externals = (config.externals || []).concat('react')
 
     // Aliases
-    Object.assign(config.resolve.alias, {
-      '@sanity/color': path.join(ROOT_PATH, 'color/src'),
-      '@sanity/icons': path.join(ROOT_PATH, 'icons/src'),
-      '@sanity/logos': path.join(ROOT_PATH, 'logos/src'),
-      '@sanity/ui': path.join(ROOT_PATH, 'ui/src'),
+    config.resolve.alias = {
+      ...config.resolve.alias,
 
-      // React v17
-      // 'react/jsx-runtime': require.resolve('react/jsx-runtime'),
-      // 'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
+      '@sanity/color': path.resolve(ROOT_PATH, 'color/src'),
+      '@sanity/icons': path.resolve(ROOT_PATH, 'icons/src'),
+      '@sanity/logos': path.join(ROOT_PATH, 'logos/src'),
+      '@sanity/ui': path.resolve(ROOT_PATH, 'ui/src'),
 
       react: require.resolve('react'),
       'react-dom': require.resolve('react-dom'),
       'styled-components': require.resolve('styled-components'),
-    })
+    }
 
     return config
   },
