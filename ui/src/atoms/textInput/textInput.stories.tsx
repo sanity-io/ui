@@ -1,5 +1,5 @@
 import icons, {IconSymbol} from '@sanity/icons'
-import {Card, Container, Stack, Text, TextInput} from '@sanity/ui'
+import {Button, Card, Container, Stack, Text, TextInput} from '@sanity/ui'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
 import {withCentered} from '~/storybook/decorators'
@@ -14,18 +14,6 @@ const symbolOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, k
 
   return acc
 }, {})
-
-export const customValidity = () => {
-  const customValidity = text('Custom validity', 'Invalid value')
-
-  return (
-    <Container width={0}>
-      <Card padding={4}>
-        <TextInput customValidity={customValidity} />
-      </Card>
-    </Container>
-  )
-}
 
 export const plain = () => {
   const border = boolean('Border?', true, 'Props')
@@ -116,6 +104,21 @@ export const plain = () => {
             space={space}
             weight={weight}
           />
+        </Stack>
+      </Card>
+    </Container>
+  )
+}
+
+export const customValidity = () => {
+  const customValidity = text('Custom validity', 'Invalid value', 'Props') || undefined
+
+  return (
+    <Container as="form" onSubmit={(event) => event.preventDefault()} width={0}>
+      <Card padding={4}>
+        <Stack space={4}>
+          <TextInput customValidity={customValidity} />
+          <Button text="Submit" type="submit" />
         </Stack>
       </Card>
     </Container>
