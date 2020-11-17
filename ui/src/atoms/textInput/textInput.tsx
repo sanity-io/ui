@@ -16,6 +16,7 @@ import {Text} from '../text'
 
 interface TextInputProps extends ResponsiveRadiusProps {
   border?: boolean
+  customValidity?: string
   icon?: IconSymbol | React.ComponentType
   iconRight?: IconSymbol | React.ComponentType
   padding?: number | number[]
@@ -33,7 +34,6 @@ interface TextInputProps extends ResponsiveRadiusProps {
     | 'text'
     | 'week'
   weight?: string
-  customValidity?: string
 }
 
 const Root = styled.span<
@@ -112,8 +112,9 @@ export const TextInput = forwardRef(
     const ref = useForwardedRef(forwardedRef)
 
     useEffect(() => {
-      if (customValidity && ref.current) {
-        ref.current.setCustomValidity(customValidity)
+      if (ref.current) {
+        // Set custom validity message
+        ref.current.setCustomValidity(customValidity || '')
       }
     }, [customValidity, ref])
 
