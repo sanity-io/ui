@@ -115,7 +115,7 @@ function buildCardTone(hueKey: ColorHueKey) {
 
   return {
     enabled: {
-      bg: hue[100].hex,
+      bg: hue[50].hex,
       fg: hue[800].hex,
       muted: {
         fg: hue[700].hex,

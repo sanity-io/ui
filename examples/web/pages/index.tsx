@@ -1,4 +1,18 @@
-import {Box, Button, Card, Container, Heading, Inline, Label, Stack, Text} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Card,
+  Code,
+  Container,
+  Flex,
+  Grid,
+  Heading,
+  Icon,
+  Inline,
+  Label,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import React from 'react'
 import {AppLayout} from '$components'
 
@@ -38,7 +52,7 @@ function IndexPage() {
           </Label>
 
           <Box marginTop={[3, 4, 5]}>
-            <Container width={0}>
+            <Container width={1}>
               <Inline space={[3, 3, 4]} style={{textAlign: 'center'}}>
                 <Card style={{width: 136, height: 40}} tone="transparent" />
                 <Card style={{width: 156, height: 40}} tone="transparent" />
@@ -55,6 +69,95 @@ function IndexPage() {
             </Container>
           </Box>
         </Box>
+      </Card>
+
+      <Card borderTop flex={1}>
+        <Container width={2}>
+          <Box paddingX={[3, 4, 5]} paddingY={[5, 6, 7, 8]}>
+            <Grid columns={[1, 1, 12, 12]} gap={[3, 4, 5]}>
+              <Box column={[1, 1, 6, 5]}>
+                <Stack space={[3, 4, 5]}>
+                  <Heading size={[2, 2, 3, 4]}>Built to be built on</Heading>
+                  <Text muted size={[2, 3, 4]}>
+                    Developers love Sanity because it exceeds expectations from flexibility to
+                    functionality and beyond.
+                  </Text>
+                  <Card padding={[3, 4]} radius={2} tone="transparent">
+                    <Code size={[1, 2, 3]}>{`npm install -g @sanity/cli\nsanity init`}</Code>
+                  </Card>
+                </Stack>
+              </Box>
+              <Box column={[1, 1, 6, 7]}>
+                <Card radius={2} style={{paddingBottom: 'calc(2 / 3 * 100%)'}} tone="transparent" />
+              </Box>
+            </Grid>
+          </Box>
+
+          <Box paddingX={[3, 4, 5]} paddingBottom={[5, 6, 7, 8]}>
+            <Grid columns={[1, 1, 1, 3]} gap={[3, 4, 5]}>
+              <Flex align="flex-start">
+                <Box marginRight={3}>
+                  <Heading>
+                    <Icon symbol="cog" />
+                  </Heading>
+                </Box>
+                <Box flex={1}>
+                  <Heading size={[0, 0, 1]}>Modern platform</Heading>
+                  <Box marginTop={[2, 2, 3]} marginBottom={[3, 3, 4]}>
+                    <Text muted size={[2, 2, 3]}>
+                      Quickly build on a hosted content infrastructure with great APIs &
+                      technologies like GraphQL and JavaScript.
+                    </Text>
+                  </Box>
+                  <Text muted size={[2, 2, 3]}>
+                    <a href="#">Join the community &rarr;</a>
+                  </Text>
+                </Box>
+              </Flex>
+
+              <Flex align="flex-start">
+                <Box marginRight={3}>
+                  <Heading>
+                    <Icon symbol="code-block" />
+                  </Heading>
+                </Box>
+                <Box flex={1}>
+                  <Heading size={[0, 0, 1]}>Programmable</Heading>
+                  <Box marginTop={[2, 2, 3]} marginBottom={[3, 3, 4]}>
+                    <Text muted size={[2, 2, 3]}>
+                      Building blocks that don’t box you in. Jumpstart your own collaborative
+                      workspace with an open source editing environment that empower everyone on
+                      your team.
+                    </Text>
+                  </Box>
+                  <Text muted size={[2, 2, 3]}>
+                    <a href="#">Explore Sanity Studio &rarr;</a>
+                  </Text>
+                </Box>
+              </Flex>
+
+              <Flex align="flex-start">
+                <Box marginRight={3}>
+                  <Heading>
+                    <Icon symbol="binary-document" />
+                  </Heading>
+                </Box>
+                <Box flex={1}>
+                  <Heading size={[0, 0, 1]}>Structured content</Heading>
+                  <Box marginTop={[2, 2, 3]} marginBottom={[3, 3, 4]}>
+                    <Text muted size={[2, 2, 3]}>
+                      Sanity lets you treat content as data so you can flow it across APIs to power
+                      experiences wherever you might need them.
+                    </Text>
+                  </Box>
+                  <Text muted size={[2, 2, 3]}>
+                    <a href="#">Discover Structured Content &rarr;</a>
+                  </Text>
+                </Box>
+              </Flex>
+            </Grid>
+          </Box>
+        </Container>
       </Card>
 
       <Card flex={1} paddingX={[3, 4, 5]} paddingY={[5, 6, 7, 8]} scheme="dark">

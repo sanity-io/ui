@@ -1,4 +1,4 @@
-import {Box, Button, Card, Container, Flex, Inline} from '@sanity/ui'
+import {Box, Button, Card, Container, Flex, Inline, Menu, MenuButton, MenuItem} from '@sanity/ui'
 import React from 'react'
 
 export function AppLayout({children}: {children?: React.ReactNode}) {
@@ -10,19 +10,47 @@ export function AppLayout({children}: {children?: React.ReactNode}) {
             <Card marginRight={4} radius={2} style={{width: 120}} tone="critical" />
             <Box flex={1}>
               <Inline space={1}>
-                <Button
-                  iconRight="chevron-down"
-                  mode="bleed"
-                  padding={2}
-                  space={2}
-                  text="Platform"
+                <MenuButton
+                  button={
+                    <Button
+                      iconRight="chevron-down"
+                      mode="bleed"
+                      padding={2}
+                      space={2}
+                      text="Platform"
+                    />
+                  }
+                  id="platform-menu"
+                  menu={
+                    <Menu>
+                      <MenuItem text="Structured content" />
+                      <MenuItem text="Sanity Studio" />
+                      <MenuItem text="Developer experience" />
+                      <MenuItem text="Solutions" />
+                      <MenuItem text="Case studies" />
+                    </Menu>
+                  }
                 />
-                <Button
-                  iconRight="chevron-down"
-                  mode="bleed"
-                  padding={2}
-                  space={2}
-                  text="Resources"
+                <MenuButton
+                  button={
+                    <Button
+                      iconRight="chevron-down"
+                      mode="bleed"
+                      padding={2}
+                      space={2}
+                      text="Resources"
+                    />
+                  }
+                  id="resources-menu"
+                  menu={
+                    <Menu>
+                      <MenuItem text="Docs" />
+                      <MenuItem text="Reference" />
+                      <MenuItem text="Guides" />
+                      <MenuItem text="Plugins &amp; tools" />
+                      <MenuItem text="Get started" />
+                    </Menu>
+                  }
                 />
                 <Button mode="bleed" padding={2} text="Pricing" />
                 <Button mode="bleed" padding={2} text="Blog" />
