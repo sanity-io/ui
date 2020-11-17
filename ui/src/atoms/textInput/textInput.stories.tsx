@@ -1,7 +1,8 @@
 import icons, {IconSymbol} from '@sanity/icons'
 import {Card, Container, Stack, Text, TextInput} from '@sanity/ui'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
-import React from 'react'
+import React, {useState} from 'react'
+import {useCallback} from 'react'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -108,4 +109,50 @@ export const plain = () => {
       </Card>
     </Container>
   )
+}
+
+export const typed = () => {
+  const type = select(
+    'Type',
+    {
+      date: 'date',
+      'datetime-local': 'datetime-local',
+      email: 'email',
+      month: 'month',
+      number: 'number',
+      password: 'password',
+      tel: 'tel',
+      time: 'time',
+      text: 'text',
+      week: 'week',
+    },
+    'text',
+    'Props'
+  )
+
+  return <Example type={type} />
+}
+
+function Example({
+  type,
+}: {
+  type:
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'tel'
+    | 'time'
+    | 'text'
+    | 'week'
+}) {
+  const [value, setValue] = useState('')
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value)
+  }, [])
+
+  return <TextInput onChange={handleChange} type={type} value={value} />
 }

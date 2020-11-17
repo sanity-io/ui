@@ -20,6 +20,17 @@ interface TextInputProps extends ResponsiveRadiusProps {
   padding?: number | number[]
   size?: number | number[]
   space?: number | number[]
+  type?:
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'tel'
+    | 'time'
+    | 'text'
+    | 'week'
   weight?: string
 }
 
@@ -78,7 +89,7 @@ const IconRightBox = styled(Box)`
 
 export const TextInput = forwardRef(
   (
-    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'size' | 'type'>,
+    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'size'>,
     ref: React.Ref<HTMLInputElement>
   ) => {
     const {
@@ -90,6 +101,7 @@ export const TextInput = forwardRef(
       radius = 1,
       size = 2,
       space = 3,
+      type = 'text',
       ...restProps
     } = props
     const {scheme} = useCard()
@@ -104,7 +116,7 @@ export const TextInput = forwardRef(
           padding={padding}
           ref={ref}
           space={space}
-          type="text"
+          type={type}
           uiSize={size}
         />
 
