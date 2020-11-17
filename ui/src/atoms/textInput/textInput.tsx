@@ -89,7 +89,7 @@ const IconRightBox = styled(Box)`
 
 export const TextInput = forwardRef(
   (
-    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'size'>,
+    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'size' | 'type'>,
     ref: React.Ref<HTMLInputElement>
   ) => {
     const {
