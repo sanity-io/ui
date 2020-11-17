@@ -26,6 +26,7 @@ interface TextInputProps extends ResponsiveRadiusProps {
     | 'date'
     | 'datetime-local'
     | 'email'
+    | 'url'
     | 'month'
     | 'number'
     | 'password'
