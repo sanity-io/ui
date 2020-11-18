@@ -5,19 +5,22 @@ import {LayerProvider} from './provider'
 
 interface LayerProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  depth?: number
 }
 
 const Root = styled.div<{depth: number}>`
   position: relative;
 `
 
-export const Layer = forwardRef((props: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
-  return (
-    <LayerProvider id={props.id}>
-      <LayerChildren {...props} ref={ref} />
-    </LayerProvider>
-  )
-})
+export const Layer = forwardRef(
+  ({depth, ...restProps}: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
+    return (
+      <LayerProvider baseDepth={depth} id={restProps.id}>
+        <LayerChildren {...restProps} ref={ref} />
+      </LayerProvider>
+    )
+  }
+)
 
 Layer.displayName = 'Layer'
 
