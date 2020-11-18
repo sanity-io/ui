@@ -7,6 +7,7 @@
     "/dist"
   ],
   "license": "MIT",
+  "sideEffects": false,
   "scripts": {
     "build": "run-p build-*",
     "build-cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
@@ -26,7 +27,8 @@
     "@reach/auto-id": "^0.11.2",
     "@sanity/color": "^2.0.7",
     "@sanity/icons": "^1.0.0-beta.1",
-    "polished": "^4.0.3"
+    "polished": "^4.0.3",
+    "react-is": "^16.0.0"
   },
   "devDependencies": {
     "@popperjs/core": "^2.4.4",
@@ -61,6 +63,7 @@
     "@popperjs/core": "^2.4",
     "framer-motion": "^2.9",
     "react": "^16.9 || ^17",
+    "react-dom": "^16.9 || ^17",
     "react-popper": "^2.2",
     "react-refractor": "^2.1",
     "styled-components": "^5.2"
