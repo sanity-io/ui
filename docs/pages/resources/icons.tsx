@@ -1,5 +1,6 @@
-import {Box, Container, Heading, Stack} from '@sanity/ui'
-import React from 'react'
+import icons from '@sanity/icons'
+import {Box, Card, Code, Grid, Heading, Stack, Text} from '@sanity/ui'
+import React, {createElement} from 'react'
 import {AppLayout} from '$components'
 import {ResourcesPageLayout} from '$components/_resourcesPage/layout'
 
@@ -7,15 +8,29 @@ function IconsPage() {
   return (
     <AppLayout>
       <ResourcesPageLayout>
-        <Stack space={[4, 4, 5, 6]}>
-          <Container as="main" width={2} style={{height: '100%'}}>
-            <Box as="main" paddingX={[4, 5, 6, 7]} paddingY={[5, 6, 7, 8]}>
-              <Heading as="h1" size={[2, 2, 3, 4]}>
-                Icons
-              </Heading>
-            </Box>
-          </Container>
-        </Stack>
+        <Box as="main" padding={[4, 5, 6, 7]}>
+          <Stack space={[4, 4, 5, 6]}>
+            <Heading as="h1" size={[2, 2, 3, 4]}>
+              Icons
+            </Heading>
+
+            <Grid columns={[1, 1, 2, 3, 4]} gap={2}>
+              {Object.keys(icons).map((iconSymbol) => (
+                <Card
+                  key={iconSymbol}
+                  padding={[3, 3, 4]}
+                  tone="transparent"
+                  style={{textAlign: 'center'}}
+                >
+                  <Stack space={[3, 3, 4]}>
+                    <Text size={[3, 3, 4]}>{createElement((icons as any)[iconSymbol])}</Text>
+                    <Code size={1}>{iconSymbol}</Code>
+                  </Stack>
+                </Card>
+              ))}
+            </Grid>
+          </Stack>
+        </Box>
       </ResourcesPageLayout>
     </AppLayout>
   )
