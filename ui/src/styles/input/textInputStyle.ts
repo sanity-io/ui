@@ -49,7 +49,7 @@ function rootColorStyle({border, disabled, scheme, theme}: TextInputRootStylePro
         '&:hover': _textInputColor(tone.hovered, border),
       },
 
-      '&:focus': {
+      '&:focus-within': {
         boxShadow: '0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color)',
       },
     } as CSSObject,
