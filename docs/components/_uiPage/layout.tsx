@@ -8,7 +8,9 @@ const Root = styled(Card)`
     position: relative;
 
     @media (min-width: ${rem(theme.media[1])}) {
-      display: grid;
+      && {
+        display: grid;
+      }
       grid-template-columns: minmax(10rem, 18rem) 3fr;
     }
   `};
@@ -87,7 +89,7 @@ export function UIPageLayout({children}: {children: React.ReactNode}) {
           />
         </NarrowDeviceMenu>
         <ContentCard>
-          <Container as="main" width={2} style={{height: '100%'}}>
+          <Container as="main" width={2}>
             <Box as="main" paddingX={[4, 5, 6, 7]} paddingY={[5, 6, 7, 8]}>
               {children}
             </Box>

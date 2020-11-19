@@ -1,20 +1,16 @@
+import {SanityMonogram} from '@sanity/logos'
 import {Box, Button, Card, Flex, Inline, Switch} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
-import styled from 'styled-components'
 import {useApp} from './hooks'
-
-const Root = styled(Flex)`
-  height: 100%;
-`
 
 export function AppLayout({children}: {children: React.ReactNode}) {
   const {colorScheme, setColorScheme} = useApp()
   const router = useRouter()
 
   return (
-    <Root direction="column">
+    <Flex direction="column" height="fill">
       <Card padding={[2, 3, 4]} borderBottom>
         <Flex align="center">
           <Box flex={1}>
@@ -25,13 +21,14 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     as="a"
                     mode="bleed"
                     padding={[1, 2, 3]}
+                    radius={3}
                     size={[2, 2, 3]}
-                    text={<strong>Sanity Design</strong>}
+                    text={<SanityMonogram />}
                   />
                 </Link>
               </Box>
               <Inline space={2}>
-                <Link href="/design" passHref>
+                {/* <Link href="/design" passHref>
                   <Button
                     as="a"
                     mode="bleed"
@@ -40,7 +37,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     size={[2, 2, 3]}
                     text="Design"
                   />
-                </Link>
+                </Link> */}
                 <Link href="/ui" passHref>
                   <Button
                     as="a"
@@ -51,16 +48,6 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     text="UI"
                   />
                 </Link>
-                <Link href="/arcade" passHref>
-                  <Button
-                    as="a"
-                    mode="bleed"
-                    padding={[1, 2, 3]}
-                    selected={router.asPath.startsWith('/arcade')}
-                    size={[2, 2, 3]}
-                    text="Arcade"
-                  />
-                </Link>
                 <Link href="/resources" passHref>
                   <Button
                     as="a"
@@ -69,6 +56,16 @@ export function AppLayout({children}: {children: React.ReactNode}) {
                     selected={router.asPath.startsWith('/resources')}
                     size={[2, 2, 3]}
                     text="Resources"
+                  />
+                </Link>
+                <Link href="/arcade" passHref>
+                  <Button
+                    as="a"
+                    mode="bleed"
+                    padding={[1, 2, 3]}
+                    selected={router.asPath.startsWith('/arcade')}
+                    size={[2, 2, 3]}
+                    text="Arcade"
                   />
                 </Link>
               </Inline>
@@ -92,6 +89,6 @@ export function AppLayout({children}: {children: React.ReactNode}) {
       </Card>
 
       {children}
-    </Root>
+    </Flex>
   )
 }

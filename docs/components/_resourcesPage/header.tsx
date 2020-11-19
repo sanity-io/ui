@@ -1,4 +1,4 @@
-import {Box, Stack, Text} from '@sanity/ui'
+import {Box, Button, Stack} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
@@ -14,38 +14,30 @@ const Root = styled(Box)`
 function NavLink(props: {children: React.ReactNode; href: string}) {
   const router = useRouter()
 
-  if (props.href === router.asPath) {
-    return <>{props.children}</>
-  }
-
   return (
     <Link href={props.href}>
-      <a>{props.children}</a>
+      <Button
+        as="a"
+        justify="flex-start"
+        mode="bleed"
+        padding={[1, 2, 3]}
+        text={props.children}
+        selected={props.href === router.asPath}
+        size={[2, 2, 2, 3]}
+      />
     </Link>
-  )
-}
-
-function ResourcesPageHeaderLink({children, href}: {children: React.ReactNode; href: string}) {
-  return (
-    <Text as="li" size={[2, 2, 3]}>
-      <NavLink href={href}>{children}</NavLink>
-    </Text>
   )
 }
 
 export function ResourcesPageHeader() {
   return (
     <Root data-name="ResourcesPageHeader" forwardedAs="header">
-      <Box as="nav" padding={[3, 4, 5]}>
-        <Stack space={[5, 5, 6]}>
-          <Stack space={[3, 3, 4]}>
-            <Stack as="ul" space={[3, 3, 4]}>
-              <ResourcesPageHeaderLink href="/resources">Introduction</ResourcesPageHeaderLink>
-              <ResourcesPageHeaderLink href="/resources/logos">Logos</ResourcesPageHeaderLink>
-              <ResourcesPageHeaderLink href="/resources/colors">Colors</ResourcesPageHeaderLink>
-              <ResourcesPageHeaderLink href="/resources/icons">Icons</ResourcesPageHeaderLink>
-            </Stack>
-          </Stack>
+      <Box as="nav" padding={[2, 3, 4]}>
+        <Stack space={1}>
+          <NavLink href="/resources">Introduction</NavLink>
+          <NavLink href="/resources/logos">Logos</NavLink>
+          <NavLink href="/resources/colors">Colors</NavLink>
+          <NavLink href="/resources/icons">Icons</NavLink>
         </Stack>
       </Box>
     </Root>

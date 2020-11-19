@@ -44,7 +44,7 @@ export function NavDrawer({onHide, open}: {onHide: () => void; open: boolean}) {
     <Root aria-hidden={!open} open={open}>
       <OverlayBg open={open} />
       <DrawerCard open={open}>
-        <Flex direction="column" style={{height: '100%'}}>
+        <Flex direction="column" height="fill">
           <Card borderBottom>
             <Flex>
               <Box padding={4} flex={1}>

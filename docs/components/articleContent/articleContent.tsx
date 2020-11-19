@@ -21,13 +21,7 @@ function buildSerializers(toc: any) {
     const language: 'sh' = props.node.language
 
     return (
-      <Card
-        marginY={[2, 2, 3, 4]}
-        padding={[3, 3, 4, 5]}
-        radius={2}
-        shadow={1}
-        style={{overflow: 'auto'}}
-      >
+      <Card marginY={[2, 2, 3, 4]} overflow="auto" padding={[3, 3, 4, 5]} radius={2} shadow={1}>
         <Code language={CODE_LANGUAGES[language] || language} muted size={[2, 2, 3]}>
           {props.node.code}
         </Code>

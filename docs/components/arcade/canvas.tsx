@@ -51,7 +51,7 @@ export function Canvas({
 
   if (result && result.type === 'error') {
     return (
-      <Card style={{height: '100%', overflow: 'auto'}} tone="critical">
+      <Card height="fill" overflow="auto" tone="critical">
         <Box padding={4}>
           <Code>{result.error.message}</Code>
         </Box>

@@ -8,7 +8,9 @@ const Root = styled(Card)`
     position: relative;
 
     @media (min-width: ${rem(theme.media[1])}) {
-      display: grid;
+      && {
+        display: grid;
+      }
       grid-template-columns: minmax(10rem, 18rem) 3fr;
     }
   `};

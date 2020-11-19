@@ -8,7 +8,7 @@ function ResourcesPage() {
     <AppLayout>
       <ResourcesPageLayout>
         <Stack space={[4, 4, 5, 6]}>
-          <Container as="main" width={2} style={{height: '100%'}}>
+          <Container as="main" height="fill" width={2}>
             <Box as="main" paddingX={[4, 5, 6, 7]} paddingY={[5, 6, 7, 8]}>
               <Heading as="h1" size={[2, 2, 3, 4]}>
                 Resources
