@@ -1,13 +1,14 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {gridStyle, GridStyleProps} from '../../styles'
+import {boxStyle, BoxStyleProps, gridStyle, GridStyleProps} from '../../styles'
 
-const Root = styled.div(gridStyle)
+const Root = styled.div<BoxStyleProps & GridStyleProps>(boxStyle, gridStyle)
 
 export const Grid = forwardRef(
   (
-    props: GridStyleProps &
-      React.HTMLProps<HTMLDivElement> & {
+    props: BoxStyleProps &
+      GridStyleProps &
+      Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'> & {
         as?: React.ElementType | keyof JSX.IntrinsicElements
       },
     ref

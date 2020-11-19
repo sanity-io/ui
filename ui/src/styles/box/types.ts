@@ -1,3 +1,7 @@
+export type BoxSizing = 'content' | 'border'
+
 export interface BoxStyleProps {
-  sizing?: 'content' | 'border'
+  height?: 'stretch' | 'fill'
+  overflow?: 'visible' | 'hidden' | 'auto'
+  sizing?: BoxSizing
 }

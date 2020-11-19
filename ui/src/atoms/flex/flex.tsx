@@ -1,12 +1,23 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {flexStyle, FlexStyleProps, flexItemStyle, FlexItemStyleProps} from '../../styles'
+import {
+  boxStyle,
+  BoxStyleProps,
+  flexStyle,
+  FlexStyleProps,
+  flexItemStyle,
+  FlexItemStyleProps,
+} from '../../styles'
 
-interface FlexProps extends FlexStyleProps {
+interface FlexProps extends BoxStyleProps, FlexStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div<FlexStyleProps & FlexItemStyleProps>(flexStyle, flexItemStyle)
+const Root = styled.div<BoxStyleProps & FlexStyleProps & FlexItemStyleProps>(
+  boxStyle,
+  flexStyle,
+  flexItemStyle
+)
 
 export const Flex = forwardRef((props: React.HTMLProps<HTMLDivElement> & FlexProps, ref) => {
   const {direction, ...restProps} = props

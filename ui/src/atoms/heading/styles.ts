@@ -33,7 +33,7 @@ export function headingBaseStyles(props: {theme: Theme}) {
       }
     }
 
-    & > svg {
+    & [data-sanity-icon] {
       vertical-align: baseline;
     }
   `

@@ -30,14 +30,16 @@ const Root = styled.div<
     FlexItemStyleProps
 >(boxStyle, gridItemStyle, flexItemStyle, responsiveMarginStyle, responsivePaddingStyle)
 
-export const Box = forwardRef((props: React.HTMLProps<HTMLDivElement> & BoxProps, ref) => {
-  const {as: asProp = 'div', margin = 0, padding = 0, ...restProps} = props
+export const Box = forwardRef(
+  (props: Omit<React.HTMLProps<HTMLDivElement>, 'height'> & BoxProps, ref) => {
+    const {as: asProp = 'div', margin = 0, padding = 0, ...restProps} = props
 
-  return (
-    <Root data-ui="Box" {...restProps} as={asProp} margin={margin} padding={padding} ref={ref}>
-      {props.children}
-    </Root>
-  )
-})
+    return (
+      <Root data-ui="Box" {...restProps} as={asProp} margin={margin} padding={padding} ref={ref}>
+        {props.children}
+      </Root>
+    )
+  }
+)
 
 Box.displayName = 'Box'

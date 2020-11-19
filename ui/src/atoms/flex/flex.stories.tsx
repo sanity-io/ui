@@ -27,7 +27,8 @@ export const plain = () => (
       'row',
       'Props'
     )}
-    style={{width: '100%', height: '100%'}}
+    height="fill"
+    style={{width: '100%'}}
   >
     <DebugCard flex={1}>
       <Code>1</Code>

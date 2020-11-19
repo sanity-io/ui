@@ -50,7 +50,7 @@ export function textBaseStyles(props: {theme: Theme; muted?: boolean}) {
       font-weight: ${weights.bold};
     }
 
-    & > svg {
+    & [data-sanity-icon] {
       vertical-align: baseline;
     }
   `

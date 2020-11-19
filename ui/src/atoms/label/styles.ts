@@ -28,7 +28,7 @@ export function labelBaseStyles(props: {theme: Theme; muted: boolean}) {
       border-radius: 1px;
     }
 
-    & svg {
+    & [data-sanity-icon] {
       vertical-align: baseline;
     }
   `

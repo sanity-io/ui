@@ -18,7 +18,7 @@ const STATUS_CARD_TONE: {[key: string]: CardTone} = {
 }
 
 export function Toast(
-  props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref' | 'title'>
+  props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>
 ) {
   const {closable, description, onClose, title, status, ...restProps} = props
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'

@@ -147,7 +147,7 @@ export function codeBaseStyles(props: {muted: boolean; theme: Theme}) {
       border-radius: 1px;
     }
 
-    & svg {
+    & [data-sanity-icon] {
       vertical-align: baseline;
     }
   `

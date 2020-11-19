@@ -63,34 +63,36 @@ const Root = styled.div<
   card
 )
 
-export const Card = forwardRef((props: React.HTMLProps<HTMLDivElement> & CardProps, ref) => {
-  const parentCard = useCard()
-  const {
-    as: asProp,
-    margin = 0,
-    padding = 0,
-    radius = 0,
-    scheme = parentCard.scheme,
-    tone = 'default',
-    ...restProps
-  } = props
-  const as = isValidElementType(asProp) ? asProp : 'div'
+export const Card = forwardRef(
+  (props: Omit<React.HTMLProps<HTMLDivElement>, 'height'> & CardProps, ref) => {
+    const parentCard = useCard()
+    const {
+      as: asProp,
+      margin = 0,
+      padding = 0,
+      radius = 0,
+      scheme = parentCard.scheme,
+      tone = 'default',
+      ...restProps
+    } = props
+    const as = isValidElementType(asProp) ? asProp : 'div'
 
-  return (
-    <CardProvider scheme={scheme} tone={tone}>
-      <Root
-        data-ui="Card"
-        {...restProps}
-        as={as}
-        margin={margin}
-        padding={padding}
-        radius={radius}
-        ref={ref}
-        scheme={scheme}
-        tone={tone}
-      />
-    </CardProvider>
-  )
-})
+    return (
+      <CardProvider scheme={scheme} tone={tone}>
+        <Root
+          data-ui="Card"
+          {...restProps}
+          as={as}
+          margin={margin}
+          padding={padding}
+          radius={radius}
+          ref={ref}
+          scheme={scheme}
+          tone={tone}
+        />
+      </CardProvider>
+    )
+  }
+)
 
 Card.displayName = 'Card'

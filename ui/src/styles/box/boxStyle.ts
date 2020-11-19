@@ -7,9 +7,16 @@ const BOX_SIZING: {[key: string]: Property.BoxSizing} = {
   border: 'border-box',
 }
 
-export function boxStyle({sizing}: BoxStyleProps): CSSObject {
+const HEIGHTS = {
+  stretch: 'stretch',
+  fill: '100%',
+}
+
+export function boxStyle({height, overflow, sizing}: BoxStyleProps): CSSObject {
   return {
-    display: 'block',
     boxSizing: sizing && BOX_SIZING[sizing],
+    display: 'block',
+    height: height && HEIGHTS[height],
+    overflow,
   }
 }

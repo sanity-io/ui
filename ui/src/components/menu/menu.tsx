@@ -20,7 +20,7 @@ const Root = styled(Box)`
 `
 
 export const Menu = forwardRef(
-  (props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>, ref) => {
+  (props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>, ref) => {
     const {children, focusLast, onClickOutside, onEscape, onItemClick, ...restProps} = props
     const {isTopLayer} = useLayer()
     const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
