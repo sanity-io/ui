@@ -154,6 +154,12 @@ const themeColor: ThemeColor = {
           border: hues.gray[700].hex,
           placeholder: hues.gray[600].hex,
         },
+        invalid: {
+          bg: hues.red[900].hex,
+          fg: hues.red[100].hex,
+          border: hues.red[800].hex,
+          placeholder: hues.red[600].hex,
+        },
       },
     },
   },

@@ -237,6 +237,7 @@ export interface ThemeColor {
         enabled: ThemeInputStateColor
         disabled: ThemeInputStateColor
         hovered: ThemeInputStateColor
+        invalid: ThemeInputStateColor
       }
     }
   }

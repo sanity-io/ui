@@ -52,6 +52,12 @@ function rootColorStyle({border, disabled, scheme, theme}: TextInputRootStylePro
       '&:focus-within': {
         boxShadow: '0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color)',
       },
+
+      '& > :invalid': {
+        backgroundColor: tone.invalid.bg,
+        color: tone.invalid.fg,
+        boxShadow: `inset 0 0 0 1px ${tone.invalid.border}`,
+      },
     } as CSSObject,
   ]
 }
