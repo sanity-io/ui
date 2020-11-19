@@ -1,0 +1,35 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ '12', '14' ]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build:packages
+
+      - name: Lint code
+        run: yarn lint
+
+      - name: Type check
+        run: yarn type-check
+
+      - name: Run tests
+        run: yarn test
