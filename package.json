@@ -50,7 +50,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "run-s build:packages lint test type-check"
+      "pre-commit": "run-s lint type-check test"
     }
   }
 }
