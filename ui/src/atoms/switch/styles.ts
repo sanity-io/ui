@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 
 /* Root */
 export function switchBaseStyles() {
@@ -32,7 +32,7 @@ export function switchInputStyles() {
 }
 
 /* Representation */
-export function switchRepresentationStyles(props: {scheme: ColorSchemeKey; theme: Theme}) {
+export function switchRepresentationStyles(props: {scheme: ThemeColorSchemeKey; theme: Theme}) {
   const {scheme, theme} = props
   const {switch: switchInput} = theme.input
   const _scheme = theme.color[scheme] || theme.color.light

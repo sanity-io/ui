@@ -3,7 +3,7 @@ import React, {forwardRef, useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
 import styled, {css} from 'styled-components'
 import {rem} from '../../styles'
-import {AvatarColorKey, ColorSchemeKey, Theme, useTheme} from '../../theme'
+import {AvatarColorKey, ThemeColorSchemeKey, Theme, useTheme} from '../../theme'
 import {useCard} from '../card'
 import {Text} from '../text'
 import {avatarTheme} from './theme'
@@ -111,8 +111,8 @@ const Stroke = styled.ellipse`
   }
 `
 
-const Initials = styled.div<{scheme: ColorSchemeKey}>(
-  (props: {scheme: ColorSchemeKey; theme: Theme}) => {
+const Initials = styled.div<{scheme: ThemeColorSchemeKey}>(
+  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
     const {scheme, theme} = props
     const tone = theme.color[scheme].card.tones.default
 

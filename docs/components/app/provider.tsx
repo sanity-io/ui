@@ -1,6 +1,6 @@
 import {
   CardProvider,
-  ColorSchemeKey,
+  ThemeColorSchemeKey,
   LayerProvider,
   studioTheme,
   ThemeProvider,
@@ -13,7 +13,9 @@ import {GlobalStyle} from './globalStyle'
 
 export function AppProvider({children}: {children?: React.ReactNode}) {
   const prefersDark = usePrefersDark()
-  const [colorScheme, setColorScheme] = useState<ColorSchemeKey>(prefersDark ? 'dark' : 'light')
+  const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
+    prefersDark ? 'dark' : 'light'
+  )
 
   useEffect(() => setColorScheme(prefersDark ? 'dark' : 'light'), [prefersDark])
 

@@ -1,11 +1,16 @@
 import {css} from 'styled-components'
 import {Theme} from '../../theme'
 
-export function textBaseStyles(props: {theme: Theme; muted?: boolean}) {
-  const {muted, theme} = props
+export function textBaseStyles(props: {accent?: boolean; theme: Theme; muted?: boolean}) {
+  const {accent, muted, theme} = props
   const {weights} = props.theme.fonts.text
 
   return css`
+    ${accent &&
+    css`
+      color: var(--card-accent-fg-color);
+    `}
+
     ${muted &&
     css`
       color: var(--card-muted-fg-color);

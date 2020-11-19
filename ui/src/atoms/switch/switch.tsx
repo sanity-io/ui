@@ -1,7 +1,7 @@
 import React, {forwardRef, useEffect} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef} from '../../hooks'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {
   switchBaseStyles,
@@ -15,9 +15,9 @@ interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Root = styled.span<{scheme: ColorSchemeKey}>(switchBaseStyles)
-const Input = styled.input<{scheme: ColorSchemeKey}>(switchInputStyles)
-const Representation = styled.span<{scheme: ColorSchemeKey}>(switchRepresentationStyles)
+const Root = styled.span<{scheme: ThemeColorSchemeKey}>(switchBaseStyles)
+const Input = styled.input<{scheme: ThemeColorSchemeKey}>(switchInputStyles)
+const Representation = styled.span<{scheme: ThemeColorSchemeKey}>(switchRepresentationStyles)
 const Track = styled.span(switchTrackStyles)
 const Thumb = styled.span<{checked?: boolean; indeterminate?: boolean}>(switchThumbStyles)
 

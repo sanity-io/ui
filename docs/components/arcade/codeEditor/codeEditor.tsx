@@ -1,4 +1,4 @@
-import {Box, BoxProps, ColorSchemeKey, useCard} from '@sanity/ui'
+import {Box, BoxProps, ThemeColorSchemeKey, useCard} from '@sanity/ui'
 import codemirror from 'codemirror'
 import React, {useCallback, useEffect, useRef} from 'react'
 import {UnControlled as CodeMirror} from 'react-codemirror2'
@@ -15,7 +15,7 @@ interface CodeEditorProps {
   onCursorChange?: (line: number, column: number) => void
 }
 
-const Root = styled(Box)<{scheme: ColorSchemeKey}>(codeEditor, codeEditorSyntax)
+const Root = styled(Box)<{scheme: ThemeColorSchemeKey}>(codeEditor, codeEditorSyntax)
 
 export function CodeEditor(props: React.HTMLProps<HTMLDivElement> & BoxProps & CodeEditorProps) {
   const {code, cursor, mode = 'jsx', onCodeChange, onCursorChange, ...restProps} = props

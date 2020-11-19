@@ -5,9 +5,9 @@ import {ThemeProps} from '../types'
 import {FontKey, ResponsiveFontProps} from './types'
 
 export function responsiveFont(fontKey: FontKey, props: ResponsiveFontProps & ThemeProps) {
-  const {size, theme} = props
+  const {size, theme, weight} = props
   const {family, sizes, weights} = theme.fonts[fontKey]
-  const fontWeight = weights[props.weight || 'regular']
+  const fontWeight = (weight && weights[weight]) || weights['regular']
 
   // @todo: make this configurable
   const defaultSize = sizes[2]

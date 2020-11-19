@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {Box, Button, Card, Container, Flex, Text, useCard} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
 
 interface DialogProps {
@@ -13,12 +13,12 @@ interface DialogProps {
   header?: React.ReactNode
   id: string
   onClose?: () => void
-  scheme?: ColorSchemeKey
+  scheme?: ThemeColorSchemeKey
   width?: number
 }
 
-const Root = styled(Layer)<{scheme: ColorSchemeKey}>(
-  ({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
+const Root = styled(Layer)<{scheme: ThemeColorSchemeKey}>(
+  ({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
     const tone = theme.color[scheme].card.tones.default
 
     return css`
@@ -105,7 +105,7 @@ const DialogCard = forwardRef(
       header: React.ReactNode
       id: string
       onClose?: () => void
-      scheme: ColorSchemeKey
+      scheme: ThemeColorSchemeKey
       width: number
     },
     ref

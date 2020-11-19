@@ -16,11 +16,29 @@ export const plain = () => {
     'Props'
   )
 
+  const weight = select(
+    'Weight',
+    {
+      'Regular (default)': undefined,
+      Medium: 'medium',
+      Semibold: 'semibold',
+      Bold: 'bold',
+    },
+    undefined,
+    'Props'
+  )
+
   return (
     <Card>
-      <Label size={size}>Hello, world</Label>
-      <Label size={size}>Hello, world</Label>
-      <Label size={size}>Hello, world</Label>
+      <Label size={size} weight={weight}>
+        Hello, world
+      </Label>
+      <Label size={size} weight={weight}>
+        Hello, world
+      </Label>
+      <Label size={size} weight={weight}>
+        Hello, world
+      </Label>
     </Card>
   )
 }

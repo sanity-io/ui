@@ -19,7 +19,7 @@ import {
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
 } from '../../styles'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {CardProvider} from './cardProvider'
 import {useCard} from './hooks'
 import {card} from './styles'
@@ -27,7 +27,7 @@ import {CardColorProps, CardTone} from './types'
 
 export interface CardBaseProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  scheme?: ColorSchemeKey
+  scheme?: ThemeColorSchemeKey
   tone?: CardTone
 }
 

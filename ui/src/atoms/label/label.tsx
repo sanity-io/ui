@@ -4,9 +4,11 @@ import {responsiveLabelFont} from '../../styles'
 import {labelBaseStyles} from './styles'
 
 interface LabelProps {
+  accent?: boolean
   as?: React.ElementType | keyof JSX.IntrinsicElements
   muted?: boolean
   size?: number | number[]
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
 const Root = styled.div<{muted: boolean; size: number[]}>(labelBaseStyles, responsiveLabelFont)

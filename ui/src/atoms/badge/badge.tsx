@@ -6,7 +6,7 @@ import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
 } from '../../styles'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {Label} from '../label'
 import {badge} from './styles'
@@ -21,7 +21,7 @@ export interface BadgeProps extends ResponsivePaddingStyleProps, ResponsiveRadiu
 
 const Root = styled.div<{
   mode: BadgeMode
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
   tone: BadgeTone
   radius: number[]
 }>(responsivePaddingStyle, responsiveRadiusStyle, badge)

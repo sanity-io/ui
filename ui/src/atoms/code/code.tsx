@@ -2,7 +2,7 @@ import React, {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import styled from 'styled-components'
 import {responsiveCodeFontStyle} from '../../styles'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {codeBaseStyles} from './styles'
 
@@ -14,7 +14,7 @@ interface CodeProps {
   weight?: string
 }
 
-const Root = styled.pre<{muted: boolean; scheme: ColorSchemeKey; size: number[]}>(
+const Root = styled.pre<{muted: boolean; scheme: ThemeColorSchemeKey; size: number[]}>(
   codeBaseStyles,
   responsiveCodeFontStyle
 )

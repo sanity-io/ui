@@ -1,12 +1,12 @@
 import React from 'react'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {CardContext} from './cardContext'
 import {CardTone} from './types'
 
 export interface CardProviderProps {
   children?: React.ReactNode
   tone?: CardTone
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
 }
 
 export function CardProvider({children, scheme, tone}: CardProviderProps) {

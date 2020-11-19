@@ -1,7 +1,7 @@
 import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
@@ -18,7 +18,7 @@ interface PopoverProps {
   portal?: boolean
   radius?: number | number[]
   referenceElement?: HTMLElement | null
-  scheme?: ColorSchemeKey
+  scheme?: ThemeColorSchemeKey
 }
 
 const Root = styled(Layer)``

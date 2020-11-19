@@ -1,9 +1,9 @@
 import {Preview} from '@sanity/components'
-import {Card, ColorSchemeKey, Theme, useCard} from '@sanity/ui'
+import {Card, ThemeColorSchemeKey, Theme, useCard} from '@sanity/ui'
 import React from 'react'
 import styled, {css} from 'styled-components'
 
-const Root = styled(Card)((props: {scheme: ColorSchemeKey; theme: Theme}) => {
+const Root = styled(Card)((props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
   const {scheme, theme} = props
   const tone = theme.color[scheme].card.tones.default
 

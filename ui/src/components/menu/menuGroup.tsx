@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
 import {Box, Icon, Popover, Text, useCard} from '../../atoms'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
 import {Menu} from './menu'
 
-const Root = styled.button<{scheme: ColorSchemeKey}>(
-  (props: {scheme: ColorSchemeKey; theme: Theme}) => {
+const Root = styled.button<{scheme: ThemeColorSchemeKey}>(
+  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
     const {scheme, theme} = props
     const tone = theme.color[scheme].card.tones.default
 

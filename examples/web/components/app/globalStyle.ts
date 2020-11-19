@@ -1,8 +1,8 @@
-import {ColorSchemeKey, Theme} from '@sanity/ui'
+import {ThemeColorSchemeKey, Theme} from '@sanity/ui'
 import {createGlobalStyle, css} from 'styled-components'
 
-export const GlobalStyle = createGlobalStyle<{scheme: ColorSchemeKey}>(
-  (props: {scheme: ColorSchemeKey; theme: Theme}) => {
+export const GlobalStyle = createGlobalStyle<{scheme: ThemeColorSchemeKey}>(
+  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
     const {scheme, theme} = props
     const color = theme.color[scheme]
 

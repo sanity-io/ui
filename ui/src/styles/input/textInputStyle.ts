@@ -1,17 +1,17 @@
 import {CSSObject} from 'styled-components'
-import {ColorSchemeKey, ThemeInputStateColor} from '../../theme'
+import {ThemeColorSchemeKey, ThemeColorInputState} from '../../theme'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 interface TextInputRootStyleProps {
   border?: boolean
   disabled?: boolean
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
 }
 
 interface TextInputInputStyleProps {
   uiSize?: number | number[]
-  weight?: string
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
 export const textInputStyle = {
@@ -19,7 +19,7 @@ export const textInputStyle = {
   input: [inputBaseStyle, inputFontSizeStyle],
 }
 
-function _textInputColor(color: ThemeInputStateColor, border?: boolean): CSSObject {
+function _textInputColor(color: ThemeColorInputState, border?: boolean): CSSObject {
   return {
     backgroundColor: color.bg,
     boxShadow: border ? `inset 0 0 0 1px ${color.border}` : undefined,
@@ -77,7 +77,7 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject
     width: '100%',
     boxSizing: 'border-box',
     fontFamily: font.family,
-    fontWeight: font.weights[weight || 'regular'],
+    fontWeight: (weight && font.weights[weight]) || font.weights.regular,
     margin: 0,
 
     '&:is(textarea)': {

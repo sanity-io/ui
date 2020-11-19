@@ -10,5 +10,6 @@ export interface FontWeightProps {
 }
 
 export interface ResponsiveFontProps extends FontWeightProps, ResponsiveFontSizeProps {
+  accent?: boolean
   muted?: boolean
 }

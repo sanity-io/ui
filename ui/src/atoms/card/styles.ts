@@ -37,6 +37,7 @@ function vars(color: ThemeCardStateColor) {
     --card-fg-color: ${color.fg};
     --card-focus-ring-color: ${color.focusRing};
     --card-muted-fg-color: ${color.muted.fg};
+    --card-accent-fg-color: ${color.accent.fg};
     --card-hairline-soft-color: ${color.hairline.soft};
     --card-hairline-hard-color: ${color.hairline.hard};
     --card-link-color: ${color.link};

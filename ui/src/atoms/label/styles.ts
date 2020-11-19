@@ -1,11 +1,16 @@
 import {css} from 'styled-components'
 import {Theme} from '../../theme'
 
-export function labelBaseStyles(props: {theme: Theme; muted: boolean}) {
-  const {theme, muted} = props
+export function labelBaseStyles(props: {accent?: boolean; theme: Theme; muted: boolean}) {
+  const {accent, theme, muted} = props
 
   return css`
     text-transform: uppercase;
+
+    ${accent &&
+    css`
+      color: var(--card-accent-fg-color);
+    `}
 
     ${muted &&
     css`

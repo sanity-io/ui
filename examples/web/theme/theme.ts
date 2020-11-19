@@ -30,7 +30,7 @@ export const sanityTheme: Theme = {
     // 24
     {umbra: [0, 11, 15, -7], penumbra: [0, 24, 38, 3], ambient: [0, 9, 46, 8]},
   ],
-  space: [0, 6, 12, 20, 32, 52, 84, 136, 220, 356],
+  space: [0, 8, 12, 20, 32, 52, 84, 136, 220, 356],
   input: {
     checkbox: {
       size: 17,

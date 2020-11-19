@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 
 export function radioBaseStyles() {
   return css`
@@ -9,7 +9,7 @@ export function radioBaseStyles() {
   `
 }
 
-export function inputElementStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
+export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) {
   const _scheme = theme.color[scheme] || theme.color.light
   const tone = _scheme.input.tones.default
   const {markSize, size} = theme.input.radio

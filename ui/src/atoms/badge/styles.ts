@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {BadgeMode, BadgeTone} from './types'
 
 export function badge({
@@ -9,7 +9,7 @@ export function badge({
   tone,
 }: {
   mode: BadgeMode
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
   theme: Theme
   tone: BadgeTone
 }) {

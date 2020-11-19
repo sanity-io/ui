@@ -2,7 +2,7 @@ import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
 import React, {forwardRef, useEffect} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 
@@ -12,7 +12,7 @@ interface CheckboxProps {
 }
 
 const Root = styled.div(checkboxBaseStyles)
-const Input = styled.input<{scheme: ColorSchemeKey}>(inputElementStyles)
+const Input = styled.input<{scheme: ThemeColorSchemeKey}>(inputElementStyles)
 
 export const Checkbox = forwardRef(
   (

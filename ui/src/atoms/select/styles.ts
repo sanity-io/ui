@@ -6,7 +6,7 @@ import {
   responsiveInputPaddingIconRightStyle,
   responsiveRadiusStyle,
 } from '../../styles'
-import {ColorSchemeKey, Theme, ThemeFontSize} from '../../theme'
+import {ThemeColorSchemeKey, Theme, ThemeFontSize} from '../../theme'
 
 const root = () => {
   return css`
@@ -29,7 +29,7 @@ const inputBase = ({theme}: {theme: Theme}) => {
   `
 }
 
-const inputColor = ({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
+const inputColor = ({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
   const _scheme = theme.color[scheme] || theme.color.light
   const tone = _scheme.input.tones.default
 
@@ -88,7 +88,7 @@ const iconBox = ({
   theme,
 }: {
   radius?: number | number[]
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
   uiSize?: number | number[]
   theme: Theme
 }) => {

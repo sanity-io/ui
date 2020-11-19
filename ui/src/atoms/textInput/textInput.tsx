@@ -8,7 +8,7 @@ import {
   responsiveInputPaddingStyle,
   textInputStyle,
 } from '../../styles'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {Box} from '../box'
 import {useCard} from '../card'
 import {Icon, IconSymbol} from '../icon'
@@ -34,14 +34,14 @@ interface TextInputProps extends ResponsiveRadiusProps {
     | 'time'
     | 'text'
     | 'week'
-  weight?: string
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
 const Root = styled.span<
   {
     border: boolean
     disabled: boolean
-    scheme: ColorSchemeKey
+    scheme: ThemeColorSchemeKey
   } & ResponsiveRadiusProps
 >(responsiveRadiusStyle, textInputStyle.root)
 
@@ -51,10 +51,10 @@ const Input = styled.input<{
   iconRight?: boolean
   space?: number | number[]
   uiSize: number | number[]
-  weight?: string
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }>(responsiveInputPaddingStyle, textInputStyle.input)
 
-const IconContainer = styled.div(({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) => {
+const IconContainer = styled.div(({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
   const _scheme = theme.color[scheme] || theme.color.light
   const tone = _scheme.input.tones.default
 

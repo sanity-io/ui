@@ -9,27 +9,27 @@ import {
   ResponsiveRadiusProps,
   textInputStyle,
 } from '../../styles'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 
 interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   border?: boolean
   size?: number | number[]
-  weight?: string
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
   customValidity?: string
 }
 
 const Root = styled.span<{
   border: boolean
   disabled: boolean
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
   radius?: number | number[]
 }>(responsiveRadiusStyle, textInputStyle.root)
 
-const Input = styled.textarea<{uiSize: number[]; weight?: string}>(
-  responsiveInputPaddingStyle,
-  textInputStyle.input
-)
+const Input = styled.textarea<{
+  uiSize: number[]
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
+}>(responsiveInputPaddingStyle, textInputStyle.input)
 
 export const TextArea = forwardRef(
   (

@@ -1,5 +1,5 @@
-import {Card, Heading, Icon} from '@sanity/ui'
-import {select, withKnobs} from '@storybook/addon-knobs'
+import {Card, Heading, Icon, Inline} from '@sanity/ui'
+import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {withCentered} from '~/storybook/decorators'
 
@@ -9,18 +9,34 @@ export default {
 }
 
 export const plain = () => {
-  const size = select(
-    'Size',
-    {'0': 0, '1': 1, '2 (default)': undefined, '3': 3, '4': 4},
+  const accent = boolean('Accent', false, 'Props')
+
+  const muted = boolean('Muted', false, 'Props')
+
+  const size = select('Size', {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4}, 2, 'Props')
+
+  const weight = select(
+    'Weight',
+    {
+      'Regular (default)': undefined,
+      Medium: 'medium',
+      Semibold: 'semibold',
+      Bold: 'bold',
+    },
     undefined,
     'Props'
   )
 
+  const textProps = {accent, muted, size, weight}
+
   return (
     <Card>
-      <Heading size={size}>
-        <Icon symbol="add" /> Hello, world
-      </Heading>
+      <Inline space={3}>
+        <Heading {...textProps}>
+          <Icon symbol="ok-hand" />
+        </Heading>
+        <Heading {...textProps}>Hello, world</Heading>
+      </Inline>
     </Card>
   )
 }

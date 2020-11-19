@@ -2,7 +2,7 @@ import {ChevronDownIcon} from '@sanity/icons'
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
-import {ColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {Box} from '../box'
 import {useCard} from '../card'
 import {Text} from '../text'
@@ -13,12 +13,12 @@ const Root = styled.div(select.root)
 const Input = styled.select<{
   padding?: number | number[]
   radius?: number | number[]
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
   space?: number | number[]
   uiSize?: number | number[]
 }>(select.input)
 
-const IconBox = styled(Box)<{scheme: ColorSchemeKey}>(select.iconBox)
+const IconBox = styled(Box)<{scheme: ThemeColorSchemeKey}>(select.iconBox)
 
 interface SelectProps {
   padding?: number | number[]

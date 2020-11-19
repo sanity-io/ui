@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
@@ -37,7 +37,7 @@ export function buttonBaseStyles() {
 
 export function buttonColorStyles(props: {
   uiMode: ButtonMode
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
   theme: Theme
   tone: ButtonTone
 }) {

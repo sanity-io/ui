@@ -3,7 +3,12 @@ import {ThemeFonts} from '@sanity/ui'
 export const fonts: ThemeFonts = {
   code: {
     family: '-apple-system-ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
-    weights: {regular: 400},
+    weights: {
+      regular: 500,
+      medium: 600,
+      semibold: 700,
+      bold: 800,
+    },
     sizes: [
       {
         ascenderHeight: 3,
@@ -50,7 +55,12 @@ export const fonts: ThemeFonts = {
   heading: {
     family:
       'Larsseit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    weights: {bold: 700},
+    weights: {
+      regular: 700,
+      medium: 800,
+      semibold: 900,
+      bold: 900,
+    },
     sizes: [
       {
         ascenderHeight: 3,
@@ -105,7 +115,12 @@ export const fonts: ThemeFonts = {
   label: {
     family:
       'Roboto Mono, Inter var, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    weights: {regular: 400, medium: 500, semibold: 600},
+    weights: {
+      regular: 600,
+      medium: 700,
+      semibold: 800,
+      bold: 900,
+    },
     sizes: [
       {
         ascenderHeight: 2,

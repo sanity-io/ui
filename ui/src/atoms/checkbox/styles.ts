@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 
 export function checkboxBaseStyles() {
   return css`
@@ -9,7 +9,7 @@ export function checkboxBaseStyles() {
   `
 }
 
-export function inputElementStyles({scheme, theme}: {scheme: ColorSchemeKey; theme: Theme}) {
+export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) {
   const _scheme = theme.color[scheme] || theme.color.light
   const color = _scheme.input
   const tone = color.tones.default

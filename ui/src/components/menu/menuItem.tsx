@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {Box, Flex, Icon, IconSymbol, Text, useCard} from '../../atoms'
 import {useForwardedRef} from '../../hooks'
 import {ResponsivePaddingStyleProps} from '../../styles'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
 
 interface MenuItemProps extends ResponsivePaddingStyleProps {
@@ -15,8 +15,8 @@ interface MenuItemProps extends ResponsivePaddingStyleProps {
   text?: React.ReactNode
 }
 
-const Root = styled.button<{scheme: ColorSchemeKey}>(
-  (props: {scheme: ColorSchemeKey; theme: Theme}) => {
+const Root = styled.button<{scheme: ThemeColorSchemeKey}>(
+  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
     const {scheme, theme} = props
     const tone = theme.color[scheme].card.tones.default
 

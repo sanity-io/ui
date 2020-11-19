@@ -1,4 +1,4 @@
-import {Card, Text} from '@sanity/ui'
+import {Card, Grid, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -146,5 +146,112 @@ export const allTones = () => {
         <Text>Brand</Text>
       </Card>
     </Stack>
+  )
+}
+
+export const asButton = () => {
+  return (
+    <Grid columns={2}>
+      <Card padding={3}>
+        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="transparent">
+          <Stack space={2}>
+            <Text>Text</Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
+        </Card>
+        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="default">
+          <Stack space={2}>
+            <Text>Text</Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
+        </Card>
+        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="positive">
+          <Stack space={2}>
+            <Text>Text</Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
+        </Card>
+        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="caution">
+          <Stack space={2}>
+            <Text>Text</Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
+        </Card>
+        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="critical">
+          <Stack space={2}>
+            <Text>Text</Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
+        </Card>
+        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="brand">
+          <Stack space={2}>
+            <Text>Text</Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
+        </Card>
+      </Card>
+      <Card padding={3}>
+        <div aria-selected>
+          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="transparent">
+            <Stack space={2}>
+              <Text>Text</Text>
+              <Text muted>Muted</Text>
+              <Text accent>Accent</Text>
+            </Stack>
+          </Card>
+        </div>
+        <div aria-selected>
+          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="default">
+            <Stack space={2}>
+              <Text>Text</Text>
+              <Text muted>Muted</Text>
+              <Text accent>Accent</Text>
+            </Stack>
+          </Card>
+        </div>
+        <div aria-selected>
+          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="positive">
+            <Stack space={2}>
+              <Text>Text</Text>
+              <Text muted>Muted</Text>
+              <Text accent>Accent</Text>
+            </Stack>
+          </Card>
+        </div>
+        <div aria-selected>
+          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="caution">
+            <Stack space={2}>
+              <Text>Text</Text>
+              <Text muted>Muted</Text>
+              <Text accent>Accent</Text>
+            </Stack>
+          </Card>
+        </div>
+        <div aria-selected>
+          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="critical">
+            <Stack space={2}>
+              <Text>Text</Text>
+              <Text muted>Muted</Text>
+              <Text accent>Accent</Text>
+            </Stack>
+          </Card>
+        </div>
+        <div aria-selected>
+          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="brand">
+            <Stack space={2}>
+              <Text>Text</Text>
+              <Text muted>Muted</Text>
+              <Text accent>Accent</Text>
+            </Stack>
+          </Card>
+        </div>
+      </Card>
+    </Grid>
   )
 }

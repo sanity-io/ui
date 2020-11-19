@@ -6,7 +6,7 @@ import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
 } from '../../styles'
-import {ColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {Box} from '../box'
 import {useCard} from '../card'
 import {Flex} from '../flex'
@@ -31,7 +31,7 @@ export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadi
 
 const Root = styled.button<{
   uiMode: ButtonMode
-  scheme: ColorSchemeKey
+  scheme: ThemeColorSchemeKey
   theme: Theme
   tone: ButtonTone
 }>(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)

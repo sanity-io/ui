@@ -1,10 +1,20 @@
 import {css} from 'styled-components'
 import {Theme} from '../../theme'
 
-export function headingBaseStyles(props: {theme: Theme}) {
-  const {theme} = props
+export function headingBaseStyles(props: {accent?: boolean; muted?: boolean; theme: Theme}) {
+  const {accent, muted, theme} = props
 
   return css`
+    ${accent &&
+    css`
+      color: var(--card-accent-fg-color);
+    `}
+
+    ${muted &&
+    css`
+      color: var(--card-muted-fg-color);
+    `}
+
     &:before {
       content: '';
       display: block;

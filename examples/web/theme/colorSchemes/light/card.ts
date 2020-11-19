@@ -1,8 +1,8 @@
 import {black, ColorHueKey, hues, white} from '@sanity/color'
-import {ThemeCardColor} from '@sanity/ui'
+import {ThemeColorCard} from '@sanity/ui'
 import {rgba} from 'polished'
 
-export const card: ThemeCardColor = {
+export const card: ThemeColorCard = {
   tones: {
     default: {
       enabled: {
@@ -10,6 +10,9 @@ export const card: ThemeCardColor = {
         fg: black.hex,
         muted: {
           fg: hues.gray[700].hex,
+        },
+        accent: {
+          fg: hues.red[600].hex,
         },
         hairline: {
           soft: hues.gray[200].hex,
@@ -30,6 +33,9 @@ export const card: ThemeCardColor = {
         muted: {
           fg: hues.gray[200].hex,
         },
+        accent: {
+          fg: hues.red[600].hex,
+        },
         hairline: {
           soft: hues.gray[100].hex,
           hard: hues.gray[200].hex,
@@ -48,6 +54,9 @@ export const card: ThemeCardColor = {
         fg: black.hex,
         muted: {
           fg: hues.gray[700].hex,
+        },
+        accent: {
+          fg: hues.red[600].hex,
         },
         hairline: {
           soft: hues.gray[200].hex,
@@ -72,6 +81,9 @@ export const card: ThemeCardColor = {
           soft: hues.gray[200].hex,
           hard: hues.gray[300].hex,
         },
+        accent: {
+          fg: hues.red[600].hex,
+        },
         focusRing: hues.blue[500].hex,
         link: hues.blue[700].hex,
         shadow: {
@@ -91,6 +103,9 @@ export const card: ThemeCardColor = {
           soft: hues.blue[400].hex,
           hard: hues.blue[300].hex,
         },
+        accent: {
+          fg: hues.red[600].hex,
+        },
         focusRing: hues.blue[500].hex,
         link: hues.blue[600].hex,
         shadow: {
@@ -102,7 +117,119 @@ export const card: ThemeCardColor = {
       },
     },
 
-    transparent: buildCardTone('gray'),
+    transparent: {
+      enabled: {
+        bg: hues.gray[100].hex,
+        fg: hues.gray[800].hex,
+        muted: {
+          fg: hues.gray[700].hex,
+        },
+        hairline: {
+          soft: hues.gray[200].hex,
+          hard: hues.gray[300].hex,
+        },
+        accent: {
+          fg: hues.red[600].hex,
+        },
+        focusRing: hues.blue[500].hex,
+        link: hues.blue[700].hex,
+        shadow: {
+          outline: rgba(hues.gray[500].hex, 0.35),
+          umbra: rgba(hues.gray[500].hex, 0.2),
+          penumbra: rgba(hues.gray[500].hex, 0.14),
+          ambient: rgba(hues.gray[500].hex, 0.12),
+        },
+      },
+      disabled: {
+        bg: white.hex,
+        fg: black.hex,
+        muted: {
+          fg: hues.gray[700].hex,
+        },
+        hairline: {
+          soft: hues.gray[200].hex,
+          hard: hues.gray[300].hex,
+        },
+        accent: {
+          fg: hues.red[600].hex,
+        },
+        focusRing: hues.blue[500].hex,
+        link: hues.blue[700].hex,
+        shadow: {
+          outline: rgba(hues.gray[500].hex, 0.35),
+          umbra: rgba(hues.gray[500].hex, 0.2),
+          penumbra: rgba(hues.gray[500].hex, 0.14),
+          ambient: rgba(hues.gray[500].hex, 0.12),
+        },
+      },
+      hovered: {
+        bg: hues.gray[50].hex,
+        fg: black.hex,
+        muted: {
+          fg: hues.gray[700].hex,
+        },
+        hairline: {
+          soft: hues.gray[200].hex,
+          hard: hues.gray[300].hex,
+        },
+        accent: {
+          fg: hues.red[600].hex,
+        },
+        focusRing: hues.blue[500].hex,
+        link: hues.blue[700].hex,
+        shadow: {
+          outline: rgba(hues.gray[500].hex, 0.35),
+          umbra: rgba(hues.gray[500].hex, 0.2),
+          penumbra: rgba(hues.gray[500].hex, 0.14),
+          ambient: rgba(hues.gray[500].hex, 0.12),
+        },
+      },
+      pressed: {
+        bg: white.hex,
+        fg: black.hex,
+        muted: {
+          fg: hues.gray[700].hex,
+        },
+        hairline: {
+          soft: hues.gray[200].hex,
+          hard: hues.gray[300].hex,
+        },
+        accent: {
+          fg: hues.red[600].hex,
+        },
+        focusRing: hues.blue[500].hex,
+        link: hues.blue[700].hex,
+        shadow: {
+          outline: rgba(hues.gray[500].hex, 0.35),
+          umbra: rgba(hues.gray[500].hex, 0.2),
+          penumbra: rgba(hues.gray[500].hex, 0.14),
+          ambient: rgba(hues.gray[500].hex, 0.12),
+        },
+      },
+      selected: {
+        bg: hues.blue[500].hex,
+        fg: white.hex,
+        muted: {
+          fg: hues.blue[100].hex,
+        },
+        hairline: {
+          soft: hues.gray[200].hex,
+          hard: hues.gray[300].hex,
+        },
+        accent: {
+          fg: hues.red[600].hex,
+        },
+        focusRing: hues.blue[500].hex,
+        link: hues.blue[700].hex,
+        shadow: {
+          outline: rgba(hues.gray[500].hex, 0.35),
+          umbra: rgba(hues.gray[500].hex, 0.2),
+          penumbra: rgba(hues.gray[500].hex, 0.14),
+          ambient: rgba(hues.gray[500].hex, 0.12),
+        },
+      },
+    },
+
     positive: buildCardTone('green'),
     caution: buildCardTone('yellow'),
     critical: buildCardTone('red'),
@@ -115,22 +242,25 @@ function buildCardTone(hueKey: ColorHueKey) {
 
   return {
     enabled: {
-      bg: hue[50].hex,
-      fg: hue[800].hex,
+      bg: hue[500].hex,
+      fg: white.hex,
       muted: {
-        fg: hue[700].hex,
+        fg: hue[200].hex,
+      },
+      accent: {
+        fg: hue[200].hex,
       },
       hairline: {
-        soft: hue[200].hex,
-        hard: hue[300].hex,
+        soft: hue[600].hex,
+        hard: hue[700].hex,
       },
       focusRing: hues.blue[500].hex,
       link: hues.blue[700].hex,
       shadow: {
-        outline: rgba(hue[500].hex, 0.35),
-        umbra: rgba(hue[500].hex, 0.2),
-        penumbra: rgba(hue[500].hex, 0.14),
-        ambient: rgba(hue[500].hex, 0.12),
+        outline: rgba(hue[600].hex, 0.35),
+        umbra: rgba(hue[600].hex, 0.2),
+        penumbra: rgba(hue[600].hex, 0.14),
+        ambient: rgba(hue[600].hex, 0.12),
       },
     },
     disabled: {
@@ -143,6 +273,9 @@ function buildCardTone(hueKey: ColorHueKey) {
         soft: hue[200].hex,
         hard: hue[300].hex,
       },
+      accent: {
+        fg: hue[600].hex,
+      },
       focusRing: hues.blue[500].hex,
       link: hues.blue[700].hex,
       shadow: {
@@ -153,10 +286,13 @@ function buildCardTone(hueKey: ColorHueKey) {
       },
     },
     hovered: {
-      bg: hue[50].hex,
-      fg: black.hex,
+      bg: hue[600].hex,
+      fg: white.hex,
       muted: {
-        fg: hue[700].hex,
+        fg: hue[200].hex,
+      },
+      accent: {
+        fg: hue[200].hex,
       },
       hairline: {
         soft: hue[200].hex,
@@ -172,10 +308,13 @@ function buildCardTone(hueKey: ColorHueKey) {
       },
     },
     pressed: {
-      bg: white.hex,
-      fg: black.hex,
+      bg: hue[700].hex,
+      fg: white.hex,
       muted: {
-        fg: hue[700].hex,
+        fg: hue[200].hex,
+      },
+      accent: {
+        fg: hue[200].hex,
       },
       hairline: {
         soft: hue[200].hex,
@@ -194,7 +333,10 @@ function buildCardTone(hueKey: ColorHueKey) {
       bg: hues.blue[500].hex,
       fg: white.hex,
       muted: {
-        fg: hues.blue[100].hex,
+        fg: hue[200].hex,
+      },
+      accent: {
+        fg: hue[200].hex,
       },
       hairline: {
         soft: hue[200].hex,
