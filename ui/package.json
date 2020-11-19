@@ -24,14 +24,17 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.2.0",
+    "@popperjs/core": "^2.4.4",
     "@reach/auto-id": "^0.11.2",
     "@sanity/color": "^2.0.7",
     "@sanity/icons": "^1.0.0-beta.1",
+    "framer-motion": "^2.9.4",
     "polished": "^4.0.3",
-    "react-is": "^16.0.0"
+    "react-is": "^16.0.0",
+    "react-popper": "^2.2.3",
+    "react-refractor": "^2.1.2"
   },
   "devDependencies": {
-    "@popperjs/core": "^2.4.4",
     "@storybook/addon-actions": "^6.0.27",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^6.0.27",
@@ -48,24 +51,17 @@
     "@types/refractor": "^3.0.0",
     "@types/resize-observer-browser": "^0.1.4",
     "@types/styled-components": "^5.1.4",
-    "framer-motion": "^2.9.4",
     "jest": "^26.6.1",
     "jest-axe": "^4.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-popper": "^2.2.3",
-    "react-refractor": "^2.1.2",
     "react-test-renderer": "^17.0.1",
     "styled-components": "^5.2.0",
     "ts-jest": "^26.4.3"
   },
   "peerDependencies": {
-    "@popperjs/core": "^2.4",
-    "framer-motion": "^2.9",
     "react": "^16.9 || ^17",
     "react-dom": "^16.9 || ^17",
-    "react-popper": "^2.2",
-    "react-refractor": "^2.1",
     "styled-components": "^5.2"
   },
   "repository": {

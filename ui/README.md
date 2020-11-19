@@ -6,7 +6,7 @@ The Sanity UI components.
 npm install @sanity/ui
 
 # Install peer dependencies
-npm install @popperjs/core framer-motion react react-popper react-refractor styled-components
+npm install react react-dom styled-components
 ```
 
 [![npm version](https://img.shields.io/npm/v/@sanity/ui.svg?style=flat-square)](https://www.npmjs.com/package/@sanity/ui)
