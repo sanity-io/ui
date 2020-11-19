@@ -15249,9 +15249,9 @@ p-waterfall@^1.0.0:
     p-reduce "^1.0.0"
 
 pako@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/pako/-/pako-2.0.1.tgz#31e05b87f8ceae06ef286421575ea962ac9c0d8a"
-  integrity sha512-mqHoEQRZ4d+JREr7Csg+QbdfuOHtojEmsAKo/cYiCJICjjB0mOMSKnRlL42P5luMWUXksJ7UDZCRkEqPrBj0Dg==
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-2.0.2.tgz#8a72af7a93431ef22aa97e0d53b0acaa3c689220"
+  integrity sha512-9e8DRI3+dRLomCmMBAH30B2ejh+blwXr7VmMEx/pVFZlSDA7oyI8uKMhKXr8IrZpoxBF2YlxUvhqRXzTT1i0NA==
 
 pako@~0.2.0:
   version "0.2.9"
