@@ -44,6 +44,7 @@
     "docs",
     "examples/*",
     "icons",
+    "logos",
     "studio",
     "ui",
     "ui-storybook"

@@ -9,6 +9,7 @@ module.exports = {
     // Add monorepo sibling packages to includes
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'color/src'))
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'icons/src'))
+    config.module.rules[0].include.push(path.join(ROOT_PATH, 'logos/src'))
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'ui/src'))
 
     // Add `react` to externals
@@ -18,6 +19,7 @@ module.exports = {
     Object.assign(config.resolve.alias, {
       '@sanity/color': path.join(ROOT_PATH, 'color/src'),
       '@sanity/icons': path.join(ROOT_PATH, 'icons/src'),
+      '@sanity/logos': path.join(ROOT_PATH, 'logos/src'),
       '@sanity/ui': path.join(ROOT_PATH, 'ui/src'),
 
       // React v17

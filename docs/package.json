@@ -17,6 +17,7 @@
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/color": "^2.0.2",
     "@sanity/icons": "^1.0.0-alpha.3",
+    "@sanity/logos": "^1.0.0-beta.0",
     "@sanity/ui": "^1.0.0-alpha.7",
     "codemirror": "^5.58.2",
     "date-fns": "^2.16.1",

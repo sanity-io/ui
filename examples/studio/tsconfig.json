@@ -11,6 +11,7 @@
     "sourceMap": true,
     "paths": {
       "@sanity/icons": ["./icons/src"],
+      "@sanity/logos": ["./logos/src"],
       "@sanity/ui": ["./ui/src"],
       "@sanity/*": ["./examples/studio/@sanity/*"]
     }

@@ -18,6 +18,7 @@ module.exports = {
       '~/storybook': path.resolve(ROOT_PATH, 'ui-storybook'),
       '@sanity/color': path.resolve(ROOT_PATH, 'color/src'),
       '@sanity/icons': path.resolve(ROOT_PATH, 'icons/src'),
+      '@sanity/logos': path.resolve(ROOT_PATH, 'logos/src'),
       '@sanity/ui': path.resolve(ROOT_PATH, 'ui/src'),
     }
 

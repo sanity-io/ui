@@ -1,0 +1,45 @@
+{
+  "name": "@sanity/logos",
+  "version": "1.0.0-beta.0",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "files": [
+    "/dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "run-p build-*",
+    "build-cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
+    "build-es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
+    "clean": "rimraf dist",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run build",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@sanity/color": "^2.0.7",
+    "react": "17.0.1"
+  },
+  "peerDependencies": {
+    "@sanity/color": "^2.0",
+    "react": "^16.9 || ^17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/design.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sanity-io/design/issues"
+  },
+  "keywords": [
+    "sanity",
+    "ui",
+    "logos"
+  ],
+  "author": "Sanity.io <hello@sanity.io>",
+  "homepage": "https://www.sanity.io/",
+  "publishConfig": {
+    "access": "public"
+  }
+}
