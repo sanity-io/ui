@@ -1,25 +1,21 @@
 import React, {cloneElement, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Button, Card, Text, TextInput} from '../../atoms'
+import {Box, Button, TextInput} from '../../atoms'
 import {focusFirstDescendant} from '../../helpers'
 import {getResponsiveProp} from '../../styles'
 import {Root, ListBoxContainer, ListBoxCard} from './styles'
 
-export interface AutocompleteOption {
-  value: string
-}
-
-export interface AutocompleteProps {
+export interface AutocompleteProps<Option extends {_key: string}> {
   border?: boolean
-  id: string
-  onChange?: (value: string) => void
-  onSelect?: (value: string) => void
-  options: AutocompleteOption[]
+  id: null | string
+  onInputChange?: (inputValue: string) => void
+  inputValue?: string
+  onSelect?: (option: Option) => void
+  options: Option[]
   padding?: number | number[]
   radius?: number | number[]
-  renderOption?: (option: AutocompleteOption) => React.ReactElement
+  renderOption: (option: Option) => React.ReactElement
   size?: number | number[]
-  value?: string
 }
 
 type OverriddenInputAttrKey =
@@ -39,7 +35,8 @@ type OverriddenInputAttrKey =
   | 'type'
   | 'value'
 
-type Props = AutocompleteProps & Omit<React.HTMLProps<HTMLInputElement>, OverriddenInputAttrKey>
+type Props<OptionType extends {_key: string}> = AutocompleteProps<OptionType> &
+  Omit<React.HTMLProps<HTMLInputElement>, OverriddenInputAttrKey>
 
 const ClearButtonBox = styled(Box)`
   position: absolute;
@@ -51,12 +48,6 @@ const ClearButtonBox = styled(Box)`
     vertical-align: top;
   }
 `
-
-const defaultRenderOption = ({value}: {value: string}) => (
-  <Card as="button" padding={3}>
-    <Text>{value}</Text>
-  </Card>
-)
 
 const LIST_IGNORE_KEYS = [
   'Control',
@@ -72,24 +63,21 @@ const LIST_IGNORE_KEYS = [
   'CapsLock',
 ]
 
-export function Autocomplete(props: Props) {
+export function Autocomplete<OptionType extends {_key: string}>(props: Props<OptionType>) {
   const {
     border = true,
     id,
-    onChange,
+    onInputChange,
     onSelect,
     options: optionsProp,
     padding: paddingProp = 3,
     radius = 2,
-    renderOption: renderOptionProp,
+    renderOption,
     size = 2,
-    value: valueProp = '',
+    inputValue = '',
     ...restProps
   } = props
-  const renderOption =
-    typeof renderOptionProp === 'function' ? renderOptionProp : defaultRenderOption
-  const [value, setValue] = useState(valueProp)
-  const valueRef = useRef(value)
+
   const [focused, setFocused] = useState(false)
   const inputId = `${id}-input`
   const listboxId = `${id}-listbox`
@@ -138,10 +126,7 @@ export function Autocomplete(props: Props) {
       }
 
       if (event.key === 'Escape') {
-        if (onChange) onChange('')
         setFocused(false)
-        valueRef.current = ''
-        setValue('')
 
         inputRef.current?.focus()
 
@@ -162,45 +147,32 @@ export function Autocomplete(props: Props) {
         return
       }
     },
-    [onChange, optionsLen]
+    [onInputChange, optionsLen]
   )
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      valueRef.current = event.currentTarget.value
-      setValue(event.currentTarget.value)
-      if (onChange) onChange(event.currentTarget.value)
+      if (onInputChange) onInputChange(event.currentTarget.value)
     },
-    [onChange]
+    [onInputChange]
   )
 
   const handleInputFocus = useCallback(() => setFocused(true), [])
 
   const handleClearButtonClick = useCallback(() => {
-    valueRef.current = ''
-    setValue('')
-    if (onChange) onChange('')
+    if (onInputChange) onInputChange('')
     inputRef.current?.focus()
-  }, [onChange])
+  }, [onInputChange])
 
   const handleClearButtonFocus = useCallback(() => setFocused(true), [])
 
   const handleOptionSelect = useCallback(
-    (v: string) => {
+    (v: OptionType) => {
       if (onSelect) onSelect(v)
-      if (onChange) onChange('')
       setFocused(false)
     },
-    [onChange, onSelect]
+    [onSelect]
   )
-
-  // Change the value when `value` prop changes
-  useEffect(() => {
-    if (valueProp !== valueRef.current) {
-      valueRef.current = valueProp
-      setValue(valueProp)
-    }
-  }, [valueProp])
 
   // Reset selected item when the list changes
   // @todo: what if the list changed, but the items have changed?
@@ -241,10 +213,10 @@ export function Autocomplete(props: Props) {
         role="combobox"
         size={size}
         spellCheck={false}
-        value={value}
+        value={inputValue}
       />
 
-      {value.length > 0 && (
+      {inputValue?.length > 0 && (
         <ClearButtonBox margin={padding.map((v) => v - 1)} onFocus={handleClearButtonFocus}>
           <Button
             aria-label="Clear"
@@ -264,10 +236,10 @@ export function Autocomplete(props: Props) {
             {options.map((option, optionIndex) => (
               <AutosuggestOption
                 id={`${id}-option-${optionIndex}`}
-                key={option.value}
+                key={optionIndex}
                 onSelect={handleOptionSelect}
                 selected={optionIndex === selectedIndex}
-                value={option.value}
+                value={option}
               >
                 {cloneElement(renderOption(option), {tabIndex: -1})}
               </AutosuggestOption>
@@ -279,12 +251,12 @@ export function Autocomplete(props: Props) {
   )
 }
 
-function AutosuggestOption(props: {
+function AutosuggestOption<T extends {_key: string}>(props: {
   children: React.ReactNode
   id: string
-  onSelect: (v: string) => void
+  onSelect: (v: T) => void
   selected: boolean
-  value: string
+  value: T
 }) {
   const {children, id, onSelect, selected, value} = props
 
