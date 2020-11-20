@@ -1,7 +1,7 @@
 import {AnimatePresence, motion} from 'framer-motion'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Container} from '../../atoms'
+import {Box} from '../../atoms'
 import {Layer} from '../../utils'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
@@ -24,12 +24,14 @@ const Root = styled(Layer)`
   pointer-events: none;
 `
 
-const ToastContainer = styled(Container)`
+const ToastContainer = styled.div`
   pointer-events: all;
   box-sizing: border-box;
   position: absolute;
   right: 0;
   bottom: 0;
+  max-width: 420px;
+  width: 100%;
 `
 
 let toastId = 0
@@ -99,7 +101,7 @@ export function ToastProvider({children}: {children?: React.ReactNode}) {
       {children}
 
       <Root>
-        <ToastContainer width={1}>
+        <ToastContainer>
           <Box padding={4}>
             <AnimatePresence initial={false}>
               {state.toasts.map(({dismiss, id, params}) => (
