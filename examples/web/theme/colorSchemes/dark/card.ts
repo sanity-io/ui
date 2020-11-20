@@ -1,6 +1,6 @@
 import {black, ColorHueKey, hues} from '@sanity/color'
-import {rgba} from 'polished'
 import {ThemeColorCard, ThemeCardToneColor} from '@sanity/ui'
+import {rgba} from 'polished'
 
 export const card: ThemeColorCard = {
   tones: {
