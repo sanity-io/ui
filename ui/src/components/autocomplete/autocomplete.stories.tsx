@@ -80,7 +80,13 @@ function PlainExample({
       if (!item) return null
 
       return (
-        <Card as="a" href="#" key={item.value} padding={3}>
+        <Card
+          as="a"
+          href="#"
+          key={item.value}
+          onClick={(event) => event.preventDefault()}
+          padding={3}
+        >
           <Text>{item.title}</Text>
         </Card>
       )

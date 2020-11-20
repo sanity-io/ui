@@ -156,9 +156,14 @@ export function Autocomplete(props: Props) {
         return
       }
 
+      if (event.key === 'Escape') {
+        if (onChange) onChange('')
+        setFocused(false)
+      }
+
       inputRef.current?.focus()
     },
-    [optionsLen]
+    [onChange, optionsLen]
   )
 
   const handleSelect = useCallback(
@@ -209,12 +214,6 @@ export function Autocomplete(props: Props) {
         spellCheck={false}
         value={value}
       />
-
-      {/* <SearchIconBox margin={padding}>
-        <Text size={size}>
-          <SearchIcon aria-hidden="true" focusable={false} />
-        </Text>
-      </SearchIconBox> */}
 
       {value.length > 0 && (
         <ClearButtonBox margin={padding.map((v) => v - 1)}>
