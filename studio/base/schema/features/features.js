@@ -23,5 +23,10 @@ export const features = {
       name: 'resourcesDocs',
       title: 'Resources',
     },
+    {
+      type: 'boolean',
+      name: 'changelog',
+      title: 'Changelog',
+    },
   ],
 }
