@@ -6,7 +6,7 @@
   "scripts": {
     "build": "build-storybook --quiet --config-dir . --output-dir public",
     "clean": "rimraf public",
-    "dev": "start-storybook --quiet --config-dir .",
+    "dev": "start-storybook --ci --quiet --config-dir . --port 9009",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "npm run clean",
     "type-check": "tsc --noEmit"
