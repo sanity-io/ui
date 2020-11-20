@@ -25,7 +25,7 @@ export function AppLayout({children}: {children: React.ReactNode}) {
     features.uiDocs && {href: '/ui', title: 'UI'},
     features.arcade && {href: '/arcade', title: 'Arcade'},
     features.resourcesDocs && {href: '/resources', title: 'Resources'},
-    {href: '/changelog', title: 'Changelog'},
+    features.changelog && {href: '/changelog', title: 'Changelog'},
   ].filter(Boolean) as Route[]
 
   return (

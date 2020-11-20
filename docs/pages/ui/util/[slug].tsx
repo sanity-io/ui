@@ -44,8 +44,8 @@ function UtilPage({data: initialData, params = {}, preview}: any) {
   return (
     <>
       <Head>
-        {article && <title>{article.title} – Sanity UI</title>}
-        {!article && 'Missing article – Sanity UI'}
+        {article && <title>{article.title} – UI – Sanity Design</title>}
+        {!article && 'Missing article – UI – Sanity Design'}
       </Head>
 
       <AppLayout>

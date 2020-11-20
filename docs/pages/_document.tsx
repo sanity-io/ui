@@ -40,14 +40,22 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
     return (
       <Html>
         <Head>
-          <meta charSet="utf-8" />
+          <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
+          <meta name="theme-color" content="#F03E2F" />
+          <meta name="msapplication-tap-highlight" content="no" />
+          {/* @todo: OG and twitter */}
           <link rel="icon" href="/favicon.ico" />
-          <script src="https://unpkg.com/@babel/standalone/babel.min.js" />
+          <link rel="icon" href="/sanity-favicon-192.png" sizes="192x192" />
+          <link rel="shortcut icon" href="/sanity-favicon-72.png" />
+          <link rel="apple-touch-icon" sizes="72x72" href="/sanity-favicon-72.png" />
+          <link rel="apple-touch-icon" sizes="144x144" href="/sanity-favicon-144.png" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/sanity-favicon-180.png" />
           {this.props.styleTags}
         </Head>
         <body>
           <Main />
           <NextScript />
+          <script src="https://unpkg.com/@babel/standalone/babel.min.js" />
         </body>
       </Html>
     )
