@@ -1,13 +1,32 @@
-import {SanityMonogram} from '@sanity/logos'
+import {SanityLogo} from '@sanity/logos'
 import {Box, Button, Card, Flex, Inline, Switch} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React from 'react'
 import {useApp} from './hooks'
 
+interface Route {
+  href: string
+  title: string
+}
+
+function ThemedSanityLogo() {
+  const dark = useApp().colorScheme === 'dark'
+
+  return <SanityLogo dark={dark} />
+}
+
 export function AppLayout({children}: {children: React.ReactNode}) {
-  const {colorScheme, setColorScheme} = useApp()
+  const {colorScheme, features, setColorScheme} = useApp()
   const router = useRouter()
+
+  const navbarRoutes = [
+    features.designDocs && {href: '/design', title: 'Design'},
+    features.uiDocs && {href: '/ui', title: 'UI'},
+    features.arcade && {href: '/arcade', title: 'Arcade'},
+    features.resourcesDocs && {href: '/resources', title: 'Resources'},
+    {href: '/changelog', title: 'Changelog'},
+  ].filter(Boolean) as Route[]
 
   return (
     <Flex direction="column" height="fill">
@@ -15,59 +34,20 @@ export function AppLayout({children}: {children: React.ReactNode}) {
         <Flex align="center">
           <Box flex={1}>
             <Flex>
-              <Box marginRight={2}>
-                <Link href="/" passHref>
-                  <Button
-                    as="a"
-                    mode="bleed"
-                    padding={[1, 2, 3]}
-                    radius={3}
-                    size={[2, 2, 3]}
-                    text={<SanityMonogram />}
-                  />
-                </Link>
-              </Box>
               <Inline space={2}>
-                {/* <Link href="/design" passHref>
-                  <Button
-                    as="a"
-                    mode="bleed"
-                    padding={[1, 2, 3]}
-                    selected={router.asPath.startsWith('/design')}
-                    size={[2, 2, 3]}
-                    text="Design"
-                  />
-                </Link> */}
-                <Link href="/ui" passHref>
-                  <Button
-                    as="a"
-                    mode="bleed"
-                    padding={[1, 2, 3]}
-                    selected={router.asPath.startsWith('/ui')}
-                    size={[2, 2, 3]}
-                    text="UI"
-                  />
-                </Link>
-                <Link href="/resources" passHref>
-                  <Button
-                    as="a"
-                    mode="bleed"
-                    padding={[1, 2, 3]}
-                    selected={router.asPath.startsWith('/resources')}
-                    size={[2, 2, 3]}
-                    text="Resources"
-                  />
-                </Link>
-                <Link href="/arcade" passHref>
-                  <Button
-                    as="a"
-                    mode="bleed"
-                    padding={[1, 2, 3]}
-                    selected={router.asPath.startsWith('/arcade')}
-                    size={[2, 2, 3]}
-                    text="Arcade"
-                  />
-                </Link>
+                {navbarRoutes.map((route, routeIndex) => (
+                  <Link href={route.href} key={route.href} passHref>
+                    <Button
+                      as="a"
+                      icon={routeIndex === 0 ? ThemedSanityLogo : undefined}
+                      mode="bleed"
+                      padding={[1, 2, 3]}
+                      selected={router.asPath.startsWith(route.href)}
+                      size={[2, 2, 3]}
+                      text={route.title}
+                    />
+                  </Link>
+                ))}
               </Inline>
             </Flex>
           </Box>
