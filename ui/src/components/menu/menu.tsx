@@ -68,10 +68,25 @@ export const Menu = forwardRef(
         if (event.key === 'ArrowUp') {
           event.preventDefault()
 
-          const nextIndex = (activeIndex + itemsRef.current.length - 1) % itemsRef.current.length
-          const element = itemsRef.current[nextIndex]
+          // NOTE: if all menu items are :disabled, this will cause an infinite loop
+          // @todo: make sure that not all menu items are disabled
 
-          setActiveIndex(nextIndex)
+          const len = itemsRef.current.length
+
+          let currentIndex = activeIndex
+          let element: HTMLButtonElement | null = null
+
+          while (!element) {
+            currentIndex = (currentIndex - 1 + len) % len
+
+            const e = itemsRef.current[currentIndex]
+
+            if (!e.disabled) {
+              element = itemsRef.current[currentIndex]
+            }
+          }
+
+          setActiveIndex(currentIndex)
 
           if (element) element.focus()
 
@@ -81,10 +96,25 @@ export const Menu = forwardRef(
         if (event.key === 'ArrowDown') {
           event.preventDefault()
 
-          const nextIndex = (activeIndex + 1) % itemsRef.current.length
-          const element = itemsRef.current[nextIndex]
+          // NOTE: if all menu items are :disabled, this will cause an infinite loop
+          // @todo: make sure that not all menu items are disabled
 
-          setActiveIndex(nextIndex)
+          const len = itemsRef.current.length
+
+          let currentIndex = activeIndex
+          let element: HTMLButtonElement | null = null
+
+          while (!element) {
+            currentIndex = (currentIndex + 1) % len
+
+            const e = itemsRef.current[currentIndex]
+
+            if (!e.disabled) {
+              element = itemsRef.current[currentIndex]
+            }
+          }
+
+          setActiveIndex(currentIndex)
 
           if (element) element.focus()
 
