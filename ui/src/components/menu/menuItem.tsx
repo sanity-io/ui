@@ -109,6 +109,11 @@ export const MenuItem = forwardRef(
       paddingLeft,
     }
 
+    function setRef(el: HTMLButtonElement | null) {
+      ref.current = el
+      rootRef.current = el
+    }
+
     return (
       <Root
         data-ui="MenuItem"
@@ -116,7 +121,7 @@ export const MenuItem = forwardRef(
         onClick={restProps.disabled ? undefined : handleClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        ref={ref}
+        ref={setRef}
         role="menuitem"
         scheme={card.scheme}
         tabIndex={-1}
