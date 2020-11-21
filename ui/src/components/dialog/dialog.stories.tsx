@@ -45,35 +45,40 @@ function PlainExample() {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} ref={buttonRef} text="Open dialog" />
+      <Button
+        id="open-dialog-button"
+        onClick={() => setOpen(true)}
+        ref={buttonRef}
+        text="Open dialog"
+      />
 
       {open && (
-        <Dialog header={<>Example</>} id="dialog1" onClose={handleClose}>
+        <Dialog header={<>Example</>} id="dialog" onClose={handleClose}>
           <Box padding={4}>
             <Stack space={4}>
               <Text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et orci vitae diam
                 aliquet imperdiet.
               </Text>
-              <Button text="Focus test" />
+              <Button id="button-1" text="Focus test" />
               <Text>
                 Sed in hendrerit metus. Sed sapien neque, imperdiet eu justo sed, vestibulum mollis
                 dolor.
               </Text>
-              <Button text="Focus test" />
+              <Button id="button-2" text="Focus test" />
               <Text>
                 Nulla sit amet ipsum ligula. Duis sit amet velit tempor, ultricies mauris dignissim,
                 mollis enim.
               </Text>
-              <Button text="Focus test" />
+              <Button id="button-3" text="Focus test" />
               <Text>Cras quis elit non mauris faucibus molestie non non augue. </Text>
               <Text>
                 Proin suscipit gravida sodales. Morbi vel purus molestie, rhoncus augue sit amet,
                 auctor justo.
               </Text>
-              <Button text="Focus test" />
+              <Button id="button-4" text="Focus test" />
               <Text>Proin lobortis nunc a tellus condimentum, a ultrices arcu egestas.</Text>
-              <Button text="Focus test" />
+              <Button id="button-5" text="Focus test" />
               <Text>
                 Suspendisse augue nibh, euismod sit amet sapien nec, molestie dignissim magna.
               </Text>
