@@ -20,6 +20,7 @@
     "test": "lerna run --stream --parallel test",
     "test:browser": "start-server-and-test dev:storybook http://localhost:9009 test:qawolf",
     "test:qawolf": "qawolf test --headless",
+    "test:qawolf:create": "qawolf create http://localhost:9009",
     "type-check": "lerna run --stream --parallel type-check"
   },
   "devDependencies": {
