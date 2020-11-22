@@ -30,24 +30,29 @@ export function AppLayout({children}: {children: React.ReactNode}) {
 
   return (
     <Flex direction="column" height="fill">
-      <Card padding={[2, 3, 4]} borderBottom>
+      <Card as="nav" padding={[2, 3, 4]} borderBottom>
         <Flex align="center">
           <Box flex={1}>
             <Flex>
               <Inline space={2}>
-                {navbarRoutes.map((route, routeIndex) => (
-                  <Link href={route.href} key={route.href} passHref>
-                    <Button
-                      as="a"
-                      icon={routeIndex === 0 ? ThemedSanityLogo : undefined}
-                      mode="bleed"
-                      padding={[1, 2, 3]}
-                      selected={router.asPath.startsWith(route.href)}
-                      size={[2, 2, 3]}
-                      text={route.title}
-                    />
-                  </Link>
-                ))}
+                {navbarRoutes.map((route, routeIndex) => {
+                  const selected = router.asPath.startsWith(route.href)
+
+                  return (
+                    <Link href={route.href} key={route.href} passHref>
+                      <Button
+                        aria-current={selected ? 'page' : undefined}
+                        as="a"
+                        icon={routeIndex === 0 ? ThemedSanityLogo : undefined}
+                        mode="bleed"
+                        padding={[1, 2, 3]}
+                        selected={selected}
+                        size={[2, 2, 3]}
+                        text={route.title}
+                      />
+                    </Link>
+                  )
+                })}
               </Inline>
             </Flex>
           </Box>
