@@ -61,7 +61,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "run-s lint type-check test"
+      "pre-commit": "run-s lint type-check test test:browser"
     }
   }
 }
