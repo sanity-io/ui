@@ -8,7 +8,7 @@ export default {
   title: 'Components/Tab',
 }
 
-export const menu = () => (
+export const example = () => (
   <Card padding={3}>
     <TabsExample />
   </Card>
