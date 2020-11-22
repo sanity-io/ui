@@ -1,5 +1,4 @@
 import {Card, Tab, TabList, TabPanel} from '@sanity/ui'
-// import {action} from '@storybook/addon-actions'
 import {withKnobs} from '@storybook/addon-knobs'
 import React, {useState} from 'react'
 import {withCentered} from '~/storybook/decorators'
