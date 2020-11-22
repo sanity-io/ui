@@ -111,7 +111,7 @@ export function LocationProvider(props: LocationProviderProps) {
           event.preventDefault()
           pushState({
             path: target.pathname,
-            query: qs.parse(target.search.slice(1)),
+            query: qs.parse(target.search?.slice(1) || ''),
           })
         }
       }

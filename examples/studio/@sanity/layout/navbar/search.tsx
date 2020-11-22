@@ -41,7 +41,7 @@ export function Search() {
   const renderOption = (option: AutocompleteOption) => {
     const item = data.find((i) => i.id === option.value)
 
-    if (!item) return null
+    if (!item) return <></>
 
     return (
       <Card as="button" href={`/?id=${item.id}`} onClick={handleLinkClick}>
