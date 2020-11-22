@@ -9,6 +9,7 @@
     "dev": "start-storybook --ci --quiet --config-dir . --port 9009",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "npm run clean",
+    "predev": "rimraf node_modules/.cache",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
