@@ -45,6 +45,11 @@ export const Tab = forwardRef(
       }
     }, [focused])
 
+    const setRef = (el: HTMLButtonElement | null) => {
+      elementRef.current = el
+      ref.current = el
+    }
+
     return (
       <Button
         data-ui="Tab"
@@ -57,7 +62,7 @@ export const Tab = forwardRef(
         onBlur={handleBlur}
         onFocus={handleFocus}
         padding={2}
-        ref={ref}
+        ref={setRef}
         role="tab"
         selected={selected}
         tabIndex={selected ? 0 : -1}
