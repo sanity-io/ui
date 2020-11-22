@@ -15,7 +15,7 @@ afterAll(async () => {
   await browser.close()
 })
 
-describe('components/Dialog', () => {
+describe('Components/Dialog', () => {
   it('should open dialog', async () => {
     const page = await context.newPage()
 

@@ -15,7 +15,7 @@ afterAll(async () => {
   await browser.close()
 })
 
-describe('components/MenuButton', () => {
+describe('Components/MenuButton', () => {
   it('should open menu', async () => {
     const page = await context.newPage()
 
