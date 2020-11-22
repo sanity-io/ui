@@ -1,7 +1,7 @@
-import {Autocomplete, Box, Card, Label, Stack, Text} from '@sanity/ui'
+import {Autocomplete, Card, Label, Stack, Text} from '@sanity/ui'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
-import countries from './__tests__/fixtures/countries'
+import countries from './__fixtures__/countries'
 
 interface DataItem {
   value: string
