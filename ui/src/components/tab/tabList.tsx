@@ -20,17 +20,13 @@ export const TabList = forwardRef((props: TabListProps & React.HTMLProps<HTMLDiv
   }, [])
 
   const handleKeyDown = useCallback(
-    (evt: React.KeyboardEvent<HTMLDivElement>) => {
-      if (evt.key === 'ArrowLeft') {
-        setFocusedIndex((prevIndex) => {
-          return prevIndex < 1 ? numTabs - 1 : prevIndex - 1
-        })
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === 'ArrowLeft') {
+        setFocusedIndex((prevIndex) => (prevIndex + numTabs - 1) % numTabs)
       }
 
-      if (evt.key === 'ArrowRight') {
-        setFocusedIndex((prevIndex) => {
-          return (prevIndex + 1) % numTabs
-        })
+      if (event.key === 'ArrowRight') {
+        setFocusedIndex((prevIndex) => (prevIndex + 1) % numTabs)
       }
     },
     [numTabs]
