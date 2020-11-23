@@ -12150,9 +12150,9 @@ is-hexadecimal@^1.0.0:
   integrity sha512-gyPJuv83bHMpocVYoqof5VDiZveEoGoFL8m3BXNb2VW8Xs+rz9kqO8LOQ5DH6EsuvilT1ApazU0pyl+ytbPtlw==
 
 is-hotkey@^0.1.4, is-hotkey@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.1.6.tgz#c214b1ccdcbda46fba4ba93d2de64915db737471"
-  integrity sha512-1+hMr0GLPM0M49UDRt9RgE8i+SM29UY4AGRP6sGz6fThOVXqSrEvTMakolhHMcVizJnPNAoMpEmE+Oi1k2NrZQ==
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.1.7.tgz#15b89a80c71df0a7367bafa8629a187196586522"
+  integrity sha512-fOzQF4+oex9Alhn4vDxzukeO5kwpn825U8CjACFD5MtPs52/0RnkYNYmhSDD6sPfRngCr/c6+VGyF3Wc7Jv+iw==
 
 is-installed-globally@^0.3.1:
   version "0.3.2"
