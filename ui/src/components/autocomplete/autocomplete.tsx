@@ -26,6 +26,7 @@ type OverriddenInputAttrKey =
   | 'as'
   | 'autoCapitalize'
   | 'autoComplete'
+  | 'inputMode'
   | 'autoCorrect'
   | 'id'
   | 'onChange'
@@ -195,6 +196,7 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
     <Root onBlur={handleRootBlur} onKeyDown={handleRootKeyDown} ref={rootRef}>
       <TextInput
         {...restProps}
+        inputMode="search"
         aria-activedescendant={activeItemId}
         aria-autocomplete="list"
         aria-expanded={expanded}
