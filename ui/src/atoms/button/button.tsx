@@ -6,7 +6,7 @@ import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
 } from '../../styles'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {ThemeColorSchemeKey, Theme, useTheme} from '../../theme'
 import {Box} from '../box'
 import {useCard} from '../card'
 import {Flex} from '../flex'
@@ -61,6 +61,8 @@ export const Button = forwardRef(
       ...restProps
     } = props
 
+    const theme = useTheme()
+
     const card = useCard()
 
     const boxProps = {
@@ -102,7 +104,9 @@ export const Button = forwardRef(
                   marginLeft={icon ? space : undefined}
                   marginRight={iconRight ? space : undefined}
                 >
-                  <Text size={size}>{text}</Text>
+                  <Text size={size} weight={theme.button.textWeight}>
+                    {text}
+                  </Text>
                 </Box>
               )}
 
