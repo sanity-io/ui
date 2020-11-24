@@ -17,9 +17,12 @@ export function responsiveFont(fontKey: FontKey, props: ResponsiveFontProps & Th
       position: 'relative',
       fontFamily: family,
       fontWeight,
-      display: 'block',
       padding: '1px 0',
       margin: 0,
+
+      '&&:not([hidden])': {
+        display: 'block',
+      },
     } as CSSObject,
     ...responsive(
       theme.media,

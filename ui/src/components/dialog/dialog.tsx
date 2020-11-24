@@ -30,7 +30,9 @@ const Root = styled(Layer)<{scheme: ThemeColorSchemeKey}>(
       left: 0;
       right: 0;
       bottom: 0;
-      display: flex;
+      &&:not([hidden]) {
+        display: flex;
+      }
       align-items: center;
       justify-content: center;
       padding: 1.25em;
@@ -43,7 +45,9 @@ const Root = styled(Layer)<{scheme: ThemeColorSchemeKey}>(
 const DialogContainer = styled(Container)`
   width: 100%;
   height: 100%;
-  display: flex;
+  &&:not([hidden]) {
+    display: flex;
+  }
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -54,7 +58,10 @@ const DialogCardRoot = styled(Card)`
   min-height: 0;
   max-height: 100%;
   overflow: hidden;
-  display: flex;
+
+  &&:not([hidden]) {
+    display: flex;
+  }
 `
 
 const DialogLayout = styled(Flex)`

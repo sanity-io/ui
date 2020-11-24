@@ -40,7 +40,10 @@ const Root = styled.button<{scheme: ThemeColorSchemeKey}>(
 
       &:is(a) {
         text-decoration: none;
-        display: block;
+
+        &:not([hidden]) {
+          display: block;
+        }
       }
 
       &:not(:disabled):focus {

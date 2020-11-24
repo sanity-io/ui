@@ -10,8 +10,11 @@ const Root = styled.div<{size: 0 | 1 | 2}>`
   white-space: nowrap;
 
   & > div {
-    display: inline-block;
     vertical-align: top;
+
+    &:not([hidden]) {
+      display: inline-block;
+    }
   }
 
   & > div + div {

@@ -44,7 +44,9 @@ const Root = styled.button<{scheme: ThemeColorSchemeKey}>(
 )
 
 const TextContainer = styled.span`
-  display: flex;
+  &&:not([hidden]) {
+    display: flex;
+  }
 
   & > div:first-child {
     flex: 1;

@@ -5,7 +5,9 @@ import {ThemeColorSchemeKey, Theme} from '../../theme'
 export function radioBaseStyles() {
   return css`
     position: relative;
-    display: inline-block;
+    &&:not([hidden]) {
+      display: inline-block;
+    }
   `
 }
 

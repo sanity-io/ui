@@ -11,7 +11,9 @@ import {ThemeColorSchemeKey, Theme, ThemeFontSize} from '../../theme'
 const root = () => {
   return css`
     position: relative;
-    display: inline-block;
+    &&:not([hidden]) {
+      display: inline-block;
+    }
   `
 }
 

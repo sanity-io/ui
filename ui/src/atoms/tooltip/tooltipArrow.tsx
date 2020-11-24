@@ -12,7 +12,9 @@ const Root = styled.div`
   }
 
   & > svg {
-    display: block;
+    &&:not([hidden]) {
+      display: block;
+    }
     transform-origin: 7.5px 7.5px;
   }
 

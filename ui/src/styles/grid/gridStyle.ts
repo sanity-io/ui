@@ -19,7 +19,10 @@ const GRID_AUTO_ROWS = {
 export function gridStyle({autoCols, autoFlow, autoRows}: GridStyleProps & {theme: Theme}) {
   return [
     {
-      display: 'grid',
+      '&&:not([hidden])': {
+        display: 'grid',
+      },
+
       gridAutoFlow: autoFlow,
       gridAutoColumns: autoCols && GRID_AUTO_COLUMS[autoCols],
       gridAutoRows: autoRows && GRID_AUTO_ROWS[autoRows],

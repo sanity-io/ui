@@ -38,10 +38,13 @@ const Root = styled.div<{uiColor: string; size: AvatarSize}>`
   }
 
   & > svg {
-    display: block;
     width: ${({size}) => rem(avatarTheme.size[size])};
     height: ${({size}) => rem(avatarTheme.size[size])};
     border-radius: ${({size}) => rem(avatarTheme.size[size] / 2)};
+
+    &:not([hidden]) {
+      display: block;
+    }
   }
 
   &:is(button) {
@@ -69,13 +72,16 @@ const Arrow = styled.div`
   transform: rotate(-90deg) translate3d(0, 6px, 0);
 
   & > svg {
-    display: block;
     width: 11px;
     height: 7px;
     position: absolute;
     top: -5px;
     left: 50%;
     transform: translateX(-50%);
+
+    &:not([hidden]) {
+      display: block;
+    }
   }
 
   [data-arrow-position='inside'] > & {
@@ -120,12 +126,15 @@ const Initials = styled.div<{scheme: ThemeColorSchemeKey}>(
       width: 100%;
       height: 100%;
       color: ${tone.enabled.fg};
-      display: flex;
       align-items: center;
       justify-content: center;
       text-transform: uppercase;
       text-align: center;
       border-radius: 50%;
+
+      &:not([hidden]) {
+        display: flex;
+      }
     `
   }
 )

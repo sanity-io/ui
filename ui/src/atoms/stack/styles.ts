@@ -7,7 +7,9 @@ function rem(px: number) {
 
 export function stackBaseStyles() {
   return css`
-    display: grid;
+    &&:not([hidden]) {
+      display: grid;
+    }
     grid-template-columns: minmax(0, 1fr);
     grid-auto-rows: min-content;
     margin: 0;

@@ -18,9 +18,12 @@ export function badge({
   const _mode = _tone.modes[mode] || _tone.modes.default
 
   return css`
-    display: inline-block;
     background-color: ${_mode.bg};
     color: ${_mode.fg};
     box-shadow: inset 0 0 0 1px ${_mode.border};
+
+    &:not([hidden]) {
+      display: inline-block;
+    }
   `
 }

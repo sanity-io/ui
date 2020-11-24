@@ -3,9 +3,12 @@ import {FlexStyleProps} from './types'
 export function flexStyle(props: FlexStyleProps) {
   return [
     {
-      display: 'flex',
       alignItems: props.align,
       justifyContent: props.justify,
+
+      '&:not([hidden])': {
+        display: 'flex',
+      },
     },
     responsiveFlexColumnStyle,
   ]

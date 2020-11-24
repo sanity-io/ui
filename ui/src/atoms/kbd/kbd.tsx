@@ -12,10 +12,13 @@ interface KBDProps {
 
 function kbd() {
   return css`
-    display: inline-block;
     background: var(--card-bg-color);
     font: inherit;
     box-shadow: inset 0 0 0 1px var(--card-hairline-hard-color);
+
+    &&:not([hidden]) {
+      display: inline-block;
+    }
   `
 }
 

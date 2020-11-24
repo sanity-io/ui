@@ -11,13 +11,15 @@ interface HotkeysProps {
 }
 
 const Root = styled.kbd`
-  display: block;
+  &&:not([hidden]) {
+    display: block;
+  }
   font: inherit;
 `
 
 const Key = styled(KBD)`
   /* See: https://github.com/styled-components/styled-components/issues/1816 */
-  && {
+  &&:not([hidden]) {
     display: block;
   }
 `

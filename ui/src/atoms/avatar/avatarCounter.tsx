@@ -8,7 +8,6 @@ import {AvatarSize} from './types'
 
 const Root = styled.div<{size: number}>(({size, theme}: {size: number; theme: Theme}) => {
   return css`
-    display: flex;
     align-items: center;
     justify-content: center;
     border-radius: ${rem(avatarTheme.size[size] / 2)};
@@ -21,6 +20,10 @@ const Root = styled.div<{size: number}>(({size, theme}: {size: number; theme: Th
     height: ${rem(avatarTheme.size[size])};
     box-shadow: 0 0 0 1px var(--card-bg-color), inset 0 0 0 1.5px var(--card-hairline-hard-color);
     padding: 0 ${rem(theme.space[2])};
+
+    &:not([hidden]) {
+      display: flex;
+    }
   `
 })
 

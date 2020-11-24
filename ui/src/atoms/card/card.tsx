@@ -68,6 +68,7 @@ export const Card = forwardRef(
     const parentCard = useCard()
     const {
       as: asProp,
+      display = 'block',
       margin = 0,
       padding = 0,
       radius = 0,
@@ -83,6 +84,7 @@ export const Card = forwardRef(
           data-ui="Card"
           {...restProps}
           as={as}
+          display={display}
           margin={margin}
           padding={padding}
           radius={radius}

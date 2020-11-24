@@ -32,10 +32,18 @@ const Root = styled.div<
 
 export const Box = forwardRef(
   (props: Omit<React.HTMLProps<HTMLDivElement>, 'height'> & BoxProps, ref) => {
-    const {as: asProp = 'div', margin = 0, padding = 0, ...restProps} = props
+    const {as: asProp = 'div', display = 'block', margin = 0, padding = 0, ...restProps} = props
 
     return (
-      <Root data-ui="Box" {...restProps} as={asProp} margin={margin} padding={padding} ref={ref}>
+      <Root
+        data-ui="Box"
+        {...restProps}
+        as={asProp}
+        display={display}
+        margin={margin}
+        padding={padding}
+        ref={ref}
+      >
         {props.children}
       </Root>
     )

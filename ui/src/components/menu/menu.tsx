@@ -14,7 +14,9 @@ interface MenuProps {
 }
 
 const Root = styled(Box)`
-  display: flex;
+  &&:not([hidden]) {
+    display: flex;
+  }
   flex-direction: column;
   outline: none;
 `

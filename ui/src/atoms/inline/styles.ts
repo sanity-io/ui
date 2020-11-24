@@ -7,10 +7,15 @@ function rem(px: number) {
 
 export function inlineBaseStyles() {
   return css`
-    display: block;
+    &&:not([hidden]) {
+      display: block;
+    }
+
+    & > div:not([hidden]) {
+      display: inline-block;
+    }
 
     & > div {
-      display: inline-block;
       vertical-align: middle;
     }
   `

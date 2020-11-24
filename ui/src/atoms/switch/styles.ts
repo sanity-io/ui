@@ -6,7 +6,9 @@ import {ThemeColorSchemeKey, Theme} from '../../theme'
 export function switchBaseStyles() {
   return css`
     position: relative;
-    display: inline-block;
+    &&:not([hidden]) {
+      display: inline-block;
+    }
   `
 }
 
@@ -42,7 +44,9 @@ export function switchRepresentationStyles(props: {scheme: ThemeColorSchemeKey; 
     --switch-thumb-color: ${tone.enabled.thumb};
     --switch-bg-color: ${tone.enabled.off.bg};
 
-    display: block;
+    &&:not([hidden]) {
+      display: block;
+    }
     position: relative;
     width: ${rem(switchInput.width)};
     height: ${rem(switchInput.height)};
@@ -73,7 +77,9 @@ export function switchTrackStyles(props: {theme: Theme}) {
   const {switch: switchInput} = props.theme.input
 
   return css`
-    display: block;
+    &&:not([hidden]) {
+      display: block;
+    }
     background: var(--switch-bg-color);
     position: absolute;
     left: 0;
@@ -101,7 +107,9 @@ export function switchThumbStyles(props: {
   const checked = indeterminate !== true && props.checked === true
 
   return css`
-    display: block;
+    &&:not([hidden]) {
+      display: block;
+    }
     position: absolute;
     left: ${rem(trackPadding)};
     top: ${rem(trackPadding)};
