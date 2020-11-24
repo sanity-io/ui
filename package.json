@@ -70,7 +70,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "run-s lint type-check test test:browser"
+      "pre-commit": "run-s lint type-check test"
     }
   }
 }
