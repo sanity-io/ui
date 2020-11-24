@@ -22,7 +22,7 @@ export function badge({
     color: ${_mode.fg};
     box-shadow: inset 0 0 0 1px ${_mode.border};
 
-    &:not([hidden]) {
+    &&:not([hidden]) {
       display: inline-block;
     }
   `

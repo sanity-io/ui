@@ -8,10 +8,6 @@ export function card(props: CardColorProps & {theme: Theme}) {
 
 export function cardBaseStyles() {
   return css`
-    &&:not([hidden]) {
-      display: block;
-    }
-
     &:is(button) {
       -webkit-font-smoothing: inherit;
       appearance: none;
