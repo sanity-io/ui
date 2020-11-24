@@ -9,14 +9,14 @@ export const card: ThemeColorCard = {
         bg: white.hex,
         fg: black.hex,
         muted: {
-          fg: hues.gray[700].hex,
+          fg: hues.gray[600].hex,
         },
         accent: {
-          fg: hues.red[600].hex,
+          fg: hues.red[500].hex,
         },
         hairline: {
-          soft: hues.gray[200].hex,
-          hard: hues.gray[300].hex,
+          soft: hues.gray[100].hex,
+          hard: hues.gray[200].hex,
         },
         focusRing: hues.blue[500].hex,
         link: hues.blue[700].hex,

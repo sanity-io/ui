@@ -8,6 +8,9 @@ export const sanityTheme: Theme = {
     distance: [-3, -6, -9],
     size: [23, 35, 55],
   },
+  button: {
+    textWeight: 'medium',
+  },
   color: {
     dark: darkScheme,
     light: lightScheme,

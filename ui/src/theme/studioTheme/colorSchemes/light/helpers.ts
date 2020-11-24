@@ -1,4 +1,4 @@
-import {hues, white, ColorHueKey} from '@sanity/color'
+import {black, hues, white, ColorHueKey} from '@sanity/color'
 import {ThemeButtonColorMode} from '../../../types'
 
 export function buildButtonDefaultMode(hueKey: ColorHueKey): ThemeButtonColorMode {
@@ -90,9 +90,9 @@ export function buildButtonBleedMode(hueKey: ColorHueKey): ThemeButtonColorMode 
       border: hue[100].hex,
     },
     selected: {
-      bg: hues.blue[50].hex,
-      fg: hues.blue[600].hex,
-      border: hues.blue[50].hex,
+      bg: hues.gray[50].hex,
+      fg: black.hex,
+      border: hues.gray[50].hex,
     },
   }
 }

@@ -25,6 +25,9 @@ export type ThemeColorSchemeKey = 'dark' | 'light'
 
 export interface Theme {
   avatar: ThemeAvatar
+  button: {
+    textWeight: 'regular' | 'medium' | 'semibold' | 'bold'
+  }
   color: ThemeColor
   container: number[]
   fonts: ThemeFonts

@@ -12,7 +12,7 @@ export const card: ThemeColorCard = {
           fg: hues.gray[400].hex,
         },
         accent: {
-          fg: hues.red[300].hex,
+          fg: hues.red[400].hex,
         },
         hairline: {
           soft: hues.gray[900].hex,
