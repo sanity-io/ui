@@ -19,10 +19,15 @@ const Root = styled.div<BoxStyleProps & FlexStyleProps & FlexItemStyleProps>(
   flexItemStyle
 )
 
-export const Flex = forwardRef((props: React.HTMLProps<HTMLDivElement> & FlexProps, ref) => {
-  const {direction, ...restProps} = props
+export const Flex = forwardRef(
+  (
+    props: BoxStyleProps & FlexProps & FlexItemStyleProps & React.HTMLProps<HTMLDivElement>,
+    ref
+  ) => {
+    const {direction, ...restProps} = props
 
-  return <Root data-ui="Flex" {...restProps} direction={direction} ref={ref} />
-})
+    return <Root data-ui="Flex" {...restProps} direction={direction} ref={ref} />
+  }
+)
 
 Flex.displayName = 'Flex'
