@@ -100,7 +100,7 @@ export function ToastProvider({children}: {children?: React.ReactNode}) {
     <ToastContext.Provider value={{push}}>
       {children}
 
-      <Root>
+      <Root data-ui="ToastProvider">
         <ToastContainer>
           <Box padding={4}>
             <AnimatePresence initial={false}>
