@@ -3,12 +3,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled(Card)`
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   height: 100%;
 `
 
 export const withCentered = (storyFn: () => JSX.Element) => (
-  <Root tone="transparent">{storyFn()}</Root>
+  <Root display="flex" tone="transparent">
+    {storyFn()}
+  </Root>
 )
