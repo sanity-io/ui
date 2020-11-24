@@ -1,47 +1,64 @@
-import {Box, Heading, Stack, Text} from '@sanity/ui'
+import {Box, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/ui'
 import React from 'react'
+import styled from 'styled-components'
+import {ArticleContent} from './articleContent'
 import {getTOC} from './helpers'
-import {ArticleContent, TimeAgo} from '$components'
+import {TimeAgo} from '$components'
 
-export function Article({article, slug}: {article?: any; slug: string}) {
-  if (!article) {
-    return (
-      <Text>
-        Missing article with slug <code>{slug}</code>!
-      </Text>
-    )
+const HeroContainer = styled(Container)`
+  @media (min-width: 800px) {
   }
+`
 
+export function Article({article}: {article?: any}) {
   const toc = article.content ? getTOC(article.content) : []
+  const layout = article.layout || {}
 
   return (
     <article>
       {article && (
-        <Stack space={[4, 4, 5, 6]}>
-          <Heading as="h1" size={[2, 2, 3, 4]}>
-            {article.title}
-          </Heading>
+        <Flex>
+          <Box flex={3}>
+            <Box padding={[3, 4, 5]}>
+              <HeroContainer width={2}>
+                <Heading as="h1" size={[2, 2, 3, 4]}>
+                  {article.title}
+                </Heading>
+              </HeroContainer>
 
-          {toc.length > 0 && (
-            <Stack space={[2, 3, 4]}>
-              {toc.map((heading) => (
-                <Box key={heading.slug}>
-                  <Text>
-                    <a href={`#${heading.slug}`}>{heading.text}</a>
-                  </Text>
-                </Box>
-              ))}
-            </Stack>
-          )}
+              <Container width={2}>
+                <Stack space={[4, 4, 5, 6]}>
+                  {article.content && <ArticleContent blocks={article.content} toc={toc} />}
+                </Stack>
 
-          {article.content && <ArticleContent blocks={article.content} toc={toc} />}
+                <Card borderTop marginTop={[3, 4, 5, 6]} paddingTop={[2, 3, 4]}>
+                  {article._updatedAt && (
+                    <Text muted size={[0, 1, 2]}>
+                      Updated <TimeAgo date={article._updatedAt} />
+                    </Text>
+                  )}
+                </Card>
+              </Container>
+            </Box>
+          </Box>
 
-          {article._updatedAt && (
-            <Text muted size={[0, 1, 2]}>
-              Updated <TimeAgo date={article._updatedAt} />
-            </Text>
-          )}
-        </Stack>
+          <Box display={['none', 'none', 'none', 'block']} flex={1} style={{maxWidth: '20rem'}}>
+            {!layout.wide && toc.length > 0 && (
+              <Box padding={[3, 4, 5]} style={{position: 'sticky', top: 0}}>
+                <Stack space={[2, 3, 4]}>
+                  <Label>On this page</Label>
+                  {toc.map((heading) => (
+                    <Box key={heading.slug}>
+                      <Text>
+                        <a href={`#${heading.slug}`}>{heading.text}</a>
+                      </Text>
+                    </Box>
+                  ))}
+                </Stack>
+              </Box>
+            )}
+          </Box>
+        </Flex>
       )}
     </article>
   )

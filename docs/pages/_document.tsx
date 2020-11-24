@@ -1,3 +1,4 @@
+import {hues} from '@sanity/color'
 import NextDocument, {
   DocumentContext,
   DocumentProps,
@@ -41,9 +42,8 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
       <Html>
         <Head>
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-          <meta name="theme-color" content="#F03E2F" />
+          <meta name="theme-color" content={hues.red[500].hex} />
           <meta name="msapplication-tap-highlight" content="no" />
-          {/* @todo: OG and twitter */}
           <link rel="icon" href="/favicon.ico" />
           <link rel="icon" href="/sanity-favicon-192.png" sizes="192x192" />
           <link rel="shortcut icon" href="/sanity-favicon-72.png" />

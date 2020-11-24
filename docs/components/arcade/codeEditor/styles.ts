@@ -90,7 +90,7 @@ export function codeEditorSyntax({scheme, theme}: {scheme: ThemeColorSchemeKey; 
       color: ${syntax.keyword};
     }
     .cm-s-default .cm-atom {
-      color: #219;
+      color: ${syntax.boolean};
     }
     .cm-s-default .cm-number {
       color: ${syntax.number};

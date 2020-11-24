@@ -15,9 +15,15 @@ import {AppFeatures} from './types'
 export function AppProvider({
   children,
   features,
+  nav,
+  node,
+  target,
 }: {
   children?: React.ReactNode
   features: AppFeatures
+  nav: any
+  node: any
+  target: any
 }) {
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
@@ -30,7 +36,7 @@ export function AppProvider({
     <ThemeProvider theme={studioTheme}>
       <CardProvider scheme={colorScheme}>
         <GlobalStyle scheme={colorScheme} />
-        <AppContext.Provider value={{colorScheme, features, setColorScheme}}>
+        <AppContext.Provider value={{colorScheme, features, nav, node, setColorScheme, target}}>
           <LayerProvider id="root">
             <ToastProvider>{children}</ToastProvider>
           </LayerProvider>

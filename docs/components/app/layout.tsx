@@ -1,79 +1,23 @@
-import {SanityLogo} from '@sanity/logos'
-import {Box, Button, Card, Flex, Inline, Switch} from '@sanity/ui'
-import Link from 'next/link'
-import {useRouter} from 'next/router'
+import {Card} from '@sanity/ui'
 import React from 'react'
-import {useApp} from './hooks'
+import styled from 'styled-components'
+import {Navbar} from './navbar'
 
-interface Route {
-  href: string
-  title: string
-}
+const Root = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
 
-function ThemedSanityLogo() {
-  const dark = useApp().colorScheme === 'dark'
-
-  return <SanityLogo dark={dark} />
-}
+const ContentContainer = styled(Card)`
+  flex: 1;
+`
 
 export function AppLayout({children}: {children: React.ReactNode}) {
-  const {colorScheme, features, setColorScheme} = useApp()
-  const router = useRouter()
-
-  const navbarRoutes = [
-    features.designDocs && {href: '/design', title: 'Design'},
-    features.uiDocs && {href: '/ui', title: 'UI'},
-    features.arcade && {href: '/arcade', title: 'Arcade'},
-    features.resourcesDocs && {href: '/resources', title: 'Resources'},
-    features.changelog && {href: '/changelog', title: 'Changelog'},
-  ].filter(Boolean) as Route[]
-
   return (
-    <Flex direction="column" height="fill">
-      <Card as="nav" padding={[2, 3, 4]} borderBottom>
-        <Flex align="center">
-          <Box flex={1}>
-            <Flex>
-              <Inline space={2}>
-                {navbarRoutes.map((route, routeIndex) => {
-                  const selected = router.asPath.startsWith(route.href)
-
-                  return (
-                    <Link href={route.href} key={route.href} passHref>
-                      <Button
-                        aria-current={selected ? 'page' : undefined}
-                        as="a"
-                        icon={routeIndex === 0 ? ThemedSanityLogo : undefined}
-                        mode="bleed"
-                        padding={[1, 2, 3]}
-                        selected={selected}
-                        size={[2, 2, 3]}
-                        text={route.title}
-                      />
-                    </Link>
-                  )
-                })}
-              </Inline>
-            </Flex>
-          </Box>
-
-          <Box paddingX={[1, 2, 3]}>
-            <Switch
-              checked={colorScheme === 'dark'}
-              onChange={(event) => {
-                if (event.currentTarget.checked) {
-                  setColorScheme('dark')
-                } else {
-                  setColorScheme('light')
-                }
-              }}
-              style={{verticalAlign: 'top'}}
-            />
-          </Box>
-        </Flex>
-      </Card>
-
-      {children}
-    </Flex>
+    <Root>
+      <Navbar />
+      <ContentContainer>{children}</ContentContainer>
+    </Root>
   )
 }
