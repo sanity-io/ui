@@ -2,23 +2,21 @@ import Head from 'next/head'
 import React from 'react'
 import {AppLayout, Article, Screen, useApp} from '$components'
 import {PageLayout} from '$components'
-import {getNavItems, getNavStaticPaths} from '$lib/nav'
-import {MAIN_NAV_QUERY} from '$queries'
-import {getClient} from '$sanity'
+import {PREVIEW} from '$features'
+import {getNavItems} from '$lib/nav'
+import {loadPageData, loadPagePaths} from '$lib/page'
 
-const __DEV__ = process.env.NODE_ENV === 'development'
+export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
+  const {params = {}, preview = PREVIEW} = opts
+  const data = await loadPageData({params, preview})
 
-export function getStaticProps({params, preview = __DEV__}: {params: any; preview?: boolean}) {
-  return {props: {params, preview}}
+  return {props: {...data, params, preview}}
 }
 
 export async function getStaticPaths() {
-  const nav = await getClient(__DEV__).fetch(MAIN_NAV_QUERY)
+  const paths = await loadPagePaths({preview: PREVIEW})
 
-  return {
-    paths: getNavStaticPaths(nav.items),
-    fallback: false,
-  }
+  return {paths, fallback: false}
 }
 
 export default function PathPage(props: {params: {path: string[]}}) {

@@ -12,7 +12,7 @@ interface Route {
 }
 
 export function Navbar() {
-  const {colorScheme, nav, setColorScheme} = useApp()
+  const {colorScheme, nav = {}, setColorScheme} = useApp()
   const router = useRouter()
 
   const navbarRoutes: Route[] = (nav.items || [])

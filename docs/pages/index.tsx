@@ -2,6 +2,15 @@ import {Box, Card, Container, Grid, Heading, Stack, Text} from '@sanity/ui'
 import Head from 'next/head'
 import React from 'react'
 import {AppLayout} from '$components'
+import {PREVIEW} from '$features'
+import {loadPageData} from '$lib/page'
+
+export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
+  const {params = {}, preview = PREVIEW} = opts
+  const data = await loadPageData({params: params, preview})
+
+  return {props: {...data, params, preview}}
+}
 
 function IndexPage() {
   return (

@@ -12,19 +12,14 @@ import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'
 import {AppFeatures} from './types'
 
-export function AppProvider({
-  children,
-  features,
-  nav,
-  node,
-  target,
-}: {
+export function AppProvider(props: {
   children?: React.ReactNode
   features: AppFeatures
   nav: any
   node: any
   target: any
 }) {
+  const {children, features, nav, node, target} = props
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
     prefersDark ? 'dark' : 'light'
