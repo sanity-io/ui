@@ -56,9 +56,13 @@ export function switchRepresentationStyles(props: {scheme: ThemeColorSchemeKey; 
     pointer-events: none;
 
     /* Focus styles */
-    input:focus-visible + & {
+    input:focus + & {
       /* @todo: Use focus ring color from card theme */
       box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+    }
+
+    input:focus:not(:focus-visible) + & {
+      box-shadow: none;
     }
 
     input:checked + & {

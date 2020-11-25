@@ -48,8 +48,12 @@ const inputColor = ({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}
       }
     }
 
-    &:not(:disabled):focus-visible {
+    &:not(:disabled):focus {
       box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+    }
+
+    &:not(:disabled):focus:not(:focus-visible) {
+      box-shadow: none;
     }
 
     &:disabled {

@@ -58,8 +58,12 @@ export function buttonColorStyles(props: {
         box-shadow: inset 0 0 0 1px ${mode.enabled.border};
       }
 
-      &:focus-visible {
+      &:focus {
         box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+      }
+
+      &:focus:not(:focus-visible) {
+        box-shadow: none;
       }
 
       @media (hover: hover) {

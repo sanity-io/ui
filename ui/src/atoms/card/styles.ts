@@ -73,7 +73,7 @@ export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
           }
         }
 
-        &:focus-visible {
+        &:focus {
           ${vars(_tone.selected)}
         }
 
@@ -101,7 +101,7 @@ export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
           }
         }
 
-        &:focus-visible {
+        &:focus {
           ${vars(_tone.selected)}
         }
 

@@ -38,8 +38,12 @@ export function headingBaseStyles(props: {accent?: boolean; muted?: boolean; the
         }
       }
 
-      &:focus-visible {
+      &:focus {
         box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+      }
+
+      &:focus:not(:focus-visible) {
+        box-shadow: none;
       }
     }
 
