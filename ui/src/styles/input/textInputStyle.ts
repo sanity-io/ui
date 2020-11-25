@@ -1,73 +1,43 @@
 import {CSSObject} from 'styled-components'
-import {ThemeColorSchemeKey, ThemeColorInputState} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
-interface TextInputRootStyleProps {
-  disabled?: boolean
+export interface TextInputInputStyleProps {
   scheme: ThemeColorSchemeKey
-}
-
-interface TextInputInputStyleProps {
   uiSize?: number | number[]
   weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
-export const textInputStyle = {
-  root: [
-    {
-      position: 'relative',
-
-      '&&:not([hidden])': {
-        display: 'block',
-      },
-    } as CSSObject,
-    rootColorStyle,
-  ],
-  input: [inputBaseStyle, inputFontSizeStyle],
+export interface TextInputRepresentationStyleProps {
+  border?: boolean
+  scheme: ThemeColorSchemeKey
 }
 
-function _textInputColor(color: ThemeColorInputState): CSSObject {
-  return {
-    '&>input,&>textarea': {
-      color: color.fg,
+export const textInputStyle = {
+  root: () => [rootStyle],
+  input: () => [inputBaseStyle, inputFontSizeStyle],
+  representation: representationStyle,
+}
 
-      '&::placeholder': {
-        color: color.placeholder,
-      },
+function rootStyle(): CSSObject {
+  return {
+    position: 'relative',
+
+    '&&:not([hidden])': {
+      display: 'block',
     },
   }
 }
 
-function rootColorStyle({disabled, scheme, theme}: TextInputRootStyleProps & ThemeProps) {
+function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject {
+  const {scheme, theme, weight} = props
+  const font = theme.fonts.text
   const _scheme = theme.color[scheme] || theme.color.light
   const tone = _scheme.input.tones.default
 
-  if (disabled) {
-    return _textInputColor(tone.disabled)
-  }
-
-  return [
-    _textInputColor(tone.enabled),
-    {
-      '@media(hover:hover)': {
-        '&:hover': _textInputColor(tone.hovered),
-      },
-
-      '&:focus-within': {
-        boxShadow: '0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color)',
-      },
-    } as CSSObject,
-  ]
-}
-
-function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject {
-  const {theme, weight} = props
-  const font = theme.fonts.text
-
   return {
     appearance: 'none',
-    color: 'inherit',
     background: 'none',
     border: 0,
     borderRadius: 0,
@@ -79,13 +49,37 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject
     margin: 0,
     position: 'relative',
     zIndex: 1,
-
-    '&&:not[hidden]': {
-      display: 'block',
-    },
+    display: 'block',
 
     '&:is(textarea)': {
       resize: 'none',
+    },
+
+    // enabled
+    '&:not(:invalid):not(:disabled)': {
+      color: tone.enabled.fg,
+
+      '&::placeholder': {
+        color: tone.enabled.placeholder,
+      },
+    },
+
+    // disabled
+    '&:not(:invalid):disabled': {
+      color: tone.disabled.fg,
+
+      '&::placeholder': {
+        color: tone.disabled.placeholder,
+      },
+    },
+
+    // invalid
+    '&:invalid': {
+      color: tone.invalid.fg,
+
+      '&::placeholder': {
+        color: tone.invalid.placeholder,
+      },
     },
   }
 }
@@ -104,4 +98,56 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
       }
     })
   )
+}
+
+function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject {
+  const {scheme, theme} = props
+  const _scheme = theme.color[scheme] || theme.color.light
+  const tone = _scheme.input.tones.default
+
+  return {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    pointerEvents: 'none',
+    zIndex: 0,
+
+    // enabled
+    color: tone.enabled.fg,
+    backgroundColor: tone.enabled.bg,
+    boxShadow: `0 0 0 1px ${tone.enabled.border}`,
+
+    // focused
+    '*:not(:disabled):focus + &': {
+      boxShadow: '0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color)',
+    },
+
+    // invalid
+    '*:not(:disabled):invalid + &': {
+      color: tone.invalid.fg,
+      backgroundColor: tone.invalid.bg,
+      boxShadow: `0 0 0 1px ${tone.invalid.border}`,
+    },
+
+    // disabled
+    '*:disabled + &': {
+      color: tone.disabled.fg,
+      backgroundColor: tone.disabled.bg,
+      boxShadow: `0 0 0 1px ${tone.disabled.border}`,
+    },
+
+    // hovered
+    '@media (hover: hover)': {
+      '*:not(:disabled):not(:invalid):hover + &': {
+        color: tone.hovered.fg,
+        backgroundColor: tone.hovered.bg,
+      },
+
+      '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
+        boxShadow: `0 0 0 1px ${tone.hovered.border}`,
+      },
+    },
+  }
 }

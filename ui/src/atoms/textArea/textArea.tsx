@@ -8,8 +8,10 @@ import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
   textInputStyle,
+  TextInputResponsivePaddingStyleProps,
+  TextInputInputStyleProps,
+  TextInputRepresentationStyleProps,
 } from '../../styles'
-import {ThemeColorSchemeKey} from '../../theme'
 import {useCard} from '../card'
 
 interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
@@ -19,17 +21,17 @@ interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusPr
   customValidity?: string
 }
 
-const Root = styled.span<{
-  border: boolean
-  disabled: boolean
-  scheme: ThemeColorSchemeKey
-  radius?: number | number[]
-}>(responsiveRadiusStyle, textInputStyle.root)
+const Root = styled.span(textInputStyle.root)
 
-const Input = styled.textarea<{
-  uiSize: number[]
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
-}>(responsiveInputPaddingStyle, textInputStyle.input)
+const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+  responsiveInputPaddingStyle,
+  textInputStyle.input
+)
+
+const Presentation = styled.div<ResponsiveRadiusProps & TextInputRepresentationStyleProps>(
+  responsiveRadiusStyle,
+  textInputStyle.representation
+)
 
 export const TextArea = forwardRef(
   (
@@ -52,7 +54,7 @@ export const TextArea = forwardRef(
       ...restProps
     } = props
 
-    const card = useCard()
+    const {scheme} = useCard()
 
     const paddingProps = {
       padding,
@@ -71,8 +73,17 @@ export const TextArea = forwardRef(
     const uiSize = getResponsiveProp(sizeProp)
 
     return (
-      <Root border={border} disabled={disabled} scheme={card.scheme} radius={radius}>
-        <Input {...restProps} {...paddingProps} disabled={disabled} ref={ref} uiSize={uiSize} />
+      <Root>
+        <Input
+          {...restProps}
+          {...paddingProps}
+          disabled={disabled}
+          ref={ref}
+          scheme={scheme}
+          uiSize={uiSize}
+        />
+
+        <Presentation border={border} radius={radius} scheme={scheme} />
       </Root>
     )
   }

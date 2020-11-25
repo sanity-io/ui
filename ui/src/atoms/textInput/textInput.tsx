@@ -1,14 +1,16 @@
 import React, {createElement, forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
   responsiveInputPaddingStyle,
   textInputStyle,
+  TextInputInputStyleProps,
+  TextInputRepresentationStyleProps,
+  TextInputResponsivePaddingStyleProps,
 } from '../../styles'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {Box} from '../box'
 import {useCard} from '../card'
 import {Icon, IconSymbol} from '../icon'
@@ -37,46 +39,17 @@ interface TextInputProps extends ResponsiveRadiusProps {
   weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
-const Root = styled.span<
-  {
-    border: boolean
-    disabled: boolean
-    scheme: ThemeColorSchemeKey
-  } & ResponsiveRadiusProps
->(responsiveRadiusStyle, textInputStyle.root)
+const Root = styled.span(textInputStyle.root)
 
-const Input = styled.input<{
-  padding?: number | number[]
-  iconLeft?: boolean
-  iconRight?: boolean
-  space?: number | number[]
-  uiSize: number | number[]
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
-}>(responsiveInputPaddingStyle, textInputStyle.input)
+const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+  responsiveInputPaddingStyle,
+  textInputStyle.input
+)
 
-const IconContainer = styled.div(({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.input.tones.default
-
-  return css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    color: ${tone.enabled.fg};
-
-    @media (hover: hover) {
-      input:not(:disabled):hover + & {
-        color: ${tone.hovered.fg};
-      }
-    }
-
-    input:disabled + & {
-      color: ${tone.disabled.fg};
-    }
-  `
-})
+const Presentation = styled.div<ResponsiveRadiusProps & TextInputRepresentationStyleProps>(
+  responsiveRadiusStyle,
+  textInputStyle.representation
+)
 
 const IconLeftBox = styled(Box)`
   position: absolute;
@@ -115,7 +88,7 @@ export const TextInput = forwardRef(
     useCustomValidity(ref, customValidity)
 
     return (
-      <Root border={border} disabled={disabled} scheme={scheme} radius={radius}>
+      <Root>
         <Input
           {...restProps}
           disabled={disabled}
@@ -123,34 +96,33 @@ export const TextInput = forwardRef(
           iconRight={Boolean(iconRight)}
           padding={padding}
           ref={ref}
+          scheme={scheme}
           space={space}
           type={type}
           uiSize={size}
         />
 
-        {(icon || iconRight) && (
-          <IconContainer scheme={scheme}>
-            {icon && (
-              <IconLeftBox padding={padding}>
-                <Text size={size}>
-                  {typeof icon === 'string' && <Icon symbol={icon} />}
-                  {typeof icon !== 'string' && isValidElementType(icon) && createElement(icon)}
-                </Text>
-              </IconLeftBox>
-            )}
+        <Presentation border={border} radius={radius} scheme={scheme}>
+          {icon && (
+            <IconLeftBox padding={padding}>
+              <Text size={size}>
+                {typeof icon === 'string' && <Icon symbol={icon} />}
+                {typeof icon !== 'string' && isValidElementType(icon) && createElement(icon)}
+              </Text>
+            </IconLeftBox>
+          )}
 
-            {iconRight && (
-              <IconRightBox padding={padding}>
-                <Text size={size}>
-                  {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
-                  {typeof iconRight !== 'string' &&
-                    isValidElementType(iconRight) &&
-                    createElement(iconRight)}
-                </Text>
-              </IconRightBox>
-            )}
-          </IconContainer>
-        )}
+          {iconRight && (
+            <IconRightBox padding={padding}>
+              <Text size={size}>
+                {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
+                {typeof iconRight !== 'string' &&
+                  isValidElementType(iconRight) &&
+                  createElement(iconRight)}
+              </Text>
+            </IconRightBox>
+          )}
+        </Presentation>
       </Root>
     )
   }

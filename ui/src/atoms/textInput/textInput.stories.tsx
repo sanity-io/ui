@@ -16,9 +16,11 @@ const symbolOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, k
 }, {})
 
 export const plain = () => {
-  const border = boolean('Border?', true, 'Props')
+  const border = boolean('Border', true, 'Props')
 
-  const disabled = boolean('Disabled?', false, 'Props')
+  const customValidity = text('Custom validity', '', 'Props') || undefined
+
+  const disabled = boolean('Disabled', false, 'Props')
 
   const icon = (select('Icon', {'(none)': '', ...symbolOptions}, 'add-circle', 'Props') ||
     undefined) as IconSymbol | undefined
@@ -44,6 +46,8 @@ export const plain = () => {
     3,
     'Props'
   )
+
+  const placeholder = text('Placeholder', '', 'Props') || undefined
 
   const radius = select(
     'Radius',
@@ -94,11 +98,13 @@ export const plain = () => {
           </Text>
           <TextInput
             border={border}
+            customValidity={customValidity}
             disabled={disabled}
             icon={icon}
             iconRight={iconRight}
             id="text-input-example"
             padding={padding}
+            placeholder={placeholder}
             radius={radius}
             size={size}
             space={space}

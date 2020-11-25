@@ -1,14 +1,17 @@
 import {Theme} from '../../theme'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 
-export function responsiveInputPaddingStyle(props: {
+export interface TextInputResponsivePaddingStyleProps {
   padding?: number | number[]
   uiSize?: number | number[]
   space?: number | number[]
-  theme: Theme
   iconLeft?: boolean
   iconRight?: boolean
-}) {
+}
+
+export function responsiveInputPaddingStyle(
+  props: TextInputResponsivePaddingStyleProps & {theme: Theme}
+) {
   const {iconLeft, iconRight, theme} = props
   const padding = getResponsiveProp(props.padding, [0])
   const space = getResponsiveProp(props.space, [0])
