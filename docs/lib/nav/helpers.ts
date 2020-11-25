@@ -1,6 +1,7 @@
 interface NavItem {
   href: string | undefined
   title: string
+  menuTitle?: string
   items: NavItem[]
   segment?: string
 }
@@ -12,6 +13,7 @@ export function getNavItems(items: any[], basePath = ''): NavItem[] {
     return {
       href: item.targetId ? href : undefined,
       title: item.title,
+      menuTitle: item.menuTitle,
       items: getNavItems(item.items || [], href),
       segment: item.segment,
     }

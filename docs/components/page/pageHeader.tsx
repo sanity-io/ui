@@ -21,7 +21,7 @@ function NavItem(props: any) {
       {props.href && (
         <Box padding={3}>
           <NavLink href={props.href} size={[2, 2, 3]} weight="medium">
-            {props.title}
+            {props.menuTitle || props.title}
           </NavLink>
         </Box>
       )}
@@ -30,7 +30,7 @@ function NavItem(props: any) {
         <Box onClick={() => setCollapsed((v) => !v)} paddingX={3} paddingTop={5} paddingBottom={3}>
           <Flex justify="space-between">
             <Label size={[2, 2, 3]} weight="medium">
-              {props.title}
+              {props.menuTitle || props.title}
             </Label>
             <Label muted size={[2, 2, 3]}>
               <Icon symbol={collapsed ? 'chevron-down' : 'chevron-up'} />
@@ -53,10 +53,20 @@ function NavItem(props: any) {
   )
 }
 
-function NavMenu({href, items, title}: {href?: string; items: NavItemType[]; title: string}) {
+function NavMenu({
+  href,
+  items,
+  menuTitle,
+  title,
+}: {
+  href?: string
+  items: NavItemType[]
+  menuTitle?: string
+  title: string
+}) {
   return (
     <Card padding={[3, 4]}>
-      <NavItem href={href || '/'} items={[]} title={title} />
+      <NavItem href={href || '/'} items={[]} menuTitle={menuTitle} title={title} />
 
       {items.map((item: any, itemIndex: number) => (
         <NavItem {...item} key={itemIndex} />

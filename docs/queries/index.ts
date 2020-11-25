@@ -10,17 +10,20 @@ export const MAIN_NAV_QUERY = groq`
     items[]{
       hidden,
       "title": coalesce(title, route.title),
+      menuTitle,
       segment,
       "targetId": target->_id,
       items[]{
         hidden,
         "title": coalesce(title, route.title),
+        menuTitle,
         segment,
         "targetId": target->_id,
         title,
         items[]{
           hidden,
           "title": coalesce(title, route.title),
+          menuTitle,
           segment,
           "targetId": target->_id,
           title
