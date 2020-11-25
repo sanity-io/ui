@@ -35,11 +35,11 @@
     "react-refractor": "^2.1.2"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.1.5",
+    "@storybook/addon-actions": "^6.1.6",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-knobs": "^6.1.5",
-    "@storybook/addon-links": "^6.1.5",
-    "@storybook/react": "^6.1.5",
+    "@storybook/addon-knobs": "^6.1.6",
+    "@storybook/addon-links": "^6.1.6",
+    "@storybook/react": "^6.1.6",
     "@types/refractor": "^3.0.0",
     "@types/resize-observer-browser": "^0.1.4",
     "@types/styled-components": "^5.1.4",
