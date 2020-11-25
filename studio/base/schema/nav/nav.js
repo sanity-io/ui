@@ -5,6 +5,7 @@ export const navItem = {
   fields: [
     {type: 'boolean', name: 'hidden', title: 'Hidden'},
     {type: 'string', name: 'title', title: 'Title'},
+    {type: 'string', name: 'menuTitle', title: 'Menu title'},
     {type: 'string', name: 'segment', title: 'Segment'},
     {type: 'reference', name: 'target', title: 'Target', to: [{type: 'article'}, {type: 'screen'}]},
     {
