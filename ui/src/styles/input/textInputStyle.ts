@@ -117,7 +117,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
     // enabled
     color: tone.enabled.fg,
     backgroundColor: tone.enabled.bg,
-    boxShadow: border ? `0 0 0 1px ${tone.enabled.border}` : undefined,
+    boxShadow: border ? `inset 0 0 0 1px ${tone.enabled.border}` : undefined,
 
     // focused
     '*:not(:disabled):focus + &': {
@@ -128,14 +128,14 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
     '*:not(:disabled):invalid + &': {
       color: tone.invalid.fg,
       backgroundColor: tone.invalid.bg,
-      boxShadow: border ? `0 0 0 1px ${tone.invalid.border}` : undefined,
+      boxShadow: border ? `inset 0 0 0 1px ${tone.invalid.border}` : undefined,
     },
 
     // disabled
     '*:disabled + &': {
       color: tone.disabled.fg,
       backgroundColor: tone.disabled.bg,
-      boxShadow: border ? `0 0 0 1px ${tone.disabled.border}` : undefined,
+      boxShadow: border ? `inset 0 0 0 1px ${tone.disabled.border}` : undefined,
     },
 
     // hovered
@@ -146,7 +146,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
       },
 
       '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
-        boxShadow: border ? `0 0 0 1px ${tone.hovered.border}` : 'none',
+        boxShadow: border ? `inset 0 0 0 1px ${tone.hovered.border}` : 'none',
       },
     },
   }
