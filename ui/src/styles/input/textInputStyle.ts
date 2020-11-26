@@ -101,7 +101,7 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
 }
 
 function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject {
-  const {scheme, theme} = props
+  const {border, scheme, theme} = props
   const _scheme = theme.color[scheme] || theme.color.light
   const tone = _scheme.input.tones.default
 
@@ -117,7 +117,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
     // enabled
     color: tone.enabled.fg,
     backgroundColor: tone.enabled.bg,
-    boxShadow: `0 0 0 1px ${tone.enabled.border}`,
+    boxShadow: border ? `0 0 0 1px ${tone.enabled.border}` : undefined,
 
     // focused
     '*:not(:disabled):focus + &': {
@@ -128,14 +128,14 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
     '*:not(:disabled):invalid + &': {
       color: tone.invalid.fg,
       backgroundColor: tone.invalid.bg,
-      boxShadow: `0 0 0 1px ${tone.invalid.border}`,
+      boxShadow: border ? `0 0 0 1px ${tone.invalid.border}` : undefined,
     },
 
     // disabled
     '*:disabled + &': {
       color: tone.disabled.fg,
       backgroundColor: tone.disabled.bg,
-      boxShadow: `0 0 0 1px ${tone.disabled.border}`,
+      boxShadow: border ? `0 0 0 1px ${tone.disabled.border}` : undefined,
     },
 
     // hovered
@@ -146,7 +146,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
       },
 
       '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
-        boxShadow: `0 0 0 1px ${tone.hovered.border}`,
+        boxShadow: border ? `0 0 0 1px ${tone.hovered.border}` : 'none',
       },
     },
   }
