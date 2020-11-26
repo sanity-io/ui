@@ -58,6 +58,7 @@ export const Button = forwardRef(
       space = 3,
       text,
       tone = 'default',
+      type = 'button',
       ...restProps
     } = props
 
@@ -86,6 +87,7 @@ export const Button = forwardRef(
         ref={ref}
         scheme={card.scheme}
         tone={tone}
+        type={type}
         uiMode={mode}
       >
         {(icon || text || iconRight) && (
