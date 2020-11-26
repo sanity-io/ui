@@ -1,6 +1,6 @@
 import {Autocomplete, Card, Label, Stack, Text} from '@sanity/ui'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useRef, useState} from 'react'
 import countries from './__fixtures__/countries'
 
 interface ExampleOption {
@@ -122,6 +122,46 @@ function CustomExample({
         renderValue={renderValue}
         size={size}
         value={query}
+      />
+    </Stack>
+  )
+}
+
+export const async = () => {
+  return (
+    <Card padding={4}>
+      <AsyncExample />
+    </Card>
+  )
+}
+
+function AsyncExample() {
+  const [options, setOptions] = useState<ExampleOption[]>([])
+  const timeoutRef = useRef(-1)
+  const [loading, setLoading] = useState(false)
+
+  const handleQueryChange = (query: string | null) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    if (query === null) return
+    setLoading(true)
+    timeoutRef.current = setTimeout(() => {
+      const results: ExampleOption[] = countries
+        .filter((d) => d.name.toLowerCase().includes(query.toLowerCase()))
+        .map((d) => ({title: d.name, value: d.code}))
+
+      setOptions(results)
+      setLoading(false)
+    }, 200 + Math.random() * 700)
+  }
+
+  return (
+    <Stack space={3}>
+      <Autocomplete
+        id="async"
+        loading={loading}
+        onQueryChange={handleQueryChange}
+        options={options}
+        placeholder="Search..."
       />
     </Stack>
   )

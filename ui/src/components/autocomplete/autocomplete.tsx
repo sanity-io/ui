@@ -1,11 +1,11 @@
 import React, {cloneElement, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Button, Card, IconSymbol, Text, TextInput} from '../../atoms'
+import {Box, Button, Card, IconSymbol, Spinner, Text, TextInput} from '../../atoms'
 import {focusFirstDescendant} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
 import {getResponsiveProp} from '../../styles'
 import {AutocompleteOption} from './autocompleteOption'
-import {Root, ListBoxContainer, ListBoxCard} from './styles'
+import {Root, LoadingCard, ListBoxContainer, ListBoxCard} from './styles'
 
 export interface BaseAutocompleteOption {
   value: string
@@ -16,7 +16,9 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   filterOption?: (query: string, option: Option) => boolean
   icon?: IconSymbol
   id: string
+  loading?: boolean
   onChange?: (value: string) => void
+  onQueryChange?: (query: string | null) => void
   onSelect?: (value: string) => void
   options?: Option[]
   padding?: number | number[]
@@ -94,7 +96,9 @@ const InnerAutocomplete = forwardRef(
       filterOption: filterOptionProp,
       icon,
       id,
+      loading,
       onChange,
+      onQueryChange,
       onSelect,
       options: optionsProp = [],
       padding: paddingProp = 3,
@@ -124,7 +128,7 @@ const InnerAutocomplete = forwardRef(
     const currentOption = value ? options.find((o) => o.value === value) : undefined
     const filteredOptions = options.filter((option) => (query ? filterOption(query, option) : true))
     const optionsLen = filteredOptions.length
-    const expanded = focused && optionsLen > 0 && query !== null
+    const expanded = loading || (focused && optionsLen > 0 && query !== null)
     const forwardedRef = useForwardedRef(ref)
 
     const handleRootBlur = useCallback(() => {
@@ -161,6 +165,7 @@ const InnerAutocomplete = forwardRef(
           setFocused(false)
           valueRef.current = ''
           setQuery(null)
+          if (onQueryChange) onQueryChange(null)
 
           inputRef.current?.focus()
 
@@ -179,36 +184,44 @@ const InnerAutocomplete = forwardRef(
           return
         }
       },
-      [optionsLen]
+      [onQueryChange, optionsLen]
     )
 
-    const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-      valueRef.current = event.currentTarget.value
-      setQuery(event.currentTarget.value)
-    }, [])
+    const handleInputChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const q = event.currentTarget.value
+
+        valueRef.current = q
+        setQuery(q)
+        if (onQueryChange) onQueryChange(q)
+      },
+      [onQueryChange]
+    )
 
     const handleInputFocus = useCallback(() => setFocused(true), [])
 
     const handleClearButtonClick = useCallback(() => {
       valueRef.current = ''
       setValue('')
-      setQuery(null)
       if (onChange) onChange('')
+      setQuery(null)
+      if (onQueryChange) onQueryChange(null)
       inputRef.current?.focus()
-    }, [onChange])
+    }, [onChange, onQueryChange])
 
     const handleClearButtonFocus = useCallback(() => setFocused(true), [])
 
     const handleOptionSelect = useCallback(
       (v: string) => {
         if (onSelect) onSelect(v)
-        if (onChange) onChange(v)
         setValue(v)
+        if (onChange) onChange(v)
         setQuery(null)
+        if (onQueryChange) onQueryChange(null)
         setFocused(false)
         inputRef.current?.focus()
       },
-      [onChange, onSelect]
+      [onChange, onSelect, onQueryChange]
     )
 
     // Change the value when `value` prop changes
@@ -299,10 +312,14 @@ const InnerAutocomplete = forwardRef(
                   }
                   value={option.value}
                 >
-                  {cloneElement(renderOption(option), {tabIndex: -1})}
+                  {cloneElement(renderOption(option), {disabled: loading, tabIndex: -1})}
                 </AutocompleteOption>
               ))}
             </ul>
+
+            <LoadingCard padding={3} style={{opacity: loading ? 0.5 : 0}}>
+              <Spinner />
+            </LoadingCard>
           </ListBoxCard>
         </ListBoxContainer>
       </Root>
