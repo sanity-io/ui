@@ -33,13 +33,13 @@ export default function PathPage(props: {params: {path: string[]}}) {
       </Head>
 
       <AppLayout>
-        {target._type === 'article' && (
+        {target && target._type === 'article' && (
           <PageLayout structure={currentStructure} {...(target.layout || {})}>
             <Article article={target} />
           </PageLayout>
         )}
 
-        {target._type === 'screen' && <Screen target={target} />}
+        {target && target._type === 'screen' && <Screen target={target} />}
       </AppLayout>
     </>
   )
