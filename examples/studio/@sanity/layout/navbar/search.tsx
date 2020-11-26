@@ -1,7 +1,7 @@
 import {useLocation} from '@sanity/base'
 import {Preview} from '@sanity/components'
-import {Autocomplete, AutocompleteOption, Box, Card, CardProvider, SrOnly} from '@sanity/ui'
-import React, {useState} from 'react'
+import {Autocomplete, Box, Card, CardProvider, SrOnly} from '@sanity/ui'
+import React from 'react'
 
 const data = [
   {id: 'breeze', title: 'Breeze'},
@@ -19,37 +19,27 @@ const data = [
   {id: 'happily', title: 'Happily Depressed'},
 ]
 
+interface AutocompleteOption {
+  value: string
+  title: string
+}
+
 export function Search() {
   const {handleLinkClick} = useLocation()
-  const [value, setValue] = useState('')
-  const [options, setOptions] = useState<AutocompleteOption[]>([])
-
-  const handleInputChange = (v: string) => {
-    setValue(v)
-
-    if (v) {
-      setOptions(
-        data
-          .filter((item) => item.title.toLowerCase().indexOf(v.toLowerCase()) > -1)
-          .map((item) => ({value: item.id}))
-      )
-    } else {
-      setOptions([])
-    }
-  }
+  const options: AutocompleteOption[] = data.map((d) => ({value: d.id, title: d.title}))
 
   const renderOption = (option: AutocompleteOption) => {
-    const item = data.find((i) => i.id === option.value)
-
-    if (!item) return <></>
-
     return (
-      <Card as="button" href={`/?id=${item.id}`} onClick={handleLinkClick}>
+      <Card as="button" href={`/?id=${option.value}`} onClick={handleLinkClick}>
         <Box paddingX={3} paddingY={2}>
-          <Preview title={item.title} subtitle={item.title} />
+          <Preview title={option.title} subtitle={option.title} />
         </Box>
       </Card>
     )
+  }
+
+  const filterOption = (query: string, option: AutocompleteOption) => {
+    return option.title.toLowerCase().includes(query.toLowerCase())
   }
 
   return (
@@ -64,12 +54,11 @@ export function Search() {
         <Autocomplete
           aria-describedby="navbar-search-label"
           border={false}
+          filterOption={filterOption}
           id="navbar-search"
-          onChange={handleInputChange}
           options={options}
           placeholder="Search documents…"
           renderOption={renderOption}
-          value={value}
         />
       </CardProvider>
     </>

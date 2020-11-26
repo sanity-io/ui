@@ -3,7 +3,7 @@ import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
 import countries from './__fixtures__/countries'
 
-interface DataItem {
+interface ExampleOption {
   value: string
   title: string
 }
@@ -13,8 +13,18 @@ export default {
   title: 'Components/Autocomplete',
 }
 
-export const plain = () => {
-  const data = countries.map((d) => ({value: d.code, title: d.name}))
+export function _default() {
+  const options = countries.map((country) => ({value: country.code}))
+
+  return (
+    <Card padding={4}>
+      <Autocomplete id="default" options={options} />
+    </Card>
+  )
+}
+
+export const custom = () => {
+  const data: ExampleOption[] = countries.map((d) => ({value: d.code, title: d.name}))
 
   const border = boolean('Border', true, 'Props')
 
@@ -50,63 +60,66 @@ export const plain = () => {
 
   return (
     <Card padding={4}>
-      <PlainExample border={border} data={data} radius={radius} size={size} />
+      <CustomExample border={border} data={data} radius={radius} size={size} />
     </Card>
   )
 }
 
-function PlainExample({
+function CustomExample({
   border,
   data,
   radius,
   size,
 }: {
   border: boolean
-  data: DataItem[]
+  data: ExampleOption[]
   radius: number
   size: number
 }) {
   const [query, setQuery] = useState('')
 
-  const renderOption = useCallback(
-    (option: {value: string}) => {
-      const item = data.find((i) => i.value === option.value)
+  const renderOption = useCallback((option: ExampleOption) => {
+    return (
+      <Card
+        as="a"
+        data-qa={`option-${option.value}`}
+        href="#"
+        key={option.value}
+        onClick={(event) => event.preventDefault()}
+        padding={3}
+      >
+        <Text>{option.title}</Text>
+      </Card>
+    )
+  }, [])
 
-      if (!item) return <></>
+  const renderValue = useCallback((value: string, option?: ExampleOption) => {
+    console.log('render value', {value, option})
 
-      return (
-        <Card
-          as="a"
-          data-qa={`option-${item.value}`}
-          href="#"
-          key={item.value}
-          onClick={(event) => event.preventDefault()}
-          padding={3}
-        >
-          <Text>{item.title}</Text>
-        </Card>
-      )
-    },
-    [data]
-  )
+    return option ? option.title : value
+  }, [])
 
-  const options = data
-    .filter((item) => query && item.title.toLowerCase().indexOf(query.toLowerCase()) > -1)
-    .map((item) => ({value: item.value}))
+  const filterOption = useCallback((value: string, option: ExampleOption) => {
+    return option.title.toLowerCase().indexOf(value.toLowerCase()) > -1
+  }, [])
+
+  const options = data.map((item) => ({value: item.value, title: item.title}))
 
   return (
     <Stack space={3}>
-      <Label as="label" htmlFor="plain" id="plain-label">
+      <Label as="label" htmlFor="custom" id="custom-label">
         Search
       </Label>
       <Autocomplete
-        aria-describedby="plain-label"
+        aria-describedby="custom-label"
         border={border}
-        id="plain"
+        filterOption={filterOption}
+        id="custom"
         onChange={setQuery}
         options={options}
         radius={radius}
         renderOption={renderOption}
+        renderValue={renderValue}
         size={size}
         value={query}
       />

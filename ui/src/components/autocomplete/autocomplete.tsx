@@ -1,24 +1,32 @@
 import React, {cloneElement, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Button, TextInput} from '../../atoms'
+import {Box, Button, Card, IconSymbol, Text, TextInput} from '../../atoms'
 import {focusFirstDescendant} from '../../helpers'
 import {getResponsiveProp} from '../../styles'
+import {AutocompleteOption} from './autocompleteOption'
 import {Root, ListBoxContainer, ListBoxCard} from './styles'
 
-export interface AutocompleteProps<Option extends {_key: string}> {
-  border?: boolean
-  id: null | string
-  onInputChange?: (inputValue: string) => void
-  inputValue?: string
-  onSelect?: (option: Option) => void
-  options: Option[]
-  padding?: number | number[]
-  radius?: number | number[]
-  renderOption: (option: Option) => React.ReactElement
-  size?: number | number[]
+export interface BaseAutocompleteOption {
+  value: string
 }
 
-type OverriddenInputAttrKey =
+export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
+  border?: boolean
+  filterOption?: (query: string, option: Option) => boolean
+  icon?: IconSymbol
+  id: string
+  onChange?: (value: string) => void
+  onSelect?: (value: string) => void
+  options?: Option[]
+  padding?: number | number[]
+  radius?: number | number[]
+  renderOption?: (option: Option) => React.ReactElement
+  renderValue?: (value: string, option?: Option) => string
+  size?: number | number[]
+  value?: string
+}
+
+type AutocompleteOverriddenInputAttrKey =
   | 'aria-activedescendant'
   | 'aria-autocomplete'
   | 'aria-expanded'
@@ -26,18 +34,16 @@ type OverriddenInputAttrKey =
   | 'as'
   | 'autoCapitalize'
   | 'autoComplete'
-  | 'inputMode'
   | 'autoCorrect'
   | 'id'
+  | 'inputMode'
   | 'onChange'
+  | 'onSelect'
   | 'ref'
   | 'role'
   | 'spellCheck'
   | 'type'
   | 'value'
-
-type Props<OptionType extends {_key: string}> = AutocompleteProps<OptionType> &
-  Omit<React.HTMLProps<HTMLInputElement>, OverriddenInputAttrKey>
 
 const ClearButtonBox = styled(Box)`
   position: absolute;
@@ -49,6 +55,18 @@ const ClearButtonBox = styled(Box)`
     vertical-align: top;
   }
 `
+
+const defaultRenderOption = ({value}: BaseAutocompleteOption) => (
+  <Card as="button" padding={3}>
+    <Text>{value}</Text>
+  </Card>
+)
+
+const defaultRenderValue = (value: string, option?: BaseAutocompleteOption) =>
+  option ? option.value : value
+
+const defaultFilterOption = (query: string, option: BaseAutocompleteOption) =>
+  option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
 const LIST_IGNORE_KEYS = [
   'Control',
@@ -64,34 +82,46 @@ const LIST_IGNORE_KEYS = [
   'CapsLock',
 ]
 
-export function Autocomplete<OptionType extends {_key: string}>(props: Props<OptionType>) {
+export function Autocomplete<Option extends BaseAutocompleteOption>(
+  props: AutocompleteProps<Option> &
+    Omit<React.HTMLProps<HTMLInputElement>, AutocompleteOverriddenInputAttrKey>
+) {
   const {
     border = true,
+    filterOption: filterOptionProp,
+    icon,
     id,
-    onInputChange,
+    onChange,
     onSelect,
-    options: optionsProp,
+    options: optionsProp = [],
     padding: paddingProp = 3,
     radius = 2,
-    renderOption,
+    renderOption: renderOptionProp,
+    renderValue = defaultRenderValue,
     size = 2,
-    inputValue = '',
+    value: valueProp = '',
     ...restProps
   } = props
-
+  const renderOption =
+    typeof renderOptionProp === 'function' ? renderOptionProp : defaultRenderOption
+  const filterOption =
+    typeof filterOptionProp === 'function' ? filterOptionProp : defaultFilterOption
+  const [value, setValue] = useState(valueProp)
+  const [query, setQuery] = useState<string | null>(null)
+  const valueRef = useRef(value)
   const [focused, setFocused] = useState(false)
-  const inputId = `${id}-input`
   const listboxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : []
-  const optionsLen = options.length
-  const expanded = focused && optionsLen > 0
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const listRef = useRef<HTMLUListElement | null>(null)
-  const activeItemId = selectedIndex ? `${id}-option-${selectedIndex}` : undefined
-  // const activeValue = (selectedIndex && options[selectedIndex]?.value) || null
+  const activeItemId = selectedIndex > -1 ? `${id}-option-${selectedIndex}` : undefined
   const padding = getResponsiveProp(paddingProp)
   const rootRef = useRef<HTMLDivElement | null>(null)
+  const currentOption = value ? options.find((o) => o.value === value) : undefined
+  const filteredOptions = options.filter((option) => (query ? filterOption(query, option) : true))
+  const optionsLen = filteredOptions.length
+  const expanded = focused && optionsLen > 0 && query !== null
 
   const handleRootBlur = useCallback(() => {
     setTimeout(() => {
@@ -99,10 +129,7 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
       const focusedEl = document.activeElement
       const focusInside = rootEl && focusedEl && rootEl.contains(focusedEl)
 
-      if (!focusInside) {
-        // hide listbox
-        setFocused(false)
-      }
+      if (!focusInside) setFocused(false)
     }, 0)
   }, [])
 
@@ -128,6 +155,8 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
 
       if (event.key === 'Escape') {
         setFocused(false)
+        valueRef.current = ''
+        setQuery(null)
 
         inputRef.current?.focus()
 
@@ -136,8 +165,6 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
 
       const target = event.target as Node
       const listEl = listRef.current
-
-      // console.log(listEl?.contains(target))
 
       if (
         (listEl === target || listEl?.contains(target)) &&
@@ -148,32 +175,45 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
         return
       }
     },
-    [onInputChange, optionsLen]
+    [optionsLen]
   )
 
-  const handleInputChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (onInputChange) onInputChange(event.currentTarget.value)
-    },
-    [onInputChange]
-  )
+  const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    valueRef.current = event.currentTarget.value
+    setQuery(event.currentTarget.value)
+  }, [])
 
   const handleInputFocus = useCallback(() => setFocused(true), [])
 
   const handleClearButtonClick = useCallback(() => {
-    if (onInputChange) onInputChange('')
+    valueRef.current = ''
+    setValue('')
+    setQuery(null)
+    if (onChange) onChange('')
     inputRef.current?.focus()
-  }, [onInputChange])
+  }, [onChange])
 
   const handleClearButtonFocus = useCallback(() => setFocused(true), [])
 
   const handleOptionSelect = useCallback(
-    (v: OptionType) => {
+    (v: string) => {
       if (onSelect) onSelect(v)
+      if (onChange) onChange(v)
+      setValue(v)
+      setQuery(null)
       setFocused(false)
+      inputRef.current?.focus()
     },
-    [onSelect]
+    [onChange, onSelect]
   )
+
+  // Change the value when `value` prop changes
+  useEffect(() => {
+    if (valueProp !== valueRef.current) {
+      valueRef.current = valueProp
+      setValue(valueProp)
+    }
+  }, [valueProp])
 
   // Reset selected item when the list changes
   // @todo: what if the list changed, but the items have changed?
@@ -193,10 +233,14 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
   }, [selectedIndex])
 
   return (
-    <Root onBlur={handleRootBlur} onKeyDown={handleRootKeyDown} ref={rootRef}>
+    <Root
+      data-ui="Autocomplete"
+      onBlur={handleRootBlur}
+      onKeyDown={handleRootKeyDown}
+      ref={rootRef}
+    >
       <TextInput
         {...restProps}
-        inputMode="search"
         aria-activedescendant={activeItemId}
         aria-autocomplete="list"
         aria-expanded={expanded}
@@ -205,8 +249,9 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
         autoComplete="off"
         autoCorrect="off"
         border={border}
-        icon="search"
-        id={inputId}
+        icon={icon}
+        id={id}
+        inputMode="search"
         onChange={handleInputChange}
         onFocus={handleInputFocus}
         padding={padding}
@@ -215,10 +260,10 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
         role="combobox"
         size={size}
         spellCheck={false}
-        value={inputValue}
+        value={query === null ? renderValue(value, currentOption) : query}
       />
 
-      {inputValue?.length > 0 && (
+      {value.length > 0 && (
         <ClearButtonBox margin={padding.map((v) => v - 1)} onFocus={handleClearButtonFocus}>
           <Button
             aria-label="Clear"
@@ -232,43 +277,25 @@ export function Autocomplete<OptionType extends {_key: string}>(props: Props<Opt
         </ClearButtonBox>
       )}
 
-      <ListBoxContainer hidden={!expanded} onInput={console.log}>
-        <ListBoxCard paddingY={1} radius={1} shadow={2}>
+      <ListBoxContainer hidden={!expanded}>
+        <ListBoxCard paddingY={1} radius={1} shadow={2} tabIndex={-1}>
           <ul aria-multiselectable={false} id={listboxId} ref={listRef} role="listbox">
-            {options.map((option, optionIndex) => (
-              <AutosuggestOption
+            {filteredOptions.map((option, optionIndex) => (
+              <AutocompleteOption
                 id={`${id}-option-${optionIndex}`}
                 key={optionIndex}
                 onSelect={handleOptionSelect}
-                selected={optionIndex === selectedIndex}
-                value={option}
+                selected={
+                  selectedIndex > -1 ? optionIndex === selectedIndex : currentOption === option
+                }
+                value={option.value}
               >
                 {cloneElement(renderOption(option), {tabIndex: -1})}
-              </AutosuggestOption>
+              </AutocompleteOption>
             ))}
           </ul>
         </ListBoxCard>
       </ListBoxContainer>
     </Root>
-  )
-}
-
-function AutosuggestOption<T extends {_key: string}>(props: {
-  children: React.ReactNode
-  id: string
-  onSelect: (v: T) => void
-  selected: boolean
-  value: T
-}) {
-  const {children, id, onSelect, selected, value} = props
-
-  const handleClick = useCallback(() => {
-    onSelect(value)
-  }, [onSelect, value])
-
-  return (
-    <li aria-selected={selected} id={id} role="presentation" onClick={handleClick}>
-      {children}
-    </li>
   )
 }
