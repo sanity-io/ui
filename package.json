@@ -6,7 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "build:packages": "lerna run --scope @sanity/* build",
-    "dev": "lerna run --parallel --stream dev",
+    "dev": "run-p dev:docs dev:storybook watch:packages",
     "dev:color": "lerna run --stream --scope @sanity/color dev",
     "dev:docs": "lerna run --stream --scope 'sanity-design-{docs,studio}' dev",
     "dev:example-manage": "lerna run --stream --scope sanity-design-example-manage dev",
@@ -21,7 +21,8 @@
     "test:browser": "start-server-and-test dev:storybook http://localhost:9009 test:qawolf",
     "test:qawolf": "qawolf test --headless",
     "test:qawolf:create": "qawolf create http://localhost:9009",
-    "type-check": "lerna run --stream --parallel type-check"
+    "type-check": "lerna run --stream --parallel type-check",
+    "watch:packages": "lerna run --stream --parallel --scope @sanity/* watch"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",

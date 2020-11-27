@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "sanity build public -y",
-    "dev": "sanity start",
+    "dev": "sanity start --port 9000",
     "deploy": "sanity deploy",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "test": "sanity check"
