@@ -11,6 +11,8 @@ export interface TextInputInputStyleProps {
 
 export interface TextInputRepresentationStyleProps {
   border?: boolean
+  hasPrefix?: boolean
+  hasSuffix?: boolean
   scheme: ThemeColorSchemeKey
 }
 
@@ -22,10 +24,8 @@ export const textInputStyle = {
 
 function rootStyle(): CSSObject {
   return {
-    position: 'relative',
-
-    '&&:not([hidden])': {
-      display: 'block',
+    '&:not([hidden])': {
+      display: 'flex',
     },
   }
 }
@@ -100,54 +100,59 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   )
 }
 
-function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject {
-  const {border, scheme, theme} = props
+function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject[] {
+  const {border, hasPrefix, hasSuffix, scheme, theme} = props
   const _scheme = theme.color[scheme] || theme.color.light
   const tone = _scheme.input.tones.default
 
-  return {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    pointerEvents: 'none',
-    zIndex: 0,
+  return [
+    {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      display: 'block',
+      pointerEvents: 'none',
+      zIndex: 0,
 
-    // enabled
-    color: tone.enabled.fg,
-    backgroundColor: tone.enabled.bg,
-    boxShadow: border ? `inset 0 0 0 1px ${tone.enabled.border}` : undefined,
+      // enabled
+      color: tone.enabled.fg,
+      backgroundColor: tone.enabled.bg,
+      boxShadow: border ? `inset 0 0 0 1px ${tone.enabled.border}` : undefined,
 
-    // focused
-    '*:not(:disabled):focus + &': {
-      boxShadow: '0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color)',
-    },
-
-    // invalid
-    '*:not(:disabled):invalid + &': {
-      color: tone.invalid.fg,
-      backgroundColor: tone.invalid.bg,
-      boxShadow: border ? `inset 0 0 0 1px ${tone.invalid.border}` : undefined,
-    },
-
-    // disabled
-    '*:disabled + &': {
-      color: tone.disabled.fg,
-      backgroundColor: tone.disabled.bg,
-      boxShadow: border ? `inset 0 0 0 1px ${tone.disabled.border}` : undefined,
-    },
-
-    // hovered
-    '@media (hover: hover)': {
-      '*:not(:disabled):not(:invalid):hover + &': {
-        color: tone.hovered.fg,
-        backgroundColor: tone.hovered.bg,
+      // focused
+      '*:not(:disabled):focus + &': {
+        boxShadow: '0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color)',
       },
 
-      '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
-        boxShadow: border ? `inset 0 0 0 1px ${tone.hovered.border}` : 'none',
+      // invalid
+      '*:not(:disabled):invalid + &': {
+        color: tone.invalid.fg,
+        backgroundColor: tone.invalid.bg,
+        boxShadow: border ? `inset 0 0 0 1px ${tone.invalid.border}` : undefined,
+      },
+
+      // disabled
+      '*:disabled + &': {
+        color: tone.disabled.fg,
+        backgroundColor: tone.disabled.bg,
+        boxShadow: border ? `inset 0 0 0 1px ${tone.disabled.border}` : undefined,
+      },
+
+      // hovered
+      '@media (hover: hover)': {
+        '*:not(:disabled):not(:invalid):hover + &': {
+          color: tone.hovered.fg,
+          backgroundColor: tone.hovered.bg,
+        },
+
+        '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
+          boxShadow: border ? `inset 0 0 0 1px ${tone.hovered.border}` : 'none',
+        },
       },
     },
-  }
+    hasPrefix ? {borderTopLeftRadius: 0, borderBottomLeftRadius: 0} : {},
+    hasSuffix ? {borderTopRightRadius: 0, borderBottomRightRadius: 0} : {},
+  ]
 }
