@@ -7,13 +7,13 @@ export const input: ThemeColorInput = {
       enabled: {
         bg: white.hex,
         fg: black.hex,
-        border: hues.gray[200].hex,
+        border: hues.gray[100].hex,
         placeholder: hues.gray[400].hex,
       },
       disabled: {
         bg: hues.gray[50].hex,
         fg: hues.gray[200].hex,
-        border: hues.gray[200].hex,
+        border: hues.gray[100].hex,
         placeholder: hues.gray[200].hex,
       },
       hovered: {
