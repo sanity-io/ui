@@ -4,7 +4,7 @@ import {FlexItemStyleProps} from './types'
 
 export function flexItemStyle({flex, theme}: FlexItemStyleProps & ThemeProps) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(flex).map((val) => ({flex: val}))
   )
 }

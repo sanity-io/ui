@@ -1,6 +1,7 @@
 import {CloseIcon} from '@sanity/icons'
 import React from 'react'
-import {Box, Card, CardTone, Flex, Stack, Text} from '../../atoms'
+import {Box, Card, Flex, Stack, Text} from '../../atoms'
+import {ThemeColorToneKey} from '../../theme'
 
 interface ToastProps {
   closable?: boolean
@@ -10,11 +11,11 @@ interface ToastProps {
   status?: 'error' | 'warning' | 'success' | 'info'
 }
 
-const STATUS_CARD_TONE: {[key: string]: CardTone} = {
+const STATUS_CARD_TONE: {[key: string]: ThemeColorToneKey} = {
   error: 'critical',
   warning: 'caution',
   success: 'positive',
-  info: 'brand',
+  info: 'primary',
 }
 
 export function Toast(

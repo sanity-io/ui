@@ -2,8 +2,6 @@ import React, {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import styled from 'styled-components'
 import {responsiveCodeFontStyle} from '../../styles'
-import {ThemeColorSchemeKey} from '../../theme'
-import {useCard} from '../card'
 import {codeBaseStyles} from './styles'
 
 interface CodeProps {
@@ -14,20 +12,16 @@ interface CodeProps {
   weight?: string
 }
 
-const Root = styled.pre<{muted: boolean; scheme: ThemeColorSchemeKey; size: number[]}>(
-  codeBaseStyles,
-  responsiveCodeFontStyle
-)
+const Root = styled.pre<{muted: boolean; size: number[]}>(codeBaseStyles, responsiveCodeFontStyle)
 
 export const Code = forwardRef(
   (props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {
     const {children, language: languageProp, muted = false, size = 2, ...restProps} = props
-    const card = useCard()
     const language = typeof languageProp === 'string' ? languageProp : undefined
     const registered = language ? Refractor.hasLanguage(language as any) : false
 
     return (
-      <Root data-ui="Code" {...restProps} ref={ref} scheme={card.scheme} size={size} muted={muted}>
+      <Root data-ui="Code" {...restProps} ref={ref} size={size} muted={muted}>
         {(!language || (language && !registered)) && <code>{children}</code>}
 
         {language && registered && (

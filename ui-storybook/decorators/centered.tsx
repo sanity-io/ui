@@ -1,4 +1,4 @@
-import {Card} from '@sanity/ui'
+import {Card, useRootTheme} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -12,6 +12,10 @@ const Root = styled(Card)`
   }
 `
 
-export const withCentered = (storyFn: () => JSX.Element) => (
-  <Root tone="transparent">{storyFn()}</Root>
-)
+export const withCentered = (storyFn: () => React.ReactElement) => <Centered>{storyFn()}</Centered>
+
+function Centered({children}: {children: React.ReactNode}) {
+  const {variant} = useRootTheme()
+
+  return <Root tone={variant}>{children}</Root>
+}

@@ -22,10 +22,12 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   onSelect?: (value: string) => void
   options?: Option[]
   padding?: number | number[]
+  prefix?: React.ReactNode
   radius?: number | number[]
   renderOption?: (option: Option) => React.ReactElement
   renderValue?: (value: string, option?: Option) => string
   size?: number | number[]
+  suffix?: React.ReactNode
   value?: string
 }
 

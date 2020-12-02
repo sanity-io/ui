@@ -2,8 +2,6 @@ import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
 import React, {forwardRef, useEffect} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
-import {ThemeColorSchemeKey} from '../../theme'
-import {useCard} from '../card'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 
 interface CheckboxProps {
@@ -12,7 +10,7 @@ interface CheckboxProps {
 }
 
 const Root = styled.div(checkboxBaseStyles)
-const Input = styled.input<{scheme: ThemeColorSchemeKey}>(inputElementStyles)
+const Input = styled.input(inputElementStyles)
 
 export const Checkbox = forwardRef(
   (
@@ -20,7 +18,6 @@ export const Checkbox = forwardRef(
     forwardedRef: React.ForwardedRef<HTMLInputElement>
   ) => {
     const {checked, className, indeterminate, customValidity, style, ...restProps} = props
-    const card = useCard()
     const ref = useForwardedRef(forwardedRef)
 
     useCustomValidity(ref, customValidity)
@@ -34,7 +31,7 @@ export const Checkbox = forwardRef(
 
     return (
       <Root className={className} data-ui="Checkbox" style={style}>
-        <Input {...restProps} checked={checked} type="checkbox" ref={ref} scheme={card.scheme} />
+        <Input {...restProps} checked={checked} type="checkbox" ref={ref} />
         <span>
           <CheckmarkIcon />
           <RemoveIcon />

@@ -27,7 +27,7 @@ export function boxStyle({height, overflow, sizing}: BoxStyleProps & {theme: The
 
 function responsiveBoxDisplayStyle({display, theme}: BoxStyleProps & {theme: Theme}) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(display).map((val) => ({'&:not([hidden])': {display: val}}))
   )
 }

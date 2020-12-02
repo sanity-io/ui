@@ -1,10 +1,8 @@
 import {CSSObject} from 'styled-components'
-import {ThemeColorSchemeKey} from '../../theme'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 export interface TextInputInputStyleProps {
-  scheme: ThemeColorSchemeKey
   uiSize?: number | number[]
   weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
@@ -13,7 +11,6 @@ export interface TextInputRepresentationStyleProps {
   border?: boolean
   hasPrefix?: boolean
   hasSuffix?: boolean
-  scheme: ThemeColorSchemeKey
 }
 
 export const textInputStyle = {
@@ -31,10 +28,9 @@ function rootStyle(): CSSObject {
 }
 
 function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject {
-  const {scheme, theme, weight} = props
-  const font = theme.fonts.text
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.input.tones.default
+  const {theme, weight} = props
+  const font = theme.sanity.fonts.text
+  const color = theme.sanity.color.input
 
   return {
     appearance: 'none',
@@ -57,28 +53,28 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject
 
     // enabled
     '&:not(:invalid):not(:disabled)': {
-      color: tone.enabled.fg,
+      color: color.default.enabled.fg,
 
       '&::placeholder': {
-        color: tone.enabled.placeholder,
+        color: color.default.enabled.placeholder,
       },
     },
 
     // disabled
     '&:not(:invalid):disabled': {
-      color: tone.disabled.fg,
+      color: color.default.disabled.fg,
 
       '&::placeholder': {
-        color: tone.disabled.placeholder,
+        color: color.default.disabled.placeholder,
       },
     },
 
     // invalid
     '&:invalid': {
-      color: tone.invalid.fg,
+      color: color.invalid.enabled.fg,
 
       '&::placeholder': {
-        color: tone.invalid.placeholder,
+        color: color.invalid.enabled.placeholder,
       },
     },
   }
@@ -88,9 +84,9 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   const {theme} = props
 
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(props.uiSize, [2]).map((sizeIndex) => {
-      const size = theme.fonts.text.sizes[sizeIndex] || theme.fonts.text.sizes[2]
+      const size = theme.sanity.fonts.text.sizes[sizeIndex] || theme.sanity.fonts.text.sizes[2]
 
       return {
         fontSize: rem(size.fontSize),
@@ -101,9 +97,8 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
 }
 
 function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject[] {
-  const {border, hasPrefix, hasSuffix, scheme, theme} = props
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.input.tones.default
+  const {border, hasPrefix, hasSuffix, theme} = props
+  const color = theme.sanity.color.input
 
   return [
     {
@@ -117,9 +112,9 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
       zIndex: 0,
 
       // enabled
-      color: tone.enabled.fg,
-      backgroundColor: tone.enabled.bg,
-      boxShadow: border ? `inset 0 0 0 1px ${tone.enabled.border}` : undefined,
+      color: color.default.enabled.fg,
+      backgroundColor: color.default.enabled.bg,
+      boxShadow: border ? `inset 0 0 0 1px ${color.default.enabled.border}` : undefined,
 
       // focused
       '*:not(:disabled):focus + &': {
@@ -128,27 +123,27 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
 
       // invalid
       '*:not(:disabled):invalid + &': {
-        color: tone.invalid.fg,
-        backgroundColor: tone.invalid.bg,
-        boxShadow: border ? `inset 0 0 0 1px ${tone.invalid.border}` : undefined,
+        color: color.invalid.enabled.fg,
+        backgroundColor: color.invalid.enabled.bg,
+        boxShadow: border ? `inset 0 0 0 1px ${color.invalid.enabled.border}` : undefined,
       },
 
       // disabled
       '*:disabled + &': {
-        color: tone.disabled.fg,
-        backgroundColor: tone.disabled.bg,
-        boxShadow: border ? `inset 0 0 0 1px ${tone.disabled.border}` : undefined,
+        color: color.default.disabled.fg,
+        backgroundColor: color.default.disabled.bg,
+        boxShadow: border ? `inset 0 0 0 1px ${color.default.disabled.border}` : undefined,
       },
 
       // hovered
       '@media (hover: hover)': {
         '*:not(:disabled):not(:invalid):hover + &': {
-          color: tone.hovered.fg,
-          backgroundColor: tone.hovered.bg,
+          color: color.default.hovered.fg,
+          backgroundColor: color.default.hovered.bg,
         },
 
         '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
-          boxShadow: border ? `inset 0 0 0 1px ${tone.hovered.border}` : 'none',
+          boxShadow: border ? `inset 0 0 0 1px ${color.default.hovered.border}` : 'none',
         },
       },
     },

@@ -1,5 +1,5 @@
 import {hues} from '@sanity/color'
-import {responsiveCodeFontStyle, ThemeColorSchemeKey, Theme} from '@sanity/ui'
+import {responsiveCodeFontStyle, Theme} from '@sanity/ui'
 import {rgba} from 'polished'
 import {css} from 'styled-components'
 
@@ -55,8 +55,8 @@ export function codeEditor() {
   `
 }
 
-export function codeEditorSyntax({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) {
-  const syntax = theme.color[scheme].syntax.tones.default
+export function codeEditorSyntax({theme}: {theme: Theme}) {
+  const syntax = theme.sanity.color.syntax
 
   // @todo
   return css`

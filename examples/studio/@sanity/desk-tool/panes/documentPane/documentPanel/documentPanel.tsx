@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Card,
   Container,
   Dialog,
   Flex,
@@ -83,36 +84,38 @@ export function DocumentPanel({onChangeOpen}: {onChangeOpen: () => void}) {
   return (
     <Root ref={rootRef}>
       <PortalProvider boundaryElement={rootRef.current} element={portalElement}>
-        <Header>
-          <Flex>
-            <Box flex={1} padding={4} paddingRight={1}>
-              <PaneTitle weight="semibold">
-                <span>Hello, world</span>
-              </PaneTitle>
-            </Box>
-            <Box padding={2}>
-              <MenuButton
-                button={<Button icon="ellipsis-vertical" mode="bleed" />}
-                id="pane-context-menu"
-                menu={
-                  <Menu>
-                    <MenuItem
-                      icon="restore"
-                      onClick={() => {
-                        console.log('open review changes')
-                        onChangeOpen()
-                      }}
-                      text="Review changes"
-                    />
-                    <MenuItem icon="binary-document" text="Inspect JSON" />
-                    <MenuDivider />
-                    <MenuItem icon="earth-americas" text="Preview on site" />
-                  </Menu>
-                }
-                placement="bottom"
-              />
-            </Box>
-          </Flex>
+        <Header depth={100}>
+          <Card>
+            <Flex>
+              <Box flex={1} padding={4} paddingRight={1}>
+                <PaneTitle weight="semibold">
+                  <span>Hello, world</span>
+                </PaneTitle>
+              </Box>
+              <Box padding={2}>
+                <MenuButton
+                  button={<Button icon="ellipsis-vertical" mode="bleed" />}
+                  id="pane-context-menu"
+                  menu={
+                    <Menu>
+                      <MenuItem
+                        icon="restore"
+                        onClick={() => {
+                          console.log('open review changes')
+                          onChangeOpen()
+                        }}
+                        text="Review changes"
+                      />
+                      <MenuItem icon="binary-document" text="Inspect JSON" />
+                      <MenuDivider />
+                      <MenuItem icon="earth-americas" text="Preview on site" />
+                    </Menu>
+                  }
+                  placement="bottom"
+                />
+              </Box>
+            </Flex>
+          </Card>
         </Header>
 
         <Content>

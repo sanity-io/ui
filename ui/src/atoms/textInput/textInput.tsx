@@ -12,7 +12,7 @@ import {
   TextInputResponsivePaddingStyleProps,
 } from '../../styles'
 import {Box} from '../box'
-import {Card, useCard} from '../card'
+import {Card} from '../card'
 import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
 
@@ -112,7 +112,6 @@ export const TextInput = forwardRef(
       type = 'text',
       ...restProps
     } = props
-    const {scheme} = useCard()
 
     const ref = useForwardedRef(forwardedRef)
 
@@ -134,7 +133,6 @@ export const TextInput = forwardRef(
             iconRight={Boolean(iconRight)}
             padding={padding}
             ref={ref}
-            scheme={scheme}
             space={space}
             type={type}
             uiSize={size}
@@ -145,7 +143,6 @@ export const TextInput = forwardRef(
             hasPrefix={Boolean(prefix)}
             hasSuffix={Boolean(suffix)}
             radius={radius}
-            scheme={scheme}
           >
             {icon && (
               <IconLeftBox padding={padding}>

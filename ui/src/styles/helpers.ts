@@ -44,7 +44,7 @@ export function getResponsiveSpace(theme: Theme, props: string[], spaceIndexes: 
   }
 
   return responsive(
-    theme.media,
-    spaceIndexes.map((spaceIndex) => createObject(props, rem(theme.space[spaceIndex])))
+    theme.sanity.media,
+    spaceIndexes.map((spaceIndex) => createObject(props, rem(theme.sanity.space[spaceIndex])))
   )
 }

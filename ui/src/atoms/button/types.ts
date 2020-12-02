@@ -1,3 +1,3 @@
 export type ButtonMode = 'default' | 'ghost' | 'bleed'
 
-export type ButtonTone = 'default' | 'brand' | 'positive' | 'caution' | 'critical'
+export type ButtonTone = 'default' | 'primary' | 'positive' | 'caution' | 'critical'

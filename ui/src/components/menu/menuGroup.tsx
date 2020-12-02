@@ -1,47 +1,45 @@
 import React, {useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
-import {Box, Icon, Popover, Text, useCard} from '../../atoms'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {Box, Icon, Popover, Text} from '../../atoms'
+import {Theme} from '../../theme'
 import {useMenu} from './hooks'
 import {Menu} from './menu'
 
-const Root = styled.button<{scheme: ThemeColorSchemeKey}>(
-  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
-    const {scheme, theme} = props
-    const tone = theme.color[scheme].card.tones.default
+const Root = styled.button((props: {theme: Theme}) => {
+  const {theme} = props
+  const tone = theme.sanity.color.card
 
-    return css`
-      -webkit-font-smoothing: inherit;
-      appearance: none;
-      font: inherit;
-      border: 0;
-      border-radius: 0;
-      background: none;
-      color: inherit;
-      text-align: left;
-      margin: 0;
-      padding: 0;
-      outline: none;
-      background-color: var(--card-bg-color);
-      color: var(--card-fg-color);
+  return css`
+    -webkit-font-smoothing: inherit;
+    appearance: none;
+    font: inherit;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: inherit;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    background-color: var(--card-bg-color);
+    color: var(--card-fg-color);
 
-      &:not(:disabled):focus {
-        --card-bg-color: ${tone.selected.bg} !important;
-        --card-fg-color: ${tone.selected.fg} !important;
-      }
+    &:not(:disabled):focus {
+      --card-bg-color: ${tone.selected.bg} !important;
+      --card-fg-color: ${tone.selected.fg} !important;
+    }
 
-      &:not(:disabled):active {
-        --card-bg-color: ${tone.pressed.bg};
-        --card-fg-color: ${tone.pressed.fg};
-      }
+    &:not(:disabled):active {
+      --card-bg-color: ${tone.pressed.bg};
+      --card-fg-color: ${tone.pressed.fg};
+    }
 
-      &:disabled {
-        --card-bg-color: ${tone.disabled.bg};
-        --card-fg-color: ${tone.disabled.fg};
-      }
-    `
-  }
-)
+    &:disabled {
+      --card-bg-color: ${tone.disabled.bg};
+      --card-fg-color: ${tone.disabled.fg};
+    }
+  `
+})
 
 const TextContainer = styled.span`
   &&:not([hidden]) {
@@ -55,7 +53,6 @@ const TextContainer = styled.span`
 `
 
 export function MenuGroup({children, title}: {children: React.ReactNode; title: string}) {
-  const card = useCard()
   const [open, setOpen] = useState(false)
   const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
   const rootRef = useRef<HTMLButtonElement | null>(null)
@@ -114,7 +111,6 @@ export function MenuGroup({children, title}: {children: React.ReactNode; title: 
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={rootRef}
-        scheme={card.scheme}
       >
         <Box padding={3}>
           <TextContainer>

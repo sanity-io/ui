@@ -19,7 +19,7 @@ const Root = styled.div<{size: number}>(({size, theme}: {size: number; theme: Th
     min-width: ${rem(avatarTheme.size[size])};
     height: ${rem(avatarTheme.size[size])};
     box-shadow: 0 0 0 1px var(--card-bg-color), inset 0 0 0 1.5px var(--card-hairline-hard-color);
-    padding: 0 ${rem(theme.space[2])};
+    padding: 0 ${rem(theme.sanity.space[2])};
 
     &:not([hidden]) {
       display: flex;

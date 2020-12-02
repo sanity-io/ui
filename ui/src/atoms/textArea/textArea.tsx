@@ -12,7 +12,6 @@ import {
   TextInputInputStyleProps,
   TextInputRepresentationStyleProps,
 } from '../../styles'
-import {useCard} from '../card'
 
 interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   border?: boolean
@@ -22,6 +21,13 @@ interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusPr
 }
 
 const Root = styled.span(textInputStyle.root)
+
+const InputRoot = styled.span`
+  flex: 1;
+  min-width: 0;
+  display: block;
+  position: relative;
+`
 
 const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
@@ -54,8 +60,6 @@ export const TextArea = forwardRef(
       ...restProps
     } = props
 
-    const {scheme} = useCard()
-
     const paddingProps = {
       padding,
       paddingX,
@@ -74,16 +78,10 @@ export const TextArea = forwardRef(
 
     return (
       <Root>
-        <Input
-          {...restProps}
-          {...paddingProps}
-          disabled={disabled}
-          ref={ref}
-          scheme={scheme}
-          uiSize={uiSize}
-        />
-
-        <Presentation border={border} radius={radius} scheme={scheme} />
+        <InputRoot>
+          <Input {...restProps} {...paddingProps} disabled={disabled} ref={ref} uiSize={uiSize} />
+          <Presentation border={border} radius={radius} />
+        </InputRoot>
       </Root>
     )
   }

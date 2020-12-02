@@ -32,7 +32,7 @@ function IndexPage() {
           </Container>
 
           <Inline space={2} style={{textAlign: 'center'}}>
-            <Button size={[2, 2, 3]} text="Get started" tone="brand" />
+            <Button size={[2, 2, 3]} text="Get started" tone="primary" />
             <Text muted size={[2, 2, 3]}>
               or
             </Text>

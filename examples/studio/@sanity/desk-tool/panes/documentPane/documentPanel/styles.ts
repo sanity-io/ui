@@ -1,4 +1,4 @@
-import {Card} from '@sanity/ui'
+import {Card, Layer} from '@sanity/ui'
 import styled from 'styled-components'
 
 export const Root = styled.div`
@@ -8,7 +8,7 @@ export const Root = styled.div`
   flex-direction: column;
 `
 
-export const Header = styled(Card)`
+export const Header = styled(Layer)`
   position: relative;
 
   &:after {

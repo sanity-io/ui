@@ -1,8 +1,6 @@
 import React, {forwardRef, useEffect} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef} from '../../hooks'
-import {ThemeColorSchemeKey} from '../../theme'
-import {useCard} from '../card'
 import {
   switchBaseStyles,
   switchRepresentationStyles,
@@ -15,9 +13,9 @@ interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Root = styled.span<{scheme: ThemeColorSchemeKey}>(switchBaseStyles)
-const Input = styled.input<{scheme: ThemeColorSchemeKey}>(switchInputStyles)
-const Representation = styled.span<{scheme: ThemeColorSchemeKey}>(switchRepresentationStyles)
+const Root = styled.span(switchBaseStyles)
+const Input = styled.input(switchInputStyles)
+const Representation = styled.span(switchRepresentationStyles)
 const Track = styled.span(switchTrackStyles)
 const Thumb = styled.span<{checked?: boolean; indeterminate?: boolean}>(switchThumbStyles)
 
@@ -27,8 +25,6 @@ export const Switch = forwardRef(
     forwardedRef: React.ForwardedRef<HTMLInputElement>
   ) => {
     const {checked, className, indeterminate, style, ...restProps} = props
-    const card = useCard()
-
     const ref = useForwardedRef(forwardedRef)
 
     useEffect(() => {
@@ -39,15 +35,14 @@ export const Switch = forwardRef(
     }, [indeterminate, ref])
 
     return (
-      <Root className={className} data-ui="Switch" style={style} scheme={card.scheme}>
+      <Root className={className} data-ui="Switch" style={style}>
         <Input
           {...restProps}
           checked={indeterminate !== true && checked}
-          scheme={card.scheme}
           type="checkbox"
           ref={ref}
         />
-        <Representation aria-hidden data-name="representation" scheme={card.scheme}>
+        <Representation aria-hidden data-name="representation">
           <Track />
           <Thumb checked={checked} indeterminate={indeterminate} />
         </Representation>

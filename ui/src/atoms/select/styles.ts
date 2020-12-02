@@ -6,7 +6,7 @@ import {
   responsiveInputPaddingIconRightStyle,
   responsiveRadiusStyle,
 } from '../../styles'
-import {ThemeColorSchemeKey, Theme, ThemeFontSize} from '../../theme'
+import {ThemeFontSize, Theme} from '../../theme'
 
 const root = () => {
   return css`
@@ -20,7 +20,7 @@ const root = () => {
 }
 
 const inputBase = ({theme}: {theme: Theme}) => {
-  const font = theme.fonts.text
+  const font = theme.sanity.fonts.text
 
   return css`
     -webkit-font-smoothing: antialiased;
@@ -33,20 +33,19 @@ const inputBase = ({theme}: {theme: Theme}) => {
   `
 }
 
-const inputColor = ({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.input.tones.default
+const inputColor = ({theme}: {theme: Theme}) => {
+  const color = theme.sanity.color.input
 
   return css`
-    background-color: ${tone.enabled.bg};
-    color: ${tone.enabled.fg};
-    box-shadow: inset 0 0 0 1px ${tone.enabled.border};
+    background-color: ${color.default.enabled.bg};
+    color: ${color.default.enabled.fg};
+    box-shadow: inset 0 0 0 1px ${color.default.enabled.border};
 
     @media (hover: hover) {
       &:not(:disabled):hover {
-        background-color: ${tone.hovered.bg};
-        color: ${tone.hovered.fg};
-        box-shadow: inset 0 0 0 1px ${tone.hovered.border};
+        background-color: ${color.default.hovered.bg};
+        color: ${color.default.hovered.fg};
+        box-shadow: inset 0 0 0 1px ${color.default.hovered.border};
       }
     }
 
@@ -60,9 +59,9 @@ const inputColor = ({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}
 
     &:disabled {
       opacity: 1;
-      background-color: ${tone.disabled.bg};
-      color: ${tone.disabled.fg};
-      box-shadow: inset 0 0 0 1px ${tone.disabled.border};
+      background-color: ${color.default.disabled.bg};
+      color: ${color.default.disabled.fg};
+      box-shadow: inset 0 0 0 1px ${color.default.disabled.border};
     }
   `
 }
@@ -75,10 +74,10 @@ const textSize = (size: ThemeFontSize) => {
 }
 
 const inputTextSize = ({theme, uiSize}: {theme: Theme; uiSize?: number | number[]}) => {
-  const {sizes} = theme.fonts.text
+  const {sizes} = theme.sanity.fonts.text
 
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(uiSize).map((sizeIndex) => textSize(sizes[sizeIndex] || sizes[2]))
   )
 }
@@ -92,16 +91,13 @@ const input = () => [
 ]
 
 const iconBox = ({
-  scheme,
   theme,
 }: {
   radius?: number | number[]
-  scheme: ThemeColorSchemeKey
   uiSize?: number | number[]
   theme: Theme
 }) => {
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.input.tones.default
+  const color = theme.sanity.color.input
 
   return css`
     pointer-events: none;
@@ -110,11 +106,11 @@ const iconBox = ({
     right: 0;
 
     select:hover + & {
-      color: ${tone.hovered.fg};
+      color: ${color.default.hovered.fg};
     }
 
     select:disabled + & {
-      color: ${tone.disabled.fg};
+      color: ${color.default.disabled.fg};
     }
   `
 }

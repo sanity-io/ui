@@ -1,5 +1,8 @@
-import {studioTheme as theme} from '../../theme'
+import {studioTheme, Theme} from '../../theme'
 import {responsivePaddingStyle} from './paddingStyle'
+
+const {color, ...restTheme} = studioTheme
+const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
 
 describe('styles/padding', () => {
   it('should', () => {

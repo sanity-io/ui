@@ -6,9 +6,9 @@ export function responsiveRadiusStyle(props: ResponsiveRadiusProps & ThemeProps)
   const {theme} = props
 
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(props.radius).map((radiusIndex) => ({
-      borderRadius: rem(theme.radius[radiusIndex]),
+      borderRadius: rem(theme.sanity.radius[radiusIndex]),
     }))
   )
 }

@@ -22,7 +22,7 @@ export function headingBaseStyles(props: {accent?: boolean; muted?: boolean; the
     }
 
     & code {
-      font-family: ${theme.fonts.code.family};
+      font-family: ${theme.sanity.fonts.code.family};
       border-radius: 2px;
     }
 

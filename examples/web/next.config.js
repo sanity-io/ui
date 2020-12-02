@@ -12,9 +12,6 @@ module.exports = {
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'logos/src'))
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'ui/src'))
 
-    // Add `react` to externals
-    // config.externals = (config.externals || []).concat('react')
-
     // Aliases
     config.resolve.alias = {
       ...config.resolve.alias,

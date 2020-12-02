@@ -63,7 +63,7 @@ export function AppLayout({children}: {children?: React.ReactNode}) {
             </Inline>
 
             <Box marginLeft={3}>
-              <Button padding={2} text="Get started" tone="brand" />
+              <Button padding={2} text="Get started" tone="primary" />
             </Box>
           </Flex>
         </Container>

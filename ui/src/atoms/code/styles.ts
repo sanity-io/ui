@@ -1,125 +1,118 @@
 import {css} from 'styled-components'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {Theme} from '../../theme'
 
-function codeSyntaxHighlightingStyles({
-  scheme,
-  theme,
-}: {
-  scheme: ThemeColorSchemeKey
-  theme: Theme
-}) {
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.syntax.tones.default
+function codeSyntaxHighlightingStyles({theme}: {theme: Theme}) {
+  const color = theme.sanity.color.syntax
 
   return css`
     & .token {
       &.atrule {
-        color: ${tone.atrule};
+        color: ${color.atrule};
       }
       &.attr-name {
-        color: ${tone.attrName};
+        color: ${color.attrName};
       }
       &.attr-value {
-        color: ${tone.attrValue};
+        color: ${color.attrValue};
       }
       &.attribute {
-        color: ${tone.attribute};
+        color: ${color.attribute};
       }
       &.boolean {
-        color: ${tone.boolean};
+        color: ${color.boolean};
       }
       &.builtin {
-        color: ${tone.builtin};
+        color: ${color.builtin};
       }
       &.cdata {
-        color: ${tone.cdata};
+        color: ${color.cdata};
       }
       &.char {
-        color: ${tone.char};
+        color: ${color.char};
       }
       &.class {
-        color: ${tone.class};
+        color: ${color.class};
       }
       &.class-name {
-        color: ${tone.className};
+        color: ${color.className};
       }
       &.comment {
-        color: ${tone.comment};
+        color: ${color.comment};
       }
       &.constant {
-        color: ${tone.constant};
+        color: ${color.constant};
       }
       &.deleted {
-        color: ${tone.deleted};
+        color: ${color.deleted};
       }
       &.doctype {
-        color: ${tone.doctype};
+        color: ${color.doctype};
       }
       &.entity {
-        color: ${tone.entity};
+        color: ${color.entity};
       }
       &.function {
-        color: ${tone.function};
+        color: ${color.function};
       }
       &.hexcode {
-        color: ${tone.hexcode};
+        color: ${color.hexcode};
       }
       &.id {
-        color: ${tone.id};
+        color: ${color.id};
       }
       &.important {
-        color: ${tone.important};
+        color: ${color.important};
       }
       &.inserted {
-        color: ${tone.inserted};
+        color: ${color.inserted};
       }
       &.keyword {
-        color: ${tone.keyword};
+        color: ${color.keyword};
       }
       &.number {
-        color: ${tone.number};
+        color: ${color.number};
       }
       &.operator {
-        color: ${tone.operator};
+        color: ${color.operator};
       }
       &.prolog {
-        color: ${tone.prolog};
+        color: ${color.prolog};
       }
       &.property {
-        color: ${tone.property};
+        color: ${color.property};
       }
       &.pseudo-class {
-        color: ${tone.pseudoClass};
+        color: ${color.pseudoClass};
       }
       &.pseudo-element {
-        color: ${tone.pseudoElement};
+        color: ${color.pseudoElement};
       }
       &.punctuation {
-        color: ${tone.punctuation};
+        color: ${color.punctuation};
       }
       &.regex {
-        color: ${tone.regex};
+        color: ${color.regex};
       }
       &.selector {
-        color: ${tone.selector};
+        color: ${color.selector};
       }
       &.string {
-        color: ${tone.string};
+        color: ${color.string};
       }
       &.symbol {
-        color: ${tone.symbol};
+        color: ${color.symbol};
       }
       &.tag {
-        color: ${tone.tag};
+        color: ${color.tag};
       }
       &.unit {
-        color: ${tone.unit};
+        color: ${color.unit};
       }
       &.url {
-        color: ${tone.url};
+        color: ${color.url};
       }
       &.variable {
-        color: ${tone.variable};
+        color: ${color.variable};
       }
     }
   `

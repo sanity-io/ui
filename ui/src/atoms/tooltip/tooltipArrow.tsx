@@ -55,9 +55,7 @@ const Shape = styled.path`
   fill: var(--card-bg-color);
 `
 
-interface TooltipArrowProps {
-  // tone?: 'navbar'
-}
+interface TooltipArrowProps {}
 
 export const TooltipArrow = forwardRef(
   (

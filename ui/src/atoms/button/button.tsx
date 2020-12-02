@@ -6,9 +6,8 @@ import {
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
 } from '../../styles'
-import {ThemeColorSchemeKey, Theme, useTheme} from '../../theme'
+import {Theme, useTheme} from '../../theme'
 import {Box} from '../box'
-import {useCard} from '../card'
 import {Flex} from '../flex'
 import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
@@ -31,7 +30,6 @@ export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadi
 
 const Root = styled.button<{
   uiMode: ButtonMode
-  scheme: ThemeColorSchemeKey
   theme: Theme
   tone: ButtonTone
 }>(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
@@ -64,8 +62,6 @@ export const Button = forwardRef(
 
     const theme = useTheme()
 
-    const card = useCard()
-
     const boxProps = {
       padding,
       paddingX,
@@ -85,7 +81,6 @@ export const Button = forwardRef(
         disabled={disabled}
         radius={radius}
         ref={ref}
-        scheme={card.scheme}
         tone={tone}
         type={type}
         uiMode={mode}
@@ -106,7 +101,7 @@ export const Button = forwardRef(
                   marginLeft={icon ? space : undefined}
                   marginRight={iconRight ? space : undefined}
                 >
-                  <Text size={size} weight={theme.button.textWeight}>
+                  <Text size={size} weight={theme.sanity.button.textWeight}>
                     {text}
                   </Text>
                 </Box>

@@ -1,8 +1,8 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {CardTone} from '../card'
+import {ThemeColorToneKey} from '../../theme'
 
-const Root = styled.div<{tone: CardTone}>`
+const Root = styled.div<{tone: ThemeColorToneKey}>`
   position: absolute;
   pointer-events: none;
   width: 27px;

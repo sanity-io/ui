@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {Theme} from '../../theme'
 
 export function radioBaseStyles() {
   return css`
@@ -11,10 +11,9 @@ export function radioBaseStyles() {
   `
 }
 
-export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) {
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.input.tones.default
-  const {markSize, size} = theme.input.radio
+export function inputElementStyles({theme}: {theme: Theme}) {
+  const color = theme.sanity.color.input
+  const {markSize, size} = theme.sanity.input.radio
   const dist = (size - markSize) / 2
 
   return css`
@@ -37,8 +36,8 @@ export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey
       height: ${rem(size)};
       width: ${rem(size)};
       border-radius: ${rem(size / 2)};
-      background: ${tone.enabled.bg};
-      box-shadow: 0 0 0 1px ${tone.enabled.border};
+      background: ${color.default.enabled.bg};
+      box-shadow: 0 0 0 1px ${color.default.enabled.border};
 
       &::after {
         content: '';
@@ -48,7 +47,7 @@ export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey
         height: ${rem(markSize)};
         width: ${rem(markSize)};
         border-radius: ${rem(markSize / 2)};
-        background: ${tone.enabled.fg};
+        background: ${color.default.enabled.fg};
         opacity: 0;
       }
     }
@@ -62,11 +61,11 @@ export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey
     }
 
     &:disabled + span {
-      box-shadow: 0 0 0 1px ${tone.disabled.border};
-      background: ${tone.disabled.bg};
+      box-shadow: 0 0 0 1px ${color.default.disabled.border};
+      background: ${color.default.disabled.bg};
 
       &::after {
-        background: ${tone.disabled.fg};
+        background: ${color.default.disabled.fg};
       }
     }
   `

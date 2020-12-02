@@ -1,7 +1,8 @@
+import {ThemeColorSchemeKey} from '@sanity/ui'
 import {render as tlRender, RenderOptions as TLRenderOptions} from '@testing-library/react'
 import React from 'react'
 import {Card} from '../src/atoms/card'
-import {ThemeColorSchemeKey, studioTheme, ThemeProvider} from '../src/theme'
+import {studioTheme, ThemeProvider} from '../src/theme'
 
 interface RenderOptions extends TLRenderOptions {
   scheme?: ThemeColorSchemeKey

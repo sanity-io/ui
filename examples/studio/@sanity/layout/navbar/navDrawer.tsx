@@ -18,10 +18,9 @@ const OverlayBg = styled.div<{open: boolean}>`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: ${({theme}: {theme: Theme}) =>
-    theme.color.light.card.tones.default.enabled.shadow.ambient};
   transition: opacity 200ms;
   opacity: ${({open}) => (open ? 1 : 0)};
+  background-color: ${({theme}: {theme: Theme}) => theme.sanity.color.base.shadow.ambient};
 `
 
 const DrawerCard = styled(Card)<{open: boolean}>`
@@ -32,8 +31,7 @@ const DrawerCard = styled(Card)<{open: boolean}>`
   margin-right: 50px;
   height: 100%;
   max-width: ${320 - 50}px;
-  box-shadow: 0 0 0 1px
-    ${({theme}: {theme: Theme}) => theme.color.light.card.tones.default.enabled.shadow.outline};
+  box-shadow: 0 0 0 1px ${({theme}: {theme: Theme}) => theme.sanity.color.base.shadow.outline};
 `
 
 export function NavDrawer({onHide, open}: {onHide: () => void; open: boolean}) {
@@ -79,7 +77,7 @@ export function NavDrawer({onHide, open}: {onHide: () => void; open: boolean}) {
               <Avatar color="magenta" size={1} />
               <Box flex={1} paddingLeft={2}>
                 <Text>
-                  <strong style={{fontWeight: 600}}>Marius Lundgård</strong>
+                  <strong style={{fontWeight: 600}}>Doug Engelbart</strong>
                 </Text>
               </Box>
               <Box>

@@ -1,8 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
-import {ThemeColorSchemeKey} from '../../theme'
-import {useCard} from '../card'
 import {radioBaseStyles, inputElementStyles} from './styles'
 
 interface RadioProps {
@@ -10,7 +8,7 @@ interface RadioProps {
 }
 
 const Root = styled.div(radioBaseStyles)
-const Input = styled.input<{scheme: ThemeColorSchemeKey}>(inputElementStyles)
+const Input = styled.input(inputElementStyles)
 
 export const Radio = forwardRef(
   (
@@ -18,14 +16,13 @@ export const Radio = forwardRef(
     forwardedRef: React.Ref<HTMLInputElement>
   ) => {
     const {className, style, customValidity, ...restProps} = props
-    const card = useCard()
     const ref = useForwardedRef(forwardedRef)
 
     useCustomValidity(ref, customValidity)
 
     return (
       <Root className={className} data-ui="Radio" style={style}>
-        <Input type="radio" {...restProps} ref={ref} scheme={card.scheme} />
+        <Input type="radio" {...restProps} ref={ref} />
         <span />
       </Root>
     )

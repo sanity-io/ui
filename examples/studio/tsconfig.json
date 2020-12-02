@@ -10,6 +10,7 @@
     "allowJs": true,
     "sourceMap": true,
     "paths": {
+      "@sanity/color": ["./color/src"],
       "@sanity/icons": ["./icons/src"],
       "@sanity/logos": ["./logos/src"],
       "@sanity/ui": ["./ui/src"],

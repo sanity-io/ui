@@ -6,7 +6,7 @@ import {FontKey, ResponsiveFontProps} from './types'
 
 export function responsiveFont(fontKey: FontKey, props: ResponsiveFontProps & ThemeProps) {
   const {size, theme, weight} = props
-  const {family, sizes, weights} = theme.fonts[fontKey]
+  const {family, sizes, weights} = theme.sanity.fonts[fontKey]
   const fontWeight = (weight && weights[weight]) || weights['regular']
 
   // @todo: make this configurable
@@ -25,7 +25,7 @@ export function responsiveFont(fontKey: FontKey, props: ResponsiveFontProps & Th
       },
     } as CSSObject,
     ...responsive(
-      theme.media,
+      theme.sanity.media,
       getResponsiveProp(size).map((sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))
     ),
   ]

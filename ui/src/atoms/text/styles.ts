@@ -3,7 +3,7 @@ import {Theme} from '../../theme'
 
 export function textBaseStyles(props: {accent?: boolean; theme: Theme; muted?: boolean}) {
   const {accent, muted, theme} = props
-  const {weights} = props.theme.fonts.text
+  const {weights} = theme.sanity.fonts.text
 
   return css`
     ${accent &&
@@ -29,9 +29,10 @@ export function textBaseStyles(props: {accent?: boolean; theme: Theme; muted?: b
     }
 
     & code {
-      font-family: ${theme.fonts.code.family};
+      font-family: ${theme.sanity.fonts.code.family};
       border-radius: 2px;
-      background: rgba(127, 127, 127, 0.1);
+      background-color: var(--card-code-bg-color);
+      color: var(--card-code-fg-color);
     }
 
     & a {

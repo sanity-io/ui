@@ -8,6 +8,12 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "paths": {
+      "@sanity/color": ["./color/src"],
+      "@sanity/icons": ["./icons/src"],
+      "@sanity/logos": ["./logos/src"],
+      "@sanity/ui": ["./ui/src"]
+    }
   }
 }

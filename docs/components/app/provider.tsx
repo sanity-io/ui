@@ -1,8 +1,7 @@
 import {
-  CardProvider,
-  ThemeColorSchemeKey,
   LayerProvider,
   studioTheme,
+  ThemeColorSchemeKey,
   ThemeProvider,
   ToastProvider,
   usePrefersDark,
@@ -28,15 +27,13 @@ export function AppProvider(props: {
   useEffect(() => setColorScheme(prefersDark ? 'dark' : 'light'), [prefersDark])
 
   return (
-    <ThemeProvider theme={studioTheme}>
-      <CardProvider scheme={colorScheme}>
-        <GlobalStyle scheme={colorScheme} />
-        <AppContext.Provider value={{colorScheme, features, nav, node, setColorScheme, target}}>
-          <LayerProvider id="root">
-            <ToastProvider>{children}</ToastProvider>
-          </LayerProvider>
-        </AppContext.Provider>
-      </CardProvider>
+    <ThemeProvider scheme={colorScheme} theme={studioTheme}>
+      <GlobalStyle />
+      <AppContext.Provider value={{colorScheme, features, nav, node, setColorScheme, target}}>
+        <LayerProvider id="root">
+          <ToastProvider>{children}</ToastProvider>
+        </LayerProvider>
+      </AppContext.Provider>
     </ThemeProvider>
   )
 }

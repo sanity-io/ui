@@ -1,4 +1,4 @@
-import {CardProvider, studioTheme, ThemeProvider} from '@sanity/ui'
+import {studioTheme, ThemeProvider} from '@sanity/ui'
 import React, {useState} from 'react'
 import {hot} from 'react-hot-loader/root'
 import {App, AppContext, GlobalStyle} from './app'
@@ -10,12 +10,10 @@ function RootComponent() {
   return (
     <LocationProvider>
       <AppContext.Provider value={{setThemeMode, themeMode}}>
-        <CardProvider scheme={themeMode}>
-          <ThemeProvider theme={studioTheme}>
-            <GlobalStyle mode={themeMode} />
-            <App />
-          </ThemeProvider>
-        </CardProvider>
+        <ThemeProvider theme={studioTheme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
       </AppContext.Provider>
     </LocationProvider>
   )

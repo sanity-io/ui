@@ -18,9 +18,11 @@ export function stackBaseStyles() {
 }
 
 export function stackSpaceStyles(props: {space: number[]; theme: Theme}) {
+  const {theme} = props
+
   return css`
     ${props.space.map((spaceIndex, mqIndex) => {
-      const space = rem(props.theme.space[spaceIndex])
+      const space = rem(theme.sanity.space[spaceIndex])
 
       if (mqIndex === 0) {
         return css`
@@ -29,7 +31,7 @@ export function stackSpaceStyles(props: {space: number[]; theme: Theme}) {
       }
 
       return css`
-        @media (min-width: ${props.theme.media[mqIndex - 1] / 16}rem) {
+        @media (min-width: ${theme.sanity.media[mqIndex - 1] / 16}rem) {
           grid-gap: ${space};
         }
       `

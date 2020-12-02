@@ -24,7 +24,7 @@ export function labelBaseStyles(props: {accent?: boolean; theme: Theme; muted: b
     }
 
     & code {
-      font-family: ${theme.fonts.code.family};
+      font-family: ${theme.sanity.fonts.code.family};
       border-radius: 2px;
     }
 

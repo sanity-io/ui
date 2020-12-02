@@ -1,6 +1,6 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
-import {Box, Button, Card, Container, Flex, Text, useCard} from '../../atoms'
+import {Box, Button, Card, Container, Flex, Text} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {ThemeColorSchemeKey, Theme} from '../../theme'
@@ -17,30 +17,28 @@ interface DialogProps {
   width?: number
 }
 
-const Root = styled(Layer)<{scheme: ThemeColorSchemeKey}>(
-  ({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
-    const tone = theme.color[scheme].card.tones.default
+const Root = styled(Layer)(({theme}: {theme: Theme}) => {
+  const color = theme.sanity.color.base
 
-    return css`
-      && {
-        position: absolute;
-      }
+  return css`
+    && {
+      position: absolute;
+    }
 
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      &&:not([hidden]) {
-        display: flex;
-      }
-      align-items: center;
-      justify-content: center;
-      padding: 1.25em;
-      outline: none;
-      background: ${tone.enabled.shadow.penumbra};
-    `
-  }
-)
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    &&:not([hidden]) {
+      display: flex;
+    }
+    align-items: center;
+    justify-content: center;
+    padding: 1.25em;
+    outline: none;
+    background: ${color.shadow.penumbra};
+  `
+})
 
 const DialogContainer = styled(Container)`
   width: 100%;
@@ -112,7 +110,7 @@ const DialogCard = forwardRef(
       header: React.ReactNode
       id: string
       onClose?: () => void
-      scheme: ThemeColorSchemeKey
+      scheme?: ThemeColorSchemeKey
       width: number
     },
     ref
@@ -200,7 +198,6 @@ DialogCard.displayName = 'DialogCard'
 
 export const Dialog = forwardRef(
   (props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id'>, ref) => {
-    const card = useCard()
     const {
       cardRadius = 2,
       cardShadow = 4,
@@ -209,7 +206,7 @@ export const Dialog = forwardRef(
       header,
       id,
       onClose,
-      scheme = card.scheme,
+      scheme,
       width = 0,
       ...restProps
     } = props
@@ -250,7 +247,6 @@ export const Dialog = forwardRef(
           onFocus={handleFocus}
           ref={ref}
           role="dialog"
-          scheme={scheme}
         >
           <div ref={preDivRef} tabIndex={0} />
           <DialogCard

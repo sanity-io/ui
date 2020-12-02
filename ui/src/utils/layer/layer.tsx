@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {useLayer} from './hooks'
 import {LayerProvider} from './provider'
 
-interface LayerProps {
+export interface LayerProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   depth?: number
 }

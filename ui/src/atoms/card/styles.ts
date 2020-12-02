@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme, ThemeCardStateColor} from '../../theme'
+import {ThemeColorBase, ThemeColorCardState, Theme} from '../../theme'
 import {CardColorProps} from './types'
 
 export function card(props: CardColorProps & {theme: Theme}) {
@@ -28,64 +28,70 @@ export function cardBaseStyles() {
   `
 }
 
-function vars(color: ThemeCardStateColor) {
+function vars(base: ThemeColorBase, color: ThemeColorCardState) {
   // Custom properties that may be used by other atoms
   return css`
     --card-bg-color: ${color.bg};
     --card-fg-color: ${color.fg};
-    --card-focus-ring-color: ${color.focusRing};
+    --card-focus-ring-color: ${base.focusRing};
+    --card-hairline-soft-color: ${color.border};
+    --card-hairline-hard-color: ${color.border};
     --card-muted-fg-color: ${color.muted.fg};
     --card-accent-fg-color: ${color.accent.fg};
-    --card-hairline-soft-color: ${color.hairline.soft};
-    --card-hairline-hard-color: ${color.hairline.hard};
-    --card-link-color: ${color.link};
-    --card-shadow-outline-color: ${color.shadow.outline};
-    --card-shadow-umbra-color: ${color.shadow.umbra};
-    --card-shadow-penumbra-color: ${color.shadow.penumbra};
-    --card-shadow-ambient-color: ${color.shadow.ambient};
+    --card-link-fg-color: ${color.link.fg};
+    --card-code-bg-color: ${color.code.bg};
+    --card-code-fg-color: ${color.code.fg};
+
+    /* @todo: deprecate */
+    --card-link-color: ${color.link.fg};
+
+    /* @todo: rename to "--base-"? */
+    --card-shadow-outline-color: ${base.shadow.outline};
+    --card-shadow-umbra-color: ${base.shadow.umbra};
+    --card-shadow-penumbra-color: ${base.shadow.penumbra};
+    --card-shadow-ambient-color: ${base.shadow.ambient};
   `
 }
 
 export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
-  const {scheme, theme} = props
-  const _scheme = theme.color[scheme] || theme.color.light
-  const _tone = _scheme.card.tones[props.tone] || _scheme.card.tones.default
+  const {theme} = props
+  const {base, card} = theme.sanity.color
 
   return css`
-    ${vars(_tone.enabled)}
+    ${vars(base, card.enabled)}
 
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
 
     &:is(button) {
       &:disabled {
-        ${vars(_tone.disabled)}
+        ${vars(base, card.disabled)}
       }
 
       &:not(:disabled) {
         @media (hover: hover) {
           &:hover {
-            ${vars(_tone.hovered)}
+            ${vars(base, card.hovered)}
           }
 
           &:active {
-            ${vars(_tone.pressed)}
+            ${vars(base, card.pressed)}
           }
         }
 
         &:focus {
-          ${vars(_tone.selected)}
+          ${vars(base, card.selected)}
         }
 
         [aria-selected='true'] > & {
-          ${vars(_tone.selected)}
+          ${vars(base, card.selected)}
         }
       }
     }
 
     &:is(a) {
       &[data-disabled] {
-        ${vars(_tone.disabled)}
+        ${vars(base, card.disabled)}
       }
 
       &:not([data-disabled]) {
@@ -93,22 +99,24 @@ export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
           outline: none;
 
           &:hover {
-            ${vars(_tone.hovered)}
+            ${vars(base, card.hovered)}
           }
 
           &:active {
-            ${vars(_tone.pressed)}
+            ${vars(base, card.pressed)}
           }
         }
 
         &:focus {
-          ${vars(_tone.selected)}
+          ${vars(base, card.selected)}
         }
 
         [aria-selected='true'] > & {
-          ${vars(_tone.selected)}
+          ${vars(base, card.selected)}
         }
       }
     }
+
+    ${theme.sanity.styles?.card?.root}
   `
 }

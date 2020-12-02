@@ -1,7 +1,7 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Box} from '../../atoms'
-import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
+import {focusFirstDescendant, focusLastDescendant, isHTMLButtonElement} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {useLayer} from '../../utils'
 import {MenuContext} from './menuContext'
@@ -26,18 +26,18 @@ export const Menu = forwardRef(
     const {children, focusLast, onClickOutside, onEscape, onItemClick, ...restProps} = props
     const {isTopLayer} = useLayer()
     const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-    const itemsRef = useRef<HTMLButtonElement[]>([])
+    const itemsRef = useRef<HTMLElement[]>([])
     const [activeIndex, setActiveIndex] = useState(-1)
 
     useEffect(() => {
       if (rootElement) {
         if (focusLast) {
           if (focusLastDescendant(rootElement)) {
-            setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLButtonElement))
+            setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
           }
         } else {
           if (focusFirstDescendant(rootElement)) {
-            setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLButtonElement))
+            setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
           }
         }
       }
@@ -49,7 +49,7 @@ export const Menu = forwardRef(
       else if (ref) ref.current = el
     }
 
-    const mount = useCallback((element: HTMLButtonElement | null) => {
+    const mount = useCallback((element: HTMLElement | null) => {
       if (!element) return () => undefined
 
       if (!itemsRef.current.includes(element)) {
@@ -76,14 +76,14 @@ export const Menu = forwardRef(
           const len = itemsRef.current.length
 
           let currentIndex = activeIndex
-          let element: HTMLButtonElement | null = null
+          let element: HTMLElement | null = null
 
           while (!element) {
             currentIndex = (currentIndex - 1 + len) % len
 
             const e = itemsRef.current[currentIndex]
 
-            if (!e.disabled) {
+            if (isHTMLButtonElement(e) && !e.disabled) {
               element = itemsRef.current[currentIndex]
             }
           }
@@ -104,14 +104,14 @@ export const Menu = forwardRef(
           const len = itemsRef.current.length
 
           let currentIndex = activeIndex
-          let element: HTMLButtonElement | null = null
+          let element: HTMLElement | null = null
 
           while (!element) {
             currentIndex = (currentIndex + 1) % len
 
             const e = itemsRef.current[currentIndex]
 
-            if (!e.disabled) {
+            if (isHTMLButtonElement(e) && !e.disabled) {
               element = itemsRef.current[currentIndex]
             }
           }
@@ -126,7 +126,7 @@ export const Menu = forwardRef(
       [activeIndex]
     )
 
-    const handleItemMouseEnter = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleItemMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
       const element = event.currentTarget
 
       setActiveIndex(itemsRef.current.indexOf(element))

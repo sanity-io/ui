@@ -2,14 +2,14 @@ import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} fro
 import dashboardTool from '@sanity/dashboard/plugin'
 import deskTool from '@sanity/desk-tool/plugin'
 import {Layout} from '@sanity/layout'
-import {CardProvider, studioTheme, Theme, ThemeProvider} from '@sanity/ui'
+import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import visionTool from '@sanity/vision/plugin'
 import React, {createElement} from 'react'
 import {hot} from 'react-hot-loader/root'
 import {createGlobalStyle, css} from 'styled-components'
 
-const GlobalStyle = createGlobalStyle(({mode, theme}: {mode: 'light' | 'dark'; theme: Theme}) => {
-  const tone = theme.color[mode].card.tones.transparent
+const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
+  const color = theme.sanity.color.base
 
   return css`
     html,
@@ -20,8 +20,8 @@ const GlobalStyle = createGlobalStyle(({mode, theme}: {mode: 'light' | 'dark'; t
 
     body {
       -webkit-font-smoothing: antialiased;
-      background-color: ${tone.enabled.bg};
-      color: ${tone.enabled.fg};
+      background-color: ${color.bg};
+      color: ${color.fg};
       margin: 0;
     }
   `
@@ -72,13 +72,11 @@ function RootComponent() {
   return (
     <StudioProvider commands={commands} dataset="production" plugins={plugins} projectId="foo">
       <LocationProvider>
-        <ThemeProvider theme={studioTheme}>
-          <CardProvider scheme={themeMode}>
-            <GlobalStyle mode={themeMode} />
-            <Layout projectName="Sanity.io">
-              <ActiveTool />
-            </Layout>
-          </CardProvider>
+        <ThemeProvider theme={studioTheme} scheme={themeMode}>
+          <GlobalStyle />
+          <Layout projectName="Sanity.io">
+            <ActiveTool />
+          </Layout>
         </ThemeProvider>
       </LocationProvider>
     </StudioProvider>

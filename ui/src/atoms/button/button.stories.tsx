@@ -100,7 +100,7 @@ export const plain = () => {
     'Tone',
     {
       Default: 'default',
-      Brand: 'brand',
+      Primary: 'primary',
       Positive: 'positive',
       Caution: 'caution',
       Critical: 'critical',

@@ -11,7 +11,7 @@ export default {
   decorators: [withCentered, withKnobs],
 }
 
-export const plain = () => {
+export const props = () => {
   const border = boolean('Border', false, 'Props')
 
   const as = select(
@@ -77,6 +77,10 @@ export const plain = () => {
     {
       Default: 'default',
       Transparent: 'transparent',
+      Primary: 'primary',
+      Positive: 'positive',
+      Caution: 'caution',
+      Critical: 'critical',
     },
     'default',
     'Props'
@@ -92,10 +96,16 @@ export const plain = () => {
       shadow={shadow}
       tone={tone}
     >
-      <Text>
-        Card with <code>padding={padding}</code>, <code>tone={tone}</code>, and{' '}
-        <code>shadow={shadow}</code>
-      </Text>
+      <Stack space={3}>
+        <Text>
+          Card with <code>padding={padding}</code>, <code>tone={tone}</code>, and{' '}
+          <code>shadow={shadow}</code>.
+        </Text>
+        <Text>
+          Text with <a>link</a>.
+        </Text>
+        <Text accent>Accented text.</Text>
+      </Stack>
     </Card>
   )
 }
@@ -116,8 +126,14 @@ export const interactiveCard = () => {
   return (
     <Card padding={4}>
       <div aria-selected={selected}>
-        <Card as="a" padding={3} tabIndex={0}>
-          <Text>Interactive</Text>
+        <Card as="button" padding={3} tabIndex={0}>
+          <Stack space={3}>
+            <Text>
+              Text <code>Code</code>
+            </Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
         </Card>
       </div>
     </Card>
@@ -142,7 +158,7 @@ export const allTones = () => {
       <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="critical">
         <Text>Critical</Text>
       </Card>
-      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="brand">
+      <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="primary">
         <Text>Brand</Text>
       </Card>
     </Stack>
@@ -188,7 +204,7 @@ export const asButton = () => {
             <Text accent>Accent</Text>
           </Stack>
         </Card>
-        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="brand">
+        <Card as="button" padding={4} style={{textAlign: 'center'}} tone="primary">
           <Stack space={2}>
             <Text>Text</Text>
             <Text muted>Muted</Text>
@@ -243,7 +259,7 @@ export const asButton = () => {
           </Card>
         </div>
         <div aria-selected>
-          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="brand">
+          <Card as="button" padding={4} style={{textAlign: 'center'}} tone="primary">
             <Stack space={2}>
               <Text>Text</Text>
               <Text muted>Muted</Text>

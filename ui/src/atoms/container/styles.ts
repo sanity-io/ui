@@ -13,7 +13,8 @@ export function containerBaseStyles() {
 }
 
 export function containerWidthStyles(props: {theme: Theme; width: number[]}) {
-  const {container} = props.theme
+  const {theme} = props
+  const {container} = theme.sanity
 
   return css`
     ${props.width.map((spaceIndex, mqIndex) => {
@@ -23,7 +24,7 @@ export function containerWidthStyles(props: {theme: Theme; width: number[]}) {
         `
 
       return css`
-        @media (min-width: ${rem(props.theme.media[mqIndex - 1])}) {
+        @media (min-width: ${rem(theme.sanity.media[mqIndex - 1])}) {
           max-width: ${rem(container[spaceIndex])};
         }
       `

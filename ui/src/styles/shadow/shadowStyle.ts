@@ -21,10 +21,12 @@ function shadowStyle(shadow: ThemeShadow | null): CSSObject {
 }
 
 export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps) {
+  const {theme} = props
+
   return responsive(
-    props.theme.media,
+    theme.sanity.media,
     getResponsiveProp(props.shadow).map((shadowIndex) =>
-      shadowStyle(props.theme.shadows[shadowIndex])
+      shadowStyle(theme.sanity.shadows[shadowIndex])
     )
   )
 }

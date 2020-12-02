@@ -1,24 +1,22 @@
-import {ThemeColorSchemeKey, Theme} from '@sanity/ui'
+import {Theme} from '@sanity/ui'
 import {createGlobalStyle, css} from 'styled-components'
 
-export const GlobalStyle = createGlobalStyle<{scheme: ThemeColorSchemeKey}>(
-  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
-    const {scheme, theme} = props
-    const color = theme.color[scheme]
+export const GlobalStyle = createGlobalStyle((props: {theme: Theme}) => {
+  const {theme} = props
+  const color = theme.sanity.color.base
 
-    return css`
-      html,
-      body,
-      #__next {
-        height: 100%;
-      }
+  return css`
+    html,
+    body,
+    #__next {
+      height: 100%;
+    }
 
-      body {
-        background-color: ${color.card.tones.transparent.enabled.bg};
-        color: ${color.card.tones.transparent.enabled.fg};
-        -webkit-font-smoothing: antialiased;
-        margin: 0;
-      }
-    `
-  }
-)
+    body {
+      background-color: ${color.bg};
+      color: ${color.fg};
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+    }
+  `
+})

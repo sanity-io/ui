@@ -3,18 +3,17 @@ import React, {forwardRef, useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
 import styled, {css} from 'styled-components'
 import {rem} from '../../styles'
-import {AvatarColorKey, ThemeColorSchemeKey, Theme, useTheme} from '../../theme'
-import {useCard} from '../card'
+import {ThemeColorSpotKey} from '../../theme'
+import {Theme, useTheme} from '../../theme'
 import {Text} from '../text'
 import {avatarTheme} from './theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from './types'
 
 export interface AvatarProps {
-  // alt?: string
   animateArrowFrom?: AvatarPosition
   arrowPosition?: AvatarPosition
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  color?: AvatarColorKey
+  color?: ThemeColorSpotKey
   initials?: string
   onImageLoadError?: (event: Error) => void
   size?: AvatarSize
@@ -121,27 +120,25 @@ const Stroke = styled.ellipse`
   }
 `
 
-const Initials = styled.div<{scheme: ThemeColorSchemeKey}>(
-  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
-    const {scheme, theme} = props
-    const tone = theme.color[scheme].card.tones.default
+const Initials = styled.div((props: {theme: Theme}) => {
+  const {theme} = props
+  const {base} = theme.sanity.color
 
-    return css`
-      width: 100%;
-      height: 100%;
-      color: ${tone.enabled.fg};
-      align-items: center;
-      justify-content: center;
-      text-transform: uppercase;
-      text-align: center;
-      border-radius: 50%;
+  return css`
+    width: 100%;
+    height: 100%;
+    color: ${base.fg};
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 50%;
 
-      &:not([hidden]) {
-        display: flex;
-      }
-    `
-  }
-)
+    &:not([hidden]) {
+      display: flex;
+    }
+  `
+})
 
 export const Avatar = forwardRef(
   (props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>, ref) => {
@@ -160,8 +157,7 @@ export const Avatar = forwardRef(
     } = props
     const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
     const theme = useTheme()
-    const card = useCard()
-    const color = theme.color[card.scheme].avatar[colorKey]
+    const color = theme.sanity.color.spot[colorKey] || theme.sanity.color.spot.gray
 
     const _sizeRem = avatarTheme.size[size]
     const _radius = avatarTheme.size[size] / 2
@@ -237,7 +233,7 @@ export const Avatar = forwardRef(
 
         {(imageFailed || !src) && initials && (
           <>
-            <Initials scheme={card.scheme}>
+            <Initials>
               {size === 0 && (
                 <Text as="span" size={0}>
                   <strong>{initials}</strong>

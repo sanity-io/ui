@@ -1,14 +1,26 @@
-import {CardProvider, studioTheme} from '@sanity/ui'
+import {studioTheme, ThemeProvider} from '@sanity/ui'
 import {select} from '@storybook/addon-knobs'
 import React from 'react'
-import {ThemeProvider} from 'styled-components'
 
 export const withTheme = (storyFn: () => JSX.Element) => {
   const scheme = select('Color sheme', {Light: 'light', Dark: 'dark'}, 'light', 'Theme')
+  const variant = select(
+    'Color variant',
+    {
+      Transparent: 'transparent',
+      Default: 'default',
+      Primary: 'primary',
+      Positive: 'positive',
+      Caution: 'caution',
+      Critical: 'critical',
+    },
+    'transparent',
+    'Theme'
+  )
 
   return (
-    <ThemeProvider theme={studioTheme}>
-      <CardProvider scheme={scheme}>{storyFn()}</CardProvider>
+    <ThemeProvider theme={studioTheme} scheme={scheme} variant={variant}>
+      {storyFn()}
     </ThemeProvider>
   )
 }

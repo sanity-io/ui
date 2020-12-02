@@ -15,7 +15,7 @@ const Root = styled(Flex)`
 
 const ContentContainer = styled(Box)`
   ${({theme}) => css`
-    @media (min-width: ${rem(theme.media[1])}) {
+    @media (min-width: ${rem(theme.sanity.media[1])}) {
       min-width: 30rem;
     }
   `}
@@ -27,7 +27,7 @@ const ContentCard = styled(Card).attrs({forwardedAs: 'main'})`
 
 const NarrowDeviceMenu = styled(Box)`
   ${({theme}) => css`
-    @media (min-width: ${rem(theme.media[1])}) {
+    @media (min-width: ${rem(theme.sanity.media[1])}) {
       &&:not([hidden]) {
         display: none;
       }
@@ -66,14 +66,7 @@ export function PageLayout({children, structure}: PageLayoutProps) {
           />
         </NarrowDeviceMenu>
 
-        <ContentCard id="content">
-          {children}
-          {/* <Container as="main" width={wide ? 3 : 2}>
-            <Box paddingX={[4, 5, 6, 7]} paddingY={[5, 6, 7, 8]}>
-              {children}
-            </Box>
-          </Container> */}
-        </ContentCard>
+        <ContentCard id="content">{children}</ContentCard>
       </ContentContainer>
     </Root>
   )

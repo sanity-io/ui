@@ -25,7 +25,7 @@ const GRID_ITEM_COLUMN = {
 
 function responsiveGridItemRowStyle({row, theme}: GridItemProps & ThemeProps) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(row).map((val) => {
       if (typeof val === 'number') {
         return {gridRow: `span ${val} / span ${val}`}
@@ -38,21 +38,21 @@ function responsiveGridItemRowStyle({row, theme}: GridItemProps & ThemeProps) {
 
 function responsiveGridItemRowStartStyle({rowStart, theme}: GridItemProps & ThemeProps) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(rowStart).map((val) => ({gridRowStart: val}))
   )
 }
 
 function responsiveGridItemRowEndStyle({rowEnd, theme}: GridItemProps & ThemeProps) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(rowEnd).map((val) => ({gridRowEnd: val}))
   )
 }
 
 function responsiveGridItemColumnStyle({column, theme}: GridItemProps & ThemeProps) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(column).map((val) => {
       if (typeof val === 'number') {
         return {gridColumn: `span ${val} / span ${val}`}
@@ -65,14 +65,14 @@ function responsiveGridItemColumnStyle({column, theme}: GridItemProps & ThemePro
 
 function responsiveGridItemColumnStartStyle({columnStart, theme}: GridItemProps & ThemeProps) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(columnStart).map((val) => ({gridColumnStart: val}))
   )
 }
 
 function responsiveGridItemColumnEndStyle({columnEnd, theme}: GridItemProps & ThemeProps) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(columnEnd).map((val) => ({gridColumnEnd: val}))
   )
 }

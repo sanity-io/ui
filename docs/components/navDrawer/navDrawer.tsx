@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components'
 
 const Root = styled(Layer)<{open: boolean}>(({open, theme}: {open: boolean; theme: Theme}) => {
   return css`
-    @media (max-width: ${rem(theme.media[1] - 1)}) {
+    @media (max-width: ${rem(theme.sanity.media[1] - 1)}) {
       z-index: 1;
       position: fixed;
       top: 0;
@@ -23,9 +23,7 @@ const Root = styled(Layer)<{open: boolean}>(({open, theme}: {open: boolean; them
       `}
     }
 
-    @media (min-width: ${rem(theme.media[1])}) {
-      /* border-right: 1px solid var(--card-shadow-outline-color); */
-      /* border-right: 1px solid var(--card-hairline-hard-color); */
+    @media (min-width: ${rem(theme.sanity.media[1])}) {
       border-right: 1px solid var(--card-hairline-soft-color);
       position: sticky;
       top: 0;

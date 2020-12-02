@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {Theme} from '../../theme'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
@@ -35,29 +35,31 @@ export function buttonBaseStyles() {
   `
 }
 
-export function buttonColorStyles(props: {
-  uiMode: ButtonMode
-  scheme: ThemeColorSchemeKey
-  theme: Theme
-  tone: ButtonTone
-}) {
-  const {scheme, theme, uiMode} = props
-  const _scheme = theme.color[scheme] || theme.color.light
-  const _tone = _scheme.button.tones[props.tone] || _scheme.button.tones.default
-  const mode = _tone.modes[uiMode] || _tone.modes.default
+export function buttonColorStyles(props: {uiMode: ButtonMode; theme: Theme; tone: ButtonTone}) {
+  const {theme, uiMode} = props
+  const mode = theme.sanity.color.button[uiMode] || theme.sanity.color.button.default
+  const color = mode[props.tone] || mode.default
 
   return css`
+    --card-bg-color: ${color.enabled.bg};
+    --card-fg-color: ${color.enabled.fg};
+    --card-border-color: ${color.enabled.border};
+
+    background-color: var(--card-bg-color);
+    color: var(--card-fg-color);
+
+    & > span {
+      box-shadow: inset 0 0 0 1px var(--card-border-color);
+    }
+
+    &:disabled,
+    &[data-disabled='true'] {
+      --card-bg-color: ${color.disabled.bg};
+      --card-fg-color: ${color.disabled.fg};
+      --card-border-color: ${color.disabled.border};
+    }
+
     &:not([data-disabled='true']) {
-      --card-bg-color: ${mode.enabled.bg};
-      --card-fg-color: ${mode.enabled.fg};
-
-      background-color: var(--card-bg-color);
-      color: var(--card-fg-color);
-
-      & > span {
-        box-shadow: inset 0 0 0 1px ${mode.enabled.border};
-      }
-
       &:focus {
         box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
       }
@@ -68,33 +70,25 @@ export function buttonColorStyles(props: {
 
       @media (hover: hover) {
         &:hover {
-          --card-bg-color: ${mode.hovered.bg};
-          --card-fg-color: ${mode.hovered.fg};
-          text-decoration: none;
-
-          & > span {
-            box-shadow: inset 0 0 0 1px ${mode.hovered.border};
-          }
+          --card-bg-color: ${color.hovered.bg};
+          --card-fg-color: ${color.hovered.fg};
+          --card-border-color: ${color.hovered.border};
         }
 
         &:active {
-          --card-bg-color: ${mode.pressed.bg};
-          --card-fg-color: ${mode.pressed.fg};
-
-          & > span {
-            box-shadow: inset 0 0 0 1px ${mode.pressed.border};
-          }
+          --card-bg-color: ${color.pressed.bg};
+          --card-fg-color: ${color.pressed.fg};
+          --card-border-color: ${color.pressed.border};
         }
 
         &[data-selected] {
-          --card-bg-color: ${mode.selected.bg};
-          --card-fg-color: ${mode.selected.fg};
-
-          & > span {
-            box-shadow: inset 0 0 0 1px ${mode.selected.border};
-          }
+          --card-bg-color: ${color.selected.bg};
+          --card-fg-color: ${color.selected.fg};
+          --card-border-color: ${color.selected.border};
         }
       }
     }
+
+    ${theme.sanity.styles?.button?.root}
   `
 }

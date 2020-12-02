@@ -28,12 +28,12 @@ export function responsiveInputPaddingStyle(
   }
 
   return responsive(
-    theme.media,
+    theme.sanity.media,
     _padding.map((_, i) => {
-      const fontSize = theme.fonts.text.sizes[_size[i]] || theme.fonts.text.sizes[2]
+      const fontSize = theme.sanity.fonts.text.sizes[_size[i]] || theme.sanity.fonts.text.sizes[2]
       const emSize = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
-      const p = theme.space[_padding[i]]
-      const s = theme.space[_space[i]]
+      const p = theme.sanity.space[_padding[i]]
+      const s = theme.sanity.space[_space[i]]
 
       const styles = {
         paddingTop: rem(p - fontSize.ascenderHeight),

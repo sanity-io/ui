@@ -1,9 +1,7 @@
 import React, {createElement, forwardRef, useCallback, useEffect, useRef} from 'react'
-import styled, {css} from 'styled-components'
-import {Box, Flex, Icon, IconSymbol, Text, useCard} from '../../atoms'
+import {Box, Card, Flex, Icon, IconSymbol, Text} from '../../atoms'
 import {useForwardedRef} from '../../hooks'
 import {ResponsivePaddingStyleProps} from '../../styles'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
 import {useMenu} from './hooks'
 
 interface MenuItemProps extends ResponsivePaddingStyleProps {
@@ -15,61 +13,11 @@ interface MenuItemProps extends ResponsivePaddingStyleProps {
   text?: React.ReactNode
 }
 
-const Root = styled.button<{scheme: ThemeColorSchemeKey}>(
-  (props: {scheme: ThemeColorSchemeKey; theme: Theme}) => {
-    const {scheme, theme} = props
-    const tone = theme.color[scheme].card.tones.default
-
-    return css`
-      --card-bg-color: ${tone.enabled.bg};
-      --card-fg-color: ${tone.enabled.fg};
-
-      -webkit-font-smoothing: inherit;
-      appearance: none;
-      font: inherit;
-      border: 0;
-      border-radius: 0;
-      background: none;
-      color: inherit;
-      text-align: left;
-      margin: 0;
-      padding: 0;
-      outline: none;
-      background-color: var(--card-bg-color);
-      color: var(--card-fg-color);
-
-      &:is(a) {
-        text-decoration: none;
-
-        &:not([hidden]) {
-          display: block;
-        }
-      }
-
-      &:not(:disabled):focus {
-        --card-bg-color: ${tone.selected.bg};
-        --card-fg-color: ${tone.selected.fg};
-      }
-
-      &:not(:disabled):active {
-        --card-bg-color: ${tone.pressed.bg};
-        --card-fg-color: ${tone.pressed.fg};
-      }
-
-      &:disabled {
-        --card-bg-color: ${tone.disabled.bg};
-        --card-fg-color: ${tone.disabled.fg};
-      }
-    `
-  }
-)
-
 export const MenuItem = forwardRef(
   (
-    props: MenuItemProps & Omit<React.HTMLProps<HTMLButtonElement>, 'ref'>,
-    forwardedRef: React.ForwardedRef<HTMLButtonElement>
+    props: MenuItemProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'ref'>,
+    forwardedRef: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const card = useCard()
     const {
       children,
       icon,
@@ -88,14 +36,14 @@ export const MenuItem = forwardRef(
       ...restProps
     } = props
     const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
-    const rootRef = useRef<HTMLButtonElement | null>(null)
+    const rootRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => mount(rootRef.current), [mount])
 
     const ref = useForwardedRef(forwardedRef)
 
     const handleClick = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
+      (event: React.MouseEvent<HTMLDivElement>) => {
         if (onClick) onClick(event)
         if (onItemClick) onItemClick()
       },
@@ -112,13 +60,14 @@ export const MenuItem = forwardRef(
       paddingLeft,
     }
 
-    function setRef(el: HTMLButtonElement | null) {
+    function setRef(el: HTMLDivElement | null) {
       ref.current = el
       rootRef.current = el
     }
 
     return (
-      <Root
+      <Card
+        as="button"
         data-ui="MenuItem"
         {...restProps}
         onClick={restProps.disabled ? undefined : handleClick}
@@ -126,11 +75,10 @@ export const MenuItem = forwardRef(
         onMouseLeave={onMouseLeave}
         ref={setRef}
         role="menuitem"
-        scheme={card.scheme}
         tabIndex={-1}
         type="button"
       >
-        {(icon || text) && (
+        {(icon || text || iconRight) && (
           <Box as="span" {...paddingProps}>
             <Flex as="span">
               {icon && (
@@ -161,7 +109,7 @@ export const MenuItem = forwardRef(
         )}
 
         {children}
-      </Root>
+      </Card>
     )
   }
 )

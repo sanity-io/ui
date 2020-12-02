@@ -1,9 +1,8 @@
-import {Theme} from '../types'
-import darkScheme from './colorSchemes/dark'
-import lightScheme from './colorSchemes/light'
+import {RootTheme} from '../types'
+import {color} from './color'
 import {fonts} from './fonts'
 
-export const studioTheme: Theme = {
+export const studioTheme: RootTheme = {
   avatar: {
     distance: [-3, -6, -9],
     size: [23, 35, 55],
@@ -11,10 +10,7 @@ export const studioTheme: Theme = {
   button: {
     textWeight: 'medium',
   },
-  color: {
-    dark: darkScheme,
-    light: lightScheme,
-  },
+  color,
   container: [320, 640, 960, 1280, 1600, 1920],
   fonts,
   media: [320, 640, 960, 1280, 1600, 1920],
@@ -48,6 +44,18 @@ export const studioTheme: Theme = {
       padding: 4,
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
+    },
+  },
+  styles: {
+    button: {
+      root: {
+        transition: 'background-color 100ms,border-color 100ms',
+      },
+    },
+    card: {
+      root: {
+        transition: 'background-color 100ms,border-color 100ms',
+      },
     },
   },
 }

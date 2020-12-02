@@ -1,11 +1,6 @@
-import {ThemeProvider, useTheme as useStyledTheme} from 'styled-components'
-import {Theme} from './types'
-
+export * from './lib'
+export * from './hooks'
 export * from './studioTheme'
+export * from './themeColorProvider'
+export * from './themeProvider'
 export * from './types'
-
-export function useTheme(): Theme {
-  return useStyledTheme() as Theme
-}
-
-export {ThemeProvider}

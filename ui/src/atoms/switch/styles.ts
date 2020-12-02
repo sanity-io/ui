@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {Theme} from '../../theme'
 
 /* Root */
 export function switchBaseStyles() {
@@ -34,15 +34,14 @@ export function switchInputStyles() {
 }
 
 /* Representation */
-export function switchRepresentationStyles(props: {scheme: ThemeColorSchemeKey; theme: Theme}) {
-  const {scheme, theme} = props
-  const {switch: switchInput} = theme.input
-  const _scheme = theme.color[scheme] || theme.color.light
-  const tone = _scheme.switch.tones.default
+export function switchRepresentationStyles(props: {theme: Theme}) {
+  const {theme} = props
+  const {switch: switchInput} = theme.sanity.input
+  const color = theme.sanity.color.button.default
 
   return css`
-    --switch-thumb-color: ${tone.enabled.thumb};
-    --switch-bg-color: ${tone.enabled.off.bg};
+    --switch-bg-color: ${color.default.enabled.bg};
+    --switch-fg-color: ${color.default.enabled.fg};
 
     &&:not([hidden]) {
       display: block;
@@ -65,20 +64,32 @@ export function switchRepresentationStyles(props: {scheme: ThemeColorSchemeKey; 
       box-shadow: none;
     }
 
+    input:hover + & {
+      --switch-bg-color: ${color.default.hovered.bg};
+      --switch-fg-color: ${color.default.hovered.fg};
+    }
+
     input:checked + & {
-      --switch-bg-color: ${tone.enabled.on.bg};
+      --switch-bg-color: ${color.positive.enabled.bg};
+      --switch-fg-color: ${color.positive.enabled.fg};
+    }
+
+    input:checked:hover + & {
+      --switch-bg-color: ${color.positive.hovered.bg};
+      --switch-fg-color: ${color.positive.hovered.fg};
     }
 
     input:disabled + & {
-      --switch-thumb-color: ${tone.disabled.thumb};
-      --switch-bg-color: ${tone.disabled.off.bg};
+      --switch-bg-color: ${color.default.disabled.fg};
+      --switch-fg-color: ${color.default.disabled.bg};
     }
   `
 }
 
 /* Track */
 export function switchTrackStyles(props: {theme: Theme}) {
-  const {switch: switchInput} = props.theme.input
+  const {theme} = props
+  const {switch: switchInput} = theme.sanity.input
 
   return css`
     &&:not([hidden]) {
@@ -100,8 +111,8 @@ export function switchThumbStyles(props: {
   indeterminate?: boolean
   theme: Theme
 }) {
-  const {indeterminate} = props
-  const {switch: switchInput} = props.theme.input
+  const {indeterminate, theme} = props
+  const {switch: switchInput} = theme.sanity.input
   const trackWidth = switchInput.width
   const trackHeight = switchInput.height
   const trackPadding = switchInput.padding
@@ -123,7 +134,7 @@ export function switchThumbStyles(props: {
     transition-property: transform;
     transition-duration: ${switchInput.transitionDurationMs}ms;
     transition-timing-function: ${switchInput.transitionTimingFunction};
-    background: var(--switch-thumb-color);
+    background: var(--switch-fg-color);
     transform: translate3d(0, 0, 0);
 
     ${checked &&

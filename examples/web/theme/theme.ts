@@ -1,9 +1,8 @@
-import {Theme} from '@sanity/ui'
-import darkScheme from './colorSchemes/dark'
-import lightScheme from './colorSchemes/light'
+import {RootTheme} from '@sanity/ui'
+import {color} from './color'
 import {fonts} from './fonts'
 
-export const sanityTheme: Theme = {
+export const sanityTheme: RootTheme = {
   avatar: {
     distance: [-3, -6, -9],
     size: [23, 35, 55],
@@ -11,10 +10,7 @@ export const sanityTheme: Theme = {
   button: {
     textWeight: 'medium',
   },
-  color: {
-    dark: darkScheme,
-    light: lightScheme,
-  },
+  color,
   container: [480, 960, 1440, 1920, 2400],
   fonts,
   media: [320, 640, 960, 1280, 1600, 1920],

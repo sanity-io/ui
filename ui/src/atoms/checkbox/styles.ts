@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem} from '../../styles'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {Theme} from '../../theme'
 
 export function checkboxBaseStyles() {
   return css`
@@ -9,11 +9,10 @@ export function checkboxBaseStyles() {
   `
 }
 
-export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey; theme: Theme}) {
-  const _scheme = theme.color[scheme] || theme.color.light
-  const color = _scheme.input
-  const tone = color.tones.default
-  const {checkbox} = theme.input
+export function inputElementStyles(props: {theme: Theme}) {
+  const {theme} = props
+  const {input} = theme.sanity.color
+  const {checkbox} = theme.sanity.input
 
   return css`
     position: absolute;
@@ -33,10 +32,10 @@ export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey
       height: ${rem(checkbox.size)};
       width: ${rem(checkbox.size)};
       box-sizing: border-box;
-      box-shadow: 0 0 0 1px ${tone.enabled.border};
+      box-shadow: 0 0 0 1px ${input.default.enabled.border};
       border-radius: 3px;
       line-height: 1;
-      background: ${tone.enabled.bg};
+      background: ${input.default.enabled.bg};
 
       & > svg {
         display: block;
@@ -62,9 +61,9 @@ export function inputElementStyles({scheme, theme}: {scheme: ThemeColorSchemeKey
     }
 
     &:disabled + span {
-      background: ${tone.disabled.bg};
-      box-shadow: 0 0 0 1px ${tone.disabled.border};
-      color: ${tone.disabled.fg};
+      background: ${input.default.disabled.bg};
+      box-shadow: 0 0 0 1px ${input.default.disabled.border};
+      color: ${input.default.disabled.fg};
     }
 
     &:indeterminate + span > svg:last-child {

@@ -1,8 +1,5 @@
-import {ThemeColorSchemeKey} from '../../theme'
-
-export type CardTone = 'default' | 'transparent' | 'positive' | 'caution' | 'critical' | 'brand'
+import {ThemeColorToneKey} from '../../theme'
 
 export interface CardColorProps {
-  scheme: ThemeColorSchemeKey
-  tone: CardTone
+  tone: ThemeColorToneKey
 }

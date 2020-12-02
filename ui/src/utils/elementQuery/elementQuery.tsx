@@ -1,10 +1,11 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react'
-import {Theme, useTheme} from '../../theme'
+import {useTheme} from '../../theme'
 import {ResizeObserver} from '../resizeObserver'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
 export function ElementQuery(props: React.HTMLProps<HTMLDivElement>) {
-  const {media} = useTheme() as Theme
+  const theme = useTheme()
+  const {media} = theme.sanity
   const {children, ...restProps} = props
   const rootRef = useRef<HTMLDivElement | null>(null)
   const [width, setWidth] = useState(() => {

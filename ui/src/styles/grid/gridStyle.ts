@@ -35,7 +35,7 @@ export function gridStyle({autoCols, autoFlow, autoRows}: GridStyleProps & {them
 
 function responsiveGridColumnsStyle({columns, theme}: GridStyleProps & {theme: Theme}) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(columns).map((val) => ({
       gridTemplateColumns: val && `repeat(${val}, minmax(0, 1fr));`,
     }))
@@ -44,7 +44,7 @@ function responsiveGridColumnsStyle({columns, theme}: GridStyleProps & {theme: T
 
 function responsiveGridRowsStyle({rows, theme}: GridStyleProps & {theme: Theme}) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(rows).map((val) => ({
       gridTemplateRows: val && `repeat(${val}, minmax(0, 1fr));`,
     }))
@@ -53,9 +53,9 @@ function responsiveGridRowsStyle({rows, theme}: GridStyleProps & {theme: Theme})
 
 function responsiveGridGapStyle({gap, theme}: GridStyleProps & {theme: Theme}) {
   return responsive(
-    theme.media,
+    theme.sanity.media,
     getResponsiveProp(gap).map((spaceIndex) => ({
-      gridGap: gap ? rem(theme.space[spaceIndex]) : undefined,
+      gridGap: gap ? rem(theme.sanity.space[spaceIndex]) : undefined,
     }))
   )
 }
