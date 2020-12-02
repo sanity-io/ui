@@ -1,6 +1,5 @@
 import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
-import styled from 'styled-components'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, Portal, useBoundaryElement, usePortal} from '../../utils'
@@ -18,10 +17,9 @@ interface PopoverProps {
   portal?: boolean
   radius?: number | number[]
   referenceElement?: HTMLElement | null
+  shadow?: number | number[]
   scheme?: ThemeColorSchemeKey
 }
-
-const Root = styled(Layer)``
 
 export const Popover = forwardRef(
   (
@@ -38,8 +36,9 @@ export const Popover = forwardRef(
       padding,
       placement: placementProp,
       portal: portalProp = true,
-      radius = 2,
+      radius = 3,
       referenceElement: referenceElementProp,
+      shadow = 3,
       scheme,
       style = {},
       ...restProps
@@ -107,18 +106,24 @@ export const Popover = forwardRef(
     }
 
     const node = (
-      <Root
+      <Layer
         data-ui="Popover"
         {...restProps}
         ref={setRootRef}
         style={{...style, ...styles.popper, pointerEvents: 'all'}}
         {...attributes.popper}
       >
-        <Card data-ui="PopoverCard" padding={padding} radius={radius} scheme={scheme} shadow={3}>
+        <Card
+          data-ui="PopoverCard"
+          padding={padding}
+          radius={radius}
+          scheme={scheme}
+          shadow={shadow}
+        >
           <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
           {content}
         </Card>
-      </Root>
+      </Layer>
     )
 
     return (
