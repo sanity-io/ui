@@ -1,29 +1,36 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box} from '../../atoms'
+import {Box, Stack} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant, isHTMLButtonElement} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
+import {ResponsivePaddingStyleProps} from '../../styles'
 import {useLayer} from '../../utils'
 import {MenuContext} from './menuContext'
 
-interface MenuProps {
+interface MenuProps extends ResponsivePaddingStyleProps {
   focusLast?: boolean
   onClickOutside?: () => void
   onEscape?: () => void
   onItemClick?: () => void
+  space?: number | number[]
 }
 
 const Root = styled(Box)`
-  &&:not([hidden]) {
-    display: flex;
-  }
-  flex-direction: column;
   outline: none;
 `
 
 export const Menu = forwardRef(
   (props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>, ref) => {
-    const {children, focusLast, onClickOutside, onEscape, onItemClick, ...restProps} = props
+    const {
+      children,
+      focusLast,
+      onClickOutside,
+      onEscape,
+      onItemClick,
+      padding = 1,
+      space = 1,
+      ...restProps
+    } = props
     const {isTopLayer} = useLayer()
     const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
     const itemsRef = useRef<HTMLElement[]>([])
@@ -175,12 +182,12 @@ export const Menu = forwardRef(
           data-ui="Menu"
           {...restProps}
           onKeyDown={handleKeyDown}
-          paddingY={1}
+          padding={padding}
           ref={setRef}
           role="menu"
           tabIndex={-1}
         >
-          {children}
+          <Stack space={space}>{children}</Stack>
         </Root>
       </MenuContext.Provider>
     )

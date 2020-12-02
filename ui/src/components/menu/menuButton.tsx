@@ -13,6 +13,7 @@ export interface MenuButtonProps {
   placement?: Placement
   popoverScheme?: ThemeColorSchemeKey
   portal?: boolean
+  radius?: number | number[]
 }
 
 export function MenuButton({
@@ -23,6 +24,7 @@ export function MenuButton({
   placement,
   popoverScheme,
   portal,
+  radius,
 }: MenuButtonProps) {
   const [open, setOpen] = useState(false)
   const [focusLast, setFocusLast] = useState(false)
@@ -99,7 +101,7 @@ export function MenuButton({
       open={open}
       placement={placement}
       portal={portal}
-      radius={2}
+      radius={radius}
       scheme={popoverScheme}
     >
       {button || <></>}

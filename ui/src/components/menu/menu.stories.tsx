@@ -88,3 +88,18 @@ export const menuButtonWithGroup = () => (
     />
   </LayerProvider>
 )
+
+export const menuItemTones = () => (
+  <LayerProvider>
+    <Card radius={3} shadow={3}>
+      <Menu>
+        <MenuItem icon="search" text="Default" tone="default" />
+        <MenuItem icon="search" text="Transparent" tone="transparent" />
+        <MenuItem icon="search" text="Primary" tone="primary" />
+        <MenuItem icon="search" text="Positive" tone="positive" />
+        <MenuItem icon="search" text="Caution" tone="caution" />
+        <MenuItem icon="search" text="Critical" tone="critical" />
+      </Menu>
+    </Card>
+  </LayerProvider>
+)

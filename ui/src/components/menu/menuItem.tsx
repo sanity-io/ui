@@ -1,16 +1,18 @@
 import React, {createElement, forwardRef, useCallback, useEffect, useRef} from 'react'
 import {Box, Card, Flex, Icon, IconSymbol, Text} from '../../atoms'
 import {useForwardedRef} from '../../hooks'
-import {ResponsivePaddingStyleProps} from '../../styles'
+import {ResponsivePaddingStyleProps, ResponsiveRadiusProps} from '../../styles'
+import {ThemeColorToneKey} from '../../theme'
 import {useMenu} from './hooks'
 
-interface MenuItemProps extends ResponsivePaddingStyleProps {
+interface MenuItemProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   icon?: IconSymbol | React.ComponentType
   iconRight?: IconSymbol | React.ComponentType
   size?: number | number[]
   space?: number | number[]
   text?: React.ReactNode
+  tone?: ThemeColorToneKey
 }
 
 export const MenuItem = forwardRef(
@@ -30,6 +32,7 @@ export const MenuItem = forwardRef(
       paddingRight,
       paddingBottom,
       paddingLeft,
+      radius = 2,
       size = 2,
       space = 3,
       text,
@@ -73,6 +76,7 @@ export const MenuItem = forwardRef(
         onClick={restProps.disabled ? undefined : handleClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        radius={radius}
         ref={setRef}
         role="menuitem"
         tabIndex={-1}
