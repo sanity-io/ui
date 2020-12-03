@@ -51,7 +51,7 @@ function Property(props: PropertyType) {
   tsType += `: ${props.type}`
 
   return (
-    <PropertyBox padding={[3, 3, 4, 5]}>
+    <PropertyBox padding={[3, 3, 4]}>
       <Stack space={[3, 3, 3, 4]}>
         <Code language="typescript" muted size={[2, 2, 3]}>
           {tsType}

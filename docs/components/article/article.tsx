@@ -20,11 +20,13 @@ export function Article({article}: {article?: any}) {
         <Flex>
           <Box flex={3}>
             <Box padding={[3, 4, 5]}>
-              <HeroContainer width={2}>
-                <Heading as="h1" size={[2, 2, 3, 4]}>
-                  {article.title}
-                </Heading>
-              </HeroContainer>
+              <Box marginBottom={[2, 3, 4]}>
+                <HeroContainer width={2}>
+                  <Heading as="h1" size={[2, 2, 3, 4]}>
+                    {article.title}
+                  </Heading>
+                </HeroContainer>
+              </Box>
 
               <Container width={2}>
                 <Stack space={[4, 4, 5, 6]}>

@@ -12,7 +12,7 @@ export function CodeExample(props: {code: string; hookCode?: string; language: s
   return (
     <Card marginY={[2, 2, 3, 4]} overflow="auto" radius={2} shadow={1}>
       <Card overflow="auto" tone="transparent">
-        {result.type === 'success' && <Box padding={[3, 3, 4, 5]}>{result.node}</Box>}
+        {result.type === 'success' && <Box padding={[3, 3, 4]}>{result.node}</Box>}
         {result.type === 'error' && (
           <Card padding={[3, 3, 4, 5]}>
             <Code style={{color: 'red'}} size={[2, 2, 3, 4]}>
@@ -21,7 +21,7 @@ export function CodeExample(props: {code: string; hookCode?: string; language: s
           </Card>
         )}
       </Card>
-      <Card overflow="auto" padding={[3, 3, 4, 5]}>
+      <Card overflow="auto" padding={[3, 3, 4]}>
         <Code language={language} muted size={[2, 2, 3]}>
           {code}
         </Code>
