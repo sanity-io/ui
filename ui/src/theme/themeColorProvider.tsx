@@ -10,11 +10,11 @@ interface ThemeColorProviderProps {
 }
 
 export function ThemeColorProvider(props: ThemeColorProviderProps) {
-  const {children, ...restProps} = props
-  const theme = useRootTheme()
+  const {children, scheme, variant} = props
+  const root = useRootTheme()
 
   return (
-    <ThemeProvider {...theme} {...restProps}>
+    <ThemeProvider scheme={scheme || root.scheme} theme={root.theme} variant={variant}>
       {children}
     </ThemeProvider>
   )
