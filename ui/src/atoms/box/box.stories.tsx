@@ -9,7 +9,7 @@ export default {
   decorators: [withCentered, withKnobs],
 }
 
-export const plain = () => {
+export const props = () => {
   const padding = select(
     'Padding',
     {
@@ -27,7 +27,7 @@ export const plain = () => {
   )
 
   return (
-    <Card border>
+    <Card border tone="inherit">
       <Box onClick={action('onClick')} padding={padding}>
         <Text>
           Box with <code>padding={padding}</code>
@@ -35,4 +35,8 @@ export const plain = () => {
       </Box>
     </Card>
   )
+}
+
+export const custom = () => {
+  return <Box padding={3}>Custom</Box>
 }

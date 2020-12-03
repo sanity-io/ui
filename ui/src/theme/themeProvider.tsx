@@ -8,16 +8,16 @@ export function ThemeProvider(props: {
   children?: React.ReactNode
   scheme?: ThemeColorSchemeKey
   theme: RootTheme
-  variant?: ThemeColorName
+  tone?: ThemeColorName
 }) {
-  const {children, scheme = 'light', theme: rootTheme, variant = 'default'} = props
+  const {children, scheme = 'light', theme: rootTheme, tone = 'default'} = props
   const {color: rootColor, ...restTheme} = rootTheme
   const colorScheme = rootColor[scheme] || rootColor.light
-  const color = colorScheme[variant] || colorScheme.default
+  const color = colorScheme[tone] || colorScheme.default
   const theme: Theme = {sanity: {...restTheme, color}}
 
   return (
-    <ThemeContext.Provider value={{theme: rootTheme, scheme, variant}}>
+    <ThemeContext.Provider value={{theme: rootTheme, scheme, tone}}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   )

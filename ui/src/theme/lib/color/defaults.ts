@@ -72,7 +72,7 @@ const spots = {
   magenta: 'hsl(300, 100%, 50%)',
 }
 
-const variants = {
+const tones = {
   transparent: {
     bg: [colors.transparent.darkest, colors.transparent.lightest],
     fg: [colors.transparent.lightest, colors.transparent.darkest],
@@ -128,10 +128,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
     // - caution
     // - critical
     return {
-      bg: variants[name].bg[dark ? 0 : 1],
-      fg: variants[name].fg[dark ? 0 : 1],
-      border: variants[name].border[dark ? 0 : 1],
-      focusRing: variants[name].focusRing[dark ? 0 : 1],
+      bg: tones[name].bg[dark ? 0 : 1],
+      fg: tones[name].fg[dark ? 0 : 1],
+      border: tones[name].border[dark ? 0 : 1],
+      focusRing: tones[name].focusRing[dark ? 0 : 1],
       shadow: {
         outline: black,
         umbra: black,

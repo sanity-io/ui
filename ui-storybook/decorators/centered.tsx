@@ -15,7 +15,7 @@ const Root = styled(Card)`
 export const withCentered = (storyFn: () => React.ReactElement) => <Centered>{storyFn()}</Centered>
 
 function Centered({children}: {children: React.ReactNode}) {
-  const {variant} = useRootTheme()
+  const {tone} = useRootTheme()
 
-  return <Root tone={variant}>{children}</Root>
+  return <Root tone={tone}>{children}</Root>
 }

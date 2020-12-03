@@ -76,6 +76,7 @@ export const props = () => {
     'Tone',
     {
       Default: 'default',
+      Inherit: 'inherit',
       Transparent: 'transparent',
       Primary: 'primary',
       Positive: 'positive',

@@ -4,8 +4,8 @@ import React from 'react'
 
 export const withTheme = (storyFn: () => JSX.Element) => {
   const scheme = select('Color sheme', {Light: 'light', Dark: 'dark'}, 'light', 'Theme')
-  const variant = select(
-    'Color variant',
+  const tone = select(
+    'Color tone',
     {
       Transparent: 'transparent',
       Default: 'default',
@@ -19,7 +19,7 @@ export const withTheme = (storyFn: () => JSX.Element) => {
   )
 
   return (
-    <ThemeProvider theme={studioTheme} scheme={scheme} variant={variant}>
+    <ThemeProvider theme={studioTheme} scheme={scheme} tone={tone}>
       {storyFn()}
     </ThemeProvider>
   )

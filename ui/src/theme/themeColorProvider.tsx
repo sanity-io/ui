@@ -6,15 +6,15 @@ import {ThemeProvider} from './themeProvider'
 interface ThemeColorProviderProps {
   children?: React.ReactNode
   scheme?: ThemeColorSchemeKey
-  variant?: ThemeColorName
+  tone?: ThemeColorName
 }
 
 export function ThemeColorProvider(props: ThemeColorProviderProps) {
-  const {children, scheme, variant} = props
+  const {children, scheme, tone} = props
   const root = useRootTheme()
 
   return (
-    <ThemeProvider scheme={scheme || root.scheme} theme={root.theme} variant={variant}>
+    <ThemeProvider scheme={scheme || root.scheme} theme={root.theme} tone={tone}>
       {children}
     </ThemeProvider>
   )

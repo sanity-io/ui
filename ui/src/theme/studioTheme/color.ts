@@ -331,51 +331,54 @@ export const color = createColorTheme({
     }
   },
 
-  spot: ({dark, key}) => {
-    return hues[key][dark ? 600 : 400].hex
+  spot: ({base, dark, key}) => {
+    const mix = dark ? screen : multiply
+
+    return mix(base.bg, hues[key][dark ? 400 : 500].hex)
   },
 
-  syntax: ({dark}) => {
-    const mainShade = dark ? 400 : 600
-    const secondaryShade = dark ? 600 : 400
+  syntax: ({base, dark}) => {
+    const mix = dark ? screen : multiply
+    const mainShade = 600
+    const secondaryShade = 400
 
     return {
-      atrule: hues.purple[mainShade].hex,
-      attrName: hues.green[mainShade].hex,
-      attrValue: hues.yellow[mainShade].hex,
-      attribute: hues.yellow[mainShade].hex,
-      boolean: hues.purple[mainShade].hex,
-      builtin: hues.orange[mainShade].hex,
-      cdata: hues.yellow[mainShade].hex,
-      char: hues.yellow[mainShade].hex,
-      class: hues.orange[mainShade].hex,
-      className: hues.cyan[mainShade].hex,
-      comment: hues.gray[secondaryShade].hex,
-      constant: hues.purple[mainShade].hex,
-      deleted: hues.red[mainShade].hex,
-      doctype: hues.gray[secondaryShade].hex,
-      entity: hues.red[mainShade].hex,
-      function: hues.green[mainShade].hex,
-      hexcode: hues.blue[mainShade].hex,
-      id: hues.purple[mainShade].hex,
-      important: hues.purple[mainShade].hex,
-      inserted: hues.yellow[mainShade].hex,
-      keyword: hues.magenta[mainShade].hex,
-      number: hues.purple[mainShade].hex,
-      operator: hues.magenta[mainShade].hex,
-      prolog: hues.gray[secondaryShade].hex,
-      property: hues.blue[mainShade].hex,
-      pseudoClass: hues.yellow[mainShade].hex,
-      pseudoElement: hues.yellow[mainShade].hex,
-      punctuation: hues.gray[mainShade].hex,
-      regex: hues.blue[mainShade].hex,
-      selector: hues.red[mainShade].hex,
-      string: hues.yellow[mainShade].hex,
-      symbol: hues.purple[mainShade].hex,
-      tag: hues.red[mainShade].hex,
-      unit: hues.orange[mainShade].hex,
-      url: hues.red[mainShade].hex,
-      variable: hues.red[mainShade].hex,
+      atrule: mix(base.bg, hues.purple[mainShade].hex),
+      attrName: mix(base.bg, hues.green[mainShade].hex),
+      attrValue: mix(base.bg, hues.yellow[mainShade].hex),
+      attribute: mix(base.bg, hues.yellow[mainShade].hex),
+      boolean: mix(base.bg, hues.purple[mainShade].hex),
+      builtin: mix(base.bg, hues.orange[mainShade].hex),
+      cdata: mix(base.bg, hues.yellow[mainShade].hex),
+      char: mix(base.bg, hues.yellow[mainShade].hex),
+      class: mix(base.bg, hues.orange[mainShade].hex),
+      className: mix(base.bg, hues.cyan[mainShade].hex),
+      comment: mix(base.bg, hues.gray[secondaryShade].hex),
+      constant: mix(base.bg, hues.purple[mainShade].hex),
+      deleted: mix(base.bg, hues.red[mainShade].hex),
+      doctype: mix(base.bg, hues.gray[secondaryShade].hex),
+      entity: mix(base.bg, hues.red[mainShade].hex),
+      function: mix(base.bg, hues.green[mainShade].hex),
+      hexcode: mix(base.bg, hues.blue[mainShade].hex),
+      id: mix(base.bg, hues.purple[mainShade].hex),
+      important: mix(base.bg, hues.purple[mainShade].hex),
+      inserted: mix(base.bg, hues.yellow[mainShade].hex),
+      keyword: mix(base.bg, hues.magenta[mainShade].hex),
+      number: mix(base.bg, hues.purple[mainShade].hex),
+      operator: mix(base.bg, hues.magenta[mainShade].hex),
+      prolog: mix(base.bg, hues.gray[secondaryShade].hex),
+      property: mix(base.bg, hues.blue[mainShade].hex),
+      pseudoClass: mix(base.bg, hues.yellow[mainShade].hex),
+      pseudoElement: mix(base.bg, hues.yellow[mainShade].hex),
+      punctuation: mix(base.bg, hues.gray[mainShade].hex),
+      regex: mix(base.bg, hues.blue[mainShade].hex),
+      selector: mix(base.bg, hues.red[mainShade].hex),
+      string: mix(base.bg, hues.yellow[mainShade].hex),
+      symbol: mix(base.bg, hues.purple[mainShade].hex),
+      tag: mix(base.bg, hues.red[mainShade].hex),
+      unit: mix(base.bg, hues.orange[mainShade].hex),
+      url: mix(base.bg, hues.red[mainShade].hex),
+      variable: mix(base.bg, hues.red[mainShade].hex),
     }
   },
 })

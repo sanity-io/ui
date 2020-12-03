@@ -19,14 +19,14 @@ import {
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
 } from '../../styles'
-import {ThemeColorProvider, ThemeColorSchemeKey, ThemeColorToneKey} from '../../theme'
+import {ThemeColorProvider, ThemeColorSchemeKey, ThemeColorToneKey, useRootTheme} from '../../theme'
 import {card} from './styles'
 import {CardColorProps} from './types'
 
 export interface CardBaseProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   scheme?: ThemeColorSchemeKey
-  tone?: ThemeColorToneKey
+  tone?: ThemeColorToneKey | 'inherit'
 }
 
 export type CardProps = BoxStyleProps &
@@ -70,15 +70,19 @@ export const Card = forwardRef(
       padding = 0,
       radius = 0,
       scheme,
-      tone = 'default',
+      tone: toneProp = 'default',
       ...restProps
     } = props
     const as = isValidElementType(asProp) ? asProp : 'div'
+    const rootTheme = useRootTheme()
+    const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
 
     return (
-      <ThemeColorProvider scheme={scheme} variant={tone}>
+      <ThemeColorProvider scheme={scheme} tone={tone}>
         <Root
+          data-scheme={rootTheme.scheme}
           data-ui="Card"
+          data-tone={tone}
           {...restProps}
           as={as}
           display={display}
