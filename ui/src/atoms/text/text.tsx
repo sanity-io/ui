@@ -7,7 +7,7 @@ interface TextProps extends ResponsiveFontProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div<ResponsiveFontProps>(textBaseStyles, responsiveTextFont)
+const Root = styled.div<ResponsiveFontProps>(responsiveTextFont, textBaseStyles)
 
 export const Text = forwardRef(
   (props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {

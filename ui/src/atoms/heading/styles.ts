@@ -5,6 +5,18 @@ export function headingBaseStyles(props: {accent?: boolean; muted?: boolean; the
   const {accent, muted, theme} = props
 
   return css`
+    &:before {
+      content: '';
+      display: block;
+      height: 0;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      height: 0;
+    }
+
     ${accent &&
     css`
       color: var(--card-accent-fg-color);
@@ -15,15 +27,9 @@ export function headingBaseStyles(props: {accent?: boolean; muted?: boolean; the
       color: var(--card-muted-fg-color);
     `}
 
-    &:before {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
     & code {
       font-family: ${theme.sanity.fonts.code.family};
-      border-radius: 2px;
+      border-radius: 1px;
     }
 
     & a {

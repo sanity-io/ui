@@ -122,16 +122,22 @@ export function codeBaseStyles(props: {muted: boolean; theme: Theme}) {
   const {muted} = props
 
   return css`
-    ${muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
-
     &:before {
       content: '';
       display: block;
       height: 0;
     }
+
+    &:after {
+      content: '';
+      display: block;
+      height: 0;
+    }
+
+    ${muted &&
+    css`
+      color: var(--card-muted-fg-color);
+    `}
 
     & code {
       font-family: inherit;

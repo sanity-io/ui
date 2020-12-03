@@ -7,6 +7,18 @@ export function labelBaseStyles(props: {accent?: boolean; theme: Theme; muted: b
   return css`
     text-transform: uppercase;
 
+    &:before {
+      content: '';
+      display: block;
+      height: 0;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      height: 0;
+    }
+
     ${accent &&
     css`
       color: var(--card-accent-fg-color);
@@ -17,15 +29,9 @@ export function labelBaseStyles(props: {accent?: boolean; theme: Theme; muted: b
       color: var(--card-muted-fg-color);
     `}
 
-    &:before {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
     & code {
       font-family: ${theme.sanity.fonts.code.family};
-      border-radius: 2px;
+      border-radius: 1px;
     }
 
     & a {

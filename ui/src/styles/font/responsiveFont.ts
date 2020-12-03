@@ -20,6 +20,18 @@ export function responsiveFont(fontKey: FontKey, props: ResponsiveFontProps & Th
       padding: '1px 0',
       margin: 0,
 
+      // '&:before': {
+      //   content: '',
+      //   display: 'block',
+      //   height: 0,
+      // },
+
+      // '&:after': {
+      //   content: '',
+      //   display: 'block',
+      //   height: 0,
+      // },
+
       '&&:not([hidden])': {
         display: 'block',
       },

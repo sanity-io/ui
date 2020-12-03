@@ -6,16 +6,6 @@ export function textBaseStyles(props: {accent?: boolean; theme: Theme; muted?: b
   const {weights} = theme.sanity.fonts.text
 
   return css`
-    ${accent &&
-    css`
-      color: var(--card-accent-fg-color);
-    `}
-
-    ${muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
-
     &:before {
       content: '';
       display: block;
@@ -28,9 +18,19 @@ export function textBaseStyles(props: {accent?: boolean; theme: Theme; muted?: b
       height: 0;
     }
 
+    ${accent &&
+    css`
+      color: var(--card-accent-fg-color);
+    `}
+
+    ${muted &&
+    css`
+      color: var(--card-muted-fg-color);
+    `}
+
     & code {
       font-family: ${theme.sanity.fonts.code.family};
-      border-radius: 2px;
+      border-radius: 1px;
       background-color: var(--card-code-bg-color);
       color: var(--card-code-fg-color);
     }

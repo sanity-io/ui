@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {headingFont} from '../../styles'
+import {responsiveHeadingFont} from '../../styles'
 import {headingBaseStyles} from './styles'
 
 interface HeadingProps {
@@ -11,7 +11,7 @@ interface HeadingProps {
   weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
-const Root = styled.div(headingBaseStyles, headingFont)
+const Root = styled.div(responsiveHeadingFont, headingBaseStyles)
 
 export const Heading = forwardRef(
   (props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {

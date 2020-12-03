@@ -11,7 +11,7 @@ interface LabelProps {
   weight?: 'regular' | 'medium' | 'semibold' | 'bold'
 }
 
-const Root = styled.div<{muted: boolean; size: number[]}>(labelBaseStyles, responsiveLabelFont)
+const Root = styled.div<{muted: boolean; size: number[]}>(responsiveLabelFont, labelBaseStyles)
 
 export const Label = forwardRef(
   (props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {

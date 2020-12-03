@@ -27,8 +27,8 @@ export const Badge = forwardRef((props: BadgeProps & React.HTMLProps<HTMLDivElem
   const {
     children,
     mode = 'default',
-    padding = 2,
-    radius = 6,
+    padding = 1,
+    radius = 2,
     size,
     tone = 'default',
     ...restProps
