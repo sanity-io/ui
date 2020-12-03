@@ -1,4 +1,4 @@
-import {Card, Code} from '@sanity/ui'
+import {Box, Code} from '@sanity/ui'
 import {select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import Refractor from 'react-refractor'
@@ -41,10 +41,10 @@ export const plain = () => {
   )
 
   return (
-    <Card padding={4} radius={2} shadow={2}>
+    <Box padding={4}>
       <Code language={language} size={size}>
         {code}
       </Code>
-    </Card>
+    </Box>
   )
 }
