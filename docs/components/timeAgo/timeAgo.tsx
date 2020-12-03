@@ -34,7 +34,7 @@ export function TimeAgo(props: TimeAgoProps) {
   }, [date])
 
   if (diff.years > 0 || diff.months > 0) {
-    return <>{format(date, 'yyyy M, d @ hh:mm')}</>
+    return <>{format(date, 'LLL d, yyyy @ hh:mm')}</>
   }
 
   if (diff.weeks > 0) {
