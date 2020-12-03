@@ -34,8 +34,7 @@ function vars(base: ThemeColorBase, color: ThemeColorCardState) {
     --card-bg-color: ${color.bg};
     --card-fg-color: ${color.fg};
     --card-focus-ring-color: ${base.focusRing};
-    --card-hairline-soft-color: ${color.border};
-    --card-hairline-hard-color: ${color.border};
+    --card-border-color: ${color.border};
     --card-muted-fg-color: ${color.muted.fg};
     --card-accent-fg-color: ${color.accent.fg};
     --card-link-fg-color: ${color.link.fg};
@@ -44,6 +43,8 @@ function vars(base: ThemeColorBase, color: ThemeColorCardState) {
 
     /* @todo: deprecate */
     --card-link-color: ${color.link.fg};
+    --card-hairline-soft-color: ${color.border};
+    --card-hairline-hard-color: ${color.border};
 
     /* @todo: rename to "--base-"? */
     --card-shadow-outline-color: ${base.shadow.outline};
