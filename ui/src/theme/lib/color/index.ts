@@ -359,5 +359,5 @@ function createColor(opts: ThemeColorBuilderOpts, dark: boolean, name: ThemeColo
 
   const syntax: ThemeColorSyntax = opts.syntax({base, dark})
 
-  return {base, button, card, input, spot, syntax, solid, muted}
+  return {base, button, card, dark, input, spot, syntax, solid, muted}
 }

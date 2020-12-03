@@ -170,6 +170,7 @@ export interface ThemeColorSpot {
 }
 
 export interface ThemeColor {
+  dark: boolean
   base: ThemeColorBase
   button: ThemeColorButton
   card: ThemeColorCard
