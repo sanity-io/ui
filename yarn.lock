@@ -4077,10 +4077,10 @@
   resolved "https://registry.yarnpkg.com/@types/braces/-/braces-3.0.0.tgz#7da1c0d44ff1c7eb660a36ec078ea61ba7eb42cb"
   integrity sha512-TbH79tcyi9FHwbyboOKeRachRq63mSuWYXOflsNO9ZyE5ClQ/JaozNKl+aWUq87qPNsXasXxi2AbgfwIJ+8GQw==
 
-"@types/codemirror@^0.0.100":
-  version "0.0.100"
-  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.100.tgz#3ebdf1514208d73f38c25925d9cf9399a42a7471"
-  integrity sha512-4jGmu1T8vpQrJCe8cbe3KveiJmK2UAt3rZO2qE2sPoMhGLuwW0cMzFYJLyXebbRJg5G3RbuUXLip1IHPUESkFA==
+"@types/codemirror@^0.0.101":
+  version "0.0.101"
+  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.101.tgz#e9fb6501b3de456e4a23964e8ebecd7a85a93675"
+  integrity sha512-Pd3XNCyjiwZ99YIPSog7ca7LriivT2tfR+TWYcPMdJ7etmyF/QFkBDWjHwlFIpVsHeMQeb48Q3Tr3EHhgE8XFQ==
   dependencies:
     "@types/tern" "*"
 
