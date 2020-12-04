@@ -1,5 +1,5 @@
 import {CSSObject} from 'styled-components'
-import {BaseTheme, ThemeColor} from './lib'
+import {BaseTheme, ThemeColor} from './lib/theme'
 
 export type RootTheme = BaseTheme<Styles>
 

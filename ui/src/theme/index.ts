@@ -1,5 +1,6 @@
-export * from './lib'
 export * from './hooks'
+export * from './lib/color-fns'
+export * from './lib/theme'
 export * from './studioTheme'
 export * from './themeColorProvider'
 export * from './themeProvider'

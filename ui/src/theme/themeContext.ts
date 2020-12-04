@@ -1,5 +1,5 @@
 import {createContext} from 'react'
-import {ThemeColorName, ThemeColorSchemeKey} from './lib'
+import {ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
 import {RootTheme} from './types'
 
 export interface ThemeContextValue {

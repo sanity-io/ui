@@ -1,4 +1,4 @@
-import {ThemeFonts} from '../lib'
+import {ThemeFonts} from '../lib/theme'
 
 export const fonts: ThemeFonts = {
   code: {

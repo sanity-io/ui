@@ -1,6 +1,6 @@
 import React from 'react'
 import {useRootTheme} from './hooks'
-import {ThemeColorName, ThemeColorSchemeKey} from './lib'
+import {ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
 import {ThemeProvider} from './themeProvider'
 
 interface ThemeColorProviderProps {

@@ -1,6 +1,6 @@
 import React from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
-import {ThemeColorSchemeKey, ThemeColorName} from './lib'
+import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
 import {ThemeContext} from './themeContext'
 import {RootTheme, Theme} from './types'
 
