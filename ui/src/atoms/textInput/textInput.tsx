@@ -127,6 +127,7 @@ export const TextInput = forwardRef(
 
         <InputRoot>
           <Input
+            data-as="input"
             {...restProps}
             disabled={disabled}
             iconLeft={Boolean(icon)}

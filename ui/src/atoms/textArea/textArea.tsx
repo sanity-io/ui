@@ -79,7 +79,14 @@ export const TextArea = forwardRef(
     return (
       <Root>
         <InputRoot>
-          <Input {...restProps} {...paddingProps} disabled={disabled} ref={ref} uiSize={uiSize} />
+          <Input
+            data-as="textarea"
+            {...restProps}
+            {...paddingProps}
+            disabled={disabled}
+            ref={ref}
+            uiSize={uiSize}
+          />
           <Presentation border={border} radius={radius} />
         </InputRoot>
       </Root>

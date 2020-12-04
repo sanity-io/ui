@@ -80,6 +80,7 @@ export const Card = forwardRef(
     return (
       <ThemeColorProvider scheme={scheme} tone={tone}>
         <Root
+          data-as={String(as) || 'div'}
           data-scheme={rootTheme.scheme}
           data-ui="Card"
           data-tone={tone}

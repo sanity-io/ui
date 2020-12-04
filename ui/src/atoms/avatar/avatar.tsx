@@ -46,7 +46,8 @@ const Root = styled.div<{uiColor: string; size: AvatarSize}>`
     }
   }
 
-  &:is(button) {
+  /* &:is(button) */
+  &[data-as='button'] {
     appearance: none;
     margin: 0;
     padding: 0;
@@ -193,6 +194,7 @@ export const Avatar = forwardRef(
     return (
       <Root
         as={as}
+        data-as={String(as) || 'div'}
         data-ui="Avatar"
         {...restProps}
         aria-label={title}

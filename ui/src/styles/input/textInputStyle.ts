@@ -47,7 +47,8 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject
     zIndex: 1,
     display: 'block',
 
-    '&:is(textarea)': {
+    // &:is(textarea)
+    '&[data-as="textarea"]': {
       resize: 'none',
     },
 

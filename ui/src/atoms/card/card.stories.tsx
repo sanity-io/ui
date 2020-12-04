@@ -122,12 +122,13 @@ export const styledCard = () => {
 }
 
 export const interactiveCard = () => {
-  const selected = boolean('Selected?', false, 'Props')
+  const selected = boolean('Selected', false, 'Props')
+  const pressed = boolean('Pressed', false, 'Props')
 
   return (
     <Card padding={4}>
       <div aria-selected={selected}>
-        <Card as="button" padding={3} tabIndex={0}>
+        <Card aria-pressed={pressed} as="button" padding={3} tabIndex={0}>
           <Stack space={3}>
             <Text>
               Text <code>Code</code>

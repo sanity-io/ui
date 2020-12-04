@@ -8,7 +8,7 @@ export function card(props: CardColorProps & {theme: Theme}) {
 
 export function cardBaseStyles() {
   return css`
-    &:is(button) {
+    &[data-as='button'] {
       -webkit-font-smoothing: inherit;
       appearance: none;
       outline: none;
@@ -18,11 +18,13 @@ export function cardBaseStyles() {
       width: stretch;
     }
 
-    &:is(a) {
+    /* &:is(a) */
+    &[data-as='a'] {
       text-decoration: none;
     }
 
-    &:is(pre) {
+    /* &:is(pre) */
+    &[data-as='pre'] {
       font: inherit;
     }
   `
@@ -64,7 +66,8 @@ export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
 
-    &:is(button) {
+    /* &:is(button) */
+    &[data-as='button'] {
       &:disabled {
         ${vars(base, card.disabled)}
       }
@@ -84,13 +87,15 @@ export function cardColorStyles(props: CardColorProps & {theme: Theme}) {
           ${vars(base, card.selected)}
         }
 
+        &[aria-pressed='true'],
         [aria-selected='true'] > & {
           ${vars(base, card.selected)}
         }
       }
     }
 
-    &:is(a) {
+    /* &:is(a) */
+    &[data-as='a'] {
       &[data-disabled] {
         ${vars(base, card.disabled)}
       }
