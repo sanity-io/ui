@@ -1,12 +1,11 @@
 import {CSSObject} from 'styled-components'
 import {Theme} from '../theme'
 
-// @todo: invent better name
-export function createObject(props: string[], value: any) {
-  return props.reduce((acc: {[key: string]: any}, prop) => {
-    acc[prop] = value
+export function fillCSSObject(propKeys: string[], value: any): CSSObject {
+  return propKeys.reduce((obj: CSSObject, propKey) => {
+    obj[propKey] = value
 
-    return acc
+    return obj
   }, {})
 }
 
@@ -26,7 +25,7 @@ export function responsive<T>(
   return statements.map((statement, mediaIndex) => {
     if (mediaIndex === 0) return statement
 
-    return {[`@media(min-width:${media[mediaIndex - 1]}px)`]: statement}
+    return {[`@media screen and (min-width: ${media[mediaIndex - 1]}px)`]: statement}
   })
 }
 
@@ -46,6 +45,6 @@ export function getResponsiveSpace(theme: Theme, props: string[], spaceIndexes: 
   }
 
   return responsive(theme.sanity.media, spaceIndexes, (spaceIndex) =>
-    createObject(props, rem(theme.sanity.space[spaceIndex]))
+    fillCSSObject(props, rem(theme.sanity.space[spaceIndex]))
   )
 }
