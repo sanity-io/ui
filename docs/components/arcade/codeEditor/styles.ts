@@ -98,10 +98,16 @@ export function codeEditorSyntax({theme}: {theme: Theme}) {
     .cm-s-default .cm-def {
       color: ${syntax.function};
     }
-    .cm-s-default .cm-variable,
-    .cm-s-default .cm-punctuation,
-    .cm-s-default .cm-property,
+    .cm-s-default .cm-variable {
+      color: ${syntax.builtin};
+    }
+    .cm-s-default .cm-punctuation {
+    }
+    .cm-s-default .cm-property {
+      color: ${syntax.property};
+    }
     .cm-s-default .cm-operator {
+      color: ${syntax.operator};
     }
     .cm-s-default .cm-variable-2 {
       color: #05a;
@@ -111,7 +117,7 @@ export function codeEditorSyntax({theme}: {theme: Theme}) {
       color: #085;
     }
     .cm-s-default .cm-comment {
-      color: #a50;
+      color: ${syntax.comment};
     }
     .cm-s-default .cm-string {
       color: ${syntax.string};
