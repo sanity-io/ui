@@ -339,8 +339,8 @@ export const color = createColorTheme({
 
   syntax: ({base, dark}) => {
     const mix = dark ? screen : multiply
-    const mainShade = 600
-    const secondaryShade = 400
+    const mainShade = dark ? 400 : 600
+    const secondaryShade = dark ? 600 : 400
 
     return {
       atrule: mix(base.bg, hues.purple[mainShade].hex),
@@ -348,7 +348,7 @@ export const color = createColorTheme({
       attrValue: mix(base.bg, hues.yellow[mainShade].hex),
       attribute: mix(base.bg, hues.yellow[mainShade].hex),
       boolean: mix(base.bg, hues.purple[mainShade].hex),
-      builtin: mix(base.bg, hues.orange[mainShade].hex),
+      builtin: mix(base.bg, hues.purple[mainShade].hex),
       cdata: mix(base.bg, hues.yellow[mainShade].hex),
       char: mix(base.bg, hues.yellow[mainShade].hex),
       class: mix(base.bg, hues.orange[mainShade].hex),
