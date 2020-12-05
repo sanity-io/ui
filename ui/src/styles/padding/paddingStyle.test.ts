@@ -20,10 +20,10 @@ describe('styles/padding', () => {
           padding: 0,
         },
         {
-          '@media(min-width:320px)': {padding: '0.25rem'},
+          '@media screen and (min-width: 320px)': {padding: '0.25rem'},
         },
         {
-          '@media(min-width:640px)': {padding: '0.5rem'},
+          '@media screen and (min-width: 640px)': {padding: '0.5rem'},
         },
       ],
     ])
