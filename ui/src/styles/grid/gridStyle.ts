@@ -27,6 +27,8 @@ export function responsiveGridStyle() {
     responsiveGridColumnsStyle,
     responsiveGridRowsStyle,
     responsiveGridGapStyle,
+    responsiveGridGapXStyle,
+    responsiveGridGapYStyle,
   ]
 }
 
@@ -81,5 +83,23 @@ function responsiveGridGapStyle(props: ResponsiveGridStyleProps & ThemeProps) {
 
   return responsive(media, getResponsiveProp(props.gap), (gap) => ({
     gridGap: gap ? rem(space[gap]) : undefined,
+  }))
+}
+
+function responsiveGridGapXStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media, space} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.gapX), (gapX) => ({
+    columnGap: gapX ? rem(space[gapX]) : undefined,
+  }))
+}
+
+function responsiveGridGapYStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media, space} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.gapY), (gapY) => ({
+    rowGap: gapY ? rem(space[gapY]) : undefined,
   }))
 }

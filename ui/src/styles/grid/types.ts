@@ -8,6 +8,8 @@ export interface ResponsiveGridStyleProps {
   autoFlow?: GridAutoFlow | GridAutoFlow[]
   columns?: number | number[]
   gap?: number | number[]
+  gapX?: number | number[]
+  gapY?: number | number[]
   rows?: number | number[]
 }
 
