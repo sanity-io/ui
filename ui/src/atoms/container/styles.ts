@@ -1,33 +1,15 @@
-import {css} from 'styled-components'
-import {Theme} from '../../theme'
-
-function rem(px: number) {
-  return `${px / 16}rem`
-}
+import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {ResponsiveWidthStyleProps} from './types'
 
 export function containerBaseStyles() {
-  return css`
-    width: 100%;
-    margin: 0 auto;
-  `
+  return {width: '100%', margin: '0 auto'}
 }
 
-export function containerWidthStyles(props: {theme: Theme; width: number[]}) {
+export function responsiveContainerWidthStyles(props: ResponsiveWidthStyleProps & ThemeProps) {
   const {theme} = props
-  const {container} = theme.sanity
+  const {container, media} = theme.sanity
 
-  return css`
-    ${props.width.map((spaceIndex, mqIndex) => {
-      if (mqIndex === 0)
-        return css`
-          max-width: ${rem(container[spaceIndex])};
-        `
-
-      return css`
-        @media (min-width: ${rem(theme.sanity.media[mqIndex - 1])}) {
-          max-width: ${rem(container[spaceIndex])};
-        }
-      `
-    })}
-  `
+  return responsive(media, getResponsiveProp(props.width), (val) => ({
+    maxWidth: val === 'auto' ? 'none' : rem(container[val]),
+  }))
 }

@@ -1,24 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
-import {boxStyle, BoxStyleProps, getResponsiveProp} from '../../styles'
-import {containerBaseStyles, containerWidthStyles} from './styles'
+import {responsiveBoxStyle, ResponsiveBoxStyleProps} from '../../styles'
+import {containerBaseStyles, responsiveContainerWidthStyles} from './styles'
+import {ResponsiveWidthStyleProps} from './types'
 
-export interface ContainerProps {
+export interface ContainerProps extends ResponsiveWidthStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  width?: number | number[]
 }
 
-const Root = styled.div<BoxStyleProps & {width?: number | number[]}>(
-  boxStyle,
+const Root = styled.div<ResponsiveBoxStyleProps & ResponsiveWidthStyleProps>(
+  responsiveBoxStyle,
   containerBaseStyles,
-  containerWidthStyles as any
+  responsiveContainerWidthStyles
 )
 
 export function Container(
-  props: BoxStyleProps & ContainerProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'width'>
+  props: ResponsiveBoxStyleProps &
+    ContainerProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'width'>
 ) {
-  const {width: widthProp, ...restProps} = props
-  const width = getResponsiveProp(widthProp, [2])
+  const {width = 2, ...restProps} = props
 
   return <Root data-ui="Container" {...restProps} width={width} />
 }

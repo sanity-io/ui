@@ -10,7 +10,7 @@ interface StackProps {
 
 const Root = styled.div(stackBaseStyles, stackSpaceStyles)
 
-export const Stack = forwardRef((props: React.HTMLProps<HTMLDivElement> & StackProps, ref) => {
+export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElement>, ref) => {
   const {space: spaceProp, ...restProps} = props
   const space = getResponsiveProp(spaceProp, [])
 

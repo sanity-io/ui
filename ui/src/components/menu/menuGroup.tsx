@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
 import {Box, Icon, Popover, Text} from '../../atoms'
-import {Theme} from '../../theme'
+import {ThemeProps} from '../../styles'
 import {useMenu} from './hooks'
 import {Menu} from './menu'
 
-const Root = styled.button((props: {theme: Theme}) => {
+const Root = styled.button((props: ThemeProps) => {
   const {theme} = props
   const tone = theme.sanity.color.card
 

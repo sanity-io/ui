@@ -3,6 +3,11 @@ import React, {forwardRef} from 'react'
 import styled, {keyframes} from 'styled-components'
 import {Text} from '../text'
 
+interface SpinnerProps {
+  muted?: boolean
+  size?: number | number[]
+}
+
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -20,13 +25,7 @@ const Root = styled(Text)`
 `
 
 export const Spinner = forwardRef(
-  (
-    props: {muted?: boolean; size?: number | number[]} & Omit<
-      React.HTMLProps<HTMLDivElement>,
-      'as'
-    >,
-    ref
-  ) => {
+  (props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>, ref) => {
     return (
       <Root {...props} ref={ref}>
         <SpinnerIcon />

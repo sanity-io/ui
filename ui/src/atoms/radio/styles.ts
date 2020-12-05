@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
-import {rem} from '../../styles'
-import {Theme} from '../../theme'
+import {rem, ThemeProps} from '../../styles'
 
 export function radioBaseStyles() {
   return css`
@@ -11,7 +10,7 @@ export function radioBaseStyles() {
   `
 }
 
-export function inputElementStyles({theme}: {theme: Theme}) {
+export function inputElementStyles({theme}: ThemeProps) {
   const color = theme.sanity.color.input
   const {markSize, size} = theme.sanity.input.radio
   const dist = (size - markSize) / 2

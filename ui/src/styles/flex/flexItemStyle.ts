@@ -1,10 +1,10 @@
 import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
-import {FlexItemStyleProps} from './types'
+import {ResponsiveFlexItemStyleProps} from './types'
 
-export function flexItemStyle({flex, theme}: FlexItemStyleProps & ThemeProps) {
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(flex).map((val) => ({flex: val}))
-  )
+export function responsiveFlexItemStyle(props: ResponsiveFlexItemStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.flex), (flex) => ({flex}))
 }

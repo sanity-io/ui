@@ -1,31 +1,44 @@
 import React, {cloneElement} from 'react'
-import styled from 'styled-components'
-import {rem} from '../../styles'
+import styled, {css} from 'styled-components'
+import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 import {childrenToElementArray} from '../helpers'
 import {AvatarCounter} from './avatarCounter'
 import {avatarTheme} from './theme'
 import {AvatarSize} from './types'
 
-const Root = styled.div<{size: 0 | 1 | 2}>`
-  white-space: nowrap;
+function avatarStackStyle() {
+  return css`
+    white-space: nowrap;
 
-  & > div {
-    vertical-align: top;
+    & > div {
+      vertical-align: top;
 
-    &:not([hidden]) {
-      display: inline-block;
+      &:not([hidden]) {
+        display: inline-block;
+      }
     }
-  }
+  `
+}
 
-  & > div + div {
-    margin-left: ${({size}) => rem(avatarTheme.distance[size])};
-  }
-`
+function responsiveAvatarStackSizeStyle(props: {size: AvatarSize | AvatarSize[]} & ThemeProps) {
+  const {theme} = props
+
+  return responsive(theme.sanity.media, getResponsiveProp(props.size), (size) => ({
+    '& > div + div': {
+      marginLeft: rem(avatarTheme.distance[size]),
+    },
+  }))
+}
+
+const Root = styled.div<{size: AvatarSize | AvatarSize[]}>(
+  responsiveAvatarStackSizeStyle,
+  avatarStackStyle
+)
 
 interface AvatarStackProps {
   children: React.ReactNode
   maxLength?: number
-  size?: AvatarSize
+  size?: AvatarSize | AvatarSize[]
   tone?: 'navbar'
 }
 

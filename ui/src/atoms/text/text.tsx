@@ -1,13 +1,19 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {ResponsiveFontProps, responsiveTextFont} from '../../styles'
+import {ResponsiveFontProps, responsiveTextAlignStyle, responsiveTextFont} from '../../styles'
+import {TextAlign} from '../../types'
 import {textBaseStyles} from './styles'
 
-interface TextProps extends ResponsiveFontProps {
+export interface TextProps extends ResponsiveFontProps {
+  align?: TextAlign | TextAlign[]
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div<ResponsiveFontProps>(responsiveTextFont, textBaseStyles)
+const Root = styled.div<ResponsiveFontProps>(
+  responsiveTextFont,
+  responsiveTextAlignStyle,
+  textBaseStyles
+)
 
 export const Text = forwardRef(
   (props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {

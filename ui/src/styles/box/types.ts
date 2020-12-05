@@ -1,10 +1,11 @@
 export type BoxSizing = 'content' | 'border'
+export type BoxDisplay = 'none' | 'block' | 'grid' | 'flex' | 'inline-block'
+export type BoxHeight = 'stretch' | 'fill'
+export type BoxOverflow = 'visible' | 'hidden' | 'auto'
 
-export type BoxDisplay = 'none' | 'block'
-
-export interface BoxStyleProps {
+export interface ResponsiveBoxStyleProps {
   display?: BoxDisplay | BoxDisplay[]
-  height?: 'stretch' | 'fill'
-  overflow?: 'visible' | 'hidden' | 'auto'
-  sizing?: BoxSizing
+  height?: BoxHeight | BoxHeight[]
+  overflow?: BoxOverflow | BoxOverflow[]
+  sizing?: BoxSizing | BoxSizing[]
 }

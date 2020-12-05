@@ -1,12 +1,11 @@
-export type FontKey = 'code' | 'heading' | 'label' | 'text'
-export type FontWeight = 'regular' | 'medium' | 'semibold' | 'bold'
+import {ThemeFontWeightKey} from '../../theme'
 
 export interface ResponsiveFontSizeProps {
   size?: number | number[]
 }
 
 export interface FontWeightProps {
-  weight?: FontWeight
+  weight?: ThemeFontWeightKey
 }
 
 export interface ResponsiveFontProps extends FontWeightProps, ResponsiveFontSizeProps {

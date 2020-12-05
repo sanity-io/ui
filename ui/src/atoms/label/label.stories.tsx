@@ -1,4 +1,4 @@
-import {Card, Label} from '@sanity/ui'
+import {Card, Container, Label} from '@sanity/ui'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {withCentered} from '~/storybook/decorators'
@@ -29,16 +29,18 @@ export const plain = () => {
   )
 
   return (
-    <Card>
-      <Label size={size} weight={weight}>
-        Hello, world
-      </Label>
-      <Label size={size} weight={weight}>
-        Hello, world
-      </Label>
-      <Label size={size} weight={weight}>
-        Hello, world
-      </Label>
-    </Card>
+    <Container width={0}>
+      <Card>
+        <Label size={size} weight={weight}>
+          Hello, world
+        </Label>
+        <Label size={size} weight={weight}>
+          Hello, world
+        </Label>
+        <Label size={size} weight={weight}>
+          Hello, world
+        </Label>
+      </Card>
+    </Container>
   )
 }

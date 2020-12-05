@@ -1,12 +1,12 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {
-  boxStyle,
-  BoxStyleProps,
-  flexItemStyle,
-  FlexItemStyleProps,
-  gridItemStyle,
-  GridItemProps,
+  responsiveBoxStyle,
+  ResponsiveBoxStyleProps,
+  responsiveFlexItemStyle,
+  ResponsiveFlexItemStyleProps,
+  responsiveGridItemStyle,
+  ResponsiveGridItemStyleProps,
   responsivePaddingStyle,
   ResponsivePaddingStyleProps,
   responsiveMarginStyle,
@@ -14,24 +14,30 @@ import {
 } from '../../styles'
 
 export interface BoxProps
-  extends BoxStyleProps,
-    GridItemProps,
+  extends ResponsiveBoxStyleProps,
+    ResponsiveGridItemStyleProps,
     ResponsiveMarginStyleProps,
     ResponsivePaddingStyleProps,
-    FlexItemStyleProps {
+    ResponsiveFlexItemStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
 const Root = styled.div<
-  BoxStyleProps &
-    GridItemProps &
+  ResponsiveBoxStyleProps &
+    ResponsiveGridItemStyleProps &
     ResponsiveMarginStyleProps &
     ResponsivePaddingStyleProps &
-    FlexItemStyleProps
->(boxStyle, gridItemStyle, flexItemStyle, responsiveMarginStyle, responsivePaddingStyle)
+    ResponsiveFlexItemStyleProps
+>(
+  responsiveBoxStyle,
+  responsiveGridItemStyle,
+  responsiveFlexItemStyle,
+  responsiveMarginStyle,
+  responsivePaddingStyle
+)
 
 export const Box = forwardRef(
-  (props: Omit<React.HTMLProps<HTMLDivElement>, 'height'> & BoxProps, ref) => {
+  (props: BoxProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>, ref) => {
     const {as: asProp = 'div', display = 'block', margin = 0, padding = 0, ...restProps} = props
 
     return (

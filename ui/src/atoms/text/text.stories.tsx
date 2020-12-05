@@ -1,4 +1,4 @@
-import {Icon, Inline, Text} from '@sanity/ui'
+import {Container, Text} from '@sanity/ui'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {Card} from '../card'
@@ -11,6 +11,9 @@ export default {
 
 export const plain = () => {
   const accent = boolean('Accent', false, 'Props')
+
+  const align =
+    select('Align', ['left', 'right', 'center', 'justify', 'initial'], '', 'Props') || undefined
 
   const muted = boolean('Muted', false, 'Props')
 
@@ -28,16 +31,13 @@ export const plain = () => {
     'Props'
   )
 
-  const textProps = {accent, muted, size, weight}
+  const textProps = {accent, align, muted, size, weight}
 
   return (
-    <Card>
-      <Inline space={3}>
-        <Text {...textProps}>
-          <Icon symbol="ok-hand" />
-        </Text>
+    <Container width={0}>
+      <Card>
         <Text {...textProps}>Hello, world</Text>
-      </Inline>
-    </Card>
+      </Card>
+    </Container>
   )
 }

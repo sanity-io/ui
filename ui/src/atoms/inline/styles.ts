@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {getResponsiveProp, responsive, ThemeProps} from '../../styles'
 
 function rem(px: number) {
   return `${px / 16}rem`
@@ -7,7 +7,7 @@ function rem(px: number) {
 
 export function inlineBaseStyles() {
   return css`
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: block;
     }
 
@@ -21,31 +21,15 @@ export function inlineBaseStyles() {
   `
 }
 
-export function inlineSpaceStyles(props: {space: number[]; theme: Theme}) {
+export function inlineSpaceStyles(props: {space?: number | number[]} & ThemeProps) {
   const {theme} = props
 
-  return css`
-    ${props.space.map((spaceIndex, mqIndex) => {
-      const space = rem(theme.sanity.space[spaceIndex])
+  return responsive(theme.sanity.media, getResponsiveProp(props.space), (spaceIndex) => {
+    const space = rem(theme.sanity.space[spaceIndex])
 
-      if (mqIndex === 0)
-        return css`
-          margin: -${space} 0 0 -${space};
-
-          & > div {
-            padding: ${space} 0 0 ${space};
-          }
-        `
-
-      return css`
-        @media (min-width: ${theme.sanity.media[mqIndex - 1] / 16}rem) {
-          margin: -${space} 0 0 -${space};
-
-          & > div {
-            padding: ${space} 0 0 ${space};
-          }
-        }
-      `
-    })}
-  `
+    return {
+      margin: `-${space} 0 0 -${space}`,
+      '& > div': {padding: `${space} 0 0 ${space}`},
+    }
+  })
 }

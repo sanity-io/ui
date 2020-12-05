@@ -1,48 +1,50 @@
 import {CSSObject} from 'styled-components'
-import {ThemeFontSize} from '../../theme'
+import {ThemeFontSize, ThemeFontKey} from '../../theme'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
-import {FontKey, ResponsiveFontProps} from './types'
+import {ResponsiveFontProps} from './types'
 
-export function responsiveFont(fontKey: FontKey, props: ResponsiveFontProps & ThemeProps) {
+export function responsiveFont(
+  fontKey: ThemeFontKey,
+  props: ResponsiveFontProps & ThemeProps
+): CSSObject[] {
   const {size, theme, weight} = props
-  const {family, sizes, weights} = theme.sanity.fonts[fontKey]
-  const fontWeight = (weight && weights[weight]) || weights['regular']
+  const {fonts, media} = theme.sanity
+  const {family, sizes, weights} = fonts[fontKey]
+  const fontWeight = (weight && weights[weight]) || weights.regular
 
   // @todo: make this configurable
   const defaultSize = sizes[2]
 
-  const ret = [
-    {
-      position: 'relative',
-      fontFamily: family,
-      fontWeight,
-      padding: '1px 0',
-      margin: 0,
+  const base = {
+    position: 'relative',
+    fontFamily: family,
+    fontWeight,
+    padding: '1px 0',
+    margin: 0,
 
-      // '&:before': {
-      //   content: '',
-      //   display: 'block',
-      //   height: 0,
-      // },
+    // '&:before': {
+    //   content: '',
+    //   display: 'block',
+    //   height: 0,
+    // },
 
-      // '&:after': {
-      //   content: '',
-      //   display: 'block',
-      //   height: 0,
-      // },
+    // '&:after': {
+    //   content: '',
+    //   display: 'block',
+    //   height: 0,
+    // },
 
-      '&&:not([hidden])': {
-        display: 'block',
-      },
-    } as CSSObject,
-    ...responsive(
-      theme.sanity.media,
-      getResponsiveProp(size).map((sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))
-    ),
-  ]
+    '&&:not([hidden])': {
+      display: 'block',
+    },
+  } as CSSObject
 
-  return ret
+  const resp = responsive(media, getResponsiveProp(size), (sizeIndex) =>
+    fontSize(sizes[sizeIndex] || defaultSize)
+  )
+
+  return [base, ...resp]
 }
 
 export function fontSize(size: ThemeFontSize): CSSObject {

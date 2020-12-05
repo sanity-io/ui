@@ -2,14 +2,14 @@ import React, {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {
-  borderStyle,
-  BorderStyleProps,
-  boxStyle,
-  BoxStyleProps,
-  flexItemStyle,
-  FlexItemStyleProps,
-  gridItemStyle,
-  GridItemProps,
+  responsiveBoxStyle,
+  responsiveBorderStyle,
+  ResponsiveBorderStyleProps,
+  ResponsiveBoxStyleProps,
+  responsiveFlexItemStyle,
+  ResponsiveFlexItemStyleProps,
+  responsiveGridItemStyle,
+  ResponsiveGridItemStyleProps,
   responsiveMarginStyle,
   ResponsiveMarginStyleProps,
   responsivePaddingStyle,
@@ -23,37 +23,35 @@ import {ThemeColorProvider, ThemeColorSchemeKey, ThemeColorToneKey, useRootTheme
 import {card} from './styles'
 import {CardColorProps} from './types'
 
-export interface CardBaseProps {
+export interface CardProps
+  extends ResponsiveBoxStyleProps,
+    ResponsiveBorderStyleProps,
+    ResponsiveGridItemStyleProps,
+    ResponsiveFlexItemStyleProps,
+    ResponsiveMarginStyleProps,
+    ResponsivePaddingStyleProps,
+    ResponsiveRadiusProps,
+    ResponsiveShadowStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   scheme?: ThemeColorSchemeKey
   tone?: ThemeColorToneKey | 'inherit'
 }
 
-export type CardProps = BoxStyleProps &
-  BorderStyleProps &
-  GridItemProps &
-  FlexItemStyleProps &
-  ResponsiveMarginStyleProps &
-  ResponsivePaddingStyleProps &
-  ResponsiveRadiusProps &
-  ResponsiveShadowStyleProps &
-  CardBaseProps
-
 const Root = styled.div<
-  BoxStyleProps &
-    BorderStyleProps &
-    GridItemProps &
-    FlexItemStyleProps &
+  ResponsiveBoxStyleProps &
+    ResponsiveBorderStyleProps &
+    ResponsiveGridItemStyleProps &
+    ResponsiveFlexItemStyleProps &
     ResponsiveMarginStyleProps &
     ResponsivePaddingStyleProps &
     CardColorProps &
     ResponsiveRadiusProps &
     ResponsiveShadowStyleProps
 >(
-  boxStyle,
-  borderStyle,
-  gridItemStyle,
-  flexItemStyle,
+  responsiveBoxStyle,
+  responsiveBorderStyle,
+  responsiveGridItemStyle,
+  responsiveFlexItemStyle,
   responsiveMarginStyle,
   responsivePaddingStyle,
   responsiveRadiusStyle,
@@ -62,7 +60,7 @@ const Root = styled.div<
 )
 
 export const Card = forwardRef(
-  (props: Omit<React.HTMLProps<HTMLDivElement>, 'height'> & CardProps, ref) => {
+  (props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>, ref) => {
     const {
       as: asProp,
       display = 'block',

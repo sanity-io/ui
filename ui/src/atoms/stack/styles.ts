@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {responsive, ThemeProps} from '../../styles'
 
 function rem(px: number) {
   return `${px / 16}rem`
@@ -7,7 +7,7 @@ function rem(px: number) {
 
 export function stackBaseStyles() {
   return css`
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: grid;
     }
     grid-template-columns: minmax(0, 1fr);
@@ -17,24 +17,10 @@ export function stackBaseStyles() {
   `
 }
 
-export function stackSpaceStyles(props: {space: number[]; theme: Theme}) {
+export function stackSpaceStyles(props: {space: number[]} & ThemeProps) {
   const {theme} = props
 
-  return css`
-    ${props.space.map((spaceIndex, mqIndex) => {
-      const space = rem(theme.sanity.space[spaceIndex])
-
-      if (mqIndex === 0) {
-        return css`
-          grid-gap: ${space};
-        `
-      }
-
-      return css`
-        @media (min-width: ${theme.sanity.media[mqIndex - 1] / 16}rem) {
-          grid-gap: ${space};
-        }
-      `
-    })}
-  `
+  return responsive(theme.sanity.media, props.space, (spaceIndex) => ({
+    gridGap: rem(theme.sanity.space[spaceIndex]),
+  }))
 }

@@ -1,18 +1,42 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {boxStyle, BoxStyleProps, gridStyle, GridStyleProps} from '../../styles'
+import {
+  responsiveBoxStyle,
+  ResponsiveBoxStyleProps,
+  responsiveFlexItemStyle,
+  ResponsiveFlexItemStyleProps,
+  responsiveGridStyle,
+  ResponsiveGridStyleProps,
+  responsivePaddingStyle,
+  ResponsivePaddingStyleProps,
+  responsiveMarginStyle,
+  ResponsiveMarginStyleProps,
+} from '../../styles'
 
-const Root = styled.div<BoxStyleProps & GridStyleProps>(boxStyle, gridStyle)
+interface GridProps
+  extends ResponsiveBoxStyleProps,
+    ResponsiveFlexItemStyleProps,
+    ResponsiveGridStyleProps,
+    ResponsivePaddingStyleProps,
+    ResponsiveMarginStyleProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
+}
+
+const Root = styled.div<
+  ResponsiveBoxStyleProps &
+    ResponsiveGridStyleProps &
+    ResponsivePaddingStyleProps &
+    ResponsiveMarginStyleProps
+>(
+  responsiveBoxStyle,
+  responsiveFlexItemStyle,
+  responsiveGridStyle,
+  responsivePaddingStyle,
+  responsiveMarginStyle
+)
 
 export const Grid = forwardRef(
-  (
-    props: BoxStyleProps &
-      GridStyleProps &
-      Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'> & {
-        as?: React.ElementType | keyof JSX.IntrinsicElements
-      },
-    ref
-  ) => {
+  (props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>, ref) => {
     const {children, ...restProps} = props
 
     return (

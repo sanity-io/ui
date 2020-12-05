@@ -1,8 +1,8 @@
 import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
-import {GridItemProps} from './types'
+import {ResponsiveGridItemStyleProps} from './types'
 
-export function gridItemStyle() {
+export function responsiveGridItemStyle() {
   return [
     responsiveGridItemRowStyle,
     responsiveGridItemRowStartStyle,
@@ -23,56 +23,62 @@ const GRID_ITEM_COLUMN = {
   full: '1 / -1',
 }
 
-function responsiveGridItemRowStyle({row, theme}: GridItemProps & ThemeProps) {
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(row).map((val) => {
-      if (typeof val === 'number') {
-        return {gridRow: `span ${val} / span ${val}`}
-      }
+function responsiveGridItemRowStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
 
-      return {gridRow: GRID_ITEM_ROW[val]}
-    })
-  )
+  return responsive(media, getResponsiveProp(props.row), (row) => {
+    if (typeof row === 'number') {
+      return {gridRow: `span ${row} / span ${row}`}
+    }
+
+    return {gridRow: GRID_ITEM_ROW[row]}
+  })
 }
 
-function responsiveGridItemRowStartStyle({rowStart, theme}: GridItemProps & ThemeProps) {
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(rowStart).map((val) => ({gridRowStart: val}))
-  )
+function responsiveGridItemRowStartStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.rowStart), (rowStart) => ({
+    gridRowStart: rowStart,
+  }))
 }
 
-function responsiveGridItemRowEndStyle({rowEnd, theme}: GridItemProps & ThemeProps) {
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(rowEnd).map((val) => ({gridRowEnd: val}))
-  )
+function responsiveGridItemRowEndStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.rowEnd), (rowEnd) => ({gridRowEnd: rowEnd}))
 }
 
-function responsiveGridItemColumnStyle({column, theme}: GridItemProps & ThemeProps) {
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(column).map((val) => {
-      if (typeof val === 'number') {
-        return {gridColumn: `span ${val} / span ${val}`}
-      }
+function responsiveGridItemColumnStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
 
-      return {gridColumn: GRID_ITEM_COLUMN[val]}
-    })
-  )
+  return responsive(media, getResponsiveProp(props.column), (column) => {
+    if (typeof column === 'number') {
+      return {gridColumn: `span ${column} / span ${column}`}
+    }
+
+    return {gridColumn: GRID_ITEM_COLUMN[column]}
+  })
 }
 
-function responsiveGridItemColumnStartStyle({columnStart, theme}: GridItemProps & ThemeProps) {
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(columnStart).map((val) => ({gridColumnStart: val}))
-  )
+function responsiveGridItemColumnStartStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.columnStart), (columnStart) => ({
+    gridColumnStart: columnStart,
+  }))
 }
 
-function responsiveGridItemColumnEndStyle({columnEnd, theme}: GridItemProps & ThemeProps) {
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(columnEnd).map((val) => ({gridColumnEnd: val}))
-  )
+function responsiveGridItemColumnEndStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.columnEnd), (columnEnd) => ({
+    gridColumnEnd: columnEnd,
+  }))
 }

@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {ThemeProps} from '../../styles'
 
-function codeSyntaxHighlightingStyles({theme}: {theme: Theme}) {
+function codeSyntaxHighlightingStyles({theme}: ThemeProps) {
   const color = theme.sanity.color.syntax
 
   return css`
@@ -118,7 +118,7 @@ function codeSyntaxHighlightingStyles({theme}: {theme: Theme}) {
   `
 }
 
-export function codeBaseStyles(props: {muted: boolean; theme: Theme}) {
+export function codeBaseStyles(props: {muted: boolean} & ThemeProps) {
   const {muted} = props
 
   return css`

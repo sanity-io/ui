@@ -1,7 +1,11 @@
-export interface GridStyleProps {
-  autoRows?: 'auto' | 'min' | 'max' | 'fr'
-  autoCols?: 'auto' | 'min' | 'max' | 'fr'
-  autoFlow?: 'row' | 'column' | 'row dense' | 'column dense'
+export type GridAutoRows = 'auto' | 'min' | 'max' | 'fr'
+export type GridAutoCols = 'auto' | 'min' | 'max' | 'fr'
+export type GridAutoFlow = 'row' | 'column' | 'row dense' | 'column dense'
+
+export interface ResponsiveGridStyleProps {
+  autoRows?: GridAutoRows | GridAutoRows[]
+  autoCols?: GridAutoCols | GridAutoCols[]
+  autoFlow?: GridAutoFlow | GridAutoFlow[]
   columns?: number | number[]
   gap?: number | number[]
   rows?: number | number[]
@@ -15,7 +19,7 @@ type GridItemRow = 'auto' | 'full' | number
 type GridItemRowStart = 'auto' | number
 type GridItemRowEnd = 'auto' | number
 
-export interface GridItemProps {
+export interface ResponsiveGridItemStyleProps {
   column?: GridItemColumn | GridItemColumn[]
   columnStart?: GridItemColumnStart | GridItemColumnStart[]
   columnEnd?: GridItemColumnEnd | GridItemColumnEnd[]

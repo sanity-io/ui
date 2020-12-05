@@ -1,17 +1,20 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {responsiveHeadingFont} from '../../styles'
+import {responsiveHeadingFont, responsiveTextAlignStyle} from '../../styles'
+import {ThemeFontWeightKey} from '../../theme'
+import {TextAlign} from '../../types'
 import {headingBaseStyles} from './styles'
 
 interface HeadingProps {
   accent?: boolean
+  align?: TextAlign | TextAlign[]
   as?: React.ElementType | keyof JSX.IntrinsicElements
   muted?: boolean
   size?: number | number[]
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
+  weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div(responsiveHeadingFont, headingBaseStyles)
+const Root = styled.div(responsiveHeadingFont, responsiveTextAlignStyle, headingBaseStyles)
 
 export const Heading = forwardRef(
   (props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {

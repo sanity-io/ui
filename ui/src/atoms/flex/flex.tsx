@@ -1,33 +1,29 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {
-  boxStyle,
-  BoxStyleProps,
-  flexStyle,
-  FlexStyleProps,
-  flexItemStyle,
-  FlexItemStyleProps,
+  responsiveBoxStyle,
+  ResponsiveBoxStyleProps,
+  responsiveFlexStyle,
+  ResponsiveFlexStyleProps,
+  responsiveFlexItemStyle,
+  ResponsiveFlexItemStyleProps,
 } from '../../styles'
 
-interface FlexProps extends BoxStyleProps, FlexStyleProps {
+interface FlexProps
+  extends ResponsiveBoxStyleProps,
+    ResponsiveFlexStyleProps,
+    ResponsiveFlexItemStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div<BoxStyleProps & FlexStyleProps & FlexItemStyleProps>(
-  boxStyle,
-  flexStyle,
-  flexItemStyle
-)
+const Root = styled.div<
+  ResponsiveBoxStyleProps & ResponsiveFlexStyleProps & ResponsiveFlexItemStyleProps
+>(responsiveBoxStyle, responsiveFlexStyle, responsiveFlexItemStyle)
 
-export const Flex = forwardRef(
-  (
-    props: BoxStyleProps & FlexProps & FlexItemStyleProps & React.HTMLProps<HTMLDivElement>,
-    ref
-  ) => {
-    const {direction, ...restProps} = props
+export const Flex = forwardRef((props: FlexProps & React.HTMLProps<HTMLDivElement>, ref) => {
+  const {direction, ...restProps} = props
 
-    return <Root data-ui="Flex" {...restProps} direction={direction} ref={ref} />
-  }
-)
+  return <Root data-ui="Flex" {...restProps} direction={direction} ref={ref} />
+})
 
 Flex.displayName = 'Flex'

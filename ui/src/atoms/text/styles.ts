@@ -1,7 +1,12 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {ThemeProps} from '../../styles'
 
-export function textBaseStyles(props: {accent?: boolean; theme: Theme; muted?: boolean}) {
+export function textBaseStyles(
+  props: {
+    accent?: boolean
+    muted?: boolean
+  } & ThemeProps
+) {
   const {accent, muted, theme} = props
   const {weights} = theme.sanity.fonts.text
 

@@ -7,6 +7,7 @@ interface IconProps {
   symbol: IconSymbol
 }
 
+// @todo: deprecate
 export const Icon = forwardRef(
   (
     props: IconProps & Omit<React.SVGProps<SVGSVGElement>, 'ref'>,

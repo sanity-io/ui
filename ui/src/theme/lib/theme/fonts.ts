@@ -1,3 +1,6 @@
+export type ThemeFontKey = 'code' | 'heading' | 'label' | 'text'
+export type ThemeFontWeightKey = 'regular' | 'medium' | 'semibold' | 'bold'
+
 export interface ThemeFontSize {
   ascenderHeight: number
   descenderHeight: number

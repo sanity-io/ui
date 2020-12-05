@@ -2,9 +2,8 @@ import {useId} from '@reach/auto-id'
 import React, {forwardRef, useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
 import styled, {css} from 'styled-components'
-import {rem} from '../../styles'
-import {ThemeColorSpotKey} from '../../theme'
-import {Theme, useTheme} from '../../theme'
+import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {ThemeColorSpotKey, useTheme} from '../../theme'
 import {Text} from '../text'
 import {avatarTheme} from './theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from './types'
@@ -16,56 +15,71 @@ export interface AvatarProps {
   color?: ThemeColorSpotKey
   initials?: string
   onImageLoadError?: (event: Error) => void
-  size?: AvatarSize
+  size?: AvatarSize | AvatarSize[]
   src?: string
   status?: AvatarStatus
   title?: string
 }
 
-const Root = styled.div<{uiColor: string; size: AvatarSize}>`
-  background-color: ${({uiColor}) => uiColor};
-  position: relative;
-  box-sizing: border-box;
-  user-select: none;
-  width: ${({size}) => rem(avatarTheme.size[size])};
-  height: ${({size}) => rem(avatarTheme.size[size])};
-  border-radius: ${({size}) => rem(avatarTheme.size[size] / 2)};
-  box-shadow: 0 0 0 1px var(--card-bg-color);
+function responsiveAvatarSizeStyle(props: {size: number | number[]} & ThemeProps) {
+  const {theme} = props
+  const {media} = theme.sanity
 
-  &[data-status='inactive'] {
-    opacity: 0.5;
+  return responsive(media, getResponsiveProp(props.size), (size) => ({
+    width: rem(avatarTheme.size[size]),
+    height: rem(avatarTheme.size[size]),
+    borderRadius: rem(avatarTheme.size[size] / 2),
+
+    '& > svg': {
+      width: rem(avatarTheme.size[size]),
+      height: rem(avatarTheme.size[size]),
+      borderRadius: rem(avatarTheme.size[size] / 2),
+    },
+  }))
+}
+
+const Root = styled.div<{uiColor: string; size: AvatarSize | AvatarSize[]}>(
+  responsiveAvatarSizeStyle,
+  ({uiColor}: {uiColor: string} & ThemeProps) => {
+    return css`
+      background-color: ${uiColor};
+      position: relative;
+      box-sizing: border-box;
+      user-select: none;
+      box-shadow: 0 0 0 1px var(--card-bg-color);
+
+      &[data-status='inactive'] {
+        opacity: 0.5;
+      }
+
+      & > svg {
+        &:not([hidden]) {
+          display: block;
+        }
+      }
+
+      /* &:is(button) */
+      &[data-as='button'] {
+        appearance: none;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        -webkit-font-smoothing: inherit;
+        color: inherit;
+        outline: none;
+
+        &:focus {
+          box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+        }
+
+        &:focus:not(:focus-visible) {
+          box-shadow: none;
+        }
+      }
+    `
   }
-
-  & > svg {
-    width: ${({size}) => rem(avatarTheme.size[size])};
-    height: ${({size}) => rem(avatarTheme.size[size])};
-    border-radius: ${({size}) => rem(avatarTheme.size[size] / 2)};
-
-    &:not([hidden]) {
-      display: block;
-    }
-  }
-
-  /* &:is(button) */
-  &[data-as='button'] {
-    appearance: none;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    -webkit-font-smoothing: inherit;
-    color: inherit;
-    outline: none;
-
-    &:focus {
-      box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
-    }
-
-    &:focus:not(:focus-visible) {
-      box-shadow: none;
-    }
-  }
-`
+)
 
 const Arrow = styled.div`
   position: absolute;
@@ -106,13 +120,13 @@ const Arrow = styled.div`
 
 const BgStroke = styled.ellipse`
   stroke-width: 4px;
-  vector-effect: non-scaling-stroke;
+  /* vector-effect: non-scaling-stroke; */
   stroke: var(--card-bg-color);
 `
 
 const Stroke = styled.ellipse`
   stroke-width: 3px;
-  vector-effect: non-scaling-stroke;
+  /* vector-effect: non-scaling-stroke; */
 
   ${Root}[data-status='editing'] & {
     stroke-dasharray: 2 4;
@@ -121,7 +135,7 @@ const Stroke = styled.ellipse`
   }
 `
 
-const Initials = styled.div((props: {theme: Theme}) => {
+const Initials = styled.div((props: ThemeProps) => {
   const {theme} = props
   const {base} = theme.sanity.color
 
@@ -160,8 +174,9 @@ export const Avatar = forwardRef(
     const theme = useTheme()
     const color = theme.sanity.color.spot[colorKey] || theme.sanity.color.spot.gray
 
-    const _sizeRem = avatarTheme.size[size]
-    const _radius = avatarTheme.size[size] / 2
+    // @todo: remove this
+    const _sizeRem = avatarTheme.size[0]
+    const _radius = avatarTheme.size[0] / 2
 
     const elementId = useId()
     const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
@@ -228,8 +243,21 @@ export const Avatar = forwardRef(
             </defs>
 
             <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${elementId}-image-url)`} />
-            <BgStroke cx={_radius} cy={_radius} rx={_radius} ry={_radius} />
-            <Stroke cx={_radius} cy={_radius} rx={_radius} ry={_radius} stroke={color} />
+            <BgStroke
+              cx={_radius}
+              cy={_radius}
+              rx={_radius}
+              ry={_radius}
+              vectorEffect="non-scaling-stroke"
+            />
+            <Stroke
+              cx={_radius}
+              cy={_radius}
+              rx={_radius}
+              ry={_radius}
+              stroke={color}
+              vectorEffect="non-scaling-stroke"
+            />
           </svg>
         )}
 

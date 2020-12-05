@@ -1,10 +1,11 @@
 import {CSSObject} from 'styled-components'
+import {ThemeFontWeightKey} from '../../theme'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 export interface TextInputInputStyleProps {
-  uiSize?: number | number[]
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
+  size?: number | number[]
+  weight?: ThemeFontWeightKey
 }
 
 export interface TextInputRepresentationStyleProps {
@@ -83,18 +84,16 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject
 
 function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   const {theme} = props
+  const {fonts, media} = theme.sanity
 
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(props.uiSize, [2]).map((sizeIndex) => {
-      const size = theme.sanity.fonts.text.sizes[sizeIndex] || theme.sanity.fonts.text.sizes[2]
+  return responsive(media, getResponsiveProp(props.size, [2]), (sizeIndex) => {
+    const size = fonts.text.sizes[sizeIndex] || fonts.text.sizes[2]
 
-      return {
-        fontSize: rem(size.fontSize),
-        lineHeight: size.lineHeight / size.fontSize,
-      }
-    })
-  )
+    return {
+      fontSize: rem(size.fontSize),
+      lineHeight: size.lineHeight / size.fontSize,
+    }
+  })
 }
 
 function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject[] {

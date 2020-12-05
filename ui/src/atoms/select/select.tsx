@@ -6,6 +6,14 @@ import {Box} from '../box'
 import {Text} from '../text'
 import {select} from './styles'
 
+interface SelectProps {
+  padding?: number | number[]
+  radius?: number | number[]
+  size?: number | number[]
+  space?: number | number[]
+  customValidity?: string
+}
+
 const Root = styled.div(select.root)
 
 const Input = styled.select<{
@@ -16,14 +24,6 @@ const Input = styled.select<{
 }>(select.input)
 
 const IconBox = styled(Box)(select.iconBox)
-
-interface SelectProps {
-  padding?: number | number[]
-  radius?: number | number[]
-  size?: number | number[]
-  space?: number | number[]
-  customValidity?: string
-}
 
 export const Select = forwardRef(
   (

@@ -12,13 +12,13 @@ export type FlexJustify =
 
 export type FlexWrap = 'wrap' | 'wrap-reverse' | 'nowrap'
 
-export interface FlexStyleProps {
-  align?: FlexAlign
-  direction?: FlexDirection
-  justify?: FlexJustify
-  wrap?: FlexWrap
+export interface ResponsiveFlexStyleProps {
+  align?: FlexAlign | FlexAlign[]
+  direction?: FlexDirection | FlexDirection[]
+  justify?: FlexJustify | FlexJustify[]
+  wrap?: FlexWrap | FlexWrap[]
 }
 
-export interface FlexItemStyleProps {
+export interface ResponsiveFlexItemStyleProps {
   flex?: number | number[]
 }

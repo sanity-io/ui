@@ -16,15 +16,17 @@ export function rem(pixelValue: number): string | 0 {
   return `${pixelValue / 16}rem`
 }
 
-export function responsive(media: number[], statements: CSSObject[]): CSSObject[] {
+export function responsive<T>(
+  media: number[],
+  values: T[],
+  callback: (value: T, index: number, array: T[]) => CSSObject
+): CSSObject[] {
+  const statements = values.map(callback)
+
   return statements.map((statement, mediaIndex) => {
     if (mediaIndex === 0) return statement
 
-    const mediaKey = `@media(min-width:${media[mediaIndex - 1]}px)`
-
-    return {
-      [mediaKey]: statement,
-    }
+    return {[`@media(min-width:${media[mediaIndex - 1]}px)`]: statement}
   })
 }
 
@@ -43,8 +45,7 @@ export function getResponsiveSpace(theme: Theme, props: string[], spaceIndexes: 
     return null
   }
 
-  return responsive(
-    theme.sanity.media,
-    spaceIndexes.map((spaceIndex) => createObject(props, rem(theme.sanity.space[spaceIndex])))
+  return responsive(theme.sanity.media, spaceIndexes, (spaceIndex) =>
+    createObject(props, rem(theme.sanity.space[spaceIndex]))
   )
 }

@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
-import {rem} from '../../styles'
-import {Theme} from '../../theme'
+import {rem, ThemeProps} from '../../styles'
 
 /* Root */
 export function switchBaseStyles() {
@@ -34,7 +33,7 @@ export function switchInputStyles() {
 }
 
 /* Representation */
-export function switchRepresentationStyles(props: {theme: Theme}) {
+export function switchRepresentationStyles(props: ThemeProps) {
   const {theme} = props
   const {switch: switchInput} = theme.sanity.input
   const color = theme.sanity.color.button.default
@@ -87,7 +86,7 @@ export function switchRepresentationStyles(props: {theme: Theme}) {
 }
 
 /* Track */
-export function switchTrackStyles(props: {theme: Theme}) {
+export function switchTrackStyles(props: ThemeProps) {
   const {theme} = props
   const {switch: switchInput} = theme.sanity.input
 
@@ -106,11 +105,9 @@ export function switchTrackStyles(props: {theme: Theme}) {
 }
 
 /* Thumb */
-export function switchThumbStyles(props: {
-  checked?: boolean
-  indeterminate?: boolean
-  theme: Theme
-}) {
+export function switchThumbStyles(
+  props: {checked?: boolean; indeterminate?: boolean} & ThemeProps
+) {
   const {indeterminate, theme} = props
   const {switch: switchInput} = theme.sanity.input
   const trackWidth = switchInput.width

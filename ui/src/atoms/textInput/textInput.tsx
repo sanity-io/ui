@@ -11,6 +11,7 @@ import {
   TextInputRepresentationStyleProps,
   TextInputResponsivePaddingStyleProps,
 } from '../../styles'
+import {ThemeFontWeightKey} from '../../theme'
 import {Box} from '../box'
 import {Card} from '../card'
 import {Icon, IconSymbol} from '../icon'
@@ -38,7 +39,7 @@ interface TextInputProps extends ResponsiveRadiusProps {
     | 'time'
     | 'text'
     | 'week'
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
+  weight?: ThemeFontWeightKey
 }
 
 const Root = styled.span(textInputStyle.root)

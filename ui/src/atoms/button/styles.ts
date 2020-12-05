@@ -1,5 +1,5 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {ThemeProps} from '../../styles'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
@@ -35,7 +35,7 @@ export function buttonBaseStyles() {
   `
 }
 
-export function buttonColorStyles(props: {uiMode: ButtonMode; theme: Theme; tone: ButtonTone}) {
+export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} & ThemeProps) {
   const {theme, uiMode} = props
   const mode = theme.sanity.color.button[uiMode] || theme.sanity.color.button.default
   const color = mode[props.tone] || mode.default

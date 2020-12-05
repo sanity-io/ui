@@ -1,37 +1,62 @@
-import {FlexStyleProps} from './types'
+import {CSSObject} from 'styled-components'
+import {getResponsiveProp, responsive} from '../helpers'
+import {ThemeProps} from '../types'
+import {ResponsiveFlexStyleProps} from './types'
 
-export function flexStyle(props: FlexStyleProps) {
+export function responsiveFlexStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
   return [
-    {
-      alignItems: props.align,
-      justifyContent: props.justify,
-
-      '&:not([hidden])': {
-        display: 'flex',
-      },
-    },
-    responsiveFlexColumnStyle,
+    {'&:not([hidden])': {display: 'flex'}},
+    ...responsiveFlexAlignStyle(props),
+    ...responsiveFlexWrapStyle(props),
+    ...responsiveFlexJustifyStyle(props),
+    ...responsiveFlexDirectionStyle(props),
   ]
 }
 
-export function responsiveFlexColumnStyle(props: FlexStyleProps) {
-  if (props.direction && props.direction.startsWith('column')) {
-    return {
-      flexDirection: props.direction,
-      flexWrap: props.wrap,
+export function responsiveFlexAlignStyle(
+  props: ResponsiveFlexStyleProps & ThemeProps
+): CSSObject[] {
+  const {theme} = props
+  const {media} = theme.sanity
 
-      '&>*': {
-        minHeight: 0,
-      },
+  return responsive(media, getResponsiveProp(props.align), (align) => {
+    return {alignItems: align}
+  })
+}
+
+export function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.wrap), (wrap) => {
+    return {flexWrap: wrap}
+  })
+}
+
+export function responsiveFlexJustifyStyle(
+  props: ResponsiveFlexStyleProps & ThemeProps
+): CSSObject[] {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.justify), (justify) => {
+    return {justifyContent: justify}
+  })
+}
+
+export function responsiveFlexDirectionStyle(
+  props: ResponsiveFlexStyleProps & ThemeProps
+): CSSObject[] {
+  const {theme} = props
+  const {media} = theme.sanity
+
+  return responsive(media, getResponsiveProp(props.direction), (direction) => {
+    if (typeof direction !== 'string') return {}
+
+    if (direction && direction.startsWith('column')) {
+      return {flexDirection: direction, '&>*': {minHeight: 0}}
     }
-  }
 
-  return {
-    flexDirection: props.direction,
-    flexWrap: props.wrap,
-
-    '&>*': {
-      minWidth: 0,
-    },
-  }
+    return {flexDirection: direction, '&>*': {minWidth: 0}}
+  })
 }

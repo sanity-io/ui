@@ -5,8 +5,9 @@ import {
   ResponsivePaddingStyleProps,
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
+  ThemeProps,
 } from '../../styles'
-import {Theme, useTheme} from '../../theme'
+import {useTheme} from '../../theme'
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Icon, IconSymbol} from '../icon'
@@ -19,7 +20,7 @@ export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadi
   mode?: ButtonMode
   icon?: IconSymbol | React.ComponentType
   iconRight?: IconSymbol | React.ComponentType
-  justify?: FlexJustify
+  justify?: FlexJustify | FlexJustify[]
   selected?: boolean
   size?: number | number[]
   space?: number | number[]
@@ -28,11 +29,11 @@ export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadi
   type?: 'button' | 'reset' | 'submit'
 }
 
-const Root = styled.button<{
-  uiMode: ButtonMode
-  theme: Theme
-  tone: ButtonTone
-}>(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
+const Root = styled.button<{uiMode: ButtonMode; tone: ButtonTone} & ThemeProps>(
+  responsiveRadiusStyle,
+  buttonBaseStyles,
+  buttonColorStyles
+)
 
 export const Button = forwardRef(
   (props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'size'>, ref) => {

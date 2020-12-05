@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {ThemeProps} from '../../styles'
 
-export function headingBaseStyles(props: {accent?: boolean; muted?: boolean; theme: Theme}) {
+export function headingBaseStyles(props: {accent?: boolean; muted?: boolean} & ThemeProps) {
   const {accent, muted, theme} = props
 
   return css`

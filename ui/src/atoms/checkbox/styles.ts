@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
-import {rem} from '../../styles'
-import {Theme} from '../../theme'
+import {rem, ThemeProps} from '../../styles'
 
 export function checkboxBaseStyles() {
   return css`
@@ -9,7 +8,7 @@ export function checkboxBaseStyles() {
   `
 }
 
-export function inputElementStyles(props: {theme: Theme}) {
+export function inputElementStyles(props: ThemeProps) {
   const {theme} = props
   const {input} = theme.sanity.color
   const {checkbox} = theme.sanity.input

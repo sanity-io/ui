@@ -5,8 +5,9 @@ import {
   responsive,
   responsiveInputPaddingIconRightStyle,
   responsiveRadiusStyle,
+  ThemeProps,
 } from '../../styles'
-import {ThemeFontSize, Theme} from '../../theme'
+import {ThemeFontSize} from '../../theme'
 
 const root = () => {
   return css`
@@ -19,7 +20,7 @@ const root = () => {
   `
 }
 
-const inputBase = ({theme}: {theme: Theme}) => {
+const inputBase = ({theme}: ThemeProps) => {
   const font = theme.sanity.fonts.text
 
   return css`
@@ -33,7 +34,7 @@ const inputBase = ({theme}: {theme: Theme}) => {
   `
 }
 
-const inputColor = ({theme}: {theme: Theme}) => {
+const inputColor = ({theme}: ThemeProps) => {
   const color = theme.sanity.color.input
 
   return css`
@@ -67,18 +68,14 @@ const inputColor = ({theme}: {theme: Theme}) => {
 }
 
 const textSize = (size: ThemeFontSize) => {
-  return {
-    fontSize: rem(size.fontSize),
-    lineHeight: rem(size.lineHeight),
-  }
+  return {fontSize: rem(size.fontSize), lineHeight: rem(size.lineHeight)}
 }
 
-const inputTextSize = ({theme, uiSize}: {theme: Theme; uiSize?: number | number[]}) => {
+const inputTextSize = ({theme, uiSize}: {uiSize?: number | number[]} & ThemeProps) => {
   const {sizes} = theme.sanity.fonts.text
 
-  return responsive(
-    theme.sanity.media,
-    getResponsiveProp(uiSize).map((sizeIndex) => textSize(sizes[sizeIndex] || sizes[2]))
+  return responsive(theme.sanity.media, getResponsiveProp(uiSize), (sizeIndex) =>
+    textSize(sizes[sizeIndex] || sizes[2])
   )
 }
 
@@ -92,11 +89,7 @@ const input = () => [
 
 const iconBox = ({
   theme,
-}: {
-  radius?: number | number[]
-  uiSize?: number | number[]
-  theme: Theme
-}) => {
+}: {radius?: number | number[]; uiSize?: number | number[]} & ThemeProps) => {
   const color = theme.sanity.color.input
 
   return css`

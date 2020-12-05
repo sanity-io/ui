@@ -19,6 +19,7 @@ export const plain = () => {
       '3': 3,
       '4': 4,
       '5': 5,
+      auto: 'auto',
     },
     0,
     'Props'

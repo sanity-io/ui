@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
-import {Theme} from '../../theme'
+import {ThemeProps} from '../../styles'
 
-export function labelBaseStyles(props: {accent?: boolean; theme: Theme; muted: boolean}) {
+export function labelBaseStyles(props: {accent?: boolean; muted: boolean} & ThemeProps) {
   const {accent, theme, muted} = props
 
   return css`

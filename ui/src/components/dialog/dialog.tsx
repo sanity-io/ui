@@ -3,7 +3,8 @@ import styled, {css} from 'styled-components'
 import {Box, Button, Card, Container, Flex, Text} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
-import {ThemeColorSchemeKey, Theme} from '../../theme'
+import {ThemeProps} from '../../styles'
+import {ThemeColorSchemeKey} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
 
 interface DialogProps {
@@ -17,7 +18,7 @@ interface DialogProps {
   width?: number
 }
 
-const Root = styled(Layer)(({theme}: {theme: Theme}) => {
+const Root = styled(Layer)(({theme}: ThemeProps) => {
   const color = theme.sanity.color.base
 
   return css`

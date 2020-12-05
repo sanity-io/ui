@@ -17,7 +17,12 @@ export default function ArcadeApp() {
         <div data-portal ref={setPortalElement} />
       </Box>
 
-      <Card height="fill" borderLeft flex={1} shadow={1}>
+      <Card
+        height="fill"
+        borderLeft={[false, false, true]}
+        borderTop={[true, true, false]}
+        flex={1}
+      >
         <CodeEditor
           code={code}
           cursor={cursor}

@@ -12,11 +12,12 @@ import {
   TextInputInputStyleProps,
   TextInputRepresentationStyleProps,
 } from '../../styles'
+import {ThemeFontWeightKey} from '../../theme'
 
 interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   border?: boolean
   size?: number | number[]
-  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
+  weight?: ThemeFontWeightKey
   customValidity?: string
 }
 
