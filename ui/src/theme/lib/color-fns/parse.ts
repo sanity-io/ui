@@ -3,7 +3,7 @@ import {HSL, RGB} from './types'
 
 const HEX_CHARS = '0123456789ABCDEFabcdef'
 
-const HSL_RE = /hsl\(\s*(\d+)\s*,\s*(\d+(?:\.\d+)?%)\s*,\s*(\d+(?:\.\d+)?%)\)/g
+const HSL_RE = /hsl\(\s*(\d+)\s*,\s*((\d+(?:\.\d+)?)%)\s*,\s*((\d+(?:\.\d+)?)%)\s*\)/i
 
 function isHexChars(str: string) {
   for (const c of str) {
@@ -31,7 +31,7 @@ function parseHsl(str: string): HSL {
     throw new Error(`parseHsl: string is not a HSL color: "${str}"`)
   }
 
-  return {h: parseInt(res[1]), s: parseFloat(res[2]), l: parseFloat(res[3])}
+  return {h: parseInt(res[1]), s: parseFloat(res[3]), l: parseFloat(res[5])}
 }
 
 export function parseColor(color: unknown): RGB {

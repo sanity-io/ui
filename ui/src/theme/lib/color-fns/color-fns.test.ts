@@ -47,9 +47,11 @@ describe('color-fns', () => {
     })
 
     it('should parse a HSL to RGB', () => {
-      const rgb = parseColor('hsl(210, 20%, 50%)')
+      const rgb1 = parseColor('hsl(210, 20%, 50%)')
+      const rgb2 = parseColor('hsl(210, 10%, 0%)')
 
-      expect(rgb).toEqual({r: 102, g: 128, b: 153})
+      expect(rgb1).toEqual({r: 102, g: 128, b: 153})
+      expect(rgb2).toEqual({r: 0, g: 0, b: 0})
     })
   })
 
