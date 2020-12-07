@@ -1,6 +1,8 @@
-import {Button, Popover, Text} from '@sanity/ui'
+import {Box, Button, Placement, Popover, Text} from '@sanity/ui'
 import {boolean, withKnobs, select} from '@storybook/addon-knobs'
-import React from 'react'
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {ThemeColorToneKey} from 'ui/src/theme'
+import {LayerProvider, useLayer} from '../../utils'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -71,6 +73,69 @@ export const plain = () => {
       radius={radius}
     >
       <Button text="Hello" />
+    </Popover>
+  )
+}
+
+export const recursive = () => {
+  return (
+    <LayerProvider>
+      <RecursiveExample />
+    </LayerProvider>
+  )
+}
+
+const placements: Placement[] = ['top', 'right', 'bottom', 'left']
+const tones: ThemeColorToneKey[] = ['primary', 'positive', 'caution', 'critical']
+
+function RecursiveExample({onClose}: {onClose?: () => void}) {
+  const [open, setOpen] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement | null>(null)
+  const {isTopLayer} = useLayer()
+  const [seed] = useState(() => Math.floor(Math.random() * 4))
+  const fallbackPlacements = useMemo(() => {
+    const before = placements.slice(seed)
+    const after = placements.slice(0, seed)
+
+    return before.concat(after)
+  }, [seed])
+
+  useEffect(() => {
+    if (open === false) buttonRef.current?.focus()
+  }, [open])
+
+  useEffect(() => {
+    buttonRef.current?.focus()
+  }, [])
+
+  const handleOpen = useCallback(() => setOpen(true), [])
+  const handleClose = useCallback(() => setOpen(false), [])
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (!isTopLayer) return
+      if (event.key === 'Escape' && onClose) onClose()
+    },
+    [isTopLayer, onClose]
+  )
+
+  return (
+    <Popover
+      fallbackPlacements={fallbackPlacements}
+      content={<RecursiveExample onClose={handleClose} />}
+      open={open}
+      placement={fallbackPlacements[3]}
+      tone={tones[seed]}
+    >
+      <Box padding={1}>
+        <Button
+          mode="bleed"
+          onKeyDown={handleKeyDown}
+          onClick={handleOpen}
+          ref={buttonRef}
+          text="Open"
+        />
+      </Box>
     </Popover>
   )
 }
