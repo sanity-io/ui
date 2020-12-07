@@ -30,7 +30,7 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "@types/codemirror": "^0.0.100",
+    "@types/codemirror": "^0.0.102",
     "@types/pako": "^1.0.1",
     "babel-plugin-styled-components": "^1.12.0"
   }
