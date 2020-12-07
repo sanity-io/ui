@@ -1,6 +1,6 @@
 import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
-import {ThemeColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey, ThemeColorToneKey} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
@@ -9,6 +9,7 @@ import {PopoverArrow} from './arrow'
 interface PopoverProps {
   allowedAutoPlacements?: Placement[]
   boundaryElement?: HTMLElement | null
+  cardClassName?: string
   children?: React.ReactElement
   content?: React.ReactNode
   disabled?: boolean
@@ -21,6 +22,7 @@ interface PopoverProps {
   referenceElement?: HTMLElement | null
   shadow?: number | number[]
   scheme?: ThemeColorSchemeKey
+  tone?: ThemeColorToneKey
 }
 
 export const Popover = forwardRef(
@@ -32,6 +34,7 @@ export const Popover = forwardRef(
     const {
       allowedAutoPlacements,
       boundaryElement: boundaryElementProp = boundaryElementContext,
+      cardClassName,
       children: child,
       content,
       disabled,
@@ -45,6 +48,7 @@ export const Popover = forwardRef(
       shadow = 3,
       scheme,
       style = {},
+      tone,
       ...restProps
     } = props
     const placement = typeof placementProp === 'string' ? placementProp : 'bottom'
@@ -125,11 +129,13 @@ export const Popover = forwardRef(
         {...attributes.popper}
       >
         <Card
+          className={cardClassName}
           data-ui="PopoverCard"
           padding={padding}
           radius={radius}
           scheme={scheme}
           shadow={shadow}
+          tone={tone}
         >
           <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />
           {content}
