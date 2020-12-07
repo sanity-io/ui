@@ -20,7 +20,7 @@ describe('Components/Dialog', () => {
     const page = await context.newPage()
 
     await page.goto(
-      'http://localhost:9009/iframe.html?id=components-dialog--plain&viewMode=story',
+      'http://localhost:9009/iframe.html?id=components-dialog--props&viewMode=story',
       {waitUntil: 'domcontentloaded'}
     )
 
@@ -31,7 +31,7 @@ describe('Components/Dialog', () => {
   it('should trap focus', async () => {
     const page = await context.newPage()
     await page.goto(
-      'http://localhost:9009/iframe.html?id=components-dialog--plain&viewMode=story',
+      'http://localhost:9009/iframe.html?id=components-dialog--props&viewMode=story',
       {waitUntil: 'domcontentloaded'}
     )
 
