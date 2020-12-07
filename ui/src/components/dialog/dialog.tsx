@@ -1,13 +1,13 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
-import {Box, Button, Card, Container, Flex, Text} from '../../atoms'
+import {Box, Button, Card, Container, Flex, ResponsiveWidthStyleProps, Text} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {ThemeProps} from '../../styles'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
 
-interface DialogProps {
+interface DialogProps extends ResponsiveWidthStyleProps {
   cardRadius?: number
   cardShadow?: number
   footer?: React.ReactNode
@@ -15,7 +15,17 @@ interface DialogProps {
   id: string
   onClose?: () => void
   scheme?: ThemeColorSchemeKey
-  width?: number
+}
+
+interface DialogCardProps extends ResponsiveWidthStyleProps {
+  cardRadius: number
+  cardShadow: number
+  children: React.ReactNode
+  footer: React.ReactNode
+  header: React.ReactNode
+  id: string
+  onClose?: () => void
+  scheme?: ThemeColorSchemeKey
 }
 
 const Root = styled(Layer)(({theme}: ThemeProps) => {
@@ -91,114 +101,90 @@ const DialogFooter = styled(Box)`
   border-top: 1px solid var(--card-hairline-soft-color);
 `
 
-const DialogCard = forwardRef(
-  (
-    {
-      cardRadius,
-      cardShadow,
-      children,
-      footer,
-      header,
-      id,
-      onClose,
-      scheme,
-      width,
-    }: {
-      cardRadius: number
-      cardShadow: number
-      children: React.ReactNode
-      footer: React.ReactNode
-      header: React.ReactNode
-      id: string
-      onClose?: () => void
-      scheme?: ThemeColorSchemeKey
-      width: number
-    },
-    ref
-  ) => {
-    const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-    const contentRef = useRef<HTMLDivElement | null>(null)
-    const {isTopLayer} = useLayer()
-    const labelId = `${id}_label`
+const DialogCard = forwardRef((props: DialogCardProps, ref) => {
+  const {cardRadius, cardShadow, children, footer, header, id, onClose, scheme, width} = props
+  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const {isTopLayer} = useLayer()
+  const labelId = `${id}_label`
 
-    useEffect(() => {
-      // On mount: focus the first interactive element in the contents
-      if (contentRef.current) {
-        focusFirstDescendant(contentRef.current)
-      }
-    }, [])
+  useEffect(() => {
+    // On mount: focus the first interactive element in the contents
+    if (contentRef.current) {
+      focusFirstDescendant(contentRef.current)
+    }
+  }, [])
 
-    useGlobalKeyDown(
-      useCallback(
-        (event: KeyboardEvent) => {
-          if (!isTopLayer) return
-
-          if (event.key === 'Escape') {
-            event.preventDefault()
-            event.stopPropagation()
-            if (onClose) onClose()
-          }
-        },
-        [isTopLayer, onClose]
-      )
-    )
-
-    useClickOutside(
-      useCallback(() => {
+  useGlobalKeyDown(
+    useCallback(
+      (event: KeyboardEvent) => {
         if (!isTopLayer) return
-        if (onClose) onClose()
-      }, [isTopLayer, onClose]),
-      [rootElement]
-    )
 
-    const setRef = useCallback(
-      (el: HTMLDivElement | null) => {
-        setRootElement(el)
-        if (typeof ref === 'function') ref(el)
-        else if (ref) ref.current = el
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          event.stopPropagation()
+          if (onClose) onClose()
+        }
       },
-      [ref]
+      [isTopLayer, onClose]
     )
+  )
 
-    return (
-      <DialogContainer width={width}>
-        <DialogCardRoot radius={cardRadius} ref={setRef} scheme={scheme} shadow={cardShadow}>
-          <DialogLayout direction="column">
-            <DialogHeader>
-              <Flex>
-                <Box flex={1} padding={4}>
-                  {header && (
-                    <Text id={labelId} weight="semibold">
-                      {header}
-                    </Text>
-                  )}
-                </Box>
-                <Box padding={2}>
-                  <Button
-                    aria-label="Close dialog"
-                    icon="close"
-                    mode="bleed"
-                    onClick={onClose}
-                    padding={3}
-                  />
-                </Box>
-              </Flex>
-            </DialogHeader>
-            <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
-              {children}
-            </DialogContent>
-            {footer && <DialogFooter>{footer}</DialogFooter>}
-          </DialogLayout>
-        </DialogCardRoot>
-      </DialogContainer>
-    )
-  }
-)
+  useClickOutside(
+    useCallback(() => {
+      if (!isTopLayer) return
+      if (onClose) onClose()
+    }, [isTopLayer, onClose]),
+    [rootElement]
+  )
+
+  const setRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      setRootElement(el)
+      if (typeof ref === 'function') ref(el)
+      else if (ref) ref.current = el
+    },
+    [ref]
+  )
+
+  return (
+    <DialogContainer width={width}>
+      <DialogCardRoot radius={cardRadius} ref={setRef} scheme={scheme} shadow={cardShadow}>
+        <DialogLayout direction="column">
+          <DialogHeader>
+            <Flex>
+              <Box flex={1} padding={4}>
+                {header && (
+                  <Text id={labelId} weight="semibold">
+                    {header}
+                  </Text>
+                )}
+              </Box>
+              <Box padding={2}>
+                <Button
+                  aria-label="Close dialog"
+                  icon="close"
+                  mode="bleed"
+                  onClick={onClose}
+                  padding={3}
+                />
+              </Box>
+            </Flex>
+          </DialogHeader>
+          <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
+            {children}
+          </DialogContent>
+          {footer && <DialogFooter>{footer}</DialogFooter>}
+        </DialogLayout>
+      </DialogCardRoot>
+    </DialogContainer>
+  )
+})
 
 DialogCard.displayName = 'DialogCard'
 
 export const Dialog = forwardRef(
-  (props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id'>, ref) => {
+  (props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>, ref) => {
     const {
       cardRadius = 2,
       cardShadow = 4,

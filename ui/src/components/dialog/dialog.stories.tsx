@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import {withKnobs} from '@storybook/addon-knobs'
+import {select, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useRef, useState} from 'react'
 import {withCentered} from '~/storybook/decorators'
 
@@ -18,10 +18,25 @@ export default {
   title: 'Components/Dialog',
 }
 
-export const plain = () => {
+export const props = () => {
+  const width = select(
+    'Icon',
+    {
+      '0 (default)': '0',
+      '1': '1',
+      '2': '2',
+      '3': '3',
+      '4': '4',
+      '5': '5',
+      Auto: 'auto',
+    },
+    '1',
+    'Props'
+  )
+
   return (
     <LayerProvider>
-      <PlainExample />
+      <PropsExample width={width === 'auto' ? width : Number(width)} />
     </LayerProvider>
   )
 }
@@ -34,7 +49,7 @@ export const nested = () => {
   )
 }
 
-function PlainExample() {
+function PropsExample(props: {width: number | 'auto'}) {
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -53,7 +68,7 @@ function PlainExample() {
       />
 
       {open && (
-        <Dialog header={<>Example</>} id="dialog" onClose={handleClose}>
+        <Dialog {...props} header={<>Example</>} id="dialog" onClose={handleClose}>
           <Box padding={4}>
             <Stack space={4}>
               <Text>
