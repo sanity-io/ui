@@ -7,10 +7,12 @@ import {Card} from '../card'
 import {PopoverArrow} from './arrow'
 
 interface PopoverProps {
+  allowedAutoPlacements?: Placement[]
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
   content?: React.ReactNode
   disabled?: boolean
+  fallbackPlacements?: Placement[]
   open?: boolean
   padding?: number | number[]
   placement?: Placement
@@ -28,10 +30,12 @@ export const Popover = forwardRef(
   ) => {
     const boundaryElementContext = useBoundaryElement()
     const {
+      allowedAutoPlacements,
       boundaryElement: boundaryElementProp = boundaryElementContext,
       children: child,
       content,
       disabled,
+      fallbackPlacements,
       open,
       padding,
       placement: placementProp,
@@ -72,6 +76,13 @@ export const Popover = forwardRef(
           name: 'offset',
           options: {
             offset: [0, 4],
+          },
+        },
+        {
+          name: 'flip',
+          options: {
+            allowedAutoPlacements,
+            fallbackPlacements,
           },
         },
       ],

@@ -7,14 +7,14 @@ import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
 
 export interface TooltipProps {
+  allowedAutoPlacements?: Placement[]
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
   content?: React.ReactNode
   disabled?: boolean
+  fallbackPlacements?: Placement[]
   placement?: Placement
   portal?: boolean
-  allowedAutoPlacements?: Placement[]
-  fallbackPlacements?: Placement[]
 }
 
 const Root = styled(Layer)`
@@ -26,10 +26,12 @@ export function Tooltip(
 ) {
   const boundaryElementContext = useBoundaryElement()
   const {
+    allowedAutoPlacements,
     boundaryElement = boundaryElementContext,
     children,
     content,
     disabled,
+    fallbackPlacements,
     placement = 'bottom',
     portal: portalProp,
     ...restProps
@@ -63,8 +65,8 @@ export function Tooltip(
       {
         name: 'flip',
         options: {
-          allowedAutoPlacements: props.allowedAutoPlacements,
-          fallbackPlacements: props.fallbackPlacements,
+          allowedAutoPlacements,
+          fallbackPlacements,
         },
       },
     ],
