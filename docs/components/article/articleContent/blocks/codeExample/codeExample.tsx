@@ -3,17 +3,26 @@ import {Box, Card, Code} from '@sanity/ui'
 import React from 'react'
 import {renderCode, renderHooks} from '$lib/eval'
 
+const useIsomorphicEffect = typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
+
 export function CodeExample(props: {code: string; hookCode?: string; language: string}) {
   const {code, hookCode, language} = props
   const hook = renderHooks(hookCode || '', {React, ...ui})
+  const [isSSR, setSSR] = React.useState(true)
+
+  useIsomorphicEffect(() => {
+    setSSR(false)
+  }, [])
+
   const hooksState = hook.fn ? hook.fn() : {}
-  const result = renderCode(code, {React, ...hooksState, ...ui})
+
+  const result = isSSR ? null : renderCode(code, {React, ...hooksState, ...ui})
 
   return (
     <Card marginY={[2, 2, 3, 4]} overflow="auto" radius={2} shadow={1}>
       <Card overflow="auto" tone="transparent">
-        {result.type === 'success' && <Box padding={[3, 3, 4]}>{result.node}</Box>}
-        {result.type === 'error' && (
+        {result?.type === 'success' && <Box padding={[3, 3, 4]}>{result.node}</Box>}
+        {result?.type === 'error' && (
           <Card padding={[3, 3, 4, 5]}>
             <Code style={{color: 'red'}} size={[2, 2, 3, 4]}>
               {result.error.message}
