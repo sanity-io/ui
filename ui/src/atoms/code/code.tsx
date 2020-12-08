@@ -22,8 +22,7 @@ export const Code = forwardRef(
 
     return (
       <Root data-ui="Code" {...restProps} ref={ref} size={size} muted={muted}>
-        {(!language || (language && !registered)) && <code>{children}</code>}
-
+        {!(language && registered) && <code>{children}</code>}
         {language && registered && (
           <Refractor inline language={language} value={String(children)} />
         )}
