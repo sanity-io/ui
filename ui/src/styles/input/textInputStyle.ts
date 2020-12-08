@@ -1,5 +1,6 @@
 import {CSSObject} from 'styled-components'
 import {ThemeFontWeightKey} from '../../theme'
+import {borderStyle, focusRingStyle} from '../_internal/focusRing'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
@@ -98,6 +99,7 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
 
 function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject[] {
   const {border, hasPrefix, hasSuffix, theme} = props
+  const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.input
 
   return [
@@ -114,25 +116,25 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
       // enabled
       color: color.default.enabled.fg,
       backgroundColor: color.default.enabled.bg,
-      boxShadow: border ? `inset 0 0 0 1px ${color.default.enabled.border}` : undefined,
-
-      // focused
-      '*:not(:disabled):focus + &': {
-        boxShadow: '0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color)',
-      },
+      boxShadow: border ? borderStyle(input, color.default.enabled.border) : undefined,
 
       // invalid
       '*:not(:disabled):invalid + &': {
         color: color.invalid.enabled.fg,
         backgroundColor: color.invalid.enabled.bg,
-        boxShadow: border ? `inset 0 0 0 1px ${color.invalid.enabled.border}` : undefined,
+        boxShadow: border ? borderStyle(input, color.invalid.enabled.border) : 'none',
+      },
+
+      // focused
+      '*:not(:disabled):focus + &': {
+        boxShadow: focusRingStyle(border, focusRing, input, color.default.enabled.border),
       },
 
       // disabled
       '*:disabled + &': {
         color: color.default.disabled.fg,
         backgroundColor: color.default.disabled.bg,
-        boxShadow: border ? `inset 0 0 0 1px ${color.default.disabled.border}` : undefined,
+        boxShadow: border ? borderStyle(input, color.default.disabled.border) : 'none',
       },
 
       // hovered
@@ -143,7 +145,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
         },
 
         '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
-          boxShadow: border ? `inset 0 0 0 1px ${color.default.hovered.border}` : 'none',
+          boxShadow: border ? borderStyle(input, color.default.hovered.border) : 'none',
         },
       },
     },

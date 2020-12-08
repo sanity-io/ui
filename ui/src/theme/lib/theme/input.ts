@@ -13,4 +13,7 @@ export interface ThemeInput {
     transitionDurationMs: number
     transitionTimingFunction: string
   }
+  border: {
+    width: number
+  }
 }

@@ -12,6 +12,10 @@ export interface BaseTheme<Styles extends {} = {}> {
   }
   color: ThemeColorSchemes
   container: number[]
+  focusRing: {
+    offset: number
+    width: number
+  }
   fonts: ThemeFonts
   media: number[]
   radius: number[]

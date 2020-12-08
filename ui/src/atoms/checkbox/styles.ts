@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
+import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
 
 export function checkboxBaseStyles() {
   return css`
@@ -10,8 +11,8 @@ export function checkboxBaseStyles() {
 
 export function inputElementStyles(props: ThemeProps) {
   const {theme} = props
-  const {input} = theme.sanity.color
-  const {checkbox} = theme.sanity.input
+  const color = theme.sanity.color.input
+  const {focusRing, input} = theme.sanity
 
   return css`
     position: absolute;
@@ -28,13 +29,13 @@ export function inputElementStyles(props: ThemeProps) {
     & + span {
       position: relative;
       display: block;
-      height: ${rem(checkbox.size)};
-      width: ${rem(checkbox.size)};
+      height: ${rem(input.checkbox.size)};
+      width: ${rem(input.checkbox.size)};
       box-sizing: border-box;
-      box-shadow: 0 0 0 1px ${input.default.enabled.border};
+      box-shadow: ${borderStyle(input, color.default.enabled.border)};
       border-radius: 3px;
       line-height: 1;
-      background: ${input.default.enabled.bg};
+      background: ${color.default.enabled.bg};
 
       & > svg {
         display: block;
@@ -42,7 +43,6 @@ export function inputElementStyles(props: ThemeProps) {
         opacity: 0;
         height: 100%;
         width: 100%;
-        /* transition: 100ms opacity; */
 
         & > path {
           vector-effect: non-scaling-stroke;
@@ -52,7 +52,7 @@ export function inputElementStyles(props: ThemeProps) {
     }
 
     &:focus + span {
-      box-shadow: 0 0 0 2px var(--card-focus-ring-color);
+      box-shadow: ${focusRingStyle(true, focusRing, input, color.default.enabled.border)};
     }
 
     &:checked + span > svg:first-child {
@@ -60,9 +60,9 @@ export function inputElementStyles(props: ThemeProps) {
     }
 
     &:disabled + span {
-      background: ${input.default.disabled.bg};
-      box-shadow: 0 0 0 1px ${input.default.disabled.border};
-      color: ${input.default.disabled.fg};
+      background: ${color.default.disabled.bg};
+      box-shadow: ${borderStyle(input, color.default.disabled.border)};
+      color: ${color.default.disabled.fg};
     }
 
     &:indeterminate + span > svg:last-child {

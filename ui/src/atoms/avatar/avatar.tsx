@@ -3,6 +3,7 @@ import React, {forwardRef, useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
 import styled, {css} from 'styled-components'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {focusRingStyle} from '../../styles/_internal/focusRing'
 import {ThemeColorSpotKey, useTheme} from '../../theme'
 import {Text} from '../text'
 import {avatarTheme} from './theme'
@@ -40,7 +41,9 @@ function responsiveAvatarSizeStyle(props: {size: number | number[]} & ThemeProps
 
 const Root = styled.div<{uiColor: string; size: AvatarSize | AvatarSize[]}>(
   responsiveAvatarSizeStyle,
-  ({uiColor}: {uiColor: string} & ThemeProps) => {
+  ({theme, uiColor}: {uiColor: string} & ThemeProps) => {
+    const {focusRing} = theme.sanity
+
     return css`
       background-color: ${uiColor};
       position: relative;
@@ -70,7 +73,7 @@ const Root = styled.div<{uiColor: string; size: AvatarSize | AvatarSize[]}>(
         outline: none;
 
         &:focus {
-          box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+          box-shadow: ${focusRingStyle(false, focusRing, {border: {width: 1}}, '')};
         }
 
         &:focus:not(:focus-visible) {

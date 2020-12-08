@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {focusRingStyle} from '../../styles/_internal/focusRing'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
@@ -37,6 +38,7 @@ export function buttonBaseStyles() {
 
 export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} & ThemeProps) {
   const {theme, uiMode} = props
+  const {focusRing} = theme.sanity
   const mode = theme.sanity.color.button[uiMode] || theme.sanity.color.button.default
   const color = mode[props.tone] || mode.default
 
@@ -48,10 +50,6 @@ export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} 
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
 
-    & > span {
-      box-shadow: inset 0 0 0 1px var(--card-border-color);
-    }
-
     &:disabled,
     &[data-disabled='true'] {
       --card-bg-color: ${color.disabled.bg};
@@ -61,7 +59,7 @@ export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} 
 
     &:not([data-disabled='true']) {
       &:focus {
-        box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+        box-shadow: ${focusRingStyle(true, focusRing, {border: {width: 1}}, color.enabled.border)};
       }
 
       &:focus:not(:focus-visible) {

@@ -7,6 +7,7 @@ import {
   responsiveRadiusStyle,
   ThemeProps,
 } from '../../styles'
+import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
 import {ThemeFontSize} from '../../theme'
 
 const root = () => {
@@ -36,22 +37,23 @@ const inputBase = ({theme}: ThemeProps) => {
 
 const inputColor = ({theme}: ThemeProps) => {
   const color = theme.sanity.color.input
+  const {focusRing, input} = theme.sanity
 
   return css`
     background-color: ${color.default.enabled.bg};
     color: ${color.default.enabled.fg};
-    box-shadow: inset 0 0 0 1px ${color.default.enabled.border};
+    box-shadow: ${borderStyle(input, color.default.enabled.border)};
 
     @media (hover: hover) {
       &:not(:disabled):hover {
         background-color: ${color.default.hovered.bg};
         color: ${color.default.hovered.fg};
-        box-shadow: inset 0 0 0 1px ${color.default.hovered.border};
+        box-shadow: ${borderStyle(input, color.default.hovered.border)};
       }
     }
 
     &:not(:disabled):focus {
-      box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+      box-shadow: ${focusRingStyle(true, focusRing, input, color.default.enabled.border)};
     }
 
     &:not(:disabled):focus:not(:focus-visible) {
@@ -62,7 +64,7 @@ const inputColor = ({theme}: ThemeProps) => {
       opacity: 1;
       background-color: ${color.default.disabled.bg};
       color: ${color.default.disabled.fg};
-      box-shadow: inset 0 0 0 1px ${color.default.disabled.border};
+      box-shadow: ${borderStyle(input, color.default.disabled.border)};
     }
   `
 }

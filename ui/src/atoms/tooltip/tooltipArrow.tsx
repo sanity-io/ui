@@ -48,7 +48,7 @@ const Root = styled.div`
 `
 
 const Border = styled.path`
-  fill: var(--card-hairline-soft-color);
+  fill: var(--card-shadow-outline-color);
 `
 
 const Shape = styled.path`

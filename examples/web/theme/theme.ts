@@ -12,6 +12,10 @@ export const sanityTheme: RootTheme = {
   },
   color,
   container: [480, 960, 1440, 1920, 2400],
+  focusRing: {
+    offset: 1,
+    width: 2,
+  },
   fonts,
   media: [320, 640, 960, 1280, 1600, 1920],
   radius: [0, 1, 3, 6, 9, 12, 21],
@@ -31,6 +35,9 @@ export const sanityTheme: RootTheme = {
   ],
   space: [0, 8, 12, 20, 32, 52, 84, 136, 220, 356],
   input: {
+    border: {
+      width: 1,
+    },
     checkbox: {
       size: 17,
     },

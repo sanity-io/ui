@@ -180,27 +180,27 @@ export const color = createColorTheme({
       enabled:
         mode === 'ghost'
           ? {...muted.enabled, bg: base.bg, border: base.border}
-          : {...solid.enabled, border: base.bg},
+          : {...solid.enabled, border: solid.enabled.bg},
       hovered: {
         ...solid.hovered,
-        border: base.bg,
+        border: solid.hovered.bg,
       },
       pressed: {
         ...solid.pressed,
-        border: base.bg,
+        border: solid.pressed.bg,
       },
       selected: {
         ...solid.selected,
-        border: base.bg,
+        border: solid.selected.bg,
       },
       disabled:
         mode === 'ghost'
           ? {...muted.disabled, bg: base.bg, border: muted.disabled.bg}
-          : {...solid.disabled, border: base.bg},
+          : {...solid.disabled, border: solid.disabled.bg},
     }
   },
 
-  input: ({base, dark, mode}) => {
+  input: ({base, dark, mode, state}) => {
     const mix = dark ? screen : multiply
 
     if (mode === 'invalid') {
@@ -211,6 +211,24 @@ export const color = createColorTheme({
         fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         border: mix(base.bg, tints[dark ? 800 : 200].hex),
         placeholder: mix(base.bg, tints[dark ? 300 : 700].hex),
+      }
+    }
+
+    if (state === 'hovered') {
+      return {
+        bg: base.bg,
+        fg: base.fg,
+        border: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
+        placeholder: mix(base.bg, hues.gray[dark ? 300 : 700].hex),
+      }
+    }
+
+    if (state === 'disabled') {
+      return {
+        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
+        fg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
+        placeholder: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
       }
     }
 

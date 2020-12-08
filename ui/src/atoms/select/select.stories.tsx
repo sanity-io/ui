@@ -19,7 +19,7 @@ export const plain = () => {
             Select
           </Label>
 
-          <Select disabled={disabled} id="select">
+          <Select disabled={disabled} id="select" radius={3}>
             <option>Test</option>
             <option>Test asdadsas d</option>
             <option>Test asd asda</option>

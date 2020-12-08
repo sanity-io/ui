@@ -12,6 +12,10 @@ export const studioTheme: RootTheme = {
   },
   color,
   container: [320, 640, 960, 1280, 1600, 1920],
+  focusRing: {
+    offset: 1,
+    width: 2,
+  },
   fonts,
   media: [320, 640, 960, 1280, 1600, 1920],
   radius: [0, 1, 3, 6, 9, 12, 21],
@@ -44,6 +48,9 @@ export const studioTheme: RootTheme = {
       padding: 4,
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
+    },
+    border: {
+      width: 1,
     },
   },
   // styles: {

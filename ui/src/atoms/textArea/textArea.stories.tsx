@@ -62,7 +62,7 @@ export const plain = () => {
       <Card padding={4}>
         <Stack space={3}>
           <Text as="label" htmlFor="text-area-example" size={1} weight="semibold">
-            TextInput
+            TextArea
           </Text>
           <TextArea
             border={border}

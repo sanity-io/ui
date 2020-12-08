@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
+import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
 
 export function radioBaseStyles() {
   return css`
@@ -12,8 +13,8 @@ export function radioBaseStyles() {
 
 export function inputElementStyles({theme}: ThemeProps) {
   const color = theme.sanity.color.input
-  const {markSize, size} = theme.sanity.input.radio
-  const dist = (size - markSize) / 2
+  const {focusRing, input} = theme.sanity
+  const dist = (input.radio.size - input.radio.markSize) / 2
 
   return css`
     appearance: none;
@@ -27,32 +28,32 @@ export function inputElementStyles({theme}: ThemeProps) {
     z-index: 1;
     padding: 0;
     margin: 0;
-    border-radius: ${rem(size / 2)};
+    border-radius: ${rem(input.radio.size / 2)};
 
     & + span {
       display: block;
       position: relative;
-      height: ${rem(size)};
-      width: ${rem(size)};
-      border-radius: ${rem(size / 2)};
+      height: ${rem(input.radio.size)};
+      width: ${rem(input.radio.size)};
+      border-radius: ${rem(input.radio.size / 2)};
       background: ${color.default.enabled.bg};
-      box-shadow: 0 0 0 1px ${color.default.enabled.border};
+      box-shadow: ${borderStyle(input, color.default.enabled.border)};
 
       &::after {
         content: '';
         position: absolute;
         top: ${rem(dist)};
         left: ${rem(dist)};
-        height: ${rem(markSize)};
-        width: ${rem(markSize)};
-        border-radius: ${rem(markSize / 2)};
+        height: ${rem(input.radio.markSize)};
+        width: ${rem(input.radio.markSize)};
+        border-radius: ${rem(input.radio.markSize / 2)};
         background: ${color.default.enabled.fg};
         opacity: 0;
       }
     }
 
     &:focus + span {
-      box-shadow: 0 0 0 2px var(--card-focus-ring-color);
+      box-shadow: ${focusRingStyle(true, focusRing, input, color.default.enabled.border)};
     }
 
     &:checked + span::after {

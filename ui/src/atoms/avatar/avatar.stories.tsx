@@ -8,7 +8,13 @@ export default {
   decorators: [withCentered, withKnobs],
 }
 
-export const plain = () => {
+export const asButton = () => {
+  const size = select('Size', {'0 (default)': 0, '1': 1, '2': 2}, 0, 'Props')
+
+  return <Avatar as="button" color="red" initials="uq" size={size} />
+}
+
+export const avatarStack = () => {
   const size = select('Size', {'0 (default)': 0, '1': 1, '2': 2}, 0, 'Props')
 
   return (
