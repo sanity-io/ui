@@ -6,7 +6,7 @@ import {focusRingStyle} from '../../styles/_internal/focusRing'
 export function switchBaseStyles() {
   return css`
     position: relative;
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: inline-block;
     }
   `
@@ -43,7 +43,7 @@ export function switchRepresentationStyles(props: ThemeProps) {
     --switch-bg-color: ${color.default.enabled.bg};
     --switch-fg-color: ${color.default.enabled.fg};
 
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: block;
     }
     position: relative;
