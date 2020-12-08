@@ -42,18 +42,27 @@ const inputColor = ({theme}: ThemeProps) => {
   return css`
     background-color: ${color.default.enabled.bg};
     color: ${color.default.enabled.fg};
-    box-shadow: ${borderStyle(input, color.default.enabled.border)};
+    box-shadow: ${borderStyle({
+      color: color.default.enabled.border,
+      width: input.border.width,
+    })};
 
     @media (hover: hover) {
       &:not(:disabled):hover {
         background-color: ${color.default.hovered.bg};
         color: ${color.default.hovered.fg};
-        box-shadow: ${borderStyle(input, color.default.hovered.border)};
+        box-shadow: ${borderStyle({
+          color: color.default.hovered.border,
+          width: input.border.width,
+        })};
       }
     }
 
     &:not(:disabled):focus {
-      box-shadow: ${focusRingStyle(true, focusRing, input, color.default.enabled.border)};
+      box-shadow: ${focusRingStyle({
+        border: {width: input.border.width, color: color.default.enabled.border},
+        focusRing,
+      })};
     }
 
     &:not(:disabled):focus:not(:focus-visible) {
@@ -64,7 +73,10 @@ const inputColor = ({theme}: ThemeProps) => {
       opacity: 1;
       background-color: ${color.default.disabled.bg};
       color: ${color.default.disabled.fg};
-      box-shadow: ${borderStyle(input, color.default.disabled.border)};
+      box-shadow: ${borderStyle({
+        color: color.default.disabled.border,
+        width: input.border.width,
+      })};
     }
   `
 }

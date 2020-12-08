@@ -37,7 +37,10 @@ export function inputElementStyles({theme}: ThemeProps) {
       width: ${rem(input.radio.size)};
       border-radius: ${rem(input.radio.size / 2)};
       background: ${color.default.enabled.bg};
-      box-shadow: ${borderStyle(input, color.default.enabled.border)};
+      box-shadow: ${borderStyle({
+        color: color.default.enabled.border,
+        width: input.border.width,
+      })};
 
       &::after {
         content: '';
@@ -53,7 +56,10 @@ export function inputElementStyles({theme}: ThemeProps) {
     }
 
     &:focus + span {
-      box-shadow: ${focusRingStyle(true, focusRing, input, color.default.enabled.border)};
+      box-shadow: ${focusRingStyle({
+        border: {width: input.border.width, color: color.default.enabled.border},
+        focusRing,
+      })};
     }
 
     &:checked + span::after {

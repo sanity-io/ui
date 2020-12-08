@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {focusRingStyle} from '../../styles/_internal/focusRing'
+import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
@@ -36,11 +36,18 @@ export function buttonBaseStyles() {
   `
 }
 
+const buttonTheme = {border: {width: 1}}
+
 export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} & ThemeProps) {
   const {theme, uiMode} = props
   const {focusRing} = theme.sanity
+  const base = theme.sanity.color.base
   const mode = theme.sanity.color.button[uiMode] || theme.sanity.color.button.default
   const color = mode[props.tone] || mode.default
+  const border = {
+    width: buttonTheme.border.width,
+    color: 'var(--card-border-color)',
+  }
 
   return css`
     --card-bg-color: ${color.enabled.bg};
@@ -49,6 +56,7 @@ export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} 
 
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
+    box-shadow: ${borderStyle(border)};
 
     &:disabled,
     &[data-disabled='true'] {
@@ -59,7 +67,7 @@ export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} 
 
     &:not([data-disabled='true']) {
       &:focus {
-        box-shadow: ${focusRingStyle(true, focusRing, {border: {width: 1}}, color.enabled.border)};
+        box-shadow: ${focusRingStyle({base, border, focusRing})};
       }
 
       &:focus:not(:focus-visible) {

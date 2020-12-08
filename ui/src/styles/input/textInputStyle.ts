@@ -116,25 +116,39 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
       // enabled
       color: color.default.enabled.fg,
       backgroundColor: color.default.enabled.bg,
-      boxShadow: border ? borderStyle(input, color.default.enabled.border) : undefined,
+      boxShadow: border
+        ? borderStyle({color: color.default.enabled.border, width: input.border.width})
+        : undefined,
 
       // invalid
       '*:not(:disabled):invalid + &': {
         color: color.invalid.enabled.fg,
         backgroundColor: color.invalid.enabled.bg,
-        boxShadow: border ? borderStyle(input, color.invalid.enabled.border) : 'none',
+        boxShadow: border
+          ? borderStyle({color: color.invalid.enabled.border, width: input.border.width})
+          : 'none',
       },
 
       // focused
       '*:not(:disabled):focus + &': {
-        boxShadow: focusRingStyle(border, focusRing, input, color.default.enabled.border),
+        boxShadow: focusRingStyle({
+          border: border
+            ? {color: color.default.enabled.border, width: input.border.width}
+            : undefined,
+          focusRing,
+        }),
       },
 
       // disabled
       '*:disabled + &': {
         color: color.default.disabled.fg,
         backgroundColor: color.default.disabled.bg,
-        boxShadow: border ? borderStyle(input, color.default.disabled.border) : 'none',
+        boxShadow: border
+          ? borderStyle({
+              color: color.default.disabled.border,
+              width: input.border.width,
+            })
+          : 'none',
       },
 
       // hovered
@@ -145,7 +159,12 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
         },
 
         '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
-          boxShadow: border ? borderStyle(input, color.default.hovered.border) : 'none',
+          boxShadow: border
+            ? borderStyle({
+                color: color.default.hovered.border,
+                width: input.border.width,
+              })
+            : 'none',
         },
       },
     },

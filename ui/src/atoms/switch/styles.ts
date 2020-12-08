@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
+import {focusRingStyle} from '../../styles/_internal/focusRing'
 
 /* Root */
 export function switchBaseStyles() {
@@ -35,7 +36,7 @@ export function switchInputStyles() {
 /* Representation */
 export function switchRepresentationStyles(props: ThemeProps) {
   const {theme} = props
-  const {switch: switchInput} = theme.sanity.input
+  const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.button.default
 
   return css`
@@ -46,17 +47,16 @@ export function switchRepresentationStyles(props: ThemeProps) {
       display: block;
     }
     position: relative;
-    width: ${rem(switchInput.width)};
-    height: ${rem(switchInput.height)};
-    border-radius: ${rem(switchInput.height / 2)};
+    width: ${rem(input.switch.width)};
+    height: ${rem(input.switch.height)};
+    border-radius: ${rem(input.switch.height / 2)};
 
     /* Make sure it’s not possible to interact with the wrapper element */
     pointer-events: none;
 
     /* Focus styles */
     input:focus + & {
-      /* @todo: Use focus ring color from card theme */
-      box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+      box-shadow: ${focusRingStyle({focusRing})};
     }
 
     input:focus:not(:focus-visible) + & {
@@ -88,7 +88,7 @@ export function switchRepresentationStyles(props: ThemeProps) {
 /* Track */
 export function switchTrackStyles(props: ThemeProps) {
   const {theme} = props
-  const {switch: switchInput} = theme.sanity.input
+  const {input} = theme.sanity
 
   return css`
     &&:not([hidden]) {
@@ -98,9 +98,9 @@ export function switchTrackStyles(props: ThemeProps) {
     position: absolute;
     left: 0;
     top: 0;
-    width: ${rem(switchInput.width)};
-    height: ${rem(switchInput.height)};
-    border-radius: ${rem(switchInput.height / 2)};
+    width: ${rem(input.switch.width)};
+    height: ${rem(input.switch.height)};
+    border-radius: ${rem(input.switch.height / 2)};
   `
 }
 
@@ -109,11 +109,11 @@ export function switchThumbStyles(
   props: {checked?: boolean; indeterminate?: boolean} & ThemeProps
 ) {
   const {indeterminate, theme} = props
-  const {switch: switchInput} = theme.sanity.input
-  const trackWidth = switchInput.width
-  const trackHeight = switchInput.height
-  const trackPadding = switchInput.padding
-  const size = trackHeight - switchInput.padding * 2
+  const {input} = theme.sanity
+  const trackWidth = input.switch.width
+  const trackHeight = input.switch.height
+  const trackPadding = input.switch.padding
+  const size = trackHeight - input.switch.padding * 2
   const checkedOffset = trackWidth - trackPadding * 2 - size
   const indeterminateOffset = trackWidth / 2 - size / 2 - trackPadding
   const checked = indeterminate !== true && props.checked === true
@@ -129,8 +129,8 @@ export function switchThumbStyles(
     width: ${rem(size)};
     border-radius: ${rem(size / 2)};
     transition-property: transform;
-    transition-duration: ${switchInput.transitionDurationMs}ms;
-    transition-timing-function: ${switchInput.transitionTimingFunction};
+    transition-duration: ${input.switch.transitionDurationMs}ms;
+    transition-timing-function: ${input.switch.transitionTimingFunction};
     background: var(--switch-fg-color);
     transform: translate3d(0, 0, 0);
 
