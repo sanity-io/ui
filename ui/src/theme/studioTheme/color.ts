@@ -153,26 +153,25 @@ export const color = createColorTheme({
       return {
         enabled: {
           ...muted.enabled,
-          bg: 'transparent',
-          border: 'transparent',
+          bg: base.bg,
+          border: base.bg,
         },
         hovered: {
           ...muted.hovered,
           bg: muted.enabled.bg,
-          border: 'transparent',
+          border: muted.enabled.bg,
         },
         pressed: {
           ...muted.pressed,
-          border: 'transparent',
+          border: muted.pressed.bg,
         },
         disabled: {
           ...muted.disabled,
-          bg: 'transparent',
-          border: 'transparent',
+          border: muted.disabled.bg,
         },
         selected: {
           ...muted.selected,
-          border: 'transparent',
+          border: muted.selected.bg,
         },
       }
     }
@@ -180,24 +179,24 @@ export const color = createColorTheme({
     return {
       enabled:
         mode === 'ghost'
-          ? {...muted.enabled, bg: 'transparent', border: base.border}
-          : {...solid.enabled, border: 'transparent'},
+          ? {...muted.enabled, bg: base.bg, border: base.border}
+          : {...solid.enabled, border: base.bg},
       hovered: {
         ...solid.hovered,
-        border: 'transparent',
+        border: base.bg,
       },
       pressed: {
         ...solid.pressed,
-        border: 'transparent',
+        border: base.bg,
       },
       selected: {
         ...solid.selected,
-        border: 'transparent',
+        border: base.bg,
       },
       disabled:
         mode === 'ghost'
-          ? {...muted.disabled, bg: 'transparent', border: muted.disabled.bg}
-          : {...solid.disabled, border: 'transparent'},
+          ? {...muted.disabled, bg: base.bg, border: muted.disabled.bg}
+          : {...solid.disabled, border: base.bg},
     }
   },
 

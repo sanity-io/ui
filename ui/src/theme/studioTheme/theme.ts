@@ -46,16 +46,16 @@ export const studioTheme: RootTheme = {
       transitionTimingFunction: 'ease-out',
     },
   },
-  styles: {
-    button: {
-      root: {
-        transition: 'background-color 100ms,border-color 100ms,color 100ms',
-      },
-    },
-    card: {
-      root: {
-        transition: 'background-color 100ms,border-color 100ms,color 100ms',
-      },
-    },
-  },
+  // styles: {
+  //   button: {
+  //     root: {
+  //       transition: 'background-color 100ms,border-color 100ms,color 100ms',
+  //     },
+  //   },
+  //   card: {
+  //     root: {
+  //       transition: 'background-color 100ms,border-color 100ms,color 100ms',
+  //     },
+  //   },
+  // },
 }
