@@ -12,7 +12,7 @@ export function checkboxBaseStyles() {
 export function inputElementStyles(props: ThemeProps) {
   const {theme} = props
   const color = theme.sanity.color.input
-  const {focusRing, input} = theme.sanity
+  const {focusRing, input, radius} = theme.sanity
 
   return css`
     position: absolute;
@@ -36,7 +36,7 @@ export function inputElementStyles(props: ThemeProps) {
         color: color.default.enabled.border,
         width: input.border.width,
       })};
-      border-radius: 3px;
+      border-radius: ${rem(radius[2])};
       line-height: 1;
       background: ${color.default.enabled.bg};
 
