@@ -3,7 +3,6 @@ import styled, {css} from 'styled-components'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 import {childrenToElementArray} from '../helpers'
 import {AvatarCounter} from './avatarCounter'
-import {avatarTheme} from './theme'
 import {AvatarSize} from './types'
 
 function avatarStackStyle() {
@@ -22,12 +21,19 @@ function avatarStackStyle() {
 
 function responsiveAvatarStackSizeStyle(props: {size: AvatarSize | AvatarSize[]} & ThemeProps) {
   const {theme} = props
+  const {avatar, media} = theme.sanity
 
-  return responsive(theme.sanity.media, getResponsiveProp(props.size), (size) => ({
-    '& > div + div': {
-      marginLeft: rem(avatarTheme.distance[size]),
-    },
-  }))
+  return responsive(media, getResponsiveProp(props.size), (size) => {
+    const avatarSize = avatar.sizes[size]
+
+    if (!avatarSize) return {}
+
+    return {
+      '& > div + div': {
+        marginLeft: rem(avatarSize.distance),
+      },
+    }
+  })
 }
 
 const Root = styled.div<{size: AvatarSize | AvatarSize[]}>(

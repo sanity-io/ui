@@ -1,4 +1,6 @@
 export interface ThemeAvatar {
-  distance: number[]
-  size: number[]
+  sizes: {
+    distance: number
+    size: number
+  }[]
 }

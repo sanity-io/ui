@@ -4,8 +4,11 @@ import {fonts} from './fonts'
 
 export const studioTheme: RootTheme = {
   avatar: {
-    distance: [-3, -6, -9],
-    size: [23, 35, 55],
+    sizes: [
+      {distance: -3, size: 23},
+      {distance: -6, size: 35},
+      {distance: -9, size: 55},
+    ],
   },
   button: {
     textWeight: 'medium',
