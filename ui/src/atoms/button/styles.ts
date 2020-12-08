@@ -1,6 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
+import {ThemeColorButtonState} from '../../theme'
 import {ButtonMode, ButtonTone} from './types'
 
 export function buttonBaseStyles() {
@@ -38,63 +39,43 @@ export function buttonBaseStyles() {
 
 const buttonTheme = {border: {width: 1}}
 
+function buttonColorVarsStyle(color: ThemeColorButtonState) {
+  return {
+    '--card-bg-color': color.bg,
+    '--card-fg-color': color.fg,
+    '--card-border-color': color.border,
+  }
+}
+
 export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} & ThemeProps) {
   const {theme, uiMode} = props
   const {focusRing} = theme.sanity
   const base = theme.sanity.color.base
   const mode = theme.sanity.color.button[uiMode] || theme.sanity.color.button.default
   const color = mode[props.tone] || mode.default
-  const border = {
-    width: buttonTheme.border.width,
-    color: 'var(--card-border-color)',
-  }
+  const border = {width: buttonTheme.border.width, color: 'var(--card-border-color)'}
 
-  return css`
-    --card-bg-color: ${color.enabled.bg};
-    --card-fg-color: ${color.enabled.fg};
-    --card-border-color: ${color.enabled.border};
-
-    background-color: var(--card-bg-color);
-    color: var(--card-fg-color);
-    box-shadow: ${borderStyle(border)};
-
-    &:disabled,
-    &[data-disabled='true'] {
-      --card-bg-color: ${color.disabled.bg};
-      --card-fg-color: ${color.disabled.fg};
-      --card-border-color: ${color.disabled.border};
-    }
-
-    &:not([data-disabled='true']) {
-      &:focus {
-        box-shadow: ${focusRingStyle({base, border, focusRing})};
-      }
-
-      &:focus:not(:focus-visible) {
-        box-shadow: none;
-      }
-
-      @media (hover: hover) {
-        &:hover {
-          --card-bg-color: ${color.hovered.bg};
-          --card-fg-color: ${color.hovered.fg};
-          --card-border-color: ${color.hovered.border};
-        }
-
-        &:active {
-          --card-bg-color: ${color.pressed.bg};
-          --card-fg-color: ${color.pressed.fg};
-          --card-border-color: ${color.pressed.border};
-        }
-
-        &[data-selected] {
-          --card-bg-color: ${color.selected.bg};
-          --card-fg-color: ${color.selected.fg};
-          --card-border-color: ${color.selected.border};
-        }
-      }
-    }
-
-    ${theme.sanity.styles?.button?.root}
-  `
+  return [
+    buttonColorVarsStyle(color.enabled),
+    {
+      backgroundColor: 'var(--card-bg-color)',
+      color: 'var(--card-fg-color)',
+      boxShadow: borderStyle(border),
+      '&:disabled, &[data-disabled="true"]': buttonColorVarsStyle(color.disabled),
+      "&:not([data-disabled='true'])": {
+        '&:focus': {
+          boxShadow: focusRingStyle({base, border, focusRing}),
+        },
+        '&:focus:not(:focus-visible)': {
+          boxShadow: 'none',
+        },
+        '@media (hover: hover)': {
+          '&:hover': buttonColorVarsStyle(color.hovered),
+          '&:active': buttonColorVarsStyle(color.pressed),
+          '&[data-selected]': buttonColorVarsStyle(color.selected),
+        },
+      },
+    },
+    theme.sanity.styles?.button?.root,
+  ]
 }
