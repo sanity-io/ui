@@ -1,17 +1,22 @@
-import {Box, Button, Placement, Popover, Text} from '@sanity/ui'
-import {boolean, withKnobs, select} from '@storybook/addon-knobs'
+import {Box, Button, Card, Placement, Popover, Text} from '@sanity/ui'
+import {boolean, withKnobs, select, text} from '@storybook/addon-knobs'
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
-import {ThemeColorToneKey} from 'ui/src/theme'
-import {LayerProvider, useLayer} from '../../utils'
-import {withCentered} from '~/storybook/decorators'
+import {ThemeColorToneKey} from '../../theme'
+import {LayerProvider, PortalProvider, useLayer} from '../../utils'
 
 export default {
   title: 'Atoms/Popover',
-  decorators: [withCentered, withKnobs],
+  decorators: [withKnobs],
 }
 
 export const plain = () => {
-  const open = boolean('Open', false, 'Props')
+  const arrow = boolean('Arrow', true, 'Props')
+
+  const content = text('Content', 'Hello, world', 'Props')
+
+  const constrainSize = boolean('Constrain size', false, 'Props')
+
+  const open = boolean('Open', true, 'Props')
 
   const padding = select(
     'Padding',
@@ -25,7 +30,7 @@ export const plain = () => {
       '6': 6,
       '7': 7,
     },
-    0,
+    3,
     'Props'
   )
 
@@ -49,6 +54,10 @@ export const plain = () => {
     'Props'
   )
 
+  const portal = boolean('Portal', true, 'Props')
+
+  const preventOverflow = boolean('Prevent overflow', false, 'Props')
+
   const radius = select(
     'Radius',
     {
@@ -60,20 +69,62 @@ export const plain = () => {
       '5': 5,
       '6': 6,
     },
-    0,
+    2,
     'Props'
   )
 
+  const width = select(
+    'Width',
+    {
+      Auto: 'auto',
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+    },
+    'auto',
+    'Props'
+  )
+
+  const props = {
+    arrow,
+    content: <Text>{content}</Text>,
+    constrainSize,
+    open,
+    padding,
+    placement,
+    portal,
+    preventOverflow,
+    radius,
+    width,
+  }
+
+  return <PropsExample {...props} />
+}
+
+function PropsExample(props: any) {
+  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+
   return (
-    <Popover
-      content={<Text>Popover content</Text>}
-      open={open}
-      padding={padding}
-      placement={placement}
-      radius={radius}
-    >
-      <Button text="Hello" />
-    </Popover>
+    <PortalProvider element={portalElement}>
+      <div
+        style={{
+          height: 'calc(100vh - 120px)',
+          position: 'relative',
+          margin: 60,
+          overflow: 'auto',
+          outline: '1px solid red',
+        }}
+      >
+        <Card padding={4} style={{padding: '150vh 0', textAlign: 'center'}}>
+          <Popover {...props}>
+            <Button text="Hello" />
+          </Popover>
+        </Card>
+        <div ref={setPortalElement} />
+      </div>
+    </PortalProvider>
   )
 }
 

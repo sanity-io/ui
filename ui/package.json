@@ -29,6 +29,7 @@
     "@sanity/color": "^2.0.9",
     "@sanity/icons": "^1.0.0-beta.3",
     "framer-motion": "^2.9.4",
+    "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.1",
     "react-popper": "^2.2.4",
     "react-refractor": "^2.1.2"
