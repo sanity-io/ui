@@ -2,17 +2,23 @@ import React from 'react'
 import styled, {css} from 'styled-components'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 import {Text} from '../text'
-import {avatarTheme} from './theme'
 import {AvatarSize} from './types'
 
-function responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize | AvatarSize[]} & ThemeProps) {
+function responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {theme} = props
+  const {avatar, media} = theme.sanity
 
-  return responsive(theme.sanity.media, getResponsiveProp(props.$size), (size) => ({
-    borderRadius: rem(avatarTheme.size[size] / 2),
-    minWidth: rem(avatarTheme.size[size]),
-    height: rem(avatarTheme.size[size]),
-  }))
+  return responsive(media, props.$size, (size) => {
+    const avatarSize = avatar.sizes[size]
+
+    if (!avatarSize) return {}
+
+    return {
+      borderRadius: rem(avatarSize.size / 2),
+      minWidth: rem(avatarSize.size),
+      height: rem(avatarSize.size),
+    }
+  })
 }
 
 function avatarCounterBaseStyle(props: ThemeProps) {
@@ -35,7 +41,7 @@ function avatarCounterBaseStyle(props: ThemeProps) {
   `
 }
 
-const Root = styled.div<{$size: AvatarSize | AvatarSize[]}>(
+const Root = styled.div<{$size: AvatarSize[]}>(
   responsiveAvatarCounterSizeStyle,
   avatarCounterBaseStyle
 )
@@ -46,10 +52,12 @@ interface AvatarCounterProps {
   tone?: 'navbar'
 }
 
-export function AvatarCounter({count, size = 0, tone}: AvatarCounterProps) {
+export function AvatarCounter({count, size: sizeProp = 0, tone}: AvatarCounterProps) {
+  const size: AvatarSize[] = getResponsiveProp(sizeProp, [0])
+
   return (
     <Root $size={size} data-tone={tone}>
-      <Text as="span" size={size}>
+      <Text as="span" size={size.map((s) => (s === 0 ? 0 : s + 1))}>
         <strong>{count}</strong>
       </Text>
     </Root>

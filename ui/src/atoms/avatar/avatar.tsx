@@ -6,7 +6,6 @@ import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/_internal/focusRing'
 import {ThemeColorSpotKey, useTheme} from '../../theme'
 import {Text} from '../text'
-import {avatarTheme} from './theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from './types'
 
 export interface AvatarProps {
@@ -22,24 +21,30 @@ export interface AvatarProps {
   title?: string
 }
 
-function responsiveAvatarSizeStyle(props: {size: number | number[]} & ThemeProps) {
+function responsiveAvatarSizeStyle(props: {size: AvatarSize[]} & ThemeProps) {
   const {theme} = props
-  const {media} = theme.sanity
+  const {avatar, media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.size), (size) => ({
-    width: rem(avatarTheme.size[size]),
-    height: rem(avatarTheme.size[size]),
-    borderRadius: rem(avatarTheme.size[size] / 2),
+  return responsive(media, props.size, (size) => {
+    const avatarSize = avatar.sizes[size]
 
-    '& > svg': {
-      width: rem(avatarTheme.size[size]),
-      height: rem(avatarTheme.size[size]),
-      borderRadius: rem(avatarTheme.size[size] / 2),
-    },
-  }))
+    if (!avatarSize) return {}
+
+    return {
+      width: rem(avatarSize.size),
+      height: rem(avatarSize.size),
+      borderRadius: rem(avatarSize.size / 2),
+
+      '& > svg': {
+        width: rem(avatarSize.size),
+        height: rem(avatarSize.size),
+        borderRadius: rem(avatarSize.size / 2),
+      },
+    }
+  })
 }
 
-const Root = styled.div<{uiColor: string; size: AvatarSize | AvatarSize[]}>(
+const Root = styled.div<{uiColor: string; size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
   ({theme, uiColor}: {uiColor: string} & ThemeProps) => {
     const {focusRing} = theme.sanity
@@ -123,13 +128,11 @@ const Arrow = styled.div`
 
 const BgStroke = styled.ellipse`
   stroke-width: 4px;
-  /* vector-effect: non-scaling-stroke; */
   stroke: var(--card-bg-color);
 `
 
 const Stroke = styled.ellipse`
   stroke-width: 3px;
-  /* vector-effect: non-scaling-stroke; */
 
   ${Root}[data-status='editing'] & {
     stroke-dasharray: 2 4;
@@ -170,16 +173,18 @@ export const Avatar = forwardRef(
       arrowPosition: arrowPositionProp,
       animateArrowFrom,
       status = 'online',
-      size = 0,
+      size: sizeProp,
       ...restProps
     } = props
     const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
+    const size: AvatarSize[] = getResponsiveProp(sizeProp, [0])
     const theme = useTheme()
     const color = theme.sanity.color.spot[colorKey] || theme.sanity.color.spot.gray
 
     // @todo: remove this
-    const _sizeRem = avatarTheme.size[0]
-    const _radius = avatarTheme.size[0] / 2
+    const avatarSize = theme.sanity.avatar.sizes[size[0]]
+    const _sizeRem = avatarSize.size
+    const _radius = _sizeRem / 2
 
     const elementId = useId()
     const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
@@ -267,21 +272,9 @@ export const Avatar = forwardRef(
         {(imageFailed || !src) && initials && (
           <>
             <Initials>
-              {size === 0 && (
-                <Text as="span" size={0}>
-                  <strong>{initials}</strong>
-                </Text>
-              )}
-              {size === 1 && (
-                <Text as="span" size={2}>
-                  <strong>{initials}</strong>
-                </Text>
-              )}
-              {size === 2 && (
-                <Text as="span" size={3}>
-                  <strong>{initials}</strong>
-                </Text>
-              )}
+              <Text as="span" size={size.map((s) => (s === 0 ? 0 : s + 1))}>
+                <strong>{initials}</strong>
+              </Text>
             </Initials>
           </>
         )}
