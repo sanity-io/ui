@@ -167,7 +167,8 @@ export const color = createColorTheme({
         },
         disabled: {
           ...muted.disabled,
-          border: muted.disabled.bg,
+          bg: base.bg,
+          border: base.bg,
         },
         selected: {
           ...muted.selected,
@@ -191,7 +192,11 @@ export const color = createColorTheme({
           ...solid.selected,
           border: solid.selected.bg,
         },
-        disabled: {...muted.disabled, bg: base.bg, border: muted.disabled.bg},
+        disabled: {
+          ...muted.disabled,
+          bg: base.bg,
+          border: muted.disabled.border,
+        },
       }
     }
 
