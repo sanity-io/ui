@@ -176,11 +176,30 @@ export const color = createColorTheme({
       }
     }
 
+    if (mode === 'ghost') {
+      return {
+        enabled: {...muted.enabled, bg: base.bg, border: base.border},
+        hovered: {
+          ...solid.hovered,
+          border: solid.hovered.bg,
+        },
+        pressed: {
+          ...solid.pressed,
+          border: solid.pressed.bg,
+        },
+        selected: {
+          ...solid.selected,
+          border: solid.selected.bg,
+        },
+        disabled: {...muted.disabled, bg: base.bg, border: muted.disabled.bg},
+      }
+    }
+
     return {
-      enabled:
-        mode === 'ghost'
-          ? {...muted.enabled, bg: base.bg, border: base.border}
-          : {...solid.enabled, border: solid.enabled.bg},
+      enabled: {
+        ...solid.enabled,
+        border: solid.enabled.bg,
+      },
       hovered: {
         ...solid.hovered,
         border: solid.hovered.bg,
@@ -193,10 +212,10 @@ export const color = createColorTheme({
         ...solid.selected,
         border: solid.selected.bg,
       },
-      disabled:
-        mode === 'ghost'
-          ? {...muted.disabled, bg: base.bg, border: muted.disabled.bg}
-          : {...solid.disabled, border: solid.disabled.bg},
+      disabled: {
+        ...solid.disabled,
+        border: solid.disabled.bg,
+      },
     }
   },
 

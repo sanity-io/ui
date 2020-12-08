@@ -73,7 +73,7 @@ const Root = styled.div<{uiColor: string; size: AvatarSize | AvatarSize[]}>(
         outline: none;
 
         &:focus {
-          box-shadow: ${focusRingStyle(false, focusRing, {border: {width: 1}}, '')};
+          box-shadow: ${focusRingStyle({focusRing})};
         }
 
         &:focus:not(:focus-visible) {

@@ -32,7 +32,10 @@ export function inputElementStyles(props: ThemeProps) {
       height: ${rem(input.checkbox.size)};
       width: ${rem(input.checkbox.size)};
       box-sizing: border-box;
-      box-shadow: ${borderStyle(input, color.default.enabled.border)};
+      box-shadow: ${borderStyle({
+        color: color.default.enabled.border,
+        width: input.border.width,
+      })};
       border-radius: 3px;
       line-height: 1;
       background: ${color.default.enabled.bg};
@@ -52,7 +55,13 @@ export function inputElementStyles(props: ThemeProps) {
     }
 
     &:focus + span {
-      box-shadow: ${focusRingStyle(true, focusRing, input, color.default.enabled.border)};
+      box-shadow: ${focusRingStyle({
+        border: {
+          width: input.border.width,
+          color: color.default.enabled.border,
+        },
+        focusRing,
+      })};
     }
 
     &:checked + span > svg:first-child {
@@ -61,7 +70,10 @@ export function inputElementStyles(props: ThemeProps) {
 
     &:disabled + span {
       background: ${color.default.disabled.bg};
-      box-shadow: ${borderStyle(input, color.default.disabled.border)};
+      box-shadow: ${borderStyle({
+        width: input.border.width,
+        color: color.default.disabled.border,
+      })};
       color: ${color.default.disabled.fg};
     }
 
