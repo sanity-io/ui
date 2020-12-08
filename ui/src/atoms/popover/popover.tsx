@@ -79,7 +79,6 @@ const applyMaxSize: Modifier<any, any> = {
   phase: 'beforeWrite',
   requires: ['maxSize'],
   fn(opts) {
-    console.log('opts', opts)
     const {state} = opts
     const {width, height} = state.modifiersData.maxSize
 
