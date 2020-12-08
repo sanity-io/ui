@@ -11,15 +11,15 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/icons": "^1.0.0-beta.2",
-    "@sanity/logos": "^1.0.0-beta.1",
-    "@sanity/ui": "^1.0.0-beta.8",
+    "@sanity/icons": "^1.0.0-beta.3",
+    "@sanity/logos": "^1.0.0-beta.3",
+    "@sanity/ui": "^1.0.0-beta.23",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "@hot-loader/react-dom": "^17.0.0",
+    "@hot-loader/react-dom": "^17.0.1",
     "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^4.5.0",
     "react-hot-loader": "^4.13.0",

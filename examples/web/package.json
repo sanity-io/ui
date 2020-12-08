@@ -12,19 +12,16 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/color": "^2.0.7",
-    "@sanity/icons": "^1.0.0-beta.2",
-    "@sanity/logos": "^1.0.0-beta.1",
-    "@sanity/ui": "^1.0.0-beta.8",
-    "color-blend": "^3.0.0",
+    "@sanity/color": "^2.0.9",
+    "@sanity/icons": "^1.0.0-beta.3",
+    "@sanity/logos": "^1.0.0-beta.3",
+    "@sanity/ui": "^1.0.0-beta.23",
     "next": "^10.0.3",
-    "parse-color": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "@types/parse-color": "^1.0.0",
     "babel-plugin-styled-components": "^1.12.0"
   }
 }
