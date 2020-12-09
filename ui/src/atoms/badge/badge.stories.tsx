@@ -32,7 +32,7 @@ export const plain = () => {
       '6': 6,
       '7': 7,
     },
-    3,
+    1,
     'Props'
   )
 
@@ -48,7 +48,7 @@ export const plain = () => {
       '6': 6,
       '7': 7,
     },
-    3,
+    1,
     'Props'
   )
 
