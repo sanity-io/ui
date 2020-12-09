@@ -19,6 +19,13 @@ const iconOptions = Object.keys(icons).reduce((acc: {[key: string]: string}, key
 export const plain = () => {
   const disabled = boolean('Disabled', false, 'Props')
 
+  const fontSize = select(
+    'Font size',
+    {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4},
+    2,
+    'Props'
+  )
+
   const icon = select('Icon', {'(none)': '', ...iconOptions}, 'add-circle', 'Props') as IconSymbol
 
   const iconRight = select(
@@ -116,6 +123,7 @@ export const plain = () => {
       <Card padding={4}>
         <Button
           disabled={disabled}
+          fontSize={fontSize}
           icon={icon && icons[icon]}
           iconRight={iconRight && icons[iconRight]}
           justify={justify}

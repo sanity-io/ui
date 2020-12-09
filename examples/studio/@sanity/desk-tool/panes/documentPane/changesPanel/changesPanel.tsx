@@ -54,12 +54,12 @@ function ChangeItem() {
 
         <div>
           <Button
+            fontSize={1}
             icon="revert"
             padding={1}
             mode="bleed"
             text="Revert changes"
             tone="critical"
-            size={1}
             space={2}
           />
         </div>

@@ -7,9 +7,9 @@ import {Text} from '../text'
 import {select} from './styles'
 
 interface SelectProps {
+  fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
-  size?: number | number[]
   space?: number | number[]
   customValidity?: string
 }
@@ -17,9 +17,9 @@ interface SelectProps {
 const Root = styled.div(select.root)
 
 const Input = styled.select<{
+  fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
-  size?: number | number[]
   space?: number | number[]
 }>(select.input)
 
@@ -27,15 +27,15 @@ const IconBox = styled(Box)(select.iconBox)
 
 export const Select = forwardRef(
   (
-    props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as' | 'size'>,
+    props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
     forwardedRef: React.Ref<HTMLSelectElement>
   ) => {
     const {
       children,
       customValidity,
+      fontSize = 2,
       padding = 3,
       radius: radiusProp = 1,
-      size = 2,
       space = 3,
       ...restProps
     } = props
@@ -49,17 +49,17 @@ export const Select = forwardRef(
         <Input
           data-ui="Select"
           {...restProps}
+          fontSize={fontSize}
           padding={padding}
           radius={radiusProp}
           ref={ref}
           space={space}
-          size={size as any}
         >
           {children}
         </Input>
 
         <IconBox padding={padding}>
-          <Text size={size}>
+          <Text size={fontSize}>
             <ChevronDownIcon />
           </Text>
         </IconBox>

@@ -5,7 +5,7 @@ import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 export interface TextInputInputStyleProps {
-  size?: number | number[]
+  fontSize?: number | number[]
   weight?: ThemeFontWeightKey
 }
 
@@ -87,7 +87,7 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   const {theme} = props
   const {fonts, media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.size, [2]), (sizeIndex) => {
+  return responsive(media, getResponsiveProp(props.fontSize, [2]), (sizeIndex) => {
     const size = fonts.text.sizes[sizeIndex] || fonts.text.sizes[2]
 
     return {

@@ -16,7 +16,7 @@ import {ThemeFontWeightKey} from '../../theme'
 
 interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   border?: boolean
-  size?: number | number[]
+  fontSize?: number | number[]
   weight?: ThemeFontWeightKey
   customValidity?: string
 }
@@ -48,6 +48,7 @@ export const TextArea = forwardRef(
     const {
       border = true,
       disabled = false,
+      fontSize: fontSizeProp = [2],
       padding = [3],
       paddingX,
       customValidity,
@@ -57,7 +58,6 @@ export const TextArea = forwardRef(
       paddingLeft,
       paddingRight,
       radius = [1],
-      size: sizeProp = [2],
       ...restProps
     } = props
 
@@ -75,7 +75,7 @@ export const TextArea = forwardRef(
 
     useCustomValidity(ref, customValidity)
 
-    const size = getResponsiveProp(sizeProp)
+    const fontSize = getResponsiveProp(fontSizeProp)
 
     return (
       <Root>
@@ -85,8 +85,8 @@ export const TextArea = forwardRef(
             {...restProps}
             {...paddingProps}
             disabled={disabled}
+            fontSize={fontSize}
             ref={ref}
-            size={size}
           />
           <Presentation border={border} radius={radius} />
         </InputRoot>

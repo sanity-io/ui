@@ -28,6 +28,21 @@ export const custom = () => {
 
   const border = boolean('Border', true, 'Props')
 
+  const fontSize = Number(
+    select(
+      'Font size',
+      {
+        '0': '0',
+        '1': '1',
+        '2 (default)': '2',
+        '3': '3',
+        '4': '4',
+      },
+      '2',
+      'Props'
+    )
+  )
+
   const radius = Number(
     select(
       'Radius',
@@ -43,24 +58,9 @@ export const custom = () => {
     )
   )
 
-  const size = Number(
-    select(
-      'Size',
-      {
-        '0': '0',
-        '1': '1',
-        '2 (default)': '2',
-        '3': '3',
-        '4': '4',
-      },
-      '2',
-      'Props'
-    )
-  )
-
   return (
     <Card padding={4}>
-      <CustomExample border={border} data={data} radius={radius} size={size} />
+      <CustomExample border={border} data={data} fontSize={fontSize} radius={radius} />
     </Card>
   )
 }
@@ -68,13 +68,13 @@ export const custom = () => {
 function CustomExample({
   border,
   data,
+  fontSize,
   radius,
-  size,
 }: {
   border: boolean
   data: ExampleOption[]
+  fontSize: number
   radius: number
-  size: number
 }) {
   const [query, setQuery] = useState('')
 
@@ -114,13 +114,13 @@ function CustomExample({
         aria-describedby="custom-label"
         border={border}
         filterOption={filterOption}
+        fontSize={fontSize}
         id="custom"
         onChange={setQuery}
         options={options}
         radius={radius}
         renderOption={renderOption}
         renderValue={renderValue}
-        size={size}
         value={query}
       />
     </Stack>

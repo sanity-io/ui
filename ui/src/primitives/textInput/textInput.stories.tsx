@@ -22,8 +22,16 @@ export const plain = () => {
 
   const disabled = boolean('Disabled', false, 'Props')
 
+  const fontSize = select(
+    'Font size',
+    {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4},
+    2,
+    'Props'
+  )
+
   const icon = (select('Icon', {'(none)': '', ...symbolOptions}, 'add-circle', 'Props') ||
     undefined) as IconSymbol | undefined
+
   const iconRight = (select(
     'Icon (right)',
     {'(none)': '', ...symbolOptions},
@@ -64,8 +72,6 @@ export const plain = () => {
     'Props'
   )
 
-  const size = select('Size', {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4}, 2, 'Props')
-
   const space = select(
     'Space',
     {
@@ -100,13 +106,13 @@ export const plain = () => {
             border={border}
             customValidity={customValidity}
             disabled={disabled}
+            fontSize={fontSize}
             icon={icon && icons[icon]}
             iconRight={iconRight && icons[iconRight]}
             id="text-input-example"
             padding={padding}
             placeholder={placeholder}
             radius={radius}
-            size={size}
             space={space}
             weight={weight}
           />

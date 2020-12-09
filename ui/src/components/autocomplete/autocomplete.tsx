@@ -14,6 +14,7 @@ export interface BaseAutocompleteOption {
 export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   border?: boolean
   filterOption?: (query: string, option: Option) => boolean
+  fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode
   id: string
   loading?: boolean
@@ -26,7 +27,6 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   radius?: number | number[]
   renderOption?: (option: Option) => React.ReactElement
   renderValue?: (value: string, option?: Option) => string
-  size?: number | number[]
   suffix?: React.ReactNode
   value?: string
 }
@@ -96,6 +96,7 @@ const InnerAutocomplete = forwardRef(
     const {
       border = true,
       filterOption: filterOptionProp,
+      fontSize = 2,
       icon,
       id,
       loading,
@@ -107,7 +108,6 @@ const InnerAutocomplete = forwardRef(
       radius = 2,
       renderOption: renderOptionProp,
       renderValue = defaultRenderValue,
-      size = 2,
       value: valueProp = '',
       ...restProps
     } = props
@@ -282,7 +282,7 @@ const InnerAutocomplete = forwardRef(
           radius={radius}
           ref={setRef}
           role="combobox"
-          size={size}
+          fontSize={fontSize}
           spellCheck={false}
           value={query === null ? renderValue(value, currentOption) : query}
         />
@@ -292,11 +292,11 @@ const InnerAutocomplete = forwardRef(
             <Button
               aria-label="Clear"
               data-qa="clear-button"
+              fontSize={fontSize}
               icon="close"
               mode="bleed"
               onClick={handleClearButtonClick}
               padding={padding.map((v) => v - 2)}
-              size={size}
             />
           </ClearButtonBox>
         )}

@@ -15,6 +15,13 @@ export const plain = () => {
 
   const disabled = boolean('Disabled', false, 'Props')
 
+  const fontSize = select(
+    'Font size',
+    {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4},
+    2,
+    'Props'
+  )
+
   const padding = select(
     'Padding',
     {
@@ -48,8 +55,6 @@ export const plain = () => {
     'Props'
   )
 
-  const size = select('Size', {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4}, 2, 'Props')
-
   const weight = select(
     'Weight',
     {'Regular (default)': undefined, Semibold: 'semibold', Bold: 'bold'},
@@ -68,11 +73,11 @@ export const plain = () => {
             border={border}
             customValidity={customValidity}
             disabled={disabled}
+            fontSize={fontSize}
             id="text-area-example"
             padding={padding}
             placeholder={placeholder}
             radius={radius}
-            size={size}
             weight={weight}
           />
         </Stack>

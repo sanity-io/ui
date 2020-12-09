@@ -19,11 +19,11 @@ import {Text} from '../text'
 interface TextInputProps extends ResponsiveRadiusProps {
   border?: boolean
   customValidity?: string
+  fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode
   iconRight?: React.ComponentType | React.ReactNode
   padding?: number | number[]
   prefix?: React.ReactNode
-  size?: number | number[]
   space?: number | number[]
   suffix?: React.ReactNode
   type?:
@@ -94,18 +94,18 @@ const IconRightBox = styled(Box)`
 
 export const TextInput = forwardRef(
   (
-    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'size' | 'type'>,
+    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'>,
     forwardedRef: React.Ref<HTMLInputElement>
   ) => {
     const {
       border = true,
       disabled = false,
+      fontSize = 2,
       icon,
       iconRight,
       padding = 3,
       prefix,
       radius = 1,
-      size = 2,
       space = 3,
       suffix,
       customValidity,
@@ -135,7 +135,7 @@ export const TextInput = forwardRef(
             padding={padding}
             ref={ref}
             space={space}
-            size={size as any}
+            fontSize={fontSize}
             type={type}
           />
 
@@ -147,7 +147,7 @@ export const TextInput = forwardRef(
           >
             {icon && (
               <IconLeftBox padding={padding}>
-                <Text size={size}>
+                <Text size={fontSize}>
                   {isValidElement(icon) && icon}
                   {isValidElementType(icon) && createElement(icon)}
                 </Text>
@@ -156,7 +156,7 @@ export const TextInput = forwardRef(
 
             {iconRight && (
               <IconRightBox padding={padding}>
-                <Text size={size}>
+                <Text size={fontSize}>
                   {isValidElement(iconRight) && iconRight}
                   {isValidElementType(iconRight) && createElement(iconRight)}
                 </Text>

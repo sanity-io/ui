@@ -57,10 +57,10 @@ export function Navbar() {
                     <Button
                       aria-current={selected ? 'page' : undefined}
                       as="a"
+                      fontSize={[2, 2, 3]}
                       mode="bleed"
                       padding={[1, 2, 3]}
                       selected={selected}
-                      size={[2, 2, 3]}
                       text={route.title}
                     />
                   </Link>
@@ -81,11 +81,11 @@ export function Navbar() {
         <Box>
           <Button
             as="a"
+            fontSize={[2, 2, 3]}
             href="https://github.com/sanity-io/design"
             icon={GitHubMark}
             mode="bleed"
             rel="noopener noreferrer"
-            size={[2, 2, 3]}
             target="_blank"
           />
         </Box>

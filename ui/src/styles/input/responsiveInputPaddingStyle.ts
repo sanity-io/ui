@@ -2,8 +2,8 @@ import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 export interface TextInputResponsivePaddingStyleProps {
+  fontSize?: number | number[]
   padding?: number | number[]
-  size?: number | number[]
   space?: number | number[]
   iconLeft?: boolean
   iconRight?: boolean
@@ -16,7 +16,7 @@ export function responsiveInputPaddingStyle(
   const {fonts, media, space: spaceScale} = theme.sanity
   const padding = getResponsiveProp(props.padding, [0])
   const space = getResponsiveProp(props.space, [0])
-  const size = getResponsiveProp(props.size, [0])
+  const size = getResponsiveProp(props.fontSize, [0])
   const len = Math.max(padding.length, space.length, size.length)
   const _padding: number[] = []
   const _space: number[] = []

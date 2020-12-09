@@ -85,10 +85,10 @@ const textSize = (size: ThemeFontSize) => {
   return {fontSize: rem(size.fontSize), lineHeight: rem(size.lineHeight)}
 }
 
-const inputTextSize = ({theme, size}: {size?: number | number[]} & ThemeProps) => {
+const inputTextSize = ({theme, fontSize}: {fontSize?: number | number[]} & ThemeProps) => {
   const {sizes} = theme.sanity.fonts.text
 
-  return responsive(theme.sanity.media, getResponsiveProp(size), (sizeIndex) =>
+  return responsive(theme.sanity.media, getResponsiveProp(fontSize), (sizeIndex) =>
     textSize(sizes[sizeIndex] || sizes[2])
   )
 }

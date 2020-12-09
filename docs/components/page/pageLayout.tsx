@@ -59,10 +59,10 @@ export function PageLayout({children, structure}: PageLayoutProps) {
         <NarrowDeviceMenu padding={[2, 4]}>
           <Button
             aria-label="Menu"
+            fontSize={[2, 3, 4]}
             icon="menu"
             mode="bleed"
             onClick={handleMenuOpenClick}
-            size={[2, 3, 4]}
           />
         </NarrowDeviceMenu>
 
