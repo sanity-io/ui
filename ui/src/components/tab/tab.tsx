@@ -8,7 +8,7 @@ interface TabProps {
    */
   'aria-controls': string
   id: string
-  icon?: React.ComponentType
+  icon?: React.ComponentType | React.ReactNode
   focused?: boolean
   label?: React.ReactNode
   selected?: boolean
