@@ -7,8 +7,8 @@ import React, {
   useRef,
 } from 'react'
 import {isValidElementType} from 'react-is'
-import {Box, Card, Flex, Text} from '../../atoms'
 import {useForwardedRef} from '../../hooks'
+import {Box, Card, Flex, Text} from '../../primitives'
 import {ResponsivePaddingStyleProps, ResponsiveRadiusProps} from '../../styles'
 import {ThemeColorToneKey} from '../../theme'
 import {useMenu} from './hooks'

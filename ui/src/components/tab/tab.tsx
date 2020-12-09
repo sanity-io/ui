@@ -1,6 +1,6 @@
 import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
-import {Button} from '../../atoms'
 import {useForwardedRef} from '../../hooks'
+import {Button} from '../../primitives'
 
 interface TabProps {
   /**

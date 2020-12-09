@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {Inline, KBD} from '../../atoms'
+import {Inline, KBD} from '../../primitives'
 
 interface HotkeysProps {
   padding?: number | number[]

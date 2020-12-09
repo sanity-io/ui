@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import React from 'react'
-import {Box, Card, Flex, Stack, Text} from '../../atoms'
+import {Box, Card, Flex, Stack, Text} from '../../primitives'
 import {ThemeColorToneKey} from '../../theme'
 
 interface ToastProps {

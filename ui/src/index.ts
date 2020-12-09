@@ -1,4 +1,4 @@
-export * from './atoms'
+export * from './primitives'
 export * from './components'
 export * from './helpers'
 export * from './hooks'

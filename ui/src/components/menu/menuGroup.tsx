@@ -1,7 +1,7 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import React, {useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
-import {Box, Popover, Text} from '../../atoms'
+import {Box, Popover, Text} from '../../primitives'
 import {ThemeProps} from '../../styles'
 import {useMenu} from './hooks'
 import {Menu} from './menu'

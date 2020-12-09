@@ -1,7 +1,7 @@
 import {AnimatePresence, motion} from 'framer-motion'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box} from '../../atoms'
+import {Box} from '../../primitives'
 import {Layer} from '../../utils'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'

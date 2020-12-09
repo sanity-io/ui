@@ -1,5 +1,5 @@
 import React from 'react'
-import {Code} from '../atoms'
+import {Code} from '../primitives'
 
 interface ErrorBoundaryProps {
   onCatch: (params: {error: Error; info: React.ErrorInfo}) => void

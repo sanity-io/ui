@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {Card} from '../../atoms'
+import {Card} from '../../primitives'
 
 export const Root = styled.div`
   position: relative;

@@ -1,6 +1,6 @@
 import React, {forwardRef, useCallback, useState} from 'react'
 import styled from 'styled-components'
-import {Inline} from '../../atoms'
+import {Inline} from '../../primitives'
 
 interface TabListProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements

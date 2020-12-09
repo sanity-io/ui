@@ -1,7 +1,7 @@
 import React, {cloneElement, useCallback, useState} from 'react'
 import ReactIs from 'react-is'
-import {Popover} from '../../atoms'
 import {useClickOutside} from '../../hooks'
+import {Popover} from '../../primitives'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Placement} from '../../types'
 
