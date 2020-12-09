@@ -12,6 +12,7 @@ import {
   Container,
   Dialog,
   Flex,
+  LayerProvider,
   Menu,
   MenuButton,
   MenuDivider,
@@ -33,20 +34,23 @@ function EditInDialogButton() {
       <Button icon={AddIcon} mode="ghost" onClick={() => setOpen(true)} text="Add" />
 
       {open && (
-        <Dialog
-          header="Edit item"
-          id="pane-context-dialog"
-          onClose={() => setOpen(false)}
-          width={1}
-        >
-          <Box paddingX={4} paddingY={5}>
-            <Stack space={5}>
-              <StringFieldInput />
-              <StringFieldInput />
-              <StringFieldInput />
-            </Stack>
-          </Box>
-        </Dialog>
+        <LayerProvider zOffset={1000}>
+          <Dialog
+            header="Edit item"
+            id="pane-context-dialog"
+            onClose={() => setOpen(false)}
+            position="absolute"
+            width={1}
+          >
+            <Box paddingX={4} paddingY={5}>
+              <Stack space={5}>
+                <StringFieldInput />
+                <StringFieldInput />
+                <StringFieldInput />
+              </Stack>
+            </Box>
+          </Dialog>
+        </LayerProvider>
       )}
     </>
   )

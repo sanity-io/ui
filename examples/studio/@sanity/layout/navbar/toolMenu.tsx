@@ -1,5 +1,4 @@
 import {useLocation, useStudioToolPlugins} from '@sanity/base'
-import {Icon} from '@sanity/icons'
 import {Box, Button, Text, Tooltip} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
@@ -54,7 +53,7 @@ export function ToolMenu(props: {onHide: () => void; onShow: () => void}) {
               >
                 <Button
                   as="a"
-                  icon={tool.icon && <Icon symbol={tool.icon} />}
+                  icon={tool.icon}
                   href={toolIndex === 0 ? '/' : `/${tool.name}`}
                   mode="bleed"
                   onClick={handleLinkClick}

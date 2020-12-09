@@ -1,6 +1,7 @@
 import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} from '@sanity/base'
 import dashboardTool from '@sanity/dashboard/plugin'
 import deskTool from '@sanity/desk-tool/plugin'
+import {ChartUpwardIcon} from '@sanity/icons'
 import {Layout} from '@sanity/layout'
 import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import visionTool from '@sanity/vision/plugin'
@@ -29,7 +30,7 @@ const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
 
 const plugins = [
   deskTool({title: 'Content'}),
-  dashboardTool({icon: 'chart-upward', name: 'analytics', title: 'Analytics'}),
+  dashboardTool({icon: ChartUpwardIcon, name: 'analytics', title: 'Analytics'}),
   visionTool(),
 ]
 
