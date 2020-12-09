@@ -1,3 +1,4 @@
+import {AddIcon, ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
 import {
   Avatar,
   Card,
@@ -27,14 +28,14 @@ export const menu = () => (
         <MenuItem
           as="a"
           href="#"
-          icon="add"
+          icon={AddIcon}
           id="menu-item-1"
           onClick={preventMouseEvent}
           text="Foo"
         />
-        <MenuItem icon="add" id="menu-item-2" text="Bar" />
+        <MenuItem icon={AddIcon} id="menu-item-2" text="Bar" />
         <MenuDivider />
-        <MenuItem icon="add" iconRight="checkmark" id="menu-item-1" text="Baz" />
+        <MenuItem icon={AddIcon} iconRight="checkmark" id="menu-item-1" text="Baz" />
       </Menu>
     </Card>
   </LayerProvider>
@@ -47,17 +48,17 @@ export const menuButton = () => (
       id="menu-button"
       menu={
         <Menu>
-          <MenuItem icon="search" id="menu-item-1" onClick={action('Search')} text="Search" />
-          <MenuItem icon="clock" id="menu-item-2" onClick={action('Clock')} text="Clock" />
+          <MenuItem icon={SearchIcon} id="menu-item-1" onClick={action('Search')} text="Search" />
+          <MenuItem icon={ClockIcon} id="menu-item-2" onClick={action('Clock')} text="Clock" />
           <MenuItem
             disabled
-            icon="comment"
+            icon={CommentIcon}
             id="menu-item-3"
             onClick={action('Comment')}
             text="Comment"
           />
           <MenuDivider />
-          <MenuItem icon="expand" id="menu-item-4" onClick={action('Expand')} text="Expand" />
+          <MenuItem icon={ExpandIcon} id="menu-item-4" onClick={action('Expand')} text="Expand" />
         </Menu>
       }
     />
@@ -71,18 +72,18 @@ export const menuButtonWithGroup = () => (
       id="example"
       menu={
         <Menu>
-          <MenuItem icon="search" onClick={action('Search')} text="Search" />
-          <MenuItem icon="clock" onClick={action('Clock')} text="Clock" />
-          <MenuItem disabled icon="comment" onClick={action('Comment')} text="Comment" />
+          <MenuItem icon={SearchIcon} onClick={action('Search')} text="Search" />
+          <MenuItem icon={ClockIcon} onClick={action('Clock')} text="Clock" />
+          <MenuItem disabled icon={CommentIcon} onClick={action('Comment')} text="Comment" />
           <MenuGroup title="test">
-            <MenuItem icon="search" onClick={action('Search')} text="Search" />
-            <MenuItem icon="clock" onClick={action('Clock')} text="Clock" />
-            <MenuItem disabled icon="comment" onClick={action('Comment')} text="Comment" />
+            <MenuItem icon={SearchIcon} onClick={action('Search')} text="Search" />
+            <MenuItem icon={ClockIcon} onClick={action('Clock')} text="Clock" />
+            <MenuItem disabled icon={CommentIcon} onClick={action('Comment')} text="Comment" />
             <MenuDivider />
-            <MenuItem icon="expand" onClick={action('Expand')} text="Expand" />
+            <MenuItem icon={ExpandIcon} onClick={action('Expand')} text="Expand" />
           </MenuGroup>
           <MenuDivider />
-          <MenuItem icon="expand" onClick={action('Expand')} text="Expand" />
+          <MenuItem icon={ExpandIcon} onClick={action('Expand')} text="Expand" />
         </Menu>
       }
     />
@@ -93,12 +94,12 @@ export const menuItemTones = () => (
   <LayerProvider>
     <Card radius={3} shadow={3}>
       <Menu>
-        <MenuItem icon="search" text="Default" tone="default" />
-        <MenuItem icon="search" text="Transparent" tone="transparent" />
-        <MenuItem icon="search" text="Primary" tone="primary" />
-        <MenuItem icon="search" text="Positive" tone="positive" />
-        <MenuItem icon="search" text="Caution" tone="caution" />
-        <MenuItem icon="search" text="Critical" tone="critical" />
+        <MenuItem icon={SearchIcon} text="Default" tone="default" />
+        <MenuItem icon={SearchIcon} text="Transparent" tone="transparent" />
+        <MenuItem icon={SearchIcon} text="Primary" tone="primary" />
+        <MenuItem icon={SearchIcon} text="Positive" tone="positive" />
+        <MenuItem icon={SearchIcon} text="Caution" tone="caution" />
+        <MenuItem icon={SearchIcon} text="Critical" tone="critical" />
       </Menu>
     </Card>
   </LayerProvider>

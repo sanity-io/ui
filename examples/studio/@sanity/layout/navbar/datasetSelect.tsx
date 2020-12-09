@@ -1,16 +1,19 @@
+import {DatabaseIcon} from '@sanity/icons'
 import {Button, Menu, MenuButton, MenuItem} from '@sanity/ui'
 import React from 'react'
 
 export function DatasetSelect() {
   return (
     <MenuButton
-      button={<Button icon="database" iconRight="chevron-down" mode="ghost" text="Production" />}
+      button={
+        <Button icon={DatabaseIcon} iconRight="chevron-down" mode="ghost" text="Production" />
+      }
       id="dataset-menu"
       menu={
         <Menu>
-          <MenuItem icon="database" text="Production" />
-          <MenuItem icon="database" text="Staging" />
-          <MenuItem icon="database" text="Development" />
+          <MenuItem icon={DatabaseIcon} text="Production" />
+          <MenuItem icon={DatabaseIcon} text="Staging" />
+          <MenuItem icon={DatabaseIcon} text="Development" />
         </Menu>
       }
       popoverScheme="light"

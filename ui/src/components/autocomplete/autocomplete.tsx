@@ -1,3 +1,4 @@
+import {CloseIcon} from '@sanity/icons'
 import React, {cloneElement, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {focusFirstDescendant} from '../../helpers'
@@ -293,7 +294,7 @@ const InnerAutocomplete = forwardRef(
               aria-label="Clear"
               data-qa="clear-button"
               fontSize={fontSize}
-              icon="close"
+              icon={CloseIcon}
               mode="bleed"
               onClick={handleClearButtonClick}
               padding={padding.map((v) => v - 2)}

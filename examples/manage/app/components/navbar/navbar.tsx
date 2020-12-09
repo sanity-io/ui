@@ -1,4 +1,4 @@
-import {Icon} from '@sanity/icons'
+import {Icon, UsersIcon} from '@sanity/icons'
 import {
   Avatar,
   Box,
@@ -38,14 +38,14 @@ export function Navbar() {
             <Box flex={1}>
               <MenuButton
                 button={
-                  <Button icon="users" iconRight="chevron-down" mode="ghost" text="Sanity.io" />
+                  <Button icon={UsersIcon} iconRight="chevron-down" mode="ghost" text="Sanity.io" />
                 }
                 id="select-org"
                 menu={
                   <Menu>
-                    <MenuItem icon="users" iconRight="checkmark" text="Sanity.io" />
-                    <MenuItem icon="users" text="GROQ" />
-                    <MenuItem icon="users" text="Portable Text" />
+                    <MenuItem icon={UsersIcon} iconRight="checkmark" text="Sanity.io" />
+                    <MenuItem icon={UsersIcon} text="GROQ" />
+                    <MenuItem icon={UsersIcon} text="Portable Text" />
                   </Menu>
                 }
               />

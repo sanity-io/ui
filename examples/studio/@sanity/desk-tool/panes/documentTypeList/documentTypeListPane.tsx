@@ -1,3 +1,4 @@
+import {EllipsisVerticalIcon, SplitHorizontalIcon, StackCompactIcon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -41,7 +42,7 @@ export function DocumentTypeListPane() {
             </Box>
             <Box padding={2}>
               <MenuButton
-                button={<Button icon="ellipsis-vertical" mode="bleed" />}
+                button={<Button icon={EllipsisVerticalIcon} mode="bleed" />}
                 id="pane-context-menu"
                 menu={
                   <Menu>
@@ -50,8 +51,8 @@ export function DocumentTypeListPane() {
                     <MenuItem iconRight="arrow-down" space={4} text="Sort by last edited" />
                     <MenuItem space={4} text="Sort by created" />
                     <MenuDivider />
-                    <MenuItem icon="stack-compact" iconRight="checkmark" text="Compact view" />
-                    <MenuItem icon="split-horizontal" text="Detailed view" />
+                    <MenuItem icon={StackCompactIcon} iconRight="checkmark" text="Compact view" />
+                    <MenuItem icon={SplitHorizontalIcon} text="Detailed view" />
                   </Menu>
                 }
                 placement="bottom"

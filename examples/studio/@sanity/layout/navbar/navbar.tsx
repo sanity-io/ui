@@ -1,4 +1,5 @@
 import {useLocation} from '@sanity/base'
+import {BellIcon, ComposeIcon, LeaveIcon, MenuIcon, PackageIcon, SearchIcon} from '@sanity/icons'
 import {
   Avatar,
   AvatarStack,
@@ -121,13 +122,13 @@ export function Navbar({projectName}: {projectName: string}) {
         <Root borderBottom padding={1} scheme="dark" style={{zIndex: layer.zIndex}}>
           <Flex align="center">
             <ToggleMenuButtonBox padding={1} visible={toolMenuVisible}>
-              <Button icon="menu" mode="bleed" onClick={handleMenuShow} />
+              <Button icon={MenuIcon} mode="bleed" onClick={handleMenuShow} />
             </ToggleMenuButtonBox>
 
             <NarrowComposeBox padding={1}>
               <Button
                 aria-label="Create new document"
-                icon="compose"
+                icon={ComposeIcon}
                 mode="bleed"
                 onClick={handleComposeDialogOpen}
               />
@@ -150,7 +151,7 @@ export function Navbar({projectName}: {projectName: string}) {
             <WideComposeBox padding={1}>
               <Button
                 aria-label="Create new document"
-                icon="compose"
+                icon={ComposeIcon}
                 mode="bleed"
                 onClick={handleComposeDialogOpen}
               />
@@ -166,11 +167,11 @@ export function Navbar({projectName}: {projectName: string}) {
 
             <NotificationsButtonBox padding={1}>
               <MenuButton
-                button={<Button aria-label="Open notifications" icon="bell" mode="bleed" />}
+                button={<Button aria-label="Open notifications" icon={BellIcon} mode="bleed" />}
                 id="notification-menu"
                 menu={
                   <Menu>
-                    <MenuItem icon="package" text="10 updates" />
+                    <MenuItem icon={PackageIcon} text="10 updates" />
                   </Menu>
                 }
                 popoverScheme="light"
@@ -235,7 +236,7 @@ export function Navbar({projectName}: {projectName: string}) {
                 id="user-menu"
                 menu={
                   <Menu>
-                    <MenuItem icon="leave" text="Sign out" />
+                    <MenuItem icon={LeaveIcon} text="Sign out" />
                   </Menu>
                 }
                 popoverScheme="light"
@@ -243,7 +244,7 @@ export function Navbar({projectName}: {projectName: string}) {
             </UserMenuBox>
 
             <SearchButtonBox padding={1}>
-              <Button icon="search" mode="bleed" />
+              <Button icon={SearchIcon} mode="bleed" />
             </SearchButtonBox>
           </Flex>
         </Root>

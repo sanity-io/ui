@@ -1,3 +1,4 @@
+import {WarningOutlineIcon} from '@sanity/icons'
 import {
   Avatar,
   AvatarStack,
@@ -48,8 +49,8 @@ export function ProjectPreview(props: {plan: string; title: React.ReactNode}) {
               </Box>
               <Box>
                 <Inline space={1}>
-                  <Button icon="warning-outline" mode="bleed" padding={2} tone="caution" />
-                  <Button icon="circle" mode="bleed" padding={2} />
+                  <Button icon={WarningOutlineIcon} mode="bleed" padding={2} tone="caution" />
+                  <Button icon={CircleIcon} mode="bleed" padding={2} />
                 </Inline>
               </Box>
             </Flex>

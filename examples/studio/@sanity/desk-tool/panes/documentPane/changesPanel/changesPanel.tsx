@@ -1,3 +1,4 @@
+import {CloseIcon, RevertIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
@@ -20,7 +21,7 @@ export function ChangesPanel({onClose}: {onClose: () => void}) {
             <Text weight="semibold">Review changes</Text>
           </Box>
           <Box padding={2}>
-            <Button icon="close" mode="bleed" onClick={onClose} />
+            <Button icon={CloseIcon} mode="bleed" onClick={onClose} />
           </Box>
         </Flex>
       </Card>
@@ -55,7 +56,7 @@ function ChangeItem() {
         <div>
           <Button
             fontSize={1}
-            icon="revert"
+            icon={RevertIcon}
             padding={1}
             mode="bleed"
             text="Revert changes"

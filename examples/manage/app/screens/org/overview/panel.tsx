@@ -1,3 +1,4 @@
+import {AddIcon} from '@sanity/icons'
 import {Avatar, Box, Button, Card, Container, Grid, Heading, Inline, Stack} from '@sanity/ui'
 import React from 'react'
 import {ActivityEvent, ProjectPreview} from '../../../components'
@@ -69,7 +70,7 @@ export function OverviewPanel() {
                         <Avatar color="yellow" size={1} />
                         <Avatar color="orange" size={1} />
                       </Inline>
-                      <Button icon="add" mode="ghost" padding={4} text="Invite new members" />
+                      <Button icon={AddIcon} mode="ghost" padding={4} text="Invite new members" />
                     </Stack>
                   </Card>
                 </Stack>

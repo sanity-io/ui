@@ -1,3 +1,11 @@
+import {
+  BillIcon,
+  ChartUpwardIcon,
+  CogIcon,
+  DashboardIcon,
+  RocketIcon,
+  UsersIcon,
+} from '@sanity/icons'
 import {Button, Inline} from '@sanity/ui'
 import React from 'react'
 import {useLocation} from '../../../lib/location'
@@ -10,7 +18,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity"
-        icon="dashboard"
+        icon={DashboardIcon}
         mode="bleed"
         onClick={handleLinkClick}
         selected={!segments[2]}
@@ -19,7 +27,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/projects"
-        icon="rocket"
+        icon={RocketIcon}
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'projects'}
@@ -28,7 +36,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/members"
-        icon="users"
+        icon={UsersIcon}
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'members'}
@@ -37,7 +45,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/activity"
-        icon="chart-upward"
+        icon={ChartUpwardIcon}
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'activity'}
@@ -46,7 +54,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/usage"
-        icon="chart-upward"
+        icon={ChartUpwardIcon}
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'usage'}
@@ -55,7 +63,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/billing"
-        icon="bill"
+        icon={BillIcon}
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'billing'}
@@ -64,7 +72,7 @@ export function OrganizationTabs() {
       <Button
         as="a"
         href="/org/sanity/settings"
-        icon="cog"
+        icon={CogIcon}
         onClick={handleLinkClick}
         mode="bleed"
         selected={segments[2] === 'settings'}

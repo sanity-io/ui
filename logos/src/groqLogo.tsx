@@ -4,6 +4,7 @@ import React from 'react'
 export function GroqLogo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      data-sanity-icon="groq-logo"
       height="1em"
       viewBox="0 0 304 64"
       fill="none"

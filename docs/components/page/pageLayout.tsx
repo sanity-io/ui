@@ -1,3 +1,4 @@
+import {MenuIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, rem, useClickOutside} from '@sanity/ui'
 import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
@@ -60,7 +61,7 @@ export function PageLayout({children, structure}: PageLayoutProps) {
           <Button
             aria-label="Menu"
             fontSize={[2, 3, 4]}
-            icon="menu"
+            icon={MenuIcon}
             mode="bleed"
             onClick={handleMenuOpenClick}
           />

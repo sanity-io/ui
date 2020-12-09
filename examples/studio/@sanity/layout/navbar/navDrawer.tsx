@@ -1,4 +1,5 @@
 import {useStudioToolPlugins} from '@sanity/base'
+import {CloseIcon, LeaveIcon} from '@sanity/icons'
 import {Avatar, Box, Button, Card, Flex, Layer, Stack, Text, Theme} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
@@ -51,7 +52,7 @@ export function NavDrawer({onHide, open}: {onHide: () => void; open: boolean}) {
                 </Text>
               </Box>
               <Box padding={2}>
-                <Button icon="close" mode="bleed" onClick={onHide} tabIndex={tabIndex} />
+                <Button icon={CloseIcon} mode="bleed" onClick={onHide} tabIndex={tabIndex} />
               </Box>
             </Flex>
           </Card>
@@ -81,7 +82,7 @@ export function NavDrawer({onHide, open}: {onHide: () => void; open: boolean}) {
                 </Text>
               </Box>
               <Box>
-                <Button icon="leave" mode="bleed" tabIndex={tabIndex} />
+                <Button icon={LeaveIcon} mode="bleed" tabIndex={tabIndex} />
               </Box>
             </Flex>
           </Card>

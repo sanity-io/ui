@@ -1,4 +1,11 @@
 import {
+  AddIcon,
+  BinaryDocumentIcon,
+  EarthAmericasIcon,
+  EllipsisVerticalIcon,
+  RestoreIcon,
+} from '@sanity/icons'
+import {
   Box,
   Button,
   Card,
@@ -23,7 +30,7 @@ function EditInDialogButton() {
 
   return (
     <>
-      <Button icon="add" mode="ghost" onClick={() => setOpen(true)} text="Add" />
+      <Button icon={AddIcon} mode="ghost" onClick={() => setOpen(true)} text="Add" />
 
       {open && (
         <Dialog
@@ -94,21 +101,21 @@ export function DocumentPanel({onChangeOpen}: {onChangeOpen: () => void}) {
               </Box>
               <Box padding={2}>
                 <MenuButton
-                  button={<Button icon="ellipsis-vertical" mode="bleed" />}
+                  button={<Button icon={EllipsisVerticalIcon} mode="bleed" />}
                   id="pane-context-menu"
                   menu={
                     <Menu>
                       <MenuItem
-                        icon="restore"
+                        icon={RestoreIcon}
                         onClick={() => {
                           console.log('open review changes')
                           onChangeOpen()
                         }}
                         text="Review changes"
                       />
-                      <MenuItem icon="binary-document" text="Inspect JSON" />
+                      <MenuItem icon={BinaryDocumentIcon} text="Inspect JSON" />
                       <MenuDivider />
-                      <MenuItem icon="earth-americas" text="Preview on site" />
+                      <MenuItem icon={EarthAmericasIcon} text="Preview on site" />
                     </Menu>
                   }
                   placement="bottom"
