@@ -2,14 +2,18 @@ import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
 import {
   Box,
   Button,
+  Card,
+  Code,
   Dialog,
   DialogProps,
+  Layer,
   LayerProvider,
   Menu,
   MenuButton,
   MenuItem,
   Stack,
   Text,
+  useLayer,
 } from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
@@ -59,6 +63,36 @@ export const onScroll = () => {
       <OnScrollExample />
     </LayerProvider>
   )
+}
+
+export const layering = () => {
+  return (
+    <LayerProvider>
+      <Layer zOffset={10} id="a">
+        <Card padding={2} shadow={2}>
+          <DebugLayer />
+        </Card>
+      </Layer>
+      <Layer zOffset={10} id="b">
+        <Card padding={2} shadow={2}>
+          <DebugLayer />
+        </Card>
+      </Layer>
+      <LayerProvider zOffset={100}>
+        <Dialog header="Layering example" id="layering-example" onClose={action('onEscape')}>
+          <Box padding={4}>
+            <DebugLayer />
+          </Box>
+        </Dialog>
+      </LayerProvider>
+    </LayerProvider>
+  )
+}
+
+function DebugLayer() {
+  const layer = useLayer()
+
+  return <Code language="json">{JSON.stringify(layer, null, 2)}</Code>
 }
 
 export const position = () => {

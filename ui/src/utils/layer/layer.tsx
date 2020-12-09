@@ -1,35 +1,29 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {useLayer} from './hooks'
-import {LayerProvider} from './provider'
+import {LayerProvider} from './layerProvider'
+import {useLayer} from './useLayer'
+
+const Root = styled.div({position: 'relative'})
 
 export interface LayerProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  depth?: number
+  zOffset?: number
 }
 
-const Root = styled.div<{depth: number}>`
-  position: relative;
-`
-
-export const Layer = forwardRef(
-  ({depth, ...restProps}: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
-    return (
-      <LayerProvider baseDepth={depth} id={restProps.id}>
-        <LayerChildren {...restProps} ref={ref} />
-      </LayerProvider>
-    )
-  }
-)
-
-Layer.displayName = 'Layer'
+interface LayerChildrenProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
+}
 
 const LayerChildren = forwardRef(
-  ({children, style = {}, ...restProps}: LayerProps & React.HTMLProps<HTMLDivElement>, ref) => {
-    const layer = useLayer() || {depth: 0}
+  (
+    props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
+    const {children, style = {}, ...restProps} = props
+    const {zIndex} = useLayer()
 
     return (
-      <Root data-ui="Layer" {...restProps} ref={ref} style={{...style, zIndex: layer.depth}}>
+      <Root {...restProps} ref={ref} style={{...style, zIndex}}>
         {children}
       </Root>
     )
@@ -37,3 +31,22 @@ const LayerChildren = forwardRef(
 )
 
 LayerChildren.displayName = 'LayerChildren'
+
+export const Layer = forwardRef(
+  (
+    props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
+    const {children, zOffset = 1, ...restProps} = props
+
+    return (
+      <LayerProvider zOffset={zOffset}>
+        <LayerChildren {...restProps} ref={ref}>
+          {children}
+        </LayerChildren>
+      </LayerProvider>
+    )
+  }
+)
+
+Layer.displayName = 'Layer'

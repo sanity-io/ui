@@ -1,3 +1,3 @@
-export * from './hooks'
+export * from './useLayer'
 export * from './layer'
-export * from './provider'
+export * from './layerProvider'

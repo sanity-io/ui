@@ -84,7 +84,7 @@ export function DocumentPanel({onChangeOpen}: {onChangeOpen: () => void}) {
   return (
     <Root ref={rootRef}>
       <PortalProvider boundaryElement={rootRef.current} element={portalElement}>
-        <Header depth={100}>
+        <Header zOffset={100}>
           <Card>
             <Flex>
               <Box flex={1} padding={4} paddingRight={1}>

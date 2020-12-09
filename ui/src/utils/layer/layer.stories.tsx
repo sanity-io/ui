@@ -1,3 +1,4 @@
+import {CloseIcon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -30,7 +31,7 @@ export const plain = () => {
 export const multipleRoots = () => {
   return (
     <Stack space={4}>
-      <LayerProvider baseDepth={100}>
+      <LayerProvider zOffset={100}>
         <Card padding={3} shadow={1}>
           <Stack space={3}>
             <LayerDebugInfo />
@@ -49,7 +50,7 @@ export const multipleRoots = () => {
           </Stack>
         </Card>
       </LayerProvider>
-      <LayerProvider baseDepth={200}>
+      <LayerProvider zOffset={200}>
         <Card as={Layer as any} padding={3} shadow={5} style={{top: -50, left: 30}}>
           <Stack space={3}>
             <LayerDebugInfo />
@@ -77,7 +78,7 @@ function LayerDebugInfo() {
 
   return (
     <Code>
-      depth={layer.depth}, size={layer.size}
+      zIndex={layer.zIndex}, size={layer.size}
     </Code>
   )
 }
@@ -123,7 +124,7 @@ function Layer1({onClose}: {onClose: () => void}) {
           </Text>
         </Box>
         <Box padding={1}>
-          <Button icon="close" mode="bleed" onClick={onClose} padding={2} />
+          <Button icon={CloseIcon} mode="bleed" onClick={onClose} padding={2} />
         </Box>
       </Flex>
       <Box padding={3}>
@@ -151,7 +152,7 @@ function Layer2({onClose}: {onClose: () => void}) {
           </Text>
         </Box>
         <Box padding={1}>
-          <Button icon="close" mode="bleed" onClick={onClose} padding={2} />
+          <Button icon={CloseIcon} mode="bleed" onClick={onClose} padding={2} />
         </Box>
       </Flex>
       <Box padding={3}>

@@ -1,3 +1,4 @@
+import {CloseIcon} from '@sanity/icons'
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
@@ -68,6 +69,7 @@ const DialogCardRoot = styled(Card)`
 const DialogLayout = styled(Flex)`
   flex: 1;
   min-height: 0;
+  width: 100%;
 `
 
 const DialogHeader = styled(Card)`
@@ -108,7 +110,10 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
   } = props
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const localContentRef = useRef<HTMLDivElement | null>(null)
-  const {isTopLayer} = useLayer()
+  const layer = useLayer()
+  const {isTopLayer} = layer
+
+  console.log(layer)
   const labelId = `${id}_label`
 
   useEffect(() => {
@@ -175,7 +180,7 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
               <Box padding={2}>
                 <Button
                   aria-label="Close dialog"
-                  icon="close"
+                  icon={CloseIcon}
                   mode="bleed"
                   onClick={onClose}
                   padding={3}
@@ -196,7 +201,10 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
 DialogCard.displayName = 'DialogCard'
 
 export const Dialog = forwardRef(
-  (props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>, ref) => {
+  (
+    props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
     const {
       cardRadius = 3,
       cardShadow = 4,

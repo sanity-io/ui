@@ -30,7 +30,7 @@ export function AppProvider(props: {
     <ThemeProvider scheme={colorScheme} theme={studioTheme}>
       <GlobalStyle />
       <AppContext.Provider value={{colorScheme, features, nav, node, setColorScheme, target}}>
-        <LayerProvider id="root">
+        <LayerProvider>
           <ToastProvider>{children}</ToastProvider>
         </LayerProvider>
       </AppContext.Provider>

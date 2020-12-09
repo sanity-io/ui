@@ -1,3 +1,4 @@
+import {AddIcon} from '@sanity/icons'
 import {screen} from '@testing-library/react'
 import {axe} from 'jest-axe'
 import React from 'react'
@@ -6,13 +7,13 @@ import {Button} from './button'
 
 describe('atoms/button', () => {
   it('should have no violations (axe)', async () => {
-    const lightResult = render(<Button icon="add" text="Label" tone="positive" />, {
+    const lightResult = render(<Button icon={AddIcon} text="Label" tone="positive" />, {
       scheme: 'light',
     })
 
     expect(await axe(lightResult.container.outerHTML)).toHaveNoViolations()
 
-    const darkResult = render(<Button icon="add" text="Label" tone="positive" />, {
+    const darkResult = render(<Button icon={AddIcon} text="Label" tone="positive" />, {
       scheme: 'dark',
     })
 

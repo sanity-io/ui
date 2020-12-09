@@ -48,11 +48,11 @@ export function Layout(props: LayoutProps) {
 
   return (
     <Root>
-      <LayerProvider baseDepth={10000} id="layour/navbar">
+      <LayerProvider zOffset={10000}>
         <Navbar projectName={projectName} />
       </LayerProvider>
 
-      <LayerProvider baseDepth={100} id="layout/main">
+      <LayerProvider zOffset={100}>
         <Main>
           {children}
           {commmandPaletteOpen && (

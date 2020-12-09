@@ -118,7 +118,7 @@ export function Navbar({projectName}: {projectName: string}) {
   return (
     <>
       <ElementQuery className="sanity-navbar">
-        <Root borderBottom padding={1} scheme="dark" style={{zIndex: layer.depth}}>
+        <Root borderBottom padding={1} scheme="dark" style={{zIndex: layer.zIndex}}>
           <Flex align="center">
             <ToggleMenuButtonBox padding={1} visible={toolMenuVisible}>
               <Button icon="menu" mode="bleed" onClick={handleMenuShow} />
@@ -251,7 +251,7 @@ export function Navbar({projectName}: {projectName: string}) {
 
       {composeDialogOpen && <ComposeDialog onClose={handleComposeDialogClose} />}
 
-      <LayerProvider baseDepth={1000}>
+      <LayerProvider zOffset={1000}>
         <NavDrawer onHide={handleMenuHide} open={drawerOpen} />
       </LayerProvider>
     </>

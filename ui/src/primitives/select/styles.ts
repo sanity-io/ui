@@ -15,7 +15,7 @@ const root = () => {
     position: relative;
     width: stretch;
 
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: inline-block;
     }
   `

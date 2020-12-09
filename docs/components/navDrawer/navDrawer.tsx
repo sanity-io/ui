@@ -32,8 +32,11 @@ const Root = styled(Layer)<{open: boolean}>(({open, theme}: {open: boolean; them
 })
 
 export const NavDrawer = forwardRef(
-  ({children, open}: {children: React.ReactNode; open: boolean}, ref) => (
-    <Root depth={1000} open={open} ref={ref}>
+  (
+    {children, open}: {children: React.ReactNode; open: boolean},
+    ref: React.Ref<HTMLDivElement>
+  ) => (
+    <Root zOffset={1000} open={open} ref={ref}>
       <Card height="fill">{children}</Card>
     </Root>
   )
