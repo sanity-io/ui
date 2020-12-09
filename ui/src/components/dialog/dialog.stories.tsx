@@ -1,3 +1,4 @@
+import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -11,12 +12,11 @@ import {
   Text,
 } from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
-import {select, text, withKnobs} from '@storybook/addon-knobs'
+import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {withCentered} from '~/storybook/decorators'
 
 export default {
-  decorators: [withCentered, withKnobs],
+  decorators: [withKnobs],
   title: 'Components/Dialog',
 }
 
@@ -61,6 +61,31 @@ export const onScroll = () => {
   )
 }
 
+export const position = () => {
+  const open = boolean('Open', false, 'Props')
+  const position = select('Position', ['fixed', 'absolute'], 'fixed', 'Props')
+
+  return (
+    <Box padding={4}>
+      <Box style={{padding: 'calc(100vh - 100px) 0'}}>
+        <Stack space={3}>
+          <Text align="center">
+            <ArrowUpIcon />
+          </Text>
+          <Text align="center">Scrollable</Text>
+          <Text align="center">
+            <ArrowDownIcon />
+          </Text>
+        </Stack>
+
+        <LayerProvider>
+          {open && <Dialog header="Position example" id="position-example" position={position} />}
+        </LayerProvider>
+      </Box>
+    </Box>
+  )
+}
+
 function PropsExample(props: Omit<DialogProps, 'id' | 'onClose'>) {
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
@@ -71,7 +96,7 @@ function PropsExample(props: Omit<DialogProps, 'id' | 'onClose'>) {
   }, [])
 
   return (
-    <>
+    <Box padding={4}>
       <Button
         id="open-dialog-button"
         onClick={() => setOpen(true)}
@@ -113,7 +138,7 @@ function PropsExample(props: Omit<DialogProps, 'id' | 'onClose'>) {
           </Box>
         </Dialog>
       )}
-    </>
+    </Box>
   )
 }
 

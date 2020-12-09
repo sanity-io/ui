@@ -1,13 +1,19 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import {Box, Button, Card, Container, Flex, ResponsiveWidthStyleProps, Text} from '../../atoms'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
-import {ThemeProps} from '../../styles'
+import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
+import {
+  dialogStyle,
+  responsiveDialogPositionStyle,
+  ResponsiveDialogPositionStyleProps,
+} from './styles'
+import {DialogPosition} from './types'
 
-export interface DialogProps extends ResponsiveWidthStyleProps {
+export interface DialogProps extends ResponsiveWidthStyleProps, ResponsivePaddingStyleProps {
   cardRadius?: number
   cardShadow?: number
   contentRef?: React.ForwardedRef<HTMLDivElement>
@@ -15,6 +21,7 @@ export interface DialogProps extends ResponsiveWidthStyleProps {
   header?: React.ReactNode
   id: string
   onClose?: () => void
+  position?: DialogPosition
   scheme?: ThemeColorSchemeKey
 }
 
@@ -30,28 +37,11 @@ interface DialogCardProps extends ResponsiveWidthStyleProps {
   scheme?: ThemeColorSchemeKey
 }
 
-const Root = styled(Layer)(({theme}: ThemeProps) => {
-  const color = theme.sanity.color.base
-
-  return css`
-    && {
-      position: absolute;
-    }
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    &&:not([hidden]) {
-      display: flex;
-    }
-    align-items: center;
-    justify-content: center;
-    padding: 1.25em;
-    outline: none;
-    background: ${color.shadow.penumbra};
-  `
-})
+const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
+  responsivePaddingStyle,
+  dialogStyle,
+  responsiveDialogPositionStyle
+)
 
 const DialogContainer = styled(Container)`
   width: 100%;
@@ -216,6 +206,8 @@ export const Dialog = forwardRef(
       header,
       id,
       onClose,
+      padding = 4,
+      position = 'fixed',
       scheme,
       width = 0,
       ...restProps
@@ -255,6 +247,8 @@ export const Dialog = forwardRef(
           aria-modal
           id={id}
           onFocus={handleFocus}
+          padding={padding}
+          position={position}
           ref={ref}
           role="dialog"
         >
