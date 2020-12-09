@@ -53,7 +53,9 @@ export function Canvas({
     return (
       <Card height="fill" overflow="auto" tone="critical">
         <Box padding={4}>
-          <Code>{result.error.message}</Code>
+          <Code>
+            {result.error.name}: {result.error.message}
+          </Code>
         </Box>
       </Card>
     )

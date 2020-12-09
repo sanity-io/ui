@@ -1,3 +1,4 @@
+import * as icons from '@sanity/ui'
 import * as ui from '@sanity/ui'
 import isHotkey from 'is-hotkey'
 import {debounce} from 'lodash'
@@ -62,7 +63,7 @@ export function useIDE() {
   const write = (newCode: string) => {
     setCode(newCode)
     saveCode(newCode)
-    setResult(renderCode(newCode, {React, ...ui}))
+    setResult(renderCode(newCode, {React, ...icons, ...ui}))
   }
 
   // load saved code
@@ -71,10 +72,10 @@ export function useIDE() {
       const cachedCode = decode(codeParamRef.current)
 
       setCode(cachedCode)
-      setResult(renderCode(cachedCode, {React, ...ui}))
+      setResult(renderCode(cachedCode, {React, ...icons, ...ui}))
     } else {
       setCode(DEFAULT_CODE)
-      setResult(renderCode(DEFAULT_CODE, {React, ...ui}))
+      setResult(renderCode(DEFAULT_CODE, {React, ...icons, ...ui}))
     }
   }, [])
 
