@@ -1,4 +1,4 @@
-import {WarningOutlineIcon} from '@sanity/icons'
+import {CircleIcon, WarningOutlineIcon} from '@sanity/icons'
 import {
   Avatar,
   AvatarStack,
