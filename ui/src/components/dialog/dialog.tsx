@@ -10,6 +10,7 @@ import {Layer, Portal, useLayer} from '../../utils'
 interface DialogProps extends ResponsiveWidthStyleProps {
   cardRadius?: number
   cardShadow?: number
+  contentRef?: React.ForwardedRef<HTMLDivElement>
   footer?: React.ReactNode
   header?: React.ReactNode
   id: string
@@ -21,6 +22,7 @@ interface DialogCardProps extends ResponsiveWidthStyleProps {
   cardRadius: number
   cardShadow: number
   children: React.ReactNode
+  contentRef?: React.ForwardedRef<HTMLDivElement>
   footer: React.ReactNode
   header: React.ReactNode
   id: string
@@ -102,16 +104,27 @@ const DialogFooter = styled(Box)`
 `
 
 const DialogCard = forwardRef((props: DialogCardProps, ref) => {
-  const {cardRadius, cardShadow, children, footer, header, id, onClose, scheme, width} = props
+  const {
+    cardRadius,
+    cardShadow,
+    children,
+    contentRef,
+    footer,
+    header,
+    id,
+    onClose,
+    scheme,
+    width,
+  } = props
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const contentRef = useRef<HTMLDivElement | null>(null)
+  const localContentRef = useRef<HTMLDivElement | null>(null)
   const {isTopLayer} = useLayer()
   const labelId = `${id}_label`
 
   useEffect(() => {
     // On mount: focus the first interactive element in the contents
-    if (contentRef.current) {
-      focusFirstDescendant(contentRef.current)
+    if (localContentRef.current) {
+      focusFirstDescendant(localContentRef.current)
     }
   }, [])
 
@@ -147,6 +160,15 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
     [ref]
   )
 
+  const setContentRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      localContentRef.current = el
+      if (typeof contentRef === 'function') contentRef(el)
+      else if (contentRef) contentRef.current = el
+    },
+    [contentRef]
+  )
+
   return (
     <DialogContainer width={width}>
       <DialogCardRoot radius={cardRadius} ref={setRef} scheme={scheme} shadow={cardShadow}>
@@ -171,7 +193,7 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
               </Box>
             </Flex>
           </DialogHeader>
-          <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
+          <DialogContent flex={1} ref={setContentRef} tabIndex={-1}>
             {children}
           </DialogContent>
           {footer && <DialogFooter>{footer}</DialogFooter>}
@@ -186,9 +208,10 @@ DialogCard.displayName = 'DialogCard'
 export const Dialog = forwardRef(
   (props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>, ref) => {
     const {
-      cardRadius = 2,
+      cardRadius = 3,
       cardShadow = 4,
       children,
+      contentRef,
       footer,
       header,
       id,
@@ -239,6 +262,7 @@ export const Dialog = forwardRef(
           <DialogCard
             cardRadius={cardRadius}
             cardShadow={cardShadow}
+            contentRef={contentRef}
             footer={footer}
             header={header}
             id={id}

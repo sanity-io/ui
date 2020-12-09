@@ -9,8 +9,9 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
+import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
-import React, {useCallback, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -20,17 +21,17 @@ export default {
 
 export const props = () => {
   const width = select(
-    'Icon',
+    'Width',
     {
-      '0 (default)': '0',
-      '1': '1',
-      '2': '2',
-      '3': '3',
-      '4': '4',
-      '5': '5',
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
       Auto: 'auto',
     },
-    '1',
+    0,
     'Props'
   )
 
@@ -45,6 +46,14 @@ export const nested = () => {
   return (
     <LayerProvider>
       <NestedExample />
+    </LayerProvider>
+  )
+}
+
+export const onScroll = () => {
+  return (
+    <LayerProvider>
+      <OnScrollExample />
     </LayerProvider>
   )
 }
@@ -145,5 +154,40 @@ function NestedExample() {
         </Dialog>
       )}
     </>
+  )
+}
+
+function OnScrollExample() {
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const el = ref.current
+
+    if (!el) return
+
+    const handleScroll = action('scroll')
+
+    el.addEventListener('scroll', handleScroll, {passive: true})
+
+    return () => el.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <Dialog contentRef={ref} header="On scroll" id="on-scroll-example">
+      <Box padding={4}>
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
+          hendrerit scelerisque ut libero. Maecenas iaculis efficitur lorem, ac faucibus mi
+          imperdiet quis. Cras a consectetur erat. Fusce imperdiet, dolor et pellentesque iaculis,
+          ex quam luctus felis, non ultrices enim sem vitae quam. Duis lorem velit, lacinia at
+          rhoncus a, tempus vel neque. Vestibulum ante ipsum primis in faucibus orci luctus et
+          ultrices posuere cubilia curae; Sed id mauris quam. Nam finibus sapien non lacinia
+          ultricies. Integer fermentum tortor at pellentesque faucibus. In venenatis commodo
+          placerat. Curabitur commodo tortor libero, vel pellentesque elit luctus sodales. Donec
+          mattis tristique nunc ac lacinia. Vestibulum non pulvinar turpis, posuere consequat arcu.
+          Fusce ut urna blandit, finibus nisi a, molestie elit. Nulla sed eleifend mi.
+        </Text>
+      </Box>
+    </Dialog>
   )
 }
