@@ -32,6 +32,7 @@ const inputBase = ({theme}: ThemeProps) => {
     color: inherit;
     width: 100%;
     outline: none;
+    margin: 0;
   `
 }
 
