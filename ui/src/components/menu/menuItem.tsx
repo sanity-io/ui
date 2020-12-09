@@ -1,5 +1,13 @@
-import React, {createElement, forwardRef, useCallback, useEffect, useRef} from 'react'
-import {Box, Card, Flex, Icon, IconSymbol, Text} from '../../atoms'
+import React, {
+  createElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react'
+import {isValidElementType} from 'react-is'
+import {Box, Card, Flex, Text} from '../../atoms'
 import {useForwardedRef} from '../../hooks'
 import {ResponsivePaddingStyleProps, ResponsiveRadiusProps} from '../../styles'
 import {ThemeColorToneKey} from '../../theme'
@@ -7,8 +15,8 @@ import {useMenu} from './hooks'
 
 interface MenuItemProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  icon?: IconSymbol | React.ComponentType
-  iconRight?: IconSymbol | React.ComponentType
+  icon?: React.ComponentType | React.ReactNode
+  iconRight?: React.ComponentType | React.ReactNode
   size?: number | number[]
   space?: number | number[]
   text?: React.ReactNode
@@ -87,8 +95,8 @@ export const MenuItem = forwardRef(
             <Flex as="span">
               {icon && (
                 <Text size={size}>
-                  {typeof icon === 'string' && <Icon symbol={icon} />}
-                  {typeof icon !== 'string' && createElement(icon)}
+                  {isValidElement(icon) && icon}
+                  {isValidElementType(icon) && createElement(icon)}
                 </Text>
               )}
 
@@ -104,8 +112,8 @@ export const MenuItem = forwardRef(
 
               {iconRight && (
                 <Text size={size}>
-                  {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
-                  {typeof iconRight !== 'string' && createElement(iconRight)}
+                  {isValidElement(iconRight) && iconRight}
+                  {isValidElementType(iconRight) && createElement(iconRight)}
                 </Text>
               )}
             </Flex>

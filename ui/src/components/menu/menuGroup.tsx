@@ -1,6 +1,7 @@
+import {ChevronRightIcon} from '@sanity/icons'
 import React, {useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
-import {Box, Icon, Popover, Text} from '../../atoms'
+import {Box, Popover, Text} from '../../atoms'
 import {ThemeProps} from '../../styles'
 import {useMenu} from './hooks'
 import {Menu} from './menu'
@@ -116,7 +117,7 @@ export function MenuGroup({children, title}: {children: React.ReactNode; title: 
           <TextContainer>
             <Text>{title}</Text>
             <Text>
-              <Icon symbol="chevron-right" />
+              <ChevronRightIcon />
             </Text>
           </TextContainer>
         </Box>

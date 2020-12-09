@@ -1,4 +1,5 @@
-import {Box, Card, Flex, Icon, Label} from '@sanity/ui'
+import {ChevronDownIcon, ChevronUpIcon} from '@sanity/icons'
+import {Box, Card, Flex, Label} from '@sanity/ui'
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import {NavLink} from '$components'
@@ -33,7 +34,7 @@ function NavItem(props: any) {
               {props.menuTitle || props.title}
             </Label>
             <Label muted size={[2, 2, 3]}>
-              <Icon symbol={collapsed ? 'chevron-down' : 'chevron-up'} />
+              {collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
             </Label>
           </Flex>
         </Box>

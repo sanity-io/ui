@@ -1,3 +1,4 @@
+import {Icon} from '@sanity/icons'
 import {
   Avatar,
   Box,
@@ -5,7 +6,6 @@ import {
   Card,
   Container,
   Flex,
-  Icon,
   Menu,
   MenuButton,
   MenuItem,

@@ -1,5 +1,5 @@
-import icons from '@sanity/icons'
-import {Button, Card, Container, IconSymbol} from '@sanity/ui'
+import {icons, IconSymbol} from '@sanity/icons'
+import {Button, Card, Container} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
@@ -116,8 +116,8 @@ export const plain = () => {
       <Card padding={4}>
         <Button
           disabled={disabled}
-          icon={icon}
-          iconRight={iconRight}
+          icon={icon && icons[icon]}
+          iconRight={iconRight && icons[iconRight]}
           justify={justify}
           mode={mode}
           onClick={action('onClick')}

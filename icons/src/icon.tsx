@@ -1,13 +1,11 @@
-import icons, {IconSymbol} from '@sanity/icons'
 import React, {createElement, forwardRef} from 'react'
-
-export type {IconSymbol}
+import {icons} from './icons'
+import type {IconSymbol} from './icons'
 
 interface IconProps {
   symbol: IconSymbol
 }
 
-// @todo: deprecate
 export const Icon = forwardRef(
   (
     props: IconProps & Omit<React.SVGProps<SVGSVGElement>, 'ref'>,

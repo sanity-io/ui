@@ -27,7 +27,7 @@
     "@popperjs/core": "^2.5.4",
     "@reach/auto-id": "^0.12.1",
     "@sanity/color": "^2.0.10",
-    "@sanity/icons": "^1.0.0-beta.3",
+    "@sanity/icons": "1.0.0-beta.3",
     "framer-motion": "^2.9.5",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.1",

@@ -1,4 +1,4 @@
-import {IconSymbol} from '@sanity/ui'
+import {IconSymbol} from '@sanity/icons'
 import {DashboardTool} from './dashboardTool'
 
 export default (params: {icon?: IconSymbol; name?: string; title?: string} = {}) => ({

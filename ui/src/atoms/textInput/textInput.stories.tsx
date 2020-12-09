@@ -1,4 +1,4 @@
-import icons, {IconSymbol} from '@sanity/icons'
+import {icons, IconSymbol} from '@sanity/icons'
 import {Button, Card, Container, Stack, Text, TextInput} from '@sanity/ui'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
@@ -100,8 +100,8 @@ export const plain = () => {
             border={border}
             customValidity={customValidity}
             disabled={disabled}
-            icon={icon}
-            iconRight={iconRight}
+            icon={icon && icons[icon]}
+            iconRight={iconRight && icons[iconRight]}
             id="text-input-example"
             padding={padding}
             placeholder={placeholder}

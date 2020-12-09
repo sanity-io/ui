@@ -1,4 +1,5 @@
-import {Card, Heading, Icon, Inline} from '@sanity/ui'
+import {Icon} from '@sanity/icons'
+import {Card, Heading, Inline} from '@sanity/ui'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {withCentered} from '~/storybook/decorators'

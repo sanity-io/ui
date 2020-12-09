@@ -1,4 +1,4 @@
-import React, {createElement, forwardRef} from 'react'
+import React, {createElement, forwardRef, isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
@@ -14,14 +14,13 @@ import {
 import {ThemeFontWeightKey} from '../../theme'
 import {Box} from '../box'
 import {Card} from '../card'
-import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
 
 interface TextInputProps extends ResponsiveRadiusProps {
   border?: boolean
   customValidity?: string
-  icon?: IconSymbol | React.ComponentType
-  iconRight?: IconSymbol | React.ComponentType
+  icon?: React.ComponentType | React.ReactNode
+  iconRight?: React.ComponentType | React.ReactNode
   padding?: number | number[]
   prefix?: React.ReactNode
   size?: number | number[]
@@ -149,8 +148,8 @@ export const TextInput = forwardRef(
             {icon && (
               <IconLeftBox padding={padding}>
                 <Text size={size}>
-                  {typeof icon === 'string' && <Icon symbol={icon} />}
-                  {typeof icon !== 'string' && isValidElementType(icon) && createElement(icon)}
+                  {isValidElement(icon) && icon}
+                  {isValidElementType(icon) && createElement(icon)}
                 </Text>
               </IconLeftBox>
             )}
@@ -158,10 +157,8 @@ export const TextInput = forwardRef(
             {iconRight && (
               <IconRightBox padding={padding}>
                 <Text size={size}>
-                  {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
-                  {typeof iconRight !== 'string' &&
-                    isValidElementType(iconRight) &&
-                    createElement(iconRight)}
+                  {isValidElement(iconRight) && iconRight}
+                  {isValidElementType(iconRight) && createElement(iconRight)}
                 </Text>
               </IconRightBox>
             )}

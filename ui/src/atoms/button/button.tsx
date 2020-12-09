@@ -1,4 +1,5 @@
-import React, {createElement, forwardRef} from 'react'
+import React, {createElement, forwardRef, isValidElement} from 'react'
+import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {
   FlexJustify,
@@ -10,7 +11,6 @@ import {
 import {useTheme} from '../../theme'
 import {Box} from '../box'
 import {Flex} from '../flex'
-import {Icon, IconSymbol} from '../icon'
 import {Text} from '../text'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 import {ButtonMode, ButtonTone} from './types'
@@ -18,8 +18,8 @@ import {ButtonMode, ButtonTone} from './types'
 export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   mode?: ButtonMode
-  icon?: IconSymbol | React.ComponentType
-  iconRight?: IconSymbol | React.ComponentType
+  icon?: React.ComponentType | React.ReactNode
+  iconRight?: React.ComponentType | React.ReactNode
   justify?: FlexJustify | FlexJustify[]
   selected?: boolean
   size?: number | number[]
@@ -91,8 +91,8 @@ export const Button = forwardRef(
             <Flex as="span" justify={justify}>
               {icon && (
                 <Text size={size}>
-                  {typeof icon === 'function' && createElement(icon)}
-                  {typeof icon === 'string' && <Icon symbol={icon} />}
+                  {isValidElement(icon) && icon}
+                  {isValidElementType(icon) && createElement(icon)}
                 </Text>
               )}
 
@@ -110,8 +110,8 @@ export const Button = forwardRef(
 
               {iconRight && (
                 <Text size={size}>
-                  {typeof iconRight === 'function' && createElement(iconRight)}
-                  {typeof iconRight === 'string' && <Icon symbol={iconRight} />}
+                  {isValidElement(iconRight) && iconRight}
+                  {isValidElementType(iconRight) && createElement(iconRight)}
                 </Text>
               )}
             </Flex>

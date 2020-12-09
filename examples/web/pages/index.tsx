@@ -1,3 +1,4 @@
+import {Icon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -7,7 +8,6 @@ import {
   Flex,
   Grid,
   Heading,
-  Icon,
   Inline,
   Label,
   Stack,

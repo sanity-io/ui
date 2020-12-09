@@ -12,7 +12,7 @@ const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
 
 const IMPORT_PATH = path.resolve(__dirname, '../export')
-const DIST_PATH = path.resolve(__dirname, '../src')
+const DIST_PATH = path.resolve(__dirname, '../src/icons')
 
 const GENERATED_BANNER = `/*
 * AUTO-GENERATED, DO NOT EDIT
@@ -97,7 +97,7 @@ async function generate() {
 
   const iconExports = `export {${files.map((f) => f.componentName).join(',')}}`
 
-  const defaultExport = `export default {${files
+  const defaultExport = `export const icons = {${files
     .map((f) => `'${f.name}': ${f.componentName}`)
     .join(',')}}`
 

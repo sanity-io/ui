@@ -1,6 +1,6 @@
 import React, {cloneElement, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Button, Card, IconSymbol, Spinner, Text, TextInput} from '../../atoms'
+import {Box, Button, Card, Spinner, Text, TextInput} from '../../atoms'
 import {focusFirstDescendant} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
 import {getResponsiveProp} from '../../styles'
@@ -14,7 +14,7 @@ export interface BaseAutocompleteOption {
 export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   border?: boolean
   filterOption?: (query: string, option: Option) => boolean
-  icon?: IconSymbol
+  icon?: React.ComponentType | React.ReactNode
   id: string
   loading?: boolean
   onChange?: (value: string) => void

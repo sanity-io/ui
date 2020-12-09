@@ -17,6 +17,10 @@ export interface AvatarProps {
   onImageLoadError?: (event: Error) => void
   size?: AvatarSize | AvatarSize[]
   src?: string
+  /**
+   * The status of the entity this Avatar represents.
+   * @alpha
+   */
   status?: AvatarStatus
   title?: string
 }
