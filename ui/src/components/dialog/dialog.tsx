@@ -7,7 +7,7 @@ import {ThemeProps} from '../../styles'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
 
-interface DialogProps extends ResponsiveWidthStyleProps {
+export interface DialogProps extends ResponsiveWidthStyleProps {
   cardRadius?: number
   cardShadow?: number
   contentRef?: React.ForwardedRef<HTMLDivElement>

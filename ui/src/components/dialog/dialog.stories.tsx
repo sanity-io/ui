@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Dialog,
+  DialogProps,
   LayerProvider,
   Menu,
   MenuButton,
@@ -10,7 +11,7 @@ import {
   Text,
 } from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
-import {select, withKnobs} from '@storybook/addon-knobs'
+import {select, text, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {withCentered} from '~/storybook/decorators'
 
@@ -20,6 +21,8 @@ export default {
 }
 
 export const props = () => {
+  const header = text('Header', 'Props example', 'Props')
+
   const width = select(
     'Width',
     {
@@ -37,7 +40,7 @@ export const props = () => {
 
   return (
     <LayerProvider>
-      <PropsExample width={width === 'auto' ? width : Number(width)} />
+      <PropsExample header={header} width={width} />
     </LayerProvider>
   )
 }
@@ -58,7 +61,7 @@ export const onScroll = () => {
   )
 }
 
-function PropsExample(props: {width: number | 'auto'}) {
+function PropsExample(props: Omit<DialogProps, 'id' | 'onClose'>) {
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -77,7 +80,7 @@ function PropsExample(props: {width: number | 'auto'}) {
       />
 
       {open && (
-        <Dialog {...props} header={<>Example</>} id="dialog" onClose={handleClose}>
+        <Dialog {...props} id="dialog" onClose={handleClose}>
           <Box padding={4}>
             <Stack space={4}>
               <Text>
@@ -173,7 +176,7 @@ function OnScrollExample() {
   }, [])
 
   return (
-    <Dialog contentRef={ref} header="On scroll" id="on-scroll-example">
+    <Dialog contentRef={ref} header="On scroll example" id="on-scroll-example">
       <Box padding={4}>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
