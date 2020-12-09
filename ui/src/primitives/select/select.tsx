@@ -19,8 +19,8 @@ const Root = styled.div(select.root)
 const Input = styled.select<{
   padding?: number | number[]
   radius?: number | number[]
+  size?: number | number[]
   space?: number | number[]
-  uiSize?: number | number[]
 }>(select.input)
 
 const IconBox = styled(Box)(select.iconBox)
@@ -53,7 +53,7 @@ export const Select = forwardRef(
           radius={radiusProp}
           ref={ref}
           space={space}
-          uiSize={size}
+          size={size as any}
         >
           {children}
         </Input>

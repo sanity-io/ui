@@ -85,10 +85,10 @@ const textSize = (size: ThemeFontSize) => {
   return {fontSize: rem(size.fontSize), lineHeight: rem(size.lineHeight)}
 }
 
-const inputTextSize = ({theme, uiSize}: {uiSize?: number | number[]} & ThemeProps) => {
+const inputTextSize = ({theme, size}: {size?: number | number[]} & ThemeProps) => {
   const {sizes} = theme.sanity.fonts.text
 
-  return responsive(theme.sanity.media, getResponsiveProp(uiSize), (sizeIndex) =>
+  return responsive(theme.sanity.media, getResponsiveProp(size), (sizeIndex) =>
     textSize(sizes[sizeIndex] || sizes[2])
   )
 }
@@ -101,9 +101,7 @@ const input = () => [
   responsiveInputPaddingIconRightStyle,
 ]
 
-const iconBox = ({
-  theme,
-}: {radius?: number | number[]; uiSize?: number | number[]} & ThemeProps) => {
+const iconBox = ({theme}: {radius?: number | number[]; size?: number | number[]} & ThemeProps) => {
   const color = theme.sanity.color.input
 
   return css`

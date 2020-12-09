@@ -75,7 +75,7 @@ export const TextArea = forwardRef(
 
     useCustomValidity(ref, customValidity)
 
-    const uiSize = getResponsiveProp(sizeProp)
+    const size = getResponsiveProp(sizeProp)
 
     return (
       <Root>
@@ -86,7 +86,7 @@ export const TextArea = forwardRef(
             {...paddingProps}
             disabled={disabled}
             ref={ref}
-            uiSize={uiSize}
+            size={size}
           />
           <Presentation border={border} radius={radius} />
         </InputRoot>

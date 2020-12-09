@@ -135,8 +135,8 @@ export const TextInput = forwardRef(
             padding={padding}
             ref={ref}
             space={space}
+            size={size as any}
             type={type}
-            uiSize={size}
           />
 
           <Presentation
