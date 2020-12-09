@@ -12,8 +12,8 @@ export interface MenuButtonProps {
   menu?: React.ReactElement
   placement?: Placement
   popoverScheme?: ThemeColorSchemeKey
+  popoverRadius?: number | number[]
   portal?: boolean
-  radius?: number | number[]
 }
 
 export function MenuButton({
@@ -24,7 +24,7 @@ export function MenuButton({
   placement,
   popoverScheme,
   portal,
-  radius,
+  popoverRadius,
 }: MenuButtonProps) {
   const [open, setOpen] = useState(false)
   const [focusLast, setFocusLast] = useState(false)
@@ -101,7 +101,7 @@ export function MenuButton({
       open={open}
       placement={placement}
       portal={portal}
-      radius={radius}
+      radius={popoverRadius}
       scheme={popoverScheme}
     >
       {button || <></>}
