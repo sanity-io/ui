@@ -6,7 +6,7 @@ import {renderCode, renderHooks} from '$lib/eval'
 
 const useIsomorphicEffect = typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
 
-export function CodeExample(props: {code: string; hookCode?: string; language: string}) {
+export default function CodeExample(props: {code: string; hookCode?: string; language: string}) {
   const {code, hookCode, language} = props
   const hook = renderHooks(hookCode || '', {React, ...icons, ...ui})
   const [isSSR, setSSR] = React.useState(true)

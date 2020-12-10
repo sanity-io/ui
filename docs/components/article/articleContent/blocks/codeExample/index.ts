@@ -1,1 +1,1 @@
-export * from './codeExample'
+export {default} from './codeExample'

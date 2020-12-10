@@ -10,6 +10,34 @@ export interface EvalErrorResult {
 
 export type EvalResult = EvalSuccessResult | EvalErrorResult
 
+// export function ready(opts?: {timeout?: number}) {
+//   const timeout = opts?.timeout || 1000
+
+//   return new Promise<void>((resolve, reject) => {
+//     const startTime = Date.now()
+
+//     const tick = () => {
+//       const duration = Date.now() - startTime
+
+//       if (duration > timeout) {
+//         reject(new Error('eval.ready: timeout'))
+
+//         return
+//       }
+
+//       if ((window as any).Babel) {
+//         resolve()
+
+//         return
+//       }
+
+//       setTimeout(tick, 100)
+//     }
+
+//     setTimeout(tick, 100)
+//   })
+// }
+
 export function renderHooks(code: string, scope: Record<string, any>) {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

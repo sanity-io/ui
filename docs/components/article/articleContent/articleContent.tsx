@@ -1,14 +1,16 @@
 import BlockContent from '@sanity/block-content-to-react'
 import {LinkIcon} from '@sanity/icons'
 import {Box, Card, Code, Heading, Text} from '@sanity/ui'
+import dynamic from 'next/dynamic'
 import React, {useMemo} from 'react'
 import {blocksToText} from '../helpers'
-import {CodeExample} from './blocks/codeExample'
 import {ColorGrid} from './blocks/colorGrid'
 import {GroqLogoGrid} from './blocks/groqLogoGrid'
 import {NpmPackageBadge} from './blocks/npmPackageBadge'
 import {PropertyTable} from './blocks/propertyTable'
 import {SanityLogoGrid} from './blocks/sanityLogoGrid'
+
+const CodeExample = dynamic(import('./blocks/codeExample'), {ssr: false})
 
 export function ArticleContent({blocks, toc}: {blocks: any[]; toc: any}) {
   const serializers = useMemo(() => buildSerializers(toc), [toc])
