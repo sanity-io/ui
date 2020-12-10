@@ -1,4 +1,5 @@
 import slugify from 'slugify'
+import {HeadingNode} from './types'
 
 const HEADER_RE = /^h\d/
 
@@ -19,13 +20,58 @@ export function blocksToText(blocks: any[], opts: any = {}) {
 }
 
 export function getTOC(blocks: any[]) {
+  // @todo: uniqify `slug`
   const headings = blocks
     .filter((block) => block._type === 'block')
     .filter((block) => HEADER_RE.test(block.style))
     .map((block) => getHeadingInfo(block))
 
-  // @todo: uniqify `slug`
-  return headings
+  const root: HeadingNode = {
+    level: 1,
+    children: [],
+    slug: 'root',
+    text: '<root>',
+  }
+
+  let node: HeadingNode = root
+
+  const stack: HeadingNode[] = [node]
+
+  for (const heading of headings) {
+    if (heading.level > node.level) {
+      const parent = node
+
+      node = {
+        level: heading.level,
+        children: [],
+        slug: heading.slug,
+        text: heading.text,
+      }
+
+      parent.children.push(node)
+      stack.push(node)
+    } else {
+      while (heading.level <= node.level) {
+        stack.pop()
+        node = stack[stack.length - 1]
+      }
+
+      const parent = stack[stack.length - 1]
+
+      node = {
+        level: heading.level,
+        children: [],
+        slug: heading.slug,
+        text: heading.text,
+      }
+
+      stack.push(node)
+
+      parent.children.push(node)
+    }
+  }
+
+  return root.children
 }
 
 export function getHeadingInfo(block: any) {

@@ -1,8 +1,9 @@
 import {Box, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/ui'
-import React from 'react'
+import React, {useMemo} from 'react'
 import styled from 'styled-components'
 import {ArticleContent} from './articleContent'
 import {getTOC} from './helpers'
+import {HeadingNode} from './types'
 import {TimeAgo} from '$components'
 
 const HeroContainer = styled(Container)`
@@ -11,7 +12,7 @@ const HeroContainer = styled(Container)`
 `
 
 export function Article({article}: {article?: any}) {
-  const toc = article.content ? getTOC(article.content) : []
+  const toc = useMemo(() => (article.content ? getTOC(article.content) : []), [article.content])
   const layout = article.layout || {}
 
   return (
@@ -47,21 +48,34 @@ export function Article({article}: {article?: any}) {
           <Box display={['none', 'none', 'none', 'block']} flex={1} style={{maxWidth: '20rem'}}>
             {!layout.wide && toc.length > 0 && (
               <Box padding={[3, 4, 5]} style={{position: 'sticky', top: 0}}>
-                <Stack space={[2, 3, 4]}>
-                  <Label>On this page</Label>
-                  {toc.map((heading) => (
-                    <Box key={heading.slug}>
-                      <Text>
-                        <a href={`#${heading.slug}`}>{heading.text}</a>
-                      </Text>
-                    </Box>
-                  ))}
-                </Stack>
+                <Label>On this page</Label>
+
+                <Box marginTop={[2, 3, 4]}>
+                  <HeadingList headings={toc} />
+                </Box>
               </Box>
             )}
           </Box>
         </Flex>
       )}
     </article>
+  )
+}
+
+function HeadingList({headings}: {headings: HeadingNode[]}) {
+  return (
+    <Stack>
+      {headings.map((heading) => (
+        <Box key={heading.slug}>
+          <Text size={2 - (heading.level - 2)}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </Text>
+
+          <Box marginTop={4} paddingLeft={2}>
+            <HeadingList headings={heading.children} />
+          </Box>
+        </Box>
+      ))}
+    </Stack>
   )
 }
