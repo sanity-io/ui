@@ -15,9 +15,9 @@
   "dependencies": {
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/color": "^2.0.9",
-    "@sanity/icons": "^1.0.0-beta.3",
-    "@sanity/logos": "^1.0.0-beta.3",
-    "@sanity/ui": "^1.0.0-beta.23",
+    "@sanity/icons": "^1.0.0",
+    "@sanity/logos": "^1.0.0",
+    "@sanity/ui": "^0.28.0",
     "codemirror": "^5.58.3",
     "date-fns": "^2.16.1",
     "next": "^10.0.3",
