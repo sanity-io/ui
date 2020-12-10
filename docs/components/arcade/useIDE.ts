@@ -1,4 +1,4 @@
-import * as icons from '@sanity/ui'
+import * as icons from '@sanity/icons'
 import * as ui from '@sanity/ui'
 import isHotkey from 'is-hotkey'
 import {debounce} from 'lodash'
