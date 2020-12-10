@@ -9,8 +9,11 @@ import {GroqLogoGrid} from './blocks/groqLogoGrid'
 import {NpmPackageBadge} from './blocks/npmPackageBadge'
 import {PropertyTable} from './blocks/propertyTable'
 import {SanityLogoGrid} from './blocks/sanityLogoGrid'
+import {ready} from '$lib/eval'
 
-const CodeExample = dynamic(import('./blocks/codeExample'), {ssr: false})
+const CodeExample = dynamic(ready().then(() => import('./blocks/codeExample')) as any, {
+  ssr: false,
+}) as any
 
 export function ArticleContent({blocks, toc}: {blocks: any[]; toc: any}) {
   const serializers = useMemo(() => buildSerializers(toc), [toc])

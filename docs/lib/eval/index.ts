@@ -10,33 +10,39 @@ export interface EvalErrorResult {
 
 export type EvalResult = EvalSuccessResult | EvalErrorResult
 
-// export function ready(opts?: {timeout?: number}) {
-//   const timeout = opts?.timeout || 1000
+export function ready(opts?: {timeout?: number}) {
+  const timeout = opts?.timeout || 10000
 
-//   return new Promise<void>((resolve, reject) => {
-//     const startTime = Date.now()
+  return new Promise<void>((resolve, reject) => {
+    if (typeof window === 'undefined') {
+      resolve()
 
-//     const tick = () => {
-//       const duration = Date.now() - startTime
+      return
+    }
 
-//       if (duration > timeout) {
-//         reject(new Error('eval.ready: timeout'))
+    const startTime = Date.now()
 
-//         return
-//       }
+    const tick = () => {
+      const duration = Date.now() - startTime
 
-//       if ((window as any).Babel) {
-//         resolve()
+      if (duration > timeout) {
+        reject(new Error('eval.ready: timeout'))
 
-//         return
-//       }
+        return
+      }
 
-//       setTimeout(tick, 100)
-//     }
+      if ((window as any).Babel) {
+        resolve()
 
-//     setTimeout(tick, 100)
-//   })
-// }
+        return
+      }
+
+      setTimeout(tick, 100)
+    }
+
+    setTimeout(tick, 100)
+  })
+}
 
 export function renderHooks(code: string, scope: Record<string, any>) {
   try {
