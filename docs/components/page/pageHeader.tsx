@@ -15,7 +15,7 @@ interface NavItemType {
 }
 
 function NavItem(props: any) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState<boolean>(props.collapsed || false)
 
   return (
     <>

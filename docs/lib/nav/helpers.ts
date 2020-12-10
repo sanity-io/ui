@@ -11,6 +11,7 @@ export function getNavItems(items: any[], basePath = ''): NavItem[] {
     const href = `${basePath}/${item.segment || ''}`
 
     return {
+      collapsed: item.collapsed || false,
       href: item.targetId ? href : undefined,
       title: item.title,
       menuTitle: item.menuTitle,

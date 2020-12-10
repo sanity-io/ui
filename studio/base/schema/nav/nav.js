@@ -4,6 +4,7 @@ export const navItem = {
   title: 'Navigation item',
   fields: [
     {type: 'boolean', name: 'hidden', title: 'Hidden'},
+    {type: 'boolean', name: 'collapsed', title: 'Collapsed'},
     {type: 'string', name: 'title', title: 'Title'},
     {type: 'string', name: 'menuTitle', title: 'Menu title'},
     {type: 'string', name: 'segment', title: 'Segment'},

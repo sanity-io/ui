@@ -11,7 +11,14 @@ describe('lib/nav', () => {
   it('should get nav items from raw data', () => {
     const items = getNavItems(data.items || [])
 
-    expect(items[0]).toEqual({href: undefined, title: 'Home', items: []})
+    expect(items[0]).toEqual({
+      collapsed: false,
+      href: undefined,
+      menuTitle: undefined,
+      title: 'Home',
+      segment: undefined,
+      items: [],
+    })
   })
 
   it('should get paths from raw data', () => {
