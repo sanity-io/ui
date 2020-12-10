@@ -28,8 +28,8 @@ export default function PathPage(props: {params: {path: string[]}}) {
   return (
     <>
       <Head>
-        {target && <title>{target.title} – Sanity Design</title>}
-        {!target && 'Missing target – Sanity Design'}
+        {target && <title>{target.title} – Sanity UI</title>}
+        {!target && 'Missing target – Sanity UI'}
       </Head>
 
       <AppLayout>

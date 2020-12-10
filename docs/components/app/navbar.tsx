@@ -41,7 +41,7 @@ export function Navbar() {
                 <Inline as="a" space={3}>
                   <SanityMonogram style={{fontSize: 25, verticalAlign: 'top'}} />
                   <Text accent size={[2, 2, 3]} weight="bold">
-                    Design
+                    UI
                   </Text>
                 </Inline>
               </Link>

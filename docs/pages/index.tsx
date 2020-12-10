@@ -16,7 +16,7 @@ function IndexPage() {
   return (
     <>
       <Head>
-        <title>Sanity Design</title>
+        <title>Sanity UI</title>
       </Head>
 
       <AppLayout>
