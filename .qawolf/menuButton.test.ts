@@ -25,7 +25,7 @@ describe('Components/MenuButton', () => {
     )
 
     await page.click('button[data-ui="Avatar"]')
-    await page.waitForSelector('[data-ui="MenuItem"]')
+    expect(await page.$('[data-ui="MenuItem"]')).toBeTruthy()
   })
 
   it('should use arrow keys to navigate the menu', async () => {
@@ -38,35 +38,35 @@ describe('Components/MenuButton', () => {
 
     // Open menu by pressed DOWN arrow key
     await page.press('#menu-button', 'ArrowDown')
-    await page.waitForSelector('#menu-item-1:focus')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
 
     // Move through menu with arrow keys
     await page.press('#menu-item-1', 'ArrowDown')
-    await page.waitForSelector('#menu-item-2:focus')
+    expect(await page.$('#menu-item-2:focus')).toBeTruthy()
     await page.press('#menu-item-2', 'ArrowDown')
     // Skips #menu-item-3, because it's disabled
-    await page.waitForSelector('#menu-item-4:focus')
+    expect(await page.$('#menu-item-4:focus')).toBeTruthy()
     await page.press('#menu-item-4', 'ArrowDown')
     // The first menu item should now be focused
-    await page.waitForSelector('#menu-item-1:focus')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
     // Escape to exit the menu
     await page.press('#menu-item-1', 'Escape')
-    await page.waitForSelector('#menu-button:focus')
+    expect(await page.$('#menu-button:focus')).toBeTruthy()
 
     // Open menu by pressed UP arrow key
     await page.press('#menu-button', 'ArrowUp')
-    await page.waitForSelector('#menu-item-4:focus')
+    expect(await page.$('#menu-item-4:focus')).toBeTruthy()
     // Move through menu with arrow keys
     await page.press('#menu-item-4', 'ArrowUp')
     // Skips #menu-item-3, because it's disabled
-    await page.waitForSelector('#menu-item-2:focus')
+    expect(await page.$('#menu-item-2:focus')).toBeTruthy()
     await page.press('#menu-item-2', 'ArrowUp')
-    await page.waitForSelector('#menu-item-1:focus')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
     await page.press('#menu-item-1', 'ArrowUp')
     // The last menu item should now be focused
-    await page.waitForSelector('#menu-item-4:focus')
+    expect(await page.$('#menu-item-4:focus')).toBeTruthy()
     // Escape to exit the menu
     await page.press('#menu-item-4', 'Escape')
-    await page.waitForSelector('#menu-button:focus')
+    expect(await page.$('#menu-button:focus')).toBeTruthy()
   })
 })
