@@ -69,4 +69,58 @@ describe('Components/MenuButton', () => {
     await page.press('#menu-item-4', 'Escape')
     expect(await page.$('#menu-button:focus')).toBeTruthy()
   })
+
+  it('should close on tab', async () => {
+    const page = await context.newPage()
+
+    await page.goto(
+      'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',
+      {waitUntil: 'domcontentloaded'}
+    )
+
+    // Open menu by pressed DOWN arrow key
+    await page.press('#menu-button', 'ArrowDown')
+    await page.waitForSelector('#menu-item-1:focus')
+
+    await page.click('#menu-button')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
+    await page.press('#menu-item-1', 'Tab')
+    expect(await page.$('#menu-button[aria-expanded="true"]')).toBeNull()
+  })
+
+  it('should close on shift + tab', async () => {
+    const page = await context.newPage()
+
+    await page.goto(
+      'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',
+      {waitUntil: 'domcontentloaded'}
+    )
+
+    // Open menu by pressed DOWN arrow key
+    await page.press('#menu-button', 'ArrowDown')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
+
+    await page.click('#menu-button')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
+    await page.press('#menu-item-1', 'Shift+Tab')
+    expect(await page.$('#menu-button[aria-expanded="true"]')).toBeNull()
+  })
+
+  it('should not close when one of the items receives focus', async () => {
+    const page = await context.newPage()
+
+    await page.goto(
+      'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',
+      {waitUntil: 'domcontentloaded'}
+    )
+
+    // Open menu by pressed DOWN arrow key
+    await page.press('#menu-button', 'ArrowDown')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
+
+    await page.click('#menu-button')
+    expect(await page.$('#menu-item-1:focus')).toBeTruthy()
+    ;(await page.$('#menu-item-2'))?.focus()
+    expect(await page.$('#menu-button[aria-expanded="true"]')).toBeTruthy()
+  })
 })
