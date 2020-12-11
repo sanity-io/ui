@@ -13,6 +13,7 @@ describe('lib/nav', () => {
 
     expect(items[0]).toEqual({
       collapsed: false,
+      hidden: false,
       href: undefined,
       menuTitle: undefined,
       title: 'Home',

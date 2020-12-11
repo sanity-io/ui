@@ -2,7 +2,7 @@ import {Box, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/u
 import React, {useMemo} from 'react'
 import styled from 'styled-components'
 import {ArticleContent} from './articleContent'
-import {getTOC} from './helpers'
+import {getHeadings, getTOCTree} from './helpers'
 import {HeadingNode} from './types'
 import {TimeAgo} from '$components'
 
@@ -12,7 +12,12 @@ const HeroContainer = styled(Container)`
 `
 
 export function Article({article}: {article?: any}) {
-  const toc = useMemo(() => (article.content ? getTOC(article.content) : []), [article.content])
+  const headings = useMemo(() => (article.content ? getHeadings(article.content) : []), [
+    article.content,
+  ])
+
+  const toc = useMemo(() => getTOCTree(headings), [headings])
+
   const layout = article.layout || {}
 
   return (
@@ -31,7 +36,9 @@ export function Article({article}: {article?: any}) {
 
               <Container width={2}>
                 <Stack space={[4, 4, 5, 6]}>
-                  {article.content && <ArticleContent blocks={article.content} toc={toc} />}
+                  {article.content && (
+                    <ArticleContent blocks={article.content} headings={headings} />
+                  )}
                 </Stack>
 
                 <Card borderTop marginTop={[3, 4, 5, 6]} paddingTop={[2, 3, 4]}>
@@ -64,16 +71,18 @@ export function Article({article}: {article?: any}) {
 
 function HeadingList({headings}: {headings: HeadingNode[]}) {
   return (
-    <Stack>
+    <Stack space={4}>
       {headings.map((heading) => (
         <Box key={heading.slug}>
           <Text size={2 - (heading.level - 2)}>
             <a href={`#${heading.slug}`}>{heading.text}</a>
           </Text>
 
-          <Box marginTop={4} paddingLeft={2}>
-            <HeadingList headings={heading.children} />
-          </Box>
+          {heading.level < 3 && heading.children.length > 0 && (
+            <Box marginTop={4} paddingLeft={2}>
+              <HeadingList headings={heading.children} />
+            </Box>
+          )}
         </Box>
       ))}
     </Stack>

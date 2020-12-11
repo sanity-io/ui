@@ -5,8 +5,10 @@ import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
 import {useApp} from './hooks'
 import {GitHubMark} from '$components'
+import {HINT_HIDDEN_CONTENT} from '$features'
 
 interface Route {
+  hidden: boolean
   href: string
   title: string
 }
@@ -16,8 +18,9 @@ export function Navbar() {
   const router = useRouter()
 
   const navbarRoutes: Route[] = (nav.items || [])
-    .filter((item: any) => !item.hidden)
+    .filter((item: any) => HINT_HIDDEN_CONTENT || !item.hidden)
     .map((item: any) => ({
+      hidden: item.hidden,
       href: `/${item.segment || ''}`,
       title: item.title,
     }))
@@ -61,6 +64,7 @@ export function Navbar() {
                       mode="bleed"
                       padding={[1, 2, 3]}
                       selected={selected}
+                      style={route.hidden ? {opacity: 0.25} : undefined}
                       text={route.title}
                     />
                   </Link>

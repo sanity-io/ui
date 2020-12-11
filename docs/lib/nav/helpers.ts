@@ -1,5 +1,9 @@
+import {HINT_HIDDEN_CONTENT} from '$features'
+
 interface NavItem {
-  href: string | undefined
+  collapsed: boolean
+  hidden: boolean
+  href?: string
   title: string
   menuTitle?: string
   items: NavItem[]
@@ -7,25 +11,28 @@ interface NavItem {
 }
 
 export function getNavItems(items: any[], basePath = ''): NavItem[] {
-  return items.map((item: any) => {
-    const href = `${basePath}/${item.segment || ''}`
+  return items
+    .filter((item) => HINT_HIDDEN_CONTENT || !item.hidden)
+    .map((item: any) => {
+      const href = `${basePath}/${item.segment || ''}`
 
-    return {
-      collapsed: item.collapsed || false,
-      href: item.targetId ? href : undefined,
-      title: item.title,
-      menuTitle: item.menuTitle,
-      items: getNavItems(item.items || [], href),
-      segment: item.segment,
-    }
-  })
+      return {
+        collapsed: item.collapsed || false,
+        hidden: item.hidden || false,
+        href: item.targetId ? href : undefined,
+        title: item.title,
+        menuTitle: item.menuTitle,
+        items: getNavItems(item.items || [], href),
+        segment: item.segment,
+      }
+    })
 }
 
 export function getNavPaths(items: any[], basePath = ''): string[] {
   const paths = []
 
   for (const item of items) {
-    if (item.hidden) continue
+    if (!HINT_HIDDEN_CONTENT && item.hidden) continue
 
     const path = `${basePath}/${item.segment || ''}`
 

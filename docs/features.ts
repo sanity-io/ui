@@ -7,3 +7,5 @@
 export const PREVIEW: boolean = process.env.FEATURE_PREVIEW
   ? JSON.parse(process.env.FEATURE_PREVIEW)
   : process.env.NODE_ENV === 'development'
+
+export const HINT_HIDDEN_CONTENT = process.env.NODE_ENV === 'development'

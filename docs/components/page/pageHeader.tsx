@@ -21,7 +21,12 @@ function NavItem(props: any) {
     <>
       {props.href && (
         <Box padding={3}>
-          <NavLink href={props.href} size={[2, 2, 3]} weight="medium">
+          <NavLink
+            href={props.href}
+            size={[2, 2, 3]}
+            style={props.hidden ? {opacity: 0.25} : undefined}
+            weight="medium"
+          >
             {props.menuTitle || props.title}
           </NavLink>
         </Box>

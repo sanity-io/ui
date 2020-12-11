@@ -1,9 +1,11 @@
 import BlockContent from '@sanity/block-content-to-react'
 import {LinkIcon} from '@sanity/icons'
-import {Box, Card, Code, Heading, Text} from '@sanity/ui'
+import {Box, Card, Code, Heading, Stack, Text} from '@sanity/ui'
 import dynamic from 'next/dynamic'
 import React, {useMemo} from 'react'
+import styled from 'styled-components'
 import {blocksToText} from '../helpers'
+import {HeadingType} from '../types'
 import {ColorGrid} from './blocks/colorGrid'
 import {GroqLogoGrid} from './blocks/groqLogoGrid'
 import {NpmPackageBadge} from './blocks/npmPackageBadge'
@@ -15,8 +17,8 @@ const CodeExample = dynamic(ready().then(() => import('./blocks/codeExample')) a
   ssr: false,
 }) as any
 
-export function ArticleContent({blocks, toc}: {blocks: any[]; toc: any}) {
-  const serializers = useMemo(() => buildSerializers(toc), [toc])
+export function ArticleContent({blocks, headings}: {blocks: any[]; headings: HeadingType[]}) {
+  const serializers = useMemo(() => buildSerializers(headings), [headings])
 
   return <BlockContent blocks={blocks} serializers={serializers} />
 }
@@ -25,7 +27,19 @@ const CODE_LANGUAGES = {
   sh: 'bash',
 }
 
-function buildSerializers(toc: any) {
+const ListItemText = styled(Text).attrs({forwardedAs: 'li'})`
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: '•';
+    left: -1em;
+    width: 1em;
+    top: 0.66em;
+  }
+`
+
+function buildSerializers(headings: HeadingType[]) {
   function CodeSerializer(props: any) {
     const language: 'sh' = props.node.language
 
@@ -97,9 +111,8 @@ function buildSerializers(toc: any) {
 
     if (HEADER_RE.test(style)) {
       const text = blocksToText([props.node])
-      const heading = toc && toc.find((t: any) => t.text === text)
+      const heading = headings.find((t: any) => t.text === text)
 
-      // const level = style.replace(/[^\d]/g, '')
       return (
         <Box {...headingProps[style].box} id={heading && heading.slug}>
           <Heading as={style} {...headingProps[style].heading}>
@@ -136,7 +149,27 @@ function buildSerializers(toc: any) {
     )
   }
 
+  function ListSerializer(props: any) {
+    return (
+      <Box paddingY={4} paddingLeft={[4, 4, 5]}>
+        <Stack as="ul" space={[2, 2, 3]}>
+          {props.children}
+        </Stack>
+      </Box>
+    )
+  }
+
+  function ListItemSerializer(props: any) {
+    return (
+      <ListItemText muted size={[2, 2, 3, 4]}>
+        {props.children}
+      </ListItemText>
+    )
+  }
+
   return {
+    list: ListSerializer,
+    listItem: ListItemSerializer,
     types: {
       block: BlockSerializer,
       code: CodeSerializer,

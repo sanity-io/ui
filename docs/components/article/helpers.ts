@@ -1,5 +1,5 @@
 import slugify from 'slugify'
-import {HeadingNode} from './types'
+import {HeadingType, HeadingNode} from './types'
 
 const HEADER_RE = /^h\d/
 
@@ -19,13 +19,15 @@ export function blocksToText(blocks: any[], opts: any = {}) {
     .join('\n\n')
 }
 
-export function getTOC(blocks: any[]) {
+export function getHeadings(blocks: any[]): HeadingType[] {
   // @todo: uniqify `slug`
-  const headings = blocks
+  return blocks
     .filter((block) => block._type === 'block')
     .filter((block) => HEADER_RE.test(block.style))
     .map((block) => getHeadingInfo(block))
+}
 
+export function getTOCTree(headings: HeadingType[]) {
   const root: HeadingNode = {
     level: 1,
     children: [],
@@ -74,7 +76,7 @@ export function getTOC(blocks: any[]) {
   return root.children
 }
 
-export function getHeadingInfo(block: any) {
+export function getHeadingInfo(block: any): HeadingType {
   const text = blocksToText([block])
 
   return {
