@@ -61,6 +61,16 @@ export function MenuButton({
     if (buttonElement) buttonElement.focus()
   }, [buttonElement])
 
+  const handleBlur = useCallback(
+    (event) => {
+      if (!menuElement?.contains(event.relatedTarget)) {
+        setOpen(false)
+        if (buttonElement) buttonElement.focus()
+      }
+    },
+    [menuElement, buttonElement]
+  )
+
   const handleItemClick = useCallback(() => {
     setOpen(false)
   }, [])
@@ -77,6 +87,7 @@ export function MenuButton({
     onEscape: handleMenuEscape,
     onItemClick: handleItemClick,
     ref: setMenuElement,
+    onBlurCapture: handleBlur,
   }
 
   // @todo: check if the `menu` property is a Menu component?
@@ -86,6 +97,8 @@ export function MenuButton({
     id,
     onClick: handleButtonClick,
     onKeyDown: handleButtonKeyDown,
+    'aria-haspopup': true,
+    'aria-expanded': open,
     ref: setButtonElement,
     selected: open,
   }
