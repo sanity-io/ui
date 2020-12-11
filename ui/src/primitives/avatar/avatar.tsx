@@ -190,7 +190,7 @@ export const Avatar = forwardRef(
     const _sizeRem = avatarSize.size
     const _radius = _sizeRem / 2
 
-    const elementId = useId()
+    const elementId = useId() || ''
     const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
       animateArrowFrom || arrowPositionProp || 'inside'
     )
@@ -245,7 +245,7 @@ export const Avatar = forwardRef(
           <svg viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
             <defs>
               <pattern
-                id={`${elementId}-image-url`}
+                id={`avatar-image-${elementId}`}
                 patternContentUnits="objectBoundingBox"
                 width="1"
                 height="1"
