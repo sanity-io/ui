@@ -15,9 +15,9 @@ import {useMenu} from './hooks'
 
 interface MenuItemProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode
   iconRight?: React.ComponentType | React.ReactNode
-  size?: number | number[]
   space?: number | number[]
   text?: React.ReactNode
   tone?: ThemeColorToneKey
@@ -30,6 +30,7 @@ export const MenuItem = forwardRef(
   ) => {
     const {
       children,
+      fontSize = 2,
       icon,
       iconRight,
       onClick,
@@ -41,7 +42,6 @@ export const MenuItem = forwardRef(
       paddingBottom,
       paddingLeft,
       radius = 2,
-      size = 2,
       space = 3,
       text,
       ...restProps
@@ -94,7 +94,7 @@ export const MenuItem = forwardRef(
           <Box as="span" {...paddingProps}>
             <Flex as="span">
               {icon && (
-                <Text size={size}>
+                <Text size={fontSize}>
                   {isValidElement(icon) && icon}
                   {isValidElementType(icon) && createElement(icon)}
                 </Text>
@@ -106,12 +106,12 @@ export const MenuItem = forwardRef(
                   marginLeft={icon ? space : undefined}
                   marginRight={iconRight ? space : undefined}
                 >
-                  <Text size={size}>{text}</Text>
+                  <Text size={fontSize}>{text}</Text>
                 </Box>
               )}
 
               {iconRight && (
-                <Text size={size}>
+                <Text size={fontSize}>
                   {isValidElement(iconRight) && iconRight}
                   {isValidElementType(iconRight) && createElement(iconRight)}
                 </Text>
