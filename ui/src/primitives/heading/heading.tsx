@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {responsiveHeadingFont, responsiveTextAlignStyle} from '../../styles'
+import {responsiveHeadingFont, responsiveTextAlignStyle} from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 import {TextAlign} from '../../types'
 import {headingBaseStyles} from './styles'

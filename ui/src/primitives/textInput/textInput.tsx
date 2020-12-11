@@ -10,7 +10,7 @@ import {
   TextInputInputStyleProps,
   TextInputRepresentationStyleProps,
   TextInputResponsivePaddingStyleProps,
-} from '../../styles'
+} from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 import {Box} from '../box'
 import {Card} from '../card'

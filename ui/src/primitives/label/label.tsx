@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles'
+import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 import {TextAlign} from '../../types'
 import {labelBaseStyles} from './styles'

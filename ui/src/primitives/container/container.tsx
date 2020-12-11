@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {responsiveBoxStyle, ResponsiveBoxStyleProps} from '../../styles'
+import {responsiveBoxStyle, ResponsiveBoxStyleProps} from '../../styles/internal'
 import {containerBaseStyles, responsiveContainerWidthStyles} from './styles'
 import {ResponsiveWidthStyleProps} from './types'
 

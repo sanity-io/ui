@@ -5,7 +5,7 @@ import {
   ResponsivePaddingStyleProps,
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
-} from '../../styles'
+} from '../../styles/internal'
 import {Label} from '../label'
 import {badge} from './styles'
 import {BadgeMode, BadgeTone} from './types'

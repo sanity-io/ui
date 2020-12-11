@@ -7,7 +7,7 @@ import {
   ResponsiveFlexStyleProps,
   responsiveFlexItemStyle,
   ResponsiveFlexItemStyleProps,
-} from '../../styles'
+} from '../../styles/internal'
 
 interface FlexProps
   extends ResponsiveBoxStyleProps,

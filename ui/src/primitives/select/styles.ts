@@ -1,13 +1,7 @@
 import {css} from 'styled-components'
-import {
-  getResponsiveProp,
-  rem,
-  responsive,
-  responsiveInputPaddingIconRightStyle,
-  responsiveRadiusStyle,
-  ThemeProps,
-} from '../../styles'
+import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
+import {responsiveInputPaddingIconRightStyle, responsiveRadiusStyle} from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
 
 const root = () => {

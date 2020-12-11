@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Button, Card, Container, Flex, ResponsiveWidthStyleProps, Text} from '../../primitives'
-import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles'
+import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
 import {

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant, isHTMLButtonElement} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
-import {ResponsivePaddingStyleProps} from '../../styles'
+import {ResponsivePaddingStyleProps} from '../../styles/internal'
 import {useLayer} from '../../utils'
 import {MenuContext} from './menuContext'
 

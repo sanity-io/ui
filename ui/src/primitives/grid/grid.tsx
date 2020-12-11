@@ -11,7 +11,7 @@ import {
   ResponsivePaddingStyleProps,
   responsiveMarginStyle,
   ResponsiveMarginStyleProps,
-} from '../../styles'
+} from '../../styles/internal'
 
 interface GridProps
   extends ResponsiveBoxStyleProps,

@@ -1,6 +1,10 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {ResponsiveFontProps, responsiveTextAlignStyle, responsiveTextFont} from '../../styles'
+import {
+  ResponsiveFontProps,
+  responsiveTextAlignStyle,
+  responsiveTextFont,
+} from '../../styles/internal'
 import {TextAlign} from '../../types'
 import {textBaseStyles} from './styles'
 

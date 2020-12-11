@@ -4,6 +4,10 @@ import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFontProps} from './types'
 
+/**
+ * A utility function getting responsive font styles.
+ * @beta Should not be used in production, as this might change.
+ */
 export function responsiveFont(
   fontKey: ThemeFontKey,
   props: ResponsiveFontProps & ThemeProps

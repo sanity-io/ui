@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
-import {responsiveRadiusStyle} from '../../styles'
+import {responsiveRadiusStyle} from '../../styles/internal'
 import {Box} from '../box'
 import {Code} from '../code'
 

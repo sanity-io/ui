@@ -1,12 +1,5 @@
-export * from './border'
-export * from './box'
-export * from './flex'
-export * from './font'
-export * from './grid'
 export * from './helpers'
-export * from './input'
-export * from './margin'
-export * from './padding'
-export * from './radius'
-export * from './shadow'
 export * from './types'
+
+// beta
+export * from './font'

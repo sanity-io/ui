@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import styled from 'styled-components'
-import {responsiveCodeFontStyle} from '../../styles'
+import {responsiveCodeFontStyle} from '../../styles/internal'
 import {codeBaseStyles} from './styles'
 
 interface CodeProps {

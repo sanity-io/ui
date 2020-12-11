@@ -9,7 +9,7 @@ import React, {
 import {isValidElementType} from 'react-is'
 import {useForwardedRef} from '../../hooks'
 import {Box, Card, Flex, Text} from '../../primitives'
-import {ResponsivePaddingStyleProps, ResponsiveRadiusProps} from '../../styles'
+import {ResponsivePaddingStyleProps, ResponsiveRadiusProps} from '../../styles/internal'
 import {ThemeColorToneKey} from '../../theme'
 import {useMenu} from './hooks'
 

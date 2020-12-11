@@ -1,8 +1,8 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
+import {getResponsiveProp} from '../../styles'
 import {
-  getResponsiveProp,
   responsiveInputPaddingStyle,
   ResponsivePaddingStyleProps,
   responsiveRadiusStyle,
@@ -11,7 +11,7 @@ import {
   TextInputResponsivePaddingStyleProps,
   TextInputInputStyleProps,
   TextInputRepresentationStyleProps,
-} from '../../styles'
+} from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 
 interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {

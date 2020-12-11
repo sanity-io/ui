@@ -18,7 +18,7 @@ import {
   ResponsiveRadiusProps,
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
-} from '../../styles'
+} from '../../styles/internal'
 import {ThemeColorProvider, ThemeColorSchemeKey, ThemeColorToneKey, useRootTheme} from '../../theme'
 import {card} from './styles'
 import {CardColorProps} from './types'

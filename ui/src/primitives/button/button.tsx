@@ -1,13 +1,13 @@
 import React, {createElement, forwardRef, isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
+import {ThemeProps} from '../../styles'
 import {
   FlexJustify,
   ResponsivePaddingStyleProps,
   responsiveRadiusStyle,
   ResponsiveRadiusProps,
-  ThemeProps,
-} from '../../styles'
+} from '../../styles/internal'
 import {useTheme} from '../../theme'
 import {Box} from '../box'
 import {Flex} from '../flex'
