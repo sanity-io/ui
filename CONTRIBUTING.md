@@ -46,5 +46,11 @@ If you’re adding an urgent bug fix, then code review is not required.
 To release updated packages, run this command:
 
 ```sh
-yarn release
+# To publish a new `latest` release
+git checkout main
+yarn release:latest
+
+# To publish a new `next` release
+git checkout next
+yarn release:next
 ```
