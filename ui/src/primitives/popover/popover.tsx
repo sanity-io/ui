@@ -109,7 +109,7 @@ export const Popover = forwardRef(
       open,
       padding,
       placement: placementProp,
-      portal: portalProp = true,
+      portal: portalProp = false,
       preventOverflow,
       radius = 3,
       referenceElement: referenceElementProp,
