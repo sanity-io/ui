@@ -113,7 +113,6 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
   const layer = useLayer()
   const {isTopLayer} = layer
 
-  console.log(layer)
   const labelId = `${id}_label`
 
   useEffect(() => {
