@@ -7,7 +7,7 @@ import {Placement} from '../../types'
 import {Layer, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {ResponsiveWidthStyleProps} from '../container'
-import {responsiveContainerWidthStyles} from '../container/styles'
+import {responsiveContainerWidthStyle} from '../container/styles'
 import {PopoverArrow} from './arrow'
 
 interface PopoverProps extends ResponsiveWidthStyleProps {
@@ -69,7 +69,7 @@ const PopoverCard = styled(Card)<
     & > * {
       min-height: 0;
     }
-    ${responsiveContainerWidthStyles}
+    ${responsiveContainerWidthStyle}
   `
 )
 

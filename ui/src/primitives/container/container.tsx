@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {responsiveBoxStyle, ResponsiveBoxStyleProps} from '../../styles/internal'
-import {containerBaseStyles, responsiveContainerWidthStyles} from './styles'
+import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
 import {ResponsiveWidthStyleProps} from './types'
 
 export interface ContainerProps extends ResponsiveWidthStyleProps {
@@ -10,8 +10,8 @@ export interface ContainerProps extends ResponsiveWidthStyleProps {
 
 const Root = styled.div<ResponsiveBoxStyleProps & ResponsiveWidthStyleProps>(
   responsiveBoxStyle,
-  containerBaseStyles,
-  responsiveContainerWidthStyles
+  containerBaseStyle,
+  responsiveContainerWidthStyle
 )
 
 export function Container(

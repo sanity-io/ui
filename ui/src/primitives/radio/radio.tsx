@@ -1,14 +1,14 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
-import {radioBaseStyles, inputElementStyles} from './styles'
+import {radioBaseStyle, inputElementStyle} from './styles'
 
 interface RadioProps {
   customValidity?: string
 }
 
-const Root = styled.div(radioBaseStyles)
-const Input = styled.input(inputElementStyles)
+const Root = styled.div(radioBaseStyle)
+const Input = styled.input(inputElementStyle)
 
 export const Radio = forwardRef(
   (

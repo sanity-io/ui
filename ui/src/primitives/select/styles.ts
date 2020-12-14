@@ -1,7 +1,11 @@
 import {css} from 'styled-components'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
-import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
-import {responsiveInputPaddingIconRightStyle, responsiveRadiusStyle} from '../../styles/internal'
+import {
+  focusRingBorderStyle,
+  focusRingStyle,
+  responsiveInputPaddingIconRightStyle,
+  responsiveRadiusStyle,
+} from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
 
 const root = () => {
@@ -37,7 +41,7 @@ const inputColor = ({theme}: ThemeProps) => {
   return css`
     background-color: ${color.default.enabled.bg};
     color: ${color.default.enabled.fg};
-    box-shadow: ${borderStyle({
+    box-shadow: ${focusRingBorderStyle({
       color: color.default.enabled.border,
       width: input.border.width,
     })};
@@ -46,7 +50,7 @@ const inputColor = ({theme}: ThemeProps) => {
       &:not(:disabled):hover {
         background-color: ${color.default.hovered.bg};
         color: ${color.default.hovered.fg};
-        box-shadow: ${borderStyle({
+        box-shadow: ${focusRingBorderStyle({
           color: color.default.hovered.border,
           width: input.border.width,
         })};
@@ -68,7 +72,7 @@ const inputColor = ({theme}: ThemeProps) => {
       opacity: 1;
       background-color: ${color.default.disabled.bg};
       color: ${color.default.disabled.fg};
-      box-shadow: ${borderStyle({
+      box-shadow: ${focusRingBorderStyle({
         color: color.default.disabled.border,
         width: input.border.width,
       })};
@@ -115,7 +119,7 @@ const iconBox = ({theme}: {radius?: number | number[]; size?: number | number[]}
   `
 }
 
-export const select = {
+export const selectStyle = {
   root,
   input,
   iconBox,

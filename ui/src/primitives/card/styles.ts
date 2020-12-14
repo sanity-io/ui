@@ -3,11 +3,11 @@ import {ThemeProps} from '../../styles'
 import {ThemeColorBase, ThemeColorCardState} from '../../theme'
 import {CardColorProps} from './types'
 
-export function card(props: CardColorProps & ThemeProps) {
-  return [cardBaseStyles, cardColorStyles(props)]
+export function cardStyle(props: CardColorProps & ThemeProps) {
+  return [cardBaseStyle, cardColorStyle(props)]
 }
 
-export function cardBaseStyles() {
+export function cardBaseStyle() {
   return css`
     &[data-as='button'] {
       -webkit-font-smoothing: inherit;
@@ -57,7 +57,7 @@ function vars(base: ThemeColorBase, color: ThemeColorCardState) {
   `
 }
 
-export function cardColorStyles(props: CardColorProps & ThemeProps) {
+export function cardColorStyle(props: CardColorProps & ThemeProps) {
   const {theme} = props
   const {base, card} = theme.sanity.color
 

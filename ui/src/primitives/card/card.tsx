@@ -20,7 +20,7 @@ import {
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
 import {ThemeColorProvider, ThemeColorSchemeKey, ThemeColorToneKey, useRootTheme} from '../../theme'
-import {card} from './styles'
+import {cardStyle} from './styles'
 import {CardColorProps} from './types'
 
 export interface CardProps
@@ -56,7 +56,7 @@ const Root = styled.div<
   responsivePaddingStyle,
   responsiveRadiusStyle,
   responsiveShadowStyle,
-  card
+  cardStyle
 )
 
 export const Card = forwardRef(

@@ -1,11 +1,11 @@
 import {useId} from '@reach/auto-id'
 import React, {forwardRef, useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
-import styled, {css} from 'styled-components'
-import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
-import {focusRingStyle} from '../../styles/_internal/focusRing'
+import styled from 'styled-components'
+import {getResponsiveProp} from '../../styles'
 import {ThemeColorSpotKey, useTheme} from '../../theme'
 import {Text} from '../text'
+import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
 import {AvatarPosition, AvatarSize, AvatarStatus} from './types'
 
 export interface AvatarProps {
@@ -25,145 +25,18 @@ export interface AvatarProps {
   title?: string
 }
 
-function responsiveAvatarSizeStyle(props: {size: AvatarSize[]} & ThemeProps) {
-  const {theme} = props
-  const {avatar, media} = theme.sanity
-
-  return responsive(media, props.size, (size) => {
-    const avatarSize = avatar.sizes[size]
-
-    if (!avatarSize) return {}
-
-    return {
-      width: rem(avatarSize.size),
-      height: rem(avatarSize.size),
-      borderRadius: rem(avatarSize.size / 2),
-
-      '& > svg': {
-        width: rem(avatarSize.size),
-        height: rem(avatarSize.size),
-        borderRadius: rem(avatarSize.size / 2),
-      },
-    }
-  })
-}
-
 const Root = styled.div<{uiColor: string; size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
-  ({theme, uiColor}: {uiColor: string} & ThemeProps) => {
-    const {focusRing} = theme.sanity
-
-    return css`
-      background-color: ${uiColor};
-      position: relative;
-      box-sizing: border-box;
-      user-select: none;
-      box-shadow: 0 0 0 1px var(--card-bg-color);
-
-      &[data-status='inactive'] {
-        opacity: 0.5;
-      }
-
-      & > svg {
-        &:not([hidden]) {
-          display: block;
-        }
-      }
-
-      /* &:is(button) */
-      &[data-as='button'] {
-        appearance: none;
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font: inherit;
-        -webkit-font-smoothing: inherit;
-        color: inherit;
-        outline: none;
-
-        &:focus {
-          box-shadow: ${focusRingStyle({focusRing})};
-        }
-
-        &:focus:not(:focus-visible) {
-          box-shadow: none;
-        }
-      }
-    `
-  }
+  avatarStyle.root
 )
 
-const Arrow = styled.div`
-  position: absolute;
-  box-sizing: border-box;
-  z-index: 0;
-  opacity: 0;
-  transition: all 0.2s linear;
-  transform: rotate(-90deg) translate3d(0, 6px, 0);
+const Arrow = styled.div(avatarStyle.arrow)
 
-  & > svg {
-    width: 11px;
-    height: 7px;
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
+const BgStroke = styled.ellipse(avatarStyle.bgStroke)
 
-    &:not([hidden]) {
-      display: block;
-    }
-  }
+const Stroke = styled.ellipse(avatarStyle.stroke)
 
-  [data-arrow-position='inside'] > & {
-    transform: rotate(-90deg) translate3d(0, 6px, 0);
-    opacity: 0;
-  }
-
-  [data-arrow-position='top'] > & {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-
-  [data-arrow-position='bottom'] > & {
-    opacity: 1;
-    transform: rotate(-180deg);
-  }
-`
-
-const BgStroke = styled.ellipse`
-  stroke-width: 4px;
-  stroke: var(--card-bg-color);
-`
-
-const Stroke = styled.ellipse`
-  stroke-width: 3px;
-
-  ${Root}[data-status='editing'] & {
-    stroke-dasharray: 2 4;
-    stroke-linecap: round;
-    animation: avatarEditingSpin 250ms infinite linear;
-  }
-`
-
-const Initials = styled.div((props: ThemeProps) => {
-  const {theme} = props
-  const {base} = theme.sanity.color
-
-  return css`
-    width: 100%;
-    height: 100%;
-    color: ${base.fg};
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    text-align: center;
-    border-radius: 50%;
-
-    &:not([hidden]) {
-      display: flex;
-    }
-  `
-})
+const Initials = styled.div(avatarStyle.initials)
 
 export const Avatar = forwardRef(
   (props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>, ref) => {
@@ -186,7 +59,7 @@ export const Avatar = forwardRef(
     const color = theme.sanity.color.spot[colorKey] || theme.sanity.color.spot.gray
 
     // @todo: remove this
-    const avatarSize = theme.sanity.avatar.sizes[size[0]]
+    const avatarSize = theme.sanity.avatar.sizes[size[0]] || theme.sanity.avatar.sizes[0]
     const _sizeRem = avatarSize.size
     const _radius = _sizeRem / 2
 

@@ -1,4 +1,4 @@
-export function borderStyle(border: {color: string; width: number}) {
+export function focusRingBorderStyle(border: {color: string; width: number}) {
   return `inset 0 0 0 ${border.width}px ${border.color}`
 }
 
@@ -14,7 +14,7 @@ export function focusRingStyle(opts: {
 
   return [
     focusRingInsetWidth > 0 && `inset 0 0 0 ${focusRingInsetWidth}px var(--card-focus-ring-color)`,
-    border && borderStyle(border),
+    border && focusRingBorderStyle(border),
     focusRingInsetWidth < 0 && `0 0 0 ${0 - focusRingInsetWidth}px ${bgColor}`,
     focusRingOutsetWidth > 0 && `0 0 0 ${focusRingOutsetWidth}px var(--card-focus-ring-color)`,
   ]

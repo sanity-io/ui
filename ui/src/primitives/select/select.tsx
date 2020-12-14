@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {Box} from '../box'
 import {Text} from '../text'
-import {select} from './styles'
+import {selectStyle} from './styles'
 
 interface SelectProps {
   fontSize?: number | number[]
@@ -14,16 +14,16 @@ interface SelectProps {
   customValidity?: string
 }
 
-const Root = styled.div(select.root)
+const Root = styled.div(selectStyle.root)
 
 const Input = styled.select<{
   fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
   space?: number | number[]
-}>(select.input)
+}>(selectStyle.input)
 
-const IconBox = styled(Box)(select.iconBox)
+const IconBox = styled(Box)(selectStyle.iconBox)
 
 export const Select = forwardRef(
   (

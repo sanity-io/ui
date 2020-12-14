@@ -2,14 +2,14 @@ import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {getResponsiveProp} from '../../styles'
 import {childrenToElementArray} from '../helpers'
-import {inlineBaseStyles, inlineSpaceStyles} from './styles'
+import {inlineBaseStyle, inlineSpaceStyle} from './styles'
 
 interface InlineProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   space?: number | number[]
 }
 
-const Root = styled.div(inlineBaseStyles, inlineSpaceStyles)
+const Root = styled.div(inlineBaseStyle, inlineSpaceStyle)
 
 export const Inline = forwardRef(
   (props: InlineProps & Omit<React.HTMLProps<HTMLDivElement>, 'space'>, ref) => {

@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
-import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
+import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 
 export function checkboxBaseStyles() {
   return css`
@@ -32,7 +32,7 @@ export function inputElementStyles(props: ThemeProps) {
       height: ${rem(input.checkbox.size)};
       width: ${rem(input.checkbox.size)};
       box-sizing: border-box;
-      box-shadow: ${borderStyle({
+      box-shadow: ${focusRingBorderStyle({
         color: color.default.enabled.border,
         width: input.border.width,
       })};
@@ -70,7 +70,7 @@ export function inputElementStyles(props: ThemeProps) {
 
     &:disabled + span {
       background: ${color.default.disabled.bg};
-      box-shadow: ${borderStyle({
+      box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
         color: color.default.disabled.border,
       })};

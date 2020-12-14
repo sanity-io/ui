@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
+import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 import {ThemeColorButtonState} from '../../theme'
 import {ButtonMode, ButtonTone} from './types'
 
@@ -60,7 +60,7 @@ export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} 
     {
       backgroundColor: 'var(--card-bg-color)',
       color: 'var(--card-fg-color)',
-      boxShadow: borderStyle(border),
+      boxShadow: focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': buttonColorVarsStyle(color.disabled),
       "&:not([data-disabled='true'])": {
         '&:focus': {

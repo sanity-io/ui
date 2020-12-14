@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
-function codeSyntaxHighlightingStyles({theme}: ThemeProps) {
+function codeSyntaxHighlightingStyle({theme}: ThemeProps) {
   const color = theme.sanity.color.syntax
 
   return {
@@ -44,7 +44,7 @@ function codeSyntaxHighlightingStyles({theme}: ThemeProps) {
   }
 }
 
-export function codeBaseStyles(props: {muted: boolean} & ThemeProps) {
+export function codeBaseStyle(props: {muted: boolean} & ThemeProps) {
   const {muted} = props
 
   return css`
@@ -69,7 +69,7 @@ export function codeBaseStyles(props: {muted: boolean} & ThemeProps) {
       font-family: inherit;
 
       &.refractor .token {
-        ${codeSyntaxHighlightingStyles}
+        ${codeSyntaxHighlightingStyle}
       }
     }
 

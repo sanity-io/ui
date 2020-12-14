@@ -1,18 +1,15 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {getResponsiveProp} from '../../styles'
-import {stackBaseStyles, stackSpaceStyles} from './styles'
+import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
-interface StackProps {
+interface StackProps extends ResponsiveStackSpaceStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  space?: number | number[]
 }
 
-const Root = styled.div(stackBaseStyles, stackSpaceStyles)
+const Root = styled.div<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
 
 export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElement>, ref) => {
-  const {space: spaceProp, ...restProps} = props
-  const space = getResponsiveProp(spaceProp, [])
+  const {space, ...restProps} = props
 
   return <Root data-ui="Stack" {...restProps} ref={ref} space={space} />
 })

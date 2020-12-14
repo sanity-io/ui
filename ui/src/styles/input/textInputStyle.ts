@@ -1,6 +1,6 @@
 import {CSSObject} from 'styled-components'
 import {ThemeFontWeightKey} from '../../theme'
-import {borderStyle, focusRingStyle} from '../_internal/focusRing'
+import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
@@ -117,7 +117,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
       color: color.default.enabled.fg,
       backgroundColor: color.default.enabled.bg,
       boxShadow: border
-        ? borderStyle({color: color.default.enabled.border, width: input.border.width})
+        ? focusRingBorderStyle({color: color.default.enabled.border, width: input.border.width})
         : undefined,
 
       // invalid
@@ -125,7 +125,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
         color: color.invalid.enabled.fg,
         backgroundColor: color.invalid.enabled.bg,
         boxShadow: border
-          ? borderStyle({color: color.invalid.enabled.border, width: input.border.width})
+          ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
           : 'none',
       },
 
@@ -144,7 +144,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
         color: color.default.disabled.fg,
         backgroundColor: color.default.disabled.bg,
         boxShadow: border
-          ? borderStyle({
+          ? focusRingBorderStyle({
               color: color.default.disabled.border,
               width: input.border.width,
             })
@@ -160,7 +160,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
 
         '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
           boxShadow: border
-            ? borderStyle({
+            ? focusRingBorderStyle({
                 color: color.default.hovered.border,
                 width: input.border.width,
               })

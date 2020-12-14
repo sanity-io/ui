@@ -2,6 +2,7 @@
 export * from './border'
 export * from './box'
 export * from './flex'
+export * from './focusRing'
 export * from './font'
 export * from './grid'
 export * from './input'

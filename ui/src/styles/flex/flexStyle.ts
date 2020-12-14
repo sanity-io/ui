@@ -3,14 +3,18 @@ import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
 
-export function responsiveFlexStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+export function responsiveFlexStyle() {
   return [
-    {'&:not([hidden])': {display: 'flex'}},
-    ...responsiveFlexAlignStyle(props),
-    ...responsiveFlexWrapStyle(props),
-    ...responsiveFlexJustifyStyle(props),
-    ...responsiveFlexDirectionStyle(props),
+    flexBaseStyle,
+    responsiveFlexAlignStyle,
+    responsiveFlexWrapStyle,
+    responsiveFlexJustifyStyle,
+    responsiveFlexDirectionStyle,
   ]
+}
+
+function flexBaseStyle() {
+  return {'&:not([hidden])': {display: 'flex'}}
 }
 
 export function responsiveFlexAlignStyle(
@@ -53,7 +57,7 @@ export function responsiveFlexDirectionStyle(
   return responsive(media, getResponsiveProp(props.direction), (direction) => {
     if (typeof direction !== 'string') return {}
 
-    if (direction && direction.startsWith('column')) {
+    if (direction.startsWith('column')) {
       return {flexDirection: direction, '&>*': {minHeight: 0}}
     }
 

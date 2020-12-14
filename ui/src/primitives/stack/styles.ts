@@ -1,26 +1,26 @@
-import {css} from 'styled-components'
-import {responsive, ThemeProps} from '../../styles'
+import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 
-function rem(px: number) {
-  return `${px / 16}rem`
+export interface ResponsiveStackSpaceStyleProps {
+  space?: number | number[]
 }
 
-export function stackBaseStyles() {
-  return css`
-    &:not([hidden]) {
-      display: grid;
-    }
-    grid-template-columns: minmax(0, 1fr);
-    grid-auto-rows: min-content;
-    margin: 0;
-    padding: 0;
-  `
+export function stackBaseStyle() {
+  return {
+    '&:not([hidden])': {
+      display: 'grid',
+    },
+    gridTemplateColumns: 'minmax(0, 1fr)',
+    gridAutoRows: 'min-content',
+    margin: 0,
+    padding: 0,
+  }
 }
 
-export function stackSpaceStyles(props: {space: number[]} & ThemeProps) {
+export function responsiveStackSpaceStyle(props: ResponsiveStackSpaceStyleProps & ThemeProps) {
   const {theme} = props
+  const {media, space} = theme.sanity
 
-  return responsive(theme.sanity.media, props.space, (spaceIndex) => ({
-    gridGap: rem(theme.sanity.space[spaceIndex]),
+  return responsive(media, getResponsiveProp(props.space), (spaceIndex) => ({
+    gridGap: rem(space[spaceIndex]),
   }))
 }

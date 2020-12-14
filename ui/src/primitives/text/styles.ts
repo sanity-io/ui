@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
-export function textBaseStyles(
+export function textBaseStyle(
   props: {
     accent?: boolean
     muted?: boolean

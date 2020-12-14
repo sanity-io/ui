@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
-import {focusRingStyle} from '../../styles/_internal/focusRing'
+import {focusRingStyle} from '../../styles/internal'
 
 /* Root */
 export function switchBaseStyles() {

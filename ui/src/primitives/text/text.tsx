@@ -6,7 +6,7 @@ import {
   responsiveTextFont,
 } from '../../styles/internal'
 import {TextAlign} from '../../types'
-import {textBaseStyles} from './styles'
+import {textBaseStyle} from './styles'
 
 export interface TextProps extends ResponsiveFontProps {
   align?: TextAlign | TextAlign[]
@@ -16,7 +16,7 @@ export interface TextProps extends ResponsiveFontProps {
 const Root = styled.div<ResponsiveFontProps>(
   responsiveTextFont,
   responsiveTextAlignStyle,
-  textBaseStyles
+  textBaseStyle
 )
 
 export const Text = forwardRef(

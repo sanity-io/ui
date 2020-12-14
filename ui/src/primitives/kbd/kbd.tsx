@@ -10,7 +10,7 @@ interface KBDProps {
   size?: number | number[]
 }
 
-function kbd() {
+function kbdStyle() {
   return css`
     background: var(--card-bg-color);
     font: inherit;
@@ -22,7 +22,7 @@ function kbd() {
   `
 }
 
-const Root = styled.kbd<{radius?: number | number[]}>(responsiveRadiusStyle, kbd)
+const Root = styled.kbd<{radius?: number | number[]}>(responsiveRadiusStyle, kbdStyle)
 
 export const KBD = forwardRef(
   (

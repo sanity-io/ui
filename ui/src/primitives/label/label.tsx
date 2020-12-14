@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 import {TextAlign} from '../../types'
-import {labelBaseStyles} from './styles'
+import {labelBaseStyle} from './styles'
 
 interface LabelProps {
   accent?: boolean
@@ -17,7 +17,7 @@ interface LabelProps {
 const Root = styled.div<{align?: TextAlign | TextAlign[]; muted: boolean; size: number[]}>(
   responsiveLabelFont,
   responsiveTextAlignStyle,
-  labelBaseStyles
+  labelBaseStyle
 )
 
 export const Label = forwardRef(

@@ -1,8 +1,8 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
-import {borderStyle, focusRingStyle} from '../../styles/_internal/focusRing'
+import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 
-export function radioBaseStyles() {
+export function radioBaseStyle() {
   return css`
     position: relative;
     &&:not([hidden]) {
@@ -11,7 +11,7 @@ export function radioBaseStyles() {
   `
 }
 
-export function inputElementStyles({theme}: ThemeProps) {
+export function inputElementStyle({theme}: ThemeProps) {
   const color = theme.sanity.color.input
   const {focusRing, input} = theme.sanity
   const dist = (input.radio.size - input.radio.markSize) / 2
@@ -37,7 +37,7 @@ export function inputElementStyles({theme}: ThemeProps) {
       width: ${rem(input.radio.size)};
       border-radius: ${rem(input.radio.size / 2)};
       background: ${color.default.enabled.bg};
-      box-shadow: ${borderStyle({
+      box-shadow: ${focusRingBorderStyle({
         color: color.default.enabled.border,
         width: input.border.width,
       })};

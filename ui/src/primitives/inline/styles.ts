@@ -1,11 +1,7 @@
 import {css} from 'styled-components'
-import {getResponsiveProp, responsive, ThemeProps} from '../../styles'
+import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 
-function rem(px: number) {
-  return `${px / 16}rem`
-}
-
-export function inlineBaseStyles() {
+export function inlineBaseStyle() {
   return css`
     &:not([hidden]) {
       display: block;
@@ -21,7 +17,7 @@ export function inlineBaseStyles() {
   `
 }
 
-export function inlineSpaceStyles(props: {space?: number | number[]} & ThemeProps) {
+export function inlineSpaceStyle(props: {space?: number | number[]} & ThemeProps) {
   const {theme} = props
 
   return responsive(theme.sanity.media, getResponsiveProp(props.space), (spaceIndex) => {
