@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@sanity/icons": "^1.0.0",
-    "@sanity/ui": "^0.29.0",
+    "@sanity/ui": "^0.30.0",
     "@storybook/addon-actions": "^6.1.10",
     "@storybook/addon-a11y": "^6.1.10",
     "@storybook/addon-info": "^5.3.21",
