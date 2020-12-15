@@ -3,6 +3,7 @@ import {Button, Card, Container} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+import styled from 'styled-components'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -139,4 +140,29 @@ export const plain = () => {
       </Card>
     </Container>
   )
+}
+
+const StyledButton1 = styled.a`
+  &:hover {
+    background-color: red;
+    box-shadow: none;
+  }
+`
+
+export const styledButton1 = () => {
+  return <Button as={StyledButton1} href="#" text="Test" />
+}
+
+const StyledButton2 = styled(Button)`
+  &:hover {
+    background-color: red;
+    box-shadow: none;
+  }
+`
+
+export const styledButton2 = () => {
+  const props = {href: '#', text: 'Test'}
+
+  // NOTE: This approach does not work with TypeScript
+  return <StyledButton2 forwardedAs="a" {...(props as any)} />
 }
