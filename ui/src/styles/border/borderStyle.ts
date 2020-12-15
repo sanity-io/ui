@@ -2,7 +2,7 @@ import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBorderStyleProps} from './types'
 
-const BORDER_VALUE = '1px solid var(--card-hairline-soft-color)'
+const BORDER_VALUE = '1px solid var(--card-border-color)'
 
 export function responsiveBorderStyle() {
   return [border, borderTop, borderRight, borderBottom, borderLeft]
