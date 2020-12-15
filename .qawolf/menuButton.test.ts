@@ -16,7 +16,7 @@ afterAll(async () => {
 })
 
 describe('Components/MenuButton', () => {
-  it('should open menu', async () => {
+  it('clicking should open/close menu', async () => {
     const page = await context.newPage()
 
     await page.goto(
@@ -24,8 +24,13 @@ describe('Components/MenuButton', () => {
       {waitUntil: 'domcontentloaded'}
     )
 
-    await page.click('button[data-ui="Avatar"]')
-    expect(await page.$('[data-ui="MenuItem"]')).toBeTruthy()
+    // click button
+    await page.click('#menu-button')
+    await page.waitForSelector('#menu-button[aria-expanded="true"]')
+
+    // click outside
+    await page.click('#next-button')
+    await page.waitForSelector('#menu-button[aria-expanded="false"]')
   })
 
   it('should use arrow keys to navigate the menu', async () => {
@@ -86,6 +91,7 @@ describe('Components/MenuButton', () => {
     expect(await page.$('#menu-item-1:focus')).toBeTruthy()
     await page.press('#menu-item-1', 'Tab')
     expect(await page.$('#menu-button[aria-expanded="true"]')).toBeNull()
+    expect(await page.$('#next-button:focus')).toBeTruthy()
   })
 
   it('should close on shift + tab', async () => {
@@ -104,6 +110,7 @@ describe('Components/MenuButton', () => {
     expect(await page.$('#menu-item-1:focus')).toBeTruthy()
     await page.press('#menu-item-1', 'Shift+Tab')
     expect(await page.$('#menu-button[aria-expanded="true"]')).toBeNull()
+    expect(await page.$('#menu-button:focus')).toBeTruthy()
   })
 
   it('should not close when one of the items receives focus', async () => {
