@@ -11,6 +11,7 @@ import {
 import {useTheme} from '../../theme'
 import {Box} from '../box'
 import {Flex} from '../flex'
+import {Spinner} from '../spinner'
 import {Text} from '../text'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 import {ButtonMode, ButtonTone} from './types'
@@ -22,6 +23,10 @@ export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadi
   icon?: React.ComponentType | React.ReactNode
   iconRight?: React.ComponentType | React.ReactNode
   justify?: FlexJustify | FlexJustify[]
+  /**
+   * @beta Do not use in production, as this might change.
+   */
+  loading?: boolean
   selected?: boolean
   space?: number | number[]
   text?: React.ReactNode
@@ -35,6 +40,21 @@ const Root = styled.button<{uiMode: ButtonMode; tone: ButtonTone} & ThemeProps>(
   buttonColorStyles
 )
 
+const LoadingBox = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  opacity: 0.8;
+  z-index: 1;
+`
+
 export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButtonElement>, ref) => {
   const {
     children,
@@ -43,6 +63,7 @@ export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButto
     icon,
     iconRight,
     justify = 'center',
+    loading,
     mode = 'default',
     padding = 3,
     paddingX,
@@ -76,15 +97,21 @@ export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButto
     <Root
       data-ui="Button"
       {...restProps}
-      data-disabled={disabled}
+      data-disabled={loading || disabled}
       data-selected={selected ? '' : undefined}
-      disabled={disabled}
+      disabled={loading || disabled}
       radius={radius}
       ref={ref}
       tone={tone}
       type={type}
       uiMode={mode}
     >
+      {Boolean(loading) && (
+        <LoadingBox>
+          <Spinner />
+        </LoadingBox>
+      )}
+
       {(icon || text || iconRight) && (
         <Box as="span" {...boxProps}>
           <Flex as="span" justify={justify}>

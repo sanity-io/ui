@@ -21,6 +21,7 @@ export function buttonBaseStyles() {
     margin: 0;
     white-space: nowrap;
     text-align: left;
+    position: relative;
     /* width: stretch; */
 
     & > span {
