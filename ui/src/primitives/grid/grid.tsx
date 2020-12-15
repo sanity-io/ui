@@ -37,10 +37,18 @@ const Root = styled.div<
 
 export const Grid = forwardRef(
   (props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>, ref) => {
-    const {children, ...restProps} = props
+    const {as: asProp, margin = 0, padding = 0, children, ...restProps} = props
 
     return (
-      <Root data-ui="Grid" {...restProps} ref={ref}>
+      <Root
+        data-as={String(asProp)}
+        data-ui="Grid"
+        {...restProps}
+        as={asProp}
+        margin={margin}
+        padding={padding}
+        ref={ref}
+      >
         {children}
       </Root>
     )

@@ -2,7 +2,12 @@ import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridStyleProps} from './types'
 
-const GRID_CSS = {'&:not([hidden])': {display: 'grid'}}
+const GRID_CSS = {
+  '&:not([hidden])': {display: 'grid'},
+  '&[data-as="ul"],&[data-as="ol"]': {
+    listStyle: 'none',
+  },
+}
 
 const GRID_AUTO_COLUMS = {
   auto: 'auto',
