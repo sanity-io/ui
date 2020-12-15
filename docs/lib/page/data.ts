@@ -3,18 +3,15 @@ import {FEATURES_QUERY, MAIN_NAV_QUERY, TARGET_QUERY} from '$queries'
 import {getClient, usePreviewSubscription} from '$sanity'
 
 export async function loadPageData({
-  params,
+  params = {},
   preview,
 }: {
-  params: {path?: string[]}
+  params?: {path?: string[]}
   preview?: boolean
 }) {
   const features = await getClient(preview).fetch(FEATURES_QUERY)
   const nav = await getClient(preview).fetch(MAIN_NAV_QUERY)
-
-  if (!params.path) return {features, nav, preview}
-
-  const node = findNavNode(nav.items, params.path)
+  const node = findNavNode(nav.items, params.path || [])
   const target = await getClient(preview).fetch(TARGET_QUERY, {id: node.targetId})
 
   return {features, nav, params, preview, target}
@@ -39,7 +36,7 @@ export function usePageData(props: any = {}) {
     enabled: preview,
   })
 
-  const node = params.path ? findNavNode(nav.items || [], params.path) : null
+  const node = findNavNode(nav.items || [], params.path || [])
 
   const {data: target} = usePreviewSubscription(TARGET_QUERY, {
     initialData: initialTarget || undefined,

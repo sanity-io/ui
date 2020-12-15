@@ -1,7 +1,8 @@
 import {Card} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
-import {Navbar} from './navbar'
+import {AppFooter} from './footer'
+import {AppNavbar} from './navbar'
 
 const Root = styled.div`
   display: flex;
@@ -16,8 +17,9 @@ const ContentContainer = styled(Card)`
 export function AppLayout({children}: {children: React.ReactNode}) {
   return (
     <Root>
-      <Navbar />
+      <AppNavbar />
       <ContentContainer>{children}</ContentContainer>
+      <AppFooter />
     </Root>
   )
 }

@@ -13,7 +13,7 @@ interface Route {
   title: string
 }
 
-export function Navbar() {
+export function AppNavbar() {
   const {colorScheme, nav = {}, setColorScheme} = useApp()
   const router = useRouter()
 
