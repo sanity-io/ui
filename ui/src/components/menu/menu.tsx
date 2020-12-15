@@ -1,10 +1,10 @@
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {focusFirstDescendant, focusLastDescendant, isHTMLButtonElement} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
 import {ResponsivePaddingStyleProps} from '../../styles/internal'
 import {useLayer} from '../../utils'
+import {getFocusableElements} from './helpers'
 import {MenuContext} from './menuContext'
 
 interface MenuProps extends ResponsivePaddingStyleProps {
@@ -37,19 +37,20 @@ export const Menu = forwardRef(
     const [activeIndex, setActiveIndex] = useState(-1)
 
     useEffect(() => {
-      window.requestAnimationFrame(() => {
+      const rafId = window.requestAnimationFrame(() => {
         if (rootElement) {
-          if (focusLast) {
-            if (focusLastDescendant(rootElement)) {
-              setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
-            }
-          } else {
-            if (focusFirstDescendant(rootElement)) {
-              setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
-            }
+          const element = itemsRef.current[focusLast ? itemsRef.current.length - 1 : 0]
+
+          if (element) {
+            element.focus()
+            setActiveIndex(itemsRef.current.indexOf(element))
           }
         }
       })
+
+      return () => {
+        window.cancelAnimationFrame(rafId)
+      }
     }, [focusLast, rootElement])
 
     const setRef = (el: HTMLDivElement | null) => {
@@ -79,22 +80,21 @@ export const Menu = forwardRef(
         if (event.key === 'ArrowUp') {
           event.preventDefault()
 
-          // NOTE: if all menu items are :disabled, this will cause an infinite loop
-          // @todo: make sure that not all menu items are disabled
+          const focusableElements = getFocusableElements(itemsRef.current)
+          const focusableLen = focusableElements.filter(({focusable}) => focusable).length
 
-          const len = itemsRef.current.length
+          if (focusableLen === 0) return
+
+          const len = focusableElements.length
 
           let currentIndex = activeIndex
+          let focusable = false
           let element: HTMLElement | null = null
 
-          while (!element) {
+          while (!focusable) {
             currentIndex = (currentIndex - 1 + len) % len
-
-            const e = itemsRef.current[currentIndex]
-
-            if (isHTMLButtonElement(e) && !e.disabled) {
-              element = itemsRef.current[currentIndex]
-            }
+            element = focusableElements[currentIndex].element
+            focusable = focusableElements[currentIndex].focusable
           }
 
           setActiveIndex(currentIndex)
@@ -107,22 +107,21 @@ export const Menu = forwardRef(
         if (event.key === 'ArrowDown') {
           event.preventDefault()
 
-          // NOTE: if all menu items are :disabled, this will cause an infinite loop
-          // @todo: make sure that not all menu items are disabled
+          const focusableElements = getFocusableElements(itemsRef.current)
+          const focusableLen = focusableElements.filter(({focusable}) => focusable).length
 
-          const len = itemsRef.current.length
+          if (focusableLen === 0) return
+
+          const len = focusableElements.length
 
           let currentIndex = activeIndex
+          let focusable = false
           let element: HTMLElement | null = null
 
-          while (!element) {
+          while (!focusable) {
             currentIndex = (currentIndex + 1) % len
-
-            const e = itemsRef.current[currentIndex]
-
-            if (isHTMLButtonElement(e) && !e.disabled) {
-              element = itemsRef.current[currentIndex]
-            }
+            element = focusableElements[currentIndex].element
+            focusable = focusableElements[currentIndex].focusable
           }
 
           setActiveIndex(currentIndex)
