@@ -31,7 +31,7 @@ export function usePageData(props: any = {}) {
     enabled: preview,
   })
 
-  const {data: nav} = usePreviewSubscription(MAIN_NAV_QUERY, {
+  const {data: nav = {}} = usePreviewSubscription(MAIN_NAV_QUERY, {
     initialData: initialNav,
     enabled: preview,
   })
