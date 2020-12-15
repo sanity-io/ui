@@ -15,6 +15,11 @@ interface ToastState {
   }[]
 }
 
+interface ToastProviderProps {
+  children?: React.ReactNode
+  zOffset?: number
+}
+
 const Root = styled(Layer)`
   position: fixed;
   top: 0;
@@ -36,7 +41,7 @@ const ToastContainer = styled.div`
 
 let toastId = 0
 
-export function ToastProvider({children}: {children?: React.ReactNode}) {
+export function ToastProvider({children, zOffset}: ToastProviderProps) {
   const [state, setState] = useState<ToastState>({toasts: []})
   const toastsRef = useRef<{[key: string]: {timeoutId: number}}>({})
 
@@ -100,7 +105,7 @@ export function ToastProvider({children}: {children?: React.ReactNode}) {
     <ToastContext.Provider value={{push}}>
       {children}
 
-      <Root data-ui="ToastProvider">
+      <Root data-ui="ToastProvider" zOffset={zOffset}>
         <ToastContainer>
           <Box padding={4}>
             <AnimatePresence initial={false}>
