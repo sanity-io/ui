@@ -17,7 +17,7 @@ export const color = createColorTheme({
       return {
         fg: dark ? white.hex : black.hex,
         bg: dark ? black.hex : white.hex,
-        border: hues.gray[dark ? 800 : 200].hex,
+        border: hues.gray[dark ? 900 : 200].hex,
         focusRing: hues.blue[500].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, 0.35),
@@ -119,9 +119,9 @@ export const color = createColorTheme({
 
     if (state === 'hovered') {
       return {
-        bg: mix(base.bg, tints[dark ? 900 : 100].hex),
-        border: mix(base.bg, tints[dark ? 200 : 700].hex),
-        fg: mix(base.bg, tints[dark ? 300 : 700].hex),
+        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        border: mix(base.bg, tints[dark ? 900 : 200].hex),
+        fg: mix(base.bg, tints[dark ? 100 : 900].hex),
       }
     }
 
@@ -294,20 +294,22 @@ export const color = createColorTheme({
     }
 
     if (state === 'hovered') {
+      const bg = muted.hovered.bg
+
       return {
         ...muted.hovered,
-        fg: base.fg,
+        // fg: base.fg,
         muted: {
-          fg: mix(muted.hovered.bg, hues.gray[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.gray[dark ? 400 : 600].hex),
         },
         accent: {
-          fg: mix(muted.hovered.bg, hues.red[dark ? 500 : 500].hex),
+          fg: mix(bg, hues.red[dark ? 500 : 500].hex),
         },
         link: {
-          fg: mix(muted.hovered.bg, hues.blue[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.blue[dark ? 400 : 600].hex),
         },
         code: {
-          bg: mix(muted.hovered.bg, hues.gray[dark ? 950 : 50].hex),
+          bg: mix(bg, hues.gray[dark ? 950 : 50].hex),
           fg: hues.gray[dark ? 400 : 600].hex,
         },
       }
