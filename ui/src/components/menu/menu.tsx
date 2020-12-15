@@ -37,17 +37,19 @@ export const Menu = forwardRef(
     const [activeIndex, setActiveIndex] = useState(-1)
 
     useEffect(() => {
-      if (rootElement) {
-        if (focusLast) {
-          if (focusLastDescendant(rootElement)) {
-            setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
-          }
-        } else {
-          if (focusFirstDescendant(rootElement)) {
-            setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
+      window.requestAnimationFrame(() => {
+        if (rootElement) {
+          if (focusLast) {
+            if (focusLastDescendant(rootElement)) {
+              setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
+            }
+          } else {
+            if (focusFirstDescendant(rootElement)) {
+              setActiveIndex(itemsRef.current.indexOf(document.activeElement as HTMLElement))
+            }
           }
         }
-      }
+      })
     }, [focusLast, rootElement])
 
     const setRef = (el: HTMLDivElement | null) => {
