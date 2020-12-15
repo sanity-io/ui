@@ -1,5 +1,6 @@
 import React, {cloneElement, useCallback, useState} from 'react'
 import ReactIs from 'react-is'
+import {isHTMLElement} from '../../helpers'
 import {useClickOutside} from '../../hooks'
 import {Popover} from '../../primitives'
 import {ThemeColorSchemeKey} from '../../theme'
@@ -13,6 +14,10 @@ export interface MenuButtonProps {
   placement?: Placement
   popoverScheme?: ThemeColorSchemeKey
   popoverRadius?: number | number[]
+
+  /**
+   * @beta Do not use in production.
+   */
   portal?: boolean
 }
 
@@ -62,18 +67,20 @@ export function MenuButton({
   }, [buttonElement])
 
   const handleBlur = useCallback(
-    (event) => {
-      if (!menuElement?.contains(event.relatedTarget)) {
+    (event: React.FocusEvent<HTMLButtonElement>) => {
+      const target = event.relatedTarget
+
+      if (isHTMLElement(target) && !menuElement?.contains(target)) {
         setOpen(false)
-        if (buttonElement) buttonElement.focus()
       }
     },
-    [menuElement, buttonElement]
+    [menuElement]
   )
 
   const handleItemClick = useCallback(() => {
     setOpen(false)
-  }, [])
+    if (buttonElement) buttonElement.focus()
+  }, [buttonElement])
 
   useClickOutside(
     useCallback(() => setOpen(false), []),
