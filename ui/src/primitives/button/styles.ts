@@ -68,7 +68,7 @@ export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} 
           boxShadow: focusRingStyle({base, border, focusRing}),
         },
         '&:focus:not(:focus-visible)': {
-          boxShadow: 'none',
+          boxShadow: focusRingBorderStyle(border),
         },
         '@media (hover: hover)': {
           '&:hover': buttonColorVarsStyle(color.hovered),
