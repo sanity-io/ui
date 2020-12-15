@@ -1,7 +1,9 @@
 import {AddIcon, ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
 import {
   Avatar,
+  Button,
   Card,
+  Inline,
   LayerProvider,
   Menu,
   MenuButton,
@@ -43,25 +45,31 @@ export const menu = () => (
 
 export const menuButton = () => (
   <LayerProvider>
-    <MenuButton
-      button={<Avatar as="button" color="magenta" size={2} />}
-      id="menu-button"
-      menu={
-        <Menu>
-          <MenuItem icon={SearchIcon} id="menu-item-1" onClick={action('Search')} text="Search" />
-          <MenuItem icon={ClockIcon} id="menu-item-2" onClick={action('Clock')} text="Clock" />
-          <MenuItem
-            disabled
-            icon={CommentIcon}
-            id="menu-item-3"
-            onClick={action('Comment')}
-            text="Comment"
-          />
-          <MenuDivider />
-          <MenuItem icon={ExpandIcon} id="menu-item-4" onClick={action('Expand')} text="Expand" />
-        </Menu>
-      }
-    />
+    <Inline space={2}>
+      <Button id="prev-button" text="Prev" />
+
+      <MenuButton
+        button={<Button tone="primary" text="Open" />}
+        id="menu-button"
+        menu={
+          <Menu>
+            <MenuItem icon={SearchIcon} id="menu-item-1" onClick={action('Search')} text="Search" />
+            <MenuItem icon={ClockIcon} id="menu-item-2" onClick={action('Clock')} text="Clock" />
+            <MenuItem
+              disabled
+              icon={CommentIcon}
+              id="menu-item-3"
+              onClick={action('Comment')}
+              text="Comment"
+            />
+            <MenuDivider />
+            <MenuItem icon={ExpandIcon} id="menu-item-4" onClick={action('Expand')} text="Expand" />
+          </Menu>
+        }
+      />
+
+      <Button id="next-button" text="Next" />
+    </Inline>
   </LayerProvider>
 )
 
