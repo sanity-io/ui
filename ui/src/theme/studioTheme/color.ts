@@ -34,7 +34,7 @@ export const color = createColorTheme({
       return {
         fg: tints[dark ? 100 : 900].hex,
         bg: tints[dark ? 950 : 50].hex,
-        border: tints[dark ? 800 : 200].hex,
+        border: tints[dark ? 800 : 300].hex,
         focusRing: hues.blue[500].hex,
         shadow: {
           outline: rgba(tints[500].hex, dark ? 0.2 : 0.4),
@@ -49,11 +49,11 @@ export const color = createColorTheme({
 
     return {
       fg: tints[dark ? 100 : 900].hex,
-      bg: tints[dark ? 950 : 50].hex,
+      bg: tints[dark ? 900 : 100].hex,
       border: tints[dark ? 800 : 200].hex,
       focusRing: tints[500].hex,
       shadow: {
-        outline: rgba(tints[500].hex, 0.35),
+        outline: rgba(tints[500].hex, dark ? 0.2 : 0.4),
         umbra: rgba(dark ? black.hex : tints[500].hex, 0.2),
         penumbra: rgba(dark ? black.hex : tints[500].hex, 0.14),
         ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
@@ -68,7 +68,7 @@ export const color = createColorTheme({
     if (state === 'disabled') {
       return {
         bg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
-        border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
+        border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
       }
     }
@@ -76,14 +76,14 @@ export const color = createColorTheme({
     if (state === 'hovered') {
       return {
         bg: mix(base.bg, tints[dark ? 300 : 600].hex),
-        border: mix(base.bg, tints[dark ? 200 : 700].hex),
+        border: mix(base.bg, tints[dark ? 300 : 600].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
       }
     }
 
     if (state === 'pressed') {
       return {
-        bg: mix(base.bg, tints[dark ? 300 : 700].hex),
+        bg: mix(base.bg, tints[dark ? 200 : 800].hex),
         border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
       }
@@ -92,7 +92,7 @@ export const color = createColorTheme({
     if (state === 'selected') {
       return {
         bg: mix(base.bg, tints[dark ? 200 : 800].hex),
-        border: mix(base.bg, tints[dark ? 100 : 900].hex),
+        border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
       }
     }
@@ -100,7 +100,7 @@ export const color = createColorTheme({
     // state: "enabled" | unknown
     return {
       bg: mix(base.bg, tints[dark ? 400 : 500].hex),
-      border: mix(base.bg, tints[dark ? 300 : 600].hex),
+      border: mix(base.bg, tints[dark ? 400 : 500].hex),
       fg: mix(base.bg, dark ? black.hex : white.hex),
     }
   },
@@ -112,7 +112,7 @@ export const color = createColorTheme({
     if (state === 'disabled') {
       return {
         bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
+        border: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
         fg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
       }
     }
@@ -120,7 +120,7 @@ export const color = createColorTheme({
     if (state === 'hovered') {
       return {
         bg: mix(base.bg, tints[dark ? 950 : 50].hex),
-        border: mix(base.bg, tints[dark ? 900 : 200].hex),
+        border: mix(base.bg, tints[dark ? 950 : 50].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
       }
     }
@@ -128,100 +128,55 @@ export const color = createColorTheme({
     if (state === 'pressed') {
       return {
         bg: mix(base.bg, tints[dark ? 900 : 100].hex),
-        border: mix(base.bg, tints[dark ? 800 : 200].hex),
-        fg: mix(base.bg, tints[dark ? 200 : 800].hex),
+        border: mix(base.bg, tints[dark ? 900 : 100].hex),
+        fg: mix(base.bg, tints[dark ? 100 : 900].hex),
       }
     }
 
     if (state === 'selected') {
       return {
-        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
-        border: mix(base.bg, tints[dark ? 100 : 900].hex),
-        fg: mix(base.bg, tints[dark ? 300 : 700].hex),
+        bg: mix(base.bg, tints[dark ? 900 : 100].hex),
+        border: mix(base.bg, tints[dark ? 900 : 100].hex),
+        fg: mix(base.bg, tints[dark ? 100 : 900].hex),
       }
     }
 
     return {
-      bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+      bg: mix(base.bg, tints[dark ? 900 : 100].hex),
       border: mix(base.bg, tints[dark ? 900 : 100].hex),
-      fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+      fg: mix(base.bg, tints[dark ? 300 : 700].hex),
     }
   },
 
   button: ({base, mode, muted, solid}) => {
     if (mode === 'bleed') {
       return {
+        ...muted,
         enabled: {
           ...muted.enabled,
           bg: base.bg,
           border: base.bg,
         },
-        hovered: {
-          ...muted.hovered,
-          bg: muted.enabled.bg,
-          border: muted.enabled.bg,
-        },
-        pressed: {
-          ...muted.pressed,
-          border: muted.pressed.bg,
-        },
         disabled: {
           ...muted.disabled,
           bg: base.bg,
           border: base.bg,
-        },
-        selected: {
-          ...muted.selected,
-          border: muted.selected.bg,
         },
       }
     }
 
     if (mode === 'ghost') {
       return {
+        ...solid,
         enabled: {...muted.enabled, bg: base.bg, border: base.border},
-        hovered: {
-          ...solid.hovered,
-          border: solid.hovered.bg,
-        },
-        pressed: {
-          ...solid.pressed,
-          border: solid.pressed.bg,
-        },
-        selected: {
-          ...solid.selected,
-          border: solid.selected.bg,
-        },
         disabled: {
           ...muted.disabled,
           bg: base.bg,
-          border: muted.disabled.border,
         },
       }
     }
 
-    return {
-      enabled: {
-        ...solid.enabled,
-        border: solid.enabled.bg,
-      },
-      hovered: {
-        ...solid.hovered,
-        border: solid.hovered.bg,
-      },
-      pressed: {
-        ...solid.pressed,
-        border: solid.pressed.bg,
-      },
-      selected: {
-        ...solid.selected,
-        border: solid.selected.bg,
-      },
-      disabled: {
-        ...solid.disabled,
-        border: solid.disabled.bg,
-      },
-    }
+    return solid
   },
 
   input: ({base, dark, mode, state}) => {
@@ -276,19 +231,19 @@ export const color = createColorTheme({
       return {
         bg,
         fg: dark ? black.hex : white.hex,
-        border: tint[dark ? 600 : 400].hex,
+        border: tint[dark ? 300 : 400].hex,
         muted: {
-          fg: mix(bg, hues.gray[dark ? 600 : 500].hex),
+          fg: mix(bg, hues.gray[dark ? 600 : 300].hex),
         },
         accent: {
           fg: mix(bg, hues.red[dark ? 600 : 500].hex),
         },
         link: {
-          fg: mix(bg, hues.blue[dark ? 600 : 500].hex),
+          fg: mix(bg, hues.blue[dark ? 600 : 300].hex),
         },
         code: {
           bg: mix(bg, hues.gray[dark ? 50 : 950].hex),
-          fg: mix(bg, hues.gray[dark ? 600 : 500].hex),
+          fg: mix(bg, hues.gray[dark ? 600 : 300].hex),
         },
       }
     }
@@ -299,14 +254,15 @@ export const color = createColorTheme({
       return {
         ...muted.hovered,
         // fg: base.fg,
+        border: mix(bg, base.border),
         muted: {
-          fg: mix(bg, hues.gray[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.gray[dark ? 400 : 700].hex),
         },
         accent: {
           fg: mix(bg, hues.red[dark ? 500 : 500].hex),
         },
         link: {
-          fg: mix(bg, hues.blue[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.blue[dark ? 400 : 700].hex),
         },
         code: {
           bg: mix(bg, hues.gray[dark ? 950 : 50].hex),
@@ -320,17 +276,17 @@ export const color = createColorTheme({
         ...muted.pressed,
         fg: base.fg,
         muted: {
-          fg: mix(muted.pressed.bg, hues.gray[dark ? 400 : 600].hex),
+          fg: mix(muted.pressed.bg, hues.gray[dark ? 400 : 700].hex),
         },
         accent: {
           fg: mix(muted.pressed.bg, hues.red[dark ? 500 : 500].hex),
         },
         link: {
-          fg: mix(muted.pressed.bg, hues.blue[dark ? 400 : 600].hex),
+          fg: mix(muted.pressed.bg, hues.blue[dark ? 400 : 700].hex),
         },
         code: {
           bg: mix(muted.pressed.bg, hues.gray[dark ? 950 : 50].hex),
-          fg: hues.gray[dark ? 400 : 600].hex,
+          fg: hues.gray[dark ? 400 : 700].hex,
         },
       }
     }
@@ -359,17 +315,17 @@ export const color = createColorTheme({
       fg: base.fg,
       border: base.border,
       muted: {
-        fg: mix(base.bg, hues.gray[dark ? 400 : 600].hex),
+        fg: mix(base.bg, hues.gray[dark ? 400 : 700].hex),
       },
       accent: {
         fg: mix(base.bg, hues.red[dark ? 500 : 500].hex),
       },
       link: {
-        fg: mix(base.bg, hues.blue[dark ? 400 : 600].hex),
+        fg: mix(base.bg, hues.blue[dark ? 400 : 700].hex),
       },
       code: {
         bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: hues.gray[dark ? 400 : 600].hex,
+        fg: hues.gray[dark ? 400 : 700].hex,
       },
     }
   },
