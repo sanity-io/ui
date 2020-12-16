@@ -62,12 +62,6 @@ const ClearButtonBox = styled(Box)`
   }
 `
 
-const defaultRenderOption = ({value}: BaseAutocompleteOption) => (
-  <Card as="button" padding={3}>
-    <Text>{value}</Text>
-  </Card>
-)
-
 const defaultRenderValue = (value: string, option?: BaseAutocompleteOption) =>
   option ? option.value : value
 
@@ -112,6 +106,16 @@ const InnerAutocomplete = forwardRef(
       value: valueProp = '',
       ...restProps
     } = props
+
+    const defaultRenderOption = useCallback(
+      ({value}: BaseAutocompleteOption) => (
+        <Card as="button" padding={paddingProp} tone="inherit">
+          <Text size={fontSize}>{value}</Text>
+        </Card>
+      ),
+      [fontSize, paddingProp]
+    )
+
     const renderOption =
       typeof renderOptionProp === 'function' ? renderOptionProp : defaultRenderOption
     const filterOption =
@@ -303,7 +307,7 @@ const InnerAutocomplete = forwardRef(
         )}
 
         <ListBoxContainer hidden={!expanded}>
-          <ListBoxCard paddingY={1} radius={1} shadow={2} tabIndex={-1}>
+          <ListBoxCard paddingY={1} radius={1} shadow={2} tabIndex={-1} tone="inherit">
             <ul aria-multiselectable={false} id={listboxId} ref={listRef} role="listbox">
               {filteredOptions.map((option, optionIndex) => (
                 <AutocompleteOption
