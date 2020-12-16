@@ -22,3 +22,5 @@ export interface ResponsiveFlexStyleProps {
 export interface ResponsiveFlexItemStyleProps {
   flex?: number | number[]
 }
+
+export interface FlexItemStyleProps extends ResponsiveFlexItemStyleProps {}

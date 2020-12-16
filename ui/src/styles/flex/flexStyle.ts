@@ -55,12 +55,6 @@ export function responsiveFlexDirectionStyle(
   const {media} = theme.sanity
 
   return responsive(media, getResponsiveProp(props.direction), (direction) => {
-    if (typeof direction !== 'string') return {}
-
-    if (direction.startsWith('column')) {
-      return {flexDirection: direction, '&>*': {minHeight: 0}}
-    }
-
-    return {flexDirection: direction, '&>*': {minWidth: 0}}
+    return {flexDirection: direction}
   })
 }

@@ -1,21 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
+  flexItemStyle,
+  FlexItemStyleProps,
   responsiveBoxStyle,
   ResponsiveBoxStyleProps,
-  responsiveFlexItemStyle,
-  ResponsiveFlexItemStyleProps,
 } from '../../styles/internal'
 import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
 import {ResponsiveWidthStyleProps} from './types'
 
-export interface ContainerProps extends ResponsiveWidthStyleProps, ResponsiveFlexItemStyleProps {
+export interface ContainerProps
+  extends FlexItemStyleProps,
+    ResponsiveBoxStyleProps,
+    ResponsiveWidthStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div<ResponsiveBoxStyleProps & ResponsiveWidthStyleProps>(
+const Root = styled.div<FlexItemStyleProps & ResponsiveBoxStyleProps & ResponsiveWidthStyleProps>(
+  flexItemStyle,
   responsiveBoxStyle,
-  responsiveFlexItemStyle,
   containerBaseStyle,
   responsiveContainerWidthStyle
 )

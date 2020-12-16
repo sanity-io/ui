@@ -1,10 +1,10 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {
+  flexItemStyle,
+  FlexItemStyleProps,
   responsiveBoxStyle,
   ResponsiveBoxStyleProps,
-  responsiveFlexItemStyle,
-  ResponsiveFlexItemStyleProps,
   responsivePaddingStyle,
   ResponsivePaddingStyleProps,
   responsiveMarginStyle,
@@ -13,8 +13,8 @@ import {
 import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
 interface StackProps
-  extends ResponsiveBoxStyleProps,
-    ResponsiveFlexItemStyleProps,
+  extends FlexItemStyleProps,
+    ResponsiveBoxStyleProps,
     ResponsivePaddingStyleProps,
     ResponsiveMarginStyleProps,
     ResponsiveStackSpaceStyleProps {
@@ -22,14 +22,14 @@ interface StackProps
 }
 
 const Root = styled.div<
-  ResponsiveBoxStyleProps &
-    ResponsiveFlexItemStyleProps &
+  FlexItemStyleProps &
+    ResponsiveBoxStyleProps &
     ResponsivePaddingStyleProps &
     ResponsiveMarginStyleProps &
     ResponsiveStackSpaceStyleProps
 >(
+  flexItemStyle,
   responsiveBoxStyle,
-  responsiveFlexItemStyle,
   responsivePaddingStyle,
   responsiveMarginStyle,
   stackBaseStyle,

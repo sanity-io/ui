@@ -44,10 +44,10 @@ function codeSyntaxHighlightingStyle({theme}: ThemeProps) {
   }
 }
 
-export function codeBaseStyle(props: {muted: boolean} & ThemeProps) {
-  const {muted} = props
-
+export function codeBaseStyle() {
   return css`
+    color: var(--card-code-fg-color);
+
     &:before {
       content: '';
       display: block;
@@ -59,11 +59,6 @@ export function codeBaseStyle(props: {muted: boolean} & ThemeProps) {
       display: block;
       height: 0;
     }
-
-    ${muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
 
     & code {
       font-family: inherit;

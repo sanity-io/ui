@@ -2,12 +2,12 @@ import React, {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {
+  flexItemStyle,
+  FlexItemStyleProps,
   responsiveBoxStyle,
   responsiveBorderStyle,
   ResponsiveBorderStyleProps,
   ResponsiveBoxStyleProps,
-  responsiveFlexItemStyle,
-  ResponsiveFlexItemStyleProps,
   responsiveGridItemStyle,
   ResponsiveGridItemStyleProps,
   responsiveMarginStyle,
@@ -24,10 +24,10 @@ import {cardStyle} from './styles'
 import {CardColorProps} from './types'
 
 export interface CardProps
-  extends ResponsiveBoxStyleProps,
+  extends FlexItemStyleProps,
+    ResponsiveBoxStyleProps,
     ResponsiveBorderStyleProps,
     ResponsiveGridItemStyleProps,
-    ResponsiveFlexItemStyleProps,
     ResponsiveMarginStyleProps,
     ResponsivePaddingStyleProps,
     ResponsiveRadiusProps,
@@ -38,20 +38,20 @@ export interface CardProps
 }
 
 const Root = styled.div<
-  ResponsiveBoxStyleProps &
+  FlexItemStyleProps &
+    ResponsiveBoxStyleProps &
     ResponsiveBorderStyleProps &
     ResponsiveGridItemStyleProps &
-    ResponsiveFlexItemStyleProps &
     ResponsiveMarginStyleProps &
     ResponsivePaddingStyleProps &
     CardColorProps &
     ResponsiveRadiusProps &
     ResponsiveShadowStyleProps
 >(
+  flexItemStyle,
   responsiveBoxStyle,
   responsiveBorderStyle,
   responsiveGridItemStyle,
-  responsiveFlexItemStyle,
   responsiveMarginStyle,
   responsivePaddingStyle,
   responsiveRadiusStyle,

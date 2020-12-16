@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {responsiveFlexItemStyle, ResponsiveFlexItemStyleProps} from '../../styles/flex'
+import {flexItemStyle, ResponsiveFlexItemStyleProps} from '../../styles/flex'
 
 interface TabPanelProps extends ResponsiveFlexItemStyleProps {
   /**
@@ -11,7 +11,7 @@ interface TabPanelProps extends ResponsiveFlexItemStyleProps {
   id: string
 }
 
-const Root = styled.div<ResponsiveFlexItemStyleProps>(responsiveFlexItemStyle)
+const Root = styled.div<ResponsiveFlexItemStyleProps>(flexItemStyle)
 
 export const TabPanel = forwardRef(
   (props: TabPanelProps & Omit<React.HTMLProps<HTMLDivElement>, 'id' | 'role'>, ref) => {

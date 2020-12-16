@@ -1,10 +1,10 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {
+  flexItemStyle,
+  FlexItemStyleProps,
   responsiveBoxStyle,
   ResponsiveBoxStyleProps,
-  responsiveFlexItemStyle,
-  ResponsiveFlexItemStyleProps,
   responsiveGridItemStyle,
   ResponsiveGridItemStyleProps,
   responsivePaddingStyle,
@@ -14,24 +14,24 @@ import {
 } from '../../styles/internal'
 
 export interface BoxProps
-  extends ResponsiveBoxStyleProps,
+  extends FlexItemStyleProps,
+    ResponsiveBoxStyleProps,
     ResponsiveGridItemStyleProps,
     ResponsiveMarginStyleProps,
-    ResponsivePaddingStyleProps,
-    ResponsiveFlexItemStyleProps {
+    ResponsivePaddingStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
 const Root = styled.div<
-  ResponsiveBoxStyleProps &
+  FlexItemStyleProps &
+    ResponsiveBoxStyleProps &
     ResponsiveGridItemStyleProps &
     ResponsiveMarginStyleProps &
-    ResponsivePaddingStyleProps &
-    ResponsiveFlexItemStyleProps
+    ResponsivePaddingStyleProps
 >(
+  flexItemStyle,
   responsiveBoxStyle,
   responsiveGridItemStyle,
-  responsiveFlexItemStyle,
   responsiveMarginStyle,
   responsivePaddingStyle
 )
