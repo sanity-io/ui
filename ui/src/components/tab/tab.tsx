@@ -10,7 +10,9 @@ interface TabProps {
   id: string
   icon?: React.ComponentType | React.ReactNode
   focused?: boolean
+  fontSize?: number | number[]
   label?: React.ReactNode
+  padding?: number | number[]
   selected?: boolean
 }
 
@@ -20,7 +22,18 @@ export const Tab = forwardRef(
       Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'type'>,
     forwardedRef: React.ForwardedRef<HTMLButtonElement>
   ) => {
-    const {icon, id, focused, label, onClick, onFocus, selected, ...restProps} = props
+    const {
+      icon,
+      id,
+      focused,
+      fontSize,
+      label,
+      onClick,
+      onFocus,
+      padding = 2,
+      selected,
+      ...restProps
+    } = props
     const elementRef = useRef<HTMLButtonElement | null>(null)
     const focusedRef = useRef(false)
 
@@ -55,13 +68,14 @@ export const Tab = forwardRef(
         data-ui="Tab"
         {...restProps}
         aria-selected={selected ? 'true' : 'false'}
+        fontSize={fontSize}
         icon={icon}
         id={id}
         mode="bleed"
         onClick={onClick}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        padding={2}
+        padding={padding}
         ref={setRef}
         role="tab"
         selected={selected}
