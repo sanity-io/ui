@@ -3,9 +3,11 @@ import {responsiveCodeFontStyle, Theme} from '@sanity/ui'
 import {rgba} from 'polished'
 import {css} from 'styled-components'
 
-export function codeEditor() {
+export function codeEditorStyle() {
   return css`
+    vertical-align: top;
     height: 100%;
+    color: var(--card-muted-fg-color);
 
     &::selection {
       background: none;
@@ -15,6 +17,7 @@ export function codeEditor() {
       ${responsiveCodeFontStyle}
       height: 100%;
       box-sizing: border-box;
+      transform: none;
     }
 
     .CodeMirror {
@@ -27,7 +30,8 @@ export function codeEditor() {
     .CodeMirror-scroll {
       margin: 0;
       box-sizing: border-box;
-      padding: 16px 0;
+      padding: 12px 0;
+      overflow: visible !important;
     }
 
     .CodeMirror-line::selection,

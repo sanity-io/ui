@@ -1,41 +1,118 @@
 import * as icons from '@sanity/icons'
+import {LaunchIcon} from '@sanity/icons'
 import * as ui from '@sanity/ui'
-import {Box, Card, Code} from '@sanity/ui'
-import React from 'react'
-import {renderCode, renderHooks} from '$lib/eval'
+import {Box, Button, Card, Tab, TabList, TabPanel} from '@sanity/ui'
+import Link from 'next/link'
+import React, {useEffect, useState} from 'react'
+import {getArcadeQuery} from '$components/screen/arcade'
+import {AsyncCodeEditor, Canvas, evalJSX, JSXEvalResult, ScopeRenderer} from '$lib/ide'
 
-const useIsomorphicEffect = typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
+export function CodeExample(props: {code: string; hookCode?: string}) {
+  const {code: codeProp, hookCode: hookCodeProp} = props
+  const [[scope], setScope] = useState<[Record<string, unknown> | null, Error | null]>([null, null])
+  const [jsxCode, setJSXCode] = useState(codeProp)
+  const [jsxResult, setJSXResult] = useState<JSXEvalResult | null>(null)
+  const [jsxCursor, setJSXCursor] = useState({line: 0, column: 0})
+  const [hookCode, setScopeCode] = useState(hookCodeProp || '')
+  const [hookCursor, setScopeCursor] = useState({line: 0, column: 0})
 
-export default function CodeExample(props: {code: string; hookCode?: string; language: string}) {
-  const {code, hookCode, language} = props
-  const hook = renderHooks(hookCode || '', {React, ...icons, ...ui})
-  const [isSSR, setSSR] = React.useState(true)
+  useEffect(() => setJSXResult(evalJSX(jsxCode, {...scope, ...icons, ...ui, React})), [
+    jsxCode,
+    scope,
+  ])
 
-  useIsomorphicEffect(() => {
-    setSSR(false)
-  }, [])
+  const onCatch = () => {
+    //
+  }
 
-  const hooksState = hook.fn ? hook.fn() : {}
+  const arcadeQuery = getArcadeQuery({jsx: jsxCode, hook: hookCode})
 
-  const result = isSSR ? null : renderCode(code, {React, ...hooksState, ...icons, ...ui})
+  const [mode, setMode] = useState<'jsx' | 'hook'>('jsx')
 
   return (
-    <Card marginY={[2, 2, 3, 4]} overflow="auto" radius={2} shadow={1}>
-      <Card overflow="auto" tone="transparent">
-        {result?.type === 'success' && <Box padding={[3, 3, 4]}>{result.node}</Box>}
-        {result?.type === 'error' && (
-          <Card padding={[3, 3, 4]} tone="critical">
-            <Code muted size={[2, 2, 3, 4]}>
-              {result.error.name}: {result.error.message}
-            </Code>
-          </Card>
-        )}
+    <Box marginY={[4, 4, 5]}>
+      <Card overflow="hidden" radius={2} shadow={1}>
+        <ScopeRenderer code={hookCode} key={hookCode} onChange={setScope} />
+
+        <Card borderBottom>
+          <Canvas onCatch={onCatch} padding={[3, 3, 4]} result={jsxResult} />
+        </Card>
+
+        <Card borderBottom paddingX={4} paddingY={2} style={{textAlign: 'center'}}>
+          <TabList space={[1, 1, 2]}>
+            <Tab
+              aria-controls="mode-jsx-panel"
+              fontSize={1}
+              id="mode-jsx-tab"
+              onClick={() => setMode('jsx')}
+              padding={2}
+              selected={mode === 'jsx'}
+              style={{verticalAlign: 'top'}}
+              label="JSX"
+            />
+            <Tab
+              aria-controls="mode-hook-panel"
+              fontSize={1}
+              id="mode-hook-tab"
+              onClick={() => setMode('hook')}
+              padding={2}
+              selected={mode === 'hook'}
+              style={{verticalAlign: 'top'}}
+              label="Hook"
+            />
+          </TabList>
+        </Card>
+
+        <TabPanel
+          aria-labelledby="mode-jsx-tab"
+          flex={1}
+          id="mode-jsx-panel"
+          hidden={mode !== 'jsx'}
+          style={{outline: 'none'}}
+        >
+          {mode === 'jsx' && (
+            <AsyncCodeEditor
+              code={jsxCode}
+              cursor={jsxCursor}
+              flex={1}
+              onCodeChange={setJSXCode}
+              onCursorChange={setJSXCursor}
+              style={{overflow: 'auto'}}
+            />
+          )}
+        </TabPanel>
+
+        <TabPanel
+          aria-labelledby="mode-hook-tab"
+          flex={1}
+          id="mode-hook-panel"
+          hidden={mode !== 'hook'}
+          style={{outline: 'none'}}
+        >
+          {mode === 'hook' && (
+            <AsyncCodeEditor
+              code={hookCode}
+              cursor={hookCursor}
+              flex={1}
+              onCodeChange={setScopeCode}
+              onCursorChange={setScopeCursor}
+            />
+          )}
+        </TabPanel>
       </Card>
-      <Card overflow="auto" padding={[3, 3, 4]}>
-        <Code language={language} muted size={[2, 2, 3]}>
-          {code}
-        </Code>
-      </Card>
-    </Card>
+
+      <Box marginTop={2} style={{textAlign: 'right'}}>
+        <Link href={{pathname: '/arcade', query: arcadeQuery}} passHref>
+          <Button
+            as="a"
+            fontSize={1}
+            iconRight={LaunchIcon}
+            mode="bleed"
+            padding={2}
+            text="Open in Arcade"
+          />
+        </Link>
+      </Box>
+    </Box>
   )
 }

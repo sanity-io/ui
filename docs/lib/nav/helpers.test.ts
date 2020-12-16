@@ -1,15 +1,11 @@
 import {data} from './__fixtures__/data'
-import {
-  findNavNode,
-  getNavItems,
-  getNavPaths,
-  getNavPathSegments,
-  getNavStaticPaths,
-} from './helpers'
+import {findNavNode, getNavItems, getNavPaths, getNavStaticPaths} from './helpers'
+import {isArray, isRecord} from '$lib/types'
 
 describe('lib/nav', () => {
   it('should get nav items from raw data', () => {
-    const items = getNavItems(data.items || [])
+    const arr = (isRecord(data) && isArray(data.items) && data.items) || []
+    const items = getNavItems(arr)
 
     expect(items[0]).toEqual({
       collapsed: false,
@@ -23,7 +19,8 @@ describe('lib/nav', () => {
   })
 
   it('should get paths from raw data', () => {
-    const paths = getNavPaths(data.items)
+    const arr = (isRecord(data) && isArray(data.items) && data.items) || []
+    const paths = getNavPaths(arr)
 
     expect(paths[0]).toBe('/design')
     expect(paths[1]).toBe('/ui')
@@ -31,17 +28,9 @@ describe('lib/nav', () => {
     expect(paths[3]).toBe('/ui/theme')
   })
 
-  it('should get path segments from raw data', () => {
-    const segmentsArr = getNavPathSegments(data.items)
-
-    expect(segmentsArr[0]).toEqual(['design'])
-    expect(segmentsArr[1]).toEqual(['ui'])
-    expect(segmentsArr[2]).toEqual(['ui', 'concepts'])
-    expect(segmentsArr[3]).toEqual(['ui', 'theme'])
-  })
-
   it('should get static paths for Next.js', () => {
-    const paths = getNavStaticPaths(data.items)
+    const arr = (isRecord(data) && isArray(data.items) && data.items) || []
+    const paths = getNavStaticPaths(arr)
 
     expect(paths[0]).toEqual({params: {path: ['design']}})
     expect(paths[1]).toEqual({params: {path: ['ui']}})
@@ -50,10 +39,11 @@ describe('lib/nav', () => {
   })
 
   it('should find target ID based on path array', () => {
-    const node1 = findNavNode(data.items, ['ui'])
-    const node2 = findNavNode(data.items, ['ui', 'atom', 'avatar'])
+    const arr = (isRecord(data) && isArray(data.items) && data.items) || []
+    const node1 = findNavNode(arr, ['ui'])
+    const node2 = findNavNode(arr, ['ui', 'atom', 'avatar'])
 
-    expect(node1.title).toBe('UI')
-    expect(node2.title).toBe('Avatar')
+    expect(node1?.title).toBe('UI')
+    expect(node2?.title).toBe('Avatar')
   })
 })

@@ -1,6 +1,6 @@
-import {decode, encode} from './helpers'
+import {decode, encode} from './zlib'
 
-describe('arcade/helpers', () => {
+describe('$lib/zlib', () => {
   it('should encode and decode a simple string', () => {
     const encoded = encode('test')
     const decoded = decode(encoded)

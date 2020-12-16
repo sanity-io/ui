@@ -53,12 +53,12 @@ function Property(props: PropertyType) {
   return (
     <PropertyBox padding={[3, 3, 4]}>
       <Stack space={[3, 3, 3, 4]}>
-        <Code language="typescript" muted size={[2, 2, 3]}>
+        <Code language="typescript" muted>
           {tsType}
         </Code>
 
         {Array.isArray(props.description) && (
-          <Text muted size={[2, 2, 3]}>
+          <Text muted size={[1, 1, 2]}>
             <PropertyDescription blocks={props.description} />
           </Text>
         )}

@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import React from 'react'
 import styled from 'styled-components'
 
-const Root = styled(Text)<{selected: boolean}>`
+const Root = styled(Text)`
   & > a {
     color: var(--card-muted-fg-color);
 
@@ -21,7 +21,13 @@ const Root = styled(Text)<{selected: boolean}>`
   }
 `
 
-export function NavLink(props: any) {
+export function NavLink(props: {
+  children: React.ReactNode
+  href: string
+  size?: number | number[]
+  style?: React.CSSProperties
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
+}) {
   const {children, href, ...restProps} = props
   const router = useRouter()
 

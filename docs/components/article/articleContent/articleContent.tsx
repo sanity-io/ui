@@ -1,23 +1,18 @@
 import BlockContent from '@sanity/block-content-to-react'
 import {LinkIcon} from '@sanity/icons'
 import {Box, Card, Code, Heading, Stack, Text} from '@sanity/ui'
-import dynamic from 'next/dynamic'
 import React, {useMemo} from 'react'
 import styled from 'styled-components'
 import {blocksToText} from '../helpers'
 import {HeadingType} from '../types'
+import {CodeExample} from './blocks/codeExample'
 import {ColorGrid} from './blocks/colorGrid'
 import {GroqLogoGrid} from './blocks/groqLogoGrid'
 import {NpmPackageBadge} from './blocks/npmPackageBadge'
 import {PropertyTable} from './blocks/propertyTable'
 import {SanityLogoGrid} from './blocks/sanityLogoGrid'
-import {ready} from '$lib/eval'
 
-const CodeExample = dynamic(ready().then(() => import('./blocks/codeExample')) as any, {
-  ssr: false,
-}) as any
-
-export function ArticleContent({blocks, headings}: {blocks: any[]; headings: HeadingType[]}) {
+export function ArticleContent({blocks, headings}: {blocks: unknown[]; headings: HeadingType[]}) {
   const serializers = useMemo(() => buildSerializers(headings), [headings])
 
   return <BlockContent blocks={blocks} serializers={serializers} />
@@ -27,15 +22,23 @@ const CODE_LANGUAGES = {
   sh: 'bash',
 }
 
-const ListItemText = styled(Text).attrs({forwardedAs: 'li'})`
-  position: relative;
+const UList = styled(Stack).attrs({forwardedAs: 'ul'})`
+  & > li {
+    position: relative;
 
-  &:before {
-    position: absolute;
-    content: '•';
-    left: -1em;
-    width: 1em;
-    top: 0.66em;
+    & > span:first-child {
+      display: block;
+      left: -1em;
+      width: 1em;
+      top: -0.66em;
+      display: block;
+      position: absolute;
+
+      &:before {
+        content: '•';
+        font-weight: 700;
+      }
+    }
   }
 `
 
@@ -44,8 +47,8 @@ function buildSerializers(headings: HeadingType[]) {
     const language: 'sh' = props.node.language
 
     return (
-      <Card marginY={[2, 2, 3, 4]} overflow="auto" padding={[3, 3, 4, 5]} radius={2} shadow={1}>
-        <Code language={CODE_LANGUAGES[language] || language} muted size={[2, 2, 3]}>
+      <Card marginY={[4, 4, 5]} overflow="auto" padding={4} radius={2} shadow={1}>
+        <Code language={CODE_LANGUAGES[language] || language} muted>
           {props.node.code}
         </Code>
       </Card>
@@ -55,15 +58,7 @@ function buildSerializers(headings: HeadingType[]) {
   function CodeExampleSerializer(props: any) {
     if (!props.node || !props.node.code) return null
 
-    const language: 'sh' = props.node.code.language
-
-    return (
-      <CodeExample
-        code={props.node.code.code}
-        hookCode={props.node.hook?.code}
-        language={CODE_LANGUAGES[language] || language}
-      />
-    )
+    return <CodeExample code={props.node.code.code} hookCode={props.node.hook?.code} />
   }
 
   function NpmPackageBadgeSerializer(props: any) {
@@ -83,22 +78,22 @@ function buildSerializers(headings: HeadingType[]) {
   const headingProps: any = {
     h2: {
       box: {
-        paddingTop: [4, 4, 5, 6],
-        paddingBottom: [2, 2, 3, 4],
+        marginTop: [5, 5, 6],
+        marginBottom: [4, 4, 5],
       },
       heading: {size: [1, 1, 2, 3]},
     },
     h3: {
       box: {
-        paddingTop: [3, 3, 4, 5],
-        paddingBottom: [2, 2, 3, 4],
+        marginTop: [5, 5, 6],
+        marginBottom: [4, 4, 5],
       },
       heading: {size: [0, 0, 1, 2]},
     },
     h4: {
       box: {
-        paddingTop: [2, 2, 3, 4],
-        paddingBottom: [2, 2, 3, 4],
+        marginTop: [5, 5, 6],
+        marginBottom: [4, 4, 5],
       },
       heading: {size: [0, 0, 0, 1]},
     },
@@ -132,8 +127,8 @@ function buildSerializers(headings: HeadingType[]) {
 
     if (style === 'blockquote') {
       return (
-        <Box as="blockquote" paddingY={4}>
-          <Text muted size={[2, 2, 3, 4]}>
+        <Box as="blockquote" marginY={[4, 4, 5]}>
+          <Text as="p" muted size={[2, 2, 3]}>
             {props.children}
           </Text>
         </Box>
@@ -141,8 +136,8 @@ function buildSerializers(headings: HeadingType[]) {
     }
 
     return (
-      <Box paddingY={4}>
-        <Text muted size={[2, 2, 3, 4]}>
+      <Box marginY={[4, 4, 5]}>
+        <Text as="p" muted size={[2, 2, 3]}>
           {props.children}
         </Text>
       </Box>
@@ -151,19 +146,18 @@ function buildSerializers(headings: HeadingType[]) {
 
   function ListSerializer(props: any) {
     return (
-      <Box paddingY={4} paddingLeft={[4, 4, 5]}>
-        <Stack as="ul" space={[2, 2, 3]}>
-          {props.children}
-        </Stack>
+      <Box marginY={[4, 4, 5]} paddingLeft={[4, 4, 5]}>
+        <UList space={[3, 3, 4]}>{props.children}</UList>
       </Box>
     )
   }
 
   function ListItemSerializer(props: any) {
     return (
-      <ListItemText muted size={[2, 2, 3, 4]}>
+      <Text as="li" muted size={[2, 2, 3]}>
+        <span />
         {props.children}
-      </ListItemText>
+      </Text>
     )
   }
 

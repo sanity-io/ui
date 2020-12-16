@@ -46,10 +46,7 @@ function NavItem(props: any) {
       )}
 
       {props.items.length > 0 && (
-        <Box
-          hidden={collapsed}
-          // paddingLeft={3}
-        >
+        <Box hidden={collapsed}>
           {props.items.map((item: any, itemIndex: number) => (
             <NavItem {...item} key={itemIndex} />
           ))}

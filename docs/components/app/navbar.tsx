@@ -6,6 +6,7 @@ import React, {useCallback} from 'react'
 import {useApp} from './hooks'
 import {GitHubMark} from '$components'
 import {HINT_HIDDEN_CONTENT} from '$features'
+import {isArray, isRecord} from '$lib/types'
 
 interface Route {
   hidden: boolean
@@ -14,15 +15,17 @@ interface Route {
 }
 
 export function AppNavbar() {
-  const {colorScheme, nav = {}, setColorScheme} = useApp()
+  const {colorScheme, nav, setColorScheme} = useApp()
   const router = useRouter()
 
-  const navbarRoutes: Route[] = (nav.items || [])
-    .filter((item: any) => HINT_HIDDEN_CONTENT || !item.hidden)
-    .map((item: any) => ({
-      hidden: item.hidden,
+  const navItems = isRecord(nav) && isArray(nav.items) ? nav.items : []
+  const navItemRecords: Record<string, unknown>[] = navItems.filter(isRecord)
+  const navbarRoutes: Route[] = navItemRecords
+    .filter((item) => HINT_HIDDEN_CONTENT || !item.hidden)
+    .map((item) => ({
+      hidden: Boolean(item.hidden),
       href: `/${item.segment || ''}`,
-      title: item.title,
+      title: String(item.title),
     }))
 
   const handleSchemeSwitchChange = useCallback(

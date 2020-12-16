@@ -2,7 +2,11 @@ import {Box, Card, Code, Grid, Heading} from '@sanity/ui'
 import React, {createElement} from 'react'
 import {useApp} from '$components/app'
 
-export function LogoGrid({logos}: {logos: any[]}) {
+export function LogoGrid({
+  logos,
+}: {
+  logos: {name: string; component: React.ComponentType<{dark?: boolean}>}[]
+}) {
   const app = useApp()
 
   return (

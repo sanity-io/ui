@@ -1,4 +1,4 @@
-export const data: any = {
+export const data: unknown = {
   items: [
     {
       title: 'Home',

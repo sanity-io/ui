@@ -4,6 +4,7 @@ import {AppLayout, useApp} from '$components'
 import {Screen} from '$components/screen'
 import {PREVIEW} from '$features'
 import {loadPageData} from '$lib/page'
+import {isRecord} from '$lib/types'
 
 export async function getStaticProps(opts: {preview?: boolean}) {
   const {preview = PREVIEW} = opts
@@ -21,7 +22,9 @@ function IndexPage() {
         <title>Sanity UI</title>
       </Head>
 
-      <AppLayout>{target && target._type === 'screen' && <Screen target={target} />}</AppLayout>
+      <AppLayout>
+        {isRecord(target) && target._type === 'screen' && <Screen target={target} />}
+      </AppLayout>
     </>
   )
 }

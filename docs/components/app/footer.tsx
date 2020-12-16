@@ -25,7 +25,7 @@ export function AppFooter() {
             fontSize={[1, 1, 2]}
             mode="bleed"
             padding={2}
-            text={<SanityLogo dark={app.colorScheme === 'dark'} />}
+            text={<SanityLogo dark={app.colorScheme === 'dark' ? true : undefined} />}
           />
         </Link>
 

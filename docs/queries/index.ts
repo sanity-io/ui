@@ -1,9 +1,5 @@
 import {groq} from 'next-sanity'
 
-export const FEATURES_QUERY = groq`
-  *[_type == "features" && _id == "features"][0]
-`
-
 export const MAIN_NAV_QUERY = groq`
   *[_type == "nav" && id == "main"]{
     // id,

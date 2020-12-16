@@ -1,14 +1,12 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
 import {createContext} from 'react'
-import {AppFeatures} from './types'
 
 export interface AppContextValue {
   colorScheme: ThemeColorSchemeKey
-  features: AppFeatures
-  nav: any
-  node: any
+  nav: unknown
+  node: Record<string, unknown> | unknown
   setColorScheme: (mode: ThemeColorSchemeKey) => void
-  target: any
+  target: unknown
 }
 
 export const AppContext = createContext<AppContextValue | null>(null)

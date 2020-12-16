@@ -5,6 +5,7 @@ import {PageLayout} from '$components'
 import {PREVIEW} from '$features'
 import {getNavItems} from '$lib/nav'
 import {loadPageData, loadPagePaths} from '$lib/page'
+import {isRecord} from '$lib/types'
 
 export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
   const {params = {}, preview = PREVIEW} = opts
@@ -22,24 +23,25 @@ export async function getStaticPaths() {
 export default function PathPage(props: {params: {path: string[]}}) {
   const {params = {path: []}} = props
   const {nav, target} = useApp()
-  const structure = getNavItems(nav.items || [])
+  const navItems: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
+  const structure = getNavItems(navItems)
   const currentStructure = structure.find((n) => n.segment === params.path[0])
 
   return (
     <>
       <Head>
-        {target && <title>{target.title} – Sanity UI</title>}
+        {isRecord(target) && <title>{target.title} – Sanity UI</title>}
         {!target && 'Missing target – Sanity UI'}
       </Head>
 
       <AppLayout>
-        {target && target._type === 'article' && (
+        {isRecord(target) && target._type === 'article' && (
           <PageLayout structure={currentStructure} {...(target.layout || {})}>
             <Article article={target} />
           </PageLayout>
         )}
 
-        {target && target._type === 'screen' && <Screen target={target} />}
+        {isRecord(target) && target._type === 'screen' && <Screen target={target} />}
       </AppLayout>
     </>
   )

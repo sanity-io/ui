@@ -1,37 +1,41 @@
 import {HINT_HIDDEN_CONTENT} from '$features'
+import {isArray, isRecord, isString} from '$lib/types'
 
 interface NavItem {
   collapsed: boolean
   hidden: boolean
   href?: string
-  title: string
+  title?: string
   menuTitle?: string
   items: NavItem[]
   segment?: string
 }
 
-export function getNavItems(items: any[], basePath = ''): NavItem[] {
-  return items
+export function getNavItems(items: unknown[], basePath = ''): NavItem[] {
+  const records: Record<string, unknown>[] = items.filter(isRecord)
+
+  return records
     .filter((item) => HINT_HIDDEN_CONTENT || !item.hidden)
-    .map((item: any) => {
+    .map((item: Record<string, unknown>) => {
       const href = `${basePath}/${item.segment || ''}`
 
       return {
-        collapsed: item.collapsed || false,
-        hidden: item.hidden || false,
+        collapsed: Boolean(item.collapsed),
+        hidden: Boolean(item.hidden),
         href: item.targetId ? href : undefined,
-        title: item.title,
-        menuTitle: item.menuTitle,
-        items: getNavItems(item.items || [], href),
-        segment: item.segment,
+        title: isString(item.title) ? item.title : undefined,
+        menuTitle: isString(item.menuTitle) ? item.menuTitle : undefined,
+        items: getNavItems(isArray(item.items) ? item.items : [], href),
+        segment: isString(item.segment) ? item.segment : undefined,
       }
     })
 }
 
-export function getNavPaths(items: any[], basePath = ''): string[] {
+export function getNavPaths(items: unknown[], basePath = ''): string[] {
   const paths = []
 
   for (const item of items) {
+    if (!isRecord(item)) continue
     if (!HINT_HIDDEN_CONTENT && item.hidden) continue
 
     const path = `${basePath}/${item.segment || ''}`
@@ -41,31 +45,27 @@ export function getNavPaths(items: any[], basePath = ''): string[] {
     }
 
     if (item.items) {
-      paths.push(...getNavPaths(item.items, path))
+      paths.push(...getNavPaths(isArray(item.items) ? item.items : [], path))
     }
   }
 
   return paths
 }
 
-export function getNavPathSegments(items: any[]) {
-  return getNavPaths(items).map((p) => p.split('/').slice(1))
-}
-
-export function getNavStaticPaths(items: any[]) {
+export function getNavStaticPaths(items: unknown[]) {
   return getNavPaths(items).map((p) => ({
     params: {path: p.split('/').slice(1)},
   }))
 }
 
-export function findNavNode(nodes: any[], path: string[]): any {
+export function findNavNode(nodes: unknown[], path: string[]): Record<string, unknown> | null {
   const len = path.length
   const segment = path[0]
 
   for (const node of nodes) {
-    if (node.segment === segment) {
+    if (isRecord(node) && node.segment === segment) {
       if (len > 1) {
-        return findNavNode(node.items, path.slice(1))
+        return findNavNode((isArray(node.items) && node.items) || [], path.slice(1))
       }
 
       return node

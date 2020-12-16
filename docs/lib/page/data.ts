@@ -1,5 +1,6 @@
 import {findNavNode} from '$lib/nav'
-import {FEATURES_QUERY, MAIN_NAV_QUERY, TARGET_QUERY} from '$queries'
+import {isArrayOfStrings, isRecord} from '$lib/types'
+import {MAIN_NAV_QUERY, TARGET_QUERY} from '$queries'
 import {getClient, usePreviewSubscription} from '$sanity'
 
 export async function loadPageData({
@@ -9,34 +10,30 @@ export async function loadPageData({
   params?: {path?: string[]}
   preview?: boolean
 }) {
-  const features = await getClient(preview).fetch(FEATURES_QUERY)
-  const nav = await getClient(preview).fetch(MAIN_NAV_QUERY)
-  const node = findNavNode(nav.items, params.path || [])
-  const target = await getClient(preview).fetch(TARGET_QUERY, {id: node.targetId})
+  const nav: unknown = await getClient(preview).fetch(MAIN_NAV_QUERY)
+  const navItems: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
+  const node = findNavNode(navItems, params.path || [])
+  const target: unknown = await getClient(preview).fetch(TARGET_QUERY, {
+    id: node ? node.targetId : '404',
+  })
 
-  return {features, nav, params, preview, target}
+  return {nav, params, preview, target}
 }
 
-export function usePageData(props: any = {}) {
-  const {
-    features: initialFeatures,
-    nav: initialNav,
-    params = {},
-    preview,
-    target: initialTarget,
-  } = props
-
-  const {data: features} = usePreviewSubscription(FEATURES_QUERY, {
-    initialData: initialFeatures,
-    enabled: preview,
-  })
+export function usePageData(props: unknown) {
+  const initialNav = isRecord(props) && props.nav
+  const preview = isRecord(props) && Boolean(props.preview)
+  const params: Record<string, unknown> =
+    (isRecord(props) && isRecord(props.params) && props.params) || {}
+  const initialTarget = isRecord(props) && props.target
 
   const {data: nav = {}} = usePreviewSubscription(MAIN_NAV_QUERY, {
     initialData: initialNav,
     enabled: preview,
   })
 
-  const node = findNavNode(nav.items || [], params.path || [])
+  const navItems: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
+  const node = findNavNode(navItems, isArrayOfStrings(params.path) ? params.path : [])
 
   const {data: target} = usePreviewSubscription(TARGET_QUERY, {
     initialData: initialTarget || undefined,
@@ -44,5 +41,5 @@ export function usePageData(props: any = {}) {
     params: {id: node ? node.targetId : '404'},
   })
 
-  return {features, nav, params, node, target}
+  return {nav, params, node, target}
 }

@@ -1,6 +1,7 @@
 import {
   LayerProvider,
   studioTheme,
+  ThemeColorProvider,
   ThemeColorSchemeKey,
   ThemeProvider,
   ToastProvider,
@@ -9,16 +10,14 @@ import {
 import React, {useEffect, useState} from 'react'
 import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'
-import {AppFeatures} from './types'
 
 export function AppProvider(props: {
   children?: React.ReactNode
-  features: AppFeatures
-  nav: any
-  node: any
-  target: any
+  nav: unknown
+  node: Record<string, unknown> | null
+  target: unknown
 }) {
-  const {children, features, nav, node, target} = props
+  const {children, nav, node, target} = props
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
     prefersDark ? 'dark' : 'light'
@@ -28,8 +27,10 @@ export function AppProvider(props: {
 
   return (
     <ThemeProvider scheme={colorScheme} theme={studioTheme}>
-      <GlobalStyle />
-      <AppContext.Provider value={{colorScheme, features, nav, node, setColorScheme, target}}>
+      <ThemeColorProvider tone="transparent">
+        <GlobalStyle />
+      </ThemeColorProvider>
+      <AppContext.Provider value={{colorScheme, nav, node, setColorScheme, target}}>
         <LayerProvider>
           <ToastProvider>{children}</ToastProvider>
         </LayerProvider>

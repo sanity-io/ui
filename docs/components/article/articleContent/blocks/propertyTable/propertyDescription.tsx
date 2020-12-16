@@ -1,8 +1,11 @@
 import BlockContent from '@sanity/block-content-to-react'
-import {Box, Heading, Text} from '@sanity/ui'
+import {Box, BoxProps, Heading, HeadingProps, Text} from '@sanity/ui'
 import React from 'react'
+import {isRecord, isString} from '$lib/types'
 
-const headingProps: any = {
+const headingProps: {
+  [key: string]: {box: Omit<BoxProps, 'as'>; heading: Omit<HeadingProps, 'as'>} | undefined
+} = {
   h2: {
     box: {
       paddingTop: [4, 4, 5, 6],
@@ -26,15 +29,18 @@ const headingProps: any = {
   },
 }
 
-function BlockSerializer(props: any) {
-  const {style = 'normal'} = props.node
+function BlockSerializer(props: Record<string, unknown>) {
+  const node: Record<string, unknown> = isRecord(props.node) ? props.node : {}
+  const style = isString(node.style) ? node.style : 'normal'
 
   if (/^h\d/.test(style)) {
     // const level = style.replace(/[^\d]/g, '')
+    const styleProps = headingProps[style] || {box: {}, heading: {}}
+
     return (
-      <Box {...headingProps[style].box}>
-        <Heading as={style} {...headingProps[style].heading}>
-          {props.children}
+      <Box {...styleProps.box}>
+        <Heading as={style as any} {...styleProps.heading}>
+          {props.children as any}
         </Heading>
       </Box>
     )
@@ -44,7 +50,7 @@ function BlockSerializer(props: any) {
     return (
       <Box as="blockquote" paddingY={4}>
         <Text muted size={[2, 2, 3, 4]}>
-          {props.children}
+          {props.children as any}
         </Text>
       </Box>
     )
@@ -53,7 +59,7 @@ function BlockSerializer(props: any) {
   return (
     <Box paddingY={4}>
       <Text muted size={[2, 2, 3, 4]}>
-        {props.children}
+        {props.children as any}
       </Text>
     </Box>
   )
@@ -65,6 +71,6 @@ const serializers = {
   },
 }
 
-export function PropertyDescription({blocks}: {blocks: any[]}) {
+export function PropertyDescription({blocks}: {blocks: unknown[]}) {
   return <BlockContent blocks={blocks} serializers={serializers} />
 }

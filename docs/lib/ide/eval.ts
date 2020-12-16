@@ -1,50 +1,28 @@
-export interface EvalSuccessResult {
+export interface JSXEvalSuccessResult {
   type: 'success'
   node: React.ReactNode
 }
 
-export interface EvalErrorResult {
+export interface JSXEvalErrorResult {
   type: 'error'
   error: Error
 }
 
-export type EvalResult = EvalSuccessResult | EvalErrorResult
+export type JSXEvalResult = JSXEvalSuccessResult | JSXEvalErrorResult
 
-export function ready(opts?: {timeout?: number}) {
-  const timeout = opts?.timeout || 10000
-
-  return new Promise<void>((resolve, reject) => {
-    if (typeof window === 'undefined') {
-      resolve()
-
-      return
-    }
-
-    const startTime = Date.now()
-
-    const tick = () => {
-      const duration = Date.now() - startTime
-
-      if (duration > timeout) {
-        reject(new Error('eval.ready: timeout'))
-
-        return
-      }
-
-      if ((window as any).Babel) {
-        resolve()
-
-        return
-      }
-
-      setTimeout(tick, 100)
-    }
-
-    setTimeout(tick, 100)
-  })
+export interface HookEvalSuccessResult {
+  type: 'success'
+  fn: () => Record<string, unknown>
 }
 
-export function renderHooks(code: string, scope: Record<string, any>) {
+export interface HookEvalErrorResult {
+  type: 'error'
+  error: Error
+}
+
+export type HookEvalResult = HookEvalSuccessResult | HookEvalErrorResult
+
+export function evalHook(code: string, scope: Record<string, any>): HookEvalResult {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = (window as any).Babel.transform(`() => {${code}}`, {
@@ -57,7 +35,7 @@ export function renderHooks(code: string, scope: Record<string, any>) {
   }
 }
 
-export function renderCode(code: string, scope: Record<string, any>): EvalResult {
+export function evalJSX(code: string, scope: Record<string, any>): JSXEvalResult {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = (window as any).Babel.transform(`<>${code}</>`, {presets: ['env', 'react']})
