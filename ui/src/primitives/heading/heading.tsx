@@ -5,7 +5,7 @@ import {ThemeFontWeightKey} from '../../theme'
 import {TextAlign} from '../../types'
 import {headingBaseStyle} from './styles'
 
-interface HeadingProps {
+export interface HeadingProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
   as?: React.ElementType | keyof JSX.IntrinsicElements
