@@ -2778,10 +2778,10 @@
     react-props-stream "^1.0.0"
     rxjs "^6.5.3"
 
-"@sanity/default-login@2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.0.9.tgz#7895f92692f36a886d4cc09f406486c478c7cd22"
-  integrity sha512-XbrKuGKlGFF7urCk0GxxtKcTvMaDKzVTxyWQ0u5D1hGpHx/evvcO8ITA4imqLSAQLnAkxKwXcwhJQAQrSVvXew==
+"@sanity/default-login@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.1.0.tgz#6c4563c9665141b4f080467b369d54bbad6c8d39"
+  integrity sha512-swuFz4DeWuhlQTO6I64lBnDPdjlxC6g1UJCpteBgblOFqcC3liQFkSLxnT2gVX4OGZXXy6oiRliyUZOUkbju3Q==
   dependencies:
     "@sanity/generate-help-url" "2.0.9"
     prop-types "^15.6.0"
