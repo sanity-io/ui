@@ -1,15 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import {responsiveBoxStyle, ResponsiveBoxStyleProps} from '../../styles/internal'
+import {
+  responsiveBoxStyle,
+  ResponsiveBoxStyleProps,
+  responsiveFlexItemStyle,
+  ResponsiveFlexItemStyleProps,
+} from '../../styles/internal'
 import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
 import {ResponsiveWidthStyleProps} from './types'
 
-export interface ContainerProps extends ResponsiveWidthStyleProps {
+export interface ContainerProps extends ResponsiveWidthStyleProps, ResponsiveFlexItemStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
 const Root = styled.div<ResponsiveBoxStyleProps & ResponsiveWidthStyleProps>(
   responsiveBoxStyle,
+  responsiveFlexItemStyle,
   containerBaseStyle,
   responsiveContainerWidthStyle
 )
