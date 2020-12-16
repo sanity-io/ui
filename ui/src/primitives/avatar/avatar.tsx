@@ -70,6 +70,8 @@ export const Avatar = forwardRef(
 
     const [imageFailed, setImageFailed] = useState<boolean>(false)
 
+    const imageId = `avatar-image-${elementId}`
+
     useEffect(() => {
       if (arrowPosition === arrowPositionProp) return undefined
 
@@ -117,17 +119,12 @@ export const Avatar = forwardRef(
         {!imageFailed && src && (
           <svg viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
             <defs>
-              <pattern
-                id={`avatar-image-${elementId}`}
-                patternContentUnits="objectBoundingBox"
-                width="1"
-                height="1"
-              >
+              <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
                 <image href={src} width="1" height="1" onError={handleImageError} />
               </pattern>
             </defs>
 
-            <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${elementId}-image-url)`} />
+            <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
             <BgStroke
               cx={_radius}
               cy={_radius}
