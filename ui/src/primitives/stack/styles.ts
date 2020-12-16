@@ -9,10 +9,11 @@ export function stackBaseStyle() {
     '&:not([hidden])': {
       display: 'grid',
     },
+    '&[data-as="ul"],&[data-as="ol"]': {
+      listStyle: 'none',
+    },
     gridTemplateColumns: 'minmax(0, 1fr)',
     gridAutoRows: 'min-content',
-    margin: 0,
-    padding: 0,
   }
 }
 
