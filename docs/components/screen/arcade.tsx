@@ -27,7 +27,7 @@ export const DEFAULT_CODE = `<Card padding={6} sizing="border">
     <Button
       icon={ComposeIcon}
       text="Compose"
-      tone="brand"
+      tone="primary"
     />
     <Button icon={PlayIcon} mode="ghost" text="Run" />
   </Inline>

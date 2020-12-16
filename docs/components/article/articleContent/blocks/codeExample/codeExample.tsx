@@ -4,8 +4,13 @@ import * as ui from '@sanity/ui'
 import {Box, Button, Card, Tab, TabList, TabPanel} from '@sanity/ui'
 import Link from 'next/link'
 import React, {useEffect, useState} from 'react'
+import styled from 'styled-components'
 import {getArcadeQuery} from '$components/screen/arcade'
 import {AsyncCodeEditor, Canvas, evalJSX, JSXEvalResult, ScopeRenderer} from '$lib/ide'
+
+const CodeTabPanel = styled(TabPanel)`
+  max-height: 300px;
+`
 
 export function CodeExample(props: {code: string; hookCode?: string}) {
   const {code: codeProp, hookCode: hookCodeProp} = props
@@ -63,7 +68,7 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
           </TabList>
         </Card>
 
-        <TabPanel
+        <CodeTabPanel
           aria-labelledby="mode-jsx-tab"
           flex={1}
           id="mode-jsx-panel"
@@ -80,9 +85,9 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
               style={{overflow: 'auto'}}
             />
           )}
-        </TabPanel>
+        </CodeTabPanel>
 
-        <TabPanel
+        <CodeTabPanel
           aria-labelledby="mode-hook-tab"
           flex={1}
           id="mode-hook-panel"
@@ -98,7 +103,7 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
               onCursorChange={setScopeCursor}
             />
           )}
-        </TabPanel>
+        </CodeTabPanel>
       </Card>
 
       <Box marginTop={2} style={{textAlign: 'right'}}>

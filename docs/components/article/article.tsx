@@ -33,9 +33,9 @@ export function Article(props: {article: Record<string, unknown>}) {
                   )}
                 </Stack>
 
-                <Card borderTop marginTop={[3, 4, 5, 6]} paddingTop={[2, 3, 4]}>
+                <Card borderTop marginTop={[3, 3, 4, 5]} paddingTop={[2, 2, 3]}>
                   {isString(article._updatedAt) && (
-                    <Text muted size={[0, 1, 2]}>
+                    <Text muted size={[0, 0, 1]}>
                       Updated <TimeAgo date={article._updatedAt} />
                     </Text>
                   )}
@@ -44,7 +44,11 @@ export function Article(props: {article: Record<string, unknown>}) {
             </Box>
           </Box>
 
-          <Box display={['none', 'none', 'none', 'block']} flex={1} style={{maxWidth: '20rem'}}>
+          <Box
+            display={['none', 'none', 'none', 'block']}
+            flex={1}
+            style={{minWidth: '12em', maxWidth: '16rem'}}
+          >
             {!layout.wide && toc.length > 0 && (
               <Box padding={[3, 4, 5]} style={{position: 'sticky', top: 0}}>
                 <Label>On this page</Label>

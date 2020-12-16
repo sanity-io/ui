@@ -7,7 +7,7 @@ export function codeEditorStyle() {
   return css`
     vertical-align: top;
     height: 100%;
-    color: var(--card-muted-fg-color);
+    color: var(--card-code-fg-color);
 
     &::selection {
       background: none;
@@ -31,7 +31,6 @@ export function codeEditorStyle() {
       margin: 0;
       box-sizing: border-box;
       padding: 12px 0;
-      overflow: visible !important;
     }
 
     .CodeMirror-line::selection,

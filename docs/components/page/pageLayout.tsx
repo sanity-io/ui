@@ -49,7 +49,7 @@ export function PageLayout({children, structure}: PageLayoutProps) {
       <Box
         display={['none', 'none', 'block']}
         flex={1}
-        style={{minWidth: '10em', maxWidth: '20em'}}
+        style={{minWidth: '12em', maxWidth: '16em'}}
       >
         <NavDrawer open={menuOpen} ref={setNavDrawerElement}>
           <PageHeader structure={structure} />

@@ -38,7 +38,13 @@ export function AppNavbar() {
   )
 
   return (
-    <Card as="header" borderBottom paddingX={[3, 4, 5]} paddingY={[2, 3, 4]}>
+    <Card
+      as="header"
+      borderBottom
+      paddingX={[3, 4, 5]}
+      paddingY={[2, 3, 4]}
+      style={{minHeight: 'auto'}}
+    >
       <Flex as="nav" align="center">
         <Box flex={1}>
           <Flex align="center">

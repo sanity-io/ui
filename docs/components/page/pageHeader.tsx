@@ -23,9 +23,8 @@ function NavItem(props: any) {
         <Box padding={3}>
           <NavLink
             href={props.href}
-            size={[2, 2, 3]}
+            size={[1, 2, 2]}
             style={props.hidden ? {opacity: 0.25} : undefined}
-            weight="medium"
           >
             {props.menuTitle || props.title}
           </NavLink>
@@ -35,10 +34,8 @@ function NavItem(props: any) {
       {!props.href && (
         <Box onClick={() => setCollapsed((v) => !v)} paddingX={3} paddingTop={5} paddingBottom={3}>
           <Flex justify="space-between">
-            <Label size={[2, 2, 3]} weight="medium">
-              {props.menuTitle || props.title}
-            </Label>
-            <Label muted size={[2, 2, 3]}>
+            <Label size={[1, 2, 2]}>{props.menuTitle || props.title}</Label>
+            <Label muted size={[1, 2, 2]}>
               {collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
             </Label>
           </Flex>

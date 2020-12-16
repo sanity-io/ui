@@ -10,9 +10,13 @@ export function AppFooter() {
   return (
     <Card
       borderTop
-      paddingX={[4, 5, 6]}
-      paddingY={[3, 4, 5]}
-      style={{position: 'relative', textAlign: 'center'}}
+      paddingX={[3, 4, 5]}
+      paddingY={[2, 3, 4]}
+      style={{
+        position: 'relative',
+        textAlign: 'center',
+        minHeight: 'auto',
+      }}
     >
       <Inline space={1}>
         <Text muted size={[1, 1, 2]}>
