@@ -2,7 +2,7 @@ import {createContext} from 'react'
 
 export interface PortalContextInterface {
   boundaryElement: HTMLElement | null
-  element: HTMLElement
+  element: HTMLElement | null
 }
 
 let globalElement: HTMLDivElement | null = null

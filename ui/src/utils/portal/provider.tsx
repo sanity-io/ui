@@ -7,12 +7,14 @@ interface PortalProviderProps {
   element: HTMLElement | null
 }
 
+const __BROWSER__ = typeof window !== 'undefined'
+
 export function PortalProvider(props: PortalProviderProps) {
   return (
     <PortalContext.Provider
       value={{
         boundaryElement: props.boundaryElement || null,
-        element: props.element || document.body,
+        element: props.element || (__BROWSER__ && document.body) || null,
       }}
     >
       {props.children}
