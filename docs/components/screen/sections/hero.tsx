@@ -42,12 +42,12 @@ export function ScreenHeroSection({data}: {data: any}) {
 
       <Container width={0}>
         <Stack space={[3, 4, 5]}>
-          <Heading align="center" size={[3, 4, 5]}>
+          <Heading align="center" as="h1" size={[3, 4, 5]}>
             {data.headline}
           </Heading>
 
           {data.copy && (
-            <Text align="center" muted size={[2, 2, 3]}>
+            <Text align="center" as="p" muted size={[2, 2, 3]}>
               {data.copy}
             </Text>
           )}
@@ -87,9 +87,11 @@ export function ScreenHeroSection({data}: {data: any}) {
                 <Link href={link.href ? link.href : '/docs/motivation'} key={link._key} passHref>
                   <Card as="a" border padding={4} radius={2}>
                     <Stack space={3}>
-                      <Heading size={1}>{link.title || <em>Untitled</em>}</Heading>
+                      <Heading as="h2" size={1}>
+                        {link.title || <em>Untitled</em>}
+                      </Heading>
                       {link.subtitle && (
-                        <Text muted size={2}>
+                        <Text as="p" muted size={2}>
                           {link.subtitle}
                         </Text>
                       )}
