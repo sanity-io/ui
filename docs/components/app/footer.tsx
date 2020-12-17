@@ -29,7 +29,7 @@ export function AppFooter() {
             fontSize={[1, 1, 2]}
             mode="bleed"
             padding={2}
-            text={<SanityLogo dark={colorScheme === 'dark' || undefined} />}
+            text={<SanityLogo aria-label="Sanity" dark={colorScheme === 'dark' || undefined} />}
           />
         </Link>
 
