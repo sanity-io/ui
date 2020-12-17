@@ -94,6 +94,15 @@ const heroSection = {
       title: 'Links',
       of: [linkType],
     },
+    {
+      type: 'object',
+      name: 'backgroundImage',
+      title: 'Image',
+      fields: [
+        {type: 'image', name: 'dark', title: 'Dark mode'},
+        {type: 'image', name: 'light', title: 'Light mode'},
+      ],
+    },
   ],
 }
 
