@@ -47,7 +47,7 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
 
   render() {
     return (
-      <Html>
+      <Html lang="en-US">
         <Head>
           {/* Global site tag (gtag.js) - Google Analytics */}
           {GA_TRACKING_ID && (
