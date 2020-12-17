@@ -5,6 +5,29 @@ const arcadeSection = {
   fields: [{type: 'boolean', name: 'test', title: 'Test'}],
 }
 
+const linkType = {
+  type: 'object',
+  name: 'link',
+  title: 'Link',
+  fields: [
+    {
+      type: 'string',
+      name: 'title',
+      title: 'Title',
+    },
+    {
+      type: 'text',
+      name: 'subtitle',
+      title: 'Subtitle',
+    },
+    {
+      type: 'string',
+      name: 'href',
+      title: 'Hypertext reference',
+    },
+  ],
+}
+
 const heroSection = {
   type: 'object',
   name: 'screenSection.hero',
@@ -27,32 +50,49 @@ const heroSection = {
     },
     {
       type: 'array',
-      name: 'links',
-      title: 'Links',
+      name: 'ctas',
+      title: 'CTAs',
       of: [
         {
           type: 'object',
-          name: 'link',
-          title: 'Link',
+          name: 'cta',
+          title: 'Call to action',
           fields: [
             {
               type: 'string',
-              name: 'title',
-              title: 'Title',
-            },
-            {
-              type: 'text',
-              name: 'subtitle',
-              title: 'Subtitle',
+              name: 'label',
+              title: 'Label',
             },
             {
               type: 'string',
               name: 'href',
               title: 'Hypertext reference',
             },
+            {
+              type: 'string',
+              name: 'tone',
+              title: 'Tone',
+              options: {
+                list: ['default', 'primary'],
+              },
+            },
+            {
+              type: 'string',
+              name: 'mode',
+              title: 'Mode',
+              options: {
+                list: ['default', 'ghost'],
+              },
+            },
           ],
         },
       ],
+    },
+    {
+      type: 'array',
+      name: 'links',
+      title: 'Links',
+      of: [linkType],
     },
   ],
 }

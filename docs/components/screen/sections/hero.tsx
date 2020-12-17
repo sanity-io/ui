@@ -1,4 +1,4 @@
-import {Box, Card, Container, Grid, Heading, Stack, Text} from '@sanity/ui'
+import {Box, Button, Card, Container, Grid, Heading, Inline, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
 import React from 'react'
 
@@ -15,6 +15,22 @@ export function ScreenHeroSection({data}: {data: any}) {
               <Text align="center" muted size={[2, 2, 3]}>
                 {data.copy}
               </Text>
+            )}
+            {data.ctas && (
+              <Inline space={2} style={{textAlign: 'center'}}>
+                {data.ctas.map((cta: any) => (
+                  <Link href={cta.href} key={cta._key} passHref>
+                    <Button
+                      as="a"
+                      fontSize={[2, 2, 3]}
+                      mode={cta.mode}
+                      padding={[3, 3, 4]}
+                      text={cta.label}
+                      tone={cta.tone}
+                    />
+                  </Link>
+                ))}
+              </Inline>
             )}
           </Stack>
         </Container>
