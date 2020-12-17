@@ -40,3 +40,11 @@ export const props = () => {
 export const custom = () => {
   return <Box padding={3}>Custom</Box>
 }
+
+export const responsive = () => {
+  return (
+    <Box id="responsive-box" display={['none', 'block', 'none', 'block', 'none', 'block']}>
+      Content!
+    </Box>
+  )
+}
