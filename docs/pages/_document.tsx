@@ -54,7 +54,7 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
           {!__DEV__ && (
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           )}
-          {!__DEV__ && <script>{GA_TRACKING_CODE}</script>}
+          {!__DEV__ && <script dangerouslySetInnerHTML={{__html: GA_TRACKING_CODE}} />}
 
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta name="theme-color" content={hues.red[500].hex} />
