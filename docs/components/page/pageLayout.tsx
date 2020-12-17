@@ -4,10 +4,11 @@ import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
 import {PageHeader} from './pageHeader'
 import {NavDrawer} from '$components'
+import {NavMenu} from '$lib/nav/types'
 
 interface PageLayoutProps {
   children: React.ReactNode
-  structure: any
+  menu: NavMenu | null
 }
 
 const Root = styled(Flex)`
@@ -36,7 +37,7 @@ const NarrowDeviceMenu = styled(Box)`
   `}
 `
 
-export function PageLayout({children, structure}: PageLayoutProps) {
+export function PageLayout({children, menu}: PageLayoutProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [navDrawerElement, setNavDrawerElement] = useState<HTMLDivElement | null>(null)
 
@@ -46,15 +47,17 @@ export function PageLayout({children, structure}: PageLayoutProps) {
 
   return (
     <Root>
-      <Box
-        display={['none', 'none', 'block']}
-        flex={1}
-        style={{minWidth: '12em', maxWidth: '16em'}}
-      >
-        <NavDrawer open={menuOpen} ref={setNavDrawerElement}>
-          <PageHeader structure={structure} />
-        </NavDrawer>
-      </Box>
+      {menu && (
+        <Box
+          display={['none', 'none', 'block']}
+          flex={1}
+          style={{minWidth: '12em', maxWidth: '16em'}}
+        >
+          <NavDrawer open={menuOpen} ref={setNavDrawerElement}>
+            <PageHeader menu={menu} />
+          </NavDrawer>
+        </Box>
+      )}
 
       <ContentContainer flex={4}>
         <NarrowDeviceMenu padding={[2, 4]}>

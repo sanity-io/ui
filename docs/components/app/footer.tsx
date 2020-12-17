@@ -5,7 +5,7 @@ import React from 'react'
 import {useApp} from './hooks'
 
 export function AppFooter() {
-  const app = useApp()
+  const {colorScheme} = useApp()
 
   return (
     <Card
@@ -29,7 +29,7 @@ export function AppFooter() {
             fontSize={[1, 1, 2]}
             mode="bleed"
             padding={2}
-            text={<SanityLogo dark={app.colorScheme === 'dark' ? true : undefined} />}
+            text={<SanityLogo dark={colorScheme === 'dark' || undefined} />}
           />
         </Link>
 

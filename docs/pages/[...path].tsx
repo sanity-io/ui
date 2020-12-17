@@ -3,9 +3,9 @@ import React from 'react'
 import {AppLayout, Article, Screen, useApp} from '$components'
 import {PageLayout} from '$components'
 import {PREVIEW} from '$features'
-import {getNavItems} from '$lib/nav'
+import {buildNavMenu, getNavItems} from '$lib/nav'
 import {loadPageData, loadPagePaths} from '$lib/page'
-import {isRecord} from '$lib/types'
+import {isArray, isRecord} from '$lib/types'
 
 export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
   const {params = {}, preview = PREVIEW} = opts
@@ -23,9 +23,10 @@ export async function getStaticPaths() {
 export default function PathPage(props: {params: {path: string[]}}) {
   const {params = {path: []}} = props
   const {nav, target} = useApp()
-  const navItems: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
-  const structure = getNavItems(navItems)
-  const currentStructure = structure.find((n) => n.segment === params.path[0])
+  const navValues: unknown[] = (isRecord(nav) && isArray(nav.items) && nav.items) || []
+  const navItems = getNavItems(navValues)
+  const navItem = navItems.find((i) => i.segment === params.path[0])
+  const menu = navItem ? buildNavMenu(navItem) : null
 
   return (
     <>
@@ -36,7 +37,7 @@ export default function PathPage(props: {params: {path: string[]}}) {
 
       <AppLayout>
         {isRecord(target) && target._type === 'article' && (
-          <PageLayout structure={currentStructure} {...(target.layout || {})}>
+          <PageLayout menu={menu} {...(target.layout || {})}>
             <Article article={target} />
           </PageLayout>
         )}

@@ -11,6 +11,9 @@ export async function loadPageData({
   preview?: boolean
 }) {
   const nav: unknown = await getClient(preview).fetch(MAIN_NAV_QUERY)
+
+  // console.log(JSON.stringify(nav))
+
   const navItems: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
   const node = findNavNode(navItems, params.path || [])
   const target: unknown = await getClient(preview).fetch(TARGET_QUERY, {
