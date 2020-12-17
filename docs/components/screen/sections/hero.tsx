@@ -84,7 +84,7 @@ export function ScreenHeroSection({data}: {data: any}) {
           <Box marginTop={[3, 4, 5]}>
             <Grid columns={[1, 1, 2, 3]} gap={[3, 4, 4, 5]}>
               {data.links.map((link: any) => (
-                <Link href={link.href ? link.href : '/docs'} key={link._key} passHref>
+                <Link href={link.href ? link.href : '/docs/motivation'} key={link._key} passHref>
                   <Card as="a" border padding={4} radius={2}>
                     <Stack space={3}>
                       <Heading size={1}>{link.title || <em>Untitled</em>}</Heading>
