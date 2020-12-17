@@ -10,6 +10,15 @@ import NextDocument, {
 import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
 
+const __DEV__ = process.env.NODE_ENV === 'development'
+
+const GA_TRACKING_ID = 'UA-129279-46'
+
+const GA_TRACKING_CODE = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_TRACKING_ID}');`
+
 class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}> {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet()
@@ -41,6 +50,12 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
     return (
       <Html>
         <Head>
+          {/* Global site tag (gtag.js) - Google Analytics */}
+          {!__DEV__ && (
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+          )}
+          {!__DEV__ && <script>{GA_TRACKING_CODE}</script>}
+
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta name="theme-color" content={hues.red[500].hex} />
           <meta name="msapplication-tap-highlight" content="no" />
