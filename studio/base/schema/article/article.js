@@ -17,5 +17,10 @@ export const article = {
     titleField,
     contentField,
     // layoutField,
+    {
+      type: 'seo',
+      name: 'seo',
+      title: 'SEO',
+    },
   ],
 }

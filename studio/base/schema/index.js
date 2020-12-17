@@ -4,8 +4,9 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import {article} from './article'
 import {nav, navItem} from './nav'
 import {screen, screenSections} from './screen'
+import {seo} from './seo'
 
 export default createSchema({
   name: 'sanity-design-studio',
-  types: schemaTypes.concat([article, nav, navItem, ...screenSections, screen]),
+  types: schemaTypes.concat([article, nav, navItem, ...screenSections, screen, seo]),
 })

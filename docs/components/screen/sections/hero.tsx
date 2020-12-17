@@ -11,11 +11,13 @@ export function ScreenHeroSection({data}: {data: any}) {
             <Heading align="center" size={[3, 4, 5]}>
               {data.headline}
             </Heading>
+
             {data.copy && (
               <Text align="center" muted size={[2, 2, 3]}>
                 {data.copy}
               </Text>
             )}
+
             {data.ctas && (
               <Inline space={2} style={{textAlign: 'center'}}>
                 {data.ctas.map((cta: any) => (

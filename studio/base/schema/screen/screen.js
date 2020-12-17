@@ -126,5 +126,10 @@ export const screen = {
         // {type: 'screenSection.colorGrid'}
       ],
     },
+    {
+      type: 'seo',
+      name: 'seo',
+      title: 'SEO',
+    },
   ],
 }

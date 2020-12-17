@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import {AppLayout, Article, Screen, useApp} from '$components'
+import {AppLayout, Article, Screen, SEO, useApp} from '$components'
 import {PageLayout} from '$components'
 import {PREVIEW} from '$features'
 import {buildNavMenu, getNavItems} from '$lib/nav'
@@ -23,6 +23,7 @@ export async function getStaticPaths() {
 export default function PathPage(props: {params: {path: string[]}}) {
   const {params = {path: []}} = props
   const {nav, target} = useApp()
+  const seo: Record<string, any> | null = isRecord(target) ? (target.seo as any) : null
   const navValues: unknown[] = (isRecord(nav) && isArray(nav.items) && nav.items) || []
   const navItems = getNavItems(navValues)
   const navItem = navItems.find((i) => i.segment === params.path[0])
@@ -30,10 +31,9 @@ export default function PathPage(props: {params: {path: string[]}}) {
 
   return (
     <>
-      <Head>
-        {isRecord(target) && <title>{target.title} – Sanity UI</title>}
-        {!target && 'Missing target – Sanity UI'}
-      </Head>
+      <Head>{isRecord(target) && <title>{target.title} – Sanity UI</title>}</Head>
+
+      <SEO seo={seo} title={isRecord(target) && target.title} />
 
       <AppLayout>
         {isRecord(target) && target._type === 'article' && (

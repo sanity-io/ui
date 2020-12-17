@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import {AppLayout, useApp} from '$components'
+import {AppLayout, SEO, useApp} from '$components'
 import {Screen} from '$components/screen'
 import {PREVIEW} from '$features'
 import {loadPageData} from '$lib/page'
@@ -15,12 +15,15 @@ export async function getStaticProps(opts: {preview?: boolean}) {
 
 function IndexPage() {
   const {target} = useApp()
+  const seo: Record<string, any> | null = isRecord(target) ? (target.seo as any) : null
 
   return (
     <>
       <Head>
         <title>Sanity UI</title>
       </Head>
+
+      <SEO seo={seo} title={isRecord(target) && target.title} />
 
       <AppLayout>
         {isRecord(target) && target._type === 'screen' && <Screen target={target} />}

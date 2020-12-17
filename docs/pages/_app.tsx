@@ -27,7 +27,16 @@ function App(props: AppProps) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
-        {/* @todo: Default metadata for OG and Twitter */}
+        <meta name="theme-color" content="#ffffff" />
+
+        {/* Default meta data */}
+        <meta name="description" content="An ergonomic toolkit to design with code." />
+
+        {/* Default Twitter metadata */}
+        <meta name="twitter:site" content="@sanity_io" />
+
+        {/* Default OG metadata */}
+        <meta property="og:site_name" content="Sanity UI" />
       </Head>
       <Component {...pageProps} {...pageData} />
     </AppProvider>
