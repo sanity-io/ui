@@ -9,12 +9,11 @@ import NextDocument, {
 } from 'next/document'
 import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
+import {GA_TRACKING_ID} from '$constants'
 
-const __DEV__ = process.env.NODE_ENV === 'development'
-
-const GA_TRACKING_ID = 'UA-129279-46'
-
-const GA_TRACKING_CODE = `window.dataLayer = window.dataLayer || [];
+const GA_TRACKING_CODE =
+  GA_TRACKING_ID &&
+  `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_TRACKING_ID}');`
@@ -51,10 +50,10 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
       <Html>
         <Head>
           {/* Global site tag (gtag.js) - Google Analytics */}
-          {!__DEV__ && (
+          {GA_TRACKING_ID && (
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           )}
-          {!__DEV__ && <script dangerouslySetInnerHTML={{__html: GA_TRACKING_CODE}} />}
+          {GA_TRACKING_CODE && <script dangerouslySetInnerHTML={{__html: GA_TRACKING_CODE}} />}
 
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta name="theme-color" content={hues.red[500].hex} />
