@@ -6,6 +6,7 @@ export interface AppContextValue {
   nav: unknown
   node: Record<string, unknown> | unknown
   setColorScheme: (mode: ThemeColorSchemeKey) => void
+  settings: unknown
   target: unknown
 }
 

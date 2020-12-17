@@ -15,9 +15,10 @@ export function AppProvider(props: {
   children?: React.ReactNode
   nav: unknown
   node: Record<string, unknown> | null
+  settings: unknown
   target: unknown
 }) {
-  const {children, nav, node, target} = props
+  const {children, nav, node, settings, target} = props
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
     prefersDark ? 'dark' : 'light'
@@ -30,7 +31,7 @@ export function AppProvider(props: {
       <ThemeColorProvider tone="transparent">
         <GlobalStyle />
       </ThemeColorProvider>
-      <AppContext.Provider value={{colorScheme, nav, node, setColorScheme, target}}>
+      <AppContext.Provider value={{colorScheme, nav, node, setColorScheme, settings, target}}>
         <LayerProvider>
           <ToastProvider>{children}</ToastProvider>
         </LayerProvider>

@@ -1,8 +1,9 @@
-import {ArrowRightIcon, RocketIcon} from '@sanity/icons'
+import {ArrowRightIcon, Icon} from '@sanity/icons'
 import {Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
 import React from 'react'
 import {AppFooter} from './footer'
+import {useApp} from './hooks'
 import {AppNavbar} from './navbar'
 
 export function AppLayout({children}: {children: React.ReactNode}) {
@@ -19,19 +20,36 @@ export function AppLayout({children}: {children: React.ReactNode}) {
 }
 
 function AppBanner() {
+  const {settings} = useApp()
+  const banner = settings && (settings as any).banner
+
+  if (!banner || banner.hidden) return null
+
   return (
     <Card padding={3} tone="primary" style={{minHeight: 'auto'}}>
       <Text align="center" size={1}>
-        <strong>
-          <RocketIcon />
-          &nbsp;&nbsp; Early access
-        </strong>
-        .{' '}
-        <Link href="https://sanity.io/blog">
-          <a>
-            Read the blog post <ArrowRightIcon />
-          </a>
-        </Link>
+        {(banner.icon || banner.title) && (
+          <strong>
+            {banner.icon && (
+              <>
+                <Icon symbol={banner.icon} />
+                &nbsp;&nbsp;{' '}
+              </>
+            )}
+            {banner.title}
+          </strong>
+        )}
+
+        {banner.link?.title && banner.link?.href && (
+          <>
+            {' '}
+            <Link href={banner.link?.href}>
+              <a>
+                {banner.link.title} <ArrowRightIcon />
+              </a>
+            </Link>
+          </>
+        )}
       </Text>
     </Card>
   )

@@ -1,6 +1,6 @@
 import {findNavNode} from '$lib/nav'
 import {isArrayOfStrings, isRecord} from '$lib/types'
-import {MAIN_NAV_QUERY, TARGET_QUERY} from '$queries'
+import {MAIN_NAV_QUERY, SETTINGS_QUERY, TARGET_QUERY} from '$queries'
 import {getClient, usePreviewSubscription} from '$sanity'
 
 export async function loadPageData({
@@ -11,20 +11,19 @@ export async function loadPageData({
   preview?: boolean
 }) {
   const nav: unknown = await getClient(preview).fetch(MAIN_NAV_QUERY)
-
-  // console.log(JSON.stringify(nav))
-
   const navItems: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
   const node = findNavNode(navItems, params.path || [])
+  const settings: unknown = await getClient(preview).fetch(SETTINGS_QUERY)
   const target: unknown = await getClient(preview).fetch(TARGET_QUERY, {
     id: node ? node.targetId : '404',
   })
 
-  return {nav, params, preview, target}
+  return {nav, params, preview, settings, target}
 }
 
 export function usePageData(props: unknown) {
   const initialNav = isRecord(props) && props.nav
+  const initialSettings = (isRecord(props) && props.settings) || null
   const preview = isRecord(props) && Boolean(props.preview)
   const params: Record<string, unknown> =
     (isRecord(props) && isRecord(props.params) && props.params) || {}
@@ -38,11 +37,16 @@ export function usePageData(props: unknown) {
   const navItems: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
   const node = findNavNode(navItems, isArrayOfStrings(params.path) ? params.path : [])
 
+  const {data: settings = {}} = usePreviewSubscription(SETTINGS_QUERY, {
+    initialData: initialSettings,
+    enabled: preview,
+  })
+
   const {data: target} = usePreviewSubscription(TARGET_QUERY, {
     initialData: initialTarget || undefined,
     enabled: preview,
     params: {id: node ? node.targetId : '404'},
   })
 
-  return {nav, params, node, target}
+  return {nav, params, node, settings, target}
 }
