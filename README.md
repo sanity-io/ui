@@ -11,7 +11,7 @@ Sanity Design consists of:
 
 ## Documentation
 
-See [sanity-design-docs.vercel.app](https://sanity-design-docs.vercel.app/).
+See [sanity.io/ui](https://www.sanity.io/ui).
 
 ## Contributing
 
