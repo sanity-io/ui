@@ -11,11 +11,13 @@ import {GroqLogoGrid} from './blocks/groqLogoGrid'
 import {NpmPackageBadge} from './blocks/npmPackageBadge'
 import {PropertyTable} from './blocks/propertyTable'
 import {SanityLogoGrid} from './blocks/sanityLogoGrid'
+import {sanity} from '$config'
+import {imageUrlBuilder} from '$sanity'
 
 export function ArticleContent({blocks, headings}: {blocks: unknown[]; headings: HeadingType[]}) {
   const serializers = useMemo(() => buildSerializers(headings), [headings])
 
-  return <BlockContent blocks={blocks} serializers={serializers} />
+  return <BlockContent {...sanity} blocks={blocks} serializers={serializers} />
 }
 
 const CODE_LANGUAGES = {
@@ -161,6 +163,25 @@ function buildSerializers(headings: HeadingType[]) {
     )
   }
 
+  function ImageSerializer(props: any) {
+    if (!props.node) return null
+
+    const src = imageUrlBuilder.image(props.node).url()
+
+    if (!src) return null
+
+    return (
+      <Box as="figure" marginY={[4, 4, 5]}>
+        <img alt={props.node.alt} src={src} style={{verticalAlign: 'top', width: '100%'}} />
+        <Box marginTop={2}>
+          <Text as="figcaption" muted size={1}>
+            {props.node.caption}
+          </Text>
+        </Box>
+      </Box>
+    )
+  }
+
   return {
     list: ListSerializer,
     listItem: ListItemSerializer,
@@ -168,6 +189,7 @@ function buildSerializers(headings: HeadingType[]) {
       block: BlockSerializer,
       code: CodeSerializer,
       codeExample: CodeExampleSerializer,
+      image: ImageSerializer,
       npmPackageBadge: NpmPackageBadgeSerializer,
       propertyTable: PropertyTableSerializer,
       'content.colorGrid': ColorGrid,
