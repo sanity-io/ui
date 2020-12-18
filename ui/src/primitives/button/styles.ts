@@ -73,8 +73,8 @@ export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} 
         '@media (hover: hover)': {
           '&:hover': buttonColorVarsStyle(color.hovered),
           '&:active': buttonColorVarsStyle(color.pressed),
-          '&[data-selected]': buttonColorVarsStyle(color.selected),
         },
+        '&[data-selected]': buttonColorVarsStyle(color.selected),
       },
     },
     theme.sanity.styles?.button?.root,
