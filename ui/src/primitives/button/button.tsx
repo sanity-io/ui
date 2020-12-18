@@ -50,9 +50,9 @@ const LoadingBox = styled.div`
   align-items: center;
   justify-content: center;
   background-color: var(--card-bg-color);
-  border-radius: 8px;
-  opacity: 0.8;
+  border-radius: inherit;
   z-index: 1;
+  box-shadow: inherit;
 `
 
 export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButtonElement>, ref) => {
@@ -97,9 +97,9 @@ export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButto
     <Root
       data-ui="Button"
       {...restProps}
-      data-disabled={loading || disabled}
+      data-disabled={Boolean(loading || disabled)}
       data-selected={selected ? '' : undefined}
-      disabled={loading || disabled}
+      disabled={Boolean(loading || disabled)}
       radius={radius}
       ref={ref}
       tone={tone}
