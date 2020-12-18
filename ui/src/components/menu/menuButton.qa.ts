@@ -1,8 +1,8 @@
 import {Browser, BrowserContext} from 'playwright'
 import qawolf from 'qawolf'
 
-let browser: Browser
-let context: BrowserContext
+let browser: Browser | undefined
+let context: BrowserContext | undefined
 
 beforeAll(async () => {
   browser = await qawolf.launch()
@@ -12,12 +12,13 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await qawolf.stopVideos()
-  await browser.close()
+  await browser?.close()
 })
 
 describe('Components/MenuButton', () => {
   it('clicking should open/close menu', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',
@@ -34,7 +35,8 @@ describe('Components/MenuButton', () => {
   })
 
   it('should use arrow keys to navigate the menu', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',
@@ -76,7 +78,8 @@ describe('Components/MenuButton', () => {
   })
 
   it('should close on tab', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',
@@ -95,7 +98,8 @@ describe('Components/MenuButton', () => {
   })
 
   it('should close on shift + tab', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',
@@ -114,7 +118,8 @@ describe('Components/MenuButton', () => {
   })
 
   it('should not close when one of the items receives focus', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story',

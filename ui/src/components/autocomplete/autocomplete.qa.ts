@@ -1,8 +1,8 @@
 import {Browser, BrowserContext} from 'playwright'
 import qawolf from 'qawolf'
 
-let browser: Browser
-let context: BrowserContext
+let browser: Browser | undefined
+let context: BrowserContext | undefined
 
 beforeAll(async () => {
   browser = await qawolf.launch()
@@ -12,12 +12,13 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await qawolf.stopVideos()
-  await browser.close()
+  await browser?.close()
 })
 
 describe('Components/Autocomplete', () => {
   it('should use key arrows', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story',
@@ -47,7 +48,8 @@ describe('Components/Autocomplete', () => {
   })
 
   it('should press clear button to clear', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story',
@@ -78,7 +80,8 @@ describe('Components/Autocomplete', () => {
   })
 
   it('should collapse when tabbing out', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story',
