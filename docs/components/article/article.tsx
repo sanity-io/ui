@@ -35,7 +35,7 @@ export function Article(props: {article: Record<string, unknown>}) {
 
                 <Card borderTop marginTop={[3, 3, 4, 5]} paddingTop={[2, 2, 3]}>
                   {isString(article._updatedAt) && (
-                    <Text muted size={[0, 0, 1]}>
+                    <Text muted size={1}>
                       Updated <TimeAgo date={article._updatedAt} />
                     </Text>
                   )}

@@ -10,15 +10,16 @@ import {
 import React, {useEffect, useState} from 'react'
 import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'
+import {NavMenu} from '$lib/nav'
 
 export function AppProvider(props: {
   children?: React.ReactNode
+  menu: NavMenu | null
   nav: unknown
-  node: Record<string, unknown> | null
   settings: unknown
   target: unknown
 }) {
-  const {children, nav, node, settings, target} = props
+  const {children, menu, nav, settings, target} = props
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
     prefersDark ? 'dark' : 'light'
@@ -31,7 +32,7 @@ export function AppProvider(props: {
       <ThemeColorProvider tone="transparent">
         <GlobalStyle />
       </ThemeColorProvider>
-      <AppContext.Provider value={{colorScheme, nav, node, setColorScheme, settings, target}}>
+      <AppContext.Provider value={{colorScheme, menu, nav, setColorScheme, settings, target}}>
         <LayerProvider>
           <ToastProvider>{children}</ToastProvider>
         </LayerProvider>

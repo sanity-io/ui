@@ -1,9 +1,11 @@
+import {MenuIcon} from '@sanity/icons'
 import {SanityMonogram} from '@sanity/logos'
 import {Box, Button, Card, Flex, Inline, Switch, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import {useApp} from './hooks'
+import {NavDrawer} from './navDrawer'
 import {GitHubMark} from '$components'
 import {features} from '$config'
 import {isArray, isRecord} from '$lib/types'
@@ -15,9 +17,9 @@ interface Route {
 }
 
 export function AppNavbar() {
-  const {colorScheme, nav, setColorScheme} = useApp()
+  const {colorScheme, menu, nav, setColorScheme} = useApp()
   const router = useRouter()
-
+  const [menuOpen, setMenuOpen] = useState(false)
   const navItems = isRecord(nav) && isArray(nav.items) ? nav.items : []
   const navItemRecords: Record<string, unknown>[] = navItems.filter(isRecord)
   const navbarRoutes: Route[] = navItemRecords
@@ -37,12 +39,15 @@ export function AppNavbar() {
     [setColorScheme]
   )
 
+  const handleMenuClose = useCallback(() => setMenuOpen(false), [])
+
   return (
     <Card
       as="header"
       borderBottom
-      paddingX={[3, 4, 5]}
       paddingY={[2, 3, 4]}
+      paddingLeft={[3, 4, 5]}
+      paddingRight={[2, 3, 4]}
       style={{minHeight: 'auto'}}
     >
       <Flex as="nav" align="center">
@@ -83,11 +88,11 @@ export function AppNavbar() {
           </Flex>
         </Box>
 
-        <Box paddingX={[2, 3, 4]}>
+        <Box marginX={[2, 3, 4]}>
           <Switch
             checked={colorScheme === 'dark'}
             onChange={handleSchemeSwitchChange}
-            style={{verticalAlign: 'top'}}
+            style={{display: 'block'}}
           />
         </Box>
 
@@ -102,6 +107,19 @@ export function AppNavbar() {
             target="_blank"
           />
         </Box>
+
+        {menu && (
+          <Box display={['block', 'block', 'none']} marginLeft={[1, 2, 3]}>
+            <Button
+              icon={MenuIcon}
+              fontSize={[2, 2, 3]}
+              mode="bleed"
+              onClick={() => setMenuOpen(true)}
+            />
+          </Box>
+        )}
+
+        {menu && <NavDrawer menu={menu} onClose={handleMenuClose} open={menuOpen} />}
       </Flex>
     </Card>
   )

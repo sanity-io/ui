@@ -3,9 +3,8 @@ import React from 'react'
 import {AppLayout, Article, Screen, SEO, useApp} from '$components'
 import {PageLayout} from '$components'
 import {features} from '$config'
-import {buildNavMenu, getNavItems} from '$lib/nav'
 import {loadPageData, loadPagePaths} from '$lib/page'
-import {isArray, isRecord} from '$lib/types'
+import {isRecord} from '$lib/types'
 
 export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
   const {params = {}, preview = features.preview} = opts
@@ -20,14 +19,9 @@ export async function getStaticPaths() {
   return {paths, fallback: false}
 }
 
-export default function PathPage(props: {params: {path: string[]}}) {
-  const {params = {path: []}} = props
-  const {nav, target} = useApp()
+export default function PathPage() {
+  const {menu, target} = useApp()
   const seo: Record<string, any> | null = isRecord(target) ? (target.seo as any) : null
-  const navValues: unknown[] = (isRecord(nav) && isArray(nav.items) && nav.items) || []
-  const navItems = getNavItems(navValues)
-  const navItem = navItems.find((i) => i.segment === params.path[0])
-  const menu = navItem ? buildNavMenu(navItem) : null
 
   return (
     <>
