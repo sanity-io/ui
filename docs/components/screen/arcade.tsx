@@ -220,13 +220,15 @@ function CanvasPane(props: {
         </Inline>
       </Card>
 
-      <Card flex={1} overflow="auto" tone="transparent">
-        <Container height="fill" style={{position: 'relative'}} width={width}>
-          <PortalProvider element={portalElement}>
-            <Canvas onCatch={onCatch} padding={[3, 3, 4]} result={result} />
-          </PortalProvider>
-          <div data-portal ref={setPortalElement} />
-        </Container>
+      <Card flex={1} tone="transparent" style={{position: 'relative'}}>
+        <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}>
+          <Container height="fill" style={{position: 'relative'}} width={width}>
+            <PortalProvider element={portalElement}>
+              <Canvas onCatch={onCatch} padding={[3, 3, 4]} result={result} />
+            </PortalProvider>
+            <div data-portal ref={setPortalElement} />
+          </Container>
+        </div>
       </Card>
     </Flex>
   )
@@ -293,7 +295,7 @@ function CodePane(props: {
         flex={1}
         id="mode-jsx-panel"
         hidden={mode !== 'jsx'}
-        style={{outline: 'none'}}
+        style={{outline: 'none', position: 'relative'}}
       >
         {mode === 'jsx' && (
           <AsyncCodeEditor
@@ -303,6 +305,7 @@ function CodePane(props: {
             language="jsx"
             onCodeChange={onJSXCodeChange}
             onCursorChange={onJSXCursorChange}
+            style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
           />
         )}
       </TabPanel>
@@ -312,7 +315,7 @@ function CodePane(props: {
         flex={1}
         id="mode-hook-panel"
         hidden={mode !== 'hook'}
-        style={{outline: 'none'}}
+        style={{outline: 'none', position: 'relative'}}
       >
         {mode === 'hook' && (
           <AsyncCodeEditor
@@ -322,6 +325,7 @@ function CodePane(props: {
             language="javascript"
             onCodeChange={onHookCodeChange}
             onCursorChange={onHookCursorChange}
+            style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
           />
         )}
       </TabPanel>

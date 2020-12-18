@@ -19,7 +19,7 @@ export function Canvas({
 }) {
   if (result && result.type === 'success') {
     return (
-      <Root height="fill" padding={padding} tone="transparent">
+      <Root height="fill" padding={padding} sizing="border" tone="transparent">
         <ErrorBoundary onCatch={onCatch}>{result.node}</ErrorBoundary>
       </Root>
     )
@@ -27,7 +27,7 @@ export function Canvas({
 
   if (result && result.type === 'error') {
     return (
-      <Card height="fill" tone="critical">
+      <Card height="fill" sizing="border" tone="critical">
         <Box padding={padding}>
           <Code>
             {result.error.name}: {result.error.message}

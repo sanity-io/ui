@@ -15,9 +15,7 @@ import {
   ScopeRenderer,
 } from '$lib/ide'
 
-const CodeTabPanel = styled(TabPanel)`
-  max-height: 300px;
-`
+const CodeTabPanel = styled(TabPanel)``
 
 export function CodeExample(props: {code: string; hookCode?: string}) {
   const {code: codeProp, hookCode: hookCodeProp} = props
@@ -94,7 +92,6 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
               flex={1}
               onCodeChange={setJSXCode}
               onCursorChange={setJSXCursor}
-              style={{overflow: 'auto'}}
             />
           )}
         </CodeTabPanel>
