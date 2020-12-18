@@ -1,8 +1,8 @@
 import {Browser, BrowserContext} from 'playwright'
 import qawolf from 'qawolf'
 
-let browser: Browser
-let context: BrowserContext
+let browser: Browser | undefined
+let context: BrowserContext | undefined
 
 beforeAll(async () => {
   browser = await qawolf.launch()
@@ -12,12 +12,13 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await qawolf.stopVideos()
-  await browser.close()
+  await browser?.close()
 })
 
 describe('Components/Dialog', () => {
   it('should open dialog', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-dialog--props&viewMode=story',
@@ -29,7 +30,8 @@ describe('Components/Dialog', () => {
   })
 
   it('should trap focus', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     await page.goto(
       'http://localhost:9009/iframe.html?id=components-dialog--props&viewMode=story',

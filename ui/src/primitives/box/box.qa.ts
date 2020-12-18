@@ -1,8 +1,8 @@
 import {Browser, BrowserContext} from 'playwright'
 import qawolf from 'qawolf'
 
-let browser: Browser
-let context: BrowserContext
+let browser: Browser | undefined
+let context: BrowserContext | undefined
 
 beforeAll(async () => {
   browser = await qawolf.launch()
@@ -12,12 +12,13 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await qawolf.stopVideos()
-  await browser.close()
+  await browser?.close()
 })
 
 describe('Primitives/Box', () => {
   it('resizing window should hide and show responsive elements', async () => {
-    const page = await context.newPage()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const page = await context!.newPage()
 
     const url = 'http://localhost:9009/iframe.html?id=atoms-box--responsive&viewMode=story'
 
