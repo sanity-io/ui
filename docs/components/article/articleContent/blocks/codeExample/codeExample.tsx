@@ -6,7 +6,14 @@ import Link from 'next/link'
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {getArcadeQuery} from '$components/screen/arcade'
-import {AsyncCodeEditor, Canvas, evalJSX, JSXEvalResult, ScopeRenderer} from '$lib/ide'
+import {
+  AsyncCodeEditor,
+  Canvas,
+  evalJSX,
+  JSXEvalResult,
+  ready as readyCheck,
+  ScopeRenderer,
+} from '$lib/ide'
 
 const CodeTabPanel = styled(TabPanel)`
   max-height: 300px;
@@ -14,6 +21,7 @@ const CodeTabPanel = styled(TabPanel)`
 
 export function CodeExample(props: {code: string; hookCode?: string}) {
   const {code: codeProp, hookCode: hookCodeProp} = props
+  const [ready, setReady] = useState(false)
   const [[scope], setScope] = useState<[Record<string, unknown> | null, Error | null]>([null, null])
   const [jsxCode, setJSXCode] = useState(codeProp)
   const [jsxResult, setJSXResult] = useState<JSXEvalResult | null>(null)
@@ -21,10 +29,14 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
   const [hookCode, setScopeCode] = useState(hookCodeProp || '')
   const [hookCursor, setScopeCursor] = useState({line: 0, column: 0})
 
-  useEffect(() => setJSXResult(evalJSX(jsxCode, {...scope, ...icons, ...ui, React})), [
-    jsxCode,
-    scope,
-  ])
+  useEffect(() => {
+    readyCheck().then(() => setReady(true))
+  }, [])
+
+  useEffect(() => {
+    if (!ready) return
+    setJSXResult(evalJSX(jsxCode, {...scope, ...icons, ...ui, React}))
+  }, [jsxCode, ready, scope])
 
   const onCatch = () => {
     //

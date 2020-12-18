@@ -17,7 +17,15 @@ import {debounce, DebouncedFunc} from 'lodash'
 import {useRouter} from 'next/router'
 import qs from 'qs'
 import React, {useEffect, useRef, useState} from 'react'
-import {AsyncCodeEditor, Canvas, Cursor, evalJSX, JSXEvalResult, ScopeRenderer} from '$lib/ide'
+import {
+  AsyncCodeEditor,
+  Canvas,
+  Cursor,
+  evalJSX,
+  JSXEvalResult,
+  ready as readyCheck,
+  ScopeRenderer,
+} from '$lib/ide'
 import {decode, encode} from '$lib/zlib'
 
 type ContainerWidth = number | 'auto'
@@ -56,9 +64,9 @@ interface ArcadeQueryParams {
 export function getArcadeQuery(params: ArcadeQueryParams) {
   const query: Record<string, string> = {mode: params.mode || 'jsx'}
 
+  if (params.width !== undefined && params.width !== 'auto') query.width = String(params.width)
   if (params.jsx) query.jsx = encode(params.jsx)
   if (params.hook) query.hook = encode(params.hook)
-  if (params.width && params.width !== 'auto') query.width = String(params.width)
 
   return query
 }
@@ -70,7 +78,7 @@ export function ArcadeScreen() {
     null,
     null,
   ])
-
+  const [ready, setReady] = useState(false)
   const {replace: replaceState} = useRouter()
   const [jsxCode, setJSXCode] = useState('')
   const [jsxResult, setJSXResult] = useState<JSXEvalResult | null>(null)
@@ -80,6 +88,12 @@ export function ArcadeScreen() {
   const [canvasWidth, setCanvasWidth] = useState<ContainerWidth>('auto')
   const [codeMode, setCodeMode] = useState<'jsx' | 'hook'>('jsx')
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
+
+  useEffect(() => {
+    readyCheck().then(() => {
+      setReady(true)
+    })
+  }, [])
 
   // Create `saveFn` callback
   useEffect(() => {
@@ -95,11 +109,11 @@ export function ArcadeScreen() {
     return () => saveFn.cancel()
   }, [replaceState])
 
-  // Re-evaluate
-  useEffect(() => setJSXResult(evalJSX(jsxCode, {...hook, ...icons, ...ui, React})), [
-    jsxCode,
-    hook,
-  ])
+  // Evaluate JSX
+  useEffect(() => {
+    if (!ready) return
+    setJSXResult(evalJSX(jsxCode, {...hook, ...icons, ...ui, React}))
+  }, [jsxCode, hook, ready])
 
   // Trigger save callback
   useEffect(() => {
@@ -110,14 +124,14 @@ export function ArcadeScreen() {
     }
   }, [codeMode, jsxCode, hookCode, canvasWidth])
 
-  // load saved state from URL
+  // Load saved state from URL
   useEffect(() => {
     const query = qs.parse(window.location.search.slice(1))
 
     setCodeMode((query.mode as any) || 'jsx')
     setHookCode(tryDecode(query.hook) || 'return {}\n')
     setJSXCode(tryDecode(query.jsx) || DEFAULT_CODE)
-    setCanvasWidth(query.width === undefined ? undefined : (Number(query.width) as any))
+    setCanvasWidth(query.width === undefined ? 'auto' : (Number(query.width) as any))
   }, [])
 
   return (

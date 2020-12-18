@@ -14,12 +14,12 @@ export function ready(opts?: {timeout?: number}) {
       const duration = Date.now() - startTime
 
       if (duration > timeout) {
-        reject(new Error('eval.ready: timeout'))
+        reject(new Error('$lib.ide.ready: timeout'))
 
         return
       }
 
-      if ((window as any).Babel) {
+      if ((window as any).Babel !== undefined) {
         resolve()
 
         return
