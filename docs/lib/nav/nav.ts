@@ -94,6 +94,8 @@ function getMenuItems(items: NavItem[]) {
 }
 
 export function buildNavMenu(navItem: NavItem) {
+  if (navItem.items.length === 0) return null
+
   const menu: NavMenu = {
     type: 'menu',
     collapsed: false,
