@@ -119,13 +119,14 @@ export function buildNavMenu(navItem: NavItem) {
   }
 
   while (items.length) {
-    const item = items.shift()
+    const item = items[0]
 
     if (!item) break
 
     if (item.type === 'menu') {
       break
     } else {
+      items.shift()
       initialGroup.items.push(item)
     }
   }

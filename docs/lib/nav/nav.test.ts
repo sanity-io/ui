@@ -31,7 +31,7 @@ describe('lib/nav', () => {
       expect(menus[0].type).toBe('menu')
       expect(menus[0].title).toBe('Docs')
       expect(menus[0].items[0].title).toBeUndefined()
-      expect(menus[0].items[0].type === 'menu' && menus[0].items[0].items.length).toBe(3)
+      expect(menus[0].items[0].type === 'menu' && menus[0].items[0].items.length).toBe(2)
     }
   })
 
@@ -42,7 +42,7 @@ describe('lib/nav', () => {
 
       expect(paths[0]).toBe('/docs')
       expect(paths[1]).toBe('/docs/motivation')
-      expect(paths[2]).toBe('/docs/theme')
+      expect(paths[2]).toBe('/docs/guide/sanity-studio')
     })
   })
 
@@ -53,7 +53,7 @@ describe('lib/nav', () => {
 
       expect(paths[0]).toEqual({params: {path: ['docs']}})
       expect(paths[1]).toEqual({params: {path: ['docs', 'motivation']}})
-      expect(paths[2]).toEqual({params: {path: ['docs', 'theme']}})
+      expect(paths[2]).toEqual({params: {path: ['docs', 'guide', 'sanity-studio']}})
     })
   })
 
