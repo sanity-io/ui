@@ -25,10 +25,14 @@ describe('lib/nav', () => {
     const items = getNavItems(data)
     const menus = items.map((item) => buildNavMenu(item))
 
-    expect(menus[0].type).toBe('menu')
-    expect(menus[0].title).toBe('Docs')
-    expect(menus[0].items[0].title).toBeUndefined()
-    expect(menus[0].items[0].type === 'menu' && menus[0].items[0].items.length).toBe(3)
+    expect(menus[0] === null).toBe(false)
+
+    if (menus[0]) {
+      expect(menus[0].type).toBe('menu')
+      expect(menus[0].title).toBe('Docs')
+      expect(menus[0].items[0].title).toBeUndefined()
+      expect(menus[0].items[0].type === 'menu' && menus[0].items[0].items.length).toBe(3)
+    }
   })
 
   describe('getNavPaths', () => {
