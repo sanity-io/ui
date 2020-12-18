@@ -29,6 +29,33 @@ const groqLogoGridField = {
   fields: [{type: 'boolean', name: 'test', title: 'Test'}],
 }
 
+const imageField = {
+  title: 'Image',
+  name: 'image',
+  type: 'image',
+  fields: [
+    {
+      name: 'alt',
+      type: 'string',
+      title: 'Alternative text (for screen readers)',
+      options: {
+        isHighlighted: true,
+      },
+    },
+    {
+      name: 'caption',
+      type: 'string',
+      title: 'Caption',
+      options: {
+        isHighlighted: true,
+      },
+    },
+  ],
+  options: {
+    hotspot: true,
+  },
+}
+
 export const contentField = {
   type: 'array',
   name: 'content',
@@ -42,5 +69,6 @@ export const contentField = {
     colorGridField,
     sanityLogoGridField,
     groqLogoGridField,
+    imageField,
   ],
 }
