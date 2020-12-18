@@ -151,7 +151,6 @@ export function ArcadeScreen() {
         <CodePane
           jsxCode={jsxCode}
           jsxCursor={jsxCursor}
-          jsxResult={jsxResult}
           mode={codeMode}
           onJSXCodeChange={setJSXCode}
           onJSXCursorChange={setJSXCursor}
@@ -237,7 +236,6 @@ function CanvasPane(props: {
 function CodePane(props: {
   jsxCode: string
   jsxCursor: Cursor
-  jsxResult: JSXEvalResult | null
   mode: 'jsx' | 'hook'
   onJSXCodeChange: (newCode: string) => void
   onJSXCursorChange: (cursor: Cursor) => void
@@ -251,7 +249,6 @@ function CodePane(props: {
   const {
     jsxCode,
     jsxCursor,
-    jsxResult,
     mode,
     onJSXCodeChange,
     onJSXCursorChange,
@@ -329,12 +326,6 @@ function CodePane(props: {
           />
         )}
       </TabPanel>
-
-      {jsxResult && jsxResult.type === 'error' && (
-        <Card borderTop padding={4} style={{minHeight: 'auto'}} tone="critical">
-          <Code>JSX error: {jsxResult.error.message}</Code>
-        </Card>
-      )}
 
       {hookError && (
         <Card borderTop padding={4} style={{minHeight: 'auto'}} tone="critical">
