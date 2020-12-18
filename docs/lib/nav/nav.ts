@@ -1,10 +1,10 @@
 import {NavMenu, NavItem, NavMenuItem} from './types'
-import {HINT_HIDDEN_CONTENT} from '$features'
+import {features} from '$config'
 import {isArray, isRecord, isString} from '$lib/types'
 
 export function getNavItems(values: unknown[], basePath = ''): NavItem[] {
   const records: Record<string, unknown>[] = values.filter(isRecord)
-  const visibleRecords = records.filter((record) => HINT_HIDDEN_CONTENT || !record.hidden)
+  const visibleRecords = records.filter((record) => features.hintHiddenContent || !record.hidden)
 
   const ret: NavItem[] = []
 
@@ -30,7 +30,7 @@ export function getNavPaths(values: unknown[], basePath = ''): string[] {
 
   for (const value of values) {
     if (!isRecord(value)) continue
-    if (!HINT_HIDDEN_CONTENT && value.hidden) continue
+    if (!features.hintHiddenContent && value.hidden) continue
 
     const path = `${basePath}/${value.segment || ''}`
 

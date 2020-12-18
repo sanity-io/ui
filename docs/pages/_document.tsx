@@ -9,14 +9,14 @@ import NextDocument, {
 } from 'next/document'
 import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
-import {GA_TRACKING_ID} from '$constants'
+import {ga} from '$config'
 
 const GA_TRACKING_CODE =
-  GA_TRACKING_ID &&
+  ga.trackingId &&
   `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${GA_TRACKING_ID}');`
+gtag('config', '${ga.trackingId}');`
 
 class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}> {
   static async getInitialProps(ctx: DocumentContext) {
@@ -50,8 +50,8 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
       <Html lang="en-US">
         <Head>
           {/* Global site tag (gtag.js) - Google Analytics */}
-          {GA_TRACKING_ID && (
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+          {ga.trackingId && (
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga.trackingId}`} />
           )}
           {GA_TRACKING_CODE && <script dangerouslySetInnerHTML={{__html: GA_TRACKING_CODE}} />}
 

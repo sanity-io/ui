@@ -5,7 +5,7 @@ import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
 import {useApp} from './hooks'
 import {GitHubMark} from '$components'
-import {HINT_HIDDEN_CONTENT} from '$features'
+import {features} from '$config'
 import {isArray, isRecord} from '$lib/types'
 
 interface Route {
@@ -21,7 +21,7 @@ export function AppNavbar() {
   const navItems = isRecord(nav) && isArray(nav.items) ? nav.items : []
   const navItemRecords: Record<string, unknown>[] = navItems.filter(isRecord)
   const navbarRoutes: Route[] = navItemRecords
-    .filter((item) => HINT_HIDDEN_CONTENT || !item.hidden)
+    .filter((item) => features.hintHiddenContent || !item.hidden)
     .map((item) => ({
       hidden: Boolean(item.hidden),
       href: `/${item.segment || ''}`,

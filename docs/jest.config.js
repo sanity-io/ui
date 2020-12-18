@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   modulePathIgnorePatterns: ['<rootDir>/.next/'],
   moduleNameMapper: {
-    '^\\$features$': '<rootDir>/features',
+    '^\\$config$': '<rootDir>/config',
     '^\\$lib\\/types$': '<rootDir>/lib/types',
   },
 }

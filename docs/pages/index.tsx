@@ -2,12 +2,12 @@ import Head from 'next/head'
 import React from 'react'
 import {AppLayout, SEO, useApp} from '$components'
 import {Screen} from '$components/screen'
-import {PREVIEW} from '$features'
+import {features} from '$config'
 import {loadPageData} from '$lib/page'
 import {isRecord} from '$lib/types'
 
 export async function getStaticProps(opts: {preview?: boolean}) {
-  const {preview = PREVIEW} = opts
+  const {preview = features.preview} = opts
   const data = await loadPageData({preview})
 
   return {props: {...data, preview}}

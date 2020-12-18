@@ -2,20 +2,20 @@ import Head from 'next/head'
 import React from 'react'
 import {AppLayout, Article, Screen, SEO, useApp} from '$components'
 import {PageLayout} from '$components'
-import {PREVIEW} from '$features'
+import {features} from '$config'
 import {buildNavMenu, getNavItems} from '$lib/nav'
 import {loadPageData, loadPagePaths} from '$lib/page'
 import {isArray, isRecord} from '$lib/types'
 
 export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
-  const {params = {}, preview = PREVIEW} = opts
+  const {params = {}, preview = features.preview} = opts
   const data = await loadPageData({params, preview})
 
   return {props: {...data, params, preview}}
 }
 
 export async function getStaticPaths() {
-  const paths = await loadPagePaths({preview: PREVIEW})
+  const paths = await loadPagePaths({preview: features.preview})
 
   return {paths, fallback: false}
 }

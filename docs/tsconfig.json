@@ -17,8 +17,7 @@
     "paths": {
       "$components": ["./components"],
       "$components/*": ["./components/*"],
-      "$constants": ["./constants"],
-      "$features": ["./features"],
+      "$config": ["./config"],
       "$lib/*": ["./lib/*"],
       "$queries": ["./queries"],
       "$routes": ["./routes"],
