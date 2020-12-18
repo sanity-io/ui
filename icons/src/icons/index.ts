@@ -113,6 +113,7 @@ import {default as StarIcon} from './starIcon'
 import {default as StrikethroughIcon} from './strikethroughIcon'
 import {default as SunIcon} from './sunIcon'
 import {default as SyncIcon} from './syncIcon'
+import {default as TerminalIcon} from './terminalIcon'
 import {default as ThLargeIcon} from './thLargeIcon'
 import {default as ThListIcon} from './thListIcon'
 import {default as ToggleArrowRightIcon} from './toggleArrowRightIcon'
@@ -245,6 +246,7 @@ export type IconSymbol =
   | 'strikethrough'
   | 'sun'
   | 'sync'
+  | 'terminal'
   | 'th-large'
   | 'th-list'
   | 'toggle-arrow-right'
@@ -377,6 +379,7 @@ export {
   StrikethroughIcon,
   SunIcon,
   SyncIcon,
+  TerminalIcon,
   ThLargeIcon,
   ThListIcon,
   ToggleArrowRightIcon,
@@ -510,6 +513,7 @@ export const icons = {
   strikethrough: StrikethroughIcon,
   sun: SunIcon,
   sync: SyncIcon,
+  terminal: TerminalIcon,
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
   'toggle-arrow-right': ToggleArrowRightIcon,
