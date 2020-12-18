@@ -60,15 +60,19 @@ const PopoverCard = styled(Card)<
   ({constrainSize}) => css`
     flex: 1;
     max-height: ${constrainSize && '100%'};
-    height: stretch;
+    /* height: stretch; */
     pointer-events: all;
+
     && {
       display: flex;
     }
+
     flex-direction: column;
+
     & > * {
       min-height: 0;
     }
+
     ${responsiveContainerWidthStyle}
   `
 )
