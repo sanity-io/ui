@@ -7,5 +7,9 @@ export async function loadPagePaths({preview}: {preview?: boolean}) {
   const nav: unknown = await getClient(preview).fetch(MAIN_NAV_QUERY)
   const navItems = (isRecord(nav) && isArray(nav.items) && nav.items) || []
 
-  return getNavStaticPaths(navItems)
+  return (
+    getNavStaticPaths(navItems)
+      // sanitize
+      .filter((p) => !p.params.path.includes('//'))
+  )
 }
