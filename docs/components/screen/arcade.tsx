@@ -135,7 +135,7 @@ export function ArcadeScreen() {
   }, [])
 
   return (
-    <Flex height="fill">
+    <Flex direction={['column', 'column', 'row']} height="fill">
       <ScopeRenderer code={hookCode} key={hookCode} onChange={setHook} />
 
       <Card flex={1} tone={jsxResult && jsxResult.type === 'error' ? 'critical' : 'default'}>
@@ -147,7 +147,7 @@ export function ArcadeScreen() {
         />
       </Card>
 
-      <Card borderLeft flex={1}>
+      <Card borderLeft={[false, false, true]} borderTop={[true, true, false]} flex={1}>
         <CodePane
           jsxCode={jsxCode}
           jsxCursor={jsxCursor}
