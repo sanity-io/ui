@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-example-manage",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "scripts": {
     "build": "webpack",
@@ -11,9 +11,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/icons": "^1.0.0",
+    "@sanity/icons": "^1.0.1",
     "@sanity/logos": "^1.0.0",
-    "@sanity/ui": "^0.31.1",
+    "@sanity/ui": "^0.31.2",
     "qs": "^6.9.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
