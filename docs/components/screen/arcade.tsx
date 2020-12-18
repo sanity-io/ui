@@ -5,6 +5,7 @@ import {
   Card,
   Code,
   Container,
+  ErrorBoundary,
   Flex,
   Inline,
   PortalProvider,
@@ -19,7 +20,6 @@ import qs from 'qs'
 import React, {useEffect, useRef, useState} from 'react'
 import {
   AsyncCodeEditor,
-  Canvas,
   Cursor,
   evalJSX,
   JSXEvalResult,
@@ -90,9 +90,7 @@ export function ArcadeScreen() {
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
 
   useEffect(() => {
-    readyCheck().then(() => {
-      setReady(true)
-    })
+    readyCheck().then(() => setReady(true))
   }, [])
 
   // Create `saveFn` callback
@@ -218,17 +216,25 @@ function CanvasPane(props: {
           />
         </Inline>
       </Card>
-
-      <Card flex={1} tone="transparent" style={{position: 'relative'}}>
-        <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}>
-          <Container height="fill" style={{position: 'relative'}} width={width}>
-            <PortalProvider element={portalElement}>
-              <Canvas onCatch={onCatch} padding={[3, 3, 4]} result={result} />
-            </PortalProvider>
-            <div data-portal ref={setPortalElement} />
-          </Container>
-        </div>
-      </Card>
+      {result && result.type === 'error' && (
+        <Card padding={[3, 3, 4]} overflow="auto" tone="critical">
+          <Code>{result.error.message}</Code>
+        </Card>
+      )}
+      {result && result.type === 'success' && (
+        <Card flex={1} tone="transparent" style={{position: 'relative'}}>
+          <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}>
+            <Container height="fill" style={{position: 'relative'}} width={width}>
+              <PortalProvider element={portalElement}>
+                <Card height="fill" padding={[3, 3, 4]} sizing="border" tone="transparent">
+                  <ErrorBoundary onCatch={onCatch}>{result.node}</ErrorBoundary>
+                </Card>
+              </PortalProvider>
+              <div data-portal ref={setPortalElement} />
+            </Container>
+          </div>
+        </Card>
+      )}
     </Flex>
   )
 }
