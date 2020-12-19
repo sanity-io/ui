@@ -65,7 +65,12 @@ export function ArcadeScreen() {
         />
       </Card>
 
-      <Card borderLeft={[false, false, true]} borderTop={[true, true, false]} flex={1}>
+      <Card
+        borderLeft={[false, false, true]}
+        borderTop={[true, true, false]}
+        flex={1}
+        style={{maxWidth: 634}}
+      >
         <CodePane
           jsxCode={jsxCode}
           jsxCursor={jsxCursor}
