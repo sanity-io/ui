@@ -1,6 +1,6 @@
 import BlockContent from '@sanity/block-content-to-react'
-import {LinkIcon} from '@sanity/icons'
-import {Box, Card, Code, Heading, Stack, Text} from '@sanity/ui'
+import {Icon, LinkIcon} from '@sanity/icons'
+import {Box, Card, Code, Flex, Heading, Stack, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
 import styled from 'styled-components'
 import {blocksToText} from '../helpers'
@@ -11,6 +11,7 @@ import {GroqLogoGrid} from './blocks/groqLogoGrid'
 import {NpmPackageBadge} from './blocks/npmPackageBadge'
 import {PropertyTable} from './blocks/propertyTable'
 import {SanityLogoGrid} from './blocks/sanityLogoGrid'
+import {PlainBlockContent} from './plainBlockContent'
 import {sanity} from '$config'
 import {imageUrlBuilder} from '$sanity'
 
@@ -182,11 +183,34 @@ function buildSerializers(headings: HeadingType[]) {
     )
   }
 
+  function CalloutSerializer(props: any) {
+    if (!props.node) return null
+
+    return (
+      <Card marginY={[4, 4, 5]} padding={2} radius={2} tone={props.node.tone || 'transparent'}>
+        <Flex>
+          {props.node.icon && (
+            <Box padding={3}>
+              <Text muted>
+                <Icon symbol={props.node.icon} />
+              </Text>
+            </Box>
+          )}
+
+          <Box flex={1} padding={3} paddingLeft={2}>
+            <PlainBlockContent blocks={props.node.content || []} />
+          </Box>
+        </Flex>
+      </Card>
+    )
+  }
+
   return {
     list: ListSerializer,
     listItem: ListItemSerializer,
     types: {
       block: BlockSerializer,
+      callout: CalloutSerializer,
       code: CodeSerializer,
       codeExample: CodeExampleSerializer,
       image: ImageSerializer,
