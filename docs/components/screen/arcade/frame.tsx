@@ -1,9 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
+import {useApp} from '$components/app'
 import {basePath} from '$config'
 import {isRecord} from '$lib/types'
 
 const Root = styled.iframe`
+  background: none;
   display: block;
   width: 100%;
   height: 100%;
@@ -11,6 +13,7 @@ const Root = styled.iframe`
 `
 
 export function ArcadeFrame({hookCode, jsxCode}: {hookCode: string; jsxCode: string}) {
+  const {colorScheme} = useApp()
   const [frame, setFrame] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
   const msgQueueRef = useRef<any[]>([])
@@ -48,18 +51,31 @@ export function ArcadeFrame({hookCode, jsxCode}: {hookCode: string; jsxCode: str
     }
   }, [frame])
 
-  // Send data to frame
-  useEffect(() => {
-    if (!frame) return
+  const postMessage = useCallback(
+    (msg: any) => {
+      if (!frame) return
 
-    const msg = {type: 'arcadeFrame/input', hookCode, jsxCode}
+      if (ready) {
+        frame.contentWindow?.postMessage(msg, location.origin)
+      } else {
+        msgQueueRef.current.push(msg)
+      }
+    },
+    [frame, ready]
+  )
 
-    if (ready) {
-      frame.contentWindow?.postMessage(msg, location.origin)
-    } else {
-      msgQueueRef.current.push(msg)
-    }
-  }, [frame, hookCode, jsxCode, ready])
+  // Send color scheme to frame
+  useEffect(() => postMessage({type: 'arcadeFrame/colorScheme', colorScheme}), [
+    colorScheme,
+    postMessage,
+  ])
+
+  // Send input to frame
+  useEffect(() => postMessage({type: 'arcadeFrame/input', hookCode, jsxCode}), [
+    hookCode,
+    jsxCode,
+    postMessage,
+  ])
 
   return <Root ref={setFrame} src={`${basePath}/arcade-frame`} />
 }

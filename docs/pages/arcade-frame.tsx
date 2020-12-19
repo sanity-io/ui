@@ -2,10 +2,12 @@ import * as icons from '@sanity/icons'
 import * as ui from '@sanity/ui'
 import {Card, Code} from '@sanity/ui'
 import React, {useEffect, useState} from 'react'
+import {useApp} from '$components'
 import {evalJSX, JSXEvalResult, ready as readyCheck, ScopeRenderer} from '$lib/ide'
 import {isRecord} from '$lib/types'
 
 export default function ArcadeFrame() {
+  const {setColorScheme} = useApp()
   const [[hook, hookError], setHook] = useState<[Record<string, unknown> | null, Error | null]>([
     null,
     null,
@@ -27,6 +29,10 @@ export default function ArcadeFrame() {
           setHookCode(msg.hookCode as any)
 
           return
+        }
+
+        if (msg.type === 'arcadeFrame/colorScheme') {
+          setColorScheme(msg.colorScheme as any)
         }
       }
     }
