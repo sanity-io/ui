@@ -1,7 +1,7 @@
 {
   "name": "sanity-design-studio",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "package.json",
   "author": "Sanity.io <hello@sanity.io>",
