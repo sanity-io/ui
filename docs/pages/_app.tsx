@@ -27,7 +27,6 @@ function App(props: AppProps) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
-        <meta name="theme-color" content="#ffffff" />
 
         {/* Default meta data */}
         <meta name="description" content="An ergonomic toolkit to design with code." />

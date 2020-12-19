@@ -1,6 +1,11 @@
 const __DEV__ = process.env.NODE_ENV === 'development'
 
 /**
+ * The application’s base path.
+ */
+export const basePath = process.env.PUBLIC_PATH || ''
+
+/**
  * Application features.
  */
 export const features = {
