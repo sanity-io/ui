@@ -17,7 +17,7 @@ export function Article(props: {article: Record<string, unknown>}) {
       {isRecord(article) && (
         <Flex>
           <Box flex={3}>
-            <Box paddingX={[3, 4, 5]} paddingY={[3, 4, 5, 5, 6, 7]}>
+            <Box paddingX={[3, 4, 5]} paddingY={[4, 5, 5, 5, 6, 7]}>
               <Box marginBottom={[2, 3, 4]}>
                 <Container width={1}>
                   <Heading as="h1" size={[2, 2, 3, 4]}>
