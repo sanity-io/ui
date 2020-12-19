@@ -13,7 +13,11 @@ export function codeEditorStyle(props: {theme: Theme}) {
     color: var(--card-code-fg-color);
 
     &::selection {
-      background-color: none;
+      background: none;
+    }
+
+    &::-moz-selection {
+      background: none;
     }
 
     & > .react-codemirror2 {
@@ -30,26 +34,44 @@ export function codeEditorStyle(props: {theme: Theme}) {
       height: 100%;
     }
 
+    /* Scroll */
     & .CodeMirror-scroll {
       margin: 0;
       box-sizing: border-box;
       padding: ${rem(space[3])} 0;
     }
 
+    /* Selection */
     & .CodeMirror-selected {
-      background-color: ${hues.blue[dark ? 900 : 100].hex};
+      background: ${hues.gray[dark ? 900 : 100].hex} !important;
+    }
+    & .CodeMirror-focused .CodeMirror-selected {
+      background: ${hues.blue[dark ? 900 : 100].hex} !important;
+    }
+    & .CodeMirror-line::selection,
+    & .CodeMirror-line > span::selection,
+    & .CodeMirror-line > span > span::selection {
+      background: none !important;
+    }
+    & .CodeMirror-line::-moz-selection,
+    & .CodeMirror-line > span::-moz-selection,
+    & .CodeMirror-line > span > span::-moz-selection {
+      background: none !important;
     }
 
+    /* Cursor */
     & .CodeMirror-cursor {
       border-color: ${hues.blue[dark ? 400 : 500].hex};
       border-left-width: 2px;
     }
 
+    /* Line */
     & .CodeMirror pre.CodeMirror-line,
     & .CodeMirror pre.CodeMirror-line-like {
       padding: 0 ${rem(space[4])};
     }
 
+    /* Sizer */
     & .CodeMirror-sizer {
       border-right-width: ${rem(space[4])} !important;
     }
