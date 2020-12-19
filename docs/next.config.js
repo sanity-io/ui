@@ -5,7 +5,7 @@ const path = require('path')
 const ROOT_PATH = path.resolve(__dirname, '..')
 
 module.exports = {
-  basePath: process.env.PUBLIC_PATH || '',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 
   webpack: (config) => {
     // Add monorepo sibling packages to includes
