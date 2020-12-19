@@ -1,16 +1,19 @@
 import {hues} from '@sanity/color'
-import {responsiveCodeFontStyle, Theme} from '@sanity/ui'
-import {rgba} from 'polished'
+import {rem, responsiveCodeFontStyle, Theme} from '@sanity/ui'
 import {css} from 'styled-components'
 
-export function codeEditorStyle() {
+export function codeEditorStyle(props: {theme: Theme}) {
+  const {theme} = props
+  const {space} = theme.sanity
+  const {dark} = theme.sanity.color
+
   return css`
     vertical-align: top;
     height: 100%;
     color: var(--card-code-fg-color);
 
     &::selection {
-      background: none;
+      background-color: none;
     }
 
     & > .react-codemirror2 {
@@ -20,162 +23,157 @@ export function codeEditorStyle() {
       transform: none;
     }
 
-    .CodeMirror {
+    & .CodeMirror {
       background: none;
       font: inherit;
       color: inherit;
       height: 100%;
     }
 
-    .CodeMirror-scroll {
+    & .CodeMirror-scroll {
       margin: 0;
       box-sizing: border-box;
-      padding: 12px 0;
+      padding: ${rem(space[3])} 0;
     }
 
-    .CodeMirror-line::selection,
-    .CodeMirror-line > span::selection,
-    .CodeMirror-line > span > span::selection {
-      background: ${rgba(hues.gray[500].hex, 0.25)};
+    & .CodeMirror-selected {
+      background-color: ${hues.blue[dark ? 900 : 100].hex};
     }
 
-    .CodeMirror-selected {
-      background: ${rgba(hues.gray[500].hex, 0.25)};
+    & .CodeMirror-cursor {
+      border-color: ${hues.blue[dark ? 400 : 500].hex};
+      border-left-width: 2px;
     }
 
-    .CodeMirror-cursor {
-      border-color: ${hues.blue[400].hex};
+    & .CodeMirror pre.CodeMirror-line,
+    & .CodeMirror pre.CodeMirror-line-like {
+      padding: 0 ${rem(space[4])};
     }
 
-    .CodeMirror pre.CodeMirror-line,
-    .CodeMirror pre.CodeMirror-line-like {
-      padding: 0 20px;
-    }
-
-    .CodeMirror-sizer {
-      border-right-width: 20px !important;
+    & .CodeMirror-sizer {
+      border-right-width: ${rem(space[4])} !important;
     }
   `
 }
 
-export function codeEditorSyntax({theme}: {theme: Theme}) {
-  const syntax = theme.sanity.color.syntax
+export function codeEditorSyntax(props: {theme: Theme}) {
+  const {theme} = props
+  const {dark, syntax} = theme.sanity.color
 
-  // @todo
   return css`
-    /* DEFAULT THEME */
-    .cm-s-default .cm-header {
-      color: blue;
+    & .cm-s-default .cm-header {
+      color: ${hues.blue[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-quote {
-      color: #090;
+    & .cm-s-default .cm-quote {
+      color: ${hues.green[dark ? 400 : 700].hex};
     }
-    .cm-negative {
-      color: #d44;
+    & .cm-negative {
+      color: ${hues.red[dark ? 400 : 700].hex};
     }
-    .cm-positive {
-      color: #292;
+    & .cm-positive {
+      color: ${hues.green[dark ? 400 : 700].hex};
     }
-    .cm-header,
-    .cm-strong {
-      font-weight: bold;
+    & .cm-header,
+    & .cm-strong {
+      font-weight: 700;
     }
-    .cm-em {
+    & .cm-em {
       font-style: italic;
     }
-    .cm-link {
+    & .cm-link {
       text-decoration: underline;
     }
-    .cm-strikethrough {
+    & .cm-strikethrough {
       text-decoration: line-through;
     }
-    .cm-s-default .cm-keyword {
+    & .cm-s-default .cm-keyword {
       color: ${syntax.keyword};
     }
-    .cm-s-default .cm-atom {
+    & .cm-s-default .cm-atom {
       color: ${syntax.boolean};
     }
-    .cm-s-default .cm-number {
+    & .cm-s-default .cm-number {
       color: ${syntax.number};
     }
-    .cm-s-default .cm-def {
+    & .cm-s-default .cm-def {
       color: ${syntax.function};
     }
-    .cm-s-default .cm-variable {
+    & .cm-s-default .cm-variable {
       color: ${syntax.builtin};
     }
-    .cm-s-default .cm-punctuation {
+    & .cm-s-default .cm-punctuation {
     }
-    .cm-s-default .cm-property {
+    & .cm-s-default .cm-property {
       color: ${syntax.property};
     }
-    .cm-s-default .cm-operator {
+    & .cm-s-default .cm-operator {
       color: ${syntax.operator};
     }
-    .cm-s-default .cm-variable-2 {
-      color: #05a;
+    & .cm-s-default .cm-variable-2 {
+      color: ${hues.cyan[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-variable-3,
-    .cm-s-default .cm-type {
-      color: #085;
+    & .cm-s-default .cm-variable-3,
+    & .cm-s-default .cm-type {
+      color: ${hues.cyan[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-comment {
+    & .cm-s-default .cm-comment {
       color: ${syntax.comment};
     }
-    .cm-s-default .cm-string {
+    & .cm-s-default .cm-string {
       color: ${syntax.string};
     }
-    .cm-s-default .cm-string-2 {
-      color: #f50;
+    & .cm-s-default .cm-string-2 {
+      color: ${hues.orange[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-meta {
-      color: #555;
+    & .cm-s-default .cm-meta {
+      color: ${hues.gray[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-qualifier {
-      color: #555;
+    & .cm-s-default .cm-qualifier {
+      color: ${hues.gray[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-builtin {
-      color: #30a;
+    & .cm-s-default .cm-builtin {
+      color: ${hues.purple[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-bracket {
-      color: #997;
+    & .cm-s-default .cm-bracket {
+      color: ${hues.gray[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-tag {
+    & .cm-s-default .cm-tag {
       color: ${syntax.className};
     }
-    .cm-s-default .cm-tag.cm-bracket {
+    & .cm-s-default .cm-tag.cm-bracket {
       color: inherit;
     }
-    .cm-s-default .cm-attribute {
+    & .cm-s-default .cm-attribute {
       color: ${syntax.attrName};
     }
-    .cm-s-default .cm-hr {
-      color: #999;
+    & .cm-s-default .cm-hr {
+      color: ${hues.gray[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-link {
-      color: #00c;
+    & .cm-s-default .cm-link {
+      color: ${hues.blue[dark ? 400 : 700].hex};
     }
-    .cm-s-default .cm-error {
-      color: #f00;
+    & .cm-s-default .cm-error {
+      color: ${hues.red[dark ? 400 : 700].hex};
     }
-    .cm-invalidchar {
-      color: #f00;
+    & .cm-invalidchar {
+      color: ${hues.red[dark ? 400 : 700].hex};
     }
-    .CodeMirror-composing {
+    & .CodeMirror-composing {
       border-bottom: 2px solid;
     }
+
     /* Default styles for common addons */
-    div.CodeMirror span.CodeMirror-matchingbracket {
-      color: #0b0;
+    & div.CodeMirror span.CodeMirror-matchingbracket {
+      color: ${hues.green[dark ? 400 : 700].hex};
     }
-    div.CodeMirror span.CodeMirror-nonmatchingbracket {
-      color: #a22;
+    & div.CodeMirror span.CodeMirror-nonmatchingbracket {
+      color: ${hues.red[dark ? 400 : 700].hex};
     }
-    .CodeMirror-matchingtag {
-      background: rgba(255, 150, 0, 0.3);
+    & .CodeMirror-matchingtag {
+      background-color: ${hues.orange[dark ? 800 : 200].hex};
     }
-    .CodeMirror-activeline-background {
-      background: #e8f2ff;
+    & .CodeMirror-activeline-background {
+      background-color: ${hues.red[dark ? 800 : 200].hex};
     }
   `
 }
