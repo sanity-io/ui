@@ -12,7 +12,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/color": "^2.0.9",
+    "@sanity/color": "^2.0.11",
     "@sanity/icons": "^1.0.1",
     "@sanity/logos": "^1.0.0",
     "@sanity/ui": "^0.31.4",

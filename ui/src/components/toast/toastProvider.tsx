@@ -43,7 +43,7 @@ let toastId = 0
 
 export function ToastProvider({children, zOffset}: ToastProviderProps) {
   const [state, setState] = useState<ToastState>({toasts: []})
-  const toastsRef = useRef<{[key: string]: {timeoutId: number}}>({})
+  const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
 
   const push = useCallback((params: ToastParams) => {
     const id = String(toastId++)

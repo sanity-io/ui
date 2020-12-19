@@ -137,13 +137,19 @@ export const async = () => {
 
 function AsyncExample() {
   const [options, setOptions] = useState<ExampleOption[]>([])
-  const timeoutRef = useRef(-1)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const [loading, setLoading] = useState(false)
 
   const handleQueryChange = (query: string | null) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    if (timeoutRef.current !== null) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+
     if (query === null) return
+
     setLoading(true)
+
     timeoutRef.current = setTimeout(() => {
       const results: ExampleOption[] = countries
         .filter((d) => d.name.toLowerCase().includes(query.toLowerCase()))

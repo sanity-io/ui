@@ -11,7 +11,7 @@ export function TimeAgo(props: TimeAgoProps) {
   const {date: dateProp} = props
   const date = getTimestamp(dateProp)
   const [diff, setDiff] = useState<TimeDiff>(getTimeDiff(date))
-  const intervalRef = useRef<number>(-1)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const tick = () => {
@@ -29,7 +29,10 @@ export function TimeAgo(props: TimeAgoProps) {
     tick()
 
     return () => {
-      clearInterval(intervalRef.current)
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
     }
   }, [date])
 

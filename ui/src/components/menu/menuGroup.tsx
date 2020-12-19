@@ -57,7 +57,7 @@ export function MenuGroup({children, title}: {children: React.ReactNode; title: 
   const [open, setOpen] = useState(false)
   const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
   const rootRef = useRef<HTMLButtonElement | null>(null)
-  const mouseLeaveTimeoutRef = useRef<number | null>(null)
+  const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => mount(rootRef.current), [mount])
 
@@ -79,8 +79,9 @@ export function MenuGroup({children, title}: {children: React.ReactNode; title: 
   }
 
   const handleMenuMouseEnter = () => {
-    if (mouseLeaveTimeoutRef.current) {
+    if (mouseLeaveTimeoutRef.current !== null) {
       clearTimeout(mouseLeaveTimeoutRef.current)
+      mouseLeaveTimeoutRef.current = null
     }
   }
 
@@ -92,8 +93,9 @@ export function MenuGroup({children, title}: {children: React.ReactNode; title: 
 
   useEffect(() => {
     return () => {
-      if (mouseLeaveTimeoutRef.current) {
+      if (mouseLeaveTimeoutRef.current !== null) {
         clearTimeout(mouseLeaveTimeoutRef.current)
+        mouseLeaveTimeoutRef.current = null
       }
     }
   }, [])
