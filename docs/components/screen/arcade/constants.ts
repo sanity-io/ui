@@ -1,11 +1,4 @@
-export const DEFAULT_CODE = `<Card padding={6} sizing="border">
-<Inline space={2}>
-  <Button
-    icon={ComposeIcon}
-    text="Compose"
-    tone="primary"
-  />
-  <Button icon={PlayIcon} mode="ghost" text="Run" />
-</Inline>
+export const DEFAULT_CODE = `<Card height="fill" padding={[3, 4, 5, 6]} sizing="border">
+  <Heading as="h1">Welcome to Sanity UI</Heading>
 </Card>
 `
