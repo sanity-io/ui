@@ -3,6 +3,7 @@ import {Box, Button, Card, Flex, Heading, Layer, useClickOutside} from '@sanity/
 import {useRouter} from 'next/router'
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
+import {useApp} from './hooks'
 import {NavMenu} from '$components'
 import {NavMenu as NavMenuType} from '$lib/nav'
 
@@ -39,6 +40,7 @@ export function NavDrawer({
   onClose: () => void
   open: boolean
 }) {
+  const {zOffsets} = useApp()
   const router = useRouter()
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
 
@@ -47,10 +49,10 @@ export function NavDrawer({
   useEffect(() => onClose(), [onClose, router])
 
   return (
-    <Root hidden={!open} ref={setRootElement} zOffset={1000}>
+    <Root hidden={!open} ref={setRootElement} zOffset={zOffsets.navDrawer}>
       <Card height="fill" shadow={3}>
         <Flex direction="column" height="fill">
-          <Header style={{minHeight: 'auto'}} zOffset={1}>
+          <Header style={{minHeight: 'auto'}}>
             <Card>
               <Flex align="center">
                 <Box flex={1} padding={[4, 4, 5]}>

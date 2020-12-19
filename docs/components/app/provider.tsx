@@ -10,6 +10,7 @@ import {
 import React, {useEffect, useState} from 'react'
 import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'
+import {zOffsets} from './zOffsets'
 import {NavMenu} from '$lib/nav'
 
 export function AppProvider(props: {
@@ -32,9 +33,11 @@ export function AppProvider(props: {
       <ThemeColorProvider tone="transparent">
         <GlobalStyle />
       </ThemeColorProvider>
-      <AppContext.Provider value={{colorScheme, menu, nav, setColorScheme, settings, target}}>
+      <AppContext.Provider
+        value={{colorScheme, menu, nav, setColorScheme, settings, target, zOffsets}}
+      >
         <LayerProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider zOffset={zOffsets.toast}>{children}</ToastProvider>
         </LayerProvider>
       </AppContext.Provider>
     </ThemeProvider>

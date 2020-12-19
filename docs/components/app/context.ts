@@ -9,6 +9,10 @@ export interface AppContextValue {
   setColorScheme: (mode: ThemeColorSchemeKey) => void
   settings: unknown
   target: unknown
+  zOffsets: {
+    navDrawer: number
+    toast: number
+  }
 }
 
 export const AppContext = createContext<AppContextValue | null>(null)
