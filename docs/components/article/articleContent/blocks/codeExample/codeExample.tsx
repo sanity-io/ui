@@ -37,7 +37,7 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
   }, [jsxCode, ready, scope])
 
   const onCatch = () => {
-    //
+    // @todo
   }
 
   const arcadeQuery = getArcadeQuery({jsx: jsxCode, hook: hookCode})
