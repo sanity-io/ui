@@ -1,8 +1,9 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {HeadingStyleProps} from './types'
 
-export function headingBaseStyle(props: {accent?: boolean; muted?: boolean} & ThemeProps) {
-  const {accent, muted, theme} = props
+export function headingBaseStyle(props: HeadingStyleProps & ThemeProps) {
+  const {$accent, $muted, theme} = props
 
   return css`
     &:before {
@@ -17,12 +18,12 @@ export function headingBaseStyle(props: {accent?: boolean; muted?: boolean} & Th
       height: 0;
     }
 
-    ${accent &&
+    ${$accent &&
     css`
       color: var(--card-accent-fg-color);
     `}
 
-    ${muted &&
+    ${$muted &&
     css`
       color: var(--card-muted-fg-color);
     `}

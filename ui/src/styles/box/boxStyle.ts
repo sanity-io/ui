@@ -26,7 +26,7 @@ function responsiveBoxDisplayStyle(props: ResponsiveBoxStyleProps & ThemeProps) 
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.display), (display) => ({
+  return responsive(media, getResponsiveProp(props.$display), (display) => ({
     '&:not([hidden])': {display},
   }))
 }
@@ -35,7 +35,7 @@ function responsiveBoxSizingStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.sizing), (sizing) => ({
+  return responsive(media, getResponsiveProp(props.$sizing), (sizing) => ({
     boxSizing: BOX_SIZING[sizing],
   }))
 }
@@ -44,7 +44,7 @@ function responsiveBoxHeightStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.height), (height) => ({
+  return responsive(media, getResponsiveProp(props.$height), (height) => ({
     height: BOX_HEIGHT[height],
   }))
 }
@@ -53,7 +53,7 @@ function responsiveBoxOverflowStyle(props: ResponsiveBoxStyleProps & ThemeProps)
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.overflow), (overflow) => ({
+  return responsive(media, getResponsiveProp(props.$overflow), (overflow) => ({
     overflow,
   }))
 }

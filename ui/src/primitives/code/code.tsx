@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import styled from 'styled-components'
-import {responsiveCodeFontStyle} from '../../styles/internal'
+import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
 import {codeBaseStyle} from './styles'
 
 interface CodeProps {
@@ -11,16 +11,16 @@ interface CodeProps {
   weight?: string
 }
 
-const Root = styled.pre<{size: number[]}>(codeBaseStyle, responsiveCodeFontStyle)
+const Root = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
 
 export const Code = forwardRef(
   (props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {
-    const {children, language: languageProp, muted = false, size = 2, ...restProps} = props
+    const {children, language: languageProp, size = 2, weight, ...restProps} = props
     const language = typeof languageProp === 'string' ? languageProp : undefined
     const registered = language ? Refractor.hasLanguage(language as any) : false
 
     return (
-      <Root data-ui="Code" {...restProps} ref={ref} size={size} muted={muted}>
+      <Root data-ui="Code" {...restProps} $size={size} $weight={weight} ref={ref}>
         {!(language && registered) && <code>{children}</code>}
         {language && registered && (
           <Refractor inline language={language} value={String(children)} />

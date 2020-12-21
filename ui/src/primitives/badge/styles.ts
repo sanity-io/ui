@@ -1,16 +1,11 @@
 import {CSSObject} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {BadgeMode, BadgeTone} from './types'
-
-export interface BadgeStyleProps {
-  mode: BadgeMode
-  tone: BadgeTone
-}
+import {BadgeStyleProps} from './types'
 
 export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {
-  const {mode, theme, tone} = props
-  const palette = theme.sanity.color[mode === 'outline' ? 'muted' : 'solid']
-  const color = palette[tone] || palette.default
+  const {$mode, $tone, theme} = props
+  const palette = theme.sanity.color[$mode === 'outline' ? 'muted' : 'solid']
+  const color = palette[$tone] || palette.default
 
   return {
     backgroundColor: color.enabled.bg,

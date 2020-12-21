@@ -24,7 +24,7 @@ export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeP
   const {theme} = props
   const {media, shadows} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.shadow), (shadow) =>
+  return responsive(media, getResponsiveProp(props.$shadow), (shadow) =>
     shadowStyle(shadows[shadow])
   )
 }

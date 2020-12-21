@@ -27,7 +27,7 @@ function responsiveGridItemRowStyle(props: ResponsiveGridItemStyleProps & ThemeP
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.row), (row) => {
+  return responsive(media, getResponsiveProp(props.$row), (row) => {
     if (typeof row === 'number') {
       return {gridRow: `span ${row} / span ${row}`}
     }
@@ -40,7 +40,7 @@ function responsiveGridItemRowStartStyle(props: ResponsiveGridItemStyleProps & T
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.rowStart), (rowStart) => ({
+  return responsive(media, getResponsiveProp(props.$rowStart), (rowStart) => ({
     gridRowStart: rowStart,
   }))
 }
@@ -49,14 +49,14 @@ function responsiveGridItemRowEndStyle(props: ResponsiveGridItemStyleProps & The
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.rowEnd), (rowEnd) => ({gridRowEnd: rowEnd}))
+  return responsive(media, getResponsiveProp(props.$rowEnd), (rowEnd) => ({gridRowEnd: rowEnd}))
 }
 
 function responsiveGridItemColumnStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.column), (column) => {
+  return responsive(media, getResponsiveProp(props.$column), (column) => {
     if (typeof column === 'number') {
       return {gridColumn: `span ${column} / span ${column}`}
     }
@@ -69,7 +69,7 @@ function responsiveGridItemColumnStartStyle(props: ResponsiveGridItemStyleProps 
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.columnStart), (columnStart) => ({
+  return responsive(media, getResponsiveProp(props.$columnStart), (columnStart) => ({
     gridColumnStart: columnStart,
   }))
 }
@@ -78,7 +78,7 @@ function responsiveGridItemColumnEndStyle(props: ResponsiveGridItemStyleProps & 
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.columnEnd), (columnEnd) => ({
+  return responsive(media, getResponsiveProp(props.$columnEnd), (columnEnd) => ({
     gridColumnEnd: columnEnd,
   }))
 }

@@ -5,20 +5,20 @@ import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 export interface TextInputInputStyleProps {
-  fontSize?: number | number[]
-  weight?: ThemeFontWeightKey
+  $fontSize?: number | number[]
+  $weight?: ThemeFontWeightKey
 }
 
 export interface TextInputRepresentationStyleProps {
-  border?: boolean
-  hasPrefix?: boolean
-  hasSuffix?: boolean
+  $border?: boolean
+  $hasPrefix?: boolean
+  $hasSuffix?: boolean
 }
 
 export const textInputStyle = {
   root: () => [rootStyle],
   input: () => [inputBaseStyle, inputFontSizeStyle],
-  representation: representationStyle,
+  representation: [representationStyle],
 }
 
 function rootStyle(): CSSObject {
@@ -30,7 +30,7 @@ function rootStyle(): CSSObject {
 }
 
 function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject {
-  const {theme, weight} = props
+  const {theme, $weight} = props
   const font = theme.sanity.fonts.text
   const color = theme.sanity.color.input
 
@@ -43,7 +43,7 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject
     width: '100%',
     boxSizing: 'border-box',
     fontFamily: font.family,
-    fontWeight: (weight && font.weights[weight]) || font.weights.regular,
+    fontWeight: ($weight && font.weights[$weight]) || font.weights.regular,
     margin: 0,
     position: 'relative',
     zIndex: 1,
@@ -87,7 +87,7 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   const {theme} = props
   const {fonts, media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.fontSize, [2]), (sizeIndex) => {
+  return responsive(media, getResponsiveProp(props.$fontSize, [2]), (sizeIndex) => {
     const size = fonts.text.sizes[sizeIndex] || fonts.text.sizes[2]
 
     return {
@@ -97,78 +97,81 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   })
 }
 
-function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject[] {
-  const {border, hasPrefix, hasSuffix, theme} = props
+function representationStyle(props: TextInputRepresentationStyleProps & ThemeProps): CSSObject {
+  const {$border, $hasPrefix, $hasSuffix, theme} = props
   const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.input
 
-  return [
-    {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      display: 'block',
-      pointerEvents: 'none',
-      zIndex: 0,
+  return {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    display: 'block',
+    pointerEvents: 'none',
+    zIndex: 0,
 
-      // enabled
+    // enabled
+    '*:not(:disabled) + &': {
       color: color.default.enabled.fg,
       backgroundColor: color.default.enabled.bg,
-      boxShadow: border
+      boxShadow: $border
         ? focusRingBorderStyle({color: color.default.enabled.border, width: input.border.width})
         : undefined,
+    },
 
-      // invalid
-      '*:not(:disabled):invalid + &': {
-        color: color.invalid.enabled.fg,
-        backgroundColor: color.invalid.enabled.bg,
-        boxShadow: border
-          ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
-          : 'none',
+    // invalid
+    '*:not(:disabled):invalid + &': {
+      color: color.invalid.enabled.fg,
+      backgroundColor: color.invalid.enabled.bg,
+      boxShadow: $border
+        ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
+        : 'none',
+    },
+
+    // focused
+    '*:not(:disabled):focus + &': {
+      boxShadow: focusRingStyle({
+        border: $border
+          ? {color: color.default.enabled.border, width: input.border.width}
+          : undefined,
+        focusRing,
+      }),
+    },
+
+    // disabled
+    '*:disabled + &': {
+      color: color.default.disabled.fg,
+      backgroundColor: color.default.disabled.bg,
+      boxShadow: $border
+        ? focusRingBorderStyle({
+            color: color.default.disabled.border,
+            width: input.border.width,
+          })
+        : 'none',
+    },
+
+    // hovered
+    '@media (hover: hover)': {
+      '*:not(:disabled):not(:invalid):hover + &': {
+        color: color.default.hovered.fg,
+        backgroundColor: color.default.hovered.bg,
       },
 
-      // focused
-      '*:not(:disabled):focus + &': {
-        boxShadow: focusRingStyle({
-          border: border
-            ? {color: color.default.enabled.border, width: input.border.width}
-            : undefined,
-          focusRing,
-        }),
-      },
-
-      // disabled
-      '*:disabled + &': {
-        color: color.default.disabled.fg,
-        backgroundColor: color.default.disabled.bg,
-        boxShadow: border
+      '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
+        boxShadow: $border
           ? focusRingBorderStyle({
-              color: color.default.disabled.border,
+              color: color.default.hovered.border,
               width: input.border.width,
             })
           : 'none',
       },
-
-      // hovered
-      '@media (hover: hover)': {
-        '*:not(:disabled):not(:invalid):hover + &': {
-          color: color.default.hovered.fg,
-          backgroundColor: color.default.hovered.bg,
-        },
-
-        '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
-          boxShadow: border
-            ? focusRingBorderStyle({
-                color: color.default.hovered.border,
-                width: input.border.width,
-              })
-            : 'none',
-        },
-      },
     },
-    hasPrefix ? {borderTopLeftRadius: 0, borderBottomLeftRadius: 0} : {},
-    hasSuffix ? {borderTopRightRadius: 0, borderBottomRightRadius: 0} : {},
-  ]
+
+    borderTopLeftRadius: $hasPrefix ? 0 : undefined,
+    borderBottomLeftRadius: $hasPrefix ? 0 : undefined,
+    borderTopRightRadius: $hasSuffix ? 0 : undefined,
+    borderBottomRightRadius: $hasSuffix ? 0 : undefined,
+  }
 }

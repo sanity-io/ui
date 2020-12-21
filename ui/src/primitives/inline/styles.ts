@@ -1,26 +1,25 @@
-import {css} from 'styled-components'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {ResponsiveInlineSpaceStyleProps} from './types'
 
 export function inlineBaseStyle() {
-  return css`
-    &:not([hidden]) {
-      display: block;
-    }
+  return {
+    lineHeight: 0,
 
-    & > div:not([hidden]) {
-      display: inline-block;
-    }
+    '&:not([hidden])': {
+      display: 'block',
+    },
 
-    & > div {
-      vertical-align: middle;
-    }
-  `
+    '& > div': {
+      display: 'inline-block',
+      verticalAlign: 'middle',
+    },
+  }
 }
 
-export function inlineSpaceStyle(props: {space?: number | number[]} & ThemeProps) {
+export function inlineSpaceStyle(props: ResponsiveInlineSpaceStyleProps & ThemeProps) {
   const {theme} = props
 
-  return responsive(theme.sanity.media, getResponsiveProp(props.space), (spaceIndex) => {
+  return responsive(theme.sanity.media, getResponsiveProp(props.$space), (spaceIndex) => {
     const space = rem(theme.sanity.space[spaceIndex])
 
     return {

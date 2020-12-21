@@ -2,21 +2,17 @@ import React, {createElement, forwardRef, isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {
-  FlexJustify,
-  ResponsivePaddingStyleProps,
-  responsiveRadiusStyle,
-  ResponsiveRadiusProps,
-} from '../../styles/internal'
+import {FlexJustify, responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Spinner} from '../spinner'
 import {Text} from '../text'
+import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 import {ButtonMode, ButtonTone} from './types'
 
-export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
+export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   mode?: ButtonMode
@@ -34,11 +30,9 @@ export interface ButtonProps extends ResponsivePaddingStyleProps, ResponsiveRadi
   type?: 'button' | 'reset' | 'submit'
 }
 
-const Root = styled.button<{uiMode: ButtonMode; tone: ButtonTone} & ThemeProps>(
-  responsiveRadiusStyle,
-  buttonBaseStyles,
-  buttonColorStyles
-)
+const Root = styled.button<
+  {$mode: ButtonMode; $tone: ButtonTone} & ResponsiveRadiusStyleProps & ThemeProps
+>(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
 
 const LoadingBox = styled.div`
   position: absolute;
@@ -97,14 +91,14 @@ export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButto
     <Root
       data-ui="Button"
       {...restProps}
+      $mode={mode}
+      $radius={radius}
+      $tone={tone}
       data-disabled={Boolean(loading || disabled)}
       data-selected={selected ? '' : undefined}
       disabled={Boolean(loading || disabled)}
-      radius={radius}
       ref={ref}
-      tone={tone}
       type={type}
-      uiMode={mode}
     >
       {Boolean(loading) && (
         <LoadingBox>

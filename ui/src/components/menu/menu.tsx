@@ -2,12 +2,12 @@ import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react
 import styled from 'styled-components'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
-import {ResponsivePaddingStyleProps} from '../../styles/internal'
+import {ResponsivePaddingProps} from '../../primitives/types'
 import {useLayer} from '../../utils'
 import {getFocusableElements} from './helpers'
 import {MenuContext} from './menuContext'
 
-interface MenuProps extends ResponsivePaddingStyleProps {
+interface MenuProps extends ResponsivePaddingProps {
   focusLast?: boolean
   onClickOutside?: () => void
   onEscape?: () => void

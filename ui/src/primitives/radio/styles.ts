@@ -5,15 +5,16 @@ import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 export function radioBaseStyle() {
   return css`
     position: relative;
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: inline-block;
     }
   `
 }
 
-export function inputElementStyle({theme}: ThemeProps) {
-  const color = theme.sanity.color.input
+export function inputElementStyle(props: ThemeProps) {
+  const {theme} = props
   const {focusRing, input} = theme.sanity
+  const color = theme.sanity.color.input
   const dist = (input.radio.size - input.radio.markSize) / 2
 
   return css`

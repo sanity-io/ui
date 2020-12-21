@@ -1,9 +1,9 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {ThemeColorBase, ThemeColorCardState} from '../../theme'
-import {CardColorProps} from './types'
+import {CardStyleProps} from './types'
 
-export function cardStyle(props: CardColorProps & ThemeProps) {
+export function cardStyle(props: CardStyleProps & ThemeProps) {
   return [cardBaseStyle, cardColorStyle(props)]
 }
 
@@ -57,7 +57,7 @@ function vars(base: ThemeColorBase, color: ThemeColorCardState) {
   `
 }
 
-export function cardColorStyle(props: CardColorProps & ThemeProps) {
+export function cardColorStyle(props: CardStyleProps & ThemeProps) {
   const {theme} = props
   const {base, card} = theme.sanity.color
 

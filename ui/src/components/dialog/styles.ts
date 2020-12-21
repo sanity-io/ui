@@ -2,7 +2,7 @@ import {getResponsiveProp, responsive, ThemeProps} from '../../styles'
 import {DialogPosition} from './types'
 
 export interface ResponsiveDialogPositionStyleProps {
-  position: DialogPosition | DialogPosition[]
+  $position: DialogPosition | DialogPosition[]
 }
 
 export function dialogStyle({theme}: ThemeProps) {
@@ -19,7 +19,6 @@ export function dialogStyle({theme}: ThemeProps) {
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    // padding: 1.25em,
     outline: 'none',
     background: color.shadow.penumbra,
   }
@@ -31,5 +30,5 @@ export function responsiveDialogPositionStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.position), (position) => ({'&&': {position}}))
+  return responsive(media, getResponsiveProp(props.$position), (position) => ({'&&': {position}}))
 }

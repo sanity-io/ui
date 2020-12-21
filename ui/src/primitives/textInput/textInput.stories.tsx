@@ -159,6 +159,31 @@ export const typed = () => {
   return <Example type={type} />
 }
 
+export const tones = () => {
+  return (
+    <Stack space={4}>
+      <Card padding={3}>
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="transparent">
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="primary">
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="positive">
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="caution">
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="critical">
+        <TextInput />
+      </Card>
+    </Stack>
+  )
+}
+
 function Example({
   type,
 }: {

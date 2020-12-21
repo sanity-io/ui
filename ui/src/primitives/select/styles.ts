@@ -8,7 +8,7 @@ import {
 } from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
 
-const root = () => {
+function rootStyle() {
   return css`
     position: relative;
     width: stretch;
@@ -19,7 +19,8 @@ const root = () => {
   `
 }
 
-const inputBase = ({theme}: ThemeProps) => {
+function inputBaseStyle(props: ThemeProps) {
+  const {theme} = props
   const font = theme.sanity.fonts.text
 
   return css`
@@ -34,9 +35,10 @@ const inputBase = ({theme}: ThemeProps) => {
   `
 }
 
-const inputColor = ({theme}: ThemeProps) => {
-  const color = theme.sanity.color.input
+function inputColorStyle(props: ThemeProps) {
+  const {theme} = props
   const {focusRing, input} = theme.sanity
+  const color = theme.sanity.color.input
 
   return css`
     background-color: ${color.default.enabled.bg};
@@ -80,27 +82,31 @@ const inputColor = ({theme}: ThemeProps) => {
   `
 }
 
-const textSize = (size: ThemeFontSize) => {
+function textSize(size: ThemeFontSize) {
   return {fontSize: rem(size.fontSize), lineHeight: rem(size.lineHeight)}
 }
 
-const inputTextSize = ({theme, fontSize}: {fontSize?: number | number[]} & ThemeProps) => {
+function inputTextSizeStyle(props: {$fontSize?: number | number[]} & ThemeProps) {
+  const {theme, $fontSize} = props
   const {sizes} = theme.sanity.fonts.text
 
-  return responsive(theme.sanity.media, getResponsiveProp(fontSize), (sizeIndex) =>
+  return responsive(theme.sanity.media, getResponsiveProp($fontSize), (sizeIndex) =>
     textSize(sizes[sizeIndex] || sizes[2])
   )
 }
 
-const input = () => [
-  responsiveRadiusStyle,
-  inputBase,
-  inputColor,
-  inputTextSize,
-  responsiveInputPaddingIconRightStyle,
-]
+function inputStyle() {
+  return [
+    responsiveRadiusStyle,
+    inputBaseStyle,
+    inputColorStyle,
+    inputTextSizeStyle,
+    responsiveInputPaddingIconRightStyle,
+  ]
+}
 
-const iconBox = ({theme}: {radius?: number | number[]; size?: number | number[]} & ThemeProps) => {
+function iconBoxStyle(props: ThemeProps) {
+  const {theme} = props
   const color = theme.sanity.color.input
 
   return css`
@@ -120,7 +126,7 @@ const iconBox = ({theme}: {radius?: number | number[]; size?: number | number[]}
 }
 
 export const selectStyle = {
-  root,
-  input,
-  iconBox,
+  root: rootStyle,
+  input: inputStyle,
+  iconBox: iconBoxStyle,
 }

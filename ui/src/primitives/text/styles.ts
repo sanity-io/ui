@@ -1,16 +1,13 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
-export function textBaseStyle(
-  props: {
-    accent?: boolean
-    muted?: boolean
-  } & ThemeProps
-) {
-  const {accent, muted, theme} = props
+export function textBaseStyle(props: {$accent?: boolean; $muted?: boolean} & ThemeProps) {
+  const {$accent, $muted, theme} = props
   const {weights} = theme.sanity.fonts.text
 
   return css`
+    color: var(--card-fg-color);
+
     &:before {
       content: '';
       display: block;
@@ -23,12 +20,12 @@ export function textBaseStyle(
       height: 0;
     }
 
-    ${accent &&
+    ${$accent &&
     css`
       color: var(--card-accent-fg-color);
     `}
 
-    ${muted &&
+    ${$muted &&
     css`
       color: var(--card-muted-fg-color);
     `}

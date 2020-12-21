@@ -9,11 +9,11 @@ import React, {
 import {isValidElementType} from 'react-is'
 import {useForwardedRef} from '../../hooks'
 import {Box, Card, Flex, Text} from '../../primitives'
-import {ResponsivePaddingStyleProps, ResponsiveRadiusProps} from '../../styles/internal'
+import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
 import {ThemeColorToneKey} from '../../theme'
 import {useMenu} from './hooks'
 
-interface MenuItemProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
+interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode

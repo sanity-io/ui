@@ -1,27 +1,23 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-  responsiveRadiusStyle,
-  ResponsiveRadiusProps,
-} from '../../styles/internal'
+import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
+import {Box, BoxProps} from '../box'
 import {Label} from '../label'
+import {ResponsiveRadiusProps} from '../types'
 import {badgeStyle} from './styles'
-import {BadgeMode, BadgeTone} from './types'
+import {BadgeStyleProps, BadgeMode, BadgeTone} from './types'
 
-export interface BadgeProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
+export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   mode?: BadgeMode
   tone?: BadgeTone
 }
 
-const Root = styled.div<{
-  mode: BadgeMode
-  radius: number[]
-  tone: BadgeTone
-}>(responsivePaddingStyle, responsiveRadiusStyle, badgeStyle)
+const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
+  responsiveRadiusStyle,
+  badgeStyle
+)
 
 export const Badge = forwardRef((props: BadgeProps & React.HTMLProps<HTMLDivElement>, ref) => {
   const {
@@ -38,11 +34,11 @@ export const Badge = forwardRef((props: BadgeProps & React.HTMLProps<HTMLDivElem
     <Root
       data-ui="Badge"
       {...restProps}
-      mode={mode}
+      $mode={mode}
+      $tone={tone}
+      $radius={radius}
       padding={padding}
       ref={ref}
-      tone={tone}
-      radius={radius}
     >
       <Label size={fontSize}>{children}</Label>
     </Root>

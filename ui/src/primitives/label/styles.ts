@@ -1,8 +1,9 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
-export function labelBaseStyle(props: {accent?: boolean; muted: boolean} & ThemeProps) {
-  const {accent, theme, muted} = props
+export function labelBaseStyle(props: {$accent?: boolean; $muted: boolean} & ThemeProps) {
+  const {$accent, $muted, theme} = props
+  const {fonts} = theme.sanity
 
   return css`
     text-transform: uppercase;
@@ -19,18 +20,18 @@ export function labelBaseStyle(props: {accent?: boolean; muted: boolean} & Theme
       height: 0;
     }
 
-    ${accent &&
+    ${$accent &&
     css`
       color: var(--card-accent-fg-color);
     `}
 
-    ${muted &&
+    ${$muted &&
     css`
       color: var(--card-muted-fg-color);
     `}
 
     & code {
-      font-family: ${theme.sanity.fonts.code.family};
+      font-family: ${fonts.code.family};
       border-radius: 1px;
     }
 

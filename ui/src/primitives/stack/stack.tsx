@@ -1,54 +1,25 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveBoxStyle,
-  ResponsiveBoxStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-  responsiveMarginStyle,
-  ResponsiveMarginStyleProps,
-} from '../../styles/internal'
+import {Box, BoxProps} from '../box'
 import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
-interface StackProps
-  extends FlexItemStyleProps,
-    ResponsiveBoxStyleProps,
-    ResponsivePaddingStyleProps,
-    ResponsiveMarginStyleProps,
-    ResponsiveStackSpaceStyleProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+interface StackProps extends BoxProps {
+  space?: number | number[]
 }
 
-const Root = styled.div<
-  FlexItemStyleProps &
-    ResponsiveBoxStyleProps &
-    ResponsivePaddingStyleProps &
-    ResponsiveMarginStyleProps &
-    ResponsiveStackSpaceStyleProps
->(
-  flexItemStyle,
-  responsiveBoxStyle,
-  responsivePaddingStyle,
-  responsiveMarginStyle,
-  stackBaseStyle,
-  responsiveStackSpaceStyle
-)
+const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
 
 export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElement>, ref) => {
-  const {as: asProp, margin = 0, padding = 0, space, ...restProps} = props
+  const {as: asProp, space, ...restProps} = props
 
   return (
     <Root
       data-as={String(asProp)}
       data-ui="Stack"
       {...restProps}
-      as={asProp}
-      margin={margin}
-      padding={padding}
+      $space={space}
+      forwardedAs={asProp}
       ref={ref}
-      space={space}
     />
   )
 })

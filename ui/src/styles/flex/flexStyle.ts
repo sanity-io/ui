@@ -23,7 +23,7 @@ export function responsiveFlexAlignStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.align), (align) => {
+  return responsive(media, getResponsiveProp(props.$align), (align) => {
     return {alignItems: align}
   })
 }
@@ -32,7 +32,7 @@ export function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeP
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.wrap), (wrap) => {
+  return responsive(media, getResponsiveProp(props.$wrap), (wrap) => {
     return {flexWrap: wrap}
   })
 }
@@ -43,7 +43,7 @@ export function responsiveFlexJustifyStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.justify), (justify) => {
+  return responsive(media, getResponsiveProp(props.$justify), (justify) => {
     return {justifyContent: justify}
   })
 }
@@ -54,7 +54,7 @@ export function responsiveFlexDirectionStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.direction), (direction) => {
+  return responsive(media, getResponsiveProp(props.$direction), (direction) => {
     return {flexDirection: direction}
   })
 }

@@ -11,7 +11,7 @@ export default {
 
 const DebugCard = styled(Card)`
   outline: 1px solid red;
-  &&:not([hidden]) {
+  &:not([hidden]) {
     display: flex;
   }
   align-items: center;

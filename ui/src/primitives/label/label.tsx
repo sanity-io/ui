@@ -14,18 +14,28 @@ interface LabelProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div<{align?: TextAlign | TextAlign[]; muted: boolean; size: number[]}>(
-  responsiveLabelFont,
-  responsiveTextAlignStyle,
-  labelBaseStyle
-)
+const Root = styled.div<{
+  $accent?: boolean
+  $align?: TextAlign | TextAlign[]
+  $muted: boolean
+  $size: number[]
+}>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 
 export const Label = forwardRef(
   (props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {
-    const {children, muted = false, size = 2, ...restProps} = props
+    const {accent, align, children, muted = false, size = 2, weight, ...restProps} = props
 
     return (
-      <Root data-ui="Label" {...restProps} muted={muted} ref={ref} size={size}>
+      <Root
+        data-ui="Label"
+        {...restProps}
+        $accent={accent}
+        $align={align}
+        $muted={muted}
+        $size={size}
+        $weight={weight}
+        ref={ref}
+      >
         {children}
       </Root>
     )

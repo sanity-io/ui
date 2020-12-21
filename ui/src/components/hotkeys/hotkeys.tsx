@@ -11,15 +11,14 @@ interface HotkeysProps {
 }
 
 const Root = styled.kbd`
-  &&:not([hidden]) {
+  &:not([hidden]) {
     display: block;
   }
   font: inherit;
 `
 
 const Key = styled(KBD)`
-  /* See: https://github.com/styled-components/styled-components/issues/1816 */
-  &&:not([hidden]) {
+  &:not([hidden]) {
     display: block;
   }
 `
@@ -36,10 +35,10 @@ export const Hotkeys = forwardRef(
     }
 
     return (
-      <Root {...restProps} ref={ref}>
+      <Root data-ui="Hotkeys" {...restProps} ref={ref}>
         <Inline as="span" space={space}>
           {keys.map((key, i) => (
-            <Key key={i} padding={padding} radius={radius} size={size}>
+            <Key fontSize={size} key={i} padding={padding} radius={radius}>
               {key}
             </Key>
           ))}

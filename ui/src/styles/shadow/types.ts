@@ -1,3 +1,3 @@
 export interface ResponsiveShadowStyleProps {
-  shadow?: number | number[]
+  $shadow?: number | number[]
 }

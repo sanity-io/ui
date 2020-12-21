@@ -3,7 +3,8 @@ import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react
 import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
-import {Box, Button, Card, Container, Flex, ResponsiveWidthStyleProps, Text} from '../../primitives'
+import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
+import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Layer, Portal, useLayer} from '../../utils'
@@ -14,28 +15,28 @@ import {
 } from './styles'
 import {DialogPosition} from './types'
 
-export interface DialogProps extends ResponsiveWidthStyleProps, ResponsivePaddingStyleProps {
-  cardRadius?: number
-  cardShadow?: number
+export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProps {
+  cardRadius?: number | number[]
+  cardShadow?: number | number[]
   contentRef?: React.ForwardedRef<HTMLDivElement>
   footer?: React.ReactNode
   header?: React.ReactNode
   id: string
   onClose?: () => void
-  position?: DialogPosition
+  position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
 }
 
-interface DialogCardProps extends ResponsiveWidthStyleProps {
-  cardRadius: number
-  cardShadow: number
+interface DialogCardProps extends ResponsiveWidthProps {
   children: React.ReactNode
   contentRef?: React.ForwardedRef<HTMLDivElement>
   footer: React.ReactNode
   header: React.ReactNode
   id: string
   onClose?: () => void
+  radius: number | number[]
   scheme?: ThemeColorSchemeKey
+  shadow: number | number[]
 }
 
 const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
@@ -45,25 +46,24 @@ const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddin
 )
 
 const DialogContainer = styled(Container)`
-  width: 100%;
-  height: 100%;
-  &&:not([hidden]) {
+  &:not([hidden]) {
     display: flex;
   }
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `
 
 const DialogCardRoot = styled(Card)`
+  &:not([hidden]) {
+    display: flex;
+  }
   width: 100%;
   min-height: 0;
   max-height: 100%;
   overflow: hidden;
-
-  &&:not([hidden]) {
-    display: flex;
-  }
 `
 
 const DialogLayout = styled(Flex)`
@@ -96,18 +96,7 @@ const DialogFooter = styled(Box)`
 `
 
 const DialogCard = forwardRef((props: DialogCardProps, ref) => {
-  const {
-    cardRadius,
-    cardShadow,
-    children,
-    contentRef,
-    footer,
-    header,
-    id,
-    onClose,
-    scheme,
-    width,
-  } = props
+  const {children, contentRef, footer, header, id, onClose, radius, scheme, shadow, width} = props
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const localContentRef = useRef<HTMLDivElement | null>(null)
   const layer = useLayer()
@@ -164,8 +153,8 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
   )
 
   return (
-    <DialogContainer width={width}>
-      <DialogCardRoot radius={cardRadius} ref={setRef} scheme={scheme} shadow={cardShadow}>
+    <DialogContainer data-ui="DialogCard" width={width}>
+      <DialogCardRoot radius={radius} ref={setRef} scheme={scheme} shadow={shadow}>
         <DialogLayout direction="column">
           <DialogHeader>
             <Flex>
@@ -250,26 +239,27 @@ export const Dialog = forwardRef(
       <Portal>
         <Root
           {...restProps}
+          $padding={padding}
+          $position={position}
           aria-labelledby={labelId}
           aria-modal
+          data-ui="Dialog"
           id={id}
           onFocus={handleFocus}
-          padding={padding}
-          position={position}
           ref={ref}
           role="dialog"
         >
           <div ref={preDivRef} tabIndex={0} />
           <DialogCard
-            cardRadius={cardRadius}
-            cardShadow={cardShadow}
             contentRef={contentRef}
             footer={footer}
             header={header}
             id={id}
             onClose={onClose}
+            radius={cardRadius}
             ref={cardRef}
             scheme={scheme}
+            shadow={cardShadow}
             width={width}
           >
             {children}

@@ -1,13 +1,13 @@
 import React, {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
-import {responsiveRadiusStyle} from '../../styles/internal'
+import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {Box} from '../box'
 import {Code} from '../code'
 
 interface KBDProps {
+  fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
-  size?: number | number[]
 }
 
 function kbdStyle() {
@@ -16,25 +16,25 @@ function kbdStyle() {
     font: inherit;
     box-shadow: inset 0 0 0 1px var(--card-hairline-hard-color);
 
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: inline-block;
     }
   `
 }
 
-const Root = styled.kbd<{radius?: number | number[]}>(responsiveRadiusStyle, kbdStyle)
+const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
 
 export const KBD = forwardRef(
   (
     props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
     ref: React.Ref<HTMLElement>
   ) => {
-    const {children, padding = 1, radius = 2, size = 1, ...restProps} = props
+    const {children, fontSize = 1, padding = 1, radius = 2, ...restProps} = props
 
     return (
-      <Root {...restProps} radius={radius} ref={ref}>
+      <Root data-ui="KBD" {...restProps} $radius={radius} ref={ref}>
         <Box as="span" padding={padding}>
-          <Code as="span" muted size={size}>
+          <Code as="span" muted size={fontSize}>
             {children}
           </Code>
         </Box>

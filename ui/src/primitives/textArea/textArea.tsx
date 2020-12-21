@@ -1,24 +1,24 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
-import {getResponsiveProp} from '../../styles'
 import {
   responsiveInputPaddingStyle,
-  ResponsivePaddingStyleProps,
   responsiveRadiusStyle,
-  ResponsiveRadiusProps,
+  ResponsiveRadiusStyleProps,
   textInputStyle,
   TextInputResponsivePaddingStyleProps,
   TextInputInputStyleProps,
   TextInputRepresentationStyleProps,
 } from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
+import {ResponsiveRadiusProps} from '../types'
 
-interface TextInputProps extends ResponsivePaddingStyleProps, ResponsiveRadiusProps {
+interface TextInputProps extends ResponsiveRadiusProps {
   border?: boolean
-  fontSize?: number | number[]
-  weight?: ThemeFontWeightKey
   customValidity?: string
+  fontSize?: number | number[]
+  padding?: number | number[]
+  weight?: ThemeFontWeightKey
 }
 
 const Root = styled.span(textInputStyle.root)
@@ -35,7 +35,7 @@ const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputIn
   textInputStyle.input
 )
 
-const Presentation = styled.div<ResponsiveRadiusProps & TextInputRepresentationStyleProps>(
+const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
   responsiveRadiusStyle,
   textInputStyle.representation
 )
@@ -47,48 +47,30 @@ export const TextArea = forwardRef(
   ) => {
     const {
       border = true,
-      disabled = false,
-      fontSize: fontSizeProp = [2],
-      padding = [3],
-      paddingX,
       customValidity,
-      paddingY,
-      paddingTop,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-      radius = [1],
+      disabled = false,
+      fontSize = 2,
+      padding = 3,
+      radius = 1,
       ...restProps
     } = props
-
-    const paddingProps = {
-      padding,
-      paddingX,
-      paddingY,
-      paddingTop,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-    }
 
     const ref = useForwardedRef(forwardedRef)
 
     useCustomValidity(ref, customValidity)
 
-    const fontSize = getResponsiveProp(fontSizeProp)
-
     return (
-      <Root>
+      <Root data-ui="TextArea">
         <InputRoot>
           <Input
             data-as="textarea"
             {...restProps}
-            {...paddingProps}
+            $fontSize={fontSize}
+            $padding={padding}
             disabled={disabled}
-            fontSize={fontSize}
             ref={ref}
           />
-          <Presentation border={border} radius={radius} />
+          <Presentation $border={border} $radius={radius} />
         </InputRoot>
       </Root>
     )

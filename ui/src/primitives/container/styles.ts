@@ -9,7 +9,7 @@ export function responsiveContainerWidthStyle(props: ResponsiveWidthStyleProps &
   const {theme} = props
   const {container, media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.width), (val) => ({
+  return responsive(media, getResponsiveProp(props.$width), (val) => ({
     maxWidth: val === 'auto' ? 'none' : rem(container[val]),
   }))
 }

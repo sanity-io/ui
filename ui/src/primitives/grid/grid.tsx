@@ -1,53 +1,43 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveBoxStyle,
-  ResponsiveBoxStyleProps,
-  responsiveGridStyle,
-  ResponsiveGridStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-  responsiveMarginStyle,
-  ResponsiveMarginStyleProps,
-} from '../../styles/internal'
+import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
+import {Box, BoxProps} from '../box'
+import {ResponsiveGridProps} from '../types'
 
-interface GridProps
-  extends FlexItemStyleProps,
-    ResponsiveBoxStyleProps,
-    ResponsiveGridStyleProps,
-    ResponsivePaddingStyleProps,
-    ResponsiveMarginStyleProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
-}
+interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
 
-const Root = styled.div<
-  FlexItemStyleProps &
-    ResponsiveBoxStyleProps &
-    ResponsiveGridStyleProps &
-    ResponsivePaddingStyleProps &
-    ResponsiveMarginStyleProps
->(
-  flexItemStyle,
-  responsiveBoxStyle,
-  responsiveGridStyle,
-  responsivePaddingStyle,
-  responsiveMarginStyle
-)
+const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 
 export const Grid = forwardRef(
   (props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>, ref) => {
-    const {as: asProp, margin = 0, padding = 0, children, ...restProps} = props
+    const {
+      as: asProp,
+      autoRows,
+      autoCols,
+      autoFlow,
+      columns,
+      gap,
+      gapX,
+      gapY,
+      rows,
+      children,
+      ...restProps
+    } = props
 
     return (
       <Root
         data-as={String(asProp)}
         data-ui="Grid"
         {...restProps}
-        as={asProp}
-        margin={margin}
-        padding={padding}
+        $autoRows={autoRows}
+        $autoCols={autoCols}
+        $autoFlow={autoFlow}
+        $columns={columns}
+        $gap={gap}
+        $gapX={gapX}
+        $gapY={gapY}
+        $rows={rows}
+        forwardedAs={asProp}
         ref={ref}
       >
         {children}

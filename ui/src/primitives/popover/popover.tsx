@@ -2,15 +2,17 @@ import maxSize from 'popper-max-size-modifier'
 import React, {cloneElement, forwardRef, useEffect, useMemo, useState} from 'react'
 import {Modifier, usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
+import {useForwardedRef} from '../../hooks'
 import {ThemeColorSchemeKey, ThemeColorToneKey} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {ResponsiveWidthStyleProps} from '../container'
 import {responsiveContainerWidthStyle} from '../container/styles'
+import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
 import {PopoverArrow} from './arrow'
 
-interface PopoverProps extends ResponsiveWidthStyleProps {
+interface PopoverProps extends ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps {
   allowedAutoPlacements?: Placement[]
   arrow?: boolean
   boundaryElement?: HTMLElement | null
@@ -24,15 +26,13 @@ interface PopoverProps extends ResponsiveWidthStyleProps {
   placement?: Placement
   portal?: boolean
   preventOverflow?: boolean
-  radius?: number | number[]
   referenceElement?: HTMLElement | null
-  shadow?: number | number[]
   scheme?: ThemeColorSchemeKey
   tone?: ThemeColorToneKey
 }
 
-const Root = styled(Layer)<{preventOverflow?: boolean}>(
-  ({preventOverflow}) => css`
+const Root = styled(Layer)<{$preventOverflow?: boolean}>(
+  ({$preventOverflow}) => css`
     pointer-events: none;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@ const Root = styled(Layer)<{preventOverflow?: boolean}>(
     }
 
     /* Hide the popover when the reference element is out of bounds */
-    ${preventOverflow &&
+    ${$preventOverflow &&
     css`
       &[data-popper-reference-hidden='true'] {
         display: none;
@@ -53,14 +53,13 @@ const Root = styled(Layer)<{preventOverflow?: boolean}>(
 
 const PopoverCard = styled(Card)<
   ResponsiveWidthStyleProps & {
-    constrainSize?: boolean
-    preventOverflow?: boolean
+    $constrainSize?: boolean
+    $preventOverflow?: boolean
   }
 >(
-  ({constrainSize}) => css`
+  ({$constrainSize}) => css`
     flex: 1;
-    max-height: ${constrainSize && '100%'};
-    /* height: stretch; */
+    max-height: ${$constrainSize && '100%'};
     pointer-events: all;
 
     && {
@@ -124,6 +123,7 @@ export const Popover = forwardRef(
       width = 0,
       ...restProps
     } = props
+    const forwardedRef = useForwardedRef(ref)
     const placement = typeof placementProp === 'string' ? placementProp : 'bottom'
     const portal = usePortal()
     const boundaryElement = boundaryElementProp || portal.boundaryElement
@@ -202,21 +202,20 @@ export const Popover = forwardRef(
 
     const setRootRef = (el: HTMLDivElement | null) => {
       setPopperElement(el)
-      if (typeof ref === 'function') ref(el)
-      else if (ref) ref.current = el
+      forwardedRef.current = el
     }
 
     const node = (
       <Root
         data-ui="Popover"
         {...restProps}
-        preventOverflow={preventOverflow}
+        $preventOverflow={preventOverflow}
         ref={setRootRef}
         style={{...style, ...styles.popper}}
         {...attributes.popper}
       >
         <PopoverCard
-          constrainSize={constrainSize}
+          $constrainSize={constrainSize}
           data-ui="PopoverCard"
           padding={padding}
           radius={radius}

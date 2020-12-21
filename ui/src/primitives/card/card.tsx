@@ -2,72 +2,47 @@ import React, {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveBoxStyle,
   responsiveBorderStyle,
   ResponsiveBorderStyleProps,
-  ResponsiveBoxStyleProps,
-  responsiveGridItemStyle,
-  ResponsiveGridItemStyleProps,
-  responsiveMarginStyle,
-  ResponsiveMarginStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
   responsiveRadiusStyle,
-  ResponsiveRadiusProps,
+  ResponsiveRadiusStyleProps,
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
 import {ThemeColorProvider, ThemeColorSchemeKey, ThemeColorToneKey, useRootTheme} from '../../theme'
+import {Box, BoxProps} from '../box'
+import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {cardStyle} from './styles'
-import {CardColorProps} from './types'
+import {CardStyleProps} from './types'
 
 export interface CardProps
-  extends FlexItemStyleProps,
-    ResponsiveBoxStyleProps,
-    ResponsiveBorderStyleProps,
-    ResponsiveGridItemStyleProps,
-    ResponsiveMarginStyleProps,
-    ResponsivePaddingStyleProps,
+  extends BoxProps,
+    ResponsiveBorderProps,
     ResponsiveRadiusProps,
-    ResponsiveShadowStyleProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+    ResponsiveShadowProps {
   scheme?: ThemeColorSchemeKey
   tone?: ThemeColorToneKey | 'inherit'
 }
 
-const Root = styled.div<
-  FlexItemStyleProps &
-    ResponsiveBoxStyleProps &
+const Root = styled(Box)<
+  CardStyleProps &
+    ResponsiveRadiusStyleProps &
     ResponsiveBorderStyleProps &
-    ResponsiveGridItemStyleProps &
-    ResponsiveMarginStyleProps &
-    ResponsivePaddingStyleProps &
-    CardColorProps &
-    ResponsiveRadiusProps &
     ResponsiveShadowStyleProps
->(
-  flexItemStyle,
-  responsiveBoxStyle,
-  responsiveBorderStyle,
-  responsiveGridItemStyle,
-  responsiveMarginStyle,
-  responsivePaddingStyle,
-  responsiveRadiusStyle,
-  responsiveShadowStyle,
-  cardStyle
-)
+>(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
 export const Card = forwardRef(
   (props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>, ref) => {
     const {
       as: asProp,
-      display = 'block',
-      margin = 0,
-      padding = 0,
+      border,
+      borderTop,
+      borderRight,
+      borderBottom,
+      borderLeft,
       radius = 0,
       scheme,
+      shadow,
       tone: toneProp = 'default',
       ...restProps
     } = props
@@ -83,13 +58,16 @@ export const Card = forwardRef(
           data-ui="Card"
           data-tone={tone}
           {...restProps}
-          as={as}
-          display={display}
-          margin={margin}
-          padding={padding}
-          radius={radius}
+          $border={border}
+          $borderTop={borderTop}
+          $borderRight={borderRight}
+          $borderBottom={borderBottom}
+          $borderLeft={borderLeft}
+          $radius={radius}
+          $shadow={shadow}
+          $tone={tone}
+          forwardedAs={as}
           ref={ref}
-          tone={tone}
         />
       </ThemeColorProvider>
     )

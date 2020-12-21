@@ -91,7 +91,7 @@ export function switchTrackStyles(props: ThemeProps) {
   const {input} = theme.sanity
 
   return css`
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: block;
     }
     background: var(--switch-bg-color);
@@ -106,9 +106,9 @@ export function switchTrackStyles(props: ThemeProps) {
 
 /* Thumb */
 export function switchThumbStyles(
-  props: {checked?: boolean; indeterminate?: boolean} & ThemeProps
+  props: {$checked?: boolean; $indeterminate?: boolean} & ThemeProps
 ) {
-  const {indeterminate, theme} = props
+  const {$indeterminate, theme} = props
   const {input} = theme.sanity
   const trackWidth = input.switch.width
   const trackHeight = input.switch.height
@@ -116,10 +116,10 @@ export function switchThumbStyles(
   const size = trackHeight - input.switch.padding * 2
   const checkedOffset = trackWidth - trackPadding * 2 - size
   const indeterminateOffset = trackWidth / 2 - size / 2 - trackPadding
-  const checked = indeterminate !== true && props.checked === true
+  const checked = $indeterminate !== true && props.$checked === true
 
   return css`
-    &&:not([hidden]) {
+    &:not([hidden]) {
       display: block;
     }
     position: absolute;
@@ -139,7 +139,7 @@ export function switchThumbStyles(
       transform: translate3d(${checkedOffset}px, 0, 0);
     `}
 
-    ${indeterminate &&
+    ${$indeterminate &&
     css`
       transform: translate3d(${indeterminateOffset}px, 0, 0);
     `}

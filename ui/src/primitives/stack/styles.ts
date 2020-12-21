@@ -1,7 +1,7 @@
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 
 export interface ResponsiveStackSpaceStyleProps {
-  space?: number | number[]
+  $space?: number | number[]
 }
 
 export function stackBaseStyle() {
@@ -21,7 +21,7 @@ export function responsiveStackSpaceStyle(props: ResponsiveStackSpaceStyleProps 
   const {theme} = props
   const {media, space} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.space), (spaceIndex) => ({
+  return responsive(media, getResponsiveProp(props.$space), (spaceIndex) => ({
     gridGap: rem(space[spaceIndex]),
   }))
 }

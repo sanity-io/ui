@@ -1,3 +1,3 @@
-export interface ResponsiveRadiusProps {
-  radius?: number | number[]
+export interface ResponsiveRadiusStyleProps {
+  $radius?: number | number[]
 }

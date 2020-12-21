@@ -43,7 +43,7 @@ const Root = styled.button((props: ThemeProps) => {
 })
 
 const TextContainer = styled.span`
-  &&:not([hidden]) {
+  &:not([hidden]) {
     display: flex;
   }
 
@@ -107,7 +107,7 @@ export function MenuGroup({children, title}: {children: React.ReactNode; title: 
   )
 
   return (
-    <Popover content={content} open={open} placement="right">
+    <Popover content={content} data-ui="MenuGroup" open={open} placement="right">
       <Root
         data-ui="MenuGroup"
         onClick={onItemClick}

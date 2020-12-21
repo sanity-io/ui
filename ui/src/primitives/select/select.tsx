@@ -17,10 +17,10 @@ interface SelectProps {
 const Root = styled.div(selectStyle.root)
 
 const Input = styled.select<{
-  fontSize?: number | number[]
-  padding?: number | number[]
-  radius?: number | number[]
-  space?: number | number[]
+  $fontSize?: number | number[]
+  $padding?: number | number[]
+  $radius?: number | number[]
+  $space?: number | number[]
 }>(selectStyle.input)
 
 const IconBox = styled(Box)(selectStyle.iconBox)
@@ -35,7 +35,7 @@ export const Select = forwardRef(
       customValidity,
       fontSize = 2,
       padding = 3,
-      radius: radiusProp = 1,
+      radius = 1,
       space = 3,
       ...restProps
     } = props
@@ -45,15 +45,15 @@ export const Select = forwardRef(
     useCustomValidity(ref, customValidity)
 
     return (
-      <Root>
+      <Root data-ui="Select">
         <Input
           data-ui="Select"
           {...restProps}
-          fontSize={fontSize}
-          padding={padding}
-          radius={radiusProp}
+          $fontSize={fontSize}
+          $padding={padding}
+          $radius={radius}
+          $space={space}
           ref={ref}
-          space={space}
         >
           {children}
         </Input>

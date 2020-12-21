@@ -25,7 +25,7 @@ export interface AvatarProps {
   title?: string
 }
 
-const Root = styled.div<{uiColor: string; size: AvatarSize[]}>(
+const Root = styled.div<{$color: string; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
   avatarStyle.root
 )
@@ -99,13 +99,13 @@ export const Avatar = forwardRef(
         data-as={String(as) || 'div'}
         data-ui="Avatar"
         {...restProps}
+        $size={size}
+        $color={color}
         aria-label={title}
         data-arrow-position={arrowPosition}
         data-status={status}
         ref={ref}
-        size={size}
         title={title}
-        uiColor={color}
       >
         <Arrow>
           <svg width="11" height="7" viewBox="0 0 11 7" fill="none">

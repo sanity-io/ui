@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {
   responsiveRadiusStyle,
-  ResponsiveRadiusProps,
+  ResponsiveRadiusStyleProps,
   responsiveInputPaddingStyle,
   textInputStyle,
   TextInputInputStyleProps,
@@ -16,7 +16,7 @@ import {Box} from '../box'
 import {Card} from '../card'
 import {Text} from '../text'
 
-interface TextInputProps extends ResponsiveRadiusProps {
+interface TextInputProps {
   border?: boolean
   customValidity?: string
   fontSize?: number | number[]
@@ -24,6 +24,7 @@ interface TextInputProps extends ResponsiveRadiusProps {
   iconRight?: React.ComponentType | React.ReactNode
   padding?: number | number[]
   prefix?: React.ReactNode
+  radius?: number | number[]
   space?: number | number[]
   suffix?: React.ReactNode
   type?:
@@ -75,7 +76,7 @@ const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInput
   textInputStyle.input
 )
 
-const Presentation = styled.span<ResponsiveRadiusProps & TextInputRepresentationStyleProps>(
+const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
   responsiveRadiusStyle,
   textInputStyle.representation
 )
@@ -118,7 +119,7 @@ export const TextInput = forwardRef(
     useCustomValidity(ref, customValidity)
 
     return (
-      <Root>
+      <Root data-ui="TextInput">
         {prefix && (
           <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border">
             <span>{prefix}</span>
@@ -129,21 +130,21 @@ export const TextInput = forwardRef(
           <Input
             data-as="input"
             {...restProps}
+            $iconLeft={Boolean(icon)}
+            $iconRight={Boolean(iconRight)}
+            $padding={padding}
+            $space={space}
+            $fontSize={fontSize}
             disabled={disabled}
-            iconLeft={Boolean(icon)}
-            iconRight={Boolean(iconRight)}
-            padding={padding}
             ref={ref}
-            space={space}
-            fontSize={fontSize}
             type={type}
           />
 
           <Presentation
-            border={border}
-            hasPrefix={Boolean(prefix)}
-            hasSuffix={Boolean(suffix)}
-            radius={radius}
+            $border={border}
+            $hasPrefix={Boolean(prefix)}
+            $hasSuffix={Boolean(suffix)}
+            $radius={radius}
           >
             {icon && (
               <IconLeftBox padding={padding}>

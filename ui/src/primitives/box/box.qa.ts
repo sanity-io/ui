@@ -25,6 +25,7 @@ describe('Primitives/Box', () => {
     await page.goto(url, {waitUntil: 'domcontentloaded'})
 
     const responsiveStyles = {
+      // 360, 600, 900, 1200, 1800, 2400
       '320': {display: 'none', flex: '1 1 0%', boxSizing: 'content-box'},
       '375': {display: 'block', flex: '2 1 0%', boxSizing: 'border-box'},
       '768': {display: 'none', flex: '3 1 0%', boxSizing: 'content-box'},
@@ -35,7 +36,7 @@ describe('Primitives/Box', () => {
     }
 
     for (const [width, style] of Object.entries(responsiveStyles)) {
-      await page.setViewportSize({width: Number(width) - 1, height: 1024})
+      await page.setViewportSize({width: Number(width), height: 1024})
 
       const element = await page.$('#responsive-box')
 

@@ -22,7 +22,6 @@ export function buttonBaseStyles() {
     white-space: nowrap;
     text-align: left;
     position: relative;
-    /* width: stretch; */
 
     & > span {
       display: block;
@@ -48,12 +47,12 @@ function buttonColorVarsStyle(color: ThemeColorButtonState) {
   }
 }
 
-export function buttonColorStyles(props: {uiMode: ButtonMode; tone: ButtonTone} & ThemeProps) {
-  const {theme, uiMode} = props
+export function buttonColorStyles(props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps) {
+  const {$mode, theme} = props
   const {focusRing} = theme.sanity
   const base = theme.sanity.color.base
-  const mode = theme.sanity.color.button[uiMode] || theme.sanity.color.button.default
-  const color = mode[props.tone] || mode.default
+  const mode = theme.sanity.color.button[$mode] || theme.sanity.color.button.default
+  const color = mode[props.$tone] || mode.default
   const border = {width: buttonTheme.border.width, color: 'var(--card-border-color)'}
 
   return [

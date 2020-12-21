@@ -14,7 +14,13 @@ export function AutocompleteOption(props: {
   }, [onSelect, value])
 
   return (
-    <li aria-selected={selected} id={id} role="presentation" onClick={handleClick}>
+    <li
+      aria-selected={selected}
+      data-ui="AutocompleteOption"
+      id={id}
+      role="presentation"
+      onClick={handleClick}
+    >
       {children}
     </li>
   )
