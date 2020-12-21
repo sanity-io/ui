@@ -6952,10 +6952,15 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror@^5.47.0, codemirror@^5.58.3:
+codemirror@^5.47.0:
   version "5.58.3"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.58.3.tgz#3f0689854ecfbed5d4479a98b96148b2c3b79796"
   integrity sha512-KBhB+juiyOOgn0AqtRmWyAT3yoElkuvWTI6hsHa9E6GQrl6bk/fdAYcvuqW1/upO9T9rtEtapWdw4XYcNiVDEA==
+
+codemirror@^5.59.0:
+  version "5.59.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.59.0.tgz#6d8132055459aabf21d04cae5cf5c430e5c57bb9"
+  integrity sha512-UGzSkCacY9z0rSpQ3wnTWRN2nvRE6foDXnJltWW8pazInR/R+3gXHrao4IFQMv/bSBvFBxt8/HPpkpKAS54x5Q==
 
 collect-v8-coverage@^1.0.0:
   version "1.0.1"
@@ -15418,10 +15423,10 @@ playwright-video@^2.4.0:
     playwright-core "^1.4.1"
     tslib "^2.0.1"
 
-playwright@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.6.2.tgz#8631aec4d16b081d8ac414637b006099814a69d1"
-  integrity sha512-KiMmQuANG4O/ozpwxP8EwBBap0/liS3+wwkGo6nBJ4O4951y4ZsRPR1dqwsMOUD9wjsWf3ER+bAmQH5XmEO4Ig==
+playwright@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.7.0.tgz#72a836dcdfa5a99cc36981eb2e86abafd9a30ce3"
+  integrity sha512-yHf4lySomty4wtWetzXu71zswPOBMHnCqyeGM3dMRObuflyuIUWb0/U++hxZnwHCkyS1H8/1+93Rjq25Rz3IGw==
   dependencies:
     debug "^4.1.1"
     extract-zip "^2.0.1"
@@ -16604,10 +16609,10 @@ q@^1.1.2, q@^1.5.1:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qawolf@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/qawolf/-/qawolf-1.6.0.tgz#2c9975074a5cbb04a736ce0a0700d7551afd9cd3"
-  integrity sha512-J7mWgQLhurSVlexti3bkKolx3M4/RbZoC1Ia2o8DQ0GdpxMKXn+y41oL8kNblc9s9pNIKQiRhBjNYpBey8u3gw==
+qawolf@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/qawolf/-/qawolf-1.7.0.tgz#f3921cd467ff61546c838a7d3c03fda509b0440c"
+  integrity sha512-aFoMFQDjNBgpu2B4ibBzU1X+y8rIKz5M9gYBWThKf88dTfG4htHUDqCaqp76XnmnZknTWKCphDF54SaxbTvjRQ==
   dependencies:
     "@qawolf/jest-reporter" "^0.1.0"
     an-array-of-english-words "^2.0.0"
@@ -16622,7 +16627,7 @@ qawolf@^1.6.0:
     inquirer "^7.3.3"
     kleur "^4.1.1"
     open "^7.2.1"
-    playwright "1.6.2"
+    playwright "1.7.0"
     playwright-video "^2.4.0"
     split "^1.0.1"
     tempy "^0.7.0"
