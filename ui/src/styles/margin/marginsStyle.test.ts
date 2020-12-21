@@ -20,10 +20,10 @@ describe('styles/margin', () => {
           margin: 0,
         },
         {
-          '@media screen and (min-width: 320px)': {margin: '0.25rem'},
+          '@media screen and (min-width: 360px)': {margin: '0.25rem'},
         },
         {
-          '@media screen and (min-width: 640px)': {margin: '0.5rem'},
+          '@media screen and (min-width: 600px)': {margin: '0.5rem'},
         },
       ],
     ])
