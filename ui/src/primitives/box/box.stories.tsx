@@ -43,7 +43,12 @@ export const custom = () => {
 
 export const responsive = () => {
   return (
-    <Box id="responsive-box" display={['none', 'block', 'none', 'block', 'none', 'block']}>
+    <Box
+      id="responsive-box"
+      display={['none', 'block', 'none', 'block', 'none', 'block']}
+      flex={[1, 2, 3, 4, 5, 6]}
+      sizing={['content', 'border', 'content', 'border', 'content', 'border']}
+    >
       Content!
     </Box>
   )
