@@ -41,8 +41,8 @@ export function ScreenHeroSection({data}: {data: any}) {
       />
 
       <Container width={0}>
-        <Stack space={[3, 4, 5]}>
-          <Heading align="center" as="h1" size={[3, 4, 5]}>
+        <Stack space={[4, 4, 5]}>
+          <Heading align="center" as="h1" size={[2, 3, 4, 5]}>
             {data.headline}
           </Heading>
 
@@ -81,7 +81,7 @@ export function ScreenHeroSection({data}: {data: any}) {
 
       {data.links && (
         <Container width={2}>
-          <Box marginTop={[3, 4, 5]}>
+          <Box marginTop={[4, 4, 5]}>
             <Grid columns={[1, 1, 2, 3]} gap={[3, 4, 4, 5]}>
               {data.links.map((link: any) => (
                 <Link href={link.href ? link.href : '/docs/motivation'} key={link._key} passHref>
