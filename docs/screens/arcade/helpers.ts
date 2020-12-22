@@ -7,6 +7,8 @@ export function getArcadeQuery(params: ArcadeQueryParams) {
   if (typeof params.width === 'number') query.width = String(params.width)
   if (params.jsx) query.jsx = encode(params.jsx)
   if (params.hook) query.hook = encode(params.hook)
+  if (params.title) query.title = params.title
+  if (params.description) query.description = params.description
 
   return query
 }

@@ -4,5 +4,7 @@ export interface ArcadeQueryParams {
   mode?: 'jsx' | 'hook'
   jsx: string
   hook?: string
+  title?: string
+  description?: string
   width?: CanvasWidth | null
 }

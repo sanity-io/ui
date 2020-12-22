@@ -60,7 +60,13 @@ export default function ArcadeFrame() {
   return (
     <>
       <ScopeRenderer code={hookCode} key={hookCode} onChange={setHook} />
-      {!errorMessage && jsxResult?.type === 'success' && jsxResult.node}
+
+      {!errorMessage && jsxResult?.type === 'success' && (
+        <Card style={{minHeight: '100%'}} tone="transparent">
+          {jsxResult.node}
+        </Card>
+      )}
+
       {errorMessage && (
         <Card padding={4} sizing="border" style={{minHeight: '100%'}} tone="critical">
           <Code>{errorMessage}</Code>

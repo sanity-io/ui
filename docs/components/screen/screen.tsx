@@ -1,6 +1,5 @@
 import {Code} from '@sanity/ui'
 import React from 'react'
-import {ArcadeScreen} from './arcade'
 import {ScreenHeroSection} from './sections/hero'
 import {isArray, isRecord} from '$lib/types'
 
@@ -12,10 +11,6 @@ export function Screen({target}: {target: Record<string, unknown>}) {
   return (
     <>
       {target.sections.map((section, sectionIndex) => {
-        if (isRecord(section) && section._type === 'screenSection.arcade') {
-          return <ArcadeScreen key={sectionIndex} />
-        }
-
         if (isRecord(section) && section._type === 'screenSection.hero') {
           return <ScreenHeroSection key={sectionIndex} data={section} />
         }

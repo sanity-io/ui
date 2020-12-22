@@ -4,8 +4,6 @@ import * as ui from '@sanity/ui'
 import {Box, Button, Card, Tab, TabList, TabPanel} from '@sanity/ui'
 import Link from 'next/link'
 import React, {useEffect, useState} from 'react'
-import styled from 'styled-components'
-import {getArcadeQuery} from '$components/screen/arcade'
 import {
   AsyncCodeEditor,
   Canvas,
@@ -14,11 +12,15 @@ import {
   ready as readyCheck,
   ScopeRenderer,
 } from '$lib/ide'
+import {getArcadeQuery} from '$screens/arcade'
 
-const CodeTabPanel = styled(TabPanel)``
-
-export function CodeExample(props: {code: string; hookCode?: string}) {
-  const {code: codeProp, hookCode: hookCodeProp} = props
+export function CodeExample(props: {
+  code: string
+  description?: string
+  hookCode?: string
+  title?: string
+}) {
+  const {code: codeProp, description, hookCode: hookCodeProp, title} = props
   const [ready, setReady] = useState(false)
   const [[scope], setScope] = useState<[Record<string, unknown> | null, Error | null]>([null, null])
   const [jsxCode, setJSXCode] = useState(codeProp)
@@ -40,7 +42,7 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
     // @todo
   }
 
-  const arcadeQuery = getArcadeQuery({jsx: jsxCode, hook: hookCode})
+  const arcadeQuery = getArcadeQuery({description, jsx: jsxCode, hook: hookCode, title})
 
   const [mode, setMode] = useState<'jsx' | 'hook'>('jsx')
 
@@ -78,7 +80,7 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
           </TabList>
         </Card>
 
-        <CodeTabPanel
+        <TabPanel
           aria-labelledby="mode-jsx-tab"
           flex={1}
           id="mode-jsx-panel"
@@ -94,9 +96,9 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
               onCursorChange={setJSXCursor}
             />
           )}
-        </CodeTabPanel>
+        </TabPanel>
 
-        <CodeTabPanel
+        <TabPanel
           aria-labelledby="mode-hook-tab"
           flex={1}
           id="mode-hook-panel"
@@ -112,7 +114,7 @@ export function CodeExample(props: {code: string; hookCode?: string}) {
               onCursorChange={setScopeCursor}
             />
           )}
-        </CodeTabPanel>
+        </TabPanel>
       </Card>
 
       <Box marginTop={2} style={{textAlign: 'right'}}>

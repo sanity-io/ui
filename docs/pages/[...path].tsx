@@ -4,7 +4,8 @@ import {AppLayout, Article, Screen, SEO, useApp} from '$components'
 import {PageLayout} from '$components'
 import {features} from '$config'
 import {loadPageData, loadPagePaths} from '$lib/page'
-import {isRecord} from '$lib/types'
+import {isArray, isRecord} from '$lib/types'
+import {ArcadeScreen} from '$screens/arcade'
 
 export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
   const {params = {}, preview = features.preview} = opts
@@ -19,9 +20,38 @@ export async function getStaticPaths() {
   return {paths, fallback: false}
 }
 
+function getArcade(target: unknown): any | null {
+  if (!isRecord(target)) return null
+
+  if (target._type !== 'screen') {
+    return null
+  }
+
+  if (!isArray(target.sections)) {
+    return null
+  }
+
+  const firstSection = target.sections[0]
+
+  if (isRecord(firstSection) && firstSection._type === 'screenSection.arcade') {
+    return firstSection
+  }
+
+  return null
+}
+
 export default function PathPage() {
   const {menu, target} = useApp()
   const seo: Record<string, any> | null = isRecord(target) ? (target.seo as any) : null
+  const arcade = getArcade(target)
+
+  if (arcade) {
+    return (
+      <AppLayout>
+        <ArcadeScreen />
+      </AppLayout>
+    )
+  }
 
   return (
     <>

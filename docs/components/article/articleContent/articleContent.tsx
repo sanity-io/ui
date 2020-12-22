@@ -61,7 +61,14 @@ function buildSerializers(headings: HeadingType[]) {
   function CodeExampleSerializer(props: any) {
     if (!props.node || !props.node.code) return null
 
-    return <CodeExample code={props.node.code.code} hookCode={props.node.hook?.code} />
+    return (
+      <CodeExample
+        code={props.node.code.code}
+        description={props.node.description}
+        hookCode={props.node.hook?.code}
+        title={props.node.title}
+      />
+    )
   }
 
   function NpmPackageBadgeSerializer(props: any) {

@@ -29,8 +29,8 @@ export function CodePane(props: {
 
   return (
     <Flex direction="column" height="fill">
-      <Card borderBottom paddingX={4} paddingY={2} style={{textAlign: 'center', minHeight: 'auto'}}>
-        <TabList space={[1, 1, 2]}>
+      <Card borderBottom padding={2} style={{minHeight: 'auto'}}>
+        <TabList space={1}>
           <Tab
             aria-controls="mode-jsx-panel"
             fontSize={1}
