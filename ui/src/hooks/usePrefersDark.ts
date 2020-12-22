@@ -1,11 +1,7 @@
 import {useEffect, useState} from 'react'
 
 export function usePrefersDark() {
-  const [dark, setDark] = useState(() =>
-    typeof window !== 'undefined'
-      ? window.matchMedia('(prefers-color-scheme: dark)').matches
-      : false
-  )
+  const [dark, setDark] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
