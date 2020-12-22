@@ -62,7 +62,7 @@ export default function ArcadeFrame() {
       <ScopeRenderer code={hookCode} key={hookCode} onChange={setHook} />
 
       {!errorMessage && jsxResult?.type === 'success' && (
-        <Card style={{minHeight: '100%'}} tone="transparent">
+        <Card height="fill" tone="transparent">
           {jsxResult.node}
         </Card>
       )}
