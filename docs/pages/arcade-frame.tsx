@@ -42,7 +42,7 @@ export default function ArcadeFrame() {
     return () => {
       window.removeEventListener('message', handleMessage)
     }
-  }, [])
+  }, [setColorScheme])
 
   // Evaluate JSX
   useEffect(() => {
