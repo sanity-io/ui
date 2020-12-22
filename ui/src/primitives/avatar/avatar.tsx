@@ -96,7 +96,7 @@ export const Avatar = forwardRef(
     return (
       <Root
         as={as}
-        data-as={String(as) || 'div'}
+        data-as={typeof as === 'string' ? as : undefined}
         data-ui="Avatar"
         {...restProps}
         $size={size}

@@ -10,15 +10,15 @@ interface StackProps extends BoxProps {
 const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
 
 export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElement>, ref) => {
-  const {as: asProp, space, ...restProps} = props
+  const {as, space, ...restProps} = props
 
   return (
     <Root
-      data-as={String(asProp)}
+      data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
       $space={space}
-      forwardedAs={asProp}
+      forwardedAs={as}
       ref={ref}
     />
   )

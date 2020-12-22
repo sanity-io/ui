@@ -11,7 +11,7 @@ const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 export const Grid = forwardRef(
   (props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>, ref) => {
     const {
-      as: asProp,
+      as,
       autoRows,
       autoCols,
       autoFlow,
@@ -26,7 +26,7 @@ export const Grid = forwardRef(
 
     return (
       <Root
-        data-as={String(asProp)}
+        data-as={typeof as === 'string' ? as : undefined}
         data-ui="Grid"
         {...restProps}
         $autoRows={autoRows}
@@ -37,7 +37,7 @@ export const Grid = forwardRef(
         $gapX={gapX}
         $gapY={gapY}
         $rows={rows}
-        forwardedAs={asProp}
+        forwardedAs={as}
         ref={ref}
       >
         {children}
