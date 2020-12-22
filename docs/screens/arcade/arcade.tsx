@@ -12,7 +12,7 @@ import {ArcadeQueryParams, CanvasWidth} from './types'
 
 type SaveFn = (params: ArcadeQueryParams) => void
 
-export function ArcadeScreen() {
+export function ArcadeScreen(props: {title: string; description: string}) {
   const {replace: replaceState} = useRouter()
   const [jsxCode, setJSXCode] = useState('')
   const [jsxCursor, setJSXCursor] = useState({line: 0, column: 0})
@@ -21,7 +21,7 @@ export function ArcadeScreen() {
   const [canvasWidth, setCanvasWidth] = useState<CanvasWidth | null>(null)
   const [codeMode, setCodeMode] = useState<'jsx' | 'hook'>('jsx')
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
-  const [meta, setMeta] = useState({title: '', description: ''})
+  const [meta, setMeta] = useState({title: props.title || '', description: props.description || ''})
 
   // Create `saveFn` callback
   useEffect(() => {
