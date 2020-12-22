@@ -5,7 +5,7 @@ import {fonts} from './fonts'
 export const studioTheme: RootTheme = {
   avatar: {
     sizes: [
-      {distance: -3, size: 23},
+      {distance: -3, size: 25},
       {distance: -6, size: 35},
       {distance: -9, size: 55},
     ],
