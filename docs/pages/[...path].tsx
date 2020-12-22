@@ -16,7 +16,10 @@ export async function getStaticProps(opts: {params?: {path?: string[]}; preview?
 export async function getStaticPaths() {
   const paths = await loadPagePaths({preview: features.preview})
 
-  return {paths, fallback: false}
+  return {
+    paths: paths.filter((p) => !(p.params.path.length === 1 && p.params.path[0] === 'arcade')),
+    fallback: false,
+  }
 }
 
 export default function PathPage() {
