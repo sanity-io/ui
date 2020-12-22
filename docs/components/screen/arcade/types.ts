@@ -1,8 +1,8 @@
-export type ContainerWidth = number | 'auto'
+export type CanvasWidth = 0 | 1 | 2 | 3
 
 export interface ArcadeQueryParams {
   mode?: 'jsx' | 'hook'
   jsx: string
   hook?: string
-  width?: ContainerWidth
+  width?: CanvasWidth | null
 }

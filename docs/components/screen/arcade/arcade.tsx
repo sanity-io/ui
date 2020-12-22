@@ -7,7 +7,7 @@ import {CanvasPane} from './canvasPane'
 import {CodePane} from './codePane'
 import {DEFAULT_CODE} from './constants'
 import {getArcadeQuery, tryDecode} from './helpers'
-import {ArcadeQueryParams, ContainerWidth} from './types'
+import {ArcadeQueryParams, CanvasWidth} from './types'
 
 type SaveFn = (params: ArcadeQueryParams) => void
 
@@ -17,7 +17,7 @@ export function ArcadeScreen() {
   const [jsxCursor, setJSXCursor] = useState({line: 0, column: 0})
   const [hookCode, setHookCode] = useState('')
   const [hookCursor, setHookCursor] = useState({line: 0, column: 0})
-  const [canvasWidth, setCanvasWidth] = useState<ContainerWidth>('auto')
+  const [canvasWidth, setCanvasWidth] = useState<CanvasWidth | null>(null)
   const [codeMode, setCodeMode] = useState<'jsx' | 'hook'>('jsx')
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
 
@@ -51,7 +51,7 @@ export function ArcadeScreen() {
     setCodeMode((query.mode as any) || 'jsx')
     setHookCode(tryDecode(query.hook) || 'return {}\n')
     setJSXCode(tryDecode(query.jsx) || DEFAULT_CODE)
-    setCanvasWidth(query.width === undefined ? 'auto' : (Number(query.width) as any))
+    setCanvasWidth(typeof query.width === 'string' ? (Number(query.width) as any) : null)
   }, [])
 
   return (
