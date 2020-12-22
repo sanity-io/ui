@@ -8,8 +8,13 @@ export const codeExampleField = {
   fields: [
     {
       type: 'string',
-      name: 'caption',
-      title: 'Caption',
+      name: 'title',
+      title: 'Title',
+    },
+    {
+      type: 'text',
+      name: 'description',
+      title: 'Description',
     },
     {
       type: 'code',
@@ -24,7 +29,8 @@ export const codeExampleField = {
   ],
   preview: {
     select: {
-      title: 'caption',
+      title: 'title',
+      subtitle: 'description',
     },
   },
 }
