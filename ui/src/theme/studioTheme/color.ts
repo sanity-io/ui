@@ -49,7 +49,7 @@ export const color = createColorTheme({
 
     return {
       fg: tints[dark ? 100 : 900].hex,
-      bg: tints[dark ? 900 : 100].hex,
+      bg: tints[dark ? 950 : 50].hex,
       border: tints[dark ? 800 : 200].hex,
       focusRing: tints[500].hex,
       shadow: {
