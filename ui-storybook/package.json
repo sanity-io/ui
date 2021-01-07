@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-ui-storybook",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "package.json",
   "scripts": {
     "build": "build-storybook --quiet --config-dir . --output-dir public",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@sanity/icons": "^1.0.1",
-    "@sanity/ui": "^0.32.2",
+    "@sanity/ui": "^0.32.3",
     "@storybook/addon-a11y": "^6.1.11",
     "@storybook/addon-actions": "^6.1.11",
     "@storybook/addon-info": "^5.3.21",
