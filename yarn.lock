@@ -3089,10 +3089,10 @@
     rxjs "^6.5.3"
     shallow-equals "^1.0.0"
 
-"@sanity/production-preview@2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@sanity/production-preview/-/production-preview-2.0.5.tgz#fe3a7e943a1e7d330867e13d5a83471ece86c9c5"
-  integrity sha512-PNWt3kb/BptGSXgNQtIWdIL2xb7JJl+ObPPxiL350GAn8soNa/AGZS0tZxqbWoPc9IK4Bfl8n57MCH19KURRww==
+"@sanity/production-preview@2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@sanity/production-preview/-/production-preview-2.1.4.tgz#54570ee3852c01a9a9338ee20535b266eb14ca74"
+  integrity sha512-smnyWIkoEip9ID9erVwl+kgwKDiDXerzca7j7EgD3ZlcAt9aAQLlkZ1CzhY+YLvZy2a6BQZIWAG5hwAsq6Dnzw==
 
 "@sanity/react-hooks@2.0.9":
   version "2.0.9"
