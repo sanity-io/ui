@@ -46,7 +46,7 @@ export function ToastProvider({children, zOffset}: ToastProviderProps) {
   const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
 
   const push = useCallback((params: ToastParams) => {
-    const id = String(toastId++)
+    const id = params.id || String(toastId++)
     const duration = params.duration || 5000
 
     const dismiss = () => {
@@ -72,21 +72,29 @@ export function ToastProvider({children, zOffset}: ToastProviderProps) {
       }
     }
 
-    setState((prevState) => ({
-      ...prevState,
-      toasts: prevState.toasts.concat([
-        {
-          dismiss,
-          id,
-          params: {
-            ...params,
-            duration,
-          },
-        },
-      ]),
-    }))
+    setState((prevState) => {
+      return {
+        ...prevState,
+        toasts: prevState.toasts
+          .filter((t) => t.id !== id)
+          .concat([
+            {
+              dismiss,
+              id,
+              params: {...params, duration},
+            },
+          ]),
+      }
+    })
+
+    if (toastsRef.current[id]) {
+      clearTimeout(toastsRef.current[id].timeoutId)
+      delete toastsRef.current[id]
+    }
 
     toastsRef.current[id] = {timeoutId: setTimeout(dismiss, duration)}
+
+    return id
   }, [])
 
   // clear timeouts on unmount
