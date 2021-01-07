@@ -1,5 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import React from 'react'
+import styled from 'styled-components'
 import {Box, Card, Flex, Stack, Text} from '../../primitives'
 import {ThemeColorToneKey} from '../../theme'
 
@@ -18,6 +19,10 @@ const STATUS_CARD_TONE: {[key: string]: ThemeColorToneKey} = {
   info: 'primary',
 }
 
+const Root = styled(Card)`
+  pointer-events: all;
+`
+
 export function Toast(
   props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>
 ) {
@@ -25,7 +30,7 @@ export function Toast(
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
 
   return (
-    <Card
+    <Root
       data-ui="Toast"
       {...restProps}
       marginTop={3}
@@ -63,6 +68,6 @@ export function Toast(
           </Box>
         )}
       </Flex>
-    </Card>
+    </Root>
   )
 }

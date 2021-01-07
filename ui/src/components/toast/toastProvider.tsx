@@ -17,6 +17,9 @@ interface ToastState {
 
 interface ToastProviderProps {
   children?: React.ReactNode
+  padding?: number | number[]
+  paddingX?: number | number[]
+  paddingY?: number | number[]
   zOffset?: number
 }
 
@@ -30,7 +33,6 @@ const Root = styled(Layer)`
 `
 
 const ToastContainer = styled.div`
-  pointer-events: all;
   box-sizing: border-box;
   position: absolute;
   right: 0;
@@ -41,7 +43,13 @@ const ToastContainer = styled.div`
 
 let toastId = 0
 
-export function ToastProvider({children, zOffset}: ToastProviderProps) {
+export function ToastProvider({
+  children,
+  padding = 4,
+  paddingX,
+  paddingY,
+  zOffset,
+}: ToastProviderProps) {
   const [state, setState] = useState<ToastState>({toasts: []})
   const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
 
@@ -115,7 +123,7 @@ export function ToastProvider({children, zOffset}: ToastProviderProps) {
 
       <Root data-ui="ToastProvider" zOffset={zOffset}>
         <ToastContainer>
-          <Box padding={4}>
+          <Box padding={padding} paddingX={paddingX} paddingY={paddingY}>
             <AnimatePresence initial={false}>
               {state.toasts.map(({dismiss, id, params}) => (
                 <motion.div
