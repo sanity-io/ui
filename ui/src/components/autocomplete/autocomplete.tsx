@@ -1,6 +1,13 @@
-import {CloseIcon} from '@sanity/icons'
-import React, {cloneElement, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
-import styled from 'styled-components'
+import {ChevronDownIcon} from '@sanity/icons'
+import React, {
+  cloneElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {focusFirstDescendant} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
 import {Box, Button, Card, Spinner, Text, TextInput} from '../../primitives'
@@ -22,6 +29,10 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   onChange?: (value: string) => void
   onQueryChange?: (query: string | null) => void
   onSelect?: (value: string) => void
+  /**
+   * @beta
+   */
+  openButton?: boolean
   options?: Option[]
   padding?: number | number[]
   prefix?: React.ReactNode
@@ -50,17 +61,6 @@ type AutocompleteOverriddenInputAttrKey =
   | 'spellCheck'
   | 'type'
   | 'value'
-
-const ClearButtonBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-
-  & > button {
-    vertical-align: top;
-  }
-`
 
 const defaultRenderValue = (value: string, option?: BaseAutocompleteOption) =>
   option ? option.value : value
@@ -98,6 +98,7 @@ const InnerAutocomplete = forwardRef(
       onChange,
       onQueryChange,
       onSelect,
+      openButton,
       options: optionsProp = [],
       padding: paddingProp = 3,
       radius = 2,
@@ -231,6 +232,11 @@ const InnerAutocomplete = forwardRef(
       [onChange, onSelect, onQueryChange]
     )
 
+    const handleOpenClick = useCallback(() => {
+      inputRef.current?.focus()
+      setQuery(query || '')
+    }, [query])
+
     // Change the value when `value` prop changes
     useEffect(() => {
       if (valueProp !== valueRef.current) {
@@ -261,6 +267,17 @@ const InnerAutocomplete = forwardRef(
       forwardedRef.current = el
     }
 
+    const clearButton = useMemo(
+      () =>
+        value.length > 0
+          ? {
+              'aria-label': 'Clear',
+              onFocus: handleClearButtonFocus,
+            }
+          : undefined,
+      [handleClearButtonFocus, value]
+    )
+
     return (
       <Root
         data-ui="Autocomplete"
@@ -278,10 +295,12 @@ const InnerAutocomplete = forwardRef(
           autoComplete="off"
           autoCorrect="off"
           border={border}
+          clearButton={clearButton}
           icon={icon}
           id={id}
           inputMode="search"
           onChange={handleInputChange}
+          onClear={handleClearButtonClick}
           onFocus={handleInputFocus}
           padding={padding}
           radius={radius}
@@ -289,22 +308,15 @@ const InnerAutocomplete = forwardRef(
           role="combobox"
           fontSize={fontSize}
           spellCheck={false}
+          suffix={
+            openButton ? (
+              <Box padding={1}>
+                <Button icon={ChevronDownIcon} mode="bleed" onClick={handleOpenClick} padding={2} />
+              </Box>
+            ) : undefined
+          }
           value={query === null ? renderValue(value, currentOption) : query}
         />
-
-        {value.length > 0 && (
-          <ClearButtonBox margin={padding.map((v) => v - 1)} onFocus={handleClearButtonFocus}>
-            <Button
-              aria-label="Clear"
-              data-qa="clear-button"
-              fontSize={fontSize}
-              icon={CloseIcon}
-              mode="bleed"
-              onClick={handleClearButtonClick}
-              padding={padding.map((v) => v - 2)}
-            />
-          </ClearButtonBox>
-        )}
 
         <ListBoxContainer hidden={!expanded}>
           <ListBoxCard paddingY={1} radius={1} shadow={2} tabIndex={-1} tone="inherit">
