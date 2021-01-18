@@ -184,6 +184,32 @@ export const tones = () => {
   )
 }
 
+export const clearButton = () => {
+  return <ClearableButtonExample />
+}
+
+function ClearableButtonExample() {
+  const [value, setValue] = useState('')
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value)
+  }, [])
+
+  const handleClear = useCallback(() => {
+    setValue('')
+  }, [])
+
+  return (
+    <TextInput
+      clearButton
+      onChange={handleChange}
+      onClear={handleClear}
+      placeholder="Enter text"
+      value={value}
+    />
+  )
+}
+
 function Example({
   type,
 }: {
