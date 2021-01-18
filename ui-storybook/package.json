@@ -15,12 +15,12 @@
   "dependencies": {
     "@sanity/icons": "^1.0.1",
     "@sanity/ui": "^0.32.5",
-    "@storybook/addon-a11y": "^6.1.11",
-    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-a11y": "^6.1.14",
+    "@storybook/addon-actions": "^6.1.14",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-knobs": "^6.1.11",
-    "@storybook/addon-links": "^6.1.11",
-    "@storybook/react": "^6.1.11",
+    "@storybook/addon-knobs": "^6.1.14",
+    "@storybook/addon-links": "^6.1.14",
+    "@storybook/react": "^6.1.14",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1"

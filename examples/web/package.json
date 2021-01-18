@@ -16,7 +16,7 @@
     "@sanity/icons": "^1.0.1",
     "@sanity/logos": "^1.0.0",
     "@sanity/ui": "^0.32.5",
-    "next": "^10.0.4",
+    "next": "^10.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1"
