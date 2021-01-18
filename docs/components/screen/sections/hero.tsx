@@ -37,7 +37,7 @@ export function ScreenHeroSection({data}: {data: any}) {
     <Root flex={1} paddingX={[3, 4, 5]} paddingY={[6, 7, 8]}>
       <BackgroundBox
         display={['none', 'none', 'block']}
-        style={{backgroundImage: backgroundImageUrl && `url(${backgroundImageUrl})`}}
+        style={{backgroundImage: backgroundImageUrl ? `url(${backgroundImageUrl})` : undefined}}
       />
 
       <Container width={0}>
