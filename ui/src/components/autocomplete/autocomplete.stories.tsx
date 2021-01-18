@@ -1,4 +1,4 @@
-import {Autocomplete, Card, Label, Stack, Text} from '@sanity/ui'
+import {Autocomplete, Box, Button, Card, Code, Label, Stack, Text} from '@sanity/ui'
 import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useRef, useState} from 'react'
 import countries from './__fixtures__/countries'
@@ -76,7 +76,7 @@ function CustomExample({
   fontSize: number
   radius: number
 }) {
-  const [query, setQuery] = useState('')
+  const [value, setValue] = useState('')
 
   const renderOption = useCallback((option: ExampleOption) => {
     return (
@@ -93,14 +93,14 @@ function CustomExample({
     )
   }, [])
 
-  const renderValue = useCallback((value: string, option?: ExampleOption) => {
-    console.log('render value', {value, option})
+  const renderValue = useCallback((currentValue: string, option?: ExampleOption) => {
+    console.log('render value', {value: currentValue, option})
 
-    return option ? option.title : value
+    return option ? option.title : currentValue
   }, [])
 
-  const filterOption = useCallback((value: string, option: ExampleOption) => {
-    return option.title.toLowerCase().indexOf(value.toLowerCase()) > -1
+  const filterOption = useCallback((query: string, option: ExampleOption) => {
+    return option.title.toLowerCase().indexOf(query.toLowerCase()) > -1
   }, [])
 
   const options = data.map((item) => ({value: item.value, title: item.title}))
@@ -116,13 +116,19 @@ function CustomExample({
         filterOption={filterOption}
         fontSize={fontSize}
         id="custom"
-        onChange={setQuery}
+        onChange={setValue}
         options={options}
         radius={radius}
         renderOption={renderOption}
         renderValue={renderValue}
-        value={query}
+        value={value}
       />
+      <Card padding={3} radius={1} tone="transparent">
+        <Code>{JSON.stringify(value)}</Code>
+      </Card>
+      <Box>
+        <Button onClick={() => setValue('NO')} text="Set to NO" />
+      </Box>
     </Stack>
   )
 }
