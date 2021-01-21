@@ -54,13 +54,17 @@ export function inputElementStyles(props: ThemeProps) {
       }
     }
 
-    &:focus + span {
+    &:not(:disabled):focus + span {
       box-shadow: ${focusRingStyle({
-        border: {
-          width: input.border.width,
-          color: color.default.enabled.border,
-        },
+        border: {width: input.border.width, color: color.default.enabled.border},
         focusRing,
+      })};
+    }
+
+    &:not(:disabled):focus:not(:focus-visible) + span {
+      box-shadow: ${focusRingBorderStyle({
+        color: color.default.enabled.border,
+        width: input.border.width,
       })};
     }
 
@@ -68,7 +72,7 @@ export function inputElementStyles(props: ThemeProps) {
       opacity: 1;
     }
 
-    &:disabled + span {
+    &:not([data-read-only]):disabled + span {
       background: ${color.default.disabled.bg};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,

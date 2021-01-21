@@ -1,4 +1,4 @@
-import {ChevronDownIcon} from '@sanity/icons'
+import {SelectIcon} from '@sanity/icons'
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
@@ -33,9 +33,11 @@ export const Select = forwardRef(
     const {
       children,
       customValidity,
+      disabled,
       fontSize = 2,
       padding = 3,
       radius = 1,
+      readOnly,
       space = 3,
       ...restProps
     } = props
@@ -47,12 +49,14 @@ export const Select = forwardRef(
     return (
       <Root data-ui="Select">
         <Input
+          data-read-only={!disabled && readOnly ? '' : undefined}
           data-ui="Select"
           {...restProps}
           $fontSize={fontSize}
           $padding={padding}
           $radius={radius}
           $space={space}
+          disabled={disabled || readOnly}
           ref={ref}
         >
           {children}
@@ -60,7 +64,7 @@ export const Select = forwardRef(
 
         <IconBox padding={padding}>
           <Text size={fontSize}>
-            <ChevronDownIcon />
+            <SelectIcon />
           </Text>
         </IconBox>
       </Root>

@@ -2,6 +2,7 @@ import {Box, Checkbox, Flex, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
+import {Card} from '../card'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -17,15 +18,18 @@ export const props = () => {
     onChange: action('onChange'),
     onFocus: action('onFocus'),
     onBlur: action('onBlur'),
+    readOnly: boolean('Read only', false, 'Props'),
   }
 
   return (
-    <Flex align="center" as="label">
-      <Checkbox {...props} />
-      <Box marginLeft={3}>
-        <Text>Label</Text>
-      </Box>
-    </Flex>
+    <Card padding={4}>
+      <Flex align="center" as="label">
+        <Checkbox {...props} />
+        <Box marginLeft={3}>
+          <Text>Label</Text>
+        </Box>
+      </Flex>
+    </Card>
   )
 }
 
@@ -39,11 +43,30 @@ function Example() {
   const handleChange = useCallback(() => setChecked((val) => !val), [])
 
   return (
-    <Flex align="center" as="label">
-      <Checkbox checked={checked || false} indeterminate={indeterminate} onChange={handleChange} />
-      <Box marginLeft={3}>
-        <Text>Label</Text>
-      </Box>
-    </Flex>
+    <Card padding={4}>
+      <Flex align="center" as="label">
+        <Checkbox
+          checked={checked || false}
+          indeterminate={indeterminate}
+          onChange={handleChange}
+        />
+        <Box marginLeft={3}>
+          <Text>Label</Text>
+        </Box>
+      </Flex>
+    </Card>
+  )
+}
+
+export const readOnly = () => {
+  return (
+    <Card padding={4}>
+      <Flex align="center" as="label">
+        <Checkbox id="checkbox-example" readOnly />
+        <Box marginLeft={3}>
+          <Text>Label</Text>
+        </Box>
+      </Flex>
+    </Card>
   )
 }

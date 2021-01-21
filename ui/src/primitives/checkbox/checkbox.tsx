@@ -17,7 +17,16 @@ export const Checkbox = forwardRef(
     props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & CheckboxProps,
     forwardedRef: React.ForwardedRef<HTMLInputElement>
   ) => {
-    const {checked, className, indeterminate, customValidity, style, ...restProps} = props
+    const {
+      checked,
+      className,
+      disabled,
+      indeterminate,
+      customValidity,
+      readOnly,
+      style,
+      ...restProps
+    } = props
     const ref = useForwardedRef(forwardedRef)
 
     useCustomValidity(ref, customValidity)
@@ -31,7 +40,15 @@ export const Checkbox = forwardRef(
 
     return (
       <Root className={className} data-ui="Checkbox" style={style}>
-        <Input {...restProps} checked={checked} type="checkbox" ref={ref} />
+        <Input
+          data-read-only={!disabled && readOnly ? '' : undefined}
+          {...restProps}
+          checked={checked}
+          disabled={disabled || readOnly}
+          type="checkbox"
+          readOnly={readOnly}
+          ref={ref}
+        />
         <span>
           <CheckmarkIcon />
           <RemoveIcon />

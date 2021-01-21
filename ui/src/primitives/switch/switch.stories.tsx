@@ -2,6 +2,7 @@ import {Box, Flex, Switch, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
+import {Card} from '../card'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -17,20 +18,27 @@ export const props = () => {
     onChange: action('onChange'),
     onFocus: action('onFocus'),
     onBlur: action('onBlur'),
+    readOnly: boolean('Read only', false, 'Props'),
   }
 
   return (
-    <Flex align="center" as="label">
-      <Switch {...props} />
-      <Box marginLeft={3}>
-        <Text>Label</Text>
-      </Box>
-    </Flex>
+    <Card padding={4}>
+      <Flex align="center" as="label">
+        <Switch {...props} />
+        <Box marginLeft={3}>
+          <Text>Label</Text>
+        </Box>
+      </Flex>
+    </Card>
   )
 }
 
 export const example = () => {
-  return <Example />
+  return (
+    <Card padding={4}>
+      <Example />
+    </Card>
+  )
 }
 
 function Example() {
