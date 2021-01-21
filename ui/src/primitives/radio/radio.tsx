@@ -15,14 +15,21 @@ export const Radio = forwardRef(
     props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps,
     forwardedRef: React.Ref<HTMLInputElement>
   ) => {
-    const {className, style, customValidity, ...restProps} = props
+    const {className, disabled, style, customValidity, readOnly, ...restProps} = props
     const ref = useForwardedRef(forwardedRef)
 
     useCustomValidity(ref, customValidity)
 
     return (
       <Root className={className} data-ui="Radio" style={style}>
-        <Input type="radio" {...restProps} ref={ref} />
+        <Input
+          data-read-only={!disabled && readOnly ? '' : undefined}
+          {...restProps}
+          disabled={disabled || readOnly}
+          readOnly={readOnly}
+          ref={ref}
+          type="radio"
+        />
         <span />
       </Root>
     )

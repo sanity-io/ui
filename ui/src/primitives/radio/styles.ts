@@ -5,8 +5,13 @@ import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 export function radioBaseStyle() {
   return css`
     position: relative;
+
     &:not([hidden]) {
       display: inline-block;
+    }
+
+    &[data-read-only] {
+      outline: 1px solid red;
     }
   `
 }
@@ -30,7 +35,9 @@ export function inputElementStyle(props: ThemeProps) {
     padding: 0;
     margin: 0;
     border-radius: ${rem(input.radio.size / 2)};
+    border: none;
 
+    /* enabled */
     & + span {
       display: block;
       position: relative;
@@ -56,10 +63,18 @@ export function inputElementStyle(props: ThemeProps) {
       }
     }
 
-    &:focus + span {
+    /* focused */
+    &:not(:disabled):focus + span {
       box-shadow: ${focusRingStyle({
         border: {width: input.border.width, color: color.default.enabled.border},
         focusRing,
+      })};
+    }
+
+    &:not(:disabled):focus:not(:focus-visible) + span {
+      box-shadow: ${focusRingBorderStyle({
+        color: color.default.enabled.border,
+        width: input.border.width,
       })};
     }
 
@@ -67,7 +82,8 @@ export function inputElementStyle(props: ThemeProps) {
       opacity: 1;
     }
 
-    &:disabled + span {
+    /* disabled */
+    &:not([data-read-only]):disabled + span {
       box-shadow: 0 0 0 1px ${color.default.disabled.border};
       background: ${color.default.disabled.bg};
 

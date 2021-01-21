@@ -63,24 +63,26 @@ export function switchRepresentationStyles(props: ThemeProps) {
       box-shadow: none;
     }
 
-    input:hover + & {
-      --switch-bg-color: ${color.default.hovered.bg};
-      --switch-fg-color: ${color.default.hovered.fg};
-    }
-
     input:checked + & {
       --switch-bg-color: ${color.positive.enabled.bg};
       --switch-fg-color: ${color.positive.enabled.fg};
     }
 
-    input:checked:hover + & {
-      --switch-bg-color: ${color.positive.hovered.bg};
-      --switch-fg-color: ${color.positive.hovered.fg};
+    @media (hover: hover) {
+      input:not(:disabled):hover + & {
+        --switch-bg-color: ${color.default.hovered.bg};
+        --switch-fg-color: ${color.default.hovered.fg};
+      }
+
+      input:not(:disabled):checked:hover + & {
+        --switch-bg-color: ${color.positive.hovered.bg};
+        --switch-fg-color: ${color.positive.hovered.fg};
+      }
     }
 
-    input:disabled + & {
-      --switch-bg-color: ${color.default.disabled.fg};
-      --switch-fg-color: ${color.default.disabled.bg};
+    input:not([data-read-only]):disabled + & {
+      --switch-bg-color: ${color.default.disabled.bg};
+      --switch-fg-color: ${color.default.disabled.fg};
     }
   `
 }
@@ -94,7 +96,7 @@ export function switchTrackStyles(props: ThemeProps) {
     &:not([hidden]) {
       display: block;
     }
-    background: var(--switch-bg-color);
+    background-color: var(--switch-bg-color);
     position: absolute;
     left: 0;
     top: 0;

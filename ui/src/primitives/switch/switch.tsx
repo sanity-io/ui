@@ -24,7 +24,7 @@ export const Switch = forwardRef(
     props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
     forwardedRef: React.ForwardedRef<HTMLInputElement>
   ) => {
-    const {checked, className, indeterminate, style, ...restProps} = props
+    const {checked, className, disabled, indeterminate, readOnly, style, ...restProps} = props
     const ref = useForwardedRef(forwardedRef)
 
     useEffect(() => {
@@ -37,8 +37,10 @@ export const Switch = forwardRef(
     return (
       <Root className={className} data-ui="Switch" style={style}>
         <Input
+          data-read-only={!disabled && readOnly ? '' : undefined}
           {...restProps}
           checked={indeterminate !== true && checked}
+          disabled={disabled || readOnly}
           type="checkbox"
           ref={ref}
         />

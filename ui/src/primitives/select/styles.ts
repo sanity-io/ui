@@ -32,6 +32,10 @@ function inputBaseStyle(props: ThemeProps) {
     width: 100%;
     outline: none;
     margin: 0;
+
+    &:disabled {
+      opacity: 1;
+    }
   `
 }
 
@@ -41,6 +45,7 @@ function inputColorStyle(props: ThemeProps) {
   const color = theme.sanity.color.input
 
   return css`
+    /* enabled */
     background-color: ${color.default.enabled.bg};
     color: ${color.default.enabled.fg};
     box-shadow: ${focusRingBorderStyle({
@@ -48,6 +53,7 @@ function inputColorStyle(props: ThemeProps) {
       width: input.border.width,
     })};
 
+    /* hovered */
     @media (hover: hover) {
       &:not(:disabled):hover {
         background-color: ${color.default.hovered.bg};
@@ -59,6 +65,7 @@ function inputColorStyle(props: ThemeProps) {
       }
     }
 
+    /* focused */
     &:not(:disabled):focus {
       box-shadow: ${focusRingStyle({
         border: {width: input.border.width, color: color.default.enabled.border},
@@ -66,12 +73,8 @@ function inputColorStyle(props: ThemeProps) {
       })};
     }
 
-    &:not(:disabled):focus:not(:focus-visible) {
-      box-shadow: none;
-    }
-
-    &:disabled {
-      opacity: 1;
+    /* disabled */
+    &:not([data-read-only]):disabled {
       background-color: ${color.default.disabled.bg};
       color: ${color.default.disabled.fg};
       box-shadow: ${focusRingBorderStyle({
@@ -115,12 +118,24 @@ function iconBoxStyle(props: ThemeProps) {
     top: 0;
     right: 0;
 
-    select:hover + & {
-      color: ${color.default.hovered.fg};
+    /* enabled */
+    --card-fg-color: ${color.default.enabled.fg};
+
+    /* hover */
+    @media (hover: hover) {
+      select:not(disabled):not(:read-only):hover + & {
+        --card-fg-color: ${color.default.hovered.fg};
+      }
     }
 
+    /* disabled */
     select:disabled + & {
-      color: ${color.default.disabled.fg};
+      --card-fg-color: ${color.default.disabled.fg};
+    }
+
+    /* read-only */
+    select[data-read-only] + & {
+      opacity: 0;
     }
   `
 }

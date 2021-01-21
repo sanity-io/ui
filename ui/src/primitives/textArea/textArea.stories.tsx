@@ -55,6 +55,8 @@ export const plain = () => {
     'Props'
   )
 
+  const readOnly = boolean('Read only', false, 'Props')
+
   const weight = select(
     'Weight',
     {'Regular (default)': undefined, Semibold: 'semibold', Bold: 'bold'},
@@ -78,6 +80,7 @@ export const plain = () => {
             padding={padding}
             placeholder={placeholder}
             radius={radius}
+            readOnly={readOnly}
             weight={weight}
           />
         </Stack>
