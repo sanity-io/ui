@@ -114,7 +114,8 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
 
     // enabled
     '*:not(:disabled) + &': {
-      color: color.default.enabled.fg,
+      '--card-bg-color': color.default.enabled.bg,
+      '--card-fg-color': color.default.enabled.fg,
       backgroundColor: color.default.enabled.bg,
       boxShadow: $border
         ? focusRingBorderStyle({color: color.default.enabled.border, width: input.border.width})
@@ -123,7 +124,8 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
 
     // invalid
     '*:not(:disabled):invalid + &': {
-      color: color.invalid.enabled.fg,
+      '--card-bg-color': color.invalid.enabled.bg,
+      '--card-fg-color': color.invalid.enabled.fg,
       backgroundColor: color.invalid.enabled.bg,
       boxShadow: $border
         ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
@@ -131,7 +133,7 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
     },
 
     // focused
-    '*:not(:disabled):focus + &': {
+    '*:not(:disabled):not(:read-only):focus + &': {
       boxShadow: focusRingStyle({
         border: $border
           ? {color: color.default.enabled.border, width: input.border.width}
@@ -142,7 +144,8 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
 
     // disabled
     '*:disabled + &': {
-      color: color.default.disabled.fg,
+      '--card-bg-color': color.default.disabled.bg,
+      '--card-fg-color': color.default.disabled.fg,
       backgroundColor: color.default.disabled.bg,
       boxShadow: $border
         ? focusRingBorderStyle({
@@ -154,12 +157,13 @@ function representationStyle(props: TextInputRepresentationStyleProps & ThemePro
 
     // hovered
     '@media (hover: hover)': {
-      '*:not(:disabled):not(:invalid):hover + &': {
-        color: color.default.hovered.fg,
+      '*:not(:disabled):not(:read-only):not(:invalid):hover + &': {
+        '--card-bg-color': color.default.hovered.bg,
+        '--card-fg-color': color.default.hovered.fg,
         backgroundColor: color.default.hovered.bg,
       },
 
-      '*:not(:disabled):not(:invalid):not(:focus):hover + &': {
+      '*:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + &': {
         boxShadow: $border
           ? focusRingBorderStyle({
               color: color.default.hovered.border,

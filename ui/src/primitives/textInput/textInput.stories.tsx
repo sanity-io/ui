@@ -72,6 +72,8 @@ export const plain = () => {
     'Props'
   )
 
+  const readOnly = boolean('Read only', false, 'Props')
+
   const space = select(
     'Space',
     {
@@ -113,6 +115,7 @@ export const plain = () => {
             padding={padding}
             placeholder={placeholder}
             radius={radius}
+            readOnly={readOnly}
             space={space}
             weight={weight}
           />
@@ -156,7 +159,31 @@ export const typed = () => {
     'Props'
   )
 
-  return <Example type={type} />
+  return <TypedExample type={type} />
+}
+
+function TypedExample({
+  type,
+}: {
+  type:
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'tel'
+    | 'time'
+    | 'text'
+    | 'week'
+}) {
+  const [value, setValue] = useState('')
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value)
+  }, [])
+
+  return <TextInput onChange={handleChange} type={type} value={value} />
 }
 
 export const tones = () => {
@@ -210,26 +237,6 @@ function ClearableButtonExample() {
   )
 }
 
-function Example({
-  type,
-}: {
-  type:
-    | 'date'
-    | 'datetime-local'
-    | 'email'
-    | 'month'
-    | 'number'
-    | 'password'
-    | 'tel'
-    | 'time'
-    | 'text'
-    | 'week'
-}) {
-  const [value, setValue] = useState('')
-
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value)
-  }, [])
-
-  return <TextInput onChange={handleChange} type={type} value={value} />
+export const readOnly = () => {
+  return <TextInput id="text-input-example" readOnly />
 }
