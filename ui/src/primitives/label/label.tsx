@@ -11,6 +11,12 @@ interface LabelProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   muted?: boolean
   size?: number | number[]
+  /**
+   * Controls how overflowing text is treated.
+   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
+   * @beta
+   */
+  textOverflow?: 'ellipsis'
   weight?: ThemeFontWeightKey
 }
 
@@ -21,9 +27,31 @@ const Root = styled.div<{
   $size: number[]
 }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 
+const SpanWithTextOverflow = styled.span`
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
 export const Label = forwardRef(
   (props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {
-    const {accent, align, children, muted = false, size = 2, weight, ...restProps} = props
+    const {
+      accent,
+      align,
+      children: childrenProp,
+      muted = false,
+      size = 2,
+      textOverflow,
+      weight,
+      ...restProps
+    } = props
+
+    let children = childrenProp
+
+    if (textOverflow === 'ellipsis') {
+      children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
+    }
 
     return (
       <Root
