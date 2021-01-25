@@ -87,6 +87,7 @@ import {default as MobileDeviceIcon} from './mobileDeviceIcon'
 import {default as MoonIcon} from './moonIcon'
 import {default as OkHandIcon} from './okHandIcon'
 import {default as OlistIcon} from './olistIcon'
+import {default as OverageIcon} from './overageIcon'
 import {default as PackageIcon} from './packageIcon'
 import {default as PauseIcon} from './pauseIcon'
 import {default as PinIcon} from './pinIcon'
@@ -220,6 +221,7 @@ export type IconSymbol =
   | 'moon'
   | 'ok-hand'
   | 'olist'
+  | 'overage'
   | 'package'
   | 'pause'
   | 'pin'
@@ -353,6 +355,7 @@ export {
   MoonIcon,
   OkHandIcon,
   OlistIcon,
+  OverageIcon,
   PackageIcon,
   PauseIcon,
   PinIcon,
@@ -487,6 +490,7 @@ export const icons = {
   moon: MoonIcon,
   'ok-hand': OkHandIcon,
   olist: OlistIcon,
+  overage: OverageIcon,
   package: PackageIcon,
   pause: PauseIcon,
   pin: PinIcon,
