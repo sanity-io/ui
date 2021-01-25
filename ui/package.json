@@ -32,20 +32,19 @@
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.1",
     "react-popper": "^2.2.4",
-    "react-refractor": "^2.1.2"
+    "react-refractor": "^2.1.4"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.1.14",
+    "@storybook/addon-actions": "^6.1.15",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-knobs": "^6.1.14",
-    "@storybook/addon-links": "^6.1.14",
-    "@storybook/react": "^6.1.14",
+    "@storybook/addon-knobs": "^6.1.15",
+    "@storybook/addon-links": "^6.1.15",
+    "@storybook/react": "^6.1.15",
     "@types/refractor": "^3.0.0",
     "@types/resize-observer-browser": "^0.1.5",
     "@types/styled-components": "^5.1.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-refractor": "^2.1.2",
     "styled-components": "^5.2.1"
   },
   "peerDependencies": {
