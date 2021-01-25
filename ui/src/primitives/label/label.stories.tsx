@@ -1,5 +1,5 @@
 import {Card, Container, Label} from '@sanity/ui'
-import {select, withKnobs} from '@storybook/addon-knobs'
+import {select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {withCentered} from '~/storybook/decorators'
 
@@ -16,6 +16,11 @@ export const plain = () => {
     'Props'
   )
 
+  const textChild = text('Text', 'Hello, world', 'Props')
+
+  const textOverflow =
+    select('Text overflow', {None: '', Ellipsis: 'ellipsis'}, '', 'Props') || undefined
+
   const weight = select(
     'Weight',
     {
@@ -30,15 +35,9 @@ export const plain = () => {
 
   return (
     <Container width={0}>
-      <Card>
-        <Label size={size} weight={weight}>
-          Hello, world
-        </Label>
-        <Label size={size} weight={weight}>
-          Hello, world
-        </Label>
-        <Label size={size} weight={weight}>
-          Hello, world
+      <Card padding={4}>
+        <Label size={size} textOverflow={textOverflow} weight={weight}>
+          {textChild}
         </Label>
       </Card>
     </Container>

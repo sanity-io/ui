@@ -1,7 +1,7 @@
-import {Icon} from '@sanity/icons'
-import {Card, Heading, Inline} from '@sanity/ui'
-import {boolean, select, withKnobs} from '@storybook/addon-knobs'
+import {Card, Heading} from '@sanity/ui'
+import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
+import {Container} from '../container'
 import {withCentered} from '~/storybook/decorators'
 
 export default {
@@ -16,28 +16,37 @@ export const plain = () => {
 
   const size = select('Size', {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4}, 2, 'Props')
 
-  const weight = select(
-    'Weight',
-    {
-      'Regular (default)': undefined,
-      Medium: 'medium',
-      Semibold: 'semibold',
-      Bold: 'bold',
-    },
-    undefined,
-    'Props'
-  )
+  const textChild = text('Text', 'Hello, world', 'Props')
 
-  const textProps = {accent, muted, size, weight}
+  const textOverflow =
+    select('Text overflow', {None: '', Ellipsis: 'ellipsis'}, '', 'Props') || undefined
+
+  const weight =
+    select(
+      'Weight',
+      {
+        'Regular (default)': '',
+        Medium: 'medium',
+        Semibold: 'semibold',
+        Bold: 'bold',
+      },
+      '',
+      'Props'
+    ) || undefined
 
   return (
-    <Card>
-      <Inline space={3}>
-        <Heading {...textProps}>
-          <Icon symbol="ok-hand" />
+    <Container width={0}>
+      <Card padding={4}>
+        <Heading
+          accent={accent}
+          muted={muted}
+          size={size}
+          textOverflow={textOverflow}
+          weight={weight}
+        >
+          {textChild}
         </Heading>
-        <Heading {...textProps}>Hello, world</Heading>
-      </Inline>
-    </Card>
+      </Card>
+    </Container>
   )
 }
