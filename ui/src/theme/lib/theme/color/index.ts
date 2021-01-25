@@ -14,6 +14,7 @@ import {
   ThemeColorMuted,
 } from './types'
 
+export * from './syntax'
 export * from './types'
 
 type PartialThemeColorBuilderOpts = Partial<ThemeColorBuilderOpts>
