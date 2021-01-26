@@ -22,6 +22,7 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   footer?: React.ReactNode
   header?: React.ReactNode
   id: string
+  onClickOutside?: () => void
   onClose?: () => void
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
@@ -33,6 +34,7 @@ interface DialogCardProps extends ResponsiveWidthProps {
   footer: React.ReactNode
   header: React.ReactNode
   id: string
+  onClickOutside?: () => void
   onClose?: () => void
   radius: number | number[]
   scheme?: ThemeColorSchemeKey
@@ -96,7 +98,19 @@ const DialogFooter = styled(Box)`
 `
 
 const DialogCard = forwardRef((props: DialogCardProps, ref) => {
-  const {children, contentRef, footer, header, id, onClose, radius, scheme, shadow, width} = props
+  const {
+    children,
+    contentRef,
+    footer,
+    header,
+    id,
+    onClickOutside,
+    onClose,
+    radius,
+    scheme,
+    shadow,
+    width,
+  } = props
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const localContentRef = useRef<HTMLDivElement | null>(null)
   const layer = useLayer()
@@ -129,8 +143,11 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
   useClickOutside(
     useCallback(() => {
       if (!isTopLayer) return
-      if (onClose) onClose()
-    }, [isTopLayer, onClose]),
+
+      if (onClickOutside) {
+        onClickOutside()
+      }
+    }, [isTopLayer, onClickOutside]),
     [rootElement]
   )
 
@@ -201,6 +218,7 @@ export const Dialog = forwardRef(
       footer,
       header,
       id,
+      onClickOutside,
       onClose,
       padding = 4,
       position = 'fixed',
@@ -255,6 +273,7 @@ export const Dialog = forwardRef(
             footer={footer}
             header={header}
             id={id}
+            onClickOutside={onClickOutside}
             onClose={onClose}
             radius={cardRadius}
             ref={cardRef}

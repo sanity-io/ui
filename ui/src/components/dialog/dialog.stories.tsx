@@ -27,6 +27,8 @@ export default {
 export const props = () => {
   const header = text('Header', 'Props example', 'Props')
 
+  const onClickOutside = boolean('Close when click outside', false, 'Props')
+
   const width = select(
     'Width',
     {
@@ -44,7 +46,7 @@ export const props = () => {
 
   return (
     <LayerProvider>
-      <PropsExample header={header} width={width} />
+      <PropsExample header={header} onClickOutside={onClickOutside} width={width} />
     </LayerProvider>
   )
 }
@@ -120,7 +122,10 @@ export const position = () => {
   )
 }
 
-function PropsExample(props: Omit<DialogProps, 'id' | 'onClose'>) {
+function PropsExample(
+  props: Omit<DialogProps, 'id' | 'onClickOutside' | 'onClose'> & {onClickOutside: boolean}
+) {
+  const {onClickOutside, ...restProps} = props
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -139,7 +144,12 @@ function PropsExample(props: Omit<DialogProps, 'id' | 'onClose'>) {
       />
 
       {open && (
-        <Dialog {...props} id="dialog" onClose={handleClose}>
+        <Dialog
+          {...restProps}
+          id="dialog"
+          onClickOutside={onClickOutside ? handleClose : undefined}
+          onClose={handleClose}
+        >
           <Box padding={4}>
             <Stack space={4}>
               <Text>
