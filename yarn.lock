@@ -2808,12 +2808,12 @@
     react-props-stream "^1.0.0"
     rxjs "^6.5.3"
 
-"@sanity/default-login@2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.0.9.tgz#7895f92692f36a886d4cc09f406486c478c7cd22"
-  integrity sha512-XbrKuGKlGFF7urCk0GxxtKcTvMaDKzVTxyWQ0u5D1hGpHx/evvcO8ITA4imqLSAQLnAkxKwXcwhJQAQrSVvXew==
+"@sanity/default-login@2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.2.6.tgz#5f9710565bbd0a575ff7b58ff3fb3ed00f6ab7b3"
+  integrity sha512-yBrooBby/cxZ3+bZh+5GcswV+L9bbgwI/mVNIlXukEuKS62Ou6z/gjJfER9NI1BiStbF7JCxu0TSR4IAYJcZiw==
   dependencies:
-    "@sanity/generate-help-url" "2.0.9"
+    "@sanity/generate-help-url" "2.2.6"
     prop-types "^15.6.0"
     rxjs "^6.5.3"
 
@@ -2958,6 +2958,11 @@
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-2.0.9.tgz#ba9268dd6c2571bf4b95a83a13462fdeff2ba883"
   integrity sha512-Ibr4fEL3McAtvScwVPi5IpnLT+fXfY5NMxjmX0IyLHTod1iwOVpVlPBjWdLiiWiaMqX7Kf9CtoNcjFhtsVj2UA==
+
+"@sanity/generate-help-url@2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-2.2.6.tgz#1673872e2747d1e8aa9406486a80ba6d3e36869d"
+  integrity sha512-DXRKXnOCoqObNEEuJJlJ78YOehgoBk92xm1ol4PfPuD4xJv5Z/cMwDecaQ2K05nx8Ecr4KJR/26XMF/FQMg9Tw==
 
 "@sanity/generate-help-url@^0.140.0":
   version "0.140.0"
