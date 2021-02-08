@@ -1,5 +1,15 @@
 {
-  "packages": ["color", "docs", "examples/*", "icons", "logos", "studio", "ui", "ui-storybook"],
+  "packages": [
+    "color",
+    "docs",
+    "examples/*",
+    "icons",
+    "logos",
+    "perf/app",
+    "studio",
+    "ui",
+    "ui-storybook"
+  ],
   "version": "independent",
   "useWorkspaces": true,
   "npmClient": "yarn"

@@ -1,0 +1,36 @@
+name: Test performance
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ '14' ]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build packages
+        run: yarn build:packages
+
+      - name: Run tests
+        run: yarn test:perf
+
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: perf
+          path: ${{ github.workspace }}/perf/artifacts

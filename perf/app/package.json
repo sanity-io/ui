@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "sanity-design-perf-app",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config webpack.build.js --no-stats && rimraf dist/ts",
+    "dev": "webpack serve --config webpack.dev.js --env development --port 9001",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "prebuild": "rimraf dist",
+    "start": "http-server -a localhost -c-0 -p 9001 -s -P http://localhost:9001/index.html? dist",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sanity/color": "^2.0.12",
+    "@sanity/icons": "^1.0.2",
+    "@sanity/logos": "^1.0.1",
+    "@sanity/ui": "^0.33.0",
+    "qs": "^6.9.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@hot-loader/react-dom": "^17.0.1",
+    "@types/qs": "^6.9.5",
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^4.5.1",
+    "http-server": "^0.12.3",
+    "react-hot-loader": "^4.13.0",
+    "ts-loader": "^8.0.15",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

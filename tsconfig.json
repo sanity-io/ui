@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig.dist",
+  "include": ["./perf/run.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
