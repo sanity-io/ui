@@ -1,4 +1,4 @@
-name: Test (browser)
+name: Browser test
 
 on:
   push:

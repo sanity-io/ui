@@ -1,4 +1,4 @@
-import {Card, studioTheme, Theme, ThemeProvider} from '@sanity/ui'
+import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import React from 'react'
 import {hot} from 'react-hot-loader/root'
 import {createGlobalStyle, css} from 'styled-components'
@@ -29,9 +29,7 @@ function RootComponent() {
   return (
     <ThemeProvider theme={studioTheme} scheme={themeMode}>
       <GlobalStyle />
-      <Card>
-        <App />
-      </Card>
+      <App />
     </ThemeProvider>
   )
 }

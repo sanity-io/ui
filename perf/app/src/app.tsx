@@ -1,6 +1,9 @@
-import {Card, studioTheme, Text, TextInput, Theme, ThemeProvider} from '@sanity/ui'
+import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import React, {useEffect, useState} from 'react'
 import {createGlobalStyle, css} from 'styled-components'
+import {ButtonVariationsScreen} from './screens/buttonVariations'
+import {TextAreaScreen} from './screens/textArea'
+import {TextInputScreen} from './screens/textInput'
 
 export const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
   const {base} = theme.sanity.color
@@ -39,10 +42,10 @@ export function App() {
   return (
     <ThemeProvider theme={studioTheme} tone="transparent">
       <GlobalStyle />
-      <Card padding={4}>
-        {path === '/' && <Text data-test="text">App</Text>}
-        {path === '/text-input' && <TextInput data-test="text-input" />}
-      </Card>
+
+      {path === '/button-variations' && <ButtonVariationsScreen />}
+      {path === '/text-input' && <TextInputScreen />}
+      {path === '/text-area' && <TextAreaScreen />}
     </ThemeProvider>
   )
 }
