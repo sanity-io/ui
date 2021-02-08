@@ -168,7 +168,9 @@ export const Popover = forwardRef(
         name: 'flip',
         options: {
           allowedAutoPlacements,
+          boundary: boundaryElement || undefined,
           fallbackPlacements,
+          padding: 8,
         },
       },
     ].filter(Boolean) as Modifier<any, any>[]
