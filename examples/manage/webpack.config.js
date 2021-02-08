@@ -38,15 +38,12 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '@popperjs/core': require.resolve('@popperjs/core'),
       '@sanity/color': path.join(ROOT_PATH, 'color/src'),
       '@sanity/icons': path.join(ROOT_PATH, 'icons/src'),
       '@sanity/logos': path.join(ROOT_PATH, 'logos/src'),
       '@sanity/ui': path.join(ROOT_PATH, 'ui/src'),
       react: require.resolve('react'),
       'react-dom': require.resolve('@hot-loader/react-dom'),
-      'react-popper': require.resolve('react-popper'),
-      'react-refractor': require.resolve('react-refractor'),
       'styled-components': require.resolve('styled-components'),
     },
   },

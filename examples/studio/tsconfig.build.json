@@ -1,5 +1,5 @@
 {
-  "include": ["./*.d.ts"],
+  "include": ["typings/*.d.ts"],
   "files": ["./main.tsx"],
   "compilerOptions": {
     "outDir": "./dist/",
