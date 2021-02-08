@@ -32,6 +32,18 @@ yarn type-check
 yarn test
 ```
 
+## Browser testing
+
+```sh
+yarn test:browser
+```
+
+## Performance testing
+
+```sh
+yarn test:perf
+```
+
 ## Git workflow
 
 Create a branch for your task, and send a pull request (PR) to `next` when you want your work reviewed and merged/rebased.
