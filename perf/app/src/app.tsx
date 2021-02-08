@@ -1,4 +1,4 @@
-import {Card, studioTheme, Text, Theme, ThemeProvider} from '@sanity/ui'
+import {Card, studioTheme, Text, TextInput, Theme, ThemeProvider} from '@sanity/ui'
 import React, {useEffect, useState} from 'react'
 import {createGlobalStyle, css} from 'styled-components'
 
@@ -22,27 +22,26 @@ export const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
 })
 
 export function App() {
-  const [render, setRender] = useState(false)
+  const [path, setPath] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname
+    }
 
-  useEffect(() => setRender(true), [])
+    return '/'
+  })
 
   useEffect(() => {
-    if (render) {
-      console.timeEnd('app')
-    } else {
-      console.time('app')
-    }
-  }, [render])
-
-  if (!render) {
-    return null
-  }
+    window.addEventListener('popstate', () => {
+      setPath(window.location.pathname)
+    })
+  }, [])
 
   return (
     <ThemeProvider theme={studioTheme} tone="transparent">
       <GlobalStyle />
       <Card padding={4}>
-        <Text data-test="text">App</Text>
+        {path === '/' && <Text data-test="text">App</Text>}
+        {path === '/text-input' && <TextInput data-test="text-input" />}
       </Card>
     </ThemeProvider>
   )
