@@ -14,7 +14,8 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/production-preview",
-    "@sanity/code-input"
+    "@sanity/code-input",
+    "perf-dashboard"
   ],
   "env": {
     "development": {

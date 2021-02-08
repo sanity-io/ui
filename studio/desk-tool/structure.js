@@ -2,8 +2,23 @@ import S from '@sanity/desk-tool/structure-builder'
 import {CogIcon} from '@sanity/icons'
 import React from 'react'
 
-const STRUCTURE_CUSTOM_TYPES = ['settings']
-const STRUCTURE_LIST_ITEM_DIVIDER = S.divider()
+const STRUCTURE_CUSTOM_TYPES = ['machine', 'perf.testRun', 'settings']
+// const STRUCTURE_LIST_ITEM_DIVIDER =
+
+const perfListItem = S.listItem()
+  // .id('performance')
+  .title('Performance')
+  .child(
+    S.list()
+      // .id('performance')
+      .title('Performance')
+      .items([
+        S.listItem()
+          .title('Performance test run')
+          .child(S.documentTypeList('perf.testRun').title('Performance test run')),
+        S.listItem().title('Machine').child(S.documentTypeList('machine').title('Machine')),
+      ])
+  )
 
 // The `Settings` root list item
 const settingsListItem = S.listItem()
@@ -19,4 +34,4 @@ const defaultListItems = S.documentTypeListItems().filter(
 export default () =>
   S.list()
     .title('Content')
-    .items([settingsListItem, STRUCTURE_LIST_ITEM_DIVIDER, ...defaultListItems])
+    .items([settingsListItem, S.divider(), ...defaultListItems, S.divider(), perfListItem])
