@@ -1,8 +1,7 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {ThemeColorToneKey} from '../../theme'
 
-const Root = styled.div<{tone: ThemeColorToneKey}>`
+const Root = styled.div`
   position: absolute;
   pointer-events: none;
   width: 27px;
@@ -56,13 +55,7 @@ const ShapePath = styled.path`
 `
 
 export const PopoverArrow = forwardRef(
-  (
-    props: React.HTMLProps<SVGGElement> & {
-      as?: React.ElementType | keyof JSX.IntrinsicElements
-      tone?: string
-    },
-    ref
-  ) => {
+  (props: Omit<React.HTMLProps<HTMLDivElement>, 'as'>, ref: React.Ref<HTMLDivElement>) => {
     return (
       <Root data-ui="PopoverArrow" {...props} ref={ref}>
         <svg

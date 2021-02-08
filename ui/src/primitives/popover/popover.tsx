@@ -226,7 +226,7 @@ export const Popover = forwardRef(
           tone={tone}
           width={width as any}
         >
-          {arrow && <PopoverArrow ref={setArrowElement} tone="default" style={styles.arrow} />}
+          {arrow && <PopoverArrow ref={setArrowElement} style={styles.arrow} />}
           {content}
         </PopoverCard>
       </Root>
