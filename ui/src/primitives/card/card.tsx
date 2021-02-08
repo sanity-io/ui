@@ -15,13 +15,15 @@ import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} fro
 import {cardStyle} from './styles'
 import {CardStyleProps} from './types'
 
+export type CardTone = ThemeColorToneKey | 'inherit'
+
 export interface CardProps
   extends BoxProps,
     ResponsiveBorderProps,
     ResponsiveRadiusProps,
     ResponsiveShadowProps {
   scheme?: ThemeColorSchemeKey
-  tone?: ThemeColorToneKey | 'inherit'
+  tone?: CardTone
 }
 
 const Root = styled(Box)<
