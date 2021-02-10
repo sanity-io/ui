@@ -1,4 +1,5 @@
 import {createContext} from 'react'
+import {globalScope} from '../../lib/globalScope'
 
 export interface MenuContextValue {
   activeIndex: number
@@ -8,4 +9,8 @@ export interface MenuContextValue {
   onMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-export const MenuContext = createContext<MenuContextValue | null>(null)
+const key = Symbol.for('@sanity/ui/context/menu')
+
+globalScope[key] = globalScope[key] || createContext<MenuContextValue | null>(null)
+
+export const MenuContext: React.Context<MenuContextValue | null> = globalScope[key]
