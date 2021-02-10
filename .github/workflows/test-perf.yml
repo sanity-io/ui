@@ -26,7 +26,7 @@ jobs:
         run: yarn build:packages
 
       - name: Run tests
-        run: yarn test:perf
+        run: NODE_ENV=production yarn test:perf
         env:
           PERF_SANITY_WRITE_TOKEN: ${{ secrets.PERF_SANITY_WRITE_TOKEN }}
 
