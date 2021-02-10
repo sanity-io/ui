@@ -4,6 +4,7 @@ export const perfTestRun = {
   title: 'Performance test run',
   fields: [
     {type: 'string', name: 'uuid', title: 'UUID'},
+    {type: 'string', name: 'sha', title: 'Commit SHA'},
     {
       type: 'array',
       name: 'results',
