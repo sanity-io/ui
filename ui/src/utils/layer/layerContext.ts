@@ -1,4 +1,5 @@
 import {createContext} from 'react'
+import {globalScope} from '../../lib/globalScope'
 
 export interface LayerContextValue {
   isTopLayer: boolean
@@ -7,4 +8,8 @@ export interface LayerContextValue {
   zIndex: number
 }
 
-export const LayerContext = createContext<LayerContextValue | null>(null)
+const key = Symbol.for('@sanity/ui/context/layer')
+
+globalScope[key] = globalScope[key] || createContext<LayerContextValue | null>(null)
+
+export const LayerContext: React.Context<LayerContextValue | null> = globalScope[key]

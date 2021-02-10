@@ -1,23 +1,36 @@
 import {createContext} from 'react'
+import {globalScope} from '../../lib/globalScope'
 
-export interface PortalContextInterface {
+export interface PortalContextValue {
   boundaryElement: HTMLElement | null
   element: HTMLElement | null
 }
 
-let globalElement: HTMLDivElement | null = null
+const key = Symbol.for('@sanity/ui/context/portal')
+const elementKey = Symbol.for('@sanity/ui/context/portal/element')
+
+globalScope[elementKey] = null
 
 export const defaultContextValue = {
   boundaryElement: null,
   get element() {
-    if (globalElement) return globalElement
+    if (typeof window === 'undefined') {
+      return null
+    }
 
-    globalElement = document.createElement('div')
-    globalElement.setAttribute('data-portal', '')
-    document.body.appendChild(globalElement)
+    if (globalScope[elementKey]) {
+      return globalScope[elementKey]
+    }
 
-    return globalElement
+    globalScope[elementKey] = document.createElement('div')
+    globalScope[elementKey].setAttribute('data-portal', '')
+
+    document.body.appendChild(globalScope[elementKey])
+
+    return globalScope[elementKey]
   },
 }
 
-export const PortalContext = createContext<PortalContextInterface>(defaultContextValue)
+globalScope[key] = globalScope[key] || createContext<PortalContextValue>(defaultContextValue)
+
+export const PortalContext: React.Context<PortalContextValue> = globalScope[key]
