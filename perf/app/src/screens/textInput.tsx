@@ -1,4 +1,4 @@
-import {TextInput} from '@sanity/ui'
+import {Card, TextInput} from '@sanity/ui'
 import React, {useState} from 'react'
 
 export function TextInputScreen() {
@@ -8,5 +8,9 @@ export function TextInputScreen() {
     setValue(event.currentTarget.value)
   }
 
-  return <TextInput data-test="text-input" onChange={handleChange} value={value} />
+  return (
+    <Card padding={4}>
+      <TextInput data-test="text-input" onChange={handleChange} value={value} />
+    </Card>
+  )
 }
