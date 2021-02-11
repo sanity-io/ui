@@ -3123,10 +3123,10 @@
     rxjs "^6.5.3"
     shallow-equals "^1.0.0"
 
-"@sanity/production-preview@2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@sanity/production-preview/-/production-preview-2.0.5.tgz#fe3a7e943a1e7d330867e13d5a83471ece86c9c5"
-  integrity sha512-PNWt3kb/BptGSXgNQtIWdIL2xb7JJl+ObPPxiL350GAn8soNa/AGZS0tZxqbWoPc9IK4Bfl8n57MCH19KURRww==
+"@sanity/production-preview@2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@sanity/production-preview/-/production-preview-2.2.6.tgz#3c92cf26d4b7c66ebd69cd80c94be09519aa9231"
+  integrity sha512-qnoyLqi1GoDoGxN4lWaVNXzNezxHC5+EGIY8k2pMZKwLwTw8stmfthCThBHuCKaEvaJBPWQX1wiIlrDFAhtv5A==
 
 "@sanity/react-hooks@2.0.9":
   version "2.0.9"
