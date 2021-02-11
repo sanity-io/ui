@@ -2,7 +2,7 @@ import {Container, Text} from '@sanity/ui'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import {Card} from '../card'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/Text',

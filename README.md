@@ -1,13 +1,24 @@
 # Sanity Design
 
-Sanity Design consists of:
+This repository contains the various projects that make up the Sanity Design System.
+
+## Contents
+
+### Core libraries
 
 - [`@sanity/color`](color)
 - [`@sanity/icons`](icons)
 - [`@sanity/logos`](logos)
 - [`@sanity/ui`](ui)
+
+### Documentation website
+
 - [`sanity-design-docs`](docs)
-- [`sanity-ui-storybook`](ui-storybook)
+- [`sanity-design-studio`](studio)
+
+### Test tools
+
+- [`sanity-design-perf-app`](perf/app)
 
 ## Documentation
 

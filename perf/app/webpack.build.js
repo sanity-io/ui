@@ -3,6 +3,7 @@
 const path = require('path')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 const ROOT_PATH = path.join(__dirname, '..', '..')
 
@@ -37,7 +38,7 @@ module.exports = {
       '@sanity/logos': path.join(ROOT_PATH, 'logos/src'),
       '@sanity/ui': path.join(ROOT_PATH, 'ui/src'),
       react: require.resolve('react'),
-      'react-dom': require.resolve('@hot-loader/react-dom'),
+      'react-dom': require.resolve('react-dom'),
       'styled-components': require.resolve('styled-components'),
     },
   },
@@ -49,5 +50,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({template: path.join(__dirname, 'src/template.html')}),
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
+    }),
   ],
 }

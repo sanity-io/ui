@@ -1,5 +1,11 @@
 {
   "extends": "../tsconfig",
-  "include": ["scripts", "src", "test", "typings"],
-  "files": ["src/index.ts"]
+  "include": ["./scripts", "./src", "./storybook", "./test", "./typings/*.d.ts"],
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "jsx": "react",
+    "paths": {
+      "$storybook/*": ["./ui/storybook/*"]
+    }
+  }
 }

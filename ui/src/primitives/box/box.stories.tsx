@@ -2,7 +2,7 @@ import {Box, Card, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/Box',
@@ -45,9 +45,9 @@ export const responsive = () => {
   return (
     <Box
       id="responsive-box"
-      display={['none', 'block', 'none', 'block', 'none', 'block']}
-      flex={[1, 2, 3, 4, 5, 6]}
-      sizing={['content', 'border', 'content', 'border', 'content', 'border']}
+      display={['none', 'block', 'none', 'block', 'none', 'block', 'none']}
+      flex={[1, 2, 3, 4, 5, 6, 7]}
+      sizing={['content', 'border', 'content', 'border', 'content', 'border', 'content']}
     >
       Content!
     </Box>

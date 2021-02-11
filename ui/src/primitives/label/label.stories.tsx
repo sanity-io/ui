@@ -1,7 +1,7 @@
 import {Card, Container, Label} from '@sanity/ui'
 import {select, text, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/Label',

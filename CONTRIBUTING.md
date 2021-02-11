@@ -6,21 +6,25 @@
 # Clone and install dependencies
 git clone git@github.com:sanity-io/design.git
 cd design
-yarn
+yarn install
+yarn build:packages
+
+# Build core packages
+yarn build:packages
 
 # Run the docs dev servers (Studio and Next.js apps)
 yarn dev:docs
 
-# Run the Studio example
+# Run the example Studio dev server
 yarn dev:example-studio
 
-# Run the Manage example
-yarn dev:manage-studio
+# Run the example Manage dev server
+yarn dev:example-manage
 
-# Run the Storybook dev server
-yarn dev:storybook
+# Run `@sanity/ui` dev server (Storybook)
+yarn dev:ui
 
-# Run all servers
+# Run default dev servers (docs, Storybook and core package watching)
 yarn dev
 ```
 

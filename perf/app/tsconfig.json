@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig",
   "include": ["./src", "./typings/*.d.ts"],
-  "files": ["./src/main.hot.tsx"],
   "compilerOptions": {
     "outDir": "./dist/ts/",
     "module": "es6",
@@ -9,5 +8,6 @@
     "jsx": "react",
     "allowJs": true,
     "sourceMap": true
-  }
+  },
+  "references": [{"path": "../../ui"}]
 }

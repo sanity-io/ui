@@ -2,7 +2,7 @@ import {icons, IconSymbol} from '@sanity/icons'
 import {Button, Card, Container, Stack, Text, TextInput} from '@sanity/ui'
 import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/TextInput',

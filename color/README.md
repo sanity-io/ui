@@ -30,14 +30,6 @@ console.log(COLOR_TINTS)
 // ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"]
 ```
 
-## Development
-
-```bash
-yarn dev
-```
-
-Open http://localhost:1234 to see color palette with live reloading. Click a color to copy its hex value. Releases will be published on Vercel.
-
 ## License
 
 MIT-licensed. See LICENSE.
