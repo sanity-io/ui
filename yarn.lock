@@ -3305,10 +3305,10 @@
     es6-error "^4.0.2"
     type-of-is "^3.5.1"
 
-"@sanity/vision@2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.0.9.tgz#4abd428043b8cc0b5ede8c85b9487a5853bbeb69"
-  integrity sha512-+ar2AocFKYqYziA2fImGnt40UUgkeXIW41yrPtz9rlrl6HpxUDmudXeXb+90xB0nlZIRK3fHJ/aC2gpKt3b8aA==
+"@sanity/vision@2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.2.6.tgz#b89ff4e2338c715846184f60cef812f6f935b71e"
+  integrity sha512-xZlwc8DsFg6WqOuHoaE6to1R6TBin4lTWJgtFggiQXN5Ne9ULdlstf5FfemK9hj94BRBhMbSsD6DlXF7kAJ9Vg==
   dependencies:
     classnames "^2.2.5"
     codemirror "^5.47.0"
@@ -7042,12 +7042,7 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror@^5.47.0:
-  version "5.58.3"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.58.3.tgz#3f0689854ecfbed5d4479a98b96148b2c3b79796"
-  integrity sha512-KBhB+juiyOOgn0AqtRmWyAT3yoElkuvWTI6hsHa9E6GQrl6bk/fdAYcvuqW1/upO9T9rtEtapWdw4XYcNiVDEA==
-
-codemirror@^5.59.2:
+codemirror@^5.47.0, codemirror@^5.59.2:
   version "5.59.2"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.59.2.tgz#ee674d3a4a8d241af38d52afc482625ba7393922"
   integrity sha512-/D5PcsKyzthtSy2NNKCyJi3b+htRkoKv3idswR/tR6UAvMNKA7SrmyZy6fOONJxSRs1JlUWEDAbxqfdArbK8iA==
