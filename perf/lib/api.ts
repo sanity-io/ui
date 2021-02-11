@@ -1,4 +1,4 @@
-import {Page} from 'puppeteer/lib/cjs/puppeteer/common/Page'
+import {Page} from 'puppeteer'
 
 export type MeasureFn = (name: string, fn: () => Promise<void>) => Promise<number>
 

@@ -28,7 +28,7 @@
     "html-webpack-plugin": "^4.5.1",
     "http-server": "^0.12.3",
     "react-hot-loader": "^4.13.0",
-    "ts-loader": "^8.0.15",
+    "ts-loader": "^8.0.17",
     "webpack": "^4.44.2",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
