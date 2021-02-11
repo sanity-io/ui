@@ -24,8 +24,9 @@
     "@sanity/default-login": "^2.2.6",
     "@sanity/desk-tool": "^2.3.6",
     "@sanity/production-preview": "^2.2.6",
+    "@sanity/ui": "^0.33.3",
     "@sanity/vision": "^2.2.6",
-    "apexcharts": "^3.24.0",
+    "apexcharts": "^3.25.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }

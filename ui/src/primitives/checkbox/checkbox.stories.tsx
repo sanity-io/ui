@@ -3,7 +3,7 @@ import {action} from '@storybook/addon-actions'
 import {boolean, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
 import {Card} from '../card'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/Checkbox',

@@ -1,8 +1,8 @@
 {
   "include": ["typings/*.d.ts"],
-  "files": ["./main.tsx"],
+  "files": ["./src/main.tsx"],
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./dist/ts/",
     "module": "es6",
     "target": "es5",
     "declaration": true,
@@ -34,7 +34,7 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@sanity/*": ["./@sanity/*"]
+      "$sanity/*": ["./src/$sanity/*"]
     }
   }
 }

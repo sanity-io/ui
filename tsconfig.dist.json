@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
 
     // Strict type-checking
@@ -23,9 +24,6 @@
     // Module resolution
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-
-    // JSX
-    "jsx": "react"
+    "esModuleInterop": true
   }
 }

@@ -9,18 +9,21 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "run-p build-*",
-    "build-cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
-    "build-es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
-    "clean": "rimraf dist",
+    "build": "run-p build:*",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
+    "build:es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
+    "clean": "rimraf dist storybook/public",
+    "dev": "start-storybook --ci --quiet --config-dir storybook --port 9009",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "npm run clean",
+    "predev": "rimraf node_modules/.cache",
     "prepublishOnly": "npm run build",
+    "storybook:build": "build-storybook --quiet --config-dir storybook --output-dir storybook/public",
     "test": "jest",
     "type-check": "tsc --noEmit",
-    "watch": "run-p watch-cjs watch-es",
-    "watch-cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir src --target ES5",
-    "watch-es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
+    "watch": "run-p watch:*",
+    "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir src --target ES5",
+    "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.2.0",
@@ -35,10 +38,11 @@
     "react-refractor": "^2.1.4"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^6.1.17",
     "@storybook/addon-actions": "^6.1.17",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^6.1.17",
-    "@storybook/addon-links": "^6.1.17",
+    "@storybook/addon-links": "^6.1.18",
     "@storybook/react": "^6.1.17",
     "@types/refractor": "^3.0.0",
     "@types/resize-observer-browser": "^0.1.5",

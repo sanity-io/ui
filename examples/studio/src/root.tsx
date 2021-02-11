@@ -1,13 +1,13 @@
-import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} from '@sanity/base'
-import dashboardTool from '@sanity/dashboard/plugin'
-import deskTool from '@sanity/desk-tool/plugin'
 import {ChartUpwardIcon} from '@sanity/icons'
-import {Layout} from '@sanity/layout'
 import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
-import visionTool from '@sanity/vision/plugin'
 import React, {createElement} from 'react'
 import {hot} from 'react-hot-loader/root'
 import {createGlobalStyle, css} from 'styled-components'
+import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} from '$sanity/base'
+import dashboardTool from '$sanity/dashboard/plugin'
+import deskTool from '$sanity/desk-tool/plugin'
+import {Layout} from '$sanity/layout'
+import visionTool from '$sanity/vision/plugin'
 
 const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
   const color = theme.sanity.color.base

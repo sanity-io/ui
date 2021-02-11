@@ -2,10 +2,11 @@
 
 const path = require('path')
 
-const ROOT_PATH = path.resolve(__dirname, '..')
+const ROOT_PATH = path.resolve(__dirname, '..', '..')
+const SRC_PATH = path.resolve(__dirname, '../src')
 
 module.exports = {
-  stories: [path.resolve(ROOT_PATH, '**/*.stories.@(ts|tsx)')],
+  stories: [path.resolve(SRC_PATH, '**/*.stories.@(ts|tsx)')],
   addons: [
     '@storybook/addon-a11y',
     '@storybook/addon-actions/register',
@@ -26,7 +27,7 @@ module.exports = {
   webpackFinal: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '~/storybook': path.resolve(ROOT_PATH, 'ui-storybook'),
+      $storybook: __dirname,
       '@sanity/color': path.resolve(ROOT_PATH, 'color/src'),
       '@sanity/icons': path.resolve(ROOT_PATH, 'icons/src'),
       '@sanity/logos': path.resolve(ROOT_PATH, 'logos/src'),

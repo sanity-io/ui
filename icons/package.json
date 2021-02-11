@@ -9,15 +9,18 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "run-p build-*",
-    "build-cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
-    "build-es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
+    "build": "run-p build:*",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir ./src --target ES5",
+    "build:es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir ./src --target ES6",
     "clean": "rimraf dist src/icons",
     "generate": "ts-node --files scripts/generate.ts",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "npm run clean && npm run generate",
     "prepublishOnly": "npm run build",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "watch": "run-p watch:*",
+    "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir src --target ES5",
+    "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
   },
   "devDependencies": {
     "@svgr/core": "^5.5.0",

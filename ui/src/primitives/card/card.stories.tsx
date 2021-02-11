@@ -4,7 +4,7 @@ import {boolean, select, withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
 import styled from 'styled-components'
 import {Stack} from '../stack'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/Card',

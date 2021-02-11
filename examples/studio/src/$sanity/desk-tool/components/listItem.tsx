@@ -1,6 +1,6 @@
-import {Preview} from '@sanity/components'
 import {Card} from '@sanity/ui'
 import React from 'react'
+import {Preview} from '$sanity/components'
 
 export function ListItem() {
   return (

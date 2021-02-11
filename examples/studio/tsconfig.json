@@ -1,20 +1,16 @@
 {
   "extends": "../../tsconfig",
-  "include": ["typings/*.d.ts"],
-  "files": ["./main.tsx"],
+  "include": ["./src", "typings/*.d.ts"],
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./dist/ts/",
     "module": "es6",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "sourceMap": true,
     "paths": {
-      "@sanity/color": ["./color/src"],
-      "@sanity/icons": ["./icons/src"],
-      "@sanity/logos": ["./logos/src"],
-      "@sanity/ui": ["./ui/src"],
-      "@sanity/*": ["./examples/studio/@sanity/*"]
+      "$sanity/*": ["./examples/studio/src/$sanity/*"]
     }
-  }
+  },
+  "references": [{"path": "../../icons"}, {"path": "../../logos"}, {"path": "../../ui"}]
 }

@@ -12,9 +12,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/color": "^2.0.12",
-    "@sanity/icons": "^1.0.2",
-    "@sanity/logos": "^1.0.1",
     "@sanity/ui": "^0.33.3",
     "qs": "^6.9.6",
     "react": "^17.0.1",
@@ -25,11 +22,11 @@
     "@hot-loader/react-dom": "^17.0.1",
     "@types/qs": "^6.9.5",
     "clean-webpack-plugin": "^3.0.0",
-    "html-webpack-plugin": "^4.5.1",
+    "html-webpack-plugin": "^5.1.0",
     "http-server": "^0.12.3",
     "react-hot-loader": "^4.13.0",
     "ts-loader": "^8.0.17",
-    "webpack": "^4.44.2",
+    "webpack": "^5.22.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   }

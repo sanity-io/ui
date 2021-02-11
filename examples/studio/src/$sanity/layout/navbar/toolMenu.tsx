@@ -1,8 +1,8 @@
-import {useLocation, useStudioToolPlugins} from '@sanity/base'
 import {Box, Button, Text, Tooltip} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
 import {useResponsiveMenu} from './hooks'
+import {useLocation, useStudioToolPlugins} from '$sanity/base'
 
 const Root = styled.div`
   padding: 1px;

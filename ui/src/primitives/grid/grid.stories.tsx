@@ -1,7 +1,7 @@
 import {Card, Code, Container, Grid} from '@sanity/ui'
 import {withKnobs} from '@storybook/addon-knobs'
 import React from 'react'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/Grid',

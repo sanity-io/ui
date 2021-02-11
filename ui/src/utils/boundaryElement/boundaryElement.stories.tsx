@@ -1,7 +1,7 @@
 import {Box, BoundaryElementProvider, Button, Card, Text, Tooltip} from '@sanity/ui'
 import {withKnobs} from '@storybook/addon-knobs'
 import React, {useState} from 'react'
-import {withCentered} from '~/storybook/decorators'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Utils/BoundaryElement',

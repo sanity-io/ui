@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig",
-  "include": ["./src", "./scripts", "./typings/*.d.ts"],
+  "include": ["./lib", "./tests"],
   "compilerOptions": {
     "outDir": "./dist/"
   }

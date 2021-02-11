@@ -1,4 +1,3 @@
-import {useLocation} from '@sanity/base'
 import {BellIcon, ComposeIcon, LeaveIcon, MenuIcon, PackageIcon, SearchIcon} from '@sanity/icons'
 import {
   Avatar,
@@ -22,6 +21,7 @@ import {DatasetSelect} from './datasetSelect'
 import {NavDrawer} from './navDrawer'
 import {Search} from './search'
 import {ToolMenu} from './toolMenu'
+import {useLocation} from '$sanity/base'
 
 const Root = styled(Card)`
   position: relative;

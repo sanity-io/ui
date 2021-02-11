@@ -1,10 +1,10 @@
-import {useCommands} from '@sanity/base'
 import {Card, LayerProvider, useGlobalKeyDown} from '@sanity/ui'
 import isHotkey from 'is-hotkey'
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import {CommandPaletteDialog} from './commandPaletteDialog'
 import {Navbar} from './navbar'
+import {useCommands} from '$sanity/base'
 
 interface LayoutProps {
   children?: React.ReactNode
