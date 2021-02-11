@@ -2682,10 +2682,10 @@
     make-error "^1.3.0"
     object-assign "^4.1.1"
 
-"@sanity/code-input@2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@sanity/code-input/-/code-input-2.0.9.tgz#078d76effef365bc5701272f44ffaa8dff7197f3"
-  integrity sha512-qAE3hQ4wPTtL6LybJ+bE6YN6zUb+dfkg+7g9fDaODYR2LJeQKNJr7WQfnTadDRwC/sU6JBm6x670EKlR6plCcw==
+"@sanity/code-input@2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@sanity/code-input/-/code-input-2.2.6.tgz#708c11b9bf75dcdf947da97c064fc1f80611e047"
+  integrity sha512-wY40c27A7EHW80IRwa/21071mEonhFcpF+JSjq/QpX6BHZ2dFYgkiyNB5harotzNki9V4buCTaODsOn8RJ9tYQ==
   dependencies:
     lodash "^4.17.15"
     react-ace "^5.0.1"
