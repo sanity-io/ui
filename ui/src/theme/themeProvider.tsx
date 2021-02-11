@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
-import {ThemeContext} from './themeContext'
+import {ThemeContext, ThemeContextValue} from './themeContext'
 import {RootTheme, Theme} from './types'
 
 export function ThemeProvider(props: {
@@ -16,8 +16,18 @@ export function ThemeProvider(props: {
   const color = colorScheme[tone] || colorScheme.default
   const theme: Theme = {sanity: {...restTheme, color}}
 
+  const value: ThemeContextValue = useMemo(
+    () => ({
+      version: 0.0,
+      theme: rootTheme,
+      scheme,
+      tone,
+    }),
+    [rootTheme, scheme, tone]
+  )
+
   return (
-    <ThemeContext.Provider value={{theme: rootTheme, scheme, tone}}>
+    <ThemeContext.Provider value={value}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   )

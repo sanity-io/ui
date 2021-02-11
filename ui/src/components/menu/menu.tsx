@@ -1,11 +1,11 @@
-import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
+import React, {forwardRef, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
 import {ResponsivePaddingProps} from '../../primitives/types'
 import {useLayer} from '../../utils'
 import {getFocusableElements} from './helpers'
-import {MenuContext} from './menuContext'
+import {MenuContext, MenuContextValue} from './menuContext'
 
 interface MenuProps extends ResponsivePaddingProps {
   focusLast?: boolean
@@ -169,16 +169,20 @@ export const Menu = forwardRef(
       )
     )
 
+    const value: MenuContextValue = useMemo(
+      () => ({
+        version: 0.0,
+        activeIndex,
+        mount,
+        onMouseEnter: handleItemMouseEnter,
+        onMouseLeave: handleItemMouseLeave,
+        onItemClick,
+      }),
+      [activeIndex, mount, handleItemMouseEnter, handleItemMouseLeave, onItemClick]
+    )
+
     return (
-      <MenuContext.Provider
-        value={{
-          activeIndex,
-          mount,
-          onMouseEnter: handleItemMouseEnter,
-          onMouseLeave: handleItemMouseLeave,
-          onItemClick,
-        }}
-      >
+      <MenuContext.Provider value={value}>
         <Root
           data-ui="Menu"
           {...restProps}

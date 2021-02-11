@@ -1,10 +1,10 @@
 import {AnimatePresence, motion} from 'framer-motion'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Box} from '../../primitives'
 import {Layer} from '../../utils'
 import {Toast} from './toast'
-import {ToastContext} from './toastContext'
+import {ToastContext, ToastContextValue} from './toastContext'
 import {ToastParams} from './types'
 
 interface ToastState {
@@ -117,8 +117,10 @@ export function ToastProvider({
     []
   )
 
+  const value: ToastContextValue = useMemo(() => ({version: 0.0, push}), [push])
+
   return (
-    <ToastContext.Provider value={{push}}>
+    <ToastContext.Provider value={value}>
       {children}
 
       <Root data-ui="ToastProvider" zOffset={zOffset}>

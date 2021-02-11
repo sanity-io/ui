@@ -1,7 +1,10 @@
 import {createContext} from 'react'
 import {globalScope} from '../../lib/globalScope'
 
-export type BoundaryElementContextValue = HTMLElement
+export type BoundaryElementContextValue = {
+  version: 0.0
+  element: HTMLElement | null
+}
 
 const key = Symbol.for('@sanity/ui/context/boundaryElement')
 

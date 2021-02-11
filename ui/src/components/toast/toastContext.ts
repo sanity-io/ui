@@ -3,6 +3,7 @@ import {globalScope} from '../../lib/globalScope'
 import {ToastParams} from './types'
 
 export interface ToastContextValue {
+  version: 0.0
   push: (params: ToastParams) => string
 }
 

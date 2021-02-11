@@ -3,8 +3,8 @@ import React, {useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
 import {Box, Popover, Text} from '../../primitives'
 import {ThemeProps} from '../../styles'
-import {useMenu} from './hooks'
 import {Menu} from './menu'
+import {useMenu} from './useMenu'
 
 const Root = styled.button((props: ThemeProps) => {
   const {theme} = props
