@@ -11,7 +11,7 @@ import {useForwardedRef} from '../../hooks'
 import {Box, Card, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
 import {ThemeColorToneKey} from '../../theme'
-import {useMenu} from './hooks'
+import {useMenu} from './useMenu'
 
 interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements

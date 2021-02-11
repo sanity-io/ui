@@ -30,7 +30,7 @@ export const Tooltip = forwardRef(
     const boundaryElementContext = useBoundaryElement()
     const {
       allowedAutoPlacements,
-      boundaryElement = boundaryElementContext,
+      boundaryElement = boundaryElementContext?.element,
       children,
       content,
       disabled,

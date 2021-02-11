@@ -2,6 +2,7 @@ import {createContext} from 'react'
 import {globalScope} from '../../lib/globalScope'
 
 export interface PortalContextValue {
+  version: 0.0
   boundaryElement: HTMLElement | null
   element: HTMLElement | null
 }
@@ -11,7 +12,8 @@ const elementKey = Symbol.for('@sanity/ui/context/portal/element')
 
 globalScope[elementKey] = null
 
-export const defaultContextValue = {
+export const defaultContextValue: PortalContextValue = {
+  version: 0.0,
   boundaryElement: null,
   get element() {
     if (typeof window === 'undefined') {

@@ -1,3 +1,3 @@
-export * from './hooks'
 export * from './portal'
-export * from './provider'
+export * from './portalProvider'
+export * from './usePortal'

@@ -4,6 +4,7 @@ import {ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
 import {RootTheme} from './types'
 
 export interface ThemeContextValue {
+  version: 0.0
   scheme: ThemeColorSchemeKey
   theme: RootTheme
   tone: ThemeColorName

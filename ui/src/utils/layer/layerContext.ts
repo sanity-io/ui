@@ -2,6 +2,7 @@ import {createContext} from 'react'
 import {globalScope} from '../../lib/globalScope'
 
 export interface LayerContextValue {
+  version: 0.0
   isTopLayer: boolean
   registerChild: () => () => void
   size: number

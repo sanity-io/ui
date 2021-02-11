@@ -1,5 +1,5 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {LayerContext} from './layerContext'
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react'
+import {LayerContext, LayerContextValue} from './layerContext'
 
 export function LayerProvider({
   children,
@@ -24,11 +24,12 @@ export function LayerProvider({
     if (!parentRegisterChild) return
 
     return parentRegisterChild()
-  })
+  }, [parentRegisterChild])
 
-  return (
-    <LayerContext.Provider value={{isTopLayer: size === 0, registerChild, size, zIndex}}>
-      {children}
-    </LayerContext.Provider>
+  const value: LayerContextValue = useMemo(
+    () => ({version: 0.0, isTopLayer: size === 0, registerChild, size, zIndex}),
+    [size, registerChild, zIndex]
   )
+
+  return <LayerContext.Provider value={value}>{children}</LayerContext.Provider>
 }

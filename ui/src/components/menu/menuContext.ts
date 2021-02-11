@@ -2,6 +2,7 @@ import {createContext} from 'react'
 import {globalScope} from '../../lib/globalScope'
 
 export interface MenuContextValue {
+  version: 0.0
   activeIndex: number
   mount: (element: HTMLElement | null) => () => void
   onItemClick?: () => void

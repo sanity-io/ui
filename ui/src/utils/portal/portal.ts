@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-import {usePortal} from './hooks'
+import {usePortal} from './usePortal'
 
 interface PortalProps {
   children: React.ReactNode
