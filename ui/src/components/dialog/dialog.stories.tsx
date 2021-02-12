@@ -80,13 +80,16 @@ export const layering = () => {
           <DebugLayer />
         </Card>
       </Layer>
-      <LayerProvider zOffset={100}>
-        <Dialog header="Layering example" id="layering-example" onClose={action('onEscape')}>
-          <Box padding={4}>
-            <DebugLayer />
-          </Box>
-        </Dialog>
-      </LayerProvider>
+      <Dialog
+        header="Layering example"
+        id="layering-example"
+        onClose={action('onEscape')}
+        zOffset={100}
+      >
+        <Box padding={4}>
+          <DebugLayer />
+        </Box>
+      </Dialog>
     </LayerProvider>
   )
 }

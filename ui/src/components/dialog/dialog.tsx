@@ -26,6 +26,7 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   onClose?: () => void
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
+  zOffset?: number
 }
 
 interface DialogCardProps extends ResponsiveWidthProps {
