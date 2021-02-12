@@ -23,7 +23,7 @@
     "@hot-loader/react-dom": "^17.0.1",
     "@types/qs": "^6.9.5",
     "clean-webpack-plugin": "^3.0.0",
-    "html-webpack-plugin": "^4.5.1",
+    "html-webpack-plugin": "^5.0.0",
     "react-hot-loader": "^4.13.0",
     "ts-loader": "^8.0.17",
     "webpack": "^4.44.2",
