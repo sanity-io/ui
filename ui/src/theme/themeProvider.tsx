@@ -11,10 +11,14 @@ export function ThemeProvider(props: {
   tone?: ThemeColorName
 }) {
   const {children, scheme = 'light', theme: rootTheme, tone = 'default'} = props
-  const {color: rootColor, ...restTheme} = rootTheme
-  const colorScheme = rootColor[scheme] || rootColor.light
-  const color = colorScheme[tone] || colorScheme.default
-  const theme: Theme = {sanity: {...restTheme, color}}
+
+  const theme: Theme = useMemo(() => {
+    const {color: rootColor, ...restTheme} = rootTheme
+    const colorScheme = rootColor[scheme] || rootColor.light
+    const color = colorScheme[tone] || colorScheme.default
+
+    return {sanity: {...restTheme, color}}
+  }, [rootTheme, scheme, tone])
 
   const value: ThemeContextValue = useMemo(
     () => ({
