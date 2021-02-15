@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react'
+import {EMPTY_ARRAY} from '../constants'
 
 type ClickOutsideListener = (event: Event) => void
 
 export function useClickOutside(
   listener: ClickOutsideListener,
-  elementsArg: Array<HTMLElement | null> = [],
+  elementsArg: Array<HTMLElement | null> = EMPTY_ARRAY,
   boundaryElement?: HTMLElement | null
 ) {
   const [element, setElement] = useState<HTMLElement | null>(null)

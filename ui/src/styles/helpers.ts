@@ -1,4 +1,5 @@
 import {CSSObject} from 'styled-components'
+import {EMPTY_ARRAY} from '../constants'
 import {Theme} from '../theme'
 
 export function fillCSSObject(propKeys: string[], value: any): CSSObject {
@@ -29,13 +30,17 @@ export function responsive<T>(
   })
 }
 
-export function getResponsiveProp<T = number>(val: T | T[] | undefined, defaultVal: T[] = []): T[] {
-  if (val === undefined) return defaultVal
+export function getResponsiveProp<T = number>(val: T | T[] | undefined, defaultVal?: T[]): T[] {
+  if (val === undefined) return defaultVal || EMPTY_ARRAY
 
   return Array.isArray(val) ? val : [val]
 }
 
-export function getResponsiveSpace(theme: Theme, props: string[], spaceIndexes: number[] = []) {
+export function getResponsiveSpace(
+  theme: Theme,
+  props: string[],
+  spaceIndexes: number[] = EMPTY_ARRAY
+) {
   if (!Array.isArray(spaceIndexes)) {
     throw new Error('the property must be array of numbers')
   }

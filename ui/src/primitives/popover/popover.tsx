@@ -2,6 +2,7 @@ import maxSize from 'popper-max-size-modifier'
 import React, {cloneElement, forwardRef, useEffect, useMemo, useState} from 'react'
 import {Modifier, usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
+import {EMPTY_RECORD} from '../../constants'
 import {useForwardedRef} from '../../hooks'
 import {ThemeColorSchemeKey, ThemeColorToneKey} from '../../theme'
 import {Placement} from '../../types'
@@ -118,7 +119,7 @@ export const Popover = forwardRef(
       referenceElement: referenceElementProp,
       shadow = 3,
       scheme,
-      style = {},
+      style = EMPTY_RECORD,
       tone,
       width = 0,
       ...restProps
@@ -207,13 +208,16 @@ export const Popover = forwardRef(
       forwardedRef.current = el
     }
 
+    // @todo: memoize?
+    const popoverStyle = {...style, ...styles.popper}
+
     const node = (
       <Root
         data-ui="Popover"
         {...restProps}
         $preventOverflow={preventOverflow}
         ref={setRootRef}
-        style={{...style, ...styles.popper}}
+        style={popoverStyle}
         {...attributes.popper}
       >
         <PopoverCard

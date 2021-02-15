@@ -1,22 +1,25 @@
 import React, {cloneElement, forwardRef} from 'react'
 import styled, {css} from 'styled-components'
+import {EMPTY_RECORD} from '../../constants'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 import {childrenToElementArray} from '../helpers'
 import {AvatarCounter} from './avatarCounter'
 import {AvatarSize} from './types'
 
-function avatarStackStyle() {
-  return css`
-    white-space: nowrap;
+const BASE_STYLES = css`
+  white-space: nowrap;
 
-    & > div {
-      vertical-align: top;
+  & > div {
+    vertical-align: top;
 
-      &:not([hidden]) {
-        display: inline-block;
-      }
+    &:not([hidden]) {
+      display: inline-block;
     }
-  `
+  }
+`
+
+function avatarStackStyle() {
+  return BASE_STYLES
 }
 
 function responsiveAvatarStackSizeStyle(props: {size: AvatarSize | AvatarSize[]} & ThemeProps) {
@@ -26,7 +29,7 @@ function responsiveAvatarStackSizeStyle(props: {size: AvatarSize | AvatarSize[]}
   return responsive(media, getResponsiveProp(props.size), (size) => {
     const avatarSize = avatar.sizes[size]
 
-    if (!avatarSize) return {}
+    if (!avatarSize) return EMPTY_RECORD
 
     return {
       '& > div + div': {

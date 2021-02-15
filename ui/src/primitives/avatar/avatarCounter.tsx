@@ -1,6 +1,8 @@
 import React from 'react'
 import styled, {css} from 'styled-components'
-import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {EMPTY_RECORD} from '../../constants'
+import {useResponsiveProp} from '../../hooks'
+import {rem, responsive, ThemeProps} from '../../styles'
 import {Text} from '../text'
 import {AvatarSize} from './types'
 
@@ -11,7 +13,7 @@ function responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemePr
   return responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size]
 
-    if (!avatarSize) return {}
+    if (!avatarSize) return EMPTY_RECORD
 
     return {
       borderRadius: rem(avatarSize.size / 2),
@@ -53,7 +55,7 @@ interface AvatarCounterProps {
 }
 
 export function AvatarCounter({count, size: sizeProp = 0, tone}: AvatarCounterProps) {
-  const size: AvatarSize[] = getResponsiveProp(sizeProp, [0])
+  const size: AvatarSize[] = useResponsiveProp(sizeProp, [0])
 
   return (
     <Root $size={size} data-tone={tone}>

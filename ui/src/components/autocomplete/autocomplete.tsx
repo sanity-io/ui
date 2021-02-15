@@ -8,10 +8,10 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import {EMPTY_ARRAY} from '../../constants'
 import {focusFirstDescendant} from '../../helpers'
-import {useForwardedRef} from '../../hooks'
+import {useForwardedRef, useResponsiveProp} from '../../hooks'
 import {Box, Button, Card, Spinner, Text, TextInput} from '../../primitives'
-import {getResponsiveProp} from '../../styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {Root, LoadingCard, ListBoxContainer, ListBoxCard} from './styles'
 
@@ -99,7 +99,7 @@ const InnerAutocomplete = forwardRef(
       onQueryChange,
       onSelect,
       openButton,
-      options: optionsProp = [],
+      options: optionsProp,
       padding: paddingProp = 3,
       radius = 2,
       renderOption: renderOptionProp,
@@ -126,15 +126,18 @@ const InnerAutocomplete = forwardRef(
     const valueRef = useRef(value)
     const [focused, setFocused] = useState(false)
     const listboxId = `${id}-listbox`
-    const options = Array.isArray(optionsProp) ? optionsProp : []
+    const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
     const [selectedIndex, setSelectedIndex] = useState(-1)
     const inputRef = useRef<HTMLInputElement | null>(null)
     const listRef = useRef<HTMLUListElement | null>(null)
     const activeItemId = selectedIndex > -1 ? `${id}-option-${selectedIndex}` : undefined
-    const padding = getResponsiveProp(paddingProp)
+    const padding = useResponsiveProp(paddingProp)
     const rootRef = useRef<HTMLDivElement | null>(null)
     const currentOption = value ? options.find((o) => o.value === value) : undefined
-    const filteredOptions = options.filter((option) => (query ? filterOption(query, option) : true))
+    const filteredOptions = useMemo(
+      () => options.filter((option) => (query ? filterOption(query, option) : true)),
+      [filterOption, options, query]
+    )
     const optionsLen = filteredOptions.length
     const expanded = loading || (focused && optionsLen > 0 && query !== null)
     const forwardedRef = useForwardedRef(ref)

@@ -1,5 +1,6 @@
 import {CSSObject} from 'styled-components'
 import {getResponsiveProp} from '..'
+import {EMPTY_RECORD} from '../../constants'
 import {BoxShadow, ThemeShadow} from '../../theme'
 import {rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -10,7 +11,7 @@ function toBoxShadow(shadow: BoxShadow, color: string) {
 }
 
 function shadowStyle(shadow: ThemeShadow | null): CSSObject {
-  if (!shadow) return {}
+  if (!shadow) return EMPTY_RECORD
 
   const outline = `0 0 0 ${rem(1)} var(--card-shadow-outline-color)`
   const umbra = toBoxShadow(shadow.umbra, 'var(--card-shadow-umbra-color)')

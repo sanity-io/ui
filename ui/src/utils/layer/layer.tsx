@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {EMPTY_RECORD} from '../../constants'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 
@@ -19,7 +20,7 @@ const LayerChildren = forwardRef(
     props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
     ref: React.Ref<HTMLDivElement>
   ) => {
-    const {children, style = {}, ...restProps} = props
+    const {children, style = EMPTY_RECORD, ...restProps} = props
     const {zIndex} = useLayer()
 
     return (

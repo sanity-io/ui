@@ -1,9 +1,8 @@
 import {CloseIcon} from '@sanity/icons'
-import React, {createElement, forwardRef, isValidElement, useCallback} from 'react'
+import React, {createElement, forwardRef, isValidElement, memo, useCallback, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
-import {useForwardedRef, useCustomValidity} from '../../hooks'
-import {getResponsiveProp} from '../../styles'
+import {useForwardedRef, useCustomValidity, useResponsiveProp} from '../../hooks'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
@@ -64,7 +63,7 @@ const InputRoot = styled.span`
   position: relative;
 `
 
-const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
+const StyledPrefix = styled(Card).attrs({forwardedAs: 'span'})`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 
@@ -74,7 +73,9 @@ const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
   }
 `
 
-const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
+const Prefix = memo(StyledPrefix)
+
+const StyledSuffix = styled(Card).attrs({forwardedAs: 'span'})`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
@@ -84,14 +85,18 @@ const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
   }
 `
 
+const Suffix = memo(StyledSuffix)
+
 const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
   textInputStyle.input
 )
 
-const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputStyle.representation
+const Presentation = memo(
+  styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
+    responsiveRadiusStyle,
+    textInputStyle.representation
+  )
 )
 
 const LeftBox = styled(Box)`
@@ -130,8 +135,7 @@ export const TextInput = forwardRef(
     } = props
 
     const ref = useForwardedRef(forwardedRef)
-
-    const padding = getResponsiveProp(paddingProp)
+    const padding = useResponsiveProp(paddingProp)
 
     useCustomValidity(ref, customValidity)
 
@@ -154,13 +158,78 @@ export const TextInput = forwardRef(
       [onClear, ref]
     )
 
-    return (
-      <Root data-ui="TextInput">
-        {prefix && (
+    const prefixNode = useMemo(
+      () =>
+        prefix && (
           <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border">
             <span>{prefix}</span>
           </Prefix>
-        )}
+        ),
+      [prefix, radius]
+    )
+
+    const presentationNode = useMemo(
+      () => (
+        <Presentation
+          $border={border}
+          $hasPrefix={Boolean(prefix)}
+          $hasSuffix={Boolean(suffix)}
+          $radius={radius}
+        >
+          {icon && (
+            <LeftBox padding={padding}>
+              <Text size={fontSize}>
+                {isValidElement(icon) && icon}
+                {isValidElementType(icon) && createElement(icon)}
+              </Text>
+            </LeftBox>
+          )}
+
+          {!clearButton && iconRight && (
+            <RightBox padding={padding}>
+              <Text size={fontSize}>
+                {isValidElement(iconRight) && iconRight}
+                {isValidElementType(iconRight) && createElement(iconRight)}
+              </Text>
+            </RightBox>
+          )}
+        </Presentation>
+      ),
+      [border, clearButton, fontSize, icon, iconRight, padding, prefix, radius, suffix]
+    )
+
+    const clearButtonNode = useMemo(
+      () =>
+        clearButton && (
+          <RightBox padding={padding.map((v) => v - 2)} style={{zIndex: 2}}>
+            <Button
+              {...(typeof clearButton === 'object' ? clearButton : {})}
+              data-qa="clear-button"
+              fontSize={fontSize}
+              icon={CloseIcon}
+              mode="bleed"
+              onClick={handleClearClick}
+              onMouseDown={handleClearMouseDown}
+              padding={padding.map((v) => v - 1)}
+            />
+          </RightBox>
+        ),
+      [clearButton, fontSize, handleClearClick, handleClearMouseDown, padding]
+    )
+
+    const suffixNode = useMemo(
+      () =>
+        suffix && (
+          <Suffix borderTop borderRight borderBottom radius={radius} sizing="border">
+            <span>{suffix}</span>
+          </Suffix>
+        ),
+      [radius, suffix]
+    )
+
+    return (
+      <Root data-ui="TextInput">
+        {prefixNode}
 
         <InputRoot>
           <Input
@@ -176,52 +245,12 @@ export const TextInput = forwardRef(
             type={type}
           />
 
-          <Presentation
-            $border={border}
-            $hasPrefix={Boolean(prefix)}
-            $hasSuffix={Boolean(suffix)}
-            $radius={radius}
-          >
-            {icon && (
-              <LeftBox padding={padding}>
-                <Text size={fontSize}>
-                  {isValidElement(icon) && icon}
-                  {isValidElementType(icon) && createElement(icon)}
-                </Text>
-              </LeftBox>
-            )}
+          {presentationNode}
 
-            {!clearButton && iconRight && (
-              <RightBox padding={padding}>
-                <Text size={fontSize}>
-                  {isValidElement(iconRight) && iconRight}
-                  {isValidElementType(iconRight) && createElement(iconRight)}
-                </Text>
-              </RightBox>
-            )}
-          </Presentation>
-
-          {clearButton && (
-            <RightBox padding={padding.map((v) => v - 2)} style={{zIndex: 2}}>
-              <Button
-                {...(typeof clearButton === 'object' ? clearButton : {})}
-                data-qa="clear-button"
-                fontSize={fontSize}
-                icon={CloseIcon}
-                mode="bleed"
-                onClick={handleClearClick}
-                onMouseDown={handleClearMouseDown}
-                padding={padding.map((v) => v - 1)}
-              />
-            </RightBox>
-          )}
+          {clearButtonNode}
         </InputRoot>
 
-        {suffix && (
-          <Suffix borderTop borderRight borderBottom radius={radius} sizing="border">
-            <span>{suffix}</span>
-          </Suffix>
-        )}
+        {suffixNode}
       </Root>
     )
   }
