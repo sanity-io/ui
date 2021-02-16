@@ -17,7 +17,7 @@
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
     "postinstall": "yarn husky install",
     "release:latest": "lerna publish --dist-tag latest",
-    "release:next": "lerna publish --canary --no-git-tag-version --dist-tag next --preid next",
+    "release:next": "lerna publish --canary --force-publish --no-git-tag-version --dist-tag next --preid next",
     "lint": "lerna run --stream --parallel lint",
     "test": "lerna run --stream --parallel test",
     "test:browser": "start-server-and-test 'yarn dev:ui' http://localhost:9009 'yarn test:cypress:run'",
