@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "0.33.3",
+  "version": "0.33.4",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "files": [
@@ -29,8 +29,8 @@
     "@juggle/resize-observer": "^3.2.0",
     "@popperjs/core": "^2.6.0",
     "@reach/auto-id": "^0.13.0",
-    "@sanity/color": "^2.0.12",
-    "@sanity/icons": "^1.0.2",
+    "@sanity/color": "^2.0.13",
+    "@sanity/icons": "^1.0.3",
     "framer-motion": "^3.3.0",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.1",

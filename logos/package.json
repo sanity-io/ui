@@ -1,6 +1,6 @@
 {
   "name": "@sanity/logos",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "files": [
@@ -22,7 +22,7 @@
     "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
   },
   "devDependencies": {
-    "@sanity/color": "^2.0.12",
+    "@sanity/color": "^2.0.13",
     "react": "17.0.1"
   },
   "peerDependencies": {
