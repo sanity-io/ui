@@ -37,6 +37,8 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): FlattenSi
   const color = theme.sanity.color.input
 
   return css`
+    --input-placeholder-color: ${color.default.enabled.placeholder};
+
     appearance: none;
     background: none;
     border: 0;
@@ -51,6 +53,10 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): FlattenSi
     z-index: 1;
     display: block;
 
+    &::placeholder {
+      color: var(--input-placeholder-color);
+    }
+
     /* &:is(textarea) */
     &[data-as='textarea'] {
       resize: none;
@@ -59,28 +65,19 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): FlattenSi
     /* enabled */
     &:not(:invalid):not(:disabled) {
       color: ${color.default.enabled.fg};
-
-      &::placeholder {
-        color: ${color.default.enabled.placeholder};
-      }
+      --input-placeholder-color: ${color.default.enabled.placeholder};
     }
 
     /* disabled */
     &:not(:invalid):disabled {
       color: ${color.default.disabled.fg};
-
-      &::placeholder {
-        color: ${color.default.disabled.placeholder};
-      }
+      --input-placeholder-color: ${color.default.disabled.placeholder};
     }
 
     /* invalid */
     &:invalid {
       color: ${color.invalid.enabled.fg};
-
-      &::placeholder {
-        color: ${color.invalid.enabled.placeholder};
-      }
+      --input-placeholder-color: ${color.invalid.enabled.placeholder};
     }
   `
 }
