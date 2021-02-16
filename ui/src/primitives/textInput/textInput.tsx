@@ -1,7 +1,8 @@
 import {CloseIcon} from '@sanity/icons'
-import React, {createElement, forwardRef, isValidElement, memo, useCallback, useMemo} from 'react'
+import React, {createElement, forwardRef, isValidElement, useCallback, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
+import {EMPTY_RECORD} from '../../constants'
 import {useForwardedRef, useCustomValidity, useResponsiveProp} from '../../hooks'
 import {
   responsiveRadiusStyle,
@@ -18,14 +19,15 @@ import {Button, ButtonProps} from '../button'
 import {Card} from '../card'
 import {Text} from '../text'
 
+type ClearButtonProps = Omit<ButtonProps, 'as'> &
+  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
+
 interface TextInputProps {
   border?: boolean
   /**
    * @beta
    */
-  clearButton?:
-    | boolean
-    | (Omit<ButtonProps, 'as'> & Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>)
+  clearButton?: boolean | ClearButtonProps
   customValidity?: string
   fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode
@@ -54,6 +56,8 @@ interface TextInputProps {
   weight?: ThemeFontWeightKey
 }
 
+const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
+
 const Root = styled.span(textInputStyle.root)
 
 const InputRoot = styled.span`
@@ -63,7 +67,7 @@ const InputRoot = styled.span`
   position: relative;
 `
 
-const StyledPrefix = styled(Card).attrs({forwardedAs: 'span'})`
+const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 
@@ -73,9 +77,7 @@ const StyledPrefix = styled(Card).attrs({forwardedAs: 'span'})`
   }
 `
 
-const Prefix = memo(StyledPrefix)
-
-const StyledSuffix = styled(Card).attrs({forwardedAs: 'span'})`
+const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
@@ -85,18 +87,14 @@ const StyledSuffix = styled(Card).attrs({forwardedAs: 'span'})`
   }
 `
 
-const Suffix = memo(StyledSuffix)
-
 const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
   textInputStyle.input
 )
 
-const Presentation = memo(
-  styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-    responsiveRadiusStyle,
-    textInputStyle.representation
-  )
+const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
+  responsiveRadiusStyle,
+  textInputStyle.representation
 )
 
 const LeftBox = styled(Box)`
@@ -137,6 +135,13 @@ export const TextInput = forwardRef(
     const ref = useForwardedRef(forwardedRef)
     const padding = useResponsiveProp(paddingProp)
 
+    // Transient properties
+    const $hasClearButton = Boolean(clearButton)
+    const $hasIcon = Boolean(icon)
+    const $hasIconRight = Boolean(iconRight)
+    const $hasSuffix = Boolean(suffix)
+    const $hasPrefix = Boolean(prefix)
+
     useCustomValidity(ref, customValidity)
 
     // Prevent the clear button from taking the focus away from the input
@@ -158,6 +163,7 @@ export const TextInput = forwardRef(
       [onClear, ref]
     )
 
+    // Render prefix (memoized)
     const prefixNode = useMemo(
       () =>
         prefix && (
@@ -168,12 +174,13 @@ export const TextInput = forwardRef(
       [prefix, radius]
     )
 
+    // Render presentation (memoized)
     const presentationNode = useMemo(
       () => (
         <Presentation
           $border={border}
-          $hasPrefix={Boolean(prefix)}
-          $hasSuffix={Boolean(suffix)}
+          $hasPrefix={$hasPrefix}
+          $hasSuffix={$hasSuffix}
           $radius={radius}
         >
           {icon && (
@@ -185,7 +192,7 @@ export const TextInput = forwardRef(
             </LeftBox>
           )}
 
-          {!clearButton && iconRight && (
+          {!$hasClearButton && iconRight && (
             <RightBox padding={padding}>
               <Text size={fontSize}>
                 {isValidElement(iconRight) && iconRight}
@@ -195,28 +202,44 @@ export const TextInput = forwardRef(
           )}
         </Presentation>
       ),
-      [border, clearButton, fontSize, icon, iconRight, padding, prefix, radius, suffix]
+      [border, fontSize, icon, iconRight, padding, radius, $hasClearButton, $hasPrefix, $hasSuffix]
     )
 
+    // Render clear button (memoized)
+    const clearButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
+    const clearButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
+    const clearButtonProps: ClearButtonProps = useMemo(
+      () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
+      [clearButton]
+    )
     const clearButtonNode = useMemo(
       () =>
         clearButton && (
-          <RightBox padding={padding.map((v) => v - 2)} style={{zIndex: 2}}>
+          <RightBox padding={clearButtonBoxPadding} style={CLEAR_BUTTON_BOX_STYLE}>
             <Button
-              {...(typeof clearButton === 'object' ? clearButton : {})}
+              {...clearButtonProps}
               data-qa="clear-button"
               fontSize={fontSize}
               icon={CloseIcon}
               mode="bleed"
               onClick={handleClearClick}
               onMouseDown={handleClearMouseDown}
-              padding={padding.map((v) => v - 1)}
+              padding={clearButtonPadding}
             />
           </RightBox>
         ),
-      [clearButton, fontSize, handleClearClick, handleClearMouseDown, padding]
+      [
+        clearButton,
+        clearButtonBoxPadding,
+        clearButtonPadding,
+        clearButtonProps,
+        fontSize,
+        handleClearClick,
+        handleClearMouseDown,
+      ]
     )
 
+    // Render suffix (memoized)
     const suffixNode = useMemo(
       () =>
         suffix && (
@@ -230,13 +253,12 @@ export const TextInput = forwardRef(
     return (
       <Root data-ui="TextInput">
         {prefixNode}
-
         <InputRoot>
           <Input
             data-as="input"
             {...restProps}
-            $iconLeft={Boolean(icon)}
-            $iconRight={Boolean(iconRight) || Boolean(clearButton)}
+            $iconLeft={$hasIcon}
+            $iconRight={$hasIconRight || $hasClearButton}
             $padding={padding}
             $space={space}
             $fontSize={fontSize}
@@ -244,12 +266,9 @@ export const TextInput = forwardRef(
             ref={ref}
             type={type}
           />
-
           {presentationNode}
-
           {clearButtonNode}
         </InputRoot>
-
         {suffixNode}
       </Root>
     )
