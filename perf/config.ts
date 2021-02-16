@@ -1,10 +1,5 @@
 import path from 'path'
 
-// register tests
-import './tests/button'
-import './tests/textArea'
-import './tests/textInput'
-
 function getEnv(key: string): string {
   const value = process.env[key]
 
@@ -22,6 +17,10 @@ export const config = {
   },
 
   baseUrl: 'http://localhost:9001',
+
+  context: __dirname,
+
+  files: ['tests/*.perf.ts'],
 
   /**
    * Number of times to run each test

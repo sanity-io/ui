@@ -24,7 +24,7 @@
     "test:cypress:open": "cypress open --config-file .cypress/cypress.json",
     "test:cypress:run": "cypress run --config-file .cypress/cypress.json",
     "test:perf": "start-server-and-test 'yarn build-and-start:perf-app' http://localhost:9001 'yarn test:perf:run'",
-    "test:perf:run": "(cd perf && ts-node -r dotenv-flow/config lib/run.ts)",
+    "test:perf:run": "cd perf && ts-node -r dotenv-flow/config lib/run.ts",
     "type-check": "lerna run --stream --parallel type-check",
     "watch:packages": "lerna run --stream --parallel --scope @sanity/* watch"
   },
@@ -41,6 +41,7 @@
     "@types/react-is": "^17.0.0",
     "@types/react-test-renderer": "^17.0.1",
     "@types/uuid": "^8.3.0",
+    "@types/yargs": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "babel-eslint": "^10.1.0",
@@ -55,6 +56,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "globby": "^11.0.2",
     "husky": "^5.0.9",
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
@@ -68,7 +70,8 @@
     "ts-jest": "^26.5.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yargs": "^16.2.0"
   },
   "workspaces": [
     "color",
