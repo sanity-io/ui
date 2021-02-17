@@ -2763,13 +2763,13 @@
     lodash "^4.17.15"
 
 "@sanity/default-layout@^2.3.6":
-  version "2.3.6"
-  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.3.6.tgz#326fcf39d1bcca8fd6cf86727c6b335289edcf06"
-  integrity sha512-kK7eUJAui55XMDt2Z8JqZvkjIDhKTeUn/PiIaX/KV4wuV5wriwx2FD6py2MDyxWlg47sXPZPoUXqqnBrVAU3EQ==
+  version "2.3.7"
+  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.3.7.tgz#7d8fb3e01812b9faaf444788e471007adfe14f73"
+  integrity sha512-GiC2tdkMZoKBuhfpzzfKgFDD9QNcQ+qSw9opcrpU/G+dVnvfrzF7iBHDOkezelurXaTG0agm5aUrfSip+111/g==
   dependencies:
-    "@sanity/base" "2.3.6"
+    "@sanity/base" "2.3.7"
     "@sanity/generate-help-url" "2.2.6"
-    "@sanity/ui" "^0.33.1"
+    "@sanity/ui" "^0.33.4"
     "@sanity/util" "2.2.6"
     classnames "^2.2.5"
     is-hotkey "^0.1.4"
