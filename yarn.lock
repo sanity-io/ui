@@ -2504,61 +2504,6 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.3.6":
-  version "2.3.6"
-  resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.3.6.tgz#8a21cbd250f64ce460cd4f0584a60edccda48efa"
-  integrity sha512-Fpj4bneBroiXxWLCs60FmYumeGBPQiORMVVU/uesqHyHO1c2ARAIfpnPdV9Boybtng3eSpmdufizKuyHwvodTw==
-  dependencies:
-    "@popperjs/core" "^2.5.4"
-    "@reach/auto-id" "^0.10.5"
-    "@sanity/bifur-client" "^0.0.7"
-    "@sanity/client" "2.2.6"
-    "@sanity/color" "^1.0.0"
-    "@sanity/generate-help-url" "2.2.6"
-    "@sanity/icons" "^1.0.1"
-    "@sanity/image-url" "^0.140.19"
-    "@sanity/initial-value-templates" "2.2.6"
-    "@sanity/mutator" "2.2.6"
-    "@sanity/schema" "2.2.6"
-    "@sanity/state-router" "2.2.6"
-    "@sanity/structure" "2.2.6"
-    "@sanity/transaction-collator" "2.2.6"
-    "@sanity/types" "2.2.6"
-    "@sanity/ui" "^0.33.1"
-    "@sanity/util" "2.2.6"
-    "@sanity/validation" "2.2.6"
-    boundless-arrow-key-navigation "^1.1.0"
-    chance "^1.0.4"
-    circular-at "^1.0.3"
-    classnames "^2.2.5"
-    dataloader "^2.0.0"
-    date-fns "^2.16.1"
-    dom-scroll-into-view "^1.2.1"
-    element-resize-detector "^1.1.14"
-    history "^4.6.3"
-    lodash "^4.17.15"
-    nano-pubsub "^2.0.0"
-    nanoid "^3.1.9"
-    observable-callback "^1.0.1"
-    oneline "^1.0.3"
-    polished "^4.0.5"
-    popper-max-size-modifier "^0.2.0"
-    promise-props "^1.0.0"
-    raf "^3.4.1"
-    react-click-outside "^3.0.0"
-    react-fast-compare "^2.0.2"
-    react-icon-base "^2.1.2"
-    react-intl "^2.2.2"
-    react-popper "^2.2.4"
-    react-props-stream "^1.0.0"
-    react-refractor "^2.1.2"
-    react-sortable-hoc "^1.11.0"
-    react-split-pane "^0.1.84"
-    rxjs "^6.5.3"
-    semver-compare "^1.0.0"
-    shallow-equals "^1.0.0"
-    styled-components "^5.2.1"
-
 "@sanity/base@2.3.7", "@sanity/base@^2.3.6":
   version "2.3.7"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.3.7.tgz#e6a5a3001ac95bc7727ecd652571b2fa5d01ee3f"
@@ -15498,13 +15443,20 @@ polished@^3.3.1, polished@^3.4.4, polished@^3.6.5:
   dependencies:
     "@babel/runtime" "^7.9.2"
 
-polished@^4.0.5, polished@^4.1.0:
+polished@^4.0.5:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/polished/-/polished-4.1.0.tgz#ab80c10e04fdf8795faee723b59577de18d2936b"
   integrity sha512-y8IInTGHuwku7+O+wsJ7OOvNpJF7EPP/IDzF1uj9UJfEEKpMAfeq5gZ5UrtOksM7Jk4+hBAk6Ce8rFOOF4msZg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@scarf/scarf" "^1.1.0"
+
+polished@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-4.1.1.tgz#40442cc973348e466f2918cdf647531bb6c29bfb"
+  integrity sha512-4MZTrfPMPRLD7ac8b+2JZxei58zw6N1hFkdBDERif5Tlj19y3vPoPusrLG+mJIlPTGnUlKw3+yWz0BazvMx1vg==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
 
 popmotion@^9.1.0:
   version "9.1.0"
