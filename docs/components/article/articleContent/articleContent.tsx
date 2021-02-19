@@ -7,6 +7,7 @@ import {blocksToText} from '../helpers'
 import {HeadingType} from '../types'
 import {CodeExample} from './blocks/codeExample'
 import {ColorGrid} from './blocks/colorGrid'
+import {FigmaEmbed} from './blocks/figmaEmbed'
 import {GroqLogoGrid} from './blocks/groqLogoGrid'
 import {NpmPackageBadge} from './blocks/npmPackageBadge'
 import {PropertyTable} from './blocks/propertyTable'
@@ -226,6 +227,7 @@ function buildSerializers(headings: HeadingType[]) {
       'content.colorGrid': ColorGrid,
       'content.groqLogoGrid': GroqLogoGrid,
       'content.sanityLogoGrid': SanityLogoGrid,
+      'content.figmaEmbed': FigmaEmbed,
     },
   }
 }
