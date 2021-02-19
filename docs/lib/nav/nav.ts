@@ -1,3 +1,4 @@
+import {uniq} from 'lodash'
 import {NavMenu, NavItem, NavMenuItem} from './types'
 import {features} from '$config'
 import {isArray, isRecord, isString} from '$lib/types'
@@ -47,7 +48,10 @@ export function getNavPaths(values: unknown[], basePath = ''): string[] {
 }
 
 export function getNavStaticPaths(items: unknown[]) {
-  return getNavPaths(items).map((p) => ({
+  // Make sure the paths are unique
+  const uniquePaths = uniq(getNavPaths(items))
+
+  return uniquePaths.map((p) => ({
     params: {path: p.split('/').slice(1)},
   }))
 }
