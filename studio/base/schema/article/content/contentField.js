@@ -3,6 +3,24 @@ import {codeExampleField} from './codeExampleField'
 import {npmPackageBadgeField} from './npmPackageBadgeField'
 import {propertyTableField} from './propertyTableField'
 
+export const figmaEmbedBlock = {
+  type: 'object',
+  name: 'content.figmaEmbed',
+  title: 'Figma embed',
+  fields: [
+    {
+      type: 'string',
+      name: 'title',
+      title: 'Title',
+    },
+    {
+      type: 'string',
+      name: 'url',
+      title: 'Figma URL',
+    },
+  ],
+}
+
 const codeBlock = {
   type: 'code',
   name: 'code',
@@ -97,5 +115,6 @@ export const contentField = {
     groqLogoGridBlock,
     imageBlock,
     calloutBlock,
+    figmaEmbedBlock,
   ],
 }
