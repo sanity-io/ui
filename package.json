@@ -61,6 +61,7 @@
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
     "lerna": "^3.22.1",
+    "lint-staged": "^10.5.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "puppeteer": "^7.0.4",
@@ -82,5 +83,8 @@
     "perf/app",
     "studio",
     "ui"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint"
+  }
 }
