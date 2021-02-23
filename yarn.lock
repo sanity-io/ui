@@ -2438,10 +2438,15 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
   integrity sha512-3NsZsJIA/22P3QUyrEDNA2D133H4j224twJrdipXN38dpnIOzAbUDtOwkcJ5pXmn75w7LSQDjA4tO9dm1XlqlA==
 
-"@popperjs/core@^2.5.4", "@popperjs/core@^2.6.0":
+"@popperjs/core@^2.5.4":
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.8.2.tgz#1fd24b99e417176566f8ada718fd16dbc7ef2b7a"
   integrity sha512-7PRna6st1As9DBTXO3Lf1lYw7bi+b/6kE2OPjvvdWHLfBxTI01FW1HSqt4akYzKe1Cta3bmhuwct4OAF2EVemA==
+
+"@popperjs/core@^2.8.3":
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.8.3.tgz#8b4eae3d9dd470c022cb9238128db8b1906e7fca"
+  integrity sha512-olsVs3lo8qKycPoWAUv4bMyoTGVXsEpLR9XxGk3LJR5Qa92a1Eg/Fj1ATdhwtC/6VMaKtsz1nSAeheD2B2Ru9A==
 
 "@reach/auto-id@^0.10.5":
   version "0.10.5"
@@ -2504,7 +2509,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.4.0", "@sanity/base@^2.3.8":
+"@sanity/base@2.4.0", "@sanity/base@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.4.0.tgz#6efa1b1910a9b1043034e3eada103436c1b3d1db"
   integrity sha512-HH48+x6tf/AY2V8207LKDgtmhzpP0uLimyEnzuCb2ijFTc0FuOss/pNvUbF3djnNKaCCy3oudPwe3ZUn0Unl1g==
@@ -2593,10 +2598,10 @@
     get-random-values "^1.2.0"
     lodash "^4.17.15"
 
-"@sanity/cli@^2.3.8":
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.3.8.tgz#85aee0e8b61285baf8445b61595c4834ba488bdb"
-  integrity sha512-kBMEwoohE5q/PNRbDstSVoTLb+1hYyLTtrLDLogN+irS8XV8PdECkOWTDgY4RJ6pKut/p4sqaPzA2MJCI5Po0Q==
+"@sanity/cli@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.4.0.tgz#ed7e194855b4572c78767ae56c97ac7ca5a8e8e2"
+  integrity sha512-F6RUNBAunNMWU4EoSYiGFXQPGAuN+cNaxi9nid1FqYDDTMblA6VhKqQqeZTmKPsMAffBiRtgOKb8XsV0Pb/v9w==
 
 "@sanity/client@2.2.6", "@sanity/client@^2.2.6":
   version "2.2.6"
@@ -2624,7 +2629,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/color/-/color-1.0.0.tgz#6cc44d4a8f6da4567828f52f141deed4d17aa31e"
   integrity sha512-npFZKld7K/F4vAe4SZNyx4W6R/3z5iH/CuIDFJTn6CRQbDgsrJTCPtVAF1nx76wMa3BYCTs4YFfIVkRRx2Jz9A==
 
-"@sanity/core@^2.3.8":
+"@sanity/core@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@sanity/core/-/core-2.4.0.tgz#cfea08b82b1c000599e7f89976bfcafef5d2671d"
   integrity sha512-f32hoR3DDYGtvhrI9nAV7U694bMBHAZRT2vpSe4PJkch2JWY43cZTSsTpWJI75oXlvZ8p2T8YlEngdI7G9KAeA==
@@ -2707,7 +2712,7 @@
     "@sanity/generate-help-url" "2.2.6"
     lodash "^4.17.15"
 
-"@sanity/default-layout@^2.3.8":
+"@sanity/default-layout@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.4.0.tgz#63a9a3ffafe9bc2747e6e6f309189ef989b4fbad"
   integrity sha512-pZxKeZoc3i/zSBFF+MWYgmn9gJZkolrqEceTbR8PVbjjMNQbuBAFhWJ6sb9mj4QSHz4vJ+WVMPFaz4f1TNW+6w==
@@ -2733,7 +2738,7 @@
     prop-types "^15.6.0"
     rxjs "^6.5.3"
 
-"@sanity/desk-tool@^2.3.8":
+"@sanity/desk-tool@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@sanity/desk-tool/-/desk-tool-2.4.0.tgz#8981e662927ef27ff87b081afadf72caa878a6f3"
   integrity sha512-ab4Z2P/5zNOfabkY2Xjn/zZZ1H/2pv4+hXnWH02/1arm9prY/spIzXIHGP8Hnknr6duyqoPxMpJikd/7vzygwg==
@@ -9070,10 +9075,10 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-prettier@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-7.2.0.tgz#f4a4bd2832e810e8cc7c1411ec85b3e85c0c53f9"
-  integrity sha512-rV4Qu0C3nfJKPOAhFujFxB7RMP+URFyQqqOZW9DMRD7ZDTFyjaIlETU3xzHELt++4ugC0+Jm084HQYkkJe+Ivg==
+eslint-config-prettier@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.0.0.tgz#024d661444319686c588c8849c8da33815dbdb1c"
+  integrity sha512-5EaAVPsIHu+grmm5WKjxUia4yHgRrbkd8I0ffqUSwixCPMVBrbS97UnzlEY/Q7OWo584vgixefM0kJnUfo/VjA==
 
 eslint-import-resolver-node@^0.3.4:
   version "0.3.4"
@@ -11178,10 +11183,10 @@ humanize-ms@^1.2.1:
   dependencies:
     ms "^2.0.0"
 
-husky@^5.0.9:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-5.1.0.tgz#68b1148523acc838af0655ead71bf4671adb9f93"
-  integrity sha512-Os0EY2haOO+59YZSwMiUDsHY43RFwBVIRStHcnnT8/kvA+sFfaA/YS4uLFRiymXYgQl6E6TQTt3y4v/Z2ctEtw==
+husky@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-5.1.1.tgz#8678953fd8deb86f387cbf1ad50bb2f7f96e83f2"
+  integrity sha512-80LZ736V0Nr4/st0c2COYaMbEQhHNmAbLMN8J/kLk7/mo0QdUkUGNDjv/7jVkhug377Wh8wfbWyaVXEJ/h2B/Q==
 
 hyperscript@^2.0.2:
   version "2.0.2"

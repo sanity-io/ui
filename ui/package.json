@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.2.0",
-    "@popperjs/core": "^2.6.0",
+    "@popperjs/core": "^2.8.3",
     "@reach/auto-id": "^0.13.0",
     "@sanity/color": "^2.0.13",
     "@sanity/icons": "^1.0.3",
