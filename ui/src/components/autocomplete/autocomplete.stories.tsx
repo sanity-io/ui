@@ -16,9 +16,64 @@ export default {
 export function _default() {
   const options = countries.map((country) => ({value: country.code}))
 
+  const fontSize = Number(
+    select(
+      'Font size',
+      {
+        '0': '0',
+        '1': '1',
+        '2 (default)': '2',
+        '3': '3',
+        '4': '4',
+      },
+      '2',
+      'Props'
+    )
+  )
+
+  const openButton = boolean('Open button', false, 'Props')
+
+  const padding = select(
+    'Padding',
+    {
+      '0': 0,
+      '1': 1,
+      '2': 2,
+      '3 (default)': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+    },
+    3,
+    'Props'
+  )
+
+  const radius = Number(
+    select(
+      'Radius',
+      {
+        '0': '0',
+        '1': '1',
+        '2 (default)': '2',
+        '3': '3',
+        '4': '4',
+      },
+      '2',
+      'Props'
+    )
+  )
+
   return (
     <Card padding={4}>
-      <Autocomplete id="default" options={options} />
+      <Autocomplete
+        fontSize={fontSize}
+        id="default"
+        openButton={openButton}
+        options={options}
+        padding={padding}
+        radius={radius}
+      />
     </Card>
   )
 }
