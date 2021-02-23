@@ -11,9 +11,12 @@ import React, {
 import {EMPTY_ARRAY} from '../../constants'
 import {focusFirstDescendant} from '../../helpers'
 import {useForwardedRef, useResponsiveProp} from '../../hooks'
-import {Box, Button, Card, Spinner, Text, TextInput} from '../../primitives'
+import {Box, Button, ButtonProps, Card, Spinner, Text, TextInput} from '../../primitives'
 import {AutocompleteOption} from './autocompleteOption'
 import {Root, LoadingCard, ListBoxContainer, ListBoxCard} from './styles'
+
+type OpenButtonProps = Omit<ButtonProps, 'as'> &
+  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
 
 export interface BaseAutocompleteOption {
   value: string
@@ -32,7 +35,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   /**
    * @beta
    */
-  openButton?: boolean
+  openButton?: boolean | OpenButtonProps
   options?: Option[]
   padding?: number | number[]
   prefix?: React.ReactNode
@@ -61,6 +64,8 @@ type AutocompleteOverriddenInputAttrKey =
   | 'spellCheck'
   | 'type'
   | 'value'
+
+const EMPTY_RECORD = {}
 
 const defaultRenderValue = (value: string, option?: BaseAutocompleteOption) =>
   option ? option.value : value
@@ -281,6 +286,36 @@ const InnerAutocomplete = forwardRef(
       [handleClearButtonFocus, value]
     )
 
+    const openButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
+    const openButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
+    const openButtonProps: OpenButtonProps = useMemo(
+      () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
+      [openButton]
+    )
+    const openButtonNode = useMemo(
+      () =>
+        openButton ? (
+          <Box padding={openButtonBoxPadding}>
+            <Button
+              {...openButtonProps}
+              fontSize={fontSize}
+              icon={ChevronDownIcon}
+              mode="bleed"
+              onClick={handleOpenClick}
+              padding={openButtonPadding}
+            />
+          </Box>
+        ) : undefined,
+      [
+        fontSize,
+        handleOpenClick,
+        openButton,
+        openButtonBoxPadding,
+        openButtonPadding,
+        openButtonProps,
+      ]
+    )
+
     return (
       <Root
         data-ui="Autocomplete"
@@ -299,6 +334,7 @@ const InnerAutocomplete = forwardRef(
           autoCorrect="off"
           border={border}
           clearButton={clearButton}
+          fontSize={fontSize}
           icon={icon}
           id={id}
           inputMode="search"
@@ -309,15 +345,8 @@ const InnerAutocomplete = forwardRef(
           radius={radius}
           ref={setRef}
           role="combobox"
-          fontSize={fontSize}
           spellCheck={false}
-          suffix={
-            openButton ? (
-              <Box padding={1}>
-                <Button icon={ChevronDownIcon} mode="bleed" onClick={handleOpenClick} padding={2} />
-              </Box>
-            ) : undefined
-          }
+          suffix={openButtonNode}
           value={query === null ? renderValue(value, currentOption) : query}
         />
 
