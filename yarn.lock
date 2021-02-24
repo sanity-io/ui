@@ -2438,12 +2438,7 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
   integrity sha512-3NsZsJIA/22P3QUyrEDNA2D133H4j224twJrdipXN38dpnIOzAbUDtOwkcJ5pXmn75w7LSQDjA4tO9dm1XlqlA==
 
-"@popperjs/core@^2.5.4":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.8.2.tgz#1fd24b99e417176566f8ada718fd16dbc7ef2b7a"
-  integrity sha512-7PRna6st1As9DBTXO3Lf1lYw7bi+b/6kE2OPjvvdWHLfBxTI01FW1HSqt4akYzKe1Cta3bmhuwct4OAF2EVemA==
-
-"@popperjs/core@^2.8.3":
+"@popperjs/core@^2.5.4", "@popperjs/core@^2.8.3":
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.8.3.tgz#8b4eae3d9dd470c022cb9238128db8b1906e7fca"
   integrity sha512-olsVs3lo8qKycPoWAUv4bMyoTGVXsEpLR9XxGk3LJR5Qa92a1Eg/Fj1ATdhwtC/6VMaKtsz1nSAeheD2B2Ru9A==
@@ -2509,10 +2504,65 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.4.0", "@sanity/base@^2.4.0":
+"@sanity/base@2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.4.0.tgz#6efa1b1910a9b1043034e3eada103436c1b3d1db"
   integrity sha512-HH48+x6tf/AY2V8207LKDgtmhzpP0uLimyEnzuCb2ijFTc0FuOss/pNvUbF3djnNKaCCy3oudPwe3ZUn0Unl1g==
+  dependencies:
+    "@popperjs/core" "^2.5.4"
+    "@reach/auto-id" "^0.10.5"
+    "@sanity/bifur-client" "^0.0.7"
+    "@sanity/client" "2.2.6"
+    "@sanity/color" "^1.0.0"
+    "@sanity/generate-help-url" "2.2.6"
+    "@sanity/icons" "^1.0.1"
+    "@sanity/image-url" "^0.140.19"
+    "@sanity/initial-value-templates" "2.4.0"
+    "@sanity/mutator" "2.2.6"
+    "@sanity/schema" "2.2.6"
+    "@sanity/state-router" "2.2.6"
+    "@sanity/structure" "2.4.0"
+    "@sanity/transaction-collator" "2.2.6"
+    "@sanity/types" "2.4.0"
+    "@sanity/ui" "^0.33.4"
+    "@sanity/util" "2.4.0"
+    "@sanity/validation" "2.3.8"
+    boundless-arrow-key-navigation "^1.1.0"
+    chance "^1.0.4"
+    circular-at "^1.0.3"
+    classnames "^2.2.5"
+    dataloader "^2.0.0"
+    date-fns "^2.16.1"
+    dom-scroll-into-view "^1.2.1"
+    element-resize-detector "^1.1.14"
+    history "^4.6.3"
+    lodash "^4.17.15"
+    nano-pubsub "^2.0.0"
+    nanoid "^3.1.9"
+    observable-callback "^1.0.1"
+    oneline "^1.0.3"
+    polished "^4.0.5"
+    popper-max-size-modifier "^0.2.0"
+    promise-props "^1.0.0"
+    raf "^3.4.1"
+    react-click-outside "^3.0.0"
+    react-fast-compare "^2.0.2"
+    react-icon-base "^2.1.2"
+    react-intl "^2.2.2"
+    react-popper "^2.2.4"
+    react-props-stream "^1.0.0"
+    react-refractor "^2.1.2"
+    react-sortable-hoc "^1.11.0"
+    react-split-pane "^0.1.84"
+    rxjs "^6.5.3"
+    semver-compare "^1.0.0"
+    shallow-equals "^1.0.0"
+    styled-components "^5.2.1"
+
+"@sanity/base@^2.4.0":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.4.1.tgz#2b80f36d81ecb9f9b240f41b0056b85c2f0b479f"
+  integrity sha512-9o+G90obRYLFVvKDyLYzk9dkB8xHGCz3ihYUbSoDY78qh9euXgApq857TvmXJ0e/4/GRpcOJignnr85qf3zPVg==
   dependencies:
     "@popperjs/core" "^2.5.4"
     "@reach/auto-id" "^0.10.5"
