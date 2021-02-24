@@ -3494,19 +3494,6 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/channel-postmessage@6.1.19":
-  version "6.1.19"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-6.1.19.tgz#af1d51fa50e0716869670a7dfbc9f5db8b2503d2"
-  integrity sha512-r9ANSRnLi4kWGBtMVIByA1i/q2I/emE457Tz61NuzGCdxug5SSO+f+4eMbzHSq9L/V59nhvFQHG7hU+AtUBUGQ==
-  dependencies:
-    "@storybook/channels" "6.1.19"
-    "@storybook/client-logger" "6.1.19"
-    "@storybook/core-events" "6.1.19"
-    core-js "^3.0.1"
-    global "^4.3.2"
-    qs "^6.6.0"
-    telejson "^5.0.2"
-
 "@storybook/channel-postmessage@6.1.20":
   version "6.1.20"
   resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-6.1.20.tgz#d23956e553ff7e5f022bd8496ee7a26defa57440"
@@ -3542,30 +3529,6 @@
   integrity sha512-UBvVf07LAUD6JTrk77f4qydS4v5hzjAHJWOfWO6b82oO5bu4hTXt/Rjj/TSz85Rl/NmM4GYAAPIfxJHg53TRTg==
   dependencies:
     core-js "^3.0.1"
-    ts-dedent "^2.0.0"
-    util-deprecate "^1.0.2"
-
-"@storybook/client-api@6.1.19":
-  version "6.1.19"
-  resolved "https://registry.yarnpkg.com/@storybook/client-api/-/client-api-6.1.19.tgz#aa61045f0b437d2016b49d5023997df181a780c2"
-  integrity sha512-2zr4y+vs2UqyvGJUXq7fAMvavgVmE9ONn4bi/xVbey0va5UWF/Y4GaPy0tub36kI+x9yTEQadRPRoWvvFcM/jw==
-  dependencies:
-    "@storybook/addons" "6.1.19"
-    "@storybook/channel-postmessage" "6.1.19"
-    "@storybook/channels" "6.1.19"
-    "@storybook/client-logger" "6.1.19"
-    "@storybook/core-events" "6.1.19"
-    "@storybook/csf" "0.0.1"
-    "@types/qs" "^6.9.0"
-    "@types/webpack-env" "^1.15.3"
-    core-js "^3.0.1"
-    global "^4.3.2"
-    lodash "^4.17.15"
-    memoizerific "^1.11.3"
-    qs "^6.6.0"
-    regenerator-runtime "^0.13.7"
-    stable "^0.1.8"
-    store2 "^2.7.1"
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
@@ -3642,33 +3605,6 @@
     react-textarea-autosize "^7.1.0"
     simplebar-react "^1.0.0-alpha.6"
     ts-dedent "^1.1.0"
-
-"@storybook/components@6.1.19":
-  version "6.1.19"
-  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-6.1.19.tgz#173c7f61fa3a50f674ff0a79520f18ed0485c04e"
-  integrity sha512-vDkoLTV71LFVIXERsvuVb3A1lnXTlwBwsJA6IDXDuwygdSdJ1VYVmUbecjSNQNEMf1qJGavjIDQ2RGKNP7v7+Q==
-  dependencies:
-    "@popperjs/core" "^2.5.4"
-    "@storybook/client-logger" "6.1.19"
-    "@storybook/csf" "0.0.1"
-    "@storybook/theming" "6.1.19"
-    "@types/overlayscrollbars" "^1.9.0"
-    "@types/react-color" "^3.0.1"
-    "@types/react-syntax-highlighter" "11.0.4"
-    core-js "^3.0.1"
-    fast-deep-equal "^3.1.1"
-    global "^4.3.2"
-    lodash "^4.17.15"
-    markdown-to-jsx "^6.11.4"
-    memoizerific "^1.11.3"
-    overlayscrollbars "^1.10.2"
-    polished "^3.4.4"
-    react-color "^2.17.0"
-    react-popper-tooltip "^3.1.1"
-    react-syntax-highlighter "^13.5.0"
-    react-textarea-autosize "^8.1.1"
-    regenerator-runtime "^0.13.7"
-    ts-dedent "^2.0.0"
 
 "@storybook/components@6.1.20":
   version "6.1.20"
@@ -20082,9 +20018,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 typescript@^4.1.5:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.5.tgz#123a3b214aaff3be32926f0d8f1f6e704eb89a72"
-  integrity sha512-6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.2.tgz#1450f020618f872db0ea17317d16d8da8ddb8c4c"
+  integrity sha512-tbb+NVrLfnsJy3M59lsDgrzWIflR4d4TIUjz+heUnHZwdF7YsrMTKoRERiIvI2lvBG95dfpLxB21WZhys1bgaQ==
 
 ua-parser-js@^0.7.18:
   version "0.7.22"
