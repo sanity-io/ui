@@ -101,7 +101,7 @@ function DebugLayer() {
 }
 
 export const position = () => {
-  const open = boolean('Open', false, 'Props')
+  const open = boolean('Open', true, 'Props')
   const position = select('Position', ['fixed', 'absolute'], 'fixed', 'Props')
 
   return (
@@ -220,6 +220,7 @@ function NestedExample() {
                           <MenuItem text="Test" />
                         </Menu>
                       }
+                      portal
                     />
                   </Box>
                 </Dialog>
