@@ -77,6 +77,7 @@ const DialogLayout = styled(Flex)`
 
 const DialogHeader = styled(Card)`
   position: relative;
+  z-index: 2;
 
   &:after {
     content: '';
@@ -90,11 +91,15 @@ const DialogHeader = styled(Card)`
 `
 
 const DialogContent = styled(Box)`
+  position: relative;
+  z-index: 1;
   overflow: auto;
   outline: none;
 `
 
 const DialogFooter = styled(Box)`
+  position: relative;
+  z-index: 3;
   border-top: 1px solid var(--card-hairline-soft-color);
 `
 
@@ -194,9 +199,11 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
               </Box>
             </Flex>
           </DialogHeader>
+
           <DialogContent flex={1} ref={setContentRef} tabIndex={-1}>
             {children}
           </DialogContent>
+
           {footer && <DialogFooter>{footer}</DialogFooter>}
         </DialogLayout>
       </DialogCardRoot>
