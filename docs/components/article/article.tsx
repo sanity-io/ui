@@ -1,9 +1,10 @@
-import {Box, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/ui'
+import {Box, Button, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
 import {ArticleContent} from './articleContent'
 import {getHeadings, getTOCTree} from './helpers'
 import {HeadingNode} from './types'
 import {TimeAgo} from '$components'
+import {FigmaLogo} from '$components/assets/figmaLogo'
 import {isArray, isRecord, isString} from '$lib/types'
 
 export function Article(props: {article: Record<string, unknown>}) {
@@ -23,6 +24,31 @@ export function Article(props: {article: Record<string, unknown>}) {
                   <Heading as="h1" size={[2, 2, 3, 4]}>
                     {String(article.title)}
                   </Heading>
+
+                  {isRecord(article.figma) && typeof article.figma.url === 'string' && (
+                    <Box marginTop={[3, 3, 4]}>
+                      <Button
+                        as="a"
+                        href={article.figma.url}
+                        mode="ghost"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <Flex padding={[2, 2, 3]}>
+                          <Text size={[1, 1, 2]}>
+                            <FigmaLogo />
+                          </Text>
+                          <Box marginLeft={3}>
+                            <Text size={[1, 1, 2]}>
+                              {(typeof article.figma.title === 'string' && article.figma.title) || (
+                                <>Open in Figma</>
+                              )}
+                            </Text>
+                          </Box>
+                        </Flex>
+                      </Button>
+                    </Box>
+                  )}
                 </Container>
               </Box>
 
