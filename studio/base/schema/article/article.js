@@ -2,6 +2,29 @@ import {contentField} from './content/contentField'
 
 const titleField = {type: 'string', name: 'title', title: 'Title'}
 
+const figmaField = {
+  type: 'object',
+  name: 'figma',
+  title: 'Figma',
+  fields: [
+    {
+      type: 'string',
+      name: 'title',
+      title: 'Title',
+    },
+    {
+      type: 'string',
+      name: 'url',
+      title: 'URL',
+      description: 'The URL to a Figma resource',
+    },
+  ],
+  options: {
+    collapsible: true,
+    collapsed: true,
+  },
+}
+
 // const layoutField = {
 //   type: 'object',
 //   name: 'layout',
@@ -15,6 +38,7 @@ export const article = {
   title: 'Article',
   fields: [
     titleField,
+    figmaField,
     contentField,
     // layoutField,
     {
