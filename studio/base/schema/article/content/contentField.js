@@ -21,6 +21,24 @@ export const figmaEmbedBlock = {
   ],
 }
 
+export const figmaButtonBlock = {
+  type: 'object',
+  name: 'content.figmaButton',
+  title: 'Figma button',
+  fields: [
+    {
+      type: 'string',
+      name: 'title',
+      title: 'Title',
+    },
+    {
+      type: 'string',
+      name: 'url',
+      title: 'URL',
+    },
+  ],
+}
+
 const codeBlock = {
   type: 'code',
   name: 'code',
@@ -116,5 +134,6 @@ export const contentField = {
     imageBlock,
     calloutBlock,
     figmaEmbedBlock,
+    figmaButtonBlock,
   ],
 }
