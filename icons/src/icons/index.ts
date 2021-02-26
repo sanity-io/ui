@@ -2,6 +2,8 @@
  * AUTO-GENERATED, DO NOT EDIT
  */
 
+import {IconComponent} from '../types'
+
 import {default as ActivityIcon} from './activityIcon'
 import {default as AddCircleIcon} from './addCircleIcon'
 import {default as AddIcon} from './addIcon'
@@ -404,7 +406,142 @@ export {
   WarningOutlineIcon,
 }
 
-export const icons = {
+export interface IconMap {
+  activity: IconComponent
+  'add-circle': IconComponent
+  add: IconComponent
+  archive: IconComponent
+  'arrow-down': IconComponent
+  'arrow-left': IconComponent
+  'arrow-right': IconComponent
+  'arrow-up': IconComponent
+  bell: IconComponent
+  bill: IconComponent
+  'binary-document': IconComponent
+  'block-element': IconComponent
+  blockquote: IconComponent
+  bold: IconComponent
+  book: IconComponent
+  bottle: IconComponent
+  'bulb-filled': IconComponent
+  'bulb-outline': IconComponent
+  calendar: IconComponent
+  'chart-upward': IconComponent
+  'checkmark-circle': IconComponent
+  checkmark: IconComponent
+  'chevron-down': IconComponent
+  'chevron-left': IconComponent
+  'chevron-right': IconComponent
+  'chevron-up': IconComponent
+  circle: IconComponent
+  clipboard: IconComponent
+  'clipboard-image': IconComponent
+  clock: IconComponent
+  'close-circle': IconComponent
+  close: IconComponent
+  'code-block': IconComponent
+  code: IconComponent
+  cog: IconComponent
+  collapse: IconComponent
+  comment: IconComponent
+  component: IconComponent
+  compose: IconComponent
+  controls: IconComponent
+  dashboard: IconComponent
+  database: IconComponent
+  document: IconComponent
+  'document-remove': IconComponent
+  documents: IconComponent
+  download: IconComponent
+  'drag-handle': IconComponent
+  drop: IconComponent
+  'earth-americas': IconComponent
+  'earth-globe': IconComponent
+  edit: IconComponent
+  'ellipsis-horizontal': IconComponent
+  'ellipsis-vertical': IconComponent
+  equal: IconComponent
+  'error-filled': IconComponent
+  'error-outline': IconComponent
+  expand: IconComponent
+  'eye-closed': IconComponent
+  'eye-open': IconComponent
+  folder: IconComponent
+  generate: IconComponent
+  heart: IconComponent
+  'help-circle': IconComponent
+  home: IconComponent
+  'ice-cream': IconComponent
+  image: IconComponent
+  'image-remove': IconComponent
+  images: IconComponent
+  'info-filled': IconComponent
+  'info-outline': IconComponent
+  'inline-element': IconComponent
+  italic: IconComponent
+  joystick: IconComponent
+  launch: IconComponent
+  leave: IconComponent
+  lemon: IconComponent
+  link: IconComponent
+  'link-removed': IconComponent
+  lock: IconComponent
+  'master-detail': IconComponent
+  menu: IconComponent
+  'mobile-device': IconComponent
+  moon: IconComponent
+  'ok-hand': IconComponent
+  olist: IconComponent
+  overage: IconComponent
+  package: IconComponent
+  pause: IconComponent
+  pin: IconComponent
+  'pin-removed': IconComponent
+  play: IconComponent
+  plug: IconComponent
+  publish: IconComponent
+  'remove-circle': IconComponent
+  remove: IconComponent
+  reset: IconComponent
+  restore: IconComponent
+  revert: IconComponent
+  robot: IconComponent
+  rocket: IconComponent
+  search: IconComponent
+  select: IconComponent
+  sort: IconComponent
+  spinner: IconComponent
+  'split-horizontal': IconComponent
+  'split-vertical': IconComponent
+  square: IconComponent
+  'stack-compact': IconComponent
+  star: IconComponent
+  strikethrough: IconComponent
+  sun: IconComponent
+  sync: IconComponent
+  terminal: IconComponent
+  'th-large': IconComponent
+  'th-list': IconComponent
+  'toggle-arrow-right': IconComponent
+  token: IconComponent
+  trash: IconComponent
+  'trend-upward': IconComponent
+  'triangle-outline': IconComponent
+  truncate: IconComponent
+  ulist: IconComponent
+  underline: IconComponent
+  undo: IconComponent
+  unknown: IconComponent
+  unlock: IconComponent
+  unpublish: IconComponent
+  upload: IconComponent
+  user: IconComponent
+  users: IconComponent
+  'warning-filled': IconComponent
+  'warning-outline': IconComponent
+}
+
+export const icons: IconMap = {
   activity: ActivityIcon,
   'add-circle': AddCircleIcon,
   add: AddIcon,

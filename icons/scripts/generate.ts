@@ -91,22 +91,36 @@ async function generate() {
 
   await Promise.all(files.map(writeIcon))
 
+  const importTypes = `import {IconComponent} from '../types'`
+
   const iconImports = files
     .map((f) => `import {default as ${f.componentName}} from './${f.basename}';`)
     .join('\n')
 
+  const typesExports = `export type IconSymbol = \n${files.map((f) => `| '${f.name}'`).join('\n')};`
+
   const iconExports = `export {${files.map((f) => f.componentName).join(',')}}`
 
-  const defaultExport = `export const icons = {${files
-    .map((f) => `'${f.name}': ${f.componentName}`)
+  const iconMapInterface = `export interface IconMap {${files
+    .map((f) => `'${f.name}': IconComponent`)
     .join(',')}}`
 
-  const typesExports = `export type IconSymbol = \n${files.map((f) => `| '${f.name}'`).join('\n')};`
+  const iconsExport = `export const icons: IconMap = {${files
+    .map((f) => `'${f.name}': ${f.componentName}`)
+    .join(',')}}`
 
   const indexPath = path.resolve(DIST_PATH, `index.ts`)
 
   const indexTsCode = format(
-    [GENERATED_BANNER, iconImports, typesExports, iconExports, defaultExport].join('\n\n'),
+    [
+      GENERATED_BANNER,
+      importTypes,
+      iconImports,
+      typesExports,
+      iconExports,
+      iconMapInterface,
+      iconsExport,
+    ].join('\n\n'),
     {
       ...prettierConfig,
       filepath: indexPath,

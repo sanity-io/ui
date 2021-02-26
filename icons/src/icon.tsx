@@ -12,12 +12,13 @@ export const Icon = forwardRef(
     ref: React.Ref<SVGSVGElement>
   ) => {
     const {symbol, ...restProps} = props
+    const iconComponent = icons[symbol]
 
-    if (!icons[symbol]) {
+    if (!iconComponent) {
       return null
     }
 
-    return createElement(icons[symbol], {...restProps, ref})
+    return createElement(iconComponent, {...restProps, ref})
   }
 )
 
