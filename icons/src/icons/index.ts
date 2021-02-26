@@ -7,10 +7,12 @@ import {IconComponent} from '../types'
 import {default as ActivityIcon} from './activityIcon'
 import {default as AddCircleIcon} from './addCircleIcon'
 import {default as AddIcon} from './addIcon'
+import {default as ApiIcon} from './apiIcon'
 import {default as ArchiveIcon} from './archiveIcon'
 import {default as ArrowDownIcon} from './arrowDownIcon'
 import {default as ArrowLeftIcon} from './arrowLeftIcon'
 import {default as ArrowRightIcon} from './arrowRightIcon'
+import {default as ArrowTopRightIcon} from './arrowTopRightIcon'
 import {default as ArrowUpIcon} from './arrowUpIcon'
 import {default as BellIcon} from './bellIcon'
 import {default as BillIcon} from './billIcon'
@@ -57,6 +59,7 @@ import {default as EarthGlobeIcon} from './earthGlobeIcon'
 import {default as EditIcon} from './editIcon'
 import {default as EllipsisHorizontalIcon} from './ellipsisHorizontalIcon'
 import {default as EllipsisVerticalIcon} from './ellipsisVerticalIcon'
+import {default as EnvelopeIcon} from './envelopeIcon'
 import {default as EqualIcon} from './equalIcon'
 import {default as ErrorFilledIcon} from './errorFilledIcon'
 import {default as ErrorOutlineIcon} from './errorOutlineIcon'
@@ -101,6 +104,7 @@ import {default as RemoveCircleIcon} from './removeCircleIcon'
 import {default as RemoveIcon} from './removeIcon'
 import {default as ResetIcon} from './resetIcon'
 import {default as RestoreIcon} from './restoreIcon'
+import {default as RetrieveIcon} from './retrieveIcon'
 import {default as RevertIcon} from './revertIcon'
 import {default as RobotIcon} from './robotIcon'
 import {default as RocketIcon} from './rocketIcon'
@@ -141,10 +145,12 @@ export type IconSymbol =
   | 'activity'
   | 'add-circle'
   | 'add'
+  | 'api'
   | 'archive'
   | 'arrow-down'
   | 'arrow-left'
   | 'arrow-right'
+  | 'arrow-top-right'
   | 'arrow-up'
   | 'bell'
   | 'bill'
@@ -191,6 +197,7 @@ export type IconSymbol =
   | 'edit'
   | 'ellipsis-horizontal'
   | 'ellipsis-vertical'
+  | 'envelope'
   | 'equal'
   | 'error-filled'
   | 'error-outline'
@@ -235,6 +242,7 @@ export type IconSymbol =
   | 'remove'
   | 'reset'
   | 'restore'
+  | 'retrieve'
   | 'revert'
   | 'robot'
   | 'rocket'
@@ -275,10 +283,12 @@ export {
   ActivityIcon,
   AddCircleIcon,
   AddIcon,
+  ApiIcon,
   ArchiveIcon,
   ArrowDownIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowTopRightIcon,
   ArrowUpIcon,
   BellIcon,
   BillIcon,
@@ -325,6 +335,7 @@ export {
   EditIcon,
   EllipsisHorizontalIcon,
   EllipsisVerticalIcon,
+  EnvelopeIcon,
   EqualIcon,
   ErrorFilledIcon,
   ErrorOutlineIcon,
@@ -369,6 +380,7 @@ export {
   RemoveIcon,
   ResetIcon,
   RestoreIcon,
+  RetrieveIcon,
   RevertIcon,
   RobotIcon,
   RocketIcon,
@@ -410,10 +422,12 @@ export interface IconMap {
   activity: IconComponent
   'add-circle': IconComponent
   add: IconComponent
+  api: IconComponent
   archive: IconComponent
   'arrow-down': IconComponent
   'arrow-left': IconComponent
   'arrow-right': IconComponent
+  'arrow-top-right': IconComponent
   'arrow-up': IconComponent
   bell: IconComponent
   bill: IconComponent
@@ -460,6 +474,7 @@ export interface IconMap {
   edit: IconComponent
   'ellipsis-horizontal': IconComponent
   'ellipsis-vertical': IconComponent
+  envelope: IconComponent
   equal: IconComponent
   'error-filled': IconComponent
   'error-outline': IconComponent
@@ -504,6 +519,7 @@ export interface IconMap {
   remove: IconComponent
   reset: IconComponent
   restore: IconComponent
+  retrieve: IconComponent
   revert: IconComponent
   robot: IconComponent
   rocket: IconComponent
@@ -545,10 +561,12 @@ export const icons: IconMap = {
   activity: ActivityIcon,
   'add-circle': AddCircleIcon,
   add: AddIcon,
+  api: ApiIcon,
   archive: ArchiveIcon,
   'arrow-down': ArrowDownIcon,
   'arrow-left': ArrowLeftIcon,
   'arrow-right': ArrowRightIcon,
+  'arrow-top-right': ArrowTopRightIcon,
   'arrow-up': ArrowUpIcon,
   bell: BellIcon,
   bill: BillIcon,
@@ -595,6 +613,7 @@ export const icons: IconMap = {
   edit: EditIcon,
   'ellipsis-horizontal': EllipsisHorizontalIcon,
   'ellipsis-vertical': EllipsisVerticalIcon,
+  envelope: EnvelopeIcon,
   equal: EqualIcon,
   'error-filled': ErrorFilledIcon,
   'error-outline': ErrorOutlineIcon,
@@ -639,6 +658,7 @@ export const icons: IconMap = {
   remove: RemoveIcon,
   reset: ResetIcon,
   restore: RestoreIcon,
+  retrieve: RetrieveIcon,
   revert: RevertIcon,
   robot: RobotIcon,
   rocket: RocketIcon,
