@@ -46,6 +46,7 @@ import {default as CommentIcon} from './commentIcon'
 import {default as ComponentIcon} from './componentIcon'
 import {default as ComposeIcon} from './composeIcon'
 import {default as ControlsIcon} from './controlsIcon'
+import {default as CopyIcon} from './copyIcon'
 import {default as DashboardIcon} from './dashboardIcon'
 import {default as DatabaseIcon} from './databaseIcon'
 import {default as DocumentIcon} from './documentIcon'
@@ -184,6 +185,7 @@ export type IconSymbol =
   | 'component'
   | 'compose'
   | 'controls'
+  | 'copy'
   | 'dashboard'
   | 'database'
   | 'document'
@@ -322,6 +324,7 @@ export {
   ComponentIcon,
   ComposeIcon,
   ControlsIcon,
+  CopyIcon,
   DashboardIcon,
   DatabaseIcon,
   DocumentIcon,
@@ -461,6 +464,7 @@ export interface IconMap {
   component: IconComponent
   compose: IconComponent
   controls: IconComponent
+  copy: IconComponent
   dashboard: IconComponent
   database: IconComponent
   document: IconComponent
@@ -600,6 +604,7 @@ export const icons: IconMap = {
   component: ComponentIcon,
   compose: ComposeIcon,
   controls: ControlsIcon,
+  copy: CopyIcon,
   dashboard: DashboardIcon,
   database: DatabaseIcon,
   document: DocumentIcon,
