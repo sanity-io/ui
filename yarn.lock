@@ -10150,13 +10150,13 @@ fragment-cache@^0.2.1:
     map-cache "^0.2.2"
 
 framer-motion@^3.5.2:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-3.9.0.tgz#49374ec917eb7c7541ae1a25bdca80b3a0820808"
-  integrity sha512-U/baWYIwO5tBCgcdPIlbB30k1KPIpbi/qXWMFV43MWcK7tiAUWBtwIJyHW59PAfcC+JVHisToaWMGTAlegMe/Q==
+  version "3.9.2"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-3.9.2.tgz#8133d99afe4931a761f91b3ae5a0531272f5cdea"
+  integrity sha512-3+v13owc4eDQAW14fMJPCp2g6vJY5BrUMNYYZ+zkMoGq6xcbep+qtmTKPJCm18iRE5nc/760TKEZggnIvenGXA==
   dependencies:
     framesync "5.2.0"
     hey-listen "^1.0.8"
-    popmotion "9.3.0"
+    popmotion "9.3.1"
     style-value-types "4.1.1"
     tslib "^1.10.0"
   optionalDependencies:
@@ -15528,10 +15528,10 @@ polished@^4.0.5, polished@^4.1.1:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-popmotion@9.3.0:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-9.3.0.tgz#53c96597f01d12f6cc4edf43c72b8f14f0b24a9a"
-  integrity sha512-zIfbu7MBZpaotT6peSPNH+irQx9P8sePcfQj8x7pzyyw/pRTdyJstu/5sToxw72BdBOdYKVh/iy+UdpOnmkdDg==
+popmotion@9.3.1:
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-9.3.1.tgz#134319ed4b9b8e3ec506c99064f7b2f14bc05781"
+  integrity sha512-Qozvg8rz2OGeZwWuIjqlSXqqgWto/+QL24ll8sAAc0n71KY/wvN1W4sAASxTuHv8YWdDnk9u9IdadyPo2DGvDA==
   dependencies:
     framesync "5.2.0"
     hey-listen "^1.0.8"
