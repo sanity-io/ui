@@ -2496,61 +2496,6 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.4.3.tgz#5e29501d6df1f5062308c61acd3ecea0614c8cbf"
-  integrity sha512-dhfXbCUL9TJcpf16mUdstAqfVlwDcGYSawzzuqyNv3CID/F7nyMBTkhsUahggaTGNJGR5sO1XaIb9XfWlYI4Xw==
-  dependencies:
-    "@popperjs/core" "^2.5.4"
-    "@reach/auto-id" "^0.10.5"
-    "@sanity/bifur-client" "^0.0.7"
-    "@sanity/client" "2.2.6"
-    "@sanity/color" "^1.0.0"
-    "@sanity/generate-help-url" "2.2.6"
-    "@sanity/icons" "^1.0.1"
-    "@sanity/image-url" "^0.140.19"
-    "@sanity/initial-value-templates" "2.4.0"
-    "@sanity/mutator" "2.2.6"
-    "@sanity/schema" "2.2.6"
-    "@sanity/state-router" "2.2.6"
-    "@sanity/structure" "2.4.0"
-    "@sanity/transaction-collator" "2.2.6"
-    "@sanity/types" "2.4.0"
-    "@sanity/ui" "^0.33.6"
-    "@sanity/util" "2.4.0"
-    "@sanity/validation" "2.3.8"
-    boundless-arrow-key-navigation "^1.1.0"
-    chance "^1.0.4"
-    circular-at "^1.0.3"
-    classnames "^2.2.5"
-    dataloader "^2.0.0"
-    date-fns "^2.16.1"
-    dom-scroll-into-view "^1.2.1"
-    element-resize-detector "^1.1.14"
-    history "^4.6.3"
-    lodash "^4.17.15"
-    nano-pubsub "^2.0.0"
-    nanoid "^3.1.9"
-    observable-callback "^1.0.1"
-    oneline "^1.0.3"
-    polished "^4.0.5"
-    popper-max-size-modifier "^0.2.0"
-    promise-props "^1.0.0"
-    raf "^3.4.1"
-    react-click-outside "^3.0.0"
-    react-fast-compare "^2.0.2"
-    react-icon-base "^2.1.2"
-    react-intl "^2.2.2"
-    react-popper "^2.2.4"
-    react-props-stream "^1.0.0"
-    react-refractor "^2.1.2"
-    react-sortable-hoc "^1.11.0"
-    react-split-pane "^0.1.84"
-    rxjs "^6.5.3"
-    semver-compare "^1.0.0"
-    shallow-equals "^1.0.0"
-    styled-components "^5.2.1"
-
 "@sanity/base@2.5.0", "@sanity/base@^2.4.3":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.5.0.tgz#14c1535c97cc321476c3bf466219044ba3e62c52"
@@ -2763,14 +2708,14 @@
     lodash "^4.17.15"
 
 "@sanity/default-layout@^2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.4.3.tgz#941e5aadd1d0f914c13dea7493aff44d5d0c2e6f"
-  integrity sha512-/TNUbpkc62wTibg3XgJLzVFovTru8FUyWQr3QMHdC5EXXnRe2+nd4jCSnBsFwC6dJ6kR/dq2XoHF7gnJ8ksVQQ==
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.5.0.tgz#c16990bdce671e1d685a83b656b9bef51fb3e944"
+  integrity sha512-hSNqH15SR904RkysOvA8XfX69A852l1/o2ibrcElzeO9E1NLWRWjL7+yq5HqlPgfcJvG5k3E1yJ533TMEtKZXw==
   dependencies:
-    "@sanity/base" "2.4.3"
+    "@sanity/base" "2.5.0"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/ui" "^0.33.6"
-    "@sanity/util" "2.4.0"
+    "@sanity/util" "2.5.0"
     classnames "^2.2.5"
     is-hotkey "^0.1.4"
     lodash "^4.17.15"
@@ -2979,19 +2924,6 @@
     tempy "^0.3.0"
     whatwg-url "^7.0.0"
 
-"@sanity/initial-value-templates@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@sanity/initial-value-templates/-/initial-value-templates-2.4.0.tgz#ae422c6b9dd364a92252ceae236991b4caf97915"
-  integrity sha512-hyNJTdq+27EEwP78wrqNAAXPPedbo8+WZelBcitfGxvisRZ6HRPxgn7GxBLrFdz2xnitJOSORZ2PgAkAOo4L9A==
-  dependencies:
-    "@sanity/util" "2.4.0"
-    "@types/lodash" "^4.14.149"
-    "@types/memoize-one" "^3.1.1"
-    "@types/node" "^8.0.0"
-    lodash "^4.17.15"
-    memoize-one "^3.1.1"
-    oneline "^1.0.3"
-
 "@sanity/initial-value-templates@2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@sanity/initial-value-templates/-/initial-value-templates-2.5.0.tgz#399eff5378c9c466c5f62d56a1147bc2da9d2bfe"
@@ -3165,18 +3097,6 @@
     lodash "^4.17.15"
     nano-pubsub "^2.0.0"
 
-"@sanity/structure@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@sanity/structure/-/structure-2.4.0.tgz#ede022f97fa9fd177e613c2b44a6d9fc277a2e20"
-  integrity sha512-wJIiZRSK1h1HKpzjT7NbsmMI9KPIV3OR7tS4VuNGkw4MA5JKR4b1SFiy6yddfmwOTlMPxKy3v4aEF7s/RTbR8g==
-  dependencies:
-    "@sanity/initial-value-templates" "2.4.0"
-    "@types/lodash" "^4.14.149"
-    "@types/memoize-one" "^3.1.1"
-    "@types/node" "^8.0.0"
-    lodash "^4.17.15"
-    memoize-one "^3.1.1"
-
 "@sanity/structure@2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@sanity/structure/-/structure-2.5.0.tgz#662963d9301d074becf98a9d479f65d600717b17"
@@ -3192,15 +3112,6 @@
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/@sanity/timed-out/-/timed-out-4.0.2.tgz#c9f61f9a1609baa1eb3e4235a24ea2a775022cdf"
   integrity sha512-NBDKGj14g9Z+bopIvZcQKWCzJq5JSrdmzRR1CS+iyA3Gm8SnIWBfZa7I3mTg2X6Nu8LQXG0EPKXdOGozLS4i3w==
-
-"@sanity/transaction-collator@2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@sanity/transaction-collator/-/transaction-collator-2.2.6.tgz#c933a70ae42ad1f22499f285531e139d949e578b"
-  integrity sha512-pCzYLGqv2Ddt2AHM3qiDC2p8BXtSgJxcumEMx4OoodltUEjQqz3ePhq9DckXr5SiJJ9Vn5zr1k/i4Z3lSqBM2A==
-  dependencies:
-    "@types/lodash" "^4.14.149"
-    "@types/node" "^8.0.0"
-    lodash "^4.17.15"
 
 "@sanity/transaction-collator@2.5.0":
   version "2.5.0"
@@ -3255,16 +3166,6 @@
   dependencies:
     "@types/uuid" "^8.0.0"
     uuid "^8.0.0"
-
-"@sanity/validation@2.3.8":
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/@sanity/validation/-/validation-2.3.8.tgz#2faaeb8dce5751ba748403ff72f884c3c9f18b19"
-  integrity sha512-3h+5/JfgZ8fz1Thq36oODw9J7y5sKnhYoi9HA+VYXGrRV/DKsE7BMToTfppYLBrD8HFAwBtnrNQfDtY2hYYEoA==
-  dependencies:
-    clone-deep "^2.0.1"
-    date-fns "^2.16.1"
-    es6-error "^4.0.2"
-    type-of-is "^3.5.1"
 
 "@sanity/validation@2.5.0":
   version "2.5.0"
@@ -4294,11 +4195,6 @@
   version "12.12.50"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.50.tgz#e9b2e85fafc15f2a8aa8fdd41091b983da5fd6ee"
   integrity sha512-5ImO01Fb8YsEOYpV+aeyGYztcYcjGsBvN4D7G5r1ef2cuQOpymjWNQi5V0rKHE6PC2ru3HkoUr/Br2/8GUA84w==
-
-"@types/node@^8.0.0":
-  version "8.10.66"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.66.tgz#dd035d409df322acc83dff62a602f12a5783bbb3"
-  integrity sha512-tktOkFUA4kXx2hhhrB8bIFb5TbwzS4uOhKEmwiD+NoiL0qtP2OQ9mFldbgD4dV1djrlBYP6eBuQZiWjuHUpqFw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
