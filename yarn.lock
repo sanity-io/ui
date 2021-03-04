@@ -3008,19 +3008,6 @@
     path-exists "^3.0.0"
     promise-props-recursive "^1.0.0"
 
-"@sanity/schema@2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@sanity/schema/-/schema-2.2.6.tgz#0aacff92b858a0c54596dd974fe66692a1304a69"
-  integrity sha512-Z0DurxHg0ozLjseG2tkXr9pZB2tdbMzoBnouY5XAWKxXcYbBtfN+YLoqodztnFtOkTyVRLZiSphEcl/TxWICEg==
-  dependencies:
-    "@sanity/generate-help-url" "2.2.6"
-    arrify "^1.0.1"
-    humanize-list "^1.0.1"
-    json-reduce "^1.0.0"
-    leven "^2.1.0"
-    lodash "^4.17.15"
-    object-inspect "^1.6.0"
-
 "@sanity/schema@2.5.0", "@sanity/schema@^2.0.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@sanity/schema/-/schema-2.5.0.tgz#65d0d372367b60d3861b7ddaff374c6d20699784"
@@ -3121,31 +3108,12 @@
     "@types/lodash" "^4.14.149"
     lodash "^4.17.15"
 
-"@sanity/types@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.4.0.tgz#061b5eae40d2903053f228fedfc3363e0066b093"
-  integrity sha512-/5Kpdof1hSXE3I9UrFZ72bF7nyce0NOUW3hcOPnDb6I+PFRwUv0+sck+WTGrLvlBOdXoN0RMv37KR59Oz88wUA==
-  dependencies:
-    "@types/react" "^17.0.0"
-
 "@sanity/types@2.5.0", "@sanity/types@^2.0.0", "@sanity/types@^2.0.1":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.5.0.tgz#498b8d734ac8629f0ab5993de0136feb4e27d8d6"
   integrity sha512-GlcWR4ktTBt5qob0urNXBTnTLXmNg7tEoEjcmkWrqBc6H3vgSd5OrrGrIoiLJSsXxBYrkBAzBONhncYpXpn6Kw==
   dependencies:
     "@types/react" "^17.0.0"
-
-"@sanity/util@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@sanity/util/-/util-2.4.0.tgz#0fed6f1fdd5c53b0232b811c5bca2b6f0fb7e108"
-  integrity sha512-ksswG6uKPEGxFAY/grqQz4YspRCnIfVxkKPr+U7jcrL+Wikz9Frz2gIME7VBCY6t9veFxuyVd0hvdW3NRnSDAA==
-  dependencies:
-    "@sanity/types" "2.4.0"
-    dotenv "^8.2.0"
-    fs-extra "^6.0.1"
-    get-random-values "^1.2.0"
-    lodash "^4.17.15"
-    resolve-from "^4.0.0"
 
 "@sanity/util@2.5.0":
   version "2.5.0"
@@ -20663,9 +20631,9 @@ webpack@^4.44.2:
     webpack-sources "^1.4.1"
 
 webpack@^5.23.0:
-  version "5.24.2"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.24.2.tgz#33790dad631e8b639f4246d762e257720875fe54"
-  integrity sha512-uxxKYEY4kMNjP+D2Y+8aw5Vd7ar4pMuKCNemxV26ysr1nk0YDiQTylg9U3VZIdkmI0YHa0uC8ABxL+uGxGWWJg==
+  version "5.24.3"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.24.3.tgz#6ec0f5059f8d7c7961075fa553cfce7b7928acb3"
+  integrity sha512-x7lrWZ7wlWAdyKdML6YPvfVZkhD1ICuIZGODE5SzKJjqI9A4SpqGTjGJTc6CwaHqn19gGaoOR3ONJ46nYsn9rw==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.46"
