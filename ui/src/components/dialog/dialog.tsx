@@ -14,6 +14,7 @@ import {
   ResponsiveDialogPositionStyleProps,
 } from './styles'
 import {DialogPosition} from './types'
+import {useDialog} from './useDialog'
 
 export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProps {
   cardRadius?: number | number[]
@@ -218,6 +219,7 @@ export const Dialog = forwardRef(
     props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
     ref: React.Ref<HTMLDivElement>
   ) => {
+    const dialog = useDialog()
     const {
       cardRadius = 3,
       cardShadow = 4,
@@ -229,9 +231,10 @@ export const Dialog = forwardRef(
       onClickOutside,
       onClose,
       padding = 4,
-      position = 'fixed',
+      position = dialog.position || 'fixed',
       scheme,
       width = 0,
+      zOffset = dialog.zOffset,
       ...restProps
     } = props
     const preDivRef = useRef<HTMLDivElement | null>(null)
@@ -274,6 +277,7 @@ export const Dialog = forwardRef(
           onFocus={handleFocus}
           ref={ref}
           role="dialog"
+          zOffset={zOffset}
         >
           <div ref={preDivRef} tabIndex={0} />
           <DialogCard
