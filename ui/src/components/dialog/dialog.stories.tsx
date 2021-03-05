@@ -6,6 +6,7 @@ import {
   Code,
   Dialog,
   DialogProps,
+  DialogProvider,
   Layer,
   LayerProvider,
   Menu,
@@ -94,12 +95,6 @@ export const layering = () => {
   )
 }
 
-function DebugLayer() {
-  const layer = useLayer()
-
-  return <Code language="json">{JSON.stringify(layer, null, 2)}</Code>
-}
-
 export const position = () => {
   const open = boolean('Open', true, 'Props')
   const position = select('Position', ['fixed', 'absolute'], 'fixed', 'Props')
@@ -123,6 +118,23 @@ export const position = () => {
       </Box>
     </Box>
   )
+}
+
+export const provider = () => {
+  return (
+    <DialogProvider position="absolute" zOffset={1000}>
+      <Dialog id="provider-example">
+        Hello
+        <Dialog id="nested-provider-example">Hello</Dialog>
+      </Dialog>
+    </DialogProvider>
+  )
+}
+
+function DebugLayer() {
+  const layer = useLayer()
+
+  return <Code language="json">{JSON.stringify(layer, null, 2)}</Code>
 }
 
 function PropsExample(
