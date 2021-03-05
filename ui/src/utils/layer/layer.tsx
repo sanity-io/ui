@@ -6,7 +6,7 @@ import {useLayer} from './useLayer'
 
 export interface LayerProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  zOffset?: number
+  zOffset?: number | number[]
 }
 
 interface LayerChildrenProps {

@@ -73,6 +73,16 @@ export const multipleRoots = () => {
   )
 }
 
+export const responsiveZOffset = () => {
+  return (
+    <Layer id="responsive-layer" zOffset={[1, 2, 3]}>
+      <Card padding={3} shadow={1}>
+        <LayerDebugInfo />
+      </Card>
+    </Layer>
+  )
+}
+
 function LayerDebugInfo() {
   const layer = useLayer()
 

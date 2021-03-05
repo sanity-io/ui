@@ -20,7 +20,7 @@ interface ToastProviderProps {
   padding?: number | number[]
   paddingX?: number | number[]
   paddingY?: number | number[]
-  zOffset?: number
+  zOffset?: number | number[]
 }
 
 const Root = styled(Layer)`

@@ -1,15 +1,19 @@
 import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react'
+import {useMediaIndex, useResponsiveProp} from '../../hooks'
 import {LayerContext, LayerContextValue} from './layerContext'
 
 export function LayerProvider({
   children,
-  zOffset = 0,
+  zOffset: zOffsetProp = 0,
 }: {
   children?: React.ReactNode
-  zOffset?: number
+  zOffset?: number | number[]
 }) {
   const parent = useContext(LayerContext)
-  const zIndex = parent ? parent.zIndex + zOffset : zOffset
+  const zOffset = useResponsiveProp(zOffsetProp)
+  const maxMediaIndex = zOffset.length - 1
+  const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
+  const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
   const [size, setSize] = useState(0)
 
   const registerChild = useCallback(() => {
