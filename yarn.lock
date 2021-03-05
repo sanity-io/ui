@@ -2551,7 +2551,7 @@
     shallow-equals "^1.0.0"
     styled-components "^5.2.1"
 
-"@sanity/base@^2.4.3":
+"@sanity/base@2.6.0", "@sanity/base@^2.4.3":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.6.0.tgz#98f2816ba8d6fd7b3d5f6c608e26eae819cb83d0"
   integrity sha512-HT13hy07xGBnwmyezVTRZkk7FdGaJ1raZE0qq7FwtzhT7d1+4rNu2rkfY4uNrpEAnI0+BgkX5LvEikUDeNFzfQ==
@@ -2763,14 +2763,14 @@
     lodash "^4.17.15"
 
 "@sanity/default-layout@^2.4.3":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.5.0.tgz#c16990bdce671e1d685a83b656b9bef51fb3e944"
-  integrity sha512-hSNqH15SR904RkysOvA8XfX69A852l1/o2ibrcElzeO9E1NLWRWjL7+yq5HqlPgfcJvG5k3E1yJ533TMEtKZXw==
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.6.0.tgz#2f5b7d5a54016a1b632d4dafc103aa0f4aa6838e"
+  integrity sha512-bGIHaDZzI5BJlLAJ21XMhUm3zR8vJsKURcbqOK/moDuBvbOfbrmTvnadTljV8KEubCnRFZMw446qZQqY1b6uFQ==
   dependencies:
-    "@sanity/base" "2.5.0"
+    "@sanity/base" "2.6.0"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/ui" "^0.33.6"
-    "@sanity/util" "2.5.0"
+    "@sanity/util" "2.6.0"
     classnames "^2.2.5"
     is-hotkey "^0.1.4"
     lodash "^4.17.15"
