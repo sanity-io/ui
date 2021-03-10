@@ -7,7 +7,7 @@
     "clean": "rimraf .next",
     "dev": "next dev -p 3003",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
-    "prebuild": "npm run clean",
+    "prebuild": "yarn clean",
     "start": "next start",
     "type-check": "tsc --noEmit"
   },

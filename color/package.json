@@ -9,22 +9,24 @@
     "/dist"
   ],
   "scripts": {
-    "build": "run-p build:*",
-    "build:cjs": "tsc --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir src --target ES5",
-    "build:es": "tsc --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6",
+    "build": "run-s build:esbuild build:decl copy:decl:* clean:decl",
+    "build:esbuild": "node -r esbuild-register scripts/build.ts",
+    "build:decl": "tsc --emitDeclarationOnly --outDir dist/decl --project tsconfig.dist.json --rootDir ./src",
     "clean": "rimraf dist",
-    "generate": "ts-node scripts/build.ts",
+    "clean:decl": "rimraf dist/decl",
+    "copy:decl:cjs": "cpx 'dist/decl/**/*.{d.ts,d.ts.map}' dist/cjs",
+    "copy:decl:es": "cpx 'dist/decl/**/*.{d.ts,d.ts.map}' dist/es",
+    "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts",
-    "prebuild": "npm run clean && npm run generate",
-    "prepublishOnly": "npm run build",
+    "prebuild": "yarn clean && yarn generate",
+    "prepublishOnly": "yarn build",
     "type-check": "tsc --noEmit",
     "watch": "run-p watch:*",
     "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir src --target ES5",
     "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
   },
   "devDependencies": {
-    "polished": "^4.1.1",
-    "ts-node": "^9.1.1"
+    "polished": "^4.1.1"
   },
   "repository": {
     "type": "git",

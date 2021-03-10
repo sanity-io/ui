@@ -7,10 +7,9 @@
 git clone git@github.com:sanity-io/design.git
 cd design
 yarn install
-yarn build:packages
 
-# Build core packages
-yarn build:packages
+# Build packages
+yarn build
 
 # Run the docs dev servers (Studio and Next.js apps)
 yarn dev:docs

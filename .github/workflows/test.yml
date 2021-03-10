@@ -33,7 +33,7 @@ jobs:
         run: yarn install
 
       - name: Build packages
-        run: yarn build:packages
+        run: yarn build
 
       - name: Lint code
         run: yarn lint
