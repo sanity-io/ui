@@ -14,11 +14,12 @@ export interface MenuButtonProps {
   placement?: Placement
   popoverScheme?: ThemeColorSchemeKey
   popoverRadius?: number | number[]
-
   /**
-   * @beta Do not use in production.
+   * Do not use in production.
+   * @beta
    */
   portal?: boolean
+  preventOverflow?: boolean
 }
 
 export function MenuButton({
@@ -30,6 +31,7 @@ export function MenuButton({
   popoverScheme,
   portal,
   popoverRadius,
+  preventOverflow,
 }: MenuButtonProps) {
   const [open, setOpen] = useState(false)
   const [focusLast, setFocusLast] = useState(false)
@@ -121,6 +123,7 @@ export function MenuButton({
       open={open}
       placement={placement}
       portal={portal}
+      preventOverflow={preventOverflow}
       radius={popoverRadius}
       scheme={popoverScheme}
     >
