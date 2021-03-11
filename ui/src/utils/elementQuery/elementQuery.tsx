@@ -1,33 +1,35 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react'
+import React, {forwardRef, useEffect, useMemo, useState} from 'react'
+import {useForwardedRef} from '../../hooks'
 import {useTheme} from '../../theme'
 import {ResizeObserver} from '../resizeObserver'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
-export function ElementQuery(props: React.HTMLProps<HTMLDivElement>) {
+export const ElementQuery = forwardRef(function ElementQuery(
+  props: React.HTMLProps<HTMLDivElement>,
+  ref: React.Ref<HTMLDivElement>
+) {
   const theme = useTheme()
   const {media} = theme.sanity
   const {children, ...restProps} = props
-  const rootRef = useRef<HTMLDivElement | null>(null)
-  const [width, setWidth] = useState(() => {
-    return window.innerWidth
-  })
+  const [width, setWidth] = useState(() => window.innerWidth)
+  const forwardedRef = useForwardedRef(ref)
 
   useEffect(() => {
     let ro: ResizeObserver
 
-    if (rootRef.current) {
+    if (forwardedRef.current) {
       const handleResizeEntries: ResizeObserverCallback = (entries) => {
         setWidth(entries[0].contentRect.width)
       }
 
       ro = new ResizeObserver(handleResizeEntries)
-      ro.observe(rootRef.current)
+      ro.observe(forwardedRef.current)
     }
 
     return () => {
       if (ro) ro.disconnect()
     }
-  }, [])
+  }, [forwardedRef])
 
   const max = useMemo(() => findMaxBreakpoints(media, width), [media, width])
   const min = useMemo(() => findMinBreakpoints(media, width), [media, width])
@@ -37,9 +39,9 @@ export function ElementQuery(props: React.HTMLProps<HTMLDivElement>) {
       {...restProps}
       data-eq-max={max.length ? max.join(' ') : undefined}
       data-eq-min={min.length ? min.join(' ') : undefined}
-      ref={rootRef}
+      ref={forwardedRef}
     >
       {children}
     </div>
   )
-}
+})
