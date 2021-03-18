@@ -2670,9 +2670,9 @@
     rxjs "^6.5.3"
 
 "@sanity/desk-tool@^2.6.1":
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/@sanity/desk-tool/-/desk-tool-2.6.2.tgz#a38ba04a39b8f92718ce75f63507cb2a7bcc46fb"
-  integrity sha512-zRFnZ2+QqVAzj40gizQ7Dmf/oX6lweH9CQcdzeS1OK3z0CeUGFthNJ8XaVFRixfMRPSble+89MOr+X98cXzYeQ==
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/@sanity/desk-tool/-/desk-tool-2.6.3.tgz#5e21c54a392a138482cdbcbfb377d491aca637cd"
+  integrity sha512-7WFTGh018r4yjrRdprqEyTRP5Pq5oKa1xkbePlAT79xcAFvULcIGf2zOBfRTysJ7Lc6ZWQ7jpoHPoBiapnQ5pQ==
   dependencies:
     "@popperjs/core" "^2.5.4"
     "@reach/auto-id" "^0.13.2"
@@ -2680,7 +2680,7 @@
     "@sanity/data-aspects" "2.2.6"
     "@sanity/diff" "2.2.6"
     "@sanity/field" "2.6.2"
-    "@sanity/form-builder" "2.6.2"
+    "@sanity/form-builder" "2.6.3"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/mutator" "2.2.6"
     "@sanity/react-hooks" "2.6.0"
@@ -2754,10 +2754,10 @@
     sanity-diff-patch "^1.0.9"
     styled-components "^5.2.1"
 
-"@sanity/form-builder@2.6.2":
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/@sanity/form-builder/-/form-builder-2.6.2.tgz#da5f404d4e146d746370881f6751bcac0be44559"
-  integrity sha512-AV8KVgnThM8qPHhW4oLe5JvebgWMyQqsZoNSPXJYmKJi/NKzSLWO4M3FVm5K0VVhS4DgsaRn0whilJkzs6VN0w==
+"@sanity/form-builder@2.6.3":
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/@sanity/form-builder/-/form-builder-2.6.3.tgz#076c94337a21967cba2717065cb80abb78456da2"
+  integrity sha512-xDbFkgXBhv19cvvJGpyZ4CAAP4LxP1QGfazmldOSFNuu8gYDoVnsb7kbjqfdXSX5x7Nu0UvnVAYzamu4OE2Uiw==
   dependencies:
     "@reach/auto-id" "^0.13.2"
     "@sanity/base" "2.6.2"
@@ -2792,7 +2792,7 @@
     pretty-ms "^7.0.1"
     react-click-outside "^3.0.0"
     react-container-query "^0.11.0"
-    react-datepicker "^1.8.0"
+    react-focus-lock "^2.5.0"
     react-measure "^2.3.0"
     rxjs "^6.5.3"
     scroll-into-view-if-needed "^2.2.26"
@@ -16727,16 +16727,6 @@ react-container-query@^0.11.0:
     container-query-toolkit "0.1.3"
     resize-observer-lite "0.2.3"
 
-react-datepicker@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-1.8.0.tgz#ee46148aa10234d42e22ab969d1110f74263ba56"
-  integrity sha512-N4LdVTtqJCsZyKXBQ/AqSEcH6FyhgsY1gD07zECNu60nGt5s4ngRlhYdHoE34VNFO+ZY+pvljZRLwSC8LS9RxQ==
-  dependencies:
-    classnames "^2.2.5"
-    prop-types "^15.6.0"
-    react-onclickoutside "^6.7.1"
-    react-popper "^1.0.2"
-
 react-dev-utils@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.4.tgz#a7ccb60257a1ca2e0efe7a83e38e6700d17aa37a"
@@ -16847,7 +16837,7 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-focus-lock@^2.1.0:
+react-focus-lock@^2.1.0, react-focus-lock@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-focus-lock/-/react-focus-lock-2.5.0.tgz#12e3a3940e897c26e2c2a0408cd25ea3c99b3709"
   integrity sha512-XLxj6uTXgz0US8TmqNU2jMfnXwZG0mH2r/afQqvPEaX6nyEll5LHVcEXk2XDUQ34RVeLPkO/xK5x6c/qiuSq/A==
@@ -16969,11 +16959,6 @@ react-measure@^2.3.0:
     prop-types "^15.6.2"
     resize-observer-polyfill "^1.5.0"
 
-react-onclickoutside@^6.7.1:
-  version "6.10.0"
-  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.10.0.tgz#05abb592575b08b4d129003494056b9dff46eeeb"
-  integrity sha512-7i2L3ef+0ILXpL6P+Hg304eCQswh4jl3ynwR71BSlMU49PE2uk31k8B2GkP6yE9s2D4jTGKnzuSpzWxu4YxfQQ==
-
 react-popper-tooltip@^2.8.3:
   version "2.11.1"
   resolved "https://registry.yarnpkg.com/react-popper-tooltip/-/react-popper-tooltip-2.11.1.tgz#3c4bdfd8bc10d1c2b9a162e859bab8958f5b2644"
@@ -16991,7 +16976,7 @@ react-popper-tooltip@^3.1.1:
     "@popperjs/core" "^2.5.4"
     react-popper "^2.2.4"
 
-react-popper@^1.0.2, react-popper@^1.3.7:
+react-popper@^1.3.7:
   version "1.3.11"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.3.11.tgz#a2cc3f0a67b75b66cfa62d2c409f9dd1fcc71ffd"
   integrity sha512-VSA/bS+pSndSF2fiasHK/PTEEAyOpX60+H5EPAjoArr8JGm+oihu4UbrqcEBpQibJxBVCpYyjAX7abJ+7DoYVg==
