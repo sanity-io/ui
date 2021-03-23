@@ -29,7 +29,7 @@ export function ArcadeScreen(props: {title: string; description: string}) {
       replaceState({
         pathname: '/arcade',
         query: getArcadeQuery(params),
-      })
+      }, undefined, { shallow: true })
     }, 100)
 
     saveFnRef.current = saveFn
