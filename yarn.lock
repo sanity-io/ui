@@ -2698,12 +2698,12 @@
     lodash "^4.17.15"
 
 "@sanity/default-layout@^2.6.0":
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.6.2.tgz#37324d9c8590979dce8fd884d2ee4ad13d208062"
-  integrity sha512-JssfFc6ME0Okn+cAg4xq+L/1Jsd1Gy3sALm9tTFTLwh3ff4Fn67RIiXVhsN1z8iiEvaaHHYJw9QwrNke0E55TQ==
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.6.4.tgz#e34cdb88c8c76407ad587d34497de70f95375324"
+  integrity sha512-VJuez0uiLT3naizmOU4pLywxzIGGgY5dmR3W1ZKespvG0aoabCI9KPcyuIp4rh39cAznmw86lhclCLNfslGuqw==
   dependencies:
     "@reach/auto-id" "^0.13.2"
-    "@sanity/base" "2.6.2"
+    "@sanity/base" "2.6.4"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/ui" "^0.33.9"
     "@sanity/util" "2.6.0"
