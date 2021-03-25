@@ -3085,10 +3085,12 @@
     type-of-is "^3.5.1"
 
 "@sanity/vision@^2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.2.6.tgz#b89ff4e2338c715846184f60cef812f6f935b71e"
-  integrity sha512-xZlwc8DsFg6WqOuHoaE6to1R6TBin4lTWJgtFggiQXN5Ne9ULdlstf5FfemK9hj94BRBhMbSsD6DlXF7kAJ9Vg==
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.7.0.tgz#763216358fc5ace72d36216e3d1bf872f138978c"
+  integrity sha512-6qhk3TC7CnLVz4Mxq9rEtSahfnoP/8Il9DfBGlnPHIuVcohr2WIBQzoh7IctljBoEUlMYGfEepiYgFopyCcwIA==
   dependencies:
+    "@sanity/icons" "^1.0.5"
+    "@sanity/ui" "^0.33.9"
     classnames "^2.2.5"
     codemirror "^5.47.0"
     moment "^2.19.1"
