@@ -38,10 +38,18 @@ export function useMediaIndex() {
         if (mq.matches) setIndex(idx)
       }
 
-      mq.addEventListener('change', handleChange)
+      if (mq.addEventListener) {
+        mq.addEventListener('change', handleChange)
+      } else {
+        mq.addListener(handleChange)
+      }
 
       return () => {
-        mq.removeEventListener('change', handleChange)
+        if (mq.removeEventListener) {
+          mq.removeEventListener('change', handleChange)
+        } else {
+          mq.removeListener(handleChange)
+        }
       }
     })
 
