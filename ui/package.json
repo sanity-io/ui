@@ -34,7 +34,7 @@
     "@reach/auto-id": "^0.13.2",
     "@sanity/color": "^2.0.14",
     "@sanity/icons": "^1.0.5",
-    "framer-motion": "^3.10.2",
+    "framer-motion": "^4.0.3",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.1",
     "react-popper": "^2.2.4",
