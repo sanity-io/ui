@@ -2729,9 +2729,9 @@
     styled-components "^5.2.1"
 
 "@sanity/default-login@^2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.2.6.tgz#5f9710565bbd0a575ff7b58ff3fb3ed00f6ab7b3"
-  integrity sha512-yBrooBby/cxZ3+bZh+5GcswV+L9bbgwI/mVNIlXukEuKS62Ou6z/gjJfER9NI1BiStbF7JCxu0TSR4IAYJcZiw==
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.7.0.tgz#a6bd4b1cb8ecc50e6ad29a5a92ed8c660bc3700e"
+  integrity sha512-rxEtkcaO9OkzUSUWGLWf8OzzTCJ01lIDwIVR45Czt4Os9CRcaSuvpYN2B+JKWusgpG5WboH16MYtC4ljTORnTg==
   dependencies:
     "@sanity/generate-help-url" "2.2.6"
     prop-types "^15.6.0"
