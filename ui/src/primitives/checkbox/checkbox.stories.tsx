@@ -1,4 +1,4 @@
-import {Box, Checkbox, Flex, Text} from '@sanity/ui'
+import {Box, Checkbox, Flex, Stack, Text} from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {boolean, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useState} from 'react'
@@ -68,5 +68,24 @@ export const readOnly = () => {
         </Box>
       </Flex>
     </Card>
+  )
+}
+
+export const multipleTones = () => {
+  return (
+    <Stack>
+      <Card padding={3} tone="primary">
+        <Checkbox />
+      </Card>
+      <Card padding={3} tone="positive">
+        <Checkbox />
+      </Card>
+      <Card padding={3} tone="caution">
+        <Checkbox />
+      </Card>
+      <Card padding={3} tone="critical">
+        <Checkbox />
+      </Card>
+    </Stack>
   )
 }
