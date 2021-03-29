@@ -31,7 +31,7 @@
     "camelcase": "^6.2.0",
     "glob": "^7.1.6",
     "mkdirp": "^1.0.4",
-    "react": "^17.0.1"
+    "react": "^17.0.2"
   },
   "peerDependencies": {
     "react": "^16.9 || ^17"
