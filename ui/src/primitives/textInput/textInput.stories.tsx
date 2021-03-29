@@ -240,3 +240,22 @@ function ClearableButtonExample() {
 export const readOnly = () => {
   return <TextInput id="text-input-example" readOnly />
 }
+
+export const multipleTones = () => {
+  return (
+    <Stack>
+      <Card padding={3} tone="primary">
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="positive">
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="caution">
+        <TextInput />
+      </Card>
+      <Card padding={3} tone="critical">
+        <TextInput />
+      </Card>
+    </Stack>
+  )
+}

@@ -55,32 +55,32 @@ export function switchRepresentationStyles(props: ThemeProps) {
     pointer-events: none;
 
     /* Focus styles */
-    input:focus + & {
+    input:focus + && {
       box-shadow: ${focusRingStyle({focusRing})};
     }
 
-    input:focus:not(:focus-visible) + & {
+    input:focus:not(:focus-visible) + && {
       box-shadow: none;
     }
 
-    input:checked + & {
+    input:checked + && {
       --switch-bg-color: ${color.positive.enabled.bg};
       --switch-fg-color: ${color.positive.enabled.fg};
     }
 
     @media (hover: hover) {
-      input:not(:disabled):hover + & {
+      input:not(:disabled):hover + && {
         --switch-bg-color: ${color.default.hovered.bg};
         --switch-fg-color: ${color.default.hovered.fg};
       }
 
-      input:not(:disabled):checked:hover + & {
+      input:not(:disabled):checked:hover + && {
         --switch-bg-color: ${color.positive.hovered.bg};
         --switch-fg-color: ${color.positive.hovered.fg};
       }
     }
 
-    input:not([data-read-only]):disabled + & {
+    input:not([data-read-only]):disabled + && {
       --switch-bg-color: ${color.default.disabled.bg};
       --switch-fg-color: ${color.default.disabled.fg};
     }

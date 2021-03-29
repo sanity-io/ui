@@ -5,10 +5,13 @@ import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
-  textInputStyle,
   TextInputResponsivePaddingStyleProps,
   TextInputInputStyleProps,
   TextInputRepresentationStyleProps,
+  textInputRootStyle,
+  textInputBaseStyle,
+  textInputFontSizeStyle,
+  textInputRepresentationStyle,
 } from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 import {ResponsiveRadiusProps} from '../types'
@@ -21,7 +24,7 @@ interface TextInputProps extends ResponsiveRadiusProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.span(textInputStyle.root)
+const Root = styled.span(textInputRootStyle)
 
 const InputRoot = styled.span`
   flex: 1;
@@ -32,12 +35,13 @@ const InputRoot = styled.span`
 
 const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
-  textInputStyle.input
+  textInputBaseStyle,
+  textInputFontSizeStyle
 )
 
 const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
   responsiveRadiusStyle,
-  textInputStyle.representation
+  textInputRepresentationStyle
 )
 
 export const TextArea = forwardRef(
