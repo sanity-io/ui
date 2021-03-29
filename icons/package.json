@@ -1,6 +1,6 @@
 {
   "name": "@sanity/icons",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "files": [
