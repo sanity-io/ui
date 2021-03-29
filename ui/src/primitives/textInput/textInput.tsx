@@ -8,10 +8,13 @@ import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
   responsiveInputPaddingStyle,
-  textInputStyle,
   TextInputInputStyleProps,
   TextInputRepresentationStyleProps,
   TextInputResponsivePaddingStyleProps,
+  textInputBaseStyle,
+  textInputFontSizeStyle,
+  textInputRepresentationStyle,
+  textInputRootStyle,
 } from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 import {Box} from '../box'
@@ -58,7 +61,7 @@ interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-const Root = styled.span(textInputStyle.root)
+const Root = styled.span(textInputRootStyle)
 
 const InputRoot = styled.span`
   flex: 1;
@@ -89,12 +92,13 @@ const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
 
 const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
-  textInputStyle.input
+  textInputBaseStyle,
+  textInputFontSizeStyle
 )
 
 const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
   responsiveRadiusStyle,
-  textInputStyle.representation
+  textInputRepresentationStyle
 )
 
 const LeftBox = styled(Box)`
