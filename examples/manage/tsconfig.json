@@ -4,7 +4,7 @@
   "compilerOptions": {
     "outDir": "./dist/ts/",
     "module": "es6",
-    "target": "es5",
+    "target": "es2015",
     "jsx": "react",
     "allowJs": true,
     "sourceMap": true

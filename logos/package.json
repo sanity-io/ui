@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@sanity/color": "^2.0.14",
-    "react": "^17.0.1"
+    "react": "^17.0.2"
   },
   "peerDependencies": {
     "@sanity/color": "^2.0",
