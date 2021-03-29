@@ -204,6 +204,8 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
 }
 
 export const matchReferenceWidth = () => {
+  const arrow = boolean('Arrow', true, 'Props')
+
   const placement = select(
     'Placement',
     {
@@ -226,7 +228,7 @@ export const matchReferenceWidth = () => {
 
   return (
     <Popover
-      arrow={false}
+      arrow={arrow}
       content={
         <Box padding={2}>
           <Text>Content</Text>
@@ -235,6 +237,7 @@ export const matchReferenceWidth = () => {
       matchReferenceWidth
       open
       placement={placement}
+      radius={2}
     >
       <Container width={0}>
         <Stack>

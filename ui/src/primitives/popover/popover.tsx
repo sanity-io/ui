@@ -126,6 +126,7 @@ export const Popover = forwardRef(
     const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
     const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
     const popperReferenceElement = referenceElementProp || referenceElement
+    const offset = useMemo(() => (arrow ? [0, 4] : [0, 0]), [arrow])
 
     const modifiers = useMemo(
       () =>
@@ -157,9 +158,7 @@ export const Popover = forwardRef(
             } as PreventOverflowModifier),
           {
             name: 'offset',
-            options: {
-              offset: [0, 4],
-            },
+            options: {offset},
           } as OffsetModifier,
           {
             name: 'flip',
@@ -180,6 +179,7 @@ export const Popover = forwardRef(
         constrainSize,
         fallbackPlacements,
         matchReferenceWidth,
+        offset,
         preventOverflow,
       ]
     )
