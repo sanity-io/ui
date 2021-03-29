@@ -15,10 +15,13 @@ export interface TextInputRepresentationStyleProps {
   $hasSuffix?: boolean
 }
 
+/**
+ * @deprecated
+ */
 export const textInputStyle = {
-  root: () => [rootStyle],
-  input: () => [inputBaseStyle, inputFontSizeStyle],
-  representation: [representationStyle],
+  root: () => [textInputRootStyle],
+  input: () => [textInputBaseStyle, textInputFontSizeStyle],
+  representation: () => [textInputRepresentationStyle],
 }
 
 const ROOT_STYLE = css`
@@ -27,16 +30,19 @@ const ROOT_STYLE = css`
   }
 `
 
-function rootStyle(): FlattenSimpleInterpolation {
+export function textInputRootStyle(): FlattenSimpleInterpolation {
   return ROOT_STYLE
 }
 
-function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): FlattenSimpleInterpolation {
+export function textInputBaseStyle(
+  props: TextInputInputStyleProps & ThemeProps
+): FlattenSimpleInterpolation {
   const {theme, $weight} = props
   const font = theme.sanity.fonts.text
   const color = theme.sanity.color.input
 
   return css`
+    --input-fg-color: ${color.default.enabled.fg};
     --input-placeholder-color: ${color.default.enabled.placeholder};
 
     appearance: none;
@@ -52,6 +58,7 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): FlattenSi
     position: relative;
     z-index: 1;
     display: block;
+    color: var(--input-fg-color);
 
     &::placeholder {
       color: var(--input-placeholder-color);
@@ -64,25 +71,25 @@ function inputBaseStyle(props: TextInputInputStyleProps & ThemeProps): FlattenSi
 
     /* enabled */
     &:not(:invalid):not(:disabled) {
-      color: ${color.default.enabled.fg};
+      --input-fg-color: ${color.default.enabled.fg};
       --input-placeholder-color: ${color.default.enabled.placeholder};
     }
 
     /* disabled */
     &:not(:invalid):disabled {
-      color: ${color.default.disabled.fg};
+      --input-fg-color: ${color.default.disabled.fg};
       --input-placeholder-color: ${color.default.disabled.placeholder};
     }
 
     /* invalid */
     &:invalid {
-      color: ${color.invalid.enabled.fg};
+      --input-fg-color: ${color.invalid.enabled.fg};
       --input-placeholder-color: ${color.invalid.enabled.placeholder};
     }
   `
 }
 
-function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
+export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   const {theme} = props
   const {fonts, media} = theme.sanity
 
@@ -96,7 +103,7 @@ function inputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
   })
 }
 
-function representationStyle(
+export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps
 ): FlattenSimpleInterpolation {
   const {$border, $hasPrefix, $hasSuffix, theme} = props
@@ -104,6 +111,10 @@ function representationStyle(
   const color = theme.sanity.color.input
 
   return css`
+    --card-bg-color: ${color.default.enabled.bg};
+    --card-fg-color: ${color.default.enabled.fg};
+    --input-box-shadow: none;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -112,30 +123,33 @@ function representationStyle(
     display: block;
     pointer-events: none;
     z-index: 0;
+    background-color: var(--card-bg-color);
+    box-shadow: var(--input-box-shadow);
+
+    border-top-left-radius: ${$hasPrefix ? 0 : undefined};
+    border-bottom-left-radius: ${$hasPrefix ? 0 : undefined};
+    border-top-right-radius: ${$hasSuffix ? 0 : undefined};
+    border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
     /* enabled */
-    *:not(:disabled) + & {
-      --card-bg-color: ${color.default.enabled.bg};
-      --card-fg-color: ${color.default.enabled.fg};
-      background-color: ${color.default.enabled.bg};
-      box-shadow: ${$border
+    *:not(:disabled) + && {
+      --input-box-shadow: ${$border
         ? focusRingBorderStyle({color: color.default.enabled.border, width: input.border.width})
         : undefined};
     }
 
     /* invalid */
-    *:not(:disabled):invalid + & {
+    *:not(:disabled):invalid + && {
       --card-bg-color: ${color.invalid.enabled.bg};
       --card-fg-color: ${color.invalid.enabled.fg};
-      background-color: ${color.invalid.enabled.bg};
-      box-shadow: ${$border
+      --input-box-shadow: ${$border
         ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
         : 'none'};
     }
 
     /* focused */
-    *:not(:disabled):not(:read-only):focus + & {
-      box-shadow: ${focusRingStyle({
+    *:not(:disabled):not(:read-only):focus + && {
+      --input-box-shadow: ${focusRingStyle({
         border: $border
           ? {color: color.default.enabled.border, width: input.border.width}
           : undefined,
@@ -144,11 +158,10 @@ function representationStyle(
     }
 
     /* disabled */
-    *:disabled + & {
+    *:disabled + && {
       --card-bg-color: ${color.default.disabled.bg};
       --card-fg-color: ${color.default.disabled.fg};
-      background-color: ${color.default.disabled.bg};
-      box-shadow: ${$border
+      --input-box-shadow: ${$border
         ? focusRingBorderStyle({
             color: color.default.disabled.border,
             width: input.border.width,
@@ -158,14 +171,13 @@ function representationStyle(
 
     /* hovered */
     @media (hover: hover) {
-      *:not(:disabled):not(:read-only):not(:invalid):hover + & {
+      *:not(:disabled):not(:read-only):not(:invalid):hover + && {
         --card-bg-color: ${color.default.hovered.bg};
         --card-fg-color: ${color.default.hovered.fg};
-        background-color: ${color.default.hovered.bg};
       }
 
-      *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + & {
-        box-shadow: ${$border
+      *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + && {
+        --input-box-shadow: ${$border
           ? focusRingBorderStyle({
               color: color.default.hovered.border,
               width: input.border.width,
@@ -173,10 +185,5 @@ function representationStyle(
           : 'none'};
       }
     }
-
-    border-top-left-radius: ${$hasPrefix ? 0 : undefined};
-    border-bottom-left-radius: ${$hasPrefix ? 0 : undefined};
-    border-top-right-radius: ${$hasSuffix ? 0 : undefined};
-    border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
   `
 }
