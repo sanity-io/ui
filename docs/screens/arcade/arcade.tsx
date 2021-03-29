@@ -26,10 +26,14 @@ export function ArcadeScreen(props: {title: string; description: string}) {
   // Create `saveFn` callback
   useEffect(() => {
     const saveFn = debounce((params: ArcadeQueryParams) => {
-      replaceState({
-        pathname: '/arcade',
-        query: getArcadeQuery(params),
-      })
+      replaceState(
+        {
+          pathname: '/arcade',
+          query: getArcadeQuery(params),
+        },
+        undefined,
+        {shallow: true}
+      )
     }, 100)
 
     saveFnRef.current = saveFn
