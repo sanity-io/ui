@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-docs",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "scripts": {
     "build": "next build",
     "clean": "rimraf .next",
@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "@sanity/block-content-to-react": "^2.0.7",
-    "@sanity/color": "^2.0.14",
-    "@sanity/icons": "^1.0.5",
-    "@sanity/logos": "^1.0.4",
-    "@sanity/ui": "^0.33.10",
+    "@sanity/color": "^2.0.15",
+    "@sanity/icons": "^1.0.6",
+    "@sanity/logos": "^1.0.5",
+    "@sanity/ui": "^0.33.11",
     "codemirror": "^5.60.0",
     "date-fns": "^2.19.0",
     "lodash": "^4.17.21",
