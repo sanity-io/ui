@@ -2,23 +2,47 @@ import React, {cloneElement, forwardRef, useCallback, useMemo, useState} from 'r
 import ReactIs from 'react-is'
 import {isHTMLElement} from '../../helpers'
 import {useClickOutside} from '../../hooks'
-import {Popover} from '../../primitives'
+import {Popover, PopoverProps} from '../../primitives'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Placement} from '../../types'
 
 export interface MenuButtonProps {
+  /**
+   * Use `popover={{boundaryElement: ...}}` instead.
+   * @deprecated
+   */
   boundaryElement?: HTMLElement
   button: React.ReactElement
   id: string
   menu?: React.ReactElement
+  /**
+   * Use `popover={{placement: ...}}` instead.
+   * @deprecated
+   */
   placement?: Placement
+  popover?: Omit<PopoverProps, 'content' | 'open'>
+  /**
+   * Use `popover={{scheme: ...}}` instead.
+   * @deprecated
+   */
   popoverScheme?: ThemeColorSchemeKey
+  /**
+   * Use `popover={{radius: ...}}` instead.
+   * @deprecated
+   */
   popoverRadius?: number | number[]
   /**
+   * Use `popover={{radius: ...}}` instead.
+   *
    * Do not use in production.
    * @beta
+   * @deprecated
    */
   portal?: boolean
+  /**
+   * Use `popover={{preventOverflow: ...}}` instead.
+   * @deprecated
+   */
   preventOverflow?: boolean
 }
 
@@ -34,6 +58,7 @@ export const MenuButton = forwardRef(function MenuButton(
     placement,
     popoverScheme,
     portal,
+    popover,
     popoverRadius,
     preventOverflow,
   } = props
@@ -136,18 +161,20 @@ export const MenuButton = forwardRef(function MenuButton(
     [buttonProp, handleButtonClick, handleButtonKeyDown, id, open, setButtonRef]
   )
 
+  const popoverProps = useMemo(() => {
+    return {
+      boundaryElement,
+      placement,
+      portal,
+      radius: popoverRadius,
+      overflow: preventOverflow,
+      scheme: popoverScheme,
+      ...(popover || {}),
+    }
+  }, [boundaryElement, placement, popover, popoverRadius, portal, preventOverflow, popoverScheme])
+
   return (
-    <Popover
-      boundaryElement={boundaryElement}
-      content={menu}
-      data-ui="MenuButton"
-      open={open}
-      placement={placement}
-      portal={portal}
-      preventOverflow={preventOverflow}
-      radius={popoverRadius}
-      scheme={popoverScheme}
-    >
+    <Popover {...popoverProps} content={menu} data-ui="MenuButton" open={open}>
       {button || <></>}
     </Popover>
   )

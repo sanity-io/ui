@@ -197,3 +197,18 @@ function ClosableMenuButtonExample() {
     </Stack>
   )
 }
+
+export const menuButtonWithoutArrow = () => {
+  return (
+    <MenuButton
+      button={<Button text="Open menu" />}
+      id="menu-button-without-arrow-example"
+      menu={
+        <Menu>
+          <MenuItem text="Item 1" />
+        </Menu>
+      }
+      popover={{arrow: false}}
+    />
+  )
+}

@@ -13,7 +13,10 @@ import {responsiveContainerWidthStyle} from '../container/styles'
 import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
 import {PopoverArrow} from './arrow'
 
-interface PopoverProps extends ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps {
+export interface PopoverProps
+  extends ResponsiveRadiusProps,
+    ResponsiveShadowProps,
+    ResponsiveWidthProps {
   allowedAutoPlacements?: Placement[]
   arrow?: boolean
   boundaryElement?: HTMLElement | null
