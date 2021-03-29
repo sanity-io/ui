@@ -184,7 +184,10 @@ function ClosableMenuButtonExample() {
             <Stack padding={1} style={{borderTop: '1px solid var(--card-border-color)'}}>
               <Button
                 icon={AddIcon}
-                onClick={() => ref.current?.focus()}
+                onClick={() => {
+                  ref.current?.click()
+                  ref.current?.focus()
+                }}
                 mode="bleed"
                 text="Add item"
                 tone="primary"
