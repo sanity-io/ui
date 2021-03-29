@@ -15,7 +15,7 @@ import {
 } from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {withKnobs} from '@storybook/addon-knobs'
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {withCentered} from '$storybook/decorators'
 
 export default {
@@ -156,6 +156,43 @@ function SelectedItemExample() {
             />
           </Menu>
         }
+      />
+    </Stack>
+  )
+}
+
+export const closeableMenuButton = () => {
+  return <ClosableMenuButtonExample />
+}
+
+function ClosableMenuButtonExample() {
+  const ref = useRef<HTMLButtonElement | null>(null)
+
+  return (
+    <Stack>
+      <MenuButton
+        button={<Button text="Open" />}
+        id="closable-menu-button-example"
+        menu={
+          <Menu padding={0} space={0}>
+            <Stack padding={1} space={1}>
+              <MenuItem text="Item 1" />
+              <MenuItem text="Item 2" />
+              <MenuItem text="Item 3" />
+              <MenuItem text="Item 4" />
+            </Stack>
+            <Stack padding={1} style={{borderTop: '1px solid var(--card-border-color)'}}>
+              <Button
+                icon={AddIcon}
+                onClick={() => ref.current?.focus()}
+                mode="bleed"
+                text="Add item"
+                tone="primary"
+              />
+            </Stack>
+          </Menu>
+        }
+        ref={ref}
       />
     </Stack>
   )
