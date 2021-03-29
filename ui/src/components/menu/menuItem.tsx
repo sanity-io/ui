@@ -18,6 +18,7 @@ interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode
   iconRight?: React.ComponentType | React.ReactNode
+  selected?: boolean
   space?: number | number[]
   text?: React.ReactNode
   tone?: ThemeColorToneKey
@@ -25,11 +26,12 @@ interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
 
 export const MenuItem = forwardRef(
   (
-    props: MenuItemProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'ref'>,
+    props: MenuItemProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'ref' | 'selected'>,
     forwardedRef: React.ForwardedRef<HTMLDivElement>
   ) => {
     const {
       children,
+      disabled,
       fontSize = 2,
       icon,
       iconRight,
@@ -42,6 +44,7 @@ export const MenuItem = forwardRef(
       paddingBottom,
       paddingLeft,
       radius = 2,
+      selected,
       space = 3,
       text,
       ...restProps
@@ -49,16 +52,17 @@ export const MenuItem = forwardRef(
     const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
     const rootRef = useRef<HTMLDivElement | null>(null)
 
-    useEffect(() => mount(rootRef.current), [mount])
+    useEffect(() => mount(rootRef.current, selected), [mount, selected])
 
     const ref = useForwardedRef(forwardedRef)
 
     const handleClick = useCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
+        if (disabled) return
         if (onClick) onClick(event)
         if (onItemClick) onItemClick()
       },
-      [onClick, onItemClick]
+      [disabled, onClick, onItemClick]
     )
 
     const paddingProps = {
@@ -71,17 +75,21 @@ export const MenuItem = forwardRef(
       paddingLeft,
     }
 
-    function setRef(el: HTMLDivElement | null) {
-      ref.current = el
-      rootRef.current = el
-    }
+    const setRef = useCallback(
+      (el: HTMLDivElement | null) => {
+        ref.current = el
+        rootRef.current = el
+      },
+      [ref]
+    )
 
     return (
       <Card
         as="button"
         data-ui="MenuItem"
         {...restProps}
-        onClick={restProps.disabled ? undefined : handleClick}
+        disabled={disabled}
+        onClick={handleClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         radius={radius}
