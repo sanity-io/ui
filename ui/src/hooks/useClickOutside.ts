@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {EMPTY_ARRAY} from '../constants'
 
-type ClickOutsideListener = (event: Event) => void
+type ClickOutsideListener = (event: MouseEvent) => void
 
 export function useClickOutside(
   listener: ClickOutsideListener,

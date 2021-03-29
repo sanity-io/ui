@@ -68,7 +68,7 @@ export const MenuButton = forwardRef(function MenuButton(
   const [menuElement, setMenuElement] = useState<HTMLDivElement | null>(null)
 
   const handleButtonClick = useCallback(() => {
-    setOpen((val) => !val)
+    setOpen((v) => !v)
     setFocusLast(false)
   }, [])
 
@@ -90,7 +90,16 @@ export const MenuButton = forwardRef(function MenuButton(
     }
   }, [])
 
-  const handleMenuClickOutside = useCallback(() => setOpen(false), [])
+  const handleMenuClickOutside = useCallback(
+    (event: MouseEvent) => {
+      const targetElement = isHTMLElement(event.target) ? event.target.closest('button') : null
+
+      if (targetElement !== buttonElement) {
+        setOpen(false)
+      }
+    },
+    [buttonElement]
+  )
 
   const handleMenuEscape = useCallback(() => {
     setOpen(false)
@@ -101,11 +110,15 @@ export const MenuButton = forwardRef(function MenuButton(
     (event: React.FocusEvent<HTMLButtonElement>) => {
       const target = event.relatedTarget
 
+      if (target === buttonElement) {
+        return
+      }
+
       if (isHTMLElement(target) && !menuElement?.contains(target)) {
         setOpen(false)
       }
     },
-    [menuElement]
+    [buttonElement, menuElement]
   )
 
   const handleItemClick = useCallback(() => {
