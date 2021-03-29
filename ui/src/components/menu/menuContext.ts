@@ -3,8 +3,9 @@ import {globalScope} from '../../lib/globalScope'
 
 export interface MenuContextValue {
   version: 0.0
+  activeElement: HTMLElement | null
   activeIndex: number
-  mount: (element: HTMLElement | null) => () => void
+  mount: (element: HTMLElement | null, selected?: boolean) => () => void
   onItemClick?: () => void
   onMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
   onMouseLeave: (event: React.MouseEvent<HTMLElement>) => void

@@ -12,6 +12,7 @@ interface MenuProps extends ResponsivePaddingProps {
   onClickOutside?: () => void
   onEscape?: () => void
   onItemClick?: () => void
+  onItemSelect?: (index: number) => void
   space?: number | number[]
 }
 
@@ -27,6 +28,7 @@ export const Menu = forwardRef(
       onClickOutside,
       onEscape,
       onItemClick,
+      onItemSelect,
       padding = 1,
       space = 1,
       ...restProps
@@ -35,10 +37,27 @@ export const Menu = forwardRef(
     const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
     const itemsRef = useRef<HTMLElement[]>([])
     const [activeIndex, setActiveIndex] = useState(-1)
+    const [activeElement, setActiveElement] = useState<HTMLElement | null>(null)
+    const activeElementRef = useRef<HTMLElement | null>(activeElement)
+
+    useEffect(() => {
+      if (onItemSelect) onItemSelect(activeIndex)
+    }, [activeIndex, onItemSelect])
+
+    useEffect(() => {
+      activeElementRef.current = activeElement
+    }, [activeElement])
 
     useEffect(() => {
       const rafId = window.requestAnimationFrame(() => {
         if (rootElement) {
+          if (activeElementRef.current) {
+            activeElementRef.current.focus()
+            setActiveIndex(itemsRef.current.indexOf(activeElementRef.current))
+
+            return
+          }
+
           const element = itemsRef.current[focusLast ? itemsRef.current.length - 1 : 0]
 
           if (element) {
@@ -53,17 +72,24 @@ export const Menu = forwardRef(
       }
     }, [focusLast, rootElement])
 
-    const setRef = (el: HTMLDivElement | null) => {
-      setRootElement(el)
-      if (typeof ref === 'function') ref(el)
-      else if (ref) ref.current = el
-    }
+    const setRef = useCallback(
+      (el: HTMLDivElement | null) => {
+        setRootElement(el)
+        if (typeof ref === 'function') ref(el)
+        else if (ref) ref.current = el
+      },
+      [ref]
+    )
 
-    const mount = useCallback((element: HTMLElement | null) => {
+    const mount = useCallback((element: HTMLElement | null, selected?: boolean) => {
       if (!element) return () => undefined
 
       if (!itemsRef.current.includes(element)) {
         itemsRef.current.push(element)
+      }
+
+      if (selected === true) {
+        setActiveElement(element)
       }
 
       return () => {
@@ -172,13 +198,14 @@ export const Menu = forwardRef(
     const value: MenuContextValue = useMemo(
       () => ({
         version: 0.0,
+        activeElement,
         activeIndex,
         mount,
         onMouseEnter: handleItemMouseEnter,
         onMouseLeave: handleItemMouseLeave,
         onItemClick,
       }),
-      [activeIndex, mount, handleItemMouseEnter, handleItemMouseLeave, onItemClick]
+      [activeElement, activeIndex, mount, handleItemMouseEnter, handleItemMouseLeave, onItemClick]
     )
 
     return (

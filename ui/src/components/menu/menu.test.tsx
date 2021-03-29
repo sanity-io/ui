@@ -19,6 +19,7 @@ describe('components/menu', () => {
       function Root() {
         const value: MenuContextValue = {
           version: 0.0,
+          activeElement: null,
           activeIndex: 0,
           mount: (element: HTMLElement | null) => () => console.log(element),
           onItemClick: () => undefined,

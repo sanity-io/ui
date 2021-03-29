@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Card,
+  Code,
   Inline,
   LayerProvider,
   Menu,
@@ -10,10 +11,11 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
+  Stack,
 } from '@sanity/ui'
 import {action} from '@storybook/addon-actions'
 import {withKnobs} from '@storybook/addon-knobs'
-import React from 'react'
+import React, {useState} from 'react'
 import {withCentered} from '$storybook/decorators'
 
 export default {
@@ -112,3 +114,49 @@ export const menuItemTones = () => (
     </Card>
   </LayerProvider>
 )
+
+export const selectedItem = () => {
+  return (
+    <LayerProvider>
+      <SelectedItemExample />
+    </LayerProvider>
+  )
+}
+
+function SelectedItemExample() {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  return (
+    <Stack space={4}>
+      <Code>selectedIndex={selectedIndex}</Code>
+
+      <MenuButton
+        button={<Button text="Open menu" />}
+        id="selected-item-example"
+        menu={
+          <Menu>
+            <MenuItem
+              icon={SearchIcon}
+              onClick={() => setSelectedIndex(0)}
+              selected={selectedIndex === 0}
+              text="Search"
+            />
+            <MenuItem
+              icon={ClockIcon}
+              onClick={() => setSelectedIndex(1)}
+              selected={selectedIndex === 1}
+              text="Clock"
+            />
+            <MenuDivider />
+            <MenuItem
+              icon={ExpandIcon}
+              onClick={() => setSelectedIndex(2)}
+              selected={selectedIndex === 2}
+              text="Expand"
+            />
+          </Menu>
+        }
+      />
+    </Stack>
+  )
+}
