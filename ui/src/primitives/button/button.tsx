@@ -122,7 +122,11 @@ export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButto
                 marginLeft={icon ? space : undefined}
                 marginRight={iconRight ? space : undefined}
               >
-                <Text size={fontSize} weight={theme.sanity.button.textWeight}>
+                <Text
+                  size={fontSize}
+                  textOverflow="ellipsis"
+                  weight={theme.sanity.button.textWeight}
+                >
                   {text}
                 </Text>
               </Box>
