@@ -9,7 +9,7 @@ import {MenuContext, MenuContextValue} from './menuContext'
 
 interface MenuProps extends ResponsivePaddingProps {
   focusLast?: boolean
-  onClickOutside?: () => void
+  onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
   onItemClick?: () => void
   onItemSelect?: (index: number) => void
@@ -174,7 +174,7 @@ export const Menu = forwardRef(
     }, [rootElement])
 
     useClickOutside(
-      useCallback(() => isTopLayer && onClickOutside && onClickOutside(), [
+      useCallback((event) => isTopLayer && onClickOutside && onClickOutside(event), [
         isTopLayer,
         onClickOutside,
       ]),
