@@ -1,12 +1,24 @@
-import {Box, Button, Card, Placement, Popover, Text} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  LayerProvider,
+  Placement,
+  Popover,
+  PortalProvider,
+  Stack,
+  Text,
+  ThemeColorToneKey,
+  useLayer,
+} from '@sanity/ui'
 import {boolean, withKnobs, select, text} from '@storybook/addon-knobs'
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
-import {ThemeColorToneKey} from '../../theme'
-import {LayerProvider, PortalProvider, useLayer} from '../../utils'
+import {withCentered} from '$storybook/decorators'
 
 export default {
   title: 'Atoms/Popover',
-  decorators: [withKnobs],
+  decorators: [withCentered, withKnobs],
 }
 
 export const plain = () => {
@@ -187,6 +199,48 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
           text="Open"
         />
       </Box>
+    </Popover>
+  )
+}
+
+export const matchReferenceWidth = () => {
+  const placement = select(
+    'Placement',
+    {
+      Top: 'top',
+      'Top start': 'top-start',
+      'Top end': 'top-end',
+      Right: 'right',
+      'Right start': 'right-start',
+      'Right end': 'right-end',
+      Left: 'left',
+      'Left start': 'left-start',
+      'Left end': 'left-end',
+      Bottom: 'bottom',
+      'Bottom start': 'bottom-start',
+      'Bottom end': 'bottom-end',
+    },
+    'bottom',
+    'Props'
+  )
+
+  return (
+    <Popover
+      arrow={false}
+      content={
+        <Box padding={2}>
+          <Text>Content</Text>
+        </Box>
+      }
+      matchReferenceWidth
+      open
+      placement={placement}
+    >
+      <Container width={0}>
+        <Stack>
+          <Button fontSize={3} padding={5} text="Button" />
+        </Stack>
+      </Container>
     </Popover>
   )
 }
