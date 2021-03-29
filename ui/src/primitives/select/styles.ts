@@ -123,18 +123,18 @@ function iconBoxStyle(props: ThemeProps) {
 
     /* hover */
     @media (hover: hover) {
-      select:not(disabled):not(:read-only):hover + & {
+      select:not(disabled):not(:read-only):hover + && {
         --card-fg-color: ${color.default.hovered.fg};
       }
     }
 
     /* disabled */
-    select:disabled + & {
+    select:disabled + && {
       --card-fg-color: ${color.default.disabled.fg};
     }
 
     /* read-only */
-    select[data-read-only] + & {
+    select[data-read-only] + && {
       opacity: 0;
     }
   `
