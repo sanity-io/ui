@@ -1,4 +1,8 @@
-import maxSize from 'popper-max-size-modifier'
+import {ArrowModifier} from '@popperjs/core/lib/modifiers/arrow'
+import {FlipModifier} from '@popperjs/core/lib/modifiers/flip'
+import {OffsetModifier} from '@popperjs/core/lib/modifiers/offset'
+import {PreventOverflowModifier} from '@popperjs/core/lib/modifiers/preventOverflow'
+import maxSizeModifier from 'popper-max-size-modifier'
 import React, {cloneElement, forwardRef, useEffect, useMemo, useState} from 'react'
 import {Modifier, usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
@@ -12,6 +16,8 @@ import {ResponsiveWidthStyleProps} from '../container'
 import {responsiveContainerWidthStyle} from '../container/styles'
 import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
 import {PopoverArrow} from './arrow'
+import {applyMaxSizeModifier} from './modifiers/applyMaxSize'
+import {matchReferenceWidthModifier} from './modifiers/matchReferenceWidth'
 
 export interface PopoverProps
   extends ResponsiveRadiusProps,
@@ -31,6 +37,7 @@ export interface PopoverProps
   portal?: boolean
   preventOverflow?: boolean
   referenceElement?: HTMLElement | null
+  matchReferenceWidth?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: ThemeColorToneKey
 }
@@ -80,23 +87,6 @@ const PopoverCard = styled(Card)<
   `
 )
 
-const applyMaxSize: Modifier<any, any> = {
-  name: 'applyMaxSize',
-  enabled: true,
-  phase: 'beforeWrite',
-  requires: ['maxSize'],
-  fn(opts) {
-    const {state} = opts
-    const {width, height} = state.modifiersData.maxSize
-
-    state.styles.popper = {
-      ...state.styles.popper,
-      maxWidth: `${width}px`,
-      maxHeight: `${height}px`,
-    }
-  },
-}
-
 export const Popover = forwardRef(
   (
     props: PopoverProps &
@@ -120,6 +110,7 @@ export const Popover = forwardRef(
       preventOverflow,
       radius = 3,
       referenceElement: referenceElementProp,
+      matchReferenceWidth,
       shadow = 3,
       scheme,
       style = EMPTY_RECORD,
@@ -136,48 +127,62 @@ export const Popover = forwardRef(
     const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
     const popperReferenceElement = referenceElementProp || referenceElement
 
-    const customMaxSize: Modifier<any, any> = useMemo(
-      () => ({
-        ...maxSize,
-        options: {boundary: boundaryElement || undefined, padding: 8},
-      }),
-      [boundaryElement]
+    const modifiers = useMemo(
+      () =>
+        [
+          constrainSize && {
+            ...maxSizeModifier,
+            options: {
+              boundary: boundaryElement || undefined,
+              padding: 8,
+            },
+          },
+          constrainSize && applyMaxSizeModifier,
+          arrow &&
+            ({
+              name: 'arrow',
+              options: {
+                element: arrowElement,
+                padding: 4,
+              },
+            } as ArrowModifier),
+          preventOverflow &&
+            ({
+              name: 'preventOverflow',
+              options: {
+                altAxis: true,
+                boundary: boundaryElement || undefined,
+                padding: 8,
+              },
+            } as PreventOverflowModifier),
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 4],
+            },
+          } as OffsetModifier,
+          {
+            name: 'flip',
+            options: {
+              allowedAutoPlacements,
+              boundary: boundaryElement || undefined,
+              fallbackPlacements,
+              padding: 8,
+            },
+          } as FlipModifier,
+          matchReferenceWidth && matchReferenceWidthModifier,
+        ].filter(Boolean) as Modifier<any, any>[],
+      [
+        allowedAutoPlacements,
+        arrow,
+        arrowElement,
+        boundaryElement,
+        constrainSize,
+        fallbackPlacements,
+        matchReferenceWidth,
+        preventOverflow,
+      ]
     )
-
-    const modifiers = [
-      constrainSize && customMaxSize,
-      constrainSize && applyMaxSize,
-      arrow && {
-        name: 'arrow',
-        options: {
-          element: arrowElement,
-          padding: 4,
-        },
-      },
-      preventOverflow && {
-        name: 'preventOverflow',
-        options: {
-          altAxis: true,
-          boundary: boundaryElement || undefined,
-          padding: 8,
-        },
-      },
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 4],
-        },
-      },
-      {
-        name: 'flip',
-        options: {
-          allowedAutoPlacements,
-          boundary: boundaryElement || undefined,
-          fallbackPlacements,
-          padding: 8,
-        },
-      },
-    ].filter(Boolean) as Modifier<any, any>[]
 
     const popper = usePopper(popperReferenceElement, popperElement, {
       placement,
@@ -187,7 +192,13 @@ export const Popover = forwardRef(
     const {attributes, forceUpdate, styles} = popper
 
     useEffect(() => {
-      if (forceUpdate) forceUpdate()
+      if (forceUpdate) {
+        try {
+          forceUpdate()
+        } catch (_) {
+          // ignore caught error
+        }
+      }
     }, [content, forceUpdate, open, popperReferenceElement])
 
     if (disabled) {
