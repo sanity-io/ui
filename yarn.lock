@@ -2751,25 +2751,25 @@
     rxjs "^6.5.3"
 
 "@sanity/desk-tool@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@sanity/desk-tool/-/desk-tool-2.7.1.tgz#926686533f98925a5de48ef6ee31e811387a5673"
-  integrity sha512-K0sM2b7wiRuLgF/kBf9QPQ2WxieTg0DdgQA+nzd2Yt739uGtzky47rASsIdLxXl+JCd8qVsgAIqh5uij5/iJ0A==
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@sanity/desk-tool/-/desk-tool-2.7.2.tgz#af1bcb4ef653ae49186b2513e8167c865134fca0"
+  integrity sha512-K2GGyT0W5hiPTy1J6+7ZRGt9PtEqCwUnDAEI4DiDP+lVCZfmNecAsZwmjeeCTkbKI6uRm5EogyhkrNg6l11CCw==
   dependencies:
     "@popperjs/core" "^2.5.4"
     "@reach/auto-id" "^0.13.2"
-    "@sanity/base" "2.7.1"
+    "@sanity/base" "2.7.2"
     "@sanity/client" "2.7.1"
     "@sanity/data-aspects" "2.2.6"
     "@sanity/diff" "2.2.6"
-    "@sanity/field" "2.7.1"
-    "@sanity/form-builder" "2.7.1"
+    "@sanity/field" "2.7.2"
+    "@sanity/form-builder" "2.7.2"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/mutator" "2.2.6"
-    "@sanity/react-hooks" "2.7.1"
-    "@sanity/structure" "2.7.1"
-    "@sanity/types" "2.7.1"
+    "@sanity/react-hooks" "2.7.2"
+    "@sanity/structure" "2.7.2"
+    "@sanity/types" "2.7.2"
     "@sanity/ui" "^0.33.9"
-    "@sanity/util" "2.7.1"
+    "@sanity/util" "2.7.2"
     "@sanity/uuid" "^3.0.1"
     boundless-arrow-key-navigation "^1.1.0"
     classnames "^2.2.5"
@@ -2820,30 +2820,30 @@
     simple-get "^4.0.0"
     split2 "^3.2.2"
 
-"@sanity/field@2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@sanity/field/-/field-2.7.1.tgz#daaff194083a5c1712d994f88ac2ebed09780f39"
-  integrity sha512-+oFUPoncp4GNMimMYqlUhrfuxydi9jdlyPbEXMNqnsuQ69hzbf5mmE2v12Ap89t7lvgeKdklJZ7qngk25ekNEQ==
+"@sanity/field@2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@sanity/field/-/field-2.7.2.tgz#bd82d59663075c1d1285aa09cc6295898217ed19"
+  integrity sha512-mtH4uyREIFvYAyw+zevizjrMJbH6Yv6AJFsG/kI/g0b7x6lJCJz8CVJNeJrPDwrP1DKh+R/2yG2hjSIHDOvmXA==
   dependencies:
     "@sanity/asset-utils" "^1.1.2"
-    "@sanity/base" "2.7.1"
+    "@sanity/base" "2.7.2"
     "@sanity/client" "2.7.1"
     "@sanity/diff" "2.2.6"
-    "@sanity/react-hooks" "2.7.1"
-    "@sanity/types" "2.7.1"
+    "@sanity/react-hooks" "2.7.2"
+    "@sanity/types" "2.7.2"
     "@sanity/ui" "^0.33.9"
-    "@sanity/util" "2.7.1"
+    "@sanity/util" "2.7.2"
     date-fns "^2.16.1"
     sanity-diff-patch "^1.0.9"
     styled-components "^5.2.1"
 
-"@sanity/form-builder@2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@sanity/form-builder/-/form-builder-2.7.1.tgz#b00f4accc53c05fb218d974b3cac8ff65acd3e91"
-  integrity sha512-SigJZYO6RStZo1lJH84qFJvOS/EM+9LbiRIVdYE0gZux1bCX2DUw7exwajdRM3X1VhRT2qIlRSGKI1h7dL/EYw==
+"@sanity/form-builder@2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@sanity/form-builder/-/form-builder-2.7.2.tgz#2922e69fd734d8e43319606fb0eb72b07e656a27"
+  integrity sha512-ccAoPlw+JpQZPVfvjOlYixxJQRjf2G7QCJ44U9/Jpw0QPqiL9UH+cOypvNpZd4rwW3zHoOz5YmDyUfOJgPHrPw==
   dependencies:
     "@reach/auto-id" "^0.13.2"
-    "@sanity/base" "2.7.1"
+    "@sanity/base" "2.7.2"
     "@sanity/block-tools" "2.5.0"
     "@sanity/client" "2.7.1"
     "@sanity/color" "^2.0.14"
@@ -2852,9 +2852,9 @@
     "@sanity/imagetool" "2.6.0"
     "@sanity/mutator" "2.2.6"
     "@sanity/portable-text-editor" "0.1.25"
-    "@sanity/types" "2.7.1"
+    "@sanity/types" "2.7.2"
     "@sanity/ui" "^0.33.9"
-    "@sanity/util" "2.7.1"
+    "@sanity/util" "2.7.2"
     "@sanity/uuid" "^3.0.1"
     attr-accept "^1.1.0"
     classnames "^2.2.5"
@@ -3021,12 +3021,12 @@
   resolved "https://registry.yarnpkg.com/@sanity/production-preview/-/production-preview-2.2.6.tgz#3c92cf26d4b7c66ebd69cd80c94be09519aa9231"
   integrity sha512-qnoyLqi1GoDoGxN4lWaVNXzNezxHC5+EGIY8k2pMZKwLwTw8stmfthCThBHuCKaEvaJBPWQX1wiIlrDFAhtv5A==
 
-"@sanity/react-hooks@2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@sanity/react-hooks/-/react-hooks-2.7.1.tgz#02d4431079d863fd0c60dc404cb2c6674b84d902"
-  integrity sha512-XD5zdF86fV1VMV6AiaSBClb20SUXR4qW8VwhKLVOu9aIuQiQQEx1+SG+L54qkVDw1sgeeImB7gT67b5kCvUkZQ==
+"@sanity/react-hooks@2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@sanity/react-hooks/-/react-hooks-2.7.2.tgz#fe82a9bbc6bd5f1852b2da3e3c071e8c7452faae"
+  integrity sha512-4Bj54+VZABO1yxWMb9c3/qv9OHlifA6HNHi88r7g534Xy3C2ZgI5iB9xzAmV/uss3W+MZYyN1ZWAmCuR0nVEjg==
   dependencies:
-    "@sanity/types" "2.7.1"
+    "@sanity/types" "2.7.2"
     lodash "^4.17.15"
     rxjs "^6.5.3"
     shallow-equals "^1.0.0"
