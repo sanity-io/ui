@@ -3182,23 +3182,23 @@
     "@sinonjs/commons" "^1.7.0"
 
 "@storybook/addon-a11y@^6.1.21":
-  version "6.1.21"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-6.1.21.tgz#28e44c9f3b7b9e8a319f59b112092fb9aa15fb96"
-  integrity sha512-FTHQ0QdPhL+0D/E/og/xkT6tIEEOSCgCV+eX9UcDn3shnxVAHEHbqJ7Yf1fF5B/nRx+ptY57c9O64vIFd7UMHg==
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-6.2.1.tgz#e55867b3e55d79aaeea87cc54faa0bdff44ff95f"
+  integrity sha512-NBBwtiJOgGEgwCYx9H+peREB1mjJGv3WnLTNewsQQCZ8pRSrhpXPFUYhd0vXq0SXQEjX6xWciAp5lEDzmvzl8Q==
   dependencies:
-    "@storybook/addons" "6.1.21"
-    "@storybook/api" "6.1.21"
-    "@storybook/channels" "6.1.21"
-    "@storybook/client-api" "6.1.21"
-    "@storybook/client-logger" "6.1.21"
-    "@storybook/components" "6.1.21"
-    "@storybook/core-events" "6.1.21"
-    "@storybook/theming" "6.1.21"
-    axe-core "^4.0.1"
-    core-js "^3.0.1"
-    global "^4.3.2"
-    lodash "^4.17.15"
-    react-sizeme "^2.5.2"
+    "@storybook/addons" "6.2.1"
+    "@storybook/api" "6.2.1"
+    "@storybook/channels" "6.2.1"
+    "@storybook/client-api" "6.2.1"
+    "@storybook/client-logger" "6.2.1"
+    "@storybook/components" "6.2.1"
+    "@storybook/core-events" "6.2.1"
+    "@storybook/theming" "6.2.1"
+    axe-core "^4.1.1"
+    core-js "^3.8.2"
+    global "^4.4.0"
+    lodash "^4.17.20"
+    react-sizeme "^3.0.1"
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
@@ -5678,7 +5678,7 @@ axe-core@^3.5.5:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.5.5.tgz#84315073b53fa3c0c51676c588d59da09a192227"
   integrity sha512-5P0QZ6J5xGikH780pghEdbEKijCTrruK9KxtPZCFWUpef0f6GipO+xEZ5GKCb020mmqgbiNO6TcA55CriL784Q==
 
-axe-core@^4.0.1, axe-core@^4.0.2:
+axe-core@^4.0.1, axe-core@^4.0.2, axe-core@^4.1.1:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.1.3.tgz#64a4c85509e0991f5168340edc4bedd1ceea6966"
   integrity sha512-vwPpH4Aj4122EW38mxO/fxhGKtwWTMLDIJfZ1He0Edbtjcfna/R3YB67yVhezUMzqc3Jr3+Ii50KRntlENL4xQ==
@@ -8845,7 +8845,7 @@ element-resize-detector@1.1.13:
   dependencies:
     batch-processor "^1.0.0"
 
-element-resize-detector@^1.1.14, element-resize-detector@^1.2.1:
+element-resize-detector@^1.1.14, element-resize-detector@^1.2.1, element-resize-detector@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/element-resize-detector/-/element-resize-detector-1.2.2.tgz#bf7c3ff915957e4e62e86241ed2f9c86b078892b"
   integrity sha512-+LOXRkCJc4I5WhEJxIDjhmE3raF8jtOMBDqSCgZTMz2TX3oXAX5pE2+MDeopJlGdXzP7KzPbBJaUGfNaP9HG4A==
@@ -17345,7 +17345,7 @@ react-shallow-renderer@^16.13.1:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0"
 
-react-sizeme@^2.5.2, react-sizeme@^2.6.7:
+react-sizeme@^2.6.7:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-2.6.12.tgz#ed207be5476f4a85bf364e92042520499455453e"
   integrity sha512-tL4sCgfmvapYRZ1FO2VmBmjPVzzqgHA7kI8lSJ6JS6L78jXFNRdOZFpXyK6P1NBZvKPPCZxReNgzZNUajAerZw==
@@ -17354,6 +17354,16 @@ react-sizeme@^2.5.2, react-sizeme@^2.6.7:
     invariant "^2.2.4"
     shallowequal "^1.1.0"
     throttle-debounce "^2.1.0"
+
+react-sizeme@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-3.0.1.tgz#4d12f4244e0e6a0fb97253e7af0314dc7c83a5a0"
+  integrity sha512-9Hf1NLgSbny1bha77l9HwvwwxQUJxFUqi44Ih+y3evA+PezBpGdCGlnvye6avss2cIgs9PgdYgMnfuzJWn/RUw==
+  dependencies:
+    element-resize-detector "^1.2.2"
+    invariant "^2.2.4"
+    shallowequal "^1.1.0"
+    throttle-debounce "^3.0.1"
 
 react-sortable-hoc@^1.11.0:
   version "1.11.0"
