@@ -19,6 +19,13 @@ const STATUS_CARD_TONE: {[key: string]: ThemeColorToneKey} = {
   info: 'primary',
 }
 
+const ROLES = {
+  error: 'alert',
+  warning: 'alert',
+  success: 'status',
+  info: 'status',
+}
+
 const Root = styled(Card)`
   pointer-events: all;
 `
@@ -32,9 +39,18 @@ export function Toast(
 ) {
   const {closable, description, onClose, title, status, ...restProps} = props
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
+  const role = status ? ROLES[status] : 'status'
 
   return (
-    <Root data-ui="Toast" {...restProps} marginTop={3} radius={2} shadow={2} tone={cardTone}>
+    <Root
+      data-ui="Toast"
+      role={role}
+      {...restProps}
+      marginTop={3}
+      radius={2}
+      shadow={2}
+      tone={cardTone}
+    >
       <Flex align="flex-start">
         <TextBox flex={1} padding={3}>
           <Stack space={3}>
