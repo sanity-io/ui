@@ -2842,17 +2842,17 @@
     lodash "^4.17.15"
 
 "@sanity/default-layout@^2.7.1":
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.7.2.tgz#e6b83655d2992b0352b8da1df28215285c6d5cdf"
-  integrity sha512-012BqofD+g4AF+CKUxYeQGF/IMqU8MyBqsn/7iMkrfRzeR/IsSbvoIYwoKR536MyiznLkJJ8PYFnyPpKfFnXAQ==
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.7.4.tgz#938d3e00f7f31930337749d5c6bd56c85fa94211"
+  integrity sha512-XI1Cl546s1EFiV2L8QmNHSHfjFO0b5xuOsboDVNDprcYM/REfp7Atg+eWYVEXCWGj5y+Ze2YPrvW8VP+wFEGBQ==
   dependencies:
     "@reach/auto-id" "^0.13.2"
-    "@sanity/base" "2.7.2"
+    "@sanity/base" "2.7.4"
     "@sanity/client" "2.7.1"
     "@sanity/generate-help-url" "2.2.6"
-    "@sanity/types" "2.7.2"
+    "@sanity/types" "2.7.4"
     "@sanity/ui" "^0.33.9"
-    "@sanity/util" "2.7.2"
+    "@sanity/util" "2.7.4"
     classnames "^2.2.5"
     is-hotkey "^0.1.4"
     lodash "^4.17.15"
