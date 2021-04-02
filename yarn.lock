@@ -3375,9 +3375,9 @@
     type-of-is "^3.5.1"
 
 "@sanity/vision@^2.7.0":
-  version "2.7.3"
-  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.7.3.tgz#fdb66c2ba33963d255bd2a0901ff13ea1ffb3327"
-  integrity sha512-bnXuAlpIO002f9pCFIELY7cjPGS/ewV43GEoixL5NAEVXptC5S1e9pCv8uIX7/U5S7g3FJwdQ64hW/glAYKo/g==
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.7.4.tgz#c4714de75290ed19eb4f90f79e792d14604b3b8f"
+  integrity sha512-jO1DokcHpig6e0VE2wZfUjpgC3bqeeWNh0HNBajumeu6tpqgJ6laJOGK75ZG7VQ+tfxpaGd/X4nXwQrxGd5bdQ==
   dependencies:
     "@sanity/icons" "^1.0.5"
     "@sanity/ui" "^0.33.9"
