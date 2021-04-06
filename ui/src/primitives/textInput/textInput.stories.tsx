@@ -112,6 +112,7 @@ export const plain = () => {
             icon={icon && icons[icon]}
             iconRight={iconRight && icons[iconRight]}
             id="text-input-example"
+            name="email"
             padding={padding}
             placeholder={placeholder}
             radius={radius}
