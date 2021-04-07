@@ -97,7 +97,7 @@ export const Popover = forwardRef(
     const {
       allowedAutoPlacements,
       arrow = true,
-      boundaryElement: boundaryElementProp = boundaryElementContext,
+      boundaryElement: boundaryElementProp = boundaryElementContext.element,
       children: child,
       content,
       constrainSize,
