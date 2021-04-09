@@ -26,7 +26,7 @@
     "http-server": "^0.12.3",
     "react-hot-loader": "^4.13.0",
     "ts-loader": "^8.1.0",
-    "webpack": "^5.30.0",
+    "webpack": "^5.31.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
   }
