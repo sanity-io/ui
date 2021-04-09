@@ -144,7 +144,7 @@ const InnerAutocomplete = forwardRef(
       [filterOption, options, query]
     )
     const optionsLen = filteredOptions.length
-    const expanded = loading || (focused && optionsLen > 0 && query !== null)
+    const expanded = (query !== null && loading) || (focused && optionsLen > 0 && query !== null)
     const forwardedRef = useForwardedRef(ref)
 
     const handleRootBlur = useCallback(() => {
