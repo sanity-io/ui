@@ -240,11 +240,6 @@ const InnerAutocomplete = forwardRef(
       [onChange, onSelect, onQueryChange]
     )
 
-    const handleOpenClick = useCallback(() => {
-      inputRef.current?.focus()
-      setQuery(query || '')
-    }, [query])
-
     // Change the value when `value` prop changes
     useEffect(() => {
       if (valueProp !== valueRef.current) {
@@ -292,6 +287,16 @@ const InnerAutocomplete = forwardRef(
       () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
       [openButton]
     )
+
+    const handleOpenClick = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        inputRef.current?.focus()
+        setQuery(query || renderValue(value, currentOption) || '')
+        if (openButtonProps.onClick) openButtonProps.onClick(event)
+      },
+      [currentOption, openButtonProps, query, renderValue, value]
+    )
+
     const openButtonNode = useMemo(
       () =>
         openButton ? (
