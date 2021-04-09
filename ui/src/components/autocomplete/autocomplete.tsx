@@ -8,12 +8,12 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import styled from 'styled-components'
 import {EMPTY_ARRAY} from '../../constants'
 import {focusFirstDescendant} from '../../helpers'
 import {useForwardedRef, useResponsiveProp} from '../../hooks'
-import {Box, Button, ButtonProps, Card, Spinner, Text, TextInput} from '../../primitives'
+import {Box, Button, ButtonProps, Card, Popover, Spinner, Text, TextInput} from '../../primitives'
 import {AutocompleteOption} from './autocompleteOption'
-import {Root, LoadingCard, ListBoxContainer, ListBoxCard} from './styles'
 
 type OpenButtonProps = Omit<ButtonProps, 'as'> &
   Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
@@ -46,24 +46,42 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   value?: string
 }
 
-type AutocompleteOverriddenInputAttrKey =
-  | 'aria-activedescendant'
-  | 'aria-autocomplete'
-  | 'aria-expanded'
-  | 'aria-owns'
-  | 'as'
-  | 'autoCapitalize'
-  | 'autoComplete'
-  | 'autoCorrect'
-  | 'id'
-  | 'inputMode'
-  | 'onChange'
-  | 'onSelect'
-  | 'ref'
-  | 'role'
-  | 'spellCheck'
-  | 'type'
-  | 'value'
+export const Root = styled.div`
+  position: relative;
+`
+
+export const ListBox = styled(Box)`
+  & > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+`
+
+const ResultsPopover = styled(Popover)`
+  & > div {
+    max-height: calc(100vh - 10em);
+    min-height: 43px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+`
+
+export const LoadingCard = styled(Card)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 100ms;
+
+  &:not([hidden]) {
+    display: flex;
+  }
+`
 
 const EMPTY_RECORD = {}
 
@@ -90,11 +108,32 @@ const LIST_IGNORE_KEYS = [
 const InnerAutocomplete = forwardRef(
   <Option extends BaseAutocompleteOption>(
     props: AutocompleteProps<Option> &
-      Omit<React.HTMLProps<HTMLInputElement>, AutocompleteOverriddenInputAttrKey>,
+      Omit<
+        React.HTMLProps<HTMLInputElement>,
+        | 'aria-activedescendant'
+        | 'aria-autocomplete'
+        | 'aria-expanded'
+        | 'aria-owns'
+        | 'as'
+        | 'autoCapitalize'
+        | 'autoComplete'
+        | 'autoCorrect'
+        | 'id'
+        | 'inputMode'
+        | 'onChange'
+        | 'onSelect'
+        | 'prefix'
+        | 'ref'
+        | 'role'
+        | 'spellCheck'
+        | 'type'
+        | 'value'
+      >,
     ref: React.Ref<HTMLInputElement>
   ) => {
     const {
       border = true,
+      disabled,
       filterOption: filterOptionProp,
       fontSize = 2,
       icon,
@@ -106,6 +145,7 @@ const InnerAutocomplete = forwardRef(
       openButton,
       options: optionsProp,
       padding: paddingProp = 3,
+      prefix,
       radius = 2,
       renderOption: renderOptionProp,
       renderValue = defaultRenderValue,
@@ -138,6 +178,7 @@ const InnerAutocomplete = forwardRef(
     const activeItemId = selectedIndex > -1 ? `${id}-option-${selectedIndex}` : undefined
     const padding = useResponsiveProp(paddingProp)
     const rootRef = useRef<HTMLDivElement | null>(null)
+    const resultsPopoverRef = useRef<HTMLDivElement | null>(null)
     const currentOption = value ? options.find((o) => o.value === value) : undefined
     const filteredOptions = useMemo(
       () => options.filter((option) => (query ? filterOption(query, option) : true)),
@@ -150,8 +191,12 @@ const InnerAutocomplete = forwardRef(
     const handleRootBlur = useCallback(() => {
       setTimeout(() => {
         const rootEl = rootRef.current
+        const resultsPopoverEl = resultsPopoverRef.current
         const focusedEl = document.activeElement
-        const focusInside = rootEl && focusedEl && rootEl.contains(focusedEl)
+        const focusInside =
+          focusedEl &&
+          ((rootEl && rootEl.contains(focusedEl)) ||
+            (resultsPopoverEl && resultsPopoverEl.contains(focusedEl)))
 
         if (!focusInside) setFocused(false)
       }, 0)
@@ -245,6 +290,7 @@ const InnerAutocomplete = forwardRef(
       if (valueProp !== valueRef.current) {
         valueRef.current = valueProp
         setValue(valueProp)
+        setQuery(null)
       }
     }, [valueProp])
 
@@ -265,20 +311,23 @@ const InnerAutocomplete = forwardRef(
       }
     }, [selectedIndex])
 
-    const setRef = (el: HTMLInputElement | null) => {
-      inputRef.current = el
-      forwardedRef.current = el
-    }
+    const setRef = useCallback(
+      (el: HTMLInputElement | null) => {
+        inputRef.current = el
+        forwardedRef.current = el
+      },
+      [forwardedRef]
+    )
 
     const clearButton = useMemo(
       () =>
-        value.length > 0
+        !disabled && value.length > 0
           ? {
               'aria-label': 'Clear',
               onFocus: handleClearButtonFocus,
             }
           : undefined,
-      [handleClearButtonFocus, value]
+      [disabled, handleClearButtonFocus, value]
     )
 
     const openButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
@@ -328,56 +377,68 @@ const InnerAutocomplete = forwardRef(
         onKeyDown={handleRootKeyDown}
         ref={rootRef}
       >
-        <TextInput
-          {...restProps}
-          aria-activedescendant={activeItemId}
-          aria-autocomplete="list"
-          aria-expanded={expanded}
-          aria-owns={listboxId}
-          autoCapitalize="off"
-          autoComplete="off"
-          autoCorrect="off"
-          border={border}
-          clearButton={clearButton}
-          fontSize={fontSize}
-          icon={icon}
-          id={id}
-          inputMode="search"
-          onChange={handleInputChange}
-          onClear={handleClearButtonClick}
-          onFocus={handleInputFocus}
-          padding={padding}
-          radius={radius}
-          ref={setRef}
-          role="combobox"
-          spellCheck={false}
-          suffix={openButtonNode}
-          value={query === null ? renderValue(value, currentOption) : query}
-        />
+        <ResultsPopover
+          arrow={false}
+          content={
+            <ListBox paddingY={1} tabIndex={-1}>
+              <ul aria-multiselectable={false} id={listboxId} ref={listRef} role="listbox">
+                {filteredOptions.map((option, optionIndex) => (
+                  <AutocompleteOption
+                    id={`${id}-option-${optionIndex}`}
+                    key={option.value}
+                    onSelect={handleOptionSelect}
+                    selected={
+                      selectedIndex > -1 ? optionIndex === selectedIndex : currentOption === option
+                    }
+                    value={option.value}
+                  >
+                    {cloneElement(renderOption(option), {disabled: loading, tabIndex: -1})}
+                  </AutocompleteOption>
+                ))}
+              </ul>
 
-        <ListBoxContainer hidden={!expanded}>
-          <ListBoxCard paddingY={1} radius={1} shadow={2} tabIndex={-1} tone="inherit">
-            <ul aria-multiselectable={false} id={listboxId} ref={listRef} role="listbox">
-              {filteredOptions.map((option, optionIndex) => (
-                <AutocompleteOption
-                  id={`${id}-option-${optionIndex}`}
-                  key={optionIndex}
-                  onSelect={handleOptionSelect}
-                  selected={
-                    selectedIndex > -1 ? optionIndex === selectedIndex : currentOption === option
-                  }
-                  value={option.value}
-                >
-                  {cloneElement(renderOption(option), {disabled: loading, tabIndex: -1})}
-                </AutocompleteOption>
-              ))}
-            </ul>
-
-            <LoadingCard padding={3} style={{opacity: loading ? 0.5 : 0}}>
-              <Spinner />
-            </LoadingCard>
-          </ListBoxCard>
-        </ListBoxContainer>
+              <LoadingCard padding={3} style={{opacity: loading ? 0.5 : 0}}>
+                <Spinner />
+              </LoadingCard>
+            </ListBox>
+          }
+          fallbackPlacements={['top']}
+          matchReferenceWidth
+          open={expanded}
+          portal
+          placement="bottom"
+          radius={1}
+          ref={resultsPopoverRef}
+        >
+          <TextInput
+            {...restProps}
+            aria-activedescendant={activeItemId}
+            aria-autocomplete="list"
+            aria-expanded={expanded}
+            aria-owns={listboxId}
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            border={border}
+            clearButton={clearButton}
+            disabled={disabled}
+            fontSize={fontSize}
+            icon={icon}
+            id={id}
+            inputMode="search"
+            onChange={handleInputChange}
+            onClear={handleClearButtonClick}
+            onFocus={handleInputFocus}
+            padding={padding}
+            prefix={prefix}
+            radius={radius}
+            ref={setRef}
+            role="combobox"
+            spellCheck={false}
+            suffix={openButtonNode}
+            value={query === null ? renderValue(value, currentOption) : query}
+          />
+        </ResultsPopover>
       </Root>
     )
   }
@@ -387,7 +448,27 @@ InnerAutocomplete.displayName = 'Autocomplete'
 
 export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
-    Omit<React.HTMLProps<HTMLInputElement>, AutocompleteOverriddenInputAttrKey> & {
+    Omit<
+      React.HTMLProps<HTMLInputElement>,
+      | 'aria-activedescendant'
+      | 'aria-autocomplete'
+      | 'aria-expanded'
+      | 'aria-owns'
+      | 'as'
+      | 'autoCapitalize'
+      | 'autoComplete'
+      | 'autoCorrect'
+      | 'id'
+      | 'inputMode'
+      | 'onChange'
+      | 'onSelect'
+      | 'prefix'
+      | 'ref'
+      | 'role'
+      | 'spellCheck'
+      | 'type'
+      | 'value'
+    > & {
       ref?: React.Ref<HTMLInputElement>
     }
 ) => React.ReactElement
