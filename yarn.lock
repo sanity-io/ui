@@ -9162,22 +9162,17 @@ es6-weak-map@^2.0.1:
     es6-symbol "^3.1.1"
 
 esbuild-register@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/esbuild-register/-/esbuild-register-2.3.0.tgz#c7c6e2cabdce0e7aa5f30be774302d3fc1ebd02e"
-  integrity sha512-uT3WXEQGAqzrI0SLy1Jz39BzIBiLWd5La9zFZ+FUSCPGqJbE+ZJHUTE8yHP1GVfyHKrrAFCZqLieaHkSprIRDQ==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/esbuild-register/-/esbuild-register-2.4.0.tgz#f266252a44b79a3a66a19959f5530fcc52ef5b6d"
+  integrity sha512-1mWroad5Mz8fqMxd0GfmEWoAuRBSsBObLVp5rpFOQSavUNgyhR5NoVlECrDcE2iineekoTsBeNS9QxKvqKvNjw==
   dependencies:
-    esbuild "^0.9.2"
+    esbuild "^0.11.5"
     jsonc-parser "^3.0.0"
 
 esbuild@^0.11.5:
   version "0.11.6"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.6.tgz#20961309c4cfed00b71027e18806150358d0cbb0"
   integrity sha512-L+nKW9ftVS/N2CVJMR9YmXHbkm+vHzlNYuo09rzipQhF7dYNvRLfWoEPSDRTl10and4owFBV9rJ2CTFNtLIOiw==
-
-esbuild@^0.9.2:
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.9.7.tgz#ea0d639cbe4b88ec25fbed4d6ff00c8d788ef70b"
-  integrity sha512-VtUf6aQ89VTmMLKrWHYG50uByMF4JQlVysb8dmg6cOgW8JnFCipmz7p+HNBl+RR3LLCuBxFGVauAe2wfnF9bLg==
 
 escalade@^3.0.2, escalade@^3.1.1:
   version "3.1.1"
