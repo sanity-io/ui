@@ -196,40 +196,116 @@ export const async = () => {
   )
 }
 
+function search(
+  query: string,
+  onResults: (results: ExampleOption[]) => void,
+  onLoading: (flag: boolean) => void
+) {
+  const fakeDelay = 50 + Math.random() * 400
+
+  onLoading(true)
+
+  const timeout = setTimeout(() => {
+    const results: ExampleOption[] = countries
+      .filter((d) => d.name.toLowerCase().includes(query.toLowerCase()))
+      .map((d) => ({title: d.name, value: d.code}))
+
+    onResults(results)
+    onLoading(false)
+  }, fakeDelay)
+
+  return {
+    cancel: () => {
+      clearTimeout(timeout)
+    },
+  }
+}
+
 function AsyncExample() {
   const [options, setOptions] = useState<ExampleOption[]>([])
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const [loading, setLoading] = useState(false)
+  const searchRef = useRef<{cancel: () => void} | null>(null)
+  const [value, setValue] = useState('')
 
-  const handleQueryChange = (query: string | null) => {
-    if (timeoutRef.current !== null) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
+  const doSearch = useCallback((query: string | null) => {
+    console.log('search', query)
+
+    if (searchRef.current) {
+      searchRef.current.cancel()
     }
 
-    if (query === null) return
+    searchRef.current = search(query || '', setOptions, setLoading)
+  }, [])
 
-    setLoading(true)
+  const filterOption = useCallback((query: string, option: ExampleOption) => {
+    return option.title.toLowerCase().indexOf(query.toLowerCase()) > -1
+  }, [])
 
-    timeoutRef.current = setTimeout(() => {
-      const results: ExampleOption[] = countries
-        .filter((d) => d.name.toLowerCase().includes(query.toLowerCase()))
-        .map((d) => ({title: d.name, value: d.code}))
+  const handleChange = useCallback(
+    (value: string) => {
+      console.log('handleChange', {value})
 
-      setOptions(results)
-      setLoading(false)
-    }, 200 + Math.random() * 700)
-  }
+      const option = options.find((o) => o.value === value)
+
+      setValue(value)
+
+      if (option) {
+        doSearch(option.title)
+      }
+    },
+    [doSearch, options]
+  )
+
+  const handleQueryChange = useCallback(
+    (query: string | null) => {
+      console.log('handleQueryChange', {query})
+
+      if (query !== null) {
+        doSearch(query)
+      }
+    },
+    [doSearch]
+  )
+
+  const handleOpenButtonClick = useCallback(() => {
+    console.log('handleOpenButtonClick')
+
+    if (!value) {
+      doSearch('')
+    }
+  }, [doSearch, value])
+
+  const renderValue = useCallback((value: string, option?: ExampleOption) => {
+    return option?.title || value
+  }, [])
+
+  const renderOption = useCallback((option: ExampleOption) => {
+    return (
+      <Card as="button" padding={3}>
+        <Text>{option.title}</Text>
+      </Card>
+    )
+  }, [])
 
   return (
     <Stack space={3}>
       <Autocomplete
+        filterOption={filterOption}
         id="async"
         loading={loading}
+        onChange={handleChange}
         onQueryChange={handleQueryChange}
+        openButton={{onClick: handleOpenButtonClick}}
         options={options}
         placeholder="Search..."
+        renderOption={renderOption}
+        renderValue={renderValue}
+        value={value}
       />
+
+      <Card overflow="auto" padding={3} shadow={1}>
+        <Code language="json">{JSON.stringify({loading, options, value}, null, 2)}</Code>
+      </Card>
     </Stack>
   )
 }
