@@ -115,7 +115,7 @@ const RightBox = styled(Box)`
 
 export const TextInput = forwardRef(
   (
-    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'>,
+    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
     forwardedRef: React.Ref<HTMLInputElement>
   ) => {
     const {
