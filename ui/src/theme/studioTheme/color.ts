@@ -206,7 +206,7 @@ export const color = createColorTheme({
       return {
         bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
         fg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
-        border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
+        border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
         placeholder: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
       }
     }
