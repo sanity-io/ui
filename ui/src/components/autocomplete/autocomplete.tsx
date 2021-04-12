@@ -11,7 +11,7 @@ import React, {
 import styled from 'styled-components'
 import {EMPTY_ARRAY} from '../../constants'
 import {focusFirstDescendant} from '../../helpers'
-import {useForwardedRef, useResponsiveProp} from '../../hooks'
+import {useClickOutside, useForwardedRef, useResponsiveProp} from '../../hooks'
 import {Box, Button, ButtonProps, Card, Popover, Spinner, Text, TextInput} from '../../primitives'
 import {AutocompleteOption} from './autocompleteOption'
 
@@ -194,8 +194,16 @@ const InnerAutocomplete = forwardRef(
     const optionsLen = filteredOptions.length
     const expanded = (query !== null && loading) || (focused && optionsLen > 0 && query !== null)
     const forwardedRef = useForwardedRef(ref)
+    const popoverMouseWithinRef = useRef(false)
 
     const handleRootBlur = useCallback(() => {
+      // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
+      // closes the results in certain situations):
+      // - Do not handle blur if the mouse is within the popover
+      if (popoverMouseWithinRef.current) {
+        return
+      }
+
       setTimeout(() => {
         const rootEl = rootRef.current
         const resultsPopoverEl = resultsPopoverRef.current
@@ -272,6 +280,14 @@ const InnerAutocomplete = forwardRef(
 
     const handleInputFocus = useCallback(() => setFocused(true), [])
 
+    const handlePopoverMouseEnter = useCallback(() => {
+      popoverMouseWithinRef.current = true
+    }, [])
+
+    const handlePopoverMouseLeave = useCallback(() => {
+      popoverMouseWithinRef.current = false
+    }, [])
+
     const handleClearButtonClick = useCallback(() => {
       valueRef.current = ''
       setValue('')
@@ -321,6 +337,14 @@ const InnerAutocomplete = forwardRef(
         focusFirstDescendant(selectedItemElement)
       }
     }, [selectedIndex])
+
+    const handleClickOutside = useCallback(() => {
+      setFocused(false)
+      setQuery(null)
+      if (onQueryChange) onQueryChange(null)
+    }, [onQueryChange])
+
+    useClickOutside(handleClickOutside, [forwardedRef.current, resultsPopoverRef.current])
 
     const setRef = useCallback(
       (el: HTMLInputElement | null) => {
@@ -416,6 +440,8 @@ const InnerAutocomplete = forwardRef(
           }
           fallbackPlacements={['top-start']}
           matchReferenceWidth
+          onMouseEnter={handlePopoverMouseEnter}
+          onMouseLeave={handlePopoverMouseLeave}
           open={expanded}
           portal
           placement="bottom-start"
