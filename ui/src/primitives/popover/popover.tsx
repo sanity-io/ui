@@ -1,10 +1,5 @@
-import {ArrowModifier} from '@popperjs/core/lib/modifiers/arrow'
-import {FlipModifier} from '@popperjs/core/lib/modifiers/flip'
-import {OffsetModifier} from '@popperjs/core/lib/modifiers/offset'
-import {PreventOverflowModifier} from '@popperjs/core/lib/modifiers/preventOverflow'
-import maxSizeModifier from 'popper-max-size-modifier'
-import React, {cloneElement, forwardRef, useEffect, useMemo, useState} from 'react'
-import {Modifier, usePopper} from 'react-popper'
+import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
+import {usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useForwardedRef} from '../../hooks'
@@ -16,8 +11,7 @@ import {ResponsiveWidthStyleProps} from '../container'
 import {responsiveContainerWidthStyle} from '../container/styles'
 import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
 import {PopoverArrow} from './arrow'
-import {applyMaxSizeModifier} from './modifiers/applyMaxSize'
-import {matchReferenceWidthModifier} from './modifiers/matchReferenceWidth'
+import {usePopoverModifiers} from './modifiers'
 
 export interface PopoverProps
   extends ResponsiveRadiusProps,
@@ -39,6 +33,8 @@ export interface PopoverProps
   referenceElement?: HTMLElement | null
   matchReferenceWidth?: boolean
   scheme?: ThemeColorSchemeKey
+  tether?: boolean
+  tetherOffset?: number | ((...args: any[]) => number)
   tone?: ThemeColorToneKey
 }
 
@@ -105,7 +101,7 @@ export const Popover = forwardRef(
       fallbackPlacements,
       open,
       padding,
-      placement: placementProp,
+      placement = 'bottom',
       portal: portalProp = false,
       preventOverflow,
       radius = 3,
@@ -114,75 +110,33 @@ export const Popover = forwardRef(
       shadow = 3,
       scheme,
       style = EMPTY_RECORD,
+      tether,
+      tetherOffset,
       tone,
       width = 0,
       ...restProps
     } = props
     const forwardedRef = useForwardedRef(ref)
-    const placement = typeof placementProp === 'string' ? placementProp : 'bottom'
     const portal = usePortal()
-    const boundaryElement = boundaryElementProp || portal.boundaryElement
     const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
     const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
     const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
     const popperReferenceElement = referenceElementProp || referenceElement
-    const offset = useMemo(() => (arrow ? [0, 4] : [0, 0]), [arrow])
 
-    const modifiers = useMemo(
-      () =>
-        [
-          constrainSize && {
-            ...maxSizeModifier,
-            options: {
-              boundary: boundaryElement || undefined,
-              padding: 8,
-            },
-          },
-          constrainSize && applyMaxSizeModifier,
-          arrow &&
-            ({
-              name: 'arrow',
-              options: {
-                element: arrowElement,
-                padding: 4,
-              },
-            } as ArrowModifier),
-          preventOverflow &&
-            ({
-              name: 'preventOverflow',
-              options: {
-                altAxis: true,
-                boundary: boundaryElement || undefined,
-                padding: 8,
-              },
-            } as PreventOverflowModifier),
-          {
-            name: 'offset',
-            options: {offset},
-          } as OffsetModifier,
-          {
-            name: 'flip',
-            options: {
-              allowedAutoPlacements,
-              boundary: boundaryElement || undefined,
-              fallbackPlacements,
-              padding: 8,
-            },
-          } as FlipModifier,
-          matchReferenceWidth && matchReferenceWidthModifier,
-        ].filter(Boolean) as Modifier<any, any>[],
-      [
-        allowedAutoPlacements,
-        arrow,
-        arrowElement,
-        boundaryElement,
-        constrainSize,
-        fallbackPlacements,
-        matchReferenceWidth,
-        offset,
-        preventOverflow,
-      ]
-    )
+    const modifiers = usePopoverModifiers({
+      allowedAutoPlacements,
+      arrow,
+      arrowElement,
+      boundaryElement: boundaryElementProp || portal.boundaryElement,
+      constrainSize,
+      distance: arrow ? 4 : 0,
+      fallbackPlacements,
+      matchReferenceWidth,
+      preventOverflow,
+      skidding: 0,
+      tether,
+      tetherOffset,
+    })
 
     const popper = usePopper(popperReferenceElement, popperElement, {
       placement,
