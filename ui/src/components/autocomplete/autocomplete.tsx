@@ -198,9 +198,13 @@ const InnerAutocomplete = forwardRef(
           ((rootEl && rootEl.contains(focusedEl)) ||
             (resultsPopoverEl && resultsPopoverEl.contains(focusedEl)))
 
-        if (!focusInside) setFocused(false)
+        if (!focusInside) {
+          setFocused(false)
+          setQuery(null)
+          if (onQueryChange) onQueryChange(null)
+        }
       }, 0)
-    }, [])
+    }, [onQueryChange])
 
     const handleRootKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLElement>) => {
