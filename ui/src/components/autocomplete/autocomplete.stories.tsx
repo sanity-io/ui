@@ -193,7 +193,7 @@ function CustomExample({
         <Code>{JSON.stringify(value)}</Code>
       </Card>
       <Box>
-        <Button onClick={() => setValue('NO')} text="Set to NO" />
+        <Button id="set-value-btn" onClick={() => setValue('NO')} text="Set to NO" />
       </Box>
     </Stack>
   )
