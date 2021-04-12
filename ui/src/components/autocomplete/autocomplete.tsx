@@ -61,10 +61,13 @@ export const ListBox = styled(Box)`
 
 const ResultsPopover = styled(Popover)`
   & > div {
-    max-height: calc(100vh - 10em);
     min-height: 43px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  &[data-popper-reference-hidden='true'] {
+    display: none;
   }
 `
 
@@ -158,7 +161,9 @@ const InnerAutocomplete = forwardRef(
     const defaultRenderOption = useCallback(
       ({value}: BaseAutocompleteOption) => (
         <Card as="button" padding={paddingProp} tone="inherit">
-          <Text size={fontSize}>{value}</Text>
+          <Text size={fontSize} textOverflow="ellipsis">
+            {value}
+          </Text>
         </Card>
       ),
       [fontSize, paddingProp]
@@ -385,6 +390,7 @@ const InnerAutocomplete = forwardRef(
       >
         <ResultsPopover
           arrow={false}
+          constrainSize
           content={
             <ListBox paddingY={1} tabIndex={-1}>
               <ul aria-multiselectable={false} id={listboxId} ref={listRef} role="listbox">
@@ -408,11 +414,11 @@ const InnerAutocomplete = forwardRef(
               </LoadingCard>
             </ListBox>
           }
-          fallbackPlacements={['top']}
+          fallbackPlacements={['top-start']}
           matchReferenceWidth
           open={expanded}
           portal
-          placement="bottom"
+          placement="bottom-start"
           radius={1}
           ref={resultsPopoverRef}
         >
