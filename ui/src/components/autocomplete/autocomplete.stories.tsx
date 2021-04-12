@@ -10,7 +10,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import {boolean, select, withKnobs} from '@storybook/addon-knobs'
+import {boolean, select, text, withKnobs} from '@storybook/addon-knobs'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import countries from './__fixtures__/countries'
 
@@ -26,6 +26,8 @@ export default {
 
 export function _default() {
   const options = countries.map((country) => ({value: country.code}))
+
+  const customValidity = text('Custom validity', '', 'Props') || undefined
 
   const fontSize = Number(
     select(
@@ -78,6 +80,7 @@ export function _default() {
   return (
     <Card padding={4}>
       <Autocomplete
+        customValidity={customValidity}
         fontSize={fontSize}
         id="default"
         openButton={openButton}

@@ -24,6 +24,7 @@ export interface BaseAutocompleteOption {
 
 export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   border?: boolean
+  customValidity?: string
   filterOption?: (query: string, option: Option) => boolean
   fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode
@@ -133,6 +134,7 @@ const InnerAutocomplete = forwardRef(
   ) => {
     const {
       border = true,
+      customValidity,
       disabled,
       filterOption: filterOptionProp,
       fontSize = 2,
@@ -425,6 +427,7 @@ const InnerAutocomplete = forwardRef(
             autoCorrect="off"
             border={border}
             clearButton={clearButton}
+            customValidity={customValidity}
             disabled={disabled}
             fontSize={fontSize}
             icon={icon}
