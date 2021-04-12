@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-perf-app",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.build.js --no-stats && rimraf dist/ts",
@@ -12,7 +12,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/ui": "^0.33.13",
+    "@sanity/ui": "^0.33.14",
     "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
