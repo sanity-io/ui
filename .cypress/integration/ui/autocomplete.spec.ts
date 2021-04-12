@@ -66,4 +66,37 @@ context('Components/Autocomplete', () => {
     // Should be collapsed
     cy.get('#custom[aria-expanded="false"]').should('exist')
   })
+
+  it('should clear query on blur', async () => {
+    cy.visit('http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story')
+
+    // Click to focus
+    cy.get('#custom').click()
+
+    // Search for "nor"
+    cy.get('#custom').type('nor')
+
+    // Arrow down 3 times
+    cy.get('#custom-listbox').realPress('ArrowDown')
+    cy.get('#custom-listbox').realPress('ArrowDown')
+    cy.get('#custom-listbox').realPress('ArrowDown')
+
+    // Enter to select
+    cy.get('[data-qa="option-NO"]').should('have.focus')
+
+    cy.realPress('{enter}')
+
+    cy.get('#custom[value="Norway"]:focus').should('exist')
+
+    // Click to focus
+    cy.get('#custom').click()
+
+    // Search for "nor"
+    cy.get('#custom').type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}net')
+
+    cy.get('#custom').realPress('Tab')
+    cy.get('[data-qa="clear-button"]').realPress('Tab')
+
+    cy.get('#custom[aria-expanded="false"][value="Norway"]').should('exist')
+  })
 })
