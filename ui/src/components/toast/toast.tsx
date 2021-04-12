@@ -23,6 +23,10 @@ const Root = styled(Card)`
   pointer-events: all;
 `
 
+const TextBox = styled(Flex)`
+  overflow-x: auto;
+`
+
 export function Toast(
   props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>
 ) {
@@ -30,17 +34,9 @@ export function Toast(
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
 
   return (
-    <Root
-      data-ui="Toast"
-      {...restProps}
-      marginTop={3}
-      padding={1}
-      radius={2}
-      shadow={2}
-      tone={cardTone}
-    >
-      <Flex>
-        <Box flex={1} padding={2}>
+    <Root data-ui="Toast" {...restProps} marginTop={3} radius={2} shadow={2} tone={cardTone}>
+      <Flex align="flex-start">
+        <TextBox flex={1} padding={3}>
           <Stack space={3}>
             {title && <Text weight="semibold">{title}</Text>}
             {description && (
@@ -49,10 +45,10 @@ export function Toast(
               </Text>
             )}
           </Stack>
-        </Box>
+        </TextBox>
 
         {closable && (
-          <Box marginLeft={2}>
+          <Box padding={1}>
             <Card
               as="button"
               padding={2}

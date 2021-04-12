@@ -25,9 +25,16 @@ function UseToastExample() {
         onClick={() =>
           toast.push({
             id: 'status',
-            // closable: true,
+            closable: true,
             title: 'Information',
             status: 'info',
+            description: (
+              <>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus pellentesque
+                luctus. Curabitur sed tortor a elit tempus malesuada. Quisque sed dapibus ligula, id
+                pulvinar nisl.
+              </>
+            ),
           })
         }
         text="Push info"
@@ -38,7 +45,7 @@ function UseToastExample() {
         onClick={() =>
           toast.push({
             id: 'status',
-            // closable: true,
+            closable: true,
             title: 'Warning',
             status: 'warning',
           })
@@ -51,7 +58,7 @@ function UseToastExample() {
         onClick={() =>
           toast.push({
             id: 'status',
-            // closable: true,
+            closable: true,
             title: 'Error',
             status: 'error',
           })
@@ -64,7 +71,7 @@ function UseToastExample() {
         onClick={() =>
           toast.push({
             // id: 'status',
-            // closable: true,
+            closable: true,
             title: 'Some message',
             // status: 'error',
           })
