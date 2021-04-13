@@ -165,8 +165,6 @@ function CustomExample({
   }, [])
 
   const renderValue = useCallback((currentValue: string, option?: ExampleOption) => {
-    console.log('render value', {value: currentValue, option})
-
     return option ? option.title : currentValue
   }, [])
 
@@ -272,7 +270,6 @@ function AsyncExample() {
   const [loadingCurrentRef, setLoadingCurrentRef] = useState(false)
 
   const doSearch = useCallback((query: string | null) => {
-    console.log('search', query)
     if (searchRef.current) searchRef.current.cancel()
     searchRef.current = search(query || '', setOptions, setLoading)
   }, [])
@@ -281,8 +278,6 @@ function AsyncExample() {
 
   const handleQueryChange = useCallback(
     (query: string | null) => {
-      console.log('handleQueryChange', {query})
-
       if (query !== null) {
         doSearch(query)
       }
@@ -291,8 +286,6 @@ function AsyncExample() {
   )
 
   const handleOpenButtonClick = useCallback(() => {
-    console.log('handleOpenButtonClick')
-
     if (!value) {
       doSearch('')
     }
@@ -331,27 +324,30 @@ function AsyncExample() {
 
   return (
     <Stack space={3}>
-      <Autocomplete
-        disabled={loadingCurrentRef}
-        filterOption={filterOption}
-        id="async"
-        loading={loading}
-        onChange={setValue}
-        onQueryChange={handleQueryChange}
-        openButton={{onClick: handleOpenButtonClick}}
-        options={options}
-        placeholder="Search..."
-        prefix={
-          <Box padding={1}>
-            <Button disabled={!value} icon={LinkIcon} mode="bleed" padding={2} />
-          </Box>
-        }
-        renderOption={renderOption}
-        renderValue={renderValue}
-        value={value}
-      />
+      <LayerProvider zOffset={100}>
+        <Autocomplete
+          disabled={loadingCurrentRef}
+          filterOption={filterOption}
+          id="async"
+          loading={loading}
+          onChange={setValue}
+          onQueryChange={handleQueryChange}
+          openButton={{onClick: handleOpenButtonClick}}
+          options={options}
+          placeholder="Search..."
+          prefix={
+            <Box padding={1}>
+              <Button disabled={!value} icon={LinkIcon} mode="bleed" padding={2} />
+            </Box>
+          }
+          radius={1}
+          renderOption={renderOption}
+          renderValue={renderValue}
+          value={value}
+        />
+      </LayerProvider>
 
-      <Card overflow="auto" padding={3} shadow={1}>
+      <Card border overflow="auto" padding={3} radius={1}>
         <Code language="json">{JSON.stringify({loading, options, value}, null, 2)}</Code>
       </Card>
     </Stack>
@@ -434,8 +430,6 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   }, [])
 
   const renderValue = useCallback((currentValue: string, option?: ExampleOption) => {
-    console.log('render value', {value: currentValue, option})
-
     return option ? option.title : currentValue
   }, [])
 

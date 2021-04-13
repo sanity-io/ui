@@ -12,7 +12,17 @@ import styled from 'styled-components'
 import {EMPTY_ARRAY} from '../../constants'
 import {focusFirstDescendant} from '../../helpers'
 import {useClickOutside, useForwardedRef, useResponsiveProp} from '../../hooks'
-import {Box, Button, ButtonProps, Card, Popover, Spinner, Text, TextInput} from '../../primitives'
+import {
+  Box,
+  Button,
+  ButtonProps,
+  Card,
+  Popover,
+  PopoverProps,
+  Spinner,
+  Text,
+  TextInput,
+} from '../../primitives'
 import {AutocompleteOption} from './autocompleteOption'
 
 type OpenButtonProps = Omit<ButtonProps, 'as'> &
@@ -39,6 +49,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   openButton?: boolean | OpenButtonProps
   options?: Option[]
   padding?: number | number[]
+  popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
   prefix?: React.ReactNode
   radius?: number | number[]
   renderOption?: (option: Option) => React.ReactElement
@@ -47,11 +58,11 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   value?: string
 }
 
-export const Root = styled.div`
+const Root = styled.div`
   position: relative;
 `
 
-export const ListBox = styled(Box)`
+const ListBox = styled(Box)`
   & > ul {
     list-style: none;
     padding: 0;
@@ -71,7 +82,7 @@ const ResultsPopover = styled(Popover)`
   }
 `
 
-export const LoadingCard = styled(Card)`
+const LoadingCard = styled(Card)`
   position: absolute;
   top: 0;
   left: 0;
@@ -150,6 +161,7 @@ const InnerAutocomplete = forwardRef(
       openButton,
       options: optionsProp,
       padding: paddingProp = 3,
+      popover = {},
       prefix,
       radius = 2,
       renderOption: renderOptionProp,
@@ -184,8 +196,10 @@ const InnerAutocomplete = forwardRef(
     const listRef = useRef<HTMLUListElement | null>(null)
     const activeItemId = selectedIndex > -1 ? `${id}-option-${selectedIndex}` : undefined
     const padding = useResponsiveProp(paddingProp)
-    const rootRef = useRef<HTMLDivElement | null>(null)
-    const resultsPopoverRef = useRef<HTMLDivElement | null>(null)
+    // const rootRef = useRef<HTMLDivElement | null>(null)
+    const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
+    const [resultsPopoverElement, setResultsPopoverElement] = useState<HTMLDivElement | null>(null)
+    // const resultsPopoverRef = useRef<HTMLDivElement | null>(null)
     const currentOption = value ? options.find((o) => o.value === value) : undefined
     const filteredOptions = useMemo(
       () => options.filter((option) => (query ? filterOption(query, option) : true)),
@@ -197,21 +211,21 @@ const InnerAutocomplete = forwardRef(
     const popoverMouseWithinRef = useRef(false)
 
     const handleRootBlur = useCallback(() => {
-      // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
-      // closes the results in certain situations):
-      // - Do not handle blur if the mouse is within the popover
-      if (popoverMouseWithinRef.current) {
-        return
-      }
-
       setTimeout(() => {
-        const rootEl = rootRef.current
-        const resultsPopoverEl = resultsPopoverRef.current
+        // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
+        // closes the results in certain situations):
+        // - Do not handle blur if the mouse is within the popover
+        if (popoverMouseWithinRef.current) {
+          return
+        }
+
+        // const rootEl = rootRef.current
+        // const resultsPopoverEl = resultsPopoverRef.current
         const focusedEl = document.activeElement
         const focusInside =
           focusedEl &&
-          ((rootEl && rootEl.contains(focusedEl)) ||
-            (resultsPopoverEl && resultsPopoverEl.contains(focusedEl)))
+          ((rootElement && rootElement.contains(focusedEl)) ||
+            (resultsPopoverElement && resultsPopoverElement.contains(focusedEl)))
 
         if (!focusInside) {
           setFocused(false)
@@ -219,7 +233,7 @@ const InnerAutocomplete = forwardRef(
           if (onQueryChange) onQueryChange(null)
         }
       }, 0)
-    }, [onQueryChange])
+    }, [onQueryChange, resultsPopoverElement, rootElement])
 
     const handleRootKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLElement>) => {
@@ -339,12 +353,15 @@ const InnerAutocomplete = forwardRef(
     }, [selectedIndex])
 
     const handleClickOutside = useCallback(() => {
-      setFocused(false)
-      setQuery(null)
-      if (onQueryChange) onQueryChange(null)
-    }, [onQueryChange])
+      if (focused) {
+        setFocused(false)
+        setQuery(null)
 
-    useClickOutside(handleClickOutside, [forwardedRef.current, resultsPopoverRef.current])
+        if (onQueryChange) onQueryChange(null)
+      }
+    }, [focused, onQueryChange])
+
+    useClickOutside(handleClickOutside, [rootElement, resultsPopoverElement])
 
     const setRef = useCallback(
       (el: HTMLInputElement | null) => {
@@ -410,9 +427,10 @@ const InnerAutocomplete = forwardRef(
         data-ui="Autocomplete"
         onBlur={handleRootBlur}
         onKeyDown={handleRootKeyDown}
-        ref={rootRef}
+        ref={setRootElement}
       >
         <ResultsPopover
+          __unstable_margins={[1, 1, 1, 1]}
           arrow={false}
           constrainSize
           content={
@@ -445,8 +463,9 @@ const InnerAutocomplete = forwardRef(
           open={expanded}
           portal
           placement="bottom-start"
-          radius={1}
-          ref={resultsPopoverRef}
+          radius={radius}
+          ref={setResultsPopoverElement}
+          {...popover}
         >
           <TextInput
             {...restProps}
