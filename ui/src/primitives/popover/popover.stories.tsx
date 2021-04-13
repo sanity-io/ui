@@ -6,6 +6,7 @@ import {
   LayerProvider,
   Placement,
   Popover,
+  PopoverProps,
   PortalProvider,
   Stack,
   Text,
@@ -27,6 +28,8 @@ export const plain = () => {
   const content = text('Content', 'Hello, world', 'Props')
 
   const constrainSize = boolean('Constrain size', false, 'Props')
+
+  const matchReferenceWidth = boolean('Match reference width', false, 'Props')
 
   const open = boolean('Open', true, 'Props')
 
@@ -99,10 +102,11 @@ export const plain = () => {
     'Props'
   )
 
-  const props = {
+  const props: PopoverProps = {
     arrow,
     content: <Text>{content}</Text>,
     constrainSize,
+    matchReferenceWidth,
     open,
     padding,
     placement,
@@ -115,7 +119,7 @@ export const plain = () => {
   return <PropsExample {...props} />
 }
 
-function PropsExample(props: any) {
+function PropsExample(props: PopoverProps) {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 
   return (
@@ -127,11 +131,12 @@ function PropsExample(props: any) {
           margin: 60,
           overflow: 'auto',
           outline: '1px solid red',
+          width: '100%',
         }}
       >
         <Card padding={4} style={{padding: '150vh 0', textAlign: 'center'}}>
-          <Popover {...props}>
-            <Button text="Hello" />
+          <Popover __unstable_margins={[1, 1, 1, 1]} {...props}>
+            <Button text="This button is the popover reference" />
           </Popover>
         </Card>
         <div ref={setPortalElement} />
@@ -244,6 +249,27 @@ export const matchReferenceWidth = () => {
           <Button fontSize={3} padding={5} text="Button" />
         </Stack>
       </Container>
+    </Popover>
+  )
+}
+
+export const margins = () => {
+  return (
+    <Popover
+      __unstable_margins={[-5, 0, -5, 0]}
+      arrow={false}
+      content={
+        <Box padding={2}>
+          <Text>Content</Text>
+        </Box>
+      }
+      matchReferenceWidth
+      open
+      radius={0}
+    >
+      <Card padding={2}>
+        <Text>Reference</Text>
+      </Card>
     </Popover>
   )
 }

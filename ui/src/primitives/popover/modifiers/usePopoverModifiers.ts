@@ -10,6 +10,7 @@ export function usePopoverModifiers({
   constrainSize,
   distance,
   fallbackPlacements,
+  margins,
   matchReferenceWidth,
   preventOverflow,
   skidding,
@@ -23,6 +24,7 @@ export function usePopoverModifiers({
   constrainSize?: boolean
   distance: number
   fallbackPlacements?: Placement[]
+  margins?: [number, number, number, number]
   matchReferenceWidth?: boolean
   preventOverflow?: boolean
   skidding: number
@@ -39,6 +41,7 @@ export function usePopoverModifiers({
         constrainSize,
         distance,
         fallbackPlacements,
+        margins,
         matchReferenceWidth,
         preventOverflow,
         skidding,
@@ -53,6 +56,7 @@ export function usePopoverModifiers({
       constrainSize,
       distance,
       fallbackPlacements,
+      margins,
       matchReferenceWidth,
       preventOverflow,
       skidding,

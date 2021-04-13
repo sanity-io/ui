@@ -1,4 +1,4 @@
-import React, {cloneElement, forwardRef, useEffect, useState} from 'react'
+import React, {cloneElement, forwardRef, useCallback, useEffect, useMemo, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
@@ -17,6 +17,10 @@ export interface PopoverProps
   extends ResponsiveRadiusProps,
     ResponsiveShadowProps,
     ResponsiveWidthProps {
+  /**
+   * @beta
+   */
+  __unstable_margins?: [number, number, number, number]
   allowedAutoPlacements?: Placement[]
   arrow?: boolean
   boundaryElement?: HTMLElement | null
@@ -91,6 +95,7 @@ export const Popover = forwardRef(
   ) => {
     const boundaryElementContext = useBoundaryElement()
     const {
+      __unstable_margins: margins,
       allowedAutoPlacements,
       arrow = true,
       boundaryElement: boundaryElementProp = boundaryElementContext.element,
@@ -131,6 +136,7 @@ export const Popover = forwardRef(
       constrainSize,
       distance: arrow ? 4 : 0,
       fallbackPlacements,
+      margins,
       matchReferenceWidth,
       preventOverflow,
       skidding: 0,
@@ -145,6 +151,31 @@ export const Popover = forwardRef(
 
     const {attributes, forceUpdate, styles} = popper
 
+    const setRef = useCallback(
+      (el: HTMLElement | null) => {
+        const childRef = (child as any).ref
+
+        setReferenceElement(el)
+
+        if (typeof childRef === 'function') {
+          childRef(el)
+        } else if (childRef) {
+          childRef.current = el
+        }
+      },
+      [child]
+    )
+
+    const setRootRef = useCallback(
+      (el: HTMLDivElement | null) => {
+        setPopperElement(el)
+        forwardedRef.current = el
+      },
+      [forwardedRef]
+    )
+
+    const popoverStyle = useMemo(() => ({...style, ...styles.popper}), [style, styles])
+
     useEffect(() => {
       if (forceUpdate) {
         try {
@@ -158,26 +189,6 @@ export const Popover = forwardRef(
     if (disabled) {
       return child || <></>
     }
-
-    const setRef = (el: HTMLElement | null) => {
-      const childRef = (child as any).ref
-
-      setReferenceElement(el)
-
-      if (typeof childRef === 'function') {
-        childRef(el)
-      } else if (childRef) {
-        childRef.current = el
-      }
-    }
-
-    const setRootRef = (el: HTMLDivElement | null) => {
-      setPopperElement(el)
-      forwardedRef.current = el
-    }
-
-    // @todo: memoize?
-    const popoverStyle = {...style, ...styles.popper}
 
     const node = (
       <Root
