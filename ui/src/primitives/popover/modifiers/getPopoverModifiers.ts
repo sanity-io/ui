@@ -1,8 +1,22 @@
 import maxSizeModifier from 'popper-max-size-modifier'
 import {Modifier} from 'react-popper'
 import {Placement} from '../../../types'
-import {applyMaxSizeModifier} from './applyMaxSize'
-import {matchReferenceWidthModifier} from './matchReferenceWidth'
+
+/*
+
+The order of popper phases:
+
+- beforeRead
+- read
+- afterRead
+- beforeMain
+- main
+- afterMain
+- beforeWrite
+- write
+- afterWrite
+
+*/
 
 export function getPopoverModifiers({
   allowedAutoPlacements,
@@ -12,6 +26,7 @@ export function getPopoverModifiers({
   constrainSize,
   distance,
   fallbackPlacements,
+  margins,
   matchReferenceWidth,
   preventOverflow,
   skidding,
@@ -25,6 +40,7 @@ export function getPopoverModifiers({
   constrainSize?: boolean
   distance: number
   fallbackPlacements?: Placement[]
+  margins?: [number, number, number, number]
   matchReferenceWidth?: boolean
   preventOverflow?: boolean
   skidding: number
@@ -39,7 +55,21 @@ export function getPopoverModifiers({
         padding: 8,
       },
     },
-    constrainSize && applyMaxSizeModifier,
+    constrainSize && {
+      name: 'applyMaxSize',
+      enabled: true,
+      phase: 'beforeWrite',
+      requires: ['maxSize'],
+      fn({state}: any) {
+        const {width, height} = state.modifiersData.maxSize
+
+        state.styles.popper = {
+          ...state.styles.popper,
+          maxWidth: `${width}px`,
+          maxHeight: `${height}px`,
+        }
+      },
+    },
     arrow && {
       name: 'arrow',
       options: {
@@ -64,6 +94,21 @@ export function getPopoverModifiers({
       },
     },
     {
+      name: 'margins',
+      enabled: true,
+      phase: 'beforeRead',
+      fn: ({state}: any) => {
+        const {rects} = state
+
+        if (margins && rects.reference) {
+          rects.reference.x += margins[3]
+          rects.reference.y += margins[1]
+          rects.reference.width -= margins[1] + margins[3]
+          rects.reference.height -= margins[0] + margins[2]
+        }
+      },
+    },
+    {
       name: 'flip',
       options: {
         allowedAutoPlacements,
@@ -72,6 +117,25 @@ export function getPopoverModifiers({
         padding: 8,
       },
     },
-    matchReferenceWidth && matchReferenceWidthModifier,
+    matchReferenceWidth && {
+      name: 'matchWidth',
+      enabled: true,
+      phase: 'beforeWrite',
+      requires: ['computeStyles'],
+      fn({state}: any) {
+        const {width} = state.rects.reference
+
+        state.styles.popper.width = `${width}px`
+      },
+      effect: ({state}: any) => {
+        const refElement = state.elements.reference
+
+        if (refElement instanceof HTMLElement) {
+          state.elements.popper.style.width = `${
+            refElement.offsetWidth - (margins ? margins[1] + margins[3] : 0)
+          }px`
+        }
+      },
+    },
   ].filter(Boolean) as Modifier<any, any>[]
 }
