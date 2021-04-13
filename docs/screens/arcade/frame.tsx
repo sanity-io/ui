@@ -25,8 +25,6 @@ export function ArcadeFrame({hookCode, jsxCode}: {hookCode: string; jsxCode: str
     const handleMessage = (event: MessageEvent) => {
       const msg = event.data
 
-      // console.log('message from frame', msg)
-
       if (isRecord(msg)) {
         if (msg.type === 'arcadeFrame/ready') {
           setReady(true)
