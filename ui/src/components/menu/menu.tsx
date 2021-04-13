@@ -18,6 +18,7 @@ interface MenuProps extends ResponsivePaddingProps {
 
 const Root = styled(Box)`
   outline: none;
+  overflow: auto;
 `
 
 export const Menu = forwardRef(

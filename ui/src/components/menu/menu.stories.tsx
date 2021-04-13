@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Code,
+  Container,
   Inline,
   LayerProvider,
   Menu,
@@ -68,6 +69,7 @@ export const menuButton = () => (
             <MenuItem icon={ExpandIcon} id="menu-item-4" onClick={action('Expand')} text="Expand" />
           </Menu>
         }
+        popover={{constrainSize: true}}
       />
 
       <Button id="next-button" text="Next" />
@@ -96,6 +98,7 @@ export const menuButtonWithGroup = () => (
           <MenuItem icon={ExpandIcon} onClick={action('Expand')} text="Expand" />
         </Menu>
       }
+      popover={{constrainSize: true}}
     />
   </LayerProvider>
 )
@@ -195,6 +198,7 @@ function ClosableMenuButtonExample() {
             </Stack>
           </Menu>
         }
+        popover={{constrainSize: true}}
         ref={ref}
       />
     </Stack>
@@ -203,15 +207,29 @@ function ClosableMenuButtonExample() {
 
 export const menuButtonWithoutArrow = () => {
   return (
-    <MenuButton
-      button={<Button text="Open menu" />}
-      id="menu-button-without-arrow-example"
-      menu={
-        <Menu>
-          <MenuItem text="Item 1" />
-        </Menu>
-      }
-      popover={{arrow: false}}
-    />
+    <Container width={0}>
+      <Stack>
+        <MenuButton
+          button={<Button mode="ghost" text="Open menu" />}
+          id="menu-button-without-arrow-example"
+          menu={
+            <Menu>
+              <MenuItem text="Item 1" />
+              <MenuItem text="Item 2" />
+              <MenuItem text="Item 3" />
+            </Menu>
+          }
+          popover={{
+            __unstable_margins: [1, 1, 1, 1],
+            arrow: false,
+            constrainSize: true,
+            fallbackPlacements: ['top-start'],
+            matchReferenceWidth: true,
+            radius: 0,
+            placement: 'bottom-start',
+          }}
+        />
+      </Stack>
+    </Container>
   )
 }
