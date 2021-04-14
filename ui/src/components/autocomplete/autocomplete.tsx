@@ -196,10 +196,8 @@ const InnerAutocomplete = forwardRef(
     const listRef = useRef<HTMLUListElement | null>(null)
     const activeItemId = selectedIndex > -1 ? `${id}-option-${selectedIndex}` : undefined
     const padding = useResponsiveProp(paddingProp)
-    // const rootRef = useRef<HTMLDivElement | null>(null)
     const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
     const [resultsPopoverElement, setResultsPopoverElement] = useState<HTMLDivElement | null>(null)
-    // const resultsPopoverRef = useRef<HTMLDivElement | null>(null)
     const currentOption = value ? options.find((o) => o.value === value) : undefined
     const filteredOptions = useMemo(
       () => options.filter((option) => (query ? filterOption(query, option) : true)),
@@ -219,8 +217,6 @@ const InnerAutocomplete = forwardRef(
           return
         }
 
-        // const rootEl = rootRef.current
-        // const resultsPopoverEl = resultsPopoverRef.current
         const focusedEl = document.activeElement
         const focusInside =
           focusedEl &&
