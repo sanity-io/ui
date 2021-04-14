@@ -19,6 +19,7 @@ const common = {
         },
       },
     ],
+    'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
     'padding-line-between-statements': [
       'warn',
       {blankLine: 'always', prev: '*', next: 'block'},
