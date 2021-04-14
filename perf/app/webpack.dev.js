@@ -1,7 +1,6 @@
 'use strict'
 
 const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const ROOT_PATH = path.join(__dirname, '..', '..')
@@ -52,8 +51,5 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({template: path.join(__dirname, 'src/template.html')}),
-  ],
+  plugins: [new HtmlWebpackPlugin({template: path.join(__dirname, 'src/template.html')})],
 }
