@@ -460,3 +460,38 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
     </Stack>
   )
 }
+
+export const focusAndBlur = () => {
+  return <FocusAndBlurExample />
+}
+
+function FocusAndBlurExample() {
+  const [log, setLog] = useState<string[]>([])
+
+  const handleBlur = useCallback(() => setLog((v) => v.concat(['blur'])), [])
+
+  const handleFocus = useCallback(() => setLog((v) => v.concat(['focus'])), [])
+
+  const handleClear = useCallback(() => setLog([]), [])
+
+  return (
+    <Card padding={4}>
+      <Stack space={3}>
+        <Autocomplete
+          id="focus-and-blur"
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          openButton
+          options={[{value: 'foo'}, {value: 'bar'}]}
+        />
+        <Stack space={1}>
+          <Card overflow="auto" padding={3} radius={2} tone="transparent">
+            <Code id="focus-and-blur-log">{JSON.stringify(log)}</Code>
+          </Card>
+
+          <Button id="focus-and-blur-clear-btn" onClick={handleClear} text="Clear" />
+        </Stack>
+      </Stack>
+    </Card>
+  )
+}

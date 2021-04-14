@@ -91,12 +91,85 @@ context('Components/Autocomplete', () => {
     // Click to focus
     cy.get('#custom').click()
 
-    // Search for "nor"
+    // Search for "net"
     cy.get('#custom').type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}net')
 
+    // Tab out of autocomplete
     cy.get('#custom').realPress('Tab')
     cy.get('[data-qa="clear-button"]').realPress('Tab')
 
+    // Expect the value to be "Norway" and autocomplete to be collapsed
     cy.get('#custom[aria-expanded="false"][value="Norway"]').should('exist')
+  })
+
+  it('should search anew after selecting a value', () => {
+    cy.visit('http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story')
+
+    // Click to focus
+    cy.get('#custom').click()
+
+    // Search for "nor"
+    cy.get('#custom').type('nor')
+
+    // Arrow down 3 times
+    cy.get('#custom-listbox').realPress('ArrowDown')
+    cy.get('#custom-listbox').realPress('ArrowDown')
+    cy.get('#custom-listbox').realPress('ArrowDown')
+
+    // Enter to select
+    cy.get('[data-qa="option-NO"]').should('have.focus')
+    cy.realPress('{enter}')
+
+    cy.get('#custom[value="Norway"]:focus').should('exist')
+
+    // Click to focus
+    cy.get('#custom').click()
+
+    // Search for "nor"
+    cy.get('#custom').type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}net')
+
+    // Arrow down 1 time
+    cy.get('#custom-listbox').realPress('ArrowDown')
+
+    // Enter to select
+    cy.get('[data-qa="option-NL"]').should('have.focus')
+    cy.realPress('{enter}')
+
+    // Expect "Netherlands" to be selected
+    cy.get('#custom[value="Netherlands"]:focus').should('exist')
+  })
+
+  it('should trigger focus and blur', () => {
+    cy.visit(
+      'http://localhost:9009/iframe.html?id=components-autocomplete--focus-and-blur&viewMode=story'
+    )
+
+    // Click to focus
+    cy.get('#focus-and-blur').click()
+    cy.get('#focus-and-blur-log').should('have.text', '["focus"]')
+
+    // Click body to blur
+    cy.get('body').click()
+    cy.get('#focus-and-blur-log').should('have.text', '["focus","blur"]')
+
+    // Clear log
+    cy.get('#focus-and-blur-clear-btn').click()
+
+    // Click to focus
+    cy.get('#focus-and-blur').click()
+
+    // Search for "nor"
+    cy.get('#focus-and-blur').type('foo')
+    cy.get('#focus-and-blur-listbox').realPress('ArrowDown')
+    cy.get('#focus-and-blur-option-0 > button').should('have.focus')
+    cy.get('#focus-and-blur-option-0 > button').click()
+
+    // Expect "foo" to be selected
+    cy.get('#focus-and-blur[value="foo"]:focus').should('exist')
+    cy.get('#focus-and-blur-log').should('have.text', '["focus"]')
+
+    // Click body to blur
+    cy.get('body').click()
+    cy.get('#focus-and-blur-log').should('have.text', '["focus","blur"]')
   })
 })
