@@ -1,7 +1,6 @@
 'use strict'
 
 const path = require('path')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
@@ -47,7 +46,6 @@ module.exports = {
   },
   plugins: [
     new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false}),
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({template: path.join(__dirname, 'src/template.html')}),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
