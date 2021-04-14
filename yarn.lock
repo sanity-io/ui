@@ -2670,10 +2670,23 @@
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.8.0.tgz#2ac038ce2932c340d5093acf856af324e02bcd4b"
   integrity sha512-ebhJ7K6x+kffOIsDxrGmgsOIDIBedZ/F5GedrNRutv5ijdLgnwkZaRRgXSZQ2vDv+yp2HlIRrzfYZrQcbZudjw==
 
-"@sanity/client@2.7.1", "@sanity/client@^2.7.1":
+"@sanity/client@2.7.1":
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-2.7.1.tgz#0163ecad3ad0875dac5a87bfa20a1652dd3e6a80"
   integrity sha512-uKMlB4v8PDQQd2+5MGC2ccE/5lteJoqeH6iPr5ELC/608KonazMrOx7ROS0gxjNlDEq7NkJePaWwiaNu1xdujA==
+  dependencies:
+    "@sanity/eventsource" "2.2.6"
+    "@sanity/generate-help-url" "2.2.6"
+    "@sanity/observable" "2.0.9"
+    deep-assign "^2.0.0"
+    get-it "^5.0.3"
+    make-error "^1.3.0"
+    object-assign "^4.1.1"
+
+"@sanity/client@^2.7.1":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@sanity/client/-/client-2.8.0.tgz#43e35937e4de0f75c0b6bf029fca0e598c8a04ed"
+  integrity sha512-S/EYj4SOJ4OMOOULCjNE2moFsb4h2Vy9zV/v4dOappal+GBxafJ9E/J4+qLhkMZqd2hTfECfawjshuoUUo+L+g==
   dependencies:
     "@sanity/eventsource" "2.2.6"
     "@sanity/generate-help-url" "2.2.6"
