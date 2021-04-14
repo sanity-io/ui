@@ -155,7 +155,9 @@ const InnerAutocomplete = forwardRef(
       icon,
       id,
       loading,
+      onBlur,
       onChange,
+      onFocus,
       onQueryChange,
       onSelect,
       openButton,
@@ -208,28 +210,31 @@ const InnerAutocomplete = forwardRef(
     const forwardedRef = useForwardedRef(ref)
     const popoverMouseWithinRef = useRef(false)
 
-    const handleRootBlur = useCallback(() => {
-      setTimeout(() => {
-        // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
-        // closes the results in certain situations):
-        // - Do not handle blur if the mouse is within the popover
-        if (popoverMouseWithinRef.current) {
-          return
-        }
+    const handleRootBlur = useCallback(
+      (event: React.FocusEvent<HTMLInputElement>) => {
+        setTimeout(() => {
+          // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
+          // closes the results in certain situations):
+          // - Do not handle blur if the mouse is within the popover
+          if (popoverMouseWithinRef.current) {
+            return
+          }
 
-        const focusedEl = document.activeElement
-        const focusInside =
-          focusedEl &&
-          ((rootElement && rootElement.contains(focusedEl)) ||
-            (resultsPopoverElement && resultsPopoverElement.contains(focusedEl)))
+          const focusedEl = document.activeElement
+          const focusInside =
+            (focusedEl && rootElement && rootElement.contains(focusedEl)) ||
+            (focusedEl && resultsPopoverElement && resultsPopoverElement.contains(focusedEl))
 
-        if (!focusInside) {
-          setFocused(false)
-          setQuery(null)
-          if (onQueryChange) onQueryChange(null)
-        }
-      }, 0)
-    }, [onQueryChange, resultsPopoverElement, rootElement])
+          if (!focusInside) {
+            setFocused(false)
+            setQuery(null)
+            if (onQueryChange) onQueryChange(null)
+            if (onBlur) onBlur(event)
+          }
+        }, 0)
+      },
+      [onBlur, onQueryChange, resultsPopoverElement, rootElement]
+    )
 
     const handleRootKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLElement>) => {
@@ -283,12 +288,25 @@ const InnerAutocomplete = forwardRef(
 
         valueRef.current = q
         setQuery(q)
+
+        if (!focused) {
+          setFocused(true)
+        }
+
         if (onQueryChange) onQueryChange(q)
       },
-      [onQueryChange]
+      [focused, onQueryChange]
     )
 
-    const handleInputFocus = useCallback(() => setFocused(true), [])
+    const handleInputFocus = useCallback(
+      (event: React.FocusEvent<HTMLInputElement>) => {
+        if (!focused) {
+          setFocused(true)
+          if (onFocus) onFocus(event)
+        }
+      },
+      [focused, onFocus]
+    )
 
     const handlePopoverMouseEnter = useCallback(() => {
       popoverMouseWithinRef.current = true
@@ -318,6 +336,7 @@ const InnerAutocomplete = forwardRef(
         if (onQueryChange) onQueryChange(null)
         setFocused(false)
         inputRef.current?.focus()
+        popoverMouseWithinRef.current = false
       },
       [onChange, onSelect, onQueryChange]
     )
