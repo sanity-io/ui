@@ -2568,61 +2568,6 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.7.4.tgz#fdf3bf56cf2792f3f6cf97cf431c53435deba36d"
-  integrity sha512-9Q7zPpWRenFx8dutpk0FY6xEzxpSI98dmO3sANl3YAfOHXqpsPHIEYn8t9hutGxjRotytFoIygCabpqrljKcFw==
-  dependencies:
-    "@popperjs/core" "^2.5.4"
-    "@reach/auto-id" "^0.13.2"
-    "@sanity/bifur-client" "^0.0.8"
-    "@sanity/client" "2.7.1"
-    "@sanity/color" "^1.0.0"
-    "@sanity/generate-help-url" "2.2.6"
-    "@sanity/icons" "1.0.5"
-    "@sanity/image-url" "^0.140.19"
-    "@sanity/initial-value-templates" "2.7.4"
-    "@sanity/mutator" "2.2.6"
-    "@sanity/schema" "2.7.4"
-    "@sanity/state-router" "2.7.4"
-    "@sanity/structure" "2.7.4"
-    "@sanity/transaction-collator" "2.7.4"
-    "@sanity/types" "2.7.4"
-    "@sanity/ui" "^0.33.9"
-    "@sanity/util" "2.7.4"
-    "@sanity/validation" "2.7.4"
-    boundless-arrow-key-navigation "^1.1.0"
-    chance "^1.0.4"
-    circular-at "^1.0.3"
-    classnames "^2.2.5"
-    dataloader "^2.0.0"
-    date-fns "^2.16.1"
-    dom-scroll-into-view "^1.2.1"
-    element-resize-detector "^1.1.14"
-    history "^4.6.3"
-    lodash "^4.17.15"
-    nano-pubsub "^2.0.0"
-    nanoid "^3.1.9"
-    observable-callback "^1.0.1"
-    oneline "^1.0.3"
-    polished "^4.0.5"
-    popper-max-size-modifier "^0.2.0"
-    promise-props "^1.0.0"
-    raf "^3.4.1"
-    react-click-outside "^3.0.0"
-    react-fast-compare "^2.0.2"
-    react-icon-base "^2.1.2"
-    react-popper "^2.2.4"
-    react-props-stream "^1.0.0"
-    react-refractor "^2.1.2"
-    react-sortable-hoc "^1.11.0"
-    react-split-pane "^0.1.84"
-    rxjs "^6.5.3"
-    rxjs-exhaustmap-with-trailing "^1.0.0"
-    semver-compare "^1.0.0"
-    shallow-equals "^1.0.0"
-    styled-components "^5.2.1"
-
 "@sanity/base@2.8.0", "@sanity/base@^2.7.4":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.8.0.tgz#8409b5f0e74809515727df306f33aabbc43638d8"
@@ -2724,19 +2669,6 @@
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.8.0.tgz#2ac038ce2932c340d5093acf856af324e02bcd4b"
   integrity sha512-ebhJ7K6x+kffOIsDxrGmgsOIDIBedZ/F5GedrNRutv5ijdLgnwkZaRRgXSZQ2vDv+yp2HlIRrzfYZrQcbZudjw==
-
-"@sanity/client@2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@sanity/client/-/client-2.7.1.tgz#0163ecad3ad0875dac5a87bfa20a1652dd3e6a80"
-  integrity sha512-uKMlB4v8PDQQd2+5MGC2ccE/5lteJoqeH6iPr5ELC/608KonazMrOx7ROS0gxjNlDEq7NkJePaWwiaNu1xdujA==
-  dependencies:
-    "@sanity/eventsource" "2.2.6"
-    "@sanity/generate-help-url" "2.2.6"
-    "@sanity/observable" "2.0.9"
-    deep-assign "^2.0.0"
-    get-it "^5.0.3"
-    make-error "^1.3.0"
-    object-assign "^4.1.1"
 
 "@sanity/client@2.8.0", "@sanity/client@^2.7.1":
   version "2.8.0"
@@ -3070,18 +3002,6 @@
     tempy "^0.3.0"
     whatwg-url "^7.0.0"
 
-"@sanity/initial-value-templates@2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@sanity/initial-value-templates/-/initial-value-templates-2.7.4.tgz#20e833d3d083e79c2b0998ffa2bb754b52b6935a"
-  integrity sha512-w9nca5l+j+xa3ViHFHcTNh7OPeunK2icGsnwNb3RRSBGbOvuqYbk6QezntDUggBa3g9zWF0uEc1EWUl03plNGg==
-  dependencies:
-    "@sanity/util" "2.7.4"
-    "@types/lodash" "^4.14.149"
-    "@types/memoize-one" "^3.1.1"
-    lodash "^4.17.15"
-    memoize-one "^3.1.1"
-    oneline "^1.0.3"
-
 "@sanity/initial-value-templates@2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/initial-value-templates/-/initial-value-templates-2.8.0.tgz#ec8faac6ada2aa3cc13e8f21a983fd3b6595aa7b"
@@ -3241,19 +3161,6 @@
     lodash "^4.17.15"
     nano-pubsub "^2.0.0"
 
-"@sanity/structure@2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@sanity/structure/-/structure-2.7.4.tgz#7239b0945a12fe9f7664ea750a6f8a017ec41ba0"
-  integrity sha512-03Q8HW49/VCw0UKKMmSlcFWUMDPnpFikKYmrQFMrkNCEWxiiCYEMinwSGcROD0o1GJHNb0L8BBkebUUpWvoG0g==
-  dependencies:
-    "@sanity/client" "2.7.1"
-    "@sanity/initial-value-templates" "2.7.4"
-    "@sanity/types" "2.7.4"
-    "@types/lodash" "^4.14.149"
-    "@types/memoize-one" "^3.1.1"
-    lodash "^4.17.15"
-    memoize-one "^3.1.1"
-
 "@sanity/structure@2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/structure/-/structure-2.8.0.tgz#67900f030e9fb821f747273a29a85ca37c74eb3d"
@@ -3280,15 +3187,6 @@
     "@types/lodash" "^4.14.149"
     lodash "^4.17.15"
 
-"@sanity/types@2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.7.4.tgz#46481dbffb1cb192166a81734754771e536674f3"
-  integrity sha512-QK7b3W7kix5kcVGOxbRGI/ryZJHwWYBFeeCN9nx4050ImWfRiNuFBhpS7IoYwDIvwZT6E/2uQ7Hqqjhet7DoJQ==
-  dependencies:
-    "@sanity/client" "2.7.1"
-    "@types/react" "^17.0.0"
-    rxjs "^6.5.3"
-
 "@sanity/types@2.8.0", "@sanity/types@^2.0.0", "@sanity/types@^2.0.1":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.8.0.tgz#d8d3672639c5d6e6aa06373aaae06ad756817285"
@@ -3297,18 +3195,6 @@
     "@sanity/client" "2.8.0"
     "@types/react" "^17.0.0"
     rxjs "^6.5.3"
-
-"@sanity/util@2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@sanity/util/-/util-2.7.4.tgz#f3980c8c05dea032473c1cdc6e77303f95e6756c"
-  integrity sha512-ktlqEqH81NDfGHUlQdAoWaTibWVMrwyhTsZDFw/DEmZNocF0E42ILgQ5w+ycaR0d1s29KrB1WnUYFN5CBO2DDA==
-  dependencies:
-    "@sanity/types" "2.7.4"
-    dotenv "^8.2.0"
-    fs-extra "^6.0.1"
-    get-random-values "^1.2.0"
-    lodash "^4.17.15"
-    resolve-from "^4.0.0"
 
 "@sanity/util@2.8.0":
   version "2.8.0"
@@ -9379,9 +9265,9 @@ eslint-plugin-jsx-a11y@^6.4.1:
     language-tags "^1.0.5"
 
 eslint-plugin-prettier@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.3.1.tgz#7079cfa2497078905011e6f82e8dd8453d1371b7"
-  integrity sha512-Rq3jkcFY8RYeQLgk2cCwuc0P7SEFwDravPhsJZOQ5N4YI4DSg50NyqJ/9gdZHzQlHf8MvafSesbNJCcP/FF6pQ==
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.4.0.tgz#cdbad3bf1dbd2b177e9825737fe63b476a08f0c7"
+  integrity sha512-UDK6rJT6INSfcOo545jiaOwB701uAIt2/dR7WnFQoGCVl1/EMqdANBmwUaqqQ45aXprsTGzSa39LI1PyuRBxxw==
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
