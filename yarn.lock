@@ -3227,12 +3227,12 @@
     type-of-is "^3.5.1"
 
 "@sanity/vision@^2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.7.4.tgz#c4714de75290ed19eb4f90f79e792d14604b3b8f"
-  integrity sha512-jO1DokcHpig6e0VE2wZfUjpgC3bqeeWNh0HNBajumeu6tpqgJ6laJOGK75ZG7VQ+tfxpaGd/X4nXwQrxGd5bdQ==
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.8.0.tgz#7b412e75dd52a438363779346982d8d1c173bb8b"
+  integrity sha512-h45RU8PBxmE7Y2zzFQurRGfwiNKC05nwGUc/JxXTxEDSQwmEq8ailqmSbTRqRNyauCV9dQ3hLG/imQohRlIOug==
   dependencies:
     "@sanity/icons" "^1.0.5"
-    "@sanity/ui" "^0.33.9"
+    "@sanity/ui" "^0.33.12"
     classnames "^2.2.5"
     codemirror "^5.47.0"
     moment "^2.19.1"
