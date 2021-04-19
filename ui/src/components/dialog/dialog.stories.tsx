@@ -279,3 +279,23 @@ function OnScrollExample() {
     </Dialog>
   )
 }
+
+export const autoFocus = () => {
+  const autoFocus = boolean('Auto-focus', true, 'Props')
+  const open = boolean('Open', false, 'Props')
+
+  if (!open)
+    return (
+      <Box padding={4}>
+        <Text>Use knobs to open the dialog</Text>
+      </Box>
+    )
+
+  return (
+    <Dialog __unstable_autoFocus={autoFocus} header="Auto-focus example" id="auto-focus-example">
+      <Box padding={4}>
+        <Button text="Focusable button" />
+      </Box>
+    </Dialog>
+  )
+}
