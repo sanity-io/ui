@@ -17,6 +17,10 @@ import {DialogPosition} from './types'
 import {useDialog} from './useDialog'
 
 export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProps {
+  /**
+   * @beta
+   */
+  __unstable_autoFocus?: boolean
   cardRadius?: number | number[]
   cardShadow?: number | number[]
   contentRef?: React.ForwardedRef<HTMLDivElement>
@@ -31,6 +35,10 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
 }
 
 interface DialogCardProps extends ResponsiveWidthProps {
+  /**
+   * @beta
+   */
+  __unstable_autoFocus?: boolean
   children: React.ReactNode
   contentRef?: React.ForwardedRef<HTMLDivElement>
   footer: React.ReactNode
@@ -106,6 +114,7 @@ const DialogFooter = styled(Box)`
 
 const DialogCard = forwardRef((props: DialogCardProps, ref) => {
   const {
+    __unstable_autoFocus: autoFocus = true,
     children,
     contentRef,
     footer,
@@ -126,11 +135,13 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
   const labelId = `${id}_label`
 
   useEffect(() => {
+    if (!autoFocus) return
+
     // On mount: focus the first interactive element in the contents
     if (localContentRef.current) {
       focusFirstDescendant(localContentRef.current)
     }
-  }, [])
+  }, [autoFocus])
 
   useGlobalKeyDown(
     useCallback(
@@ -221,6 +232,7 @@ export const Dialog = forwardRef(
   ) => {
     const dialog = useDialog()
     const {
+      __unstable_autoFocus: autoFocus = true,
       cardRadius = 3,
       cardShadow = 4,
       children,
@@ -281,6 +293,7 @@ export const Dialog = forwardRef(
         >
           <div ref={preDivRef} tabIndex={0} />
           <DialogCard
+            __unstable_autoFocus={autoFocus}
             contentRef={contentRef}
             footer={footer}
             header={header}
