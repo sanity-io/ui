@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-example-manage",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "license": "MIT",
   "scripts": {
     "build": "vite build",
@@ -13,7 +13,7 @@
   "dependencies": {
     "@sanity/icons": "^1.0.6",
     "@sanity/logos": "^1.0.5",
-    "@sanity/ui": "^0.33.17",
+    "@sanity/ui": "^0.33.18",
     "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
