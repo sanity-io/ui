@@ -9,8 +9,7 @@ const Root = styled(Flex)`
 `
 
 export function DocumentPane() {
-  const [changesOpen, setChangesOpen] = useState(true)
-
+  const [changesOpen, setChangesOpen] = useState(false)
   const handleChangesOpen = () => setChangesOpen(true)
   const handleChangesClose = () => setChangesOpen(false)
 

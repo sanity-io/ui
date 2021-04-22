@@ -1,7 +1,6 @@
 import {BellIcon, ComposeIcon, LeaveIcon, MenuIcon, PackageIcon, SearchIcon} from '@sanity/icons'
 import {
   Avatar,
-  AvatarStack,
   Box,
   Button,
   Card,
@@ -11,7 +10,6 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  Text,
   useLayer,
 } from '@sanity/ui'
 import React, {useCallback, useState} from 'react'
@@ -19,6 +17,7 @@ import styled, {css} from 'styled-components'
 import {ComposeDialog} from './composeDialog'
 import {DatasetSelect} from './datasetSelect'
 import {NavDrawer} from './navDrawer'
+import {PresenceMenu} from './presenceMenu'
 import {Search} from './search'
 import {ToolMenu} from './toolMenu'
 import {useLocation} from '$sanity/base'
@@ -179,55 +178,7 @@ export function Navbar({projectName}: {projectName: string}) {
             </NotificationsButtonBox>
 
             <MembersMenuBox padding={1}>
-              <MenuButton
-                button={
-                  <Button aria-label="Open list of online users" mode="bleed">
-                    <Box padding={3} aria-hidden>
-                      <AvatarStack style={{margin: -6}}>
-                        <Avatar color="purple" initials="eh" />
-                        <Avatar color="blue" initials="ss" />
-                        <Avatar color="cyan" initials="ir" />
-                      </AvatarStack>
-                    </Box>
-                  </Button>
-                }
-                id="members-menu"
-                menu={
-                  <Menu>
-                    <MenuItem>
-                      <Box paddingX={4} paddingY={3}>
-                        <Flex align="center">
-                          <Box marginRight={3}>
-                            <Avatar color="cyan" initials="ir" size={1} />
-                          </Box>
-                          <Text>Ida Vikan Rise</Text>
-                        </Flex>
-                      </Box>
-                    </MenuItem>
-                    <MenuItem>
-                      <Box paddingX={4} paddingY={3}>
-                        <Flex align="center">
-                          <Box marginRight={3}>
-                            <Avatar color="blue" initials="ss" size={1} />
-                          </Box>
-                          <Text>Simen Svale Skogsrud</Text>
-                        </Flex>
-                      </Box>
-                    </MenuItem>
-                    <MenuItem>
-                      <Box paddingX={4} paddingY={3}>
-                        <Flex align="center">
-                          <Box marginRight={3}>
-                            <Avatar color="purple" initials="eh" size={1} />
-                          </Box>
-                          <Text>Espen Hovlandsdal</Text>
-                        </Flex>
-                      </Box>
-                    </MenuItem>
-                  </Menu>
-                }
-                popoverScheme="light"
-              />
+              <PresenceMenu />
             </MembersMenuBox>
 
             <UserMenuBox padding={1} paddingRight={3}>
