@@ -1,7 +1,6 @@
 import {ChartUpwardIcon} from '@sanity/icons'
 import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import React, {createElement} from 'react'
-import {hot} from 'react-hot-loader/root'
 import {createGlobalStyle, css} from 'styled-components'
 import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} from '$sanity/base'
 import dashboardTool from '$sanity/dashboard/plugin'
@@ -48,7 +47,7 @@ function ActiveTool() {
   return <div>Unknown tool: {activeToolName}</div>
 }
 
-function RootComponent() {
+export function Root() {
   const themeMode = 'light'
 
   const commands = [
@@ -83,5 +82,3 @@ function RootComponent() {
     </StudioProvider>
   )
 }
-
-export const Root = hot(RootComponent)

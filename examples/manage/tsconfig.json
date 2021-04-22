@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig",
-  "include": ["./src", "./typings/*.d.ts"],
+  "include": ["./src", "./typings/*.d.ts", "./vite.config.ts"],
   "compilerOptions": {
     "outDir": "./dist/ts/",
     "module": "es6",
@@ -9,5 +9,10 @@
     "allowJs": true,
     "sourceMap": true
   },
-  "references": [{"path": "../../icons"}, {"path": "../../logos"}, {"path": "../../ui"}]
+  "references": [
+    {"path": "../../color"},
+    {"path": "../../icons"},
+    {"path": "../../logos"},
+    {"path": "../../ui"}
+  ]
 }
