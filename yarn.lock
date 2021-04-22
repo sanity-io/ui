@@ -2835,12 +2835,12 @@
     lodash "^4.17.15"
 
 "@sanity/default-layout@^2.8.0":
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.8.0.tgz#fac44f02a5b5cbfe84e9a74662cdd014990dfb6b"
-  integrity sha512-GwAqGRvH7KKwpNLxDbPEMy6RIlOuwYB+bmnoE+p6p4lK6mMNDT7FFDl75Fw9aYR4YksWHpoice8OLhtMl07m+w==
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.8.1.tgz#4d20116b6fa34c81b0a16670744111e2d18612aa"
+  integrity sha512-jXc64NCSJ7t9pzrb5AYxZMasj+MMMI7/IPbOi3ipfcZjDqw1fwuw+aEtUn/yqPAGu51+ZHNxfpTUnAW5ea3ZeQ==
   dependencies:
     "@reach/auto-id" "^0.13.2"
-    "@sanity/base" "2.8.0"
+    "@sanity/base" "2.8.1"
     "@sanity/client" "2.8.0"
     "@sanity/generate-help-url" "2.2.6"
     "@sanity/types" "2.8.0"
