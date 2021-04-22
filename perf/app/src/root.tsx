@@ -1,6 +1,5 @@
 import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
 import React from 'react'
-import {hot} from 'react-hot-loader/root'
 import {createGlobalStyle, css} from 'styled-components'
 import {App} from './app'
 
@@ -23,7 +22,7 @@ const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
   `
 })
 
-function RootComponent() {
+export function Root() {
   const themeMode = 'light'
 
   return (
@@ -33,5 +32,3 @@ function RootComponent() {
     </ThemeProvider>
   )
 }
-
-export const Root = hot(RootComponent)
