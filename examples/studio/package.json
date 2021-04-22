@@ -25,8 +25,8 @@
     "@types/qs": "^6.9.6",
     "html-webpack-plugin": "^5.3.1",
     "react-hot-loader": "^4.13.0",
-    "ts-loader": "^9.0.0",
-    "webpack": "^5.33.2",
+    "ts-loader": "^9.1.0",
+    "webpack": "^5.35.0",
     "webpack-bundle-analyzer": "^4.4.1",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
