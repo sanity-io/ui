@@ -77,6 +77,7 @@ async function run() {
   const client = sanityClient({
     ...config.sanity,
     useCdn: false,
+    apiVersion: '2021-03-31',
   })
 
   const machine = getMachineInfo()
