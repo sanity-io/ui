@@ -4,8 +4,8 @@
   "version": "0.1.36",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config webpack.build.js",
-    "dev": "webpack serve --config webpack.dev.js --env development --port 3001",
+    "build": "vite build",
+    "dev": "vite",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "rimraf dist",
     "type-check": "tsc --noEmit"
@@ -21,14 +21,6 @@
     "styled-components": "^5.2.3"
   },
   "devDependencies": {
-    "@hot-loader/react-dom": "^17.0.1",
-    "@types/qs": "^6.9.6",
-    "html-webpack-plugin": "^5.3.1",
-    "react-hot-loader": "^4.13.0",
-    "ts-loader": "^9.1.0",
-    "webpack": "^5.35.0",
-    "webpack-bundle-analyzer": "^4.4.1",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "@types/qs": "^6.9.6"
   }
 }
