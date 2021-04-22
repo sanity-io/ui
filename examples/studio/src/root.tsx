@@ -8,8 +8,9 @@ import deskTool from '$sanity/desk-tool/plugin'
 import {Layout} from '$sanity/layout'
 import visionTool from '$sanity/vision/plugin'
 
-const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
-  const color = theme.sanity.color.base
+const GlobalStyle = createGlobalStyle((props: {theme: Theme}) => {
+  const {theme} = props
+  const {base} = theme.sanity.color
 
   return css`
     html,
@@ -20,8 +21,8 @@ const GlobalStyle = createGlobalStyle(({theme}: {theme: Theme}) => {
 
     body {
       -webkit-font-smoothing: antialiased;
-      background-color: ${color.bg};
-      color: ${color.fg};
+      background-color: ${base.bg};
+      color: ${base.fg};
       margin: 0;
     }
   `
@@ -70,15 +71,15 @@ export function Root() {
   ]
 
   return (
-    <StudioProvider commands={commands} dataset="production" plugins={plugins} projectId="foo">
-      <LocationProvider>
-        <ThemeProvider theme={studioTheme} scheme={themeMode}>
-          <GlobalStyle />
+    <ThemeProvider theme={studioTheme} scheme={themeMode} tone="transparent">
+      <GlobalStyle />
+      <StudioProvider commands={commands} dataset="production" plugins={plugins} projectId="foo">
+        <LocationProvider>
           <Layout projectName="Sanity.io">
             <ActiveTool />
           </Layout>
-        </ThemeProvider>
-      </LocationProvider>
-    </StudioProvider>
+        </LocationProvider>
+      </StudioProvider>
+    </ThemeProvider>
   )
 }

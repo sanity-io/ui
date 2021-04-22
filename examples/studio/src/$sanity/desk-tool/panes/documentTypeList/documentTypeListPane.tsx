@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Flex,
+  LayerProvider,
   Menu,
   MenuButton,
   MenuDivider,
@@ -41,22 +42,25 @@ export function DocumentTypeListPane() {
               </PaneTitle>
             </Box>
             <Box padding={2}>
-              <MenuButton
-                button={<Button icon={EllipsisVerticalIcon} mode="bleed" />}
-                id="pane-context-menu"
-                menu={
-                  <Menu>
-                    <MenuItem space={4} text="Sort by title" />
-                    <MenuItem space={4} text="Sort by slug" />
-                    <MenuItem iconRight="arrow-down" space={4} text="Sort by last edited" />
-                    <MenuItem space={4} text="Sort by created" />
-                    <MenuDivider />
-                    <MenuItem icon={StackCompactIcon} iconRight="checkmark" text="Compact view" />
-                    <MenuItem icon={SplitHorizontalIcon} text="Detailed view" />
-                  </Menu>
-                }
-                placement="bottom"
-              />
+              <LayerProvider zOffset={200}>
+                <MenuButton
+                  button={<Button icon={EllipsisVerticalIcon} mode="bleed" />}
+                  id="pane-context-menu"
+                  menu={
+                    <Menu>
+                      <MenuItem space={4} text="Sort by title" />
+                      <MenuItem space={4} text="Sort by slug" />
+                      <MenuItem iconRight="arrow-down" space={4} text="Sort by last edited" />
+                      <MenuItem space={4} text="Sort by created" />
+                      <MenuDivider />
+                      <MenuItem icon={StackCompactIcon} iconRight="checkmark" text="Compact view" />
+                      <MenuItem icon={SplitHorizontalIcon} text="Detailed view" />
+                    </Menu>
+                  }
+                  placement="bottom"
+                  portal
+                />
+              </LayerProvider>
             </Box>
           </Flex>
         </Header>
