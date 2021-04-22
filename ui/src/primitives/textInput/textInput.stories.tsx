@@ -191,22 +191,22 @@ export const tones = () => {
   return (
     <Stack space={4}>
       <Card padding={3}>
-        <TextInput />
+        <TextInput placeholder="default" />
       </Card>
       <Card padding={3} tone="transparent">
-        <TextInput />
+        <TextInput placeholder="transparent" />
       </Card>
       <Card padding={3} tone="primary">
-        <TextInput />
+        <TextInput placeholder="primary" />
       </Card>
       <Card padding={3} tone="positive">
-        <TextInput />
+        <TextInput placeholder="positive" />
       </Card>
       <Card padding={3} tone="caution">
-        <TextInput />
+        <TextInput placeholder="caution" />
       </Card>
       <Card padding={3} tone="critical">
-        <TextInput />
+        <TextInput placeholder="critical" />
       </Card>
     </Stack>
   )

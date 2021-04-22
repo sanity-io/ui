@@ -189,7 +189,7 @@ export const color = createColorTheme({
         bg: mix(base.bg, tints[dark ? 950 : 50].hex),
         fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         border: mix(base.bg, tints[dark ? 800 : 200].hex),
-        placeholder: mix(base.bg, tints[dark ? 300 : 700].hex),
+        placeholder: mix(base.bg, tints[dark ? 600 : 400].hex),
       }
     }
 
@@ -198,7 +198,7 @@ export const color = createColorTheme({
         bg: base.bg,
         fg: base.fg,
         border: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 300 : 700].hex),
+        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
       }
     }
 
@@ -215,7 +215,7 @@ export const color = createColorTheme({
       bg: base.bg,
       fg: base.fg,
       border: base.border,
-      placeholder: mix(base.bg, hues.gray[dark ? 300 : 700].hex),
+      placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
     }
   },
 
