@@ -1,62 +1,18 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
+import {_getMediaManager} from '../lib/media'
 import {useTheme} from '../theme'
-
-function _getMediaQuery(media: number[], index: number) {
-  return index === 0
-    ? `(max-width: ${media[index] - 1}px)`
-    : `screen and (min-width: ${media[index - 1]}px) and (max-width: ${media[index] - 1}px)`
-}
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export function useMediaIndex() {
+export function useMediaIndex(): number {
   const theme = useTheme()
   const {media} = theme.sanity
+  const manager = useMemo(() => _getMediaManager(media), [media])
+  const [index, setIndex] = useState(manager.getCurrentIndex)
 
-  // Get initial index
-  const [index, setIndex] = useState(() => {
-    if (typeof window !== 'undefined') {
-      for (let idx = 0; idx < media.length; idx += 1) {
-        const mq = window.matchMedia(_getMediaQuery(media, idx))
-
-        if (mq.matches) {
-          return idx
-        }
-      }
-    }
-
-    return 0
-  })
-
-  useEffect(() => {
-    const disposeFns = media.map((_, idx) => {
-      const mq = window.matchMedia(_getMediaQuery(media, idx))
-
-      const handleChange = () => {
-        if (mq.matches) setIndex(idx)
-      }
-
-      if (mq.addEventListener) {
-        mq.addEventListener('change', handleChange)
-      } else {
-        mq.addListener(handleChange)
-      }
-
-      return () => {
-        if (mq.removeEventListener) {
-          mq.removeEventListener('change', handleChange)
-        } else {
-          mq.removeListener(handleChange)
-        }
-      }
-    })
-
-    return () => {
-      disposeFns.forEach((disposeFn) => disposeFn())
-    }
-  }, [media])
+  useEffect(() => manager.subscribe(setIndex), [manager])
 
   return index
 }
