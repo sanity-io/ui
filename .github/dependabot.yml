@@ -1,0 +1,132 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "09:30"
+    timezone: Europe/Oslo
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@sanity/base"
+    versions:
+    - 2.10.0
+    - 2.3.7
+    - 2.4.0
+    - 2.5.0
+    - 2.6.2
+    - 2.6.4
+    - 2.7.1
+    - 2.7.2
+    - 2.9.1
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.30
+    - 15.0.0
+  - dependency-name: framer-motion
+    versions:
+    - 4.0.0
+    - 4.0.2
+    - 4.0.3
+    - 4.1.5
+  - dependency-name: webpack
+    versions:
+    - 5.18.0
+    - 5.19.0
+    - 5.20.0
+    - 5.20.1
+    - 5.20.2
+    - 5.21.2
+    - 5.22.0
+    - 5.34.0
+  - dependency-name: puppeteer
+    versions:
+    - 9.0.0
+  - dependency-name: "@reach/auto-id"
+    versions:
+    - 0.15.0
+  - dependency-name: "@storybook/addon-actions"
+    versions:
+    - 6.2.3
+  - dependency-name: cypress
+    versions:
+    - 6.9.1
+  - dependency-name: styled-components
+    versions:
+    - 5.2.2
+  - dependency-name: "@typescript-eslint/eslint-plugin"
+    versions:
+    - 4.20.0
+  - dependency-name: esbuild
+    versions:
+    - 0.10.1
+  - dependency-name: "@sanity/client"
+    versions:
+    - 2.7.0
+  - dependency-name: react-is
+    versions:
+    - 17.0.2
+  - dependency-name: lerna
+    versions:
+    - 4.0.0
+  - dependency-name: typescript
+    versions:
+    - 4.2.2
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 8.0.0
+  - dependency-name: "@popperjs/core"
+    versions:
+    - 2.7.1
+  - dependency-name: qawolf
+    versions:
+    - 2.2.0
+  - dependency-name: html-webpack-plugin
+    versions:
+    - 5.0.0
+    - 5.1.0
+  - dependency-name: "@sanity/desk-tool"
+    versions:
+    - 2.2.5
+    - 2.3.0
+    - 2.3.1
+    - 2.3.3
+    - 2.3.4
+    - 2.3.5
+  - dependency-name: "@sanity/vision"
+    versions:
+    - 2.1.4
+    - 2.2.6
+  - dependency-name: "@sanity/production-preview"
+    versions:
+    - 2.1.4
+    - 2.2.6
+  - dependency-name: "@sanity/code-input"
+    versions:
+    - 2.1.4
+    - 2.2.6
+  - dependency-name: "@sanity/cli"
+    versions:
+    - 2.2.5
+    - 2.2.6
+  - dependency-name: "@sanity/default-layout"
+    versions:
+    - 2.2.5
+    - 2.3.0
+    - 2.3.2
+    - 2.3.3
+    - 2.3.4
+    - 2.3.5
+  - dependency-name: "@sanity/core"
+    versions:
+    - 2.2.3
+    - 2.2.6
+    - 2.3.3
+  - dependency-name: "@sanity/default-login"
+    versions:
+    - 2.1.4
+    - 2.2.6
+  - dependency-name: "@sanity/components"
+    versions:
+    - 2.1.4
+    - 2.2.6
