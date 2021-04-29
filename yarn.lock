@@ -2583,7 +2583,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.9.1", "@sanity/base@^2.8.1":
+"@sanity/base@2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.9.1.tgz#889f424ce50d429999e45b1bea3089cece5edaf0"
   integrity sha512-Na1jzFLflRF9p71kC2BzoS1WK3Mrz4lEHvlXtjy7Arrdex4+2NjnVgnsnH0v4Drhxxzd6MEtZ6cGuxjhxV32Kw==
@@ -2607,6 +2607,62 @@
     "@sanity/ui" "^0.33.18"
     "@sanity/util" "2.9.1"
     "@sanity/validation" "2.9.1"
+    boundless-arrow-key-navigation "^1.1.0"
+    chance "^1.0.4"
+    circular-at "^1.0.3"
+    classnames "^2.2.5"
+    dataloader "^2.0.0"
+    date-fns "^2.16.1"
+    dom-scroll-into-view "^1.2.1"
+    element-resize-detector "^1.1.14"
+    history "^4.6.3"
+    lodash "^4.17.15"
+    nano-pubsub "^2.0.0"
+    nanoid "^3.1.9"
+    observable-callback "^1.0.1"
+    oneline "^1.0.3"
+    polished "^4.0.5"
+    popper-max-size-modifier "^0.2.0"
+    promise-props "^1.0.0"
+    raf "^3.4.1"
+    react-click-outside "^3.0.0"
+    react-fast-compare "^3.2.0"
+    react-icon-base "^2.1.2"
+    react-popper "^2.2.4"
+    react-props-stream "^1.0.0"
+    react-refractor "^2.1.2"
+    react-sortable-hoc "^1.11.0"
+    react-split-pane "^0.1.84"
+    rxjs "^6.5.3"
+    rxjs-exhaustmap-with-trailing "^1.0.0"
+    semver-compare "^1.0.0"
+    shallow-equals "^1.0.0"
+    styled-components "^5.2.1"
+
+"@sanity/base@^2.8.1":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.10.0.tgz#a7e92c78c93669bd8467bb3eb187510a6070c439"
+  integrity sha512-QLU/OH5NLZwcRdtLHHBYup4kGXixj8wLU5pDEQclrTd6pAFe96yubga5FKWlMME7/UYlPrYSdfvfpIXkSr1zBg==
+  dependencies:
+    "@juggle/resize-observer" "^3.3.0"
+    "@popperjs/core" "^2.5.4"
+    "@reach/auto-id" "^0.13.2"
+    "@sanity/bifur-client" "^0.0.8"
+    "@sanity/client" "2.8.0"
+    "@sanity/color" "^2.0.15"
+    "@sanity/generate-help-url" "2.2.6"
+    "@sanity/icons" "1.0.5"
+    "@sanity/image-url" "^0.140.19"
+    "@sanity/initial-value-templates" "2.10.0"
+    "@sanity/mutator" "2.2.6"
+    "@sanity/schema" "2.10.0"
+    "@sanity/state-router" "2.7.4"
+    "@sanity/structure" "2.10.0"
+    "@sanity/transaction-collator" "2.7.4"
+    "@sanity/types" "2.10.0"
+    "@sanity/ui" "^0.33.19"
+    "@sanity/util" "2.10.0"
+    "@sanity/validation" "2.10.0"
     boundless-arrow-key-navigation "^1.1.0"
     chance "^1.0.4"
     circular-at "^1.0.3"
@@ -3019,6 +3075,18 @@
     tempy "^0.3.0"
     whatwg-url "^7.0.0"
 
+"@sanity/initial-value-templates@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/initial-value-templates/-/initial-value-templates-2.10.0.tgz#ee6d98373abb157e7779dde7007c266c30f793f4"
+  integrity sha512-thyO/yBTZVbgGA4G7w9Psu0nygSHxccNZ7Vz2Eag+EPS3fwGdfAFtL0fY4sLNRn/KBHEfK3rbnC84YcwK6Ajvw==
+  dependencies:
+    "@sanity/util" "2.10.0"
+    "@types/lodash" "^4.14.149"
+    "@types/memoize-one" "^3.1.1"
+    lodash "^4.17.15"
+    memoize-one "^3.1.1"
+    oneline "^1.0.3"
+
 "@sanity/initial-value-templates@2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@sanity/initial-value-templates/-/initial-value-templates-2.9.1.tgz#19e9d934b1fd9507e7f9ae879c6f4fe4cc6916d6"
@@ -3103,7 +3171,20 @@
     path-exists "^3.0.0"
     promise-props-recursive "^1.0.0"
 
-"@sanity/schema@2.9.1", "@sanity/schema@^2.0.0":
+"@sanity/schema@2.10.0", "@sanity/schema@^2.0.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/schema/-/schema-2.10.0.tgz#b4697e176dc65fe239c3c614e2bb5c82832a4d1d"
+  integrity sha512-W8vCQmdPAc3lDWADidEJ12LVL2yTGMkaN0SjpTMhEXfbN8pyOy8ZoT9rIw1hk2kNJ6u6D1SQFf0DkITEkHdd5Q==
+  dependencies:
+    "@sanity/generate-help-url" "2.2.6"
+    arrify "^1.0.1"
+    humanize-list "^1.0.1"
+    json-reduce "^1.0.0"
+    leven "^2.1.0"
+    lodash "^4.17.15"
+    object-inspect "^1.6.0"
+
+"@sanity/schema@2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@sanity/schema/-/schema-2.9.1.tgz#f76ed161a520cfcd0309eb6d0b24622520ff9500"
   integrity sha512-coTIgaWzTUTBzwq1vR385hR4W++MJ5vMDoWP4II087KkOCmFdVUj5kAchFWyObMu/74taqa3GCwlRoqf98smWQ==
@@ -3178,6 +3259,19 @@
     lodash "^4.17.15"
     nano-pubsub "^2.0.0"
 
+"@sanity/structure@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/structure/-/structure-2.10.0.tgz#5a1c5fb187101127f83218698b9460b3f6a93e81"
+  integrity sha512-qinYuxCr24Qav2cw9rEau3/Nmd2i3E/WajNQtHV3vE5O3cksqCC/DvJXzUHMkEuI6hys+JGXG1ezhS2wRh4Jfw==
+  dependencies:
+    "@sanity/client" "2.8.0"
+    "@sanity/initial-value-templates" "2.10.0"
+    "@sanity/types" "2.10.0"
+    "@types/lodash" "^4.14.149"
+    "@types/memoize-one" "^3.1.1"
+    lodash "^4.17.15"
+    memoize-one "^3.1.1"
+
 "@sanity/structure@2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@sanity/structure/-/structure-2.9.1.tgz#2563971ded91a4747934bb9d68972e94db2ca97f"
@@ -3204,7 +3298,17 @@
     "@types/lodash" "^4.14.149"
     lodash "^4.17.15"
 
-"@sanity/types@2.9.1", "@sanity/types@^2.0.0", "@sanity/types@^2.0.1":
+"@sanity/types@2.10.0", "@sanity/types@^2.0.0", "@sanity/types@^2.0.1":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.10.0.tgz#9dc9be02907ffb94e1c64a23e2c19ef326272309"
+  integrity sha512-x4QpPD1yLttBx+aN4XNtfV/N4ioTEtTuZNaK05PMkiEoiXafjzFhokhWUhX71ONqFn99pKDhfvvuPQEvKZZfqw==
+  dependencies:
+    "@sanity/client" "2.8.0"
+    "@sanity/color" "^2.0.15"
+    "@types/react" "^17.0.0"
+    rxjs "^6.5.3"
+
+"@sanity/types@2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.9.1.tgz#cab101422c5ab17047fd120ef2dd264add9415a2"
   integrity sha512-qFF7oUJ75Akse66AQCxokthxaiAgp/itB0XwlUZURs8V0RUBXHuCSkySz+E+pcEu71DUYqWyqrzeZBAUyw6TLw==
@@ -3212,6 +3316,18 @@
     "@sanity/client" "2.8.0"
     "@types/react" "^17.0.0"
     rxjs "^6.5.3"
+
+"@sanity/util@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/util/-/util-2.10.0.tgz#d5d2456ad0addfdb9fd1993bad9d738953cf0a8f"
+  integrity sha512-oA3dFFFS9FLKV1s1jzsK2ClVJdPLuBccBCmDDd8k36CBGXzMPZQ437Zdyt1p+y0eby420JKXPSKvid6gzlM5Eg==
+  dependencies:
+    "@sanity/types" "2.10.0"
+    dotenv "^8.2.0"
+    fs-extra "^6.0.1"
+    get-random-values "^1.2.2"
+    lodash "^4.17.15"
+    resolve-from "^4.0.0"
 
 "@sanity/util@2.9.1":
   version "2.9.1"
@@ -3232,6 +3348,16 @@
   dependencies:
     "@types/uuid" "^8.0.0"
     uuid "^8.0.0"
+
+"@sanity/validation@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/validation/-/validation-2.10.0.tgz#798b2fac1c9dd6761ef6506f6f1ba4c6505c4068"
+  integrity sha512-aczqklOTjlNmhYNV0DoDy2oFpdnZ//y4OUewZlfrk1s3HLDyIagTIMKxP7RTxwRqT2jDXj7AMIIdp5T1D0kvfQ==
+  dependencies:
+    clone-deep "^2.0.1"
+    date-fns "^2.16.1"
+    es6-error "^4.0.2"
+    type-of-is "^3.5.1"
 
 "@sanity/validation@2.9.1":
   version "2.9.1"
@@ -10081,7 +10207,7 @@ get-port@^5.1.1:
   resolved "https://registry.yarnpkg.com/get-port/-/get-port-5.1.1.tgz#0469ed07563479de6efb986baf053dcd7d4e3193"
   integrity sha512-g/Q1aTSDOxFpchXC4i8ZWvxA1lnPqx/JHqcpIw0/LX9T8x/GBbi6YnlN5nhaKIFkT8oFsscUKgDJYxfwfS6QsQ==
 
-get-random-values@^1.2.0:
+get-random-values@^1.2.0, get-random-values@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/get-random-values/-/get-random-values-1.2.2.tgz#f1d944d0025433d53a2bd9941b9e975d98a2f7ff"
   integrity sha512-lMyPjQyl0cNNdDf2oR+IQ/fM3itDvpoHy45Ymo2r0L1EjazeSl13SfbKZs7KtZ/3MDCeueiaJiuOEfKqRTsSgA==
@@ -13729,12 +13855,7 @@ nano-pubsub@^2.0.0:
   resolved "https://registry.yarnpkg.com/nano-pubsub/-/nano-pubsub-2.0.0.tgz#de291f170ce54ea3e3b39f0b53296d322cd9c540"
   integrity sha512-tDJdYcRD4CIHAxB6kAWO7HWSGWODxL0buzcJHazIIrmHYDH2t7DcTN0vV7dIr39oPwZo5WawULp9CHhtYdhm0A==
 
-nanoid@^3.1.12, nanoid@^3.1.16, nanoid@^3.1.9:
-  version "3.1.20"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.20.tgz#badc263c6b1dcf14b71efaa85f6ab4c1d6cfc788"
-  integrity sha512-a1cQNyczgKbLX9jwbS/+d7W8fX/RfgYR7lVWwWOGIPNgK2m0MWvrGF6/m4kk6U3QcFMnZf3RIhL0v2Jgh/0Uxw==
-
-nanoid@^3.1.22:
+nanoid@^3.1.12, nanoid@^3.1.16, nanoid@^3.1.22, nanoid@^3.1.9:
   version "3.1.22"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.22.tgz#b35f8fb7d151990a8aebd5aa5015c03cf726f844"
   integrity sha512-/2ZUaJX2ANuLtTvqTlgqBQNJoQO398KyJgZloL0PZkC0dpysjncRUPsFe3DUPzz/y3h+u7C46np8RMuvF3jsSQ==
