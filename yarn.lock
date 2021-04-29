@@ -3371,12 +3371,12 @@
     type-of-is "^3.5.1"
 
 "@sanity/vision@^2.8.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.9.0.tgz#c311d9604c9447cd1c46fe4e8ebf3c95881750f2"
-  integrity sha512-CJTS9X1JIrccUSh+oc7J6NTLLlk7y6klp5UObYq2jh9NH9HWFOijtO6JXpbsfDFCqZ+HPi3bgpY7+O2Oi6mU2Q==
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.10.0.tgz#f2b44177d2f3cefcc5d79fcfad16e2042fe8d54f"
+  integrity sha512-hs4NFRD8w8mWCwDDUQVaCnF4QU0+Dw0Avz7sleD5gJwSHmhvB9xvVHZW1tb1vmoon3MruqRKvtOW1Qcp2A6VdQ==
   dependencies:
     "@sanity/icons" "^1.0.5"
-    "@sanity/ui" "^0.33.18"
+    "@sanity/ui" "^0.33.19"
     classnames "^2.2.5"
     codemirror "^5.47.0"
     moment "^2.19.1"
