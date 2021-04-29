@@ -2738,9 +2738,9 @@
     lodash "^4.17.15"
 
 "@sanity/cli@^2.8.0":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.9.1.tgz#57a1be173f267dd6de2b620ba329684b5e36433f"
-  integrity sha512-Iieh/VBxE6mOSzIz9pK5lVicqYT3wLcRAQVOweLiHcBKwfTTg0YSWMGlL6qiKN+IgXN+CU7gPvXkoiConNCcGA==
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.10.0.tgz#f1ea041e112d83af8c00bd678f5f9d29e1d4e7a4"
+  integrity sha512-yXhRtEjwz9MmewRWy6/nR1WWkx5bf5Cb2FCBlwxS6VHexfxf4SxE+MfFOLqoEUqzoXbOL6mDEq+zCg8yqP7bnw==
 
 "@sanity/client@2.8.0", "@sanity/client@^2.8.0":
   version "2.8.0"
