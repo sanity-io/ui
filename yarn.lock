@@ -2708,9 +2708,9 @@
     react-ace "^5.0.1"
 
 "@sanity/core@^2.8.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@sanity/core/-/core-2.10.0.tgz#8e8777b9698177b0230103b8e9ceef7183ec95b9"
-  integrity sha512-VOjEJuaPdXbtIXeH1I5TW4egDq4/13OgVAvy+TfHb5gdc36XDtK1RVoLKuTrypu+Y9aPcN2+tpmIwo69eYmSdw==
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/@sanity/core/-/core-2.10.2.tgz#7937f4b4a95a262bf3e32f6727cc4b30d1847d4f"
+  integrity sha512-CJyflu7NZmgxELPRCGTVO1QNOjrbQBX72d2irfPeYziwxwT/ToYgHCZPm3iG2SdjzY/cBtrvwxjPSaiHhigKpg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.10.4"
     "@babel/preset-env" "^7.11.5"
@@ -2720,8 +2720,8 @@
     "@sanity/eventsource" "2.2.6"
     "@sanity/export" "2.8.0"
     "@sanity/generate-help-url" "2.2.6"
-    "@sanity/import" "2.8.0"
-    "@sanity/mutator" "2.2.6"
+    "@sanity/import" "2.10.2"
+    "@sanity/mutator" "2.10.2"
     "@sanity/plugin-loader" "2.10.0"
     "@sanity/resolver" "2.10.0"
     "@sanity/schema" "2.10.0"
@@ -2991,13 +2991,13 @@
     dom-event "1.0.0"
     lodash "^4.17.15"
 
-"@sanity/import@2.8.0":
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/@sanity/import/-/import-2.8.0.tgz#84f9ea1b383d8907095aaca08ad2b96435871332"
-  integrity sha512-zNGHr7a5eGAel0cRKQKX6ZkU/1OjXbIYVyqWhITVhFwf5CfvR3ogKOsIHzjdGA7zd7vjhr9D8RiyuJ8OIPvpEA==
+"@sanity/import@2.10.2":
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/@sanity/import/-/import-2.10.2.tgz#990b57fd1fe17aa71cc51ed3f3dd7bc764c9454b"
+  integrity sha512-24M8LEAua585cmd/KsSnvU6TV3JjHEEXbuB8368DURDZDNVy9nGtRfokNSDmBEHLaLIucOY/3yUYZjtLfZd3iQ==
   dependencies:
     "@sanity/generate-help-url" "2.2.6"
-    "@sanity/mutator" "2.2.6"
+    "@sanity/mutator" "2.10.2"
     "@sanity/uuid" "^3.0.1"
     debug "^3.1.0"
     file-url "^2.0.2"
@@ -3026,6 +3026,16 @@
     lodash "^4.17.15"
     memoize-one "^3.1.1"
     oneline "^1.0.3"
+
+"@sanity/mutator@2.10.2":
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/@sanity/mutator/-/mutator-2.10.2.tgz#46bc87f57f2c8fb4fddfc7b946eb66ed3e39af82"
+  integrity sha512-dAN+XHlGg2Q8Lj+NPLEaUfPzAkZ41zdTbN65EKlmoW8qc+eRtWBGa+iSrUspTWvhMp6gX6aDmUa6K5WY8UAn7w==
+  dependencies:
+    "@types/diff-match-patch" "^1.0.32"
+    debug "^3.1.0"
+    diff-match-patch "^1.0.4"
+    lodash "^4.17.15"
 
 "@sanity/mutator@2.2.6":
   version "2.2.6"
