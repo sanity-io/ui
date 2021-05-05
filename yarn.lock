@@ -2583,62 +2583,6 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.2.tgz#d6b4b875bee4189cb56f274a7fb5494174463cb2"
   integrity sha512-wVNhZ/W0ktlvHUzUrCuJMY9YtSls3PU+p5iQko8+P2R0HhEJfBCeTMTdqCe4BY/AfzVb4tn3/xr6XRRBKEL+AA==
 
-"@sanity/base@2.10.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.10.0.tgz#a7e92c78c93669bd8467bb3eb187510a6070c439"
-  integrity sha512-QLU/OH5NLZwcRdtLHHBYup4kGXixj8wLU5pDEQclrTd6pAFe96yubga5FKWlMME7/UYlPrYSdfvfpIXkSr1zBg==
-  dependencies:
-    "@juggle/resize-observer" "^3.3.0"
-    "@popperjs/core" "^2.5.4"
-    "@reach/auto-id" "^0.13.2"
-    "@sanity/bifur-client" "^0.0.8"
-    "@sanity/client" "2.8.0"
-    "@sanity/color" "^2.0.15"
-    "@sanity/generate-help-url" "2.2.6"
-    "@sanity/icons" "1.0.5"
-    "@sanity/image-url" "^0.140.19"
-    "@sanity/initial-value-templates" "2.10.0"
-    "@sanity/mutator" "2.2.6"
-    "@sanity/schema" "2.10.0"
-    "@sanity/state-router" "2.7.4"
-    "@sanity/structure" "2.10.0"
-    "@sanity/transaction-collator" "2.7.4"
-    "@sanity/types" "2.10.0"
-    "@sanity/ui" "^0.33.19"
-    "@sanity/util" "2.10.0"
-    "@sanity/validation" "2.10.0"
-    boundless-arrow-key-navigation "^1.1.0"
-    chance "^1.0.4"
-    circular-at "^1.0.3"
-    classnames "^2.2.5"
-    dataloader "^2.0.0"
-    date-fns "^2.16.1"
-    dom-scroll-into-view "^1.2.1"
-    element-resize-detector "^1.1.14"
-    history "^4.6.3"
-    lodash "^4.17.15"
-    nano-pubsub "^2.0.0"
-    nanoid "^3.1.9"
-    observable-callback "^1.0.1"
-    oneline "^1.0.3"
-    polished "^4.0.5"
-    popper-max-size-modifier "^0.2.0"
-    promise-props "^1.0.0"
-    raf "^3.4.1"
-    react-click-outside "^3.0.0"
-    react-fast-compare "^3.2.0"
-    react-icon-base "^2.1.2"
-    react-popper "^2.2.4"
-    react-props-stream "^1.0.0"
-    react-refractor "^2.1.2"
-    react-sortable-hoc "^1.11.0"
-    react-split-pane "^0.1.84"
-    rxjs "^6.5.3"
-    rxjs-exhaustmap-with-trailing "^1.0.0"
-    semver-compare "^1.0.0"
-    shallow-equals "^1.0.0"
-    styled-components "^5.2.1"
-
 "@sanity/base@2.10.2", "@sanity/base@^2.8.1":
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.10.2.tgz#3a34598b8c255d5bc403dcb87d57feb7c0e18e81"
@@ -3087,16 +3031,6 @@
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/@sanity/mutator/-/mutator-2.10.2.tgz#46bc87f57f2c8fb4fddfc7b946eb66ed3e39af82"
   integrity sha512-dAN+XHlGg2Q8Lj+NPLEaUfPzAkZ41zdTbN65EKlmoW8qc+eRtWBGa+iSrUspTWvhMp6gX6aDmUa6K5WY8UAn7w==
-  dependencies:
-    "@types/diff-match-patch" "^1.0.32"
-    debug "^3.1.0"
-    diff-match-patch "^1.0.4"
-    lodash "^4.17.15"
-
-"@sanity/mutator@2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@sanity/mutator/-/mutator-2.2.6.tgz#5ee69abf014e007b2fc98d2d1da59e4443ba4ee0"
-  integrity sha512-05BC1yT/4Iak9eJNo+RJVXEBbRNKmEn2whMuwVz9it39/1Ybo2ycsbn+95kQGh2Cdvp9fOuvcYIfoYKWm2Pg6g==
   dependencies:
     "@types/diff-match-patch" "^1.0.32"
     debug "^3.1.0"
@@ -4735,13 +4669,13 @@
     eslint-utils "^2.0.0"
 
 "@typescript-eslint/parser@^4.22.0":
-  version "4.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.22.0.tgz#e1637327fcf796c641fe55f73530e90b16ac8fe8"
-  integrity sha512-z/bGdBJJZJN76nvAY9DkJANYgK3nlRstRRi74WHm3jjgf2I8AglrSY+6l7ogxOmn55YJ6oKZCLLy+6PW70z15Q==
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.22.1.tgz#a95bda0fd01d994a15fc3e99dc984294f25c19cc"
+  integrity sha512-l+sUJFInWhuMxA6rtirzjooh8cM/AATAe3amvIkqKFeMzkn85V+eLzb1RyuXkHak4dLfYzOmF6DXPyflJvjQnw==
   dependencies:
-    "@typescript-eslint/scope-manager" "4.22.0"
-    "@typescript-eslint/types" "4.22.0"
-    "@typescript-eslint/typescript-estree" "4.22.0"
+    "@typescript-eslint/scope-manager" "4.22.1"
+    "@typescript-eslint/types" "4.22.1"
+    "@typescript-eslint/typescript-estree" "4.22.1"
     debug "^4.1.1"
 
 "@typescript-eslint/scope-manager@4.22.0":
@@ -4752,10 +4686,23 @@
     "@typescript-eslint/types" "4.22.0"
     "@typescript-eslint/visitor-keys" "4.22.0"
 
+"@typescript-eslint/scope-manager@4.22.1":
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-4.22.1.tgz#5bb357f94f9cd8b94e6be43dd637eb73b8f355b4"
+  integrity sha512-d5bAiPBiessSmNi8Amq/RuLslvcumxLmyhf1/Xa9IuaoFJ0YtshlJKxhlbY7l2JdEk3wS0EnmnfeJWSvADOe0g==
+  dependencies:
+    "@typescript-eslint/types" "4.22.1"
+    "@typescript-eslint/visitor-keys" "4.22.1"
+
 "@typescript-eslint/types@4.22.0":
   version "4.22.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.22.0.tgz#0ca6fde5b68daf6dba133f30959cc0688c8dd0b6"
   integrity sha512-sW/BiXmmyMqDPO2kpOhSy2Py5w6KvRRsKZnV0c4+0nr4GIcedJwXAq+RHNK4lLVEZAJYFltnnk1tJSlbeS9lYA==
+
+"@typescript-eslint/types@4.22.1":
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.22.1.tgz#bf99c6cec0b4a23d53a61894816927f2adad856a"
+  integrity sha512-2HTkbkdAeI3OOcWbqA8hWf/7z9c6gkmnWNGz0dKSLYLWywUlkOAQ2XcjhlKLj5xBFDf8FgAOF5aQbnLRvgNbCw==
 
 "@typescript-eslint/typescript-estree@4.22.0":
   version "4.22.0"
@@ -4770,12 +4717,33 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
+"@typescript-eslint/typescript-estree@4.22.1":
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-4.22.1.tgz#dca379eead8cdfd4edc04805e83af6d148c164f9"
+  integrity sha512-p3We0pAPacT+onSGM+sPR+M9CblVqdA9F1JEdIqRVlxK5Qth4ochXQgIyb9daBomyQKAXbygxp1aXQRV0GC79A==
+  dependencies:
+    "@typescript-eslint/types" "4.22.1"
+    "@typescript-eslint/visitor-keys" "4.22.1"
+    debug "^4.1.1"
+    globby "^11.0.1"
+    is-glob "^4.0.1"
+    semver "^7.3.2"
+    tsutils "^3.17.1"
+
 "@typescript-eslint/visitor-keys@4.22.0":
   version "4.22.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-4.22.0.tgz#169dae26d3c122935da7528c839f42a8a42f6e47"
   integrity sha512-nnMu4F+s4o0sll6cBSsTeVsT4cwxB7zECK3dFxzEjPBii9xLpq4yqqsy/FU5zMfan6G60DKZSCXAa3sHJZrcYw==
   dependencies:
     "@typescript-eslint/types" "4.22.0"
+    eslint-visitor-keys "^2.0.0"
+
+"@typescript-eslint/visitor-keys@4.22.1":
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-4.22.1.tgz#6045ae25a11662c671f90b3a403d682dfca0b7a6"
+  integrity sha512-WPkOrIRm+WCLZxXQHCi+WG8T2MMTUFR70rWjdWYddLT7cEfb2P4a3O/J2U1FBVsSFTocXLCoXWY6MZGejeStvQ==
+  dependencies:
+    "@typescript-eslint/types" "4.22.1"
     eslint-visitor-keys "^2.0.0"
 
 "@vitejs/plugin-react-refresh@^1.3.2":
