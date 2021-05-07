@@ -29,29 +29,29 @@
     "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
   },
   "dependencies": {
-    "@juggle/resize-observer": "^3.3.0",
+    "@juggle/resize-observer": "^3.3.1",
     "@popperjs/core": "^2.9.2",
     "@reach/auto-id": "^0.15.0",
     "@sanity/color": "^2.0.15",
     "@sanity/icons": "^1.0.6",
-    "framer-motion": "^4.1.8",
+    "framer-motion": "^4.1.13",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.2",
     "react-popper": "^2.2.5",
     "react-refractor": "^2.1.4"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^6.2.8",
-    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-a11y": "^6.2.9",
+    "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-knobs": "^6.2.8",
-    "@storybook/addon-links": "^6.2.8",
-    "@storybook/react": "^6.2.8",
+    "@storybook/addon-knobs": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/react": "^6.2.9",
     "@types/refractor": "^3.0.0",
     "@types/styled-components": "^5.1.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.3.0"
   },
   "peerDependencies": {
     "react": "^16.9 || ^17",

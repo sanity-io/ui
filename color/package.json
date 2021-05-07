@@ -26,7 +26,7 @@
     "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
   },
   "devDependencies": {
-    "polished": "^4.1.1"
+    "polished": "^4.1.2"
   },
   "repository": {
     "type": "git",
