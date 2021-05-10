@@ -7,11 +7,22 @@ import {TimeAgo} from '$components'
 import {FigmaLogo} from '$components/assets/figmaLogo'
 import {isArray, isRecord, isString} from '$lib/types'
 
+interface ArticleLayout {
+  wide: boolean
+}
+
+function useArticleLayout(article: Record<string, unknown>): ArticleLayout {
+  return {
+    wide: isRecord(article.layout) && Boolean(article.layout.wide),
+  }
+}
+
 export function Article(props: {article: Record<string, unknown>}) {
   const {article} = props
   const headings = useMemo(() => getHeadings(article.content), [article.content])
   const toc = useMemo(() => getTOCTree(headings), [headings])
-  const layout: Record<string, unknown> = isRecord(article.layout) ? article.layout : {}
+  const layout = useArticleLayout(article)
+  // const layout: Record<string, unknown> = isRecord(article.layout) ? article.layout : {}
 
   return (
     <article>
@@ -20,7 +31,7 @@ export function Article(props: {article: Record<string, unknown>}) {
           <Box flex={3}>
             <Box paddingX={[3, 4, 5]} paddingY={[4, 5, 5, 5, 6, 7]}>
               <Box marginBottom={[2, 3, 4]}>
-                <Container width={1}>
+                <Container width={layout.wide ? 2 : 1}>
                   <Heading as="h1" size={[2, 2, 3, 4]}>
                     {String(article.title)}
                   </Heading>
@@ -52,7 +63,7 @@ export function Article(props: {article: Record<string, unknown>}) {
                 </Container>
               </Box>
 
-              <Container width={1}>
+              <Container width={layout.wide ? 2 : 1}>
                 <Stack space={[4, 4, 5, 6]}>
                   {isArray(article.content) && (
                     <ArticleContent blocks={article.content} headings={headings} />

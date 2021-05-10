@@ -1,6 +1,6 @@
 context('Components/MenuButton', () => {
   it('clicking should open/close menu', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
     // click button
     cy.get('#menu-button').click()
@@ -12,7 +12,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should use arrow keys to navigate the menu', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
     // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')
@@ -50,7 +50,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should close on tab', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
     // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')
@@ -64,7 +64,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should close on shift + tab', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
     // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')
@@ -78,7 +78,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should not close when one of the items receives focus', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-menu--menu-button&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
     //   // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')

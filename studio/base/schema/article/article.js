@@ -25,12 +25,12 @@ const figmaField = {
   },
 }
 
-// const layoutField = {
-//   type: 'object',
-//   name: 'layout',
-//   title: 'Layout',
-//   fields: [{type: 'boolean', name: 'wide', title: 'Wide'}],
-// }
+const layoutField = {
+  type: 'object',
+  name: 'layout',
+  title: 'Layout',
+  fields: [{type: 'boolean', name: 'wide', title: 'Wide'}],
+}
 
 export const article = {
   type: 'document',
@@ -40,7 +40,7 @@ export const article = {
     titleField,
     figmaField,
     contentField,
-    // layoutField,
+    layoutField,
     {
       type: 'seo',
       name: 'seo',

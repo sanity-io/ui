@@ -20,10 +20,10 @@ yarn dev:example-studio
 # Run the example Manage dev server
 yarn dev:example-manage
 
-# Run `@sanity/ui` dev server (Storybook)
+# Run `@sanity/ui` dev server (Workshop)
 yarn dev:ui
 
-# Run default dev servers (docs, Storybook and core package watching)
+# Run default dev servers (docs, Workshop and core package watching)
 yarn dev
 ```
 

@@ -1,2 +1,4 @@
 /dist
 /node_modules
+/workshop/dist
+/tsconfig.tsbuildinfo

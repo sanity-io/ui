@@ -1,13 +1,13 @@
 context('Components/Dialog', () => {
   it('should open dialog', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-dialog--props&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/dialog/props')
 
     cy.get('#open-dialog-button').click()
     cy.get('#dialog').should('be.visible')
   })
 
   it('should trap focus', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-dialog--props&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/dialog/props')
 
     // Press enter to open the dialog
     // cy.get('#open-dialog-button').realPress('{enter}')

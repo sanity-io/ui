@@ -1,6 +1,6 @@
 context('Primitives/Grid', () => {
   it('should have responsive styles', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=atoms-grid--responsive&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/grid/responsive')
 
     const sizes = [
       {

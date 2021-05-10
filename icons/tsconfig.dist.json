@@ -1,6 +1,6 @@
 {
-  "extends": "../tsconfig.dist",
-  "include": ["./typings/*.d.ts"],
+  "extends": "../tsconfig.settings",
+  "include": ["./typings"],
   "files": ["./src/index.ts"],
   "compilerOptions": {
     "outDir": "./dist/",
