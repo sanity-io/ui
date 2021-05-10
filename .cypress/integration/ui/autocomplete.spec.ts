@@ -1,6 +1,6 @@
 context('Components/Autocomplete', () => {
   it('should use key arrows', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     cy.get('#custom').click()
 
@@ -25,7 +25,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should press clear button to clear', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     cy.get('#custom').click()
 
@@ -52,7 +52,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should collapse when tabbing out', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
     cy.get('#custom').click()
@@ -68,7 +68,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should clear query on blur', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
     cy.get('#custom').click()
@@ -103,7 +103,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should search anew after selecting a value', () => {
-    cy.visit('http://localhost:9009/iframe.html?id=components-autocomplete--custom&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
     cy.get('#custom').click()
@@ -140,9 +140,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should trigger focus and blur', () => {
-    cy.visit(
-      'http://localhost:9009/iframe.html?id=components-autocomplete--focus-and-blur&viewMode=story'
-    )
+    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/focus-and-blur')
 
     // Click to focus
     cy.get('#focus-and-blur').click()

@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig",
-  "include": ["./src", "./typings/*.d.ts", "./vite.config.ts"],
+  "include": ["./src", "./typings", "./vite.config.ts"],
   "compilerOptions": {
     "outDir": "./dist/ts/",
     "module": "es6",

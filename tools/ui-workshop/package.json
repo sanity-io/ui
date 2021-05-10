@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@sanity/ui-workshop",
+  "version": "0.1.0",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "run-s build:esbuild build:decl copy:decl:* clean:decl",
+    "build:esbuild": "node -r esbuild-register scripts/build.ts",
+    "build:decl": "tsc --emitDeclarationOnly --outDir lib/decl --project tsconfig.dist.json --rootDir ./src",
+    "clean": "rimraf lib",
+    "clean:decl": "rimraf lib/decl",
+    "copy:decl:cjs": "cpx 'lib/decl/**/*.{d.ts,d.ts.map}' lib/cjs",
+    "copy:decl:esm": "cpx 'lib/decl/**/*.{d.ts,d.ts.map}' lib/esm",
+    "prebuild": "yarn clean",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "axe-core": "^4.2.0"
+  },
+  "devDependencies": {
+    "@sanity/icons": "^1.0.6",
+    "@sanity/ui": "^0.33.18",
+    "react": "^17.0.2",
+    "segmented-property": "^3.0.3",
+    "styled-components": "^5.3.0"
+  },
+  "peerDependencies": {
+    "@sanity/icons": "^1.0",
+    "@sanity/ui": "^0.33",
+    "react": "^17",
+    "styled-components": "^5.2"
+  }
+}

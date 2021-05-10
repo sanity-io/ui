@@ -1,6 +1,6 @@
 context('Primitives/Box', () => {
   it('resizing window should hide and show responsive elements', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=atoms-box--responsive&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/primitives/box/responsive')
 
     const sizes = [
       {viewport: [320, 600], css: {display: 'none', flex: '1 1 0%', boxSizing: 'content-box'}},

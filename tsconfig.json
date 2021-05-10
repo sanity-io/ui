@@ -1,7 +1,3 @@
 {
-  "extends": "./tsconfig.dist",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "composite": true
-  }
+  "extends": "./tsconfig.settings"
 }

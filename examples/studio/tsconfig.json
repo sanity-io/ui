@@ -1,15 +1,17 @@
 {
   "extends": "../../tsconfig",
-  "include": ["./src", "typings/*.d.ts", "./vite.config.ts"],
+  "include": ["./src", "typings", "./vite.config.ts"],
   "compilerOptions": {
+    "rootDir": "../../",
     "outDir": "./dist/ts/",
     "module": "es6",
     "target": "es2015",
     "jsx": "react",
     "allowJs": true,
     "sourceMap": true,
+    "baseUrl": ".",
     "paths": {
-      "$sanity/*": ["./examples/studio/src/$sanity/*"]
+      "$sanity/*": ["./src/$sanity/*"]
     }
   },
   "references": [

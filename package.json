@@ -5,6 +5,7 @@
   "scripts": {
     "build": "lerna run --scope @sanity/* build",
     "build-and-start:perf-app": "(cd perf/app && yarn build && yarn start)",
+    "build-and-start:workshop": "(cd ui && yarn workshop:build && yarn workshop:start)",
     "dev": "run-p dev:docs dev:ui watch:packages",
     "dev:color": "lerna run --stream --scope @sanity/color dev",
     "dev:docs": "lerna run --stream --scope 'sanity-design-{docs,studio}' dev",
@@ -19,7 +20,7 @@
     "release:next": "lerna publish --canary --force-publish --no-git-tag-version --dist-tag next --preid next",
     "lint": "lerna run --stream --parallel lint",
     "test": "lerna run --stream --parallel test",
-    "test:browser": "start-server-and-test 'yarn dev:ui' http://localhost:9009 'yarn test:cypress:run'",
+    "test:browser": "start-server-and-test 'yarn build-and-start:workshop' http://localhost:9009 'yarn test:cypress:run'",
     "test:cypress:open": "cypress open --config-file .cypress/cypress.json",
     "test:cypress:run": "cypress run --config-file .cypress/cypress.json",
     "test:perf": "start-server-and-test 'yarn build-and-start:perf-app' http://localhost:9001 'yarn test:perf:run'",
@@ -59,6 +60,7 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "globby": "^11.0.3",
+    "http-server": "^0.12.3",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
@@ -83,6 +85,7 @@
     "logos",
     "perf/app",
     "studio",
+    "tools/*",
     "ui"
   ],
   "lint-staged": {

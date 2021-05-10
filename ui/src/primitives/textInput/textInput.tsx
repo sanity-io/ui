@@ -25,6 +25,19 @@ import {Text} from '../text'
 type ClearButtonProps = Omit<ButtonProps, 'as'> &
   Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
 
+export type TextInputType =
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'url'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'tel'
+  | 'time'
+  | 'text'
+  | 'week'
+
 interface TextInputProps {
   border?: boolean
   /**
@@ -44,18 +57,7 @@ interface TextInputProps {
   radius?: number | number[]
   space?: number | number[]
   suffix?: React.ReactNode
-  type?:
-    | 'date'
-    | 'datetime-local'
-    | 'email'
-    | 'url'
-    | 'month'
-    | 'number'
-    | 'password'
-    | 'tel'
-    | 'time'
-    | 'text'
-    | 'week'
+  type?: TextInputType
   weight?: ThemeFontWeightKey
 }
 

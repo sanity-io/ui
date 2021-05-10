@@ -1,6 +1,6 @@
 context('Utils/Layer', () => {
   it('should support responsize z-offset', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=utils-layer--responsive-z-offset&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/utils/layer/responsive-z-offset')
 
     const sizes = [
       {viewport: [320, 600], css: {zIndex: '1'}},

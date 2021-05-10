@@ -1,7 +1,7 @@
 import {CloseIcon} from '@sanity/icons'
 import React from 'react'
 import styled from 'styled-components'
-import {Box, Card, Flex, Stack, Text} from '../../primitives'
+import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
 import {ThemeColorToneKey} from '../../theme'
 
 interface ToastProps {
@@ -65,18 +65,14 @@ export function Toast(
 
         {closable && (
           <Box padding={1}>
-            <Card
+            <Button
               as="button"
+              icon={CloseIcon}
+              mode="bleed"
               padding={2}
               onClick={onClose}
-              radius={2}
-              tone={cardTone}
               style={{verticalAlign: 'top'}}
-            >
-              <Text>
-                <CloseIcon />
-              </Text>
-            </Card>
+            />
           </Box>
         )}
       </Flex>

@@ -1,11 +1,11 @@
 {
   "extends": "../tsconfig",
-  "include": ["./scripts", "./src", "./storybook", "./test", "./typings/*.d.ts"],
+  "include": ["./scripts", "./src", "./test", "./typings", "./workshop"],
   "compilerOptions": {
+    "composite": true,
+    "rootDir": "../",
     "outDir": "./dist/",
-    "jsx": "react",
-    "paths": {
-      "$storybook/*": ["./ui/storybook/*"]
-    }
-  }
+    "jsx": "react"
+  },
+  "references": [{"path": "../tools/ui-workshop"}]
 }

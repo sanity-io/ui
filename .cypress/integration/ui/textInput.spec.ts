@@ -1,6 +1,6 @@
 context('Primitives/TextInput', () => {
   it('readonly input should not have focus styling', async () => {
-    cy.visit('http://localhost:9009/iframe.html?id=atoms-textinput--read-only&viewMode=story')
+    cy.visit('http://localhost:9009/frame/?path=/primitives/text-input/read-only')
 
     cy.get('#text-input-example').click()
 

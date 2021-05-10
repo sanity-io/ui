@@ -25,5 +25,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "typings/*.d.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "typings"]
 }

@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig",
+  "include": ["./scripts", "./src"],
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "../../",
+    "jsx": "react"
+  },
+  "references": [{"path": "../../ui"}]
+}
