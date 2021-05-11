@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./build/dts/",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -30,6 +30,6 @@
       "@sanity/ui": ["../ui/src"]
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "typings"]
+  "exclude": ["./node_modules"],
+  "include": ["**/*.ts", "**/*.tsx", "./next-env.d.ts", "./typings"]
 }

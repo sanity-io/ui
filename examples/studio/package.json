@@ -5,9 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build": "vite build",
+    "clean": "rimraf public",
     "dev": "vite",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
-    "prebuild": "rimraf dist",
+    "prebuild": "yarn clean",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

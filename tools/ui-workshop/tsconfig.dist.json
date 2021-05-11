@@ -1,7 +1,0 @@
-{
-  "extends": "../../tsconfig.settings",
-  "files": ["./src/index.ts"],
-  "compilerOptions": {
-    "jsx": "react"
-  }
-}

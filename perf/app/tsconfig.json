@@ -3,17 +3,12 @@
   "include": ["./src", "./typings", "./vite.config.ts"],
   "compilerOptions": {
     "rootDir": "../../",
-    "outDir": "./dist/ts/",
+    "outDir": "./lib/dts/",
     "module": "es6",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "sourceMap": true
   },
-  "references": [
-    {"path": "../../color"},
-    {"path": "../../icons"},
-    {"path": "../../logos"},
-    {"path": "../../ui"}
-  ]
+  "references": [{"path": "../../ui/tsconfig.lib.json"}]
 }

@@ -6,7 +6,7 @@ const ROOT_PATH = path.join(__dirname, '..', '..')
 
 export default defineConfig({
   build: {
-    outDir: path.resolve(__dirname, 'dist'),
+    outDir: path.resolve(__dirname, 'public'),
   },
   plugins: [reactRefresh()],
   resolve: {

@@ -2,7 +2,7 @@
   "include": ["typings"],
   "files": ["./src/main.tsx"],
   "compilerOptions": {
-    "outDir": "./dist/ts/",
+    "outDir": "./build/dts/",
     "module": "es6",
     "target": "es5",
     "declaration": true,

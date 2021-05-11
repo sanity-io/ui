@@ -6,15 +6,15 @@
   "module": "lib/esm/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "run-s build:esbuild build:decl copy:decl:* clean:decl",
+    "build": "run-s build:esbuild build:dts copy:dts:* clean:dts",
     "build:esbuild": "node -r esbuild-register scripts/build.ts",
-    "build:decl": "tsc --emitDeclarationOnly --outDir lib/decl --project tsconfig.dist.json --rootDir ./src",
+    "build:dts": "tsc --emitDeclarationOnly --project tsconfig.lib.json --rootDir src",
     "clean": "rimraf lib",
-    "clean:decl": "rimraf lib/decl",
-    "copy:decl:cjs": "cpx 'lib/decl/**/*.{d.ts,d.ts.map}' lib/cjs",
-    "copy:decl:esm": "cpx 'lib/decl/**/*.{d.ts,d.ts.map}' lib/esm",
+    "clean:dts": "rimraf lib/dts",
+    "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
+    "copy:dts:esm": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "prebuild": "yarn clean",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc -b"
   },
   "dependencies": {
     "axe-core": "^4.2.0"

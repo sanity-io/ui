@@ -1,32 +1,32 @@
 {
   "name": "@sanity/ui",
   "version": "0.33.19",
-  "main": "dist/cjs/index.js",
-  "module": "dist/es/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "files": [
-    "/dist"
+    "/lib"
   ],
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "build": "run-s build:esbuild build:decl copy:decl:* clean:decl",
+    "build": "run-s build:esbuild build:dts copy:dts:* clean:dts",
     "build:esbuild": "node -r esbuild-register scripts/build.ts",
-    "build:decl": "tsc --emitDeclarationOnly --outDir dist/decl --project tsconfig.dist.json --rootDir ./src",
-    "clean": "rimraf dist workshop/dist",
-    "clean:decl": "rimraf dist/decl",
-    "copy:decl:cjs": "cpx 'dist/decl/**/*.{d.ts,d.ts.map}' dist/cjs",
-    "copy:decl:es": "cpx 'dist/decl/**/*.{d.ts,d.ts.map}' dist/es",
+    "build:dts": "tsc --emitDeclarationOnly --outDir lib/dts --project tsconfig.lib.json --rootDir src",
+    "clean": "rimraf lib workshop/public",
+    "clean:dts": "rimraf lib/dts",
+    "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
+    "copy:dts:es": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "dev": "(cd workshop && vite)",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "yarn clean",
     "prepublishOnly": "yarn build",
-    "workshop:build": "(cd workshop && rimraf dist && NODE_ENV=production vite build)",
-    "workshop:start": "http-server -a localhost -c-0 -p 9009 -s -P http://localhost:9009/index.html? workshop/dist",
+    "workshop:build": "(cd workshop && rimraf public && NODE_ENV=production vite build)",
+    "workshop:start": "http-server -a localhost -c-0 -p 9009 -s -P http://localhost:9009/index.html? workshop/public",
     "test": "jest",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc -b",
     "watch": "run-p watch:*",
-    "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir src --target ES5",
-    "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
+    "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir lib/cjs --project tsconfig.lib.json --rootDir src --target ES5",
+    "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir lib/esm --project tsconfig.lib.json --rootDir src --target ES6"
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",

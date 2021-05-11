@@ -17,7 +17,7 @@ async function _findEntryPoints() {
   return files.filter((file) => {
     return (
       !file.includes('__fixtures__') &&
-      !file.endsWith('.stories.tsx') &&
+      !file.endsWith('.workshop.tsx') &&
       !file.endsWith('.test.ts') &&
       !file.endsWith('.test.tsx')
     )
@@ -30,7 +30,7 @@ function _buildCjs(entryPoints: string[]) {
     target: 'es2015',
     define,
     bundle: false,
-    outdir: path.resolve(rootPath, 'dist/cjs'),
+    outdir: path.resolve(rootPath, 'lib/cjs'),
     sourcemap: 'external',
     loader: {'.js': 'jsx'},
     entryPoints,
@@ -43,7 +43,7 @@ function _buildEs(entryPoints: string[]) {
     target: 'es2015',
     define,
     bundle: false,
-    outdir: path.resolve(rootPath, 'dist/es'),
+    outdir: path.resolve(rootPath, 'lib/esm'),
     sourcemap: 'external',
     loader: {'.js': 'jsx'},
     entryPoints,

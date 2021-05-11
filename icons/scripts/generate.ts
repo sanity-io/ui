@@ -12,7 +12,7 @@ const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
 
 const IMPORT_PATH = path.resolve(__dirname, '../export')
-const DIST_PATH = path.resolve(__dirname, '../src/icons')
+const DEST_PATH = path.resolve(__dirname, '../src/icons')
 
 const GENERATED_BANNER = `/*
 * AUTO-GENERATED, DO NOT EDIT
@@ -41,7 +41,7 @@ async function readIcon(filePath: string) {
     {icon: true, ref: true, typescript: true},
     {componentName}
   )
-  const targetPath = path.resolve(DIST_PATH, `${basename}.tsx`)
+  const targetPath = path.resolve(DEST_PATH, `${basename}.tsx`)
   const code = format(
     [
       GENERATED_BANNER,
@@ -72,7 +72,7 @@ async function writeIcon(file: any) {
 }
 
 async function generate() {
-  await mkdirp(DIST_PATH)
+  await mkdirp(DEST_PATH)
 
   const filePaths = (await _glob(path.join(IMPORT_PATH, '**/*.svg'))) as any[]
   const files = await Promise.all(filePaths.map(readIcon))
@@ -109,7 +109,7 @@ async function generate() {
     .map((f) => `'${f.name}': ${f.componentName}`)
     .join(',')}}`
 
-  const indexPath = path.resolve(DIST_PATH, `index.ts`)
+  const indexPath = path.resolve(DEST_PATH, `index.ts`)
 
   const indexTsCode = format(
     [

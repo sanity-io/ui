@@ -2,8 +2,8 @@
   "extends": "../tsconfig",
   "include": ["./src", "./scripts", "./typings"],
   "compilerOptions": {
-    "composite": true,
     "rootDir": "../",
-    "outDir": "./dist/"
+    "outDir": "./lib/dts/",
+    "noEmit": true
   }
 }
