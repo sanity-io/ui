@@ -175,10 +175,10 @@ export const Menu = forwardRef(
     }, [rootElement])
 
     useClickOutside(
-      useCallback((event) => isTopLayer && onClickOutside && onClickOutside(event), [
-        isTopLayer,
-        onClickOutside,
-      ]),
+      useCallback(
+        (event) => isTopLayer && onClickOutside && onClickOutside(event),
+        [isTopLayer, onClickOutside]
+      ),
       [rootElement]
     )
 
