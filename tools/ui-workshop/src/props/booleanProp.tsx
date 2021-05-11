@@ -1,18 +1,18 @@
 import {Box, Checkbox, Flex, Text} from '@sanity/ui'
 import React from 'react'
-import {BooleanKnobSchema} from '../types'
+import {BooleanPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function BooleanKnob(props: {schema: BooleanKnobSchema; value?: boolean}) {
+export function BooleanProp(props: {schema: BooleanPropSchema; value?: boolean}) {
   const {schema, value} = props
-  const {setKnobValue} = useScope()
+  const {setPropValue} = useScope()
 
   return (
     <Flex as="label" padding={3}>
       <Box marginRight={2} style={{lineHeight: 0}}>
         <Checkbox
           checked={value || false}
-          onChange={(event) => setKnobValue(schema.name, event.currentTarget.checked)}
+          onChange={(event) => setPropValue(schema.name, event.currentTarget.checked)}
         />
       </Box>
       <Box paddingY={1}>

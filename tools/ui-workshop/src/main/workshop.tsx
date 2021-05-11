@@ -1,13 +1,13 @@
 import {Flex, studioTheme, ThemeProvider, usePrefersDark} from '@sanity/ui'
 import {AxeResults} from 'axe-core'
 import React, {useCallback, useEffect, useReducer, useState} from 'react'
-import {knobsReducer} from '../knobs/reducer'
-import {KnobSchema, WorkshopLocation, WorkshopScope} from '../types'
+import {propsReducer} from '../props/reducer'
+import {PropSchema, WorkshopLocation, WorkshopScope} from '../types'
 import {useFrame} from './useFrame'
 import {WorkshopNavbar} from './workshopNavbar'
 import {WorkshopProvider} from './workshopProvider'
 import {WorkshopStoryCanvas} from './workshopStoryCanvas'
-import {WorkshopStoryKnobs} from './workshopStoryKnobs'
+import {WorkshopStoryInspector} from './workshopStoryInspector'
 import {WorkshopStoryNav} from './workshopStoryNav'
 
 export interface WorkshopProps {
@@ -20,28 +20,28 @@ export interface WorkshopProps {
   title: string
 }
 
-export function Workshop(props: WorkshopProps) {
-  const {collections, frameUrl, location, onLocationPush, onLocationReplace, scopes, title} = props
+export function Workshop(_props: WorkshopProps) {
+  const {collections, frameUrl, location, onLocationPush, onLocationReplace, scopes, title} = _props
   const {postMessage, ready, ref: frameRef, subscribe} = useFrame()
-  const [knobs, dispatch] = useReducer(knobsReducer, [])
+  const [props, dispatch] = useReducer(propsReducer, [])
   const [axeResults, setAxeResults] = useState<AxeResults | null>(null)
   const [viewport, setViewport] = useState<number | 'auto'>('auto')
   const [zoom, setZoom] = useState(1)
   const prefersDark = usePrefersDark()
   const [scheme, setScheme] = useState<'light' | 'dark'>(prefersDark ? 'dark' : 'light')
 
-  const registerKnob = useCallback((knobSchema: KnobSchema) => {
-    dispatch({type: 'registerKnob', knobSchema})
+  const registerProp = useCallback((PropSchema: PropSchema) => {
+    dispatch({type: 'registerProp', PropSchema})
   }, [])
 
-  const unregisterKnob = useCallback((knobName: string) => {
-    dispatch({type: 'unregisterKnob', knobName})
+  const unregisterProp = useCallback((PropName: string) => {
+    dispatch({type: 'unregisterProp', PropName})
   }, [])
 
-  const setKnobValue = useCallback(
-    (knobName: string, value: any) => {
-      dispatch({type: 'setKnobValue', knobName, value})
-      postMessage({type: 'workshop/setKnobValue', knobName, value})
+  const setPropValue = useCallback(
+    (PropName: string, value: any) => {
+      dispatch({type: 'setPropValue', PropName, value})
+      postMessage({type: 'workshop/setPropValue', PropName, value})
     },
     [postMessage]
   )
@@ -57,20 +57,20 @@ export function Workshop(props: WorkshopProps) {
           setAxeResults(msg.results as any)
         }
 
-        if (msg.type === 'workshop/frame/registerKnob') {
-          registerKnob(msg.knobSchema as any)
+        if (msg.type === 'workshop/frame/registerProp') {
+          registerProp(msg.PropSchema as any)
         }
 
-        if (msg.type === 'workshop/frame/setKnobValue') {
-          setKnobValue(msg.knobName as string, msg.value)
+        if (msg.type === 'workshop/frame/setPropValue') {
+          setPropValue(msg.PropName as string, msg.value)
         }
 
-        if (msg.type === 'workshop/frame/unregisterKnob') {
-          unregisterKnob(msg.knobName as any)
+        if (msg.type === 'workshop/frame/unregisterProp') {
+          unregisterProp(msg.PropName as any)
         }
       }
     })
-  }, [registerKnob, setKnobValue, subscribe, unregisterKnob])
+  }, [registerProp, setPropValue, subscribe, unregisterProp])
 
   return (
     <ThemeProvider scheme={scheme} theme={studioTheme}>
@@ -80,11 +80,11 @@ export function Workshop(props: WorkshopProps) {
         onLocationPush={onLocationPush}
         onLocationReplace={onLocationReplace}
         scopes={scopes}
-        knobs={knobs}
-        registerKnob={registerKnob}
-        setKnobValue={setKnobValue}
+        props={props}
+        registerProp={registerProp}
+        setPropValue={setPropValue}
         title={title}
-        unregisterKnob={unregisterKnob}
+        unregisterProp={unregisterProp}
       >
         <Flex direction="column" height="fill">
           <WorkshopNavbar
@@ -103,7 +103,7 @@ export function Workshop(props: WorkshopProps) {
               scheme={scheme}
               viewport={viewport}
             />
-            <WorkshopStoryKnobs axeResults={axeResults} />
+            <WorkshopStoryInspector axeResults={axeResults} />
           </Flex>
         </Flex>
       </WorkshopProvider>

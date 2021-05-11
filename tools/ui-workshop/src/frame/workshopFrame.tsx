@@ -2,10 +2,10 @@ import {Card, studioTheme, ThemeColorSchemeKey, ThemeProvider, ToastProvider} fr
 import axe from 'axe-core'
 import React, {createElement, useCallback, useEffect, useMemo, useReducer, useState} from 'react'
 import {isRecord} from '../isRecord'
-import {knobsReducer} from '../knobs/reducer'
+import {propsReducer} from '../props/reducer'
 import {resolveLocation} from '../resolveLocation'
 import {ScopeProvider} from '../scopeProvider'
-import {KnobSchema, WorkshopContextValue, WorkshopLocation, WorkshopScope} from '../types'
+import {PropSchema, WorkshopContextValue, WorkshopLocation, WorkshopScope} from '../types'
 import {useWorkshop} from '../useWorkshop'
 import {WorkshopContext} from '../workshopContext'
 
@@ -28,14 +28,14 @@ const qs = {
   },
 }
 
-export function WorkshopFrame(props: {frameUrl: string; scopes: WorkshopScope[]; title: string}) {
-  const {frameUrl, scopes, title} = props
+export function WorkshopFrame(_props: {frameUrl: string; scopes: WorkshopScope[]; title: string}) {
+  const {frameUrl, scopes, title} = _props
   const query = useMemo(() => qs.parse(window.location.search.substr(1)), [])
   const [path, setPath] = useState(query.path || '/')
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>(
     (query.scheme as ThemeColorSchemeKey) || 'light'
   )
-  const [knobs, dispatch] = useReducer(knobsReducer, [])
+  const [props, dispatch] = useReducer(propsReducer, [])
   const [zoom, setZoom] = useState(query.zoom ? Number(query.zoom) : 1)
 
   const postMessage = useCallback((msg: Record<string, unknown>) => {
@@ -57,10 +57,10 @@ export function WorkshopFrame(props: {frameUrl: string; scopes: WorkshopScope[];
           return
         }
 
-        if (msg.type === 'workshop/setKnobValue') {
+        if (msg.type === 'workshop/setPropValue') {
           dispatch({
-            type: 'setKnobValue',
-            knobName: msg.knobName as string,
+            type: 'setPropValue',
+            PropName: msg.PropName as string,
             value: msg.value,
           })
 
@@ -92,26 +92,26 @@ export function WorkshopFrame(props: {frameUrl: string; scopes: WorkshopScope[];
     [postMessage]
   )
 
-  const registerKnob = useCallback(
-    (knobSchema: KnobSchema) => {
-      postMessage({type: 'workshop/frame/registerKnob', knobSchema})
-      dispatch({type: 'registerKnob', knobSchema})
+  const registerProp = useCallback(
+    (PropSchema: PropSchema) => {
+      postMessage({type: 'workshop/frame/registerProp', PropSchema})
+      dispatch({type: 'registerProp', PropSchema})
     },
     [postMessage]
   )
 
-  const unregisterKnob = useCallback(
-    (knobName: string) => {
-      postMessage({type: 'workshop/frame/unregisterKnob', knobName})
-      dispatch({type: 'unregisterKnob', knobName})
+  const unregisterProp = useCallback(
+    (PropName: string) => {
+      postMessage({type: 'workshop/frame/unregisterProp', PropName})
+      dispatch({type: 'unregisterProp', PropName})
     },
     [postMessage]
   )
 
-  const setKnobValue = useCallback(
-    (knobName: string, value: any) => {
-      postMessage({type: 'workshop/frame/setKnobValue', knobName, value})
-      dispatch({type: 'setKnobValue', knobName, value})
+  const setPropValue = useCallback(
+    (PropName: string, value: any) => {
+      postMessage({type: 'workshop/frame/setPropValue', PropName, value})
+      dispatch({type: 'setPropValue', PropName, value})
     },
     [postMessage]
   )
@@ -155,13 +155,13 @@ export function WorkshopFrame(props: {frameUrl: string; scopes: WorkshopScope[];
       <ToastProvider>
         <WorkshopContext.Provider value={contextValue}>
           <ScopeProvider
-            knobs={knobs}
-            registerKnob={registerKnob}
+            props={props}
+            registerProp={registerProp}
             scope={scope}
-            setKnobValue={setKnobValue}
+            setPropValue={setPropValue}
             story={story}
             title={title}
-            unregisterKnob={unregisterKnob}
+            unregisterProp={unregisterProp}
           >
             <RenderCanvas />
           </ScopeProvider>
