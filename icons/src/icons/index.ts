@@ -101,6 +101,7 @@ import {default as PinRemovedIcon} from './pinRemovedIcon'
 import {default as PlayIcon} from './playIcon'
 import {default as PlugIcon} from './plugIcon'
 import {default as PublishIcon} from './publishIcon'
+import {default as ReadOnlyIcon} from './readOnlyIcon'
 import {default as RemoveCircleIcon} from './removeCircleIcon'
 import {default as RemoveIcon} from './removeIcon'
 import {default as ResetIcon} from './resetIcon'
@@ -240,6 +241,7 @@ export type IconSymbol =
   | 'play'
   | 'plug'
   | 'publish'
+  | 'read-only'
   | 'remove-circle'
   | 'remove'
   | 'reset'
@@ -379,6 +381,7 @@ export {
   PlayIcon,
   PlugIcon,
   PublishIcon,
+  ReadOnlyIcon,
   RemoveCircleIcon,
   RemoveIcon,
   ResetIcon,
@@ -519,6 +522,7 @@ export interface IconMap {
   play: IconComponent
   plug: IconComponent
   publish: IconComponent
+  'read-only': IconComponent
   'remove-circle': IconComponent
   remove: IconComponent
   reset: IconComponent
@@ -659,6 +663,7 @@ export const icons: IconMap = {
   play: PlayIcon,
   plug: PlugIcon,
   publish: PublishIcon,
+  'read-only': ReadOnlyIcon,
   'remove-circle': RemoveCircleIcon,
   remove: RemoveIcon,
   reset: ResetIcon,
