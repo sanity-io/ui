@@ -16,8 +16,6 @@ export function buildMenuItems(
     }
   }
 
-  console.log('collections', collections, name)
-
   const coll = collections.find((c) => c.name === name)
 
   return {
