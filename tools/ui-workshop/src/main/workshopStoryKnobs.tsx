@@ -1,10 +1,32 @@
 import {ErrorFilledIcon, ToggleArrowRightIcon, WarningFilledIcon} from '@sanity/icons'
-import {Box, Card, Code, Flex, Layer, Stack, Tab, TabList, TabPanel, Text} from '@sanity/ui'
+import {
+  Box,
+  Card,
+  Code,
+  Flex,
+  Layer,
+  rem,
+  Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  Text,
+  Theme,
+} from '@sanity/ui'
 import {AxeResults} from 'axe-core'
 import React, {useState} from 'react'
-import {TreeCard} from '../components/treeCard'
+import styled, {css} from 'styled-components'
 import {Knob} from '../knobs'
 import {useScope} from '../useScope'
+
+export const TreeCard = styled(Card)<{$level: number}>((props: {$level: number; theme: Theme}) => {
+  const {$level, theme} = props
+  const {space} = theme.sanity
+
+  return css`
+    padding-left: ${rem(space[2] * $level)};
+  `
+})
 
 export function WorkshopStoryKnobs(props: {axeResults: AxeResults | null}) {
   const {axeResults} = props
