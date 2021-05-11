@@ -1,11 +1,11 @@
 import {Box, Select, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
-import {SelectKnobSchema} from '../types'
+import {SelectPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function SelectKnob(props: {schema: SelectKnobSchema; value: any}) {
+export function SelectProp(props: {schema: SelectPropSchema; value: any}) {
   const {schema, value: valueProp} = props
-  const {setKnobValue} = useScope()
+  const {setPropValue} = useScope()
 
   const value = useMemo(() => {
     const entries = Object.entries(schema.options)
@@ -31,7 +31,7 @@ export function SelectKnob(props: {schema: SelectKnobSchema; value: any}) {
             const optionKey = event.currentTarget.value
             const optionValue = schema.options[optionKey as any]
 
-            setKnobValue(schema.name, optionValue)
+            setPropValue(schema.name, optionValue)
           }}
           padding={2}
           radius={2}

@@ -6,20 +6,20 @@ export function useBoolean(
   defaultValue?: boolean,
   groupName?: string
 ): boolean | undefined {
-  const {knobs, registerKnob, unregisterKnob} = useScope()
+  const {props: Props, registerProp, unregisterProp} = useScope()
 
   useEffect(() => {
-    registerKnob({
+    registerProp({
       type: 'boolean',
       groupName,
       name,
       defaultValue,
     })
 
-    return () => unregisterKnob(name)
-  }, [defaultValue, groupName, name, registerKnob, unregisterKnob])
+    return () => unregisterProp(name)
+  }, [defaultValue, groupName, name, registerProp, unregisterProp])
 
-  const knob = knobs.find((k) => k.schema.name === name)
+  const Prop = Props.find((k) => k.schema.name === name)
 
-  return knob ? knob.value : defaultValue
+  return Prop ? Prop.value : defaultValue
 }

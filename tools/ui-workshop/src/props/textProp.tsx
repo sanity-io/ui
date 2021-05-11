@@ -1,11 +1,11 @@
 import {Box, Text, TextArea} from '@sanity/ui'
 import React from 'react'
-import {TextKnobSchema} from '../types'
+import {TextPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function TextKnob(props: {schema: TextKnobSchema; value?: string}) {
+export function TextProp(props: {schema: TextPropSchema; value?: string}) {
   const {schema, value} = props
-  const {setKnobValue} = useScope()
+  const {setPropValue} = useScope()
 
   return (
     <Box padding={3}>
@@ -14,7 +14,7 @@ export function TextKnob(props: {schema: TextKnobSchema; value?: string}) {
       </Text>
       <Box marginTop={2}>
         <TextArea
-          onChange={(event) => setKnobValue(schema.name, event.currentTarget.value)}
+          onChange={(event) => setPropValue(schema.name, event.currentTarget.value)}
           rows={4}
           value={value || ''}
         />

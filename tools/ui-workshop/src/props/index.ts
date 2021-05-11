@@ -1,4 +1,4 @@
-export * from './knob'
+export * from './prop'
 
 export * from './useBoolean'
 export * from './useNumber'

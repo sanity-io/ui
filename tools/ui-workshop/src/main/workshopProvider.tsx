@@ -1,37 +1,37 @@
 import React, {useMemo} from 'react'
 import {resolveLocation} from '../resolveLocation'
 import {ScopeProvider} from '../scopeProvider'
-import {KnobSchema, StoryKnob, WorkshopLocation, WorkshopScope} from '../types'
+import {PropSchema, StoryProp, WorkshopLocation, WorkshopScope} from '../types'
 import {WorkshopContext} from '../workshopContext'
 
 export interface WorkshopProviderProps {
   children?: React.ReactNode
   frameUrl: string
   location: WorkshopLocation
-  knobs: StoryKnob[]
   onLocationPush: (loc: WorkshopLocation) => void
   onLocationReplace: (loc: WorkshopLocation) => void
-  registerKnob: (knobSchema: KnobSchema) => void
+  props: StoryProp[]
+  registerProp: (PropSchema: PropSchema) => void
   scopes: WorkshopScope[]
-  setKnobValue: (knobName: string, value: any) => void
+  setPropValue: (PropName: string, value: any) => void
   title: string
-  unregisterKnob: (knobName: string) => void
+  unregisterProp: (PropName: string) => void
 }
 
-export function WorkshopProvider(props: WorkshopProviderProps) {
+export function WorkshopProvider(_props: WorkshopProviderProps) {
   const {
     children,
     frameUrl,
-    knobs,
+    props,
     location,
     onLocationPush,
     onLocationReplace,
-    registerKnob,
+    registerProp,
     scopes,
-    setKnobValue,
+    setPropValue,
     title,
-    unregisterKnob,
-  } = props
+    unregisterProp,
+  } = _props
 
   const workshop = useMemo(() => {
     const {scope, story} = resolveLocation(scopes, location.path)
@@ -51,13 +51,13 @@ export function WorkshopProvider(props: WorkshopProviderProps) {
   return (
     <WorkshopContext.Provider value={workshop}>
       <ScopeProvider
-        knobs={knobs}
-        registerKnob={registerKnob}
+        props={props}
+        registerProp={registerProp}
         scope={workshop.scope}
-        setKnobValue={setKnobValue}
+        setPropValue={setPropValue}
         story={workshop.story}
         title={title}
-        unregisterKnob={unregisterKnob}
+        unregisterProp={unregisterProp}
       >
         {children}
       </ScopeProvider>

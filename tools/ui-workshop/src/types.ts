@@ -10,66 +10,66 @@ export interface WorkshopScope {
   stories: WorkshopStory[]
 }
 
-export interface GenericKnobSchema<T = unknown> {
+export interface GenericPropSchema<T = unknown> {
   name: string
   defaultValue?: T
   groupName?: string
 }
 
-export interface BooleanKnobSchema extends GenericKnobSchema<boolean> {
+export interface BooleanPropSchema extends GenericPropSchema<boolean> {
   type: 'boolean'
 }
 
-export interface NumberKnobSchema extends GenericKnobSchema<number> {
+export interface NumberPropSchema extends GenericPropSchema<number> {
   type: 'number'
 }
 
-export type SelectKnobValue = string | number | boolean
+export type SelectPropValue = string | number | boolean
 
-// interface SelectKnobOptionsProp<T> {
+// interface SelectPropOptionsProp<T> {
 //   [key: string]: T
 // }
 
-export type SelectKnobOptionsProp<T extends SelectKnobValue = SelectKnobValue> =
+export type SelectPropOptionsProp<T extends SelectPropValue = SelectPropValue> =
   | Record<PropertyKey, T>
   | Record<Extract<T, PropertyKey>, T[keyof T]>
   | T[]
   | readonly T[]
 
-export interface SelectKnobSchema<T extends SelectKnobValue = SelectKnobValue>
-  extends GenericKnobSchema<T> {
+export interface SelectPropSchema<T extends SelectPropValue = SelectPropValue>
+  extends GenericPropSchema<T> {
   type: 'select'
-  options: SelectKnobOptionsProp<T>
+  options: SelectPropOptionsProp<T>
 }
 
-export interface StringKnobSchema extends GenericKnobSchema<string> {
+export interface StringPropSchema extends GenericPropSchema<string> {
   type: 'string'
 }
 
-export interface TextKnobSchema extends GenericKnobSchema<string> {
+export interface TextPropSchema extends GenericPropSchema<string> {
   type: 'text'
 }
 
-export type KnobSchema =
-  | BooleanKnobSchema
-  | NumberKnobSchema
-  | SelectKnobSchema
-  | StringKnobSchema
-  | TextKnobSchema
+export type PropSchema =
+  | BooleanPropSchema
+  | NumberPropSchema
+  | SelectPropSchema
+  | StringPropSchema
+  | TextPropSchema
 
-export interface StoryKnob {
-  schema: KnobSchema
+export interface StoryProp {
+  schema: PropSchema
   value: any
 }
 
 export interface ScopeContextValue {
   scope: WorkshopScope | null
   story: WorkshopStory | null
-  knobs: StoryKnob[]
-  registerKnob: (knob: KnobSchema) => void
-  setKnobValue: (knobName: string, value: any) => void
+  props: StoryProp[]
+  registerProp: (Prop: PropSchema) => void
+  setPropValue: (PropName: string, value: any) => void
   // title: string
-  unregisterKnob: (knobName: string) => void
+  unregisterProp: (PropName: string) => void
 }
 
 export interface WorkshopLocation {

@@ -24,13 +24,10 @@ export function resolveLocation(
 
   segments = segments.slice(len)
 
+  const story = (scope && scope.stories.find((story) => story.name === segments.join('/'))) || null
+
   return {
     scope,
-    story:
-      (scope &&
-        scope.stories.find((story) => {
-          return story.name === segments.join('/')
-        })) ||
-      null,
+    story,
   }
 }
