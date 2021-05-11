@@ -21,6 +21,7 @@ export default defineScope('primitives/text-input', 'TextInput', [
   {name: 'clear-button', title: 'Clear button', component: ClearButtonStory},
   {name: 'read-only', title: 'Read only', component: ReadOnlyStory},
   {name: 'multiple-tones', title: 'Multiple tones', component: MultipleTonesStory},
+  {name: 'states', title: 'States', component: StatesStory},
 ])
 
 const ICON_SYMBOL_OPTIONS = Object.keys(icons).reduce(
@@ -217,5 +218,36 @@ function MultipleTonesStory() {
         <TextInput />
       </Card>
     </Stack>
+  )
+}
+
+function StatesStory() {
+  return (
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <Container width={1}>
+        <Stack space={5}>
+          <Stack space={3}>
+            <Text size={1} weight="semibold">
+              Enabled (default)
+            </Text>
+            <TextInput value="This is some text" />
+          </Stack>
+
+          <Stack space={3}>
+            <Text size={1} weight="semibold">
+              Disabled
+            </Text>
+            <TextInput disabled value="This is some text" />
+          </Stack>
+
+          <Stack space={3}>
+            <Text size={1} weight="semibold">
+              Read-only
+            </Text>
+            <TextInput readOnly value="This is some text" />
+          </Stack>
+        </Stack>
+      </Container>
+    </Flex>
   )
 }
