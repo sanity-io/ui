@@ -2,28 +2,28 @@
   "name": "@sanity/color",
   "version": "2.0.15",
   "description": "The Sanity color palette.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/es/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "sideEffects": false,
   "files": [
-    "/dist"
+    "/lib"
   ],
   "scripts": {
-    "build": "run-s build:esbuild build:decl copy:decl:* clean:decl",
+    "build": "run-s build:esbuild build:dts copy:dts:* clean:dts",
     "build:esbuild": "node -r esbuild-register scripts/build.ts",
-    "build:decl": "tsc --emitDeclarationOnly --outDir dist/decl --project tsconfig.dist.json --rootDir ./src",
-    "clean": "rimraf dist",
-    "clean:decl": "rimraf dist/decl",
-    "copy:decl:cjs": "cpx 'dist/decl/**/*.{d.ts,d.ts.map}' dist/cjs",
-    "copy:decl:es": "cpx 'dist/decl/**/*.{d.ts,d.ts.map}' dist/es",
+    "build:dts": "tsc --emitDeclarationOnly --project tsconfig.lib.json --rootDir src",
+    "clean": "rimraf lib",
+    "clean:dts": "rimraf lib/dts",
+    "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
+    "copy:dts:es": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts",
     "prebuild": "yarn clean && yarn generate",
     "prepublishOnly": "yarn build",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc -b",
     "watch": "run-p watch:*",
-    "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir dist/cjs --project tsconfig.dist.json --rootDir src --target ES5",
-    "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir dist/es --project tsconfig.dist.json --rootDir src --target ES6"
+    "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir lib/cjs --project tsconfig.lib.json --rootDir src --target ES5",
+    "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir lib/esm --project tsconfig.lib.json --rootDir src --target ES6"
   },
   "devDependencies": {
     "polished": "^4.1.2"

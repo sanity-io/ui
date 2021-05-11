@@ -2,10 +2,14 @@
   "extends": "../tsconfig",
   "include": ["./scripts", "./src", "./test", "./typings", "./workshop"],
   "compilerOptions": {
-    "composite": true,
     "rootDir": "../",
-    "outDir": "./dist/",
-    "jsx": "react"
+    "outDir": "./lib/dts/",
+    "jsx": "react",
+    "noEmit": true
   },
-  "references": [{"path": "../tools/ui-workshop"}]
+  "references": [
+    {"path": "../color/tsconfig.lib.json"},
+    {"path": "../icons/tsconfig.lib.json"},
+    {"path": "../tools/ui-workshop/tsconfig.lib.json"}
+  ]
 }

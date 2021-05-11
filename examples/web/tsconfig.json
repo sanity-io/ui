@@ -24,6 +24,6 @@
       "@sanity/ui": ["../../ui/src"]
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "typings"]
+  "exclude": ["./node_modules"],
+  "include": ["**/*.ts", "**/*.tsx", "./next-env.d.ts", "./typings"]
 }

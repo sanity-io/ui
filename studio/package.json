@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "sanity build public -y",
+    "clean": "rimraf public",
     "dev": "sanity start --port 9000",
     "deploy": "sanity deploy",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx"

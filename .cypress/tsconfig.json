@@ -5,5 +5,5 @@
     "lib": ["es5", "dom"],
     "types": ["cypress", "cypress-real-events", "node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["./**/*.ts"]
 }

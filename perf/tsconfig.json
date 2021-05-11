@@ -3,6 +3,6 @@
   "include": ["./*.ts", "./lib", "./tests"],
   "compilerOptions": {
     "rootDir": "../",
-    "outDir": "./dist/"
+    "outDir": "./lib/dts/"
   }
 }

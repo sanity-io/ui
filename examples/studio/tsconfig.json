@@ -3,7 +3,7 @@
   "include": ["./src", "typings", "./vite.config.ts"],
   "compilerOptions": {
     "rootDir": "../../",
-    "outDir": "./dist/ts/",
+    "outDir": "./build/dts/",
     "module": "es6",
     "target": "es2015",
     "jsx": "react",
@@ -15,9 +15,9 @@
     }
   },
   "references": [
-    {"path": "../../color"},
-    {"path": "../../icons"},
-    {"path": "../../logos"},
-    {"path": "../../ui"}
+    {"path": "../../color/tsconfig.lib.json"},
+    {"path": "../../icons/tsconfig.lib.json"},
+    {"path": "../../logos/tsconfig.lib.json"},
+    {"path": "../../ui/tsconfig.lib.json"}
   ]
 }

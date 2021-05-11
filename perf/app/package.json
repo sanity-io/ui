@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build": "vite build",
+    "clean": "rimraf public",
     "dev": "vite",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
-    "prebuild": "rimraf dist",
-    "start": "http-server -a localhost -c-0 -p 9001 -s -P http://localhost:9001/index.html? dist",
+    "prebuild": "yarn clean",
+    "start": "http-server -a localhost -c-0 -p 9001 -s -P http://localhost:9001/index.html? public",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

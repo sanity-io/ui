@@ -1,9 +1,0 @@
-{
-  "extends": "../tsconfig.settings",
-  "include": ["./typings"],
-  "files": ["./src/index.ts"],
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "jsx": "react"
-  }
-}
