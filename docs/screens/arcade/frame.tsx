@@ -63,17 +63,16 @@ export function ArcadeFrame({hookCode, jsxCode}: {hookCode: string; jsxCode: str
   )
 
   // Send color scheme to frame
-  useEffect(() => postMessage({type: 'arcadeFrame/colorScheme', colorScheme}), [
-    colorScheme,
-    postMessage,
-  ])
+  useEffect(
+    () => postMessage({type: 'arcadeFrame/colorScheme', colorScheme}),
+    [colorScheme, postMessage]
+  )
 
   // Send input to frame
-  useEffect(() => postMessage({type: 'arcadeFrame/input', hookCode, jsxCode}), [
-    hookCode,
-    jsxCode,
-    postMessage,
-  ])
+  useEffect(
+    () => postMessage({type: 'arcadeFrame/input', hookCode, jsxCode}),
+    [hookCode, jsxCode, postMessage]
+  )
 
   return <Root ref={setFrame} src={`${basePath}/arcade-frame`} />
 }

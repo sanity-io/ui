@@ -16,5 +16,5 @@ export function useRootTheme() {
     throw new Error('useRootTheme(): the context value is not compatible')
   }
 
-  return (value as any) as ThemeContextValue
+  return value as any as ThemeContextValue
 }
