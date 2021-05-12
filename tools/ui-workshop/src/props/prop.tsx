@@ -2,6 +2,7 @@ import {Box, Text} from '@sanity/ui'
 import React from 'react'
 import {PropSchema} from '../types'
 import {BooleanProp} from './booleanProp'
+import {NumberProp} from './numberProp'
 import {SelectProp} from './selectProp'
 import {StringProp} from './stringProp'
 import {TextProp} from './textProp'
@@ -11,6 +12,10 @@ export function Prop(props: {schema: PropSchema; value: any}) {
 
   if (schema.type === 'boolean') {
     return <BooleanProp schema={schema} value={value} />
+  }
+
+  if (schema.type === 'number') {
+    return <NumberProp schema={schema} value={value} />
   }
 
   if (schema.type === 'select') {
@@ -30,7 +35,7 @@ export function Prop(props: {schema: PropSchema; value: any}) {
       <Text size={1} weight="semibold">
         Unknown Prop type:{' '}
         <code>
-          {schema.name}: {schema.type}
+          {(schema as any).name}: {(schema as any).type}
         </code>
       </Text>
     </Box>
