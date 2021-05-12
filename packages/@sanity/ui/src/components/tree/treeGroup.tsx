@@ -5,7 +5,7 @@ import {useTree} from './useTree'
 export function TreeGroup(
   props: {expanded?: boolean} & Omit<
     React.HTMLProps<HTMLDivElement>,
-    'as' | 'height' | 'ref' | 'role'
+    'as' | 'height' | 'ref' | 'role' | 'wrap'
   >
 ) {
   const {children, expanded = false, ...restProps} = props

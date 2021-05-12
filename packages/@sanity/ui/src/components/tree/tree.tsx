@@ -11,7 +11,7 @@ import {TreeContextValue, TreeState} from './types'
 export function Tree(
   props: {space?: number | number[]} & Omit<
     React.HTMLProps<HTMLDivElement>,
-    'align' | 'as' | 'height' | 'ref' | 'role'
+    'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'
   >
 ) {
   const {children, space = 1, ...restProps} = props
