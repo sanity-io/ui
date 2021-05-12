@@ -11,7 +11,7 @@ import React, {
 import styled from 'styled-components'
 import {EMPTY_ARRAY} from '../../constants'
 import {focusFirstDescendant} from '../../helpers'
-import {useClickOutside, useForwardedRef, useResponsiveProp} from '../../hooks'
+import {useForwardedRef, useResponsiveProp} from '../../hooks'
 import {
   Box,
   Button,
@@ -351,7 +351,7 @@ const InnerAutocomplete = forwardRef(
     }, [valueProp])
 
     // Reset selected item when the list changes
-    // @todo: what if the list changed, but the items have changed?
+    // @todo: what if the list length didn’t change, but the list contents changed?
     useEffect(() => setSelectedIndex(-1), [optionsLen])
 
     // Focus the selected item
@@ -366,17 +366,6 @@ const InnerAutocomplete = forwardRef(
         focusFirstDescendant(selectedItemElement)
       }
     }, [selectedIndex])
-
-    const handleClickOutside = useCallback(() => {
-      if (focused) {
-        setFocused(false)
-        setQuery(null)
-
-        if (onQueryChange) onQueryChange(null)
-      }
-    }, [focused, onQueryChange])
-
-    useClickOutside(handleClickOutside, [rootElement, resultsPopoverElement])
 
     const setRef = useCallback(
       (el: HTMLInputElement | null) => {
