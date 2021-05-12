@@ -44,6 +44,7 @@ export const Card = forwardRef(
       borderLeft,
       radius = 0,
       scheme,
+      selected,
       shadow,
       tone: toneProp = 'default',
       ...restProps
@@ -57,6 +58,7 @@ export const Card = forwardRef(
         <Root
           data-as={typeof as === 'string' ? as : undefined}
           data-scheme={rootTheme.scheme}
+          data-selected={selected ? '' : undefined}
           data-ui="Card"
           data-tone={tone}
           {...restProps}
@@ -70,6 +72,7 @@ export const Card = forwardRef(
           $tone={tone}
           forwardedAs={as}
           ref={ref}
+          selected={selected}
         />
       </ThemeColorProvider>
     )
