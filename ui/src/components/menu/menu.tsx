@@ -7,12 +7,14 @@ import {useLayer} from '../../utils'
 import {getFocusableElements} from './helpers'
 import {MenuContext, MenuContextValue} from './menuContext'
 
-interface MenuProps extends ResponsivePaddingProps {
+export interface MenuProps extends ResponsivePaddingProps {
+  focusFirst?: boolean
   focusLast?: boolean
   onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
   onItemClick?: () => void
   onItemSelect?: (index: number) => void
+  registerElement?: (el: HTMLElement) => () => void
   space?: number | number[]
 }
 
@@ -22,15 +24,21 @@ const Root = styled(Box)`
 `
 
 export const Menu = forwardRef(
-  (props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>, ref) => {
+  (
+    props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
+    ref
+  ) => {
     const {
       children,
+      focusFirst = true,
       focusLast,
       onClickOutside,
       onEscape,
       onItemClick,
       onItemSelect,
+      onKeyDown,
       padding = 1,
+      registerElement,
       space = 1,
       ...restProps
     } = props
@@ -41,15 +49,22 @@ export const Menu = forwardRef(
     const [activeElement, setActiveElement] = useState<HTMLElement | null>(null)
     const activeElementRef = useRef<HTMLElement | null>(activeElement)
 
+    // Trigger `onItemSelect` when active index changes
     useEffect(() => {
       if (onItemSelect) onItemSelect(activeIndex)
     }, [activeIndex, onItemSelect])
 
+    // Update active element
     useEffect(() => {
       activeElementRef.current = activeElement
     }, [activeElement])
 
+    // Auto-focus item after render
     useEffect(() => {
+      const doFocus = focusFirst || focusLast
+
+      if (!doFocus) return
+
       const rafId = window.requestAnimationFrame(() => {
         if (rootElement) {
           if (activeElementRef.current) {
@@ -71,7 +86,7 @@ export const Menu = forwardRef(
       return () => {
         window.cancelAnimationFrame(rafId)
       }
-    }, [focusLast, rootElement])
+    }, [focusFirst, focusLast, rootElement])
 
     const setRef = useCallback(
       (el: HTMLDivElement | null) => {
@@ -106,6 +121,7 @@ export const Menu = forwardRef(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'ArrowUp') {
           event.preventDefault()
+          event.stopPropagation()
 
           const focusableElements = getFocusableElements(itemsRef.current)
           const focusableLen = focusableElements.filter(({focusable}) => focusable).length
@@ -133,6 +149,7 @@ export const Menu = forwardRef(
 
         if (event.key === 'ArrowDown') {
           event.preventDefault()
+          event.stopPropagation()
 
           const focusableElements = getFocusableElements(itemsRef.current)
           const focusableLen = focusableElements.filter(({focusable}) => focusable).length
@@ -157,8 +174,12 @@ export const Menu = forwardRef(
 
           return
         }
+
+        if (onKeyDown) {
+          onKeyDown(event)
+        }
       },
-      [activeIndex]
+      [activeIndex, onKeyDown]
     )
 
     const handleItemMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
@@ -196,17 +217,36 @@ export const Menu = forwardRef(
       )
     )
 
+    useEffect(() => {
+      if (!rootElement || !registerElement) return
+
+      return registerElement(rootElement)
+    }, [registerElement, rootElement])
+
     const value: MenuContextValue = useMemo(
       () => ({
         version: 0.0,
         activeElement,
         activeIndex,
         mount,
+        onClickOutside,
+        onEscape,
         onMouseEnter: handleItemMouseEnter,
         onMouseLeave: handleItemMouseLeave,
         onItemClick,
+        registerElement,
       }),
-      [activeElement, activeIndex, mount, handleItemMouseEnter, handleItemMouseLeave, onItemClick]
+      [
+        activeElement,
+        activeIndex,
+        mount,
+        handleItemMouseEnter,
+        handleItemMouseLeave,
+        onClickOutside,
+        onEscape,
+        onItemClick,
+        registerElement,
+      ]
     )
 
     return (

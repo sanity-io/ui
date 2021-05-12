@@ -1,10 +1,9 @@
 import React, {cloneElement, forwardRef, useCallback, useMemo, useState} from 'react'
-import ReactIs from 'react-is'
-import {isHTMLElement} from '../../helpers'
-import {useClickOutside} from '../../hooks'
+import {isElement} from 'react-is'
 import {Popover, PopoverProps} from '../../primitives'
 import {ThemeColorSchemeKey} from '../../theme'
 import {Placement} from '../../types'
+import {MenuProps} from './menu'
 
 export interface MenuButtonProps {
   /**
@@ -65,7 +64,7 @@ export const MenuButton = forwardRef(function MenuButton(
   const [open, setOpen] = useState(false)
   const [focusLast, setFocusLast] = useState(false)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
-  const [menuElement, setMenuElement] = useState<HTMLDivElement | null>(null)
+  const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
 
   const handleButtonClick = useCallback(() => {
     setOpen((v) => !v)
@@ -92,13 +91,25 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const handleMenuClickOutside = useCallback(
     (event: MouseEvent) => {
-      const targetElement = isHTMLElement(event.target) ? event.target.closest('button') : null
+      const target = event.target
 
-      if (targetElement !== buttonElement) {
-        setOpen(false)
+      if (!(target instanceof Node)) {
+        return
       }
+
+      if (buttonElement && (target === buttonElement || buttonElement.contains(target))) {
+        return
+      }
+
+      for (const el of menuElements) {
+        if (target === el || el.contains(target)) {
+          return
+        }
+      }
+
+      setOpen(false)
     },
-    [buttonElement]
+    [buttonElement, menuElements]
   )
 
   const handleMenuEscape = useCallback(() => {
@@ -110,15 +121,23 @@ export const MenuButton = forwardRef(function MenuButton(
     (event: React.FocusEvent<HTMLButtonElement>) => {
       const target = event.relatedTarget
 
+      if (!(target instanceof Node)) {
+        return
+      }
+
       if (target === buttonElement) {
         return
       }
 
-      if (isHTMLElement(target) && !menuElement?.contains(target)) {
-        setOpen(false)
+      for (const el of menuElements) {
+        if (el === target || el.contains(target)) {
+          return
+        }
       }
+
+      setOpen(false)
     },
-    [buttonElement, menuElement]
+    [buttonElement, menuElements]
   )
 
   const handleItemClick = useCallback(() => {
@@ -126,23 +145,38 @@ export const MenuButton = forwardRef(function MenuButton(
     if (buttonElement) buttonElement.focus()
   }, [buttonElement])
 
-  useClickOutside(
-    useCallback(() => setOpen(false), []),
-    [buttonElement, menuElement]
+  const registerElement = useCallback((el: HTMLElement) => {
+    setChildMenuElements((els) => els.concat([el]))
+
+    return () => {
+      setChildMenuElements((els) => {
+        return els.filter((_el) => _el !== el)
+      })
+    }
+  }, [])
+
+  const menuProps: MenuProps = useMemo(
+    () => ({
+      'aria-labelledby': id,
+      focusLast,
+      onBlurCapture: handleBlur,
+      onClickOutside: handleMenuClickOutside,
+      onEscape: handleMenuEscape,
+      onItemClick: handleItemClick,
+      registerElement,
+    }),
+    [
+      focusLast,
+      handleMenuClickOutside,
+      handleMenuEscape,
+      handleItemClick,
+      id,
+      handleBlur,
+      registerElement,
+    ]
   )
 
-  const menuProps = {
-    'aria-labelledby': id,
-    focusLast,
-    onClickOutside: handleMenuClickOutside,
-    onEscape: handleMenuEscape,
-    onItemClick: handleItemClick,
-    ref: setMenuElement,
-    onBlurCapture: handleBlur,
-  }
-
-  // @todo: check if the `menu` property is a Menu component?
-  const menu = menuProp ? cloneElement(menuProp, menuProps) : null
+  const menu = isElement(menuProp) ? cloneElement(menuProp, menuProps) : null
 
   const setButtonRef = useCallback(
     (el: HTMLButtonElement | null) => {
@@ -157,11 +191,11 @@ export const MenuButton = forwardRef(function MenuButton(
     [ref]
   )
 
-  // @todo: check if the `button` property is a Button component?
   const button = useMemo(
     () =>
-      ReactIs.isElement(buttonProp)
+      isElement(buttonProp)
         ? cloneElement(buttonProp, {
+            'data-ui': 'MenuButton',
             id,
             onClick: handleButtonClick,
             onKeyDown: handleButtonKeyDown,
@@ -174,7 +208,7 @@ export const MenuButton = forwardRef(function MenuButton(
     [buttonProp, handleButtonClick, handleButtonKeyDown, id, open, setButtonRef]
   )
 
-  const popoverProps = useMemo(() => {
+  const popoverProps: PopoverProps = useMemo(() => {
     return {
       boundaryElement,
       placement,
@@ -187,7 +221,7 @@ export const MenuButton = forwardRef(function MenuButton(
   }, [boundaryElement, placement, popover, popoverRadius, portal, preventOverflow, popoverScheme])
 
   return (
-    <Popover {...popoverProps} content={menu} data-ui="MenuButton" open={open}>
+    <Popover {...popoverProps} content={menu} data-ui="MenuButton__popover" open={open}>
       {button || <></>}
     </Popover>
   )
