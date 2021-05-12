@@ -5,6 +5,8 @@ const path = require('path')
 const ROOT_PATH = path.resolve(__dirname, '../..')
 
 module.exports = {
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+
   webpack: (config) => {
     // Add monorepo sibling packages to includes
     config.module.rules[0].include.push(path.join(ROOT_PATH, 'packages/@sanity/color/src'))
@@ -15,10 +17,11 @@ module.exports = {
     // Aliases
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@sanity/color': path.join(ROOT_PATH, 'packages/@sanity/color/src'),
-      '@sanity/icons': path.join(ROOT_PATH, 'packages/@sanity/icons/src'),
+
+      '@sanity/color': path.resolve(ROOT_PATH, 'packages/@sanity/color/src'),
+      '@sanity/icons': path.resolve(ROOT_PATH, 'packages/@sanity/icons/src'),
       '@sanity/logos': path.join(ROOT_PATH, 'packages/@sanity/logos/src'),
-      '@sanity/ui': path.join(ROOT_PATH, 'packages/@sanity/ui/src'),
+      '@sanity/ui': path.resolve(ROOT_PATH, 'packages/@sanity/ui/src'),
 
       react: require.resolve('react'),
       'react-dom': require.resolve('react-dom'),

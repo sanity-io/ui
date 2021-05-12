@@ -2,7 +2,7 @@ import path from 'path'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import {defineConfig} from 'vite'
 
-const ROOT_PATH = path.join(__dirname, '..', '..')
+const ROOT_PATH = path.resolve(__dirname, '../..')
 
 export default defineConfig({
   build: {
@@ -17,19 +17,19 @@ export default defineConfig({
       },
       {
         find: '@sanity/color',
-        replacement: path.resolve(ROOT_PATH, 'color/src'),
+        replacement: path.resolve(ROOT_PATH, 'packages/@sanity/color/src'),
       },
       {
         find: '@sanity/icons',
-        replacement: path.resolve(ROOT_PATH, 'icons/src'),
+        replacement: path.resolve(ROOT_PATH, 'packages/@sanity/icons/src'),
       },
       {
         find: '@sanity/logos',
-        replacement: path.resolve(ROOT_PATH, 'logos/src'),
+        replacement: path.resolve(ROOT_PATH, 'packages/@sanity/logos/src'),
       },
       {
         find: '@sanity/ui',
-        replacement: path.resolve(ROOT_PATH, 'ui/src'),
+        replacement: path.resolve(ROOT_PATH, 'packages/@sanity/ui/src'),
       },
       {
         find: 'react',

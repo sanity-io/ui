@@ -6,19 +6,15 @@ This repository contains the various projects that make up the Sanity Design Sys
 
 ### Core libraries
 
-- [`@sanity/color`](color)
-- [`@sanity/icons`](icons)
-- [`@sanity/logos`](logos)
-- [`@sanity/ui`](ui)
+- [`@sanity/color`](packages/@sanity/color)
+- [`@sanity/icons`](packages/@sanity/icons)
+- [`@sanity/logos`](packages/@sanity/logos)
+- [`@sanity/ui`](packages/@sanity/ui)
 
 ### Documentation website
 
-- [`sanity-design-docs`](docs)
-- [`sanity-design-studio`](studio)
-
-### Test tools
-
-- [`sanity-design-perf-app`](perf/app)
+- [`sanity-design-docs`](apps/docs)
+- [`sanity-design-studio`](apps/studio)
 
 ## Documentation
 

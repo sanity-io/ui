@@ -1,5 +1,5 @@
 {
-  "packages": ["color", "docs", "examples/*", "icons", "logos", "perf/app", "studio", "ui"],
+  "packages": ["apps/*", "examples/*", "packages/@sanity/*"],
   "version": "independent",
   "useWorkspaces": true,
   "npmClient": "yarn"
