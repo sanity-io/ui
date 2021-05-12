@@ -11,8 +11,9 @@ export default defineScope('primitives/card', 'Card', [
   {name: 'as-button', title: 'As button', component: AsButtonStory},
 ])
 
-const AS_OPTIONS: {[key: string]: 'div' | 'span' | 'ol' | 'pre' | 'ul'} = {
+const AS_OPTIONS: {[key: string]: 'div' | 'button' | 'span' | 'ol' | 'pre' | 'ul'} = {
   'DIV (default)': 'div',
+  BUTTON: 'button',
   SPAN: 'span',
   OL: 'ol',
   PRE: 'pre',
@@ -64,6 +65,7 @@ function PropsStory() {
   const as = useSelect('As', AS_OPTIONS, 'div', 'Props')
   const padding = useSelect('Padding', SPACE_OPTIONS, 0, 'Props')
   const radius = useSelect('Radius', RADIUS_OPTIONS, 0, 'Props')
+  const selected = useBoolean('Selected', false, 'Props')
   const shadow = useSelect('Shadow', SHADOW_OPTIONS, 0, 'Props')
   const tone = useSelect('Tone', CARD_TONE_OPTIONS, 'default', 'Props')
 
@@ -75,6 +77,7 @@ function PropsStory() {
         onClick={useAction('onClick')}
         padding={padding}
         radius={radius}
+        selected={selected}
         shadow={shadow}
         tone={tone}
       >

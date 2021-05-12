@@ -73,6 +73,10 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps) {
         ${vars(base, card.disabled)}
       }
 
+      &[data-selected] {
+        ${vars(base, card.pressed)}
+      }
+
       &:not(:disabled) {
         @media (hover: hover) {
           &:hover {
@@ -99,6 +103,10 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps) {
     &[data-as='a'] {
       &[data-disabled] {
         ${vars(base, card.disabled)}
+      }
+
+      &[data-selected] {
+        ${vars(base, card.pressed)}
       }
 
       &:not([data-disabled]) {
