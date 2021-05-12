@@ -42,6 +42,7 @@ export function switchRepresentationStyles(props: ThemeProps) {
   return css`
     --switch-bg-color: ${color.default.enabled.bg};
     --switch-fg-color: ${color.default.enabled.fg};
+    --switch-box-shadow: none;
 
     &:not([hidden]) {
       display: block;
@@ -54,13 +55,26 @@ export function switchRepresentationStyles(props: ThemeProps) {
     /* Make sure it’s not possible to interact with the wrapper element */
     pointer-events: none;
 
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      box-shadow: var(--switch-box-shadow);
+      border-radius: inherit;
+    }
+
     /* Focus styles */
     input:focus + && {
-      box-shadow: ${focusRingStyle({focusRing})};
+      --switch-box-shadow: ${focusRingStyle({focusRing})};
     }
 
     input:focus:not(:focus-visible) + && {
-      box-shadow: none;
+      --switch-box-shadow: none;
     }
 
     input:checked + && {
