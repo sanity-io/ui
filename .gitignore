@@ -1,6 +1,7 @@
 .DS_Store
 /.vscode
 /lerna-debug.log
+/local_registry.log
 /node_modules
 /package-lock.json
 /yarn-error.log

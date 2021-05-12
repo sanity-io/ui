@@ -1,0 +1,47 @@
+#!/bin/bash
+
+function release_dryrun() {
+  # Build packages using lerna
+  yarn lerna bootstrap
+  yarn lerna version --no-git-tag-version --no-push --yes
+  yarn build
+
+  # Start local NPM registry
+  yarn rimraf local_registry.log
+  yarn verdaccio >> "local_registry.log" &
+  sleep 10 # probably not needed
+
+  # Configure sample user
+  local npm_username="test123"
+  local npm_password="test123"
+  local npm_email="test123@test123.com"
+  local npm_registry_url="http://localhost:4873"
+  yarn npm-cli-login -u "$npm_username" -p "$npm_password" -e "$npm_email" -r "$npm_registry_url"
+
+  # Execute publish in dry-run
+  yarn lerna publish from-package \
+      --registry "http://localhost:4873" \
+      --no-git-tag-version --no-push --yes \
+      --loglevel verbose
+
+  # Kill the verdaccio server
+  yarn kill-port 4873
+}
+
+# Try/catch
+(
+  set -e
+  release_dryrun
+)
+# and here we catch errors
+# catch
+errorCode=$?
+if [ $errorCode -ne 0 ]; then
+  echo "error: release_dryrun() failed"
+
+  # Kill the verdaccio server
+  yarn kill-port 4873
+
+  # Exit with error code
+  exit $errorCode
+fi
