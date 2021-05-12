@@ -73,8 +73,6 @@ export function useClickOutside(
     window.addEventListener('mousedown', handleWindowMouseDown)
 
     return () => {
-      console.log('useClickOutside.removeListener')
-
       window.removeEventListener('mousedown', handleWindowMouseDown)
     }
   }, [boundaryElement, listener, elements])
