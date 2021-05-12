@@ -34,11 +34,23 @@ export function useClickOutside(
     const nextElements = _getElements(element, elementsArg)
 
     if (prevElements.length !== nextElements.length) {
+      setElements(nextElements)
+      elementsRef.current = nextElements
+
       return
     }
 
     for (const el of prevElements) {
       if (!nextElements.includes(el)) {
+        setElements(nextElements)
+        elementsRef.current = nextElements
+
+        return
+      }
+    }
+
+    for (const el of nextElements) {
+      if (!prevElements.includes(el)) {
         setElements(nextElements)
         elementsRef.current = nextElements
 
