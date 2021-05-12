@@ -1,6 +1,7 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {
+  boxStyle,
   flexItemStyle,
   FlexItemStyleProps,
   responsiveBoxStyle,
@@ -36,6 +37,7 @@ const Root = styled.div<
     ResponsiveMarginStyleProps &
     ResponsivePaddingStyleProps
 >(
+  boxStyle,
   flexItemStyle,
   responsiveBoxStyle,
   responsiveGridItemStyle,
@@ -77,6 +79,7 @@ export const Box = forwardRef(
 
     return (
       <Root
+        data-as={asProp}
         data-ui="Box"
         {...restProps}
         $column={column}
