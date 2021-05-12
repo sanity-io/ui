@@ -55,8 +55,8 @@ export function AppNavbar() {
           <Flex align="center">
             <Flex align="center" flex={1}>
               <Link href="/" passHref>
-                <Inline as="a" space={2}>
-                  <SanityMonogram style={{fontSize: 25, verticalAlign: 'top'}} />
+                <Inline as="a" space={2} style={{textDecoration: 'none'}}>
+                  <SanityMonogram style={{fontSize: 25}} />
                   <Text size={[2, 2, 3]} weight="bold" style={{color: 'var(--card-fg-color)'}}>
                     UI
                   </Text>
