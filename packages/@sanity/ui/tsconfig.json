@@ -1,0 +1,15 @@
+{
+  "extends": "../../../tsconfig",
+  "include": ["./scripts", "./src", "./test", "./typings", "./workshop"],
+  "compilerOptions": {
+    "rootDir": "../../../",
+    "outDir": "./lib/dts/",
+    "jsx": "react",
+    "noEmit": true
+  },
+  "references": [
+    {"path": "../color/tsconfig.lib.json"},
+    {"path": "../icons/tsconfig.lib.json"},
+    {"path": "../ui-workshop/tsconfig.lib.json"}
+  ]
+}

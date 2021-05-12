@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./build/dts/",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -17,7 +18,12 @@
     "paths": {
       "$components": ["./components"],
       "$components/*": ["./components/*"],
-      "$theme": ["./theme"],
+      "$config": ["./config"],
+      "$lib/*": ["./lib/*"],
+      "$queries": ["./queries"],
+      "$sanity": ["./sanity"],
+      "$screens/*": ["./screens/*"],
+      "$sections": ["./sections"],
       "@sanity/color": ["../../packages/@sanity/color/src"],
       "@sanity/icons": ["../../packages/@sanity/icons/src"],
       "@sanity/logos": ["../../packages/@sanity/logos/src"],

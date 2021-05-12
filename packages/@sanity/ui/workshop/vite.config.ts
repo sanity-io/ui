@@ -1,14 +1,24 @@
 import path from 'path'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import {defineConfig} from 'vite'
+import {resolveWorkshopEnvPlugin} from './resolveStoriesPlugin'
 
-const ROOT_PATH = path.resolve(__dirname, '../..')
+const ROOT_PATH = path.join(__dirname, '../../../..')
 
 export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'public'),
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        frame: path.resolve(__dirname, 'frame/index.html'),
+      },
+    },
   },
-  plugins: [reactRefresh()],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+  },
+  plugins: [reactRefresh(), resolveWorkshopEnvPlugin()],
   resolve: {
     alias: [
       {
@@ -16,16 +26,20 @@ export default defineConfig({
         replacement: path.resolve(ROOT_PATH, 'packages/@sanity/color/src'),
       },
       {
-        find: '@sanity/icons',
-        replacement: path.resolve(ROOT_PATH, 'packages/@sanity/icons/src'),
-      },
-      {
         find: '@sanity/logos',
         replacement: path.resolve(ROOT_PATH, 'packages/@sanity/logos/src'),
       },
       {
+        find: '@sanity/icons',
+        replacement: path.resolve(ROOT_PATH, 'packages/@sanity/icons/src'),
+      },
+      {
         find: '@sanity/ui',
         replacement: path.resolve(ROOT_PATH, 'packages/@sanity/ui/src'),
+      },
+      {
+        find: '@sanity/ui-workshop',
+        replacement: path.resolve(ROOT_PATH, 'packages/@sanity/ui-workshop/src'),
       },
       {
         find: 'react',
@@ -41,8 +55,8 @@ export default defineConfig({
       },
     ],
   },
-  root: path.resolve(__dirname, 'src'),
+  root: __dirname,
   server: {
-    port: 3002,
+    port: 9009,
   },
 })

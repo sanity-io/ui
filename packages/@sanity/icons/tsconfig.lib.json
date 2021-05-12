@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tsconfig.settings",
+  "include": ["./src", "./typings"],
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "../../../",
+    "outDir": "./lib/dts/",
+    "jsx": "react"
+  }
+}

@@ -4,21 +4,18 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run --scope @sanity/* build",
-    "build-and-start:perf-app": "(cd perf/app && yarn build && yarn start)",
-    "build-and-start:workshop": "(cd ui && yarn workshop:build && yarn workshop:start)",
+    "build-and-start:workshop": "(cd packages/@sanity/ui && yarn workshop:build && yarn workshop:start)",
     "clean": "lerna run clean",
     "dev": "run-p dev:docs dev:ui watch:packages",
-    "dev:color": "lerna run --stream --scope @sanity/color dev",
     "dev:docs": "lerna run --stream --scope 'sanity-design-{docs,studio}' dev",
     "dev:example-manage": "lerna run --stream --scope sanity-design-example-manage dev",
     "dev:example-studio": "lerna run --stream --scope sanity-design-example-studio dev",
     "dev:example-web": "lerna run --stream --scope sanity-design-example-web dev",
-    "dev:perf": "lerna run --stream --scope 'sanity-design-{perf-app,studio}' dev",
     "dev:ui": "lerna run --stream --scope @sanity/ui dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
     "generate": "lerna run generate",
     "postinstall": "yarn husky install",
-    "release:dryrun": "./scripts/publish_dryrun",
+    "release:dryrun": "yarn build && ./scripts/publish_dryrun",
     "release:latest": "yarn build && lerna publish --dist-tag latest",
     "release:next": "yarn build && lerna publish --canary --force-publish --no-git-tag-version --dist-tag next --preid next",
     "lint": "lerna run --stream --parallel lint",
@@ -26,8 +23,6 @@
     "test:browser": "start-server-and-test 'yarn build-and-start:workshop' http://localhost:9009 'yarn test:cypress:run'",
     "test:cypress:open": "cypress open --config-file .cypress/cypress.json",
     "test:cypress:run": "cypress run --config-file .cypress/cypress.json",
-    "test:perf": "start-server-and-test 'yarn build-and-start:perf-app' http://localhost:9001 'yarn test:perf:run'",
-    "test:perf:run": "cd perf && node -r esbuild-register -r dotenv-flow/config lib/run.ts",
     "type-check": "lerna run --stream --parallel type-check",
     "watch:packages": "lerna run --stream --parallel --scope @sanity/* watch"
   },
@@ -84,15 +79,9 @@
     "yargs": "^17.0.1"
   },
   "workspaces": [
-    "color",
-    "docs",
+    "apps/*",
     "examples/*",
-    "icons",
-    "logos",
-    "perf/app",
-    "studio",
-    "tools/*",
-    "ui"
+    "packages/@sanity/*"
   ],
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint"

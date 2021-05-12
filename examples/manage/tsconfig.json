@@ -10,9 +10,9 @@
     "sourceMap": true
   },
   "references": [
-    {"path": "../../color/tsconfig.lib.json"},
-    {"path": "../../icons/tsconfig.lib.json"},
-    {"path": "../../logos/tsconfig.lib.json"},
-    {"path": "../../ui/tsconfig.lib.json"}
+    {"path": "../../packages/@sanity/color/tsconfig.lib.json"},
+    {"path": "../../packages/@sanity/icons/tsconfig.lib.json"},
+    {"path": "../../packages/@sanity/logos/tsconfig.lib.json"},
+    {"path": "../../packages/@sanity/ui/tsconfig.lib.json"}
   ]
 }
