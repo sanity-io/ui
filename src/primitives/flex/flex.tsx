@@ -9,15 +9,23 @@ import {
 import {Box, BoxProps} from '../box'
 import {ResponsiveFlexProps, ResponsiveFlexItemProps} from '../types'
 
-interface FlexProps extends BoxProps, ResponsiveFlexProps, ResponsiveFlexItemProps {}
+export interface FlexProps
+  extends Omit<BoxProps, 'display'>,
+    ResponsiveFlexProps,
+    ResponsiveFlexItemProps {
+  gap?: number | number[]
+}
 
 const Root = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
   flexItemStyle,
   responsiveFlexStyle
 )
 
-export const Flex = forwardRef((props: FlexProps & React.HTMLProps<HTMLDivElement>, ref) => {
-  const {align, as, direction = 'row', justify, wrap, ...restProps} = props
+export const Flex = forwardRef(function Flex(
+  props: FlexProps & Omit<React.HTMLProps<HTMLDivElement>, 'wrap'>,
+  ref
+) {
+  const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
 
   return (
     <Root
@@ -25,6 +33,7 @@ export const Flex = forwardRef((props: FlexProps & React.HTMLProps<HTMLDivElemen
       {...restProps}
       $align={align}
       $direction={direction}
+      $gap={gap}
       $justify={justify}
       $wrap={wrap}
       forwardedAs={as}
@@ -32,5 +41,3 @@ export const Flex = forwardRef((props: FlexProps & React.HTMLProps<HTMLDivElemen
     />
   )
 })
-
-Flex.displayName = 'Flex'

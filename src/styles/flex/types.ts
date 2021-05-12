@@ -12,6 +12,7 @@ export type FlexWrap = 'wrap' | 'wrap-reverse' | 'nowrap'
 export interface ResponsiveFlexStyleProps {
   $align?: FlexAlign | FlexAlign[]
   $direction?: FlexDirection | FlexDirection[]
+  $gap?: number | number[]
   $justify?: FlexJustify | FlexJustify[]
   $wrap?: FlexWrap | FlexWrap[]
 }
