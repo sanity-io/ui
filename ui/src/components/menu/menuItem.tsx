@@ -11,11 +11,13 @@ import {useForwardedRef} from '../../hooks'
 import {Box, Card, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
 import {ThemeColorToneKey} from '../../theme'
+import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
 
 interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
+  hotkeys?: string[]
   icon?: React.ComponentType | React.ReactNode
   iconRight?: React.ComponentType | React.ReactNode
   selected?: boolean
@@ -33,6 +35,7 @@ export const MenuItem = forwardRef(
       children,
       disabled,
       fontSize = 2,
+      hotkeys,
       icon,
       iconRight,
       onClick,
@@ -115,6 +118,12 @@ export const MenuItem = forwardRef(
                   marginRight={iconRight ? space : undefined}
                 >
                   <Text size={fontSize}>{text}</Text>
+                </Box>
+              )}
+
+              {hotkeys && (
+                <Box marginLeft={space} style={{marginTop: -4, marginBottom: -4}}>
+                  <Hotkeys fontSize={fontSize} keys={hotkeys} />
                 </Box>
               )}
 

@@ -1,11 +1,11 @@
 import {AddIcon, ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
 import {
-  Avatar,
   Box,
   Button,
   Card,
   Code,
   Grid,
+  Inline,
   LayerProvider,
   Menu,
   MenuButton,
@@ -20,7 +20,7 @@ import React, {useRef, useState} from 'react'
 export default defineScope('components/menu', 'Menu', [
   {name: 'props', title: 'Props', component: MenuStory},
   {name: 'menu-button', title: 'MenuButton', component: MenuButtonStory},
-  {name: 'with-group', title: 'With group', component: WithGroupStory},
+  {name: 'groups', title: 'Groups', component: GroupsStory},
   {name: 'tones', title: 'Tones', component: MenuItemTonesStory},
   {name: 'selected-item', title: 'Selected item', component: SelectedItemStory},
   {name: 'closable', title: 'Closeable', component: ClosableMenuButtonStory},
@@ -46,11 +46,10 @@ function MenuStory() {
 
 function MenuButtonStory() {
   return (
-    <LayerProvider>
-      <Box padding={[4, 5, 6]}>
-        <Grid columns={3} gap={2}>
-          <Button id="prev-button" mode="ghost" text="Prev" />
-
+    <Box padding={[4, 5, 6]}>
+      <Grid columns={3} gap={2}>
+        <Button id="prev-button" mode="ghost" text="Prev" />
+        <LayerProvider>
           <MenuButton
             button={<Button tone="primary" text="Open" />}
             id="menu-button"
@@ -84,48 +83,142 @@ function MenuButtonStory() {
                 />
               </Menu>
             }
-            popover={{constrainSize: true}}
+            popover={{constrainSize: true, portal: true}}
           />
-
-          <Button mode="ghost" id="next-button" text="Next" />
-        </Grid>
-      </Box>
-    </LayerProvider>
+        </LayerProvider>
+        <Button mode="ghost" id="next-button" text="Next" />
+      </Grid>
+    </Box>
   )
 }
 
-function WithGroupStory() {
+function GroupsStory() {
   return (
-    <LayerProvider>
-      <Box padding={[4, 5, 6]}>
-        <MenuButton
-          button={<Avatar as="button" color="magenta" size={2} />}
-          id="example"
-          menu={
-            <Menu>
-              <MenuItem icon={SearchIcon} onClick={useAction('Search')} text="Search" />
-              <MenuItem icon={ClockIcon} onClick={useAction('Clock')} text="Clock" />
-              <MenuItem disabled icon={CommentIcon} onClick={useAction('Comment')} text="Comment" />
-              <MenuGroup title="test">
-                <MenuItem icon={SearchIcon} onClick={useAction('Search')} text="Search" />
-                <MenuItem icon={ClockIcon} onClick={useAction('Clock')} text="Clock" />
-                <MenuItem
-                  disabled
-                  icon={CommentIcon}
-                  onClick={useAction('Comment')}
-                  text="Comment"
-                />
-                <MenuDivider />
-                <MenuItem icon={ExpandIcon} onClick={useAction('Expand')} text="Expand" />
-              </MenuGroup>
-              <MenuDivider />
-              <MenuItem icon={ExpandIcon} onClick={useAction('Expand')} text="Expand" />
-            </Menu>
-          }
-          popover={{constrainSize: true, preventOverflow: true}}
-        />
-      </Box>
-    </LayerProvider>
+    <Box padding={[4, 5, 6]}>
+      <Card padding={1} radius={3} shadow={1}>
+        <Inline space={1}>
+          <LayerProvider>
+            <MenuButton
+              button={<Button fontSize={1} mode="bleed" padding={2} text="File" />}
+              id="example"
+              menu={
+                <Menu>
+                  <MenuItem
+                    fontSize={1}
+                    hotkeys={['⌘', 'T']}
+                    onClick={useAction('New tab')}
+                    padding={2}
+                    text="New tab"
+                  />
+                  <MenuItem
+                    fontSize={1}
+                    hotkeys={['⌘', 'N']}
+                    onClick={useAction('New window')}
+                    padding={2}
+                    text="New window"
+                  />
+                  <MenuItem
+                    fontSize={1}
+                    hotkeys={['⇧', '⌘', 'T']}
+                    onClick={useAction('Reopen closed tab')}
+                    padding={2}
+                    text="Reopen closed tab"
+                  />
+                  <MenuItem
+                    fontSize={1}
+                    hotkeys={['⌘', 'O']}
+                    onClick={useAction('Open file…')}
+                    padding={2}
+                    text="Open file…"
+                  />
+                  <MenuItem
+                    fontSize={1}
+                    hotkeys={['⌘', 'L']}
+                    onClick={useAction('Open location…')}
+                    padding={2}
+                    text="Open location…"
+                  />
+                  <MenuDivider />
+                  <MenuGroup
+                    fontSize={1}
+                    onClick={useAction('Share')}
+                    padding={2}
+                    popover={{placement: 'right-start', portal: true}}
+                    text="Share"
+                  >
+                    <MenuItem
+                      fontSize={1}
+                      onClick={useAction('Share / Email link')}
+                      padding={2}
+                      text="Email link"
+                    />
+                    <MenuItem
+                      fontSize={1}
+                      onClick={useAction('Share / Messages')}
+                      padding={2}
+                      text="Messages"
+                    />
+                    <MenuItem
+                      fontSize={1}
+                      onClick={useAction('Share / Airdrop')}
+                      padding={2}
+                      text="Airdrop"
+                    />
+                    <MenuItem fontSize={1} onClick={useAction('Notes')} padding={2} text="Notes" />
+                    <MenuGroup
+                      fontSize={1}
+                      onClick={useAction('Share / More')}
+                      padding={2}
+                      popover={{placement: 'right-start', portal: true}}
+                      text="More"
+                    >
+                      <MenuItem
+                        fontSize={1}
+                        onClick={useAction('Share / More / Email link')}
+                        padding={2}
+                        text="Email link"
+                      />
+                      <MenuItem
+                        fontSize={1}
+                        onClick={useAction('Share / More / Messages')}
+                        padding={2}
+                        text="Messages"
+                      />
+                      <MenuItem
+                        fontSize={1}
+                        onClick={useAction('Share / More / Airdrop')}
+                        padding={2}
+                        text="Airdrop"
+                      />
+                      <MenuItem
+                        fontSize={1}
+                        onClick={useAction('Share / More / Notes')}
+                        padding={2}
+                        text="Notes"
+                      />
+                    </MenuGroup>
+                  </MenuGroup>
+                  <MenuDivider />
+                  <MenuItem
+                    fontSize={1}
+                    hotkeys={['⌘', 'P']}
+                    onClick={useAction('Print…')}
+                    padding={2}
+                    text="Print…"
+                  />
+                </Menu>
+              }
+              popover={{constrainSize: true, portal: true, preventOverflow: true}}
+            />
+          </LayerProvider>
+
+          <Button disabled fontSize={1} mode="bleed" padding={2} text="Edit" />
+          <Button disabled fontSize={1} mode="bleed" padding={2} text="View" />
+          <Button disabled fontSize={1} mode="bleed" padding={2} text="Window" />
+          <Button disabled fontSize={1} mode="bleed" padding={2} text="Help" />
+        </Inline>
+      </Card>
+    </Box>
   )
 }
 

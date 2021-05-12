@@ -6,9 +6,12 @@ export interface MenuContextValue {
   activeElement: HTMLElement | null
   activeIndex: number
   mount: (element: HTMLElement | null, selected?: boolean) => () => void
+  onClickOutside?: (event: MouseEvent) => void
+  onEscape?: () => void
   onItemClick?: () => void
   onMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
   onMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
+  registerElement?: (el: HTMLElement) => () => void
 }
 
 const key = Symbol.for('@sanity/ui/context/menu')

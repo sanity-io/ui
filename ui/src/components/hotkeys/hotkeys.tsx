@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import {Inline, KBD} from '../../primitives'
 
 interface HotkeysProps {
+  fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
-  size?: number | number[]
   space?: number | number[]
   keys?: string[]
 }
@@ -25,20 +25,20 @@ const Key = styled(KBD)`
 
 export const Hotkeys = forwardRef(
   (
-    props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref'>,
+    props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
     ref: React.Ref<HTMLElement>
   ) => {
-    const {keys, padding, radius, size, space = 1, ...restProps} = props
+    const {fontSize, keys, padding, radius, space = 1, ...restProps} = props
 
     if (!keys || keys.length === 0) {
-      return <span />
+      return <></>
     }
 
     return (
       <Root data-ui="Hotkeys" {...restProps} ref={ref}>
         <Inline as="span" space={space}>
           {keys.map((key, i) => (
-            <Key fontSize={size} key={i} padding={padding} radius={radius}>
+            <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
               {key}
             </Key>
           ))}
