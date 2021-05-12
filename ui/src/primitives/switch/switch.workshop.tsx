@@ -54,13 +54,15 @@ function ExampleStory() {
   }, [])
 
   return (
-    <Flex align="center" as="label">
-      <Switch checked={checked || false} indeterminate={indeterminate} onChange={handleChange} />
-      <Box marginLeft={3}>
-        <Text size={1} weight="semibold">
-          Label
-        </Text>
-      </Box>
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <Flex align="center" as="label">
+        <Switch checked={checked || false} indeterminate={indeterminate} onChange={handleChange} />
+        <Box marginLeft={3}>
+          <Text size={1} weight="semibold">
+            Label
+          </Text>
+        </Box>
+      </Flex>
     </Flex>
   )
 }
