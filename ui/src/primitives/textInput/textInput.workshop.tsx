@@ -10,7 +10,7 @@ import {
   TextInputType,
   ThemeFontWeightKey,
 } from '@sanity/ui'
-import {defineScope, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
+import {defineScope, useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import React, {useCallback, useState} from 'react'
 
 export default defineScope('primitives/text-input', 'TextInput', [
@@ -222,29 +222,41 @@ function MultipleTonesStory() {
 }
 
 function StatesStory() {
+  const onChange = useAction('onChange')
+
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={1}>
         <Stack space={5}>
           <Stack space={3}>
             <Text size={1} weight="semibold">
-              Enabled (default)
+              <label htmlFor="enabled-example">Enabled (default)</label>
             </Text>
-            <TextInput value="This is some text" />
+            <TextInput id="enabled-example" onChange={onChange} value="This is some text" />
           </Stack>
 
           <Stack space={3}>
             <Text size={1} weight="semibold">
-              Disabled
+              <label htmlFor="disabled-example">Disabled</label>
             </Text>
-            <TextInput disabled value="This is some text" />
+            <TextInput
+              disabled
+              id="disabled-example"
+              onChange={onChange}
+              value="This is some text"
+            />
           </Stack>
 
           <Stack space={3}>
             <Text size={1} weight="semibold">
-              Read-only
+              <label htmlFor="read-only-example">Read-only</label>
             </Text>
-            <TextInput readOnly value="This is some text" />
+            <TextInput
+              id="read-only-example"
+              readOnly
+              onChange={onChange}
+              value="This is some text"
+            />
           </Stack>
         </Stack>
       </Container>
