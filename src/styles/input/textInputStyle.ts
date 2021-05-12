@@ -80,7 +80,7 @@ export function textInputBaseStyle(
     }
 
     /* enabled */
-    &:not(:invalid):not(:disabled) {
+    &:not(:invalid):not(:disabled):not(:read-only) {
       --input-fg-color: ${color.default.enabled.fg};
       --input-placeholder-color: ${color.default.enabled.placeholder};
     }
@@ -95,6 +95,12 @@ export function textInputBaseStyle(
     &:invalid {
       --input-fg-color: ${color.invalid.enabled.fg};
       --input-placeholder-color: ${color.invalid.enabled.placeholder};
+    }
+
+    /* readOnly */
+    &:read-only {
+      --input-fg-color: ${color.default.readOnly.fg};
+      --input-placeholder-color: ${color.default.readOnly.placeholder};
     }
   `
 }
@@ -158,7 +164,7 @@ export function textInputRepresentationStyle(
     }
 
     /* focused */
-    *:not(:disabled):not(:read-only):focus + && {
+    *:not(:disabled):focus + && {
       --input-box-shadow: ${focusRingStyle({
         border: $border
           ? {color: color.default.enabled.border, width: input.border.width}
@@ -194,6 +200,12 @@ export function textInputRepresentationStyle(
             })
           : 'none'};
       }
+    }
+
+    /* readOnly */
+    *:read-only + && {
+      --card-bg-color: ${color.default.readOnly.bg};
+      --card-fg-color: ${color.default.readOnly.fg};
     }
   `
 }
