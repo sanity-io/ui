@@ -150,6 +150,7 @@ export interface ThemeColorInputStates {
   enabled: ThemeColorInputState
   disabled: ThemeColorInputState
   hovered: ThemeColorInputState
+  readOnly: ThemeColorInputState
 }
 
 export interface ThemeColorInput {
@@ -232,7 +233,7 @@ export interface ThemeColorBuilderOpts {
     muted: ThemeColorMutedTone
     dark: boolean
     mode: 'default' | 'invalid'
-    state: 'enabled' | 'disabled' | 'hovered'
+    state: 'enabled' | 'disabled' | 'hovered' | 'readOnly'
   }) => ThemeColorInputState
   syntax: (opts: {base: ThemeColorBase; dark: boolean}) => ThemeColorSyntax
   spot: (opts: {base: ThemeColorBase; dark: boolean; key: ThemeColorSpotKey}) => string
