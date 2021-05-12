@@ -1,4 +1,5 @@
 import {Property} from 'csstype'
+import {css} from 'styled-components'
 import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBoxStyleProps} from './types'
@@ -11,6 +12,15 @@ const BOX_SIZING: {[key: string]: Property.BoxSizing} = {
 const BOX_HEIGHT = {
   stretch: 'stretch',
   fill: '100%',
+}
+
+export function boxStyle() {
+  return css`
+    &[data-as='ul'],
+    &[data-as='ol'] {
+      list-style: none;
+    }
+  `
 }
 
 export function responsiveBoxStyle() {
