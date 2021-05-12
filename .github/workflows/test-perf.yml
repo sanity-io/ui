@@ -32,9 +32,6 @@ jobs:
       - name: Install packages
         run: yarn install
 
-      - name: Build packages
-        run: yarn build
-
       - name: Run tests
         run: NODE_ENV=production yarn test:perf
         env:
