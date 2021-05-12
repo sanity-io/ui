@@ -170,6 +170,7 @@ export function MenuGroup(
         onMouseLeave={handleMouseLeave}
         radius={radius}
         ref={rootRef}
+        selected={open}
       >
         <Box padding={padding}>
           <TextContainer>

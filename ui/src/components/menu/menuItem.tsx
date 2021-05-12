@@ -98,6 +98,7 @@ export const MenuItem = forwardRef(
         radius={radius}
         ref={setRef}
         role="menuitem"
+        selected={selected}
         tabIndex={-1}
         type="button"
       >
