@@ -26,9 +26,7 @@ export function useClickOutside(
   boundaryElement?: HTMLElement | null
 ) {
   const [element, setElement] = useState<HTMLElement | null>(null)
-  const [elements, setElements] = useState(() => {
-    return _getElements(element, elementsArg)
-  })
+  const [elements, setElements] = useState(() => _getElements(element, elementsArg))
   const elementsRef = useRef(elements)
 
   useEffect(() => {
@@ -55,34 +53,30 @@ export function useClickOutside(
     const handleWindowMouseDown = (evt: MouseEvent) => {
       const target = evt.target
 
-      if (!target) {
+      if (!(target instanceof Node)) {
         return
       }
 
-      if (boundaryElement && !boundaryElement.contains(target as Node)) {
+      if (boundaryElement && !boundaryElement.contains(target)) {
         return
       }
-
-      let clickInside = false
 
       for (const el of elements) {
-        if (el.contains(target as Node)) {
-          clickInside = true
+        if (target === el || el.contains(target)) {
+          return
         }
       }
 
-      if (!clickInside) {
-        listener(evt)
-      }
+      listener(evt)
     }
 
     window.addEventListener('mousedown', handleWindowMouseDown)
 
     return () => {
+      console.log('useClickOutside.removeListener')
+
       window.removeEventListener('mousedown', handleWindowMouseDown)
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [boundaryElement, listener, elements])
 
   return setElement
