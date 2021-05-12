@@ -53,7 +53,7 @@ export function ScreenHeroSection({data}: {data: any}) {
           )}
 
           {data.ctas && (
-            <Inline space={2} style={{textAlign: 'center'}}>
+            <Inline justify="center" space={2}>
               {data.ctas.map((cta: any) => (
                 <Link href={cta.href} key={cta._key} passHref>
                   <Button
