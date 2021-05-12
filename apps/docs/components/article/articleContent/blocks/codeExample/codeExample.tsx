@@ -55,8 +55,8 @@ export function CodeExample(props: {
           <Canvas onCatch={onCatch} padding={[3, 3, 4]} result={jsxResult} />
         </Card>
 
-        <Card borderBottom paddingX={4} paddingY={2} style={{textAlign: 'center'}}>
-          <TabList space={[1, 1, 2]}>
+        <Card borderBottom paddingX={4} paddingY={2}>
+          <TabList justify="center" space={[1, 1, 2]}>
             <Tab
               aria-controls="mode-jsx-panel"
               fontSize={1}
