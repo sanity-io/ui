@@ -19,7 +19,6 @@
     "dev": "(cd workshop && vite)",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "yarn clean",
-    "prepublishOnly": "yarn build",
     "workshop:build": "(cd workshop && rimraf public && NODE_ENV=production vite build)",
     "workshop:start": "http-server -a localhost -c-0 -p 9009 -s -P http://localhost:9009/index.html? workshop/public",
     "test": "jest",

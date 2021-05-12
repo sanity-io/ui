@@ -18,7 +18,6 @@
     "copy:dts:es": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "yarn clean",
-    "prepublishOnly": "yarn build",
     "type-check": "tsc -b",
     "watch": "run-p watch:*",
     "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir lib/cjs --project tsconfig.lib.json --rootDir src --target ES5",

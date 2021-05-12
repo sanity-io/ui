@@ -19,7 +19,6 @@
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts",
     "prebuild": "yarn clean && yarn generate",
-    "prepublishOnly": "yarn build",
     "type-check": "tsc -b",
     "watch": "run-p watch:*",
     "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir lib/cjs --project tsconfig.lib.json --rootDir src --target ES5",
