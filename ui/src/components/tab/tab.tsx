@@ -1,6 +1,6 @@
 import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
 import {useForwardedRef} from '../../hooks'
-import {Button} from '../../primitives'
+import {Button, ButtonTone} from '../../primitives'
 
 interface TabProps {
   /**
@@ -14,6 +14,7 @@ interface TabProps {
   label?: React.ReactNode
   padding?: number | number[]
   selected?: boolean
+  tone?: ButtonTone
 }
 
 export const Tab = forwardRef(
