@@ -329,6 +329,14 @@ function createColor(opts: ThemeColorBuilderOpts, dark: boolean, name: ThemeColo
         solid: solid.default,
         muted: muted.default,
       }),
+      readOnly: opts.input({
+        base,
+        dark,
+        mode: 'default',
+        state: 'readOnly',
+        solid: solid.default,
+        muted: muted.default,
+      }),
     },
     invalid: {
       enabled: opts.input({
@@ -352,6 +360,14 @@ function createColor(opts: ThemeColorBuilderOpts, dark: boolean, name: ThemeColo
         dark,
         mode: 'invalid',
         state: 'hovered',
+        solid: solid.default,
+        muted: muted.default,
+      }),
+      readOnly: opts.input({
+        base,
+        dark,
+        mode: 'invalid',
+        state: 'readOnly',
         solid: solid.default,
         muted: muted.default,
       }),
