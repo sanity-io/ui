@@ -13049,16 +13049,16 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-sanity@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/next-sanity/-/next-sanity-0.1.12.tgz#324abdb073c9d1ed028d6a133fac315de337058f"
-  integrity sha512-hZlxaBCIX08mh/pFjzShACl0IZQ8PoKUec9mnwvZmhgELyFnjXBqwFyzrKh+M9LpqyyX9+9IT9xkQq2rOPxPzQ==
+next-sanity@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/next-sanity/-/next-sanity-0.2.0.tgz#4e2d01ef6eabfc870f85d6e7b4915d2bcc9c479f"
+  integrity sha512-tN3N+DQyoBTpqGPQIhVUWdfUbcGeE09EVjHe/npyQvRRb5zPpmWP1AmoJ3Nzd/QwRrDBPIbOkBW2/YCh+72U7A==
   dependencies:
     "@sanity/block-content-to-react" "^2.0.7"
+    "@sanity/client" "^2.8.0"
     "@sanity/groq-store" "^0.1.3"
     "@sanity/image-url" "^0.140.22"
     groq "^2.2.6"
-    picosanity "^2.3.0"
     use-deep-compare-effect "^1.6.1"
 
 next-tick@1, next-tick@^1.1.0:
@@ -13132,7 +13132,7 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-node-fetch@2.6.1, node-fetch@^2.6.0, node-fetch@^2.6.1:
+node-fetch@2.6.1, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -14228,13 +14228,6 @@ picomatch@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.3.tgz#465547f359ccc206d3c48e46a1bcb89bf7ee619d"
   integrity sha512-KpELjfwcCDUb9PeigTs2mBJzXUPzAuP2oPcA989He8Rte0+YUAjw1JVedDhuTKPkHjSYzMN3npC9luThGYEKdg==
-
-picosanity@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/picosanity/-/picosanity-2.3.0.tgz#73483d9bb2dee974afd4708e4fa9b983eca16424"
-  integrity sha512-92pkZzUM77jJBojYGRMR0IZSu7J4kWNYx41/oqLJjzKxHiFxpA+vBauLqBUA23LajXnAKDdr4OVvDKlcGcvjNQ==
-  dependencies:
-    node-fetch "^2.6.0"
 
 pidtree@^0.3.0:
   version "0.3.1"
