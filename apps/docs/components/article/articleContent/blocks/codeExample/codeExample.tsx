@@ -56,7 +56,7 @@ export function CodeExample(props: {
         </Card>
 
         <Card borderBottom paddingX={4} paddingY={2}>
-          <TabList justify="center" space={[1, 1, 2]}>
+          <TabList space={[1, 1, 2]} style={{textAlign: 'center'}}>
             <Tab
               aria-controls="mode-jsx-panel"
               fontSize={1}

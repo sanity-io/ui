@@ -9,7 +9,7 @@ export function AppFooter() {
 
   return (
     <Card borderTop paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} style={{minHeight: 'auto'}}>
-      <Inline justify="center" space={1}>
+      <Inline space={1} style={{textAlign: 'center'}}>
         <Text muted size={[1, 1, 2]}>
           By
         </Text>
