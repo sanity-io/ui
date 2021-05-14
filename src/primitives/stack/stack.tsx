@@ -1,19 +1,27 @@
 import React, {forwardRef} from 'react'
-import {Flex, FlexProps} from '../flex'
+import styled from 'styled-components'
+import {Box, BoxProps} from '../box'
+import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
-export interface StackProps extends Omit<FlexProps, 'direction' | 'display' | 'gap'> {
+interface StackProps extends BoxProps {
   space?: number | number[]
 }
 
-export const Stack = forwardRef(function Stack(
-  props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'wrap'>,
-  ref
-) {
-  const {children, space, ...restProps} = props
+const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
+
+export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElement>, ref) => {
+  const {as, space, ...restProps} = props
 
   return (
-    <Flex data-ui="Stack" {...restProps} direction="column" gap={space} ref={ref}>
-      {children}
-    </Flex>
+    <Root
+      data-as={typeof as === 'string' ? as : undefined}
+      data-ui="Stack"
+      {...restProps}
+      $space={space}
+      forwardedAs={as}
+      ref={ref}
+    />
   )
 })
+
+Stack.displayName = 'Stack'
