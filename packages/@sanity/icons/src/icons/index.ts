@@ -4,6 +4,7 @@
 
 import {IconComponent} from '../types'
 
+import {default as AccessDeniedIcon} from './accessDeniedIcon'
 import {default as ActivityIcon} from './activityIcon'
 import {default as AddCircleIcon} from './addCircleIcon'
 import {default as AddIcon} from './addIcon'
@@ -144,6 +145,7 @@ import {default as WarningFilledIcon} from './warningFilledIcon'
 import {default as WarningOutlineIcon} from './warningOutlineIcon'
 
 export type IconSymbol =
+  | 'access-denied'
   | 'activity'
   | 'add-circle'
   | 'add'
@@ -284,6 +286,7 @@ export type IconSymbol =
   | 'warning-outline'
 
 export {
+  AccessDeniedIcon,
   ActivityIcon,
   AddCircleIcon,
   AddIcon,
@@ -425,6 +428,7 @@ export {
 }
 
 export interface IconMap {
+  'access-denied': IconComponent
   activity: IconComponent
   'add-circle': IconComponent
   add: IconComponent
@@ -566,6 +570,7 @@ export interface IconMap {
 }
 
 export const icons: IconMap = {
+  'access-denied': AccessDeniedIcon,
   activity: ActivityIcon,
   'add-circle': AddCircleIcon,
   add: AddIcon,
