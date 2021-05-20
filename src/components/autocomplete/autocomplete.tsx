@@ -166,6 +166,7 @@ const InnerAutocomplete = forwardRef(
       popover = {},
       prefix,
       radius = 2,
+      readOnly,
       renderOption: renderOptionProp,
       renderValue = defaultRenderValue,
       value: valueProp = '',
@@ -404,7 +405,7 @@ const InnerAutocomplete = forwardRef(
 
     const openButtonNode = useMemo(
       () =>
-        openButton ? (
+        !disabled && !readOnly && openButton ? (
           <Box padding={openButtonBoxPadding}>
             <Button
               {...openButtonProps}
@@ -417,12 +418,14 @@ const InnerAutocomplete = forwardRef(
           </Box>
         ) : undefined,
       [
+        disabled,
         fontSize,
         handleOpenClick,
         openButton,
         openButtonBoxPadding,
         openButtonPadding,
         openButtonProps,
+        readOnly,
       ]
     )
 
@@ -494,6 +497,7 @@ const InnerAutocomplete = forwardRef(
             padding={padding}
             prefix={prefix}
             radius={radius}
+            readOnly={readOnly}
             ref={setRef}
             role="combobox"
             spellCheck={false}

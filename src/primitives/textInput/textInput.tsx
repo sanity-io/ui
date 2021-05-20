@@ -131,6 +131,7 @@ export const TextInput = forwardRef(
       padding: paddingProp = 3,
       prefix,
       radius = 1,
+      readOnly,
       space = 3,
       suffix,
       customValidity,
@@ -220,6 +221,8 @@ export const TextInput = forwardRef(
     )
     const clearButtonNode = useMemo(
       () =>
+        !disabled &&
+        !readOnly &&
         clearButton && (
           <RightBox padding={clearButtonBoxPadding} style={CLEAR_BUTTON_BOX_STYLE}>
             <Button
@@ -239,9 +242,11 @@ export const TextInput = forwardRef(
         clearButtonBoxPadding,
         clearButtonPadding,
         clearButtonProps,
+        disabled,
         fontSize,
         handleClearClick,
         handleClearMouseDown,
+        readOnly,
       ]
     )
 
@@ -269,6 +274,7 @@ export const TextInput = forwardRef(
             $space={space}
             $fontSize={fontSize}
             disabled={disabled}
+            readOnly={readOnly}
             ref={ref}
             type={type}
           />
