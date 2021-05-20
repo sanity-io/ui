@@ -38,7 +38,7 @@ export function inputElementStyles(props: ThemeProps) {
       })};
       border-radius: ${rem(radius[2])};
       line-height: 1;
-      background: ${color.default.enabled.bg};
+      background-color: ${color.default.enabled.bg};
 
       & > svg {
         display: block;
@@ -72,8 +72,17 @@ export function inputElementStyles(props: ThemeProps) {
       opacity: 1;
     }
 
+    &[data-read-only] + span {
+      background-color: ${color.default.readOnly.bg};
+      box-shadow: ${focusRingBorderStyle({
+        width: input.border.width,
+        color: color.default.readOnly.border,
+      })};
+      color: ${color.default.readOnly.fg};
+    }
+
     &:not([data-read-only]):disabled + span {
-      background: ${color.default.disabled.bg};
+      background-color: ${color.default.disabled.bg};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
         color: color.default.disabled.border,
