@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-docs",
-  "version": "0.1.44",
+  "version": "0.1.45",
   "scripts": {
     "build": "next build",
     "clean": "rimraf .next",
@@ -17,7 +17,7 @@
     "@sanity/color": "^2.0.17",
     "@sanity/icons": "^1.0.9",
     "@sanity/logos": "^1.0.7",
-    "@sanity/ui": "^0.33.25",
+    "@sanity/ui": "^0.33.26",
     "codemirror": "^5.61.0",
     "date-fns": "^2.21.3",
     "lodash": "^4.17.21",
