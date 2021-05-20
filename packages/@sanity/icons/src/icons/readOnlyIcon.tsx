@@ -10,7 +10,7 @@ function ReadOnlyIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       data-sanity-icon="read-only"
       width="1em"
       height="1em"
-      viewBox="0 0 17 16"
+      viewBox="-3 -5 20 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       ref={svgRef}
