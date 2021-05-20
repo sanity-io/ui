@@ -82,6 +82,16 @@ export function inputElementStyle(props: ThemeProps) {
       opacity: 1;
     }
 
+    /* read only */
+    &[data-read-only] + span {
+      box-shadow: 0 0 0 1px ${color.default.readOnly.border};
+      background: ${color.default.readOnly.bg};
+
+      &::after {
+        background: ${color.default.readOnly.fg};
+      }
+    }
+
     /* disabled */
     &:not([data-read-only]):disabled + span {
       box-shadow: 0 0 0 1px ${color.default.disabled.border};
