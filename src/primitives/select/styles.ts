@@ -73,6 +73,16 @@ function inputColorStyle(props: ThemeProps) {
       })};
     }
 
+    /* read-only */
+    &[data-read-only] {
+      background-color: ${color.default.readOnly.bg};
+      color: ${color.default.readOnly.fg};
+      box-shadow: ${focusRingBorderStyle({
+        color: color.default.readOnly.border,
+        width: input.border.width,
+      })};
+    }
+
     /* disabled */
     &:not([data-read-only]):disabled {
       background-color: ${color.default.disabled.bg};
@@ -135,7 +145,7 @@ function iconBoxStyle(props: ThemeProps) {
 
     /* read-only */
     select[data-read-only] + && {
-      opacity: 0;
+      --card-fg-color: ${color.default.readOnly.fg};
     }
   `
 }
