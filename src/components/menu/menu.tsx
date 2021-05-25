@@ -8,13 +8,23 @@ import {getFocusableElements} from './helpers'
 import {MenuContext, MenuContextValue} from './menuContext'
 
 export interface MenuProps extends ResponsivePaddingProps {
+  /**
+   * Use `shouldFocus="first" instead.
+   * @deprecated
+   */
   focusFirst?: boolean
+  /**
+   * Use `shouldFocus="last" instead.
+   * @deprecated
+   */
   focusLast?: boolean
   onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
   onItemClick?: () => void
   onItemSelect?: (index: number) => void
+  originElement?: HTMLElement | null
   registerElement?: (el: HTMLElement) => () => void
+  shouldFocus?: 'first' | 'last' | null
   space?: number | number[]
 }
 
@@ -30,15 +40,17 @@ export const Menu = forwardRef(
   ) => {
     const {
       children,
-      focusFirst = true,
+      focusFirst,
       focusLast,
       onClickOutside,
       onEscape,
       onItemClick,
       onItemSelect,
       onKeyDown,
+      originElement,
       padding = 1,
       registerElement,
+      shouldFocus = (props.focusFirst && 'first') || (props.focusLast && 'last') || null,
       space = 1,
       ...restProps
     } = props
@@ -61,9 +73,7 @@ export const Menu = forwardRef(
 
     // Auto-focus item after render
     useEffect(() => {
-      const doFocus = focusFirst || focusLast
-
-      if (!doFocus) return
+      if (!shouldFocus) return
 
       const rafId = window.requestAnimationFrame(() => {
         if (rootElement) {
@@ -74,7 +84,7 @@ export const Menu = forwardRef(
             return
           }
 
-          const element = itemsRef.current[focusLast ? itemsRef.current.length - 1 : 0]
+          const element = itemsRef.current[shouldFocus === 'last' ? itemsRef.current.length - 1 : 0]
 
           if (element) {
             element.focus()
@@ -86,7 +96,7 @@ export const Menu = forwardRef(
       return () => {
         window.cancelAnimationFrame(rafId)
       }
-    }, [focusFirst, focusLast, rootElement])
+    }, [rootElement, shouldFocus])
 
     const setRef = useCallback(
       (el: HTMLDivElement | null) => {
@@ -119,6 +129,51 @@ export const Menu = forwardRef(
 
     const handleKeyDown = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
+        // Move focus to the element that opened the menu before handling the `Tab` press
+        if (event.key === 'Tab') {
+          if (originElement) {
+            originElement.focus()
+          }
+
+          return
+        }
+
+        // Move focus to the first focusable menuitem
+        if (event.key === 'Home') {
+          event.preventDefault()
+          event.stopPropagation()
+
+          const focusableElements = getFocusableElements(itemsRef.current)
+          const el = focusableElements[0]
+
+          if (el) {
+            const currentIndex = itemsRef.current.indexOf(el.element)
+
+            setActiveIndex(currentIndex)
+            el.element.focus()
+          }
+
+          return
+        }
+
+        // Move focus to the last focusable menuitem
+        if (event.key === 'End') {
+          event.preventDefault()
+          event.stopPropagation()
+
+          const focusableElements = getFocusableElements(itemsRef.current)
+          const el = focusableElements[focusableElements.length - 1]
+
+          if (el) {
+            const currentIndex = itemsRef.current.indexOf(el.element)
+
+            setActiveIndex(currentIndex)
+            el.element.focus()
+          }
+
+          return
+        }
+
         if (event.key === 'ArrowUp') {
           event.preventDefault()
           event.stopPropagation()
@@ -179,7 +234,7 @@ export const Menu = forwardRef(
           onKeyDown(event)
         }
       },
-      [activeIndex, onKeyDown]
+      [activeIndex, onKeyDown, originElement]
     )
 
     const handleItemMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
