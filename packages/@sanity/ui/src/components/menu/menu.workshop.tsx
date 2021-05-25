@@ -14,11 +14,10 @@ import {
   MenuItem,
   Stack,
 } from '@sanity/ui'
-import {defineScope, useAction} from '@sanity/ui-workshop'
+import {defineScope, useAction, useBoolean} from '@sanity/ui-workshop'
 import React, {useRef, useState} from 'react'
 
 export default defineScope('components/menu', 'Menu', [
-  {name: 'props', title: 'Props', component: MenuStory},
   {name: 'menu-button', title: 'MenuButton', component: MenuButtonStory},
   {name: 'groups', title: 'Groups', component: GroupsStory},
   {name: 'tones', title: 'Tones', component: MenuItemTonesStory},
@@ -27,24 +26,9 @@ export default defineScope('components/menu', 'Menu', [
   {name: 'without-arrow', title: 'Without arrow', component: WithoutArrowStory},
 ])
 
-function MenuStory() {
-  return (
-    <Box padding={[4, 5, 6]}>
-      <MenuButton
-        button={<Button text="Menu" />}
-        id="example-menu"
-        menu={
-          <Menu>
-            <MenuItem selected text="A" />
-            <MenuItem selected text="B" />
-          </Menu>
-        }
-      />
-    </Box>
-  )
-}
-
 function MenuButtonStory() {
+  const portal = useBoolean('Portal', false, 'Props')
+
   return (
     <Box padding={[4, 5, 6]}>
       <Grid columns={3} gap={2}>
@@ -83,7 +67,7 @@ function MenuButtonStory() {
                 />
               </Menu>
             }
-            popover={{constrainSize: true, portal: true}}
+            popover={{constrainSize: true, portal}}
           />
         </LayerProvider>
         <Button mode="ghost" id="next-button" text="Next" />
