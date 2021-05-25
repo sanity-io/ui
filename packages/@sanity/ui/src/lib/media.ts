@@ -44,7 +44,9 @@ function _createMediaManager(media: number[]): _MediaManager {
     const disposeFns: (() => void)[] = []
 
     for (const {index, mq} of sizes) {
-      const handleChange = () => subscriber(index)
+      const handleChange = () => {
+        if (mq.matches) subscriber(index)
+      }
 
       if (mq.addEventListener) {
         mq.addEventListener('change', handleChange)
