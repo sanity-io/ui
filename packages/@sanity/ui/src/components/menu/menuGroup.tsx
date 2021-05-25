@@ -49,7 +49,7 @@ export function MenuGroup(
   } = useMenu()
   const rootRef = useRef<HTMLButtonElement | null>(null)
   const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const focusFirst = useRef(false)
+  const shouldFocusRef = useRef<'first' | 'last' | null>(null)
 
   useEffect(() => mount(rootRef.current), [mount])
 
@@ -105,6 +105,14 @@ export function MenuGroup(
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       if (onClick) onClick(event)
+
+      shouldFocusRef.current = 'first'
+
+      setOpen(true)
+
+      requestAnimationFrame(() => {
+        shouldFocusRef.current = null
+      })
     },
     [onClick]
   )
@@ -125,7 +133,6 @@ export function MenuGroup(
 
   const content = (
     <Menu
-      focusFirst={focusFirst.current}
       onClickOutside={onClickOutside}
       onEscape={onEscape}
       onItemClick={handleItemClick}
@@ -133,6 +140,7 @@ export function MenuGroup(
       onMouseEnter={handleMenuMouseEnter}
       onMouseLeave={handleMenuMouseLeave}
       registerElement={registerElement}
+      shouldFocus={shouldFocusRef.current}
     >
       {children}
     </Menu>
@@ -146,12 +154,12 @@ export function MenuGroup(
     }
 
     if (event.key === 'ArrowRight') {
-      focusFirst.current = true
+      shouldFocusRef.current = 'first'
 
       setOpen(true)
 
       requestAnimationFrame(() => {
-        focusFirst.current = false
+        shouldFocusRef.current = null
       })
 
       return
@@ -171,6 +179,7 @@ export function MenuGroup(
         radius={radius}
         ref={rootRef}
         selected={open}
+        tabIndex={-1}
       >
         <Box padding={padding}>
           <TextContainer>
