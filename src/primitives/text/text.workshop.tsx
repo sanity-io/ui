@@ -1,6 +1,7 @@
 import {
   Card,
   Container,
+  Flex,
   Text,
   TextAlign,
   Theme,
@@ -103,8 +104,10 @@ function ColoredTextStory() {
   const color = useSelect('Color', COLOR_OPTIONS, 'gray')
 
   return (
-    <ColoredText align="center" color={color} size={4} theme={theme} weight="bold">
-      {color}
-    </ColoredText>
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <ColoredText align="center" color={color} size={4} theme={theme} weight="bold">
+        {color}
+      </ColoredText>
+    </Flex>
   )
 }
