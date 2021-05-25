@@ -13,22 +13,22 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/block-content-to-react": "^2.0.7",
+    "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/color": "^2.0.17",
     "@sanity/icons": "^1.0.9",
     "@sanity/logos": "^1.0.7",
     "@sanity/ui": "^0.33.26",
-    "codemirror": "^5.61.0",
+    "codemirror": "^5.61.1",
     "date-fns": "^2.21.3",
     "lodash": "^4.17.21",
-    "next": "^10.2.0",
-    "next-sanity": "^0.1.12",
+    "next": "^10.2.3",
+    "next-sanity": "^0.2.0",
     "pako": "^2.0.3",
     "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.2",
-    "slugify": "^1.5.2",
+    "slugify": "^1.5.3",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
