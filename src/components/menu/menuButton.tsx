@@ -62,28 +62,32 @@ export const MenuButton = forwardRef(function MenuButton(
     preventOverflow,
   } = props
   const [open, setOpen] = useState(false)
-  const [focusLast, setFocusLast] = useState(false)
+  const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
   const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
 
   const handleButtonClick = useCallback(() => {
     setOpen((v) => !v)
-    setFocusLast(false)
+    setShouldFocus(null)
   }, [])
 
   const handleButtonKeyDown = useCallback((event: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === 'ArrowDown') {
+    // On `ArrowDown`, `Enter` and `Space`
+    // - Opens menu and moves focus to first menuitem
+    if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       setOpen(true)
-      setFocusLast(false)
+      setShouldFocus('first')
 
       return
     }
 
+    // On `ArrowUp`
+    // - 	Opens menu and moves focus to last menuitem
     if (event.key === 'ArrowUp') {
       event.preventDefault()
       setOpen(true)
-      setFocusLast(true)
+      setShouldFocus('last')
 
       return
     }
@@ -125,10 +129,6 @@ export const MenuButton = forwardRef(function MenuButton(
         return
       }
 
-      if (target === buttonElement) {
-        return
-      }
-
       for (const el of menuElements) {
         if (el === target || el.contains(target)) {
           return
@@ -137,7 +137,7 @@ export const MenuButton = forwardRef(function MenuButton(
 
       setOpen(false)
     },
-    [buttonElement, menuElements]
+    [menuElements]
   )
 
   const handleItemClick = useCallback(() => {
@@ -158,21 +158,23 @@ export const MenuButton = forwardRef(function MenuButton(
   const menuProps: MenuProps = useMemo(
     () => ({
       'aria-labelledby': id,
-      focusLast,
       onBlurCapture: handleBlur,
       onClickOutside: handleMenuClickOutside,
       onEscape: handleMenuEscape,
       onItemClick: handleItemClick,
+      originElement: buttonElement,
       registerElement,
+      shouldFocus,
     }),
     [
-      focusLast,
+      buttonElement,
       handleMenuClickOutside,
       handleMenuEscape,
       handleItemClick,
       id,
       handleBlur,
       registerElement,
+      shouldFocus,
     ]
   )
 
