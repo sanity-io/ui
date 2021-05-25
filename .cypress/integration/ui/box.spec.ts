@@ -1,5 +1,5 @@
 context('Primitives/Box', () => {
-  it('resizing window should hide and show responsive elements', async () => {
+  it('resizing window should hide and show responsive elements', () => {
     cy.visit('http://localhost:9009/frame/?path=/primitives/box/responsive')
 
     const sizes = [

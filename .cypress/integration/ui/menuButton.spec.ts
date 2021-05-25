@@ -1,5 +1,5 @@
 context('Components/MenuButton', () => {
-  it('clicking should open/close menu', async () => {
+  it('clicking should open/close menu', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
     // click button
@@ -11,7 +11,7 @@ context('Components/MenuButton', () => {
     cy.get('#menu-button[aria-expanded="false"]').should('exist')
   })
 
-  it('should use arrow keys to navigate the menu', async () => {
+  it('should use arrow keys to navigate the menu', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
     // Open menu by pressed DOWN arrow key
@@ -49,44 +49,31 @@ context('Components/MenuButton', () => {
     cy.get('#menu-button').should('be.focused')
   })
 
-  it('should close on tab', async () => {
+  it('should close on tab', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
-    // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')
     cy.get('#menu-item-1').should('be.focused')
-
-    cy.get('#menu-button').click()
-    cy.get('#menu-item-1:focus').should('be.focused')
     cy.get('#menu-item-1').realPress('Tab')
     cy.get('#menu-button[aria-expanded="true"]').should('not.exist')
     cy.get('#next-button').should('be.focused')
   })
 
-  it('should close on shift + tab', async () => {
+  it('should close on shift + tab', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
-    // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')
-    cy.get('#menu-item-1').should('be.focused')
-
-    cy.get('#menu-button').click()
     cy.get('#menu-item-1').should('be.focused')
     cy.get('#menu-item-1').realPress(['Shift', 'Tab'])
     cy.get('#menu-button[aria-expanded="true"]').should('not.exist')
-    cy.get('#menu-button').should('be.focused')
+    cy.get('#prev-button').should('be.focused')
   })
 
-  it('should not close when one of the items receives focus', async () => {
+  it('should not close when one of the items receives focus', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
 
-    //   // Open menu by pressed DOWN arrow key
-    cy.get('#menu-button').focus().realPress('ArrowDown')
-    cy.get('#menu-item-1').should('be.focused')
-
     cy.get('#menu-button').click()
-    cy.get('#menu-item-1').should('be.focused')
-
+    cy.get('#menu-button').should('be.focused')
     cy.get('#menu-item-2').focus()
     cy.get('#menu-button[aria-expanded="true"]').should('exist')
   })
