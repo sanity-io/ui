@@ -1,6 +1,6 @@
 context('Primitives/Grid', () => {
-  it('should have responsive styles', async () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/grid/responsive')
+  it('should have responsive styles', () => {
+    cy.visit('http://localhost:9009/frame/?path=/primitives/grid/responsive')
 
     const sizes = [
       {
@@ -16,7 +16,7 @@ context('Primitives/Grid', () => {
         viewport: [360, 375],
         css: {
           gridGap: '4px 4px',
-          gridTemplateColumns: '158px 158px',
+          gridTemplateColumns: '146px 146px',
           gridTemplateRows: '11px 11px 11px 11px 11px 11px',
         },
       },
@@ -25,7 +25,7 @@ context('Primitives/Grid', () => {
         viewport: [600, 768],
         css: {
           gridGap: '8px 8px',
-          gridTemplateColumns: '181.328px 181.328px 181.328px',
+          gridTemplateColumns: '160px 160px 160px',
           gridTemplateRows: '11px 11px 11px 11px',
         },
       },
@@ -34,7 +34,7 @@ context('Primitives/Grid', () => {
         viewport: [900, 1024],
         css: {
           gridGap: '12px 12px',
-          gridTemplateColumns: '206px 206px 206px 206px',
+          gridTemplateColumns: '190px 190px 190px 190px',
           gridTemplateRows: '11px 11px 11px 11px',
         },
       },
@@ -43,7 +43,7 @@ context('Primitives/Grid', () => {
         viewport: [1200, 1600],
         css: {
           gridGap: '20px 20px',
-          gridTemplateColumns: '216px 216px 216px 216px 216px',
+          gridTemplateColumns: '203.188px 203.188px 203.188px 203.188px 203.188px',
           gridTemplateRows: '11px 11px 11px 11px 11px',
         },
       },
@@ -52,7 +52,7 @@ context('Primitives/Grid', () => {
         viewport: [1800, 1920],
         css: {
           gridGap: '32px 32px',
-          gridTemplateColumns: '266.656px 266.656px 266.656px 266.656px 266.656px 266.656px',
+          gridTemplateColumns: '256px 256px 256px 256px 256px 256px',
           gridTemplateRows: '11px 11px 11px 11px 11px 11px',
         },
       },
@@ -62,7 +62,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: '52px 52px',
           gridTemplateColumns:
-            '292.562px 292.562px 292.562px 292.562px 292.562px 292.562px 292.562px',
+            '283.422px 283.422px 283.422px 283.422px 283.422px 283.422px 283.422px',
           gridTemplateRows: '11px 11px 11px 11px 11px 11px 11px',
         },
       },

@@ -1,12 +1,12 @@
 context('Components/Dialog', () => {
-  it('should open dialog', async () => {
+  it('should open dialog', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/dialog/props')
 
     cy.get('#open-dialog-button').click()
     cy.get('#dialog').should('be.visible')
   })
 
-  it('should trap focus', async () => {
+  it('should trap focus', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/dialog/props')
 
     // Press enter to open the dialog

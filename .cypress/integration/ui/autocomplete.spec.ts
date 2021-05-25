@@ -1,5 +1,5 @@
 context('Components/Autocomplete', () => {
-  it('should use key arrows', async () => {
+  it('should use key arrows', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     cy.get('#custom').click()
@@ -24,7 +24,7 @@ context('Components/Autocomplete', () => {
     cy.get('#custom[aria-expanded="false"][value=""]').should('exist')
   })
 
-  it('should press clear button to clear', async () => {
+  it('should press clear button to clear', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     cy.get('#custom').click()
@@ -51,7 +51,7 @@ context('Components/Autocomplete', () => {
     cy.get('#custom[value=""]').should('be.focused')
   })
 
-  it('should collapse when tabbing out', async () => {
+  it('should collapse when tabbing out', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
@@ -67,7 +67,7 @@ context('Components/Autocomplete', () => {
     cy.get('#custom[aria-expanded="false"]').should('exist')
   })
 
-  it('should clear query on blur', async () => {
+  it('should clear query on blur', () => {
     cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
