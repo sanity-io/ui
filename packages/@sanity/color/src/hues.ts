@@ -426,3 +426,5 @@ export const cyan: ColorTints = {
     hex: '#112124',
   },
 }
+
+export const hues = {gray, blue, purple, magenta, red, orange, yellow, green, cyan}

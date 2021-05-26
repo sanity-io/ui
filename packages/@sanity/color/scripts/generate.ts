@@ -63,6 +63,8 @@ const tpl = `/*
 import {ColorTints} from './types'
 
 ${COLOR_HUES.map(buildExport).join('\n\n')}
+
+export const hues = {${COLOR_HUES.join(', ')}};
 `
 
 // Format generated file with prettier so it can be commited without us being ashamed
