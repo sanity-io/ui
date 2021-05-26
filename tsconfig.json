@@ -1,3 +1,4 @@
 {
-  "extends": "./tsconfig.settings"
+  "extends": "./tsconfig.settings",
+  "include": ["./scripts"]
 }

@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tsconfig.settings",
+  "include": ["./scripts", "./src", "./test"],
+  "compilerOptions": {
+    "rootDir": "../../../",
+    "outDir": "./lib/dts/",
+    "noEmit": true,
+    "jsx": "react"
+  }
+}

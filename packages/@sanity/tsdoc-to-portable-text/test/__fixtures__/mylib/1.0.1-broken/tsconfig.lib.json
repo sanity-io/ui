@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.settings",
+  "files": ["./src/index.ts"],
+  "compilerOptions": {
+    "outDir": "./lib/esm",
+    "jsx": "react"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "private": true,
+  "name": "@sanity/tsdoc-to-portable-text",
+  "version": "0.1.0",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "bin": {
+    "tsdoc-to-portable-text": "bin/tsdoc-to-portable-text"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "author": "Sanity.io <hello@sanity.io>",
+  "license": "MIT",
+  "scripts": {
+    "build": "run-s build:esbuild build:dts copy:dts:* clean:dts copy:json:*",
+    "build:dts": "tsc --emitDeclarationOnly --project tsconfig.lib.json --rootDir src",
+    "build:esbuild": "node -r esbuild-register scripts/build.ts",
+    "clean": "rimraf lib",
+    "clean:dts": "rimraf lib/dts",
+    "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
+    "copy:dts:esm": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
+    "copy:json:cjs": "cpx 'src/**/*.json' lib/cjs",
+    "copy:json:esm": "cpx 'src/**/*.json' lib/esm",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "prebuild": "yarn clean",
+    "test": "jest",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@microsoft/api-extractor": "^7.15.2",
+    "@microsoft/api-extractor-model": "^7.13.2",
+    "@microsoft/tsdoc": "^0.13.2",
+    "@types/cpx": "^1.5.1",
+    "chalk": "^4.1.1",
+    "mkdirp": "^1.0.4",
+    "slugify": "^1.5.3",
+    "tmp": "^0.2.1",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/mkdirp": "^1.0.1",
+    "@types/tmp": "^0.2.0",
+    "cpx": "^1.5.0",
+    "pkg-up": "^3.1.0"
+  }
+}
