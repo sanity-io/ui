@@ -1,16 +1,15 @@
 import * as icons from '@sanity/icons'
 import {LaunchIcon} from '@sanity/icons'
 import * as ui from '@sanity/ui'
-import {Box, Button, Card, Tab, TabList, TabPanel} from '@sanity/ui'
+import {Box, Button, Card, Flex, Spinner, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import Link from 'next/link'
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {
   AsyncCodeEditor,
   Canvas,
-  evalJSX,
-  JSXEvalResult,
+  evalComponent,
+  EvalComponentResult,
   ready as readyCheck,
-  ScopeRenderer,
 } from '$lib/ide'
 import {getArcadeQuery} from '$screens/arcade'
 
@@ -20,14 +19,14 @@ export function CodeExample(props: {
   hookCode?: string
   title?: string
 }) {
-  const {code: codeProp, description, hookCode: hookCodeProp, title} = props
+  const {code: codeProp = '', description, hookCode: hookCodeProp = '', title} = props
   const [ready, setReady] = useState(false)
-  const [[scope], setScope] = useState<[Record<string, unknown> | null, Error | null]>([null, null])
-  const [jsxCode, setJSXCode] = useState(codeProp)
-  const [jsxResult, setJSXResult] = useState<JSXEvalResult | null>(null)
+  const [jsxCode, setJSXCode] = useState<string>(codeProp)
+  const [evalResult, setEvalResult] = useState<EvalComponentResult | null>(null)
   const [jsxCursor, setJSXCursor] = useState({line: 0, column: 0})
-  const [hookCode, setScopeCode] = useState(hookCodeProp || '')
+  const [hookCode, setScopeCode] = useState<string>(hookCodeProp)
   const [hookCursor, setScopeCursor] = useState({line: 0, column: 0})
+  const [renderError, setRenderError] = useState<Error | null>(null)
 
   useEffect(() => {
     readyCheck().then(() => setReady(true))
@@ -35,12 +34,17 @@ export function CodeExample(props: {
 
   useEffect(() => {
     if (!ready) return
-    setJSXResult(evalJSX(jsxCode, {...scope, ...icons, ...ui, React}))
-  }, [jsxCode, ready, scope])
 
-  const onCatch = () => {
-    // @todo
-  }
+    setEvalResult(evalComponent({hookCode, jsxCode, scope: {...icons, ...ui, ...React, React}}))
+  }, [hookCode, jsxCode, ready])
+
+  useEffect(() => {
+    setRenderError(null)
+  }, [hookCode, jsxCode])
+
+  const onCatch = useCallback((params: {error: Error; info: React.ErrorInfo}) => {
+    setRenderError(params.error)
+  }, [])
 
   const arcadeQuery = getArcadeQuery({description, jsx: jsxCode, hook: hookCode, title})
 
@@ -49,13 +53,27 @@ export function CodeExample(props: {
   return (
     <Box marginY={[4, 4, 5]}>
       <Card overflow="hidden" radius={2} shadow={1}>
-        <ScopeRenderer code={hookCode} key={hookCode} onChange={setScope} />
+        {ready && !renderError && (
+          <Card style={{minHeight: 51}} tone="transparent">
+            <Canvas key={`${hookCode};${jsxCode}`} onCatch={onCatch} result={evalResult} />
+          </Card>
+        )}
 
-        <Card borderBottom>
-          <Canvas onCatch={onCatch} padding={[3, 3, 4]} result={jsxResult} />
-        </Card>
+        {renderError && (
+          <Card padding={4} tone="critical">
+            <Text>An error occured while rendering</Text>
+          </Card>
+        )}
 
-        <Card borderBottom paddingX={4} paddingY={2}>
+        {!ready && (
+          <Card padding={4} tone="transparent">
+            <Flex justify="center">
+              <Spinner muted />
+            </Flex>
+          </Card>
+        )}
+
+        <Card borderTop borderBottom paddingX={4} paddingY={2}>
           <TabList space={[1, 1, 2]} style={{textAlign: 'center'}}>
             <Tab
               aria-controls="mode-jsx-panel"
@@ -85,11 +103,11 @@ export function CodeExample(props: {
           flex={1}
           id="mode-jsx-panel"
           hidden={mode !== 'jsx'}
-          style={{outline: 'none'}}
+          style={{outline: 'none', minHeight: 100}}
         >
           {mode === 'jsx' && (
             <AsyncCodeEditor
-              code={jsxCode}
+              code={jsxCode || ''}
               cursor={jsxCursor}
               flex={1}
               onCodeChange={setJSXCode}
@@ -103,11 +121,11 @@ export function CodeExample(props: {
           flex={1}
           id="mode-hook-panel"
           hidden={mode !== 'hook'}
-          style={{outline: 'none'}}
+          style={{outline: 'none', minHeight: 100}}
         >
           {mode === 'hook' && (
             <AsyncCodeEditor
-              code={hookCode}
+              code={hookCode || ''}
               cursor={hookCursor}
               flex={1}
               onCodeChange={setScopeCode}

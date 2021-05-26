@@ -1,14 +1,15 @@
 import {Card, Flex, Tab, TabList, TabPanel} from '@sanity/ui'
 import React from 'react'
+import {ArcadeCodeMode} from './types'
 import {AsyncCodeEditor, Cursor} from '$lib/ide'
 
 export function CodePane(props: {
   jsxCode: string
   jsxCursor: Cursor
-  mode: 'jsx' | 'hook'
+  mode: ArcadeCodeMode
   onJSXCodeChange: (newCode: string) => void
   onJSXCursorChange: (cursor: Cursor) => void
-  onModeChange: (mode: 'jsx' | 'hook') => void
+  onModeChange: (mode: ArcadeCodeMode) => void
   onHookCodeChange: (newCode: string) => void
   onHookCursorChange: (cursor: Cursor) => void
   hookCode: string
