@@ -24,7 +24,7 @@ export function useClickOutside(
   listener: ClickOutsideListener,
   elementsArg: Array<HTMLElement | HTMLElement[] | null> = EMPTY_ARRAY,
   boundaryElement?: HTMLElement | null
-) {
+): (el: HTMLElement | null) => void {
   const [element, setElement] = useState<HTMLElement | null>(null)
   const [elements, setElements] = useState(() => _getElements(element, elementsArg))
   const elementsRef = useRef(elements)

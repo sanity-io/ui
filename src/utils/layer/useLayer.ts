@@ -1,8 +1,8 @@
 import {useContext} from 'react'
 import {isRecord} from '../../lib/isRecord'
-import {LayerContext} from './layerContext'
+import {LayerContext, LayerContextValue} from './layerContext'
 
-export function useLayer() {
+export function useLayer(): LayerContextValue {
   const value = useContext(LayerContext)
 
   if (!value) {
