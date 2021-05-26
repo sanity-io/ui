@@ -61,7 +61,7 @@ export function findNavNode(nodes: unknown[], path: string[]): Record<string, un
   const segment = path[0]
 
   for (const node of nodes) {
-    if (isRecord(node) && node.segment === segment) {
+    if (isRecord(node) && ((!node.segment && !segment) || node.segment === segment)) {
       if (len > 1) {
         return findNavNode((isArray(node.items) && node.items) || [], path.slice(1))
       }
