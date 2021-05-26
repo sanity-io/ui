@@ -15,5 +15,12 @@ export const previewClient = createClient({
   token: process.env.SANITY_API_TOKEN,
 })
 
-export const getClient = (usePreview?: boolean) => (usePreview ? previewClient : sanityClient)
+export const getClient = (preview?: boolean) => {
+  if (preview) {
+    return previewClient
+  }
+
+  return sanityClient
+}
+
 export const useCurrentUser = createCurrentUserHook(sanity)

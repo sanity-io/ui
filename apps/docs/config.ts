@@ -37,13 +37,19 @@ export const ga = {
  * Sanity client configuration.
  */
 export const sanity = {
-  // Find your project ID and dataset in `sanity.json` in your studio project
+  // The Sanity API version
+  apiVersion: '2021-03-25',
+
+  // The Sanity project dataset name
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+
+  // The Sanity project ID
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
-  useCdn: process.env.NODE_ENV === 'production',
+
   // useCdn == true gives fast, cheap responses using a globally distributed cache.
   // Set this to false if your application require the freshest possible
   // data always (potentially slightly slower and a bit more expensive).
+  useCdn: process.env.NODE_ENV === 'production',
 }
 
 function parseFlag<T = unknown>(envValue: string | undefined, defaultValue: T) {
