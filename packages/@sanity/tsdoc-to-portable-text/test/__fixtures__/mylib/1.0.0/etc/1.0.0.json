@@ -1,0 +1,365 @@
+[
+  {
+    "_type": "api.release",
+    "_id": "mylib_1-0-0",
+    "version": "1.0.0",
+    "members": [
+      {
+        "_type": "reference",
+        "_key": "15cb148fb5d4f062894fe0e153b35382",
+        "_ref": "15cb148fb5d4f062894fe0e153b35382",
+        "_weak": true
+      },
+      {
+        "_type": "reference",
+        "_key": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+        "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+        "_weak": true
+      },
+      {
+        "_type": "reference",
+        "_key": "f8290b4913d399ece606e41443224121",
+        "_ref": "f8290b4913d399ece606e41443224121",
+        "_weak": true
+      },
+      {
+        "_type": "reference",
+        "_key": "7baa7de0358f25b593b8be235abe8fee",
+        "_ref": "7baa7de0358f25b593b8be235abe8fee",
+        "_weak": true
+      },
+      {
+        "_type": "reference",
+        "_key": "03fdbeef0c01fd8e571a926d2905e46f",
+        "_ref": "03fdbeef0c01fd8e571a926d2905e46f",
+        "_weak": true
+      }
+    ]
+  },
+  {
+    "_type": "api.function",
+    "_id": "15cb148fb5d4f062894fe0e153b35382",
+    "release": {
+      "_type": "reference",
+      "_ref": "mylib_1-0-0",
+      "_weak": true
+    },
+    "name": "Button",
+    "slug": {
+      "_type": "slug",
+      "current": "Button"
+    },
+    "comment": {
+      "_type": "tsdoc.docComment",
+      "modifierTags": [
+        {
+          "_type": "tsdoc.modifierTag",
+          "_key": "0",
+          "name": "@public"
+        }
+      ]
+    },
+    "parameters": [
+      {
+        "_type": "api.functionParameter",
+        "_key": "50fe03ab7bf37089a7e88da9b31ffb3b",
+        "name": "props",
+        "type": [
+          {
+            "_type": "api.reference",
+            "_key": "token0",
+            "text": "ButtonProps",
+            "reference": {
+              "_type": "reference",
+              "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+              "_weak": true
+            }
+          },
+          {
+            "_type": "api.text",
+            "_key": "token1",
+            "text": " & "
+          },
+          {
+            "_type": "api.reference",
+            "_key": "token2",
+            "text": "Omit",
+            "reference": {
+              "_type": "reference",
+              "_ref": "a5c5b216214ec778de7d29f2f68daa12",
+              "_weak": true
+            }
+          },
+          {
+            "_type": "api.text",
+            "_key": "token3",
+            "text": "<"
+          },
+          {
+            "_type": "api.reference",
+            "_key": "token4",
+            "text": "React.HTMLProps",
+            "reference": {
+              "_type": "reference",
+              "_ref": "7cfe5783eeff1a8cbc57d36619aeb734",
+              "_weak": true
+            }
+          },
+          {
+            "_type": "api.text",
+            "_key": "token5",
+            "text": "<"
+          },
+          {
+            "_type": "api.reference",
+            "_key": "token6",
+            "text": "HTMLButtonElement",
+            "reference": {
+              "_type": "reference",
+              "_ref": "1b2a945e82fde37bf0240a7d0caa7ce2",
+              "_weak": true
+            }
+          },
+          {
+            "_type": "api.text",
+            "_key": "token7",
+            "text": ">, 'type'>"
+          }
+        ]
+      }
+    ],
+    "returnType": [
+      {
+        "_type": "api.reference",
+        "_key": "token0",
+        "text": "React.ReactElement",
+        "reference": {
+          "_type": "reference",
+          "_ref": "6ee336755fb67bdfe8e62b856e2f8484",
+          "_weak": true
+        }
+      }
+    ],
+    "releaseTag": "public",
+    "isReactComponentType": true,
+    "propsType": {
+      "_type": "reference",
+      "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+      "_weak": true
+    }
+  },
+  {
+    "_type": "api.interface",
+    "_id": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+    "release": {
+      "_type": "reference",
+      "_ref": "mylib_1-0-0",
+      "_weak": true
+    },
+    "name": "ButtonProps",
+    "slug": {
+      "_type": "slug",
+      "current": "ButtonProps"
+    },
+    "comment": {
+      "_type": "tsdoc.docComment",
+      "modifierTags": [
+        {
+          "_type": "tsdoc.modifierTag",
+          "_key": "0",
+          "name": "@public"
+        }
+      ]
+    },
+    "extends": [
+      {
+        "_type": "api.extend",
+        "_key": "extend0",
+        "type": [
+          {
+            "_type": "api.reference",
+            "_key": "token0",
+            "text": "ResponsiveMarginProps",
+            "reference": {
+              "_type": "reference",
+              "_ref": "03fdbeef0c01fd8e571a926d2905e46f",
+              "_weak": true
+            }
+          },
+          {
+            "_type": "api.text",
+            "_key": "token1",
+            "text": " "
+          }
+        ]
+      }
+    ],
+    "members": [
+      {
+        "_type": "api.property",
+        "_key": "f303f9a15cddbe8ee0296511a8b04b30",
+        "type": [
+          {
+            "_type": "api.reference",
+            "_key": "token0",
+            "text": "ButtonTone",
+            "reference": {
+              "_type": "reference",
+              "_ref": "f8290b4913d399ece606e41443224121",
+              "_weak": true
+            }
+          }
+        ],
+        "name": "tone",
+        "optional": true,
+        "releaseTag": "public"
+      },
+      {
+        "_type": "api.property",
+        "_key": "599dcce2998a6b40b1e38e8c6006cb0a",
+        "type": [
+          {
+            "_type": "api.reference",
+            "_key": "token0",
+            "text": "ButtonType",
+            "reference": {
+              "_type": "reference",
+              "_ref": "7baa7de0358f25b593b8be235abe8fee",
+              "_weak": true
+            }
+          }
+        ],
+        "name": "type",
+        "optional": true,
+        "releaseTag": "public"
+      }
+    ],
+    "releaseTag": "public",
+    "typeParameters": []
+  },
+  {
+    "_type": "api.typeAlias",
+    "_id": "f8290b4913d399ece606e41443224121",
+    "release": {
+      "_type": "reference",
+      "_ref": "mylib_1-0-0",
+      "_weak": true
+    },
+    "name": "ButtonTone",
+    "slug": {
+      "_type": "slug",
+      "current": "ButtonTone"
+    },
+    "comment": {
+      "_type": "tsdoc.docComment",
+      "modifierTags": [
+        {
+          "_type": "tsdoc.modifierTag",
+          "_key": "0",
+          "name": "@public"
+        }
+      ]
+    },
+    "type": [
+      {
+        "_type": "api.text",
+        "_key": "token0",
+        "text": "'positive' | 'caution' | 'critical'"
+      }
+    ],
+    "releaseTag": "public"
+  },
+  {
+    "_type": "api.typeAlias",
+    "_id": "7baa7de0358f25b593b8be235abe8fee",
+    "release": {
+      "_type": "reference",
+      "_ref": "mylib_1-0-0",
+      "_weak": true
+    },
+    "name": "ButtonType",
+    "slug": {
+      "_type": "slug",
+      "current": "ButtonType"
+    },
+    "comment": {
+      "_type": "tsdoc.docComment",
+      "modifierTags": [
+        {
+          "_type": "tsdoc.modifierTag",
+          "_key": "0",
+          "name": "@public"
+        }
+      ]
+    },
+    "type": [
+      {
+        "_type": "api.text",
+        "_key": "token0",
+        "text": "'button' | 'submit' | 'reset'"
+      }
+    ],
+    "releaseTag": "public"
+  },
+  {
+    "_type": "api.interface",
+    "_id": "03fdbeef0c01fd8e571a926d2905e46f",
+    "release": {
+      "_type": "reference",
+      "_ref": "mylib_1-0-0",
+      "_weak": true
+    },
+    "name": "ResponsiveMarginProps",
+    "slug": {
+      "_type": "slug",
+      "current": "ResponsiveMarginProps"
+    },
+    "comment": {
+      "_type": "tsdoc.docComment",
+      "modifierTags": [
+        {
+          "_type": "tsdoc.modifierTag",
+          "_key": "0",
+          "name": "@public"
+        }
+      ]
+    },
+    "extends": [],
+    "members": [
+      {
+        "_type": "api.property",
+        "_key": "d42f4851e770aa0f758b01388874f67b",
+        "type": [
+          {
+            "_type": "api.text",
+            "_key": "token0",
+            "text": "number | number[]"
+          }
+        ],
+        "name": "margin",
+        "optional": true,
+        "releaseTag": "public"
+      }
+    ],
+    "releaseTag": "public",
+    "typeParameters": []
+  },
+  {
+    "_type": "api.package",
+    "_id": "mylib",
+    "name": "mylib",
+    "releases": [
+      {
+        "_type": "reference",
+        "_key": "mylib_1-0-0",
+        "_ref": "mylib_1-0-0",
+        "_weak": true
+      }
+    ],
+    "latestRelease": {
+      "_type": "reference",
+      "_ref": "mylib_1-0-0",
+      "_weak": true
+    }
+  }
+]

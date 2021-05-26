@@ -13,6 +13,7 @@
     "dev:example-web": "lerna run --stream --scope sanity-design-example-web dev",
     "dev:ui": "lerna run --stream --scope @sanity/ui dev",
     "dev:studio": "lerna run --stream --scope sanity-design-studio dev",
+    "extract:tsdoc-to-portable-text": "node -r esbuild-register scripts/extract_tsdoc-to-portable-text.ts",
     "generate": "lerna run generate",
     "postinstall": "yarn husky install",
     "release:dryrun": "yarn build && ./scripts/publish_dryrun",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@sanity/client": "^2.10.5",
+    "@sanity/tsdoc-to-portable-text": "0.1.0",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
