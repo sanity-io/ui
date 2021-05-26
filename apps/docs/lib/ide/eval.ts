@@ -1,46 +1,41 @@
-export interface JSXEvalSuccessResult {
+export interface EvalComponentSuccessResult {
   type: 'success'
   node: React.ReactNode
 }
 
-export interface JSXEvalErrorResult {
+export interface EvalComponentErrorResult {
   type: 'error'
   error: Error
 }
 
-export type JSXEvalResult = JSXEvalSuccessResult | JSXEvalErrorResult
+export type EvalComponentResult = EvalComponentSuccessResult | EvalComponentErrorResult
 
-export interface HookEvalSuccessResult {
-  type: 'success'
-  fn: () => Record<string, unknown>
-}
+export function evalComponent(opts: {
+  hookCode: string
+  jsxCode: string
+  scope: Record<string, any>
+}): EvalComponentResult {
+  const code = [
+    `function EvalComponent() {`,
+    `  ${opts.hookCode || ''}`,
+    `  return <>${opts.jsxCode}</>`,
+    `}\n`,
+    `function main() {`,
+    `  try {`,
+    `    return {type: 'success', node: <EvalComponent />}`,
+    `  } catch (error) {`,
+    `    return {type: 'error', error: error}`,
+    `  }`,
+    `}\n`,
+    `main()`,
+  ].join('\n')
 
-export interface HookEvalErrorResult {
-  type: 'error'
-  error: Error
-}
-
-export type HookEvalResult = HookEvalSuccessResult | HookEvalErrorResult
-
-export function evalHook(code: string, scope: Record<string, any>): HookEvalResult {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = (window as any).Babel.transform(`() => {${code}}`, {
+    const babelResult = (window as any).Babel.transform(code, {
       presets: ['env', 'react'],
     })
 
-    return {type: 'success', fn: scopeEval(result.code, scope)}
-  } catch (error) {
-    return {type: 'error', error}
-  }
-}
-
-export function evalJSX(code: string, scope: Record<string, any>): JSXEvalResult {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = (window as any).Babel.transform(`<>${code}</>`, {presets: ['env', 'react']})
-
-    return {type: 'success', node: scopeEval(result.code, scope)}
+    return scopeEval(babelResult.code, opts.scope)
   } catch (error) {
     return {type: 'error', error}
   }

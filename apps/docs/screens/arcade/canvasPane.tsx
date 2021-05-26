@@ -17,10 +17,9 @@ import {
   useToast,
 } from '@sanity/ui'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
+import {SIZES} from './constants'
 import {ArcadeFrame} from './frame'
-import {CanvasWidth} from './types'
-
-const SIZES = [320, 375, 768, 1024]
+import {ArcadeMeta, CanvasWidth} from './types'
 
 function MetaEditor({
   onCancel,
@@ -28,8 +27,8 @@ function MetaEditor({
   value,
 }: {
   onCancel: () => void
-  onChange: (data: {title: string; description: string}) => void
-  value: {title: string; description: string}
+  onChange: (data: ArcadeMeta) => void
+  value: ArcadeMeta
 }) {
   const toast = useToast()
   const [formTitle, setFormTitle] = useState(value.title)
@@ -103,8 +102,8 @@ function MetaEditor({
 export function CanvasPane(props: {
   hookCode: string
   jsxCode: string
-  meta: {title: string; description: string}
-  onMetaChange: (value: {title: string; description: string}) => void
+  meta: ArcadeMeta
+  onMetaChange: (value: ArcadeMeta) => void
   onWidthChange: (v: CanvasWidth | null) => void
   width: CanvasWidth | null
 }) {
@@ -114,7 +113,7 @@ export function CanvasPane(props: {
   const [editButtonElement, setEditButtonElement] = useState<HTMLDivElement | null>(null)
 
   const handleMetaChange = useCallback(
-    (value: {title: string; description: string}) => {
+    (value: ArcadeMeta) => {
       setEditorOpen(false)
       onMetaChange(value)
     },

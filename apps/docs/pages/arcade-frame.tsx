@@ -1,21 +1,19 @@
 import * as icons from '@sanity/icons'
 import * as ui from '@sanity/ui'
-import {Card, Code} from '@sanity/ui'
-import React, {useEffect, useState} from 'react'
+import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
+import React, {useCallback, useEffect, useState} from 'react'
 import {useApp} from '$components'
-import {evalJSX, JSXEvalResult, ready as readyCheck, ScopeRenderer} from '$lib/ide'
+import {evalComponent, EvalComponentResult, ready as readyCheck} from '$lib/ide'
 import {isRecord} from '$lib/types'
 
 export default function ArcadeFrame() {
   const {setColorScheme} = useApp()
-  const [[hook, hookError], setHook] = useState<[Record<string, unknown> | null, Error | null]>([
-    null,
-    null,
-  ])
-  const [jsxResult, setJSXResult] = useState<JSXEvalResult | null>(null)
+  const [evalResult, setEvalResult] = useState<EvalComponentResult | null>(null)
   const [evalReady, setEvalReady] = useState(false)
-  const [hookCode, setHookCode] = useState('')
-  const [jsxCode, setJSXCode] = useState('')
+  const [hookCode, setHookCode] = useState<string | null>(null)
+  const [jsxCode, setJSXCode] = useState<string | null>(null)
+  const [renderError, setRenderError] = useState<Error | null>(null)
+  const [windowError, setWindowError] = useState<Error | null>(null)
 
   useEffect(() => {
     parent.postMessage({type: 'arcadeFrame/ready'}, location.origin)
@@ -44,32 +42,79 @@ export default function ArcadeFrame() {
     }
   }, [setColorScheme])
 
-  // Evaluate JSX
   useEffect(() => {
     if (!evalReady) return
-    setJSXResult(evalJSX(jsxCode, {...hook, ...icons, ...ui, React}))
-  }, [jsxCode, hook, evalReady])
+    if (hookCode === null) return
+    if (jsxCode === null) return
+
+    setEvalResult(evalComponent({hookCode, jsxCode, scope: {...icons, ...ui, ...React, React}}))
+  }, [hookCode, jsxCode, evalReady])
+
+  useEffect(() => {
+    setRenderError(null)
+    setWindowError(null)
+  }, [hookCode, jsxCode])
 
   useEffect(() => {
     readyCheck().then(() => setEvalReady(true))
   }, [])
 
-  const errorMessage =
-    (jsxResult?.type === 'error' && jsxResult.error.message) || hookError?.message
+  const handleCatch = useCallback((params: {error: Error; info: React.ErrorInfo}) => {
+    params.error.stack = ''
+    setRenderError(params.error)
+  }, [])
+
+  const errorMessage = evalResult?.type === 'error' && evalResult.error.message
+
+  const renderErrorMessage = renderError?.message
+
+  useEffect(() => {
+    function handleWindowError(event: ErrorEvent) {
+      setWindowError(event.error)
+
+      // Attempt to prevent Next.js dev overlay from rendering
+      // @todo: make this work
+      event.error.stack = null
+      event.stopImmediatePropagation()
+    }
+
+    window.addEventListener('error', handleWindowError, true)
+
+    return () => {
+      window.removeEventListener('error', handleWindowError)
+    }
+  }, [setWindowError])
 
   return (
     <>
-      <ScopeRenderer code={hookCode} key={hookCode} onChange={setHook} />
-
-      {!errorMessage && jsxResult?.type === 'success' && (
-        <Card height="fill" tone="transparent">
-          {jsxResult.node}
+      {evalResult?.type === 'success' && !renderError && (
+        <Card height="fill" key={`${hookCode};${jsxCode}`} tone="transparent">
+          <ErrorBoundary onCatch={handleCatch}>{evalResult.node}</ErrorBoundary>
         </Card>
       )}
 
       {errorMessage && (
-        <Card padding={4} sizing="border" style={{minHeight: '100%'}} tone="critical">
+        <Card
+          padding={4}
+          overflow="auto"
+          sizing="border"
+          style={{minHeight: '100%'}}
+          tone="critical"
+        >
           <Code>{errorMessage}</Code>
+        </Card>
+      )}
+
+      {renderErrorMessage && (
+        <Card
+          padding={4}
+          overflow="auto"
+          sizing="border"
+          style={{minHeight: '100%'}}
+          tone="critical"
+        >
+          {!windowError && <Text>An error occured while rendering</Text>}
+          {windowError && <Text>{windowError.message}</Text>}
         </Card>
       )}
     </>
