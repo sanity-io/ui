@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export interface ThemeInput {
   checkbox: {
     size: number

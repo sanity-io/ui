@@ -5,7 +5,10 @@ import {ThemeFontWeightKey} from '../../theme'
 import {TextAlign} from '../../types'
 import {labelBaseStyle} from './styles'
 
-interface LabelProps {
+/**
+ * @public
+ */
+export interface LabelProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
   as?: React.ElementType | keyof JSX.IntrinsicElements
@@ -34,6 +37,9 @@ const SpanWithTextOverflow = styled.span`
   overflow: hidden;
 `
 
+/**
+ * @public
+ */
 export const Label = forwardRef(
   (props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {
     const {

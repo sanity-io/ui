@@ -3,7 +3,10 @@ import React, {forwardRef} from 'react'
 import styled, {keyframes} from 'styled-components'
 import {Text} from '../text'
 
-interface SpinnerProps {
+/**
+ * @public
+ */
+export interface SpinnerProps {
   muted?: boolean
   size?: number | number[]
 }
@@ -24,6 +27,9 @@ const Root = styled(Text)`
   }
 `
 
+/**
+ * @public
+ */
 export const Spinner = forwardRef(
   (props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>, ref) => {
     return (

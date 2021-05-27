@@ -5,7 +5,7 @@ import {ResponsiveFontStyleProps} from './types'
 
 /**
  * Get responsive CSS for the `heading` font style.
- * @beta Should not be used in production, as this might change.
+ * @internal
  */
 export function responsiveHeadingFont(props: ResponsiveFontStyleProps & ThemeProps): CSSObject[] {
   return responsiveFont('heading', props)

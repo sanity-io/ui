@@ -1,14 +1,26 @@
 import React from 'react'
 import {Code} from '../primitives'
 
-interface ErrorBoundaryProps {
+/**
+ * DO NOT USE IN PRODUCTION
+ * @beta
+ */
+export interface ErrorBoundaryProps {
   onCatch: (params: {error: Error; info: React.ErrorInfo}) => void
 }
 
-interface ErrorBoundaryState {
+/**
+ * DO NOT USE IN PRODUCTION
+ * @beta
+ */
+export interface ErrorBoundaryState {
   error: Error | null
 }
 
+/**
+ * DO NOT USE IN PRODUCTION
+ * @beta
+ */
 export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = {error: null}
 

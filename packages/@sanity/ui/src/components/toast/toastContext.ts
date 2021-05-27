@@ -1,11 +1,6 @@
 import {createContext} from 'react'
 import {globalScope} from '../../lib/globalScope'
-import {ToastParams} from './types'
-
-export interface ToastContextValue {
-  version: 0.0
-  push: (params: ToastParams) => string
-}
+import {ToastContextValue} from './types'
 
 const key = Symbol.for('@sanity/ui/context/toast')
 

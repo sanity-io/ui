@@ -1,7 +1,11 @@
 import {useContext} from 'react'
 import {isRecord} from '../../lib/isRecord'
-import {LayerContext, LayerContextValue} from './layerContext'
+import {LayerContext} from './layerContext'
+import {LayerContextValue} from './types'
 
+/**
+ * @public
+ */
 export function useLayer(): LayerContextValue {
   const value = useContext(LayerContext)
 

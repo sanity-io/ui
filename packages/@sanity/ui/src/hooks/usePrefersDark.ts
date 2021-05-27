@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react'
 
+/**
+ * @public
+ */
 export function usePrefersDark() {
   const [dark, setDark] = useState(false)
 

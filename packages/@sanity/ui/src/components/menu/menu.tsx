@@ -7,15 +7,16 @@ import {useLayer} from '../../utils'
 import {getFocusableElements} from './helpers'
 import {MenuContext, MenuContextValue} from './menuContext'
 
+/**
+ * @public
+ */
 export interface MenuProps extends ResponsivePaddingProps {
   /**
-   * Use `shouldFocus="first" instead.
-   * @deprecated
+   * @deprecated Use `shouldFocus="first"` instead.
    */
   focusFirst?: boolean
   /**
-   * Use `shouldFocus="last" instead.
-   * @deprecated
+   * @deprecated Use `shouldFocus="last"` instead.
    */
   focusLast?: boolean
   onClickOutside?: (event: MouseEvent) => void
@@ -33,6 +34,9 @@ const Root = styled(Box)`
   overflow: auto;
 `
 
+/**
+ * @public
+ */
 export const Menu = forwardRef(
   (
     props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,

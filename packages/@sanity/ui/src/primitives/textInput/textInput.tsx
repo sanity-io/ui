@@ -22,9 +22,15 @@ import {Button, ButtonProps} from '../button'
 import {Card} from '../card'
 import {Text} from '../text'
 
-type ClearButtonProps = Omit<ButtonProps, 'as'> &
+/**
+ * @public
+ */
+export type TextInputClearButtonProps = Omit<ButtonProps, 'as'> &
   Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
 
+/**
+ * @public
+ */
 export type TextInputType =
   | 'date'
   | 'datetime-local'
@@ -38,12 +44,15 @@ export type TextInputType =
   | 'text'
   | 'week'
 
-interface TextInputProps {
+/**
+ * @public
+ */
+export interface TextInputProps {
   border?: boolean
   /**
    * @beta
    */
-  clearButton?: boolean | ClearButtonProps
+  clearButton?: boolean | TextInputClearButtonProps
   customValidity?: string
   fontSize?: number | number[]
   icon?: React.ComponentType | React.ReactNode
@@ -115,6 +124,9 @@ const RightBox = styled(Box)`
   right: 0;
 `
 
+/**
+ * @public
+ */
 export const TextInput = forwardRef(
   (
     props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
@@ -215,7 +227,7 @@ export const TextInput = forwardRef(
     // Render clear button (memoized)
     const clearButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
     const clearButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
-    const clearButtonProps: ClearButtonProps = useMemo(
+    const clearButtonProps: TextInputClearButtonProps = useMemo(
       () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
       [clearButton]
     )

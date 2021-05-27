@@ -1,6 +1,7 @@
 import React from 'react'
 import {render} from '../../../test'
-import {BoundaryElementContext, BoundaryElementContextValue} from './boundaryElementContext'
+import {BoundaryElementContext} from './boundaryElementContext'
+import {BoundaryElementContextValue} from './types'
 import {useBoundaryElement} from './useBoundaryElement'
 
 describe('utils/boundaryElement', () => {

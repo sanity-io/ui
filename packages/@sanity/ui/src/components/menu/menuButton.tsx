@@ -5,46 +5,46 @@ import {ThemeColorSchemeKey} from '../../theme'
 import {Placement} from '../../types'
 import {MenuProps} from './menu'
 
+/**
+ * @public
+ */
 export interface MenuButtonProps {
   /**
-   * Use `popover={{boundaryElement: ...}}` instead.
-   * @deprecated
+   * @deprecated Use `popover={{boundaryElement: ...}}` instead.
    */
   boundaryElement?: HTMLElement
   button: React.ReactElement
   id: string
   menu?: React.ReactElement
   /**
-   * Use `popover={{placement: ...}}` instead.
-   * @deprecated
+   * @deprecated Use `popover={{placement: ...}}` instead.
    */
   placement?: Placement
   popover?: Omit<PopoverProps, 'content' | 'open'>
   /**
-   * Use `popover={{scheme: ...}}` instead.
-   * @deprecated
+   * @deprecated Use `popover={{scheme: ...}}` instead.
    */
   popoverScheme?: ThemeColorSchemeKey
   /**
-   * Use `popover={{radius: ...}}` instead.
-   * @deprecated
+   * @deprecated Use `popover={{radius: ...}}` instead.
    */
   popoverRadius?: number | number[]
   /**
-   * Use `popover={{radius: ...}}` instead.
-   *
    * Do not use in production.
    * @beta
-   * @deprecated
+   *
+   * @deprecated Use `popover={{radius: ...}}` instead.
    */
   portal?: boolean
   /**
-   * Use `popover={{preventOverflow: ...}}` instead.
-   * @deprecated
+   * @deprecated Use `popover={{preventOverflow: ...}}` instead.
    */
   preventOverflow?: boolean
 }
 
+/**
+ * @public
+ */
 export const MenuButton = forwardRef(function MenuButton(
   props: MenuButtonProps,
   ref: React.ForwardedRef<HTMLButtonElement | null>

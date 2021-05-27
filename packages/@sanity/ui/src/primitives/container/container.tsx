@@ -5,6 +5,9 @@ import {ResponsiveWidthProps} from '../types'
 import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
 import {ResponsiveWidthStyleProps} from './types'
 
+/**
+ * @public
+ */
 export interface ContainerProps extends BoxProps, ResponsiveWidthProps {}
 
 const Root = styled(Box)<ResponsiveWidthStyleProps>(
@@ -12,6 +15,9 @@ const Root = styled(Box)<ResponsiveWidthStyleProps>(
   responsiveContainerWidthStyle
 )
 
+/**
+ * @public
+ */
 export const Container = forwardRef(
   (props: ContainerProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'width'>, ref) => {
     const {as, width = 2, ...restProps} = props

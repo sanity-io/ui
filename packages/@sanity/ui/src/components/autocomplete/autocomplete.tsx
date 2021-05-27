@@ -25,13 +25,22 @@ import {
 } from '../../primitives'
 import {AutocompleteOption} from './autocompleteOption'
 
-type OpenButtonProps = Omit<ButtonProps, 'as'> &
+/**
+ * @public
+ */
+export type AutocompleteOpenButtonProps = Omit<ButtonProps, 'as'> &
   Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
 
+/**
+ * @public
+ */
 export interface BaseAutocompleteOption {
   value: string
 }
 
+/**
+ * @public
+ */
 export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   border?: boolean
   customValidity?: string
@@ -46,7 +55,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   /**
    * @beta
    */
-  openButton?: boolean | OpenButtonProps
+  openButton?: boolean | AutocompleteOpenButtonProps
   options?: Option[]
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
@@ -389,7 +398,7 @@ const InnerAutocomplete = forwardRef(
 
     const openButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
     const openButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
-    const openButtonProps: OpenButtonProps = useMemo(
+    const openButtonProps: AutocompleteOpenButtonProps = useMemo(
       () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
       [openButton]
     )
@@ -512,6 +521,9 @@ const InnerAutocomplete = forwardRef(
 
 InnerAutocomplete.displayName = 'Autocomplete'
 
+/**
+ * @public
+ */
 export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<

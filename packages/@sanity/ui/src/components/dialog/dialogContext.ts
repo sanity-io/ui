@@ -1,6 +1,6 @@
 import {createContext} from 'react'
 import {globalScope} from '../../lib/globalScope'
-import {DialogPosition} from './types'
+import {DialogPosition} from '../../types'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

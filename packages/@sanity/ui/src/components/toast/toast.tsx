@@ -4,7 +4,10 @@ import styled from 'styled-components'
 import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
 import {ThemeColorToneKey} from '../../theme'
 
-interface ToastProps {
+/**
+ * @public
+ */
+export interface ToastProps {
   closable?: boolean
   description?: React.ReactNode
   onClose?: () => void
@@ -34,6 +37,9 @@ const TextBox = styled(Flex)`
   overflow-x: auto;
 `
 
+/**
+ * @public
+ */
 export function Toast(
   props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>
 ) {

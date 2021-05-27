@@ -4,7 +4,10 @@ import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/in
 import {Box} from '../box'
 import {Code} from '../code'
 
-interface KBDProps {
+/**
+ * @public
+ */
+export interface KBDProps {
   fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
@@ -24,6 +27,9 @@ function kbdStyle() {
 
 const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
 
+/**
+ * @public
+ */
 export const KBD = forwardRef(
   (
     props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,

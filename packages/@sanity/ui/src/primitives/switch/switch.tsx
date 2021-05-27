@@ -9,7 +9,10 @@ import {
   switchInputStyles,
 } from './styles'
 
-interface SwitchProps {
+/**
+ * @public
+ */
+export interface SwitchProps {
   indeterminate?: boolean
 }
 
@@ -19,6 +22,9 @@ const Representation = styled.span(switchRepresentationStyles)
 const Track = styled.span(switchTrackStyles)
 const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
 
+/**
+ * @public
+ */
 export const Switch = forwardRef(
   (
     props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,

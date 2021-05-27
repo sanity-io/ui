@@ -5,7 +5,7 @@ import {ResponsiveFontStyleProps} from './types'
 
 /**
  * Get responsive CSS for the `text` font style.
- * @beta Should not be used in production, as this might change.
+ * @internal
  */
 export function responsiveTextFont(props: ResponsiveFontStyleProps & ThemeProps): CSSObject[] {
   return responsiveFont('text', props)

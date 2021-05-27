@@ -5,12 +5,18 @@ import {childrenToElementArray} from '../helpers'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
 import {ResponsiveInlineSpaceStyleProps} from './types'
 
+/**
+ * @public
+ */
 export interface InlineProps extends Omit<BoxProps, 'display'> {
   space?: number | number[]
 }
 
 const Root = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
 
+/**
+ * @public
+ */
 export const Inline = forwardRef((props: InlineProps & React.HTMLProps<HTMLDivElement>, ref) => {
   const {as, children: childrenProp, space, ...restProps} = props
   const children = childrenToElementArray(childrenProp).filter(Boolean)

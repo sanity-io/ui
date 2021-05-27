@@ -1,7 +1,6 @@
-import {Card, Stack, Text} from '@sanity/ui'
+import {Card, Stack, Text, useMediaIndex} from '@sanity/ui'
 import {defineScope} from '@sanity/ui-workshop'
 import React from 'react'
-import {useMediaIndex} from './useMediaIndex'
 
 export default defineScope('hooks/use-media-index', 'useMediaIndex', [
   {name: 'test', title: 'Test', component: TestStory},
