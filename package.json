@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@sanity/client": "^2.10.5",
-    "@sanity/tsdoc-to-portable-text": "0.1.0",
+    "@sanity/tsdoc-to-portable-text": "0.1.1",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
