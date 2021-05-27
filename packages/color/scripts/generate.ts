@@ -13,6 +13,8 @@ import {ColorHueKey, ColorValue, ColorHueConfig, ColorTintKey} from '../src/type
 
 const ROOT_PATH = path.resolve(__dirname, '../../../..')
 
+const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
+
 function getColorHex(config: ColorHueConfig, tint: string): string {
   const tintNum = Number(tint)
   const midPoint = config.midPoint || 500
@@ -52,18 +54,19 @@ function buildExport(hue: ColorHueKey) {
     return acc
   }, initial)
 
-  return `export const ${hue}: ColorTints = ${JSON.stringify(tints, null, 2)}`
+  return `/**\n * @public\n */\nexport const ${hue}: ColorTints = ${JSON.stringify(tints, null, 2)}`
 }
 
 // Actual "template" to output
-const tpl = `/*
- * AUTO-GENERATED, DO NOT EDIT
- */
+const tpl = `${GENERATED_BANNER}
 
 import {ColorTints} from './types'
 
 ${COLOR_HUES.map(buildExport).join('\n\n')}
 
+/**
+ * @public
+ */
 export const hues = {${COLOR_HUES.join(', ')}};
 `
 
