@@ -34,7 +34,7 @@ const TextContainer = styled.span`
  */
 export function MenuGroup(
   props: MenuGroupProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref'>
-) {
+): React.ReactElement {
   const {
     children,
     fontSize,

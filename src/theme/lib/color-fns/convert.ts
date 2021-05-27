@@ -3,7 +3,7 @@ import {HSL, RGB} from './types'
 /**
  * @internal
  */
-export function hexToRgb(hex: string) {
+export function hexToRgb(hex: string): RGB {
   if (hex.length === 4) {
     const hexR = hex.slice(1, 2)
     const hexG = hex.slice(2, 3)

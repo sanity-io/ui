@@ -1,7 +1,9 @@
-import {css} from 'styled-components'
+import {css, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
-export function textBaseStyle(props: {$accent?: boolean; $muted?: boolean} & ThemeProps) {
+export function textBaseStyle(
+  props: {$accent?: boolean; $muted?: boolean} & ThemeProps
+): FlattenSimpleInterpolation {
   const {$accent, $muted, theme} = props
   const {weights} = theme.sanity.fonts.text
 

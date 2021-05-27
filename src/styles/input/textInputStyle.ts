@@ -1,4 +1,4 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeFontWeightKey} from '../../theme'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {getResponsiveProp, rem, responsive} from '../helpers'
@@ -19,15 +19,6 @@ export interface TextInputRepresentationStyleProps {
   $border?: boolean
   $hasPrefix?: boolean
   $hasSuffix?: boolean
-}
-
-/**
- * @deprecated
- */
-export const textInputStyle = {
-  root: () => [textInputRootStyle],
-  input: () => [textInputBaseStyle, textInputFontSizeStyle],
-  representation: () => [textInputRepresentationStyle],
 }
 
 const ROOT_STYLE = css`
@@ -111,7 +102,7 @@ export function textInputBaseStyle(
   `
 }
 
-export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps) {
+export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {fonts, media} = theme.sanity
 
