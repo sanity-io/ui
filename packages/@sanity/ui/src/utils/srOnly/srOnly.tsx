@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 
 const Root = styled.div`
@@ -12,16 +12,18 @@ const Root = styled.div`
 /**
  * @public
  */
-export function SrOnly({
-  as,
-  children,
-}: {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
-  children?: React.ReactNode
-}) {
+export const SrOnly = forwardRef(function SrOnly(
+  props: {
+    as?: React.ElementType | keyof JSX.IntrinsicElements
+    children?: React.ReactNode
+  },
+  ref: React.Ref<HTMLDivElement>
+) {
+  const {as, children} = props
+
   return (
-    <Root aria-hidden as={as} data-ui="SrOnly">
+    <Root aria-hidden as={as} data-ui="SrOnly" ref={ref}>
       {children}
     </Root>
   )
-}
+})

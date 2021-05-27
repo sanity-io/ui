@@ -1,10 +1,13 @@
+import {CSSObject} from 'styled-components'
 import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBorderStyleProps} from './types'
 
 const BORDER_VALUE = '1px solid var(--card-border-color)'
 
-export function responsiveBorderStyle() {
+export function responsiveBorderStyle(): Array<
+  (props: ResponsiveBorderStyleProps & ThemeProps) => CSSObject[]
+> {
   return [border, borderTop, borderRight, borderBottom, borderLeft]
 }
 

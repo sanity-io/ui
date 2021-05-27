@@ -62,11 +62,12 @@ module.exports = {
       ],
       rules: {
         ...common.rules,
-        '@typescript-eslint/explicit-module-boundary-types': 0,
+        '@typescript-eslint/explicit-module-boundary-types': 'error',
+
+        // Disable rules
         '@typescript-eslint/interface-name-prefix': 0,
         '@typescript-eslint/member-delimiter-style': 0,
         '@typescript-eslint/no-empty-interface': 0,
-
         // @todo: remove this
         '@typescript-eslint/no-explicit-any': 0,
       },

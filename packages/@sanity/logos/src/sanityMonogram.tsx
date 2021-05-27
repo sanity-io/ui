@@ -1,10 +1,13 @@
 import {hues, white} from '@sanity/color'
-import React from 'react'
+import React, {forwardRef} from 'react'
 
 /**
  * @public
  */
-export function SanityMonogram(props: React.SVGProps<SVGSVGElement>) {
+export const SanityMonogram = forwardRef(function SanityMonogram(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="sanity-monogram"
@@ -14,6 +17,7 @@ export function SanityMonogram(props: React.SVGProps<SVGSVGElement>) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <rect width="128" height="128" rx="8" fill={hues.red[500].hex} />
       <path
@@ -30,4 +34,4 @@ export function SanityMonogram(props: React.SVGProps<SVGSVGElement>) {
       />
     </svg>
   )
-}
+})

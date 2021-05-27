@@ -1,8 +1,11 @@
+import {CSSObject} from 'styled-components'
 import {getResponsiveProp, getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveMarginStyleProps} from './types'
 
-export function responsiveMarginStyle(props: ResponsiveMarginStyleProps & ThemeProps) {
+export function responsiveMarginStyle(
+  props: ResponsiveMarginStyleProps & ThemeProps
+): CSSObject[][] {
   const {theme} = props
 
   return [
@@ -13,5 +16,5 @@ export function responsiveMarginStyle(props: ResponsiveMarginStyleProps & ThemeP
     getResponsiveSpace(theme, ['marginRight'], getResponsiveProp(props.$marginRight)),
     getResponsiveSpace(theme, ['marginBottom'], getResponsiveProp(props.$marginBottom)),
     getResponsiveSpace(theme, ['marginLeft'], getResponsiveProp(props.$marginLeft)),
-  ].filter(Boolean)
+  ].filter(Boolean) as CSSObject[][]
 }

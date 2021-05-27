@@ -6,13 +6,16 @@ import {LayerContextValue} from './types'
 /**
  * @public
  */
-export function LayerProvider({
-  children,
-  zOffset: zOffsetProp = 0,
-}: {
+export interface LayerProviderProps {
   children?: React.ReactNode
   zOffset?: number | number[]
-}) {
+}
+
+/**
+ * @public
+ */
+export function LayerProvider(props: LayerProviderProps): React.ReactElement {
+  const {children, zOffset: zOffsetProp = 0} = props
   const parent = useContext(LayerContext)
   const zOffset = useResponsiveProp(zOffsetProp)
   const maxMediaIndex = zOffset.length - 1

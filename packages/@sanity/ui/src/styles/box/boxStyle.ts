@@ -1,8 +1,14 @@
 import {Property} from 'csstype'
-import {css} from 'styled-components'
+import {CSSObject} from 'styled-components'
 import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBoxStyleProps} from './types'
+
+const BASE_STYLE: CSSObject = {
+  '&[data-as="ul"],&[data-as="ol"]': {
+    listStyle: 'none',
+  },
+}
 
 const BOX_SIZING: {[key: string]: Property.BoxSizing} = {
   content: 'content-box',
@@ -14,16 +20,13 @@ const BOX_HEIGHT = {
   fill: '100%',
 }
 
-export function boxStyle() {
-  return css`
-    &[data-as='ul'],
-    &[data-as='ol'] {
-      list-style: none;
-    }
-  `
+export function boxStyle(): CSSObject {
+  return BASE_STYLE
 }
 
-export function responsiveBoxStyle() {
+export function responsiveBoxStyle(): Array<
+  (props: ResponsiveBoxStyleProps & ThemeProps) => CSSObject[]
+> {
   return [
     responsiveBoxSizingStyle,
     responsiveBoxHeightStyle,

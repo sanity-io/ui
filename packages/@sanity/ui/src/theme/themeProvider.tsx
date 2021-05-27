@@ -17,7 +17,7 @@ export interface ThemeProviderProps {
 /**
  * @public
  */
-export function ThemeProvider(props: ThemeProviderProps) {
+export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
   const {children, scheme = 'light', theme: rootTheme, tone = 'default'} = props
 
   const theme: Theme = useMemo(() => {

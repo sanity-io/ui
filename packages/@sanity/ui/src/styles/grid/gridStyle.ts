@@ -1,3 +1,4 @@
+import {CSSObject} from 'styled-components'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridStyleProps} from './types'
@@ -23,7 +24,9 @@ const GRID_AUTO_ROWS = {
   fr: 'minmax(0, 1fr)',
 }
 
-export function responsiveGridStyle() {
+export function responsiveGridStyle(): Array<
+  CSSObject | ((props: ResponsiveGridStyleProps & ThemeProps) => CSSObject[])
+> {
   return [
     GRID_CSS,
     responsiveGridAutoFlowStyle,
