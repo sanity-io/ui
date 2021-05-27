@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function BulbFilledIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const BulbFilledIcon = forwardRef(function BulbFilledIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="bulb-filled"
@@ -13,7 +17,7 @@ function BulbFilledIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -30,7 +34,4 @@ function BulbFilledIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(BulbFilledIcon)
-export default ForwardRef
+})

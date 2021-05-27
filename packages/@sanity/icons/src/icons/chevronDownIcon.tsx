@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const ChevronDownIcon = forwardRef(function ChevronDownIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="chevron-down"
@@ -13,13 +17,10 @@ function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Re
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M17 10L12.5 15.5L8 10" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ChevronDownIcon)
-export default ForwardRef
+})

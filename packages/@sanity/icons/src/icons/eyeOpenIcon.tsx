@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function EyeOpenIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const EyeOpenIcon = forwardRef(function EyeOpenIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="eye-open"
@@ -13,7 +17,7 @@ function EyeOpenIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SV
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -31,7 +35,4 @@ function EyeOpenIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SV
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(EyeOpenIcon)
-export default ForwardRef
+})

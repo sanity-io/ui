@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function DropIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const DropIcon = forwardRef(function DropIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="drop"
@@ -13,7 +17,7 @@ function DropIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSV
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -23,7 +27,4 @@ function DropIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSV
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(DropIcon)
-export default ForwardRef
+})

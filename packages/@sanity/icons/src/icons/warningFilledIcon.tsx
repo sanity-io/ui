@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function WarningFilledIcon(
+export const WarningFilledIcon = forwardRef(function WarningFilledIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,7 +17,7 @@ function WarningFilledIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -27,7 +28,4 @@ function WarningFilledIcon(
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(WarningFilledIcon)
-export default ForwardRef
+})

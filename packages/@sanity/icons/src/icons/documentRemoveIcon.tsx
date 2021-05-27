@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function DocumentRemoveIcon(
+export const DocumentRemoveIcon = forwardRef(function DocumentRemoveIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,7 +17,7 @@ function DocumentRemoveIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -28,7 +29,4 @@ function DocumentRemoveIcon(
       <path d="M2 13H23" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(DocumentRemoveIcon)
-export default ForwardRef
+})

@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function InlineElementIcon(
+export const InlineElementIcon = forwardRef(function InlineElementIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,7 +17,7 @@ function InlineElementIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <rect x={8.5} y={6.5} width={8} height={12} stroke="currentColor" strokeWidth={1.2} />
@@ -24,7 +25,4 @@ function InlineElementIcon(
       <path d="M19.5 5V20" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(InlineElementIcon)
-export default ForwardRef
+})

@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ThListIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const ThListIcon = forwardRef(function ThListIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="th-list"
@@ -13,7 +17,7 @@ function ThListIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <rect x={5.5} y={6.5} width={14} height={12} stroke="currentColor" strokeWidth={1.2} />
@@ -24,7 +28,4 @@ function ThListIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ThListIcon)
-export default ForwardRef
+})

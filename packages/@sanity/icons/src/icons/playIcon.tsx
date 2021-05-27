@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function PlayIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const PlayIcon = forwardRef(function PlayIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="play"
@@ -13,13 +17,10 @@ function PlayIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSV
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M9 19V6L19 12.5L9 19Z" fill="currentColor" />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(PlayIcon)
-export default ForwardRef
+})
