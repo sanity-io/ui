@@ -33,7 +33,7 @@ export interface MenuButtonProps {
    * Do not use in production.
    * @beta
    *
-   * @deprecated Use `popover={{radius: ...}}` instead.
+   * @deprecated Use `popover={{portal: ...}}` instead.
    */
   portal?: boolean
   /**
