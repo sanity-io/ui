@@ -1,6 +1,9 @@
 import {hues, white} from '@sanity/color'
 import React from 'react'
 
+/**
+ * @public
+ */
 export function SanityMonogram(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
