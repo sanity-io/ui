@@ -2,7 +2,10 @@ import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {Inline, KBD} from '../../primitives'
 
-interface HotkeysProps {
+/**
+ * @public
+ */
+export interface HotkeysProps {
   fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
@@ -23,6 +26,9 @@ const Key = styled(KBD)`
   }
 `
 
+/**
+ * @public
+ */
 export const Hotkeys = forwardRef(
   (
     props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,

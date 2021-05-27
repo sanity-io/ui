@@ -2,10 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {usePortal} from './usePortal'
 
-interface PortalProps {
+/**
+ * @public
+ */
+export interface PortalProps {
   children: React.ReactNode
 }
 
+/**
+ * @public
+ */
 export function Portal(props: PortalProps): React.ReactPortal | null {
   const portal = usePortal()
 

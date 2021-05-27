@@ -9,6 +9,9 @@ import {
 import {Box, BoxProps} from '../box'
 import {ResponsiveFlexProps, ResponsiveFlexItemProps} from '../types'
 
+/**
+ * @public
+ */
 export interface FlexProps
   extends Omit<BoxProps, 'display'>,
     ResponsiveFlexProps,
@@ -21,6 +24,9 @@ const Root = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
   responsiveFlexStyle
 )
 
+/**
+ * @public
+ */
 export const Flex = forwardRef(function Flex(
   props: FlexProps & Omit<React.HTMLProps<HTMLDivElement>, 'wrap'>,
   ref

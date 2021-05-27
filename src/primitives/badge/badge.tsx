@@ -1,12 +1,16 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
+import {BadgeMode, BadgeTone} from '../../types'
 import {Box, BoxProps} from '../box'
 import {Label} from '../label'
 import {ResponsiveRadiusProps} from '../types'
 import {badgeStyle} from './styles'
-import {BadgeStyleProps, BadgeMode, BadgeTone} from './types'
+import {BadgeStyleProps} from './types'
 
+/**
+ * @public
+ */
 export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
@@ -19,6 +23,9 @@ const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
   badgeStyle
 )
 
+/**
+ * @public
+ */
 export const Badge = forwardRef((props: BadgeProps & React.HTMLProps<HTMLDivElement>, ref) => {
   const {
     children,

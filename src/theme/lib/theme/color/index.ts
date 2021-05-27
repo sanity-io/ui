@@ -17,8 +17,14 @@ import {
 export * from './syntax'
 export * from './types'
 
-type PartialThemeColorBuilderOpts = Partial<ThemeColorBuilderOpts>
+/**
+ * @public
+ */
+export type PartialThemeColorBuilderOpts = Partial<ThemeColorBuilderOpts>
 
+/**
+ * @public
+ */
 export function createColorTheme(
   partialOpts: PartialThemeColorBuilderOpts = {}
 ): ThemeColorSchemes {

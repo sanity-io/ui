@@ -1,6 +1,7 @@
 import React from 'react'
 import {render} from '../../../test'
-import {ToastContext, ToastContextValue} from './toastContext'
+import {ToastContext} from './toastContext'
+import {ToastContextValue} from './types'
 import {useToast} from './useToast'
 
 describe('components/toast', () => {

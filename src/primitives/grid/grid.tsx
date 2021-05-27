@@ -4,10 +4,16 @@ import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/intern
 import {Box, BoxProps} from '../box'
 import {ResponsiveGridProps} from '../types'
 
-interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
+/**
+ * @public
+ */
+export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
 
 const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 
+/**
+ * @public
+ */
 export const Grid = forwardRef(
   (props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>, ref) => {
     const {

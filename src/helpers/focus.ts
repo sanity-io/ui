@@ -11,6 +11,9 @@ import {
 //   IgnoreUtilFocusChanges: false,
 // }
 
+/**
+ * @internal
+ */
 export function isFocusable(element: HTMLElement) {
   if (
     element.tabIndex > 0 ||
@@ -38,6 +41,9 @@ export function isFocusable(element: HTMLElement) {
   return false
 }
 
+/**
+ * @internal
+ */
 export function attemptFocus(element: HTMLElement) {
   if (!isFocusable(element)) {
     return false
@@ -56,6 +62,9 @@ export function attemptFocus(element: HTMLElement) {
   return document.activeElement === element
 }
 
+/**
+ * @internal
+ */
 export function focusFirstDescendant(element: HTMLElement) {
   for (let i = 0; i < element.childNodes.length; i++) {
     const child = element.childNodes[i]
@@ -68,6 +77,9 @@ export function focusFirstDescendant(element: HTMLElement) {
   return false
 }
 
+/**
+ * @internal
+ */
 export function focusLastDescendant(element: HTMLElement) {
   for (let i = element.childNodes.length - 1; i >= 0; i--) {
     const child = element.childNodes[i]

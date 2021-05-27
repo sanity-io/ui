@@ -1,5 +1,8 @@
 import {HSL, RGB} from './types'
 
+/**
+ * @internal
+ */
 export function hexToRgb(hex: string) {
   if (hex.length === 4) {
     const hexR = hex.slice(1, 2)
@@ -20,10 +23,16 @@ export function hexToRgb(hex: string) {
   }
 }
 
+/**
+ * @internal
+ */
 export function rgbToHex({r, g, b}: RGB): string {
   return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
+/**
+ * @internal
+ */
 export function hslToRgb(hsl: HSL): RGB {
   // Must be fractions of 1
   const s = hsl.s / 100

@@ -7,6 +7,9 @@ import {Layer, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
 
+/**
+ * @public
+ */
 export interface TooltipProps {
   allowedAutoPlacements?: Placement[]
   boundaryElement?: HTMLElement | null
@@ -22,6 +25,9 @@ const Root = styled(Layer)`
   pointer-events: none;
 `
 
+/**
+ * @public
+ */
 export const Tooltip = forwardRef(
   (
     props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,

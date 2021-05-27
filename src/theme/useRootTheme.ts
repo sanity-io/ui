@@ -1,8 +1,12 @@
 import {useContext} from 'react'
 import {isRecord} from '../lib/isRecord'
-import {ThemeContext, ThemeContextValue} from './themeContext'
+import {ThemeContext} from './themeContext'
+import {ThemeContextValue} from './types'
 
-export function useRootTheme() {
+/**
+ * @public
+ */
+export function useRootTheme(): ThemeContextValue {
   const value: unknown = useContext(ThemeContext)
 
   if (!value) {

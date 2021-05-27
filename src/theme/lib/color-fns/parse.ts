@@ -34,6 +34,9 @@ function parseHsl(str: string): HSL {
   return {h: parseInt(res[1]), s: parseFloat(res[3]), l: parseFloat(res[5])}
 }
 
+/**
+ * @internal
+ */
 export function parseColor(color: unknown): RGB {
   if (!color) return {r: 0, g: 0, b: 0}
 

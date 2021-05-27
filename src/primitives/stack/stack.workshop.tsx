@@ -1,7 +1,6 @@
-import {Card, Flex, Stack, Text} from '@sanity/ui'
+import {Card, Container, Flex, Stack, Text} from '@sanity/ui'
 import {defineScope, useSelect} from '@sanity/ui-workshop'
 import React from 'react'
-import {Container} from '../container'
 
 const SPACE_OPTIONS = {
   '0': 0,

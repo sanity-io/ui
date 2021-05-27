@@ -1,6 +1,7 @@
 import React from 'react'
 import {render} from '../../../test'
-import {PortalContext, PortalContextValue} from './portalContext'
+import {PortalContext} from './portalContext'
+import {PortalContextValue} from './types'
 import {usePortal} from './usePortal'
 
 describe('utils/portal', () => {

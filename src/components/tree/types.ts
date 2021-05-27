@@ -1,14 +1,13 @@
 /**
- * @internal
+ * @beta
  */
 export interface TreeState {
   [key: string]: {element: HTMLElement; expanded: boolean} | undefined
 }
 
 /**
- * @internal
+ * @beta
  */
-
 export interface TreeContextValue {
   version: 0.0
   focusedElement: HTMLElement | null

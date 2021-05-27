@@ -1,7 +1,13 @@
 import {ThemeColorSyntax} from './syntax'
 
+/**
+ * @public
+ */
 export type ThemeColorSchemeKey = 'dark' | 'light'
 
+/**
+ * @public
+ */
 export type ThemeColorName =
   | 'default'
   | 'transparent'
@@ -10,8 +16,14 @@ export type ThemeColorName =
   | 'caution'
   | 'critical'
 
+/**
+ * @public
+ */
 export type ThemeColorButtonModeKey = 'default' | 'ghost' | 'bleed'
 
+/**
+ * @public
+ */
 export type ThemeColorToneKey =
   | 'default'
   | 'transparent'
@@ -20,6 +32,9 @@ export type ThemeColorToneKey =
   | 'caution'
   | 'critical'
 
+/**
+ * @public
+ */
 export type ThemeColorSpotKey =
   | 'gray'
   | 'blue'
@@ -31,12 +46,18 @@ export type ThemeColorSpotKey =
   | 'green'
   | 'cyan'
 
+/**
+ * @public
+ */
 export interface ThemeColorButtonState {
   bg: string
   fg: string
   border: string
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorButtonStates {
   enabled: ThemeColorButtonState
   hovered: ThemeColorButtonState
@@ -45,6 +66,9 @@ export interface ThemeColorButtonStates {
   disabled: ThemeColorButtonState
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorCardState {
   bg: string
   fg: string
@@ -64,6 +88,9 @@ export interface ThemeColorCardState {
   }
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorCard {
   enabled: ThemeColorCardState
   hovered: ThemeColorCardState
@@ -72,6 +99,9 @@ export interface ThemeColorCard {
   disabled: ThemeColorCardState
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorBase {
   bg: string
   fg: string
@@ -85,12 +115,18 @@ export interface ThemeColorBase {
   }
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorGenericState {
   bg: string
   border: string
   fg: string
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorSolidTone {
   enabled: ThemeColorGenericState
   disabled: ThemeColorGenericState
@@ -99,6 +135,9 @@ export interface ThemeColorSolidTone {
   selected: ThemeColorGenericState
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorSolid {
   default: ThemeColorSolidTone
   transparent: ThemeColorSolidTone
@@ -108,6 +147,9 @@ export interface ThemeColorSolid {
   critical: ThemeColorSolidTone
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorMutedTone {
   enabled: ThemeColorGenericState
   disabled: ThemeColorGenericState
@@ -116,6 +158,9 @@ export interface ThemeColorMutedTone {
   selected: ThemeColorGenericState
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorMuted {
   default: ThemeColorMutedTone
   transparent: ThemeColorMutedTone
@@ -125,6 +170,9 @@ export interface ThemeColorMuted {
   critical: ThemeColorMutedTone
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorButtonTones {
   default: ThemeColorButtonStates
   primary: ThemeColorButtonStates
@@ -133,12 +181,18 @@ export interface ThemeColorButtonTones {
   critical: ThemeColorButtonStates
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorButton {
   default: ThemeColorButtonTones
   ghost: ThemeColorButtonTones
   bleed: ThemeColorButtonTones
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorInputState {
   bg: string
   fg: string
@@ -146,6 +200,9 @@ export interface ThemeColorInputState {
   placeholder: string
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorInputStates {
   enabled: ThemeColorInputState
   disabled: ThemeColorInputState
@@ -153,11 +210,17 @@ export interface ThemeColorInputStates {
   readOnly: ThemeColorInputState
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorInput {
   default: ThemeColorInputStates
   invalid: ThemeColorInputStates
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorSpot {
   gray: string
   blue: string
@@ -170,6 +233,9 @@ export interface ThemeColorSpot {
   cyan: string
 }
 
+/**
+ * @public
+ */
 export interface ThemeColor {
   dark: boolean
   base: ThemeColorBase
@@ -182,6 +248,9 @@ export interface ThemeColor {
   muted: ThemeColorMuted
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorScheme {
   default: ThemeColor
   transparent: ThemeColor
@@ -191,11 +260,17 @@ export interface ThemeColorScheme {
   critical: ThemeColor
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorSchemes {
   dark: ThemeColorScheme
   light: ThemeColorScheme
 }
 
+/**
+ * @public
+ */
 export interface ThemeColorBuilderOpts {
   base: (opts: {dark: boolean; name: ThemeColorName}) => ThemeColorBase
   solid: (opts: {

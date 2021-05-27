@@ -1,7 +1,10 @@
 import {useEffect, useRef, useState} from 'react'
 import {EMPTY_ARRAY} from '../constants'
 
-type ClickOutsideListener = (event: MouseEvent) => void
+/**
+ * @public
+ */
+export type ClickOutsideListener = (event: MouseEvent) => void
 
 function _getElements(
   element: HTMLElement | null,
@@ -20,6 +23,9 @@ function _getElements(
   return ret.filter(Boolean) as HTMLElement[]
 }
 
+/**
+ * @public
+ */
 export function useClickOutside(
   listener: ClickOutsideListener,
   elementsArg: Array<HTMLElement | HTMLElement[] | null> = EMPTY_ARRAY,

@@ -4,10 +4,13 @@ import ReactIs from 'react-is'
 import styled from 'styled-components'
 import {useResponsiveProp} from '../../hooks'
 import {ThemeColorSpotKey, useTheme} from '../../theme'
+import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
 import {Text} from '../text'
 import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
-import {AvatarPosition, AvatarSize, AvatarStatus} from './types'
 
+/**
+ * @public
+ */
 export interface AvatarProps {
   animateArrowFrom?: AvatarPosition
   arrowPosition?: AvatarPosition
@@ -38,6 +41,9 @@ const Stroke = styled.ellipse(avatarStyle.stroke)
 
 const Initials = styled.div(avatarStyle.initials)
 
+/**
+ * @public
+ */
 export const Avatar = forwardRef(
   (props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>, ref) => {
     const {

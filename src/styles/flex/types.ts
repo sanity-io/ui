@@ -1,14 +1,8 @@
-// Flex
-export type FlexAlign = 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
-export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
-export type FlexJustify =
-  | 'flex-start'
-  | 'flex-end'
-  | 'center'
-  | 'space-between'
-  | 'space-around'
-  | 'space-evenly'
-export type FlexWrap = 'wrap' | 'wrap-reverse' | 'nowrap'
+import {FlexAlign, FlexDirection, FlexJustify, FlexWrap} from '../../types'
+
+/**
+ * @internal
+ */
 export interface ResponsiveFlexStyleProps {
   $align?: FlexAlign | FlexAlign[]
   $direction?: FlexDirection | FlexDirection[]
@@ -17,8 +11,14 @@ export interface ResponsiveFlexStyleProps {
   $wrap?: FlexWrap | FlexWrap[]
 }
 
-// FlexItem
+/**
+ * @internal
+ */
 export interface ResponsiveFlexItemStyleProps {
   $flex?: number | number[]
 }
+
+/**
+ * @internal
+ */
 export interface FlexItemStyleProps extends ResponsiveFlexItemStyleProps {}

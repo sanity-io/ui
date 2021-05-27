@@ -11,6 +11,9 @@ import {TextAlign} from '../../types'
 import {headingBaseStyle} from './styles'
 import {HeadingStyleProps} from './types'
 
+/**
+ * @public
+ */
 export interface HeadingProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
@@ -37,6 +40,9 @@ const SpanWithTextOverflow = styled.span`
   overflow: hidden;
 `
 
+/**
+ * @public
+ */
 export const Heading = forwardRef(
   (props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {
     const {

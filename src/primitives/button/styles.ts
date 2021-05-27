@@ -2,7 +2,7 @@ import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 import {ThemeColorButtonState} from '../../theme'
-import {ButtonMode, ButtonTone} from './types'
+import {ButtonMode, ButtonTone} from '../../types'
 
 export function buttonBaseStyles() {
   return css`

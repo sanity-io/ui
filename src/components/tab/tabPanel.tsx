@@ -1,7 +1,10 @@
 import React, {forwardRef} from 'react'
 import {Box, BoxProps} from '../../primitives'
 
-interface TabPanelProps extends BoxProps {
+/**
+ * @public
+ */
+export interface TabPanelProps extends BoxProps {
   /**
    * The `id` of the correlating `Tab` component.
    */
@@ -9,6 +12,9 @@ interface TabPanelProps extends BoxProps {
   id: string
 }
 
+/**
+ * @public
+ */
 export const TabPanel = forwardRef(
   (
     props: TabPanelProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-labelledby' | 'id' | 'role'>,

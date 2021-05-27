@@ -3,12 +3,18 @@ import styled from 'styled-components'
 import {Box, BoxProps} from '../box'
 import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
-interface StackProps extends BoxProps {
+/**
+ * @public
+ */
+export interface StackProps extends BoxProps {
   space?: number | number[]
 }
 
 const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
 
+/**
+ * @public
+ */
 export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElement>, ref) => {
   const {as, space, ...restProps} = props
 

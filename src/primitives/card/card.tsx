@@ -9,14 +9,16 @@ import {
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
-import {ThemeColorProvider, ThemeColorSchemeKey, ThemeColorToneKey, useRootTheme} from '../../theme'
+import {ThemeColorProvider, ThemeColorSchemeKey, useRootTheme} from '../../theme'
+import {CardTone} from '../../types'
 import {Box, BoxProps} from '../box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {cardStyle} from './styles'
 import {CardStyleProps} from './types'
 
-export type CardTone = ThemeColorToneKey | 'inherit'
-
+/**
+ * @public
+ */
 export interface CardProps
   extends BoxProps,
     ResponsiveBorderProps,
@@ -33,6 +35,9 @@ const Root = styled(Box)<
     ResponsiveShadowStyleProps
 >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
+/**
+ * @public
+ */
 export const Card = forwardRef(
   (props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>, ref) => {
     const {

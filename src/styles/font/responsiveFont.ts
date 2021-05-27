@@ -6,7 +6,7 @@ import {ResponsiveFontStyleProps} from './types'
 
 /**
  * A utility function getting responsive font styles.
- * @beta Should not be used in production, as this might change.
+ * @internal
  */
 export function responsiveFont(
   fontKey: ThemeFontKey,

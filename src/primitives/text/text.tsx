@@ -9,6 +9,9 @@ import {ThemeFontWeightKey} from '../../theme'
 import {TextAlign} from '../../types'
 import {textBaseStyle} from './styles'
 
+/**
+ * @public
+ */
 export interface TextProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
@@ -37,6 +40,9 @@ const SpanWithTextOverflow = styled.span`
   overflow: hidden;
 `
 
+/**
+ * @public
+ */
 export const Text = forwardRef(
   (props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {
     const {

@@ -4,6 +4,9 @@ import {EMPTY_RECORD} from '../../constants'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 
+/**
+ * @public
+ */
 export interface LayerProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   zOffset?: number | number[]
@@ -31,6 +34,9 @@ const LayerChildren = forwardRef(function LayerChildren(
   )
 })
 
+/**
+ * @public
+ */
 export const Layer = forwardRef(function Layer(
   props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
   ref: React.Ref<HTMLDivElement>

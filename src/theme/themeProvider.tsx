@@ -1,15 +1,23 @@
 import React, {useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
-import {ThemeContext, ThemeContextValue} from './themeContext'
-import {RootTheme, Theme} from './types'
+import {ThemeContext} from './themeContext'
+import {RootTheme, Theme, ThemeContextValue} from './types'
 
-export function ThemeProvider(props: {
+/**
+ * @public
+ */
+export interface ThemeProviderProps {
   children?: React.ReactNode
   scheme?: ThemeColorSchemeKey
   theme: RootTheme
   tone?: ThemeColorName
-}) {
+}
+
+/**
+ * @public
+ */
+export function ThemeProvider(props: ThemeProviderProps) {
   const {children, scheme = 'light', theme: rootTheme, tone = 'default'} = props
 
   const theme: Theme = useMemo(() => {

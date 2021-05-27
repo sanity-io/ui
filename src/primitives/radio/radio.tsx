@@ -3,13 +3,19 @@ import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {radioBaseStyle, inputElementStyle} from './styles'
 
-interface RadioProps {
+/**
+ * @public
+ */
+export interface RadioProps {
   customValidity?: string
 }
 
 const Root = styled.div(radioBaseStyle)
 const Input = styled.input(inputElementStyle)
 
+/**
+ * @public
+ */
 export const Radio = forwardRef(
   (
     props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps,
