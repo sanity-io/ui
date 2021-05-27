@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function AccessDeniedIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const AccessDeniedIcon = forwardRef(function AccessDeniedIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="access-denied"
@@ -13,7 +17,7 @@ function AccessDeniedIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.R
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -23,7 +27,4 @@ function AccessDeniedIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.R
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(AccessDeniedIcon)
-export default ForwardRef
+})

@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function EarthAmericasIcon(
+export const EarthAmericasIcon = forwardRef(function EarthAmericasIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,7 +17,7 @@ function EarthAmericasIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <circle cx={12.5} cy={12.5} r={8} stroke="currentColor" strokeWidth={1.2} />
@@ -28,7 +29,4 @@ function EarthAmericasIcon(
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(EarthAmericasIcon)
-export default ForwardRef
+})

@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function UnknownIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const UnknownIcon = forwardRef(function UnknownIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="unknown"
@@ -13,7 +17,7 @@ function UnknownIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SV
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <rect x={5.5} y={5.5} width={14} height={14} stroke="currentColor" strokeWidth={1.2} />
@@ -25,7 +29,4 @@ function UnknownIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SV
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(UnknownIcon)
-export default ForwardRef
+})

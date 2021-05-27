@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function UploadIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const UploadIcon = forwardRef(function UploadIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="upload"
@@ -13,7 +17,7 @@ function UploadIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M19.5 15.5H5.5V19.5H19.5V15.5Z" stroke="currentColor" strokeWidth={1.2} />
@@ -21,7 +25,4 @@ function UploadIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       <path d="M7.5 11L12.5 6.00003L17.5 11" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(UploadIcon)
-export default ForwardRef
+})

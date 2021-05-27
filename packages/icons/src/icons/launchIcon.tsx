@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function LaunchIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const LaunchIcon = forwardRef(function LaunchIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="launch"
@@ -13,7 +17,7 @@ function LaunchIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M15 5.5H5.5V19.5H19.5V10" stroke="currentColor" strokeWidth={1.2} />
@@ -21,7 +25,4 @@ function LaunchIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       <path d="M17 3.5H21.5V8" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(LaunchIcon)
-export default ForwardRef
+})

@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ApiIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const ApiIcon = forwardRef(function ApiIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="api"
@@ -13,7 +17,7 @@ function ApiIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVG
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -24,7 +28,4 @@ function ApiIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVG
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ApiIcon)
-export default ForwardRef
+})

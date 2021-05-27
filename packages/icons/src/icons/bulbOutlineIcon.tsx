@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function BulbOutlineIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const BulbOutlineIcon = forwardRef(function BulbOutlineIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="bulb-outline"
@@ -13,7 +17,7 @@ function BulbOutlineIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Re
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -29,7 +33,4 @@ function BulbOutlineIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Re
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(BulbOutlineIcon)
-export default ForwardRef
+})

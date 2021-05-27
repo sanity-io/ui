@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function BillIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const BillIcon = forwardRef(function BillIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="bill"
@@ -13,7 +17,7 @@ function BillIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSV
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -26,7 +30,4 @@ function BillIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSV
       <path d="M11 16H17" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(BillIcon)
-export default ForwardRef
+})

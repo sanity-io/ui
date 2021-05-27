@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function JoystickIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const JoystickIcon = forwardRef(function JoystickIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="joystick"
@@ -13,7 +17,7 @@ function JoystickIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <circle cx={12.5} cy={7.5} r={3} stroke="currentColor" strokeWidth={1.2} />
@@ -23,7 +27,4 @@ function JoystickIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       <path d="M5.5 17.5H19.5V20.5H5.5V17.5Z" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(JoystickIcon)
-export default ForwardRef
+})

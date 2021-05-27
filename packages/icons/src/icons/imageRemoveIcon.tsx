@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ImageRemoveIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const ImageRemoveIcon = forwardRef(function ImageRemoveIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="image-remove"
@@ -13,7 +17,7 @@ function ImageRemoveIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Re
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -25,7 +29,4 @@ function ImageRemoveIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Re
       <path d="M2 13H23" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ImageRemoveIcon)
-export default ForwardRef
+})

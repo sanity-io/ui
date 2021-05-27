@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function InfoOutlineIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const InfoOutlineIcon = forwardRef(function InfoOutlineIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="info-outline"
@@ -13,7 +17,7 @@ function InfoOutlineIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Re
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <circle cx={12.5} cy={12.5} r={8} stroke="currentColor" strokeWidth={1.2} />
@@ -21,7 +25,4 @@ function InfoOutlineIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Re
       <path d="M12.5 12V16" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(InfoOutlineIcon)
-export default ForwardRef
+})

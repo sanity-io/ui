@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function DragHandleIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const DragHandleIcon = forwardRef(function DragHandleIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="drag-handle"
@@ -13,7 +17,7 @@ function DragHandleIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <circle cx={9.5} cy={6.5} r={1.5} fill="currentColor" />
@@ -24,7 +28,4 @@ function DragHandleIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref
       <circle cx={15.5} cy={18.5} r={1.5} fill="currentColor" />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(DragHandleIcon)
-export default ForwardRef
+})

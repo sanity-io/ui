@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function SplitHorizontalIcon(
+export const SplitHorizontalIcon = forwardRef(function SplitHorizontalIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,14 +17,11 @@ function SplitHorizontalIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M19.5 12.5H5.5V6.5H19.5V12.5Z" stroke="currentColor" strokeWidth={1.2} />
       <path d="M19.5 18.5H5.5V12.5H19.5V18.5Z" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(SplitHorizontalIcon)
-export default ForwardRef
+})

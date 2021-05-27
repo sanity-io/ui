@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ExpandIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const ExpandIcon = forwardRef(function ExpandIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="expand"
@@ -13,7 +17,7 @@ function ExpandIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M18.5 6.5L14 11" stroke="currentColor" strokeWidth={1.2} />
@@ -22,7 +26,4 @@ function ExpandIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVG
       <path d="M11 18.5H6.5L6.5 14" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ExpandIcon)
-export default ForwardRef
+})

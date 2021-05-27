@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function DocumentIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const DocumentIcon = forwardRef(function DocumentIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="document"
@@ -13,14 +17,11 @@ function DocumentIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M10.5 4.5H18.5V20.5H6.5V8.5L10.5 4.5Z" stroke="currentColor" strokeWidth={1.2} />
       <path d="M10.5 4.5V8.5H6.5" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(DocumentIcon)
-export default ForwardRef
+})

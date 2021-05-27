@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function SunIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const SunIcon = forwardRef(function SunIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="sun"
@@ -13,7 +17,7 @@ function SunIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVG
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <circle cx={12.5} cy={12.5} r={4} stroke="currentColor" strokeWidth={1.2} />
@@ -27,7 +31,4 @@ function SunIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVG
       <path d="M7.55025 7.55026L5.42893 5.42894" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(SunIcon)
-export default ForwardRef
+})

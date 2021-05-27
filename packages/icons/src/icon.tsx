@@ -2,24 +2,26 @@ import React, {createElement, forwardRef} from 'react'
 import {icons} from './icons'
 import type {IconSymbol} from './icons'
 
-interface IconProps {
+/**
+ * @public
+ */
+export interface IconProps {
   symbol: IconSymbol
 }
 
-export const Icon = forwardRef(
-  (
-    props: IconProps & Omit<React.SVGProps<SVGSVGElement>, 'ref'>,
-    ref: React.Ref<SVGSVGElement>
-  ) => {
-    const {symbol, ...restProps} = props
-    const iconComponent = icons[symbol]
+/**
+ * @public
+ */
+export const Icon = forwardRef(function Icon(
+  props: IconProps & Omit<React.SVGProps<SVGSVGElement>, 'ref'>,
+  ref: React.Ref<SVGSVGElement>
+) {
+  const {symbol, ...restProps} = props
+  const iconComponent = icons[symbol]
 
-    if (!iconComponent) {
-      return null
-    }
-
-    return createElement(iconComponent, {...restProps, ref})
+  if (!iconComponent) {
+    return null
   }
-)
 
-Icon.displayName = 'Icon'
+  return createElement(iconComponent, {...restProps, ref})
+})

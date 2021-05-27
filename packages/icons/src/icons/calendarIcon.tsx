@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function CalendarIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const CalendarIcon = forwardRef(function CalendarIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="calendar"
@@ -13,7 +17,7 @@ function CalendarIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -32,7 +36,4 @@ function CalendarIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       <path d="M17.5 8V3" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(CalendarIcon)
-export default ForwardRef
+})

@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function LemonIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const LemonIcon = forwardRef(function LemonIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="lemon"
@@ -13,7 +17,7 @@ function LemonIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGS
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -28,7 +32,4 @@ function LemonIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGS
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(LemonIcon)
-export default ForwardRef
+})
