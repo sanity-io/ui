@@ -1,10 +1,13 @@
 import {hues} from '@sanity/color'
-import React from 'react'
+import React, {forwardRef} from 'react'
 
 /**
  * @public
  */
-export function GroqLogo(props: React.SVGProps<SVGSVGElement>) {
+export const GroqLogo = forwardRef(function GroqLogo(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="groq-logo"
@@ -13,6 +16,7 @@ export function GroqLogo(props: React.SVGProps<SVGSVGElement>) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path d="M32 0L0 32H32V0Z" fill={hues.magenta[400].hex} />
       <path d="M32 32H0L32 64V32Z" fill={hues.green[300].hex} />
@@ -34,4 +38,4 @@ export function GroqLogo(props: React.SVGProps<SVGSVGElement>) {
       <path d="M272 0V32H304L272 0Z" fill={hues.green[300].hex} />
     </svg>
   )
-}
+})
