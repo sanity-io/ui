@@ -1,7 +1,10 @@
 import {hues, white} from '@sanity/color'
 import React from 'react'
 
-interface SanityLogoProps {
+/**
+ * @public
+ */
+export interface SanityLogoProps {
   dark?: boolean
 }
 
@@ -10,6 +13,9 @@ const schemes = {
   dark: [hues.gray[500].hex, hues.gray[300].hex, white.hex],
 }
 
+/**
+ * @public
+ */
 export function SanityLogo(props: SanityLogoProps & React.SVGProps<SVGSVGElement>) {
   const scheme = schemes[props.dark ? 'dark' : 'light']
 
