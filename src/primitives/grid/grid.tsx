@@ -14,42 +14,30 @@ const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 /**
  * @public
  */
-export const Grid = forwardRef(
-  (props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>, ref) => {
-    const {
-      as,
-      autoRows,
-      autoCols,
-      autoFlow,
-      columns,
-      gap,
-      gapX,
-      gapY,
-      rows,
-      children,
-      ...restProps
-    } = props
+export const Grid = forwardRef(function Grid(
+  props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>,
+  ref
+) {
+  const {as, autoRows, autoCols, autoFlow, columns, gap, gapX, gapY, rows, children, ...restProps} =
+    props
 
-    return (
-      <Root
-        data-as={typeof as === 'string' ? as : undefined}
-        data-ui="Grid"
-        {...restProps}
-        $autoRows={autoRows}
-        $autoCols={autoCols}
-        $autoFlow={autoFlow}
-        $columns={columns}
-        $gap={gap}
-        $gapX={gapX}
-        $gapY={gapY}
-        $rows={rows}
-        forwardedAs={as}
-        ref={ref}
-      >
-        {children}
-      </Root>
-    )
-  }
-)
-
-Grid.displayName = 'Grid'
+  return (
+    <Root
+      data-as={typeof as === 'string' ? as : undefined}
+      data-ui="Grid"
+      {...restProps}
+      $autoRows={autoRows}
+      $autoCols={autoCols}
+      $autoFlow={autoFlow}
+      $columns={columns}
+      $gap={gap}
+      $gapX={gapX}
+      $gapY={gapY}
+      $rows={rows}
+      forwardedAs={as}
+      ref={ref}
+    >
+      {children}
+    </Root>
+  )
+})

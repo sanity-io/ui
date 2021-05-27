@@ -19,21 +19,18 @@ const Root = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeF
 /**
  * @public
  */
-export const Code = forwardRef(
-  (props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {
-    const {children, language: languageProp, size = 2, weight, ...restProps} = props
-    const language = typeof languageProp === 'string' ? languageProp : undefined
-    const registered = language ? Refractor.hasLanguage(language as any) : false
+export const Code = forwardRef(function Code(
+  props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'size'>,
+  ref
+) {
+  const {children, language: languageProp, size = 2, weight, ...restProps} = props
+  const language = typeof languageProp === 'string' ? languageProp : undefined
+  const registered = language ? Refractor.hasLanguage(language as any) : false
 
-    return (
-      <Root data-ui="Code" {...restProps} $size={size} $weight={weight} ref={ref}>
-        {!(language && registered) && <code>{children}</code>}
-        {language && registered && (
-          <Refractor inline language={language} value={String(children)} />
-        )}
-      </Root>
-    )
-  }
-)
-
-Code.displayName = 'Code'
+  return (
+    <Root data-ui="Code" {...restProps} $size={size} $weight={weight} ref={ref}>
+      {!(language && registered) && <code>{children}</code>}
+      {language && registered && <Refractor inline language={language} value={String(children)} />}
+    </Root>
+  )
+})

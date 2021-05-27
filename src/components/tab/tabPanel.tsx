@@ -15,26 +15,22 @@ export interface TabPanelProps extends BoxProps {
 /**
  * @public
  */
-export const TabPanel = forwardRef(
-  (
-    props: TabPanelProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-labelledby' | 'id' | 'role'>,
-    ref
-  ) => {
-    const {flex, ...restProps} = props
+export const TabPanel = forwardRef(function TabPanel(
+  props: TabPanelProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-labelledby' | 'id' | 'role'>,
+  ref
+) {
+  const {flex, ...restProps} = props
 
-    return (
-      <Box
-        data-ui="TabPanel"
-        {...restProps}
-        flex={flex}
-        ref={ref}
-        role="tabpanel"
-        tabIndex={props.tabIndex === undefined ? 0 : props.tabIndex}
-      >
-        {props.children}
-      </Box>
-    )
-  }
-)
-
-TabPanel.displayName = 'TabPanel'
+  return (
+    <Box
+      data-ui="TabPanel"
+      {...restProps}
+      flex={flex}
+      ref={ref}
+      role="tabpanel"
+      tabIndex={props.tabIndex === undefined ? 0 : props.tabIndex}
+    >
+      {props.children}
+    </Box>
+  )
+})

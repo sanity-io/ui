@@ -115,7 +115,7 @@ const DialogFooter = styled(Box)`
   border-top: 1px solid var(--card-hairline-soft-color);
 `
 
-const DialogCard = forwardRef((props: DialogCardProps, ref) => {
+const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
   const {
     __unstable_autoFocus: autoFocus = true,
     children,
@@ -226,99 +226,93 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
   )
 })
 
-DialogCard.displayName = 'DialogCard'
-
 /**
  * @public
  */
-export const Dialog = forwardRef(
-  (
-    props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
-    const dialog = useDialog()
-    const {
-      __unstable_autoFocus: autoFocus = true,
-      cardRadius = 3,
-      cardShadow = 4,
-      children,
-      contentRef,
-      footer,
-      header,
-      id,
-      onClickOutside,
-      onClose,
-      padding = 4,
-      position = dialog.position || 'fixed',
-      scheme,
-      width = 0,
-      zOffset = dialog.zOffset,
-      ...restProps
-    } = props
-    const preDivRef = useRef<HTMLDivElement | null>(null)
-    const postDivRef = useRef<HTMLDivElement | null>(null)
-    const cardRef = useRef<HTMLDivElement | null>(null)
+export const Dialog = forwardRef(function Dialog(
+  props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
+  ref: React.Ref<HTMLDivElement>
+) {
+  const dialog = useDialog()
+  const {
+    __unstable_autoFocus: autoFocus = true,
+    cardRadius = 3,
+    cardShadow = 4,
+    children,
+    contentRef,
+    footer,
+    header,
+    id,
+    onClickOutside,
+    onClose,
+    padding = 4,
+    position = dialog.position || 'fixed',
+    scheme,
+    width = 0,
+    zOffset = dialog.zOffset,
+    ...restProps
+  } = props
+  const preDivRef = useRef<HTMLDivElement | null>(null)
+  const postDivRef = useRef<HTMLDivElement | null>(null)
+  const cardRef = useRef<HTMLDivElement | null>(null)
 
-    const handleFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-      const target = event.target
-      const cardElement = cardRef.current
+  const handleFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+    const target = event.target
+    const cardElement = cardRef.current
 
-      if (!cardElement) {
-        return
-      }
+    if (!cardElement) {
+      return
+    }
 
-      if (target === preDivRef.current) {
-        focusLastDescendant(cardElement)
+    if (target === preDivRef.current) {
+      focusLastDescendant(cardElement)
 
-        return
-      }
+      return
+    }
 
-      if (target === postDivRef.current) {
-        focusFirstDescendant(cardElement)
+    if (target === postDivRef.current) {
+      focusFirstDescendant(cardElement)
 
-        return
-      }
-    }, [])
+      return
+    }
+  }, [])
 
-    const labelId = `${id}_label`
+  const labelId = `${id}_label`
 
-    return (
-      <Portal>
-        <Root
-          {...restProps}
-          $padding={padding}
-          $position={position}
-          aria-labelledby={labelId}
-          aria-modal
-          data-ui="Dialog"
+  return (
+    <Portal>
+      <Root
+        {...restProps}
+        $padding={padding}
+        $position={position}
+        aria-labelledby={labelId}
+        aria-modal
+        data-ui="Dialog"
+        id={id}
+        onFocus={handleFocus}
+        ref={ref}
+        role="dialog"
+        zOffset={zOffset}
+      >
+        <div ref={preDivRef} tabIndex={0} />
+        <DialogCard
+          __unstable_autoFocus={autoFocus}
+          contentRef={contentRef}
+          footer={footer}
+          header={header}
           id={id}
-          onFocus={handleFocus}
-          ref={ref}
-          role="dialog"
-          zOffset={zOffset}
+          onClickOutside={onClickOutside}
+          onClose={onClose}
+          radius={cardRadius}
+          ref={cardRef}
+          scheme={scheme}
+          shadow={cardShadow}
+          width={width}
         >
-          <div ref={preDivRef} tabIndex={0} />
-          <DialogCard
-            __unstable_autoFocus={autoFocus}
-            contentRef={contentRef}
-            footer={footer}
-            header={header}
-            id={id}
-            onClickOutside={onClickOutside}
-            onClose={onClose}
-            radius={cardRadius}
-            ref={cardRef}
-            scheme={scheme}
-            shadow={cardShadow}
-            width={width}
-          >
-            {children}
-          </DialogCard>
-          <div ref={postDivRef} tabIndex={0} />
-        </Root>
-      </Portal>
-    )
-  }
-)
-
-Dialog.displayName = 'Dialog'
+          {children}
+        </DialogCard>
+        <div ref={postDivRef} tabIndex={0} />
+      </Root>
+    </Portal>
+  )
+})

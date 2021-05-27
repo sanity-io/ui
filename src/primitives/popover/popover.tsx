@@ -93,148 +93,144 @@ const PopoverCard = styled(Card)<
 /**
  * @public
  */
-export const Popover = forwardRef(
-  (
-    props: PopoverProps &
-      Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-    ref
-  ) => {
-    const boundaryElementContext = useBoundaryElement()
-    const {
-      __unstable_margins: margins,
-      allowedAutoPlacements,
-      arrow = true,
-      boundaryElement: boundaryElementProp = boundaryElementContext.element,
-      children: child,
-      content,
-      constrainSize,
-      disabled,
-      fallbackPlacements,
-      open,
-      padding,
-      placement = 'bottom',
-      portal: portalProp = false,
-      preventOverflow,
-      radius = 3,
-      referenceElement: referenceElementProp,
-      matchReferenceWidth,
-      shadow = 3,
-      scheme,
-      style = EMPTY_RECORD,
-      tether,
-      tetherOffset,
-      tone,
-      width = 0,
-      ...restProps
-    } = props
-    const forwardedRef = useForwardedRef(ref)
-    const portal = usePortal()
-    const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
-    const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
-    const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
-    const popperReferenceElement = referenceElementProp || referenceElement
+export const Popover = forwardRef(function Popover(
+  props: PopoverProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
+  ref
+) {
+  const boundaryElementContext = useBoundaryElement()
+  const {
+    __unstable_margins: margins,
+    allowedAutoPlacements,
+    arrow = true,
+    boundaryElement: boundaryElementProp = boundaryElementContext.element,
+    children: child,
+    content,
+    constrainSize,
+    disabled,
+    fallbackPlacements,
+    open,
+    padding,
+    placement = 'bottom',
+    portal: portalProp = false,
+    preventOverflow,
+    radius = 3,
+    referenceElement: referenceElementProp,
+    matchReferenceWidth,
+    shadow = 3,
+    scheme,
+    style = EMPTY_RECORD,
+    tether,
+    tetherOffset,
+    tone,
+    width = 0,
+    ...restProps
+  } = props
+  const forwardedRef = useForwardedRef(ref)
+  const portal = usePortal()
+  const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
+  const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
+  const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
+  const popperReferenceElement = referenceElementProp || referenceElement
 
-    const modifiers = usePopoverModifiers({
-      allowedAutoPlacements,
-      arrow,
-      arrowElement,
-      boundaryElement: boundaryElementProp || portal.boundaryElement,
-      constrainSize,
-      distance: arrow ? 4 : 0,
-      fallbackPlacements,
-      margins,
-      matchReferenceWidth,
-      preventOverflow,
-      skidding: 0,
-      tether,
-      tetherOffset,
-    })
+  const modifiers = usePopoverModifiers({
+    allowedAutoPlacements,
+    arrow,
+    arrowElement,
+    boundaryElement: boundaryElementProp || portal.boundaryElement,
+    constrainSize,
+    distance: arrow ? 4 : 0,
+    fallbackPlacements,
+    margins,
+    matchReferenceWidth,
+    preventOverflow,
+    skidding: 0,
+    tether,
+    tetherOffset,
+  })
 
-    const popper = usePopper(popperReferenceElement, popperElement, {
-      placement,
-      modifiers,
-    })
+  const popper = usePopper(popperReferenceElement, popperElement, {
+    placement,
+    modifiers,
+  })
 
-    const {attributes, forceUpdate, styles} = popper
+  const {attributes, forceUpdate, styles} = popper
 
-    const setRef = useCallback(
-      (el: HTMLElement | null) => {
-        const childRef = (child as any).ref
+  const setRef = useCallback(
+    (el: HTMLElement | null) => {
+      const childRef = (child as any).ref
 
-        setReferenceElement(el)
+      setReferenceElement(el)
 
-        if (typeof childRef === 'function') {
-          childRef(el)
-        } else if (childRef) {
-          childRef.current = el
-        }
-      },
-      [child]
-    )
-
-    const setRootRef = useCallback(
-      (el: HTMLDivElement | null) => {
-        setPopperElement(el)
-        forwardedRef.current = el
-      },
-      [forwardedRef]
-    )
-
-    const popoverStyle = useMemo(() => ({...style, ...styles.popper}), [style, styles])
-
-    useEffect(() => {
-      if (forceUpdate) {
-        try {
-          forceUpdate()
-        } catch (_) {
-          // ignore caught error
-        }
+      if (typeof childRef === 'function') {
+        childRef(el)
+      } else if (childRef) {
+        childRef.current = el
       }
-    }, [content, forceUpdate, open, popperReferenceElement])
+    },
+    [child]
+  )
 
-    if (disabled) {
-      return child || <></>
+  const setRootRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      setPopperElement(el)
+      forwardedRef.current = el
+    },
+    [forwardedRef]
+  )
+
+  const popoverStyle = useMemo(() => ({...style, ...styles.popper}), [style, styles])
+
+  useEffect(() => {
+    if (forceUpdate) {
+      try {
+        forceUpdate()
+      } catch (_) {
+        // ignore caught error
+      }
     }
+  }, [content, forceUpdate, open, popperReferenceElement])
 
-    const node = (
-      <Root
-        data-ui="Popover"
-        {...restProps}
-        $preventOverflow={preventOverflow}
-        ref={setRootRef}
-        style={popoverStyle}
-        {...attributes.popper}
-      >
-        <PopoverCard
-          $constrainSize={constrainSize}
-          data-ui="PopoverCard"
-          padding={padding}
-          radius={radius}
-          scheme={scheme}
-          shadow={shadow}
-          tone={tone}
-          width={width as any}
-        >
-          {arrow && <PopoverArrow ref={setArrowElement} style={styles.arrow} />}
-          {content}
-        </PopoverCard>
-      </Root>
-    )
-
-    return (
-      <>
-        {child && !referenceElementProp ? cloneElement(child, {ref: setRef}) : child || <></>}
-
-        {open && (
-          <>
-            {portalProp && <Portal>{node}</Portal>}
-
-            {!portalProp && node}
-          </>
-        )}
-      </>
-    )
+  if (disabled) {
+    return child || <></>
   }
-)
 
-Popover.displayName = 'Popover'
+  const node = (
+    <Root
+      data-ui="Popover"
+      {...restProps}
+      $preventOverflow={preventOverflow}
+      ref={setRootRef}
+      style={popoverStyle}
+      {...attributes.popper}
+    >
+      <PopoverCard
+        $constrainSize={constrainSize}
+        data-ui="PopoverCard"
+        padding={padding}
+        radius={radius}
+        scheme={scheme}
+        shadow={shadow}
+        tone={tone}
+        width={width as any}
+      >
+        {arrow && <PopoverArrow ref={setArrowElement} style={styles.arrow} />}
+        {content}
+      </PopoverCard>
+    </Root>
+  )
+
+  return (
+    <>
+      {child && !referenceElementProp ? cloneElement(child, {ref: setRef}) : child || <></>}
+
+      {open && (
+        <>
+          {portalProp && <Portal>{node}</Portal>}
+
+          {!portalProp && node}
+        </>
+      )}
+    </>
+  )
+})
