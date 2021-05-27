@@ -4,11 +4,17 @@ import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
+/**
+ * @internal
+ */
 export interface TextInputInputStyleProps {
   $fontSize?: number | number[]
   $weight?: ThemeFontWeightKey
 }
 
+/**
+ * @internal
+ */
 export interface TextInputRepresentationStyleProps {
   $border?: boolean
   $hasPrefix?: boolean

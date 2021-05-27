@@ -1,4 +1,26 @@
-// Border
+import {
+  BoxDisplay,
+  BoxHeight,
+  BoxOverflow,
+  BoxSizing,
+  FlexAlign,
+  FlexDirection,
+  FlexJustify,
+  FlexWrap,
+  GridAutoCols,
+  GridAutoFlow,
+  GridAutoRows,
+  GridItemColumn,
+  GridItemColumnEnd,
+  GridItemColumnStart,
+  GridItemRow,
+  GridItemRowEnd,
+  GridItemRowStart,
+} from '../types'
+
+/**
+ * @public
+ */
 export interface ResponsiveBorderProps {
   border?: boolean | boolean[]
   borderTop?: boolean | boolean[]
@@ -7,11 +29,9 @@ export interface ResponsiveBorderProps {
   borderLeft?: boolean | boolean[]
 }
 
-// Box
-export type BoxSizing = 'content' | 'border'
-export type BoxDisplay = 'none' | 'block' | 'grid' | 'flex' | 'inline-block'
-export type BoxHeight = 'stretch' | 'fill'
-export type BoxOverflow = 'visible' | 'hidden' | 'auto'
+/**
+ * @public
+ */
 export interface ResponsiveBoxProps {
   display?: BoxDisplay | BoxDisplay[]
   height?: BoxHeight | BoxHeight[]
@@ -19,17 +39,9 @@ export interface ResponsiveBoxProps {
   sizing?: BoxSizing | BoxSizing[]
 }
 
-// Flex
-export type FlexAlign = 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
-export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
-export type FlexJustify =
-  | 'flex-start'
-  | 'flex-end'
-  | 'center'
-  | 'space-between'
-  | 'space-around'
-  | 'space-evenly'
-export type FlexWrap = 'wrap' | 'wrap-reverse' | 'nowrap'
+/**
+ * @public
+ */
 export interface ResponsiveFlexProps {
   align?: FlexAlign | FlexAlign[]
   direction?: FlexDirection | FlexDirection[]
@@ -37,15 +49,16 @@ export interface ResponsiveFlexProps {
   wrap?: FlexWrap | FlexWrap[]
 }
 
-// FlexItem
+/**
+ * @public
+ */
 export interface ResponsiveFlexItemProps {
   flex?: number | number[]
 }
 
-// Grid
-export type GridAutoRows = 'auto' | 'min' | 'max' | 'fr'
-export type GridAutoCols = 'auto' | 'min' | 'max' | 'fr'
-export type GridAutoFlow = 'row' | 'column' | 'row dense' | 'column dense'
+/**
+ * @public
+ */
 export interface ResponsiveGridProps {
   autoRows?: GridAutoRows | GridAutoRows[]
   autoCols?: GridAutoCols | GridAutoCols[]
@@ -57,13 +70,9 @@ export interface ResponsiveGridProps {
   rows?: number | number[]
 }
 
-// GridItem
-type GridItemColumn = 'auto' | 'full' | number
-type GridItemColumnStart = 'auto' | number
-type GridItemColumnEnd = 'auto' | number
-type GridItemRow = 'auto' | 'full' | number
-type GridItemRowStart = 'auto' | number
-type GridItemRowEnd = 'auto' | number
+/**
+ * @public
+ */
 export interface ResponsiveGridItemProps {
   column?: GridItemColumn | GridItemColumn[]
   columnStart?: GridItemColumnStart | GridItemColumnStart[]
@@ -73,7 +82,9 @@ export interface ResponsiveGridItemProps {
   rowEnd?: GridItemRowEnd | GridItemRowEnd[]
 }
 
-// Margin
+/**
+ * @public
+ */
 export interface ResponsiveMarginProps {
   margin?: number | number[]
   marginX?: number | number[]
@@ -84,7 +95,9 @@ export interface ResponsiveMarginProps {
   marginLeft?: number | number[]
 }
 
-// Padding
+/**
+ * @public
+ */
 export interface ResponsivePaddingProps {
   padding?: number | number[]
   paddingX?: number | number[]
@@ -95,17 +108,23 @@ export interface ResponsivePaddingProps {
   paddingLeft?: number | number[]
 }
 
-// Radius
+/**
+ * @public
+ */
 export interface ResponsiveRadiusProps {
   radius?: number | number[]
 }
 
-// Shadow
+/**
+ * @public
+ */
 export interface ResponsiveShadowProps {
   shadow?: number | number[]
 }
 
-// Width
+/**
+ * @public
+ */
 export interface ResponsiveWidthProps {
   width?: number | number[] | 'auto'
 }

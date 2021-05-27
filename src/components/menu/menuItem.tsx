@@ -14,7 +14,10 @@ import {ThemeColorToneKey} from '../../theme'
 import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
 
-interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
+/**
+ * @public
+ */
+export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   hotkeys?: string[]
@@ -26,6 +29,9 @@ interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   tone?: ThemeColorToneKey
 }
 
+/**
+ * @public
+ */
 export const MenuItem = forwardRef(
   (
     props: MenuItemProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'ref' | 'selected'>,

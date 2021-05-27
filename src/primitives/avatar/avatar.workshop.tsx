@@ -1,7 +1,6 @@
-import {Avatar, AvatarCounter, AvatarStack, Flex} from '@sanity/ui'
+import {Avatar, AvatarCounter, AvatarSize, AvatarStack, Flex} from '@sanity/ui'
 import {defineScope, useSelect} from '@sanity/ui-workshop'
 import React from 'react'
-import {AvatarSize} from './types'
 
 export default defineScope('primitives/avatar', 'Avatar', [
   {name: 'as-button', title: 'As button', component: AsButtonStory},

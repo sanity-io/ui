@@ -1,8 +1,12 @@
 import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
 import {useForwardedRef} from '../../hooks'
-import {Button, ButtonTone} from '../../primitives'
+import {Button} from '../../primitives'
+import {ButtonTone} from '../../types'
 
-interface TabProps {
+/**
+ * @public
+ */
+export interface TabProps {
   /**
    * The `id` of the correlating `TabPanel` component.
    */
@@ -17,6 +21,9 @@ interface TabProps {
   tone?: ButtonTone
 }
 
+/**
+ * @public
+ */
 export const Tab = forwardRef(
   (
     props: TabProps &

@@ -6,7 +6,10 @@ import {Box} from '../box'
 import {Text} from '../text'
 import {selectStyle} from './styles'
 
-interface SelectProps {
+/**
+ * @public
+ */
+export interface SelectProps {
   fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
@@ -25,6 +28,9 @@ const Input = styled.select<{
 
 const IconBox = styled(Box)(selectStyle.iconBox)
 
+/**
+ * @public
+ */
 export const Select = forwardRef(
   (
     props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,

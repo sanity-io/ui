@@ -4,6 +4,10 @@ import {useTheme} from '../../theme'
 import {ResizeObserver} from '../resizeObserver'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
+/**
+ * DO NOT USE IN PRODUCTION.
+ * @beta
+ */
 export const ElementQuery = forwardRef(function ElementQuery(
   props: React.HTMLProps<HTMLDivElement>,
   ref: React.Ref<HTMLDivElement>

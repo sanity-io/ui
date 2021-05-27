@@ -1,7 +1,11 @@
 import React, {useMemo} from 'react'
-import {PortalContext, PortalContextValue} from './portalContext'
+import {PortalContext} from './portalContext'
+import {PortalContextValue} from './types'
 
-interface PortalProviderProps {
+/**
+ * @public
+ */
+export interface PortalProviderProps {
   boundaryElement?: HTMLElement | null
   children: React.ReactNode
   element: HTMLElement | null
@@ -9,6 +13,9 @@ interface PortalProviderProps {
 
 const __BROWSER__ = typeof window !== 'undefined'
 
+/**
+ * @public
+ */
 export function PortalProvider(props: PortalProviderProps) {
   const {boundaryElement, children, element} = props
 

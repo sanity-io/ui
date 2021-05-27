@@ -7,6 +7,7 @@ function screenChannel(b: number, s: number) {
 /**
  * Apply the \`screen\` blend mode
  * Source: https://www.w3.org/TR/compositing-1/#blendingscreen
+ * @internal
  */
 export function screen(b: RGB, s: RGB): RGB {
   return {

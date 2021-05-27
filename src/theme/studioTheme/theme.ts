@@ -2,6 +2,9 @@ import {RootTheme} from '../types'
 import {color} from './color'
 import {fonts} from './fonts'
 
+/**
+ * @public
+ */
 export const studioTheme: RootTheme = {
   avatar: {
     sizes: [

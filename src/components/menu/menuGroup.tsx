@@ -18,6 +18,9 @@ const TextContainer = styled.span`
   }
 `
 
+/**
+ * @public
+ */
 export function MenuGroup(
   props: {
     fontSize?: number | number[]

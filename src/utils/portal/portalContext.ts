@@ -1,11 +1,6 @@
 import {createContext} from 'react'
 import {globalScope} from '../../lib/globalScope'
-
-export interface PortalContextValue {
-  version: 0.0
-  boundaryElement: HTMLElement | null
-  element: HTMLElement | null
-}
+import {PortalContextValue} from './types'
 
 const key = Symbol.for('@sanity/ui/context/portal')
 const elementKey = Symbol.for('@sanity/ui/context/portal/element')

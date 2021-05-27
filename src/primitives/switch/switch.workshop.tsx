@@ -1,8 +1,7 @@
-import {Box, Flex, Switch, Text} from '@sanity/ui'
+import {Box, Flex, Switch, Text, useTheme} from '@sanity/ui'
 import {defineScope, useBoolean, useNumber} from '@sanity/ui-workshop'
 import React, {useCallback, useMemo, useState} from 'react'
 import {ThemeProvider} from 'styled-components'
-import {useTheme} from '../../theme'
 
 export default defineScope('primitives/switch', 'Switch', [
   {name: 'props', title: 'Props', component: SwitchStory},

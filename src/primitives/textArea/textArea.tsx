@@ -16,7 +16,10 @@ import {
 import {ThemeFontWeightKey} from '../../theme'
 import {ResponsiveRadiusProps} from '../types'
 
-interface TextInputProps extends ResponsiveRadiusProps {
+/**
+ * @public
+ */
+export interface TextAreaProps extends ResponsiveRadiusProps {
   border?: boolean
   customValidity?: string
   fontSize?: number | number[]
@@ -44,9 +47,12 @@ const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresenta
   textInputRepresentationStyle
 )
 
+/**
+ * @public
+ */
 export const TextArea = forwardRef(
   (
-    props: TextInputProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
+    props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
     forwardedRef: React.ForwardedRef<HTMLTextAreaElement>
   ) => {
     const {

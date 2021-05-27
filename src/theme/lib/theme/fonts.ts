@@ -1,6 +1,16 @@
+/**
+ * @public
+ */
 export type ThemeFontKey = 'code' | 'heading' | 'label' | 'text'
+
+/**
+ * @public
+ */
 export type ThemeFontWeightKey = 'regular' | 'medium' | 'semibold' | 'bold'
 
+/**
+ * @public
+ */
 export interface ThemeFontSize {
   ascenderHeight: number
   descenderHeight: number
@@ -10,6 +20,9 @@ export interface ThemeFontSize {
   lineHeight: number
 }
 
+/**
+ * @public
+ */
 export interface ThemeFontWeight {
   regular: number
   medium: number
@@ -17,12 +30,18 @@ export interface ThemeFontWeight {
   bold: number
 }
 
+/**
+ * @public
+ */
 export interface ThemeFont {
   family: string
   weights: ThemeFontWeight
   sizes: ThemeFontSize[]
 }
 
+/**
+ * @public
+ */
 export interface ThemeFonts {
   code: ThemeFont
   heading: ThemeFont

@@ -2,9 +2,9 @@ import React, {cloneElement, forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {AvatarSize} from '../../types'
 import {childrenToElementArray} from '../helpers'
 import {AvatarCounter} from './avatarCounter'
-import {AvatarSize} from './types'
 
 const BASE_STYLES = css`
   white-space: nowrap;
@@ -44,13 +44,19 @@ const Root = styled.div<{size: AvatarSize | AvatarSize[]}>(
   avatarStackStyle
 )
 
-interface AvatarStackProps {
+/**
+ * @public
+ */
+export interface AvatarStackProps {
   children: React.ReactNode
   maxLength?: number
   size?: AvatarSize | AvatarSize[]
   tone?: 'navbar'
 }
 
+/**
+ * @public
+ */
 export const AvatarStack = forwardRef(
   (
     props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,

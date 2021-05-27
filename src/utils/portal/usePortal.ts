@@ -1,7 +1,11 @@
 import {useContext} from 'react'
 import {isRecord} from '../../lib/isRecord'
-import {PortalContext, PortalContextValue} from './portalContext'
+import {PortalContext} from './portalContext'
+import {PortalContextValue} from './types'
 
+/**
+ * @public
+ */
 export function usePortal(): PortalContextValue {
   const value = useContext(PortalContext)
 

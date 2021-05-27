@@ -5,7 +5,7 @@ import {ResponsiveFontStyleProps} from './types'
 
 /**
  * Get responsive CSS for the `code` font style.
- * @beta Should not be used in production, as this might change.
+ * @internal
  */
 export function responsiveCodeFontStyle(props: ResponsiveFontStyleProps & ThemeProps): CSSObject[] {
   return responsiveFont('code', props)

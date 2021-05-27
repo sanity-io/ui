@@ -1,12 +1,16 @@
 import {useContext} from 'react'
 import {isRecord} from '../../lib/isRecord'
-import {BoundaryElementContext, BoundaryElementContextValue} from './boundaryElementContext'
+import {BoundaryElementContext} from './boundaryElementContext'
+import {BoundaryElementContextValue} from './types'
 
 const DEFAULT_VALUE: BoundaryElementContextValue = {
   version: 0.0,
   element: null,
 }
 
+/**
+ * @public
+ */
 export function useBoundaryElement(): BoundaryElementContextValue {
   const value = useContext(BoundaryElementContext)
 

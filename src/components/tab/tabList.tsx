@@ -1,10 +1,16 @@
 import React, {cloneElement, forwardRef, useCallback, useState} from 'react'
 import {Inline, InlineProps} from '../../primitives'
 
-interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
+/**
+ * @public
+ */
+export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
   children: React.ReactElement[]
 }
 
+/**
+ * @public
+ */
 export const TabList = forwardRef(
   (props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>, ref) => {
     const {children, ...restProps} = props

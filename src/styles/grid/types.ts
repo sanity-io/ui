@@ -1,7 +1,18 @@
-// Grid
-export type GridAutoRows = 'auto' | 'min' | 'max' | 'fr'
-export type GridAutoCols = 'auto' | 'min' | 'max' | 'fr'
-export type GridAutoFlow = 'row' | 'column' | 'row dense' | 'column dense'
+import {
+  GridAutoCols,
+  GridAutoFlow,
+  GridAutoRows,
+  GridItemColumn,
+  GridItemColumnEnd,
+  GridItemColumnStart,
+  GridItemRow,
+  GridItemRowEnd,
+  GridItemRowStart,
+} from '../../types'
+
+/**
+ * @internal
+ */
 export interface ResponsiveGridStyleProps {
   $autoRows?: GridAutoRows | GridAutoRows[]
   $autoCols?: GridAutoCols | GridAutoCols[]
@@ -13,13 +24,9 @@ export interface ResponsiveGridStyleProps {
   $rows?: number | number[]
 }
 
-// GridItem
-type GridItemColumn = 'auto' | 'full' | number
-type GridItemColumnStart = 'auto' | number
-type GridItemColumnEnd = 'auto' | number
-type GridItemRow = 'auto' | 'full' | number
-type GridItemRowStart = 'auto' | number
-type GridItemRowEnd = 'auto' | number
+/**
+ * @internal
+ */
 export interface ResponsiveGridItemStyleProps {
   $column?: GridItemColumn | GridItemColumn[]
   $columnStart?: GridItemColumnStart | GridItemColumnStart[]

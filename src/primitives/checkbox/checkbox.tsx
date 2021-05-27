@@ -4,7 +4,10 @@ import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 
-interface CheckboxProps {
+/**
+ * @public
+ */
+export interface CheckboxProps {
   indeterminate?: boolean
   customValidity?: string
 }
@@ -12,6 +15,9 @@ interface CheckboxProps {
 const Root = styled.div(checkboxBaseStyles)
 const Input = styled.input(inputElementStyles)
 
+/**
+ * @public
+ */
 export const Checkbox = forwardRef(
   (
     props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & CheckboxProps,

@@ -1,3 +1,6 @@
+/**
+ * @internal
+ */
 export interface ResponsiveBorderStyleProps {
   $border?: boolean | boolean[]
   $borderTop?: boolean | boolean[]

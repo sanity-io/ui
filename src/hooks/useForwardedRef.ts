@@ -1,6 +1,9 @@
 import React, {useRef} from 'react'
 import {useIsomorphicEffect} from './useIsomorphicEffect'
 
+/**
+ * @beta
+ */
 export function useForwardedRef<T>(ref: React.ForwardedRef<T>): React.MutableRefObject<T | null> {
   const innerRef = useRef<T | null>(null)
 

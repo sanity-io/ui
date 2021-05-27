@@ -2,6 +2,9 @@ import {CSSObject} from 'styled-components'
 import {EMPTY_ARRAY} from '../constants'
 import {Theme} from '../theme'
 
+/**
+ * @internal
+ */
 export function fillCSSObject(propKeys: string[], value: any): CSSObject {
   return propKeys.reduce((obj: CSSObject, propKey) => {
     obj[propKey] = value
@@ -10,12 +13,18 @@ export function fillCSSObject(propKeys: string[], value: any): CSSObject {
   }, {})
 }
 
+/**
+ * @internal
+ */
 export function rem(pixelValue: number): string | 0 {
   if (pixelValue === 0) return 0
 
   return `${pixelValue / 16}rem`
 }
 
+/**
+ * @internal
+ */
 export function responsive<T>(
   media: number[],
   values: T[],
@@ -30,12 +39,18 @@ export function responsive<T>(
   })
 }
 
+/**
+ * @internal
+ */
 export function getResponsiveProp<T = number>(val: T | T[] | undefined, defaultVal?: T[]): T[] {
   if (val === undefined) return defaultVal || EMPTY_ARRAY
 
   return Array.isArray(val) ? val : [val]
 }
 
+/**
+ * @internal
+ */
 export function getResponsiveSpace(
   theme: Theme,
   props: string[],
