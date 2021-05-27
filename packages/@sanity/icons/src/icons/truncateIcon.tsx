@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function TruncateIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const TruncateIcon = forwardRef(function TruncateIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="truncate"
@@ -13,7 +17,7 @@ function TruncateIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M5 12.5H20" stroke="currentColor" strokeWidth={1.2} />
@@ -21,7 +25,4 @@ function TruncateIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       <path d="M16.5 5.5L12.5 9.5L8.5 5.5" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(TruncateIcon)
-export default ForwardRef
+})

@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ToggleArrowRightIcon(
+export const ToggleArrowRightIcon = forwardRef(function ToggleArrowRightIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,13 +17,10 @@ function ToggleArrowRightIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M9 17V8L17 12.5L9 17Z" fill="currentColor" />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ToggleArrowRightIcon)
-export default ForwardRef
+})

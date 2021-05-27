@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ReadOnlyIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const ReadOnlyIcon = forwardRef(function ReadOnlyIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="read-only"
@@ -13,7 +17,7 @@ function ReadOnlyIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -23,7 +27,4 @@ function ReadOnlyIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ReadOnlyIcon)
-export default ForwardRef
+})

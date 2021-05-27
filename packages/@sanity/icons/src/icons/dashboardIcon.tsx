@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function DashboardIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const DashboardIcon = forwardRef(function DashboardIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="dashboard"
@@ -13,7 +17,7 @@ function DashboardIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M19.5 19.5H5.5V5.5H19.5V19.5Z" stroke="currentColor" strokeWidth={1.2} />
@@ -21,7 +25,4 @@ function DashboardIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<
       <path d="M14.5 19.5V12.5M10.5 12.5V5.5" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(DashboardIcon)
-export default ForwardRef
+})

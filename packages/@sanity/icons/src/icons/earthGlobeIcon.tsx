@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function EarthGlobeIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const EarthGlobeIcon = forwardRef(function EarthGlobeIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="earth-globe"
@@ -13,7 +17,7 @@ function EarthGlobeIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <circle cx={12.5} cy={12.5} r={8} stroke="currentColor" strokeWidth={1.2} />
@@ -32,7 +36,4 @@ function EarthGlobeIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref
       <path d="M5.5 16.5H19.5M5.5 8.5H19.5" stroke="currentColor" />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(EarthGlobeIcon)
-export default ForwardRef
+})

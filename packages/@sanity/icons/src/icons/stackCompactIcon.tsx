@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function StackCompactIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const StackCompactIcon = forwardRef(function StackCompactIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="stack-compact"
@@ -13,7 +17,7 @@ function StackCompactIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.R
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M19.5 9.5H5.5V6.5H19.5V9.5Z" stroke="currentColor" strokeWidth={1.2} />
@@ -22,7 +26,4 @@ function StackCompactIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.R
       <path d="M19.5 18.5H5.5V15.5H19.5V18.5Z" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(StackCompactIcon)
-export default ForwardRef
+})

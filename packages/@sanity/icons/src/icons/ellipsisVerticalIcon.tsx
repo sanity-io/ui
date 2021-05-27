@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function EllipsisVerticalIcon(
+export const EllipsisVerticalIcon = forwardRef(function EllipsisVerticalIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,7 +17,7 @@ function EllipsisVerticalIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <circle cx={12.5} cy={6.5} r={1.5} fill="currentColor" />
@@ -24,7 +25,4 @@ function EllipsisVerticalIcon(
       <circle cx={12.5} cy={18.5} r={1.5} fill="currentColor" />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(EllipsisVerticalIcon)
-export default ForwardRef
+})

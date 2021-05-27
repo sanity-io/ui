@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function OlistIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const OlistIcon = forwardRef(function OlistIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="olist"
@@ -13,7 +17,7 @@ function OlistIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGS
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M10 7.5H19" stroke="currentColor" strokeWidth={1.2} />
@@ -24,7 +28,4 @@ function OlistIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGS
       <path d="M8 13.5H6L7 11.5H5" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(OlistIcon)
-export default ForwardRef
+})

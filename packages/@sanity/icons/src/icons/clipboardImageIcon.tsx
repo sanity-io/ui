@@ -1,12 +1,13 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function ClipboardImageIcon(
+export const ClipboardImageIcon = forwardRef(function ClipboardImageIcon(
   props: React.SVGProps<SVGSVGElement>,
-  svgRef?: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
@@ -16,7 +17,7 @@ function ClipboardImageIcon(
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M8 5.5H6.5V19.5H10.5M17 5.5H18.5V11.5" stroke="currentColor" strokeWidth={1.2} />
@@ -33,7 +34,4 @@ function ClipboardImageIcon(
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(ClipboardImageIcon)
-export default ForwardRef
+})

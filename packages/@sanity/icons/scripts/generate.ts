@@ -16,9 +16,7 @@ const writeFile = util.promisify(fs.writeFile)
 const IMPORT_PATH = path.resolve(__dirname, '../export')
 const DEST_PATH = path.resolve(__dirname, '../src/icons')
 
-const GENERATED_BANNER = `/*
-* AUTO-GENERATED, DO NOT EDIT
-*/`
+const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
 const prettierConfig = JSON.parse(fs.readFileSync(path.resolve(ROOT_PATH, '.prettierrc'), 'utf8'))
 
@@ -42,19 +40,21 @@ async function readIcon(filePath: string) {
     {componentName}
   )
   const targetPath = path.resolve(DEST_PATH, `${basename}.tsx`)
-  const code = format(
-    [
-      GENERATED_BANNER,
-      svgrJsx
-        .replace('* as React', 'React')
-        .replace(/"#121923"/g, '"currentColor"')
-        .replace('<svg ', `<svg data-sanity-icon="${name}" `),
-    ].join('\n\n'),
-    {
-      ...prettierConfig,
-      filepath: targetPath,
-    }
-  )
+  const unformattedCode = [
+    GENERATED_BANNER,
+    svgrJsx
+      .replace('* as React', 'React, {forwardRef}')
+      .replace(
+        `function ${componentName}(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {`,
+        `/**\n * @public\n */\nexport const ${componentName} = forwardRef(function ${componentName}(props: React.SVGProps<SVGSVGElement>, ref: React.Ref<SVGSVGElement>) {`
+      )
+      .replace('ref={svgRef}', 'ref={ref}')
+      .replace(`}\n\nconst ForwardRef = React.forwardRef(${componentName});`, '})')
+      .replace(`export default ForwardRef;`, '')
+      .replace(/"#121923"/g, '"currentColor"')
+      .replace('<svg ', `<svg data-sanity-icon="${name}" `),
+  ].join('\n\n')
+  const code = format(unformattedCode, {...prettierConfig, filepath: targetPath})
 
   return {
     basename,
@@ -94,18 +94,20 @@ async function generate() {
   const importTypes = `import {IconComponent} from '../types'`
 
   const iconImports = files
-    .map((f) => `import {default as ${f.componentName}} from './${f.basename}';`)
+    .map((f) => `import {${f.componentName}} from './${f.basename}';`)
     .join('\n')
 
-  const typesExports = `export type IconSymbol = \n${files.map((f) => `| '${f.name}'`).join('\n')};`
+  const typesExports = `/**\n * @public\n */\nexport type IconSymbol = \n${files
+    .map((f) => `| '${f.name}'`)
+    .join('\n')};`
 
   const iconExports = `export {${files.map((f) => f.componentName).join(',')}}`
 
-  const iconMapInterface = `export interface IconMap {${files
+  const iconMapInterface = `/**\n * @public\n */\nexport interface IconMap {${files
     .map((f) => `'${f.name}': IconComponent`)
     .join(',')}}`
 
-  const iconsExport = `export const icons: IconMap = {${files
+  const iconsExport = `/**\n * @public\n */\nexport const icons: IconMap = {${files
     .map((f) => `'${f.name}': ${f.componentName}`)
     .join(',')}}`
 

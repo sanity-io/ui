@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function LockIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const LockIcon = forwardRef(function LockIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="lock"
@@ -13,7 +17,7 @@ function LockIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSV
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M7.5 11.5H17.5V19.5H7.5V11.5Z" stroke="currentColor" strokeWidth={1.2} />
@@ -24,7 +28,4 @@ function LockIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSV
       />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(LockIcon)
-export default ForwardRef
+})

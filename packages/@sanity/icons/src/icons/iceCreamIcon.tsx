@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function IceCreamIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const IceCreamIcon = forwardRef(function IceCreamIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="ice-cream"
@@ -13,7 +17,7 @@ function IceCreamIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path d="M9.5 13.5L12.5 20.5L15.5 13.5" stroke="currentColor" strokeWidth={1.2} />
@@ -30,7 +34,4 @@ function IceCreamIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<S
       <circle cx={14.5} cy={10.5} r={3} stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(IceCreamIcon)
-export default ForwardRef
+})

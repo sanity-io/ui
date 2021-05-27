@@ -1,10 +1,14 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import React, {forwardRef} from 'react'
+
+/**
+ * @public
  */
-
-import React from 'react'
-
-function TrashIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {
+export const TrashIcon = forwardRef(function TrashIcon(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   return (
     <svg
       data-sanity-icon="trash"
@@ -13,7 +17,7 @@ function TrashIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGS
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={svgRef}
+      ref={ref}
       {...props}
     >
       <path
@@ -30,7 +34,4 @@ function TrashIcon(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGS
       <path d="M12.5 9V17M15.5 9L15 17M9.5 9L10 17" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
-
-const ForwardRef = React.forwardRef(TrashIcon)
-export default ForwardRef
+})
