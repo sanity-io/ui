@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export interface ThemeColorSyntax {
   atrule: string
   attrName: string

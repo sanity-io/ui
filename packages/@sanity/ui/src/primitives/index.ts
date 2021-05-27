@@ -22,3 +22,6 @@ export * from './text'
 export * from './textArea'
 export * from './textInput'
 export * from './tooltip'
+
+// Types
+export * from './types'

@@ -1,6 +1,8 @@
-export type BadgeMode = 'default' | 'outline'
-export type BadgeTone = 'default' | 'primary' | 'positive' | 'caution' | 'critical'
+import {BadgeMode, BadgeTone} from '../../types'
 
+/**
+ * @internal
+ */
 export interface BadgeStyleProps {
   $mode: BadgeMode
   $tone: BadgeTone

@@ -13,6 +13,9 @@ import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from
 import {PopoverArrow} from './arrow'
 import {usePopoverModifiers} from './modifiers'
 
+/**
+ * @public
+ */
 export interface PopoverProps
   extends ResponsiveRadiusProps,
     ResponsiveShadowProps,
@@ -87,6 +90,9 @@ const PopoverCard = styled(Card)<
   `
 )
 
+/**
+ * @public
+ */
 export const Popover = forwardRef(
   (
     props: PopoverProps &

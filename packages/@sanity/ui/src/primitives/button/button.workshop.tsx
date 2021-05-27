@@ -1,9 +1,8 @@
 import {icons, IconSymbol} from '@sanity/icons'
-import {Button, ButtonMode, ButtonTone, Card, Container, Flex, Stack} from '@sanity/ui'
+import {Button, ButtonMode, ButtonTone, Card, Container, Flex, FlexJustify, Stack} from '@sanity/ui'
 import {defineScope, useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import React from 'react'
 import styled from 'styled-components'
-import {FlexJustify} from '../../primitives/types'
 
 export default defineScope('primitives/button', 'Button', [
   {name: 'props', title: 'Props', component: ButtonStory},

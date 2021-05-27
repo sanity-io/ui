@@ -1,6 +1,10 @@
 import React, {useMemo} from 'react'
-import {BoundaryElementContext, BoundaryElementContextValue} from './boundaryElementContext'
+import {BoundaryElementContext} from './boundaryElementContext'
+import {BoundaryElementContextValue} from './types'
 
+/**
+ * @public
+ */
 export function BoundaryElementProvider({
   children,
   element,

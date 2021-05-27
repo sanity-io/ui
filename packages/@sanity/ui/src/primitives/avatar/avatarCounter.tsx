@@ -3,8 +3,8 @@ import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useResponsiveProp} from '../../hooks'
 import {rem, responsive, ThemeProps} from '../../styles'
+import {AvatarSize} from '../../types'
 import {Text} from '../text'
-import {AvatarSize} from './types'
 
 function responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {theme} = props
@@ -48,12 +48,18 @@ const Root = styled.div<{$size: AvatarSize[]}>(
   avatarCounterBaseStyle
 )
 
-interface AvatarCounterProps {
+/**
+ * @public
+ */
+export interface AvatarCounterProps {
   count: number
   size?: AvatarSize | AvatarSize[]
   tone?: 'navbar'
 }
 
+/**
+ * @public
+ */
 export function AvatarCounter({count, size: sizeProp = 0, tone}: AvatarCounterProps) {
   const size: AvatarSize[] = useResponsiveProp(sizeProp, [0])
 

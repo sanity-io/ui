@@ -7,15 +7,18 @@ import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {ThemeColorSchemeKey} from '../../theme'
+import {DialogPosition} from '../../types'
 import {Layer, Portal, useLayer} from '../../utils'
 import {
   dialogStyle,
   responsiveDialogPositionStyle,
   ResponsiveDialogPositionStyleProps,
 } from './styles'
-import {DialogPosition} from './types'
 import {useDialog} from './useDialog'
 
+/**
+ * @public
+ */
 export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProps {
   /**
    * @beta
@@ -225,6 +228,9 @@ const DialogCard = forwardRef((props: DialogCardProps, ref) => {
 
 DialogCard.displayName = 'DialogCard'
 
+/**
+ * @public
+ */
 export const Dialog = forwardRef(
   (
     props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,

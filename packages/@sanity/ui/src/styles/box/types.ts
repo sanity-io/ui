@@ -1,8 +1,8 @@
-export type BoxSizing = 'content' | 'border'
-export type BoxDisplay = 'none' | 'block' | 'grid' | 'flex' | 'inline-block'
-export type BoxHeight = 'stretch' | 'fill'
-export type BoxOverflow = 'visible' | 'hidden' | 'auto'
+import {BoxDisplay, BoxHeight, BoxOverflow, BoxSizing} from '../../types'
 
+/**
+ * @internal
+ */
 export interface ResponsiveBoxStyleProps {
   $display?: BoxDisplay | BoxDisplay[]
   $height?: BoxHeight | BoxHeight[]

@@ -9,6 +9,9 @@ const Root = styled.div`
   overflow: hidden;
 `
 
+/**
+ * @public
+ */
 export function SrOnly({
   as,
   children,

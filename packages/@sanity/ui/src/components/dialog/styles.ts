@@ -1,6 +1,9 @@
 import {getResponsiveProp, responsive, ThemeProps} from '../../styles'
-import {DialogPosition} from './types'
+import {DialogPosition} from '../../types'
 
+/**
+ * @internal
+ */
 export interface ResponsiveDialogPositionStyleProps {
   $position: DialogPosition | DialogPosition[]
 }

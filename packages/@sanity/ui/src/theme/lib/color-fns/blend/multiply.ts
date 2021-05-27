@@ -7,6 +7,7 @@ function multiplyChannel(b: number, s: number) {
 /**
  * Apply the \`multiply\` blend mode
  * Source: https://www.w3.org/TR/compositing-1/#blendingmultiply
+ * @internal
  */
 export function multiply(b: RGB, s: RGB): RGB {
   return {

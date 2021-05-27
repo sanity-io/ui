@@ -5,7 +5,7 @@ import {ResponsiveTextAlignStyleProps} from './types'
 
 /**
  * Get responsive text align styles.
- * @beta Should not be used in production, as this might change.
+ * @internal
  */
 export function responsiveTextAlignStyle(
   props: ResponsiveTextAlignStyleProps & ThemeProps
