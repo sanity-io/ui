@@ -1,9 +1,10 @@
-/*
- * AUTO-GENERATED, DO NOT EDIT
- */
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
 import {ColorTints} from './types'
 
+/**
+ * @public
+ */
 export const gray: ColorTints = {
   '50': {
     title: 'Gray 50',
@@ -51,6 +52,9 @@ export const gray: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const blue: ColorTints = {
   '50': {
     title: 'Blue 50',
@@ -98,6 +102,9 @@ export const blue: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const purple: ColorTints = {
   '50': {
     title: 'Purple 50',
@@ -145,6 +152,9 @@ export const purple: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const magenta: ColorTints = {
   '50': {
     title: 'Magenta 50',
@@ -192,6 +202,9 @@ export const magenta: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const red: ColorTints = {
   '50': {
     title: 'Red 50',
@@ -239,6 +252,9 @@ export const red: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const orange: ColorTints = {
   '50': {
     title: 'Orange 50',
@@ -286,6 +302,9 @@ export const orange: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const yellow: ColorTints = {
   '50': {
     title: 'Yellow 50',
@@ -333,6 +352,9 @@ export const yellow: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const green: ColorTints = {
   '50': {
     title: 'Green 50',
@@ -380,6 +402,9 @@ export const green: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const cyan: ColorTints = {
   '50': {
     title: 'Cyan 50',
@@ -427,4 +452,7 @@ export const cyan: ColorTints = {
   },
 }
 
+/**
+ * @public
+ */
 export const hues = {gray, blue, purple, magenta, red, orange, yellow, green, cyan}
