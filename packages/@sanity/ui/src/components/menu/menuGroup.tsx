@@ -5,6 +5,17 @@ import {Box, Card, Popover, PopoverProps, Text} from '../../primitives'
 import {Menu} from './menu'
 import {useMenu} from './useMenu'
 
+/**
+ * @public
+ */
+export interface MenuGroupProps {
+  fontSize?: number | number[]
+  padding?: number | number[]
+  popover?: Omit<PopoverProps, 'content' | 'open'>
+  radius?: number | number[]
+  text: React.ReactNode
+}
+
 const MOUSE_LEAVE_TIMEOUT = 1000
 
 const TextContainer = styled.span`
@@ -22,13 +33,7 @@ const TextContainer = styled.span`
  * @public
  */
 export function MenuGroup(
-  props: {
-    fontSize?: number | number[]
-    padding?: number | number[]
-    popover?: Omit<PopoverProps, 'content' | 'open'>
-    radius?: number | number[]
-    text: React.ReactNode
-  } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref'>
+  props: MenuGroupProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref'>
 ) {
   const {
     children,
