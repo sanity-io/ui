@@ -1,5 +1,5 @@
 import {hues, white} from '@sanity/color'
-import React from 'react'
+import React, {forwardRef} from 'react'
 
 /**
  * @public
@@ -16,7 +16,10 @@ const schemes = {
 /**
  * @public
  */
-export function SanityLogo(props: SanityLogoProps & React.SVGProps<SVGSVGElement>) {
+export const SanityLogo = forwardRef(function SanityLogo(
+  props: SanityLogoProps & React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>
+) {
   const scheme = schemes[props.dark ? 'dark' : 'light']
 
   return (
@@ -27,6 +30,7 @@ export function SanityLogo(props: SanityLogoProps & React.SVGProps<SVGSVGElement
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path d="M311.14 57.234V80.0016H298.499V57.234" fill={scheme[1]} />
       <path d="M298.499 57.2341L319.889 20.0017H333.316L311.14 57.2341H298.499Z" fill={scheme[2]} />
@@ -73,4 +77,4 @@ export function SanityLogo(props: SanityLogoProps & React.SVGProps<SVGSVGElement
       />
     </svg>
   )
-}
+})

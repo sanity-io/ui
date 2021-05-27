@@ -55,7 +55,7 @@ const RADIUS_OPTIONS = {
   '4': '4',
 }
 
-export function DefaultStory() {
+export function DefaultStory(): React.ReactElement {
   const options = countries.map((country) => ({value: country.code}))
   const border = useBoolean('Border', true, 'Props')
   const customValidity = useText('Custom validity', '', 'Props') || undefined

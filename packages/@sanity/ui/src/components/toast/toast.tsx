@@ -42,7 +42,7 @@ const TextBox = styled(Flex)`
  */
 export function Toast(
   props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>
-) {
+): React.ReactElement {
   const {closable, description, onClose, title, status, ...restProps} = props
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'

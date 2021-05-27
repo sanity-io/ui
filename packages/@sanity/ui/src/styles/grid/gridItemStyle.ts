@@ -1,8 +1,11 @@
+import {CSSObject} from 'styled-components'
 import {getResponsiveProp, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridItemStyleProps} from './types'
 
-export function responsiveGridItemStyle() {
+export function responsiveGridItemStyle(): Array<
+  (props: ResponsiveGridItemStyleProps & ThemeProps) => CSSObject[]
+> {
   return [
     responsiveGridItemRowStyle,
     responsiveGridItemRowStartStyle,

@@ -1,8 +1,11 @@
+import {CSSObject} from 'styled-components'
 import {getResponsiveProp, getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsivePaddingStyleProps} from './types'
 
-export function responsivePaddingStyle(props: ResponsivePaddingStyleProps & ThemeProps) {
+export function responsivePaddingStyle(
+  props: ResponsivePaddingStyleProps & ThemeProps
+): CSSObject[][] {
   const {theme} = props
 
   return [
@@ -13,5 +16,5 @@ export function responsivePaddingStyle(props: ResponsivePaddingStyleProps & Them
     getResponsiveSpace(theme, ['paddingRight'], getResponsiveProp(props.$paddingRight)),
     getResponsiveSpace(theme, ['paddingBottom'], getResponsiveProp(props.$paddingBottom)),
     getResponsiveSpace(theme, ['paddingLeft'], getResponsiveProp(props.$paddingLeft)),
-  ].filter(Boolean)
+  ].filter(Boolean) as CSSObject[][]
 }

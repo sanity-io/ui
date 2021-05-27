@@ -21,7 +21,7 @@ function shadowStyle(shadow: ThemeShadow | null): CSSObject {
   return {boxShadow: `${outline}, ${umbra}, ${penumbra}, ${ambient}`}
 }
 
-export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps) {
+export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media, shadows} = theme.sanity
 

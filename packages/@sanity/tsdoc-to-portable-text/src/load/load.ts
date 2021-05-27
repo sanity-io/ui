@@ -6,7 +6,10 @@ import {writeFile} from './helpers'
 /**
  * @public
  */
-export async function load(_docs: SanityDocumentValue[], opts: {fs?: {path: string}} = {}) {
+export async function load(
+  _docs: SanityDocumentValue[],
+  opts: {fs?: {path: string}} = {}
+): Promise<void> {
   if (opts.fs) {
     const dirPath = path.dirname(opts.fs.path)
 

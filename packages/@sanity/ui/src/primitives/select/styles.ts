@@ -1,14 +1,15 @@
-import {css} from 'styled-components'
+import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
 import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
 import {
   focusRingBorderStyle,
   focusRingStyle,
   responsiveInputPaddingIconRightStyle,
   responsiveRadiusStyle,
+  ResponsiveRadiusStyleProps,
 } from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
 
-function rootStyle() {
+function rootStyle(): FlattenSimpleInterpolation {
   return css`
     position: relative;
     width: stretch;
@@ -19,7 +20,7 @@ function rootStyle() {
   `
 }
 
-function inputBaseStyle(props: ThemeProps) {
+function inputBaseStyle(props: ThemeProps): FlattenSimpleInterpolation {
   const {theme} = props
   const font = theme.sanity.fonts.text
 
@@ -108,7 +109,10 @@ function inputTextSizeStyle(props: {$fontSize?: number | number[]} & ThemeProps)
   )
 }
 
-function inputStyle() {
+function inputStyle(): Array<
+  | ((props: ResponsiveRadiusStyleProps & ThemeProps) => CSSObject[])
+  | ((props: ThemeProps) => FlattenSimpleInterpolation)
+> {
   return [
     responsiveRadiusStyle,
     inputBaseStyle,
@@ -118,7 +122,7 @@ function inputStyle() {
   ]
 }
 
-function iconBoxStyle(props: ThemeProps) {
+function iconBoxStyle(props: ThemeProps): FlattenSimpleInterpolation {
   const {theme} = props
   const color = theme.sanity.color.input
 

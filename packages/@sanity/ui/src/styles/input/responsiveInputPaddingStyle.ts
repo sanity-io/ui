@@ -1,3 +1,4 @@
+import {CSSObject} from 'styled-components'
 import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
@@ -11,7 +12,7 @@ export interface TextInputResponsivePaddingStyleProps {
 
 export function responsiveInputPaddingStyle(
   props: TextInputResponsivePaddingStyleProps & ThemeProps
-) {
+): CSSObject[] {
   const {$iconLeft, $iconRight, theme} = props
   const {fonts, media, space: spaceScale} = theme.sanity
   const padding = getResponsiveProp(props.$padding, [0])
@@ -54,7 +55,7 @@ export function responsiveInputPaddingIconsStyle(
     size?: number | number[]
     space?: number | number[]
   } & ThemeProps
-) {
+): CSSObject[] {
   return responsiveInputPaddingStyle({...props, $iconLeft: true, $iconRight: true})
 }
 
@@ -64,7 +65,7 @@ export function responsiveInputPaddingIconLeftStyle(
     size?: number | number[]
     space?: number | number[]
   } & ThemeProps
-) {
+): CSSObject[] {
   return responsiveInputPaddingStyle({...props, $iconLeft: true})
 }
 
@@ -74,6 +75,6 @@ export function responsiveInputPaddingIconRightStyle(
     size?: number | number[]
     space?: number | number[]
   } & ThemeProps
-) {
+): CSSObject[] {
   return responsiveInputPaddingStyle({...props, $iconRight: true})
 }

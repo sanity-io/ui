@@ -3,19 +3,19 @@ import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
 
-export function responsiveFlexStyle() {
+const BASE_STYLE: CSSObject = {'&:not([hidden])': {display: 'flex'}}
+
+export function responsiveFlexStyle(): Array<
+  CSSObject | ((props: ResponsiveFlexStyleProps & ThemeProps) => CSSObject[])
+> {
   return [
-    flexBaseStyle,
+    BASE_STYLE,
     responsiveFlexAlignStyle,
     responsiveFlexGapStyle,
     responsiveFlexWrapStyle,
     responsiveFlexJustifyStyle,
     responsiveFlexDirectionStyle,
   ]
-}
-
-function flexBaseStyle() {
-  return {'&:not([hidden])': {display: 'flex'}}
 }
 
 export function responsiveFlexAlignStyle(

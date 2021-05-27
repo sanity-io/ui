@@ -1,6 +1,6 @@
 import maxSizeModifier from 'popper-max-size-modifier'
 import {Modifier} from 'react-popper'
-import {Placement} from '../../../types'
+import {PopoverModifiersProps} from './types'
 
 /*
 
@@ -18,35 +18,23 @@ The order of popper phases:
 
 */
 
-export function getPopoverModifiers({
-  allowedAutoPlacements,
-  arrow,
-  arrowElement,
-  boundaryElement,
-  constrainSize,
-  distance,
-  fallbackPlacements,
-  margins,
-  matchReferenceWidth,
-  preventOverflow,
-  skidding,
-  tether,
-  tetherOffset,
-}: {
-  allowedAutoPlacements?: Placement[]
-  arrow?: boolean
-  arrowElement?: HTMLElement | null
-  boundaryElement?: HTMLElement | null
-  constrainSize?: boolean
-  distance: number
-  fallbackPlacements?: Placement[]
-  margins?: [number, number, number, number]
-  matchReferenceWidth?: boolean
-  preventOverflow?: boolean
-  skidding: number
-  tether?: boolean
-  tetherOffset?: number | ((...args: any[]) => number)
-}) {
+export function getPopoverModifiers(props: PopoverModifiersProps): Modifier<any, any>[] {
+  const {
+    allowedAutoPlacements,
+    arrow,
+    arrowElement,
+    boundaryElement,
+    constrainSize,
+    distance,
+    fallbackPlacements,
+    margins,
+    matchReferenceWidth,
+    preventOverflow,
+    skidding,
+    tether,
+    tetherOffset,
+  } = props
+
   return [
     constrainSize && {
       ...maxSizeModifier,

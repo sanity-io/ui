@@ -16,7 +16,7 @@ export interface DialogProviderProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export function DialogProvider(props: DialogProviderProps) {
+export function DialogProvider(props: DialogProviderProps): React.ReactElement {
   const {children, position, zOffset} = props
 
   const contextValue: DialogContextValue = useMemo(
