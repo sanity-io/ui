@@ -1,7 +1,7 @@
 {
   "name": "sanity-design-studio",
   "private": true,
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "",
   "main": "package.json",
   "author": "Sanity.io <hello@sanity.io>",
@@ -25,7 +25,7 @@
     "@sanity/default-login": "^2.10.5",
     "@sanity/desk-tool": "^2.10.5",
     "@sanity/production-preview": "^2.2.6",
-    "@sanity/ui": "^0.33.28",
+    "@sanity/ui": "^0.33.29",
     "@sanity/vision": "^2.10.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
