@@ -25,38 +25,34 @@ const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switch
 /**
  * @public
  */
-export const Switch = forwardRef(
-  (
-    props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
-    forwardedRef: React.ForwardedRef<HTMLInputElement>
-  ) => {
-    const {checked, className, disabled, indeterminate, readOnly, style, ...restProps} = props
-    const ref = useForwardedRef(forwardedRef)
+export const Switch = forwardRef(function Switch(
+  props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
+  forwardedRef: React.ForwardedRef<HTMLInputElement>
+) {
+  const {checked, className, disabled, indeterminate, readOnly, style, ...restProps} = props
+  const ref = useForwardedRef(forwardedRef)
 
-    useEffect(() => {
-      if (ref.current) {
-        // Set the indeterminate state
-        ref.current.indeterminate = indeterminate || false
-      }
-    }, [indeterminate, ref])
+  useEffect(() => {
+    if (ref.current) {
+      // Set the indeterminate state
+      ref.current.indeterminate = indeterminate || false
+    }
+  }, [indeterminate, ref])
 
-    return (
-      <Root className={className} data-ui="Switch" style={style}>
-        <Input
-          data-read-only={!disabled && readOnly ? '' : undefined}
-          {...restProps}
-          checked={indeterminate !== true && checked}
-          disabled={disabled || readOnly}
-          type="checkbox"
-          ref={ref}
-        />
-        <Representation aria-hidden data-name="representation">
-          <Track />
-          <Thumb $checked={checked} $indeterminate={indeterminate} />
-        </Representation>
-      </Root>
-    )
-  }
-)
-
-Switch.displayName = 'Switch'
+  return (
+    <Root className={className} data-ui="Switch" style={style}>
+      <Input
+        data-read-only={!disabled && readOnly ? '' : undefined}
+        {...restProps}
+        checked={indeterminate !== true && checked}
+        disabled={disabled || readOnly}
+        type="checkbox"
+        ref={ref}
+      />
+      <Representation aria-hidden data-name="representation">
+        <Track />
+        <Thumb $checked={checked} $indeterminate={indeterminate} />
+      </Representation>
+    </Root>
+  )
+})

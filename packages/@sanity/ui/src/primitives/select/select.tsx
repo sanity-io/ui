@@ -31,51 +31,47 @@ const IconBox = styled(Box)(selectStyle.iconBox)
 /**
  * @public
  */
-export const Select = forwardRef(
-  (
-    props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
-    forwardedRef: React.Ref<HTMLSelectElement>
-  ) => {
-    const {
-      children,
-      customValidity,
-      disabled,
-      fontSize = 2,
-      padding = 3,
-      radius = 1,
-      readOnly,
-      space = 3,
-      ...restProps
-    } = props
+export const Select = forwardRef(function Select(
+  props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
+  forwardedRef: React.Ref<HTMLSelectElement>
+) {
+  const {
+    children,
+    customValidity,
+    disabled,
+    fontSize = 2,
+    padding = 3,
+    radius = 1,
+    readOnly,
+    space = 3,
+    ...restProps
+  } = props
 
-    const ref = useForwardedRef(forwardedRef)
+  const ref = useForwardedRef(forwardedRef)
 
-    useCustomValidity(ref, customValidity)
+  useCustomValidity(ref, customValidity)
 
-    return (
-      <Root data-ui="Select">
-        <Input
-          data-read-only={!disabled && readOnly ? '' : undefined}
-          data-ui="Select"
-          {...restProps}
-          $fontSize={fontSize}
-          $padding={padding}
-          $radius={radius}
-          $space={space}
-          disabled={disabled || readOnly}
-          ref={ref}
-        >
-          {children}
-        </Input>
+  return (
+    <Root data-ui="Select">
+      <Input
+        data-read-only={!disabled && readOnly ? '' : undefined}
+        data-ui="Select"
+        {...restProps}
+        $fontSize={fontSize}
+        $padding={padding}
+        $radius={radius}
+        $space={space}
+        disabled={disabled || readOnly}
+        ref={ref}
+      >
+        {children}
+      </Input>
 
-        <IconBox padding={padding}>
-          <Text size={fontSize}>
-            <SelectIcon />
-          </Text>
-        </IconBox>
-      </Root>
-    )
-  }
-)
-
-Select.displayName = 'Select'
+      <IconBox padding={padding}>
+        <Text size={fontSize}>
+          <SelectIcon />
+        </Text>
+      </IconBox>
+    </Root>
+  )
+})

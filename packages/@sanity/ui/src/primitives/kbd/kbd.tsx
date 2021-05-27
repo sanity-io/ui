@@ -30,23 +30,19 @@ const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdSt
 /**
  * @public
  */
-export const KBD = forwardRef(
-  (
-    props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-    ref: React.Ref<HTMLElement>
-  ) => {
-    const {children, fontSize = 1, padding = 1, radius = 2, ...restProps} = props
+export const KBD = forwardRef(function KBD(
+  props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
+  ref: React.Ref<HTMLElement>
+) {
+  const {children, fontSize = 1, padding = 1, radius = 2, ...restProps} = props
 
-    return (
-      <Root data-ui="KBD" {...restProps} $radius={radius} ref={ref}>
-        <Box as="span" padding={padding}>
-          <Code as="span" muted size={fontSize}>
-            {children}
-          </Code>
-        </Box>
-      </Root>
-    )
-  }
-)
-
-KBD.displayName = 'KBD'
+  return (
+    <Root data-ui="KBD" {...restProps} $radius={radius} ref={ref}>
+      <Box as="span" padding={padding}>
+        <Code as="span" muted size={fontSize}>
+          {children}
+        </Code>
+      </Box>
+    </Root>
+  )
+})

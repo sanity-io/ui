@@ -50,41 +50,37 @@ const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresenta
 /**
  * @public
  */
-export const TextArea = forwardRef(
-  (
-    props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
-    forwardedRef: React.ForwardedRef<HTMLTextAreaElement>
-  ) => {
-    const {
-      border = true,
-      customValidity,
-      disabled = false,
-      fontSize = 2,
-      padding = 3,
-      radius = 1,
-      ...restProps
-    } = props
+export const TextArea = forwardRef(function TextArea(
+  props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
+  forwardedRef: React.ForwardedRef<HTMLTextAreaElement>
+) {
+  const {
+    border = true,
+    customValidity,
+    disabled = false,
+    fontSize = 2,
+    padding = 3,
+    radius = 1,
+    ...restProps
+  } = props
 
-    const ref = useForwardedRef(forwardedRef)
+  const ref = useForwardedRef(forwardedRef)
 
-    useCustomValidity(ref, customValidity)
+  useCustomValidity(ref, customValidity)
 
-    return (
-      <Root data-ui="TextArea">
-        <InputRoot>
-          <Input
-            data-as="textarea"
-            {...restProps}
-            $fontSize={fontSize}
-            $padding={padding}
-            disabled={disabled}
-            ref={ref}
-          />
-          <Presentation $border={border} $radius={radius} />
-        </InputRoot>
-      </Root>
-    )
-  }
-)
-
-TextArea.displayName = 'TextArea'
+  return (
+    <Root data-ui="TextArea">
+      <InputRoot>
+        <Input
+          data-as="textarea"
+          {...restProps}
+          $fontSize={fontSize}
+          $padding={padding}
+          disabled={disabled}
+          ref={ref}
+        />
+        <Presentation $border={border} $radius={radius} />
+      </InputRoot>
+    </Root>
+  )
+})

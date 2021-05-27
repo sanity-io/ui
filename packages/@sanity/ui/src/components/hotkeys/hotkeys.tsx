@@ -29,29 +29,25 @@ const Key = styled(KBD)`
 /**
  * @public
  */
-export const Hotkeys = forwardRef(
-  (
-    props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-    ref: React.Ref<HTMLElement>
-  ) => {
-    const {fontSize, keys, padding, radius, space = 1, ...restProps} = props
+export const Hotkeys = forwardRef(function Hotkeys(
+  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
+  ref: React.Ref<HTMLElement>
+) {
+  const {fontSize, keys, padding, radius, space = 1, ...restProps} = props
 
-    if (!keys || keys.length === 0) {
-      return <></>
-    }
-
-    return (
-      <Root data-ui="Hotkeys" {...restProps} ref={ref}>
-        <Inline as="span" space={space}>
-          {keys.map((key, i) => (
-            <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
-              {key}
-            </Key>
-          ))}
-        </Inline>
-      </Root>
-    )
+  if (!keys || keys.length === 0) {
+    return <></>
   }
-)
 
-Hotkeys.displayName = 'Hotkeys'
+  return (
+    <Root data-ui="Hotkeys" {...restProps} ref={ref}>
+      <Inline as="span" space={space}>
+        {keys.map((key, i) => (
+          <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
+            {key}
+          </Key>
+        ))}
+      </Inline>
+    </Root>
+  )
+})
