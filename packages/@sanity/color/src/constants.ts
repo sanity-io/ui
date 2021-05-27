@@ -1,5 +1,8 @@
 import {ColorHueKey, ColorTintKey} from './types'
 
+/**
+ * @public
+ */
 export const COLOR_HUES: ColorHueKey[] = [
   'gray',
   'blue',
@@ -12,6 +15,9 @@ export const COLOR_HUES: ColorHueKey[] = [
   'cyan',
 ]
 
+/**
+ * @public
+ */
 export const COLOR_TINTS: ColorTintKey[] = [
   '50',
   '100',
