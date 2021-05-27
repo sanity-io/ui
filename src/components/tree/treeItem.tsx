@@ -9,6 +9,19 @@ import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
 
+/**
+ * @beta
+ */
+export interface TreeItemProps {
+  expanded?: boolean
+  fontSize?: number | number[]
+  icon?: React.ComponentType
+  padding?: number | number[]
+  space?: number | number[]
+  text?: React.ReactNode
+  weight?: ThemeFontWeightKey
+}
+
 const Root = styled.li((props: {theme: Theme}) => {
   const {theme} = props
   const {card, muted} = theme.sanity.color
@@ -79,16 +92,8 @@ const TreeItemBox = styled(Box)<{$level: number}>((props: {$level: number; theme
  * @beta
  */
 export function TreeItem(
-  props: {
-    expanded?: boolean
-    fontSize?: number | number[]
-    icon?: React.ComponentType
-    padding?: number | number[]
-    space?: number | number[]
-    text?: React.ReactNode
-    weight?: ThemeFontWeightKey
-  } & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>
-) {
+  props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>
+): React.ReactElement {
   const {
     children,
     expanded: expandedProp = false,

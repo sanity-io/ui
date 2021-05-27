@@ -8,7 +8,7 @@ export interface AutocompleteOptionProps {
   value: string
 }
 
-export function AutocompleteOption(props: AutocompleteOptionProps) {
+export function AutocompleteOption(props: AutocompleteOptionProps): React.ReactElement {
   const {children, id, onSelect, selected, value} = props
 
   const handleClick = useCallback(() => {

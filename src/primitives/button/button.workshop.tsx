@@ -47,7 +47,7 @@ const ICON_SYMBOL_OPTIONS = Object.keys(icons).reduce(
   {'(none)': ''}
 )
 
-export function ButtonStory() {
+export function ButtonStory(): React.ReactElement {
   const disabled = useBoolean('Disabled', false, 'Props')
   const fontSize = useSelect('Font size', TEXT_SIZE_OPTIONS, 2, 'Props')
   const icon = useSelect('Icon', ICON_SYMBOL_OPTIONS, 'add-circle', 'Props') as IconSymbol

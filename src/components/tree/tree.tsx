@@ -19,7 +19,7 @@ export interface TreeProps {
 export function Tree(
   props: TreeProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>
-) {
+): React.ReactElement {
   const {children, space = 1, ...restProps} = props
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const path: string[] = useMemo(() => [], [])

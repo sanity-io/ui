@@ -1,6 +1,6 @@
 import {parseColor, rgbToHex, screen as _screen, multiply as _multiply} from '../lib/color-fns'
 
-export function multiply(bg: string, fg: string) {
+export function multiply(bg: string, fg: string): string {
   const b = parseColor(bg)
   const s = parseColor(fg)
   const hex = rgbToHex(_multiply(b, s))
@@ -8,7 +8,7 @@ export function multiply(bg: string, fg: string) {
   return hex
 }
 
-export function screen(bg: string, fg: string) {
+export function screen(bg: string, fg: string): string {
   const b = parseColor(bg)
   const s = parseColor(fg)
   const hex = rgbToHex(_screen(b, s))

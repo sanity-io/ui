@@ -4,7 +4,7 @@ export function _findPrevItemElement(
   state: TreeState,
   itemElements: HTMLElement[],
   focusedElement: HTMLElement
-) {
+): HTMLElement | null {
   const idx = itemElements.indexOf(focusedElement)
   const els = itemElements.slice(0, idx)
   const len = els.length
@@ -47,7 +47,7 @@ export function _findNextItemElement(
   state: TreeState,
   itemElements: HTMLElement[],
   focusedElement: HTMLElement
-) {
+): HTMLElement | null {
   const idx = itemElements.indexOf(focusedElement)
   const els = itemElements.slice(idx)
   const len = itemElements.length
@@ -90,7 +90,7 @@ export function _findNextItemElement(
   return null
 }
 
-export function _focusItemElement(el: HTMLElement) {
+export function _focusItemElement(el: HTMLElement): void {
   if (el.getAttribute('role') === 'treeitem') {
     el.focus()
   }

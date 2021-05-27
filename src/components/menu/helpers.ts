@@ -7,7 +7,9 @@ function isFocusable(element: HTMLElement) {
   )
 }
 
-export function getFocusableElements(elements: HTMLElement[]) {
+export function getFocusableElements(
+  elements: HTMLElement[]
+): {element: HTMLElement; focusable: boolean}[] {
   return elements.map((element) => {
     return {element, focusable: isFocusable(element)}
   })

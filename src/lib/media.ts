@@ -76,7 +76,7 @@ function _createMediaManager(media: number[]): _MediaManager {
 /**
  * @internal
  */
-export function _getMediaManager(media: number[]) {
+export function _getMediaManager(media: number[]): _MediaManager {
   let manager = MEDIA_MANAGER_CACHE.get(media)
 
   if (!manager) {

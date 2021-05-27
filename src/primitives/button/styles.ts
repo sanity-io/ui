@@ -1,10 +1,10 @@
-import {css} from 'styled-components'
+import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 import {ThemeColorButtonState} from '../../theme'
 import {ButtonMode, ButtonTone} from '../../types'
 
-export function buttonBaseStyles() {
+export function buttonBaseStyles(): FlattenSimpleInterpolation {
   return css`
     -webkit-font-smoothing: inherit;
     appearance: none;
@@ -47,7 +47,9 @@ function buttonColorVarsStyle(color: ThemeColorButtonState) {
   }
 }
 
-export function buttonColorStyles(props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps) {
+export function buttonColorStyles(
+  props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps
+): CSSObject[] {
   const {$mode, theme} = props
   const {focusRing} = theme.sanity
   const base = theme.sanity.color.base
@@ -77,5 +79,5 @@ export function buttonColorStyles(props: {$mode: ButtonMode; $tone: ButtonTone} 
       },
     },
     theme.sanity.styles?.button?.root,
-  ]
+  ].filter(Boolean) as CSSObject[]
 }

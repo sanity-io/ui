@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useResponsiveProp} from '../../hooks'
@@ -60,7 +60,11 @@ export interface AvatarCounterProps {
 /**
  * @public
  */
-export function AvatarCounter({count, size: sizeProp = 0, tone}: AvatarCounterProps) {
+export const AvatarCounter = forwardRef(function AvatarCounter({
+  count,
+  size: sizeProp = 0,
+  tone,
+}: AvatarCounterProps) {
   const size: AvatarSize[] = useResponsiveProp(sizeProp, [0])
 
   return (
@@ -70,4 +74,4 @@ export function AvatarCounter({count, size: sizeProp = 0, tone}: AvatarCounterPr
       </Text>
     </Root>
   )
-}
+})

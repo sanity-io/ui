@@ -1,4 +1,4 @@
-export function findMaxBreakpoints(media: number[], width: number) {
+export function findMaxBreakpoints(media: number[], width: number): number[] {
   const ret: number[] = []
 
   for (let i = 0; i < media.length; i += 1) {
@@ -12,7 +12,7 @@ export function findMaxBreakpoints(media: number[], width: number) {
   return ret
 }
 
-export function findMinBreakpoints(media: number[], width: number) {
+export function findMinBreakpoints(media: number[], width: number): number[] {
   const ret: number[] = []
 
   for (let i = 0; i < media.length; i += 1) {
