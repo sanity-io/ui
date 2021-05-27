@@ -2,11 +2,13 @@ import React from 'react'
 import {Stack} from '../../primitives'
 import {useTree} from './useTree'
 
+export interface TreeGroupProps {
+  expanded?: boolean
+}
+
 export function TreeGroup(
-  props: {expanded?: boolean} & Omit<
-    React.HTMLProps<HTMLDivElement>,
-    'as' | 'height' | 'ref' | 'role' | 'wrap'
-  >
+  props: TreeGroupProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'role' | 'wrap'>
 ) {
   const {children, expanded = false, ...restProps} = props
   const tree = useTree()

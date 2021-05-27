@@ -1,12 +1,14 @@
 import React, {useCallback} from 'react'
 
-export function AutocompleteOption(props: {
+export interface AutocompleteOptionProps {
   children: React.ReactNode
   id: string
   onSelect: (v: string) => void
   selected: boolean
   value: string
-}) {
+}
+
+export function AutocompleteOption(props: AutocompleteOptionProps) {
   const {children, id, onSelect, selected, value} = props
 
   const handleClick = useCallback(() => {
