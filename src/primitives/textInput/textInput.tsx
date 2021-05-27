@@ -127,176 +127,172 @@ const RightBox = styled(Box)`
 /**
  * @public
  */
-export const TextInput = forwardRef(
-  (
-    props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
-    forwardedRef: React.Ref<HTMLInputElement>
-  ) => {
-    const {
-      border = true,
-      clearButton,
-      disabled = false,
-      fontSize = 2,
-      icon,
-      iconRight,
-      onClear,
-      padding: paddingProp = 3,
-      prefix,
-      radius = 1,
-      readOnly,
-      space = 3,
-      suffix,
-      customValidity,
-      type = 'text',
-      ...restProps
-    } = props
+export const TextInput = forwardRef(function TextInput(
+  props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
+  forwardedRef: React.Ref<HTMLInputElement>
+) {
+  const {
+    border = true,
+    clearButton,
+    disabled = false,
+    fontSize = 2,
+    icon,
+    iconRight,
+    onClear,
+    padding: paddingProp = 3,
+    prefix,
+    radius = 1,
+    readOnly,
+    space = 3,
+    suffix,
+    customValidity,
+    type = 'text',
+    ...restProps
+  } = props
 
-    const ref = useForwardedRef(forwardedRef)
-    const padding = useResponsiveProp(paddingProp)
+  const ref = useForwardedRef(forwardedRef)
+  const padding = useResponsiveProp(paddingProp)
 
-    // Transient properties
-    const $hasClearButton = Boolean(clearButton)
-    const $hasIcon = Boolean(icon)
-    const $hasIconRight = Boolean(iconRight)
-    const $hasSuffix = Boolean(suffix)
-    const $hasPrefix = Boolean(prefix)
+  // Transient properties
+  const $hasClearButton = Boolean(clearButton)
+  const $hasIcon = Boolean(icon)
+  const $hasIconRight = Boolean(iconRight)
+  const $hasSuffix = Boolean(suffix)
+  const $hasPrefix = Boolean(prefix)
 
-    useCustomValidity(ref, customValidity)
+  useCustomValidity(ref, customValidity)
 
-    // Prevent the clear button from taking the focus away from the input
-    const handleClearMouseDown = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+  // Prevent the clear button from taking the focus away from the input
+  const handleClearMouseDown = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+  }, [])
+
+  const handleClearClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
       event.stopPropagation()
-    }, [])
 
-    const handleClearClick = useCallback(
-      (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        event.stopPropagation()
+      if (onClear) onClear()
 
-        if (onClear) onClear()
+      // Focus the input, in case focus has been lost when clicking the clear button
+      ref.current?.focus()
+    },
+    [onClear, ref]
+  )
 
-        // Focus the input, in case focus has been lost when clicking the clear button
-        ref.current?.focus()
-      },
-      [onClear, ref]
-    )
-
-    // Render prefix (memoized)
-    const prefixNode = useMemo(
-      () =>
-        prefix && (
-          <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border">
-            <span>{prefix}</span>
-          </Prefix>
-        ),
-      [prefix, radius]
-    )
-
-    // Render presentation (memoized)
-    const presentationNode = useMemo(
-      () => (
-        <Presentation
-          $border={border}
-          $hasPrefix={$hasPrefix}
-          $hasSuffix={$hasSuffix}
-          $radius={radius}
-        >
-          {icon && (
-            <LeftBox padding={padding}>
-              <Text size={fontSize}>
-                {isValidElement(icon) && icon}
-                {isValidElementType(icon) && createElement(icon)}
-              </Text>
-            </LeftBox>
-          )}
-
-          {!$hasClearButton && iconRight && (
-            <RightBox padding={padding}>
-              <Text size={fontSize}>
-                {isValidElement(iconRight) && iconRight}
-                {isValidElementType(iconRight) && createElement(iconRight)}
-              </Text>
-            </RightBox>
-          )}
-        </Presentation>
+  // Render prefix (memoized)
+  const prefixNode = useMemo(
+    () =>
+      prefix && (
+        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border">
+          <span>{prefix}</span>
+        </Prefix>
       ),
-      [border, fontSize, icon, iconRight, padding, radius, $hasClearButton, $hasPrefix, $hasSuffix]
-    )
+    [prefix, radius]
+  )
 
-    // Render clear button (memoized)
-    const clearButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
-    const clearButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
-    const clearButtonProps: TextInputClearButtonProps = useMemo(
-      () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
-      [clearButton]
-    )
-    const clearButtonNode = useMemo(
-      () =>
-        !disabled &&
-        !readOnly &&
-        clearButton && (
-          <RightBox padding={clearButtonBoxPadding} style={CLEAR_BUTTON_BOX_STYLE}>
-            <Button
-              {...clearButtonProps}
-              data-qa="clear-button"
-              fontSize={fontSize}
-              icon={CloseIcon}
-              mode="bleed"
-              onClick={handleClearClick}
-              onMouseDown={handleClearMouseDown}
-              padding={clearButtonPadding}
-            />
+  // Render presentation (memoized)
+  const presentationNode = useMemo(
+    () => (
+      <Presentation
+        $border={border}
+        $hasPrefix={$hasPrefix}
+        $hasSuffix={$hasSuffix}
+        $radius={radius}
+      >
+        {icon && (
+          <LeftBox padding={padding}>
+            <Text size={fontSize}>
+              {isValidElement(icon) && icon}
+              {isValidElementType(icon) && createElement(icon)}
+            </Text>
+          </LeftBox>
+        )}
+
+        {!$hasClearButton && iconRight && (
+          <RightBox padding={padding}>
+            <Text size={fontSize}>
+              {isValidElement(iconRight) && iconRight}
+              {isValidElementType(iconRight) && createElement(iconRight)}
+            </Text>
           </RightBox>
-        ),
-      [
-        clearButton,
-        clearButtonBoxPadding,
-        clearButtonPadding,
-        clearButtonProps,
-        disabled,
-        fontSize,
-        handleClearClick,
-        handleClearMouseDown,
-        readOnly,
-      ]
-    )
+        )}
+      </Presentation>
+    ),
+    [border, fontSize, icon, iconRight, padding, radius, $hasClearButton, $hasPrefix, $hasSuffix]
+  )
 
-    // Render suffix (memoized)
-    const suffixNode = useMemo(
-      () =>
-        suffix && (
-          <Suffix borderTop borderRight borderBottom radius={radius} sizing="border">
-            <span>{suffix}</span>
-          </Suffix>
-        ),
-      [radius, suffix]
-    )
-
-    return (
-      <Root data-ui="TextInput">
-        {prefixNode}
-        <InputRoot>
-          <Input
-            data-as="input"
-            {...restProps}
-            $iconLeft={$hasIcon}
-            $iconRight={$hasIconRight || $hasClearButton}
-            $padding={padding}
-            $space={space}
-            $fontSize={fontSize}
-            disabled={disabled}
-            readOnly={readOnly}
-            ref={ref}
-            type={type}
+  // Render clear button (memoized)
+  const clearButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
+  const clearButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
+  const clearButtonProps: TextInputClearButtonProps = useMemo(
+    () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
+    [clearButton]
+  )
+  const clearButtonNode = useMemo(
+    () =>
+      !disabled &&
+      !readOnly &&
+      clearButton && (
+        <RightBox padding={clearButtonBoxPadding} style={CLEAR_BUTTON_BOX_STYLE}>
+          <Button
+            {...clearButtonProps}
+            data-qa="clear-button"
+            fontSize={fontSize}
+            icon={CloseIcon}
+            mode="bleed"
+            onClick={handleClearClick}
+            onMouseDown={handleClearMouseDown}
+            padding={clearButtonPadding}
           />
-          {presentationNode}
-          {clearButtonNode}
-        </InputRoot>
-        {suffixNode}
-      </Root>
-    )
-  }
-)
+        </RightBox>
+      ),
+    [
+      clearButton,
+      clearButtonBoxPadding,
+      clearButtonPadding,
+      clearButtonProps,
+      disabled,
+      fontSize,
+      handleClearClick,
+      handleClearMouseDown,
+      readOnly,
+    ]
+  )
 
-TextInput.displayName = 'TextInput'
+  // Render suffix (memoized)
+  const suffixNode = useMemo(
+    () =>
+      suffix && (
+        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border">
+          <span>{suffix}</span>
+        </Suffix>
+      ),
+    [radius, suffix]
+  )
+
+  return (
+    <Root data-ui="TextInput">
+      {prefixNode}
+      <InputRoot>
+        <Input
+          data-as="input"
+          {...restProps}
+          $iconLeft={$hasIcon}
+          $iconRight={$hasIconRight || $hasClearButton}
+          $padding={padding}
+          $space={space}
+          $fontSize={fontSize}
+          disabled={disabled}
+          readOnly={readOnly}
+          ref={ref}
+          type={type}
+        />
+        {presentationNode}
+        {clearButtonNode}
+      </InputRoot>
+      {suffixNode}
+    </Root>
+  )
+})

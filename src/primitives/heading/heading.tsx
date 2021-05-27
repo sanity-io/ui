@@ -43,40 +43,39 @@ const SpanWithTextOverflow = styled.span`
 /**
  * @public
  */
-export const Heading = forwardRef(
-  (props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'size'>, ref) => {
-    const {
-      accent = false,
-      align,
-      children: childrenProp,
-      muted = false,
-      size = 2,
-      textOverflow,
-      weight,
-      ...restProps
-    } = props
+export const Heading = forwardRef(function Heading(
+  props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'size'>,
+  ref
+) {
+  const {
+    accent = false,
+    align,
+    children: childrenProp,
+    muted = false,
+    size = 2,
+    textOverflow,
+    weight,
+    ...restProps
+  } = props
 
-    let children = childrenProp
+  let children = childrenProp
 
-    if (textOverflow === 'ellipsis') {
-      children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-    }
-
-    return (
-      <Root
-        data-ui="Heading"
-        {...restProps}
-        $accent={accent}
-        $align={align}
-        $muted={muted}
-        $size={size}
-        $weight={weight}
-        ref={ref}
-      >
-        {children}
-      </Root>
-    )
+  if (textOverflow === 'ellipsis') {
+    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
   }
-)
 
-Heading.displayName = 'Heading'
+  return (
+    <Root
+      data-ui="Heading"
+      {...restProps}
+      $accent={accent}
+      $align={align}
+      $muted={muted}
+      $size={size}
+      $weight={weight}
+      ref={ref}
+    >
+      {children}
+    </Root>
+  )
+})

@@ -26,7 +26,10 @@ const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
 /**
  * @public
  */
-export const Badge = forwardRef((props: BadgeProps & React.HTMLProps<HTMLDivElement>, ref) => {
+export const Badge = forwardRef(function Badge(
+  props: BadgeProps & React.HTMLProps<HTMLDivElement>,
+  ref
+) {
   const {
     children,
     fontSize,
@@ -51,5 +54,3 @@ export const Badge = forwardRef((props: BadgeProps & React.HTMLProps<HTMLDivElem
     </Root>
   )
 })
-
-Badge.displayName = 'Badge'

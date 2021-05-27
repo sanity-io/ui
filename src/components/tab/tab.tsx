@@ -24,75 +24,71 @@ export interface TabProps {
 /**
  * @public
  */
-export const Tab = forwardRef(
-  (
-    props: TabProps &
-      Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'type'>,
-    forwardedRef: React.ForwardedRef<HTMLButtonElement>
-  ) => {
-    const {
-      icon,
-      id,
-      focused,
-      fontSize,
-      label,
-      onClick,
-      onFocus,
-      padding = 2,
-      selected,
-      ...restProps
-    } = props
-    const elementRef = useRef<HTMLButtonElement | null>(null)
-    const focusedRef = useRef(false)
+export const Tab = forwardRef(function Tab(
+  props: TabProps &
+    Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'type'>,
+  forwardedRef: React.ForwardedRef<HTMLButtonElement>
+) {
+  const {
+    icon,
+    id,
+    focused,
+    fontSize,
+    label,
+    onClick,
+    onFocus,
+    padding = 2,
+    selected,
+    ...restProps
+  } = props
+  const elementRef = useRef<HTMLButtonElement | null>(null)
+  const focusedRef = useRef(false)
 
-    const handleBlur = useCallback(() => {
-      focusedRef.current = false
-    }, [])
+  const handleBlur = useCallback(() => {
+    focusedRef.current = false
+  }, [])
 
-    const handleFocus = useCallback(
-      (event: React.FocusEvent<HTMLButtonElement>) => {
-        focusedRef.current = true
-        if (onFocus) onFocus(event)
-      },
-      [onFocus]
-    )
+  const handleFocus = useCallback(
+    (event: React.FocusEvent<HTMLButtonElement>) => {
+      focusedRef.current = true
+      if (onFocus) onFocus(event)
+    },
+    [onFocus]
+  )
 
-    const ref = useForwardedRef(forwardedRef)
+  const ref = useForwardedRef(forwardedRef)
 
-    useEffect(() => {
-      if (focused && !focusedRef.current) {
-        if (elementRef.current) elementRef.current.focus()
-        focusedRef.current = true
-      }
-    }, [focused])
-
-    const setRef = (el: HTMLButtonElement | null) => {
-      elementRef.current = el
-      ref.current = el
+  useEffect(() => {
+    if (focused && !focusedRef.current) {
+      if (elementRef.current) elementRef.current.focus()
+      focusedRef.current = true
     }
+  }, [focused])
 
-    return (
-      <Button
-        data-ui="Tab"
-        {...restProps}
-        aria-selected={selected ? 'true' : 'false'}
-        fontSize={fontSize}
-        icon={icon}
-        id={id}
-        mode="bleed"
-        onClick={onClick}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        padding={padding}
-        ref={setRef}
-        role="tab"
-        selected={selected}
-        tabIndex={selected ? 0 : -1}
-        text={label}
-        type="button"
-      />
-    )
+  const setRef = (el: HTMLButtonElement | null) => {
+    elementRef.current = el
+    ref.current = el
   }
-)
 
-Tab.displayName = 'Tab'
+  return (
+    <Button
+      data-ui="Tab"
+      {...restProps}
+      aria-selected={selected ? 'true' : 'false'}
+      fontSize={fontSize}
+      icon={icon}
+      id={id}
+      mode="bleed"
+      onClick={onClick}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+      padding={padding}
+      ref={setRef}
+      role="tab"
+      selected={selected}
+      tabIndex={selected ? 0 : -1}
+      text={label}
+      type="button"
+    />
+  )
+})

@@ -55,7 +55,10 @@ const LoadingBox = styled.div`
 /**
  * @public
  */
-export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButtonElement>, ref) => {
+export const Button = forwardRef(function Button(
+  props: ButtonProps & React.HTMLProps<HTMLButtonElement>,
+  ref
+) {
   const {
     children,
     disabled,
@@ -152,5 +155,3 @@ export const Button = forwardRef((props: ButtonProps & React.HTMLProps<HTMLButto
     </Root>
   )
 })
-
-Button.displayName = 'Button'

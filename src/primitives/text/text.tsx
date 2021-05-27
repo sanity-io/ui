@@ -43,40 +43,39 @@ const SpanWithTextOverflow = styled.span`
 /**
  * @public
  */
-export const Text = forwardRef(
-  (props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>, ref) => {
-    const {
-      accent = false,
-      align,
-      children: childrenProp,
-      muted = false,
-      size = 2,
-      textOverflow,
-      weight,
-      ...restProps
-    } = props
+export const Text = forwardRef(function Text(
+  props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>,
+  ref
+) {
+  const {
+    accent = false,
+    align,
+    children: childrenProp,
+    muted = false,
+    size = 2,
+    textOverflow,
+    weight,
+    ...restProps
+  } = props
 
-    let children = childrenProp
+  let children = childrenProp
 
-    if (textOverflow === 'ellipsis') {
-      children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-    }
-
-    return (
-      <Root
-        data-ui="Text"
-        {...restProps}
-        $accent={accent}
-        $align={align}
-        $muted={muted}
-        ref={ref}
-        $size={size}
-        $weight={weight}
-      >
-        {children}
-      </Root>
-    )
+  if (textOverflow === 'ellipsis') {
+    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
   }
-)
 
-Text.displayName = 'Text'
+  return (
+    <Root
+      data-ui="Text"
+      {...restProps}
+      $accent={accent}
+      $align={align}
+      $muted={muted}
+      ref={ref}
+      $size={size}
+      $weight={weight}
+    >
+      {children}
+    </Root>
+  )
+})

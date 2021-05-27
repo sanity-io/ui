@@ -11,44 +11,43 @@ export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
 /**
  * @public
  */
-export const TabList = forwardRef(
-  (props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>, ref) => {
-    const {children, ...restProps} = props
-    const [focusedIndex, setFocusedIndex] = useState(-1)
+export const TabList = forwardRef(function TabList(
+  props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
+  ref
+) {
+  const {children, ...restProps} = props
+  const [focusedIndex, setFocusedIndex] = useState(-1)
 
-    const tabs = children.map((child, childIndex) =>
-      cloneElement(child, {
-        focused: focusedIndex === childIndex,
-        key: childIndex,
-        onFocus: () => handleTabFocus(childIndex),
-      })
-    )
+  const tabs = children.map((child, childIndex) =>
+    cloneElement(child, {
+      focused: focusedIndex === childIndex,
+      key: childIndex,
+      onFocus: () => handleTabFocus(childIndex),
+    })
+  )
 
-    const numTabs = tabs.length
+  const numTabs = tabs.length
 
-    const handleTabFocus = useCallback((tabIdx: number) => {
-      setFocusedIndex(tabIdx)
-    }, [])
+  const handleTabFocus = useCallback((tabIdx: number) => {
+    setFocusedIndex(tabIdx)
+  }, [])
 
-    const handleKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (event.key === 'ArrowLeft') {
-          setFocusedIndex((prevIndex) => (prevIndex + numTabs - 1) % numTabs)
-        }
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === 'ArrowLeft') {
+        setFocusedIndex((prevIndex) => (prevIndex + numTabs - 1) % numTabs)
+      }
 
-        if (event.key === 'ArrowRight') {
-          setFocusedIndex((prevIndex) => (prevIndex + 1) % numTabs)
-        }
-      },
-      [numTabs]
-    )
+      if (event.key === 'ArrowRight') {
+        setFocusedIndex((prevIndex) => (prevIndex + 1) % numTabs)
+      }
+    },
+    [numTabs]
+  )
 
-    return (
-      <Inline data-ui="TabList" {...restProps} onKeyDown={handleKeyDown} ref={ref} role="tablist">
-        {tabs}
-      </Inline>
-    )
-  }
-)
-
-TabList.displayName = 'TabList'
+  return (
+    <Inline data-ui="TabList" {...restProps} onKeyDown={handleKeyDown} ref={ref} role="tablist">
+      {tabs}
+    </Inline>
+  )
+})
