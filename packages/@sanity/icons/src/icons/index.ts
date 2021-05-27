@@ -126,6 +126,7 @@ import {default as SyncIcon} from './syncIcon'
 import {default as TerminalIcon} from './terminalIcon'
 import {default as ThLargeIcon} from './thLargeIcon'
 import {default as ThListIcon} from './thListIcon'
+import {default as TiersIcon} from './tiersIcon'
 import {default as ToggleArrowRightIcon} from './toggleArrowRightIcon'
 import {default as TokenIcon} from './tokenIcon'
 import {default as TrashIcon} from './trashIcon'
@@ -267,6 +268,7 @@ export type IconSymbol =
   | 'terminal'
   | 'th-large'
   | 'th-list'
+  | 'tiers'
   | 'toggle-arrow-right'
   | 'token'
   | 'trash'
@@ -408,6 +410,7 @@ export {
   TerminalIcon,
   ThLargeIcon,
   ThListIcon,
+  TiersIcon,
   ToggleArrowRightIcon,
   TokenIcon,
   TrashIcon,
@@ -550,6 +553,7 @@ export interface IconMap {
   terminal: IconComponent
   'th-large': IconComponent
   'th-list': IconComponent
+  tiers: IconComponent
   'toggle-arrow-right': IconComponent
   token: IconComponent
   trash: IconComponent
@@ -692,6 +696,7 @@ export const icons: IconMap = {
   terminal: TerminalIcon,
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
+  tiers: TiersIcon,
   'toggle-arrow-right': ToggleArrowRightIcon,
   token: TokenIcon,
   trash: TrashIcon,
