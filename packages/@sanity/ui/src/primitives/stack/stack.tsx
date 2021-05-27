@@ -15,7 +15,10 @@ const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, respons
 /**
  * @public
  */
-export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElement>, ref) => {
+export const Stack = forwardRef(function Stack(
+  props: StackProps & React.HTMLProps<HTMLDivElement>,
+  ref
+) {
   const {as, space, ...restProps} = props
 
   return (
@@ -29,5 +32,3 @@ export const Stack = forwardRef((props: StackProps & React.HTMLProps<HTMLDivElem
     />
   )
 })
-
-Stack.displayName = 'Stack'

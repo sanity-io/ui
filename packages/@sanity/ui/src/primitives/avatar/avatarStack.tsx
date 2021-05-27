@@ -57,47 +57,37 @@ export interface AvatarStackProps {
 /**
  * @public
  */
-export const AvatarStack = forwardRef(
-  (
-    props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
-    const {
-      children: childrenProp,
-      maxLength: maxLengthProp = 4,
-      size = 0,
-      tone,
-      ...restProps
-    } = props
-    const maxLength = Math.max(maxLengthProp, 0)
-    const children = childrenToElementArray(childrenProp).filter(
-      (child) => typeof child !== 'string'
-    ) as React.ReactElement[]
-    const len = children.length
-    const visibleCount = maxLength - 1
-    const extraCount = len - visibleCount
-    const visibleChildren = extraCount > 1 ? children.slice(extraCount, len) : children
+export const AvatarStack = forwardRef(function AvatarStack(
+  props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
+  ref: React.Ref<HTMLDivElement>
+) {
+  const {children: childrenProp, maxLength: maxLengthProp = 4, size = 0, tone, ...restProps} = props
+  const maxLength = Math.max(maxLengthProp, 0)
+  const children = childrenToElementArray(childrenProp).filter(
+    (child) => typeof child !== 'string'
+  ) as React.ReactElement[]
+  const len = children.length
+  const visibleCount = maxLength - 1
+  const extraCount = len - visibleCount
+  const visibleChildren = extraCount > 1 ? children.slice(extraCount, len) : children
 
-    return (
-      <Root data-ui="AvatarStack" {...restProps} ref={ref} size={size}>
-        {len === 0 && (
-          <div>
-            <AvatarCounter count={len} tone={tone} />
-          </div>
-        )}
+  return (
+    <Root data-ui="AvatarStack" {...restProps} ref={ref} size={size}>
+      {len === 0 && (
+        <div>
+          <AvatarCounter count={len} tone={tone} />
+        </div>
+      )}
 
-        {len !== 0 && extraCount > 1 && (
-          <div>
-            <AvatarCounter count={extraCount} size={size} tone={tone} />
-          </div>
-        )}
+      {len !== 0 && extraCount > 1 && (
+        <div>
+          <AvatarCounter count={extraCount} size={size} tone={tone} />
+        </div>
+      )}
 
-        {visibleChildren.map((child, childIndex) => (
-          <div key={String(childIndex)}>{cloneElement(child, {size, tone})}</div>
-        ))}
-      </Root>
-    )
-  }
-)
-
-AvatarStack.displayName = 'AvatarStack'
+      {visibleChildren.map((child, childIndex) => (
+        <div key={String(childIndex)}>{cloneElement(child, {size, tone})}</div>
+      ))}
+    </Root>
+  )
+})

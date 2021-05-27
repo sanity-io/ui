@@ -30,14 +30,13 @@ const Root = styled(Text)`
 /**
  * @public
  */
-export const Spinner = forwardRef(
-  (props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>, ref) => {
-    return (
-      <Root data-ui="Spinner" {...props} ref={ref}>
-        <SpinnerIcon />
-      </Root>
-    )
-  }
-)
-
-Spinner.displayName = 'Spinner'
+export const Spinner = forwardRef(function Spinner(
+  props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
+  ref
+) {
+  return (
+    <Root data-ui="Spinner" {...props} ref={ref}>
+      <SpinnerIcon />
+    </Root>
+  )
+})

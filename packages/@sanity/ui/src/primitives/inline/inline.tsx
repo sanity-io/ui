@@ -17,7 +17,10 @@ const Root = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlin
 /**
  * @public
  */
-export const Inline = forwardRef((props: InlineProps & React.HTMLProps<HTMLDivElement>, ref) => {
+export const Inline = forwardRef(function Inline(
+  props: InlineProps & React.HTMLProps<HTMLDivElement>,
+  ref
+) {
   const {as, children: childrenProp, space, ...restProps} = props
   const children = childrenToElementArray(childrenProp).filter(Boolean)
 
@@ -29,5 +32,3 @@ export const Inline = forwardRef((props: InlineProps & React.HTMLProps<HTMLDivEl
     </Root>
   )
 })
-
-Inline.displayName = 'Inline'
