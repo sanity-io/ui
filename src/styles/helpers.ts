@@ -14,7 +14,7 @@ export function fillCSSObject(propKeys: string[], value: unknown): CSSObject {
 }
 
 /**
- * @internal
+ * @public
  */
 export function rem(pixelValue: number): string | 0 {
   if (pixelValue === 0) return 0
