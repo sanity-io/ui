@@ -8,11 +8,17 @@ import {TreeContextValue, TreeState} from './types'
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
+export interface TreeProps {
+  space?: number | number[]
+}
+
+/**
+ * This API might change. DO NOT USE IN PRODUCTION.
+ * @beta
+ */
 export function Tree(
-  props: {space?: number | number[]} & Omit<
-    React.HTMLProps<HTMLDivElement>,
-    'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'
-  >
+  props: TreeProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>
 ) {
   const {children, space = 1, ...restProps} = props
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
