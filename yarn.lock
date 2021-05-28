@@ -3266,6 +3266,22 @@
     "@types/react" "^17.0.0"
     rxjs "^6.5.3"
 
+"@sanity/ui@^0.33.19":
+  version "0.33.29"
+  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-0.33.29.tgz#263972f3a11c6063413764f23e3985b6e0e3657b"
+  integrity sha512-9tu1Qz4Oh7AHUJiTa6hQAgxI5z0hzbqzfkUJXJsxyYKvZpCvStd3KbKBxUlaRzzDYGp9mmZ1icrz4NlIvG+51A==
+  dependencies:
+    "@juggle/resize-observer" "^3.3.1"
+    "@popperjs/core" "^2.9.2"
+    "@reach/auto-id" "^0.15.0"
+    "@sanity/color" "^2.0.17"
+    "@sanity/icons" "^1.1.0"
+    framer-motion "^4.1.17"
+    popper-max-size-modifier "^0.2.0"
+    react-is "^17.0.2"
+    react-popper "^2.2.5"
+    react-refractor "^2.1.4"
+
 "@sanity/util@2.10.5":
   version "2.10.5"
   resolved "https://registry.yarnpkg.com/@sanity/util/-/util-2.10.5.tgz#4589e2baf76fcb7d02a79fa95b0c3b5de3840fee"
@@ -4179,10 +4195,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/refractor@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/refractor/-/refractor-3.0.0.tgz#c535cfad1c54cf377ae2984f6cf6e9627a36ea66"
-  integrity sha512-jkCqkTpxMXXfN03Xpzj+mBMxo9IxG616SV2U42iwHkBGq/f8RrX3DCzLayIqUV+MAIBCUvl5xPnjqpUtZRnMqA==
+"@types/refractor@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/refractor/-/refractor-3.0.1.tgz#67d3a29a3c9790ac5273eef176952d8a04092528"
+  integrity sha512-OILmCoaBGdKyg1MAGatoPn3qq0c9R72PZpcnZvJQLZRN7idT+uiFqgVDvJI0fcS3/xsPTIzkNuzzjz9MZGJlVw==
   dependencies:
     "@types/prismjs" "*"
 
@@ -7346,15 +7362,10 @@ date-fns@^1.27.2:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
-date-fns@^2.16.1:
-  version "2.21.2"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.21.2.tgz#9db92305cf00626e9122e56c72195b17725594aa"
-  integrity sha512-FMkG7pIPx64mGIpS2LOb3Wp3O606H/hatoiz7G0oiYWai1izdM4tF1dd7QABv2NogkIDI4wxsfLLFQSuVvDHgA==
-
-date-fns@^2.21.3:
-  version "2.21.3"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.21.3.tgz#8f5f6889d7a96bbcc1f0ea50239b397a83357f9b"
-  integrity sha512-HeYdzCaFflc1i4tGbj7JKMjM4cKGYoyxwcIIkHzNgCkX8xXDNJDZXgDDVchIWpN4eQc3lH37WarduXFZJOtxfw==
+date-fns@^2.16.1, date-fns@^2.21.3:
+  version "2.22.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.0.tgz#e25d79dda0639ae9e840d02ab34446613037c392"
+  integrity sha512-1TMrlJRPYjeR6KS9TgnJz4DX1rHW5NkfgIHpe9NWL6TGTzd6qo8mLo6ibt3p1wvXAu/DOal1Yce5YloFGeexBA==
 
 date-now@1.0.1:
   version "1.0.1"
