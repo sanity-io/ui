@@ -31,7 +31,7 @@ const Root = styled(Text)`
  * @public
  */
 export const Spinner = forwardRef(function Spinner(
-  props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
+  props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
   ref
 ) {
   return (
