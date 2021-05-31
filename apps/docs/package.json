@@ -19,7 +19,7 @@
     "@sanity/logos": "^1.1.0",
     "@sanity/ui": "^0.34.0",
     "codemirror": "^5.61.1",
-    "date-fns": "^2.21.3",
+    "date-fns": "^2.22.1",
     "lodash": "^4.17.21",
     "next": "^10.2.3",
     "next-sanity": "^0.2.0",
