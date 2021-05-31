@@ -3266,6 +3266,22 @@
     "@types/react" "^17.0.0"
     rxjs "^6.5.3"
 
+"@sanity/ui@^0.33.19":
+  version "0.33.29"
+  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-0.33.29.tgz#263972f3a11c6063413764f23e3985b6e0e3657b"
+  integrity sha512-9tu1Qz4Oh7AHUJiTa6hQAgxI5z0hzbqzfkUJXJsxyYKvZpCvStd3KbKBxUlaRzzDYGp9mmZ1icrz4NlIvG+51A==
+  dependencies:
+    "@juggle/resize-observer" "^3.3.1"
+    "@popperjs/core" "^2.9.2"
+    "@reach/auto-id" "^0.15.0"
+    "@sanity/color" "^2.0.17"
+    "@sanity/icons" "^1.1.0"
+    framer-motion "^4.1.17"
+    popper-max-size-modifier "^0.2.0"
+    react-is "^17.0.2"
+    react-popper "^2.2.5"
+    react-refractor "^2.1.4"
+
 "@sanity/util@2.10.5":
   version "2.10.5"
   resolved "https://registry.yarnpkg.com/@sanity/util/-/util-2.10.5.tgz#4589e2baf76fcb7d02a79fa95b0c3b5de3840fee"
@@ -4179,10 +4195,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/refractor@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/refractor/-/refractor-3.0.0.tgz#c535cfad1c54cf377ae2984f6cf6e9627a36ea66"
-  integrity sha512-jkCqkTpxMXXfN03Xpzj+mBMxo9IxG616SV2U42iwHkBGq/f8RrX3DCzLayIqUV+MAIBCUvl5xPnjqpUtZRnMqA==
+"@types/refractor@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/refractor/-/refractor-3.0.1.tgz#67d3a29a3c9790ac5273eef176952d8a04092528"
+  integrity sha512-OILmCoaBGdKyg1MAGatoPn3qq0c9R72PZpcnZvJQLZRN7idT+uiFqgVDvJI0fcS3/xsPTIzkNuzzjz9MZGJlVw==
   dependencies:
     "@types/prismjs" "*"
 
@@ -7234,9 +7250,9 @@ cyclist@^1.0.1:
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
 cypress-real-events@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.4.0.tgz#39575031a4020581e0bbf105d7a306ee57d94f48"
-  integrity sha512-1s4BQN1D++vFSuaad0qKsWcoApM5tQqPBFyDJEa6JeCZIsAdgMdGLuKi5QNIdl5KTJix0jxglzFJAThyz3borQ==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.5.0.tgz#115945872f3e39b90f6896a5a226ff4effa1b8f5"
+  integrity sha512-5virdYmZmtnpVqX4U0Ht66985b5MpCHE6icDXReQGognja5d2FuRD+Hh2MqzJqOTmai74z50u5+nmTZ/Dn/VcQ==
 
 cypress@^7.4.0:
   version "7.4.0"
