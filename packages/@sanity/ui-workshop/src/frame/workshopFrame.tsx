@@ -1,4 +1,12 @@
-import {Card, studioTheme, ThemeColorSchemeKey, ThemeProvider, ToastProvider} from '@sanity/ui'
+import {
+  BoundaryElementProvider,
+  Card,
+  PortalProvider,
+  studioTheme,
+  ThemeColorSchemeKey,
+  ThemeProvider,
+  ToastProvider,
+} from '@sanity/ui'
 import axe from 'axe-core'
 import React, {createElement, useCallback, useEffect, useMemo, useReducer, useState} from 'react'
 import {isRecord} from '../isRecord'
@@ -6,7 +14,6 @@ import {propsReducer} from '../props/reducer'
 import {resolveLocation} from '../resolveLocation'
 import {ScopeProvider} from '../scopeProvider'
 import {PropSchema, WorkshopContextValue, WorkshopLocation, WorkshopScope} from '../types'
-import {useWorkshop} from '../useWorkshop'
 import {WorkshopContext} from '../workshopContext'
 
 const qs = {
@@ -28,7 +35,11 @@ const qs = {
   },
 }
 
-export function WorkshopFrame(_props: {frameUrl: string; scopes: WorkshopScope[]; title: string}) {
+export function WorkshopFrame(_props: {
+  frameUrl: string
+  scopes: WorkshopScope[]
+  title: string
+}): React.ReactElement {
   const {frameUrl, scopes, title} = _props
   const query = useMemo(() => qs.parse(window.location.search.substr(1)), [])
   const [path, setPath] = useState(query.path || '/')
@@ -37,6 +48,8 @@ export function WorkshopFrame(_props: {frameUrl: string; scopes: WorkshopScope[]
   )
   const [props, dispatch] = useReducer(propsReducer, [])
   const [zoom, setZoom] = useState(query.zoom ? Number(query.zoom) : 1)
+  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 
   const postMessage = useCallback((msg: Record<string, unknown>) => {
     parent.postMessage(msg, window.location.origin)
@@ -151,36 +164,29 @@ export function WorkshopFrame(_props: {frameUrl: string; scopes: WorkshopScope[]
   }, [zoom])
 
   return (
-    <ThemeProvider scheme={scheme} theme={studioTheme}>
-      <ToastProvider>
-        <WorkshopContext.Provider value={contextValue}>
-          <ScopeProvider
-            props={props}
-            registerProp={registerProp}
-            scope={scope}
-            setPropValue={setPropValue}
-            story={story}
-            title={title}
-            unregisterProp={unregisterProp}
-          >
-            <RenderCanvas />
-          </ScopeProvider>
-        </WorkshopContext.Provider>
-      </ToastProvider>
-    </ThemeProvider>
+    <BoundaryElementProvider element={boundaryElement}>
+      <PortalProvider element={portalElement}>
+        <ThemeProvider scheme={scheme} theme={studioTheme}>
+          <ToastProvider>
+            <WorkshopContext.Provider value={contextValue}>
+              <ScopeProvider
+                props={props}
+                registerProp={registerProp}
+                scope={scope}
+                setPropValue={setPropValue}
+                story={story}
+                title={title}
+                unregisterProp={unregisterProp}
+              >
+                <Card as="main" height="fill" ref={setBoundaryElement}>
+                  {story && createElement(story.component)}
+                </Card>
+                <div data-portal="" ref={setPortalElement} />
+              </ScopeProvider>
+            </WorkshopContext.Provider>
+          </ToastProvider>
+        </ThemeProvider>
+      </PortalProvider>
+    </BoundaryElementProvider>
   )
-}
-
-function RenderCanvas() {
-  const studio = useWorkshop()
-
-  if (studio.story) {
-    return (
-      <Card as="main" height="fill">
-        {createElement(studio.story.component)}
-      </Card>
-    )
-  }
-
-  return null
 }
