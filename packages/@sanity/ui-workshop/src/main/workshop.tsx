@@ -1,4 +1,11 @@
-import {Flex, studioTheme, ThemeProvider, usePrefersDark} from '@sanity/ui'
+import {
+  BoundaryElementProvider,
+  Flex,
+  PortalProvider,
+  studioTheme,
+  ThemeProvider,
+  usePrefersDark,
+} from '@sanity/ui'
 import {AxeResults} from 'axe-core'
 import React, {useCallback, useEffect, useReducer, useState} from 'react'
 import {propsReducer} from '../props/reducer'
@@ -20,7 +27,7 @@ export interface WorkshopProps {
   title: string
 }
 
-export function Workshop(_props: WorkshopProps) {
+export function Workshop(_props: WorkshopProps): React.ReactElement {
   const {collections, frameUrl, location, onLocationPush, onLocationReplace, scopes, title} = _props
   const {postMessage, ready, ref: frameRef, subscribe} = useFrame()
   const [props, dispatch] = useReducer(propsReducer, [])
@@ -29,6 +36,8 @@ export function Workshop(_props: WorkshopProps) {
   const [zoom, setZoom] = useState(1)
   const prefersDark = usePrefersDark()
   const [scheme, setScheme] = useState<'light' | 'dark'>(prefersDark ? 'dark' : 'light')
+  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 
   const registerProp = useCallback((PropSchema: PropSchema) => {
     dispatch({type: 'registerProp', PropSchema})
@@ -73,40 +82,45 @@ export function Workshop(_props: WorkshopProps) {
   }, [registerProp, setPropValue, subscribe, unregisterProp])
 
   return (
-    <ThemeProvider scheme={scheme} theme={studioTheme}>
-      <WorkshopProvider
-        frameUrl={frameUrl}
-        location={location}
-        onLocationPush={onLocationPush}
-        onLocationReplace={onLocationReplace}
-        scopes={scopes}
-        props={props}
-        registerProp={registerProp}
-        setPropValue={setPropValue}
-        title={title}
-        unregisterProp={unregisterProp}
-      >
-        <Flex direction="column" height="fill">
-          <WorkshopNavbar
-            scheme={scheme}
-            setScheme={setScheme}
-            setViewport={setViewport}
-            setZoom={setZoom}
-            viewport={viewport}
-            zoom={zoom}
-          />
-          <Flex flex={1}>
-            <WorkshopStoryNav collections={collections} />
-            <WorkshopStoryCanvas
-              frameRef={frameRef}
-              ready={ready}
-              scheme={scheme}
-              viewport={viewport}
-            />
-            <WorkshopStoryInspector axeResults={axeResults} />
-          </Flex>
-        </Flex>
-      </WorkshopProvider>
-    </ThemeProvider>
+    <BoundaryElementProvider element={boundaryElement}>
+      <PortalProvider element={portalElement}>
+        <ThemeProvider scheme={scheme} theme={studioTheme}>
+          <WorkshopProvider
+            frameUrl={frameUrl}
+            location={location}
+            onLocationPush={onLocationPush}
+            onLocationReplace={onLocationReplace}
+            scopes={scopes}
+            props={props}
+            registerProp={registerProp}
+            setPropValue={setPropValue}
+            title={title}
+            unregisterProp={unregisterProp}
+          >
+            <Flex direction="column" height="fill" ref={setBoundaryElement}>
+              <WorkshopNavbar
+                scheme={scheme}
+                setScheme={setScheme}
+                setViewport={setViewport}
+                setZoom={setZoom}
+                viewport={viewport}
+                zoom={zoom}
+              />
+              <Flex flex={1}>
+                <WorkshopStoryNav collections={collections} />
+                <WorkshopStoryCanvas
+                  frameRef={frameRef}
+                  ready={ready}
+                  scheme={scheme}
+                  viewport={viewport}
+                />
+                <WorkshopStoryInspector axeResults={axeResults} />
+              </Flex>
+            </Flex>
+            <div data-portal="" ref={setPortalElement} />
+          </WorkshopProvider>
+        </ThemeProvider>
+      </PortalProvider>
+    </BoundaryElementProvider>
   )
 }
