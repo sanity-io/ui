@@ -205,9 +205,9 @@ export const color = createColorTheme({
     if (state === 'disabled') {
       return {
         bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        fg: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
         border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
+        placeholder: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
       }
     }
 
