@@ -1,12 +1,105 @@
-import {Box, Card, Code, Tree, TreeItem, useRootTheme, useTheme} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Card,
+  Code,
+  Container,
+  Dialog,
+  Flex,
+  Popover,
+  Stack,
+  Text,
+  Tooltip,
+  Tree,
+  TreeItem,
+  useRootTheme,
+  useTheme,
+} from '@sanity/ui'
 import {defineScope} from '@sanity/ui-workshop'
 
-import React from 'react'
+import React, {useCallback, useState} from 'react'
 
 export default defineScope('theme', 'Theme', [
+  {name: 'layer', title: 'Layer', component: LayerStory},
   {name: 'color', title: 'Color', component: ColorStory},
   {name: 'context', title: 'Context', component: ContextStory},
 ])
+
+function LayerStory() {
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const openDialog = useCallback(() => setDialogOpen(true), [])
+  const closeDialog = useCallback(() => setDialogOpen(false), [])
+
+  return (
+    <Flex padding={[4, 5, 6]}>
+      <Container>
+        {dialogOpen && (
+          <Dialog header="Dialog" id="dialog" onClickOutside={closeDialog} onClose={closeDialog}>
+            <Box padding={4}>
+              <Stack space={[4, 5, 6]}>
+                <Popover
+                  content={
+                    <Box padding={2}>
+                      <Text>Popover content</Text>
+                    </Box>
+                  }
+                  open
+                  portal
+                >
+                  <Text>Popover</Text>
+                </Popover>
+
+                <Flex>
+                  <Tooltip
+                    content={
+                      <Box padding={2}>
+                        <Text>Tooltip content</Text>
+                      </Box>
+                    }
+                    placement="top"
+                    portal
+                  >
+                    <Text size={1}>Tooltip</Text>
+                  </Tooltip>
+                </Flex>
+              </Stack>
+            </Box>
+          </Dialog>
+        )}
+
+        <Stack space={[4, 5, 6]}>
+          <Popover
+            content={
+              <Box padding={2}>
+                <Text>Popover content</Text>
+              </Box>
+            }
+            open
+            portal
+          >
+            <Text>Popover</Text>
+          </Popover>
+
+          <Flex>
+            <Tooltip
+              content={
+                <Box padding={2}>
+                  <Text size={1}>Tooltip content</Text>
+                </Box>
+              }
+              placement="top"
+              portal
+            >
+              <Text>Tooltip</Text>
+            </Tooltip>
+          </Flex>
+
+          <Button onClick={openDialog} text="Open dialog" />
+        </Stack>
+      </Container>
+    </Flex>
+  )
+}
 
 function ColorStory() {
   const theme = useTheme()
