@@ -6,6 +6,9 @@ import {PortalContextValue} from './types'
  * @public
  */
 export interface PortalProviderProps {
+  /**
+   * @deprecated Use `<BoundaryElementProvider element={...} />` instead
+   */
   boundaryElement?: HTMLElement | null
   children: React.ReactNode
   element: HTMLElement | null
