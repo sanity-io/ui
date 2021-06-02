@@ -3,9 +3,9 @@ import {usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useForwardedRef} from '../../hooks'
-import {ThemeColorSchemeKey, ThemeColorToneKey} from '../../theme'
+import {ThemeColorSchemeKey, ThemeColorToneKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
-import {Layer, Portal, useBoundaryElement, usePortal} from '../../utils'
+import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {ResponsiveWidthStyleProps} from '../container'
 import {responsiveContainerWidthStyle} from '../container/styles'
@@ -17,7 +17,8 @@ import {usePopoverModifiers} from './modifiers'
  * @public
  */
 export interface PopoverProps
-  extends ResponsiveRadiusProps,
+  extends Omit<LayerProps, 'as'>,
+    ResponsiveRadiusProps,
     ResponsiveShadowProps,
     ResponsiveWidthProps {
   /**
@@ -99,6 +100,7 @@ export const Popover = forwardRef(function Popover(
   ref
 ) {
   const boundaryElementContext = useBoundaryElement()
+  const theme = useTheme()
   const {
     __unstable_margins: margins,
     allowedAutoPlacements,
@@ -124,6 +126,7 @@ export const Popover = forwardRef(function Popover(
     tetherOffset,
     tone,
     width = 0,
+    zOffset = theme.sanity.layer?.popover.zOffset,
     ...restProps
   } = props
   const forwardedRef = useForwardedRef(ref)
@@ -202,6 +205,7 @@ export const Popover = forwardRef(function Popover(
       $preventOverflow={preventOverflow}
       ref={setRootRef}
       style={popoverStyle}
+      zOffset={zOffset}
       {...attributes.popper}
     >
       <PopoverCard

@@ -6,7 +6,7 @@ import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
-import {ThemeColorSchemeKey} from '../../theme'
+import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {DialogPosition} from '../../types'
 import {Layer, Portal, useLayer} from '../../utils'
 import {
@@ -234,6 +234,7 @@ export const Dialog = forwardRef(function Dialog(
   ref: React.Ref<HTMLDivElement>
 ) {
   const dialog = useDialog()
+  const theme = useTheme()
   const {
     __unstable_autoFocus: autoFocus = true,
     cardRadius = 3,
@@ -249,7 +250,7 @@ export const Dialog = forwardRef(function Dialog(
     position = dialog.position || 'fixed',
     scheme,
     width = 0,
-    zOffset = dialog.zOffset,
+    zOffset = dialog.zOffset || theme.sanity.layer?.dialog.zOffset,
     ...restProps
   } = props
   const preDivRef = useRef<HTMLDivElement | null>(null)

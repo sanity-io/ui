@@ -2,15 +2,16 @@ import React, {cloneElement, forwardRef, useCallback, useEffect, useState} from 
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
 import {useForwardedRef} from '../../hooks'
+import {useTheme} from '../../theme'
 import {Placement} from '../../types'
-import {Layer, Portal, useBoundaryElement} from '../../utils'
+import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
 
 /**
  * @public
  */
-export interface TooltipProps {
+export interface TooltipProps extends Omit<LayerProps, 'as'> {
   allowedAutoPlacements?: Placement[]
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
@@ -33,6 +34,7 @@ export const Tooltip = forwardRef(function Tooltip(
   ref
 ) {
   const boundaryElementContext = useBoundaryElement()
+  const theme = useTheme()
   const {
     allowedAutoPlacements,
     boundaryElement = boundaryElementContext?.element,
@@ -42,6 +44,7 @@ export const Tooltip = forwardRef(function Tooltip(
     fallbackPlacements,
     placement = 'bottom',
     portal,
+    zOffset = theme.sanity.layer?.tooltip.zOffset,
     ...restProps
   } = props
   const forwardedRef = useForwardedRef(ref)
@@ -113,9 +116,10 @@ export const Tooltip = forwardRef(function Tooltip(
     <Root
       data-ui="Tooltip"
       {...restProps}
+      {...popper.attributes.popper}
       ref={setRef}
       style={popper.styles.popper}
-      {...popper.attributes.popper}
+      zOffset={zOffset}
     >
       <Card radius={2} shadow={3}>
         {content}
