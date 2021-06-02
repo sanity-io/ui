@@ -60,15 +60,15 @@ export interface AvatarCounterProps {
 /**
  * @public
  */
-export const AvatarCounter = forwardRef(function AvatarCounter({
-  count,
-  size: sizeProp = 0,
-  tone,
-}: AvatarCounterProps) {
+export const AvatarCounter = forwardRef(function AvatarCounter(
+  props: AvatarCounterProps,
+  ref: React.Ref<HTMLDivElement>
+) {
+  const {count, size: sizeProp = 0, tone} = props
   const size: AvatarSize[] = useResponsiveProp(sizeProp, [0])
 
   return (
-    <Root $size={size} data-tone={tone}>
+    <Root $size={size} data-tone={tone} ref={ref}>
       <Text as="span" size={size.map((s) => (s === 0 ? 0 : s + 1))}>
         <strong>{count}</strong>
       </Text>
