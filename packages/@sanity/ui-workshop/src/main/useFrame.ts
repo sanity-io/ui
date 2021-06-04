@@ -1,7 +1,14 @@
-import {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {isRecord} from '../isRecord'
 
-export function useFrame() {
+interface Frame {
+  postMessage: (msg: Record<string, unknown>) => void
+  ready: boolean
+  ref: React.Dispatch<React.SetStateAction<HTMLIFrameElement | null>>
+  subscribe: (subscriber: (msg: Record<string, unknown>) => void) => () => void
+}
+
+export function useFrame(): Frame {
   const [frameElement, setFrameElement] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
   const msgQueueRef = useRef<Record<string, unknown>[]>([])

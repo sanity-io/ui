@@ -3,7 +3,7 @@ import React from 'react'
 import {NumberPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function NumberProp(props: {schema: NumberPropSchema; value?: string}) {
+export function NumberProp(props: {schema: NumberPropSchema; value?: string}): React.ReactElement {
   const {schema, value = ''} = props
   const {setPropValue} = useScope()
 

@@ -28,7 +28,10 @@ export function buildMenuItems(
   }
 }
 
-export function buildMenu(collections: MenuCollection[], scopes: WorkshopScope[]) {
+export function buildMenu(
+  collections: MenuCollection[],
+  scopes: WorkshopScope[]
+): MenuList | MenuScope {
   const scopeMap: {[key: string]: WorkshopScope} = {}
 
   // Merge scopes

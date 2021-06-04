@@ -17,7 +17,7 @@ export function WorkshopStoryCanvas(props: {
   ready: boolean
   scheme: 'light' | 'dark'
   viewport: number | 'auto'
-}) {
+}): React.ReactElement {
   const {frameRef, ready, scheme, viewport} = props
   const {frameUrl, location, scope, story} = useWorkshop()
   const initialFrameUrl = useRef(`${frameUrl}?path=${location.path}&scheme=${scheme}`)

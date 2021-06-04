@@ -1,7 +1,7 @@
 import {useCallback} from 'react'
 import {useScope} from './useScope'
 
-export function useAction(name: string) {
+export function useAction(name: string): (...args: any[]) => void {
   const {scope, story} = useScope()
 
   return useCallback(

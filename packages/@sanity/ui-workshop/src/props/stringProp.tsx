@@ -3,7 +3,7 @@ import React from 'react'
 import {StringPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function StringProp(props: {schema: StringPropSchema; value?: string}) {
+export function StringProp(props: {schema: StringPropSchema; value?: string}): React.ReactElement {
   const {schema, value} = props
   const {setPropValue} = useScope()
 

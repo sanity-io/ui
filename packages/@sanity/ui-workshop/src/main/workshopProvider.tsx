@@ -18,7 +18,7 @@ export interface WorkshopProviderProps {
   unregisterProp: (PropName: string) => void
 }
 
-export function WorkshopProvider(_props: WorkshopProviderProps) {
+export function WorkshopProvider(_props: WorkshopProviderProps): React.ReactElement {
   const {
     children,
     frameUrl,

@@ -3,7 +3,7 @@ import React from 'react'
 import {TextPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function TextProp(props: {schema: TextPropSchema; value?: string}) {
+export function TextProp(props: {schema: TextPropSchema; value?: string}): React.ReactElement {
   const {schema, value} = props
   const {setPropValue} = useScope()
 

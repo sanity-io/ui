@@ -13,6 +13,7 @@
     "clean:dts": "rimraf lib/dts",
     "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
     "copy:dts:esm": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
     "prebuild": "yarn clean",
     "type-check": "tsc -b"
   },
