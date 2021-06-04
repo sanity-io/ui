@@ -42,10 +42,11 @@ export function Article(props: {article: Record<string, unknown>}) {
                         as="a"
                         href={article.figma.url}
                         mode="ghost"
+                        padding={[2, 2, 3]}
                         rel="noreferrer"
                         target="_blank"
                       >
-                        <Flex padding={[2, 2, 3]}>
+                        <Flex>
                           <Text size={[1, 1, 2]}>
                             <FigmaLogo />
                           </Text>

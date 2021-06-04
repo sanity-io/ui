@@ -5,8 +5,8 @@ export function PresenceMenu() {
   return (
     <MenuButton
       button={
-        <Button aria-label="Open list of online users" mode="bleed">
-          <Box padding={3} aria-hidden>
+        <Button aria-label="Open list of online users" mode="bleed" padding={3}>
+          <Box aria-hidden>
             <AvatarStack style={{margin: -6}}>
               <Avatar color="purple" initials="eh" />
               <Avatar color="blue" initials="ss" />

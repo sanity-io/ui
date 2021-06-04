@@ -22,7 +22,7 @@ export function WorkshopNavbar(props: {
   setZoom: (z: number) => void
   viewport: number | 'auto'
   zoom: number
-}) {
+}): React.ReactElement {
   const {scheme, setScheme, setViewport, setZoom, viewport, zoom} = props
   const {scope, story, title} = useWorkshop()
 
@@ -118,8 +118,8 @@ export function WorkshopNavbar(props: {
             </LayerProvider>
           </Box>
           <Box marginLeft={2}>
-            <Button as="label" mode="bleed">
-              <Flex align="center" padding={2}>
+            <Button as="label" mode="bleed" padding={2}>
+              <Flex align="center">
                 <Box marginRight={2}>
                   <Text size={1}>
                     <SunIcon />
