@@ -13,12 +13,14 @@ import {
   MenuGroup,
   MenuItem,
   Stack,
+  Text,
 } from '@sanity/ui'
 import {defineScope, useAction, useBoolean} from '@sanity/ui-workshop'
 import React, {useRef, useState} from 'react'
 
 export default defineScope('components/menu', 'Menu', [
   {name: 'menu-button', title: 'MenuButton', component: MenuButtonStory},
+  {name: 'custom-menu-item', title: 'Custom MenuItem', component: CustomMenuItemStory},
   {name: 'groups', title: 'Groups', component: GroupsStory},
   {name: 'tones', title: 'Tones', component: MenuItemTonesStory},
   {name: 'selected-item', title: 'Selected item', component: SelectedItemStory},
@@ -72,6 +74,44 @@ function MenuButtonStory() {
         </LayerProvider>
         <Button mode="ghost" id="next-button" text="Next" />
       </Grid>
+    </Box>
+  )
+}
+
+function CustomMenuItemStory() {
+  return (
+    <Box padding={[4, 5, 6]}>
+      <Card radius={3} shadow={2}>
+        <LayerProvider>
+          <Menu>
+            <MenuItem padding={3}>
+              <Stack space={3}>
+                <Text weight="semibold">First option</Text>
+                <Text muted size={1}>
+                  Description
+                </Text>
+              </Stack>
+            </MenuItem>
+            <MenuItem padding={3}>
+              <Stack space={3}>
+                <Text weight="semibold">Second option</Text>
+                <Text muted size={1}>
+                  Description
+                </Text>
+              </Stack>
+            </MenuItem>
+            <MenuDivider />
+            <MenuItem padding={3} tone="critical">
+              <Stack space={3}>
+                <Text weight="semibold">Dangerous option</Text>
+                <Text muted size={1}>
+                  Description
+                </Text>
+              </Stack>
+            </MenuItem>
+          </Menu>
+        </LayerProvider>
+      </Card>
     </Box>
   )
 }
