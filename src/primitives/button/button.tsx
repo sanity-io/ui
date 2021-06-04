@@ -1,4 +1,4 @@
-import React, {createElement, forwardRef, isValidElement} from 'react'
+import React, {createElement, forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {ThemeProps} from '../../styles'
@@ -86,15 +86,19 @@ export const Button = forwardRef(function Button(
 
   const theme = useTheme()
 
-  const boxProps = {
-    padding,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-  }
+  const boxProps = useMemo(
+    () => ({
+      flex: 1,
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+    }),
+    [padding, paddingX, paddingY, paddingTop, paddingBottom, paddingLeft, paddingRight]
+  )
 
   return (
     <Root
@@ -151,7 +155,11 @@ export const Button = forwardRef(function Button(
         </Box>
       )}
 
-      {children && <span>{children}</span>}
+      {children && (
+        <Box as="span" {...boxProps}>
+          {children}
+        </Box>
+      )}
     </Root>
   )
 })
