@@ -4,6 +4,7 @@ import React, {
   isValidElement,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
 } from 'react'
 import {isValidElementType} from 'react-is'
@@ -73,15 +74,18 @@ export const MenuItem = forwardRef(function MenuItem(
     [disabled, onClick, onItemClick]
   )
 
-  const paddingProps = {
-    padding,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingRight,
-    paddingBottom,
-    paddingLeft,
-  }
+  const paddingProps = useMemo(
+    () => ({
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+    }),
+    [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft]
+  )
 
   const setRef = useCallback(
     (el: HTMLDivElement | null) => {
@@ -143,7 +147,11 @@ export const MenuItem = forwardRef(function MenuItem(
         </Box>
       )}
 
-      {children}
+      {children && (
+        <Box as="span" {...paddingProps}>
+          {children}
+        </Box>
+      )}
     </Card>
   )
 })
