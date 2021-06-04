@@ -127,7 +127,9 @@ export const MenuItem = forwardRef(function MenuItem(
                 marginLeft={icon ? space : undefined}
                 marginRight={iconRight ? space : undefined}
               >
-                <Text size={fontSize}>{text}</Text>
+                <Text size={fontSize} textOverflow="ellipsis">
+                  {text}
+                </Text>
               </Box>
             )}
 
