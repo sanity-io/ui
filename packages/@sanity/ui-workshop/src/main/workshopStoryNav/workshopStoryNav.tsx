@@ -4,7 +4,7 @@ import {useWorkshop} from '../../useWorkshop'
 import {buildMenu} from './helpers'
 import {MenuCollection, MenuList, MenuScope} from './types'
 
-export function WorkshopStoryNav(props: {collections?: MenuCollection[]}) {
+export function WorkshopStoryNav(props: {collections?: MenuCollection[]}): React.ReactElement {
   const {collections = []} = props
   const {scopes} = useWorkshop()
   const menu = useMemo(() => buildMenu(collections, scopes), [collections, scopes])

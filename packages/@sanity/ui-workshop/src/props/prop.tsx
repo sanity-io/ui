@@ -7,7 +7,7 @@ import {SelectProp} from './selectProp'
 import {StringProp} from './stringProp'
 import {TextProp} from './textProp'
 
-export function Prop(props: {schema: PropSchema; value: any}) {
+export function Prop(props: {schema: PropSchema; value: any}): React.ReactElement {
   const {schema, value} = props
 
   if (schema.type === 'boolean') {

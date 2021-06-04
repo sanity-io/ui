@@ -29,7 +29,7 @@ function Details(props: {children?: React.ReactNode; summary?: React.ReactNode; 
   )
 }
 
-export function InspectAxeResults(props: {axeResults: AxeResults}) {
+export function InspectAxeResults(props: {axeResults: AxeResults}): React.ReactElement {
   const {axeResults} = props
   const violations = axeResults.violations.filter((node) => node.id !== 'page-has-heading-one')
   const incomplete = axeResults.incomplete

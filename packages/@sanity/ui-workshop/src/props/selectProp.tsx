@@ -3,7 +3,7 @@ import React, {useMemo} from 'react'
 import {SelectPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function SelectProp(props: {schema: SelectPropSchema; value: any}) {
+export function SelectProp(props: {schema: SelectPropSchema; value: any}): React.ReactElement {
   const {schema, value: valueProp} = props
   const {setPropValue} = useScope()
 

@@ -18,13 +18,13 @@ export interface SetPropValueMsg {
 
 export type PropsMsg = RegistePropMsg | UnregistePropMsg | SetPropValueMsg
 
-export function propsReducer(Props: StoryProp[], msg: PropsMsg) {
+export function propsReducer(props: StoryProp[], msg: PropsMsg): StoryProp[] {
   if (msg.type === 'registerProp') {
-    return Props.concat([{schema: msg.PropSchema, value: msg.PropSchema.defaultValue}])
+    return props.concat([{schema: msg.PropSchema, value: msg.PropSchema.defaultValue}])
   }
 
   if (msg.type === 'setPropValue') {
-    return Props.map((k) => {
+    return props.map((k) => {
       if (k.schema.name === msg.PropName) {
         return {...k, value: msg.value}
       }
@@ -34,8 +34,8 @@ export function propsReducer(Props: StoryProp[], msg: PropsMsg) {
   }
 
   if (msg.type === 'unregisterProp') {
-    return Props.filter((k) => k.schema.name !== msg.PropName)
+    return props.filter((k) => k.schema.name !== msg.PropName)
   }
 
-  return Props
+  return props
 }

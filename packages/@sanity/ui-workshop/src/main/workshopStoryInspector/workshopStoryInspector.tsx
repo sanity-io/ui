@@ -5,7 +5,7 @@ import {Prop} from '../../props'
 import {useScope} from '../../useScope'
 import {InspectAxeResults} from './inspectAxeResults'
 
-export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}) {
+export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}): React.ReactElement {
   const {axeResults} = props
   const scope = useScope()
   const [tab, setTab] = useState<'props' | 'axe-results'>('props')

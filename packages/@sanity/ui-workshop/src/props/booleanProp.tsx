@@ -3,7 +3,10 @@ import React from 'react'
 import {BooleanPropSchema} from '../types'
 import {useScope} from '../useScope'
 
-export function BooleanProp(props: {schema: BooleanPropSchema; value?: boolean}) {
+export function BooleanProp(props: {
+  schema: BooleanPropSchema
+  value?: boolean
+}): React.ReactElement {
   const {schema, value} = props
   const {setPropValue} = useScope()
 

@@ -11,7 +11,7 @@ export function ScopeProvider(_props: {
   story: WorkshopStory | null
   title: string
   unregisterProp: (PropName: string) => void
-}) {
+}): React.ReactElement {
   const {children, props, registerProp, scope, setPropValue, story, title, unregisterProp} = _props
 
   const contextValue: ScopeContextValue = useMemo(
