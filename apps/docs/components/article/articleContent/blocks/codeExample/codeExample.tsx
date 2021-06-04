@@ -55,7 +55,12 @@ export function CodeExample(props: {
       <Card overflow="hidden" radius={2} shadow={1}>
         {ready && !renderError && (
           <Card style={{minHeight: 51}} tone="transparent">
-            <Canvas key={`${hookCode};${jsxCode}`} onCatch={onCatch} result={evalResult} />
+            <Canvas
+              key={`${hookCode};${jsxCode}`}
+              onCatch={onCatch}
+              padding={4}
+              result={evalResult}
+            />
           </Card>
         )}
 
