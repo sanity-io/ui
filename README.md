@@ -20,7 +20,7 @@ import ReactDOM from 'react-dom'
 
 ReactDOM.render(
   <ThemeProvider theme={studioTheme}>
-    <Button>Hello, world</Button>
+    <Button text="Hello, world" />
   </ThemeProvider>,
   document.getElementById('root')
 )
