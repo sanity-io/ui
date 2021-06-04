@@ -1,5 +1,15 @@
 import {icons, IconSymbol} from '@sanity/icons'
-import {Button, ButtonMode, ButtonTone, Card, Container, Flex, FlexJustify, Stack} from '@sanity/ui'
+import {
+  Button,
+  ButtonMode,
+  ButtonTone,
+  Card,
+  Container,
+  Flex,
+  FlexJustify,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import {defineScope, useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import React from 'react'
 import styled from 'styled-components'
@@ -9,6 +19,7 @@ export default defineScope('primitives/button', 'Button', [
   {name: 'styled-1', title: 'Styled #1', component: StyledButton1Story},
   {name: 'styled-2', title: 'Styled #2', component: StyledButton2Story},
   {name: 'stacked', title: 'Stacked', component: StackedStory},
+  {name: 'custom', title: 'Custom', component: CustomStory},
 ])
 
 const BUTTON_MODE_OPTIONS: {[key: string]: ButtonMode} = {
@@ -167,6 +178,16 @@ function StackedStory() {
           </Stack>
         </Card>
       </Container>
+    </Flex>
+  )
+}
+
+function CustomStory() {
+  return (
+    <Flex align="center" height="fill" justify="center">
+      <Button padding={2}>
+        <Text>Custom button</Text>
+      </Button>
     </Flex>
   )
 }
