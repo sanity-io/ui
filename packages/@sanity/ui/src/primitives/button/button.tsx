@@ -28,6 +28,7 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   loading?: boolean
   selected?: boolean
   space?: number | number[]
+  textAlign?: 'left' | 'right' | 'center'
   text?: React.ReactNode
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
@@ -79,6 +80,7 @@ export const Button = forwardRef(function Button(
     selected,
     space = 3,
     text,
+    textAlign,
     tone = 'default',
     type = 'button',
     ...restProps
@@ -136,6 +138,7 @@ export const Button = forwardRef(function Button(
                 marginRight={iconRight ? space : undefined}
               >
                 <Text
+                  align={textAlign}
                   size={fontSize}
                   textOverflow="ellipsis"
                   weight={theme.sanity.button.textWeight}

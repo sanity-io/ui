@@ -47,6 +47,13 @@ const FLEX_JUSTIFY_OPTIONS: FlexJustify[] = [
 
 const TEXT_SIZE_OPTIONS = {'0': 0, '1': 1, '2 (default)': 2, '3': 3, '4': 4}
 
+const TEXT_ALIGN_OPTIONS: {[key: string]: 'left' | 'right' | 'center' | ''} = {
+  Undefined: '',
+  Left: 'left',
+  Right: 'right',
+  Center: 'center',
+}
+
 const SPACE_OPTIONS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7}
 
 const ICON_SYMBOL_OPTIONS = Object.keys(icons).reduce(
@@ -70,6 +77,7 @@ export function ButtonStory(): React.ReactElement {
   const selected = useBoolean('Selected', false, 'Props')
   const space = useSelect('Space', SPACE_OPTIONS, 3, 'Props')
   const tone = useSelect('Tone', BUTTON_TONE_OPTIONS, 'default', 'Props')
+  const textAlign = useSelect('Text align', TEXT_ALIGN_OPTIONS, undefined, 'Props') || undefined
   const textProp = useText('Text', 'Label', 'Props')
 
   return (
@@ -86,6 +94,7 @@ export function ButtonStory(): React.ReactElement {
         paddingY={paddingY}
         selected={selected}
         space={space}
+        textAlign={textAlign}
         text={textProp}
         tone={tone}
       />
