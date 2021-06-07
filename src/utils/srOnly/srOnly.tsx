@@ -1,6 +1,11 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
 
+export interface SrOnlyProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
+  children?: React.ReactNode
+}
+
 const Root = styled.div`
   display: block;
   width: 0;
@@ -13,10 +18,7 @@ const Root = styled.div`
  * @public
  */
 export const SrOnly = forwardRef(function SrOnly(
-  props: {
-    as?: React.ElementType | keyof JSX.IntrinsicElements
-    children?: React.ReactNode
-  },
+  props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden'>,
   ref: React.Ref<HTMLDivElement>
 ) {
   const {as, children} = props
