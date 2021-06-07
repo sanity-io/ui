@@ -1,6 +1,7 @@
 import {ColorHueKey, ColorTintKey} from './types'
 
 /**
+ * The color hues provided by `@sanity/color`.
  * @public
  */
 export const COLOR_HUES: ColorHueKey[] = [
@@ -16,6 +17,7 @@ export const COLOR_HUES: ColorHueKey[] = [
 ]
 
 /**
+ * The color tints provided by `@sanity/color`
  * @public
  */
 export const COLOR_TINTS: ColorTintKey[] = [
