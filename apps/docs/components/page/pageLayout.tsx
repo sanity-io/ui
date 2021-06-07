@@ -4,9 +4,10 @@ import styled, {css} from 'styled-components'
 import {PageHeader} from './pageHeader'
 import {NavMenu} from '$lib/nav'
 
-interface PageLayoutProps {
+export interface PageLayoutProps {
   children: React.ReactNode
-  menu: NavMenu | null
+  menu?: NavMenu
+  menuHeader?: React.ReactNode
 }
 
 const Root = styled(Flex)`
@@ -25,7 +26,7 @@ const ContentCard = styled(Card).attrs({forwardedAs: 'main'})`
   min-height: 100%;
 `
 
-export function PageLayout({children, menu}: PageLayoutProps) {
+export function PageLayout({children, menu, menuHeader}: PageLayoutProps) {
   return (
     <Root>
       {menu && (
@@ -34,7 +35,7 @@ export function PageLayout({children, menu}: PageLayoutProps) {
           flex={1}
           style={{minWidth: '12em', maxWidth: '16em'}}
         >
-          <PageHeader menu={menu} />
+          <PageHeader header={menuHeader} menu={menu} />
         </Box>
       )}
 

@@ -3,8 +3,8 @@ import React, {useMemo} from 'react'
 import {ArticleContent} from './articleContent'
 import {getHeadings, getTOCTree} from './helpers'
 import {HeadingNode} from './types'
-import {TimeAgo} from '$components'
-import {FigmaLogo} from '$components/assets/figmaLogo'
+import {FigmaLogo} from '$components/assets'
+import {TimeAgo} from '$components/timeAgo'
 import {isArray, isRecord, isString} from '$lib/types'
 
 interface ArticleLayout {

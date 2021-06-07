@@ -7,8 +7,8 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
-import {AppProvider} from '$components'
-import {usePageData} from '$lib/page'
+import {AppProvider} from '$components/app'
+import {useDocsPageData, useGlobalPageData, useReferencePageData} from '$lib/page'
 
 Refractor.registerLanguage(bash)
 Refractor.registerLanguage(javascript)
@@ -17,26 +17,70 @@ Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
 function App(props: AppProps) {
+  const {pageProps} = props
+
+  if (pageProps.scope === 'docs') {
+    return <DocsApp {...props} />
+  }
+
+  if (pageProps.scope === 'reference') {
+    return <ReferenceApp {...props} />
+  }
+
+  return <GlobalApp {...props} />
+}
+
+function DefaultMeta() {
+  return (
+    <Head>
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+      />
+
+      {/* Default meta data */}
+      <meta name="description" content="An ergonomic toolkit to design with code." />
+
+      {/* Default Twitter metadata */}
+      <meta name="twitter:site" content="@sanity_io" />
+
+      {/* Default OG metadata */}
+      <meta property="og:site_name" content="Sanity UI" />
+    </Head>
+  )
+}
+
+function GlobalApp(props: AppProps) {
   const {Component, pageProps} = props
-  const pageData = usePageData(pageProps)
+  const pageData = useGlobalPageData(pageProps)
 
   return (
-    <AppProvider {...pageData}>
-      <Head>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-        />
+    <AppProvider {...pageData} params={pageProps.params || {}}>
+      <DefaultMeta />
+      <Component {...pageProps} {...pageData} />
+    </AppProvider>
+  )
+}
 
-        {/* Default meta data */}
-        <meta name="description" content="An ergonomic toolkit to design with code." />
+function DocsApp(props: AppProps) {
+  const {Component, pageProps} = props
+  const pageData = useDocsPageData(pageProps)
 
-        {/* Default Twitter metadata */}
-        <meta name="twitter:site" content="@sanity_io" />
+  return (
+    <AppProvider {...pageData} params={pageProps.params || {}}>
+      <DefaultMeta />
+      <Component {...pageProps} {...pageData} />
+    </AppProvider>
+  )
+}
 
-        {/* Default OG metadata */}
-        <meta property="og:site_name" content="Sanity UI" />
-      </Head>
+function ReferenceApp(props: AppProps) {
+  const {Component, pageProps} = props
+  const pageData = useReferencePageData(pageProps)
+
+  return (
+    <AppProvider {...pageData} params={pageProps.params || {}}>
+      <DefaultMeta />
       <Component {...pageProps} {...pageData} />
     </AppProvider>
   )

@@ -7,7 +7,7 @@ import {
   ToastProvider,
   usePrefersDark,
 } from '@sanity/ui'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'
 import {zOffsets} from './zOffsets'
@@ -15,12 +15,11 @@ import {NavMenu} from '$lib/nav'
 
 export function AppProvider(props: {
   children?: React.ReactNode
-  menu: NavMenu | null
-  nav: unknown
-  settings: unknown
-  target: unknown
+  data: unknown
+  menu?: NavMenu
+  params: Record<string, any>
 }) {
-  const {children, menu, nav, settings, target} = props
+  const {children, data, menu, params} = props
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
     prefersDark ? 'dark' : 'light'
@@ -28,14 +27,17 @@ export function AppProvider(props: {
 
   useEffect(() => setColorScheme(prefersDark ? 'dark' : 'light'), [prefersDark])
 
+  const contextValue = useMemo(
+    () => ({colorScheme, data, menu, params, setColorScheme, zOffsets}),
+    [colorScheme, data, menu, params, setColorScheme]
+  )
+
   return (
     <ThemeProvider scheme={colorScheme} theme={studioTheme}>
       <ThemeColorProvider tone="transparent">
         <GlobalStyle />
       </ThemeColorProvider>
-      <AppContext.Provider
-        value={{colorScheme, menu, nav, setColorScheme, settings, target, zOffsets}}
-      >
+      <AppContext.Provider value={contextValue}>
         <LayerProvider>
           <ToastProvider zOffset={zOffsets.toast}>{children}</ToastProvider>
         </LayerProvider>

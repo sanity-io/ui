@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {useApp} from './hooks'
-import {NavMenu} from '$components'
+import {NavMenu} from '$components/navMenu'
 import {NavMenu as NavMenuType} from '$lib/nav'
 
 const Root = styled(Layer).attrs({forwardedAs: 'aside'})`

@@ -1,6 +1,6 @@
 import {Button} from '@sanity/ui'
 import React from 'react'
-import {FigmaLogo} from '$components/assets/figmaLogo'
+import {FigmaLogo} from '$components/assets'
 
 export function FigmaButton(props: any) {
   const {url} = props.node || {}

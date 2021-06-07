@@ -1,18 +1,19 @@
 import React from 'react'
-import {AppLayout} from '$components'
+import {AppLayout} from '$components/app'
 import {features} from '$config'
-import {loadPageData} from '$lib/page'
+import {loadGlobalPageData} from '$lib/page'
 import {ArcadeScreen} from '$screens/arcade'
 
 export async function getServerSideProps(opts: {preview?: boolean; query: Record<string, string>}) {
   const {preview = features.preview, query} = opts
-  const data = await loadPageData({preview})
+  const pageData = await loadGlobalPageData({preview})
 
   return {
     props: {
-      ...data,
+      ...pageData,
       title: query.title || '',
       description: query.description || '',
+      preview,
     },
   }
 }

@@ -4,11 +4,10 @@ import {NavMenu} from '$lib/nav'
 
 export interface AppContextValue {
   colorScheme: ThemeColorSchemeKey
-  menu: NavMenu | null
-  nav: unknown
+  data: unknown
+  menu?: NavMenu
+  params: Record<string, any>
   setColorScheme: (mode: ThemeColorSchemeKey) => void
-  settings: unknown
-  target: unknown
   zOffsets: {
     navDrawer: number
     toast: number
