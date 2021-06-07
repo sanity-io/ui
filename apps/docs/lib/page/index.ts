@@ -1,2 +1,3 @@
-export * from './data'
-export * from './paths'
+export * from './_global'
+export * from './docs'
+export * from './reference'

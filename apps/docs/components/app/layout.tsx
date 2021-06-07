@@ -5,6 +5,7 @@ import React from 'react'
 import {AppFooter} from './footer'
 import {useApp} from './hooks'
 import {AppNavbar} from './navbar'
+import {isRecord} from '$lib/types'
 
 export function AppLayout({children}: {children: React.ReactNode}) {
   return (
@@ -20,7 +21,8 @@ export function AppLayout({children}: {children: React.ReactNode}) {
 }
 
 function AppBanner() {
-  const {settings} = useApp()
+  const {data} = useApp()
+  const settings = isRecord(data) && data.settings
   const banner = settings && (settings as any).banner
 
   if (!banner || banner.hidden) return null

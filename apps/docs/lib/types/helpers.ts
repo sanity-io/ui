@@ -1,5 +1,5 @@
 export function isRecord(val: unknown): val is Record<string, unknown> {
-  return Boolean(val) && typeof val === 'object'
+  return Boolean(val) && !Array.isArray(val) && typeof val === 'object'
 }
 
 export function isArray(val: unknown): val is Array<unknown> {

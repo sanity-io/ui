@@ -1,3 +1,5 @@
+import {BadgeTone} from '@sanity/ui'
+
 export interface NavItem {
   collapsed: boolean
   hidden: boolean
@@ -13,6 +15,10 @@ export interface NavMenuLink {
   hidden: boolean
   href: string
   title?: string
+  badge?: {
+    text: string
+    tone?: BadgeTone
+  }
 }
 
 export interface NavMenu {

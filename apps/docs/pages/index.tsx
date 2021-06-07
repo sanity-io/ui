@@ -1,20 +1,21 @@
 import Head from 'next/head'
 import React from 'react'
-import {AppLayout, SEO, useApp} from '$components'
+import {AppLayout, SEO, useApp} from '$components/app'
 import {Screen} from '$components/screen'
 import {features} from '$config'
-import {loadPageData} from '$lib/page'
+import {loadGlobalPageData} from '$lib/page'
 import {isRecord} from '$lib/types'
 
 export async function getStaticProps(opts: {preview?: boolean}) {
   const {preview = features.preview} = opts
-  const data = await loadPageData({preview})
+  const pageData = await loadGlobalPageData({preview})
 
-  return {props: {...data, preview}}
+  return {props: {...pageData, preview}}
 }
 
 function IndexPage() {
-  const {target} = useApp()
+  const {data} = useApp()
+  const target = isRecord(data) && isRecord(data.target) && data.target
   const seo: Record<string, any> | null = isRecord(target) ? (target.seo as any) : null
 
   return (

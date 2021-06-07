@@ -6,7 +6,7 @@ import {useRouter} from 'next/router'
 import React, {useCallback, useState} from 'react'
 import {useApp} from './hooks'
 import {NavDrawer} from './navDrawer'
-import {GitHubMark} from '$components'
+import {GitHubMark} from '$components/assets'
 import {features} from '$config'
 import {isArray, isRecord} from '$lib/types'
 
@@ -17,7 +17,8 @@ interface Route {
 }
 
 export function AppNavbar() {
-  const {colorScheme, menu, nav, setColorScheme} = useApp()
+  const {colorScheme, data, menu, setColorScheme} = useApp()
+  const nav = isRecord(data) && data.nav
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
   const navItems = isRecord(nav) && isArray(nav.items) ? nav.items : []

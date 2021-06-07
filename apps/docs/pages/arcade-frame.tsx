@@ -2,7 +2,7 @@ import * as icons from '@sanity/icons'
 import * as ui from '@sanity/ui'
 import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
 import React, {useCallback, useEffect, useState} from 'react'
-import {useApp} from '$components'
+import {useApp} from '$components/app'
 import {evalComponent, EvalComponentResult, ready as readyCheck} from '$lib/ide'
 import {isRecord} from '$lib/types'
 
