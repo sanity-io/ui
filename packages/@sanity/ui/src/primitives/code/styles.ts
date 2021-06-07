@@ -70,7 +70,8 @@ export function codeBaseStyle(): FlattenInterpolation<StyledThemeProps<Theme>> {
     }
 
     & a {
-      text-decoration: none;
+      color: inherit;
+      text-decoration: underline;
       border-radius: 1px;
     }
 
