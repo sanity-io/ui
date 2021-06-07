@@ -36,4 +36,6 @@ jobs:
         run: yarn build
 
       - name: Extract API
+        env:
+          SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
         run: yarn extract:tsdoc-to-portable-text
