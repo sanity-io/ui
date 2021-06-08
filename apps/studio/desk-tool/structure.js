@@ -34,7 +34,7 @@ const packagesListItem = S.listItem()
       .title('Packages')
       .child((packageId) =>
         documentStore
-          .listenQuery(`*[_id == $id]{_id,name,releases[]->{_id,version}}[0]`, {
+          .listenQuery(`*[_id == $id]{_id,scope,name,releases[]->{_id,version}}[0]`, {
             id: packageId,
           })
           .pipe(
@@ -42,7 +42,9 @@ const packagesListItem = S.listItem()
               if (!packageDoc) return null
 
               return S.list()
-                .title(packageDoc.name)
+                .title(
+                  packageDoc.scope ? `${packageDoc.scope}/${packageDoc.name}` : packageDoc.name
+                )
                 .id(packageDoc._id)
                 .items(
                   packageDoc.releases.map((release) =>

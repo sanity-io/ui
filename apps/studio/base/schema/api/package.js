@@ -8,6 +8,12 @@ export const apiPackage = {
   fields: [
     {
       type: 'string',
+      name: 'scope',
+      title: 'Scope',
+    },
+
+    {
+      type: 'string',
       name: 'name',
       title: 'Name',
     },
@@ -34,5 +40,20 @@ export const apiPackage = {
       weak: true,
     },
   ],
+
   readOnly: true,
+
+  preview: {
+    select: {
+      name: 'name',
+      scope: 'scope',
+    },
+    prepare({name, scope}) {
+      console.log('prepare', name, scope)
+
+      return {
+        title: scope ? `${scope}/${name}` : name,
+      }
+    },
+  },
 }
