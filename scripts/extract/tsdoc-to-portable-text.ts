@@ -1,6 +1,6 @@
 import path from 'path'
 import createSanityClient from '@sanity/client'
-import {extract, transform} from '@sanity/tsdoc-to-portable-text'
+import {extract, SanityDocumentValue, transform} from '@sanity/tsdoc-to-portable-text'
 import chalk from 'chalk'
 import {readJSONFile} from './helpers'
 
@@ -26,7 +26,7 @@ function getEnv(key: string) {
   return val
 }
 
-async function extractPackage(name: string) {
+async function extractPackage(name: string, currPackageDoc?: SanityDocumentValue) {
   const packagePath = path.resolve(ROOT_PATH, './packages', name)
   const packageJsonPath = path.resolve(packagePath, 'package.json')
   const pkg = await readJSONFile(packageJsonPath)
@@ -74,23 +74,34 @@ async function extractPackage(name: string) {
     process.exit(1)
   }
 
-  const p = result.apiPackage.name.split('/')
-  const packageScope = p.length > 1 ? p[0] : null
-  const packageName = p.length > 1 ? p[1] : p[0]
-
-  const docs = transform(result, {
-    package: {scope: packageScope, name: packageName, version: pkg.version},
-  })
+  const docs = transform(result, {package: {version: pkg.version}, currPackageDoc})
 
   return docs
 }
 
 async function extractTsdocToPortableText() {
+  let data: {[key: string]: SanityDocumentValue} = {}
+
+  if (config.sanity.token) {
+    const sanityClient = createSanityClient({
+      ...config.sanity,
+      apiVersion: '2021-06-01',
+      useCdn: false,
+    })
+
+    data = await sanityClient.fetch(`{
+      'color': *[_type == 'api.package' && name == 'color'][0],
+      'icons': *[_type == 'api.package' && name == 'icons'][0],
+      'logos': *[_type == 'api.package' && name == 'logos'][0],
+      'ui': *[_type == 'api.package' && name == 'ui'][0]
+    }`)
+  }
+
   const packages = await Promise.all([
-    extractPackage('@sanity/color'),
-    extractPackage('@sanity/icons'),
-    extractPackage('@sanity/logos'),
-    extractPackage('@sanity/ui'),
+    extractPackage('@sanity/color', data.color),
+    extractPackage('@sanity/icons', data.icons),
+    extractPackage('@sanity/logos', data.logos),
+    extractPackage('@sanity/ui', data.ui),
   ])
 
   const docs = packages.reduce((acc, docs) => acc.concat(docs))
