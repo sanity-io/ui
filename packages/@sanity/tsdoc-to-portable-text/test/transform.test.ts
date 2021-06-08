@@ -17,7 +17,7 @@ describe('transform', () => {
       packagePath: project.path,
     })
 
-    const docs = transform(result, {package: {scope: null, name: 'mylib', version: '1.0.0'}})
+    const docs = transform(result, {package: {version: '1.0.0'}})
 
     expect(docs[0]).toEqual({
       _type: 'api.release',

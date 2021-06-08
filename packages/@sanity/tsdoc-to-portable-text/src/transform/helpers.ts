@@ -1,17 +1,19 @@
 import crypto from 'crypto'
 import _slugify from 'slugify'
-import {TransformOpts} from './types'
+import {TransformContext} from './types'
 
 export function hash(key: string): string {
   return crypto.createHash('md5').update(key).digest('hex')
 }
 
-export function createId(config: TransformOpts, key: string): string {
-  if (config.package.scope) {
-    return hash(`${config.package.scope}/${config.package.name}@${config.package.version}/${key}`)
+export function createId(ctx: TransformContext, key: string): string {
+  const {scope, name, version} = ctx.package
+
+  if (scope) {
+    return hash(`${scope}/${name}@${version}/${key}`)
   }
 
-  return hash(`${config.package.name}@${config.package.version}/${key}`)
+  return hash(`${name}@${version}/${key}`)
 }
 
 export function isArray(val: unknown): val is unknown[] {

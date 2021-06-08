@@ -1,26 +1,22 @@
 import {ApiPackage} from '@microsoft/api-extractor-model'
 import {SanityDocumentValue} from '../sanity'
 import {isArray, isRecord} from './helpers'
+import {TransformContext} from './types'
 
-export function transformPackage(
-  node: ApiPackage,
-  currPackageDoc: SanityDocumentValue | null,
-  releaseDoc: SanityDocumentValue
-): SanityDocumentValue {
-  const _releases = currPackageDoc?.releases
+export function transformPackage(ctx: TransformContext, node: ApiPackage): SanityDocumentValue {
+  let releases =
+    ctx.currPackageDoc && isArray(ctx.currPackageDoc.releases) ? ctx.currPackageDoc.releases : []
 
-  let releases = isArray(_releases) ? _releases : []
-
-  const release = releases.find((r) => isRecord(r) && r._key === releaseDoc._id)
+  const release = releases.find((r) => isRecord(r) && r._key === ctx.releaseDoc._id)
 
   if (release) {
     // replace
     releases = releases.map((r) => {
-      if (r === release) {
+      if (isRecord(r) && isRecord(release) && r._key === release._key) {
         return {
           _type: 'reference',
-          _key: releaseDoc._id,
-          _ref: releaseDoc._id,
+          _key: ctx.releaseDoc._id,
+          _ref: ctx.releaseDoc._id,
           _weak: true,
         }
       }
@@ -31,21 +27,22 @@ export function transformPackage(
     // add
     releases.push({
       _type: 'reference',
-      _key: releaseDoc._id,
-      _ref: releaseDoc._id,
+      _key: ctx.releaseDoc._id,
+      _ref: ctx.releaseDoc._id,
       _weak: true,
     })
   }
 
   return {
-    ...currPackageDoc,
+    ...(ctx.currPackageDoc || {}),
     _type: 'api.package',
     _id: node.name.replace(/@/g, '').replace(/\./g, '-').replace(/\//g, '_'),
-    name: node.name,
+    scope: ctx.package.scope,
+    name: ctx.package.name,
     releases,
     latestRelease: {
       _type: 'reference',
-      _ref: releaseDoc._id,
+      _ref: ctx.releaseDoc._id,
       _weak: true,
     },
   }

@@ -2,7 +2,7 @@ import {ExtractResult} from '../extract'
 import {SanityDocumentValue} from '../sanity'
 import {transformPackage} from './transformPackage'
 import {transformPackageMember} from './transformPackageMember'
-import {TransformOpts} from './types'
+import {TransformContext, TransformOpts} from './types'
 
 /**
  * @public
@@ -12,10 +12,13 @@ export function transform(
   opts: TransformOpts
 ): SanityDocumentValue[] {
   const {apiPackage} = extractResult
-  const {version, scope, name} = opts.package
+  const {version} = opts.package
   const currPackageDoc = opts.currPackageDoc || null
+  const p = apiPackage.name.split('/')
+  const packageScope = p.length > 1 ? p[0] : null
+  const packageName = p.length > 1 ? p[1] : p[0]
 
-  const releaseId = [scope, name, version]
+  const releaseId = [apiPackage.name, version]
     .filter(Boolean)
     .join('_')
     .replace(/@/g, '')
@@ -34,12 +37,22 @@ export function transform(
     }[],
   }
 
-  const packageDoc = transformPackage(apiPackage, currPackageDoc, releaseDoc)
+  const ctx: TransformContext = {
+    package: {
+      scope: packageScope,
+      name: packageName,
+      version,
+    },
+    currPackageDoc,
+    releaseDoc,
+  }
+
+  const packageDoc = transformPackage(ctx, apiPackage)
 
   const docs: SanityDocumentValue[] = [releaseDoc]
 
   for (const member of apiPackage.members[0].members) {
-    const memberDoc = transformPackageMember(opts, member, releaseDoc)
+    const memberDoc = transformPackageMember(ctx, member)
 
     docs.push(memberDoc)
 

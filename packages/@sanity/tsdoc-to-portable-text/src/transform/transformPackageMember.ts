@@ -12,31 +12,30 @@ import {transformFunction} from './transformFunction'
 import {transformInterface} from './transformInterface'
 import {transformTypeAlias} from './transformTypeAlias'
 import {transformVariable} from './transformVariable'
-import {TransformOpts} from './types'
+import {TransformContext} from './types'
 
 export function transformPackageMember(
-  config: TransformOpts,
-  member: ApiItem,
-  releaseDoc: SanityDocumentValue
+  ctx: TransformContext,
+  member: ApiItem
 ): SanityDocumentValue {
   if (member.kind === 'Class') {
-    return transformClass(config, member as ApiClass, releaseDoc)
+    return transformClass(ctx, member as ApiClass)
   }
 
   if (member.kind === 'Function') {
-    return transformFunction(config, member as ApiFunction, releaseDoc)
+    return transformFunction(ctx, member as ApiFunction)
   }
 
   if (member.kind === 'Interface') {
-    return transformInterface(config, member as ApiInterface, releaseDoc)
+    return transformInterface(ctx, member as ApiInterface)
   }
 
   if (member.kind === 'TypeAlias') {
-    return transformTypeAlias(config, member as ApiTypeAlias, releaseDoc)
+    return transformTypeAlias(ctx, member as ApiTypeAlias)
   }
 
   if (member.kind === 'Variable') {
-    return transformVariable(config, member as ApiVariable, releaseDoc)
+    return transformVariable(ctx, member as ApiVariable)
   }
 
   throw new Error(`package: unknown member type: ${member.kind}`)

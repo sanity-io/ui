@@ -18,7 +18,7 @@ describe('load', () => {
       packagePath: project.path,
     })
 
-    const docs = transform(result, {package: {scope: null, name: 'mylib', version: '1.0.0'}})
+    const docs = transform(result, {package: {version: '1.0.0'}})
 
     await load(docs, {fs: {path: path.resolve(project.path, 'etc/1.0.0.json')}})
   })

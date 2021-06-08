@@ -1,9 +1,9 @@
 import {ExcerptToken} from '@microsoft/api-extractor-model'
 import {createId} from './helpers'
-import {TransformOpts} from './types'
+import {TransformContext} from './types'
 
 export function transformTokens(
-  config: TransformOpts,
+  ctx: TransformContext,
   tokens: ExcerptToken[]
 ): Record<string, unknown>[] {
   return tokens.map((t, idx) => {
@@ -30,7 +30,7 @@ export function transformTokens(
         text: t.text,
         reference: {
           _type: 'reference',
-          _ref: createId(config, t.canonicalReference.toString()),
+          _ref: createId(ctx, t.canonicalReference.toString()),
           _weak: true,
         },
       }
