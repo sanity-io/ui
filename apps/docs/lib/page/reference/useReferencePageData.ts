@@ -5,11 +5,11 @@ import {usePreviewSubscription} from '$sanity'
 
 export function useReferencePageData(props: {
   data: unknown
-  params: {version: string}
+  params: {name: string; version: string}
   preview: boolean
 }) {
   const {data: dataProp, params, preview} = props
-  const basePath = `/reference/${params.version}`
+  const basePath = `/reference/${params.name}/${params.version}`
 
   const {data} = usePreviewSubscription(DATA_QUERY, {
     enabled: preview,

@@ -33,7 +33,7 @@ export function useDocsPageData(props: {
   })
 
   const navItems = getNavItems(navValues)
-  const navItem = isArray(path) ? navItems.find((i) => i.segment === path[0]) : undefined
+  const navItem = path[0] ? navItems.find((i) => i.segment === path[0]) : undefined
   const menu = navItem ? buildNavMenu(navItem) : undefined
 
   return {data: {nav, settings, target}, menu}

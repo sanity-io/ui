@@ -52,7 +52,9 @@ export function ReferenceInterfaceMember(props: any) {
             Inherited from{' '}
             {data.inheritedFrom.slug && (
               <code>
-                <Link href={`/reference/${params?.version}/${data.inheritedFrom.slug?.current}`}>
+                <Link
+                  href={`/reference/${params.name}/${params.version}/${data.inheritedFrom.slug?.current}`}
+                >
                   <a>{data.inheritedFrom.name}</a>
                 </Link>
               </code>

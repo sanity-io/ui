@@ -22,18 +22,14 @@ export async function loadDocsPageData({
     id: node ? node.targetId : '404',
   })
   const navItems = getNavItems(navValues)
-  const navItem = isArray(path) && navItems.find((i) => i.segment === path[0])
+  const navItem = path[0] ? navItems.find((i) => i.segment === path[0]) : undefined
   const menu = navItem && buildNavMenu(navItem)
   const menuData = menu ? {menu} : undefined
 
   return {
     scope: 'docs',
     ...menuData,
-    data: {
-      nav,
-      settings,
-      target: targetData,
-    },
+    data: {nav, settings, target: targetData},
     preview,
   }
 }

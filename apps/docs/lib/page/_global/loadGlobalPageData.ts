@@ -1,6 +1,6 @@
 import {isArray} from 'lodash'
 import {DATA_QUERY} from './queries'
-import {findNavNode} from '$lib/nav'
+import {buildNavMenu, findNavNode, getNavItems} from '$lib/nav'
 import {isRecord} from '$lib/types'
 import {TARGET_QUERY} from '$queries'
 import {getClient} from '$sanity'
@@ -21,14 +21,15 @@ export async function loadGlobalPageData({
   const targetData: unknown = await getClient(preview).fetch(TARGET_QUERY, {
     id: node ? node.targetId : '404',
   })
+  const navItems = getNavItems(navValues)
+  const navItem = path[0] ? navItems.find((i) => i.segment === path[0]) : undefined
+  const menu = navItem && buildNavMenu(navItem)
+  const menuData = menu ? {menu} : undefined
 
   return {
     scope: 'global',
-    data: {
-      nav,
-      settings,
-      target: targetData,
-    },
+    data: {nav, settings, target: targetData},
+    ...menuData,
     preview,
   }
 }

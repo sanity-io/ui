@@ -1,78 +1,106 @@
 import {BadgeTone} from '@sanity/ui'
-import {NavMenu, NavMenuLink} from '$lib/nav'
+import {NavMenu, NavMenuItem, NavMenuLink} from '$lib/nav'
 
 export function getReleaseMenu(data: any, basePath: string): NavMenu {
-  const reactComponentTypeMembers = data.members.filter((member: any) => {
+  const reactComponentTypeMembers: any[] = data.members.filter((member: any) => {
     return member.isReactComponentType
   })
 
-  const members = data.members.filter((member: any) => {
+  const members: any[] = data.members.filter((member: any) => {
     return !member.isReactComponentType
   })
+
+  const reactCommponentItems = reactComponentTypeMembers.map((member: any) =>
+    getMenuLink(member, basePath)
+  )
+
+  const classItems = members
+    .filter((member: any) => member._type === 'api.class')
+    .map((member: any) => getMenuLink(member, basePath))
+
+  const functionItems = members
+    .filter((member: any) => member._type === 'api.function')
+    .map((member: any) => getMenuLink(member, basePath))
+
+  const typeItems = members
+    .filter((member: any) => member._type === 'api.typeAlias')
+    .map((member: any) => getMenuLink(member, basePath))
+
+  const interfaceItems = members
+    .filter((member: any) => member._type === 'api.interface')
+    .map((member: any) => getMenuLink(member, basePath))
+
+  const variableItems = members
+    .filter((member: any) => member._type === 'api.variable')
+    .map((member: any) => getMenuLink(member, basePath))
+
+  const items: NavMenuItem[] = [
+    {
+      type: 'menuLink',
+      hidden: false,
+      title: 'Overview',
+      href: basePath,
+    },
+  ]
+
+  if (reactCommponentItems.length) {
+    items.push({
+      type: 'menu',
+      collapsed: false,
+      title: 'React components',
+      items: reactCommponentItems,
+    })
+  }
+
+  if (classItems.length) {
+    items.push({
+      type: 'menu',
+      collapsed: false,
+      title: 'Classes',
+      items: classItems,
+    })
+  }
+
+  if (functionItems.length) {
+    items.push({
+      type: 'menu',
+      collapsed: false,
+      title: 'Functions',
+      items: functionItems,
+    })
+  }
+
+  if (typeItems.length) {
+    items.push({
+      type: 'menu',
+      collapsed: false,
+      title: 'Types',
+      items: typeItems,
+    })
+  }
+
+  if (interfaceItems.length) {
+    items.push({
+      type: 'menu',
+      collapsed: false,
+      title: 'Interfaces',
+      items: interfaceItems,
+    })
+  }
+
+  if (variableItems.length) {
+    items.push({
+      type: 'menu',
+      collapsed: false,
+      title: 'Variables',
+      items: variableItems,
+    })
+  }
 
   return {
     type: 'menu',
     collapsed: false,
-    items: [
-      {
-        type: 'menu',
-        collapsed: false,
-        items: [
-          {
-            type: 'menuLink',
-            hidden: false,
-            title: 'Overview',
-            href: basePath,
-          },
-        ],
-      },
-      {
-        type: 'menu',
-        collapsed: false,
-        title: 'React components',
-        items: reactComponentTypeMembers.map((member: any) => getMenuLink(member, basePath)),
-      },
-      {
-        type: 'menu',
-        collapsed: false,
-        title: 'Classes',
-        items: members
-          .filter((member: any) => member._type === 'api.class')
-          .map((member: any) => getMenuLink(member, basePath)),
-      },
-      {
-        type: 'menu',
-        collapsed: false,
-        title: 'Functions',
-        items: members
-          .filter((member: any) => member._type === 'api.function')
-          .map((member: any) => getMenuLink(member, basePath)),
-      },
-      {
-        type: 'menu',
-        collapsed: false,
-        title: 'Types',
-        items: members
-          .filter((member: any) => member._type === 'api.typeAlias')
-          .map((member: any) => getMenuLink(member, basePath)),
-      },
-      {
-        type: 'menu',
-        collapsed: false,
-        title: 'Interfaces',
-        items: members
-          .filter((member: any) => member._type === 'api.interface')
-          .map((member: any) => getMenuLink(member, basePath)),
-      },
-      {
-        type: 'menu',
-        collapsed: false,
-        title: 'Variables',
-        items: members
-          .filter((member: any) => member._type === 'api.variable')
-          .map((member: any) => getMenuLink(member, basePath)),
-      },
-    ],
+    items,
   }
 }
 

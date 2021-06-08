@@ -16,7 +16,10 @@ export function ReferenceReferrers(props: any) {
           <Stack as="ul" space={[3, 3, 4]}>
             {data.referrers.map((referrer: any) => (
               <Box as="li" key={referrer.slug}>
-                <NavLink href={`/reference/${params.version}/${referrer.slug}`} size={[2, 2, 3]}>
+                <NavLink
+                  href={`/reference/${params.name}/${params.version}/${referrer.slug}`}
+                  size={[2, 2, 3]}
+                >
                   <code>{referrer.name}</code>
                 </NavLink>
               </Box>
