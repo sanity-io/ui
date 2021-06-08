@@ -24,7 +24,7 @@ export function TokenPreview({token}: any) {
     return (
       <Tooltip content={<ReferenceTooltipContent data={token.reference} />} placement="top" portal>
         <span>
-          <Link href={`/reference/${params.version}/${token.reference.name}`}>
+          <Link href={`/reference/${params.name}/${params.version}/${token.reference.name}`}>
             <a>{token.reference.name}</a>
           </Link>
         </span>

@@ -1,8 +1,9 @@
-import {Box, Container, Heading, Label, Stack} from '@sanity/ui'
+import {Select, Stack} from '@sanity/ui'
 import Head from 'next/head'
-import React from 'react'
+import {useRouter} from 'next/router'
+import React, {useCallback} from 'react'
 import {AppLayout, useApp} from '$components/app'
-import {NavLink} from '$components/navLink'
+import {PageLayout} from '$components/page'
 import {features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
@@ -13,8 +14,7 @@ export async function getStaticProps(opts: {
 }) {
   const {params = {}, preview = features.preview} = opts
 
-  // @todo: remove this hard-coding
-  params.name = '@sanity/ui'
+  params.name = ''
   params.version = ''
   params.slug = ''
 
@@ -23,47 +23,57 @@ export async function getStaticProps(opts: {
   return {props: {...pageData, params, preview}}
 }
 
-export default function ReferencePage() {
-  const {data} = useApp()
-  const pkg = (isRecord(data) && isRecord(data.package) && data.package) || null
-  const releasesData = pkg && pkg.releases
-  const versions: string[] = isArray(releasesData)
-    ? (releasesData
-        .map((d) => isRecord(d) && isString(d.version) && d.version)
-        .filter(Boolean) as string[])
+function ReferencePage({params}: any) {
+  const {data, menu} = useApp()
+  const {push: pushState} = useRouter()
+  const packagesData = isRecord(data) && data.packages
+  const packages: {name: string}[] = isArray(packagesData)
+    ? (packagesData
+        .map((d) => isRecord(d) && isString(d.name) && {name: d.name})
+        .filter(Boolean) as {name: string}[])
     : []
 
+  const handleNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const value = event.currentTarget.value
+
+      pushState({
+        pathname: value ? `/reference/${value}` : '/reference',
+      })
+    },
+    [pushState]
+  )
+
+  const menuHeader = (
+    <Stack
+      padding={[2, 3, 4]}
+      space={[1, 2, 3]}
+      // style={{borderBottom: '1px solid var(--card-border-color)'}}
+    >
+      <Select onChange={handleNameChange} value={params.name}>
+        <option value="">Select package…</option>
+        {packages.map((pkg) => (
+          <option key={pkg.name} value={pkg.name}>
+            @sanity/{pkg.name}
+          </option>
+        ))}
+      </Select>
+
+      <Select disabled>
+        <option value="">Select version…</option>
+      </Select>
+    </Stack>
+  )
+
   return (
-    <>
+    <AppLayout>
       <Head>
-        <title>API reference – Sanity UI</title>
+        <title>API Reference – Sanity UI</title>
       </Head>
 
-      <AppLayout>
-        <Box paddingX={[3, 4, 5]} paddingY={[4, 5, 5, 5, 6, 7]}>
-          <Container>
-            <Box marginBottom={[2, 3, 4]}>
-              <Heading as="h1" size={[2, 2, 3, 4]}>
-                API reference for <code>@sanity/ui</code>
-              </Heading>
-            </Box>
-
-            <Stack marginY={[4, 4, 5]} space={[3, 3, 4]}>
-              <Label>Choose a version</Label>
-
-              <Stack as="ul" space={[3, 3, 4]}>
-                {versions.map((version) => (
-                  <Box as="li" key={version}>
-                    <NavLink href={`/reference/${version}`} size={[2, 2, 3]}>
-                      v{version}
-                    </NavLink>
-                  </Box>
-                ))}
-              </Stack>
-            </Stack>
-          </Container>
-        </Box>
-      </AppLayout>
-    </>
+      <PageLayout menu={menu} menuHeader={menuHeader} />
+    </AppLayout>
   )
 }
+
+export default ReferencePage

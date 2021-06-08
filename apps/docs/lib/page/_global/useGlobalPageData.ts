@@ -1,6 +1,6 @@
 import {useMemo} from 'react'
 import {DATA_QUERY} from './queries'
-import {findNavNode} from '$lib/nav'
+import {buildNavMenu, findNavNode, getNavItems} from '$lib/nav'
 import {isArray, isArrayOfStrings, isRecord} from '$lib/types'
 import {TARGET_QUERY} from '$queries'
 import {usePreviewSubscription} from '$sanity'
@@ -33,5 +33,9 @@ export function useGlobalPageData(props: {
     params: {id: node ? node.targetId : '404'},
   })
 
-  return {data: {nav, settings, target}}
+  const navItems = getNavItems(navValues)
+  const navItem = path[0] ? navItems.find((i) => i.segment === path[0]) : undefined
+  const menu = navItem ? buildNavMenu(navItem) : undefined
+
+  return {data: {nav, settings, target}, menu}
 }

@@ -28,7 +28,7 @@ function AppBanner() {
   if (!banner || banner.hidden) return null
 
   return (
-    <Card padding={3} tone="primary" style={{minHeight: 'auto'}}>
+    <Card padding={3} tone="transparent" style={{minHeight: 'auto'}}>
       <Text align="center" size={1}>
         {(banner.icon || banner.title) && (
           <strong>

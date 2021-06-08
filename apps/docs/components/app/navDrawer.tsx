@@ -74,13 +74,14 @@ export function NavDrawer({
           </Header>
 
           <Box flex={1} overflow="auto">
-            {menu.items.map((item, itemIndex) => {
-              if (item.type === 'menu') {
-                return <NavMenu key={itemIndex} menu={item} />
-              }
+            {menu.items &&
+              menu.items.map((item, itemIndex) => {
+                if (item.type === 'menu') {
+                  return <NavMenu key={itemIndex} menu={item} />
+                }
 
-              return null
-            })}
+                return null
+              })}
           </Box>
         </Flex>
       </Card>

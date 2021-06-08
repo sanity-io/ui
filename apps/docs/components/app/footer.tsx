@@ -8,7 +8,7 @@ export function AppFooter() {
   const {colorScheme} = useApp()
 
   return (
-    <Card borderTop paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} style={{minHeight: 'auto'}}>
+    <Card paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} style={{minHeight: 'auto'}} tone="transparent">
       <Inline space={1} style={{textAlign: 'center'}}>
         <Text muted size={[1, 1, 2]}>
           By

@@ -1,5 +1,5 @@
 import {uniq} from 'lodash'
-import {NavMenu, NavItem, NavMenuItem} from './types'
+import {NavItem, NavMenu, NavMenuItem} from './types'
 import {features} from '$config'
 import {isArray, isRecord, isString} from '$lib/types'
 
@@ -73,70 +73,53 @@ export function findNavNode(nodes: unknown[], path: string[]): Record<string, un
   return null
 }
 
-function getMenuItems(items: NavItem[]) {
-  const ret: NavMenuItem[] = []
+function getNavMenuItem(navItem: NavItem): NavMenuItem {
+  const items: NavMenuItem[] = []
 
-  for (const item of items) {
-    if (item.href) {
-      ret.push({
-        type: 'menuLink',
-        hidden: item.hidden,
-        title: item.menuTitle || item.title,
-        href: item.href,
-      })
-    } else {
-      ret.push({
-        type: 'menu',
-        collapsed: item.collapsed,
-        items: getMenuItems(item.items),
-        title: item.menuTitle || item.title,
-      })
+  if (navItem.items) {
+    for (const child of navItem.items) {
+      if (features.hintHiddenContent || !child.hidden) {
+        items.push(getNavMenuItem(child))
+      }
     }
   }
 
-  return ret
+  if (items.length) {
+    return {
+      type: 'menu',
+      collapsed: navItem.collapsed,
+      items,
+      title: navItem.menuTitle || navItem.title || '',
+    }
+  }
+
+  return {
+    type: 'menuLink',
+    hidden: navItem.hidden,
+    href: navItem.href || '',
+    title: navItem.menuTitle || navItem.title || '',
+  }
 }
 
-export function buildNavMenu(navItem: NavItem) {
-  if (navItem.items.length === 0) return undefined
+export function buildNavMenu(navItem: NavItem): NavMenu {
+  const items: NavMenuItem[] = [
+    {
+      type: 'menuLink',
+      hidden: navItem.hidden,
+      href: navItem.href || '',
+      title: navItem.menuTitle || navItem.title || '',
+    },
+  ]
 
-  const menu: NavMenu = {
-    type: 'menu',
-    collapsed: false,
-    items: [],
-    title: navItem.title || '',
-  }
-
-  const items = getMenuItems(navItem.items)
-
-  const initialGroup: NavMenu = {
-    type: 'menu',
-    collapsed: false,
-    items: [
-      {
-        type: 'menuLink',
-        hidden: false,
-        title: navItem.menuTitle || navItem.title || '',
-        href: `/${navItem.segment || ''}`,
-      },
-    ],
-  }
-
-  while (items.length) {
-    const item = items[0]
-
-    if (!item) break
-
-    if (item.type === 'menu') {
-      break
-    } else {
-      items.shift()
-      initialGroup.items.push(item)
+  for (const child of navItem.items) {
+    if (features.hintHiddenContent || !child.hidden) {
+      items.push(getNavMenuItem(child))
     }
   }
 
-  menu.items.push(initialGroup)
-  menu.items.push(...items)
-
-  return menu
+  return {
+    type: 'menu',
+    collapsed: false,
+    items,
+  }
 }

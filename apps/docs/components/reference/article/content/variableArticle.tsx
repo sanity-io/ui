@@ -36,7 +36,7 @@ export function ReferenceVariableContent(props: {data: any}) {
           <P>
             Defined by the{' '}
             <code>
-              <Link href={`/reference/${params.version}/${propsType.slug?.current}`}>
+              <Link href={`/reference/${params.name}/${params.version}/${propsType.slug?.current}`}>
                 <a>{propsType.name}</a>
               </Link>
             </code>{' '}

@@ -5,7 +5,7 @@ import {PageHeader} from './pageHeader'
 import {NavMenu} from '$lib/nav'
 
 export interface PageLayoutProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   menu?: NavMenu
   menuHeader?: React.ReactNode
 }
@@ -14,10 +14,15 @@ const Root = styled(Flex)`
   position: relative;
 `
 
+const NavBox = styled(Box)`
+  min-width: 12em;
+  max-width: 22rem;
+`
+
 const ContentContainer = styled(Box)`
   ${({theme}) => css`
     @media (min-width: ${rem(theme.sanity.media[1])}) {
-      min-width: 30rem;
+      min-width: 25.5rem;
     }
   `}
 `
@@ -29,14 +34,10 @@ const ContentCard = styled(Card).attrs({forwardedAs: 'main'})`
 export function PageLayout({children, menu, menuHeader}: PageLayoutProps) {
   return (
     <Root>
-      {menu && (
-        <Box
-          display={['none', 'none', 'block']}
-          flex={1}
-          style={{minWidth: '12em', maxWidth: '16em'}}
-        >
+      {(menuHeader || (menu && menu.items.length > 1)) && (
+        <NavBox display={['none', 'none', 'block']} flex={1}>
           <PageHeader header={menuHeader} menu={menu} />
-        </Box>
+        </NavBox>
       )}
 
       <ContentContainer flex={4}>
