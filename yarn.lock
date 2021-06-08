@@ -8241,12 +8241,7 @@ esbuild@^0.11.5:
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.20.tgz#7cefa1aee8b372c184e42457885f7ce5d3e62a1e"
   integrity sha512-QOZrVpN/Yz74xfat0H6euSgn3RnwLevY1mJTEXneukz1ln9qB+ieaerRMzSeETpz/UJWsBMzRVR/andBht5WKw==
 
-esbuild@^0.12.5:
-  version "0.12.5"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.5.tgz#36076a6bc1966ba2741981d30512e95e8aaff495"
-  integrity sha512-vcuP53pA5XiwUU4FnlXM+2PnVjTfHGthM7uP1gtp+9yfheGvFFbq/KyuESThmtoHPUrfZH5JpxGVJIFDVD1Egw==
-
-esbuild@^0.12.6:
+esbuild@^0.12.5, esbuild@^0.12.6:
   version "0.12.6"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.6.tgz#85bc755c7cf3005d4f34b4f10f98049ce0ee67ce"
   integrity sha512-RDvVLvAjsq/kIZJoneMiUOH7EE7t2QaW7T3Q7EdQij14+bZbDq5sndb0tTanmHIFSqZVMBMMyqzVHkS3dJobeA==
@@ -15496,7 +15491,7 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.2, postcss@^7.0.27:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.2.10:
+postcss@^8.3.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.0.tgz#b1a713f6172ca427e3f05ef1303de8b65683325f"
   integrity sha512-+ogXpdAjWGa+fdYY5BQ96V/6tAo+TdSSIMP5huJBIygdWwKtVoB5JWZ7yUd4xZ8r+8Kvvx4nyg/PQ071H4UtcQ==
@@ -19630,12 +19625,12 @@ viewport-dimensions@^0.2.0:
   integrity sha1-3nQHR9tTh/0XJfUXXpG6x2r982w=
 
 vite@^2.3.6:
-  version "2.3.6"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.3.6.tgz#1f7cfde88a51a802d69000c7bac85d481c2e871c"
-  integrity sha512-fsEpNKDHgh3Sn66JH06ZnUBnIgUVUtw6ucDhlOj1CEqxIkymU25yv1/kWDPlIjyYHnalr0cN6V+zzUJ+fmWHYw==
+  version "2.3.7"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.3.7.tgz#3023892419367465e1af1739578f8663d04243b2"
+  integrity sha512-Y0xRz11MPYu/EAvzN94+FsOZHbSvO6FUvHv127CyG7mV6oDoay2bw+g5y9wW3Blf8OY3chaz3nc/DcRe1IQ3Nw==
   dependencies:
     esbuild "^0.12.5"
-    postcss "^8.2.10"
+    postcss "^8.3.0"
     resolve "^1.19.0"
     rollup "^2.38.5"
   optionalDependencies:
