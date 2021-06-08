@@ -50,13 +50,7 @@ export const etl: CmdFn = async ({args, cwd, flags}) => {
     }
   }
 
-  const p = result.apiPackage.name.split('/')
-  const packageScope = p.length > 1 ? p[0] : null
-  const packageName = p.length > 1 ? p[1] : p[0]
-
-  const docs = transform(result, {
-    package: {scope: packageScope, name: packageName, version: pkg.version},
-  })
+  const docs = transform(result, {package: {version: pkg.version}})
 
   const jsonPath = path.resolve(packagePath, outDir, `${pkg.version}.json`)
 

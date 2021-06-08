@@ -5,30 +5,26 @@ import {RELEASE_TAGS} from './constants'
 import {createId, sanitizeName, slugify} from './helpers'
 import {transformDocComment} from './transformDocComment'
 import {transformTokens} from './transformTokens'
-import {TransformOpts} from './types'
+import {TransformContext} from './types'
 
-export function transformVariable(
-  config: TransformOpts,
-  node: ApiVariable,
-  releaseDoc: SanityDocumentValue
-): SanityDocumentValue {
+export function transformVariable(ctx: TransformContext, node: ApiVariable): SanityDocumentValue {
   const name = sanitizeName(node.name)
   const docComment = node.tsdocComment
   const comment = docComment ? transformDocComment(docComment) : undefined
   const type = transformTokens(
-    config,
+    ctx,
     node.excerptTokens.slice(
       node.variableTypeExcerpt.tokenRange.startIndex,
       node.variableTypeExcerpt.tokenRange.endIndex
     )
   )
   const isReactComponentType = _variableIsReactComponentType(node)
-  const propsType = isReactComponentType ? _variablePropsType(config, node, docComment) : undefined
+  const propsType = isReactComponentType ? _variablePropsType(ctx, node, docComment) : undefined
 
   return {
     _type: 'api.variable',
-    _id: createId(config, node.canonicalReference.toString()),
-    release: {_type: 'reference', _ref: releaseDoc._id, _weak: true},
+    _id: createId(ctx, node.canonicalReference.toString()),
+    release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment,
@@ -67,7 +63,7 @@ function _variableIsReactComponentType(node: ApiVariable) {
   return false
 }
 
-function _variablePropsType(config: TransformOpts, node: ApiVariable, docComment?: DocComment) {
+function _variablePropsType(ctx: TransformContext, node: ApiVariable, docComment?: DocComment) {
   const typeTokens = node.excerptTokens.slice(
     node.variableTypeExcerpt.tokenRange.startIndex,
     node.variableTypeExcerpt.tokenRange.endIndex
@@ -87,7 +83,7 @@ function _variablePropsType(config: TransformOpts, node: ApiVariable, docComment
     if (sanityUIRef && sanityUIRef.canonicalReference) {
       return {
         _type: 'reference',
-        _ref: createId(config, sanityUIRef.canonicalReference.toString()),
+        _ref: createId(ctx, sanityUIRef.canonicalReference.toString()),
         _weak: true,
       }
     }
@@ -106,7 +102,7 @@ function _variablePropsType(config: TransformOpts, node: ApiVariable, docComment
 
         return {
           _type: 'reference',
-          _ref: createId(config, `@sanity/ui!${text}:interface`),
+          _ref: createId(ctx, `@sanity/ui!${text}:interface`),
           _weak: true,
         }
       }

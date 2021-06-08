@@ -10,20 +10,16 @@ import {RELEASE_TAGS} from './constants'
 import {createId, hash, sanitizeName, slugify} from './helpers'
 import {transformDocComment} from './transformDocComment'
 import {transformTokens} from './transformTokens'
-import {TransformOpts} from './types'
+import {TransformContext} from './types'
 
-export function transformInterface(
-  config: TransformOpts,
-  node: ApiInterface,
-  releaseDoc: SanityDocumentValue
-): SanityDocumentValue {
+export function transformInterface(ctx: TransformContext, node: ApiInterface): SanityDocumentValue {
   const docComment = node.tsdocComment
   const name = sanitizeName(node.name)
 
   return {
     _type: 'api.interface',
-    _id: createId(config, node.canonicalReference.toString()),
-    release: {_type: 'reference', _ref: releaseDoc._id, _weak: true},
+    _id: createId(ctx, node.canonicalReference.toString()),
+    release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment: docComment ? transformDocComment(docComment) : undefined,
@@ -32,12 +28,12 @@ export function transformInterface(
         _type: 'api.extend',
         _key: `extend${idx}`,
         type: transformTokens(
-          config,
+          ctx,
           t.excerpt.tokens.slice(t.excerpt.tokenRange.startIndex, t.excerpt.tokenRange.endIndex)
         ),
       }
     }),
-    members: node.members.map((m) => transformInterfaceMember(config, m)),
+    members: node.members.map((m) => transformInterfaceMember(ctx, m)),
     releaseTag: RELEASE_TAGS[node.releaseTag],
     typeParameters: node.typeParameters.map((p, idx: number) => {
       return {
@@ -45,14 +41,14 @@ export function transformInterface(
         _key: `typeParameter${idx}`,
         name: p.name,
         constraintType: transformTokens(
-          config,
+          ctx,
           node.excerptTokens.slice(
             p.constraintExcerpt.tokenRange.startIndex,
             p.constraintExcerpt.tokenRange.endIndex
           )
         ),
         defaultTypeType: transformTokens(
-          config,
+          ctx,
           node.excerptTokens.slice(
             p.defaultTypeExcerpt.tokenRange.startIndex,
             p.defaultTypeExcerpt.tokenRange.endIndex
@@ -63,7 +59,7 @@ export function transformInterface(
   }
 }
 
-function transformInterfaceMember(config: TransformOpts, m: ApiItem): any {
+function transformInterfaceMember(ctx: TransformContext, m: ApiItem): any {
   if (m.kind === 'PropertySignature') {
     const mem = m as ApiPropertySignature
     const docComment = mem.tsdocComment
@@ -72,7 +68,7 @@ function transformInterfaceMember(config: TransformOpts, m: ApiItem): any {
       _type: 'api.property',
       _key: hash(mem.name),
       type: transformTokens(
-        config,
+        ctx,
         mem.excerptTokens.slice(
           mem.propertyTypeExcerpt.tokenRange.startIndex,
           mem.propertyTypeExcerpt.tokenRange.endIndex
@@ -89,23 +85,14 @@ function transformInterfaceMember(config: TransformOpts, m: ApiItem): any {
     const mem = m as ApiIndexSignature
     const docComment = mem.tsdocComment
 
-    // console.log({
-    //   kind: mem.kind,
-    //   canonicalReference: mem.canonicalReference.toString(),
-    //   overloadIndex: mem.overloadIndex,
-    //   // s: mem.returnTypeExcerpt
-    //   displayName: mem.displayName,
-    //   // a: mem.excerpt
-    // })
-
     return {
       _type: 'api.indexProperty',
       _key: hash(mem.canonicalReference.toString()),
-      members: mem.members.map((m) => transformInterfaceMember(config, m)),
+      members: mem.members.map((m) => transformInterfaceMember(ctx, m)),
       comment: docComment ? transformDocComment(docComment) : undefined,
-      parameters: mem.parameters.map((p) => transformIndexParameter(config, mem, p)),
+      parameters: mem.parameters.map((p) => transformIndexParameter(ctx, mem, p)),
       returnType: transformTokens(
-        config,
+        ctx,
         mem.excerptTokens.slice(
           mem.returnTypeExcerpt.tokenRange.startIndex,
           mem.returnTypeExcerpt.tokenRange.endIndex
@@ -114,18 +101,16 @@ function transformInterfaceMember(config: TransformOpts, m: ApiItem): any {
     }
   }
 
-  // console.log(m)
-
   throw new Error(`Unknown interface member kind: ${m.kind}`)
 }
 
-function transformIndexParameter(config: TransformOpts, node: ApiIndexSignature, param: Parameter) {
+function transformIndexParameter(ctx: TransformContext, node: ApiIndexSignature, param: Parameter) {
   return {
     _type: 'api.indexParameter',
     _key: hash(param.name),
     name: param.name,
     type: transformTokens(
-      config,
+      ctx,
       node.excerptTokens.slice(
         param.parameterTypeExcerpt.tokenRange.startIndex,
         param.parameterTypeExcerpt.tokenRange.endIndex

@@ -5,9 +5,20 @@ import {SanityDocumentValue} from '../sanity'
  */
 export interface TransformOpts {
   package: {
+    version: string
+  }
+  currPackageDoc?: SanityDocumentValue | null
+}
+
+/**
+ * @public
+ */
+export interface TransformContext {
+  package: {
     scope: string | null
     name: string
     version: string
   }
-  currPackageDoc?: SanityDocumentValue | null
+  currPackageDoc: SanityDocumentValue | null
+  releaseDoc: SanityDocumentValue
 }
