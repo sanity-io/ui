@@ -84,8 +84,18 @@ const TreeItemBox = styled(Box)<{$level: number}>((props: {$level: number; theme
 
   return css`
     padding-left: ${rem(space[2] * $level)};
+
+    &[data-as='a'] {
+      text-decoration: none;
+    }
   `
 })
+
+const ToggleArrowText = styled(Text)`
+  & > svg {
+    transition: transform 100ms;
+  }
+`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -101,6 +111,7 @@ export function TreeItem(
     href,
     icon,
     id: idProp,
+    muted,
     onClick,
     padding = 3,
     selected = false,
@@ -168,19 +179,21 @@ export function TreeItem(
         style={{visibility: icon || children ? 'visible' : 'hidden', pointerEvents: 'none'}}
       >
         {icon && (
-          <Text size={fontSize} weight={weight}>
+          <Text muted={muted} size={fontSize} weight={weight}>
             {createElement(icon)}
           </Text>
         )}
         {!icon && (
-          <Text size={fontSize} weight={weight}>
+          <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </Text>
+          </ToggleArrowText>
         )}
       </Box>
-      <Text size={fontSize} weight={weight}>
-        {text}
-      </Text>
+      <Box flex={1}>
+        <Text muted={muted} size={fontSize} textOverflow="ellipsis" weight={weight}>
+          {text}
+        </Text>
+      </Box>
     </Flex>
   )
 
