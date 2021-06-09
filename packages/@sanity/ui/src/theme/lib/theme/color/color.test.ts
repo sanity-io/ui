@@ -19,6 +19,10 @@ describe('color', () => {
           penumbra: 'hsl(0, 0%, 0%)',
           umbra: 'hsl(0, 0%, 0%)',
         },
+        skeleton: {
+          from: 'hsl(0, 0%, 0%)',
+          to: 'hsl(0, 0%, 0%)',
+        },
       })
     })
 

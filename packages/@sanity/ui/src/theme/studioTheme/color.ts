@@ -25,6 +25,10 @@ export const color = createColorTheme({
           penumbra: rgba(dark ? black.hex : hues.gray[500].hex, 0.14),
           ambient: rgba(dark ? black.hex : hues.gray[500].hex, 0.12),
         },
+        skeleton: {
+          from: dark ? hues.gray[900].hex : hues.gray[100].hex,
+          to: rgba(dark ? hues.gray[900].hex : hues.gray[100].hex, 0.5),
+        },
       }
     }
 
@@ -42,6 +46,10 @@ export const color = createColorTheme({
           penumbra: rgba(dark ? black.hex : tints[500].hex, 0.14),
           ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
         },
+        skeleton: {
+          from: dark ? tints[800].hex : tints[200].hex,
+          to: rgba(dark ? tints[800].hex : tints[200].hex, 0.5),
+        },
       }
     }
 
@@ -57,6 +65,10 @@ export const color = createColorTheme({
         umbra: rgba(dark ? black.hex : tints[500].hex, 0.2),
         penumbra: rgba(dark ? black.hex : tints[500].hex, 0.14),
         ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
+      },
+      skeleton: {
+        from: dark ? tints[800].hex : tints[200].hex,
+        to: rgba(dark ? tints[800].hex : tints[200].hex, 0.5),
       },
     }
   },
@@ -254,6 +266,7 @@ export const color = createColorTheme({
           bg: mix(bg, hues.gray[dark ? 50 : 950].hex),
           fg: mix(bg, hues.gray[dark ? 600 : 300].hex),
         },
+        skeleton: base.skeleton,
       }
     }
 
@@ -277,6 +290,7 @@ export const color = createColorTheme({
           bg: mix(bg, hues.gray[dark ? 950 : 50].hex),
           fg: hues.gray[dark ? 400 : 600].hex,
         },
+        skeleton: base.skeleton,
       }
     }
 
@@ -297,6 +311,7 @@ export const color = createColorTheme({
           bg: mix(muted.pressed.bg, hues.gray[dark ? 950 : 50].hex),
           fg: hues.gray[dark ? 400 : 700].hex,
         },
+        skeleton: base.skeleton,
       }
     }
 
@@ -316,6 +331,7 @@ export const color = createColorTheme({
           bg: 'transparent',
           fg: muted.disabled.fg,
         },
+        skeleton: base.skeleton,
       }
     }
 
@@ -336,6 +352,7 @@ export const color = createColorTheme({
         bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
         fg: hues.gray[dark ? 400 : 700].hex,
       },
+      skeleton: base.skeleton,
     }
   },
 
