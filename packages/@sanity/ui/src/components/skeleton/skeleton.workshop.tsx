@@ -12,7 +12,7 @@ function ExampleStory() {
       <Container width={0}>
         <Card marginY={4} radius={2} shadow={1} tone="caution">
           <Stack padding={4} space={4}>
-            <Skeleton style={{height: 100}} />
+            <Skeleton style={{height: 100}} radius={2} />
             <Stack space={3}>
               <Skeleton style={{height: 11, width: '50%'}} />
               <Skeleton style={{height: 9, width: '60%'}} />
