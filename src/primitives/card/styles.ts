@@ -56,6 +56,10 @@ function vars(base: ThemeColorBase, color: ThemeColorCardState) {
     --card-shadow-umbra-color: ${base.shadow.umbra};
     --card-shadow-penumbra-color: ${base.shadow.penumbra};
     --card-shadow-ambient-color: ${base.shadow.ambient};
+
+    /* Skeleton */
+    --card-skeleton-color-from: ${color.skeleton.from};
+    --card-skeleton-color-to: ${color.skeleton.to};
   `
 }
 
