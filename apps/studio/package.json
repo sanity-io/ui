@@ -11,7 +11,7 @@
     "clean": "rimraf public",
     "dev": "sanity start --port 9000",
     "deploy": "sanity deploy",
-    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet"
   },
   "keywords": [
     "sanity"

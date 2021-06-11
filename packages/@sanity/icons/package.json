@@ -17,7 +17,7 @@
     "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
     "copy:dts:es": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "generate": "node -r esbuild-register scripts/generate.ts",
-    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "pregenerate": "rimraf src/icons",
     "type-check": "tsc -b",

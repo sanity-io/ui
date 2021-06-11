@@ -6,7 +6,7 @@
     "build": "next build",
     "clean": "rimraf .next",
     "dev": "next dev",
-    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "start": "next start",
     "test": "jest",
