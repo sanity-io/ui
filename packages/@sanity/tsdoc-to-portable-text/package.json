@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@sanity/tsdoc-to-portable-text",
   "version": "0.1.1",
   "main": "lib/cjs/index.js",
