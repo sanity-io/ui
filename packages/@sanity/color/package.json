@@ -17,7 +17,7 @@
     "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
     "copy:dts:es": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "generate": "node -r esbuild-register scripts/generate.ts",
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint . --ext .js,.ts --quiet",
     "prebuild": "yarn clean && yarn generate",
     "type-check": "tsc -b",
     "watch": "run-p watch:*",

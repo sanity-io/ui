@@ -7,7 +7,7 @@
     "build": "vite build",
     "clean": "rimraf public",
     "dev": "vite",
-    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "type-check": "tsc --noEmit"
   },
@@ -23,6 +23,6 @@
   "devDependencies": {
     "@types/qs": "^6.9.6",
     "@vitejs/plugin-react-refresh": "^1.3.3",
-    "vite": "^2.3.6"
+    "vite": "^2.3.7"
   }
 }

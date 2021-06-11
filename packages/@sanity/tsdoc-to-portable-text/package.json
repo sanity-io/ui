@@ -22,14 +22,14 @@
     "copy:dts:esm": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "copy:json:cjs": "cpx 'src/**/*.json' lib/cjs",
     "copy:json:esm": "cpx 'src/**/*.json' lib/esm",
-    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx",
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "test": "jest",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@microsoft/api-extractor": "^7.15.2",
-    "@microsoft/api-extractor-model": "^7.13.2",
+    "@microsoft/api-extractor": "^7.16.1",
+    "@microsoft/api-extractor-model": "^7.13.3",
     "@microsoft/tsdoc": "^0.13.2",
     "@types/cpx": "^1.5.1",
     "chalk": "^4.1.1",
