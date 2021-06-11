@@ -119,6 +119,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
           penumbra: black,
           ambient: black,
         },
+        skeleton: {
+          from: dark ? white : black,
+          to: dark ? white : black,
+        },
       }
     }
 
@@ -137,6 +141,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         umbra: black,
         penumbra: black,
         ambient: black,
+      },
+      skeleton: {
+        from: dark ? white : black,
+        to: dark ? white : black,
       },
     }
   },
@@ -203,7 +211,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
     return solid
   },
 
-  card: () => {
+  card: ({base}) => {
     return {
       bg: black,
       fg: black,
@@ -221,6 +229,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         bg: black,
         fg: black,
       },
+      skeleton: base.skeleton,
     }
   },
 
