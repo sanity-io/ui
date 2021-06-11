@@ -121,7 +121,7 @@ export function TreeItem(
     ...restProps
   } = props
   const rootRef = useRef<HTMLLIElement | null>(null)
-  const treeitemRef = useRef<HTMLElement | null>(null)
+  const treeitemRef = useRef<HTMLAnchorElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const id = useId(idProp) || idProp
