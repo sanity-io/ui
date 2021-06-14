@@ -11,7 +11,7 @@ import {
   Text,
 } from '@sanity/ui'
 import {defineScope, useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
+import React, {useCallback, useRef} from 'react'
 import styled from 'styled-components'
 
 export default defineScope('primitives/button', 'Button', [
@@ -21,6 +21,7 @@ export default defineScope('primitives/button', 'Button', [
   {name: 'stacked', title: 'Stacked', component: StackedStory},
   {name: 'custom', title: 'Custom', component: CustomStory},
   {name: 'mixed-children', title: 'Mixed children', component: MixedChildrenStory},
+  {name: 'upload-button', title: 'Upload button', component: UploadButtonStory},
 ])
 
 const BUTTON_MODE_OPTIONS: {[key: string]: ButtonMode} = {
@@ -208,6 +209,32 @@ function MixedChildrenStory() {
       <Button fontSize={[2, 2, 3]} icon={AddIcon} mode="ghost" padding={[3, 3, 4]} text="Create">
         <span style={{display: 'none'}}>test</span>
       </Button>
+    </Flex>
+  )
+}
+
+function UploadButtonStory() {
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      inputRef.current?.click()
+    }
+  }, [])
+
+  return (
+    <Flex align="center" height="fill" htmlFor="file" justify="center">
+      <Button
+        as="label"
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        text={
+          <>
+            Upload
+            <input id="file" ref={inputRef} type="file" style={{display: 'none'}} />
+          </>
+        }
+      />
     </Flex>
   )
 }
