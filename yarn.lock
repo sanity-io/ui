@@ -2870,9 +2870,9 @@
     styled-components "^5.2.1"
 
 "@sanity/default-login@^2.10.5":
-  version "2.10.5"
-  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.10.5.tgz#f33cad5e59c742bad9a618d1269d8b81e661de8a"
-  integrity sha512-5vWmKIIsSVIrfJpr3BtZO7BP2EtuXpIXE+UyjAl2nSLbAGzHopY24jz29RVR9fT6PapMX+aODAi5g6pm0frcfQ==
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.11.1.tgz#e3d4db645ad248fa755aede637d432c92a8f52d0"
+  integrity sha512-EXy3xeg/mqxpGuHKlAZoK98cCNh6HwcnowLqTD4fRvkq36fAEf8cf/STQLmttM60zAXdSg1mz+dDbHzodDaDiw==
   dependencies:
     "@sanity/generate-help-url" "2.2.6"
     prop-types "^15.6.0"
@@ -16813,14 +16813,7 @@ rxjs-exhaustmap-with-trailing@^1.0.0:
   resolved "https://registry.yarnpkg.com/rxjs-exhaustmap-with-trailing/-/rxjs-exhaustmap-with-trailing-1.0.1.tgz#de6c1126b30b539574b869072a6f8ff978a96736"
   integrity sha512-hs0+hC3F4/W7PFjxiHiguZ+mor4+CNOqXynsS4CxJvHMLrcAGQC+HYQBBRCUudi5AZmN3wC5qvizJd+tp5n0sQ==
 
-rxjs@^6.4.0, rxjs@^6.5.3, rxjs@^6.6.0, rxjs@^6.6.3:
-  version "6.6.6"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.6.tgz#14d8417aa5a07c5e633995b525e1e3c0dec03b70"
-  integrity sha512-/oTwee4N4iWzAMAL9xdGKjkEHmIwupR3oXbQjCKywF1BeFohswF3vZdogbmEF6pZkOsXTzWkrZszrWpQTByYVg==
-  dependencies:
-    tslib "^1.9.0"
-
-rxjs@^6.6.7:
+rxjs@^6.4.0, rxjs@^6.5.3, rxjs@^6.6.0, rxjs@^6.6.3, rxjs@^6.6.7:
   version "6.6.7"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.7.tgz#90ac018acabf491bf65044235d5863c4dab804c9"
   integrity sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==
