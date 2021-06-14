@@ -90,7 +90,7 @@ export const Button = forwardRef(function Button(
 
   const boxProps = useMemo(
     () => ({
-      flex: 1,
+      // flex: 1,
       padding,
       paddingX,
       paddingY,
@@ -121,7 +121,7 @@ export const Button = forwardRef(function Button(
         </LoadingBox>
       )}
 
-      {(icon || text || iconRight) && (
+      {!children && (icon || text || iconRight) && (
         <Box as="span" {...boxProps}>
           <Flex as="span" justify={justify}>
             {icon && (
