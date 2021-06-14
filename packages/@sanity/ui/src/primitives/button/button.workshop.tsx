@@ -1,4 +1,4 @@
-import {icons, IconSymbol} from '@sanity/icons'
+import {AddIcon, icons, IconSymbol} from '@sanity/icons'
 import {
   Button,
   ButtonMode,
@@ -20,6 +20,7 @@ export default defineScope('primitives/button', 'Button', [
   {name: 'styled-2', title: 'Styled #2', component: StyledButton2Story},
   {name: 'stacked', title: 'Stacked', component: StackedStory},
   {name: 'custom', title: 'Custom', component: CustomStory},
+  {name: 'mixed-children', title: 'Mixed children', component: MixedChildrenStory},
 ])
 
 const BUTTON_MODE_OPTIONS: {[key: string]: ButtonMode} = {
@@ -196,6 +197,16 @@ function CustomStory() {
     <Flex align="center" height="fill" justify="center">
       <Button padding={2}>
         <Text>Custom button</Text>
+      </Button>
+    </Flex>
+  )
+}
+
+function MixedChildrenStory() {
+  return (
+    <Flex align="center" height="fill" justify="center">
+      <Button fontSize={[2, 2, 3]} icon={AddIcon} mode="ghost" padding={[3, 3, 4]} text="Create">
+        <span style={{display: 'none'}}>test</span>
       </Button>
     </Flex>
   )
