@@ -1,9 +1,11 @@
+import {CalendarIcon} from '@sanity/icons'
 import {
   Box,
   Button,
   Card,
   Container,
   Flex,
+  Inline,
   LayerProvider,
   Placement,
   Popover,
@@ -11,10 +13,19 @@ import {
   Stack,
   Text,
   ThemeColorToneKey,
+  useClickOutside,
   useLayer,
 } from '@sanity/ui'
 import {defineScope, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
+export default defineScope('primitives/popover', 'Popover', [
+  {name: 'plain', title: 'Plain', component: PlainStory},
+  {name: 'recursive', title: 'Recursive', component: RecursiveStory},
+  {name: 'match-ref-width', title: 'Match reference width', component: MatchReferenceWidthStory},
+  {name: 'margins', title: 'Margins', component: MarginsStory},
+  {name: 'right-aligned', title: 'Right-aligned', component: RightAlignedStory},
+])
 
 const SPACE_OPTIONS = {
   '0': 0,
@@ -60,13 +71,6 @@ const WIDTH_OPTIONS: {[key: string]: 'auto' | number} = {
   '3': 3,
   '4': 4,
 }
-
-export default defineScope('primitives/popover', 'Popover', [
-  {name: 'plain', title: 'Plain', component: PlainStory},
-  {name: 'recursive', title: 'Recursive', component: RecursiveStory},
-  {name: 'match-ref-width', title: 'Match reference width', component: MatchReferenceWidthStory},
-  {name: 'margins', title: 'Margins', component: MarginsStory},
-])
 
 function PlainStory() {
   const arrow = useBoolean('Arrow', true, 'Props')
@@ -235,6 +239,36 @@ function MarginsStory() {
             </Text>
           </Card>
         </Container>
+      </Popover>
+    </Flex>
+  )
+}
+
+function RightAlignedStory() {
+  const [open, setOpen] = useState(false)
+  const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
+  const content = (
+    <Box padding={3}>
+      <Inline space={3}>
+        <Text>Popover</Text>
+        <Text>Popover</Text>
+        <Text>Popover</Text>
+        <Text>Popover</Text>
+        <Text>Popover</Text>
+        <Text>Popover</Text>
+      </Inline>
+    </Box>
+  )
+
+  const handleOpen = useCallback(() => setOpen(true), [])
+  const handleClose = useCallback(() => setOpen(false), [])
+
+  useClickOutside(handleClose, [popoverElement])
+
+  return (
+    <Flex justify="flex-end" padding={[4, 5, 6]}>
+      <Popover content={content} open={open} portal preventOverflow ref={setPopoverElement}>
+        <Button icon={CalendarIcon} mode="ghost" onClick={handleOpen} selected={open} />
       </Popover>
     </Flex>
   )
