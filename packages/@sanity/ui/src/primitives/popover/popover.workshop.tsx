@@ -74,50 +74,60 @@ const WIDTH_OPTIONS: {[key: string]: 'auto' | number} = {
 
 function PlainStory() {
   const arrow = useBoolean('Arrow', true, 'Props')
+  const boundaryElementFlag = useBoolean('Boundary element', true, 'Props')
   const content = useText('Content', 'Hello, world', 'Props')
-  const constrainSize = useBoolean('Constrain size', false, 'Props')
+  const constrainSize = useBoolean('Constrain size', true, 'Props')
   const matchReferenceWidth = useBoolean('Match reference width', false, 'Props')
   const open = useBoolean('Open', true, 'Props')
   const padding = useSelect('Padding', SPACE_OPTIONS, 3, 'Props')
   const placement = useSelect('Placement', PLACEMENT_OPTIONS, 'bottom', 'Props')
   const portal = useBoolean('Portal', true, 'Props')
-  const preventOverflow = useBoolean('Prevent overflow', false, 'Props')
+  const preventOverflow = useBoolean('Prevent overflow', true, 'Props')
   const radius = useSelect('Radius', RADIUS_OPTIONS, 2, 'Props')
   const width = useSelect('Width', WIDTH_OPTIONS, 'auto', 'Props')
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (
     <PortalProvider element={portalElement}>
+      <Text muted size={1} style={{position: 'absolute', top: 40, left: 60}}>
+        Scroll this box to reveal the popover
+      </Text>
       <div
+        ref={setBoundaryElement}
         style={{
           height: 'calc(100vh - 120px)',
           position: 'relative',
           margin: 60,
           overflow: 'auto',
           outline: '1px solid red',
-          width: '100%',
+          width: 'calc(100vw - 120px)',
         }}
       >
-        <Card padding={4} style={{padding: '150vh 0', textAlign: 'center'}}>
-          <Popover
-            __unstable_margins={[1, 1, 1, 1]}
-            arrow={arrow}
-            content={<Text>{content}</Text>}
-            constrainSize={constrainSize}
-            matchReferenceWidth={matchReferenceWidth}
-            open={open}
-            padding={padding}
-            placement={placement}
-            portal={portal}
-            preventOverflow={preventOverflow}
-            radius={radius}
-            width={width}
-          >
-            <Button text="This button is the popover reference" />
-          </Popover>
+        <Card padding={4} style={{textAlign: 'center'}}>
+          <div style={{padding: '150vh 0'}}>
+            <Popover
+              __unstable_margins={[1, 1, 1, 1]}
+              arrow={arrow}
+              boundaryElement={boundaryElementFlag ? boundaryElement : undefined}
+              content={<Text>{content}</Text>}
+              constrainSize={constrainSize}
+              fallbackPlacements={['top', 'bottom']}
+              matchReferenceWidth={matchReferenceWidth}
+              open={open}
+              padding={padding}
+              placement={placement}
+              portal={portal}
+              preventOverflow={preventOverflow}
+              radius={radius}
+              width={width}
+            >
+              <Button text="This button is the popover reference" />
+            </Popover>
+          </div>
         </Card>
-        <div ref={setPortalElement} />
       </div>
+      <div ref={setPortalElement} />
     </PortalProvider>
   )
 }
@@ -172,6 +182,7 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       content={<RecursiveExample onClose={handleClose} />}
       open={open}
       placement={fallbackPlacements[3]}
+      portal
       tone={tones[seed]}
     >
       <Button
