@@ -51,6 +51,7 @@ const Root = styled(Layer)<{$preventOverflow?: boolean}>(
     pointer-events: none;
     display: flex;
     flex-direction: column;
+    max-width: calc(100% - 16px);
 
     & > * {
       min-height: 0;
