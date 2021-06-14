@@ -24,7 +24,7 @@
     "copy:json:esm": "cpx 'src/**/*.json' lib/esm",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
-    "test": "jest",
+    "test": "jest --runInBand",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
