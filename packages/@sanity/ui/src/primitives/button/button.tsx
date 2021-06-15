@@ -121,7 +121,7 @@ export const Button = forwardRef(function Button(
         </LoadingBox>
       )}
 
-      {!children && (icon || text || iconRight) && (
+      {(icon || text || iconRight) && (
         <Box as="span" {...boxProps}>
           <Flex as="span" justify={justify}>
             {icon && (
