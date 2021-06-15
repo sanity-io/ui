@@ -9,6 +9,7 @@ import {
   Popover,
   Stack,
   Text,
+  ThemeProvider,
   Tooltip,
   Tree,
   TreeItem,
@@ -20,10 +21,25 @@ import {defineScope} from '@sanity/ui-workshop'
 import React, {useCallback, useState} from 'react'
 
 export default defineScope('theme', 'Theme', [
+  {name: 'nested-provider', title: 'Nested provider', component: NestedProviderStory},
   {name: 'layer', title: 'Layer', component: LayerStory},
   {name: 'color', title: 'Color', component: ColorStory},
   {name: 'context', title: 'Context', component: ContextStory},
 ])
+
+function NestedProviderStory() {
+  return (
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <ThemeProvider>
+        <Card padding={[3, 4, 5]} radius={3} tone="primary">
+          <Text>
+            This card is wrapped in a nested <code>ThemeProvider</code>
+          </Text>
+        </Card>
+      </ThemeProvider>
+    </Flex>
+  )
+}
 
 function LayerStory() {
   const [dialogOpen, setDialogOpen] = useState(false)
