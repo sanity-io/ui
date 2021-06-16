@@ -5,7 +5,11 @@
     "rootDir": "../../../",
     "outDir": "./lib/dts/",
     "jsx": "react",
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@sanity/ui": ["./src"]
+    }
   },
   "references": [
     {"path": "../color/tsconfig.lib.json"},
