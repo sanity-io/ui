@@ -86,6 +86,9 @@ export interface ThemeColorCardState {
     bg: string
     fg: string
   }
+  /**
+   * @beta
+   */
   skeleton?: {
     from: string
     to: string
@@ -117,6 +120,9 @@ export interface ThemeColorBase {
     penumbra: string
     ambient: string
   }
+  /**
+   * @beta
+   */
   skeleton?: {
     from: string
     to: string
@@ -130,6 +136,13 @@ export interface ThemeColorGenericState {
   bg: string
   border: string
   fg: string
+  /**
+   * @beta
+   */
+  skeleton: {
+    from: string
+    to: string
+  }
 }
 
 /**

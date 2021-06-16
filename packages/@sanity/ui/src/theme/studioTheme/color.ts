@@ -13,6 +13,8 @@ const tones: {[key: string]: ColorTints} = {
 
 export const color = createColorTheme({
   base: ({dark, name}) => {
+    const mix = dark ? screen : multiply
+
     if (name === 'default') {
       return {
         fg: dark ? white.hex : black.hex,
@@ -27,17 +29,18 @@ export const color = createColorTheme({
         },
         skeleton: {
           from: dark ? hues.gray[900].hex : hues.gray[100].hex,
-          to: rgba(dark ? hues.gray[900].hex : hues.gray[100].hex, 0.5),
+          to: dark ? hues.gray[950].hex : hues.gray[50].hex,
         },
       }
     }
 
     if (name === 'transparent') {
       const tints = tones.default
+      const bg = tints[dark ? 950 : 50].hex
 
       return {
         fg: tints[dark ? 100 : 900].hex,
-        bg: tints[dark ? 950 : 50].hex,
+        bg,
         border: tints[dark ? 800 : 300].hex,
         focusRing: hues.blue[500].hex,
         shadow: {
@@ -47,17 +50,18 @@ export const color = createColorTheme({
           ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
         },
         skeleton: {
-          from: dark ? tints[800].hex : tints[200].hex,
-          to: rgba(dark ? tints[800].hex : tints[200].hex, 0.5),
+          from: mix(bg, dark ? hues.gray[900].hex : hues.gray[100].hex),
+          to: mix(bg, dark ? hues.gray[950].hex : hues.gray[50].hex),
         },
       }
     }
 
     const tints = tones[name] || tones.default
+    const bg = tints[dark ? 950 : 50].hex
 
     return {
       fg: tints[dark ? 100 : 900].hex,
-      bg: tints[dark ? 950 : 50].hex,
+      bg,
       border: tints[dark ? 800 : 200].hex,
       focusRing: tints[500].hex,
       shadow: {
@@ -67,8 +71,8 @@ export const color = createColorTheme({
         ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
       },
       skeleton: {
-        from: dark ? tints[800].hex : tints[200].hex,
-        to: rgba(dark ? tints[800].hex : tints[200].hex, 0.5),
+        from: mix(bg, dark ? hues.gray[900].hex : hues.gray[100].hex),
+        to: mix(bg, dark ? hues.gray[950].hex : hues.gray[50].hex),
       },
     }
   },
@@ -82,6 +86,10 @@ export const color = createColorTheme({
         bg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
         border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        skeleton: {
+          from: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+          to: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
+        },
       }
     }
 
@@ -90,6 +98,10 @@ export const color = createColorTheme({
         bg: mix(base.bg, tints[dark ? 300 : 600].hex),
         border: mix(base.bg, tints[dark ? 300 : 600].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        skeleton: {
+          from: mix(base.bg, hues.gray[dark ? 400 : 500].hex),
+          to: mix(base.bg, hues.gray[dark ? 500 : 400].hex),
+        },
       }
     }
 
@@ -98,6 +110,10 @@ export const color = createColorTheme({
         bg: mix(base.bg, tints[dark ? 200 : 800].hex),
         border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        skeleton: {
+          from: mix(base.bg, hues.gray[dark ? 300 : 900].hex),
+          to: mix(base.bg, hues.gray[dark ? 400 : 800].hex),
+        },
       }
     }
 
@@ -106,6 +122,10 @@ export const color = createColorTheme({
         bg: mix(base.bg, tints[dark ? 200 : 800].hex),
         border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        skeleton: {
+          from: mix(base.bg, hues.gray[dark ? 300 : 900].hex),
+          to: mix(base.bg, hues.gray[dark ? 400 : 800].hex),
+        },
       }
     }
 
@@ -114,6 +134,10 @@ export const color = createColorTheme({
       bg: mix(base.bg, tints[dark ? 400 : 500].hex),
       border: mix(base.bg, tints[dark ? 400 : 500].hex),
       fg: mix(base.bg, dark ? black.hex : white.hex),
+      skeleton: {
+        from: mix(base.bg, hues.gray[dark ? 500 : 400].hex),
+        to: mix(base.bg, hues.gray[dark ? 600 : 300].hex),
+      },
     }
   },
 
@@ -122,41 +146,71 @@ export const color = createColorTheme({
     const tints = tones[tone] || tones.default
 
     if (state === 'disabled') {
+      const bg = mix(base.bg, hues.gray[dark ? 950 : 50].hex)
+
       return {
-        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
+        bg,
         border: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
         fg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        skeleton: {
+          from: mix(bg, dark ? hues.gray[900].hex : hues.gray[100].hex),
+          to: mix(bg, dark ? hues.gray[950].hex : hues.gray[50].hex),
+        },
       }
     }
 
     if (state === 'hovered') {
+      const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
+
       return {
-        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        bg,
         border: mix(base.bg, tints[dark ? 950 : 50].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
+        skeleton: {
+          from: mix(bg, dark ? tints[900].hex : tints[100].hex),
+          to: mix(bg, dark ? tints[950].hex : tints[50].hex),
+        },
       }
     }
 
     if (state === 'pressed') {
+      const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+
       return {
-        bg: mix(base.bg, tints[dark ? 900 : 100].hex),
+        bg,
         border: mix(base.bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
+        skeleton: {
+          from: mix(bg, dark ? tints[900].hex : tints[100].hex),
+          to: mix(bg, dark ? tints[950].hex : tints[50].hex),
+        },
       }
     }
 
     if (state === 'selected') {
+      const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+
       return {
-        bg: mix(base.bg, tints[dark ? 900 : 100].hex),
+        bg,
         border: mix(base.bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
+        skeleton: {
+          from: mix(bg, dark ? tints[900].hex : tints[100].hex),
+          to: mix(bg, dark ? tints[950].hex : tints[50].hex),
+        },
       }
     }
 
+    const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+
     return {
-      bg: mix(base.bg, tints[dark ? 900 : 100].hex),
+      bg,
       border: mix(base.bg, tints[dark ? 900 : 100].hex),
       fg: mix(base.bg, tints[dark ? 300 : 700].hex),
+      skeleton: {
+        from: mix(bg, dark ? tints[900].hex : tints[100].hex),
+        to: mix(bg, dark ? tints[950].hex : tints[50].hex),
+      },
     }
   },
 
@@ -246,13 +300,13 @@ export const color = createColorTheme({
     if (state === 'selected') {
       mix = dark ? multiply : screen
 
-      const tint = ['default', 'transparent'].includes(name) ? hues.blue : tones[name]
-      const bg = tint[dark ? 400 : 500].hex
+      const tints = ['default', 'transparent'].includes(name) ? hues.blue : tones[name]
+      const bg = tints[dark ? 400 : 500].hex
 
       return {
         bg,
         fg: dark ? black.hex : white.hex,
-        border: tint[dark ? 300 : 400].hex,
+        border: tints[dark ? 300 : 400].hex,
         muted: {
           fg: mix(bg, hues.gray[dark ? 600 : 300].hex),
         },
@@ -266,7 +320,10 @@ export const color = createColorTheme({
           bg: mix(bg, hues.gray[dark ? 50 : 950].hex),
           fg: mix(bg, hues.gray[dark ? 600 : 300].hex),
         },
-        skeleton: base.skeleton,
+        skeleton: {
+          from: mix(bg, dark ? tints[200].hex : tints[800].hex),
+          to: mix(bg, dark ? tints[100].hex : tints[900].hex),
+        },
       }
     }
 
@@ -275,7 +332,6 @@ export const color = createColorTheme({
 
       return {
         ...muted.hovered,
-        // fg: base.fg,
         border: mix(bg, base.border),
         muted: {
           fg: mix(bg, hues.gray[dark ? 400 : 700].hex),
@@ -288,9 +344,8 @@ export const color = createColorTheme({
         },
         code: {
           bg: mix(bg, hues.gray[dark ? 950 : 50].hex),
-          fg: hues.gray[dark ? 400 : 600].hex,
+          fg: mix(bg, hues.gray[dark ? 400 : 600].hex),
         },
-        skeleton: base.skeleton,
       }
     }
 
@@ -311,7 +366,6 @@ export const color = createColorTheme({
           bg: mix(muted.pressed.bg, hues.gray[dark ? 950 : 50].hex),
           fg: hues.gray[dark ? 400 : 700].hex,
         },
-        skeleton: base.skeleton,
       }
     }
 
@@ -331,7 +385,6 @@ export const color = createColorTheme({
           bg: 'transparent',
           fg: muted.disabled.fg,
         },
-        skeleton: base.skeleton,
       }
     }
 

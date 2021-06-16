@@ -157,6 +157,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         bg: dark ? color.light : color.dark,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.darkest : color.lightest,
+        skeleton: {
+          from: dark ? white : black,
+          to: dark ? white : black,
+        },
       }
     }
 
@@ -164,6 +168,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       bg: color.base,
       border: dark ? color.light : color.dark,
       fg: dark ? color.darkest : color.lightest,
+      skeleton: {
+        from: dark ? white : black,
+        to: dark ? white : black,
+      },
     }
   },
 
@@ -175,6 +183,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         bg: dark ? color.darker : color.lighter,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.lightest : color.darkest,
+        skeleton: {
+          from: dark ? white : black,
+          to: dark ? white : black,
+        },
       }
     }
 
@@ -182,6 +194,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       bg: dark ? color.darkest : color.lightest,
       border: dark ? color.darker : color.lighter,
       fg: dark ? color.lighter : color.darker,
+      skeleton: {
+        from: dark ? white : black,
+        to: dark ? white : black,
+      },
     }
   },
 
