@@ -282,20 +282,50 @@ function AsButtonStory() {
   )
 }
 
+function ExamplePreview(props: {loading?: boolean}) {
+  const {loading} = props
+
+  return (
+    <Flex align="center" gap={3}>
+      <Skeleton style={{width: 35, height: 35}} />
+      <Stack flex={1} space={2}>
+        {loading ? <TextSkeleton animated /> : <Text>Title</Text>}
+        {loading ? (
+          <TextSkeleton animated size={1} />
+        ) : (
+          <Text muted size={1}>
+            Subtitle
+          </Text>
+        )}
+      </Stack>
+    </Flex>
+  )
+}
+
+function PaneItem(props: {
+  active?: boolean
+  children?: React.ReactNode
+  onClick: () => void
+  selected: boolean
+}) {
+  const {active, children, onClick, selected} = props
+
+  const card = (
+    <Card as="button" onClick={onClick} padding={3} radius={2} selected={selected} tone="inherit">
+      {children}
+    </Card>
+  )
+
+  if (active && selected) {
+    return <div aria-selected>{card}</div>
+  }
+
+  return card
+}
+
 function SelectableItemsStory() {
   const tone = useSelect('Tone', CARD_TONE_OPTIONS, 'default', 'Props')
-
-  function Preview() {
-    return (
-      <Flex align="center" gap={3}>
-        <Skeleton style={{width: 35, height: 35}} />
-        <Stack flex={1} space={2}>
-          <TextSkeleton />
-          <TextSkeleton size={1} />
-        </Stack>
-      </Flex>
-    )
-  }
+  const loading = useBoolean('Loading', false, 'Props')
 
   const [list1Id, setList1Id] = useState('e')
 
@@ -316,130 +346,46 @@ function SelectableItemsStory() {
     <Flex height="fill">
       <Card flex={1} tone={tone}>
         <Stack padding={2} space={1}>
-          <Card
-            as="button"
-            onClick={() => list1.select('a')}
-            padding={3}
-            radius={2}
-            selected={list1Id === 'a'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list1.select('b')}
-            padding={3}
-            radius={2}
-            selected={list1Id === 'b'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list1.select('c')}
-            padding={3}
-            radius={2}
-            selected={list1Id === 'c'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list1.select('d')}
-            padding={3}
-            radius={2}
-            selected={list1Id === 'd'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list1.select('e')}
-            padding={3}
-            radius={2}
-            selected={list1Id === 'e'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list1.select('f')}
-            padding={3}
-            radius={2}
-            selected={list1Id === 'f'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
+          <PaneItem onClick={() => list1.select('a')} selected={list1Id === 'a'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem onClick={() => list1.select('b')} selected={list1Id === 'b'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem onClick={() => list1.select('c')} selected={list1Id === 'c'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem onClick={() => list1.select('d')} selected={list1Id === 'd'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem onClick={() => list1.select('e')} selected={list1Id === 'e'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem onClick={() => list1.select('f')} selected={list1Id === 'f'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
         </Stack>
       </Card>
       <Card borderLeft flex={1} tone={tone}>
         <Stack padding={2} space={1}>
-          <Card
-            as="button"
-            onClick={() => list2.select('a')}
-            padding={3}
-            radius={2}
-            selected={list2Id === 'a'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list2.select('b')}
-            padding={3}
-            radius={2}
-            selected={list2Id === 'b'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list2.select('c')}
-            padding={3}
-            radius={2}
-            selected={list2Id === 'c'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list2.select('d')}
-            padding={3}
-            radius={2}
-            selected={list2Id === 'd'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list2.select('e')}
-            padding={3}
-            radius={2}
-            selected={list2Id === 'e'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
-          <Card
-            as="button"
-            onClick={() => list2.select('f')}
-            padding={3}
-            radius={2}
-            selected={list2Id === 'f'}
-            tone="inherit"
-          >
-            <Preview />
-          </Card>
+          <PaneItem active onClick={() => list2.select('a')} selected={list2Id === 'a'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem active onClick={() => list2.select('b')} selected={list2Id === 'b'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem active onClick={() => list2.select('c')} selected={list2Id === 'c'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem active onClick={() => list2.select('d')} selected={list2Id === 'd'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem active onClick={() => list2.select('e')} selected={list2Id === 'e'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
+          <PaneItem active onClick={() => list2.select('f')} selected={list2Id === 'f'}>
+            <ExamplePreview loading={loading} />
+          </PaneItem>
         </Stack>
       </Card>
     </Flex>
