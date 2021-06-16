@@ -3113,12 +3113,12 @@
     type-of-is "^3.5.1"
 
 "@sanity/vision@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.11.0.tgz#84b540b6fe85ab4e050189853e7229cf1c6d977e"
-  integrity sha512-T6FB4i/OlprWaVfuv12B2SF90M6Brc5FSt1i/qqq253zAxNJh19BY+kB1ZGzuegokQzB3ZBHZY0kwC0MsH39Gg==
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.11.2.tgz#41ae196e3c4bd4b52d2244c14d669a4a2a57cd5f"
+  integrity sha512-2xeRI5HxeEhq5yYJ49PnnjzQ+QDpOQjzWjUS5Un33yF8SwHKfJeFXofA4UzB3G3sTINGR2bJ+EG/qradTpBDFg==
   dependencies:
     "@sanity/icons" "^1.1.2"
-    "@sanity/ui" "^0.34.2"
+    "@sanity/ui" "^0.34.3"
     classnames "^2.2.5"
     codemirror "^5.47.0"
     moment "^2.19.1"
