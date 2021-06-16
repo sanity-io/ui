@@ -4,13 +4,15 @@ import {
   Container,
   Flex,
   Grid,
+  Layer,
   Skeleton,
   Stack,
   Text,
+  TextInput,
   TextSkeleton,
 } from '@sanity/ui'
 import {defineScope, useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 
 export default defineScope('primitives/card', 'Card', [
@@ -286,12 +288,18 @@ function ExamplePreview(props: {loading?: boolean}) {
   const {loading} = props
 
   return (
-    <Flex align="center" gap={3}>
-      <Skeleton style={{width: 35, height: 35}} />
+    <Flex align="center" gap={2}>
+      <Skeleton radius={1} style={{width: 33, height: 33}} />
       <Stack flex={1} space={2}>
-        {loading ? <TextSkeleton animated /> : <Text>Title</Text>}
         {loading ? (
-          <TextSkeleton animated size={1} />
+          <TextSkeleton animated style={{width: '50%'}} />
+        ) : (
+          <Text size={1} weight="medium">
+            Title
+          </Text>
+        )}
+        {loading ? (
+          <TextSkeleton animated size={1} style={{width: '60%'}} />
         ) : (
           <Text muted size={1}>
             Subtitle
@@ -311,7 +319,7 @@ function PaneItem(props: {
   const {active, children, onClick, selected} = props
 
   const card = (
-    <Card as="button" onClick={onClick} padding={3} radius={2} selected={selected} tone="inherit">
+    <Card as="button" onClick={onClick} padding={2} radius={2} selected={selected} tone="inherit">
       {children}
     </Card>
   )
@@ -323,11 +331,50 @@ function PaneItem(props: {
   return card
 }
 
+function DocumentPane(props: {id: string | null; tone?: CardTone}) {
+  const {id, tone} = props
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [id])
+
+  return (
+    <Card borderLeft flex={1.5} height="fill" overflow="hidden" tone={tone}>
+      <Flex direction="column" height="fill">
+        <Layer zOffset={1000}>
+          <Card padding={4} shadow={1} tone="inherit">
+            <Text weight="semibold">Document ({id})</Text>
+          </Card>
+        </Layer>
+
+        <Stack
+          as="form"
+          flex={1}
+          overflow="auto"
+          paddingX={4}
+          paddingTop={5}
+          paddingBottom={9}
+          space={5}
+        >
+          <Stack space={3}>
+            <Text size={1} weight="medium">
+              Title
+            </Text>
+            <TextInput ref={inputRef} />
+          </Stack>
+        </Stack>
+      </Flex>
+    </Card>
+  )
+}
+
 function SelectableItemsStory() {
   const tone = useSelect('Tone', CARD_TONE_OPTIONS, 'default', 'Props')
   const loading = useBoolean('Loading', false, 'Props')
 
-  const [list1Id, setList1Id] = useState('e')
+  const [list1Id, setList1Id] = useState<string | null>(null)
+  const [list2Id, setList2Id] = useState<string | null>(null)
 
   const list1 = {
     select: useCallback((id) => {
@@ -336,16 +383,17 @@ function SelectableItemsStory() {
     }, []),
   }
 
-  const [list2Id, setList2Id] = useState(null)
-
   const list2 = {
     select: useCallback((id) => setList2Id(id), []),
   }
 
   return (
     <Flex height="fill">
-      <Card flex={1} tone={tone}>
-        <Stack padding={2} space={1}>
+      <Card flex={1} overflow="hidden" tone={tone}>
+        <Card padding={4} shadow={1} tone="inherit">
+          <Text weight="semibold">List</Text>
+        </Card>
+        <Stack padding={3} space={1}>
           <PaneItem onClick={() => list1.select('a')} selected={list1Id === 'a'}>
             <ExamplePreview loading={loading} />
           </PaneItem>
@@ -366,28 +414,34 @@ function SelectableItemsStory() {
           </PaneItem>
         </Stack>
       </Card>
-      <Card borderLeft flex={1} tone={tone}>
-        <Stack padding={2} space={1}>
-          <PaneItem active onClick={() => list2.select('a')} selected={list2Id === 'a'}>
-            <ExamplePreview loading={loading} />
-          </PaneItem>
-          <PaneItem active onClick={() => list2.select('b')} selected={list2Id === 'b'}>
-            <ExamplePreview loading={loading} />
-          </PaneItem>
-          <PaneItem active onClick={() => list2.select('c')} selected={list2Id === 'c'}>
-            <ExamplePreview loading={loading} />
-          </PaneItem>
-          <PaneItem active onClick={() => list2.select('d')} selected={list2Id === 'd'}>
-            <ExamplePreview loading={loading} />
-          </PaneItem>
-          <PaneItem active onClick={() => list2.select('e')} selected={list2Id === 'e'}>
-            <ExamplePreview loading={loading} />
-          </PaneItem>
-          <PaneItem active onClick={() => list2.select('f')} selected={list2Id === 'f'}>
-            <ExamplePreview loading={loading} />
-          </PaneItem>
-        </Stack>
-      </Card>
+      {list1Id && (
+        <Card borderLeft flex={1} overflow="hidden" tone={tone}>
+          <Card padding={4} shadow={1} tone="inherit">
+            <Text weight="semibold">Document list ({list1Id})</Text>
+          </Card>
+          <Stack padding={3} space={1}>
+            <PaneItem active onClick={() => list2.select('a')} selected={list2Id === 'a'}>
+              <ExamplePreview loading={loading} />
+            </PaneItem>
+            <PaneItem active onClick={() => list2.select('b')} selected={list2Id === 'b'}>
+              <ExamplePreview loading={loading} />
+            </PaneItem>
+            <PaneItem active onClick={() => list2.select('c')} selected={list2Id === 'c'}>
+              <ExamplePreview loading={loading} />
+            </PaneItem>
+            <PaneItem active onClick={() => list2.select('d')} selected={list2Id === 'd'}>
+              <ExamplePreview loading={loading} />
+            </PaneItem>
+            <PaneItem active onClick={() => list2.select('e')} selected={list2Id === 'e'}>
+              <ExamplePreview loading={loading} />
+            </PaneItem>
+            <PaneItem active onClick={() => list2.select('f')} selected={list2Id === 'f'}>
+              <ExamplePreview loading={loading} />
+            </PaneItem>
+          </Stack>
+        </Card>
+      )}
+      {list2Id && <DocumentPane id={list2Id} tone={tone} />}
     </Flex>
   )
 }
