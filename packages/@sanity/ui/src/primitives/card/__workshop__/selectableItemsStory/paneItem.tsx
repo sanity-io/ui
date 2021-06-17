@@ -9,15 +9,11 @@ export function PaneItem(props: {
 }) {
   const {active, children, onClick, selected} = props
 
-  const card = (
-    <Card as="button" onClick={onClick} padding={2} radius={2} selected={selected} tone="inherit">
-      {children}
-    </Card>
+  return (
+    <div aria-selected={active && selected}>
+      <Card as="button" onClick={onClick} padding={2} radius={2} selected={selected} tone="inherit">
+        {children}
+      </Card>
+    </div>
   )
-
-  if (active && selected) {
-    return <div aria-selected>{card}</div>
-  }
-
-  return card
 }
