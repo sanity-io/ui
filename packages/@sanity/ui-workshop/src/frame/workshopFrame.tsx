@@ -179,7 +179,8 @@ export function WorkshopFrame(_props: {
                 unregisterProp={unregisterProp}
               >
                 <Card as="main" height="fill" ref={setBoundaryElement}>
-                  {story && createElement(story.component)}
+                  {story?.component && createElement(story?.component)}
+                  {story?.resolveComponent && <AsyncComponent resolve={story?.resolveComponent} />}
                 </Card>
                 <div data-portal="" ref={setPortalElement} />
               </ScopeProvider>
@@ -189,4 +190,25 @@ export function WorkshopFrame(_props: {
       </PortalProvider>
     </BoundaryElementProvider>
   )
+}
+
+function AsyncComponent(props: {
+  resolve: () => Promise<React.ComponentType | {default: React.ComponentType}>
+}) {
+  const {resolve} = props
+  const [component, setComponent] = useState<React.ComponentType | null>(null)
+
+  useEffect(() => {
+    resolve().then((result) => {
+      if (result && typeof result === 'object' && result.default) {
+        setComponent(() => result.default)
+      } else if (typeof result === 'function') {
+        setComponent(result)
+      }
+    })
+  }, [resolve])
+
+  if (!component) return null
+
+  return createElement(component)
 }

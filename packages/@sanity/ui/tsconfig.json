@@ -2,14 +2,12 @@
   "extends": "../../../tsconfig.settings",
   "include": ["./scripts", "./src", "./test", "./typings", "./workshop"],
   "compilerOptions": {
+    "module": "es2020",
     "rootDir": "../../../",
     "outDir": "./lib/dts/",
     "jsx": "react",
     "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@sanity/ui": ["./src"]
-    }
+    "baseUrl": "."
   },
   "references": [
     {"path": "../color/tsconfig.lib.json"},

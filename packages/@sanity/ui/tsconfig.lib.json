@@ -3,6 +3,7 @@
   "include": ["./src", "./typings"],
   "exclude": [
     "./src/**/__fixtures__/*",
+    "./src/**/__workshop__/*",
     "./src/**/*.test.ts",
     "./src/**/*.test.tsx",
     "./src/**/*.workshop.tsx",

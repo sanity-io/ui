@@ -1,7 +1,10 @@
+import React from 'react'
+
 export interface WorkshopStory {
   name: string
   title: string
-  component: React.ComponentType
+  component?: React.ComponentType
+  resolveComponent?: () => Promise<React.ComponentType | {default: React.ComponentType}>
 }
 
 export interface WorkshopScope {
