@@ -29,6 +29,7 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   contentRef?: React.ForwardedRef<HTMLDivElement>
   footer?: React.ReactNode
   header?: React.ReactNode
+  hideCloseButton?: boolean
   id: string
   onClickOutside?: () => void
   onClose?: () => void
@@ -46,6 +47,7 @@ interface DialogCardProps extends ResponsiveWidthProps {
   contentRef?: React.ForwardedRef<HTMLDivElement>
   footer: React.ReactNode
   header: React.ReactNode
+  hideCloseButton?: boolean
   id: string
   onClickOutside?: () => void
   onClose?: () => void
@@ -122,6 +124,7 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
     contentRef,
     footer,
     header,
+    hideCloseButton = false,
     id,
     onClickOutside,
     onClose,
@@ -136,6 +139,7 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
   const {isTopLayer} = layer
 
   const labelId = `${id}_label`
+  const showCloseButton = !hideCloseButton && onClose
 
   useEffect(() => {
     if (!autoFocus) return
@@ -203,15 +207,17 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
                   </Text>
                 )}
               </Box>
-              <Box padding={2}>
-                <Button
-                  aria-label="Close dialog"
-                  icon={CloseIcon}
-                  mode="bleed"
-                  onClick={onClose}
-                  padding={3}
-                />
-              </Box>
+              {showCloseButton && (
+                <Box padding={2}>
+                  <Button
+                    aria-label="Close dialog"
+                    icon={CloseIcon}
+                    mode="bleed"
+                    onClick={onClose}
+                    padding={3}
+                  />
+                </Box>
+              )}
             </Flex>
           </DialogHeader>
 
@@ -243,6 +249,7 @@ export const Dialog = forwardRef(function Dialog(
     contentRef,
     footer,
     header,
+    hideCloseButton = false,
     id,
     onClickOutside,
     onClose,
@@ -301,6 +308,7 @@ export const Dialog = forwardRef(function Dialog(
           contentRef={contentRef}
           footer={footer}
           header={header}
+          hideCloseButton={hideCloseButton}
           id={id}
           onClickOutside={onClickOutside}
           onClose={onClose}
