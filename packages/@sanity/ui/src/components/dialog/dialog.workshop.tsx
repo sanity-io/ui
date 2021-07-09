@@ -53,6 +53,7 @@ function DebugLayer() {
 function PropsStory() {
   const header = useText('Header', 'Props example', 'Props')
   const onClickOutside = useBoolean('Close when click outside', false, 'Props') || false
+  const hideCloseButton = useBoolean('Hide close button', false, 'Props') || false
   const width = useSelect('Width', WIDTH_OPTIONS, 0, 'Props')
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
@@ -80,6 +81,7 @@ function PropsStory() {
             onClose={handleClose}
             open={open}
             width={width}
+            hideCloseButton={hideCloseButton}
           >
             <Box padding={4}>
               <Stack space={4}>
