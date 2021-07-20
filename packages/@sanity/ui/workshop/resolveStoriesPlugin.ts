@@ -7,12 +7,8 @@ import {ResolvedConfig} from 'vite'
 const WORKSHOP_ENV_MODULE_ID = '$workshop'
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace NodeJS {
-    interface Global {
-      $workshopWatcher: chokidar.FSWatcher | undefined
-    }
-  }
+  // eslint-disable-next-line no-var
+  var $workshopWatcher: chokidar.FSWatcher | undefined
 }
 
 function compileModule(paths: string[]) {

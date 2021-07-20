@@ -18,7 +18,7 @@
     "type-check": "tsc -b"
   },
   "dependencies": {
-    "axe-core": "^4.2.2"
+    "axe-core": "^4.3.1"
   },
   "devDependencies": {
     "@sanity/icons": "^1.1.2",
