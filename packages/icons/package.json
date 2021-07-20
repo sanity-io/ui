@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@svgr/core": "^5.5.0",
-    "@types/mkdirp": "^1.0.1",
+    "@types/mkdirp": "^1.0.2",
     "camelcase": "^6.2.0",
     "glob": "^7.1.7",
     "react": "^17.0.2"
