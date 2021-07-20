@@ -4,7 +4,9 @@ import {ThemeProps} from '../types'
 import {ResponsiveGridStyleProps} from './types'
 
 const GRID_CSS = {
-  '&:not([hidden])': {display: 'grid'},
+  '&&:not([hidden])': {
+    display: 'grid',
+  },
   '&[data-as="ul"],&[data-as="ol"]': {
     listStyle: 'none',
   },
