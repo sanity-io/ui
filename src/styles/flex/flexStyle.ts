@@ -3,7 +3,11 @@ import {getResponsiveProp, rem, responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
 
-const BASE_STYLE: CSSObject = {'&:not([hidden])': {display: 'flex'}}
+const BASE_STYLE: CSSObject = {
+  '&&:not([hidden])': {
+    display: 'flex',
+  },
+}
 
 export function responsiveFlexStyle(): Array<
   CSSObject | ((props: ResponsiveFlexStyleProps & ThemeProps) => CSSObject[])

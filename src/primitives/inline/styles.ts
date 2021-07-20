@@ -6,7 +6,7 @@ export function inlineBaseStyle(): CSSObject {
   return {
     lineHeight: 0,
 
-    '&:not([hidden])': {
+    '&&:not([hidden])': {
       display: 'block',
     },
 

@@ -6,7 +6,7 @@ export interface ResponsiveStackSpaceStyleProps {
 }
 
 const BASE_STYLE: CSSObject = {
-  '&:not([hidden])': {
+  '&&:not([hidden])': {
     display: 'grid',
   },
   '&[data-as="ul"],&[data-as="ol"]': {
