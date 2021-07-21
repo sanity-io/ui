@@ -3235,12 +3235,12 @@
     type-of-is "^3.5.1"
 
 "@sanity/vision@^2.13.0":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.13.0.tgz#f9011fdc96c80912c68aebb0b8e9f57cedc2ea53"
-  integrity sha512-sUXJVbwJLUzGlTgXUx2yN1eMqBQylbb/6SHvS5odTbTWHiu6AhberSDEZt2U7+ea6L0o8S+oalfqsEqSFBMtVQ==
+  version "2.13.1"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.13.1.tgz#41a0da01f48b47071b820cd8014a6c9b5af2ba47"
+  integrity sha512-bDIP8fippCaPXCQlKo42+J7D9UNsLfyFVIEiZ6tmATe9ZrzRSurJejKZ2Ix3eRMT02TkkfwpYQhggETOgpeEVw==
   dependencies:
-    "@sanity/icons" "^1.1.2"
-    "@sanity/ui" "^0.34.3"
+    "@sanity/icons" "^1.1.3"
+    "@sanity/ui" "^0.34.5"
     classnames "^2.2.5"
     codemirror "^5.47.0"
     moment "^2.19.1"
@@ -6355,12 +6355,7 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror@^5.47.0:
-  version "5.61.1"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.61.1.tgz#ccfc8a43b8fcfb8b12e8e75b5ffde48d541406e0"
-  integrity sha512-+D1NZjAucuzE93vJGbAaXzvoBHwp9nJZWWWF9utjv25+5AZUiah6CIlfb4ikG4MoDsFsCG8niiJH5++OO2LgIQ==
-
-codemirror@^5.62.0:
+codemirror@^5.47.0, codemirror@^5.62.0:
   version "5.62.0"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.62.0.tgz#e9ecd012e6f9eaf2e05ff4a449ff750f51619e22"
   integrity sha512-Xnl3304iCc8nyVZuRkzDVVwc794uc9QNX0UcPGeNic1fbzkSrO4l4GVXho9tRNKBgPYZXgocUqXyfIv3BILhCQ==
