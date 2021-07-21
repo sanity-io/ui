@@ -75,13 +75,13 @@ function PropsStory() {
 
         {open && (
           <Dialog
+            __unstable_hideCloseButton={hideCloseButton}
             header={header}
             id="dialog"
             onClickOutside={onClickOutside ? handleClose : undefined}
             onClose={handleClose}
             open={open}
             width={width}
-            hideCloseButton={hideCloseButton}
           >
             <Box padding={4}>
               <Stack space={4}>
