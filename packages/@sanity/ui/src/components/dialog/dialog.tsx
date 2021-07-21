@@ -24,6 +24,10 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
    * @beta
    */
   __unstable_autoFocus?: boolean
+  /**
+   * @beta
+   */
+  __unstable_hideCloseButton?: boolean
   cardRadius?: number | number[]
   cardShadow?: number | number[]
   contentRef?: React.ForwardedRef<HTMLDivElement>
@@ -41,7 +45,11 @@ interface DialogCardProps extends ResponsiveWidthProps {
   /**
    * @beta
    */
-  __unstable_autoFocus?: boolean
+  __unstable_autoFocus: boolean
+  /**
+   * @beta
+   */
+  __unstable_hideCloseButton: boolean
   children: React.ReactNode
   contentRef?: React.ForwardedRef<HTMLDivElement>
   footer: React.ReactNode
@@ -117,7 +125,8 @@ const DialogFooter = styled(Box)`
 
 const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
   const {
-    __unstable_autoFocus: autoFocus = true,
+    __unstable_autoFocus: autoFocus,
+    __unstable_hideCloseButton: hideCloseButton,
     children,
     contentRef,
     footer,
@@ -134,8 +143,8 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
   const localContentRef = useRef<HTMLDivElement | null>(null)
   const layer = useLayer()
   const {isTopLayer} = layer
-
   const labelId = `${id}_label`
+  const showCloseButton = !hideCloseButton && Boolean(onClose)
 
   useEffect(() => {
     if (!autoFocus) return
@@ -203,15 +212,17 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
                   </Text>
                 )}
               </Box>
-              <Box padding={2}>
-                <Button
-                  aria-label="Close dialog"
-                  icon={CloseIcon}
-                  mode="bleed"
-                  onClick={onClose}
-                  padding={3}
-                />
-              </Box>
+              {showCloseButton && (
+                <Box padding={2}>
+                  <Button
+                    aria-label="Close dialog"
+                    icon={CloseIcon}
+                    mode="bleed"
+                    onClick={onClose}
+                    padding={3}
+                  />
+                </Box>
+              )}
             </Flex>
           </DialogHeader>
 
@@ -237,6 +248,7 @@ export const Dialog = forwardRef(function Dialog(
   const theme = useTheme()
   const {
     __unstable_autoFocus: autoFocus = true,
+    __unstable_hideCloseButton: hideCloseButton = false,
     cardRadius = 3,
     cardShadow = 4,
     children,
@@ -298,6 +310,7 @@ export const Dialog = forwardRef(function Dialog(
         <div ref={preDivRef} tabIndex={0} />
         <DialogCard
           __unstable_autoFocus={autoFocus}
+          __unstable_hideCloseButton={hideCloseButton}
           contentRef={contentRef}
           footer={footer}
           header={header}
