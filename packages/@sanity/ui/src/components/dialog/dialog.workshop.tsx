@@ -275,7 +275,7 @@ function AutoFocusStory() {
 
   if (!open) {
     return (
-      <Box padding={[4, 5, 6]}>
+      <Box padding={4}>
         <Text muted>Use knobs to open the dialog</Text>
       </Box>
     )
@@ -283,7 +283,7 @@ function AutoFocusStory() {
 
   return (
     <Dialog __unstable_autoFocus={autoFocus} header="Auto-focus example" id="auto-focus-example">
-      <Box padding={[4, 5, 6]}>
+      <Box padding={4}>
         <Button text="Focusable button" />
       </Box>
     </Dialog>
