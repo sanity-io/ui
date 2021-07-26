@@ -144,7 +144,8 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
   const layer = useLayer()
   const {isTopLayer} = layer
   const labelId = `${id}_label`
-  const showCloseButton = !hideCloseButton && Boolean(onClose)
+  const showCloseButton = Boolean(onClose) && hideCloseButton === false
+  const showHeader = Boolean(header) || showCloseButton
 
   useEffect(() => {
     if (!autoFocus) return
@@ -158,12 +159,12 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
   useGlobalKeyDown(
     useCallback(
       (event: KeyboardEvent) => {
-        if (!isTopLayer) return
+        if (!isTopLayer || !onClose) return
 
         if (event.key === 'Escape') {
           event.preventDefault()
           event.stopPropagation()
-          if (onClose) onClose()
+          onClose()
         }
       },
       [isTopLayer, onClose]
@@ -172,11 +173,9 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
 
   useClickOutside(
     useCallback(() => {
-      if (!isTopLayer) return
+      if (!isTopLayer || !onClickOutside) return
 
-      if (onClickOutside) {
-        onClickOutside()
-      }
+      onClickOutside()
     }, [isTopLayer, onClickOutside]),
     [rootElement]
   )
@@ -203,28 +202,31 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
     <DialogContainer data-ui="DialogCard" width={width}>
       <DialogCardRoot radius={radius} ref={setRef} scheme={scheme} shadow={shadow}>
         <DialogLayout direction="column">
-          <DialogHeader>
-            <Flex>
-              <Box flex={1} padding={4}>
-                {header && (
-                  <Text id={labelId} weight="semibold">
-                    {header}
-                  </Text>
-                )}
-              </Box>
-              {showCloseButton && (
-                <Box padding={2}>
-                  <Button
-                    aria-label="Close dialog"
-                    icon={CloseIcon}
-                    mode="bleed"
-                    onClick={onClose}
-                    padding={3}
-                  />
+          {showHeader && (
+            <DialogHeader>
+              <Flex>
+                <Box flex={1} padding={4}>
+                  {header && (
+                    <Text id={labelId} weight="semibold">
+                      {header}
+                    </Text>
+                  )}
                 </Box>
-              )}
-            </Flex>
-          </DialogHeader>
+                {showCloseButton && (
+                  <Box padding={2}>
+                    <Button
+                      aria-label="Close dialog"
+                      disabled={!onClose}
+                      icon={CloseIcon}
+                      mode="bleed"
+                      onClick={onClose}
+                      padding={3}
+                    />
+                  </Box>
+                )}
+              </Flex>
+            </DialogHeader>
+          )}
 
           <DialogContent flex={1} ref={setContentRef} tabIndex={-1}>
             {children}
