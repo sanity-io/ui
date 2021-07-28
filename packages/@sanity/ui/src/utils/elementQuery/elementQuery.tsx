@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useMemo, useState} from 'react'
+import React, {forwardRef, useCallback, useEffect, useMemo, useState} from 'react'
 import {useForwardedRef} from '../../hooks'
 import {useTheme} from '../../theme'
 import {ResizeObserver} from '../resizeObserver'
@@ -8,42 +8,56 @@ import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
  * DO NOT USE IN PRODUCTION.
  * @beta
  */
+export interface MediaQueryProps {
+  media?: number[]
+}
+
+/**
+ * DO NOT USE IN PRODUCTION.
+ * @beta
+ */
 export const ElementQuery = forwardRef(function ElementQuery(
-  props: React.HTMLProps<HTMLDivElement>,
-  ref: React.Ref<HTMLDivElement>
+  props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'media'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const theme = useTheme()
-  const {media} = theme.sanity
-  const {children, ...restProps} = props
+  const {children, media = theme.sanity.media, ...restProps} = props
   const [width, setWidth] = useState(() => window.innerWidth)
   const forwardedRef = useForwardedRef(ref)
+  const [element, setElement] = useState<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    let ro: ResizeObserver
+    if (!element) return
 
-    if (forwardedRef.current) {
-      const handleResizeEntries: ResizeObserverCallback = (entries) => {
-        setWidth(entries[0].contentRect.width)
-      }
-
-      ro = new ResizeObserver(handleResizeEntries)
-      ro.observe(forwardedRef.current)
+    const handleResizeEntries: ResizeObserverCallback = (entries) => {
+      setWidth(entries[0].contentRect.width)
     }
 
-    return () => {
-      if (ro) ro.disconnect()
-    }
-  }, [forwardedRef])
+    const ro = new ResizeObserver(handleResizeEntries)
+
+    ro.observe(element)
+
+    return () => ro.disconnect()
+  }, [element])
 
   const max = useMemo(() => findMaxBreakpoints(media, width), [media, width])
   const min = useMemo(() => findMinBreakpoints(media, width), [media, width])
 
+  const setRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      forwardedRef.current = el
+      setElement(el)
+    },
+    [forwardedRef]
+  )
+
   return (
     <div
+      data-ui="ElementQuery"
       {...restProps}
       data-eq-max={max.length ? max.join(' ') : undefined}
       data-eq-min={min.length ? min.join(' ') : undefined}
-      ref={forwardedRef}
+      ref={setRef}
     >
       {children}
     </div>
