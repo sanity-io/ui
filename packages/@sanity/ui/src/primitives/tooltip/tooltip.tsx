@@ -93,6 +93,16 @@ export const Tooltip = forwardRef(function Tooltip(
     if (forceUpdate) forceUpdate()
   }, [forceUpdate, content])
 
+  // Close when `disabled` changes to `true`
+  useEffect(() => {
+    if (disabled) setIsOpen(false)
+  }, [disabled])
+
+  // Close when `content` changes to falsy
+  useEffect(() => {
+    if (!content) setIsOpen(false)
+  }, [content])
+
   const setRef = (el: HTMLDivElement | null) => {
     setPopperElement(el)
     forwardedRef.current = el
