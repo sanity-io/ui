@@ -1,5 +1,6 @@
 import {AddIcon, icons, IconSymbol, UploadIcon} from '@sanity/icons'
 import {
+  Box,
   Button,
   ButtonMode,
   ButtonTone,
@@ -143,58 +144,48 @@ function StyledButton2Story() {
 }
 
 function StackedStory() {
+  const tones = Object.entries(BUTTON_TONE_OPTIONS)
   const disabled = useBoolean('Disabled', false, 'Props')
   const fontSize = useSelect('Font size', TEXT_SIZE_OPTIONS, 2, 'Props')
   const icon = useSelect('Icon', ICON_SYMBOL_OPTIONS, 'add-circle', 'Props') as IconSymbol
   const iconRight = useSelect('Icon (right)', ICON_SYMBOL_OPTIONS, '', 'Props') as IconSymbol
   const justify = useSelect('Justify', FLEX_JUSTIFY_OPTIONS, 'center', 'Props')
   const mode = useSelect('Mode', BUTTON_MODE_OPTIONS, 'default', 'Props')
+  const onClick = useAction('onClick')
   const paddingX = useSelect('Padding X', SPACE_OPTIONS, 3, 'Props')
   const paddingY = useSelect('Padding Y', SPACE_OPTIONS, 3, 'Props')
   const selected = useBoolean('Selected', false, 'Props')
   const space = useSelect('Space', SPACE_OPTIONS, 3, 'Props')
-  const tone = useSelect('Tone', BUTTON_TONE_OPTIONS, 'default', 'Props')
-  const textProp = useText('Text', 'Label', 'Props')
 
   return (
-    <Flex align="center" height="fill" justify="center">
-      <Container width={0} style={{textAlign: 'center'}}>
-        <Card padding={4}>
-          <Stack space={1}>
-            <Button
-              disabled={disabled}
-              fontSize={fontSize}
-              icon={icon && icons[icon]}
-              iconRight={iconRight && icons[iconRight]}
-              justify={justify}
-              mode={mode}
-              onClick={useAction('onClick')}
-              paddingX={paddingX}
-              paddingY={paddingY}
-              selected={selected}
-              space={space}
-              text={textProp}
-              tone={tone}
-            />
-            <Button
-              disabled={disabled}
-              fontSize={fontSize}
-              icon={icon && icons[icon]}
-              iconRight={iconRight && icons[iconRight]}
-              justify={justify}
-              mode={mode}
-              onClick={useAction('onClick')}
-              paddingX={paddingX}
-              paddingY={paddingY}
-              selected={selected}
-              space={space}
-              text={textProp}
-              tone={tone}
-            />
-          </Stack>
-        </Card>
-      </Container>
-    </Flex>
+    <Card height="fill" tone="transparent">
+      <Flex align="center" height="fill" justify="center">
+        <Container width={0} style={{textAlign: 'center'}}>
+          <Box padding={4}>
+            <Stack space={1}>
+              {tones.map(([title, tone]) => (
+                <Button
+                  disabled={disabled}
+                  fontSize={fontSize}
+                  icon={icon && icons[icon]}
+                  iconRight={iconRight && icons[iconRight]}
+                  justify={justify}
+                  key={tone}
+                  mode={mode}
+                  onClick={onClick}
+                  paddingX={paddingX}
+                  paddingY={paddingY}
+                  selected={selected}
+                  space={space}
+                  text={title}
+                  tone={tone}
+                />
+              ))}
+            </Stack>
+          </Box>
+        </Container>
+      </Flex>
+    </Card>
   )
 }
 

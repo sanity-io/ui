@@ -20,7 +20,11 @@ function compileModule(paths: string[]) {
 }
 
 export function resolveWorkshopEnvPlugin() {
-  const filePattern = path.resolve(__dirname, '../src/**/*.workshop.tsx')
+  const filePatterns = [
+    path.resolve(__dirname, '../src/**/*.workshop.tsx'),
+    path.resolve(__dirname, '../src/**/__workshop__/index.ts'),
+    path.resolve(__dirname, '../src/**/__workshop__/index.tsx'),
+  ]
   const modulePath = path.resolve(__dirname, './.workshop-scopes.ts')
 
   let paths: string[] = []
@@ -39,7 +43,7 @@ export function resolveWorkshopEnvPlugin() {
       if (id === WORKSHOP_ENV_MODULE_ID) {
         if (!isInitialized) {
           isInitialized = true
-          paths = globby.sync(filePattern)
+          paths = globby.sync(filePatterns)
           _writeModule()
         }
 
@@ -61,7 +65,7 @@ export function resolveWorkshopEnvPlugin() {
       global.$workshopWatcher.close()
     }
 
-    global.$workshopWatcher = chokidar.watch(filePattern, {
+    global.$workshopWatcher = chokidar.watch(filePatterns, {
       ignoreInitial: true,
     })
 
