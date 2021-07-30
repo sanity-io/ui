@@ -1,4 +1,4 @@
-import {Card, CardTone, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
+import {Box, Card, CardTone, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
 import {defineScope, useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import React from 'react'
 import styled from 'styled-components'
@@ -130,28 +130,24 @@ function InteractiveCardStory() {
 }
 
 function AllTonesStory() {
+  const tones = Object.entries(CARD_TONE_OPTIONS)
+
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={0}>
         <Stack space={5}>
-          <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="default">
-            <Text>Default</Text>
-          </Card>
-          <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="transparent">
-            <Text>Transparent</Text>
-          </Card>
-          <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="positive">
-            <Text>Positive</Text>
-          </Card>
-          <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="caution">
-            <Text>Caution</Text>
-          </Card>
-          <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="critical">
-            <Text>Critical</Text>
-          </Card>
-          <Card padding={4} radius={2} shadow={4} style={{textAlign: 'center'}} tone="primary">
-            <Text>Brand</Text>
-          </Card>
+          {tones.map(([title, tone]) => (
+            <Card
+              key={tone}
+              padding={4}
+              radius={2}
+              shadow={4}
+              style={{textAlign: 'center'}}
+              tone={tone}
+            >
+              <Text>{title}</Text>
+            </Card>
+          ))}
         </Stack>
       </Container>
     </Flex>
@@ -159,110 +155,71 @@ function AllTonesStory() {
 }
 
 function AsButtonStory() {
+  const tones = Object.entries(CARD_TONE_OPTIONS)
+
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container>
-        <Grid columns={2} gap={[4, 5, 6]}>
-          <Stack>
-            <Card as="button" padding={4} style={{textAlign: 'center'}} tone="transparent">
-              <Stack space={2}>
-                <Text>Text</Text>
-                <Text muted>Muted</Text>
-                <Text accent>Accent</Text>
-              </Stack>
-            </Card>
-            <Card as="button" padding={4} style={{textAlign: 'center'}} tone="default">
-              <Stack space={2}>
-                <Text>Text</Text>
-                <Text muted>Muted</Text>
-                <Text accent>Accent</Text>
-              </Stack>
-            </Card>
-            <Card as="button" padding={4} style={{textAlign: 'center'}} tone="positive">
-              <Stack space={2}>
-                <Text>Text</Text>
-                <Text muted>Muted</Text>
-                <Text accent>Accent</Text>
-              </Stack>
-            </Card>
-            <Card as="button" padding={4} style={{textAlign: 'center'}} tone="caution">
-              <Stack space={2}>
-                <Text>Text</Text>
-                <Text muted>Muted</Text>
-                <Text accent>Accent</Text>
-              </Stack>
-            </Card>
-            <Card as="button" padding={4} style={{textAlign: 'center'}} tone="critical">
-              <Stack space={2}>
-                <Text>Text</Text>
-                <Text muted>Muted</Text>
-                <Text accent>Accent</Text>
-              </Stack>
-            </Card>
-            <Card as="button" padding={4} style={{textAlign: 'center'}} tone="primary">
-              <Stack space={2}>
-                <Text>Text</Text>
-                <Text muted>Muted</Text>
-                <Text accent>Accent</Text>
-              </Stack>
-            </Card>
-          </Stack>
-          <Stack>
-            <div aria-selected>
-              <Card as="button" padding={4} style={{textAlign: 'center'}} tone="transparent">
-                <Stack space={2}>
-                  <Text>Text</Text>
-                  <Text muted>Muted</Text>
-                  <Text accent>Accent</Text>
-                </Stack>
-              </Card>
-            </div>
-            <div aria-selected>
-              <Card as="button" padding={4} style={{textAlign: 'center'}} tone="default">
-                <Stack space={2}>
-                  <Text>Text</Text>
-                  <Text muted>Muted</Text>
-                  <Text accent>Accent</Text>
-                </Stack>
-              </Card>
-            </div>
-            <div aria-selected>
-              <Card as="button" padding={4} style={{textAlign: 'center'}} tone="positive">
-                <Stack space={2}>
-                  <Text>Text</Text>
-                  <Text muted>Muted</Text>
-                  <Text accent>Accent</Text>
-                </Stack>
-              </Card>
-            </div>
-            <div aria-selected>
-              <Card as="button" padding={4} style={{textAlign: 'center'}} tone="caution">
-                <Stack space={2}>
-                  <Text>Text</Text>
-                  <Text muted>Muted</Text>
-                  <Text accent>Accent</Text>
-                </Stack>
-              </Card>
-            </div>
-            <div aria-selected>
-              <Card as="button" padding={4} style={{textAlign: 'center'}} tone="critical">
-                <Stack space={2}>
-                  <Text>Text</Text>
-                  <Text muted>Muted</Text>
-                  <Text accent>Accent</Text>
-                </Stack>
-              </Card>
-            </div>
-            <div aria-selected>
-              <Card as="button" padding={4} style={{textAlign: 'center'}} tone="primary">
-                <Stack space={2}>
-                  <Text>Text</Text>
-                  <Text muted>Muted</Text>
-                  <Text accent>Accent</Text>
-                </Stack>
-              </Card>
-            </div>
-          </Stack>
+        <Grid columns={3} gap={2}>
+          <Box>
+            <Text align="center" size={1} weight="semibold">
+              Enabled
+            </Text>
+            <Stack marginTop={3} space={2}>
+              {tones.map(([title, tone]) => (
+                <Card as="button" key={tone} padding={4} style={{textAlign: 'center'}} tone={tone}>
+                  <Stack space={2}>
+                    <Text weight="semibold">{title}</Text>
+                    <Text muted>Muted</Text>
+                    <Text accent>Accent</Text>
+                  </Stack>
+                </Card>
+              ))}
+            </Stack>
+          </Box>
+
+          <Box>
+            <Text align="center" size={1} weight="semibold">
+              Disabled
+            </Text>
+            <Stack marginTop={3} space={2}>
+              {tones.map(([title, tone]) => (
+                <Card
+                  as="button"
+                  disabled
+                  key={tone}
+                  padding={4}
+                  style={{textAlign: 'center'}}
+                  tone={tone}
+                >
+                  <Stack space={2}>
+                    <Text weight="semibold">{title}</Text>
+                    <Text muted>Muted</Text>
+                    <Text accent>Accent</Text>
+                  </Stack>
+                </Card>
+              ))}
+            </Stack>
+          </Box>
+
+          <Box>
+            <Text align="center" size={1} weight="semibold">
+              Selected
+            </Text>
+            <Stack marginTop={3} space={2}>
+              {tones.map(([title, tone]) => (
+                <div aria-selected key={tone}>
+                  <Card as="button" padding={4} style={{textAlign: 'center'}} tone={tone}>
+                    <Stack space={2}>
+                      <Text weight="semibold">{title}</Text>
+                      <Text muted>Muted</Text>
+                      <Text accent>Accent</Text>
+                    </Stack>
+                  </Card>
+                </div>
+              ))}
+            </Stack>
+          </Box>
         </Grid>
       </Container>
     </Flex>
