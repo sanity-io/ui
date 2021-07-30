@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
+  useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
 import {useForwardedRef} from '../../hooks'
@@ -53,15 +53,17 @@ export const MenuItem = forwardRef(function MenuItem(
     paddingBottom,
     paddingLeft,
     radius = 2,
-    selected,
+    selected: selectedProp,
     space = 3,
     text,
     ...restProps
   } = props
-  const {mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
-  const rootRef = useRef<HTMLDivElement | null>(null)
+  const {activeElement, mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
+  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
+  const active = rootElement === activeElement
+  const selected = active // || (!activeElement && selectedProp)
 
-  useEffect(() => mount(rootRef.current, selected), [mount, selected])
+  useEffect(() => mount(rootElement, selectedProp), [mount, rootElement, selectedProp])
 
   const ref = useForwardedRef(forwardedRef)
 
@@ -90,7 +92,7 @@ export const MenuItem = forwardRef(function MenuItem(
   const setRef = useCallback(
     (el: HTMLDivElement | null) => {
       ref.current = el
-      rootRef.current = el
+      setRootElement(el)
     },
     [ref]
   )

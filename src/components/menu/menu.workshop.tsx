@@ -1,4 +1,4 @@
-import {AddIcon, ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
+import {AddIcon, CheckmarkIcon, ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -20,9 +20,10 @@ import React, {useRef, useState} from 'react'
 
 export default defineScope('components/menu', 'Menu', [
   {name: 'menu-button', title: 'MenuButton', component: MenuButtonStory},
+  {name: 'nested-menu-items', title: 'Nested MenuItems', component: NestedMenuItems},
   {name: 'custom-menu-item', title: 'Custom MenuItem', component: CustomMenuItemStory},
   {name: 'groups', title: 'Groups', component: GroupsStory},
-  {name: 'tones', title: 'Tones', component: MenuItemTonesStory},
+  {name: 'tones', title: 'Tones', component: TonesStory},
   {name: 'selected-item', title: 'Selected item', component: SelectedItemStory},
   {name: 'closable', title: 'Closeable', component: ClosableMenuButtonStory},
   {name: 'without-arrow', title: 'Without arrow', component: WithoutArrowStory},
@@ -74,6 +75,27 @@ function MenuButtonStory() {
         </LayerProvider>
         <Button mode="ghost" id="next-button" text="Next" />
       </Grid>
+    </Box>
+  )
+}
+
+function NestedMenuItems() {
+  return (
+    <Box padding={[4, 5, 6]}>
+      <MenuButton
+        button={<Button text="Open" />}
+        id="nested-example"
+        menu={
+          <Menu>
+            <Stack space={1}>
+              <MenuItem text="Item 1" />
+              <MenuItem text="Item 2" />
+            </Stack>
+            <MenuDivider />
+            <MenuItem text="Item 3" />
+          </Menu>
+        }
+      />
     </Box>
   )
 }
@@ -246,18 +268,20 @@ function GroupsStory() {
   )
 }
 
-function MenuItemTonesStory() {
+function TonesStory() {
+  const disabled = useBoolean('Disabled', false, 'Props')
+
   return (
     <LayerProvider>
       <Box padding={[4, 5, 6]}>
         <Card radius={3} shadow={3}>
           <Menu>
-            <MenuItem icon={SearchIcon} text="Default" tone="default" />
-            <MenuItem icon={SearchIcon} text="Transparent" tone="transparent" />
-            <MenuItem icon={SearchIcon} text="Primary" tone="primary" />
-            <MenuItem icon={SearchIcon} text="Positive" tone="positive" />
-            <MenuItem icon={SearchIcon} text="Caution" tone="caution" />
-            <MenuItem icon={SearchIcon} text="Critical" tone="critical" />
+            <MenuItem disabled={disabled} icon={SearchIcon} text="Default" tone="default" />
+            <MenuItem disabled={disabled} icon={SearchIcon} text="Transparent" tone="transparent" />
+            <MenuItem disabled={disabled} icon={SearchIcon} text="Primary" tone="primary" />
+            <MenuItem disabled={disabled} icon={SearchIcon} text="Positive" tone="positive" />
+            <MenuItem disabled={disabled} icon={SearchIcon} text="Caution" tone="caution" />
+            <MenuItem disabled={disabled} icon={SearchIcon} text="Critical" tone="critical" />
           </Menu>
         </Card>
       </Box>
@@ -280,25 +304,29 @@ function SelectedItemStory() {
             <Menu>
               <MenuItem
                 icon={SearchIcon}
+                iconRight={selectedIndex === 0 ? CheckmarkIcon : undefined}
                 onClick={() => setSelectedIndex(0)}
                 selected={selectedIndex === 0}
-                text="Search"
+                text="Show search"
               />
               <MenuItem
                 icon={ClockIcon}
+                iconRight={selectedIndex === 1 ? CheckmarkIcon : undefined}
                 onClick={() => setSelectedIndex(1)}
                 selected={selectedIndex === 1}
-                text="Clock"
+                text="Show clock"
               />
               <MenuDivider />
               <MenuItem
                 icon={ExpandIcon}
+                iconRight={selectedIndex === 2 ? CheckmarkIcon : undefined}
                 onClick={() => setSelectedIndex(2)}
                 selected={selectedIndex === 2}
-                text="Expand"
+                text="Expanded"
               />
             </Menu>
           }
+          popover={{matchReferenceWidth: true}}
         />
       </Stack>
     </Box>
