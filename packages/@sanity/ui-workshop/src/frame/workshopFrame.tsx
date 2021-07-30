@@ -52,7 +52,7 @@ export function WorkshopFrame(_props: {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 
   const postMessage = useCallback((msg: Record<string, unknown>) => {
-    parent.postMessage(msg, window.location.origin)
+    parent?.postMessage(msg, window.location.origin)
   }, [])
 
   useEffect(() => {
@@ -149,18 +149,28 @@ export function WorkshopFrame(_props: {
   useEffect(() => {
     if (!story) return
 
-    axe
-      .run()
-      .then((results) => {
-        postMessage({type: 'workshop/frame/axe/results', results})
-      })
-      .catch((err) => {
-        console.error('Something bad happened:', err.message)
-      })
+    try {
+      axe
+        .run()
+        .then((results) => {
+          postMessage({type: 'workshop/frame/axe/results', results})
+        })
+        .catch((err) => {
+          console.error('Something bad happened:', err.message)
+        })
+    } catch (axeRunError) {
+      if (axeRunError instanceof Error) {
+        console.log('could not run axe:', axeRunError.message)
+      } else {
+        console.log('could not run axe:', axeRunError)
+      }
+    }
   }, [postMessage, story])
 
   useEffect(() => {
-    document.body.style.zoom = String(zoom)
+    const bodyStyle: any = document.body.style
+
+    bodyStyle.zoom = String(zoom)
   }, [zoom])
 
   return (
