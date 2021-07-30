@@ -4,7 +4,7 @@ import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
 import {ResponsivePaddingProps} from '../../primitives/types'
 import {useLayer} from '../../utils'
-import {getFocusableElements} from './helpers'
+import {_getFocusableElements, _sortElements} from './helpers'
 import {MenuContext, MenuContextValue} from './menuContext'
 
 /**
@@ -43,7 +43,9 @@ export const Menu = forwardRef(function Menu(
 ) {
   const {
     children,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusFirst,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusLast,
     onClickOutside,
     onEscape,
@@ -57,49 +59,15 @@ export const Menu = forwardRef(function Menu(
     space = 1,
     ...restProps
   } = props
+
   const {isTopLayer} = useLayer()
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const itemsRef = useRef<HTMLElement[]>([])
+  const elementsRef = useRef<HTMLElement[]>([])
   const [activeIndex, setActiveIndex] = useState(-1)
-  const [activeElement, setActiveElement] = useState<HTMLElement | null>(null)
+  const activeIndexRef = useRef(activeIndex)
+  const activeElement = elementsRef.current[activeIndex] || null
   const activeElementRef = useRef<HTMLElement | null>(activeElement)
-
-  // Trigger `onItemSelect` when active index changes
-  useEffect(() => {
-    if (onItemSelect) onItemSelect(activeIndex)
-  }, [activeIndex, onItemSelect])
-
-  // Update active element
-  useEffect(() => {
-    activeElementRef.current = activeElement
-  }, [activeElement])
-
-  // Auto-focus item after render
-  useEffect(() => {
-    if (!shouldFocus) return
-
-    const rafId = window.requestAnimationFrame(() => {
-      if (rootElement) {
-        if (activeElementRef.current) {
-          activeElementRef.current.focus()
-          setActiveIndex(itemsRef.current.indexOf(activeElementRef.current))
-
-          return
-        }
-
-        const element = itemsRef.current[shouldFocus === 'last' ? itemsRef.current.length - 1 : 0]
-
-        if (element) {
-          element.focus()
-          setActiveIndex(itemsRef.current.indexOf(element))
-        }
-      }
-    })
-
-    return () => {
-      window.cancelAnimationFrame(rafId)
-    }
-  }, [rootElement, shouldFocus])
+  const mounted = Boolean(rootElement)
 
   const setRef = useCallback(
     (el: HTMLDivElement | null) => {
@@ -110,25 +78,32 @@ export const Menu = forwardRef(function Menu(
     [ref]
   )
 
-  const mount = useCallback((element: HTMLElement | null, selected?: boolean) => {
-    if (!element) return () => undefined
+  const mount = useCallback(
+    (element: HTMLElement | null, selected?: boolean): (() => void) => {
+      if (!element) return () => undefined
 
-    if (!itemsRef.current.includes(element)) {
-      itemsRef.current.push(element)
-    }
-
-    if (selected === true) {
-      setActiveElement(element)
-    }
-
-    return () => {
-      const idx = itemsRef.current.push(element)
-
-      if (idx > -1) {
-        itemsRef.current.splice(idx, 1)
+      if (elementsRef.current.indexOf(element) === -1) {
+        elementsRef.current.push(element)
+        _sortElements(rootElement, elementsRef.current)
       }
-    }
-  }, [])
+
+      if (selected) {
+        const selectedIndex = elementsRef.current.indexOf(element)
+
+        setActiveIndex(selectedIndex)
+        activeIndexRef.current = selectedIndex
+      }
+
+      return () => {
+        const idx = elementsRef.current.indexOf(element)
+
+        if (idx > -1) {
+          elementsRef.current.splice(idx, 1)
+        }
+      }
+    },
+    [rootElement]
+  )
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -146,15 +121,15 @@ export const Menu = forwardRef(function Menu(
         event.preventDefault()
         event.stopPropagation()
 
-        const focusableElements = getFocusableElements(itemsRef.current)
+        const focusableElements = _getFocusableElements(elementsRef.current)
         const el = focusableElements[0]
 
-        if (el) {
-          const currentIndex = itemsRef.current.indexOf(el.element)
+        if (!el) return
 
-          setActiveIndex(currentIndex)
-          el.element.focus()
-        }
+        const currentIndex = elementsRef.current.indexOf(el)
+
+        setActiveIndex(currentIndex)
+        activeIndexRef.current = currentIndex
 
         return
       }
@@ -164,15 +139,15 @@ export const Menu = forwardRef(function Menu(
         event.preventDefault()
         event.stopPropagation()
 
-        const focusableElements = getFocusableElements(itemsRef.current)
+        const focusableElements = _getFocusableElements(elementsRef.current)
         const el = focusableElements[focusableElements.length - 1]
 
-        if (el) {
-          const currentIndex = itemsRef.current.indexOf(el.element)
+        if (!el) return
 
-          setActiveIndex(currentIndex)
-          el.element.focus()
-        }
+        const currentIndex = elementsRef.current.indexOf(el)
+
+        setActiveIndex(currentIndex)
+        activeIndexRef.current = currentIndex
 
         return
       }
@@ -181,26 +156,22 @@ export const Menu = forwardRef(function Menu(
         event.preventDefault()
         event.stopPropagation()
 
-        const focusableElements = getFocusableElements(itemsRef.current)
-        const focusableLen = focusableElements.filter(({focusable}) => focusable).length
+        const focusableElements = _getFocusableElements(elementsRef.current)
+        const focusableLen = focusableElements.length
 
         if (focusableLen === 0) return
 
-        const len = focusableElements.length
+        const focusedElement = elementsRef.current[activeIndex]
 
-        let currentIndex = activeIndex
-        let focusable = false
-        let element: HTMLElement | null = null
+        let focusedIndex = focusableElements.indexOf(focusedElement)
 
-        while (!focusable) {
-          currentIndex = (currentIndex - 1 + len) % len
-          element = focusableElements[currentIndex].element
-          focusable = focusableElements[currentIndex].focusable
-        }
+        focusedIndex = (focusedIndex - 1 + focusableLen) % focusableLen
+
+        const el = focusableElements[focusedIndex]
+        const currentIndex = elementsRef.current.indexOf(el)
 
         setActiveIndex(currentIndex)
-
-        if (element) element.focus()
+        activeIndexRef.current = currentIndex
 
         return
       }
@@ -209,26 +180,22 @@ export const Menu = forwardRef(function Menu(
         event.preventDefault()
         event.stopPropagation()
 
-        const focusableElements = getFocusableElements(itemsRef.current)
-        const focusableLen = focusableElements.filter(({focusable}) => focusable).length
+        const focusableElements = _getFocusableElements(elementsRef.current)
+        const focusableLen = focusableElements.length
 
         if (focusableLen === 0) return
 
-        const len = focusableElements.length
+        const focusedElement = elementsRef.current[activeIndex]
 
-        let currentIndex = activeIndex
-        let focusable = false
-        let element: HTMLElement | null = null
+        let focusedIndex = focusableElements.indexOf(focusedElement)
 
-        while (!focusable) {
-          currentIndex = (currentIndex + 1) % len
-          element = focusableElements[currentIndex].element
-          focusable = focusableElements[currentIndex].focusable
-        }
+        focusedIndex = (focusedIndex + 1) % focusableLen
+
+        const el = focusableElements[focusedIndex]
+        const currentIndex = elementsRef.current.indexOf(el)
 
         setActiveIndex(currentIndex)
-
-        if (element) element.focus()
+        activeIndexRef.current = currentIndex
 
         return
       }
@@ -242,16 +209,71 @@ export const Menu = forwardRef(function Menu(
 
   const handleItemMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
     const element = event.currentTarget
+    const currentIndex = elementsRef.current.indexOf(element)
 
-    setActiveIndex(itemsRef.current.indexOf(element))
-
-    element.focus()
+    setActiveIndex(currentIndex)
+    activeIndexRef.current = currentIndex
   }, [])
 
   const handleItemMouseLeave = useCallback(() => {
-    setActiveIndex(-1)
     rootElement?.focus()
+    setActiveIndex(-1)
+    activeIndexRef.current = -1
   }, [rootElement])
+
+  // Trigger `onItemSelect` when active index changes
+  useEffect(() => {
+    if (onItemSelect) onItemSelect(activeIndex)
+  }, [activeIndex, onItemSelect])
+
+  useEffect(() => {
+    activeElementRef.current = activeElement
+  }, [activeElement])
+
+  // Set focus on the currently active element
+  useEffect(() => {
+    if (!mounted) return
+
+    const rafId = window.requestAnimationFrame(() => {
+      const _activeIndex = activeIndexRef.current
+
+      if (_activeIndex === -1) {
+        if (shouldFocus === 'first') {
+          const focusableElements = _getFocusableElements(elementsRef.current)
+          const el = focusableElements[0]
+
+          if (el) {
+            const currentIndex = elementsRef.current.indexOf(el)
+
+            setActiveIndex(currentIndex)
+            activeIndexRef.current = currentIndex
+          }
+        }
+
+        if (shouldFocus === 'last') {
+          const focusableElements = _getFocusableElements(elementsRef.current)
+          const el = focusableElements[focusableElements.length - 1]
+
+          if (el) {
+            const currentIndex = elementsRef.current.indexOf(el)
+
+            setActiveIndex(currentIndex)
+            activeIndexRef.current = currentIndex
+          }
+        }
+
+        return
+      }
+
+      const element = elementsRef.current[_activeIndex] || null
+
+      element?.focus()
+    })
+
+    return () => {
+      window.cancelAnimationFrame(rafId)
+    }
+  }, [activeIndex, mounted, shouldFocus])
 
   useClickOutside(
     useCallback(

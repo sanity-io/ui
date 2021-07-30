@@ -47,6 +47,7 @@ export function MenuGroup(
   } = props
   const [open, setOpen] = useState(false)
   const {
+    activeElement,
     mount,
     onClickOutside,
     onEscape,
@@ -55,11 +56,13 @@ export function MenuGroup(
     onMouseLeave,
     registerElement,
   } = useMenu()
-  const rootRef = useRef<HTMLButtonElement | null>(null)
+  const [rootElement, setRootElement] = useState<HTMLButtonElement | null>(null)
   const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const shouldFocusRef = useRef<'first' | 'last' | null>(null)
+  const active = activeElement === rootElement
 
-  useEffect(() => mount(rootRef.current), [mount])
+  // Register the element
+  useEffect(() => mount(rootElement), [mount, rootElement])
 
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
@@ -85,17 +88,20 @@ export function MenuGroup(
     [onMouseLeave]
   )
 
-  const handleMenuKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'ArrowLeft') {
-      event.stopPropagation()
+  const handleMenuKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === 'ArrowLeft') {
+        event.stopPropagation()
 
-      setOpen(false)
+        setOpen(false)
 
-      requestAnimationFrame(() => {
-        rootRef.current?.focus()
-      })
-    }
-  }, [])
+        requestAnimationFrame(() => {
+          rootElement?.focus()
+        })
+      }
+    },
+    [rootElement]
+  )
 
   const handleMenuMouseEnter = useCallback(() => {
     if (mouseLeaveTimeoutRef.current) {
@@ -185,8 +191,8 @@ export function MenuGroup(
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         radius={radius}
-        ref={rootRef}
-        selected={open}
+        ref={setRootElement}
+        selected={active || open}
         tabIndex={-1}
       >
         <Box padding={padding}>
