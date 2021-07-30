@@ -59,6 +59,8 @@ export const Label = forwardRef(function Label(
 
   if (textOverflow === 'ellipsis') {
     children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
+  } else {
+    children = <span>{children}</span>
   }
 
   return (
