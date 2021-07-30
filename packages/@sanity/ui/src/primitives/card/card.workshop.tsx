@@ -115,7 +115,7 @@ function InteractiveCardStory() {
   return (
     <Flex align="center" height="fill" justify="center">
       <div aria-selected={selected}>
-        <Card aria-pressed={pressed} as="button" padding={3} tabIndex={0}>
+        <Card __unstable_focusRing aria-pressed={pressed} as="button" padding={3} tabIndex={0}>
           <Stack space={3}>
             <Text>
               Text <code>Code</code>
@@ -167,7 +167,14 @@ function AsButtonStory() {
             </Text>
             <Stack marginTop={3} space={2}>
               {tones.map(([title, tone]) => (
-                <Card as="button" key={tone} padding={4} style={{textAlign: 'center'}} tone={tone}>
+                <Card
+                  __unstable_focusRing
+                  as="button"
+                  key={tone}
+                  padding={4}
+                  style={{textAlign: 'center'}}
+                  tone={tone}
+                >
                   <Stack space={2}>
                     <Text weight="semibold">{title}</Text>
                     <Text muted>Muted</Text>
@@ -185,6 +192,7 @@ function AsButtonStory() {
             <Stack marginTop={3} space={2}>
               {tones.map(([title, tone]) => (
                 <Card
+                  __unstable_focusRing
                   as="button"
                   disabled
                   key={tone}
@@ -209,7 +217,13 @@ function AsButtonStory() {
             <Stack marginTop={3} space={2}>
               {tones.map(([title, tone]) => (
                 <div aria-selected key={tone}>
-                  <Card as="button" padding={4} style={{textAlign: 'center'}} tone={tone}>
+                  <Card
+                    __unstable_focusRing
+                    as="button"
+                    padding={4}
+                    style={{textAlign: 'center'}}
+                    tone={tone}
+                  >
                     <Stack space={2}>
                       <Text weight="semibold">{title}</Text>
                       <Text muted>Muted</Text>
