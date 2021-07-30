@@ -24,6 +24,10 @@ export interface CardProps
     ResponsiveBorderProps,
     ResponsiveRadiusProps,
     ResponsiveShadowProps {
+  /**
+   * @beta
+   */
+  __unstable_focusRing?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
 }
@@ -43,6 +47,7 @@ export const Card = forwardRef(function Card(
   ref
 ) {
   const {
+    __unstable_focusRing: focusRing = false,
     as: asProp,
     border,
     borderTop,
@@ -74,6 +79,7 @@ export const Card = forwardRef(function Card(
         $borderRight={borderRight}
         $borderBottom={borderBottom}
         $borderLeft={borderLeft}
+        $focusRing={focusRing}
         $radius={radius}
         $shadow={shadow}
         $tone={tone}

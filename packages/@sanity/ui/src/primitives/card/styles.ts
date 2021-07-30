@@ -1,5 +1,6 @@
 import {css, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {ThemeColorBase, ThemeColorCardState} from '../../theme'
 import {CardStyleProps} from './types'
 
@@ -64,8 +65,10 @@ function vars(base: ThemeColorBase, color: ThemeColorCardState) {
 }
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpleInterpolation {
-  const {theme} = props
+  const {$focusRing, theme} = props
+  const {focusRing} = theme.sanity
   const {base, card} = theme.sanity.color
+  const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
     ${vars(base, card.enabled)}
@@ -95,9 +98,14 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         }
 
         &:focus {
-          ${vars(base, card.selected)}
+          box-shadow: ${$focusRing ? focusRingStyle({base, border, focusRing}) : undefined};
         }
 
+        &:focus:not(:focus-visible) {
+          box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
+        }
+
+        &[data-selected],
         &[aria-pressed='true'],
         [aria-selected='true'] > & {
           ${vars(base, card.selected)}
@@ -129,7 +137,11 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         }
 
         &:focus {
-          ${vars(base, card.selected)}
+          box-shadow: ${$focusRing ? focusRingStyle({base, border, focusRing}) : undefined};
+        }
+
+        &:focus:not(:focus-visible) {
+          box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
         }
 
         [aria-selected='true'] > & {
