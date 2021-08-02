@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
-import {ButtonMode, ButtonTone, FlexJustify} from '../../types'
+import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Spinner} from '../spinner'
@@ -28,7 +28,7 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   loading?: boolean
   selected?: boolean
   space?: number | number[]
-  textAlign?: 'left' | 'right' | 'center'
+  textAlign?: ButtonTextAlign
   text?: React.ReactNode
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
