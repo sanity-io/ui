@@ -7,7 +7,7 @@ import {
   usePrefersDark,
 } from '@sanity/ui'
 import {AxeResults} from 'axe-core'
-import React, {useCallback, useEffect, useReducer, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useReducer, useState} from 'react'
 import {propsReducer} from '../props/reducer'
 import {PropSchema, WorkshopLocation, WorkshopScope} from '../types'
 import {useFrame} from './useFrame'
@@ -27,8 +27,23 @@ export interface WorkshopProps {
   title: string
 }
 
+function _sortScopes(a: WorkshopScope, b: WorkshopScope) {
+  if (a.name < b.name) return -1
+  if (a.name > b.name) return 1
+
+  return 0
+}
+
 export function Workshop(_props: WorkshopProps): React.ReactElement {
-  const {collections, frameUrl, location, onLocationPush, onLocationReplace, scopes, title} = _props
+  const {
+    collections,
+    frameUrl,
+    location,
+    onLocationPush,
+    onLocationReplace,
+    scopes: scopesProp,
+    title,
+  } = _props
   const {postMessage, ready, ref: frameRef, subscribe} = useFrame()
   const [props, dispatch] = useReducer(propsReducer, [])
   const [axeResults, setAxeResults] = useState<AxeResults | null>(null)
@@ -38,6 +53,7 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
   const [scheme, setScheme] = useState<'light' | 'dark'>(prefersDark ? 'dark' : 'light')
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+  const scopes = useMemo(() => scopesProp.sort(_sortScopes), [scopesProp])
 
   const registerProp = useCallback((PropSchema: PropSchema) => {
     dispatch({type: 'registerProp', PropSchema})
@@ -55,12 +71,8 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
     [postMessage]
   )
 
-  useEffect(() => {
-    postMessage({type: 'workshop/setLocation', path: location.path, scheme, zoom})
-  }, [location.path, postMessage, scheme, zoom])
-
-  useEffect(() => {
-    return subscribe((msg) => {
+  const _handleMsg = useCallback(
+    (msg: Record<string, unknown>) => {
       if (typeof msg.type === 'string' && msg.type.startsWith('workshop/')) {
         if (msg.type === 'workshop/frame/axe/results') {
           setAxeResults(msg.results as any)
@@ -78,8 +90,27 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
           unregisterProp(msg.PropName as any)
         }
       }
+    },
+    [registerProp, setPropValue, unregisterProp]
+  )
+
+  useEffect(() => {
+    postMessage({type: 'workshop/setLocation', path: location.path, scheme, zoom})
+  }, [location.path, postMessage, scheme, zoom])
+
+  useEffect(() => {
+    return subscribe((msg) => {
+      if (typeof msg.type === 'string' && msg.type === 'queue') {
+        const queue: any = msg.queue
+
+        for (const _msg of queue) {
+          _handleMsg(_msg)
+        }
+      } else {
+        _handleMsg(msg)
+      }
     })
-  }, [registerProp, setPropValue, subscribe, unregisterProp])
+  }, [_handleMsg, subscribe])
 
   return (
     <BoundaryElementProvider element={boundaryElement}>

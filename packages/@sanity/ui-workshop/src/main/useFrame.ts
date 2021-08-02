@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {isRecord} from '../isRecord'
+import {isRecord} from '../lib/isRecord'
 
 interface Frame {
   postMessage: (msg: Record<string, unknown>) => void
@@ -16,9 +16,7 @@ export function useFrame(): Frame {
   useEffect(() => {
     if (!frameElement) return
 
-    const handleMessage = (event: MessageEvent) => {
-      const msg = event.data
-
+    const handleMessage = (msg: Record<string, unknown>) => {
       if (isRecord(msg)) {
         if (msg.type === 'workshop/frame/ready') {
           setReady(true)
@@ -31,17 +29,29 @@ export function useFrame(): Frame {
             msgQueueRef.current = []
           }
 
-          window.removeEventListener('message', handleMessage)
+          window.removeEventListener('message', _handleMessage)
 
           return
+        }
+
+        if (msg.type === 'queue') {
+          const queue: any = msg.queue
+
+          for (const _msg of queue) {
+            handleMessage(_msg)
+          }
         }
       }
     }
 
-    window.addEventListener('message', handleMessage)
+    const _handleMessage = (event: MessageEvent) => {
+      handleMessage(event.data)
+    }
+
+    window.addEventListener('message', _handleMessage)
 
     return () => {
-      window.removeEventListener('message', handleMessage)
+      window.removeEventListener('message', _handleMessage)
     }
   }, [frameElement])
 

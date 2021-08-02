@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface WorkshopStory {
   name: string
   title: string

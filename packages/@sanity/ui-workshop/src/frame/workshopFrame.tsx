@@ -7,33 +7,24 @@ import {
   ThemeProvider,
   ToastProvider,
 } from '@sanity/ui'
-import axe from 'axe-core'
-import React, {createElement, useCallback, useEffect, useMemo, useReducer, useState} from 'react'
-import {isRecord} from '../isRecord'
+import React, {
+  createElement,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react'
+import {useAxeResults} from '../axe/useAxeResults'
+import {isRecord} from '../lib/isRecord'
+import {qs} from '../lib/qs'
 import {propsReducer} from '../props/reducer'
 import {resolveLocation} from '../resolveLocation'
 import {ScopeProvider} from '../scopeProvider'
 import {PropSchema, WorkshopContextValue, WorkshopLocation, WorkshopScope} from '../types'
 import {WorkshopContext} from '../workshopContext'
-
-const qs = {
-  parse(str: string): Record<string, string> {
-    const params = new URLSearchParams('?' + str)
-    const q: Record<string, string> = {}
-
-    params.forEach((value, key) => {
-      q[key] = value
-    })
-
-    return q
-  },
-
-  stringify(q: {[key: string]: any}) {
-    return Object.entries(q)
-      .map(([key, value]) => `${key}=${value}`)
-      .join('&')
-  },
-}
+import {useParent} from './useParent'
 
 export function WorkshopFrame(_props: {
   frameUrl: string
@@ -50,10 +41,10 @@ export function WorkshopFrame(_props: {
   const [zoom, setZoom] = useState(query.zoom ? Number(query.zoom) : 1)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
-
-  const postMessage = useCallback((msg: Record<string, unknown>) => {
-    parent?.postMessage(msg, window.location.origin)
-  }, [])
+  const {postMessage} = useParent()
+  const {scope, story} = useMemo(() => resolveLocation(scopes, path), [path, scopes])
+  const loc = useMemo(() => ({path}), [path])
+  const axeResults = useAxeResults({enabled: Boolean(story), key: story?.name || null})
 
   useEffect(() => {
     postMessage({type: 'workshop/frame/ready', path})
@@ -129,10 +120,6 @@ export function WorkshopFrame(_props: {
     [postMessage]
   )
 
-  const {scope, story} = useMemo(() => resolveLocation(scopes, path), [path, scopes])
-
-  const loc = useMemo(() => ({path}), [path])
-
   const contextValue: WorkshopContextValue = useMemo(() => {
     return {
       frameUrl,
@@ -147,25 +134,8 @@ export function WorkshopFrame(_props: {
   }, [frameUrl, loc, pushLocation, replaceLocation, scope, scopes, story, title])
 
   useEffect(() => {
-    if (!story) return
-
-    try {
-      axe
-        .run()
-        .then((results) => {
-          postMessage({type: 'workshop/frame/axe/results', results})
-        })
-        .catch((err) => {
-          console.error('Something bad happened:', err.message)
-        })
-    } catch (axeRunError) {
-      if (axeRunError instanceof Error) {
-        console.log('could not run axe:', axeRunError.message)
-      } else {
-        console.log('could not run axe:', axeRunError)
-      }
-    }
-  }, [postMessage, story])
+    postMessage({type: 'workshop/frame/axe/results', results: axeResults})
+  }, [axeResults, postMessage])
 
   useEffect(() => {
     const bodyStyle: any = document.body.style
@@ -188,9 +158,11 @@ export function WorkshopFrame(_props: {
                 title={title}
                 unregisterProp={unregisterProp}
               >
-                <Card as="main" height="fill" ref={setBoundaryElement}>
-                  {story && createElement(story.component)}
-                </Card>
+                <Suspense fallback={null}>
+                  <Card as="main" height="fill" ref={setBoundaryElement}>
+                    {story && createElement(story.component)}
+                  </Card>
+                </Suspense>
                 <div data-portal="" ref={setPortalElement} />
               </ScopeProvider>
             </WorkshopContext.Provider>
