@@ -4,6 +4,7 @@
   "compilerOptions": {
     "rootDir": "../../../",
     "outDir": "./lib/dts/",
+    "module": "ES2020",
     "jsx": "react",
     "noEmit": true
   },

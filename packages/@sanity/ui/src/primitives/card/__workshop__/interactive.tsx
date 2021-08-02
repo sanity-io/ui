@@ -2,7 +2,7 @@ import {Card, Flex, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import React from 'react'
 
-export function InteractiveCardStory() {
+export default function InteractiveCardStory() {
   const selected = useBoolean('Selected', false, 'Props')
   const pressed = useBoolean('Pressed', false, 'Props')
 

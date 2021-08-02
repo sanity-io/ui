@@ -2,21 +2,21 @@ import {Card, Flex, Stack, Text} from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import React from 'react'
 import {
-  CARD_AS_OPTIONS,
-  CARD_TONE_OPTIONS,
-  RADIUS_OPTIONS,
-  SHADOW_OPTIONS,
-  SPACE_OPTIONS,
-} from './constants'
+  WORKSHOP_CARD_AS_OPTIONS,
+  WORKSHOP_CARD_TONE_OPTIONS,
+  WORKSHOP_RADIUS_OPTIONS,
+  WORKSHOP_SHADOW_OPTIONS,
+  WORKSHOP_SPACE_OPTIONS,
+} from '../../../__workshop__/constants'
 
-export function PropsStory() {
+export default function PropsStory() {
   const border = useBoolean('Border', false, 'Props')
-  const as = useSelect('As', CARD_AS_OPTIONS, 'div', 'Props')
-  const padding = useSelect('Padding', SPACE_OPTIONS, 0, 'Props')
-  const radius = useSelect('Radius', RADIUS_OPTIONS, 0, 'Props')
+  const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div', 'Props')
+  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 0, 'Props')
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0, 'Props')
   const selected = useBoolean('Selected', false, 'Props')
-  const shadow = useSelect('Shadow', SHADOW_OPTIONS, 0, 'Props')
-  const tone = useSelect('Tone', CARD_TONE_OPTIONS, 'default', 'Props')
+  const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 0, 'Props')
+  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Props')
 
   return (
     <Flex align="center" height="fill" justify="center">

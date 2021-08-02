@@ -1,9 +1,9 @@
 import {Card, Container, Flex, Stack, Text} from '@sanity/ui'
 import React from 'react'
-import {CARD_TONE_OPTIONS} from './constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
 
-export function AllTonesStory() {
-  const tones = Object.entries(CARD_TONE_OPTIONS)
+export default function AllTonesStory() {
+  const tones = Object.entries(WORKSHOP_CARD_TONE_OPTIONS)
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">

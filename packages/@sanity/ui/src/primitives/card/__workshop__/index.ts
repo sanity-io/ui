@@ -1,14 +1,10 @@
 import {defineScope} from '@sanity/ui-workshop'
-import {AllTonesStory} from './allTones'
-import {AsButtonStory} from './asButton'
-import {InteractiveCardStory} from './interactive'
-import {PropsStory} from './props'
-import {StyledCardStory} from './styled'
+import {lazy} from 'react'
 
 export default defineScope('primitives/card', 'Card', [
-  {name: 'props', title: 'Props', component: PropsStory},
-  {name: 'styled', title: 'Styled', component: StyledCardStory},
-  {name: 'interactive', title: 'Interactive', component: InteractiveCardStory},
-  {name: 'tones', title: 'Tones', component: AllTonesStory},
-  {name: 'as-button', title: 'As button', component: AsButtonStory},
+  {name: 'props', title: 'Props', component: lazy(() => import('./props'))},
+  {name: 'styled', title: 'Styled', component: lazy(() => import('./styled'))},
+  {name: 'interactive', title: 'Interactive', component: lazy(() => import('./interactive'))},
+  {name: 'tones', title: 'Tones', component: lazy(() => import('./allTones'))},
+  {name: 'as-button', title: 'As button', component: lazy(() => import('./asButton'))},
 ])
