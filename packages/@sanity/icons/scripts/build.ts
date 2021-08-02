@@ -17,7 +17,7 @@ async function _findEntryPoints() {
   return files.filter((file) => {
     return (
       !file.includes('__fixtures__') &&
-      !file.endsWith('.workshop.tsx') &&
+      !file.includes('__workshop__') &&
       !file.endsWith('.test.ts') &&
       !file.endsWith('.test.tsx')
     )
