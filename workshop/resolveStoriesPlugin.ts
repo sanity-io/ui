@@ -6,27 +6,37 @@ import {ResolvedConfig} from 'vite'
 
 const WORKSHOP_ENV_MODULE_ID = '$workshop'
 
+const WORKSHOP_PATTERNS = [
+  path.resolve(__dirname, '../src/**/__workshop__/index.ts'),
+  path.resolve(__dirname, '../src/**/__workshop__/index.tsx'),
+]
+
+const WORKSHOP_SCOPES_PATH = path.resolve(__dirname, './scopes.ts')
+
 declare global {
   // eslint-disable-next-line no-var
   var $workshopWatcher: chokidar.FSWatcher | undefined
 }
 
+function sanitizeModulePath(modulePath: string) {
+  return path
+    .relative(__dirname, modulePath)
+    .replace(/\.[^/.]+$/, '')
+    .replace(/\/index$/, '')
+}
+
 function compileModule(paths: string[]) {
-  const imports = paths.map((p, idx) => `import _${idx} from '${p}'`).join('\n')
-  const exports = paths.map((_p, idx) => `  _${idx}`).join(',\n')
-  const code = [imports, `export const scopes = [\n${exports}\n]`].join('\n\n') + `\n`
+  const sortedPaths = paths.sort()
+  const imports = sortedPaths
+    .map((p, idx) => `import _${idx} from '${sanitizeModulePath(p)}'`)
+    .join('\n')
+  const exports = sortedPaths.map((_p, idx) => `  _${idx}`).join(',\n')
+  const code = [imports, `export const scopes = [\n${exports},\n]`].join('\n\n') + `\n`
 
   return code
 }
 
 export function resolveWorkshopEnvPlugin() {
-  const filePatterns = [
-    path.resolve(__dirname, '../src/**/*.workshop.tsx'),
-    path.resolve(__dirname, '../src/**/__workshop__/index.ts'),
-    path.resolve(__dirname, '../src/**/__workshop__/index.tsx'),
-  ]
-  const modulePath = path.resolve(__dirname, './.workshop-scopes.ts')
-
   let paths: string[] = []
   let isInitialized = false
   let isWatcherInitialized = false
@@ -43,7 +53,7 @@ export function resolveWorkshopEnvPlugin() {
       if (id === WORKSHOP_ENV_MODULE_ID) {
         if (!isInitialized) {
           isInitialized = true
-          paths = globby.sync(filePatterns)
+          paths = globby.sync(WORKSHOP_PATTERNS)
           _writeModule()
         }
 
@@ -51,7 +61,7 @@ export function resolveWorkshopEnvPlugin() {
           _initWatcher()
         }
 
-        return modulePath
+        return WORKSHOP_SCOPES_PATH
       }
 
       return undefined
@@ -65,7 +75,7 @@ export function resolveWorkshopEnvPlugin() {
       global.$workshopWatcher.close()
     }
 
-    global.$workshopWatcher = chokidar.watch(filePatterns, {
+    global.$workshopWatcher = chokidar.watch(WORKSHOP_PATTERNS, {
       ignoreInitial: true,
     })
 
@@ -92,6 +102,6 @@ export function resolveWorkshopEnvPlugin() {
   }
 
   function _writeModule() {
-    fs.writeFileSync(modulePath, compileModule(paths))
+    fs.writeFileSync(WORKSHOP_SCOPES_PATH, compileModule(paths))
   }
 }

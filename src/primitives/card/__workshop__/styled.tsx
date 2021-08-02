@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const StyledCard = styled(Card).attrs({forwardedAs: 'ol'})``
 
-export function StyledCardStory() {
+export default function StyledCardStory() {
   return (
     <Flex align="center" height="fill" justify="center">
       <StyledCard>
