@@ -102,58 +102,65 @@ function Color(props: {color: ThemeColor; tone: CardTone}) {
 
   return (
     <Card padding={[3, 4, 5]} tone={tone}>
-      <Stack
-        marginBottom={4}
-        padding={3}
-        space={2}
-        style={{
-          borderRadius: 3,
-          boxShadow: `inset 0 0 0 1px ${color.base.border}`,
-        }}
-      >
-        <Text>Text</Text>
-        <Text muted>Muted</Text>
-        <Text accent>Accent</Text>
-        <Text>
-          <a href="#">Link</a>
-        </Text>
-        <Text>
-          <code>Code</code>
-        </Text>
+      <Stack space={[3, 4, 5]}>
+        <Stack
+          padding={3}
+          space={2}
+          style={{
+            borderRadius: 3,
+            boxShadow: `inset 0 0 0 1px ${color.base.border}`,
+          }}
+        >
+          <Text>Text</Text>
+          <Text muted>Muted</Text>
+          <Text accent>Accent</Text>
+          <Text>
+            <a href="#">Link</a>
+          </Text>
+          <Text>
+            <code>Code</code>
+          </Text>
+          <div
+            style={{
+              height: 9,
+              background: `linear-gradient(to right, ${color.base.skeleton?.from}, ${color.base.skeleton?.to})`,
+            }}
+          />
+        </Stack>
+
+        {features.button && <ColorButton color={color.button} />}
+
+        {features.card && (
+          <Box padding={2} style={{backgroundColor: color.card.enabled.bg}}>
+            <Text style={{color: 'inherit'}}>Card</Text>
+          </Box>
+        )}
+
+        {features.input && (
+          <Box padding={2} style={{backgroundColor: color.input.default.enabled.bg}}>
+            <Text style={{color: 'inherit'}}>Input</Text>
+          </Box>
+        )}
+
+        {features.muted && <ColorMuted color={color.muted} />}
+
+        {features.selectable && <ColorSelectable color={color.selectable} />}
+
+        {features.solid && <ColorSolid color={color.solid} />}
+
+        {features.spot && (
+          <Flex gap={1} padding={2}>
+            <Box flex={1} style={{backgroundColor: color.spot.blue, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.spot.purple, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.spot.magenta, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.spot.red, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.spot.yellow, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.spot.green, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.spot.cyan, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.spot.gray, width: 25, height: 25}} />
+          </Flex>
+        )}
       </Stack>
-
-      {features.button && <ColorButton color={color.button} />}
-
-      {features.card && (
-        <Box padding={2} style={{backgroundColor: color.card.enabled.bg}}>
-          <Text style={{color: 'inherit'}}>Card</Text>
-        </Box>
-      )}
-
-      {features.input && (
-        <Box padding={2} style={{backgroundColor: color.input.default.enabled.bg}}>
-          <Text style={{color: 'inherit'}}>Input</Text>
-        </Box>
-      )}
-
-      {features.muted && <ColorMuted color={color.muted} />}
-
-      {features.selectable && <ColorSelectable color={color.selectable} />}
-
-      {features.solid && <ColorSolid color={color.solid} />}
-
-      {features.spot && (
-        <Flex gap={1} padding={2}>
-          <Box flex={1} style={{backgroundColor: color.spot.blue, width: 25, height: 25}} />
-          <Box flex={1} style={{backgroundColor: color.spot.purple, width: 25, height: 25}} />
-          <Box flex={1} style={{backgroundColor: color.spot.magenta, width: 25, height: 25}} />
-          <Box flex={1} style={{backgroundColor: color.spot.red, width: 25, height: 25}} />
-          <Box flex={1} style={{backgroundColor: color.spot.yellow, width: 25, height: 25}} />
-          <Box flex={1} style={{backgroundColor: color.spot.green, width: 25, height: 25}} />
-          <Box flex={1} style={{backgroundColor: color.spot.cyan, width: 25, height: 25}} />
-          <Box flex={1} style={{backgroundColor: color.spot.gray, width: 25, height: 25}} />
-        </Flex>
-      )}
     </Card>
   )
 }
@@ -253,6 +260,12 @@ function ColorGenericState(props: {color: ThemeColorButtonState}) {
       <Text align="center" size={1} style={{color: color.code.fg}}>
         <span style={{backgroundColor: color.code.bg}}>Code</span>
       </Text>
+      <div
+        style={{
+          height: 9,
+          background: `linear-gradient(to right, ${color.skeleton?.from}, ${color.skeleton?.to})`,
+        }}
+      />
     </Stack>
   )
 }
