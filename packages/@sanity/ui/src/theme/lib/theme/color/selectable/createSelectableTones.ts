@@ -2,34 +2,34 @@ import {ThemeColorBase} from '../base'
 import {ThemeColorBuilderOpts} from '../factory'
 import {ThemeColorMuted} from '../muted'
 import {ThemeColorSolid} from '../solid'
-import {ThemeColorMenuItem, ThemeColorMenuItemStates} from './types'
+import {ThemeColorSelectable, ThemeColorSelectableStates} from './types'
 
-export function createMenuItemTones(
+export function createSelectableTones(
   opts: ThemeColorBuilderOpts,
   base: ThemeColorBase,
   dark: boolean,
   solid: ThemeColorSolid,
   muted: ThemeColorMuted
-): ThemeColorMenuItem {
+): ThemeColorSelectable {
   return {
-    default: createMenuItemStates(opts, base, dark, solid, muted, 'default'),
-    primary: createMenuItemStates(opts, base, dark, solid, muted, 'primary'),
-    positive: createMenuItemStates(opts, base, dark, solid, muted, 'positive'),
-    caution: createMenuItemStates(opts, base, dark, solid, muted, 'caution'),
-    critical: createMenuItemStates(opts, base, dark, solid, muted, 'critical'),
+    default: _createSelectableStates(opts, base, dark, solid, muted, 'default'),
+    primary: _createSelectableStates(opts, base, dark, solid, muted, 'primary'),
+    positive: _createSelectableStates(opts, base, dark, solid, muted, 'positive'),
+    caution: _createSelectableStates(opts, base, dark, solid, muted, 'caution'),
+    critical: _createSelectableStates(opts, base, dark, solid, muted, 'critical'),
   }
 }
 
-function createMenuItemStates(
+function _createSelectableStates(
   opts: ThemeColorBuilderOpts,
   base: ThemeColorBase,
   dark: boolean,
   solid: ThemeColorSolid,
   muted: ThemeColorMuted,
   tone: 'default' | 'primary' | 'positive' | 'caution' | 'critical'
-): ThemeColorMenuItemStates {
+): ThemeColorSelectableStates {
   return {
-    enabled: opts.menuItem({
+    enabled: opts.selectable({
       base,
       dark,
       solid,
@@ -37,7 +37,7 @@ function createMenuItemStates(
       state: 'enabled',
       tone,
     }),
-    hovered: opts.menuItem({
+    hovered: opts.selectable({
       base,
       dark,
       solid,
@@ -45,7 +45,7 @@ function createMenuItemStates(
       state: 'hovered',
       tone,
     }),
-    pressed: opts.menuItem({
+    pressed: opts.selectable({
       base,
       dark,
       solid,
@@ -53,7 +53,7 @@ function createMenuItemStates(
       state: 'pressed',
       tone,
     }),
-    selected: opts.menuItem({
+    selected: opts.selectable({
       base,
       dark,
       solid,
@@ -61,7 +61,7 @@ function createMenuItemStates(
       state: 'selected',
       tone,
     }),
-    disabled: opts.menuItem({
+    disabled: opts.selectable({
       base,
       dark,
       solid,

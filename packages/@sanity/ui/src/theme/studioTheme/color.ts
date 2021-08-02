@@ -530,7 +530,7 @@ export const color = createColorTheme({
     }
   },
 
-  menuItem: ({base, muted, tone, solid, state}) => {
+  selectable: ({base, muted, tone, solid, state}) => {
     if (state === 'enabled') {
       return {
         ...muted[tone].enabled,

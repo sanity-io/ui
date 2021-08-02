@@ -2,8 +2,8 @@ import {ThemeColorBase} from './base'
 import {ThemeColorButton} from './button'
 import {ThemeColorCard} from './card'
 import {ThemeColorInput} from './input'
-import {ThemeColorMenuItem} from './menuItem'
 import {ThemeColorMuted} from './muted'
+import {ThemeColorSelectable} from './selectable'
 import {ThemeColorSolid} from './solid'
 import {ThemeColorSpot} from './spot'
 import {ThemeColorSyntax} from './syntax'
@@ -44,7 +44,7 @@ export interface ThemeColor {
   button: ThemeColorButton
   card: ThemeColorCard
   input: ThemeColorInput
-  menuItem: ThemeColorMenuItem
+  selectable: ThemeColorSelectable
   spot: ThemeColorSpot
   syntax: ThemeColorSyntax
   solid: ThemeColorSolid
