@@ -36,6 +36,23 @@ describe('color', () => {
         bg: 'hsl(0, 0%, 95%)',
         border: 'hsl(0, 0%, 70%)',
         fg: 'hsl(0, 0%, 20%)',
+        muted: {
+          fg: 'hsl(0, 0%, 0%)',
+        },
+        link: {
+          fg: 'hsl(0, 0%, 0%)',
+        },
+        accent: {
+          fg: 'hsl(0, 0%, 0%)',
+        },
+        code: {
+          bg: 'hsl(0, 0%, 0%)',
+          fg: 'hsl(0, 0%, 0%)',
+        },
+        skeleton: {
+          from: 'hsl(0, 0%, 0%)',
+          to: 'hsl(0, 0%, 0%)',
+        },
       })
     })
   })

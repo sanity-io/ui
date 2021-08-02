@@ -1,4 +1,4 @@
-import {ThemeColorBuilderOpts} from './types'
+import {ThemeColorBuilderOpts} from './factory'
 
 const black = 'hsl(0, 0%, 0%)'
 const white = 'hsl(0, 0%, 100%)'
@@ -149,7 +149,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
     }
   },
 
-  solid: ({dark, state, tone}) => {
+  solid: ({base, dark, state, tone}) => {
     const color = colors[tone]
 
     if (state === 'hovered') {
@@ -157,6 +157,20 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         bg: dark ? color.light : color.dark,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.darkest : color.lightest,
+        muted: {
+          fg: black,
+        },
+        accent: {
+          fg: black,
+        },
+        link: {
+          fg: black,
+        },
+        code: {
+          bg: black,
+          fg: black,
+        },
+        skeleton: base.skeleton,
       }
     }
 
@@ -164,10 +178,24 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       bg: color.base,
       border: dark ? color.light : color.dark,
       fg: dark ? color.darkest : color.lightest,
+      muted: {
+        fg: black,
+      },
+      accent: {
+        fg: black,
+      },
+      link: {
+        fg: black,
+      },
+      code: {
+        bg: black,
+        fg: black,
+      },
+      skeleton: base.skeleton,
     }
   },
 
-  muted: ({dark, state, tone}) => {
+  muted: ({base, dark, state, tone}) => {
     const color = colors[tone]
 
     if (state === 'hovered') {
@@ -175,6 +203,20 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         bg: dark ? color.darker : color.lighter,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.lightest : color.darkest,
+        muted: {
+          fg: black,
+        },
+        accent: {
+          fg: black,
+        },
+        link: {
+          fg: black,
+        },
+        code: {
+          bg: black,
+          fg: black,
+        },
+        skeleton: base.skeleton,
       }
     }
 
@@ -182,10 +224,24 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       bg: dark ? color.darkest : color.lightest,
       border: dark ? color.darker : color.lighter,
       fg: dark ? color.lighter : color.darker,
+      muted: {
+        fg: black,
+      },
+      accent: {
+        fg: black,
+      },
+      link: {
+        fg: black,
+      },
+      code: {
+        bg: black,
+        fg: black,
+      },
+      skeleton: base.skeleton,
     }
   },
 
-  button: ({mode, muted, solid}) => {
+  button: ({base, mode, muted, solid}) => {
     if (mode === 'bleed') {
       return {
         ...muted,
@@ -193,11 +249,39 @@ export const defaultOpts: ThemeColorBuilderOpts = {
           bg: 'transparent',
           fg: muted.enabled.fg,
           border: 'transparent',
+          muted: {
+            fg: black,
+          },
+          accent: {
+            fg: black,
+          },
+          link: {
+            fg: black,
+          },
+          code: {
+            bg: black,
+            fg: black,
+          },
+          skeleton: base.skeleton,
         },
         hovered: {
           bg: muted.enabled.bg,
           fg: muted.hovered.fg,
           border: 'transparent',
+          muted: {
+            fg: black,
+          },
+          accent: {
+            fg: black,
+          },
+          link: {
+            fg: black,
+          },
+          code: {
+            bg: black,
+            fg: black,
+          },
+          skeleton: base.skeleton,
         },
       }
     }
@@ -240,6 +324,10 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       border: black,
       placeholder: black,
     }
+  },
+
+  menuItem: ({muted, state, tone}) => {
+    return muted[tone][state]
   },
 
   spot: ({key}) => {
