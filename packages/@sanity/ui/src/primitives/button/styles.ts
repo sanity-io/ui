@@ -4,6 +4,9 @@ import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 import {ButtonMode, ButtonTone} from '../../types'
 
+/**
+ * @internal
+ */
 export function buttonBaseStyles(): FlattenSimpleInterpolation {
   return css`
     -webkit-font-smoothing: inherit;
