@@ -15,6 +15,8 @@ const tones: {[key: string]: ColorTints} = {
 export const color = createColorTheme({
   base: ({dark, name}) => {
     if (name === 'default') {
+      const skeletonFrom = dark ? hues.gray[900].hex : hues.gray[100].hex
+
       return {
         fg: dark ? white.hex : black.hex,
         bg: dark ? black.hex : white.hex,
@@ -27,14 +29,15 @@ export const color = createColorTheme({
           ambient: rgba(dark ? black.hex : hues.gray[500].hex, 0.12),
         },
         skeleton: {
-          from: dark ? hues.gray[900].hex : hues.gray[100].hex,
-          to: rgba(dark ? hues.gray[900].hex : hues.gray[100].hex, 0.5),
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
         },
       }
     }
 
     if (name === 'transparent') {
       const tints = tones.default
+      const skeletonFrom = tints[dark ? 800 : 200].hex
 
       return {
         fg: tints[dark ? 100 : 900].hex,
@@ -48,13 +51,14 @@ export const color = createColorTheme({
           ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
         },
         skeleton: {
-          from: dark ? tints[800].hex : tints[200].hex,
-          to: rgba(dark ? tints[800].hex : tints[200].hex, 0.5),
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
         },
       }
     }
 
     const tints = tones[name] || tones.default
+    const skeletonFrom = tints[dark ? 800 : 200].hex
 
     return {
       fg: tints[dark ? 100 : 900].hex,
@@ -68,8 +72,8 @@ export const color = createColorTheme({
         ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
       },
       skeleton: {
-        from: dark ? tints[800].hex : tints[200].hex,
-        to: rgba(dark ? tints[800].hex : tints[200].hex, 0.5),
+        from: skeletonFrom,
+        to: rgba(skeletonFrom, 0.5),
       },
     }
   },
@@ -83,6 +87,7 @@ export const color = createColorTheme({
       tints = tones.default
 
       const bg = mix(base.bg, tints[dark ? 800 : 200].hex)
+      const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {
         bg,
@@ -101,12 +106,16 @@ export const color = createColorTheme({
           bg,
           fg: mix(base.bg, tints[dark ? 950 : 50].hex),
         },
-        skeleton: base.skeleton,
+        skeleton: {
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
+        },
       }
     }
 
     if (state === 'hovered') {
       const bg = mix(base.bg, tints[dark ? 300 : 600].hex)
+      const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {
         bg,
@@ -125,12 +134,16 @@ export const color = createColorTheme({
           bg: mix(bg, tints[dark ? 950 : 50].hex),
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
-        skeleton: base.skeleton,
+        skeleton: {
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
+        },
       }
     }
 
     if (state === 'pressed') {
       const bg = mix(base.bg, tints[dark ? 200 : 800].hex)
+      const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {
         bg: mix(base.bg, tints[dark ? 200 : 800].hex),
@@ -149,12 +162,16 @@ export const color = createColorTheme({
           bg: mix(bg, tints[dark ? 950 : 50].hex),
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
-        skeleton: base.skeleton,
+        skeleton: {
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
+        },
       }
     }
 
     if (state === 'selected') {
       const bg = mix(base.bg, tints[dark ? 200 : 800].hex)
+      const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {
         bg,
@@ -173,31 +190,38 @@ export const color = createColorTheme({
           bg: mix(bg, tints[dark ? 950 : 50].hex),
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
-        skeleton: base.skeleton,
+        skeleton: {
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
+        },
       }
     }
 
     // state: "enabled" | unknown
     const bg = mix(base.bg, tints[dark ? 400 : 500].hex)
+    const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
     return {
       bg,
       border: mix(base.bg, tints[dark ? 400 : 500].hex),
       fg: mix(base.bg, dark ? black.hex : white.hex),
       muted: {
-        fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        fg: mix(base.bg, tints[dark ? 900 : 100].hex),
       },
       accent: {
-        fg: mix2(bg, hues.red[dark ? 800 : 200].hex),
+        fg: mix2(bg, hues.red[dark ? 900 : 100].hex),
       },
       link: {
-        fg: mix2(bg, hues.blue[dark ? 800 : 200].hex),
+        fg: mix2(bg, hues.blue[dark ? 900 : 100].hex),
       },
       code: {
         bg: mix(bg, tints[dark ? 950 : 50].hex),
-        fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        fg: mix(base.bg, tints[dark ? 900 : 100].hex),
       },
-      skeleton: base.skeleton,
+      skeleton: {
+        from: skeletonFrom,
+        to: rgba(skeletonFrom, 0.5),
+      },
     }
   },
 
@@ -209,8 +233,8 @@ export const color = createColorTheme({
     if (state === 'disabled') {
       tints = tones.default
 
-      const {skeleton} = base
       const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
+      const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {
         bg,
@@ -229,103 +253,120 @@ export const color = createColorTheme({
           bg,
           fg: mix(bg, tints[dark ? 900 : 100].hex),
         },
-        skeleton,
+        skeleton: {
+          from: rgba(skeletonFrom, 0.5),
+          to: rgba(skeletonFrom, 0.25),
+        },
       }
     }
 
     if (state === 'hovered') {
-      // const { skeleton} = base
       const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
+      const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {
         bg,
         border: mix(base.bg, tints[dark ? 950 : 50].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
         muted: {
-          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+          fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         },
         accent: {
-          fg: mix(base.bg, hues.red[dark ? 400 : 600].hex),
+          fg: mix(base.bg, hues.red[dark ? 300 : 700].hex),
         },
         link: {
-          fg: mix(base.bg, hues.blue[dark ? 400 : 600].hex),
+          fg: mix(base.bg, hues.blue[dark ? 300 : 700].hex),
         },
         code: {
           bg: mix(bg, tints[dark ? 950 : 50].hex),
-          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+          fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         },
-        skeleton: base.skeleton,
+        skeleton: {
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
+        },
       }
     }
 
     if (state === 'pressed') {
-      const {skeleton} = base
       const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+      const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {
         bg: mix(base.bg, tints[dark ? 900 : 100].hex),
         border: mix(base.bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
         muted: {
-          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+          fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         },
         accent: {
-          fg: mix(bg, hues.red[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.red[dark ? 300 : 700].hex),
         },
         link: {
-          fg: mix(bg, hues.blue[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.blue[dark ? 300 : 700].hex),
         },
         code: {
           bg: mix(bg, tints[dark ? 950 : 50].hex),
-          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+          fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         },
-        skeleton,
+        skeleton: {
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
+        },
       }
     }
 
     if (state === 'selected') {
-      const {skeleton} = base
       const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+      const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {
         bg,
         border: mix(base.bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
         muted: {
-          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+          fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         },
         accent: {
-          fg: mix(bg, hues.red[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.red[dark ? 300 : 700].hex),
         },
         link: {
-          fg: mix(bg, hues.blue[dark ? 400 : 600].hex),
+          fg: mix(bg, hues.blue[dark ? 300 : 700].hex),
         },
         code: {
           bg: mix(bg, tints[dark ? 950 : 50].hex),
-          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+          fg: mix(base.bg, tints[dark ? 300 : 700].hex),
         },
-        skeleton,
+        skeleton: {
+          from: skeletonFrom,
+          to: rgba(skeletonFrom, 0.5),
+        },
       }
     }
+
+    const skeletonFrom = mix(base.bg, tints[dark ? 900 : 100].hex)
 
     return {
       bg: mix(base.bg, tints[dark ? 900 : 100].hex),
       border: mix(base.bg, tints[dark ? 900 : 100].hex),
-      fg: mix(base.bg, tints[dark ? 300 : 700].hex),
+      fg: mix(base.bg, tints[dark ? 100 : 900].hex),
       muted: {
-        fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        fg: mix(base.bg, tints[dark ? 300 : 700].hex),
       },
       accent: {
-        fg: mix(base.bg, hues.red[dark ? 400 : 600].hex),
+        fg: mix(base.bg, hues.red[dark ? 300 : 700].hex),
       },
       link: {
-        fg: mix(base.bg, hues.blue[dark ? 400 : 600].hex),
+        fg: mix(base.bg, hues.blue[dark ? 300 : 700].hex),
       },
       code: {
         bg: mix(base.bg, tints[dark ? 950 : 50].hex),
-        fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        fg: mix(base.bg, tints[dark ? 300 : 700].hex),
       },
-      skeleton: base.skeleton,
+      skeleton: {
+        from: skeletonFrom,
+        to: rgba(skeletonFrom, 0.5),
+      },
     }
   },
 
