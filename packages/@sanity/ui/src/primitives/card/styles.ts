@@ -1,7 +1,7 @@
 import {css, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
-import {ThemeColorBase, ThemeColorCardState} from '../../theme'
 import {CardStyleProps} from './types'
 
 export function cardStyle(
@@ -34,36 +34,6 @@ export function cardBaseStyle(): FlattenSimpleInterpolation {
   `
 }
 
-function vars(base: ThemeColorBase, color: ThemeColorCardState) {
-  // Custom properties that may be used by other atoms
-  return css`
-    --card-bg-color: ${color.bg};
-    --card-fg-color: ${color.fg};
-    --card-focus-ring-color: ${base.focusRing};
-    --card-border-color: ${color.border};
-    --card-muted-fg-color: ${color.muted.fg};
-    --card-accent-fg-color: ${color.accent.fg};
-    --card-link-fg-color: ${color.link.fg};
-    --card-code-bg-color: ${color.code.bg};
-    --card-code-fg-color: ${color.code.fg};
-
-    /* @todo: deprecate */
-    --card-link-color: ${color.link.fg};
-    --card-hairline-soft-color: ${color.border};
-    --card-hairline-hard-color: ${color.border};
-
-    /* @todo: rename to "--base-"? */
-    --card-shadow-outline-color: ${base.shadow.outline};
-    --card-shadow-umbra-color: ${base.shadow.umbra};
-    --card-shadow-penumbra-color: ${base.shadow.penumbra};
-    --card-shadow-ambient-color: ${base.shadow.ambient};
-
-    /* Skeleton */
-    --card-skeleton-color-from: ${color.skeleton?.from};
-    --card-skeleton-color-to: ${color.skeleton?.to};
-  `
-}
-
 export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpleInterpolation {
   const {$focusRing, theme} = props
   const {focusRing} = theme.sanity
@@ -71,7 +41,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
   const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
-    ${vars(base, card.enabled)}
+    ${_colorVarsStyle(base, card.enabled)}
 
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
@@ -79,21 +49,21 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
     /* &:is(button) */
     &[data-as='button'] {
       &:disabled {
-        ${vars(base, card.disabled)}
+        ${_colorVarsStyle(base, card.disabled)}
       }
 
       &[data-selected] {
-        ${vars(base, card.pressed)}
+        ${_colorVarsStyle(base, card.pressed)}
       }
 
       &:not(:disabled) {
         @media (hover: hover) {
           &:hover {
-            ${vars(base, card.hovered)}
+            ${_colorVarsStyle(base, card.hovered)}
           }
 
           &:active {
-            ${vars(base, card.pressed)}
+            ${_colorVarsStyle(base, card.pressed)}
           }
         }
 
@@ -108,7 +78,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         &[data-selected],
         &[aria-pressed='true'],
         [aria-selected='true'] > & {
-          ${vars(base, card.selected)}
+          ${_colorVarsStyle(base, card.selected)}
         }
       }
     }
@@ -116,11 +86,11 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
     /* &:is(a) */
     &[data-as='a'] {
       &[data-disabled] {
-        ${vars(base, card.disabled)}
+        ${_colorVarsStyle(base, card.disabled)}
       }
 
       &[data-selected] {
-        ${vars(base, card.pressed)}
+        ${_colorVarsStyle(base, card.pressed)}
       }
 
       &:not([data-disabled]) {
@@ -128,11 +98,11 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
           outline: none;
 
           &:hover {
-            ${vars(base, card.hovered)}
+            ${_colorVarsStyle(base, card.hovered)}
           }
 
           &:active {
-            ${vars(base, card.pressed)}
+            ${_colorVarsStyle(base, card.pressed)}
           }
         }
 
@@ -145,7 +115,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         }
 
         [aria-selected='true'] > & {
-          ${vars(base, card.selected)}
+          ${_colorVarsStyle(base, card.selected)}
         }
       }
     }
