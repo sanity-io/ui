@@ -9,10 +9,11 @@ import React, {
 } from 'react'
 import {isValidElementType} from 'react-is'
 import {useForwardedRef} from '../../hooks'
-import {Box, Card, Flex, Text} from '../../primitives'
+import {Box, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {ThemeColorToneKey} from '../../theme'
+import {SelectableTone} from '../../types/selectable'
 import {Hotkeys} from '../hotkeys'
+import {Selectable} from './_selectable'
 import {useMenu} from './useMenu'
 
 /**
@@ -27,7 +28,7 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   selected?: boolean
   space?: number | number[]
   text?: React.ReactNode
-  tone?: ThemeColorToneKey
+  tone?: SelectableTone
 }
 
 /**
@@ -38,6 +39,7 @@ export const MenuItem = forwardRef(function MenuItem(
   forwardedRef: React.ForwardedRef<HTMLDivElement>
 ) {
   const {
+    as = 'button',
     children,
     disabled,
     fontSize = 2,
@@ -56,12 +58,12 @@ export const MenuItem = forwardRef(function MenuItem(
     selected: selectedProp,
     space = 3,
     text,
+    tone = 'default',
     ...restProps
   } = props
   const {activeElement, mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const active = rootElement === activeElement
-  const selected = active // || (!activeElement && selectedProp)
+  const selected = Boolean(activeElement) && rootElement === activeElement
 
   useEffect(() => mount(rootElement, selectedProp), [mount, rootElement, selectedProp])
 
@@ -98,20 +100,23 @@ export const MenuItem = forwardRef(function MenuItem(
   )
 
   return (
-    <Card
-      as="button"
+    <Selectable
+      data-as={as}
       data-ui="MenuItem"
+      forwardedAs={as}
       {...restProps}
+      data-selected={selected ? '' : undefined}
+      $radius={radius}
+      $tone={tone}
       disabled={disabled}
       onClick={handleClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      radius={radius}
+      padding={0}
       ref={setRef}
       role="menuitem"
-      selected={selected}
       tabIndex={-1}
-      type="button"
+      type={as === 'button' ? 'button' : undefined}
     >
       {(icon || text || iconRight) && (
         <Box as="span" {...paddingProps}>
@@ -156,6 +161,6 @@ export const MenuItem = forwardRef(function MenuItem(
           {children}
         </Box>
       )}
-    </Card>
+    </Selectable>
   )
 })

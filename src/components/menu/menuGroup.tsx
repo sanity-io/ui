@@ -1,7 +1,9 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {Box, Card, Popover, PopoverProps, Text} from '../../primitives'
+import {Box, Popover, PopoverProps, Text} from '../../primitives'
+import {SelectableTone} from '../../types/selectable'
+import {Selectable} from './_selectable'
 import {Menu} from './menu'
 import {useMenu} from './useMenu'
 
@@ -9,11 +11,13 @@ import {useMenu} from './useMenu'
  * @public
  */
 export interface MenuGroupProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: number | number[]
   text: React.ReactNode
+  tone?: SelectableTone
 }
 
 const MOUSE_LEAVE_TIMEOUT = 1000
@@ -36,6 +40,7 @@ export function MenuGroup(
   props: MenuGroupProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref'>
 ): React.ReactElement {
   const {
+    as = 'button',
     children,
     fontSize,
     onClick,
@@ -43,6 +48,7 @@ export function MenuGroup(
     popover = {},
     radius = 2,
     text,
+    tone = 'default',
     ...restProps
   } = props
   const [open, setOpen] = useState(false)
@@ -59,7 +65,8 @@ export function MenuGroup(
   const [rootElement, setRootElement] = useState<HTMLButtonElement | null>(null)
   const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const shouldFocusRef = useRef<'first' | 'last' | null>(null)
-  const active = activeElement === rootElement
+  const active = Boolean(activeElement) && activeElement === rootElement
+  const selected = active || open
 
   // Register the element
   useEffect(() => mount(rootElement), [mount, rootElement])
@@ -182,18 +189,21 @@ export function MenuGroup(
 
   return (
     <Popover {...popover} content={content} data-ui="MenuGroup__popover" open={open}>
-      <Card
-        as="button"
+      <Selectable
+        data-as={as}
         data-ui="MenuGroup"
+        forwardedAs={as}
         {...restProps}
+        data-selected={selected ? '' : undefined}
+        $radius={radius}
+        $tone={tone}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        radius={radius}
         ref={setRootElement}
-        selected={active || open}
         tabIndex={-1}
+        type={as === 'button' ? 'button' : undefined}
       >
         <Box padding={padding}>
           <TextContainer>
@@ -203,7 +213,7 @@ export function MenuGroup(
             </Text>
           </TextContainer>
         </Box>
-      </Card>
+      </Selectable>
     </Popover>
   )
 }

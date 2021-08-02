@@ -1,7 +1,7 @@
 import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
-import {ThemeColorButtonState} from '../../theme'
 import {ButtonMode, ButtonTone} from '../../types'
 
 export function buttonBaseStyles(): FlattenSimpleInterpolation {
@@ -39,14 +39,9 @@ export function buttonBaseStyles(): FlattenSimpleInterpolation {
 
 const buttonTheme = {border: {width: 1}}
 
-function buttonColorVarsStyle(color: ThemeColorButtonState) {
-  return {
-    '--card-bg-color': color.bg,
-    '--card-fg-color': color.fg,
-    '--card-border-color': color.border,
-  }
-}
-
+/**
+ * @internal
+ */
 export function buttonColorStyles(
   props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps
 ): CSSObject[] {
@@ -58,12 +53,12 @@ export function buttonColorStyles(
   const border = {width: buttonTheme.border.width, color: 'var(--card-border-color)'}
 
   return [
-    buttonColorVarsStyle(color.enabled),
+    _colorVarsStyle(base, color.enabled),
     {
       backgroundColor: 'var(--card-bg-color)',
       color: 'var(--card-fg-color)',
       boxShadow: focusRingBorderStyle(border),
-      '&:disabled, &[data-disabled="true"]': buttonColorVarsStyle(color.disabled),
+      '&:disabled, &[data-disabled="true"]': _colorVarsStyle(base, color.disabled),
       "&:not([data-disabled='true'])": {
         '&:focus': {
           boxShadow: focusRingStyle({base, border, focusRing}),
@@ -72,10 +67,10 @@ export function buttonColorStyles(
           boxShadow: focusRingBorderStyle(border),
         },
         '@media (hover: hover)': {
-          '&:hover': buttonColorVarsStyle(color.hovered),
-          '&:active': buttonColorVarsStyle(color.pressed),
+          '&:hover': _colorVarsStyle(base, color.hovered),
+          '&:active': _colorVarsStyle(base, color.pressed),
         },
-        '&[data-selected]': buttonColorVarsStyle(color.selected),
+        '&[data-selected]': _colorVarsStyle(base, color.selected),
       },
     },
     theme.sanity.styles?.button?.root,

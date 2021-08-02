@@ -6,16 +6,16 @@ export default function BasicStory() {
   return (
     <Box padding={[4, 5, 6]}>
       <Tree space={1}>
-        <TreeItem expanded text="Fruit" weight="bold">
+        <TreeItem expanded text="Fruit">
           <TreeItem text="Oranges" />
           <TreeItem text="Pineapple" selected />
-          <TreeItem expanded text="Apples" weight="bold">
+          <TreeItem text="Apples">
             <TreeItem href="#apples-macintosh" icon={LinkIcon} text="Macintosh" />
             <TreeItem text="Granny Smith" />
             <TreeItem text="Fuji" />
           </TreeItem>
           <TreeItem text="Bananas" />
-          <TreeItem text="Pears" weight="bold">
+          <TreeItem text="Pears">
             <TreeItem text="Anjou" />
             <TreeItem text="Bartlett" />
             <TreeItem text="Bosc" />

@@ -1,10 +1,15 @@
 import {useId} from '@reach/auto-id'
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import React, {createElement, useCallback, useEffect, useMemo, useRef} from 'react'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import {Box, Flex, Text} from '../../primitives'
-import {rem} from '../../styles'
-import {Theme, ThemeFontWeightKey} from '../../theme'
+import {ThemeFontWeightKey} from '../../theme'
+import {
+  treeItemRootStyle,
+  treeItemRootColorStyle,
+  treeItemBoxStyle,
+  TreeItemBoxStyleProps,
+} from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
@@ -22,74 +27,9 @@ export interface TreeItemProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.li((props: {theme: Theme}) => {
-  const {theme} = props
-  const {card, muted} = theme.sanity.color
+const Root = styled.li(treeItemRootStyle, treeItemRootColorStyle)
 
-  return css`
-    --treeitem-bg-color: ${card.enabled.bg};
-    --card-fg-color: ${card.enabled.fg};
-
-    &[data-selected] {
-      --treeitem-bg-color: ${card.pressed.bg};
-      --card-fg-color: ${card.pressed.fg};
-    }
-
-    &[role='none'] > [role='treeitem'] {
-      outline: none;
-      cursor: default;
-      background-color: var(--treeitem-bg-color);
-      color: var(--treeitem-fg-color);
-      border-radius: 3px;
-
-      &:not(:focus):hover {
-        --treeitem-bg-color: ${muted.default.hovered.bg};
-        --card-fg-color: ${muted.default.hovered.fg};
-      }
-
-      &:focus {
-        --treeitem-bg-color: ${card.selected.bg};
-        --card-fg-color: ${card.selected.fg};
-        position: relative;
-      }
-    }
-
-    &[role='treeitem'] {
-      outline: none;
-
-      & > div {
-        cursor: default;
-        background-color: var(--treeitem-bg-color);
-        color: var(--card-fg-color);
-        border-radius: 3px;
-      }
-
-      &:not(:focus) > div:hover {
-        --treeitem-bg-color: ${muted.default.hovered.bg};
-        --card-fg-color: ${muted.default.hovered.fg};
-      }
-
-      &:focus > div {
-        --treeitem-bg-color: ${card.selected.bg};
-        --card-fg-color: ${card.selected.fg};
-        position: relative;
-      }
-    }
-  `
-})
-
-const TreeItemBox = styled(Box)<{$level: number}>((props: {$level: number; theme: Theme}) => {
-  const {$level, theme} = props
-  const {space} = theme.sanity
-
-  return css`
-    padding-left: ${rem(space[2] * $level)};
-
-    &[data-as='a'] {
-      text-decoration: none;
-    }
-  `
-})
+const TreeItemBox = styled(Box)<TreeItemBoxStyleProps>(treeItemBoxStyle)
 
 const ToggleArrowText = styled(Text)`
   & > svg {
