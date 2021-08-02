@@ -13,25 +13,36 @@ import {
   ThemeColorButtonTones,
   ThemeColorProvider,
   ThemeColorScheme,
+  ThemeColorSelectable,
+  ThemeColorSelectableStates,
   useRootTheme,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import React, {createContext, useContext} from 'react'
-import {ThemeColorMenuItem, ThemeColorMenuItemStates} from '../lib/theme/color/menuItem'
+import {
+  ThemeColorMuted,
+  ThemeColorMutedTone,
+  ThemeColorSolid,
+  ThemeColorSolidTone,
+} from '../lib/theme'
 
 interface Features {
   button: boolean
   card: boolean
-  menuItem: boolean
   input: boolean
+  muted: boolean
+  selectable: boolean
+  solid: boolean
   spot: boolean
 }
 
 const defaultFeatures: Features = {
-  button: true,
+  button: false,
   card: false,
   input: false,
-  menuItem: false,
+  muted: true,
+  selectable: false,
+  solid: true,
   spot: false,
 }
 
@@ -45,12 +56,14 @@ export default function CanvasStory() {
   const {theme} = useRootTheme()
   const features: Features = {
     ...defaultFeatures,
-    button: useBoolean('Show button', defaultFeatures.button, 'Props') ?? defaultFeatures.button,
-    card: useBoolean('Show card', defaultFeatures.card, 'Props') ?? defaultFeatures.card,
-    input: useBoolean('Show input', defaultFeatures.input, 'Props') ?? defaultFeatures.input,
-    menuItem:
-      useBoolean('Show menuItem', defaultFeatures.menuItem, 'Props') ?? defaultFeatures.menuItem,
-    spot: useBoolean('Show spot', defaultFeatures.spot, 'Props') ?? defaultFeatures.spot,
+    button: useBoolean('Button', defaultFeatures.button, 'Props') ?? defaultFeatures.button,
+    card: useBoolean('Card', defaultFeatures.card, 'Props') ?? defaultFeatures.card,
+    input: useBoolean('Input', defaultFeatures.input, 'Props') ?? defaultFeatures.input,
+    muted: useBoolean('Muted', defaultFeatures.muted, 'Props') ?? defaultFeatures.muted,
+    selectable:
+      useBoolean('Selectable', defaultFeatures.selectable, 'Props') ?? defaultFeatures.selectable,
+    solid: useBoolean('Solid', defaultFeatures.solid, 'Props') ?? defaultFeatures.solid,
+    spot: useBoolean('Spot', defaultFeatures.spot, 'Props') ?? defaultFeatures.spot,
   }
 
   return (
@@ -123,7 +136,11 @@ function Color(props: {color: ThemeColor; tone: CardTone}) {
         </Box>
       )}
 
-      {features.menuItem && <ColorMenuItem color={color.menuItem} />}
+      {features.muted && <ColorMuted color={color.muted} />}
+
+      {features.selectable && <ColorSelectable color={color.selectable} />}
+
+      {features.solid && <ColorSolid color={color.solid} />}
 
       {features.spot && (
         <Flex gap={1} padding={2}>
@@ -240,21 +257,77 @@ function ColorGenericState(props: {color: ThemeColorButtonState}) {
   )
 }
 
-function ColorMenuItem(props: {color: ThemeColorMenuItem}) {
+function ColorMuted(props: {color: ThemeColorMuted}) {
   const {color} = props
 
   return (
     <Stack space={1}>
-      <ColorMenuItemTone color={color.default} />
-      <ColorMenuItemTone color={color.primary} />
-      <ColorMenuItemTone color={color.positive} />
-      <ColorMenuItemTone color={color.caution} />
-      <ColorMenuItemTone color={color.critical} />
+      <ColorMutedTone color={color.default} />
+      <ColorMutedTone color={color.primary} />
+      <ColorMutedTone color={color.positive} />
+      <ColorMutedTone color={color.caution} />
+      <ColorMutedTone color={color.critical} />
     </Stack>
   )
 }
 
-function ColorMenuItemTone(props: {color: ThemeColorMenuItemStates}) {
+function ColorMutedTone(props: {color: ThemeColorMutedTone}) {
+  const {color} = props
+
+  return (
+    <Grid columns={5} gap={1}>
+      <ColorGenericState color={color.enabled} />
+      <ColorGenericState color={color.hovered} />
+      <ColorGenericState color={color.pressed} />
+      <ColorGenericState color={color.selected} />
+      <ColorGenericState color={color.disabled} />
+    </Grid>
+  )
+}
+
+function ColorSolid(props: {color: ThemeColorSolid}) {
+  const {color} = props
+
+  return (
+    <Stack space={1}>
+      <ColorSolidTone color={color.default} />
+      <ColorSolidTone color={color.primary} />
+      <ColorSolidTone color={color.positive} />
+      <ColorSolidTone color={color.caution} />
+      <ColorSolidTone color={color.critical} />
+    </Stack>
+  )
+}
+
+function ColorSolidTone(props: {color: ThemeColorSolidTone}) {
+  const {color} = props
+
+  return (
+    <Grid columns={5} gap={1}>
+      <ColorGenericState color={color.enabled} />
+      <ColorGenericState color={color.hovered} />
+      <ColorGenericState color={color.pressed} />
+      <ColorGenericState color={color.selected} />
+      <ColorGenericState color={color.disabled} />
+    </Grid>
+  )
+}
+
+function ColorSelectable(props: {color: ThemeColorSelectable}) {
+  const {color} = props
+
+  return (
+    <Stack space={1}>
+      <ColorSelectableTone color={color.default} />
+      <ColorSelectableTone color={color.primary} />
+      <ColorSelectableTone color={color.positive} />
+      <ColorSelectableTone color={color.caution} />
+      <ColorSelectableTone color={color.critical} />
+    </Stack>
+  )
+}
+
+function ColorSelectableTone(props: {color: ThemeColorSelectableStates}) {
   const {color} = props
 
   return (

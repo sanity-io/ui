@@ -326,7 +326,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
     }
   },
 
-  menuItem: ({muted, state, tone}) => {
+  selectable: ({muted, state, tone}) => {
     return muted[tone][state]
   },
 

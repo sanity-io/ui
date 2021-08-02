@@ -7,10 +7,10 @@ import {createCardStates} from './card/createCardStates'
 import {defaultOpts} from './defaults'
 import {ThemeColorInputState} from './input'
 import {createInputModes} from './input/createInputModes'
-import {ThemeColorMenuItemState} from './menuItem'
-import {createMenuItemTones} from './menuItem/createMenuItemTones'
 import {ThemeColorMuted, ThemeColorMutedTone} from './muted'
 import {createMutedTones} from './muted/createMuted'
+import {ThemeColorSelectableState} from './selectable'
+import {createSelectableTones} from './selectable/createSelectableTones'
 import {ThemeColorSolid, ThemeColorSolidTone} from './solid'
 import {createSolidTones} from './solid/createSolidTones'
 import {ThemeColorSpotKey} from './spot'
@@ -66,14 +66,14 @@ export interface ThemeColorBuilderOpts {
     mode: 'default' | 'invalid'
     state: 'enabled' | 'disabled' | 'hovered' | 'readOnly'
   }) => ThemeColorInputState
-  menuItem: (opts: {
+  selectable: (opts: {
     dark: boolean
     base: ThemeColorBase
     solid: ThemeColorSolid
     muted: ThemeColorMuted
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
     tone: 'default' | 'primary' | 'positive' | 'caution' | 'critical'
-  }) => ThemeColorMenuItemState
+  }) => ThemeColorSelectableState
   syntax: (opts: {base: ThemeColorBase; dark: boolean}) => ThemeColorSyntax
   spot: (opts: {base: ThemeColorBase; dark: boolean; key: ThemeColorSpotKey}) => string
 }
@@ -129,7 +129,7 @@ function _createColor(
     card: createCardStates(opts, base, dark, name, solid, muted),
     dark,
     input: createInputModes(opts, base, dark, solid, muted),
-    menuItem: createMenuItemTones(opts, base, dark, solid, muted),
+    selectable: createSelectableTones(opts, base, dark, solid, muted),
     spot: createSpot(opts, base, dark),
     syntax: opts.syntax({base, dark}),
     solid,

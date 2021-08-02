@@ -1,7 +1,7 @@
 import {css, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
-import {ThemeColorBase, ThemeColorMenuItemState} from '../../theme'
+import {ThemeColorBase, ThemeColorSelectableState} from '../../theme'
 import {MenuItemTone} from '../../types/menuItem'
 
 /**
@@ -34,7 +34,7 @@ export function menuItemBaseStyle(): FlattenSimpleInterpolation {
   `
 }
 
-function _vars(base: ThemeColorBase, color: ThemeColorMenuItemState) {
+function _vars(base: ThemeColorBase, color: ThemeColorSelectableState) {
   return {
     // Base
     // @todo: rename to "--base-"?
@@ -68,8 +68,8 @@ export function menuItemColorStyle(
 ): FlattenSimpleInterpolation {
   const {$focusRing, $tone, theme} = props
   const {focusRing} = theme.sanity
-  const {base, menuItem} = theme.sanity.color
-  const tone = menuItem[$tone] || menuItem.default
+  const {base, selectable} = theme.sanity.color
+  const tone = selectable[$tone] || selectable.default
   const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
