@@ -5,6 +5,7 @@ import {multiply, screen} from './helpers'
 
 const tones: {[key: string]: ColorTints} = {
   default: hues.gray,
+  transparent: hues.gray,
   primary: hues.blue,
   positive: hues.green,
   caution: hues.yellow,
@@ -17,8 +18,8 @@ export const color = createColorTheme({
       return {
         fg: dark ? white.hex : black.hex,
         bg: dark ? black.hex : white.hex,
-        border: hues.gray[dark ? 900 : 200].hex,
-        focusRing: hues.blue[500].hex,
+        border: hues.gray[dark ? 800 : 200].hex,
+        focusRing: hues.blue[dark ? 500 : 500].hex,
         shadow: {
           outline: rgba(hues.gray[500].hex, dark ? 0.2 : 0.4),
           umbra: rgba(dark ? black.hex : hues.gray[500].hex, 0.2),
@@ -75,81 +76,235 @@ export const color = createColorTheme({
 
   solid: ({base, dark, state, tone}) => {
     const mix = dark ? screen : multiply
-    const tints = tones[tone] || tones.default
+    const mix2 = dark ? multiply : screen
+    let tints = tones[tone] || tones.default
 
     if (state === 'disabled') {
+      tints = tones.default
+
+      const bg = mix(base.bg, tints[dark ? 800 : 200].hex)
+
       return {
-        bg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
-        border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        bg,
+        border: mix(base.bg, tints[dark ? 800 : 200].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        muted: {
+          fg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        },
+        accent: {
+          fg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        },
+        link: {
+          fg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        },
+        code: {
+          bg,
+          fg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        },
+        skeleton: base.skeleton,
       }
     }
 
     if (state === 'hovered') {
+      const bg = mix(base.bg, tints[dark ? 300 : 600].hex)
+
       return {
-        bg: mix(base.bg, tints[dark ? 300 : 600].hex),
+        bg,
         border: mix(base.bg, tints[dark ? 300 : 600].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        muted: {
+          fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        },
+        accent: {
+          fg: mix2(bg, hues.red[dark ? 800 : 200].hex),
+        },
+        link: {
+          fg: mix2(bg, hues.blue[dark ? 800 : 200].hex),
+        },
+        code: {
+          bg: mix(bg, tints[dark ? 950 : 50].hex),
+          fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        },
+        skeleton: base.skeleton,
       }
     }
 
     if (state === 'pressed') {
+      const bg = mix(base.bg, tints[dark ? 200 : 800].hex)
+
       return {
         bg: mix(base.bg, tints[dark ? 200 : 800].hex),
         border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        muted: {
+          fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        },
+        accent: {
+          fg: mix2(bg, hues.red[dark ? 800 : 200].hex),
+        },
+        link: {
+          fg: mix2(bg, hues.blue[dark ? 800 : 200].hex),
+        },
+        code: {
+          bg: mix(bg, tints[dark ? 950 : 50].hex),
+          fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        },
+        skeleton: base.skeleton,
       }
     }
 
     if (state === 'selected') {
+      const bg = mix(base.bg, tints[dark ? 200 : 800].hex)
+
       return {
-        bg: mix(base.bg, tints[dark ? 200 : 800].hex),
+        bg,
         border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
+        muted: {
+          fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        },
+        accent: {
+          fg: mix2(bg, hues.red[dark ? 800 : 200].hex),
+        },
+        link: {
+          fg: mix2(bg, hues.blue[dark ? 800 : 200].hex),
+        },
+        code: {
+          bg: mix(bg, tints[dark ? 950 : 50].hex),
+          fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+        },
+        skeleton: base.skeleton,
       }
     }
 
     // state: "enabled" | unknown
+    const bg = mix(base.bg, tints[dark ? 400 : 500].hex)
+
     return {
-      bg: mix(base.bg, tints[dark ? 400 : 500].hex),
+      bg,
       border: mix(base.bg, tints[dark ? 400 : 500].hex),
       fg: mix(base.bg, dark ? black.hex : white.hex),
+      muted: {
+        fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+      },
+      accent: {
+        fg: mix2(bg, hues.red[dark ? 800 : 200].hex),
+      },
+      link: {
+        fg: mix2(bg, hues.blue[dark ? 800 : 200].hex),
+      },
+      code: {
+        bg: mix(bg, tints[dark ? 950 : 50].hex),
+        fg: mix(base.bg, tints[dark ? 800 : 200].hex),
+      },
+      skeleton: base.skeleton,
     }
   },
 
   muted: ({base, dark, state, tone}) => {
     const mix = dark ? screen : multiply
-    const tints = tones[tone] || tones.default
+
+    let tints = tones[tone] || tones.default
 
     if (state === 'disabled') {
+      tints = tones.default
+
+      const {skeleton} = base
+      const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
+
       return {
-        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        border: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        bg,
+        border: mix(bg, tints[dark ? 950 : 50].hex),
+        fg: mix(bg, tints[dark ? 800 : 200].hex),
+        muted: {
+          fg: mix(bg, tints[dark ? 900 : 100].hex),
+        },
+        accent: {
+          fg: mix(bg, tints[dark ? 900 : 100].hex),
+        },
+        link: {
+          fg: mix(bg, tints[dark ? 900 : 100].hex),
+        },
+        code: {
+          bg,
+          fg: mix(bg, tints[dark ? 900 : 100].hex),
+        },
+        skeleton,
       }
     }
 
     if (state === 'hovered') {
+      // const { skeleton} = base
+      const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
+
       return {
-        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        bg,
         border: mix(base.bg, tints[dark ? 950 : 50].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
+        muted: {
+          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        },
+        accent: {
+          fg: mix(base.bg, hues.red[dark ? 400 : 600].hex),
+        },
+        link: {
+          fg: mix(base.bg, hues.blue[dark ? 400 : 600].hex),
+        },
+        code: {
+          bg: mix(bg, tints[dark ? 950 : 50].hex),
+          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        },
+        skeleton: base.skeleton,
       }
     }
 
     if (state === 'pressed') {
+      const {skeleton} = base
+      const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+
       return {
         bg: mix(base.bg, tints[dark ? 900 : 100].hex),
         border: mix(base.bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
+        muted: {
+          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        },
+        accent: {
+          fg: mix(bg, hues.red[dark ? 400 : 600].hex),
+        },
+        link: {
+          fg: mix(bg, hues.blue[dark ? 400 : 600].hex),
+        },
+        code: {
+          bg: mix(bg, tints[dark ? 950 : 50].hex),
+          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        },
+        skeleton,
       }
     }
 
     if (state === 'selected') {
+      const {skeleton} = base
+      const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+
       return {
-        bg: mix(base.bg, tints[dark ? 900 : 100].hex),
+        bg,
         border: mix(base.bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 100 : 900].hex),
+        muted: {
+          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        },
+        accent: {
+          fg: mix(bg, hues.red[dark ? 400 : 600].hex),
+        },
+        link: {
+          fg: mix(bg, hues.blue[dark ? 400 : 600].hex),
+        },
+        code: {
+          bg: mix(bg, tints[dark ? 950 : 50].hex),
+          fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+        },
+        skeleton,
       }
     }
 
@@ -157,6 +312,20 @@ export const color = createColorTheme({
       bg: mix(base.bg, tints[dark ? 900 : 100].hex),
       border: mix(base.bg, tints[dark ? 900 : 100].hex),
       fg: mix(base.bg, tints[dark ? 300 : 700].hex),
+      muted: {
+        fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+      },
+      accent: {
+        fg: mix(base.bg, hues.red[dark ? 400 : 600].hex),
+      },
+      link: {
+        fg: mix(base.bg, hues.blue[dark ? 400 : 600].hex),
+      },
+      code: {
+        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        fg: mix(base.bg, tints[dark ? 400 : 600].hex),
+      },
+      skeleton: base.skeleton,
     }
   },
 
@@ -180,7 +349,11 @@ export const color = createColorTheme({
     if (mode === 'ghost') {
       return {
         ...solid,
-        enabled: {...muted.enabled, bg: base.bg, border: base.border},
+        enabled: {
+          ...muted.enabled,
+          bg: base.bg,
+          border: base.border,
+        },
         disabled: {
           ...muted.disabled,
           bg: base.bg,
@@ -191,68 +364,20 @@ export const color = createColorTheme({
     return solid
   },
 
-  input: ({base, dark, mode, state}) => {
-    const mix = dark ? screen : multiply
-
-    if (mode === 'invalid') {
-      const tints = tones.critical
-
-      return {
-        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
-        fg: mix(base.bg, tints[dark ? 300 : 700].hex),
-        border: mix(base.bg, tints[dark ? 800 : 200].hex),
-        placeholder: mix(base.bg, tints[dark ? 600 : 400].hex),
-      }
-    }
-
-    if (state === 'hovered') {
-      return {
-        bg: base.bg,
-        fg: base.fg,
-        border: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
-      }
-    }
-
-    if (state === 'disabled') {
-      return {
-        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
-        border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
-      }
-    }
-
-    if (state === 'readOnly') {
-      return {
-        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 200 : 800].hex),
-        border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
-      }
-    }
-
-    return {
-      bg: base.bg,
-      fg: base.fg,
-      border: base.border,
-      placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
-    }
-  },
-
   card: ({base, dark, muted, name, state}) => {
     let mix = dark ? screen : multiply
+    let tints = tones[name] || tones.default
 
     if (state === 'selected') {
       mix = dark ? multiply : screen
+      tints = ['default', 'transparent'].includes(name) ? hues.blue : tints
 
-      const tint = ['default', 'transparent'].includes(name) ? hues.blue : tones[name]
-      const bg = tint[dark ? 400 : 500].hex
+      const bg = tints[dark ? 400 : 500].hex
 
       return {
         bg,
         fg: dark ? black.hex : white.hex,
-        border: tint[dark ? 300 : 400].hex,
+        border: tints[dark ? 300 : 400].hex,
         muted: {
           fg: mix(bg, hues.gray[dark ? 600 : 300].hex),
         },
@@ -340,7 +465,7 @@ export const color = createColorTheme({
       fg: base.fg,
       border: base.border,
       muted: {
-        fg: mix(base.bg, hues.gray[dark ? 400 : 700].hex),
+        fg: mix(base.bg, tints[dark ? 400 : 700].hex),
       },
       accent: {
         fg: mix(base.bg, hues.red[dark ? 500 : 500].hex),
@@ -349,11 +474,94 @@ export const color = createColorTheme({
         fg: mix(base.bg, hues.blue[dark ? 400 : 700].hex),
       },
       code: {
-        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: hues.gray[dark ? 400 : 700].hex,
+        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        fg: tints[dark ? 400 : 700].hex,
       },
       skeleton: base.skeleton,
     }
+  },
+
+  input: ({base, dark, mode, state}) => {
+    const mix = dark ? screen : multiply
+
+    if (mode === 'invalid') {
+      const tints = tones.critical
+
+      return {
+        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        fg: mix(base.bg, tints[dark ? 300 : 700].hex),
+        border: mix(base.bg, tints[dark ? 800 : 200].hex),
+        placeholder: mix(base.bg, tints[dark ? 600 : 400].hex),
+      }
+    }
+
+    if (state === 'hovered') {
+      return {
+        bg: base.bg,
+        fg: base.fg,
+        border: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
+        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+      }
+    }
+
+    if (state === 'disabled') {
+      return {
+        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
+        fg: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
+        border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
+        placeholder: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+      }
+    }
+
+    if (state === 'readOnly') {
+      return {
+        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
+        fg: mix(base.bg, hues.gray[dark ? 200 : 800].hex),
+        border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+      }
+    }
+
+    return {
+      bg: base.bg,
+      fg: base.fg,
+      border: base.border,
+      placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+    }
+  },
+
+  menuItem: ({base, muted, tone, solid, state}) => {
+    if (state === 'enabled') {
+      return {
+        ...muted[tone].enabled,
+        bg: base.bg,
+      }
+    }
+
+    if (state === 'pressed') {
+      if (tone === 'default') {
+        return solid.primary.pressed
+      }
+
+      return solid[tone].pressed
+    }
+
+    if (state === 'selected') {
+      if (tone === 'default') {
+        return solid.primary.enabled
+      }
+
+      return solid[tone].enabled
+    }
+
+    if (state === 'disabled') {
+      return {
+        ...muted[tone].disabled,
+        bg: base.bg,
+      }
+    }
+
+    return muted[tone][state]
   },
 
   spot: ({base, dark, key}) => {
