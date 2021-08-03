@@ -11,20 +11,18 @@ import {
   ThemeColorButtonState,
   ThemeColorButtonStates,
   ThemeColorButtonTones,
+  ThemeColorMuted,
+  ThemeColorMutedTone,
   ThemeColorProvider,
   ThemeColorScheme,
   ThemeColorSelectable,
   ThemeColorSelectableStates,
+  ThemeColorSolid,
+  ThemeColorSolidTone,
   useRootTheme,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import React, {createContext, useContext} from 'react'
-import {
-  ThemeColorMuted,
-  ThemeColorMutedTone,
-  ThemeColorSolid,
-  ThemeColorSolidTone,
-} from '../lib/theme'
 
 interface Features {
   button: boolean
@@ -144,7 +142,8 @@ function Color(props: {color: ThemeColor; tone: CardTone}) {
 
         {features.muted && <ColorMuted color={color.muted} />}
 
-        {features.selectable && <ColorSelectable color={color.selectable} />}
+        {/* @todo: remove use of `muted` here */}
+        {features.selectable && <ColorSelectable color={color.selectable || color.muted} />}
 
         {features.solid && <ColorSolid color={color.solid} />}
 

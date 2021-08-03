@@ -44,7 +44,7 @@ export interface ThemeColor {
   button: ThemeColorButton
   card: ThemeColorCard
   input: ThemeColorInput
-  selectable: ThemeColorSelectable
+  selectable?: ThemeColorSelectable
   spot: ThemeColorSpot
   syntax: ThemeColorSyntax
   solid: ThemeColorSolid
