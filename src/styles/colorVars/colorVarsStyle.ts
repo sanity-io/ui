@@ -18,16 +18,16 @@ export function _colorVarsStyle(base: ThemeColorBase, color: ThemeColorGenericSt
     '--card-bg-color': color.bg,
     '--card-fg-color': color.fg,
     '--card-border-color': color.border,
-    '--card-muted-fg-color': color.muted.fg,
-    '--card-accent-fg-color': color.accent.fg,
-    '--card-link-fg-color': color.link.fg,
-    '--card-code-bg-color': color.code.bg,
-    '--card-code-fg-color': color.code.fg,
+    '--card-muted-fg-color': color.muted?.fg,
+    '--card-accent-fg-color': color.accent?.fg,
+    '--card-link-fg-color': color.link?.fg,
+    '--card-code-bg-color': color.code?.bg,
+    '--card-code-fg-color': color.code?.fg,
     '--card-skeleton-color-from': color.skeleton?.from,
     '--card-skeleton-color-to': color.skeleton?.to,
 
     // @todo: deprecate
-    '--card-link-color': color.link.fg,
+    '--card-link-color': color.link?.fg,
     '--card-hairline-soft-color': color.border,
     '--card-hairline-hard-color': color.border,
   }

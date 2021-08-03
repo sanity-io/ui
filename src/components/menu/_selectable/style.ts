@@ -36,8 +36,9 @@ export function selectableColorStyle(
   props: SelectableStyleProps & ThemeProps
 ): FlattenSimpleInterpolation {
   const {$tone, theme} = props
-  const {base, selectable} = theme.sanity.color
-  const tone = selectable[$tone] || selectable.default
+  const {base, muted, selectable} = theme.sanity.color
+  // @todo: remove use of `muted` here
+  const tone = selectable ? selectable[$tone] || selectable.default : muted[$tone] || muted.default
 
   return css`
     ${_colorVarsStyle(base, tone.enabled)}
