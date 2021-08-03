@@ -19,7 +19,7 @@
     "postinstall": "yarn husky install",
     "release:dryrun": "yarn build && ./scripts/publish/dryrun",
     "release:latest": "yarn build && lerna publish --dist-tag latest",
-    "release:next": "yarn build && lerna publish --canary --force-publish --no-git-tag-version --dist-tag next --preid next",
+    "release:next": "yarn build && lerna publish --canary --force-publish --no-git-tag-version --dist-tag=next --preid=next --exact",
     "lint": "lerna run --stream --parallel lint",
     "test": "lerna run --stream --parallel test",
     "test:browser": "start-server-and-test 'yarn build-and-start:workshop' http://localhost:9009 'yarn test:cypress:run'",
