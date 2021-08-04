@@ -42,4 +42,9 @@ export default defineScope('components/menu', 'Menu', [
     title: 'Without arrow',
     component: lazy(() => import('./withoutArrow')),
   },
+  {
+    name: 'constrained-in-boundary',
+    title: 'Constrained in boundary',
+    component: lazy(() => import('./constrainedInBoundary')),
+  },
 ])
