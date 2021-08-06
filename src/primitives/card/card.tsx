@@ -28,6 +28,7 @@ export interface CardProps
    * @beta
    */
   __unstable_focusRing?: boolean
+  pressed?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
 }
@@ -47,6 +48,7 @@ export const Card = forwardRef(function Card(
   ref
 ) {
   const {
+    pressed = false,
     __unstable_focusRing: focusRing = false,
     as: asProp,
     border,
@@ -69,6 +71,7 @@ export const Card = forwardRef(function Card(
     <ThemeColorProvider scheme={scheme} tone={tone}>
       <Root
         data-as={typeof as === 'string' ? as : undefined}
+        data-pressed={pressed ? '' : undefined}
         data-scheme={rootTheme.scheme}
         data-selected={selected ? '' : undefined}
         data-ui="Card"
