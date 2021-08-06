@@ -24,6 +24,7 @@ export function cardBaseStyle(): FlattenSimpleInterpolation {
 
     /* &:is(a) */
     &[data-as='a'] {
+      outline: none;
       text-decoration: none;
     }
 
@@ -48,6 +49,10 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
 
     /* &:is(button) */
     &[data-as='button'] {
+      --card-focus-ring-box-shadow: none;
+
+      box-shadow: var(--card-focus-ring-box-shadow);
+
       &:disabled {
         ${_colorVarsStyle(base, card.disabled)}
       }
@@ -76,17 +81,21 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         }
 
         &:focus {
-          box-shadow: ${$focusRing ? focusRingStyle({base, border, focusRing}) : undefined};
+          --card-focus-ring-box-shadow: ${$focusRing
+            ? focusRingStyle({base, border, focusRing})
+            : undefined};
         }
 
         &:focus:not(:focus-visible) {
-          box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
+          --card-focus-ring-box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
         }
       }
     }
 
     /* &:is(a) */
     &[data-as='a'] {
+      box-shadow: var(--card-focus-ring-box-shadow);
+
       &[data-disabled] {
         ${_colorVarsStyle(base, card.disabled)}
       }
@@ -114,11 +123,13 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         }
 
         &:focus {
-          box-shadow: ${$focusRing ? focusRingStyle({base, border, focusRing}) : undefined};
+          --card-focus-ring-box-shadow: ${$focusRing
+            ? focusRingStyle({base, border, focusRing})
+            : undefined};
         }
 
         &:focus:not(:focus-visible) {
-          box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
+          --card-focus-ring-box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
         }
       }
     }
