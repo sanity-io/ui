@@ -52,18 +52,26 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         ${_colorVarsStyle(base, card.disabled)}
       }
 
-      &[data-selected] {
-        ${_colorVarsStyle(base, card.pressed)}
-      }
-
       &:not(:disabled) {
-        @media (hover: hover) {
-          &:hover {
-            ${_colorVarsStyle(base, card.hovered)}
-          }
+        &[data-pressed],
+        &[aria-pressed='true'] {
+          ${_colorVarsStyle(base, card.pressed)}
+        }
 
-          &:active {
-            ${_colorVarsStyle(base, card.pressed)}
+        &[data-selected],
+        [aria-selected='true'] > & {
+          ${_colorVarsStyle(base, card.selected)}
+        }
+
+        @media (hover: hover) {
+          &:not([data-pressed]):not([aria-pressed='true']):not([data-selected]) {
+            &:hover {
+              ${_colorVarsStyle(base, card.hovered)}
+            }
+
+            &:active {
+              ${_colorVarsStyle(base, card.pressed)}
+            }
           }
         }
 
@@ -73,12 +81,6 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
 
         &:focus:not(:focus-visible) {
           box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
-        }
-
-        &[data-selected],
-        &[aria-pressed='true'],
-        [aria-selected='true'] > & {
-          ${_colorVarsStyle(base, card.selected)}
         }
       }
     }
@@ -89,20 +91,25 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
         ${_colorVarsStyle(base, card.disabled)}
       }
 
-      &[data-selected] {
-        ${_colorVarsStyle(base, card.pressed)}
-      }
-
       &:not([data-disabled]) {
+        &[data-pressed] {
+          ${_colorVarsStyle(base, card.pressed)}
+        }
+
+        &[data-selected],
+        [aria-selected='true'] > & {
+          ${_colorVarsStyle(base, card.selected)}
+        }
+
         @media (hover: hover) {
-          outline: none;
+          &:not([data-pressed]):not([data-selected]) {
+            &:hover {
+              ${_colorVarsStyle(base, card.hovered)}
+            }
 
-          &:hover {
-            ${_colorVarsStyle(base, card.hovered)}
-          }
-
-          &:active {
-            ${_colorVarsStyle(base, card.pressed)}
+            &:active {
+              ${_colorVarsStyle(base, card.pressed)}
+            }
           }
         }
 
@@ -112,10 +119,6 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
 
         &:focus:not(:focus-visible) {
           box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
-        }
-
-        [aria-selected='true'] > & {
-          ${_colorVarsStyle(base, card.selected)}
         }
       }
     }

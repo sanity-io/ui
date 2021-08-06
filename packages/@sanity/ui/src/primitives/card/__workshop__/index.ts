@@ -7,4 +7,5 @@ export default defineScope('primitives/card', 'Card', [
   {name: 'interactive', title: 'Interactive', component: lazy(() => import('./interactive'))},
   {name: 'tones', title: 'Tones', component: lazy(() => import('./allTones'))},
   {name: 'as-button', title: 'As button', component: lazy(() => import('./asButton'))},
+  {name: 'list-nav', title: 'List navigation', component: lazy(() => import('./listNavigation'))},
 ])
