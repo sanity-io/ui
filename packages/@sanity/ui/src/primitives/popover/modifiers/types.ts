@@ -10,6 +10,7 @@ export interface PopoverModifiersProps {
   fallbackPlacements?: Placement[]
   margins?: [number, number, number, number]
   matchReferenceWidth?: boolean
+  open: boolean
   preventOverflow?: boolean
   skidding: number
   tether?: boolean

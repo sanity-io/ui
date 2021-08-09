@@ -15,30 +15,15 @@ export function usePopoverModifiers(props: PopoverModifiersProps): Modifier<any,
     fallbackPlacements,
     margins,
     matchReferenceWidth,
+    open,
     preventOverflow,
     skidding,
     tether,
     tetherOffset,
   } = props
 
-  return useMemo(
-    () =>
-      getPopoverModifiers({
-        allowedAutoPlacements,
-        arrow,
-        arrowElement,
-        boundaryElement,
-        constrainSize,
-        distance,
-        fallbackPlacements,
-        margins,
-        matchReferenceWidth,
-        preventOverflow,
-        skidding,
-        tether,
-        tetherOffset,
-      }),
-    [
+  return useMemo(() => {
+    return getPopoverModifiers({
       allowedAutoPlacements,
       arrow,
       arrowElement,
@@ -48,10 +33,26 @@ export function usePopoverModifiers(props: PopoverModifiersProps): Modifier<any,
       fallbackPlacements,
       margins,
       matchReferenceWidth,
+      open,
       preventOverflow,
       skidding,
       tether,
       tetherOffset,
-    ]
-  )
+    })
+  }, [
+    allowedAutoPlacements,
+    arrow,
+    arrowElement,
+    boundaryElement,
+    constrainSize,
+    distance,
+    fallbackPlacements,
+    margins,
+    matchReferenceWidth,
+    open,
+    preventOverflow,
+    skidding,
+    tether,
+    tetherOffset,
+  ])
 }
