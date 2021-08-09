@@ -31,40 +31,53 @@ export function treeItemRootStyle(): FlattenSimpleInterpolation {
 
 export function treeItemRootColorStyle(props: ThemeProps): FlattenSimpleInterpolation {
   const {theme} = props
-  const {base, card} = theme.sanity.color
+  const $tone = 'default'
+  const {base, muted, selectable} = theme.sanity.color
+  // @todo: remove use of `muted` here
+  const tone = selectable ? selectable[$tone] || selectable.default : muted[$tone] || muted.default
 
   return css`
-    ${_colorVarsStyle(base, card.enabled)}
+    /* <div role="none"><a data-ui="TreeItem__box" role="treeitem" tabIndex="0"></div> */
+    &[role='none'] {
+      & > [role='treeitem'] {
+        ${_colorVarsStyle(base, tone.enabled)}
 
-    &[data-selected] {
-      ${_colorVarsStyle(base, card.pressed)}
-    }
-
-    &[role='none'] > [role='treeitem'] {
-      background-color: var(--card-bg-color);
-      color: var(--treeitem-fg-color);
-
-      &:not(:focus):hover {
-        ${_colorVarsStyle(base, card.hovered)}
+        background-color: var(--card-bg-color);
+        color: var(--treeitem-fg-color);
       }
 
-      &:focus {
-        ${_colorVarsStyle(base, card.selected)}
+      &[data-selected] > [role='treeitem'] {
+        ${_colorVarsStyle(base, tone.pressed)}
+      }
+
+      & > [role='treeitem']:not(:focus):hover {
+        ${_colorVarsStyle(base, tone.hovered)}
+      }
+
+      & > [role='treeitem']:focus {
+        ${_colorVarsStyle(base, tone.selected)}
       }
     }
 
+    /* <div role="treeitem" tabIndex="0"><div data-ui="TreeItem__box"></div> */
     &[role='treeitem'] {
-      & > div {
+      & > [data-ui='TreeItem__box'] {
+        ${_colorVarsStyle(base, tone.enabled)}
+
         background-color: var(--card-bg-color);
         color: var(--card-fg-color);
       }
 
-      &:not(:focus) > div:hover {
-        ${_colorVarsStyle(base, card.hovered)}
+      &[data-selected] > [data-ui='TreeItem__box'] {
+        ${_colorVarsStyle(base, tone.pressed)}
       }
 
-      &:focus > div {
-        ${_colorVarsStyle(base, card.selected)}
+      &:not(:focus) > [data-ui='TreeItem__box']:hover {
+        ${_colorVarsStyle(base, tone.hovered)}
+      }
+
+      &:focus > [data-ui='TreeItem__box'] {
+        ${_colorVarsStyle(base, tone.selected)}
       }
     }
   `
