@@ -1,7 +1,6 @@
 import {
   LayerProvider,
   studioTheme,
-  ThemeColorProvider,
   ThemeColorSchemeKey,
   ThemeProvider,
   ToastProvider,
@@ -34,9 +33,7 @@ export function AppProvider(props: {
 
   return (
     <ThemeProvider scheme={colorScheme} theme={studioTheme}>
-      <ThemeColorProvider tone="transparent">
-        <GlobalStyle />
-      </ThemeColorProvider>
+      <GlobalStyle />
       <AppContext.Provider value={contextValue}>
         <LayerProvider>
           <ToastProvider zOffset={zOffsets.toast}>{children}</ToastProvider>

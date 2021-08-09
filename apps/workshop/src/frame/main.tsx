@@ -1,5 +1,6 @@
+import {studioTheme, ThemeColorSchemeKey, ThemeProvider} from '@sanity/ui'
 import {WorkshopFrame} from '@sanity/ui-workshop'
-import React from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 import Refractor from 'react-refractor'
 import javascript from 'refractor/lang/javascript'
@@ -13,7 +14,14 @@ Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
-ReactDOM.render(
-  <WorkshopFrame frameUrl="/frame/" scopes={scopes} title="@sanity/ui" />,
-  document.getElementById('root')
-)
+ReactDOM.render(<Root />, document.getElementById('root'))
+
+function Root() {
+  const [scheme, setScheme] = useState<ThemeColorSchemeKey>('light')
+
+  return (
+    <ThemeProvider scheme={scheme} theme={studioTheme}>
+      <WorkshopFrame frameUrl="/frame/" setScheme={setScheme} scopes={scopes} title="Sanity UI" />
+    </ThemeProvider>
+  )
+}

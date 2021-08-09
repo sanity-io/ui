@@ -1,5 +1,6 @@
+import {HeartIcon} from '@sanity/icons'
 import {SanityLogo} from '@sanity/logos'
-import {Button, Card, Inline, Text} from '@sanity/ui'
+import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
 import React from 'react'
 import {useApp} from './hooks'
@@ -8,26 +9,34 @@ export function AppFooter() {
   const {colorScheme} = useApp()
 
   return (
-    <Card paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} style={{minHeight: 'auto'}} tone="transparent">
-      <Inline space={1} style={{textAlign: 'center'}}>
-        <Text muted size={[1, 1, 2]}>
-          By
+    <Card borderTop paddingX={[3, 4, 5]} paddingY={[1, 2, 3]} style={{minHeight: 'auto'}}>
+      <Flex align="center" as="p" gap={1} justify="center">
+        <Text as="span" muted size={1}>
+          Made with
+        </Text>
+
+        <Box as="span" paddingX={1}>
+          <Text as="span" accent size={1}>
+            <HeartIcon aria-label="love" />
+          </Text>
+        </Box>
+
+        <Text as="span" muted size={1}>
+          by folks at
         </Text>
 
         <Link href="https://sanity.io" passHref>
-          <Button
-            as="a"
-            fontSize={[1, 1, 2]}
-            mode="bleed"
-            padding={2}
-            text={<SanityLogo aria-label="Sanity" dark={colorScheme === 'dark' || undefined} />}
-          />
+          <Button as="a" mode="bleed" padding={1} tone="critical">
+            <Text as="span" size={1}>
+              <SanityLogo aria-label="Sanity" dark={colorScheme === 'dark' || undefined} />
+            </Text>
+          </Button>
         </Link>
 
-        <Text muted size={[1, 1, 2]}>
+        {/* <Text muted size={1}>
           the platform for structured content
-        </Text>
-      </Inline>
+        </Text> */}
+      </Flex>
     </Card>
   )
 }

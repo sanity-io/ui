@@ -33,16 +33,18 @@ const ContentCard = styled(Card).attrs({forwardedAs: 'main'})`
 
 export function PageLayout({children, menu, menuHeader}: PageLayoutProps) {
   return (
-    <Root>
-      {(menuHeader || (menu && menu.items.length > 1)) && (
-        <NavBox display={['none', 'none', 'block']} flex={1}>
-          <PageHeader header={menuHeader} menu={menu} />
-        </NavBox>
-      )}
+    <Card flex={1} style={{minHeight: 'auto'}}>
+      <Root>
+        {(menuHeader || (menu && menu.items.length > 1)) && (
+          <NavBox display={['none', 'none', 'block']} flex={1}>
+            <PageHeader header={menuHeader} menu={menu} />
+          </NavBox>
+        )}
 
-      <ContentContainer flex={4}>
-        <ContentCard id="content">{children}</ContentCard>
-      </ContentContainer>
-    </Root>
+        <ContentContainer flex={4}>
+          <ContentCard id="content">{children}</ContentCard>
+        </ContentContainer>
+      </Root>
+    </Card>
   )
 }

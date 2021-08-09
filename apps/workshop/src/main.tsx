@@ -1,11 +1,13 @@
+import {studioTheme, ThemeColorProvider, ThemeProvider, usePrefersDark} from '@sanity/ui'
 import {Workshop, WorkshopLocation} from '@sanity/ui-workshop'
-import React, {useCallback, useMemo} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import ReactDOM from 'react-dom'
 import Refractor from 'react-refractor'
 import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
+import {createGlobalStyle} from 'styled-components'
 import {LocationProvider, useLocation} from './location'
 import {scopes} from '$workshop'
 
@@ -14,7 +16,7 @@ Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
-const WORKSHOP_COLLECTIONS = [
+const WORKSHOP_COLLECTIONS: {name: string; title: string}[] = [
   {
     name: 'components',
     title: 'Components',
@@ -33,6 +35,26 @@ const WORKSHOP_COLLECTIONS = [
   },
 ]
 
+const GlobalStyle = createGlobalStyle`
+  html {
+    background-color: ${({theme}) => theme.sanity.color.base.bg}
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  #root {
+    -webkit-font-smoothing: antialiased;
+  }
+`
+
 function Root() {
   const {path, pushState, replaceState} = useLocation()
 
@@ -48,16 +70,30 @@ function Root() {
 
   const studioLocation: WorkshopLocation = useMemo(() => ({path}), [path])
 
+  const prefersDark = usePrefersDark()
+  const [scheme, setScheme] = useState<'light' | 'dark'>(prefersDark ? 'dark' : 'light')
+
+  useEffect(() => {
+    setScheme(prefersDark ? 'dark' : 'light')
+  }, [prefersDark])
+
   return (
-    <Workshop
-      collections={WORKSHOP_COLLECTIONS}
-      frameUrl="/frame/"
-      location={studioLocation}
-      onLocationPush={handleLocationPush}
-      onLocationReplace={handleLocationReplace}
-      scopes={scopes}
-      title="Sanity UI Workshop"
-    />
+    <ThemeProvider scheme={scheme} theme={studioTheme}>
+      <ThemeColorProvider tone="transparent">
+        <GlobalStyle />
+      </ThemeColorProvider>
+      <Workshop
+        collections={WORKSHOP_COLLECTIONS}
+        frameUrl="/frame/"
+        location={studioLocation}
+        onLocationPush={handleLocationPush}
+        onLocationReplace={handleLocationReplace}
+        scheme={scheme}
+        scopes={scopes}
+        setScheme={setScheme}
+        title="Sanity UI Workshop"
+      />
+    </ThemeProvider>
   )
 }
 

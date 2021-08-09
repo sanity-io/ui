@@ -4,6 +4,7 @@ module.exports = {
   modulePathIgnorePatterns: ['<rootDir>/.next/'],
   moduleNameMapper: {
     '^\\$config$': '<rootDir>/config',
+    '^\\$lib\\/config$': '<rootDir>/lib/config',
     '^\\$lib\\/types$': '<rootDir>/lib/types',
   },
 }

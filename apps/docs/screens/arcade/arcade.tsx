@@ -106,38 +106,40 @@ export function ArcadeScreen(props: {title: string; description: string}) {
         />
       </Head>
 
-      <Flex direction={['column', 'column', 'row']} height="fill">
-        <Card flex={1}>
-          <CanvasPane
-            hookCode={state.hookCode}
-            jsxCode={state.jsxCode}
-            meta={state.meta}
-            onMetaChange={setMeta}
-            onWidthChange={setCanvasWidth}
-            width={state.canvasWidth}
-          />
-        </Card>
+      <Card flex={1} tone="transparent">
+        <Flex direction={['column', 'column', 'row']} height="fill">
+          <Card flex={1}>
+            <CanvasPane
+              hookCode={state.hookCode}
+              jsxCode={state.jsxCode}
+              meta={state.meta}
+              onMetaChange={setMeta}
+              onWidthChange={setCanvasWidth}
+              width={state.canvasWidth}
+            />
+          </Card>
 
-        <Card
-          borderLeft={[false, false, true]}
-          borderTop={[true, true, false]}
-          flex={1}
-          style={{maxWidth: 634}}
-        >
-          <CodePane
-            jsxCode={state.jsxCode}
-            jsxCursor={state.jsxCursor}
-            mode={state.codeMode}
-            onJSXCodeChange={setJSXCode}
-            onJSXCursorChange={setJSXCursor}
-            onModeChange={setCodeMode}
-            onHookCodeChange={setHookCode}
-            onHookCursorChange={setHookCursor}
-            hookCode={state.hookCode}
-            hookCursor={state.hookCursor}
-          />
-        </Card>
-      </Flex>
+          <Card
+            borderLeft={[false, false, true]}
+            borderTop={[true, true, false]}
+            flex={1}
+            style={{maxWidth: 634}}
+          >
+            <CodePane
+              jsxCode={state.jsxCode}
+              jsxCursor={state.jsxCursor}
+              mode={state.codeMode}
+              onJSXCodeChange={setJSXCode}
+              onJSXCursorChange={setJSXCursor}
+              onModeChange={setCodeMode}
+              onHookCodeChange={setHookCode}
+              onHookCursorChange={setHookCursor}
+              hookCode={state.hookCode}
+              hookCursor={state.hookCursor}
+            />
+          </Card>
+        </Flex>
+      </Card>
     </>
   )
 }

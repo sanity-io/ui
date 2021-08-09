@@ -1,4 +1,14 @@
+import {parseFlag} from '$lib/config'
+
 const __DEV__ = process.env.NODE_ENV === 'development'
+
+/**
+ * IDs of static screens
+ * These are ignored from pages generated from screen IDs in the database.
+ */
+export const app = {
+  staticScreenIds: ['arcade', 'workshop'],
+}
 
 /**
  * The application’s base path.
@@ -52,14 +62,31 @@ export const sanity = {
   useCdn: process.env.NODE_ENV === 'production',
 }
 
-function parseFlag<T = unknown>(envValue: string | undefined, defaultValue: T) {
-  try {
-    if (typeof envValue === 'string') {
-      return JSON.parse(envValue) as T
-    }
-  } catch (_) {
-    console.warn(`features: could not parse env value`)
-  }
-
-  return defaultValue
+/**
+ * Workshop configuration.
+ */
+export const workshop = {
+  collections: [
+    {
+      name: 'components',
+      title: 'Components',
+    },
+    {
+      name: 'hooks',
+      title: 'Hooks',
+    },
+    {
+      name: 'primitives',
+      title: 'Primitives',
+    },
+    {
+      name: 'utils',
+      title: 'Utils',
+    },
+  ],
+  features: {
+    navbar: false,
+  },
+  frameUrl: '/workshop/frame/',
+  title: 'Workshop',
 }

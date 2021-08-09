@@ -27,7 +27,8 @@
       "@sanity/color": ["../../packages/@sanity/color/src"],
       "@sanity/icons": ["../../packages/@sanity/icons/src"],
       "@sanity/logos": ["../../packages/@sanity/logos/src"],
-      "@sanity/ui": ["../../packages/@sanity/ui/src"]
+      "@sanity/ui": ["../../packages/@sanity/ui/src"],
+      "@sanity/ui-workshop": ["../../packages/@sanity/ui-workshop/src"]
     }
   },
   "exclude": ["./node_modules"],

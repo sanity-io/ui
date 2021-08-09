@@ -1,3 +1,4 @@
+import {app} from '$config'
 import {getNavStaticPaths} from '$lib/nav'
 import {isArray, isRecord} from '$lib/types'
 import {MAIN_NAV_QUERY} from '$queries'
@@ -20,8 +21,10 @@ export async function loadGlobalPagePaths({preview}: {preview?: boolean}) {
       // since that is reserved for the `/[...path]` page component
       .filter((p) => !(p.params.path.length === 1 && p.params.path[0] === ''))
 
-      // Remove paths that are `/arcade`,
-      // since that is reserved for the `/arcade` page component
-      .filter((p) => !(p.params.path.length === 1 && p.params.path[0] === 'arcade'))
+      // Remove paths that are `/<static-screen-id>`,
+      // since that is reserved for the `/<static-screen-id>` page component
+      .filter(
+        (p) => !(p.params.path.length === 1 && app.staticScreenIds.includes(p.params.path[0]))
+      )
   )
 }
