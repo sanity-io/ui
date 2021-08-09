@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import {Box} from '../../../primitives'
-import {responsiveBorderStyle, ResponsiveBorderStyleProps} from '../../../styles/border'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../../styles/radius'
+import {responsiveBorderStyle, ResponsiveBorderStyleProps} from '../../styles/border'
+import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/radius'
+import {Box} from '../box'
 import {selectableBaseStyle, selectableColorStyle, SelectableStyleProps} from './style'
 
 /**

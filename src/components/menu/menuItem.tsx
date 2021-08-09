@@ -10,10 +10,10 @@ import React, {
 import {isValidElementType} from 'react-is'
 import {useForwardedRef} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
+import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
 import {SelectableTone} from '../../types/selectable'
 import {Hotkeys} from '../hotkeys'
-import {Selectable} from './_selectable'
 import {useMenu} from './useMenu'
 
 /**
@@ -25,6 +25,7 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   hotkeys?: string[]
   icon?: React.ComponentType | React.ReactNode
   iconRight?: React.ComponentType | React.ReactNode
+  pressed?: boolean
   selected?: boolean
   space?: number | number[]
   text?: React.ReactNode
@@ -54,6 +55,7 @@ export const MenuItem = forwardRef(function MenuItem(
     paddingRight,
     paddingBottom,
     paddingLeft,
+    pressed,
     radius = 2,
     selected: selectedProp,
     space = 3,
@@ -105,6 +107,8 @@ export const MenuItem = forwardRef(function MenuItem(
       data-ui="MenuItem"
       forwardedAs={as}
       {...restProps}
+      aria-pressed={as === 'button' && pressed}
+      data-pressed={as !== 'button' && pressed ? '' : undefined}
       data-selected={selected ? '' : undefined}
       $radius={radius}
       $tone={tone}
