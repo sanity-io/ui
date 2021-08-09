@@ -29,19 +29,29 @@ export function getPopoverModifiers(props: PopoverModifiersProps): Modifier<any,
     fallbackPlacements,
     margins,
     matchReferenceWidth,
+    open,
     preventOverflow,
     skidding,
     tether,
     tetherOffset,
   } = props
 
+  if (!open) {
+    return []
+  }
+
+  const detectOverflowOptions = {
+    altAxis: true,
+    boundary: boundaryElement || undefined,
+    padding: 8,
+    tether,
+    tetherOffset,
+  }
+
   return [
     constrainSize && {
       ...maxSizeModifier,
-      options: {
-        boundary: boundaryElement || undefined,
-        padding: 8,
-      },
+      options: detectOverflowOptions,
     },
     constrainSize && {
       name: 'applyMaxSize',
@@ -65,15 +75,9 @@ export function getPopoverModifiers(props: PopoverModifiersProps): Modifier<any,
         padding: 4,
       },
     },
-    preventOverflow && {
+    (constrainSize || preventOverflow) && {
       name: 'preventOverflow',
-      options: {
-        altAxis: true,
-        boundary: boundaryElement || undefined,
-        padding: 8,
-        tether,
-        tetherOffset,
-      },
+      options: detectOverflowOptions,
     },
     {
       name: 'offset',
@@ -81,14 +85,14 @@ export function getPopoverModifiers(props: PopoverModifiersProps): Modifier<any,
         offset: [skidding, distance],
       },
     },
-    {
+    margins && {
       name: 'margins',
       enabled: true,
       phase: 'beforeRead',
       fn: ({state}: any) => {
         const {rects} = state
 
-        if (margins && rects.reference) {
+        if (rects.reference) {
           rects.reference.x += margins[3]
           rects.reference.y += margins[1]
           rects.reference.width -= margins[1] + margins[3]
