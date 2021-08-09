@@ -36,6 +36,10 @@ export function getPopoverModifiers(props: PopoverModifiersProps): Modifier<any,
     tetherOffset,
   } = props
 
+  // NOTE: For later viewers:
+  // Prior to adding this change, the popover would get `maxWidth: 0` the 2nd time it
+  // was opened, when used with `constrainSize`. I was looking for a way to "reset"
+  // the size of the popover as measured by Popper.js, and this seems to be a workaround.
   if (!open) {
     return []
   }
