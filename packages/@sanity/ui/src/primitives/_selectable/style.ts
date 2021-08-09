@@ -1,7 +1,7 @@
 import {css, FlattenSimpleInterpolation} from 'styled-components'
-import {ThemeProps} from '../../../styles'
-import {_colorVarsStyle} from '../../../styles/colorVars'
-import {SelectableTone} from '../../../types/selectable'
+import {ThemeProps} from '../../styles'
+import {_colorVarsStyle} from '../../styles/colorVars'
+import {SelectableTone} from '../../types/selectable'
 
 /**
  * @internal
@@ -53,18 +53,24 @@ export function selectableColorStyle(
       }
 
       &:not(:disabled) {
-        &[data-selected],
         &[aria-pressed='true'] {
+          ${_colorVarsStyle(base, tone.pressed)}
+        }
+
+        &[data-selected],
+        &[aria-selected='true'] > & {
           ${_colorVarsStyle(base, tone.selected)}
         }
 
         @media (hover: hover) {
-          &:not([data-selected]):not([aria-pressed='true']):hover {
-            ${_colorVarsStyle(base, tone.hovered)}
-          }
+          &:not([aria-pressed='true']):not([data-selected]) {
+            &:hover {
+              ${_colorVarsStyle(base, tone.hovered)}
+            }
 
-          &:active {
-            ${_colorVarsStyle(base, tone.pressed)}
+            &:active {
+              ${_colorVarsStyle(base, tone.pressed)}
+            }
           }
         }
       }
@@ -77,24 +83,26 @@ export function selectableColorStyle(
       }
 
       &:not([data-disabled]) {
-        @media (hover: hover) {
-          outline: none;
-
-          &:hover {
-            ${_colorVarsStyle(base, tone.hovered)}
-          }
-
-          &:active {
-            ${_colorVarsStyle(base, tone.pressed)}
-          }
+        &[data-pressed] {
+          ${_colorVarsStyle(base, tone.pressed)}
         }
 
         &[data-selected] {
           ${_colorVarsStyle(base, tone.selected)}
         }
 
-        [aria-selected='true'] > & {
-          ${_colorVarsStyle(base, tone.selected)}
+        @media (hover: hover) {
+          outline: none;
+
+          &:not([data-pressed]):not([data-selected]) {
+            &:hover {
+              ${_colorVarsStyle(base, tone.hovered)}
+            }
+
+            &:active {
+              ${_colorVarsStyle(base, tone.pressed)}
+            }
+          }
         }
       }
     }
