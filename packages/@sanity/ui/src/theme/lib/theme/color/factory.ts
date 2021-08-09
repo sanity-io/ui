@@ -46,9 +46,9 @@ export interface ThemeColorBuilderOpts {
   card: (opts: {
     base: ThemeColorBase
     dark: boolean
-    muted: ThemeColorMutedTone
+    muted: ThemeColorMuted
     name: ThemeColorName
-    solid: ThemeColorSolidTone
+    solid: ThemeColorSolid
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
   }) => ThemeColorCardState
   button: (opts: {
