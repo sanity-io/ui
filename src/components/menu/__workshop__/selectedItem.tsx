@@ -19,6 +19,7 @@ export default function SelectedItemStory() {
                 icon={SearchIcon}
                 iconRight={selectedIndex === 0 ? CheckmarkIcon : undefined}
                 onClick={() => setSelectedIndex(0)}
+                pressed={selectedIndex === 0}
                 selected={selectedIndex === 0}
                 text="Show search"
               />
@@ -26,6 +27,7 @@ export default function SelectedItemStory() {
                 icon={ClockIcon}
                 iconRight={selectedIndex === 1 ? CheckmarkIcon : undefined}
                 onClick={() => setSelectedIndex(1)}
+                pressed={selectedIndex === 1}
                 selected={selectedIndex === 1}
                 text="Show clock"
               />
@@ -34,6 +36,7 @@ export default function SelectedItemStory() {
                 icon={ExpandIcon}
                 iconRight={selectedIndex === 2 ? CheckmarkIcon : undefined}
                 onClick={() => setSelectedIndex(2)}
+                pressed={selectedIndex === 2}
                 selected={selectedIndex === 2}
                 text="Expanded"
               />
