@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "0.34.8",
+  "version": "0.35.0",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "files": [
