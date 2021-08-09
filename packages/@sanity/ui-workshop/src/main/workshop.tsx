@@ -1,15 +1,15 @@
-import {
-  BoundaryElementProvider,
-  Flex,
-  PortalProvider,
-  studioTheme,
-  ThemeProvider,
-  usePrefersDark,
-} from '@sanity/ui'
+import {BoundaryElementProvider, Flex, PortalProvider} from '@sanity/ui'
 import {AxeResults} from 'axe-core'
 import React, {useCallback, useEffect, useMemo, useReducer, useState} from 'react'
+import {WORKSHOP_DEFAULT_FEATURES} from '../constants'
 import {propsReducer} from '../props/reducer'
-import {PropSchema, WorkshopLocation, WorkshopScope} from '../types'
+import {
+  PropSchema,
+  WorkshopCollection,
+  WorkshopFeatures,
+  WorkshopLocation,
+  WorkshopScope,
+} from '../types'
 import {useFrame} from './useFrame'
 import {WorkshopNavbar} from './workshopNavbar'
 import {WorkshopProvider} from './workshopProvider'
@@ -18,12 +18,15 @@ import {WorkshopStoryInspector} from './workshopStoryInspector'
 import {WorkshopStoryNav} from './workshopStoryNav'
 
 export interface WorkshopProps {
-  collections?: {name: string; title: string}[]
+  collections?: WorkshopCollection[]
+  features?: Partial<WorkshopFeatures>
   frameUrl: string
   location: WorkshopLocation
   onLocationPush: (loc: WorkshopLocation) => void
   onLocationReplace: (loc: WorkshopLocation) => void
+  scheme: 'dark' | 'light'
   scopes: WorkshopScope[]
+  setScheme: (scheme: 'dark' | 'light') => void
   title: string
 }
 
@@ -37,20 +40,22 @@ function _sortScopes(a: WorkshopScope, b: WorkshopScope) {
 export function Workshop(_props: WorkshopProps): React.ReactElement {
   const {
     collections,
+    features: featuresProp = {},
     frameUrl,
     location,
     onLocationPush,
     onLocationReplace,
+    scheme,
     scopes: scopesProp,
+    setScheme,
     title,
   } = _props
+  const features = useMemo(() => ({...WORKSHOP_DEFAULT_FEATURES, ...featuresProp}), [featuresProp])
   const {postMessage, ready, ref: frameRef, subscribe} = useFrame()
   const [props, dispatch] = useReducer(propsReducer, [])
   const [axeResults, setAxeResults] = useState<AxeResults | null>(null)
   const [viewport, setViewport] = useState<number | 'auto'>('auto')
   const [zoom, setZoom] = useState(1)
-  const prefersDark = usePrefersDark()
-  const [scheme, setScheme] = useState<'light' | 'dark'>(prefersDark ? 'dark' : 'light')
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const scopes = useMemo(() => scopesProp.sort(_sortScopes), [scopesProp])
@@ -115,20 +120,21 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
   return (
     <BoundaryElementProvider element={boundaryElement}>
       <PortalProvider element={portalElement}>
-        <ThemeProvider scheme={scheme} theme={studioTheme}>
-          <WorkshopProvider
-            frameUrl={frameUrl}
-            location={location}
-            onLocationPush={onLocationPush}
-            onLocationReplace={onLocationReplace}
-            scopes={scopes}
-            props={props}
-            registerProp={registerProp}
-            setPropValue={setPropValue}
-            title={title}
-            unregisterProp={unregisterProp}
-          >
-            <Flex direction="column" height="fill" ref={setBoundaryElement}>
+        <WorkshopProvider
+          features={features}
+          frameUrl={frameUrl}
+          location={location}
+          onLocationPush={onLocationPush}
+          onLocationReplace={onLocationReplace}
+          scopes={scopes}
+          props={props}
+          registerProp={registerProp}
+          setPropValue={setPropValue}
+          title={title}
+          unregisterProp={unregisterProp}
+        >
+          <Flex direction="column" height="fill" ref={setBoundaryElement}>
+            {features.navbar && (
               <WorkshopNavbar
                 scheme={scheme}
                 setScheme={setScheme}
@@ -137,20 +143,20 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
                 viewport={viewport}
                 zoom={zoom}
               />
-              <Flex flex={1}>
-                <WorkshopStoryNav collections={collections} />
-                <WorkshopStoryCanvas
-                  frameRef={frameRef}
-                  ready={ready}
-                  scheme={scheme}
-                  viewport={viewport}
-                />
-                <WorkshopStoryInspector axeResults={axeResults} />
-              </Flex>
+            )}
+            <Flex flex={1}>
+              <WorkshopStoryNav collections={collections} />
+              <WorkshopStoryCanvas
+                frameRef={frameRef}
+                ready={ready}
+                scheme={scheme}
+                viewport={viewport}
+              />
+              <WorkshopStoryInspector axeResults={axeResults} />
             </Flex>
-            <div data-portal="" ref={setPortalElement} />
-          </WorkshopProvider>
-        </ThemeProvider>
+          </Flex>
+          <div data-portal="" ref={setPortalElement} />
+        </WorkshopProvider>
       </PortalProvider>
     </BoundaryElementProvider>
   )

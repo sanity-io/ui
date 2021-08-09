@@ -1,5 +1,9 @@
 import React from 'react'
 
+export interface WorkshopFeatures {
+  navbar: boolean
+}
+
 export interface WorkshopStory {
   name: string
   title: string
@@ -10,6 +14,11 @@ export interface WorkshopScope {
   name: string
   title: string
   stories: WorkshopStory[]
+}
+
+export interface WorkshopCollection {
+  name: string
+  title: string
 }
 
 export interface GenericPropSchema<T = unknown> {

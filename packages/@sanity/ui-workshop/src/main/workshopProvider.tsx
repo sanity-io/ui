@@ -1,11 +1,12 @@
 import React, {useMemo} from 'react'
 import {resolveLocation} from '../resolveLocation'
 import {ScopeProvider} from '../scopeProvider'
-import {PropSchema, StoryProp, WorkshopLocation, WorkshopScope} from '../types'
+import {PropSchema, StoryProp, WorkshopFeatures, WorkshopLocation, WorkshopScope} from '../types'
 import {WorkshopContext} from '../workshopContext'
 
 export interface WorkshopProviderProps {
-  children?: React.ReactNode
+  children: React.ReactNode
+  features?: WorkshopFeatures
   frameUrl: string
   location: WorkshopLocation
   onLocationPush: (loc: WorkshopLocation) => void
@@ -21,6 +22,7 @@ export interface WorkshopProviderProps {
 export function WorkshopProvider(_props: WorkshopProviderProps): React.ReactElement {
   const {
     children,
+    features = {},
     frameUrl,
     props,
     location,
@@ -37,6 +39,7 @@ export function WorkshopProvider(_props: WorkshopProviderProps): React.ReactElem
     const {scope, story} = resolveLocation(scopes, location.path)
 
     return {
+      features,
       frameUrl,
       location,
       pushLocation: onLocationPush,
@@ -46,7 +49,7 @@ export function WorkshopProvider(_props: WorkshopProviderProps): React.ReactElem
       story,
       title,
     }
-  }, [frameUrl, location, onLocationPush, onLocationReplace, scopes, title])
+  }, [features, frameUrl, location, onLocationPush, onLocationReplace, scopes, title])
 
   return (
     <WorkshopContext.Provider value={workshop}>

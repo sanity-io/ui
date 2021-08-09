@@ -1,5 +1,5 @@
 import {Card, Container, Flex, Spinner} from '@sanity/ui'
-import React, {useRef} from 'react'
+import React, {useMemo, useState} from 'react'
 import styled from 'styled-components'
 import {useWorkshop} from '../useWorkshop'
 
@@ -20,11 +20,16 @@ export function WorkshopStoryCanvas(props: {
 }): React.ReactElement {
   const {frameRef, ready, scheme, viewport} = props
   const {frameUrl, location, scope, story} = useWorkshop()
-  const initialFrameUrl = useRef(`${frameUrl}?path=${location.path}&scheme=${scheme}`)
+  const [currentFrameUrl] = useState(() => `${frameUrl}?path=${location.path}&scheme=${scheme}`)
+
+  const iframe = useMemo(
+    () => <Iframe hidden={!ready} ref={frameRef} src={currentFrameUrl} />,
+    [currentFrameUrl, frameRef, ready]
+  )
 
   return (
     <Flex direction="column" flex={3} overflow="hidden">
-      <Card flex={1} padding={[2, 2, 3, 4]} tone="transparent">
+      <Card flex={1} padding={2} tone="transparent">
         <Container
           height="fill"
           hidden={!scope || !story}
@@ -43,7 +48,7 @@ export function WorkshopStoryCanvas(props: {
               </Flex>
             )}
 
-            <Iframe hidden={!ready} ref={frameRef} src={initialFrameUrl.current} />
+            {iframe}
           </Card>
         </Container>
       </Card>

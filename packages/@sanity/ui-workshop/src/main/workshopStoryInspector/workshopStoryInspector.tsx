@@ -16,7 +16,7 @@ export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}): 
   return (
     <Card borderLeft flex={1} overflow="auto" style={{minWidth: 180, maxWidth: 300}}>
       <Layer style={{position: 'sticky', top: 0}}>
-        <Card paddingX={3} paddingY={2} shadow={1}>
+        <Card padding={2} shadow={1}>
           <TabList space={1}>
             <Tab
               aria-controls="props-panel"
@@ -41,7 +41,13 @@ export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}): 
         </Card>
       </Layer>
 
-      <TabPanel aria-labelledby="props-tab" hidden={tab !== 'props'} id="props-panel" padding={2}>
+      <TabPanel
+        aria-labelledby="props-tab"
+        hidden={tab !== 'props'}
+        id="props-panel"
+        overflow="auto"
+        padding={2}
+      >
         {scope.props.map((prop, propIndex) => (
           <Prop key={propIndex} schema={prop.schema} value={prop.value} />
         ))}
@@ -52,6 +58,7 @@ export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}): 
           aria-labelledby="axe-results-tab"
           hidden={tab !== 'axe-results'}
           id="axe-results-panel"
+          overflow="auto"
         >
           {axeResults && <InspectAxeResults axeResults={axeResults} />}
         </TabPanel>

@@ -12,7 +12,7 @@ export function WorkshopStoryNav(props: {collections?: MenuCollection[]}): React
   return (
     <Card borderRight flex={1} overflow="auto" style={{minWidth: 180, maxWidth: 300}}>
       {menu.type === 'list' && (
-        <Box padding={3}>
+        <Box padding={4}>
           <Tree space={1}>
             <MenuItems items={menu.items} />
           </Tree>
@@ -53,9 +53,9 @@ function MenuItems(props: {basePath?: string; items: Array<MenuList | MenuScope>
           return (
             <TreeItem
               expanded={location.path.startsWith(path + '/')}
-              fontSize={1}
+              // fontSize={1}
               key={item.name || itemIndex}
-              padding={2}
+              padding={3}
               text={item.title}
               weight="semibold"
             >
@@ -68,20 +68,20 @@ function MenuItems(props: {basePath?: string; items: Array<MenuList | MenuScope>
           return (
             <TreeItem
               expanded={item.scope === currentScope}
-              fontSize={1}
+              // fontSize={1}
               key={item.name}
-              padding={2}
+              padding={3}
               text={item.title}
               weight="semibold"
             >
               {item.scope.stories.map((story) => (
                 <TreeItem
                   data-path={`/${item.scope.name}/${story.name}`}
-                  fontSize={1}
+                  // fontSize={1}
                   href={`/${item.scope.name}/${story.name}`}
                   key={story.name}
                   onClick={handleStoryClick}
-                  padding={2}
+                  padding={3}
                   selected={currentStory === story}
                   text={story.title}
                 />

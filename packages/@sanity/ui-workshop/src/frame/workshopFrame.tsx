@@ -2,9 +2,7 @@ import {
   BoundaryElementProvider,
   Card,
   PortalProvider,
-  studioTheme,
   ThemeColorSchemeKey,
-  ThemeProvider,
   ToastProvider,
 } from '@sanity/ui'
 import React, {
@@ -30,14 +28,16 @@ import {useParent} from './useParent'
 export function WorkshopFrame(_props: {
   frameUrl: string
   scopes: WorkshopScope[]
+  setScheme: (scheme: 'dark' | 'light') => void
   title: string
 }): React.ReactElement {
-  const {frameUrl, scopes, title} = _props
-  const query = useMemo(() => qs.parse(window.location.search.substr(1)), [])
+  const {frameUrl, scopes, setScheme, title} = _props
+  const query = useMemo(() => {
+    if (typeof window === 'undefined') return {}
+
+    return qs.parse(window.location.search.substr(1))
+  }, [])
   const [path, setPath] = useState(query.path || '/')
-  const [scheme, setScheme] = useState<ThemeColorSchemeKey>(
-    (query.scheme as ThemeColorSchemeKey) || 'light'
-  )
   const [props, dispatch] = useReducer(propsReducer, [])
   const [zoom, setZoom] = useState(query.zoom ? Number(query.zoom) : 1)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
@@ -49,42 +49,7 @@ export function WorkshopFrame(_props: {
     enabled: features.axe && Boolean(story),
     key: story?.name || null,
   })
-
-  useEffect(() => {
-    postMessage({type: 'workshop/frame/ready', path})
-
-    const handleMessage = (event: MessageEvent) => {
-      const msg = event.data
-
-      if (isRecord(msg)) {
-        if (msg.type === 'workshop/setLocation') {
-          setPath(msg.path as string)
-          setScheme(msg.scheme as ThemeColorSchemeKey)
-          setZoom(msg.zoom as number)
-
-          return
-        }
-
-        if (msg.type === 'workshop/setPropValue') {
-          dispatch({
-            type: 'setPropValue',
-            PropName: msg.PropName as string,
-            value: msg.value,
-          })
-
-          return
-        }
-
-        console.warn('unhandled msg', msg)
-      }
-    }
-
-    window.addEventListener('message', handleMessage)
-
-    return () => {
-      window.removeEventListener('message', handleMessage)
-    }
-  }, [path, postMessage])
+  const [mounted, setMounted] = useState(false)
 
   const pushLocation = useCallback(
     (newLoc: WorkshopLocation) => {
@@ -142,37 +107,81 @@ export function WorkshopFrame(_props: {
     postMessage({type: 'workshop/frame/axe/results', results: axeResults})
   }, [axeResults, postMessage])
 
+  // Set mounted
+  useEffect(() => setMounted(true), [])
+
+  // Set initial scheme
+  useEffect(() => setScheme(query.scheme as ThemeColorSchemeKey), [query.scheme, setScheme])
+
+  useEffect(() => {
+    postMessage({type: 'workshop/frame/ready', path})
+
+    const handleMessage = (event: MessageEvent) => {
+      const msg = event.data
+
+      if (isRecord(msg)) {
+        if (msg.type === 'workshop/setLocation') {
+          setPath(msg.path as string)
+          setScheme(msg.scheme as ThemeColorSchemeKey)
+          setZoom(msg.zoom as number)
+
+          return
+        }
+
+        if (msg.type === 'workshop/setPropValue') {
+          dispatch({
+            type: 'setPropValue',
+            PropName: msg.PropName as string,
+            value: msg.value,
+          })
+
+          return
+        }
+
+        console.warn('unhandled msg', msg)
+      }
+    }
+
+    window.addEventListener('message', handleMessage)
+
+    return () => {
+      window.removeEventListener('message', handleMessage)
+    }
+  }, [path, postMessage, setScheme])
+
   useEffect(() => {
     const bodyStyle: any = document.body.style
 
     bodyStyle.zoom = String(zoom)
   }, [zoom])
 
+  if (!mounted) {
+    return <></>
+  }
+
   return (
     <BoundaryElementProvider element={boundaryElement}>
       <PortalProvider element={portalElement}>
-        <ThemeProvider scheme={scheme} theme={studioTheme}>
-          <ToastProvider>
-            <WorkshopContext.Provider value={contextValue}>
-              <ScopeProvider
-                props={props}
-                registerProp={registerProp}
-                scope={scope}
-                setPropValue={setPropValue}
-                story={story}
-                title={title}
-                unregisterProp={unregisterProp}
-              >
-                <Suspense fallback={null}>
-                  <Card as="main" height="fill" ref={setBoundaryElement}>
-                    {story && createElement(story.component)}
-                  </Card>
-                </Suspense>
-                <div data-portal="" ref={setPortalElement} />
-              </ScopeProvider>
-            </WorkshopContext.Provider>
-          </ToastProvider>
-        </ThemeProvider>
+        <ToastProvider>
+          <WorkshopContext.Provider value={contextValue}>
+            <ScopeProvider
+              props={props}
+              registerProp={registerProp}
+              scope={scope}
+              setPropValue={setPropValue}
+              story={story}
+              title={title}
+              unregisterProp={unregisterProp}
+            >
+              <Suspense fallback={null}>
+                <Card as="main" height="fill" ref={setBoundaryElement}>
+                  {story && createElement(story.component)}
+                </Card>
+              </Suspense>
+              <div data-portal="" ref={setPortalElement} />
+            </ScopeProvider>
+          </WorkshopContext.Provider>
+        </ToastProvider>
       </PortalProvider>
     </BoundaryElementProvider>
   )

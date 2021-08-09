@@ -1,4 +1,4 @@
-import {useCallback, useRef} from 'react'
+import {useCallback, useMemo, useRef} from 'react'
 
 export type Msg = Record<string, unknown>
 
@@ -8,6 +8,7 @@ export function useParent(): {postMessage: (msg: Msg) => void} {
 
   const _flushMessageQueue = useCallback(() => {
     if (flushTimeoutRef.current) return
+
     flushTimeoutRef.current = setTimeout(() => {
       const queue = messageQueueRef.current
 
@@ -30,5 +31,5 @@ export function useParent(): {postMessage: (msg: Msg) => void} {
     [_flushMessageQueue]
   )
 
-  return {postMessage}
+  return useMemo(() => ({postMessage}), [postMessage])
 }
