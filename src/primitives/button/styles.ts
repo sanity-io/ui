@@ -63,7 +63,6 @@ export function buttonColorStyles(
       boxShadow: focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': _colorVarsStyle(base, color.disabled),
       "&:not([data-disabled='true'])": {
-        '&[data-selected]': _colorVarsStyle(base, color.pressed),
         '&:focus': {
           boxShadow: focusRingStyle({base, border, focusRing}),
         },
@@ -74,6 +73,7 @@ export function buttonColorStyles(
           '&:hover': _colorVarsStyle(base, color.hovered),
           '&:active': _colorVarsStyle(base, color.pressed),
         },
+        '&[data-selected]': _colorVarsStyle(base, color.pressed),
       },
     },
     theme.sanity.styles?.button?.root,
