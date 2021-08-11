@@ -16,13 +16,13 @@
     "@sanity/icons": "^1.1.4",
     "@sanity/logos": "^1.1.4",
     "@sanity/ui": "^0.35.1",
-    "next": "^11.0.1",
+    "next": "^11.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.13.2",
-    "eslint-config-next": "^11.0.1"
+    "eslint-config-next": "^11.1.0"
   }
 }
