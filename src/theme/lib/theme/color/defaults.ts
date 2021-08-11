@@ -155,6 +155,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
     if (state === 'hovered') {
       return {
         bg: dark ? color.light : color.dark,
+        bg2: dark ? color.light : color.dark,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.darkest : color.lightest,
         muted: {
@@ -176,6 +177,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
 
     return {
       bg: color.base,
+      bg2: color.base,
       border: dark ? color.light : color.dark,
       fg: dark ? color.darkest : color.lightest,
       muted: {
@@ -201,6 +203,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
     if (state === 'hovered') {
       return {
         bg: dark ? color.darker : color.lighter,
+        bg2: dark ? color.darker : color.lighter,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.lightest : color.darkest,
         muted: {
@@ -222,6 +225,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
 
     return {
       bg: dark ? color.darkest : color.lightest,
+      bg2: dark ? color.darkest : color.lightest,
       border: dark ? color.darker : color.lighter,
       fg: dark ? color.lighter : color.darker,
       muted: {
@@ -247,6 +251,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         ...muted,
         enabled: {
           bg: 'transparent',
+          bg2: 'transparent',
           fg: muted.enabled.fg,
           border: 'transparent',
           muted: {
@@ -266,6 +271,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         },
         hovered: {
           bg: muted.enabled.bg,
+          bg2: muted.enabled.bg,
           fg: muted.hovered.fg,
           border: 'transparent',
           muted: {
@@ -298,6 +304,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
   card: ({base}) => {
     return {
       bg: black,
+      bg2: black,
       fg: black,
       border: black,
       muted: {

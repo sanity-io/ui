@@ -4,7 +4,11 @@ import {ThemeColorBase, ThemeColorGenericState} from '../../theme'
 /**
  * @internal
  */
-export function _colorVarsStyle(base: ThemeColorBase, color: ThemeColorGenericState): CSSObject {
+export function _colorVarsStyle(
+  base: ThemeColorBase,
+  color: ThemeColorGenericState,
+  checkered = false
+): CSSObject {
   return {
     // Base
     // @todo: rename to "--base-"?
@@ -16,6 +20,9 @@ export function _colorVarsStyle(base: ThemeColorBase, color: ThemeColorGenericSt
 
     // Card
     '--card-bg-color': color.bg,
+    '--card-bg-image': checkered
+      ? `repeating-conic-gradient(${color.bg} 0% 25%, ${color.bg2 || color.bg} 0% 50%)`
+      : undefined,
     '--card-fg-color': color.fg,
     '--card-border-color': color.border,
     '--card-muted-fg-color': color.muted?.fg,

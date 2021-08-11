@@ -25,6 +25,12 @@ export interface CardProps
     ResponsiveRadiusProps,
     ResponsiveShadowProps {
   /**
+   * Do not use in production.
+   * @beta
+   */
+  __unstable_checkered?: boolean
+  /**
+   * Do not use in production.
    * @beta
    */
   __unstable_focusRing?: boolean
@@ -49,6 +55,7 @@ export const Card = forwardRef(function Card(
 ) {
   const {
     pressed = false,
+    __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
     as: asProp,
     border,
@@ -71,6 +78,7 @@ export const Card = forwardRef(function Card(
     <ThemeColorProvider scheme={scheme} tone={tone}>
       <Root
         data-as={typeof as === 'string' ? as : undefined}
+        data-checkered={checkered ? '' : undefined}
         data-pressed={pressed ? '' : undefined}
         data-scheme={rootTheme.scheme}
         data-selected={selected ? '' : undefined}
@@ -82,6 +90,7 @@ export const Card = forwardRef(function Card(
         $borderRight={borderRight}
         $borderBottom={borderBottom}
         $borderLeft={borderLeft}
+        $checkered={checkered}
         $focusRing={focusRing}
         $radius={radius}
         $shadow={shadow}

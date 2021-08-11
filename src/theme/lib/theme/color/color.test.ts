@@ -34,6 +34,7 @@ describe('color', () => {
 
       expect(color.muted.default.enabled).toEqual({
         bg: 'hsl(0, 0%, 95%)',
+        bg2: 'hsl(0, 0%, 95%)',
         border: 'hsl(0, 0%, 70%)',
         fg: 'hsl(0, 0%, 20%)',
         muted: {
