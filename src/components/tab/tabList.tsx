@@ -1,11 +1,15 @@
-import React, {cloneElement, forwardRef, useCallback, useState} from 'react'
+import React, {cloneElement, forwardRef, useCallback, useMemo, useState} from 'react'
 import {Inline, InlineProps} from '../../primitives'
 
 /**
  * @public
  */
 export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
-  children: React.ReactElement[]
+  children: Array<React.ReactElement | null | undefined | false>
+}
+
+function _isReactElement(node: unknown): node is React.ReactElement {
+  return Boolean(node)
 }
 
 /**
@@ -15,8 +19,10 @@ export const TabList = forwardRef(function TabList(
   props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
   ref
 ) {
-  const {children, ...restProps} = props
+  const {children: childrenProp, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
+
+  const children = useMemo(() => childrenProp.filter(_isReactElement), [childrenProp])
 
   const tabs = children.map((child, childIndex) =>
     cloneElement(child, {
