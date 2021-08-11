@@ -66,7 +66,7 @@ export function MenuGroup(
   const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const shouldFocusRef = useRef<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
-  const selected = active || open
+  // const selected = active || open
 
   // Register the element
   useEffect(() => mount(rootElement), [mount, rootElement])
@@ -194,7 +194,9 @@ export function MenuGroup(
         data-ui="MenuGroup"
         forwardedAs={as}
         {...restProps}
-        data-selected={selected ? '' : undefined}
+        aria-pressed={as === 'button' ? !active && open : undefined}
+        data-pressed={as !== 'button' ? !active && open : undefined}
+        data-selected={active ? '' : undefined}
         $radius={radius}
         $tone={tone}
         onClick={handleClick}

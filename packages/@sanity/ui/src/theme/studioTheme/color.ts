@@ -255,7 +255,7 @@ export const color = createColorTheme({
           fg: mix(bg, tints[dark ? 900 : 100].hex),
         },
         accent: {
-          fg: mix(bg, tints[dark ? 400 : 500].hex),
+          fg: mix(bg, tints[dark ? 900 : 100].hex),
         },
         link: {
           fg: mix(bg, tints[dark ? 900 : 100].hex),
@@ -272,11 +272,11 @@ export const color = createColorTheme({
     }
 
     if (state === 'hovered') {
-      if (isNeutral) {
-        tints = tones.primary
-      }
+      // if (isNeutral) {
+      //   tints = tones.primary
+      // }
 
-      const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
+      const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
       const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {
@@ -308,7 +308,7 @@ export const color = createColorTheme({
         tints = tones.primary
       }
 
-      const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
+      const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
       const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {

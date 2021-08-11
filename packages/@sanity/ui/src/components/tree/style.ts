@@ -50,12 +50,14 @@ export function treeItemRootColorStyle(props: ThemeProps): FlattenSimpleInterpol
         ${_colorVarsStyle(base, tone.pressed)}
       }
 
-      & > [role='treeitem']:not(:focus):hover {
-        ${_colorVarsStyle(base, tone.hovered)}
-      }
+      @media (hover: hover) {
+        &:not([data-selected]) > [role='treeitem']:not(:focus):hover {
+          ${_colorVarsStyle(base, tone.hovered)}
+        }
 
-      & > [role='treeitem']:focus {
-        ${_colorVarsStyle(base, tone.selected)}
+        & > [role='treeitem']:focus {
+          ${_colorVarsStyle(base, tone.selected)}
+        }
       }
     }
 
@@ -72,12 +74,14 @@ export function treeItemRootColorStyle(props: ThemeProps): FlattenSimpleInterpol
         ${_colorVarsStyle(base, tone.pressed)}
       }
 
-      &:not(:focus) > [data-ui='TreeItem__box']:hover {
-        ${_colorVarsStyle(base, tone.hovered)}
-      }
+      @media (hover: hover) {
+        &:not([data-selected]):not(:focus) > [data-ui='TreeItem__box']:hover {
+          ${_colorVarsStyle(base, tone.hovered)}
+        }
 
-      &:focus > [data-ui='TreeItem__box'] {
-        ${_colorVarsStyle(base, tone.selected)}
+        &:focus > [data-ui='TreeItem__box'] {
+          ${_colorVarsStyle(base, tone.selected)}
+        }
       }
     }
   `

@@ -45,6 +45,7 @@ export function selectableColorStyle(
 
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
+    outline: none;
 
     /* &:is(button) */
     &[data-as='button'] {
@@ -63,7 +64,7 @@ export function selectableColorStyle(
         }
 
         @media (hover: hover) {
-          &:not([aria-pressed='true']):not([data-selected]) {
+          &:not([data-selected]) {
             &:hover {
               ${_colorVarsStyle(base, tone.hovered)}
             }
@@ -92,9 +93,7 @@ export function selectableColorStyle(
         }
 
         @media (hover: hover) {
-          outline: none;
-
-          &:not([data-pressed]):not([data-selected]) {
+          &:not([data-selected]) {
             &:hover {
               ${_colorVarsStyle(base, tone.hovered)}
             }
