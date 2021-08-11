@@ -31,7 +31,7 @@
   "devDependencies": {
     "@sanity/client": "^2.13.0",
     "@sanity/tsdoc-to-portable-text": "^0.1.4",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.0",
     "@types/jest-axe": "^3.5.2",
     "@types/node": "^16.4.13",
     "@types/prettier": "^2.3.2",
