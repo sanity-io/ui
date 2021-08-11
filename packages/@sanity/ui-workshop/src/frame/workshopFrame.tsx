@@ -16,7 +16,8 @@ import React, {
   useReducer,
   useState,
 } from 'react'
-// import {useAxeResults} from '../axe/useAxeResults'
+import {useAxeResults} from '../axe/useAxeResults'
+import {features} from '../features'
 import {isRecord} from '../lib/isRecord'
 import {qs} from '../lib/qs'
 import {propsReducer} from '../props/reducer'
@@ -44,7 +45,10 @@ export function WorkshopFrame(_props: {
   const {postMessage} = useParent()
   const {scope, story} = useMemo(() => resolveLocation(scopes, path), [path, scopes])
   const loc = useMemo(() => ({path}), [path])
-  // const axeResults = useAxeResults({enabled: Boolean(story), key: story?.name || null})
+  const axeResults = useAxeResults({
+    enabled: features.axe && Boolean(story),
+    key: story?.name || null,
+  })
 
   useEffect(() => {
     postMessage({type: 'workshop/frame/ready', path})
@@ -133,9 +137,10 @@ export function WorkshopFrame(_props: {
     }
   }, [frameUrl, loc, pushLocation, replaceLocation, scope, scopes, story, title])
 
-  // useEffect(() => {
-  //   postMessage({type: 'workshop/frame/axe/results', results: axeResults})
-  // }, [axeResults, postMessage])
+  useEffect(() => {
+    if (!features.axe) return
+    postMessage({type: 'workshop/frame/axe/results', results: axeResults})
+  }, [axeResults, postMessage])
 
   useEffect(() => {
     const bodyStyle: any = document.body.style

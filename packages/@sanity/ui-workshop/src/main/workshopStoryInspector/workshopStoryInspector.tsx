@@ -1,6 +1,7 @@
 import {Card, Layer, Tab, TabList, TabPanel} from '@sanity/ui'
 import {AxeResults} from 'axe-core'
 import React, {useState} from 'react'
+import {features} from '../../features'
 import {Prop} from '../../props'
 import {useScope} from '../../useScope'
 import {InspectAxeResults} from './inspectAxeResults'
@@ -25,15 +26,17 @@ export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}): 
               onClick={() => setTab('props')}
               selected={tab === 'props'}
             />
-            <Tab
-              aria-controls="axe-results-panel"
-              fontSize={1}
-              id="axe-results-tab"
-              label={(<>Accessbility ({axeResults?.violations.length || 0})</>) as any}
-              onClick={() => setTab('axe-results')}
-              selected={tab === 'axe-results'}
-              tone={hasA11yViolations ? 'critical' : undefined}
-            />
+            {features.axe && (
+              <Tab
+                aria-controls="axe-results-panel"
+                fontSize={1}
+                id="axe-results-tab"
+                label={(<>Accessibility ({axeResults?.violations.length || 0})</>) as any}
+                onClick={() => setTab('axe-results')}
+                selected={tab === 'axe-results'}
+                tone={hasA11yViolations ? 'critical' : undefined}
+              />
+            )}
           </TabList>
         </Card>
       </Layer>
@@ -44,13 +47,15 @@ export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}): 
         ))}
       </TabPanel>
 
-      <TabPanel
-        aria-labelledby="axe-results-tab"
-        hidden={tab !== 'axe-results'}
-        id="axe-results-panel"
-      >
-        {axeResults && <InspectAxeResults axeResults={axeResults} />}
-      </TabPanel>
+      {features.axe && (
+        <TabPanel
+          aria-labelledby="axe-results-tab"
+          hidden={tab !== 'axe-results'}
+          id="axe-results-panel"
+        >
+          {axeResults && <InspectAxeResults axeResults={axeResults} />}
+        </TabPanel>
+      )}
     </Card>
   )
 }
