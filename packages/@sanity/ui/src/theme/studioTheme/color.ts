@@ -96,6 +96,7 @@ export const color = createColorTheme({
 
       return {
         bg,
+        bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: mix(base.bg, tints[dark ? 800 : 200].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
@@ -124,6 +125,7 @@ export const color = createColorTheme({
 
       return {
         bg,
+        bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: mix(base.bg, tints[dark ? 300 : 600].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
@@ -152,6 +154,7 @@ export const color = createColorTheme({
 
       return {
         bg: mix(base.bg, tints[dark ? 200 : 800].hex),
+        bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
@@ -184,6 +187,7 @@ export const color = createColorTheme({
 
       return {
         bg,
+        bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: mix(base.bg, tints[dark ? 200 : 800].hex),
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
@@ -212,6 +216,7 @@ export const color = createColorTheme({
 
     return {
       bg,
+      bg2: mix2(bg, tints[dark ? 50 : 950].hex),
       border: mix(base.bg, tints[dark ? 400 : 500].hex),
       fg: mix(base.bg, dark ? black.hex : white.hex),
       muted: {
@@ -249,6 +254,7 @@ export const color = createColorTheme({
 
       return {
         bg,
+        bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: mix(bg, tints[dark ? 950 : 50].hex),
         fg: mix(bg, tints[dark ? 800 : 200].hex),
         muted: {
@@ -281,6 +287,7 @@ export const color = createColorTheme({
 
       return {
         bg,
+        bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: mix(bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 200 : 800].hex),
         muted: {
@@ -313,6 +320,7 @@ export const color = createColorTheme({
 
       return {
         bg,
+        bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: mix(bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 200 : 800].hex),
         muted: {
@@ -345,6 +353,7 @@ export const color = createColorTheme({
 
       return {
         bg,
+        bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: mix(bg, tints[dark ? 900 : 100].hex),
         fg: mix(base.bg, tints[dark ? 200 : 800].hex),
         muted: {
@@ -372,6 +381,7 @@ export const color = createColorTheme({
 
     return {
       bg,
+      bg2: mix(bg, tints[dark ? 950 : 50].hex),
       border: mix(bg, tints[dark ? 900 : 100].hex),
       fg: mix(base.bg, tints[dark ? 300 : 700].hex),
       muted: {
@@ -468,6 +478,7 @@ export const color = createColorTheme({
 
     return {
       bg,
+      bg2: mix(bg, tints[dark ? 950 : 50].hex),
       fg: base.fg,
       border: base.border,
       muted: {

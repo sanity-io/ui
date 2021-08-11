@@ -45,9 +45,9 @@ const defaultFeatures: Features = {
 
   base: false,
   button: false,
-  card: true,
+  card: false,
   input: false,
-  muted: false,
+  muted: true,
   selectable: false,
   solid: false,
   spot: false,
@@ -267,11 +267,25 @@ function ColorGenericState(props: {color: ThemeColorButtonState}) {
       space={2}
       style={{
         backgroundColor: color.bg,
+        color: color.fg,
         border: `1px solid ${color.border}`,
         borderRadius: 3,
       }}
     >
-      <Text align="center" style={{color: color.fg}}>
+      <Flex style={{border: `1px solid ${color.border}`}}>
+        <Box flex={1} padding={3} style={{backgroundColor: color.bg}}>
+          <Text align="center" size={1} style={{color: 'inherit'}}>
+            bg
+          </Text>
+        </Box>
+        <Box flex={1} padding={3} style={{backgroundColor: color.bg2}}>
+          <Text align="center" size={1} style={{color: 'inherit'}}>
+            bg2
+          </Text>
+        </Box>
+      </Flex>
+
+      <Text align="center" style={{color: 'inherit'}}>
         Text
       </Text>
       <Text align="center" size={1} style={{color: color.muted.fg}}>

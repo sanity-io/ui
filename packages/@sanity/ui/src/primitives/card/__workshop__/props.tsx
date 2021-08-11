@@ -10,8 +10,9 @@ import {
 } from '../../../__workshop__/constants'
 
 export default function PropsStory() {
-  const border = useBoolean('Border', false, 'Props')
   const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div', 'Props')
+  const border = useBoolean('Border', false, 'Props')
+  const checkered = useBoolean('Checkered', false, 'Props')
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 0, 'Props')
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0, 'Props')
   const selected = useBoolean('Selected', false, 'Props')
@@ -21,6 +22,7 @@ export default function PropsStory() {
   return (
     <Flex align="center" height="fill" justify="center">
       <Card
+        __unstable_checkered={checkered}
         as={as}
         border={border}
         onClick={useAction('onClick')}

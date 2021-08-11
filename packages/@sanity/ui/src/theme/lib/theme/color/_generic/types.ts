@@ -3,6 +3,10 @@
  */
 export interface ThemeColorGenericState {
   bg: string
+  /**
+   * @beta
+   */
+  bg2?: string
   border: string
   fg: string
   muted: {
