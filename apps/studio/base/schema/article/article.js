@@ -47,4 +47,10 @@ export const article = {
       title: 'SEO',
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      media: 'seo.og.image',
+    },
+  },
 }
