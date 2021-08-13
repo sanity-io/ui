@@ -18,7 +18,7 @@ const Input = styled.input(inputElementStyle)
  */
 export const Radio = forwardRef(function Radio(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps,
-  forwardedRef: React.Ref<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>
 ) {
   const {className, disabled, style, customValidity, readOnly, ...restProps} = props
   const ref = useForwardedRef(forwardedRef)

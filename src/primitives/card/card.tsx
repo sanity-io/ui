@@ -50,8 +50,8 @@ const Root = styled(Box)<
  * @public
  */
 export const Card = forwardRef(function Card(
-  props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>,
-  ref
+  props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {
     pressed = false,

@@ -52,8 +52,8 @@ const Root = styled.div<
  * @public
  */
 export const Box = forwardRef(function Box(
-  props: BoxProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>,
-  ref
+  props: BoxProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {
     as: asProp = 'div',

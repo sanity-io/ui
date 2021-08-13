@@ -15,8 +15,8 @@ const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
  * @public
  */
 export const Grid = forwardRef(function Grid(
-  props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'rows'>,
-  ref
+  props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {as, autoRows, autoCols, autoFlow, columns, gap, gapX, gapY, rows, children, ...restProps} =
     props

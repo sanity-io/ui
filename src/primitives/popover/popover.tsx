@@ -98,7 +98,7 @@ const PopoverCard = styled(Card)<
 export const Popover = forwardRef(function Popover(
   props: PopoverProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-  ref
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const boundaryElementContext = useBoundaryElement()
   const theme = useTheme()

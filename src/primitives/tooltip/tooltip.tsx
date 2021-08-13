@@ -31,7 +31,7 @@ const Root = styled(Layer)`
  */
 export const Tooltip = forwardRef(function Tooltip(
   props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-  ref
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const boundaryElementContext = useBoundaryElement()
   const theme = useTheme()

@@ -44,8 +44,8 @@ const SpanWithTextOverflow = styled.span`
  * @public
  */
 export const Text = forwardRef(function Text(
-  props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'size'>,
-  ref
+  props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {
     accent = false,
