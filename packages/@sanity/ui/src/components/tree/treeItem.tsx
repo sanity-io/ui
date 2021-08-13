@@ -29,7 +29,7 @@ export interface TreeItemProps {
 
 const Root = styled.li(treeItemRootStyle, treeItemRootColorStyle)
 
-const TreeItemBox = styled(Box)<TreeItemBoxStyleProps>(treeItemBoxStyle)
+const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
 
 const ToggleArrowText = styled(Text)`
   & > svg {
@@ -61,7 +61,7 @@ export function TreeItem(
     ...restProps
   } = props
   const rootRef = useRef<HTMLLIElement | null>(null)
-  const treeitemRef = useRef<HTMLAnchorElement | null>(null)
+  const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const id = useId(idProp) || idProp
@@ -153,7 +153,6 @@ export function TreeItem(
           $level={tree.level}
           aria-expanded={expanded}
           data-ui="TreeItem__box"
-          forwardedAs="a"
           href={href}
           ref={treeitemRef}
           role="treeitem"
@@ -183,7 +182,7 @@ export function TreeItem(
       role="treeitem"
       tabIndex={tabIndex}
     >
-      <TreeItemBox $level={tree.level} data-ui="TreeItem__box">
+      <TreeItemBox $level={tree.level} as="div" data-ui="TreeItem__box">
         {content}
       </TreeItemBox>
 

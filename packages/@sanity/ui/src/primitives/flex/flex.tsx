@@ -28,8 +28,8 @@ const Root = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
  * @public
  */
 export const Flex = forwardRef(function Flex(
-  props: FlexProps & Omit<React.HTMLProps<HTMLDivElement>, 'wrap'>,
-  ref
+  props: FlexProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
 

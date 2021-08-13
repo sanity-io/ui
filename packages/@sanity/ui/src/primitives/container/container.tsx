@@ -19,8 +19,8 @@ const Root = styled(Box)<ResponsiveWidthStyleProps>(
  * @public
  */
 export const Container = forwardRef(function Container(
-  props: ContainerProps & Omit<React.HTMLProps<HTMLDivElement>, 'height' | 'width'>,
-  ref
+  props: ContainerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {as, width = 2, ...restProps} = props
 

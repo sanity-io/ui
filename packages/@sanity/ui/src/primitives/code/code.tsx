@@ -20,8 +20,8 @@ const Root = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeF
  * @public
  */
 export const Code = forwardRef(function Code(
-  props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'size'>,
-  ref
+  props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
+  ref: React.ForwardedRef<HTMLElement>
 ) {
   const {children, language: languageProp, size = 2, weight, ...restProps} = props
   const language = typeof languageProp === 'string' ? languageProp : undefined

@@ -8,6 +8,7 @@ import {Code} from '../code'
  * @public
  */
 export interface KBDProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   padding?: number | number[]
   radius?: number | number[]
@@ -32,7 +33,7 @@ const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdSt
  */
 export const KBD = forwardRef(function KBD(
   props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.Ref<HTMLElement>
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {children, fontSize = 1, padding = 1, radius = 2, ...restProps} = props
 

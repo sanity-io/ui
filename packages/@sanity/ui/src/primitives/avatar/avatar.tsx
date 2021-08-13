@@ -45,8 +45,8 @@ const Initials = styled.div(avatarStyle.initials)
  * @public
  */
 export const Avatar = forwardRef(function Avatar(
-  props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'ref'>,
-  ref
+  props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {
     as: asProp,

@@ -59,7 +59,7 @@ export interface AvatarStackProps {
  */
 export const AvatarStack = forwardRef(function AvatarStack(
   props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {children: childrenProp, maxLength: maxLengthProp = 4, size = 0, tone, ...restProps} = props
   const maxLength = Math.max(maxLengthProp, 0)
