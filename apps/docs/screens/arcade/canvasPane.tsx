@@ -110,7 +110,7 @@ export function CanvasPane(props: {
   const {hookCode, jsxCode, meta, onMetaChange, onWidthChange, width} = props
   const [editorOpen, setEditorOpen] = useState(false)
   const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
-  const [editButtonElement, setEditButtonElement] = useState<HTMLDivElement | null>(null)
+  const [editButtonElement, setEditButtonElement] = useState<HTMLButtonElement | null>(null)
 
   const handleMetaChange = useCallback(
     (value: ArcadeMeta) => {
