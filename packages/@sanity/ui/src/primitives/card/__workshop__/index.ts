@@ -9,4 +9,5 @@ export default defineScope('primitives/card', 'Card', [
   {name: 'as-button', title: 'As button', component: lazy(() => import('./asButton'))},
   {name: 'list-nav', title: 'List navigation', component: lazy(() => import('./listNavigation'))},
   {name: 'checkered', title: 'Checkered', component: lazy(() => import('./checkered'))},
+  {name: 'as-component', title: 'As component', component: lazy(() => import('./asComponent'))},
 ])
