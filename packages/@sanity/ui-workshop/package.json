@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@sanity/ui-workshop",
   "version": "0.1.23",
   "main": "lib/cjs/index.js",
@@ -32,5 +31,22 @@
     "@sanity/ui": "^0.33",
     "react": "^17",
     "styled-components": "^5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/design.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sanity-io/design/issues"
+  },
+  "keywords": [
+    "sanity",
+    "ui",
+    "components"
+  ],
+  "author": "Sanity.io <hello@sanity.io>",
+  "homepage": "https://www.sanity.io/",
+  "publishConfig": {
+    "access": "public"
   }
 }
