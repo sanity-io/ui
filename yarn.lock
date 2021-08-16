@@ -3127,10 +3127,10 @@
     slate "^0.58.4"
     styled-components "^5.0.0"
 
-"@sanity/production-preview@2.14.1-canary.36":
-  version "2.14.1-canary.36"
-  resolved "https://registry.npmjs.org/@sanity/production-preview/-/production-preview-2.14.1-canary.36.tgz#d97734afef8375808256df56aa192c4d2de59a2c"
-  integrity sha512-G04w9sKfRpaMa38Vs5XyFqyHmYzmzT5n+/KOT5c0Me+GeMwwOy5433n9LJENCVNJX7W7v1YlXZzhIzpXc1+hIw==
+"@sanity/production-preview@2.14.1-conditional-fields.64":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/production-preview/-/production-preview-2.14.1-conditional-fields.64.tgz#2ccc68ceb22bef337ca5771cbe5c0462ad574e4c"
+  integrity sha512-rE0zqC7XXeWB5a87DQ+iFc6o7WjO/44+AJdyYlWQK3U8ScOQF3d6SBqWYVy4tFB8wGTVSHSBrwdbGyT3Tmt8UA==
 
 "@sanity/react-hooks@2.14.1-canary.36+e74126bdd6":
   version "2.14.1-canary.36"
