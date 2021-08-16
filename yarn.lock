@@ -3333,10 +3333,10 @@
     lodash "^4.17.15"
     type-of-is "^3.5.1"
 
-"@sanity/vision@2.14.1-canary.36":
-  version "2.14.1-canary.36"
-  resolved "https://registry.npmjs.org/@sanity/vision/-/vision-2.14.1-canary.36.tgz#5808fd445c4993866926263a66a17c41a3c8ef05"
-  integrity sha512-pR/tApNYcEbjFbHxOeSsUN8DT7r4XO5/cqEcRLglCYr5dkJNmeSWoCDdPHcJ31stEiON15xUtA9Id004VuYW8g==
+"@sanity/vision@2.14.1-conditional-fields.64":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.14.1-conditional-fields.64.tgz#3df6c5f0965cc498efc4c4c80303c65cfa9fe634"
+  integrity sha512-jUD1F/TcGbMArWRiwiW2fpBhD/7WieoSdQhhKmw7yUzCR4D2iW+RIimQrXOX6NQyk9E8LFonH3TzA6p9JRQj5w==
   dependencies:
     "@sanity/icons" "^1.1.4"
     "@sanity/ui" "^0.35.0"
@@ -6513,12 +6513,7 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror@^5.47.0:
-  version "5.61.1"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.61.1.tgz#ccfc8a43b8fcfb8b12e8e75b5ffde48d541406e0"
-  integrity sha512-+D1NZjAucuzE93vJGbAaXzvoBHwp9nJZWWWF9utjv25+5AZUiah6CIlfb4ikG4MoDsFsCG8niiJH5++OO2LgIQ==
-
-codemirror@^5.62.2s:
+codemirror@^5.47.0, codemirror@^5.62.2s:
   version "5.62.2"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.62.2.tgz#bce6d19c9829e6e788f83886d48ecf5c1e106e65"
   integrity sha512-tVFMUa4J3Q8JUd1KL9yQzQB0/BJt7ZYZujZmTPgo/54Lpuq3ez4C8x/ATUY/wv7b7X3AUq8o3Xd+2C5ZrCGWHw==
