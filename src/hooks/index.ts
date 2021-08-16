@@ -1,4 +1,5 @@
 export * from './useClickOutside'
+export * from './useElementRect'
 export * from './useGlobalKeyDown'
 export * from './useMediaIndex'
 export * from './usePrefersDark'
