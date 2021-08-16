@@ -2642,6 +2642,66 @@
     shallow-equals "^1.0.0"
     styled-components "^5.2.1"
 
+"@sanity/base@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.14.1-conditional-fields.64.tgz#5f9cd4a95b7c87cbc4971f5af7152501291a2de9"
+  integrity sha512-zv6ev5fiOud9Z2Sus1949bZHrwpiG03CfSupVQ7xsHlqvJUfXluQ+jE4ik0J845K4ypSmkRQjyWOYlF6hd4TMA==
+  dependencies:
+    "@juggle/resize-observer" "^3.3.0"
+    "@popperjs/core" "^2.5.4"
+    "@reach/auto-id" "^0.13.2"
+    "@sanity/bifur-client" "^0.0.8"
+    "@sanity/client" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/color" "^2.1.4"
+    "@sanity/generate-help-url" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/icons" "^1.1.4"
+    "@sanity/image-url" "^0.140.19"
+    "@sanity/initial-value-templates" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/mutator" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/schema" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/state-router" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/structure" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/transaction-collator" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/types" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/ui" "^0.35.0"
+    "@sanity/util" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/validation" "2.14.1-conditional-fields.64+9588d94d86"
+    boundless-arrow-key-navigation "^1.1.0"
+    chance "^1.0.4"
+    circular-at "^1.0.3"
+    classnames "^2.2.5"
+    dataloader "^2.0.0"
+    date-fns "^2.16.1"
+    dom-scroll-into-view "^1.2.1"
+    element-resize-detector "^1.1.14"
+    groq-js "^0.2.0"
+    history "^4.6.3"
+    json-reduce "^1.0.0"
+    lodash "^4.17.15"
+    nano-pubsub "^2.0.0"
+    nanoid "^3.1.9"
+    observable-callback "^1.0.1"
+    polished "^4.0.5"
+    popper-max-size-modifier "^0.2.0"
+    raf "^3.4.1"
+    react-click-outside "^3.0.0"
+    react-fast-compare "^3.2.0"
+    react-icon-base "^2.1.2"
+    react-is "^17.0.2"
+    react-popper "^2.2.4"
+    react-props-stream "^1.0.0"
+    react-refractor "^2.1.2"
+    react-rx "^1.0.0-beta.6"
+    react-sortable-hoc "^1.11.0"
+    react-split-pane "^0.1.84"
+    refractor "^3.3.1"
+    rxjs "^6.5.3"
+    rxjs-etc "^10.6.0"
+    rxjs-exhaustmap-with-trailing "^1.0.0"
+    semver-compare "^1.0.0"
+    shallow-equals "^1.0.0"
+    styled-components "^5.2.1"
+
 "@sanity/bifur-client@^0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@sanity/bifur-client/-/bifur-client-0.0.8.tgz#99bc4ebaf2c660af9afa3d66b8220357c2454766"
@@ -2709,6 +2769,19 @@
   dependencies:
     "@sanity/eventsource" "2.14.1-canary.36+e74126bdd6"
     "@sanity/generate-help-url" "2.14.1-canary.36+e74126bdd6"
+    "@sanity/observable" "2.0.9"
+    deep-assign "^2.0.0"
+    get-it "^5.0.3"
+    make-error "^1.3.0"
+    object-assign "^4.1.1"
+
+"@sanity/client@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/client/-/client-2.14.1-conditional-fields.64.tgz#e316f23a4cc9ef499e824b21b8be119158f7c7c8"
+  integrity sha512-hgVlOMRGSuxvz40sfOTddKTE5zPoTJac3EE4eWEjZd5CLiJTVhIIJ0JVIrJgk1WsUtgSrCKaz5OqRRSQPdjKWQ==
+  dependencies:
+    "@sanity/eventsource" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/generate-help-url" "2.14.1-conditional-fields.64+9588d94d86"
     "@sanity/observable" "2.0.9"
     deep-assign "^2.0.0"
     get-it "^5.0.3"
@@ -2823,17 +2896,17 @@
     "@sanity/generate-help-url" "2.14.1-canary.36+e74126bdd6"
     lodash "^4.17.15"
 
-"@sanity/default-layout@2.14.1-canary.36":
-  version "2.14.1-canary.36"
-  resolved "https://registry.npmjs.org/@sanity/default-layout/-/default-layout-2.14.1-canary.36.tgz#a847ed6b4ae50d106ca60450b5fdf1fe502ceda8"
-  integrity sha512-1c5tNegr+TYgOeLi6TxUF/krQIMxFHR5zGinMP1xbFk1Zdb2GD6P7d8M11MBUyH0P5caXq/+eyz5fKlVEzPXVQ==
+"@sanity/default-layout@2.14.1-conditional-fields.64":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.14.1-conditional-fields.64.tgz#125668cac175e16ff7c557ed21bd55e84f37af78"
+  integrity sha512-Q66fkj9YD9v6i5VZdyoOtynHIFasSc1rn3F93jKaBRFG4cNsV/ZcPCZFFFOVsBwgL14tbMPEkemtn5/8EOQZnA==
   dependencies:
     "@reach/auto-id" "^0.13.2"
-    "@sanity/base" "2.14.1-canary.36+e74126bdd6"
-    "@sanity/client" "2.14.1-canary.36+e74126bdd6"
-    "@sanity/generate-help-url" "2.14.1-canary.36+e74126bdd6"
+    "@sanity/base" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/client" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/generate-help-url" "2.14.1-conditional-fields.64+9588d94d86"
     "@sanity/ui" "^0.35.0"
-    "@sanity/util" "2.14.1-canary.36+e74126bdd6"
+    "@sanity/util" "2.14.1-conditional-fields.64+9588d94d86"
     classnames "^2.2.5"
     is-hotkey "^0.1.4"
     lodash "^4.17.15"
@@ -2910,6 +2983,14 @@
   version "2.14.1-canary.36"
   resolved "https://registry.npmjs.org/@sanity/eventsource/-/eventsource-2.14.1-canary.36.tgz#a67f712b392a1f9d27a58555a101b04e7b9f87f5"
   integrity sha512-Y4+CItcg9ry4sQLAo4LD/OPT0RIkEP4j+j8atR6RhX60HmyrT++k9wKyOr40SaS5wqx3LP/Yqvwhh315U5xCYw==
+  dependencies:
+    "@rexxars/eventsource-polyfill" "^1.0.0"
+    eventsource "^1.0.6"
+
+"@sanity/eventsource@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/eventsource/-/eventsource-2.14.1-conditional-fields.64.tgz#96ebe3ba9d206a141bb7ec4263e6d18e25fc6dd2"
+  integrity sha512-21OUOAppLwh0gzJjXhFmdBRoUc8S6ZCFh6xYojHAgEEOSVzeKqg5zh0k0tcl4Dfzg+2oFvMmTP3nCT58dxU0dQ==
   dependencies:
     "@rexxars/eventsource-polyfill" "^1.0.0"
     eventsource "^1.0.6"
@@ -3010,6 +3091,11 @@
   resolved "https://registry.npmjs.org/@sanity/generate-help-url/-/generate-help-url-2.14.1-canary.36.tgz#abebb8da818b1b9c1031df091732bab9f8f2006b"
   integrity sha512-eObQ7DzuEtavU6vH5/q2vhnvpHjWRIn6UgsGB83uhZCPcBoq37vXhClIBENdpskS/AomDvYiKsCtA0L01cp92w==
 
+"@sanity/generate-help-url@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-2.14.1-conditional-fields.64.tgz#8031c2064a7d35cd5f3a4a45d8d9d9330d0a870e"
+  integrity sha512-FUIkI9HEMZ0W6qtfcm7ABbIdDaVLee89/hzJCSrcezqxtKV6lRsXOl7uf2fbzdPU0qEWydPt0hDnLaXXAOOXfA==
+
 "@sanity/generate-help-url@2.2.6":
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-2.2.6.tgz#1673872e2747d1e8aa9406486a80ba6d3e36869d"
@@ -3082,10 +3168,30 @@
     lodash "^4.17.15"
     oneline "^1.0.3"
 
+"@sanity/initial-value-templates@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/initial-value-templates/-/initial-value-templates-2.14.1-conditional-fields.64.tgz#abe6331af45752b2d13f1e4b57e2d3ad635af8d8"
+  integrity sha512-vKL9xtUx+P/sjXzWhoqnEcUyBCKDFgOvRSI16Q8eHwLDBCByUBGnYtq6GpfJJZzRSgWk1twlp0qc0kPd1VZjjg==
+  dependencies:
+    "@sanity/util" "2.14.1-conditional-fields.64+9588d94d86"
+    "@types/lodash" "^4.14.149"
+    lodash "^4.17.15"
+    oneline "^1.0.3"
+
 "@sanity/mutator@2.14.1-canary.36+e74126bdd6":
   version "2.14.1-canary.36"
   resolved "https://registry.npmjs.org/@sanity/mutator/-/mutator-2.14.1-canary.36.tgz#045ff77bdf41afd89a7f71f2bd125b5bf71bce66"
   integrity sha512-eZT5JysPI0AykaJe889hDtGSz/1latOhaBY8TeP8iYrdRO0gufUxQsKH+pY7wNmT4aT6ouOLeUsLiraRrHRd2w==
+  dependencies:
+    "@types/diff-match-patch" "^1.0.32"
+    debug "^3.2.7"
+    diff-match-patch "^1.0.4"
+    lodash "^4.17.15"
+
+"@sanity/mutator@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/mutator/-/mutator-2.14.1-conditional-fields.64.tgz#282daf6f63f37e772429ea7db9c4d0dcc88593b5"
+  integrity sha512-nx3ZnvNoc2iL6xQ4R7w2Yfyvh3ocjYy1anCf7mOJS7gDokorpheAFmoTgBtuDvq26R+/gkzOa1/1C0rbODilTg==
   dependencies:
     "@types/diff-match-patch" "^1.0.32"
     debug "^3.2.7"
@@ -3165,6 +3271,18 @@
     lodash "^4.17.15"
     object-inspect "^1.6.0"
 
+"@sanity/schema@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/schema/-/schema-2.14.1-conditional-fields.64.tgz#4c2b2052026460800444fcda1865e9cc83ffc276"
+  integrity sha512-n6p5tiM65FLivSqC55fqYIxFG7U0mHpoJXJY2IGfm0zoEaWiqH5fC/UB45u6YgCdQQZ1wvKgMzxLdQSGihdq7Q==
+  dependencies:
+    "@sanity/generate-help-url" "2.14.1-conditional-fields.64+9588d94d86"
+    arrify "^1.0.1"
+    humanize-list "^1.0.1"
+    leven "^2.1.0"
+    lodash "^4.17.15"
+    object-inspect "^1.6.0"
+
 "@sanity/schema@^2.0.0":
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/@sanity/schema/-/schema-2.10.0.tgz#b4697e176dc65fe239c3c614e2bb5c82832a4d1d"
@@ -3238,6 +3356,15 @@
     lodash "^4.17.15"
     nano-pubsub "^2.0.0"
 
+"@sanity/state-router@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/state-router/-/state-router-2.14.1-conditional-fields.64.tgz#ab2263a21f87c73f8cdf319fe5cdffeb02c292e5"
+  integrity sha512-xYRgfxn9QJZ/dPcmNKMKKI0eXpiYK/rI2dr7VKHuNoe02Hfuz4GJET7g7ce8PW/lfj7X7xLbCExLGThhJIvXCw==
+  dependencies:
+    debug "^3.2.7"
+    lodash "^4.17.15"
+    nano-pubsub "^2.0.0"
+
 "@sanity/structure@2.14.1-canary.36+e74126bdd6":
   version "2.14.1-canary.36"
   resolved "https://registry.npmjs.org/@sanity/structure/-/structure-2.14.1-canary.36.tgz#53c4d578de24c2593bf7f856aad67e055ac6dc71"
@@ -3245,6 +3372,18 @@
   dependencies:
     "@sanity/client" "2.14.1-canary.36+e74126bdd6"
     "@sanity/initial-value-templates" "2.14.1-canary.36+e74126bdd6"
+    "@types/lodash" "^4.14.149"
+    "@types/memoize-one" "^3.1.1"
+    lodash "^4.17.15"
+    memoize-one "^3.1.1"
+
+"@sanity/structure@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/structure/-/structure-2.14.1-conditional-fields.64.tgz#d66b97c3e230ca2da2ab887845971526c83b2140"
+  integrity sha512-CEOhU6bARGRql6vWb/rtZNv1HQZE5fA8srCuze3zknSXNWO9TRBvs4Nr7JpDVVtCV/YS2lFpUoFWNVtApGF4Cw==
+  dependencies:
+    "@sanity/client" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/initial-value-templates" "2.14.1-conditional-fields.64+9588d94d86"
     "@types/lodash" "^4.14.149"
     "@types/memoize-one" "^3.1.1"
     lodash "^4.17.15"
@@ -3263,6 +3402,14 @@
     "@types/lodash" "^4.14.149"
     lodash "^4.17.15"
 
+"@sanity/transaction-collator@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/transaction-collator/-/transaction-collator-2.14.1-conditional-fields.64.tgz#e92d4cfba0601613cb50399931bb0cf39820cf61"
+  integrity sha512-0MpeHoAwlpOEE9OfnTb9ofajpw+hLnAccpdY6UPFkuR5u6HIhknYVsJpX1uHf1Xy61cCZVdS42kVM+dWM4wgIA==
+  dependencies:
+    "@types/lodash" "^4.14.149"
+    lodash "^4.17.15"
+
 "@sanity/types@2.14.1-canary.36+e74126bdd6":
   version "2.14.1-canary.36"
   resolved "https://registry.npmjs.org/@sanity/types/-/types-2.14.1-canary.36.tgz#1dd1de6abebd795519d75d667c125c043c5cd569"
@@ -3271,6 +3418,18 @@
     "@sanity/client" "2.14.1-canary.36+e74126bdd6"
     "@sanity/color" "^2.1.4"
     "@sanity/types" "2.14.1-canary.36+e74126bdd6"
+    "@types/react" "^17.0.0"
+    react "17.0.1"
+    rxjs "^6.5.3"
+
+"@sanity/types@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.14.1-conditional-fields.64.tgz#681dfd936fe52b7981bb62eb0b42266bca5f4285"
+  integrity sha512-keTt8tnhHD82b//XNoQN3pI3cdaffU1jaX+Jn+fhLTmZbI8yDh9195dQNpLJfbrg1NYC/Tuw6lRzT2BwyJqVxg==
+  dependencies:
+    "@sanity/client" "2.14.1-conditional-fields.64+9588d94d86"
+    "@sanity/color" "^2.1.4"
+    "@sanity/types" "2.14.1-conditional-fields.64+9588d94d86"
     "@types/react" "^17.0.0"
     react "17.0.1"
     rxjs "^6.5.3"
@@ -3285,12 +3444,41 @@
     "@types/react" "^17.0.0"
     rxjs "^6.5.3"
 
+"@sanity/ui@^0.35.0":
+  version "0.35.1"
+  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-0.35.1.tgz#2265923277a9d9c4df1fd06041f5bd541d1325ef"
+  integrity sha512-ilU9VsAmXkosGPhYjWp32J34wrs/36U1Fn3nm0EDynQJ0P2vZGBtBKgK8mOo4S0XUQSgSPF1Y9IW2//flEi4wg==
+  dependencies:
+    "@juggle/resize-observer" "^3.3.1"
+    "@popperjs/core" "^2.9.3"
+    "@reach/auto-id" "^0.16.0"
+    "@sanity/color" "^2.1.4"
+    "@sanity/icons" "^1.1.4"
+    framer-motion "^4.1.17"
+    popper-max-size-modifier "^0.2.0"
+    react-is "^17.0.2"
+    react-popper "^2.2.5"
+    react-refractor "^2.1.4"
+
 "@sanity/util@2.14.1-canary.36+e74126bdd6":
   version "2.14.1-canary.36"
   resolved "https://registry.npmjs.org/@sanity/util/-/util-2.14.1-canary.36.tgz#46e2a01b18775b8097d41884fd965fac10af0c58"
   integrity sha512-DcBWbRdfuGhGFWHssMKW07u0Ffy8Qq1ywKt3bfqRl289vpLL5bdOd2SVST76ibRfC7X0MH9ECNsQosl8VHwN1w==
   dependencies:
     "@sanity/types" "2.14.1-canary.36+e74126bdd6"
+    dotenv "^8.2.0"
+    fs-extra "^6.0.1"
+    get-random-values "^1.2.2"
+    lodash "^4.17.15"
+    moment "^2.19.1"
+    resolve-from "^4.0.0"
+
+"@sanity/util@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/util/-/util-2.14.1-conditional-fields.64.tgz#37d9e05480b7f6cf1cf765a691de2fa837b15c8a"
+  integrity sha512-kN+YU9dpxEU8KNs8NXuljGr2wxSmlYfMxlqDfZu2Al32Bk1khPifEc3cUWP8GZf8FuqokAlvJT94Dv0uh/r08A==
+  dependencies:
+    "@sanity/types" "2.14.1-conditional-fields.64+9588d94d86"
     dotenv "^8.2.0"
     fs-extra "^6.0.1"
     get-random-values "^1.2.2"
@@ -3310,6 +3498,17 @@
   version "2.14.1-canary.36"
   resolved "https://registry.npmjs.org/@sanity/validation/-/validation-2.14.1-canary.36.tgz#fc253ecd1aa6b34dc8f6e7e3d8cb46718ba6d1af"
   integrity sha512-CW2ZD/HTy7DW1ReQ+cQxZr6t7rGGYwk1HAIsfnru+Iodn2UtpmPrXV8BHy6PhmmlpREiMy5I8Cl3Gq66xcMjNQ==
+  dependencies:
+    clone-deep "^2.0.1"
+    date-fns "^2.16.1"
+    es6-error "^4.0.2"
+    lodash "^4.17.15"
+    type-of-is "^3.5.1"
+
+"@sanity/validation@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/validation/-/validation-2.14.1-conditional-fields.64.tgz#65b5fc1756990e618193a42f8852b904340042ba"
+  integrity sha512-GbV7cLEkQFpQl6PEThM7ao8rLTXZi3TtnWcMlpSyrmOo3Qy2Uo+H7vLKV9cP38xXL6fBgIFWHgoGxkfPnkSRBQ==
   dependencies:
     clone-deep "^2.0.1"
     date-fns "^2.16.1"
