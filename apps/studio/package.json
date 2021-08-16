@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@sanity/base": "2.14.1-canary.36",
-    "@sanity/cli": "2.14.1-canary.36",
+    "@sanity/cli": "2.14.1-conditional-fields.64",
     "@sanity/code-input": "2.14.1-canary.36",
     "@sanity/core": "2.14.1-canary.36",
     "@sanity/default-layout": "2.14.1-canary.36",

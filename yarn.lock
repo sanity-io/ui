@@ -2684,10 +2684,10 @@
     get-random-values "^1.2.2"
     lodash "^4.17.15"
 
-"@sanity/cli@2.14.1-canary.36":
-  version "2.14.1-canary.36"
-  resolved "https://registry.npmjs.org/@sanity/cli/-/cli-2.14.1-canary.36.tgz#ac739dfb9bfce68476833217e1cbe1acabe852aa"
-  integrity sha512-eqt2Ji5V6UEnXLtbd5b+98u8U8swpQHA2eKu4Stk/0bOJf2kxMNZXJ8yNSj5nDwy3a5MkuSUHo2v5IKhaZAJfQ==
+"@sanity/cli@2.14.1-conditional-fields.64":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.14.1-conditional-fields.64.tgz#034d92d87e4e48ae764ad5131507f574523ca97d"
+  integrity sha512-zZOjJrlZlvOcZxGAH0Vy8ciw4TaqpL5Vm2ltob8lli5d6W+G1CXMMFFAiEYVehQX78yoOhEUQAOmeU6l4BWEaA==
 
 "@sanity/client@2.11.0":
   version "2.11.0"
