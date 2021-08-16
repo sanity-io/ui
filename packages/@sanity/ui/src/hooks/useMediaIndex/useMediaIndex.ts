@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from 'react'
-import {_getMediaManager} from '../lib/media'
-import {useTheme} from '../theme'
+import {useTheme} from '../../theme'
+import {_getMediaManager} from './lib/media'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
