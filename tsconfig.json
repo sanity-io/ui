@@ -1,6 +1,6 @@
 {
   "extends": "../../../tsconfig.settings",
-  "include": ["./scripts", "./src", "./test", "./typings", "./workshop"],
+  "include": ["./scripts", "./src", "./test", "./typings"],
   "compilerOptions": {
     "rootDir": "../../../",
     "outDir": "./lib/dts/",
