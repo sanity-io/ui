@@ -20,7 +20,7 @@
     "@sanity/base": "2.14.1-canary.36",
     "@sanity/cli": "2.14.1-canary.36",
     "@sanity/code-input": "2.14.1-canary.36",
-    "@sanity/core": "2.14.1-canary.36",
+    "@sanity/core": "2.14.1-conditional-fields.64",
     "@sanity/default-layout": "2.14.1-canary.36",
     "@sanity/default-login": "2.14.1-canary.36",
     "@sanity/desk-tool": "2.14.1-canary.36",
