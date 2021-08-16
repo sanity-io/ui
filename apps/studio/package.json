@@ -1,7 +1,7 @@
 {
   "name": "sanity-design-studio",
   "private": true,
-  "version": "1.0.44",
+  "version": "1.0.45",
   "description": "",
   "main": "package.json",
   "author": "Sanity.io <hello@sanity.io>",
@@ -25,7 +25,7 @@
     "@sanity/default-login": "2.14.1-canary.36",
     "@sanity/desk-tool": "2.14.1-canary.36",
     "@sanity/production-preview": "2.14.1-canary.36",
-    "@sanity/ui": "^0.36.0",
+    "@sanity/ui": "^0.36.1",
     "@sanity/vision": "2.14.1-canary.36",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
