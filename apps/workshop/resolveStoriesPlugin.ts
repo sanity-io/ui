@@ -6,12 +6,14 @@ import {ResolvedConfig} from 'vite'
 
 const WORKSHOP_ENV_MODULE_ID = '$workshop'
 
+const WORKSHOP_SRC_PATH = path.resolve(__dirname, 'src')
+
 const WORKSHOP_PATTERNS = [
-  path.resolve(__dirname, '../src/**/__workshop__/index.ts'),
-  path.resolve(__dirname, '../src/**/__workshop__/index.tsx'),
+  path.resolve(__dirname, '../../packages/**/src/**/__workshop__/index.ts'),
+  path.resolve(__dirname, '../../packages/**/src/**/__workshop__/index.tsx'),
 ]
 
-const WORKSHOP_SCOPES_PATH = path.resolve(__dirname, './scopes.ts')
+const WORKSHOP_SCOPES_PATH = path.resolve(WORKSHOP_SRC_PATH, 'scopes.ts')
 
 declare global {
   // eslint-disable-next-line no-var
@@ -20,7 +22,7 @@ declare global {
 
 function sanitizeModulePath(modulePath: string) {
   return path
-    .relative(__dirname, modulePath)
+    .relative(WORKSHOP_SRC_PATH, modulePath)
     .replace(/\.[^/.]+$/, '')
     .replace(/\/index$/, '')
 }

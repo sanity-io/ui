@@ -3,15 +3,15 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 import {defineConfig} from 'vite'
 import {resolveWorkshopEnvPlugin} from './resolveStoriesPlugin'
 
-const ROOT_PATH = path.join(__dirname, '../../../..')
+const ROOT_PATH = path.join(__dirname, '../..')
 
 export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'public'),
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
-        frame: path.resolve(__dirname, 'frame/index.html'),
+        main: path.resolve(__dirname, 'src/index.html'),
+        frame: path.resolve(__dirname, 'src/frame/index.html'),
       },
     },
   },
@@ -55,7 +55,7 @@ export default defineConfig({
       },
     ],
   },
-  root: __dirname,
+  root: path.resolve(__dirname, 'src'),
   server: {
     port: 9009,
   },

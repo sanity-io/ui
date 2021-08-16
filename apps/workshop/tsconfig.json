@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.settings",
+  "include": ["./scripts", "./src", "./test", "./typings"],
+  "compilerOptions": {
+    "rootDir": "../../",
+    "outDir": "./lib/dts/",
+    "module": "ES2020",
+    "jsx": "react",
+    "noEmit": true
+  },
+  "references": [{"path": "../../packages/@sanity/ui-workshop/tsconfig.lib.json"}]
+}
