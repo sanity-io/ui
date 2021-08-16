@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "license": "MIT",
