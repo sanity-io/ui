@@ -2842,12 +2842,12 @@
     rxjs "^6.5.3"
     styled-components "^5.2.1"
 
-"@sanity/default-login@2.14.1-canary.36":
-  version "2.14.1-canary.36"
-  resolved "https://registry.npmjs.org/@sanity/default-login/-/default-login-2.14.1-canary.36.tgz#1a085776af3f2af7b2fbd35db7da1642522032fa"
-  integrity sha512-J+XMapLf7373ngkQ+VjofN1LyGceGMtJFnjx4HUyISUV5bdQ6wq+jhD021a/Gjamw2Csac7Sb3QRWILvANGuAw==
+"@sanity/default-login@2.14.1-conditional-fields.64":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.14.1-conditional-fields.64.tgz#1a68e8dbe77206cb9bba8af22a101c5f2a234393"
+  integrity sha512-cR7t5W9g73L+qyikYnQymNXTUvYbuUcaSjAenBdXp3z+Cy4QnXYOg5pHHnuVa/Vik7AnwHwzNZqxUYcL7kmFhA==
   dependencies:
-    "@sanity/generate-help-url" "2.14.1-canary.36+e74126bdd6"
+    "@sanity/generate-help-url" "2.14.1-conditional-fields.64+9588d94d86"
     "@sanity/logos" "^1.1.4"
     "@sanity/ui" "^0.35.0"
     prop-types "^15.6.0"
@@ -3009,6 +3009,11 @@
   version "2.14.1-canary.36"
   resolved "https://registry.npmjs.org/@sanity/generate-help-url/-/generate-help-url-2.14.1-canary.36.tgz#abebb8da818b1b9c1031df091732bab9f8f2006b"
   integrity sha512-eObQ7DzuEtavU6vH5/q2vhnvpHjWRIn6UgsGB83uhZCPcBoq37vXhClIBENdpskS/AomDvYiKsCtA0L01cp92w==
+
+"@sanity/generate-help-url@2.14.1-conditional-fields.64+9588d94d86":
+  version "2.14.1-conditional-fields.64"
+  resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-2.14.1-conditional-fields.64.tgz#8031c2064a7d35cd5f3a4a45d8d9d9330d0a870e"
+  integrity sha512-FUIkI9HEMZ0W6qtfcm7ABbIdDaVLee89/hzJCSrcezqxtKV6lRsXOl7uf2fbzdPU0qEWydPt0hDnLaXXAOOXfA==
 
 "@sanity/generate-help-url@2.2.6":
   version "2.2.6"
