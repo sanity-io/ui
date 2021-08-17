@@ -21,7 +21,7 @@ const Root = styled.div`
  * @public
  */
 export const SrOnly = forwardRef(function SrOnly(
-  props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden'>,
+  props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden' | 'as'>,
   ref: React.Ref<HTMLDivElement>
 ) {
   const {as, children} = props
