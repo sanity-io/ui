@@ -9,6 +9,7 @@ import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
  * @beta
  */
 export interface MediaQueryProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
   media?: number[]
 }
 
@@ -17,7 +18,7 @@ export interface MediaQueryProps {
  * @beta
  */
 export const ElementQuery = forwardRef(function ElementQuery(
-  props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'media'>,
+  props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'media'>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const theme = useTheme()
