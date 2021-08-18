@@ -5,24 +5,19 @@ import {Article} from '$components/article'
 import {PageLayout} from '$components/page'
 import {Screen} from '$components/screen'
 import {features} from '$config'
-import {loadGlobalPageData, loadGlobalPagePaths} from '$lib/page'
+import {loadGlobalPageData} from '$lib/page'
 import {isRecord} from '$lib/types'
 import {NotFoundScreen} from '$screens/notFound'
 
-export async function getStaticProps(opts: {params?: {path?: string[]}; preview?: boolean}) {
-  const {params = {}, preview = features.preview} = opts
+export async function getStaticProps(opts: {preview?: boolean}) {
+  const {preview = features.preview} = opts
+  const params = {path: ['404']}
   const pageData = await loadGlobalPageData({params, preview})
 
   return {props: {...pageData, params, preview}}
 }
 
-export async function getStaticPaths() {
-  const paths = await loadGlobalPagePaths({preview: features.preview})
-
-  return {paths, fallback: false}
-}
-
-export default function PathPage() {
+export default function NotFoundPage() {
   const {data, menu} = useApp()
   const target = isRecord(data) && isRecord(data.target) && data.target
   const seo: Record<string, any> | null = target ? (target.seo as any) : null
