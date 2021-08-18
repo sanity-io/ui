@@ -53,9 +53,9 @@ function MenuItems(props: {basePath?: string; items: Array<MenuList | MenuScope>
           return (
             <TreeItem
               expanded={location.path.startsWith(path + '/')}
-              // fontSize={1}
+              fontSize={1}
               key={item.name || itemIndex}
-              padding={3}
+              padding={2}
               text={item.title}
               weight="semibold"
             >
@@ -68,20 +68,20 @@ function MenuItems(props: {basePath?: string; items: Array<MenuList | MenuScope>
           return (
             <TreeItem
               expanded={item.scope === currentScope}
-              // fontSize={1}
+              fontSize={1}
               key={item.name}
-              padding={3}
+              padding={2}
               text={item.title}
               weight="semibold"
             >
               {item.scope.stories.map((story) => (
                 <TreeItem
                   data-path={`/${item.scope.name}/${story.name}`}
-                  // fontSize={1}
+                  fontSize={1}
                   href={`/${item.scope.name}/${story.name}`}
                   key={story.name}
                   onClick={handleStoryClick}
-                  padding={3}
+                  padding={2}
                   selected={currentStory === story}
                   text={story.title}
                 />
