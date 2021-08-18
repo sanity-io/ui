@@ -1,7 +1,7 @@
 export default {
   root: true,
   project: {
-    name: 'Sanity Design',
+    name: 'Design',
   },
   api: {
     projectId: 'mos42crl',
