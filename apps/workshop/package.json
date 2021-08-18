@@ -12,7 +12,8 @@
     "prebuild": "yarn clean",
     "scopes:build": "node -r esbuild-register scripts/scopes/build.ts",
     "start": "http-server -a localhost -c-0 -p 9009 -s -P http://localhost:9009/index.html? public",
-    "type-check": "tsc -b"
+    "tsc": "tsc -b",
+    "type-check": "run-s scopes:build tsc"
   },
   "dependencies": {
     "@sanity/ui-workshop": "^0.1.25",
