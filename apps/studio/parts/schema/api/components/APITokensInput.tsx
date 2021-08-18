@@ -4,6 +4,20 @@ import {IntentLink} from 'part:@sanity/base/router'
 import React from 'react'
 import styled from 'styled-components'
 
+interface TokenValue {
+  _key: string
+  reference?: {_ref: string}
+  text?: string
+}
+
+interface APITokensInputProps {
+  type: {
+    title: string
+    description?: string
+  }
+  value?: TokenValue[]
+}
+
 const Code = styled(UICode)`
   & a {
     color: var(--card-link-color);
@@ -14,7 +28,7 @@ const Code = styled(UICode)`
   }
 `
 
-export function APITokensInput(props) {
+export function APITokensInput(props: APITokensInputProps) {
   const {type, value = []} = props
 
   return (
@@ -30,7 +44,7 @@ export function APITokensInput(props) {
   )
 }
 
-function TokenPreview({token}) {
+function TokenPreview({token}: {token: TokenValue}) {
   if (token.reference?._ref) {
     return (
       <IntentLink intent="edit" params={{id: token.reference?._ref}}>

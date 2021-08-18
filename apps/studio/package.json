@@ -17,7 +17,8 @@
     "prestart": "yarn config:build",
     "sanity:start": "sanity start --port 9000",
     "start": "run-p config:watch sanity:start",
-    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet"
+    "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
+    "type-check": "tsc"
   },
   "dependencies": {
     "@sanity/base": "^2.15.1",
@@ -28,6 +29,7 @@
     "@sanity/default-login": "^2.15.0",
     "@sanity/desk-tool": "^2.15.1",
     "@sanity/production-preview": "^2.15.0",
+    "@sanity/types": "^2.15.0",
     "@sanity/ui": "^0.36.1",
     "@sanity/vision": "^2.15.0",
     "react": "^17.0.2",

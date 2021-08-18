@@ -1,8 +1,10 @@
 import S from '@sanity/desk-tool/structure-builder'
 import {CogIcon, EditIcon, PackageIcon} from '@sanity/icons'
+import {SanityDocument} from '@sanity/types'
 import documentStore from 'part:@sanity/base/datastore/document'
 import React from 'react'
 import {map} from 'rxjs/operators'
+import {isArray, isRecord, isString} from '../lib/helpers'
 
 const STRUCTURE_CUSTOM_TYPES = [
   'api.class',
@@ -38,18 +40,42 @@ const packagesListItem = S.listItem()
             id: packageId,
           })
           .pipe(
-            map((packageDoc) => {
+            map((packageDoc: SanityDocument) => {
               if (!packageDoc) return null
 
+              const scope = isString(packageDoc.scope) && packageDoc.scope
+              const name = isString(packageDoc.name) && packageDoc.name
+              const title = isString(scope) ? `${scope}/${name}` : `${name}`
+              const releases = isArray(packageDoc.releases) ? packageDoc.releases : []
+
               return S.list()
-                .title(
-                  packageDoc.scope ? `${packageDoc.scope}/${packageDoc.name}` : packageDoc.name
-                )
+                .title(title)
                 .id(packageDoc._id)
                 .items(
-                  packageDoc.releases.map((release) =>
-                    S.listItem()
-                      .title(release.version)
+                  releases.map((release, releaseIndex) => {
+                    const releaseId =
+                      isRecord(release) && isString(release._id)
+                        ? release._id
+                        : `<release-#${releaseIndex}>`
+
+                    const releaseTitle =
+                      isRecord(release) && isString(release.version)
+                        ? release.version
+                        : '<missing version>'
+
+                    const menuItems = [
+                      S.menuItem()
+                        .icon(EditIcon)
+                        .title('Edit release')
+                        .intent({
+                          type: 'edit',
+                          params: {id: releaseId, type: 'api.release'},
+                        })
+                        .showAsAction(true),
+                    ]
+
+                    return S.listItem()
+                      .title(releaseTitle)
                       .child(
                         S.documentList()
                           .canHandleIntent((name, params) => {
@@ -60,22 +86,13 @@ const packagesListItem = S.listItem()
                             return false
                           })
                           .defaultOrdering([{field: 'name', direction: 'asc'}])
-                          .id(release._id)
-                          .title(release.version)
+                          .id(releaseId)
+                          .title(releaseTitle)
                           .filter(`_type != "api.package" && references($releaseId)`)
-                          .params({releaseId: release._id})
-                          .menuItems([
-                            S.menuItem()
-                              .icon(EditIcon)
-                              .title('Edit release')
-                              .intent({
-                                type: 'edit',
-                                params: {id: release._id, type: 'api.release'},
-                              })
-                              .showAsAction(),
-                          ])
+                          .params({releaseId})
+                          .menuItems(menuItems)
                       )
-                  )
+                  })
                 )
             })
           )
@@ -89,9 +106,13 @@ const settingsListItem = S.listItem()
   .child(S.editor().id('settings').schemaType('settings').documentId('settings'))
 
 // The default root list items (except custom ones)
-const defaultListItems = S.documentTypeListItems().filter(
-  (listItem) => !STRUCTURE_CUSTOM_TYPES.includes(listItem.getId())
-)
+const defaultListItems = S.documentTypeListItems().filter((listItem) => {
+  const id = listItem.getId()
+
+  if (!id) return true
+
+  return !STRUCTURE_CUSTOM_TYPES.includes(id)
+})
 
 export default () =>
   S.list()

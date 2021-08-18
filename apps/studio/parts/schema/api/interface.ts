@@ -135,7 +135,7 @@ export const apiInterface = {
             select: {
               type: 'type',
             },
-            prepare({type}) {
+            prepare({type}: {type: {text: string}[]}) {
               return {
                 title: type.map((token) => token.text).join(''),
               }

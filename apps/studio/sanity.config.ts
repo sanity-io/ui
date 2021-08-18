@@ -23,15 +23,15 @@ export default {
   parts: [
     {
       name: 'part:@sanity/base/schema',
-      path: './base/schema',
+      path: './parts/schema',
     },
     {
       implements: 'part:@sanity/production-preview/resolve-production-url',
-      path: './production-preview/resolve-production-url',
+      path: './parts/resolveProductionUrl',
     },
     {
       name: 'part:@sanity/desk-tool/structure',
-      path: './desk-tool/structure',
+      path: './parts/structure',
     },
   ],
 }

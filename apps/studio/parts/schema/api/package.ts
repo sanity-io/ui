@@ -48,7 +48,7 @@ export const apiPackage = {
       name: 'name',
       scope: 'scope',
     },
-    prepare({name, scope}) {
+    prepare({name, scope}: {name: string; scope?: string}) {
       console.log('prepare', name, scope)
 
       return {
