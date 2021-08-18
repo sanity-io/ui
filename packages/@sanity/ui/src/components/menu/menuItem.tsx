@@ -37,7 +37,7 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
  */
 export const MenuItem = forwardRef(function MenuItem(
   props: MenuItemProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'selected'>,
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'selected' | 'tabIndex'>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>
 ) {
   const {
