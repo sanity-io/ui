@@ -37,7 +37,8 @@ const TextContainer = styled.span`
  * @public
  */
 export function MenuGroup(
-  props: MenuGroupProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref'>
+  props: MenuGroupProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'tabIndex'>
 ): React.ReactElement {
   const {
     as = 'button',
