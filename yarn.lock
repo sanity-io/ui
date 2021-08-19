@@ -2568,7 +2568,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.15.0.tgz#cc41b583a3a4dd458d969510362ded4bcf6fdd99"
   integrity sha512-q6Nc6K4eJ6qLbMwIRtqMWs38RH0kRsMLJo/Yz4IPoku5a28T+VtHxSG6KqGQeLIgeBV0VSoWHfe2MtavfTMqBw==
 
-"@sanity/client@2.15.0", "@sanity/client@^2.14.0":
+"@sanity/client@2.15.0", "@sanity/client@^2.14.0", "@sanity/client@^2.15.0":
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-2.15.0.tgz#2b78c193455b1940f0846ca2d57712be39960bc2"
   integrity sha512-myMaP7Zbvb0gVUyFnW8TimiHFSkX/GnwNJOYr794Xl/YlYlJGQJY9aiLH9G0sCSgGZGlgtOqWXjdc/n4v6Ypcw==
@@ -3883,9 +3883,9 @@
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
 "@types/node@*", "@types/node@^16.6.1":
-  version "16.6.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.6.1.tgz#aee62c7b966f55fc66c7b6dfa1d58db2a616da61"
-  integrity sha512-Sr7BhXEAer9xyGuCN3Ek9eg9xPviCF2gfu9kTfuU2HkTVAMYSDeX40fvpmo72n5nansg3nsBjuQBrsS28r+NUw==
+  version "16.6.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.6.2.tgz#331b7b9f8621c638284787c5559423822fdffc50"
+  integrity sha512-LSw8TZt12ZudbpHc6EkIyDM3nHVWKYrAvGy6EAJfNfjusbwnThqjqxUKKRwuV3iWYeW/LYMzNgaq3MaLffQ2xA==
 
 "@types/node@10.17.13":
   version "10.17.13"
@@ -4097,7 +4097,7 @@
   dependencies:
     "@types/node" "*"
 
-"@typescript-eslint/eslint-plugin@^4.29.1":
+"@typescript-eslint/eslint-plugin@^4.29.2":
   version "4.29.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.29.2.tgz#f54dc0a32b8f61c6024ab8755da05363b733838d"
   integrity sha512-x4EMgn4BTfVd9+Z+r+6rmWxoAzBaapt4QFqE+d8L8sUtYZYLDTK6VG/y/SMMWA5t1/BVU5Kf+20rX4PtWzUYZg==
@@ -4122,7 +4122,7 @@
     eslint-scope "^5.1.1"
     eslint-utils "^3.0.0"
 
-"@typescript-eslint/parser@^4.20.0", "@typescript-eslint/parser@^4.29.1":
+"@typescript-eslint/parser@^4.20.0", "@typescript-eslint/parser@^4.29.2":
   version "4.29.2"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.29.2.tgz#1c7744f4c27aeb74610c955d3dce9250e95c370a"
   integrity sha512-WQ6BPf+lNuwteUuyk1jD/aHKqMQ9jrdCn7Gxt9vvBnzbpj7aWEf+aZsJ1zvTjx5zFxGCt000lsbD9tQPEL8u6g==
