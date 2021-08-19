@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-example-web",
-  "version": "0.1.61",
+  "version": "0.1.62",
   "scripts": {
     "build": "next build",
     "clean": "rimraf .next",
@@ -15,7 +15,7 @@
     "@sanity/color": "^2.1.4",
     "@sanity/icons": "^1.1.5",
     "@sanity/logos": "^1.1.4",
-    "@sanity/ui": "^0.36.1",
+    "@sanity/ui": "^0.36.2",
     "next": "^11.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
