@@ -25,7 +25,7 @@ export function _getDOMPath(rootElement: HTMLElement, el: HTMLElement): number[]
 
   let e = el
 
-  while (e.parentElement !== rootElement) {
+  while (e !== rootElement) {
     const parentElement = e.parentElement
 
     if (!parentElement) return path
@@ -74,8 +74,6 @@ export function _sortElements(rootElement: HTMLElement | null, elements: HTMLEle
         return aIndex - bIndex
       }
     }
-
-    // 0 - 1
 
     return 0
   }
