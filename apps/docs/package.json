@@ -23,7 +23,7 @@
     "@sanity/logos": "^1.1.4",
     "@sanity/ui": "^0.36.2",
     "@sanity/ui-workshop": "^0.2.0",
-    "codemirror": "^5.62.2",
+    "codemirror": "^5.62.3",
     "date-fns": "^2.23.0",
     "lodash": "^4.17.21",
     "next": "^11.1.0",
