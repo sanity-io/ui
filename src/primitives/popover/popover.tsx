@@ -3,8 +3,8 @@ import {usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useForwardedRef} from '../../hooks'
-import {ThemeColorSchemeKey, ThemeColorToneKey, useTheme} from '../../theme'
-import {Placement} from '../../types'
+import {ThemeColorSchemeKey, useTheme} from '../../theme'
+import {CardTone, Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {ResponsiveWidthStyleProps} from '../container'
@@ -43,7 +43,7 @@ export interface PopoverProps
   scheme?: ThemeColorSchemeKey
   tether?: boolean
   tetherOffset?: number | ((...args: any[]) => number)
-  tone?: ThemeColorToneKey
+  tone?: CardTone
 }
 
 const Root = styled(Layer)<{$preventOverflow?: boolean}>(
@@ -125,7 +125,7 @@ export const Popover = forwardRef(function Popover(
     style = EMPTY_RECORD,
     tether,
     tetherOffset,
-    tone,
+    tone = 'inherit',
     width = 0,
     zOffset = theme.sanity.layer?.popover.zOffset,
     ...restProps
