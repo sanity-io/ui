@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "license": "MIT",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@sanity/icons": "^1.1.5",
-    "@sanity/ui": "^0.36.2",
+    "@sanity/ui": "^0.36.3",
     "react": "^17.0.2",
     "styled-components": "^5.3.1"
   },
