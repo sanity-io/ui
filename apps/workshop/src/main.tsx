@@ -36,22 +36,8 @@ const WORKSHOP_COLLECTIONS: {name: string; title: string}[] = [
 ]
 
 const GlobalStyle = createGlobalStyle`
-  html {
-    background-color: ${({theme}) => theme.sanity.color.base.bg}
-  }
-
-  html,
-  body,
-  #root {
-    height: 100%;
-  }
-
   body {
-    margin: 0;
-  }
-
-  #root {
-    -webkit-font-smoothing: antialiased;
+    background-color: ${({theme}) => theme.sanity.color.base.bg}
   }
 `
 
