@@ -7,7 +7,7 @@ const ROOT_PATH = path.join(__dirname, '../..')
 
 export default defineConfig({
   build: {
-    outDir: path.resolve(__dirname, 'public'),
+    outDir: path.resolve(__dirname, 'dist'),
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'src/index.html'),
