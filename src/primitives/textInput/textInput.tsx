@@ -185,7 +185,7 @@ export const TextInput = forwardRef(function TextInput(
   const prefixNode = useMemo(
     () =>
       prefix && (
-        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border">
+        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border" tone="inherit">
           <span>{prefix}</span>
         </Prefix>
       ),
@@ -265,7 +265,7 @@ export const TextInput = forwardRef(function TextInput(
   const suffixNode = useMemo(
     () =>
       suffix && (
-        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border">
+        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border" tone="inherit">
           <span>{suffix}</span>
         </Suffix>
       ),
