@@ -37,7 +37,11 @@ export function evalComponent(opts: {
 
     return scopeEval(babelResult.code, opts.scope)
   } catch (error) {
-    return {type: 'error', error}
+    if (error instanceof Error) {
+      return {type: 'error', error}
+    }
+
+    return {type: 'error', error: new Error(String(error))}
   }
 }
 
