@@ -26,7 +26,10 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App) =>
+            function EnhancedApp(props) {
+              return sheet.collectStyles(<App {...props} />)
+            },
         })
 
       const initialProps = await NextDocument.getInitialProps(ctx)
