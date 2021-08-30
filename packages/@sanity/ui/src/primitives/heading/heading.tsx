@@ -75,7 +75,7 @@ export const Heading = forwardRef(function Heading(
       $weight={weight}
       ref={ref}
     >
-      {children}
+      <span>{children}</span>
     </Root>
   )
 })

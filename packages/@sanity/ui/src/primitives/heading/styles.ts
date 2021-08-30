@@ -8,18 +8,6 @@ export function headingBaseStyle(
   const {$accent, $muted, theme} = props
 
   return css`
-    &:before {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
-    &:after {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
     ${$accent &&
     css`
       color: var(--card-accent-fg-color);

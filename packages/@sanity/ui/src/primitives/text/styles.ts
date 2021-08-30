@@ -10,18 +10,6 @@ export function textBaseStyle(
   return css`
     color: var(--card-fg-color);
 
-    &:before {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
-    &:after {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
     ${$accent &&
     css`
       color: var(--card-accent-fg-color);

@@ -10,18 +10,6 @@ export function labelBaseStyle(
   return css`
     text-transform: uppercase;
 
-    &:before {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
-    &:after {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
     ${$accent &&
     css`
       color: var(--card-accent-fg-color);
