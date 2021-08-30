@@ -3,6 +3,7 @@ import {ThemeFonts} from '../lib/theme'
 export const fonts: ThemeFonts = {
   code: {
     family: '-apple-system-ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
+    horizontalOffset: 0.075,
     weights: {
       regular: 400,
       medium: 500,
@@ -55,6 +56,7 @@ export const fonts: ThemeFonts = {
   heading: {
     family:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif',
+    horizontalOffset: 0.075,
     weights: {
       regular: 700,
       medium: 800,
@@ -115,6 +117,7 @@ export const fonts: ThemeFonts = {
   label: {
     family:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", system-ui, sans-serif',
+    horizontalOffset: 0.075,
     weights: {
       regular: 600,
       medium: 700,
@@ -125,7 +128,7 @@ export const fonts: ThemeFonts = {
       {
         ascenderHeight: 2,
         descenderHeight: 2,
-        fontSize: 10,
+        fontSize: 9.8,
         iconSize: 15,
         lineHeight: 11,
         letterSpacing: 0.5,
@@ -167,6 +170,7 @@ export const fonts: ThemeFonts = {
   text: {
     family:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif',
+    horizontalOffset: 0.075,
     weights: {
       regular: 400,
       medium: 500,

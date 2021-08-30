@@ -75,7 +75,7 @@ export const Text = forwardRef(function Text(
       $size={size}
       $weight={weight}
     >
-      {children}
+      <span>{children}</span>
     </Root>
   )
 })

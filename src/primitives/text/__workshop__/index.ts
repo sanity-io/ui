@@ -12,4 +12,9 @@ export default defineScope('primitives/text', 'Text', [
     title: 'Colored text',
     component: lazy(() => import('./colored')),
   },
+  {
+    name: 'optical-alignment',
+    title: 'Optical alignment',
+    component: lazy(() => import('./opticalAlignment')),
+  },
 ])

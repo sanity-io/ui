@@ -22,7 +22,7 @@ const rotate = keyframes`
 `
 
 const Root = styled(Text)`
-  & > svg {
+  & > span > svg {
     animation: ${rotate} 500ms linear infinite;
   }
 `

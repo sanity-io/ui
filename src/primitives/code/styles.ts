@@ -49,18 +49,6 @@ export function codeBaseStyle(): FlattenInterpolation<StyledThemeProps<Theme>> {
   return css`
     color: var(--card-code-fg-color);
 
-    &:before {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
-    &:after {
-      content: '';
-      display: block;
-      height: 0;
-    }
-
     & code {
       font-family: inherit;
 
