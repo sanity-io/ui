@@ -1,6 +1,7 @@
-import {MoonIcon, SelectIcon, SunIcon} from '@sanity/icons'
+import {ControlsIcon, MenuIcon, MoonIcon, SelectIcon, SunIcon} from '@sanity/icons'
 import {
   Box,
+  Breadcrumbs,
   Button,
   Card,
   Flex,
@@ -24,7 +25,7 @@ export function WorkshopNavbar(props: {
   zoom: number
 }): React.ReactElement {
   const {scheme, setScheme, setViewport, setZoom, viewport, zoom} = props
-  const {scope, story, title} = useWorkshop()
+  const {pushLocation, scope, story, title} = useWorkshop()
 
   const handleToggleScheme = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,56 +36,59 @@ export function WorkshopNavbar(props: {
     [setScheme]
   )
 
+  const handleHomeClick = useCallback(
+    (event) => {
+      if (event.shiftKey || event.ctrlKey) return
+      event.preventDefault()
+      pushLocation({path: '/'})
+    },
+    [pushLocation]
+  )
+
   return (
     <Card borderBottom paddingX={3} paddingY={2}>
-      <Flex align="center" style={{lineHeight: 0}}>
-        <Box flex={1} style={{minWidth: 250}}>
-          <Box padding={2}>
-            <Text size={1} weight="bold">
-              {title}
-            </Text>
-          </Box>
+      <Flex align="center">
+        <Box display={['block', 'block', 'none']}>
+          <Button fontSize={1} icon={MenuIcon} mode="bleed" padding={2} />
         </Box>
-        <Box flex={3} paddingX={3}>
-          <Text align="center" size={1} textOverflow="ellipsis">
-            {scope && <strong>{scope.title}</strong>}
-            {scope && story && <> / {story.title}</>}
-          </Text>
-        </Box>
-        <Flex align="center" justify="flex-end" flex={1} style={{minWidth: 250}}>
-          <LayerProvider zOffset={100}>
-            <MenuButton
-              button={
-                <Button
-                  fontSize={1}
-                  iconRight={SelectIcon}
-                  mode="ghost"
-                  padding={2}
-                  style={{minWidth: 80}}
-                  text={ZOOM_OPTIONS.find((o) => o.value === zoom)?.title}
-                />
-              }
-              id="zoom-menu"
-              menu={
-                <Menu>
-                  {ZOOM_OPTIONS.map((option) => (
-                    <MenuItem
-                      fontSize={1}
-                      key={option.value}
-                      onClick={() => setZoom(option.value)}
-                      padding={2}
-                      selected={option.value === zoom}
-                      text={option.title}
-                    />
-                  ))}
-                </Menu>
-              }
-              popover={{matchReferenceWidth: true}}
-              portal
-            />
-          </LayerProvider>
 
-          <Box marginLeft={2}>
+        <Flex
+          flex={1}
+          justify={['center', 'center', 'flex-start']}
+          padding={2}
+          sizing="border"
+          style={{minWidth: 250}}
+        >
+          <Breadcrumbs
+            separator={
+              <Text muted size={1}>
+                /
+              </Text>
+            }
+            space={2}
+          >
+            <Text size={1} weight="bold">
+              <a href="/" onClick={handleHomeClick} style={{color: 'inherit'}}>
+                {title}
+              </a>
+            </Text>
+
+            {scope && (
+              <Text align="center" size={1}>
+                {scope.title}
+              </Text>
+            )}
+
+            {story && <Text size={1}>{story.title}</Text>}
+          </Breadcrumbs>
+        </Flex>
+
+        <Box display={['block', 'block', 'none']}>
+          <Button fontSize={1} icon={ControlsIcon} mode="bleed" padding={2} />
+        </Box>
+
+        <Box display={['none', 'none', 'block']} flex={1}>
+          <Flex align="center" justify="flex-end">
             <LayerProvider zOffset={100}>
               <MenuButton
                 button={
@@ -94,19 +98,19 @@ export function WorkshopNavbar(props: {
                     mode="ghost"
                     padding={2}
                     style={{minWidth: 80}}
-                    text={VIEWPORT_OPTIONS.find((o) => o.value === viewport)?.title}
+                    text={ZOOM_OPTIONS.find((o) => o.value === zoom)?.title}
                   />
                 }
-                id="viewport-menu"
+                id="zoom-menu"
                 menu={
                   <Menu>
-                    {VIEWPORT_OPTIONS.map((option) => (
+                    {ZOOM_OPTIONS.map((option) => (
                       <MenuItem
                         fontSize={1}
                         key={option.value}
-                        onClick={() => setViewport(option.value)}
+                        onClick={() => setZoom(option.value)}
                         padding={2}
-                        selected={option.value === viewport}
+                        selected={option.value === zoom}
                         text={option.title}
                       />
                     ))}
@@ -116,27 +120,62 @@ export function WorkshopNavbar(props: {
                 portal
               />
             </LayerProvider>
-          </Box>
-          <Box marginLeft={2}>
-            <Button as="label" mode="bleed" padding={2}>
-              <Flex align="center">
-                <Box marginRight={2}>
-                  <Text size={1}>
-                    <SunIcon />
-                  </Text>
-                </Box>
-                <Box style={{margin: '-4px 0'}}>
-                  <Switch checked={scheme === 'dark'} onChange={handleToggleScheme} />
-                </Box>
-                <Box marginLeft={2}>
-                  <Text size={1}>
-                    <MoonIcon />
-                  </Text>
-                </Box>
-              </Flex>
-            </Button>
-          </Box>
-        </Flex>
+
+            <Flex marginLeft={2}>
+              <LayerProvider zOffset={100}>
+                <MenuButton
+                  button={
+                    <Button
+                      fontSize={1}
+                      iconRight={SelectIcon}
+                      mode="ghost"
+                      padding={2}
+                      style={{minWidth: 80}}
+                      text={VIEWPORT_OPTIONS.find((o) => o.value === viewport)?.title}
+                    />
+                  }
+                  id="viewport-menu"
+                  menu={
+                    <Menu>
+                      {VIEWPORT_OPTIONS.map((option) => (
+                        <MenuItem
+                          fontSize={1}
+                          key={option.value}
+                          onClick={() => setViewport(option.value)}
+                          padding={2}
+                          selected={option.value === viewport}
+                          text={option.title}
+                        />
+                      ))}
+                    </Menu>
+                  }
+                  popover={{matchReferenceWidth: true}}
+                  portal
+                />
+              </LayerProvider>
+            </Flex>
+
+            <Box marginLeft={2}>
+              <Button as="label" mode="bleed" padding={2}>
+                <Flex align="center">
+                  <Box marginRight={2}>
+                    <Text size={1}>
+                      <SunIcon />
+                    </Text>
+                  </Box>
+                  <Box style={{margin: '-4px 0'}}>
+                    <Switch checked={scheme === 'dark'} onChange={handleToggleScheme} />
+                  </Box>
+                  <Box marginLeft={2}>
+                    <Text size={1}>
+                      <MoonIcon />
+                    </Text>
+                  </Box>
+                </Flex>
+              </Button>
+            </Box>
+          </Flex>
+        </Box>
       </Flex>
     </Card>
   )

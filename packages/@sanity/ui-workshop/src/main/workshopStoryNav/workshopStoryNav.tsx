@@ -10,9 +10,15 @@ export function WorkshopStoryNav(props: {collections?: MenuCollection[]}): React
   const menu = useMemo(() => buildMenu(collections, scopes), [collections, scopes])
 
   return (
-    <Card borderRight flex={1} overflow="auto" style={{minWidth: 180, maxWidth: 300}}>
+    <Card
+      borderRight
+      display={['none', 'none', 'block']}
+      flex={1}
+      overflow="auto"
+      style={{minWidth: 180, maxWidth: 300}}
+    >
       {menu.type === 'list' && (
-        <Box padding={4}>
+        <Box padding={3}>
           <Tree space={1}>
             <MenuItems items={menu.items} />
           </Tree>

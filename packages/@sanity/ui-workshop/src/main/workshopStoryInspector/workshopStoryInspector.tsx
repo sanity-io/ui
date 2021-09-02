@@ -62,7 +62,13 @@ export function WorkshopStoryInspector(props: {axeResults: AxeResults | null}): 
   const showTabs = tabs.length > 1
 
   return (
-    <Card borderLeft flex={1} overflow="auto" style={{minWidth: 180, maxWidth: 300}}>
+    <Card
+      borderLeft
+      display={['none', 'none', 'block']}
+      flex={1}
+      overflow="auto"
+      style={{minWidth: 180, maxWidth: 300}}
+    >
       {showTabs && (
         <Layer style={{position: 'sticky', top: 0}}>
           <Card padding={2} shadow={1}>
