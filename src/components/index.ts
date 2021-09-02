@@ -1,4 +1,5 @@
 export * from './autocomplete'
+export * from './breadcrumbs'
 export * from './dialog'
 export * from './hotkeys'
 export * from './menu'
