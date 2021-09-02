@@ -77,7 +77,7 @@ function Root() {
         scheme={scheme}
         scopes={scopes}
         setScheme={setScheme}
-        title="Sanity UI Workshop"
+        title="Sanity UI"
       />
     </ThemeProvider>
   )
