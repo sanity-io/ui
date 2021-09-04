@@ -1,10 +1,13 @@
 'use strict'
 
 const path = require('path')
+const withBundleAnalyzer = require('@next/bundle-analyzer')
 
 const ROOT_PATH = path.resolve(__dirname, '../..')
 
-module.exports = {
+module.exports = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})({
   webpack: (config) => {
     // Add monorepo sibling packages to includes
     config.module.rules[1].include.push(path.join(ROOT_PATH, 'packages/@sanity/color/src'))
@@ -27,4 +30,4 @@ module.exports = {
 
     return config
   },
-}
+})

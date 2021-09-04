@@ -1,19 +1,42 @@
-import {Box, Button, Card, Container, Flex, Inline, Menu, MenuButton, MenuItem} from '@sanity/ui'
+import {ChevronDownIcon} from '@sanity/icons'
+import {SanityLogo} from '@sanity/logos'
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Flex,
+  Inline,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Text,
+} from '@sanity/ui'
+import Link from 'next/link'
 import React from 'react'
 
 export function AppLayout({children}: {children?: React.ReactNode}) {
   return (
     <>
+      <Card as="a" href="#" padding={3} tone="primary">
+        <Text align="center">Latest release: Conditional Fields</Text>
+      </Card>
+
       <Card borderBottom padding={[2, 2, 3, 4]}>
         <Container>
           <Flex>
-            <Card marginRight={4} radius={2} style={{width: 120}} tone="critical" />
+            <Box marginRight={2}>
+              <Link href="/" passHref>
+                <Button as="a" icon={SanityLogo} mode="bleed" padding={2} tone="critical" />
+              </Link>
+            </Box>
+            {/* <Card radius={2} style={{width: 120}} tone="critical" /> */}
             <Box flex={1}>
               <Inline space={1}>
                 <MenuButton
                   button={
                     <Button
-                      iconRight="chevron-down"
+                      iconRight={ChevronDownIcon}
                       mode="bleed"
                       padding={2}
                       space={2}
@@ -23,18 +46,18 @@ export function AppLayout({children}: {children?: React.ReactNode}) {
                   id="platform-menu"
                   menu={
                     <Menu>
-                      <MenuItem text="Structured content" />
-                      <MenuItem text="Sanity Studio" />
-                      <MenuItem text="Developer experience" />
-                      <MenuItem text="Solutions" />
-                      <MenuItem text="Case studies" />
+                      <MenuItem padding={2} text="Structured content" />
+                      <MenuItem padding={2} text="Sanity Studio" />
+                      <MenuItem padding={2} text="Developer experience" />
+                      <MenuItem padding={2} text="Solutions" />
+                      <MenuItem padding={2} text="Case studies" />
                     </Menu>
                   }
                 />
                 <MenuButton
                   button={
                     <Button
-                      iconRight="chevron-down"
+                      iconRight={ChevronDownIcon}
                       mode="bleed"
                       padding={2}
                       space={2}
@@ -44,11 +67,11 @@ export function AppLayout({children}: {children?: React.ReactNode}) {
                   id="resources-menu"
                   menu={
                     <Menu>
-                      <MenuItem text="Docs" />
-                      <MenuItem text="Reference" />
-                      <MenuItem text="Guides" />
-                      <MenuItem text="Plugins &amp; tools" />
-                      <MenuItem text="Get started" />
+                      <MenuItem padding={2} text="Docs" />
+                      <MenuItem padding={2} text="Reference" />
+                      <MenuItem padding={2} text="Guides" />
+                      <MenuItem padding={2} text="Plugins &amp; tools" />
+                      <MenuItem padding={2} text="Get started" />
                     </Menu>
                   }
                 />
@@ -57,12 +80,12 @@ export function AppLayout({children}: {children?: React.ReactNode}) {
               </Inline>
             </Box>
 
-            <Inline space={1}>
+            <Inline space={2}>
               <Button mode="bleed" padding={2} text="Contact us" />
               <Button mode="bleed" padding={2} text="Log in" />
             </Inline>
 
-            <Box marginLeft={3}>
+            <Box marginLeft={2}>
               <Button padding={2} text="Get started" tone="primary" />
             </Box>
           </Flex>
