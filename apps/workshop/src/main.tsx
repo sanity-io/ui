@@ -1,4 +1,10 @@
-import {studioTheme, ThemeColorProvider, ThemeProvider, usePrefersDark} from '@sanity/ui'
+import {
+  studioTheme,
+  ThemeColorProvider,
+  ThemeProvider,
+  useGlobalKeyDown,
+  usePrefersDark,
+} from '@sanity/ui'
 import {Workshop, WorkshopLocation} from '@sanity/ui-workshop'
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import ReactDOM from 'react-dom'
@@ -62,6 +68,12 @@ function Root() {
   useEffect(() => {
     setScheme(prefersDark ? 'dark' : 'light')
   }, [prefersDark])
+
+  useGlobalKeyDown((event) => {
+    if (event.metaKey && event.key === 'i') {
+      setScheme((v) => (v === 'light' ? 'dark' : 'light'))
+    }
+  })
 
   return (
     <ThemeProvider scheme={scheme} theme={studioTheme}>
