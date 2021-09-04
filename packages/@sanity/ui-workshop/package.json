@@ -3,6 +3,7 @@
   "version": "0.2.1",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
+  "sideEffects": false,
   "license": "MIT",
   "scripts": {
     "build": "run-s build:esbuild build:dts copy:dts:* clean:dts",

@@ -3,6 +3,7 @@
   "version": "0.1.8",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
+  "sideEffects": false,
   "bin": {
     "tsdoc-to-portable-text": "bin/tsdoc-to-portable-text"
   },
