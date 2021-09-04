@@ -13,8 +13,13 @@ import {
   Text,
 } from '@sanity/ui'
 import React, {useCallback} from 'react'
+import styled from 'styled-components'
 import {useWorkshop} from '../useWorkshop'
 import {VIEWPORT_OPTIONS, ZOOM_OPTIONS} from './constants'
+
+const Root = styled(Card)`
+  line-height: 0;
+`
 
 export function WorkshopNavbar(props: {
   scheme: 'light' | 'dark'
@@ -46,7 +51,7 @@ export function WorkshopNavbar(props: {
   )
 
   return (
-    <Card borderBottom paddingX={3} paddingY={2}>
+    <Root borderBottom paddingX={3} paddingY={2}>
       <Flex align="center">
         <Box display={['block', 'block', 'none']}>
           <Button fontSize={1} icon={MenuIcon} mode="bleed" padding={2} />
@@ -177,6 +182,6 @@ export function WorkshopNavbar(props: {
           </Flex>
         </Box>
       </Flex>
-    </Card>
+    </Root>
   )
 }
