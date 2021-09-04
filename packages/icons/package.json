@@ -3,11 +3,11 @@
   "version": "1.1.5",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
+  "sideEffects": false,
   "files": [
     "/lib"
   ],
   "license": "MIT",
-  "sideEffects": false,
   "scripts": {
     "build": "run-s build:esbuild build:dts copy:dts:* clean:dts",
     "build:esbuild": "node -r esbuild-register scripts/build.ts",
