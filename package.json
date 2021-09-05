@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "0.36.3",
+  "version": "0.36.4",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "sideEffects": false,
@@ -32,7 +32,7 @@
     "@popperjs/core": "^2.10.1",
     "@reach/auto-id": "^0.16.0",
     "@sanity/color": "^2.1.4",
-    "@sanity/icons": "^1.1.5",
+    "@sanity/icons": "^1.1.6",
     "framer-motion": "^4.1.17",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.2",
