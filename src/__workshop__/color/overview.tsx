@@ -63,6 +63,7 @@ function ColorTintPreview(props: {tint: ColorValue}) {
         })
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.log(err)
         pushToast({
           status: 'error',
