@@ -155,8 +155,6 @@ const InnerWorkshopFrame = forwardRef(function InnerWorkshopFrame(
 
           return
         }
-
-        console.warn('unhandled msg', msg)
       }
     }
 

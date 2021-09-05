@@ -21,6 +21,7 @@ async function runCli() {
 }
 
 runCli().catch((err) => {
+  // eslint-disable-next-line no-console
   console.error(`${chalk.red('error')} ${err.message}`)
   process.exit(1)
 })

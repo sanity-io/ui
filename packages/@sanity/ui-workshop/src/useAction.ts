@@ -7,6 +7,8 @@ export function useAction(name: string): (...args: any[]) => void {
   return useCallback(
     (...args: any[]) => {
       if (!scope || !story) return
+
+      // eslint-disable-next-line no-console
       console.log(`[${scope.name}/${story.name}]`, name, ...args)
     },
     [scope, story, name]

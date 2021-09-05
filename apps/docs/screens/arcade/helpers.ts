@@ -18,7 +18,8 @@ export function tryDecode(encoded: unknown) {
     try {
       return decode(encoded)
     } catch (err) {
-      console.error(err)
+      // eslint-disable-next-line no-console
+      console.error('Could not decode arcade query:', err)
     }
   }
 

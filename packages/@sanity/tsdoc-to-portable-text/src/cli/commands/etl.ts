@@ -42,10 +42,12 @@ export const etl: CmdFn = async ({args, cwd, flags}) => {
 
   for (const msg of result.messages) {
     if (msg.logLevel === 'error') {
+      // eslint-disable-next-line no-console
       console.log(`${chalk.red('error')} ${msg.text}`)
     }
 
     if (msg.logLevel === 'warning') {
+      // eslint-disable-next-line no-console
       console.log(`${chalk.yellow('warning')} ${msg.text}`)
     }
   }
@@ -56,6 +58,7 @@ export const etl: CmdFn = async ({args, cwd, flags}) => {
 
   await load(docs, {fs: {path: jsonPath}})
 
+  // eslint-disable-next-line no-console
   console.log(
     `${chalk.green('success')} wrote documents to ${path.relative(packagePath, jsonPath)}`
   )

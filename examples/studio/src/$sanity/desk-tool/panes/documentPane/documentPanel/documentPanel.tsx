@@ -109,14 +109,7 @@ export function DocumentPanel({onChangeOpen}: {onChangeOpen: () => void}) {
                   id="pane-context-menu"
                   menu={
                     <Menu>
-                      <MenuItem
-                        icon={RestoreIcon}
-                        onClick={() => {
-                          console.log('open review changes')
-                          onChangeOpen()
-                        }}
-                        text="Review changes"
-                      />
+                      <MenuItem icon={RestoreIcon} onClick={onChangeOpen} text="Review changes" />
                       <MenuItem icon={BinaryDocumentIcon} text="Inspect JSON" />
                       <MenuDivider />
                       <MenuItem icon={EarthAmericasIcon} text="Preview on site" />

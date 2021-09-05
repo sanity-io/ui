@@ -57,6 +57,7 @@ export function Root() {
       shortcut: ['mod', 'shift', 'f'],
       title: 'Log active element',
       handle() {
+        // eslint-disable-next-line no-console
         console.log(document.activeElement)
       },
     },
@@ -65,6 +66,7 @@ export function Root() {
       shortcut: ['mod', 'shift', 'l'],
       title: 'Sign out',
       handle() {
+        // eslint-disable-next-line no-console
         console.log('@todo: sign out')
       },
     },

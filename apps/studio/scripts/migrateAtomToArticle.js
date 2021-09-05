@@ -7,6 +7,7 @@ async function migrate() {
 
   return Promise.all(
     docs.map(({_id: prevId, ...doc}) => {
+      // eslint-disable-next-line no-console
       console.log('previous id', prevId)
 
       return client.create({...doc, _type: 'article'})
@@ -15,6 +16,7 @@ async function migrate() {
 }
 
 migrate().catch((err) => {
+  // eslint-disable-next-line no-console
   console.error(err)
   process.exit(1)
 })

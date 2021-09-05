@@ -11,5 +11,7 @@ export function writeConfig() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     JSON.stringify(require(CONFIG_TS_PATH).default, null, 2) + '\n'
   )
+
+  // eslint-disable-next-line no-console
   console.log(`Generated: ${path.relative(ROOT_PATH, CONFIG_JSON_PATH)}`)
 }

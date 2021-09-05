@@ -1,3 +1,4 @@
+import {useToast} from '@sanity/ui'
 import axe from 'axe-core'
 import {useEffect, useState} from 'react'
 
@@ -9,6 +10,7 @@ export function useAxeResults(props: {
 }): axe.AxeResults | null {
   const {enabled = true, key} = props
   const [results, setResults] = useState<axe.AxeResults | null>(null)
+  const {push: pushToast} = useToast()
 
   useEffect(() => {
     if (!enabled) return
@@ -32,16 +34,34 @@ export function useAxeResults(props: {
           setResults(results)
         })
         .catch((err) => {
-          console.error('Something bad happened:', err.message)
+          // eslint-disable-next-line no-console
+          console.error(err)
+
+          pushToast({
+            title: 'Axe: failed to run',
+            description: err.message,
+            status: 'error',
+          })
         })
     } catch (axeRunError) {
+      // eslint-disable-next-line no-console
+      console.error(axeRunError)
+
       if (axeRunError instanceof Error) {
-        console.log('could not run axe:', axeRunError.message)
+        pushToast({
+          title: 'Axe: unknown error',
+          description: axeRunError.message,
+          status: 'error',
+        })
       } else {
-        console.log('could not run axe:', axeRunError)
+        pushToast({
+          title: 'Axe: unknown error',
+          description: String(axeRunError),
+          status: 'error',
+        })
       }
     }
-  }, [enabled, key])
+  }, [enabled, key, pushToast])
 
   return results
 }
