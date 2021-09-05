@@ -1,4 +1,4 @@
-import {BoundaryElementProvider, Flex, PortalProvider} from '@sanity/ui'
+import {BoundaryElementProvider, Flex, PortalProvider, ToastProvider} from '@sanity/ui'
 import {AxeResults} from 'axe-core'
 import React, {useCallback, useEffect, useMemo, useReducer, useState} from 'react'
 import {WORKSHOP_DEFAULT_FEATURES} from '../constants'
@@ -118,47 +118,49 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
   }, [_handleMsg, subscribe])
 
   return (
-    <BoundaryElementProvider element={boundaryElement}>
-      <PortalProvider element={portalElement}>
-        <WorkshopProvider
-          features={features}
-          frameUrl={frameUrl}
-          location={location}
-          onLocationPush={onLocationPush}
-          onLocationReplace={onLocationReplace}
-          scopes={scopes}
-          props={props}
-          registerProp={registerProp}
-          setPropValue={setPropValue}
-          title={title}
-          unregisterProp={unregisterProp}
-        >
-          <Flex direction="column" height="fill" ref={setBoundaryElement}>
-            {features.navbar && (
-              <WorkshopNavbar
-                scheme={scheme}
-                setScheme={setScheme}
-                setViewport={setViewport}
-                setZoom={setZoom}
-                viewport={viewport}
-                zoom={zoom}
-              />
-            )}
-            <Flex flex={1}>
-              <WorkshopStoryNav collections={collections} />
-              <WorkshopStoryCanvas
-                frameRef={frameRef}
-                ready={ready}
-                scheme={scheme}
-                viewport={viewport}
-                zoom={zoom}
-              />
-              <WorkshopStoryInspector axeResults={axeResults} />
+    <ToastProvider>
+      <BoundaryElementProvider element={boundaryElement}>
+        <PortalProvider element={portalElement}>
+          <WorkshopProvider
+            features={features}
+            frameUrl={frameUrl}
+            location={location}
+            onLocationPush={onLocationPush}
+            onLocationReplace={onLocationReplace}
+            scopes={scopes}
+            props={props}
+            registerProp={registerProp}
+            setPropValue={setPropValue}
+            title={title}
+            unregisterProp={unregisterProp}
+          >
+            <Flex direction="column" height="fill" ref={setBoundaryElement}>
+              {features.navbar && (
+                <WorkshopNavbar
+                  scheme={scheme}
+                  setScheme={setScheme}
+                  setViewport={setViewport}
+                  setZoom={setZoom}
+                  viewport={viewport}
+                  zoom={zoom}
+                />
+              )}
+              <Flex flex={1}>
+                <WorkshopStoryNav collections={collections} />
+                <WorkshopStoryCanvas
+                  frameRef={frameRef}
+                  ready={ready}
+                  scheme={scheme}
+                  viewport={viewport}
+                  zoom={zoom}
+                />
+                <WorkshopStoryInspector axeResults={axeResults} />
+              </Flex>
             </Flex>
-          </Flex>
-          <div data-portal="" ref={setPortalElement} />
-        </WorkshopProvider>
-      </PortalProvider>
-    </BoundaryElementProvider>
+            <div data-portal="" ref={setPortalElement} />
+          </WorkshopProvider>
+        </PortalProvider>
+      </BoundaryElementProvider>
+    </ToastProvider>
   )
 }

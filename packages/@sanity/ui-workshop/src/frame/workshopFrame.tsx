@@ -7,6 +7,7 @@ import {
 } from '@sanity/ui'
 import React, {
   createElement,
+  forwardRef,
   Suspense,
   useCallback,
   useEffect,
@@ -25,12 +26,33 @@ import {PropSchema, WorkshopContextValue, WorkshopLocation, WorkshopScope} from 
 import {WorkshopContext} from '../workshopContext'
 import {useParent} from './useParent'
 
-export function WorkshopFrame(_props: {
+interface WorkshopFrameProps {
   frameUrl: string
   scopes: WorkshopScope[]
   setScheme: (scheme: 'dark' | 'light') => void
   title: string
-}): React.ReactElement {
+}
+
+export function WorkshopFrame(_props: WorkshopFrameProps): React.ReactElement {
+  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+
+  return (
+    <ToastProvider>
+      <BoundaryElementProvider element={boundaryElement}>
+        <PortalProvider element={portalElement}>
+          <InnerWorkshopFrame {..._props} ref={setBoundaryElement} />
+          <div data-portal="" ref={setPortalElement} />
+        </PortalProvider>
+      </BoundaryElementProvider>
+    </ToastProvider>
+  )
+}
+
+const InnerWorkshopFrame = forwardRef(function InnerWorkshopFrame(
+  _props: WorkshopFrameProps,
+  ref: React.ForwardedRef<HTMLDivElement>
+) {
   const {frameUrl, scopes, setScheme, title} = _props
   const query = useMemo(() => {
     if (typeof window === 'undefined') return {}
@@ -39,8 +61,6 @@ export function WorkshopFrame(_props: {
   }, [])
   const [path, setPath] = useState(query.path || '/')
   const [props, dispatch] = useReducer(propsReducer, [])
-  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
-  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const {postMessage} = useParent()
   const {scope, story} = useMemo(() => resolveLocation(scopes, path), [path, scopes])
   const loc = useMemo(() => ({path}), [path])
@@ -152,29 +172,22 @@ export function WorkshopFrame(_props: {
   }
 
   return (
-    <BoundaryElementProvider element={boundaryElement}>
-      <PortalProvider element={portalElement}>
-        <ToastProvider>
-          <WorkshopContext.Provider value={contextValue}>
-            <ScopeProvider
-              props={props}
-              registerProp={registerProp}
-              scope={scope}
-              setPropValue={setPropValue}
-              story={story}
-              title={title}
-              unregisterProp={unregisterProp}
-            >
-              <Suspense fallback={null}>
-                <Card as="main" height="fill" ref={setBoundaryElement}>
-                  {story && createElement(story.component)}
-                </Card>
-              </Suspense>
-              <div data-portal="" ref={setPortalElement} />
-            </ScopeProvider>
-          </WorkshopContext.Provider>
-        </ToastProvider>
-      </PortalProvider>
-    </BoundaryElementProvider>
+    <WorkshopContext.Provider value={contextValue}>
+      <ScopeProvider
+        props={props}
+        registerProp={registerProp}
+        scope={scope}
+        setPropValue={setPropValue}
+        story={story}
+        title={title}
+        unregisterProp={unregisterProp}
+      >
+        <Suspense fallback={null}>
+          <Card as="main" height="fill" ref={ref}>
+            {story && createElement(story.component)}
+          </Card>
+        </Suspense>
+      </ScopeProvider>
+    </WorkshopContext.Provider>
   )
-}
+})
