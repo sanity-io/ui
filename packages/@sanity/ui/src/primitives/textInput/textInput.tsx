@@ -26,7 +26,7 @@ import {Text} from '../text'
  * @public
  */
 export type TextInputClearButtonProps = Omit<ButtonProps, 'as'> &
-  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
+  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'onClick' | 'onMouseDown' | 'ref'>
 
 /**
  * @public
@@ -118,7 +118,8 @@ const LeftBox = styled(Box)`
   left: 0;
 `
 
-const RightBox = styled(Box)`
+const RightCard = styled(Card)`
+  background-color: transparent;
   position: absolute;
   top: 0;
   right: 0;
@@ -141,7 +142,7 @@ export const TextInput = forwardRef(function TextInput(
     onClear,
     padding: paddingProp = 3,
     prefix,
-    radius = 1,
+    radius: radiusProp = 1,
     readOnly,
     space = 3,
     suffix,
@@ -152,6 +153,7 @@ export const TextInput = forwardRef(function TextInput(
 
   const ref = useForwardedRef(forwardedRef)
   const padding = useResponsiveProp(paddingProp)
+  const radius = useResponsiveProp(radiusProp)
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)
@@ -211,12 +213,12 @@ export const TextInput = forwardRef(function TextInput(
         )}
 
         {!$hasClearButton && iconRight && (
-          <RightBox padding={padding}>
+          <RightCard padding={padding}>
             <Text size={fontSize}>
               {isValidElement(iconRight) && iconRight}
               {isValidElementType(iconRight) && createElement(iconRight)}
             </Text>
-          </RightBox>
+          </RightCard>
         )}
       </Presentation>
     ),
@@ -235,28 +237,36 @@ export const TextInput = forwardRef(function TextInput(
       !disabled &&
       !readOnly &&
       clearButton && (
-        <RightBox padding={clearButtonBoxPadding} style={CLEAR_BUTTON_BOX_STYLE}>
+        <RightCard
+          forwardedAs="span"
+          padding={clearButtonBoxPadding}
+          style={CLEAR_BUTTON_BOX_STYLE}
+          tone={customValidity ? 'critical' : undefined}
+        >
           <Button
-            {...clearButtonProps}
             data-qa="clear-button"
             fontSize={fontSize}
             icon={CloseIcon}
             mode="bleed"
+            padding={clearButtonPadding}
+            radius={radius.map((r) => r - 1)}
+            {...clearButtonProps}
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
-            padding={clearButtonPadding}
           />
-        </RightBox>
+        </RightCard>
       ),
     [
       clearButton,
       clearButtonBoxPadding,
       clearButtonPadding,
       clearButtonProps,
+      customValidity,
       disabled,
       fontSize,
       handleClearClick,
       handleClearMouseDown,
+      radius,
       readOnly,
     ]
   )
