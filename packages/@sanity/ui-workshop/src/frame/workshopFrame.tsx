@@ -39,7 +39,6 @@ export function WorkshopFrame(_props: {
   }, [])
   const [path, setPath] = useState(query.path || '/')
   const [props, dispatch] = useReducer(propsReducer, [])
-  const [zoom, setZoom] = useState(query.zoom ? Number(query.zoom) : 1)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const {postMessage} = useParent()
@@ -123,7 +122,6 @@ export function WorkshopFrame(_props: {
         if (msg.type === 'workshop/setLocation') {
           setPath(msg.path as string)
           setScheme(msg.scheme as ThemeColorSchemeKey)
-          setZoom(msg.zoom as number)
 
           return
         }
@@ -148,12 +146,6 @@ export function WorkshopFrame(_props: {
       window.removeEventListener('message', handleMessage)
     }
   }, [path, postMessage, setScheme])
-
-  useEffect(() => {
-    const bodyStyle: any = document.body.style
-
-    bodyStyle.zoom = String(zoom)
-  }, [zoom])
 
   if (!mounted) {
     return <></>

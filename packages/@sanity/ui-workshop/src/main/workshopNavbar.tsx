@@ -24,9 +24,9 @@ const Root = styled(Card)`
 export function WorkshopNavbar(props: {
   scheme: 'light' | 'dark'
   setScheme: (s: 'light' | 'dark') => void
-  setViewport: (v: number | 'auto') => void
+  setViewport: (v: string) => void
   setZoom: (z: number) => void
-  viewport: number | 'auto'
+  viewport: string
   zoom: number
 }): React.ReactElement {
   const {scheme, setScheme, setViewport, setZoom, viewport, zoom} = props
@@ -136,7 +136,7 @@ export function WorkshopNavbar(props: {
                       mode="ghost"
                       padding={2}
                       style={{minWidth: 80}}
-                      text={VIEWPORT_OPTIONS.find((o) => o.value === viewport)?.title}
+                      text={VIEWPORT_OPTIONS.find((o) => o.name === viewport)?.title}
                     />
                   }
                   id="viewport-menu"
@@ -145,10 +145,10 @@ export function WorkshopNavbar(props: {
                       {VIEWPORT_OPTIONS.map((option) => (
                         <MenuItem
                           fontSize={1}
-                          key={option.value}
-                          onClick={() => setViewport(option.value)}
+                          key={option.name}
+                          onClick={() => setViewport(option.name)}
                           padding={2}
-                          selected={option.value === viewport}
+                          selected={option.name === viewport}
                           text={option.title}
                         />
                       ))}

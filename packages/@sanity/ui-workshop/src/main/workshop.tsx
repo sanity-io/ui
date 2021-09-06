@@ -54,7 +54,7 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
   const {postMessage, ready, ref: frameRef, subscribe} = useFrame()
   const [props, dispatch] = useReducer(propsReducer, [])
   const [axeResults, setAxeResults] = useState<AxeResults | null>(null)
-  const [viewport, setViewport] = useState<number | 'auto'>('auto')
+  const [viewport, setViewport] = useState<string>('auto')
   const [zoom, setZoom] = useState(1)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
@@ -100,8 +100,8 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
   )
 
   useEffect(() => {
-    postMessage({type: 'workshop/setLocation', path: location.path, scheme, zoom})
-  }, [location.path, postMessage, scheme, zoom])
+    postMessage({type: 'workshop/setLocation', path: location.path, scheme})
+  }, [location.path, postMessage, scheme])
 
   useEffect(() => {
     return subscribe((msg) => {
@@ -151,6 +151,7 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
                 ready={ready}
                 scheme={scheme}
                 viewport={viewport}
+                zoom={zoom}
               />
               <WorkshopStoryInspector axeResults={axeResults} />
             </Flex>
