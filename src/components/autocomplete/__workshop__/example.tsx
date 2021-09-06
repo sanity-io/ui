@@ -1,6 +1,6 @@
 import {Autocomplete, Box, Card, Container, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
+import React, {useMemo} from 'react'
 import {
   WORKSHOP_CARD_TONE_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
@@ -11,7 +11,7 @@ import countries from '../__fixtures__/countries'
 
 export default function ExampleStory() {
   const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Layout')
-  const options = countries.map((country) => ({value: country.code}))
+  const options = useMemo(() => countries.map((country) => ({value: country.code})), [])
   const border = useBoolean('Border', true, 'Props')
   const customValidity = useText('Custom validity', '', 'Props') || undefined
   const disabled = useBoolean('Disabled', false, 'Props')
@@ -38,6 +38,7 @@ export default function ExampleStory() {
               openButton={openButton}
               options={options}
               padding={padding}
+              placeholder="Search"
               radius={radius}
               readOnly={readOnly}
             />

@@ -14,8 +14,8 @@ export default function CustomStory() {
   const readOnly = useBoolean('Read only', false, 'Props')
   const [value, setValue] = useState('')
 
-  const renderOption = useCallback((option: ExampleOption) => {
-    return (
+  const renderOption = useCallback(
+    (option: ExampleOption) => (
       <Card
         as="a"
         data-qa={`option-${option.value}`}
@@ -23,11 +23,13 @@ export default function CustomStory() {
         key={option.value}
         onClick={(event) => event.preventDefault()}
         padding={3}
+        radius={radius - 1}
       >
         <Text>{option.title}</Text>
       </Card>
-    )
-  }, [])
+    ),
+    [radius]
+  )
 
   const renderValue = useCallback((currentValue: string, option?: ExampleOption) => {
     return option ? option.title : currentValue
@@ -54,6 +56,7 @@ export default function CustomStory() {
           id="custom"
           onChange={setValue}
           options={options}
+          placeholder="Search"
           radius={radius}
           readOnly={readOnly}
           renderOption={renderOption}

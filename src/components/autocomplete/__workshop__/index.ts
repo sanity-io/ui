@@ -27,4 +27,9 @@ export default defineScope('components/autocomplete', 'Autocomplete', [
     title: 'Focus and blur',
     component: lazy(() => import('./focusAndBlur')),
   },
+  {
+    name: 'fullscreen',
+    title: 'Fullscreen',
+    component: lazy(() => import('./fullscreen')),
+  },
 ])
