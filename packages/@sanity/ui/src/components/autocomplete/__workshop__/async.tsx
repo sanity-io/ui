@@ -11,20 +11,20 @@ import {
   Text,
 } from '@sanity/ui'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import countries from '../__fixtures__/countries'
+import {countriesStore} from '../__mocks__/apiStore'
 
 export default function AsyncStory() {
   const [options, setOptions] = useState<BaseAutocompleteOption[]>([])
   const [loading, setLoading] = useState(false)
   const searchRef = useRef<{cancel: () => void} | null>(null)
+  const fetchRef = useRef<{cancel: () => void} | null>(null)
   const [value, setValue] = useState('')
   const [optionTitle, setOptionTitle] = useState<string | null>(null)
-  const fetchCurrentRef = useRef<{cancel: () => void} | null>(null)
   const [loadingCurrentRef, setLoadingCurrentRef] = useState(false)
 
   const doSearch = useCallback((query: string | null) => {
     if (searchRef.current) searchRef.current.cancel()
-    searchRef.current = search(query || '', setOptions, setLoading)
+    searchRef.current = countriesStore.search(query || '', setOptions, setLoading)
   }, [])
 
   const filterOption = useCallback(() => true, [])
@@ -57,10 +57,10 @@ export default function AsyncStory() {
   }, [])
 
   useEffect(() => {
-    if (fetchCurrentRef.current) fetchCurrentRef.current.cancel()
+    if (fetchRef.current) fetchRef.current.cancel()
 
     if (value) {
-      fetchCurrentRef.current = fetchDocument(
+      fetchRef.current = countriesStore.fetchDocument(
         value,
         (data) => setOptionTitle(data?.title || null),
         setLoadingCurrentRef
@@ -91,7 +91,7 @@ export default function AsyncStory() {
             onQueryChange={handleQueryChange}
             openButton={{onClick: handleOpenButtonClick}}
             options={options}
-            placeholder="Search..."
+            placeholder="Search"
             prefix={
               <Box padding={1}>
                 <Button disabled={!value} icon={LinkIcon} mode="bleed" padding={2} />
@@ -120,11 +120,11 @@ function AsyncOption(props: {documentId: string; disabled?: boolean; tabIndex?: 
 
   useEffect(() => {
     if (ref.current) ref.current.cancel()
-    ref.current = fetchDocument(documentId, setData, setLoading)
+    ref.current = countriesStore.fetchDocument(documentId, setData, setLoading)
   }, [documentId])
 
   return (
-    <Card as="button" disabled={disabled} padding={3} tabIndex={tabIndex}>
+    <Card data-as="button" disabled={disabled} padding={3} tabIndex={tabIndex}>
       {loading && (
         <Text muted>
           <>Loading…</>
@@ -134,54 +134,4 @@ function AsyncOption(props: {documentId: string; disabled?: boolean; tabIndex?: 
       {!loading && <Text muted={!data}>{data ? data.title : <>Untitled</>}</Text>}
     </Card>
   )
-}
-
-function search(
-  query: string,
-  onResults: (results: BaseAutocompleteOption[]) => void,
-  onLoading: (flag: boolean) => void
-) {
-  const fakeDelay = 150 + Math.random() * 800
-
-  onLoading(true)
-
-  const timeout = setTimeout(() => {
-    const results: BaseAutocompleteOption[] = countries
-      .filter((d) => d.name.toLowerCase().includes(query.toLowerCase()))
-      .map((d) => ({value: d.code}))
-
-    onResults(results)
-    onLoading(false)
-  }, fakeDelay)
-
-  return {
-    cancel: () => {
-      clearTimeout(timeout)
-    },
-  }
-}
-
-function fetchDocument(
-  id: string,
-  onResult: (value: {title: string} | null) => void,
-  onLoading: (flag: boolean) => void
-) {
-  const fakeDelay = 50 + Math.random() * 400
-
-  onLoading(true)
-
-  const timeout = setTimeout(() => {
-    const rec = countries.find((c) => c.code === id)
-
-    const doc = rec && {title: rec.name}
-
-    onResult(doc || null)
-    onLoading(false)
-  }, fakeDelay)
-
-  return {
-    cancel: () => {
-      clearTimeout(timeout)
-    },
-  }
 }

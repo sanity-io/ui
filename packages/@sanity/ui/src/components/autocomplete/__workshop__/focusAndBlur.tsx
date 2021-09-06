@@ -16,6 +16,7 @@ export default function FocusAndBlurStory() {
           onFocus={handleFocus}
           openButton
           options={[{value: 'foo'}, {value: 'bar'}]}
+          placeholder="Search"
         />
         <Stack space={1}>
           <Card overflow="auto" padding={3} radius={2} tone="transparent">

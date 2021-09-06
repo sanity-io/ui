@@ -18,7 +18,9 @@ export default function ConstrainedHeightStory() {
     <Card height="fill" tone="transparent">
       <Card
         ref={setBoundaryElement}
-        style={{position: 'absolute', top: 50, right: 50, bottom: 50, left: 50}}
+        radius={3}
+        shadow={3}
+        style={{position: 'absolute', top: 20, right: 20, bottom: 20, left: 20}}
       >
         <Box height="fill" overflow="auto" padding={[3, 4, 5]} sizing="border">
           <Stack space={5}>
@@ -52,6 +54,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
         key={option.value}
         onClick={(event) => event.preventDefault()}
         padding={3}
+        radius={2}
       >
         <Text textOverflow="ellipsis">{option.title}</Text>
       </Card>
@@ -80,6 +83,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           onChange={setValue}
           openButton
           options={options}
+          placeholder="Search"
           radius={1}
           renderOption={renderOption}
           renderValue={renderValue}
