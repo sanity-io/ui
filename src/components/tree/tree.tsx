@@ -23,7 +23,7 @@ export function Tree(
   const {children, space = 1, ...restProps} = props
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const path: string[] = useMemo(() => [], [])
-  const rootRef = useRef<HTMLElement | null>(null)
+  const rootRef = useRef<HTMLDivElement | null>(null)
   const [itemElements, setItemElements] = useState<HTMLElement[]>([])
   const [state, setState] = useState<TreeState>({})
 
