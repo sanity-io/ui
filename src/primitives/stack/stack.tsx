@@ -7,6 +7,7 @@ import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProp
  * @public
  */
 export interface StackProps extends BoxProps {
+  as?: React.ElementType | keyof JSX.IntrinsicElements
   space?: number | number[]
 }
 
@@ -16,8 +17,8 @@ const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, respons
  * @public
  */
 export const Stack = forwardRef(function Stack(
-  props: StackProps & React.HTMLProps<HTMLDivElement>,
-  ref
+  props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
+  ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {as, space, ...restProps} = props
 
