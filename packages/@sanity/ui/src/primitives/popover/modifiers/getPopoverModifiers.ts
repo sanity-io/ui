@@ -45,7 +45,7 @@ export function getPopoverModifiers(props: PopoverModifiersProps): Modifier<any,
   }
 
   const detectOverflowOptions = {
-    altAxis: true,
+    altAxis: !constrainSize,
     boundary: boundaryElement || undefined,
     padding: 8,
     tether,
