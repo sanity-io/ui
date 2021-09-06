@@ -20,7 +20,7 @@ export function AutocompleteOption(props: AutocompleteOptionProps): React.ReactE
       aria-selected={selected}
       data-ui="AutocompleteOption"
       id={id}
-      role="presentation"
+      role="option"
       onClick={handleClick}
     >
       {children}
