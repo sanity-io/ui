@@ -25,8 +25,8 @@ const STATUS_CARD_TONE: {[key: string]: ThemeColorToneKey} = {
 const ROLES = {
   error: 'alert',
   warning: 'alert',
-  success: 'status',
-  info: 'status',
+  success: 'alert',
+  info: 'alert',
 }
 
 const Root = styled(Card)`
