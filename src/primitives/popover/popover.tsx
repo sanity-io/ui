@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useForwardedRef} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
-import {CardTone, Placement} from '../../types'
+import {CardTone, Placement, PopoverMargins} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {ResponsiveWidthStyleProps} from '../container'
@@ -24,7 +24,7 @@ export interface PopoverProps
   /**
    * @beta
    */
-  __unstable_margins?: [number, number, number, number]
+  __unstable_margins?: PopoverMargins
   allowedAutoPlacements?: Placement[]
   arrow?: boolean
   boundaryElement?: HTMLElement | null
