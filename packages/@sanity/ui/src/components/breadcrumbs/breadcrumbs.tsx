@@ -24,10 +24,10 @@ export interface BreadcrumbsProps {
  * @beta
  */
 export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref'>,
+  props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
   ref: React.ForwardedRef<HTMLOListElement>
 ) {
-  const {children, maxLength, separator, space = 2} = props
+  const {children, maxLength, separator, space = 2, ...restProps} = props
   const [open, setOpen] = useState(false)
   const [expandElement, setExpandElement] = useState<HTMLButtonElement | null>(null)
   const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
@@ -85,7 +85,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   }, [collapse, expand, maxLength, open, rawItems, space])
 
   return (
-    <Root ref={ref}>
+    <Root data-ui="Breadcrumbs" {...restProps} ref={ref}>
       {items.map((item, itemIndex) => (
         <Fragment key={itemIndex}>
           {itemIndex > 0 && (
