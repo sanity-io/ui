@@ -61,6 +61,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
     &[data-as='button'] {
       --card-focus-ring-box-shadow: none;
 
+      cursor: default;
       box-shadow: var(--card-focus-ring-box-shadow);
 
       &:disabled {
@@ -68,18 +69,16 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
       }
 
       &:not(:disabled) {
-        &[data-pressed],
-        &[aria-pressed='true'] {
+        &[data-pressed] {
           ${_colorVarsStyle(base, card.pressed, $checkered)}
         }
 
-        &[data-selected],
-        [aria-selected='true'] > & {
+        &[data-selected] {
           ${_colorVarsStyle(base, card.selected, $checkered)}
         }
 
         @media (hover: hover) {
-          &:not([data-pressed]):not([aria-pressed='true']):not([data-selected]) {
+          &:not([data-pressed]):not([data-selected]) {
             &:hover {
               ${_colorVarsStyle(base, card.hovered, $checkered)}
             }
@@ -104,6 +103,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
 
     /* &:is(a) */
     &[data-as='a'] {
+      cursor: pointer;
       box-shadow: var(--card-focus-ring-box-shadow);
 
       &[data-disabled] {
@@ -115,8 +115,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
           ${_colorVarsStyle(base, card.pressed, $checkered)}
         }
 
-        &[data-selected],
-        [aria-selected='true'] > & {
+        &[data-selected] {
           ${_colorVarsStyle(base, card.selected, $checkered)}
         }
 
