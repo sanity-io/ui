@@ -241,7 +241,7 @@ export const TextInput = forwardRef(function TextInput(
           forwardedAs="span"
           padding={clearButtonBoxPadding}
           style={CLEAR_BUTTON_BOX_STYLE}
-          tone={customValidity ? 'critical' : undefined}
+          tone={customValidity ? 'critical' : 'inherit'}
         >
           <Button
             data-qa="clear-button"
