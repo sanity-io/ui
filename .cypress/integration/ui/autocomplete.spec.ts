@@ -61,7 +61,10 @@ context('Components/Autocomplete', () => {
     cy.get('#custom:focus').type('nor')
 
     // Tab 1 time
-    cy.get('#custom[aria-expanded="true"]').should('have.focus').realPress('Tab')
+    cy.get('#custom[aria-expanded="true"]').should('have.focus')
+
+    // Focus the next focusable element
+    cy.get('#set-value-btn').focus()
 
     // Should be collapsed
     cy.get('#custom[aria-expanded="false"]').should('exist')
@@ -95,8 +98,7 @@ context('Components/Autocomplete', () => {
     cy.get('#custom').type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}net')
 
     // Tab out of autocomplete
-    cy.get('#custom').realPress('Tab')
-    cy.get('[data-qa="clear-button"]').realPress('Tab')
+    cy.get('#set-value-btn').focus()
 
     // Expect the value to be "Norway" and autocomplete to be collapsed
     cy.get('#custom[aria-expanded="false"][value="Norway"]').should('exist')
