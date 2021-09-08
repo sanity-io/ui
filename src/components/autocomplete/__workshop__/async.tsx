@@ -18,6 +18,7 @@ export default function AsyncStory() {
   const [loading, setLoading] = useState(false)
   const searchRef = useRef<{cancel: () => void} | null>(null)
   const fetchRef = useRef<{cancel: () => void} | null>(null)
+  const [query, setQuery] = useState<string | null>(null)
   const [value, setValue] = useState('')
   const [optionTitle, setOptionTitle] = useState<string | null>(null)
   const [loadingCurrentRef, setLoadingCurrentRef] = useState(false)
@@ -31,6 +32,8 @@ export default function AsyncStory() {
 
   const handleQueryChange = useCallback(
     (query: string | null) => {
+      setQuery(query)
+
       if (query !== null) {
         doSearch(query)
       }
@@ -105,15 +108,20 @@ export default function AsyncStory() {
         </LayerProvider>
 
         <Card border overflow="auto" padding={3} radius={1}>
-          <Code language="json">{JSON.stringify({loading, options, value}, null, 2)}</Code>
+          <Code language="json">{JSON.stringify({loading, options, query, value}, null, 2)}</Code>
         </Card>
       </Stack>
     </Box>
   )
 }
 
-function AsyncOption(props: {documentId: string; disabled?: boolean; tabIndex?: number}) {
-  const {documentId, disabled, tabIndex} = props
+function AsyncOption(props: {
+  documentId: string
+  disabled?: boolean
+  selected?: boolean
+  tabIndex?: number
+}) {
+  const {documentId, disabled, selected, tabIndex} = props
   const [data, setData] = useState<{title: string} | null>(null)
   const [loading, setLoading] = useState(false)
   const ref = useRef<{cancel: () => void} | null>(null)
@@ -124,7 +132,14 @@ function AsyncOption(props: {documentId: string; disabled?: boolean; tabIndex?: 
   }, [documentId])
 
   return (
-    <Card data-as="button" disabled={disabled} padding={3} tabIndex={tabIndex}>
+    <Card
+      data-as="button"
+      disabled={disabled}
+      padding={3}
+      radius={1}
+      selected={selected}
+      tabIndex={tabIndex}
+    >
       {loading && (
         <Text muted>
           <>Loading…</>

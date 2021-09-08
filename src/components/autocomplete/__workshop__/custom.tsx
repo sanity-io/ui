@@ -10,6 +10,7 @@ export default function CustomStory() {
   const border = useBoolean('Border', true, 'Props')
   const disabled = useBoolean('Disabled', false, 'Props')
   const fontSize = Number(useSelect('Font size', WORKSHOP_TEXT_SIZE_OPTIONS, 2, 'Props'))
+  const openButton = useBoolean('Open button', true, 'Props')
   const radius = Number(useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props'))
   const readOnly = useBoolean('Read only', false, 'Props')
   const [value, setValue] = useState('')
@@ -55,6 +56,7 @@ export default function CustomStory() {
           fontSize={fontSize}
           id="custom"
           onChange={setValue}
+          openButton={openButton}
           options={options}
           placeholder="Search"
           radius={radius}

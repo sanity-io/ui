@@ -20,9 +20,7 @@ export const countriesStore = {
     }, fakeDelay)
 
     return {
-      cancel: () => {
-        clearTimeout(timeout)
-      },
+      cancel: () => clearTimeout(timeout),
     }
   },
 
@@ -45,9 +43,7 @@ export const countriesStore = {
     }, fakeDelay)
 
     return {
-      cancel: () => {
-        clearTimeout(timeout)
-      },
+      cancel: () => clearTimeout(timeout),
     }
   },
 }
