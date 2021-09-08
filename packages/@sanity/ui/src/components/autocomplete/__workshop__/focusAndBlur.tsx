@@ -2,6 +2,7 @@ import {Autocomplete, Box, Button, Card, Code, Stack} from '@sanity/ui'
 import React, {useCallback, useState} from 'react'
 
 export default function FocusAndBlurStory() {
+  const [value, setValue] = useState('')
   const [log, setLog] = useState<string[]>([])
   const handleBlur = useCallback(() => setLog((v) => v.concat(['blur'])), [])
   const handleFocus = useCallback(() => setLog((v) => v.concat(['focus'])), [])
@@ -13,10 +14,12 @@ export default function FocusAndBlurStory() {
         <Autocomplete
           id="focus-and-blur"
           onBlur={handleBlur}
+          onChange={setValue}
           onFocus={handleFocus}
           openButton
           options={[{value: 'foo'}, {value: 'bar'}]}
           placeholder="Search"
+          value={value}
         />
         <Stack space={1}>
           <Card overflow="auto" padding={3} radius={2} tone="transparent">
