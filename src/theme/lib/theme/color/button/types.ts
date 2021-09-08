@@ -6,7 +6,7 @@ import {ThemeColorGenericState} from '../_generic'
 export type ThemeColorButtonModeKey = 'default' | 'ghost' | 'bleed'
 
 /**
- * @deprecated
+ * @deprecated Use `ThemeColorGenericState` instead.
  * @public
  */
 export type ThemeColorButtonState = ThemeColorGenericState

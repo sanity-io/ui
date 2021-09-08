@@ -1,3 +1,6 @@
+/**
+ * @internal
+ */
 export function _isScrollable(el: Node): boolean {
   if (!(el instanceof Element)) return false
 
