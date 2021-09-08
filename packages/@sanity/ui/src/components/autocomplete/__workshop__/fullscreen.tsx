@@ -6,6 +6,8 @@ import {
   Button,
   Card,
   Flex,
+  Heading,
+  Label,
   Layer,
   Portal,
   PortalProvider,
@@ -16,7 +18,7 @@ import {
   useToast,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {countriesStore} from '../__mocks__/apiStore'
 
 export default function Fullscreen() {
@@ -24,9 +26,12 @@ export default function Fullscreen() {
 
   const {push: pushToast} = useToast()
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+  const [closeSearchButtonElement, setCloseSearchButtonElement] =
+    useState<HTMLButtonElement | null>(null)
   const [options, setOptions] = useState<BaseAutocompleteOption[]>([])
   const searchRef = useRef<{cancel: () => void} | null>(null)
   const fetchRef = useRef<{cancel: () => void} | null>(null)
+  const openSearchButtonElementRef = useRef<HTMLButtonElement | null>(null)
   const [loading, setLoading] = useState(false)
   const [loadingCurrentRef, setLoadingCurrentRef] = useState(false)
   const [open, setOpen] = useState(false)
@@ -34,6 +39,11 @@ export default function Fullscreen() {
   const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState<string | null>(null)
   const [value, setValue] = useState<string>('')
+
+  const relatedElements = useMemo(
+    () => [closeSearchButtonElement].filter(Boolean) as HTMLElement[],
+    [closeSearchButtonElement]
+  )
 
   const search = useCallback((query: string | null) => {
     if (searchRef.current) searchRef.current.cancel()
@@ -71,11 +81,16 @@ export default function Fullscreen() {
   }, [])
 
   const renderPopover = useCallback(
-    (props: any, ref: any) => {
+    (props: {content: React.ReactNode; hidden: boolean}, ref: React.Ref<HTMLDivElement>) => {
       if (!props.hidden && error) {
         return (
           <Portal>
-            <Card padding={4} style={{position: 'absolute', inset: '0 0 0 0'}} tone="critical">
+            <Card
+              padding={4}
+              scheme="light"
+              style={{position: 'absolute', inset: '0 0 0 0'}}
+              tone="critical"
+            >
               <Flex align="center" height="fill" justify="center">
                 <Text align="center" muted>
                   Something went wrong while searching
@@ -89,7 +104,7 @@ export default function Fullscreen() {
       if (!props.hidden && query && !loading && options.length === 0) {
         return (
           <Portal>
-            <Card padding={4} style={{position: 'absolute', inset: '0 0 0 0'}}>
+            <Card padding={4} scheme="light" style={{position: 'absolute', inset: '0 0 0 0'}}>
               <Flex align="center" height="fill" justify="center">
                 <Text align="center" muted>
                   No results for <strong>‘{query}’</strong>
@@ -102,7 +117,7 @@ export default function Fullscreen() {
 
       return (
         <Portal>
-          <Card hidden={props.hidden} ref={ref}>
+          <Card hidden={props.hidden} ref={ref} scheme="light">
             {props.content}
           </Card>
         </Portal>
@@ -121,6 +136,7 @@ export default function Fullscreen() {
 
   useEffect(() => {
     if (open) inputRef.current?.focus()
+    if (!open) openSearchButtonElementRef.current?.focus()
   }, [open])
 
   useEffect(() => {
@@ -145,7 +161,13 @@ export default function Fullscreen() {
           <Card hidden={open} padding={2} scheme="dark">
             <Flex align="center">
               <Box flex={1} />
-              <Button aria-label="Search" icon={SearchIcon} mode="bleed" onClick={handleOpen} />
+              <Button
+                aria-label="Open search"
+                icon={SearchIcon}
+                mode="bleed"
+                onClick={handleOpen}
+                ref={openSearchButtonElementRef}
+              />
             </Flex>
           </Card>
           <Layer hidden={!open} style={{position: 'sticky', top: 0}}>
@@ -164,25 +186,40 @@ export default function Fullscreen() {
                     placeholder="Search"
                     radius={2}
                     ref={inputRef}
+                    relatedElements={relatedElements}
                     renderOption={renderOption}
                     renderPopover={renderPopover}
                     renderValue={renderValue}
                     value={value}
                   />
                 </Box>
-                <Button icon={CloseIcon} onClick={handleClose} mode="bleed" />
+                <Button
+                  aria-label="Close search"
+                  icon={CloseIcon}
+                  onClick={handleClose}
+                  mode="bleed"
+                  ref={setCloseSearchButtonElement}
+                />
               </Flex>
             </Card>
           </Layer>
-          <Box flex={1} ref={setPortalElement} style={{position: 'relative'}} />
+          <Card flex={1} hidden={!open} ref={setPortalElement} style={{position: 'relative'}} />
+          <Box flex={1} hidden={open} padding={4}>
+            <Heading>Welcome to this app</Heading>
+          </Box>
         </Flex>
       </PortalProvider>
     </Card>
   )
 }
 
-function AsyncOption(props: {documentId: string; disabled?: boolean; tabIndex?: number}) {
-  const {documentId, disabled, tabIndex} = props
+function AsyncOption(props: {
+  documentId: string
+  disabled?: boolean
+  selected?: boolean
+  tabIndex?: number
+}) {
+  const {documentId, disabled, selected, tabIndex} = props
   const [data, setData] = useState<{code: string; title: string} | null>(null)
   const [loading, setLoading] = useState(false)
   const ref = useRef<{cancel: () => void} | null>(null)
@@ -195,10 +232,12 @@ function AsyncOption(props: {documentId: string; disabled?: boolean; tabIndex?: 
   return (
     <Card
       aria-label={data?.title}
-      data-as="button"
+      data-as="a"
       disabled={disabled}
       padding={2}
       radius={2}
+      selected={selected}
+      style={{lineHeight: 0}}
       tabIndex={tabIndex}
     >
       <Flex align="center">
@@ -222,6 +261,11 @@ function AsyncOption(props: {documentId: string; disabled?: boolean; tabIndex?: 
               </>
             )}
           </Stack>
+        </Box>
+        <Box paddingX={2}>
+          <Label muted size={0}>
+            Country
+          </Label>
         </Box>
       </Flex>
     </Card>

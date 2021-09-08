@@ -1,6 +1,6 @@
 import {Autocomplete, Box, Card, Container, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import React, {useMemo} from 'react'
+import React, {useCallback, useMemo, useState} from 'react'
 import {
   WORKSHOP_CARD_TONE_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
@@ -20,6 +20,9 @@ export default function ExampleStory() {
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const radius = Number(useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props'))
   const readOnly = useBoolean('Read only', false, 'Props')
+  const [value, setValue] = useState('')
+
+  const handleChange = useCallback((value: string) => setValue(value), [])
 
   return (
     <Card height="fill" tone={layoutTone}>
@@ -34,6 +37,7 @@ export default function ExampleStory() {
               customValidity={customValidity}
               disabled={disabled}
               fontSize={fontSize}
+              onChange={handleChange}
               id="default"
               openButton={openButton}
               options={options}
@@ -41,6 +45,7 @@ export default function ExampleStory() {
               placeholder="Search"
               radius={radius}
               readOnly={readOnly}
+              value={value}
             />
           </Stack>
         </Box>
