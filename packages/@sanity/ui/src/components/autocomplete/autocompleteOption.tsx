@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react'
+import {_isEnterToClickElement} from '../../helpers'
 
 export interface AutocompleteOptionProps {
   children: React.ReactNode
@@ -15,6 +16,15 @@ export function AutocompleteOption(props: AutocompleteOptionProps): React.ReactE
     onSelect(value)
   }, [onSelect, value])
 
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLLIElement>) => {
+      if (event.key === 'Enter' && !_isEnterToClickElement(event.currentTarget)) {
+        handleClick()
+      }
+    },
+    [handleClick]
+  )
+
   return (
     <li
       aria-selected={selected}
@@ -22,6 +32,7 @@ export function AutocompleteOption(props: AutocompleteOptionProps): React.ReactE
       id={id}
       role="option"
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
     >
       {children}
     </li>

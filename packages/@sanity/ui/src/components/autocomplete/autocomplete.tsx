@@ -1,44 +1,29 @@
-import {ChevronDownIcon, SpinnerIcon} from '@sanity/icons'
+import {ChevronDownIcon} from '@sanity/icons'
 import React, {
   cloneElement,
   forwardRef,
   useCallback,
   useEffect,
   useMemo,
+  useReducer,
   useRef,
   useState,
 } from 'react'
-import styled, {keyframes} from 'styled-components'
 import {EMPTY_ARRAY} from '../../constants'
-import {focusFirstDescendant} from '../../helpers'
+import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
 import {useForwardedRef, useResponsiveProp} from '../../hooks'
-import {
-  Box,
-  BoxProps,
-  Button,
-  ButtonProps,
-  Card,
-  Popover,
-  PopoverProps,
-  Stack,
-  Text,
-  TextInput,
-} from '../../primitives'
-import {Placement, PopoverMargins} from '../../types'
+import {Box, BoxProps, Button, Card, PopoverProps, Stack, Text, TextInput} from '../../primitives'
+import {AnimatedSpinnerIcon, ListBox, ResultsPopover, Root} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
-
-/**
- * @public
- */
-export type AutocompleteOpenButtonProps = Omit<ButtonProps, 'as'> &
-  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
-
-/**
- * @public
- */
-export interface BaseAutocompleteOption {
-  value: string
-}
+import {autocompleteReducer} from './autocompleteReducer'
+import {
+  EMPTY_RECORD,
+  AUTOCOMPLETE_LISTBOX_IGNORE_KEYS,
+  AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS,
+  AUTOCOMPLETE_POPOVER_MARGINS,
+  AUTOCOMPLETE_POPOVER_PLACEMENT,
+} from './constants'
+import {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
 
 /**
  * @public
@@ -67,6 +52,10 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
   prefix?: React.ReactNode
   radius?: number | number[]
+  /**
+   * @beta
+   */
+  relatedElements?: HTMLElement[]
   renderOption?: (option: Option) => React.ReactElement
   /**
    * @beta
@@ -84,69 +73,11 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   value?: string
 }
 
-const POPOVER_MARGINS: PopoverMargins = [0, 1, 1, 1]
-const POPOVER_PLACEMENT: Placement = 'bottom-start'
-const POPOVER_FALLBACK_PLACEMENTS: Placement[] = ['top-start']
-
-const Root = styled.div`
-  position: relative;
-`
-
-const ListBox = styled(Box)`
-  & > ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-`
-
-const ResultsPopover = styled(Popover)`
-  & > div {
-    min-height: 43px;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  &[data-popper-reference-hidden='true'] {
-    display: none;
-  }
-`
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-const AnimatedSpinnerIcon = styled(SpinnerIcon)`
-  animation: ${rotate} 500ms linear infinite;
-`
-
-const EMPTY_RECORD = {}
-
 const defaultRenderValue = (value: string, option?: BaseAutocompleteOption) =>
   option ? option.value : value
 
 const defaultFilterOption = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
-
-const LIST_IGNORE_KEYS = [
-  'Control',
-  'Shift',
-  'Alt',
-  'Enter',
-  'Home',
-  'End',
-  'PageUp',
-  'PageDown',
-  'Meta',
-  'Tab',
-  'CapsLock',
-]
 
 const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   Option extends BaseAutocompleteOption
@@ -197,12 +128,23 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     prefix,
     radius = 3,
     readOnly,
+    relatedElements,
     renderOption: renderOptionProp,
     renderPopover,
     renderValue = defaultRenderValue,
     value: valueProp = '',
     ...restProps
   } = props
+
+  const [state, dispatch] = useReducer(autocompleteReducer, {
+    activeValue: valueProp || null,
+    focused: false,
+    listFocused: false,
+    query: null,
+    value: valueProp || null,
+  })
+
+  const {activeValue, focused, listFocused, query, value} = state
 
   const defaultRenderOption = useCallback(
     ({value}: BaseAutocompleteOption) => (
@@ -219,30 +161,29 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     typeof renderOptionProp === 'function' ? renderOptionProp : defaultRenderOption
   const filterOption =
     typeof filterOptionProp === 'function' ? filterOptionProp : defaultFilterOption
-  const [value, setValue] = useState(valueProp)
-  const [query, setQuery] = useState<string | null>(null)
-  const valueRef = useRef(value)
-  const [focused, setFocused] = useState(false)
-  const listboxId = `${id}-listbox`
-  const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const [activeIndex, setActiveIndex] = useState(-1)
-  const inputRef = useRef<HTMLInputElement | null>(null)
-  const listRef = useRef<HTMLDivElement | null>(null)
-  const padding = useResponsiveProp(paddingProp)
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const [resultsPopoverElement, setResultsPopoverElement] = useState<HTMLDivElement | null>(null)
-  const currentOption = value ? options.find((o) => o.value === value) : undefined
+  const inputElementRef = useRef<HTMLInputElement | null>(null)
+  const listBoxElementRef = useRef<HTMLDivElement | null>(null)
+  const focusedElementRef = useRef<HTMLElement | null>(null)
+  const valueRef = useRef(value)
+  const valuePropRef = useRef(valueProp)
+  const forwardedRef = useForwardedRef(ref)
+  const popoverMouseWithinRef = useRef(false)
+  const listBoxId = `${id}-listbox`
+  const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
+  const padding = useResponsiveProp(paddingProp)
+  const currentOption = useMemo(
+    () => (value !== null ? options.find((o) => o.value === value) : undefined),
+    [options, value]
+  )
   const filteredOptions = useMemo(
     () => options.filter((option) => (query ? filterOption(query, option) : true)),
     [filterOption, options, query]
   )
-  const activeItemId = filteredOptions[activeIndex]
-    ? `${id}-option-${filteredOptions[activeIndex].value}`
-    : undefined
-  const optionsLen = filteredOptions.length
-  const expanded = (query !== null && loading) || (focused && optionsLen > 0 && query !== null)
-  const forwardedRef = useForwardedRef(ref)
-  const popoverMouseWithinRef = useRef(false)
+  const filteredOptionsLen = filteredOptions.length
+  const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
+  const expanded = (query !== null && loading) || (focused && query !== null)
 
   const handleRootBlur = useCallback(
     (event: React.FocusEvent<HTMLInputElement>) => {
@@ -254,119 +195,143 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           return
         }
 
-        const focusedEl = document.activeElement
-        const focusInside =
-          (focusedEl && rootElement && rootElement.contains(focusedEl)) ||
-          (focusedEl && resultsPopoverElement && resultsPopoverElement.contains(focusedEl))
+        const elements: HTMLElement[] = (relatedElements || []).concat(
+          rootElement ? [rootElement] : [],
+          resultsPopoverElement ? [resultsPopoverElement] : []
+        )
 
-        if (!focusInside) {
-          setFocused(false)
-          setQuery(null)
+        let focusInside = false
+
+        if (document.activeElement) {
+          for (const e of elements) {
+            if (e === document.activeElement || e.contains(document.activeElement)) {
+              focusInside = true
+              break
+            }
+          }
+        }
+
+        if (focusInside === false) {
+          dispatch({type: 'root/blur'})
+          popoverMouseWithinRef.current = false
           if (onQueryChange) onQueryChange(null)
           if (onBlur) onBlur(event)
         }
       }, 0)
     },
-    [onBlur, onQueryChange, resultsPopoverElement, rootElement]
+    [onBlur, onQueryChange, relatedElements, resultsPopoverElement, rootElement]
   )
+
+  const handleRootFocus = useCallback((event: React.FocusEvent) => {
+    const listBoxElement = listBoxElementRef.current
+    const focusedElement = event.target instanceof HTMLElement ? event.target : null
+
+    focusedElementRef.current = focusedElement
+
+    const nextListFocused = Boolean(
+      listBoxElement && focusedElement && listBoxElement.contains(focusedElement)
+    )
+
+    dispatch({type: 'root/setListFocused', listFocused: nextListFocused})
+  }, [])
 
   const handleOptionSelect = useCallback(
     (v: string) => {
-      if (onSelect) onSelect(v)
-      setValue(v)
-      if (onChange) onChange(v)
-      setQuery(null)
-      if (onQueryChange) onQueryChange(null)
-      setFocused(false)
-      inputRef.current?.focus()
+      dispatch({type: 'option/select', value: v})
+
       popoverMouseWithinRef.current = false
+
+      if (onSelect) onSelect(v)
+
+      valueRef.current = v
+
+      if (onChange) onChange(v)
+      if (onQueryChange) onQueryChange(null)
+
+      inputElementRef.current?.focus()
     },
     [onChange, onSelect, onQueryChange]
   )
 
   const handleRootKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
-      const filteredOptionsLen = filteredOptions.length
-
       if (event.key === 'ArrowDown') {
         event.preventDefault()
+
         if (!filteredOptionsLen) return
-        setActiveIndex((index) => (index + 1) % filteredOptionsLen)
+
+        const activeOption = filteredOptions.find((o) => o.value === activeValue)
+        const activeIndex = activeOption ? filteredOptions.indexOf(activeOption) : -1
+        const nextActiveOption = filteredOptions[(activeIndex + 1) % filteredOptionsLen]
+
+        if (nextActiveOption) {
+          dispatch({type: 'root/setActiveValue', value: nextActiveOption.value, listFocused: true})
+        }
 
         return
       }
 
       if (event.key === 'ArrowUp') {
         event.preventDefault()
+
         if (!filteredOptionsLen) return
-        setActiveIndex((index) => {
-          return index === -1
-            ? filteredOptionsLen - 1
-            : (filteredOptionsLen + index - 1) % filteredOptionsLen
-        })
 
-        return
-      }
+        const activeOption = filteredOptions.find((o) => o.value === activeValue)
+        const activeIndex = activeOption ? filteredOptions.indexOf(activeOption) : -1
+        const nextActiveOption =
+          filteredOptions[
+            activeIndex === -1
+              ? filteredOptionsLen - 1
+              : (filteredOptionsLen + activeIndex - 1) % filteredOptionsLen
+          ]
 
-      if (event.key === 'Escape') {
-        setFocused(false)
-        valueRef.current = ''
-        setQuery(null)
-        if (onQueryChange) onQueryChange(null)
-
-        inputRef.current?.focus()
-
-        return
-      }
-
-      if (event.key === 'Enter') {
-        event.preventDefault()
-        event.stopPropagation()
-
-        const activeOpen = filteredOptions[activeIndex]
-
-        if (activeOpen) {
-          handleOptionSelect(activeOpen.value)
+        if (nextActiveOption) {
+          dispatch({type: 'root/setActiveValue', value: nextActiveOption.value, listFocused: true})
         }
 
         return
       }
 
+      if (event.key === 'Escape') {
+        dispatch({type: 'root/escape'})
+        popoverMouseWithinRef.current = false
+        if (onQueryChange) onQueryChange(null)
+        inputElementRef.current?.focus()
+
+        return
+      }
+
       const target = event.target as Node
-      const listEl = listRef.current
+      const listEl = listBoxElementRef.current
 
       if (
         (listEl === target || listEl?.contains(target)) &&
-        !LIST_IGNORE_KEYS.includes(event.key)
+        !AUTOCOMPLETE_LISTBOX_IGNORE_KEYS.includes(event.key)
       ) {
-        inputRef.current?.focus()
+        inputElementRef.current?.focus()
 
         return
       }
     },
-    [filteredOptions, handleOptionSelect, onQueryChange, activeIndex]
+    [activeValue, filteredOptions, filteredOptionsLen, onQueryChange]
   )
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const q = event.currentTarget.value
+      const nextQuery = event.currentTarget.value
 
-      valueRef.current = q
-      setQuery(q)
+      dispatch({type: 'input/change', query: nextQuery})
 
-      if (!focused) {
-        setFocused(true)
-      }
-
-      if (onQueryChange) onQueryChange(q)
+      if (onQueryChange) onQueryChange(nextQuery)
     },
-    [focused, onQueryChange]
+    [onQueryChange]
   )
 
   const handleInputFocus = useCallback(
     (event: React.FocusEvent<HTMLInputElement>) => {
       if (!focused) {
-        setFocused(true)
+        dispatch({type: 'input/focus'})
+
         if (onFocus) onFocus(event)
       }
     },
@@ -382,52 +347,69 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   }, [])
 
   const handleClearButtonClick = useCallback(() => {
+    dispatch({type: 'root/clear'})
     valueRef.current = ''
-    setValue('')
     if (onChange) onChange('')
-    setQuery(null)
     if (onQueryChange) onQueryChange(null)
-    inputRef.current?.focus()
+    inputElementRef.current?.focus()
   }, [onChange, onQueryChange])
 
-  const handleClearButtonFocus = useCallback(() => setFocused(true), [])
+  const handleClearButtonFocus = useCallback(() => {
+    dispatch({type: 'input/focus'})
+  }, [])
 
   // Change the value when `value` prop changes
   useEffect(() => {
-    if (valueProp !== valueRef.current) {
+    if (valueProp !== valuePropRef.current) {
+      dispatch({type: 'value/change', value: valueProp})
+      valuePropRef.current = valueProp
       valueRef.current = valueProp
-      setValue(valueProp)
-      setQuery(null)
+      if (onQueryChange) onQueryChange(null)
     }
-  }, [valueProp])
+  }, [onQueryChange, valueProp, value])
 
-  // Reset selected item when the list changes
-  // @todo: what if the list length didn’t change, but the list contents changed?
-  useEffect(() => setActiveIndex(-1), [optionsLen])
+  // Reset active item when closing
+  useEffect(() => {
+    if (!focused) {
+      if (valueRef.current) {
+        dispatch({type: 'root/setActiveValue', value: valueRef.current})
+      }
+    }
+  }, [focused])
 
   // Focus the selected item
   useEffect(() => {
-    const listElement = listRef.current
+    const listElement = listBoxElementRef.current
 
     if (!listElement) return
 
-    const activeItemElement = listElement.childNodes[activeIndex] as HTMLLIElement | undefined
+    const activeOption = filteredOptions.find((o) => o.value === activeValue)
 
-    if (activeItemElement) {
-      focusFirstDescendant(activeItemElement)
+    if (activeOption) {
+      const activeIndex = filteredOptions.indexOf(activeOption)
+      const activeItemElement = listElement.childNodes[activeIndex] as HTMLLIElement | undefined
+
+      if (activeItemElement) {
+        if (_hasFocus(activeItemElement)) {
+          // already focused
+          return
+        }
+
+        focusFirstDescendant(activeItemElement)
+      }
     }
-  }, [activeIndex])
+  }, [activeValue, filteredOptions])
 
   const setRef = useCallback(
     (el: HTMLInputElement | null) => {
-      inputRef.current = el
+      inputElementRef.current = el
       forwardedRef.current = el
     },
     [forwardedRef]
   )
 
   const clearButton = useMemo(() => {
-    if (!loading && !disabled && value.length > 0) {
+    if (!loading && !disabled && value) {
       return {
         'aria-label': 'Clear',
         onFocus: handleClearButtonFocus,
@@ -446,29 +428,37 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const handleOpenClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      inputRef.current?.focus()
-      setQuery(query || renderValue(value, currentOption) || '')
+      dispatch({
+        type: 'root/open',
+        query: value ? renderValue(value, currentOption) : '',
+      })
+
       if (openButtonProps.onClick) openButtonProps.onClick(event)
+
+      _raf(() => inputElementRef.current?.focus())
     },
-    [currentOption, openButtonProps, query, renderValue, value]
+    [currentOption, openButtonProps, renderValue, value]
   )
 
   const openButtonNode = useMemo(
     () =>
       !disabled && !readOnly && openButton ? (
-        <Box padding={openButtonBoxPadding}>
+        <Box aria-hidden={expanded} padding={openButtonBoxPadding}>
           <Button
-            {...openButtonProps}
+            aria-label="Open"
+            disabled={expanded}
             fontSize={fontSize}
             icon={ChevronDownIcon}
             mode="bleed"
-            onClick={handleOpenClick}
             padding={openButtonPadding}
+            {...openButtonProps}
+            onClick={handleOpenClick}
           />
         </Box>
       ) : undefined,
     [
       disabled,
+      expanded,
       fontSize,
       handleOpenClick,
       openButton,
@@ -479,13 +469,25 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     ]
   )
 
+  const inputValue = useMemo(() => {
+    if (query === null) {
+      if (value !== null) {
+        return renderValue(value, currentOption)
+      }
+
+      return ''
+    }
+
+    return query
+  }, [currentOption, query, renderValue, value])
+
   const input = (
     <TextInput
       {...restProps}
       aria-activedescendant={activeItemId}
       aria-autocomplete="list"
       aria-expanded={expanded}
-      aria-owns={listboxId}
+      aria-owns={listBoxId}
       autoCapitalize="off"
       autoComplete="off"
       autoCorrect="off"
@@ -509,25 +511,36 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       role="combobox"
       spellCheck={false}
       suffix={openButtonNode}
-      value={query === null ? renderValue(value, currentOption) : query}
+      value={inputValue}
     />
+  )
+
+  const handleListBoxKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      // If the focus is currently in the list, move focus to the input element
+      if (event.key === 'Tab') {
+        if (listFocused) inputElementRef.current?.focus()
+      }
+    },
+    [listFocused]
   )
 
   const content = useMemo(() => {
     if (filteredOptions.length === 0) return null
 
     return (
-      <ListBox padding={1} {...listBox} tabIndex={-1}>
+      <ListBox onKeyDown={handleListBoxKeyDown} padding={1} {...listBox} tabIndex={-1}>
         <Stack
           as="ul"
           aria-multiselectable={false}
-          id={listboxId}
-          ref={listRef}
+          id={listBoxId}
+          ref={listBoxElementRef}
           role="listbox"
           space={1}
         >
-          {filteredOptions.map((option, optionIndex) => {
-            const active = activeIndex > -1 ? optionIndex === activeIndex : currentOption === option
+          {filteredOptions.map((option) => {
+            const active =
+              activeValue !== null ? option.value === activeValue : currentOption === option
 
             return (
               <AutocompleteOption
@@ -538,9 +551,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
                 value={option.value}
               >
                 {cloneElement(renderOption(option), {
-                  'data-selected': active ? '' : undefined,
                   disabled: loading,
-                  tabIndex: active ? 0 : -1,
+                  selected: active,
+                  tabIndex: listFocused && active ? 0 : -1,
                 })}
               </AutocompleteOption>
             )
@@ -549,47 +562,54 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       </ListBox>
     )
   }, [
+    activeValue,
     currentOption,
     filteredOptions,
     handleOptionSelect,
+    handleListBoxKeyDown,
     id,
     listBox,
-    listboxId,
+    listBoxId,
+    listFocused,
     loading,
     renderOption,
-    activeIndex,
   ])
 
   const results = useMemo(() => {
     if (renderPopover) {
       return renderPopover(
-        {content, hidden: !expanded, inputElement: inputRef.current},
+        {content, hidden: !expanded, inputElement: inputElementRef.current},
         setResultsPopoverElement
       )
     }
 
+    if (filteredOptionsLen === 0) {
+      return null
+    }
+
     return (
       <ResultsPopover
-        __unstable_margins={POPOVER_MARGINS}
+        __unstable_margins={AUTOCOMPLETE_POPOVER_MARGINS}
         arrow={false}
         constrainSize
         content={content}
-        fallbackPlacements={POPOVER_FALLBACK_PLACEMENTS}
+        fallbackPlacements={AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS}
         matchReferenceWidth
         onMouseEnter={handlePopoverMouseEnter}
         onMouseLeave={handlePopoverMouseLeave}
         open={expanded}
+        placement={AUTOCOMPLETE_POPOVER_PLACEMENT}
         portal
-        placement={POPOVER_PLACEMENT}
         radius={radius}
         ref={setResultsPopoverElement}
-        referenceElement={inputRef.current}
+        referenceElement={inputElementRef.current}
         {...popover}
       />
     )
   }, [
     content,
     expanded,
+    filteredOptionsLen,
     handlePopoverMouseEnter,
     handlePopoverMouseLeave,
     popover,
@@ -601,6 +621,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     <Root
       data-ui="Autocomplete"
       onBlur={handleRootBlur}
+      onFocus={handleRootFocus}
       onKeyDown={handleRootKeyDown}
       ref={setRootElement}
     >
