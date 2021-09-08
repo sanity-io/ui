@@ -11,6 +11,10 @@ import {
 //   IgnoreUtilFocusChanges: false,
 // }
 
+export function _hasFocus(element: HTMLElement): boolean {
+  return Boolean(document.activeElement) && element.contains(document.activeElement)
+}
+
 /**
  * @internal
  */

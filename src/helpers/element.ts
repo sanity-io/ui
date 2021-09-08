@@ -1,6 +1,13 @@
 /**
  * @internal
  */
+export function _isEnterToClickElement(element: HTMLElement): boolean {
+  return isHTMLAnchorElement(element) || isHTMLButtonElement(element)
+}
+
+/**
+ * @internal
+ */
 export function isHTMLElement(node: unknown): node is HTMLElement {
   return node instanceof Node && node.nodeType === Node.ELEMENT_NODE
 }
