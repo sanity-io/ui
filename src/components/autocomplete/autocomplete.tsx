@@ -132,7 +132,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     renderOption: renderOptionProp,
     renderPopover,
     renderValue = defaultRenderValue,
-    value: valueProp = '',
+    value: valueProp,
     ...restProps
   } = props
 
@@ -237,7 +237,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const handleOptionSelect = useCallback(
     (v: string) => {
-      dispatch({type: 'option/select', value: v})
+      dispatch({type: 'value/change', value: v})
 
       popoverMouseWithinRef.current = false
 
@@ -361,12 +361,20 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   // Change the value when `value` prop changes
   useEffect(() => {
     if (valueProp !== valuePropRef.current) {
-      dispatch({type: 'value/change', value: valueProp})
       valuePropRef.current = valueProp
-      valueRef.current = valueProp
-      if (onQueryChange) onQueryChange(null)
+
+      if (valueProp !== undefined) {
+        dispatch({type: 'value/change', value: valueProp})
+        valueRef.current = valueProp
+      }
+
+      return
     }
-  }, [onQueryChange, valueProp, value])
+
+    if (valueProp !== value) {
+      dispatch({type: 'value/change', value: valueProp || null})
+    }
+  }, [valueProp, value])
 
   // Reset active item when closing
   useEffect(() => {

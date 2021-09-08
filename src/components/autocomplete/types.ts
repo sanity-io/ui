@@ -88,17 +88,9 @@ export interface AutocompleteInputFoocusMsg {
 /**
  * @internal
  */
-export interface AutocompleteOptionSelectMsg {
-  type: 'option/select'
-  value: string
-}
-
-/**
- * @internal
- */
 export interface AutocompleteValueChangeMsg {
   type: 'value/change'
-  value: string
+  value: string | null
 }
 
 /**
@@ -113,5 +105,4 @@ export type AutocompleteMsg =
   | AutocompleteRootSetListFocusedMsg
   | AutocompleteInputChangeMsg
   | AutocompleteInputFoocusMsg
-  | AutocompleteOptionSelectMsg
   | AutocompleteValueChangeMsg
