@@ -42,10 +42,6 @@ export function autocompleteReducer(
     return {...state, listFocused: msg.listFocused}
   }
 
-  if (msg.type === 'option/select') {
-    return {...state, activeValue: msg.value, focused: false, query: null, value: msg.value}
-  }
-
   if (msg.type === 'value/change') {
     return {...state, activeValue: msg.value, query: null, value: msg.value}
   }
