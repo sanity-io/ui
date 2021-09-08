@@ -1,7 +1,7 @@
 import {ThemeColorGenericState} from '../_generic'
 
 /**
- * @deprecated
+ * @deprecated Use `ThemeColorGenericState` instead.
  * @public
  */
 export type ThemeColorCardState = ThemeColorGenericState
