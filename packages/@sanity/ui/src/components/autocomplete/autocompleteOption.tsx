@@ -13,7 +13,11 @@ export function AutocompleteOption(props: AutocompleteOptionProps): React.ReactE
   const {children, id, onSelect, selected, value} = props
 
   const handleClick = useCallback(() => {
-    onSelect(value)
+    // Calling the `onSelect` in a timeout is a fix to
+    // allow the `click` event to propagate in some cases
+    setTimeout(() => {
+      onSelect(value)
+    }, 0)
   }, [onSelect, value])
 
   const handleKeyDown = useCallback(
