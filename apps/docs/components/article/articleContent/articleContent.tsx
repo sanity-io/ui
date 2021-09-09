@@ -31,15 +31,13 @@ const UList = styled(Stack).attrs({forwardedAs: 'ul'})`
   & > li {
     position: relative;
 
-    & > span:first-child {
-      display: block;
-      left: -1em;
-      width: 1em;
-      top: -0.66em;
-      display: block;
-      position: absolute;
-
+    & > span {
       &:before {
+        display: block;
+        left: -1em;
+        width: 1em;
+        top: -0.66em;
+        position: absolute;
         content: '•';
         font-weight: 700;
       }
