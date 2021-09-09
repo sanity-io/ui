@@ -48,4 +48,7 @@ export const settings = {
       ],
     },
   ],
+  preview: {
+    prepare: () => ({title: 'Website settings'}),
+  },
 }

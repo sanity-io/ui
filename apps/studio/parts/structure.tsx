@@ -117,4 +117,4 @@ const defaultListItems = S.documentTypeListItems().filter((listItem) => {
 export default () =>
   S.list()
     .title('Content')
-    .items([settingsListItem, S.divider(), packagesListItem, ...defaultListItems, S.divider()])
+    .items([settingsListItem, S.divider(), packagesListItem, ...defaultListItems])
