@@ -9,7 +9,7 @@ export function AppFooter() {
   const {colorScheme} = useApp()
 
   return (
-    <Card borderTop paddingX={[3, 4, 5]} paddingY={[1, 2, 3]} style={{minHeight: 'auto'}}>
+    <Card borderTop paddingX={[3, 4, 5]} paddingY={[1, 2, 3]}>
       <Flex align="center" as="p" gap={1} justify="center">
         <Text as="span" muted size={1}>
           Made with

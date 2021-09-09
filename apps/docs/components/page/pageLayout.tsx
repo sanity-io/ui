@@ -33,7 +33,7 @@ const ContentCard = styled(Card).attrs({forwardedAs: 'main'})`
 
 export function PageLayout({children, menu, menuHeader}: PageLayoutProps) {
   return (
-    <Card flex={1} style={{minHeight: 'auto'}}>
+    <Card flex={1}>
       <Root>
         {(menuHeader || (menu && menu.items.length > 1)) && (
           <NavBox display={['none', 'none', 'block']} flex={1}>

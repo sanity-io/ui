@@ -51,7 +51,7 @@ export function AppNavbar() {
   const handleMenuClose = useCallback(() => setMenuOpen(false), [])
 
   return (
-    <Card as="header" borderBottom padding={[2, 3, 4]} style={{minHeight: 'auto'}}>
+    <Card as="header" borderBottom padding={[2, 3, 4]}>
       <Flex as="nav" align="center">
         <Flex align="center" flex={1}>
           <Link href="/" passHref>
