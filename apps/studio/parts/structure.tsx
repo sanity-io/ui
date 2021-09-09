@@ -5,6 +5,7 @@ import documentStore from 'part:@sanity/base/datastore/document'
 import React from 'react'
 import {map} from 'rxjs/operators'
 import {isArray, isRecord, isString} from '../lib/helpers'
+import {ArticlePreview} from './documentView/articlePreview'
 
 const STRUCTURE_CUSTOM_TYPES = [
   'api.class',
@@ -113,6 +114,15 @@ const defaultListItems = S.documentTypeListItems().filter((listItem) => {
 
   return !STRUCTURE_CUSTOM_TYPES.includes(id)
 })
+
+export function getDefaultDocumentNode({schemaType}: {schemaType: string}) {
+  // Add `Preview` tab to the `article` document form
+  if (schemaType === 'article') {
+    return S.document().views([S.view.form(), S.view.component(ArticlePreview).title('Preview')])
+  }
+
+  return undefined
+}
 
 export default () =>
   S.list()
