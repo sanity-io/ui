@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import React, {useCallback, useMemo} from 'react'
 import {scopes} from '../../workshopScopes'
 import {AppLayout, SEO, useApp} from '$components/app'
-import {features, workshop} from '$config'
+import {app, features, workshop} from '$config'
 import {loadGlobalPageData} from '$lib/page'
 import {isRecord} from '$lib/types'
 
@@ -49,7 +49,7 @@ function WorkshopPage() {
   return (
     <>
       <Head>
-        <title>Workshop – Sanity UI</title>
+        <title>Workshop – {app.siteName}</title>
       </Head>
 
       <SEO seo={seo} title={isRecord(target) && target.title} />

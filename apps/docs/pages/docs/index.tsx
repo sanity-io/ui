@@ -4,7 +4,7 @@ import {AppLayout, SEO, useApp} from '$components/app'
 import {Article} from '$components/article'
 import {PageLayout} from '$components/page'
 import {Screen} from '$components/screen'
-import {features} from '$config'
+import {app, features} from '$config'
 import {loadDocsPageData} from '$lib/page'
 import {isRecord} from '$lib/types'
 
@@ -22,7 +22,13 @@ export default function DocsPage() {
 
   return (
     <>
-      <Head>{target && <title>{target.title} – Sanity UI</title>}</Head>
+      <Head>
+        {target && (
+          <title>
+            {target.title} – {app.siteName}
+          </title>
+        )}
+      </Head>
 
       <SEO seo={seo} title={isRecord(target) && target.title} />
 

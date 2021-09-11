@@ -6,7 +6,7 @@ import React, {useCallback} from 'react'
 import {AppLayout, useApp} from '$components/app'
 import {NavLink} from '$components/navLink'
 import {PageLayout} from '$components/page'
-import {features} from '$config'
+import {app, features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
 import {getClient} from '$sanity'
@@ -123,7 +123,9 @@ function ReferencePackagePage({params}: any) {
   return (
     <AppLayout>
       <Head>
-        <title>@sanity/{params.name} – Sanity UI</title>
+        <title>
+          @sanity/{params.name} – {app.siteName}
+        </title>
       </Head>
 
       <PageLayout menu={menu} menuHeader={menuHeader}>

@@ -1,3 +1,4 @@
+import {white} from '@sanity/color'
 import {parseFlag} from '$lib/config'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
@@ -7,6 +8,9 @@ const __DEV__ = process.env.NODE_ENV === 'development'
  * These are ignored from pages generated from screen IDs in the database.
  */
 export const app = {
+  themeColor: white.hex,
+  siteName: 'Sanity UI',
+  description: 'An ergonomic toolkit to design with code.',
   staticScreenIds: ['arcade', 'workshop'],
 }
 

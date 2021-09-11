@@ -2,6 +2,7 @@ import {WorkshopFrame} from '@sanity/ui-workshop'
 import React from 'react'
 import {scopes} from '../../workshopScopes'
 import {useApp} from '$components/app'
+import {app} from '$config'
 
 function WorkshopFramePage() {
   const {setColorScheme} = useApp()
@@ -11,7 +12,7 @@ function WorkshopFramePage() {
       frameUrl="/frame/"
       scopes={scopes}
       setScheme={setColorScheme}
-      title="Sanity UI"
+      title={app.siteName}
     />
   )
 }

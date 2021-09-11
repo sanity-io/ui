@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import {AppLayout, SEO, useApp} from '$components/app'
 import {Screen} from '$components/screen'
-import {features} from '$config'
+import {app, features} from '$config'
 import {loadGlobalPageData} from '$lib/page'
 import {isRecord} from '$lib/types'
 
@@ -21,7 +21,7 @@ function IndexPage() {
   return (
     <>
       <Head>
-        <title>Sanity UI</title>
+        <title>{app.siteName}</title>
       </Head>
 
       <SEO seo={seo} title={isRecord(target) && target.title} />

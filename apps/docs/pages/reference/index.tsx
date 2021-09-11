@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
 import {AppLayout, useApp} from '$components/app'
 import {PageLayout} from '$components/page'
-import {features} from '$config'
+import {app, features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
 
@@ -68,7 +68,7 @@ function ReferencePage({params}: any) {
   return (
     <AppLayout>
       <Head>
-        <title>API Reference – Sanity UI</title>
+        <title>API Reference – {app.siteName}</title>
       </Head>
 
       <PageLayout menu={menu} menuHeader={menuHeader} />

@@ -6,7 +6,7 @@ import React, {useCallback} from 'react'
 import {AppLayout, useApp} from '$components/app'
 import {PageLayout} from '$components/page'
 import {ReleaseContent} from '$components/reference'
-import {features} from '$config'
+import {app, features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
 import {getClient} from '$sanity'
@@ -119,7 +119,7 @@ function ReferenceVersionPage({params}: any) {
     <AppLayout>
       <Head>
         <title>
-          @sanity/{params.name} v{params.version} – Sanity UI
+          @sanity/{params.name} v{params.version} – {app.siteName}
         </title>
       </Head>
 

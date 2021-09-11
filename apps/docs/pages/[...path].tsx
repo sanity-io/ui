@@ -4,7 +4,7 @@ import {AppLayout, SEO, useApp} from '$components/app'
 import {Article} from '$components/article'
 import {PageLayout} from '$components/page'
 import {Screen} from '$components/screen'
-import {features} from '$config'
+import {app, features} from '$config'
 import {loadGlobalPageData, loadGlobalPagePaths} from '$lib/page'
 import {isRecord} from '$lib/types'
 import {NotFoundScreen} from '$screens/notFound'
@@ -30,8 +30,13 @@ export default function PathPage() {
   return (
     <>
       <Head>
-        {target && <title>{target.title} – Sanity UI</title>}
-        {!target && <title>Page not found – Sanity UI</title>}
+        {target && (
+          <title>
+            {target.title} – {app.siteName}
+          </title>
+        )}
+
+        {!target && <title>Page not found – {app.siteName}</title>}
       </Head>
 
       <SEO seo={seo} title={isRecord(target) && target.title} />

@@ -8,6 +8,7 @@ import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
 import {AppProvider} from '$components/app'
+import {app} from '$config'
 import {useDocsPageData, useGlobalPageData, useReferencePageData} from '$lib/page'
 
 Refractor.registerLanguage(bash)
@@ -39,13 +40,13 @@ function DefaultMeta() {
       />
 
       {/* Default meta data */}
-      <meta name="description" content="An ergonomic toolkit to design with code." />
+      <meta name="description" content={app.description} />
 
       {/* Default Twitter metadata */}
       <meta name="twitter:site" content="@sanity_io" />
 
       {/* Default OG metadata */}
-      <meta property="og:site_name" content="Sanity UI" />
+      <meta property="og:site_name" content={app.siteName} />
     </Head>
   )
 }

@@ -1,4 +1,4 @@
-import {hues} from '@sanity/color'
+import {white} from '@sanity/color'
 import NextDocument, {
   DocumentContext,
   DocumentProps,
@@ -9,7 +9,7 @@ import NextDocument, {
 } from 'next/document'
 import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
-import {basePath, ga} from '$config'
+import {app, basePath, ga} from '$config'
 
 const GA_TRACKING_CODE =
   ga.trackingId &&
@@ -58,7 +58,7 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
           )}
           {GA_TRACKING_CODE && <script dangerouslySetInnerHTML={{__html: GA_TRACKING_CODE}} />}
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
-          <meta name="theme-color" content={hues.red[500].hex} />
+          <meta name="theme-color" content={app.themeColor} />
           <meta name="msapplication-tap-highlight" content="no" />
           <link rel="apple-touch-icon" sizes="48x48" href={`${basePath}/sanity-favicon-48.png`} />
           <link rel="apple-touch-icon" sizes="72x72" href={`${basePath}/sanity-favicon-72.png`} />

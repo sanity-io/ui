@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
+import {app} from '$config'
 import {imageUrlBuilder} from '$sanity'
 
 export function SEO({seo, title}: {seo: any; title: any}) {
@@ -14,11 +15,8 @@ export function SEO({seo, title}: {seo: any; title: any}) {
 
       {/* OpenGraph */}
       <meta property="og:type" content={seo?.og?.type || 'website'} />
-      <meta property="og:title" content={seo?.og?.title || title || 'Sanity UI'} />
-      <meta
-        property="og:description"
-        content={seo?.og?.description || 'An ergonomic toolkit to design with code.'}
-      />
+      <meta property="og:title" content={seo?.og?.title || title || app.siteName} />
+      <meta property="og:description" content={seo?.og?.description || app.description} />
 
       {ogImage && <meta property="og:image" content={ogImage} />}
     </Head>
