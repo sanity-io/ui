@@ -14,7 +14,7 @@ export function workshopReducer(state: WorkshopState, msg: WorkshopMsg): Worksho
   }
 
   if (msg.type === 'workshop/unregisterProp') {
-    return {...state, schemas: state.schemas.filter((s) => s.name === msg.name)}
+    return {...state, schemas: state.schemas.filter((s) => s.name !== msg.name)}
   }
 
   if (msg.type === 'workshop/setPropValue') {
