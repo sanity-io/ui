@@ -91,6 +91,6 @@ export const workshop = {
   features: {
     navbar: false,
   },
-  frameUrl: '/workshop/frame/',
+  frameUrl: `${basePath}/workshop/frame/`,
   title: 'Workshop',
 }

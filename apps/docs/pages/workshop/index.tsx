@@ -27,21 +27,34 @@ function WorkshopPage() {
   const target = isRecord(data) && isRecord(data.target) && data.target
   const seo: Record<string, any> | null = isRecord(target) ? (target.seo as any) : null
   const {push: pushLocation, query, replace: replaceLocation} = useRouter()
-  const location: WorkshopLocation = useMemo(
-    () => ({path: query.path ? String(query.path) || '/' : '/'}),
-    [query]
-  )
+  const location: WorkshopLocation = useMemo(() => {
+    const {path, ...restQuery} = query
+
+    return {path: path ? String(path) || '/' : '/', query: restQuery as any}
+  }, [query])
 
   const handleLocationPush = useCallback(
     (loc: WorkshopLocation) => {
-      pushLocation({pathname: '/workshop', query: {path: loc.path}})
+      pushLocation({
+        pathname: `/workshop`,
+        query: {
+          path: loc.path,
+          value: loc.query?.value ? String(loc.query?.value) : undefined,
+        },
+      })
     },
     [pushLocation]
   )
 
   const handleLocationReplace = useCallback(
     (loc: WorkshopLocation) => {
-      replaceLocation({pathname: '/workshop', query: {path: loc.path}})
+      replaceLocation({
+        pathname: `/workshop`,
+        query: {
+          path: loc.path,
+          value: loc.query?.value ? String(loc.query?.value) : undefined,
+        },
+      })
     },
     [replaceLocation]
   )
