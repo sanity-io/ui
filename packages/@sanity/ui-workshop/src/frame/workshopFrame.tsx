@@ -19,9 +19,10 @@ import {useAxeResults} from '../axe/useAxeResults'
 import {features} from '../features'
 import {isRecord} from '../lib/isRecord'
 import {qs} from '../lib/qs'
-import {propsReducer} from '../props/reducer'
 import {resolveLocation} from '../resolveLocation'
 import {ScopeProvider} from '../scopeProvider'
+import {workshopReducer} from '../store'
+import {WorkshopMsg} from '../store/types'
 import {PropSchema, WorkshopContextValue, WorkshopLocation, WorkshopScope} from '../types'
 import {WorkshopContext} from '../workshopContext'
 import {useParent} from './useParent'
@@ -33,7 +34,7 @@ interface WorkshopFrameProps {
   title: string
 }
 
-export function WorkshopFrame(_props: WorkshopFrameProps): React.ReactElement {
+export function WorkshopFrame(props: WorkshopFrameProps): React.ReactElement {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 
@@ -41,7 +42,7 @@ export function WorkshopFrame(_props: WorkshopFrameProps): React.ReactElement {
     <ToastProvider>
       <BoundaryElementProvider element={boundaryElement}>
         <PortalProvider element={portalElement}>
-          <InnerWorkshopFrame {..._props} ref={setBoundaryElement} />
+          <InnerWorkshopFrame {...props} ref={setBoundaryElement} />
           <div data-portal="" ref={setPortalElement} />
         </PortalProvider>
       </BoundaryElementProvider>
@@ -50,17 +51,21 @@ export function WorkshopFrame(_props: WorkshopFrameProps): React.ReactElement {
 }
 
 const InnerWorkshopFrame = forwardRef(function InnerWorkshopFrame(
-  _props: WorkshopFrameProps,
+  props: WorkshopFrameProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const {frameUrl, scopes, setScheme, title} = _props
+  const {frameUrl, scopes, setScheme, title} = props
   const query = useMemo(() => {
     if (typeof window === 'undefined') return {}
 
     return qs.parse(window.location.search.substr(1))
   }, [])
+  const value = useMemo(
+    () => (query.value ? JSON.parse(decodeURIComponent(query.value)) : {}),
+    [query]
+  )
   const [path, setPath] = useState(query.path || '/')
-  const [props, dispatch] = useReducer(propsReducer, [])
+  const [state, dispatch] = useReducer(workshopReducer, {axeResults: null, schemas: [], value})
   const {postMessage} = useParent()
   const {scope, story} = useMemo(() => resolveLocation(scopes, path), [path, scopes])
   const loc = useMemo(() => ({path}), [path])
@@ -72,38 +77,48 @@ const InnerWorkshopFrame = forwardRef(function InnerWorkshopFrame(
 
   const pushLocation = useCallback(
     (newLoc: WorkshopLocation) => {
-      postMessage({type: 'workshop/frame/pushLocation', location: newLoc})
+      const msg: WorkshopMsg = {type: 'workshop/frame/pushLocation', location: newLoc}
+
+      postMessage(msg)
     },
     [postMessage]
   )
 
   const replaceLocation = useCallback(
     (newLoc: WorkshopLocation) => {
-      postMessage({type: 'workshop/frame/replaceLocation', location: newLoc})
+      const msg: WorkshopMsg = {type: 'workshop/frame/replaceLocation', location: newLoc}
+
+      postMessage(msg)
     },
     [postMessage]
   )
 
   const registerProp = useCallback(
-    (PropSchema: PropSchema) => {
-      postMessage({type: 'workshop/frame/registerProp', PropSchema})
-      dispatch({type: 'registerProp', PropSchema})
+    (schema: PropSchema) => {
+      const msg: WorkshopMsg = {type: 'workshop/registerProp', schema}
+
+      postMessage(msg)
+      dispatch(msg)
     },
     [postMessage]
   )
 
   const unregisterProp = useCallback(
-    (PropName: string) => {
-      postMessage({type: 'workshop/frame/unregisterProp', PropName})
-      dispatch({type: 'unregisterProp', PropName})
+    (name: string) => {
+      const msg: WorkshopMsg = {type: 'workshop/unregisterProp', name}
+
+      postMessage(msg)
+      dispatch(msg)
     },
     [postMessage]
   )
 
   const setPropValue = useCallback(
-    (PropName: string, value: any) => {
-      postMessage({type: 'workshop/frame/setPropValue', PropName, value})
-      dispatch({type: 'setPropValue', PropName, value})
+    (name: string, value: any) => {
+      const msg: WorkshopMsg = {type: 'workshop/setPropValue', name, value}
+
+      postMessage(msg)
+      dispatch(msg)
     },
     [postMessage]
   )
@@ -123,38 +138,36 @@ const InnerWorkshopFrame = forwardRef(function InnerWorkshopFrame(
 
   useEffect(() => {
     if (!features.axe) return
-    postMessage({type: 'workshop/frame/axe/results', results: axeResults})
-  }, [axeResults, postMessage])
 
-  // Set mounted
-  useEffect(() => setMounted(true), [])
+    const msg: WorkshopMsg = {type: 'workshop/frame/setAxeResults', results: axeResults}
+
+    postMessage(msg)
+  }, [axeResults, postMessage])
 
   // Set initial scheme
   useEffect(() => setScheme(query.scheme as ThemeColorSchemeKey), [query.scheme, setScheme])
 
   useEffect(() => {
-    postMessage({type: 'workshop/frame/ready', path})
+    const readyMsg: WorkshopMsg = {type: 'workshop/ready', path}
+
+    postMessage(readyMsg)
+
+    const handleMainMsg = (msg: WorkshopMsg) => {
+      if (msg.type === 'workshop/main/setLocation') {
+        setPath(msg.path)
+        setScheme(msg.scheme)
+
+        return
+      }
+
+      dispatch(msg)
+    }
 
     const handleMessage = (event: MessageEvent) => {
       const msg = event.data
 
-      if (isRecord(msg)) {
-        if (msg.type === 'workshop/setLocation') {
-          setPath(msg.path as string)
-          setScheme(msg.scheme as ThemeColorSchemeKey)
-
-          return
-        }
-
-        if (msg.type === 'workshop/setPropValue') {
-          dispatch({
-            type: 'setPropValue',
-            PropName: msg.PropName as string,
-            value: msg.value,
-          })
-
-          return
-        }
+      if (isRecord(msg) && typeof msg.type === 'string' && msg.type.startsWith('workshop/')) {
+        handleMainMsg(msg as any)
       }
     }
 
@@ -165,6 +178,9 @@ const InnerWorkshopFrame = forwardRef(function InnerWorkshopFrame(
     }
   }, [path, postMessage, setScheme])
 
+  // Set mounted
+  useEffect(() => setMounted(true), [])
+
   if (!mounted) {
     return <></>
   }
@@ -172,13 +188,15 @@ const InnerWorkshopFrame = forwardRef(function InnerWorkshopFrame(
   return (
     <WorkshopContext.Provider value={contextValue}>
       <ScopeProvider
-        props={props}
+        axeResults={state.axeResults}
+        schemas={state.schemas}
         registerProp={registerProp}
         scope={scope}
         setPropValue={setPropValue}
         story={story}
         title={title}
         unregisterProp={unregisterProp}
+        value={state.value}
       >
         <Suspense fallback={null}>
           <Card as="main" height="fill" ref={ref}>

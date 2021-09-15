@@ -4,9 +4,9 @@ import {useScope} from '../useScope'
 export function useNumber(
   name: string,
   defaultValue?: number,
-  groupName?: string
+  groupName = 'Props'
 ): number | undefined {
-  const {props: Props, registerProp, unregisterProp} = useScope()
+  const {registerProp, schemas, unregisterProp, value} = useScope()
 
   useEffect(() => {
     registerProp({
@@ -19,7 +19,7 @@ export function useNumber(
     return () => unregisterProp(name)
   }, [defaultValue, groupName, name, registerProp, unregisterProp])
 
-  const Prop = Props.find((k) => k.schema.name === name)
+  const schema = schemas.find((s) => s.name === name)
 
-  return Prop ? Prop.value : defaultValue
+  return value[name] === undefined ? schema?.defaultValue : value[name]
 }

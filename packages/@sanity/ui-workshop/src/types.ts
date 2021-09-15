@@ -1,3 +1,4 @@
+import {AxeResults} from 'axe-core'
 import React from 'react'
 
 export interface WorkshopFeatures {
@@ -37,10 +38,6 @@ export interface NumberPropSchema extends GenericPropSchema<number> {
 
 export type SelectPropValue = string | number | boolean
 
-// interface SelectPropOptionsProp<T> {
-//   [key: string]: T
-// }
-
 export type SelectPropOptionsProp<T extends SelectPropValue = SelectPropValue> =
   | Record<PropertyKey, T>
   | Record<Extract<T, PropertyKey>, T[keyof T]>
@@ -68,23 +65,24 @@ export type PropSchema =
   | StringPropSchema
   | TextPropSchema
 
-export interface StoryProp {
-  schema: PropSchema
+export interface ScopeContextValue {
+  axeResults: AxeResults | null
+  schemas: PropSchema[]
+  scope: WorkshopScope | null
+  story: WorkshopStory | null
+  registerProp: (Prop: PropSchema) => void
+  setPropValue: (PropName: string, value: any) => void
+  unregisterProp: (PropName: string) => void
   value: any
 }
 
-export interface ScopeContextValue {
-  scope: WorkshopScope | null
-  story: WorkshopStory | null
-  props: StoryProp[]
-  registerProp: (Prop: PropSchema) => void
-  setPropValue: (PropName: string, value: any) => void
-  // title: string
-  unregisterProp: (PropName: string) => void
+export type WorkshopQuery = {
+  [key: string]: string | number | boolean | WorkshopQuery
 }
 
 export interface WorkshopLocation {
   path: string
+  query?: WorkshopQuery
 }
 
 export interface WorkshopContextValue {

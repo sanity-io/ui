@@ -12,7 +12,7 @@ import {
   Switch,
   Text,
 } from '@sanity/ui'
-import React, {useCallback} from 'react'
+import React, {useCallback, useMemo} from 'react'
 import styled from 'styled-components'
 import {useWorkshop} from '../useWorkshop'
 import {VIEWPORT_OPTIONS, ZOOM_OPTIONS} from './constants'
@@ -50,83 +50,51 @@ export function WorkshopNavbar(props: {
     [pushLocation]
   )
 
-  return (
-    <Root borderBottom paddingX={3} paddingY={2}>
-      <Flex align="center">
-        <Box display={['block', 'block', 'none']}>
-          <Button fontSize={1} icon={MenuIcon} mode="bleed" padding={2} />
-        </Box>
+  return useMemo(
+    () => (
+      <Root borderBottom paddingX={3} paddingY={2}>
+        <Flex align="center">
+          <Box display={['block', 'block', 'none']}>
+            <Button fontSize={1} icon={MenuIcon} mode="bleed" padding={2} />
+          </Box>
 
-        <Flex
-          flex={1}
-          justify={['center', 'center', 'flex-start']}
-          padding={2}
-          sizing="border"
-          style={{minWidth: 250}}
-        >
-          <Breadcrumbs
-            separator={
-              <Text muted size={1}>
-                /
-              </Text>
-            }
-            space={2}
+          <Flex
+            flex={1}
+            justify={['center', 'center', 'flex-start']}
+            padding={2}
+            sizing="border"
+            style={{minWidth: 250}}
           >
-            <Text size={1} weight="bold">
-              <a href="/" onClick={handleHomeClick} style={{color: 'inherit'}}>
-                {title}
-              </a>
-            </Text>
-
-            {scope && (
-              <Text align="center" size={1}>
-                {scope.title}
+            <Breadcrumbs
+              separator={
+                <Text muted size={1}>
+                  /
+                </Text>
+              }
+              space={2}
+            >
+              <Text size={1} weight="bold">
+                <a href="/" onClick={handleHomeClick} style={{color: 'inherit'}}>
+                  {title}
+                </a>
               </Text>
-            )}
 
-            {story && <Text size={1}>{story.title}</Text>}
-          </Breadcrumbs>
-        </Flex>
+              {scope && (
+                <Text align="center" size={1}>
+                  {scope.title}
+                </Text>
+              )}
 
-        <Box display={['block', 'block', 'none']}>
-          <Button fontSize={1} icon={ControlsIcon} mode="bleed" padding={2} />
-        </Box>
+              {story && <Text size={1}>{story.title}</Text>}
+            </Breadcrumbs>
+          </Flex>
 
-        <Box display={['none', 'none', 'block']} flex={1}>
-          <Flex align="center" justify="flex-end">
-            <LayerProvider zOffset={100}>
-              <MenuButton
-                button={
-                  <Button
-                    fontSize={1}
-                    iconRight={SelectIcon}
-                    mode="ghost"
-                    padding={2}
-                    style={{minWidth: 80}}
-                    text={ZOOM_OPTIONS.find((o) => o.value === zoom)?.title}
-                  />
-                }
-                id="zoom-menu"
-                menu={
-                  <Menu>
-                    {ZOOM_OPTIONS.map((option) => (
-                      <MenuItem
-                        fontSize={1}
-                        key={option.value}
-                        onClick={() => setZoom(option.value)}
-                        padding={2}
-                        selected={option.value === zoom}
-                        text={option.title}
-                      />
-                    ))}
-                  </Menu>
-                }
-                popover={{matchReferenceWidth: true}}
-                portal
-              />
-            </LayerProvider>
+          <Box display={['block', 'block', 'none']}>
+            <Button fontSize={1} icon={ControlsIcon} mode="bleed" padding={2} />
+          </Box>
 
-            <Flex marginLeft={2}>
+          <Box display={['none', 'none', 'block']} flex={1}>
+            <Flex align="center" justify="flex-end">
               <LayerProvider zOffset={100}>
                 <MenuButton
                   button={
@@ -136,19 +104,19 @@ export function WorkshopNavbar(props: {
                       mode="ghost"
                       padding={2}
                       style={{minWidth: 80}}
-                      text={VIEWPORT_OPTIONS.find((o) => o.name === viewport)?.title}
+                      text={ZOOM_OPTIONS.find((o) => o.value === zoom)?.title}
                     />
                   }
-                  id="viewport-menu"
+                  id="zoom-menu"
                   menu={
                     <Menu>
-                      {VIEWPORT_OPTIONS.map((option) => (
+                      {ZOOM_OPTIONS.map((option) => (
                         <MenuItem
                           fontSize={1}
-                          key={option.name}
-                          onClick={() => setViewport(option.name)}
+                          key={option.value}
+                          onClick={() => setZoom(option.value)}
                           padding={2}
-                          selected={option.name === viewport}
+                          selected={option.value === zoom}
                           text={option.title}
                         />
                       ))}
@@ -158,30 +126,76 @@ export function WorkshopNavbar(props: {
                   portal
                 />
               </LayerProvider>
-            </Flex>
 
-            <Box marginLeft={2}>
-              <Button as="label" mode="bleed" padding={2}>
-                <Flex align="center">
-                  <Box marginRight={2}>
-                    <Text size={1}>
-                      <SunIcon />
-                    </Text>
-                  </Box>
-                  <Box style={{margin: '-4px 0'}}>
-                    <Switch checked={scheme === 'dark'} onChange={handleToggleScheme} />
-                  </Box>
-                  <Box marginLeft={2}>
-                    <Text size={1}>
-                      <MoonIcon />
-                    </Text>
-                  </Box>
-                </Flex>
-              </Button>
-            </Box>
-          </Flex>
-        </Box>
-      </Flex>
-    </Root>
+              <Flex marginLeft={2}>
+                <LayerProvider zOffset={100}>
+                  <MenuButton
+                    button={
+                      <Button
+                        fontSize={1}
+                        iconRight={SelectIcon}
+                        mode="ghost"
+                        padding={2}
+                        style={{minWidth: 80}}
+                        text={VIEWPORT_OPTIONS.find((o) => o.name === viewport)?.title}
+                      />
+                    }
+                    id="viewport-menu"
+                    menu={
+                      <Menu>
+                        {VIEWPORT_OPTIONS.map((option) => (
+                          <MenuItem
+                            fontSize={1}
+                            key={option.name}
+                            onClick={() => setViewport(option.name)}
+                            padding={2}
+                            selected={option.name === viewport}
+                            text={option.title}
+                          />
+                        ))}
+                      </Menu>
+                    }
+                    popover={{matchReferenceWidth: true}}
+                    portal
+                  />
+                </LayerProvider>
+              </Flex>
+
+              <Box marginLeft={2}>
+                <Button as="label" mode="bleed" padding={2}>
+                  <Flex align="center">
+                    <Box marginRight={2}>
+                      <Text size={1}>
+                        <SunIcon />
+                      </Text>
+                    </Box>
+                    <Box style={{margin: '-4px 0'}}>
+                      <Switch checked={scheme === 'dark'} onChange={handleToggleScheme} />
+                    </Box>
+                    <Box marginLeft={2}>
+                      <Text size={1}>
+                        <MoonIcon />
+                      </Text>
+                    </Box>
+                  </Flex>
+                </Button>
+              </Box>
+            </Flex>
+          </Box>
+        </Flex>
+      </Root>
+    ),
+    [
+      handleHomeClick,
+      handleToggleScheme,
+      scheme,
+      scope,
+      setViewport,
+      setZoom,
+      story,
+      title,
+      viewport,
+      zoom,
+    ]
   )
 }

@@ -1,6 +1,7 @@
 import {Card, Container, Flex, Spinner} from '@sanity/ui'
 import React, {useMemo, useState} from 'react'
 import styled from 'styled-components'
+import {useScope} from '..'
 import {useWorkshop} from '../useWorkshop'
 import {VIEWPORT_OPTIONS} from './constants'
 
@@ -22,8 +23,17 @@ export function WorkshopStoryCanvas(props: {
 }): React.ReactElement {
   const {frameRef, ready, scheme, viewport, zoom} = props
   const {frameUrl, location, scope, story} = useWorkshop()
-  const [currentFrameUrl] = useState(() => `${frameUrl}?path=${location.path}&scheme=${scheme}`)
+  const {value} = useScope()
+  const [currentFrameUrl] = useState(
+    () =>
+      `${frameUrl}?path=${location.path}&scheme=${scheme}&value=${encodeURIComponent(
+        JSON.stringify(value)
+      )}`
+  )
   const v = VIEWPORT_OPTIONS.find((o) => o.name === viewport)
+
+  const viewportW = v?.rect.width
+  const viewportH = v?.rect.height
 
   const iframe = useMemo(
     () => (
@@ -42,36 +52,41 @@ export function WorkshopStoryCanvas(props: {
     [currentFrameUrl, frameRef, ready, zoom]
   )
 
-  return (
-    <Flex direction="column" flex={3} overflow="hidden">
-      <Card flex={1} padding={2} tone="transparent">
-        <Flex align="center" height="fill" justify="center">
-          <Container
-            height="fill"
-            hidden={!scope || !story}
-            style={{
-              maxWidth: v?.rect.width === 'auto' ? undefined : `${(v?.rect.width || 1) * zoom}px`,
-              maxHeight: v?.rect.height ? `${(v?.rect.height || 1) * zoom}px` : undefined,
-            }}
-            width="auto"
-          >
-            <Card
-              height="fill"
-              overflow="hidden"
-              shadow={ready ? 1 : undefined}
-              tone={ready ? undefined : 'inherit'}
-            >
-              {!ready && (
-                <Flex align="center" height="fill" justify="center">
-                  <Spinner muted />
-                </Flex>
-              )}
+  const hidden = !scope || !story
 
-              {iframe}
-            </Card>
-          </Container>
-        </Flex>
-      </Card>
-    </Flex>
+  return useMemo(
+    () => (
+      <Flex direction="column" flex={3} overflow="hidden">
+        <Card flex={1} padding={2} tone="transparent">
+          <Flex align="center" height="fill" justify="center">
+            <Container
+              height="fill"
+              hidden={hidden}
+              style={{
+                maxWidth: viewportW === 'auto' ? undefined : `${(viewportW || 1) * zoom}px`,
+                maxHeight: viewportH ? `${(viewportH || 1) * zoom}px` : undefined,
+              }}
+              width="auto"
+            >
+              <Card
+                height="fill"
+                overflow="hidden"
+                shadow={ready ? 1 : undefined}
+                tone={ready ? undefined : 'inherit'}
+              >
+                {!ready && (
+                  <Flex align="center" height="fill" justify="center">
+                    <Spinner muted />
+                  </Flex>
+                )}
+
+                {iframe}
+              </Card>
+            </Container>
+          </Flex>
+        </Card>
+      </Flex>
+    ),
+    [hidden, iframe, ready, viewportW, viewportH, zoom]
   )
 }

@@ -6,9 +6,9 @@ export function useSelect<T extends SelectPropValue>(
   name: string,
   options: SelectPropOptionsProp<T>,
   defaultValue?: T,
-  groupName?: string
+  groupName = 'Props'
 ): T | undefined {
-  const {props: Props, registerProp, unregisterProp} = useScope()
+  const {registerProp, schemas, unregisterProp, value} = useScope()
 
   useEffect(() => {
     registerProp({
@@ -22,7 +22,7 @@ export function useSelect<T extends SelectPropValue>(
     return () => unregisterProp(name)
   }, [defaultValue, groupName, name, options, registerProp, unregisterProp])
 
-  const Prop = Props.find((k) => k.schema.name === name)
+  const schema = schemas.find((s) => s.name === name)
 
-  return Prop ? Prop.value : defaultValue
+  return value[name] === undefined ? schema?.defaultValue : value[name]
 }

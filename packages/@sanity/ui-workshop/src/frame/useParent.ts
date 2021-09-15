@@ -1,9 +1,7 @@
 import {useCallback, useMemo, useRef} from 'react'
 
-export type Msg = Record<string, unknown>
-
-export function useParent(): {postMessage: (msg: Msg) => void} {
-  const messageQueueRef = useRef<Msg[]>([])
+export function useParent(): {postMessage: (msg: any) => void} {
+  const messageQueueRef = useRef<any[]>([])
   const flushTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const _flushMessageQueue = useCallback(() => {
@@ -18,13 +16,13 @@ export function useParent(): {postMessage: (msg: Msg) => void} {
       if (queue.length === 1) {
         parent?.postMessage(queue[0], window.location.origin)
       } else {
-        parent?.postMessage({type: 'queue', queue}, window.location.origin)
+        parent?.postMessage({type: 'workshop/queue', queue}, window.location.origin)
       }
     }, 0)
   }, [])
 
   const postMessage = useCallback(
-    (msg: Msg) => {
+    (msg: any) => {
       messageQueueRef.current.push(msg)
       _flushMessageQueue()
     },

@@ -1,8 +1,10 @@
 import {BoundaryElementProvider, Flex, PortalProvider, ToastProvider} from '@sanity/ui'
-import {AxeResults} from 'axe-core'
-import React, {useCallback, useEffect, useMemo, useReducer, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useReducer, useRef, useState} from 'react'
 import {WORKSHOP_DEFAULT_FEATURES} from '../constants'
-import {propsReducer} from '../props/reducer'
+import {isRecord} from '../lib/isRecord'
+import {decode as zlibDecode, encode as zlibEncode} from '../lib/zlib'
+import {workshopReducer} from '../store'
+import {WorkshopMsg} from '../store/types'
 import {
   PropSchema,
   WorkshopCollection,
@@ -37,7 +39,15 @@ function _sortScopes(a: WorkshopScope, b: WorkshopScope) {
   return 0
 }
 
-export function Workshop(_props: WorkshopProps): React.ReactElement {
+function encodeValue(val: any) {
+  return zlibEncode(JSON.stringify(val))
+}
+
+function decodeValue(val: string) {
+  return JSON.parse(zlibDecode(val))
+}
+
+export function Workshop(props: WorkshopProps): React.ReactElement {
   const {
     collections,
     features: featuresProp = {},
@@ -49,115 +59,182 @@ export function Workshop(_props: WorkshopProps): React.ReactElement {
     scopes: scopesProp,
     setScheme,
     title,
-  } = _props
+  } = props
+
   const features = useMemo(() => ({...WORKSHOP_DEFAULT_FEATURES, ...featuresProp}), [featuresProp])
   const {postMessage, ready, ref: frameRef, subscribe} = useFrame()
-  const [props, dispatch] = useReducer(propsReducer, [])
-  const [axeResults, setAxeResults] = useState<AxeResults | null>(null)
+  const rawValue = location.query?.value
+  const [encodedValue, setEncodedValue] = useState(typeof rawValue === 'string' ? rawValue : null)
+  const encodedValueRef = useRef(encodedValue)
+  const [state, dispatch] = useReducer(workshopReducer, {
+    axeResults: null,
+    schemas: [],
+    value: encodedValue ? decodeValue(encodedValue) : {},
+  })
   const [viewport, setViewport] = useState<string>('auto')
   const [zoom, setZoom] = useState(1)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const scopes = useMemo(() => scopesProp.sort(_sortScopes), [scopesProp])
+  const locationRef = useRef(location)
 
-  const registerProp = useCallback((PropSchema: PropSchema) => {
-    dispatch({type: 'registerProp', PropSchema})
+  useEffect(() => {
+    locationRef.current = location
+  }, [location])
+
+  useEffect(() => {
+    const loc = locationRef.current
+
+    if (encodedValue && loc.query?.value !== encodedValue) {
+      const newLoc = {...loc, query: {...loc.query, value: encodedValue}}
+
+      onLocationReplace(newLoc)
+    } else if (loc.query?.value && !encodedValue) {
+      const query = {...loc.query}
+
+      delete query.value
+
+      const newLoc = {...loc, query}
+
+      onLocationReplace(newLoc)
+    }
+  }, [encodedValue, onLocationReplace])
+
+  const registerProp = useCallback((schema: PropSchema) => {
+    const msg: WorkshopMsg = {type: 'workshop/registerProp', schema}
+
+    dispatch(msg)
   }, [])
 
-  const unregisterProp = useCallback((PropName: string) => {
-    dispatch({type: 'unregisterProp', PropName})
+  const unregisterProp = useCallback((name: string) => {
+    const msg: WorkshopMsg = {type: 'workshop/unregisterProp', name}
+
+    dispatch(msg)
   }, [])
 
   const setPropValue = useCallback(
-    (PropName: string, value: any) => {
-      dispatch({type: 'setPropValue', PropName, value})
-      postMessage({type: 'workshop/setPropValue', PropName, value})
+    (name: string, value: any) => {
+      const msg: WorkshopMsg = {type: 'workshop/setPropValue', name, value}
+
+      dispatch(msg)
+      postMessage(msg)
     },
     [postMessage]
   )
 
-  const _handleMsg = useCallback(
-    (msg: Record<string, unknown>) => {
-      if (typeof msg.type === 'string' && msg.type.startsWith('workshop/')) {
-        if (msg.type === 'workshop/frame/axe/results') {
-          setAxeResults(msg.results as any)
-        }
-
-        if (msg.type === 'workshop/frame/registerProp') {
-          registerProp(msg.PropSchema as any)
-        }
-
-        if (msg.type === 'workshop/frame/setPropValue') {
-          setPropValue(msg.PropName as string, msg.value)
-        }
-
-        if (msg.type === 'workshop/frame/unregisterProp') {
-          unregisterProp(msg.PropName as any)
-        }
-      }
-    },
-    [registerProp, setPropValue, unregisterProp]
-  )
-
   useEffect(() => {
-    postMessage({type: 'workshop/setLocation', path: location.path, scheme})
+    const msg: WorkshopMsg = {
+      type: 'workshop/main/setLocation',
+      path: location.path,
+      scheme,
+    }
+
+    postMessage(msg)
   }, [location.path, postMessage, scheme])
 
   useEffect(() => {
-    return subscribe((msg) => {
-      if (typeof msg.type === 'string' && msg.type === 'queue') {
-        const queue: any = msg.queue
+    function handleMsg(msg: any) {
+      if (!isRecord(msg)) return
+      if (typeof msg.type !== 'string') return
+      if (!msg.type.startsWith('workshop/')) return
+      dispatch(msg as any)
+    }
 
-        for (const _msg of queue) {
-          _handleMsg(_msg)
-        }
-      } else {
-        _handleMsg(msg)
+    return subscribe(handleMsg)
+  }, [subscribe])
+
+  useEffect(() => {
+    if (Object.keys(state.value).length) {
+      const enc = encodeValue(state.value)
+
+      setEncodedValue(enc)
+      encodedValueRef.current = enc
+    } else {
+      setEncodedValue(null)
+      encodedValueRef.current = null
+    }
+  }, [state.value])
+
+  useEffect(() => {
+    setEncodedValue(typeof rawValue === 'string' ? rawValue : null)
+  }, [rawValue])
+
+  useEffect(() => {
+    if (encodedValue !== encodedValueRef.current) {
+      const msg: WorkshopMsg = {
+        type: 'workshop/setValue',
+        value: encodedValue ? decodeValue(encodedValue) : {},
       }
-    })
-  }, [_handleMsg, subscribe])
+
+      dispatch(msg)
+      postMessage(msg)
+    }
+  }, [encodedValue, postMessage])
+
+  const children = useMemo(
+    () => (
+      <>
+        <Flex direction="column" height="fill" ref={setBoundaryElement}>
+          {features.navbar && (
+            <WorkshopNavbar
+              scheme={scheme}
+              setScheme={setScheme}
+              setViewport={setViewport}
+              setZoom={setZoom}
+              viewport={viewport}
+              zoom={zoom}
+            />
+          )}
+          <Flex flex={1}>
+            <WorkshopStoryNav collections={collections} />
+            <WorkshopStoryCanvas
+              frameRef={frameRef}
+              ready={ready}
+              scheme={scheme}
+              viewport={viewport}
+              zoom={zoom}
+              // value={state.value}
+            />
+            <WorkshopStoryInspector />
+          </Flex>
+        </Flex>
+        <div data-portal="" ref={setPortalElement} />
+      </>
+    ),
+    [
+      collections,
+      features,
+      frameRef,
+      ready,
+      scheme,
+      setScheme,
+      // state.axeResults,
+      // state.value,
+      viewport,
+      zoom,
+    ]
+  )
 
   return (
     <ToastProvider>
       <BoundaryElementProvider element={boundaryElement}>
         <PortalProvider element={portalElement}>
           <WorkshopProvider
+            axeResults={state.axeResults}
             features={features}
             frameUrl={frameUrl}
             location={location}
             onLocationPush={onLocationPush}
             onLocationReplace={onLocationReplace}
+            schemas={state.schemas}
             scopes={scopes}
-            props={props}
             registerProp={registerProp}
             setPropValue={setPropValue}
             title={title}
             unregisterProp={unregisterProp}
+            value={state.value}
           >
-            <Flex direction="column" height="fill" ref={setBoundaryElement}>
-              {features.navbar && (
-                <WorkshopNavbar
-                  scheme={scheme}
-                  setScheme={setScheme}
-                  setViewport={setViewport}
-                  setZoom={setZoom}
-                  viewport={viewport}
-                  zoom={zoom}
-                />
-              )}
-              <Flex flex={1}>
-                <WorkshopStoryNav collections={collections} />
-                <WorkshopStoryCanvas
-                  frameRef={frameRef}
-                  ready={ready}
-                  scheme={scheme}
-                  viewport={viewport}
-                  zoom={zoom}
-                />
-                <WorkshopStoryInspector axeResults={axeResults} />
-              </Flex>
-            </Flex>
-            <div data-portal="" ref={setPortalElement} />
+            {children}
           </WorkshopProvider>
         </PortalProvider>
       </BoundaryElementProvider>
