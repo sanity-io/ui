@@ -33,5 +33,9 @@ export default {
       name: 'part:@sanity/desk-tool/structure',
       path: './parts/structure',
     },
+    {
+      implements: 'part:@sanity/base/brand-logo',
+      path: './parts/logo',
+    },
   ],
 }
