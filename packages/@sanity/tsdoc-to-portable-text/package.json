@@ -29,8 +29,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@microsoft/api-extractor": "^7.18.7",
-    "@microsoft/api-extractor-model": "^7.13.5",
+    "@microsoft/api-extractor": "^7.18.9",
+    "@microsoft/api-extractor-model": "^7.13.7",
     "@microsoft/tsdoc": "^0.13.2",
     "@types/cpx": "^1.5.2",
     "chalk": "^4.1.2",
