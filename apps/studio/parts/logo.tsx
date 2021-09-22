@@ -6,8 +6,8 @@ export default function Logo() {
     <SanityMonogram
       style={{
         display: 'block',
-        height: 'calc(2rem - 7px)',
-        margin: 'calc(-0.5rem + 4px) auto',
+        height: 'calc(2rem - 5px)',
+        margin: -8,
       }}
     />
   )
