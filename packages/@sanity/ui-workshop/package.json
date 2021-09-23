@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "sideEffects": false,
@@ -23,8 +23,8 @@
     "segmented-property": "^3.0.3"
   },
   "devDependencies": {
-    "@sanity/icons": "^1.1.7",
-    "@sanity/ui": "^0.36.10",
+    "@sanity/icons": "^1.2.0",
+    "@sanity/ui": "^0.36.11",
     "@types/pako": "^1.0.2",
     "react": "^17.0.2",
     "styled-components": "^5.3.1"

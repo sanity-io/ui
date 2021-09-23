@@ -1,6 +1,6 @@
 {
   "name": "@sanity/tsdoc-to-portable-text",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "sideEffects": false,
