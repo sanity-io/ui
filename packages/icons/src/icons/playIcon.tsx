@@ -20,7 +20,12 @@ export const PlayIcon = forwardRef(function PlayIcon(
       ref={ref}
       {...props}
     >
-      <path d="M9 19V6L19 12.5L9 19Z" fill="currentColor" />
+      <path
+        d="M9.5 18.5V6.5L18.5 12.5L9.5 18.5Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

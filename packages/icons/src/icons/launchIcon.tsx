@@ -20,9 +20,12 @@ export const LaunchIcon = forwardRef(function LaunchIcon(
       ref={ref}
       {...props}
     >
-      <path d="M15 5.5H5.5V19.5H19.5V10" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M21.5 3.5L11.5 13.5" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M17 3.5H21.5V8" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M14 6.5H5.5V19.5H18.5V11M20.5 4.5L10.5 14.5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
+      <path d="M16 4.5H20.5V9" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

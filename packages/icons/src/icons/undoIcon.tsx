@@ -21,11 +21,11 @@ export const UndoIcon = forwardRef(function UndoIcon(
       {...props}
     >
       <path
-        d="M5.88468 17C7.32466 19.1128 9.75033 20.5 12.5 20.5C16.9183 20.5 20.5 16.9183 20.5 12.5C20.5 8.08172 16.9183 4.5 12.5 4.5C8.08172 4.5 4.5 8.08172 4.5 12.5V13"
+        d="M5.88468 17C7.32466 19.1128 9.75033 20.5 12.5 20.5C16.9183 20.5 20.5 16.9183 20.5 12.5C20.5 8.08172 16.9183 4.5 12.5 4.5C8.08172 4.5 4.5 8.08172 4.5 12.5V13.5"
         stroke="currentColor"
         strokeWidth={1.2}
       />
-      <path d="M7.5 11L4.56189 13.5L2 10.5" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M7 11L4.5 13.5L2 11" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

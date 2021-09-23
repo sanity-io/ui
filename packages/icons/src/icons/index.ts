@@ -13,6 +13,8 @@ import {ArrowLeftIcon} from './arrowLeftIcon'
 import {ArrowRightIcon} from './arrowRightIcon'
 import {ArrowTopRightIcon} from './arrowTopRightIcon'
 import {ArrowUpIcon} from './arrowUpIcon'
+import {BarChartIcon} from './barChartIcon'
+import {BasketIcon} from './basketIcon'
 import {BellIcon} from './bellIcon'
 import {BillIcon} from './billIcon'
 import {BinaryDocumentIcon} from './binaryDocumentIcon'
@@ -24,6 +26,7 @@ import {BottleIcon} from './bottleIcon'
 import {BulbFilledIcon} from './bulbFilledIcon'
 import {BulbOutlineIcon} from './bulbOutlineIcon'
 import {CalendarIcon} from './calendarIcon'
+import {CaseIcon} from './caseIcon'
 import {ChartUpwardIcon} from './chartUpwardIcon'
 import {CheckmarkCircleIcon} from './checkmarkCircleIcon'
 import {CheckmarkIcon} from './checkmarkIcon'
@@ -46,8 +49,10 @@ import {ComponentIcon} from './componentIcon'
 import {ComposeIcon} from './composeIcon'
 import {ControlsIcon} from './controlsIcon'
 import {CopyIcon} from './copyIcon'
+import {CreditCardIcon} from './creditCardIcon'
 import {DashboardIcon} from './dashboardIcon'
 import {DatabaseIcon} from './databaseIcon'
+import {DesktopIcon} from './desktopIcon'
 import {DocumentIcon} from './documentIcon'
 import {DocumentRemoveIcon} from './documentRemoveIcon'
 import {DocumentsIcon} from './documentsIcon'
@@ -66,8 +71,10 @@ import {ErrorOutlineIcon} from './errorOutlineIcon'
 import {ExpandIcon} from './expandIcon'
 import {EyeClosedIcon} from './eyeClosedIcon'
 import {EyeOpenIcon} from './eyeOpenIcon'
+import {FilterIcon} from './filterIcon'
 import {FolderIcon} from './folderIcon'
 import {GenerateIcon} from './generateIcon'
+import {HeartFilledIcon} from './heartFilledIcon'
 import {HeartIcon} from './heartIcon'
 import {HelpCircleIcon} from './helpCircleIcon'
 import {HomeIcon} from './homeIcon'
@@ -78,6 +85,8 @@ import {ImagesIcon} from './imagesIcon'
 import {InfoFilledIcon} from './infoFilledIcon'
 import {InfoOutlineIcon} from './infoOutlineIcon'
 import {InlineElementIcon} from './inlineElementIcon'
+import {InsertAboveIcon} from './insertAboveIcon'
+import {InsertBelowIcon} from './insertBelowIcon'
 import {ItalicIcon} from './italicIcon'
 import {JoystickIcon} from './joystickIcon'
 import {LaunchIcon} from './launchIcon'
@@ -99,6 +108,7 @@ import {PinIcon} from './pinIcon'
 import {PinRemovedIcon} from './pinRemovedIcon'
 import {PlayIcon} from './playIcon'
 import {PlugIcon} from './plugIcon'
+import {PresentationIcon} from './presentationIcon'
 import {PublishIcon} from './publishIcon'
 import {ReadOnlyIcon} from './readOnlyIcon'
 import {RemoveCircleIcon} from './removeCircleIcon'
@@ -118,18 +128,22 @@ import {SplitVerticalIcon} from './splitVerticalIcon'
 import {SquareIcon} from './squareIcon'
 import {StackCompactIcon} from './stackCompactIcon'
 import {StarIcon} from './starIcon'
+import {StopIcon} from './stopIcon'
 import {StrikethroughIcon} from './strikethroughIcon'
 import {SunIcon} from './sunIcon'
 import {SyncIcon} from './syncIcon'
+import {TagIcon} from './tagIcon'
 import {TerminalIcon} from './terminalIcon'
 import {ThLargeIcon} from './thLargeIcon'
 import {ThListIcon} from './thListIcon'
 import {TiersIcon} from './tiersIcon'
 import {ToggleArrowRightIcon} from './toggleArrowRightIcon'
 import {TokenIcon} from './tokenIcon'
+import {TransferIcon} from './transferIcon'
 import {TrashIcon} from './trashIcon'
 import {TrendUpwardIcon} from './trendUpwardIcon'
 import {TriangleOutlineIcon} from './triangleOutlineIcon'
+import {TrolleyIcon} from './trolleyIcon'
 import {TruncateIcon} from './truncateIcon'
 import {UlistIcon} from './ulistIcon'
 import {UnderlineIcon} from './underlineIcon'
@@ -158,6 +172,8 @@ export type IconSymbol =
   | 'arrow-right'
   | 'arrow-top-right'
   | 'arrow-up'
+  | 'bar-chart'
+  | 'basket'
   | 'bell'
   | 'bill'
   | 'binary-document'
@@ -169,6 +185,7 @@ export type IconSymbol =
   | 'bulb-filled'
   | 'bulb-outline'
   | 'calendar'
+  | 'case'
   | 'chart-upward'
   | 'checkmark-circle'
   | 'checkmark'
@@ -191,8 +208,10 @@ export type IconSymbol =
   | 'compose'
   | 'controls'
   | 'copy'
+  | 'credit-card'
   | 'dashboard'
   | 'database'
+  | 'desktop'
   | 'document'
   | 'document-remove'
   | 'documents'
@@ -211,8 +230,10 @@ export type IconSymbol =
   | 'expand'
   | 'eye-closed'
   | 'eye-open'
+  | 'filter'
   | 'folder'
   | 'generate'
+  | 'heart-filled'
   | 'heart'
   | 'help-circle'
   | 'home'
@@ -223,6 +244,8 @@ export type IconSymbol =
   | 'info-filled'
   | 'info-outline'
   | 'inline-element'
+  | 'insert-above'
+  | 'insert-below'
   | 'italic'
   | 'joystick'
   | 'launch'
@@ -244,6 +267,7 @@ export type IconSymbol =
   | 'pin-removed'
   | 'play'
   | 'plug'
+  | 'presentation'
   | 'publish'
   | 'read-only'
   | 'remove-circle'
@@ -263,18 +287,22 @@ export type IconSymbol =
   | 'square'
   | 'stack-compact'
   | 'star'
+  | 'stop'
   | 'strikethrough'
   | 'sun'
   | 'sync'
+  | 'tag'
   | 'terminal'
   | 'th-large'
   | 'th-list'
   | 'tiers'
   | 'toggle-arrow-right'
   | 'token'
+  | 'transfer'
   | 'trash'
   | 'trend-upward'
   | 'triangle-outline'
+  | 'trolley'
   | 'truncate'
   | 'ulist'
   | 'underline'
@@ -300,6 +328,8 @@ export {
   ArrowRightIcon,
   ArrowTopRightIcon,
   ArrowUpIcon,
+  BarChartIcon,
+  BasketIcon,
   BellIcon,
   BillIcon,
   BinaryDocumentIcon,
@@ -311,6 +341,7 @@ export {
   BulbFilledIcon,
   BulbOutlineIcon,
   CalendarIcon,
+  CaseIcon,
   ChartUpwardIcon,
   CheckmarkCircleIcon,
   CheckmarkIcon,
@@ -333,8 +364,10 @@ export {
   ComposeIcon,
   ControlsIcon,
   CopyIcon,
+  CreditCardIcon,
   DashboardIcon,
   DatabaseIcon,
+  DesktopIcon,
   DocumentIcon,
   DocumentRemoveIcon,
   DocumentsIcon,
@@ -353,8 +386,10 @@ export {
   ExpandIcon,
   EyeClosedIcon,
   EyeOpenIcon,
+  FilterIcon,
   FolderIcon,
   GenerateIcon,
+  HeartFilledIcon,
   HeartIcon,
   HelpCircleIcon,
   HomeIcon,
@@ -365,6 +400,8 @@ export {
   InfoFilledIcon,
   InfoOutlineIcon,
   InlineElementIcon,
+  InsertAboveIcon,
+  InsertBelowIcon,
   ItalicIcon,
   JoystickIcon,
   LaunchIcon,
@@ -386,6 +423,7 @@ export {
   PinRemovedIcon,
   PlayIcon,
   PlugIcon,
+  PresentationIcon,
   PublishIcon,
   ReadOnlyIcon,
   RemoveCircleIcon,
@@ -405,18 +443,22 @@ export {
   SquareIcon,
   StackCompactIcon,
   StarIcon,
+  StopIcon,
   StrikethroughIcon,
   SunIcon,
   SyncIcon,
+  TagIcon,
   TerminalIcon,
   ThLargeIcon,
   ThListIcon,
   TiersIcon,
   ToggleArrowRightIcon,
   TokenIcon,
+  TransferIcon,
   TrashIcon,
   TrendUpwardIcon,
   TriangleOutlineIcon,
+  TrolleyIcon,
   TruncateIcon,
   UlistIcon,
   UnderlineIcon,
@@ -446,6 +488,8 @@ export interface IconMap {
   'arrow-right': IconComponent
   'arrow-top-right': IconComponent
   'arrow-up': IconComponent
+  'bar-chart': IconComponent
+  basket: IconComponent
   bell: IconComponent
   bill: IconComponent
   'binary-document': IconComponent
@@ -457,6 +501,7 @@ export interface IconMap {
   'bulb-filled': IconComponent
   'bulb-outline': IconComponent
   calendar: IconComponent
+  case: IconComponent
   'chart-upward': IconComponent
   'checkmark-circle': IconComponent
   checkmark: IconComponent
@@ -479,8 +524,10 @@ export interface IconMap {
   compose: IconComponent
   controls: IconComponent
   copy: IconComponent
+  'credit-card': IconComponent
   dashboard: IconComponent
   database: IconComponent
+  desktop: IconComponent
   document: IconComponent
   'document-remove': IconComponent
   documents: IconComponent
@@ -499,8 +546,10 @@ export interface IconMap {
   expand: IconComponent
   'eye-closed': IconComponent
   'eye-open': IconComponent
+  filter: IconComponent
   folder: IconComponent
   generate: IconComponent
+  'heart-filled': IconComponent
   heart: IconComponent
   'help-circle': IconComponent
   home: IconComponent
@@ -511,6 +560,8 @@ export interface IconMap {
   'info-filled': IconComponent
   'info-outline': IconComponent
   'inline-element': IconComponent
+  'insert-above': IconComponent
+  'insert-below': IconComponent
   italic: IconComponent
   joystick: IconComponent
   launch: IconComponent
@@ -532,6 +583,7 @@ export interface IconMap {
   'pin-removed': IconComponent
   play: IconComponent
   plug: IconComponent
+  presentation: IconComponent
   publish: IconComponent
   'read-only': IconComponent
   'remove-circle': IconComponent
@@ -551,18 +603,22 @@ export interface IconMap {
   square: IconComponent
   'stack-compact': IconComponent
   star: IconComponent
+  stop: IconComponent
   strikethrough: IconComponent
   sun: IconComponent
   sync: IconComponent
+  tag: IconComponent
   terminal: IconComponent
   'th-large': IconComponent
   'th-list': IconComponent
   tiers: IconComponent
   'toggle-arrow-right': IconComponent
   token: IconComponent
+  transfer: IconComponent
   trash: IconComponent
   'trend-upward': IconComponent
   'triangle-outline': IconComponent
+  trolley: IconComponent
   truncate: IconComponent
   ulist: IconComponent
   underline: IconComponent
@@ -592,6 +648,8 @@ export const icons: IconMap = {
   'arrow-right': ArrowRightIcon,
   'arrow-top-right': ArrowTopRightIcon,
   'arrow-up': ArrowUpIcon,
+  'bar-chart': BarChartIcon,
+  basket: BasketIcon,
   bell: BellIcon,
   bill: BillIcon,
   'binary-document': BinaryDocumentIcon,
@@ -603,6 +661,7 @@ export const icons: IconMap = {
   'bulb-filled': BulbFilledIcon,
   'bulb-outline': BulbOutlineIcon,
   calendar: CalendarIcon,
+  case: CaseIcon,
   'chart-upward': ChartUpwardIcon,
   'checkmark-circle': CheckmarkCircleIcon,
   checkmark: CheckmarkIcon,
@@ -625,8 +684,10 @@ export const icons: IconMap = {
   compose: ComposeIcon,
   controls: ControlsIcon,
   copy: CopyIcon,
+  'credit-card': CreditCardIcon,
   dashboard: DashboardIcon,
   database: DatabaseIcon,
+  desktop: DesktopIcon,
   document: DocumentIcon,
   'document-remove': DocumentRemoveIcon,
   documents: DocumentsIcon,
@@ -645,8 +706,10 @@ export const icons: IconMap = {
   expand: ExpandIcon,
   'eye-closed': EyeClosedIcon,
   'eye-open': EyeOpenIcon,
+  filter: FilterIcon,
   folder: FolderIcon,
   generate: GenerateIcon,
+  'heart-filled': HeartFilledIcon,
   heart: HeartIcon,
   'help-circle': HelpCircleIcon,
   home: HomeIcon,
@@ -657,6 +720,8 @@ export const icons: IconMap = {
   'info-filled': InfoFilledIcon,
   'info-outline': InfoOutlineIcon,
   'inline-element': InlineElementIcon,
+  'insert-above': InsertAboveIcon,
+  'insert-below': InsertBelowIcon,
   italic: ItalicIcon,
   joystick: JoystickIcon,
   launch: LaunchIcon,
@@ -678,6 +743,7 @@ export const icons: IconMap = {
   'pin-removed': PinRemovedIcon,
   play: PlayIcon,
   plug: PlugIcon,
+  presentation: PresentationIcon,
   publish: PublishIcon,
   'read-only': ReadOnlyIcon,
   'remove-circle': RemoveCircleIcon,
@@ -697,18 +763,22 @@ export const icons: IconMap = {
   square: SquareIcon,
   'stack-compact': StackCompactIcon,
   star: StarIcon,
+  stop: StopIcon,
   strikethrough: StrikethroughIcon,
   sun: SunIcon,
   sync: SyncIcon,
+  tag: TagIcon,
   terminal: TerminalIcon,
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
   tiers: TiersIcon,
   'toggle-arrow-right': ToggleArrowRightIcon,
   token: TokenIcon,
+  transfer: TransferIcon,
   trash: TrashIcon,
   'trend-upward': TrendUpwardIcon,
   'triangle-outline': TriangleOutlineIcon,
+  trolley: TrolleyIcon,
   truncate: TruncateIcon,
   ulist: UlistIcon,
   underline: UnderlineIcon,

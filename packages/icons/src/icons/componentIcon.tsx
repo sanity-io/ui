@@ -20,8 +20,11 @@ export const ComponentIcon = forwardRef(function ComponentIcon(
       ref={ref}
       {...props}
     >
-      <path d="M12.5 4L21 12.5L12.5 21L4 12.5L12.5 4Z" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M8.5 8.5L16.5 16.5M16.5 8.5L8.5 16.5" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M8.5 8.5L12.5 12.5M12.5 12.5L16.5 16.5M12.5 12.5L16.5 8.5M12.5 12.5L8.5 16.5M12.5 4L21 12.5L12.5 21L4 12.5L12.5 4Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

@@ -21,13 +21,10 @@ export const PlugIcon = forwardRef(function PlugIcon(
       {...props}
     >
       <path
-        d="M9 12L7 14L10 17L12 15C14 16.5 15 16 16 15L17.5 13.5L10.5 6.5L9 8C8 9 7.5 10 9 12Z"
+        d="M13.25 8.5L16.75 5M16.25 11.5L19.75 8M9.25 15.5L5.25 19.5M7.75 14L9.75 12C8.25 10 8.75 9 9.75 8C10.15 7.6 11.25 6.5 11.25 6.5L18.25 13.5C18.25 13.5 17.3825 14.3675 16.75 15C15.75 16 14.75 16.5 12.75 15L10.75 17L7.75 14Z"
         stroke="currentColor"
         strokeWidth={1.2}
       />
-      <path d="M12.5 8.5L16 5" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M15.5 11.5L19 8" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M8.5 15.5L4.5 19.5" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

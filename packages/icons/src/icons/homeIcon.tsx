@@ -20,8 +20,11 @@ export const HomeIcon = forwardRef(function HomeIcon(
       ref={ref}
       {...props}
     >
-      <path d="M6.5 9V18.5H18.5V9M4.5 10L12.5 5L20.5 10" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M14.5 18.5V11.5H10.5V18.5" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M6.5 8.75V18.5H18.5V8.75M4.5 10L12.5 5L20.5 10M14.5 18.5V11.5H10.5V18.5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

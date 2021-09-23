@@ -20,8 +20,11 @@ export const ChartUpwardIcon = forwardRef(function ChartUpwardIcon(
       ref={ref}
       {...props}
     >
-      <path d="M5.5 5V19.5H20" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M7.5 16L11.5 11.5L15.5 14L19.5 8.5" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M5.5 5V19.5H20M7.5 16L11.5 11.5L15.5 14L19.5 8.5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })
