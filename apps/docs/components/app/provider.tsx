@@ -15,10 +15,11 @@ import {NavMenu} from '$lib/nav'
 export function AppProvider(props: {
   children?: React.ReactNode
   data: unknown
+  loading: boolean
   menu?: NavMenu
   params: Record<string, any>
 }) {
-  const {children, data, menu, params} = props
+  const {children, data, loading, menu, params} = props
   const prefersDark = usePrefersDark()
   const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
     prefersDark ? 'dark' : 'light'
@@ -27,8 +28,8 @@ export function AppProvider(props: {
   useEffect(() => setColorScheme(prefersDark ? 'dark' : 'light'), [prefersDark])
 
   const contextValue = useMemo(
-    () => ({colorScheme, data, menu, params, setColorScheme, zOffsets}),
-    [colorScheme, data, menu, params, setColorScheme]
+    () => ({colorScheme, data, loading, menu, params, setColorScheme, zOffsets}),
+    [colorScheme, data, loading, menu, params, setColorScheme]
   )
 
   return (

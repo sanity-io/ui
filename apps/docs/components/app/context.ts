@@ -5,6 +5,7 @@ import {NavMenu} from '$lib/nav'
 export interface AppContextValue {
   colorScheme: ThemeColorSchemeKey
   data: unknown
+  loading: boolean
   menu?: NavMenu
   params: Record<string, any>
   setColorScheme: (mode: ThemeColorSchemeKey) => void

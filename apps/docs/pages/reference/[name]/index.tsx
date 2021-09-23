@@ -1,5 +1,4 @@
 import {Box, Container, Heading, Label, Select, Stack} from '@sanity/ui'
-import groq from 'groq'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
@@ -9,46 +8,26 @@ import {PageLayout} from '$components/page'
 import {app, features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
-import {getClient} from '$sanity'
 
-export async function getStaticProps(opts: {
-  params: {name?: string; slug?: string; version: string}
+export async function getServerSideProps(context: {
+  params: {name?: string; version?: string; slug?: string}
   preview?: boolean
 }) {
-  const {params, preview = features.preview} = opts
+  const {params, preview = features.preview} = context
 
-  params.slug = ''
   params.version = ''
+  params.slug = ''
 
   const pageData = await loadReferencePageData({params, preview})
 
   return {props: {...pageData, params, preview}}
 }
 
-const VERSIONS_QUERY = groq`
-{
-  'packages': *[_type == "api.package"] {
-    name,
-  }
-}
-`
-
-export async function getStaticPaths() {
-  const data = await getClient(features.preview).fetch(VERSIONS_QUERY)
-  const paths: {params: {name: string}}[] = []
-
-  if (isRecord(data) && isArray(data.packages)) {
-    for (const pkg of data.packages) {
-      if (isRecord(pkg) && isString(pkg.name)) {
-        paths.push({params: {name: pkg.name}})
-      }
-    }
-  }
-
-  return {paths, fallback: false}
-}
-
-function ReferencePackagePage({params}: any) {
+function ReferencePackagePage({
+  params,
+}: {
+  params: {name?: string; version?: string; slug?: string}
+}) {
   const {data, menu} = useApp()
   const {push: pushState} = useRouter()
   const packagesData = isRecord(data) && data.packages
@@ -94,11 +73,7 @@ function ReferencePackagePage({params}: any) {
   )
 
   const menuHeader = (
-    <Stack
-      padding={[2, 3, 4]}
-      space={[1, 2, 3]}
-      // style={{borderBottom: '1px solid var(--card-border-color)'}}
-    >
+    <Stack padding={[2, 3, 4]} space={[1, 2, 3]}>
       <Select onChange={handleNameChange} value={params.name}>
         <option value="">Select package…</option>
         {packages.map((pkg) => (

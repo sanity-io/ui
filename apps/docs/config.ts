@@ -24,6 +24,14 @@ export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
  */
 export const features = {
   /**
+   * Show page loading spinner
+   *
+   * Toggle this flag on/off by setting the environment variable `NEXT_PUBLIC_FEATURE_PAGE_LOADING_SPINNER=true|false`.
+   * Defaults to `false`.
+   */
+  pageLoadingSpinner: parseFlag(process.env.NEXT_PUBLIC_FEATURE_PAGE_LOADING_SPINNER, false),
+
+  /**
    * Fetch draft data when `true`.
    *
    * Toggle this flag on/off by setting the environment variable `NEXT_PUBLIC_FEATURE_PREVIEW=true|false`.

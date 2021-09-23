@@ -16,7 +16,7 @@ export function ReleaseContent({
 }) {
   const serializers = useMemo(() => buildSerializers(headings), [headings])
 
-  return <BlockContent {...sanity} blocks={blocks} serializers={serializers} />
+  return <BlockContent {...sanity} blocks={blocks || []} serializers={serializers} />
 }
 
 const CODE_LANGUAGES = {

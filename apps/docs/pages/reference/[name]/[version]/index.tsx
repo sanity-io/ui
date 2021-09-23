@@ -1,5 +1,4 @@
 import {Box, Container, Heading, Select, Stack} from '@sanity/ui'
-import groq from 'groq'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
@@ -9,13 +8,12 @@ import {ReleaseContent} from '$components/reference'
 import {app, features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
-import {getClient} from '$sanity'
 
-export async function getStaticProps(opts: {
-  params: {name?: string; slug?: string; version: string}
+export async function getServerSideProps(context: {
+  params: {name?: string; version?: string; slug?: string}
   preview?: boolean
 }) {
-  const {params, preview = features.preview} = opts
+  const {params, preview = features.preview} = context
 
   params.slug = ''
 
@@ -24,37 +22,11 @@ export async function getStaticProps(opts: {
   return {props: {...pageData, params, preview}}
 }
 
-const PACKAGES_QUERY = groq`
-{
-  'packages': *[_type == "api.package"] {
-    name,
-    releases[]->{
-      version
-    }
-  }
-}
-`
-
-export async function getStaticPaths() {
-  const data = await getClient(features.preview).fetch(PACKAGES_QUERY)
-  const paths: {params: {name: string; version: string}}[] = []
-
-  if (isRecord(data) && isArray(data.packages)) {
-    for (const pkg of data.packages) {
-      if (isRecord(pkg) && isString(pkg.name) && isArray(pkg.releases)) {
-        for (const release of pkg.releases) {
-          if (isRecord(release) && isString(release.version)) {
-            paths.push({params: {name: pkg.name, version: release.version}})
-          }
-        }
-      }
-    }
-  }
-
-  return {paths, fallback: false}
-}
-
-function ReferenceVersionPage({params}: any) {
+function ReferenceVersionPage({
+  params,
+}: {
+  params: {name?: string; version?: string; slug?: string}
+}) {
   const {data, menu} = useApp()
   const {push: pushState} = useRouter()
   const packagesData = isRecord(data) && data.packages

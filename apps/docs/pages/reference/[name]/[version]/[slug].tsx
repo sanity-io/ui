@@ -1,5 +1,4 @@
 import {Select, Stack} from '@sanity/ui'
-import groq from 'groq'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
@@ -9,62 +8,22 @@ import {ReferenceArticle} from '$components/reference'
 import {features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
-import {getClient} from '$sanity'
 
-const PACKAGES_QUERY = groq`
-{
-  'packages': * [_type == "api.package"] {
-    name,
-    releases[]->{
-      version,
-      members[]->{
-        'slug': slug.current
-      }
-    }
-  }
-}
-`
-
-export async function getStaticProps(opts: {
-  params: {name: string; version: string; slug: string}
+export async function getServerSideProps(context: {
+  params: {name?: string; version?: string; slug?: string}
   preview?: boolean
 }) {
-  const {params, preview = features.preview} = opts
+  const {params, preview = features.preview} = context
   const pageData = await loadReferencePageData({params, preview})
 
   return {props: {...pageData, params, preview}}
 }
 
-export async function getStaticPaths() {
-  const data: unknown = await getClient(features.preview).fetch(PACKAGES_QUERY)
-  const paths: {params: {name: string; version: string; slug: string}}[] = []
-
-  if (isRecord(data) && isArray(data.packages)) {
-    for (const pkg of data.packages) {
-      if (isRecord(pkg) && isString(pkg.name) && isArray(pkg.releases)) {
-        for (const release of pkg.releases) {
-          if (isRecord(release) && isArray(release.members)) {
-            for (const member of release.members) {
-              if (isString(release.version) && isRecord(member) && isString(member.slug)) {
-                paths.push({
-                  params: {
-                    name: pkg.name,
-                    version: release.version,
-                    slug: member.slug,
-                  },
-                })
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return {paths, fallback: false}
-}
-
-function ReferenceArticlePage({params}: any) {
+function ReferenceArticlePage({
+  params,
+}: {
+  params: {name?: string; version?: string; slug?: string}
+}) {
   const {data, menu} = useApp()
   const {push: pushState} = useRouter()
   const packagesData = isRecord(data) && data.packages
@@ -103,11 +62,7 @@ function ReferenceArticlePage({params}: any) {
   )
 
   const menuHeader = (
-    <Stack
-      padding={[2, 3, 4]}
-      space={[1, 2, 3]}
-      // style={{borderBottom: '1px solid var(--card-border-color)'}}
-    >
+    <Stack padding={[2, 3, 4]} space={[1, 2, 3]}>
       <Select onChange={handleNameChange} value={params.name}>
         {packages.map((pkg) => (
           <option key={pkg.name} value={pkg.name}>

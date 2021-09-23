@@ -8,11 +8,11 @@ import {app, features} from '$config'
 import {loadReferencePageData} from '$lib/page'
 import {isArray, isRecord, isString} from '$lib/types'
 
-export async function getStaticProps(opts: {
-  params?: {name?: string; slug?: string; version?: string}
+export async function getServerSideProps(context: {
+  params: {name?: string; version?: string; slug?: string}
   preview?: boolean
 }) {
-  const {params = {}, preview = features.preview} = opts
+  const {params = {}, preview = features.preview} = context
 
   params.name = ''
   params.version = ''
@@ -23,7 +23,11 @@ export async function getStaticProps(opts: {
   return {props: {...pageData, params, preview}}
 }
 
-function ReferencePage({params}: any) {
+export default function ReferencePage({
+  params,
+}: {
+  params: {name?: string; version?: string; slug?: string}
+}) {
   const {data, menu} = useApp()
   const {push: pushState} = useRouter()
   const packagesData = isRecord(data) && data.packages
@@ -45,11 +49,7 @@ function ReferencePage({params}: any) {
   )
 
   const menuHeader = (
-    <Stack
-      padding={[2, 3, 4]}
-      space={[1, 2, 3]}
-      // style={{borderBottom: '1px solid var(--card-border-color)'}}
-    >
+    <Stack padding={[2, 3, 4]} space={[1, 2, 3]}>
       <Select onChange={handleNameChange} value={params.name}>
         <option value="">Select package…</option>
         {packages.map((pkg) => (
@@ -75,5 +75,3 @@ function ReferencePage({params}: any) {
     </AppLayout>
   )
 }
-
-export default ReferencePage
