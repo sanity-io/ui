@@ -20,7 +20,7 @@ export const CheckmarkIcon = forwardRef(function CheckmarkIcon(
       ref={ref}
       {...props}
     >
-      <path d="M5.5 12.5L10.5 17.5L20 8" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M5.5 12.5L10.5 17.5L20 6" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

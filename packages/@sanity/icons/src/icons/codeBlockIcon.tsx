@@ -20,9 +20,11 @@ export const CodeBlockIcon = forwardRef(function CodeBlockIcon(
       ref={ref}
       {...props}
     >
-      <path d="M11 16L7.5 12.5L11 9" stroke="currentColor" strokeWidth={1.2} />
-      <rect x={3.6} y={4.6} width={17.8} height={15.8} stroke="currentColor" strokeWidth={1.2} />
-      <path d="M14 9L17.5 12.5L14 16" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M11 15L8.5 12.5L11 10M14 10L16.5 12.5L14 15M5.5 6.5H19.5V18.5H5.5V6.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

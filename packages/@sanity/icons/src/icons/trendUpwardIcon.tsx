@@ -20,11 +20,8 @@ export const TrendUpwardIcon = forwardRef(function TrendUpwardIcon(
       ref={ref}
       {...props}
     >
-      <path
-        d="M3.5 17.5L10.5 10.5L14.5 14.5L21.5 7.5M21.5 7.5V13M21.5 7.5H16"
-        stroke="currentColor"
-        strokeWidth={1.2}
-      />
+      <path d="M4.5 18.5L11.5 10.5L13.5 14.5L20.5 6.5" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M20.5 11V6.5H16" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

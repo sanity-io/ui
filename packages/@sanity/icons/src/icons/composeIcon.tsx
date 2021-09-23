@@ -20,13 +20,11 @@ export const ComposeIcon = forwardRef(function ComposeIcon(
       ref={ref}
       {...props}
     >
-      <path d="M14 5.5H5.5V19.5H19.5V11" stroke="currentColor" strokeWidth={1.2} />
       <path
-        d="M9.5 13.5L9 16L11.5 15.5L21 6L19 4L9.5 13.5Z"
+        d="M17 6L19 8M14 5.5H5.5V19.5H19.5V11M9 16L9.5 13.5L19 4L21 6L11.5 15.5L9 16Z"
         stroke="currentColor"
         strokeWidth={1.2}
       />
-      <path d="M17 6L19 8" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

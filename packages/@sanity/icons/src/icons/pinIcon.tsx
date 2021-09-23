@@ -25,7 +25,11 @@ export const PinIcon = forwardRef(function PinIcon(
         stroke="currentColor"
         strokeWidth={1.2}
       />
-      <circle cx={12.5} cy={10.5} r={1.5} stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M14 10.5C14 11.3284 13.3284 12 12.5 12C11.6716 12 11 11.3284 11 10.5C11 9.67157 11.6716 9 12.5 9C13.3284 9 14 9.67157 14 10.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

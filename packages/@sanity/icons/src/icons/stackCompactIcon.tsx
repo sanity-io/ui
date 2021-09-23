@@ -20,10 +20,11 @@ export const StackCompactIcon = forwardRef(function StackCompactIcon(
       ref={ref}
       {...props}
     >
-      <path d="M19.5 9.5H5.5V6.5H19.5V9.5Z" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M19.5 12.5H5.5V9.5H19.5V12.5Z" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M19.5 15.5H5.5V12.5H19.5V15.5Z" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M19.5 18.5H5.5V15.5H19.5V18.5Z" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M5.5 15.5V18.5H19.5V15.5M5.5 15.5H19.5M5.5 15.5V12.5M19.5 15.5V12.5M5.5 12.5H19.5M5.5 12.5V9.5M19.5 12.5V9.5M5.5 9.5V6.5H19.5V9.5M5.5 9.5H19.5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

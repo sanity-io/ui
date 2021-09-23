@@ -20,10 +20,9 @@ export const CollapseIcon = forwardRef(function CollapseIcon(
       ref={ref}
       {...props}
     >
-      <path d="M14.5 10.5L19 6" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M19 10.5H14.5V6" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M6 14.5H10.5V19" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M6 14.5L10.5 14.5V19M19 10.5H14.5L14.5 6" stroke="currentColor" strokeWidth={1.2} />
       <path d="M10.5 14.5L6 19" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M14.5 10.5L19 6" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

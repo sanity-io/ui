@@ -20,9 +20,8 @@ export const ClipboardIcon = forwardRef(function ClipboardIcon(
       ref={ref}
       {...props}
     >
-      <path d="M8 5.5H6.5V19.5H18.5V5.5H17" stroke="currentColor" strokeWidth={1.2} />
       <path
-        d="M12.5 3C13.5 3 13.5 4.5 14 4.5C15 4.5 15.6 5 15.6 6.5H9.5C9.5 5 10 4.5 11 4.5C11.5 4.5 11.5 3 12.5 3Z"
+        d="M8 5.5H6.5V19.5H18.5V5.5H17M12.5 3C11.5 3 11.5 4.5 11 4.5C10 4.5 9.5 5 9.5 6.5H15.6C15.6 5 15 4.5 14 4.5C13.5 4.5 13.5 3 12.5 3Z"
         stroke="currentColor"
         strokeWidth={1.2}
       />

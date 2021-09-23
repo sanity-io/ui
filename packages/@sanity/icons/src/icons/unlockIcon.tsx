@@ -22,7 +22,7 @@ export const UnlockIcon = forwardRef(function UnlockIcon(
     >
       <path d="M7.5 11.5H17.5V19.5H7.5V11.5Z" stroke="currentColor" strokeWidth={1.2} />
       <path
-        d="M3.5 11.5V7.5C3.5 5.5 4.5 4.5 6.5 4.5C8.5 4.5 9.5 5.5 9.5 7.5V11.5"
+        d="M3.5 11.5V8.5C3.5 6.5 5 5.5 6.5 5.5C8 5.5 9.5 6.5 9.5 8.5V11.5"
         stroke="currentColor"
         strokeWidth={1.2}
       />

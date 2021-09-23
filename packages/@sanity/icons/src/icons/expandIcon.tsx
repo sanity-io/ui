@@ -20,10 +20,8 @@ export const ExpandIcon = forwardRef(function ExpandIcon(
       ref={ref}
       {...props}
     >
-      <path d="M18.5 6.5L14 11" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M14 6.5H18.5V11" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M6.5 18.5L11 14" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M11 18.5H6.5L6.5 14" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M14 6.5H18.5V11M11 18.5H6.5V14" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M18.5 6.5L14 11M6.5 18.5L11 14" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

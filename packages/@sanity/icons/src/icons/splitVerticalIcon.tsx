@@ -20,8 +20,7 @@ export const SplitVerticalIcon = forwardRef(function SplitVerticalIcon(
       ref={ref}
       {...props}
     >
-      <rect x={5.5} y={5.5} width={14} height={14} stroke="currentColor" strokeWidth={1.2} />
-      <path d="M12.5 5.5V19.5" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M12.5 5.5V19.5M5.5 5.5H19.5V19.5H5.5V5.5Z" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

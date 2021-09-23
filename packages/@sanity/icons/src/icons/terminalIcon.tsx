@@ -21,7 +21,7 @@ export const TerminalIcon = forwardRef(function TerminalIcon(
       {...props}
     >
       <path
-        d="M8 9L11.5 12.5L8 16M13 16H18M3.5 4.5H21.5V20.5H3.5V4.5Z"
+        d="M8.5 9.5L11.5 12.5L8.5 15.5M13 15.5H17M5.5 6.5H19.5V18.5H5.5V6.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
       />

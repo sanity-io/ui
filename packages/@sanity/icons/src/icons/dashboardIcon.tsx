@@ -20,9 +20,11 @@ export const DashboardIcon = forwardRef(function DashboardIcon(
       ref={ref}
       {...props}
     >
-      <path d="M19.5 19.5H5.5V5.5H19.5V19.5Z" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M5.5 12.5H19.5" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M14.5 19.5V12.5M10.5 12.5V5.5" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M14.5 19.5V12.5M10.5 12.5V5.5M5.5 12.5H19.5M5.5 19.5H19.5V5.5H5.5V19.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

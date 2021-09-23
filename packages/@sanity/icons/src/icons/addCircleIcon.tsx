@@ -20,9 +20,11 @@ export const AddCircleIcon = forwardRef(function AddCircleIcon(
       ref={ref}
       {...props}
     >
-      <circle cx={12.5} cy={12.5} r={8} stroke="currentColor" strokeWidth={1.2} />
-      <line x1={8} y1={12.4} x2={17} y2={12.4} stroke="currentColor" strokeWidth={1.2} />
-      <path d="M12.5 8V17" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M8 12.4H17M12.5 8V17M20.5 12.5C20.5 16.9183 16.9183 20.5 12.5 20.5C8.08172 20.5 4.5 16.9183 4.5 12.5C4.5 8.08172 8.08172 4.5 12.5 4.5C16.9183 4.5 20.5 8.08172 20.5 12.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

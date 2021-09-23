@@ -20,8 +20,11 @@ export const EditIcon = forwardRef(function EditIcon(
       ref={ref}
       {...props}
     >
-      <path d="M7 15L6 19L10 18L20 8L17 5L7 15Z" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M15 7L18 10" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M15 7L18 10M6 19L7 15L17 5L20 8L10 18L6 19Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+      />
     </svg>
   )
 })

@@ -20,9 +20,8 @@ export const LockIcon = forwardRef(function LockIcon(
       ref={ref}
       {...props}
     >
-      <path d="M7.5 11.5H17.5V19.5H7.5V11.5Z" stroke="currentColor" strokeWidth={1.2} />
       <path
-        d="M9.5 11.5V8.5C9.5 6.5 10.5 5.5 12.5 5.5C14.5 5.5 15.5 6.5 15.5 8.5V11.5"
+        d="M15.5 11.5V8.5C15.5 6.5 14 5.5 12.5 5.5C11 5.5 9.5 6.5 9.5 8.5V11.5M7.5 11.5H17.5V19.5H7.5V11.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
       />
