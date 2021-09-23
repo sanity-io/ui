@@ -1,26 +1,68 @@
-import {Icon, icons, IconSymbol} from '@sanity/icons'
-import {Box, Card, Code, Grid, Heading, Stack} from '@sanity/ui'
-import React from 'react'
+import {Icon, icons, IconSymbol, SearchIcon} from '@sanity/icons'
+import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
+import React, {useCallback, useMemo, useState} from 'react'
+
+function ucfirst(str: string) {
+  return str.slice(0, 1).toUpperCase() + str.slice(1)
+}
+
+function toPascalCase(str: string) {
+  const p = str.split('-')
+
+  return p.map(ucfirst).join('')
+}
 
 export default function OverviewStory() {
+  const [query, setQuery] = useState('')
+
+  const iconKeys = useMemo(() => {
+    return Object.keys(icons).filter((iconKey) => {
+      return query === '' ? true : iconKey.includes(query.toLowerCase())
+    })
+  }, [query])
+
+  const handleQueryChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.currentTarget.value)
+  }, [])
+
   return (
     <Card padding={[4, 5, 6]}>
-      <Box>
-        <Heading>Overview of Sanity icons</Heading>
-      </Box>
+      <Container width={1}>
+        <Box>
+          <Heading>Overview of Sanity icons</Heading>
+        </Box>
 
-      <Grid columns={[1, 1, 2, 3, 4, 5, 6]} gap={3} marginTop={[4, 5, 6]}>
-        {Object.keys(icons).map((iconKey) => (
-          <Card border key={iconKey} padding={4} radius={2}>
-            <Stack space={4}>
-              <Heading align="center">
-                <Icon symbol={iconKey as IconSymbol} />
-              </Heading>
-              <Code style={{textAlign: 'center'}}>{iconKey}</Code>
-            </Stack>
-          </Card>
-        ))}
-      </Grid>
+        <Box marginY={[3, 4, 5]}>
+          <TextInput
+            icon={SearchIcon}
+            onChange={handleQueryChange}
+            placeholder="Filter by name…"
+            value={query}
+          />
+        </Box>
+
+        {iconKeys.length === 0 && <Text>No matches</Text>}
+
+        {iconKeys.length > 0 && (
+          <Stack space={3} marginTop={[3, 4, 5]}>
+            {iconKeys.map((iconKey) => (
+              <Card border key={iconKey} overflow="hidden" radius={2}>
+                <Flex align="center" gap={4} padding={4}>
+                  <Heading>
+                    <Icon symbol={iconKey as IconSymbol} />
+                  </Heading>
+                  <Text>{iconKey}</Text>
+                </Flex>
+                <Card overflow="auto" padding={4} tone="transparent">
+                  <Code language="typescript">{`import {${toPascalCase(
+                    iconKey
+                  )}Icon} from '@sanity/icons'`}</Code>
+                </Card>
+              </Card>
+            ))}
+          </Stack>
+        )}
+      </Container>
     </Card>
   )
 }
