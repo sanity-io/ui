@@ -91,6 +91,32 @@ export const Tooltip = forwardRef(function Tooltip(
   const handleMouseEnter = useCallback(() => setIsOpen(true), [])
   const handleMouseLeave = useCallback(() => setIsOpen(false), [])
 
+  // Detect whether the mouse is moving outside of the reference element. This is sometimes
+  // necessary, because the tooltip might not always close as it should (e.g. when clicking
+  // the reference element triggers a CPU-heavy operation.)
+  useEffect(() => {
+    if (!isOpen) return
+
+    function handleWindowMouseMove(event: MouseEvent) {
+      if (!referenceElement) return
+
+      const isHoveringReference =
+        referenceElement === event.target ||
+        (event.target instanceof Node && referenceElement.contains(event.target))
+
+      if (!isHoveringReference) {
+        setIsOpen(false)
+        window.removeEventListener('mousemove', handleWindowMouseMove)
+      }
+    }
+
+    window.addEventListener('mousemove', handleWindowMouseMove)
+
+    return () => {
+      window.removeEventListener('mousemove', handleWindowMouseMove)
+    }
+  }, [isOpen, referenceElement])
+
   useEffect(() => {
     if (forceUpdate) forceUpdate()
   }, [forceUpdate, content])
