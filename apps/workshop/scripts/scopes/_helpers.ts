@@ -69,7 +69,7 @@ function _writeModule(opts: ScopeResolverOptions, paths: string[]) {
 
 function _compileModule(opts: ScopeResolverOptions, paths: string[]) {
   if (paths.length === 0) {
-    return `export const scopes = []`
+    return `// THIS FILE IS AUTO-GENERATED\n\nexport const scopes = []`
   }
 
   const sortedPaths = paths.sort()
@@ -77,7 +77,10 @@ function _compileModule(opts: ScopeResolverOptions, paths: string[]) {
     .map((p, idx) => `import _${idx} from '${_sanitizeModulePath(opts, p)}'`)
     .join('\n')
   const exports = sortedPaths.map((_p, idx) => `  _${idx}`).join(',\n')
-  const code = [imports, `export const scopes = [\n${exports},\n]`].join('\n\n') + `\n`
+  const code =
+    [`// THIS FILE IS AUTO-GENERATED`, imports, `export const scopes = [\n${exports},\n]`].join(
+      '\n\n'
+    ) + `\n`
 
   return code
 }

@@ -1,6 +1,7 @@
 import {Icon, icons, IconSymbol, SearchIcon} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
 import React, {useCallback, useMemo, useState} from 'react'
+import {packages} from '$packages'
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -28,15 +29,22 @@ export default function OverviewStory() {
   return (
     <Card padding={[4, 5, 6]}>
       <Container width={1}>
-        <Box>
-          <Heading>Overview of Sanity icons</Heading>
-        </Box>
+        <Stack space={4}>
+          <Heading as="h1">@sanity/icons v{packages.icons?.version}</Heading>
+          <Text as="p" muted>
+            {packages.icons?.description}
+          </Text>
+          <Card border padding={3} radius={2}>
+            <Code language="bash">{`npm install @sanity/icons\n\n# Install peer dependencies\nnpm install react`}</Code>
+          </Card>
+        </Stack>
 
-        <Box marginY={[3, 4, 5]}>
+        <Box marginTop={[3, 4, 5]} marginBottom={3}>
           <TextInput
             icon={SearchIcon}
             onChange={handleQueryChange}
             placeholder="Filter by name…"
+            radius={2}
             value={query}
           />
         </Box>
@@ -44,7 +52,7 @@ export default function OverviewStory() {
         {iconKeys.length === 0 && <Text>No matches</Text>}
 
         {iconKeys.length > 0 && (
-          <Stack space={3} marginTop={[3, 4, 5]}>
+          <Stack space={3}>
             {iconKeys.map((iconKey) => (
               <Card border key={iconKey} overflow="hidden" radius={2}>
                 <Flex align="center" gap={4} padding={4}>

@@ -21,6 +21,7 @@
       "$config": ["./config"],
       "$lib/*": ["./lib/*"],
       "$queries": ["./queries"],
+      "$packages": ["./packages"],
       "$sanity": ["./sanity"],
       "$screens/*": ["./screens/*"],
       "$sections": ["./sections"],

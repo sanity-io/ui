@@ -1,6 +1,7 @@
 import path from 'path'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import {defineConfig} from 'vite'
+import {designWorkshop} from './vite/plugin-design-workshop'
 import {pluginWorkshopScopes} from './vite/plugin-workshop-scopes'
 
 const ROOT_PATH = path.join(__dirname, '../..')
@@ -18,7 +19,7 @@ export default defineConfig({
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
   },
-  plugins: [reactRefresh(), pluginWorkshopScopes()],
+  plugins: [reactRefresh(), pluginWorkshopScopes(), designWorkshop()],
   resolve: {
     alias: [
       {

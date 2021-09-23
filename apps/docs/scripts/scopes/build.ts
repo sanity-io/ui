@@ -14,4 +14,4 @@ const SCOPES_RESOLVER_OPTIONS: ScopeResolverOptions = {
 _writeScopes(SCOPES_RESOLVER_OPTIONS)
 
 // eslint-disable-next-line no-console
-console.log('Wrote scopes to', SCOPES_RESOLVER_OPTIONS.target)
+console.log('Wrote workshop scopes to', path.relative(ROOT_PATH, SCOPES_RESOLVER_OPTIONS.target))

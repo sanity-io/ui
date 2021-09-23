@@ -15,6 +15,7 @@
 # production
 /build
 
+/packages.ts
 /workshopScopes.ts
 
 # debug
