@@ -37,9 +37,9 @@
     "react-refractor": "^2.1.5"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.6.0",
+    "@testing-library/dom": "^8.7.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.1.0",
+    "@testing-library/react": "^12.1.1",
     "@types/refractor": "^3.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
