@@ -2,7 +2,7 @@ import {CloseIcon} from '@sanity/icons'
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
-import {useClickOutside, useGlobalKeyDown} from '../../hooks'
+import {useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
@@ -123,7 +123,10 @@ const DialogFooter = styled(Box)`
   border-top: 1px solid var(--card-hairline-soft-color);
 `
 
-const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
+const DialogCard = forwardRef(function DialogCard(
+  props: DialogCardProps,
+  ref: React.ForwardedRef<HTMLDivElement>
+) {
   const {
     __unstable_autoFocus: autoFocus,
     __unstable_hideCloseButton: hideCloseButton,
@@ -139,6 +142,7 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
     shadow,
     width,
   } = props
+  const forwardedRef = useForwardedRef(ref)
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const localContentRef = useRef<HTMLDivElement | null>(null)
   const layer = useLayer()
@@ -151,10 +155,10 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
     if (!autoFocus) return
 
     // On mount: focus the first interactive element in the contents
-    if (localContentRef.current) {
-      focusFirstDescendant(localContentRef.current)
+    if (forwardedRef.current) {
+      focusFirstDescendant(forwardedRef.current)
     }
-  }, [autoFocus])
+  }, [autoFocus, forwardedRef])
 
   useGlobalKeyDown(
     useCallback(
@@ -183,10 +187,9 @@ const DialogCard = forwardRef(function DialogCard(props: DialogCardProps, ref) {
   const setRef = useCallback(
     (el: HTMLDivElement | null) => {
       setRootElement(el)
-      if (typeof ref === 'function') ref(el)
-      else if (ref) ref.current = el
+      forwardedRef.current = el
     },
-    [ref]
+    [forwardedRef]
   )
 
   const setContentRef = useCallback(
