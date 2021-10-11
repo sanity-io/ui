@@ -30,7 +30,7 @@
     "@sanity/desk-tool": "^2.21.2",
     "@sanity/icons": "^1.2.1",
     "@sanity/logos": "^1.1.6",
-    "@sanity/production-preview": "2.20.1-canary.190",
+    "@sanity/production-preview": "2.15.0",
     "@sanity/types": "^2.21.0",
     "@sanity/ui": "^0.36.12",
     "@sanity/vision": "^2.21.2",
