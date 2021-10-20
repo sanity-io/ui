@@ -43,6 +43,10 @@ function PageHeaderItem(props: {item: NavMenuItem}) {
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLLIElement>) => {
+      if (event.altKey || event.metaKey || event.shiftKey) {
+        return
+      }
+
       if (item.type === 'menuLink') {
         event.preventDefault()
         pushLocation(item.href)
