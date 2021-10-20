@@ -2,6 +2,7 @@ import {Box, Layer, Tree, TreeItem} from '@sanity/ui'
 import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
 import styled from 'styled-components'
+import {basePath} from '$config'
 import {NavMenu, NavMenuItem} from '$lib/nav'
 
 export interface PageHeaderProps {
@@ -69,7 +70,7 @@ function PageHeaderItem(props: {item: NavMenuItem}) {
   return (
     <TreeItem
       fontSize={[1, 1, 1, 2]}
-      href={item.href}
+      href={`${basePath}${item.href}`}
       muted
       onClick={handleClick}
       padding={[2, 2, 2, 3]}
