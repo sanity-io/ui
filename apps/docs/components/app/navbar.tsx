@@ -1,7 +1,7 @@
 import {gray, white} from '@sanity/color'
-import {MenuIcon} from '@sanity/icons'
+import {MenuIcon, MoonIcon, SunIcon} from '@sanity/icons'
 import {SanityMonogram, SanityMonogramColor} from '@sanity/logos'
-import {Box, Button, Card, Flex, Switch, Text} from '@sanity/ui'
+import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React, {useCallback, useMemo, useState} from 'react'
@@ -39,14 +39,9 @@ export function AppNavbar() {
       title: String(item.title),
     }))
 
-  const handleSchemeSwitchChange = useCallback(
-    (event) => {
-      const {checked} = event.currentTarget
-
-      setColorScheme(checked ? 'dark' : 'light')
-    },
-    [setColorScheme]
-  )
+  const handleToggleColorSchemeChange = useCallback(() => {
+    setColorScheme(colorScheme === 'light' ? 'dark' : 'light')
+  }, [colorScheme, setColorScheme])
 
   const handleMenuClose = useCallback(() => setMenuOpen(false), [])
 
@@ -96,16 +91,18 @@ export function AppNavbar() {
           </Box>
         </Flex>
 
-        <Box marginX={[2, 3, 4]}>
-          <Switch
-            checked={colorScheme === 'dark'}
-            onChange={handleSchemeSwitchChange}
-            style={{display: 'block'}}
+        <Box marginLeft={[2, 3, 4]}>
+          <Button
+            aria-label="Toggle color scheme"
+            icon={colorScheme === 'light' ? MoonIcon : SunIcon}
+            mode="bleed"
+            onClick={handleToggleColorSchemeChange}
           />
         </Box>
 
-        <Box>
+        <Box marginLeft={[1, 1, 2]}>
           <Button
+            aria-label="Open GitHub repository"
             as="a"
             href="https://github.com/sanity-io/design"
             icon={GitHubMark}
