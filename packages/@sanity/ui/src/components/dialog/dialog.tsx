@@ -36,6 +36,7 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   id: string
   onClickOutside?: () => void
   onClose?: () => void
+  portal?: string
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
   zOffset?: number | number[]
@@ -264,6 +265,7 @@ export const Dialog = forwardRef(function Dialog(
     onClickOutside,
     onClose,
     padding = 4,
+    portal,
     position = dialog.position || 'fixed',
     scheme,
     width = 0,
@@ -298,7 +300,7 @@ export const Dialog = forwardRef(function Dialog(
   const labelId = `${id}_label`
 
   return (
-    <Portal>
+    <Portal __unstable_name={portal}>
       <Root
         {...restProps}
         $padding={padding}

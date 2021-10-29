@@ -19,7 +19,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   disabled?: boolean
   fallbackPlacements?: Placement[]
   placement?: Placement
-  portal?: boolean
+  portal?: boolean | string
   scheme?: ThemeColorSchemeKey
 }
 
@@ -172,7 +172,12 @@ export const Tooltip = forwardRef(function Tooltip(
 
       {isOpen && (
         <>
-          {portal && <Portal>{popperNode}</Portal>}
+          {portal && (
+            <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
+              {popperNode}
+            </Portal>
+          )}
+
           {!portal && popperNode}
         </>
       )}
