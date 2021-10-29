@@ -26,11 +26,11 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",
-    "@popperjs/core": "^2.10.1",
+    "@popperjs/core": "^2.10.2",
     "@reach/auto-id": "^0.16.0",
     "@sanity/color": "^2.1.5",
     "@sanity/icons": "^1.2.1",
-    "framer-motion": "^4.1.17",
+    "framer-motion": "^5.0.0",
     "lodash": "^4.17.21",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.2",
@@ -38,13 +38,13 @@
     "react-refractor": "^2.1.5"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.7.2",
+    "@testing-library/dom": "^8.10.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@types/refractor": "^3.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.3"
   },
   "peerDependencies": {
     "react": "^16.9 || ^17",
