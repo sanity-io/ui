@@ -10,34 +10,34 @@ import {MenuProps} from './menu'
  */
 export interface MenuButtonProps {
   /**
-   * @deprecated Use `popover={{boundaryElement: ...}}` instead.
+   * @deprecated Use `popover={{boundaryElement: element}}` instead.
    */
   boundaryElement?: HTMLElement
   button: React.ReactElement
   id: string
   menu?: React.ReactElement
   /**
-   * @deprecated Use `popover={{placement: ...}}` instead.
+   * @deprecated Use `popover={{placement: 'top'}}` instead.
    */
   placement?: Placement
   popover?: Omit<PopoverProps, 'content' | 'open'>
   /**
-   * @deprecated Use `popover={{scheme: ...}}` instead.
+   * @deprecated Use `popover={{scheme: 'dark'}}` instead.
    */
   popoverScheme?: ThemeColorSchemeKey
   /**
-   * @deprecated Use `popover={{radius: ...}}` instead.
+   * @deprecated Use `popover={{radius: 2}}` instead.
    */
   popoverRadius?: number | number[]
   /**
    * Do not use in production.
    * @beta
    *
-   * @deprecated Use `popover={{portal: ...}}` instead.
+   * @deprecated Use `popover={{portal: true}}` instead.
    */
   portal?: boolean
   /**
-   * @deprecated Use `popover={{preventOverflow: ...}}` instead.
+   * @deprecated Use `popover={{preventOverflow: true}}` instead.
    */
   preventOverflow?: boolean
 }
