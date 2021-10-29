@@ -36,7 +36,7 @@ export interface PopoverProps
   open?: boolean
   padding?: number | number[]
   placement?: Placement
-  portal?: boolean
+  portal?: boolean | string
   preventOverflow?: boolean
   referenceElement?: HTMLElement | null
   matchReferenceWidth?: boolean
@@ -232,7 +232,11 @@ export const Popover = forwardRef(function Popover(
 
       {open && (
         <>
-          {portalProp && <Portal>{node}</Portal>}
+          {portalProp && (
+            <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
+              {node}
+            </Portal>
+          )}
 
           {!portalProp && node}
         </>

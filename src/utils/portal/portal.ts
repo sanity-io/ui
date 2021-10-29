@@ -7,17 +7,24 @@ import {usePortal} from './usePortal'
  */
 export interface PortalProps {
   children: React.ReactNode
+  /**
+   * @beta This API might change. DO NOT USE IN PRODUCTION.
+   */
+  __unstable_name?: string
 }
 
 /**
  * @public
  */
 export function Portal(props: PortalProps): React.ReactPortal | null {
+  const {children, __unstable_name: name} = props
   const portal = usePortal()
+  const portalElement =
+    (name ? portal.elements && portal.elements[name] : portal.element) || portal.elements?.default
 
-  if (!portal.element) {
+  if (!portalElement) {
     return null
   }
 
-  return ReactDOM.createPortal(props.children, portal.element)
+  return ReactDOM.createPortal(children, portalElement)
 }
