@@ -21,23 +21,23 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@sanity/base": "^2.21.2",
-    "@sanity/cli": "^2.21.0",
-    "@sanity/code-input": "^2.21.2",
-    "@sanity/core": "^2.21.0",
-    "@sanity/default-layout": "^2.21.2",
-    "@sanity/default-login": "^2.21.0",
-    "@sanity/desk-tool": "^2.21.2",
+    "@sanity/base": "^2.21.7",
+    "@sanity/cli": "^2.21.7",
+    "@sanity/code-input": "^2.21.7",
+    "@sanity/core": "^2.21.7",
+    "@sanity/default-layout": "^2.21.7",
+    "@sanity/default-login": "^2.21.7",
+    "@sanity/desk-tool": "^2.21.7",
     "@sanity/icons": "^1.2.1",
     "@sanity/logos": "^1.1.6",
     "@sanity/production-preview": "2.15.0",
-    "@sanity/types": "^2.21.0",
+    "@sanity/types": "^2.21.7",
     "@sanity/ui": "^0.36.12",
-    "@sanity/vision": "^2.21.2",
+    "@sanity/vision": "^2.21.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rxjs": "^6.5.3",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "chokidar": "^3.5.2"
