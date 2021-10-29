@@ -42,4 +42,9 @@ export default defineScope('primitives/button', 'Button', [
     title: 'SanityUploadButtonWorkaroundStory',
     component: lazy(() => import('./sanityUploadButton')),
   },
+  {
+    name: 'custom-icons',
+    title: 'Custom icons',
+    component: lazy(() => import('./customIcons')),
+  },
 ])
