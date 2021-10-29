@@ -60,6 +60,8 @@ export function fontSize(size: ThemeFontSize, horizontalOffset?: number): CSSObj
   const negHeight = ascenderHeight + descenderHeight
   const capHeight = lineHeight - negHeight
   const iconOffset = (capHeight - iconSize) / 2
+  const customIconSize = Math.floor((fontSize * 1.125) / 2) * 2 + 1
+  const customIconOffset = (capHeight - customIconSize) / 2
 
   return {
     fontSize: rem(fontSize),
@@ -77,6 +79,18 @@ export function fontSize(size: ThemeFontSize, horizontalOffset?: number): CSSObj
 
     '& > code, & > span': {
       margin: horizontalOffset ? `0 calc(${rem(0 - horizontalOffset * fontSize)} - 1px)` : '0 -1px',
+    },
+
+    '& svg:not([data-sanity-icon])': {
+      fontSize: `calc(${customIconSize} / 16 * 1rem)`,
+      margin: [
+        // top & bottom
+        rem(customIconOffset),
+        // left & right
+        horizontalOffset
+          ? `calc(${rem(customIconOffset)} + ${rem(horizontalOffset * fontSize)})`
+          : rem(customIconOffset),
+      ].join(' '),
     },
 
     '& [data-sanity-icon]': {
