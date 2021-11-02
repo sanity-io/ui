@@ -111,6 +111,7 @@ export const MenuItem = forwardRef(function MenuItem(
       aria-pressed={as === 'button' && pressed}
       data-pressed={as !== 'button' && pressed ? '' : undefined}
       data-selected={selected ? '' : undefined}
+      data-disabled={disabled ? '' : undefined}
       $radius={radius}
       $tone={tone}
       disabled={disabled}
