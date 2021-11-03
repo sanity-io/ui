@@ -4,6 +4,7 @@ import * as ui from '@sanity/ui'
 import {Box, Button, Card, Flex, Spinner, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import Link from 'next/link'
 import React, {useCallback, useEffect, useState} from 'react'
+import styled, {keyframes} from 'styled-components'
 import {
   AsyncCodeEditor,
   Canvas,
@@ -35,7 +36,13 @@ export function CodeExample(props: {
   useEffect(() => {
     if (!ready) return
 
-    setEvalResult(evalComponent({hookCode, jsxCode, scope: {...icons, ...ui, ...React, React}}))
+    setEvalResult(
+      evalComponent({
+        hookCode,
+        jsxCode,
+        scope: {...icons, ...ui, ...React, React, styled, keyframes},
+      })
+    )
   }, [hookCode, jsxCode, ready])
 
   useEffect(() => {
