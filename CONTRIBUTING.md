@@ -56,10 +56,15 @@ To release updated packages, run this command:
 
 ```sh
 # To publish a new `latest` release
+git checkout next
+git pull --rebase
+git rebase origin/main
 git checkout main
+git rebase next
 yarn release:latest
 
 # To publish a new `next` release
 git checkout next
+git pull --rebase
 yarn release:next
 ```
