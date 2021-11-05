@@ -10,6 +10,10 @@ import {MenuProps} from './menu'
  */
 export interface MenuButtonProps {
   /**
+   * @beta Do not use in production.
+   */
+  __unstable_disableRestoreFocusOnClose?: boolean
+  /**
    * @deprecated Use `popover={{boundaryElement: element}}` instead.
    */
   boundaryElement?: HTMLElement
@@ -30,9 +34,7 @@ export interface MenuButtonProps {
    */
   popoverRadius?: number | number[]
   /**
-   * Do not use in production.
-   * @beta
-   *
+   * @beta Do not use in production.
    * @deprecated Use `popover={{portal: true}}` instead.
    */
   portal?: boolean
@@ -50,6 +52,7 @@ export const MenuButton = forwardRef(function MenuButton(
   ref: React.ForwardedRef<HTMLButtonElement | null>
 ) {
   const {
+    __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
     boundaryElement,
     button: buttonProp,
     id,
@@ -118,8 +121,9 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const handleMenuEscape = useCallback(() => {
     setOpen(false)
+    if (disableRestoreFocusOnClose) return
     if (buttonElement) buttonElement.focus()
-  }, [buttonElement])
+  }, [buttonElement, disableRestoreFocusOnClose])
 
   const handleBlur = useCallback(
     (event: React.FocusEvent<HTMLButtonElement>) => {
@@ -142,8 +146,9 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const handleItemClick = useCallback(() => {
     setOpen(false)
+    if (disableRestoreFocusOnClose) return
     if (buttonElement) buttonElement.focus()
-  }, [buttonElement])
+  }, [buttonElement, disableRestoreFocusOnClose])
 
   const registerElement = useCallback((el: HTMLElement) => {
     setChildMenuElements((els) => els.concat([el]))
