@@ -52,4 +52,9 @@ export default defineScope('components/menu', 'Menu', [
     title: 'As component',
     component: lazy(() => import('./asComponent')),
   },
+  {
+    name: 'disable-focus-on-close',
+    title: 'Disable focus on close',
+    component: lazy(() => import('./disableFocusOnClose')),
+  },
 ])
