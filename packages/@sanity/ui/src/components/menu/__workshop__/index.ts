@@ -57,4 +57,9 @@ export default defineScope('components/menu', 'Menu', [
     title: 'Disable focus on close',
     component: lazy(() => import('./disableFocusOnClose')),
   },
+  {
+    name: 'menu-button-with-on-close',
+    title: 'MenuButton with on close',
+    component: lazy(() => import('./onCloseMenuButton')),
+  },
 ])
