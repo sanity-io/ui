@@ -1,4 +1,12 @@
-import React, {cloneElement, forwardRef, useCallback, useMemo, useState} from 'react'
+import React, {
+  cloneElement,
+  forwardRef,
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+  useRef,
+} from 'react'
 import {isElement} from 'react-is'
 import {Popover, PopoverProps} from '../../primitives'
 import {ThemeColorSchemeKey} from '../../theme'
@@ -20,6 +28,7 @@ export interface MenuButtonProps {
   button: React.ReactElement
   id: string
   menu?: React.ReactElement
+  onClose?: () => void
   /**
    * @deprecated Use `popover={{placement: 'top'}}` instead.
    */
@@ -57,6 +66,7 @@ export const MenuButton = forwardRef(function MenuButton(
     button: buttonProp,
     id,
     menu: menuProp,
+    onClose,
     placement,
     popoverScheme,
     portal,
@@ -68,6 +78,17 @@ export const MenuButton = forwardRef(function MenuButton(
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
   const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
+  const openRef = useRef<boolean>(open)
+
+  useEffect(() => {
+    if (onClose && !open && openRef.current) {
+      onClose()
+    }
+  }, [onClose, open])
+
+  useEffect(() => {
+    openRef.current = open
+  }, [open])
 
   const handleButtonClick = useCallback(() => {
     setOpen((v) => !v)

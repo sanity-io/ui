@@ -4,7 +4,7 @@ import React, {useCallback} from 'react'
 export default function OnCloseMenuButton() {
   const {push} = useToast()
 
-  const handleOnClose = useCallback(() => {
+  const handleClose = useCallback(() => {
     push({
       title: 'Menu closed',
       status: 'success',
@@ -17,7 +17,7 @@ export default function OnCloseMenuButton() {
         <MenuButton
           button={<Button text="With onClose callback" />}
           id="closable-example"
-          onClose={handleOnClose}
+          onClose={handleClose}
           menu={
             <Menu padding={0} space={0}>
               <Stack padding={1} space={1}>
