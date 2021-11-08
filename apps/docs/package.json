@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-docs",
-  "version": "0.1.75",
+  "version": "0.1.76",
   "scripts": {
     "build": "next build",
     "clean": "rimraf .next workshopScopes.ts",
@@ -22,8 +22,8 @@
     "@sanity/color": "^2.1.5",
     "@sanity/icons": "^1.2.1",
     "@sanity/logos": "^1.1.6",
-    "@sanity/ui": "^0.36.14",
-    "@sanity/ui-workshop": "^0.3.6",
+    "@sanity/ui": "^0.36.15",
+    "@sanity/ui-workshop": "^0.3.7",
     "codemirror": "^5.63.3",
     "date-fns": "^2.25.0",
     "lodash": "^4.17.21",
