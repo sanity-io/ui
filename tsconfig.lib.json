@@ -6,13 +6,13 @@
     "./src/**/__mocks__/*",
     "./src/**/__workshop__/*",
     "./src/**/*.test.ts",
-    "./src/**/*.test.tsx",
-    "./test"
+    "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
     "composite": true,
-    "rootDir": "../../../",
     "outDir": "./lib/dts/",
+    "declarationDir": "./lib/",
+    "rootDir": ".",
     "jsx": "react"
   },
   "references": [{"path": "../color/tsconfig.lib.json"}, {"path": "../icons/tsconfig.lib.json"}]
