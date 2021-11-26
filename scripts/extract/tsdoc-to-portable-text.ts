@@ -4,9 +4,7 @@ import {extract, SanityDocumentValue, transform} from '@sanity/tsdoc-to-portable
 import chalk from 'chalk'
 import {readJSONFile} from './helpers'
 
-const CWD = process.cwd()
 const ROOT_PATH = path.resolve(__dirname, '../..')
-const IGNORE_MSG_IDS = ['ae-internal-missing-underscore']
 
 const config = {
   sanity: {
@@ -31,17 +29,13 @@ async function extractPackage(name: string, currPackageDoc?: SanityDocumentValue
   const packageJsonPath = path.resolve(packagePath, 'package.json')
   const pkg = await readJSONFile(packageJsonPath)
 
-  const result = await extract('lib/esm/index.d.ts', {
+  const result = await extract('lib/src/index.d.ts', {
     packagePath,
     tsconfigPath: 'tsconfig.extract.json',
   })
 
   for (const msg of result.messages) {
-    if (IGNORE_MSG_IDS.includes(msg.messageId)) {
-      continue
-    }
-
-    const sourceFilePath = msg.sourceFilePath && path.relative(CWD, msg.sourceFilePath)
+    const sourceFilePath = msg.sourceFilePath && path.relative(ROOT_PATH, msg.sourceFilePath)
 
     if (msg.logLevel === 'error') {
       console.log(

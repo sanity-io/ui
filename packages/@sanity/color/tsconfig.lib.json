@@ -3,7 +3,8 @@
   "include": ["./src", "./typings"],
   "compilerOptions": {
     "composite": true,
-    "rootDir": "../../../",
-    "outDir": "./lib/dts/"
+    "outDir": "./lib/dts/",
+    "declarationDir": "./lib/",
+    "rootDir": "."
   }
 }

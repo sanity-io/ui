@@ -1,7 +1,9 @@
+#!/usr/bin/env node
+
 import chalk from 'chalk'
-import {etl} from './commands/etl'
-import {getCLIContext} from './helpers'
-import {CmdFn} from './types'
+import {etl} from './cli/commands/etl'
+import {getCLIContext} from './cli/helpers'
+import {CmdFn} from './cli/types'
 
 const commands: {[key: string]: CmdFn | undefined} = {
   etl,

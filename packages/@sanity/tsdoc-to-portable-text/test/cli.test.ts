@@ -3,7 +3,7 @@ import {exec} from './lib/exec'
 import {spawnProject} from './lib/spawnProject'
 
 function runCli(cmd: string, opts: {cwd: string}) {
-  return exec(`${path.resolve(__dirname, '../bin/tsdoc-to-portable-text')} ${cmd}`, {cwd: opts.cwd})
+  return exec(`${path.resolve(__dirname, '../lib/cli.js')} ${cmd}`, {cwd: opts.cwd})
 }
 
 describe('cli', () => {

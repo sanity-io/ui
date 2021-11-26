@@ -1,18 +1,24 @@
 {
   "name": "@sanity/ui-workshop",
   "version": "0.3.7",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
   "sideEffects": false,
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./lib/sanity-ui-workshop.js",
+    "default": "./lib/sanity-ui-workshop.modern.js"
+  },
+  "main": "lib/sanity-ui-workshop.js",
+  "module": "lib/sanity-ui-workshop.module.js",
+  "types": "lib/src/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
   "license": "MIT",
   "scripts": {
-    "build": "run-s build:esbuild build:dts copy:dts:* clean:dts",
-    "build:esbuild": "node -r esbuild-register scripts/build.ts",
-    "build:dts": "tsc --emitDeclarationOnly --project tsconfig.lib.json --rootDir src",
+    "build": "run-s build:microbundle",
+    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
     "clean": "rimraf lib",
-    "clean:dts": "rimraf lib/dts",
-    "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
-    "copy:dts:esm": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "type-check": "tsc -b"

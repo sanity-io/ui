@@ -2,20 +2,23 @@
   "name": "@sanity/color",
   "version": "2.1.5",
   "description": "The Sanity color palette.",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
   "sideEffects": false,
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./lib/sanity-color.js",
+    "default": "./lib/sanity-color.modern.js"
+  },
+  "main": "lib/sanity-color.js",
+  "module": "lib/sanity-color.module.js",
+  "types": "lib/src/index.d.ts",
   "files": [
-    "/lib"
+    "lib",
+    "src"
   ],
   "scripts": {
-    "build": "run-s build:esbuild build:dts copy:dts:* clean:dts",
-    "build:esbuild": "node -r esbuild-register scripts/build.ts",
-    "build:dts": "tsc --emitDeclarationOnly --project tsconfig.lib.json --rootDir src",
+    "build": "run-s build:microbundle",
+    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
     "clean": "rimraf lib",
-    "clean:dts": "rimraf lib/dts",
-    "copy:dts:cjs": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/cjs",
-    "copy:dts:es": "cpx 'lib/dts/**/*.{d.ts,d.ts.map}' lib/esm",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts --quiet",
     "prebuild": "yarn clean && yarn generate",

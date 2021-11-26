@@ -23,7 +23,7 @@ import {extract, load, transform} from '@sanity/tsdoc-to-portable-text'
 // Path to a package with a package.json file
 const packagePath = __dirname
 
-const result = await extract('lib/esm/index.d.ts', {
+const result = await extract('lib/src/index.d.ts', {
   packagePath,
   tsconfigPath: 'tsconfig.lib.json'
 })

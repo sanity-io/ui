@@ -22,7 +22,7 @@ import React, {
   useReducer,
   useState,
 } from 'react'
-import {useAxeResults} from '../axe/useAxeResults'
+import {useAxeResults} from '../axe'
 import {features} from '../features'
 import {isRecord} from '../lib/isRecord'
 import {qs} from '../lib/qs'

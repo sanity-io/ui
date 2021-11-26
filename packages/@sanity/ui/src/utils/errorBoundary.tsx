@@ -1,5 +1,5 @@
 import React from 'react'
-import {Code} from '../primitives'
+import {Code} from '../primitives/code'
 
 /**
  * DO NOT USE IN PRODUCTION

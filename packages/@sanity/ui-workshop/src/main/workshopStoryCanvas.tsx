@@ -1,7 +1,7 @@
 import {Card, Container, Flex, Spinner} from '@sanity/ui'
 import React, {useMemo, useState} from 'react'
 import styled from 'styled-components'
-import {useScope} from '..'
+import {useScope} from '../useScope'
 import {useWorkshop} from '../useWorkshop'
 import {VIEWPORT_OPTIONS} from './constants'
 
