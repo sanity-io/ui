@@ -18,7 +18,7 @@
     "type-check": "tsc -b"
   },
   "dependencies": {
-    "axe-core": "^4.3.4",
+    "axe-core": "^4.3.5",
     "pako": "^2.0.4",
     "segmented-property": "^3.0.3"
   },

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "incremental": true,
     "outDir": "./build/dts/",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
