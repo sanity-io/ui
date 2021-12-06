@@ -81,13 +81,22 @@ export default function Fullscreen() {
   }, [])
 
   const renderPopover = useCallback(
-    (props: {content: React.ReactNode; hidden: boolean}, ref: React.Ref<HTMLDivElement>) => {
+    (
+      props: {
+        content: React.ReactNode
+        hidden: boolean
+        onMouseEnter: () => void
+        onMouseLeave: () => void
+      },
+      ref: React.Ref<HTMLDivElement>
+    ) => {
       if (!props.hidden && error) {
         return (
           <Portal>
             <Card
+              onMouseEnter={props.onMouseEnter}
+              onMouseLeave={props.onMouseLeave}
               padding={4}
-              scheme="light"
               style={{position: 'absolute', inset: '0 0 0 0'}}
               tone="critical"
             >
@@ -104,7 +113,12 @@ export default function Fullscreen() {
       if (!props.hidden && query && !loading && options.length === 0) {
         return (
           <Portal>
-            <Card padding={4} scheme="light" style={{position: 'absolute', inset: '0 0 0 0'}}>
+            <Card
+              onMouseEnter={props.onMouseEnter}
+              onMouseLeave={props.onMouseLeave}
+              padding={4}
+              style={{position: 'absolute', inset: '0 0 0 0'}}
+            >
               <Flex align="center" height="fill" justify="center">
                 <Text align="center" muted>
                   No results for <strong>‘{query}’</strong>
@@ -117,7 +131,12 @@ export default function Fullscreen() {
 
       return (
         <Portal>
-          <Card hidden={props.hidden} ref={ref} scheme="light">
+          <Card
+            hidden={props.hidden}
+            onMouseEnter={props.onMouseEnter}
+            onMouseLeave={props.onMouseLeave}
+            ref={ref}
+          >
             {props.content}
           </Card>
         </Portal>
@@ -158,7 +177,7 @@ export default function Fullscreen() {
     <Card style={{display: 'flex', flexDirection: 'column', minHeight: '100%'}} tone="transparent">
       <PortalProvider element={portalElement}>
         <Flex direction="column" flex={1} height="fill">
-          <Card hidden={open} padding={2} scheme="dark">
+          <Card hidden={open} padding={2}>
             <Flex align="center">
               <Box flex={1} />
               <Button
