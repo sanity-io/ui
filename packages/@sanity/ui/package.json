@@ -33,7 +33,7 @@
     "@reach/auto-id": "^0.16.0",
     "@sanity/color": "^2.1.5",
     "@sanity/icons": "^1.2.1",
-    "framer-motion": "^5.3.3",
+    "framer-motion": "5.3.3",
     "lodash": "^4.17.21",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.2",
