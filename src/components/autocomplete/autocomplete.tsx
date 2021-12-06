@@ -65,6 +65,8 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
       content: React.ReactElement | null
       hidden: boolean
       inputElement: HTMLInputElement | null
+      onMouseEnter: () => void
+      onMouseLeave: () => void
     },
     ref: React.Ref<HTMLDivElement>
   ) => React.ReactNode
@@ -586,7 +588,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const results = useMemo(() => {
     if (renderPopover) {
       return renderPopover(
-        {content, hidden: !expanded, inputElement: inputElementRef.current},
+        {
+          content,
+          hidden: !expanded,
+          inputElement: inputElementRef.current,
+          onMouseEnter: handlePopoverMouseEnter,
+          onMouseLeave: handlePopoverMouseLeave,
+        },
         setResultsPopoverElement
       )
     }
