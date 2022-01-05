@@ -1,4 +1,11 @@
-import {BookIcon, CopyIcon, EllipsisVerticalIcon, ImageIcon, TrashIcon} from '@sanity/icons'
+import {
+  AddIcon,
+  BookIcon,
+  CopyIcon,
+  EllipsisVerticalIcon,
+  ImageIcon,
+  TrashIcon,
+} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -27,11 +34,11 @@ export default function MenuGroupRightStory() {
                   id="right-menu"
                   menu={
                     <Menu>
-                      <MenuGroup popover={{placement: 'left'}} text="Add above">
+                      <MenuGroup icon={AddIcon} popover={{placement: 'left'}} text="Add above">
                         <MenuItem icon={ImageIcon} text="Image" />
                         <MenuItem icon={BookIcon} text="Book" />
                       </MenuGroup>
-                      <MenuGroup popover={{placement: 'left'}} text="Add below">
+                      <MenuGroup icon={AddIcon} popover={{placement: 'left'}} text="Add below">
                         <MenuItem icon={ImageIcon} text="Image" />
                         <MenuItem icon={BookIcon} text="Book" />
                       </MenuGroup>
