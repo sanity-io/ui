@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "0.36.17",
+  "version": "0.37.0",
   "sideEffects": false,
   "source": "src/index.ts",
   "exports": {
@@ -32,7 +32,7 @@
     "@popperjs/core": "^2.11.2",
     "@reach/auto-id": "^0.16.0",
     "@sanity/color": "^2.1.6",
-    "@sanity/icons": "^1.2.2",
+    "@sanity/icons": "^1.2.3",
     "framer-motion": "5.5.5",
     "lodash": "^4.17.21",
     "popper-max-size-modifier": "^0.2.0",
