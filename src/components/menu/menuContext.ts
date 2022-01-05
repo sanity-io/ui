@@ -9,8 +9,8 @@ export interface MenuContextValue {
   onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
   onItemClick?: () => void
-  onMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
-  onMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
+  onItemMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
+  onItemMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
   registerElement?: (el: HTMLElement) => () => void
 }
 

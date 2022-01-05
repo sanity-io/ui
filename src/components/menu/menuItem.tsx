@@ -64,9 +64,9 @@ export const MenuItem = forwardRef(function MenuItem(
     tone = 'default',
     ...restProps
   } = props
-  const {activeElement, mount, onItemClick, onMouseEnter, onMouseLeave} = useMenu()
+  const {activeElement, mount, onItemClick, onItemMouseEnter, onItemMouseLeave} = useMenu()
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const selected = Boolean(activeElement) && rootElement === activeElement
+  const active = Boolean(activeElement) && activeElement === rootElement
 
   useEffect(() => mount(rootElement, selectedProp), [mount, rootElement, selectedProp])
 
@@ -110,14 +110,14 @@ export const MenuItem = forwardRef(function MenuItem(
       {...restProps}
       aria-pressed={as === 'button' && pressed}
       data-pressed={as !== 'button' && pressed ? '' : undefined}
-      data-selected={selected ? '' : undefined}
+      data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
       $radius={radius}
       $tone={tone}
       disabled={disabled}
       onClick={handleClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={onItemMouseEnter}
+      onMouseLeave={onItemMouseLeave}
       padding={0}
       ref={setRef}
       role="menuitem"

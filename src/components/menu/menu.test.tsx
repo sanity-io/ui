@@ -25,8 +25,8 @@ describe('components/menu', () => {
           activeIndex: 0,
           mount: (element: HTMLElement | null) => () => console.log(element),
           onItemClick: () => undefined,
-          onMouseEnter: (event: React.MouseEvent<HTMLElement>) => console.log(event),
-          onMouseLeave: (event: React.MouseEvent<HTMLElement>) => console.log(event),
+          onItemMouseEnter: (event: React.MouseEvent<HTMLElement>) => console.log(event),
+          onItemMouseLeave: (event: React.MouseEvent<HTMLElement>) => console.log(event),
         }
 
         return (
@@ -38,12 +38,14 @@ describe('components/menu', () => {
 
       render(<Root />)
 
-      expect(log.mock.calls[0][0].version).toBe(0.0)
-      expect(log.mock.calls[0][0].activeIndex).toBe(0)
-      expect(typeof log.mock.calls[0][0].mount).toBe('function')
-      expect(typeof log.mock.calls[0][0].onItemClick).toBe('function')
-      expect(typeof log.mock.calls[0][0].onMouseEnter).toBe('function')
-      expect(typeof log.mock.calls[0][0].onMouseLeave).toBe('function')
+      const contextValue = log.mock.calls[0][0]
+
+      expect(contextValue.version).toBe(0.0)
+      expect(contextValue.activeIndex).toBe(0)
+      expect(typeof contextValue.mount).toBe('function')
+      expect(typeof contextValue.onItemClick).toBe('function')
+      expect(typeof contextValue.onItemMouseEnter).toBe('function')
+      expect(typeof contextValue.onItemMouseEnter).toBe('function')
     })
 
     it('should fail when no context value is provided', async () => {
@@ -60,10 +62,11 @@ describe('components/menu', () => {
       }
 
       function Root() {
-        const value = undefined
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const value: any = undefined
 
         return (
-          <MenuContext.Provider value={value as any}>
+          <MenuContext.Provider value={value}>
             <Debug />
           </MenuContext.Provider>
         )
@@ -89,12 +92,13 @@ describe('components/menu', () => {
 
       function Root() {
         // NOTE: we’re testing this because the context value may be a function in the future
-        const value = () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const value: any = () => {
           return {version: 1}
         }
 
         return (
-          <MenuContext.Provider value={value as any}>
+          <MenuContext.Provider value={value}>
             <Debug />
           </MenuContext.Provider>
         )

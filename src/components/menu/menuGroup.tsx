@@ -19,8 +19,6 @@ export interface MenuGroupProps {
   tone?: SelectableTone
 }
 
-const MOUSE_LEAVE_TIMEOUT = 1000
-
 /**
  * @public
  */
@@ -40,47 +38,28 @@ export function MenuGroup(
     tone = 'default',
     ...restProps
   } = props
-  const [open, setOpen] = useState(false)
   const {
     activeElement,
     mount,
     onClickOutside,
     onEscape,
     onItemClick,
-    onMouseEnter,
-    onMouseLeave,
+    onItemMouseEnter,
     registerElement,
   } = useMenu()
   const [rootElement, setRootElement] = useState<HTMLButtonElement | null>(null)
-  const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [open, setOpen] = useState(false)
   const shouldFocusRef = useRef<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
-
-  // Register the element
-  useEffect(() => mount(rootElement), [mount, rootElement])
+  const [withinMenu, setWithinMenu] = useState(false)
 
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
-      if (mouseLeaveTimeoutRef.current) {
-        clearTimeout(mouseLeaveTimeoutRef.current)
-        mouseLeaveTimeoutRef.current = null
-      }
-
-      onMouseEnter(event)
+      setWithinMenu(false)
+      onItemMouseEnter(event)
       setOpen(true)
     },
-    [onMouseEnter]
-  )
-
-  const handleMouseLeave = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
-      onMouseLeave(event)
-
-      mouseLeaveTimeoutRef.current = setTimeout(() => {
-        setOpen(false)
-      }, MOUSE_LEAVE_TIMEOUT)
-    },
-    [onMouseLeave]
+    [onItemMouseEnter]
   )
 
   const handleMenuKeyDown = useCallback(
@@ -98,19 +77,6 @@ export function MenuGroup(
     [rootElement]
   )
 
-  const handleMenuMouseEnter = useCallback(() => {
-    if (mouseLeaveTimeoutRef.current) {
-      clearTimeout(mouseLeaveTimeoutRef.current)
-      mouseLeaveTimeoutRef.current = null
-    }
-  }, [])
-
-  const handleMenuMouseLeave = useCallback(() => {
-    mouseLeaveTimeoutRef.current = setTimeout(() => {
-      setOpen(false)
-    }, MOUSE_LEAVE_TIMEOUT)
-  }, [])
-
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       if (onClick) onClick(event)
@@ -126,28 +92,33 @@ export function MenuGroup(
     [onClick]
   )
 
-  const handleItemClick = useCallback(() => {
+  const handleChildItemClick = useCallback(() => {
     setOpen(false)
     if (onItemClick) onItemClick()
   }, [onItemClick])
 
-  useEffect(() => {
-    return () => {
-      if (mouseLeaveTimeoutRef.current !== null) {
-        clearTimeout(mouseLeaveTimeoutRef.current)
-        mouseLeaveTimeoutRef.current = null
-      }
-    }
-  }, [])
+  const handleMenuMouseEnter = useCallback(() => setWithinMenu(true), [])
 
-  const content = (
+  // Register the menu item element
+  useEffect(() => mount(rootElement), [mount, rootElement])
+
+  // Close child menu when a sibling item becomes active
+  useEffect(() => {
+    if (!active) setOpen(false)
+  }, [active])
+
+  // Update state when child menu is no longer open
+  useEffect(() => {
+    if (!open) setWithinMenu(false)
+  }, [open])
+
+  const childMenu = (
     <Menu
       onClickOutside={onClickOutside}
       onEscape={onEscape}
-      onItemClick={handleItemClick}
+      onItemClick={handleChildItemClick}
       onKeyDown={handleMenuKeyDown}
       onMouseEnter={handleMenuMouseEnter}
-      onMouseLeave={handleMenuMouseLeave}
       registerElement={registerElement}
       shouldFocus={shouldFocusRef.current}
     >
@@ -166,6 +137,7 @@ export function MenuGroup(
       shouldFocusRef.current = 'first'
 
       setOpen(true)
+      setWithinMenu(true)
 
       requestAnimationFrame(() => {
         shouldFocusRef.current = null
@@ -176,21 +148,20 @@ export function MenuGroup(
   }, [])
 
   return (
-    <Popover {...popover} content={content} data-ui="MenuGroup__popover" open={open}>
+    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
       <Selectable
         data-as={as}
         data-ui="MenuGroup"
         forwardedAs={as}
         {...restProps}
-        aria-pressed={as === 'button' ? !active && open : undefined}
-        data-pressed={as !== 'button' ? !active && open : undefined}
-        data-selected={active ? '' : undefined}
+        aria-pressed={as === 'button' ? withinMenu : undefined}
+        data-pressed={as !== 'button' ? withinMenu : undefined}
+        data-selected={!withinMenu && active ? '' : undefined}
         $radius={radius}
         $tone={tone}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         ref={setRootElement}
         tabIndex={-1}
         type={as === 'button' ? 'button' : undefined}
