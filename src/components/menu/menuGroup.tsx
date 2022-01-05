@@ -1,5 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {createElement, isValidElement, useCallback, useEffect, useRef, useState} from 'react'
+import {isValidElementType} from 'react-is'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {SelectableTone} from '../../types/selectable'
@@ -12,9 +13,11 @@ import {useMenu} from './useMenu'
 export interface MenuGroupProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
+  icon?: React.ComponentType | React.ReactNode
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: number | number[]
+  space?: number | number[]
   text: React.ReactNode
   tone?: SelectableTone
 }
@@ -30,10 +33,12 @@ export function MenuGroup(
     as = 'button',
     children,
     fontSize,
+    icon,
     onClick,
     padding = 3,
     popover = {},
     radius = 2,
+    space = 3,
     text,
     tone = 'default',
     ...restProps
@@ -168,12 +173,20 @@ export function MenuGroup(
       >
         <Box padding={padding}>
           <Flex>
-            <Box flex={1}>
+            {icon && (
+              <Text size={fontSize}>
+                {isValidElement(icon) && icon}
+                {isValidElementType(icon) && createElement(icon)}
+              </Text>
+            )}
+
+            <Box flex={1} marginLeft={icon ? space : undefined}>
               <Text size={fontSize} textOverflow="ellipsis">
                 {text}
               </Text>
             </Box>
-            <Box marginLeft={3}>
+
+            <Box marginLeft={space}>
               <Text size={fontSize}>
                 <ChevronRightIcon />
               </Text>
