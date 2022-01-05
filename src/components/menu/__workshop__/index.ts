@@ -23,6 +23,11 @@ export default defineScope('components/menu', 'Menu', [
     component: lazy(() => import('./groups')),
   },
   {
+    name: 'menu-group-right',
+    title: 'Menu group (right)',
+    component: lazy(() => import('./menuGroupRight')),
+  },
+  {
     name: 'tones',
     title: 'Tones',
     component: lazy(() => import('./tones')),
