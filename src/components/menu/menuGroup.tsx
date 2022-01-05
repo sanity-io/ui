@@ -1,7 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import styled from 'styled-components'
-import {Box, Popover, PopoverProps, Text} from '../../primitives'
+import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {SelectableTone} from '../../types/selectable'
 import {Menu} from './menu'
@@ -21,17 +20,6 @@ export interface MenuGroupProps {
 }
 
 const MOUSE_LEAVE_TIMEOUT = 1000
-
-const TextContainer = styled.span`
-  &:not([hidden]) {
-    display: flex;
-  }
-
-  & > div:first-child {
-    flex: 1;
-    min-width: 0;
-  }
-`
 
 /**
  * @public
@@ -67,7 +55,6 @@ export function MenuGroup(
   const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const shouldFocusRef = useRef<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
-  // const selected = active || open
 
   // Register the element
   useEffect(() => mount(rootElement), [mount, rootElement])
@@ -209,12 +196,18 @@ export function MenuGroup(
         type={as === 'button' ? 'button' : undefined}
       >
         <Box padding={padding}>
-          <TextContainer>
-            <Text size={fontSize}>{text}</Text>
-            <Text size={fontSize}>
-              <ChevronRightIcon />
-            </Text>
-          </TextContainer>
+          <Flex>
+            <Box flex={1}>
+              <Text size={fontSize} textOverflow="ellipsis">
+                {text}
+              </Text>
+            </Box>
+            <Box marginLeft={3}>
+              <Text size={fontSize}>
+                <ChevronRightIcon />
+              </Text>
+            </Box>
+          </Flex>
         </Box>
       </Selectable>
     </Popover>
