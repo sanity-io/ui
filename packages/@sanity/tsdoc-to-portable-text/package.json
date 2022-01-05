@@ -31,20 +31,20 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@microsoft/api-extractor": "^7.18.19",
-    "@microsoft/api-extractor-model": "^7.13.16",
+    "@microsoft/api-extractor": "^7.19.3",
+    "@microsoft/api-extractor-model": "^7.15.2",
     "@microsoft/tsdoc": "^0.13.2",
     "@types/cpx": "^1.5.2",
     "chalk": "^4.1.2",
     "mkdirp": "^1.0.4",
     "pkg-up": "^3.1.0",
-    "slugify": "^1.6.3",
+    "slugify": "^1.6.5",
     "tmp": "^0.2.1",
-    "yargs": "^17.2.1"
+    "yargs": "^17.3.1"
   },
   "devDependencies": {
     "@types/mkdirp": "^1.0.2",
-    "@types/tmp": "^0.2.2",
+    "@types/tmp": "^0.2.3",
     "cpx": "^1.5.0"
   }
 }
