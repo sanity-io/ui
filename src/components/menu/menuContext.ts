@@ -9,9 +9,19 @@ export interface MenuContextValue {
   onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
   onItemClick?: () => void
-  onItemMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
-  onItemMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
+  onItemMouseEnter?: (event: React.MouseEvent<HTMLElement>) => void
+  onItemMouseLeave?: (event: React.MouseEvent<HTMLElement>) => void
   registerElement?: (el: HTMLElement) => () => void
+
+  /**
+   * @deprecated Use `onItemMouseEnter` instead
+   */
+  onMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
+
+  /**
+   * @deprecated Use `onItemMouseLeave` instead
+   */
+  onMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
 }
 
 const key = Symbol.for('@sanity/ui/context/menu')

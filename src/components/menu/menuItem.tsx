@@ -64,7 +64,14 @@ export const MenuItem = forwardRef(function MenuItem(
     tone = 'default',
     ...restProps
   } = props
-  const {activeElement, mount, onItemClick, onItemMouseEnter, onItemMouseLeave} = useMenu()
+  const menu = useMenu()
+  const {
+    activeElement,
+    mount,
+    onItemClick,
+    onItemMouseEnter = menu.onMouseEnter,
+    onItemMouseLeave = menu.onMouseLeave,
+  } = menu
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
 
