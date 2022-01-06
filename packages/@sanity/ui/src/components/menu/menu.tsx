@@ -131,6 +131,10 @@ export const Menu = forwardRef(function Menu(
       onItemMouseEnter: handleItemMouseEnter,
       onItemMouseLeave: handleItemMouseLeave,
       registerElement,
+
+      // deprecated
+      onMouseEnter: handleItemMouseEnter,
+      onMouseLeave: handleItemMouseLeave,
     }),
     [
       activeElement,

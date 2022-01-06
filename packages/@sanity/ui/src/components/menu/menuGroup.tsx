@@ -43,15 +43,16 @@ export function MenuGroup(
     tone = 'default',
     ...restProps
   } = props
+  const menu = useMenu()
   const {
     activeElement,
     mount,
     onClickOutside,
     onEscape,
     onItemClick,
-    onItemMouseEnter,
+    onItemMouseEnter = menu.onMouseEnter,
     registerElement,
-  } = useMenu()
+  } = menu
   const [rootElement, setRootElement] = useState<HTMLButtonElement | null>(null)
   const [open, setOpen] = useState(false)
   const shouldFocusRef = useRef<'first' | 'last' | null>(null)
