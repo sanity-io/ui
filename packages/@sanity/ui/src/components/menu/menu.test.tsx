@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import React from 'react'
+import React, {useCallback, useMemo} from 'react'
 import {render} from '../../../test'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenu} from './useMenu'
@@ -19,15 +19,30 @@ describe('components/menu', () => {
       }
 
       function Root() {
-        const value: MenuContextValue = {
-          version: 0.0,
-          activeElement: null,
-          activeIndex: 0,
-          mount: (element: HTMLElement | null) => () => console.log(element),
-          onItemClick: () => undefined,
-          onItemMouseEnter: (event: React.MouseEvent<HTMLElement>) => console.log(event),
-          onItemMouseLeave: (event: React.MouseEvent<HTMLElement>) => console.log(event),
-        }
+        const handleItemMouseEnter = useCallback(
+          (event: React.MouseEvent<HTMLElement>) => console.log(event),
+          []
+        )
+
+        const handleItemMouseLeave = useCallback(
+          (event: React.MouseEvent<HTMLElement>) => console.log(event),
+          []
+        )
+
+        const value: MenuContextValue = useMemo(
+          () => ({
+            version: 0.0,
+            activeElement: null,
+            activeIndex: 0,
+            mount: (element: HTMLElement | null) => () => console.log(element),
+            onItemClick: () => undefined,
+            onItemMouseEnter: handleItemMouseEnter,
+            onItemMouseLeave: handleItemMouseLeave,
+            onMouseEnter: handleItemMouseEnter,
+            onMouseLeave: handleItemMouseLeave,
+          }),
+          [handleItemMouseEnter, handleItemMouseLeave]
+        )
 
         return (
           <MenuContext.Provider value={value}>
