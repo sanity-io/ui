@@ -36,5 +36,7 @@ describe('atoms/button', () => {
     }
 
     render(<WrappedButton button={buttonProps} />)
+
+    expect(screen.getByText('Button text')).toBeInTheDocument()
   })
 })

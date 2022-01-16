@@ -1,6 +1,6 @@
 {
   "extends": "../../../tsconfig.settings",
-  "include": ["./src", "./typings"],
+  "include": ["./src/", "./typings/"],
   "exclude": [
     "./src/**/__fixtures__/*",
     "./src/**/__mocks__/*",
@@ -11,8 +11,8 @@
   "compilerOptions": {
     "composite": true,
     "outDir": "./lib/dts/",
-    "declarationDir": "./lib/",
-    "rootDir": ".",
+    "declarationDir": "./lib/dts/",
+    "rootDir": "./src/",
     "jsx": "react"
   },
   "references": [{"path": "../color/tsconfig.lib.json"}, {"path": "../icons/tsconfig.lib.json"}]
