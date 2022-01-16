@@ -8,5 +8,4 @@ const {createJestConfig} = require('../../../test/jestConfig')
 module.exports = createJestConfig({
   displayName: require('./package.json').name,
   modulePathIgnorePatterns: ['<rootDir>/lib/'],
-  setupFilesAfterEnv: ['./test/setupTests.ts'],
 })

@@ -3,17 +3,17 @@
   "version": "1.2.3",
   "description": "The Sanity icons.",
   "sideEffects": false,
-  "source": "src/index.ts",
+  "source": "./src/index.ts",
   "exports": {
     "require": "./lib/sanity-icons.js",
     "default": "./lib/sanity-icons.modern.js"
   },
-  "main": "lib/sanity-icons.js",
-  "module": "lib/sanity-icons.module.js",
-  "types": "lib/src/index.d.ts",
+  "main": "./lib/sanity-icons.js",
+  "module": "./lib/sanity-icons.module.js",
+  "types": "./lib/dts/index.d.ts",
   "files": [
-    "lib",
-    "src"
+    "./lib/",
+    "./src/"
   ],
   "license": "MIT",
   "scripts": {
@@ -24,6 +24,7 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "pregenerate": "rimraf src/icons",
+    "test": "jest",
     "type-check": "tsc -b",
     "watch": "run-p watch:*",
     "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir lib/cjs --project tsconfig.lib.json --rootDir src --target ES5",

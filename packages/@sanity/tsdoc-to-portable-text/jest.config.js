@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 'use strict'
 
-module.exports = {
-  modulePathIgnorePatterns: ['<rootDir>/test/__fixtures'],
+const {createJestConfig} = require('../../../test/jestConfig')
+
+/** @type {import('@jest/types').Config.InitialOptions} */
+module.exports = createJestConfig({
+  displayName: require('./package.json').name,
+  modulePathIgnorePatterns: ['<rootDir>/lib/'],
   testEnvironment: 'node',
-  testTimeout: 10000,
-  transform: {'^.+\\.tsx?$': 'esbuild-jest'},
-  verbose: true,
-}
+})

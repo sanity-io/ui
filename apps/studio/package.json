@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "sanity build public -y",
-    "clean": "rimraf public",
+    "clean": "rimraf build public",
     "config:build": "node -r esbuild-register scripts/config/build.ts",
     "config:watch": "node -r esbuild-register scripts/config/watch.ts",
     "deploy": "sanity deploy",

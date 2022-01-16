@@ -4,17 +4,26 @@
 
 const withTranspileModules = require('next-transpile-modules')
 
-module.exports = withTranspileModules([
-  // Add monorepo sibling packages to includes
+const MONOREPO_PACKAGES = [
   '@sanity/color',
   '@sanity/icons',
   '@sanity/logos',
   '@sanity/ui',
   '@sanity/ui-workshop',
-])({
+]
+
+module.exports = withTranspileModules(
+  // Add monorepo sibling packages to includes
+  MONOREPO_PACKAGES
+)({
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+
   react: {
     useSuspense: false,
+  },
+
+  typescript: {
+    tsconfigPath: './tsconfig.next.json',
   },
 
   webpack: (config) => {

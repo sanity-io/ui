@@ -4,7 +4,7 @@
   "version": "0.1.80",
   "scripts": {
     "build": "next build",
-    "clean": "rimraf .next",
+    "clean": "rimraf .next build",
     "dev": "next dev -p 3003",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",

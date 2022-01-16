@@ -4,7 +4,7 @@
   "version": "0.1.81",
   "scripts": {
     "build": "next build",
-    "clean": "rimraf .next workshopScopes.ts",
+    "clean": "rimraf .next build workshopScopes.ts",
     "dev": "run-s packages:build scopes:build && run-p scopes:watch next:dev",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "next:dev": "next dev",

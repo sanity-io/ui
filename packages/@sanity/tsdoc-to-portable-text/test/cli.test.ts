@@ -1,10 +1,8 @@
-import path from 'path'
-import {exec} from './lib/exec'
+import chalk from 'chalk'
+import {run} from '../src/cli/run'
 import {spawnProject} from './lib/spawnProject'
 
-function runCli(cmd: string, opts: {cwd: string}) {
-  return exec(`${path.resolve(__dirname, '../lib/cli.js')} ${cmd}`, {cwd: opts.cwd})
-}
+const noop = () => undefined
 
 describe('cli', () => {
   let project: {cleanup: () => void; path: string}
@@ -18,11 +16,22 @@ describe('cli', () => {
   })
 
   test('run `etl` command', async () => {
-    const result = await runCli(
-      'etl lib/esm/index.d.ts --outDir etc --tsconfig tsconfig.lib.json',
-      {cwd: project.path}
-    )
+    // Spy on `console.log`
+    const log = jest.spyOn(global.console, 'log').mockImplementation(noop)
 
-    expect(result.stdout).toContain('wrote documents to etc/1.0.0.json\n')
+    await run({
+      args: ['lib/esm/index.d.ts'],
+      cwd: project.path,
+      cmd: 'etl',
+      flags: {
+        outDir: 'etc',
+        tsconfig: 'tsconfig.lib.json',
+      },
+    })
+
+    expect(log).toBeCalledWith(`${chalk.green('success')} wrote documents to etc/1.0.0.json`)
+
+    // Reset the spy at the end of the test
+    log.mockReset()
   })
 })

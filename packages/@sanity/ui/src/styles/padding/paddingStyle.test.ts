@@ -5,13 +5,13 @@ const {color, ...restTheme} = studioTheme
 const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
 
 describe('styles/padding', () => {
-  it('should', () => {
+  it('should 1', () => {
     const styles = responsivePaddingStyle({$padding: 0, theme})
 
     expect(styles).toEqual([[{padding: 0}]])
   })
 
-  it('should', () => {
+  it('should 2', () => {
     const styles = responsivePaddingStyle({$padding: [0, 1, 2], theme})
 
     expect(styles).toEqual([

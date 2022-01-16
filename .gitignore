@@ -1,6 +1,7 @@
 .DS_Store
 /*.log
 /.vscode
+/build
 /lerna-debug.log
 /local_registry.log
 /node_modules

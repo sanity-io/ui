@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import {PluginOption} from 'vite'
 
-const PACKAGES_PATH = path.resolve(__dirname, '../src/packages.ts')
+const PACKAGES_PATH = path.resolve(__dirname, '../src/packages.js')
 
 const packages = {
   color: require('../../../packages/@sanity/color/package.json'),

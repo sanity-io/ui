@@ -1,4 +1,26 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./scripts"]
+  "include": ["./*.js", "./package.json", "./scripts/", "./test/"],
+  "compilerOptions": {
+    "outDir": "./build/dts",
+    "allowJs": true,
+    "checkJs": true,
+    "resolveJsonModule": true
+  },
+  "references": [
+    {"path": "./apps/docs"},
+    {"path": "./apps/studio"},
+    {"path": "./apps/workshop"},
+
+    {"path": "./examples/manage"},
+    {"path": "./examples/studio"},
+    {"path": "./examples/web"},
+
+    {"path": "./packages/@sanity/color"},
+    {"path": "./packages/@sanity/icons"},
+    {"path": "./packages/@sanity/logos"},
+    {"path": "./packages/@sanity/tsdoc-to-portable-text"},
+    {"path": "./packages/@sanity/ui"},
+    {"path": "./packages/@sanity/ui-workshop"}
+  ]
 }

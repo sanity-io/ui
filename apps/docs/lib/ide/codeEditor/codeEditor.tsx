@@ -15,7 +15,7 @@ interface CodeEditorCursor {
   column: number
 }
 
-interface CodeEditorProps extends BoxProps {
+export interface CodeEditorProps extends BoxProps {
   code: string
   cursor: CodeEditorCursor
   fontSize?: number | number[]

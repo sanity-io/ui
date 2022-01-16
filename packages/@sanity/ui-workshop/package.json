@@ -2,17 +2,17 @@
   "name": "@sanity/ui-workshop",
   "version": "0.3.12",
   "sideEffects": false,
-  "source": "src/index.ts",
+  "source": "./src/index.ts",
   "exports": {
     "require": "./lib/sanity-ui-workshop.js",
     "default": "./lib/sanity-ui-workshop.modern.js"
   },
-  "main": "lib/sanity-ui-workshop.js",
-  "module": "lib/sanity-ui-workshop.module.js",
-  "types": "lib/src/index.d.ts",
+  "main": "./lib/sanity-ui-workshop.js",
+  "module": "./lib/sanity-ui-workshop.module.js",
+  "types": "./lib/dts/index.d.ts",
   "files": [
-    "lib",
-    "src"
+    "./lib/",
+    "./src/"
   ],
   "license": "MIT",
   "scripts": {
@@ -21,6 +21,7 @@
     "clean": "rimraf lib",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
+    "test": "jest",
     "type-check": "tsc -b"
   },
   "dependencies": {

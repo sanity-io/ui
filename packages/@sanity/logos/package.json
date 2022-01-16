@@ -2,17 +2,17 @@
   "name": "@sanity/logos",
   "version": "1.1.7",
   "sideEffects": false,
-  "source": "src/index.ts",
+  "source": "./src/index.ts",
   "exports": {
     "require": "./lib/sanity-logos.js",
     "default": "./lib/sanity-logos.modern.js"
   },
-  "main": "lib/sanity-logos.js",
-  "module": "lib/sanity-logos.module.js",
-  "types": "lib/src/index.d.ts",
+  "main": "./lib/sanity-logos.js",
+  "module": "./lib/sanity-logos.module.js",
+  "types": "./lib/dts/index.d.ts",
   "files": [
-    "lib",
-    "src"
+    "./lib/",
+    "./src/"
   ],
   "license": "MIT",
   "scripts": {
@@ -21,6 +21,7 @@
     "clean": "rimraf lib",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
+    "test": "jest",
     "type-check": "tsc -b",
     "watch": "run-p watch:*",
     "watch:cjs": "tsc --preserveWatchOutput -w --module CommonJS --outDir lib/cjs --project tsconfig.lib.json --rootDir src --target ES5",

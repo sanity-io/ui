@@ -2,21 +2,21 @@
   "name": "@sanity/tsdoc-to-portable-text",
   "version": "0.1.15",
   "sideEffects": false,
-  "source": "src/index.ts",
+  "source": "./src/index.ts",
   "exports": {
     "cli": "./lib/tsdoc-to-portable-text.cli.js",
     "require": "./lib/tsdoc-to-portable-text.js",
     "default": "./lib/tsdoc-to-portable-text.modern.js"
   },
-  "main": "lib/tsdoc-to-portable-text.js",
-  "module": "lib/tsdoc-to-portable-text.module.js",
-  "types": "lib/src/index.d.ts",
+  "main": "./lib/tsdoc-to-portable-text.js",
+  "module": "./lib/tsdoc-to-portable-text.module.js",
+  "types": "./lib/dts/index.d.ts",
   "bin": {
-    "tsdoc-to-portable-text": "lib/cli.js"
+    "tsdoc-to-portable-text": "./lib/cli.js"
   },
   "files": [
-    "lib",
-    "src"
+    "./lib/",
+    "./src/"
   ],
   "author": "Sanity.io <hello@sanity.io>",
   "license": "MIT",

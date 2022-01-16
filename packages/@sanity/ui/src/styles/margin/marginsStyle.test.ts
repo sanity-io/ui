@@ -5,13 +5,13 @@ const {color, ...restTheme} = studioTheme
 const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
 
 describe('styles/margin', () => {
-  it('should', () => {
+  it('should 1', () => {
     const styles = responsiveMarginStyle({$margin: 0, theme})
 
     expect(styles).toEqual([[{margin: 0}]])
   })
 
-  it('should', () => {
+  it('should 2', () => {
     const styles = responsiveMarginStyle({$margin: [0, 1, 2], theme})
 
     expect(styles).toEqual([

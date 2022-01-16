@@ -15,8 +15,9 @@
 # production
 /build
 
-/packages.ts
-/workshopScopes.ts
+# generated files
+/packages.js
+/workshopScopes.js
 
 # debug
 npm-debug.log*

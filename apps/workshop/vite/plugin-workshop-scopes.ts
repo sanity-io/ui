@@ -9,7 +9,7 @@ const SCOPES_RESOLVER_OPTIONS: ScopeResolverOptions = {
     path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.ts'),
     path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.tsx'),
   ],
-  target: path.resolve(__dirname, '../src/scopes.ts'),
+  target: path.resolve(__dirname, '../src/scopes.js'),
 }
 
 const WORKSHOP_ENV_MODULE_ID = '$workshop'

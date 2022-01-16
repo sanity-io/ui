@@ -5,7 +5,7 @@
   "scripts": {
     "build": "lerna run --scope @sanity/* build",
     "build:workshop": "lerna run --scope sanity-ui-workshop build",
-    "clean": "lerna run clean",
+    "clean": "rimraf build && lerna run clean",
     "dev": "run-p dev:docs dev:ui watch:packages",
     "dev:docs": "lerna run --stream --scope 'sanity-design-{docs,studio}' dev",
     "dev:example-manage": "lerna run --stream --scope sanity-design-example-manage dev",
@@ -22,16 +22,16 @@
     "release:next": "yarn build && lerna publish --canary --force-publish --no-git-tag-version --dist-tag=next --preid=next --exact",
     "lint": "lerna run --stream --parallel lint",
     "start:workshop": "lerna run --scope sanity-ui-workshop start",
-    "test": "lerna run --stream --parallel test",
+    "test": "jest",
     "test:browser": "start-server-and-test 'run-s build:workshop start:workshop' http://localhost:9009 'yarn test:cypress:run'",
     "test:cypress:open": "cypress open --config-file .cypress/cypress.json",
     "test:cypress:run": "cypress run --config-file .cypress/cypress.json",
-    "type-check": "lerna run --stream --parallel type-check",
+    "type-check": "tsc --build",
     "watch:packages": "lerna run --stream --parallel --scope @sanity/* watch"
   },
   "devDependencies": {
     "@sanity/client": "^2.23.2",
-    "@sanity/tsdoc-to-portable-text": "^0.1.13",
+    "@sanity/tsdoc-to-portable-text": "^0.1.15",
     "@types/jest": "^27.4.0",
     "@types/jest-axe": "^3.5.3",
     "@types/node": "^17.0.8",

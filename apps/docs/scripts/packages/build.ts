@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const ROOT_PATH = path.resolve(__dirname, '../../../..')
-const PACKAGES_PATH = path.resolve(__dirname, '../../packages.ts')
+const PACKAGES_PATH = path.resolve(__dirname, '../../packages.js')
 
 const packages = {
   color: require('../../../../packages/@sanity/color/package.json'),

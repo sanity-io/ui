@@ -1,2 +1,7 @@
+/build
 /dist
 /node_modules
+
+# generated source files
+/src/scopes.js
+/src/packages.js

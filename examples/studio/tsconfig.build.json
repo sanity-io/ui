@@ -32,7 +32,7 @@
 
     // JSX
     "jsx": "react",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "$sanity/*": ["./src/$sanity/*"]
     }
