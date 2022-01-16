@@ -16,13 +16,13 @@
     "@sanity/icons": "^1.2.3",
     "@sanity/logos": "^1.1.7",
     "@sanity/ui": "^0.37.2",
-    "next": "^12.0.7",
+    "next": "^12.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^12.0.7",
+    "@next/bundle-analyzer": "^12.0.8",
     "babel-plugin-styled-components": "^2.0.2",
     "next-transpile-modules": "^9.0.0"
   }
