@@ -33,7 +33,7 @@
     "@reach/auto-id": "^0.16.0",
     "@sanity/color": "^2.1.6",
     "@sanity/icons": "^1.2.3",
-    "framer-motion": "5.5.5",
+    "framer-motion": "5.6.0",
     "lodash": "^4.17.21",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.2",
@@ -41,7 +41,7 @@
     "react-refractor": "^2.1.5"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.11.1",
+    "@testing-library/dom": "^8.11.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/refractor": "^3.0.2",
