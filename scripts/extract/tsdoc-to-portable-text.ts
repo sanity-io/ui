@@ -123,5 +123,5 @@ async function extractTsdocToPortableText() {
 
 extractTsdocToPortableText().catch((error) => {
   console.log(`${chalk.red('error')} ${error.message}`)
-  process.exit(0)
+  process.exit(1)
 })
