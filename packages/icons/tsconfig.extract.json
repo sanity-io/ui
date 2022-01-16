@@ -1,6 +1,6 @@
 {
   "extends": "../../../tsconfig.settings",
-  "include": ["./typings"],
+  "include": ["./typings/"],
   "files": ["./src/index.ts"],
   "compilerOptions": {
     "outDir": "./lib/dts/",
