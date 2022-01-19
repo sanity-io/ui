@@ -34,7 +34,6 @@
     "@sanity/color": "^2.1.6",
     "@sanity/icons": "^1.2.3",
     "framer-motion": "6.2.1",
-    "lodash": "^4.17.21",
     "popper-max-size-modifier": "^0.2.0",
     "react-is": "^17.0.2",
     "react-popper": "^2.2.5",
