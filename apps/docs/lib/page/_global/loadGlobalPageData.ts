@@ -1,4 +1,3 @@
-import {isArray} from 'lodash'
 import {DATA_QUERY} from './queries'
 import {buildNavMenu, findNavNode, getNavItems} from '$lib/nav'
 import {isRecord} from '$lib/types'
@@ -16,7 +15,7 @@ export async function loadGlobalPageData({
   const pageData: unknown = await getClient(preview).fetch(DATA_QUERY)
   const nav = isRecord(pageData) && pageData.nav
   const settings = isRecord(pageData) && pageData.settings
-  const navValues: unknown[] = (isRecord(nav) && isArray(nav.items) && nav.items) || []
+  const navValues: unknown[] = (isRecord(nav) && Array.isArray(nav.items) && nav.items) || []
   const node = findNavNode(navValues, path)
   const targetData: unknown = await getClient(preview).fetch(TARGET_QUERY, {
     id: node ? node.targetId : '404',

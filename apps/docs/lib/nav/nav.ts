@@ -1,4 +1,3 @@
-import {uniq} from 'lodash'
 import {NavItem, NavMenu, NavMenuItem} from './types'
 import {features} from '$config'
 import {isArray, isRecord, isString} from '$lib/types'
@@ -122,4 +121,8 @@ export function buildNavMenu(navItem: NavItem): NavMenu {
     collapsed: false,
     items,
   }
+}
+
+function uniq(items: string[]): string[] {
+  return items.filter((item, index) => items.indexOf(item) === index)
 }
