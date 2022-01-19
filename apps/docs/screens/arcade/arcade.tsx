@@ -1,5 +1,5 @@
 import {Card, Flex} from '@sanity/ui'
-import {debounce, DebouncedFunc} from 'lodash'
+import {debounce, DebouncedFunc} from 'lodash-es'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import qs from 'qs'
