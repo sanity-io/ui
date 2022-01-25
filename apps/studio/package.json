@@ -21,25 +21,25 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@sanity/base": "^2.24.1",
-    "@sanity/cli": "^2.24.1",
-    "@sanity/code-input": "^2.24.1",
-    "@sanity/core": "^2.24.0",
-    "@sanity/default-layout": "^2.24.1",
+    "@sanity/base": "^2.25.0",
+    "@sanity/cli": "^2.25.0",
+    "@sanity/code-input": "^2.25.0",
+    "@sanity/core": "^2.25.0",
+    "@sanity/default-layout": "^2.25.0",
     "@sanity/default-login": "^2.24.1",
-    "@sanity/desk-tool": "^2.24.1",
+    "@sanity/desk-tool": "^2.25.0",
     "@sanity/icons": "^1.2.3",
     "@sanity/logos": "^1.1.7",
     "@sanity/production-preview": "2.15.0",
     "@sanity/types": "^2.24.0",
     "@sanity/ui": "^0.37.2",
-    "@sanity/vision": "^2.24.1",
+    "@sanity/vision": "^2.25.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rxjs": "^6.5.3",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "chokidar": "^3.5.2"
+    "chokidar": "^3.5.3"
   }
 }
