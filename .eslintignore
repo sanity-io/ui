@@ -1,0 +1,22 @@
+/build
+
+# Apps
+/apps/docs/.next
+/apps/docs/build
+/apps/studio/build
+/apps/studio/public
+/apps/workshop/build
+/apps/workshop/dist
+
+# Examples
+/examples/manage/build
+/examples/manage/public
+/examples/studio/build
+/examples/studio/public
+/examples/web/.next
+/examples/web/build
+
+# Packages
+/packages/*/lib
+/packages/@sanity/*/lib
+/packages/@sanity/**/__fixtures__

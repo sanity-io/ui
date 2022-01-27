@@ -16,7 +16,7 @@
     "extract": "run-s extract:*",
     "extract:tsdoc-to-portable-text": "cd scripts/extract && node -r dotenv-flow/config -r esbuild-register tsdoc-to-portable-text.ts",
     "generate": "lerna run generate",
-    "lint": "lerna run --stream --parallel lint",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "postinstall": "yarn husky install",
     "release:dryrun": "yarn build && ./scripts/publish/dryrun",
     "release:latest": "yarn build && lerna publish --dist-tag latest",
