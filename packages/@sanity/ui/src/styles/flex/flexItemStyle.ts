@@ -20,5 +20,7 @@ export function responsiveFlexItemStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$flex), (flex) => ({flex}))
+  return responsive(media, getResponsiveProp(props.$flex), (flex) => {
+    return {flex}
+  })
 }

@@ -1,4 +1,4 @@
-import {FlexAlign, FlexDirection, FlexJustify, FlexWrap} from '../../types'
+import {FlexAlign, FlexDirection, FlexJustify, FlexValue, FlexWrap} from '../../types'
 
 /**
  * @internal
@@ -15,7 +15,7 @@ export interface ResponsiveFlexStyleProps {
  * @internal
  */
 export interface ResponsiveFlexItemStyleProps {
-  $flex?: number | number[]
+  $flex?: FlexValue | FlexValue[]
 }
 
 /**
