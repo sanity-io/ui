@@ -22,4 +22,9 @@ export type FlexJustify =
 /**
  * @public
  */
+export type FlexValue = number | 'none'
+
+/**
+ * @public
+ */
 export type FlexWrap = 'wrap' | 'wrap-reverse' | 'nowrap'

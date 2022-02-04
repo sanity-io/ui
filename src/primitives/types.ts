@@ -6,6 +6,7 @@ import {
   FlexAlign,
   FlexDirection,
   FlexJustify,
+  FlexValue,
   FlexWrap,
   GridAutoCols,
   GridAutoFlow,
@@ -53,7 +54,7 @@ export interface ResponsiveFlexProps {
  * @public
  */
 export interface ResponsiveFlexItemProps {
-  flex?: number | number[]
+  flex?: FlexValue | FlexValue[]
 }
 
 /**
