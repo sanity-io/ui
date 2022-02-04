@@ -62,6 +62,7 @@ git rebase origin/main
 git checkout main
 git rebase next
 yarn release:latest
+git push origin main
 
 # To publish a new `next` release
 git checkout next
