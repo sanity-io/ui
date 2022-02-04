@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-example-studio",
-  "version": "0.1.80",
+  "version": "0.1.81",
   "license": "MIT",
   "scripts": {
     "build": "vite build",
@@ -12,9 +12,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity/icons": "^1.2.3",
-    "@sanity/logos": "^1.1.7",
-    "@sanity/ui": "^0.37.2",
+    "@sanity/icons": "^1.2.4",
+    "@sanity/logos": "^1.1.8",
+    "@sanity/ui": "^0.37.3",
     "is-hotkey": "^0.2.0",
     "qs": "^6.10.3",
     "react": "^17.0.2",
