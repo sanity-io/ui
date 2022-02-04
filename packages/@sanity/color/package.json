@@ -1,6 +1,6 @@
 {
   "name": "@sanity/color",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "The Sanity color palette.",
   "sideEffects": false,
   "source": "./src/index.ts",
