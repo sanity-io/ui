@@ -15,8 +15,8 @@
     "tsdoc-to-portable-text": "./lib/cli.js"
   },
   "files": [
-    "./lib/",
-    "./src/"
+    "lib",
+    "src"
   ],
   "author": "Sanity.io <hello@sanity.io>",
   "license": "MIT",

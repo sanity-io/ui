@@ -11,8 +11,8 @@
   "module": "./lib/sanity-logos.module.js",
   "types": "./lib/dts/index.d.ts",
   "files": [
-    "./lib/",
-    "./src/"
+    "lib",
+    "src"
   ],
   "license": "MIT",
   "scripts": {
