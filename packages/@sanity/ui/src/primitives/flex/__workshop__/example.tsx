@@ -13,7 +13,7 @@ const DebugCard = styled(Card)`
   justify-content: center;
 `
 
-export default function PlainStory() {
+export default function ExampleStory() {
   const direction = useSelect('Direction', WORKSHOP_FLEX_DIRECTION_OPTIONS, 'row', 'Props')
 
   return (
@@ -26,8 +26,8 @@ export default function PlainStory() {
         <Code>[1,2,3]</Code>
       </DebugCard>
 
-      <DebugCard flex={1}>
-        <Code>1</Code>
+      <DebugCard flex={['none', 'none', 1]}>
+        <Code>['none', 'none', 1]</Code>
       </DebugCard>
     </Flex>
   )
