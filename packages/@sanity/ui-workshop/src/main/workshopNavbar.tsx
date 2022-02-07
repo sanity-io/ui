@@ -1,4 +1,4 @@
-import {ControlsIcon, MenuIcon, MoonIcon, SelectIcon, SunIcon} from '@sanity/icons'
+import {ControlsIcon, LaunchIcon, MenuIcon, MoonIcon, SelectIcon, SunIcon} from '@sanity/icons'
 import {
   Box,
   Breadcrumbs,
@@ -14,6 +14,7 @@ import {
 } from '@sanity/ui'
 import React, {useCallback, useMemo} from 'react'
 import styled from 'styled-components'
+import {useScope} from '../useScope'
 import {useWorkshop} from '../useWorkshop'
 import {VIEWPORT_OPTIONS, ZOOM_OPTIONS} from './constants'
 
@@ -30,8 +31,16 @@ export function WorkshopNavbar(props: {
   zoom: number
 }): React.ReactElement {
   const {scheme, setScheme, setViewport, setZoom, viewport, zoom} = props
-  const {pushLocation, scope, story, title} = useWorkshop()
+  const {pushLocation, scope, story, title, location, frameUrl} = useWorkshop()
+  const {value} = useScope()
 
+  const currentFrameUrl = useMemo(
+    () =>
+      `${frameUrl}?path=${location.path}&scheme=${scheme}&value=${encodeURIComponent(
+        JSON.stringify(value)
+      )}`,
+    [frameUrl, location.path, scheme, value]
+  )
   const handleToggleScheme = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const target = event.currentTarget
@@ -160,7 +169,21 @@ export function WorkshopNavbar(props: {
                   />
                 </LayerProvider>
               </Flex>
-
+              {story && (
+                <Box marginLeft={2}>
+                  <Button
+                    as="a"
+                    fontSize={1}
+                    href={currentFrameUrl}
+                    iconRight={LaunchIcon}
+                    mode="ghost"
+                    padding={2}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    text="Open story"
+                  />
+                </Box>
+              )}
               <Box marginLeft={2}>
                 <Button as="label" mode="bleed" padding={2}>
                   <Flex align="center">
@@ -186,6 +209,7 @@ export function WorkshopNavbar(props: {
       </Root>
     ),
     [
+      currentFrameUrl,
       handleHomeClick,
       handleToggleScheme,
       scheme,
