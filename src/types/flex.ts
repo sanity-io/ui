@@ -22,7 +22,7 @@ export type FlexJustify =
 /**
  * @public
  */
-export type FlexValue = number | 'none'
+export type FlexValue = number | 'none' | 'auto' | 'initial'
 
 /**
  * @public
