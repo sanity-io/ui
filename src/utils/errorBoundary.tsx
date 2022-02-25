@@ -37,7 +37,9 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
     const {error} = this.state
 
     if (error) {
-      return <Code>{error.message}</Code>
+      const message = typeof error?.message === 'string' ? error.message : 'Error'
+
+      return <Code>{message}</Code>
     }
 
     return this.props.children
