@@ -137,7 +137,7 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
       docNode as DocParagraph
     )
 
-    const children = _transformContainer(transformedParagraph)
+    const children = _transformDocCommentContent(transformedParagraph)
 
     if (!children) return undefined
 
@@ -205,7 +205,9 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
   throw new Error(`unknown doc node type: ${docNode.kind}`)
 }
 
-function _transformContainer(section: DocNodeContainer): Record<string, unknown>[] | undefined {
+export function _transformDocCommentContent(
+  section: DocNodeContainer
+): Record<string, unknown>[] | undefined {
   if (!section.nodes.length) return undefined
 
   const nodes = section.nodes
@@ -217,7 +219,7 @@ function _transformContainer(section: DocNodeContainer): Record<string, unknown>
 
 export function transformDocComment(docComment: DocComment): Record<string, unknown> {
   // Summary
-  const summary = _transformContainer(docComment.summarySection)
+  const summary = _transformDocCommentContent(docComment.summarySection)
 
   // Parameters
   const parameters = docComment.params.blocks.length
@@ -225,49 +227,59 @@ export function transformDocComment(docComment: DocComment): Record<string, unkn
         _type: 'tsdoc.paramBlock',
         _key: String(idx),
         name: paramBlock.parameterName,
-        content: _transformContainer(paramBlock.content),
+        content: _transformDocCommentContent(paramBlock.content),
       }))
     : undefined
 
   // Returns
   const returns = docComment.returnsBlock && {
     _type: 'tsdoc.returnsBlock',
-    content: _transformContainer(docComment.returnsBlock.content),
+    content: _transformDocCommentContent(docComment.returnsBlock.content),
   }
 
   // `@remarks` block
   const remarks = docComment.remarksBlock && {
     _type: 'tsdoc.remarksBlock',
-    content: _transformContainer(docComment.remarksBlock.content),
+    content: _transformDocCommentContent(docComment.remarksBlock.content),
   }
 
-  // `@example` blocks
-  const _exampleBlocks = docComment.customBlocks.filter(
-    (x) => x.blockTag.tagNameWithUpperCase === StandardTags.example.tagNameWithUpperCase
-  )
-  const exampleBlocks = _exampleBlocks.length
-    ? _exampleBlocks.map((exampleBlock, idx) => {
-        return {
-          _type: 'tsdoc.exampleBlock',
-          _key: String(idx),
-          content: _transformContainer(exampleBlock.content),
-        }
+  const exampleBlocks = []
+  const customBlocks = []
+
+  // Custom blocks
+  for (let i = 0; i < docComment.customBlocks.length; i += 1) {
+    const customBlock = docComment.customBlocks[i]
+
+    // This is a `@example` block
+    if (customBlock.blockTag.tagNameWithUpperCase === StandardTags.example.tagNameWithUpperCase) {
+      exampleBlocks.push({
+        _type: 'tsdoc.exampleBlock',
+        _key: String(i),
+        content: _transformDocCommentContent(customBlock.content),
       })
-    : undefined
+    } else {
+      customBlocks.push({
+        _type: 'tsdoc.customBlock',
+        _key: String(i),
+        tag: customBlock.blockTag.tagName,
+        content: _transformDocCommentContent(customBlock.content),
+      })
+    }
+  }
 
   // `@see` blocks
   const seeBlocks = docComment.seeBlocks.length
     ? docComment.seeBlocks.map((seeBlock, idx) => ({
         _type: 'tsdoc.seeBlock',
         _key: String(idx),
-        content: _transformContainer(seeBlock.content),
+        content: _transformDocCommentContent(seeBlock.content),
       }))
     : undefined
 
   // `@deprecated` block
   const deprecated = docComment.deprecatedBlock && {
     _type: 'tsdoc.deprecatedBlock',
-    content: _transformContainer(docComment.deprecatedBlock.content),
+    content: _transformDocCommentContent(docComment.deprecatedBlock.content),
   }
 
   // Modifiers
@@ -285,7 +297,8 @@ export function transformDocComment(docComment: DocComment): Record<string, unkn
     parameters,
     returns,
     remarks,
-    exampleBlocks,
+    customBlocks: customBlocks.length > 0 ? customBlocks : undefined,
+    exampleBlocks: exampleBlocks.length > 0 ? exampleBlocks : undefined,
     seeBlocks,
     deprecated,
     modifierTags,

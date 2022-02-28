@@ -85,7 +85,7 @@ export function createApiExtractorConfig(opts: {
        * DEFAULT VALUE: "<projectFolder>/tsconfig.json"
        */
       tsconfigFilePath: path.resolve(opts.packagePath, opts.tsconfigPath || 'tsconfig.json'),
-      // tsconfigFilePath: '<projectFolder>/tsconfig.dist.json',
+
       /**
        * Provides a compiler configuration that will be used instead of reading the tsconfig.json file from disk.
        * The object must conform to the TypeScript tsconfig schema:
@@ -99,6 +99,7 @@ export function createApiExtractorConfig(opts: {
       // "overrideTsconfig": {
       //   . . .
       // }
+
       /**
        * This option causes the compiler to be invoked with the --skipLibCheck option. This option is not recommended
        * and may cause API Extractor to produce incomplete or incorrect declarations, but it may be required when
@@ -179,7 +180,6 @@ export function createApiExtractorConfig(opts: {
        * SUPPORTED TOKENS: <projectFolder>, <packageName>, <unscopedPackageName>
        * DEFAULT VALUE: "<projectFolder>/temp/<unscopedPackageName>.api.json"
        */
-      // apiJsonFilePath: '<projectFolder>/temp/<unscopedPackageName>.api.json',
       apiJsonFilePath: path.resolve(opts.tempDirPath, 'api.json'),
     },
 

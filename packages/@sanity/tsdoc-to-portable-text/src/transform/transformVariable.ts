@@ -8,6 +8,10 @@ import {transformTokens} from './transformTokens'
 import {TransformContext} from './types'
 
 export function transformVariable(ctx: TransformContext, node: ApiVariable): SanityDocumentValue {
+  if (!ctx.packageDoc) {
+    throw new Error('transformVariable: missing package document')
+  }
+
   const name = sanitizeName(node.name)
   const docComment = node.tsdocComment
   const comment = docComment ? transformDocComment(docComment) : undefined
@@ -24,6 +28,7 @@ export function transformVariable(ctx: TransformContext, node: ApiVariable): San
   return {
     _type: 'api.variable',
     _id: createId(ctx, node.canonicalReference.toString()),
+    package: {_type: 'reference', _ref: ctx.packageDoc._id, _weak: true},
     release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},

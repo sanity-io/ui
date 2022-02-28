@@ -3,6 +3,8 @@ import {Extractor, ExtractorConfig, ExtractorMessage} from '@microsoft/api-extra
 import {ApiPackage} from '@microsoft/api-extractor-model'
 import {createApiExtractorConfig} from './apiExtractorConfig'
 import {createTmpDir} from './helpers'
+import {createTSDocConfig} from './tsDocConfig'
+import {TSDocCustomTag} from './types'
 
 /**
  * @public
@@ -19,12 +21,16 @@ export interface ExtractResult {
 export async function extract(
   inputPath: string,
   opts: {
+    customTags?: TSDocCustomTag[]
     packagePath: string
     tsconfigPath?: string
   }
 ): Promise<ExtractResult> {
+  const {customTags = []} = opts
   const tmpDir = await createTmpDir()
   const tmpDirPath = tmpDir.path
+
+  const tsdocConfigFile = await createTSDocConfig({customTags})
 
   // Load the API Extractor configuration
   const extractorConfig: ExtractorConfig = ExtractorConfig.prepare({
@@ -34,7 +40,8 @@ export async function extract(
       tempDirPath: tmpDirPath,
       tsconfigPath: opts.tsconfigPath,
     }),
-    configObjectFullPath: path.resolve(__dirname, '__api-extractor.json'),
+    configObjectFullPath: undefined,
+    tsdocConfigFile,
     packageJsonFullPath: path.resolve(opts.packagePath, 'package.json'),
   })
 

@@ -1,0 +1,424 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transform should transform class 1`] = `
+Object {
+  "_id": "ead4d7d99c69e54e6e02479a21215ad0",
+  "_type": "api.class",
+  "comment": Object {
+    "_type": "tsdoc.docComment",
+    "customBlocks": Array [
+      Object {
+        "_key": "1",
+        "_type": "tsdoc.customBlock",
+        "content": Array [
+          Object {
+            "_key": "0",
+            "_type": "block",
+            "children": Array [
+              Object {
+                "_key": "0",
+                "_type": "span",
+                "marks": Array [],
+                "text": "You can define your own custom block tags and tell the parser about them. The playground doesn't render this block, but your own tooling could do that.",
+              },
+            ],
+            "markDefs": Array [],
+            "style": "normal",
+          },
+        ],
+        "tag": "@sampleCustomBlockTag",
+      },
+    ],
+    "deprecated": undefined,
+    "exampleBlocks": Array [
+      Object {
+        "_key": "0",
+        "_type": "tsdoc.exampleBlock",
+        "content": Array [
+          Object {
+            "_key": "0",
+            "_type": "block",
+            "children": Array [
+              Object {
+                "_key": "0",
+                "_type": "span",
+                "marks": Array [],
+                "text": "Code samples can be enclosed in a Markdown code fence:",
+              },
+            ],
+            "markDefs": Array [],
+            "style": "normal",
+          },
+          Object {
+            "_key": "1",
+            "_type": "code",
+            "code": "function getAverage(x, y) {
+  return (x + y) / 2.0;
+}
+",
+            "language": "ts",
+          },
+        ],
+      },
+    ],
+    "modifierTags": Array [
+      Object {
+        "_key": "0",
+        "_type": "tsdoc.modifierTag",
+        "name": "@beta",
+      },
+      Object {
+        "_key": "1",
+        "_type": "tsdoc.modifierTag",
+        "name": "@sealed",
+      },
+    ],
+    "parameters": undefined,
+    "remarks": Object {
+      "_type": "tsdoc.remarksBlock",
+      "content": Array [
+        Object {
+          "_key": "0",
+          "_type": "block",
+          "children": Array [
+            Object {
+              "_key": "0",
+              "_type": "span",
+              "marks": Array [],
+              "text": "The main documentation for an API item is separated into a brief \\"summary\\" section optionally followed by an ",
+            },
+            Object {
+              "_key": "1",
+              "_type": "span",
+              "marks": Array [
+                "code",
+              ],
+              "text": "@remarks",
+            },
+            Object {
+              "_key": "2",
+              "_type": "span",
+              "marks": Array [],
+              "text": " block containing additional details.",
+            },
+          ],
+          "markDefs": Array [],
+          "style": "normal",
+        },
+        Object {
+          "_key": "1",
+          "_type": "block",
+          "children": Array [
+            Object {
+              "_key": "0",
+              "_type": "span",
+              "marks": Array [],
+              "text": "Unlike the summary, the remarks block may contain lengthy documentation content. The remarks should not restate information from the summary, since the summary section will always be displayed wherever the remarks section appears. Other sections (e.g. an ",
+            },
+            Object {
+              "_key": "1",
+              "_type": "span",
+              "marks": Array [
+                "code",
+              ],
+              "text": "@example",
+            },
+            Object {
+              "_key": "2",
+              "_type": "span",
+              "marks": Array [],
+              "text": " block) if shown will usually appear after the remarks section.",
+            },
+          ],
+          "markDefs": Array [],
+          "style": "normal",
+        },
+        Object {
+          "_key": "2",
+          "_type": "block",
+          "children": Array [
+            Object {
+              "_key": "0",
+              "_type": "span",
+              "marks": Array [],
+              "text": "Code samples can be enclosed in a Markdown code fence:",
+            },
+          ],
+          "markDefs": Array [],
+          "style": "normal",
+        },
+        Object {
+          "_key": "3",
+          "_type": "code",
+          "code": "function getAverage(x, y) {
+  return (x + y) / 2.0;
+}
+",
+          "language": "ts",
+        },
+        Object {
+          "_key": "4",
+          "_type": "block",
+          "children": Array [
+            Object {
+              "_key": "0",
+              "_type": "span",
+              "marks": Array [],
+              "text": "If you use special symbols and don't want to use a code span, you can escape them using backslashes: ",
+            },
+            Object {
+              "_key": "1",
+              "_type": "span",
+              "marks": Array [],
+              "text": "{",
+            },
+            Object {
+              "_key": "2",
+              "_type": "span",
+              "marks": Array [],
+              "text": "@",
+            },
+            Object {
+              "_key": "3",
+              "_type": "span",
+              "marks": Array [],
+              "text": "inheritDoc Button.render",
+            },
+            Object {
+              "_key": "4",
+              "_type": "span",
+              "marks": Array [],
+              "text": "}",
+            },
+          ],
+          "markDefs": Array [],
+          "style": "normal",
+        },
+      ],
+    },
+    "returns": undefined,
+    "seeBlocks": undefined,
+    "summary": Array [
+      Object {
+        "_key": "0",
+        "_type": "block",
+        "children": Array [
+          Object {
+            "_key": "0",
+            "_type": "span",
+            "marks": Array [],
+            "text": "The summary section should be brief. On a documentation web site, it will be shown on a page that lists summaries for many different API items. On a detail page for a single item, the summary will be shown followed by the remarks section (if any).",
+          },
+        ],
+        "markDefs": Array [],
+        "style": "normal",
+      },
+    ],
+  },
+  "members": Array [
+    Object {
+      "_key": "8d3ce42f4aeda10d5b563bebea7e190f",
+      "_type": "api.constructor",
+      "comment": Object {
+        "_type": "tsdoc.docComment",
+        "customBlocks": undefined,
+        "deprecated": undefined,
+        "exampleBlocks": undefined,
+        "modifierTags": undefined,
+        "parameters": undefined,
+        "remarks": undefined,
+        "returns": undefined,
+        "seeBlocks": undefined,
+        "summary": Array [
+          Object {
+            "_key": "0",
+            "_type": "block",
+            "children": Array [
+              Object {
+                "_key": "0",
+                "_type": "span",
+                "marks": Array [],
+                "text": "Constructs a new instance of the ",
+              },
+              Object {
+                "_key": "1",
+                "_type": "span",
+                "marks": Array [
+                  "code",
+                ],
+                "text": "Class",
+              },
+              Object {
+                "_key": "2",
+                "_type": "span",
+                "marks": Array [],
+                "text": " class",
+              },
+            ],
+            "markDefs": Array [],
+            "style": "normal",
+          },
+        ],
+      },
+      "members": Array [],
+      "parameters": Array [
+        Object {
+          "_key": "b80bb7740288fda1f201890375a60c8f",
+          "_type": "api.parameter",
+          "comment": undefined,
+          "name": "id",
+          "type": Array [
+            Object {
+              "_key": "token0",
+              "_type": "api.text",
+              "text": "string",
+            },
+          ],
+        },
+      ],
+      "releaseTag": "beta",
+    },
+    Object {
+      "_key": "e6e4098107452e0fe162d6c799ccaa99",
+      "_type": "api.property",
+      "comment": undefined,
+      "isEventProperty": false,
+      "isOptional": false,
+      "isStatic": false,
+      "name": "$id",
+      "releaseTag": "beta",
+      "type": Array [
+        Object {
+          "_key": "token0",
+          "_type": "api.text",
+          "text": "string",
+        },
+      ],
+    },
+    Object {
+      "_key": "11350dc1337d0e80054837b6a8d61210",
+      "_type": "api.method",
+      "comment": undefined,
+      "isOptional": false,
+      "isStatic": false,
+      "members": Array [],
+      "name": "method",
+      "parameters": Array [
+        Object {
+          "_key": "327a6c4304ad5938eaf0efb6cc3e53dc",
+          "_type": "api.parameter",
+          "comment": undefined,
+          "name": "flag",
+          "type": Array [
+            Object {
+              "_key": "token0",
+              "_type": "api.text",
+              "text": "boolean",
+            },
+          ],
+        },
+      ],
+      "releaseTag": "beta",
+      "returnType": Array [
+        Object {
+          "_key": "token0",
+          "_type": "api.text",
+          "text": "boolean",
+        },
+      ],
+      "typeParameters": Array [],
+    },
+  ],
+  "name": "Class",
+  "package": Object {
+    "_ref": "mylib",
+    "_type": "reference",
+    "_weak": true,
+  },
+  "release": Object {
+    "_ref": "mylib_1-0-0",
+    "_type": "reference",
+    "_weak": true,
+  },
+  "releaseTag": "beta",
+  "slug": Object {
+    "_type": "slug",
+    "current": "Class",
+  },
+}
+`;
+
+exports[`transform should transform interface with call signature 1`] = `
+Object {
+  "_id": "9053f9d2ff132c36903fbaf0067d5ce8",
+  "_type": "api.interface",
+  "comment": Object {
+    "_type": "tsdoc.docComment",
+    "customBlocks": undefined,
+    "deprecated": undefined,
+    "exampleBlocks": undefined,
+    "modifierTags": Array [
+      Object {
+        "_key": "0",
+        "_type": "tsdoc.modifierTag",
+        "name": "@beta",
+      },
+    ],
+    "parameters": undefined,
+    "remarks": undefined,
+    "returns": undefined,
+    "seeBlocks": undefined,
+    "summary": undefined,
+  },
+  "extends": Array [],
+  "members": Array [
+    Object {
+      "_key": "1b3ef1024601ff5c0ab8ffbf196ab5f0",
+      "_type": "api.callSignature",
+      "comment": undefined,
+      "members": Array [],
+      "parameters": Array [
+        Object {
+          "_key": "id",
+          "_type": "api.parameter",
+          "name": "id",
+          "releaseTag": "beta",
+          "type": Array [
+            Object {
+              "_key": "token0",
+              "_type": "api.text",
+              "text": "string",
+            },
+          ],
+        },
+      ],
+      "releaseTag": "beta",
+      "returnType": Array [
+        Object {
+          "_key": "token0",
+          "_type": "api.text",
+          "text": "string[]",
+        },
+      ],
+      "typeParameters": Array [],
+    },
+  ],
+  "name": "Resolver",
+  "package": Object {
+    "_ref": "mylib",
+    "_type": "reference",
+    "_weak": true,
+  },
+  "release": Object {
+    "_ref": "mylib_1-0-0",
+    "_type": "reference",
+    "_weak": true,
+  },
+  "releaseTag": "beta",
+  "slug": Object {
+    "_type": "slug",
+    "current": "Resolver",
+  },
+  "typeParameters": Array [],
+}
+`;

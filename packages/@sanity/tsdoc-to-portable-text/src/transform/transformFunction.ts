@@ -12,9 +12,14 @@ export function transformFunction(ctx: TransformContext, node: ApiFunction): San
   const isReactComponentType = _functionIsReactComponentType(node)
   const propsType = isReactComponentType ? _functionPropsType(ctx, node) : undefined
 
+  if (!ctx.packageDoc) {
+    throw new Error('transformFunction: missing package document')
+  }
+
   return {
     _type: 'api.function',
     _id: createId(ctx, node.canonicalReference.toString()),
+    package: {_type: 'reference', _ref: ctx.packageDoc._id, _weak: true},
     release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
@@ -62,7 +67,6 @@ function _functionIsReactComponentType(node: ApiFunction) {
   const returnsReactElement = returnTypeCode === 'React.ReactElement'
   const returnsReactNode = returnTypeCode === 'React.ReactNode'
 
-  // console.log('returnTypeCode', returnTypeCode)
   const returnsReactPortal =
     returnTypeCode === 'React.ReactPortal' || returnTypeCode.startsWith('React.ReactPortal |')
 

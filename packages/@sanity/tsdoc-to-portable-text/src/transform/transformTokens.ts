@@ -24,13 +24,33 @@ export function transformTokens(
         }
       }
 
+      const sourceShortName = t.canonicalReference.source?.toString()
+      const _sourceNameParts = sourceShortName?.split('/')
+      const sourceScope = _sourceNameParts?.length === 2 ? _sourceNameParts[0] : undefined
+      let sourceName = _sourceNameParts?.length === 2 ? _sourceNameParts[1] : _sourceNameParts?.[0]
+
+      if (sourceName && sourceName.endsWith('!')) {
+        sourceName = sourceName.slice(0, -1)
+      }
+
+      const refContext: TransformContext = sourceName
+        ? {
+            ...ctx,
+            package: {
+              ...ctx.package,
+              scope: sourceScope || null,
+              name: sourceName,
+            },
+          }
+        : ctx
+
       return {
         _type: 'api.reference',
         _key: `token${idx}`,
         text: t.text,
         reference: {
           _type: 'reference',
-          _ref: createId(ctx, t.canonicalReference.toString()),
+          _ref: createId(refContext, t.canonicalReference.toString()),
           _weak: true,
         },
       }

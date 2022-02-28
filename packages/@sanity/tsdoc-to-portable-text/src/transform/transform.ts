@@ -28,7 +28,15 @@ export function transform(
   const releaseDoc = {
     _type: 'api.release',
     _id: releaseId,
+    package: undefined as
+      | {
+          _type: 'reference'
+          _ref: string
+          _weak: boolean
+        }
+      | undefined,
     version,
+    identifiers: [] as string[],
     members: [] as {
       _type: 'reference'
       _key: string
@@ -49,12 +57,24 @@ export function transform(
 
   const packageDoc = transformPackage(ctx, apiPackage)
 
+  ctx.packageDoc = packageDoc
+
   const docs: SanityDocumentValue[] = [releaseDoc]
+
+  const identifierDocs: SanityDocumentValue[] = []
 
   for (const member of apiPackage.members[0].members) {
     const memberDoc = transformPackageMember(ctx, member)
 
     docs.push(memberDoc)
+
+    releaseDoc.package = {
+      _type: 'reference',
+      _ref: packageDoc._id,
+      _weak: true,
+    }
+
+    releaseDoc.identifiers.push(member.displayName)
 
     releaseDoc.members.push({
       _type: 'reference',
@@ -62,9 +82,19 @@ export function transform(
       _ref: memberDoc._id,
       _weak: true,
     })
+
+    identifierDocs.push({
+      _type: 'api.identifier',
+      _id: packageDoc._id + `_${member.displayName}`,
+      name: member.displayName,
+      package: {
+        _type: 'reference',
+        _ref: packageDoc._id,
+      },
+    })
   }
 
-  docs.push(packageDoc)
+  docs.push(packageDoc, ...identifierDocs)
 
   return docs
 }
