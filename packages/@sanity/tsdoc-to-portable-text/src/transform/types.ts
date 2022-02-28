@@ -20,5 +20,6 @@ export interface TransformContext {
     version: string
   }
   currPackageDoc: SanityDocumentValue | null
+  packageDoc?: SanityDocumentValue
   releaseDoc: SanityDocumentValue
 }

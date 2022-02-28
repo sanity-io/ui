@@ -7,6 +7,7 @@ describe('extract', () => {
     const project = await spawnProject('mylib/1.0.0')
 
     const result = await extract('lib/esm/index.d.ts', {
+      customTags: [{name: 'sampleCustomBlockTag', syntaxKind: 'block', allowMultiple: true}],
       packagePath: project.path,
       tsconfigPath: 'tsconfig.json',
     })
@@ -25,6 +26,7 @@ describe('extract', () => {
 
   //   try {
   //     await extract('lib/esm/index.d.ts', {
+  //       customTags: [{name: 'sampleCustomBlockTag', syntaxKind: 'block', allowMultiple: true}],
   //       packagePath: project.path,
   //       tsconfigPath: 'tsconfig.json',
   //     })

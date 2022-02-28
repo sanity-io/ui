@@ -21,10 +21,9 @@
   "author": "Sanity.io <hello@sanity.io>",
   "license": "MIT",
   "scripts": {
-    "build": "run-s build:microbundle copy:json && chmod +x lib/cli.js",
+    "build": "run-s build:microbundle && chmod +x lib/cli.js",
     "build:microbundle": "microbundle --format modern,esm,cjs --target node --tsconfig tsconfig.lib.json src/{cli,index}.ts",
     "clean": "rimraf lib",
-    "copy:json": "cpx 'src/extract/*.json' lib/",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "test": "jest --runInBand",
@@ -34,8 +33,10 @@
     "@microsoft/api-extractor": "^7.19.4",
     "@microsoft/api-extractor-model": "^7.15.3",
     "@microsoft/tsdoc": "^0.13.2",
+    "@microsoft/tsdoc-config": "^0.15.2",
     "@types/cpx": "^1.5.2",
     "chalk": "^4.1.2",
+    "jsonc-parser": "^3.0.0",
     "mkdirp": "^1.0.4",
     "pkg-up": "^3.1.0",
     "slugify": "^1.6.5",
@@ -44,7 +45,6 @@
   },
   "devDependencies": {
     "@types/mkdirp": "^1.0.2",
-    "@types/tmp": "^0.2.3",
-    "cpx": "^1.5.0"
+    "@types/tmp": "^0.2.3"
   }
 }
