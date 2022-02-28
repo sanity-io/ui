@@ -1,13 +1,23 @@
 import path from 'path'
 import viteReact from '@vitejs/plugin-react'
 import {defineConfig} from 'vite'
+import {ScopeResolverOptions} from './scripts/scopes/_helpers'
 import {designWorkshop} from './vite/plugin-design-workshop'
 import {pluginWorkshopScopes} from './vite/plugin-workshop-scopes'
 
 const ROOT_PATH = path.join(__dirname, '../..')
 
+const WORKSHOP_SCOPES_OPTIONS: ScopeResolverOptions = {
+  pattern: [
+    path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.ts'),
+    path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.tsx'),
+  ],
+  target: path.resolve(__dirname, 'src/scopes.js'),
+}
+
 export default defineConfig({
   build: {
+    sourcemap: true,
     outDir: path.resolve(__dirname, 'dist'),
     rollupOptions: {
       input: {
@@ -17,9 +27,11 @@ export default defineConfig({
     },
   },
   define: {
+    // @todo: only in development?
+    'process.env.ROOT_PATH': JSON.stringify(ROOT_PATH),
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
   },
-  plugins: [viteReact(), pluginWorkshopScopes(), designWorkshop()],
+  plugins: [viteReact(), pluginWorkshopScopes(WORKSHOP_SCOPES_OPTIONS), designWorkshop()],
   resolve: {
     alias: [
       {

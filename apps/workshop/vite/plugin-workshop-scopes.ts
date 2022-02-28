@@ -1,44 +1,29 @@
-import path from 'path'
-import {ResolvedConfig} from 'vite'
+import {Plugin, ResolvedConfig} from 'vite'
 import {_initWatcher, _writeScopes, ScopeResolverOptions} from '../scripts/scopes/_helpers'
 
-const ROOT_PATH = path.resolve(__dirname, '../../..')
-
-const SCOPES_RESOLVER_OPTIONS: ScopeResolverOptions = {
-  pattern: [
-    path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.ts'),
-    path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.tsx'),
-  ],
-  target: path.resolve(__dirname, '../src/scopes.js'),
-}
-
-const WORKSHOP_ENV_MODULE_ID = '$workshop'
-
-export function pluginWorkshopScopes() {
+export function pluginWorkshopScopes(opts: ScopeResolverOptions): Plugin {
   let isInitialized = false
   let isWatcherInitialized = false
-  let shouldWatch = true
+  let shouldWatch = false
 
   return {
     name: 'resolve-stories',
+
+    enforce: 'pre',
 
     configResolved(config: ResolvedConfig) {
       shouldWatch = config.command !== 'build'
     },
 
-    resolveId(id: string) {
-      if (id === WORKSHOP_ENV_MODULE_ID) {
-        if (!isInitialized) {
-          _writeScopes(SCOPES_RESOLVER_OPTIONS)
-          isInitialized = true
-        }
+    resolveId() {
+      if (!isInitialized) {
+        _writeScopes(opts)
+        isInitialized = true
+      }
 
-        if (shouldWatch && !isWatcherInitialized) {
-          _initWatcher(SCOPES_RESOLVER_OPTIONS)
-          isWatcherInitialized = true
-        }
-
-        return SCOPES_RESOLVER_OPTIONS.target
+      if (shouldWatch && !isWatcherInitialized) {
+        _initWatcher(opts)
+        isWatcherInitialized = true
       }
 
       return undefined

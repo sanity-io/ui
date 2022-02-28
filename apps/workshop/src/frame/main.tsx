@@ -8,7 +8,8 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
-import {scopes} from '$workshop'
+import {config} from '../config'
+import {GlobalStyle} from '../GlobalStyle'
 
 Refractor.registerLanguage(bash)
 Refractor.registerLanguage(javascript)
@@ -23,7 +24,8 @@ function Root() {
 
   return (
     <ThemeProvider scheme={scheme} theme={studioTheme}>
-      <WorkshopFrame frameUrl="/frame/" setScheme={setScheme} scopes={scopes} title="Sanity UI" />
+      <GlobalStyle />
+      <WorkshopFrame config={config} setScheme={setScheme} />
     </ThemeProvider>
   )
 }

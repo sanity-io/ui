@@ -1,12 +1,16 @@
 {
   "extends": "../../tsconfig.settings",
-  "include": ["./scripts", "./src", "./test", "./typings"],
+  "include": ["./scripts/", "./src/", "./test/", "./typings/"],
   "compilerOptions": {
     "composite": true,
     "rootDir": "./",
     "outDir": "./build/dts/",
     "module": "ES2020",
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./"
   },
-  "references": [{"path": "../../packages/@sanity/ui-workshop/tsconfig.lib.json"}]
+  "references": [
+    {"path": "../../packages/@sanity/ui/tsconfig.lib.json"},
+    {"path": "../../packages/@sanity/ui-workshop/tsconfig.lib.json"}
+  ]
 }

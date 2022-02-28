@@ -1,73 +1,50 @@
 import {
   studioTheme,
   ThemeColorProvider,
+  ThemeColorSchemeKey,
   ThemeProvider,
   useGlobalKeyDown,
   usePrefersDark,
 } from '@sanity/ui'
-import {Workshop, WorkshopLocation} from '@sanity/ui-workshop'
-import React, {useCallback, useEffect, useMemo, useState} from 'react'
+import {createLocationStore, Workshop} from '@sanity/ui-workshop'
+import React, {useEffect, useMemo, useState} from 'react'
 import ReactDOM from 'react-dom'
 import Refractor from 'react-refractor'
+import bash from 'refractor/lang/bash'
 import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
-import {createGlobalStyle} from 'styled-components'
-import {LocationProvider, useLocation} from './location'
-import {scopes} from '$workshop'
+import {config} from './config'
+import {GlobalStyle} from './GlobalStyle'
 
+Refractor.registerLanguage(bash)
 Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
-const WORKSHOP_COLLECTIONS: {name: string; title: string}[] = [
-  {
-    name: 'components',
-    title: 'Components',
-  },
-  {
-    name: 'hooks',
-    title: 'Hooks',
-  },
-  {
-    name: 'primitives',
-    title: 'Primitives',
-  },
-  {
-    name: 'utils',
-    title: 'Utils',
-  },
-]
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${({theme}) => theme.sanity.color.base.bg}
-  }
-`
-
 function Root() {
-  const {path, pushState, query, replaceState} = useLocation()
-
-  const handleLocationPush = useCallback(
-    (newLoc: WorkshopLocation) => pushState(newLoc),
-    [pushState]
-  )
-
-  const handleLocationReplace = useCallback(
-    (newLoc: WorkshopLocation) => replaceState(newLoc),
-    [replaceState]
-  )
-
-  const studioLocation: WorkshopLocation = useMemo(() => ({path, query}), [path, query])
-
+  const locationStore = useMemo(() => createLocationStore(), [])
   const prefersDark = usePrefersDark()
-  const [scheme, setScheme] = useState<'light' | 'dark'>(prefersDark ? 'dark' : 'light')
+
+  const [scheme, setScheme] = useState<ThemeColorSchemeKey>(() => {
+    const loc = locationStore.get()
+
+    if (loc.query?.scheme) {
+      return loc.query.scheme as ThemeColorSchemeKey
+    }
+
+    return prefersDark ? 'dark' : 'light'
+  })
 
   useEffect(() => {
-    setScheme(prefersDark ? 'dark' : 'light')
-  }, [prefersDark])
+    const loc = locationStore.get()
+
+    if (!loc.query?.scheme) {
+      setScheme(prefersDark ? 'dark' : 'light')
+    }
+  }, [locationStore, prefersDark])
 
   useGlobalKeyDown((event) => {
     if (event.metaKey && event.key === 'i') {
@@ -75,29 +52,27 @@ function Root() {
     }
   })
 
+  useEffect(() => {
+    return locationStore.subscribe((loc) => {
+      if (!loc.query?.scheme) {
+        setScheme(prefersDark ? 'dark' : 'light')
+      }
+    })
+  }, [locationStore, prefersDark])
+
   return (
     <ThemeProvider scheme={scheme} theme={studioTheme}>
       <ThemeColorProvider tone="transparent">
         <GlobalStyle />
       </ThemeColorProvider>
       <Workshop
-        collections={WORKSHOP_COLLECTIONS}
-        frameUrl="/frame/"
-        location={studioLocation}
-        onLocationPush={handleLocationPush}
-        onLocationReplace={handleLocationReplace}
+        config={config}
+        locationStore={locationStore}
         scheme={scheme}
-        scopes={scopes}
-        setScheme={setScheme}
-        title="Sanity UI"
+        onSchemeChange={setScheme}
       />
     </ThemeProvider>
   )
 }
 
-ReactDOM.render(
-  <LocationProvider>
-    <Root />
-  </LocationProvider>,
-  document.getElementById('root')
-)
+ReactDOM.render(<Root />, document.getElementById('root'))

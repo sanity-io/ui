@@ -5,8 +5,8 @@
   "main": "package.json",
   "license": "MIT",
   "scripts": {
-    "build": "NODE_ENV=production vite build",
-    "clean": "rimraf build dist",
+    "build": "vite build",
+    "clean": "rimraf build dist src/packages.js src/scopes.js",
     "dev": "vite",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
