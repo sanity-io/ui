@@ -8,7 +8,7 @@ const SCOPES_RESOLVER_OPTIONS: ScopeResolverOptions = {
     path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.ts'),
     path.resolve(ROOT_PATH, 'packages/**/src/**/__workshop__/index.tsx'),
   ],
-  target: path.resolve(__dirname, '../../workshopScopes.js'),
+  target: path.resolve(__dirname, '../../workshop/scopes.js'),
 }
 
 _writeScopes(SCOPES_RESOLVER_OPTIONS)

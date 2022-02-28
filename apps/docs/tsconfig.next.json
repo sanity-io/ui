@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "./next-env.d.ts", "./typings/"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": [
     "**/__fixtures__/*",
     "**/__mocks__/*",
@@ -16,6 +16,7 @@
     "outDir": "./build/dts/",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -38,7 +39,8 @@
       "$sanity.server": ["./sanity.server"],
       "$screens/*": ["./screens/*"],
       "$sections": ["./sections"],
-      "@sanity/*": ["../../packages/@sanity/*/src"]
+      "@sanity/*": ["../../packages/@sanity/*/src"],
+      "$workshop/*": ["./workshop/*"]
     }
   }
 }

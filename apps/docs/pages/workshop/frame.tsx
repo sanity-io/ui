@@ -1,20 +1,12 @@
 import {WorkshopFrame} from '@sanity/ui-workshop'
 import React from 'react'
-import {scopes} from '../../workshopScopes'
 import {useApp} from '$components/app'
-import {app} from '$config'
+import {config} from '$workshop/config'
 
 function WorkshopFramePage() {
   const {setColorScheme} = useApp()
 
-  return (
-    <WorkshopFrame
-      frameUrl="/frame/"
-      scopes={scopes}
-      setScheme={setColorScheme}
-      title={app.siteName}
-    />
-  )
+  return <WorkshopFrame config={config} setScheme={setColorScheme} />
 }
 
 export default WorkshopFramePage

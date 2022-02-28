@@ -17,7 +17,6 @@
 
 # generated files
 /packages.js
-/workshopScopes.js
 
 # debug
 npm-debug.log*

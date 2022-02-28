@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "./next-env.d.ts", "./typings/"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["./build/", "./node_modules/"],
   "compilerOptions": {
     "composite": true,
@@ -8,6 +8,7 @@
     "outDir": "./build/dts/",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -29,7 +30,8 @@
       "$sanity": ["./sanity"],
       "$sanity.server": ["./sanity.server"],
       "$screens/*": ["./screens/*"],
-      "$sections": ["./sections"]
+      "$sections": ["./sections"],
+      "$workshop/*": ["./workshop/*"]
     }
   },
   "references": [

@@ -73,32 +73,3 @@ export const sanity = {
   // data always (potentially slightly slower and a bit more expensive).
   useCdn: process.env.NODE_ENV === 'production',
 }
-
-/**
- * Workshop configuration.
- */
-export const workshop = {
-  collections: [
-    {
-      name: 'components',
-      title: 'Components',
-    },
-    {
-      name: 'hooks',
-      title: 'Hooks',
-    },
-    {
-      name: 'primitives',
-      title: 'Primitives',
-    },
-    {
-      name: 'utils',
-      title: 'Utils',
-    },
-  ],
-  features: {
-    navbar: false,
-  },
-  frameUrl: `${basePath}/workshop/frame/`,
-  title: 'Workshop',
-}
