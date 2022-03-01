@@ -26,7 +26,7 @@ export interface TabProps {
  */
 export const Tab = forwardRef(function Tab(
   props: TabProps &
-    Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'type'>,
+    Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'label' | 'type'>,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>
 ) {
   const {
