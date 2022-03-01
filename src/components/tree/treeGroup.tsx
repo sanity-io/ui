@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import {Stack} from '../../primitives'
 import {useTree} from './useTree'
 
@@ -6,7 +6,7 @@ export interface TreeGroupProps {
   expanded?: boolean
 }
 
-export function TreeGroup(
+export const TreeGroup = memo(function TreeGroup(
   props: TreeGroupProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'role' | 'wrap'>
 ): React.ReactElement {
@@ -26,4 +26,4 @@ export function TreeGroup(
       {children}
     </Stack>
   )
-}
+})

@@ -26,15 +26,11 @@ export function useMenuController(props: {
   shouldFocus: 'first' | 'last' | null
 }): MenuController {
   const {onKeyDown, originElement, shouldFocus} = props
-
   const elementsRef = useRef<HTMLElement[]>([])
-
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const [activeIndex, _setActiveIndex] = useState(-1)
-
-  const activeElement = elementsRef.current[activeIndex] || null
   const activeIndexRef = useRef(activeIndex)
-
+  const activeElement = elementsRef.current[activeIndex] || null
   const mounted = Boolean(rootElement)
 
   const setActiveIndex = useCallback((nextActiveIndex) => {
@@ -122,7 +118,7 @@ export function useMenuController(props: {
 
         if (focusableLen === 0) return
 
-        const focusedElement = elementsRef.current[activeIndex]
+        const focusedElement = elementsRef.current[activeIndexRef.current]
 
         let focusedIndex = focusableElements.indexOf(focusedElement)
 
@@ -145,7 +141,7 @@ export function useMenuController(props: {
 
         if (focusableLen === 0) return
 
-        const focusedElement = elementsRef.current[activeIndex]
+        const focusedElement = elementsRef.current[activeIndexRef.current]
 
         let focusedIndex = focusableElements.indexOf(focusedElement)
 
@@ -163,7 +159,7 @@ export function useMenuController(props: {
         onKeyDown(event)
       }
     },
-    [activeIndex, onKeyDown, originElement, setActiveIndex]
+    [onKeyDown, originElement, setActiveIndex]
   )
 
   const handleItemMouseEnter = useCallback(
