@@ -1,4 +1,5 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import React, {forwardRef, memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useForwardedRef} from '../../hooks'
 import {Stack} from '../../primitives'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './treeContext'
@@ -16,174 +17,197 @@ export interface TreeProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export function Tree(
-  props: TreeProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>
-): React.ReactElement {
-  const {children, space = 1, ...restProps} = props
-  const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
-  const path: string[] = useMemo(() => [], [])
-  const rootRef = useRef<HTMLDivElement | null>(null)
-  const [itemElements, setItemElements] = useState<HTMLElement[]>([])
-  const [state, setState] = useState<TreeState>({})
+export const Tree = memo(
+  forwardRef(function Tree(
+    props: TreeProps &
+      Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
+    ref: React.ForwardedRef<HTMLDivElement>
+  ): React.ReactElement {
+    const {children, space = 1, ...restProps} = props
+    const forwardedRef = useForwardedRef(ref)
+    const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
+    const focusedElementRef = useRef(focusedElement)
+    const path: string[] = useMemo(() => [], [])
+    const [itemElements, setItemElements] = useState<HTMLElement[]>([])
+    const [state, setState] = useState<TreeState>({})
+    const stateRef = useRef(state)
 
-  const registerItem = useCallback(
-    (element: HTMLElement, path: string, expanded: boolean, selected: boolean) => {
-      setState((s) => ({...s, [path]: {element, expanded}}))
+    useEffect(() => {
+      focusedElementRef.current = focusedElement
+    }, [focusedElement])
 
-      if (selected) {
-        setFocusedElement(element)
-      }
+    useEffect(() => {
+      stateRef.current = state
+    }, [state])
 
-      return () => {
-        setState((s) => {
-          const newState = {...s}
+    const registerItem = useCallback(
+      (element: HTMLElement, path: string, expanded: boolean, selected: boolean) => {
+        setState((s) => ({...s, [path]: {element, expanded}}))
 
-          delete newState[path]
-
-          return newState
-        })
-      }
-    },
-    []
-  )
-
-  const setExpanded = useCallback((path: string, expanded: boolean) => {
-    setState((s) => {
-      const itemState = s[path]
-
-      if (!itemState) return s
-
-      return {...s, [path]: {...itemState, expanded}}
-    })
-  }, [])
-
-  const contextValue: TreeContextValue = useMemo(
-    () => ({
-      version: 0.0,
-      focusedElement: focusedElement || itemElements[0] || null,
-      level: 0,
-      path,
-      registerItem,
-      setExpanded,
-      setFocusedElement,
-      space,
-      state,
-    }),
-    [focusedElement, itemElements, path, registerItem, setExpanded, space, state]
-  )
-
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (!focusedElement) return
-
-      if (event.key === 'ArrowDown') {
-        event.preventDefault()
-
-        const nextEl = _findNextItemElement(state, itemElements, focusedElement)
-
-        if (nextEl) {
-          _focusItemElement(nextEl)
-          setFocusedElement(nextEl)
+        if (selected) {
+          setFocusedElement(element)
         }
 
-        return
-      }
-
-      if (event.key === 'ArrowUp') {
-        event.preventDefault()
-
-        const prevEl = _findPrevItemElement(state, itemElements, focusedElement)
-
-        if (prevEl) {
-          _focusItemElement(prevEl)
-          setFocusedElement(prevEl)
-        }
-
-        return
-      }
-
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault()
-
-        const itemKey = focusedElement.getAttribute('data-tree-key')
-
-        if (!itemKey) return
-
-        const itemState = state[itemKey]
-
-        if (!itemState) return
-
-        if (itemState.expanded) {
+        return () => {
           setState((s) => {
-            const itemState = s[itemKey]
+            const newState = {...s}
 
-            if (!itemState) return s
+            delete newState[path]
 
-            return {...s, [itemKey]: {...itemState, expanded: false}}
+            return newState
           })
-        } else {
-          const itemPath = itemKey.split('/')
+        }
+      },
+      []
+    )
 
-          itemPath.pop()
+    const setExpanded = useCallback((path: string, expanded: boolean) => {
+      setState((s) => {
+        const itemState = s[path]
 
-          const parentKey = itemPath.join('/')
-          const parentState = parentKey && state[parentKey]
+        if (!itemState) return s
 
-          if (parentState) {
-            parentState.element.focus()
-            setFocusedElement(parentState.element)
+        return {...s, [path]: {...itemState, expanded}}
+      })
+    }, [])
+
+    const contextValue: TreeContextValue = useMemo(
+      () => ({
+        version: 0.0,
+        focusedElement: focusedElement || itemElements[0] || null,
+        level: 0,
+        path,
+        registerItem,
+        setExpanded,
+        setFocusedElement,
+        space,
+        state,
+      }),
+      [focusedElement, itemElements, path, registerItem, setExpanded, space, state]
+    )
+
+    const handleKeyDown = useCallback(
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (!focusedElementRef.current) return
+
+        if (event.key === 'ArrowDown') {
+          event.preventDefault()
+
+          const nextEl = _findNextItemElement(
+            stateRef.current,
+            itemElements,
+            focusedElementRef.current
+          )
+
+          if (nextEl) {
+            _focusItemElement(nextEl)
+            setFocusedElement(nextEl)
           }
+
+          return
         }
 
-        return
-      }
+        if (event.key === 'ArrowUp') {
+          event.preventDefault()
 
-      if (event.key === 'ArrowRight') {
-        event.preventDefault()
+          const prevEl = _findPrevItemElement(
+            stateRef.current,
+            itemElements,
+            focusedElementRef.current
+          )
 
-        const focusedKey = focusedElement.getAttribute('data-tree-key')
+          if (prevEl) {
+            _focusItemElement(prevEl)
+            setFocusedElement(prevEl)
+          }
 
-        if (!focusedKey) return
-
-        if (!state[focusedKey]?.expanded) {
-          setState((s) => {
-            const itemState = s[focusedKey]
-
-            if (!itemState) return s
-
-            return {...s, [focusedKey]: {...itemState, expanded: true}}
-          })
+          return
         }
 
-        return
-      }
-    },
-    [focusedElement, itemElements, state]
-  )
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault()
 
-  useEffect(() => {
-    if (!rootRef.current) return
-    const _itemElements = Array.from(
-      rootRef.current.querySelectorAll('[data-ui="TreeItem"]')
-    ) as HTMLElement[]
+          const itemKey = focusedElementRef.current.getAttribute('data-tree-key')
 
-    setItemElements(_itemElements)
-  }, [children])
+          if (!itemKey) return
 
-  return (
-    <TreeContext.Provider value={contextValue}>
-      <Stack
-        as="ul"
-        data-ui="Tree"
-        {...restProps}
-        onKeyDown={handleKeyDown}
-        ref={rootRef}
-        role="tree"
-        space={space}
-      >
-        {children}
-      </Stack>
-    </TreeContext.Provider>
-  )
-}
+          const itemState = stateRef.current[itemKey]
+
+          if (!itemState) return
+
+          if (itemState.expanded) {
+            setState((s) => {
+              const itemState = s[itemKey]
+
+              if (!itemState) return s
+
+              return {...s, [itemKey]: {...itemState, expanded: false}}
+            })
+          } else {
+            const itemPath = itemKey.split('/')
+
+            itemPath.pop()
+
+            const parentKey = itemPath.join('/')
+            const parentState = parentKey && stateRef.current[parentKey]
+
+            if (parentState) {
+              parentState.element.focus()
+              setFocusedElement(parentState.element)
+            }
+          }
+
+          return
+        }
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault()
+
+          const focusedKey = focusedElementRef.current.getAttribute('data-tree-key')
+
+          if (!focusedKey) return
+
+          if (!stateRef.current[focusedKey]?.expanded) {
+            setState((s) => {
+              const itemState = s[focusedKey]
+
+              if (!itemState) return s
+
+              return {...s, [focusedKey]: {...itemState, expanded: true}}
+            })
+          }
+
+          return
+        }
+      },
+      [itemElements]
+    )
+
+    useEffect(() => {
+      if (!forwardedRef.current) return
+      const _itemElements = Array.from(
+        forwardedRef.current.querySelectorAll('[data-ui="TreeItem"]')
+      ) as HTMLElement[]
+
+      setItemElements(_itemElements)
+    }, [children, forwardedRef])
+
+    return (
+      <TreeContext.Provider value={contextValue}>
+        <Stack
+          as="ul"
+          data-ui="Tree"
+          {...restProps}
+          onKeyDown={handleKeyDown}
+          ref={forwardedRef}
+          role="tree"
+          space={space}
+        >
+          {children}
+        </Stack>
+      </TreeContext.Provider>
+    )
+  })
+)
+
+Tree.displayName = 'Tree'
