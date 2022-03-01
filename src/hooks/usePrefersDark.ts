@@ -1,13 +1,19 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 
 /**
  * @public
  */
 export function usePrefersDark(): boolean {
-  const [dark, setDark] = useState(false)
+  const mq = useMemo(() => {
+    if (typeof window === 'undefined') return undefined
+
+    return window.matchMedia('(prefers-color-scheme: dark)')
+  }, [])
+
+  const [dark, setDark] = useState(mq?.matches || false)
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    if (!mq) return undefined
 
     setDark(mq.matches)
 
@@ -16,7 +22,7 @@ export function usePrefersDark(): boolean {
     mq.addEventListener('change', handleChange)
 
     return () => mq.removeEventListener('change', handleChange)
-  }, [])
+  }, [mq])
 
   return dark
 }
