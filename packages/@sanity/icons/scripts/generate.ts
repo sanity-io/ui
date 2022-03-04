@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import util from 'util'
-import svgr from '@svgr/core'
+import {transform} from '@svgr/core'
 import camelCase from 'camelcase'
 import glob from 'glob'
 import mkdirp from 'mkdirp'
@@ -33,28 +33,55 @@ async function readIcon(filePath: string) {
   const name = nameSegments.join('-')
   const componentName = camelCase(`${name}-icon`, {pascalCase: true})
   const basename = camelCase(name) + 'Icon'
-  const contents = await readFile(filePath)
-  const svgrJsx = await svgr(
-    contents.toString(),
+  const targetPath = path.resolve(DEST_PATH, `${basename}.tsx`)
+
+  // Read SVG markup
+  const svgMarkupBuf = await readFile(filePath)
+
+  let code = await transform(
+    svgMarkupBuf.toString(),
     {icon: true, ref: true, typescript: true},
     {componentName}
   )
-  const targetPath = path.resolve(DEST_PATH, `${basename}.tsx`)
-  const unformattedCode = [
-    GENERATED_BANNER,
-    svgrJsx
-      .replace('* as React', 'React, {forwardRef}')
-      .replace(
-        `function ${componentName}(props: React.SVGProps<SVGSVGElement>, svgRef?: React.Ref<SVGSVGElement>) {`,
-        `/**\n * @public\n */\nexport const ${componentName} = forwardRef(function ${componentName}(props: React.SVGProps<SVGSVGElement>, ref: React.Ref<SVGSVGElement>) {`
-      )
-      .replace('ref={svgRef}', 'ref={ref}')
-      .replace(`}\n\nconst ForwardRef = React.forwardRef(${componentName});`, '})')
-      .replace(`export default ForwardRef;`, '')
-      .replace(/"#121923"/g, '"currentColor"')
-      .replace('<svg ', `<svg data-sanity-icon="${name}" `),
-  ].join('\n\n')
-  const code = format(unformattedCode, {...prettierConfig, filepath: targetPath})
+
+  // replace: prettify importing
+  code = code.replace('import * as React from "react";', 'import React, {forwardRef} from "react";')
+
+  // replace: remove unnecessary imports
+  code = code.replace('import { SVGProps, Ref, forwardRef } from "react";', '')
+
+  // replace: add `@public` tag and wrap in `forwardRef`
+  code = code.replace(
+    `const ${componentName} = (`,
+    `/**\n * @public\n */\nexport const ${componentName} = forwardRef(function ${componentName} (`
+  )
+
+  // replace: fix typing
+  code = code.replace('props: SVGProps<SVGSVGElement>', 'props: React.SVGProps<SVGSVGElement>')
+
+  // replace: fix typing
+  code = code.replace(
+    'ref: Ref<SVGSVGElement>) =>',
+    // @todo: use `React.ForwardedRef` here (breaking change)
+    'ref: React.Ref<SVGSVGElement>) {\nreturn ('
+  )
+
+  // replace: wrap in `forwardRef`
+  code = code.replace('</svg>;', '</svg>); })')
+
+  // replace: emove unecessary code
+  code = code.replace(`const ForwardRef = forwardRef(${componentName});`, '')
+  code = code.replace('export default ForwardRef;', '')
+
+  // replace: add generated banner
+  code = GENERATED_BANNER + '\n\n' + code
+
+  // Replace Sanity black hex value with `currentColor`
+  code = code
+    .replace(/"#121923"/g, '"currentColor"')
+    .replace('<svg ', `<svg data-sanity-icon="${name}" `)
+
+  code = format(code, {...prettierConfig, filepath: targetPath})
 
   return {
     basename,
@@ -67,14 +94,14 @@ async function readIcon(filePath: string) {
   }
 }
 
-async function writeIcon(file: any) {
+async function writeIcon(file: {code: string; targetPath: string}) {
   await writeFile(file.targetPath, file.code)
 }
 
 async function generate() {
   await mkdirp(DEST_PATH)
 
-  const filePaths = (await _glob(path.join(IMPORT_PATH, '**/*.svg'))) as any[]
+  const filePaths = await _glob(path.join(IMPORT_PATH, '**/*.svg'))
   const files = await Promise.all(filePaths.map(readIcon))
 
   files.sort((a, b) => {
