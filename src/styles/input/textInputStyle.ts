@@ -25,6 +25,8 @@ const ROOT_STYLE = css`
   &:not([hidden]) {
     display: flex;
   }
+
+  align-items: center;
 `
 
 export function textInputRootStyle(): FlattenSimpleInterpolation {

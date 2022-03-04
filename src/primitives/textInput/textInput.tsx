@@ -226,8 +226,28 @@ export const TextInput = forwardRef(function TextInput(
   )
 
   // Render clear button (memoized)
-  const clearButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
-  const clearButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
+  const clearButtonBoxPadding = useMemo(
+    () =>
+      padding.map((v) => {
+        if (v === 0) return 0
+        if (v === 1) return 1
+        if (v === 2) return 1
+
+        return v - 2
+      }),
+    [padding]
+  )
+  const clearButtonPadding = useMemo(
+    () =>
+      padding.map((v) => {
+        if (v === 0) return 0
+        if (v === 1) return 0
+        if (v === 2) return 1
+
+        return v - 1
+      }),
+    [padding]
+  )
   const clearButtonProps: TextInputClearButtonProps = useMemo(
     () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
     [clearButton]
@@ -249,7 +269,7 @@ export const TextInput = forwardRef(function TextInput(
             icon={CloseIcon}
             mode="bleed"
             padding={clearButtonPadding}
-            radius={radius.map((r) => r - 1)}
+            radius={radius}
             {...clearButtonProps}
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
