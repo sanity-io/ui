@@ -1,5 +1,5 @@
 import path from 'path'
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import viteReact from '@vitejs/plugin-react'
 import {defineConfig} from 'vite'
 
 const ROOT_PATH = path.resolve(__dirname, '../..')
@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'public'),
   },
-  plugins: [reactRefresh()],
+  plugins: [viteReact()],
   resolve: {
     alias: [
       {
@@ -30,6 +30,14 @@ export default defineConfig({
       {
         find: '@sanity/ui',
         replacement: path.resolve(ROOT_PATH, 'packages/@sanity/ui/src'),
+      },
+      {
+        find: 'react/jsx-dev-runtime',
+        replacement: require.resolve('react/jsx-dev-runtime'),
+      },
+      {
+        find: 'react/jsx-runtime',
+        replacement: require.resolve('react/jsx-runtime'),
       },
       {
         find: 'react',

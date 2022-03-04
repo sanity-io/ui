@@ -1,5 +1,5 @@
 import path from 'path'
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import viteReact from '@vitejs/plugin-react'
 import {defineConfig} from 'vite'
 import {designWorkshop} from './vite/plugin-design-workshop'
 import {pluginWorkshopScopes} from './vite/plugin-workshop-scopes'
@@ -19,7 +19,7 @@ export default defineConfig({
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
   },
-  plugins: [reactRefresh(), pluginWorkshopScopes(), designWorkshop()],
+  plugins: [viteReact(), pluginWorkshopScopes(), designWorkshop()],
   resolve: {
     alias: [
       {
@@ -41,6 +41,14 @@ export default defineConfig({
       {
         find: '@sanity/ui-workshop',
         replacement: path.resolve(ROOT_PATH, 'packages/@sanity/ui-workshop/src'),
+      },
+      {
+        find: 'react/jsx-dev-runtime',
+        replacement: require.resolve('react/jsx-dev-runtime'),
+      },
+      {
+        find: 'react/jsx-runtime',
+        replacement: require.resolve('react/jsx-runtime'),
       },
       {
         find: 'react',
