@@ -1,0 +1,73 @@
+import React, {memo, Profiler, useCallback, useEffect, useMemo, useRef} from 'react'
+import {PerfTestRenderResult} from '..'
+import {PerfTest, PerfTestRunFn} from '../types'
+import {usePerf} from './usePerf'
+
+export interface PerfTestHookProps<TargetType = unknown> {
+  ref: React.MutableRefObject<TargetType | null>
+  Wrapper: React.ComponentType<{children?: React.ReactNode}>
+}
+
+export interface PerfTestProps<TargetType = unknown> {
+  description?: string
+  name: string
+  run: PerfTestRunFn<TargetType>
+  title?: string
+}
+
+export function usePerfTest<TargetType = unknown>(
+  props: PerfTestProps<TargetType>
+): PerfTestHookProps<TargetType> {
+  const {name, title, description, run} = props
+
+  const {activeTest, addRenderResult, registerTest} = usePerf()
+  const active = activeTest === name
+
+  const ref = useRef<TargetType | null>(null)
+
+  const test: PerfTest<TargetType> = useMemo(
+    () => ({description, name, ref, run, title}),
+    [description, name, ref, run, title]
+  )
+
+  const handleRender: React.ProfilerOnRenderCallback = useCallback(
+    (id, phase, actualDuration, baseDuration, startTime, commitTime, interactions) => {
+      const result: PerfTestRenderResult = {
+        id,
+        phase,
+        actualDuration,
+        baseDuration,
+        startTime,
+        commitTime,
+        interactions,
+      }
+
+      setTimeout(() => {
+        // eslint-disable-next-line
+        console.log('@todo: render', {addRenderResult, name, result})
+
+        // @todo: this causes an infinite render-loop – why???
+        // addRenderResult(name, result)
+      }, 0)
+    },
+    [addRenderResult, name]
+  )
+
+  const Wrapper = useMemo(() => {
+    return memo(function Wrapper({children}: {children?: React.ReactNode}): React.ReactElement {
+      if (!active) {
+        return <>{children}</>
+      }
+
+      return (
+        <Profiler id={name} onRender={handleRender}>
+          {children}
+        </Profiler>
+      )
+    })
+  }, [active, handleRender, name])
+
+  useEffect(() => registerTest(test as PerfTest<unknown>), [registerTest, test])
+
+  return useMemo(() => ({ref, Wrapper}), [ref, Wrapper])
+}

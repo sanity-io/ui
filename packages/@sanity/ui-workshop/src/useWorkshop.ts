@@ -1,13 +1,12 @@
 import {useContext} from 'react'
-import {WorkshopContextValue} from './types'
-import {WorkshopContext} from './workshopContext'
+import {WorkshopContext, WorkshopContextValue} from './WorkshopContext'
 
-export function useWorkshop(): WorkshopContextValue {
-  const studio = useContext(WorkshopContext)
+export function useWorkshop<CustomMsg = never>(): WorkshopContextValue<CustomMsg> {
+  const workshop = useContext(WorkshopContext)
 
-  if (!studio) {
+  if (!workshop) {
     throw new Error('Workshop: missing context value')
   }
 
-  return studio
+  return workshop as unknown as WorkshopContextValue<CustomMsg>
 }

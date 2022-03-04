@@ -1,1 +1,1 @@
-export * from './workshopFrame'
+export * from './WorkshopFrame'

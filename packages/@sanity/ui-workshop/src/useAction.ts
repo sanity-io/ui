@@ -1,11 +1,11 @@
 import {useCallback} from 'react'
-import {useScope} from './useScope'
+import {useWorkshop} from './useWorkshop'
 
-export function useAction(name: string): (...args: any[]) => void {
-  const {scope, story} = useScope()
+export function useAction(name: string): (...args: unknown[]) => void {
+  const {scope, story} = useWorkshop()
 
   return useCallback(
-    (...args: any[]) => {
+    (...args: unknown[]) => {
       if (!scope || !story) return
 
       // eslint-disable-next-line no-console

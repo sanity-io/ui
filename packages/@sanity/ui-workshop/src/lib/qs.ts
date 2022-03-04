@@ -10,7 +10,7 @@ export const qs = {
     return q
   },
 
-  stringify(q: {[key: string]: any}): string {
+  stringify(q: {[key: string]: unknown}): string {
     return Object.entries(q)
       .map(([key, value]) => `${key}=${value}`)
       .join('&')
