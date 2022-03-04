@@ -35,6 +35,7 @@
       "$queries": ["./queries"],
       "$packages": ["./packages"],
       "$sanity": ["./sanity"],
+      "$sanity.server": ["./sanity.server"],
       "$screens/*": ["./screens/*"],
       "$sections": ["./sections"],
       "@sanity/*": ["../../packages/@sanity/*/src"]

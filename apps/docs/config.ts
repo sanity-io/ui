@@ -60,7 +60,7 @@ export const ga = {
  */
 export const sanity = {
   // The Sanity API version
-  apiVersion: '2021-03-25',
+  apiVersion: '2021-10-21',
 
   // The Sanity project dataset name
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
