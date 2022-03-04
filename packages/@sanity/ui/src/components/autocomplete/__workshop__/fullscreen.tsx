@@ -183,7 +183,7 @@ export default function Fullscreen() {
               <Button
                 aria-label="Open search"
                 icon={SearchIcon}
-                mode="bleed"
+                mode="ghost"
                 onClick={handleOpen}
                 ref={openSearchButtonElementRef}
               />
@@ -191,35 +191,36 @@ export default function Fullscreen() {
           </Card>
           <Layer hidden={!open} style={{position: 'sticky', top: 0}}>
             <Card padding={2} shadow={1}>
-              <Flex align="center">
-                <Box flex={1} paddingRight={2}>
-                  <Autocomplete
-                    filterOption={filterOption}
-                    icon={SearchIcon}
-                    id="fullsceen-example"
-                    listBox={{padding: 2}}
-                    loading={loading}
-                    onQueryChange={handleQueryChange}
-                    onSelect={handleSelect}
-                    options={options}
-                    placeholder="Search"
-                    radius={2}
-                    ref={inputRef}
-                    relatedElements={relatedElements}
-                    renderOption={renderOption}
-                    renderPopover={renderPopover}
-                    renderValue={renderValue}
-                    value={value}
-                  />
-                </Box>
-                <Button
-                  aria-label="Close search"
-                  icon={CloseIcon}
-                  onClick={handleClose}
-                  mode="bleed"
-                  ref={setCloseSearchButtonElement}
-                />
-              </Flex>
+              <Autocomplete
+                filterOption={filterOption}
+                icon={SearchIcon}
+                id="fullsceen-example"
+                listBox={{padding: 2}}
+                loading={loading}
+                onQueryChange={handleQueryChange}
+                onSelect={handleSelect}
+                options={options}
+                placeholder="Search"
+                radius={2}
+                ref={inputRef}
+                relatedElements={relatedElements}
+                renderOption={renderOption}
+                renderPopover={renderPopover}
+                renderValue={renderValue}
+                suffix={
+                  <Box padding={1}>
+                    <Button
+                      aria-label="Close search"
+                      icon={CloseIcon}
+                      onClick={handleClose}
+                      padding={2}
+                      mode="bleed"
+                      ref={setCloseSearchButtonElement}
+                    />
+                  </Box>
+                }
+                value={value}
+              />
             </Card>
           </Layer>
           <Card flex={1} hidden={!open} ref={setPortalElement} style={{position: 'relative'}} />

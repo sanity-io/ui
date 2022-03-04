@@ -1,7 +1,11 @@
 import {Autocomplete, Box, Button, Card, Code, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import React, {useCallback, useState} from 'react'
-import {WORKSHOP_RADIUS_OPTIONS, WORKSHOP_TEXT_SIZE_OPTIONS} from '../../../__workshop__/constants'
+import {
+  WORKSHOP_RADIUS_OPTIONS,
+  WORKSHOP_SPACE_OPTIONS,
+  WORKSHOP_TEXT_SIZE_OPTIONS,
+} from '../../../__workshop__/constants'
 import countries from '../__fixtures__/countries'
 import {ExampleOption} from './types'
 
@@ -11,6 +15,7 @@ export default function CustomStory() {
   const disabled = useBoolean('Disabled', false, 'Props')
   const fontSize = Number(useSelect('Font size', WORKSHOP_TEXT_SIZE_OPTIONS, 2, 'Props'))
   const openButton = useBoolean('Open button', true, 'Props')
+  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const radius = Number(useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props'))
   const readOnly = useBoolean('Read only', false, 'Props')
   const [value, setValue] = useState('')
@@ -23,13 +28,13 @@ export default function CustomStory() {
         href="#"
         key={option.value}
         onClick={(event) => event.preventDefault()}
-        padding={3}
+        padding={padding}
         radius={radius - 1}
       >
-        <Text>{option.title}</Text>
+        <Text size={fontSize}>{option.title}</Text>
       </Card>
     ),
-    [radius]
+    [fontSize, padding, radius]
   )
 
   const renderValue = useCallback((currentValue: string, option?: ExampleOption) => {
@@ -58,6 +63,7 @@ export default function CustomStory() {
           onChange={setValue}
           openButton={openButton}
           options={options}
+          padding={padding}
           placeholder="Search"
           radius={radius}
           readOnly={readOnly}
