@@ -134,6 +134,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     renderOption: renderOptionProp,
     renderPopover,
     renderValue = defaultRenderValue,
+    suffix,
     value: valueProp,
     ...restProps
   } = props
@@ -429,8 +430,28 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     return undefined
   }, [disabled, handleClearButtonFocus, loading, value])
 
-  const openButtonBoxPadding = useMemo(() => padding.map((v) => v - 2), [padding])
-  const openButtonPadding = useMemo(() => padding.map((v) => v - 1), [padding])
+  const openButtonBoxPadding = useMemo(
+    () =>
+      padding.map((v) => {
+        if (v === 0) return 0
+        if (v === 1) return 1
+        if (v === 2) return 1
+
+        return v - 2
+      }),
+    [padding]
+  )
+  const openButtonPadding = useMemo(
+    () =>
+      padding.map((v) => {
+        if (v === 0) return 0
+        if (v === 1) return 0
+        if (v === 2) return 1
+
+        return v - 1
+      }),
+    [padding]
+  )
   const openButtonProps: AutocompleteOpenButtonProps = useMemo(
     () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
     [openButton]
@@ -520,7 +541,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       ref={setRef}
       role="combobox"
       spellCheck={false}
-      suffix={openButtonNode}
+      suffix={suffix || openButtonNode}
       value={inputValue}
     />
   )
