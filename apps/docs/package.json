@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-design-docs",
-  "version": "0.1.85",
+  "version": "0.1.86",
   "scripts": {
     "build": "next build",
     "clean": "rimraf .next build packages.js workshop/scopes.js",
@@ -24,7 +24,7 @@
     "@sanity/image-url": "^1.0.1",
     "@sanity/logos": "^1.1.9",
     "@sanity/ui": "^0.37.6",
-    "@sanity/ui-workshop": "^0.4.0",
+    "@sanity/ui-workshop": "^0.4.1",
     "codemirror": "^5.65.2",
     "date-fns": "^2.28.0",
     "lodash-es": "^4.17.21",
