@@ -46,5 +46,8 @@
   "devDependencies": {
     "@types/mkdirp": "^1.0.2",
     "@types/tmp": "^0.2.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
