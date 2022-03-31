@@ -1,4 +1,4 @@
-import {Box, Card, Code, ErrorBoundary, Flex, Heading, Spinner, Stack} from '@sanity/ui'
+import {Box, Button, Card, Code, ErrorBoundary, Flex, Heading, Spinner, Stack} from '@sanity/ui'
 import React, {createElement, memo, Suspense, useCallback, useState} from 'react'
 import {WorkshopStory} from '../types'
 import {useWorkshop} from '../useWorkshop'
@@ -18,6 +18,10 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactElement
     []
   )
 
+  const handleRetry = useCallback(() => {
+    setState({error: null, errorInfo: null})
+  }, [])
+
   if (!story) {
     return <></>
   }
@@ -25,7 +29,7 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactElement
   if (state.error) {
     return (
       <Card as="main" height="fill" overflow="auto" tone="critical">
-        <ErrorScreen error={state.error} errorInfo={state.errorInfo} />
+        <ErrorScreen error={state.error} errorInfo={state.errorInfo} onRetry={handleRetry} />
       </Card>
     )
   }
@@ -62,8 +66,9 @@ const LoadingScreen = memo(function LoadingScreen(props: {story: WorkshopStory})
 const ErrorScreen = memo(function ErrorScreen(props: {
   error: Error
   errorInfo: React.ErrorInfo | null
+  onRetry: () => void
 }) {
-  const {error, errorInfo} = props
+  const {error, errorInfo, onRetry} = props
 
   return (
     <Box padding={4}>
@@ -71,6 +76,9 @@ const ErrorScreen = memo(function ErrorScreen(props: {
         <Heading as="h1" size={[1, 1, 2]}>
           {error.message}
         </Heading>
+        <Box>
+          <Button onClick={onRetry} text="Retry" />
+        </Box>
         {error.stack && <Code size={1}>{formatStack(error.stack)}</Code>}
         {errorInfo && (
           <Code size={1}>{'Component stack:' + formatStack(errorInfo.componentStack)}</Code>
