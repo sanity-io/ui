@@ -4,6 +4,7 @@ import {PropsProvider} from './PropsProvider'
 
 // export hooks
 export * from './hooks'
+export * from './useProps'
 
 export function propsPlugin(): WorkshopPlugin {
   return {
