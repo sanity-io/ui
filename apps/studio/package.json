@@ -27,7 +27,7 @@
     "@sanity/core": "^2.29.3",
     "@sanity/default-layout": "^2.29.3",
     "@sanity/default-login": "^2.29.3",
-    "@sanity/desk-tool": "^2.29.3",
+    "@sanity/desk-tool": "^2.29.4",
     "@sanity/icons": "^1.2.6",
     "@sanity/logos": "^1.1.9",
     "@sanity/production-preview": "2.29.3",
