@@ -19,9 +19,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "$components": ["./components"],
+      "$components": ["./components/"],
       "$components/*": ["./components/*"],
-      "$theme": ["./theme"]
+      "$theme": ["./theme/"]
     }
   },
   "references": [

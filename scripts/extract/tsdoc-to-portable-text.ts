@@ -29,7 +29,7 @@ async function extractPackage(name: string, currPackageDoc?: SanityDocumentValue
   const packageJsonPath = path.resolve(packagePath, 'package.json')
   const pkg = await readJSONFile(packageJsonPath)
 
-  const result = await extract('lib/dts/index.d.ts', {
+  const result = await extract('lib/dts/src/index.d.ts', {
     packagePath,
     tsconfigPath: 'tsconfig.extract.json',
   })

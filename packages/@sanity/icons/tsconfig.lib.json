@@ -12,7 +12,7 @@
     "composite": true,
     "outDir": "./lib/dts/",
     "declarationDir": "./lib/dts/",
-    "rootDir": "./src/",
+    "rootDir": "./",
     "jsx": "react"
   }
 }

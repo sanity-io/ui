@@ -9,7 +9,7 @@
     "dev": "vite",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "@sanity/icons": "^1.2.7",

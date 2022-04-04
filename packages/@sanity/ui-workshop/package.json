@@ -9,7 +9,7 @@
   },
   "main": "./lib/sanity-ui-workshop.js",
   "module": "./lib/sanity-ui-workshop.module.js",
-  "types": "./lib/dts/index.d.ts",
+  "types": "./lib/dts/src/index.d.ts",
   "files": [
     "lib",
     "src"
@@ -22,7 +22,7 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "test": "jest",
-    "type-check": "tsc -b"
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "axe-core": "^4.4.1",

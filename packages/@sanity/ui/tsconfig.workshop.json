@@ -1,0 +1,18 @@
+{
+  "extends": "../../../tsconfig.settings",
+  "include": [
+    "./src/**/__fixtures__/",
+    "./src/**/__mocks__/",
+    "./src/**/__workshop__/",
+    "./typings/"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "./",
+    "outDir": "./lib/workshop",
+    "declarationDir": "./lib/workshop",
+    "module": "ES2020",
+    "jsx": "react"
+  },
+  "references": [{"path": "../ui/tsconfig.lib.json"}, {"path": "../ui-workshop/tsconfig.lib.json"}]
+}

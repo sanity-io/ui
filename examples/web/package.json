@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "start": "next start -p 3003",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "@sanity/color": "^2.1.9",

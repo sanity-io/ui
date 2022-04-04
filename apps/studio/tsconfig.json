@@ -1,5 +1,6 @@
 {
   "include": ["**/*.tsx", "**/*.ts"],
+  "exclude": ["./build/"],
   "compilerOptions": {
     "composite": true,
     "module": "commonjs",

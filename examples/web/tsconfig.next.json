@@ -19,10 +19,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "$components": ["./components"],
+      "$components": ["./components/"],
       "$components/*": ["./components/*"],
-      "$theme": ["./theme"],
-      "@sanity/*": ["../../packages/@sanity/*/src"]
+      "$theme": ["./theme/"],
+      "@sanity/*": ["../../packages/@sanity/*/src/"]
     }
   }
 }

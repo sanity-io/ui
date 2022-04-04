@@ -14,8 +14,8 @@
     "scopes:watch": "node -r esbuild-register scripts/scopes/watch.ts",
     "start": "next start",
     "test": "jest",
-    "tsc:no-emit": "tsc --noEmit",
-    "type-check": "run-s packages:build scopes:build tsc:no-emit"
+    "tsc:build": "tsc --build",
+    "type-check": "run-s packages:build scopes:build tsc:build"
   },
   "dependencies": {
     "@sanity/block-content-to-react": "^3.0.0",

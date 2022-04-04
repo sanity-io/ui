@@ -10,7 +10,7 @@
   },
   "main": "./lib/tsdoc-to-portable-text.js",
   "module": "./lib/tsdoc-to-portable-text.module.js",
-  "types": "./lib/dts/index.d.ts",
+  "types": "./lib/dts/src/index.d.ts",
   "bin": {
     "tsdoc-to-portable-text": "./lib/cli.js"
   },
@@ -27,7 +27,7 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "test": "jest --runInBand",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "@microsoft/api-extractor": "^7.20.0",

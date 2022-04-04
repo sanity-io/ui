@@ -1,6 +1,6 @@
 {
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["./build/", "./node_modules/"],
+  "exclude": ["./build/"],
   "compilerOptions": {
     "composite": true,
     "incremental": true,
@@ -21,16 +21,15 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "$components": ["./components"],
+      "$components": ["./components/"],
       "$components/*": ["./components/*"],
       "$config": ["./config"],
       "$lib/*": ["./lib/*"],
-      "$queries": ["./queries"],
+      "$queries": ["./queries/"],
       "$packages": ["./packages"],
       "$sanity": ["./sanity"],
       "$sanity.server": ["./sanity.server"],
       "$screens/*": ["./screens/*"],
-      "$sections": ["./sections"],
       "$workshop/*": ["./workshop/*"]
     }
   },

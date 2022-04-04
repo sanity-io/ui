@@ -10,9 +10,9 @@
   ],
   "compilerOptions": {
     "composite": true,
+    "rootDir": "./",
     "outDir": "./lib/dts/",
     "declarationDir": "./lib/dts/",
-    "rootDir": "./src/",
     "jsx": "react"
   },
   "references": [{"path": "../icons/tsconfig.lib.json"}, {"path": "../ui/tsconfig.lib.json"}]

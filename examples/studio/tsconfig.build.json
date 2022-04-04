@@ -1,5 +1,5 @@
 {
-  "include": ["typings"],
+  "include": ["./typings/"],
   "files": ["./src/main.tsx"],
   "compilerOptions": {
     "outDir": "./build/dts/",
