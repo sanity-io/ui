@@ -3,19 +3,42 @@ import {extract} from '../src'
 import {spawnProject} from './lib/spawnProject'
 
 describe('extract', () => {
-  test('should succeed', async () => {
+  test('should extract package with only root export', async () => {
     const project = await spawnProject('mylib/1.0.0')
 
-    const result = await extract('lib/esm/index.d.ts', {
+    const results = await extract(project.path, {
       customTags: [{name: 'sampleCustomBlockTag', syntaxKind: 'block', allowMultiple: true}],
-      packagePath: project.path,
       tsconfigPath: 'tsconfig.json',
     })
+
+    const result = results[0]
 
     project.cleanup()
 
     expect(result.messages[result.messages.length - 1].text).toEqual(
-      `Writing: ${path.resolve(result.tmpDirPath, 'api.json')}`
+      `Writing: ${path.resolve(result.tempDirPath, 'api.json')}`
+    )
+  })
+
+  test('should extract package with multiple exports', async () => {
+    const project = await spawnProject('multi-export/1.0.0')
+
+    expect(await project.dirs()).toEqual(['lib', 'node_modules', 'src'])
+    expect(await project.dirs('lib')).toEqual(['cjs', 'dts', 'esm'])
+
+    const results = await extract(project.path, {
+      customTags: [{name: 'sampleCustomBlockTag', syntaxKind: 'block', allowMultiple: true}],
+      tsconfigPath: 'tsconfig.lib.json',
+    })
+
+    expect(results.length).toBe(2)
+
+    const result = results[0]
+
+    project.cleanup()
+
+    expect(result.messages[result.messages.length - 1].text).toEqual(
+      `Writing: ${path.resolve(result.tempDirPath, 'api.json')}`
     )
   })
 

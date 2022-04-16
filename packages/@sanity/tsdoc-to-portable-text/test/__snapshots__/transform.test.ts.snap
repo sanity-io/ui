@@ -1,5 +1,916 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`transform should result in a "api.release" document 1`] = `
+Array [
+  Object {
+    "_id": "mylib",
+    "_type": "api.package",
+    "identifiers": Array [
+      "Button",
+      "ButtonProps",
+      "ButtonTone",
+      "ButtonType",
+      "Class",
+      "Resolver",
+      "ResponsiveMarginProps",
+    ],
+    "latestRelease": Object {
+      "_ref": "mylib_1-0-0",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "name": "mylib",
+    "releases": Array [
+      Object {
+        "_key": "mylib_1-0-0",
+        "_ref": "mylib_1-0-0",
+        "_type": "reference",
+        "_weak": true,
+      },
+    ],
+    "scope": undefined,
+  },
+  Object {
+    "_id": "mylib_1-0-0",
+    "_type": "api.release",
+    "exports": Array [
+      Object {
+        "_key": ".",
+        "_type": "api.export",
+        "members": Array [
+          Object {
+            "_key": "15cb148fb5d4f062894fe0e153b35382",
+            "_ref": "15cb148fb5d4f062894fe0e153b35382",
+            "_type": "reference",
+            "_weak": true,
+          },
+          Object {
+            "_key": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+            "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+            "_type": "reference",
+            "_weak": true,
+          },
+          Object {
+            "_key": "f8290b4913d399ece606e41443224121",
+            "_ref": "f8290b4913d399ece606e41443224121",
+            "_type": "reference",
+            "_weak": true,
+          },
+          Object {
+            "_key": "7baa7de0358f25b593b8be235abe8fee",
+            "_ref": "7baa7de0358f25b593b8be235abe8fee",
+            "_type": "reference",
+            "_weak": true,
+          },
+          Object {
+            "_key": "ead4d7d99c69e54e6e02479a21215ad0",
+            "_ref": "ead4d7d99c69e54e6e02479a21215ad0",
+            "_type": "reference",
+            "_weak": true,
+          },
+          Object {
+            "_key": "9053f9d2ff132c36903fbaf0067d5ce8",
+            "_ref": "9053f9d2ff132c36903fbaf0067d5ce8",
+            "_type": "reference",
+            "_weak": true,
+          },
+          Object {
+            "_key": "03fdbeef0c01fd8e571a926d2905e46f",
+            "_ref": "03fdbeef0c01fd8e571a926d2905e46f",
+            "_type": "reference",
+            "_weak": true,
+          },
+        ],
+        "name": "mylib",
+        "path": ".",
+      },
+    ],
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "version": "1.0.0",
+  },
+  Object {
+    "_id": "15cb148fb5d4f062894fe0e153b35382",
+    "_type": "api.function",
+    "comment": Object {
+      "_type": "tsdoc.docComment",
+      "customBlocks": undefined,
+      "deprecated": undefined,
+      "exampleBlocks": undefined,
+      "modifierTags": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.modifierTag",
+          "name": "@public",
+        },
+      ],
+      "parameters": undefined,
+      "remarks": undefined,
+      "returns": undefined,
+      "seeBlocks": undefined,
+      "summary": undefined,
+    },
+    "isReactComponentType": true,
+    "name": "Button",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "parameters": Array [
+      Object {
+        "_key": "50fe03ab7bf37089a7e88da9b31ffb3b",
+        "_type": "api.functionParameter",
+        "name": "props",
+        "type": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.reference",
+            "reference": Object {
+              "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+              "_type": "reference",
+              "_weak": true,
+            },
+            "text": "ButtonProps",
+          },
+          Object {
+            "_key": "token1",
+            "_type": "api.text",
+            "text": " & ",
+          },
+          Object {
+            "_key": "token2",
+            "_type": "api.reference",
+            "reference": Object {
+              "_ref": "a5c5b216214ec778de7d29f2f68daa12",
+              "_type": "reference",
+              "_weak": true,
+            },
+            "text": "Omit",
+          },
+          Object {
+            "_key": "token3",
+            "_type": "api.text",
+            "text": "<",
+          },
+          Object {
+            "_key": "token4",
+            "_type": "api.reference",
+            "reference": Object {
+              "_ref": "51c4e41c89c9026264bbf30d5c7977e6",
+              "_type": "reference",
+              "_weak": true,
+            },
+            "text": "React.HTMLProps",
+          },
+          Object {
+            "_key": "token5",
+            "_type": "api.text",
+            "text": "<",
+          },
+          Object {
+            "_key": "token6",
+            "_type": "api.reference",
+            "reference": Object {
+              "_ref": "1b2a945e82fde37bf0240a7d0caa7ce2",
+              "_type": "reference",
+              "_weak": true,
+            },
+            "text": "HTMLButtonElement",
+          },
+          Object {
+            "_key": "token7",
+            "_type": "api.text",
+            "text": ">, 'type'>",
+          },
+        ],
+      },
+    ],
+    "propsType": Object {
+      "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "releaseTag": "public",
+    "returnType": Array [
+      Object {
+        "_key": "token0",
+        "_type": "api.reference",
+        "reference": Object {
+          "_ref": "10dd42507410f3d886670555aa9c23e5",
+          "_type": "reference",
+          "_weak": true,
+        },
+        "text": "React.ReactElement",
+      },
+    ],
+    "slug": Object {
+      "_type": "slug",
+      "current": "Button",
+    },
+  },
+  Object {
+    "_id": "mylib_Button",
+    "_type": "api.identifier",
+    "name": "Button",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+    "_type": "api.interface",
+    "comment": Object {
+      "_type": "tsdoc.docComment",
+      "customBlocks": undefined,
+      "deprecated": undefined,
+      "exampleBlocks": undefined,
+      "modifierTags": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.modifierTag",
+          "name": "@public",
+        },
+      ],
+      "parameters": undefined,
+      "remarks": undefined,
+      "returns": undefined,
+      "seeBlocks": undefined,
+      "summary": undefined,
+    },
+    "extends": Array [
+      Object {
+        "_key": "extend0",
+        "_type": "api.extend",
+        "type": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.reference",
+            "reference": Object {
+              "_ref": "03fdbeef0c01fd8e571a926d2905e46f",
+              "_type": "reference",
+              "_weak": true,
+            },
+            "text": "ResponsiveMarginProps",
+          },
+        ],
+      },
+    ],
+    "members": Array [
+      Object {
+        "_key": "f303f9a15cddbe8ee0296511a8b04b30",
+        "_type": "api.property",
+        "comment": undefined,
+        "isOptional": true,
+        "name": "tone",
+        "releaseTag": "public",
+        "type": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.reference",
+            "reference": Object {
+              "_ref": "f8290b4913d399ece606e41443224121",
+              "_type": "reference",
+              "_weak": true,
+            },
+            "text": "ButtonTone",
+          },
+        ],
+      },
+      Object {
+        "_key": "599dcce2998a6b40b1e38e8c6006cb0a",
+        "_type": "api.property",
+        "comment": undefined,
+        "isOptional": true,
+        "name": "type",
+        "releaseTag": "public",
+        "type": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.reference",
+            "reference": Object {
+              "_ref": "7baa7de0358f25b593b8be235abe8fee",
+              "_type": "reference",
+              "_weak": true,
+            },
+            "text": "ButtonType",
+          },
+        ],
+      },
+    ],
+    "name": "ButtonProps",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "releaseTag": "public",
+    "slug": Object {
+      "_type": "slug",
+      "current": "ButtonProps",
+    },
+    "typeParameters": Array [],
+  },
+  Object {
+    "_id": "mylib_ButtonProps",
+    "_type": "api.identifier",
+    "name": "ButtonProps",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "f8290b4913d399ece606e41443224121",
+    "_type": "api.typeAlias",
+    "comment": Object {
+      "_type": "tsdoc.docComment",
+      "customBlocks": undefined,
+      "deprecated": undefined,
+      "exampleBlocks": undefined,
+      "modifierTags": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.modifierTag",
+          "name": "@public",
+        },
+      ],
+      "parameters": undefined,
+      "remarks": undefined,
+      "returns": undefined,
+      "seeBlocks": undefined,
+      "summary": undefined,
+    },
+    "name": "ButtonTone",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "releaseTag": "public",
+    "slug": Object {
+      "_type": "slug",
+      "current": "ButtonTone",
+    },
+    "type": Array [
+      Object {
+        "_key": "token0",
+        "_type": "api.text",
+        "text": "'positive' | 'caution' | 'critical'",
+      },
+    ],
+  },
+  Object {
+    "_id": "mylib_ButtonTone",
+    "_type": "api.identifier",
+    "name": "ButtonTone",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "7baa7de0358f25b593b8be235abe8fee",
+    "_type": "api.typeAlias",
+    "comment": Object {
+      "_type": "tsdoc.docComment",
+      "customBlocks": undefined,
+      "deprecated": undefined,
+      "exampleBlocks": undefined,
+      "modifierTags": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.modifierTag",
+          "name": "@public",
+        },
+      ],
+      "parameters": undefined,
+      "remarks": undefined,
+      "returns": undefined,
+      "seeBlocks": undefined,
+      "summary": undefined,
+    },
+    "name": "ButtonType",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "releaseTag": "public",
+    "slug": Object {
+      "_type": "slug",
+      "current": "ButtonType",
+    },
+    "type": Array [
+      Object {
+        "_key": "token0",
+        "_type": "api.text",
+        "text": "'button' | 'submit' | 'reset'",
+      },
+    ],
+  },
+  Object {
+    "_id": "mylib_ButtonType",
+    "_type": "api.identifier",
+    "name": "ButtonType",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "ead4d7d99c69e54e6e02479a21215ad0",
+    "_type": "api.class",
+    "comment": Object {
+      "_type": "tsdoc.docComment",
+      "customBlocks": Array [
+        Object {
+          "_key": "1",
+          "_type": "tsdoc.customBlock",
+          "content": Array [
+            Object {
+              "_key": "0",
+              "_type": "block",
+              "children": Array [
+                Object {
+                  "_key": "0",
+                  "_type": "span",
+                  "marks": Array [],
+                  "text": "You can define your own custom block tags and tell the parser about them. The playground doesn't render this block, but your own tooling could do that.",
+                },
+              ],
+              "markDefs": Array [],
+              "style": "normal",
+            },
+          ],
+          "tag": "@sampleCustomBlockTag",
+        },
+      ],
+      "deprecated": undefined,
+      "exampleBlocks": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.exampleBlock",
+          "content": Array [
+            Object {
+              "_key": "0",
+              "_type": "block",
+              "children": Array [
+                Object {
+                  "_key": "0",
+                  "_type": "span",
+                  "marks": Array [],
+                  "text": "Code samples can be enclosed in a Markdown code fence:",
+                },
+              ],
+              "markDefs": Array [],
+              "style": "normal",
+            },
+            Object {
+              "_key": "1",
+              "_type": "code",
+              "code": "function getAverage(x, y) {
+  return (x + y) / 2.0;
+}
+",
+              "language": "ts",
+            },
+          ],
+        },
+      ],
+      "modifierTags": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.modifierTag",
+          "name": "@beta",
+        },
+        Object {
+          "_key": "1",
+          "_type": "tsdoc.modifierTag",
+          "name": "@sealed",
+        },
+      ],
+      "parameters": undefined,
+      "remarks": Object {
+        "_type": "tsdoc.remarksBlock",
+        "content": Array [
+          Object {
+            "_key": "0",
+            "_type": "block",
+            "children": Array [
+              Object {
+                "_key": "0",
+                "_type": "span",
+                "marks": Array [],
+                "text": "The main documentation for an API item is separated into a brief \\"summary\\" section optionally followed by an ",
+              },
+              Object {
+                "_key": "1",
+                "_type": "span",
+                "marks": Array [
+                  "code",
+                ],
+                "text": "@remarks",
+              },
+              Object {
+                "_key": "2",
+                "_type": "span",
+                "marks": Array [],
+                "text": " block containing additional details.",
+              },
+            ],
+            "markDefs": Array [],
+            "style": "normal",
+          },
+          Object {
+            "_key": "1",
+            "_type": "block",
+            "children": Array [
+              Object {
+                "_key": "0",
+                "_type": "span",
+                "marks": Array [],
+                "text": "Unlike the summary, the remarks block may contain lengthy documentation content. The remarks should not restate information from the summary, since the summary section will always be displayed wherever the remarks section appears. Other sections (e.g. an ",
+              },
+              Object {
+                "_key": "1",
+                "_type": "span",
+                "marks": Array [
+                  "code",
+                ],
+                "text": "@example",
+              },
+              Object {
+                "_key": "2",
+                "_type": "span",
+                "marks": Array [],
+                "text": " block) if shown will usually appear after the remarks section.",
+              },
+            ],
+            "markDefs": Array [],
+            "style": "normal",
+          },
+          Object {
+            "_key": "2",
+            "_type": "block",
+            "children": Array [
+              Object {
+                "_key": "0",
+                "_type": "span",
+                "marks": Array [],
+                "text": "Code samples can be enclosed in a Markdown code fence:",
+              },
+            ],
+            "markDefs": Array [],
+            "style": "normal",
+          },
+          Object {
+            "_key": "3",
+            "_type": "code",
+            "code": "function getAverage(x, y) {
+  return (x + y) / 2.0;
+}
+",
+            "language": "ts",
+          },
+          Object {
+            "_key": "4",
+            "_type": "block",
+            "children": Array [
+              Object {
+                "_key": "0",
+                "_type": "span",
+                "marks": Array [],
+                "text": "If you use special symbols and don't want to use a code span, you can escape them using backslashes: ",
+              },
+              Object {
+                "_key": "1",
+                "_type": "span",
+                "marks": Array [],
+                "text": "{",
+              },
+              Object {
+                "_key": "2",
+                "_type": "span",
+                "marks": Array [],
+                "text": "@",
+              },
+              Object {
+                "_key": "3",
+                "_type": "span",
+                "marks": Array [],
+                "text": "inheritDoc Button.render",
+              },
+              Object {
+                "_key": "4",
+                "_type": "span",
+                "marks": Array [],
+                "text": "}",
+              },
+            ],
+            "markDefs": Array [],
+            "style": "normal",
+          },
+        ],
+      },
+      "returns": undefined,
+      "seeBlocks": undefined,
+      "summary": Array [
+        Object {
+          "_key": "0",
+          "_type": "block",
+          "children": Array [
+            Object {
+              "_key": "0",
+              "_type": "span",
+              "marks": Array [],
+              "text": "The summary section should be brief. On a documentation web site, it will be shown on a page that lists summaries for many different API items. On a detail page for a single item, the summary will be shown followed by the remarks section (if any).",
+            },
+          ],
+          "markDefs": Array [],
+          "style": "normal",
+        },
+      ],
+    },
+    "members": Array [
+      Object {
+        "_key": "8d3ce42f4aeda10d5b563bebea7e190f",
+        "_type": "api.constructor",
+        "comment": Object {
+          "_type": "tsdoc.docComment",
+          "customBlocks": undefined,
+          "deprecated": undefined,
+          "exampleBlocks": undefined,
+          "modifierTags": undefined,
+          "parameters": undefined,
+          "remarks": undefined,
+          "returns": undefined,
+          "seeBlocks": undefined,
+          "summary": Array [
+            Object {
+              "_key": "0",
+              "_type": "block",
+              "children": Array [
+                Object {
+                  "_key": "0",
+                  "_type": "span",
+                  "marks": Array [],
+                  "text": "Constructs a new instance of the ",
+                },
+                Object {
+                  "_key": "1",
+                  "_type": "span",
+                  "marks": Array [
+                    "code",
+                  ],
+                  "text": "Class",
+                },
+                Object {
+                  "_key": "2",
+                  "_type": "span",
+                  "marks": Array [],
+                  "text": " class",
+                },
+              ],
+              "markDefs": Array [],
+              "style": "normal",
+            },
+          ],
+        },
+        "members": Array [],
+        "parameters": Array [
+          Object {
+            "_key": "b80bb7740288fda1f201890375a60c8f",
+            "_type": "api.parameter",
+            "comment": undefined,
+            "name": "id",
+            "type": Array [
+              Object {
+                "_key": "token0",
+                "_type": "api.text",
+                "text": "string",
+              },
+            ],
+          },
+        ],
+        "releaseTag": "beta",
+      },
+      Object {
+        "_key": "e6e4098107452e0fe162d6c799ccaa99",
+        "_type": "api.property",
+        "comment": undefined,
+        "isEventProperty": false,
+        "isOptional": false,
+        "isStatic": false,
+        "name": "$id",
+        "releaseTag": "beta",
+        "type": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.text",
+            "text": "string",
+          },
+        ],
+      },
+      Object {
+        "_key": "11350dc1337d0e80054837b6a8d61210",
+        "_type": "api.method",
+        "comment": undefined,
+        "isOptional": false,
+        "isStatic": false,
+        "members": Array [],
+        "name": "method",
+        "parameters": Array [
+          Object {
+            "_key": "327a6c4304ad5938eaf0efb6cc3e53dc",
+            "_type": "api.parameter",
+            "comment": undefined,
+            "name": "flag",
+            "type": Array [
+              Object {
+                "_key": "token0",
+                "_type": "api.text",
+                "text": "boolean",
+              },
+            ],
+          },
+        ],
+        "releaseTag": "beta",
+        "returnType": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.text",
+            "text": "boolean",
+          },
+        ],
+        "typeParameters": Array [],
+      },
+    ],
+    "name": "Class",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "releaseTag": "beta",
+    "slug": Object {
+      "_type": "slug",
+      "current": "Class",
+    },
+  },
+  Object {
+    "_id": "mylib_Class",
+    "_type": "api.identifier",
+    "name": "Class",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "9053f9d2ff132c36903fbaf0067d5ce8",
+    "_type": "api.interface",
+    "comment": Object {
+      "_type": "tsdoc.docComment",
+      "customBlocks": undefined,
+      "deprecated": undefined,
+      "exampleBlocks": undefined,
+      "modifierTags": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.modifierTag",
+          "name": "@beta",
+        },
+      ],
+      "parameters": undefined,
+      "remarks": undefined,
+      "returns": undefined,
+      "seeBlocks": undefined,
+      "summary": undefined,
+    },
+    "extends": Array [],
+    "members": Array [
+      Object {
+        "_key": "1b3ef1024601ff5c0ab8ffbf196ab5f0",
+        "_type": "api.callSignature",
+        "comment": undefined,
+        "members": Array [],
+        "parameters": Array [
+          Object {
+            "_key": "id",
+            "_type": "api.parameter",
+            "name": "id",
+            "releaseTag": "beta",
+            "type": Array [
+              Object {
+                "_key": "token0",
+                "_type": "api.text",
+                "text": "string",
+              },
+            ],
+          },
+        ],
+        "releaseTag": "beta",
+        "returnType": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.text",
+            "text": "string[]",
+          },
+        ],
+        "typeParameters": Array [],
+      },
+    ],
+    "name": "Resolver",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "releaseTag": "beta",
+    "slug": Object {
+      "_type": "slug",
+      "current": "Resolver",
+    },
+    "typeParameters": Array [],
+  },
+  Object {
+    "_id": "mylib_Resolver",
+    "_type": "api.identifier",
+    "name": "Resolver",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "03fdbeef0c01fd8e571a926d2905e46f",
+    "_type": "api.interface",
+    "comment": Object {
+      "_type": "tsdoc.docComment",
+      "customBlocks": undefined,
+      "deprecated": undefined,
+      "exampleBlocks": undefined,
+      "modifierTags": Array [
+        Object {
+          "_key": "0",
+          "_type": "tsdoc.modifierTag",
+          "name": "@public",
+        },
+      ],
+      "parameters": undefined,
+      "remarks": undefined,
+      "returns": undefined,
+      "seeBlocks": undefined,
+      "summary": undefined,
+    },
+    "extends": Array [],
+    "members": Array [
+      Object {
+        "_key": "d42f4851e770aa0f758b01388874f67b",
+        "_type": "api.property",
+        "comment": undefined,
+        "isOptional": true,
+        "name": "margin",
+        "releaseTag": "public",
+        "type": Array [
+          Object {
+            "_key": "token0",
+            "_type": "api.text",
+            "text": "number | number[]",
+          },
+        ],
+      },
+    ],
+    "name": "ResponsiveMarginProps",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "releaseTag": "public",
+    "slug": Object {
+      "_type": "slug",
+      "current": "ResponsiveMarginProps",
+    },
+    "typeParameters": Array [],
+  },
+  Object {
+    "_id": "mylib_ResponsiveMarginProps",
+    "_type": "api.identifier",
+    "name": "ResponsiveMarginProps",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+]
+`;
+
 exports[`transform should transform class 1`] = `
 Object {
   "_id": "ead4d7d99c69e54e6e02479a21215ad0",
@@ -335,11 +1246,6 @@ Object {
     "_type": "reference",
     "_weak": true,
   },
-  "release": Object {
-    "_ref": "mylib_1-0-0",
-    "_type": "reference",
-    "_weak": true,
-  },
   "releaseTag": "beta",
   "slug": Object {
     "_type": "slug",
@@ -406,11 +1312,6 @@ Object {
   "name": "Resolver",
   "package": Object {
     "_ref": "mylib",
-    "_type": "reference",
-    "_weak": true,
-  },
-  "release": Object {
-    "_ref": "mylib_1-0-0",
     "_type": "reference",
     "_weak": true,
   },

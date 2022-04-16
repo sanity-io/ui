@@ -14,11 +14,9 @@ describe('load', () => {
   })
 
   test('should ...', async () => {
-    const result = await extract('./lib/esm/index.d.ts', {
-      packagePath: project.path,
-    })
+    const results = await extract(project.path)
 
-    const docs = transform(result, {package: {version: '1.0.0'}})
+    const docs = transform(results, {package: {version: '1.0.0'}})
 
     await load(docs, {fs: {path: path.resolve(project.path, 'etc/1.0.0.json')}})
   })

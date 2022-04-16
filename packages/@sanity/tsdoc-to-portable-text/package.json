@@ -28,7 +28,7 @@
     "clean": "rimraf lib",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
-    "test": "jest --runInBand",
+    "test": "jest",
     "type-check": "tsc --build"
   },
   "dependencies": {

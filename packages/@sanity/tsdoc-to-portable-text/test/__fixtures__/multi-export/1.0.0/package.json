@@ -1,5 +1,5 @@
 {
-  "name": "mylib",
+  "name": "multi-export",
   "version": "1.0.0",
   "license": "MIT",
   "main": "./lib/cjs/index.js",
@@ -10,6 +10,18 @@
       "source": "./src/index.ts",
       "require": "./lib/cjs/index.ks",
       "default": "./lib/esm/index.ks"
+    },
+    "./extra": {
+      "source": "./src/extra.ts",
+      "require": "./lib/cjs/extra.js",
+      "default": "./lib/esm/extra.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "extra": [
+        "./lib/dts/src/extra.d.ts"
+      ]
     }
   },
   "scripts": {
@@ -19,8 +31,8 @@
     "prebuild": "rimraf lib/"
   },
   "devDependencies": {
-    "@types/react": "^17.0.44",
+    "@types/react": "^17.0.19",
     "react": "^17.0.2",
-    "typescript": "^4.6.3"
+    "typescript": "^4.3.5"
   }
 }

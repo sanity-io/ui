@@ -4,8 +4,12 @@
   "license": "MIT",
   "main": "./lib/cjs/index.d.ts",
   "module": "./lib/esm/index.d.ts",
+  "types": "./lib/dts/src/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.lib.json"
+    "build": "yarn build:cjs && yarn build:esm && tsc --build -f tsconfig.build.json",
+    "build:cjs": "tsc --project tsconfig.lib.json --outDir lib/cjs/ --rootDir src/",
+    "build:esm": "tsc --project tsconfig.lib.json --outDir lib/esm/ --rootDir src/",
+    "prebuild": "rimraf lib/"
   },
   "devDependencies": {
     "@types/react": "^17.0.44",

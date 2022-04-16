@@ -2,7 +2,8 @@
   "extends": "./tsconfig.settings",
   "include": ["./src"],
   "compilerOptions": {
-    "outDir": "./lib/esm",
+    "rootDir": "./",
+    "outDir": "./lib/dts/",
     "jsx": "react"
   }
 }

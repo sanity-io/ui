@@ -5,19 +5,11 @@ import {spawnProject} from './lib/spawnProject'
 const noop = () => undefined
 
 describe('cli', () => {
-  let project: {cleanup: () => void; path: string}
-
-  beforeAll(async () => {
-    project = await spawnProject('mylib/1.0.0')
-  })
-
-  afterAll(async () => {
-    project.cleanup()
-  })
-
   test('run `etl` command', async () => {
     // Spy on `console.log`
     const log = jest.spyOn(global.console, 'log').mockImplementation(noop)
+
+    const project = await spawnProject('mylib/1.0.0')
 
     await run({
       args: ['lib/esm/index.d.ts'],
@@ -28,6 +20,8 @@ describe('cli', () => {
         tsconfig: 'tsconfig.lib.json',
       },
     })
+
+    project.cleanup()
 
     expect(log).toBeCalledWith(`${chalk.green('success')} wrote documents to etc/1.0.0.json`)
 
