@@ -1,14 +1,9 @@
-name: Extract
-
+name: Extract, Transform & Load
 on: [push, pull_request]
 
 jobs:
-  test:
-    runs-on: ubuntu-18.04
-
-    strategy:
-      matrix:
-        node: [ '14' ]
+  etl:
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +30,7 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Extract API
+      - name: Extract, Transform & Load
         env:
           SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
-        run: yarn extract:tsdoc-to-portable-text
+        run: yarn etl --quiet

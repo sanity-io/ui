@@ -2,6 +2,7 @@
 /*.log
 /.vscode
 /build
+/etc
 /lerna-debug.log
 /local_registry.log
 /node_modules
