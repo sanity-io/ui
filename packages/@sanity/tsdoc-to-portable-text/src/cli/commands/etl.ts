@@ -35,24 +35,25 @@ export const etl: CmdFn = async ({args, cwd, flags}) => {
 
   const packagePath = path.dirname(packageJsonPath)
 
-  const result = await extract(inputPath, {
-    packagePath,
+  const results = await extract(packagePath, {
     tsconfigPath,
   })
 
-  for (const msg of result.messages) {
-    if (msg.logLevel === 'error') {
-      // eslint-disable-next-line no-console
-      console.log(`${chalk.red('error')} ${msg.text}`)
-    }
+  for (const result of results) {
+    for (const msg of result.messages) {
+      if (msg.logLevel === 'error') {
+        // eslint-disable-next-line no-console
+        console.log(`${chalk.red('error')} ${msg.text}`)
+      }
 
-    if (msg.logLevel === 'warning') {
-      // eslint-disable-next-line no-console
-      console.log(`${chalk.yellow('warning')} ${msg.text}`)
+      if (msg.logLevel === 'warning') {
+        // eslint-disable-next-line no-console
+        console.log(`${chalk.yellow('warning')} ${msg.text}`)
+      }
     }
   }
 
-  const docs = transform(result, {package: {version: pkg.version}})
+  const docs = transform(results, {package: {version: pkg.version}})
 
   const jsonPath = path.resolve(packagePath, outDir, `${pkg.version}.json`)
 

@@ -6,6 +6,10 @@ export function transformTokens(
   ctx: TransformContext,
   tokens: ExcerptToken[]
 ): Record<string, unknown>[] {
+  if (!ctx.package) {
+    throw new Error('transformTokens: missing package document')
+  }
+
   return tokens.map((t, idx) => {
     if (t.kind === 'Content') {
       return {
@@ -37,8 +41,8 @@ export function transformTokens(
         ? {
             ...ctx,
             package: {
-              ...ctx.package,
-              scope: sourceScope || null,
+              ...ctx.package!,
+              scope: sourceScope,
               name: sourceName,
             },
           }

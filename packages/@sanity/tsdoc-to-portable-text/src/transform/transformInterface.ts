@@ -17,18 +17,25 @@ import {transformTokens} from './transformTokens'
 import {TransformContext} from './types'
 
 export function transformInterface(ctx: TransformContext, node: ApiInterface): SanityDocumentValue {
+  if (!ctx.package) {
+    throw new Error('transformEnum: missing package document')
+  }
+
+  if (!ctx.export) {
+    throw new Error('transformEnum: missing export document')
+  }
+
   const docComment = node.tsdocComment
   const name = sanitizeName(node.name)
 
-  if (!ctx.packageDoc) {
+  if (!ctx.package) {
     throw new Error('transformInterface: missing package document')
   }
 
   return {
     _type: 'api.interface',
     _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.packageDoc._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
+    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment: docComment ? transformDocComment(docComment) : undefined,

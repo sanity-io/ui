@@ -6,7 +6,15 @@ import {transformDocComment} from './transformDocComment'
 import {TransformContext} from './types'
 
 export function transformNamespace(ctx: TransformContext, node: ApiNamespace): SanityDocumentValue {
-  if (!ctx.packageDoc) {
+  if (!ctx.package) {
+    throw new Error('transformNamespace: missing package document')
+  }
+
+  if (!ctx.export) {
+    throw new Error('transformNamespace: missing export document')
+  }
+
+  if (!ctx.package) {
     throw new Error('transformNamespace: missing package document')
   }
 
@@ -15,8 +23,7 @@ export function transformNamespace(ctx: TransformContext, node: ApiNamespace): S
   return {
     _type: 'api.namespace',
     _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.packageDoc._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
+    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
     releaseTag: RELEASE_TAGS[node.releaseTag],
     name: node.name,
     slug: {_type: 'slug', current: slugify(node.name)},

@@ -7,20 +7,27 @@ import {transformTokens} from './transformTokens'
 import {TransformContext} from './types'
 
 export function transformFunction(ctx: TransformContext, node: ApiFunction): SanityDocumentValue {
+  if (!ctx.package) {
+    throw new Error('transformEnum: missing package document')
+  }
+
+  if (!ctx.export) {
+    throw new Error('transformEnum: missing export document')
+  }
+
   const docComment = node.tsdocComment
   const name = sanitizeName(node.name)
   const isReactComponentType = _functionIsReactComponentType(node)
   const propsType = isReactComponentType ? _functionPropsType(ctx, node) : undefined
 
-  if (!ctx.packageDoc) {
+  if (!ctx.package) {
     throw new Error('transformFunction: missing package document')
   }
 
   return {
     _type: 'api.function',
     _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.packageDoc._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
+    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment: docComment ? transformDocComment(docComment) : undefined,

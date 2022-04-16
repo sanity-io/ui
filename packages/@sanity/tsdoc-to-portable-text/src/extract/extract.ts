@@ -1,8 +1,9 @@
 import path from 'path'
 import {Extractor, ExtractorConfig, ExtractorMessage} from '@microsoft/api-extractor'
 import {ApiPackage} from '@microsoft/api-extractor-model'
+import {TSDocConfigFile} from '@microsoft/tsdoc-config'
 import {createApiExtractorConfig} from './apiExtractorConfig'
-import {createTmpDir} from './helpers'
+import {createTempDir} from './helpers'
 import {createTSDocConfig} from './tsDocConfig'
 import {TSDocCustomTag} from './types'
 
@@ -11,38 +12,111 @@ import {TSDocCustomTag} from './types'
  */
 export interface ExtractResult {
   apiPackage: ApiPackage
+  exportPath?: string
   messages: ExtractorMessage[]
-  tmpDirPath: string
+  tempDirPath: string
 }
 
 /**
  * @public
  */
 export async function extract(
-  inputPath: string,
-  opts: {
+  packagePath: string,
+  options: {
     customTags?: TSDocCustomTag[]
-    packagePath: string
     tsconfigPath?: string
-  }
-): Promise<ExtractResult> {
-  const {customTags = []} = opts
-  const tmpDir = await createTmpDir()
-  const tmpDirPath = tmpDir.path
-
+  } = {}
+): Promise<ExtractResult[]> {
+  const {customTags = [], tsconfigPath} = options
+  const tempDir = await createTempDir()
+  const tempDirPath = tempDir.path
   const tsdocConfigFile = await createTSDocConfig({customTags})
+  const packageJsonFullPath = path.resolve(packagePath, 'package.json')
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const pkg = require(packageJsonFullPath)
+
+  if (!pkg.types) {
+    throw new Error(`package is missing \`types\` property (name=${pkg.name})`)
+  }
+
+  const exports: {type: 'export'; path?: string; typesPath: string}[] = []
+  const types = pkg.typesVersions?.['*']
+
+  if (pkg.exports) {
+    for (const [exportPath] of Object.entries(pkg.exports)) {
+      const isRoot = exportPath === '.'
+      const subPath = isRoot ? undefined : path.relative('root', path.join('root', exportPath))
+
+      exports.push({
+        type: 'export',
+        path: subPath,
+        typesPath: subPath ? types?.[subPath]?.[0] : pkg.types,
+      })
+    }
+  } else {
+    exports.push({
+      type: 'export',
+      path: undefined,
+      typesPath: pkg.types,
+    })
+  }
+
+  try {
+    const results: ExtractResult[] = []
+
+    for (const exp of exports) {
+      results.push({
+        exportPath: exp.path,
+        ...(await _doExtract({
+          typesPath: exp.typesPath,
+          packagePath,
+          tempDirPath,
+          tsconfigPath,
+          tsdocConfigFile,
+          packageJsonFullPath,
+        })),
+      })
+    }
+
+    // Clean up temporary directory
+    tempDir.cleanup()
+
+    return results
+  } catch (err) {
+    // Clean up temporary directory
+    tempDir.cleanup()
+
+    throw err
+  }
+}
+
+async function _doExtract({
+  typesPath,
+  packagePath,
+  tempDirPath,
+  tsconfigPath,
+  tsdocConfigFile,
+  packageJsonFullPath,
+}: {
+  typesPath: string
+  packagePath: string
+  tempDirPath: string
+  tsconfigPath?: string
+  tsdocConfigFile?: TSDocConfigFile
+  packageJsonFullPath: string
+}) {
   // Load the API Extractor configuration
   const extractorConfig: ExtractorConfig = ExtractorConfig.prepare({
     configObject: createApiExtractorConfig({
-      mainEntryPointFilePath: inputPath,
-      packagePath: opts.packagePath,
-      tempDirPath: tmpDirPath,
-      tsconfigPath: opts.tsconfigPath,
+      mainEntryPointFilePath: typesPath,
+      packagePath,
+      tempDirPath,
+      tsconfigPath,
     }),
     configObjectFullPath: undefined,
     tsdocConfigFile,
-    packageJsonFullPath: path.resolve(opts.packagePath, 'package.json'),
+    packageJsonFullPath,
   })
 
   const messages: ExtractorMessage[] = []
@@ -61,16 +135,10 @@ export async function extract(
   })
 
   if (extractorResult.succeeded) {
-    const apiPackage = ApiPackage.loadFromJsonFile(path.resolve(tmpDirPath, 'api.json'))
+    const apiPackage = ApiPackage.loadFromJsonFile(path.resolve(tempDirPath, 'api.json'))
 
-    // Clean up temporary directory
-    tmpDir.cleanup()
-
-    return {apiPackage, messages, tmpDirPath}
+    return {apiPackage, messages, tempDirPath}
   }
-
-  // Clean up temporary directory
-  tmpDir.cleanup()
 
   throw new Error(
     `API Extractor completed with ${extractorResult.errorCount} errors` +

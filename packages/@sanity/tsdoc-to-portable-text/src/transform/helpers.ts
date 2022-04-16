@@ -7,13 +7,11 @@ export function hash(key: string): string {
 }
 
 export function createId(ctx: TransformContext, key: string): string {
-  const {scope, name, version} = ctx.package
+  const {scope, name, exportPath, version} = ctx
 
-  if (scope) {
-    return hash(`${scope}/${name}@${version}/${key}`)
-  }
+  const exportName = [scope, name, exportPath].filter(Boolean).join('/')
 
-  return hash(`${name}@${version}/${key}`)
+  return hash(`${exportName}@${version}/${key}`)
 }
 
 export function isArray(val: unknown): val is unknown[] {
@@ -36,4 +34,13 @@ export function sanitizeName(str: string): string {
 
 export function slugify(str: string): string {
   return _slugify(str)
+}
+
+export function _parsePackageName(nameStr: string): [string | undefined, string] {
+  const p = nameStr.split('/')
+
+  const packageScope = p.length > 1 ? p[0] : undefined
+  const packageName = p.length > 1 ? p[1] : p[0]
+
+  return [packageScope, packageName]
 }

@@ -18,15 +18,18 @@ export function transformClass(ctx: TransformContext, node: ApiClass): SanityDoc
   const docComment = node.tsdocComment
   const name = sanitizeName(node.name)
 
-  if (!ctx.packageDoc) {
+  if (!ctx.package) {
     throw new Error('transformClass: missing package document')
+  }
+
+  if (!ctx.export) {
+    throw new Error('transformClass: missing export document')
   }
 
   return {
     _type: 'api.class',
     _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.packageDoc._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.releaseDoc._id, _weak: true},
+    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment: docComment ? transformDocComment(docComment) : undefined,

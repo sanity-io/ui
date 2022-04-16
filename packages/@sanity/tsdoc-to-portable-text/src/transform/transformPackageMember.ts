@@ -1,5 +1,6 @@
 import {
   ApiClass,
+  ApiEnum,
   ApiFunction,
   ApiInterface,
   ApiItem,
@@ -9,6 +10,7 @@ import {
 } from '@microsoft/api-extractor-model'
 import {SanityDocumentValue} from '../sanity'
 import {transformClass} from './transformClass'
+import {transformEnum} from './transformEnum'
 import {transformFunction} from './transformFunction'
 import {transformInterface} from './transformInterface'
 import {transformNamespace} from './transformNamespace'
@@ -42,6 +44,10 @@ export function transformPackageMember(
 
   if (member.kind === 'Variable') {
     return transformVariable(ctx, member as ApiVariable)
+  }
+
+  if (member.kind === 'Enum') {
+    return transformEnum(ctx, member as ApiEnum)
   }
 
   throw new Error(`package: unknown member type: ${member.kind}`)
