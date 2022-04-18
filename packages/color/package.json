@@ -29,7 +29,7 @@
     "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir lib/esm --project tsconfig.lib.json --rootDir src --target ES6"
   },
   "devDependencies": {
-    "polished": "^4.2.1"
+    "polished": "^4.2.2"
   },
   "repository": {
     "type": "git",
