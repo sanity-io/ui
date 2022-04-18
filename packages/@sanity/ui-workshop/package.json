@@ -39,7 +39,7 @@
   "peerDependencies": {
     "@sanity/icons": "^1.0",
     "@sanity/ui": "^0.33",
-    "react": "^17",
+    "react": "^16.9 || ^17 || ^18",
     "styled-components": "^5.2"
   },
   "repository": {
