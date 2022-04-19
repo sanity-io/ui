@@ -4,8 +4,10 @@
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
-    "require": "./lib/sanity-logos.js",
-    "default": "./lib/sanity-logos.modern.js"
+    ".": {
+      "require": "./lib/sanity-logos.js",
+      "default": "./lib/sanity-logos.modern.js"
+    }
   },
   "main": "./lib/sanity-logos.js",
   "module": "./lib/sanity-logos.module.js",
