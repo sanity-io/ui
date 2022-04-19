@@ -2,6 +2,8 @@ import {extract, transform} from '../src'
 import {spawnProject} from './lib/spawnProject'
 
 describe('transform', () => {
+  jest.setTimeout(10000)
+
   test('should result in a "api.release" document', async () => {
     const project = await spawnProject('mylib/1.0.0')
 

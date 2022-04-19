@@ -3,6 +3,8 @@ import {extract} from '../src'
 import {spawnProject} from './lib/spawnProject'
 
 describe('extract', () => {
+  jest.setTimeout(10000)
+
   test('should extract package with only root export', async () => {
     const project = await spawnProject('mylib/1.0.0')
 

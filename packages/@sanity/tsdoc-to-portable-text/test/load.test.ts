@@ -3,6 +3,8 @@ import {extract, load, transform} from '../src'
 import {spawnProject} from './lib/spawnProject'
 
 describe('load', () => {
+  jest.setTimeout(10000)
+
   let project: {cleanup: () => void; path: string}
 
   beforeAll(async () => {
