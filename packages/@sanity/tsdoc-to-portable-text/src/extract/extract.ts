@@ -47,18 +47,29 @@ export async function extract(
     for (const [exportPath] of Object.entries(pkg.exports)) {
       const isRoot = exportPath === '.'
       const subPath = isRoot ? undefined : path.relative('root', path.join('root', exportPath))
+      const typesPath = subPath ? types?.[subPath]?.[0] : pkg.types
+
+      if (!typesPath) {
+        throw new Error(`[${pkg.name}] missing types path`)
+      }
 
       exports.push({
         type: 'export',
         path: subPath,
-        typesPath: subPath ? types?.[subPath]?.[0] : pkg.types,
+        typesPath,
       })
     }
   } else {
+    const typesPath = pkg.types
+
+    if (!typesPath) {
+      throw new Error(`[${pkg.name}] missing types path`)
+    }
+
     exports.push({
       type: 'export',
       path: undefined,
-      typesPath: pkg.types,
+      typesPath,
     })
   }
 
@@ -91,14 +102,7 @@ export async function extract(
   }
 }
 
-async function _doExtract({
-  typesPath,
-  packagePath,
-  tempDirPath,
-  tsconfigPath,
-  tsdocConfigFile,
-  packageJsonFullPath,
-}: {
+async function _doExtract(options: {
   typesPath: string
   packagePath: string
   tempDirPath: string
@@ -106,6 +110,9 @@ async function _doExtract({
   tsdocConfigFile?: TSDocConfigFile
   packageJsonFullPath: string
 }) {
+  const {typesPath, packagePath, tempDirPath, tsconfigPath, tsdocConfigFile, packageJsonFullPath} =
+    options
+
   // Load the API Extractor configuration
   const extractorConfig: ExtractorConfig = ExtractorConfig.prepare({
     configObject: createApiExtractorConfig({
