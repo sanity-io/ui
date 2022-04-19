@@ -4,8 +4,10 @@
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
-    "require": "./lib/sanity-ui.js",
-    "default": "./lib/sanity-ui.modern.js"
+    ".": {
+      "require": "./lib/sanity-ui.js",
+      "default": "./lib/sanity-ui.modern.js"
+    }
   },
   "main": "./lib/sanity-ui.js",
   "module": "./lib/sanity-ui.module.js",
