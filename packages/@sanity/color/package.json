@@ -5,8 +5,10 @@
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
-    "require": "./lib/sanity-color.js",
-    "default": "./lib/sanity-color.modern.js"
+    ".": {
+      "require": "./lib/sanity-color.js",
+      "default": "./lib/sanity-color.modern.js"
+    }
   },
   "main": "./lib/sanity-color.js",
   "module": "./lib/sanity-color.module.js",

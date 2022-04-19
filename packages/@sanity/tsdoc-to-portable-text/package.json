@@ -4,9 +4,11 @@
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
-    "cli": "./lib/tsdoc-to-portable-text.cli.js",
-    "require": "./lib/tsdoc-to-portable-text.js",
-    "default": "./lib/tsdoc-to-portable-text.modern.js"
+    ".": {
+      "cli": "./lib/tsdoc-to-portable-text.cli.js",
+      "require": "./lib/tsdoc-to-portable-text.js",
+      "default": "./lib/tsdoc-to-portable-text.modern.js"
+    }
   },
   "main": "./lib/tsdoc-to-portable-text.js",
   "module": "./lib/tsdoc-to-portable-text.module.js",
