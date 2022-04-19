@@ -5,8 +5,10 @@
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
-    "require": "./lib/sanity-icons.js",
-    "default": "./lib/sanity-icons.modern.js"
+    ".": {
+      "require": "./lib/sanity-icons.js",
+      "default": "./lib/sanity-icons.modern.js"
+    }
   },
   "main": "./lib/sanity-icons.js",
   "module": "./lib/sanity-icons.module.js",
