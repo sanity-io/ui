@@ -9,11 +9,15 @@ import {TransformContext} from './types'
 
 export function transformVariable(ctx: TransformContext, node: ApiVariable): SanityDocumentValue {
   if (!ctx.package) {
-    throw new Error('transformVariable: missing package document')
+    throw new Error('transformVariable: missing `package` document')
+  }
+
+  if (!ctx.release) {
+    throw new Error('transformVariable: missing `release` document')
   }
 
   if (!ctx.export) {
-    throw new Error('transformVariable: missing export document')
+    throw new Error('transformVariable: missing `export` document')
   }
 
   const name = sanitizeName(node.name)
@@ -33,6 +37,7 @@ export function transformVariable(ctx: TransformContext, node: ApiVariable): San
     _type: 'api.variable',
     _id: createId(ctx, node.canonicalReference.toString()),
     package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
+    release: {_type: 'reference', _ref: ctx.release._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment,

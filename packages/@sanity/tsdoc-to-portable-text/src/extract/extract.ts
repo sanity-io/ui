@@ -1,5 +1,10 @@
 import path from 'path'
-import {Extractor, ExtractorConfig, ExtractorMessage} from '@microsoft/api-extractor'
+import {
+  Extractor,
+  ExtractorConfig,
+  ExtractorMessage,
+  IExtractorMessagesConfig,
+} from '@microsoft/api-extractor'
 import {ApiPackage} from '@microsoft/api-extractor-model'
 import {TSDocConfigFile} from '@microsoft/tsdoc-config'
 import {createApiExtractorConfig} from './apiExtractorConfig'
@@ -11,9 +16,10 @@ import {TSDocCustomTag} from './types'
  * @public
  */
 export interface ExtractResult {
-  apiPackage: ApiPackage
+  apiPackage?: ApiPackage
   exportPath?: string
   messages: ExtractorMessage[]
+  succeeded: boolean
   tempDirPath: string
 }
 
@@ -24,10 +30,11 @@ export async function extract(
   packagePath: string,
   options: {
     customTags?: TSDocCustomTag[]
+    reporting?: IExtractorMessagesConfig
     tsconfigPath?: string
   } = {}
 ): Promise<ExtractResult[]> {
-  const {customTags = [], tsconfigPath} = options
+  const {customTags = [], reporting, tsconfigPath} = options
   const tempDir = await createTempDir()
   const tempDirPath = tempDir.path
   const tsdocConfigFile = await createTSDocConfig({customTags})
@@ -81,6 +88,7 @@ export async function extract(
         exportPath: exp.path,
         ...(await _doExtract({
           typesPath: exp.typesPath,
+          reporting,
           packagePath,
           tempDirPath,
           tsconfigPath,
@@ -105,19 +113,28 @@ export async function extract(
 async function _doExtract(options: {
   typesPath: string
   packagePath: string
+  reporting?: IExtractorMessagesConfig
   tempDirPath: string
   tsconfigPath?: string
   tsdocConfigFile?: TSDocConfigFile
   packageJsonFullPath: string
 }) {
-  const {typesPath, packagePath, tempDirPath, tsconfigPath, tsdocConfigFile, packageJsonFullPath} =
-    options
+  const {
+    typesPath,
+    packagePath,
+    reporting,
+    tempDirPath,
+    tsconfigPath,
+    tsdocConfigFile,
+    packageJsonFullPath,
+  } = options
 
   // Load the API Extractor configuration
   const extractorConfig: ExtractorConfig = ExtractorConfig.prepare({
     configObject: createApiExtractorConfig({
       mainEntryPointFilePath: typesPath,
       packagePath,
+      reporting,
       tempDirPath,
       tsconfigPath,
     }),
@@ -141,14 +158,9 @@ async function _doExtract(options: {
     },
   })
 
-  if (extractorResult.succeeded) {
-    const apiPackage = ApiPackage.loadFromJsonFile(path.resolve(tempDirPath, 'api.json'))
+  const apiPackage = extractorResult.succeeded
+    ? ApiPackage.loadFromJsonFile(path.resolve(tempDirPath, 'api.json'))
+    : undefined
 
-    return {apiPackage, messages, tempDirPath}
-  }
-
-  throw new Error(
-    `API Extractor completed with ${extractorResult.errorCount} errors` +
-      ` and ${extractorResult.warningCount} warnings`
-  )
+  return {apiPackage, messages, succeeded: extractorResult.succeeded, tempDirPath}
 }

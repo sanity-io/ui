@@ -22,6 +22,12 @@ export function transform(
 
   for (const extractResult of extractResults) {
     const {apiPackage, exportPath} = extractResult
+
+    if (!apiPackage) {
+      // skip failed
+      continue
+    }
+
     const [packageScope, packageName] = _parsePackageName(apiPackage.name)
 
     const releaseId = [packageScope, packageName, releaseVersion]
@@ -65,6 +71,7 @@ export function transform(
       },
       version: releaseVersion,
       exports: ctx.release?.exports || [],
+      identifiers: ctx.release?.identifiers || [],
     }
 
     ctx.package.latestRelease = {
@@ -119,12 +126,22 @@ export function transform(
         },
       }
 
+      // Add identifier to `package`
       if (
         isArray(ctx.package?.identifiers) &&
         !ctx.package?.identifiers.includes(identifierDoc.name)
       ) {
         ctx.package.identifiers.push(identifierDoc.name)
         ctx.package.identifiers.sort()
+      }
+
+      // Add identifier to `release`
+      if (
+        isArray(ctx.release?.identifiers) &&
+        !ctx.release?.identifiers.includes(identifierDoc.name)
+      ) {
+        ctx.release.identifiers.push(identifierDoc.name)
+        ctx.release.identifiers.sort()
       }
 
       if (isArray(ctx.export.identifiers)) {

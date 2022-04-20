@@ -8,11 +8,15 @@ import {TransformContext} from './types'
 
 export function transformFunction(ctx: TransformContext, node: ApiFunction): SanityDocumentValue {
   if (!ctx.package) {
-    throw new Error('transformEnum: missing package document')
+    throw new Error('transformFunction: missing `package` document')
+  }
+
+  if (!ctx.release) {
+    throw new Error('transformFunction: missing `release` document')
   }
 
   if (!ctx.export) {
-    throw new Error('transformEnum: missing export document')
+    throw new Error('transformFunction: missing `export` document')
   }
 
   const docComment = node.tsdocComment
@@ -20,14 +24,11 @@ export function transformFunction(ctx: TransformContext, node: ApiFunction): San
   const isReactComponentType = _functionIsReactComponentType(node)
   const propsType = isReactComponentType ? _functionPropsType(ctx, node) : undefined
 
-  if (!ctx.package) {
-    throw new Error('transformFunction: missing package document')
-  }
-
   return {
     _type: 'api.function',
     _id: createId(ctx, node.canonicalReference.toString()),
     package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
+    release: {_type: 'reference', _ref: ctx.release._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment: docComment ? transformDocComment(docComment) : undefined,

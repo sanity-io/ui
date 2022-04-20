@@ -85,6 +85,15 @@ Array [
         "path": ".",
       },
     ],
+    "identifiers": Array [
+      "Button",
+      "ButtonProps",
+      "ButtonTone",
+      "ButtonType",
+      "Class",
+      "Resolver",
+      "ResponsiveMarginProps",
+    ],
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
@@ -191,6 +200,11 @@ Array [
     ],
     "propsType": Object {
       "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "release": Object {
+      "_ref": "mylib_1-0-0",
       "_type": "reference",
       "_weak": true,
     },
@@ -308,6 +322,11 @@ Array [
       "_type": "reference",
       "_weak": true,
     },
+    "release": Object {
+      "_ref": "mylib_1-0-0",
+      "_type": "reference",
+      "_weak": true,
+    },
     "releaseTag": "public",
     "slug": Object {
       "_type": "slug",
@@ -348,6 +367,11 @@ Array [
     "name": "ButtonTone",
     "package": Object {
       "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "release": Object {
+      "_ref": "mylib_1-0-0",
       "_type": "reference",
       "_weak": true,
     },
@@ -397,6 +421,11 @@ Array [
     "name": "ButtonType",
     "package": Object {
       "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "release": Object {
+      "_ref": "mylib_1-0-0",
       "_type": "reference",
       "_weak": true,
     },
@@ -756,6 +785,11 @@ Array [
       "_type": "reference",
       "_weak": true,
     },
+    "release": Object {
+      "_ref": "mylib_1-0-0",
+      "_type": "reference",
+      "_weak": true,
+    },
     "releaseTag": "beta",
     "slug": Object {
       "_type": "slug",
@@ -831,6 +865,11 @@ Array [
       "_type": "reference",
       "_weak": true,
     },
+    "release": Object {
+      "_ref": "mylib_1-0-0",
+      "_type": "reference",
+      "_weak": true,
+    },
     "releaseTag": "beta",
     "slug": Object {
       "_type": "slug",
@@ -889,6 +928,11 @@ Array [
     "name": "ResponsiveMarginProps",
     "package": Object {
       "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "release": Object {
+      "_ref": "mylib_1-0-0",
       "_type": "reference",
       "_weak": true,
     },
@@ -1246,6 +1290,11 @@ Object {
     "_type": "reference",
     "_weak": true,
   },
+  "release": Object {
+    "_ref": "mylib_1-0-0",
+    "_type": "reference",
+    "_weak": true,
+  },
   "releaseTag": "beta",
   "slug": Object {
     "_type": "slug",
@@ -1312,6 +1361,11 @@ Object {
   "name": "Resolver",
   "package": Object {
     "_ref": "mylib",
+    "_type": "reference",
+    "_weak": true,
+  },
+  "release": Object {
+    "_ref": "mylib_1-0-0",
     "_type": "reference",
     "_weak": true,
   },

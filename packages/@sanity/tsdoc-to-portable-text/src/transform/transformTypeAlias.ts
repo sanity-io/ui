@@ -11,17 +11,22 @@ export function transformTypeAlias(ctx: TransformContext, node: ApiTypeAlias): S
   const name = sanitizeName(node.name)
 
   if (!ctx.package) {
-    throw new Error('transformTypeAlias: missing package document')
+    throw new Error('transformTypeAlias: missing `package` document')
+  }
+
+  if (!ctx.release) {
+    throw new Error('transformTypeAlias: missing `release` document')
   }
 
   if (!ctx.export) {
-    throw new Error('transformTypeAlias: missing export document')
+    throw new Error('transformTypeAlias: missing `export` document')
   }
 
   return {
     _type: 'api.typeAlias',
     _id: createId(ctx, node.canonicalReference.toString()),
     package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
+    release: {_type: 'reference', _ref: ctx.release._id, _weak: true},
     name,
     slug: {_type: 'slug', current: slugify(name)},
     comment: docComment ? transformDocComment(docComment) : undefined,
