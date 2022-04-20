@@ -1,11 +1,19 @@
 import path from 'path'
 import {extract, ExtractorMessage, ExtractResult} from '@sanity/tsdoc-to-portable-text'
 import chalk from 'chalk'
-import {isRecord, isString, readJSONFile} from '../../helpers'
+import {
+  _encodePackageName,
+  _parsePackageName,
+  isRecord,
+  isString,
+  readJSONFile,
+} from '../../_helpers'
+import {config} from '../../config'
 
 const ROOT_PATH = path.resolve(__dirname, '../../../..')
 
 export interface PackageResult {
+  scope?: string
   name: string
   results: ExtractResult[]
   version: string
@@ -14,22 +22,28 @@ export interface PackageResult {
 export function extractFromTsdoc(options: {quiet: boolean}): Promise<PackageResult[]> {
   const {quiet} = options
 
-  return Promise.all([
-    _extractPackage({name: 'color', quiet}),
-    _extractPackage({name: 'icons', quiet}),
-    _extractPackage({name: 'logos', quiet}),
-    _extractPackage({name: 'ui', quiet}),
-  ])
+  return Promise.all(
+    config.workspace.map((nameStr) => {
+      const [scope, name] = _parsePackageName(nameStr)
+
+      return _extractPackage({scope, name, quiet})
+    })
+  )
 }
 
-async function _extractPackage(options: {name: string; quiet: boolean}): Promise<PackageResult> {
-  const {name, quiet} = options
+async function _extractPackage(options: {
+  scope?: string
+  name: string
+  quiet: boolean
+}): Promise<PackageResult> {
+  const {scope, name, quiet} = options
+  const fullName = _encodePackageName(scope, name)
 
   if (!quiet) {
-    console.log(`${chalk.blue('info')} [@sanity/${name}] Extract from TSDoc`)
+    console.log(`${chalk.blue('info')} [${fullName}] Extract from TSDoc`)
   }
 
-  const packagePath = path.resolve(ROOT_PATH, 'packages', '@sanity', name)
+  const packagePath = path.resolve(ROOT_PATH, 'packages', fullName)
   const packageJsonPath = path.resolve(packagePath, 'package.json')
   const pkg = await readJSONFile(packageJsonPath)
 
@@ -44,6 +58,7 @@ async function _extractPackage(options: {name: string; quiet: boolean}): Promise
   }
 
   const results = await extract(packagePath, {
+    reporting: config.reporting,
     tsconfigPath: 'tsconfig.extract.json',
   })
 
@@ -77,13 +92,13 @@ async function _extractPackage(options: {name: string; quiet: boolean}): Promise
     }
   }
 
-  const hasErrors = messages.filter((msg) => msg.logLevel === 'error').length
+  const allSucceeded = results.every((r) => r.succeeded)
 
-  if (hasErrors > 0) {
-    throw new Error(`[@sanity/${name}] Extracting from TSDoc failed`)
+  if (!allSucceeded) {
+    throw new Error(`[${fullName}] Extracting from TSDoc failed`)
   }
 
-  console.log(`${chalk.green('success')} [@sanity/${name}] Extracted from TSDoc`)
+  console.log(`${chalk.green('success')} [${fullName}] Extracted from TSDoc`)
 
-  return {name, results, version}
+  return {scope, name, results, version}
 }

@@ -2,11 +2,11 @@ import path from 'path'
 import {SanityDocument} from '@sanity/client'
 import cac from 'cac'
 import chalk from 'chalk'
-import {extractFromTsdoc} from './extract'
-import {extractPackagesFromSanity} from './extract/sanity'
-import {loadToFs} from './load/fs'
-import {loadToSanity} from './load/sanity'
-import {transformTsdocToPortableText} from './transform/tsdocToPortableText'
+import {_parsePackageName} from './_helpers'
+import {config} from './config'
+import {extractFromTsdoc, extractPackagesFromSanity} from './extract'
+import {loadToFs, loadToSanity} from './load'
+import {transformTsdocToPortableText} from './transform'
 
 const ROOT_PATH = path.resolve(__dirname, '../..')
 
@@ -25,7 +25,9 @@ async function main() {
 
     const docs: SanityDocument[] = []
 
-    for (const [name, pkg] of Object.entries(packages)) {
+    for (const fullName of config.workspace) {
+      const [scope, name] = _parsePackageName(fullName)
+      const pkg = packages.find((p) => p.scope === scope && p.name === name)
       const pkgResult = packageResults.find((r) => r.name === name)
 
       if (!pkgResult) {
@@ -35,6 +37,7 @@ async function main() {
       const {results, version} = pkgResult
 
       const _docs = transformTsdocToPortableText({
+        scope,
         name,
         package: pkg as SanityDocument | undefined,
         quiet,
@@ -44,6 +47,7 @@ async function main() {
 
       await loadToFs({
         cwd,
+        scope,
         name,
         version,
         docs: _docs,

@@ -3,18 +3,21 @@ import path from 'path'
 import {SanityDocument} from '@sanity/client'
 import chalk from 'chalk'
 import mkdirp from 'mkdirp'
+import {_encodePackageName} from '../../_helpers'
 
-const etcPath = path.resolve(__dirname, '../../../etc')
+const etcPath = path.resolve(__dirname, '../../../../etc')
 
 export async function loadToFs(options: {
   cwd: string
+  scope?: string
   name: string
   docs: SanityDocument[]
   version: string
 }): Promise<void> {
-  const {cwd, name, docs, version} = options
+  const {cwd, scope, name, docs, version} = options
+  const fullName = _encodePackageName(scope, name)
 
-  const packagePath = path.resolve(etcPath, '@sanity', name)
+  const packagePath = path.resolve(etcPath, fullName)
 
   await mkdirp(packagePath)
 
@@ -24,6 +27,6 @@ export async function loadToFs(options: {
 
   // prettier-ignore
   console.log(
-    `${chalk.green('success')} [@sanity/${name}] Loaded ${docs.length} documents to ${path.relative(cwd, filePath)}`
+    `${chalk.green('success')} [${fullName}] Loaded ${docs.length} documents to ${path.relative(cwd, filePath)}`
   )
 }
