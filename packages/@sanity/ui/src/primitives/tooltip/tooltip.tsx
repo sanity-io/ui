@@ -118,7 +118,13 @@ export const Tooltip = forwardRef(function Tooltip(
   }, [isOpen, referenceElement])
 
   useEffect(() => {
-    if (forceUpdate) forceUpdate()
+    if (forceUpdate) {
+      try {
+        forceUpdate()
+      } catch (_) {
+        // ignore caught error
+      }
+    }
   }, [forceUpdate, content])
 
   // Close when `disabled` changes to `true`
