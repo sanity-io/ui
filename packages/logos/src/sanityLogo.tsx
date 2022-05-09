@@ -20,7 +20,8 @@ export const SanityLogo = forwardRef(function SanityLogo(
   props: SanityLogoProps & React.SVGProps<SVGSVGElement>,
   ref: React.Ref<SVGSVGElement>
 ) {
-  const scheme = schemes[props.dark ? 'dark' : 'light']
+  const {dark, ...svgProps} = props
+  const scheme = schemes[dark ? 'dark' : 'light']
 
   return (
     <svg
@@ -29,7 +30,7 @@ export const SanityLogo = forwardRef(function SanityLogo(
       viewBox="0 0 352 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
+      {...svgProps}
       ref={ref}
     >
       <path d="M311.14 57.234V80.0016H298.499V57.234" fill={scheme[1]} />
