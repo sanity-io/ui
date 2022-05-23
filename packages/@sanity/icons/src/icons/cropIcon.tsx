@@ -5,13 +5,13 @@ import React, {forwardRef} from 'react'
 /**
  * @public
  */
-export const ToggleArrowRightIcon = forwardRef(function ToggleArrowRightIcon(
+export const CropIcon = forwardRef(function CropIcon(
   props: React.SVGProps<SVGSVGElement>,
   ref: React.Ref<SVGSVGElement>
 ) {
   return (
     <svg
-      data-sanity-icon="toggle-arrow-right"
+      data-sanity-icon="crop"
       width="1em"
       height="1em"
       viewBox="0 0 25 25"
@@ -20,7 +20,7 @@ export const ToggleArrowRightIcon = forwardRef(function ToggleArrowRightIcon(
       ref={ref}
       {...props}
     >
-      <path d="M10 16.5V8.5L16 12.5L10 16.5Z" fill="currentColor" />
+      <path d="M8.5 4V16.5H21M4 8.5H16.5V21" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

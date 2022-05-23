@@ -21,7 +21,7 @@ export const SplitHorizontalIcon = forwardRef(function SplitHorizontalIcon(
       {...props}
     >
       <path
-        d="M19.5 12.5V19.5H5.5V12.5M19.5 12.5H5.5M19.5 12.5V5.5H5.5V12.5"
+        d="M19.5 10.5V20.5H5.5V10.5M19.5 10.5H5.5M19.5 10.5V4.5H5.5V10.5M12.5 13V15.5M12.5 18V15.5M12.5 15.5H15M12.5 15.5H10"
         stroke="currentColor"
         strokeWidth={1.2}
       />

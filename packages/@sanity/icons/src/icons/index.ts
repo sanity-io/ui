@@ -50,12 +50,24 @@ import {ComposeIcon} from './composeIcon'
 import {ControlsIcon} from './controlsIcon'
 import {CopyIcon} from './copyIcon'
 import {CreditCardIcon} from './creditCardIcon'
+import {CropIcon} from './cropIcon'
 import {DashboardIcon} from './dashboardIcon'
 import {DatabaseIcon} from './databaseIcon'
 import {DesktopIcon} from './desktopIcon'
 import {DocumentIcon} from './documentIcon'
+import {DocumentPdfIcon} from './documentPdfIcon'
 import {DocumentRemoveIcon} from './documentRemoveIcon'
+import {DocumentSheetIcon} from './documentSheetIcon'
 import {DocumentsIcon} from './documentsIcon'
+import {DocumentTextIcon} from './documentTextIcon'
+import {DocumentVideoIcon} from './documentVideoIcon'
+import {DocumentWordIcon} from './documentWordIcon'
+import {DocumentZipIcon} from './documentZipIcon'
+import {DotIcon} from './dotIcon'
+import {DoubleChevronDownIcon} from './doubleChevronDownIcon'
+import {DoubleChevronLeftIcon} from './doubleChevronLeftIcon'
+import {DoubleChevronRightIcon} from './doubleChevronRightIcon'
+import {DoubleChevronUpIcon} from './doubleChevronUpIcon'
 import {DownloadIcon} from './downloadIcon'
 import {DragHandleIcon} from './dragHandleIcon'
 import {DropIcon} from './dropIcon'
@@ -85,6 +97,7 @@ import {ImagesIcon} from './imagesIcon'
 import {InfoFilledIcon} from './infoFilledIcon'
 import {InfoOutlineIcon} from './infoOutlineIcon'
 import {InlineElementIcon} from './inlineElementIcon'
+import {InlineIcon} from './inlineIcon'
 import {InsertAboveIcon} from './insertAboveIcon'
 import {InsertBelowIcon} from './insertBelowIcon'
 import {ItalicIcon} from './italicIcon'
@@ -127,6 +140,7 @@ import {SplitHorizontalIcon} from './splitHorizontalIcon'
 import {SplitVerticalIcon} from './splitVerticalIcon'
 import {SquareIcon} from './squareIcon'
 import {StackCompactIcon} from './stackCompactIcon'
+import {StackIcon} from './stackIcon'
 import {StarIcon} from './starIcon'
 import {StopIcon} from './stopIcon'
 import {StrikethroughIcon} from './strikethroughIcon'
@@ -140,6 +154,7 @@ import {TiersIcon} from './tiersIcon'
 import {ToggleArrowRightIcon} from './toggleArrowRightIcon'
 import {TokenIcon} from './tokenIcon'
 import {TransferIcon} from './transferIcon'
+import {TranslateIcon} from './translateIcon'
 import {TrashIcon} from './trashIcon'
 import {TrendUpwardIcon} from './trendUpwardIcon'
 import {TriangleOutlineIcon} from './triangleOutlineIcon'
@@ -209,12 +224,24 @@ export type IconSymbol =
   | 'controls'
   | 'copy'
   | 'credit-card'
+  | 'crop'
   | 'dashboard'
   | 'database'
   | 'desktop'
   | 'document'
+  | 'document-pdf'
   | 'document-remove'
+  | 'document-sheet'
+  | 'document-text'
+  | 'document-video'
+  | 'document-word'
+  | 'document-zip'
   | 'documents'
+  | 'dot'
+  | 'double-chevron-down'
+  | 'double-chevron-left'
+  | 'double-chevron-right'
+  | 'double-chevron-up'
   | 'download'
   | 'drag-handle'
   | 'drop'
@@ -244,6 +271,7 @@ export type IconSymbol =
   | 'info-filled'
   | 'info-outline'
   | 'inline-element'
+  | 'inline'
   | 'insert-above'
   | 'insert-below'
   | 'italic'
@@ -286,6 +314,7 @@ export type IconSymbol =
   | 'split-vertical'
   | 'square'
   | 'stack-compact'
+  | 'stack'
   | 'star'
   | 'stop'
   | 'strikethrough'
@@ -299,6 +328,7 @@ export type IconSymbol =
   | 'toggle-arrow-right'
   | 'token'
   | 'transfer'
+  | 'translate'
   | 'trash'
   | 'trend-upward'
   | 'triangle-outline'
@@ -365,12 +395,24 @@ export {
   ControlsIcon,
   CopyIcon,
   CreditCardIcon,
+  CropIcon,
   DashboardIcon,
   DatabaseIcon,
   DesktopIcon,
   DocumentIcon,
+  DocumentPdfIcon,
   DocumentRemoveIcon,
+  DocumentSheetIcon,
+  DocumentTextIcon,
+  DocumentVideoIcon,
+  DocumentWordIcon,
+  DocumentZipIcon,
   DocumentsIcon,
+  DotIcon,
+  DoubleChevronDownIcon,
+  DoubleChevronLeftIcon,
+  DoubleChevronRightIcon,
+  DoubleChevronUpIcon,
   DownloadIcon,
   DragHandleIcon,
   DropIcon,
@@ -400,6 +442,7 @@ export {
   InfoFilledIcon,
   InfoOutlineIcon,
   InlineElementIcon,
+  InlineIcon,
   InsertAboveIcon,
   InsertBelowIcon,
   ItalicIcon,
@@ -442,6 +485,7 @@ export {
   SplitVerticalIcon,
   SquareIcon,
   StackCompactIcon,
+  StackIcon,
   StarIcon,
   StopIcon,
   StrikethroughIcon,
@@ -455,6 +499,7 @@ export {
   ToggleArrowRightIcon,
   TokenIcon,
   TransferIcon,
+  TranslateIcon,
   TrashIcon,
   TrendUpwardIcon,
   TriangleOutlineIcon,
@@ -525,12 +570,24 @@ export interface IconMap {
   controls: IconComponent
   copy: IconComponent
   'credit-card': IconComponent
+  crop: IconComponent
   dashboard: IconComponent
   database: IconComponent
   desktop: IconComponent
   document: IconComponent
+  'document-pdf': IconComponent
   'document-remove': IconComponent
+  'document-sheet': IconComponent
+  'document-text': IconComponent
+  'document-video': IconComponent
+  'document-word': IconComponent
+  'document-zip': IconComponent
   documents: IconComponent
+  dot: IconComponent
+  'double-chevron-down': IconComponent
+  'double-chevron-left': IconComponent
+  'double-chevron-right': IconComponent
+  'double-chevron-up': IconComponent
   download: IconComponent
   'drag-handle': IconComponent
   drop: IconComponent
@@ -560,6 +617,7 @@ export interface IconMap {
   'info-filled': IconComponent
   'info-outline': IconComponent
   'inline-element': IconComponent
+  inline: IconComponent
   'insert-above': IconComponent
   'insert-below': IconComponent
   italic: IconComponent
@@ -602,6 +660,7 @@ export interface IconMap {
   'split-vertical': IconComponent
   square: IconComponent
   'stack-compact': IconComponent
+  stack: IconComponent
   star: IconComponent
   stop: IconComponent
   strikethrough: IconComponent
@@ -615,6 +674,7 @@ export interface IconMap {
   'toggle-arrow-right': IconComponent
   token: IconComponent
   transfer: IconComponent
+  translate: IconComponent
   trash: IconComponent
   'trend-upward': IconComponent
   'triangle-outline': IconComponent
@@ -685,12 +745,24 @@ export const icons: IconMap = {
   controls: ControlsIcon,
   copy: CopyIcon,
   'credit-card': CreditCardIcon,
+  crop: CropIcon,
   dashboard: DashboardIcon,
   database: DatabaseIcon,
   desktop: DesktopIcon,
   document: DocumentIcon,
+  'document-pdf': DocumentPdfIcon,
   'document-remove': DocumentRemoveIcon,
+  'document-sheet': DocumentSheetIcon,
+  'document-text': DocumentTextIcon,
+  'document-video': DocumentVideoIcon,
+  'document-word': DocumentWordIcon,
+  'document-zip': DocumentZipIcon,
   documents: DocumentsIcon,
+  dot: DotIcon,
+  'double-chevron-down': DoubleChevronDownIcon,
+  'double-chevron-left': DoubleChevronLeftIcon,
+  'double-chevron-right': DoubleChevronRightIcon,
+  'double-chevron-up': DoubleChevronUpIcon,
   download: DownloadIcon,
   'drag-handle': DragHandleIcon,
   drop: DropIcon,
@@ -720,6 +792,7 @@ export const icons: IconMap = {
   'info-filled': InfoFilledIcon,
   'info-outline': InfoOutlineIcon,
   'inline-element': InlineElementIcon,
+  inline: InlineIcon,
   'insert-above': InsertAboveIcon,
   'insert-below': InsertBelowIcon,
   italic: ItalicIcon,
@@ -762,6 +835,7 @@ export const icons: IconMap = {
   'split-vertical': SplitVerticalIcon,
   square: SquareIcon,
   'stack-compact': StackCompactIcon,
+  stack: StackIcon,
   star: StarIcon,
   stop: StopIcon,
   strikethrough: StrikethroughIcon,
@@ -775,6 +849,7 @@ export const icons: IconMap = {
   'toggle-arrow-right': ToggleArrowRightIcon,
   token: TokenIcon,
   transfer: TransferIcon,
+  translate: TranslateIcon,
   trash: TrashIcon,
   'trend-upward': TrendUpwardIcon,
   'triangle-outline': TriangleOutlineIcon,
