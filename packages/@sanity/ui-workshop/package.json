@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@sanity/icons": "^1.3.0",
-    "@sanity/ui": "^0.37.10",
+    "@sanity/ui": "^0.37.11",
     "@types/pako": "^1.0.3",
     "react": "^17.0.2",
     "styled-components": "^5.3.5"

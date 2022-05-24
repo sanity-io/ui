@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sanity-ui-workshop",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "main": "package.json",
   "license": "MIT",
   "scripts": {
@@ -16,7 +16,7 @@
     "type-check": "run-s scopes:build tsc"
   },
   "dependencies": {
-    "@sanity/ui-workshop": "^0.4.5",
+    "@sanity/ui-workshop": "^0.4.6",
     "qs": "^6.10.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

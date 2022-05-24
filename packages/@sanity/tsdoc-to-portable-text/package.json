@@ -1,6 +1,6 @@
 {
   "name": "@sanity/tsdoc-to-portable-text",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
