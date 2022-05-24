@@ -5,7 +5,7 @@ import {spawnProject} from './lib/spawnProject'
 const noop = () => undefined
 
 describe('cli', () => {
-  jest.setTimeout(10000)
+  jest.setTimeout(20000)
 
   test('run `etl` command', async () => {
     // Spy on `console.log`
