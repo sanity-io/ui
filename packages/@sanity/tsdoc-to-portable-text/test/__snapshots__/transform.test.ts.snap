@@ -8,98 +8,32 @@ Array [
     "latestRelease": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "name": "mylib",
-    "releases": Array [
-      Object {
-        "_key": "mylib_1-0-0",
-        "_ref": "mylib_1-0-0",
-        "_type": "reference",
-        "_weak": true,
-      },
-    ],
     "scope": undefined,
-    "symbolNames": Array [
-      "Button",
-      "ButtonProps",
-      "ButtonTone",
-      "ButtonType",
-      "Class",
-      "Resolver",
-      "ResponsiveMarginProps",
-    ],
   },
   Object {
     "_id": "mylib_1-0-0",
     "_type": "api.release",
-    "exports": Array [
-      Object {
-        "_key": ".",
-        "_type": "api.export",
-        "members": Array [
-          Object {
-            "_key": "15cb148fb5d4f062894fe0e153b35382",
-            "_ref": "15cb148fb5d4f062894fe0e153b35382",
-            "_type": "reference",
-            "_weak": true,
-          },
-          Object {
-            "_key": "2e98a594f4b9a7d1a4fd0f695f2dafed",
-            "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
-            "_type": "reference",
-            "_weak": true,
-          },
-          Object {
-            "_key": "f8290b4913d399ece606e41443224121",
-            "_ref": "f8290b4913d399ece606e41443224121",
-            "_type": "reference",
-            "_weak": true,
-          },
-          Object {
-            "_key": "7baa7de0358f25b593b8be235abe8fee",
-            "_ref": "7baa7de0358f25b593b8be235abe8fee",
-            "_type": "reference",
-            "_weak": true,
-          },
-          Object {
-            "_key": "ead4d7d99c69e54e6e02479a21215ad0",
-            "_ref": "ead4d7d99c69e54e6e02479a21215ad0",
-            "_type": "reference",
-            "_weak": true,
-          },
-          Object {
-            "_key": "9053f9d2ff132c36903fbaf0067d5ce8",
-            "_ref": "9053f9d2ff132c36903fbaf0067d5ce8",
-            "_type": "reference",
-            "_weak": true,
-          },
-          Object {
-            "_key": "03fdbeef0c01fd8e571a926d2905e46f",
-            "_ref": "03fdbeef0c01fd8e571a926d2905e46f",
-            "_type": "reference",
-            "_weak": true,
-          },
-        ],
-        "name": "mylib",
-        "path": ".",
-      },
-    ],
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
-    "symbolNames": Array [
-      "Button",
-      "ButtonProps",
-      "ButtonTone",
-      "ButtonType",
-      "Class",
-      "Resolver",
-      "ResponsiveMarginProps",
-    ],
     "version": "1.0.0",
+  },
+  Object {
+    "_id": "mylib_1-0-0__main",
+    "_type": "api.export",
+    "name": "mylib",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+    "path": ".",
+    "release": Object {
+      "_ref": "mylib_1-0-0",
+      "_type": "reference",
+    },
   },
   Object {
     "_id": "15cb148fb5d4f062894fe0e153b35382",
@@ -122,103 +56,80 @@ Array [
       "seeBlocks": undefined,
       "summary": undefined,
     },
+    "export": Object {
+      "_ref": "mylib_1-0-0__main",
+      "_type": "reference",
+    },
     "isReactComponentType": true,
-    "members": Array [],
     "name": "Button",
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
     "parameters": Array [
       Object {
         "_key": "50fe03ab7bf37089a7e88da9b31ffb3b",
         "_type": "api.parameter",
+        "comment": undefined,
         "name": "props",
         "type": Array [
           Object {
             "_key": "token0",
-            "_type": "api.reference",
-            "reference": Object {
+            "_type": "api.token",
+            "symbol": Object {
               "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
               "_type": "reference",
-              "_weak": true,
             },
             "text": "ButtonProps",
           },
           Object {
             "_key": "token1",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": " & ",
           },
           Object {
             "_key": "token2",
-            "_type": "api.reference",
-            "reference": Object {
-              "_ref": "a5c5b216214ec778de7d29f2f68daa12",
-              "_type": "reference",
-              "_weak": true,
-            },
+            "_type": "api.token",
             "text": "Omit",
           },
           Object {
             "_key": "token3",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": "<",
           },
           Object {
             "_key": "token4",
-            "_type": "api.reference",
-            "reference": Object {
-              "_ref": "51c4e41c89c9026264bbf30d5c7977e6",
-              "_type": "reference",
-              "_weak": true,
-            },
+            "_type": "api.token",
             "text": "React.HTMLProps",
           },
           Object {
             "_key": "token5",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": "<",
           },
           Object {
             "_key": "token6",
-            "_type": "api.reference",
-            "reference": Object {
-              "_ref": "1b2a945e82fde37bf0240a7d0caa7ce2",
-              "_type": "reference",
-              "_weak": true,
-            },
+            "_type": "api.token",
             "text": "HTMLButtonElement",
           },
           Object {
             "_key": "token7",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": ">, 'type'>",
           },
         ],
       },
     ],
-    "propsType": Object {
-      "_ref": "2e98a594f4b9a7d1a4fd0f695f2dafed",
-      "_type": "reference",
-      "_weak": true,
-    },
+    "propsType": undefined,
     "release": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "releaseTag": "public",
     "returnType": Array [
       Object {
         "_key": "token0",
-        "_type": "api.reference",
-        "reference": Object {
-          "_ref": "10dd42507410f3d886670555aa9c23e5",
-          "_type": "reference",
-          "_weak": true,
-        },
+        "_type": "api.token",
         "text": "React.ReactElement",
       },
     ],
@@ -227,15 +138,6 @@ Array [
       "current": "Button",
     },
     "typeParameters": Array [],
-  },
-  Object {
-    "_id": "mylib_Button",
-    "_type": "api.symbol",
-    "name": "Button",
-    "package": Object {
-      "_ref": "mylib",
-      "_type": "reference",
-    },
   },
   Object {
     "_id": "2e98a594f4b9a7d1a4fd0f695f2dafed",
@@ -258,6 +160,10 @@ Array [
       "seeBlocks": undefined,
       "summary": undefined,
     },
+    "export": Object {
+      "_ref": "mylib_1-0-0__main",
+      "_type": "reference",
+    },
     "extends": Array [
       Object {
         "_key": "extend0",
@@ -265,11 +171,10 @@ Array [
         "type": Array [
           Object {
             "_key": "token0",
-            "_type": "api.reference",
-            "reference": Object {
+            "_type": "api.token",
+            "symbol": Object {
               "_ref": "03fdbeef0c01fd8e571a926d2905e46f",
               "_type": "reference",
-              "_weak": true,
             },
             "text": "ResponsiveMarginProps",
           },
@@ -287,11 +192,10 @@ Array [
         "type": Array [
           Object {
             "_key": "token0",
-            "_type": "api.reference",
-            "reference": Object {
+            "_type": "api.token",
+            "symbol": Object {
               "_ref": "f8290b4913d399ece606e41443224121",
               "_type": "reference",
-              "_weak": true,
             },
             "text": "ButtonTone",
           },
@@ -307,11 +211,10 @@ Array [
         "type": Array [
           Object {
             "_key": "token0",
-            "_type": "api.reference",
-            "reference": Object {
+            "_type": "api.token",
+            "symbol": Object {
               "_ref": "7baa7de0358f25b593b8be235abe8fee",
               "_type": "reference",
-              "_weak": true,
             },
             "text": "ButtonType",
           },
@@ -322,12 +225,10 @@ Array [
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
     "release": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "releaseTag": "public",
     "slug": Object {
@@ -335,15 +236,6 @@ Array [
       "current": "ButtonProps",
     },
     "typeParameters": Array [],
-  },
-  Object {
-    "_id": "mylib_ButtonProps",
-    "_type": "api.symbol",
-    "name": "ButtonProps",
-    "package": Object {
-      "_ref": "mylib",
-      "_type": "reference",
-    },
   },
   Object {
     "_id": "f8290b4913d399ece606e41443224121",
@@ -366,16 +258,18 @@ Array [
       "seeBlocks": undefined,
       "summary": undefined,
     },
+    "export": Object {
+      "_ref": "mylib_1-0-0__main",
+      "_type": "reference",
+    },
     "name": "ButtonTone",
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
     "release": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "releaseTag": "public",
     "slug": Object {
@@ -385,19 +279,10 @@ Array [
     "type": Array [
       Object {
         "_key": "token0",
-        "_type": "api.text",
+        "_type": "api.token",
         "text": "'positive' | 'caution' | 'critical'",
       },
     ],
-  },
-  Object {
-    "_id": "mylib_ButtonTone",
-    "_type": "api.symbol",
-    "name": "ButtonTone",
-    "package": Object {
-      "_ref": "mylib",
-      "_type": "reference",
-    },
   },
   Object {
     "_id": "7baa7de0358f25b593b8be235abe8fee",
@@ -420,16 +305,18 @@ Array [
       "seeBlocks": undefined,
       "summary": undefined,
     },
+    "export": Object {
+      "_ref": "mylib_1-0-0__main",
+      "_type": "reference",
+    },
     "name": "ButtonType",
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
     "release": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "releaseTag": "public",
     "slug": Object {
@@ -439,19 +326,10 @@ Array [
     "type": Array [
       Object {
         "_key": "token0",
-        "_type": "api.text",
+        "_type": "api.token",
         "text": "'button' | 'submit' | 'reset'",
       },
     ],
-  },
-  Object {
-    "_id": "mylib_ButtonType",
-    "_type": "api.symbol",
-    "name": "ButtonType",
-    "package": Object {
-      "_ref": "mylib",
-      "_type": "reference",
-    },
   },
   Object {
     "_id": "ead4d7d99c69e54e6e02479a21215ad0",
@@ -667,6 +545,10 @@ Array [
         },
       ],
     },
+    "export": Object {
+      "_ref": "mylib_1-0-0__main",
+      "_type": "reference",
+    },
     "members": Array [
       Object {
         "_key": "8d3ce42f4aeda10d5b563bebea7e190f",
@@ -721,7 +603,7 @@ Array [
             "type": Array [
               Object {
                 "_key": "token0",
-                "_type": "api.text",
+                "_type": "api.token",
                 "text": "string",
               },
             ],
@@ -741,7 +623,7 @@ Array [
         "type": Array [
           Object {
             "_key": "token0",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": "string",
           },
         ],
@@ -762,7 +644,7 @@ Array [
             "type": Array [
               Object {
                 "_key": "token0",
-                "_type": "api.text",
+                "_type": "api.token",
                 "text": "boolean",
               },
             ],
@@ -772,7 +654,7 @@ Array [
         "returnType": Array [
           Object {
             "_key": "token0",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": "boolean",
           },
         ],
@@ -783,26 +665,15 @@ Array [
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
     "release": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "releaseTag": "beta",
     "slug": Object {
       "_type": "slug",
       "current": "Class",
-    },
-  },
-  Object {
-    "_id": "mylib_Class",
-    "_type": "api.symbol",
-    "name": "Class",
-    "package": Object {
-      "_ref": "mylib",
-      "_type": "reference",
     },
   },
   Object {
@@ -826,6 +697,10 @@ Array [
       "seeBlocks": undefined,
       "summary": undefined,
     },
+    "export": Object {
+      "_ref": "mylib_1-0-0__main",
+      "_type": "reference",
+    },
     "extends": Array [],
     "members": Array [
       Object {
@@ -837,12 +712,13 @@ Array [
           Object {
             "_key": "id",
             "_type": "api.parameter",
+            "comment": undefined,
             "name": "id",
             "releaseTag": "beta",
             "type": Array [
               Object {
                 "_key": "token0",
-                "_type": "api.text",
+                "_type": "api.token",
                 "text": "string",
               },
             ],
@@ -852,7 +728,7 @@ Array [
         "returnType": Array [
           Object {
             "_key": "token0",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": "string[]",
           },
         ],
@@ -863,12 +739,10 @@ Array [
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
     "release": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "releaseTag": "beta",
     "slug": Object {
@@ -876,15 +750,6 @@ Array [
       "current": "Resolver",
     },
     "typeParameters": Array [],
-  },
-  Object {
-    "_id": "mylib_Resolver",
-    "_type": "api.symbol",
-    "name": "Resolver",
-    "package": Object {
-      "_ref": "mylib",
-      "_type": "reference",
-    },
   },
   Object {
     "_id": "03fdbeef0c01fd8e571a926d2905e46f",
@@ -907,6 +772,10 @@ Array [
       "seeBlocks": undefined,
       "summary": undefined,
     },
+    "export": Object {
+      "_ref": "mylib_1-0-0__main",
+      "_type": "reference",
+    },
     "extends": Array [],
     "members": Array [
       Object {
@@ -919,7 +788,7 @@ Array [
         "type": Array [
           Object {
             "_key": "token0",
-            "_type": "api.text",
+            "_type": "api.token",
             "text": "number | number[]",
           },
         ],
@@ -929,12 +798,10 @@ Array [
     "package": Object {
       "_ref": "mylib",
       "_type": "reference",
-      "_weak": true,
     },
     "release": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
-      "_weak": true,
     },
     "releaseTag": "public",
     "slug": Object {
@@ -942,6 +809,60 @@ Array [
       "current": "ResponsiveMarginProps",
     },
     "typeParameters": Array [],
+  },
+  Object {
+    "_id": "mylib_Button",
+    "_type": "api.symbol",
+    "name": "Button",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "mylib_ButtonProps",
+    "_type": "api.symbol",
+    "name": "ButtonProps",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "mylib_ButtonTone",
+    "_type": "api.symbol",
+    "name": "ButtonTone",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "mylib_ButtonType",
+    "_type": "api.symbol",
+    "name": "ButtonType",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "mylib_Class",
+    "_type": "api.symbol",
+    "name": "Class",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
+  },
+  Object {
+    "_id": "mylib_Resolver",
+    "_type": "api.symbol",
+    "name": "Resolver",
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+    },
   },
   Object {
     "_id": "mylib_ResponsiveMarginProps",
@@ -1170,6 +1091,10 @@ Object {
       },
     ],
   },
+  "export": Object {
+    "_ref": "mylib_1-0-0__main",
+    "_type": "reference",
+  },
   "members": Array [
     Object {
       "_key": "8d3ce42f4aeda10d5b563bebea7e190f",
@@ -1224,7 +1149,7 @@ Object {
           "type": Array [
             Object {
               "_key": "token0",
-              "_type": "api.text",
+              "_type": "api.token",
               "text": "string",
             },
           ],
@@ -1244,7 +1169,7 @@ Object {
       "type": Array [
         Object {
           "_key": "token0",
-          "_type": "api.text",
+          "_type": "api.token",
           "text": "string",
         },
       ],
@@ -1265,7 +1190,7 @@ Object {
           "type": Array [
             Object {
               "_key": "token0",
-              "_type": "api.text",
+              "_type": "api.token",
               "text": "boolean",
             },
           ],
@@ -1275,7 +1200,7 @@ Object {
       "returnType": Array [
         Object {
           "_key": "token0",
-          "_type": "api.text",
+          "_type": "api.token",
           "text": "boolean",
         },
       ],
@@ -1286,12 +1211,10 @@ Object {
   "package": Object {
     "_ref": "mylib",
     "_type": "reference",
-    "_weak": true,
   },
   "release": Object {
     "_ref": "mylib_1-0-0",
     "_type": "reference",
-    "_weak": true,
   },
   "releaseTag": "beta",
   "slug": Object {
@@ -1323,6 +1246,10 @@ Object {
     "seeBlocks": undefined,
     "summary": undefined,
   },
+  "export": Object {
+    "_ref": "mylib_1-0-0__main",
+    "_type": "reference",
+  },
   "extends": Array [],
   "members": Array [
     Object {
@@ -1334,12 +1261,13 @@ Object {
         Object {
           "_key": "id",
           "_type": "api.parameter",
+          "comment": undefined,
           "name": "id",
           "releaseTag": "beta",
           "type": Array [
             Object {
               "_key": "token0",
-              "_type": "api.text",
+              "_type": "api.token",
               "text": "string",
             },
           ],
@@ -1349,7 +1277,7 @@ Object {
       "returnType": Array [
         Object {
           "_key": "token0",
-          "_type": "api.text",
+          "_type": "api.token",
           "text": "string[]",
         },
       ],
@@ -1360,12 +1288,10 @@ Object {
   "package": Object {
     "_ref": "mylib",
     "_type": "reference",
-    "_weak": true,
   },
   "release": Object {
     "_ref": "mylib_1-0-0",
     "_type": "reference",
-    "_weak": true,
   },
   "releaseTag": "beta",
   "slug": Object {

@@ -1,4 +1,4 @@
-import {extract, transform} from '../src'
+import {APIExportDocument, APIMemberDocument, APIPackageDocument, extract, transform} from '../src'
 import {spawnProject} from './lib/spawnProject'
 
 describe('transform', () => {
@@ -74,18 +74,26 @@ describe('transform', () => {
 
     const docs = transform(result, {package: {version: '1.0.0'}})
 
-    const pkg = docs.find((d) => d._type === 'api.package')!
+    // Assert package document
+    const pkg = docs.find((d) => d._type === 'api.package') as unknown as APIPackageDocument
 
-    expect(pkg.symbolNames).toEqual(['extra', 'version'])
+    expect(pkg.name).toBe('multi-export')
 
-    const release = docs.find((d) => d._type === 'api.release')!
+    // Assert export documents
+    const exports = docs.filter((d) => d._type === 'api.export') as unknown as APIExportDocument[]
+    const exportPaths = exports.map((exp) => exp.path)
 
-    expect(release.exports).toHaveLength(2)
+    expect(exportPaths).toEqual(['.', 'extra'])
 
-    const names = (release.exports as any[])
-      .reduce<any[]>((acc, x) => acc.concat(x.members), [])
-      .map((x) => docs.find((d) => d._id === x._ref)!.name)
+    // Assert member documents
+    const members = docs.filter((d) =>
+      ['api.variable'].includes(d._type)
+    ) as unknown as APIMemberDocument[]
+    const memberExports = members.map((sym) => sym.export)
 
-    expect(names).toEqual(['version', 'extra'])
+    expect(memberExports).toEqual([
+      {_type: 'reference', _ref: 'multi-export_1-0-0__main'},
+      {_type: 'reference', _ref: 'multi-export_1-0-0_extra'},
+    ])
   })
 })
