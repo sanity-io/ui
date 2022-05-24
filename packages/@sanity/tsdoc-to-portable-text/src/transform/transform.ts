@@ -1,8 +1,15 @@
 import {ExtractResult} from '../extract'
 import {SanityDocumentValue} from '../sanity'
-import {isArray, _parsePackageName} from './helpers'
+import {
+  APIExportDocument,
+  APIMemberDocument,
+  APIPackageDocument,
+  APIReleaseDocument,
+  APISymbolDocument,
+} from '../types'
+import {isRecord, _parsePackageName} from './helpers'
+import {transformExportMember} from './transformExportMember'
 import {transformPackage} from './transformPackage'
-import {transformPackageMember} from './transformPackageMember'
 import {TransformContext, TransformOpts} from './types'
 
 /**
@@ -14,10 +21,19 @@ export function transform(
 ): SanityDocumentValue[] {
   const {version: releaseVersion} = opts.package
 
-  const state: any = {
-    package: opts.currPackageDoc || undefined,
-    identifiers: [],
+  const state: {
+    exports: APIExportDocument[]
+    members: APIMemberDocument[]
+    package?: APIPackageDocument
+    release?: APIReleaseDocument
+    symbolNames: string[]
+    symbols: APISymbolDocument[]
+  } = {
+    exports: [],
     members: [],
+    package: opts.currPackageDoc || undefined,
+    symbolNames: [],
+    symbols: [],
   }
 
   for (const extractResult of extractResults) {
@@ -37,19 +53,26 @@ export function transform(
       .replace(/\./g, '-')
       .replace(/\//g, '_')
 
-    const exportDoc: any = {
-      _key: exportPath || '.',
+    const exportId = [packageScope, packageName, releaseVersion, exportPath || '_main']
+      .filter(Boolean)
+      .join('_')
+      .replace(/@/g, '')
+      .replace(/\./g, '-')
+      .replace(/\//g, '_')
+
+    const exportDoc: APIExportDocument = {
+      _id: exportId,
       _type: 'api.export',
+      package: {_type: 'reference', _ref: ''},
+      release: {_type: 'reference', _ref: ''},
       name: [packageScope, packageName, exportPath].filter(Boolean).join('/'),
       path: exportPath || '.',
-      members: [],
     }
 
     const ctx: TransformContext = {
       apiPackage: apiPackage,
       scope: packageScope,
       name: packageName,
-      exportPath,
       version: releaseVersion,
       package: state.package,
       release: state.release,
@@ -58,111 +81,39 @@ export function transform(
 
     const packageDoc = transformPackage(ctx, apiPackage)
 
+    exportDoc.package._ref = packageDoc._id
+
     ctx.package = packageDoc
 
     ctx.release = {
       ...ctx.release,
       _type: 'api.release',
       _id: releaseId,
-      package: {
-        _type: 'reference',
-        _ref: ctx.package._id,
-        _weak: true,
-      },
+      package: {_type: 'reference', _ref: ctx.package._id},
       version: releaseVersion,
-      exports: ctx.release?.exports || [],
-      identifiers: ctx.release?.identifiers || [],
     }
 
-    ctx.package.latestRelease = {
-      _type: 'reference',
-      _ref: ctx.release._id,
-      _weak: true,
-    }
+    exportDoc.release._ref = ctx.release._id
 
-    let releases: any[] = isArray(ctx.package.releases) ? ctx.package.releases : []
+    state.exports.push(exportDoc)
 
-    const isReleased = releases.some((r) => r._ref === releaseId)
-
-    // replace or append
-    ctx.package.releases = releases = isReleased
-      ? releases.map((r) => {
-          if (r._key === releaseId) {
-            return {
-              _type: 'reference',
-              _key: releaseId,
-              _ref: releaseId,
-              _weak: true,
-            }
-          }
-
-          return r
-        })
-      : releases.concat([
-          {
-            _type: 'reference',
-            _key: releaseId,
-            _ref: releaseId,
-            _weak: true,
-          },
-        ])
-
-    if (isArray(ctx.release.exports)) {
-      ctx.release.exports.push(exportDoc)
-    }
+    ctx.package.latestRelease = {_type: 'reference', _ref: ctx.release._id}
 
     for (const member of apiPackage.members[0].members) {
-      const memberDoc = transformPackageMember(ctx, member)
+      const memberDoc = transformExportMember(ctx, member)
 
       state.members.push(memberDoc)
 
-      const identifierDoc = {
-        _type: 'api.identifier',
+      const symbolDoc: APISymbolDocument = {
+        _type: 'api.symbol',
         _id: packageDoc._id + `_${member.displayName}`,
         name: member.displayName,
-        package: {
-          _type: 'reference',
-          _ref: packageDoc._id,
-        },
+        package: {_type: 'reference', _ref: packageDoc._id},
       }
 
-      // Add identifier to `package`
-      if (
-        isArray(ctx.package?.identifiers) &&
-        !ctx.package?.identifiers.includes(identifierDoc.name)
-      ) {
-        ctx.package.identifiers.push(identifierDoc.name)
-        ctx.package.identifiers.sort()
-      }
+      const hasSymbol = state.symbols.some((s) => s.name === symbolDoc.name)
 
-      // Add identifier to `release`
-      if (
-        isArray(ctx.release?.identifiers) &&
-        !ctx.release?.identifiers.includes(identifierDoc.name)
-      ) {
-        ctx.release.identifiers.push(identifierDoc.name)
-        ctx.release.identifiers.sort()
-      }
-
-      if (isArray(ctx.export.identifiers)) {
-        ctx.export.identifiers.push({
-          _type: 'reference',
-          _key: identifierDoc._id,
-          _ref: identifierDoc._id,
-          _weak: true,
-        })
-      }
-
-      if (isArray(ctx.export.members)) {
-        ctx.export.members.push({
-          _type: 'reference',
-          _key: memberDoc._id,
-          _ref: memberDoc._id,
-          _weak: true,
-        })
-      }
-
-      state.members.push(identifierDoc)
+      if (!hasSymbol) state.symbols.push(symbolDoc)
     }
 
     // keep these references
@@ -170,7 +121,34 @@ export function transform(
     state.release = ctx.release
   }
 
-  const docs: SanityDocumentValue[] = [state.package, state.release, ...state.members]
+  const docs = [
+    state.package,
+    state.release,
+    ...state.exports,
+    ...state.members,
+    ...state.symbols,
+  ] as unknown as SanityDocumentValue[]
+
+  // Remove references to non-existing documents
+  for (const doc of docs) {
+    _removeNonExistingRefs(doc, docs)
+  }
 
   return docs
+}
+
+function _removeNonExistingRefs(source: Record<string, unknown>, docs: SanityDocumentValue[]) {
+  for (const [key, value] of Object.entries(source)) {
+    if (isRecord(value)) {
+      if (value._type === 'reference') {
+        const exists = docs.some((d) => d._id === value._ref)
+
+        if (!exists) {
+          delete source[key]
+        }
+      } else {
+        _removeNonExistingRefs(value, docs)
+      }
+    }
+  }
 }

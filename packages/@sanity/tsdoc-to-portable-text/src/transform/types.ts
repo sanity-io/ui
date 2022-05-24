@@ -1,5 +1,5 @@
 import {ApiPackage} from '@microsoft/api-extractor-model'
-import {SanityDocumentValue} from '../sanity'
+import {APIExportDocument, APIPackageDocument, APIReleaseDocument} from '../types'
 
 /**
  * @public
@@ -8,7 +8,7 @@ export interface TransformOpts {
   package: {
     version: string
   }
-  currPackageDoc?: SanityDocumentValue | null
+  currPackageDoc?: APIPackageDocument
 }
 
 /**
@@ -18,9 +18,9 @@ export interface TransformContext {
   apiPackage: ApiPackage
   scope?: string
   name: string
-  exportPath?: string
+  // exportPath?: string
   version: string
-  package?: SanityDocumentValue
-  release?: SanityDocumentValue
-  export: any
+  package?: APIPackageDocument
+  release?: APIReleaseDocument
+  export: APIExportDocument
 }

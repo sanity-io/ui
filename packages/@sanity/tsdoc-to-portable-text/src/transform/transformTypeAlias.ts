@@ -1,14 +1,18 @@
 import {ApiTypeAlias} from '@microsoft/api-extractor-model'
-import {SanityDocumentValue} from '../sanity'
+import {APITypeAliasDocument} from '../types'
+import {_transformTokens} from './_transformTokens'
 import {RELEASE_TAGS} from './constants'
-import {createId, sanitizeName, slugify} from './helpers'
+import {_createExportMemberId, _sanitizeName, _slugify} from './helpers'
 import {transformDocComment} from './transformDocComment'
-import {transformTokens} from './transformTokens'
 import {TransformContext} from './types'
 
-export function transformTypeAlias(ctx: TransformContext, node: ApiTypeAlias): SanityDocumentValue {
-  const docComment = node.tsdocComment
-  const name = sanitizeName(node.name)
+export function transformTypeAlias(
+  ctx: TransformContext,
+  node: ApiTypeAlias
+): APITypeAliasDocument {
+  if (!ctx.export) {
+    throw new Error('transformTypeAlias: missing `export` document')
+  }
 
   if (!ctx.package) {
     throw new Error('transformTypeAlias: missing `package` document')
@@ -18,25 +22,25 @@ export function transformTypeAlias(ctx: TransformContext, node: ApiTypeAlias): S
     throw new Error('transformTypeAlias: missing `release` document')
   }
 
-  if (!ctx.export) {
-    throw new Error('transformTypeAlias: missing `export` document')
-  }
+  const docComment = node.tsdocComment
+  const name = _sanitizeName(node.name)
 
   return {
     _type: 'api.typeAlias',
-    _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.release._id, _weak: true},
-    name,
-    slug: {_type: 'slug', current: slugify(name)},
+    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
     comment: docComment ? transformDocComment(docComment) : undefined,
-    type: transformTokens(
+    export: {_type: 'reference', _ref: ctx.export._id},
+    name,
+    package: {_type: 'reference', _ref: ctx.package._id},
+    release: {_type: 'reference', _ref: ctx.release._id},
+    releaseTag: RELEASE_TAGS[node.releaseTag],
+    slug: {_type: 'slug', current: _slugify(name)},
+    type: _transformTokens(
       ctx,
       node.excerptTokens.slice(
         node.typeExcerpt.tokenRange.startIndex,
         node.typeExcerpt.tokenRange.endIndex
       )
     ),
-    releaseTag: RELEASE_TAGS[node.releaseTag],
   }
 }

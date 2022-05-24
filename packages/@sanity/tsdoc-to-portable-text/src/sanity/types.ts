@@ -9,3 +9,30 @@ export interface SanityDocumentValue {
   _createdAt?: string
   [key: string]: unknown
 }
+
+/**
+ * @public
+ */
+export interface SanityReferenceValue {
+  _type: 'reference'
+  _ref: string
+  _weak?: boolean
+}
+
+/**
+ * @public
+ */
+export interface SanitySlugValue {
+  _type: 'slug'
+  current: string
+}
+
+/**
+ * @public
+ */
+export type SanityArrayObjectItem<T> = T & {_key: string}
+
+/**
+ * @public
+ */
+export type PortableTextNode = any

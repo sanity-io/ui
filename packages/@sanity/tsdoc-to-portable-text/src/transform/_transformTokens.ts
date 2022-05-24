@@ -1,19 +1,23 @@
 import {ExcerptToken} from '@microsoft/api-extractor-model'
-import {createId} from './helpers'
+import {SanityArrayObjectItem} from '../sanity'
+import {SerializedAPIToken} from '../types'
+import {_createExportMemberId} from './helpers'
 import {TransformContext} from './types'
 
-export function transformTokens(
+export function _transformTokens(
   ctx: TransformContext,
   tokens: ExcerptToken[]
-): Record<string, unknown>[] {
-  if (!ctx.package) {
+): SanityArrayObjectItem<SerializedAPIToken>[] {
+  const pkg = ctx.package
+
+  if (!pkg) {
     throw new Error('transformTokens: missing package document')
   }
 
   return tokens.map((t, idx) => {
     if (t.kind === 'Content') {
       return {
-        _type: 'api.text',
+        _type: 'api.token',
         _key: `token${idx}`,
         text: t.text,
       }
@@ -22,7 +26,7 @@ export function transformTokens(
     if (t.kind === 'Reference') {
       if (!t.canonicalReference) {
         return {
-          _type: 'api.text',
+          _type: 'api.token',
           _key: `token${idx}`,
           text: t.text,
         }
@@ -40,22 +44,17 @@ export function transformTokens(
       const refContext: TransformContext = sourceName
         ? {
             ...ctx,
-            package: {
-              ...ctx.package!,
-              scope: sourceScope,
-              name: sourceName,
-            },
+            package: {...pkg, scope: sourceScope, name: sourceName},
           }
         : ctx
 
       return {
-        _type: 'api.reference',
+        _type: 'api.token',
         _key: `token${idx}`,
         text: t.text,
-        reference: {
+        symbol: {
           _type: 'reference',
-          _ref: createId(refContext, t.canonicalReference.toString()),
-          _weak: true,
+          _ref: _createExportMemberId(refContext, t.canonicalReference.toString()),
         },
       }
     }

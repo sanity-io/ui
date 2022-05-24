@@ -1,15 +1,15 @@
 import crypto from 'crypto'
-import _slugify from 'slugify'
+import slugify from 'slugify'
 import {TransformContext} from './types'
 
 export function hash(key: string): string {
   return crypto.createHash('md5').update(key).digest('hex')
 }
 
-export function createId(ctx: TransformContext, key: string): string {
-  const {scope, name, exportPath, version} = ctx
+export function _createExportMemberId(ctx: TransformContext, key: string): string {
+  const {scope, name, export: exp, version} = ctx
 
-  const exportName = [scope, name, exportPath].filter(Boolean).join('/')
+  const exportName = [scope, name, exp.path !== '.' && exp.path].filter(Boolean).join('/')
 
   return hash(`${exportName}@${version}/${key}`)
 }
@@ -22,7 +22,7 @@ export function isRecord(val: unknown): val is Record<string, unknown> {
   return typeof val === 'object' && Boolean(val)
 }
 
-export function sanitizeName(str: string): string {
+export function _sanitizeName(str: string): string {
   // Since `Text` is part of the default browser scope, API extractor will append `_2` to other
   // implementations. So we need to replace it for the case of readable docs.
   if (str === 'Text_2') {
@@ -32,8 +32,8 @@ export function sanitizeName(str: string): string {
   return str
 }
 
-export function slugify(str: string): string {
-  return _slugify(str)
+export function _slugify(str: string): string {
+  return slugify(str)
 }
 
 export function _parsePackageName(nameStr: string): [string | undefined, string] {

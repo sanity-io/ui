@@ -1,13 +1,18 @@
 import {ApiVariable} from '@microsoft/api-extractor-model'
 import {DocComment, DocPlainText} from '@microsoft/tsdoc'
-import {SanityDocumentValue} from '../sanity'
+import {SanityReferenceValue} from '../sanity'
+import {APIVariableDocument} from '../types'
+import {_transformTokens} from './_transformTokens'
 import {RELEASE_TAGS} from './constants'
-import {createId, sanitizeName, slugify} from './helpers'
+import {_createExportMemberId, _sanitizeName, _slugify} from './helpers'
 import {transformDocComment} from './transformDocComment'
-import {transformTokens} from './transformTokens'
 import {TransformContext} from './types'
 
-export function transformVariable(ctx: TransformContext, node: ApiVariable): SanityDocumentValue {
+export function transformVariable(ctx: TransformContext, node: ApiVariable): APIVariableDocument {
+  if (!ctx.export) {
+    throw new Error('transformVariable: missing `export` document')
+  }
+
   if (!ctx.package) {
     throw new Error('transformVariable: missing `package` document')
   }
@@ -16,14 +21,10 @@ export function transformVariable(ctx: TransformContext, node: ApiVariable): San
     throw new Error('transformVariable: missing `release` document')
   }
 
-  if (!ctx.export) {
-    throw new Error('transformVariable: missing `export` document')
-  }
-
-  const name = sanitizeName(node.name)
+  const name = _sanitizeName(node.name)
   const docComment = node.tsdocComment
   const comment = docComment ? transformDocComment(docComment) : undefined
-  const type = transformTokens(
+  const type = _transformTokens(
     ctx,
     node.excerptTokens.slice(
       node.variableTypeExcerpt.tokenRange.startIndex,
@@ -35,16 +36,17 @@ export function transformVariable(ctx: TransformContext, node: ApiVariable): San
 
   return {
     _type: 'api.variable',
-    _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.release._id, _weak: true},
-    name,
-    slug: {_type: 'slug', current: slugify(name)},
+    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
     comment,
-    releaseTag: RELEASE_TAGS[node.releaseTag],
-    type,
+    export: {_type: 'reference', _ref: ctx.export._id},
     isReactComponentType,
+    name,
+    package: {_type: 'reference', _ref: ctx.package._id},
     propsType,
+    release: {_type: 'reference', _ref: ctx.release._id},
+    releaseTag: RELEASE_TAGS[node.releaseTag],
+    slug: {_type: 'slug', current: _slugify(name)},
+    type,
   }
 }
 
@@ -76,7 +78,11 @@ function _variableIsReactComponentType(node: ApiVariable) {
   return false
 }
 
-function _variablePropsType(ctx: TransformContext, node: ApiVariable, docComment?: DocComment) {
+function _variablePropsType(
+  ctx: TransformContext,
+  node: ApiVariable,
+  docComment?: DocComment
+): SanityReferenceValue | undefined {
   const typeTokens = node.excerptTokens.slice(
     node.variableTypeExcerpt.tokenRange.startIndex,
     node.variableTypeExcerpt.tokenRange.endIndex
@@ -96,8 +102,7 @@ function _variablePropsType(ctx: TransformContext, node: ApiVariable, docComment
     if (sanityUIRef && sanityUIRef.canonicalReference) {
       return {
         _type: 'reference',
-        _ref: createId(ctx, sanityUIRef.canonicalReference.toString()),
-        _weak: true,
+        _ref: _createExportMemberId(ctx, sanityUIRef.canonicalReference.toString()),
       }
     }
   }
@@ -115,8 +120,7 @@ function _variablePropsType(ctx: TransformContext, node: ApiVariable, docComment
 
         return {
           _type: 'reference',
-          _ref: createId(ctx, `@sanity/ui!${text}:interface`),
-          _weak: true,
+          _ref: _createExportMemberId(ctx, `@sanity/ui!${text}:interface`),
         }
       }
     }

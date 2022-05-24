@@ -9,12 +9,24 @@ import {
   DocMemberIdentifier,
   DocMemberReference,
   DocNode,
-  DocNodeContainer,
   DocNodeTransforms,
   DocParagraph,
   DocPlainText,
+  DocSection,
   StandardTags,
 } from '@microsoft/tsdoc'
+import {PortableTextNode} from '../sanity'
+import {
+  TSDocComment,
+  TSDocCustomBlock,
+  TSDocDeprecatedBlock,
+  TSDocExampleBlock,
+  TSDocModifierTag,
+  TSDocParamBlock,
+  TSDocRemarksBlock,
+  TSDocReturnsBlock,
+  TSDocSeeBlock,
+} from '../types'
 import {isArray, isRecord} from './helpers'
 
 function _transformDocNode(docNode: DocNode, key: string): Record<string, unknown> | undefined {
@@ -206,8 +218,8 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
 }
 
 export function _transformDocCommentContent(
-  section: DocNodeContainer
-): Record<string, unknown>[] | undefined {
+  section: DocSection | DocParagraph
+): PortableTextNode[] | undefined {
   if (!section.nodes.length) return undefined
 
   const nodes = section.nodes
@@ -217,12 +229,12 @@ export function _transformDocCommentContent(
   return nodes.length ? nodes : undefined
 }
 
-export function transformDocComment(docComment: DocComment): Record<string, unknown> {
+export function transformDocComment(docComment: DocComment): TSDocComment {
   // Summary
   const summary = _transformDocCommentContent(docComment.summarySection)
 
   // Parameters
-  const parameters = docComment.params.blocks.length
+  const parameters: TSDocParamBlock[] | undefined = docComment.params.blocks.length
     ? docComment.params.blocks.map((paramBlock, idx) => ({
         _type: 'tsdoc.paramBlock',
         _key: String(idx),
@@ -232,19 +244,19 @@ export function transformDocComment(docComment: DocComment): Record<string, unkn
     : undefined
 
   // Returns
-  const returns = docComment.returnsBlock && {
+  const returns: TSDocReturnsBlock | undefined = docComment.returnsBlock && {
     _type: 'tsdoc.returnsBlock',
     content: _transformDocCommentContent(docComment.returnsBlock.content),
   }
 
   // `@remarks` block
-  const remarks = docComment.remarksBlock && {
+  const remarks: TSDocRemarksBlock | undefined = docComment.remarksBlock && {
     _type: 'tsdoc.remarksBlock',
     content: _transformDocCommentContent(docComment.remarksBlock.content),
   }
 
-  const exampleBlocks = []
-  const customBlocks = []
+  const exampleBlocks: TSDocExampleBlock[] = []
+  const customBlocks: TSDocCustomBlock[] = []
 
   // Custom blocks
   for (let i = 0; i < docComment.customBlocks.length; i += 1) {
@@ -268,7 +280,7 @@ export function transformDocComment(docComment: DocComment): Record<string, unkn
   }
 
   // `@see` blocks
-  const seeBlocks = docComment.seeBlocks.length
+  const seeBlocks: TSDocSeeBlock[] | undefined = docComment.seeBlocks.length
     ? docComment.seeBlocks.map((seeBlock, idx) => ({
         _type: 'tsdoc.seeBlock',
         _key: String(idx),
@@ -277,13 +289,13 @@ export function transformDocComment(docComment: DocComment): Record<string, unkn
     : undefined
 
   // `@deprecated` block
-  const deprecated = docComment.deprecatedBlock && {
+  const deprecated: TSDocDeprecatedBlock | undefined = docComment.deprecatedBlock && {
     _type: 'tsdoc.deprecatedBlock',
     content: _transformDocCommentContent(docComment.deprecatedBlock.content),
   }
 
   // Modifiers
-  const modifierTags = docComment.modifierTagSet.nodes.length
+  const modifierTags: TSDocModifierTag[] | undefined = docComment.modifierTagSet.nodes.length
     ? docComment.modifierTagSet.nodes.map((modifierTag, idx) => ({
         _type: 'tsdoc.modifierTag',
         _key: String(idx),

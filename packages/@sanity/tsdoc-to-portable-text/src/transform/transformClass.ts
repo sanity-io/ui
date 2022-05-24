@@ -7,16 +7,23 @@ import {
   Parameter,
   TypeParameter,
 } from '@microsoft/api-extractor-model'
-import {SanityDocumentValue} from '../sanity'
+import {SanityArrayObjectItem} from '../sanity'
+import {
+  APIClassDocument,
+  SerializedAPIClassMember,
+  SerializedAPIParameter,
+  SerializedAPITypeParameter,
+} from '../types'
+import {_transformTokens} from './_transformTokens'
 import {RELEASE_TAGS} from './constants'
-import {createId, hash, sanitizeName, slugify} from './helpers'
+import {_createExportMemberId, hash, _sanitizeName, _slugify} from './helpers'
 import {transformDocComment, _transformDocCommentContent} from './transformDocComment'
-import {transformTokens} from './transformTokens'
 import {TransformContext} from './types'
 
-export function transformClass(ctx: TransformContext, node: ApiClass): SanityDocumentValue {
-  const docComment = node.tsdocComment
-  const name = sanitizeName(node.name)
+export function transformClass(ctx: TransformContext, node: ApiClass): APIClassDocument {
+  if (!ctx.export) {
+    throw new Error('transformClass: missing `export` document')
+  }
 
   if (!ctx.package) {
     throw new Error('transformClass: missing `package` document')
@@ -26,58 +33,37 @@ export function transformClass(ctx: TransformContext, node: ApiClass): SanityDoc
     throw new Error('transformClass: missing `release` document')
   }
 
-  if (!ctx.export) {
-    throw new Error('transformClass: missing `export` document')
-  }
+  const docComment = node.tsdocComment
+  const name = _sanitizeName(node.name)
 
   return {
     _type: 'api.class',
-    _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.release._id, _weak: true},
-    name,
-    slug: {_type: 'slug', current: slugify(name)},
+    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
     comment: docComment ? transformDocComment(docComment) : undefined,
-    releaseTag: RELEASE_TAGS[node.releaseTag],
+    export: {_type: 'reference', _ref: ctx.export._id},
     members: node.members.map((m) => _transformClassMember(ctx, m)),
+    name,
+    package: {_type: 'reference', _ref: ctx.package._id},
+    release: {_type: 'reference', _ref: ctx.release._id},
+    releaseTag: RELEASE_TAGS[node.releaseTag],
+    slug: {_type: 'slug', current: _slugify(name)},
   }
 }
 
-function _transformClassMember(ctx: TransformContext, m: ApiItem): Record<string, unknown> {
+function _transformClassMember(
+  ctx: TransformContext,
+  m: ApiItem
+): SanityArrayObjectItem<SerializedAPIClassMember> {
   if (m.kind === 'Constructor') {
     const mem = m as ApiConstructor
     const docComment = mem.tsdocComment
 
     return {
-      _type: 'api.constructor',
+      _type: 'api.constructorMember',
       _key: hash(mem.canonicalReference.toString()),
       releaseTag: RELEASE_TAGS[mem.releaseTag],
       comment: docComment ? transformDocComment(docComment) : undefined,
       parameters: mem.parameters.map((p) => _transformParameter(ctx, mem, p)),
-      members: mem.members.map((m) => _transformConstructorMember(ctx, m)),
-    }
-  }
-
-  if (m.kind === 'Property') {
-    const mem = m as ApiProperty
-    const docComment = mem.tsdocComment
-
-    return {
-      _type: 'api.property',
-      _key: hash(mem.canonicalReference.toString()),
-      name: mem.name,
-      releaseTag: RELEASE_TAGS[mem.releaseTag],
-      comment: docComment ? transformDocComment(docComment) : undefined,
-      isEventProperty: mem.isEventProperty,
-      isOptional: mem.isOptional,
-      isStatic: mem.isStatic,
-      type: transformTokens(
-        ctx,
-        mem.excerptTokens.slice(
-          mem.propertyTypeExcerpt.tokenRange.startIndex,
-          mem.propertyTypeExcerpt.tokenRange.endIndex
-        )
-      ),
     }
   }
 
@@ -86,21 +72,43 @@ function _transformClassMember(ctx: TransformContext, m: ApiItem): Record<string
     const docComment = mem.tsdocComment
 
     return {
-      _type: 'api.method',
+      _type: 'api.methodMember',
       _key: hash(mem.canonicalReference.toString()),
-      name: mem.name,
-      releaseTag: RELEASE_TAGS[mem.releaseTag],
       comment: docComment ? transformDocComment(docComment) : undefined,
+      name: mem.name,
       isOptional: mem.isOptional,
       isStatic: mem.isStatic,
-      members: mem.members.map((m) => _transformMethodMember(ctx, m)),
-      typeParameters: mem.typeParameters.map((p) => _transformTypeParameter(ctx, mem, p)),
       parameters: mem.parameters.map((p) => _transformParameter(ctx, mem, p)),
-      returnType: transformTokens(
+      releaseTag: RELEASE_TAGS[mem.releaseTag],
+      returnType: _transformTokens(
         ctx,
         mem.excerptTokens.slice(
           mem.returnTypeExcerpt.tokenRange.startIndex,
           mem.returnTypeExcerpt.tokenRange.endIndex
+        )
+      ),
+      typeParameters: mem.typeParameters.map((p) => _transformTypeParameter(ctx, mem, p)),
+    }
+  }
+
+  if (m.kind === 'Property') {
+    const mem = m as ApiProperty
+    const docComment = mem.tsdocComment
+
+    return {
+      _type: 'api.propertyMember',
+      _key: hash(mem.canonicalReference.toString()),
+      comment: docComment ? transformDocComment(docComment) : undefined,
+      name: mem.name,
+      isEventProperty: mem.isEventProperty,
+      isOptional: mem.isOptional,
+      isStatic: mem.isStatic,
+      releaseTag: RELEASE_TAGS[mem.releaseTag],
+      type: _transformTokens(
+        ctx,
+        mem.excerptTokens.slice(
+          mem.propertyTypeExcerpt.tokenRange.startIndex,
+          mem.propertyTypeExcerpt.tokenRange.endIndex
         )
       ),
     }
@@ -113,12 +121,12 @@ function _transformTypeParameter(
   ctx: TransformContext,
   method: ApiMethod,
   typeParam: TypeParameter
-) {
+): SanityArrayObjectItem<SerializedAPITypeParameter> {
   return {
     _type: 'api.typeParameter',
     _key: typeParam.name,
     name: typeParam.name,
-    defaultType: transformTokens(
+    defaultType: _transformTokens(
       ctx,
       method.excerptTokens.slice(
         typeParam.defaultTypeExcerpt.tokenRange.startIndex,
@@ -128,15 +136,24 @@ function _transformTypeParameter(
   }
 }
 
-function _transformParameter(ctx: TransformContext, node: ApiConstructor, param: Parameter) {
+function _transformParameter(
+  ctx: TransformContext,
+  node: ApiConstructor,
+  param: Parameter
+): SanityArrayObjectItem<SerializedAPIParameter> {
   const tsDocComment = param.tsdocParamBlock?.content
 
   return {
     _type: 'api.parameter',
     _key: hash(param.name),
+    comment: tsDocComment
+      ? {
+          _type: 'tsdoc.docComment',
+          summary: _transformDocCommentContent(tsDocComment),
+        }
+      : undefined,
     name: param.name,
-    comment: tsDocComment ? _transformDocCommentContent(tsDocComment) : undefined,
-    type: transformTokens(
+    type: _transformTokens(
       ctx,
       node.excerptTokens.slice(
         param.parameterTypeExcerpt.tokenRange.startIndex,
@@ -144,14 +161,4 @@ function _transformParameter(ctx: TransformContext, node: ApiConstructor, param:
       )
     ),
   }
-}
-
-function _transformConstructorMember(_ctx: TransformContext, m: ApiItem): Record<string, unknown> {
-  // @todo
-  throw new Error(`Unknown constructor member kind: ${m.kind}`)
-}
-
-function _transformMethodMember(_ctx: TransformContext, m: ApiItem): Record<string, unknown> {
-  // @todo
-  throw new Error(`Unknown method member kind: ${m.kind}`)
 }

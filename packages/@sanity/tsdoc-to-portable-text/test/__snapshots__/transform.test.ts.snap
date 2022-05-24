@@ -5,15 +5,6 @@ Array [
   Object {
     "_id": "mylib",
     "_type": "api.package",
-    "identifiers": Array [
-      "Button",
-      "ButtonProps",
-      "ButtonTone",
-      "ButtonType",
-      "Class",
-      "Resolver",
-      "ResponsiveMarginProps",
-    ],
     "latestRelease": Object {
       "_ref": "mylib_1-0-0",
       "_type": "reference",
@@ -29,6 +20,15 @@ Array [
       },
     ],
     "scope": undefined,
+    "symbolNames": Array [
+      "Button",
+      "ButtonProps",
+      "ButtonTone",
+      "ButtonType",
+      "Class",
+      "Resolver",
+      "ResponsiveMarginProps",
+    ],
   },
   Object {
     "_id": "mylib_1-0-0",
@@ -85,7 +85,12 @@ Array [
         "path": ".",
       },
     ],
-    "identifiers": Array [
+    "package": Object {
+      "_ref": "mylib",
+      "_type": "reference",
+      "_weak": true,
+    },
+    "symbolNames": Array [
       "Button",
       "ButtonProps",
       "ButtonTone",
@@ -94,11 +99,6 @@ Array [
       "Resolver",
       "ResponsiveMarginProps",
     ],
-    "package": Object {
-      "_ref": "mylib",
-      "_type": "reference",
-      "_weak": true,
-    },
     "version": "1.0.0",
   },
   Object {
@@ -123,6 +123,7 @@ Array [
       "summary": undefined,
     },
     "isReactComponentType": true,
+    "members": Array [],
     "name": "Button",
     "package": Object {
       "_ref": "mylib",
@@ -132,7 +133,7 @@ Array [
     "parameters": Array [
       Object {
         "_key": "50fe03ab7bf37089a7e88da9b31ffb3b",
-        "_type": "api.functionParameter",
+        "_type": "api.parameter",
         "name": "props",
         "type": Array [
           Object {
@@ -225,10 +226,11 @@ Array [
       "_type": "slug",
       "current": "Button",
     },
+    "typeParameters": Array [],
   },
   Object {
     "_id": "mylib_Button",
-    "_type": "api.identifier",
+    "_type": "api.symbol",
     "name": "Button",
     "package": Object {
       "_ref": "mylib",
@@ -277,7 +279,7 @@ Array [
     "members": Array [
       Object {
         "_key": "f303f9a15cddbe8ee0296511a8b04b30",
-        "_type": "api.property",
+        "_type": "api.propertySignatureMember",
         "comment": undefined,
         "isOptional": true,
         "name": "tone",
@@ -297,7 +299,7 @@ Array [
       },
       Object {
         "_key": "599dcce2998a6b40b1e38e8c6006cb0a",
-        "_type": "api.property",
+        "_type": "api.propertySignatureMember",
         "comment": undefined,
         "isOptional": true,
         "name": "type",
@@ -336,7 +338,7 @@ Array [
   },
   Object {
     "_id": "mylib_ButtonProps",
-    "_type": "api.identifier",
+    "_type": "api.symbol",
     "name": "ButtonProps",
     "package": Object {
       "_ref": "mylib",
@@ -390,7 +392,7 @@ Array [
   },
   Object {
     "_id": "mylib_ButtonTone",
-    "_type": "api.identifier",
+    "_type": "api.symbol",
     "name": "ButtonTone",
     "package": Object {
       "_ref": "mylib",
@@ -444,7 +446,7 @@ Array [
   },
   Object {
     "_id": "mylib_ButtonType",
-    "_type": "api.identifier",
+    "_type": "api.symbol",
     "name": "ButtonType",
     "package": Object {
       "_ref": "mylib",
@@ -668,7 +670,7 @@ Array [
     "members": Array [
       Object {
         "_key": "8d3ce42f4aeda10d5b563bebea7e190f",
-        "_type": "api.constructor",
+        "_type": "api.constructorMember",
         "comment": Object {
           "_type": "tsdoc.docComment",
           "customBlocks": undefined,
@@ -710,7 +712,6 @@ Array [
             },
           ],
         },
-        "members": Array [],
         "parameters": Array [
           Object {
             "_key": "b80bb7740288fda1f201890375a60c8f",
@@ -730,7 +731,7 @@ Array [
       },
       Object {
         "_key": "e6e4098107452e0fe162d6c799ccaa99",
-        "_type": "api.property",
+        "_type": "api.propertyMember",
         "comment": undefined,
         "isEventProperty": false,
         "isOptional": false,
@@ -747,11 +748,10 @@ Array [
       },
       Object {
         "_key": "11350dc1337d0e80054837b6a8d61210",
-        "_type": "api.method",
+        "_type": "api.methodMember",
         "comment": undefined,
         "isOptional": false,
         "isStatic": false,
-        "members": Array [],
         "name": "method",
         "parameters": Array [
           Object {
@@ -798,7 +798,7 @@ Array [
   },
   Object {
     "_id": "mylib_Class",
-    "_type": "api.identifier",
+    "_type": "api.symbol",
     "name": "Class",
     "package": Object {
       "_ref": "mylib",
@@ -830,7 +830,7 @@ Array [
     "members": Array [
       Object {
         "_key": "1b3ef1024601ff5c0ab8ffbf196ab5f0",
-        "_type": "api.callSignature",
+        "_type": "api.callSignatureMember",
         "comment": undefined,
         "members": Array [],
         "parameters": Array [
@@ -879,7 +879,7 @@ Array [
   },
   Object {
     "_id": "mylib_Resolver",
-    "_type": "api.identifier",
+    "_type": "api.symbol",
     "name": "Resolver",
     "package": Object {
       "_ref": "mylib",
@@ -911,7 +911,7 @@ Array [
     "members": Array [
       Object {
         "_key": "d42f4851e770aa0f758b01388874f67b",
-        "_type": "api.property",
+        "_type": "api.propertySignatureMember",
         "comment": undefined,
         "isOptional": true,
         "name": "margin",
@@ -945,7 +945,7 @@ Array [
   },
   Object {
     "_id": "mylib_ResponsiveMarginProps",
-    "_type": "api.identifier",
+    "_type": "api.symbol",
     "name": "ResponsiveMarginProps",
     "package": Object {
       "_ref": "mylib",
@@ -1173,7 +1173,7 @@ Object {
   "members": Array [
     Object {
       "_key": "8d3ce42f4aeda10d5b563bebea7e190f",
-      "_type": "api.constructor",
+      "_type": "api.constructorMember",
       "comment": Object {
         "_type": "tsdoc.docComment",
         "customBlocks": undefined,
@@ -1215,7 +1215,6 @@ Object {
           },
         ],
       },
-      "members": Array [],
       "parameters": Array [
         Object {
           "_key": "b80bb7740288fda1f201890375a60c8f",
@@ -1235,7 +1234,7 @@ Object {
     },
     Object {
       "_key": "e6e4098107452e0fe162d6c799ccaa99",
-      "_type": "api.property",
+      "_type": "api.propertyMember",
       "comment": undefined,
       "isEventProperty": false,
       "isOptional": false,
@@ -1252,11 +1251,10 @@ Object {
     },
     Object {
       "_key": "11350dc1337d0e80054837b6a8d61210",
-      "_type": "api.method",
+      "_type": "api.methodMember",
       "comment": undefined,
       "isOptional": false,
       "isStatic": false,
-      "members": Array [],
       "name": "method",
       "parameters": Array [
         Object {
@@ -1329,7 +1327,7 @@ Object {
   "members": Array [
     Object {
       "_key": "1b3ef1024601ff5c0ab8ffbf196ab5f0",
-      "_type": "api.callSignature",
+      "_type": "api.callSignatureMember",
       "comment": undefined,
       "members": Array [],
       "parameters": Array [

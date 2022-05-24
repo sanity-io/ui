@@ -18,7 +18,7 @@ describe('transform', () => {
     expect(docs).toMatchSnapshot()
   })
 
-  test('should result in "api.identifier" documents', async () => {
+  test('should result in "api.symbol" documents', async () => {
     const project = await spawnProject('mylib/1.0.0')
 
     const result = await extract(project.path, {
@@ -28,9 +28,9 @@ describe('transform', () => {
     project.cleanup()
 
     const docs = transform(result, {package: {version: '1.0.0'}})
-    const identifierDocs = docs.filter((d) => d._type === 'api.identifier')
+    const symbolDocs = docs.filter((d) => d._type === 'api.symbol')
 
-    expect(identifierDocs.length).toBe(7)
+    expect(symbolDocs.length).toBe(7)
   })
 
   test('should transform class', async () => {
@@ -76,7 +76,7 @@ describe('transform', () => {
 
     const pkg = docs.find((d) => d._type === 'api.package')!
 
-    expect(pkg.identifiers).toEqual(['extra', 'version'])
+    expect(pkg.symbolNames).toEqual(['extra', 'version'])
 
     const release = docs.find((d) => d._type === 'api.release')!
 

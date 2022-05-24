@@ -8,7 +8,7 @@ import {
   ApiTypeAlias,
   ApiVariable,
 } from '@microsoft/api-extractor-model'
-import {SanityDocumentValue} from '../sanity'
+import {APIMemberDocument} from '../types'
 import {transformClass} from './transformClass'
 import {transformEnum} from './transformEnum'
 import {transformFunction} from './transformFunction'
@@ -18,10 +18,7 @@ import {transformTypeAlias} from './transformTypeAlias'
 import {transformVariable} from './transformVariable'
 import {TransformContext} from './types'
 
-export function transformPackageMember(
-  ctx: TransformContext,
-  member: ApiItem
-): SanityDocumentValue {
+export function transformExportMember(ctx: TransformContext, member: ApiItem): APIMemberDocument {
   if (member.kind === 'Class') {
     return transformClass(ctx, member as ApiClass)
   }

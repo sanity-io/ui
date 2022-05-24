@@ -1,12 +1,18 @@
 import {ApiFunction, Parameter} from '@microsoft/api-extractor-model'
-import {SanityDocumentValue} from '../sanity'
+import {SanityArrayObjectItem} from '../sanity'
+import {APIFunctionDocument, SerializedAPIParameter} from '../types'
+import {_transformTokens} from './_transformTokens'
+import {_transformTypeParameter} from './_transformTypeParameter'
 import {RELEASE_TAGS} from './constants'
-import {createId, hash, sanitizeName, slugify} from './helpers'
-import {transformDocComment} from './transformDocComment'
-import {transformTokens} from './transformTokens'
+import {_createExportMemberId, hash, _sanitizeName, _slugify} from './helpers'
+import {transformDocComment, _transformDocCommentContent} from './transformDocComment'
 import {TransformContext} from './types'
 
-export function transformFunction(ctx: TransformContext, node: ApiFunction): SanityDocumentValue {
+export function transformFunction(ctx: TransformContext, node: ApiFunction): APIFunctionDocument {
+  if (!ctx.export) {
+    throw new Error('transformFunction: missing `export` document')
+  }
+
   if (!ctx.package) {
     throw new Error('transformFunction: missing `package` document')
   }
@@ -15,43 +21,53 @@ export function transformFunction(ctx: TransformContext, node: ApiFunction): San
     throw new Error('transformFunction: missing `release` document')
   }
 
-  if (!ctx.export) {
-    throw new Error('transformFunction: missing `export` document')
-  }
-
   const docComment = node.tsdocComment
-  const name = sanitizeName(node.name)
+  const name = _sanitizeName(node.name)
   const isReactComponentType = _functionIsReactComponentType(node)
   const propsType = isReactComponentType ? _functionPropsType(ctx, node) : undefined
 
   return {
     _type: 'api.function',
-    _id: createId(ctx, node.canonicalReference.toString()),
-    package: {_type: 'reference', _ref: ctx.package._id, _weak: true},
-    release: {_type: 'reference', _ref: ctx.release._id, _weak: true},
-    name,
-    slug: {_type: 'slug', current: slugify(name)},
+    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
     comment: docComment ? transformDocComment(docComment) : undefined,
+    export: {_type: 'reference', _ref: ctx.export._id},
+    isReactComponentType,
+    name,
+    package: {_type: 'reference', _ref: ctx.package._id},
     parameters: node.parameters.map((p) => transformFunctionParameter(ctx, node, p)),
-    returnType: transformTokens(
+    propsType,
+    release: {_type: 'reference', _ref: ctx.release._id},
+    releaseTag: RELEASE_TAGS[node.releaseTag],
+    slug: {_type: 'slug', current: _slugify(name)},
+    returnType: _transformTokens(
       ctx,
       node.excerptTokens.slice(
         node.returnTypeExcerpt.tokenRange.startIndex,
         node.returnTypeExcerpt.tokenRange.endIndex
       )
     ),
-    releaseTag: RELEASE_TAGS[node.releaseTag],
-    isReactComponentType,
-    propsType,
+    typeParameters: node.typeParameters.map((p) => _transformTypeParameter(ctx, node, p)),
   }
 }
 
-function transformFunctionParameter(ctx: TransformContext, node: ApiFunction, param: Parameter) {
+function transformFunctionParameter(
+  ctx: TransformContext,
+  node: ApiFunction,
+  param: Parameter
+): SanityArrayObjectItem<SerializedAPIParameter> {
+  const tsDocComment = param.tsdocParamBlock?.content
+
   return {
-    _type: 'api.functionParameter',
+    _type: 'api.parameter',
     _key: hash(param.name),
+    comment: tsDocComment
+      ? {
+          _type: 'tsdoc.docComment',
+          summary: _transformDocCommentContent(tsDocComment),
+        }
+      : undefined,
     name: param.name,
-    type: transformTokens(
+    type: _transformTokens(
       ctx,
       node.excerptTokens.slice(
         param.parameterTypeExcerpt.tokenRange.startIndex,
@@ -89,7 +105,7 @@ function _functionPropsType(ctx: TransformContext, node: ApiFunction) {
   const propsParam = node.parameters[0] && node.parameters[0].name === 'props' && node.parameters[0]
 
   if (propsParam) {
-    const propsTokens = transformTokens(
+    const propsTokens = _transformTokens(
       ctx,
       node.excerptTokens.slice(
         propsParam.parameterTypeExcerpt.tokenRange.startIndex,
@@ -97,8 +113,8 @@ function _functionPropsType(ctx: TransformContext, node: ApiFunction) {
       )
     )
 
-    if (propsTokens.length && propsTokens[0]._type === 'api.reference') {
-      return propsTokens[0].reference
+    if (propsTokens.length) {
+      return propsTokens[0].member
     }
   }
 
