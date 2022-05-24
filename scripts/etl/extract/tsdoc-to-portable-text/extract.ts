@@ -19,11 +19,14 @@ export interface PackageResult {
   version: string
 }
 
-export function extractFromTsdoc(options: {quiet: boolean}): Promise<PackageResult[]> {
-  const {quiet} = options
+export function extractFromTsdoc(options: {
+  quiet: boolean
+  workspace: string[]
+}): Promise<PackageResult[]> {
+  const {quiet, workspace} = options
 
   return Promise.all(
-    config.workspace.map((nameStr) => {
+    workspace.map((nameStr) => {
       const [scope, name] = _parsePackageName(nameStr)
 
       return _extractPackage({scope, name, quiet})
@@ -59,7 +62,7 @@ async function _extractPackage(options: {
 
   const results = await extract(packagePath, {
     reporting: config.reporting,
-    tsconfigPath: 'tsconfig.extract.json',
+    // tsconfigPath: 'tsconfig.lib.json',
   })
 
   const messages = results.reduce<ExtractorMessage[]>((acc, x) => acc.concat(x.messages), [])

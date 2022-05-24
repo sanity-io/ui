@@ -1,3 +1,4 @@
+import path from 'path'
 import {ExtractorLogLevel, IExtractorMessagesConfig} from '@microsoft/api-extractor'
 
 function getEnv(key: string) {
@@ -111,6 +112,10 @@ const reporting: IExtractorMessagesConfig = {
 }
 
 export const config = {
+  fs: {
+    etcPath: path.resolve(__dirname, '../../etc/api'),
+  },
+
   reporting,
 
   sanity: {
@@ -119,5 +124,12 @@ export const config = {
     token: process.env.SANITY_API_TOKEN,
   },
 
-  workspace: ['@sanity/color', '@sanity/icons', '@sanity/logos', '@sanity/ui'],
+  workspace: [
+    '@sanity/color',
+    '@sanity/icons',
+    '@sanity/logos',
+    '@sanity/tsdoc-to-portable-text',
+    '@sanity/ui',
+    // '@sanity/ui-workshop',
+  ],
 }

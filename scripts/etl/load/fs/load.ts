@@ -4,8 +4,7 @@ import {SanityDocument} from '@sanity/client'
 import chalk from 'chalk'
 import mkdirp from 'mkdirp'
 import {_encodePackageName} from '../../_helpers'
-
-const etcPath = path.resolve(__dirname, '../../../../etc')
+import {config} from '../../config'
 
 export async function loadToFs(options: {
   cwd: string
@@ -17,13 +16,13 @@ export async function loadToFs(options: {
   const {cwd, scope, name, docs, version} = options
   const fullName = _encodePackageName(scope, name)
 
-  const packagePath = path.resolve(etcPath, fullName)
+  const packagePath = path.resolve(config.fs.etcPath, fullName)
 
   await mkdirp(packagePath)
 
   const filePath = path.resolve(packagePath, `${version}.json`)
 
-  await writeFile(filePath, JSON.stringify(docs, null, 2))
+  await writeFile(filePath, JSON.stringify(docs, null, 2) + '\n')
 
   // prettier-ignore
   console.log(

@@ -5,8 +5,9 @@ import {config} from '../../config'
 
 export async function extractPackagesFromSanity(options: {
   quiet: boolean
+  workspace: string[]
 }): Promise<SanityDocument[]> {
-  const {quiet} = options
+  const {quiet, workspace} = options
 
   if (!quiet) {
     console.log(`${chalk.blue('info')} Extract packages from Sanity ...`)
@@ -28,7 +29,7 @@ export async function extractPackagesFromSanity(options: {
     .filter((d) => {
       const nameStr = [d.scope, d.name].filter(Boolean).join('/')
 
-      return config.workspace.includes(nameStr)
+      return workspace.includes(nameStr)
     })
     .map((d) => _extractPackage({data: d, scope: d.scope, name: d.name}))
 }
