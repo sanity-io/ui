@@ -21,7 +21,7 @@ export const PlayIcon = forwardRef(function PlayIcon(
       {...props}
     >
       <path
-        d="M9.5 18.5V6.5L18.5 12.5L9.5 18.5Z"
+        d="M7.5 18.5V6.5L17.5 12.5L7.5 18.5Z"
         fill="currentColor"
         stroke="currentColor"
         strokeWidth={1.2}
