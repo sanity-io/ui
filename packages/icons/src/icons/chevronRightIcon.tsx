@@ -20,7 +20,7 @@ export const ChevronRightIcon = forwardRef(function ChevronRightIcon(
       ref={ref}
       {...props}
     >
-      <path d="M10 8L15.5 12.5L10 17" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M10.5 8L15 12.5L10.5 17" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

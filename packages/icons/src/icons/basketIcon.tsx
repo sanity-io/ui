@@ -21,7 +21,7 @@ export const BasketIcon = forwardRef(function BasketIcon(
       {...props}
     >
       <path
-        d="M8.5 10.5H5L6.5 19.5H18.5L20 10.5H16.5M8.5 10.5L10.5 4.5H14.5L16.5 10.5M8.5 10.5H16.5"
+        d="M8.5 10.5H5L6.5 19.5H18.5L20 10.5H16.5M8.5 10.5L10.2721 5.18377C10.4082 4.77543 10.7903 4.5 11.2208 4.5H13.7792C14.2097 4.5 14.5918 4.77543 14.7279 5.18377L16.5 10.5M8.5 10.5H16.5"
         stroke="currentColor"
         strokeWidth={1.2}
       />

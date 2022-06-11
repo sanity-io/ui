@@ -108,6 +108,8 @@ import {LemonIcon} from './lemonIcon'
 import {LinkIcon} from './linkIcon'
 import {LinkRemovedIcon} from './linkRemovedIcon'
 import {LockIcon} from './lockIcon'
+import {LogoJsIcon} from './logoJsIcon'
+import {LogoTsIcon} from './logoTsIcon'
 import {MasterDetailIcon} from './masterDetailIcon'
 import {MenuIcon} from './menuIcon'
 import {MobileDeviceIcon} from './mobileDeviceIcon'
@@ -282,6 +284,8 @@ export type IconSymbol =
   | 'link'
   | 'link-removed'
   | 'lock'
+  | 'logo-js'
+  | 'logo-ts'
   | 'master-detail'
   | 'menu'
   | 'mobile-device'
@@ -453,6 +457,8 @@ export {
   LinkIcon,
   LinkRemovedIcon,
   LockIcon,
+  LogoJsIcon,
+  LogoTsIcon,
   MasterDetailIcon,
   MenuIcon,
   MobileDeviceIcon,
@@ -628,6 +634,8 @@ export interface IconMap {
   link: IconComponent
   'link-removed': IconComponent
   lock: IconComponent
+  'logo-js': IconComponent
+  'logo-ts': IconComponent
   'master-detail': IconComponent
   menu: IconComponent
   'mobile-device': IconComponent
@@ -803,6 +811,8 @@ export const icons: IconMap = {
   link: LinkIcon,
   'link-removed': LinkRemovedIcon,
   lock: LockIcon,
+  'logo-js': LogoJsIcon,
+  'logo-ts': LogoTsIcon,
   'master-detail': MasterDetailIcon,
   menu: MenuIcon,
   'mobile-device': MobileDeviceIcon,
