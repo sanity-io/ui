@@ -1,5 +1,3 @@
-export * from './common'
-
 export * from './avatar'
 export * from './badge'
 export * from './box'
@@ -9,5 +7,7 @@ export * from './dialog'
 export * from './flex'
 export * from './grid'
 export * from './gridItem'
+export * from './placement'
 export * from './popover'
 export * from './selectable'
+export * from './text'
