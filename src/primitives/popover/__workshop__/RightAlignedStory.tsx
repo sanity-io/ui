@@ -40,6 +40,7 @@ export default function RightAlignedStory() {
             constrainSize={constrainSize}
             content={content}
             open={open}
+            overflow="auto"
             padding={3}
             portal
             placement="bottom"
