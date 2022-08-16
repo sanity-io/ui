@@ -39,7 +39,9 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
   }, [open])
 
   useEffect(() => {
-    buttonRef.current?.focus()
+    setTimeout(() => {
+      buttonRef.current?.focus()
+    }, 0)
   }, [])
 
   const handleOpen = useCallback(() => setOpen(true), [])
@@ -58,6 +60,7 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       fallbackPlacements={fallbackPlacements}
       content={<RecursiveExample onClose={handleClose} />}
       open={open}
+      padding={1}
       placement={fallbackPlacements[3]}
       portal
       tone={tones[seed]}

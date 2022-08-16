@@ -5,7 +5,7 @@ export default function MarginsStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Popover
-        __unstable_margins={[-5, -5, -5, -5]}
+        __unstable_margins={[-8, 8, -8, 8]}
         arrow={false}
         content={
           <Box padding={2}>

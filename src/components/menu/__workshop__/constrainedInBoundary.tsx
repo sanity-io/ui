@@ -8,11 +8,19 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  PopoverProps,
   SelectableTone,
   Text,
 } from '@sanity/ui'
-import React, {useMemo, useState} from 'react'
+import React, {useState} from 'react'
+import {MenuButtonProps} from '../menuButton'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  constrainSize: true,
+  placement: 'bottom',
+  portal: true,
+  // preventOverflow: true,
+  // width: 1,
+}
 
 const items: {tone: SelectableTone; message: string}[] = [
   {
@@ -88,17 +96,6 @@ const items: {tone: SelectableTone; message: string}[] = [
 export default function ConstrainedInBoundaryStory() {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
-  const popoverProps: PopoverProps = useMemo(
-    () => ({
-      constrainSize: true,
-      placement: 'bottom',
-      portal: true,
-      preventOverflow: true,
-      width: 1,
-    }),
-    []
-  )
-
   return (
     <Box height="fill" padding={[4, 5, 6]} sizing="border">
       <Card height="fill" shadow={1}>
@@ -129,7 +126,7 @@ export default function ConstrainedInBoundaryStory() {
                         })}
                       </Menu>
                     }
-                    popover={popoverProps}
+                    popover={POPOVER_PROPS}
                   />
                 </BoundaryElementProvider>
               </Box>

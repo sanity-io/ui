@@ -1,7 +1,11 @@
 import {Box, Button, Card, Flex, Text, Tooltip} from '@sanity/ui'
+import {useSelect} from '@sanity/ui-workshop'
 import React from 'react'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
 
 export default function PropsStory() {
+  const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
+
   return (
     <Card height="fill">
       <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
@@ -11,7 +15,7 @@ export default function PropsStory() {
               <Text size={1}>Tooltip content</Text>
             </Box>
           }
-          placement="top"
+          placement={placement}
           portal
         >
           <Button mode="bleed" text="Hover me" />

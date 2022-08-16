@@ -30,15 +30,33 @@ const typingPerfTest: PerfTestProps<HTMLInputElement> = {
 export default function PlainStory() {
   const {ref, Wrapper} = usePerfTest(typingPerfTest)
 
+  return (
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <Container width={0}>
+        <Stack space={3}>
+          <Text as="label" htmlFor="text-input-example" size={1} weight="semibold">
+            TextInput
+          </Text>
+          <Wrapper>
+            <TextInputTest inputRef={ref} />
+          </Wrapper>
+        </Stack>
+      </Container>
+    </Flex>
+  )
+}
+
+function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
+  const {inputRef: ref} = props
   const border = useBoolean('Border', true, 'Props')
   const customValidity = useText('Custom validity', '', 'Props') || undefined
   const disabled = useBoolean('Disabled', false, 'Props')
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2, 'Props')
-  const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS, 'add-circle', 'Props') as IconSymbol
+  const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS, 'search', 'Props') as IconSymbol
   const iconRight = useSelect(
     'Icon (right)',
     WORKSHOP_ICON_SYMBOL_OPTIONS,
-    'add-circle',
+    'close',
     'Props'
   ) as IconSymbol
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
@@ -56,35 +74,24 @@ export default function PlainStory() {
   )
 
   return (
-    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <Container width={0}>
-        <Stack space={3}>
-          <Text as="label" htmlFor="text-input-example" size={1} weight="semibold">
-            TextInput
-          </Text>
-          <Wrapper>
-            <TextInput
-              border={border}
-              customValidity={customValidity}
-              disabled={disabled}
-              fontSize={fontSize}
-              icon={icon && icons[icon]}
-              iconRight={iconRight && icons[iconRight]}
-              id="text-input-example"
-              name="email"
-              onChange={handleChange}
-              padding={padding}
-              placeholder={placeholder}
-              radius={radius}
-              readOnly={readOnly}
-              ref={ref}
-              space={space}
-              value={value}
-              weight={weight}
-            />
-          </Wrapper>
-        </Stack>
-      </Container>
-    </Flex>
+    <TextInput
+      border={border}
+      customValidity={customValidity}
+      disabled={disabled}
+      fontSize={fontSize}
+      icon={icon && icons[icon]}
+      iconRight={iconRight && icons[iconRight]}
+      id="text-input-example"
+      name="email"
+      onChange={handleChange}
+      padding={padding}
+      placeholder={placeholder}
+      radius={radius}
+      readOnly={readOnly}
+      ref={ref}
+      space={space}
+      value={value}
+      weight={weight}
+    />
   )
 }

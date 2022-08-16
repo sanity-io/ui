@@ -1,7 +1,8 @@
-import {Container, Flex, Stack, Text, TextArea} from '@sanity/ui'
+import {Card, Container, Flex, Stack, Text, TextArea} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import React from 'react'
 import {
+  WORKSHOP_CARD_TONE_OPTIONS,
   WORKSHOP_FONT_WEIGHT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
@@ -9,6 +10,8 @@ import {
 } from '../../../__workshop__/constants'
 
 export default function PlainStory() {
+  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS)
+
   const border = useBoolean('Border', true, 'Props')
   const customValidity = useText('Custom validity', '', 'Props') || undefined
   const disabled = useBoolean('Disabled', false, 'Props')
@@ -22,23 +25,25 @@ export default function PlainStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={0}>
-        <Stack space={3}>
-          <Text as="label" htmlFor="text-area-example" size={1} weight="semibold">
-            TextArea
-          </Text>
-          <TextArea
-            border={border}
-            customValidity={customValidity}
-            disabled={disabled}
-            fontSize={fontSize}
-            id="text-area-example"
-            padding={padding}
-            placeholder={placeholder}
-            radius={radius}
-            readOnly={readOnly}
-            weight={weight}
-          />
-        </Stack>
+        <Card padding={3} tone={tone}>
+          <Stack space={3}>
+            <Text as="label" htmlFor="text-area-example" size={1} weight="semibold">
+              TextArea
+            </Text>
+            <TextArea
+              border={border}
+              customValidity={customValidity}
+              disabled={disabled}
+              fontSize={fontSize}
+              id="text-area-example"
+              padding={padding}
+              placeholder={placeholder}
+              radius={radius}
+              readOnly={readOnly}
+              weight={weight}
+            />
+          </Stack>
+        </Card>
       </Container>
     </Flex>
   )
