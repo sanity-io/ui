@@ -62,17 +62,17 @@ export const MenuButton = forwardRef(function MenuButton(
 ) {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
-    boundaryElement,
+    boundaryElement: deprecated_boundaryElement,
     button: buttonProp,
     id,
     menu: menuProp,
     onClose,
-    placement,
-    popoverScheme,
-    portal,
+    placement: deprecated_placement,
+    popoverScheme: deprecated_popoverScheme,
+    portal: deprecated_portal = true,
     popover,
-    popoverRadius,
-    preventOverflow,
+    popoverRadius: deprecated_popoverRadius,
+    preventOverflow: deprecated_preventOverflow,
   } = props
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
@@ -238,15 +238,23 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const popoverProps: PopoverProps = useMemo(() => {
     return {
-      boundaryElement,
-      placement,
-      portal,
-      radius: popoverRadius,
-      overflow: preventOverflow,
-      scheme: popoverScheme,
+      boundaryElement: deprecated_boundaryElement,
+      placement: deprecated_placement,
+      portal: deprecated_portal,
+      radius: deprecated_popoverRadius,
+      preventOverflow: deprecated_preventOverflow,
+      scheme: deprecated_popoverScheme,
       ...(popover || {}),
     }
-  }, [boundaryElement, placement, popover, popoverRadius, portal, preventOverflow, popoverScheme])
+  }, [
+    deprecated_boundaryElement,
+    deprecated_preventOverflow,
+    deprecated_placement,
+    popover,
+    deprecated_popoverRadius,
+    deprecated_portal,
+    deprecated_popoverScheme,
+  ])
 
   return (
     <Popover {...popoverProps} content={menu} data-ui="MenuButton__popover" open={open}>
