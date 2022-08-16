@@ -2,6 +2,7 @@ import React, {forwardRef, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {_isScrollable} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
+import {_elementSizeObserver} from '../../observers'
 import {StackProps} from '../../primitives'
 import {useTheme} from '../../theme'
 
@@ -86,18 +87,18 @@ export const VirtualList = forwardRef(function VirtualList(
 
       scrollEl.addEventListener('scroll', handleScroll, {passive: true})
 
-      const ro = new ResizeObserver((entries) => {
-        setScrollHeight(entries[0].contentRect.height)
-      })
-
-      ro.observe(scrollEl)
+      const disposeElementSizeListener = _elementSizeObserver.subscribe(
+        scrollEl,
+        (scrollElementSize) => {
+          setScrollHeight(scrollElementSize.content.height)
+        }
+      )
 
       handleScroll()
 
       return () => {
         scrollEl.removeEventListener('scroll', handleScroll)
-        ro.unobserve(scrollEl)
-        ro.disconnect()
+        disposeElementSizeListener()
       }
     }
 

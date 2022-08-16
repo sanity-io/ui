@@ -1,5 +1,6 @@
-import React, {forwardRef} from 'react'
+import React, {forwardRef, useMemo} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'
 import {childrenToElementArray} from '../helpers'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
@@ -22,13 +23,18 @@ export const Inline = forwardRef(function Inline(
   ref
 ) {
   const {as, children: childrenProp, space, ...restProps} = props
-  const children = childrenToElementArray(childrenProp).filter(Boolean)
+
+  const children = useMemo(
+    () =>
+      childrenToElementArray(childrenProp)
+        .filter(Boolean)
+        .map((child, idx) => <div key={idx}>{child}</div>),
+    [childrenProp]
+  )
 
   return (
-    <Root data-ui="Inline" {...restProps} $space={space} forwardedAs={as} ref={ref}>
-      {children.map((child, idx) => (
-        <div key={idx}>{child}</div>
-      ))}
+    <Root data-ui="Inline" {...restProps} $space={useArrayProp(space)} forwardedAs={as} ref={ref}>
+      {children}
     </Root>
   )
 })

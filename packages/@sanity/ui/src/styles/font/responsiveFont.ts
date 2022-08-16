@@ -1,6 +1,6 @@
 import {CSSObject} from 'styled-components'
 import {ThemeFontSize, ThemeFontKey} from '../../theme'
-import {getResponsiveProp, rem, responsive} from '../helpers'
+import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFontStyleProps} from './types'
 
@@ -48,9 +48,7 @@ export function responsiveFont(
     },
   }
 
-  const resp = responsive(media, getResponsiveProp($size), (sizeIndex) =>
-    fontSize(sizes[sizeIndex] || defaultSize, horizontalOffset)
-  )
+  const resp = _responsive(media, $size, (sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))
 
   return [base, ...resp]
 }

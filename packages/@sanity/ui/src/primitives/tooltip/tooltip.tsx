@@ -1,7 +1,7 @@
 import React, {cloneElement, forwardRef, useCallback, useEffect, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
-import {useForwardedRef} from '../../hooks'
+import {useArrayProp, useForwardedRef} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
@@ -42,13 +42,14 @@ export const Tooltip = forwardRef(function Tooltip(
     children,
     content,
     disabled,
-    fallbackPlacements,
+    fallbackPlacements: fallbackPlacementsProp,
     placement = 'bottom',
     portal,
     scheme,
     zOffset = theme.sanity.layer?.tooltip.zOffset,
     ...restProps
   } = props
+  const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
   const forwardedRef = useForwardedRef(ref)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)

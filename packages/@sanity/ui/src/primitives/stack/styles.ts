@@ -1,8 +1,8 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps} from '../../styles'
 
 export interface ResponsiveStackSpaceStyleProps {
-  $space?: number | number[]
+  $space: number[]
 }
 
 const BASE_STYLE: CSSObject = {
@@ -26,7 +26,7 @@ export function responsiveStackSpaceStyle(
   const {theme} = props
   const {media, space} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$space), (spaceIndex) => ({
+  return _responsive(media, props.$space, (spaceIndex) => ({
     gridGap: rem(space[spaceIndex]),
   }))
 }

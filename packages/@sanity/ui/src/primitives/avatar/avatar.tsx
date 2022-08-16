@@ -1,8 +1,8 @@
 import {useId} from '@reach/auto-id'
-import React, {forwardRef, useCallback, useEffect, useState} from 'react'
+import React, {forwardRef, useCallback, useEffect, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import styled from 'styled-components'
-import {useResponsiveProp} from '../../hooks'
+import {useArrayProp} from '../../hooks'
 import {ThemeColorSpotKey, useTheme} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
 import {Text} from '../text'
@@ -58,11 +58,11 @@ export const Avatar = forwardRef(function Avatar(
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
     status = 'online',
-    size: sizeProp,
+    size: sizeProp = 0,
     ...restProps
   } = props
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
-  const size: AvatarSize[] = useResponsiveProp(sizeProp, [0])
+  const size = useArrayProp(sizeProp)
   const theme = useTheme()
   const color = theme.sanity.color.spot[colorKey] || theme.sanity.color.spot.gray
 
@@ -100,6 +100,8 @@ export const Avatar = forwardRef(function Avatar(
       onImageLoadError(new Error('Avatar: the image failed to load'))
     }
   }, [onImageLoadError])
+
+  const initialsSize = useMemo(() => size.map((s) => (s === 0 ? 0 : s + 1)), [size])
 
   return (
     <Root
@@ -154,7 +156,7 @@ export const Avatar = forwardRef(function Avatar(
       {(imageFailed || !src) && initials && (
         <>
           <Initials>
-            <Text as="span" size={size.map((s) => (s === 0 ? 0 : s + 1))}>
+            <Text as="span" size={initialsSize}>
               <strong>{initials}</strong>
             </Text>
           </Initials>

@@ -127,5 +127,5 @@ export interface ResponsiveShadowProps {
  * @public
  */
 export interface ResponsiveWidthProps {
-  width?: number | number[] | 'auto'
+  width?: number | 'auto' | (number | 'auto')[]
 }

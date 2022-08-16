@@ -1,5 +1,5 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp, rem, responsive} from '../helpers'
+import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
 
@@ -28,7 +28,7 @@ export function responsiveFlexAlignStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$align), (align) => {
+  return _responsive(media, props.$align, (align) => {
     return {alignItems: align}
   })
 }
@@ -37,7 +37,7 @@ function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
   const {theme} = props
   const {media, space} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$gap), (gap) => ({
+  return _responsive(media, props.$gap, (gap) => ({
     gap: gap ? rem(space[gap]) : undefined,
   }))
 }
@@ -46,7 +46,7 @@ export function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeP
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$wrap), (wrap) => {
+  return _responsive(media, props.$wrap, (wrap) => {
     return {flexWrap: wrap}
   })
 }
@@ -57,7 +57,7 @@ export function responsiveFlexJustifyStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$justify), (justify) => {
+  return _responsive(media, props.$justify, (justify) => {
     return {justifyContent: justify}
   })
 }
@@ -68,7 +68,7 @@ export function responsiveFlexDirectionStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$direction), (direction) => {
+  return _responsive(media, props.$direction, (direction) => {
     return {flexDirection: direction}
   })
 }

@@ -1,7 +1,7 @@
 import {SelectIcon} from '@sanity/icons'
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {useForwardedRef, useCustomValidity} from '../../hooks'
+import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
 import {Box} from '../box'
 import {Text} from '../text'
 import {selectStyle} from './styles'
@@ -20,10 +20,10 @@ export interface SelectProps {
 const Root = styled.div(selectStyle.root)
 
 const Input = styled.select<{
-  $fontSize?: number | number[]
-  $padding?: number | number[]
-  $radius?: number | number[]
-  $space?: number | number[]
+  $fontSize: number[]
+  $padding: number[]
+  $radius: number[]
+  $space: number[]
 }>(selectStyle.input)
 
 const IconBox = styled(Box)(selectStyle.iconBox)
@@ -57,10 +57,10 @@ export const Select = forwardRef(function Select(
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-ui="Select"
         {...restProps}
-        $fontSize={fontSize}
-        $padding={padding}
-        $radius={radius}
-        $space={space}
+        $fontSize={useArrayProp(fontSize)}
+        $padding={useArrayProp(padding)}
+        $radius={useArrayProp(radius)}
+        $space={useArrayProp(space)}
         disabled={disabled || readOnly}
         ref={ref}
       >

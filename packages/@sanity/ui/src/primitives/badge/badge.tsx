@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {BadgeMode, BadgeTone} from '../../types'
 import {Box, BoxProps} from '../box'
@@ -46,8 +47,8 @@ export const Badge = forwardRef(function Badge(
       {...restProps}
       $mode={mode}
       $tone={tone}
-      $radius={radius}
-      padding={padding}
+      $radius={useArrayProp(radius)}
+      padding={useArrayProp(padding)}
       ref={ref}
     >
       <Label size={fontSize}>{children}</Label>

@@ -2,7 +2,7 @@ import {CloseIcon} from '@sanity/icons'
 import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
-import {useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
+import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
@@ -138,11 +138,14 @@ const DialogCard = forwardRef(function DialogCard(
     id,
     onClickOutside,
     onClose,
-    radius,
+    radius: radiusProp,
     scheme,
-    shadow,
-    width,
+    shadow: shadowProp,
+    width: widthProp,
   } = props
+  const radius = useArrayProp(radiusProp)
+  const shadow = useArrayProp(shadowProp)
+  const width = useArrayProp(widthProp)
   const forwardedRef = useForwardedRef(ref)
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const localContentRef = useRef<HTMLDivElement | null>(null)
@@ -255,7 +258,7 @@ export const Dialog = forwardRef(function Dialog(
   const {
     __unstable_autoFocus: autoFocus = true,
     __unstable_hideCloseButton: hideCloseButton = false,
-    cardRadius = 3,
+    cardRadius: cardRadiusProp = 3,
     cardShadow = 4,
     children,
     contentRef,
@@ -264,14 +267,19 @@ export const Dialog = forwardRef(function Dialog(
     id,
     onClickOutside,
     onClose,
-    padding = 4,
+    padding: paddingProp = 4,
     portal,
-    position = dialog.position || 'fixed',
+    position: positionProp = dialog.position || 'fixed',
     scheme,
-    width = 0,
-    zOffset = dialog.zOffset || theme.sanity.layer?.dialog.zOffset,
+    width: widthProp = 0,
+    zOffset: zOffsetProp = dialog.zOffset || theme.sanity.layer?.dialog.zOffset,
     ...restProps
   } = props
+  const cardRadius = useArrayProp(cardRadiusProp)
+  const padding = useArrayProp(paddingProp)
+  const position = useArrayProp(positionProp)
+  const width = useArrayProp(widthProp)
+  const zOffset = useArrayProp(zOffsetProp)
   const preDivRef = useRef<HTMLDivElement | null>(null)
   const postDivRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)

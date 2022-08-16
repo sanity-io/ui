@@ -1,5 +1,5 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp, getResponsiveSpace} from '../helpers'
+import {_getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveMarginStyleProps} from './types'
 
@@ -9,12 +9,12 @@ export function responsiveMarginStyle(
   const {theme} = props
 
   return [
-    getResponsiveSpace(theme, ['margin'], getResponsiveProp(props.$margin)),
-    getResponsiveSpace(theme, ['marginLeft', 'marginRight'], getResponsiveProp(props.$marginX)),
-    getResponsiveSpace(theme, ['marginTop', 'marginBottom'], getResponsiveProp(props.$marginY)),
-    getResponsiveSpace(theme, ['marginTop'], getResponsiveProp(props.$marginTop)),
-    getResponsiveSpace(theme, ['marginRight'], getResponsiveProp(props.$marginRight)),
-    getResponsiveSpace(theme, ['marginBottom'], getResponsiveProp(props.$marginBottom)),
-    getResponsiveSpace(theme, ['marginLeft'], getResponsiveProp(props.$marginLeft)),
+    _getResponsiveSpace(theme, ['margin'], props.$margin),
+    _getResponsiveSpace(theme, ['marginLeft', 'marginRight'], props.$marginX),
+    _getResponsiveSpace(theme, ['marginTop', 'marginBottom'], props.$marginY),
+    _getResponsiveSpace(theme, ['marginTop'], props.$marginTop),
+    _getResponsiveSpace(theme, ['marginRight'], props.$marginRight),
+    _getResponsiveSpace(theme, ['marginBottom'], props.$marginBottom),
+    _getResponsiveSpace(theme, ['marginLeft'], props.$marginLeft),
   ].filter(Boolean) as CSSObject[][]
 }

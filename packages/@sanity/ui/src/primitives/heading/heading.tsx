@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {
   ResponsiveFontStyleProps,
   responsiveHeadingFont,
@@ -69,9 +70,9 @@ export const Heading = forwardRef(function Heading(
       data-ui="Heading"
       {...restProps}
       $accent={accent}
-      $align={align}
+      $align={useArrayProp(align)}
       $muted={muted}
-      $size={size}
+      $size={useArrayProp(size)}
       $weight={weight}
       ref={ref}
     >

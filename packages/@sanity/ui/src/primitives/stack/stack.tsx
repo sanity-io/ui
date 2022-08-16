@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'
 import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
@@ -27,7 +28,7 @@ export const Stack = forwardRef(function Stack(
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
-      $space={space}
+      $space={useArrayProp(space)}
       forwardedAs={as}
       ref={ref}
     />

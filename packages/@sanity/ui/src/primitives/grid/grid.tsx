@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
 import {Box, BoxProps} from '../box'
 import {ResponsiveGridProps} from '../types'
@@ -26,14 +27,14 @@ export const Grid = forwardRef(function Grid(
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Grid"
       {...restProps}
-      $autoRows={autoRows}
-      $autoCols={autoCols}
-      $autoFlow={autoFlow}
-      $columns={columns}
-      $gap={gap}
-      $gapX={gapX}
-      $gapY={gapY}
-      $rows={rows}
+      $autoRows={useArrayProp(autoRows)}
+      $autoCols={useArrayProp(autoCols)}
+      $autoFlow={useArrayProp(autoFlow)}
+      $columns={useArrayProp(columns)}
+      $gap={useArrayProp(gap)}
+      $gapX={useArrayProp(gapX)}
+      $gapY={useArrayProp(gapY)}
+      $rows={useArrayProp(rows)}
       forwardedAs={as}
       ref={ref}
     >

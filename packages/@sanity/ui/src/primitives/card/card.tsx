@@ -1,6 +1,7 @@
 import React, {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {
   responsiveBorderStyle,
   ResponsiveBorderStyleProps,
@@ -83,15 +84,15 @@ export const Card = forwardRef(function Card(
         data-ui="Card"
         data-tone={tone}
         {...restProps}
-        $border={border}
-        $borderTop={borderTop}
-        $borderRight={borderRight}
-        $borderBottom={borderBottom}
-        $borderLeft={borderLeft}
+        $border={useArrayProp(border)}
+        $borderTop={useArrayProp(borderTop)}
+        $borderRight={useArrayProp(borderRight)}
+        $borderBottom={useArrayProp(borderBottom)}
+        $borderLeft={useArrayProp(borderLeft)}
         $checkered={checkered}
         $focusRing={focusRing}
-        $radius={radius}
-        $shadow={shadow}
+        $radius={useArrayProp(radius)}
+        $shadow={useArrayProp(shadow)}
         $tone={tone}
         data-checkered={checkered ? '' : undefined}
         data-pressed={pressed ? '' : undefined}

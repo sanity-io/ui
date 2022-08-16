@@ -3,7 +3,7 @@ import React, {createElement, forwardRef, isValidElement, useCallback, useMemo} 
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useForwardedRef, useCustomValidity, useResponsiveProp} from '../../hooks'
+import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
@@ -136,7 +136,7 @@ export const TextInput = forwardRef(function TextInput(
     border = true,
     clearButton,
     disabled = false,
-    fontSize = 2,
+    fontSize: fontSizeProp = 2,
     icon,
     iconRight,
     onClear,
@@ -144,7 +144,7 @@ export const TextInput = forwardRef(function TextInput(
     prefix,
     radius: radiusProp = 1,
     readOnly,
-    space = 3,
+    space: spaceProp = 3,
     suffix,
     customValidity,
     type = 'text',
@@ -152,8 +152,11 @@ export const TextInput = forwardRef(function TextInput(
   } = props
 
   const ref = useForwardedRef(forwardedRef)
-  const padding = useResponsiveProp(paddingProp)
-  const radius = useResponsiveProp(radiusProp)
+
+  const fontSize = useArrayProp(fontSizeProp)
+  const padding = useArrayProp(paddingProp)
+  const radius = useArrayProp(radiusProp)
+  const space = useArrayProp(spaceProp)
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)
@@ -309,11 +312,11 @@ export const TextInput = forwardRef(function TextInput(
         <Input
           data-as="input"
           {...restProps}
+          $fontSize={fontSize}
           $iconLeft={$hasIcon}
           $iconRight={$hasIconRight || $hasClearButton}
           $padding={padding}
           $space={space}
-          $fontSize={fontSize}
           disabled={disabled}
           readOnly={readOnly}
           ref={ref}

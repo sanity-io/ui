@@ -4,18 +4,18 @@ import {FlexAlign, FlexDirection, FlexJustify, FlexValue, FlexWrap} from '../../
  * @internal
  */
 export interface ResponsiveFlexStyleProps {
-  $align?: FlexAlign | FlexAlign[]
-  $direction?: FlexDirection | FlexDirection[]
-  $gap?: number | number[]
-  $justify?: FlexJustify | FlexJustify[]
-  $wrap?: FlexWrap | FlexWrap[]
+  $align: FlexAlign[]
+  $direction: FlexDirection[]
+  $gap: number[]
+  $justify: FlexJustify[]
+  $wrap: FlexWrap[]
 }
 
 /**
  * @internal
  */
 export interface ResponsiveFlexItemStyleProps {
-  $flex?: FlexValue | FlexValue[]
+  $flex: FlexValue[]
 }
 
 /**

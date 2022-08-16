@@ -1,5 +1,5 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp, responsive} from '../helpers'
+import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveTextAlignStyleProps} from './types'
 
@@ -12,7 +12,7 @@ export function responsiveTextAlignStyle(
 ): CSSObject[] {
   const {theme} = props
 
-  return responsive(theme.sanity.media, getResponsiveProp(props.$align), (textAlign) => {
+  return _responsive(theme.sanity.media, props.$align, (textAlign) => {
     return {textAlign}
   })
 }

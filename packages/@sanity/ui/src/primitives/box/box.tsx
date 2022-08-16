@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {
   boxStyle,
   flexItemStyle,
@@ -90,31 +91,31 @@ export const Box = forwardRef(function Box(
       data-as={typeof asProp === 'string' ? asProp : undefined}
       data-ui="Box"
       {...restProps}
-      $column={column}
-      $columnStart={columnStart}
-      $columnEnd={columnEnd}
-      $display={display}
-      $flex={flex}
-      $height={height}
-      $margin={margin}
-      $marginX={marginX}
-      $marginY={marginY}
-      $marginTop={marginTop}
-      $marginRight={marginRight}
-      $marginBottom={marginBottom}
-      $marginLeft={marginLeft}
-      $overflow={overflow}
-      $padding={padding}
-      $paddingX={paddingX}
-      $paddingY={paddingY}
-      $paddingTop={paddingTop}
-      $paddingRight={paddingRight}
-      $paddingBottom={paddingBottom}
-      $paddingLeft={paddingLeft}
-      $row={row}
-      $rowStart={rowStart}
-      $rowEnd={rowEnd}
-      $sizing={sizing}
+      $column={useArrayProp(column)}
+      $columnStart={useArrayProp(columnStart)}
+      $columnEnd={useArrayProp(columnEnd)}
+      $display={useArrayProp(display)}
+      $flex={useArrayProp(flex)}
+      $height={useArrayProp(height)}
+      $margin={useArrayProp(margin)}
+      $marginX={useArrayProp(marginX)}
+      $marginY={useArrayProp(marginY)}
+      $marginTop={useArrayProp(marginTop)}
+      $marginRight={useArrayProp(marginRight)}
+      $marginBottom={useArrayProp(marginBottom)}
+      $marginLeft={useArrayProp(marginLeft)}
+      $overflow={useArrayProp(overflow)}
+      $padding={useArrayProp(padding)}
+      $paddingX={useArrayProp(paddingX)}
+      $paddingY={useArrayProp(paddingY)}
+      $paddingTop={useArrayProp(paddingTop)}
+      $paddingRight={useArrayProp(paddingRight)}
+      $paddingBottom={useArrayProp(paddingBottom)}
+      $paddingLeft={useArrayProp(paddingLeft)}
+      $row={useArrayProp(row)}
+      $rowStart={useArrayProp(rowStart)}
+      $rowEnd={useArrayProp(rowEnd)}
+      $sizing={useArrayProp(sizing)}
       as={asProp}
       ref={ref}
     >

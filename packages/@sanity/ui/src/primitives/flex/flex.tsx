@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {
   flexItemStyle,
   FlexItemStyleProps,
@@ -37,11 +38,11 @@ export const Flex = forwardRef(function Flex(
     <Root
       data-ui="Flex"
       {...restProps}
-      $align={align}
-      $direction={direction}
-      $gap={gap}
-      $justify={justify}
-      $wrap={wrap}
+      $align={useArrayProp(align)}
+      $direction={useArrayProp(direction)}
+      $gap={useArrayProp(gap)}
+      $justify={useArrayProp(justify)}
+      $wrap={useArrayProp(wrap)}
       forwardedAs={as}
       ref={ref}
     />

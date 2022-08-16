@@ -1,8 +1,7 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp} from '..'
 import {EMPTY_RECORD} from '../../constants'
 import {BoxShadow, ThemeShadow} from '../../theme'
-import {rem, responsive} from '../helpers'
+import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveShadowStyleProps} from './types'
 
@@ -25,7 +24,5 @@ export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeP
   const {theme} = props
   const {media, shadows} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$shadow), (shadow) =>
-    shadowStyle(shadows[shadow])
-  )
+  return _responsive(media, props.$shadow, (shadow) => shadowStyle(shadows[shadow]))
 }

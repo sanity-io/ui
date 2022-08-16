@@ -2,5 +2,5 @@
  * @internal
  */
 export interface ResponsiveWidthStyleProps {
-  $width?: number | number[] | 'auto'
+  $width: (number | 'auto')[]
 }

@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
 import {ThemeFontWeightKey} from '../../theme'
 import {TextAlign} from '../../types'
@@ -25,7 +26,7 @@ export interface LabelProps {
 
 const Root = styled.div<{
   $accent?: boolean
-  $align?: TextAlign | TextAlign[]
+  $align: TextAlign[]
   $muted: boolean
   $size: number[]
 }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
@@ -68,9 +69,9 @@ export const Label = forwardRef(function Label(
       data-ui="Label"
       {...restProps}
       $accent={accent}
-      $align={align}
+      $align={useArrayProp(align)}
       $muted={muted}
-      $size={size}
+      $size={useArrayProp(size)}
       $weight={weight}
       ref={ref}
     >

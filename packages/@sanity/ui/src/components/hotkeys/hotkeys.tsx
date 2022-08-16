@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {Inline, KBD} from '../../primitives'
 
 /**
@@ -33,7 +34,8 @@ export const Hotkeys = forwardRef(function Hotkeys(
   props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
   ref: React.Ref<HTMLElement>
 ) {
-  const {fontSize, keys, padding, radius, space = 1, ...restProps} = props
+  const {fontSize, keys, padding, radius, space: spaceProp = 1, ...restProps} = props
+  const space = useArrayProp(spaceProp)
 
   if (!keys || keys.length === 0) {
     return <></>
