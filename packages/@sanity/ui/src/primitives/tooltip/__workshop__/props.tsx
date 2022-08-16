@@ -1,10 +1,11 @@
 import {Box, Button, Card, Flex, Text, Tooltip} from '@sanity/ui'
 import {useSelect, useText} from '@sanity/ui-workshop'
-import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_PLACEMENT_OPTIONS, WORKSHOP_SHADOW_OPTIONS} from '../../../__workshop__/constants'
 
 export default function PropsStory() {
   const content = useText('Content', 'Tooltip content')
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
+  const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 2)
 
   return (
     <Card height="fill">
@@ -17,6 +18,7 @@ export default function PropsStory() {
           }
           placement={placement}
           portal
+          shadow={shadow}
         >
           <Button mode="bleed" text="Hover me" />
         </Tooltip>
