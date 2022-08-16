@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {useForwardedRef, useCustomValidity} from '../../hooks'
+import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
 import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
@@ -74,12 +74,16 @@ export const TextArea = forwardRef(function TextArea(
         <Input
           data-as="textarea"
           {...restProps}
-          $fontSize={fontSize}
-          $padding={padding}
+          $fontSize={useArrayProp(fontSize)}
+          $padding={useArrayProp(padding)}
+          $space={useArrayProp(0)}
           disabled={disabled}
           ref={ref}
         />
-        <Presentation $border={border} $radius={radius} />
+        <Presentation
+          $border={border}
+          $radius={useArrayProp(radius)}
+        />
       </InputRoot>
     </Root>
   )

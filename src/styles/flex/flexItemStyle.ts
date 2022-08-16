@@ -1,5 +1,6 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp, responsive} from '../helpers'
+import {EMPTY_ARRAY} from '../../constants'
+import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexItemStyleProps} from './types'
 
@@ -20,7 +21,7 @@ export function responsiveFlexItemStyle(
   const {theme} = props
   const {media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$flex), (flex) => {
-    return {flex}
-  })
+  if (!props.$flex) return EMPTY_ARRAY
+
+  return _responsive(media, props.$flex, (flex) => ({flex}))
 }

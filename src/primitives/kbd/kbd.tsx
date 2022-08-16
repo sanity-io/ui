@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {Box} from '../box'
 import {Code} from '../code'
@@ -38,7 +39,7 @@ export const KBD = forwardRef(function KBD(
   const {children, fontSize = 1, padding = 1, radius = 2, ...restProps} = props
 
   return (
-    <Root data-ui="KBD" {...restProps} $radius={radius} ref={ref}>
+    <Root data-ui="KBD" {...restProps} $radius={useArrayProp(radius)} ref={ref}>
       <Box as="span" padding={padding}>
         <Code as="span" muted size={fontSize}>
           {children}

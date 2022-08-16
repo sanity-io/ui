@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'
 import {ResponsiveWidthProps} from '../types'
 import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
@@ -24,5 +25,13 @@ export const Container = forwardRef(function Container(
 ) {
   const {as, width = 2, ...restProps} = props
 
-  return <Root data-ui="Container" {...restProps} $width={width} forwardedAs={as} ref={ref} />
+  return (
+    <Root
+      data-ui="Container"
+      {...restProps}
+      $width={useArrayProp(width)}
+      forwardedAs={as}
+      ref={ref}
+    />
+  )
 })

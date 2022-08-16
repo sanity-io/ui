@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import {useClickOutside} from '../../hooks'
+import {useArrayProp, useClickOutside} from '../../hooks'
 import {Box, Popover, Stack, Text} from '../../primitives'
 import {ExpandButton, Root} from './breadcrumbs.styles'
 
@@ -27,7 +27,8 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
   ref: React.ForwardedRef<HTMLOListElement>
 ) {
-  const {children, maxLength, separator, space = 2, ...restProps} = props
+  const {children, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
+  const space = useArrayProp(spaceRaw)
   const [open, setOpen] = useState(false)
   const [expandElement, setExpandElement] = useState<HTMLButtonElement | null>(null)
   const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)

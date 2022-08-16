@@ -1,6 +1,7 @@
 import React, {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
 import {codeBaseStyle} from './styles'
 
@@ -28,7 +29,7 @@ export const Code = forwardRef(function Code(
   const registered = language ? Refractor.hasLanguage(language as any) : false
 
   return (
-    <Root data-ui="Code" {...restProps} $size={size} $weight={weight} ref={ref}>
+    <Root data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
       {!(language && registered) && <code>{children}</code>}
       {language && registered && <Refractor inline language={language} value={String(children)} />}
     </Root>

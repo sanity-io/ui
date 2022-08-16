@@ -2,7 +2,7 @@ import React, {cloneElement, forwardRef, useCallback, useEffect, useMemo, useSta
 import {usePopper} from 'react-popper'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useForwardedRef} from '../../hooks'
+import {useArrayProp, useForwardedRef} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {CardTone, Placement, PopoverMargins} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
@@ -71,6 +71,7 @@ const PopoverCard = styled(Card)<
   ResponsiveWidthStyleProps & {
     $constrainSize?: boolean
     $preventOverflow?: boolean
+    $width: (number | 'auto')[]
   }
 >(
   ({$constrainSize}) => css`
@@ -126,7 +127,7 @@ export const Popover = forwardRef(function Popover(
     tether,
     tetherOffset,
     tone = 'inherit',
-    width = 0,
+    width: widthProp = 0,
     zOffset = theme.sanity.layer?.popover.zOffset,
     ...restProps
   } = props
@@ -136,6 +137,7 @@ export const Popover = forwardRef(function Popover(
   const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
   const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
   const popperReferenceElement = referenceElementProp || referenceElement
+  const width = useArrayProp(widthProp)
 
   const modifiers = usePopoverModifiers({
     allowedAutoPlacements,
@@ -212,13 +214,13 @@ export const Popover = forwardRef(function Popover(
     >
       <PopoverCard
         $constrainSize={constrainSize}
+        $width={width}
         data-ui="PopoverCard"
         padding={padding}
         radius={radius}
         scheme={scheme}
         shadow={shadow}
         tone={tone}
-        width={width as any}
       >
         {arrow && <PopoverArrow ref={setArrowElement} style={styles.arrow} />}
         {content}

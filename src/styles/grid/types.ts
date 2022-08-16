@@ -14,24 +14,24 @@ import {
  * @internal
  */
 export interface ResponsiveGridStyleProps {
-  $autoRows?: GridAutoRows | GridAutoRows[]
-  $autoCols?: GridAutoCols | GridAutoCols[]
-  $autoFlow?: GridAutoFlow | GridAutoFlow[]
-  $columns?: number | number[]
-  $gap?: number | number[]
-  $gapX?: number | number[]
-  $gapY?: number | number[]
-  $rows?: number | number[]
+  $autoRows: GridAutoRows[]
+  $autoCols: GridAutoCols[]
+  $autoFlow: GridAutoFlow[]
+  $columns: number[]
+  $gap: number[]
+  $gapX: number[]
+  $gapY: number[]
+  $rows: number[]
 }
 
 /**
  * @internal
  */
 export interface ResponsiveGridItemStyleProps {
-  $column?: GridItemColumn | GridItemColumn[]
-  $columnStart?: GridItemColumnStart | GridItemColumnStart[]
-  $columnEnd?: GridItemColumnEnd | GridItemColumnEnd[]
-  $row?: GridItemRow | GridItemRow[]
-  $rowStart?: GridItemRowStart | GridItemRowStart[]
-  $rowEnd?: GridItemRowEnd | GridItemRowEnd[]
+  $column: GridItemColumn[]
+  $columnStart: GridItemColumnStart[]
+  $columnEnd: GridItemColumnEnd[]
+  $row: GridItemRow[]
+  $rowStart: GridItemRowStart[]
+  $rowEnd: GridItemRowEnd[]
 }

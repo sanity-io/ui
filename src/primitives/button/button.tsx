@@ -1,6 +1,7 @@
 import React, {createElement, forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
@@ -66,25 +67,36 @@ export const Button = forwardRef(function Button(
     fontSize,
     icon,
     iconRight,
-    justify = 'center',
+    justify: justifyProp = 'center',
     loading,
     mode = 'default',
-    padding = 3,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    radius = 2,
+    padding: paddingProp = 3,
+    paddingX: paddingXProp,
+    paddingY: paddingYProp,
+    paddingTop: paddingTopProp,
+    paddingBottom: paddingBottomProp,
+    paddingLeft: paddingLeftProp,
+    paddingRight: paddingRightProp,
+    radius: radiusProp = 2,
     selected,
-    space = 3,
+    space: spaceProp = 3,
     text,
     textAlign,
     tone = 'default',
     type = 'button',
     ...restProps
   } = props
+
+  const justify = useArrayProp(justifyProp)
+  const padding = useArrayProp(paddingProp)
+  const paddingX = useArrayProp(paddingXProp)
+  const paddingY = useArrayProp(paddingYProp)
+  const paddingTop = useArrayProp(paddingTopProp)
+  const paddingBottom = useArrayProp(paddingBottomProp)
+  const paddingLeft = useArrayProp(paddingLeftProp)
+  const paddingRight = useArrayProp(paddingRightProp)
+  const radius = useArrayProp(radiusProp)
+  const space = useArrayProp(spaceProp)
 
   const theme = useTheme()
 

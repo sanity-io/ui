@@ -1,7 +1,6 @@
-import React, {forwardRef, useCallback, useEffect, useMemo, useState} from 'react'
-import {useForwardedRef} from '../../hooks'
+import React, {forwardRef, useCallback, useMemo, useState} from 'react'
+import {useElementSize, useForwardedRef} from '../../hooks'
 import {useTheme} from '../../theme'
-import {ResizeObserver} from '../resizeObserver'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
 /**
@@ -23,23 +22,11 @@ export const ElementQuery = forwardRef(function ElementQuery(
 ) {
   const theme = useTheme()
   const {children, media = theme.sanity.media, ...restProps} = props
-  const [width, setWidth] = useState(() => window.innerWidth)
+
   const forwardedRef = useForwardedRef(ref)
   const [element, setElement] = useState<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (!element) return
-
-    const handleResizeEntries: ResizeObserverCallback = (entries) => {
-      setWidth(entries[0].contentRect.width)
-    }
-
-    const ro = new ResizeObserver(handleResizeEntries)
-
-    ro.observe(element)
-
-    return () => ro.disconnect()
-  }, [element])
+  const elementSize = useElementSize(element)
+  const width = useMemo(() => elementSize?.border.width ?? window.innerWidth, [elementSize])
 
   const max = useMemo(() => findMaxBreakpoints(media, width), [media, width])
   const min = useMemo(() => findMinBreakpoints(media, width), [media, width])

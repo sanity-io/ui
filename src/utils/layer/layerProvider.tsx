@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react'
-import {useMediaIndex, useResponsiveProp} from '../../hooks'
+import {useMediaIndex, useArrayProp} from '../../hooks'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'
 
@@ -17,7 +17,7 @@ export interface LayerProviderProps {
 export function LayerProvider(props: LayerProviderProps): React.ReactElement {
   const {children, zOffset: zOffsetProp = 0} = props
   const parent = useContext(LayerContext)
-  const zOffset = useResponsiveProp(zOffsetProp)
+  const zOffset = useArrayProp(zOffsetProp)
   const maxMediaIndex = zOffset.length - 1
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]

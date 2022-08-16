@@ -11,7 +11,7 @@ import React, {
 } from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {useForwardedRef, useResponsiveProp} from '../../hooks'
+import {useForwardedRef, useArrayProp} from '../../hooks'
 import {Box, BoxProps, Button, Card, PopoverProps, Stack, Text, TextInput} from '../../primitives'
 import {AnimatedSpinnerIcon, ListBox, ResultsPopover, Root} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
@@ -175,7 +175,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const popoverMouseWithinRef = useRef(false)
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const padding = useResponsiveProp(paddingProp)
+  const padding = useArrayProp(paddingProp)
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value]

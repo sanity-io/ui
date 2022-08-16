@@ -124,7 +124,6 @@ export const MenuItem = forwardRef(function MenuItem(
       onClick={handleClick}
       onMouseEnter={onItemMouseEnter}
       onMouseLeave={onItemMouseLeave}
-      padding={0}
       ref={setRef}
       role="menuitem"
       tabIndex={-1}

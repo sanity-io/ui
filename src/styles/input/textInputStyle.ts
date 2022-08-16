@@ -1,14 +1,14 @@
 import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeFontWeightKey} from '../../theme'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
-import {getResponsiveProp, rem, responsive} from '../helpers'
+import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 /**
  * @internal
  */
 export interface TextInputInputStyleProps {
-  $fontSize?: number | number[]
+  $fontSize: number[]
   $weight?: ThemeFontWeightKey
 }
 
@@ -108,7 +108,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
   const {theme} = props
   const {fonts, media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$fontSize, [2]), (sizeIndex) => {
+  return _responsive(media, props.$fontSize, (sizeIndex) => {
     const size = fonts.text.sizes[sizeIndex] || fonts.text.sizes[2]
 
     return {

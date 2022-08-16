@@ -2,11 +2,11 @@
  * @internal
  */
 export interface ResponsivePaddingStyleProps {
-  $padding?: number | number[]
-  $paddingX?: number | number[]
-  $paddingY?: number | number[]
-  $paddingTop?: number | number[]
-  $paddingRight?: number | number[]
-  $paddingBottom?: number | number[]
-  $paddingLeft?: number | number[]
+  $padding?: number[]
+  $paddingX?: number[]
+  $paddingY?: number[]
+  $paddingTop?: number[]
+  $paddingRight?: number[]
+  $paddingBottom?: number[]
+  $paddingLeft?: number[]
 }

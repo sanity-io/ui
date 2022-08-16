@@ -1,9 +1,9 @@
 export interface ResponsiveMarginStyleProps {
-  $margin?: number | number[]
-  $marginX?: number | number[]
-  $marginY?: number | number[]
-  $marginTop?: number | number[]
-  $marginRight?: number | number[]
-  $marginBottom?: number | number[]
-  $marginLeft?: number | number[]
+  $margin?: number[]
+  $marginX?: number[]
+  $marginY?: number[]
+  $marginTop?: number[]
+  $marginRight?: number[]
+  $marginBottom?: number[]
+  $marginLeft?: number[]
 }

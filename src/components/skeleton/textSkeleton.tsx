@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
-import {useResponsiveProp} from '../../hooks'
-import {responsive} from '../../styles'
+import {useArrayProp} from '../../hooks'
+import {_responsive} from '../../styles'
 import {Theme, ThemeFontKey} from '../../theme'
 import {Skeleton, SkeletonProps} from './skeleton'
 
@@ -10,7 +10,7 @@ const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>(
     const {media} = theme.sanity
     const font = theme.sanity.fonts[$style]
 
-    const styles = responsive(media, $size, (sizeIndex) => {
+    const styles = _responsive(media, $size, (sizeIndex) => {
       const fontSize = font.sizes[sizeIndex]
       const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
 
@@ -63,7 +63,7 @@ export const TextSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useResponsiveProp(size)
+  const $size = useArrayProp(size)
 
   return <Root {...restProps} $size={$size} ref={ref} $style="text" />
 })
@@ -78,7 +78,7 @@ export const LabelSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useResponsiveProp(size)
+  const $size = useArrayProp(size)
 
   return <Root {...restProps} $size={$size} ref={ref} $style="label" />
 })
@@ -93,7 +93,7 @@ export const HeadingSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useResponsiveProp(size)
+  const $size = useArrayProp(size)
 
   return <Root {...restProps} $size={$size} ref={ref} $style="heading" />
 })
@@ -108,7 +108,7 @@ export const CodeSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useResponsiveProp(size)
+  const $size = useArrayProp(size)
 
   return <Root {...restProps} $size={$size} ref={ref} $style="code" />
 })

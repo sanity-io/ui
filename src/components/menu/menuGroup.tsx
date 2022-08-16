@@ -1,6 +1,7 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import React, {createElement, isValidElement, useCallback, useEffect, useRef, useState} from 'react'
 import {isValidElementType} from 'react-is'
+import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {SelectableTone} from '../../types/selectable'
@@ -163,7 +164,7 @@ export function MenuGroup(
         aria-pressed={as === 'button' ? withinMenu : undefined}
         data-pressed={as !== 'button' ? withinMenu : undefined}
         data-selected={!withinMenu && active ? '' : undefined}
-        $radius={radius}
+        $radius={useArrayProp(radius)}
         $tone={tone}
         onClick={handleClick}
         onKeyDown={handleKeyDown}

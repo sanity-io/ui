@@ -1,44 +1,41 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp, rem, responsive} from '../helpers'
+import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
 export interface TextInputResponsivePaddingStyleProps {
-  $fontSize?: number | number[]
+  $fontSize: number[]
   $iconLeft?: boolean
   $iconRight?: boolean
-  $padding?: number | number[]
-  $space?: number | number[]
+  $padding: number[]
+  $space: number[]
 }
 
 export function responsiveInputPaddingStyle(
   props: TextInputResponsivePaddingStyleProps & ThemeProps
 ): CSSObject[] {
-  const {$iconLeft, $iconRight, theme} = props
+  const {$fontSize, $iconLeft, $iconRight, $padding, $space, theme} = props
   const {fonts, media, space: spaceScale} = theme.sanity
-  const padding = getResponsiveProp(props.$padding, [0])
-  const space = getResponsiveProp(props.$space, [0])
-  const size = getResponsiveProp(props.$fontSize, [0])
-  const len = Math.max(padding.length, space.length, size.length)
+  const len = Math.max($padding.length, $space.length, $fontSize.length)
   const _padding: number[] = []
   const _space: number[] = []
-  const _size: number[] = []
+  const _fontSize: number[] = []
 
   for (let i = 0; i < len; i += 1) {
-    _padding[i] = padding[i] === undefined ? _padding[i - 1] : padding[i]
-    _space[i] = space[i] === undefined ? _space[i - 1] : space[i]
-    _size[i] = size[i] === undefined ? _size[i - 1] : size[i]
+    _fontSize[i] = $fontSize[i] === undefined ? _fontSize[i - 1] : $fontSize[i]
+    _padding[i] = $padding[i] === undefined ? _padding[i - 1] : $padding[i]
+    _space[i] = $space[i] === undefined ? _space[i - 1] : $space[i]
   }
 
-  return responsive(media, _padding, (_, i) => {
-    const fontSize = fonts.text.sizes[_size[i]] || fonts.text.sizes[2]
-    const emSize = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
+  return _responsive(media, _padding, (_, i) => {
+    const size = fonts.text.sizes[_fontSize[i]] || fonts.text.sizes[2]
+    const emSize = size.lineHeight - size.ascenderHeight - size.descenderHeight
     const p = spaceScale[_padding[i]]
     const s = spaceScale[_space[i]]
 
     const styles = {
-      paddingTop: rem(p - fontSize.ascenderHeight),
+      paddingTop: rem(p - size.ascenderHeight),
       paddingRight: rem(p),
-      paddingBottom: rem(p - fontSize.descenderHeight),
+      paddingBottom: rem(p - size.descenderHeight),
       paddingLeft: rem(p),
     }
 
@@ -51,9 +48,9 @@ export function responsiveInputPaddingStyle(
 
 export function responsiveInputPaddingIconsStyle(
   props: {
-    padding?: number | number[]
-    size?: number | number[]
-    space?: number | number[]
+    $fontSize: number[]
+    $padding: number[]
+    $space: number[]
   } & ThemeProps
 ): CSSObject[] {
   return responsiveInputPaddingStyle({...props, $iconLeft: true, $iconRight: true})
@@ -61,9 +58,9 @@ export function responsiveInputPaddingIconsStyle(
 
 export function responsiveInputPaddingIconLeftStyle(
   props: {
-    padding?: number | number[]
-    size?: number | number[]
-    space?: number | number[]
+    $fontSize: number[]
+    $padding: number[]
+    $space: number[]
   } & ThemeProps
 ): CSSObject[] {
   return responsiveInputPaddingStyle({...props, $iconLeft: true})
@@ -71,9 +68,9 @@ export function responsiveInputPaddingIconLeftStyle(
 
 export function responsiveInputPaddingIconRightStyle(
   props: {
-    padding?: number | number[]
-    size?: number | number[]
-    space?: number | number[]
+    $fontSize: number[]
+    $padding: number[]
+    $space: number[]
   } & ThemeProps
 ): CSSObject[] {
   return responsiveInputPaddingStyle({...props, $iconRight: true})

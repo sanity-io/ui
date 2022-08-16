@@ -1,5 +1,5 @@
 import {CSSObject} from 'styled-components'
-import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps} from '../../styles'
 import {ResponsiveWidthStyleProps} from './types'
 
 const BASE_STYLE: CSSObject = {
@@ -17,7 +17,7 @@ export function responsiveContainerWidthStyle(
   const {theme} = props
   const {container, media} = theme.sanity
 
-  return responsive(media, getResponsiveProp(props.$width), (val) => ({
+  return _responsive(media, props.$width, (val) => ({
     maxWidth: val === 'auto' ? 'none' : rem(container[val]),
   }))
 }

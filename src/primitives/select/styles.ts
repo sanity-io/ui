@@ -1,5 +1,5 @@
 import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
-import {getResponsiveProp, rem, responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps} from '../../styles'
 import {
   focusRingBorderStyle,
   focusRingStyle,
@@ -100,17 +100,23 @@ function textSize(size: ThemeFontSize) {
   return {fontSize: rem(size.fontSize), lineHeight: rem(size.lineHeight)}
 }
 
-function inputTextSizeStyle(props: {$fontSize?: number | number[]} & ThemeProps) {
+function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
   const {theme, $fontSize} = props
   const {sizes} = theme.sanity.fonts.text
 
-  return responsive(theme.sanity.media, getResponsiveProp($fontSize), (sizeIndex) =>
+  return _responsive(theme.sanity.media, $fontSize, (sizeIndex) =>
     textSize(sizes[sizeIndex] || sizes[2])
   )
 }
 
 function inputStyle(): Array<
-  | ((props: ResponsiveRadiusStyleProps & ThemeProps) => CSSObject[])
+  | ((
+      props: ResponsiveRadiusStyleProps & {
+        $fontSize: number[]
+        $padding: number[]
+        $space: number[]
+      } & ThemeProps
+    ) => CSSObject[])
   | ((props: ThemeProps) => FlattenSimpleInterpolation)
 > {
   return [

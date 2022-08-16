@@ -5,7 +5,7 @@ import {TextAlign} from '../../types'
  * @internal
  */
 export interface ResponsiveFontSizeStyleProps {
-  $size?: number | number[]
+  $size: number[]
 }
 
 /**
@@ -19,7 +19,7 @@ export interface FontWeightStyleProps {
  * @internal
  */
 export interface ResponsiveTextAlignStyleProps {
-  $align?: TextAlign | TextAlign[]
+  $align: TextAlign[]
 }
 
 /**
@@ -27,7 +27,8 @@ export interface ResponsiveTextAlignStyleProps {
  */
 export interface ResponsiveFontStyleProps
   extends FontWeightStyleProps,
-    ResponsiveFontSizeStyleProps {
+    ResponsiveFontSizeStyleProps,
+    ResponsiveTextAlignStyleProps {
   $accent?: boolean
   $muted?: boolean
 }

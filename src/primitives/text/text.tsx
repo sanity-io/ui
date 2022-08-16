@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react'
 import styled from 'styled-components'
+import {useArrayProp} from '../../hooks'
 import {
   ResponsiveFontStyleProps,
   responsiveTextAlignStyle,
@@ -69,10 +70,10 @@ export const Text = forwardRef(function Text(
       data-ui="Text"
       {...restProps}
       $accent={accent}
-      $align={align}
+      $align={useArrayProp(align)}
       $muted={muted}
       ref={ref}
-      $size={size}
+      $size={useArrayProp(size)}
       $weight={weight}
     >
       <span>{children}</span>

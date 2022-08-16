@@ -1,5 +1,5 @@
 import {CSSObject} from 'styled-components'
-import {rem, responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
@@ -103,7 +103,7 @@ export function responsiveAvatarSizeStyle(
   const {theme} = props
   const {avatar, media} = theme.sanity
 
-  return responsive(media, props.$size, (size) => {
+  return _responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size] || avatar.sizes[0]
 
     return {

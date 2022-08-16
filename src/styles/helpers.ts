@@ -5,11 +5,11 @@ import {Theme} from '../theme'
 /**
  * @internal
  */
-export function fillCSSObject(propKeys: string[], value: unknown): CSSObject {
-  return propKeys.reduce((obj: CSSObject, propKey) => {
-    obj[propKey] = value as any
+export function _fillCSSObject(keys: string[], value: string | number | CSSObject): CSSObject {
+  return keys.reduce<CSSObject>((style, key) => {
+    style[key] = value
 
-    return obj
+    return style
   }, {})
 }
 
@@ -25,7 +25,7 @@ export function rem(pixelValue: number): string | 0 {
 /**
  * @internal
  */
-export function responsive<T>(
+export function _responsive<T>(
   media: number[],
   values: T[],
   callback: (value: T, index: number, array: T[]) => CSSObject
@@ -42,7 +42,7 @@ export function responsive<T>(
 /**
  * @internal
  */
-export function getResponsiveProp<T = number>(val: T | T[] | undefined, defaultVal?: T[]): T[] {
+export function _getArrayProp<T = number>(val: T | T[] | undefined, defaultVal?: T[]): T[] {
   if (val === undefined) return defaultVal || EMPTY_ARRAY
 
   return Array.isArray(val) ? val : [val]
@@ -51,7 +51,7 @@ export function getResponsiveProp<T = number>(val: T | T[] | undefined, defaultV
 /**
  * @internal
  */
-export function getResponsiveSpace(
+export function _getResponsiveSpace(
   theme: Theme,
   props: string[],
   spaceIndexes: number[] = EMPTY_ARRAY
@@ -64,7 +64,7 @@ export function getResponsiveSpace(
     return null
   }
 
-  return responsive(theme.sanity.media, spaceIndexes, (spaceIndex) =>
-    fillCSSObject(props, rem(theme.sanity.space[spaceIndex]))
+  return _responsive(theme.sanity.media, spaceIndexes, (spaceIndex) =>
+    _fillCSSObject(props, rem(theme.sanity.space[spaceIndex]))
   )
 }
