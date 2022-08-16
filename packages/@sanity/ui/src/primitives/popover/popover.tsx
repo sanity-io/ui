@@ -1,17 +1,30 @@
-import {cloneElement, forwardRef, useCallback, useEffect, useMemo, useRef, useState} from 'react'
-import {usePopper} from 'react-popper'
-import styled, {css} from 'styled-components'
-import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useForwardedRef} from '../../hooks'
+import {
+  Middleware,
+  arrow,
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useFloating,
+  size as sizeMiddleware,
+  RootBoundary,
+} from '@floating-ui/react-dom'
+import {
+  cloneElement,
+  forwardRef,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import {useForwardedRef, useArrayProp, useElementSize} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
-import {CardTone, Placement, PopoverMargins} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
-import {Card} from '../card'
-import {ResponsiveWidthStyleProps} from '../container'
-import {responsiveContainerWidthStyle} from '../container/styles'
+import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
+import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
 import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
-import {PopoverArrow} from './arrow'
-import {usePopoverModifiers} from './modifiers'
+import {PopoverCard} from './popoverCard'
 
 /**
  * @public
@@ -25,6 +38,7 @@ export interface PopoverProps
    * @beta
    */
   __unstable_margins?: PopoverMargins
+  /** @deprecated Use `fallbackPlacements` instead. */
   allowedAutoPlacements?: Placement[]
   arrow?: boolean
   boundaryElement?: HTMLElement | null
@@ -34,6 +48,7 @@ export interface PopoverProps
   disabled?: boolean
   fallbackPlacements?: Placement[]
   open?: boolean
+  overflow?: BoxOverflow
   padding?: number | number[]
   placement?: Placement
   portal?: boolean | string
@@ -41,217 +56,244 @@ export interface PopoverProps
   referenceElement?: HTMLElement | null
   matchReferenceWidth?: boolean
   scheme?: ThemeColorSchemeKey
+  /** @deprecated No longer supported. */
   tether?: boolean
+  /** @deprecated No longer supported. */
   tetherOffset?: number | ((...args: any[]) => number)
   tone?: CardTone
 }
 
-const Root = styled(Layer)<{$preventOverflow?: boolean}>(
-  ({$preventOverflow}) => css`
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    max-width: calc(100% - 16px);
-
-    & > * {
-      min-height: 0;
-    }
-
-    /* Hide the popover when the reference element is out of bounds */
-    ${$preventOverflow &&
-    css`
-      &[data-popper-reference-hidden='true'] {
-        display: none;
+function size(scope: {
+  boundaryElement: HTMLElement | null
+  constrainSize: boolean
+  matchReferenceWidth: boolean | undefined
+  setAvailableWidth: (v: number) => void
+  setAvailableHeight: (v: number) => void
+  setReferenceWidth: (v: number) => void
+}) {
+  return sizeMiddleware({
+    apply(args) {
+      if (scope.constrainSize) {
+        scope.setAvailableWidth(args.availableWidth)
+        scope.setAvailableHeight(args.availableHeight)
       }
-    `}
-  `
-)
 
-const PopoverCard = styled(Card)<
-  ResponsiveWidthStyleProps & {
-    $constrainSize?: boolean
-    $preventOverflow?: boolean
-    $width: (number | 'auto')[]
-  }
->(
-  ({$constrainSize}) => css`
-    flex: 1;
-    max-height: ${$constrainSize && '100%'};
-    pointer-events: all;
-
-    && {
-      display: flex;
-    }
-
-    flex-direction: column;
-
-    & > * {
-      min-height: 0;
-    }
-
-    ${responsiveContainerWidthStyle}
-  `
-)
-
-/**
- * @public
- */
-export const Popover = forwardRef(function Popover(
-  props: PopoverProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-  ref: React.ForwardedRef<HTMLDivElement>
-) {
-  const boundaryElementContext = useBoundaryElement()
-  const theme = useTheme()
-  const {
-    __unstable_margins: margins,
-    allowedAutoPlacements,
-    arrow = true,
-    boundaryElement: boundaryElementProp = boundaryElementContext.element,
-    children: child,
-    content,
-    constrainSize,
-    disabled,
-    fallbackPlacements,
-    open = false,
-    padding,
-    placement = 'bottom',
-    portal: portalProp = false,
-    preventOverflow,
-    radius = 3,
-    referenceElement: referenceElementProp,
-    matchReferenceWidth,
-    shadow = 3,
-    scheme,
-    style = EMPTY_RECORD,
-    tether,
-    tetherOffset,
-    tone = 'inherit',
-    width: widthProp = 0,
-    zOffset = theme.sanity.layer?.popover.zOffset,
-    ...restProps
-  } = props
-  const forwardedRef = useForwardedRef(ref)
-  const portal = usePortal()
-  const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
-  const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
-  const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
-  const popperReferenceElement = referenceElementProp || referenceElement
-  const width = useArrayProp(matchReferenceWidth ? 'auto' : widthProp)
-
-  const modifiers = usePopoverModifiers({
-    allowedAutoPlacements,
-    arrow,
-    arrowElement,
-    boundaryElement: boundaryElementProp || portal.boundaryElement,
-    constrainSize,
-    distance: arrow ? 4 : 0,
-    fallbackPlacements,
-    margins,
-    matchReferenceWidth,
-    open,
-    preventOverflow,
-    skidding: 0,
-    tether,
-    tetherOffset,
-  })
-
-  const popper = usePopper(popperReferenceElement, popperElement, {
-    placement,
-    modifiers,
-  })
-
-  const {attributes, forceUpdate, styles} = popper
-
-  const setRef = useCallback(
-    (el: HTMLElement | null) => {
-      const childRef = (child as any).ref
-
-      setReferenceElement(el)
-
-      if (typeof childRef === 'function') {
-        childRef(el)
-      } else if (childRef) {
-        childRef.current = el
+      if (scope.matchReferenceWidth) {
+        scope.setReferenceWidth(args.rects.reference.width)
       }
     },
-    [child]
-  )
+    boundary: scope.boundaryElement || undefined,
+  })
+}
 
-  const setRootRef = useCallback(
-    (el: HTMLDivElement | null) => {
-      setPopperElement(el)
-      forwardedRef.current = el
-    },
-    [forwardedRef]
-  )
+/** @public */
+export const Popover = memo(
+  forwardRef(function Popover(
+    props: PopoverProps &
+      Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
+    ref: React.ForwardedRef<HTMLDivElement>
+  ): React.ReactElement {
+    const theme = useTheme()
+    const boundaryElementContext = useBoundaryElement()
 
-  const popoverStyle = useMemo(() => ({...style, ...styles.popper}), [style, styles])
+    const {
+      __unstable_margins: margins,
+      allowedAutoPlacements,
+      arrow: arrowProp = true,
+      boundaryElement = boundaryElementContext.element,
+      children: childProp,
+      constrainSize = false,
+      content,
+      disabled,
+      fallbackPlacements,
+      matchReferenceWidth: matchReferenceWidthProp,
+      open,
+      overflow = props.constrainSize ? 'auto' : undefined,
+      padding: paddingProp,
+      placement: placementProp = 'bottom',
+      portal,
+      preventOverflow = true,
+      radius: radiusProp = 3,
+      referenceElement,
+      scheme,
+      shadow: shadowProp = 3,
+      tether,
+      tetherOffset,
+      tone = 'inherit',
+      width: widthProp = undefined,
+      zOffset: zOffsetProp = theme.sanity.layer?.popover.zOffset,
+      ...restProps
+    } = props
+    const boundarySize = useElementSize(boundaryElement)?.border
+    const padding = useArrayProp(paddingProp)
+    const radius = useArrayProp(radiusProp)
+    const shadow = useArrayProp(shadowProp)
+    const width = useArrayProp(widthProp)
+    const zOffset = useArrayProp(zOffsetProp)
+    const [availableWidth, setAvailableWidth] = useState<number | undefined>(undefined)
+    const [availableHeight, setAvailableHeight] = useState<number | undefined>(undefined)
+    const [referenceWidth, setReferenceWidth] = useState<number | undefined>(undefined)
+    const forwardedRef = useForwardedRef(ref)
+    const arrowRef = useRef<HTMLDivElement | null>(null)
+    const rootBoundary: RootBoundary = 'viewport'
 
-  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const middleware = useMemo(() => {
+      const ret: Middleware[] = []
 
-  useEffect(() => {
-    if (updateTimeoutRef.current) {
-      clearTimeout(updateTimeoutRef.current)
-      updateTimeoutRef.current = null
-    }
+      // Flip the floating element when leaving the boundary box
+      if (constrainSize || preventOverflow) {
+        ret.push(
+          flip({
+            boundary: boundaryElement || undefined,
+            fallbackPlacements,
+            padding: 8,
+            rootBoundary,
+          })
+        )
+      }
 
-    updateTimeoutRef.current = setTimeout(() => {
-      if (forceUpdate) {
-        try {
-          forceUpdate()
-        } catch (_) {
-          // ignore caught error
+      // Track sizes
+      ret.push(
+        size({
+          boundaryElement,
+          constrainSize,
+          matchReferenceWidth: matchReferenceWidthProp,
+          setAvailableHeight,
+          setAvailableWidth,
+          setReferenceWidth,
+        })
+      )
+
+      // Define distance between reference and floating element
+      ret.push(offset({mainAxis: arrowProp ? 4 : 0}))
+
+      // Shift the popover so its sits with the boundary eleement
+      if (preventOverflow) {
+        ret.push(
+          shift({
+            boundary: boundaryElement || undefined,
+            rootBoundary,
+            padding: 8,
+          })
+        )
+      }
+
+      // Place arrow
+      if (arrowProp) {
+        ret.push(arrow({element: arrowRef, padding: 4}))
+      }
+
+      return ret
+    }, [
+      arrowProp,
+      boundaryElement,
+      constrainSize,
+      fallbackPlacements,
+      matchReferenceWidthProp,
+      preventOverflow,
+    ])
+
+    const {x, y, placement, reference, floating, middlewareData, strategy} = useFloating({
+      middleware,
+      placement: placementProp,
+      whileElementsMounted: autoUpdate,
+    })
+
+    const arrowX = middlewareData.arrow?.x
+    const arrowY = middlewareData.arrow?.y
+
+    const setArrow = useCallback((arrowEl: HTMLDivElement | null) => {
+      arrowRef.current = arrowEl
+    }, [])
+
+    const setFloating = useCallback(
+      (node: HTMLDivElement | null) => {
+        forwardedRef.current = node
+        floating(node)
+      },
+      [floating, forwardedRef]
+    )
+
+    const setReference = useCallback(
+      (node: HTMLElement | null) => {
+        reference(node)
+
+        const childRef = (childProp as any)?.ref
+
+        if (typeof childRef === 'function') {
+          childRef(node)
+        } else if (childRef) {
+          childRef.current = node
         }
-      }
-    }, 0)
-  }, [content, forceUpdate, open, popperReferenceElement])
+      },
+      [childProp, reference]
+    )
 
-  if (disabled) {
-    return child || <></>
-  }
+    const child = useMemo(() => {
+      if (!childProp || referenceElement) return null
 
-  const node = (
-    <Root
-      data-ui="Popover"
-      {...restProps}
-      $preventOverflow={preventOverflow}
-      ref={setRootRef}
-      style={popoverStyle}
-      zOffset={zOffset}
-      {...attributes.popper}
-    >
-      <PopoverCard
-        $constrainSize={constrainSize}
-        $width={width}
-        data-ui="PopoverCard"
-        padding={padding}
-        radius={radius}
-        scheme={scheme}
-        shadow={shadow}
-        tone={tone}
-      >
-        {arrow && <PopoverArrow ref={setArrowElement} style={styles.arrow} />}
-        {content}
-      </PopoverCard>
-    </Root>
-  )
+      return cloneElement(childProp, {ref: setReference})
+    }, [childProp, referenceElement, setReference])
 
-  return (
-    <>
-      {child && !referenceElementProp ? cloneElement(child, {ref: setRef}) : child || <></>}
+    useEffect(() => {
+      if (referenceElement) reference(referenceElement)
+    }, [reference, referenceElement])
 
-      {open && (
-        <>
-          {portalProp && (
-            <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-              {node}
-            </Portal>
-          )}
+    if (disabled) {
+      return childProp || <></>
+    }
 
-          {!portalProp && node}
-        </>
-      )}
-    </>
-  )
-})
+    const popover = (
+      <LayerProvider zOffset={zOffset}>
+        <PopoverCard
+          {...restProps}
+          __unstable_margins={margins}
+          arrow={arrowProp}
+          arrowRef={setArrow}
+          arrowX={arrowX}
+          arrowY={arrowY}
+          availableWidth={constrainSize ? availableWidth : undefined}
+          availableHeight={constrainSize ? availableHeight : undefined}
+          boundaryWidth={boundarySize?.width}
+          overflow={overflow}
+          padding={padding}
+          placement={placement}
+          radius={radius}
+          ref={setFloating}
+          referenceWidth={matchReferenceWidthProp ? referenceWidth : undefined}
+          scheme={scheme}
+          shadow={shadow}
+          strategy={strategy}
+          tone={tone}
+          x={x}
+          y={y}
+          width={width}
+        >
+          {content}
+        </PopoverCard>
+      </LayerProvider>
+    )
+
+    return (
+      <>
+        {/* the popover */}
+        {open && (
+          <>
+            {portal ? (
+              <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
+                {popover}
+              </Portal>
+            ) : (
+              popover
+            )}
+          </>
+        )}
+
+        {/* the referred element */}
+        {child}
+      </>
+    )
+  })
+)
+
+Popover.displayName = 'Popover'

@@ -17,11 +17,11 @@ const Root = styled.div`
     transform-origin: 13.5px 13.5px;
   }
 
-  [data-popper-placement^='top'] > div > & {
+  [data-placement^='top'] > & {
     bottom: -27px;
   }
 
-  [data-popper-placement^='right'] > div > & {
+  [data-placement^='right'] > & {
     left: -27px;
 
     & > svg {
@@ -29,7 +29,7 @@ const Root = styled.div`
     }
   }
 
-  [data-popper-placement^='left'] > div > & {
+  [data-placement^='left'] > & {
     right: -27px;
 
     & > svg {
@@ -37,7 +37,7 @@ const Root = styled.div`
     }
   }
 
-  [data-popper-placement^='bottom'] > div > & {
+  [data-placement^='bottom'] > & {
     top: -27px;
 
     & > svg {
@@ -59,7 +59,7 @@ export const PopoverArrow = forwardRef(function PopoverArrow(
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
   return (
-    <Root data-ui="PopoverArrow" {...props} ref={ref}>
+    <Root data-ui="Popover__arrow" {...props} ref={ref}>
       <svg
         width="27"
         height="11"
