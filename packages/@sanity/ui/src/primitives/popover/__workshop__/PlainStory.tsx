@@ -49,6 +49,7 @@ export default function PlainStory() {
               fallbackPlacements={['top', 'bottom']}
               matchReferenceWidth={matchReferenceWidth}
               open={open}
+              overflow="auto"
               padding={padding}
               placement={placement}
               portal={portal}
