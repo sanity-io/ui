@@ -8,43 +8,55 @@ export default function OpticalAlignment() {
       <Stack space={1}>
         <Flex>
           <Card padding={0} scheme="dark">
-            <Heading size={5}>Hamburgefonstiv M</Heading>
+            <Heading accent size={5}>
+              Hamburgefonstiv M
+            </Heading>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Heading size={4}>Hamburgefonstiv M</Heading>
+            <Heading accent size={4}>
+              Hamburgefonstiv M
+            </Heading>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Heading size={3}>Hamburgefonstiv M</Heading>
+            <Heading accent size={3}>
+              Hamburgefonstiv M
+            </Heading>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Heading size={2}>Hamburgefonstiv M</Heading>
+            <Heading accent size={2}>
+              Hamburgefonstiv M
+            </Heading>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Heading size={1}>Hamburgefonstiv M</Heading>
+            <Heading accent size={1}>
+              Hamburgefonstiv M
+            </Heading>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Heading size={0}>Hamburgefonstiv M</Heading>
+            <Heading accent size={0}>
+              Hamburgefonstiv M
+            </Heading>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={2} scheme="dark">
-            <Heading>
+            <Heading accent>
               <AddCircleIcon />
             </Heading>
           </Card>

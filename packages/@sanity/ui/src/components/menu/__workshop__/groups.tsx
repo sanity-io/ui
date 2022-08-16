@@ -129,7 +129,7 @@ export default function GroupsStory() {
                   />
                 </Menu>
               }
-              popover={{constrainSize: true, portal: true, preventOverflow: true}}
+              // popover={{constrainSize: true, portal: true, preventOverflow: true}}
             />
           </LayerProvider>
 

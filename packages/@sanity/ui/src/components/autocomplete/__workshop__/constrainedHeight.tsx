@@ -8,7 +8,9 @@ import {
   Text,
 } from '@sanity/ui'
 import React, {useCallback, useState} from 'react'
+import {Popover} from '../../../primitives'
 import countries from '../__fixtures__/countries'
+import {AutocompleteProps} from '../autocomplete'
 import {ExampleOption} from './types'
 
 export default function ConstrainedHeightStory() {
@@ -71,6 +73,38 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
 
   const options = countries.map((item) => ({value: item.code, title: item.name}))
 
+  const renderPopover: AutocompleteProps['renderPopover'] = useCallback(
+    (
+      popoverProps: {
+        content: React.ReactElement | null
+        hidden: boolean
+        inputElement: HTMLInputElement | null
+        onMouseEnter: () => void
+        onMouseLeave: () => void
+      },
+      popoverRef: React.Ref<HTMLDivElement>
+    ) => {
+      const {hidden, inputElement, ...restProps} = popoverProps
+
+      if (hidden) return null
+
+      return (
+        <Popover
+          {...restProps}
+          arrow={false}
+          constrainSize
+          matchReferenceWidth
+          open
+          placement="bottom"
+          radius={1}
+          ref={popoverRef}
+          referenceElement={inputElement}
+        />
+      )
+    },
+    []
+  )
+
   return (
     <Stack space={3}>
       <Text size={1} weight="medium">
@@ -84,8 +118,10 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           openButton
           options={options}
           placeholder="Search"
+          // popover={{allowedAutoPlacements: ['bottom-start', 'top-start']}}
           radius={1}
           renderOption={renderOption}
+          renderPopover={renderPopover}
           renderValue={renderValue}
           value={value}
         />

@@ -1,7 +1,10 @@
-import {TextInput} from '@sanity/ui'
+import {Box, TextInput} from '@sanity/ui'
+import {useText} from '@sanity/ui-workshop'
 import React, {useCallback, useState} from 'react'
 
 export default function ClearButtonStory() {
+  const customValidity = useText('Custom validitiy')
+
   const [value, setValue] = useState('')
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,12 +16,15 @@ export default function ClearButtonStory() {
   }, [])
 
   return (
-    <TextInput
-      clearButton
-      onChange={handleChange}
-      onClear={handleClear}
-      placeholder="Enter text"
-      value={value}
-    />
+    <Box padding={4}>
+      <TextInput
+        clearButton
+        customValidity={customValidity}
+        onChange={handleChange}
+        onClear={handleClear}
+        placeholder="Enter text"
+        value={value}
+      />
+    </Box>
   )
 }

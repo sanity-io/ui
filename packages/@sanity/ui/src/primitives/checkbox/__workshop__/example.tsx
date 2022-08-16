@@ -14,8 +14,10 @@ export default function ExampleStory() {
           indeterminate={indeterminate}
           onChange={handleChange}
         />
-        <Box marginLeft={3}>
-          <Text>Label</Text>
+        <Box marginLeft={2}>
+          <Text size={1} weight="semibold">
+            Toggle
+          </Text>
         </Box>
       </Flex>
     </Flex>

@@ -1,11 +1,11 @@
-import {LinkIcon} from '@sanity/icons'
+import {EarthAmericasIcon, SearchIcon} from '@sanity/icons'
 import {
   Autocomplete,
   BaseAutocompleteOption,
   Box,
-  Button,
   Card,
   Code,
+  Flex,
   LayerProvider,
   Stack,
   Text,
@@ -88,6 +88,7 @@ export default function AsyncStory() {
           <Autocomplete
             disabled={loadingCurrentRef}
             filterOption={filterOption}
+            icon={value ? EarthAmericasIcon : SearchIcon}
             id="async"
             loading={loading}
             onChange={setValue}
@@ -95,11 +96,6 @@ export default function AsyncStory() {
             openButton={{onClick: handleOpenButtonClick}}
             options={options}
             placeholder="Search"
-            prefix={
-              <Box padding={1}>
-                <Button disabled={!value} icon={LinkIcon} mode="bleed" padding={2} />
-              </Box>
-            }
             radius={1}
             renderOption={renderOption}
             renderValue={renderValue}
@@ -140,13 +136,19 @@ function AsyncOption(props: {
       selected={selected}
       tabIndex={tabIndex}
     >
-      {loading && (
-        <Text muted>
-          <>Loading…</>
+      <Flex gap={3}>
+        <Text>
+          <EarthAmericasIcon />
         </Text>
-      )}
 
-      {!loading && <Text muted={!data}>{data ? data.title : <>Untitled</>}</Text>}
+        {loading && (
+          <Text muted>
+            <>Loading…</>
+          </Text>
+        )}
+
+        {!loading && <Text muted={!data}>{data ? data.title : <>Untitled</>}</Text>}
+      </Flex>
     </Card>
   )
 }

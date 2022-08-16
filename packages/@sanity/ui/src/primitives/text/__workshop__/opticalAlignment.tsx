@@ -8,31 +8,41 @@ export default function OpticalAlignment() {
       <Stack space={1}>
         <Flex>
           <Card padding={0} scheme="dark">
-            <Text size={4}>Hamburgefonstiv M</Text>
+            <Text accent size={4}>
+              Hamburgefonstiv M
+            </Text>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Text size={3}>Hamburgefonstiv M</Text>
+            <Text accent size={3}>
+              Hamburgefonstiv M
+            </Text>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Text size={2}>Hamburgefonstiv M</Text>
+            <Text accent size={2}>
+              Hamburgefonstiv M
+            </Text>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Text size={1}>Hamburgefonstiv M</Text>
+            <Text accent size={1}>
+              Hamburgefonstiv M
+            </Text>
           </Card>
         </Flex>
 
         <Flex>
           <Card padding={0} scheme="dark">
-            <Text size={0}>Hamburgefonstiv M</Text>
+            <Text accent size={0}>
+              Hamburgefonstiv M
+            </Text>
           </Card>
         </Flex>
 

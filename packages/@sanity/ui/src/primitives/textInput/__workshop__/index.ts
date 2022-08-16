@@ -13,8 +13,8 @@ export default defineScope('primitives/text-input', 'TextInput', [
     component: lazy(() => import('./customValidity')),
   },
   {
-    name: 'types',
-    title: 'Types',
+    name: 'typed',
+    title: 'Typed',
     component: lazy(() => import('./typed')),
   },
   {

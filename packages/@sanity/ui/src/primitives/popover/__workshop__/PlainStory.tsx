@@ -1,5 +1,5 @@
 import {Button, Card, Popover, PortalProvider, Text} from '@sanity/ui'
-import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
+import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import React, {useState} from 'react'
 import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
@@ -9,18 +9,17 @@ import {
 } from '../../../__workshop__/constants'
 
 export default function PlainStory() {
-  const arrow = useBoolean('Arrow', true, 'Props')
-  const boundaryElementFlag = useBoolean('Boundary element', true, 'Props')
-  const content = useText('Content', 'Hello, world', 'Props')
-  const constrainSize = useBoolean('Constrain size', true, 'Props')
-  const matchReferenceWidth = useBoolean('Match reference width', false, 'Props')
-  const open = useBoolean('Open', true, 'Props')
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
-  const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom', 'Props')
-  const portal = useBoolean('Portal', true, 'Props')
-  const preventOverflow = useBoolean('Prevent overflow', true, 'Props')
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props')
-  const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto', 'Props')
+  const arrow = useBoolean('Arrow', true)
+  const boundaryElementFlag = useBoolean('Boundary element', true)
+  const constrainSize = useBoolean('Constrain size', true)
+  const matchReferenceWidth = useBoolean('Match reference width', false)
+  const open = useBoolean('Open', true)
+  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
+  const portal = useBoolean('Portal', true)
+  const preventOverflow = useBoolean('Prevent overflow', true)
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
+  const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
@@ -46,7 +45,6 @@ export default function PlainStory() {
               __unstable_margins={[1, 1, 1, 1]}
               arrow={arrow}
               boundaryElement={boundaryElementFlag ? boundaryElement : undefined}
-              content={<Text>{content}</Text>}
               constrainSize={constrainSize}
               fallbackPlacements={['top', 'bottom']}
               matchReferenceWidth={matchReferenceWidth}

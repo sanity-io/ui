@@ -19,7 +19,7 @@ const clipboard = {
 
 export default function ColorOverviewStory(): React.ReactElement {
   return (
-    <Grid columns={[1, 1, 2, 3]} gapX={[3, 4, 5]} gapY={[4, 5, 6]} padding={[3, 4, 5]}>
+    <Grid columns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
       {COLOR_HUES.map((hueKey) => (
         <ColorHuePreview tints={hues[hueKey]} hueKey={hueKey} key={hueKey} />
       ))}
@@ -32,7 +32,7 @@ function ColorHuePreview(props: {hueKey: string; tints: ColorTints}) {
 
   return (
     <Box>
-      <Heading as="h2" size={[1, 1, 2]}>
+      <Heading as="h2" size={1}>
         {ucfirst(hueKey)}
       </Heading>
 
@@ -78,22 +78,20 @@ function ColorTintPreview(props: {tint: ColorValue}) {
       as="button"
       onClick={handleClick}
       radius={2}
-      style={
-        {
-          '--card-bg-color': tint.hex,
-          '--card-fg-color': hsl.l < 50 ? white.hex : black.hex,
-          cursor: 'pointer',
-        } as any
-      }
+      style={{
+        ['--card-bg-color' as any]: tint.hex,
+        ['--card-fg-color' as any]: hsl.l < 50 ? white.hex : black.hex,
+        cursor: 'pointer',
+      }}
     >
       <Flex padding={3}>
         <Box flex={1}>
-          <Code size={[1, 1, 2]} style={{color: 'inherit'}}>
+          <Code size={1} style={{color: 'inherit'}}>
             {tint.title}
           </Code>
         </Box>
         <Box>
-          <Code size={[1, 1, 2]} style={{color: 'inherit'}}>
+          <Code size={1} style={{color: 'inherit'}}>
             {tint.hex}
           </Code>
         </Box>
