@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react'
+import React, {forwardRef, useMemo} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
@@ -66,11 +66,12 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   ref: React.Ref<HTMLDivElement>
 ) {
   const {count, size: sizeProp = 0} = props
-  const size: AvatarSize[] = useArrayProp(sizeProp)
+  const size = useArrayProp(sizeProp)
+  const counterSize = useMemo(() => size.map((s) => (s === 0 ? 0 : s + 1)), [size])
 
   return (
     <Root $size={size} ref={ref}>
-      <Text as="span" size={size.map((s) => (s === 0 ? 0 : s + 1))}>
+      <Text as="span" size={counterSize}>
         <strong>{count}</strong>
       </Text>
     </Root>

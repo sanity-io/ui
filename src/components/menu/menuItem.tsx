@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
-import {useForwardedRef} from '../../hooks'
+import {useArrayProp, useForwardedRef} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
@@ -118,7 +118,8 @@ export const MenuItem = forwardRef(function MenuItem(
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
       forwardedAs={as}
-      $radius={radius}
+      $radius={useArrayProp(radius)}
+      $padding={useArrayProp(0)}
       $tone={tone}
       disabled={disabled}
       onClick={handleClick}
