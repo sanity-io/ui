@@ -28,7 +28,7 @@ const LayerChildren = forwardRef(function LayerChildren(
   const {zIndex} = useLayer()
 
   return (
-    <Root {...restProps} ref={ref} style={{...style, zIndex}}>
+    <Root {...restProps} data-ui="Layer" ref={ref} style={{...style, zIndex}}>
       {children}
     </Root>
   )
