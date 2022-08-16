@@ -24,11 +24,6 @@ export const ListBox = styled(Box)`
  * @internal
  */
 export const ResultsPopover = styled(Popover)`
-  & > div {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
   &[data-popper-reference-hidden='true'] {
     display: none;
   }
