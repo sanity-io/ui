@@ -3,7 +3,7 @@ import React, {createElement, forwardRef, isValidElement, useCallback, useMemo} 
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
+import {useArrayProp, useForwardedRef, useCustomValidity} from '../../hooks'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
