@@ -8,7 +8,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: 'normal normal',
           gridTemplateColumns: '280px',
-          gridTemplateRows: '11px 11px 11px 11px 11px 11px 11px 11px 11px 11px 11px 11px',
+          gridTemplateRows: '19px 19px 19px 19px 19px 19px 19px 19px 19px 19px 19px 19px',
         },
       },
 
@@ -17,7 +17,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: '4px 4px',
           gridTemplateColumns: '146px 146px',
-          gridTemplateRows: '11px 11px 11px 11px 11px 11px',
+          gridTemplateRows: '27px 27px 27px 27px 27px 27px',
         },
       },
 
@@ -26,7 +26,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: '8px 8px',
           gridTemplateColumns: '160px 160px 160px',
-          gridTemplateRows: '11px 11px 11px 11px',
+          gridTemplateRows: '35px 35px 35px 35px',
         },
       },
 
@@ -35,7 +35,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: '12px 12px',
           gridTemplateColumns: '190px 190px 190px 190px',
-          gridTemplateRows: '11px 11px 11px 11px',
+          gridTemplateRows: '35px 35px 35px 35px',
         },
       },
 
@@ -44,7 +44,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: '20px 20px',
           gridTemplateColumns: '203.188px 203.188px 203.188px 203.188px 203.188px',
-          gridTemplateRows: '11px 11px 11px 11px 11px',
+          gridTemplateRows: '35px 35px 35px 35px 35px',
         },
       },
 
@@ -53,7 +53,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: '32px 32px',
           gridTemplateColumns: '256px 256px 256px 256px 256px 256px',
-          gridTemplateRows: '11px 11px 11px 11px 11px 11px',
+          gridTemplateRows: '35px 35px 35px 35px 35px 35px',
         },
       },
 
@@ -63,7 +63,7 @@ context('Primitives/Grid', () => {
           gridGap: '52px 52px',
           gridTemplateColumns:
             '283.422px 283.422px 283.422px 283.422px 283.422px 283.422px 283.422px',
-          gridTemplateRows: '11px 11px 11px 11px 11px 11px 11px',
+          gridTemplateRows: '35px 35px 35px 35px 35px 35px 35px',
         },
       },
     ]
