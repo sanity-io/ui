@@ -1,5 +1,5 @@
 import {SearchIcon} from '@sanity/icons'
-import {Box, Card, Layer, TextInput} from '@sanity/ui'
+import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
 import React, {memo, useCallback, useMemo, useState} from 'react'
 import styled from 'styled-components'
 import {EMPTY_ARRAY} from '../constants'
@@ -92,37 +92,39 @@ const NavigatorView = memo(function NavigatorView(props: {
 
   return (
     <Root borderRight flex={1} overflow="hidden">
-      <Layer style={flexNoneStyle}>
-        <Card padding={2} shadow={1} style={lineHeightNoneStyle}>
-          <TextInput
-            border={false}
-            clearButton={Boolean(query)}
-            fontSize={textInputFontSize}
-            icon={SearchIcon}
-            onChange={onSearchQueryChange}
-            onClear={onSearchQueryClear}
-            padding={2}
-            placeholder="Stories"
-            radius={2}
-            space={2}
-            value={query}
-          />
+      <Flex direction="column" height="fill">
+        <Layer style={flexNoneStyle}>
+          <Card padding={2} shadow={1} style={lineHeightNoneStyle}>
+            <TextInput
+              border={false}
+              clearButton={Boolean(query)}
+              fontSize={textInputFontSize}
+              icon={SearchIcon}
+              onChange={onSearchQueryChange}
+              onClear={onSearchQueryClear}
+              padding={2}
+              placeholder="Stories"
+              radius={2}
+              space={2}
+              value={query}
+            />
+          </Card>
+        </Layer>
+
+        <Card flex={1} overflow="auto">
+          {query && matches.length > 0 && (
+            <Box padding={2}>
+              <SearchResults matches={matches} onStoryClick={onStoryClick} />
+            </Box>
+          )}
+
+          {!query && menu.type === 'list' && (
+            <Box padding={2}>
+              <StoryTree items={menu.items} />
+            </Box>
+          )}
         </Card>
-      </Layer>
-
-      <Card flex={1} overflow="auto">
-        {query && matches.length > 0 && (
-          <Box padding={2}>
-            <SearchResults matches={matches} onStoryClick={onStoryClick} />
-          </Box>
-        )}
-
-        {!query && menu.type === 'list' && (
-          <Box padding={2}>
-            <StoryTree items={menu.items} />
-          </Box>
-        )}
-      </Card>
+      </Flex>
     </Root>
   )
 })
