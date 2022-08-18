@@ -54,7 +54,6 @@ export const Card = forwardRef(function Card(
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const {
-    pressed = false,
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
     as: asProp,
@@ -63,6 +62,7 @@ export const Card = forwardRef(function Card(
     borderRight,
     borderBottom,
     borderLeft,
+    pressed,
     radius = 0,
     scheme,
     selected,
@@ -70,6 +70,7 @@ export const Card = forwardRef(function Card(
     tone: toneProp = 'default',
     ...restProps
   } = props
+
   const as = isValidElementType(asProp) ? asProp : 'div'
   const rootTheme = useRootTheme()
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
@@ -78,10 +79,7 @@ export const Card = forwardRef(function Card(
     <ThemeColorProvider scheme={scheme} tone={tone}>
       <Root
         data-as={typeof as === 'string' ? as : undefined}
-        data-checkered={checkered ? '' : undefined}
-        data-pressed={pressed ? '' : undefined}
         data-scheme={rootTheme.scheme}
-        data-selected={selected ? '' : undefined}
         data-ui="Card"
         data-tone={tone}
         {...restProps}
@@ -95,6 +93,9 @@ export const Card = forwardRef(function Card(
         $radius={radius}
         $shadow={shadow}
         $tone={tone}
+        data-checkered={checkered ? '' : undefined}
+        data-pressed={pressed ? '' : undefined}
+        data-selected={selected ? '' : undefined}
         forwardedAs={as}
         ref={ref}
         selected={selected}
