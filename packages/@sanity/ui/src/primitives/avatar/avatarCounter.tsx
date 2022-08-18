@@ -54,6 +54,7 @@ const Root = styled.div<{$size: AvatarSize[]}>(
 export interface AvatarCounterProps {
   count: number
   size?: AvatarSize | AvatarSize[]
+  /** @deprecated No longer supported. */
   tone?: 'navbar'
 }
 
@@ -64,11 +65,11 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   props: AvatarCounterProps,
   ref: React.Ref<HTMLDivElement>
 ) {
-  const {count, size: sizeProp = 0, tone} = props
+  const {count, size: sizeProp = 0} = props
   const size: AvatarSize[] = useResponsiveProp(sizeProp, [0])
 
   return (
-    <Root $size={size} data-tone={tone} ref={ref}>
+    <Root $size={size} ref={ref}>
       <Text as="span" size={size.map((s) => (s === 0 ? 0 : s + 1))}>
         <strong>{count}</strong>
       </Text>
