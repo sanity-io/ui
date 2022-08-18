@@ -29,12 +29,12 @@ export function ToolMenu(props: {onHide: () => void; onShow: () => void}) {
   const {handleLinkClick, segments} = useLocation()
   const tools = useStudioToolPlugins()
   const {onHide, onShow} = props
-  const {collapsed, hidden, rootRef, wrapperRef} = useResponsiveMenu({onHide, onShow})
+  const {collapsed, hidden, setRootElement, setWrapperElement} = useResponsiveMenu({onHide, onShow})
   const activeToolName = segments[0] || tools[0]?.name
 
   return (
-    <Root ref={rootRef}>
-      <ButtonContainer ref={wrapperRef}>
+    <Root ref={setRootElement}>
+      <ButtonContainer ref={setWrapperElement}>
         {!hidden && (
           <>
             {tools.map((tool: any, toolIndex: number) => (

@@ -1,4 +1,4 @@
-import {ResizeObserver} from '@sanity/ui'
+import {useElementSize} from '@sanity/ui'
 import {useEffect, useRef, useState} from 'react'
 
 export function useResponsiveMenu(props: {onHide: () => void; onShow: () => void}) {
@@ -7,21 +7,21 @@ export function useResponsiveMenu(props: {onHide: () => void; onShow: () => void
   const [hidden, setHidden] = useState(false)
   const expandedWidthRef = useRef<number>(-1)
   const collapsedWidthRef = useRef<number>(-1)
-  const rootRef = useRef<HTMLDivElement | null>(null)
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const [widths, setWidths] = useState({current: -1, wrapper: -1})
-  const widthsRef = useRef(widths)
+  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
+  const [wrapperElement, setWrapperElement] = useState<HTMLDivElement | null>(null)
+  const rootWidth = useElementSize(rootElement)?.border.width ?? 0
+  const wrapperWidth = useElementSize(wrapperElement)?.border.width ?? 0
 
   useEffect(() => {
-    if (widths.current < 0) return
-    if (widths.wrapper < 0) return
+    if (rootWidth < 0) return
+    if (wrapperWidth < 0) return
 
     if (!collapsed) {
       if (expandedWidthRef.current === -1) {
-        expandedWidthRef.current = widths.wrapper
+        expandedWidthRef.current = wrapperWidth
       }
 
-      if (widths.current < widths.wrapper) {
+      if (rootWidth < wrapperWidth) {
         setCollapsed(true)
 
         return
@@ -34,21 +34,21 @@ export function useResponsiveMenu(props: {onHide: () => void; onShow: () => void
     }
 
     if (!hidden) {
-      if (widths.wrapper === expandedWidthRef.current) {
+      if (wrapperWidth === expandedWidthRef.current) {
         return
       }
 
       if (collapsedWidthRef.current === -1) {
-        collapsedWidthRef.current = widths.wrapper
+        collapsedWidthRef.current = wrapperWidth
       }
 
-      if (expandedWidthRef.current < widths.current) {
+      if (expandedWidthRef.current < rootWidth) {
         setCollapsed(false)
 
         return
       }
 
-      if (widths.current < widths.wrapper) {
+      if (rootWidth < wrapperWidth) {
         onHide()
         setHidden(true)
 
@@ -58,52 +58,21 @@ export function useResponsiveMenu(props: {onHide: () => void; onShow: () => void
       return
     }
 
-    if (widths.wrapper !== 0) {
+    if (wrapperWidth !== 0) {
       return
     }
 
-    if (collapsedWidthRef.current < widths.current) {
+    if (collapsedWidthRef.current < rootWidth) {
       onShow()
       setHidden(false)
 
-      if (expandedWidthRef.current < widths.current) {
+      if (expandedWidthRef.current < rootWidth) {
         setCollapsed(false)
 
         return
       }
     }
-  }, [collapsed, hidden, onHide, onShow, widths])
+  }, [collapsed, hidden, onHide, onShow, rootWidth, wrapperWidth])
 
-  useEffect(() => {
-    const rootElement = rootRef.current
-    const wrapperElement = wrapperRef.current
-
-    if (!rootElement || !wrapperElement) return undefined
-
-    const ro = new ResizeObserver((entries) => {
-      const nextWidths = {...widthsRef.current}
-
-      for (const entry of entries) {
-        const entryWidth = entry.contentRect.width
-
-        if (entry.target === rootElement) {
-          nextWidths.current = entryWidth
-        }
-
-        if (entry.target === wrapperElement) {
-          nextWidths.wrapper = entryWidth
-        }
-      }
-
-      setWidths(nextWidths)
-      widthsRef.current = nextWidths
-    })
-
-    ro.observe(rootElement)
-    ro.observe(wrapperElement)
-
-    return () => ro.disconnect()
-  }, [])
-
-  return {collapsed, hidden, rootRef, wrapperRef}
+  return {collapsed, hidden, rootElement, setRootElement, setWrapperElement, wrapperElement}
 }
