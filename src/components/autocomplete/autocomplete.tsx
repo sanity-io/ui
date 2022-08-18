@@ -560,10 +560,17 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     if (filteredOptions.length === 0) return null
 
     return (
-      <ListBox onKeyDown={handleListBoxKeyDown} padding={1} {...listBox} tabIndex={-1}>
+      <ListBox
+        data-ui="AutoComplete__results"
+        onKeyDown={handleListBoxKeyDown}
+        padding={1}
+        {...listBox}
+        tabIndex={-1}
+      >
         <Stack
           as="ul"
           aria-multiselectable={false}
+          data-ui="AutoComplete__resultsList"
           id={listBoxId}
           ref={listBoxElementRef}
           role="listbox"
