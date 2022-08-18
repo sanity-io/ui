@@ -70,7 +70,7 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   const counterSize = useMemo(() => size.map((s) => (s === 0 ? 0 : s + 1)), [size])
 
   return (
-    <Root $size={size} ref={ref}>
+    <Root $size={size} data-ui="AvatarCounter" ref={ref}>
       <Text as="span" size={counterSize}>
         <strong>{count}</strong>
       </Text>
