@@ -6,7 +6,7 @@ const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
 
 describe('styles/margin', () => {
   it('should 1', () => {
-    const styles = responsiveMarginStyle({$margin: 0, theme})
+    const styles = responsiveMarginStyle({$margin: [0], theme})
 
     expect(styles).toEqual([[{margin: 0}]])
   })
