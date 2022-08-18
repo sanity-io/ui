@@ -51,6 +51,7 @@ export interface AvatarStackProps {
   children: React.ReactNode
   maxLength?: number
   size?: AvatarSize | AvatarSize[]
+  /** @deprecated No longer supported. */
   tone?: 'navbar'
 }
 
@@ -75,18 +76,18 @@ export const AvatarStack = forwardRef(function AvatarStack(
     <Root data-ui="AvatarStack" {...restProps} ref={ref} size={size}>
       {len === 0 && (
         <div>
-          <AvatarCounter count={len} tone={tone} />
+          <AvatarCounter count={len} />
         </div>
       )}
 
       {len !== 0 && extraCount > 1 && (
         <div>
-          <AvatarCounter count={extraCount} size={size} tone={tone} />
+          <AvatarCounter count={extraCount} size={size} />
         </div>
       )}
 
       {visibleChildren.map((child, childIndex) => (
-        <div key={String(childIndex)}>{cloneElement(child, {size, tone})}</div>
+        <div key={String(childIndex)}>{cloneElement(child, {size})}</div>
       ))}
     </Root>
   )
