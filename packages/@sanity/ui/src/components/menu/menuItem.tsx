@@ -111,14 +111,13 @@ export const MenuItem = forwardRef(function MenuItem(
 
   return (
     <Selectable
-      data-as={as}
       data-ui="MenuItem"
-      forwardedAs={as}
       {...restProps}
       aria-pressed={as === 'button' && pressed}
       data-pressed={as !== 'button' && pressed ? '' : undefined}
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
+      forwardedAs={as}
       $radius={radius}
       $tone={tone}
       disabled={disabled}
