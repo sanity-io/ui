@@ -27,7 +27,7 @@ import {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
 /**
  * @public
  */
-export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
+export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseAutocompleteOption> {
   border?: boolean
   customValidity?: string
   filterOption?: (query: string, option: Option) => boolean
