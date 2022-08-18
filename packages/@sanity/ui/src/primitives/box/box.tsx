@@ -87,7 +87,7 @@ export const Box = forwardRef(function Box(
 
   return (
     <Root
-      data-as={asProp}
+      data-as={typeof asProp === 'string' ? asProp : undefined}
       data-ui="Box"
       {...restProps}
       $column={column}
