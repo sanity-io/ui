@@ -6,7 +6,7 @@ const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
 
 describe('styles/padding', () => {
   it('should 1', () => {
-    const styles = responsivePaddingStyle({$padding: 0, theme})
+    const styles = responsivePaddingStyle({$padding: [0], theme})
 
     expect(styles).toEqual([[{padding: 0}]])
   })
