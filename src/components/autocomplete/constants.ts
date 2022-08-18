@@ -3,11 +3,6 @@ import {Placement, PopoverMargins} from '../../types'
 /**
  * @internal
  */
-export const EMPTY_RECORD = {}
-
-/**
- * @internal
- */
 export const AUTOCOMPLETE_LISTBOX_IGNORE_KEYS = [
   'Control',
   'Shift',

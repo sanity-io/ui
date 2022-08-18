@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import {EMPTY_ARRAY} from '../../constants'
+import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
 import {useForwardedRef, useResponsiveProp} from '../../hooks'
 import {Box, BoxProps, Button, Card, PopoverProps, Stack, Text, TextInput} from '../../primitives'
@@ -17,7 +17,6 @@ import {AnimatedSpinnerIcon, ListBox, ResultsPopover, Root} from './autocomplete
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {
-  EMPTY_RECORD,
   AUTOCOMPLETE_LISTBOX_IGNORE_KEYS,
   AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS,
   AUTOCOMPLETE_POPOVER_MARGINS,
