@@ -6,7 +6,6 @@ import {Box, Popover} from '../../primitives'
  * @internal
  */
 export const Root = styled.div`
-  /* position: relative; */
   line-height: 0;
 `
 
