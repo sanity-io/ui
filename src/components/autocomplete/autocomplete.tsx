@@ -48,7 +48,8 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption> {
   openButton?: boolean | AutocompleteOpenButtonProps
   options?: Option[]
   padding?: number | number[]
-  popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
+  popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'> &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'ref' | 'width'>
   prefix?: React.ReactNode
   radius?: number | number[]
   /**
