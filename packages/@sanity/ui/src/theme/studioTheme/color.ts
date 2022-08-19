@@ -17,18 +17,19 @@ const NEUTRAL_TONES = ['default', 'transparent']
 export const color = createColorTheme({
   base: ({dark, name}) => {
     if (name === 'default') {
-      const skeletonFrom = dark ? hues.gray[900].hex : hues.gray[100].hex
+      const tints = hues.gray
+      const skeletonFrom = dark ? tints[900].hex : tints[100].hex
 
       return {
         fg: dark ? white.hex : black.hex,
         bg: dark ? black.hex : white.hex,
-        border: hues.gray[dark ? 800 : 200].hex,
+        border: tints[dark ? 800 : 200].hex,
         focusRing: hues.blue[dark ? 500 : 500].hex,
         shadow: {
-          outline: rgba(hues.gray[500].hex, 0.4),
-          umbra: rgba(dark ? black.hex : hues.gray[500].hex, 0.2),
-          penumbra: rgba(dark ? black.hex : hues.gray[500].hex, 0.14),
-          ambient: rgba(dark ? black.hex : hues.gray[500].hex, 0.12),
+          outline: rgba(tints[500].hex, 0.4),
+          umbra: dark ? rgba(tints[950].hex, 0.4) : rgba(tints[500].hex, 0.2),
+          penumbra: dark ? rgba(tints[950].hex, 0.28) : rgba(tints[500].hex, 0.14),
+          ambient: dark ? rgba(tints[950].hex, 0.24) : rgba(tints[500].hex, 0.12),
         },
         skeleton: {
           from: skeletonFrom,
@@ -47,10 +48,10 @@ export const color = createColorTheme({
         border: tints[dark ? 800 : 300].hex,
         focusRing: hues.blue[500].hex,
         shadow: {
-          outline: rgba(tints[500].hex, dark ? 0.2 : 0.4),
-          umbra: rgba(dark ? black.hex : tints[500].hex, 0.2),
-          penumbra: rgba(dark ? black.hex : tints[500].hex, 0.14),
-          ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
+          outline: rgba(tints[500].hex, 0.4),
+          umbra: dark ? rgba(tints[900].hex, 0.4) : rgba(tints[500].hex, 0.2),
+          penumbra: dark ? rgba(tints[900].hex, 0.28) : rgba(tints[500].hex, 0.14),
+          ambient: dark ? rgba(tints[900].hex, 0.24) : rgba(tints[500].hex, 0.12),
         },
         skeleton: {
           from: skeletonFrom,
@@ -68,10 +69,10 @@ export const color = createColorTheme({
       border: tints[dark ? 800 : 200].hex,
       focusRing: tints[500].hex,
       shadow: {
-        outline: rgba(tints[500].hex, dark ? 0.2 : 0.4),
-        umbra: rgba(dark ? black.hex : tints[500].hex, 0.2),
-        penumbra: rgba(dark ? black.hex : tints[500].hex, 0.14),
-        ambient: rgba(dark ? black.hex : tints[500].hex, 0.12),
+        outline: rgba(tints[500].hex, 0.4),
+        umbra: dark ? rgba(tints[900].hex, 0.4) : rgba(tints[500].hex, 0.2),
+        penumbra: dark ? rgba(tints[900].hex, 0.28) : rgba(tints[500].hex, 0.14),
+        ambient: dark ? rgba(tints[900].hex, 0.24) : rgba(tints[500].hex, 0.12),
       },
       skeleton: {
         from: skeletonFrom,
