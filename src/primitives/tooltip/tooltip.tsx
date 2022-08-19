@@ -1,4 +1,4 @@
-import React, {cloneElement, forwardRef, useCallback, useEffect, useState} from 'react'
+import React, {cloneElement, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import {usePopper} from 'react-popper'
 import styled from 'styled-components'
 import {useArrayProp, useForwardedRef} from '../../hooks'
@@ -118,14 +118,23 @@ export const Tooltip = forwardRef(function Tooltip(
     }
   }, [isOpen, referenceElement])
 
+  const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
   useEffect(() => {
-    if (forceUpdate) {
-      try {
-        forceUpdate()
-      } catch (_) {
-        // ignore caught error
-      }
+    if (updateTimeoutRef.current) {
+      clearTimeout(updateTimeoutRef.current)
+      updateTimeoutRef.current = null
     }
+
+    updateTimeoutRef.current = setTimeout(() => {
+      if (forceUpdate) {
+        try {
+          forceUpdate()
+        } catch (_) {
+          // ignore caught error
+        }
+      }
+    }, 0)
   }, [forceUpdate, content])
 
   // Close when `disabled` changes to `true`
