@@ -145,7 +145,7 @@ export const Popover = forwardRef(function Popover(
   const [popperElement, setPopperElement] = useState<HTMLElement | null>(null)
   const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null)
   const popperReferenceElement = referenceElementProp || referenceElement
-  const width = useArrayProp(widthProp)
+  const width = useArrayProp(matchReferenceWidth ? 'auto' : widthProp)
 
   const modifiers = usePopoverModifiers({
     allowedAutoPlacements,
