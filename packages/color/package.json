@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "run-s build:microbundle",
-    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
+    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
     "clean": "rimraf lib",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts --quiet",
