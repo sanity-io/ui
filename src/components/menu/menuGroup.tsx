@@ -37,7 +37,7 @@ export function MenuGroup(
     icon,
     onClick,
     padding = 3,
-    popover = {},
+    popover,
     radius = 2,
     space = 3,
     text,
