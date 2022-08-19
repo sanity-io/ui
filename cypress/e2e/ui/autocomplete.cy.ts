@@ -1,6 +1,6 @@
 context('Components/Autocomplete', () => {
   it('should use key arrows', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
+    cy.visit('/frame/?path=/components/autocomplete/custom')
 
     cy.get('#custom').click()
 
@@ -25,7 +25,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should press clear button to clear', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
+    cy.visit('/frame/?path=/components/autocomplete/custom')
 
     cy.get('#custom').click()
 
@@ -52,7 +52,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should collapse when tabbing out', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
+    cy.visit('/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
     cy.get('#custom').click()
@@ -71,7 +71,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should clear query on blur', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
+    cy.visit('/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
     cy.get('#custom').click()
@@ -105,7 +105,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should search anew after selecting a value', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/custom')
+    cy.visit('/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
     cy.get('#custom').click()
@@ -142,7 +142,7 @@ context('Components/Autocomplete', () => {
   })
 
   it('should trigger focus and blur', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/autocomplete/focus-and-blur')
+    cy.visit('/frame/?path=/components/autocomplete/focus-and-blur')
 
     // Click to focus
     cy.get('#focus-and-blur').click()

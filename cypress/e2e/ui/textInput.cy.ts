@@ -1,6 +1,6 @@
 context('Primitives/TextInput', () => {
   it('read-only input should have focus styling', () => {
-    cy.visit('http://localhost:9009/frame/?path=/primitives/text-input/read-only')
+    cy.visit('/frame/?path=/primitives/text-input/read-only')
 
     cy.get('#text-input-example').click()
 

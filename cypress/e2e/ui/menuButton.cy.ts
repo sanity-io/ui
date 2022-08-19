@@ -1,6 +1,6 @@
 context('Components/MenuButton', () => {
   it('clicking should open/close menu', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
+    cy.visit('/frame/?path=/components/menu/menu-button')
 
     // click button
     cy.get('#menu-button').click()
@@ -12,7 +12,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should use arrow keys to navigate the menu', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
+    cy.visit('/frame/?path=/components/menu/menu-button')
 
     // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')
@@ -50,7 +50,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should close on tab', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
+    cy.visit('/frame/?path=/components/menu/menu-button')
 
     cy.get('#menu-button').focus().realPress('ArrowDown')
     cy.get('#menu-item-1').should('be.focused')
@@ -60,7 +60,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should close on shift + tab', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
+    cy.visit('/frame/?path=/components/menu/menu-button')
 
     cy.get('#menu-button').focus().realPress('ArrowDown')
     cy.get('#menu-item-1').should('be.focused')
@@ -70,7 +70,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should not close when one of the items receives focus', () => {
-    cy.visit('http://localhost:9009/frame/?path=/components/menu/menu-button')
+    cy.visit('/frame/?path=/components/menu/menu-button')
 
     cy.get('#menu-button').click()
     cy.get('#menu-button').should('be.focused')

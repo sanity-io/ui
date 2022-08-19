@@ -1,6 +1,6 @@
 context('Primitives/Grid', () => {
   it('should have responsive styles', () => {
-    cy.visit('http://localhost:9009/frame/?path=/primitives/grid/responsive')
+    cy.visit('/frame/?path=/primitives/grid/responsive')
 
     const sizes = [
       {
@@ -43,7 +43,7 @@ context('Primitives/Grid', () => {
         viewport: [1200, 1600],
         css: {
           gridGap: '20px 20px',
-          gridTemplateColumns: '203.188px 203.188px 203.188px 203.188px 203.188px',
+          gridTemplateColumns: '203.188px 203.203px 203.203px 203.203px 203.203px',
           gridTemplateRows: '35px 35px 35px 35px 35px',
         },
       },
@@ -62,7 +62,7 @@ context('Primitives/Grid', () => {
         css: {
           gridGap: '52px 52px',
           gridTemplateColumns:
-            '283.422px 283.422px 283.422px 283.422px 283.422px 283.422px 283.422px',
+            '283.422px 283.422px 283.438px 283.422px 283.438px 283.422px 283.438px',
           gridTemplateRows: '35px 35px 35px 35px 35px 35px 35px',
         },
       },
