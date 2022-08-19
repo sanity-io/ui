@@ -2,7 +2,7 @@ import {ThemeFonts} from '../lib/theme'
 
 export const fonts: ThemeFonts = {
   code: {
-    family: '-apple-system-ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
+    family: 'ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace',
     weights: {
       regular: 400,
       medium: 500,
