@@ -19,7 +19,8 @@ export async function getStaticProps(opts: {preview?: boolean}) {
 
 export default function NotFoundPage() {
   const {data, menu} = useApp()
-  const target = isRecord(data) && isRecord(data.target) && data.target
+  const target = isRecord(data) && isRecord(data.target) ? data.target : undefined
+  const layout = isRecord(target?.layout) ? target?.layout : undefined
   const seo: Record<string, any> | null = target ? (target.seo as any) : null
 
   return (
@@ -37,7 +38,7 @@ export default function NotFoundPage() {
 
       <AppLayout>
         {target && target._type === 'article' && (
-          <PageLayout menu={menu} {...(target.layout || {})}>
+          <PageLayout menu={menu} {...layout}>
             <Article article={target} />
           </PageLayout>
         )}

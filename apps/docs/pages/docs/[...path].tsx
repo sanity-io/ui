@@ -23,7 +23,8 @@ export async function getStaticPaths() {
 
 export default function DocsPathPage() {
   const {data, menu} = useApp()
-  const target = isRecord(data) && isRecord(data.target) && data.target
+  const target = isRecord(data) && isRecord(data.target) ? data.target : undefined
+  const layout = isRecord(target?.layout) ? target?.layout : undefined
   const seo = (target && isRecord(target.seo) && target.seo) || null
 
   return (
@@ -40,7 +41,7 @@ export default function DocsPathPage() {
 
       <AppLayout>
         {target && target._type === 'article' && (
-          <PageLayout menu={menu} {...(target.layout || {})}>
+          <PageLayout menu={menu} {...layout}>
             <Article article={target} />
           </PageLayout>
         )}
