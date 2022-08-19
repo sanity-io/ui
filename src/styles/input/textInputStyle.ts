@@ -1,5 +1,6 @@
 import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeFontWeightKey} from '../../theme'
+import {CardTone} from '../../types'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -9,6 +10,7 @@ import {ThemeProps} from '../types'
  */
 export interface TextInputInputStyleProps {
   $fontSize: number[]
+  $tone: CardTone
   $weight?: ThemeFontWeightKey
 }
 
@@ -19,6 +21,7 @@ export interface TextInputRepresentationStyleProps {
   $border?: boolean
   $hasPrefix?: boolean
   $hasSuffix?: boolean
+  $tone: CardTone
 }
 
 const ROOT_STYLE = css`
@@ -36,14 +39,11 @@ export function textInputRootStyle(): FlattenSimpleInterpolation {
 export function textInputBaseStyle(
   props: TextInputInputStyleProps & ThemeProps
 ): FlattenSimpleInterpolation {
-  const {theme, $weight} = props
+  const {theme, $tone, $weight} = props
   const font = theme.sanity.fonts.text
   const color = theme.sanity.color.input
 
   return css`
-    --input-fg-color: ${color.default.enabled.fg};
-    --input-placeholder-color: ${color.default.enabled.placeholder};
-
     appearance: none;
     background: none;
     border: 0;
@@ -57,7 +57,6 @@ export function textInputBaseStyle(
     position: relative;
     z-index: 1;
     display: block;
-    color: var(--input-fg-color);
 
     /* NOTE: This is a hack to disable Chrome’s autofill styles */
     &:-webkit-autofill,
@@ -69,37 +68,44 @@ export function textInputBaseStyle(
       transition-delay: 86400s /* 24h */;
     }
 
-    &::placeholder {
-      color: var(--input-placeholder-color);
-    }
-
     /* &:is(textarea) */
     &[data-as='textarea'] {
       resize: none;
     }
 
-    /* enabled */
-    &:not(:invalid):not(:disabled):not(:read-only) {
+    color: var(--input-fg-color);
+
+    &::placeholder {
+      color: var(--input-placeholder-color);
+    }
+
+    &[data-tone='${$tone}'] {
       --input-fg-color: ${color.default.enabled.fg};
       --input-placeholder-color: ${color.default.enabled.placeholder};
-    }
 
-    /* disabled */
-    &:not(:invalid):disabled {
-      --input-fg-color: ${color.default.disabled.fg};
-      --input-placeholder-color: ${color.default.disabled.placeholder};
-    }
+      /* enabled */
+      &:not(:invalid):not(:disabled):not(:read-only) {
+        --input-fg-color: ${color.default.enabled.fg};
+        --input-placeholder-color: ${color.default.enabled.placeholder};
+      }
 
-    /* invalid */
-    &:invalid {
-      --input-fg-color: ${color.invalid.enabled.fg};
-      --input-placeholder-color: ${color.invalid.enabled.placeholder};
-    }
+      /* disabled */
+      &:not(:invalid):disabled {
+        --input-fg-color: ${color.default.disabled.fg};
+        --input-placeholder-color: ${color.default.disabled.placeholder};
+      }
 
-    /* readOnly */
-    &:read-only {
-      --input-fg-color: ${color.default.readOnly.fg};
-      --input-placeholder-color: ${color.default.readOnly.placeholder};
+      /* invalid */
+      &:invalid {
+        --input-fg-color: ${color.invalid.enabled.fg};
+        --input-placeholder-color: ${color.invalid.enabled.placeholder};
+      }
+
+      /* readOnly */
+      &:read-only {
+        --input-fg-color: ${color.default.readOnly.fg};
+        --input-placeholder-color: ${color.default.readOnly.placeholder};
+      }
     }
   `
 }
@@ -121,13 +127,11 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps
 ): FlattenSimpleInterpolation {
-  const {$border, $hasPrefix, $hasSuffix, theme} = props
+  const {$border, $hasPrefix, $hasSuffix, $tone, theme} = props
   const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.input
 
   return css`
-    --card-bg-color: ${color.default.enabled.bg};
-    --card-fg-color: ${color.default.enabled.fg};
     --input-box-shadow: none;
 
     position: absolute;
@@ -138,6 +142,7 @@ export function textInputRepresentationStyle(
     display: block;
     pointer-events: none;
     z-index: 0;
+
     background-color: var(--card-bg-color);
     box-shadow: var(--input-box-shadow);
 
@@ -146,65 +151,70 @@ export function textInputRepresentationStyle(
     border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
-    /* enabled */
-    *:not(:disabled) + && {
-      --input-box-shadow: ${$border
-        ? focusRingBorderStyle({color: color.default.enabled.border, width: input.border.width})
-        : undefined};
-    }
+    &[data-tone='${$tone}'] {
+      --card-bg-color: ${color.default.enabled.bg};
+      --card-fg-color: ${color.default.enabled.fg};
 
-    /* invalid */
-    *:not(:disabled):invalid + && {
-      --card-bg-color: ${color.invalid.enabled.bg};
-      --card-fg-color: ${color.invalid.enabled.fg};
-      --input-box-shadow: ${$border
-        ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
-        : 'none'};
-    }
-
-    /* focused */
-    *:not(:disabled):focus + && {
-      --input-box-shadow: ${focusRingStyle({
-        border: $border
-          ? {color: color.default.enabled.border, width: input.border.width}
-          : undefined,
-        focusRing,
-      })};
-    }
-
-    /* disabled */
-    *:disabled + && {
-      --card-bg-color: ${color.default.disabled.bg};
-      --card-fg-color: ${color.default.disabled.fg};
-      --input-box-shadow: ${$border
-        ? focusRingBorderStyle({
-            color: color.default.disabled.border,
-            width: input.border.width,
-          })
-        : 'none'};
-    }
-
-    /* hovered */
-    @media (hover: hover) {
-      *:not(:disabled):not(:read-only):not(:invalid):hover + && {
-        --card-bg-color: ${color.default.hovered.bg};
-        --card-fg-color: ${color.default.hovered.fg};
+      /* enabled */
+      *:not(:disabled) + & {
+        --input-box-shadow: ${$border
+          ? focusRingBorderStyle({color: color.default.enabled.border, width: input.border.width})
+          : undefined};
       }
 
-      *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + && {
+      /* invalid */
+      *:not(:disabled):invalid + & {
+        --card-bg-color: ${color.invalid.enabled.bg};
+        --card-fg-color: ${color.invalid.enabled.fg};
+        --input-box-shadow: ${$border
+          ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
+          : 'none'};
+      }
+
+      /* focused */
+      *:not(:disabled):focus + & {
+        --input-box-shadow: ${focusRingStyle({
+          border: $border
+            ? {color: color.default.enabled.border, width: input.border.width}
+            : undefined,
+          focusRing,
+        })};
+      }
+
+      /* disabled */
+      *:disabled + & {
+        --card-bg-color: ${color.default.disabled.bg} !important;
+        --card-fg-color: ${color.default.disabled.fg} !important;
         --input-box-shadow: ${$border
           ? focusRingBorderStyle({
-              color: color.default.hovered.border,
+              color: color.default.disabled.border,
               width: input.border.width,
             })
           : 'none'};
       }
-    }
 
-    /* readOnly */
-    *:read-only + && {
-      --card-bg-color: ${color.default.readOnly.bg};
-      --card-fg-color: ${color.default.readOnly.fg};
+      /* readOnly */
+      *:read-only + & {
+        --card-bg-color: ${color.default.readOnly.bg} !important;
+        --card-fg-color: ${color.default.readOnly.fg} !important;
+      }
+
+      /* hovered */
+      @media (hover: hover) {
+        *:not(:disabled):not(:read-only):not(:invalid):hover + & {
+          --card-bg-color: ${color.default.hovered.bg};
+          --card-fg-color: ${color.default.hovered.fg};
+        }
+
+        *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + & {
+          --input-box-shadow: ${$border
+            ? focusRingBorderStyle({
+                color: color.default.hovered.border,
+                width: input.border.width,
+              })
+            : 'none'};
+        }
+      }
     }
   `
 }

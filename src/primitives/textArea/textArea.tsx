@@ -13,7 +13,7 @@ import {
   textInputFontSizeStyle,
   textInputRepresentationStyle,
 } from '../../styles/internal'
-import {ThemeFontWeightKey} from '../../theme'
+import {ThemeFontWeightKey, useRootTheme} from '../../theme'
 import {ResponsiveRadiusProps} from '../types'
 
 /**
@@ -61,10 +61,13 @@ export const TextArea = forwardRef(function TextArea(
     fontSize = 2,
     padding = 3,
     radius = 1,
+    weight,
     ...restProps
   } = props
 
   const ref = useForwardedRef(forwardedRef)
+
+  const rootTheme = useRootTheme()
 
   useCustomValidity(ref, customValidity)
 
@@ -73,16 +76,21 @@ export const TextArea = forwardRef(function TextArea(
       <InputRoot>
         <Input
           data-as="textarea"
+          data-tone={rootTheme.tone}
           {...restProps}
           $fontSize={useArrayProp(fontSize)}
           $padding={useArrayProp(padding)}
           $space={useArrayProp(0)}
+          $tone={rootTheme.tone}
+          $weight={weight}
           disabled={disabled}
           ref={ref}
         />
         <Presentation
           $border={border}
           $radius={useArrayProp(radius)}
+          $tone={rootTheme.tone}
+          data-tone={rootTheme.tone}
         />
       </InputRoot>
     </Root>

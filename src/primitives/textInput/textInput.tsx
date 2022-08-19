@@ -16,7 +16,7 @@ import {
   textInputRepresentationStyle,
   textInputRootStyle,
 } from '../../styles/internal'
-import {ThemeFontWeightKey} from '../../theme'
+import {ThemeFontWeightKey, useRootTheme} from '../../theme'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
 import {Card} from '../card'
@@ -72,7 +72,7 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-const Root = styled.span(textInputRootStyle)
+const Root = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
 
 const InputRoot = styled.span`
   flex: 1;
@@ -118,6 +118,12 @@ const LeftBox = styled(Box)`
   left: 0;
 `
 
+const RightBox = styled(Box)`
+  position: absolute;
+  top: 0;
+  right: 0;
+`
+
 const RightCard = styled(Card)`
   background-color: transparent;
   position: absolute;
@@ -148,10 +154,13 @@ export const TextInput = forwardRef(function TextInput(
     suffix,
     customValidity,
     type = 'text',
+    weight,
     ...restProps
   } = props
 
   const ref = useForwardedRef(forwardedRef)
+
+  const rootTheme = useRootTheme()
 
   const fontSize = useArrayProp(fontSizeProp)
   const padding = useArrayProp(paddingProp)
@@ -205,6 +214,8 @@ export const TextInput = forwardRef(function TextInput(
         $hasPrefix={$hasPrefix}
         $hasSuffix={$hasSuffix}
         $radius={radius}
+        $tone={rootTheme.tone}
+        data-tone={rootTheme.tone}
       >
         {icon && (
           <LeftBox padding={padding}>
@@ -216,16 +227,27 @@ export const TextInput = forwardRef(function TextInput(
         )}
 
         {!$hasClearButton && iconRight && (
-          <RightCard padding={padding}>
+          <RightBox padding={padding}>
             <Text size={fontSize}>
               {isValidElement(iconRight) && iconRight}
               {isValidElementType(iconRight) && createElement(iconRight)}
             </Text>
-          </RightCard>
+          </RightBox>
         )}
       </Presentation>
     ),
-    [border, fontSize, icon, iconRight, padding, radius, $hasClearButton, $hasPrefix, $hasSuffix]
+    [
+      border,
+      fontSize,
+      icon,
+      iconRight,
+      padding,
+      radius,
+      rootTheme.tone,
+      $hasClearButton,
+      $hasPrefix,
+      $hasSuffix,
+    ]
   )
 
   // Render clear button (memoized)
@@ -306,25 +328,31 @@ export const TextInput = forwardRef(function TextInput(
   )
 
   return (
-    <Root data-ui="TextInput">
+    <Root data-ui="TextInput" tone={rootTheme.tone}>
       {prefixNode}
+
       <InputRoot>
         <Input
           data-as="input"
+          data-tone={rootTheme.tone}
           {...restProps}
           $fontSize={fontSize}
           $iconLeft={$hasIcon}
           $iconRight={$hasIconRight || $hasClearButton}
           $padding={padding}
           $space={space}
+          $tone={rootTheme.tone}
+          $weight={weight}
           disabled={disabled}
           readOnly={readOnly}
           ref={ref}
           type={type}
         />
+
         {presentationNode}
         {clearButtonNode}
       </InputRoot>
+
       {suffixNode}
     </Root>
   )
