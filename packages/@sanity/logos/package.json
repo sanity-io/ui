@@ -1,6 +1,6 @@
 {
   "name": "@sanity/logos",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
@@ -30,7 +30,7 @@
     "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir lib/esm --project tsconfig.lib.json --rootDir src --target ES6"
   },
   "devDependencies": {
-    "@sanity/color": "^2.1.12",
+    "@sanity/color": "^2.1.13",
     "react": "^17.0.2"
   },
   "peerDependencies": {
