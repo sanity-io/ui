@@ -213,7 +213,7 @@ function _transformMember(
 
 function _transformParameter(
   ctx: TransformContext,
-  node: ApiIndexSignature,
+  node: ApiCallSignature | ApiIndexSignature,
   param: Parameter
 ): SanityArrayObjectItem<SerializedAPIParameter> {
   const tsDocComment = param.tsdocParamBlock?.content
