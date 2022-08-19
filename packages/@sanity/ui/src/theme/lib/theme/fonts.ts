@@ -37,9 +37,7 @@ export interface ThemeFont {
   family: string
   weights: ThemeFontWeight
   sizes: ThemeFontSize[]
-  /**
-   * @beta
-   */
+  /** @deprecated No longer supported. */
   horizontalOffset?: number
 }
 
