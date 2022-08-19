@@ -5,7 +5,7 @@
   "source": "./src/index.ts",
   "exports": {
     "require": "./lib/sanity-ui-workshop.js",
-    "default": "./lib/sanity-ui-workshop.modern.js"
+    "default": "./lib/sanity-ui-workshop.modern.mjs"
   },
   "main": "./lib/sanity-ui-workshop.js",
   "module": "./lib/sanity-ui-workshop.module.js",

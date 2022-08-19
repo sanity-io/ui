@@ -7,7 +7,7 @@
   "exports": {
     ".": {
       "require": "./lib/sanity-color.js",
-      "default": "./lib/sanity-color.modern.js"
+      "default": "./lib/sanity-color.modern.mjs"
     }
   },
   "main": "./lib/sanity-color.js",
