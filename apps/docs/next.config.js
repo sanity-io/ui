@@ -18,10 +18,6 @@ module.exports = withTranspileModules(
 )({
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 
-  react: {
-    useSuspense: false,
-  },
-
   typescript: {
     tsconfigPath: './tsconfig.next.json',
   },
@@ -29,10 +25,11 @@ module.exports = withTranspileModules(
   webpack: (config) => {
     // Aliases
     config.resolve.alias = {
-      ...config.resolve.alias,
-
       'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
       'react/jsx-runtime': require.resolve('react/jsx-runtime'),
+
+      ...config.resolve.alias,
+
       react: require.resolve('react'),
       'react-dom': require.resolve('react-dom'),
       'styled-components': require.resolve('styled-components'),
