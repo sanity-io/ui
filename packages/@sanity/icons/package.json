@@ -20,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "build": "run-s build:microbundle",
-    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
+    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
     "clean": "rimraf lib",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
@@ -33,7 +33,7 @@
     "watch:es": "tsc --preserveWatchOutput -w --module ES6 --outDir lib/esm --project tsconfig.lib.json --rootDir src --target ES6"
   },
   "devDependencies": {
-    "@svgr/core": "^6.2.1",
+    "@svgr/core": "^6.3.1",
     "@types/mkdirp": "^1.0.2",
     "camelcase": "^6.3.0",
     "glob": "^7.2.0",

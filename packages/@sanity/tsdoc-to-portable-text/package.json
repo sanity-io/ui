@@ -32,18 +32,18 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@microsoft/api-extractor": "^7.22.2",
-    "@microsoft/api-extractor-model": "^7.17.1",
+    "@microsoft/api-extractor": "^7.29.3",
+    "@microsoft/api-extractor-model": "^7.23.1",
     "@microsoft/tsdoc": "^0.14.1",
     "@microsoft/tsdoc-config": "^0.16.1",
     "@types/cpx": "^1.5.2",
     "chalk": "^4.1.2",
-    "jsonc-parser": "^3.0.0",
+    "jsonc-parser": "^3.1.0",
     "mkdirp": "^1.0.4",
     "pkg-up": "^3.1.0",
     "slugify": "^1.6.5",
     "tmp": "^0.2.1",
-    "yargs": "^17.4.1"
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
     "@types/mkdirp": "^1.0.2",

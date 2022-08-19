@@ -19,7 +19,7 @@
   "license": "MIT",
   "scripts": {
     "build": "run-s build:microbundle",
-    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
+    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
     "clean": "rimraf lib",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
