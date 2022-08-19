@@ -1,9 +1,10 @@
 import {Box, Button, Card, Flex, Text, Tooltip} from '@sanity/ui'
-import {useSelect} from '@sanity/ui-workshop'
+import {useSelect, useText} from '@sanity/ui-workshop'
 import React from 'react'
 import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
 
 export default function PropsStory() {
+  const content = useText('Content', 'Tooltip content')
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
 
   return (
@@ -12,7 +13,7 @@ export default function PropsStory() {
         <Tooltip
           content={
             <Box padding={2}>
-              <Text size={1}>Tooltip content</Text>
+              <Text size={1}>{content}</Text>
             </Box>
           }
           placement={placement}
