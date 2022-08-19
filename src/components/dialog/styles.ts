@@ -24,7 +24,7 @@ export function dialogStyle({theme}: ThemeProps): CSSObject {
     alignItems: 'center',
     justifyContent: 'center',
     outline: 'none',
-    background: color.shadow.penumbra,
+    background: color.shadow.umbra,
   }
 }
 
