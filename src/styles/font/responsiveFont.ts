@@ -14,7 +14,7 @@ export function responsiveFont(
 ): CSSObject[] {
   const {$size, $weight, theme} = props
   const {fonts, media} = theme.sanity
-  const {family, sizes, weights, horizontalOffset} = fonts[fontKey]
+  const {family, sizes, weights} = fonts[fontKey]
   const fontWeight = ($weight && weights[$weight]) || weights.regular
 
   // @todo: make this configurable
@@ -24,7 +24,7 @@ export function responsiveFont(
     position: 'relative',
     fontFamily: family,
     fontWeight,
-    padding: '1px',
+    padding: '1px 0',
     margin: 0,
 
     '&:before': {
@@ -49,13 +49,13 @@ export function responsiveFont(
   }
 
   const resp = responsive(media, getResponsiveProp($size), (sizeIndex) =>
-    fontSize(sizes[sizeIndex] || defaultSize, horizontalOffset)
+    fontSize(sizes[sizeIndex] || defaultSize)
   )
 
   return [base, ...resp]
 }
 
-export function fontSize(size: ThemeFontSize, horizontalOffset?: number): CSSObject {
+export function fontSize(size: ThemeFontSize): CSSObject {
   const {ascenderHeight, descenderHeight, fontSize, iconSize, letterSpacing, lineHeight} = size
   const negHeight = ascenderHeight + descenderHeight
   const capHeight = lineHeight - negHeight
@@ -77,32 +77,14 @@ export function fontSize(size: ThemeFontSize, horizontalOffset?: number): CSSObj
       marginBottom: '-1px',
     },
 
-    '& > code, & > span': {
-      margin: horizontalOffset ? `0 calc(${rem(0 - horizontalOffset * fontSize)} - 1px)` : '0 -1px',
-    },
-
     '& svg:not([data-sanity-icon])': {
       fontSize: `calc(${customIconSize} / 16 * 1rem)`,
-      margin: [
-        // top & bottom
-        rem(customIconOffset),
-        // left & right
-        horizontalOffset
-          ? `calc(${rem(customIconOffset)} + ${rem(horizontalOffset * fontSize)})`
-          : rem(customIconOffset),
-      ].join(' '),
+      margin: rem(customIconOffset),
     },
 
     '& [data-sanity-icon]': {
       fontSize: `calc(${iconSize} / 16 * 1rem)`,
-      margin: [
-        // top & bottom
-        rem(iconOffset),
-        // left & right
-        horizontalOffset
-          ? `calc(${rem(iconOffset)} + ${rem(horizontalOffset * fontSize)})`
-          : rem(iconOffset),
-      ].join(' '),
+      margin: rem(iconOffset),
     },
   }
 }
