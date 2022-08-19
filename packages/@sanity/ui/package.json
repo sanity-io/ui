@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "0.37.16",
+  "version": "0.37.17",
   "sideEffects": false,
   "source": "./src/index.ts",
   "exports": {
