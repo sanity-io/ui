@@ -214,7 +214,9 @@ export const TextInput = forwardRef(function TextInput(
         $hasPrefix={$hasPrefix}
         $hasSuffix={$hasSuffix}
         $radius={radius}
+        $scheme={rootTheme.scheme}
         $tone={rootTheme.tone}
+        data-scheme={rootTheme.scheme}
         data-tone={rootTheme.tone}
       >
         {icon && (
@@ -243,7 +245,7 @@ export const TextInput = forwardRef(function TextInput(
       iconRight,
       padding,
       radius,
-      rootTheme.tone,
+      rootTheme,
       $hasClearButton,
       $hasPrefix,
       $hasSuffix,
@@ -334,12 +336,14 @@ export const TextInput = forwardRef(function TextInput(
       <InputRoot>
         <Input
           data-as="input"
+          data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
           {...restProps}
           $fontSize={fontSize}
           $iconLeft={$hasIcon}
           $iconRight={$hasIconRight || $hasClearButton}
           $padding={padding}
+          $scheme={rootTheme.scheme}
           $space={space}
           $tone={rootTheme.tone}
           $weight={weight}

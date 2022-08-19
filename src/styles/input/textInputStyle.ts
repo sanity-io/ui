@@ -1,5 +1,5 @@
 import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
-import {ThemeFontWeightKey} from '../../theme'
+import {ThemeColorSchemeKey, ThemeFontWeightKey} from '../../theme'
 import {CardTone} from '../../types'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'
@@ -10,6 +10,7 @@ import {ThemeProps} from '../types'
  */
 export interface TextInputInputStyleProps {
   $fontSize: number[]
+  $scheme: ThemeColorSchemeKey
   $tone: CardTone
   $weight?: ThemeFontWeightKey
 }
@@ -21,6 +22,7 @@ export interface TextInputRepresentationStyleProps {
   $border?: boolean
   $hasPrefix?: boolean
   $hasSuffix?: boolean
+  $scheme: ThemeColorSchemeKey
   $tone: CardTone
 }
 
@@ -39,7 +41,7 @@ export function textInputRootStyle(): FlattenSimpleInterpolation {
 export function textInputBaseStyle(
   props: TextInputInputStyleProps & ThemeProps
 ): FlattenSimpleInterpolation {
-  const {theme, $tone, $weight} = props
+  const {theme, $scheme, $tone, $weight} = props
   const font = theme.sanity.fonts.text
   const color = theme.sanity.color.input
 
@@ -79,7 +81,7 @@ export function textInputBaseStyle(
       color: var(--input-placeholder-color);
     }
 
-    &[data-tone='${$tone}'] {
+    &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
       --input-fg-color: ${color.default.enabled.fg};
       --input-placeholder-color: ${color.default.enabled.placeholder};
 
@@ -127,7 +129,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps
 ): FlattenSimpleInterpolation {
-  const {$border, $hasPrefix, $hasSuffix, $tone, theme} = props
+  const {$border, $hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
   const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.input
 
@@ -151,7 +153,7 @@ export function textInputRepresentationStyle(
     border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
-    &[data-tone='${$tone}'] {
+    &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
       --card-bg-color: ${color.default.enabled.bg};
       --card-fg-color: ${color.default.enabled.fg};
 

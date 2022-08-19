@@ -80,6 +80,7 @@ export const TextArea = forwardRef(function TextArea(
           {...restProps}
           $fontSize={useArrayProp(fontSize)}
           $padding={useArrayProp(padding)}
+          $scheme={rootTheme.scheme}
           $space={useArrayProp(0)}
           $tone={rootTheme.tone}
           $weight={weight}
@@ -89,6 +90,7 @@ export const TextArea = forwardRef(function TextArea(
         <Presentation
           $border={border}
           $radius={useArrayProp(radius)}
+          $scheme={rootTheme.scheme}
           $tone={rootTheme.tone}
           data-tone={rootTheme.tone}
         />
