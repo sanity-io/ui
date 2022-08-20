@@ -6,7 +6,7 @@
   "exports": {
     ".": {
       "require": "./lib/sanity-ui.js",
-      "default": "./lib/sanity-ui.modern.mjs"
+      "default": "./lib/sanity-ui.modern.js"
     }
   },
   "main": "./lib/sanity-ui.js",
