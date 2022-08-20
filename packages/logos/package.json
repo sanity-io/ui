@@ -6,7 +6,7 @@
   "exports": {
     ".": {
       "require": "./lib/sanity-logos.js",
-      "default": "./lib/sanity-logos.modern.mjs"
+      "default": "./lib/sanity-logos.modern.js"
     }
   },
   "main": "./lib/sanity-logos.js",
