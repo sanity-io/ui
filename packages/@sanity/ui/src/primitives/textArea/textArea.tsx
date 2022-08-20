@@ -76,6 +76,7 @@ export const TextArea = forwardRef(function TextArea(
       <InputRoot>
         <Input
           data-as="textarea"
+          data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
           {...restProps}
           $fontSize={useArrayProp(fontSize)}
@@ -92,6 +93,7 @@ export const TextArea = forwardRef(function TextArea(
           $radius={useArrayProp(radius)}
           $scheme={rootTheme.scheme}
           $tone={rootTheme.tone}
+          data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
         />
       </InputRoot>
