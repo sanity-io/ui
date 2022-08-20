@@ -68,7 +68,7 @@
     "kill-port": "^1.6.1",
     "lerna": "^5.4.3",
     "lint-staged": "^13.0.3",
-    "microbundle": "^0.15.1",
+    "microbundle": "^0.14.2",
     "mkdirp": "^1.0.4",
     "npm-cli-login": "^1.0.0",
     "npm-run-all": "^4.1.5",
