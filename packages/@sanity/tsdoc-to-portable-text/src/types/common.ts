@@ -1,5 +1,5 @@
-import {SanityArrayObjectItem} from '../sanity'
-import {APIMember} from './symbols'
+import {SanityArrayItem} from '../_lib/sanity'
+import {APIMember} from './members'
 import {TSDocComment} from './tsdoc'
 
 /**
@@ -24,7 +24,7 @@ export interface APIParameter {
   comment?: TSDocComment
   name: string
   releaseTag?: APIReleaseTag
-  type: SanityArrayObjectItem<APIToken>[]
+  type: SanityArrayItem<APIToken>[]
 }
 
 /**
@@ -32,7 +32,7 @@ export interface APIParameter {
  */
 export interface APITypeParameter {
   _type: 'api.typeParameter'
-  constraintType?: SanityArrayObjectItem<APIToken>[]
-  defaultType: SanityArrayObjectItem<APIToken>[]
+  constraintType?: SanityArrayItem<APIToken>[]
+  defaultType: SanityArrayItem<APIToken>[]
   name: string
 }

@@ -1,10 +1,10 @@
-import {PortableTextNode} from '../sanity'
+import {PortableTextNode} from '../_lib/portable-text'
+import {SanityArrayItem} from '../_lib/sanity'
 
 /**
  * @public
  */
 export interface TSDocParamBlock {
-  _key: string
   _type: 'tsdoc.paramBlock'
   content?: PortableTextNode[]
   name: string
@@ -30,7 +30,6 @@ export interface TSDocRemarksBlock {
  * @public
  */
 export interface TSDocCustomBlock {
-  _key: string
   _type: 'tsdoc.customBlock'
   content?: PortableTextNode[]
   tag: string
@@ -40,7 +39,6 @@ export interface TSDocCustomBlock {
  * @public
  */
 export interface TSDocExampleBlock {
-  _key: string
   _type: 'tsdoc.exampleBlock'
   content?: PortableTextNode[]
 }
@@ -49,7 +47,6 @@ export interface TSDocExampleBlock {
  * @public
  */
 export interface TSDocSeeBlock {
-  _key: string
   _type: 'tsdoc.seeBlock'
   content?: PortableTextNode[]
 }
@@ -75,13 +72,13 @@ export interface TSDocModifierTag {
  */
 export interface TSDocComment {
   _type: 'tsdoc.docComment'
-  customBlocks?: TSDocCustomBlock[]
+  customBlocks?: SanityArrayItem<TSDocCustomBlock>[]
   deprecated?: TSDocDeprecatedBlock
-  exampleBlocks?: TSDocExampleBlock[]
-  modifierTags?: TSDocModifierTag[]
-  parameters?: TSDocParamBlock[]
+  exampleBlocks?: SanityArrayItem<TSDocExampleBlock>[]
+  modifierTags?: SanityArrayItem<TSDocModifierTag>[]
+  parameters?: SanityArrayItem<TSDocParamBlock>[]
   remarks?: TSDocRemarksBlock
   returns?: TSDocReturnsBlock
-  seeBlocks?: TSDocSeeBlock[]
-  summary?: PortableTextNode[]
+  seeBlocks?: SanityArrayItem<TSDocSeeBlock>[]
+  summary?: SanityArrayItem<PortableTextNode>[]
 }

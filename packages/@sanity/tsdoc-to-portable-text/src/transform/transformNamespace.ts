@@ -1,17 +1,32 @@
-import {ApiFunction, ApiItem, ApiNamespace, Parameter} from '@microsoft/api-extractor-model'
-import {SanityArrayObjectItem} from '../sanity'
-import {APINamespaceDocument, SerializedAPINamespaceMember, SerializedAPIParameter} from '../types'
-import {_transformTokens} from './_transformTokens'
-import {_transformTypeParameter} from './_transformTypeParameter'
+import {
+  ApiClass,
+  ApiEnum,
+  ApiFunction,
+  ApiInterface,
+  ApiItem,
+  ApiNamespace,
+  ApiTypeAlias,
+  ApiVariable,
+} from '@microsoft/api-extractor-model'
+import {SerializedAPIMember, SerializedAPINamespace} from '../types'
 import {RELEASE_TAGS} from './constants'
-import {_createExportMemberId, hash, _slugify} from './helpers'
-import {transformDocComment, _transformDocCommentContent} from './transformDocComment'
+import {_slugify} from './helpers'
+import {_transformClass} from './transformClass'
+import {_transformDocComment} from './transformDocComment'
+import {_transformEnum} from './transformEnum'
+import {_transformFunction} from './transformFunction'
+import {_transformInterface} from './transformInterface'
+import {_transformTypeAlias} from './transformTypeAlias'
+import {_transformVariable} from './transformVariable'
 import {TransformContext} from './types'
 
-export function transformNamespace(
+/**
+ * @internal
+ */
+export function _transformNamespace(
   ctx: TransformContext,
   node: ApiNamespace
-): APINamespaceDocument {
+): SerializedAPINamespace {
   if (!ctx.export) {
     throw new Error('transformNamespace: missing `export` document')
   }
@@ -28,10 +43,12 @@ export function transformNamespace(
 
   return {
     _type: 'api.namespace',
-    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
-    comment: docComment ? transformDocComment(docComment) : undefined,
+    comment: docComment ? _transformDocComment(docComment) : undefined,
     export: {_type: 'reference', _ref: ctx.export._id},
-    members: node.members.map((m) => _transformNamespaceMember(ctx, m)),
+    members: node.members.map((m, idx) => ({
+      _key: `member${idx}`,
+      ..._transformNamespaceMember(ctx, m),
+    })),
     name: node.name,
     package: {_type: 'reference', _ref: ctx.package._id},
     release: {_type: 'reference', _ref: ctx.release._id},
@@ -40,59 +57,34 @@ export function transformNamespace(
   }
 }
 
-function _transformNamespaceMember(
-  ctx: TransformContext,
-  m: ApiItem
-): SanityArrayObjectItem<SerializedAPINamespaceMember> {
+function _transformNamespaceMember(ctx: TransformContext, m: ApiItem): SerializedAPIMember {
+  if (m.kind === 'Class') {
+    return _transformClass(ctx, m as ApiClass)
+  }
+
+  if (m.kind === 'Enum') {
+    return _transformEnum(ctx, m as ApiEnum)
+  }
+
   if (m.kind === 'Function') {
-    const mem = m as ApiFunction
-    const docComment = mem.tsdocComment
-
-    return {
-      _type: 'api.functionMember',
-      _key: hash(mem.canonicalReference.toString()),
-      comment: docComment ? transformDocComment(docComment) : undefined,
-      // members: mem.members.map((m) => _transformFunctionMember(ctx, m)),
-      name: mem.name,
-      parameters: mem.parameters.map((p) => _transformParameter(ctx, mem, p)),
-      releaseTag: RELEASE_TAGS[mem.releaseTag],
-      returnType: _transformTokens(
-        ctx,
-        mem.excerptTokens.slice(
-          mem.returnTypeExcerpt.tokenRange.startIndex,
-          mem.returnTypeExcerpt.tokenRange.endIndex
-        )
-      ),
-      typeParameters: mem.typeParameters.map((p) => _transformTypeParameter(ctx, mem, p)),
-    }
+    return _transformFunction(ctx, m as ApiFunction)
   }
 
-  throw new Error(`Unknown namespace member kind: ${m.kind}`)
-}
-
-function _transformParameter(
-  ctx: TransformContext,
-  node: ApiFunction,
-  param: Parameter
-): SanityArrayObjectItem<SerializedAPIParameter> {
-  const tsDocComment = param.tsdocParamBlock?.content
-
-  return {
-    _type: 'api.parameter',
-    _key: hash(param.name),
-    comment: tsDocComment
-      ? {
-          _type: 'tsdoc.docComment',
-          summary: _transformDocCommentContent(tsDocComment),
-        }
-      : undefined,
-    name: param.name,
-    type: _transformTokens(
-      ctx,
-      node.excerptTokens.slice(
-        param.parameterTypeExcerpt.tokenRange.startIndex,
-        param.parameterTypeExcerpt.tokenRange.endIndex
-      )
-    ),
+  if (m.kind === 'Interface') {
+    return _transformInterface(ctx, m as ApiInterface)
   }
+
+  if (m.kind === 'Namespace') {
+    return _transformNamespace(ctx, m as ApiNamespace)
+  }
+
+  if (m.kind === 'TypeAlias') {
+    return _transformTypeAlias(ctx, m as ApiTypeAlias)
+  }
+
+  if (m.kind === 'Variable') {
+    return _transformVariable(ctx, m as ApiVariable)
+  }
+
+  throw new Error(`Unknown namespace  kind: ${m.kind}`)
 }

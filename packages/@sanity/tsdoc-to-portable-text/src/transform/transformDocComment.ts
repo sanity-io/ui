@@ -15,7 +15,8 @@ import {
   DocSection,
   StandardTags,
 } from '@microsoft/tsdoc'
-import {PortableTextNode} from '../sanity'
+import {PortableTextNode, PortableTextSpanNode} from '../_lib/portable-text'
+import {SanityArrayItem} from '../_lib/sanity'
 import {
   TSDocComment,
   TSDocCustomBlock,
@@ -29,7 +30,10 @@ import {
 } from '../types'
 import {isArray, isRecord} from './helpers'
 
-function _transformDocNode(docNode: DocNode, key: string): Record<string, unknown> | undefined {
+/**
+ * @internal
+ */
+function _transformDocNode(docNode: DocNode): PortableTextNode | undefined {
   // Block = "Block",
   // BlockTag = "BlockTag",
   // Excerpt = "Excerpt",
@@ -59,7 +63,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
   if (docNode.kind === 'CodeSpan') {
     return {
       _type: 'span',
-      _key: key,
       marks: ['code'],
       text: (docNode as DocCodeSpan).code,
     }
@@ -68,7 +71,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
   if (docNode.kind === 'ErrorText') {
     return {
       _type: 'span',
-      _key: key,
       marks: [],
       text: (docNode as DocErrorText).text,
     }
@@ -77,7 +79,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
   if (docNode.kind === 'EscapedText') {
     return {
       _type: 'span',
-      _key: key,
       marks: [],
       text: (docNode as DocEscapedText).decodedText,
     }
@@ -88,7 +89,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
 
     return {
       _type: 'code',
-      _key: key,
       code: node.code,
       language: node.language,
     }
@@ -102,7 +102,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
 
       return {
         _type: 'span',
-        _key: key,
         _markDef: {
           _type: 'link',
           href: linkTag.urlDestination,
@@ -132,7 +131,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
 
       return {
         _type: 'span',
-        _key: key,
         // @todo
         // _markDef: {
         //   _type: 'link',
@@ -149,37 +147,47 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
       docNode as DocParagraph
     )
 
+    if (
+      transformedParagraph.nodes.length === 1 &&
+      transformedParagraph.nodes[0].kind === 'SoftBreak'
+    ) {
+      return undefined
+    }
+
     const children = _transformDocCommentContent(transformedParagraph)
 
     if (!children) return undefined
 
     // Find mark defs
-    const markDefs = []
+    const markDefs: SanityArrayItem<PortableTextSpanNode['_markDef']>[] = []
 
     for (const child of children) {
-      if (child._type === 'span' && child._markDef) {
-        const markDefKey = isRecord(child._markDef) && `${child._markDef._type}${markDefs.length}`
+      if (child._type === 'span' && isRecord(child._markDef)) {
+        const markDefKey = `${child._markDef._type}${markDefs.length}`
 
-        if (isRecord(child._markDef)) {
-          child._markDef._key = markDefKey
-        }
+        child._markDef._key = markDefKey
 
         if (isArray(child.marks)) {
           child.marks.push(markDefKey)
         }
 
-        markDefs.push(child._markDef)
+        markDefs.push({_key: markDefKey, ...child._markDef})
+
         delete child._markDef
       }
     }
 
     if (children.length === 0) {
-      children.push({_type: 'span', _key: '0', marks: [], text: ''})
+      children.push({
+        _type: 'span',
+        _key: '0',
+        marks: [],
+        text: '',
+      })
     }
 
     return {
       _type: 'block',
-      _key: key,
       style: 'normal',
       children,
       markDefs,
@@ -189,7 +197,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
   if (docNode.kind === 'PlainText') {
     return {
       _type: 'span',
-      _key: key,
       marks: [],
       text: (docNode as DocPlainText).text,
     }
@@ -198,7 +205,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
   if (docNode.kind === 'SoftBreak') {
     return {
       _type: 'span',
-      _key: key,
       text: '\n',
     }
   }
@@ -208,7 +214,6 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
 
     return {
       _type: 'span',
-      _key: key,
       marks: [],
       text: node.tagName,
     }
@@ -219,25 +224,33 @@ function _transformDocNode(docNode: DocNode, key: string): Record<string, unknow
 
 export function _transformDocCommentContent(
   section: DocSection | DocParagraph
-): PortableTextNode[] | undefined {
+): SanityArrayItem<PortableTextNode>[] | undefined {
   if (!section.nodes.length) return undefined
 
-  const nodes = section.nodes
-    .map((node, idx) => _transformDocNode(node, String(idx)))
-    .filter(Boolean) as Record<string, unknown>[]
+  const nodes: SanityArrayItem<PortableTextNode>[] = section.nodes
+    .map((node, idx) => {
+      if (idx === 0 && node.kind === 'SoftBreak') {
+        return undefined
+      }
+
+      const transformedNode = _transformDocNode(node)
+
+      return transformedNode && {_key: `node${idx}`, ...transformedNode}
+    })
+    .filter(Boolean) as SanityArrayItem<PortableTextNode>[]
 
   return nodes.length ? nodes : undefined
 }
 
-export function transformDocComment(docComment: DocComment): TSDocComment {
+export function _transformDocComment(docComment: DocComment): TSDocComment {
   // Summary
   const summary = _transformDocCommentContent(docComment.summarySection)
 
   // Parameters
-  const parameters: TSDocParamBlock[] | undefined = docComment.params.blocks.length
+  const parameters: SanityArrayItem<TSDocParamBlock>[] | undefined = docComment.params.blocks.length
     ? docComment.params.blocks.map((paramBlock, idx) => ({
         _type: 'tsdoc.paramBlock',
-        _key: String(idx),
+        _key: `paramBlock${idx}`,
         name: paramBlock.parameterName,
         content: _transformDocCommentContent(paramBlock.content),
       }))
@@ -255,8 +268,8 @@ export function transformDocComment(docComment: DocComment): TSDocComment {
     content: _transformDocCommentContent(docComment.remarksBlock.content),
   }
 
-  const exampleBlocks: TSDocExampleBlock[] = []
-  const customBlocks: TSDocCustomBlock[] = []
+  const exampleBlocks: SanityArrayItem<TSDocExampleBlock>[] = []
+  const customBlocks: SanityArrayItem<TSDocCustomBlock>[] = []
 
   // Custom blocks
   for (let i = 0; i < docComment.customBlocks.length; i += 1) {
@@ -266,13 +279,13 @@ export function transformDocComment(docComment: DocComment): TSDocComment {
     if (customBlock.blockTag.tagNameWithUpperCase === StandardTags.example.tagNameWithUpperCase) {
       exampleBlocks.push({
         _type: 'tsdoc.exampleBlock',
-        _key: String(i),
+        _key: `exampleBlock${i}`,
         content: _transformDocCommentContent(customBlock.content),
       })
     } else {
       customBlocks.push({
         _type: 'tsdoc.customBlock',
-        _key: String(i),
+        _key: `customBlock${i}`,
         tag: customBlock.blockTag.tagName,
         content: _transformDocCommentContent(customBlock.content),
       })
@@ -280,10 +293,10 @@ export function transformDocComment(docComment: DocComment): TSDocComment {
   }
 
   // `@see` blocks
-  const seeBlocks: TSDocSeeBlock[] | undefined = docComment.seeBlocks.length
+  const seeBlocks: SanityArrayItem<TSDocSeeBlock>[] | undefined = docComment.seeBlocks.length
     ? docComment.seeBlocks.map((seeBlock, idx) => ({
         _type: 'tsdoc.seeBlock',
-        _key: String(idx),
+        _key: `seeBlock${idx}`,
         content: _transformDocCommentContent(seeBlock.content),
       }))
     : undefined
@@ -295,24 +308,25 @@ export function transformDocComment(docComment: DocComment): TSDocComment {
   }
 
   // Modifiers
-  const modifierTags: TSDocModifierTag[] | undefined = docComment.modifierTagSet.nodes.length
+  const modifierTags: SanityArrayItem<TSDocModifierTag>[] | undefined = docComment.modifierTagSet
+    .nodes.length
     ? docComment.modifierTagSet.nodes.map((modifierTag, idx) => ({
         _type: 'tsdoc.modifierTag',
-        _key: String(idx),
+        _key: `modifierTag${idx}`,
         name: modifierTag.tagName,
       }))
     : undefined
 
   return {
     _type: 'tsdoc.docComment',
-    summary,
-    parameters,
-    returns,
-    remarks,
     customBlocks: customBlocks.length > 0 ? customBlocks : undefined,
-    exampleBlocks: exampleBlocks.length > 0 ? exampleBlocks : undefined,
-    seeBlocks,
     deprecated,
+    exampleBlocks: exampleBlocks.length > 0 ? exampleBlocks : undefined,
     modifierTags,
+    parameters,
+    remarks,
+    returns,
+    seeBlocks,
+    summary,
   }
 }

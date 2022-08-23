@@ -1,5 +1,5 @@
 import {ExcerptToken} from '@microsoft/api-extractor-model'
-import {SanityArrayObjectItem} from '../sanity'
+import {SanityArrayItem} from '../_lib/sanity'
 import {SerializedAPIToken} from '../types'
 import {_createExportMemberId} from './helpers'
 import {TransformContext} from './types'
@@ -7,7 +7,7 @@ import {TransformContext} from './types'
 export function _transformTokens(
   ctx: TransformContext,
   tokens: ExcerptToken[]
-): SanityArrayObjectItem<SerializedAPIToken>[] {
+): SanityArrayItem<SerializedAPIToken>[] {
   const pkg = ctx.package
 
   if (!pkg) {

@@ -6,26 +6,23 @@ import {
   ApiItem,
   ApiMethodSignature,
   ApiPropertySignature,
-  Parameter,
-  TypeParameter,
 } from '@microsoft/api-extractor-model'
-import {SanityArrayObjectItem} from '../sanity'
-import {
-  APIInterfaceDocument,
-  SerializedAPIInterfaceMember,
-  SerializedAPIParameter,
-  SerializedAPITypeParameter,
-} from '../types'
+import {SerializedAPIInterface, SerializedAPIInterfaceMember} from '../types'
+import {_transformParameter} from './_transformParameter'
 import {_transformTokens} from './_transformTokens'
+import {_transformTypeParameter} from './_transformTypeParameter'
 import {RELEASE_TAGS} from './constants'
-import {_createExportMemberId, hash, _sanitizeName, _slugify} from './helpers'
-import {transformDocComment, _transformDocCommentContent} from './transformDocComment'
+import {_sanitizeName, _slugify} from './helpers'
+import {_transformDocComment} from './transformDocComment'
 import {TransformContext} from './types'
 
-export function transformInterface(
+/**
+ * @internal
+ */
+export function _transformInterface(
   ctx: TransformContext,
   node: ApiInterface
-): APIInterfaceDocument {
+): SerializedAPIInterface {
   if (!ctx.export) {
     throw new Error('transformEnum: missing `export` document')
   }
@@ -43,8 +40,7 @@ export function transformInterface(
 
   return {
     _type: 'api.interface',
-    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
-    comment: docComment ? transformDocComment(docComment) : undefined,
+    comment: docComment ? _transformDocComment(docComment) : undefined,
     export: {_type: 'reference', _ref: ctx.export._id},
     extends: node.extendsTypes.map((t, idx) => {
       return {
@@ -56,7 +52,10 @@ export function transformInterface(
         ),
       }
     }),
-    members: node.members.map((m) => _transformMember(ctx, m)),
+    members: node.members.map((m, idx) => ({
+      _key: `member${idx}`,
+      ..._transformInterfaceMember(ctx, m),
+    })),
     name,
     package: {_type: 'reference', _ref: ctx.package._id},
     release: {_type: 'reference', _ref: ctx.release._id},
@@ -68,47 +67,19 @@ export function transformInterface(
   }
 }
 
-function _transformTypeParameter(
-  ctx: TransformContext,
-  node: ApiCallSignature | ApiInterface,
-  p: TypeParameter,
-  idx: number
-): SanityArrayObjectItem<SerializedAPITypeParameter> {
-  return {
-    _type: 'api.typeParameter',
-    _key: `typeParameter${idx}`,
-    name: p.name,
-    constraintType: _transformTokens(
-      ctx,
-      node.excerptTokens.slice(
-        p.constraintExcerpt.tokenRange.startIndex,
-        p.constraintExcerpt.tokenRange.endIndex
-      )
-    ),
-    defaultType: _transformTokens(
-      ctx,
-      node.excerptTokens.slice(
-        p.defaultTypeExcerpt.tokenRange.startIndex,
-        p.defaultTypeExcerpt.tokenRange.endIndex
-      )
-    ),
-  }
-}
-
-function _transformMember(
+function _transformInterfaceMember(
   ctx: TransformContext,
   m: ApiItem
-): SanityArrayObjectItem<SerializedAPIInterfaceMember> {
+): SerializedAPIInterfaceMember {
   if (m.kind === 'CallSignature') {
     const mem = m as ApiCallSignature
     const docComment = mem.tsdocComment
 
     return {
-      _type: 'api.callSignatureMember',
-      _key: hash(mem.canonicalReference.toString()),
-      comment: docComment ? transformDocComment(docComment) : undefined,
-      members: mem.members.map((m) => _transformMember(ctx, m)),
-      parameters: mem.parameters.map((p) => _transformParameter(ctx, mem, p)),
+      _type: 'api.callSignature',
+      comment: docComment ? _transformDocComment(docComment) : undefined,
+      members: mem.members.map((m) => _transformInterfaceMember(ctx, m)),
+      parameters: mem.parameters.map((p, idx) => _transformParameter(ctx, mem, p, idx)),
       releaseTag: RELEASE_TAGS[mem.releaseTag],
       returnType: _transformTokens(
         ctx,
@@ -126,11 +97,10 @@ function _transformMember(
     const docComment = mem.tsdocComment
 
     return {
-      _type: 'api.constructSignatureMember',
-      _key: hash(mem.canonicalReference.toString()),
-      comment: docComment ? transformDocComment(docComment) : undefined,
-      members: mem.members.map((m) => _transformMember(ctx, m)),
-      parameters: mem.parameters.map((p) => _transformParameter(ctx, mem, p)),
+      _type: 'api.constructSignature',
+      comment: docComment ? _transformDocComment(docComment) : undefined,
+      members: mem.members.map((m) => _transformInterfaceMember(ctx, m)),
+      parameters: mem.parameters.map((p, idx) => _transformParameter(ctx, mem, p, idx)),
       releaseTag: RELEASE_TAGS[mem.releaseTag],
       returnType: _transformTokens(
         ctx,
@@ -148,13 +118,12 @@ function _transformMember(
     const docComment = mem.tsdocComment
 
     return {
-      _type: 'api.methodSignatureMember',
-      _key: hash(mem.canonicalReference.toString()),
-      comment: docComment ? transformDocComment(docComment) : undefined,
+      _type: 'api.methodSignature',
+      comment: docComment ? _transformDocComment(docComment) : undefined,
       isOptional: mem.isOptional,
-      members: mem.members.map((m) => _transformMember(ctx, m)),
+      members: mem.members.map((m) => _transformInterfaceMember(ctx, m)),
       name: mem.name,
-      parameters: mem.parameters.map((p) => _transformParameter(ctx, mem, p)),
+      parameters: mem.parameters.map((p, idx) => _transformParameter(ctx, mem, p, idx)),
       releaseTag: RELEASE_TAGS[mem.releaseTag],
       returnType: _transformTokens(
         ctx,
@@ -172,9 +141,8 @@ function _transformMember(
     const docComment = mem.tsdocComment
 
     return {
-      _type: 'api.propertySignatureMember',
-      _key: hash(mem.name),
-      comment: docComment ? transformDocComment(docComment) : undefined,
+      _type: 'api.propertySignature',
+      comment: docComment ? _transformDocComment(docComment) : undefined,
       isOptional: mem.isOptional,
       name: mem.name,
       releaseTag: RELEASE_TAGS[mem.releaseTag],
@@ -193,10 +161,9 @@ function _transformMember(
     const docComment = mem.tsdocComment
 
     return {
-      _type: 'api.indexSignatureMember',
-      _key: hash(mem.canonicalReference.toString()),
-      comment: docComment ? transformDocComment(docComment) : undefined,
-      parameters: mem.parameters.map((p) => _transformParameter(ctx, mem, p)),
+      _type: 'api.indexSignature',
+      comment: docComment ? _transformDocComment(docComment) : undefined,
+      parameters: mem.parameters.map((p, idx) => _transformParameter(ctx, mem, p, idx)),
       releaseTag: RELEASE_TAGS[mem.releaseTag],
       returnType: _transformTokens(
         ctx,
@@ -209,32 +176,4 @@ function _transformMember(
   }
 
   throw new Error(`Unknown interface member kind: ${m.kind}`)
-}
-
-function _transformParameter(
-  ctx: TransformContext,
-  node: ApiCallSignature | ApiIndexSignature,
-  param: Parameter
-): SanityArrayObjectItem<SerializedAPIParameter> {
-  const tsDocComment = param.tsdocParamBlock?.content
-
-  return {
-    _type: 'api.parameter',
-    _key: param.name,
-    comment: tsDocComment
-      ? {
-          _type: 'tsdoc.docComment',
-          summary: _transformDocCommentContent(tsDocComment),
-        }
-      : undefined,
-    name: param.name,
-    releaseTag: RELEASE_TAGS[node.releaseTag],
-    type: _transformTokens(
-      ctx,
-      node.excerptTokens.slice(
-        param.parameterTypeExcerpt.tokenRange.startIndex,
-        param.parameterTypeExcerpt.tokenRange.endIndex
-      )
-    ),
-  }
 }

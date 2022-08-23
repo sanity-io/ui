@@ -1,14 +1,20 @@
 import {ApiVariable} from '@microsoft/api-extractor-model'
 import {DocComment, DocPlainText} from '@microsoft/tsdoc'
-import {SanityReferenceValue} from '../sanity'
-import {APIVariableDocument} from '../types'
+import {SanityReferenceValue} from '../_lib/sanity'
+import {SerializedAPIVariable} from '../types'
 import {_transformTokens} from './_transformTokens'
 import {RELEASE_TAGS} from './constants'
 import {_createExportMemberId, _sanitizeName, _slugify} from './helpers'
-import {transformDocComment} from './transformDocComment'
+import {_transformDocComment} from './transformDocComment'
 import {TransformContext} from './types'
 
-export function transformVariable(ctx: TransformContext, node: ApiVariable): APIVariableDocument {
+/**
+ * @internal
+ */
+export function _transformVariable(
+  ctx: TransformContext,
+  node: ApiVariable
+): SerializedAPIVariable {
   if (!ctx.export) {
     throw new Error('transformVariable: missing `export` document')
   }
@@ -23,7 +29,7 @@ export function transformVariable(ctx: TransformContext, node: ApiVariable): API
 
   const name = _sanitizeName(node.name)
   const docComment = node.tsdocComment
-  const comment = docComment ? transformDocComment(docComment) : undefined
+  const comment = docComment ? _transformDocComment(docComment) : undefined
   const type = _transformTokens(
     ctx,
     node.excerptTokens.slice(
@@ -36,7 +42,6 @@ export function transformVariable(ctx: TransformContext, node: ApiVariable): API
 
   return {
     _type: 'api.variable',
-    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
     comment,
     export: {_type: 'reference', _ref: ctx.export._id},
     isReactComponentType,
@@ -125,8 +130,6 @@ function _variablePropsType(
       }
     }
   }
-
-  // console.warn(`WARN: could not detect props type for \`${node.name}\` (variable)`)
 
   return undefined
 }

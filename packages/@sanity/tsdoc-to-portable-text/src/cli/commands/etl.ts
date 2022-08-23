@@ -7,13 +7,7 @@ import {transform} from '../../transform'
 import {readJSONFile} from '../helpers'
 import {CmdFn} from '../types'
 
-export const etl: CmdFn = async ({args, cwd, flags}) => {
-  const inputPath = args[0]
-
-  if (typeof inputPath !== 'string') {
-    throw new Error('missing input')
-  }
-
+export const etl: CmdFn = async ({cwd, flags}) => {
   const outDir = typeof flags.outDir === 'string' ? flags.outDir : '.'
   const tsconfigPath = typeof flags.tsconfig === 'string' ? flags.tsconfig : 'tsconfig.json'
 

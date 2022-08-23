@@ -1,12 +1,15 @@
 import {ApiEnum, ApiEnumMember, ApiItem} from '@microsoft/api-extractor-model'
-import {SanityArrayObjectItem} from '../sanity'
-import {APIEnumDocument, APIEnumMember} from '../types'
+import {SanityArrayItem} from '../_lib/sanity'
+import {SerializedAPIEnum, APIEnumMember} from '../types'
 import {RELEASE_TAGS} from './constants'
-import {_createExportMemberId, hash, _slugify} from './helpers'
-import {transformDocComment} from './transformDocComment'
+import {hash, _slugify} from './helpers'
+import {_transformDocComment} from './transformDocComment'
 import {TransformContext} from './types'
 
-export function transformEnum(ctx: TransformContext, node: ApiEnum): APIEnumDocument {
+/**
+ * @internal
+ */
+export function _transformEnum(ctx: TransformContext, node: ApiEnum): SerializedAPIEnum {
   if (!ctx.export) {
     throw new Error('transformEnum: missing `export` document')
   }
@@ -23,8 +26,7 @@ export function transformEnum(ctx: TransformContext, node: ApiEnum): APIEnumDocu
 
   return {
     _type: 'api.enum',
-    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
-    comment: docComment ? transformDocComment(docComment) : undefined,
+    comment: docComment ? _transformDocComment(docComment) : undefined,
     export: {_type: 'reference', _ref: ctx.export._id},
     members: node.members.map((m) => _transformEnumMember(ctx, m)),
     name: node.name,
@@ -35,10 +37,7 @@ export function transformEnum(ctx: TransformContext, node: ApiEnum): APIEnumDocu
   }
 }
 
-function _transformEnumMember(
-  _ctx: TransformContext,
-  m: ApiItem
-): SanityArrayObjectItem<APIEnumMember> {
+function _transformEnumMember(_ctx: TransformContext, m: ApiItem): SanityArrayItem<APIEnumMember> {
   if (m.kind === 'EnumMember') {
     const node = m as ApiEnumMember
 

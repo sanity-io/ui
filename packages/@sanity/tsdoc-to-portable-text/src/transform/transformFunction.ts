@@ -1,14 +1,20 @@
-import {ApiFunction, Parameter} from '@microsoft/api-extractor-model'
-import {SanityArrayObjectItem} from '../sanity'
-import {APIFunctionDocument, SerializedAPIParameter} from '../types'
+import {ApiFunction} from '@microsoft/api-extractor-model'
+import {SerializedAPIFunction} from '../types'
+import {_transformParameter} from './_transformParameter'
 import {_transformTokens} from './_transformTokens'
 import {_transformTypeParameter} from './_transformTypeParameter'
 import {RELEASE_TAGS} from './constants'
-import {_createExportMemberId, hash, _sanitizeName, _slugify} from './helpers'
-import {transformDocComment, _transformDocCommentContent} from './transformDocComment'
+import {_sanitizeName, _slugify} from './helpers'
+import {_transformDocComment} from './transformDocComment'
 import {TransformContext} from './types'
 
-export function transformFunction(ctx: TransformContext, node: ApiFunction): APIFunctionDocument {
+/**
+ * @internal
+ */
+export function _transformFunction(
+  ctx: TransformContext,
+  node: ApiFunction
+): SerializedAPIFunction {
   if (!ctx.export) {
     throw new Error('transformFunction: missing `export` document')
   }
@@ -28,13 +34,12 @@ export function transformFunction(ctx: TransformContext, node: ApiFunction): API
 
   return {
     _type: 'api.function',
-    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
-    comment: docComment ? transformDocComment(docComment) : undefined,
+    comment: docComment ? _transformDocComment(docComment) : undefined,
     export: {_type: 'reference', _ref: ctx.export._id},
     isReactComponentType,
     name,
     package: {_type: 'reference', _ref: ctx.package._id},
-    parameters: node.parameters.map((p) => transformFunctionParameter(ctx, node, p)),
+    parameters: node.parameters.map((p, idx) => _transformParameter(ctx, node, p, idx)),
     propsType,
     release: {_type: 'reference', _ref: ctx.release._id},
     releaseTag: RELEASE_TAGS[node.releaseTag],
@@ -46,34 +51,7 @@ export function transformFunction(ctx: TransformContext, node: ApiFunction): API
         node.returnTypeExcerpt.tokenRange.endIndex
       )
     ),
-    typeParameters: node.typeParameters.map((p) => _transformTypeParameter(ctx, node, p)),
-  }
-}
-
-function transformFunctionParameter(
-  ctx: TransformContext,
-  node: ApiFunction,
-  param: Parameter
-): SanityArrayObjectItem<SerializedAPIParameter> {
-  const tsDocComment = param.tsdocParamBlock?.content
-
-  return {
-    _type: 'api.parameter',
-    _key: hash(param.name),
-    comment: tsDocComment
-      ? {
-          _type: 'tsdoc.docComment',
-          summary: _transformDocCommentContent(tsDocComment),
-        }
-      : undefined,
-    name: param.name,
-    type: _transformTokens(
-      ctx,
-      node.excerptTokens.slice(
-        param.parameterTypeExcerpt.tokenRange.startIndex,
-        param.parameterTypeExcerpt.tokenRange.endIndex
-      )
-    ),
+    typeParameters: node.typeParameters.map((p, idx) => _transformTypeParameter(ctx, node, p, idx)),
   }
 }
 
@@ -117,8 +95,6 @@ function _functionPropsType(ctx: TransformContext, node: ApiFunction) {
       return propsTokens[0].member
     }
   }
-
-  // console.warn(`WARN: could not detect props type for \`${node.name}\` (function)`)
 
   return undefined
 }

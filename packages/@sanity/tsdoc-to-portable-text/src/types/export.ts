@@ -1,14 +1,14 @@
-import {SanityArrayObjectItem} from '../sanity'
+import {SanityArrayItem} from '../_lib/sanity'
+import {APIMember} from './members'
 import {APIPackage} from './package'
 import {APIRelease} from './release'
-import {APIMember} from './symbols'
 
 /**
  * @public
  */
 export interface APIExport {
   _type: 'api.export'
-  members: SanityArrayObjectItem<APIMember>[]
+  members: SanityArrayItem<APIMember>[]
   name: string
   package: APIPackage
   path: string

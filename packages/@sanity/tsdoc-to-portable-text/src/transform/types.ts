@@ -18,7 +18,6 @@ export interface TransformContext {
   apiPackage: ApiPackage
   scope?: string
   name: string
-  // exportPath?: string
   version: string
   package?: APIPackageDocument
   release?: APIReleaseDocument

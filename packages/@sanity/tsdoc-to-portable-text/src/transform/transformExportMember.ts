@@ -8,44 +8,72 @@ import {
   ApiTypeAlias,
   ApiVariable,
 } from '@microsoft/api-extractor-model'
-import {APIMemberDocument} from '../types'
-import {transformClass} from './transformClass'
-import {transformEnum} from './transformEnum'
-import {transformFunction} from './transformFunction'
-import {transformInterface} from './transformInterface'
-import {transformNamespace} from './transformNamespace'
-import {transformTypeAlias} from './transformTypeAlias'
-import {transformVariable} from './transformVariable'
+import {SerializedAPIMember} from '../types'
+import {_createExportMemberId} from './helpers'
+import {_transformClass} from './transformClass'
+import {_transformEnum} from './transformEnum'
+import {_transformFunction} from './transformFunction'
+import {_transformInterface} from './transformInterface'
+import {_transformNamespace} from './transformNamespace'
+import {_transformTypeAlias} from './transformTypeAlias'
+import {_transformVariable} from './transformVariable'
 import {TransformContext} from './types'
 
-export function transformExportMember(ctx: TransformContext, member: ApiItem): APIMemberDocument {
-  if (member.kind === 'Class') {
-    return transformClass(ctx, member as ApiClass)
+/**
+ * @internal
+ */
+export function transformExportMember(
+  ctx: TransformContext,
+  item: ApiItem
+): SerializedAPIMember & {_id: string} {
+  if (item.kind === 'Class') {
+    return {
+      _id: _createExportMemberId(ctx, item.canonicalReference.toString()),
+      ..._transformClass(ctx, item as ApiClass),
+    }
   }
 
-  if (member.kind === 'Function') {
-    return transformFunction(ctx, member as ApiFunction)
+  if (item.kind === 'Enum') {
+    return {
+      _id: _createExportMemberId(ctx, item.canonicalReference.toString()),
+      ..._transformEnum(ctx, item as ApiEnum),
+    }
   }
 
-  if (member.kind === 'Interface') {
-    return transformInterface(ctx, member as ApiInterface)
+  if (item.kind === 'Function') {
+    return {
+      _id: _createExportMemberId(ctx, item.canonicalReference.toString()),
+      ..._transformFunction(ctx, item as ApiFunction),
+    }
   }
 
-  if (member.kind === 'Namespace') {
-    return transformNamespace(ctx, member as ApiNamespace)
+  if (item.kind === 'Interface') {
+    return {
+      _id: _createExportMemberId(ctx, item.canonicalReference.toString()),
+      ..._transformInterface(ctx, item as ApiInterface),
+    }
   }
 
-  if (member.kind === 'TypeAlias') {
-    return transformTypeAlias(ctx, member as ApiTypeAlias)
+  if (item.kind === 'Namespace') {
+    return {
+      _id: _createExportMemberId(ctx, item.canonicalReference.toString()),
+      ..._transformNamespace(ctx, item as ApiNamespace),
+    }
   }
 
-  if (member.kind === 'Variable') {
-    return transformVariable(ctx, member as ApiVariable)
+  if (item.kind === 'TypeAlias') {
+    return {
+      _id: _createExportMemberId(ctx, item.canonicalReference.toString()),
+      ..._transformTypeAlias(ctx, item as ApiTypeAlias),
+    }
   }
 
-  if (member.kind === 'Enum') {
-    return transformEnum(ctx, member as ApiEnum)
+  if (item.kind === 'Variable') {
+    return {
+      _id: _createExportMemberId(ctx, item.canonicalReference.toString()),
+      ..._transformVariable(ctx, item as ApiVariable),
+    }
   }
 
-  throw new Error(`package: unknown member type: ${member.kind}`)
+  throw new Error(`package: unknown member type: ${item.kind}`)
 }

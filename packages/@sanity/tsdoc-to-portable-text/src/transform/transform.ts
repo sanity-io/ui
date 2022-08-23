@@ -1,29 +1,36 @@
 import {ExtractResult} from '../extract'
-import {SanityDocumentValue} from '../sanity'
 import {
   APIExportDocument,
-  APIMemberDocument,
   APIPackageDocument,
   APIReleaseDocument,
   APISymbolDocument,
+  SerializedAPIMember,
 } from '../types'
 import {isRecord, _parsePackageName} from './helpers'
 import {transformExportMember} from './transformExportMember'
-import {transformPackage} from './transformPackage'
+import {_transformPackage} from './transformPackage'
 import {TransformContext, TransformOpts} from './types'
 
 /**
  * @public
  */
-export function transform(
-  extractResults: ExtractResult[],
-  opts: TransformOpts
-): SanityDocumentValue[] {
+export type TransformResult = Array<
+  | APIExportDocument
+  | APIPackageDocument
+  | APIReleaseDocument
+  | APISymbolDocument
+  | (SerializedAPIMember & {_id: string})
+>
+
+/**
+ * @public
+ */
+export function transform(extractResults: ExtractResult[], opts: TransformOpts): TransformResult {
   const {version: releaseVersion} = opts.package
 
   const state: {
     exports: APIExportDocument[]
-    members: APIMemberDocument[]
+    members: (SerializedAPIMember & {_id: string})[]
     package?: APIPackageDocument
     release?: APIReleaseDocument
     symbolNames: string[]
@@ -79,7 +86,7 @@ export function transform(
       export: exportDoc,
     }
 
-    const packageDoc = transformPackage(ctx, apiPackage)
+    const packageDoc = _transformPackage(ctx, apiPackage)
 
     exportDoc.package._ref = packageDoc._id
 
@@ -121,23 +128,22 @@ export function transform(
     state.release = ctx.release
   }
 
-  const docs = [
-    state.package,
-    state.release,
-    ...state.exports,
-    ...state.members,
-    ...state.symbols,
-  ] as unknown as SanityDocumentValue[]
+  const result: TransformResult = []
+
+  if (state.package) result.push(state.package)
+  if (state.release) result.push(state.release)
+
+  result.push(...state.exports, ...state.members, ...state.symbols)
 
   // Remove references to non-existing documents
-  for (const doc of docs) {
-    _removeNonExistingRefs(doc, docs)
+  for (const doc of result) {
+    _removeNonExistingRefs(doc as unknown as Record<string, unknown>, result)
   }
 
-  return docs
+  return result
 }
 
-function _removeNonExistingRefs(source: Record<string, unknown>, docs: SanityDocumentValue[]) {
+function _removeNonExistingRefs(source: Record<string, unknown>, docs: TransformResult) {
   for (const [key, value] of Object.entries(source)) {
     if (isRecord(value)) {
       if (value._type === 'reference') {

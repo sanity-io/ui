@@ -30,9 +30,4 @@ export interface SanitySlugValue {
 /**
  * @public
  */
-export type SanityArrayObjectItem<T> = T & {_key: string}
-
-/**
- * @public
- */
-export type PortableTextNode = any
+export type SanityArrayItem<T> = T & {_key: string}

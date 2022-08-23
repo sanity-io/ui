@@ -1,15 +1,18 @@
 import {ApiTypeAlias} from '@microsoft/api-extractor-model'
-import {APITypeAliasDocument} from '../types'
+import {SerializedAPITypeAlias} from '../types'
 import {_transformTokens} from './_transformTokens'
 import {RELEASE_TAGS} from './constants'
-import {_createExportMemberId, _sanitizeName, _slugify} from './helpers'
-import {transformDocComment} from './transformDocComment'
+import {_sanitizeName, _slugify} from './helpers'
+import {_transformDocComment} from './transformDocComment'
 import {TransformContext} from './types'
 
-export function transformTypeAlias(
+/**
+ * @internal
+ */
+export function _transformTypeAlias(
   ctx: TransformContext,
   node: ApiTypeAlias
-): APITypeAliasDocument {
+): SerializedAPITypeAlias {
   if (!ctx.export) {
     throw new Error('transformTypeAlias: missing `export` document')
   }
@@ -27,8 +30,7 @@ export function transformTypeAlias(
 
   return {
     _type: 'api.typeAlias',
-    _id: _createExportMemberId(ctx, node.canonicalReference.toString()),
-    comment: docComment ? transformDocComment(docComment) : undefined,
+    comment: docComment ? _transformDocComment(docComment) : undefined,
     export: {_type: 'reference', _ref: ctx.export._id},
     name,
     package: {_type: 'reference', _ref: ctx.package._id},

@@ -1,23 +1,48 @@
-import {SanityArrayObjectItem, SanityReferenceValue} from '../sanity'
+import {SanityArrayItem, SanityReferenceValue} from '../_lib/sanity'
 import {APIParameter, APIToken, APITypeParameter} from './common'
 import {
-  APICallSignatureMember,
-  APIConstructorMember,
-  APIConstructSignatureMember,
-  APIFunctionMember,
-  APIIndexSignatureMember,
-  APIMethodMember,
-  APIMethodSignatureMember,
-  APIPropertyMember,
-  APIPropertySignatureMember,
+  APICallSignature,
+  APIClass,
+  APIConstructor,
+  APIConstructSignature,
+  APIEnum,
+  APIFunction,
+  APIIndexSignature,
+  APIInterface,
+  APIMethod,
+  APIMethodSignature,
+  APINamespace,
+  APIProperty,
+  APIPropertySignature,
+  APITypeAlias,
+  APIVariable,
 } from './members'
-import {APITypeAlias, APIVariable} from './symbols'
+
+/**
+ * @public
+ */
+export interface SerializedAPIEnum extends Omit<APIEnum, 'export' | 'package' | 'release'> {
+  export: SanityReferenceValue
+  package: SanityReferenceValue
+  release: SanityReferenceValue
+}
+
+/**
+ * @public
+ */
+export interface SerializedAPINamespace
+  extends Omit<APINamespace, 'export' | 'members' | 'package' | 'release'> {
+  export: SanityReferenceValue
+  members: SanityArrayItem<SerializedAPIMember>[]
+  package: SanityReferenceValue
+  release: SanityReferenceValue
+}
 
 /**
  * @public
  */
 export interface SerializedAPIParameter extends Omit<APIParameter, 'type'> {
-  type: SanityArrayObjectItem<SerializedAPIToken>[]
+  type: SanityArrayItem<SerializedAPIToken>[]
 }
 
 /**
@@ -32,124 +57,176 @@ export interface SerializedAPIToken extends Omit<APIToken, 'member'> {
  */
 export interface SerializedAPITypeParameter
   extends Omit<APITypeParameter, 'constraintType' | 'defaultType'> {
-  constraintType?: SanityArrayObjectItem<SerializedAPIToken>[]
-  defaultType: SanityArrayObjectItem<SerializedAPIToken>[]
+  constraintType?: SanityArrayItem<SerializedAPIToken>[]
+  defaultType: SanityArrayItem<SerializedAPIToken>[]
 }
 
 /**
  * @public
  */
-export interface SerializedAPITypeAlias extends Omit<APITypeAlias, 'type'> {
-  type: SanityArrayObjectItem<SerializedAPIToken>[]
+export interface SerializedAPITypeAlias
+  extends Omit<APITypeAlias, 'export' | 'package' | 'release' | 'type'> {
+  export: SanityReferenceValue
+  type: SanityArrayItem<SerializedAPIToken>[]
+  package: SanityReferenceValue
+  release: SanityReferenceValue
 }
 
 /**
  * @public
  */
-export interface SerializedAPIVariable extends Omit<APIVariable, 'type'> {
-  type: SanityArrayObjectItem<SerializedAPIToken>[]
+export interface SerializedAPIVariable
+  extends Omit<APIVariable, 'export' | 'package' | 'propsType' | 'release' | 'type'> {
+  export: SanityReferenceValue
+  type: SanityArrayItem<SerializedAPIToken>[]
+  package: SanityReferenceValue
+  propsType?: SanityReferenceValue
+  release: SanityReferenceValue
 }
 
 /**
  * @public
  */
-export interface SerializedAPIFunctionMember
-  extends Omit<APIFunctionMember, 'parameters' | 'returnType' | 'typeParameters'> {
-  parameters: SanityArrayObjectItem<SerializedAPIParameter>[]
-  returnType: SanityArrayObjectItem<SerializedAPIToken>[]
-  typeParameters: SanityArrayObjectItem<SerializedAPITypeParameter>[]
+export interface SerializedAPIClass
+  extends Omit<APIClass, 'export' | 'members' | 'package' | 'release'> {
+  export: SanityReferenceValue
+  members: SanityArrayItem<SerializedAPIClassMember>[]
+  package: SanityReferenceValue
+  release: SanityReferenceValue
 }
 
 /**
  * @public
  */
-export type SerializedAPINamespaceMember = SerializedAPIFunctionMember
-
-/**
- * @public
- */
-export interface SerializedAPICallSignatureMember
-  extends Omit<APICallSignatureMember, 'parameters' | 'returnType' | 'typeParameters'> {
-  parameters: SanityArrayObjectItem<SerializedAPIParameter>[]
-  returnType: SanityArrayObjectItem<SerializedAPIToken>[]
-  typeParameters: SanityArrayObjectItem<SerializedAPITypeParameter>[]
+export interface SerializedAPIFunction
+  extends Omit<
+    APIFunction,
+    'export' | 'package' | 'parameters' | 'propsType' | 'release' | 'returnType' | 'typeParameters'
+  > {
+  export: SanityReferenceValue
+  package: SanityReferenceValue
+  parameters: SanityArrayItem<SerializedAPIParameter>[]
+  propsType?: SanityReferenceValue
+  release: SanityReferenceValue
+  returnType: SanityArrayItem<SerializedAPIToken>[]
+  typeParameters: SanityArrayItem<SerializedAPITypeParameter>[]
 }
 
 /**
  * @public
  */
-export interface SerializedAPIConstructSignatureMember
-  extends Omit<APIConstructSignatureMember, 'parameters' | 'returnType' | 'typeParameters'> {
-  parameters: SanityArrayObjectItem<SerializedAPIParameter>[]
-  returnType: SanityArrayObjectItem<SerializedAPIToken>[]
-  typeParameters: SanityArrayObjectItem<SerializedAPITypeParameter>[]
+export interface SerializedAPIInterface
+  extends Omit<APIInterface, 'extends' | 'members' | 'package' | 'release' | 'typeParameters'> {
+  _type: 'api.interface'
+  export: SanityReferenceValue
+  extends: {
+    _type: 'api.extend'
+    type: SanityArrayItem<SerializedAPIToken>[]
+  }[]
+  members: SanityArrayItem<SerializedAPIInterfaceMember>[]
+  package: SanityReferenceValue
+  release: SanityReferenceValue
+  typeParameters: SanityArrayItem<SerializedAPITypeParameter>[]
 }
 
 /**
  * @public
  */
-export interface SerializedAPIMethodSignatureMember
-  extends Omit<APIMethodSignatureMember, 'parameters' | 'returnType' | 'typeParameters'> {
-  parameters: SanityArrayObjectItem<SerializedAPIParameter>[]
-  returnType: SanityArrayObjectItem<SerializedAPIToken>[]
-  typeParameters: SanityArrayObjectItem<SerializedAPITypeParameter>[]
+export interface SerializedAPICallSignature
+  extends Omit<APICallSignature, 'parameters' | 'returnType' | 'typeParameters'> {
+  parameters: SanityArrayItem<SerializedAPIParameter>[]
+  returnType: SanityArrayItem<SerializedAPIToken>[]
+  typeParameters: SanityArrayItem<SerializedAPITypeParameter>[]
 }
 
 /**
  * @public
  */
-export interface SerializedAPIPropertySignatureMember
-  extends Omit<APIPropertySignatureMember, 'type'> {
-  type: SanityArrayObjectItem<SerializedAPIToken>[]
+export interface SerializedAPIConstructSignature
+  extends Omit<APIConstructSignature, 'parameters' | 'returnType' | 'typeParameters'> {
+  parameters: SanityArrayItem<SerializedAPIParameter>[]
+  returnType: SanityArrayItem<SerializedAPIToken>[]
+  typeParameters: SanityArrayItem<SerializedAPITypeParameter>[]
 }
 
 /**
  * @public
  */
-export interface SerializedAPIIndexSignatureMember
-  extends Omit<APIIndexSignatureMember, 'parameters' | 'returnType'> {
-  parameters: SanityArrayObjectItem<SerializedAPIParameter>[]
-  returnType: SanityArrayObjectItem<SerializedAPIToken>[]
+export interface SerializedAPIMethodSignature
+  extends Omit<APIMethodSignature, 'parameters' | 'returnType' | 'typeParameters'> {
+  parameters: SanityArrayItem<SerializedAPIParameter>[]
+  returnType: SanityArrayItem<SerializedAPIToken>[]
+  typeParameters: SanityArrayItem<SerializedAPITypeParameter>[]
+}
+
+/**
+ * @public
+ */
+export interface SerializedAPIPropertySignature extends Omit<APIPropertySignature, 'type'> {
+  type: SanityArrayItem<SerializedAPIToken>[]
+}
+
+/**
+ * @public
+ */
+export interface SerializedAPIIndexSignature
+  extends Omit<APIIndexSignature, 'parameters' | 'returnType'> {
+  parameters: SanityArrayItem<SerializedAPIParameter>[]
+  returnType: SanityArrayItem<SerializedAPIToken>[]
 }
 
 /**
  * @public
  */
 export type SerializedAPIInterfaceMember =
-  | SerializedAPICallSignatureMember
-  | SerializedAPIConstructSignatureMember
-  | SerializedAPIMethodSignatureMember
-  | SerializedAPIPropertySignatureMember
-  | SerializedAPIIndexSignatureMember
+  | SerializedAPICallSignature
+  | SerializedAPIConstructSignature
+  | SerializedAPIMethodSignature
+  | SerializedAPIPropertySignature
+  | SerializedAPIIndexSignature
 
 /**
  * @public
  */
-export interface SerializedAPIConstructorMember extends Omit<APIConstructorMember, 'parameters'> {
-  parameters: SanityArrayObjectItem<SerializedAPIParameter>[]
+export interface SerializedAPIConstructor extends Omit<APIConstructor, 'parameters'> {
+  parameters: SanityArrayItem<SerializedAPIParameter>[]
 }
 
 /**
  * @public
  */
-export interface SerializedAPIPropertyMember extends Omit<APIPropertyMember, 'type'> {
-  type: SanityArrayObjectItem<SerializedAPIToken>[]
+export interface SerializedAPIPropertyMember extends Omit<APIProperty, 'type'> {
+  type: SanityArrayItem<SerializedAPIToken>[]
 }
 
 /**
  * @public
  */
 export interface SerializedAPIMethodMember
-  extends Omit<APIMethodMember, 'parameters' | 'returnType' | 'typeParameters'> {
-  parameters: SanityArrayObjectItem<SerializedAPIParameter>[]
+  extends Omit<APIMethod, 'parameters' | 'returnType' | 'typeParameters'> {
+  parameters: SanityArrayItem<SerializedAPIParameter>[]
   returnType: SerializedAPIToken[]
-  typeParameters: SanityArrayObjectItem<SerializedAPITypeParameter>[]
+  typeParameters: SanityArrayItem<SerializedAPITypeParameter>[]
 }
 
 /**
  * @public
  */
 export type SerializedAPIClassMember =
-  | SerializedAPIConstructorMember
+  | SerializedAPIConstructor
   | SerializedAPIPropertyMember
   | SerializedAPIMethodMember
+
+/**
+ * All API member types.
+ *
+ * @public
+ */
+export type SerializedAPIMember =
+  | SerializedAPIClass
+  | SerializedAPIEnum
+  | SerializedAPIFunction
+  | SerializedAPIInterface
+  | SerializedAPINamespace
+  | SerializedAPITypeAlias
+  | SerializedAPIVariable
