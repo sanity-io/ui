@@ -5,4 +5,4 @@ export * from './_lib/sanity'
 export * from './transform'
 export * from './types'
 
-export type {ExtractorMessage} from '@microsoft/api-extractor'
+export type {ExtractorLogLevel, ExtractorMessage} from '@microsoft/api-extractor'
