@@ -1,4 +1,11 @@
-import {APIExportDocument, APIMemberDocument, APIPackageDocument, extract, transform} from '../src'
+import {
+  APIExportDocument,
+  APIPackageDocument,
+  SerializedAPIMember,
+  SerializedAPINamespace,
+  extract,
+  transform,
+} from '../src'
 import {spawnProject} from './lib/spawnProject'
 
 describe('transform', () => {
@@ -88,12 +95,29 @@ describe('transform', () => {
     // Assert member documents
     const members = docs.filter((d) =>
       ['api.variable'].includes(d._type)
-    ) as unknown as APIMemberDocument[]
+    ) as unknown as SerializedAPIMember[]
+
     const memberExports = members.map((sym) => sym.export)
 
     expect(memberExports).toEqual([
       {_type: 'reference', _ref: 'multi-export_1-0-0__main'},
       {_type: 'reference', _ref: 'multi-export_1-0-0_extra'},
     ])
+  })
+
+  test('should transform package with namespace exports', async () => {
+    const project = await spawnProject('namespaces/1.0.0')
+
+    const results = await extract(project.path)
+
+    project.cleanup()
+
+    const docs = transform(results, {package: {version: '1.0.0'}})
+
+    const doc = docs.find(
+      (d) => d._type === 'api.namespace' && d.name === 'Schema'
+    ) as SerializedAPINamespace
+
+    expect(doc.members.length).toBe(5)
   })
 })
