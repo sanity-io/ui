@@ -1,6 +1,6 @@
 import {writeFile} from 'fs/promises'
 import path from 'path'
-import {SanityDocument} from '@sanity/client'
+import {TransformResult} from '@sanity/tsdoc-to-portable-text'
 import chalk from 'chalk'
 import mkdirp from 'mkdirp'
 import {_encodePackageName} from '../../_helpers'
@@ -10,7 +10,7 @@ export async function loadToFs(options: {
   cwd: string
   scope?: string
   name: string
-  docs: SanityDocument[]
+  docs: TransformResult
   version: string
 }): Promise<void> {
   const {cwd, scope, name, docs, version} = options
