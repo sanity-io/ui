@@ -35,7 +35,7 @@ jobs:
         run: yarn install
 
       - name: Build packages
-        run: yarn type-check && yarn lerna run --scope @sanity/tsdoc-to-portable-text build
+        run: yarn build
 
       - name: Extract, Transform & Load
         env:

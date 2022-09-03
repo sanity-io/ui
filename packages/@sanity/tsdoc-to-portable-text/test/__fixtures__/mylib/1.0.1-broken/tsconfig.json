@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.settings",
-  "include": ["./src"],
-  "compilerOptions": {
-    "rootDir": "./",
-    "outDir": "./lib/dts/",
-    "jsx": "react"
-  }
-}

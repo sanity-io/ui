@@ -128,8 +128,7 @@ export const config = {
     '@sanity/color',
     '@sanity/icons',
     '@sanity/logos',
-    '@sanity/tsdoc-to-portable-text',
     '@sanity/ui',
-    // '@sanity/ui-workshop',
+    '@sanity/ui-workshop',
   ],
 }
