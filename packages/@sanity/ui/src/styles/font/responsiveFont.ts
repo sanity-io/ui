@@ -48,6 +48,19 @@ export function responsiveFont(
     },
   }
 
+  // @TODO fix the real condition that is causing $size to be undefined sometimes
+  if (!$size) {
+    // @ts-expect-error: `warned` isn't typed, the underlying issue should be solved rather than typing it
+    if (!responsiveFont.warned) {
+      // eslint-disable-next-line no-console
+      console.warn('No size specified for responsive font', {fontKey, $size, props, base})
+      // @ts-expect-error: `warned` isn't typed, the underlying issue should be solved rather than typing it
+      responsiveFont.warned = true
+    }
+
+    return [base]
+  }
+
   const resp = _responsive(media, $size, (sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))
 
   return [base, ...resp]
