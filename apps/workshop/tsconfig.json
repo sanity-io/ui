@@ -6,7 +6,7 @@
     "rootDir": "./",
     "outDir": "./build/dts/",
     "module": "ES2020",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "baseUrl": "./"
   },
   "references": [

@@ -13,7 +13,7 @@ exports.createJestConfig = (
   /** @type {import('@jest/types').Config.InitialOptions} */
   config = {}
 ) => {
-  const {setupFiles = [], ...restConfig} = config
+  const {setupFiles = [], setupFilesAfterEnv = [], ...restConfig} = config
 
   return {
     ...restConfig,
@@ -22,6 +22,10 @@ exports.createJestConfig = (
       '^@sanity/(.*)$': path.resolve(ROOT_PATH, 'packages/@sanity/$1/src'),
     },
     setupFiles: [...setupFiles],
+    setupFilesAfterEnv: [
+      ...setupFilesAfterEnv,
+      path.resolve(__dirname, './workaroundEsbuildJestRuntime.ts'),
+    ],
     testEnvironment: 'jsdom',
     // - match all files in `__tests__` directories
     // - match files ending with `.test.js`, `.test.ts`, `.test.jsx`, or `.test.tsx`

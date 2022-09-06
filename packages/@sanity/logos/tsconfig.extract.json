@@ -3,6 +3,6 @@
   "files": ["./src/index.ts"],
   "compilerOptions": {
     "outDir": "./lib/dts/",
-    "jsx": "react"
+    "jsx": "react-jsx"
   }
 }

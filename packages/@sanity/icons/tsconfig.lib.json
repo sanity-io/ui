@@ -13,6 +13,6 @@
     "outDir": "./lib/dts/",
     "declarationDir": "./lib/dts/",
     "rootDir": "./",
-    "jsx": "react"
+    "jsx": "react-jsx"
   }
 }

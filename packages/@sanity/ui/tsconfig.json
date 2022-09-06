@@ -8,7 +8,7 @@
     "outDir": "./lib/dts/",
     "declarationDir": "./lib/dts/",
     "module": "ES2020",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "references": [
     {"path": "../color/tsconfig.lib.json"},

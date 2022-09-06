@@ -12,7 +12,7 @@
     "outDir": "./lib/workshop",
     "declarationDir": "./lib/workshop",
     "module": "ES2020",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "references": [{"path": "../ui/tsconfig.lib.json"}, {"path": "../ui-workshop/tsconfig.lib.json"}]
 }

@@ -6,7 +6,7 @@
     "outDir": "./build/dts/",
     "module": "es6",
     "target": "es2015",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "references": [
     {"path": "../../packages/@sanity/icons/tsconfig.lib.json"},

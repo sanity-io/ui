@@ -5,6 +5,6 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./lib/dts/",
-    "jsx": "react"
+    "jsx": "react-jsx"
   }
 }
