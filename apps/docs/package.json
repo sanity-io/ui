@@ -43,7 +43,6 @@
     "@types/lodash-es": "^4.17.6",
     "@types/pako": "^2.0.0",
     "@types/qs": "^6.9.7",
-    "babel-plugin-styled-components": "^2.0.7",
     "chokidar": "^3.5.3",
     "next-transpile-modules": "^9.0.0"
   }

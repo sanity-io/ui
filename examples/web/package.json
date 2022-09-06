@@ -23,7 +23,6 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.5",
-    "babel-plugin-styled-components": "^2.0.7",
     "next-transpile-modules": "^9.0.0"
   }
 }

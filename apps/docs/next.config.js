@@ -18,6 +18,10 @@ module.exports = withTranspileModules(
 )({
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 
+  compiler: {
+    styledComponents: true,
+  },
+
   typescript: {
     tsconfigPath: './tsconfig.next.json',
   },
