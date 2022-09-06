@@ -21,9 +21,7 @@ export function AppProvider(props: {
 }) {
   const {children, data, loading, menu, params} = props
   const prefersDark = usePrefersDark()
-  const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>(
-    prefersDark ? 'dark' : 'light'
-  )
+  const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey>('light')
 
   useEffect(() => setColorScheme(prefersDark ? 'dark' : 'light'), [prefersDark])
 
