@@ -1,6 +1,5 @@
 import {CloseIcon, LeaveIcon} from '@sanity/icons'
 import {Avatar, Box, Button, Card, Flex, Layer, Stack, Text, Theme} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 import {useStudioToolPlugins} from '$sanity/base'
 

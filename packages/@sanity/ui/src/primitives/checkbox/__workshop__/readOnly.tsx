@@ -1,5 +1,4 @@
 import {Box, Checkbox, Flex, Text} from '@sanity/ui'
-import React from 'react'
 
 export default function ReadOnlyStory() {
   return (

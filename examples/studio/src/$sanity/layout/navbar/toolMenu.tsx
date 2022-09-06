@@ -1,5 +1,4 @@
 import {Box, Button, Text, Tooltip} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 import {useResponsiveMenu} from './hooks'
 import {useLocation, useStudioToolPlugins} from '$sanity/base'

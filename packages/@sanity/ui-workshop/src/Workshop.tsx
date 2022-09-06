@@ -5,7 +5,7 @@ import {
   ThemeColorSchemeKey,
   ToastProvider,
 } from '@sanity/ui'
-import React, {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector'
 import {debounce} from './lib/debounce'

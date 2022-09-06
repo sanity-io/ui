@@ -5,7 +5,7 @@ import {
   ThemeColorSchemeKey,
   ToastProvider,
 } from '@sanity/ui'
-import React, {memo, useCallback, useEffect, useMemo, useState} from 'react'
+import {memo, useCallback, useEffect, useMemo, useState} from 'react'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'
 import {WorkshopConfig, WorkshopMsg, WorkshopState} from '../types'

@@ -1,7 +1,6 @@
 import {hues, white} from '@sanity/color'
 import {SanityMonogram} from '@sanity/logos'
 import sanityConfig from 'config:sanity'
-import React from 'react'
 
 export default function Logo() {
   return (

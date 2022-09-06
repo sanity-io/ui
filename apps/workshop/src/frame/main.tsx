@@ -1,6 +1,6 @@
 import {studioTheme, ThemeColorSchemeKey, ThemeProvider} from '@sanity/ui'
 import {WorkshopFrame} from '@sanity/ui-workshop'
-import React, {useState} from 'react'
+import {useState} from 'react'
 import ReactDOM from 'react-dom'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'

@@ -7,7 +7,7 @@ import {
   usePrefersDark,
 } from '@sanity/ui'
 import {createLocationStore, Workshop} from '@sanity/ui-workshop'
-import React, {useEffect, useMemo, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import ReactDOM from 'react-dom'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'

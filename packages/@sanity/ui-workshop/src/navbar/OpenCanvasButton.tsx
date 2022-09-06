@@ -1,6 +1,6 @@
 import {LaunchIcon} from '@sanity/icons'
 import {Button} from '@sanity/ui'
-import React, {memo, useMemo} from 'react'
+import {memo, useMemo} from 'react'
 import {buildFrameUrl} from '../helpers'
 import {useWorkshop} from '../useWorkshop'
 

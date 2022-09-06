@@ -1,7 +1,7 @@
 import {LinkIcon} from '@sanity/icons'
 import {Box, Tree, TreeItem} from '@sanity/ui'
 import {usePerfTest} from '@sanity/ui-workshop'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 import {perfTests} from './basic.perf'
 
 export default function BasicStory() {

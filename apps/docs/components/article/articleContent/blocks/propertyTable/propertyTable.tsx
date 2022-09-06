@@ -1,5 +1,4 @@
 import {Box, Card, Code, Stack, Text} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 import {PropertyDescription} from './propertyDescription'
 

@@ -1,7 +1,6 @@
 import {ArrowRightIcon, Icon} from '@sanity/icons'
 import {Card, Text} from '@sanity/ui'
 import Link from 'next/link'
-import React from 'react'
 import {useApp} from './hooks'
 import {isRecord} from '$lib/types'
 

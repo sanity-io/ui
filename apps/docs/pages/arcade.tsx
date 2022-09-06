@@ -1,4 +1,3 @@
-import React from 'react'
 import {AppLayout} from '$components/app'
 import {features} from '$config'
 import {loadGlobalPageData} from '$lib/page'

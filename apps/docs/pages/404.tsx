@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import React from 'react'
 import {AppLayout, SEO, useApp} from '$components/app'
 import {Article} from '$components/article'
 import {PageLayout} from '$components/page'

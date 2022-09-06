@@ -1,5 +1,4 @@
 import {Card} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 import {AppBanner} from './banner'
 import {AppFooter} from './footer'

@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect, useMemo, useState} from 'react'
+import {memo, useCallback, useEffect, useMemo, useState} from 'react'
 import {useWorkshop} from '../../useWorkshop'
 import {_runTest} from './_runTest'
 import {PerfMsg} from './msg'

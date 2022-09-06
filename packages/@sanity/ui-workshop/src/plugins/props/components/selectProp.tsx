@@ -1,5 +1,5 @@
 import {Box, Select, Text} from '@sanity/ui'
-import React, {memo, useMemo} from 'react'
+import {memo, useMemo} from 'react'
 import {SelectPropSchema} from '../types'
 import {useProps} from '../useProps'
 

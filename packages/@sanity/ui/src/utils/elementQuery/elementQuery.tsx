@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useMemo, useState} from 'react'
+import {forwardRef, useCallback, useMemo, useState} from 'react'
 import {useElementSize, useForwardedRef} from '../../hooks'
 import {useTheme} from '../../theme'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'

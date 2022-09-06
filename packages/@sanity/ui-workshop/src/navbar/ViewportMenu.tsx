@@ -1,6 +1,6 @@
 import {SelectIcon} from '@sanity/icons'
 import {Button, Menu, MenuButton, MenuItem} from '@sanity/ui'
-import React, {memo, useCallback} from 'react'
+import {memo, useCallback} from 'react'
 import {VIEWPORT_OPTIONS} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 

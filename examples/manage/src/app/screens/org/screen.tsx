@@ -1,4 +1,3 @@
-import React from 'react'
 import {useLocation} from '../../../lib/location'
 import {Layout, OrgHeader} from '../../components'
 

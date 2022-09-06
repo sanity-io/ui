@@ -1,6 +1,6 @@
 import {Box, Card, CardTone, Code, Stack, Text} from '@sanity/ui'
 import axe from 'axe-core'
-import React, {memo} from 'react'
+import {memo} from 'react'
 import {useA11y} from './useA11y'
 
 export const A11yInspector = memo(function A11yInspector(): React.ReactElement {

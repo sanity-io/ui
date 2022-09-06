@@ -1,6 +1,6 @@
 import {ControlsIcon, MenuIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Inline} from '@sanity/ui'
-import React, {memo} from 'react'
+import {memo} from 'react'
 import {NavbarBreadcrumbs} from './NavbarBreadcrumbs'
 import {OpenCanvasButton} from './OpenCanvasButton'
 import {SchemeMenu} from './SchemeMenu'

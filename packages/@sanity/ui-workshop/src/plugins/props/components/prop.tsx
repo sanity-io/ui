@@ -1,5 +1,4 @@
 import {Box, Text} from '@sanity/ui'
-import React from 'react'
 import {PropSchema} from '../types'
 import {BooleanProp} from './booleanProp'
 import {NumberProp} from './numberProp'

@@ -1,4 +1,3 @@
-import React from 'react'
 import {render} from '../../../test'
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'

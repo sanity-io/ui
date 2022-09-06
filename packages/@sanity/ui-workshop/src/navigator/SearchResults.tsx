@@ -1,5 +1,5 @@
 import {Card, Stack, Text} from '@sanity/ui'
-import React, {memo} from 'react'
+import {memo} from 'react'
 import {WorkshopScope, WorkshopStory} from '../types'
 
 export const SearchResults = memo(function SearchResults(props: {

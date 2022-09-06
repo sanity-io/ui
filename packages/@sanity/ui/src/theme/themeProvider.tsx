@@ -1,4 +1,4 @@
-import React, {useContext, useMemo} from 'react'
+import {useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'

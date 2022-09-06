@@ -1,6 +1,5 @@
 import {CloseIcon, RevertIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled(Flex)`

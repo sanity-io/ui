@@ -1,5 +1,5 @@
 import {Box, Checkbox, Flex, Text} from '@sanity/ui'
-import React, {memo} from 'react'
+import {memo} from 'react'
 import {BooleanPropSchema} from '../types'
 import {useProps} from '../useProps'
 
