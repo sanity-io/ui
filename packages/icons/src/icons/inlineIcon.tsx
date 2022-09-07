@@ -1,6 +1,6 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 
 /**
  * @public

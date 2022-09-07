@@ -5,6 +5,6 @@
     "composite": true,
     "rootDir": ".",
     "outDir": "./dist/types",
-    "jsx": "react"
+    "jsx": "react-jsx"
   }
 }
