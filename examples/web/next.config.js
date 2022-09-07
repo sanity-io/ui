@@ -20,6 +20,7 @@ module.exports = withTranspileModules(
   withBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
   })({
+    reactStrictMode: true,
     compiler: {
       styledComponents: true,
     },
@@ -37,6 +38,7 @@ module.exports = withTranspileModules(
         ...config.resolve.alias,
 
         react: require.resolve('react'),
+        'react-dom/client': require.resolve('react-dom/client'),
         'react-dom': require.resolve('react-dom'),
         'styled-components': require.resolve('styled-components'),
       }

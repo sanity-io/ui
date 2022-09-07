@@ -18,6 +18,7 @@ module.exports = withTranspileModules(
 )({
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 
+  reactStrictMode: true,
   compiler: {
     styledComponents: true,
   },
@@ -35,6 +36,7 @@ module.exports = withTranspileModules(
       ...config.resolve.alias,
 
       react: require.resolve('react'),
+      'react-dom/client': require.resolve('react-dom/client'),
       'react-dom': require.resolve('react-dom'),
       'styled-components': require.resolve('styled-components'),
     }
