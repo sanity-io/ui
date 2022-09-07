@@ -1,5 +1,4 @@
 import {Card, Code, ErrorBoundary} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 import {EvalComponentResult} from './eval'
 

@@ -11,7 +11,6 @@ import {
   MenuItem,
   Stack,
 } from '@sanity/ui'
-import React from 'react'
 
 export function ProjectsPanel() {
   return (

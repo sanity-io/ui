@@ -1,7 +1,7 @@
 import {CloseIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Heading, Layer, useClickOutside} from '@sanity/ui'
 import {useRouter} from 'next/router'
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {useApp} from './hooks'
 import {NavMenu} from '$components/navMenu'

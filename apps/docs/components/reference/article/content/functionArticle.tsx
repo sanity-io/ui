@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {
   CommentDeprecatedCallout,
   CommentExampleBlocks,

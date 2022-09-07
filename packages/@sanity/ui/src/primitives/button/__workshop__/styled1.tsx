@@ -1,5 +1,4 @@
 import {Button, Flex} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const StyledButton1 = styled.a`

@@ -1,6 +1,5 @@
 import BlockContent from '@sanity/block-content-to-react'
 import {Box, Text} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 function BlockSerializer(props: any) {

@@ -1,6 +1,5 @@
 import BlockContent from '@sanity/block-content-to-react'
 import {Box, BoxProps, Heading, HeadingProps, Text} from '@sanity/ui'
-import React from 'react'
 import {isRecord, isString} from '$lib/types'
 
 const headingProps: {

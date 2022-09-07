@@ -1,4 +1,3 @@
-import React from 'react'
 import {render} from '../../test'
 import {studioTheme} from './studioTheme'
 import {ThemeContext} from './themeContext'

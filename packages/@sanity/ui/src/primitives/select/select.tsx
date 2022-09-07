@@ -1,5 +1,5 @@
 import {SelectIcon} from '@sanity/icons'
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
 import {Box} from '../box'

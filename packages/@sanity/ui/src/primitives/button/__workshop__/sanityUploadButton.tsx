@@ -1,6 +1,5 @@
 import {UploadIcon} from '@sanity/icons'
 import {Button, Flex} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`

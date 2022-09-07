@@ -1,4 +1,4 @@
-import React, {cloneElement, forwardRef} from 'react'
+import {cloneElement, forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'

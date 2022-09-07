@@ -12,7 +12,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import React, {useRef, useState} from 'react'
+import {useRef, useState} from 'react'
 import styled from 'styled-components'
 import {ListItem} from '../../components/listItem'
 import {Root, Header, Content, ScrollContainer} from './styles'

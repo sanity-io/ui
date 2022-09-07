@@ -12,7 +12,6 @@ import {
   useRootTheme,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import React from 'react'
 import styled, {css} from 'styled-components'
 
 const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(

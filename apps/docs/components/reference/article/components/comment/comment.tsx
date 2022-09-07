@@ -1,6 +1,5 @@
 import {WarningOutlineIcon} from '@sanity/icons'
 import {Box, Card, Flex, Text} from '@sanity/ui'
-import React from 'react'
 import {CommentContent} from './commentContent'
 import {H} from '$components/typography'
 

@@ -15,7 +15,6 @@ npm install react react-dom styled-components
 
 ```jsx
 import {Button, studioTheme, ThemeProvider} from '@sanity/ui'
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 ReactDOM.render(

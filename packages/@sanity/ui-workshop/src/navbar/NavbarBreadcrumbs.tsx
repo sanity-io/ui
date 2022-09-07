@@ -1,5 +1,5 @@
 import {Breadcrumbs, Text} from '@sanity/ui'
-import React, {memo, useCallback} from 'react'
+import {memo, useCallback} from 'react'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */

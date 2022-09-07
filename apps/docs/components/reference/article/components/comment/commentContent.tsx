@@ -1,6 +1,6 @@
 import BlockContent from '@sanity/block-content-to-react'
 import {Box, Card, Code, Heading, Text} from '@sanity/ui'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {sanity} from '$config'
 
 const CODE_LANGUAGES = {

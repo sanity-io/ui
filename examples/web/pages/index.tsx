@@ -13,7 +13,6 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import React from 'react'
 import {AppLayout} from '$components'
 
 function IndexPage() {

@@ -1,6 +1,5 @@
 import {RocketIcon} from '@sanity/icons'
 import {Button, Flex, Inline} from '@sanity/ui'
-import React from 'react'
 
 export default function CustomIconsStory() {
   return (

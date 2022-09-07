@@ -1,5 +1,4 @@
 import {CloseIcon} from '@sanity/icons'
-import React from 'react'
 import styled from 'styled-components'
 import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
 import {ThemeColorToneKey} from '../../theme'

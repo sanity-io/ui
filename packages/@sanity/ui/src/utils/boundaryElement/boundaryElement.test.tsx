@@ -1,4 +1,3 @@
-import React from 'react'
 import {render} from '../../../test'
 import {BoundaryElementContext} from './boundaryElementContext'
 import {BoundaryElementContextValue} from './types'
