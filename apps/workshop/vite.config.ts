@@ -67,6 +67,10 @@ export default defineConfig({
         replacement: require.resolve('react'),
       },
       {
+        find: 'react-dom/client',
+        replacement: require.resolve('react-dom/client'),
+      },
+      {
         find: 'react-dom',
         replacement: require.resolve('react-dom'),
       },

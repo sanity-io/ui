@@ -1,13 +1,13 @@
-import {Component} from 'react'
+import {Component, PropsWithChildren} from 'react'
 import {Code} from '../primitives/code'
 
 /**
  * DO NOT USE IN PRODUCTION
  * @beta
  */
-export interface ErrorBoundaryProps {
+export type ErrorBoundaryProps = PropsWithChildren<{
   onCatch: (params: {error: Error; info: React.ErrorInfo}) => void
-}
+}>
 
 /**
  * DO NOT USE IN PRODUCTION

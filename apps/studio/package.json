@@ -34,8 +34,8 @@
     "@sanity/types": "^2.30.5",
     "@sanity/ui": "^0.38.2",
     "@sanity/vision": "^2.30.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rxjs": "^6.5.3",
     "styled-components": "^5.3.5"
   },
