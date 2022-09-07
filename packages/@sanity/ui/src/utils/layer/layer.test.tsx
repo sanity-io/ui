@@ -1,4 +1,5 @@
 import React from 'react'
+import {vi} from 'vitest'
 import {render} from '../../../test'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'
@@ -7,7 +8,7 @@ import {useLayer} from './useLayer'
 describe('utils/layer', () => {
   describe('useLayer', () => {
     it('should get context value', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootLayer = useLayer()
@@ -43,7 +44,7 @@ describe('utils/layer', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
@@ -71,7 +72,7 @@ describe('utils/layer', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {

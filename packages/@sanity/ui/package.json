@@ -24,7 +24,7 @@
     "clean": "rimraf dist",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
-    "test": "jest",
+    "test": "vitest run",
     "type-check": "tsc --build",
     "watch": "pkg watch --tsconfig tsconfig.dist.json"
   },
@@ -42,8 +42,7 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^8.17.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^12.1.5",
+    "@testing-library/react": "^13.4.0",
     "@types/refractor": "^3.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

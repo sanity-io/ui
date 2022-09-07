@@ -21,17 +21,9 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "$components": ["./components"],
-      "$components/*": ["./components/*"],
-      "$config": ["./config"],
-      "$lib/*": ["./lib/*"],
-      "$queries": ["./queries"],
-      "$packages": ["./packages"],
-      "$sanity": ["./sanity"],
-      "$sanity.server": ["./sanity.server"],
-      "$screens/*": ["./screens/*"],
-      "$workshop/*": ["./workshop/*"]
-    }
+      "$packages": ["./packages"]
+    },
+    "types": ["vitest/globals"]
   },
   "references": [
     {"path": "../../packages/@sanity/color/tsconfig.dist.json"},

@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/qs": "^6.9.7",
-    "@vitejs/plugin-react": "^2.0.1",
-    "vite": "^3.0.8"
+    "@vitejs/plugin-react": "^2.1.0",
+    "vite": "^3.1.0"
   }
 }

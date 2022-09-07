@@ -27,7 +27,7 @@
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "pregenerate": "rimraf src/icons",
-    "test": "jest",
+    "test": "vitest run",
     "type-check": "tsc --build",
     "watch": "pkg watch --tsconfig tsconfig.dist.json"
   },
