@@ -1,8 +1,0 @@
-{
-  "extends": "../../../tsconfig.settings",
-  "files": ["./src/index.ts"],
-  "compilerOptions": {
-    "rootDir": "./",
-    "outDir": "./lib/dts/"
-  }
-}
