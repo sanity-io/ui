@@ -1,7 +1,7 @@
 import {studioTheme, ThemeColorSchemeKey, ThemeProvider} from '@sanity/ui'
 import {WorkshopFrame} from '@sanity/ui-workshop'
-import {useState} from 'react'
-import ReactDOM from 'react-dom'
+import {StrictMode, useState} from 'react'
+import {createRoot} from 'react-dom/client'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'
 import javascript from 'refractor/lang/javascript'
@@ -17,8 +17,6 @@ Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
-ReactDOM.render(<Root />, document.getElementById('root'))
-
 function Root() {
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>('light')
 
@@ -29,3 +27,12 @@ function Root() {
     </ThemeProvider>
   )
 }
+
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(document.getElementById('root')!)
+
+root.render(
+  <StrictMode>
+    <Root />
+  </StrictMode>
+)
