@@ -25,11 +25,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Head>
-        {target && (
-          <title>
-            {target.title} – {app.siteName}
-          </title>
-        )}
+        {target && <title>{`${target.title} – ${app.siteName}`}</title>}
         {!target && <title>Page not found – {app.siteName}</title>}
       </Head>
 

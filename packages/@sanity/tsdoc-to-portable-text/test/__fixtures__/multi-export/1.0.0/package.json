@@ -31,8 +31,8 @@
     "prebuild": "rimraf lib/"
   },
   "devDependencies": {
-    "@types/react": "^17.0.19",
-    "react": "^17.0.2",
-    "typescript": "^4.3.5"
+    "@types/react": "^18.0.18",
+    "react": "^18.2.0",
+    "typescript": "^4.8.2"
   }
 }

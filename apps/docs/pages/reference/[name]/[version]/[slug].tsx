@@ -85,11 +85,7 @@ function ReferenceArticlePage({
   return (
     <AppLayout>
       <Head>
-        {currentMember && (
-          <title>
-            {currentMember.name} – v{params.version} – Sanity UI
-          </title>
-        )}
+        {currentMember && <title>{`${currentMember.name} – v${params.version} – Sanity UI`}</title>}
       </Head>
 
       <PageLayout menu={menu} menuHeader={menuHeader}>

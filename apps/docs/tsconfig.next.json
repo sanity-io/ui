@@ -1,5 +1,8 @@
 {
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "exclude": [
     "**/__fixtures__/*",
     "**/__mocks__/*",
@@ -14,7 +17,11 @@
     "rootDir": "../../",
     "outDir": "./build/dts/",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -25,20 +32,42 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "$components": ["./components/"],
-      "$components/*": ["./components/*"],
-      "$config": ["./config"],
-      "$lib/*": ["./lib/*"],
-      "$queries": ["./queries/"],
-      "$packages": ["./packages"],
-      "$sanity": ["./sanity"],
-      "$sanity.server": ["./sanity.server"],
-      "$screens/*": ["./screens/*"],
-      "@sanity/*": ["../../packages/@sanity/*/src/"],
-      "$workshop/*": ["./workshop/*"]
+      "$components": [
+        "./components/"
+      ],
+      "$components/*": [
+        "./components/*"
+      ],
+      "$config": [
+        "./config"
+      ],
+      "$lib/*": [
+        "./lib/*"
+      ],
+      "$queries": [
+        "./queries/"
+      ],
+      "$packages": [
+        "./packages"
+      ],
+      "$sanity": [
+        "./sanity"
+      ],
+      "$sanity.server": [
+        "./sanity.server"
+      ],
+      "$screens/*": [
+        "./screens/*"
+      ],
+      "@sanity/*": [
+        "../../packages/@sanity/*/src/"
+      ],
+      "$workshop/*": [
+        "./workshop/*"
+      ]
     }
   }
 }

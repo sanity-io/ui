@@ -28,13 +28,7 @@ export default function DocsPathPage() {
 
   return (
     <>
-      <Head>
-        {target && (
-          <title>
-            {target.title} – {app.siteName}
-          </title>
-        )}
-      </Head>
+      <Head>{target && <title>{`${target.title} – ${app.siteName}`}</title>}</Head>
 
       <SEO seo={seo} title={isRecord(target) && target.title} />
 

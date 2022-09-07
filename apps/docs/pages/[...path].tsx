@@ -30,11 +30,7 @@ export default function PathPage() {
   return (
     <>
       <Head>
-        {target && (
-          <title>
-            {target.title} – {app.siteName}
-          </title>
-        )}
+        {target && <title>{`${target.title} – ${app.siteName}`}</title>}
 
         {!target && <title>Page not found – {app.siteName}</title>}
       </Head>
