@@ -1,18 +1,15 @@
 {
   "extends": "../../../tsconfig.settings",
-  "include": [
-    "./src/**/__fixtures__/",
-    "./src/**/__mocks__/",
-    "./src/**/__workshop__/",
-    "./typings/"
-  ],
+  "include": ["./src/**/__fixtures__", "./src/**/__mocks__", "./src/**/__workshop__", "./typings"],
   "compilerOptions": {
     "composite": true,
-    "rootDir": "./",
-    "outDir": "./lib/workshop",
-    "declarationDir": "./lib/workshop",
+    "rootDir": ".",
+    "outDir": "./dist/workshop",
     "module": "ES2020",
     "jsx": "react"
   },
-  "references": [{"path": "../ui/tsconfig.lib.json"}, {"path": "../ui-workshop/tsconfig.lib.json"}]
+  "references": [
+    {"path": "../ui/tsconfig.dist.json"},
+    {"path": "../ui-workshop/tsconfig.dist.json"}
+  ]
 }

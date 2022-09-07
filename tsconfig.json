@@ -1,18 +1,17 @@
 {
   "extends": "../../../tsconfig.settings",
-  "include": ["./src/", "./test/", "./typings/"],
-  "exclude": ["./src/**/__workshop__/"],
+  "include": ["./src", "./test", "./typings"],
+  "exclude": ["./src/**/__workshop__"],
   "compilerOptions": {
     "composite": true,
-    "rootDir": "./",
-    "outDir": "./lib/dts/",
-    "declarationDir": "./lib/dts/",
+    "rootDir": ".",
+    "outDir": "./dist/types",
     "module": "ES2020",
     "jsx": "react"
   },
   "references": [
-    {"path": "../color/tsconfig.lib.json"},
-    {"path": "../icons/tsconfig.lib.json"},
+    {"path": "../color/tsconfig.dist.json"},
+    {"path": "../icons/tsconfig.dist.json"},
     {"path": "./tsconfig.workshop.json"}
   ]
 }
