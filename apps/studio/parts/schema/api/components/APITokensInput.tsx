@@ -1,6 +1,7 @@
 import {FormField} from '@sanity/base/components'
 import {Card, Code as UICode} from '@sanity/ui'
 import {IntentLink} from 'part:@sanity/base/router'
+import React from 'react'
 import styled from 'styled-components'
 
 interface TokenValue {

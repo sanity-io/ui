@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "outDir": "./build/ide"
   },
   "references": [

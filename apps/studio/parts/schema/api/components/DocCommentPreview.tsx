@@ -1,5 +1,6 @@
 import {FormField} from '@sanity/base/components'
 import {Card, Code} from '@sanity/ui'
+import React from 'react'
 
 interface DocCommentPreview {
   type: {
