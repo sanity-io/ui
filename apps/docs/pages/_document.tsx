@@ -18,7 +18,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${ga.trackingId}');`
 
-class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}> {
+class Document extends NextDocument<DocumentProps> {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet()
     const originalRenderPage = ctx.renderPage
@@ -26,22 +26,14 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) =>
-            function EnhancedApp(props) {
-              return sheet.collectStyles(<App {...props} />)
-            },
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
         })
 
       const initialProps = await NextDocument.getInitialProps(ctx)
 
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
+        styles: [initialProps.styles, sheet.getStyleElement()],
       }
     } finally {
       sheet.seal()
@@ -151,7 +143,6 @@ class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}
             sizes="1024x1024"
             href={`${basePath}/sanity-favicon-1024.png`}
           />
-          {this.props.styleTags}
           <script async src="https://unpkg.com/@babel/standalone/babel.min.js" />
         </Head>
         <body>

@@ -1,10 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import {Root} from './root'
 
-ReactDOM.render(
-  <React.StrictMode>
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(document.getElementById('root')!)
+
+root.render(
+  <StrictMode>
     <Root />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 )

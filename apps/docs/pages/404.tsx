@@ -26,12 +26,9 @@ export default function NotFoundPage() {
   return (
     <>
       <Head>
-        {target && (
-          <title>
-            {target.title} – {app.siteName}
-          </title>
-        )}
-        {!target && <title>Page not found – {app.siteName}</title>}
+        <title>
+          {target ? `${target.title} – ${app.siteName}` : `Page not found – ${app.siteName}`}
+        </title>
       </Head>
 
       <SEO seo={seo} title={isRecord(target) && target.title} />

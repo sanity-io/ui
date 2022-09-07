@@ -15,14 +15,13 @@ npm install react react-dom styled-components
 
 ```jsx
 import {Button, studioTheme, ThemeProvider} from '@sanity/ui'
-import React from 'react'
-import ReactDOM from 'react-dom'
+import {createRoot} from 'react-dom/client'
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'))
+root.render(
   <ThemeProvider theme={studioTheme}>
     <Button text="Hello, world" />
-  </ThemeProvider>,
-  document.getElementById('root')
+  </ThemeProvider>
 )
 ```
 

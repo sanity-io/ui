@@ -1,6 +1,5 @@
-import {useId} from '@reach/auto-id'
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import React, {createElement, memo, useCallback, useEffect, useMemo, useRef} from 'react'
+import React, {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import styled from 'styled-components'
 import {Box, Flex, Text} from '../../primitives'
 import {ThemeFontWeightKey} from '../../theme'
@@ -64,7 +63,8 @@ export const TreeItem = memo(function TreeItem(
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
-  const id = useId(idProp) || idProp
+  const _id = useId()
+  const id = idProp || _id
   const itemPath = useMemo(() => path.concat([id || '']), [id, path])
   const itemKey = itemPath.join('/')
   const itemState = tree.state[itemKey]
