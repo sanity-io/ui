@@ -63,7 +63,8 @@ export const TreeItem = memo(function TreeItem(
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
-  const id = useId(idProp) || idProp
+  const _id = useId()
+  const id = idProp || _id
   const itemPath = useMemo(() => path.concat([id || '']), [id, path])
   const itemKey = itemPath.join('/')
   const itemState = tree.state[itemKey]
