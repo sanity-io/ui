@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {useApp} from '../../../app'
 import {H1, H2, P} from '../../../typography'
 import {

@@ -1,5 +1,5 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import React, {
+import {
   cloneElement,
   forwardRef,
   useCallback,

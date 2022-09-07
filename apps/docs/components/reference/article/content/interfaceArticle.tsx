@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {H1, H2} from '../../../typography'
 import {Comment} from '../components/comment'
 import {ReferenceInterfaceMembers} from '../components/interface'

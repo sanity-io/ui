@@ -1,5 +1,5 @@
 import {Box, Button, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/ui'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {isArray, isRecord, isString} from '../../lib/types'
 import {FigmaLogo} from '../assets'
 import {TimeAgo} from '../timeAgo'

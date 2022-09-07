@@ -45,7 +45,7 @@ async function readIcon(filePath: string) {
   )
 
   // replace: prettify importing
-  code = code.replace('import * as React from "react";', 'import React, {forwardRef} from "react";')
+  code = code.replace('import * as React from "react";', 'import {forwardRef} from "react";')
 
   // replace: remove unnecessary imports
   code = code.replace('import { SVGProps, Ref, forwardRef } from "react";', '')

@@ -1,4 +1,3 @@
-import React from 'react'
 import {StudioContext} from './context'
 import {PluginProvider} from './plugin'
 import {StudioCommand} from './types'

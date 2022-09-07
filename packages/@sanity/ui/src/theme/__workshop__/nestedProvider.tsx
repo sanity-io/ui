@@ -1,5 +1,4 @@
 import {Card, Flex, Text, ThemeProvider} from '@sanity/ui'
-import React from 'react'
 
 export default function NestedProviderStory() {
   return (

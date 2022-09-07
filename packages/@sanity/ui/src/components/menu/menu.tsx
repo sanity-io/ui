@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useEffect, useMemo} from 'react'
+import {forwardRef, useCallback, useEffect, useMemo} from 'react'
 import styled from 'styled-components'
 import {useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'

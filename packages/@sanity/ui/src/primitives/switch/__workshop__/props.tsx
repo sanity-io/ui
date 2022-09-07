@@ -1,6 +1,6 @@
 import {Flex, Switch, useTheme} from '@sanity/ui'
 import {useBoolean, useNumber} from '@sanity/ui-workshop'
-import React, {useCallback, useMemo} from 'react'
+import {useCallback, useMemo} from 'react'
 import {ThemeProvider} from 'styled-components'
 
 export default function PropsStory() {

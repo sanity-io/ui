@@ -1,5 +1,5 @@
 import {Box, Flex} from '@sanity/ui'
-import React, {useState} from 'react'
+import {useState} from 'react'
 import styled from 'styled-components'
 import {ChangesPanel} from './changesPanel'
 import {DocumentPanel} from './documentPanel'

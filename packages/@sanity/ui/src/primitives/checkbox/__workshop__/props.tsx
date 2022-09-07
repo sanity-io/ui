@@ -1,6 +1,5 @@
 import {Box, Checkbox, Flex, Text} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
-import React from 'react'
 
 export default function PropsStory() {
   const checked = useBoolean('Checked', false, 'Props')

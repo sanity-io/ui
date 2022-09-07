@@ -1,5 +1,5 @@
 import {Card, Container, Portal, PortalProvider, Stack, Text} from '@sanity/ui'
-import React, {useState} from 'react'
+import {useState} from 'react'
 
 export default function NamedStory() {
   const [portal1Element, setPortal1Element] = useState<HTMLDivElement | null>(null)

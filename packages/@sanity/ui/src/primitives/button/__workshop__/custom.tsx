@@ -1,5 +1,4 @@
 import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
-import React from 'react'
 import {WORKSHOP_BUTTON_TONE_OPTIONS} from '../../../__workshop__/constants'
 
 export default function CustomStory() {

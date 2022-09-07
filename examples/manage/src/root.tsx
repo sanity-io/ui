@@ -1,5 +1,5 @@
 import {studioTheme, ThemeProvider} from '@sanity/ui'
-import React, {useState} from 'react'
+import {useState} from 'react'
 import {App, AppContext, GlobalStyle} from './app'
 import {LocationProvider} from './lib/location'
 

@@ -1,6 +1,5 @@
 import {Box, Card, Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import React from 'react'
 
 export default function TonesStory() {
   const transparentTone = useBoolean('Transparent', true)

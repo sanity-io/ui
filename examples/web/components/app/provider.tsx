@@ -1,5 +1,4 @@
 import {ThemeProvider} from '@sanity/ui'
-import React from 'react'
 import {GlobalStyle} from './globalStyle'
 import {sanityTheme} from '$theme'
 

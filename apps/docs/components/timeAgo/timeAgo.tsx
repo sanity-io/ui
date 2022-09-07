@@ -1,5 +1,5 @@
 import {format} from 'date-fns'
-import React, {useEffect, useRef, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {getIntervalTimeout, getTimeDiff, getTimestamp} from './helpers'
 import {TimeDiff} from './types'
 

@@ -1,5 +1,4 @@
 import {Card} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 import {features} from '../../config'
 import {Loading} from '../loading'

@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect} from 'react'
+import {forwardRef, useEffect} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef} from '../../hooks'
 import {

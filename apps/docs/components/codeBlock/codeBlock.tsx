@@ -1,5 +1,4 @@
 import {Card, Code} from '@sanity/ui'
-import React from 'react'
 
 export function CodeBlock(props: {children: React.ReactNode; language?: string}) {
   return (

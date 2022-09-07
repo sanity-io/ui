@@ -1,5 +1,5 @@
 import {Box, Button, Card, Code, ErrorBoundary, Flex, Heading, Spinner, Stack} from '@sanity/ui'
-import React, {createElement, memo, Suspense, useCallback, useState} from 'react'
+import {createElement, memo, Suspense, useCallback, useState} from 'react'
 import {WorkshopStory} from '../types'
 import {useWorkshop} from '../useWorkshop'
 import {formatStack} from './formatStack'

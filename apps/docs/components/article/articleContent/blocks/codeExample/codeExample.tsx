@@ -3,7 +3,8 @@ import {LaunchIcon} from '@sanity/icons'
 import * as ui from '@sanity/ui'
 import {Box, Button, Card, Flex, Spinner, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import Link from 'next/link'
-import React, {useCallback, useEffect, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
+import * as React from 'react'
 import styled, {keyframes} from 'styled-components'
 import {
   AsyncCodeEditor,

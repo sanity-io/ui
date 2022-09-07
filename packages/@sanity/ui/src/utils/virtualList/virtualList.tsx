@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useMemo, useRef, useState} from 'react'
+import {forwardRef, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {_isScrollable} from '../../helpers'
 import {useForwardedRef} from '../../hooks'

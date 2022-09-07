@@ -7,7 +7,7 @@ import {
   ThemeColorToneKey,
   useLayer,
 } from '@sanity/ui'
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 export default function RecursiveStory() {
   return (
