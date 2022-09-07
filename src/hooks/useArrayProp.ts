@@ -1,13 +1,14 @@
 import {useMemo} from 'react'
 import {_getArrayProp} from '../styles'
 
-export type Primitive = string | number | boolean | undefined | null
+/** @beta */
+export type ArrayPropPrimitive = string | number | boolean | undefined | null
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export function useArrayProp<T extends Primitive = Primitive>(
+export function useArrayProp<T extends ArrayPropPrimitive = ArrayPropPrimitive>(
   val: T | T[] | undefined,
   defaultVal?: T[]
 ): T[] {

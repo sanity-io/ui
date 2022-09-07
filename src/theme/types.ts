@@ -7,7 +7,7 @@ import {BaseTheme, ThemeColor, ThemeColorName, ThemeColorSchemeKey} from './lib/
 export type RootTheme = BaseTheme<Styles>
 
 /**
- * @todo Rename to `ThemeStyles`
+ * TODO: Rename to `ThemeStyles`
  * @public
  */
 export interface Styles {

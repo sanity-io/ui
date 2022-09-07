@@ -23,8 +23,8 @@ export interface ThemeColorButtonStates {
 }
 
 /**
+ * TODO: Rename to `ThemeColorButtonMode`.
  * @public
- * @todo Rename to `ThemeColorButtonMode`.
  */
 export interface ThemeColorButtonTones {
   default: ThemeColorButtonStates
