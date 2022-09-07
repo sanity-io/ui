@@ -7,8 +7,8 @@ import {
   usePrefersDark,
 } from '@sanity/ui'
 import {createLocationStore, Workshop} from '@sanity/ui-workshop'
-import {useEffect, useMemo, useState} from 'react'
-import ReactDOM from 'react-dom'
+import {StrictMode, useEffect, useMemo, useState} from 'react'
+import {createRoot} from 'react-dom/client'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'
 import javascript from 'refractor/lang/javascript'
@@ -75,4 +75,11 @@ function Root() {
   )
 }
 
-ReactDOM.render(<Root />, document.getElementById('root'))
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(document.getElementById('root')!)
+
+root.render(
+  <StrictMode>
+    <Root />
+  </StrictMode>
+)

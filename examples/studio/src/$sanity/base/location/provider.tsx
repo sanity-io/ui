@@ -84,7 +84,7 @@ export function LocationProvider(props: LocationProviderProps) {
     stateRef.current = state
   }, [state])
 
-  const pushState = useCallback((params) => {
+  const pushState = useCallback((params: any) => {
     const newState = getNewState(stateRef.current, params)
     const url = getUrlFromState(newState)
 
@@ -93,7 +93,7 @@ export function LocationProvider(props: LocationProviderProps) {
     setState(newState)
   }, [])
 
-  const replaceState = useCallback((params) => {
+  const replaceState = useCallback((params: any) => {
     const newState = getNewState(stateRef.current, params)
     const url = getUrlFromState(newState)
 

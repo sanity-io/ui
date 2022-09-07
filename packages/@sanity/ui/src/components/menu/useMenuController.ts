@@ -33,7 +33,7 @@ export function useMenuController(props: {
   const activeElement = elementsRef.current[activeIndex] || null
   const mounted = Boolean(rootElement)
 
-  const setActiveIndex = useCallback((nextActiveIndex) => {
+  const setActiveIndex = useCallback((nextActiveIndex: number) => {
     _setActiveIndex(nextActiveIndex)
     activeIndexRef.current = nextActiveIndex
   }, [])
