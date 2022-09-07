@@ -7,7 +7,7 @@
     "rootDir": ".",
     "outDir": "./dist/types",
     "module": "ES2020",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "references": [
     {"path": "../color/tsconfig.dist.json"},
