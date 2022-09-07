@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+import {createPortal} from 'react-dom'
 import {usePortal} from './usePortal'
 
 /**
@@ -25,5 +25,5 @@ export function Portal(props: PortalProps): React.ReactPortal | null {
     return null
   }
 
-  return ReactDOM.createPortal(children, portalElement)
+  return createPortal(children, portalElement)
 }

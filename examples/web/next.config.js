@@ -20,6 +20,11 @@ module.exports = withTranspileModules(
   withBundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',
   })({
+    reactStrictMode: true,
+    compiler: {
+      styledComponents: true,
+    },
+
     typescript: {
       tsconfigPath: './tsconfig.next.json',
     },
@@ -29,6 +34,7 @@ module.exports = withTranspileModules(
       config.resolve.alias = {
         'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
         'react/jsx-runtime': require.resolve('react/jsx-runtime'),
+        'react-dom/client': require.resolve('react-dom/client'),
 
         ...config.resolve.alias,
 

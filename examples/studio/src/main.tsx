@@ -1,10 +1,17 @@
 import {StrictMode} from 'react'
-import ReactDOM from 'react-dom'
+import {createRoot} from 'react-dom/client'
 import {Root} from './root'
 
-ReactDOM.render(
+const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+  throw new Error('missing #root element')
+}
+
+const root = createRoot(rootElement)
+
+root.render(
   <StrictMode>
     <Root />
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 )
