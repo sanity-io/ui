@@ -1,5 +1,6 @@
 import {WorkshopScope} from '../types'
 
+/** @internal */
 export interface MenuList {
   type: 'list'
   name?: string
@@ -7,6 +8,7 @@ export interface MenuList {
   items: Array<MenuList | MenuScope>
 }
 
+/** @internal */
 export interface MenuScope {
   type: 'scope'
   name: string
@@ -14,6 +16,7 @@ export interface MenuScope {
   scope: WorkshopScope
 }
 
+/** @internal */
 export interface MenuCollection {
   name?: string
   title?: string

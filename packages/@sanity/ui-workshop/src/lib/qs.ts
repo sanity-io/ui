@@ -1,3 +1,4 @@
+/** @internal */
 export const qs = {
   parse(str: string): Record<string, string> {
     const params = new URLSearchParams('?' + str)

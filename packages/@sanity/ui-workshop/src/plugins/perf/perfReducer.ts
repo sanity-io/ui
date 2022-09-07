@@ -2,6 +2,7 @@ import {WorkshopMsg} from '../../types'
 import {PerfMsg} from './msg'
 import {PerfState} from './types'
 
+/** @internal */
 export function perfReducer(state: PerfState, msg: PerfMsg | WorkshopMsg): PerfState {
   if (msg.type === 'workshop/perf/clearResults') {
     return {...state, results: state.results.filter((d) => d.name !== msg.name)}

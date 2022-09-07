@@ -3,6 +3,7 @@ import React, {memo} from 'react'
 import {BooleanPropSchema} from '../types'
 import {useProps} from '../useProps'
 
+/** @internal */
 export const BooleanProp = memo(function BooleanProp(props: {
   schema: BooleanPropSchema
   value?: boolean

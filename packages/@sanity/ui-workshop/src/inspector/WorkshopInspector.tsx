@@ -11,6 +11,7 @@ interface InspectorTab {
   tone?: ButtonTone
 }
 
+/** @internal */
 export const WorkshopInspector = memo(function WorkshopInspector(): React.ReactElement {
   const {plugins} = useWorkshop()
 

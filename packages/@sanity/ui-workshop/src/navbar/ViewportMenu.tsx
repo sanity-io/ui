@@ -4,6 +4,7 @@ import React, {memo, useCallback} from 'react'
 import {VIEWPORT_OPTIONS} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 
+/** @internal */
 export const ViewportMenu = memo(function ViewportMenu() {
   const {broadcast, story, viewport} = useWorkshop()
 

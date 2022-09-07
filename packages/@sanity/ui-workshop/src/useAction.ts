@@ -1,6 +1,7 @@
 import {useCallback} from 'react'
 import {useWorkshop} from './useWorkshop'
 
+/** @public */
 export function useAction(name: string): (...args: unknown[]) => void {
   const {scope, story} = useWorkshop()
 

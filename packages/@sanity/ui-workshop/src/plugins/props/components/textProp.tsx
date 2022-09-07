@@ -3,6 +3,7 @@ import React, {memo} from 'react'
 import {TextPropSchema} from '../types'
 import {useProps} from '../useProps'
 
+/** @internal */
 export const TextProp = memo(function TextProp(props: {
   schema: TextPropSchema
   value?: string

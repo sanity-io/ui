@@ -1,6 +1,7 @@
 import {isEqual} from './lib/isEqual'
 import {WorkshopMsg, WorkshopState} from './types'
 
+/** @internal */
 export function workshopReducer(state: WorkshopState, msg: WorkshopMsg): WorkshopState {
   if (msg.type === 'workshop/frameReady') {
     return {...state, frameReady: true}

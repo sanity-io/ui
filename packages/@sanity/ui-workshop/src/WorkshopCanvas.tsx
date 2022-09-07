@@ -12,6 +12,7 @@ const Frame = styled.iframe`
   width: 100%;
 `
 
+/** @internal */
 export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
   frameRef: React.Ref<HTMLIFrameElement>
 }): React.ReactElement {

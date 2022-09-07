@@ -2,6 +2,7 @@ import {WorkshopMsg} from '../../types'
 import {PropsMsg} from './msg'
 import {PropsState} from './types'
 
+/** @internal */
 export function propsReducer(state: PropsState, msg: WorkshopMsg | PropsMsg): PropsState {
   if (msg.type === 'workshop/props/setValue') {
     return {

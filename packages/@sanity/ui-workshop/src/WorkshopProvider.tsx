@@ -7,10 +7,11 @@ import {propsPlugin} from './plugins/props'
 import {WorkshopConfig, WorkshopMsg, WorkshopPlugin} from './types'
 import {WorkshopContext, WorkshopContextValue} from './WorkshopContext'
 
+/** @internal */
 export interface WorkshopProviderProps {
   broadcast: (msg: WorkshopMsg) => void
   children?: React.ReactNode
-  channel: Pubsub
+  channel: Pubsub<WorkshopMsg>
   config: WorkshopConfig
   frameReady: boolean
   origin: 'frame' | 'main'
@@ -21,6 +22,7 @@ export interface WorkshopProviderProps {
   zoom?: number
 }
 
+/** @internal */
 export const WorkshopProvider = memo(function WorkshopProvider(
   props: WorkshopProviderProps
 ): React.ReactElement {

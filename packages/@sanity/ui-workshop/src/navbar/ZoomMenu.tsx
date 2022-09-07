@@ -4,6 +4,7 @@ import React, {memo, useCallback} from 'react'
 import {ZOOM_OPTIONS} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 
+/** @internal */
 export function ZoomMenu(): React.ReactElement {
   const {broadcast, story, zoom} = useWorkshop()
 

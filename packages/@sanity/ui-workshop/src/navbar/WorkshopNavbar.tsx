@@ -7,6 +7,7 @@ import {SchemeMenu} from './SchemeMenu'
 import {ViewportMenu} from './ViewportMenu'
 import {ZoomMenu} from './ZoomMenu'
 
+/** @internal */
 export const WorkshopNavbar = memo(function WorkshopNavbar(): React.ReactElement {
   return (
     <Card borderBottom flex="none" padding={2} style={{lineHeight: 0}}>

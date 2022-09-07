@@ -1,9 +1,11 @@
-export interface Pubsub<Msg = any> {
+/** @public */
+export interface Pubsub<Msg = unknown> {
   publish: (msg: Msg) => void
   subscribe: (subscriber: (msg: Msg) => void) => () => void
 }
 
-export function createPubsub<Msg = any>(): Pubsub<Msg> {
+/** @internal */
+export function createPubsub<Msg = unknown>(): Pubsub<Msg> {
   const subscribers = new Set<(msg: Msg) => void>()
 
   return {

@@ -3,6 +3,7 @@ import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import React, {memo} from 'react'
 import {usePerf} from './hooks'
 
+/** @internal */
 export const PerfInspector = memo(function PerfInspector(): React.ReactElement {
   const {clearResults, results, runTest, testDetails} = usePerf()
 

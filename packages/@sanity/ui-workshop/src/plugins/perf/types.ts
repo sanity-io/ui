@@ -1,7 +1,9 @@
+/** @beta */
 export type PerfTestRunFn<TargetType = unknown> = (context: {
   target: TargetType
 }) => Promise<void> | void
 
+/** @internal */
 export interface PerfTest<TargetType = unknown> {
   description?: string
   name: string
@@ -10,6 +12,7 @@ export interface PerfTest<TargetType = unknown> {
   run: PerfTestRunFn<TargetType>
 }
 
+/** @internal */
 export interface PerfTestResult {
   name: string
   renders: PerfTestRenderResult[]
@@ -20,6 +23,7 @@ export interface PerfTestResult {
   }
 }
 
+/** @internal */
 export interface PerfTestDetail {
   description?: string
   name: string
@@ -28,6 +32,7 @@ export interface PerfTestDetail {
 
 /**
  * @see React.ProfilerOnRenderCallback
+ * @internal
  */
 export interface PerfTestRenderResult {
   id: string
@@ -44,6 +49,7 @@ export interface PerfTestRenderResult {
   }>
 }
 
+/** @internal */
 export interface PerfState {
   results: PerfTestResult[]
   activeTest?: string

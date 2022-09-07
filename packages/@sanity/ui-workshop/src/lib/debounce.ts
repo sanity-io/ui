@@ -1,1 +1,4 @@
-export {default as debounce} from 'lodash/debounce'
+import lodashDebounce from 'lodash/debounce'
+
+/** @internal */
+export const debounce = lodashDebounce

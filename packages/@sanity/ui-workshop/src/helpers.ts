@@ -1,6 +1,7 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
 import {WorkshopScope, WorkshopStory} from './types'
 
+/** @internal */
 export function resolveLocation(
   scopes: WorkshopScope[],
   path: string
@@ -27,6 +28,7 @@ export function resolveLocation(
   return {scope, story}
 }
 
+/** @internal */
 export function buildFrameUrl(params: {
   baseUrl?: string
   path: string

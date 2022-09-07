@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import {useProps} from '../useProps'
 
+/** @internal */
 export function useBoolean(
   name: string,
   defaultValue?: boolean,

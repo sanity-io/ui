@@ -9,6 +9,7 @@ import {
   WorkshopStory,
 } from './types'
 
+/** @public */
 export interface WorkshopContextValue<CustomMsg = never> {
   plugins: WorkshopPlugin[]
   broadcast: (msg: WorkshopMsg | CustomMsg) => void
@@ -28,4 +29,5 @@ export interface WorkshopContextValue<CustomMsg = never> {
   zoom: number
 }
 
+/** @internal */
 export const WorkshopContext = createContext<WorkshopContextValue | null>(null)

@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import {useProps} from '../useProps'
 
+/** @internal */
 export function useText(
   name: string,
   defaultValue?: string,

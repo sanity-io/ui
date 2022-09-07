@@ -10,7 +10,7 @@ const atob =
     ? (str: string) => Buffer.from(str, 'base64').toString('binary')
     : window.atob
 
-export const uint8ArrayToBase64 = (uint8array: Uint8Array): string => {
+function uint8ArrayToBase64(uint8array: Uint8Array): string {
   let str = ''
 
   for (let i = 0, {length} = uint8array; i < length; i++) {
@@ -32,6 +32,7 @@ function base64ToUint8Array(base64: string) {
   return bytes
 }
 
+/** @internal */
 export function decode(input: string): string {
   if (input.length === 0) return ''
 
@@ -40,6 +41,7 @@ export function decode(input: string): string {
   return pako.inflate(arr, {to: 'string'})
 }
 
+/** @internal */
 export function encode(input: string): string {
   if (input.length === 0) return ''
 

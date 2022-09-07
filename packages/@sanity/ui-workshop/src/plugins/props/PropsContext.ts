@@ -1,6 +1,7 @@
 import {createContext} from 'react'
 import {PropSchema} from './types'
 
+/** @internal */
 export interface PropsContextValue {
   registerProp: (propSchema: PropSchema) => void
   schemas: PropSchema[]
@@ -9,4 +10,5 @@ export interface PropsContextValue {
   value: Record<string, unknown>
 }
 
+/** @internal */
 export const PropsContext = createContext<PropsContextValue | null>(null)

@@ -1,6 +1,7 @@
 import {createContext} from 'react'
 import {PerfTest, PerfTestDetail, PerfTestRenderResult, PerfTestResult} from './types'
 
+/** @internal */
 export interface PerfContextValue {
   activeTest?: string
   addRenderResult: (testName: string, result: PerfTestRenderResult) => void
@@ -12,4 +13,5 @@ export interface PerfContextValue {
   tests: PerfTest[]
 }
 
+/** @internal */
 export const PerfContext = createContext<PerfContextValue | null>(null)

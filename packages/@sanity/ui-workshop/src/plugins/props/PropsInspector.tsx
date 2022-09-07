@@ -3,6 +3,7 @@ import React, {memo} from 'react'
 import {Prop} from './components/prop'
 import {useProps} from './useProps'
 
+/** @internal */
 export const PropsInspector = memo(function PropsInspector(): React.ReactElement {
   const {schemas, value} = useProps()
 

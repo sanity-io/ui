@@ -11,6 +11,7 @@ const RE_URL = /http:\/\/([^:/\s]+)(:[0-9]+)?/g
 const RE_VITE_FS_PREFIX = /\/@fs\//g
 const RE_VITE_FS_SUFFIX = /\?([a-z]{1})=([0-9]+)/g
 
+/** @internal */
 export function formatStack(stack: string): string {
   let ret = decodeURIComponent(stack)
 

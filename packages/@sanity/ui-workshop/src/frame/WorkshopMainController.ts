@@ -7,6 +7,7 @@ export interface WorkshopMainController {
   message: Pubsub<WorkshopMsg>
 }
 
+/** @internal */
 export function createMainController(): WorkshopMainController {
   const _subscribers = new Set<(msg: WorkshopMsg) => void>()
 

@@ -6,6 +6,7 @@ import {PerfContext, PerfContextValue} from './PerfContext'
 import {perfReducer} from './perfReducer'
 import {PerfState, PerfTest, PerfTestRenderResult} from './types'
 
+/** @internal */
 export const PerfProvider = memo(function PerfProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {

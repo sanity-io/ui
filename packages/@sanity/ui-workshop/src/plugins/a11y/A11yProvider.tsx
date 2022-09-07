@@ -4,6 +4,7 @@ import {useWorkshop} from '../../useWorkshop'
 import {A11yContext, A11yContextValue} from './A11yContext'
 import {A11yMsg} from './msg'
 
+/** @internal */
 export const A11yProvider = memo(function A11yProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {

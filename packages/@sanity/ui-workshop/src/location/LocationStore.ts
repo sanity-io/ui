@@ -1,6 +1,7 @@
 import {qs} from '../lib/qs'
 import {WorkshopLocation} from '../types'
 
+/** @public */
 export interface WorkshopLocationStore {
   get: () => Omit<WorkshopLocation, 'type'>
   push: (nextLocation: Omit<WorkshopLocation, 'type'>) => void
@@ -21,6 +22,7 @@ function _getStateFromWindow(): Omit<WorkshopLocation, 'type'> {
   }
 }
 
+/** @internal */
 export function createLocationStore(): WorkshopLocationStore {
   const _subscribers = new Set<(nextLocation: WorkshopLocation) => void>()
 

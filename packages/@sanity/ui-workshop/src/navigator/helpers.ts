@@ -2,6 +2,7 @@ import {set} from 'segmented-property'
 import {WorkshopScope} from '../types'
 import {MenuCollection, MenuList, MenuScope} from './types'
 
+/** @internal */
 export function buildMenuItems(
   collections: MenuCollection[],
   node: Record<string, unknown>,
@@ -28,6 +29,7 @@ export function buildMenuItems(
   }
 }
 
+/** @internal */
 export function buildMenu(
   collections: MenuCollection[],
   scopes: WorkshopScope[]

@@ -7,6 +7,7 @@ import {SelectProp} from './selectProp'
 import {StringProp} from './stringProp'
 import {TextProp} from './textProp'
 
+/** @internal */
 export function Prop(props: {schema: PropSchema; value: any}): React.ReactElement {
   const {schema, value} = props
 

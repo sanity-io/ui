@@ -4,6 +4,7 @@ import {WorkshopStory} from '../types'
 import {useWorkshop} from '../useWorkshop'
 import {formatStack} from './formatStack'
 
+/** @internal */
 export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactElement {
   const {story} = useWorkshop()
   const [state, setState] = useState<{error: Error | null; errorInfo: React.ErrorInfo | null}>({

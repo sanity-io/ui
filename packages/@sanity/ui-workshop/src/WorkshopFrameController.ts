@@ -3,11 +3,13 @@ import {isRecord} from './lib/isRecord'
 import {Pubsub} from './lib/pubsub'
 import {WorkshopMsg} from './types'
 
+/** @internal */
 export interface WorkshopFrameController {
   message: Pubsub<WorkshopMsg>
   setElement: (el: HTMLIFrameElement | null) => void
 }
 
+/** @internal */
 export function createWorkshopFrameController(): WorkshopFrameController {
   const _subscribers = new Set<(msg: WorkshopMsg) => void>()
 

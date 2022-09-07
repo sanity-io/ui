@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import {useProps} from '../useProps'
 
+/** @internal */
 export function useString(
   name: string,
   defaultValue?: string,

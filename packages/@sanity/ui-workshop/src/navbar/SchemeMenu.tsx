@@ -3,6 +3,7 @@ import {Button} from '@sanity/ui'
 import React, {memo, useCallback} from 'react'
 import {useWorkshop} from '../useWorkshop'
 
+/** @internal */
 export function SchemeMenu(): React.ReactElement {
   const {broadcast, scheme} = useWorkshop()
 

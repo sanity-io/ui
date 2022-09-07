@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react'
 
 const IGNORE_VIOLATION_IDS = ['landmark-one-main', 'page-has-heading-one']
 
+/** @internal */
 export function useAxeResults(props: {
   enabled: boolean
   key: string | null

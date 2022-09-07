@@ -4,6 +4,7 @@ function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
+/** @internal */
 export async function _runTest(
   test: PerfTest,
   target: unknown

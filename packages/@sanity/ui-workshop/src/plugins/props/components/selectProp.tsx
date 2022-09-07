@@ -3,6 +3,7 @@ import React, {memo, useMemo} from 'react'
 import {SelectPropSchema} from '../types'
 import {useProps} from '../useProps'
 
+/** @internal */
 export const SelectProp = memo(function SelectProp(props: {
   schema: SelectPropSchema
   value: any

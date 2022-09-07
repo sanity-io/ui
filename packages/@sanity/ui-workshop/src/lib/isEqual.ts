@@ -1,1 +1,4 @@
-export {default as isEqual} from 'lodash/isEqual'
+import lodashIsEqual from 'lodash/isEqual'
+
+/** @internal */
+export const isEqual = lodashIsEqual

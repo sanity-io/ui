@@ -4,6 +4,7 @@ import React, {memo, useMemo} from 'react'
 import {buildFrameUrl} from '../helpers'
 import {useWorkshop} from '../useWorkshop'
 
+/** @internal */
 export const OpenCanvasButton = memo(function OpenCanvasButton() {
   const {frameUrl, path, payload, scheme, zoom, viewport} = useWorkshop()
 

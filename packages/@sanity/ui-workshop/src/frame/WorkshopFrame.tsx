@@ -14,6 +14,7 @@ import {workshopReducer} from '../workshopReducer'
 import {WorkshopCanvas} from './WorkshopCanvas'
 import {createMainController} from './WorkshopMainController'
 
+/** @internal */
 export interface WorkshopFrameProps {
   config: WorkshopConfig
   setScheme: (nextScheme: ThemeColorSchemeKey) => void
@@ -33,6 +34,7 @@ function getStateFromLocation(): WorkshopState {
   }
 }
 
+/** @internal */
 export const WorkshopFrame = memo(function WorkshopFrame(
   props: WorkshopFrameProps
 ): React.ReactElement {

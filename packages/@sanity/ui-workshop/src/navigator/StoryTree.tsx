@@ -4,6 +4,7 @@ import {WorkshopStory} from '../types'
 import {useWorkshop} from '../useWorkshop'
 import {MenuList, MenuScope} from './types'
 
+/** @internal */
 export const StoryTree = memo(function StoryTree(props: {items: Array<MenuList | MenuScope>}) {
   const {items} = props
 

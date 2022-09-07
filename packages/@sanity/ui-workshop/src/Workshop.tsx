@@ -20,6 +20,7 @@ import {createWorkshopFrameController} from './WorkshopFrameController'
 import {WorkshopProvider} from './WorkshopProvider'
 import {workshopReducer} from './workshopReducer'
 
+/** @public */
 export interface WorkshopProps {
   config: WorkshopConfig
   locationStore: WorkshopLocationStore
@@ -76,6 +77,7 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
   return query
 }
 
+/** @public */
 export const Workshop = memo(function Workshop(props: WorkshopProps): React.ReactElement {
   const {config, locationStore, onSchemeChange, scheme: schemeProp} = props
   const withNavbar = config.features?.navbar ?? true

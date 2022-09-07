@@ -7,6 +7,7 @@ import {PropsContext, PropsContextValue} from './PropsContext'
 import {propsReducer} from './propsReducer'
 import {PropSchema, PropsState} from './types'
 
+/** @internal */
 export const PropsProvider = memo(function PropsProvider(props: {
   children?: React.ReactNode
 }): React.ReactElement {

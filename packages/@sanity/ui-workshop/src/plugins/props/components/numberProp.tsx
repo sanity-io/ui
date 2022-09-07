@@ -3,6 +3,7 @@ import React, {memo} from 'react'
 import {NumberPropSchema} from '../types'
 import {useProps} from '../useProps'
 
+/** @internal */
 export const NumberProp = memo(function NumberProp(props: {
   schema: NumberPropSchema
   value?: string

@@ -1,10 +1,12 @@
 import {PerfTestRenderResult} from './types'
 
+/** @internal */
 export interface PerfClearResultsMsg {
   type: 'workshop/perf/clearResults'
   name: string
 }
 
+/** @internal */
 export interface PerfRegisterTestMsg {
   type: 'workshop/perf/registerTest'
   description?: string
@@ -12,16 +14,19 @@ export interface PerfRegisterTestMsg {
   title?: string
 }
 
+/** @internal */
 export interface PerfRunTestMsg {
   type: 'workshop/perf/runTest'
   name: string
 }
 
+/** @internal */
 export interface PerfUnregisterTestMsg {
   type: 'workshop/perf/unregisterTest'
   name: string
 }
 
+/** @internal */
 export interface PerfAddResultMsg {
   type: 'workshop/perf/addResult'
   name: string
@@ -32,12 +37,14 @@ export interface PerfAddResultMsg {
   }
 }
 
+/** @internal */
 export interface PerfAddRenderResultMsg {
   type: 'workshop/perf/addRenderResult'
   name: string
   result: PerfTestRenderResult
 }
 
+/** @internal */
 export type PerfMsg =
   | PerfClearResultsMsg
   | PerfRegisterTestMsg

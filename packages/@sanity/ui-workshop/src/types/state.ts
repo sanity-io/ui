@@ -1,5 +1,6 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
 
+/** @public */
 export interface WorkshopState {
   frameReady: boolean
   path: string

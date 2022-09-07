@@ -2,6 +2,7 @@ import {Card, Stack, Text} from '@sanity/ui'
 import React, {memo} from 'react'
 import {WorkshopScope, WorkshopStory} from '../types'
 
+/** @internal */
 export const SearchResults = memo(function SearchResults(props: {
   matches: {scope: WorkshopScope; story: WorkshopStory}[]
   onStoryClick: (event: React.MouseEvent<HTMLDivElement>) => void

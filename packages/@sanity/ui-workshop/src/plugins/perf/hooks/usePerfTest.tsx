@@ -3,11 +3,13 @@ import {PerfTestRenderResult} from '..'
 import {PerfTest, PerfTestRunFn} from '../types'
 import {usePerf} from './usePerf'
 
+/** @beta */
 export interface PerfTestHookProps<TargetType = unknown> {
   ref: React.MutableRefObject<TargetType | null>
   Wrapper: React.ComponentType<{children?: React.ReactNode}>
 }
 
+/** @beta */
 export interface PerfTestProps<TargetType = unknown> {
   description?: string
   name: string
@@ -15,6 +17,7 @@ export interface PerfTestProps<TargetType = unknown> {
   title?: string
 }
 
+/** @beta */
 export function usePerfTest<TargetType = unknown>(
   props: PerfTestProps<TargetType>
 ): PerfTestHookProps<TargetType> {

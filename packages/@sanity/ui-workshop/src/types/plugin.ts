@@ -1,3 +1,4 @@
+/** @public */
 export interface WorkshopPlugin {
   name: string
   title: string

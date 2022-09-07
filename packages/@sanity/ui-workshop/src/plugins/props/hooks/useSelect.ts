@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {SelectPropOptionsProp, SelectPropValue} from '../types'
 import {useProps} from '../useProps'
 
+/** @internal */
 export function useSelect<T extends SelectPropValue>(
   name: string,
   options: SelectPropOptionsProp<T>,

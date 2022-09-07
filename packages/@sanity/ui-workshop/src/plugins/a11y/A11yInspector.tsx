@@ -3,6 +3,7 @@ import axe from 'axe-core'
 import React, {memo} from 'react'
 import {useA11y} from './useA11y'
 
+/** @internal */
 export const A11yInspector = memo(function A11yInspector(): React.ReactElement {
   const {results} = useA11y()
 
@@ -25,6 +26,7 @@ export const A11yInspector = memo(function A11yInspector(): React.ReactElement {
   )
 })
 
+/** @internal */
 const ResultItem = memo(function ResultItem(props: {result: axe.Result; tone?: CardTone}) {
   const {result, tone} = props
 

@@ -19,6 +19,7 @@ const flexNoneStyle: React.CSSProperties = {flex: 'none'}
 const lineHeightNoneStyle: React.CSSProperties = {lineHeight: 0}
 const textInputFontSize = [2, 2, 1]
 
+/** @internal */
 export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
   collections?: MenuCollection[]
 }): React.ReactElement {
