@@ -39,10 +39,10 @@
     "@types/mkdirp": "^1.0.2",
     "camelcase": "^6.3.0",
     "glob": "^7.2.0",
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "peerDependencies": {
-    "react": "^16.14 || ^17 || ^18"
+    "react": "^18"
   },
   "repository": {
     "type": "git",
