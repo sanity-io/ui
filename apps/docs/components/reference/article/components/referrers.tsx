@@ -1,5 +1,4 @@
 import {Box, Label, Stack} from '@sanity/ui'
-import React from 'react'
 import {useApp} from '$components/app'
 import {NavLink} from '$components/navLink'
 

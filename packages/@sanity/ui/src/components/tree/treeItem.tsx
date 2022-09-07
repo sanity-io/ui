@@ -1,5 +1,5 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import React, {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
+import {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import styled from 'styled-components'
 import {Box, Flex, Text} from '../../primitives'
 import {ThemeFontWeightKey} from '../../theme'

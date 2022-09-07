@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
-import React, {createElement, forwardRef, isValidElement, useCallback, useMemo} from 'react'
+import {createElement, forwardRef, isValidElement, useCallback, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'

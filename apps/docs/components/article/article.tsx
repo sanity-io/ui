@@ -1,5 +1,5 @@
 import {Box, Button, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/ui'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {ArticleContent} from './articleContent'
 import {getHeadings, getTOCTree} from './helpers'
 import {HeadingNode} from './types'

@@ -1,5 +1,4 @@
 import {Card, Layer, LayerProvider, Stack} from '@sanity/ui'
-import React from 'react'
 import {LayerDebugInfo} from './_debug'
 
 export default function MultipleRootsStory() {

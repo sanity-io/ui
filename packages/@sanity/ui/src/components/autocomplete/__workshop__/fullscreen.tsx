@@ -18,7 +18,7 @@ import {
   useToast,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {countriesStore} from '../__mocks__/apiStore'
 
 export default function Fullscreen() {

@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
+import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'

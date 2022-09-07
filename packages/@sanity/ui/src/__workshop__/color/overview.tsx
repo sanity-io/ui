@@ -1,6 +1,6 @@
 import {black, ColorTints, ColorValue, COLOR_HUES, hues, white} from '@sanity/color'
 import {Box, Card, Code, Flex, Grid, Heading, Stack, useToast} from '@sanity/ui'
-import React, {useCallback} from 'react'
+import {useCallback} from 'react'
 import {hexToRgb, rgbToHsl} from '../../theme'
 
 function ucfirst(str: string) {

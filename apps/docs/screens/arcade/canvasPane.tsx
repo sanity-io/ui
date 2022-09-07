@@ -16,7 +16,7 @@ import {
   useLayer,
   useToast,
 } from '@sanity/ui'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
 import {SIZES} from './constants'
 import {ArcadeFrame} from './frame'
 import {ArcadeMeta, CanvasWidth} from './types'

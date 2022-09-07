@@ -3713,10 +3713,10 @@
     object-assign "^4.1.1"
     rxjs "^6.5.3"
 
-"@sanity/pkg-utils@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@sanity/pkg-utils/-/pkg-utils-1.5.1.tgz#41e4b46dec0270cc95770e394668de02c3fab83b"
-  integrity sha512-bQGxBcTg53ZcQDGtQcLJJPIhjbZppRLeXlIqMjtBZegbx1bE9fE2itPSyRACzOU8qj1I23ixlEJVhNRMdy30Ng==
+"@sanity/pkg-utils@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@sanity/pkg-utils/-/pkg-utils-1.6.0.tgz#e34bfcf0042d543fa1702a0cfa8a7eefc09e3f43"
+  integrity sha512-FWqSfhiFDIZpy4Q2z0eln5eLsvN3f93pJP+m6FdsJBJU1nvHfKpm8A7egdf8Y2GEHyK/bPaz71sT3oQ/92reEw==
   dependencies:
     "@microsoft/api-extractor" "^7.29.5"
     "@microsoft/tsdoc-config" "^0.16.1"

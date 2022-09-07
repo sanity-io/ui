@@ -1,6 +1,6 @@
 import {Box, Container, Flex, Radio, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 
 export default function ExampleStory() {
   const [value, setValue] = useState('first-option')

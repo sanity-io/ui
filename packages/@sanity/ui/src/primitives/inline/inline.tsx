@@ -1,4 +1,4 @@
-import React, {forwardRef, useMemo} from 'react'
+import {forwardRef, useMemo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'

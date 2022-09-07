@@ -1,7 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Button, Flex} from '@sanity/ui'
 import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
 import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
   WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS,

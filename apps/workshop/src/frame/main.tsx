@@ -1,6 +1,6 @@
 import {studioTheme, ThemeColorSchemeKey, ThemeProvider} from '@sanity/ui'
 import {WorkshopFrame} from '@sanity/ui-workshop'
-import React, {StrictMode, useState} from 'react'
+import {StrictMode. useState} from 'react'
 import {createRoot} from 'react-dom/client'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'

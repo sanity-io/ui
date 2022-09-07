@@ -1,5 +1,4 @@
 import {Badge} from '@sanity/ui'
-import React from 'react'
 
 export function ReleaseTag(props: {tag: string}) {
   const {tag} = props

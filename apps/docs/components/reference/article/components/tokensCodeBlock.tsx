@@ -1,5 +1,5 @@
 import {Card, Code, Label, Stack} from '@sanity/ui'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {prettify} from '../helpers'
 
 export function TokensCodeBlock(props: any) {

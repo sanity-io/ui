@@ -1,5 +1,5 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
-import React, {createElement, memo, useMemo} from 'react'
+import {createElement, memo, useMemo} from 'react'
 import {EMPTY_ARRAY} from './constants'
 import {resolveLocation} from './helpers'
 import {Pubsub} from './lib/pubsub'

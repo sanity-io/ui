@@ -1,4 +1,4 @@
-import React, {forwardRef, memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {forwardRef, memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {useForwardedRef} from '../../hooks'
 import {Stack} from '../../primitives'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'

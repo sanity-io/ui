@@ -1,4 +1,3 @@
-import React from 'react'
 import {ReferenceInterfaceMember} from './interfaceMember'
 
 export function ReferenceInterfaceMembers(props: any) {

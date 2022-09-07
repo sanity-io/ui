@@ -1,7 +1,7 @@
 import {Box, Container, Heading, Select, Stack} from '@sanity/ui'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
-import React, {useCallback} from 'react'
+import {useCallback} from 'react'
 import {AppLayout, useApp} from '$components/app'
 import {PageLayout} from '$components/page'
 import {ReleaseContent} from '$components/reference'

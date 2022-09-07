@@ -1,6 +1,5 @@
 import {AddIcon} from '@sanity/icons'
 import {Avatar, Box, Button, Card, Container, Grid, Heading, Inline, Stack} from '@sanity/ui'
-import React from 'react'
 import {ActivityEvent, ProjectPreview} from '../../../components'
 
 export function OverviewPanel() {

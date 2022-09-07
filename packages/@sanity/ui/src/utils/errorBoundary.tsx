@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from 'react'
+import {Component, PropsWithChildren} from 'react'
 import {Code} from '../primitives/code'
 
 /**
@@ -21,7 +21,7 @@ export interface ErrorBoundaryState {
  * DO NOT USE IN PRODUCTION
  * @beta
  */
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = {error: null}
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {

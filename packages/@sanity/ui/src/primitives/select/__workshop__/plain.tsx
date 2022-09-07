@@ -1,6 +1,5 @@
 import {Card, Container, Label, Select, Stack} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import React from 'react'
 
 export default function PlainStory() {
   const disabled = useBoolean('Disabled', false, 'Props')

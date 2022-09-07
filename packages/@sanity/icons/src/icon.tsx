@@ -1,4 +1,4 @@
-import React, {createElement, forwardRef} from 'react'
+import {createElement, forwardRef} from 'react'
 import {icons} from './icons'
 import type {IconSymbol} from './icons'
 

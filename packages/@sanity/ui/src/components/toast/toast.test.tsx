@@ -1,4 +1,3 @@
-import React from 'react'
 import {render} from '../../../test'
 import {ToastContext} from './toastContext'
 import {ToastContextValue} from './types'
