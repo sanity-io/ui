@@ -4652,6 +4652,22 @@
     react-popper "^2.2.5"
     react-refractor "^2.1.7"
 
+"@sanity/ui@latest":
+  version "0.38.0"
+  resolved "https://registry.yarnpkg.com/@sanity/ui/-/ui-0.38.0.tgz#97d6cfcb10048e23528dfb47d3c8a5cabd304a36"
+  integrity sha512-HtoWPSmCz8L8kLhRuwK/u/AEMQquW8SjR6dfykE1tVmgCl20r1c5zsBLsivpfqGJ4hfZxxf1MeHoClRIs+MrwQ==
+  dependencies:
+    "@juggle/resize-observer" "^3.4.0"
+    "@popperjs/core" "^2.11.6"
+    "@reach/auto-id" "^0.17.0"
+    "@sanity/color" "^2.1.14"
+    "@sanity/icons" "^1.3.4"
+    framer-motion "6.3.0"
+    popper-max-size-modifier "^0.2.0"
+    react-is "^17.0.2"
+    react-popper "^2.3.0"
+    react-refractor "^2.1.7"
+
 "@sanity/util@2.30.5":
   version "2.30.5"
   resolved "https://registry.yarnpkg.com/@sanity/util/-/util-2.30.5.tgz#97c0f8bb43fd282bdcff26e961ef56aa71864a84"
