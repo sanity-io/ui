@@ -1,6 +1,6 @@
 import {ChartUpwardIcon} from '@sanity/icons'
 import {studioTheme, Theme, ThemeProvider} from '@sanity/ui'
-import React, {createElement} from 'react'
+import {createElement} from 'react'
 import {createGlobalStyle, css} from 'styled-components'
 import {LocationProvider, StudioProvider, useLocation, useStudioToolPlugins} from '$sanity/base'
 import dashboardTool from '$sanity/dashboard/plugin'

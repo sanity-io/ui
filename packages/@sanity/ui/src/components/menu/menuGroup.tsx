@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import React, {createElement, isValidElement, useCallback, useEffect, useRef, useState} from 'react'
+import {createElement, isValidElement, useCallback, useEffect, useRef, useState} from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'

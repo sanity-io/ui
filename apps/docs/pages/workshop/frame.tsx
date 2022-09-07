@@ -1,5 +1,4 @@
 import {WorkshopFrame} from '@sanity/ui-workshop'
-import React from 'react'
 import {useApp} from '../../components/app'
 import {config} from '../../workshop/config'
 

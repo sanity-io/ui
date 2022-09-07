@@ -1,5 +1,4 @@
 import {Avatar, AvatarStack, Box, Button, Flex, Menu, MenuButton, MenuItem, Text} from '@sanity/ui'
-import React from 'react'
 
 export function PresenceMenu() {
   return (

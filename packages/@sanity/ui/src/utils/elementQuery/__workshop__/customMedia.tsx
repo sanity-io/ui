@@ -1,5 +1,4 @@
 import {Box, Card, ElementQuery, Text} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const TestCard = styled(Card)`

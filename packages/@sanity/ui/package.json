@@ -52,8 +52,8 @@
     "styled-components": "^5.3.5"
   },
   "peerDependencies": {
-    "react": "^16.9 || ^17 || ^18",
-    "react-dom": "^16.9 || ^17 || ^18",
+    "react": "^16.14 || ^17 || ^18",
+    "react-dom": "^16.14 || ^17 || ^18",
     "styled-components": "^5.2"
   },
   "repository": {

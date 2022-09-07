@@ -1,7 +1,7 @@
 import {Select, Stack} from '@sanity/ui'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
-import React, {useCallback} from 'react'
+import {useCallback} from 'react'
 import {AppLayout, useApp} from '../../components/app'
 import {PageLayout} from '../../components/page'
 import {app, features} from '../../config'

@@ -6,7 +6,6 @@ import NextDocument, {
   Main,
   NextScript,
 } from 'next/document'
-import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
 
 class Document extends NextDocument<DocumentProps & {styleTags: React.ReactNode}> {

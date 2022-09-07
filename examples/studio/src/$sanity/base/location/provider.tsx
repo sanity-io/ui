@@ -1,5 +1,5 @@
 import qs from 'qs'
-import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react'
+import {createContext, useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react'
 
 interface LocationProviderProps {
   children: React.ReactNode
@@ -26,7 +26,7 @@ interface LocationContextType extends LocationState {
   segments: string[]
 }
 
-export const LocationContext = React.createContext<LocationContextType>({
+export const LocationContext = createContext<LocationContextType>({
   path: '/',
   title: '',
   query: {},

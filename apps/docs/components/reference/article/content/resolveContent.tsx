@@ -1,5 +1,4 @@
 import {Text} from '@sanity/ui'
-import React from 'react'
 import {ReferenceClassContent} from './classArticle'
 import {ReferenceFunctionContent} from './functionArticle'
 import {ReferenceInterfaceContent} from './interfaceArticle'

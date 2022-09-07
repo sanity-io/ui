@@ -1,6 +1,5 @@
 import {Box, Card, Code, Dialog, Layer, LayerProvider, useLayer} from '@sanity/ui'
 import {useAction} from '@sanity/ui-workshop'
-import React from 'react'
 
 export default function LayeringStory() {
   return (

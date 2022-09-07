@@ -1,5 +1,4 @@
 import {GroqLogo, GroqMonogram} from '@sanity/logos'
-import React from 'react'
 import {LogoGrid} from '../logoGrid'
 
 const logos: {component: React.ComponentType; name: string}[] = [

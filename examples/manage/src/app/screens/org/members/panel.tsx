@@ -1,5 +1,4 @@
 import {Box, Card, Container, Heading} from '@sanity/ui'
-import React from 'react'
 
 export function MembersPanel() {
   return (

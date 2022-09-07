@@ -1,6 +1,6 @@
 import {ChevronDownIcon} from '@sanity/icons'
 import {Box, Card, Flex, Label, Stack} from '@sanity/ui'
-import React, {useState} from 'react'
+import {useState} from 'react'
 import styled from 'styled-components'
 import {NavMenu as NavMenuType, NavMenuItem} from '../../lib//nav'
 import {NavLink} from '../navLink'

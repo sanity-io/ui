@@ -1,6 +1,5 @@
 import {DatabaseIcon} from '@sanity/icons'
 import {Button, Menu, MenuButton, MenuItem} from '@sanity/ui'
-import React from 'react'
 
 export function DatasetSelect() {
   return (

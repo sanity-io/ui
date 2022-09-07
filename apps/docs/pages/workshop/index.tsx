@@ -1,6 +1,5 @@
 import {Workshop} from '@sanity/ui-workshop'
 import Head from 'next/head'
-import React from 'react'
 import {AppLayout, SEO, useApp} from '../../components/app'
 import {app, features} from '../../config'
 import {loadGlobalPageData} from '../../lib/page'

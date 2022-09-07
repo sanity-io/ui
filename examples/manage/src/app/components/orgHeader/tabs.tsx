@@ -7,7 +7,6 @@ import {
   UsersIcon,
 } from '@sanity/icons'
 import {Button, Inline} from '@sanity/ui'
-import React from 'react'
 import {useLocation} from '../../../lib/location'
 
 export function OrganizationTabs() {

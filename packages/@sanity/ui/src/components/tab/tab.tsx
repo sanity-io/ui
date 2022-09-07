@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useEffect, useRef} from 'react'
+import {forwardRef, useCallback, useEffect, useRef} from 'react'
 import {useForwardedRef} from '../../hooks'
 import {Button} from '../../primitives'
 import {ButtonTone} from '../../types'

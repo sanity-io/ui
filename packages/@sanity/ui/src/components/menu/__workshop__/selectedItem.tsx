@@ -1,6 +1,6 @@
 import {CheckmarkIcon, ClockIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
 import {Box, Button, Code, Menu, MenuButton, MenuDivider, MenuItem, Stack} from '@sanity/ui'
-import React, {useState} from 'react'
+import {useState} from 'react'
 
 export default function SelectedItemStory() {
   const [selectedIndex, setSelectedIndex] = useState(0)

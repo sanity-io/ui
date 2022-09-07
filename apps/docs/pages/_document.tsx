@@ -6,7 +6,6 @@ import NextDocument, {
   Main,
   NextScript,
 } from 'next/document'
-import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
 import {app, basePath, ga} from '../config'
 

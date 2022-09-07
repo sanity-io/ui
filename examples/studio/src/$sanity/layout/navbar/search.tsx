@@ -1,5 +1,4 @@
 import {Autocomplete, Box, Card, SrOnly, ThemeColorProvider} from '@sanity/ui'
-import React from 'react'
 import {useLocation} from '$sanity/base'
 import {Preview} from '$sanity/components'
 

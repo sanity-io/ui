@@ -1,5 +1,5 @@
 import {Box, BoxProps, Heading} from '@sanity/ui'
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 
 const headingProps = {
   1: {

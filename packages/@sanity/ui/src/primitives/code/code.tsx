@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
