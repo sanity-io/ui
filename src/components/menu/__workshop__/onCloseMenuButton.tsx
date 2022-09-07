@@ -1,5 +1,5 @@
 import {Box, Button, Menu, MenuButton, MenuItem, Stack, useToast} from '@sanity/ui'
-import React, {useCallback} from 'react'
+import {useCallback} from 'react'
 
 export default function OnCloseMenuButton() {
   const {push} = useToast()

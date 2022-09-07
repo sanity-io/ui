@@ -1,6 +1,5 @@
 import {Breadcrumbs, Flex, Text} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
-import React from 'react'
 
 const BREADCRUMBS_MAX_LENGTH_OPTIONS = {
   '(none)': 0,

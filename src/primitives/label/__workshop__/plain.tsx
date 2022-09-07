@@ -1,6 +1,5 @@
 import {Flex, Label} from '@sanity/ui'
 import {useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
 import {
   WORKSHOP_LABEL_FONT_SIZE_OPTIONS,
   WORKSHOP_FONT_WEIGHT_OPTIONS,

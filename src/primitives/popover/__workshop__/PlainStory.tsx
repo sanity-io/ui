@@ -1,6 +1,6 @@
 import {Button, Card, Popover, PortalProvider, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
-import React, {useState} from 'react'
+import {useState} from 'react'
 import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,

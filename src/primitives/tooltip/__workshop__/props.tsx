@@ -1,6 +1,5 @@
 import {Box, Button, Card, Flex, Text, Tooltip} from '@sanity/ui'
 import {useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
 import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
 
 export default function PropsStory() {

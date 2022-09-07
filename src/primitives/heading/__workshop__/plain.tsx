@@ -1,6 +1,5 @@
 import {Flex, Heading} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
 import {
   WORKSHOP_HEADING_FONT_SIZE_OPTIONS,
   WORKSHOP_FONT_WEIGHT_OPTIONS,

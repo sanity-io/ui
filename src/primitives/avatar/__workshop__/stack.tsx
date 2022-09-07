@@ -1,6 +1,5 @@
 import {Avatar, AvatarCounter, AvatarStack, Flex} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
-import React from 'react'
 import {WORKSHOP_AVATAR_SIZE_OPTIONS} from '../../../__workshop__/constants'
 
 export default function StackStory() {

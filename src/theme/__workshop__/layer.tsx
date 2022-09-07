@@ -1,5 +1,5 @@
 import {Box, Button, Container, Dialog, Flex, Popover, Stack, Text, Tooltip} from '@sanity/ui'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 
 export default function LayerStory() {
   const [dialogOpen, setDialogOpen] = useState(false)

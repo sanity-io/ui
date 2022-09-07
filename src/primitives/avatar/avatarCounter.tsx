@@ -1,4 +1,4 @@
-import React, {forwardRef, useMemo} from 'react'
+import {forwardRef, useMemo} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'

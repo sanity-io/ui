@@ -1,7 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Box, Button, Card, Container, Flex, Stack} from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
-import React from 'react'
 import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
   WORKSHOP_BUTTON_TONE_OPTIONS,
