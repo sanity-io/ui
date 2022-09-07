@@ -1,4 +1,5 @@
 import React from 'react'
+import {vi} from 'vitest'
 import {render} from '../../../test'
 import {BoundaryElementContext} from './boundaryElementContext'
 import {BoundaryElementContextValue} from './types'
@@ -7,7 +8,7 @@ import {useBoundaryElement} from './useBoundaryElement'
 describe('utils/boundaryElement', () => {
   describe('useBoundaryElement', () => {
     it('should get context value', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootBoundaryElement = useBoundaryElement()
@@ -37,7 +38,7 @@ describe('utils/boundaryElement', () => {
     })
 
     it('should provide default value when no context value is provided', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootBoundaryElement = useBoundaryElement()
@@ -64,7 +65,7 @@ describe('utils/boundaryElement', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {

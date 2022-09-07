@@ -13,7 +13,7 @@
     "scopes:build": "node -r esbuild-register scripts/scopes/build.ts",
     "scopes:watch": "node -r esbuild-register scripts/scopes/watch.ts",
     "start": "next start",
-    "test": "jest",
+    "test": "vitest run",
     "tsc:build": "tsc --build",
     "type-check": "run-s packages:build scopes:build tsc:build"
   },

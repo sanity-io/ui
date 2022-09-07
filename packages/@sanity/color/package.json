@@ -25,7 +25,7 @@
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts --quiet",
     "prebuild": "yarn clean && yarn generate",
-    "test": "jest",
+    "test": "vitest run",
     "type-check": "tsc --build",
     "watch": "pkg watch --tsconfig tsconfig.dist.json"
   },
