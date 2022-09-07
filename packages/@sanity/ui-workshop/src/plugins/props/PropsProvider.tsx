@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {isEqual} from '../../lib/isEqual'
 import {useWorkshop} from '../../useWorkshop'
 import {decodeValue, encodeValue} from './helpers'

@@ -34,7 +34,7 @@
   },
   "peerDependencies": {
     "@sanity/color": "^2.0",
-    "react": "^16.9 || ^17 || ^18"
+    "react": "^16.14 || ^17 || ^18"
   },
   "repository": {
     "type": "git",

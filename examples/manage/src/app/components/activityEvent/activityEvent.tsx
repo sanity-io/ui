@@ -1,5 +1,4 @@
 import {Avatar, Box, Card, Flex, Text} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled(Card).attrs({forwardedAs: 'a'})`

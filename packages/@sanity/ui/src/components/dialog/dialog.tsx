@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
-import React, {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
+import {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'

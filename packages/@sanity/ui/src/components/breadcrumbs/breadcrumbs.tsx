@@ -1,12 +1,4 @@
-import React, {
-  Children,
-  forwardRef,
-  Fragment,
-  isValidElement,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react'
+import {Children, forwardRef, Fragment, isValidElement, useCallback, useMemo, useState} from 'react'
 import {useArrayProp, useClickOutside} from '../../hooks'
 import {Box, Popover, Stack, Text} from '../../primitives'
 import {ExpandButton, Root} from './breadcrumbs.styles'

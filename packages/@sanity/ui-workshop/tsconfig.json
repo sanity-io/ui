@@ -5,7 +5,7 @@
     "composite": true,
     "rootDir": ".",
     "outDir": "./dist/types",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "references": [{"path": "../icons/tsconfig.dist.json"}, {"path": "../ui/tsconfig.dist.json"}]
 }

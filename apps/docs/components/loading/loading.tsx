@@ -1,5 +1,4 @@
 import {Spinner} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const Root = styled.div<{$loading: boolean}>`

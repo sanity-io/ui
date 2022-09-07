@@ -1,7 +1,7 @@
 import {Box, BoxProps} from '@sanity/ui'
 import codemirror from 'codemirror'
 import isHotkey from 'is-hotkey'
-import React, {useCallback, useEffect, useRef} from 'react'
+import {useCallback, useEffect, useRef} from 'react'
 import {Controlled as CodeMirror} from 'react-codemirror2'
 import styled from 'styled-components'
 import 'codemirror/mode/jsx/jsx'

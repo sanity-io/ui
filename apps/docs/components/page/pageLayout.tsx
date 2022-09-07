@@ -1,5 +1,4 @@
 import {Box, Card, Flex, rem} from '@sanity/ui'
-import React from 'react'
 import styled, {css} from 'styled-components'
 import {PageHeader} from './pageHeader'
 import {NavMenu} from '$lib/nav'

@@ -1,5 +1,4 @@
 import {Card, Container, Label, Select, Stack} from '@sanity/ui'
-import React from 'react'
 
 export default function ReadOnlyStory() {
   return (

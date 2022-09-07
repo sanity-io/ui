@@ -1,5 +1,5 @@
 import {hues} from '@sanity/color'
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 
 /**
  * @public

@@ -1,5 +1,5 @@
 import {Box, Container, Flex, Label} from '@sanity/ui'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import styled from 'styled-components'
 import {ReferenceArticleContent} from './content/resolveContent'
 import {getHeadings} from './content/resolveHeadings'

@@ -1,5 +1,4 @@
 import {Box, Card, Tree, TreeItem, useRootTheme} from '@sanity/ui'
-import React from 'react'
 
 export default function ColorStory() {
   const {theme} = useRootTheme()

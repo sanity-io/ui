@@ -1,5 +1,4 @@
 import {Badge, Heading} from '@sanity/ui'
-import React from 'react'
 import {
   CommentDeprecatedCallout,
   CommentExampleBlocks,

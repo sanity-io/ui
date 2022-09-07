@@ -13,7 +13,6 @@ import {
   Text,
 } from '@sanity/ui'
 import Link from 'next/link'
-import React from 'react'
 
 export function AppLayout({children}: {children?: React.ReactNode}) {
   return (

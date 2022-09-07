@@ -1,5 +1,5 @@
 import {Box, ButtonTone, Card, Flex, Layer, Tab, TabList, TabPanel} from '@sanity/ui'
-import React, {createElement, memo, useCallback, useMemo, useState} from 'react'
+import {createElement, memo, useCallback, useMemo, useState} from 'react'
 import {useWorkshop} from '../useWorkshop'
 
 const MemoTab = memo(Tab)

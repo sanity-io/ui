@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useState} from 'react'
+import {forwardRef, useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Box} from '../../primitives'

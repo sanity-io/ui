@@ -1,5 +1,4 @@
 import {Card, Flex, Stack} from '@sanity/ui'
-import React from 'react'
 
 export default function CheckeredStory() {
   return (

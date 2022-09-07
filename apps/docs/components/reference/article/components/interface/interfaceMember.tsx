@@ -1,6 +1,5 @@
 import {Badge, Box, Card, Code, Flex, Heading, Inline, Label, Stack, Text} from '@sanity/ui'
 import Link from 'next/link'
-import React from 'react'
 import {CommentExampleBlocks, CommentRemarks, CommentSummary} from '../comment'
 import {TokenPreview} from '../tokenPreview'
 import {useApp} from '$components/app'

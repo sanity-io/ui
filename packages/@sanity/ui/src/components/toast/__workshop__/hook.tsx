@@ -1,5 +1,4 @@
 import {Box, Button, Inline, ToastProvider, useToast} from '@sanity/ui'
-import React from 'react'
 
 export default function HookStory() {
   const toast = useToast()

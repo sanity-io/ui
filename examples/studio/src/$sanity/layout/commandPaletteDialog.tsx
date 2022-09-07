@@ -1,5 +1,4 @@
 import {Box, Card, Dialog, Flex, Hotkeys, Menu, Text} from '@sanity/ui'
-import React from 'react'
 import {useCommands} from '$sanity/base'
 
 export function CommandPaletteDialog({onClose}: {onClose: () => void}) {

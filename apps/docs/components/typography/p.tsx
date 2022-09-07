@@ -1,5 +1,5 @@
 import {Box, Text} from '@sanity/ui'
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 
 export const P = forwardRef(function P(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref'>,

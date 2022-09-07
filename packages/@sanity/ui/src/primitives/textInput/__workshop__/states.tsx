@@ -1,6 +1,5 @@
 import {Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {useAction} from '@sanity/ui-workshop'
-import React from 'react'
 
 export default function StatesStory() {
   const onChange = useAction('onChange')

@@ -1,6 +1,5 @@
 import {Card, Flex, Stack, Text} from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
-import React from 'react'
 import {
   WORKSHOP_CARD_AS_OPTIONS,
   WORKSHOP_CARD_TONE_OPTIONS,

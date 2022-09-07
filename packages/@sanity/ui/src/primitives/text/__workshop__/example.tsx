@@ -1,6 +1,5 @@
 import {Card, Container, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
 import {
   WORKSHOP_TEXT_ALIGN_OPTIONS,
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,

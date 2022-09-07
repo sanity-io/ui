@@ -1,5 +1,5 @@
 import {Button, Flex} from '@sanity/ui'
-import React, {useCallback, useRef} from 'react'
+import {useCallback, useRef} from 'react'
 
 export default function UploadButtonStory() {
   const inputRef = useRef<HTMLInputElement | null>(null)

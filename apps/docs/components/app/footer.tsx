@@ -2,7 +2,6 @@ import {HeartIcon} from '@sanity/icons'
 import {SanityLogo} from '@sanity/logos'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
-import React from 'react'
 import {useApp} from './hooks'
 
 export function AppFooter() {
