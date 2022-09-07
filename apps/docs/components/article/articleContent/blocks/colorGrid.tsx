@@ -2,7 +2,6 @@ import {COLOR_HUES, COLOR_TINTS, hues} from '@sanity/color'
 import {ClipboardIcon} from '@sanity/icons'
 import {Box, Button, Code, Flex, Grid, Heading, Stack, Text, useToast} from '@sanity/ui'
 import {readableColor} from 'polished'
-import React from 'react'
 
 export function ColorGrid() {
   const toast = useToast()

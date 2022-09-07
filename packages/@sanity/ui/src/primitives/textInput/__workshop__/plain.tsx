@@ -2,7 +2,7 @@ import {icons, IconSymbol} from '@sanity/icons'
 import {Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {PerfTestProps, useBoolean, usePerfTest, useSelect, useText} from '@sanity/ui-workshop'
 import {fireEvent} from '@testing-library/dom'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 import {
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
   WORKSHOP_FONT_WEIGHT_OPTIONS,

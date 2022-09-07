@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import React from 'react'
 import {AppLayout, SEO, useApp} from '../components/app'
 import {Screen} from '../components/screen'
 import {app, features} from '../config'

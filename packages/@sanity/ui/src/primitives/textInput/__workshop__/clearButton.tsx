@@ -1,6 +1,6 @@
 import {Box, TextInput} from '@sanity/ui'
 import {useText} from '@sanity/ui-workshop'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 
 export default function ClearButtonStory() {
   const customValidity = useText('Custom validitiy')

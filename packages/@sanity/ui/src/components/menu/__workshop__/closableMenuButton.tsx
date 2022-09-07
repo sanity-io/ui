@@ -1,6 +1,6 @@
 import {AddIcon} from '@sanity/icons'
 import {Box, Button, Menu, MenuButton, MenuItem, Stack} from '@sanity/ui'
-import React, {useRef} from 'react'
+import {useRef} from 'react'
 
 export default function ClosableMenuButtonStory() {
   const ref = useRef<HTMLButtonElement | null>(null)

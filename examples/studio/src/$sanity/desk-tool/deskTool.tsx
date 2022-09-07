@@ -1,5 +1,4 @@
 import {Box, Flex} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 import {DocumentPane, DocumentTypeListPane, RootPane} from './panes'
 

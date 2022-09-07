@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 import {H} from './h'
 
 export const H2 = forwardRef(function H2(

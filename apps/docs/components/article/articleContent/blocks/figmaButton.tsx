@@ -1,5 +1,4 @@
 import {Button} from '@sanity/ui'
-import React from 'react'
 import {FigmaLogo} from '../../../assets'
 
 export function FigmaButton(props: any) {

@@ -1,5 +1,5 @@
 import {AnimatePresence, motion} from 'framer-motion'
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Box} from '../../primitives'
 import {Layer} from '../../utils'

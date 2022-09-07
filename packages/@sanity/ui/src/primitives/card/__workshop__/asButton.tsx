@@ -1,5 +1,4 @@
 import {Box, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
-import React from 'react'
 import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
 
 export default function AsButtonStory() {

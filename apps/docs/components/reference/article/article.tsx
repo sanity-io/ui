@@ -1,5 +1,5 @@
 import {Box, Container, Flex, Label} from '@sanity/ui'
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import styled from 'styled-components'
 import {HeadingList} from '../../article'
 import {getTOCTree} from '../../article/helpers'

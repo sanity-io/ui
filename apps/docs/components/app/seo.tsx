@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import React from 'react'
 import {app} from '../../config'
 import {imageUrlBuilder} from '../../sanity'
 

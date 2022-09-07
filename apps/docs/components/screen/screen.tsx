@@ -1,5 +1,4 @@
 import {Code} from '@sanity/ui'
-import React from 'react'
 import {isArray, isRecord} from '../../lib/types'
 import {ScreenHeroSection} from './sections/hero'
 

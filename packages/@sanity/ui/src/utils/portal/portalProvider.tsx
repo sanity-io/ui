@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {useUnique} from '../../hooks/_internal'
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'

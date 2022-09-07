@@ -1,5 +1,4 @@
 import {Box, Card, Dialog, Flex, Stack, Text, ThemeColorProvider} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const Grid = styled.div`

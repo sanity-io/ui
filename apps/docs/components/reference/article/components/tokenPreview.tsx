@@ -1,6 +1,5 @@
 import {Box, Code, Container, Tooltip} from '@sanity/ui'
 import Link from 'next/link'
-import React from 'react'
 import styled from 'styled-components'
 import {useApp} from '../../../app'
 import {CommentSummary} from './comment'

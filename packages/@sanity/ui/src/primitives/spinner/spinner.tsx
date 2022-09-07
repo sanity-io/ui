@@ -1,5 +1,5 @@
 import {SpinnerIcon} from '@sanity/icons'
-import React, {forwardRef} from 'react'
+import {forwardRef} from 'react'
 import styled, {keyframes} from 'styled-components'
 import {Text} from '../text'
 

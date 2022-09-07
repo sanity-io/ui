@@ -1,6 +1,5 @@
 import {Badge, Flex} from '@sanity/ui'
 import {useAction, useSelect, useText} from '@sanity/ui-workshop'
-import React from 'react'
 import {
   WORKSHOP_BADGE_MODE_OPTIONS,
   WORKSHOP_BADGE_TONE_OPTIONS,

@@ -6,7 +6,7 @@
     "rootDir": ".",
     "outDir": "./dist/workshop",
     "module": "ES2020",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "references": [
     {"path": "../ui/tsconfig.dist.json"},

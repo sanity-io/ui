@@ -1,5 +1,4 @@
 import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
-import React from 'react'
 import styled from 'styled-components'
 
 const ConcatenatedText = styled(Text)`

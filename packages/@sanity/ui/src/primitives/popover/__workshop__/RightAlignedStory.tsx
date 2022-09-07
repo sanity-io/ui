@@ -1,7 +1,7 @@
 import {EllipsisVerticalIcon} from '@sanity/icons'
 import {Button, Card, Flex, Popover, Text, useClickOutside} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 
 export default function RightAlignedStory() {
   const constrainSize = useBoolean('Constrain size', false)

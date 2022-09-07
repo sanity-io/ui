@@ -1,6 +1,6 @@
 import {MoonIcon, SunIcon} from '@sanity/icons'
 import {Button} from '@sanity/ui'
-import React, {memo, useCallback} from 'react'
+import {memo, useCallback} from 'react'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */

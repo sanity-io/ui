@@ -1,6 +1,5 @@
 import {Flex, Radio} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
-import React from 'react'
 
 export default function PlainStory() {
   const checked = useBoolean('Checked?', false, 'Props')

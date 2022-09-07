@@ -6,7 +6,7 @@ import {
   ToastProvider,
   usePrefersDark,
 } from '@sanity/ui'
-import React, {useEffect, useMemo, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import {NavMenu} from '../../lib/nav'
 import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'

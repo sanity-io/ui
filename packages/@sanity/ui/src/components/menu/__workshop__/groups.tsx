@@ -11,7 +11,6 @@ import {
   MenuItem,
 } from '@sanity/ui'
 import {useAction} from '@sanity/ui-workshop'
-import React from 'react'
 
 export default function GroupsStory() {
   return (

@@ -1,5 +1,4 @@
 import {Box, Card, Container, Text} from '@sanity/ui'
-import React from 'react'
 
 export function DashboardTool() {
   return (

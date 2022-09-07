@@ -12,7 +12,7 @@ import {
   MenuItem,
   useLayer,
 } from '@sanity/ui'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 import styled, {css} from 'styled-components'
 import {ComposeDialog} from './composeDialog'
 import {DatasetSelect} from './datasetSelect'

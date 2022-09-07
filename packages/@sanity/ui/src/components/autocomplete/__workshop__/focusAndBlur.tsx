@@ -1,5 +1,5 @@
 import {Autocomplete, Box, Button, Card, Code, Stack} from '@sanity/ui'
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 
 export default function FocusAndBlurStory() {
   const [value, setValue] = useState('')

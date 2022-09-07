@@ -1,5 +1,5 @@
 import {Card, Container, Flex, Heading, Spinner, Stack, Text} from '@sanity/ui'
-import React, {memo, useMemo, useState} from 'react'
+import {memo, useMemo, useState} from 'react'
 import styled from 'styled-components'
 import {VIEWPORT_OPTIONS} from './constants'
 import {buildFrameUrl} from './helpers'
