@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.settings",
+  "include": ["./src"],
+  "exclude": [
+    "./src/**/__fixtures__",
+    "./src/**/__mocks__",
+    "./src/**/__workshop__",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": ".",
+    "outDir": "./dist/types",
+    "jsx": "react"
+  }
+}
