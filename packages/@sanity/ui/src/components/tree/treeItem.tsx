@@ -1,6 +1,5 @@
-import {useId} from '@reach/auto-id'
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import {createElement, memo, useCallback, useEffect, useMemo, useRef} from 'react'
+import {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import styled from 'styled-components'
 import {Box, Flex, Text} from '../../primitives'
 import {ThemeFontWeightKey} from '../../theme'

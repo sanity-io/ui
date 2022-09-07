@@ -1,5 +1,4 @@
-import {useId} from '@reach/auto-id'
-import {forwardRef, useCallback, useEffect, useMemo, useState} from 'react'
+import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -71,7 +70,7 @@ export const Avatar = forwardRef(function Avatar(
   const _sizeRem = avatarSize.size
   const _radius = _sizeRem / 2
 
-  const elementId = useId() || ''
+  const elementId = useId()
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside'
   )
