@@ -1,8 +1,8 @@
 {
-  "include": ["./typings/"],
+  "include": ["./typings"],
   "files": ["./src/main.tsx"],
   "compilerOptions": {
-    "outDir": "./build/dts/",
+    "outDir": "./build/ide",
     "module": "es6",
     "target": "es5",
     "declaration": true,

@@ -3,26 +3,29 @@
   "version": "0.5.1",
   "sideEffects": false,
   "source": "./src/index.ts",
+  "module": "./dist/sanity-ui-workshop.js",
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/sanity-ui-workshop.cjs",
   "exports": {
-    "require": "./lib/sanity-ui-workshop.js",
-    "default": "./lib/sanity-ui-workshop.modern.js"
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/sanity-ui-workshop.js",
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/sanity-ui-workshop.cjs"
+    }
   },
-  "main": "./lib/sanity-ui-workshop.js",
-  "module": "./lib/sanity-ui-workshop.module.js",
-  "types": "./lib/dts/src/index.d.ts",
   "files": [
-    "lib",
+    "dist",
     "src"
   ],
   "license": "MIT",
   "scripts": {
-    "build": "run-s build:microbundle",
-    "build:microbundle": "microbundle --format modern,esm,cjs --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react --no-compress --tsconfig tsconfig.lib.json",
-    "clean": "rimraf lib",
+    "build": "pkg build --tsconfig tsconfig.dist.json",
+    "clean": "rimraf dist",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "prebuild": "yarn clean",
     "test": "jest",
-    "type-check": "tsc --build"
+    "watch": "pkg watch --tsconfig tsconfig.dist.json"
   },
   "dependencies": {
     "axe-core": "^4.4.3",

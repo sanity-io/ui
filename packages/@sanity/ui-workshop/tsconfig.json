@@ -1,12 +1,11 @@
 {
   "extends": "../../../tsconfig",
-  "include": ["./src/"],
+  "include": ["./src"],
   "compilerOptions": {
     "composite": true,
-    "rootDir": "./",
-    "outDir": "./lib/dts/",
-    "declarationDir": "./lib/dts/",
+    "rootDir": ".",
+    "outDir": "./dist/types",
     "jsx": "react"
   },
-  "references": [{"path": "../icons/tsconfig.lib.json"}, {"path": "../ui/tsconfig.lib.json"}]
+  "references": [{"path": "../icons/tsconfig.dist.json"}, {"path": "../ui/tsconfig.dist.json"}]
 }

@@ -1,11 +1,11 @@
 {
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["./build/"],
+  "exclude": ["./build"],
   "compilerOptions": {
     "composite": true,
     "incremental": true,
-    "rootDir": "./",
-    "outDir": "./build/dts/",
+    "rootDir": ".",
+    "outDir": "./build/ide",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "downlevelIteration": true,
@@ -19,13 +19,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "$components": ["./components/"],
+      "$components": ["./components"],
       "$components/*": ["./components/*"],
       "$config": ["./config"],
       "$lib/*": ["./lib/*"],
-      "$queries": ["./queries/"],
+      "$queries": ["./queries"],
       "$packages": ["./packages"],
       "$sanity": ["./sanity"],
       "$sanity.server": ["./sanity.server"],
@@ -34,10 +34,10 @@
     }
   },
   "references": [
-    {"path": "../../packages/@sanity/color/tsconfig.lib.json"},
-    {"path": "../../packages/@sanity/icons/tsconfig.lib.json"},
-    {"path": "../../packages/@sanity/logos/tsconfig.lib.json"},
-    {"path": "../../packages/@sanity/ui/tsconfig.lib.json"},
-    {"path": "../../packages/@sanity/ui-workshop/tsconfig.lib.json"}
+    {"path": "../../packages/@sanity/color/tsconfig.dist.json"},
+    {"path": "../../packages/@sanity/icons/tsconfig.dist.json"},
+    {"path": "../../packages/@sanity/logos/tsconfig.dist.json"},
+    {"path": "../../packages/@sanity/ui/tsconfig.dist.json"},
+    {"path": "../../packages/@sanity/ui-workshop/tsconfig.dist.json"}
   ]
 }

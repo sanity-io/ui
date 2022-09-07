@@ -1,26 +1,25 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./*.js", "./package.json", "./scripts/", "./test/"],
+  "include": ["./*.js", "./package.json", "./scripts", "./test"],
   "compilerOptions": {
-    "outDir": "./build/dts/",
+    "outDir": "./build/ide",
     "allowJs": true,
     "checkJs": true,
     "resolveJsonModule": true
   },
   "references": [
-    {"path": "./apps/docs/"},
-    {"path": "./apps/studio/"},
-    {"path": "./apps/workshop/"},
+    {"path": "./apps/docs"},
+    {"path": "./apps/studio"},
+    {"path": "./apps/workshop"},
 
-    {"path": "./examples/manage/"},
-    {"path": "./examples/studio/"},
-    {"path": "./examples/web/"},
+    {"path": "./examples/manage"},
+    {"path": "./examples/studio"},
+    {"path": "./examples/web"},
 
-    {"path": "./packages/@sanity/color/"},
-    {"path": "./packages/@sanity/icons/"},
-    {"path": "./packages/@sanity/logos/"},
-    {"path": "./packages/@sanity/tsdoc-to-portable-text/"},
-    {"path": "./packages/@sanity/ui/"},
-    {"path": "./packages/@sanity/ui-workshop/"}
+    {"path": "./packages/@sanity/color"},
+    {"path": "./packages/@sanity/icons"},
+    {"path": "./packages/@sanity/logos"},
+    {"path": "./packages/@sanity/ui"},
+    {"path": "./packages/@sanity/ui-workshop"}
   ]
 }

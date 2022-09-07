@@ -17,6 +17,6 @@
 /examples/web/build
 
 # Packages
-/packages/*/lib
-/packages/@sanity/*/lib
+/packages/*/dist
+/packages/@sanity/*/dist
 /packages/@sanity/**/__fixtures__
