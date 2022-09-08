@@ -6,8 +6,7 @@
     "rootDir": ".",
     "outDir": "./build/ide",
     "module": "ES2020",
-    "jsx": "react",
-    "baseUrl": "."
+    "jsx": "react"
   },
   "references": [
     {"path": "../../packages/@sanity/ui/tsconfig.dist.json"},
