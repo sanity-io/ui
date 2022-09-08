@@ -1,4 +1,8 @@
-import {a11yPlugin, defineConfig, perfPlugin} from '@sanity/ui-workshop'
+import {
+  // a11yPlugin,
+  defineConfig,
+  perfPlugin,
+} from '@sanity/ui-workshop'
 import {scopes} from './scopes'
 
 export const config = defineConfig({
@@ -24,7 +28,10 @@ export const config = defineConfig({
     // navbar: false,
   },
   frameUrl: '/frame/',
-  plugins: [perfPlugin(), a11yPlugin()],
+  plugins: [
+    perfPlugin(),
+    // a11yPlugin()
+  ],
   scopes,
   title: 'Sanity UI',
 })
