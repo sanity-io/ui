@@ -23,10 +23,12 @@
   "license": "MIT",
   "scripts": {
     "build": "pkg build --tsconfig tsconfig.dist.json",
+    "check:package": "pkg --strict --tsconfig tsconfig.dist.json",
     "clean": "rimraf dist",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
-    "prebuild": "yarn clean",
+    "postbuild": "run-s check:package",
+    "prebuild": "run-s clean",
     "pregenerate": "rimraf src/icons",
     "test": "vitest run",
     "type-check": "tsc --build",
