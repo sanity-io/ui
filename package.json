@@ -5,6 +5,7 @@
   "scripts": {
     "build": "lerna run --scope @sanity/* build",
     "build:workshop": "lerna run --scope sanity-ui-workshop build",
+    "check:packages": "lerna run --scope @sanity/* check:package",
     "clean": "rimraf build && lerna run clean",
     "dev": "run-p dev:docs dev:ui watch:packages",
     "dev:docs": "lerna run --stream --scope 'sanity-design-{docs,studio}' dev",

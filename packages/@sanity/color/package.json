@@ -22,10 +22,12 @@
   ],
   "scripts": {
     "build": "pkg build --tsconfig tsconfig.dist.json",
+    "check:package": "pkg --strict --tsconfig tsconfig.dist.json",
     "clean": "rimraf dist",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts --quiet",
-    "prebuild": "yarn clean && yarn generate",
+    "postbuild": "run-s check:package",
+    "prebuild": "run-s clean generate",
     "test": "vitest run",
     "type-check": "tsc --build",
     "watch": "pkg watch --tsconfig tsconfig.dist.json"
