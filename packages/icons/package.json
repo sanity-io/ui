@@ -9,10 +9,11 @@
   "main": "./dist/sanity-icons.cjs",
   "exports": {
     ".": {
+      "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
       "import": "./dist/sanity-icons.js",
-      "types": "./dist/types/src/index.d.ts",
-      "require": "./dist/sanity-icons.cjs"
+      "require": "./dist/sanity-icons.cjs",
+      "default": "./dist/sanity-icons.js"
     }
   },
   "files": [
