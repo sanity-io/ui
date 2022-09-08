@@ -1,6 +1,6 @@
 import {defineConfig, perfPlugin} from '@sanity/ui-workshop'
+import {app, basePath} from '../config'
 import {scopes} from './scopes'
-import {app, basePath} from '$config'
 
 export const config = defineConfig({
   collections: [

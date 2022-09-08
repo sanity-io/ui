@@ -1,8 +1,8 @@
 import React from 'react'
-import {AppLayout} from '$components/app'
-import {features} from '$config'
-import {loadGlobalPageData} from '$lib/page'
-import {ArcadeScreen} from '$screens/arcade'
+import {AppLayout} from '../components/app'
+import {features} from '../config'
+import {loadGlobalPageData} from '../lib/page'
+import {ArcadeScreen} from '../screens/arcade'
 
 export async function getServerSideProps(opts: {preview?: boolean; query: Record<string, string>}) {
   const {preview = features.preview, query} = opts

@@ -1,6 +1,6 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
 import {createContext} from 'react'
-import {NavMenu} from '$lib/nav'
+import {NavMenu} from '../../lib/nav'
 
 export interface AppContextValue {
   colorScheme: ThemeColorSchemeKey

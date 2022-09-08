@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {useApp} from '$components/app'
-import {basePath} from '$config'
-import {isRecord} from '$lib/types'
+import {useApp} from '../../components/app'
+import {basePath} from '../../config'
+import {isRecord} from '../../lib/types'
 
 const Root = styled.iframe`
   background: none;

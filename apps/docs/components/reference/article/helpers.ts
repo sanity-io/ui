@@ -1,4 +1,4 @@
-// import {runPrettier} from '$lib/ide/codeEditor/prettier'
+// import {runPrettier} from '../../../lib/ide/codeEditor/prettier'
 
 export function prettify(code: string) {
   return code

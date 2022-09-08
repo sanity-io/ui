@@ -1,6 +1,6 @@
 import {Box, Stack, Text} from '@sanity/ui'
 import React from 'react'
-import {HeadingNode} from '$lib/portable-text'
+import {HeadingNode} from './types'
 
 export function HeadingList({headings, space = 4}: {headings: HeadingNode[]; space?: number}) {
   return (

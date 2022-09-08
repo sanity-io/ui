@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import React from 'react'
-import {AppLayout, SEO, useApp} from '$components/app'
-import {Article} from '$components/article'
-import {PageLayout} from '$components/page'
-import {Screen} from '$components/screen'
-import {app, features} from '$config'
-import {loadGlobalPageData} from '$lib/page'
-import {isRecord} from '$lib/types'
-import {NotFoundScreen} from '$screens/notFound'
+import {AppLayout, SEO, useApp} from '../components/app'
+import {Article} from '../components/article'
+import {PageLayout} from '../components/page'
+import {Screen} from '../components/screen'
+import {app, features} from '../config'
+import {loadGlobalPageData} from '../lib/page'
+import {isRecord} from '../lib/types'
+import {NotFoundScreen} from '../screens/notFound'
 
 export async function getStaticProps(opts: {preview?: boolean}) {
   const {preview = features.preview} = opts

@@ -1,6 +1,6 @@
 import slugify from 'slugify'
+import {isArray, isRecord, isString} from '../types'
 import {HeadingType, HeadingNode} from './types'
-import {isArray, isRecord, isString} from '$lib/types'
 
 const HEADER_RE = /^h\d/
 

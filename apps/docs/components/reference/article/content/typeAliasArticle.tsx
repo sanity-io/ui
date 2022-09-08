@@ -1,4 +1,5 @@
 import React from 'react'
+import {H1} from '../../../typography'
 import {
   CommentDeprecatedCallout,
   CommentExampleBlocks,
@@ -8,7 +9,6 @@ import {
 import {ReferenceReferrers} from '../components/referrers'
 import {ReleaseTag} from '../components/releaseTag'
 import {TokensCodeBlock} from '../components/tokensCodeBlock'
-import {H1} from '$components/typography'
 
 export function ReferenceTypeAliasContent(props: {data: any}) {
   const {data} = props

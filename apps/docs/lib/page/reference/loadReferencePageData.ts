@@ -1,7 +1,7 @@
+import {getReleaseMenu} from '../../../components/reference'
+import {getClient} from '../../../sanity.server'
+import {isRecord, isString} from '../../types'
 import {DATA_QUERY} from './queries'
-import {getReleaseMenu} from '$components/reference'
-import {isRecord, isString} from '$lib/types'
-import {getClient} from '$sanity.server'
 
 export async function loadReferencePageData({
   params,

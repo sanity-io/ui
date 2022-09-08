@@ -5,11 +5,11 @@ import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import React, {useCallback, useMemo, useState} from 'react'
+import {features, sanity} from '../../config'
+import {isArray, isRecord} from '../../lib/types'
+import {GitHubMark} from '../assets'
 import {useApp} from './hooks'
 import {NavDrawer} from './navDrawer'
-import {GitHubMark} from '$components/assets'
-import {features, sanity} from '$config'
-import {isArray, isRecord} from '$lib/types'
 
 interface AppNavbarRoute {
   hidden: boolean

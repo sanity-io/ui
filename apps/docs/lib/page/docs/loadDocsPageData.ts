@@ -1,8 +1,8 @@
+import {TARGET_QUERY} from '../../../queries'
+import {getClient} from '../../../sanity.server'
+import {buildNavMenu, findNavNode, getNavItems} from '../../nav'
+import {isRecord} from '../../types'
 import {DATA_QUERY} from './queries'
-import {buildNavMenu, findNavNode, getNavItems} from '$lib/nav'
-import {isRecord} from '$lib/types'
-import {TARGET_QUERY} from '$queries'
-import {getClient} from '$sanity.server'
 
 export async function loadDocsPageData({
   params = {},

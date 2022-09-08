@@ -1,4 +1,4 @@
-import {Cursor} from '$lib/ide'
+import {Cursor} from '../../lib/ide'
 
 export type CanvasWidth = 0 | 1 | 2 | 3
 

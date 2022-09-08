@@ -14,7 +14,7 @@ export function ready(opts?: {timeout?: number}) {
       const duration = Date.now() - startTime
 
       if (duration > timeout) {
-        reject(new Error('$lib.ide.ready: timeout'))
+        reject(new Error('IDE.ready: timeout'))
 
         return
       }

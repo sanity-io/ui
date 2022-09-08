@@ -1,7 +1,7 @@
 import {Code} from '@sanity/ui'
 import React from 'react'
+import {isArray, isRecord} from '../../lib/types'
 import {ScreenHeroSection} from './sections/hero'
-import {isArray, isRecord} from '$lib/types'
 
 export function Screen({target}: {target: Record<string, unknown>}) {
   if (!isArray(target.sections)) {

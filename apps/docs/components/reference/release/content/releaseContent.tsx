@@ -3,9 +3,9 @@ import {Icon, LinkIcon} from '@sanity/icons'
 import {Box, Card, Code, Flex, Heading, Stack, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
 import styled from 'styled-components'
-import {sanity} from '$config'
-import {blocksToText, HeadingType, PlainBlockContent} from '$lib/portable-text'
-import {imageUrlBuilder} from '$sanity'
+import {sanity} from '../../../../config'
+import {blocksToText, HeadingType, PlainBlockContent} from '../../../../lib/portable-text'
+import {imageUrlBuilder} from '../../../../sanity'
 
 export function ReleaseContent({
   blocks = [],

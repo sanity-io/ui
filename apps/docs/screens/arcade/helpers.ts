@@ -1,5 +1,5 @@
+import {decode, encode} from '../../lib/zlib'
 import {ArcadeQueryParams} from './types'
-import {decode, encode} from '$lib/zlib'
 
 export function getArcadeQuery(params: ArcadeQueryParams) {
   const query: Record<string, string> = {mode: params.mode || 'jsx'}

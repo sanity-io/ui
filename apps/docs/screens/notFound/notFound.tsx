@@ -1,7 +1,7 @@
 import {Box, Container, Flex, Heading, useTheme} from '@sanity/ui'
 import Image from 'next/image'
 import React from 'react'
-import {basePath} from '$config'
+import {basePath} from '../../config'
 
 export function NotFoundScreen() {
   const {color} = useTheme().sanity

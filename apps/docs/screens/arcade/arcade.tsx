@@ -4,13 +4,13 @@ import Head from 'next/head'
 import {useRouter} from 'next/router'
 import qs from 'qs'
 import React, {useCallback, useEffect, useReducer, useRef} from 'react'
+import {Cursor} from '../../lib/ide'
 import {arcadeReducer} from './arcadeReducer'
 import {CanvasPane} from './canvasPane'
 import {CodePane} from './codePane'
 import {DEFAULT_CODE, INITIAL_STATE} from './constants'
 import {getArcadeQuery, tryDecode} from './helpers'
 import {ArcadeCodeMode, ArcadeMeta, ArcadeQueryParams, CanvasWidth} from './types'
-import {Cursor} from '$lib/ide'
 
 type SaveFn = (params: ArcadeQueryParams) => void
 

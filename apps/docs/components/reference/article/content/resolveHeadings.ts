@@ -1,5 +1,5 @@
+import {HeadingType} from '../../../../lib/portable-text'
 import {getInterfaceMembers} from '../components/interface/helpers'
-import {HeadingType} from '$lib/portable-text'
 
 export function getHeadings(data: any): HeadingType[] {
   const {comment} = data

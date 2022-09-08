@@ -1,10 +1,10 @@
 import {Box, Container, Flex, Label} from '@sanity/ui'
 import React, {useMemo} from 'react'
 import styled from 'styled-components'
+import {HeadingList} from '../../article'
+import {getTOCTree} from '../../article/helpers'
 import {ReferenceArticleContent} from './content/resolveContent'
 import {getHeadings} from './content/resolveHeadings'
-import {HeadingList} from '$components/article'
-import {getTOCTree} from '$lib/portable-text'
 
 const TOCNavBox = styled(Box)`
   min-width: 12em;

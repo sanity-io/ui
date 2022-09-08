@@ -1,7 +1,7 @@
 import {Card, Flex, Tab, TabList, TabPanel} from '@sanity/ui'
 import React from 'react'
+import {AsyncCodeEditor, Cursor} from '../../lib/ide'
 import {ArcadeCodeMode} from './types'
-import {AsyncCodeEditor, Cursor} from '$lib/ide'
 
 export function CodePane(props: {
   jsxCode: string

@@ -2,8 +2,8 @@ import {Box, Layer, Tree, TreeItem} from '@sanity/ui'
 import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
 import styled from 'styled-components'
-import {basePath} from '$config'
-import {NavMenu, NavMenuItem} from '$lib/nav'
+import {basePath} from '../../config'
+import {NavMenu, NavMenuItem} from '../../lib/nav'
 
 export interface PageHeaderProps {
   header?: React.ReactNode
