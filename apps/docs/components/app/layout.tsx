@@ -1,12 +1,12 @@
 import {Card} from '@sanity/ui'
 import React from 'react'
 import styled from 'styled-components'
+import {features} from '../../config'
+import {Loading} from '../loading'
 import {AppBanner} from './banner'
 import {AppFooter} from './footer'
 import {useApp} from './hooks'
 import {AppNavbar} from './navbar'
-import {Loading} from '$components/loading'
-import {features} from '$config'
 
 const Root = styled(Card)`
   flex-direction: column;

@@ -1,6 +1,6 @@
+import {features} from '../../config'
+import {isArray, isRecord, isString} from '../types'
 import {NavItem, NavMenu, NavMenuItem} from './types'
-import {features} from '$config'
-import {isArray, isRecord, isString} from '$lib/types'
 
 export function getNavItems(values: unknown[], basePath = ''): NavItem[] {
   const records: Record<string, unknown>[] = values.filter(isRecord)

@@ -1,7 +1,7 @@
 import BlockContent from '@sanity/block-content-to-react'
 import {Box, BoxProps, Heading, HeadingProps, Text} from '@sanity/ui'
 import React from 'react'
-import {isRecord, isString} from '$lib/types'
+import {isRecord, isString} from '../../../../../lib/types'
 
 const headingProps: {
   [key: string]: {box: Omit<BoxProps, 'as'>; heading: Omit<HeadingProps, 'as'>} | undefined

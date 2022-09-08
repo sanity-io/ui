@@ -1,6 +1,6 @@
 import {Box, Card, Code, Grid, Heading} from '@sanity/ui'
 import React, {createElement} from 'react'
-import {useApp} from '$components/app'
+import {useApp} from '../../../app'
 
 export function LogoGrid({
   logos,

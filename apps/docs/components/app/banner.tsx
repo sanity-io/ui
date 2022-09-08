@@ -2,8 +2,8 @@ import {ArrowRightIcon, Icon} from '@sanity/icons'
 import {Card, Text} from '@sanity/ui'
 import Link from 'next/link'
 import React from 'react'
+import {isRecord} from '../../lib/types'
 import {useApp} from './hooks'
-import {isRecord} from '$lib/types'
 
 export function AppBanner() {
   const {data} = useApp()

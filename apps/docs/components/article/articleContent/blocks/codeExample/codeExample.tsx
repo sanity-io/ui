@@ -11,8 +11,8 @@ import {
   evalComponent,
   EvalComponentResult,
   ready as readyCheck,
-} from '$lib/ide'
-import {getArcadeQuery} from '$screens/arcade'
+} from '../../../../../lib/ide'
+import {getArcadeQuery} from '../../../../../screens/arcade'
 
 export function CodeExample(props: {
   code: string

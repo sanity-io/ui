@@ -1,6 +1,6 @@
 import {decode, encode} from './zlib'
 
-describe('$lib/zlib', () => {
+describe('zlib', () => {
   it('should encode and decode a simple string', () => {
     const encoded = encode('test')
     const decoded = decode(encoded)

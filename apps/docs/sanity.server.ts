@@ -1,5 +1,5 @@
 import {createClient, SanityClient} from 'next-sanity'
-import {sanity} from '$config'
+import {sanity} from './config'
 
 export const sanityClient: SanityClient = createClient(sanity)
 export const previewClient: SanityClient = createClient({

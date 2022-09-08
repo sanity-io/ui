@@ -1,7 +1,7 @@
 import {Box, Label, Stack} from '@sanity/ui'
 import React from 'react'
-import {useApp} from '$components/app'
-import {NavLink} from '$components/navLink'
+import {useApp} from '../../../app'
+import {NavLink} from '../../../navLink'
 
 export function ReferenceReferrers(props: any) {
   const {data} = props

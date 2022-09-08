@@ -1,4 +1,3 @@
-import {white} from '@sanity/color'
 import NextDocument, {
   DocumentContext,
   DocumentProps,
@@ -9,7 +8,7 @@ import NextDocument, {
 } from 'next/document'
 import React from 'react'
 import {ServerStyleSheet} from 'styled-components'
-import {app, basePath, ga} from '$config'
+import {app, basePath, ga} from '../config'
 
 const GA_TRACKING_CODE =
   ga.trackingId &&

@@ -8,9 +8,9 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
-import {AppProvider} from '$components/app'
-import {app} from '$config'
-import {useDocsPageData, useGlobalPageData, useReferencePageData} from '$lib/page'
+import {AppProvider} from '../components/app'
+import {app} from '../config'
+import {useDocsPageData, useGlobalPageData, useReferencePageData} from '../lib/page'
 
 Refractor.registerLanguage(bash)
 Refractor.registerLanguage(javascript)

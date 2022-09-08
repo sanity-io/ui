@@ -1,10 +1,10 @@
 import React, {useMemo} from 'react'
+import {H1, H2} from '../../../typography'
 import {Comment} from '../components/comment'
 import {ReferenceInterfaceMembers} from '../components/interface'
 import {getInterfaceMembers} from '../components/interface/helpers'
 import {ReferenceReferrers} from '../components/referrers'
 import {ReleaseTag} from '../components/releaseTag'
-import {H1, H2} from '$components/typography'
 
 export function ReferenceInterfaceContent(props: {data: any}) {
   const {data} = props

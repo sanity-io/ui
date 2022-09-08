@@ -1,7 +1,7 @@
+import {getReleaseMenu} from '../../../components/reference'
+import {usePreviewSubscription} from '../../../sanity'
+import {isRecord, isString} from '../../types'
 import {DATA_QUERY} from './queries'
-import {getReleaseMenu} from '$components/reference'
-import {isRecord, isString} from '$lib/types'
-import {usePreviewSubscription} from '$sanity'
 
 export function useReferencePageData(props: {
   data: unknown

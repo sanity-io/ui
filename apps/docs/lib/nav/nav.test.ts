@@ -1,6 +1,6 @@
+import {isArray, isRecord} from '../types'
 import {nav} from './__fixtures__/data'
 import {buildNavMenu, findNavNode, getNavItems, getNavPaths, getNavStaticPaths} from './nav'
-import {isArray, isRecord} from '$lib/types'
 
 describe('lib/nav', () => {
   describe('getNavItems', () => {

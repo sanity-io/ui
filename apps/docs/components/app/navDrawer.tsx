@@ -3,9 +3,9 @@ import {Box, Button, Card, Flex, Heading, Layer, useClickOutside} from '@sanity/
 import {useRouter} from 'next/router'
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
+import {NavMenu as NavMenuType} from '../../lib/nav'
+import {NavMenu} from '../navMenu'
 import {useApp} from './hooks'
-import {NavMenu} from '$components/navMenu'
-import {NavMenu as NavMenuType} from '$lib/nav'
 
 const Root = styled(Layer).attrs({forwardedAs: 'aside'})`
   position: fixed;

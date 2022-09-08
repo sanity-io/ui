@@ -3,6 +3,8 @@ import {Icon, LinkIcon} from '@sanity/icons'
 import {Box, Card, Code, Flex, Heading, Stack, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
 import styled from 'styled-components'
+import {sanity} from '../../../config'
+import {imageUrlBuilder} from '../../../sanity'
 import {blocksToText} from '../helpers'
 import {HeadingType} from '../types'
 import {CodeExample} from './blocks/codeExample'
@@ -14,8 +16,6 @@ import {NpmPackageBadge} from './blocks/npmPackageBadge'
 import {PropertyTable} from './blocks/propertyTable'
 import {SanityLogoGrid} from './blocks/sanityLogoGrid'
 import {PlainBlockContent} from './plainBlockContent'
-import {sanity} from '$config'
-import {imageUrlBuilder} from '$sanity'
 
 export function ArticleContent({blocks, headings}: {blocks: unknown[]; headings: HeadingType[]}) {
   const serializers = useMemo(() => buildSerializers(headings), [headings])

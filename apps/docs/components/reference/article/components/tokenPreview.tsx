@@ -2,8 +2,8 @@ import {Box, Code, Container, Tooltip} from '@sanity/ui'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import {useApp} from '../../../app'
 import {CommentSummary} from './comment'
-import {useApp} from '$components/app'
 
 const CommentBox = styled(Box)`
   border-top: 1px solid var(--card-border-color);

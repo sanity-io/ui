@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import React, {useMemo} from 'react'
+import {useApp} from '../../../app'
+import {H1, H2, P} from '../../../typography'
 import {
   CommentDeprecatedCallout,
   CommentExampleBlocks,
@@ -10,8 +12,6 @@ import {ReferenceInterfaceMembers} from '../components/interface'
 import {getInterfaceMembers} from '../components/interface/helpers'
 import {ReleaseTag} from '../components/releaseTag'
 import {TokensCodeBlock} from '../components/tokensCodeBlock'
-import {useApp} from '$components/app'
-import {H1, H2, P} from '$components/typography'
 
 export function ReferenceFunctionContent(props: {data: any}) {
   const {data} = props

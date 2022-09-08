@@ -2,8 +2,8 @@ import {Box, Button, Card, Container, Grid, Heading, Inline, Stack, Text} from '
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
-import {useApp} from '$components/app'
-import {imageUrlBuilder} from '$sanity'
+import {imageUrlBuilder} from '../../../sanity'
+import {useApp} from '../../app'
 
 const Root = styled(Card)`
   position: relative;

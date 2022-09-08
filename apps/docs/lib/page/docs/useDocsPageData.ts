@@ -1,9 +1,9 @@
 import {useMemo} from 'react'
+import {TARGET_QUERY} from '../../../queries'
+import {usePreviewSubscription} from '../../../sanity'
+import {buildNavMenu, findNavNode, getNavItems} from '../../nav'
+import {isArray, isRecord} from '../../types'
 import {DATA_QUERY} from './queries'
-import {buildNavMenu, findNavNode, getNavItems} from '$lib/nav'
-import {isArray, isRecord} from '$lib/types'
-import {TARGET_QUERY} from '$queries'
-import {usePreviewSubscription} from '$sanity'
 
 export function useDocsPageData(props: {
   data: {nav: unknown; settings: unknown; target: unknown}

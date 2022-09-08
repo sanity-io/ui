@@ -1,11 +1,11 @@
 import {Box, Button, Card, Container, Flex, Heading, Label, Stack, Text} from '@sanity/ui'
 import React, {useMemo} from 'react'
+import {isArray, isRecord, isString} from '../../lib/types'
+import {FigmaLogo} from '../assets'
+import {TimeAgo} from '../timeAgo'
 import {ArticleContent} from './articleContent'
 import {getHeadings, getTOCTree} from './helpers'
 import {HeadingNode} from './types'
-import {FigmaLogo} from '$components/assets'
-import {TimeAgo} from '$components/timeAgo'
-import {isArray, isRecord, isString} from '$lib/types'
 
 interface ArticleLayout {
   wide: boolean

@@ -28,17 +28,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "$components": ["./components"],
-      "$components/*": ["./components/*"],
-      "$config": ["./config"],
-      "$lib/*": ["./lib/*"],
-      "$queries": ["./queries"],
-      "$packages": ["./packages"],
-      "$sanity": ["./sanity"],
-      "$sanity.server": ["./sanity.server"],
-      "$screens/*": ["./screens/*"],
-      "@sanity/*": ["../../packages/@sanity/*/src"],
-      "$workshop/*": ["./workshop/*"]
+      "$packages": ["./packages"]
     }
   }
 }

@@ -1,5 +1,5 @@
 import {BadgeTone} from '@sanity/ui'
-import {NavMenu, NavMenuItem, NavMenuLink} from '$lib/nav'
+import {NavMenu, NavMenuItem, NavMenuLink} from '../../../lib/nav'
 
 export function getReleaseMenu(data: any, basePath: string): NavMenu {
   const reactComponentTypeMembers: any[] = data.members.filter((member: any) => {

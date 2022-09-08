@@ -1,5 +1,5 @@
 import {white} from '@sanity/color'
-import {parseFlag} from '$lib/config'
+import {parseFlag} from './lib/config'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 

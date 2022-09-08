@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
-import {app} from '$config'
-import {imageUrlBuilder} from '$sanity'
+import {app} from '../../config'
+import {imageUrlBuilder} from '../../sanity'
 
 export function SEO({seo, title}: {seo: any; title: any}) {
   // 1200x630

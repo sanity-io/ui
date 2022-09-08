@@ -2,12 +2,12 @@ import {Box, Container, Heading, Label, Select, Stack} from '@sanity/ui'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
 import React, {useCallback} from 'react'
-import {AppLayout, useApp} from '$components/app'
-import {NavLink} from '$components/navLink'
-import {PageLayout} from '$components/page'
-import {app, features} from '$config'
-import {loadReferencePageData} from '$lib/page'
-import {isArray, isRecord, isString} from '$lib/types'
+import {AppLayout, useApp} from '../../../components/app'
+import {NavLink} from '../../../components/navLink'
+import {PageLayout} from '../../../components/page'
+import {app, features} from '../../../config'
+import {loadReferencePageData} from '../../../lib/page'
+import {isArray, isRecord, isString} from '../../../lib/types'
 
 export async function getServerSideProps(context: {
   params: {name?: string; version?: string; slug?: string}

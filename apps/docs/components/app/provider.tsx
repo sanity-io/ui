@@ -7,10 +7,10 @@ import {
   usePrefersDark,
 } from '@sanity/ui'
 import React, {useEffect, useMemo, useState} from 'react'
+import {NavMenu} from '../../lib/nav'
 import {AppContext} from './context'
 import {GlobalStyle} from './globalStyle'
 import {zOffsets} from './zOffsets'
-import {NavMenu} from '$lib/nav'
 
 export function AppProvider(props: {
   children?: React.ReactNode

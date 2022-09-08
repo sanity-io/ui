@@ -3,9 +3,9 @@ import * as ui from '@sanity/ui'
 import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
 import React, {useCallback, useEffect, useState} from 'react'
 import styled, {keyframes} from 'styled-components'
-import {useApp} from '$components/app'
-import {evalComponent, EvalComponentResult, ready as readyCheck} from '$lib/ide'
-import {isRecord} from '$lib/types'
+import {useApp} from '../components/app'
+import {evalComponent, EvalComponentResult, ready as readyCheck} from '../lib/ide'
+import {isRecord} from '../lib/types'
 
 export default function ArcadeFrame() {
   const {setColorScheme} = useApp()
