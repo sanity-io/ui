@@ -8,10 +8,11 @@
   "main": "./dist/sanity-ui.cjs",
   "exports": {
     ".": {
-      "source": "./src/index.ts",
-      "default": "./dist/sanity-ui.js",
       "types": "./dist/types/src/index.d.ts",
-      "require": "./dist/sanity-ui.cjs"
+      "source": "./src/index.ts",
+      "import": "./dist/sanity-ui.js",
+      "require": "./dist/sanity-ui.cjs",
+      "default": "./dist/sanity-ui.js"
     }
   },
   "files": [
