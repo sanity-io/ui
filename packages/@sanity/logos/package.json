@@ -8,10 +8,11 @@
   "main": "./dist/sanity-logos.js",
   "exports": {
     ".": {
+      "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "require": "./dist/sanity-logos.cjs",
       "import": "./dist/sanity-logos.js",
-      "types": "./dist/types/src/index.d.ts"
+      "require": "./dist/sanity-logos.cjs",
+      "default": "./dist/sanity-logos.js"
     }
   },
   "files": [

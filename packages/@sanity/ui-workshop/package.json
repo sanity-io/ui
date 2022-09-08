@@ -8,10 +8,11 @@
   "main": "./dist/sanity-ui-workshop.cjs",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "source": "./src/index.ts",
       "import": "./dist/sanity-ui-workshop.js",
-      "types": "./dist/types/index.d.ts",
-      "require": "./dist/sanity-ui-workshop.cjs"
+      "require": "./dist/sanity-ui-workshop.cjs",
+      "default": "./dist/sanity-ui-workshop.js"
     }
   },
   "files": [

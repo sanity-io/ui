@@ -9,10 +9,11 @@
   "main": "./dist/sanity-color.cjs",
   "exports": {
     ".": {
+      "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
       "import": "./dist/sanity-color.js",
-      "types": "./dist/types/src/index.d.ts",
-      "require": "./dist/sanity-color.cjs"
+      "require": "./dist/sanity-color.cjs",
+      "default": "./dist/sanity-color.js"
     }
   },
   "files": [
