@@ -18,6 +18,10 @@ module.exports = withTranspileModules(
 )({
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   typescript: {
     tsconfigPath: './tsconfig.next.json',
   },
