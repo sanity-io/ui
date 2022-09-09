@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@sanity/client": "^3.3.6",
-    "@sanity/pkg-utils": "^1.7.1",
+    "@sanity/pkg-utils": "^1.7.2",
     "@sanity/tsdoc-to-portable-text": "^0.4.1",
     "@types/node": "^18.7.15",
     "@types/prettier": "^2.7.0",
