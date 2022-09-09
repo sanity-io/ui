@@ -6,7 +6,7 @@ import {usePerf} from './usePerf'
 /** @beta */
 export interface PerfTestHookProps<TargetType = unknown> {
   ref: React.MutableRefObject<TargetType | null>
-  Wrapper: React.ComponentType<{children?: React.ReactNode}>
+  Wrapper: React.ElementType<{children?: React.ReactNode}>
 }
 
 /** @beta */

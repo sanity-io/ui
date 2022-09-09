@@ -7,7 +7,7 @@ const MemoTab = memo(Tab)
 interface InspectorTab {
   id: string
   label: React.ReactNode
-  panel?: React.ComponentType
+  panel?: React.ElementType
   tone?: ButtonTone
 }
 
@@ -118,6 +118,6 @@ function InspectorTabView(props: {
   )
 }
 
-const MemoRender = memo(function MemoRender(props: {component: React.ComponentType}) {
+const MemoRender = memo(function MemoRender(props: {component: React.ElementType}) {
   return createElement(props.component)
 })

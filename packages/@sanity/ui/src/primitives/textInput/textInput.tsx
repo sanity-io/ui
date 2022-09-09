@@ -55,8 +55,8 @@ export interface TextInputProps {
   clearButton?: boolean | TextInputClearButtonProps
   customValidity?: string
   fontSize?: number | number[]
-  icon?: React.ComponentType | React.ReactNode
-  iconRight?: React.ComponentType | React.ReactNode
+  icon?: React.ElementType | React.ReactNode
+  iconRight?: React.ElementType | React.ReactNode
   /**
    * @beta
    */
