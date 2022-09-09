@@ -28,7 +28,12 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "$packages": ["./packages"]
+      "$packages": ["./packages"],
+      "@sanity/color": ["../../packages/@sanity/color/src"],
+      "@sanity/icons": ["../../packages/@sanity/icons/src"],
+      "@sanity/logos": ["../../packages/@sanity/logos/src"],
+      "@sanity/ui": ["../../packages/@sanity/ui/src"],
+      "@sanity/ui-workshop": ["../../packages/@sanity/ui-workshop/src"]
     }
   }
 }
