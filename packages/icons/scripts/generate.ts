@@ -3,13 +3,12 @@ import path from 'path'
 import util from 'util'
 import {transform} from '@svgr/core'
 import camelCase from 'camelcase'
-import glob from 'glob'
+import globby from 'globby'
 import mkdirp from 'mkdirp'
 import {format} from 'prettier'
 
 const ROOT_PATH = path.resolve(__dirname, '../../../..')
 
-const _glob = util.promisify(glob)
 const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
 
@@ -101,7 +100,7 @@ async function writeIcon(file: {code: string; targetPath: string}) {
 async function generate() {
   await mkdirp(DEST_PATH)
 
-  const filePaths = await _glob(path.join(IMPORT_PATH, '**/*.svg'))
+  const filePaths = await globby(path.join(IMPORT_PATH, '**/*.svg'))
   const files = await Promise.all(filePaths.map(readIcon))
 
   files.sort((a, b) => {
