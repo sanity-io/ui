@@ -19,7 +19,7 @@ import {useTree} from './useTree'
 export interface TreeItemProps {
   expanded?: boolean
   fontSize?: number | number[]
-  icon?: React.ComponentType
+  icon?: React.ElementType
   padding?: number | number[]
   space?: number | number[]
   text?: React.ReactNode

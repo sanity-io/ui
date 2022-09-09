@@ -14,7 +14,7 @@ import {useMenu} from './useMenu'
 export interface MenuGroupProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
-  icon?: React.ComponentType | React.ReactNode
+  icon?: React.ElementType | React.ReactNode
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: number | number[]
