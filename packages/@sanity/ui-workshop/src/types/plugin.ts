@@ -2,6 +2,6 @@
 export interface WorkshopPlugin {
   name: string
   title: string
-  inspector?: React.ComponentType
-  provider?: React.ComponentType<{children?: React.ReactNode}>
+  inspector?: React.ElementType
+  provider?: React.ElementType<{children?: React.ReactNode}>
 }

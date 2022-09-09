@@ -1,7 +1,7 @@
 import {SanityLogo, SanityMonogram} from '@sanity/logos'
 import {LogoGrid} from '../logoGrid'
 
-const logos: {component: React.ComponentType; name: string}[] = [
+const logos: {component: React.ElementType; name: string}[] = [
   {
     component: SanityLogo,
     name: 'SanityLogo',
