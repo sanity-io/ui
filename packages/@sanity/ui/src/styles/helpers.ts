@@ -30,7 +30,7 @@ export function _responsive<T>(
   values: T[],
   callback: (value: T, index: number, array: T[]) => CSSObject
 ): CSSObject[] {
-  const statements = values.map(callback)
+  const statements = values?.map(callback) || []
 
   return statements.map((statement, mediaIndex) => {
     if (mediaIndex === 0) return statement
