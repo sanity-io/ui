@@ -8,7 +8,7 @@ export interface WorkshopCollection {
 export interface WorkshopStory<Options = Record<string, unknown>> {
   name: string
   title: string
-  component: React.ComponentType
+  component: React.ElementType
   options?: Options
 }
 

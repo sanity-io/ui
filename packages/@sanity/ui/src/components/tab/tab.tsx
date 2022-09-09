@@ -12,7 +12,7 @@ export interface TabProps {
    */
   'aria-controls': string
   id: string
-  icon?: React.ComponentType | React.ReactNode
+  icon?: React.ElementType | React.ReactNode
   focused?: boolean
   fontSize?: number | number[]
   label?: React.ReactNode
