@@ -32,7 +32,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   customValidity?: string
   filterOption?: (query: string, option: Option) => boolean
   fontSize?: number | number[]
-  icon?: React.ComponentType | React.ReactNode
+  icon?: React.ElementType | React.ReactNode
   id: string
   /**
    * @beta

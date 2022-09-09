@@ -23,8 +23,8 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   hotkeys?: string[]
-  icon?: React.ComponentType | React.ReactNode
-  iconRight?: React.ComponentType | React.ReactNode
+  icon?: React.ElementType | React.ReactNode
+  iconRight?: React.ElementType | React.ReactNode
   pressed?: boolean
   selected?: boolean
   space?: number | number[]
