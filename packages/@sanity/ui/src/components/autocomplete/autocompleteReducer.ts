@@ -36,9 +36,6 @@ export function autocompleteReducer(
   }
 
   if (msg.type === 'root/setListFocused') {
-    // prevent unnecessary re-render
-    if (state.listFocused === msg.listFocused) return state
-
     return {...state, listFocused: msg.listFocused}
   }
 
