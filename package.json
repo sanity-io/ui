@@ -31,7 +31,7 @@
     "watch:packages": "lerna run --stream --parallel --scope @sanity/* watch"
   },
   "resolutions": {
-    "@types/react": "^18.0.18"
+    "@types/react": "^18.0.19"
   },
   "devDependencies": {
     "@sanity/client": "^3.3.6",
