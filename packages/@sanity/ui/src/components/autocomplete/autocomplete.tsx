@@ -168,7 +168,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const [resultsPopoverElement, setResultsPopoverElement] = useState<HTMLDivElement | null>(null)
   const inputElementRef = useRef<HTMLInputElement | null>(null)
   const listBoxElementRef = useRef<HTMLDivElement | null>(null)
-  const focusedElementRef = useRef<HTMLElement | null>(null)
+  const listFocusedRef = useRef(false)
   const valueRef = useRef(value)
   const valuePropRef = useRef(valueProp)
   const forwardedRef = useForwardedRef(ref)
@@ -228,14 +228,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const handleRootFocus = useCallback((event: React.FocusEvent) => {
     const listBoxElement = listBoxElementRef.current
     const focusedElement = event.target instanceof HTMLElement ? event.target : null
+    const listFocused = listBoxElement?.contains(focusedElement) || false
 
-    focusedElementRef.current = focusedElement
+    if (listFocused !== listFocusedRef.current) {
+      listFocusedRef.current = listFocused
 
-    const nextListFocused = Boolean(
-      listBoxElement && focusedElement && listBoxElement.contains(focusedElement)
-    )
-
-    dispatch({type: 'root/setListFocused', listFocused: nextListFocused})
+      dispatch({type: 'root/setListFocused', listFocused})
+    }
   }, [])
 
   const handleOptionSelect = useCallback(
