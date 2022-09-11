@@ -1,8 +1,25 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import {cloneElement, forwardRef, useCallback, useEffect, useMemo, useReducer, useRef} from 'react'
+import {
+  ChangeEvent,
+  ElementType,
+  FocusEvent,
+  HTMLProps,
+  KeyboardEvent,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  Ref,
+  cloneElement,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+} from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {useForwardedRef, useArrayProp} from '../../hooks'
+import {useArrayProp, useForwardedRef} from '../../hooks'
 import {Box, BoxProps, Button, Card, PopoverProps, Stack, Text, TextInput} from '../../primitives'
 import {AnimatedSpinnerIcon, ListBox, ResultsPopover, Root} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
@@ -23,53 +40,45 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   customValidity?: string
   filterOption?: (query: string, option: Option) => boolean
   fontSize?: number | number[]
-  icon?: React.ElementType | React.ReactNode
+  icon?: ElementType | ReactNode
   id: string
-  /**
-   * @beta
-   */
+  /** @beta */
   listBox?: BoxProps
   loading?: boolean
   onChange?: (value: string) => void
   onQueryChange?: (query: string | null) => void
   onSelect?: (value: string) => void
-  /**
-   * @beta
-   */
+  /** @beta */
   openButton?: boolean | AutocompleteOpenButtonProps
   options?: Option[]
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'> &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'ref' | 'width'>
-  prefix?: React.ReactNode
+    Omit<HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'ref' | 'width'>
+  prefix?: ReactNode
   radius?: number | number[]
-  /**
-   * @beta
-   */
+  /** @beta */
   relatedElements?: HTMLElement[]
-  renderOption?: (option: Option) => React.ReactElement
-  /**
-   * @beta
-   */
+  renderOption?: (option: Option) => ReactElement
+  /** @beta */
   renderPopover?: (
     props: {
-      content: React.ReactElement | null
+      content: ReactElement | null
       hidden: boolean
       inputElement: HTMLInputElement | null
       onMouseEnter: () => void
       onMouseLeave: () => void
     },
-    ref: React.Ref<HTMLDivElement>
-  ) => React.ReactNode
+    ref: Ref<HTMLDivElement>
+  ) => ReactNode
   renderValue?: (value: string, option?: Option) => string
-  suffix?: React.ReactNode
+  suffix?: ReactNode
   value?: string
 }
 
-const defaultRenderValue = (value: string, option?: BaseAutocompleteOption) =>
+const DEFAULT_RENDER_VALUE = (value: string, option?: BaseAutocompleteOption) =>
   option ? option.value : value
 
-const defaultFilterOption = (query: string, option: BaseAutocompleteOption) =>
+const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
 const InnerAutocomplete = forwardRef(function InnerAutocomplete<
@@ -77,7 +86,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 >(
   props: AutocompleteProps<Option> &
     Omit<
-      React.HTMLProps<HTMLInputElement>,
+      HTMLProps<HTMLInputElement>,
       | 'aria-activedescendant'
       | 'aria-autocomplete'
       | 'aria-expanded'
@@ -97,7 +106,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'type'
       | 'value'
     >,
-  ref: React.Ref<HTMLInputElement>
+  ref: Ref<HTMLInputElement>
 ) {
   const {
     border = true,
@@ -107,7 +116,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     fontSize = 2,
     icon,
     id,
-    listBox = {},
+    listBox = EMPTY_RECORD,
     loading,
     onBlur,
     onChange,
@@ -117,14 +126,14 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     openButton,
     options: optionsProp,
     padding: paddingProp = 3,
-    popover = {},
+    popover = EMPTY_RECORD,
     prefix,
     radius = 3,
     readOnly,
     relatedElements,
     renderOption: renderOptionProp,
     renderPopover,
-    renderValue = defaultRenderValue,
+    renderValue = DEFAULT_RENDER_VALUE,
     suffix,
     value: valueProp,
     ...restProps
@@ -153,8 +162,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const renderOption =
     typeof renderOptionProp === 'function' ? renderOptionProp : defaultRenderOption
+
   const filterOption =
-    typeof filterOptionProp === 'function' ? filterOptionProp : defaultFilterOption
+    typeof filterOptionProp === 'function' ? filterOptionProp : DEFAULT_FILTER_OPTION
 
   // Element refs
   const rootElementRef = useRef<HTMLDivElement | null>(null)
@@ -186,7 +196,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const expanded = (query !== null && loading) || (focused && query !== null)
 
   const handleRootBlur = useCallback(
-    (event: React.FocusEvent<HTMLInputElement>) => {
+    (event: FocusEvent<HTMLInputElement>) => {
       setTimeout(() => {
         // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
         // closes the results in certain situations):
@@ -222,7 +232,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     [onBlur, onQueryChange, relatedElements]
   )
 
-  const handleRootFocus = useCallback((event: React.FocusEvent) => {
+  const handleRootFocus = useCallback((event: FocusEvent<HTMLDivElement>) => {
     const listBoxElement = listBoxElementRef.current
     const focusedElement = event.target instanceof HTMLElement ? event.target : null
     const listFocused = listBoxElement?.contains(focusedElement) || false
@@ -253,7 +263,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   )
 
   const handleRootKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLElement>) => {
+    (event: KeyboardEvent<HTMLElement>) => {
       if (event.key === 'ArrowDown') {
         event.preventDefault()
 
@@ -316,7 +326,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   )
 
   const handleInputChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const nextQuery = event.currentTarget.value
 
       dispatch({type: 'input/change', query: nextQuery})
@@ -327,7 +337,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   )
 
   const handleInputFocus = useCallback(
-    (event: React.FocusEvent<HTMLInputElement>) => {
+    (event: FocusEvent<HTMLInputElement>) => {
       if (!focused) {
         dispatch({type: 'input/focus'})
 
@@ -439,24 +449,14 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       }),
     [padding]
   )
-  const openButtonPadding = useMemo(
-    () =>
-      padding.map((v) => {
-        if (v === 0) return 0
-        if (v === 1) return 0
-        if (v === 2) return 1
-
-        return v - 1
-      }),
-    [padding]
-  )
+  const openButtonPadding = useMemo(() => padding.map((v) => Math.max(v - 1, 0)), [padding])
   const openButtonProps: AutocompleteOpenButtonProps = useMemo(
     () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
     [openButton]
   )
 
   const handleOpenClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       dispatch({
         type: 'root/open',
         query: value ? renderValue(value, currentOption) : '',
@@ -545,7 +545,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   )
 
   const handleListBoxKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       // If the focus is currently in the list, move focus to the input element
       if (event.key === 'Tab') {
         if (listFocused) inputElementRef.current?.focus()
@@ -679,7 +679,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<
-      React.HTMLProps<HTMLInputElement>,
+      HTMLProps<HTMLInputElement>,
       | 'aria-activedescendant'
       | 'aria-autocomplete'
       | 'aria-expanded'
@@ -699,6 +699,6 @@ export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocomplet
       | 'type'
       | 'value'
     > & {
-      ref?: React.Ref<HTMLInputElement>
+      ref?: Ref<HTMLInputElement>
     }
-) => React.ReactElement
+) => ReactElement
