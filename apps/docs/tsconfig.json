@@ -22,8 +22,7 @@
     "baseUrl": ".",
     "paths": {
       "$packages": ["./packages"]
-    },
-    "types": ["vitest/globals"]
+    }
   },
   "references": [
     {"path": "../../packages/@sanity/color/tsconfig.dist.json"},

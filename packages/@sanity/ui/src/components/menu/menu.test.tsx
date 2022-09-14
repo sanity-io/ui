@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
-import {useCallback, useMemo} from 'react'
-import {vi} from 'vitest'
+import React, {useCallback, useMemo} from 'react'
 import {render} from '../../../test'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenu} from './useMenu'
@@ -9,7 +8,7 @@ import {useMenu} from './useMenu'
 describe('components/menu', () => {
   describe('useMenu', () => {
     it('should get context value', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         const rootMenu = useMenu()
@@ -65,7 +64,7 @@ describe('components/menu', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {
@@ -94,7 +93,7 @@ describe('components/menu', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {

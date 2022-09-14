@@ -1,4 +1,3 @@
-import {vi} from 'vitest'
 import {render} from '../../test'
 import {studioTheme} from './studioTheme'
 import {ThemeContext} from './themeContext'
@@ -8,7 +7,7 @@ import {useRootTheme} from './useRootTheme'
 describe('theme', () => {
   describe('useRootTheme', () => {
     it('should get context value', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         const rootTheme = useRootTheme()
@@ -41,7 +40,7 @@ describe('theme', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {
@@ -69,7 +68,7 @@ describe('theme', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {

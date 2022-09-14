@@ -1,4 +1,3 @@
-import {vi} from 'vitest'
 import {render} from '../../../test'
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'
@@ -7,7 +6,7 @@ import {usePortal} from './usePortal'
 describe('utils/portal', () => {
   describe('usePortal', () => {
     it('should get context value', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         const rootPortal = usePortal()
@@ -39,7 +38,7 @@ describe('utils/portal', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {
@@ -67,7 +66,7 @@ describe('utils/portal', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {
