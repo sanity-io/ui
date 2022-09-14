@@ -6,7 +6,7 @@
     "allowJs": true,
     "checkJs": true,
     "resolveJsonModule": true,
-    "types": ["vitest/globals"]
+    "jsx": "react-jsx"
   },
   "references": [
     {"path": "./apps/docs"},
