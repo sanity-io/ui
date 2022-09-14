@@ -30,7 +30,7 @@
     "postbuild": "run-s check:package",
     "prebuild": "run-s clean",
     "pregenerate": "rimraf src/icons",
-    "test": "vitest run",
+    "test": "jest",
     "type-check": "tsc --build",
     "watch": "pkg watch --tsconfig tsconfig.dist.json"
   },
