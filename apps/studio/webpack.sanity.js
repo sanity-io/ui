@@ -2,20 +2,22 @@
 
 'use strict'
 
-const path = require('path')
+// const path = require('path')
 
-const ROOT_PATH = path.resolve(__dirname, '../..')
+// const ROOT_PATH = path.resolve(__dirname, '../..')
 
 module.exports = (baseConfig) => ({
   ...baseConfig,
-  resolve: {
-    ...baseConfig?.resolve,
-    alias: {
-      ...baseConfig?.resolve?.alias,
-      '@sanity/color': path.resolve(ROOT_PATH, 'packages/@sanity/color/src'),
-      '@sanity/icons': path.resolve(ROOT_PATH, 'packages/@sanity/icons/src'),
-      '@sanity/logos': path.resolve(ROOT_PATH, 'packages/@sanity/logos/src'),
-      '@sanity/ui': path.resolve(ROOT_PATH, 'packages/@sanity/ui/src'),
-    },
-  },
+  // resolve: {
+  //   ...baseConfig?.resolve,
+  //   alias: {
+  //     '@sanity/color': path.resolve(ROOT_PATH, 'packages/@sanity/color/src'),
+  //     '@sanity/icons': path.resolve(ROOT_PATH, 'packages/@sanity/icons/src'),
+  //     '@sanity/logos': path.resolve(ROOT_PATH, 'packages/@sanity/logos/src'),
+  //     '@sanity/ui': path.resolve(ROOT_PATH, 'packages/@sanity/ui/src'),
+  //     react: require.resolve('react'),
+  //     'react-dom': require.resolve('react-dom'),
+  //     ...baseConfig?.resolve?.alias,
+  //   },
+  // },
 })
