@@ -1,33 +1,33 @@
 import {
-  render as tlRender,
-  RenderOptions as TLRenderOptions,
+  render as _testRender,
+  RenderOptions as _TestRenderOptions,
   RenderResult,
 } from '@testing-library/react'
-import {StrictMode, Fragment} from 'react'
+import {StrictMode, Fragment, ReactElement, ReactNode} from 'react'
 import {Card, studioTheme, ThemeColorSchemeKey, ThemeProvider} from '../src'
 
-interface RenderOptions extends TLRenderOptions {
+export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ThemeColorSchemeKey
   strict?: boolean
 }
 
-const DefaultWrapper: React.FC = ({children}: any) => <main>{children}</main>
+function DefaultWrapper({children}: {children?: ReactNode}) {
+  return <main>{children}</main>
+}
 
-export function render(
-  element: React.ReactElement<any>,
-  options: RenderOptions = {}
-): RenderResult {
+export function render(rootElement: ReactElement, options: TestRenderOptions = {}): RenderResult {
   const {
     baseElement,
     scheme = 'light',
-    strict = false,
+    strict = true,
     wrapper: InnerWrapper = DefaultWrapper,
   } = options
-  const Mode = strict ? StrictMode : Fragment
 
-  const Wrapper: React.FC = ({children}: any) => {
+  function TestWrapper({children}: {children?: React.ReactNode}) {
+    const Strictness = strict ? StrictMode : Fragment
+
     return (
-      <Mode>
+      <Strictness>
         <InnerWrapper>
           <ThemeProvider theme={studioTheme}>
             <Card padding={4} scheme={scheme}>
@@ -35,14 +35,12 @@ export function render(
             </Card>
           </ThemeProvider>
         </InnerWrapper>
-      </Mode>
+      </Strictness>
     )
   }
 
-  const result = tlRender(element, {
+  return _testRender(rootElement, {
     baseElement,
-    wrapper: Wrapper,
+    wrapper: TestWrapper,
   })
-
-  return result
 }

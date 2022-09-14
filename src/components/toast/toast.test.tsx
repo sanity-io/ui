@@ -1,4 +1,3 @@
-import {vi} from 'vitest'
 import {render} from '../../../test'
 import {ToastContext} from './toastContext'
 import {ToastContextValue} from './types'
@@ -7,7 +6,7 @@ import {useToast} from './useToast'
 describe('components/toast', () => {
   describe('useToast', () => {
     it('should get context value', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         const rootToast = useToast()
@@ -37,7 +36,7 @@ describe('components/toast', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {
@@ -65,7 +64,7 @@ describe('components/toast', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = vi.fn()
+      const log = jest.fn()
 
       function Debug() {
         try {
