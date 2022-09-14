@@ -28,7 +28,7 @@
     "lint": "eslint . --ext .js,.ts --quiet",
     "postbuild": "run-s check:package",
     "prebuild": "run-s clean generate",
-    "test": "vitest run",
+    "test": "jest",
     "type-check": "tsc --build",
     "watch": "pkg watch --tsconfig tsconfig.dist.json"
   },
