@@ -1,7 +1,7 @@
 import {SpinnerIcon} from '@sanity/icons'
-import React, {forwardRef} from 'react'
-import styled, {keyframes} from 'styled-components'
-import {Text} from '../text'
+import React, {forwardRef, useMemo} from 'react'
+import styled from 'styled-components'
+import {spinnerSizeStyle, spinnerStyle} from './styles'
 
 /**
  * @public
@@ -11,21 +11,7 @@ export interface SpinnerProps {
   size?: number | number[]
 }
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-const Root = styled(Text)`
-  & > span > svg {
-    animation: ${rotate} 500ms linear infinite;
-  }
-`
+const Root = styled.div<{$muted?: boolean; $size: number[]}>(spinnerStyle, spinnerSizeStyle)
 
 /**
  * @public
@@ -34,8 +20,11 @@ export const Spinner = forwardRef(function Spinner(
   props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
+  const {muted, size = 2, ...restProps} = props
+  const $size = useMemo(() => (Array.isArray(size) ? size : [size]), [size])
+
   return (
-    <Root data-ui="Spinner" {...props} ref={ref}>
+    <Root data-ui="Spinner" {...restProps} $muted={muted} $size={$size} ref={ref}>
       <SpinnerIcon />
     </Root>
   )
