@@ -43,6 +43,7 @@ export type TextInputType =
   | 'time'
   | 'text'
   | 'week'
+  | 'color'
 
 /**
  * @public

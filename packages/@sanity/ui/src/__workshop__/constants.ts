@@ -235,6 +235,7 @@ export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS: {[key: string]: TextInputType} = 
   time: 'time',
   text: 'text',
   week: 'week',
+  color: 'color',
 }
 
 export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | ''} = {
