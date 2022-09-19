@@ -5,7 +5,7 @@
   "source": "./src/index.ts",
   "module": "./dist/sanity-logos.js",
   "types": "./dist/types/src/index.d.ts",
-  "main": "./dist/sanity-logos.js",
+  "main": "./dist/sanity-logos.cjs",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
