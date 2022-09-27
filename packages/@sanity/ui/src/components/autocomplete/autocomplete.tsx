@@ -251,7 +251,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       if (onChange) onChange(v)
       if (onQueryChange) onQueryChange(null)
 
-      inputElementRef.current?.focus()
+      requestAnimationFrame(() => inputElementRef.current?.focus())
     },
     [onChange, onSelect, onQueryChange]
   )
