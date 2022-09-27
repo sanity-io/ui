@@ -2,17 +2,17 @@
   "name": "@sanity/ui",
   "version": "0.38.2",
   "sideEffects": false,
-  "source": "./src/index.ts",
-  "module": "./dist/sanity-ui.js",
   "types": "./dist/types/src/index.d.ts",
-  "main": "./dist/sanity-ui.cjs",
+  "source": "./src/index.ts",
+  "module": "./dist/sanity-ui.mjs",
+  "main": "./dist/sanity-ui.js",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-ui.js",
-      "require": "./dist/sanity-ui.cjs",
-      "default": "./dist/sanity-ui.js"
+      "import": "./dist/sanity-ui.mjs",
+      "require": "./dist/sanity-ui.js",
+      "default": "./dist/sanity-ui.mjs"
     }
   },
   "files": [
