@@ -3,17 +3,17 @@
   "version": "2.1.16",
   "description": "The Sanity color palette.",
   "sideEffects": false,
-  "source": "./src/index.ts",
-  "module": "./dist/sanity-color.js",
   "types": "./dist/types/src/index.d.ts",
-  "main": "./dist/sanity-color.cjs",
+  "source": "./src/index.ts",
+  "module": "./dist/sanity-color.mjs",
+  "main": "./dist/sanity-color.js",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-color.js",
-      "require": "./dist/sanity-color.cjs",
-      "default": "./dist/sanity-color.js"
+      "import": "./dist/sanity-color.mjs",
+      "require": "./dist/sanity-color.js",
+      "default": "./dist/sanity-color.mjs"
     }
   },
   "files": [
