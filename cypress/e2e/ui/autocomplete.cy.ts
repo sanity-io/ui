@@ -38,7 +38,7 @@ context('Components/Autocomplete', () => {
     cy.get('#custom-listbox').realPress('ArrowDown')
 
     // Enter to select
-    cy.get('[data-qa="option-NO"]').should('have.focus').realPress('{enter}')
+    cy.get('[data-qa="option-NO"]', {timeout: 10000}).should('have.focus').realPress('{enter}')
 
     // Tab 1 time
     cy.get('#custom').should('have.focus').realPress('Tab')
@@ -111,7 +111,7 @@ context('Components/Autocomplete', () => {
     cy.get('#custom').click()
 
     // Search for "nor"
-    cy.get('#custom').type('nor')
+    cy.get('#custom', {timeout: 10000}).type('nor')
 
     // Arrow down 3 times
     cy.get('#custom-listbox').realPress('ArrowDown')

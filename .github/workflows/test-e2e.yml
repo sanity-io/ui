@@ -46,7 +46,7 @@ jobs:
           CYPRESS_CACHE_FOLDER: './node_modules/.cypress'
         run: yarn test:browser
 
-      - name: Upload Cypress Videos
+      - name: Upload Cypress Artifacts
         if: always()
         uses: actions/upload-artifact@v3
         with:
