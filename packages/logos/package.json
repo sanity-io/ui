@@ -2,17 +2,17 @@
   "name": "@sanity/logos",
   "version": "1.1.17",
   "sideEffects": false,
-  "source": "./src/index.ts",
-  "module": "./dist/sanity-logos.js",
   "types": "./dist/types/src/index.d.ts",
-  "main": "./dist/sanity-logos.cjs",
+  "source": "./src/index.ts",
+  "module": "./dist/sanity-logos.mjs",
+  "main": "./dist/sanity-logos.js",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-logos.js",
-      "require": "./dist/sanity-logos.cjs",
-      "default": "./dist/sanity-logos.js"
+      "import": "./dist/sanity-logos.mjs",
+      "require": "./dist/sanity-logos.js",
+      "default": "./dist/sanity-logos.mjs"
     }
   },
   "files": [
