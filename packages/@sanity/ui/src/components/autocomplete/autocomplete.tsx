@@ -1,14 +1,5 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import {
-  cloneElement,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useReducer,
-  useRef,
-  useState,
-} from 'react'
+import {cloneElement, forwardRef, useCallback, useEffect, useMemo, useReducer, useRef} from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
 import {useForwardedRef, useArrayProp} from '../../hooks'
@@ -164,15 +155,21 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     typeof renderOptionProp === 'function' ? renderOptionProp : defaultRenderOption
   const filterOption =
     typeof filterOptionProp === 'function' ? filterOptionProp : defaultFilterOption
-  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const [resultsPopoverElement, setResultsPopoverElement] = useState<HTMLDivElement | null>(null)
+
+  // Element refs
+  const rootElementRef = useRef<HTMLDivElement | null>(null)
+  const resultsPopoverElementRef = useRef<HTMLDivElement | null>(null)
   const inputElementRef = useRef<HTMLInputElement | null>(null)
   const listBoxElementRef = useRef<HTMLDivElement | null>(null)
+
+  // Value refs
   const listFocusedRef = useRef(false)
   const valueRef = useRef(value)
   const valuePropRef = useRef(valueProp)
-  const forwardedRef = useForwardedRef(ref)
   const popoverMouseWithinRef = useRef(false)
+
+  const forwardedRef = useForwardedRef(ref)
+
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
   const padding = useArrayProp(paddingProp)
@@ -199,8 +196,8 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         }
 
         const elements: HTMLElement[] = (relatedElements || []).concat(
-          rootElement ? [rootElement] : [],
-          resultsPopoverElement ? [resultsPopoverElement] : []
+          rootElementRef.current ? [rootElementRef.current] : [],
+          resultsPopoverElementRef.current ? [resultsPopoverElementRef.current] : []
         )
 
         let focusInside = false
@@ -222,7 +219,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         }
       }, 0)
     },
-    [onBlur, onQueryChange, relatedElements, resultsPopoverElement, rootElement]
+    [onBlur, onQueryChange, relatedElements]
   )
 
   const handleRootFocus = useCallback((event: React.FocusEvent) => {
@@ -362,6 +359,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   // Change the value when `value` prop changes
   useEffect(() => {
+    // If `valueProp` changed
     if (valueProp !== valuePropRef.current) {
       valuePropRef.current = valueProp
 
@@ -373,17 +371,18 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       return
     }
 
-    if (valueProp !== value) {
+    // If `valueProp` is not equal to `value`
+    if (valueProp !== valueRef.current) {
+      valueRef.current = valueProp || null
+
       dispatch({type: 'value/change', value: valueProp || null})
     }
-  }, [valueProp, value])
+  }, [valueProp])
 
   // Reset active item when closing
   useEffect(() => {
-    if (!focused) {
-      if (valueRef.current) {
-        dispatch({type: 'root/setActiveValue', value: valueRef.current})
-      }
+    if (!focused && valueRef.current) {
+      dispatch({type: 'root/setActiveValue', value: valueRef.current})
     }
   }, [focused])
 
@@ -622,7 +621,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           onMouseEnter: handlePopoverMouseEnter,
           onMouseLeave: handlePopoverMouseLeave,
         },
-        setResultsPopoverElement
+        resultsPopoverElementRef
       )
     }
 
@@ -644,7 +643,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         placement={AUTOCOMPLETE_POPOVER_PLACEMENT}
         portal
         radius={radius}
-        ref={setResultsPopoverElement}
+        ref={resultsPopoverElementRef}
         referenceElement={inputElementRef.current}
         {...popover}
       />
@@ -666,7 +665,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
       onKeyDown={handleRootKeyDown}
-      ref={setRootElement}
+      ref={rootElementRef}
     >
       {input}
       {results}
