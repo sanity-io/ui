@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.settings",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{"name": "next"}],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [".next/types/**/*.ts", "next-env.d.ts", "sanity.config.ts", "sanity-env.d.ts", "src"],
+  "exclude": ["node_modules", "tmp"]
+}
