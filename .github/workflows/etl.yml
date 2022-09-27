@@ -1,5 +1,11 @@
 name: Extract, Transform & Load
-on: [push, pull_request]
+on:
+  # Build on pushes to release branches
+  push:
+    branches: [next]
+  # Build on pull requests targeting release branches
+  pull_request:
+    branches: [next]
 
 jobs:
   etl:
