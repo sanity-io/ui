@@ -3,17 +3,17 @@
   "version": "1.3.6",
   "description": "The Sanity icons.",
   "sideEffects": false,
-  "source": "./src/index.ts",
-  "module": "./dist/sanity-icons.js",
   "types": "./dist/types/src/index.d.ts",
-  "main": "./dist/sanity-icons.cjs",
+  "source": "./src/index.ts",
+  "module": "./dist/sanity-icons.mjs",
+  "main": "./dist/sanity-icons.js",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-icons.js",
-      "require": "./dist/sanity-icons.cjs",
-      "default": "./dist/sanity-icons.js"
+      "import": "./dist/sanity-icons.mjs",
+      "require": "./dist/sanity-icons.js",
+      "default": "./dist/sanity-icons.mjs"
     }
   },
   "files": [

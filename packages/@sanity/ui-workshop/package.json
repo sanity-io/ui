@@ -2,17 +2,17 @@
   "name": "@sanity/ui-workshop",
   "version": "0.6.1",
   "sideEffects": false,
-  "source": "./src/index.ts",
-  "module": "./dist/sanity-ui-workshop.js",
   "types": "./dist/types/index.d.ts",
-  "main": "./dist/sanity-ui-workshop.cjs",
+  "source": "./src/index.ts",
+  "module": "./dist/sanity-ui-workshop.mjs",
+  "main": "./dist/sanity-ui-workshop.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-ui-workshop.js",
-      "require": "./dist/sanity-ui-workshop.cjs",
-      "default": "./dist/sanity-ui-workshop.js"
+      "import": "./dist/sanity-ui-workshop.mjs",
+      "require": "./dist/sanity-ui-workshop.js",
+      "default": "./dist/sanity-ui-workshop.mjs"
     }
   },
   "files": [

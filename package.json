@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@sanity/client": "^3.4.1",
-    "@sanity/pkg-utils": "^1.7.2",
+    "@sanity/pkg-utils": "^1.8.2",
     "@sanity/tsdoc-to-portable-text": "^0.4.1",
     "@types/jest": "^29.0.2",
     "@types/jest-axe": "^3.5.4",
