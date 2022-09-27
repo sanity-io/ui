@@ -10,7 +10,6 @@
   },
   "references": [
     {"path": "./apps/docs"},
-    {"path": "./apps/studio"},
     {"path": "./apps/workshop"},
 
     {"path": "./examples/manage"},

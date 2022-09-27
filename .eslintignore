@@ -3,8 +3,6 @@
 # Apps
 /apps/docs/.next
 /apps/docs/build
-/apps/studio/build
-/apps/studio/public
 /apps/workshop/build
 /apps/workshop/dist
 
