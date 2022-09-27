@@ -3,13 +3,10 @@ import {TARGET_QUERY} from '../../../queries'
 import {usePreviewSubscription} from '../../../sanity'
 import {buildNavMenu, findNavNode, getNavItems} from '../../nav'
 import {isArray, isArrayOfStrings, isRecord} from '../../types'
+import {PageProps} from '../types'
 import {DATA_QUERY} from './queries'
 
-export function useGlobalPageData(props: {
-  data?: {nav: unknown; settings: unknown; target: unknown}
-  params?: {path?: string[]}
-  preview?: boolean
-}) {
+export function useGlobalPageData(props: PageProps) {
   const {data, params = {}, preview} = props
   const path = useMemo(() => (isArrayOfStrings(params.path) ? params.path : []), [params])
 

@@ -1,13 +1,10 @@
 import {getReleaseMenu} from '../../../components/reference'
 import {usePreviewSubscription} from '../../../sanity'
 import {isRecord, isString} from '../../types'
+import {PageProps} from '../types'
 import {DATA_QUERY} from './queries'
 
-export function useReferencePageData(props: {
-  data: unknown
-  params: {name: string; version: string}
-  preview: boolean
-}) {
+export function useReferencePageData(props: PageProps) {
   const {data: dataProp, params, preview} = props
   const basePath = `/reference/${params.name}/${params.version}`
 

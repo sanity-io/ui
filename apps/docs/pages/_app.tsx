@@ -10,7 +10,7 @@ import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
 import {AppProvider} from '../components/app'
 import {app} from '../config'
-import {useDocsPageData, useGlobalPageData, useReferencePageData} from '../lib/page'
+import {PageProps, useDocsPageData, useGlobalPageData, useReferencePageData} from '../lib/page'
 
 Refractor.registerLanguage(bash)
 Refractor.registerLanguage(javascript)
@@ -18,7 +18,7 @@ Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
-function App(props: AppProps) {
+function App(props: AppProps<PageProps>) {
   const {pageProps} = props
   const [loading, setLoading] = useState(false)
 
@@ -77,7 +77,7 @@ function DefaultMeta() {
   )
 }
 
-function GlobalApp(props: AppProps & {loading: boolean}) {
+function GlobalApp(props: AppProps<PageProps> & {loading: boolean}) {
   const {Component, loading, pageProps} = props
   const pageData = useGlobalPageData(pageProps)
 
@@ -89,7 +89,7 @@ function GlobalApp(props: AppProps & {loading: boolean}) {
   )
 }
 
-function DocsApp(props: AppProps & {loading: boolean}) {
+function DocsApp(props: AppProps<PageProps> & {loading: boolean}) {
   const {Component, loading, pageProps} = props
   const pageData = useDocsPageData(pageProps)
 
@@ -101,7 +101,7 @@ function DocsApp(props: AppProps & {loading: boolean}) {
   )
 }
 
-function ReferenceApp(props: AppProps & {loading: boolean}) {
+function ReferenceApp(props: AppProps<PageProps> & {loading: boolean}) {
   const {Component, loading, pageProps} = props
   const pageData = useReferencePageData(pageProps)
 
