@@ -76,7 +76,7 @@ export default defineConfig({
       },
       {
         find: 'styled-components',
-        replacement: require.resolve('styled-components'),
+        replacement: require.resolve('styled-components/dist/styled-components.browser.esm.js'),
       },
     ],
   },

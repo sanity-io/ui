@@ -48,7 +48,6 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-is": "^17.0.3",
     "@types/react-test-renderer": "^18.0.0",
-    "@types/styled-components": "^5.1.26",
     "@types/uuid": "^8.3.4",
     "@types/yargs": "^17.0.13",
     "@typescript-eslint/eslint-plugin": "^5.39.0",

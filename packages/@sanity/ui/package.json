@@ -48,13 +48,13 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "react-refractor": "^2.1.7",
-    "styled-components": "^5.3.6"
+    "styled-components": "6.0.0-beta.3"
   },
   "peerDependencies": {
     "react": "^18",
     "react-dom": "^18",
     "react-is": "^18",
-    "styled-components": "^5.2"
+    "styled-components": "beta || ^6"
   },
   "repository": {
     "type": "git",

@@ -12,17 +12,16 @@ export interface SpinnerProps {
 }
 
 const rotate = keyframes`
-  from {
+  0% {
     transform: rotate(0deg);
   }
-
-  to {
+  100% {
     transform: rotate(360deg);
   }
 `
 
 const Root = styled(Text)`
-  & > span > svg {
+  > span > svg {
     animation: ${rotate} 500ms linear infinite;
   }
 `

@@ -40,7 +40,9 @@ module.exports = withTranspileModules(
 
         react: require.resolve('react'),
         'react-dom': require.resolve('react-dom'),
-        'styled-components': require.resolve('styled-components'),
+        'styled-components': require.resolve(
+          'styled-components/dist/styled-components.browser.esm.js'
+        ),
       }
 
       return config

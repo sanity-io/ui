@@ -40,13 +40,13 @@
     "@sanity/ui": "^0.38.2",
     "@types/pako": "^2.0.0",
     "react": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "6.0.0-beta.3"
   },
   "peerDependencies": {
     "@sanity/icons": "^1.0",
     "@sanity/ui": "^0.38",
     "react": "^18",
-    "styled-components": "^5.2"
+    "styled-components": "beta || ^6"
   },
   "repository": {
     "type": "git",

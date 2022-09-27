@@ -37,7 +37,7 @@
     "react-codemirror2": "^7.2.1",
     "react-dom": "^18.2.0",
     "slugify": "^1.6.5",
-    "styled-components": "^5.3.6"
+    "styled-components": "6.0.0-beta.3"
   },
   "devDependencies": {
     "@types/codemirror": "^5.60.5",
