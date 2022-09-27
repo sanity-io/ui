@@ -2,6 +2,7 @@ import {ChevronDownIcon} from '@sanity/icons'
 import {
   cloneElement,
   forwardRef,
+  startTransition,
   useCallback,
   useEffect,
   useMemo,
@@ -233,13 +234,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     if (listFocused !== listFocusedRef.current) {
       listFocusedRef.current = listFocused
 
-      dispatch({type: 'root/setListFocused', listFocused})
+      startTransition(() => dispatch({type: 'root/setListFocused', listFocused}))
     }
   }, [])
 
   const handleOptionSelect = useCallback(
     (v: string) => {
-      dispatch({type: 'value/change', value: v})
+      startTransition(() => dispatch({type: 'value/change', value: v}))
 
       popoverMouseWithinRef.current = false
 
@@ -366,7 +367,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       valuePropRef.current = valueProp
 
       if (valueProp !== undefined) {
-        dispatch({type: 'value/change', value: valueProp})
+        startTransition(() => dispatch({type: 'value/change', value: valueProp}))
         valueRef.current = valueProp
       }
 
@@ -374,7 +375,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     }
 
     if (valueProp !== value) {
-      dispatch({type: 'value/change', value: valueProp || null})
+      startTransition(() => dispatch({type: 'value/change', value: valueProp || null}))
     }
   }, [valueProp, value])
 
