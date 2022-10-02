@@ -35,7 +35,7 @@
     "watch": "pkg watch --tsconfig tsconfig.dist.json"
   },
   "devDependencies": {
-    "@svgr/core": "^6.3.1",
+    "@svgr/core": "^6.4.0",
     "@types/mkdirp": "^1.0.2",
     "camelcase": "^6.3.0",
     "react": "^18.2.0"
