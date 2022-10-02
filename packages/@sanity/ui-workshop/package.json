@@ -40,7 +40,7 @@
     "@sanity/ui": "^0.38.2",
     "@types/pako": "^2.0.0",
     "react": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.6"
   },
   "peerDependencies": {
     "@sanity/icons": "^1.0",
