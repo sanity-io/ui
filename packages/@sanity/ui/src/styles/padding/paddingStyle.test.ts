@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {studioTheme, Theme} from '../../theme'
 import {responsivePaddingStyle} from './paddingStyle'
 

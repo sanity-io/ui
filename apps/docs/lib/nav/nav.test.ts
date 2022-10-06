@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {isArray, isRecord} from '../types'
 import {nav} from './__fixtures__/data'
 import {buildNavMenu, findNavNode, getNavItems, getNavPaths, getNavStaticPaths} from './nav'

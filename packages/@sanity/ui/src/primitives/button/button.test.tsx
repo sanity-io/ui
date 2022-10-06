@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {AddIcon} from '@sanity/icons'
 import {screen} from '@testing-library/react'
 import {axe} from 'jest-axe'

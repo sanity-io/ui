@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {axe} from 'jest-axe'
 import {render} from '../../../test'
 import {Badge} from './badge'

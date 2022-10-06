@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {decode, encode} from './zlib'
 
 describe('zlib', () => {

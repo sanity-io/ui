@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {render} from '../../../test'
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'
