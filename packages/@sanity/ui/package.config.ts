@@ -1,9 +1,4 @@
 import {defineConfig} from '@sanity/pkg-utils'
+import baseConfig from '../../../package.config'
 
-export default defineConfig({
-  extract: {
-    rules: {
-      'ae-internal-missing-underscore': 'off',
-    },
-  },
-})
+export default defineConfig({...baseConfig})

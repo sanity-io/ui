@@ -4,15 +4,15 @@
   "sideEffects": false,
   "types": "./dist/types/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/sanity-ui-workshop.mjs",
+  "module": "./dist/sanity-ui-workshop.esm.js",
   "main": "./dist/sanity-ui-workshop.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-ui-workshop.mjs",
+      "import": "./dist/sanity-ui-workshop.esm.js",
       "require": "./dist/sanity-ui-workshop.js",
-      "default": "./dist/sanity-ui-workshop.mjs"
+      "default": "./dist/sanity-ui-workshop.esm.js"
     }
   },
   "files": [

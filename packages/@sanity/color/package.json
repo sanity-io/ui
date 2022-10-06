@@ -5,15 +5,15 @@
   "sideEffects": false,
   "types": "./dist/types/src/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/sanity-color.mjs",
+  "module": "./dist/sanity-color.esm.js",
   "main": "./dist/sanity-color.js",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-color.mjs",
+      "import": "./dist/sanity-color.esm.js",
       "require": "./dist/sanity-color.js",
-      "default": "./dist/sanity-color.mjs"
+      "default": "./dist/sanity-color.esm.js"
     }
   },
   "files": [
