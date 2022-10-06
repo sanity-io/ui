@@ -13,22 +13,30 @@ exports.createJestConfig = (
   /** @type {import('@jest/types').Config.InitialOptions} */
   config = {}
 ) => {
-  return {
-    ...config,
-    moduleFileExtensions: [...(config.moduleFileExtensions || []), 'ts', 'tsx', 'js', 'jsx'],
-    modulePathIgnorePatterns: [...(config.modulePathIgnorePatterns || []), '<rootDir>/dist/'],
-    moduleNameMapper: {
-      ...config.moduleNameMapper,
-      '^@sanity/(.*)$': path.resolve(ROOT_PATH, 'packages/@sanity/$1/src'),
-    },
-    setupFilesAfterEnv: [
-      ...(config.setupFilesAfterEnv || []),
-      path.resolve(__dirname, 'globalReact.ts'),
-    ],
-    testEnvironment: config.testEnvironment || 'jsdom',
+  const {
+    moduleFileExtensions = [],
+    modulePathIgnorePatterns = [],
+    moduleNameMapper,
     // - match all files in `__tests__` directories
     // - match files ending with `.test.js`, `.test.ts`, `.test.jsx`, or `.test.tsx`
-    testRegex: config.testRegex || '(/__tests__/.*|\\.test)\\.[jt]sx?$',
-    transform: {'^.+\\.tsx?$': ['esbuild-jest', {sourcemap: true}]},
+    testRegex = '(/__tests__/.*|\\.test)\\.[jt]sx?$',
+  } = config
+
+  return {
+    ...config,
+    moduleFileExtensions: [...moduleFileExtensions, 'cjs', 'js', 'jsx', 'mjs', 'ts', 'tsx'],
+    modulePathIgnorePatterns: [...modulePathIgnorePatterns, '<rootDir>/dist/'],
+    moduleNameMapper: {
+      ...moduleNameMapper,
+      '^@sanity/(.*)$': path.resolve(ROOT_PATH, 'packages/@sanity/$1/src'),
+    },
+    testRegex,
+    transform: {
+      '\\.[jt]sx?$': [
+        'babel-jest',
+        // rootMode upwards makes use of the global babel.config.js
+        {rootMode: 'upward'},
+      ],
+    },
   }
 }
