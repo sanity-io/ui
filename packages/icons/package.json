@@ -5,15 +5,15 @@
   "sideEffects": false,
   "types": "./dist/types/src/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/sanity-icons.mjs",
+  "module": "./dist/sanity-icons.esm.js",
   "main": "./dist/sanity-icons.js",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-icons.mjs",
+      "import": "./dist/sanity-icons.esm.js",
       "require": "./dist/sanity-icons.js",
-      "default": "./dist/sanity-icons.mjs"
+      "default": "./dist/sanity-icons.esm.js"
     }
   },
   "files": [
