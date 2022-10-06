@@ -1,4 +1,6 @@
-import {createColorTheme} from '.'
+/** @jest-environment jsdom */
+
+import {createColorTheme} from './factory'
 
 describe('color', () => {
   describe('createColorTheme', () => {
