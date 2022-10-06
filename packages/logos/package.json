@@ -4,15 +4,15 @@
   "sideEffects": false,
   "types": "./dist/types/src/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/sanity-logos.mjs",
+  "module": "./dist/sanity-logos.esm.js",
   "main": "./dist/sanity-logos.js",
   "exports": {
     ".": {
       "types": "./dist/types/src/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/sanity-logos.mjs",
+      "import": "./dist/sanity-logos.esm.js",
       "require": "./dist/sanity-logos.js",
-      "default": "./dist/sanity-logos.mjs"
+      "default": "./dist/sanity-logos.esm.js"
     }
   },
   "files": [
