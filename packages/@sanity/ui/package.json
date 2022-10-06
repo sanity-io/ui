@@ -48,7 +48,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/refractor": "^3.0.2",
-    "framer-motion": "^7.5.1",
+    "framer-motion": "^7.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-refractor": "^2.1.7",
