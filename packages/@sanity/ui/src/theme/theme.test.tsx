@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {render} from '../../test'
 import {studioTheme} from './studioTheme'
 import {ThemeContext} from './themeContext'

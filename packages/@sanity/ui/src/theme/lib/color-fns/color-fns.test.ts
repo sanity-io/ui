@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import {hexToRgb, multiply, parseColor, rgba, screen} from '.'
 
 const hues = {

@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 /* eslint-disable no-console */
 
 import React, {useCallback, useMemo} from 'react'
