@@ -17,6 +17,7 @@ exports.createJestConfig = (
     moduleFileExtensions = [],
     modulePathIgnorePatterns = [],
     moduleNameMapper,
+    setupFilesAfterEnv = [],
     // - match all files in `__tests__` directories
     // - match files ending with `.test.js`, `.test.ts`, `.test.jsx`, or `.test.tsx`
     testRegex = '(/__tests__/.*|\\.test)\\.[jt]sx?$',
@@ -30,6 +31,7 @@ exports.createJestConfig = (
       ...moduleNameMapper,
       '^@sanity/(.*)$': path.resolve(ROOT_PATH, 'packages/@sanity/$1/src'),
     },
+    setupFilesAfterEnv: [...setupFilesAfterEnv, path.resolve(__dirname, 'setupFilesAfterEnv.ts')],
     testRegex,
     transform: {
       '\\.[jt]sx?$': [
