@@ -80,8 +80,8 @@ export default function AsyncStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Stack space={3}>
-        <Text as="label" htmlFor="async" size={1} weight="semibold">
+      <Stack space={[3, 3, 4]}>
+        <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="semibold">
           Country
         </Text>
         <LayerProvider zOffset={100}>
@@ -104,7 +104,9 @@ export default function AsyncStory() {
         </LayerProvider>
 
         <Card border overflow="auto" padding={3} radius={1}>
-          <Code language="json">{JSON.stringify({loading, options, query, value}, null, 2)}</Code>
+          <Code language="json" size={[1, 1, 2]}>
+            {JSON.stringify({loading, options, query, value}, null, 2)}
+          </Code>
         </Card>
       </Stack>
     </Box>
