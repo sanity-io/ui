@@ -39,6 +39,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   content?: React.ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]
+  padding?: number | number[]
   placement?: Placement
   portal?: boolean | string
   scheme?: ThemeColorSchemeKey
@@ -64,6 +65,7 @@ export const Tooltip = forwardRef(function Tooltip(
     content,
     disabled,
     fallbackPlacements: fallbackPlacementsProp,
+    padding,
     placement: placementProp = 'bottom',
     portal,
     scheme,
@@ -239,6 +241,7 @@ export const Tooltip = forwardRef(function Tooltip(
       <Card
         data-ui="Tooltip__card"
         data-placement={placement}
+        padding={padding}
         radius={2}
         scheme={scheme}
         shadow={shadow}
