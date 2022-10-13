@@ -21,6 +21,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "postinstall": "yarn husky install",
     "release:dryrun": "yarn build && ./scripts/publish/dryrun",
+    "release:1.x": "yarn build && lerna publish --force-publish --dist-tag=beta --preid=beta --exact",
     "release:latest": "yarn build && lerna publish --dist-tag latest",
     "release:next": "yarn build && lerna publish --canary --force-publish --no-git-tag-version --dist-tag=next --preid=next --exact",
     "start:workshop": "lerna run --scope sanity-ui-workshop start",
