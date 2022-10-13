@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.3.1",
-    "next-transpile-modules": "^9.0.0"
+    "next-transpile-modules": "^9.1.0"
   }
 }

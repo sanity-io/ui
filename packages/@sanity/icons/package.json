@@ -22,8 +22,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "pkg build --tsconfig tsconfig.dist.json",
-    "check:package": "pkg --strict --tsconfig tsconfig.dist.json",
+    "build": "pkg build",
+    "check:package": "pkg --strict",
     "clean": "rimraf dist",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
@@ -32,7 +32,7 @@
     "pregenerate": "rimraf src/icons",
     "test": "jest",
     "type-check": "tsc --build",
-    "watch": "pkg watch --tsconfig tsconfig.dist.json"
+    "watch": "pkg watch"
   },
   "devDependencies": {
     "@svgr/core": "^6.4.0",

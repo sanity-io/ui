@@ -30,7 +30,7 @@
     "is-hotkey": "^0.2.0",
     "lodash-es": "^4.17.21",
     "next": "^12.3.1",
-    "next-sanity": "^0.8.4",
+    "next-sanity": "^0.8.5",
     "pako": "^2.0.4",
     "qs": "^6.11.0",
     "react": "^18.2.0",
@@ -46,6 +46,6 @@
     "@types/pako": "^2.0.0",
     "@types/qs": "^6.9.7",
     "chokidar": "^3.5.3",
-    "next-transpile-modules": "^9.0.0"
+    "next-transpile-modules": "^9.1.0"
   }
 }
