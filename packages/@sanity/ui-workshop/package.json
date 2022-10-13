@@ -44,7 +44,7 @@
   },
   "peerDependencies": {
     "@sanity/icons": "^1.0",
-    "@sanity/ui": "^0.38",
+    "@sanity/ui": "1.0.0-beta.28",
     "react": "^18",
     "styled-components": "^5.2"
   },

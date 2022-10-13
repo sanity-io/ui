@@ -2903,6 +2903,11 @@
     object-assign "^4.1.1"
     rxjs "^6.0.0"
 
+"@sanity/color@^2.1.14":
+  version "2.1.16"
+  resolved "https://registry.yarnpkg.com/@sanity/color/-/color-2.1.16.tgz#4d4b36874279e1801c89827c6eb3332c960a729f"
+  integrity sha512-R5Wh4qt+Jv20nvwSwE5xA+eS3kF2diPA6noAPQZSUsSG9UIUGGgxJyU0hWUa9O06RTCNqgBQI1YJiZTeJ6S7SA==
+
 "@sanity/eventsource@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@sanity/eventsource/-/eventsource-4.0.0.tgz#ec9c352e87a2f79db8d25eedbb009ced21ec2e97"
