@@ -21,8 +21,8 @@
     "src"
   ],
   "scripts": {
-    "build": "pkg build --tsconfig tsconfig.dist.json",
-    "check:package": "pkg --strict --tsconfig tsconfig.dist.json",
+    "build": "pkg build",
+    "check:package": "pkg --strict",
     "clean": "rimraf dist",
     "generate": "node -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .js,.ts --quiet",
@@ -30,7 +30,7 @@
     "prebuild": "run-s clean generate",
     "test": "jest",
     "type-check": "tsc --build",
-    "watch": "pkg watch --tsconfig tsconfig.dist.json"
+    "watch": "pkg watch"
   },
   "devDependencies": {
     "polished": "^4.2.2"
