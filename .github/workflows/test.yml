@@ -2,10 +2,10 @@ name: Tests
 on:
   # Build on pushes to release branches
   push:
-    branches: [next]
+    branches: [1.x, next]
   # Build on pull requests targeting release branches
   pull_request:
-    branches: [next]
+    branches: [1.x, next]
 
 jobs:
   test:
