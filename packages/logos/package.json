@@ -21,15 +21,15 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "pkg build --tsconfig tsconfig.dist.json",
-    "check:package": "pkg --strict --tsconfig tsconfig.dist.json",
+    "build": "pkg build",
+    "check:package": "pkg --strict",
     "clean": "rimraf dist",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "postbuild": "run-s check:package",
     "prebuild": "run-s clean",
     "test": "jest",
     "type-check": "tsc --build",
-    "watch": "pkg watch --tsconfig tsconfig.dist.json"
+    "watch": "pkg watch"
   },
   "devDependencies": {
     "@sanity/color": "^2.1.16",
