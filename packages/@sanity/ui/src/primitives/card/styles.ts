@@ -48,10 +48,12 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): FlattenSimple
 export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpleInterpolation {
   const {$checkered, $focusRing, theme} = props
   const {focusRing} = theme.sanity
-  const {base, card} = theme.sanity.color
+  const {base, card, dark} = theme.sanity.color
   const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
+    color-scheme: ${dark ? 'dark' : 'light'};
+
     ${_colorVarsStyle(base, card.enabled, $checkered)}
 
     background-color: var(--card-bg-color);
