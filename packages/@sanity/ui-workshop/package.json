@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "sideEffects": false,
   "types": "./dist/types/index.d.ts",
   "source": "./src/index.ts",
@@ -36,8 +36,8 @@
     "segmented-property": "^3.0.3"
   },
   "devDependencies": {
-    "@sanity/icons": "1.3.9-beta.0",
-    "@sanity/ui": "1.0.0-beta.29",
+    "@sanity/icons": "1.3.9-beta.1",
+    "@sanity/ui": "1.0.0-beta.30",
     "@types/pako": "^2.0.0",
     "react": "^18.2.0",
     "styled-components": "^5.3.6"
