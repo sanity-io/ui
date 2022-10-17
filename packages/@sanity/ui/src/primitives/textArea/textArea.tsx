@@ -89,10 +89,10 @@ export const TextArea = forwardRef(function TextArea(
           ref={ref}
         />
         <Presentation
-          $border={border}
           $radius={useArrayProp(radius)}
           $scheme={rootTheme.scheme}
           $tone={rootTheme.tone}
+          data-border={border ? '' : undefined}
           data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
         />

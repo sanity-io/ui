@@ -19,7 +19,6 @@ export interface TextInputInputStyleProps {
  * @internal
  */
 export interface TextInputRepresentationStyleProps {
-  $border?: boolean
   $hasPrefix?: boolean
   $hasSuffix?: boolean
   $scheme: ThemeColorSchemeKey
@@ -129,7 +128,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps
 ): FlattenSimpleInterpolation {
-  const {$border, $hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
+  const {$hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
   const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.input
 
@@ -158,41 +157,51 @@ export function textInputRepresentationStyle(
       --card-fg-color: ${color.default.enabled.fg};
 
       /* enabled */
-      *:not(:disabled) + & {
-        --input-box-shadow: ${$border
-          ? focusRingBorderStyle({color: color.default.enabled.border, width: input.border.width})
-          : undefined};
+      *:not(:disabled) + &[data-border] {
+        --input-box-shadow: ${focusRingBorderStyle({
+          color: color.default.enabled.border,
+          width: input.border.width,
+        })};
       }
 
       /* invalid */
       *:not(:disabled):invalid + & {
         --card-bg-color: ${color.invalid.enabled.bg};
         --card-fg-color: ${color.invalid.enabled.fg};
-        --input-box-shadow: ${$border
-          ? focusRingBorderStyle({color: color.invalid.enabled.border, width: input.border.width})
-          : 'none'};
+
+        &[data-border] {
+          --input-box-shadow: ${focusRingBorderStyle({
+            color: color.invalid.enabled.border,
+            width: input.border.width,
+          })};
+        }
       }
 
       /* focused */
       *:not(:disabled):focus + & {
-        --input-box-shadow: ${focusRingStyle({
-          border: $border
-            ? {color: color.default.enabled.border, width: input.border.width}
-            : undefined,
-          focusRing,
-        })};
+        &[data-border] {
+          --input-box-shadow: ${focusRingStyle({
+            border: {color: color.default.enabled.border, width: input.border.width},
+            focusRing,
+          })};
+        }
+
+        &:not([data-border]) {
+          --input-box-shadow: ${focusRingStyle({focusRing})};
+        }
       }
 
       /* disabled */
       *:disabled + & {
         --card-bg-color: ${color.default.disabled.bg} !important;
         --card-fg-color: ${color.default.disabled.fg} !important;
-        --input-box-shadow: ${$border
-          ? focusRingBorderStyle({
-              color: color.default.disabled.border,
-              width: input.border.width,
-            })
-          : 'none'};
+
+        &[data-border] {
+          --input-box-shadow: ${focusRingBorderStyle({
+            color: color.default.disabled.border,
+            width: input.border.width,
+          })};
+        }
       }
 
       /* readOnly */
@@ -208,13 +217,11 @@ export function textInputRepresentationStyle(
           --card-fg-color: ${color.default.hovered.fg};
         }
 
-        *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + & {
-          --input-box-shadow: ${$border
-            ? focusRingBorderStyle({
-                color: color.default.hovered.border,
-                width: input.border.width,
-              })
-            : 'none'};
+        *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + &[data-border] {
+          --input-box-shadow: ${focusRingBorderStyle({
+            color: color.default.hovered.border,
+            width: input.border.width,
+          })};
         }
       }
     }

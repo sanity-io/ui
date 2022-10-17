@@ -211,12 +211,12 @@ export const TextInput = forwardRef(function TextInput(
   const presentationNode = useMemo(
     () => (
       <Presentation
-        $border={border}
         $hasPrefix={$hasPrefix}
         $hasSuffix={$hasSuffix}
         $radius={radius}
         $scheme={rootTheme.scheme}
         $tone={rootTheme.tone}
+        data-border={border ? '' : undefined}
         data-scheme={rootTheme.scheme}
         data-tone={rootTheme.tone}
       >
