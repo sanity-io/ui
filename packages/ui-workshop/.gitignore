@@ -1,0 +1,11 @@
+# Root level ignores
+/*.log
+/.vscode
+/package-lock.json
+/yarn.lock
+
+# Global ignores
+.DS_Store
+dist
+etc
+node_modules
