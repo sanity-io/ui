@@ -1,4 +1,4 @@
-import {WorkshopScope} from '../types'
+import {WorkshopScope} from '../config'
 
 /** @internal */
 export interface MenuList {

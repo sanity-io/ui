@@ -1,9 +1,17 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./src"],
+  "include": ["./package.json", "./scripts", "./src", "./typings", "./workshop.config.ts"],
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    "paths": {
+      "@sanity/ui-workshop": ["./src/core"],
+      "@sanity/ui-workshop/plugin-a11y": ["./src//plugin-a11y"],
+      "@sanity/ui-workshop/plugin-perf": ["./src/plugin-perf"]
+    },
+
+    "resolveJsonModule": true
   }
 }

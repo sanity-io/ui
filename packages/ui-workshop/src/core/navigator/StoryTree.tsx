@@ -1,6 +1,6 @@
 import {Tree, TreeItem} from '@sanity/ui'
 import {memo, useCallback, useMemo} from 'react'
-import {WorkshopStory} from '../types'
+import {WorkshopStory} from '../config'
 import {useWorkshop} from '../useWorkshop'
 import {MenuList, MenuScope} from './types'
 

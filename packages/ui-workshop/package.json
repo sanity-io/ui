@@ -2,29 +2,58 @@
   "name": "@sanity/ui-workshop",
   "version": "1.0.0-beta.3",
   "sideEffects": false,
-  "types": "./dist/index.d.ts",
-  "source": "./src/index.ts",
+  "bin": {
+    "workshop": "./bin/workshop"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "src"
+  ],
+  "types": "./dist/sanity-ui-workshop.d.ts",
+  "source": "./src/core/index.ts",
   "module": "./dist/sanity-ui-workshop.esm.js",
   "main": "./dist/sanity-ui-workshop.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "source": "./src/index.ts",
+      "types": "./dist/sanity-ui-workshop.d.ts",
+      "source": "./src/core/index.ts",
       "import": "./dist/sanity-ui-workshop.esm.js",
       "require": "./dist/sanity-ui-workshop.js",
       "default": "./dist/sanity-ui-workshop.esm.js"
+    },
+    "./plugin-a11y": {
+      "types": "./dist/sanity-ui-workshop-plugin-a11y.d.ts",
+      "source": "./src/plugin-a11y/index.ts",
+      "import": "./dist/sanity-ui-workshop-plugin-a11y.esm.js",
+      "require": "./dist/sanity-ui-workshop-plugin-a11y.js",
+      "default": "./dist/sanity-ui-workshop-plugin-a11y.esm.js"
+    },
+    "./plugin-perf": {
+      "types": "./dist/sanity-ui-workshop-plugin-perf.d.ts",
+      "source": "./src/plugin-perf/index.ts",
+      "import": "./dist/sanity-ui-workshop-plugin-perf.esm.js",
+      "require": "./dist/sanity-ui-workshop-plugin-perf.js",
+      "default": "./dist/sanity-ui-workshop-plugin-perf.esm.js"
     }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "typesVersions": {
+    "*": {
+      "plugin-a11y": [
+        "./dist/sanity-ui-workshop-plugin-a11y.d.ts"
+      ],
+      "plugin-perf": [
+        "./dist/sanity-ui-workshop-plugin-perf.d.ts"
+      ]
+    }
+  },
   "license": "MIT",
   "scripts": {
     "build": "pkg build",
     "check:package": "pkg --strict",
     "clean": "rimraf dist",
     "commit": "cz",
+    "dev": "run-p workshop:dev",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
     "postbuild": "run-s check:package",
@@ -33,13 +62,26 @@
     "prepublishOnly": "pnpm run build",
     "release": "semantic-release",
     "test": "jest",
-    "watch": "pkg watch"
+    "watch": "pkg watch",
+    "workshop:build": "rimraf .workshop && node -r dotenv-flow/config -r esbuild-register scripts/build",
+    "workshop:dev": "node -r dotenv-flow/config -r esbuild-register scripts/dev",
+    "workshop:start": "serve -p 1337 -s .workshop/dist"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^2.1.0",
     "axe-core": "^4.4.3",
+    "cac": "^6.7.14",
+    "chokidar": "^3.5.3",
+    "dotenv-flow": "^3.2.0",
+    "esbuild": "^0.15.12",
+    "esbuild-register": "^3.3.3",
+    "express": "^4.18.2",
+    "globby": "^11.1.0",
     "lodash": "^4.17.21",
+    "mkdirp": "^1.0.4",
     "pako": "^2.0.4",
-    "segmented-property": "^3.0.3"
+    "segmented-property": "^3.0.3",
+    "vite": "^3.1.8"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -54,9 +96,11 @@
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@types/express": "^4.17.14",
     "@types/jest": "^29.1.2",
     "@types/jest-axe": "^3.5.5",
     "@types/lodash": "^4.14.186",
+    "@types/mkdirp": "^1.0.2",
     "@types/node": "^18.11.2",
     "@types/pako": "^2.0.0",
     "@types/react": "^18.0.21",
@@ -78,12 +122,14 @@
     "jest": "^29.2.1",
     "jest-axe": "^6.0.0",
     "jest-environment-jsdom": "^29.1.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "rimraf": "^3.0.2",
     "semantic-release": "^19.0.5",
+    "serve": "^14.0.1",
     "styled-components": "^5.3.6",
     "typescript": "^4.8.4"
   },
@@ -91,6 +137,7 @@
     "@sanity/icons": "^1.0",
     "@sanity/ui": "beta",
     "react": "^18",
+    "react-dom": "^18",
     "styled-components": "^5.2"
   },
   "repository": {
