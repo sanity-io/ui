@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.settings",
+  "include": ["./src"],
+  "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
+  "compilerOptions": {
+    "composite": true,
+    "sourceMap": true,
+    "rootDir": ".",
+    "outDir": "./dist",
+    "jsx": "react-jsx"
+  }
+}
