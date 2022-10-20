@@ -1,5 +1,5 @@
 import {SelectIcon} from '@sanity/icons'
-import {Button, Menu, MenuButton, MenuItem} from '@sanity/ui'
+import {Button, Menu, MenuButton, MenuButtonProps, MenuItem} from '@sanity/ui'
 import {memo, useCallback} from 'react'
 import {ZOOM_OPTIONS} from '../constants'
 import {useWorkshop} from '../useWorkshop'
@@ -14,6 +14,13 @@ export function ZoomMenu(): React.ReactElement {
   )
 
   return <ZoomMenuView disabled={!story} setZoom={setZoom} zoom={zoom} />
+}
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  constrainSize: true,
+  matchReferenceWidth: true,
+  placement: 'bottom',
+  portal: true,
 }
 
 const ZoomMenuView = memo(function ZoomMenuView(props: {
@@ -51,8 +58,7 @@ const ZoomMenuView = memo(function ZoomMenuView(props: {
           ))}
         </Menu>
       }
-      popover={{matchReferenceWidth: true}}
-      portal
+      popover={POPOVER_PROPS}
     />
   )
 })

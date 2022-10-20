@@ -1,6 +1,7 @@
 # Root level ignores
 /*.log
 /.vscode
+/.workshop
 /package-lock.json
 /yarn.lock
 

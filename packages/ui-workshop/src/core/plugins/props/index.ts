@@ -1,6 +1,6 @@
 export type {PropsContextValue} from './PropsContext'
 
-import {WorkshopPlugin} from '../../types'
+import {WorkshopPlugin} from '../../config'
 import {PropsInspector} from './PropsInspector'
 import {PropsProvider} from './PropsProvider'
 

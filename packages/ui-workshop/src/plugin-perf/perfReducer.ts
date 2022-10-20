@@ -1,4 +1,4 @@
-import {WorkshopMsg} from '../../types'
+import {WorkshopMsg} from '@sanity/ui-workshop'
 import {PerfMsg} from './msg'
 import {PerfState} from './types'
 

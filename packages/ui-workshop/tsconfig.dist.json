@@ -1,12 +1,13 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./src"],
+  "include": ["./package.json", "./src", "./typings"],
   "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
   "compilerOptions": {
     "composite": true,
     "sourceMap": true,
     "rootDir": ".",
     "outDir": "./dist",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "resolveJsonModule": true
   }
 }
