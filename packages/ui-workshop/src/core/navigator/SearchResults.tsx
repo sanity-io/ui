@@ -1,6 +1,6 @@
 import {Card, Stack, Text} from '@sanity/ui'
 import {memo} from 'react'
-import {WorkshopScope, WorkshopStory} from '../types'
+import {WorkshopScope, WorkshopStory} from '../config'
 
 /** @internal */
 export const SearchResults = memo(function SearchResults(props: {

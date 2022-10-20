@@ -11,7 +11,7 @@ npm install @sanity/ui-workshop
 ## Basic usage
 
 ```sh
-workshop dev --port 8080
+workshop dev
 ```
 
 ## License
