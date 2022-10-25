@@ -1,11 +1,12 @@
 import {forwardRef} from 'react'
 import styled from 'styled-components'
+import {DEFAULT_POPOVER_ARROW_HEIGHT, DEFAULT_POPOVER_ARROW_WIDTH} from './constants'
 
 const Root = styled.div`
   position: absolute;
   pointer-events: none;
-  width: 27px;
-  height: 27px;
+  width: ${DEFAULT_POPOVER_ARROW_WIDTH}px;
+  height: ${DEFAULT_POPOVER_ARROW_WIDTH}px;
   fill: none;
 
   :empty + & {
@@ -14,15 +15,15 @@ const Root = styled.div`
 
   & > svg {
     display: block;
-    transform-origin: 13.5px 13.5px;
+    transform-origin: ${DEFAULT_POPOVER_ARROW_WIDTH / 2}px ${DEFAULT_POPOVER_ARROW_WIDTH / 2}px;
   }
 
   [data-placement^='top'] > & {
-    bottom: -27px;
+    bottom: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
   }
 
   [data-placement^='right'] > & {
-    left: -27px;
+    left: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
 
     & > svg {
       transform: rotate(90deg);
@@ -30,7 +31,7 @@ const Root = styled.div`
   }
 
   [data-placement^='left'] > & {
-    right: -27px;
+    right: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
 
     & > svg {
       transform: rotate(-90deg);
@@ -38,7 +39,7 @@ const Root = styled.div`
   }
 
   [data-placement^='bottom'] > & {
-    top: -27px;
+    top: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
 
     & > svg {
       transform: rotate(180deg);
@@ -61,8 +62,8 @@ export const PopoverArrow = forwardRef(function PopoverArrow(
   return (
     <Root data-ui="Popover__arrow" {...props} ref={ref}>
       <svg
-        width="27"
-        height="11"
+        width={DEFAULT_POPOVER_ARROW_WIDTH}
+        height={DEFAULT_POPOVER_ARROW_HEIGHT}
         viewBox="0 0 27 11"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
