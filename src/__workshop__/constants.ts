@@ -8,6 +8,7 @@ import {
   ButtonTone,
   CardTone,
   DialogPosition,
+  FlexAlign,
   FlexJustify,
   Placement,
   TextAlign,
@@ -105,14 +106,22 @@ export const WORKSHOP_FLEX_DIRECTION_OPTIONS: {[key: string]: 'row' | 'column'} 
   Column: 'column',
 }
 
-export const WORKSHOP_FLEX_JUSTIFY_OPTIONS: FlexJustify[] = [
-  'flex-start',
-  'flex-end',
-  'center',
-  'space-between',
-  'space-around',
-  'space-evenly',
-]
+export const WORKSHOP_FLEX_ALIGN_OPTIONS: Record<FlexAlign, FlexAlign> = {
+  baseline: 'baseline',
+  center: 'center',
+  'flex-end': 'flex-end',
+  'flex-start': 'flex-start',
+  stretch: 'stretch',
+}
+
+export const WORKSHOP_FLEX_JUSTIFY_OPTIONS: Record<FlexJustify, FlexJustify> = {
+  center: 'center',
+  'flex-end': 'flex-end',
+  'flex-start': 'flex-start',
+  'space-around': 'space-around',
+  'space-between': 'space-between',
+  'space-evenly': 'space-evenly',
+}
 
 export const WORKSHOP_FONT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey} = {
   Regular: 'regular',
@@ -148,19 +157,19 @@ export const WORKSHOP_LABEL_FONT_SIZE_OPTIONS = {
   '4': 4,
 }
 
-export const WORKSHOP_PLACEMENT_OPTIONS: {[key: string]: Placement} = {
-  Top: 'top',
-  'Top start': 'top-start',
-  'Top end': 'top-end',
-  Right: 'right',
-  'Right start': 'right-start',
-  'Right end': 'right-end',
-  Left: 'left',
-  'Left start': 'left-start',
-  'Left end': 'left-end',
-  Bottom: 'bottom',
-  'Bottom start': 'bottom-start',
-  'Bottom end': 'bottom-end',
+export const WORKSHOP_PLACEMENT_OPTIONS: Record<Placement, Placement> = {
+  top: 'top',
+  'top-start': 'top-start',
+  'top-end': 'top-end',
+  right: 'right',
+  'right-start': 'right-start',
+  'right-end': 'right-end',
+  left: 'left',
+  'left-start': 'left-start',
+  'left-end': 'left-end',
+  bottom: 'bottom',
+  'bottom-start': 'bottom-start',
+  'bottom-end': 'bottom-end',
 }
 
 export const WORKSHOP_RADIUS_OPTIONS = {
@@ -278,11 +287,11 @@ export const WORKSHOP_TOAST_STATUS_OPTIONS: {
 }
 
 export const WORKSHOP_WIDTH_OPTIONS: {[key: string]: number | 'auto'} = {
+  Auto: 'auto',
   '0': 0,
   '1': 1,
   '2': 2,
   '3': 3,
   '4': 4,
   '5': 5,
-  Auto: 'auto',
 }

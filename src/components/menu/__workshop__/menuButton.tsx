@@ -7,15 +7,25 @@ import {
   LayerProvider,
   Menu,
   MenuButton,
+  MenuButtonProps,
   MenuDivider,
   MenuItem,
 } from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
+import {useMemo} from 'react'
 import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
 
 export default function MenuButtonStory() {
   const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Props')
   const portal = useBoolean('Portal', false, 'Props')
+
+  const popover: MenuButtonProps['popover'] = useMemo(
+    () => ({
+      constrainSize: true,
+      portal,
+    }),
+    [portal]
+  )
 
   return (
     <Card height="fill" tone={layoutTone}>
@@ -56,7 +66,7 @@ export default function MenuButtonStory() {
                   />
                 </Menu>
               }
-              popover={{constrainSize: true, portal}}
+              popover={popover}
             />
           </LayerProvider>
           <Button mode="ghost" id="next-button" text="Next" />

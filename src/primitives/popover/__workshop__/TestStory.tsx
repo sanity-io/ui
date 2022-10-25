@@ -15,6 +15,7 @@ export default function TestStory(): ReactElement {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const arrow = useBoolean('Arrow', true)
+  const constrainSize = useBoolean('Constrain size', true)
   const matchReferenceWidth = useBoolean('Match reference width', false)
   const open = useBoolean('Open', true)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
@@ -58,6 +59,7 @@ export default function TestStory(): ReactElement {
               <Popover
                 arrow={arrow}
                 content={<Text size={1}>{text}</Text>}
+                constrainSize={constrainSize}
                 fallbackPlacements={['left', 'bottom', 'right', 'top']}
                 matchReferenceWidth={matchReferenceWidth}
                 open={open}

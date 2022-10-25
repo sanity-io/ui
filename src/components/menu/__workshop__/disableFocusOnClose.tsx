@@ -1,6 +1,11 @@
 import {SelectIcon} from '@sanity/icons'
-import {Button, Flex, Menu, MenuButton, MenuItem} from '@sanity/ui'
+import {Button, Flex, Menu, MenuButton, MenuButtonProps, MenuItem} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  constrainSize: true,
+  matchReferenceWidth: true,
+}
 
 export default function DisableFocusOnCloseStory() {
   const disableRestoreFocusOnClose = useBoolean('Disable restore focus on close', false)
@@ -28,7 +33,7 @@ export default function DisableFocusOnCloseStory() {
             <MenuItem text="Test 3" />
           </Menu>
         }
-        popover={{constrainSize: true, matchReferenceWidth: true}}
+        popover={POPOVER_PROPS}
       />
     </Flex>
   )

@@ -1,6 +1,10 @@
 import {AddIcon} from '@sanity/icons'
-import {Box, Button, Menu, MenuButton, MenuItem, Stack} from '@sanity/ui'
+import {Box, Button, Menu, MenuButton, MenuButtonProps, MenuItem, Stack} from '@sanity/ui'
 import {useRef} from 'react'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  constrainSize: true,
+}
 
 export default function ClosableMenuButtonStory() {
   const ref = useRef<HTMLButtonElement | null>(null)
@@ -33,7 +37,7 @@ export default function ClosableMenuButtonStory() {
               </Stack>
             </Menu>
           }
-          popover={{constrainSize: true}}
+          popover={POPOVER_PROPS}
           ref={ref}
         />
       </Stack>
