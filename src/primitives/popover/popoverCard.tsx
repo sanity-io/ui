@@ -2,18 +2,38 @@ import {Strategy} from '@floating-ui/react-dom'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import styled, {CSSObject} from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
+import {ThemeProps} from '../../styles'
 import {ThemeColorSchemeKey} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {useLayer} from '../../utils'
-import {Box} from '../box'
 import {Card} from '../card'
+import {Container} from '../container'
+import {
+  DEFAULT_POPOVER_ARROW_WIDTH,
+  DEFAULT_POPOVER_MARGINS,
+  DEFAULT_POPOVER_PADDING,
+} from './constants'
 import {PopoverArrow} from './popoverArrow'
 
-function popoverCardStyle(props: {$boundaryWidth?: number}): CSSObject {
+function popoverCardStyle(props: {$boundaryWidth?: number} & ThemeProps): CSSObject {
   const {$boundaryWidth} = props
 
   return {
-    maxWidth: $boundaryWidth ? `${$boundaryWidth - 16}px` : 'calc(100% - 16px)',
+    '&:not([hidden])': {
+      display: 'flex',
+    },
+
+    flexDirection: 'column',
+
+    width: 'max-content',
+    minWidth: 'min-content',
+    maxWidth:
+      typeof $boundaryWidth === 'number'
+        ? `${$boundaryWidth - DEFAULT_POPOVER_PADDING * 2}px`
+        : undefined,
+
+    height: 'max-content',
+    minHeight: 'min-content',
   }
 }
 
@@ -25,9 +45,7 @@ const Root = memo(styled(Card)(popoverCardStyle))
 export const PopoverCard = memo(
   forwardRef(function PopoverCard(
     props: {
-      /**
-       * @beta
-       */
+      /** @beta*/
       __unstable_margins?: PopoverMargins
       arrow: boolean
       arrowRef: React.Ref<HTMLDivElement>
@@ -69,8 +87,9 @@ export const PopoverCard = memo(
       scheme,
       shadow,
       strategy,
+      style,
       tone,
-      width,
+      width = 'auto',
       x: xProp,
       y: yProp,
       ...restProps
@@ -78,19 +97,19 @@ export const PopoverCard = memo(
 
     const {zIndex} = useLayer()
 
-    // top right bottom left
-    const margins: PopoverMargins = useMemo(() => marginsProp || [0, 0, 0, 0], [marginsProp])
+    // Get margins: [top, right, bottom, left]
+    const margins: PopoverMargins = useMemo(
+      () => marginsProp || DEFAULT_POPOVER_MARGINS,
+      [marginsProp]
+    )
 
-    // translate according to margins
+    // Translate according to margins
     const referenceWidth = referenceWidthProp
       ? referenceWidthProp - margins[1] - margins[3]
       : undefined
+
     const x = (xProp ?? 0) + margins[3]
     const y = (yProp ?? 0) + margins[0]
-
-    const maxWidth = availableWidth
-      ? Math.min(availableWidth - 8, referenceWidth || Infinity)
-      : undefined
 
     const rootStyle: CSSProperties = useMemo(
       () => ({
@@ -99,17 +118,11 @@ export const PopoverCard = memo(
         left: x,
         zIndex,
         width: referenceWidth,
-        maxWidth: referenceWidth ? undefined : maxWidth,
+        maxWidth: availableWidth,
+        maxHeight: availableHeight,
+        ...style,
       }),
-      [referenceWidth, maxWidth, strategy, x, y, zIndex]
-    )
-
-    const wrapperStyle: CSSProperties = useMemo(
-      () => ({
-        minHeight: 25,
-        maxHeight: availableHeight ? availableHeight - 8 : undefined,
-      }),
-      [availableHeight]
+      [availableHeight, availableWidth, referenceWidth, strategy, style, x, y, zIndex]
     )
 
     const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
@@ -122,7 +135,7 @@ export const PopoverCard = memo(
         bottom: undefined,
       }
 
-      if (staticSide) style[staticSide] = -27
+      if (staticSide) style[staticSide] = 0 - DEFAULT_POPOVER_ARROW_WIDTH
 
       return style
     }, [arrowX, arrowY, staticSide])
@@ -139,17 +152,17 @@ export const PopoverCard = memo(
         shadow={shadow}
         style={rootStyle}
         tone={tone}
-        $width={width}
       >
-        <Box
+        <Container
           data-ui="Popover__wrapper"
+          flex={1}
           overflow={overflow}
           padding={padding}
           sizing="border"
-          style={wrapperStyle}
+          width={width}
         >
           {children}
-        </Box>
+        </Container>
 
         {arrow && <PopoverArrow ref={arrowRef} style={arrowStyle} />}
       </Root>

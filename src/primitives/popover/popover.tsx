@@ -1,14 +1,13 @@
 import {
   Middleware,
+  RootBoundary,
   arrow,
   autoUpdate,
   flip,
+  hide,
   offset,
   shift,
   useFloating,
-  size as sizeMiddleware,
-  RootBoundary,
-  hide,
 } from '@floating-ui/react-dom'
 import {
   cloneElement,
@@ -25,6 +24,8 @@ import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
 import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
+import {DEFAULT_POPOVER_DISTANCE, DEFAULT_POPOVER_PADDING} from './constants'
+import {size} from './floating-ui/size'
 import {PopoverCard} from './popoverCard'
 
 /**
@@ -64,29 +65,6 @@ export interface PopoverProps
   tone?: CardTone
 }
 
-function size(scope: {
-  boundaryElement: HTMLElement | null
-  constrainSize: boolean
-  matchReferenceWidth: boolean | undefined
-  setAvailableWidth: (v: number) => void
-  setAvailableHeight: (v: number) => void
-  setReferenceWidth: (v: number) => void
-}) {
-  return sizeMiddleware({
-    apply(args) {
-      if (scope.constrainSize) {
-        scope.setAvailableWidth(args.availableWidth)
-        scope.setAvailableHeight(args.availableHeight)
-      }
-
-      if (scope.matchReferenceWidth) {
-        scope.setReferenceWidth(args.rects.reference.width)
-      }
-    },
-    boundary: scope.boundaryElement || undefined,
-  })
-}
-
 /** @public */
 export const Popover = memo(
   forwardRef(function Popover(
@@ -109,7 +87,7 @@ export const Popover = memo(
       fallbackPlacements,
       matchReferenceWidth: matchReferenceWidthProp,
       open,
-      overflow = props.constrainSize ? 'auto' : undefined,
+      overflow = props.constrainSize ? 'auto' : 'hidden',
       padding: paddingProp,
       placement: placementProp = 'bottom',
       portal,
@@ -121,7 +99,7 @@ export const Popover = memo(
       tether,
       tetherOffset,
       tone = 'inherit',
-      width: widthProp = undefined,
+      width: widthProp = 'auto',
       zOffset: zOffsetProp = theme.sanity.layer?.popover.zOffset,
       ...restProps
     } = props
@@ -147,26 +125,33 @@ export const Popover = memo(
           flip({
             boundary: boundaryElement || undefined,
             fallbackPlacements,
-            padding: 8,
+            padding: DEFAULT_POPOVER_PADDING,
             rootBoundary,
           })
         )
       }
 
       // Track sizes
-      ret.push(
-        size({
-          boundaryElement,
-          constrainSize,
-          matchReferenceWidth: matchReferenceWidthProp,
-          setAvailableHeight,
-          setAvailableWidth,
-          setReferenceWidth,
-        })
-      )
+      if (constrainSize || matchReferenceWidthProp) {
+        ret.push(
+          size({
+            boundaryElement,
+            constrainSize,
+            matchReferenceWidth: matchReferenceWidthProp,
+            padding: DEFAULT_POPOVER_PADDING,
+            setAvailableHeight,
+            setAvailableWidth,
+            setReferenceWidth,
+          })
+        )
+      }
 
       // Define distance between reference and floating element
-      ret.push(offset({mainAxis: arrowProp ? 4 : 0}))
+      ret.push(
+        offset({
+          mainAxis: arrowProp ? DEFAULT_POPOVER_DISTANCE : 0,
+        })
+      )
 
       // Shift the popover so its sits with the boundary eleement
       if (preventOverflow) {
@@ -174,14 +159,19 @@ export const Popover = memo(
           shift({
             boundary: boundaryElement || undefined,
             rootBoundary,
-            padding: 8,
+            padding: DEFAULT_POPOVER_PADDING,
           })
         )
       }
 
       // Place arrow
       if (arrowProp) {
-        ret.push(arrow({element: arrowRef, padding: 4}))
+        ret.push(
+          arrow({
+            element: arrowRef,
+            padding: DEFAULT_POPOVER_PADDING,
+          })
+        )
       }
 
       ret.push(
@@ -265,7 +255,7 @@ export const Popover = memo(
           arrowY={arrowY}
           availableWidth={constrainSize ? availableWidth : undefined}
           availableHeight={constrainSize ? availableHeight : undefined}
-          boundaryWidth={boundarySize?.width}
+          boundaryWidth={preventOverflow ? boundarySize?.width : undefined}
           hidden={referenceHidden}
           overflow={overflow}
           padding={padding}
