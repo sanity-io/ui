@@ -6,11 +6,24 @@ import {
   LayerProvider,
   Menu,
   MenuButton,
+  MenuButtonProps,
   MenuDivider,
   MenuGroup,
   MenuItem,
 } from '@sanity/ui'
 import {useAction} from '@sanity/ui-workshop'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  placement: 'bottom',
+  portal: true,
+  preventOverflow: true,
+}
+
+const NESTED_POPOVER_PROPS: MenuButtonProps['popover'] = {
+  placement: 'right-start',
+  portal: true,
+  preventOverflow: true,
+}
 
 export default function GroupsStory() {
   return (
@@ -63,7 +76,7 @@ export default function GroupsStory() {
                     fontSize={1}
                     onClick={useAction('Share')}
                     padding={2}
-                    popover={{placement: 'right-start', portal: true}}
+                    popover={NESTED_POPOVER_PROPS}
                     text="Share"
                   >
                     <MenuItem
@@ -89,7 +102,7 @@ export default function GroupsStory() {
                       fontSize={1}
                       onClick={useAction('Share / More')}
                       padding={2}
-                      popover={{placement: 'right-start', portal: true}}
+                      popover={NESTED_POPOVER_PROPS}
                       text="More"
                     >
                       <MenuItem
@@ -128,7 +141,7 @@ export default function GroupsStory() {
                   />
                 </Menu>
               }
-              // popover={{constrainSize: true, portal: true, preventOverflow: true}}
+              popover={POPOVER_PROPS}
             />
           </LayerProvider>
 

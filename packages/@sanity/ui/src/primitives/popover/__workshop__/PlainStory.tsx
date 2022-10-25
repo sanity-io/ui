@@ -24,28 +24,31 @@ export default function PlainStory() {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (
-    <PortalProvider element={portalElement}>
-      <Text muted size={1} style={{position: 'absolute', top: 40, left: 60}}>
-        Scroll this box to reveal the popover
-      </Text>
-      <div
-        ref={setBoundaryElement}
-        style={{
-          height: 'calc(100vh - 120px)',
-          position: 'relative',
-          margin: 60,
-          overflow: 'auto',
-          outline: '1px solid red',
-          width: 'calc(100vw - 120px)',
-        }}
-      >
-        <Card padding={4} style={{textAlign: 'center'}}>
-          <div style={{padding: '150vh 0'}}>
+    <Card height="fill" padding={3} sizing="border">
+      <PortalProvider element={portalElement}>
+        <Text align="center" muted size={1}>
+          Scroll this box to reveal the popover
+        </Text>
+        <div
+          ref={setBoundaryElement}
+          style={{
+            height: 'calc(100vh - 120px)',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            margin: 60,
+            overflow: 'auto',
+            outline: '1px solid red',
+            width: 'calc(100vw - 120px)',
+          }}
+        >
+          <div style={{padding: '150vh 0', textAlign: 'center'}}>
             <Popover
               __unstable_margins={[1, 1, 1, 1]}
               arrow={arrow}
               boundaryElement={boundaryElementFlag ? boundaryElement : undefined}
               constrainSize={constrainSize}
+              content={<Text>popover content</Text>}
               fallbackPlacements={['top', 'bottom']}
               matchReferenceWidth={matchReferenceWidth}
               open={open}
@@ -60,9 +63,9 @@ export default function PlainStory() {
               <Button text="This button is the popover reference" />
             </Popover>
           </div>
-        </Card>
-      </div>
-      <div ref={setPortalElement} />
-    </PortalProvider>
+        </div>
+        <div ref={setPortalElement} />
+      </PortalProvider>
+    </Card>
   )
 }

@@ -14,10 +14,17 @@ import {
   Flex,
   Menu,
   MenuButton,
+  MenuButtonProps,
   MenuDivider,
   MenuGroup,
   MenuItem,
 } from '@sanity/ui'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  placement: 'right',
+  portal: true,
+  preventOverflow: true,
+}
 
 export default function MenuGroupRightStory() {
   return (
@@ -46,7 +53,7 @@ export default function MenuGroupRightStory() {
                       <MenuItem icon={TrashIcon} text="Remove" tone="critical" />
                     </Menu>
                   }
-                  popover={{placement: 'right', portal: true}}
+                  popover={POPOVER_PROPS}
                 />
               </Box>
             </Flex>

@@ -1,6 +1,20 @@
 import {CheckmarkIcon, ClockIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
-import {Box, Button, Code, Menu, MenuButton, MenuDivider, MenuItem, Stack} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Code,
+  Menu,
+  MenuButton,
+  MenuButtonProps,
+  MenuDivider,
+  MenuItem,
+  Stack,
+} from '@sanity/ui'
 import {useState} from 'react'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  matchReferenceWidth: true,
+}
 
 export default function SelectedItemStory() {
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -42,7 +56,7 @@ export default function SelectedItemStory() {
               />
             </Menu>
           }
-          popover={{matchReferenceWidth: true}}
+          popover={POPOVER_PROPS}
         />
       </Stack>
     </Box>

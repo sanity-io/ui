@@ -28,8 +28,8 @@ export default defineScope('primitives/popover', 'Popover', [
     component: lazy(() => import('./MarginsStory')),
   },
   {
-    name: 'right-aligned',
-    title: 'Right-aligned',
-    component: lazy(() => import('./RightAlignedStory')),
+    name: 'aligned',
+    title: 'Aligned',
+    component: lazy(() => import('./AlignedStory')),
   },
 ])

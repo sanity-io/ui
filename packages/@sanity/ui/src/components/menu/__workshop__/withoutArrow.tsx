@@ -1,4 +1,14 @@
-import {Box, Button, Menu, MenuButton, MenuItem, Stack} from '@sanity/ui'
+import {Box, Button, Menu, MenuButton, MenuButtonProps, MenuItem, Stack} from '@sanity/ui'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  __unstable_margins: [1, 1, 1, 1],
+  arrow: false,
+  constrainSize: true,
+  fallbackPlacements: ['top-start'],
+  matchReferenceWidth: true,
+  radius: 0,
+  placement: 'bottom-start',
+}
 
 export default function WithoutArrowStory() {
   return (
@@ -14,15 +24,7 @@ export default function WithoutArrowStory() {
               <MenuItem text="Item 3" />
             </Menu>
           }
-          popover={{
-            __unstable_margins: [1, 1, 1, 1],
-            arrow: false,
-            constrainSize: true,
-            fallbackPlacements: ['top-start'],
-            matchReferenceWidth: true,
-            radius: 0,
-            placement: 'bottom-start',
-          }}
+          popover={POPOVER_PROPS}
         />
       </Stack>
     </Box>

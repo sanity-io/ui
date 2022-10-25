@@ -1,5 +1,9 @@
-import {Box, Button, Menu, MenuButton, MenuItem, Stack, useToast} from '@sanity/ui'
+import {Box, Button, Menu, MenuButton, MenuButtonProps, MenuItem, Stack, useToast} from '@sanity/ui'
 import {useCallback} from 'react'
+
+const POPOVER_PROPS: MenuButtonProps['popover'] = {
+  constrainSize: true,
+}
 
 export default function OnCloseMenuButton() {
   const {push} = useToast()
@@ -28,7 +32,7 @@ export default function OnCloseMenuButton() {
               </Stack>
             </Menu>
           }
-          popover={{constrainSize: true}}
+          popover={POPOVER_PROPS}
         />
         <Button text="Blur test button" mode="ghost" />
       </Stack>
