@@ -20,8 +20,18 @@ import {
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
 import {useArrayProp, useForwardedRef} from '../../hooks'
-import {Box, BoxProps, Button, Card, PopoverProps, Stack, Text, TextInput} from '../../primitives'
-import {AnimatedSpinnerIcon, ListBox, ResultsPopover, Root} from './autocomplete.styles'
+import {
+  Box,
+  BoxProps,
+  Button,
+  Card,
+  Popover,
+  PopoverProps,
+  Stack,
+  Text,
+  TextInput,
+} from '../../primitives'
+import {AnimatedSpinnerIcon, ListBox, Root} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {
@@ -630,7 +640,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     }
 
     return (
-      <ResultsPopover
+      <Popover
         __unstable_margins={AUTOCOMPLETE_POPOVER_MARGINS}
         arrow={false}
         constrainSize

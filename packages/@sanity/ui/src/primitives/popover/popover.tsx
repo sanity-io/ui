@@ -8,6 +8,7 @@ import {
   useFloating,
   size as sizeMiddleware,
   RootBoundary,
+  hide,
 } from '@floating-ui/react-dom'
 import {
   cloneElement,
@@ -183,6 +184,14 @@ export const Popover = memo(
         ret.push(arrow({element: arrowRef, padding: 4}))
       }
 
+      ret.push(
+        hide({
+          boundary: boundaryElement || undefined,
+          padding: DEFAULT_POPOVER_PADDING,
+          strategy: 'referenceHidden',
+        })
+      )
+
       return ret
     }, [
       arrowProp,
@@ -198,6 +207,8 @@ export const Popover = memo(
       placement: placementProp,
       whileElementsMounted: autoUpdate,
     })
+
+    const referenceHidden = middlewareData.hide?.referenceHidden
 
     const arrowX = middlewareData.arrow?.x
     const arrowY = middlewareData.arrow?.y
@@ -255,6 +266,7 @@ export const Popover = memo(
           availableWidth={constrainSize ? availableWidth : undefined}
           availableHeight={constrainSize ? availableHeight : undefined}
           boundaryWidth={boundarySize?.width}
+          hidden={referenceHidden}
           overflow={overflow}
           padding={padding}
           placement={placement}

@@ -1,6 +1,6 @@
 import {SpinnerIcon} from '@sanity/icons'
 import styled, {keyframes} from 'styled-components'
-import {Box, Popover} from '../../primitives'
+import {Box} from '../../primitives'
 
 /**
  * @internal
@@ -17,15 +17,6 @@ export const ListBox = styled(Box)`
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-`
-
-/**
- * @internal
- */
-export const ResultsPopover = styled(Popover)`
-  &[data-popper-reference-hidden='true'] {
-    display: none;
   }
 `
 
