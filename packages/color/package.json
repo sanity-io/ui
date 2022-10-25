@@ -1,6 +1,6 @@
 {
   "name": "@sanity/color",
-  "version": "2.1.19-beta.1",
+  "version": "2.1.19-beta.2",
   "description": "The Sanity color palette.",
   "sideEffects": false,
   "types": "./dist/types/src/index.d.ts",
