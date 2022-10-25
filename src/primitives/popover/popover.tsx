@@ -40,8 +40,6 @@ export interface PopoverProps
    * @beta
    */
   __unstable_margins?: PopoverMargins
-  /** @deprecated Use `fallbackPlacements` instead. */
-  allowedAutoPlacements?: Placement[]
   arrow?: boolean
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
@@ -58,10 +56,6 @@ export interface PopoverProps
   referenceElement?: HTMLElement | null
   matchReferenceWidth?: boolean
   scheme?: ThemeColorSchemeKey
-  /** @deprecated No longer supported. */
-  tether?: boolean
-  /** @deprecated No longer supported. */
-  tetherOffset?: number | ((...args: any[]) => number)
   tone?: CardTone
 }
 
@@ -77,7 +71,6 @@ export const Popover = memo(
 
     const {
       __unstable_margins: margins,
-      allowedAutoPlacements,
       arrow: arrowProp = true,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
@@ -96,8 +89,6 @@ export const Popover = memo(
       referenceElement,
       scheme,
       shadow: shadowProp = 3,
-      tether,
-      tetherOffset,
       tone = 'inherit',
       width: widthProp = 'auto',
       zOffset: zOffsetProp = theme.sanity.layer?.popover.zOffset,
