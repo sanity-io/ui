@@ -16,5 +16,7 @@ function _getAlias() {
     '@sanity/ui-workshop/plugin-a11y': path.resolve(__dirname, 'src/plugin-a11y'),
     '@sanity/ui-workshop/plugin-perf': path.resolve(__dirname, 'src/plugin-perf'),
     '@sanity/ui-workshop': path.resolve(__dirname, 'src/core'),
+
+    '@sanity/ui': path.resolve(__dirname, '../design/packages/@sanity/ui/src'),
   }
 }
