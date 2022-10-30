@@ -1,4 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
+import {memo} from 'react'
 import styled from 'styled-components'
 import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
 import {ThemeColorToneKey} from '../../theme'
@@ -28,13 +29,13 @@ const ROLES = {
   info: 'alert',
 }
 
-const Root = styled(Card)`
+const Root = memo(styled(Card)`
   pointer-events: all;
-`
+`)
 
-const TextBox = styled(Flex)`
+const TextBox = memo(styled(Flex)`
   overflow-x: auto;
-`
+`)
 
 /**
  * @public

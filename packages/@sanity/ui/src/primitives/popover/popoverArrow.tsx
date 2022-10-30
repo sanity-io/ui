@@ -1,8 +1,8 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {DEFAULT_POPOVER_ARROW_HEIGHT, DEFAULT_POPOVER_ARROW_WIDTH} from './constants'
 
-const Root = styled.div`
+const Root = memo(styled.div`
   position: absolute;
   pointer-events: none;
   width: ${DEFAULT_POPOVER_ARROW_WIDTH}px;
@@ -45,15 +45,15 @@ const Root = styled.div`
       transform: rotate(180deg);
     }
   }
-`
+`)
 
-const BorderPath = styled.path`
+const BorderPath = memo(styled.path`
   fill: var(--card-shadow-outline-color);
-`
+`)
 
-const ShapePath = styled.path`
+const ShapePath = memo(styled.path`
   fill: var(--card-bg-color);
-`
+`)
 
 export const PopoverArrow = forwardRef(function PopoverArrow(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

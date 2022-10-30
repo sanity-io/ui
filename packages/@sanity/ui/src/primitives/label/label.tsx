@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
@@ -24,19 +24,21 @@ export interface LabelProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div<{
-  $accent?: boolean
-  $align: TextAlign[]
-  $muted: boolean
-  $size: number[]
-}>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
+const Root = memo(
+  styled.div<{
+    $accent?: boolean
+    $align: TextAlign[]
+    $muted: boolean
+    $size: number[]
+  }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
+)
 
-const SpanWithTextOverflow = styled.span`
+const SpanWithTextOverflow = memo(styled.span`
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-`
+`)
 
 /**
  * @public

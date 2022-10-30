@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Inline, KBD} from '../../primitives'
@@ -14,18 +14,18 @@ export interface HotkeysProps {
   keys?: string[]
 }
 
-const Root = styled.kbd`
+const Root = memo(styled.kbd`
   &:not([hidden]) {
     display: block;
   }
   font: inherit;
-`
+`)
 
-const Key = styled(KBD)`
+const Key = memo(styled(KBD)`
   &:not([hidden]) {
     display: block;
   }
-`
+`)
 
 /**
  * @public

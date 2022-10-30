@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled, {css} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
@@ -27,7 +27,7 @@ function kbdStyle() {
   `
 }
 
-const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
+const Root = memo(styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle))
 
 /**
  * @public

@@ -1,4 +1,4 @@
-import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
+import {forwardRef, memo, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -27,18 +27,17 @@ export interface AvatarProps {
   title?: string
 }
 
-const Root = styled.div<{$color: string; $size: AvatarSize[]}>(
-  responsiveAvatarSizeStyle,
-  avatarStyle.root
+const Root = memo(
+  styled.div<{$color: string; $size: AvatarSize[]}>(responsiveAvatarSizeStyle, avatarStyle.root)
 )
 
-const Arrow = styled.div(avatarStyle.arrow)
+const Arrow = memo(styled.div(avatarStyle.arrow))
 
-const BgStroke = styled.ellipse(avatarStyle.bgStroke)
+const BgStroke = memo(styled.ellipse(avatarStyle.bgStroke))
 
-const Stroke = styled.ellipse(avatarStyle.stroke)
+const Stroke = memo(styled.ellipse(avatarStyle.stroke))
 
-const Initials = styled.div(avatarStyle.initials)
+const Initials = memo(styled.div(avatarStyle.initials))
 
 /**
  * @public

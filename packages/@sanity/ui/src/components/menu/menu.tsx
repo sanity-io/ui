@@ -1,4 +1,4 @@
-import {forwardRef, useCallback, useEffect, useMemo} from 'react'
+import {forwardRef, memo, useCallback, useEffect, useMemo} from 'react'
 import styled from 'styled-components'
 import {useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
@@ -29,10 +29,10 @@ export interface MenuProps extends ResponsivePaddingProps {
   space?: number | number[]
 }
 
-const Root = styled(Box)`
+const Root = memo(styled(Box)`
   outline: none;
   overflow: auto;
-`
+`)
 
 /**
  * @public

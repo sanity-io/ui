@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
-import {createElement, forwardRef, isValidElement, useCallback, useMemo} from 'react'
+import {createElement, forwardRef, isValidElement, memo, useCallback, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
@@ -73,16 +73,16 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-const Root = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
+const Root = memo(styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle))
 
-const InputRoot = styled.span`
+const InputRoot = memo(styled.span`
   flex: 1;
   min-width: 0;
   display: block;
   position: relative;
-`
+`)
 
-const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
+const Prefix = memo(styled(Card).attrs({forwardedAs: 'span'})`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 
@@ -90,9 +90,9 @@ const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
     display: block;
     margin: -1px;
   }
-`
+`)
 
-const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
+const Suffix = memo(styled(Card).attrs({forwardedAs: 'span'})`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
@@ -100,37 +100,41 @@ const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
     display: block;
     margin: -1px;
   }
-`
+`)
 
-const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle
+const Input = memo(
+  styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+    responsiveInputPaddingStyle,
+    textInputBaseStyle,
+    textInputFontSizeStyle
+  )
 )
 
-const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle
+const Presentation = memo(
+  styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
+    responsiveRadiusStyle,
+    textInputRepresentationStyle
+  )
 )
 
-const LeftBox = styled(Box)`
+const LeftBox = memo(styled(Box)`
   position: absolute;
   top: 0;
   left: 0;
-`
+`)
 
-const RightBox = styled(Box)`
+const RightBox = memo(styled(Box)`
   position: absolute;
   top: 0;
   right: 0;
-`
+`)
 
-const RightCard = styled(Card)`
+const RightCard = memo(styled(Card)`
   background-color: transparent;
   position: absolute;
   top: 0;
   right: 0;
-`
+`)
 
 /**
  * @public

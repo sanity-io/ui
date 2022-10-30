@@ -1,4 +1,4 @@
-import {forwardRef, useMemo} from 'react'
+import {forwardRef, memo, useMemo} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
@@ -43,9 +43,8 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
   `
 }
 
-const Root = styled.div<{$size: AvatarSize[]}>(
-  _responsiveAvatarCounterSizeStyle,
-  _avatarCounterBaseStyle
+const Root = memo(
+  styled.div<{$size: AvatarSize[]}>(_responsiveAvatarCounterSizeStyle, _avatarCounterBaseStyle)
 )
 
 /**

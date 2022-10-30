@@ -1,4 +1,4 @@
-import {forwardRef, useEffect, useState} from 'react'
+import {forwardRef, memo, useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Box} from '../../primitives'
@@ -6,9 +6,11 @@ import {BoxProps, ResponsiveRadiusProps} from '../../primitives'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {skeletonStyle} from './styles'
 
-const Root = styled(Box)<{$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  skeletonStyle
+const Root = memo(
+  styled(Box)<{$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps>(
+    responsiveRadiusStyle,
+    skeletonStyle
+  )
 )
 
 /**

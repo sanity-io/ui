@@ -1,4 +1,4 @@
-import {createElement, forwardRef, isValidElement, useMemo} from 'react'
+import {createElement, forwardRef, isValidElement, memo, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -35,11 +35,15 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   type?: 'button' | 'reset' | 'submit'
 }
 
-const Root = styled.button<
-  {$mode: ButtonMode; $tone: ButtonTone} & ResponsiveRadiusStyleProps & ThemeProps
->(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
+const Root = memo(
+  styled.button<{$mode: ButtonMode; $tone: ButtonTone} & ResponsiveRadiusStyleProps & ThemeProps>(
+    responsiveRadiusStyle,
+    buttonBaseStyles,
+    buttonColorStyles
+  )
+)
 
-const LoadingBox = styled.div`
+const LoadingBox = memo(styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -52,7 +56,7 @@ const LoadingBox = styled.div`
   border-radius: inherit;
   z-index: 1;
   box-shadow: inherit;
-`
+`)
 
 /**
  * @public

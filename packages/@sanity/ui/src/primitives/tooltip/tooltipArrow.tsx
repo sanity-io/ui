@@ -1,7 +1,7 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 
-const Root = styled.div`
+const Root = memo(styled.div`
   position: absolute;
   pointer-events: none;
   width: 15px;
@@ -60,15 +60,15 @@ const Root = styled.div`
       transform: rotate(180deg);
     }
   }
-`
+`)
 
-const Border = styled.path`
+const Border = memo(styled.path`
   fill: var(--card-shadow-outline-color);
-`
+`)
 
-const Shape = styled.path`
+const Shape = memo(styled.path`
   fill: var(--card-bg-color);
-`
+`)
 
 interface TooltipArrowProps {}
 

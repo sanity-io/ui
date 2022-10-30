@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {
@@ -20,9 +20,8 @@ export interface FlexProps
   gap?: number | number[]
 }
 
-const Root = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
-  flexItemStyle,
-  responsiveFlexStyle
+const Root = memo(
+  styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(flexItemStyle, responsiveFlexStyle)
 )
 
 /**

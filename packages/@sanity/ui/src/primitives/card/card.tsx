@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -40,12 +40,14 @@ export interface CardProps
   tone?: CardTone
 }
 
-const Root = styled(Box)<
-  CardStyleProps &
-    ResponsiveRadiusStyleProps &
-    ResponsiveBorderStyleProps &
-    ResponsiveShadowStyleProps
->(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
+const Root = memo(
+  styled(Box)<
+    CardStyleProps &
+      ResponsiveRadiusStyleProps &
+      ResponsiveBorderStyleProps &
+      ResponsiveShadowStyleProps
+  >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
+)
 
 /**
  * @public

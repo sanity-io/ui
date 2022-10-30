@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
-import {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
+import {forwardRef, memo, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
 import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
@@ -63,13 +63,15 @@ interface DialogCardProps extends ResponsiveWidthProps {
   shadow: number | number[]
 }
 
-const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
-  responsivePaddingStyle,
-  dialogStyle,
-  responsiveDialogPositionStyle
+const Root = memo(
+  styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
+    responsivePaddingStyle,
+    dialogStyle,
+    responsiveDialogPositionStyle
+  )
 )
 
-const DialogContainer = styled(Container)`
+const DialogContainer = memo(styled(Container)`
   &:not([hidden]) {
     display: flex;
   }
@@ -78,9 +80,9 @@ const DialogContainer = styled(Container)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`
+`)
 
-const DialogCardRoot = styled(Card)`
+const DialogCardRoot = memo(styled(Card)`
   &:not([hidden]) {
     display: flex;
   }
@@ -88,15 +90,15 @@ const DialogCardRoot = styled(Card)`
   min-height: 0;
   max-height: 100%;
   overflow: hidden;
-`
+`)
 
-const DialogLayout = styled(Flex)`
+const DialogLayout = memo(styled(Flex)`
   flex: 1;
   min-height: 0;
   width: 100%;
-`
+`)
 
-const DialogHeader = styled(Card)`
+const DialogHeader = memo(styled(Card)`
   position: relative;
   z-index: 2;
 
@@ -109,20 +111,20 @@ const DialogHeader = styled(Card)`
     bottom: -1px;
     border-bottom: 1px solid var(--card-hairline-soft-color);
   }
-`
+`)
 
-const DialogContent = styled(Box)`
+const DialogContent = memo(styled(Box)`
   position: relative;
   z-index: 1;
   overflow: auto;
   outline: none;
-`
+`)
 
-const DialogFooter = styled(Box)`
+const DialogFooter = memo(styled(Box)`
   position: relative;
   z-index: 3;
   border-top: 1px solid var(--card-hairline-soft-color);
-`
+`)
 
 const DialogCard = forwardRef(function DialogCard(
   props: DialogCardProps,

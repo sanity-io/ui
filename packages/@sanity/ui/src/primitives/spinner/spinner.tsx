@@ -1,5 +1,5 @@
 import {SpinnerIcon} from '@sanity/icons'
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled, {keyframes} from 'styled-components'
 import {Text} from '../text'
 
@@ -21,11 +21,11 @@ const rotate = keyframes`
   }
 `
 
-const Root = styled(Text)`
+const Root = memo(styled(Text)`
   & > span > svg {
     animation: ${rotate} 500ms linear infinite;
   }
-`
+`)
 
 /**
  * @public

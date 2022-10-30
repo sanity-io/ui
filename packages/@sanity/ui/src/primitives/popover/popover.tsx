@@ -9,16 +9,7 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {
-  cloneElement,
-  forwardRef,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {cloneElement, forwardRef, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {useForwardedRef, useArrayProp, useElementSize} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
@@ -60,233 +51,231 @@ export interface PopoverProps
 }
 
 /** @public */
-export const Popover = memo(
-  forwardRef(function Popover(
-    props: PopoverProps &
-      Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-    ref: React.ForwardedRef<HTMLDivElement>
-  ): React.ReactElement {
-    const theme = useTheme()
-    const boundaryElementContext = useBoundaryElement()
+export const Popover = forwardRef(function Popover(
+  props: PopoverProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
+  ref: React.ForwardedRef<HTMLDivElement>
+): React.ReactElement {
+  const theme = useTheme()
+  const boundaryElementContext = useBoundaryElement()
 
-    const {
-      __unstable_margins: margins,
-      arrow: arrowProp = true,
-      boundaryElement = boundaryElementContext.element,
-      children: childProp,
-      constrainSize = false,
-      content,
-      disabled,
-      fallbackPlacements,
-      matchReferenceWidth: matchReferenceWidthProp,
-      open,
-      overflow = props.constrainSize ? 'auto' : 'hidden',
-      padding: paddingProp,
-      placement: placementProp = 'bottom',
-      portal,
-      preventOverflow = true,
-      radius: radiusProp = 3,
-      referenceElement,
-      scheme,
-      shadow: shadowProp = 3,
-      tone = 'inherit',
-      width: widthProp = 'auto',
-      zOffset: zOffsetProp = theme.sanity.layer?.popover.zOffset,
-      ...restProps
-    } = props
-    const boundarySize = useElementSize(boundaryElement)?.border
-    const padding = useArrayProp(paddingProp)
-    const radius = useArrayProp(radiusProp)
-    const shadow = useArrayProp(shadowProp)
-    const width = useArrayProp(widthProp)
-    const zOffset = useArrayProp(zOffsetProp)
-    const [availableWidth, setAvailableWidth] = useState<number | undefined>(undefined)
-    const [availableHeight, setAvailableHeight] = useState<number | undefined>(undefined)
-    const [referenceWidth, setReferenceWidth] = useState<number | undefined>(undefined)
-    const forwardedRef = useForwardedRef(ref)
-    const arrowRef = useRef<HTMLDivElement | null>(null)
-    const rootBoundary: RootBoundary = 'viewport'
+  const {
+    __unstable_margins: margins,
+    arrow: arrowProp = true,
+    boundaryElement = boundaryElementContext.element,
+    children: childProp,
+    constrainSize = false,
+    content,
+    disabled,
+    fallbackPlacements,
+    matchReferenceWidth: matchReferenceWidthProp,
+    open,
+    overflow = props.constrainSize ? 'auto' : 'hidden',
+    padding: paddingProp,
+    placement: placementProp = 'bottom',
+    portal,
+    preventOverflow = true,
+    radius: radiusProp = 3,
+    referenceElement,
+    scheme,
+    shadow: shadowProp = 3,
+    tone = 'inherit',
+    width: widthProp = 'auto',
+    zOffset: zOffsetProp = theme.sanity.layer?.popover.zOffset,
+    ...restProps
+  } = props
+  const boundarySize = useElementSize(boundaryElement)?.border
+  const padding = useArrayProp(paddingProp)
+  const radius = useArrayProp(radiusProp)
+  const shadow = useArrayProp(shadowProp)
+  const width = useArrayProp(widthProp)
+  const zOffset = useArrayProp(zOffsetProp)
+  const [availableWidth, setAvailableWidth] = useState<number | undefined>(undefined)
+  const [availableHeight, setAvailableHeight] = useState<number | undefined>(undefined)
+  const [referenceWidth, setReferenceWidth] = useState<number | undefined>(undefined)
+  const forwardedRef = useForwardedRef(ref)
+  const arrowRef = useRef<HTMLDivElement | null>(null)
+  const rootBoundary: RootBoundary = 'viewport'
 
-    const middleware = useMemo(() => {
-      const ret: Middleware[] = []
+  const middleware = useMemo(() => {
+    const ret: Middleware[] = []
 
-      // Flip the floating element when leaving the boundary box
-      if (constrainSize || preventOverflow) {
-        ret.push(
-          flip({
-            boundary: boundaryElement || undefined,
-            fallbackPlacements,
-            padding: DEFAULT_POPOVER_PADDING,
-            rootBoundary,
-          })
-        )
-      }
-
-      // Track sizes
-      if (constrainSize || matchReferenceWidthProp) {
-        ret.push(
-          size({
-            boundaryElement,
-            constrainSize,
-            matchReferenceWidth: matchReferenceWidthProp,
-            padding: DEFAULT_POPOVER_PADDING,
-            setAvailableHeight,
-            setAvailableWidth,
-            setReferenceWidth,
-          })
-        )
-      }
-
-      // Define distance between reference and floating element
+    // Flip the floating element when leaving the boundary box
+    if (constrainSize || preventOverflow) {
       ret.push(
-        offset({
-          mainAxis: arrowProp ? DEFAULT_POPOVER_DISTANCE : 0,
-        })
-      )
-
-      // Shift the popover so its sits with the boundary eleement
-      if (preventOverflow) {
-        ret.push(
-          shift({
-            boundary: boundaryElement || undefined,
-            rootBoundary,
-            padding: DEFAULT_POPOVER_PADDING,
-          })
-        )
-      }
-
-      // Place arrow
-      if (arrowProp) {
-        ret.push(
-          arrow({
-            element: arrowRef,
-            padding: DEFAULT_POPOVER_PADDING,
-          })
-        )
-      }
-
-      ret.push(
-        hide({
+        flip({
           boundary: boundaryElement || undefined,
+          fallbackPlacements,
           padding: DEFAULT_POPOVER_PADDING,
-          strategy: 'referenceHidden',
+          rootBoundary,
         })
       )
-
-      return ret
-    }, [
-      arrowProp,
-      boundaryElement,
-      constrainSize,
-      fallbackPlacements,
-      matchReferenceWidthProp,
-      preventOverflow,
-    ])
-
-    const {x, y, placement, reference, floating, middlewareData, strategy} = useFloating({
-      middleware,
-      placement: placementProp,
-      whileElementsMounted: autoUpdate,
-    })
-
-    const referenceHidden = middlewareData.hide?.referenceHidden
-
-    const arrowX = middlewareData.arrow?.x
-    const arrowY = middlewareData.arrow?.y
-
-    const setArrow = useCallback((arrowEl: HTMLDivElement | null) => {
-      arrowRef.current = arrowEl
-    }, [])
-
-    const setFloating = useCallback(
-      (node: HTMLDivElement | null) => {
-        forwardedRef.current = node
-        floating(node)
-      },
-      [floating, forwardedRef]
-    )
-
-    const setReference = useCallback(
-      (node: HTMLElement | null) => {
-        reference(node)
-
-        const childRef = (childProp as any)?.ref
-
-        if (typeof childRef === 'function') {
-          childRef(node)
-        } else if (childRef) {
-          childRef.current = node
-        }
-      },
-      [childProp, reference]
-    )
-
-    const child = useMemo(() => {
-      if (!childProp || referenceElement) return null
-
-      return cloneElement(childProp, {ref: setReference})
-    }, [childProp, referenceElement, setReference])
-
-    useEffect(() => {
-      if (referenceElement) reference(referenceElement)
-    }, [reference, referenceElement])
-
-    if (disabled) {
-      return childProp || <></>
     }
 
-    const popover = (
-      <LayerProvider zOffset={zOffset}>
-        <PopoverCard
-          {...restProps}
-          __unstable_margins={margins}
-          arrow={arrowProp}
-          arrowRef={setArrow}
-          arrowX={arrowX}
-          arrowY={arrowY}
-          availableWidth={constrainSize ? availableWidth : undefined}
-          availableHeight={constrainSize ? availableHeight : undefined}
-          boundaryWidth={preventOverflow ? boundarySize?.width : undefined}
-          hidden={referenceHidden}
-          overflow={overflow}
-          padding={padding}
-          placement={placement}
-          radius={radius}
-          ref={setFloating}
-          referenceWidth={matchReferenceWidthProp ? referenceWidth : undefined}
-          scheme={scheme}
-          shadow={shadow}
-          strategy={strategy}
-          tone={tone}
-          x={x}
-          y={y}
-          width={width}
-        >
-          {content}
-        </PopoverCard>
-      </LayerProvider>
+    // Track sizes
+    if (constrainSize || matchReferenceWidthProp) {
+      ret.push(
+        size({
+          boundaryElement,
+          constrainSize,
+          matchReferenceWidth: matchReferenceWidthProp,
+          padding: DEFAULT_POPOVER_PADDING,
+          setAvailableHeight,
+          setAvailableWidth,
+          setReferenceWidth,
+        })
+      )
+    }
+
+    // Define distance between reference and floating element
+    ret.push(
+      offset({
+        mainAxis: arrowProp ? DEFAULT_POPOVER_DISTANCE : 0,
+      })
     )
 
-    return (
-      <>
-        {/* the popover */}
-        {open && (
-          <>
-            {portal ? (
-              <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
-                {popover}
-              </Portal>
-            ) : (
-              popover
-            )}
-          </>
-        )}
+    // Shift the popover so its sits with the boundary eleement
+    if (preventOverflow) {
+      ret.push(
+        shift({
+          boundary: boundaryElement || undefined,
+          rootBoundary,
+          padding: DEFAULT_POPOVER_PADDING,
+        })
+      )
+    }
 
-        {/* the referred element */}
-        {child}
-      </>
+    // Place arrow
+    if (arrowProp) {
+      ret.push(
+        arrow({
+          element: arrowRef,
+          padding: DEFAULT_POPOVER_PADDING,
+        })
+      )
+    }
+
+    ret.push(
+      hide({
+        boundary: boundaryElement || undefined,
+        padding: DEFAULT_POPOVER_PADDING,
+        strategy: 'referenceHidden',
+      })
     )
+
+    return ret
+  }, [
+    arrowProp,
+    boundaryElement,
+    constrainSize,
+    fallbackPlacements,
+    matchReferenceWidthProp,
+    preventOverflow,
+  ])
+
+  const {x, y, placement, reference, floating, middlewareData, strategy} = useFloating({
+    middleware,
+    placement: placementProp,
+    whileElementsMounted: autoUpdate,
   })
-)
+
+  const referenceHidden = middlewareData.hide?.referenceHidden
+
+  const arrowX = middlewareData.arrow?.x
+  const arrowY = middlewareData.arrow?.y
+
+  const setArrow = useCallback((arrowEl: HTMLDivElement | null) => {
+    arrowRef.current = arrowEl
+  }, [])
+
+  const setFloating = useCallback(
+    (node: HTMLDivElement | null) => {
+      forwardedRef.current = node
+      floating(node)
+    },
+    [floating, forwardedRef]
+  )
+
+  const setReference = useCallback(
+    (node: HTMLElement | null) => {
+      reference(node)
+
+      const childRef = (childProp as any)?.ref
+
+      if (typeof childRef === 'function') {
+        childRef(node)
+      } else if (childRef) {
+        childRef.current = node
+      }
+    },
+    [childProp, reference]
+  )
+
+  const child = useMemo(() => {
+    if (!childProp || referenceElement) return null
+
+    return cloneElement(childProp, {ref: setReference})
+  }, [childProp, referenceElement, setReference])
+
+  useEffect(() => {
+    if (referenceElement) reference(referenceElement)
+  }, [reference, referenceElement])
+
+  if (disabled) {
+    return childProp || <></>
+  }
+
+  const popover = (
+    <LayerProvider zOffset={zOffset}>
+      <PopoverCard
+        {...restProps}
+        __unstable_margins={margins}
+        arrow={arrowProp}
+        arrowRef={setArrow}
+        arrowX={arrowX}
+        arrowY={arrowY}
+        availableWidth={constrainSize ? availableWidth : undefined}
+        availableHeight={constrainSize ? availableHeight : undefined}
+        boundaryWidth={preventOverflow ? boundarySize?.width : undefined}
+        hidden={referenceHidden}
+        overflow={overflow}
+        padding={padding}
+        placement={placement}
+        radius={radius}
+        ref={setFloating}
+        referenceWidth={matchReferenceWidthProp ? referenceWidth : undefined}
+        scheme={scheme}
+        shadow={shadow}
+        strategy={strategy}
+        tone={tone}
+        x={x}
+        y={y}
+        width={width}
+      >
+        {content}
+      </PopoverCard>
+    </LayerProvider>
+  )
+
+  return (
+    <>
+      {/* the popover */}
+      {open && (
+        <>
+          {portal ? (
+            <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
+              {popover}
+            </Portal>
+          ) : (
+            popover
+          )}
+        </>
+      )}
+
+      {/* the referred element */}
+      {child}
+    </>
+  )
+})
 
 Popover.displayName = 'Popover'

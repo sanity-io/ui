@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {
@@ -30,16 +30,20 @@ export interface HeadingProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div<
-  HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
->(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
+const Root = memo(
+  styled.div<HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps>(
+    headingBaseStyle,
+    responsiveTextAlignStyle,
+    responsiveHeadingFont
+  )
+)
 
-const SpanWithTextOverflow = styled.span`
+const SpanWithTextOverflow = memo(styled.span`
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-`
+`)
 
 /**
  * @public

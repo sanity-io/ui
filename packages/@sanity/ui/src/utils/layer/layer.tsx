@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {LayerProvider} from './layerProvider'
@@ -16,9 +16,9 @@ interface LayerChildrenProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div`
+const Root = memo(styled.div`
   position: relative;
-`
+`)
 
 const LayerChildren = forwardRef(function LayerChildren(
   props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

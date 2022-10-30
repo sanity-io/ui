@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {
@@ -34,19 +34,21 @@ export interface BoxProps
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = styled.div<
-  FlexItemStyleProps &
-    ResponsiveBoxStyleProps &
-    ResponsiveGridItemStyleProps &
-    ResponsiveMarginStyleProps &
-    ResponsivePaddingStyleProps
->(
-  boxStyle,
-  flexItemStyle,
-  responsiveBoxStyle,
-  responsiveGridItemStyle,
-  responsiveMarginStyle,
-  responsivePaddingStyle
+const Root = memo(
+  styled.div<
+    FlexItemStyleProps &
+      ResponsiveBoxStyleProps &
+      ResponsiveGridItemStyleProps &
+      ResponsiveMarginStyleProps &
+      ResponsivePaddingStyleProps
+  >(
+    boxStyle,
+    flexItemStyle,
+    responsiveBoxStyle,
+    responsiveGridItemStyle,
+    responsiveMarginStyle,
+    responsivePaddingStyle
+  )
 )
 
 /**

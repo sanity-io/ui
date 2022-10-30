@@ -1,4 +1,4 @@
-import {forwardRef, useEffect} from 'react'
+import {forwardRef, memo, useEffect} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef} from '../../hooks'
 import {
@@ -16,11 +16,11 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Root = styled.span(switchBaseStyles)
-const Input = styled.input(switchInputStyles)
-const Representation = styled.span(switchRepresentationStyles)
-const Track = styled.span(switchTrackStyles)
-const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
+const Root = memo(styled.span(switchBaseStyles))
+const Input = memo(styled.input(switchInputStyles))
+const Representation = memo(styled.span(switchRepresentationStyles))
+const Track = memo(styled.span(switchTrackStyles))
+const Thumb = memo(styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles))
 
 /**
  * @public

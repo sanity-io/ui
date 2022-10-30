@@ -28,13 +28,15 @@ export interface TreeItemProps {
 
 const Root = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
 
-const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
+const TreeItemBox = memo(
+  styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
+)
 
-const ToggleArrowText = styled(Text)`
+const ToggleArrowText = memo(styled(Text)`
   & > svg {
     transition: transform 100ms;
   }
-`
+`)
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

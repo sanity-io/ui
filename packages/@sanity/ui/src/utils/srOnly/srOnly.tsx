@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 
 /**
@@ -9,13 +9,13 @@ export interface SrOnlyProps {
   children?: React.ReactNode
 }
 
-const Root = styled.div`
+const Root = memo(styled.div`
   display: block;
   width: 0;
   height: 0;
   position: absolute;
   overflow: hidden;
-`
+`)
 
 /**
  * @public

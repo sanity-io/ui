@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
@@ -19,9 +19,8 @@ export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
   tone?: BadgeTone
 }
 
-const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  badgeStyle
+const Root = memo(
+  styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(responsiveRadiusStyle, badgeStyle)
 )
 
 /**

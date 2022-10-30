@@ -1,5 +1,5 @@
 import {SelectIcon} from '@sanity/icons'
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
 import {Box} from '../box'
@@ -17,16 +17,18 @@ export interface SelectProps {
   customValidity?: string
 }
 
-const Root = styled.div(selectStyle.root)
+const Root = memo(styled.div(selectStyle.root))
 
-const Input = styled.select<{
-  $fontSize: number[]
-  $padding: number[]
-  $radius: number[]
-  $space: number[]
-}>(selectStyle.input)
+const Input = memo(
+  styled.select<{
+    $fontSize: number[]
+    $padding: number[]
+    $radius: number[]
+    $space: number[]
+  }>(selectStyle.input)
+)
 
-const IconBox = styled(Box)(selectStyle.iconBox)
+const IconBox = memo(styled(Box)(selectStyle.iconBox))
 
 /**
  * @public

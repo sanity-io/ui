@@ -1,24 +1,25 @@
 import {SpinnerIcon} from '@sanity/icons'
+import {memo} from 'react'
 import styled, {keyframes} from 'styled-components'
 import {Box} from '../../primitives'
 
 /**
  * @internal
  */
-export const Root = styled.div`
+export const Root = memo(styled.div`
   line-height: 0;
-`
+`)
 
 /**
  * @internal
  */
-export const ListBox = styled(Box)`
+export const ListBox = memo(styled(Box)`
   & > ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-`
+`)
 
 const rotate = keyframes`
   from {
@@ -33,6 +34,6 @@ const rotate = keyframes`
 /**
  * @internal
  */
-export const AnimatedSpinnerIcon = styled(SpinnerIcon)`
+export const AnimatedSpinnerIcon = memo(styled(SpinnerIcon)`
   animation: ${rotate} 500ms linear infinite;
-`
+`)

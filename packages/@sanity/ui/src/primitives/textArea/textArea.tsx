@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
 import {
@@ -27,24 +27,28 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.span(textInputRootStyle)
+const Root = memo(styled.span(textInputRootStyle))
 
-const InputRoot = styled.span`
+const InputRoot = memo(styled.span`
   flex: 1;
   min-width: 0;
   display: block;
   position: relative;
-`
+`)
 
-const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle
+const Input = memo(
+  styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+    responsiveInputPaddingStyle,
+    textInputBaseStyle,
+    textInputFontSizeStyle
+  )
 )
 
-const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle
+const Presentation = memo(
+  styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
+    responsiveRadiusStyle,
+    textInputRepresentationStyle
+  )
 )
 
 /**

@@ -1,4 +1,4 @@
-import {cloneElement, forwardRef} from 'react'
+import {cloneElement, forwardRef, memo} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
@@ -40,7 +40,9 @@ function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProp
   })
 }
 
-const Root = styled.div<{$size: AvatarSize[]}>(responsiveAvatarStackSizeStyle, avatarStackStyle)
+const Root = memo(
+  styled.div<{$size: AvatarSize[]}>(responsiveAvatarStackSizeStyle, avatarStackStyle)
+)
 
 /**
  * @public

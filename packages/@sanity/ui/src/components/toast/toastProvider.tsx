@@ -1,5 +1,5 @@
 import {AnimatePresence, motion} from 'framer-motion'
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Box} from '../../primitives'
 import {Layer} from '../../utils'
@@ -26,23 +26,23 @@ export interface ToastProviderProps {
   zOffset?: number | number[]
 }
 
-const Root = styled(Layer)`
+const Root = memo(styled(Layer)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   pointer-events: none;
-`
+`)
 
-const ToastContainer = styled.div`
+const ToastContainer = memo(styled.div`
   box-sizing: border-box;
   position: absolute;
   right: 0;
   bottom: 0;
   max-width: 420px;
   width: 100%;
-`
+`)
 
 let toastId = 0
 

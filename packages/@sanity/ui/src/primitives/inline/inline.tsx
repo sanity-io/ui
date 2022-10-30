@@ -1,4 +1,4 @@
-import {forwardRef, useMemo} from 'react'
+import {forwardRef, memo, useMemo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'
@@ -13,7 +13,7 @@ export interface InlineProps extends Omit<BoxProps, 'display'> {
   space?: number | number[]
 }
 
-const Root = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
+const Root = memo(styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle))
 
 /**
  * @public

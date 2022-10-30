@@ -18,6 +18,7 @@ import {
   useState,
   CSSProperties,
   ForwardedRef,
+  memo,
 } from 'react'
 import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
@@ -46,9 +47,9 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   shadow?: number | number[]
 }
 
-const Root = styled(Layer)`
+const Root = memo(styled(Layer)`
   pointer-events: none;
-`
+`)
 
 /**
  * @public

@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
@@ -10,7 +10,7 @@ import {ResponsiveGridProps} from '../types'
  */
 export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
 
-const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
+const Root = memo(styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle))
 
 /**
  * @public

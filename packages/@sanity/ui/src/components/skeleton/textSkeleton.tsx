@@ -1,24 +1,26 @@
-import {forwardRef} from 'react'
+import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {_responsive} from '../../styles'
 import {Theme, ThemeFontKey} from '../../theme'
 import {Skeleton, SkeletonProps} from './skeleton'
 
-const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>(
-  ({$size, $style, theme}: {$size: number[]; $style: ThemeFontKey; theme: Theme}) => {
-    const {media} = theme.sanity
-    const font = theme.sanity.fonts[$style]
+const Root = memo(
+  styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>(
+    ({$size, $style, theme}: {$size: number[]; $style: ThemeFontKey; theme: Theme}) => {
+      const {media} = theme.sanity
+      const font = theme.sanity.fonts[$style]
 
-    const styles = _responsive(media, $size, (sizeIndex) => {
-      const fontSize = font.sizes[sizeIndex]
-      const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
+      const styles = _responsive(media, $size, (sizeIndex) => {
+        const fontSize = font.sizes[sizeIndex]
+        const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
 
-      return {height: capHeight}
-    })
+        return {height: capHeight}
+      })
 
-    return styles
-  }
+      return styles
+    }
+  )
 )
 
 /**

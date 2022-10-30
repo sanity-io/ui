@@ -1,4 +1,4 @@
-import {forwardRef, useEffect, useMemo, useRef, useState} from 'react'
+import {forwardRef, memo, useEffect, useMemo, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {_isScrollable} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
@@ -30,15 +30,15 @@ export interface VirtualListProps<Item = any> {
   renderItem?: (item: Item) => React.ReactNode
 }
 
-const Root = styled.div`
+const Root = memo(styled.div`
   position: relative;
-`
+`)
 
-const ItemWrapper = styled.div`
+const ItemWrapper = memo(styled.div`
   position: absolute;
   left: 0;
   right: 0;
-`
+`)
 
 /**
  * @beta
