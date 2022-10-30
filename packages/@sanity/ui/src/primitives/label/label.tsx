@@ -33,12 +33,14 @@ const Root = memo(
   }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 )
 
-const SpanWithTextOverflow = memo(styled.span`
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-`)
+const SpanWithTextOverflow = memo(
+  styled.span({
+    display: 'block',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+  })
+)
 
 /**
  * @public

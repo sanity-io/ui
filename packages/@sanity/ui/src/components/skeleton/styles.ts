@@ -1,13 +1,13 @@
 import {css, keyframes} from 'styled-components'
 
-const keyframe = keyframes`
-  0% {
-    background-position: 100%;
-  }
-  100% {
-    background-position: -100%;
-  }
-`
+const keyframe = keyframes({
+  '0%': {
+    backgroundPosition: '100%',
+  },
+  '100%': {
+    backgroundPosition: '-100%',
+  },
+})
 
 const animation = css`
   background-image: linear-gradient(
@@ -37,11 +37,7 @@ export const skeletonStyle = css<{$animated: boolean; $visible: boolean}>`
 
   @media screen and (prefers-reduced-motion: no-preference) {
     ${({$animated}) =>
-      $animated
-        ? animation
-        : css`
-            background-color: var(--card-skeleton-color-from);
-          `}
+      $animated ? animation : {backgroundColor: 'var(--card-skeleton-color-from)'}}
   }
 
   @media screen and (prefers-reduced-motion: reduce) {

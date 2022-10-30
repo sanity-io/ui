@@ -1,5 +1,5 @@
 import {forwardRef, memo} from 'react'
-import styled, {css} from 'styled-components'
+import styled, {CSSObject} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {Box} from '../box'
@@ -15,16 +15,16 @@ export interface KBDProps {
   radius?: number | number[]
 }
 
-function kbdStyle() {
-  return css`
-    background: var(--card-bg-color);
-    font: inherit;
-    box-shadow: inset 0 0 0 1px var(--card-hairline-hard-color);
+function kbdStyle(): CSSObject {
+  return {
+    background: 'var(--card-bg-color)',
+    font: 'inherit',
+    boxShadow: 'inset 0 0 0 1px var(--card-hairline-hard-color)',
 
-    &:not([hidden]) {
-      display: inline-block;
-    }
-  `
+    '&:not([hidden])': {
+      display: 'inline-block',
+    },
+  }
 }
 
 const Root = memo(styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle))

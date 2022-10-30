@@ -77,7 +77,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 
     /* &:is(button) */
     '&[data-as="button"]': {
-      '-webkit-font-smoothing': 'inherit',
+      WebkitFontSmoothing: 'inherit',
       appearance: 'none',
       margin: 0,
       padding: 0,

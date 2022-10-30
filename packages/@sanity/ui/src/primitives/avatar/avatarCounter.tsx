@@ -1,12 +1,12 @@
 import {forwardRef, memo, useMemo} from 'react'
-import styled, {css} from 'styled-components'
+import styled, {CSSObject} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {AvatarSize} from '../../types'
 import {Text} from '../text'
 
-function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
+function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps): CSSObject[] {
   const {theme} = props
   const {avatar, media} = theme.sanity
 
@@ -23,24 +23,24 @@ function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeP
   })
 }
 
-function _avatarCounterBaseStyle(props: ThemeProps) {
+function _avatarCounterBaseStyle(props: ThemeProps): CSSObject {
   const {theme} = props
 
-  return css`
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    user-select: none;
-    color: inherit;
-    color: var(--card-fg-color);
-    background: var(--card-bg-color);
-    box-shadow: 0 0 0 1px var(--card-bg-color), inset 0 0 0 1.5px var(--card-hairline-hard-color);
-    padding: 0 ${rem(theme.sanity.space[2])};
+  return {
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    userSelect: 'none',
+    // color: 'inherit',
+    color: 'var(--card-fg-color)',
+    background: 'var(--card-bg-color)',
+    boxShadow: '0 0 0 1px var(--card-bg-color), inset 0 0 0 1.5px var(--card-hairline-hard-color)',
+    padding: `0 ${rem(theme.sanity.space[2])}`,
 
-    &:not([hidden]) {
-      display: flex;
-    }
-  `
+    '&:not([hidden])': {
+      display: 'flex',
+    },
+  }
 }
 
 const Root = memo(

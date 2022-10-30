@@ -1,4 +1,4 @@
-import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
+import {CSSObject} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
@@ -7,37 +7,36 @@ import {ButtonMode, ButtonTone} from '../../types'
 /**
  * @internal
  */
-export function buttonBaseStyles(): FlattenSimpleInterpolation {
-  return css`
-    -webkit-font-smoothing: inherit;
-    appearance: none;
-    display: inline-flex;
-    align-items: center;
-    font: inherit;
-    border: 0;
-    outline: none;
-    user-select: none;
-    text-decoration: none;
-    border: 0;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    white-space: nowrap;
-    text-align: left;
-    position: relative;
+export function buttonBaseStyles(): CSSObject {
+  return {
+    WebkitFontSmoothing: 'inherit',
+    appearance: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
+    font: 'inherit',
+    border: 0,
+    outline: 'none',
+    userSelect: 'none',
+    textDecoration: 'none',
+    boxSizing: 'border-box',
+    padding: 0,
+    margin: 0,
+    whiteSpace: 'nowrap',
+    textAlign: 'left',
+    position: 'relative',
 
-    & > span {
-      display: block;
-      flex: 1;
-      min-width: 0;
-      border-radius: inherit;
-    }
+    '& > span': {
+      display: 'block',
+      flex: 1,
+      minWidth: 0,
+      borderRadius: 'inherit',
+    },
 
-    &::-moz-focus-inner {
-      border: 0;
-      padding: 0;
-    }
-  `
+    '&::-moz-focus-inner': {
+      border: 0,
+      padding: 0,
+    },
+  }
 }
 
 const buttonTheme = {border: {width: 1}}

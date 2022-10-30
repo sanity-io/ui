@@ -1,5 +1,5 @@
 import {cloneElement, forwardRef, memo} from 'react'
-import styled, {css} from 'styled-components'
+import styled, {CSSObject} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
 import {rem, _responsive, ThemeProps} from '../../styles'
@@ -7,17 +7,17 @@ import {AvatarSize} from '../../types'
 import {childrenToElementArray} from '../helpers'
 import {AvatarCounter} from './avatarCounter'
 
-const BASE_STYLES = css`
-  white-space: nowrap;
+const BASE_STYLES: CSSObject = {
+  whiteSpace: 'nowrap',
 
-  & > div {
-    vertical-align: top;
+  '& > div': {
+    verticalAlign: 'top',
 
-    &:not([hidden]) {
-      display: inline-block;
-    }
-  }
-`
+    '&:not([hidden])': {
+      display: 'inline-block',
+    },
+  },
+}
 
 function avatarStackStyle() {
   return BASE_STYLES

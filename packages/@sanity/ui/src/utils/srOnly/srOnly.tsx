@@ -9,13 +9,15 @@ export interface SrOnlyProps {
   children?: React.ReactNode
 }
 
-const Root = memo(styled.div`
-  display: block;
-  width: 0;
-  height: 0;
-  position: absolute;
-  overflow: hidden;
-`)
+const Root = memo(
+  styled.div({
+    display: 'block',
+    width: 0,
+    height: 0,
+    position: 'absolute',
+    overflow: 'hidden',
+  })
+)
 
 /**
  * @public

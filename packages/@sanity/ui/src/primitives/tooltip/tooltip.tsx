@@ -47,9 +47,11 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   shadow?: number | number[]
 }
 
-const Root = memo(styled(Layer)`
-  pointer-events: none;
-`)
+const Root = memo(
+  styled(Layer)({
+    pointerEvents: 'none',
+  })
+)
 
 /**
  * @public

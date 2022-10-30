@@ -2,58 +2,64 @@ import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {DEFAULT_POPOVER_ARROW_HEIGHT, DEFAULT_POPOVER_ARROW_WIDTH} from './constants'
 
-const Root = memo(styled.div`
-  position: absolute;
-  pointer-events: none;
-  width: ${DEFAULT_POPOVER_ARROW_WIDTH}px;
-  height: ${DEFAULT_POPOVER_ARROW_WIDTH}px;
-  fill: none;
+const Root = memo(
+  styled.div({
+    position: 'absolute',
+    pointerEvents: 'none',
+    width: `${DEFAULT_POPOVER_ARROW_WIDTH}px`,
+    height: `${DEFAULT_POPOVER_ARROW_WIDTH}px`,
+    fill: 'none',
 
-  :empty + & {
-    display: none;
-  }
+    ':empty + &': {
+      display: 'none',
+    },
 
-  & > svg {
-    display: block;
-    transform-origin: ${DEFAULT_POPOVER_ARROW_WIDTH / 2}px ${DEFAULT_POPOVER_ARROW_WIDTH / 2}px;
-  }
+    '& > svg': {
+      display: 'block',
+      transformOrigin: `${DEFAULT_POPOVER_ARROW_WIDTH / 2}px ${DEFAULT_POPOVER_ARROW_WIDTH / 2}px`,
+    },
 
-  [data-placement^='top'] > & {
-    bottom: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
-  }
+    '[data-placement^="top"] > &': {
+      bottom: `-${DEFAULT_POPOVER_ARROW_WIDTH}px`,
+    },
 
-  [data-placement^='right'] > & {
-    left: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
+    '[data-placement^="right"] > &': {
+      left: `-${DEFAULT_POPOVER_ARROW_WIDTH}px`,
 
-    & > svg {
-      transform: rotate(90deg);
-    }
-  }
+      '& > svg': {
+        transform: 'rotate(90deg)',
+      },
+    },
 
-  [data-placement^='left'] > & {
-    right: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
+    '[data-placement^="left"] > &': {
+      right: `-${DEFAULT_POPOVER_ARROW_WIDTH}px`,
 
-    & > svg {
-      transform: rotate(-90deg);
-    }
-  }
+      '& > svg': {
+        transform: 'rotate(-90deg)',
+      },
+    },
 
-  [data-placement^='bottom'] > & {
-    top: -${DEFAULT_POPOVER_ARROW_WIDTH}px;
+    '[data-placement^="bottom"] > &': {
+      top: `-${DEFAULT_POPOVER_ARROW_WIDTH}px`,
 
-    & > svg {
-      transform: rotate(180deg);
-    }
-  }
-`)
+      '& > svg': {
+        transform: 'rotate(180deg)',
+      },
+    },
+  })
+)
 
-const BorderPath = memo(styled.path`
-  fill: var(--card-shadow-outline-color);
-`)
+const BorderPath = memo(
+  styled.path({
+    fill: 'var(--card-shadow-outline-color)',
+  })
+)
 
-const ShapePath = memo(styled.path`
-  fill: var(--card-bg-color);
-`)
+const ShapePath = memo(
+  styled.path({
+    fill: 'var(--card-bg-color)',
+  })
+)
 
 export const PopoverArrow = forwardRef(function PopoverArrow(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

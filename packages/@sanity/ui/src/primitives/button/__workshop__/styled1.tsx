@@ -1,12 +1,12 @@
 import {Button, Flex} from '@sanity/ui'
 import styled from 'styled-components'
 
-const StyledButton1 = styled.a`
-  &:hover {
-    background-color: red;
-    box-shadow: none;
-  }
-`
+const StyledButton1 = styled.a({
+  '&:hover': {
+    backgroundColor: 'red',
+    boxShadow: 'none',
+  },
+})
 
 export default function StyledButton1Story() {
   return (

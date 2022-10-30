@@ -6,34 +6,39 @@ import {Box} from '../../primitives'
 /**
  * @internal
  */
-export const Root = memo(styled.div`
-  line-height: 0;
-`)
+export const Root = memo(
+  styled.div({
+    lineHeight: 0,
+  })
+)
 
 /**
  * @internal
  */
-export const ListBox = memo(styled(Box)`
-  & > ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-`)
+export const ListBox = memo(
+  styled(Box)({
+    '& > ul': {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+    },
+  })
+)
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`
+const rotate = keyframes({
+  from: {
+    transform: 'rotate(0deg)',
+  },
+  to: {
+    transform: 'rotate(360deg)',
+  },
+})
 
 /**
  * @internal
  */
-export const AnimatedSpinnerIcon = memo(styled(SpinnerIcon)`
-  animation: ${rotate} 500ms linear infinite;
-`)
+export const AnimatedSpinnerIcon = memo(
+  styled(SpinnerIcon)`
+    animation: ${rotate} 500ms linear infinite;
+  `
+)

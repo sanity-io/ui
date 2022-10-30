@@ -1,37 +1,31 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {CSSObject} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
 export function labelBaseStyle(
   props: {$accent?: boolean; $muted: boolean} & ThemeProps
-): FlattenSimpleInterpolation {
+): CSSObject {
   const {$accent, $muted, theme} = props
   const {fonts} = theme.sanity
 
-  return css`
-    text-transform: uppercase;
+  return {
+    textTransform: 'uppercase',
 
-    ${$accent &&
-    css`
-      color: var(--card-accent-fg-color);
-    `}
+    ...($accent ? {color: 'var(--card-accent-fg-color)'} : {}),
 
-    ${$muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
+    ...($muted ? {color: 'var(--card-muted-fg-color)'} : {}),
 
-    & code {
-      font-family: ${fonts.code.family};
-      border-radius: 1px;
-    }
+    '& code': {
+      fontFamily: fonts.code.family,
+      borderRadius: 1,
+    },
 
-    & a {
-      text-decoration: none;
-      border-radius: 1px;
-    }
+    '& a': {
+      textDecoration: 'none',
+      borderRadius: 1,
+    },
 
-    & [data-sanity-icon] {
-      vertical-align: baseline;
-    }
-  `
+    '& [data-sanity-icon]': {
+      verticalAlign: 'baseline',
+    },
+  }
 }

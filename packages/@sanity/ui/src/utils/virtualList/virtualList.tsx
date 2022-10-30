@@ -30,15 +30,19 @@ export interface VirtualListProps<Item = any> {
   renderItem?: (item: Item) => React.ReactNode
 }
 
-const Root = memo(styled.div`
-  position: relative;
-`)
+const Root = memo(
+  styled.div({
+    position: 'relative',
+  })
+)
 
-const ItemWrapper = memo(styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-`)
+const ItemWrapper = memo(
+  styled.div({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+  })
+)
 
 /**
  * @beta

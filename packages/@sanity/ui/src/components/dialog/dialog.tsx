@@ -71,60 +71,72 @@ const Root = memo(
   )
 )
 
-const DialogContainer = memo(styled(Container)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`)
+const DialogContainer = memo(
+  styled(Container)({
+    '&:not([hidden])': {
+      display: 'flex',
+    },
+    width: '100%',
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  })
+)
 
-const DialogCardRoot = memo(styled(Card)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  min-height: 0;
-  max-height: 100%;
-  overflow: hidden;
-`)
+const DialogCardRoot = memo(
+  styled(Card)({
+    '&:not([hidden])': {
+      display: 'flex',
+    },
+    width: '100%',
+    minHeight: 0,
+    maxHeight: '100%',
+    overflow: 'hidden',
+  })
+)
 
-const DialogLayout = memo(styled(Flex)`
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-`)
+const DialogLayout = memo(
+  styled(Flex)({
+    flex: 1,
+    minHeight: 0,
+    width: '100%',
+  })
+)
 
-const DialogHeader = memo(styled(Card)`
-  position: relative;
-  z-index: 2;
+const DialogHeader = memo(
+  styled(Card)({
+    position: 'relative',
+    zIndex: 2,
 
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    border-bottom: 1px solid var(--card-hairline-soft-color);
-  }
-`)
+    '&:after': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: '-1px',
+      borderBottom: '1px solid var(--card-hairline-soft-color)',
+    },
+  })
+)
 
-const DialogContent = memo(styled(Box)`
-  position: relative;
-  z-index: 1;
-  overflow: auto;
-  outline: none;
-`)
+const DialogContent = memo(
+  styled(Box)({
+    position: 'relative',
+    zIndex: 1,
+    overflow: 'auto',
+    outline: 'none',
+  })
+)
 
-const DialogFooter = memo(styled(Box)`
-  position: relative;
-  z-index: 3;
-  border-top: 1px solid var(--card-hairline-soft-color);
-`)
+const DialogFooter = memo(
+  styled(Box)({
+    position: 'relative',
+    zIndex: 3,
+    borderTop: '1px solid var(--card-hairline-soft-color)',
+  })
+)
 
 const DialogCard = forwardRef(function DialogCard(
   props: DialogCardProps,

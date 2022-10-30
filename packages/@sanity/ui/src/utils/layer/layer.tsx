@@ -16,9 +16,11 @@ interface LayerChildrenProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
-const Root = memo(styled.div`
-  position: relative;
-`)
+const Root = memo(
+  styled.div({
+    position: 'relative',
+  })
+)
 
 const LayerChildren = forwardRef(function LayerChildren(
   props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

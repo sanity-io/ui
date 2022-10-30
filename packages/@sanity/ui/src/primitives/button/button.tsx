@@ -43,20 +43,22 @@ const Root = memo(
   )
 )
 
-const LoadingBox = memo(styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--card-bg-color);
-  border-radius: inherit;
-  z-index: 1;
-  box-shadow: inherit;
-`)
+const LoadingBox = memo(
+  styled.div({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'var(--card-bg-color)',
+    borderRadius: 'inherit',
+    zIndex: 1,
+    boxShadow: 'inherit',
+  })
+)
 
 /**
  * @public

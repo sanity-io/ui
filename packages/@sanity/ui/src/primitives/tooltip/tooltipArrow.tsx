@@ -1,74 +1,64 @@
 import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 
-const Root = memo(styled.div`
-  position: absolute;
-  pointer-events: none;
-  width: 15px;
-  height: 15px;
-  fill: none;
+const Root = memo(
+  styled.div({
+    position: 'absolute',
+    pointerEvents: 'none',
+    width: '15px',
+    height: '15px',
+    fill: 'none',
 
-  :empty + & {
-    display: none;
-  }
+    ':empty + &': {
+      display: 'none',
+    },
 
-  & > svg {
-    display: block;
-    transform-origin: 7.5px 7.5px;
-  }
+    '& > svg': {
+      display: 'block',
+      transformOrigin: '7.5px 7.5px',
+    },
 
-  /* position: absolute;
-  width: 15px;
-  height: 15px;
-  fill: none;
+    '[data-placement^="top"] > &': {
+      bottom: '-27px',
+    },
 
-  :empty + & {
-    display: none;
-  }
+    '[data-placement^="right"] > &': {
+      left: '-27px',
 
-  & > svg {
-    &:not([hidden]) {
-      display: block;
-    }
-    transform-origin: 7.5px 7.5px;
-  } */
+      '& > svg': {
+        transform: 'rotate(90deg)',
+      },
+    },
 
-  [data-placement^='top'] > & {
-    bottom: -27px;
-  }
+    '[data-placement^="left"] > &': {
+      right: '-27px',
 
-  [data-placement^='right'] > & {
-    left: -27px;
+      '& > svg': {
+        transform: 'rotate(-90deg)',
+      },
+    },
 
-    & > svg {
-      transform: rotate(90deg);
-    }
-  }
+    '[data-placement^="bottom"] > &': {
+      top: '-27px',
 
-  [data-placement^='left'] > & {
-    right: -27px;
+      '& > svg': {
+        transform: 'rotate(180deg)',
+      },
+    },
+  })
+)
 
-    & > svg {
-      transform: rotate(-90deg);
-    }
-  }
+const Border = memo(
+  styled.path({
+    fill: 'var(--card-shadow-outline-color)',
+  })
+)
 
-  [data-placement^='bottom'] > & {
-    top: -27px;
-
-    & > svg {
-      transform: rotate(180deg);
-    }
-  }
-`)
-
-const Border = memo(styled.path`
-  fill: var(--card-shadow-outline-color);
-`)
-
-const Shape = memo(styled.path`
-  fill: var(--card-bg-color);
-`)
+const Shape = memo(
+  styled.path({
+    fill: 'var(--card-bg-color)',
+  })
+)
 
 interface TooltipArrowProps {}
 

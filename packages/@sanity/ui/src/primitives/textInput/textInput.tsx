@@ -73,34 +73,43 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-const Root = memo(styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle))
+// NOTE: use `['attrs']` to work around a VS Code syntax highlighting issue
+const Root = memo(styled(Card)['attrs']({forwardedAs: 'span'})(textInputRootStyle))
 
-const InputRoot = memo(styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`)
+const InputRoot = memo(
+  styled.span({
+    flex: 1,
+    minWidth: 0,
+    display: 'block',
+    position: 'relative',
+  })
+)
 
-const Prefix = memo(styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+// NOTE: use `['attrs']` to work around a VS Code syntax highlighting issue
+const Prefix = memo(
+  styled(Card)['attrs']({forwardedAs: 'span'})({
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
 
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`)
+    '& > span': {
+      display: 'block',
+      margin: '-1px',
+    },
+  })
+)
 
-const Suffix = memo(styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+// NOTE: use `['attrs']` to work around a VS Code syntax highlighting issue
+const Suffix = memo(
+  styled(Card)['attrs']({forwardedAs: 'span'})({
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
 
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`)
+    '& > span': {
+      display: 'block',
+      margin: '-1px',
+    },
+  })
+)
 
 const Input = memo(
   styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
@@ -117,24 +126,30 @@ const Presentation = memo(
   )
 )
 
-const LeftBox = memo(styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`)
+const LeftBox = memo(
+  styled(Box)({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  })
+)
 
-const RightBox = memo(styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-`)
+const RightBox = memo(
+  styled(Box)({
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  })
+)
 
-const RightCard = memo(styled(Card)`
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-`)
+const RightCard = memo(
+  styled(Card)({
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  })
+)
 
 /**
  * @public

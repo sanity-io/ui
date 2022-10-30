@@ -29,10 +29,12 @@ export interface MenuProps extends ResponsivePaddingProps {
   space?: number | number[]
 }
 
-const Root = memo(styled(Box)`
-  outline: none;
-  overflow: auto;
-`)
+const Root = memo(
+  styled(Box)({
+    outline: 'none',
+    overflow: 'auto',
+  })
+)
 
 /**
  * @public

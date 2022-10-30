@@ -29,12 +29,14 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
 
 const Root = memo(styled.span(textInputRootStyle))
 
-const InputRoot = memo(styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`)
+const InputRoot = memo(
+  styled.span({
+    flex: 1,
+    minWidth: 0,
+    display: 'block',
+    position: 'relative',
+  })
+)
 
 const Input = memo(
   styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(

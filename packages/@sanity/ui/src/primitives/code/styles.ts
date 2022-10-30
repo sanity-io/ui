@@ -1,8 +1,8 @@
-import {css, FlattenInterpolation, ThemeProps as StyledThemeProps} from 'styled-components'
+import {CSSObject} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {Theme} from '../../theme'
 
-function codeSyntaxHighlightingStyle({theme}: ThemeProps) {
+function codeSyntaxHighlightingStyle({theme}: ThemeProps): CSSObject {
   const color = theme.sanity.color.syntax
 
   return {
@@ -45,26 +45,24 @@ function codeSyntaxHighlightingStyle({theme}: ThemeProps) {
   }
 }
 
-export function codeBaseStyle(): FlattenInterpolation<StyledThemeProps<Theme>> {
-  return css`
-    color: var(--card-code-fg-color);
+export function codeBaseStyle({theme}: {theme: Theme}): CSSObject {
+  return {
+    color: 'var(--card-code-fg-color)',
 
-    & code {
-      font-family: inherit;
+    '& code': {
+      fontFamily: 'inherit',
 
-      &.refractor .token {
-        ${codeSyntaxHighlightingStyle}
-      }
-    }
+      '&.refractor .token': codeSyntaxHighlightingStyle({theme}),
+    },
 
-    & a {
-      color: inherit;
-      text-decoration: underline;
-      border-radius: 1px;
-    }
+    '& a': {
+      color: 'inherit',
+      textDecoration: 'underline',
+      borderRadius: '1px',
+    },
 
-    & [data-sanity-icon] {
-      vertical-align: baseline;
-    }
-  `
+    '& [data-sanity-icon]': {
+      verticalAlign: 'baseline',
+    },
+  }
 }

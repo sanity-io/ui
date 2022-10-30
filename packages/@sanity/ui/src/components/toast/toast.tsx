@@ -29,13 +29,17 @@ const ROLES = {
   info: 'alert',
 }
 
-const Root = memo(styled(Card)`
-  pointer-events: all;
-`)
+const Root = memo(
+  styled(Card)({
+    pointerEvents: 'all',
+  })
+)
 
-const TextBox = memo(styled(Flex)`
-  overflow-x: auto;
-`)
+const TextBox = memo(
+  styled(Flex)({
+    overflowX: 'auto',
+  })
+)
 
 /**
  * @public

@@ -14,18 +14,22 @@ export interface HotkeysProps {
   keys?: string[]
 }
 
-const Root = memo(styled.kbd`
-  &:not([hidden]) {
-    display: block;
-  }
-  font: inherit;
-`)
+const Root = memo(
+  styled.kbd({
+    '&:not([hidden])': {
+      display: 'block',
+    },
+    font: 'inherit',
+  })
+)
 
-const Key = memo(styled(KBD)`
-  &:not([hidden]) {
-    display: block;
-  }
-`)
+const Key = memo(
+  styled(KBD)({
+    '&:not([hidden])': {
+      display: 'block',
+    },
+  })
+)
 
 /**
  * @public
