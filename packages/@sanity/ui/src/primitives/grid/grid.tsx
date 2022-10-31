@@ -1,7 +1,18 @@
 import {forwardRef, memo} from 'react'
-import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
-import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
+import {compose} from '../../styles'
+import {
+  responsiveGridAutoColsStyle,
+  responsiveGridAutoFlowStyle,
+  responsiveGridAutoRowsStyle,
+  responsiveGridColumnsStyle,
+  responsiveGridGapStyle,
+  responsiveGridGapXStyle,
+  responsiveGridGapYStyle,
+  responsiveGridRowsStyle,
+  ResponsiveGridStyleProps,
+  __tmp_gridStyle,
+} from '../../styles/internal'
 import {Box, BoxProps} from '../box'
 import {ResponsiveGridProps} from '../types'
 
@@ -10,7 +21,19 @@ import {ResponsiveGridProps} from '../types'
  */
 export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
 
-const Root = memo(styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle))
+const Root = memo(
+  compose<ResponsiveGridStyleProps>(Box, [
+    __tmp_gridStyle,
+    responsiveGridAutoFlowStyle,
+    responsiveGridAutoRowsStyle,
+    responsiveGridAutoColsStyle,
+    responsiveGridColumnsStyle,
+    responsiveGridRowsStyle,
+    responsiveGridGapStyle,
+    responsiveGridGapXStyle,
+    responsiveGridGapYStyle,
+  ])
+)
 
 /**
  * @public

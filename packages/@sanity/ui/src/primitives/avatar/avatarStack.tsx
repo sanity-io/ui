@@ -1,8 +1,8 @@
 import {cloneElement, forwardRef, memo} from 'react'
-import styled, {CSSObject} from 'styled-components'
+import {CSSObject} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
-import {rem, _responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps, compose} from '../../styles'
 import {AvatarSize} from '../../types'
 import {childrenToElementArray} from '../helpers'
 import {AvatarCounter} from './avatarCounter'
@@ -17,10 +17,6 @@ const BASE_STYLES: CSSObject = {
       display: 'inline-block',
     },
   },
-}
-
-function avatarStackStyle() {
-  return BASE_STYLES
 }
 
 function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
@@ -41,7 +37,7 @@ function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProp
 }
 
 const Root = memo(
-  styled.div<{$size: AvatarSize[]}>(responsiveAvatarStackSizeStyle, avatarStackStyle)
+  compose<{$size: AvatarSize[]}>('div', [responsiveAvatarStackSizeStyle, BASE_STYLES])
 )
 
 /**

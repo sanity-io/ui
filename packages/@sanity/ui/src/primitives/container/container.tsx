@@ -1,6 +1,6 @@
 import {forwardRef, memo} from 'react'
-import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {Box, BoxProps} from '../box'
 import {ResponsiveWidthProps} from '../types'
 import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
@@ -12,7 +12,7 @@ import {ResponsiveWidthStyleProps} from './types'
 export interface ContainerProps extends BoxProps, ResponsiveWidthProps {}
 
 const Root = memo(
-  styled(Box)<ResponsiveWidthStyleProps>(containerBaseStyle, responsiveContainerWidthStyle)
+  compose<ResponsiveWidthStyleProps>(Box, [containerBaseStyle, responsiveContainerWidthStyle])
 )
 
 /**

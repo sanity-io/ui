@@ -1,11 +1,17 @@
 import {forwardRef, memo} from 'react'
-import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {
-  flexItemStyle,
   FlexItemStyleProps,
-  responsiveFlexStyle,
   ResponsiveFlexStyleProps,
+  __tmp_flexItemStyle,
+  __tmp_flexStyle,
+  responsiveFlexAlignStyle,
+  responsiveFlexDirectionStyle,
+  responsiveFlexGapStyle,
+  responsiveFlexItemStyle,
+  responsiveFlexJustifyStyle,
+  responsiveFlexWrapStyle,
 } from '../../styles/internal'
 import {Box, BoxProps} from '../box'
 import {ResponsiveFlexProps, ResponsiveFlexItemProps} from '../types'
@@ -21,7 +27,18 @@ export interface FlexProps
 }
 
 const Root = memo(
-  styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(flexItemStyle, responsiveFlexStyle)
+  compose<FlexItemStyleProps & ResponsiveFlexStyleProps>(Box, [
+    // flexItem
+    __tmp_flexItemStyle,
+    responsiveFlexItemStyle,
+    // flex
+    __tmp_flexStyle,
+    responsiveFlexAlignStyle,
+    responsiveFlexGapStyle,
+    responsiveFlexWrapStyle,
+    responsiveFlexJustifyStyle,
+    responsiveFlexDirectionStyle,
+  ])
 )
 
 /**

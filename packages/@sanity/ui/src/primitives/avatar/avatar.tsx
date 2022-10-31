@@ -1,11 +1,12 @@
 import {forwardRef, memo, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
-import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {ThemeColorSpotKey, useTheme} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
 import {Text} from '../text'
 import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
+import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
 /**
  * @public
@@ -28,16 +29,19 @@ export interface AvatarProps {
 }
 
 const Root = memo(
-  styled.div<{$color: string; $size: AvatarSize[]}>(responsiveAvatarSizeStyle, avatarStyle.root)
+  compose<AvatarRootStyleProps & ResponsiveAvatarSizeStyleProps>('div', [
+    responsiveAvatarSizeStyle,
+    avatarStyle.root,
+  ])
 )
 
-const Arrow = memo(styled.div(avatarStyle.arrow))
+const Arrow = memo(compose('div', [avatarStyle.arrow]))
 
-const BgStroke = memo(styled.ellipse(avatarStyle.bgStroke))
+const BgStroke = memo(compose('ellipse', [avatarStyle.bgStroke]))
 
-const Stroke = memo(styled.ellipse(avatarStyle.stroke))
+const Stroke = memo(compose('ellipse', [avatarStyle.stroke]))
 
-const Initials = memo(styled.div(avatarStyle.initials))
+const Initials = memo(compose('div', [avatarStyle.initials]))
 
 /**
  * @public

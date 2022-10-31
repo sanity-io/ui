@@ -5,13 +5,13 @@ import {ResponsiveBorderStyleProps} from './types'
 
 const BORDER_VALUE = '1px solid var(--card-border-color)'
 
-export function responsiveBorderStyle(): Array<
-  (props: ResponsiveBorderStyleProps & ThemeProps) => CSSObject[]
-> {
-  return [border, borderTop, borderRight, borderBottom, borderLeft]
-}
+// export function responsiveBorderStyle(): Array<
+//   (props: ResponsiveBorderStyleProps & ThemeProps) => CSSObject[]
+// > {
+//   return [responsiveBorderStyle, borderTop, borderRight, borderBottom, borderLeft]
+// }
 
-function border(props: ResponsiveBorderStyleProps & ThemeProps) {
+export function responsiveBorderStyle(props: ResponsiveBorderStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -20,7 +20,9 @@ function border(props: ResponsiveBorderStyleProps & ThemeProps) {
   )
 }
 
-function borderTop(props: ResponsiveBorderStyleProps & ThemeProps) {
+export function responsiveBorderTopStyle(
+  props: ResponsiveBorderStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -29,7 +31,9 @@ function borderTop(props: ResponsiveBorderStyleProps & ThemeProps) {
   )
 }
 
-function borderRight(props: ResponsiveBorderStyleProps & ThemeProps) {
+export function responsiveBorderRightStyle(
+  props: ResponsiveBorderStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -38,7 +42,9 @@ function borderRight(props: ResponsiveBorderStyleProps & ThemeProps) {
   )
 }
 
-function borderBottom(props: ResponsiveBorderStyleProps & ThemeProps) {
+export function responsiveBorderBottomStyle(
+  props: ResponsiveBorderStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -47,7 +53,9 @@ function borderBottom(props: ResponsiveBorderStyleProps & ThemeProps) {
   )
 }
 
-function borderLeft(props: ResponsiveBorderStyleProps & ThemeProps) {
+export function responsiveBorderLeftStyle(
+  props: ResponsiveBorderStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 

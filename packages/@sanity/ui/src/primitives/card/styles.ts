@@ -4,12 +4,6 @@ import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {CardStyleProps} from './types'
 
-export function cardStyle(
-  props: CardStyleProps & ThemeProps
-): Array<CSSObject | (() => CSSObject)> {
-  return [cardBaseStyle(props), cardColorStyle(props)]
-}
-
 export function cardBaseStyle(props: CardStyleProps & ThemeProps): CSSObject {
   const {$checkered, theme} = props
   const space = theme.sanity.space

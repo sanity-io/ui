@@ -55,13 +55,13 @@ export function _getResponsiveSpace(
   theme: Theme,
   props: string[],
   spaceIndexes: number[] = EMPTY_ARRAY
-): CSSObject[] | null {
+): CSSObject[] {
   if (!Array.isArray(spaceIndexes)) {
     throw new Error('the property must be array of numbers')
   }
 
   if (spaceIndexes.length === 0) {
-    return null
+    return []
   }
 
   return _responsive(theme.sanity.media, spaceIndexes, (spaceIndex) =>

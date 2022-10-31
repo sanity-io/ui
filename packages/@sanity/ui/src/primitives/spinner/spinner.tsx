@@ -21,11 +21,14 @@ const rotate = keyframes`
   }
 `
 
-const Root = memo(styled(Text)`
+const RawRoot = styled(Text)`
   & > span > svg {
     animation: ${rotate} 500ms linear infinite;
   }
-`)
+`
+
+// NOTE: workaround for VS Code syntax highlighting
+const Root = memo(RawRoot)
 
 /**
  * @public

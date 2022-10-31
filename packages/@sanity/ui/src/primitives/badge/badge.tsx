@@ -1,6 +1,6 @@
-import {forwardRef, memo} from 'react'
-import styled from 'styled-components'
+import {ForwardedRef, forwardRef, memo} from 'react'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {BadgeMode, BadgeTone} from '../../types'
 import {Box, BoxProps} from '../box'
@@ -20,7 +20,7 @@ export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
 }
 
 const Root = memo(
-  styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(responsiveRadiusStyle, badgeStyle)
+  compose<ResponsiveRadiusStyleProps & BadgeStyleProps>(Box, [responsiveRadiusStyle, badgeStyle])
 )
 
 /**
@@ -28,7 +28,7 @@ const Root = memo(
  */
 export const Badge = forwardRef(function Badge(
   props: BadgeProps & React.HTMLProps<HTMLDivElement>,
-  ref
+  ref: ForwardedRef<HTMLDivElement>
 ) {
   const {
     children,

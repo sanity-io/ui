@@ -1,8 +1,8 @@
 import {Strategy} from '@floating-ui/react-dom'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
-import styled, {CSSObject} from 'styled-components'
+import {CSSObject} from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
-import {ThemeProps} from '../../styles'
+import {compose, ThemeProps} from '../../styles'
 import {ThemeColorSchemeKey} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {useLayer} from '../../utils'
@@ -37,7 +37,7 @@ function popoverCardStyle(props: {$boundaryWidth?: number} & ThemeProps): CSSObj
   }
 }
 
-const Root = memo(styled(Card)(popoverCardStyle))
+const Root = memo(compose<{$boundaryWidth?: number}>(Card, [popoverCardStyle]))
 
 /**
  * @internal

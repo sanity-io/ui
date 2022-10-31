@@ -1,18 +1,30 @@
 import {forwardRef, memo} from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {
-  boxStyle,
-  flexItemStyle,
   FlexItemStyleProps,
-  responsiveBoxStyle,
   ResponsiveBoxStyleProps,
-  responsiveGridItemStyle,
   ResponsiveGridItemStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-  responsiveMarginStyle,
   ResponsiveMarginStyleProps,
+  ResponsivePaddingStyleProps,
+  __tmp_flexItemStyle,
+  boxStyle,
+  // responsiveBoxStyle,
+  responsiveFlexItemStyle,
+  // responsiveGridItemStyle,
+  responsiveMarginStyle,
+  responsivePaddingStyle,
+  responsiveBoxSizingStyle,
+  responsiveBoxHeightStyle,
+  responsiveBoxOverflowStyle,
+  responsiveBoxDisplayStyle,
+  responsiveGridItemRowStyle,
+  responsiveGridItemRowStartStyle,
+  responsiveGridItemRowEndStyle,
+  responsiveGridItemColumnStyle,
+  responsiveGridItemColumnStartStyle,
+  responsiveGridItemColumnEndStyle,
 } from '../../styles/internal'
 import {
   ResponsiveBoxProps,
@@ -35,20 +47,34 @@ export interface BoxProps
 }
 
 const Root = memo(
-  styled.div<
+  compose<
     FlexItemStyleProps &
       ResponsiveBoxStyleProps &
       ResponsiveGridItemStyleProps &
       ResponsiveMarginStyleProps &
       ResponsivePaddingStyleProps
-  >(
+  >('div', [
+    // box
     boxStyle,
-    flexItemStyle,
-    responsiveBoxStyle,
-    responsiveGridItemStyle,
+    responsiveBoxSizingStyle,
+    responsiveBoxHeightStyle,
+    responsiveBoxOverflowStyle,
+    responsiveBoxDisplayStyle,
+    // flexItem
+    __tmp_flexItemStyle,
+    responsiveFlexItemStyle,
+    // gridItem
+    responsiveGridItemRowStyle,
+    responsiveGridItemRowStartStyle,
+    responsiveGridItemRowEndStyle,
+    responsiveGridItemColumnStyle,
+    responsiveGridItemColumnStartStyle,
+    responsiveGridItemColumnEndStyle,
+    // margin
     responsiveMarginStyle,
-    responsivePaddingStyle
-  )
+    // padding
+    responsivePaddingStyle,
+  ])
 )
 
 /**

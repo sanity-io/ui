@@ -1,6 +1,7 @@
 import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
@@ -39,18 +40,18 @@ const InputRoot = memo(
 )
 
 const Input = memo(
-  styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+  compose<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>('textarea', [
     responsiveInputPaddingStyle,
     textInputBaseStyle,
-    textInputFontSizeStyle
-  )
+    textInputFontSizeStyle,
+  ])
 )
 
 const Presentation = memo(
-  styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
+  compose<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>('div', [
     responsiveRadiusStyle,
-    textInputRepresentationStyle
-  )
+    textInputRepresentationStyle,
+  ])
 )
 
 /**

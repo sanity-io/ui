@@ -1,6 +1,7 @@
 import {forwardRef, memo} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {
   ResponsiveFontStyleProps,
   responsiveTextAlignStyle,
@@ -29,7 +30,11 @@ export interface TextProps {
 }
 
 const Root = memo(
-  styled.div<ResponsiveFontStyleProps>(responsiveTextFont, responsiveTextAlignStyle, textBaseStyle)
+  compose<ResponsiveFontStyleProps>('div', [
+    responsiveTextFont,
+    responsiveTextAlignStyle,
+    textBaseStyle,
+  ])
 )
 
 const SpanWithTextOverflow = memo(

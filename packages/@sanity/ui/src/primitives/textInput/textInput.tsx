@@ -4,6 +4,7 @@ import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp, useForwardedRef, useCustomValidity} from '../../hooks'
+import {compose} from '../../styles'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
@@ -112,18 +113,18 @@ const Suffix = memo(
 )
 
 const Input = memo(
-  styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+  compose<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>('input', [
     responsiveInputPaddingStyle,
     textInputBaseStyle,
-    textInputFontSizeStyle
-  )
+    textInputFontSizeStyle,
+  ])
 )
 
 const Presentation = memo(
-  styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
+  compose<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>('span', [
     responsiveRadiusStyle,
-    textInputRepresentationStyle
-  )
+    textInputRepresentationStyle,
+  ])
 )
 
 const LeftBox = memo(

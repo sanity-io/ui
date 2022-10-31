@@ -4,15 +4,9 @@ import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexItemStyleProps} from './types'
 
-const BASE_STYLE: CSSObject = {
+export const __tmp_flexItemStyle: CSSObject = {
   minWidth: 0,
   minHeight: 0,
-}
-
-export function flexItemStyle(): Array<
-  CSSObject | ((props: ResponsiveFlexItemStyleProps & ThemeProps) => CSSObject[])
-> {
-  return [BASE_STYLE, responsiveFlexItemStyle]
 }
 
 export function responsiveFlexItemStyle(

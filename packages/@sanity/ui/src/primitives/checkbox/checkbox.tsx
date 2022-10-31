@@ -1,7 +1,7 @@
 import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
 import {forwardRef, memo, useEffect} from 'react'
-import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity} from '../../hooks'
+import {compose} from '../../styles'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 
 /**
@@ -12,8 +12,8 @@ export interface CheckboxProps {
   customValidity?: string
 }
 
-const Root = memo(styled.div(checkboxBaseStyles))
-const Input = memo(styled.input(inputElementStyles))
+const Root = memo(compose('div', [checkboxBaseStyles]))
+const Input = memo(compose('input', [inputElementStyles]))
 
 /**
  * @public

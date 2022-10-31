@@ -1,8 +1,8 @@
 import {forwardRef, memo, useMemo} from 'react'
-import styled, {CSSObject} from 'styled-components'
+import {CSSObject} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
-import {rem, _responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps, compose} from '../../styles'
 import {AvatarSize} from '../../types'
 import {Text} from '../text'
 
@@ -44,7 +44,10 @@ function _avatarCounterBaseStyle(props: ThemeProps): CSSObject {
 }
 
 const Root = memo(
-  styled.div<{$size: AvatarSize[]}>(_responsiveAvatarCounterSizeStyle, _avatarCounterBaseStyle)
+  compose<{$size: AvatarSize[]}>('div', [
+    _responsiveAvatarCounterSizeStyle,
+    _avatarCounterBaseStyle,
+  ])
 )
 
 /**

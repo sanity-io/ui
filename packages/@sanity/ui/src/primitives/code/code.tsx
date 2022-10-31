@@ -1,7 +1,7 @@
 import {forwardRef, memo} from 'react'
 import Refractor from 'react-refractor'
-import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
 import {codeBaseStyle} from './styles'
 
@@ -15,7 +15,9 @@ export interface CodeProps {
   weight?: string
 }
 
-const Root = memo(styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle))
+const Root = memo(
+  compose<ResponsiveFontStyleProps>('pre', [codeBaseStyle, responsiveCodeFontStyle])
+)
 
 /**
  * @public

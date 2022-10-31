@@ -2,6 +2,7 @@ import {ToggleArrowRightIcon} from '@sanity/icons'
 import {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import styled from 'styled-components'
 import {Box, Flex, Text} from '../../primitives'
+import {compose} from '../../styles'
 import {ThemeFontWeightKey} from '../../theme'
 import {
   treeItemRootStyle,
@@ -26,7 +27,7 @@ export interface TreeItemProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
+const Root = memo(compose('li', [treeItemRootStyle, treeItemRootColorStyle]))
 
 const TreeItemBox = memo(
   styled(Box)['attrs']({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)

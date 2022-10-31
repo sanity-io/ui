@@ -3,24 +3,19 @@ import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
 
-const BASE_STYLE: CSSObject = {
+export const __tmp_flexStyle: CSSObject = {
   '&&:not([hidden])': {
     display: 'flex',
   },
 }
 
-export function responsiveFlexStyle(): Array<
-  CSSObject | ((props: ResponsiveFlexStyleProps & ThemeProps) => CSSObject[])
-> {
-  return [
-    BASE_STYLE,
-    responsiveFlexAlignStyle,
-    responsiveFlexGapStyle,
-    responsiveFlexWrapStyle,
-    responsiveFlexJustifyStyle,
-    responsiveFlexDirectionStyle,
-  ]
-}
+// export function responsiveFlexStyle(): Array<
+//   CSSObject | ((props: ResponsiveFlexStyleProps & ThemeProps) => CSSObject[])
+// > {
+//   return [
+
+//   ]
+// }
 
 export function responsiveFlexAlignStyle(
   props: ResponsiveFlexStyleProps & ThemeProps
@@ -33,7 +28,7 @@ export function responsiveFlexAlignStyle(
   })
 }
 
-function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
+export function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media, space} = theme.sanity
 

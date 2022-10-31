@@ -1,8 +1,7 @@
 import {createElement, forwardRef, isValidElement, memo, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
-import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
-import {ThemeProps} from '../../styles'
+import {compose, ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
@@ -36,28 +35,29 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
 }
 
 const Root = memo(
-  styled.button<{$mode: ButtonMode; $tone: ButtonTone} & ResponsiveRadiusStyleProps & ThemeProps>(
-    responsiveRadiusStyle,
-    buttonBaseStyles,
-    buttonColorStyles
+  compose<{$mode: ButtonMode; $tone: ButtonTone} & ResponsiveRadiusStyleProps & ThemeProps>(
+    'button',
+    [responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles]
   )
 )
 
 const LoadingBox = memo(
-  styled.div({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'var(--card-bg-color)',
-    borderRadius: 'inherit',
-    zIndex: 1,
-    boxShadow: 'inherit',
-  })
+  compose('div', [
+    {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'var(--card-bg-color)',
+      borderRadius: 'inherit',
+      zIndex: 1,
+      boxShadow: 'inherit',
+    },
+  ])
 )
 
 /**

@@ -3,7 +3,7 @@ import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridStyleProps} from './types'
 
-const GRID_CSS = {
+export const __tmp_gridStyle: CSSObject = {
   '&&:not([hidden])': {
     display: 'grid',
   },
@@ -26,23 +26,25 @@ const GRID_AUTO_ROWS = {
   fr: 'minmax(0, 1fr)',
 }
 
-export function responsiveGridStyle(): Array<
-  CSSObject | ((props: ResponsiveGridStyleProps & ThemeProps) => CSSObject[])
-> {
-  return [
-    GRID_CSS,
-    responsiveGridAutoFlowStyle,
-    responsiveGridAutoRowsStyle,
-    responsiveGridAutoColsStyle,
-    responsiveGridColumnsStyle,
-    responsiveGridRowsStyle,
-    responsiveGridGapStyle,
-    responsiveGridGapXStyle,
-    responsiveGridGapYStyle,
-  ]
-}
+// export function responsiveGridStyle(): Array<
+//   CSSObject | ((props: ResponsiveGridStyleProps & ThemeProps) => CSSObject[])
+// > {
+//   return [
+//     __tmp_gridStyle,
+//     responsiveGridAutoFlowStyle,
+//     responsiveGridAutoRowsStyle,
+//     responsiveGridAutoColsStyle,
+//     responsiveGridColumnsStyle,
+//     responsiveGridRowsStyle,
+//     responsiveGridGapStyle,
+//     responsiveGridGapXStyle,
+//     responsiveGridGapYStyle,
+//   ]
+// }
 
-function responsiveGridAutoFlowStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridAutoFlowStyle(
+  props: ResponsiveGridStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -51,7 +53,9 @@ function responsiveGridAutoFlowStyle(props: ResponsiveGridStyleProps & ThemeProp
   }))
 }
 
-function responsiveGridAutoRowsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridAutoRowsStyle(
+  props: ResponsiveGridStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -60,7 +64,9 @@ function responsiveGridAutoRowsStyle(props: ResponsiveGridStyleProps & ThemeProp
   }))
 }
 
-function responsiveGridAutoColsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridAutoColsStyle(
+  props: ResponsiveGridStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -69,7 +75,9 @@ function responsiveGridAutoColsStyle(props: ResponsiveGridStyleProps & ThemeProp
   }))
 }
 
-function responsiveGridColumnsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridColumnsStyle(
+  props: ResponsiveGridStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -78,7 +86,7 @@ function responsiveGridColumnsStyle(props: ResponsiveGridStyleProps & ThemeProps
   }))
 }
 
-function responsiveGridRowsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridRowsStyle(props: ResponsiveGridStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -87,7 +95,7 @@ function responsiveGridRowsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   }))
 }
 
-function responsiveGridGapStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridGapStyle(props: ResponsiveGridStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media, space} = theme.sanity
 
@@ -96,7 +104,7 @@ function responsiveGridGapStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   }))
 }
 
-function responsiveGridGapXStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridGapXStyle(props: ResponsiveGridStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media, space} = theme.sanity
 
@@ -105,7 +113,7 @@ function responsiveGridGapXStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   }))
 }
 
-function responsiveGridGapYStyle(props: ResponsiveGridStyleProps & ThemeProps) {
+export function responsiveGridGapYStyle(props: ResponsiveGridStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media, space} = theme.sanity
 

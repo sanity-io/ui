@@ -24,18 +24,20 @@ export function boxStyle(): CSSObject {
   return BASE_STYLE
 }
 
-export function responsiveBoxStyle(): Array<
-  (props: ResponsiveBoxStyleProps & ThemeProps) => CSSObject[]
-> {
-  return [
-    responsiveBoxSizingStyle,
-    responsiveBoxHeightStyle,
-    responsiveBoxOverflowStyle,
-    responsiveBoxDisplayStyle,
-  ]
-}
+// export function responsiveBoxStyle(): Array<
+//   (props: ResponsiveBoxStyleProps & ThemeProps) => CSSObject[]
+// > {
+//   return [
+//     responsiveBoxSizingStyle,
+//     responsiveBoxHeightStyle,
+//     responsiveBoxOverflowStyle,
+//     responsiveBoxDisplayStyle,
+//   ]
+// }
 
-function responsiveBoxDisplayStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
+export function responsiveBoxDisplayStyle(
+  props: ResponsiveBoxStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -44,7 +46,7 @@ function responsiveBoxDisplayStyle(props: ResponsiveBoxStyleProps & ThemeProps) 
   }))
 }
 
-function responsiveBoxSizingStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
+export function responsiveBoxSizingStyle(props: ResponsiveBoxStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -53,7 +55,7 @@ function responsiveBoxSizingStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
   }))
 }
 
-function responsiveBoxHeightStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
+export function responsiveBoxHeightStyle(props: ResponsiveBoxStyleProps & ThemeProps): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 
@@ -62,7 +64,9 @@ function responsiveBoxHeightStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
   }))
 }
 
-function responsiveBoxOverflowStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
+export function responsiveBoxOverflowStyle(
+  props: ResponsiveBoxStyleProps & ThemeProps
+): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
 

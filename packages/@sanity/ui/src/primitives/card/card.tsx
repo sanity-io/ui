@@ -1,10 +1,14 @@
 import {forwardRef, memo} from 'react'
 import {isValidElementType} from 'react-is'
-import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
+import {compose} from '../../styles'
 import {
+  responsiveBorderBottomStyle,
+  responsiveBorderLeftStyle,
+  responsiveBorderRightStyle,
   responsiveBorderStyle,
   ResponsiveBorderStyleProps,
+  responsiveBorderTopStyle,
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
   responsiveShadowStyle,
@@ -14,7 +18,7 @@ import {ThemeColorProvider, ThemeColorSchemeKey, useRootTheme} from '../../theme
 import {CardTone} from '../../types'
 import {Box, BoxProps} from '../box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
-import {cardStyle} from './styles'
+import {cardBaseStyle, cardColorStyle} from './styles'
 import {CardStyleProps} from './types'
 
 /**
@@ -41,12 +45,22 @@ export interface CardProps
 }
 
 const Root = memo(
-  styled(Box)<
+  compose<
     CardStyleProps &
       ResponsiveRadiusStyleProps &
       ResponsiveBorderStyleProps &
       ResponsiveShadowStyleProps
-  >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
+  >(Box, [
+    responsiveBorderStyle,
+    responsiveBorderTopStyle,
+    responsiveBorderRightStyle,
+    responsiveBorderBottomStyle,
+    responsiveBorderLeftStyle,
+    responsiveRadiusStyle,
+    responsiveShadowStyle,
+    cardBaseStyle,
+    cardColorStyle,
+  ])
 )
 
 /**
