@@ -1,6 +1,6 @@
 {
   "name": "@sanity/icons",
-  "version": "1.3.9-beta.2",
+  "version": "1.3.9-beta.3",
   "description": "The Sanity icons.",
   "sideEffects": false,
   "types": "./dist/types/src/index.d.ts",
