@@ -31,9 +31,6 @@ function popoverCardStyle(props: {$boundaryWidth?: number} & ThemeProps): CSSObj
       typeof $boundaryWidth === 'number'
         ? `${$boundaryWidth - DEFAULT_POPOVER_PADDING * 2}px`
         : undefined,
-
-    height: 'max-content',
-    minHeight: 'min-content',
   }
 }
 
