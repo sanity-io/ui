@@ -1,6 +1,6 @@
-import {WorkshopScope, WorkshopStory} from './types'
+import {WorkshopScope} from './types'
 
 /** @public */
-export function defineScope(name: string, title: string, stories: WorkshopStory[]): WorkshopScope {
-  return {name, title, stories}
+export function defineScope(scope: WorkshopScope): WorkshopScope {
+  return scope
 }
