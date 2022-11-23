@@ -228,28 +228,30 @@ export const MenuButton = forwardRef(function MenuButton(
     [buttonProp, handleButtonClick, handleButtonKeyDown, id, open, setButtonRef]
   )
 
-  const popoverProps: PopoverProps = useMemo(() => {
-    return {
+  const popoverProps: MenuButtonProps['popover'] = useMemo(
+    () => ({
       boundaryElement: deprecated_boundaryElement,
+      overflow: 'auto',
       placement: deprecated_placement,
       portal: deprecated_portal,
-      radius: deprecated_popoverRadius,
       preventOverflow: deprecated_preventOverflow,
+      radius: deprecated_popoverRadius,
       scheme: deprecated_popoverScheme,
       ...(popover || {}),
-    }
-  }, [
-    deprecated_boundaryElement,
-    deprecated_preventOverflow,
-    deprecated_placement,
-    popover,
-    deprecated_popoverRadius,
-    deprecated_portal,
-    deprecated_popoverScheme,
-  ])
+    }),
+    [
+      deprecated_boundaryElement,
+      deprecated_placement,
+      deprecated_popoverRadius,
+      deprecated_popoverScheme,
+      deprecated_portal,
+      deprecated_preventOverflow,
+      popover,
+    ]
+  )
 
   return (
-    <Popover {...popoverProps} content={menu} data-ui="MenuButton__popover" open={open}>
+    <Popover data-ui="MenuButton__popover" {...popoverProps} content={menu} open={open}>
       {button || <></>}
     </Popover>
   )

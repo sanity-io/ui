@@ -37,7 +37,6 @@ import {autocompleteReducer} from './autocompleteReducer'
 import {
   AUTOCOMPLETE_LISTBOX_IGNORE_KEYS,
   AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS,
-  AUTOCOMPLETE_POPOVER_MARGINS,
   AUTOCOMPLETE_POPOVER_PLACEMENT,
 } from './constants'
 import {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
@@ -641,7 +640,6 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
     return (
       <Popover
-        __unstable_margins={AUTOCOMPLETE_POPOVER_MARGINS}
         arrow={false}
         constrainSize
         content={content}
@@ -650,6 +648,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         onMouseEnter={handlePopoverMouseEnter}
         onMouseLeave={handlePopoverMouseLeave}
         open={expanded}
+        overflow="auto"
         placement={AUTOCOMPLETE_POPOVER_PLACEMENT}
         portal
         radius={radius}

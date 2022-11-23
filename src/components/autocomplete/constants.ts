@@ -1,4 +1,4 @@
-import {Placement, PopoverMargins} from '../../types'
+import {Placement} from '../../types'
 
 /**
  * @internal
@@ -20,14 +20,9 @@ export const AUTOCOMPLETE_LISTBOX_IGNORE_KEYS = [
 /**
  * @internal
  */
-export const AUTOCOMPLETE_POPOVER_MARGINS: PopoverMargins = [0, 1, 0, 0]
+export const AUTOCOMPLETE_POPOVER_PLACEMENT: Placement = 'bottom-start'
 
 /**
  * @internal
  */
-export const AUTOCOMPLETE_POPOVER_PLACEMENT: Placement = 'bottom'
-
-/**
- * @internal
- */
-export const AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS: Placement[] = ['bottom', 'top']
+export const AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS: Placement[] = ['bottom-start', 'top-start']
