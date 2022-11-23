@@ -1,8 +1,8 @@
 import {readFile} from 'fs/promises'
 import path from 'path'
+import type {WorkshopConfigOptions} from '@sanity/ui-workshop'
 import express from 'express'
 import {createServer as createViteServer} from 'vite'
-import {WorkshopConfigOptions} from '../../core/cli'
 import {createViteConfig} from '../viteConfig'
 
 export async function createDevServer(options: {
