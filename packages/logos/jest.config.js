@@ -1,10 +1,16 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 'use strict'
 
-const {createJestConfig} = require('../../../test/jestConfig')
-
 /** @type {import('@jest/types').Config.InitialOptions} */
-module.exports = createJestConfig({
-  displayName: require('./package.json').name,
-})
+module.exports = {
+  moduleFileExtensions: ['cjs', 'js', 'jsx', 'mjs', 'ts', 'tsx'],
+  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  setupFilesAfterEnv: ['<rootDir>/test/setupFilesAfterEnv.ts'],
+  testRegex: '(/__tests__/.*|\\.test)\\.[jt]sx?$',
+  transform: {
+    '\\.[jt]sx?$': [
+      'babel-jest',
+      // rootMode upwards makes use of the global babel.config.js
+      {rootMode: 'upward'},
+    ],
+  },
+}
