@@ -6,7 +6,7 @@ export default function Tones() {
   const mode = useSelect('Mode', WORKSHOP_BADGE_MODE_OPTIONS, 'default', 'Props')
 
   return (
-    <Flex align="center" height="fill" justify="center">
+    <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Inline space={2}>
         <Badge mode={mode}>Default</Badge>
         <Badge mode={mode} tone="primary">
