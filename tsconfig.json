@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.settings",
+  "extends": "./tsconfig.settings",
   "include": ["./src", "./test", "./typings"],
   "exclude": ["./src/**/__workshop__"],
   "compilerOptions": {
@@ -8,10 +8,5 @@
     "outDir": "./dist/types",
     "module": "ES2020",
     "jsx": "react-jsx"
-  },
-  "references": [
-    {"path": "../color/tsconfig.dist.json"},
-    {"path": "../icons/tsconfig.dist.json"},
-    {"path": "./tsconfig.workshop.json"}
-  ]
+  }
 }
