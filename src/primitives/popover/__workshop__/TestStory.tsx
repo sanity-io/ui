@@ -63,7 +63,6 @@ export default function TestStory(): ReactElement {
                 fallbackPlacements={['left', 'bottom', 'right', 'top']}
                 matchReferenceWidth={matchReferenceWidth}
                 open={open}
-                overflow="auto"
                 padding={3}
                 placement={placement}
                 portal
