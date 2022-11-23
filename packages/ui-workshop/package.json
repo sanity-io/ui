@@ -52,6 +52,9 @@
       ],
       "plugin-perf": [
         "./dist/plugin-perf.d.ts"
+      ],
+      "runtime": [
+        "./dist/runtime.d.ts"
       ]
     }
   },
