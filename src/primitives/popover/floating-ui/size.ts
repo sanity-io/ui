@@ -1,25 +1,32 @@
-import {Middleware, detectOverflow} from '@floating-ui/react-dom'
+import {Elements, Middleware, detectOverflow} from '@floating-ui/react-dom'
+import {PopoverMargins} from '../../../types'
 
-export function size(scope: {
-  boundaryElement: HTMLElement | null
+export interface SizeMiddlewareApplyOptions {
+  availableWidth: number
+  availableHeight: number
+  elements: Elements
+  referenceWidth: number
+}
+
+export function size(options: {
+  apply: (args: SizeMiddlewareApplyOptions) => void
+  boundaryElement?: HTMLElement | null
   constrainSize: boolean
+  margins: PopoverMargins
   matchReferenceWidth?: boolean
   padding?: number
-  setAvailableWidth: (v: number) => void
-  setAvailableHeight: (v: number) => void
-  setReferenceWidth: (v: number) => void
 }): Middleware {
-  const {padding = 0} = scope
+  const {apply, margins, padding = 0} = options
 
   return {
     name: '@sanity/ui/size',
     async fn(args) {
-      const {placement, rects} = args
+      const {elements, placement, platform, rects} = args
       const {floating, reference} = rects
 
       const overflow = await detectOverflow(args, {
         altBoundary: true,
-        boundary: scope.boundaryElement || undefined,
+        boundary: options.boundaryElement || undefined,
         elementContext: 'floating',
         padding,
         rootBoundary: 'viewport',
@@ -28,36 +35,44 @@ export function size(scope: {
       let maxWidth = Infinity
       let maxHeight = Infinity
 
+      const floatingW = floating.width
+      const floatingH = floating.height
+
       if (placement.includes('top')) {
-        maxWidth = floating.width - (overflow.left + overflow.right)
-        maxHeight = floating.height - overflow.top - padding
+        maxWidth = floatingW - (overflow.left + overflow.right)
+        maxHeight = floatingH - overflow.top
       }
 
       if (placement.includes('right')) {
-        maxWidth = floating.width - overflow.right - padding
-        maxHeight = floating.height - (overflow.top + overflow.bottom)
+        maxWidth = floatingW - overflow.right
+        maxHeight = floatingH - (overflow.top + overflow.bottom)
       }
 
       if (placement.includes('bottom')) {
-        maxWidth = floating.width - (overflow.left + overflow.right)
-        maxHeight = floating.height - overflow.bottom - padding
+        maxWidth = floatingW - (overflow.left + overflow.right)
+        maxHeight = floatingH - overflow.bottom
       }
 
       if (placement.includes('left')) {
-        maxWidth = floating.width - overflow.left - padding
-        maxHeight = floating.height - (overflow.top + overflow.bottom)
+        maxWidth = floatingW - overflow.left
+        maxHeight = floatingH - (overflow.top + overflow.bottom)
       }
 
-      if (scope.constrainSize) {
-        scope.setAvailableWidth(maxWidth)
-        scope.setAvailableHeight(maxHeight)
-      }
+      // IMPORTANT – APPLY ELEMENT STYLES HERE
+      // Elements need to be resized BEFORE the `platform.getDimensions` call below
+      apply({
+        availableWidth: maxWidth - margins[1] - margins[3],
+        availableHeight: maxHeight - margins[0] - margins[2],
+        elements,
+        referenceWidth: reference.width - margins[1] - margins[3],
+      })
 
-      if (scope.matchReferenceWidth) {
-        scope.setReferenceWidth(reference.width)
-      }
+      const nextDimensions = await platform.getDimensions(elements.floating)
 
-      if (!floating.width || !floating.height) {
+      const targetH = nextDimensions.height
+      const targetW = nextDimensions.width
+
+      if (floatingW !== targetW || floatingH !== targetH) {
         return {reset: {rects: true}}
       }
 

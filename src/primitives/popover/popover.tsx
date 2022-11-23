@@ -8,23 +8,19 @@ import {
   offset,
   shift,
   useFloating,
+  UseFloatingProps,
 } from '@floating-ui/react-dom'
-import {
-  cloneElement,
-  forwardRef,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {cloneElement, forwardRef, memo, useCallback, useEffect, useMemo, useRef} from 'react'
 import {useForwardedRef, useArrayProp, useElementSize} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
 import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
-import {DEFAULT_POPOVER_DISTANCE, DEFAULT_POPOVER_PADDING} from './constants'
+import {
+  DEFAULT_POPOVER_DISTANCE,
+  DEFAULT_POPOVER_MARGINS,
+  DEFAULT_POPOVER_PADDING,
+} from './constants'
 import {size} from './floating-ui/size'
 import {PopoverCard} from './popoverCard'
 
@@ -70,7 +66,7 @@ export const Popover = memo(
     const boundaryElementContext = useBoundaryElement()
 
     const {
-      __unstable_margins: margins,
+      __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
       arrow: arrowProp = true,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
@@ -80,7 +76,7 @@ export const Popover = memo(
       fallbackPlacements,
       matchReferenceWidth: matchReferenceWidthProp,
       open,
-      overflow = props.constrainSize ? 'auto' : 'hidden',
+      overflow = 'hidden',
       padding: paddingProp,
       placement: placementProp = 'bottom',
       portal,
@@ -100,9 +96,6 @@ export const Popover = memo(
     const shadow = useArrayProp(shadowProp)
     const width = useArrayProp(widthProp)
     const zOffset = useArrayProp(zOffsetProp)
-    const [availableWidth, setAvailableWidth] = useState<number | undefined>(undefined)
-    const [availableHeight, setAvailableHeight] = useState<number | undefined>(undefined)
-    const [referenceWidth, setReferenceWidth] = useState<number | undefined>(undefined)
     const forwardedRef = useForwardedRef(ref)
     const arrowRef = useRef<HTMLDivElement | null>(null)
     const rootBoundary: RootBoundary = 'viewport'
@@ -122,21 +115,6 @@ export const Popover = memo(
         )
       }
 
-      // Track sizes
-      if (constrainSize || matchReferenceWidthProp) {
-        ret.push(
-          size({
-            boundaryElement,
-            constrainSize,
-            matchReferenceWidth: matchReferenceWidthProp,
-            padding: DEFAULT_POPOVER_PADDING,
-            setAvailableHeight,
-            setAvailableWidth,
-            setReferenceWidth,
-          })
-        )
-      }
-
       // Define distance between reference and floating element
       ret.push(
         offset({
@@ -144,7 +122,30 @@ export const Popover = memo(
         })
       )
 
-      // Shift the popover so its sits with the boundary eleement
+      // Track sizes
+      if (constrainSize || matchReferenceWidthProp) {
+        ret.push(
+          size({
+            apply({availableWidth, availableHeight, elements, referenceWidth}) {
+              if (matchReferenceWidthProp) {
+                elements.floating.style.width = `${referenceWidth}px`
+              }
+
+              if (constrainSize) {
+                elements.floating.style.maxWidth = `${availableWidth}px`
+                elements.floating.style.maxHeight = `${availableHeight}px`
+              }
+            },
+            boundaryElement,
+            constrainSize,
+            margins,
+            matchReferenceWidth: matchReferenceWidthProp,
+            padding: DEFAULT_POPOVER_PADDING,
+          })
+        )
+      }
+
+      // Shift the popover so its sits within the boundary eleement
       if (preventOverflow) {
         ret.push(
           shift({
@@ -179,15 +180,29 @@ export const Popover = memo(
       boundaryElement,
       constrainSize,
       fallbackPlacements,
+      margins,
       matchReferenceWidthProp,
       preventOverflow,
     ])
 
-    const {x, y, placement, reference, floating, middlewareData, strategy} = useFloating({
-      middleware,
-      placement: placementProp,
-      whileElementsMounted: autoUpdate,
-    })
+    const floatingProps: UseFloatingProps = useMemo(
+      () => ({
+        middleware,
+        placement: placementProp,
+        whileElementsMounted: autoUpdate,
+      }),
+      [middleware, placementProp]
+    )
+
+    const {
+      x,
+      y,
+      placement,
+      reference: referenceRef,
+      floating: floatingRef,
+      middlewareData,
+      strategy,
+    } = useFloating(floatingProps)
 
     const referenceHidden = middlewareData.hide?.referenceHidden
 
@@ -201,15 +216,16 @@ export const Popover = memo(
     const setFloating = useCallback(
       (node: HTMLDivElement | null) => {
         forwardedRef.current = node
-        floating(node)
+        floatingRef(node)
       },
-      [floating, forwardedRef]
+      [floatingRef, forwardedRef]
     )
 
     const setReference = useCallback(
       (node: HTMLElement | null) => {
-        reference(node)
+        referenceRef(node)
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const childRef = (childProp as any)?.ref
 
         if (typeof childRef === 'function') {
@@ -218,7 +234,7 @@ export const Popover = memo(
           childRef.current = node
         }
       },
-      [childProp, reference]
+      [childProp, referenceRef]
     )
 
     const child = useMemo(() => {
@@ -228,8 +244,8 @@ export const Popover = memo(
     }, [childProp, referenceElement, setReference])
 
     useEffect(() => {
-      if (referenceElement) reference(referenceElement)
-    }, [reference, referenceElement])
+      referenceRef(referenceElement || null)
+    }, [referenceRef, referenceElement])
 
     if (disabled) {
       return childProp || <></>
@@ -244,8 +260,6 @@ export const Popover = memo(
           arrowRef={setArrow}
           arrowX={arrowX}
           arrowY={arrowY}
-          availableWidth={constrainSize ? availableWidth : undefined}
-          availableHeight={constrainSize ? availableHeight : undefined}
           boundaryWidth={preventOverflow ? boundarySize?.width : undefined}
           hidden={referenceHidden}
           overflow={overflow}
@@ -253,7 +267,6 @@ export const Popover = memo(
           placement={placement}
           radius={radius}
           ref={setFloating}
-          referenceWidth={matchReferenceWidthProp ? referenceWidth : undefined}
           scheme={scheme}
           shadow={shadow}
           strategy={strategy}

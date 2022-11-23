@@ -36,6 +36,11 @@ function popoverCardStyle(props: {$boundaryWidth?: number} & ThemeProps): CSSObj
 
 const Root = memo(styled(Card)(popoverCardStyle))
 
+const PopoverContainer = memo(styled(Container)`
+  max-height: inherit;
+  max-width: inherit;
+`)
+
 /**
  * @internal
  */
@@ -48,14 +53,11 @@ export const PopoverCard = memo(
       arrowRef: React.Ref<HTMLDivElement>
       arrowX?: number
       arrowY?: number
-      availableHeight?: number
-      availableWidth?: number
       boundaryWidth?: number
       overflow?: BoxOverflow
       padding?: number | number[]
       placement?: Placement
       radius?: number | number[]
-      referenceWidth?: number
       scheme?: ThemeColorSchemeKey
       shadow?: number | number[]
       strategy: Strategy
@@ -72,15 +74,12 @@ export const PopoverCard = memo(
       arrowRef,
       arrowX,
       arrowY,
-      availableHeight,
-      availableWidth,
       boundaryWidth,
       children,
       padding,
       placement,
       overflow,
       radius,
-      referenceWidth: referenceWidthProp,
       scheme,
       shadow,
       strategy,
@@ -101,10 +100,6 @@ export const PopoverCard = memo(
     )
 
     // Translate according to margins
-    const referenceWidth = referenceWidthProp
-      ? referenceWidthProp - margins[1] - margins[3]
-      : undefined
-
     const x = (xProp ?? 0) + margins[3]
     const y = (yProp ?? 0) + margins[0]
 
@@ -114,12 +109,9 @@ export const PopoverCard = memo(
         top: y,
         left: x,
         zIndex,
-        width: referenceWidth,
-        maxWidth: availableWidth,
-        maxHeight: availableHeight,
         ...style,
       }),
-      [availableHeight, availableWidth, referenceWidth, strategy, style, x, y, zIndex]
+      [strategy, style, x, y, zIndex]
     )
 
     const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
@@ -147,10 +139,11 @@ export const PopoverCard = memo(
         ref={ref}
         scheme={scheme}
         shadow={shadow}
+        sizing="border"
         style={rootStyle}
         tone={tone}
       >
-        <Container
+        <PopoverContainer
           data-ui="Popover__wrapper"
           flex={1}
           overflow={overflow}
@@ -159,7 +152,7 @@ export const PopoverCard = memo(
           width={width}
         >
           {children}
-        </Container>
+        </PopoverContainer>
 
         {arrow && <PopoverArrow ref={arrowRef} style={arrowStyle} />}
       </Root>
