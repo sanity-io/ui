@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-beta.7](https://github.com/sanity-io/ui-workshop/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2022-11-23)
+
+### Bug Fixes
+
+- export `./runtime` types ([4045284](https://github.com/sanity-io/ui-workshop/commit/40452840c84361822b45da32d7e25d5f281a67ea))
+
 ## [1.0.0-beta.6](https://github.com/sanity-io/ui-workshop/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-11-23)
 
 ### Features
