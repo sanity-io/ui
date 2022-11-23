@@ -1,5 +1,7 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
+/* eslint-disable import/order */
+
 import {IconComponent} from '../types'
 
 import {AccessDeniedIcon} from './accessDeniedIcon'
@@ -58,11 +60,11 @@ import {DocumentIcon} from './documentIcon'
 import {DocumentPdfIcon} from './documentPdfIcon'
 import {DocumentRemoveIcon} from './documentRemoveIcon'
 import {DocumentSheetIcon} from './documentSheetIcon'
-import {DocumentsIcon} from './documentsIcon'
 import {DocumentTextIcon} from './documentTextIcon'
 import {DocumentVideoIcon} from './documentVideoIcon'
 import {DocumentWordIcon} from './documentWordIcon'
 import {DocumentZipIcon} from './documentZipIcon'
+import {DocumentsIcon} from './documentsIcon'
 import {DotIcon} from './dotIcon'
 import {DoubleChevronDownIcon} from './doubleChevronDownIcon'
 import {DoubleChevronLeftIcon} from './doubleChevronLeftIcon'

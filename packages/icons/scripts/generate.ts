@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import fs from 'fs'
 import path from 'path'
 import util from 'util'
@@ -7,7 +9,7 @@ import globby from 'globby'
 import mkdirp from 'mkdirp'
 import {format} from 'prettier'
 
-const ROOT_PATH = path.resolve(__dirname, '../../../..')
+const ROOT_PATH = path.resolve(__dirname, '..')
 
 const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
@@ -142,6 +144,7 @@ async function generate() {
   const indexTsCode = format(
     [
       GENERATED_BANNER,
+      '/* eslint-disable import/order */',
       importTypes,
       iconImports,
       typesExports,
@@ -156,6 +159,8 @@ async function generate() {
   )
 
   await writeFile(indexPath, indexTsCode)
+
+  console.log(`generated ${files.length} icons:`, files.map((f) => f.name).join(', '))
 }
 
 generate().catch((err) => {

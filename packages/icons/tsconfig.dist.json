@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.settings",
+  "extends": "./tsconfig.settings",
   "include": ["./src"],
   "exclude": [
     "./src/**/__fixtures__",
@@ -9,10 +9,9 @@
     "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
-    "composite": true,
-    "sourceMap": true,
     "rootDir": ".",
-    "outDir": "./dist/types",
+    "outDir": "./dist",
+    "sourceMap": true,
     "jsx": "react-jsx"
   }
 }
