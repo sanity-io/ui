@@ -1,0 +1,50 @@
+name: CI & Release
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+      - beta
+      - alpha
+
+jobs:
+  test:
+    runs-on: ${{ matrix.platform }}
+    name: Node.js ${{ matrix.node-version }} / ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-latest, macos-latest]
+        node-version: [lts/*, current]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm i pnpm@latest -g
+      - run: pnpm install
+      - run: pnpm lint
+      - run: pnpm build
+      - run: pnpm test
+
+  release:
+    name: "Semantic release"
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Need to fetch entire commit history to
+          # analyze every commit since last release
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - run: npm i pnpm@latest -g
+      - run: pnpm install
+      # Branches that will release new versions are defined in .releaserc.json
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

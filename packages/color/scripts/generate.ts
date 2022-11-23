@@ -1,4 +1,6 @@
-/**
+/* eslint-disable no-console */
+
+/*
  * Generates src/colorPalette.ts based on `COLOR_HUES` constant + values in `src/config.js`
  * This lets us move `polished` (or similar) to a dev dependency, reducing bundle size
  */
@@ -11,7 +13,7 @@ import * as colors from '../src/config'
 import {COLOR_HUES, COLOR_TINTS} from '../src/constants'
 import {ColorHueKey, ColorValue, ColorHueConfig, ColorTintKey} from '../src/types'
 
-const ROOT_PATH = path.resolve(__dirname, '../../../..')
+const ROOT_PATH = path.resolve(__dirname, '..')
 
 const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
@@ -75,3 +77,5 @@ const prettierConfig = JSON.parse(readFileSync(path.resolve(ROOT_PATH, '.prettie
 const filepath = path.resolve(__dirname, '../src/hues.ts')
 
 writeFileSync(filepath, format(tpl, {filepath, ...prettierConfig}))
+
+console.log('generated', path.relative(ROOT_PATH, filepath))
