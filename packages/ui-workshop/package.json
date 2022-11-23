@@ -10,60 +10,66 @@
     "dist",
     "src"
   ],
-  "types": "./dist/sanity-ui-workshop.d.ts",
-  "source": "./src/core/index.ts",
-  "module": "./dist/sanity-ui-workshop.esm.js",
-  "main": "./dist/sanity-ui-workshop.js",
+  "types": "./dist/index.d.ts",
+  "source": "./exports/index.ts",
+  "module": "./dist/index.esm.js",
+  "main": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./dist/sanity-ui-workshop.d.ts",
-      "source": "./src/core/index.ts",
-      "import": "./dist/sanity-ui-workshop.esm.js",
-      "require": "./dist/sanity-ui-workshop.js",
-      "default": "./dist/sanity-ui-workshop.esm.js"
+      "types": "./dist/index.d.ts",
+      "source": "./exports/index.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.esm.js"
     },
     "./plugin-a11y": {
-      "types": "./dist/sanity-ui-workshop-plugin-a11y.d.ts",
-      "source": "./src/plugin-a11y/index.ts",
-      "import": "./dist/sanity-ui-workshop-plugin-a11y.esm.js",
-      "require": "./dist/sanity-ui-workshop-plugin-a11y.js",
-      "default": "./dist/sanity-ui-workshop-plugin-a11y.esm.js"
+      "types": "./dist/plugin-a11y.d.ts",
+      "source": "./exports/plugin-a11y.ts",
+      "import": "./dist/plugin-a11y.esm.js",
+      "require": "./dist/plugin-a11y.js",
+      "default": "./dist/plugin-a11y.esm.js"
     },
     "./plugin-perf": {
-      "types": "./dist/sanity-ui-workshop-plugin-perf.d.ts",
-      "source": "./src/plugin-perf/index.ts",
-      "import": "./dist/sanity-ui-workshop-plugin-perf.esm.js",
-      "require": "./dist/sanity-ui-workshop-plugin-perf.js",
-      "default": "./dist/sanity-ui-workshop-plugin-perf.esm.js"
+      "types": "./dist/plugin-perf.d.ts",
+      "source": "./exports/plugin-perf.ts",
+      "import": "./dist/plugin-perf.esm.js",
+      "require": "./dist/plugin-perf.js",
+      "default": "./dist/plugin-perf.esm.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "source": "./exports/runtime.ts",
+      "import": "./dist/runtime.esm.js",
+      "require": "./dist/runtime.js",
+      "default": "./dist/runtime.esm.js"
     },
     "./package.json": "./package.json"
   },
   "typesVersions": {
     "*": {
       "plugin-a11y": [
-        "./dist/sanity-ui-workshop-plugin-a11y.d.ts"
+        "./dist/plugin-a11y.d.ts"
       ],
       "plugin-perf": [
-        "./dist/sanity-ui-workshop-plugin-perf.d.ts"
+        "./dist/plugin-perf.d.ts"
       ]
     }
   },
   "license": "MIT",
   "scripts": {
-    "build": "pkg build",
-    "check:package": "pkg --strict",
+    "build": "run-s clean build:pkg check:pkg",
+    "build:pkg": "pkg build",
+    "check:pkg": "pkg --strict",
     "clean": "rimraf dist",
     "commit": "cz",
     "dev": "run-p workshop:dev",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
-    "postbuild": "run-s check:package",
-    "prebuild": "run-s clean",
     "prepare": "husky install",
     "prepublishOnly": "pnpm run build",
     "release": "semantic-release",
     "test": "jest",
-    "watch": "pkg watch",
+    "watch": "pkg watch --strict",
     "workshop:build": "rimraf .workshop && node -r dotenv-flow/config -r esbuild-register scripts/build",
     "workshop:dev": "node -r dotenv-flow/config -r esbuild-register scripts/dev",
     "workshop:start": "serve -p 1337 -s .workshop/dist"

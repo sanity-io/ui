@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./package.json", "./src", "./typings"],
+  "include": ["./exports", "./package.json", "./src", "./typings"],
   "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
   "compilerOptions": {
     "composite": true,
