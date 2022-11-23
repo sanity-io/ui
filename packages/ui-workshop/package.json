@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "sideEffects": false,
   "bin": {
     "workshop": "./bin/workshop"
