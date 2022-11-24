@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "cypress-real-events", "node"]
+  },
+  "include": ["./**/*.ts"]
+}

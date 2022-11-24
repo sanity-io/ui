@@ -17,6 +17,8 @@ jobs:
       matrix:
         platform: [ubuntu-latest, macos-latest]
         node-version: [lts/*, current]
+    env:
+      CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -27,6 +29,16 @@ jobs:
       - run: pnpm build
       - run: pnpm lint
       - run: pnpm test
+      - run: pnpm test:browser
+
+      - name: Upload Cypress Artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress
+          path: |
+            cypress/screenshots
+            cypress/videos
 
   release:
     name: 'Semantic release'
