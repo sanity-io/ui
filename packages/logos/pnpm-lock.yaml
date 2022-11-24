@@ -7,12 +7,12 @@ specifiers:
   '@babel/preset-typescript': ^7.18.6
   '@commitlint/cli': ^17.3.0
   '@commitlint/config-conventional': ^17.3.0
-  '@sanity/color': 3.0.0-beta.1
+  '@sanity/color': ^2.1.20
   '@sanity/icons': ^2.0.0
   '@sanity/pkg-utils': ^1.18.0
   '@sanity/semantic-release-preset': ^2.0.2
   '@sanity/ui': 1.0.0-beta.33
-  '@sanity/ui-workshop': 1.0.0-beta.5
+  '@sanity/ui-workshop': 1.0.0-beta.9
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
   '@types/jest': ^29.2.3
@@ -56,12 +56,12 @@ devDependencies:
   '@babel/preset-typescript': 7.18.6_@babel+core@7.20.2
   '@commitlint/cli': 17.3.0
   '@commitlint/config-conventional': 17.3.0
-  '@sanity/color': 3.0.0-beta.1
+  '@sanity/color': 2.1.20
   '@sanity/icons': 2.0.0_react@18.2.0
   '@sanity/pkg-utils': 1.18.0_typescript@4.9.3
   '@sanity/semantic-release-preset': 2.0.2
   '@sanity/ui': 1.0.0-beta.33_23mhwjhnzfjwvdn7ol54k26zom
-  '@sanity/ui-workshop': 1.0.0-beta.5_m5sab4zki4ofn3fhl63mgogffa
+  '@sanity/ui-workshop': 1.0.0-beta.9_m5sab4zki4ofn3fhl63mgogffa
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@types/jest': 29.2.3
@@ -2349,9 +2349,8 @@ packages:
     engines: {node: '>=14.0.0'}
     dev: true
 
-  /@sanity/color/3.0.0-beta.1:
-    resolution: {integrity: sha512-XN6t+6PJj2zu+QE8Ex0WEHBxWEsrFvf+8KeBxQYl2eo/bjfvuOFlyEIZ9/yByfKH7xAihLyYmAFtYb1DeLbxfw==}
-    engines: {node: '>=14.0.0'}
+  /@sanity/color/2.1.20:
+    resolution: {integrity: sha512-dHPgiCMf+lwvQls5uPzorfiq9YuU41AzvifA+ugVHmXvq7JBoofoOPUOmdHUQF0l0shSy0nD3zn52j2I+T2ekg==}
     dev: true
 
   /@sanity/icons/1.3.9_react@18.2.0:
@@ -2434,11 +2433,11 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop/1.0.0-beta.5_m5sab4zki4ofn3fhl63mgogffa:
-    resolution: {integrity: sha512-IjOez/HbgGYeMDvQ1YT1PvXETDunlqReCUgx491+6cVdOiN+5f/Gi4qZkCHsnM2DetroiXRaizkhUa8U1vPobA==}
+  /@sanity/ui-workshop/1.0.0-beta.9_m5sab4zki4ofn3fhl63mgogffa:
+    resolution: {integrity: sha512-ZuUPpyuYXwXOVD0FDRjVElSVgN2LrQIU8A/UK5irnlqbfvj4wLkcH+c3iCcJK9PJRD1OjxbqVLdS750LfrGbtQ==}
     hasBin: true
     peerDependencies:
-      '@sanity/icons': ^1.0
+      '@sanity/icons': ^2.0
       '@sanity/ui': beta
       react: ^18
       react-dom: ^18
