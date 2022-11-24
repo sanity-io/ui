@@ -103,7 +103,7 @@
     "@sanity/icons": "^2.0.0",
     "@sanity/pkg-utils": "^1.17.1",
     "@sanity/semantic-release-preset": "^2.0.2",
-    "@sanity/ui": "1.0.0-beta.34",
+    "@sanity/ui": "^1.0.0",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -145,8 +145,8 @@
     "typescript": "^4.8.4"
   },
   "peerDependencies": {
-    "@sanity/icons": "^2.0",
-    "@sanity/ui": "beta",
+    "@sanity/icons": "^2",
+    "@sanity/ui": "^1",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^5.2"
