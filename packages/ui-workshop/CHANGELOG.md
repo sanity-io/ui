@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-beta.11](https://github.com/sanity-io/ui-workshop/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-11-24)
+
+### Bug Fixes
+
+- **deps:** update dependencies ([d135410](https://github.com/sanity-io/ui-workshop/commit/d135410665ded97ce03140c9978de7f2e1daac9c))
+
 ## [1.0.0-beta.10](https://github.com/sanity-io/ui-workshop/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-11-24)
 
 ### Bug Fixes
