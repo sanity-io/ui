@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/sanity-io/logos/compare/v2.0.0...v2.0.1) (2022-11-24)
+
+### Bug Fixes
+
+- **deps:** upgrade dependencies ([537741c](https://github.com/sanity-io/logos/commit/537741cd843a6e0b66cacefd72bcf91ef385db58))
+
 ## [2.0.0](https://github.com/sanity-io/logos/compare/v1.1.21...v2.0.0) (2022-11-24)
 
 ### ⚠ BREAKING CHANGES
