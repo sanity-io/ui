@@ -1,6 +1,8 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope('primitives/container', 'Container', [
-  {name: 'plain', title: 'Plain', component: lazy(() => import('./example'))},
-])
+export default defineScope({
+  name: 'primitives/container',
+  title: 'Container',
+  stories: [{name: 'plain', title: 'Plain', component: lazy(() => import('./example'))}],
+})

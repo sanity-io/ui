@@ -1,6 +1,6 @@
 import {Autocomplete, Box, Card, Container, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop'
+import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
 import {useCallback, useMemo, useState} from 'react'
 import {

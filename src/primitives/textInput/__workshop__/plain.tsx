@@ -1,6 +1,7 @@
 import {icons, IconSymbol} from '@sanity/icons'
 import {Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
-import {PerfTestProps, useBoolean, usePerfTest, useSelect, useText} from '@sanity/ui-workshop'
+import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
+import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
 import {useCallback, useState} from 'react'
 import {

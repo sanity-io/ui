@@ -1,12 +1,14 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./src", "./test", "./typings"],
-  "exclude": ["./src/**/__workshop__"],
+  "include": ["./package.config.ts", "./src", "./test", "./typings", "./workshop.config.ts"],
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
     "outDir": "./dist/types",
     "module": "ES2020",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@sanity/ui": ["./src"]
+    }
   }
 }

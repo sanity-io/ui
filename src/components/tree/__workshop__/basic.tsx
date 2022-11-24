@@ -1,6 +1,6 @@
 import {LinkIcon} from '@sanity/icons'
 import {Box, Tree, TreeItem} from '@sanity/ui'
-import {usePerfTest} from '@sanity/ui-workshop'
+import {usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {useCallback, useState} from 'react'
 import {perfTests} from './basic.perf'
 
