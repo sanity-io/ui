@@ -99,10 +99,10 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "@commitlint/config-conventional": "^17.2.0",
-    "@sanity/icons": "1.3.9-beta.3",
+    "@sanity/icons": "^2.0.0",
     "@sanity/pkg-utils": "^1.17.1",
     "@sanity/semantic-release-preset": "^2.0.2",
-    "@sanity/ui": "1.0.0-beta.32",
+    "@sanity/ui": "1.0.0-beta.33",
     "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -144,7 +144,7 @@
     "typescript": "^4.8.4"
   },
   "peerDependencies": {
-    "@sanity/icons": "^1.0",
+    "@sanity/icons": "^2.0",
     "@sanity/ui": "beta",
     "react": "^18",
     "react-dom": "^18",
