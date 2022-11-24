@@ -1,6 +1,6 @@
-import {devCommand} from '../src/cli/devCommand'
+import {dev} from '../src/runtime'
 
-devCommand({cwd: process.cwd()}).catch((err) => {
+dev({cwd: process.cwd()}).catch((err) => {
   // eslint-disable-next-line no-console
   console.error(err)
 })

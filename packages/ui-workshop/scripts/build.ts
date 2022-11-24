@@ -1,6 +1,6 @@
-import {buildCommand} from '../src/cli/buildCommand'
+import {build} from '../src/runtime'
 
-buildCommand({cwd: process.cwd()}).catch((err) => {
+build({cwd: process.cwd()}).catch((err) => {
   // eslint-disable-next-line no-console
   console.error(err)
 })
