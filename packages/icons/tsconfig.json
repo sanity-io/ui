@@ -4,6 +4,9 @@
   "compilerOptions": {
     "rootDir": ".",
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@sanity/icons": ["./src"]
+    }
   }
 }
