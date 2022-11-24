@@ -9,7 +9,7 @@ specifiers:
   '@sanity/icons': ^2.0.0
   '@sanity/pkg-utils': ^1.17.1
   '@sanity/semantic-release-preset': ^2.0.2
-  '@sanity/ui': 1.0.0-beta.33
+  '@sanity/ui': 1.0.0-beta.34
   '@testing-library/dom': ^8.19.0
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
@@ -89,7 +89,7 @@ devDependencies:
   '@sanity/icons': 2.0.0_react@18.2.0
   '@sanity/pkg-utils': 1.17.1_typescript@4.8.4
   '@sanity/semantic-release-preset': 2.0.2
-  '@sanity/ui': 1.0.0-beta.33_23mhwjhnzfjwvdn7ol54k26zom
+  '@sanity/ui': 1.0.0-beta.34_23mhwjhnzfjwvdn7ol54k26zom
   '@testing-library/dom': 8.19.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
@@ -2346,18 +2346,9 @@ packages:
       string-argv: 0.3.1
     dev: true
 
-  /@sanity/color/2.1.19:
-    resolution: {integrity: sha512-R5PrRS7Gie5WwW3hPqYT/amEGqgImwMrvVCA7n3kiKAbhdl48w1LjAsmy4jG64CXzQiXIVZYgybyBKTsZUTkxg==}
+  /@sanity/color/3.0.0-beta.1:
+    resolution: {integrity: sha512-XN6t+6PJj2zu+QE8Ex0WEHBxWEsrFvf+8KeBxQYl2eo/bjfvuOFlyEIZ9/yByfKH7xAihLyYmAFtYb1DeLbxfw==}
     engines: {node: '>=14.0.0'}
-    dev: true
-
-  /@sanity/icons/1.3.9_react@18.2.0:
-    resolution: {integrity: sha512-tNYYxCpYk5VlP+xD8SSP3ijAESH/esB0ct6QMohKWdQceaHtot7kW3qmkO/pU9mw0iodBD3cn3vdUDPb3IIDew==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: ^18
-    dependencies:
-      react: 18.2.0
     dev: true
 
   /@sanity/icons/2.0.0_react@18.2.0:
@@ -2429,8 +2420,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui/1.0.0-beta.33_23mhwjhnzfjwvdn7ol54k26zom:
-    resolution: {integrity: sha512-dVTVwzep3KaczJ069ljM5t+Gq6ZU9BcMrVNlRICq7prsyIig0GaJEPvPxr16BBCMLdbUf1UGFisH94aLh0qQtQ==}
+  /@sanity/ui/1.0.0-beta.34_23mhwjhnzfjwvdn7ol54k26zom:
+    resolution: {integrity: sha512-WTmrIyqnCHUSTkv40/0KGBEfCGmD8ESQL3bRN+QmGUp+sB5jeXDxKJ6590eUtwodzyfm2K5Vh/CVGOQ3NDAPfA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
@@ -2439,8 +2430,8 @@ packages:
       styled-components: ^5.2
     dependencies:
       '@floating-ui/react-dom': 1.0.0_biqbaboplfbrettd7655fr4n2y
-      '@sanity/color': 2.1.19
-      '@sanity/icons': 1.3.9_react@18.2.0
+      '@sanity/color': 3.0.0-beta.1
+      '@sanity/icons': 2.0.0_react@18.2.0
       csstype: 3.1.1
       framer-motion: 7.6.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
