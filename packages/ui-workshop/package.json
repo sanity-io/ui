@@ -63,6 +63,7 @@
     "build": "run-s clean build:pkg check:pkg",
     "build:pkg": "pkg build",
     "check:pkg": "pkg --strict",
+    "check:types": "tsc --build",
     "clean": "rimraf dist",
     "commit": "cz",
     "dev": "run-p workshop:dev",
