@@ -8,7 +8,7 @@ import {ColorSwatchesEditor} from './ColorSwatchEditor'
 import {ColorToolSwatch} from './types'
 
 const _hues: {hue: ColorHueKey; swatches: ColorToolSwatch[]}[] = COLOR_HUES.map((hue) => {
-  const {tints} = config[hue]
+  const tints = config[hue]
 
   return {
     hue: hue as ColorHueKey,
