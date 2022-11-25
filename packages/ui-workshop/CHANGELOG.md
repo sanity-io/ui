@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0-beta.12](https://github.com/sanity-io/ui-workshop/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-11-25)
+
+### Features
+
+- root stories ([80dedc5](https://github.com/sanity-io/ui-workshop/commit/80dedc5e7946064b4631cf12e6777ac9cc34e2dc))
+
+### Bug Fixes
+
+- scrollable frame background ([3203b89](https://github.com/sanity-io/ui-workshop/commit/3203b895906952dbc2699f8c4f02ef72cc38c346))
+
 ## [1.0.0-beta.11](https://github.com/sanity-io/ui-workshop/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-11-24)
 
 ### Bug Fixes
