@@ -20,6 +20,7 @@
       "@sanity/ui-workshop": ["./exports"]
     },
 
+    "noEmit": true,
     "resolveJsonModule": true
   }
 }
