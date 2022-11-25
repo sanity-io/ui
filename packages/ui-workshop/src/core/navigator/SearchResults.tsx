@@ -21,8 +21,8 @@ export const SearchResults = memo(function SearchResults(props: {
           padding={2}
           radius={2}
         >
-          <Text size={1} textOverflow="ellipsis" weight="semibold">
-            {scope.title} / {story.title}
+          <Text size={1} textOverflow="ellipsis">
+            {[scope.title || '', story.title].filter(Boolean).join(' / ')}
           </Text>
         </Card>
       ))}

@@ -2,10 +2,12 @@ import {Tree, TreeItem} from '@sanity/ui'
 import {memo, useCallback, useMemo} from 'react'
 import {WorkshopStory} from '../config'
 import {useWorkshop} from '../useWorkshop'
-import {MenuList, MenuScope} from './types'
+import {MenuList, MenuScope, MenuStory} from './types'
 
 /** @internal */
-export const StoryTree = memo(function StoryTree(props: {items: Array<MenuList | MenuScope>}) {
+export const StoryTree = memo(function StoryTree(props: {
+  items: Array<MenuList | MenuScope | MenuStory>
+}) {
   const {items} = props
 
   return (
@@ -17,7 +19,7 @@ export const StoryTree = memo(function StoryTree(props: {items: Array<MenuList |
 
 const MenuItems = memo(function MenuItems(props: {
   basePath?: string
-  items: Array<MenuList | MenuScope>
+  items: Array<MenuList | MenuScope | MenuStory>
 }) {
   const {basePath = '', items} = props
   const {broadcast, path: workshopPath, scope: currentScope, story: currentStory} = useWorkshop()
@@ -53,6 +55,21 @@ const MenuItems = memo(function MenuItems(props: {
                 key={item.name || itemIndex}
                 item={item}
                 path={path}
+              />
+            )
+          }
+
+          if (item.type === 'story') {
+            return (
+              <TreeItem
+                data-path={`/${item.name || ''}`}
+                fontSize={1}
+                href={`/${item.name || ''}`}
+                key={item.name}
+                onClick={handleStoryClick}
+                padding={2}
+                selected={currentStory === item}
+                text={item.title}
               />
             )
           }
