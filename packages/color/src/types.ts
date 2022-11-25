@@ -1,25 +1,46 @@
-/**
- * @public
- */
-export interface ColorHueConfig {
-  darkest: string
-  mid: string
-  lightest: string
-  midPoint: number
+/** @internal */
+export type RGB = [number, number, number]
+
+/** @internal */
+export type HSL = [number, number, number]
+
+/** @internal */
+export interface ColorTintConfig {
   title: string
+  hsl: HSL
 }
 
-/**
- * @public
- */
-export interface ColorValue {
+/** @internal */
+export interface ColorHueConfig {
+  title: string
+  tints: {
+    [key in ColorTintKey]: ColorTintConfig
+  }
+}
+
+/** @internal */
+export interface ColorConfig {
+  black: ColorTintConfig
+  white: ColorTintConfig
+
+  gray: ColorHueConfig
+  blue: ColorHueConfig
+  purple: ColorHueConfig
+  magenta: ColorHueConfig
+  red: ColorHueConfig
+  orange: ColorHueConfig
+  yellow: ColorHueConfig
+  green: ColorHueConfig
+  cyan: ColorHueConfig
+}
+
+/** @public */
+export interface ColorTint {
   hex: string
   title: string
 }
 
-/**
- * @public
- */
+/** @public */
 export type ColorTintKey =
   | '50'
   | '100'
@@ -33,16 +54,12 @@ export type ColorTintKey =
   | '900'
   | '950'
 
-/**
- * @public
- */
+/** @public */
 export type ColorTints = {
-  [key in ColorTintKey]: ColorValue
+  [key in ColorTintKey]: ColorTint
 }
 
-/**
- * @public
- */
+/** @public */
 export type ColorHueKey =
   | 'gray'
   | 'red'
@@ -54,22 +71,13 @@ export type ColorHueKey =
   | 'purple'
   | 'magenta'
 
-/**
- * @public
- */
-export interface ColorPalette {
-  // Color values
-  black: ColorValue
-  white: ColorValue
+/** @public */
+export type ColorHues = {
+  [key in ColorHueKey]: ColorTints
+}
 
-  // Color tints
-  gray: ColorTints
-  red: ColorTints
-  orange: ColorTints
-  yellow: ColorTints
-  green: ColorTints
-  cyan: ColorTints
-  blue: ColorTints
-  purple: ColorTints
-  magenta: ColorTints
+/** @public */
+export interface Color extends ColorHues {
+  black: ColorTint
+  white: ColorTint
 }

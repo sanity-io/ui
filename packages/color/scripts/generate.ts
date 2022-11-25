@@ -1,81 +1,60 @@
-/* eslint-disable no-console */
-
-/*
+/**
  * Generates src/colorPalette.ts based on `COLOR_HUES` constant + values in `src/config.js`
  * This lets us move `polished` (or similar) to a dev dependency, reducing bundle size
  */
 
 import {writeFileSync, readFileSync} from 'fs'
 import path from 'path'
-import {mix} from 'polished'
 import {format} from 'prettier'
-import * as colors from '../src/config'
-import {COLOR_HUES, COLOR_TINTS} from '../src/constants'
-import {ColorHueKey, ColorValue, ColorHueConfig, ColorTintKey} from '../src/types'
+import {COLOR_HUES, ColorHueKey, buildTints, config, hslToRgb, rgbToHex} from '../src'
 
 const ROOT_PATH = path.resolve(__dirname, '..')
 
 const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
-function getColorHex(config: ColorHueConfig, tint: string): string {
-  const tintNum = Number(tint)
-  const midPoint = config.midPoint || 500
-  const darkSize = 1000 - midPoint
-  const lightPosition = tintNum / midPoint
-  const darkPosition = (tintNum - midPoint) / darkSize
+function buildHueExport(hue: ColorHueKey) {
+  const colorConfig = config[hue]
 
-  if (tintNum === midPoint) {
-    return config.mid.toLowerCase()
-  }
-
-  // light side of scale: x < midPoint
-  if (tintNum < midPoint) {
-    return mix(lightPosition, config.mid, config.lightest)
-  }
-
-  // dark side of scale: x > midPoint
-  return mix(darkPosition, config.darkest, config.mid)
-}
-
-// Given a hue (eg red, blue) - grab the colors from configured values
-// and generate a named export containing a generated set of tints
-// Note: A more compact format + expander function was considered,
-// but only amounted to ~72 byte decrease in bundle size after gziping
-function buildExport(hue: ColorHueKey) {
-  if (!colors[hue]) {
+  if (!colorConfig) {
     throw new Error(`src/config is missing export for ${hue}`)
   }
 
-  const initial = {} as Partial<{[key in ColorTintKey]: ColorValue}>
-  const tints = COLOR_TINTS.reduce((acc, tint) => {
-    acc[tint] = {
-      title: `${hue.slice(0, 1).toUpperCase()}${hue.slice(1)} ${tint}`,
-      hex: getColorHex(colors[hue], tint),
-    }
+  const tints = buildTints({color: colorConfig, hueKey: hue, black: config.black})
 
-    return acc
-  }, initial)
-
-  return `/**\n * @public\n */\nexport const ${hue}: ColorTints = ${JSON.stringify(tints, null, 2)}`
+  return `/** @public */\nexport const ${hue}: ColorTints = ${JSON.stringify(tints, null, 2)}`
 }
 
 // Actual "template" to output
 const tpl = `${GENERATED_BANNER}
 
-import {ColorTints} from './types'
+import {Color, ColorHues, ColorTint, ColorTints} from './types'
 
-${COLOR_HUES.map(buildExport).join('\n\n')}
+/** @public */
+export const black: ColorTint = {
+  title: 'Black',
+  hex: '${rgbToHex(hslToRgb(config.black.hsl))}',
+}
 
-/**
- * @public
- */
-export const hues = {${COLOR_HUES.join(', ')}};
+/** @public */
+export const white: ColorTint = {
+  title: 'White',
+  hex: '${rgbToHex(hslToRgb(config.white.hsl))}',
+}
+
+${COLOR_HUES.map(buildHueExport).join('\n\n')}
+
+/** @public */
+export const hues: ColorHues = {${COLOR_HUES.join(', ')}};
+
+/** @public */
+export const color: Color = {black, white, ...hues};
 `
 
 // Format generated file with prettier so it can be commited without us being ashamed
 const prettierConfig = JSON.parse(readFileSync(path.resolve(ROOT_PATH, '.prettierrc'), 'utf8'))
-const filepath = path.resolve(__dirname, '../src/hues.ts')
+const filepath = path.resolve(__dirname, '../src/color.ts')
 
 writeFileSync(filepath, format(tpl, {filepath, ...prettierConfig}))
 
+// eslint-disable-next-line no-console
 console.log('generated', path.relative(ROOT_PATH, filepath))
