@@ -37,7 +37,7 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
 
     for (const scope of scopes) {
       for (const story of scope.stories) {
-        if (scope.title.toLowerCase().includes(q) || story.title.toLowerCase().includes(q)) {
+        if (scope.title?.toLowerCase().includes(q) || story.title.toLowerCase().includes(q)) {
           ret.push({scope, story})
         }
       }

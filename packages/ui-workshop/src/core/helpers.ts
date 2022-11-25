@@ -6,7 +6,7 @@ export function resolveLocation(
   scopes: WorkshopScope[],
   path: string
 ): {scope: WorkshopScope | null; story: WorkshopStory | null} {
-  let segments = path?.split('/').slice(1).filter(Boolean)
+  const segments = path.split('/').slice(1).filter(Boolean)
 
   const p = segments.join('/')
 
@@ -17,15 +17,17 @@ export function resolveLocation(
     }
   }
 
-  const scope = scopes.find((scope) => p.startsWith(`${scope.name}/`)) || null
+  for (const scope of scopes) {
+    for (const story of scope.stories) {
+      const storyPath = [scope.name, story.name].filter(Boolean).join('/')
 
-  const len = scope?.name.split('/').length || 0
+      if (p === storyPath) {
+        return {scope, story}
+      }
+    }
+  }
 
-  segments = segments.slice(len)
-
-  const story = (scope && scope.stories.find((story) => story.name === segments.join('/'))) || null
-
-  return {scope, story}
+  return {scope: null, story: null}
 }
 
 /** @internal */

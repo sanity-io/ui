@@ -14,8 +14,8 @@ export interface WorkshopStory<Options = Record<string, unknown>> {
 
 /** @public */
 export interface WorkshopScope {
-  name: string
-  title: string
+  name?: string
+  title?: string
   stories: WorkshopStory[]
 }
 
