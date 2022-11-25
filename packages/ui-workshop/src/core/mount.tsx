@@ -29,9 +29,7 @@ function Root(props: {config: WorkshopConfig}) {
 
   return (
     <ThemeProvider scheme={scheme} theme={studioTheme}>
-      <ThemeProvider tone="transparent">
-        <GlobalStyle />
-      </ThemeProvider>
+      <GlobalStyle />
       <Workshop
         config={config}
         locationStore={locationStore}
