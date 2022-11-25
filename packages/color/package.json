@@ -23,7 +23,7 @@
     "src"
   ],
   "scripts": {
-    "build": "run-s clean generate build:pkg check:pkg",
+    "build": "rimraf dist && run-s generate build:pkg check:pkg",
     "build:pkg": "pkg build --strict",
     "check:pkg": "pkg --strict",
     "check:types": "tsc --build",
