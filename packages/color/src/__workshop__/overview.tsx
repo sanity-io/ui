@@ -1,10 +1,10 @@
-import {Box, Card, Code, Flex, Grid, Heading, Stack, hexToRgb, rgbToHsl, useToast} from '@sanity/ui'
+import {Box, Card, Code, Flex, Grid, Heading, Stack, useToast} from '@sanity/ui'
 import {ReactElement, useCallback} from 'react'
 import styled from 'styled-components'
-import {black, white} from '../config'
+import {color} from '../color'
 import {COLOR_HUES} from '../constants'
-import {hues} from '../hues'
-import {ColorTints, ColorValue} from '../types'
+import {hexToRgb, rgbToHsl} from '../lib/convert'
+import {ColorTints, ColorTint} from '../types'
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -24,7 +24,7 @@ export default function ColorOverviewStory(): ReactElement {
   return (
     <Grid columns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
       {COLOR_HUES.map((hueKey) => (
-        <ColorHuePreview tints={hues[hueKey]} hueKey={hueKey} key={hueKey} />
+        <ColorHuePreview tints={color[hueKey]} hueKey={hueKey} key={hueKey} />
       ))}
     </Grid>
   )
@@ -61,7 +61,7 @@ const ColorCard = styled(Card)<{$bg: string; $fg: string}>`
   }
 `
 
-function ColorTintPreview(props: {tint: ColorValue}) {
+function ColorTintPreview(props: {tint: ColorTint}) {
   const {tint} = props
   const hsl = rgbToHsl(hexToRgb(tint.hex))
   const {push: pushToast} = useToast()
@@ -91,7 +91,7 @@ function ColorTintPreview(props: {tint: ColorValue}) {
   return (
     <ColorCard
       $bg={tint.hex}
-      $fg={hsl.l < 50 ? white : black}
+      $fg={hsl[2] < 50 ? color.white.hex : color.black.hex}
       __unstable_focusRing
       forwardedAs="button"
       onClick={handleClick}
