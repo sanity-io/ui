@@ -3,11 +3,11 @@
   "include": ["./exports", "./package.json", "./src", "./typings"],
   "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
   "compilerOptions": {
-    "composite": true,
-    "sourceMap": true,
     "rootDir": ".",
     "outDir": "./dist",
     "jsx": "react-jsx",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "emitDeclarationOnly": true
   }
 }
