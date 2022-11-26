@@ -4,10 +4,10 @@ An environment for designing, reviewing, and quality-testing React components.
 
 ```sh
 # Install `@sanity/ui-workshop` as dev dependency
-npm install @sanity/ui-workshop@beta -D
+npm install @sanity/ui-workshop -D
 
 # Install peer dependencies
-npm install @sanity/icons@beta @sanity/ui@beta react react-dom styled-components
+npm install @sanity/icons @sanity/ui react react-dom styled-components
 ```
 
 [![npm version](https://img.shields.io/npm/v/@sanity/ui-workshop.svg?style=flat-square)](https://www.npmjs.com/package/@sanity/ui-workshop)
