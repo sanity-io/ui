@@ -4,6 +4,7 @@ import {
   PortalProvider,
   ThemeColorSchemeKey,
   ToastProvider,
+  useMediaIndex,
 } from '@sanity/ui'
 import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {WorkshopConfig} from './config'
@@ -89,6 +90,9 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
     () => getStateFromLocation(locationStore.get(), schemeProp)
   )
+  const mediaIndex = useMediaIndex()
+  const [navigatorExpanded, setNavigatorExpanded] = useState(false)
+  const [inspectorExpanded, setInspectorExpanded] = useState(false)
   const frameReadyRef = useRef(frameReady)
 
   const schemeRef = useRef(scheme)
@@ -115,6 +119,33 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
     () => debounce((loc: Omit<WorkshopLocation, 'type'>) => locationStore.replace(loc), 150),
     [locationStore]
   )
+
+  const handleNavigatorToggle = useCallback(() => {
+    setNavigatorExpanded((v) => !v)
+    setInspectorExpanded(false)
+  }, [])
+
+  const handleInspectorToggle = useCallback(() => {
+    setNavigatorExpanded(false)
+    setInspectorExpanded((v) => !v)
+  }, [])
+
+  const mediaIndexRef = useRef(mediaIndex)
+
+  useEffect(() => {
+    const prevMediaIndex = mediaIndexRef.current
+
+    if (prevMediaIndex < 2 && mediaIndex >= 2) {
+      setNavigatorExpanded(false)
+      setInspectorExpanded(false)
+    }
+
+    mediaIndexRef.current = mediaIndex
+  }, [mediaIndex])
+
+  useEffect(() => {
+    setNavigatorExpanded(false)
+  }, [path])
 
   // Cancel debounced functions
   useEffect(() => () => _pushLocation.cancel(), [_pushLocation])
@@ -214,13 +245,29 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
       <ToastProvider>
         <BoundaryElementProvider element={boundaryElement}>
           <PortalProvider element={portalElement}>
-            <Flex data-boundary="" direction="column" height="fill" ref={setBoundaryElement}>
-              {withNavbar && <WorkshopNavbar />}
+            <Flex
+              data-boundary=""
+              direction="column"
+              height="fill"
+              ref={setBoundaryElement}
+              style={{minWidth: 320}}
+            >
+              {withNavbar && (
+                <WorkshopNavbar
+                  inspectorExpanded={inspectorExpanded}
+                  navigatorExpanded={navigatorExpanded}
+                  onInspectorToggle={handleInspectorToggle}
+                  onNavigatorToggle={handleNavigatorToggle}
+                />
+              )}
 
               <Flex flex={1}>
-                <WorkshopNavigator collections={config.collections} />
-                <WorkshopCanvas frameRef={frame.setElement} />
-                <WorkshopInspector />
+                <WorkshopNavigator collections={config.collections} expanded={navigatorExpanded} />
+                <WorkshopCanvas
+                  frameRef={frame.setElement}
+                  hidden={navigatorExpanded || inspectorExpanded}
+                />
+                <WorkshopInspector expanded={inspectorExpanded} />
               </Flex>
 
               <div data-portal="" ref={setPortalElement} />

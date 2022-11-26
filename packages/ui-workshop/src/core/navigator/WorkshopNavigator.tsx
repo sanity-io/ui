@@ -1,5 +1,5 @@
 import {SearchIcon} from '@sanity/icons'
-import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
+import {Box, BoxDisplay, Card, Flex, Layer, TextInput} from '@sanity/ui'
 import {memo, useCallback, useMemo, useState} from 'react'
 import styled from 'styled-components'
 import {WorkshopScope, WorkshopStory} from '../config'
@@ -10,9 +10,15 @@ import {SearchResults} from './SearchResults'
 import {StoryTree} from './StoryTree'
 import {MenuCollection, MenuList, MenuScope} from './types'
 
-const Root = styled(Card).attrs({display: ['none', 'none', 'block']})`
-  min-width: 180px;
-  max-width: 300px;
+const Root = styled(Card)`
+  overflow: hidden;
+
+  @media screen and (min-width: ${({theme}) => theme.sanity.media[1]}px) {
+    border-right: 1px solid var(--card-border-color);
+    min-width: 180px;
+    max-width: 300px;
+    overflow: auto;
+  }
 `
 
 const flexNoneStyle: React.CSSProperties = {flex: 'none'}
@@ -22,8 +28,9 @@ const textInputFontSize = [2, 2, 1]
 /** @internal */
 export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
   collections?: MenuCollection[]
+  expanded: boolean
 }): React.ReactElement {
-  const {collections = []} = props
+  const {collections = [], expanded} = props
   const {broadcast, scopes} = useWorkshop()
   const menu = useMemo(() => buildMenu(collections, scopes), [collections, scopes])
   const [query, setQuery] = useState('')
@@ -71,6 +78,7 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
 
   return (
     <NavigatorView
+      expanded={expanded}
       matches={matches}
       menu={menu}
       onSearchQueryChange={handleSearchQueryChange}
@@ -82,6 +90,7 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
 })
 
 const NavigatorView = memo(function NavigatorView(props: {
+  expanded: boolean
   matches: {scope: WorkshopScope; story: WorkshopStory}[]
   menu: MenuScope | MenuList
   onSearchQueryChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -89,10 +98,16 @@ const NavigatorView = memo(function NavigatorView(props: {
   onStoryClick: (event: React.MouseEvent<HTMLDivElement>) => void
   query: string
 }) {
-  const {matches, menu, onSearchQueryChange, onSearchQueryClear, onStoryClick, query} = props
+  const {expanded, matches, menu, onSearchQueryChange, onSearchQueryClear, onStoryClick, query} =
+    props
+
+  const display: BoxDisplay[] = useMemo(
+    () => (expanded ? ['block'] : ['none', 'none', 'block']),
+    [expanded]
+  )
 
   return (
-    <Root borderRight flex={1} overflow="hidden">
+    <Root display={display} flex={1}>
       <Flex direction="column" height="fill">
         <Layer style={flexNoneStyle}>
           <Card padding={2} shadow={1} style={lineHeightNoneStyle}>

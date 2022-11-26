@@ -1,5 +1,5 @@
 import {Tree, TreeItem} from '@sanity/ui'
-import {memo, useCallback, useMemo} from 'react'
+import {memo, MouseEvent, useCallback, useMemo} from 'react'
 import {WorkshopStory} from '../config'
 import {useWorkshop} from '../useWorkshop'
 import {MenuList, MenuScope, MenuStory} from './types'
@@ -24,8 +24,10 @@ const MenuItems = memo(function MenuItems(props: {
   const {basePath = '', items} = props
   const {broadcast, path: workshopPath, scope: currentScope, story: currentStory} = useWorkshop()
 
+  // console.log('currentStory', currentStory)
+
   const handleStoryClick = useCallback(
-    (event: React.MouseEvent<HTMLLIElement>) => {
+    (event: MouseEvent<HTMLLIElement>) => {
       event.preventDefault()
 
       const target = event.currentTarget
@@ -63,12 +65,12 @@ const MenuItems = memo(function MenuItems(props: {
             return (
               <TreeItem
                 data-path={`/${item.name || ''}`}
-                fontSize={1}
+                fontSize={[2, 2, 1]}
                 href={`/${item.name || ''}`}
                 key={item.name}
                 onClick={handleStoryClick}
                 padding={2}
-                selected={currentStory === item}
+                selected={currentStory?.component === item.component}
                 text={item.title}
               />
             )
@@ -109,7 +111,7 @@ const MemoScope = memo(function MemoScope(props: {
   currentStory: WorkshopStory | null
   expanded: boolean
   item: MenuScope
-  onStoryClick: (event: React.MouseEvent<HTMLLIElement>) => void
+  onStoryClick: (event: MouseEvent<HTMLLIElement>) => void
 }) {
   const {currentStory, expanded, item, onStoryClick} = props
 
@@ -118,7 +120,7 @@ const MemoScope = memo(function MemoScope(props: {
       item.scope.stories.map((story) => (
         <TreeItem
           data-path={`/${item.scope.name}/${story.name}`}
-          fontSize={1}
+          fontSize={[2, 2, 1]}
           href={`/${item.scope.name}/${story.name}`}
           key={story.name}
           onClick={onStoryClick}
@@ -131,7 +133,13 @@ const MemoScope = memo(function MemoScope(props: {
   )
 
   return (
-    <TreeItem expanded={expanded} fontSize={1} padding={2} text={item.title} weight="semibold">
+    <TreeItem
+      expanded={expanded}
+      fontSize={[2, 2, 1]}
+      padding={2}
+      text={item.title}
+      weight="semibold"
+    >
       {children}
     </TreeItem>
   )
