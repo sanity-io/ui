@@ -101,7 +101,13 @@ const MemoList = memo(function MemoList(props: {expanded: boolean; item: MenuLis
   const children = useMemo(() => <MenuItems basePath={path} items={item.items} />, [item, path])
 
   return (
-    <TreeItem expanded={expanded} fontSize={1} padding={2} text={item.title} weight="semibold">
+    <TreeItem
+      expanded={expanded}
+      fontSize={[2, 2, 1]}
+      padding={2}
+      text={item.title}
+      weight="semibold"
+    >
       {children}
     </TreeItem>
   )
