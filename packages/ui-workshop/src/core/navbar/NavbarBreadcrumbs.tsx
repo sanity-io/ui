@@ -35,25 +35,25 @@ const NavbarBreadcrumbsView = memo(function NavbarBreadcrumbsView(props: {
   return (
     <Breadcrumbs
       separator={
-        <Text muted size={1}>
+        <Text muted size={[2, 2, 1]}>
           /
         </Text>
       }
       space={2}
     >
-      <Text size={1} weight="bold">
+      <Text size={[2, 2, 1]} weight="bold">
         <a href="/" onClick={onHomeClick} style={{color: 'inherit'}}>
           {title}
         </a>
       </Text>
 
       {scopeTitle && (
-        <Text align="center" size={1}>
+        <Text align="center" size={[2, 2, 1]}>
           {scopeTitle}
         </Text>
       )}
 
-      {storyTitle && <Text size={1}>{storyTitle}</Text>}
+      {storyTitle && <Text size={[2, 2, 1]}>{storyTitle}</Text>}
     </Breadcrumbs>
   )
 })
