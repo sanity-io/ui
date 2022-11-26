@@ -11,7 +11,7 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactElement {
     return (
       <Box padding={2}>
         <Box padding={2}>
-          <Text muted size={1}>
+          <Text muted size={[2, 2, 1]}>
             No tests
           </Text>
         </Box>

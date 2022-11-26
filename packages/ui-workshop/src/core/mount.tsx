@@ -1,5 +1,5 @@
 import {studioTheme, ThemeColorSchemeKey, ThemeProvider, usePrefersDark} from '@sanity/ui'
-import {StrictMode, useMemo, useState} from 'react'
+import {StrictMode, useEffect, useMemo, useState} from 'react'
 import {createRoot} from 'react-dom/client'
 import {WorkshopConfig} from './config'
 import {GlobalStyle} from './GlobalStyle'
@@ -26,6 +26,10 @@ function Root(props: {config: WorkshopConfig}) {
   const prefersDark = usePrefersDark()
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>(prefersDark ? 'dark' : 'light')
   const locationStore = useMemo(() => createLocationStore(), [])
+
+  useEffect(() => {
+    setScheme(prefersDark ? 'dark' : 'light')
+  }, [prefersDark])
 
   return (
     <ThemeProvider scheme={scheme} theme={studioTheme}>

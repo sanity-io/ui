@@ -1,18 +1,30 @@
-import {Box, ButtonTone, Card, Flex, Layer, Tab, TabList, TabPanel} from '@sanity/ui'
-import {createElement, memo, useCallback, useMemo, useState} from 'react'
+import {Box, BoxDisplay, Card, Flex, TabPanel} from '@sanity/ui'
+import {createElement, ElementType, memo, ReactElement, useMemo, useState} from 'react'
+import styled from 'styled-components'
 import {useWorkshop} from '../useWorkshop'
+import {InspectorHeader} from './InspectorHeader'
+import {InspectorTab} from './types'
 
-const MemoTab = memo(Tab)
+const Root = styled(Card)`
+  overflow: hidden;
 
-interface InspectorTab {
-  id: string
-  label: React.ReactNode
-  panel?: React.ElementType
-  tone?: ButtonTone
-}
+  @media screen and (min-width: ${({theme}) => theme.sanity.media[1]}px) {
+    border-left: 1px solid var(--card-border-color);
+    min-width: 180px;
+    max-width: 300px;
+    overflow: auto;
+  }
+`
+
+const MemoRender = memo(function MemoRender(props: {component: ElementType}) {
+  return createElement(props.component)
+})
 
 /** @internal */
-export const WorkshopInspector = memo(function WorkshopInspector(): React.ReactElement {
+export const WorkshopInspector = memo(function WorkshopInspector(props: {
+  expanded: boolean
+}): ReactElement {
+  const {expanded} = props
   const {plugins} = useWorkshop()
 
   const tabs: InspectorTab[] = useMemo(() => {
@@ -32,18 +44,15 @@ export const WorkshopInspector = memo(function WorkshopInspector(): React.ReactE
   const currentTab = tabs.find((tab) => tab.id === tabId)
   const showTabs = tabs.length > 1
 
+  const display: BoxDisplay[] = useMemo(
+    () => (expanded ? ['block'] : ['none', 'none', 'block']),
+    [expanded]
+  )
+
   return (
-    <Card
-      borderLeft
-      display={['none', 'none', 'block']}
-      flex={1}
-      overflow="auto"
-      style={{minWidth: 180, maxWidth: 300}}
-    >
+    <Root display={display} flex={1}>
       <Flex direction="column" height="fill">
-        {showTabs && (
-          <InspectorHeaderWithTabs currentTabId={tabId} onTabChange={setTabId} tabs={tabs} />
-        )}
+        {showTabs && <InspectorHeader currentTabId={tabId} onTabChange={setTabId} tabs={tabs} />}
 
         {showTabs &&
           tabs.map((tab) => (
@@ -65,59 +74,6 @@ export const WorkshopInspector = memo(function WorkshopInspector(): React.ReactE
           </Box>
         )}
       </Flex>
-    </Card>
+    </Root>
   )
-})
-
-const InspectorHeaderWithTabs = memo(function InspectorHeaderWithTabs(props: {
-  currentTabId: string | null
-  onTabChange: (id: string) => void
-  tabs: InspectorTab[]
-}) {
-  const {currentTabId, onTabChange, tabs} = props
-
-  return (
-    <Layer style={{flex: 'none', position: 'sticky', top: 0}}>
-      <Card padding={2} shadow={1} style={{lineHeight: 0}}>
-        <TabList space={1}>
-          {tabs.map((tab) => (
-            <InspectorTabView
-              key={tab.id}
-              onTabChange={onTabChange}
-              selected={tab.id === currentTabId}
-              tab={tab}
-            />
-          ))}
-        </TabList>
-      </Card>
-    </Layer>
-  )
-})
-
-function InspectorTabView(props: {
-  onTabChange: (id: string) => void
-  selected: boolean
-  tab: InspectorTab
-}) {
-  const {onTabChange, selected, tab} = props
-
-  const handleClick = useCallback(() => {
-    onTabChange(tab.id)
-  }, [onTabChange, tab])
-
-  return (
-    <MemoTab
-      aria-controls={`${tab.id}-panel`}
-      fontSize={1}
-      id={tab.id}
-      label={tab.label}
-      onClick={handleClick}
-      selected={selected}
-      tone={tab.tone}
-    />
-  )
-}
-
-const MemoRender = memo(function MemoRender(props: {component: React.ElementType}) {
-  return createElement(props.component)
 })

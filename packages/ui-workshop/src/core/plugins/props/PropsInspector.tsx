@@ -11,7 +11,7 @@ export const PropsInspector = memo(function PropsInspector(): React.ReactElement
     <Box padding={2}>
       {schemas.length === 0 && (
         <Box padding={2}>
-          <Text muted size={1}>
+          <Text muted size={[2, 2, 1]}>
             No properties
           </Text>
         </Box>
