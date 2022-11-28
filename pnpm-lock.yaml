@@ -13,7 +13,7 @@ specifiers:
   '@sanity/icons': ^2.0.0
   '@sanity/pkg-utils': ^1.18.0
   '@sanity/semantic-release-preset': ^2.0.2
-  '@sanity/ui-workshop': ^1.0.0
+  '@sanity/ui-workshop': ^1.0.1
   '@testing-library/dom': ^8.19.0
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
@@ -80,7 +80,7 @@ devDependencies:
   '@juggle/resize-observer': 3.4.0
   '@sanity/pkg-utils': 1.18.0_typescript@4.9.3
   '@sanity/semantic-release-preset': 2.0.2
-  '@sanity/ui-workshop': 1.0.0_hqjudgdzti7i6gaxutoeqx2m2y
+  '@sanity/ui-workshop': 1.0.1_hqjudgdzti7i6gaxutoeqx2m2y
   '@testing-library/dom': 8.19.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
@@ -2493,8 +2493,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop/1.0.0_hqjudgdzti7i6gaxutoeqx2m2y:
-    resolution: {integrity: sha512-9E6i0x+30ZfKmG+051IxVQsHSg7neuS1KFG5yEmomTISFY7KSoO8kygMGGf8Zmp712p/rdOigAowQNK/OexL9g==}
+  /@sanity/ui-workshop/1.0.1_hqjudgdzti7i6gaxutoeqx2m2y:
+    resolution: {integrity: sha512-9vPQDVMp2k9Eg8hpFEG4tYJC5stwSGZXG0YI+ZxLHqd3HreidXKwPKOm6eqOc2PWuD492+JTpQxfp/icbciPpw==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2
