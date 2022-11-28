@@ -74,8 +74,8 @@
     "release": "semantic-release",
     "test": "jest",
     "watch": "pkg watch --strict",
-    "workshop:build": "rimraf .workshop && node -r dotenv-flow/config -r esbuild-register scripts/build",
-    "workshop:dev": "node -r dotenv-flow/config -r esbuild-register scripts/dev",
+    "workshop:build": "rimraf .workshop && node -r dotenv-flow/config -r esbuild-register -r tsconfig-paths/register scripts/build",
+    "workshop:dev": "node -r dotenv-flow/config -r esbuild-register -r tsconfig-paths/register scripts/dev",
     "workshop:start": "serve -p 1337 -s .workshop/dist"
   },
   "dependencies": {
@@ -137,6 +137,7 @@
     "semantic-release": "^19.0.5",
     "serve": "^14.1.2",
     "styled-components": "^5.3.6",
+    "tsconfig-paths": "^4.1.0",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
