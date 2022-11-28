@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import {UserConfig} from 'vite'
 import {WorkshopConfigOptions} from '../core/cli'
 
+/** @internal */
 export function createViteConfig(options: {
   config?: WorkshopConfigOptions
   cwd: string
@@ -12,6 +13,7 @@ export function createViteConfig(options: {
 
   return {
     build: {
+      outDir: path.resolve(cwd, 'dist'),
       rollupOptions: {
         input: {
           main: path.resolve(outDir, 'index.html'),
