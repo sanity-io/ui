@@ -24,8 +24,6 @@ const MenuItems = memo(function MenuItems(props: {
   const {basePath = '', items} = props
   const {broadcast, path: workshopPath, scope: currentScope, story: currentStory} = useWorkshop()
 
-  // console.log('currentStory', currentStory)
-
   const handleStoryClick = useCallback(
     (event: MouseEvent<HTMLLIElement>) => {
       event.preventDefault()
