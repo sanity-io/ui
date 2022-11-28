@@ -95,7 +95,8 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           constrainSize
           matchReferenceWidth
           open
-          placement="bottom"
+          overflow="auto"
+          placement="bottom-start"
           radius={1}
           ref={popoverRef}
           referenceElement={inputElement}
@@ -118,7 +119,6 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           openButton
           options={options}
           placeholder="Search"
-          // popover={{allowedAutoPlacements: ['bottom-start', 'top-start']}}
           radius={1}
           renderOption={renderOption}
           renderPopover={renderPopover}
