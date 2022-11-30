@@ -2,12 +2,10 @@ import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
 export default defineScope({
-  name: 'icons',
-  title: 'Icons',
   stories: [
     {
-      name: 'overview',
-      title: 'Overview',
+      name: 'all',
+      title: 'All icons',
       component: lazy(() => import('./overview')),
     },
   ],
