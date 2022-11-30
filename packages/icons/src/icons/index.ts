@@ -20,6 +20,7 @@ import {BasketIcon} from './basketIcon'
 import {BellIcon} from './bellIcon'
 import {BillIcon} from './billIcon'
 import {BinaryDocumentIcon} from './binaryDocumentIcon'
+import {BlockContentIcon} from './blockContentIcon'
 import {BlockElementIcon} from './blockElementIcon'
 import {BlockquoteIcon} from './blockquoteIcon'
 import {BoldIcon} from './boldIcon'
@@ -116,6 +117,7 @@ import {MasterDetailIcon} from './masterDetailIcon'
 import {MenuIcon} from './menuIcon'
 import {MobileDeviceIcon} from './mobileDeviceIcon'
 import {MoonIcon} from './moonIcon'
+import {NumberIcon} from './numberIcon'
 import {OkHandIcon} from './okHandIcon'
 import {OlistIcon} from './olistIcon'
 import {OverageIcon} from './overageIcon'
@@ -148,6 +150,7 @@ import {StackIcon} from './stackIcon'
 import {StarIcon} from './starIcon'
 import {StopIcon} from './stopIcon'
 import {StrikethroughIcon} from './strikethroughIcon'
+import {StringIcon} from './stringIcon'
 import {SunIcon} from './sunIcon'
 import {SyncIcon} from './syncIcon'
 import {TagIcon} from './tagIcon'
@@ -196,6 +199,7 @@ export type IconSymbol =
   | 'bell'
   | 'bill'
   | 'binary-document'
+  | 'block-content'
   | 'block-element'
   | 'blockquote'
   | 'bold'
@@ -292,6 +296,7 @@ export type IconSymbol =
   | 'menu'
   | 'mobile-device'
   | 'moon'
+  | 'number'
   | 'ok-hand'
   | 'olist'
   | 'overage'
@@ -324,6 +329,7 @@ export type IconSymbol =
   | 'star'
   | 'stop'
   | 'strikethrough'
+  | 'string'
   | 'sun'
   | 'sync'
   | 'tag'
@@ -369,6 +375,7 @@ export {
   BellIcon,
   BillIcon,
   BinaryDocumentIcon,
+  BlockContentIcon,
   BlockElementIcon,
   BlockquoteIcon,
   BoldIcon,
@@ -465,6 +472,7 @@ export {
   MenuIcon,
   MobileDeviceIcon,
   MoonIcon,
+  NumberIcon,
   OkHandIcon,
   OlistIcon,
   OverageIcon,
@@ -497,6 +505,7 @@ export {
   StarIcon,
   StopIcon,
   StrikethroughIcon,
+  StringIcon,
   SunIcon,
   SyncIcon,
   TagIcon,
@@ -546,6 +555,7 @@ export interface IconMap {
   bell: IconComponent
   bill: IconComponent
   'binary-document': IconComponent
+  'block-content': IconComponent
   'block-element': IconComponent
   blockquote: IconComponent
   bold: IconComponent
@@ -642,6 +652,7 @@ export interface IconMap {
   menu: IconComponent
   'mobile-device': IconComponent
   moon: IconComponent
+  number: IconComponent
   'ok-hand': IconComponent
   olist: IconComponent
   overage: IconComponent
@@ -674,6 +685,7 @@ export interface IconMap {
   star: IconComponent
   stop: IconComponent
   strikethrough: IconComponent
+  string: IconComponent
   sun: IconComponent
   sync: IconComponent
   tag: IconComponent
@@ -723,6 +735,7 @@ export const icons: IconMap = {
   bell: BellIcon,
   bill: BillIcon,
   'binary-document': BinaryDocumentIcon,
+  'block-content': BlockContentIcon,
   'block-element': BlockElementIcon,
   blockquote: BlockquoteIcon,
   bold: BoldIcon,
@@ -819,6 +832,7 @@ export const icons: IconMap = {
   menu: MenuIcon,
   'mobile-device': MobileDeviceIcon,
   moon: MoonIcon,
+  number: NumberIcon,
   'ok-hand': OkHandIcon,
   olist: OlistIcon,
   overage: OverageIcon,
@@ -851,6 +865,7 @@ export const icons: IconMap = {
   star: StarIcon,
   stop: StopIcon,
   strikethrough: StrikethroughIcon,
+  string: StringIcon,
   sun: SunIcon,
   sync: SyncIcon,
   tag: TagIcon,

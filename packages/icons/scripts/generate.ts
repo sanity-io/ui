@@ -80,6 +80,7 @@ async function readIcon(filePath: string) {
   // Replace Sanity black hex value with `currentColor`
   code = code
     .replace(/"#121923"/g, '"currentColor"')
+    .replace(/"#101112"/g, '"currentColor"')
     .replace('<svg ', `<svg data-sanity-icon="${name}" `)
 
   code = format(code, {...prettierConfig, filepath: targetPath})
