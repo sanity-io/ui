@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/sanity-io/icons/compare/v2.0.0...v2.1.0) (2022-11-30)
+
+### Features
+
+- add number, string and block content icon ([#2](https://github.com/sanity-io/icons/issues/2)) ([ddb23d6](https://github.com/sanity-io/icons/commit/ddb23d617f4f16d3bc236fc8256c9cca81b4b166))
+
 ## [2.0.0](https://github.com/sanity-io/icons/compare/v1.3.10...v2.0.0) (2022-11-24)
 
 ### ⚠ BREAKING CHANGES
