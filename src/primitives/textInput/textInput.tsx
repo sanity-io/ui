@@ -292,6 +292,7 @@ export const TextInput = forwardRef(function TextInput(
           tone={customValidity ? 'critical' : 'inherit'}
         >
           <Button
+            aria-label="Clear"
             data-qa="clear-button"
             fontSize={fontSize}
             icon={CloseIcon}
