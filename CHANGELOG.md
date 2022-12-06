@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/sanity-io/ui/compare/v1.0.0...v1.0.1) (2022-12-06)
+
+### Bug Fixes
+
+- **a11y:** add `aria-label` to `TextInput` clear button ([#1020](https://github.com/sanity-io/ui/issues/1020)) ([f226821](https://github.com/sanity-io/ui/commit/f2268212ae8a3e8d87388ee57a56087f1974121d))
+
 ## 1.0.0 (2022-11-24)
 
 ### ⚠ BREAKING CHANGES
