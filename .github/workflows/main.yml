@@ -4,9 +4,10 @@ on:
   push:
   pull_request:
     branches:
-      - main
-      - beta
       - alpha
+      - beta
+      - next
+      - main
 
 jobs:
   test:
