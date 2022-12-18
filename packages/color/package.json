@@ -1,19 +1,20 @@
 {
+  "type": "module",
   "name": "@sanity/color",
   "version": "2.1.20",
   "description": "The Sanity color palette.",
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/index.esm.js",
-  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js",
-      "default": "./dist/index.esm.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -29,7 +30,7 @@
     "clean": "rimraf .workshop dist",
     "commit": "cz",
     "format": "prettier --write --cache --ignore-unknown .",
-    "generate": "node -r esbuild-register scripts/generate.ts",
+    "generate": "node --loader esbuild-register/loader -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
     "prepare": "husky install",
     "prepublishOnly": "pnpm build",
