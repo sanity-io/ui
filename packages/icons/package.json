@@ -1,19 +1,20 @@
 {
+  "type": "module",
   "name": "@sanity/icons",
   "version": "2.1.0",
   "description": "The Sanity icons.",
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/index.esm.js",
-  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js",
-      "default": "./dist/index.esm.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -28,7 +29,7 @@
     "commit": "cz",
     "dev": "run-p workshop:dev",
     "format": "prettier --write --cache --ignore-unknown .",
-    "generate": "rimraf src/icons && node -r esbuild-register scripts/generate.ts",
+    "generate": "rimraf src/icons && node --loader esbuild-register/loader -r esbuild-register scripts/generate.ts",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
     "pkg:build": "pkg build --strict",
     "pkg:check": "pkg --strict",
