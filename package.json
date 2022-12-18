@@ -47,8 +47,8 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "^1.0.1",
-    "@sanity/color": "^2.1.20",
-    "@sanity/icons": "^2.1.0",
+    "@sanity/color": "2.2.0-alpha.1",
+    "@sanity/icons": "2.2.0-beta.1",
     "csstype": "^3.1.1",
     "framer-motion": "^7.10.2",
     "react-refractor": "^2.1.7"

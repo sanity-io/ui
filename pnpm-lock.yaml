@@ -9,8 +9,8 @@ specifiers:
   '@commitlint/config-conventional': ^17.3.0
   '@floating-ui/react-dom': ^1.0.1
   '@juggle/resize-observer': ^3.4.0
-  '@sanity/color': ^2.1.20
-  '@sanity/icons': ^2.1.0
+  '@sanity/color': 2.2.0-alpha.1
+  '@sanity/icons': 2.2.0-beta.1
   '@sanity/pkg-utils': 2.0.0-beta.1
   '@sanity/semantic-release-preset': ^2.0.4
   '@sanity/ui-workshop': ^1.0.1
@@ -65,8 +65,8 @@ specifiers:
 
 dependencies:
   '@floating-ui/react-dom': 1.0.1_biqbaboplfbrettd7655fr4n2y
-  '@sanity/color': 2.1.20
-  '@sanity/icons': 2.1.0_react@18.2.0
+  '@sanity/color': 2.2.0-alpha.1
+  '@sanity/icons': 2.2.0-beta.1_react@18.2.0
   csstype: 3.1.1
   framer-motion: 7.10.2_biqbaboplfbrettd7655fr4n2y
   react-refractor: 2.1.7_react@18.2.0
@@ -81,7 +81,7 @@ devDependencies:
   '@juggle/resize-observer': 3.4.0
   '@sanity/pkg-utils': 2.0.0-beta.1_typescript@4.9.4
   '@sanity/semantic-release-preset': 2.0.4
-  '@sanity/ui-workshop': 1.0.1_6xvnkmjshjij2mizi7mpn4rfly
+  '@sanity/ui-workshop': 1.0.1_nifnnuw3s6xuavmd4wct3ex464
   '@testing-library/dom': 8.19.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
@@ -2656,12 +2656,12 @@ packages:
       string-argv: 0.3.1
     dev: true
 
-  /@sanity/color/2.1.20:
-    resolution: {integrity: sha512-dHPgiCMf+lwvQls5uPzorfiq9YuU41AzvifA+ugVHmXvq7JBoofoOPUOmdHUQF0l0shSy0nD3zn52j2I+T2ekg==}
+  /@sanity/color/2.2.0-alpha.1:
+    resolution: {integrity: sha512-RgnqdTAYdJkJ/yqEpoQW+pPwgF+ctfGIhzcNDVU9UX9b0VzU5EM9ra3C6KxIWYcVQEBlELx9s2Po5PisKDq+GQ==}
     dev: false
 
-  /@sanity/icons/2.1.0_react@18.2.0:
-    resolution: {integrity: sha512-Q2IgQJ6f6/mV1ztv+EnYGhBwWcmB8uQLYCNcxI6hirWb5nj7KmCXWasOoptTiO+ecrKmRFmAi1f7nDvXD+Aywg==}
+  /@sanity/icons/2.2.0-beta.1_react@18.2.0:
+    resolution: {integrity: sha512-kI46lZJNM0AlLtegAn8IcD8w/ZE8/g8obgc4ky23JW1CxnwBTL0IZ5DNA1oPOx/wZFUaaebnQij9Aq69gzj21g==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
@@ -2730,7 +2730,7 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop/1.0.1_6xvnkmjshjij2mizi7mpn4rfly:
+  /@sanity/ui-workshop/1.0.1_nifnnuw3s6xuavmd4wct3ex464:
     resolution: {integrity: sha512-9vPQDVMp2k9Eg8hpFEG4tYJC5stwSGZXG0YI+ZxLHqd3HreidXKwPKOm6eqOc2PWuD492+JTpQxfp/icbciPpw==}
     hasBin: true
     peerDependencies:
@@ -2740,7 +2740,7 @@ packages:
       react-dom: ^18
       styled-components: ^5.2
     dependencies:
-      '@sanity/icons': 2.1.0_react@18.2.0
+      '@sanity/icons': 2.2.0-beta.1_react@18.2.0
       '@vitejs/plugin-react': 2.2.0_vite@3.2.4
       axe-core: 4.5.2
       cac: 6.7.14
