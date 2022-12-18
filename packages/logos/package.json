@@ -1,18 +1,19 @@
 {
+  "type": "module",
   "name": "@sanity/logos",
   "version": "2.0.2",
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/index.esm.js",
-  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js",
-      "default": "./dist/index.esm.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
