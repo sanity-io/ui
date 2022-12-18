@@ -11,7 +11,7 @@ specifiers:
   '@juggle/resize-observer': ^3.4.0
   '@sanity/color': ^2.1.20
   '@sanity/icons': ^2.1.0
-  '@sanity/pkg-utils': ^1.20.4
+  '@sanity/pkg-utils': 2.0.0-beta.1
   '@sanity/semantic-release-preset': ^2.0.4
   '@sanity/ui-workshop': ^1.0.1
   '@testing-library/dom': ^8.19.0
@@ -79,7 +79,7 @@ devDependencies:
   '@commitlint/cli': 17.3.0
   '@commitlint/config-conventional': 17.3.0
   '@juggle/resize-observer': 3.4.0
-  '@sanity/pkg-utils': 1.20.4_typescript@4.9.4
+  '@sanity/pkg-utils': 2.0.0-beta.1_typescript@4.9.4
   '@sanity/semantic-release-preset': 2.0.4
   '@sanity/ui-workshop': 1.0.1_6xvnkmjshjij2mizi7mpn4rfly
   '@testing-library/dom': 8.19.0
@@ -2668,8 +2668,8 @@ packages:
     dependencies:
       react: 18.2.0
 
-  /@sanity/pkg-utils/1.20.4_typescript@4.9.4:
-    resolution: {integrity: sha512-//ih6YW2HB1Zc/4nAxMcVuq2szXpSqw77CyuHlj5F1vfQYyhqfAKZZEIN5Rg03pKyrxDbFcnTb6KFk0yGO+SaQ==}
+  /@sanity/pkg-utils/2.0.0-beta.1_typescript@4.9.4:
+    resolution: {integrity: sha512-41FyEIjE02oYVVIFUWnjddSBc4PWHbMQ+kP7VI4q7SJFMrAZvgH5BI8SCYftd7WfssPkE14w+S8qFEEsmn9zDA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     peerDependencies:
