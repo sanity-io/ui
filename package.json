@@ -1,18 +1,19 @@
 {
+  "type": "module",
   "name": "@sanity/ui",
   "version": "1.0.1",
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/index.esm.js",
-  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js",
-      "default": "./dist/index.esm.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -40,8 +41,8 @@
     "test": "jest",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
     "watch": "pkg watch --strict",
-    "workshop:build": "node -r esbuild-register -r tsconfig-paths/register scripts/build",
-    "workshop:dev": "node -r esbuild-register -r tsconfig-paths/register scripts/dev",
+    "workshop:build": "node --loader esbuild-register/loader -r esbuild-register -r tsconfig-paths/register scripts/build",
+    "workshop:dev": "node --loader esbuild-register/loader -r esbuild-register -r tsconfig-paths/register scripts/dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
   "dependencies": {
