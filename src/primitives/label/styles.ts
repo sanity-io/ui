@@ -30,6 +30,12 @@ export function labelBaseStyle(
       border-radius: 1px;
     }
 
+    & svg {
+      /* Certain popular CSS libraries changes the defaults for SVG display */
+      /* Make sure SVGs are rendered as inline elements */
+      display: inline;
+    }
+
     & [data-sanity-icon] {
       vertical-align: baseline;
     }
