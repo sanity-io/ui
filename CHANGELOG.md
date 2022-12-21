@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/sanity-io/ui/compare/v1.0.3...v1.0.4) (2022-12-21)
+
+### Bug Fixes
+
+- apply display: inline to SVGs to be tailwind compatible ([#1022](https://github.com/sanity-io/ui/issues/1022)) ([efbb6ae](https://github.com/sanity-io/ui/commit/efbb6ae201657b1cae1235137f1e2ddb00cd3513))
+
 ## [1.0.2](https://github.com/sanity-io/ui/compare/v1.0.1...v1.0.2) (2022-12-16)
 
 ### Bug Fixes
