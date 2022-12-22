@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/sanity-io/ui-workshop/compare/v1.1.1...v1.1.2) (2022-12-22)
+
+### Bug Fixes
+
+- **deps:** update dependencies ([3510ce9](https://github.com/sanity-io/ui-workshop/commit/3510ce92abd24d7ea349c49cfcda9bcd4c22f617))
+- **deps:** upgrade to `globby@13` ([cf37ff4](https://github.com/sanity-io/ui-workshop/commit/cf37ff4d6c732db41dfddf59d08758a5970e9b1c))
+- **deps:** upgrade to `vite@4` ([53dfc94](https://github.com/sanity-io/ui-workshop/commit/53dfc94cc854f43edefa0b507df4b3fc8ba24c54))
+
 ## [1.1.1](https://github.com/sanity-io/ui-workshop/compare/v1.1.0...v1.1.1) (2022-12-22)
 
 ### Bug Fixes
