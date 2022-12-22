@@ -3,4 +3,4 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv-flow').config()
 
-require('../dist/cli')
+require('../dist/cli.cjs')
