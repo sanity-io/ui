@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@sanity/color",
-  "version": "2.2.0-alpha.1",
+  "version": "2.2.0",
   "description": "The Sanity color palette.",
   "sideEffects": false,
   "types": "./dist/index.d.ts",

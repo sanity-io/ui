@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/sanity-io/color/compare/v2.1.20...v2.2.0) (2022-12-22)
+
+### Features
+
+- convert to ES package ([c43ad93](https://github.com/sanity-io/color/commit/c43ad9340ee729f7f8902b60fe0bd6787dd252fa))
+
+### Bug Fixes
+
+- **deps:** update dependencies ([403a76d](https://github.com/sanity-io/color/commit/403a76d46561bcfcba4680a688856f2d87a8d3ad))
+
 ## [2.2.0-alpha.1](https://github.com/sanity-io/color/compare/v2.1.20...v2.2.0-alpha.1) (2022-12-18)
 
 ### Features
