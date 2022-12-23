@@ -19,7 +19,7 @@ export interface PortalProviderProps {
   __unstable_elements?: Record<string, HTMLElement | null | undefined>
 }
 
-const __BROWSER__ = typeof window !== 'undefined'
+const __BROWSER__ = typeof document !== 'undefined'
 
 /**
  * @public

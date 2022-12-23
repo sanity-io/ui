@@ -12,7 +12,8 @@ export function useArrayProp<T extends ArrayPropPrimitive = ArrayPropPrimitive>(
   val: T | T[] | undefined,
   defaultVal?: T[]
 ): T[] {
-  const __perf_hash__ = JSON.stringify(val ?? defaultVal)
+  // JSON.stringify is fast, but it's not faster than useMemo's referencial equality check
+  const __perf_hash__ = useMemo(() => JSON.stringify(val ?? defaultVal), [defaultVal, val])
 
   return useMemo(
     () => _getArrayProp(val, defaultVal),

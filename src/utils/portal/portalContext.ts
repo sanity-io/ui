@@ -11,7 +11,7 @@ export const defaultContextValue: PortalContextValue = {
   version: 0.0,
   boundaryElement: null,
   get element() {
-    if (typeof window === 'undefined') {
+    if (typeof document === 'undefined') {
       return null
     }
 
