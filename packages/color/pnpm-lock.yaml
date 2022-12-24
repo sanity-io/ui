@@ -38,7 +38,7 @@ devDependencies:
   '@babel/preset-typescript': 7.18.6_@babel+core@7.20.7
   '@commitlint/cli': 17.3.0
   '@commitlint/config-conventional': 17.3.0
-  '@sanity/pkg-utils': 2.0.2_typescript@4.9.4
+  '@sanity/pkg-utils': 2.0.3_typescript@4.9.4
   '@sanity/semantic-release-preset': 2.0.4
   '@testing-library/jest-dom': 5.16.5
   '@types/jest': 29.2.4
@@ -2316,8 +2316,8 @@ packages:
       string-argv: 0.3.1
     dev: true
 
-  /@sanity/pkg-utils/2.0.2_typescript@4.9.4:
-    resolution: {integrity: sha512-IwhR/VyUF3mwN6aUryxiloqG0vbC7CVeAM1A8m4UE3kFx6KeFO6MdzU3cz5QTrXgyma8aJ25PeDiqoZGL/mGTQ==}
+  /@sanity/pkg-utils/2.0.3_typescript@4.9.4:
+    resolution: {integrity: sha512-UHzSgmsRfCnUgFcyHwCMTv+dOOU6rHMe5MjlI2jnNmmgUns8ASTHNtMCfQXKcCCqaskFICjirF7snoE1L0wavw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     peerDependencies:
