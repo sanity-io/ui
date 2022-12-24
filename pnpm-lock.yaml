@@ -30,7 +30,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.47.0
   commitizen: ^4.2.6
   csstype: ^3.1.1
-  cypress: ^11.2.0
+  cypress: ^12.2.0
   cypress-real-events: ^1.7.4
   cz-conventional-changelog: ^3.3.0
   esbuild: ^0.16.10
@@ -97,8 +97,8 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.47.0_ncmi6noazr3nzas7jxykisekym
   '@typescript-eslint/parser': 5.47.0_lzzuuodtsqwxnvqeq4g4likcqa
   commitizen: 4.2.6
-  cypress: 11.2.0
-  cypress-real-events: 1.7.4_cypress@11.2.0
+  cypress: 12.2.0
+  cypress-real-events: 1.7.4_cypress@12.2.0
   cz-conventional-changelog: 3.3.0
   esbuild: 0.16.10
   esbuild-register: 3.4.2_esbuild@0.16.10
@@ -4517,17 +4517,17 @@ packages:
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
 
-  /cypress-real-events/1.7.4_cypress@11.2.0:
+  /cypress-real-events/1.7.4_cypress@12.2.0:
     resolution: {integrity: sha512-bAlIf3w6uJa72hcbLFpQIl/hBoNGYnSVzFMgohefWcooyZz2WbFZdFAEDOl5qOPATtAU01o92sWvc2QW9eT8aA==}
     peerDependencies:
       cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x
     dependencies:
-      cypress: 11.2.0
+      cypress: 12.2.0
     dev: true
 
-  /cypress/11.2.0:
-    resolution: {integrity: sha512-u61UGwtu7lpsNWLUma/FKNOsrjcI6wleNmda/TyKHe0dOBcVjbCPlp1N6uwFZ0doXev7f/91YDpU9bqDCFeBLA==}
-    engines: {node: '>=12.0.0'}
+  /cypress/12.2.0:
+    resolution: {integrity: sha512-kvl95ri95KK8mAy++tEU/wUgzAOMiIciZSL97LQvnOinb532m7dGvwN0mDSIGbOd71RREtmT9o4h088RjK5pKw==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     hasBin: true
     requiresBuild: true
     dependencies:
@@ -7496,7 +7496,7 @@ packages:
       log-update: 4.0.0
       p-map: 4.0.0
       rfdc: 1.3.0
-      rxjs: 7.5.7
+      rxjs: 7.6.0
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
@@ -9096,12 +9096,6 @@ packages:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
       queue-microtask: 1.2.3
-    dev: true
-
-  /rxjs/7.5.7:
-    resolution: {integrity: sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==}
-    dependencies:
-      tslib: 2.4.1
     dev: true
 
   /rxjs/7.6.0:
