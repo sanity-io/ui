@@ -9,7 +9,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.3.0
   '@sanity/color': ^2.2.0
   '@sanity/icons': ^2.2.0
-  '@sanity/pkg-utils': ^2.0.2
+  '@sanity/pkg-utils': ^2.0.3
   '@sanity/semantic-release-preset': ^2.0.4
   '@sanity/ui': 1.0.4
   '@sanity/ui-workshop': 1.1.2
@@ -58,7 +58,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.3.0
   '@sanity/color': 2.2.0
   '@sanity/icons': 2.2.0_react@18.2.0
-  '@sanity/pkg-utils': 2.0.2_typescript@4.9.4
+  '@sanity/pkg-utils': 2.0.3_typescript@4.9.4
   '@sanity/semantic-release-preset': 2.0.4
   '@sanity/ui': 1.0.4_23mhwjhnzfjwvdn7ol54k26zom
   '@sanity/ui-workshop': 1.1.2_m3amlysxtj5g2hkwbfpi2lnyiu
@@ -2568,8 +2568,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /@sanity/pkg-utils/2.0.2_typescript@4.9.4:
-    resolution: {integrity: sha512-IwhR/VyUF3mwN6aUryxiloqG0vbC7CVeAM1A8m4UE3kFx6KeFO6MdzU3cz5QTrXgyma8aJ25PeDiqoZGL/mGTQ==}
+  /@sanity/pkg-utils/2.0.3_typescript@4.9.4:
+    resolution: {integrity: sha512-UHzSgmsRfCnUgFcyHwCMTv+dOOU6rHMe5MjlI2jnNmmgUns8ASTHNtMCfQXKcCCqaskFICjirF7snoE1L0wavw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     peerDependencies:
