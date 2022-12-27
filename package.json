@@ -45,7 +45,7 @@
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "^1.0.1",
+    "@floating-ui/react-dom": "^1.1.0",
     "@sanity/color": "^2.2.0",
     "@sanity/icons": "^2.2.0",
     "csstype": "^3.1.1",
