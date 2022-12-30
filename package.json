@@ -5,15 +5,15 @@
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
-  "module": "./dist/index.esm.js",
+  "module": "./dist/index.mjs",
   "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/index.esm.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js",
-      "default": "./dist/index.esm.js"
+      "default": "./dist/index.mjs"
     },
     "./package.json": "./package.json"
   },
