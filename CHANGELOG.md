@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://github.com/sanity-io/ui/compare/v1.0.6...v1.0.7) (2023-01-02)
+
+### Bug Fixes
+
+- **build:** remove `"type": "commonjs"` for Next.js support ([aa51484](https://github.com/sanity-io/ui/commit/aa5148471754b5f336d4c46e1ae6ad99eda11617))
+- **deps:** update depdendencies ([ca85065](https://github.com/sanity-io/ui/commit/ca85065e4ea1f913214e2611b2a81c73a875233e))
+
 ## [1.0.6](https://github.com/sanity-io/ui/compare/v1.0.5...v1.0.6) (2022-12-28)
 
 ### Bug Fixes
