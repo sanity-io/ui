@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/sanity-io/ui-workshop/compare/v1.1.3...v1.1.4) (2023-01-02)
+
+### Bug Fixes
+
+- **build:** include `node` directory ([2d95455](https://github.com/sanity-io/ui-workshop/commit/2d9545538b154ee472fef3ebf2cd8247ee14cc36))
+
 ## [1.1.3](https://github.com/sanity-io/ui-workshop/compare/v1.1.2...v1.1.3) (2023-01-02)
 
 ### Bug Fixes
