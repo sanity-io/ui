@@ -21,6 +21,10 @@
       "source": "./exports/index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
+      "node": {
+        "import": "./node/index.js",
+        "require": "./dist/index.cjs"
+      },
       "default": "./dist/index.js"
     },
     "./plugin-a11y": {
@@ -28,6 +32,10 @@
       "source": "./exports/plugin-a11y.ts",
       "import": "./dist/plugin-a11y.js",
       "require": "./dist/plugin-a11y.cjs",
+      "node": {
+        "import": "./node/plugin-a11y.js",
+        "require": "./dist/plugin-a11y.cjs"
+      },
       "default": "./dist/plugin-a11y.js"
     },
     "./plugin-perf": {
@@ -35,6 +43,10 @@
       "source": "./exports/plugin-perf.ts",
       "import": "./dist/plugin-perf.js",
       "require": "./dist/plugin-perf.cjs",
+      "node": {
+        "import": "./node/plugin-perf.js",
+        "require": "./dist/plugin-perf.cjs"
+      },
       "default": "./dist/plugin-perf.js"
     },
     "./runtime": {
@@ -42,6 +54,10 @@
       "source": "./exports/runtime.ts",
       "import": "./dist/runtime.js",
       "require": "./dist/runtime.cjs",
+      "node": {
+        "import": "./node/runtime.js",
+        "require": "./dist/runtime.cjs"
+      },
       "default": "./dist/runtime.js"
     },
     "./package.json": "./package.json"
