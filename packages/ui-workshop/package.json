@@ -9,6 +9,7 @@
   "files": [
     "bin",
     "dist",
+    "node",
     "src"
   ],
   "types": "./dist/index.d.ts",
