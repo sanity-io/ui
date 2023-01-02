@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/sanity-io/ui-workshop/compare/v1.1.4...v1.1.5) (2023-01-02)
+
+### Bug Fixes
+
+- **deps:** downgrade to `globby@11` ([c2e6f34](https://github.com/sanity-io/ui-workshop/commit/c2e6f348ba28e975b01c87204fbcb614282f2b8a))
+
 ## [1.1.4](https://github.com/sanity-io/ui-workshop/compare/v1.1.3...v1.1.4) (2023-01-02)
 
 ### Bug Fixes
