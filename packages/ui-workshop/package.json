@@ -9,7 +9,6 @@
   "files": [
     "bin",
     "dist",
-    "node",
     "src"
   ],
   "types": "./dist/index.d.ts",
@@ -23,7 +22,7 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "node": {
-        "import": "./node/index.js",
+        "import": "./dist/node/index.cjs.js",
         "require": "./dist/index.cjs"
       },
       "default": "./dist/index.js"
@@ -34,7 +33,7 @@
       "import": "./dist/plugin-a11y.js",
       "require": "./dist/plugin-a11y.cjs",
       "node": {
-        "import": "./node/plugin-a11y.js",
+        "import": "./dist/node/plugin-a11y.cjs.js",
         "require": "./dist/plugin-a11y.cjs"
       },
       "default": "./dist/plugin-a11y.js"
@@ -45,7 +44,7 @@
       "import": "./dist/plugin-perf.js",
       "require": "./dist/plugin-perf.cjs",
       "node": {
-        "import": "./node/plugin-perf.js",
+        "import": "./dist/node/plugin-perf.cjs.js",
         "require": "./dist/plugin-perf.cjs"
       },
       "default": "./dist/plugin-perf.js"
@@ -56,7 +55,7 @@
       "import": "./dist/runtime.js",
       "require": "./dist/runtime.cjs",
       "node": {
-        "import": "./node/runtime.js",
+        "import": "./dist/node/runtime.cjs.js",
         "require": "./dist/runtime.cjs"
       },
       "default": "./dist/runtime.js"
