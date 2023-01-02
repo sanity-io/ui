@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/sanity-io/ui/compare/v1.0.8...v1.0.9) (2023-01-02)
+
+### Bug Fixes
+
+- **build:** provide Node ESM wrapper ([645360b](https://github.com/sanity-io/ui/commit/645360b96e19acf9dc2a68e61d5ba4a2d0ca4ba7))
+
 ## [1.0.8](https://github.com/sanity-io/ui/compare/v1.0.7...v1.0.8) (2023-01-02)
 
 ### Bug Fixes
