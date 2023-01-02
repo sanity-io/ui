@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.8](https://github.com/sanity-io/ui/compare/v1.0.7...v1.0.8) (2023-01-02)
+
+### Bug Fixes
+
+- **deps:** update dependency framer-motion to v8 ([#1030](https://github.com/sanity-io/ui/issues/1030)) ([6b169ae](https://github.com/sanity-io/ui/commit/6b169ae244a5a860a838de9c503426e8341ba787))
+- full SSR hydration support ([#1023](https://github.com/sanity-io/ui/issues/1023)) ([6225ece](https://github.com/sanity-io/ui/commit/6225ece6e46f3df49c0ed8e0077bad4c90651e92))
+
 ## [1.0.7](https://github.com/sanity-io/ui/compare/v1.0.6...v1.0.7) (2023-01-02)
 
 ### Bug Fixes
