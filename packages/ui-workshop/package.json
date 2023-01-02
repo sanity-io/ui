@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@sanity/ui-workshop",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "sideEffects": false,
   "bin": {
     "workshop": "./bin/workshop.cjs"
