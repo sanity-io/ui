@@ -1,19 +1,18 @@
 import {AnimatePresence, motion} from 'framer-motion'
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState, startTransition} from 'react'
 import styled from 'styled-components'
+import {useMounted} from '../../hooks/useMounted'
 import {Box} from '../../primitives'
 import {Layer} from '../../utils'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
 import {ToastContextValue, ToastParams} from './types'
 
-interface ToastState {
-  toasts: {
-    dismiss: () => void
-    id: string
-    params: ToastParams
-  }[]
-}
+type ToastState = {
+  dismiss: () => void
+  id: string
+  params: ToastParams
+}[]
 
 /**
  * @public
@@ -51,25 +50,29 @@ let toastId = 0
  */
 export function ToastProvider(props: ToastProviderProps): React.ReactElement {
   const {children, padding = 4, paddingX, paddingY, zOffset} = props
-  const [state, setState] = useState<ToastState>({toasts: []})
+  const [state, _setState] = useState<ToastState>([])
+
   const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
 
   const push = useCallback((params: ToastParams) => {
+    // Wrap setState in startTransition to allow React to give input state updates higher priority
+    const setState: typeof _setState = (state) => startTransition(() => _setState(state))
+
     const id = params.id || String(toastId++)
     const duration = params.duration || 5000
 
     const dismiss = () => {
       const timeoutId = toastsRef.current[id]?.timeoutId
 
-      setState((prevState) => {
-        const idx = prevState.toasts.findIndex((t) => t.id === id)
+      setState((prevState): ToastState => {
+        const idx = prevState.findIndex((t) => t.id === id)
 
         if (idx > -1) {
-          const toasts = prevState.toasts.slice(0)
+          const toasts = prevState.slice(0)
 
           toasts.splice(idx, 1)
 
-          return {...prevState, toasts}
+          return toasts
         }
 
         return prevState
@@ -81,19 +84,16 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
       }
     }
 
-    setState((prevState) => {
-      return {
-        ...prevState,
-        toasts: prevState.toasts
-          .filter((t) => t.id !== id)
-          .concat([
-            {
-              dismiss,
-              id,
-              params: {...params, duration},
-            },
-          ]),
-      }
+    setState((prevState): ToastState => {
+      return prevState
+        .filter((t) => t.id !== id)
+        .concat([
+          {
+            dismiss,
+            id,
+            params: {...params, duration},
+          },
+        ])
     })
 
     if (toastsRef.current[id]) {
@@ -119,37 +119,40 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
   )
 
   const value: ToastContextValue = useMemo(() => ({version: 0.0, push}), [push])
+  const mounted = useMounted()
 
   return (
     <ToastContext.Provider value={value}>
       {children}
 
-      <Root data-ui="ToastProvider" zOffset={zOffset}>
-        <ToastContainer>
-          <Box padding={padding} paddingX={paddingX} paddingY={paddingY}>
-            <AnimatePresence initial={false}>
-              {state.toasts.map(({dismiss, id, params}) => (
-                <motion.div
-                  animate={{opacity: 1, y: 0, scale: 1}}
-                  exit={{opacity: 0, scale: 0.5, transition: {duration: 0.2}}}
-                  initial={{opacity: 0, y: 32, scale: 0.25}}
-                  key={id}
-                  layout="position"
-                  transition={{type: 'spring', damping: 30, stiffness: 400}}
-                >
-                  <Toast
-                    closable={params.closable}
-                    description={params.description}
-                    onClose={dismiss}
-                    status={params.status}
-                    title={params.title}
-                  />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </Box>
-        </ToastContainer>
-      </Root>
+      {mounted && (
+        <Root data-ui="ToastProvider" zOffset={zOffset}>
+          <ToastContainer>
+            <Box padding={padding} paddingX={paddingX} paddingY={paddingY}>
+              <AnimatePresence initial={false}>
+                {state.map(({dismiss, id, params}) => (
+                  <motion.div
+                    animate={{opacity: 1, y: 0, scale: 1}}
+                    exit={{opacity: 0, scale: 0.5, transition: {duration: 0.2}}}
+                    initial={{opacity: 0, y: 32, scale: 0.25}}
+                    key={id}
+                    layout="position"
+                    transition={{type: 'spring', damping: 30, stiffness: 400}}
+                  >
+                    <Toast
+                      closable={params.closable}
+                      description={params.description}
+                      onClose={dismiss}
+                      status={params.status}
+                      title={params.title}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </Box>
+          </ToastContainer>
+        </Root>
+      )}
     </ToastContext.Provider>
   )
 }
