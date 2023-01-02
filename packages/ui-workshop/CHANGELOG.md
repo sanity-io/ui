@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.7](https://github.com/sanity-io/ui-workshop/compare/v1.1.6...v1.1.7) (2023-01-02)
+
+### Bug Fixes
+
+- **build:** auto-generate Node ESM wrappers ([b26bbfe](https://github.com/sanity-io/ui-workshop/commit/b26bbfef6a070be24937cf921ac0752a10236a28))
+- **deps:** update dependencies ([08d683d](https://github.com/sanity-io/ui-workshop/commit/08d683d21be0985654c6a13999e2017661faf113))
+
 ## [1.1.6](https://github.com/sanity-io/ui-workshop/compare/v1.1.5...v1.1.6) (2023-01-02)
 
 ### Bug Fixes
