@@ -12,6 +12,10 @@
       "source": "./src/index.ts",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js",
+      "node": {
+        "import": "./dist/index.cjs.mjs",
+        "require": "./dist/index.js"
+      },
       "default": "./dist/index.esm.js"
     },
     "./package.json": "./package.json"
