@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/sanity-io/icons/compare/v2.2.0...v2.2.1) (2023-01-03)
+
+### Bug Fixes
+
+- **build:** auto-generate Node ESM wrapper ([0c4e143](https://github.com/sanity-io/icons/commit/0c4e1439db37e6b32fda536ac18b920691e2c655))
+- **deps:** update dependencies ([582739c](https://github.com/sanity-io/icons/commit/582739c4f1402e5e86b6404391780378f93a0ab6))
+
 ## [2.2.0](https://github.com/sanity-io/icons/compare/v2.1.0...v2.2.0) (2022-12-22)
 
 ### Features
