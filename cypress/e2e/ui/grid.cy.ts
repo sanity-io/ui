@@ -40,10 +40,10 @@ context('Primitives/Grid', () => {
       },
 
       {
-        viewport: [1200, 1600],
+        viewport: [1204, 1600],
         css: {
           gridGap: '20px 20px',
-          gridTemplateColumns: '203.188px 203.203px 203.203px 203.203px 203.203px',
+          gridTemplateColumns: '204px 204px 204px 204px 204px',
           gridTemplateRows: '35px 35px 35px 35px 35px',
         },
       },
@@ -58,11 +58,10 @@ context('Primitives/Grid', () => {
       },
 
       {
-        viewport: [2400, 3840],
+        viewport: [2404, 3840],
         css: {
           gridGap: '52px 52px',
-          gridTemplateColumns:
-            '283.422px 283.422px 283.438px 283.422px 283.438px 283.422px 283.438px',
+          gridTemplateColumns: '284px 284px 284px 284px 284px 284px 284px',
           gridTemplateRows: '35px 35px 35px 35px 35px 35px 35px',
         },
       },
