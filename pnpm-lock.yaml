@@ -42,7 +42,7 @@ specifiers:
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-react: ^7.31.11
   eslint-plugin-react-hooks: ^4.6.0
-  framer-motion: ^8.1.1
+  framer-motion: ^8.1.4
   http-server: ^14.1.1
   husky: ^8.0.3
   jest: ^29.3.1
@@ -68,7 +68,7 @@ dependencies:
   '@sanity/color': 2.2.1
   '@sanity/icons': 2.2.1_react@18.2.0
   csstype: 3.1.1
-  framer-motion: 8.1.3_biqbaboplfbrettd7655fr4n2y
+  framer-motion: 8.1.4_biqbaboplfbrettd7655fr4n2y
   react-refractor: 2.1.7_react@18.2.0
 
 devDependencies:
@@ -5724,8 +5724,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /framer-motion/8.1.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-pvlAEwjl4W6EMRp0rvWABCk+YyrlnPMXYzgyhkLSnBq9TdACFNeJBql7E40pMS0ttaWMKfwmH1A/raFCtcMf/A==}
+  /framer-motion/8.1.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-dyibKIom+lX0BsSG1fHwxbDkEIMAGMUlWL4fFdOfMzd0t/kNKqQB4QTFf2sG9vovjUeTNXSVbmBW07g2S8HV2Q==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
