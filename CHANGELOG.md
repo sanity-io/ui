@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.11](https://github.com/sanity-io/ui/compare/v1.0.10...v1.0.11) (2023-01-03)
+
+### Bug Fixes
+
+- **build:** sort export properties ([d524bf8](https://github.com/sanity-io/ui/commit/d524bf83c3c78c9fc87a859d60d4589c6964c1c8))
+
 ## [1.0.10](https://github.com/sanity-io/ui/compare/v1.0.9...v1.0.10) (2023-01-03)
 
 ### Bug Fixes
