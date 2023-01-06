@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/sanity-io/ui-workshop/compare/v1.1.8...v1.2.0) (2023-01-06)
+
+### Features
+
+- include plugin options in props ([231aedb](https://github.com/sanity-io/ui-workshop/commit/231aedb401c60842eac0a74ce2194e18d839d4a9))
+
+### Bug Fixes
+
+- **deps:** update dependencies ([c45c1a7](https://github.com/sanity-io/ui-workshop/commit/c45c1a76a345c6f068e2de08400d43ae0a1e0fbe))
+
 ## [1.1.8](https://github.com/sanity-io/ui-workshop/compare/v1.1.7...v1.1.8) (2023-01-03)
 
 ### Bug Fixes
