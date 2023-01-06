@@ -1,7 +1,7 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
 import {createElement, memo, useMemo} from 'react'
 import {WorkshopConfig, WorkshopPlugin} from './config'
-import {EMPTY_ARRAY} from './constants'
+import {EMPTY_ARRAY, EMPTY_RECORD} from './constants'
 import {resolveLocation} from './helpers'
 import {Pubsub} from './lib/pubsub'
 import {propsPlugin} from './plugins/props'
@@ -99,7 +99,11 @@ export const WorkshopProvider = memo(function WorkshopProvider(
 
   for (const plugin of plugins) {
     if (plugin.provider) {
-      wrappedChildren = createElement(plugin.provider, {}, wrappedChildren)
+      wrappedChildren = createElement(
+        plugin.provider,
+        {options: plugin.options || EMPTY_RECORD},
+        wrappedChildren
+      )
     }
   }
 

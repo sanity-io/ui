@@ -1,3 +1,5 @@
+import {ElementType, ReactNode} from 'react'
+
 /** @public */
 export interface WorkshopCollection {
   name: string
@@ -8,7 +10,7 @@ export interface WorkshopCollection {
 export interface WorkshopStory<Options = Record<string, unknown>> {
   name: string
   title: string
-  component: React.ElementType
+  component: ElementType
   options?: Options
 }
 
@@ -26,15 +28,16 @@ export interface WorkshopConfig {
     navbar?: boolean
   }
   frameUrl?: string
-  plugins?: WorkshopPlugin[]
+  plugins?: WorkshopPlugin<any>[]
   scopes: WorkshopScope[]
   title?: string
 }
 
 /** @public */
-export interface WorkshopPlugin {
+export interface WorkshopPlugin<Options = any> {
   name: string
   title: string
-  inspector?: React.ElementType
-  provider?: React.ElementType<{children?: React.ReactNode}>
+  inspector?: ElementType<{options: Options}>
+  provider?: ElementType<{children?: ReactNode; options: Options}>
+  options?: Options
 }

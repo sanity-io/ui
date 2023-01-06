@@ -1,6 +1,7 @@
 import {Box, BoxDisplay, Card, Flex, TabPanel} from '@sanity/ui'
 import {createElement, ElementType, memo, ReactElement, useMemo, useState} from 'react'
 import styled from 'styled-components'
+import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'
 import {InspectorTab} from './types'
@@ -16,8 +17,8 @@ const Root = styled(Card)`
   }
 `
 
-const MemoRender = memo(function MemoRender(props: {component: ElementType}) {
-  return createElement(props.component)
+const MemoRender = memo(function MemoRender(props: {component: ElementType; options: any}) {
+  return createElement(props.component, {options: props.options})
 })
 
 /** @internal */
@@ -35,7 +36,7 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
           id: plugin.name,
           label: plugin.title,
           tone: undefined,
-          panel: plugin.inspector,
+          plugin,
         }
       })
   }, [plugins])
@@ -64,13 +65,21 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
               key={tab.id}
               overflow="auto"
             >
-              {tab.panel && createElement(tab.panel)}
+              {tab.plugin.inspector && (
+                <MemoRender
+                  component={tab.plugin.inspector}
+                  options={tab.plugin.options || EMPTY_RECORD}
+                />
+              )}
             </TabPanel>
           ))}
 
-        {!showTabs && currentTab?.panel && (
+        {!showTabs && currentTab?.plugin.inspector && (
           <Box flex={1} overflow="auto">
-            <MemoRender component={currentTab.panel} />
+            <MemoRender
+              component={currentTab.plugin.inspector}
+              options={currentTab.plugin.options || EMPTY_RECORD}
+            />
           </Box>
         )}
       </Flex>
