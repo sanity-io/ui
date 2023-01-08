@@ -65,7 +65,7 @@
     "@commitlint/config-conventional": "^17.4.0",
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/pkg-utils": "^2.1.1",
-    "@sanity/semantic-release-preset": "^2.0.5",
+    "@sanity/semantic-release-preset": "^3.0.2",
     "@sanity/ui-workshop": "^1.1.8",
     "@testing-library/dom": "^8.19.1",
     "@testing-library/jest-dom": "^5.16.5",
