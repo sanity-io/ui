@@ -1,5 +1,6 @@
 # Root level ignores
 /*.log
+/*.tgz
 /.vscode
 /.workshop
 /package-lock.json
