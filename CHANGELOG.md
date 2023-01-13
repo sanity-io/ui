@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.14](https://github.com/sanity-io/ui/compare/v1.0.13...v1.0.14) (2023-01-13)
+
+### Bug Fixes
+
+- **deps:** pin `@floating-ui/react-dom` to `1.1.1` ([1eb56ef](https://github.com/sanity-io/ui/commit/1eb56ef3411cc72ae9096aa3a20c3e5cc7b76602))
+
 ## [1.0.13](https://github.com/sanity-io/ui/compare/v1.0.12...v1.0.13) (2023-01-13)
 
 ### Bug Fixes
