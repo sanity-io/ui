@@ -35,5 +35,10 @@ export default defineScope({
       title: 'Aligned',
       component: lazy(() => import('./AlignedStory')),
     },
+    {
+      name: 'openOnMountStory',
+      title: 'Open on mount',
+      component: lazy(() => import('./OpenOnMountStory')),
+    },
   ],
 })
