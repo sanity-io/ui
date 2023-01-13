@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.13](https://github.com/sanity-io/ui/compare/v1.0.12...v1.0.13) (2023-01-13)
+
+### Bug Fixes
+
+- **deps:** update dependencies ([7c08eb9](https://github.com/sanity-io/ui/commit/7c08eb95c5bf7f589cac5e0daf387b1543276f5b))
+
 ## [1.0.12](https://github.com/sanity-io/ui/compare/v1.0.11...v1.0.12) (2023-01-04)
 
 ### Bug Fixes
