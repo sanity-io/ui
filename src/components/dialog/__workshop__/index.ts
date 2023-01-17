@@ -12,5 +12,6 @@ export default defineScope({
     {name: 'position', title: 'Position', component: lazy(() => import('./position'))},
     {name: 'provider', title: 'Provider', component: lazy(() => import('./provider'))},
     {name: 'auto-focus', title: 'AutoFocus', component: lazy(() => import('./autoFocus'))},
+    {name: 'panes', title: 'Panes', component: lazy(() => import('./panes'))},
   ],
 })
