@@ -19,6 +19,11 @@ import {useDialog} from './useDialog'
 /**
  * @public
  */
+export type DialogCloseAction = 'escape' | 'close-button'
+
+/**
+ * @public
+ */
 export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProps {
   /**
    * @beta
@@ -35,7 +40,8 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   header?: React.ReactNode
   id: string
   onClickOutside?: () => void
-  onClose?: () => void
+  onOverlayClick?: () => void
+  onClose?: (action: DialogCloseAction) => void
   portal?: string
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
@@ -57,7 +63,7 @@ interface DialogCardProps extends ResponsiveWidthProps {
   header: React.ReactNode
   id: string
   onClickOutside?: () => void
-  onClose?: () => void
+  onClose?: (action: DialogCloseAction) => void
   radius: number | number[]
   scheme?: ThemeColorSchemeKey
   shadow: number | number[]
@@ -172,7 +178,7 @@ const DialogCard = forwardRef(function DialogCard(
         if (event.key === 'Escape') {
           event.preventDefault()
           event.stopPropagation()
-          onClose()
+          onClose('escape')
         }
       },
       [isTopLayer, onClose]
@@ -205,9 +211,26 @@ const DialogCard = forwardRef(function DialogCard(
     [contentRef]
   )
 
+  // Stop propagation of click events to prevent the `onOverlayClick` click
+  // handler from firing when clicking inside the `DialogCardRoot`
+  const handleCardRootClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => event.stopPropagation(),
+    []
+  )
+
+  const handleCloseButtonClick = useCallback(() => {
+    onClose?.('close-button')
+  }, [onClose])
+
   return (
     <DialogContainer data-ui="DialogCard" width={width}>
-      <DialogCardRoot radius={radius} ref={setRef} scheme={scheme} shadow={shadow}>
+      <DialogCardRoot
+        radius={radius}
+        ref={setRef}
+        scheme={scheme}
+        shadow={shadow}
+        onClick={handleCardRootClick}
+      >
         <DialogLayout direction="column">
           {showHeader && (
             <DialogHeader>
@@ -226,7 +249,7 @@ const DialogCard = forwardRef(function DialogCard(
                       disabled={!onClose}
                       icon={CloseIcon}
                       mode="bleed"
-                      onClick={onClose}
+                      onClick={handleCloseButtonClick}
                       padding={3}
                     />
                   </Box>
@@ -266,6 +289,7 @@ export const Dialog = forwardRef(function Dialog(
     header,
     id,
     onClickOutside,
+    onOverlayClick,
     onClose,
     padding: paddingProp = 4,
     portal,
@@ -317,6 +341,7 @@ export const Dialog = forwardRef(function Dialog(
         aria-modal
         data-ui="Dialog"
         id={id}
+        onClick={onOverlayClick}
         onFocus={handleFocus}
         ref={ref}
         role="dialog"
