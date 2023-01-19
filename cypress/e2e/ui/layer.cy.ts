@@ -26,6 +26,9 @@ context('Utils/Layer', () => {
     cy.visit('/frame/?path=/utils/layer/nested')
 
     cy.get('#open-layer-1').click()
+
+    cy.get('#layer-debug-info-1').contains('size=1')
+
     cy.get('#open-layer-2').click()
 
     cy.get('#layer-debug-info-1').contains('size=2')
