@@ -18,5 +18,6 @@ export default defineScope({
       title: 'Layering focus',
       component: lazy(() => import('./layeringFocus')),
     },
+    {name: 'wrapped', title: 'Wrapped', component: lazy(() => import('./wrapped'))},
   ],
 })
