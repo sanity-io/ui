@@ -178,10 +178,27 @@ const DialogCard = forwardRef(function DialogCard(
   const showCloseButton = Boolean(onClose) && hideCloseButton === false
   const showHeader = Boolean(header) || showCloseButton
 
+  const [lastFocusedElement, setLastFocusedElement] = useState<HTMLElement | null>(null)
+
+  const handleContentFocus = useCallback(() => {
+    const containsActiveElement = localContentRef?.current?.contains(document.activeElement)
+
+    if (containsActiveElement) {
+      setLastFocusedElement(document.activeElement as HTMLElement)
+    }
+  }, [])
+
+  // Set focus on the last focused element when the dialog becomes the top layer.
+  useEffect(() => {
+    if (isTopLayer && lastFocusedElement) {
+      lastFocusedElement.focus()
+    }
+  }, [autoFocus, forwardedRef, isTopLayer, lastFocusedElement])
+
   useEffect(() => {
     if (!autoFocus) return
 
-    // On mount: focus the first interactive element in the contents
+    // On mount: If there is no last focused element, focus the first focusable element
     if (forwardedRef.current) {
       focusFirstDescendant(forwardedRef.current)
     }
@@ -275,7 +292,7 @@ const DialogCard = forwardRef(function DialogCard(
             </DialogHeader>
           )}
 
-          <DialogContent flex={1} ref={setContentRef} tabIndex={-1}>
+          <DialogContent flex={1} onFocus={handleContentFocus} ref={setContentRef} tabIndex={-1}>
             {children}
           </DialogContent>
 
