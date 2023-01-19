@@ -178,27 +178,10 @@ const DialogCard = forwardRef(function DialogCard(
   const showCloseButton = Boolean(onClose) && hideCloseButton === false
   const showHeader = Boolean(header) || showCloseButton
 
-  const [lastFocusedElement, setLastFocusedElement] = useState<HTMLElement | null>(null)
-
-  const handleContentFocus = useCallback(() => {
-    const containsActiveElement = localContentRef?.current?.contains(document.activeElement)
-
-    if (containsActiveElement) {
-      setLastFocusedElement(document.activeElement as HTMLElement)
-    }
-  }, [])
-
-  // Set focus on the last focused element when the dialog becomes the top layer.
-  useEffect(() => {
-    if (isTopLayer && lastFocusedElement) {
-      lastFocusedElement.focus()
-    }
-  }, [autoFocus, forwardedRef, isTopLayer, lastFocusedElement])
-
   useEffect(() => {
     if (!autoFocus) return
 
-    // On mount: If there is no last focused element, focus the first focusable element
+    // On mount: focus the first focusable element
     if (forwardedRef.current) {
       focusFirstDescendant(forwardedRef.current)
     }
@@ -292,7 +275,7 @@ const DialogCard = forwardRef(function DialogCard(
             </DialogHeader>
           )}
 
-          <DialogContent flex={1} onFocus={handleContentFocus} ref={setContentRef} tabIndex={-1}>
+          <DialogContent flex={1} ref={setContentRef} tabIndex={-1}>
             {children}
           </DialogContent>
 
@@ -324,6 +307,7 @@ export const Dialog = forwardRef(function Dialog(
     id,
     onClickOutside,
     onClose,
+    onFocus,
     padding: paddingProp = 4,
     portal: portalProp,
     position: positionProp = dialog.position || 'fixed',
@@ -345,26 +329,31 @@ export const Dialog = forwardRef(function Dialog(
   const cardRef = useRef<HTMLDivElement | null>(null)
   const focusedElementRef = useRef<HTMLElement | null>(null)
 
-  const handleFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    const target = event.target
-    const cardElement = cardRef.current
+  const handleFocus = useCallback(
+    (event: React.FocusEvent<HTMLDivElement>) => {
+      onFocus?.(event)
 
-    if (cardElement && target === preDivRef.current) {
-      focusLastDescendant(cardElement)
+      const target = event.target
+      const cardElement = cardRef.current
 
-      return
-    }
+      if (cardElement && target === preDivRef.current) {
+        focusLastDescendant(cardElement)
 
-    if (cardElement && target === postDivRef.current) {
-      focusFirstDescendant(cardElement)
+        return
+      }
 
-      return
-    }
+      if (cardElement && target === postDivRef.current) {
+        focusFirstDescendant(cardElement)
 
-    if (isHTMLElement(event.target)) {
-      focusedElementRef.current = event.target
-    }
-  }, [])
+        return
+      }
+
+      if (isHTMLElement(event.target)) {
+        focusedElementRef.current = event.target
+      }
+    },
+    [onFocus]
+  )
 
   const labelId = `${id}_label`
 
