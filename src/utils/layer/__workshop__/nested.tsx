@@ -18,8 +18,8 @@ export default function PlainStory() {
         </Box>
         <Box padding={3}>
           <Stack space={3}>
-            <LayerDebugInfo />
-            <Button mode="ghost" onClick={handleOpen} text="Open layer 1" />
+            <LayerDebugInfo id="layer-debug-info-1" />
+            <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
             {open && (
               <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <Layer1 onClose={handleClose} />
@@ -52,7 +52,7 @@ function Layer1({onClose}: {onClose: () => void}) {
       <Box padding={3}>
         <Stack space={3}>
           <LayerDebugInfo />
-          <Button mode="ghost" onClick={handleOpen} text="Open layer 2" />
+          <Button id="open-layer-2" mode="ghost" onClick={handleOpen} text="Open layer 2" />
           {open && (
             <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <Layer2 onClose={handleClose} />

@@ -6,9 +6,9 @@ export default defineScope({
   title: 'Layer',
   stories: [
     {
-      name: 'plain',
-      title: 'Plain',
-      component: lazy(() => import('./plain')),
+      name: 'nested',
+      title: 'Nested',
+      component: lazy(() => import('./nested')),
     },
     {
       name: 'multiple-roots',
