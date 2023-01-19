@@ -21,4 +21,13 @@ context('Utils/Layer', () => {
       cy.get('#responsive-layer').should('have.attr', 'style', `z-index: ${css.zIndex};`)
     }
   })
+
+  it('should calculate size of nested layers', () => {
+    cy.visit('/frame/?path=/utils/layer/nested')
+
+    cy.get('#open-layer-1').click()
+    cy.get('#open-layer-2').click()
+
+    cy.get('#layer-debug-info-1').contains('size=2')
+  })
 })
