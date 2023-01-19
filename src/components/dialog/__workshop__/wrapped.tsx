@@ -74,7 +74,5 @@ function WrappedDialog(props: DialogProps & {children?: ReactNode}) {
     }
   }, [isTopLayer, lastFocusedElement])
 
-  // console.log('layer', {id: props.id, isTopLayer, layer})
-
-  return <Dialog {...props} onFocus={handleContentFocus} ref={dialogRef} />
+  return <Dialog {...props} data-size={layer.size} onFocus={handleContentFocus} ref={dialogRef} />
 }

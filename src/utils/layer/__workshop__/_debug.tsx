@@ -6,7 +6,12 @@ export function LayerDebugInfo(props: {id?: string}) {
 
   return (
     <Code id={id}>
-      zIndex={layer.zIndex}, size={layer.size}
+      {[
+        //
+        `isTopLayer=${layer.isTopLayer}`,
+        `size=${layer.size}`,
+        `zIndex=${layer.zIndex}`,
+      ].join('\n')}
     </Code>
   )
 }
