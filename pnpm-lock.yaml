@@ -56,7 +56,7 @@ specifiers:
   react-dom: ^18.2.0
   react-is: ^18.2.0
   react-refractor: ^2.1.7
-  rimraf: ^3.0.2
+  rimraf: ^4.1.2
   semantic-release: ^19.0.5
   start-server-and-test: ^1.15.2
   styled-components: ^5.3.6
@@ -121,7 +121,7 @@ devDependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-is: 18.2.0
-  rimraf: 3.0.2
+  rimraf: 4.1.2
   semantic-release: 19.0.5
   start-server-and-test: 1.15.2
   styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
@@ -9248,6 +9248,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
+
+  /rimraf/4.1.2:
+    resolution: {integrity: sha512-BlIbgFryTbw3Dz6hyoWFhKk+unCcHMSkZGrTFVAx2WmttdBSonsdtRlwiuTbDqTKr+UlXIUqJVS4QT5tUzGENQ==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /rollup-plugin-esbuild/5.0.0_6dvxugndbkuwxf6z2chavwhoee:
