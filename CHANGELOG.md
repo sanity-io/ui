@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/sanity-io/ui/compare/v1.0.15...v1.1.0) (2023-01-24)
+
+### Features
+
+- add `usePrefersReducedMotion` hook ([d6f6c35](https://github.com/sanity-io/ui/commit/d6f6c356662edec0396d2b065323a1ef7968a788))
+
 ## [1.0.15](https://github.com/sanity-io/ui/compare/v1.0.14...v1.0.15) (2023-01-24)
 
 ### Bug Fixes
