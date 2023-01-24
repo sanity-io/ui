@@ -1,12 +1,12 @@
 /**
  * @internal
  */
-export const EMPTY_ARRAY: any[] = []
+export const EMPTY_ARRAY: never[] = []
 
 /**
  * @internal
  */
-export const EMPTY_RECORD: Record<string, any> = {}
+export const EMPTY_RECORD: Record<string, never> = {}
 
 /**
  * @internal
