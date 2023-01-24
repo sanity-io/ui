@@ -13,7 +13,14 @@ import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/typ
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {DialogPosition} from '../../types'
-import {Layer, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
+import {
+  Layer,
+  LayerActivateCallbackProps,
+  Portal,
+  useBoundaryElement,
+  useLayer,
+  usePortal,
+} from '../../utils'
 import {
   dialogStyle,
   responsiveDialogPositionStyle,
@@ -39,6 +46,8 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   footer?: React.ReactNode
   header?: React.ReactNode
   id: string
+  /** A callback that fires when the dialog becomes the top layer when it was not the top layer before. */
+  onActivate?: (props: LayerActivateCallbackProps) => void
   onClickOutside?: () => void
   onClose?: () => void
   portal?: string
@@ -305,6 +314,7 @@ export const Dialog = forwardRef(function Dialog(
     footer,
     header,
     id,
+    onActivate,
     onClickOutside,
     onClose,
     onFocus,
@@ -396,6 +406,7 @@ export const Dialog = forwardRef(function Dialog(
         aria-modal
         data-ui="Dialog"
         id={id}
+        onActivate={onActivate}
         onClick={handleRootClick}
         onFocus={handleFocus}
         ref={ref}

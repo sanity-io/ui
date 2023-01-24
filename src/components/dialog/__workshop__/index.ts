@@ -13,11 +13,7 @@ export default defineScope({
     {name: 'provider', title: 'Provider', component: lazy(() => import('./provider'))},
     {name: 'auto-focus', title: 'AutoFocus', component: lazy(() => import('./autoFocus'))},
     {name: 'panes', title: 'Panes', component: lazy(() => import('./panes'))},
-    {
-      name: 'layering-focus',
-      title: 'Layering focus',
-      component: lazy(() => import('./layeringFocus')),
-    },
+    {name: 'activate', title: 'Activate', component: lazy(() => import('./activate'))},
     {name: 'wrapped', title: 'Wrapped', component: lazy(() => import('./wrapped'))},
   ],
 })

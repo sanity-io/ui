@@ -1,19 +1,30 @@
-import {forwardRef} from 'react'
+import {FocusEvent, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
+import {useForwardedRef} from '../../hooks'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 
 /**
  * @public
  */
+export interface LayerActivateCallbackProps {
+  activeElement: HTMLElement | null
+}
+
+/**
+ * @public
+ */
 export interface LayerProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  /** A callback that fires when the layer becomes the top layer when it was not the top layer before. */
+  onActivate?: (props: LayerActivateCallbackProps) => void
   zOffset?: number | number[]
 }
 
 interface LayerChildrenProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  onActivate?: (props: LayerActivateCallbackProps) => void
 }
 
 const Root = styled.div`
@@ -24,11 +35,56 @@ const LayerChildren = forwardRef(function LayerChildren(
   props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
   ref: React.Ref<HTMLDivElement>
 ) {
-  const {children, style = EMPTY_RECORD, ...restProps} = props
-  const {zIndex} = useLayer()
+  const {children, onActivate, onFocus, style = EMPTY_RECORD, ...restProps} = props
+  const {zIndex, isTopLayer} = useLayer()
+  const [lastFocusedElement, setLastFocusedElement] = useState<HTMLElement | null>(null)
+  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
+
+  const forwardedRef = useForwardedRef(ref)
+  const isTopLayerRef = useRef<boolean>(isTopLayer)
+
+  // When the layer very first mounts, it will be the top layer, but we don't want to fire the callback in that case.
+  // We use a ref to track the previous value of isTopLayer to determine if the layer has become the top layer since the last render.
+  useEffect(() => {
+    const becameTopLayer = isTopLayerRef.current !== isTopLayer && isTopLayer
+
+    if (becameTopLayer) {
+      onActivate?.({activeElement: lastFocusedElement || null})
+    }
+
+    isTopLayerRef.current = isTopLayer
+  }, [isTopLayer, lastFocusedElement, onActivate])
+
+  const handleFocus = useCallback(
+    (event: FocusEvent<HTMLDivElement, Element>) => {
+      // Call the user-provided onFocus handler if any
+      onFocus?.(event)
+
+      const containsActiveElement = rootElement?.contains(document.activeElement)
+
+      if (containsActiveElement && isTopLayer) {
+        setLastFocusedElement(document.activeElement as HTMLElement)
+      }
+    },
+    [isTopLayer, onFocus, rootElement]
+  )
+
+  const setRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      setRootElement(el)
+      forwardedRef.current = el
+    },
+    [forwardedRef]
+  )
 
   return (
-    <Root {...restProps} data-ui="Layer" ref={ref} style={{...style, zIndex}}>
+    <Root
+      {...restProps}
+      data-ui="Layer"
+      onFocus={handleFocus}
+      ref={setRef}
+      style={{...style, zIndex}}
+    >
       {children}
     </Root>
   )
@@ -41,11 +97,11 @@ export const Layer = forwardRef(function Layer(
   props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
   ref: React.Ref<HTMLDivElement>
 ) {
-  const {children, zOffset = 1, ...restProps} = props
+  const {children, onActivate, zOffset = 1, ...restProps} = props
 
   return (
     <LayerProvider zOffset={zOffset}>
-      <LayerChildren {...restProps} ref={ref}>
+      <LayerChildren {...restProps} ref={ref} onActivate={onActivate}>
         {children}
       </LayerChildren>
     </LayerProvider>
