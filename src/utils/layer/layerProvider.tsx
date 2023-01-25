@@ -16,30 +16,47 @@ export interface LayerProviderProps {
  */
 export function LayerProvider(props: LayerProviderProps): React.ReactElement {
   const {children, zOffset: zOffsetProp = 0} = props
+
+  // Get parent context values
   const parent = useContext(LayerContext)
+  const parentRegisterChild = parent?.registerChild
+
+  // Get z-index offset
   const zOffset = useArrayProp(zOffsetProp)
+
+  // Get responsive z-index value
   const maxMediaIndex = zOffset.length - 1
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
+
+  // This is a state value that is used to keep track of the number of child layers
+  // This is only used by the root `LayerProvider`s
   const [size, setSize] = useState(0)
 
   const registerChild = useCallback(() => {
+    // Register child layers to the parent layer
+    const parentDispose = parentRegisterChild?.()
+
     setSize((v) => v + 1)
 
-    return () => setSize((v) => v - 1)
-  }, [])
-
-  const parentRegisterChild = parent?.registerChild
-
-  useEffect(() => {
-    if (!parentRegisterChild) return
-
-    return parentRegisterChild()
+    return () => {
+      setSize((v) => v - 1)
+      parentDispose?.()
+    }
   }, [parentRegisterChild])
 
+  // Register this layer on mount
+  useEffect(() => parentRegisterChild?.(), [parentRegisterChild])
+
   const value: LayerContextValue = useMemo(
-    () => ({version: 0.0, isTopLayer: size === 0, registerChild, size, zIndex}),
-    [size, registerChild, zIndex]
+    () => ({
+      version: 0.0,
+      isTopLayer: size === 0,
+      registerChild,
+      size,
+      zIndex,
+    }),
+    [registerChild, size, zIndex]
   )
 
   return <LayerContext.Provider value={value}>{children}</LayerContext.Provider>
