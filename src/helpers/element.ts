@@ -46,3 +46,10 @@ export function isHTMLSelectElement(element: unknown): element is HTMLSelectElem
 export function isHTMLTextAreaElement(element: unknown): element is HTMLTextAreaElement {
   return isHTMLElement(element) && element.nodeName === 'TEXTAREA'
 }
+
+/**
+ * @internal
+ */
+export function containsOrEqualsElement(element: HTMLElement, node: Node): boolean {
+  return element.contains(node) || element === node
+}
