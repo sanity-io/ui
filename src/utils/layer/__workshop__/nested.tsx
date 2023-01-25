@@ -9,26 +9,28 @@ export default function PlainStory() {
   const handleClose = useCallback(() => setOpen(false), [])
 
   return (
-    <LayerProvider>
-      <Card radius={2}>
-        <Box padding={3}>
-          <Text>
-            <strong>Root layer</strong>
-          </Text>
-        </Box>
-        <Box padding={3}>
-          <Stack space={3}>
-            <LayerDebugInfo />
-            <Button mode="ghost" onClick={handleOpen} text="Open layer 1" />
-            {open && (
-              <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                <Layer1 onClose={handleClose} />
-              </Layer>
-            )}
-          </Stack>
-        </Box>
-      </Card>
-    </LayerProvider>
+    <Box padding={3}>
+      <LayerProvider>
+        <Card radius={2} shadow={1}>
+          <Box padding={3}>
+            <Text>
+              <strong>Root layer</strong>
+            </Text>
+          </Box>
+          <Box padding={3}>
+            <Stack space={3}>
+              <LayerDebugInfo id="layer-debug-info-1" />
+              <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
+              {open && (
+                <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                  <Layer1 onClose={handleClose} />
+                </Layer>
+              )}
+            </Stack>
+          </Box>
+        </Card>
+      </LayerProvider>
+    </Box>
   )
 }
 
@@ -52,7 +54,7 @@ function Layer1({onClose}: {onClose: () => void}) {
       <Box padding={3}>
         <Stack space={3}>
           <LayerDebugInfo />
-          <Button mode="ghost" onClick={handleOpen} text="Open layer 2" />
+          <Button id="open-layer-2" mode="ghost" onClick={handleOpen} text="Open layer 2" />
           {open && (
             <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <Layer2 onClose={handleClose} />
