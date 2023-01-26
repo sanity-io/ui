@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/sanity-io/ui/compare/v1.1.0...v1.2.0) (2023-01-26)
+
+### Features
+
+- dialog and layer improvements ([#1052](https://github.com/sanity-io/ui/issues/1052)) ([392e1a0](https://github.com/sanity-io/ui/commit/392e1a0c8e6726f297d254a3de49d2ac2db169c6))
+
 ## [1.1.0](https://github.com/sanity-io/ui/compare/v1.0.15...v1.1.0) (2023-01-24)
 
 ### Features
