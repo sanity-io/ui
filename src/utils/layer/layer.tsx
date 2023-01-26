@@ -1,6 +1,7 @@
 import {FocusEvent, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
+import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
@@ -36,13 +37,14 @@ const LayerChildren = forwardRef(function LayerChildren(
   const forwardedRef = useForwardedRef(ref)
   const isTopLayerRef = useRef<boolean>(isTopLayer)
 
-  // When the layer very first mounts, it will be the top layer, but we don't want to fire the callback in that case.
-  // We use a ref to track the previous value of isTopLayer to determine if the layer has become the top layer since the last render.
+  // When the layer very first mounts, it will be the top layer, but we don't want to fire
+  // the callback in that case. We use a ref to track the previous value of isTopLayer to
+  // determine if the layer has become the top layer since the last render.
   useEffect(() => {
     const becameTopLayer = isTopLayerRef.current !== isTopLayer && isTopLayer
 
     if (becameTopLayer) {
-      onActivate?.({activeElement: lastFocusedElement || null})
+      onActivate?.({activeElement: lastFocusedElement})
     }
 
     isTopLayerRef.current = isTopLayer
@@ -53,10 +55,13 @@ const LayerChildren = forwardRef(function LayerChildren(
       // Call the user-provided onFocus handler if any
       onFocus?.(event)
 
-      const containsActiveElement = rootElement?.contains(document.activeElement)
+      const containsActiveElement =
+        isHTMLElement(rootElement) &&
+        isHTMLElement(document.activeElement) &&
+        containsOrEqualsElement(rootElement, document.activeElement)
 
-      if (containsActiveElement && isTopLayer) {
-        setLastFocusedElement(document.activeElement as HTMLElement)
+      if (containsActiveElement && isTopLayer && isHTMLElement(document.activeElement)) {
+        setLastFocusedElement(document.activeElement)
       }
     },
     [isTopLayer, onFocus, rootElement]
