@@ -22,6 +22,7 @@ describe('utils/layer', () => {
         const value: LayerContextValue = {
           version: 0.0,
           isTopLayer: true,
+          level: 0,
           registerChild: () => () => undefined,
           size: 0,
           zIndex: 0,

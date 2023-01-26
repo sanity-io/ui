@@ -25,7 +25,7 @@ export default function MultipleRootsStory() {
       </LayerProvider>
 
       <LayerProvider zOffset={200}>
-        <Card as={Layer as any} padding={3} shadow={5} style={{top: -50, left: 30}}>
+        <Card as={Layer} padding={3} shadow={5} style={{top: -50, left: 30}}>
           <Stack space={3}>
             <LayerDebugInfo />
             <Layer>

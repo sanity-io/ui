@@ -4,33 +4,41 @@ import {useCallback, useState} from 'react'
 import {LayerDebugInfo} from './_debug'
 
 export default function PlainStory() {
+  return (
+    <Box padding={3}>
+      <Root />
+      <Root />
+      <Root />
+    </Box>
+  )
+}
+
+function Root() {
   const [open, setOpen] = useState(false)
   const handleOpen = useCallback(() => setOpen(true), [])
   const handleClose = useCallback(() => setOpen(false), [])
 
   return (
-    <Box padding={3}>
-      <LayerProvider>
-        <Card radius={2} shadow={1}>
-          <Box padding={3}>
-            <Text>
-              <strong>Root layer</strong>
-            </Text>
-          </Box>
-          <Box padding={3}>
-            <Stack space={3}>
-              <LayerDebugInfo id="layer-debug-info-1" />
-              <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
-              {open && (
-                <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                  <Layer1 onClose={handleClose} />
-                </Layer>
-              )}
-            </Stack>
-          </Box>
-        </Card>
-      </LayerProvider>
-    </Box>
+    <LayerProvider>
+      <Card radius={2} shadow={1}>
+        <Box padding={3}>
+          <Text>
+            <strong>Root layer</strong>
+          </Text>
+        </Box>
+        <Box padding={3}>
+          <Stack space={3}>
+            <LayerDebugInfo id="layer-debug-info-1" />
+            <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
+            {open && (
+              <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <Layer1 onClose={handleClose} />
+              </Layer>
+            )}
+          </Stack>
+        </Box>
+      </Card>
+    </LayerProvider>
   )
 }
 
