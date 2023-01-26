@@ -35,4 +35,23 @@ context('Components/Dialog', () => {
     // The first button should again be focused
     cy.get('#button-1').should('be.focused')
   })
+
+  it('should focus last focused element when dialog becomes top layer', () => {
+    cy.visit('/frame/?path=/components/dialog/activate')
+
+    // Open the nested dialogs
+    cy.get('#open-dialog-1-button').click()
+    cy.get('#open-dialog-2-button-2').click()
+    cy.get('#open-dialog-3-button-3').click()
+
+    // Close dialogs and check if the last focused element is focused
+    cy.realPress('Escape')
+    cy.get('#open-dialog-3-button-3').should('be.focused')
+
+    cy.realPress('Escape')
+    cy.get('#open-dialog-2-button-2').should('be.focused')
+
+    cy.realPress('Escape')
+    cy.get('#open-dialog-1-button').should('be.focused')
+  })
 })

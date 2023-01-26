@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import {isRecord} from '../../lib/isRecord'
+import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'
 
@@ -13,12 +13,13 @@ export function useLayer(): LayerContextValue {
     throw new Error('useLayer(): missing context value')
   }
 
-  // NOTE: This check is for future-compatiblity
-  // - If the value is not an object, it’s not compatible with the current version
-  // - If the value is an object, but doesn’t have `version: 0.0`, it’s not compatible with the current version
-  if (!isRecord(value) || value.version !== 0.0) {
-    throw new Error('useLayer(): the context value is not compatible')
+  try {
+    return getLayerContext(value)
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(`useLayer(): ${err.message}`)
+    } else {
+      throw new Error(`useLayer(): ${err}`)
+    }
   }
-
-  return value
 }

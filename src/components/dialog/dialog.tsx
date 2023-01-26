@@ -1,14 +1,19 @@
 import {CloseIcon} from '@sanity/icons'
 import {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
-import {focusFirstDescendant, focusLastDescendant} from '../../helpers'
+import {
+  containsOrEqualsElement,
+  focusFirstDescendant,
+  focusLastDescendant,
+  isHTMLElement,
+} from '../../helpers'
 import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {DialogPosition} from '../../types'
-import {Layer, Portal, useLayer} from '../../utils'
+import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {
   dialogStyle,
   responsiveDialogPositionStyle,
@@ -34,6 +39,8 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   footer?: React.ReactNode
   header?: React.ReactNode
   id: string
+  /** A callback that fires when the dialog becomes the top layer when it was not the top layer before. */
+  onActivate?: LayerProps['onActivate']
   onClickOutside?: () => void
   onClose?: () => void
   portal?: string
@@ -58,9 +65,23 @@ interface DialogCardProps extends ResponsiveWidthProps {
   id: string
   onClickOutside?: () => void
   onClose?: () => void
+  portal?: string
   radius: number | number[]
   scheme?: ThemeColorSchemeKey
   shadow: number | number[]
+}
+
+function isTargetWithinScope(
+  boundaryElement: HTMLElement | null,
+  portalElement: HTMLElement | null,
+  target: Node
+): boolean {
+  if (!boundaryElement || !portalElement) return true
+
+  return (
+    containsOrEqualsElement(boundaryElement, target) ||
+    containsOrEqualsElement(portalElement, target)
+  )
 }
 
 const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
@@ -138,11 +159,15 @@ const DialogCard = forwardRef(function DialogCard(
     id,
     onClickOutside,
     onClose,
+    portal: portalProp,
     radius: radiusProp,
     scheme,
     shadow: shadowProp,
     width: widthProp,
   } = props
+  const portal = usePortal()
+  const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
+  const boundaryElement = useBoundaryElement().element
   const radius = useArrayProp(radiusProp)
   const shadow = useArrayProp(shadowProp)
   const width = useArrayProp(widthProp)
@@ -158,7 +183,7 @@ const DialogCard = forwardRef(function DialogCard(
   useEffect(() => {
     if (!autoFocus) return
 
-    // On mount: focus the first interactive element in the contents
+    // On mount: focus the first focusable element
     if (forwardedRef.current) {
       focusFirstDescendant(forwardedRef.current)
     }
@@ -169,22 +194,39 @@ const DialogCard = forwardRef(function DialogCard(
       (event: KeyboardEvent) => {
         if (!isTopLayer || !onClose) return
 
+        const target = document.activeElement
+
+        if (target && !isTargetWithinScope(boundaryElement, portalElement, target)) {
+          // Ignore key presses when the focused element is outside of scope
+          return
+        }
+
         if (event.key === 'Escape') {
           event.preventDefault()
           event.stopPropagation()
           onClose()
         }
       },
-      [isTopLayer, onClose]
+      [boundaryElement, isTopLayer, onClose, portalElement]
     )
   )
 
   useClickOutside(
-    useCallback(() => {
-      if (!isTopLayer || !onClickOutside) return
+    useCallback(
+      (event: MouseEvent) => {
+        if (!isTopLayer || !onClickOutside) return
 
-      onClickOutside()
-    }, [isTopLayer, onClickOutside]),
+        const target = event.target as Node | null
+
+        if (target && !isTargetWithinScope(boundaryElement, portalElement, target)) {
+          // Ignore clicks outside of the scope
+          return
+        }
+
+        onClickOutside()
+      },
+      [boundaryElement, isTopLayer, onClickOutside, portalElement]
+    ),
     [rootElement]
   )
 
@@ -265,16 +307,21 @@ export const Dialog = forwardRef(function Dialog(
     footer,
     header,
     id,
+    onActivate,
     onClickOutside,
     onClose,
+    onFocus,
     padding: paddingProp = 4,
-    portal,
+    portal: portalProp,
     position: positionProp = dialog.position || 'fixed',
     scheme,
     width: widthProp = 0,
     zOffset: zOffsetProp = dialog.zOffset || theme.sanity.layer?.dialog.zOffset,
     ...restProps
   } = props
+  const portal = usePortal()
+  const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
+  const boundaryElement = useBoundaryElement().element
   const cardRadius = useArrayProp(cardRadiusProp)
   const padding = useArrayProp(paddingProp)
   const position = useArrayProp(positionProp)
@@ -283,32 +330,67 @@ export const Dialog = forwardRef(function Dialog(
   const preDivRef = useRef<HTMLDivElement | null>(null)
   const postDivRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)
+  const focusedElementRef = useRef<HTMLElement | null>(null)
 
-  const handleFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    const target = event.target
-    const cardElement = cardRef.current
+  const handleFocus = useCallback(
+    (event: React.FocusEvent<HTMLDivElement>) => {
+      onFocus?.(event)
 
-    if (!cardElement) {
-      return
-    }
+      const target = event.target
+      const cardElement = cardRef.current
 
-    if (target === preDivRef.current) {
-      focusLastDescendant(cardElement)
+      if (cardElement && target === preDivRef.current) {
+        focusLastDescendant(cardElement)
 
-      return
-    }
+        return
+      }
 
-    if (target === postDivRef.current) {
-      focusFirstDescendant(cardElement)
+      if (cardElement && target === postDivRef.current) {
+        focusFirstDescendant(cardElement)
 
-      return
-    }
-  }, [])
+        return
+      }
+
+      if (isHTMLElement(event.target)) {
+        focusedElementRef.current = event.target
+      }
+    },
+    [onFocus]
+  )
 
   const labelId = `${id}_label`
 
+  const rootClickTimeoutRef = useRef<NodeJS.Timeout>()
+
+  // If the resulting active element (a.k.a. focused element) is not withing scope when clicking
+  // within the dialog, then we want to focus the previously interactive element in the dialog instead.
+  // This is to allow the user to tab or close the dialog by pressing escape.
+  const handleRootClick = useCallback(() => {
+    if (rootClickTimeoutRef.current) {
+      clearTimeout(rootClickTimeoutRef.current)
+    }
+
+    rootClickTimeoutRef.current = setTimeout(() => {
+      const activeElement = document.activeElement
+
+      if (activeElement && !isTargetWithinScope(boundaryElement, portalElement, activeElement)) {
+        const target = focusedElementRef.current
+
+        if (!target || !document.body.contains(target)) {
+          // No previously focused element, or it's not in the document anymore
+          const cardElement = cardRef.current
+          if (cardElement) focusFirstDescendant(cardElement)
+
+          return
+        }
+
+        target.focus()
+      }
+    }, 0)
+  }, [boundaryElement, portalElement])
+
   return (
-    <Portal __unstable_name={portal}>
+    <Portal __unstable_name={portalProp}>
       <Root
         {...restProps}
         $padding={padding}
@@ -317,6 +399,8 @@ export const Dialog = forwardRef(function Dialog(
         aria-modal
         data-ui="Dialog"
         id={id}
+        onActivate={onActivate}
+        onClick={handleRootClick}
         onFocus={handleFocus}
         ref={ref}
         role="dialog"
@@ -332,6 +416,7 @@ export const Dialog = forwardRef(function Dialog(
           id={id}
           onClickOutside={onClickOutside}
           onClose={onClose}
+          portal={portalProp}
           radius={cardRadius}
           ref={cardRef}
           scheme={scheme}
