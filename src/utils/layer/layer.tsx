@@ -1,4 +1,4 @@
-import {FocusEvent, forwardRef, useCallback, useEffect, useRef, useState} from 'react'
+import {FocusEvent, forwardRef, useCallback, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
@@ -18,12 +18,10 @@ export interface LayerProps {
 
 interface LayerChildrenProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  onActivate?: (props: {activeElement: HTMLElement | null}) => void
+  onActivate?: LayerProps['onActivate']
 }
 
-const Root = styled.div`
-  position: relative;
-`
+const Root = styled.div({position: 'relative'})
 
 const LayerChildren = forwardRef(function LayerChildren(
   props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
@@ -31,9 +29,7 @@ const LayerChildren = forwardRef(function LayerChildren(
 ) {
   const {children, onActivate, onFocus, style = EMPTY_RECORD, ...restProps} = props
   const {zIndex, isTopLayer} = useLayer()
-  const [lastFocusedElement, setLastFocusedElement] = useState<HTMLElement | null>(null)
-  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-
+  const lastFocusedRef = useRef<HTMLElement | null>(null)
   const forwardedRef = useForwardedRef(ref)
   const isTopLayerRef = useRef<boolean>(isTopLayer)
 
@@ -44,35 +40,27 @@ const LayerChildren = forwardRef(function LayerChildren(
     const becameTopLayer = isTopLayerRef.current !== isTopLayer && isTopLayer
 
     if (becameTopLayer) {
-      onActivate?.({activeElement: lastFocusedElement})
+      onActivate?.({activeElement: lastFocusedRef.current})
     }
 
     isTopLayerRef.current = isTopLayer
-  }, [isTopLayer, lastFocusedElement, onActivate])
+  }, [isTopLayer, onActivate])
 
   const handleFocus = useCallback(
     (event: FocusEvent<HTMLDivElement, Element>) => {
       // Call the user-provided onFocus handler if any
       onFocus?.(event)
 
-      const containsActiveElement =
-        isHTMLElement(rootElement) &&
-        isHTMLElement(document.activeElement) &&
-        containsOrEqualsElement(rootElement, document.activeElement)
+      const rootElement = forwardedRef.current
+      const target = document.activeElement
 
-      if (containsActiveElement && isTopLayer && isHTMLElement(document.activeElement)) {
-        setLastFocusedElement(document.activeElement)
+      if (!isTopLayer || !rootElement || !target) return
+
+      if (isHTMLElement(target) && containsOrEqualsElement(rootElement, target)) {
+        lastFocusedRef.current = target
       }
     },
-    [isTopLayer, onFocus, rootElement]
-  )
-
-  const setRef = useCallback(
-    (el: HTMLDivElement | null) => {
-      setRootElement(el)
-      forwardedRef.current = el
-    },
-    [forwardedRef]
+    [forwardedRef, isTopLayer, onFocus]
   )
 
   return (
@@ -80,7 +68,7 @@ const LayerChildren = forwardRef(function LayerChildren(
       {...restProps}
       data-ui="Layer"
       onFocus={handleFocus}
-      ref={setRef}
+      ref={forwardedRef}
       style={{...style, zIndex}}
     >
       {children}
@@ -95,11 +83,11 @@ export const Layer = forwardRef(function Layer(
   props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
   ref: React.Ref<HTMLDivElement>
 ) {
-  const {children, onActivate, zOffset = 1, ...restProps} = props
+  const {children, zOffset = 1, ...restProps} = props
 
   return (
     <LayerProvider zOffset={zOffset}>
-      <LayerChildren {...restProps} ref={ref} onActivate={onActivate}>
+      <LayerChildren {...restProps} ref={ref}>
         {children}
       </LayerChildren>
     </LayerProvider>
