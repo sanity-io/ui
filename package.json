@@ -49,11 +49,11 @@
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "1.1.1",
+    "@floating-ui/react-dom": "1.2.2",
     "@sanity/color": "^2.2.2",
     "@sanity/icons": "^2.2.2",
     "csstype": "^3.1.1",
-    "framer-motion": "^8.5.2",
+    "framer-motion": "^8.5.5",
     "react-refractor": "^2.1.7"
   },
   "devDependencies": {

@@ -7,7 +7,7 @@ specifiers:
   '@babel/preset-typescript': ^7.18.6
   '@commitlint/cli': ^17.4.2
   '@commitlint/config-conventional': ^17.4.2
-  '@floating-ui/react-dom': 1.1.1
+  '@floating-ui/react-dom': 1.2.2
   '@juggle/resize-observer': ^3.4.0
   '@sanity/color': ^2.2.2
   '@sanity/icons': ^2.2.2
@@ -42,7 +42,7 @@ specifiers:
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-react: ^7.32.1
   eslint-plugin-react-hooks: ^4.6.0
-  framer-motion: ^8.5.2
+  framer-motion: ^8.5.5
   http-server: ^14.1.1
   husky: ^8.0.3
   jest: ^29.4.0
@@ -64,11 +64,11 @@ specifiers:
   typescript: ^4.9.4
 
 dependencies:
-  '@floating-ui/react-dom': 1.1.1_biqbaboplfbrettd7655fr4n2y
+  '@floating-ui/react-dom': 1.2.2_biqbaboplfbrettd7655fr4n2y
   '@sanity/color': 2.2.2
   '@sanity/icons': 2.2.2_react@18.2.0
   csstype: 3.1.1
-  framer-motion: 8.5.2_biqbaboplfbrettd7655fr4n2y
+  framer-motion: 8.5.5_biqbaboplfbrettd7655fr4n2y
   react-refractor: 2.1.7_react@18.2.0
 
 devDependencies:
@@ -2131,19 +2131,19 @@ packages:
     resolution: {integrity: sha512-zbsLwtnHo84w1Kc8rScAo5GMk1GdecSlrflIbfnEBJwvTSj1SL6kkOYV+nHraMCPEy+RNZZUaZyL8JosDGCtGQ==}
     dev: false
 
-  /@floating-ui/dom/1.1.0:
-    resolution: {integrity: sha512-TSogMPVxbRe77QCj1dt8NmRiJasPvuc+eT5jnJ6YpLqgOD2zXc5UA3S1qwybN+GVCDNdKfpKy1oj8RpzLJvh6A==}
+  /@floating-ui/dom/1.1.1:
+    resolution: {integrity: sha512-TpIO93+DIujg3g7SykEAGZMDtbJRrmnYRCNYSjJlvIbGhBjRSNTLVbNeDQBrzy9qDgUbiWdc7KA0uZHZ2tJmiw==}
     dependencies:
       '@floating-ui/core': 1.1.0
     dev: false
 
-  /@floating-ui/react-dom/1.1.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-F27E+7SLB5NZvwF9Egqx/PlvxOhMnA6k/yNMQUqaQ9BPZdr4fQgSW6J6AKNIrBQElBT8IRDtv9j6h7FDkgp3dA==}
+  /@floating-ui/react-dom/1.2.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-DbmFBLwFrZhtXgCI2ra7wXYT8L2BN4/4AMQKyu05qzsVji51tXOfF36VE2gpMB6nhJGHa85PdEg75FB4+vnLFQ==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@floating-ui/dom': 1.1.0
+      '@floating-ui/dom': 1.1.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -6025,8 +6025,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /framer-motion/8.5.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-dt1WwCUIlJ24N/PCCayr0BZJcHOfU/L7kO8fgG8SxcAiGufaNg+Xl0oD14z7mRTGLrqRdA1ZlMW5Wr77aO1Xuw==}
+  /framer-motion/8.5.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5IDx5bxkjWHWUF3CVJoSyUVOtrbAxtzYBBowRE2uYI/6VYhkEBD+rbTHEGuUmbGHRj6YqqSfoG7Aa1cLyWCrBA==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
