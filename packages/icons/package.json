@@ -128,7 +128,7 @@
       "prettier --write --cache --ignore-unknown"
     ]
   },
-  "packageManager": "pnpm@7.25.1",
+  "packageManager": "pnpm@7.26.3",
   "publishConfig": {
     "access": "public"
   },
