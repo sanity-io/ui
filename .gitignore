@@ -3,3 +3,5 @@
 .workshop
 dist
 node_modules
+
+/etc
