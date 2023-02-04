@@ -150,7 +150,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.1.2",
     "semantic-release": "^20.1.0",
     "serve": "^14.2.0",
     "styled-components": "^5.3.6",
