@@ -8,7 +8,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.4.2
   '@sanity/icons': ^2.2.2
   '@sanity/pkg-utils': ^2.2.3
-  '@sanity/semantic-release-preset': ^2.0.5
+  '@sanity/semantic-release-preset': ^4.0.0
   '@sanity/ui': ^1.2.2
   '@types/express': ^4.17.17
   '@types/jest': ^29.4.0
@@ -84,7 +84,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.4.2
   '@sanity/icons': 2.2.2_react@18.2.0
   '@sanity/pkg-utils': 2.2.3_bdgp3l2zgaopogaavxusmetvge
-  '@sanity/semantic-release-preset': 2.0.5
+  '@sanity/semantic-release-preset': 4.0.0_semantic-release@19.0.5
   '@sanity/ui': 1.2.2_23mhwjhnzfjwvdn7ol54k26zom
   '@types/express': 4.17.17
   '@types/jest': 29.4.0
@@ -1560,6 +1560,7 @@ packages:
   /@commitlint/load/17.4.2:
     resolution: {integrity: sha512-Si++F85rJ9t4hw6JcOw1i2h0fdpdFQt0YKwjuK4bk9KhFjyFkRxvR3SB2dPaMs+EwWlDrDBGL+ygip1QD6gmPw==}
     engines: {node: '>=v14'}
+    requiresBuild: true
     dependencies:
       '@commitlint/config-validator': 17.4.0
       '@commitlint/execute-rule': 17.4.0
@@ -2871,9 +2872,11 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/semantic-release-preset/2.0.5:
-    resolution: {integrity: sha512-7GmiJnNxZYtlVT9AZFUNOqHF/tAhttM23zD8AgeDMzbnl26qrwww3MzQFbl5RYxpvrUvZqFB5Pga83mMrzJQdg==}
-    engines: {node: '>=16.0.0'}
+  /@sanity/semantic-release-preset/4.0.0_semantic-release@19.0.5:
+    resolution: {integrity: sha512-OCfgcRpIADa+ctGIHGLUjI/13wBXY63BsNHSsY5aPAEXZ/19ac7PhcLSY0GJ1bSFZv39SMoRAoCVf6a5oU14yQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      semantic-release: ^20
     dependencies:
       '@semantic-release/changelog': 6.0.2_semantic-release@19.0.5
       '@semantic-release/exec': 6.0.3_semantic-release@19.0.5
@@ -2882,7 +2885,6 @@ packages:
       semantic-release: 19.0.5
       semantic-release-license: 1.0.3
     transitivePeerDependencies:
-      - encoding
       - supports-color
     dev: true
 
