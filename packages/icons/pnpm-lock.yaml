@@ -10,7 +10,7 @@ specifiers:
   '@sanity/pkg-utils': ^2.2.5
   '@sanity/semantic-release-preset': ^4.0.0
   '@sanity/ui': ^1.2.2
-  '@sanity/ui-workshop': ^1.2.0
+  '@sanity/ui-workshop': ^1.2.1
   '@svgr/core': ^6.5.1
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
@@ -62,7 +62,7 @@ devDependencies:
   '@sanity/pkg-utils': 2.2.5_4bewfcp2iebiwuold25d6rgcsy
   '@sanity/semantic-release-preset': 4.0.0_semantic-release@20.1.0
   '@sanity/ui': 1.2.2_23mhwjhnzfjwvdn7ol54k26zom
-  '@sanity/ui-workshop': 1.2.0_mcsahbxutyxvlvb7vaawwrsn6a
+  '@sanity/ui-workshop': 1.2.1_mcsahbxutyxvlvb7vaawwrsn6a
   '@svgr/core': 6.5.1
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
@@ -2859,8 +2859,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop/1.2.0_mcsahbxutyxvlvb7vaawwrsn6a:
-    resolution: {integrity: sha512-h+iD3uobNZLK8AfCnohErgJFC43x/9dzE3c1OwtDw7e7MhAtHXwpNY2imQTNb4iLDN7i8aqCb4K+h6Xz5z1gew==}
+  /@sanity/ui-workshop/1.2.1_mcsahbxutyxvlvb7vaawwrsn6a:
+    resolution: {integrity: sha512-ikSIRz4yG24KS5LPSrqQR47B6LuIjNPKH5jcUOL22yH1MU/AmxyqZrZ4seisWgc183fzxOeFFrBXkKB+o162qQ==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2
@@ -2870,23 +2870,23 @@ packages:
       styled-components: ^5.2
     dependencies:
       '@sanity/ui': 1.2.2_23mhwjhnzfjwvdn7ol54k26zom
-      '@vitejs/plugin-react': 3.0.1_vite@4.0.4
-      axe-core: 4.6.2
+      '@vitejs/plugin-react': 3.1.0_vite@4.1.1
+      axe-core: 4.6.3
       cac: 6.7.14
       chokidar: 3.5.3
       dotenv-flow: 3.2.0
-      esbuild: 0.16.17
-      esbuild-register: 3.4.2_esbuild@0.16.17
+      esbuild: 0.17.8
+      esbuild-register: 3.4.2_esbuild@0.17.8
       express: 4.18.2
       globby: 11.1.0
       lodash: 4.17.21
-      mkdirp: 1.0.4
+      mkdirp: 2.1.3
       pako: 2.1.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       segmented-property: 3.0.3
       styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
-      vite: 4.0.4_@types+node@18.13.0
+      vite: 4.1.1_@types+node@18.13.0
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3591,18 +3591,18 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-react/3.0.1_vite@4.0.4:
-    resolution: {integrity: sha512-mx+QvYwIbbpOIJw+hypjnW1lAbKDHtWK5ibkF/V1/oMBu8HU/chb+SnqJDAsLq1+7rGqjktCEomMTM5KShzUKQ==}
+  /@vitejs/plugin-react/3.1.0_vite@4.1.1:
+    resolution: {integrity: sha512-AfgcRL8ZBhAlc3BFdigClmTUMISmmzHn7sB2h9U1odvc5U/MjWXsAaz18b/WoppUTDBzxOJwo2VdClfUcItu9g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
-      vite: ^4.0.0
+      vite: ^4.1.0-beta.0
     dependencies:
       '@babel/core': 7.20.12
       '@babel/plugin-transform-react-jsx-self': 7.18.6_@babel+core@7.20.12
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.20.12
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.0.4_@types+node@18.13.0
+      vite: 4.1.1_@types+node@18.13.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3885,6 +3885,11 @@ packages:
 
   /axe-core/4.6.2:
     resolution: {integrity: sha512-b1WlTV8+XKLj9gZy2DZXgQiyDp9xkkoe2a6U6UbYccScq2wgH/YwCeI2/Jq2mgo0HzQxqJOjWZBLeA/mqsk5Mg==}
+    engines: {node: '>=4'}
+    dev: true
+
+  /axe-core/4.6.3:
+    resolution: {integrity: sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==}
     engines: {node: '>=4'}
     dev: true
 
@@ -5038,17 +5043,6 @@ packages:
 
   /es6-object-assign/1.1.0:
     resolution: {integrity: sha512-MEl9uirslVwqQU369iHNWZXsI8yaZYGg/D65aOgZkeyFJwHYSxilf7rQzXKI7DdDuBPrBXbfk3sl9hJhmd5AUw==}
-    dev: true
-
-  /esbuild-register/3.4.2_esbuild@0.16.17:
-    resolution: {integrity: sha512-kG/XyTDyz6+YDuyfB9ZoSIOOmgyFCH+xPRtsCa8W85HLRV5Csp+o3jWVbOSHgSLfyLc5DmP+KFDNwty4mEjC+Q==}
-    peerDependencies:
-      esbuild: '>=0.12 <1'
-    dependencies:
-      debug: 4.3.4
-      esbuild: 0.16.17
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /esbuild-register/3.4.2_esbuild@0.17.8:
@@ -7749,12 +7743,6 @@ packages:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
     dev: true
 
-  /mkdirp/1.0.4:
-    resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dev: true
-
   /mkdirp/2.1.3:
     resolution: {integrity: sha512-sjAkg21peAG9HS+Dkx7hlG9Ztx7HLeKnvB3NQRcu/mltCVmvkF0pisbiTSfDVYTT86XEfZrTUosLdZLStquZUw==}
     engines: {node: '>=10'}
@@ -9966,8 +9954,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /vite/4.0.4_@types+node@18.13.0:
-    resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
+  /vite/4.1.1_@types+node@18.13.0:
+    resolution: {integrity: sha512-LM9WWea8vsxhr782r9ntg+bhSFS06FJgCvvB0+8hf8UWtvaiDagKYWXndjfX6kGl74keHJUcpzrQliDXZlF5yg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
