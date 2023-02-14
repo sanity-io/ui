@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
