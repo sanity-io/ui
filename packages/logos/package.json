@@ -52,7 +52,7 @@
     "@sanity/color": "^2.2.2",
     "@sanity/icons": "^2.2.2",
     "@sanity/pkg-utils": "^2.1.1",
-    "@sanity/semantic-release-preset": "^2.0.5",
+    "@sanity/semantic-release-preset": "^4.0.0",
     "@sanity/ui": "^1.0.11",
     "@sanity/ui-workshop": "^1.1.8",
     "@testing-library/jest-dom": "^5.16.5",
