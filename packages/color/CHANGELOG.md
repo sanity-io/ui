@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/sanity-io/color/compare/v2.2.2...v2.2.3) (2023-02-14)
+
+### Bug Fixes
+
+- **deps:** update devdependencies (non-major) ([#19](https://github.com/sanity-io/color/issues/19)) ([01bd9ab](https://github.com/sanity-io/color/commit/01bd9ab4fe5e9009d42fbf2a3c46309825d83c10))
+
 ## [2.2.2](https://github.com/sanity-io/color/compare/v2.2.1...v2.2.2) (2023-01-04)
 
 ### Bug Fixes
