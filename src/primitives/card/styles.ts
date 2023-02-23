@@ -81,6 +81,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
 
         @media (hover: hover) {
           &:not([data-pressed]):not([data-selected]) {
+            &[data-hovered],
             &:hover {
               ${_colorVarsStyle(base, card.hovered, $checkered)}
             }
@@ -123,6 +124,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpl
 
         @media (hover: hover) {
           &:not([data-pressed]):not([data-selected]) {
+            &[data-hovered],
             &:hover {
               ${_colorVarsStyle(base, card.hovered, $checkered)}
             }

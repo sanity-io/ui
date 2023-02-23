@@ -65,6 +65,7 @@ export function selectableColorStyle(
 
         @media (hover: hover) {
           &:not([data-selected]) {
+            &[data-hovered],
             &:hover {
               ${_colorVarsStyle(base, tone.hovered)}
             }
@@ -94,6 +95,7 @@ export function selectableColorStyle(
 
         @media (hover: hover) {
           &:not([data-selected]) {
+            &[data-hovered],
             &:hover {
               ${_colorVarsStyle(base, tone.hovered)}
             }

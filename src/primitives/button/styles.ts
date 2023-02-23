@@ -72,6 +72,7 @@ export function buttonColorStyles(
         '@media (hover: hover)': {
           '&:hover': _colorVarsStyle(base, color.hovered),
           '&:active': _colorVarsStyle(base, color.pressed),
+          '&[data-hovered]': _colorVarsStyle(base, color.hovered),
         },
         '&[data-selected]': _colorVarsStyle(base, color.pressed),
       },
