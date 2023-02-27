@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/sanity-io/ui/compare/v1.2.5...v1.3.0) (2023-02-27)
+
+### Features
+
+- allow hovered styles to be applied via the `data-hovered` attr ([#1073](https://github.com/sanity-io/ui/issues/1073)) ([f6ef012](https://github.com/sanity-io/ui/commit/f6ef0123ace965cb47a596f4b8f9c5f80050c095))
+
+### Bug Fixes
+
+- re-pin `@floating-ui/react-dom` to `1.1.1` ([#1076](https://github.com/sanity-io/ui/issues/1076)) ([9b86bd6](https://github.com/sanity-io/ui/commit/9b86bd6f19b2cd330b40afaaa51a9ef763ca33a9))
+
 ## [1.2.5](https://github.com/sanity-io/ui/compare/v1.2.4...v1.2.5) (2023-02-20)
 
 ### Bug Fixes
