@@ -50,10 +50,10 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "1.1.1",
-    "@sanity/color": "^2.2.3",
+    "@sanity/color": "^2.2.5",
     "@sanity/icons": "^2.2.2",
     "csstype": "^3.1.1",
-    "framer-motion": "^9.0.4",
+    "framer-motion": "^9.1.7",
     "react-refractor": "^2.1.7"
   },
   "devDependencies": {
