@@ -14,7 +14,7 @@ specifiers:
   '@sanity/pkg-utils': ^2.2.13
   '@sanity/semantic-release-preset': ^4.0.0
   '@sanity/ui-workshop': ^1.2.1
-  '@testing-library/dom': ^8.20.0
+  '@testing-library/dom': ^9.0.0
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.4.0
   '@types/jest': ^29.4.0
@@ -82,7 +82,7 @@ devDependencies:
   '@sanity/pkg-utils': 2.2.13_345kigqis4fipgyy5xb3ndshmq
   '@sanity/semantic-release-preset': 4.0.2_semantic-release@20.1.3
   '@sanity/ui-workshop': 1.2.1_ksqp33xt27bpzzhoniyxvhps7e
-  '@testing-library/dom': 8.20.0
+  '@testing-library/dom': 9.0.1
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@types/jest': 29.5.0
@@ -2923,6 +2923,20 @@ packages:
   /@testing-library/dom/8.20.0:
     resolution: {integrity: sha512-d9ULIT+a4EXLX3UU8FBjauG9NnsZHkHztXoIcTsOKoOw030fyjheN9svkTULjJxtYag9DZz5Jz5qkWZDPxTFwA==}
     engines: {node: '>=12'}
+    dependencies:
+      '@babel/code-frame': 7.18.6
+      '@babel/runtime': 7.21.0
+      '@types/aria-query': 5.0.1
+      aria-query: 5.1.3
+      chalk: 4.1.2
+      dom-accessibility-api: 0.5.16
+      lz-string: 1.5.0
+      pretty-format: 27.5.1
+    dev: true
+
+  /@testing-library/dom/9.0.1:
+    resolution: {integrity: sha512-fTOVsMY9QLFCCXRHG3Ese6cMH5qIWwSbgxZsgeF5TNsy81HKaZ4kgehnSF8FsR3OF+numlIV2YcU79MzbnhSig==}
+    engines: {node: '>=14'}
     dependencies:
       '@babel/code-frame': 7.18.6
       '@babel/runtime': 7.21.0
