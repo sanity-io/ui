@@ -107,6 +107,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "rimraf": "^4.4.0",
+    "semantic-release": "^21.0.0",
     "start-server-and-test": "^2.0.0",
     "styled-components": "^5.3.9",
     "tsconfig-paths": "^4.1.2",
