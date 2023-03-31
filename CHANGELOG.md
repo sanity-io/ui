@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/sanity-io/ui/compare/v1.3.0...v1.3.1) (2023-03-31)
+
+### Bug Fixes
+
+- add `typeof window` guard to ResizeObserver ([6e84577](https://github.com/sanity-io/ui/commit/6e84577f7e1b6eb073b3806cb87f66481f9bf1c2))
+
 ## [1.3.0](https://github.com/sanity-io/ui/compare/v1.2.5...v1.3.0) (2023-02-27)
 
 ### Features
