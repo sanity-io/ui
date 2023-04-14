@@ -12,12 +12,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "node": {
         "import": "./dist/index.cjs.js",
         "require": "./dist/index.cjs"
       },
+      "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
