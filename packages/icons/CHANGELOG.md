@@ -5,6 +5,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/sanity-io/icons/compare/v2.2.2...v2.3.0) (2023-04-14)
+
+### Features
+
+- add `schema`, `sparkle` and `sparkles` icons ([fb9d548](https://github.com/sanity-io/icons/commit/fb9d548b0fa818b96f4d2f7996bdf76be3f794ee))
+
+### Bug Fixes
+
+- **build:** order of export properties ([0ce4234](https://github.com/sanity-io/icons/commit/0ce4234dc2d4a0cf1cb39966ff3b744b73c7e80f))
+- **deps:** update dependencies ([9d1544c](https://github.com/sanity-io/icons/commit/9d1544c9e94291ffcc6d18389c2375d06b8d0512))
+
 ## [2.2.2](https://github.com/sanity-io/icons/compare/v2.2.1...v2.2.2) (2023-01-04)
 
 ### Bug Fixes
