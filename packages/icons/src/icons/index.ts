@@ -138,9 +138,12 @@ import {RetrieveIcon} from './retrieveIcon'
 import {RevertIcon} from './revertIcon'
 import {RobotIcon} from './robotIcon'
 import {RocketIcon} from './rocketIcon'
+import {SchemaIcon} from './schemaIcon'
 import {SearchIcon} from './searchIcon'
 import {SelectIcon} from './selectIcon'
 import {SortIcon} from './sortIcon'
+import {SparkleIcon} from './sparkleIcon'
+import {SparklesIcon} from './sparklesIcon'
 import {SpinnerIcon} from './spinnerIcon'
 import {SplitHorizontalIcon} from './splitHorizontalIcon'
 import {SplitVerticalIcon} from './splitVerticalIcon'
@@ -317,9 +320,12 @@ export type IconSymbol =
   | 'revert'
   | 'robot'
   | 'rocket'
+  | 'schema'
   | 'search'
   | 'select'
   | 'sort'
+  | 'sparkle'
+  | 'sparkles'
   | 'spinner'
   | 'split-horizontal'
   | 'split-vertical'
@@ -493,9 +499,12 @@ export {
   RevertIcon,
   RobotIcon,
   RocketIcon,
+  SchemaIcon,
   SearchIcon,
   SelectIcon,
   SortIcon,
+  SparkleIcon,
+  SparklesIcon,
   SpinnerIcon,
   SplitHorizontalIcon,
   SplitVerticalIcon,
@@ -673,9 +682,12 @@ export interface IconMap {
   revert: IconComponent
   robot: IconComponent
   rocket: IconComponent
+  schema: IconComponent
   search: IconComponent
   select: IconComponent
   sort: IconComponent
+  sparkle: IconComponent
+  sparkles: IconComponent
   spinner: IconComponent
   'split-horizontal': IconComponent
   'split-vertical': IconComponent
@@ -853,9 +865,12 @@ export const icons: IconMap = {
   revert: RevertIcon,
   robot: RobotIcon,
   rocket: RocketIcon,
+  schema: SchemaIcon,
   search: SearchIcon,
   select: SelectIcon,
   sort: SortIcon,
+  sparkle: SparkleIcon,
+  sparkles: SparklesIcon,
   spinner: SpinnerIcon,
   'split-horizontal': SplitHorizontalIcon,
   'split-vertical': SplitVerticalIcon,
