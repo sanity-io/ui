@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/sanity-io/icons/compare/v2.3.0...v2.3.1) (2023-04-14)
+
+### Bug Fixes
+
+- **build:** replace black colors ([fb05c8d](https://github.com/sanity-io/icons/commit/fb05c8d6235fa343dd48f670bb3183d173e48ca4))
+- use `currentColor` ([7c178db](https://github.com/sanity-io/icons/commit/7c178db6bbe978b7d0953dd380b75eb152a57a8d))
+
 ## [2.3.0](https://github.com/sanity-io/icons/compare/v2.2.2...v2.3.0) (2023-04-14)
 
 ### Features
