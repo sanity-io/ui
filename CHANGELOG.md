@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/sanity-io/ui/compare/v1.3.2...v1.3.3) (2023-05-04)
+
+### Bug Fixes
+
+- avoid scroll on `overflow: hidden` ([#1098](https://github.com/sanity-io/ui/issues/1098)) ([5b778da](https://github.com/sanity-io/ui/commit/5b778da0660d4de0d44e09fcd222dbb60695f97e))
+
 ## [1.3.2](https://github.com/sanity-io/ui/compare/v1.3.1...v1.3.2) (2023-04-14)
 
 ### Bug Fixes
