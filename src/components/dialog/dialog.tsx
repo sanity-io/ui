@@ -109,6 +109,7 @@ const DialogCardRoot = styled(Card)`
   min-height: 0;
   max-height: 100%;
   overflow: hidden;
+  overflow: clip;
 `
 
 const DialogLayout = styled(Flex)`

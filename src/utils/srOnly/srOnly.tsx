@@ -15,6 +15,7 @@ const Root = styled.div`
   height: 0;
   position: absolute;
   overflow: hidden;
+  overflow: clip;
 `
 
 /**
