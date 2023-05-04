@@ -6,6 +6,7 @@ const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`
   & input {
     -webkit-appearance: none;
     overflow: hidden;
+    overflow: clip;
     top: 0;
     left: 0;
     width: 100%;

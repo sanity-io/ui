@@ -39,6 +39,7 @@ const SpanWithTextOverflow = styled.span`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  overflow: clip;
 `
 
 /**
