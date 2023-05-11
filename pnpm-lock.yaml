@@ -76,8 +76,8 @@ devDependencies:
     specifier: ^18.0.11
     version: 18.0.11
   '@types/react-is':
-    specifier: ^17.0.3
-    version: 17.0.3
+    specifier: ^18.0.0
+    version: 18.2.0
   '@types/refractor':
     specifier: ^3.0.2
     version: 3.0.2
@@ -4050,8 +4050,8 @@ packages:
       '@types/react': 18.0.28
     dev: true
 
-  /@types/react-is@17.0.3:
-    resolution: {integrity: sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==}
+  /@types/react-is@18.2.0:
+    resolution: {integrity: sha512-1vz2yObaQkLL7YFe/pme2cpvDsCwI1WXIfL+5eLz0MI9gFG24Re16RzUsI8t9XZn9ZWvgLNDrJBmrqXJO7GNQQ==}
     dependencies:
       '@types/react': 18.0.28
     dev: true
