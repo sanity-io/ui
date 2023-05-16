@@ -23,6 +23,7 @@ import {
 } from './constants'
 import {size} from './floating-ui/size'
 import {PopoverCard} from './popoverCard'
+import {useOnForcedUpdate} from './useOnForcedUpdate'
 
 /**
  * @public
@@ -200,9 +201,14 @@ export const Popover = memo(
       placement,
       reference: referenceRef,
       floating: floatingRef,
+      update: floatingUpdate,
       middlewareData,
       strategy,
     } = useFloating(floatingProps)
+
+    const handleForcedUpdate = useCallback(() => {
+      floatingUpdate()
+    }, [floatingUpdate])
 
     const referenceHidden = middlewareData.hide?.referenceHidden
 
@@ -246,6 +252,8 @@ export const Popover = memo(
     useEffect(() => {
       referenceRef(referenceElement || null)
     }, [referenceRef, referenceElement])
+
+    useOnForcedUpdate(handleForcedUpdate)
 
     if (disabled) {
       return childProp || <></>
