@@ -36,6 +36,7 @@ export interface PopoverProps
    * @beta
    */
   __unstable_margins?: PopoverMargins
+  __unstable_containerElements?: HTMLElement[] | null
   arrow?: boolean
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
@@ -43,6 +44,7 @@ export interface PopoverProps
   content?: React.ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]
+  matchReferenceWidth?: boolean
   open?: boolean
   overflow?: BoxOverflow
   padding?: number | number[]
@@ -50,7 +52,6 @@ export interface PopoverProps
   portal?: boolean | string
   preventOverflow?: boolean
   referenceElement?: HTMLElement | null
-  matchReferenceWidth?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
 }
@@ -67,6 +68,7 @@ export const Popover = memo(
 
     const {
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
+      __unstable_containerElements: containerElements,
       arrow: arrowProp = true,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
@@ -202,6 +204,7 @@ export const Popover = memo(
       floating: floatingRef,
       middlewareData,
       strategy,
+      update,
     } = useFloating(floatingProps)
 
     const referenceHidden = middlewareData.hide?.referenceHidden
@@ -246,6 +249,28 @@ export const Popover = memo(
     useEffect(() => {
       referenceRef(referenceElement || null)
     }, [referenceRef, referenceElement])
+
+    useEffect(() => {
+      if (!referenceElement) return
+
+      const containerEls = Array.isArray(containerElements) ? containerElements : []
+      const observeElements = [boundaryElement, ...containerEls].filter(Boolean) as HTMLElement[]
+
+      if (observeElements.length === 0) return
+
+      observeElements.forEach((element) => {
+        if (!element) return
+
+        const observer = new ResizeObserver(update)
+
+        observer.observe(element)
+
+        return () => {
+          observer.disconnect()
+          observeElements.forEach(observer.unobserve)
+        }
+      })
+    }, [boundaryElement, referenceElement, containerElements, update])
 
     if (disabled) {
       return childProp || <></>
