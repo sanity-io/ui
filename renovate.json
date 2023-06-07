@@ -3,6 +3,6 @@
   "extends": [
     "github>sanity-io/renovate-presets",
     ":reviewer(team:ecosystem)"
-  ].
+  ],
   "ignoreDeps": ["@floating-ui/react-dom"]
 }
