@@ -66,6 +66,8 @@ export default function MenuButtonStory() {
                   />
                 </Menu>
               }
+              onClose={useAction('onClose')}
+              onOpen={useAction('onOpen')}
               popover={popover}
             />
           </LayerProvider>
