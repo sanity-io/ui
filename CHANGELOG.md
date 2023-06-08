@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0](https://github.com/sanity-io/ui/compare/v1.4.0...v1.5.0) (2023-06-08)
+
+### Features
+
+- **menu:** add `onOpen` callback property ([3b25d78](https://github.com/sanity-io/ui/commit/3b25d78c9175cb57aebf4eef3048906cbdf04e56))
+
 ## [1.3.4](https://github.com/sanity-io/ui/compare/v1.3.3...v1.3.4) (2023-06-08)
 
 ### Bug Fixes
