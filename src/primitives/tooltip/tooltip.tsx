@@ -110,7 +110,7 @@ export const Tooltip = forwardRef(function Tooltip(
     return ret
   }, [boundaryElement, fallbackPlacements])
 
-  const {x, y, placement, reference, floating, middlewareData, update, strategy} = useFloating({
+  const {x, y, placement, middlewareData, refs, update, strategy} = useFloating({
     middleware,
     placement: placementProp,
     whileElementsMounted: autoUpdate,
@@ -186,7 +186,7 @@ export const Tooltip = forwardRef(function Tooltip(
   }, [content])
 
   // Update reference
-  useEffect(() => reference(referenceElement), [reference, referenceElement])
+  useEffect(() => refs.setReference(referenceElement), [referenceElement, refs])
 
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
@@ -199,9 +199,9 @@ export const Tooltip = forwardRef(function Tooltip(
   const setFloating = useCallback(
     (node: HTMLDivElement | null) => {
       forwardedRef.current = node
-      floating(node)
+      refs.setFloating(node)
     },
-    [floating, forwardedRef]
+    [forwardedRef, refs]
   )
 
   const childRef: ForwardedRef<HTMLElement | null> = (childProp as any)?.ref

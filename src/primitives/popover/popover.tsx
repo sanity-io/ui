@@ -8,7 +8,6 @@ import {
   offset,
   shift,
   useFloating,
-  UseFloatingProps,
 } from '@floating-ui/react-dom'
 import {cloneElement, forwardRef, memo, useCallback, useEffect, useMemo, useRef} from 'react'
 import {useForwardedRef, useArrayProp, useElementSize} from '../../hooks'
@@ -185,24 +184,11 @@ export const Popover = memo(
       preventOverflow,
     ])
 
-    const floatingProps: UseFloatingProps = useMemo(
-      () => ({
-        middleware,
-        placement: placementProp,
-        whileElementsMounted: autoUpdate,
-      }),
-      [middleware, placementProp]
-    )
-
-    const {
-      x,
-      y,
-      placement,
-      reference: referenceRef,
-      floating: floatingRef,
-      middlewareData,
-      strategy,
-    } = useFloating(floatingProps)
+    const {x, y, middlewareData, placement, refs, strategy} = useFloating({
+      middleware,
+      placement: placementProp,
+      whileElementsMounted: autoUpdate,
+    })
 
     const referenceHidden = middlewareData.hide?.referenceHidden
 
@@ -216,14 +202,14 @@ export const Popover = memo(
     const setFloating = useCallback(
       (node: HTMLDivElement | null) => {
         forwardedRef.current = node
-        floatingRef(node)
+        refs.setFloating(node)
       },
-      [floatingRef, forwardedRef]
+      [forwardedRef, refs]
     )
 
     const setReference = useCallback(
       (node: HTMLElement | null) => {
-        referenceRef(node)
+        refs.setReference(node)
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const childRef = (childProp as any)?.ref
@@ -234,7 +220,7 @@ export const Popover = memo(
           childRef.current = node
         }
       },
-      [childProp, referenceRef]
+      [childProp, refs]
     )
 
     const child = useMemo(() => {
@@ -244,8 +230,8 @@ export const Popover = memo(
     }, [childProp, referenceElement, setReference])
 
     useEffect(() => {
-      referenceRef(referenceElement || null)
-    }, [referenceRef, referenceElement])
+      refs.setReference(referenceElement || null)
+    }, [referenceElement, refs])
 
     if (disabled) {
       return childProp || <></>
