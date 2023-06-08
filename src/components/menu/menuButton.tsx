@@ -21,6 +21,7 @@ export interface MenuButtonProps {
   id: string
   menu?: React.ReactElement
   onClose?: () => void
+  onOpen?: () => void
   /**
    * @deprecated Use `popover={{placement: 'top'}}` instead.
    */
@@ -59,6 +60,7 @@ export const MenuButton = forwardRef(function MenuButton(
     id,
     menu: menuProp,
     onClose,
+    onOpen,
     placement: deprecated_placement,
     popoverScheme: deprecated_popoverScheme,
     portal: deprecated_portal = true,
@@ -72,6 +74,14 @@ export const MenuButton = forwardRef(function MenuButton(
   const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
   const openRef = useRef<boolean>(open)
 
+  // Notify consumers when the menu opens
+  useEffect(() => {
+    if (onOpen && open && !openRef.current) {
+      onOpen()
+    }
+  }, [onOpen, open])
+
+  // Notify consumers when the menu closes
   useEffect(() => {
     if (onClose && !open && openRef.current) {
       onClose()
