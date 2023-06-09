@@ -1,5 +1,5 @@
-import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import {ReactElement, useState} from 'react'
+import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
+import {ReactElement, useRef, useState} from 'react'
 import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
@@ -10,6 +10,7 @@ import {Button} from '../../button'
 import {Card} from '../../card'
 import {Text} from '../../text'
 import {Popover} from '../popover'
+import {PopoverUpdateCallback} from '../types'
 
 export default function TestStory(): ReactElement {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
@@ -25,6 +26,8 @@ export default function TestStory(): ReactElement {
   const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
 
   const text = useText('Text', 'Test')
+
+  const updateRef = useRef<PopoverUpdateCallback>()
 
   return (
     <Card
@@ -68,6 +71,7 @@ export default function TestStory(): ReactElement {
                 portal
                 preventOverflow={preventOverflow}
                 radius={radius}
+                updateRef={updateRef}
                 width={width}
               >
                 <Button text="reference" style={{width: referenceWide ? 300 : undefined}} />
