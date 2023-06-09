@@ -15,6 +15,8 @@ import {PopoverUpdateCallback} from '../types'
 export default function TestStory(): ReactElement {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+
+  const mount = useBoolean('Mount', true)
   const arrow = useBoolean('Arrow', true)
   const constrainSize = useBoolean('Constrain size', true)
   const matchReferenceWidth = useBoolean('Match reference width', false)
@@ -28,6 +30,8 @@ export default function TestStory(): ReactElement {
   const text = useText('Text', 'Test')
 
   const updateRef = useRef<PopoverUpdateCallback>()
+
+  const button = <Button text="reference" style={{width: referenceWide ? 300 : undefined}} />
 
   return (
     <Card
@@ -59,23 +63,27 @@ export default function TestStory(): ReactElement {
         <div style={{padding: '150vh'}}>
           <PortalProvider element={portalElement}>
             <BoundaryElementProvider element={boundaryElement}>
-              <Popover
-                arrow={arrow}
-                content={<Text size={1}>{text}</Text>}
-                constrainSize={constrainSize}
-                fallbackPlacements={['left', 'bottom', 'right', 'top']}
-                matchReferenceWidth={matchReferenceWidth}
-                open={open}
-                padding={3}
-                placement={placement}
-                portal
-                preventOverflow={preventOverflow}
-                radius={radius}
-                updateRef={updateRef}
-                width={width}
-              >
-                <Button text="reference" style={{width: referenceWide ? 300 : undefined}} />
-              </Popover>
+              {!mount && button}
+              {mount && (
+                <Popover
+                  arrow={arrow}
+                  content={<Text>{text}</Text>}
+                  constrainSize={constrainSize}
+                  fallbackPlacements={['left', 'bottom', 'right', 'top']}
+                  matchReferenceWidth={matchReferenceWidth}
+                  open={open}
+                  overflow="hidden"
+                  padding={3}
+                  placement={placement}
+                  portal
+                  preventOverflow={preventOverflow}
+                  radius={radius}
+                  updateRef={updateRef}
+                  width={width}
+                >
+                  {button}
+                </Popover>
+              )}
             </BoundaryElementProvider>
           </PortalProvider>
         </div>

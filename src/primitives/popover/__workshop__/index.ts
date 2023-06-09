@@ -40,5 +40,10 @@ export default defineScope({
       title: 'Open on mount',
       component: lazy(() => import('./OpenOnMountStory')),
     },
+    {
+      name: 'side-panel',
+      title: 'Side panel',
+      component: lazy(() => import('./SidePanelStory')),
+    },
   ],
 })

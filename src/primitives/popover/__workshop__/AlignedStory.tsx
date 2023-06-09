@@ -52,6 +52,7 @@ export default function AlignedStory() {
             constrainSize={constrainSize}
             content={content}
             open={open}
+            overflow="auto"
             padding={3}
             portal={portal}
             placement={placement}
