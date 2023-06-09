@@ -1,45 +1,23 @@
 import {Strategy} from '@floating-ui/react-dom'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
-import styled, {CSSObject} from 'styled-components'
+import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
-import {ThemeProps} from '../../styles'
 import {ThemeColorSchemeKey} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {useLayer} from '../../utils'
 import {Card} from '../card'
-import {Container} from '../container'
-import {
-  DEFAULT_POPOVER_ARROW_WIDTH,
-  DEFAULT_POPOVER_MARGINS,
-  DEFAULT_POPOVER_PADDING,
-} from './constants'
+import {Flex} from '../flex'
+import {DEFAULT_POPOVER_ARROW_WIDTH, DEFAULT_POPOVER_MARGINS} from './constants'
 import {PopoverArrow} from './popoverArrow'
 
-function popoverCardStyle(props: {$boundaryWidth?: number} & ThemeProps): CSSObject {
-  const {$boundaryWidth} = props
-
-  return {
-    '&:not([hidden])': {
-      display: 'flex',
-    },
-
-    flexDirection: 'column',
-
-    width: 'max-content',
-    minWidth: 'min-content',
-    maxWidth:
-      typeof $boundaryWidth === 'number'
-        ? `${$boundaryWidth - DEFAULT_POPOVER_PADDING * 2}px`
-        : undefined,
-  }
-}
-
-const Root = memo(styled(Card)(popoverCardStyle))
-
-const PopoverContainer = memo(styled(Container)`
-  max-height: inherit;
-  max-width: inherit;
-`)
+const Root = styled(Card)({
+  '&:not([hidden])': {
+    display: 'flex',
+  },
+  flexDirection: 'column',
+  width: 'max-content',
+  minWidth: 'min-content',
+})
 
 /**
  * @internal
@@ -53,7 +31,6 @@ export const PopoverCard = memo(
       arrowRef: React.Ref<HTMLDivElement>
       arrowX?: number
       arrowY?: number
-      boundaryWidth?: number
       overflow?: BoxOverflow
       padding?: number | number[]
       placement?: Placement
@@ -62,7 +39,7 @@ export const PopoverCard = memo(
       shadow?: number | number[]
       strategy: Strategy
       tone: CardTone
-      width?: number | 'auto' | (number | 'auto')[]
+      width: number | undefined
       x: number | null
       y: number | null
     } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
@@ -74,7 +51,6 @@ export const PopoverCard = memo(
       arrowRef,
       arrowX,
       arrowY,
-      boundaryWidth,
       children,
       padding,
       placement,
@@ -85,7 +61,7 @@ export const PopoverCard = memo(
       strategy,
       style,
       tone,
-      width = 'auto',
+      width,
       x: xProp,
       y: yProp,
       ...restProps
@@ -108,10 +84,11 @@ export const PopoverCard = memo(
         position: strategy,
         top: y,
         left: x,
+        width,
         zIndex,
         ...style,
       }),
-      [strategy, style, x, y, zIndex]
+      [strategy, style, width, x, y, zIndex]
     )
 
     const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
@@ -131,10 +108,9 @@ export const PopoverCard = memo(
 
     return (
       <Root
-        {...restProps}
-        $boundaryWidth={boundaryWidth}
-        data-placement={placement}
         data-ui="Popover"
+        {...restProps}
+        data-placement={placement}
         radius={radius}
         ref={ref}
         scheme={scheme}
@@ -143,16 +119,11 @@ export const PopoverCard = memo(
         style={rootStyle}
         tone={tone}
       >
-        <PopoverContainer
-          data-ui="Popover__wrapper"
-          flex={1}
-          overflow={overflow}
-          padding={padding}
-          sizing="border"
-          width={width}
-        >
-          {children}
-        </PopoverContainer>
+        <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
+          <Flex direction="column" flex={1} padding={padding}>
+            {children}
+          </Flex>
+        </Flex>
 
         {arrow && <PopoverArrow ref={arrowRef} style={arrowStyle} />}
       </Root>

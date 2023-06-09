@@ -20,28 +20,26 @@ import {
   useMemo,
   useRef,
 } from 'react'
-import {useForwardedRef, useArrayProp, useElementSize} from '../../hooks'
+import {useForwardedRef, useArrayProp, useElementSize, useMediaIndex} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
-import {ResponsiveRadiusProps, ResponsiveShadowProps, ResponsiveWidthProps} from '../types'
+import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_POPOVER_DISTANCE,
   DEFAULT_POPOVER_MARGINS,
   DEFAULT_POPOVER_PADDING,
 } from './constants'
 import {size} from './floating-ui/size'
+import {calcCurrentWidth, calcMaxWidth} from './helpers'
 import {PopoverCard} from './popoverCard'
-import {PopoverUpdateCallback} from './types'
+import {PopoverUpdateCallback, PopoverWidth} from './types'
 
-/**
- * @public
- */
+/** @public */
 export interface PopoverProps
   extends Omit<LayerProps, 'as'>,
     ResponsiveRadiusProps,
-    ResponsiveShadowProps,
-    ResponsiveWidthProps {
+    ResponsiveShadowProps {
   /** @beta */
   __unstable_margins?: PopoverMargins
   arrow?: boolean
@@ -65,6 +63,7 @@ export interface PopoverProps
   updateRef?:
     | MutableRefObject<PopoverUpdateCallback | undefined>
     | RefCallback<PopoverUpdateCallback | undefined>
+  width?: PopoverWidth | PopoverWidth[]
 }
 
 /** @public */
@@ -107,11 +106,58 @@ export const Popover = memo(
     const padding = useArrayProp(paddingProp)
     const radius = useArrayProp(radiusProp)
     const shadow = useArrayProp(shadowProp)
-    const width = useArrayProp(widthProp)
+    const widthArrayProp = useArrayProp(widthProp)
     const zOffset = useArrayProp(zOffsetProp)
     const forwardedRef = useForwardedRef(ref)
     const arrowRef = useRef<HTMLDivElement | null>(null)
     const rootBoundary: RootBoundary = 'viewport'
+
+    const mediaIndex = useMediaIndex()
+    const boundaryWidth = constrainSize || preventOverflow ? boundarySize?.width : undefined
+
+    // Update width when
+    // - media index changes
+    // - `width` property changes
+    const width = calcCurrentWidth({mediaIndex, theme, width: widthArrayProp})
+    const widthRef = useRef(width)
+
+    useEffect(() => {
+      widthRef.current = width
+    }, [width])
+
+    // Update max width when
+    // - boundary width changes
+    // - `width` property changes
+    const maxWidth = calcMaxWidth({boundaryWidth, currentWidth: width})
+    const maxWidthRef = useRef(maxWidth)
+
+    useEffect(() => {
+      maxWidthRef.current = maxWidth
+    }, [maxWidth])
+
+    // Keep track of reference element width (see `size` middleware below)
+    const referenceWidthRef = useRef<number>()
+
+    // Force apply width & max width to floating element
+    useEffect(() => {
+      const floatingElement = forwardedRef.current
+
+      if (!open || !floatingElement) return
+
+      const referenceWidth = referenceWidthRef.current
+
+      if (matchReferenceWidth) {
+        if (referenceWidth !== undefined) {
+          floatingElement.style.width = `${referenceWidth}px`
+        }
+      } else if (width !== undefined) {
+        floatingElement.style.width = `${width}px`
+      }
+
+      if (typeof maxWidth === 'number') {
+        floatingElement.style.maxWidth = `${maxWidth}px`
+      }
+    }, [width, forwardedRef, matchReferenceWidth, maxWidth, open])
 
     const middleware = useMemo(() => {
       const ret: Middleware[] = []
@@ -140,12 +186,25 @@ export const Popover = memo(
         ret.push(
           size({
             apply({availableWidth, availableHeight, elements, referenceWidth}) {
+              // not fresh, so use refs
+
+              referenceWidthRef.current = referenceWidth
+
+              const _currentWidth = widthRef.current
+              const _maxWidth = maxWidthRef.current
+
               if (matchReferenceWidth) {
                 elements.floating.style.width = `${referenceWidth}px`
+              } else if (_currentWidth !== undefined) {
+                elements.floating.style.width = `${_currentWidth}px`
               }
 
               if (constrainSize) {
-                elements.floating.style.maxWidth = `${availableWidth}px`
+                elements.floating.style.maxWidth = `${Math.min(
+                  availableWidth,
+                  _maxWidth ?? Infinity
+                )}px`
+
                 elements.floating.style.maxHeight = `${availableHeight}px`
               }
             },
@@ -270,7 +329,6 @@ export const Popover = memo(
           arrowRef={setArrow}
           arrowX={arrowX}
           arrowY={arrowY}
-          boundaryWidth={preventOverflow ? boundarySize?.width : undefined}
           hidden={referenceHidden}
           overflow={overflow}
           padding={padding}
@@ -281,9 +339,9 @@ export const Popover = memo(
           shadow={shadow}
           strategy={strategy}
           tone={tone}
+          width={matchReferenceWidth ? referenceWidthRef.current : width}
           x={x}
           y={y}
-          width={width}
         >
           {content}
         </PopoverCard>
