@@ -9,7 +9,17 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {cloneElement, forwardRef, memo, useCallback, useEffect, useMemo, useRef} from 'react'
+import {
+  MutableRefObject,
+  RefCallback,
+  cloneElement,
+  forwardRef,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react'
 import {useForwardedRef, useArrayProp, useElementSize} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
@@ -22,6 +32,7 @@ import {
 } from './constants'
 import {size} from './floating-ui/size'
 import {PopoverCard} from './popoverCard'
+import {PopoverUpdateCallback} from './types'
 
 /**
  * @public
@@ -31,9 +42,7 @@ export interface PopoverProps
     ResponsiveRadiusProps,
     ResponsiveShadowProps,
     ResponsiveWidthProps {
-  /**
-   * @beta
-   */
+  /** @beta */
   __unstable_margins?: PopoverMargins
   arrow?: boolean
   boundaryElement?: HTMLElement | null
@@ -52,6 +61,10 @@ export interface PopoverProps
   referenceElement?: HTMLElement | null
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
+  /** @beta */
+  updateRef?:
+    | MutableRefObject<PopoverUpdateCallback | undefined>
+    | RefCallback<PopoverUpdateCallback | undefined>
 }
 
 /** @public */
@@ -87,6 +100,7 @@ export const Popover = memo(
       tone = 'inherit',
       width: widthProp = 'auto',
       zOffset: zOffsetProp = theme.sanity.layer?.popover.zOffset,
+      updateRef,
       ...restProps
     } = props
     const boundarySize = useElementSize(boundaryElement)?.border
@@ -184,7 +198,7 @@ export const Popover = memo(
       preventOverflow,
     ])
 
-    const {x, y, middlewareData, placement, refs, strategy} = useFloating({
+    const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
       middleware,
       placement: placementProp,
       whileElementsMounted: autoUpdate,
@@ -228,6 +242,16 @@ export const Popover = memo(
 
       return cloneElement(childProp, {ref: setReference})
     }, [childProp, referenceElement, setReference])
+
+    useEffect(() => {
+      if (updateRef) {
+        if (typeof updateRef === 'function') {
+          updateRef(update)
+        } else if (updateRef) {
+          updateRef.current = update
+        }
+      }
+    }, [update, updateRef])
 
     useEffect(() => {
       refs.setReference(referenceElement || null)
