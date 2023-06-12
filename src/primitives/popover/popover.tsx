@@ -42,6 +42,7 @@ export interface PopoverProps
   content?: React.ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]
+  matchReferenceWidth?: boolean
   open?: boolean
   overflow?: BoxOverflow
   padding?: number | number[]
@@ -49,7 +50,6 @@ export interface PopoverProps
   portal?: boolean | string
   preventOverflow?: boolean
   referenceElement?: HTMLElement | null
-  matchReferenceWidth?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
 }
@@ -73,7 +73,7 @@ export const Popover = memo(
       content,
       disabled,
       fallbackPlacements,
-      matchReferenceWidth: matchReferenceWidthProp,
+      matchReferenceWidth,
       open,
       overflow = 'hidden',
       padding: paddingProp,
@@ -122,11 +122,11 @@ export const Popover = memo(
       )
 
       // Track sizes
-      if (constrainSize || matchReferenceWidthProp) {
+      if (constrainSize || matchReferenceWidth) {
         ret.push(
           size({
             apply({availableWidth, availableHeight, elements, referenceWidth}) {
-              if (matchReferenceWidthProp) {
+              if (matchReferenceWidth) {
                 elements.floating.style.width = `${referenceWidth}px`
               }
 
@@ -138,7 +138,7 @@ export const Popover = memo(
             boundaryElement,
             constrainSize,
             margins,
-            matchReferenceWidth: matchReferenceWidthProp,
+            matchReferenceWidth,
             padding: DEFAULT_POPOVER_PADDING,
           })
         )
@@ -180,7 +180,7 @@ export const Popover = memo(
       constrainSize,
       fallbackPlacements,
       margins,
-      matchReferenceWidthProp,
+      matchReferenceWidth,
       preventOverflow,
     ])
 
