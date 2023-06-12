@@ -43,12 +43,14 @@ export interface PopoverProps
   /** @beta */
   __unstable_margins?: PopoverMargins
   arrow?: boolean
+  /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
   constrainSize?: boolean
   content?: React.ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]
+  floatingBoundary?: HTMLElement | null
   matchReferenceWidth?: boolean
   open?: boolean
   overflow?: BoxOverflow
@@ -56,6 +58,7 @@ export interface PopoverProps
   placement?: Placement
   portal?: boolean | string
   preventOverflow?: boolean
+  referenceBoundary?: HTMLElement | null
   referenceElement?: HTMLElement | null
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
@@ -86,6 +89,7 @@ export const Popover = memo(
       disabled,
       fallbackPlacements,
       matchReferenceWidth,
+      floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
       open,
       overflow = 'hidden',
       padding: paddingProp,
@@ -93,6 +97,7 @@ export const Popover = memo(
       portal,
       preventOverflow = true,
       radius: radiusProp = 3,
+      referenceBoundary = props.boundaryElement ?? boundaryElementContext.element,
       referenceElement,
       scheme,
       shadow: shadowProp = 3,
@@ -166,7 +171,7 @@ export const Popover = memo(
       if (constrainSize || preventOverflow) {
         ret.push(
           flip({
-            boundary: boundaryElement || undefined,
+            boundary: floatingBoundary || undefined,
             fallbackPlacements,
             padding: DEFAULT_POPOVER_PADDING,
             rootBoundary,
@@ -208,7 +213,7 @@ export const Popover = memo(
                 elements.floating.style.maxHeight = `${availableHeight}px`
               }
             },
-            boundaryElement,
+            boundaryElement: floatingBoundary || undefined,
             constrainSize,
             margins,
             matchReferenceWidth,
@@ -221,7 +226,7 @@ export const Popover = memo(
       if (preventOverflow) {
         ret.push(
           shift({
-            boundary: boundaryElement || undefined,
+            boundary: floatingBoundary || undefined,
             rootBoundary,
             padding: DEFAULT_POPOVER_PADDING,
           })
@@ -240,7 +245,7 @@ export const Popover = memo(
 
       ret.push(
         hide({
-          boundary: boundaryElement || undefined,
+          boundary: referenceBoundary || undefined,
           padding: DEFAULT_POPOVER_PADDING,
           strategy: 'referenceHidden',
         })
@@ -249,12 +254,13 @@ export const Popover = memo(
       return ret
     }, [
       arrowProp,
-      boundaryElement,
       constrainSize,
       fallbackPlacements,
+      floatingBoundary,
       margins,
       matchReferenceWidth,
       preventOverflow,
+      referenceBoundary,
     ])
 
     const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
