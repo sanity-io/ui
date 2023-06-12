@@ -5,6 +5,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0](https://github.com/sanity-io/ui/compare/v1.5.0...v1.6.0) (2023-06-12)
+
+### Features
+
+- **popover:** add `floatingBoundary` and `referenceBoundary` props ([ffb8d1d](https://github.com/sanity-io/ui/commit/ffb8d1d2402066c64642eeb6e4a8d623b8d13a23))
+- **popover:** add `updateRef` property ([2bf1061](https://github.com/sanity-io/ui/commit/2bf1061757f5d7c57a70206949f78feccddc42c0))
+
+### Bug Fixes
+
+- **deps:** upgrade `@floating-ui/react-dom` ([37814eb](https://github.com/sanity-io/ui/commit/37814eb735347ab5375a1cac53183a4f0c81a51c))
+- **popover:** fix width issues ([ba0be52](https://github.com/sanity-io/ui/commit/ba0be524a33beae5a192253b2ba9c3692ae7ca9f))
+
 ## [1.5.0](https://github.com/sanity-io/ui/compare/v1.4.0...v1.5.0) (2023-06-08)
 
 ### Features
