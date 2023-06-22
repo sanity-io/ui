@@ -20,10 +20,12 @@ export const DocumentRemoveIcon = forwardRef(function DocumentRemoveIcon(
       ref={ref}
       {...props}
     >
+      <path d="M11.5 4.5V9.5H6.5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
-        d="M11.5 4.5H18.5V11M11.5 4.5L6.5 9.5M11.5 4.5V9.5H6.5M6.5 9.5V11M6.5 14V20.5H18.5V14M3 12.5H22"
+        d="M6.5 14V20.5H18.5V14M6.5 11V9.5L11.5 4.5H18.5V11M3 12.5H22"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

@@ -20,8 +20,13 @@ export const EnterIcon = forwardRef(function EnterIcon(
       ref={ref}
       {...props}
     >
-      <path d="M6 14.5H19.5V7" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M10 18.5L6 14.5L10 10.5" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M6 14.5H19.5V7" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
+      <path
+        d="M10 18.5L6 14.5L10 10.5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

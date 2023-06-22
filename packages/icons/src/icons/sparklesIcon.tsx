@@ -25,6 +25,7 @@ export const SparklesIcon = forwardRef(function SparklesIcon(
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

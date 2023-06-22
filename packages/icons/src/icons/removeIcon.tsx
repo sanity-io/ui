@@ -20,7 +20,7 @@ export const RemoveIcon = forwardRef(function RemoveIcon(
       ref={ref}
       {...props}
     >
-      <path d="M5 12.5H20" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M5 12.5H20" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
 })

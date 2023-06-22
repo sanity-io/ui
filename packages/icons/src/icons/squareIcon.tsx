@@ -20,7 +20,15 @@ export const SquareIcon = forwardRef(function SquareIcon(
       ref={ref}
       {...props}
     >
-      <rect x={5.5} y={5.5} width={14} height={14} stroke="currentColor" strokeWidth={1.2} />
+      <rect
+        x={5.5}
+        y={5.5}
+        width={14}
+        height={14}
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

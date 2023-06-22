@@ -20,7 +20,12 @@ export const CropIcon = forwardRef(function CropIcon(
       ref={ref}
       {...props}
     >
-      <path d="M8.5 4V16.5H21M4 8.5H16.5V21" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M9.5 5V15.5H20M5 9.5H15.5V20"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

@@ -24,6 +24,7 @@ export const StarIcon = forwardRef(function StarIcon(
         d="M13 4L15.2747 9.8691L21.5595 10.2188L16.6806 14.1959L18.2901 20.2812L13 16.87L7.70993 20.2812L9.31941 14.1959L4.44049 10.2188L10.7253 9.8691L13 4Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

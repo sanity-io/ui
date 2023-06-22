@@ -20,8 +20,18 @@ export const UnpublishIcon = forwardRef(function UnpublishIcon(
       ref={ref}
       {...props}
     >
-      <path d="M5 19.5H20M12.5 16V5" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M17.5 11L12.5 16L7.5 11" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M5 19.5H20M12.5 16V5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+      <path
+        d="M17.5 11L12.5 16L7.5 11"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

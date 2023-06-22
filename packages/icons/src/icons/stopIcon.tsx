@@ -28,6 +28,7 @@ export const StopIcon = forwardRef(function StopIcon(
         fill="currentColor"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

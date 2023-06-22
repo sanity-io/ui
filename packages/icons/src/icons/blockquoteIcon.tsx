@@ -20,7 +20,12 @@ export const BlockquoteIcon = forwardRef(function BlockquoteIcon(
       ref={ref}
       {...props}
     >
-      <path d="M10 17.5H19M6 7.5H19M10 12.5H17M6.5 12V18" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M10 17.5H19M6 7.5H19M10 12.5H17M6.5 12V18"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

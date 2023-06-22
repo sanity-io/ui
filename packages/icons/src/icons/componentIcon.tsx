@@ -24,6 +24,7 @@ export const ComponentIcon = forwardRef(function ComponentIcon(
         d="M8.5 8.5L12.5 12.5M12.5 12.5L16.5 16.5M12.5 12.5L16.5 8.5M12.5 12.5L8.5 16.5M12.5 4L21 12.5L12.5 21L4 12.5L12.5 4Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

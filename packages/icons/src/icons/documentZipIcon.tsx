@@ -20,15 +20,12 @@ export const DocumentZipIcon = forwardRef(function DocumentZipIcon(
       ref={ref}
       {...props}
     >
+      <path d="M11.5 4.5V9.5H6.5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
-        d="M11.5 4.5H18.5V20.5H6.5V9.5M11.5 4.5L6.5 9.5M11.5 4.5V9.5H6.5"
+        d="M15 4.5L13.5 5L15.5 6L13.5 7L15.5 8L13.5 9L15.5 10L13.5 11L14.5 11.5V13M11.5 4.5H18.5V20.5H6.5V9.5L11.5 4.5ZM13.5 13H15.5L16 17H13L13.5 13Z"
         stroke="currentColor"
         strokeWidth={1.2}
-      />
-      <path
-        d="M15 4.5L13.5 5L15.5 6L13.5 7L15.5 8L13.5 9L15.5 10L13.5 11L14.5 11.5V13M13.5 13H15.5L16 17H13L13.5 13Z"
-        stroke="currentColor"
-        strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

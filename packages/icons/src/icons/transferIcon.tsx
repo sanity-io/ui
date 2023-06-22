@@ -20,8 +20,18 @@ export const TransferIcon = forwardRef(function TransferIcon(
       ref={ref}
       {...props}
     >
-      <path d="M19.5 16.5H6M5.5 8.5L19 8.5" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M16 13L19.5 16.5L16 20M9 12L5.5 8.5L9 5" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M19.5 16.5H6M5.5 8.5L19 8.5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16 13L19.5 16.5L16 20M9 12L5.5 8.5L9 5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

@@ -24,6 +24,7 @@ export const BlockElementIcon = forwardRef(function BlockElementIcon(
         d="M5 19.5H20M5 5.5H20M6.5 8.5H18.5V16.5H6.5V8.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

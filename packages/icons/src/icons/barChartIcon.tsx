@@ -24,6 +24,7 @@ export const BarChartIcon = forwardRef(function BarChartIcon(
         d="M5.5 5V19.5H20M8.5 18V13M11.5 18V9M14.5 18V11M17.5 18V7"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

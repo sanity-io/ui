@@ -20,7 +20,12 @@ export const CodeIcon = forwardRef(function CodeIcon(
       ref={ref}
       {...props}
     >
-      <path d="M11 16L7.5 12.5L11 9M14 9L17.5 12.5L14 16" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M11 16L7.5 12.5L11 9M14 9L17.5 12.5L14 16"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

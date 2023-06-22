@@ -20,10 +20,12 @@ export const OverageIcon = forwardRef(function OverageIcon(
       ref={ref}
       {...props}
     >
+      <path d="M18.5 11V6.5H14" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
-        d="M6.5 18.5L9 16L12 13L18.5 6.5M18.5 6.5V11M18.5 6.5H14M3 14.5H22"
+        d="M6.5 18.5L9 16L12 13L18.5 6.5M3 13.5H22"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

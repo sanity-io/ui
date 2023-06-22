@@ -20,7 +20,14 @@ export const CircleIcon = forwardRef(function CircleIcon(
       ref={ref}
       {...props}
     >
-      <circle cx={12.5} cy={12.5} r={8} stroke="currentColor" strokeWidth={1.2} />
+      <circle
+        cx={12.5}
+        cy={12.5}
+        r={8}
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

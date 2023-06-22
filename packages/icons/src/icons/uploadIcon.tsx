@@ -24,8 +24,14 @@ export const UploadIcon = forwardRef(function UploadIcon(
         d="M12.5 6.00003V15.5M5.5 15.5H19.5V19.5H5.5V15.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
-      <path d="M7.5 11L12.5 6.00003L17.5 11" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M7.5 11L12.5 6.00003L17.5 11"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

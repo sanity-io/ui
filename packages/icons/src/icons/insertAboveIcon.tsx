@@ -25,6 +25,7 @@ export const InsertAboveIcon = forwardRef(function InsertAboveIcon(
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinecap="square"
+        strokeLinejoin="round"
       />
     </svg>
   )

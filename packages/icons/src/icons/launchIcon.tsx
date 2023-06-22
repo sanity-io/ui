@@ -24,8 +24,9 @@ export const LaunchIcon = forwardRef(function LaunchIcon(
         d="M14 6.5H5.5V19.5H18.5V11M20.5 4.5L10.5 14.5"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
-      <path d="M16 4.5H20.5V9" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M16 4.5H20.5V9" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
 })

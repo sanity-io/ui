@@ -24,8 +24,9 @@ export const RetryIcon = forwardRef(function RetryIcon(
         d="M20 9L10 9C7.51472 9 5.5 11.0147 5.5 13.5C5.5 15.9853 7.51472 18 10 18H20"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
-      <path d="M16 13L20 9L16 5" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M16 13L20 9L16 5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
 })

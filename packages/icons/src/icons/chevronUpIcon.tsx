@@ -20,7 +20,12 @@ export const ChevronUpIcon = forwardRef(function ChevronUpIcon(
       ref={ref}
       {...props}
     >
-      <path d="M8 14.5L12.5 10L17 14.5" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M8 14.5L12.5 10L17 14.5"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

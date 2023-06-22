@@ -20,7 +20,12 @@ export const AddIcon = forwardRef(function AddIcon(
       ref={ref}
       {...props}
     >
-      <path d="M12.5 5V20M5 12.5H20" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M12.5 5V20M5 12.5H20"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

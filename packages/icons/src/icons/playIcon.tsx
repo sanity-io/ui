@@ -25,6 +25,7 @@ export const PlayIcon = forwardRef(function PlayIcon(
         fill="currentColor"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

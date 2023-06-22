@@ -24,6 +24,7 @@ export const DoubleChevronUpIcon = forwardRef(function DoubleChevronUpIcon(
         d="M8 12.5L12.5 8L17 12.5M8 16.5L12.5 12L17 16.5"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

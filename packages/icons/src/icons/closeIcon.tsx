@@ -20,7 +20,12 @@ export const CloseIcon = forwardRef(function CloseIcon(
       ref={ref}
       {...props}
     >
-      <path d="M18 7L7 18M7 7L18 18" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M18 7L7 18M7 7L18 18"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

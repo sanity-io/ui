@@ -24,6 +24,7 @@ export const InlineElementIcon = forwardRef(function InlineElementIcon(
         d="M5.5 5V20M19.5 5V20M8.5 6.5H16.5V18.5H8.5V6.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

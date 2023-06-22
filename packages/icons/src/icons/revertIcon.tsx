@@ -24,8 +24,9 @@ export const RevertIcon = forwardRef(function RevertIcon(
         d="M5 9L15 9C17.4853 9 19.5 11.0147 19.5 13.5C19.5 15.9853 17.4853 18 15 18H5"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
-      <path d="M9 13L5 9L9 5" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M9 13L5 9L9 5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
 })

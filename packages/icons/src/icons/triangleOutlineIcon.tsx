@@ -20,7 +20,12 @@ export const TriangleOutlineIcon = forwardRef(function TriangleOutlineIcon(
       ref={ref}
       {...props}
     >
-      <path d="M20.5 18.5H4.5L12.5 5.5L20.5 18.5Z" stroke="currentColor" strokeWidth={1.2} />
+      <path
+        d="M20.5 18.5H4.5L12.5 5.5L20.5 18.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

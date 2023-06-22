@@ -24,6 +24,7 @@ export const FolderIcon = forwardRef(function FolderIcon(
         d="M11.5 8.5H19.5V18.5H5.5V5.5H10.5L11.5 8.5ZM11.5 8.5H5.5"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

@@ -25,6 +25,7 @@ export const HeartFilledIcon = forwardRef(function HeartFilledIcon(
         fill="currentColor"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

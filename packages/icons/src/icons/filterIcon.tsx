@@ -25,6 +25,7 @@ export const FilterIcon = forwardRef(function FilterIcon(
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinecap="square"
+        strokeLinejoin="round"
       />
     </svg>
   )

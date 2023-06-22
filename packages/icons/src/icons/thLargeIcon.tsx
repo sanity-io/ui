@@ -24,6 +24,7 @@ export const ThLargeIcon = forwardRef(function ThLargeIcon(
         d="M12.5 6.5V12.5M12.5 12.5V18.5M12.5 12.5H20.5M12.5 12.5H4.5M4.5 6.5H20.5V18.5H4.5V6.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

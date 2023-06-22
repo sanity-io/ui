@@ -24,6 +24,7 @@ export const CodeBlockIcon = forwardRef(function CodeBlockIcon(
         d="M11 15L8.5 12.5L11 10M14 10L16.5 12.5L14 15M5.5 6.5H19.5V18.5H5.5V6.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

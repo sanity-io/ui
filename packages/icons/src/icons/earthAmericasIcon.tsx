@@ -25,8 +25,16 @@ export const EarthAmericasIcon = forwardRef(function EarthAmericasIcon(
         fill="currentColor"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
-      <circle cx={12.5} cy={12.5} r={8} stroke="currentColor" strokeWidth={1.2} />
+      <circle
+        cx={12.5}
+        cy={12.5}
+        r={8}
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

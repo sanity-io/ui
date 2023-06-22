@@ -20,10 +20,12 @@ export const ArrowDownIcon = forwardRef(function ArrowDownIcon(
       ref={ref}
       {...props}
     >
+      <path d="M12.5 19.5V5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
-        d="M12.5 19.5V5M12.5 19.5L18 14M12.5 19.5L7 14"
+        d="M18 14L12.5 19.5L7 14"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

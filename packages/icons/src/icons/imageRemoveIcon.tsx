@@ -24,6 +24,7 @@ export const ImageRemoveIcon = forwardRef(function ImageRemoveIcon(
         d="M5.5 11V6.5H19.5V11M5.5 14V18.5H19.5V14M3 12.5H22"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

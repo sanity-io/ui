@@ -24,6 +24,7 @@ export const BookIcon = forwardRef(function BookIcon(
         d="M20.5 17.5V5.5L12.5 6.5M20.5 17.5L12.5 18.5M20.5 17.5V18.5M4.5 17.5V5.5L12.5 6.5M4.5 17.5L12.5 18.5M4.5 17.5V18.5M12.5 18.5L4.5 19.5V18.5M12.5 18.5L20.5 19.5V18.5M12.5 18.5V6.5M12.5 18.5H4.5M12.5 18.5H20.5"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

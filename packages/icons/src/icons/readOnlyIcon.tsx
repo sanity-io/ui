@@ -24,6 +24,7 @@ export const ReadOnlyIcon = forwardRef(function ReadOnlyIcon(
         d="M15 7L18 10M10 12L7 15L6 19L10 18L13 15M12 10L17 5L20 8L15 13M19 19L5 5"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )

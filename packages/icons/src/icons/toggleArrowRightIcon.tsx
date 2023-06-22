@@ -20,7 +20,12 @@ export const ToggleArrowRightIcon = forwardRef(function ToggleArrowRightIcon(
       ref={ref}
       {...props}
     >
-      <path d="M10 16.5V8.5L16 12.5L10 16.5Z" fill="currentColor" stroke="currentColor" />
+      <path
+        d="M10 16.5V8.5L16 12.5L10 16.5Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 })

@@ -24,11 +24,13 @@ export const TagIcon = forwardRef(function TagIcon(
         d="M12.5 20L5 20L5 12.5L12.5 5L20 12.5L12.5 20Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
       <path
         d="M11 15.5C11 16.3284 10.3284 17 9.5 17C8.67157 17 8 16.3284 8 15.5C8 14.6716 8.67157 14 9.5 14C10.3284 14 11 14.6716 11 15.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
+        strokeLinejoin="round"
       />
     </svg>
   )
