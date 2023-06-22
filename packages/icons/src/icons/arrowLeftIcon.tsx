@@ -20,7 +20,7 @@ export const ArrowLeftIcon = forwardRef(function ArrowLeftIcon(
       ref={ref}
       {...props}
     >
-      <path d="M12 18L6.5 12.5L12 7M6.5 12.5H19" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M11 18L5.5 12.5M5.5 12.5L11 7M5.5 12.5H20" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

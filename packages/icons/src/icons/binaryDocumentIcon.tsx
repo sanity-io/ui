@@ -21,12 +21,11 @@ export const BinaryDocumentIcon = forwardRef(function BinaryDocumentIcon(
       {...props}
     >
       <path
-        d="M9.5 11.5V16.5M10.5 4.5H18.5V20.5H6.5V8.5L10.5 4.5ZM12.5 11.5V16.5H15.5V11.5H12.5Z"
+        d="M11.5 4.5H18.5V20.5H6.5V9.5M11.5 4.5L6.5 9.5M11.5 4.5V9.5H6.5M9.5 12.5V17.5M12.5 12.5V17.5H15.5V12.5H12.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinecap="square"
       />
-      <path d="M10.5 4.5V8.5H6.5" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

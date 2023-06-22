@@ -21,13 +21,13 @@ export const DocumentVideoIcon = forwardRef(function DocumentVideoIcon(
       {...props}
     >
       <path
-        d="M10.5 4.5V8.5H6.5M10.5 4.5H18.5V20.5H6.5V8.5L10.5 4.5Z"
+        d="M11.5 16.5V13.5L14 15L11.5 16.5Z"
+        fill="currentColor"
         stroke="currentColor"
         strokeWidth={1.2}
       />
       <path
-        d="M11.5 15.5V12.5L14 14L11.5 15.5Z"
-        fill="currentColor"
+        d="M11.5 4.5H18.5V20.5H6.5V9.5M11.5 4.5L6.5 9.5M11.5 4.5V9.5H6.5"
         stroke="currentColor"
         strokeWidth={1.2}
       />

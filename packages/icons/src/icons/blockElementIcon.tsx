@@ -21,8 +21,9 @@ export const BlockElementIcon = forwardRef(function BlockElementIcon(
       {...props}
     >
       <path
-        d="M6.5 8.5V7.9H5.9V8.5H6.5ZM18.5 8.5H19.1V7.9H18.5V8.5ZM6.5 16.5H5.9V17.1H6.5V16.5ZM18.5 16.5V17.1H19.1V16.5H18.5ZM6.5 9.1H18.5V7.9H6.5V9.1ZM7.1 16.5V8.5H5.9V16.5H7.1ZM18.5 15.9H6.5V17.1H18.5V15.9ZM17.9 8.5V16.5H19.1V8.5H17.9ZM5 20.1H20V18.9H5V20.1ZM5 6.1H20V4.9H5V6.1Z"
-        fill="currentColor"
+        d="M5 19.5H20M5 5.5H20M6.5 8.5H18.5V16.5H6.5V8.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
       />
     </svg>
   )

@@ -21,7 +21,7 @@ export const DocumentIcon = forwardRef(function DocumentIcon(
       {...props}
     >
       <path
-        d="M10.5 4.5V8.5H6.5M10.5 4.5H18.5V20.5H6.5V8.5L10.5 4.5Z"
+        d="M11.5 4.5H18.5V20.5H6.5V9.5M11.5 4.5L6.5 9.5M11.5 4.5V9.5H6.5"
         stroke="currentColor"
         strokeWidth={1.2}
       />

@@ -23,7 +23,7 @@ export const BlockContentIcon = forwardRef(function BlockContentIcon(
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M21 7.59999L11 7.59999V6.39999L21 6.39999V7.59999Z"
+        d="M21 7.60002L11 7.60003V6.40003L21 6.40002V7.60002Z"
         fill="currentColor"
       />
       <path
@@ -45,7 +45,7 @@ export const BlockContentIcon = forwardRef(function BlockContentIcon(
         fill="currentColor"
       />
       <path
-        d="M9.86438 15.6H11.2L8.27623 7.59999H6.92377L4 15.6H5.29072L6.0371 13.4766H9.12362L9.86438 15.6ZM7.53546 9.05252H7.63086L8.80374 12.4344H6.35698L7.53546 9.05252Z"
+        d="M9.86438 15.6H11.2L8.27623 7.60003H6.92377L4 15.6H5.29072L6.0371 13.4767H9.12362L9.86438 15.6ZM7.53546 9.05255H7.63086L8.80374 12.4344H6.35698L7.53546 9.05255Z"
         fill="currentColor"
       />
     </svg>

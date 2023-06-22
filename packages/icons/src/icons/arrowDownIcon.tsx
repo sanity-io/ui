@@ -21,7 +21,7 @@ export const ArrowDownIcon = forwardRef(function ArrowDownIcon(
       {...props}
     >
       <path
-        d="M12.5 18.5V6M12.5 18.5L18 13M12.5 18.5L7 13"
+        d="M12.5 19.5V5M12.5 19.5L18 14M12.5 19.5L7 14"
         stroke="currentColor"
         strokeWidth={1.2}
       />

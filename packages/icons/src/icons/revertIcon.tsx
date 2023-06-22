@@ -21,7 +21,7 @@ export const RevertIcon = forwardRef(function RevertIcon(
       {...props}
     >
       <path
-        d="M5 9L14.5 9C16.9853 9 19 11.0147 19 13.5C19 15.9853 16.9853 18 14.5 18H5"
+        d="M5 9L15 9C17.4853 9 19.5 11.0147 19.5 13.5C19.5 15.9853 17.4853 18 15 18H5"
         stroke="currentColor"
         strokeWidth={1.2}
       />

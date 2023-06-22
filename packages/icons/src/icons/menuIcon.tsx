@@ -20,10 +20,7 @@ export const MenuIcon = forwardRef(function MenuIcon(
       ref={ref}
       {...props}
     >
-      <path
-        d="M6 8.1H19V6.9H6V8.1ZM6 18.1H19V16.9H6V18.1ZM6 13.1H19V11.9H6V13.1Z"
-        fill="currentColor"
-      />
+      <path d="M6 7.5H19M6 17.5H19M6 12.5H19" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

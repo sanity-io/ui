@@ -20,13 +20,12 @@ export const RetrieveIcon = forwardRef(function RetrieveIcon(
       ref={ref}
       {...props}
     >
+      <path d="M9 14L12.5 10.5L16 14" stroke="currentColor" strokeWidth={1.2} />
       <path
-        d="M12.5 10.5L12.5 17.5M4.5 7.5V20.5H20.5V7.5L18.5 4.5H6.5L4.5 7.5Z"
+        d="M19.5 7.5V19.5H5.5V7.5M19.5 7.5L17.5 5.5H7.5L5.5 7.5M19.5 7.5H5.5M12.5 10.5L12.5 17.5"
         stroke="currentColor"
         strokeWidth={1.2}
       />
-      <path d="M9 14L12.5 10.5L16 14" stroke="currentColor" strokeWidth={1.2} />
-      <path d="M4.5 7.5H20.5" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

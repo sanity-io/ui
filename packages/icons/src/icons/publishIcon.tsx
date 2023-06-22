@@ -20,12 +20,8 @@ export const PublishIcon = forwardRef(function PublishIcon(
       ref={ref}
       {...props}
     >
-      <path
-        d="M4.99997 5.50005H20M7.5 14L12.5 9.00003L17.5 14"
-        stroke="currentColor"
-        strokeWidth={1.2}
-      />
-      <path d="M12.5 9.00003V20" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M4.99997 5.50006H20M12.5 9.00005V20" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M7.5 14L12.5 9.00006L17.5 14" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })

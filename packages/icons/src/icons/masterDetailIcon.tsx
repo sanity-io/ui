@@ -21,7 +21,7 @@ export const MasterDetailIcon = forwardRef(function MasterDetailIcon(
       {...props}
     >
       <path
-        d="M6 8.5H9M10.5 5.5V19.5M6 11.5H9M13 8.5H18M6 14.5H9M4.5 5.5H20.5V19.5H4.5V5.5Z"
+        d="M7 9.5H10M11.5 6.5V18.5M7 12.5H10M13 9.5H18M7 15.5H10M5.5 6.5H19.5V18.5H5.5V6.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
       />

@@ -20,11 +20,8 @@ export const DownloadIcon = forwardRef(function DownloadIcon(
       ref={ref}
       {...props}
     >
-      <path
-        d="M19.5 17V19.5H5.5V17M17.5 11L12.5 16L7.5 11M12.5 16V4.99998"
-        stroke="currentColor"
-        strokeWidth={1.2}
-      />
+      <path d="M19.5 17V19.5H5.5V17M12.5 16L12.5 5" stroke="currentColor" strokeWidth={1.2} />
+      <path d="M17.5 11L12.5 16L7.5 11" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
 })
