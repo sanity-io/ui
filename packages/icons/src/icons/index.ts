@@ -47,6 +47,7 @@ import {CodeBlockIcon} from './codeBlockIcon'
 import {CodeIcon} from './codeIcon'
 import {CogIcon} from './cogIcon'
 import {CollapseIcon} from './collapseIcon'
+import {ColorWheelIcon} from './colorWheelIcon'
 import {CommentIcon} from './commentIcon'
 import {ComponentIcon} from './componentIcon'
 import {ComposeIcon} from './composeIcon'
@@ -79,6 +80,8 @@ import {EarthGlobeIcon} from './earthGlobeIcon'
 import {EditIcon} from './editIcon'
 import {EllipsisHorizontalIcon} from './ellipsisHorizontalIcon'
 import {EllipsisVerticalIcon} from './ellipsisVerticalIcon'
+import {EnterIcon} from './enterIcon'
+import {EnterRightIcon} from './enterRightIcon'
 import {EnvelopeIcon} from './envelopeIcon'
 import {EqualIcon} from './equalIcon'
 import {ErrorFilledIcon} from './errorFilledIcon'
@@ -89,6 +92,7 @@ import {EyeOpenIcon} from './eyeOpenIcon'
 import {FilterIcon} from './filterIcon'
 import {FolderIcon} from './folderIcon'
 import {GenerateIcon} from './generateIcon'
+import {GroqIcon} from './groqIcon'
 import {HeartFilledIcon} from './heartFilledIcon'
 import {HeartIcon} from './heartIcon'
 import {HelpCircleIcon} from './helpCircleIcon'
@@ -135,12 +139,14 @@ import {RemoveIcon} from './removeIcon'
 import {ResetIcon} from './resetIcon'
 import {RestoreIcon} from './restoreIcon'
 import {RetrieveIcon} from './retrieveIcon'
+import {RetryIcon} from './retryIcon'
 import {RevertIcon} from './revertIcon'
 import {RobotIcon} from './robotIcon'
 import {RocketIcon} from './rocketIcon'
 import {SchemaIcon} from './schemaIcon'
 import {SearchIcon} from './searchIcon'
 import {SelectIcon} from './selectIcon'
+import {ShareIcon} from './shareIcon'
 import {SortIcon} from './sortIcon'
 import {SparkleIcon} from './sparkleIcon'
 import {SparklesIcon} from './sparklesIcon'
@@ -157,6 +163,7 @@ import {StringIcon} from './stringIcon'
 import {SunIcon} from './sunIcon'
 import {SyncIcon} from './syncIcon'
 import {TagIcon} from './tagIcon'
+import {TagsIcon} from './tagsIcon'
 import {TerminalIcon} from './terminalIcon'
 import {ThLargeIcon} from './thLargeIcon'
 import {ThListIcon} from './thListIcon'
@@ -170,6 +177,7 @@ import {TrendUpwardIcon} from './trendUpwardIcon'
 import {TriangleOutlineIcon} from './triangleOutlineIcon'
 import {TrolleyIcon} from './trolleyIcon'
 import {TruncateIcon} from './truncateIcon'
+import {TwitterIcon} from './twitterIcon'
 import {UlistIcon} from './ulistIcon'
 import {UnderlineIcon} from './underlineIcon'
 import {UndoIcon} from './undoIcon'
@@ -181,6 +189,7 @@ import {UserIcon} from './userIcon'
 import {UsersIcon} from './usersIcon'
 import {WarningFilledIcon} from './warningFilledIcon'
 import {WarningOutlineIcon} from './warningOutlineIcon'
+import {WrenchIcon} from './wrenchIcon'
 
 /**
  * @public
@@ -229,6 +238,7 @@ export type IconSymbol =
   | 'code'
   | 'cog'
   | 'collapse'
+  | 'color-wheel'
   | 'comment'
   | 'component'
   | 'compose'
@@ -261,6 +271,8 @@ export type IconSymbol =
   | 'edit'
   | 'ellipsis-horizontal'
   | 'ellipsis-vertical'
+  | 'enter'
+  | 'enter-right'
   | 'envelope'
   | 'equal'
   | 'error-filled'
@@ -271,6 +283,7 @@ export type IconSymbol =
   | 'filter'
   | 'folder'
   | 'generate'
+  | 'groq'
   | 'heart-filled'
   | 'heart'
   | 'help-circle'
@@ -317,12 +330,14 @@ export type IconSymbol =
   | 'reset'
   | 'restore'
   | 'retrieve'
+  | 'retry'
   | 'revert'
   | 'robot'
   | 'rocket'
   | 'schema'
   | 'search'
   | 'select'
+  | 'share'
   | 'sort'
   | 'sparkle'
   | 'sparkles'
@@ -339,6 +354,7 @@ export type IconSymbol =
   | 'sun'
   | 'sync'
   | 'tag'
+  | 'tags'
   | 'terminal'
   | 'th-large'
   | 'th-list'
@@ -352,6 +368,7 @@ export type IconSymbol =
   | 'triangle-outline'
   | 'trolley'
   | 'truncate'
+  | 'twitter'
   | 'ulist'
   | 'underline'
   | 'undo'
@@ -363,6 +380,7 @@ export type IconSymbol =
   | 'users'
   | 'warning-filled'
   | 'warning-outline'
+  | 'wrench'
 
 export {
   AccessDeniedIcon,
@@ -408,6 +426,7 @@ export {
   CodeIcon,
   CogIcon,
   CollapseIcon,
+  ColorWheelIcon,
   CommentIcon,
   ComponentIcon,
   ComposeIcon,
@@ -440,6 +459,8 @@ export {
   EditIcon,
   EllipsisHorizontalIcon,
   EllipsisVerticalIcon,
+  EnterIcon,
+  EnterRightIcon,
   EnvelopeIcon,
   EqualIcon,
   ErrorFilledIcon,
@@ -450,6 +471,7 @@ export {
   FilterIcon,
   FolderIcon,
   GenerateIcon,
+  GroqIcon,
   HeartFilledIcon,
   HeartIcon,
   HelpCircleIcon,
@@ -496,12 +518,14 @@ export {
   ResetIcon,
   RestoreIcon,
   RetrieveIcon,
+  RetryIcon,
   RevertIcon,
   RobotIcon,
   RocketIcon,
   SchemaIcon,
   SearchIcon,
   SelectIcon,
+  ShareIcon,
   SortIcon,
   SparkleIcon,
   SparklesIcon,
@@ -518,6 +542,7 @@ export {
   SunIcon,
   SyncIcon,
   TagIcon,
+  TagsIcon,
   TerminalIcon,
   ThLargeIcon,
   ThListIcon,
@@ -531,6 +556,7 @@ export {
   TriangleOutlineIcon,
   TrolleyIcon,
   TruncateIcon,
+  TwitterIcon,
   UlistIcon,
   UnderlineIcon,
   UndoIcon,
@@ -542,6 +568,7 @@ export {
   UsersIcon,
   WarningFilledIcon,
   WarningOutlineIcon,
+  WrenchIcon,
 }
 
 /**
@@ -591,6 +618,7 @@ export interface IconMap {
   code: IconComponent
   cog: IconComponent
   collapse: IconComponent
+  'color-wheel': IconComponent
   comment: IconComponent
   component: IconComponent
   compose: IconComponent
@@ -623,6 +651,8 @@ export interface IconMap {
   edit: IconComponent
   'ellipsis-horizontal': IconComponent
   'ellipsis-vertical': IconComponent
+  enter: IconComponent
+  'enter-right': IconComponent
   envelope: IconComponent
   equal: IconComponent
   'error-filled': IconComponent
@@ -633,6 +663,7 @@ export interface IconMap {
   filter: IconComponent
   folder: IconComponent
   generate: IconComponent
+  groq: IconComponent
   'heart-filled': IconComponent
   heart: IconComponent
   'help-circle': IconComponent
@@ -679,12 +710,14 @@ export interface IconMap {
   reset: IconComponent
   restore: IconComponent
   retrieve: IconComponent
+  retry: IconComponent
   revert: IconComponent
   robot: IconComponent
   rocket: IconComponent
   schema: IconComponent
   search: IconComponent
   select: IconComponent
+  share: IconComponent
   sort: IconComponent
   sparkle: IconComponent
   sparkles: IconComponent
@@ -701,6 +734,7 @@ export interface IconMap {
   sun: IconComponent
   sync: IconComponent
   tag: IconComponent
+  tags: IconComponent
   terminal: IconComponent
   'th-large': IconComponent
   'th-list': IconComponent
@@ -714,6 +748,7 @@ export interface IconMap {
   'triangle-outline': IconComponent
   trolley: IconComponent
   truncate: IconComponent
+  twitter: IconComponent
   ulist: IconComponent
   underline: IconComponent
   undo: IconComponent
@@ -725,6 +760,7 @@ export interface IconMap {
   users: IconComponent
   'warning-filled': IconComponent
   'warning-outline': IconComponent
+  wrench: IconComponent
 }
 
 /**
@@ -774,6 +810,7 @@ export const icons: IconMap = {
   code: CodeIcon,
   cog: CogIcon,
   collapse: CollapseIcon,
+  'color-wheel': ColorWheelIcon,
   comment: CommentIcon,
   component: ComponentIcon,
   compose: ComposeIcon,
@@ -806,6 +843,8 @@ export const icons: IconMap = {
   edit: EditIcon,
   'ellipsis-horizontal': EllipsisHorizontalIcon,
   'ellipsis-vertical': EllipsisVerticalIcon,
+  enter: EnterIcon,
+  'enter-right': EnterRightIcon,
   envelope: EnvelopeIcon,
   equal: EqualIcon,
   'error-filled': ErrorFilledIcon,
@@ -816,6 +855,7 @@ export const icons: IconMap = {
   filter: FilterIcon,
   folder: FolderIcon,
   generate: GenerateIcon,
+  groq: GroqIcon,
   'heart-filled': HeartFilledIcon,
   heart: HeartIcon,
   'help-circle': HelpCircleIcon,
@@ -862,12 +902,14 @@ export const icons: IconMap = {
   reset: ResetIcon,
   restore: RestoreIcon,
   retrieve: RetrieveIcon,
+  retry: RetryIcon,
   revert: RevertIcon,
   robot: RobotIcon,
   rocket: RocketIcon,
   schema: SchemaIcon,
   search: SearchIcon,
   select: SelectIcon,
+  share: ShareIcon,
   sort: SortIcon,
   sparkle: SparkleIcon,
   sparkles: SparklesIcon,
@@ -884,6 +926,7 @@ export const icons: IconMap = {
   sun: SunIcon,
   sync: SyncIcon,
   tag: TagIcon,
+  tags: TagsIcon,
   terminal: TerminalIcon,
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
@@ -897,6 +940,7 @@ export const icons: IconMap = {
   'triangle-outline': TriangleOutlineIcon,
   trolley: TrolleyIcon,
   truncate: TruncateIcon,
+  twitter: TwitterIcon,
   ulist: UlistIcon,
   underline: UnderlineIcon,
   undo: UndoIcon,
@@ -908,4 +952,5 @@ export const icons: IconMap = {
   users: UsersIcon,
   'warning-filled': WarningFilledIcon,
   'warning-outline': WarningOutlineIcon,
+  wrench: WrenchIcon,
 }
