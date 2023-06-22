@@ -85,9 +85,6 @@ async function readIcon(filePath: string) {
     .replace(/"#101112"/g, '"currentColor"')
     .replace('<svg ', `<svg data-sanity-icon="${name}" `)
 
-  // Remove `strokeLinejoin="round"`
-  code = code.replace(/strokeLinejoin="round"/g, '')
-
   code = format(code, {...prettierConfig, filepath: targetPath})
 
   return {
