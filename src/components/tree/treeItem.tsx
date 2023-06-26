@@ -1,7 +1,7 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import styled from 'styled-components'
-import {Box, Flex, Text} from '../../primitives'
+import {Box, BoxProps, Flex, Text} from '../../primitives'
 import {ThemeFontWeightKey} from '../../theme'
 import {
   treeItemRootStyle,
@@ -24,6 +24,10 @@ export interface TreeItemProps {
   space?: number | number[]
   text?: React.ReactNode
   weight?: ThemeFontWeightKey
+  /**
+   * Allows passing a custom element type to the link component
+   */
+  linkAs?: BoxProps['as']
 }
 
 const Root = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
@@ -57,6 +61,7 @@ export const TreeItem = memo(function TreeItem(
     space = 2,
     text,
     weight,
+    linkAs,
     ...restProps
   } = props
   const rootRef = useRef<HTMLLIElement | null>(null)
@@ -157,6 +162,7 @@ export const TreeItem = memo(function TreeItem(
           ref={treeitemRef}
           role="treeitem"
           tabIndex={tabIndex}
+          as={linkAs}
         >
           {content}
         </TreeItemBox>
