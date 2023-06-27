@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0](https://github.com/sanity-io/ui/compare/v1.6.0...v1.7.0) (2023-06-27)
+
+### Features
+
+- support passing custom component to tree item link ([#1103](https://github.com/sanity-io/ui/issues/1103)) ([217961e](https://github.com/sanity-io/ui/commit/217961e2e4ad6a99f9eba5dc6ca7986abc0d0034))
+
 ## [1.6.0](https://github.com/sanity-io/ui/compare/v1.5.0...v1.6.0) (2023-06-12)
 
 ### Features
