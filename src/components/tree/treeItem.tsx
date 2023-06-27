@@ -20,14 +20,14 @@ export interface TreeItemProps {
   expanded?: boolean
   fontSize?: number | number[]
   icon?: React.ElementType
-  padding?: number | number[]
-  space?: number | number[]
-  text?: React.ReactNode
-  weight?: ThemeFontWeightKey
   /**
    * Allows passing a custom element type to the link component
    */
   linkAs?: BoxProps['as']
+  padding?: number | number[]
+  space?: number | number[]
+  text?: React.ReactNode
+  weight?: ThemeFontWeightKey
 }
 
 const Root = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
@@ -54,6 +54,7 @@ export const TreeItem = memo(function TreeItem(
     href,
     icon,
     id: idProp,
+    linkAs,
     muted,
     onClick,
     padding = 3,
@@ -61,7 +62,6 @@ export const TreeItem = memo(function TreeItem(
     space = 2,
     text,
     weight,
-    linkAs,
     ...restProps
   } = props
   const rootRef = useRef<HTMLLIElement | null>(null)
@@ -157,12 +157,12 @@ export const TreeItem = memo(function TreeItem(
         <TreeItemBox
           $level={tree.level}
           aria-expanded={expanded}
+          as={linkAs}
           data-ui="TreeItem__box"
           href={href}
           ref={treeitemRef}
           role="treeitem"
           tabIndex={tabIndex}
-          as={linkAs}
         >
           {content}
         </TreeItemBox>
