@@ -101,7 +101,7 @@
     "cac": "^6.7.14",
     "chokidar": "^3.5.3",
     "dotenv-flow": "^3.2.0",
-    "esbuild": "^0.17.8",
+    "esbuild": "^0.18.0",
     "esbuild-register": "^3.4.2",
     "express": "^4.18.2",
     "globby": "^11.1.0",
