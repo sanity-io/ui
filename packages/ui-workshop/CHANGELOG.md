@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/sanity-io/ui-workshop/compare/v1.2.3...v1.2.4) (2023-06-28)
+
+### Bug Fixes
+
+- **deps:** update dependency @vitejs/plugin-react to v4 ([#44](https://github.com/sanity-io/ui-workshop/issues/44)) ([e1affe6](https://github.com/sanity-io/ui-workshop/commit/e1affe6ba5973eaf9d0106a7279877603dbd51fb))
+
 ## [1.2.3](https://github.com/sanity-io/ui-workshop/compare/v1.2.2...v1.2.3) (2023-06-27)
 
 ### Bug Fixes
