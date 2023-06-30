@@ -183,6 +183,10 @@ export const Tree = memo(
       [itemElements]
     )
 
+    const handleOnFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+      setFocusedElement(event.target as HTMLElement)
+    }, [])
+
     useEffect(() => {
       if (!forwardedRef.current) return
       const _itemElements = Array.from(
@@ -202,6 +206,7 @@ export const Tree = memo(
           ref={forwardedRef}
           role="tree"
           space={space}
+          onFocus={handleOnFocus}
         >
           {children}
         </Stack>
