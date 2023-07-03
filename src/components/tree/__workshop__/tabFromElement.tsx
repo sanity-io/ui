@@ -1,5 +1,5 @@
 import {LinkIcon} from '@sanity/icons'
-import {Box, TextInput, Tree, TreeItem} from '@sanity/ui'
+import {Box, TextInput, Tree, TreeItem, Text} from '@sanity/ui'
 import {usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {useCallback, useState} from 'react'
 import {perfTests} from './basic.perf'
@@ -19,10 +19,12 @@ export default function BasicStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Box padding={2}>
-        This example is to demonstrate that when you tab from an outside element (using the keyboard
-        to navigate), you can still access the tree and tree item. Press the input beneath and start
-        tabbing / using the arrow.
+      <Box paddingY={3}>
+        <Text>
+          This example is to demonstrate that when you tab from an outside element (using the
+          keyboard to navigate), you can still access the tree and tree item. Press the input
+          beneath and start tabbing / using the arrow.
+        </Text>
       </Box>
       <Wrapper>
         <TextInput />
