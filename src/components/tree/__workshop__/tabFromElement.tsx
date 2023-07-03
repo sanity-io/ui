@@ -28,7 +28,7 @@ export default function BasicStory() {
       </Box>
       <Wrapper>
         <TextInput />
-        <Tree ref={ref} space={1}>
+        <Tree ref={ref} space={1} onFocus={() => console.log("I'm focus!")}>
           <TreeItem onClick={handleClick} expanded text="Fruit">
             <TreeItem
               data-testid="oranges"
