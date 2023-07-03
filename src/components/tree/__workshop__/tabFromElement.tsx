@@ -17,6 +17,10 @@ export default function BasicStory() {
     if (testid) setId(testid)
   }, [])
 
+  const handleFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+    console.log("I'm focused")
+  }, [])
+
   return (
     <Box padding={[4, 5, 6]}>
       <Box paddingY={3}>
@@ -28,7 +32,7 @@ export default function BasicStory() {
       </Box>
       <Wrapper>
         <TextInput />
-        <Tree ref={ref} space={1} onFocus={() => console.log("I'm focus!")}>
+        <Tree ref={ref} space={1} onFocus={handleFocus}>
           <TreeItem onClick={handleClick} expanded text="Fruit">
             <TreeItem
               data-testid="oranges"
