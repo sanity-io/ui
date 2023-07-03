@@ -208,11 +208,11 @@ export const Tree = memo(
           as="ul"
           data-ui="Tree"
           {...restProps}
+          onFocus={handleFocus}
           onKeyDown={handleKeyDown}
           ref={forwardedRef}
           role="tree"
           space={space}
-          onFocus={handleFocus}
         >
           {children}
         </Stack>
