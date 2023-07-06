@@ -190,7 +190,7 @@ export const Tree = memo(
         // Call the element's `focus` handler
         props.onFocus?.(event)
       },
-      [props]
+      [props.onFocus]
     )
 
     useEffect(() => {
