@@ -70,5 +70,10 @@ export default defineScope({
       title: 'MenuButton with on close',
       component: lazy(() => import('./onCloseMenuButton')),
     },
+    {
+      name: 'shouldFocus',
+      title: 'Menu with shouldFocus',
+      component: lazy(() => import('./shouldFocus')),
+    },
   ],
 })
