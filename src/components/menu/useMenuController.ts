@@ -173,9 +173,14 @@ export function useMenuController(props: {
   )
 
   const handleItemMouseLeave = useCallback(() => {
+    // Set the active index to -2 to deactivate all menu items
+    // when the user moves the mouse away from the menu item.
+    // We avoid using -1 because it would focus the first menu item,
+    // which would be incorrect when the user hovers over a gap
+    // between two menu items or a menu divider.
+    setActiveIndex(-2)
     rootElement?.focus()
-    setActiveIndex(-1)
-  }, [rootElement, setActiveIndex])
+  }, [setActiveIndex, rootElement])
 
   // Set focus on the currently active element
   useEffect(() => {
