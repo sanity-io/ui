@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/sanity-io/ui/compare/v1.7.0...v1.7.1) (2023-07-06)
+
+### Bug Fixes
+
+- issue with tabbing on tree ([#1104](https://github.com/sanity-io/ui/issues/1104)) ([39a6d61](https://github.com/sanity-io/ui/commit/39a6d61ec952af13b15f703ceebd6b14649f6556))
+
 ## [1.7.0](https://github.com/sanity-io/ui/compare/v1.6.0...v1.7.0) (2023-06-27)
 
 ### Features
