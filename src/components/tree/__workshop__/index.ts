@@ -11,5 +11,11 @@ export default defineScope({
       component: lazy(() => import('./basic')),
       // options: {perfTests: () => import('./basic.perf')},
     },
+    {
+      name: 'tab',
+      title: 'Tab',
+      component: lazy(() => import('./tabFromElement')),
+      // options: {perfTests: () => import('./basic.perf')},
+    },
   ],
 })

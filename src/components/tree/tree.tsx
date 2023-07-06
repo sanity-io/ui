@@ -23,7 +23,7 @@ export const Tree = memo(
       Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
     ref: React.ForwardedRef<HTMLDivElement>
   ): React.ReactElement {
-    const {children, space = 1, ...restProps} = props
+    const {children, space = 1, onFocus, ...restProps} = props
     const forwardedRef = useForwardedRef(ref)
     const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
     const focusedElementRef = useRef(focusedElement)
@@ -183,6 +183,16 @@ export const Tree = memo(
       [itemElements]
     )
 
+    const handleFocus = useCallback(
+      (event: React.FocusEvent<HTMLDivElement>) => {
+        setFocusedElement(event.target)
+
+        // Call the element's `focus` handler
+        onFocus?.(event)
+      },
+      [onFocus]
+    )
+
     useEffect(() => {
       if (!forwardedRef.current) return
       const _itemElements = Array.from(
@@ -198,6 +208,7 @@ export const Tree = memo(
           as="ul"
           data-ui="Tree"
           {...restProps}
+          onFocus={handleFocus}
           onKeyDown={handleKeyDown}
           ref={forwardedRef}
           role="tree"
