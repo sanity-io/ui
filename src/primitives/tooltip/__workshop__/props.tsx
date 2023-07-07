@@ -12,6 +12,7 @@ export default function PropsStory() {
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useBoolean('Portal', true)
   const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 2)
+  const closeOnClick = useBoolean('Close on click', true)
 
   return (
     <Card height="fill">
@@ -22,6 +23,7 @@ export default function PropsStory() {
           placement={placement}
           portal={portal}
           shadow={shadow}
+          closeOnClick={closeOnClick}
         >
           <Button mode="bleed" text="Hover me" />
         </Tooltip>

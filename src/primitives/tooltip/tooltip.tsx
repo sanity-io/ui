@@ -36,6 +36,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   allowedAutoPlacements?: Placement[]
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
+  closeOnClick?: boolean
   content?: React.ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]
@@ -62,6 +63,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const {
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
+    closeOnClick = false,
     content,
     disabled,
     fallbackPlacements: fallbackPlacementsProp,
@@ -148,7 +150,11 @@ export const Tooltip = forwardRef(function Tooltip(
   const handleFocus = useCallback(() => setIsOpen(true), [])
   const handleMouseEnter = useCallback(() => setIsOpen(true), [])
   const handleMouseLeave = useCallback(() => setIsOpen(false), [])
-  const handleOnClick = useCallback(() => setIsOpen(false), [])
+  const handleOnClick = useCallback(() => {
+    if (closeOnClick) {
+      setIsOpen(false)
+    }
+  }, [closeOnClick])
 
   // Detect whether the mouse is moving outside of the reference element. This is sometimes
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
@@ -229,17 +235,20 @@ export const Tooltip = forwardRef(function Tooltip(
       onFocus: handleFocus,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
-      onClick: handleOnClick,
+      onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+        handleOnClick()
+        childProp.props.onClick?.(e)
+      },
       ref: setReference,
     })
   }, [
     childProp,
+    handleOnClick,
     handleBlur,
     handleFocus,
     handleMouseEnter,
     handleMouseLeave,
     setReference,
-    handleOnClick,
   ])
 
   if (!child) return <></>
