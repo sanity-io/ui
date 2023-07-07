@@ -148,6 +148,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const handleFocus = useCallback(() => setIsOpen(true), [])
   const handleMouseEnter = useCallback(() => setIsOpen(true), [])
   const handleMouseLeave = useCallback(() => setIsOpen(false), [])
+  const handleOnClick = useCallback(() => setIsOpen(false), [])
 
   // Detect whether the mouse is moving outside of the reference element. This is sometimes
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
@@ -228,9 +229,18 @@ export const Tooltip = forwardRef(function Tooltip(
       onFocus: handleFocus,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
+      onClick: handleOnClick,
       ref: setReference,
     })
-  }, [childProp, handleBlur, handleFocus, handleMouseEnter, handleMouseLeave, setReference])
+  }, [
+    childProp,
+    handleBlur,
+    handleFocus,
+    handleMouseEnter,
+    handleMouseLeave,
+    setReference,
+    handleOnClick,
+  ])
 
   if (!child) return <></>
 
