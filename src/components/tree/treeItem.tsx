@@ -89,7 +89,7 @@ export const TreeItem = memo(function TreeItem(
 
       if (
         target instanceof HTMLElement &&
-        (target.getAttribute('data-ui') === 'TreeItem__box' ||
+        (target.getAttribute('data-ui') === 'TreeItem' ||
           target.closest('[data-ui="TreeItem__box"]'))
       ) {
         event.stopPropagation()
