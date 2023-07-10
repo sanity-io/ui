@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/sanity-io/ui/compare/v1.7.1...v1.7.2) (2023-07-10)
+
+### Bug Fixes
+
+- allow for enter to close / open items in treeItem ([#1107](https://github.com/sanity-io/ui/issues/1107)) ([aa8e34f](https://github.com/sanity-io/ui/commit/aa8e34fa7d617321a3531ab5a68d506d6854e5ed))
+
 ## [1.7.1](https://github.com/sanity-io/ui/compare/v1.7.0...v1.7.1) (2023-07-06)
 
 ### Bug Fixes
