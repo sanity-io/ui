@@ -235,7 +235,7 @@ export const Tooltip = forwardRef(function Tooltip(
       onFocus: handleFocus,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
-      onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+      onClick: (e: React.MouseEvent<HTMLElement>) => {
         handleOnClick()
         childProp.props.onClick?.(e)
       },
