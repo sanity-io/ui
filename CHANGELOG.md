@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.3](https://github.com/sanity-io/ui/compare/v1.7.2...v1.7.3) (2023-07-13)
+
+### Bug Fixes
+
+- **menu:** remove focus first item on mouse leave ([dcec93f](https://github.com/sanity-io/ui/commit/dcec93fefa6108274c3dd08a254e4ccbadb9dd5a))
+
 ## [1.7.2](https://github.com/sanity-io/ui/compare/v1.7.1...v1.7.2) (2023-07-10)
 
 ### Bug Fixes
