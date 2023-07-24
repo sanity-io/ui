@@ -1,4 +1,5 @@
 import {cloneElement, forwardRef, useCallback, useMemo, useState} from 'react'
+import styled from 'styled-components'
 import {Inline, InlineProps} from '../../primitives'
 
 /**
@@ -11,6 +12,16 @@ export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
 function _isReactElement(node: unknown): node is React.ReactElement {
   return Boolean(node)
 }
+
+//Limits the width of tabs in tablist
+const CustomInline = styled(Inline)`
+  & > div {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+`
 
 /**
  * @public
@@ -52,8 +63,14 @@ export const TabList = forwardRef(function TabList(
   )
 
   return (
-    <Inline data-ui="TabList" {...restProps} onKeyDown={handleKeyDown} ref={ref} role="tablist">
+    <CustomInline
+      data-ui="TabList"
+      {...restProps}
+      onKeyDown={handleKeyDown}
+      ref={ref}
+      role="tablist"
+    >
       {tabs}
-    </Inline>
+    </CustomInline>
   )
 })
