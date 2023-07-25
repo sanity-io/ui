@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.6](https://github.com/sanity-io/ui-workshop/compare/v1.2.5...v1.2.6) (2023-07-25)
+
+### Bug Fixes
+
+- downgrade mkdirp to v2 ([a50e5de](https://github.com/sanity-io/ui-workshop/commit/a50e5dec662ff7df5e05be6d5c009fb133034211))
+
 ## [1.2.5](https://github.com/sanity-io/ui-workshop/compare/v1.2.4...v1.2.5) (2023-07-25)
 
 ### Bug Fixes
