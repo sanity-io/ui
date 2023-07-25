@@ -10,7 +10,7 @@ export function ZoomMenu(): React.ReactElement {
 
   const setZoom = useCallback(
     (value: number) => broadcast({type: 'workshop/setZoom', value}),
-    [broadcast]
+    [broadcast],
   )
 
   return <ZoomMenuView disabled={!story} setZoom={setZoom} zoom={zoom} />

@@ -7,7 +7,7 @@ function delay(ms: number) {
 /** @internal */
 export async function _runTest(
   test: PerfTest,
-  target: unknown
+  target: unknown,
 ): Promise<{
   avgDuration: number
   sumDuration: number

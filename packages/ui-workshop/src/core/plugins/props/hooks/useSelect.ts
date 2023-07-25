@@ -7,7 +7,7 @@ export function useSelect<T extends SelectPropValue>(
   name: string,
   options: SelectPropOptionsProp<T>,
   defaultValue?: T,
-  groupName = 'Props'
+  groupName = 'Props',
 ): T | undefined {
   const {registerProp, unregisterProp, value} = useProps()
 

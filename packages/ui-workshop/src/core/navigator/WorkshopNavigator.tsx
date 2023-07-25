@@ -55,7 +55,7 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
 
   const handleSearchQueryChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => setQuery(event.currentTarget.value),
-    []
+    [],
   )
 
   const handleSearchQueryClear = useCallback(() => setQuery(''), [])
@@ -73,7 +73,7 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
         setQuery('')
       }
     },
-    [broadcast]
+    [broadcast],
   )
 
   return (
@@ -103,7 +103,7 @@ const NavigatorView = memo(function NavigatorView(props: {
 
   const display: BoxDisplay[] = useMemo(
     () => (expanded ? ['block'] : ['none', 'none', 'block']),
-    [expanded]
+    [expanded],
   )
 
   return (

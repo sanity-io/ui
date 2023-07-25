@@ -22,14 +22,14 @@ export const PerfProvider = memo(function PerfProvider(props: {
     (name: string, result: PerfTestRenderResult) => {
       broadcast({type: 'workshop/perf/addRenderResult', name, result})
     },
-    [broadcast]
+    [broadcast],
   )
 
   const clearResults = useCallback(
     (name: string) => {
       broadcast({type: 'workshop/perf/clearResults', name})
     },
-    [broadcast]
+    [broadcast],
   )
 
   const registerTest = useCallback(
@@ -48,14 +48,14 @@ export const PerfProvider = memo(function PerfProvider(props: {
         setState((s) => ({...s, tests: s.tests.filter((t) => t !== test)}))
       }
     },
-    [broadcast]
+    [broadcast],
   )
 
   const runTest = useCallback(
     (testName: string) => {
       broadcast({type: 'workshop/perf/runTest', name: testName})
     },
-    [broadcast]
+    [broadcast],
   )
 
   const perf: PerfContextValue = useMemo(
@@ -69,7 +69,7 @@ export const PerfProvider = memo(function PerfProvider(props: {
       testDetails,
       tests,
     }),
-    [activeTest, addRenderResult, clearResults, registerTest, results, runTest, testDetails, tests]
+    [activeTest, addRenderResult, clearResults, registerTest, results, runTest, testDetails, tests],
   )
 
   useEffect(() => {

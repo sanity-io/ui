@@ -12,7 +12,7 @@ export const ViewportMenu = memo(function ViewportMenu() {
     (value: string) => {
       broadcast({type: 'workshop/setViewport', value})
     },
-    [broadcast]
+    [broadcast],
   )
 
   return <ViewportMenuView disabled={!story} setViewport={setViewport} viewport={viewport} />

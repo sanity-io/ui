@@ -5,7 +5,7 @@ import {useProps} from '../useProps'
 export function useText(
   name: string,
   defaultValue?: string,
-  groupName = 'Props'
+  groupName = 'Props',
 ): string | undefined {
   const {registerProp, unregisterProp, value} = useProps()
 

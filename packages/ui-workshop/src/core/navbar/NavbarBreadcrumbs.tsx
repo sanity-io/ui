@@ -11,7 +11,7 @@ export function NavbarBreadcrumbs(): React.ReactElement {
       event.preventDefault()
       broadcast({type: 'workshop/setPath', value: '/'})
     },
-    [broadcast]
+    [broadcast],
   )
 
   return (

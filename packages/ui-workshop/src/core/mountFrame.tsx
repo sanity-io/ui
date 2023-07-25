@@ -16,7 +16,7 @@ export function mountFrame(options: {config: WorkshopConfig; element: HTMLElemen
   root.render(
     <StrictMode>
       <Root config={config} />
-    </StrictMode>
+    </StrictMode>,
   )
 }
 

@@ -25,7 +25,7 @@ export interface WorkshopProviderProps {
 
 /** @internal */
 export const WorkshopProvider = memo(function WorkshopProvider(
-  props: WorkshopProviderProps
+  props: WorkshopProviderProps,
 ): React.ReactElement {
   const {
     broadcast,
@@ -92,7 +92,7 @@ export const WorkshopProvider = memo(function WorkshopProvider(
       title,
       viewport,
       zoom,
-    ]
+    ],
   )
 
   let wrappedChildren = children
@@ -102,7 +102,7 @@ export const WorkshopProvider = memo(function WorkshopProvider(
       wrappedChildren = createElement(
         plugin.provider,
         {options: plugin.options || EMPTY_RECORD},
-        wrappedChildren
+        wrappedChildren,
       )
     }
   }
