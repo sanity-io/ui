@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.5](https://github.com/sanity-io/ui/compare/v1.7.4...v1.7.5) (2023-07-25)
+
+### Bug Fixes
+
+- add provenance ([bdeb189](https://github.com/sanity-io/ui/commit/bdeb189b2b1f7f9d5d4e41b7e10d8a88f9e5451f))
+
 ## [1.7.4](https://github.com/sanity-io/ui/compare/v1.7.3...v1.7.4) (2023-07-25)
 
 ### Bug Fixes
