@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.5](https://github.com/sanity-io/ui-workshop/compare/v1.2.4...v1.2.5) (2023-07-25)
+
+### Bug Fixes
+
+- **deps:** allow `styled-components` peer `v6` ([8026973](https://github.com/sanity-io/ui-workshop/commit/802697374aad0ee9db01850f21184d038fdafd9e))
+
 ## [1.2.4](https://github.com/sanity-io/ui-workshop/compare/v1.2.3...v1.2.4) (2023-06-28)
 
 ### Bug Fixes
