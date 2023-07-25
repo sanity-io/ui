@@ -42,7 +42,7 @@ export default function Fullscreen() {
 
   const relatedElements = useMemo(
     () => [closeSearchButtonElement].filter(Boolean) as HTMLElement[],
-    [closeSearchButtonElement]
+    [closeSearchButtonElement],
   )
 
   const search = useCallback((query: string | null) => {
@@ -59,7 +59,7 @@ export default function Fullscreen() {
       if (query !== null) search(query)
       setQuery(query)
     },
-    [search]
+    [search],
   )
 
   const handleOpen = useCallback(() => {
@@ -73,7 +73,7 @@ export default function Fullscreen() {
       setValue(v)
       pushToast({status: 'info', title: `Selected “${v}”`})
     },
-    [pushToast]
+    [pushToast],
   )
 
   const renderOption = useCallback((option: BaseAutocompleteOption) => {
@@ -88,7 +88,7 @@ export default function Fullscreen() {
         onMouseEnter: () => void
         onMouseLeave: () => void
       },
-      ref: React.Ref<HTMLDivElement>
+      ref: React.Ref<HTMLDivElement>,
     ) => {
       if (!props.hidden && error) {
         return (
@@ -142,7 +142,7 @@ export default function Fullscreen() {
         </Portal>
       )
     },
-    [error, loading, options, query]
+    [error, loading, options, query],
   )
 
   const renderValue = useCallback(() => {
@@ -165,7 +165,7 @@ export default function Fullscreen() {
       fetchRef.current = countriesStore.fetchDocument(
         value,
         (data) => setOptionTitle(data?.title || null),
-        setLoadingCurrentRef
+        setLoadingCurrentRef,
       )
     } else {
       setOptionTitle(null)

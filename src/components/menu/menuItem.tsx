@@ -38,7 +38,7 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
 export const MenuItem = forwardRef(function MenuItem(
   props: MenuItemProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'selected' | 'tabIndex'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     as = 'button',
@@ -85,7 +85,7 @@ export const MenuItem = forwardRef(function MenuItem(
       if (onClick) onClick(event)
       if (onItemClick) onItemClick()
     },
-    [disabled, onClick, onItemClick]
+    [disabled, onClick, onItemClick],
   )
 
   const paddingProps = useMemo(
@@ -98,7 +98,7 @@ export const MenuItem = forwardRef(function MenuItem(
       paddingBottom,
       paddingLeft,
     }),
-    [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft]
+    [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
   )
 
   const setRef = useCallback(
@@ -106,7 +106,7 @@ export const MenuItem = forwardRef(function MenuItem(
       ref.current = el
       setRootElement(el)
     },
-    [ref]
+    [ref],
   )
 
   return (

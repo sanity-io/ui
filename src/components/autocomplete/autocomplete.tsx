@@ -77,7 +77,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
       onMouseEnter: () => void
       onMouseLeave: () => void
     },
-    ref: Ref<HTMLDivElement>
+    ref: Ref<HTMLDivElement>,
   ) => ReactNode
   renderValue?: (value: string, option?: Option) => string
   suffix?: ReactNode
@@ -91,7 +91,7 @@ const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
 const InnerAutocomplete = forwardRef(function InnerAutocomplete<
-  Option extends BaseAutocompleteOption
+  Option extends BaseAutocompleteOption,
 >(
   props: AutocompleteProps<Option> &
     Omit<
@@ -115,7 +115,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'type'
       | 'value'
     >,
-  ref: Ref<HTMLInputElement>
+  ref: Ref<HTMLInputElement>,
 ) {
   const {
     border = true,
@@ -166,7 +166,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         </Text>
       </Card>
     ),
-    [fontSize, paddingProp]
+    [fontSize, paddingProp],
   )
 
   const renderOption =
@@ -194,11 +194,11 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const padding = useArrayProp(paddingProp)
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
-    [options, value]
+    [options, value],
   )
   const filteredOptions = useMemo(
     () => options.filter((option) => (query ? filterOption(query, option) : true)),
-    [filterOption, options, query]
+    [filterOption, options, query],
   )
   const filteredOptionsLen = filteredOptions.length
   const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
@@ -216,7 +216,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
         const elements: HTMLElement[] = (relatedElements || []).concat(
           rootElementRef.current ? [rootElementRef.current] : [],
-          resultsPopoverElementRef.current ? [resultsPopoverElementRef.current] : []
+          resultsPopoverElementRef.current ? [resultsPopoverElementRef.current] : [],
         )
 
         let focusInside = false
@@ -238,7 +238,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         }
       }, 0)
     },
-    [onBlur, onQueryChange, relatedElements]
+    [onBlur, onQueryChange, relatedElements],
   )
 
   const handleRootFocus = useCallback((event: FocusEvent<HTMLDivElement>) => {
@@ -268,7 +268,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
       inputElementRef.current?.focus()
     },
-    [onChange, onSelect, onQueryChange]
+    [onChange, onSelect, onQueryChange],
   )
 
   const handleRootKeyDown = useCallback(
@@ -331,7 +331,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         return
       }
     },
-    [activeValue, filteredOptions, filteredOptionsLen, onQueryChange]
+    [activeValue, filteredOptions, filteredOptionsLen, onQueryChange],
   )
 
   const handleInputChange = useCallback(
@@ -342,7 +342,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
       if (onQueryChange) onQueryChange(nextQuery)
     },
-    [onQueryChange]
+    [onQueryChange],
   )
 
   const handleInputFocus = useCallback(
@@ -353,7 +353,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         if (onFocus) onFocus(event)
       }
     },
-    [focused, onFocus]
+    [focused, onFocus],
   )
 
   const handlePopoverMouseEnter = useCallback(() => {
@@ -433,7 +433,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       inputElementRef.current = el
       forwardedRef.current = el
     },
-    [forwardedRef]
+    [forwardedRef],
   )
 
   const clearButton = useMemo(() => {
@@ -456,12 +456,12 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
         return v - 2
       }),
-    [padding]
+    [padding],
   )
   const openButtonPadding = useMemo(() => padding.map((v) => Math.max(v - 1, 0)), [padding])
   const openButtonProps: AutocompleteOpenButtonProps = useMemo(
     () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
-    [openButton]
+    [openButton],
   )
 
   const handleOpenClick = useCallback(
@@ -475,7 +475,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
       _raf(() => inputElementRef.current?.focus())
     },
-    [currentOption, openButtonProps, renderValue, value]
+    [currentOption, openButtonProps, renderValue, value],
   )
 
   const openButtonNode = useMemo(
@@ -504,7 +504,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       openButtonPadding,
       openButtonProps,
       readOnly,
-    ]
+    ],
   )
 
   const inputValue = useMemo(() => {
@@ -560,7 +560,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         if (listFocused) inputElementRef.current?.focus()
       }
     },
-    [listFocused]
+    [listFocused],
   )
 
   const content = useMemo(() => {
@@ -630,7 +630,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           onMouseEnter: handlePopoverMouseEnter,
           onMouseLeave: handlePopoverMouseLeave,
         },
-        resultsPopoverElementRef
+        resultsPopoverElementRef,
       )
     }
 
@@ -709,5 +709,5 @@ export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocomplet
       | 'value'
     > & {
       ref?: Ref<HTMLInputElement>
-    }
+    },
 ) => ReactElement

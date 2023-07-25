@@ -5,21 +5,27 @@ import {_responsive} from '../../styles'
 import {Theme, ThemeFontKey} from '../../theme'
 import {Skeleton, SkeletonProps} from './skeleton'
 
-const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>(
-  ({$size, $style, theme}: {$size: number[]; $style: ThemeFontKey; theme: Theme}) => {
-    const {media} = theme.sanity
-    const font = theme.sanity.fonts[$style]
+const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>(({
+  $size,
+  $style,
+  theme,
+}: {
+  $size: number[]
+  $style: ThemeFontKey
+  theme: Theme
+}) => {
+  const {media} = theme.sanity
+  const font = theme.sanity.fonts[$style]
 
-    const styles = _responsive(media, $size, (sizeIndex) => {
-      const fontSize = font.sizes[sizeIndex]
-      const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
+  const styles = _responsive(media, $size, (sizeIndex) => {
+    const fontSize = font.sizes[sizeIndex]
+    const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
 
-      return {height: capHeight}
-    })
+    return {height: capHeight}
+  })
 
-    return styles
-  }
-)
+  return styles
+})
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -60,7 +66,7 @@ export interface CodeSkeletonProps extends SkeletonProps {
 export const TextSkeleton = forwardRef(function TextSkeleton(
   props: TextSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)
@@ -75,7 +81,7 @@ export const TextSkeleton = forwardRef(function TextSkeleton(
 export const LabelSkeleton = forwardRef(function TextSkeleton(
   props: LabelSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)
@@ -90,7 +96,7 @@ export const LabelSkeleton = forwardRef(function TextSkeleton(
 export const HeadingSkeleton = forwardRef(function TextSkeleton(
   props: HeadingSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)
@@ -105,7 +111,7 @@ export const HeadingSkeleton = forwardRef(function TextSkeleton(
 export const CodeSkeleton = forwardRef(function TextSkeleton(
   props: CodeSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)

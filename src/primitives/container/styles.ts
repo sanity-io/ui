@@ -12,7 +12,7 @@ export function containerBaseStyle(): CSSObject {
 }
 
 export function responsiveContainerWidthStyle(
-  props: ResponsiveWidthStyleProps & ThemeProps
+  props: ResponsiveWidthStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {container, media} = theme.sanity

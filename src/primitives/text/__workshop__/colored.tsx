@@ -3,15 +3,16 @@ import {useSelect} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
 import {WORKSHOP_SPOT_COLOR_OPTIONS} from '../../../__workshop__/constants'
 
-const ColoredText = styled(Text)<{color?: ThemeColorSpotKey}>(
-  (props: {color?: ThemeColorSpotKey; theme: Theme}) => {
-    const {spot} = props.theme.sanity.color
+const ColoredText = styled(Text)<{color?: ThemeColorSpotKey}>((props: {
+  color?: ThemeColorSpotKey
+  theme: Theme
+}) => {
+  const {spot} = props.theme.sanity.color
 
-    return css`
-      color: ${spot[props.color || 'gray']};
-    `
-  }
-)
+  return css`
+    color: ${spot[props.color || 'gray']};
+  `
+})
 
 export default function ColoredTextStory() {
   const theme = useTheme()

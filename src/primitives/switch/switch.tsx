@@ -27,7 +27,7 @@ const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switch
  */
 export const Switch = forwardRef(function Switch(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {checked, className, disabled, indeterminate, readOnly, style, ...restProps} = props
   const ref = useForwardedRef(forwardedRef)

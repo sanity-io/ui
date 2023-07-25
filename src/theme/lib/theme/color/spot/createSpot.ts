@@ -5,7 +5,7 @@ import {ThemeColorSpot} from './types'
 export function createSpot(
   opts: ThemeColorBuilderOpts,
   base: ThemeColorBase,
-  dark: boolean
+  dark: boolean,
 ): ThemeColorSpot {
   return {
     gray: opts.spot({base, dark, key: 'gray'}),

@@ -34,7 +34,7 @@ export default function CustomStory() {
         <Text size={fontSize}>{option.title}</Text>
       </Card>
     ),
-    [fontSize, padding, radius]
+    [fontSize, padding, radius],
   )
 
   const renderValue = useCallback((currentValue: string, option?: ExampleOption) => {

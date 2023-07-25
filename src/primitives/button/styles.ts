@@ -46,7 +46,7 @@ const buttonTheme = {border: {width: 1}}
  * @internal
  */
 export function buttonColorStyles(
-  props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps
+  props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps,
 ): CSSObject[] {
   const {$mode, theme} = props
   const {focusRing} = theme.sanity

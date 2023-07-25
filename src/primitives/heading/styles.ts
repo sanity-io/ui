@@ -3,7 +3,7 @@ import {ThemeProps} from '../../styles'
 import {HeadingStyleProps} from './types'
 
 export function headingBaseStyle(
-  props: HeadingStyleProps & ThemeProps
+  props: HeadingStyleProps & ThemeProps,
 ): FlattenSimpleInterpolation {
   const {$accent, $muted, theme} = props
 
@@ -36,7 +36,9 @@ export function headingBaseStyle(
       }
 
       &:focus {
-        box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+        box-shadow:
+          0 0 0 1px var(--card-bg-color),
+          0 0 0 3px var(--card-focus-ring-color);
       }
 
       &:focus:not(:focus-visible) {

@@ -74,7 +74,7 @@ export const Popover = memo(
   forwardRef(function Popover(
     props: PopoverProps &
       Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-    ref: React.ForwardedRef<HTMLDivElement>
+    ref: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
     const theme = useTheme()
     const boundaryElementContext = useBoundaryElement()
@@ -175,7 +175,7 @@ export const Popover = memo(
             fallbackPlacements,
             padding: DEFAULT_POPOVER_PADDING,
             rootBoundary,
-          })
+          }),
         )
       }
 
@@ -183,7 +183,7 @@ export const Popover = memo(
       ret.push(
         offset({
           mainAxis: arrowProp ? DEFAULT_POPOVER_DISTANCE : 0,
-        })
+        }),
       )
 
       // Track sizes
@@ -207,7 +207,7 @@ export const Popover = memo(
               if (constrainSize) {
                 elements.floating.style.maxWidth = `${Math.min(
                   availableWidth,
-                  _maxWidth ?? Infinity
+                  _maxWidth ?? Infinity,
                 )}px`
 
                 elements.floating.style.maxHeight = `${availableHeight}px`
@@ -218,7 +218,7 @@ export const Popover = memo(
             margins,
             matchReferenceWidth,
             padding: DEFAULT_POPOVER_PADDING,
-          })
+          }),
         )
       }
 
@@ -229,7 +229,7 @@ export const Popover = memo(
             boundary: floatingBoundary || undefined,
             rootBoundary,
             padding: DEFAULT_POPOVER_PADDING,
-          })
+          }),
         )
       }
 
@@ -239,7 +239,7 @@ export const Popover = memo(
           arrow({
             element: arrowRef,
             padding: DEFAULT_POPOVER_PADDING,
-          })
+          }),
         )
       }
 
@@ -248,7 +248,7 @@ export const Popover = memo(
           boundary: referenceBoundary || undefined,
           padding: DEFAULT_POPOVER_PADDING,
           strategy: 'referenceHidden',
-        })
+        }),
       )
 
       return ret
@@ -283,7 +283,7 @@ export const Popover = memo(
         forwardedRef.current = node
         refs.setFloating(node)
       },
-      [forwardedRef, refs]
+      [forwardedRef, refs],
     )
 
     const setReference = useCallback(
@@ -299,7 +299,7 @@ export const Popover = memo(
           childRef.current = node
         }
       },
-      [childProp, refs]
+      [childProp, refs],
     )
 
     const child = useMemo(() => {
@@ -373,7 +373,7 @@ export const Popover = memo(
         {child}
       </>
     )
-  })
+  }),
 )
 
 Popover.displayName = 'Popover'

@@ -11,7 +11,7 @@ export function createCardStates(
   dark: boolean,
   name: ThemeColorName,
   solid: ThemeColorSolid,
-  muted: ThemeColorMuted
+  muted: ThemeColorMuted,
 ): ThemeColorCard {
   return {
     enabled: opts.card({

@@ -29,7 +29,7 @@ export function dialogStyle({theme}: ThemeProps): CSSObject {
 }
 
 export function responsiveDialogPositionStyle(
-  props: ResponsiveDialogPositionStyleProps & ThemeProps
+  props: ResponsiveDialogPositionStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity

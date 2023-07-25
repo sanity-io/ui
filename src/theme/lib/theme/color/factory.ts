@@ -87,7 +87,7 @@ export type PartialThemeColorBuilderOpts = Partial<ThemeColorBuilderOpts>
  * @public
  */
 export function createColorTheme(
-  partialOpts: PartialThemeColorBuilderOpts = {}
+  partialOpts: PartialThemeColorBuilderOpts = {},
 ): ThemeColorSchemes {
   const builders: ThemeColorBuilderOpts = {...defaultOpts, ...partialOpts}
 
@@ -117,7 +117,7 @@ function _createColorScheme(opts: ThemeColorBuilderOpts, dark: boolean): ThemeCo
 function _createColor(
   opts: ThemeColorBuilderOpts,
   dark: boolean,
-  name: ThemeColorName
+  name: ThemeColorName,
 ): ThemeColor {
   const base = opts.base({dark, name})
   const solid = createSolidTones(opts, base, dark, name)

@@ -51,7 +51,7 @@ export interface MenuButtonProps {
  */
 export const MenuButton = forwardRef(function MenuButton(
   props: MenuButtonProps,
-  ref: React.ForwardedRef<HTMLButtonElement | null>
+  ref: React.ForwardedRef<HTMLButtonElement | null>,
 ) {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
@@ -139,7 +139,7 @@ export const MenuButton = forwardRef(function MenuButton(
 
       setOpen(false)
     },
-    [buttonElement, menuElements]
+    [buttonElement, menuElements],
   )
 
   const handleMenuEscape = useCallback(() => {
@@ -164,7 +164,7 @@ export const MenuButton = forwardRef(function MenuButton(
 
       setOpen(false)
     },
-    [menuElements]
+    [menuElements],
   )
 
   const handleItemClick = useCallback(() => {
@@ -203,7 +203,7 @@ export const MenuButton = forwardRef(function MenuButton(
       handleBlur,
       registerElement,
       shouldFocus,
-    ]
+    ],
   )
 
   const menu = isElement(menuProp) ? cloneElement(menuProp, menuProps) : null
@@ -218,7 +218,7 @@ export const MenuButton = forwardRef(function MenuButton(
 
       setButtonElement(el)
     },
-    [ref]
+    [ref],
   )
 
   const button = useMemo(
@@ -235,7 +235,7 @@ export const MenuButton = forwardRef(function MenuButton(
             selected: open,
           })
         : null,
-    [buttonProp, handleButtonClick, handleButtonKeyDown, id, open, setButtonRef]
+    [buttonProp, handleButtonClick, handleButtonKeyDown, id, open, setButtonRef],
   )
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
@@ -257,7 +257,7 @@ export const MenuButton = forwardRef(function MenuButton(
       deprecated_portal,
       deprecated_preventOverflow,
       popover,
-    ]
+    ],
   )
 
   return (

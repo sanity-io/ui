@@ -105,12 +105,12 @@ const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
 const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
   textInputBaseStyle,
-  textInputFontSizeStyle
+  textInputFontSizeStyle,
 )
 
 const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
   responsiveRadiusStyle,
-  textInputRepresentationStyle
+  textInputRepresentationStyle,
 )
 
 const LeftBox = styled(Box)`
@@ -137,7 +137,7 @@ const RightCard = styled(Card)`
  */
 export const TextInput = forwardRef(function TextInput(
   props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
-  forwardedRef: React.Ref<HTMLInputElement>
+  forwardedRef: React.Ref<HTMLInputElement>,
 ) {
   const {
     border = true,
@@ -193,7 +193,7 @@ export const TextInput = forwardRef(function TextInput(
       // Focus the input, in case focus has been lost when clicking the clear button
       ref.current?.focus()
     },
-    [onClear, ref]
+    [onClear, ref],
   )
 
   // Render prefix (memoized)
@@ -204,7 +204,7 @@ export const TextInput = forwardRef(function TextInput(
           <span>{prefix}</span>
         </Prefix>
       ),
-    [prefix, radius]
+    [prefix, radius],
   )
 
   // Render presentation (memoized)
@@ -250,7 +250,7 @@ export const TextInput = forwardRef(function TextInput(
       $hasClearButton,
       $hasPrefix,
       $hasSuffix,
-    ]
+    ],
   )
 
   // Render clear button (memoized)
@@ -263,7 +263,7 @@ export const TextInput = forwardRef(function TextInput(
 
         return v - 2
       }),
-    [padding]
+    [padding],
   )
   const clearButtonPadding = useMemo(
     () =>
@@ -274,11 +274,11 @@ export const TextInput = forwardRef(function TextInput(
 
         return v - 1
       }),
-    [padding]
+    [padding],
   )
   const clearButtonProps: TextInputClearButtonProps = useMemo(
     () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
-    [clearButton]
+    [clearButton],
   )
   const clearButtonNode = useMemo(
     () =>
@@ -317,7 +317,7 @@ export const TextInput = forwardRef(function TextInput(
       handleClearMouseDown,
       radius,
       readOnly,
-    ]
+    ],
   )
 
   // Render suffix (memoized)
@@ -328,7 +328,7 @@ export const TextInput = forwardRef(function TextInput(
           <span>{suffix}</span>
         </Suffix>
       ),
-    [radius, suffix]
+    [radius, suffix],
   )
 
   return (

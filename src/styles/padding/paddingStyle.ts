@@ -4,7 +4,7 @@ import {ThemeProps} from '../types'
 import {ResponsivePaddingStyleProps} from './types'
 
 export function responsivePaddingStyle(
-  props: ResponsivePaddingStyleProps & ThemeProps
+  props: ResponsivePaddingStyleProps & ThemeProps,
 ): CSSObject[][] {
   const {theme} = props
 

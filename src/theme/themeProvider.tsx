@@ -46,7 +46,7 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
         scheme,
         tone,
       },
-    [themeProp, scheme, tone]
+    [themeProp, scheme, tone],
   )
 
   if (!theme) {

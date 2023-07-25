@@ -10,7 +10,7 @@ import {ResponsiveFontStyleProps} from './types'
  */
 export function responsiveFont(
   fontKey: ThemeFontKey,
-  props: ResponsiveFontStyleProps & ThemeProps
+  props: ResponsiveFontStyleProps & ThemeProps,
 ): CSSObject[] {
   const {$size, $weight, theme} = props
   const {fonts, media} = theme.sanity

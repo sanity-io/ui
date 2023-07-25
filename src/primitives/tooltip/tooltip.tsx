@@ -55,7 +55,7 @@ const Root = styled(Layer)`
  */
 export const Tooltip = forwardRef(function Tooltip(
   props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
   const theme = useTheme()
@@ -89,7 +89,7 @@ export const Tooltip = forwardRef(function Tooltip(
         fallbackPlacements,
         padding: 4,
         rootBoundary,
-      })
+      }),
     )
 
     // Define distance between reference and floating element
@@ -101,7 +101,7 @@ export const Tooltip = forwardRef(function Tooltip(
         boundary: boundaryElement || undefined,
         rootBoundary,
         padding: 4,
-      })
+      }),
     )
 
     // Place arrow
@@ -122,7 +122,7 @@ export const Tooltip = forwardRef(function Tooltip(
       top: y ?? 0,
       left: x ?? 0,
     }),
-    [strategy, x, y]
+    [strategy, x, y],
   )
 
   const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
@@ -193,7 +193,7 @@ export const Tooltip = forwardRef(function Tooltip(
       arrowRef.current = arrowEl
       update()
     },
-    [update]
+    [update],
   )
 
   const setFloating = useCallback(
@@ -201,7 +201,7 @@ export const Tooltip = forwardRef(function Tooltip(
       forwardedRef.current = node
       refs.setFloating(node)
     },
-    [forwardedRef, refs]
+    [forwardedRef, refs],
   )
 
   const childRef: ForwardedRef<HTMLElement | null> = (childProp as any)?.ref
@@ -217,7 +217,7 @@ export const Tooltip = forwardRef(function Tooltip(
       // childRef.current = node
       setReferenceElement(node)
     },
-    [childRef]
+    [childRef],
   )
 
   const child = useMemo(() => {

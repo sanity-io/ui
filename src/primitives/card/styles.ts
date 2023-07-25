@@ -5,7 +5,7 @@ import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {CardStyleProps} from './types'
 
 export function cardStyle(
-  props: CardStyleProps & ThemeProps
+  props: CardStyleProps & ThemeProps,
 ): Array<FlattenSimpleInterpolation | (() => FlattenSimpleInterpolation)> {
   return [cardBaseStyle(props), cardColorStyle(props)]
 }

@@ -94,7 +94,7 @@ describe('components/toast', () => {
       render(<Root />)
 
       expect(log.mock.calls[0][0].message).toEqual(
-        'useToast(): the context value is not compatible'
+        'useToast(): the context value is not compatible',
       )
     })
   })

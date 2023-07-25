@@ -38,7 +38,7 @@ export function textInputRootStyle(): FlattenSimpleInterpolation {
 }
 
 export function textInputBaseStyle(
-  props: TextInputInputStyleProps & ThemeProps
+  props: TextInputInputStyleProps & ThemeProps,
 ): FlattenSimpleInterpolation {
   const {theme, $scheme, $tone, $weight} = props
   const font = theme.sanity.fonts.text
@@ -126,7 +126,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 }
 
 export function textInputRepresentationStyle(
-  props: TextInputRepresentationStyleProps & ThemeProps
+  props: TextInputRepresentationStyleProps & ThemeProps,
 ): FlattenSimpleInterpolation {
   const {$hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
   const {focusRing, input} = theme.sanity

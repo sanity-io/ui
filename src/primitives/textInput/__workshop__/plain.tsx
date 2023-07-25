@@ -58,7 +58,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
     'Icon (right)',
     WORKSHOP_ICON_SYMBOL_OPTIONS,
     'close',
-    'Props'
+    'Props',
   ) as IconSymbol
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const placeholder = useText('Placeholder', '', 'Props') || undefined
@@ -71,7 +71,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.currentTarget.value),
-    []
+    [],
   )
 
   return (

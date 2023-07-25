@@ -17,7 +17,7 @@ export interface BreadcrumbsProps {
  */
 export const Breadcrumbs = forwardRef(function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
-  ref: React.ForwardedRef<HTMLOListElement>
+  ref: React.ForwardedRef<HTMLOListElement>,
 ) {
   const {children, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
   const space = useArrayProp(spaceRaw)
@@ -35,7 +35,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
       Children.toArray(children).filter((child) => {
         return isValidElement(child)
       }),
-    [children]
+    [children],
   )
 
   const items = useMemo(() => {

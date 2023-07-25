@@ -32,7 +32,7 @@ const Root = styled(Text)`
  */
 export const Spinner = forwardRef(function Spinner(
   props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
     <Root data-ui="Spinner" {...props} ref={ref}>

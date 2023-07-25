@@ -9,7 +9,7 @@ export function createSelectableTones(
   base: ThemeColorBase,
   dark: boolean,
   solid: ThemeColorSolid,
-  muted: ThemeColorMuted
+  muted: ThemeColorMuted,
 ): ThemeColorSelectable {
   return {
     default: _createSelectableStates(opts, base, dark, solid, muted, 'default'),
@@ -26,7 +26,7 @@ function _createSelectableStates(
   dark: boolean,
   solid: ThemeColorSolid,
   muted: ThemeColorMuted,
-  tone: 'default' | 'primary' | 'positive' | 'caution' | 'critical'
+  tone: 'default' | 'primary' | 'positive' | 'caution' | 'critical',
 ): ThemeColorSelectableStates {
   return {
     enabled: opts.selectable({

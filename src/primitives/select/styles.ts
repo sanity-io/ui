@@ -105,7 +105,7 @@ function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
   const {sizes} = theme.sanity.fonts.text
 
   return _responsive(theme.sanity.media, $fontSize, (sizeIndex) =>
-    textSize(sizes[sizeIndex] || sizes[2])
+    textSize(sizes[sizeIndex] || sizes[2]),
   )
 }
 
@@ -115,7 +115,7 @@ function inputStyle(): Array<
         $fontSize: number[]
         $padding: number[]
         $space: number[]
-      } & ThemeProps
+      } & ThemeProps,
     ) => CSSObject[])
   | ((props: ThemeProps) => FlattenSimpleInterpolation)
 > {

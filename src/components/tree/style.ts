@@ -92,7 +92,7 @@ export interface TreeItemBoxStyleProps {
 }
 
 export function treeItemBoxStyle(
-  props: TreeItemBoxStyleProps & ThemeProps
+  props: TreeItemBoxStyleProps & ThemeProps,
 ): FlattenSimpleInterpolation {
   const {$level, theme} = props
   const {space} = theme.sanity

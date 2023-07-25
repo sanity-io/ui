@@ -15,8 +15,8 @@ describe('useMediaIndex', () => {
       renderToStaticMarkup(
         <ThemeProvider theme={studioTheme}>
           <Log />
-        </ThemeProvider>
-      )
+        </ThemeProvider>,
+      ),
     ).toBe('mediaIndex: 0')
   })
   it(`SSR to markup for hydration doesn't throw`, () => {
@@ -24,8 +24,8 @@ describe('useMediaIndex', () => {
       renderToString(
         <ThemeProvider theme={studioTheme}>
           <Log />
-        </ThemeProvider>
-      )
+        </ThemeProvider>,
+      ),
     ).toMatchInlineSnapshot(`"mediaIndex: <!-- -->0"`)
   })
 })

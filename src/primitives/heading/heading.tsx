@@ -47,7 +47,7 @@ const SpanWithTextOverflow = styled.span`
  */
 export const Heading = forwardRef(function Heading(
   props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLElement>
+  ref: React.ForwardedRef<HTMLElement>,
 ) {
   const {
     accent = false,

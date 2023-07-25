@@ -4,7 +4,7 @@ import {ThemeProps} from '../types'
 import {ResponsiveMarginStyleProps} from './types'
 
 export function responsiveMarginStyle(
-  props: ResponsiveMarginStyleProps & ThemeProps
+  props: ResponsiveMarginStyleProps & ThemeProps,
 ): CSSObject[][] {
   const {theme} = props
 

@@ -18,7 +18,7 @@ export interface TabPanelProps extends BoxProps {
 export const TabPanel = forwardRef(function TabPanel(
   props: TabPanelProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'aria-labelledby' | 'id' | 'role'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {flex, ...restProps} = props
 

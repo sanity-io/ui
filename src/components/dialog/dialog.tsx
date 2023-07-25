@@ -74,7 +74,7 @@ interface DialogCardProps extends ResponsiveWidthProps {
 function isTargetWithinScope(
   boundaryElement: HTMLElement | null,
   portalElement: HTMLElement | null,
-  target: Node
+  target: Node,
 ): boolean {
   if (!boundaryElement || !portalElement) return true
 
@@ -87,7 +87,7 @@ function isTargetWithinScope(
 const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
   responsivePaddingStyle,
   dialogStyle,
-  responsiveDialogPositionStyle
+  responsiveDialogPositionStyle,
 )
 
 const DialogContainer = styled(Container)`
@@ -148,7 +148,7 @@ const DialogFooter = styled(Box)`
 
 const DialogCard = forwardRef(function DialogCard(
   props: DialogCardProps,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     __unstable_autoFocus: autoFocus,
@@ -208,8 +208,8 @@ const DialogCard = forwardRef(function DialogCard(
           onClose()
         }
       },
-      [boundaryElement, isTopLayer, onClose, portalElement]
-    )
+      [boundaryElement, isTopLayer, onClose, portalElement],
+    ),
   )
 
   useClickOutside(
@@ -226,9 +226,9 @@ const DialogCard = forwardRef(function DialogCard(
 
         onClickOutside()
       },
-      [boundaryElement, isTopLayer, onClickOutside, portalElement]
+      [boundaryElement, isTopLayer, onClickOutside, portalElement],
     ),
-    [rootElement]
+    [rootElement],
   )
 
   const setRef = useCallback(
@@ -236,7 +236,7 @@ const DialogCard = forwardRef(function DialogCard(
       setRootElement(el)
       forwardedRef.current = el
     },
-    [forwardedRef]
+    [forwardedRef],
   )
 
   const setContentRef = useCallback(
@@ -245,7 +245,7 @@ const DialogCard = forwardRef(function DialogCard(
       if (typeof contentRef === 'function') contentRef(el)
       else if (contentRef) contentRef.current = el
     },
-    [contentRef]
+    [contentRef],
   )
 
   return (
@@ -294,7 +294,7 @@ const DialogCard = forwardRef(function DialogCard(
  */
 export const Dialog = forwardRef(function Dialog(
   props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const dialog = useDialog()
   const theme = useTheme()
@@ -356,7 +356,7 @@ export const Dialog = forwardRef(function Dialog(
         focusedElementRef.current = event.target
       }
     },
-    [onFocus]
+    [onFocus],
   )
 
   const labelId = `${id}_label`

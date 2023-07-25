@@ -58,7 +58,7 @@ export interface AvatarStackProps {
  */
 export const AvatarStack = forwardRef(function AvatarStack(
   props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     children: childrenProp,
@@ -67,7 +67,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
     ...restProps
   } = props
   const children = childrenToElementArray(childrenProp).filter(
-    (child) => typeof child !== 'string'
+    (child) => typeof child !== 'string',
   ) as React.ReactElement[]
   const maxLength = Math.max(maxLengthProp, 0)
   const size = useArrayProp(sizeProp)

@@ -9,5 +9,5 @@ import {selectableBaseStyle, selectableColorStyle, SelectableStyleProps} from '.
 export const Selectable = styled(Box)<SelectableStyleProps & ResponsiveRadiusStyleProps>(
   responsiveRadiusStyle,
   selectableBaseStyle,
-  selectableColorStyle
+  selectableColorStyle,
 )

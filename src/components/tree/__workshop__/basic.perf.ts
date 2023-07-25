@@ -3,7 +3,7 @@ import {findByTestId, fireEvent} from '@testing-library/dom'
 
 function test<ElementType = unknown>(
   title: string,
-  run: PerfTestRunFn<ElementType>
+  run: PerfTestRunFn<ElementType>,
 ): PerfTestProps<ElementType> {
   return {name: title, run}
 }

@@ -34,7 +34,9 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
     color: inherit;
     color: var(--card-fg-color);
     background: var(--card-bg-color);
-    box-shadow: 0 0 0 1px var(--card-bg-color), inset 0 0 0 1.5px var(--card-hairline-hard-color);
+    box-shadow:
+      0 0 0 1px var(--card-bg-color),
+      inset 0 0 0 1.5px var(--card-hairline-hard-color);
     padding: 0 ${rem(theme.sanity.space[2])};
 
     &:not([hidden]) {
@@ -45,7 +47,7 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
 
 const Root = styled.div<{$size: AvatarSize[]}>(
   _responsiveAvatarCounterSizeStyle,
-  _avatarCounterBaseStyle
+  _avatarCounterBaseStyle,
 )
 
 /**
@@ -63,7 +65,7 @@ export interface AvatarCounterProps {
  */
 export const AvatarCounter = forwardRef(function AvatarCounter(
   props: AvatarCounterProps,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {count, size: sizeProp = 0} = props
   const size = useArrayProp(sizeProp)

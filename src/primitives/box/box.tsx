@@ -46,7 +46,7 @@ const Root = styled.div<
   responsiveBoxStyle,
   responsiveGridItemStyle,
   responsiveMarginStyle,
-  responsivePaddingStyle
+  responsivePaddingStyle,
 )
 
 /**
@@ -54,7 +54,7 @@ const Root = styled.div<
  */
 export const Box = forwardRef(function Box(
   props: BoxProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     as: asProp = 'div',

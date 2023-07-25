@@ -47,7 +47,7 @@ export const VirtualList = forwardRef(function VirtualList(
   props: VirtualListProps &
     StackProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ): React.ReactElement {
   const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
   const {space} = useTheme().sanity

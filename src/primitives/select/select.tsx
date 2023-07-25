@@ -33,7 +33,7 @@ const IconBox = styled(Box)(selectStyle.iconBox)
  */
 export const Select = forwardRef(function Select(
   props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
-  forwardedRef: React.ForwardedRef<HTMLSelectElement>
+  forwardedRef: React.ForwardedRef<HTMLSelectElement>,
 ) {
   const {
     children,

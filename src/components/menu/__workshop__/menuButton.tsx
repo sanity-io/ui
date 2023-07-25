@@ -24,7 +24,7 @@ export default function MenuButtonStory() {
       constrainSize: true,
       portal,
     }),
-    [portal]
+    [portal],
   )
 
   return (

@@ -98,7 +98,7 @@ describe('theme', () => {
       render(<Root />)
 
       expect(log.mock.calls[0][0].message).toEqual(
-        'useRootTheme(): the context value is not compatible'
+        'useRootTheme(): the context value is not compatible',
       )
     })
   })

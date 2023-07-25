@@ -39,7 +39,7 @@ const Root = styled(Box)`
  */
 export const Menu = forwardRef(function Menu(
   props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     children,
@@ -80,7 +80,7 @@ export const Menu = forwardRef(function Menu(
       setRootElement(el)
       forwardedRef.current = el
     },
-    [forwardedRef, setRootElement]
+    [forwardedRef, setRootElement],
   )
 
   // Trigger `onItemSelect` when active index changes
@@ -92,9 +92,9 @@ export const Menu = forwardRef(function Menu(
   useClickOutside(
     useCallback(
       (event) => isTopLayer && onClickOutside && onClickOutside(event),
-      [isTopLayer, onClickOutside]
+      [isTopLayer, onClickOutside],
     ),
-    [rootElement]
+    [rootElement],
   )
 
   // Close menu when pressing Escape
@@ -108,8 +108,8 @@ export const Menu = forwardRef(function Menu(
           if (onEscape) onEscape()
         }
       },
-      [isTopLayer, onEscape]
-    )
+      [isTopLayer, onEscape],
+    ),
   )
 
   // Register root element (for nested menus)
@@ -146,7 +146,7 @@ export const Menu = forwardRef(function Menu(
       onEscape,
       onItemClick,
       registerElement,
-    ]
+    ],
   )
 
   return (

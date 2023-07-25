@@ -9,7 +9,7 @@ export function createInputModes(
   base: ThemeColorBase,
   dark: boolean,
   solid: ThemeColorSolid,
-  muted: ThemeColorMuted
+  muted: ThemeColorMuted,
 ): ThemeColorInput {
   return {
     default: {

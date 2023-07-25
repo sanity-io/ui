@@ -7,7 +7,7 @@ export function createSolidTones(
   opts: ThemeColorBuilderOpts,
   base: ThemeColorBase,
   dark: boolean,
-  name: ThemeColorName
+  name: ThemeColorName,
 ): ThemeColorSolid {
   return {
     default: {

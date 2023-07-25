@@ -39,12 +39,12 @@ const InputRoot = styled.span`
 const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
   textInputBaseStyle,
-  textInputFontSizeStyle
+  textInputFontSizeStyle,
 )
 
 const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
   responsiveRadiusStyle,
-  textInputRepresentationStyle
+  textInputRepresentationStyle,
 )
 
 /**
@@ -52,7 +52,7 @@ const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresenta
  */
 export const TextArea = forwardRef(function TextArea(
   props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
-  forwardedRef: React.ForwardedRef<HTMLTextAreaElement>
+  forwardedRef: React.ForwardedRef<HTMLTextAreaElement>,
 ) {
   const {
     border = true,

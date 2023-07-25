@@ -21,7 +21,7 @@ export function stackBaseStyle(): CSSObject {
 }
 
 export function responsiveStackSpaceStyle(
-  props: ResponsiveStackSpaceStyleProps & ThemeProps
+  props: ResponsiveStackSpaceStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {media, space} = theme.sanity

@@ -33,7 +33,7 @@ export function selectableBaseStyle(): FlattenSimpleInterpolation {
 }
 
 export function selectableColorStyle(
-  props: SelectableStyleProps & ThemeProps
+  props: SelectableStyleProps & ThemeProps,
 ): FlattenSimpleInterpolation {
   const {$tone, theme} = props
   const {base, muted, selectable} = theme.sanity.color

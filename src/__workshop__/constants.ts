@@ -139,14 +139,14 @@ export const WORKSHOP_HEADING_FONT_SIZE_OPTIONS = {
 }
 
 export const WORKSHOP_ICON_SYMBOL_OPTIONS: {[key: string]: IconSymbol | ''} = Object.keys(
-  icons
+  icons,
 ).reduce(
   (acc: {[key: string]: IconSymbol | ''}, key) => {
     acc[key] = key as IconSymbol
 
     return acc
   },
-  {'(none)': ''}
+  {'(none)': ''},
 )
 
 export const WORKSHOP_LABEL_FONT_SIZE_OPTIONS = {

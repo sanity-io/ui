@@ -27,7 +27,7 @@ export interface TabProps {
 export const Tab = forwardRef(function Tab(
   props: TabProps &
     Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'label' | 'type'>,
-  forwardedRef: React.ForwardedRef<HTMLButtonElement>
+  forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
     icon,
@@ -53,7 +53,7 @@ export const Tab = forwardRef(function Tab(
       focusedRef.current = true
       if (onFocus) onFocus(event)
     },
-    [onFocus]
+    [onFocus],
   )
 
   const ref = useForwardedRef(forwardedRef)

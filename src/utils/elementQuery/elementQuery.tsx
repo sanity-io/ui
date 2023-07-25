@@ -18,7 +18,7 @@ export interface MediaQueryProps {
  */
 export const ElementQuery = forwardRef(function ElementQuery(
   props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'media'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const theme = useTheme()
   const {children, media = theme.sanity.media, ...restProps} = props
@@ -36,7 +36,7 @@ export const ElementQuery = forwardRef(function ElementQuery(
       forwardedRef.current = el
       setElement(el)
     },
-    [forwardedRef]
+    [forwardedRef],
   )
 
   return (

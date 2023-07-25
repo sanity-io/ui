@@ -82,7 +82,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
         onMouseEnter: () => void
         onMouseLeave: () => void
       },
-      popoverRef: React.Ref<HTMLDivElement>
+      popoverRef: React.Ref<HTMLDivElement>,
     ) => {
       const {hidden, inputElement, ...restProps} = popoverProps
 
@@ -103,7 +103,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
         />
       )
     },
-    []
+    [],
   )
 
   return (

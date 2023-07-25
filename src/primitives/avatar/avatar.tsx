@@ -29,7 +29,7 @@ export interface AvatarProps {
 
 const Root = styled.div<{$color: string; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
-  avatarStyle.root
+  avatarStyle.root,
 )
 
 const Arrow = styled.div(avatarStyle.arrow)
@@ -45,7 +45,7 @@ const Initials = styled.div(avatarStyle.initials)
  */
 export const Avatar = forwardRef(function Avatar(
   props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     as: asProp,
@@ -72,7 +72,7 @@ export const Avatar = forwardRef(function Avatar(
 
   const elementId = useId()
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
-    animateArrowFrom || arrowPositionProp || 'inside'
+    animateArrowFrom || arrowPositionProp || 'inside',
   )
 
   const [imageFailed, setImageFailed] = useState<boolean>(false)

@@ -23,12 +23,12 @@ describe('components/menu', () => {
       function Root() {
         const handleItemMouseEnter = useCallback(
           (event: React.MouseEvent<HTMLElement>) => console.log(event),
-          []
+          [],
         )
 
         const handleItemMouseLeave = useCallback(
           (event: React.MouseEvent<HTMLElement>) => console.log(event),
-          []
+          [],
         )
 
         const value: MenuContextValue = useMemo(
@@ -43,7 +43,7 @@ describe('components/menu', () => {
             onMouseEnter: handleItemMouseEnter,
             onMouseLeave: handleItemMouseLeave,
           }),
-          [handleItemMouseEnter, handleItemMouseLeave]
+          [handleItemMouseEnter, handleItemMouseLeave],
         )
 
         return (

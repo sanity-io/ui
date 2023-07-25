@@ -32,7 +32,7 @@ const Key = styled(KBD)`
  */
 export const Hotkeys = forwardRef(function Hotkeys(
   props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.Ref<HTMLElement>
+  ref: React.Ref<HTMLElement>,
 ) {
   const {fontSize, keys, padding, radius, space: spaceProp = 1, ...restProps} = props
   const space = useArrayProp(spaceProp)

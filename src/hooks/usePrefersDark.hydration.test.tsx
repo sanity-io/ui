@@ -23,7 +23,7 @@ describe('usePrefersDark SSR hydration', () => {
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
         matches: true,
-      } as any)
+      }) as any
   })
 
   afterAll(() => {

@@ -10,7 +10,7 @@ export type ArrayPropPrimitive = string | number | boolean | undefined | null
  */
 export function useArrayProp<T extends ArrayPropPrimitive = ArrayPropPrimitive>(
   val: T | T[] | undefined,
-  defaultVal?: T[]
+  defaultVal?: T[],
 ): T[] {
   // JSON.stringify is fast, but it's not faster than useMemo's referencial equality check
   const __perf_hash__ = useMemo(() => JSON.stringify(val ?? defaultVal), [defaultVal, val])
@@ -20,6 +20,6 @@ export function useArrayProp<T extends ArrayPropPrimitive = ArrayPropPrimitive>(
 
     // Improve performance: Keep object identify for a given hash of the value
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [__perf_hash__]
+    [__perf_hash__],
   )
 }

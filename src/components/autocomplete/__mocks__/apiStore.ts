@@ -4,7 +4,7 @@ export const countriesStore = {
   search(
     query: string,
     onResults: (results: {value: string}[]) => void,
-    onLoading: (flag: boolean) => void
+    onLoading: (flag: boolean) => void,
   ): {cancel: () => void} {
     const fakeDelay = 350 + Math.random() * 800
 
@@ -27,7 +27,7 @@ export const countriesStore = {
   fetchDocument(
     id: string,
     onResult: (value: {code: string; title: string} | null) => void,
-    onLoading: (flag: boolean) => void
+    onLoading: (flag: boolean) => void,
   ): {cancel: () => void} {
     const fakeDelay = 50 + Math.random() * 400
 

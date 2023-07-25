@@ -5,7 +5,7 @@ import {AutocompleteMsg, AutocompleteState} from './types'
  */
 export function autocompleteReducer(
   state: AutocompleteState,
-  msg: AutocompleteMsg
+  msg: AutocompleteMsg,
 ): AutocompleteState {
   if (msg.type === 'input/change') {
     return {...state, activeValue: null, focused: true, query: msg.query}

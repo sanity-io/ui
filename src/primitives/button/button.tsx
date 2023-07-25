@@ -59,7 +59,7 @@ const LoadingBox = styled.div`
  */
 export const Button = forwardRef(function Button(
   props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as'>,
-  ref: React.ForwardedRef<HTMLButtonElement>
+  ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
     children,
@@ -111,7 +111,7 @@ export const Button = forwardRef(function Button(
       paddingLeft,
       paddingRight,
     }),
-    [padding, paddingX, paddingY, paddingTop, paddingBottom, paddingLeft, paddingRight]
+    [padding, paddingX, paddingY, paddingTop, paddingBottom, paddingLeft, paddingRight],
   )
 
   return (

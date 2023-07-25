@@ -23,7 +23,7 @@ export function responsiveFlexStyle(): Array<
 }
 
 export function responsiveFlexAlignStyle(
-  props: ResponsiveFlexStyleProps & ThemeProps
+  props: ResponsiveFlexStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
@@ -52,7 +52,7 @@ export function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeP
 }
 
 export function responsiveFlexJustifyStyle(
-  props: ResponsiveFlexStyleProps & ThemeProps
+  props: ResponsiveFlexStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity
@@ -63,7 +63,7 @@ export function responsiveFlexJustifyStyle(
 }
 
 export function responsiveFlexDirectionStyle(
-  props: ResponsiveFlexStyleProps & ThemeProps
+  props: ResponsiveFlexStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity

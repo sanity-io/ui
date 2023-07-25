@@ -8,7 +8,7 @@ import {skeletonStyle} from './styles'
 
 const Root = styled(Box)<{$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps>(
   responsiveRadiusStyle,
-  skeletonStyle
+  skeletonStyle,
 )
 
 /**
@@ -26,7 +26,7 @@ export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxProps, 'ch
  */
 export const Skeleton = forwardRef(function Skeleton(
   props: SkeletonProps & React.HTMLProps<HTMLDivElement>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {animated = false, delay, radius, ...restProps} = props
   const [visible, setVisible] = useState<boolean>(delay ? false : true)

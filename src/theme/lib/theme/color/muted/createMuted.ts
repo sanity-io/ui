@@ -7,7 +7,7 @@ export function createMutedTones(
   opts: ThemeColorBuilderOpts,
   base: ThemeColorBase,
   dark: boolean,
-  name: ThemeColorName
+  name: ThemeColorName,
 ): ThemeColorMuted {
   return {
     default: {

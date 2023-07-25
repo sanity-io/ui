@@ -28,7 +28,7 @@ export interface MenuGroupProps {
  */
 export function MenuGroup(
   props: MenuGroupProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'tabIndex'>
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'tabIndex'>,
 ): React.ReactElement {
   const {
     as = 'button',
@@ -66,7 +66,7 @@ export function MenuGroup(
       onItemMouseEnter(event)
       setOpen(true)
     },
-    [onItemMouseEnter]
+    [onItemMouseEnter],
   )
 
   const handleMenuKeyDown = useCallback(
@@ -81,7 +81,7 @@ export function MenuGroup(
         })
       }
     },
-    [rootElement]
+    [rootElement],
   )
 
   const handleClick = useCallback(
@@ -96,7 +96,7 @@ export function MenuGroup(
         shouldFocusRef.current = null
       })
     },
-    [onClick]
+    [onClick],
   )
 
   const handleChildItemClick = useCallback(() => {

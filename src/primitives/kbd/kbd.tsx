@@ -34,7 +34,7 @@ const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdSt
  */
 export const KBD = forwardRef(function KBD(
   props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {children, fontSize = 1, padding = 1, radius = 2, ...restProps} = props
 

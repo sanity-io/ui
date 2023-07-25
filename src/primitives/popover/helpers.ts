@@ -27,6 +27,6 @@ export function calcMaxWidth(params: {
 
   return Math.min(
     currentWidth ?? Infinity,
-    (boundaryWidth || Infinity) - DEFAULT_POPOVER_PADDING * 2
+    (boundaryWidth || Infinity) - DEFAULT_POPOVER_PADDING * 2,
   )
 }

@@ -61,7 +61,7 @@ export function useMenuController(props: {
         }
       }
     },
-    [rootElement, setActiveIndex]
+    [rootElement, setActiveIndex],
   )
 
   const handleKeyDown = useCallback(
@@ -159,7 +159,7 @@ export function useMenuController(props: {
         onKeyDown(event)
       }
     },
-    [onKeyDown, originElement, setActiveIndex]
+    [onKeyDown, originElement, setActiveIndex],
   )
 
   const handleItemMouseEnter = useCallback(
@@ -169,7 +169,7 @@ export function useMenuController(props: {
 
       setActiveIndex(currentIndex)
     },
-    [setActiveIndex]
+    [setActiveIndex],
   )
 
   const handleItemMouseLeave = useCallback(() => {

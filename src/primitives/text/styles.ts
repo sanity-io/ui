@@ -2,7 +2,7 @@ import {css, FlattenSimpleInterpolation} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
 export function textBaseStyle(
-  props: {$accent?: boolean; $muted?: boolean} & ThemeProps
+  props: {$accent?: boolean; $muted?: boolean} & ThemeProps,
 ): FlattenSimpleInterpolation {
   const {$accent, $muted, theme} = props
   const {weights} = theme.sanity.fonts.text
@@ -40,7 +40,9 @@ export function textBaseStyle(
       }
 
       &:focus {
-        box-shadow: 0 0 0 1px var(--card-bg-color), 0 0 0 3px var(--card-focus-ring-color);
+        box-shadow:
+          0 0 0 1px var(--card-bg-color),
+          0 0 0 3px var(--card-focus-ring-color);
       }
 
       &:focus:not(:focus-visible) {

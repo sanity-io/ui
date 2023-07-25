@@ -23,7 +23,7 @@ export default function PropsStory() {
         },
       },
     }),
-    [focusRingOffset, focusRingWidth, theme]
+    [focusRingOffset, focusRingWidth, theme],
   )
 
   return (

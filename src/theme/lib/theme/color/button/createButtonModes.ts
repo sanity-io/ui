@@ -10,7 +10,7 @@ export function createButtonModes(
   base: ThemeColorBase,
   dark: boolean,
   solid: ThemeColorSolid,
-  muted: ThemeColorMuted
+  muted: ThemeColorMuted,
 ): ThemeColorButton {
   return {
     default: createButtonTones(opts, base, dark, solid, muted, 'default'),

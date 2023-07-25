@@ -19,7 +19,7 @@ const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, respons
  */
 export const Stack = forwardRef(function Stack(
   props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {as, space, ...restProps} = props
 

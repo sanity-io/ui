@@ -74,7 +74,7 @@ interface TooltipArrowProps {}
 
 export const TooltipArrow = forwardRef(function TooltipArrow(
   props: TooltipArrowProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {...restProps} = props
 

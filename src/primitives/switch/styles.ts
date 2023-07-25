@@ -122,7 +122,7 @@ export function switchTrackStyles(props: ThemeProps): FlattenSimpleInterpolation
 
 /* Thumb */
 export function switchThumbStyles(
-  props: {$checked?: boolean; $indeterminate?: boolean} & ThemeProps
+  props: {$checked?: boolean; $indeterminate?: boolean} & ThemeProps,
 ): FlattenSimpleInterpolation {
   const {$indeterminate, theme} = props
   const {input} = theme.sanity

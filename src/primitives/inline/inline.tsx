@@ -20,7 +20,7 @@ const Root = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlin
  */
 export const Inline = forwardRef(function Inline(
   props: InlineProps & React.HTMLProps<HTMLDivElement>,
-  ref
+  ref,
 ) {
   const {as, children: childrenProp, space, ...restProps} = props
 
@@ -29,7 +29,7 @@ export const Inline = forwardRef(function Inline(
       childrenToElementArray(childrenProp)
         .filter(Boolean)
         .map((child, idx) => <div key={idx}>{child}</div>),
-    [childrenProp]
+    [childrenProp],
   )
 
   return (

@@ -10,7 +10,7 @@ import {ThemeShadow} from './shadow'
  */
 export interface BaseTheme<
   // eslint-disable-next-line @typescript-eslint/ban-types
-  Styles extends {} = {}
+  Styles extends {} = {},
 > {
   avatar: ThemeAvatar
   button: {

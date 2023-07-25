@@ -25,7 +25,7 @@ export function DialogProvider(props: DialogProviderProps): React.ReactElement {
       position,
       zOffset,
     }),
-    [position, zOffset]
+    [position, zOffset],
   )
 
   return <DialogContext.Provider value={contextValue}>{children}</DialogContext.Provider>

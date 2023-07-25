@@ -52,7 +52,7 @@ const Root = styled(Box)<
  */
 export const Card = forwardRef(function Card(
   props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     __unstable_checkered: checkered = false,

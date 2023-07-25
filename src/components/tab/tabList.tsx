@@ -17,7 +17,7 @@ function _isReactElement(node: unknown): node is React.ReactElement {
  */
 export const TabList = forwardRef(function TabList(
   props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref
+  ref,
 ) {
   const {children: childrenProp, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
@@ -29,7 +29,7 @@ export const TabList = forwardRef(function TabList(
       focused: focusedIndex === childIndex,
       key: childIndex,
       onFocus: () => handleTabFocus(childIndex),
-    })
+    }),
   )
 
   const numTabs = tabs.length
@@ -48,7 +48,7 @@ export const TabList = forwardRef(function TabList(
         setFocusedIndex((prevIndex) => (prevIndex + 1) % numTabs)
       }
     },
-    [numTabs]
+    [numTabs],
   )
 
   return (

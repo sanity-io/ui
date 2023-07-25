@@ -45,7 +45,7 @@ const ToggleArrowText = styled(Text)`
  * @beta
  */
 export const TreeItem = memo(function TreeItem(
-  props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>
+  props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>,
 ): React.ReactElement {
   const {
     children,
@@ -78,7 +78,7 @@ export const TreeItem = memo(function TreeItem(
   const tabIndex = tree.focusedElement && tree.focusedElement === rootRef.current ? 0 : -1
   const contextValue = useMemo(
     () => ({...tree, level: tree.level + 1, path: itemPath}),
-    [itemPath, tree]
+    [itemPath, tree],
   )
 
   const handleClick = useCallback(
@@ -97,7 +97,7 @@ export const TreeItem = memo(function TreeItem(
         setFocusedElement(rootRef.current)
       }
     },
-    [expanded, itemKey, onClick, setExpanded, setFocusedElement]
+    [expanded, itemKey, onClick, setExpanded, setFocusedElement],
   )
 
   const handleKeyDown = useCallback(
@@ -108,7 +108,7 @@ export const TreeItem = memo(function TreeItem(
         el?.click()
       }
     },
-    [focused]
+    [focused],
   )
 
   useEffect(() => {

@@ -28,7 +28,7 @@ export function rem(pixelValue: number): string | 0 {
 export function _responsive<T>(
   media: number[],
   values: T[],
-  callback: (value: T, index: number, array: T[]) => CSSObject
+  callback: (value: T, index: number, array: T[]) => CSSObject,
 ): CSSObject[] {
   const statements = values?.map(callback) || []
 
@@ -54,7 +54,7 @@ export function _getArrayProp<T = number>(val: T | T[] | undefined, defaultVal?:
 export function _getResponsiveSpace(
   theme: Theme,
   props: string[],
-  spaceIndexes: number[] = EMPTY_ARRAY
+  spaceIndexes: number[] = EMPTY_ARRAY,
 ): CSSObject[] | null {
   if (!Array.isArray(spaceIndexes)) {
     throw new Error('the property must be array of numbers')
@@ -65,6 +65,6 @@ export function _getResponsiveSpace(
   }
 
   return _responsive(theme.sanity.media, spaceIndexes, (spaceIndex) =>
-    _fillCSSObject(props, rem(theme.sanity.space[spaceIndex]))
+    _fillCSSObject(props, rem(theme.sanity.space[spaceIndex])),
   )
 }

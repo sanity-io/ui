@@ -85,7 +85,7 @@ export function LayerProvider(props: LayerProviderProps): React.ReactElement {
         parentDispose?.()
       }
     },
-    [parentRegisterChild]
+    [parentRegisterChild],
   )
 
   // Register this layer on mount
@@ -100,7 +100,7 @@ export function LayerProvider(props: LayerProviderProps): React.ReactElement {
       size,
       zIndex,
     }),
-    [isTopLayer, level, registerChild, size, zIndex]
+    [isTopLayer, level, registerChild, size, zIndex],
   )
 
   return <LayerContext.Provider value={value}>{children}</LayerContext.Provider>

@@ -20,7 +20,7 @@ const Input = styled.input(inputElementStyles)
  */
 export const Checkbox = forwardRef(function Checkbox(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & CheckboxProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     checked,

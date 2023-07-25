@@ -31,7 +31,7 @@ export interface TextProps {
 const Root = styled.div<ResponsiveFontStyleProps>(
   responsiveTextFont,
   responsiveTextAlignStyle,
-  textBaseStyle
+  textBaseStyle,
 )
 
 const SpanWithTextOverflow = styled.span`
@@ -47,7 +47,7 @@ const SpanWithTextOverflow = styled.span`
  */
 export const Text = forwardRef(function Text(
   props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent = false,

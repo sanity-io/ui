@@ -43,7 +43,7 @@ export const PopoverCard = memo(
       x: number | null
       y: number | null
     } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-    ref: React.ForwardedRef<HTMLDivElement>
+    ref: React.ForwardedRef<HTMLDivElement>,
   ) {
     const {
       __unstable_margins: marginsProp,
@@ -72,7 +72,7 @@ export const PopoverCard = memo(
     // Get margins: [top, right, bottom, left]
     const margins: PopoverMargins = useMemo(
       () => marginsProp || DEFAULT_POPOVER_MARGINS,
-      [marginsProp]
+      [marginsProp],
     )
 
     // Translate according to margins
@@ -88,7 +88,7 @@ export const PopoverCard = memo(
         zIndex,
         ...style,
       }),
-      [strategy, style, width, x, y, zIndex]
+      [strategy, style, width, x, y, zIndex],
     )
 
     const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
@@ -128,7 +128,7 @@ export const PopoverCard = memo(
         {arrow && <PopoverArrow ref={arrowRef} style={arrowStyle} />}
       </Root>
     )
-  })
+  }),
 )
 
 PopoverCard.displayName = 'PopoverCard'

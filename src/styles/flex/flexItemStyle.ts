@@ -16,7 +16,7 @@ export function flexItemStyle(): Array<
 }
 
 export function responsiveFlexItemStyle(
-  props: ResponsiveFlexItemStyleProps & ThemeProps
+  props: ResponsiveFlexItemStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {media} = theme.sanity

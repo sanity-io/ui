@@ -21,7 +21,7 @@ export default function ChangingProps() {
         <Text>Item #{item.key}</Text>
       </Card>
     ),
-    [expanded, toggleExpand]
+    [expanded, toggleExpand],
   )
 
   return (

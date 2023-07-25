@@ -3,7 +3,7 @@ import {TreeState} from './types'
 export function _findPrevItemElement(
   state: TreeState,
   itemElements: HTMLElement[],
-  focusedElement: HTMLElement
+  focusedElement: HTMLElement,
 ): HTMLElement | null {
   const idx = itemElements.indexOf(focusedElement)
   const els = itemElements.slice(0, idx)
@@ -46,7 +46,7 @@ export function _findPrevItemElement(
 export function _findNextItemElement(
   state: TreeState,
   itemElements: HTMLElement[],
-  focusedElement: HTMLElement
+  focusedElement: HTMLElement,
 ): HTMLElement | null {
   const idx = itemElements.indexOf(focusedElement)
   const els = itemElements.slice(idx)

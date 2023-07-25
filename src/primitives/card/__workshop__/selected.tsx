@@ -14,23 +14,27 @@ import {
 import {useBoolean} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
 
-const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(
-  ({$tone, theme}: {$tone: ThemeColorToneKey; theme: Theme}) => {
-    const tone = theme.sanity.color.solid[$tone]
+const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(({
+  $tone,
+  theme,
+}: {
+  $tone: ThemeColorToneKey
+  theme: Theme
+}) => {
+  const tone = theme.sanity.color.solid[$tone]
 
-    return css`
-      &:not([data-selected]) {
-        --card-fg-color: ${tone ? tone.enabled.bg : undefined};
-        --card-muted-fg-color: ${tone ? tone.enabled.bg : undefined};
-      }
+  return css`
+    &:not([data-selected]) {
+      --card-fg-color: ${tone ? tone.enabled.bg : undefined};
+      --card-muted-fg-color: ${tone ? tone.enabled.bg : undefined};
+    }
 
-      [data-ui='Card']:disabled & {
-        --card-fg-color: inherit;
-        --card-muted-fg-color: inherit;
-      }
-    `
-  }
-)
+    [data-ui='Card']:disabled & {
+      --card-fg-color: inherit;
+      --card-muted-fg-color: inherit;
+    }
+  `
+})
 
 export default function SelectedStory() {
   const disabled = useBoolean('Disabled', false) || false

@@ -21,7 +21,7 @@ export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
 
 const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
   responsiveRadiusStyle,
-  badgeStyle
+  badgeStyle,
 )
 
 /**
@@ -29,7 +29,7 @@ const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
  */
 export const Badge = forwardRef(function Badge(
   props: BadgeProps & React.HTMLProps<HTMLDivElement>,
-  ref
+  ref,
 ) {
   const {
     children,

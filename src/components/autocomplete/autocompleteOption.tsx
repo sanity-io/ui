@@ -26,7 +26,7 @@ export function AutocompleteOption(props: AutocompleteOptionProps): React.ReactE
         handleClick()
       }
     },
-    [handleClick]
+    [handleClick],
   )
 
   return (

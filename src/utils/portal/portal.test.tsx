@@ -96,7 +96,7 @@ describe('utils/portal', () => {
       render(<Root />)
 
       expect(log.mock.calls[0][0].message).toEqual(
-        'usePortal(): the context value is not compatible'
+        'usePortal(): the context value is not compatible',
       )
     })
   })

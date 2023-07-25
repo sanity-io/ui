@@ -115,7 +115,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
 
       toastsRef.current = {}
     },
-    []
+    [],
   )
 
   const value: ToastContextValue = useMemo(() => ({version: 0.0, push}), [push])

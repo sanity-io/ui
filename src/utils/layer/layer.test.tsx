@@ -101,7 +101,7 @@ describe('utils/layer', () => {
       render(<Root />)
 
       expect(log.mock.calls[0][0].message).toEqual(
-        'useLayer(): the context value is not compatible'
+        'useLayer(): the context value is not compatible',
       )
     })
   })

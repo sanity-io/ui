@@ -38,7 +38,7 @@ export default function AsyncStory() {
         doSearch(query)
       }
     },
-    [doSearch]
+    [doSearch],
   )
 
   const handleOpenButtonClick = useCallback(() => {
@@ -66,7 +66,7 @@ export default function AsyncStory() {
       fetchRef.current = countriesStore.fetchDocument(
         value,
         (data) => setOptionTitle(data?.title || null),
-        setLoadingCurrentRef
+        setLoadingCurrentRef,
       )
     } else {
       setOptionTitle(null)

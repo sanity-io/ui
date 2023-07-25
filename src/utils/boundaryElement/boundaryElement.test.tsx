@@ -93,7 +93,7 @@ describe('utils/boundaryElement', () => {
       render(<Root />)
 
       expect(log.mock.calls[0][0].message).toEqual(
-        'useBoundaryElement(): the context value is not compatible'
+        'useBoundaryElement(): the context value is not compatible',
       )
     })
   })

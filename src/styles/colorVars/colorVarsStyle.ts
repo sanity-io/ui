@@ -7,7 +7,7 @@ import {ThemeColorBase, ThemeColorGenericState} from '../../theme'
 export function _colorVarsStyle(
   base: ThemeColorBase,
   color: ThemeColorGenericState,
-  checkered = false
+  checkered = false,
 ): CSSObject {
   return {
     // Base

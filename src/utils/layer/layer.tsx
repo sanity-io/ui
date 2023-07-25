@@ -25,7 +25,7 @@ const Root = styled.div({position: 'relative'})
 
 const LayerChildren = forwardRef(function LayerChildren(
   props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {children, onActivate, onFocus, style = EMPTY_RECORD, ...restProps} = props
   const {zIndex, isTopLayer} = useLayer()
@@ -60,7 +60,7 @@ const LayerChildren = forwardRef(function LayerChildren(
         lastFocusedRef.current = target
       }
     },
-    [forwardedRef, isTopLayer, onFocus]
+    [forwardedRef, isTopLayer, onFocus],
   )
 
   return (
@@ -81,7 +81,7 @@ const LayerChildren = forwardRef(function LayerChildren(
  */
 export const Layer = forwardRef(function Layer(
   props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {children, zOffset = 1, ...restProps} = props
 

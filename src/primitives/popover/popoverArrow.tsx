@@ -57,7 +57,7 @@ const ShapePath = styled.path`
 
 export const PopoverArrow = forwardRef(function PopoverArrow(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
     <Root data-ui="Popover__arrow" {...props} ref={ref}>

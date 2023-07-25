@@ -98,7 +98,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 }
 
 export function responsiveAvatarSizeStyle(
-  props: ResponsiveAvatarSizeStyleProps & ThemeProps
+  props: ResponsiveAvatarSizeStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
   const {avatar, media} = theme.sanity

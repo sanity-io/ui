@@ -52,7 +52,7 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       if (!isTopLayer) return
       if (event.key === 'Escape' && onClose) onClose()
     },
-    [isTopLayer, onClose]
+    [isTopLayer, onClose],
   )
 
   return (

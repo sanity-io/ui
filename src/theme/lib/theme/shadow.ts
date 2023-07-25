@@ -7,7 +7,7 @@ export type BoxShadow = [
   number,
   number,
   number,
-  number
+  number,
 ]
 
 /**

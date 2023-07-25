@@ -8,7 +8,7 @@ import {ResponsiveTextAlignStyleProps} from './types'
  * @internal
  */
 export function responsiveTextAlignStyle(
-  props: ResponsiveTextAlignStyleProps & ThemeProps
+  props: ResponsiveTextAlignStyleProps & ThemeProps,
 ): CSSObject[] {
   const {theme} = props
 

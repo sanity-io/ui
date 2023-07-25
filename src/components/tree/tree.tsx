@@ -21,7 +21,7 @@ export const Tree = memo(
   forwardRef(function Tree(
     props: TreeProps &
       Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-    ref: React.ForwardedRef<HTMLDivElement>
+    ref: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
     const {children, space = 1, onFocus, ...restProps} = props
     const forwardedRef = useForwardedRef(ref)
@@ -58,7 +58,7 @@ export const Tree = memo(
           })
         }
       },
-      []
+      [],
     )
 
     const setExpanded = useCallback((path: string, expanded: boolean) => {
@@ -83,7 +83,7 @@ export const Tree = memo(
         space,
         state,
       }),
-      [focusedElement, itemElements, path, registerItem, setExpanded, space, state]
+      [focusedElement, itemElements, path, registerItem, setExpanded, space, state],
     )
 
     const handleKeyDown = useCallback(
@@ -96,7 +96,7 @@ export const Tree = memo(
           const nextEl = _findNextItemElement(
             stateRef.current,
             itemElements,
-            focusedElementRef.current
+            focusedElementRef.current,
           )
 
           if (nextEl) {
@@ -113,7 +113,7 @@ export const Tree = memo(
           const prevEl = _findPrevItemElement(
             stateRef.current,
             itemElements,
-            focusedElementRef.current
+            focusedElementRef.current,
           )
 
           if (prevEl) {
@@ -180,7 +180,7 @@ export const Tree = memo(
           return
         }
       },
-      [itemElements]
+      [itemElements],
     )
 
     const handleFocus = useCallback(
@@ -190,13 +190,13 @@ export const Tree = memo(
         // Call the element's `focus` handler
         onFocus?.(event)
       },
-      [onFocus]
+      [onFocus],
     )
 
     useEffect(() => {
       if (!forwardedRef.current) return
       const _itemElements = Array.from(
-        forwardedRef.current.querySelectorAll('[data-ui="TreeItem"]')
+        forwardedRef.current.querySelectorAll('[data-ui="TreeItem"]'),
       ) as HTMLElement[]
 
       setItemElements(_itemElements)
@@ -218,7 +218,7 @@ export const Tree = memo(
         </Stack>
       </TreeContext.Provider>
     )
-  })
+  }),
 )
 
 Tree.displayName = 'Tree'
