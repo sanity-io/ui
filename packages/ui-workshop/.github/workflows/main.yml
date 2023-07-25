@@ -15,8 +15,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest, macos-latest]
+        platform: [ubuntu-latest]
         node-version: [lts/*, current]
+        include:
+          - platform: macos-latest
+            node-version: lts/*
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
