@@ -199,7 +199,8 @@
     "singleQuote": true
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "release": {
     "extends": "@sanity/semantic-release-preset",
