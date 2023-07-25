@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /** @jest-environment jsdom */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * As this hook is used for top-level theming it's likely to be called while server-rendering
  * and that's why it's worth it to have a testing suite for hydration

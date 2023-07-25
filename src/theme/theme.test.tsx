@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /** @jest-environment jsdom */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {render} from '../../test'
 import {studioTheme} from './studioTheme'
