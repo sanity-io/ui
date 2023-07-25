@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.9](https://github.com/sanity-io/ui-workshop/compare/v1.2.8...v1.2.9) (2023-07-25)
+
+### Bug Fixes
+
+- add provenance ([6920520](https://github.com/sanity-io/ui-workshop/commit/692052032585a42121a95e744e9d5a374e4605d3))
+
 ## [1.2.8](https://github.com/sanity-io/ui-workshop/compare/v1.2.7...v1.2.8) (2023-07-25)
 
 ### Bug Fixes
