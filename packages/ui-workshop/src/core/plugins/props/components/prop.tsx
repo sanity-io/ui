@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Text} from '@sanity/ui'
 import {PropSchema} from '../types'
 import {BooleanProp} from './booleanProp'
