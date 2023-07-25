@@ -148,7 +148,8 @@
   },
   "packageManager": "pnpm@8.6.10",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "release": {
     "extends": "@sanity/semantic-release-preset",
