@@ -2,15 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>sanity-io/renovate-config",
+    ":maintainLockFilesMonthly",
     ":reviewer(team:ecosystem)"
   ],
   "ignoreDeps": ["@floating-ui/react-dom"],
   "packageRules": [
     {
-      "matchDepTypes": [
-        "dependencies",
-        "devDependencies"
-      ],
+      "matchDepTypes": ["devDependencies"],
       "rangeStrategy": "bump"
     }
   ]
