@@ -47,7 +47,7 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
 
   const display: BoxDisplay[] = useMemo(
     () => (expanded ? ['block'] : ['none', 'none', 'block']),
-    [expanded]
+    [expanded],
   )
 
   return (

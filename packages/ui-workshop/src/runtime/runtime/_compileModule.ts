@@ -21,7 +21,7 @@ export function _compileModule(paths: string[]): string {
   const exports = sortedPaths.map((_p, idx) => `  _${idx}`).join(',\n')
   const code =
     [`// THIS FILE IS AUTO-GENERATED`, imports, `export const scopes = [\n${exports},\n]`].join(
-      '\n\n'
+      '\n\n',
     ) + `\n`
 
   return code

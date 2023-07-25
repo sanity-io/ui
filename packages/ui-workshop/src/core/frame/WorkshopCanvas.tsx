@@ -16,7 +16,7 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactElement
     ({error, info: errorInfo}: {error: Error; info: React.ErrorInfo}) => {
       setState({error, errorInfo})
     },
-    []
+    [],
   )
 
   const handleRetry = useCallback(() => {

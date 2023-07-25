@@ -4,7 +4,7 @@ import {WorkshopScope, WorkshopStory} from './config'
 /** @internal */
 export function resolveLocation(
   scopes: WorkshopScope[],
-  path: string
+  path: string,
 ): {scope: WorkshopScope | null; story: WorkshopStory | null} {
   const segments = path.split('/').slice(1).filter(Boolean)
 

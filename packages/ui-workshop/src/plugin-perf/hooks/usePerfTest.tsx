@@ -19,7 +19,7 @@ export interface PerfTestProps<TargetType = unknown> {
 
 /** @beta */
 export function usePerfTest<TargetType = unknown>(
-  props: PerfTestProps<TargetType>
+  props: PerfTestProps<TargetType>,
 ): PerfTestHookProps<TargetType> {
   const {name, title, description, run} = props
 
@@ -30,7 +30,7 @@ export function usePerfTest<TargetType = unknown>(
 
   const test: PerfTest<TargetType> = useMemo(
     () => ({description, name, ref, run, title}),
-    [description, name, ref, run, title]
+    [description, name, ref, run, title],
   )
 
   const handleRender: React.ProfilerOnRenderCallback = useCallback(
@@ -53,7 +53,7 @@ export function usePerfTest<TargetType = unknown>(
         // addRenderResult(name, result)
       }, 0)
     },
-    [addRenderResult, name]
+    [addRenderResult, name],
   )
 
   const Wrapper = useMemo(() => {

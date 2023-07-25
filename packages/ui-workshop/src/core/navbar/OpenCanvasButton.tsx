@@ -13,7 +13,7 @@ export const OpenCanvasButton = memo(function OpenCanvasButton() {
       path === '/'
         ? undefined
         : buildFrameUrl({baseUrl: frameUrl, path, payload, scheme, zoom, viewport}),
-    [frameUrl, path, payload, scheme, zoom, viewport]
+    [frameUrl, path, payload, scheme, zoom, viewport],
   )
 
   return (

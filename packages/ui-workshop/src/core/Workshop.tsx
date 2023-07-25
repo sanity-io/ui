@@ -33,7 +33,7 @@ export interface WorkshopProps {
 function getStateFromLocation(
   loc: Omit<WorkshopLocation, 'type'>,
   schemeProp?: ThemeColorSchemeKey,
-  frameReady?: boolean
+  frameReady?: boolean,
 ): WorkshopState {
   const path = loc.path
   const query = loc.query || {}
@@ -67,7 +67,7 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
       if (['schema', 'viewport', 'zoom'].includes(key)) {
         // eslint-disable-next-line no-console
         console.warn(
-          `Workshop: the payload cannot contain a property named "${key}" (protected name)`
+          `Workshop: the payload cannot contain a property named "${key}" (protected name)`,
         )
       } else {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,7 +88,7 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
-    () => getStateFromLocation(locationStore.get(), schemeProp)
+    () => getStateFromLocation(locationStore.get(), schemeProp),
   )
   const mediaIndex = useMediaIndex()
   const [navigatorExpanded, setNavigatorExpanded] = useState(false)
@@ -107,17 +107,17 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
       // Pass message to frame
       frame.message.publish(msg)
     },
-    [channel, frame]
+    [channel, frame],
   )
 
   const _pushLocation = useMemo(
     () => debounce((loc: Omit<WorkshopLocation, 'type'>) => locationStore.push(loc), 150),
-    [locationStore]
+    [locationStore],
   )
 
   const _replaceLocation = useMemo(
     () => debounce((loc: Omit<WorkshopLocation, 'type'>) => locationStore.replace(loc), 150),
-    [locationStore]
+    [locationStore],
   )
 
   const handleNavigatorToggle = useCallback(() => {
@@ -186,7 +186,7 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
           return changed ? nextState : prevState
         })
       }),
-    [_pushLocation, _replaceLocation, channel, locationStore]
+    [_pushLocation, _replaceLocation, channel, locationStore],
   )
 
   // Pipe messages from frame to channel
@@ -204,7 +204,7 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
 
         broadcast({type: 'workshop/setState', value: nextState})
       }),
-    [broadcast, frameReady, locationStore]
+    [broadcast, frameReady, locationStore],
   )
 
   // Observe `scheme` state
