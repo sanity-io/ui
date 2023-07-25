@@ -96,12 +96,12 @@
     "workshop:start": "serve -p 1337 -s .workshop/dist"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^4.0.0",
-    "axe-core": "^4.6.3",
+    "@vitejs/plugin-react": "^4.0.3",
+    "axe-core": "^4.7.2",
     "cac": "^6.7.14",
     "chokidar": "^3.5.3",
     "dotenv-flow": "^3.2.0",
-    "esbuild": "^0.18.0",
+    "esbuild": "^0.18.16",
     "esbuild-register": "^3.4.2",
     "express": "^4.18.2",
     "globby": "^11.1.0",
@@ -109,7 +109,7 @@
     "mkdirp": "^2.1.6",
     "pako": "^2.1.0",
     "segmented-property": "^3.0.3",
-    "vite": "^4.1.1"
+    "vite": "^4.4.7"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
