@@ -192,7 +192,7 @@
       "prettier --write --cache --ignore-unknown"
     ]
   },
-  "packageManager": "pnpm@7.33.3",
+  "packageManager": "pnpm@7.33.5",
   "prettier": {
     "semi": false,
     "printWidth": 100,
