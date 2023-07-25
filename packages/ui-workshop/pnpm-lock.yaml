@@ -36,8 +36,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   mkdirp:
-    specifier: ^3.0.0
-    version: 3.0.1
+    specifier: ^2.1.6
+    version: 2.1.6
   pako:
     specifier: ^2.1.0
     version: 2.1.0
@@ -85,9 +85,6 @@ devDependencies:
   '@types/lodash':
     specifier: ^4.14.195
     version: 4.14.195
-  '@types/mkdirp':
-    specifier: ^1.0.2
-    version: 1.0.2
   '@types/node':
     specifier: ^18.17.0
     version: 18.17.0
@@ -3237,12 +3234,6 @@ packages:
 
   /@types/minimist@1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
-    dev: true
-
-  /@types/mkdirp@1.0.2:
-    resolution: {integrity: sha512-o0K1tSO0Dx5X6xlU5F1D6625FawhC3dU3iqr25lluNv/+/QIVH8RLNEiVokgIZo+mz+87w/3Mkg/VvQS+J51fQ==}
-    dependencies:
-      '@types/node': 18.17.0
     dev: true
 
   /@types/node@18.17.0:
@@ -7770,10 +7761,17 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     dev: true
 
+  /mkdirp@2.1.6:
+    resolution: {integrity: sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dev: false
+
   /mkdirp@3.0.1:
     resolution: {integrity: sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: true
 
   /modify-values@1.0.1:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
