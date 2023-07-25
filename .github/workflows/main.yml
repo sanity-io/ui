@@ -9,6 +9,9 @@ on:
       - next
       - main
 
+permissions:
+  contents: read # for checkout
+
 jobs:
   test:
     runs-on: ${{ matrix.platform }}
@@ -45,6 +48,11 @@ jobs:
             cypress/videos
 
   release:
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
     name: 'Semantic release'
     needs: test
     runs-on: ubuntu-latest
