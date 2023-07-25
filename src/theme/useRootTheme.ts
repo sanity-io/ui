@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {useContext} from 'react'
 import {isRecord} from '../lib/isRecord'
 import {ThemeContext} from './themeContext'

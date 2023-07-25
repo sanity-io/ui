@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /** @jest-environment jsdom */
 /**
  * As this hook is used for top-level theming it's likely to be called while server-rendering

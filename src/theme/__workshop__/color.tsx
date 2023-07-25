@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Card, Tree, TreeItem, useRootTheme} from '@sanity/ui'
 
 export default function ColorStory() {
