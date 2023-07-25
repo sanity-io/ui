@@ -32,7 +32,7 @@ export const InspectorHeader = memo(function InspectorHeader(props: {
           tab={tab}
         />
       )),
-    [currentTabId, onTabChange, tabs]
+    [currentTabId, onTabChange, tabs],
   )
 
   return (

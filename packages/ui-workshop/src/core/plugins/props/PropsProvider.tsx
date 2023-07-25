@@ -25,26 +25,26 @@ export const PropsProvider = memo(function PropsProvider(props: {
     (schema: PropSchema) => {
       broadcast({type: 'workshop/props/registerProp', schema})
     },
-    [broadcast]
+    [broadcast],
   )
 
   const unregisterProp = useCallback(
     (name: string) => {
       broadcast({type: 'workshop/props/unregisterProp', name})
     },
-    [broadcast]
+    [broadcast],
   )
 
   const setPropValue = useCallback(
     (name: string, value: unknown) => {
       broadcast({type: 'workshop/props/setPropValue', name, value})
     },
-    [broadcast]
+    [broadcast],
   )
 
   const ctx: PropsContextValue = useMemo(
     () => ({registerProp, schemas, setPropValue, unregisterProp, value}),
-    [registerProp, schemas, setPropValue, unregisterProp, value]
+    [registerProp, schemas, setPropValue, unregisterProp, value],
   )
 
   // Subscribe to global messages
@@ -61,7 +61,7 @@ export const PropsProvider = memo(function PropsProvider(props: {
           return nextState
         })
       }),
-    [channel]
+    [channel],
   )
 
   useEffect(() => {

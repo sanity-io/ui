@@ -5,7 +5,7 @@ import {useProps} from '../useProps'
 export function useNumber(
   name: string,
   defaultValue?: number,
-  groupName = 'Props'
+  groupName = 'Props',
 ): number | undefined {
   const {registerProp, unregisterProp, value} = useProps()
 

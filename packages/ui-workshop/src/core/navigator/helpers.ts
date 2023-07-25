@@ -6,7 +6,7 @@ import {MenuCollection, MenuList, MenuScope, MenuStory} from './types'
 export function parseMenuNode(
   collections: MenuCollection[],
   node: Record<string, unknown>,
-  name?: string
+  name?: string,
 ): Array<MenuList | MenuScope | MenuStory> {
   if (node.__scope__) {
     const scope = node.__scope__ as WorkshopScope
@@ -30,7 +30,7 @@ export function parseMenuNode(
   const entries = Object.entries(node).filter(([key]) => key !== '__scope__')
 
   const items = entries.flatMap(([key, child]) =>
-    parseMenuNode(coll?.children || [], child as Record<string, unknown>, key)
+    parseMenuNode(coll?.children || [], child as Record<string, unknown>, key),
   )
 
   return [
@@ -46,7 +46,7 @@ export function parseMenuNode(
 /** @internal */
 export function buildMenu(
   collections: MenuCollection[],
-  scopes: WorkshopScope[]
+  scopes: WorkshopScope[],
 ): MenuList | MenuScope {
   const scopeMap: {[key: string]: WorkshopScope} = {}
 

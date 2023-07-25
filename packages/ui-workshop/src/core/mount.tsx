@@ -17,7 +17,7 @@ export function mount(options: {config: WorkshopConfig; element: HTMLElement | n
   root.render(
     <StrictMode>
       <Root config={config} />
-    </StrictMode>
+    </StrictMode>,
   )
 }
 

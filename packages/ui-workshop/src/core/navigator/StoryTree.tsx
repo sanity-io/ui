@@ -35,7 +35,7 @@ const MenuItems = memo(function MenuItems(props: {
         broadcast({type: 'workshop/setPath', value: targetPath})
       }
     },
-    [broadcast]
+    [broadcast],
   )
 
   return useMemo(() => {
@@ -133,7 +133,7 @@ const MemoScope = memo(function MemoScope(props: {
           text={story.title}
         />
       )),
-    [currentStory, item, onStoryClick]
+    [currentStory, item, onStoryClick],
   )
 
   return (

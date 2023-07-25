@@ -37,7 +37,7 @@ function getStateFromLocation(): WorkshopState {
 
 /** @internal */
 export const WorkshopFrame = memo(function WorkshopFrame(
-  props: WorkshopFrameProps
+  props: WorkshopFrameProps,
 ): React.ReactElement {
   const {config, setScheme} = props
   const main = useMemo(() => createMainController(), [])
@@ -54,11 +54,11 @@ export const WorkshopFrame = memo(function WorkshopFrame(
       // Pass message to main
       main.message.publish(msg)
     },
-    [channel, main]
+    [channel, main],
   )
 
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
-    () => getStateFromLocation()
+    () => getStateFromLocation(),
   )
 
   // Subscribe to global messages

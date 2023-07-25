@@ -4,7 +4,7 @@ import {useWorkshop} from './useWorkshop'
 /** @public */
 export function useAction(
   name: string,
-  options?: {preventDefault?: boolean}
+  options?: {preventDefault?: boolean},
 ): (...args: unknown[]) => void {
   const {preventDefault = false} = options || {}
   const {scope, story} = useWorkshop()
@@ -22,6 +22,6 @@ export function useAction(
       // eslint-disable-next-line no-console
       console.log(`[${scope.name}/${story.name}]`, name, ...args)
     },
-    [preventDefault, scope, story, name]
+    [preventDefault, scope, story, name],
   )
 }

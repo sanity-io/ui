@@ -5,7 +5,7 @@ import {useProps} from '../useProps'
 export function useBoolean(
   name: string,
   defaultValue?: boolean,
-  groupName = 'Props'
+  groupName = 'Props',
 ): boolean | undefined {
   const {registerProp, unregisterProp, value} = useProps()
 

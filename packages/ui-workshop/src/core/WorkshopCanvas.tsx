@@ -24,7 +24,7 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
   const viewportH = viewportOption?.rect.height
 
   const [initialFrameUrl] = useState(() =>
-    buildFrameUrl({baseUrl: frameUrl, path, payload, scheme, viewport, zoom})
+    buildFrameUrl({baseUrl: frameUrl, path, payload, scheme, viewport, zoom}),
   )
 
   const containerStyle = useMemo(
@@ -32,7 +32,7 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
       maxWidth: viewportW === 'auto' ? undefined : `${(viewportW || 1) * zoom}px`,
       maxHeight: viewportH ? `${(viewportH || 1) * zoom}px` : undefined,
     }),
-    [viewportW, viewportH, zoom]
+    [viewportW, viewportH, zoom],
   )
 
   const display: BoxDisplay = useMemo(() => (hidden ? 'none' : 'block'), [hidden])
@@ -44,7 +44,7 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
       width: `${100 / zoom}%`,
       height: `${100 / zoom}%`,
     }),
-    [zoom]
+    [zoom],
   )
 
   return (
