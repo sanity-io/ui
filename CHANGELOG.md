@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.6](https://github.com/sanity-io/ui/compare/v1.7.5...v1.7.6) (2023-08-14)
+
+### Bug Fixes
+
+- add provenance ([74b0c0b](https://github.com/sanity-io/ui/commit/74b0c0b77380bb3c2ab2791cbbad9aa69565739c))
+- **components:** add maxwidth to tabs ([#1111](https://github.com/sanity-io/ui/issues/1111)) ([0198d5a](https://github.com/sanity-io/ui/commit/0198d5a4394839999f4d2e1610e2a9cddeefea1e))
+
 ## [1.7.5](https://github.com/sanity-io/ui/compare/v1.7.4...v1.7.5) (2023-07-25)
 
 ### Bug Fixes
