@@ -1,4 +1,5 @@
 import {forwardRef, useCallback, useEffect, useRef} from 'react'
+import styled from 'styled-components'
 import {useForwardedRef} from '../../hooks'
 import {Button} from '../../primitives'
 import {ButtonTone} from '../../types'
@@ -20,6 +21,10 @@ export interface TabProps {
   selected?: boolean
   tone?: ButtonTone
 }
+
+const CustomButton = styled(Button)`
+  max-width: 100%;
+`
 
 /**
  * @public
@@ -71,7 +76,7 @@ export const Tab = forwardRef(function Tab(
   }
 
   return (
-    <Button
+    <CustomButton
       data-ui="Tab"
       {...restProps}
       aria-selected={selected ? 'true' : 'false'}
