@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.8](https://github.com/sanity-io/ui/compare/v1.7.7...v1.7.8) (2023-08-16)
+
+### Bug Fixes
+
+- **tooltip:** use floatingStyles to prevent rerenders of tooltip ([#1119](https://github.com/sanity-io/ui/issues/1119)) ([d4c9d69](https://github.com/sanity-io/ui/commit/d4c9d69d173565f0368e214e9f3e75f4802bdfaa))
+
 ## [1.7.7](https://github.com/sanity-io/ui/compare/v1.7.6...v1.7.7) (2023-08-14)
 
 ### Bug Fixes
