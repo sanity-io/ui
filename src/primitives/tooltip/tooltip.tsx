@@ -103,8 +103,8 @@ export const Tooltip = forwardRef(function Tooltip(
       size({
         apply({availableWidth, availableHeight, elements}) {
           Object.assign(elements.floating.style, {
-            maxWidth: `${availableWidth}px`,
-            maxHeight: `${availableHeight}px`,
+            maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
+            maxHeight: `${availableHeight - 4 * 2}px`, // the padding is `4px`
           })
         },
       }),
