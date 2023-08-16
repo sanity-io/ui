@@ -8,6 +8,7 @@ import {
   useFloating,
   Middleware,
   RootBoundary,
+  size,
 } from '@floating-ui/react-dom'
 import {
   cloneElement,
@@ -90,11 +91,24 @@ export const Tooltip = forwardRef(function Tooltip(
         fallbackPlacements,
         padding: 4,
         rootBoundary,
+        mainAxis: false,
       }),
     )
 
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: 3}))
+
+    // Set width and height on the floating element
+    ret.push(
+      size({
+        apply({availableWidth, availableHeight, elements}) {
+          Object.assign(elements.floating.style, {
+            maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
+            maxHeight: `${availableHeight - 4 * 2}px`, // the padding is `4px`
+          })
+        },
+      }),
+    )
 
     // Shift the tooltip so its sits with the boundary eleement
     ret.push(
@@ -111,20 +125,11 @@ export const Tooltip = forwardRef(function Tooltip(
     return ret
   }, [boundaryElement, fallbackPlacements])
 
-  const {x, y, placement, middlewareData, refs, update, strategy} = useFloating({
+  const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
     placement: placementProp,
     whileElementsMounted: autoUpdate,
   })
-
-  const rootStyle: CSSProperties = useMemo(
-    () => ({
-      position: strategy,
-      top: y ?? 0,
-      left: x ?? 0,
-    }),
-    [strategy, x, y],
-  )
 
   const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
 
@@ -238,7 +243,13 @@ export const Tooltip = forwardRef(function Tooltip(
   if (disabled) return child
 
   const root = (
-    <Root data-ui="Tooltip" {...restProps} ref={setFloating} style={rootStyle} zOffset={zOffset}>
+    <Root
+      data-ui="Tooltip"
+      {...restProps}
+      ref={setFloating}
+      style={floatingStyles}
+      zOffset={zOffset}
+    >
       <Card
         data-ui="Tooltip__card"
         data-placement={placement}
