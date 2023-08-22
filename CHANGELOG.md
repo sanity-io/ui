@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.10](https://github.com/sanity-io/ui/compare/v1.7.9...v1.7.10) (2023-08-22)
+
+### Bug Fixes
+
+- add `node.module` export condition ([4e4d414](https://github.com/sanity-io/ui/commit/4e4d414c5a3b213fc905faf337bcc9d07bcaf7ad))
+- **typings:** handle styled-components v6 type definition changes ([43cc758](https://github.com/sanity-io/ui/commit/43cc75874bdb247c185c095b92d0392bea613605))
+
 ## [1.7.9](https://github.com/sanity-io/ui/compare/v1.7.8...v1.7.9) (2023-08-22)
 
 ### Bug Fixes
