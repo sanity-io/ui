@@ -19,45 +19,45 @@
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./exports/index.ts",
-      "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "node": {
-        "import": "./dist/node/index.cjs.js",
-        "require": "./dist/index.cjs"
+        "module": "./dist/index.js",
+        "import": "./dist/node/index.cjs.js"
       },
+      "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./plugin-a11y": {
       "types": "./dist/plugin-a11y.d.ts",
       "source": "./exports/plugin-a11y.ts",
-      "import": "./dist/plugin-a11y.js",
       "require": "./dist/plugin-a11y.cjs",
       "node": {
-        "import": "./dist/node/plugin-a11y.cjs.js",
-        "require": "./dist/plugin-a11y.cjs"
+        "module": "./dist/plugin-a11y.js",
+        "import": "./dist/node/plugin-a11y.cjs.js"
       },
+      "import": "./dist/plugin-a11y.js",
       "default": "./dist/plugin-a11y.js"
     },
     "./plugin-perf": {
       "types": "./dist/plugin-perf.d.ts",
       "source": "./exports/plugin-perf.ts",
-      "import": "./dist/plugin-perf.js",
       "require": "./dist/plugin-perf.cjs",
       "node": {
-        "import": "./dist/node/plugin-perf.cjs.js",
-        "require": "./dist/plugin-perf.cjs"
+        "module": "./dist/plugin-perf.js",
+        "import": "./dist/node/plugin-perf.cjs.js"
       },
+      "import": "./dist/plugin-perf.js",
       "default": "./dist/plugin-perf.js"
     },
     "./runtime": {
       "types": "./dist/runtime.d.ts",
       "source": "./exports/runtime.ts",
-      "import": "./dist/runtime.js",
       "require": "./dist/runtime.cjs",
       "node": {
-        "import": "./dist/node/runtime.cjs.js",
-        "require": "./dist/runtime.cjs"
+        "module": "./dist/runtime.js",
+        "import": "./dist/node/runtime.cjs.js"
       },
+      "import": "./dist/runtime.js",
       "default": "./dist/runtime.js"
     },
     "./package.json": "./package.json"
