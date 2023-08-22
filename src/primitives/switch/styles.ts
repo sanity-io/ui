@@ -1,9 +1,9 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
 
 /* Root */
-export function switchBaseStyles(): FlattenSimpleInterpolation {
+export function switchBaseStyles(): ReturnType<typeof css> {
   return css`
     position: relative;
     &:not([hidden]) {
@@ -13,7 +13,7 @@ export function switchBaseStyles(): FlattenSimpleInterpolation {
 }
 
 /* Input */
-export function switchInputStyles(): FlattenSimpleInterpolation {
+export function switchInputStyles(): ReturnType<typeof css> {
   // Visually hide the input element while keeping it interactive
   return css`
     position: absolute;
@@ -34,7 +34,7 @@ export function switchInputStyles(): FlattenSimpleInterpolation {
 }
 
 /* Representation */
-export function switchRepresentationStyles(props: ThemeProps): FlattenSimpleInterpolation {
+export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.button.default
@@ -102,7 +102,7 @@ export function switchRepresentationStyles(props: ThemeProps): FlattenSimpleInte
 }
 
 /* Track */
-export function switchTrackStyles(props: ThemeProps): FlattenSimpleInterpolation {
+export function switchTrackStyles(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const {input} = theme.sanity
 
@@ -123,7 +123,7 @@ export function switchTrackStyles(props: ThemeProps): FlattenSimpleInterpolation
 /* Thumb */
 export function switchThumbStyles(
   props: {$checked?: boolean; $indeterminate?: boolean} & ThemeProps,
-): FlattenSimpleInterpolation {
+): ReturnType<typeof css> {
   const {$indeterminate, theme} = props
   const {input} = theme.sanity
   const trackWidth = input.switch.width

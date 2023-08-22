@@ -1,4 +1,4 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_colorVarsStyle} from '../../styles/colorVars'
 import {SelectableTone} from '../../types/selectable'
@@ -10,7 +10,7 @@ export interface SelectableStyleProps {
   $tone: SelectableTone
 }
 
-export function selectableBaseStyle(): FlattenSimpleInterpolation {
+export function selectableBaseStyle(): ReturnType<typeof css> {
   return css`
     background-color: inherit;
     color: inherit;
@@ -34,7 +34,7 @@ export function selectableBaseStyle(): FlattenSimpleInterpolation {
 
 export function selectableColorStyle(
   props: SelectableStyleProps & ThemeProps,
-): FlattenSimpleInterpolation {
+): ReturnType<typeof css> {
   const {$tone, theme} = props
   const {base, muted, selectable} = theme.sanity.color
   // @todo: remove use of `muted` here

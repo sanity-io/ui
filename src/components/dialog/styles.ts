@@ -1,6 +1,6 @@
-import {CSSObject} from 'styled-components'
 import {_responsive, ThemeProps} from '../../styles'
 import {DialogPosition} from '../../types'
+import {CSSObject} from '../../types/styled'
 
 /**
  * @internal

@@ -1,6 +1,6 @@
-import {CSSObject} from 'styled-components'
 import {EMPTY_ARRAY} from '../constants'
 import {Theme} from '../theme'
+import {CSSObject} from '../types/styled'
 
 /**
  * @internal

@@ -1,8 +1,8 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 
-export function radioBaseStyle(): FlattenSimpleInterpolation {
+export function radioBaseStyle(): ReturnType<typeof css> {
   return css`
     position: relative;
 
@@ -16,7 +16,7 @@ export function radioBaseStyle(): FlattenSimpleInterpolation {
   `
 }
 
-export function inputElementStyle(props: ThemeProps): FlattenSimpleInterpolation {
+export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.input

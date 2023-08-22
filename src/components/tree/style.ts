@@ -1,8 +1,8 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {_colorVarsStyle} from '../../styles/colorVars'
 
-export function treeItemRootStyle(): FlattenSimpleInterpolation {
+export function treeItemRootStyle(): ReturnType<typeof css> {
   return css`
     &[role='none'] > [role='treeitem'] {
       outline: none;
@@ -29,7 +29,7 @@ export function treeItemRootStyle(): FlattenSimpleInterpolation {
   `
 }
 
-export function treeItemRootColorStyle(props: ThemeProps): FlattenSimpleInterpolation {
+export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const $tone = 'default'
   const {base, muted, selectable} = theme.sanity.color
@@ -93,7 +93,7 @@ export interface TreeItemBoxStyleProps {
 
 export function treeItemBoxStyle(
   props: TreeItemBoxStyleProps & ThemeProps,
-): FlattenSimpleInterpolation {
+): ReturnType<typeof css> {
   const {$level, theme} = props
   const {space} = theme.sanity
 

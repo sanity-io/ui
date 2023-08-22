@@ -1,10 +1,9 @@
-import styled, {StyledComponent} from 'styled-components'
-import {Theme} from '../../theme'
+import styled from 'styled-components'
 
 /**
  * @public
  */
-export const MenuDivider: StyledComponent<'hr', Theme> = styled.hr`
+export const MenuDivider = styled.hr`
   height: 1px;
   border: 0;
   background: var(--card-hairline-soft-color);

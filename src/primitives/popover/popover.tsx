@@ -35,6 +35,8 @@ import {calcCurrentWidth, calcMaxWidth} from './helpers'
 import {PopoverCard} from './popoverCard'
 import {PopoverUpdateCallback, PopoverWidth} from './types'
 
+export type {PopoverUpdateCallback}
+
 /** @public */
 export interface PopoverProps
   extends Omit<LayerProps, 'as'>,

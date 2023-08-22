@@ -1,5 +1,5 @@
-import {CSSObject} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {CSSObject} from '../../types/styled'
 import {BadgeStyleProps} from './types'
 
 export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {

@@ -1,4 +1,4 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
@@ -6,11 +6,11 @@ import {CardStyleProps} from './types'
 
 export function cardStyle(
   props: CardStyleProps & ThemeProps,
-): Array<FlattenSimpleInterpolation | (() => FlattenSimpleInterpolation)> {
+): Array<ReturnType<typeof css> | (() => ReturnType<typeof css>)> {
   return [cardBaseStyle(props), cardColorStyle(props)]
 }
 
-export function cardBaseStyle(props: CardStyleProps & ThemeProps): FlattenSimpleInterpolation {
+export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$checkered, theme} = props
   const space = theme.sanity.space
 
@@ -45,7 +45,7 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): FlattenSimple
   `
 }
 
-export function cardColorStyle(props: CardStyleProps & ThemeProps): FlattenSimpleInterpolation {
+export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$checkered, $focusRing, theme} = props
   const {focusRing} = theme.sanity
   const {base, card, dark} = theme.sanity.color

@@ -1,5 +1,5 @@
 import {Property} from 'csstype'
-import {CSSObject} from 'styled-components'
+import {CSSObject} from '../../types/styled'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBoxStyleProps} from './types'

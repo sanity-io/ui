@@ -1,8 +1,6 @@
-import {css, FlattenInterpolation, ThemeProps as StyledThemeProps} from 'styled-components'
-import {ThemeProps} from '../../styles'
-import {Theme} from '../../theme'
+import {css, ExecutionContext} from 'styled-components'
 
-function codeSyntaxHighlightingStyle({theme}: ThemeProps) {
+function codeSyntaxHighlightingStyle({theme}: ExecutionContext) {
   const color = theme.sanity.color.syntax
 
   return {
@@ -45,7 +43,7 @@ function codeSyntaxHighlightingStyle({theme}: ThemeProps) {
   }
 }
 
-export function codeBaseStyle(): FlattenInterpolation<StyledThemeProps<Theme>> {
+export function codeBaseStyle(): ReturnType<typeof css> {
   return css`
     color: var(--card-code-fg-color);
 

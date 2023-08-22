@@ -1,5 +1,5 @@
-import {CSSObject} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
+import {CSSObject} from '../../types/styled'
 import {ResponsiveWidthStyleProps} from './types'
 
 const BASE_STYLE: CSSObject = {

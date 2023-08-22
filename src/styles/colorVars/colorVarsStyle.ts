@@ -1,5 +1,5 @@
-import {CSSObject} from 'styled-components'
 import {ThemeColorBase, ThemeColorGenericState} from '../../theme'
+import {CSSObject} from '../../types/styled'
 
 /**
  * @internal

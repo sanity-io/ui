@@ -1,15 +1,15 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 
-export function checkboxBaseStyles(): FlattenSimpleInterpolation {
+export function checkboxBaseStyles(): ReturnType<typeof css> {
   return css`
     position: relative;
     display: inline-block;
   `
 }
 
-export function inputElementStyles(props: ThemeProps): FlattenSimpleInterpolation {
+export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const color = theme.sanity.color.input
   const {focusRing, input, radius} = theme.sanity

@@ -1,10 +1,8 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {HeadingStyleProps} from './types'
 
-export function headingBaseStyle(
-  props: HeadingStyleProps & ThemeProps,
-): FlattenSimpleInterpolation {
+export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$accent, $muted, theme} = props
 
   return css`

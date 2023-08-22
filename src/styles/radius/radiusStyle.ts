@@ -1,4 +1,4 @@
-import {CSSObject} from 'styled-components'
+import {CSSObject} from '../../types/styled'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveRadiusStyleProps} from './types'

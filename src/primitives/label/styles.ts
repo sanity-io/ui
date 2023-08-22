@@ -1,9 +1,9 @@
-import {css, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
 export function labelBaseStyle(
   props: {$accent?: boolean; $muted: boolean} & ThemeProps,
-): FlattenSimpleInterpolation {
+): ReturnType<typeof css> {
   const {$accent, $muted, theme} = props
   const {fonts} = theme.sanity
 

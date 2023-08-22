@@ -1,6 +1,6 @@
-import {CSSObject} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
+import {CSSObject} from '../../types/styled'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
 export const avatarStyle = {
@@ -32,6 +32,7 @@ function avatarArrowStyle(): CSSObject {
       left: '50%',
       transform: 'translateX(-6px)',
 
+      // @ts-expect-error -- TODO wait for CSSObject types to be fixed in `styled-components` itself
       '&:not([hidden])': {
         display: 'block',
       },
@@ -70,6 +71,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
     },
 
     '&>svg': {
+      // @ts-expect-error -- TODO wait for CSSObject types to be fixed in `styled-components` itself
       '&:not([hidden])': {
         display: 'block',
       },
@@ -77,7 +79,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 
     /* &:is(button) */
     '&[data-as="button"]': {
-      '-webkit-font-smoothing': 'inherit',
+      WebkitFontSmoothing: 'inherit',
       appearance: 'none',
       margin: 0,
       padding: 0,
@@ -86,6 +88,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
       color: 'inherit',
       outline: 'none',
 
+      // @ts-expect-error -- TODO wait for CSSObject types to be fixed in `styled-components` itself
       '&:focus': {
         boxShadow: focusRingStyle({focusRing}),
       },
@@ -152,7 +155,7 @@ function avatarStrokeStyle(): CSSObject {
     strokeWidth: '3px',
 
     '[data-status="editing"] &': {
-      strokeSasharray: '2 4',
+      strokeDasharray: '2 4',
       strokeLinecap: 'round',
     },
   }

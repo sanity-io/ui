@@ -1,4 +1,4 @@
-import {CSSObject} from 'styled-components'
+import {CSSObject} from '../types/styled'
 import {BaseTheme, ThemeColor, ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
 
 /**

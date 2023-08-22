@@ -1,4 +1,4 @@
-import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {
   focusRingBorderStyle,
@@ -8,8 +8,9 @@ import {
   ResponsiveRadiusStyleProps,
 } from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
+import {CSSObject} from '../../types/styled'
 
-function rootStyle(): FlattenSimpleInterpolation {
+function rootStyle(): ReturnType<typeof css> {
   return css`
     position: relative;
     width: stretch;
@@ -20,7 +21,7 @@ function rootStyle(): FlattenSimpleInterpolation {
   `
 }
 
-function inputBaseStyle(props: ThemeProps): FlattenSimpleInterpolation {
+function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const font = theme.sanity.fonts.text
 
@@ -117,7 +118,7 @@ function inputStyle(): Array<
         $space: number[]
       } & ThemeProps,
     ) => CSSObject[])
-  | ((props: ThemeProps) => FlattenSimpleInterpolation)
+  | ((props: ThemeProps) => ReturnType<typeof css>)
 > {
   return [
     responsiveRadiusStyle,
@@ -128,7 +129,7 @@ function inputStyle(): Array<
   ]
 }
 
-function iconBoxStyle(props: ThemeProps): FlattenSimpleInterpolation {
+function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const color = theme.sanity.color.input
 

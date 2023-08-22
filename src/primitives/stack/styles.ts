@@ -1,5 +1,5 @@
-import {CSSObject} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
+import {CSSObject} from '../../types/styled'
 
 export interface ResponsiveStackSpaceStyleProps {
   $space: number[]

@@ -1,5 +1,5 @@
-import {CSSObject} from 'styled-components'
 import {EMPTY_ARRAY} from '../../constants'
+import {CSSObject} from '../../types/styled'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexItemStyleProps} from './types'

@@ -1,13 +1,14 @@
-import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 import {ButtonMode, ButtonTone} from '../../types'
+import {CSSObject} from '../../types/styled'
 
 /**
  * @internal
  */
-export function buttonBaseStyles(): FlattenSimpleInterpolation {
+export function buttonBaseStyles(): ReturnType<typeof css> {
   return css`
     -webkit-font-smoothing: inherit;
     appearance: none;

@@ -33,7 +33,14 @@ export const Inline = forwardRef(function Inline(
   )
 
   return (
-    <Root data-ui="Inline" {...restProps} $space={useArrayProp(space)} forwardedAs={as} ref={ref}>
+    <Root
+      data-ui="Inline"
+      {...restProps}
+      $space={useArrayProp(space)}
+      forwardedAs={as}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ref={ref as any}
+    >
       {children}
     </Root>
   )

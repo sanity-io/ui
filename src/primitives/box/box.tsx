@@ -32,6 +32,7 @@ export interface BoxProps
     ResponsiveMarginProps,
     ResponsivePaddingProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  forwardedAs?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
 const Root = styled.div<

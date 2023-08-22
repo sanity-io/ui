@@ -1,6 +1,7 @@
-import {css, CSSObject, FlattenSimpleInterpolation} from 'styled-components'
+import {css} from 'styled-components'
 import {ThemeColorSchemeKey, ThemeFontWeightKey} from '../../theme'
 import {CardTone} from '../../types'
+import {CSSObject} from '../../types/styled'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -33,13 +34,13 @@ const ROOT_STYLE = css`
   align-items: center;
 `
 
-export function textInputRootStyle(): FlattenSimpleInterpolation {
+export function textInputRootStyle(): ReturnType<typeof css> {
   return ROOT_STYLE
 }
 
 export function textInputBaseStyle(
   props: TextInputInputStyleProps & ThemeProps,
-): FlattenSimpleInterpolation {
+): ReturnType<typeof css> {
   const {theme, $scheme, $tone, $weight} = props
   const font = theme.sanity.fonts.text
   const color = theme.sanity.color.input
@@ -127,7 +128,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 
 export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps,
-): FlattenSimpleInterpolation {
+): ReturnType<typeof css> {
   const {$hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
   const {focusRing, input} = theme.sanity
   const color = theme.sanity.color.input

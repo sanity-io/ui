@@ -1,4 +1,4 @@
-import {CSSObject} from 'styled-components'
+import {CSSObject} from '../../types/styled'
 import {_getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsivePaddingStyleProps} from './types'

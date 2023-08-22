@@ -14,7 +14,7 @@ const ITEMS = [...Array(8).keys()].map((num) => ({
 const OPTIONS = {first: 'first', last: 'last'}
 
 export default function ShouldFocusStory() {
-  const shouldFocus = useSelect('Should focus', OPTIONS, 'first')
+  const shouldFocus = useSelect<keyof typeof OPTIONS>('Should focus', OPTIONS, 'first')
 
   const [popoverOpen, setPopoverOpen] = useState<boolean>(false)
   const handleToggleOpen = useCallback(() => setPopoverOpen((v) => !v), [])

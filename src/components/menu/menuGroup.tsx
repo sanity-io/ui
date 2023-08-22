@@ -54,7 +54,7 @@ export function MenuGroup(
     onItemMouseEnter = menu.onMouseEnter,
     registerElement,
   } = menu
-  const [rootElement, setRootElement] = useState<HTMLButtonElement | null>(null)
+  const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
   const [open, setOpen] = useState(false)
   const shouldFocusRef = useRef<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
