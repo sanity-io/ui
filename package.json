@@ -12,6 +12,7 @@
       "source": "./src/index.ts",
       "require": "./dist/index.js",
       "node": {
+        "module": "./dist/index.esm.js",
         "import": "./dist/index.cjs.mjs"
       },
       "import": "./dist/index.esm.js",
