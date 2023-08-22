@@ -54,7 +54,7 @@ devDependencies:
     version: 4.1.3(semantic-release@21.0.9)
   '@sanity/ui-workshop':
     specifier: ^1.2.9
-    version: 1.2.9(@sanity/icons@2.4.1)(@sanity/ui@1.7.8)(@types/node@20.5.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7)
+    version: 1.2.9(@sanity/icons@2.4.1)(@sanity/ui@1.7.9)(@types/node@20.5.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7)
   '@testing-library/dom':
     specifier: ^9.3.1
     version: 9.3.1
@@ -149,8 +149,8 @@ devDependencies:
     specifier: ^29.6.3
     version: 29.6.3
   lint-staged:
-    specifier: ^13.3.0
-    version: 13.3.0
+    specifier: ^14.0.1
+    version: 14.0.1
   module-alias:
     specifier: ^2.2.3
     version: 2.2.3
@@ -3064,7 +3064,7 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop@1.2.9(@sanity/icons@2.4.1)(@sanity/ui@1.7.8)(@types/node@20.5.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7):
+  /@sanity/ui-workshop@1.2.9(@sanity/icons@2.4.1)(@sanity/ui@1.7.9)(@types/node@20.5.1)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7):
     resolution: {integrity: sha512-i4GdDdFw/soG77JlHRJyBGzn+XLCKVQfyad2qaOGMpKBdpkcdnr9imYQVlNvwxpJ9W86ZOImg+ppR/e9LoNmtA==}
     hasBin: true
     peerDependencies:
@@ -3075,7 +3075,7 @@ packages:
       styled-components: ^5.2 || ^6
     dependencies:
       '@sanity/icons': 2.4.1(react@18.2.0)
-      '@sanity/ui': 1.7.8(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7)
+      '@sanity/ui': 1.7.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7)
       '@vitejs/plugin-react': 4.0.3(vite@4.4.7)
       axe-core: 4.7.2
       cac: 6.7.14
@@ -3104,14 +3104,14 @@ packages:
       - terser
     dev: true
 
-  /@sanity/ui@1.7.8(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7):
-    resolution: {integrity: sha512-ZrnIqvkMxlCwv+Ul8s1FSx6pt6VAO5ZHxtrI1zlWPQ7Kw6yTLTKefqULlr8zGXi8BHe70KVoNLCk/yIPAdWabg==}
+  /@sanity/ui@1.7.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7):
+    resolution: {integrity: sha512-RnNEduhCqXDM3yvn5/ca0grAJi64BFh4H/W9R1zvMB35TaTojhIFDtDOr8RJsEY6cMvAkOKVGmR3t1ebiJ0ILw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
       react-dom: ^18
       react-is: ^18
-      styled-components: ^5.2
+      styled-components: ^5.2 || ^6
     dependencies:
       '@floating-ui/react-dom': 2.0.0(react-dom@18.2.0)(react@18.2.0)
       '@sanity/color': 2.2.5
@@ -8186,8 +8186,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /lint-staged@13.3.0:
-    resolution: {integrity: sha512-mPRtrYnipYYv1FEE134ufbWpeggNTo+O/UPzngoaKzbzHAthvR55am+8GfHTnqNRQVRRrYQLGW9ZyUoD7DsBHQ==}
+  /lint-staged@14.0.1:
+    resolution: {integrity: sha512-Mw0cL6HXnHN1ag0mN/Dg4g6sr8uf8sn98w2Oc1ECtFto9tvRF7nkXGJRbx8gPlHyoR0pLyBr2lQHbWwmUHe1Sw==}
     engines: {node: ^16.14.0 || >=18.0.0}
     hasBin: true
     dependencies:
