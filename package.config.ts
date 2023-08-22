@@ -4,6 +4,7 @@ export default defineConfig({
   extract: {
     rules: {
       'ae-internal-missing-underscore': 'off',
+      'ae-incompatible-release-tags': 'warn',
     },
   },
   legacyExports: true,
