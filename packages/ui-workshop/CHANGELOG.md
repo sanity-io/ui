@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.10](https://github.com/sanity-io/ui-workshop/compare/v1.2.9...v1.2.10) (2023-08-22)
+
+### Bug Fixes
+
+- add `node.module` export condition ([87ce223](https://github.com/sanity-io/ui-workshop/commit/87ce2234a2c5c8c3096046573079f4a21b4e0eb2))
+
 ## [1.2.9](https://github.com/sanity-io/ui-workshop/compare/v1.2.8...v1.2.9) (2023-07-25)
 
 ### Bug Fixes
