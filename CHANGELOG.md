@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.9](https://github.com/sanity-io/ui/compare/v1.7.8...v1.7.9) (2023-08-22)
+
+### Bug Fixes
+
+- **deps:** allow `styled-components` v6 ([b6a27da](https://github.com/sanity-io/ui/commit/b6a27da8b4bff038dbf5613ca14891890c867f61))
+
 ## [1.7.8](https://github.com/sanity-io/ui/compare/v1.7.7...v1.7.8) (2023-08-16)
 
 ### Bug Fixes
