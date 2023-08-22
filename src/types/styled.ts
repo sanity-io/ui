@@ -4,5 +4,6 @@
 
 import type {StyledObject} from 'styled-components'
 
+/** @internal */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CSSObject = StyledObject<any>
