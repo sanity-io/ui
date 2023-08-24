@@ -23,11 +23,13 @@ import {
 import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
 import {useArrayProp, useForwardedRef} from '../../hooks'
+import {useDelayedState} from '../../hooks/useDelayedState'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {TooltipArrow} from './tooltipArrow'
+import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
 /**
  * @public
@@ -45,6 +47,17 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   portal?: boolean | string
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
+  /**
+   * @beta Adds a delay to open the tooltip.
+   * If only a number is passed, it will be used for both opening and closing.
+   * If an object is passed, it can be used to set different delays for opening and closing.
+   */
+  delay?:
+    | number
+    | {
+        open: number
+        close: number
+      }
 }
 
 const Root = styled(Layer)`
@@ -72,6 +85,7 @@ export const Tooltip = forwardRef(function Tooltip(
     scheme,
     shadow = 2,
     zOffset = theme.sanity.layer?.tooltip.zOffset,
+    delay,
     ...restProps
   } = props
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
@@ -144,11 +158,33 @@ export const Tooltip = forwardRef(function Tooltip(
     return style
   }, [arrowX, arrowY, staticSide])
 
-  const [isOpen, setIsOpen] = useState(false)
-  const handleBlur = useCallback(() => setIsOpen(false), [])
-  const handleFocus = useCallback(() => setIsOpen(true), [])
-  const handleMouseEnter = useCallback(() => setIsOpen(true), [])
-  const handleMouseLeave = useCallback(() => setIsOpen(false), [])
+  const [isOpen, setIsOpen] = useDelayedState(false)
+  const delayGroupContext = useTooltipDelayGroup()
+  const isInsideGroup = delayGroupContext !== null
+  const openDelayProp = delay && typeof delay === 'object' ? delay.open : delay
+  const closeDelayProp = delay && typeof delay === 'object' ? delay.close : delay
+
+  const openDelay = isInsideGroup ? delayGroupContext.openDelay : openDelayProp
+  const closeDelay = isInsideGroup ? delayGroupContext.closeDelay : closeDelayProp
+
+  const handleIsOpenChange = useCallback(
+    (state: boolean) => {
+      if (isInsideGroup) {
+        /**
+         * Notify the group that the tooltip state has changed.
+         * When closing, add a 200ms delay, allowing the user to reach the next tooltip.
+         * */
+        delayGroupContext?.setIsGroupActive(state, state ? openDelay : 200)
+      }
+      setIsOpen(state, state ? openDelay : closeDelay)
+    },
+    [openDelay, closeDelay],
+  )
+
+  const handleBlur = useCallback(() => handleIsOpenChange(false), [handleIsOpenChange])
+  const handleFocus = useCallback(() => handleIsOpenChange(true), [handleIsOpenChange])
+  const handleMouseEnter = useCallback(() => handleIsOpenChange(true), [handleIsOpenChange])
+  const handleMouseLeave = useCallback(() => handleIsOpenChange(false), [handleIsOpenChange])
 
   // Detect whether the mouse is moving outside of the reference element. This is sometimes
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
@@ -164,7 +200,7 @@ export const Tooltip = forwardRef(function Tooltip(
         (event.target instanceof Node && referenceElement.contains(event.target))
 
       if (!isHoveringReference) {
-        setIsOpen(false)
+        handleIsOpenChange(false)
         window.removeEventListener('mousemove', handleWindowMouseMove)
       }
     }
@@ -174,16 +210,16 @@ export const Tooltip = forwardRef(function Tooltip(
     return () => {
       window.removeEventListener('mousemove', handleWindowMouseMove)
     }
-  }, [isOpen, referenceElement])
+  }, [isOpen, referenceElement, handleIsOpenChange])
 
   // Close when `disabled` changes to `true`
   useEffect(() => {
-    if (disabled) setIsOpen(false)
+    if (disabled) handleIsOpenChange(false)
   }, [disabled])
 
   // Close when `content` changes to falsy
   useEffect(() => {
-    if (!content) setIsOpen(false)
+    if (!content) handleIsOpenChange(false)
   }, [content])
 
   // Update reference

@@ -5,6 +5,7 @@ import {
 } from '@testing-library/react'
 import {StrictMode, Fragment, ReactElement, ReactNode} from 'react'
 import {Card, studioTheme, ThemeColorSchemeKey, ThemeProvider} from '../src'
+import './mocks'
 
 export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ThemeColorSchemeKey
