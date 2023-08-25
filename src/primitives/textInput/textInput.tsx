@@ -133,11 +133,6 @@ const RightCard = styled(Card)`
   right: 0;
 `
 
-const RightFlex = styled(Flex)`
-  justify-content: center;
-  align-content: center;
-`
-
 /**
  * @public
  */
@@ -297,7 +292,7 @@ export const TextInput = forwardRef(function TextInput(
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
         >
-          <RightFlex>
+          <Flex align="center" justify="center">
             <Button
               aria-label="Clear"
               data-qa="clear-button"
@@ -310,7 +305,7 @@ export const TextInput = forwardRef(function TextInput(
               onClick={handleClearClick}
               onMouseDown={handleClearMouseDown}
             />
-          </RightFlex>
+          </Flex>
         </RightCard>
       ),
     [
