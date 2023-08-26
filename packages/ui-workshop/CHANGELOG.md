@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.11](https://github.com/sanity-io/ui-workshop/compare/v1.2.10...v1.2.11) (2023-08-26)
+
+### Bug Fixes
+
+- set default `jsx` esbuild option ([403f43a](https://github.com/sanity-io/ui-workshop/commit/403f43a1e6915076e9538bf395c9ab2515910b6b))
+
 ## [1.2.10](https://github.com/sanity-io/ui-workshop/compare/v1.2.9...v1.2.10) (2023-08-22)
 
 ### Bug Fixes
