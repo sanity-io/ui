@@ -26,7 +26,7 @@ const HTML = `<!DOCTYPE html>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/main.tsx"></script>
+    <script type="module" src="/.workshop/main.tsx"></script>
   </body>
 </html>
 `

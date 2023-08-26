@@ -1,23 +1,22 @@
 import path from 'path'
 import react from '@vitejs/plugin-react'
 import {UserConfig} from 'vite'
-import {WorkshopConfigOptions} from '../core/cli'
 
 /** @internal */
 export function createViteConfig(options: {
-  config?: WorkshopConfigOptions
   cwd: string
   outDir: string
+  runtimeDir: string
 }): UserConfig {
-  const {config, cwd, outDir} = options
+  const {cwd, outDir, runtimeDir} = options
 
   return {
     build: {
-      outDir: path.resolve(cwd, 'dist'),
+      outDir,
       rollupOptions: {
         input: {
-          main: path.resolve(outDir, 'index.html'),
-          frame: path.resolve(outDir, 'frame/index.html'),
+          main: path.resolve(runtimeDir, 'index.html'),
+          frame: path.resolve(runtimeDir, 'frame/index.html'),
         },
       },
     },
@@ -27,7 +26,6 @@ export function createViteConfig(options: {
       },
     },
     plugins: [react()],
-    resolve: {alias: config?.alias},
-    root: path.resolve(cwd, '.workshop'),
+    root: cwd,
   }
 }
