@@ -1,26 +1,29 @@
 import {readFile} from 'fs/promises'
 import path from 'path'
-import type {WorkshopConfigOptions} from '@sanity/ui-workshop'
+import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 import express from 'express'
-import {createServer as createViteServer} from 'vite'
+import {InlineConfig, createServer as createViteServer} from 'vite'
 import {createViteConfig} from '../viteConfig'
 
 export async function createDevServer(options: {
-  config?: WorkshopConfigOptions
   cwd: string
   outDir: string
+  runtime?: WorkshopRuntimeOptions
+  runtimeDir: string
 }): Promise<express.Application> {
-  const {config, cwd, outDir} = options
+  const {cwd, outDir, runtime, runtimeDir} = options
 
   const app = express()
 
-  const vite = await createViteServer({
-    ...createViteConfig({config, cwd, outDir}),
+  const baseViteConfig: InlineConfig = {
+    ...createViteConfig({cwd, outDir, runtimeDir}),
     appType: 'custom', // don't include HTML middlewares
     configFile: false,
     logLevel: 'info',
     server: {middlewareMode: true},
-  })
+  }
+  const viteConfig = runtime?.vite?.(baseViteConfig) || baseViteConfig
+  const vite = await createViteServer(viteConfig)
 
   app.use(vite.middlewares)
 
@@ -34,7 +37,7 @@ export async function createDevServer(options: {
     }
 
     try {
-      let template = await readFile(path.resolve(outDir, htmlPath), 'utf-8')
+      let template = await readFile(path.resolve(runtimeDir, htmlPath), 'utf-8')
 
       template = await vite.transformIndexHtml(url, template)
 
