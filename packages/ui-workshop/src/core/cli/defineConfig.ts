@@ -1,11 +1,7 @@
-import {WorkshopConfig} from '../config/types'
+import {WorkshopConfig} from '../config'
 
 /** @public */
-export interface WorkshopConfigOptions extends Omit<WorkshopConfig, 'scopes'> {
-  alias?: Record<string, string>
-  pattern?: string | string[]
-  port?: number
-}
+export interface WorkshopConfigOptions extends Omit<WorkshopConfig, 'scopes'> {}
 
 /** @public */
 export function defineConfig(config: WorkshopConfigOptions): WorkshopConfigOptions {

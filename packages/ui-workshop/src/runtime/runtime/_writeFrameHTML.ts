@@ -31,7 +31,7 @@ const HTML = `<!DOCTYPE html>
         window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__
       }
     </script>
-    <script type="module" src="/frame/main.tsx"></script>
+    <script type="module" src="/.workshop/frame/main.tsx"></script>
   </body>
 </html>
 `

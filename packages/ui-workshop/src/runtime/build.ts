@@ -1,7 +1,9 @@
 import {writeFile} from 'fs/promises'
 import path from 'path'
+import cpx from 'cpx'
+import rimraf from 'rimraf'
 import {build as viteBuild} from 'vite'
-import {_loadConfig} from './config'
+import {_loadRuntime} from './config/_loadRuntime'
 import {DEFAULT_PATTERN} from './constants'
 import {_getFiles} from './lib/_getFiles'
 import {_compileModule} from './runtime/_compileModule'
@@ -21,14 +23,15 @@ function getScopes(options: {cwd: string; pattern: string | string[]}): Promise<
 /** @alpha */
 export async function build(options: {cwd: string}): Promise<void> {
   const {cwd} = options
-  const config = await _loadConfig({packagePath: cwd})
-  const outDir = path.resolve(cwd, '.workshop')
+  const runtime = await _loadRuntime({packagePath: cwd})
+  const runtimeDir = path.resolve(cwd, '.workshop')
+  const outDir = runtime?.build?.outDir || path.resolve(cwd, 'dist')
 
-  await buildStaticFiles({outDir})
+  await buildStaticFiles({runtimeDir})
 
   const scopes = await getScopes({
     cwd,
-    pattern: config?.pattern || DEFAULT_PATTERN,
+    pattern: runtime?.pattern || DEFAULT_PATTERN,
   })
 
   const relativeScopes = scopes.map((f) => {
@@ -37,7 +40,15 @@ export async function build(options: {cwd: string}): Promise<void> {
 
   const code = _compileModule(relativeScopes)
 
-  await writeFile(path.resolve(outDir, 'scopes.ts'), code)
+  await writeFile(path.resolve(runtimeDir, 'scopes.ts'), code)
 
-  await viteBuild(createViteConfig({config, cwd, outDir}))
+  const baseViteConfig = createViteConfig({cwd, outDir, runtimeDir})
+  const viteConfig = runtime?.vite?.(baseViteConfig) || baseViteConfig
+
+  await viteBuild(viteConfig)
+
+  // copy
+  cpx.copySync(path.resolve(outDir, '.workshop', '**/*'), outDir)
+
+  await rimraf(path.resolve(outDir, '.workshop'))
 }
