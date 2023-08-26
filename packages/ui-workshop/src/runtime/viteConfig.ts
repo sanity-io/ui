@@ -21,6 +21,11 @@ export function createViteConfig(options: {
         },
       },
     },
+    optimizeDeps: {
+      esbuildOptions: {
+        jsx: 'automatic',
+      },
+    },
     plugins: [react()],
     resolve: {alias: config?.alias},
     root: path.resolve(cwd, '.workshop'),
