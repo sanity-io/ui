@@ -19,6 +19,7 @@ import {
   useState,
   CSSProperties,
   ForwardedRef,
+  useId,
 } from 'react'
 import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
@@ -28,6 +29,7 @@ import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
+import {Delay} from '../types'
 import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
@@ -48,16 +50,13 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
   /**
-   * @beta Adds a delay to open the tooltip.
-   * If only a number is passed, it will be used for both opening and closing.
-   * If an object is passed, it can be used to set different delays for opening and closing.
+   * @beta Adds a delay to open or close the tooltip.  Defaults to 0.
+   *
+   * If only a `number` is passed, it will be used for both opening and closing.
+   *
+   * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
    */
-  delay?:
-    | number
-    | {
-        open: number
-        close: number
-      }
+  delay?: Delay
 }
 
 const Root = styled(Layer)`
@@ -158,27 +157,39 @@ export const Tooltip = forwardRef(function Tooltip(
     return style
   }, [arrowX, arrowY, staticSide])
 
+  const tooltipId = useId()
   const [isOpen, setIsOpen] = useDelayedState(false)
   const delayGroupContext = useTooltipDelayGroup()
+  const showTooltip = isOpen || delayGroupContext?.openTooltipId === tooltipId
+
   const isInsideGroup = delayGroupContext !== null
-  const openDelayProp = delay && typeof delay === 'object' ? delay.open : delay
-  const closeDelayProp = delay && typeof delay === 'object' ? delay.close : delay
+  const openDelayProp = typeof delay === 'number' ? delay : delay?.open || 0
+  const closeDelayProp = typeof delay === 'number' ? delay : delay?.close || 0
 
   const openDelay = isInsideGroup ? delayGroupContext.openDelay : openDelayProp
   const closeDelay = isInsideGroup ? delayGroupContext.closeDelay : closeDelayProp
 
   const handleIsOpenChange = useCallback(
-    (state: boolean) => {
+    (open: boolean) => {
       if (isInsideGroup) {
-        /**
-         * Notify the group that the tooltip state has changed.
-         * When closing, add a 200ms delay, allowing the user to reach the next tooltip.
-         * */
-        delayGroupContext?.setIsGroupActive(state, state ? openDelay : 200)
+        //  When it's inside a group, the open or close status will be handled by the group.
+        if (open) {
+          delayGroupContext.setIsGroupActive(open, openDelay)
+          delayGroupContext.setOpenTooltipId(tooltipId, openDelay)
+        } else {
+          const minimumGroupDeactivateDelay = 200 // We should provide some delay to allow the user to reach the next tooltip.
+          const groupDeactivateDelay =
+            closeDelay > minimumGroupDeactivateDelay ? closeDelay : minimumGroupDeactivateDelay
+
+          delayGroupContext.setIsGroupActive(open, groupDeactivateDelay)
+          delayGroupContext.setOpenTooltipId(null, closeDelay)
+        }
+      } else {
+        // When it's not inside a group, the open or close status will be handled by the tooltip itself.
+        setIsOpen(open, open ? openDelay : closeDelay)
       }
-      setIsOpen(state, state ? openDelay : closeDelay)
     },
-    [openDelay, closeDelay],
+    [isInsideGroup, delayGroupContext, openDelay, tooltipId, closeDelay, setIsOpen],
   )
 
   const handleBlur = useCallback(() => handleIsOpenChange(false), [handleIsOpenChange])
@@ -215,12 +226,12 @@ export const Tooltip = forwardRef(function Tooltip(
   // Close when `disabled` changes to `true`
   useEffect(() => {
     if (disabled) handleIsOpenChange(false)
-  }, [disabled])
+  }, [disabled, handleIsOpenChange])
 
   // Close when `content` changes to falsy
   useEffect(() => {
     if (!content) handleIsOpenChange(false)
-  }, [content])
+  }, [content, handleIsOpenChange])
 
   // Update reference
   useEffect(() => refs.setReference(referenceElement), [referenceElement, refs])
@@ -293,7 +304,7 @@ export const Tooltip = forwardRef(function Tooltip(
     <>
       {child}
 
-      {isOpen && (
+      {showTooltip && (
         <>
           {portal ? (
             <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>

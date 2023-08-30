@@ -1,8 +1,9 @@
 /** @jest-environment jsdom */
-
-import {Text, Button} from '@sanity/ui'
 import {screen, act, fireEvent} from '@testing-library/react'
+import '../../../test/mocks/resizeObserver.mock'
+import '../../../test/mocks/matchMedia.mock'
 import {render} from '../../../test'
+import {Text, Button} from '../../primitives'
 import {Tooltip, TooltipDelayGroupProvider} from '../tooltip'
 
 describe('Tooltip', () => {
@@ -15,6 +16,7 @@ describe('Tooltip', () => {
       )
 
       const button = screen.getByText('Hover me')
+
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
 
@@ -30,6 +32,7 @@ describe('Tooltip', () => {
     it('should support delays to show and hide the tooltip.', () => {
       jest.useFakeTimers()
       const delay = 200
+
       render(
         <Tooltip
           content={<Text size={1}>{'Tooltip content'}</Text>}
@@ -41,6 +44,7 @@ describe('Tooltip', () => {
       )
 
       const button = screen.getByText('Hover me')
+
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
 
@@ -65,6 +69,7 @@ describe('Tooltip', () => {
       jest.useFakeTimers()
       const openDelay = 200
       const closeDelay = 150
+
       render(
         <Tooltip
           content={<Text size={1}>{'Tooltip content'}</Text>}
@@ -79,6 +84,7 @@ describe('Tooltip', () => {
       )
 
       const button = screen.getByText('Hover me')
+
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
 
@@ -102,8 +108,9 @@ describe('Tooltip', () => {
   })
 
   describe('Using the <TooltipDelayGroupProvider />', () => {
-    it('should support groups with the same delay.', () => {
+    it('should support groups with the same delay to open and close.', () => {
       const delay = 150
+
       jest.useFakeTimers()
       render(
         <TooltipDelayGroupProvider delay={delay}>
@@ -122,6 +129,7 @@ describe('Tooltip', () => {
 
       const button1 = screen.getByText('Button 1')
       const button2 = screen.getByText('Button 2')
+
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
@@ -142,16 +150,10 @@ describe('Tooltip', () => {
       fireEvent.mouseOut(button1)
       fireEvent.mouseEnter(button2)
 
-      // Validate Tooltip 1 is still showing, it has a close delay of 150ms
-      screen.getByText('Tooltip 1')
-
-      // Validate Tooltip 2 is rendered after 1ms
+      // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
       act(() => jest.advanceTimersByTime(1))
-      screen.getByText('Tooltip 2')
-
-      // Validate Tooltip 1 is not rendered anymore after 150ms
-      act(() => jest.advanceTimersByTime(delay))
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
+      screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
@@ -179,6 +181,7 @@ describe('Tooltip', () => {
     it('should support groups with different open and close delay.', () => {
       const openDelay = 250
       const closeDelay = 150
+
       jest.useFakeTimers()
       render(
         <TooltipDelayGroupProvider
@@ -202,6 +205,7 @@ describe('Tooltip', () => {
 
       const button1 = screen.getByText('Button 1')
       const button2 = screen.getByText('Button 2')
+
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
@@ -209,7 +213,7 @@ describe('Tooltip', () => {
       // Hovers on first button, it should show first tooltip only
       fireEvent.mouseEnter(button1)
       act(() => jest.advanceTimersByTime(openDelay / 2))
-      // Content should not be rendered yet, we have a delay of 150ms
+      // Content should not be rendered yet, we have a delay of2150ms
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
       act(() => jest.advanceTimersByTime(openDelay / 2))
@@ -222,16 +226,10 @@ describe('Tooltip', () => {
       fireEvent.mouseOut(button1)
       fireEvent.mouseEnter(button2)
 
-      // Validate Tooltip 1 is still showing, it has a close delay of 150ms
-      screen.getByText('Tooltip 1')
-
-      // Validate Tooltip 2 is rendered after 1ms
+      // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
       act(() => jest.advanceTimersByTime(1))
-      screen.getByText('Tooltip 2')
-
-      // Validate Tooltip 1 is not rendered anymore after 150ms
-      act(() => jest.advanceTimersByTime(closeDelay))
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
+      screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
@@ -255,6 +253,26 @@ describe('Tooltip', () => {
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
       act(() => jest.advanceTimersByTime(openDelay / 2))
       screen.getByText('Tooltip 2')
+    })
+    it("should throw an error if it's nested inside another <TooltipDelayGroupProvider />", () => {
+      // eslint-disable-next-line no-console
+      console.error = jest.fn() // Silence console.error as we are actually expecting an error in this test.
+      expect(() => {
+        render(
+          <TooltipDelayGroupProvider delay={100}>
+            <TooltipDelayGroupProvider delay={100}>
+              <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} placement={'top'} delay={400}>
+                <Button mode="bleed" text="Button 1" />
+              </Tooltip>
+            </TooltipDelayGroupProvider>
+          </TooltipDelayGroupProvider>,
+        )
+      }).toThrow(
+        'TooltipDelayGroupProvider cannot be nested inside another TooltipDelayGroupProvider',
+      )
+
+      // Clean up the console.error mock
+      jest.clearAllMocks()
     })
   })
 })

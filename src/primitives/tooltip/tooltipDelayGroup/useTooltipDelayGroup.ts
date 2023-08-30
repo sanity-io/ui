@@ -7,5 +7,6 @@ import {TooltipDelayGroupContextValue} from './types'
  */
 export function useTooltipDelayGroup(): TooltipDelayGroupContextValue | null {
   const value = useContext(TooltipDelayGroupContext)
+
   return value
 }

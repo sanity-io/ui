@@ -1,21 +1,22 @@
+import {useMemo} from 'react'
 import {useDelayedState} from '../../../hooks/useDelayedState'
+import {Delay} from '../../types'
 import {TooltipDelayGroupContext} from './tooltipDelayGroupContext'
+import {TooltipDelayGroupContextValue} from './types'
+import {useTooltipDelayGroup} from './useTooltipDelayGroup'
 /**
  * @beta
  * */
 export interface TooltipDelayGroupProviderProps {
   children?: React.ReactNode
   /**
-   * @beta Adds a delay to open the tooltip.
-   * If only a number is passed, it will be used for both opening and closing.
-   * If an object is passed, it can be used to set different delays for opening and closing.
+   * @beta Handles the delays to open or close a tooltip inside a group
+   *
+   * If only a `number` is passed, it will be used for both opening and closing.
+   *
+   * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
    */
-  delay?:
-    | number
-    | {
-        open: number
-        close: number
-      }
+  delay: Delay
 }
 
 /**
@@ -28,19 +29,33 @@ export function TooltipDelayGroupProvider(
 ): React.ReactElement {
   const {children, delay} = props
   const [isGroupActive, setIsGroupActive] = useDelayedState(false)
-  const openDelay = delay && typeof delay === 'object' ? delay.open : delay || 0
-  const closeDelay = delay && typeof delay === 'object' ? delay.close : delay || 0
+  const [openTooltipId, setOpenTooltipId] = useDelayedState<string | null>(null)
+
+  const isInsideContext = useTooltipDelayGroup()
+
+  if (isInsideContext) {
+    throw new Error(
+      'TooltipDelayGroupProvider cannot be nested inside another TooltipDelayGroupProvider',
+    )
+  }
+
+  const openDelay = typeof delay === 'number' ? delay : delay?.open || 0
+  const closeDelay = typeof delay === 'number' ? delay : delay?.close || 0
+
+  const value: TooltipDelayGroupContextValue = useMemo(
+    () => ({
+      isGroupActive: isGroupActive,
+      setIsGroupActive: setIsGroupActive,
+      openTooltipId: openTooltipId,
+      setOpenTooltipId: setOpenTooltipId,
+      // When the group is active, we want the next tooltip to open immediately.
+      openDelay: isGroupActive ? 1 : openDelay,
+      closeDelay: closeDelay,
+    }),
+    [closeDelay, isGroupActive, openDelay, openTooltipId, setIsGroupActive, setOpenTooltipId],
+  )
+
   return (
-    <TooltipDelayGroupContext.Provider
-      value={{
-        isGroupActive: isGroupActive,
-        setIsGroupActive: setIsGroupActive,
-        // When the group is active, we want the next tooltip to open immediately.
-        openDelay: isGroupActive ? 1 : openDelay,
-        closeDelay: closeDelay,
-      }}
-    >
-      {children}
-    </TooltipDelayGroupContext.Provider>
+    <TooltipDelayGroupContext.Provider value={value}>{children}</TooltipDelayGroupContext.Provider>
   )
 }

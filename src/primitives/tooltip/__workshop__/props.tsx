@@ -59,8 +59,8 @@ export default function PropsStory() {
             Grouped tooltips
           </Text>
           <Text align="center" size={1}>
-            We are inside a group, so after the first popover shows, you won't have a delay on the
-            followings.
+            All tooltip delays are set to 1ms after the first tooltip within a DelayGroupProvider
+            opens.
           </Text>
           <Flex align="center" justify="center" padding={4} sizing="border" gap={4}>
             <TooltipDelayGroupProvider
