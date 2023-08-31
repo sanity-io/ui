@@ -20,15 +20,19 @@ import {
   useState,
   CSSProperties,
   ForwardedRef,
+  useId,
 } from 'react'
 import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
 import {useArrayProp, useForwardedRef} from '../../hooks'
+import {useDelayedState} from '../../hooks/useDelayedState'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
+import {Delay} from '../types'
 import {TooltipArrow} from './tooltipArrow'
+import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
 /**
  * @public
@@ -46,6 +50,14 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   portal?: boolean | string
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
+  /**
+   * @public Adds a delay to open or close the tooltip.  Defaults to 0.
+   *
+   * If only a `number` is passed, it will be used for both opening and closing.
+   *
+   * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
+   */
+  delay?: Delay
 }
 
 const Root = styled(Layer)`
@@ -73,6 +85,7 @@ export const Tooltip = forwardRef(function Tooltip(
     scheme,
     shadow = 2,
     zOffset = theme.sanity.layer?.tooltip.zOffset,
+    delay,
     ...restProps
   } = props
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
@@ -149,11 +162,45 @@ export const Tooltip = forwardRef(function Tooltip(
     return style
   }, [arrowX, arrowY, staticSide])
 
-  const [isOpen, setIsOpen] = useState(false)
-  const handleBlur = useCallback(() => setIsOpen(false), [])
-  const handleFocus = useCallback(() => setIsOpen(true), [])
-  const handleMouseEnter = useCallback(() => setIsOpen(true), [])
-  const handleMouseLeave = useCallback(() => setIsOpen(false), [])
+  const tooltipId = useId()
+  const [isOpen, setIsOpen] = useDelayedState(false)
+  const delayGroupContext = useTooltipDelayGroup()
+  const showTooltip = isOpen || delayGroupContext?.openTooltipId === tooltipId
+
+  const isInsideGroup = delayGroupContext !== null
+  const openDelayProp = typeof delay === 'number' ? delay : delay?.open || 0
+  const closeDelayProp = typeof delay === 'number' ? delay : delay?.close || 0
+
+  const openDelay = isInsideGroup ? delayGroupContext.openDelay : openDelayProp
+  const closeDelay = isInsideGroup ? delayGroupContext.closeDelay : closeDelayProp
+
+  const handleIsOpenChange = useCallback(
+    (open: boolean) => {
+      if (isInsideGroup) {
+        //  When it's inside a group, the open or close status will be handled by the group.
+        if (open) {
+          delayGroupContext.setIsGroupActive(open, openDelay)
+          delayGroupContext.setOpenTooltipId(tooltipId, openDelay)
+        } else {
+          const minimumGroupDeactivateDelay = 200 // We should provide some delay to allow the user to reach the next tooltip.
+          const groupDeactivateDelay =
+            closeDelay > minimumGroupDeactivateDelay ? closeDelay : minimumGroupDeactivateDelay
+
+          delayGroupContext.setIsGroupActive(open, groupDeactivateDelay)
+          delayGroupContext.setOpenTooltipId(null, closeDelay)
+        }
+      } else {
+        // When it's not inside a group, the open or close status will be handled by the tooltip itself.
+        setIsOpen(open, open ? openDelay : closeDelay)
+      }
+    },
+    [isInsideGroup, delayGroupContext, openDelay, tooltipId, closeDelay, setIsOpen],
+  )
+
+  const handleBlur = useCallback(() => handleIsOpenChange(false), [handleIsOpenChange])
+  const handleFocus = useCallback(() => handleIsOpenChange(true), [handleIsOpenChange])
+  const handleMouseEnter = useCallback(() => handleIsOpenChange(true), [handleIsOpenChange])
+  const handleMouseLeave = useCallback(() => handleIsOpenChange(false), [handleIsOpenChange])
 
   // Detect whether the mouse is moving outside of the reference element. This is sometimes
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
@@ -169,7 +216,7 @@ export const Tooltip = forwardRef(function Tooltip(
         (event.target instanceof Node && referenceElement.contains(event.target))
 
       if (!isHoveringReference) {
-        setIsOpen(false)
+        handleIsOpenChange(false)
         window.removeEventListener('mousemove', handleWindowMouseMove)
       }
     }
@@ -179,17 +226,17 @@ export const Tooltip = forwardRef(function Tooltip(
     return () => {
       window.removeEventListener('mousemove', handleWindowMouseMove)
     }
-  }, [isOpen, referenceElement])
+  }, [isOpen, referenceElement, handleIsOpenChange])
 
   // Close when `disabled` changes to `true`
   useEffect(() => {
-    if (disabled) setIsOpen(false)
-  }, [disabled])
+    if (disabled) handleIsOpenChange(false)
+  }, [disabled, handleIsOpenChange])
 
   // Close when `content` changes to falsy
   useEffect(() => {
-    if (!content) setIsOpen(false)
-  }, [content])
+    if (!content) handleIsOpenChange(false)
+  }, [content, handleIsOpenChange])
 
   // Update reference
   useEffect(() => refs.setReference(referenceElement), [referenceElement, refs])
@@ -268,7 +315,7 @@ export const Tooltip = forwardRef(function Tooltip(
     <>
       {child}
 
-      {isOpen && (
+      {showTooltip && (
         <>
           {portal ? (
             <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>

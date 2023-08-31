@@ -129,3 +129,13 @@ export interface ResponsiveShadowProps {
 export interface ResponsiveWidthProps {
   width?: number | 'auto' | (number | 'auto')[]
 }
+
+/**
+ * @beta
+ */
+export type Delay =
+  | number
+  | Partial<{
+      open: number
+      close: number
+    }>
