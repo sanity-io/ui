@@ -31,6 +31,7 @@ import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
+import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
 import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
@@ -63,21 +64,6 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
 const Root = styled(Layer)`
   pointer-events: none;
 `
-
-const DEFAULT_FALLBACK_PLACEMENTS: Record<Placement, Placement[]> = {
-  top: ['bottom', 'left', 'right'],
-  'top-start': ['bottom-start', 'left-start', 'right-start'],
-  'top-end': ['bottom-end', 'left-end', 'right-end'],
-  bottom: ['top', 'left', 'right'],
-  'bottom-start': ['top-start', 'left-start', 'right-start'],
-  'bottom-end': ['top-end', 'left-end', 'right-end'],
-  left: ['right', 'top', 'bottom'],
-  'left-start': ['right-start', 'top-start', 'bottom-start'],
-  'left-end': ['right-end', 'top-end', 'bottom-end'],
-  right: ['left', 'top', 'bottom'],
-  'right-start': ['left-start', 'top-start', 'bottom-start'],
-  'right-end': ['left-end', 'top-end', 'bottom-end'],
-}
 
 /**
  * @public
