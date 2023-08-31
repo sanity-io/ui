@@ -20,12 +20,10 @@ import {
   useMemo,
   useRef,
 } from 'react'
-
 import {useForwardedRef, useArrayProp, useElementSize, useMediaIndex} from '../../hooks'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
-
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_POPOVER_DISTANCE,
