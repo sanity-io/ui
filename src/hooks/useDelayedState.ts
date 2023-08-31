@@ -12,16 +12,13 @@ export function useDelayedState<S>(
 
   const onStateChange = useCallback((nextState: SetStateAction<S>, delay?: number) => {
     const action = () => {
-      setState((prev) => {
-        if (typeof nextState === 'function') {
-          const callback = nextState as (prevState: S) => S
-          return callback(prev)
-        }
-        return nextState
-      })
+      setState(nextState)
     }
     // A new state change has been initiated, cancel the previous one.
-    if (delayedAction.current) clearTimeout(delayedAction.current)
+    if (delayedAction.current) {
+      clearTimeout(delayedAction.current)
+      delayedAction.current = undefined
+    }
     if (!delay) return action()
     delayedAction.current = setTimeout(action, delay)
   }, [])
