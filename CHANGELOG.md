@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.12](https://github.com/sanity-io/ui/compare/v1.7.11...v1.7.12) (2023-08-31)
+
+### Reverts
+
+- Revert "fix: temporarily revert #1119 because of a regression bug" ([d6f1f6d](https://github.com/sanity-io/ui/commit/d6f1f6da6855e496afbf346f51ae19f60a4b1b04)), closes [#1119](https://github.com/sanity-io/ui/issues/1119)
+
 ## [1.7.11](https://github.com/sanity-io/ui/compare/v1.7.10...v1.7.11) (2023-08-24)
 
 ### Bug Fixes
