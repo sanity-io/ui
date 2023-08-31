@@ -105,7 +105,7 @@ export const Popover = memo(
       content,
       disabled,
       fallbackPlacements = props.fallbackPlacements ??
-        DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'top'],
+        DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
       matchReferenceWidth,
       floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
       open,
@@ -143,7 +143,7 @@ export const Popover = memo(
     // - `width` property changes
     const width = calcCurrentWidth({mediaIndex, theme, width: widthArrayProp})
     const widthRef = useRef(width)
-    console.log(fallbackPlacements)
+
     useEffect(() => {
       widthRef.current = width
     }, [width])

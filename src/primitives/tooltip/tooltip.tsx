@@ -94,7 +94,7 @@ export const Tooltip = forwardRef(function Tooltip(
     content,
     disabled,
     fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
-      DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'top'],
+      DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     padding,
     placement: placementProp = 'bottom',
     portal,
