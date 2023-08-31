@@ -37,6 +37,21 @@ import {PopoverUpdateCallback, PopoverWidth} from './types'
 
 export type {PopoverUpdateCallback}
 
+const DEFAULT_FALLBACK_PLACEMENTS: Record<Placement, Placement[]> = {
+  top: ['bottom', 'left', 'right'],
+  'top-start': ['bottom-start', 'left-start', 'right-start'],
+  'top-end': ['bottom-end', 'left-end', 'right-end'],
+  bottom: ['top', 'left', 'right'],
+  'bottom-start': ['top-start', 'left-start', 'right-start'],
+  'bottom-end': ['top-end', 'left-end', 'right-end'],
+  left: ['right', 'top', 'bottom'],
+  'left-start': ['right-start', 'top-start', 'bottom-start'],
+  'left-end': ['right-end', 'top-end', 'bottom-end'],
+  right: ['left', 'top', 'bottom'],
+  'right-start': ['left-start', 'top-start', 'bottom-start'],
+  'right-end': ['left-end', 'top-end', 'bottom-end'],
+}
+
 /** @public */
 export interface PopoverProps
   extends Omit<LayerProps, 'as'>,
@@ -89,20 +104,8 @@ export const Popover = memo(
       constrainSize = false,
       content,
       disabled,
-      fallbackPlacements = [
-        'top',
-        'top-start',
-        'top-end',
-        'bottom',
-        'bottom-start',
-        'bottom-end',
-        'left',
-        'left-start',
-        'left-end',
-        'right',
-        'right-start',
-        'right-end',
-      ],
+      fallbackPlacements = props.fallbackPlacements ??
+        DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'top'],
       matchReferenceWidth,
       floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
       open,
@@ -140,7 +143,7 @@ export const Popover = memo(
     // - `width` property changes
     const width = calcCurrentWidth({mediaIndex, theme, width: widthArrayProp})
     const widthRef = useRef(width)
-
+    console.log(fallbackPlacements)
     useEffect(() => {
       widthRef.current = width
     }, [width])
