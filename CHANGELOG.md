@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/sanity-io/ui/compare/v1.8.0...v1.8.1) (2023-08-31)
+
+### Bug Fixes
+
+- **textinput:** correctly center <TextInput> clear button on smaller font sizes ([#1127](https://github.com/sanity-io/ui/issues/1127)) ([8a08209](https://github.com/sanity-io/ui/commit/8a0820927953423dce9971a279bf5762373d2b29))
+
 ## [1.8.0](https://github.com/sanity-io/ui/compare/v1.7.12...v1.8.0) (2023-08-31)
 
 ### Features
