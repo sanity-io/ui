@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0](https://github.com/sanity-io/ui/compare/v1.7.12...v1.8.0) (2023-08-31)
+
+### Features
+
+- **tooltip:** adds support for custom delay, standalone and grouped ([#1129](https://github.com/sanity-io/ui/issues/1129)) ([36a2bb0](https://github.com/sanity-io/ui/commit/36a2bb09d16596863ce75bb5623311af8b78e405))
+
 ## [1.7.12](https://github.com/sanity-io/ui/compare/v1.7.11...v1.7.12) (2023-08-31)
 
 ### Reverts
