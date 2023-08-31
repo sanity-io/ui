@@ -5,12 +5,12 @@ import {TooltipDelayGroupContext} from './tooltipDelayGroupContext'
 import {TooltipDelayGroupContextValue} from './types'
 import {useTooltipDelayGroup} from './useTooltipDelayGroup'
 /**
- * @beta
+ * @public
  * */
 export interface TooltipDelayGroupProviderProps {
   children?: React.ReactNode
   /**
-   * @beta Handles the delays to open or close a tooltip inside a group
+   * @public Handles the delays to open or close a tooltip inside a group
    *
    * If only a `number` is passed, it will be used for both opening and closing.
    *
@@ -20,7 +20,7 @@ export interface TooltipDelayGroupProviderProps {
 }
 
 /**
- * @beta
+ * @public
  * Provides context for a group of tooltip elements that should share a delay
  * which temporarily becomes 1 ms after the first floating element of the group opens.
  */

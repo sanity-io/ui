@@ -14,11 +14,13 @@ export function useDelayedState<S>(
     const action = () => {
       setState(nextState)
     }
+
     // A new state change has been initiated, cancel the previous one.
     if (delayedAction.current) {
       clearTimeout(delayedAction.current)
       delayedAction.current = undefined
     }
+
     if (!delay) return action()
     delayedAction.current = setTimeout(action, delay)
   }, [])
