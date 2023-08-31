@@ -132,7 +132,7 @@ const RightCard = styled(Card)`
   right: 0;
 `
 
-const TextInputButton = styled(Button)({
+const TextInputClearButton = styled(Button)({
   '&:not([hidden])': {
     display: 'block',
   },
@@ -297,7 +297,7 @@ export const TextInput = forwardRef(function TextInput(
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
         >
-          <TextInputButton
+          <TextInputClearButton
             aria-label="Clear"
             data-qa="clear-button"
             fontSize={fontSize}
