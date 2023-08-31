@@ -20,7 +20,6 @@ import {ThemeFontWeightKey, useRootTheme} from '../../theme'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
 import {Card} from '../card'
-import {Flex} from '../flex'
 import {Text} from '../text'
 
 /**
@@ -132,6 +131,12 @@ const RightCard = styled(Card)`
   top: 0;
   right: 0;
 `
+
+const TextInputButton = styled(Button)({
+  '&:not([hidden])': {
+    display: 'block',
+  },
+})
 
 /**
  * @public
@@ -292,20 +297,18 @@ export const TextInput = forwardRef(function TextInput(
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
         >
-          <Flex align="center" justify="center">
-            <Button
-              aria-label="Clear"
-              data-qa="clear-button"
-              fontSize={fontSize}
-              icon={CloseIcon}
-              mode="bleed"
-              padding={clearButtonPadding}
-              radius={radius}
-              {...clearButtonProps}
-              onClick={handleClearClick}
-              onMouseDown={handleClearMouseDown}
-            />
-          </Flex>
+          <TextInputButton
+            aria-label="Clear"
+            data-qa="clear-button"
+            fontSize={fontSize}
+            icon={CloseIcon}
+            mode="bleed"
+            padding={clearButtonPadding}
+            radius={radius}
+            {...clearButtonProps}
+            onClick={handleClearClick}
+            onMouseDown={handleClearMouseDown}
+          />
         </RightCard>
       ),
     [
