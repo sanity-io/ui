@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/sanity-io/ui/compare/v1.8.1...v1.8.2) (2023-09-01)
+
+### Bug Fixes
+
+- **tooltip:** add default fallbackplacements ([#1130](https://github.com/sanity-io/ui/issues/1130)) ([420e3ea](https://github.com/sanity-io/ui/commit/420e3eaca57cd30bb0c417755d0208f5d06e6fe1))
+
 ## [1.8.1](https://github.com/sanity-io/ui/compare/v1.8.0...v1.8.1) (2023-08-31)
 
 ### Bug Fixes
