@@ -54,7 +54,7 @@ devDependencies:
     version: 4.1.4(semantic-release@21.1.1)
   '@sanity/ui-workshop':
     specifier: ^1.2.11
-    version: 1.2.11(@sanity/icons@2.4.1)(@sanity/ui@1.7.11)(@types/node@20.5.6)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7)
+    version: 1.2.11(@sanity/icons@2.4.1)(@sanity/ui@1.8.1)(@types/node@20.5.6)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7)
   '@testing-library/dom':
     specifier: ^9.3.1
     version: 9.3.1
@@ -98,11 +98,11 @@ devDependencies:
     specifier: ^4.3.0
     version: 4.3.0
   cypress:
-    specifier: ^12.17.4
-    version: 12.17.4
+    specifier: ^13.1.0
+    version: 13.1.0
   cypress-real-events:
     specifier: ^1.10.0
-    version: 1.10.0(cypress@12.17.4)
+    version: 1.10.0(cypress@13.1.0)
   cz-conventional-changelog:
     specifier: ^3.3.0
     version: 3.3.0
@@ -1745,8 +1745,8 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@cypress/request@2.88.12:
-    resolution: {integrity: sha512-tOn+0mDZxASFM+cuAP9szGUGPI1HwWVSvdzm7V4cCsPdFTx6qMj29CwaQmRAMIEhORIUBFBsYROYJcveK4uOjA==}
+  /@cypress/request@3.0.0:
+    resolution: {integrity: sha512-GKFCqwZwMYmL3IBoNeR2MM1SnxRIGERsQOTWeQKoYBt2JLqcqiy7JXqO894FLrpjZYqGxW92MNwRH2BN56obdQ==}
     engines: {node: '>= 6'}
     dependencies:
       aws-sign2: 0.7.0
@@ -3030,7 +3030,7 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop@1.2.11(@sanity/icons@2.4.1)(@sanity/ui@1.7.11)(@types/node@20.5.6)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7):
+  /@sanity/ui-workshop@1.2.11(@sanity/icons@2.4.1)(@sanity/ui@1.8.1)(@types/node@20.5.6)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.7):
     resolution: {integrity: sha512-vzj7upIF7wq2W1HEA0D5VSkR8axaH4Rt07yNTAaas7CLgjSE9r2d+Gnkrq4FIbIuN1GYhhCD+D3/s60GaZrpQw==}
     hasBin: true
     peerDependencies:
@@ -3041,7 +3041,7 @@ packages:
       styled-components: ^5.2 || ^6
     dependencies:
       '@sanity/icons': 2.4.1(react@18.2.0)
-      '@sanity/ui': 1.7.11(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7)
+      '@sanity/ui': 1.8.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7)
       '@vitejs/plugin-react': 4.0.4(vite@4.4.9)
       axe-core: 4.7.2
       cac: 6.7.14
@@ -3070,8 +3070,8 @@ packages:
       - terser
     dev: true
 
-  /@sanity/ui@1.7.11(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7):
-    resolution: {integrity: sha512-N9zICg3NbgyfzM/cboqTj2Ik0I+T49LFADQzLtOCqQCT/RypbBE1sB2MrD+LWaiB6lfzqM1rns4v4yD2IlOvDg==}
+  /@sanity/ui@1.8.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.0.7):
+    resolution: {integrity: sha512-ui20lmSeUTgwrFiybUBnO95HyJMEzdQJbvEoUN25fE0hcRHA0oQDG48281TUcPMDVPLDwSn9JYYpCbrA8/PZoA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
@@ -4888,22 +4888,22 @@ packages:
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
 
-  /cypress-real-events@1.10.0(cypress@12.17.4):
+  /cypress-real-events@1.10.0(cypress@13.1.0):
     resolution: {integrity: sha512-ALSdCiG+Rj3Sl6qooqTFeFGBxOIe8QJUcgIuJ6ZVBanTEijXRzqxqstMC2ZKfixqj1TyNjolyZU4zOoN/jtHpg==}
     peerDependencies:
       cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x
     dependencies:
-      cypress: 12.17.4
+      cypress: 13.1.0
       prettier: 3.0.2
     dev: true
 
-  /cypress@12.17.4:
-    resolution: {integrity: sha512-gAN8Pmns9MA5eCDFSDJXWKUpaL3IDd89N9TtIupjYnzLSmlpVr+ZR+vb4U/qaMp+lB6tBvAmt7504c3Z4RU5KQ==}
-    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
+  /cypress@13.1.0:
+    resolution: {integrity: sha512-LUKxCYlB973QBFls1Up4FAE9QIYobT+2I8NvvAwMfQS2YwsWbr6yx7y9hmsk97iqbHkKwZW3MRjoK1RToBFVdQ==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@cypress/request': 2.88.12
+      '@cypress/request': 3.0.0
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
       '@types/node': 16.18.46
       '@types/sinonjs__fake-timers': 8.1.1
