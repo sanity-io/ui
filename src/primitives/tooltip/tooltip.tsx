@@ -31,6 +31,7 @@ import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
+import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
 import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
@@ -78,7 +79,8 @@ export const Tooltip = forwardRef(function Tooltip(
     children: childProp,
     content,
     disabled,
-    fallbackPlacements: fallbackPlacementsProp,
+    fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
+      DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     padding,
     placement: placementProp = 'bottom',
     portal,

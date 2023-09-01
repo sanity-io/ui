@@ -28,6 +28,7 @@ import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_POPOVER_DISTANCE,
   DEFAULT_POPOVER_MARGINS,
+  DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_POPOVER_PADDING,
 } from './constants'
 import {size} from './floating-ui/size'
@@ -89,7 +90,8 @@ export const Popover = memo(
       constrainSize = false,
       content,
       disabled,
-      fallbackPlacements,
+      fallbackPlacements = props.fallbackPlacements ??
+        DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
       matchReferenceWidth,
       floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
       open,
