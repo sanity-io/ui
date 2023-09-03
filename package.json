@@ -81,7 +81,7 @@
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "commitizen": "^4.3.0",
-    "cypress": "^12.17.4",
+    "cypress": "^13.1.0",
     "cypress-real-events": "^1.10.0",
     "cz-conventional-changelog": "^3.3.0",
     "esbuild": "^0.19.2",
