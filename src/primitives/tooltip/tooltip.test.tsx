@@ -275,4 +275,26 @@ describe('Tooltip', () => {
       jest.clearAllMocks()
     })
   })
+  it('should show the tooltip when focus, close with Escape key', () => {
+    render(
+      <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} placement={'top'}>
+        <Button mode="bleed" text="Hover me" />
+      </Tooltip>,
+    )
+
+    const button = screen.getByText('Hover me')
+
+    // Validate tooltip content is not rendered
+    expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+
+    fireEvent.focus(button)
+
+    // Validate tooltip content is rendered
+    screen.getByText('Tooltip content')
+    act(() => {
+      fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
+    })
+    // Validate tooltip content is not rendered anymore
+    expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+  })
 })

@@ -243,6 +243,22 @@ export const Tooltip = forwardRef(function Tooltip(
   // Update reference
   useEffect(() => refs.setReference(referenceElement), [referenceElement, refs])
 
+  useEffect(() => {
+    // If the user clicks on escape key, close the tooltip.
+    if (!showTooltip) return
+
+    function handleWindowKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        handleIsOpenChange(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleWindowKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleWindowKeyDown)
+    }
+  }, [handleIsOpenChange, showTooltip])
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
       arrowRef.current = arrowEl
