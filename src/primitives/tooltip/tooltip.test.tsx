@@ -275,26 +275,71 @@ describe('Tooltip', () => {
       jest.clearAllMocks()
     })
   })
-  it('should show the tooltip when focus, close with Escape key', () => {
-    render(
-      <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} placement={'top'}>
-        <Button mode="bleed" text="Hover me" />
-      </Tooltip>,
-    )
+  describe('Closing the <Tooltip /> with the Escape key', () => {
+    it('Standalone tooltip closes immediately with Escape key', () => {
+      const delay = 150
 
-    const button = screen.getByText('Hover me')
+      jest.useFakeTimers()
 
-    // Validate tooltip content is not rendered
-    expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      render(
+        <Tooltip
+          content={<Text size={1}>{'Tooltip content'}</Text>}
+          placement={'top'}
+          delay={delay}
+        >
+          <Button mode="bleed" text="Hover me" />
+        </Tooltip>,
+      )
 
-    fireEvent.focus(button)
+      const button = screen.getByText('Hover me')
 
-    // Validate tooltip content is rendered
-    screen.getByText('Tooltip content')
-    act(() => {
-      fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
+      // Validate tooltip content is not rendered
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      fireEvent.focus(button)
+      act(() => jest.advanceTimersByTime(delay))
+
+      // Validate tooltip content is rendered
+      screen.getByText('Tooltip content')
+
+      act(() => {
+        fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
+      })
+      // Validate tooltip content is not rendered anymore
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
-    // Validate tooltip content is not rendered anymore
-    expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    it('With <TooltipDelayGroupProvider />  closes immediately with Escape key', () => {
+      const delay = 150
+
+      jest.useFakeTimers()
+
+      render(
+        <TooltipDelayGroupProvider delay={{close: delay}}>
+          <Tooltip
+            content={<Text size={1}>{'Tooltip content'}</Text>}
+            placement={'top'}
+            delay={{close: delay}}
+          >
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
+        </TooltipDelayGroupProvider>,
+      )
+
+      const button = screen.getByText('Hover me')
+
+      // Validate tooltip content is not rendered
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      fireEvent.focus(button)
+
+      act(() => jest.advanceTimersByTime(delay))
+
+      // Validate tooltip content is rendered
+      screen.getByText('Tooltip content')
+
+      act(() => {
+        fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
+      })
+      // Validate tooltip content is not rendered anymore
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    })
   })
 })

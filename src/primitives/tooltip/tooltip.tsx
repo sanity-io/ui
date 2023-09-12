@@ -177,23 +177,27 @@ export const Tooltip = forwardRef(function Tooltip(
   const closeDelay = isInsideGroup ? delayGroupContext.closeDelay : closeDelayProp
 
   const handleIsOpenChange = useCallback(
-    (open: boolean) => {
+    (open: boolean, immediate?: boolean) => {
       if (isInsideGroup) {
         //  When it's inside a group, the open or close status will be handled by the group.
         if (open) {
-          delayGroupContext.setIsGroupActive(open, openDelay)
-          delayGroupContext.setOpenTooltipId(tooltipId, openDelay)
+          const groupedOpenDelay = immediate ? 0 : openDelay
+
+          delayGroupContext.setIsGroupActive(open, groupedOpenDelay)
+          delayGroupContext.setOpenTooltipId(tooltipId, groupedOpenDelay)
         } else {
           const minimumGroupDeactivateDelay = 200 // We should provide some delay to allow the user to reach the next tooltip.
           const groupDeactivateDelay =
             closeDelay > minimumGroupDeactivateDelay ? closeDelay : minimumGroupDeactivateDelay
 
           delayGroupContext.setIsGroupActive(open, groupDeactivateDelay)
-          delayGroupContext.setOpenTooltipId(null, closeDelay)
+          delayGroupContext.setOpenTooltipId(null, immediate ? 0 : closeDelay)
         }
       } else {
+        const standaloneDelay = immediate ? 0 : open ? openDelay : closeDelay
+
         // When it's not inside a group, the open or close status will be handled by the tooltip itself.
-        setIsOpen(open, open ? openDelay : closeDelay)
+        setIsOpen(open, standaloneDelay)
       }
     },
     [isInsideGroup, delayGroupContext, openDelay, tooltipId, closeDelay, setIsOpen],
@@ -249,7 +253,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
     function handleWindowKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        handleIsOpenChange(false)
+        handleIsOpenChange(false, true)
       }
     }
 
