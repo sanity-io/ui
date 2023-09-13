@@ -54,7 +54,7 @@ export const fonts: ThemeFonts = {
   },
   heading: {
     family:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
+      'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
     weights: {
       regular: 700,
       medium: 800,
@@ -114,7 +114,7 @@ export const fonts: ThemeFonts = {
   },
   label: {
     family:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", system-ui, sans-serif',
+      'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", system-ui, sans-serif',
     weights: {
       regular: 600,
       medium: 700,
@@ -166,7 +166,7 @@ export const fonts: ThemeFonts = {
   },
   text: {
     family:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
+      'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
     weights: {
       regular: 400,
       medium: 500,
