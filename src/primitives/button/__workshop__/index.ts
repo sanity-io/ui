@@ -11,6 +11,11 @@ export default defineScope({
       component: lazy(() => import('./props')),
     },
     {
+      name: 'matrix',
+      title: 'Matrix',
+      component: lazy(() => import('./matrix')),
+    },
+    {
       name: 'styled-1',
       title: 'Styled #1',
       component: lazy(() => import('./styled1')),
