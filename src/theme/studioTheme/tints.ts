@@ -1,0 +1,140 @@
+import {ColorTintKey, ColorTints, ColorValue, black, hues, white} from '@sanity/color'
+import {validTones} from './color'
+
+type colorsKeys =
+  | 'text_primary'
+  | 'text_secondary'
+  | 'bg_base'
+  | 'bg_base_hover'
+  | 'bg_base_active'
+  | 'bg_accent'
+  | 'bg_accent_hover'
+  | 'bg_accent_active'
+  | 'bg_tint'
+  | 'icon_default'
+  | 'icon_inverted'
+  | 'border_base'
+  | 'border_accent'
+  | 'border_accent_inverted'
+
+type ColorTintsDictionary = {
+  [key in colorsKeys]: ColorTintKey | ColorValue
+}
+const defaultTints: {
+  light: ColorTintsDictionary
+  dark: ColorTintsDictionary
+} = {
+  light: {
+    text_primary: '900',
+    text_secondary: '600',
+    bg_base: white,
+    bg_base_hover: '50',
+    bg_base_active: '100',
+    bg_accent: '500',
+    bg_accent_hover: '600',
+    bg_accent_active: '700',
+    bg_tint: '50',
+    icon_default: '500',
+    icon_inverted: white,
+    border_base: '100',
+    border_accent: '500',
+    border_accent_inverted: white,
+  },
+  dark: {
+    text_primary: '50',
+    text_secondary: '300',
+    bg_base: black,
+    bg_base_hover: '900',
+    bg_base_active: '800',
+    bg_accent: '500',
+    bg_accent_hover: '400',
+    bg_accent_active: '300',
+    bg_tint: '900',
+    icon_default: '300',
+    icon_inverted: hues.gray[900],
+    border_base: '900',
+    border_accent: '300',
+    border_accent_inverted: hues.gray[900],
+  },
+}
+
+export const colorTints: {
+  light: {
+    [key in validTones]: ColorTintsDictionary
+  }
+  dark: {
+    [key in validTones]: ColorTintsDictionary
+  }
+} = {
+  light: {
+    default: {
+      ...defaultTints.light,
+      bg_accent: '900',
+      bg_accent_hover: '950',
+      bg_accent_active: black,
+      border_accent: '600',
+    },
+    primary: {
+      ...defaultTints.light,
+      bg_accent: '900',
+      bg_accent_hover: '950',
+      bg_accent_active: black,
+      border_accent: '600',
+    },
+    positive: {
+      ...defaultTints.light,
+      bg_base_hover: hues.gray[50],
+      bg_base_active: '50',
+      bg_accent: '400',
+      bg_accent_hover: '500',
+      bg_accent_active: '600',
+      border_accent: '400',
+    },
+    transparent: defaultTints.light,
+    caution: defaultTints.light,
+    critical: defaultTints.light,
+  },
+  dark: {
+    default: {
+      ...defaultTints.dark,
+      text_primary: white,
+      bg_accent: white,
+      bg_accent_hover: '50',
+      bg_accent_active: '100',
+    },
+    primary: {
+      ...defaultTints.dark,
+      text_primary: white,
+      bg_accent: white,
+      bg_accent_hover: '50',
+      bg_accent_active: '100',
+    },
+    positive: {
+      ...defaultTints.dark,
+      bg_base_hover: hues.gray[900],
+      bg_base_active: '900',
+      bg_accent: '400',
+      bg_accent_hover: '300',
+      bg_accent_active: '200',
+      border_accent: '400',
+    },
+    transparent: defaultTints.dark,
+    caution: defaultTints.dark,
+    critical: defaultTints.dark,
+  },
+}
+
+export const getColor = (
+  tints: ColorTints,
+  dark: boolean,
+  tone: validTones,
+  key: colorsKeys,
+): string => {
+  const value = colorTints[dark ? 'dark' : 'light'][tone][key]
+
+  if (typeof value === 'string') {
+    return tints[value].hex
+  }
+
+  return value.hex
+}
