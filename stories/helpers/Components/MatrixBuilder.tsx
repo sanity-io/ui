@@ -1,4 +1,4 @@
-import {Card, Text} from '../../../src/primitives'
+import {Card, Flex, Grid, Text} from '../../../src/primitives'
 
 interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {
   scheme: 'light' | 'dark'
@@ -20,55 +20,37 @@ export function MatrixBuilder<Rows extends string[], Cols extends string[]>({
   renderItem,
 }: MatrixBuilderProps<Rows, Cols>): JSX.Element {
   return (
-    <Card scheme={scheme} padding={4} border marginBottom={4}>
-      <table
-        style={{
-          borderCollapse: 'collapse',
-          tableLayout: 'fixed',
-          width: '100%',
-          borderSpacing: '10px 10px',
-        }}
-      >
-        <thead>
-          <tr>
-            <th>
-              <Text weight="semibold">{title}</Text>
-            </th>
-            {columns.map((column) => (
-              <th key={column + 'head'}>
-                <Text weight="semibold" style={{textTransform: 'capitalize'}}>
-                  {column}
-                </Text>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody style={{borderTop: '16px solid transparent'}}>
-          {rows.map((row) => (
-            <tr
-              key={row}
-              style={{
-                borderBottom: '16px solid transparent',
-              }}
+    <Card scheme={scheme} padding={4} border radius={2}>
+      <Grid columns={columns.length + 1} rows={rows.length + 1} gap={2}>
+        {/* First row, columns titles */}
+        <Flex align={'center'}>
+          <Text weight="semibold">{title}</Text>
+        </Flex>
+        {columns.map((column) => (
+          <Flex align={'center'} key={column + 'head'}>
+            <Text
+              weight="semibold"
+              style={{textTransform: 'capitalize', textAlign: 'center', width: '100%'}}
             >
-              <td style={{verticalAlign: 'middle', textAlign: 'center'}}>
-                <Text
-                  style={{
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  {row}
-                </Text>
-              </td>
-              {columns.map((column) => (
-                <td key={column + row} style={{verticalAlign: 'middle', textAlign: 'center'}}>
-                  {renderItem({column, row})}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              {column}
+            </Text>
+          </Flex>
+        ))}
+
+        {/* Rows titles and items */}
+        {rows.map((row) => (
+          <>
+            <Flex align={'center'}>
+              <Text style={{textTransform: 'capitalize'}}>{row}</Text>
+            </Flex>
+            {columns.map((column) => (
+              <Flex key={column + row} style={{verticalAlign: 'middle', textAlign: 'center'}}>
+                {renderItem({column, row})}
+              </Flex>
+            ))}
+          </>
+        ))}
+      </Grid>
     </Card>
   )
 }

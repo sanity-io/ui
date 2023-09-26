@@ -4,7 +4,7 @@ import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
   WORKSHOP_BUTTON_TONE_OPTIONS,
 } from '../../src/__workshop__/constants'
-import {Button, Flex, Stack} from '../../src/primitives'
+import {Button, Flex} from '../../src/primitives'
 import {FONT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
 import {MatrixBuilder} from '../helpers/Components/MatrixBuilder'
 import {capitalize} from '../helpers/utils'
@@ -93,12 +93,7 @@ export const MultipleStyles: Story = {
     },
   },
   render: (props) => (
-    <Stack
-      space={3}
-      style={{
-        maxWidth: '640px',
-      }}
-    >
+    <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
       <MatrixBuilder
         scheme="light"
         columns={buttonModes}
@@ -117,6 +112,6 @@ export const MultipleStyles: Story = {
           <Button {...props} tone={row} mode={column} text={capitalize(column)} />
         )}
       />
-    </Stack>
+    </Flex>
   ),
 }
