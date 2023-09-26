@@ -1,24 +1,21 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {userEvent, within} from '@storybook/testing-library'
-import {Button, Card, Tooltip, Text} from '../../src/primitives'
+import {Button, Card, Text, Tooltip} from '../../src/primitives'
 import {SHADOW_CONTROLS, SPACE_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Tooltip> = {
+  args: {
+    children: <Button mode="bleed" text="Hover me" />,
+    content: "I'm a tooltip",
+    padding: 2,
+    shadow: 2,
+  },
   argTypes: {
     content: {
       type: 'string',
     },
     padding: SPACE_CONTROLS,
     shadow: SHADOW_CONTROLS,
-  },
-  args: {
-    content: "I'm a tooltip",
-    delay: {
-      open: 300,
-      close: 500,
-    },
-    padding: 2,
-    shadow: 2,
   },
   parameters: {
     controls: {
@@ -32,13 +29,18 @@ const meta: Meta<typeof Tooltip> = {
 export default meta
 type Story = StoryObj<typeof Tooltip>
 
-export const Docs: Story = {
+export const Basic: Story = {
   render: (props) => {
     return (
       <Card padding={6}>
-        <Tooltip {...props} content={<Text>{props.content}</Text>}>
-          <Button mode="bleed" text="Hover me" />
-        </Tooltip>
+        <Tooltip
+          {...props}
+          content={
+            <Text muted size={1}>
+              {props.content}
+            </Text>
+          }
+        />
       </Card>
     )
   },
@@ -59,9 +61,14 @@ export const WithOpenDelay: Story = {
   render: (props) => {
     return (
       <Card padding={6}>
-        <Tooltip {...props} content={<Text>{props.content}</Text>}>
-          <Button mode="bleed" text="Hover me" />
-        </Tooltip>
+        <Tooltip
+          {...props}
+          content={
+            <Text muted size={1}>
+              {props.content}
+            </Text>
+          }
+        />
       </Card>
     )
   },
@@ -69,6 +76,7 @@ export const WithOpenDelay: Story = {
     const canvas = within(canvasElement)
 
     const button = canvas.getByText('Hover me')
+
     await userEvent.hover(button)
     await canvas.findByText('Content', undefined, {timeout: 300})
   },

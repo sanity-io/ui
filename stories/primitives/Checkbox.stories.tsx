@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
-import {Card, Checkbox} from '../../src/primitives'
+import {Checkbox, Flex, Stack} from '../../src/primitives'
 
 const meta: Meta<typeof Checkbox> = {
   argTypes: {
@@ -16,12 +16,8 @@ const meta: Meta<typeof Checkbox> = {
 export default meta
 type Story = StoryObj<typeof Checkbox>
 
-export const Docs: Story = {
-  render: (props) => (
-    <Card padding={3}>
-      <Checkbox {...props} />
-    </Card>
-  ),
+export const Default: Story = {
+  render: (props) => <Checkbox {...props} />,
 }
 
 export const Controlled: Story = {
@@ -37,10 +33,30 @@ export const Controlled: Story = {
       setChecked((prev) => !prev)
     }, [])
 
+    return <Checkbox defaultChecked={selected} onClick={handleChange} {...props} />
+  },
+}
+
+export const InputStates: Story = {
+  parameters: {
+    controls: {
+      include: ['customValidity'],
+    },
+  },
+  render: (props) => {
     return (
-      <Card padding={3}>
-        <Checkbox onClick={handleChange} selected={selected} {...props} />
-      </Card>
+      <Stack space={3}>
+        <Flex gap={3}>
+          <Checkbox {...props} />
+          <Checkbox {...props} indeterminate />
+          <Checkbox {...props} defaultChecked />
+        </Flex>
+        <Flex gap={3}>
+          <Checkbox {...props} disabled />
+          <Checkbox {...props} disabled indeterminate />
+          <Checkbox {...props} defaultChecked disabled />
+        </Flex>
+      </Stack>
     )
   },
 }

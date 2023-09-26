@@ -41,6 +41,13 @@ export const FONT_SIZE_CONTROLS = {
   options: [0, 1, 2, 3, 4],
 }
 
+export const FONT_WEIGHT_CONTROLS = {
+  control: {
+    type: 'select',
+  },
+  options: ['regular', 'medium', 'semibold', 'bold'],
+}
+
 export const OVERFLOW_CONTROLS = {
   control: {
     type: 'radio',

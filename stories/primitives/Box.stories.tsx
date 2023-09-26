@@ -22,7 +22,7 @@ const meta: Meta<typeof Box> = {
 export default meta
 type Story = StoryObj<typeof Box>
 
-export const Docs: Story = {
+export const Default: Story = {
   render: (props) => {
     return <Box {...props} />
   },

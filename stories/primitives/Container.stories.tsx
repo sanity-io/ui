@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Container, Text} from '../../src/primitives'
+import {Card, Container, Stack, Text} from '../../src/primitives'
 import {OVERFLOW_CONTROLS, WIDTH_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Container> = {
@@ -20,31 +20,57 @@ const meta: Meta<typeof Container> = {
 export default meta
 type Story = StoryObj<typeof Container>
 
-export const Docs: Story = {
+export const Default: Story = {
   render: (props) => {
-    return (
-      <Card padding={4}>
-        <Container {...props} />
-      </Card>
-    )
+    return <Container {...props} />
   },
 }
 
-export const Width: Story = {
+export const Widths: Story = {
   parameters: {
     controls: {
-      include: ['width'],
+      include: [],
     },
   },
   render: (props) => {
-    const {children, ...rest} = props
-
     return (
-      <Container {...rest}>
-        <Card padding={4} tone="transparent">
-          {children}
-        </Card>
-      </Container>
+      <Stack space={2}>
+        <Container {...props} width="auto">
+          <Card padding={4} tone="transparent">
+            <Text align="center">Auto</Text>
+          </Card>
+        </Container>
+        <Container {...props} width={5}>
+          <Card padding={4} tone="transparent">
+            <Text align="center">5</Text>
+          </Card>
+        </Container>
+        <Container {...props} width={4}>
+          <Card padding={4} tone="transparent">
+            <Text align="center">4</Text>
+          </Card>
+        </Container>
+        <Container {...props} width={3}>
+          <Card padding={4} tone="transparent">
+            <Text align="center">3</Text>
+          </Card>
+        </Container>
+        <Container {...props} width={2}>
+          <Card padding={4} tone="transparent">
+            <Text align="center">2</Text>
+          </Card>
+        </Container>
+        <Container {...props} width={1}>
+          <Card padding={4} tone="transparent">
+            <Text align="center">1</Text>
+          </Card>
+        </Container>
+        <Container {...props} width={0}>
+          <Card padding={4} tone="transparent">
+            <Text align="center">0</Text>
+          </Card>
+        </Container>
+      </Stack>
     )
   },
 }

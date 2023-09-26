@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Code} from '../../src/primitives'
-import {FONT_SIZE_CONTROLS} from '../constants'
+import {Code, Stack} from '../../src/primitives'
+import {FONT_SIZE_CONTROLS, FONT_WEIGHT_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Code> = {
   args: {
@@ -9,6 +9,7 @@ const meta: Meta<typeof Code> = {
   },
   argTypes: {
     size: FONT_SIZE_CONTROLS,
+    weight: FONT_WEIGHT_CONTROLS,
   },
   component: Code,
   tags: ['autodocs'],
@@ -17,12 +18,45 @@ const meta: Meta<typeof Code> = {
 export default meta
 type Story = StoryObj<typeof Code>
 
-export const Docs: Story = {
+export const Default: Story = {
+  render: (props) => {
+    return <Code {...props} />
+  },
+}
+
+export const Sizes: Story = {
+  parameters: {
+    controls: {
+      include: ['weight'],
+    },
+  },
   render: (props) => {
     return (
-      <Card padding={3}>
+      <Stack space={3}>
+        <Code {...props} size={4} />
+        <Code {...props} size={3} />
+        <Code {...props} size={2} />
+        <Code {...props} size={1} />
+        <Code {...props} size={0} />
+      </Stack>
+    )
+  },
+}
+
+export const Weights: Story = {
+  parameters: {
+    controls: {
+      include: ['size'],
+    },
+  },
+  render: (props) => {
+    return (
+      <Stack space={3}>
         <Code {...props} />
-      </Card>
+        <Code {...props} weight="medium" />
+        <Code {...props} weight="semibold" />
+        <Code {...props} weight="bold" />
+      </Stack>
     )
   },
 }

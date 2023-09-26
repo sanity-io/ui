@@ -1,11 +1,11 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Badge, Flex} from '../../src/primitives'
+import {Badge, Flex, Stack} from '../../src/primitives'
 import {FONT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Badge> = {
   component: Badge,
   args: {
-    children: 'Label',
+    children: 'Jackdaws love my big sphinx of quartz',
   },
   argTypes: {
     fontSize: FONT_SIZE_CONTROLS,
@@ -18,17 +18,24 @@ const meta: Meta<typeof Badge> = {
 export default meta
 type Story = StoryObj<typeof Badge>
 
-export const Docs: Story = {
+export const Default: Story = {
   render: (props) => <Badge {...props} />,
 }
 
-export const Basic: Story = {
+export const Modes: Story = {
   parameters: {
     controls: {
-      include: ['children', 'fontSize', 'mode', 'padding', 'radius', 'tone'],
+      include: ['fontSize', 'padding', 'radius'],
     },
   },
-  render: (props) => <Badge {...props} />,
+  render: (props) => (
+    <Flex gap={3}>
+      <Badge {...props}>Default</Badge>
+      <Badge {...props} mode="outline">
+        Outline
+      </Badge>
+    </Flex>
+  ),
 }
 
 export const Tones: Story = {
@@ -53,5 +60,49 @@ export const Tones: Story = {
         Critical
       </Badge>
     </Flex>
+  ),
+}
+
+export const MultipleStyles: Story = {
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius'],
+    },
+  },
+  render: (props) => (
+    <Stack space={3}>
+      <Flex gap={2}>
+        <Badge {...props}>Default</Badge>
+        <Badge {...props} tone="primary">
+          Primary
+        </Badge>
+        <Badge {...props} tone="positive">
+          Positive
+        </Badge>
+        <Badge {...props} tone="caution">
+          Caution
+        </Badge>
+        <Badge {...props} tone="critical">
+          Critical
+        </Badge>
+      </Flex>
+      <Flex gap={2}>
+        <Badge {...props} mode="outline">
+          Default
+        </Badge>
+        <Badge {...props} mode="outline" tone="primary">
+          Primary
+        </Badge>
+        <Badge {...props} mode="outline" tone="positive">
+          Positive
+        </Badge>
+        <Badge {...props} mode="outline" tone="caution">
+          Caution
+        </Badge>
+        <Badge {...props} mode="outline" tone="critical">
+          Critical
+        </Badge>
+      </Flex>
+    </Stack>
   ),
 }

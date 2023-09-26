@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Flex, Text} from '../../src/primitives'
+import {Card, Flex, Grid, Text} from '../../src/primitives'
 import {RADIUS_CONTROLS, SHADOW_CONTROLS, SPACE_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Card> = {
@@ -23,10 +23,155 @@ const meta: Meta<typeof Card> = {
 export default meta
 type Story = StoryObj<typeof Card>
 
-export const Docs: Story = {
+export const Default: Story = {
   render: (props) => {
     return <Card {...props} />
   },
+}
+
+export const Borders: Story = {
+  args: {
+    tone: 'transparent',
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
+    },
+  },
+  render: (props) => (
+    <Flex gap={2}>
+      <Card {...props} borderTop>
+        <Text>Top</Text>
+      </Card>
+      <Card {...props} borderBottom>
+        <Text>Bottom</Text>
+      </Card>
+      <Card {...props} borderLeft>
+        <Text>Left</Text>
+      </Card>
+      <Card {...props} borderRight>
+        <Text>Right</Text>
+      </Card>
+      <Card {...props} border>
+        <Text>Full</Text>
+      </Card>
+    </Flex>
+  ),
+}
+
+export const Radii: Story = {
+  args: {
+    tone: 'transparent',
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding'],
+    },
+  },
+  render: (props) => (
+    <Flex gap={2}>
+      <Card {...props} radius={0}>
+        <Text>0</Text>
+      </Card>
+      <Card {...props} radius={1}>
+        <Text>1</Text>
+      </Card>
+      <Card {...props} radius={2}>
+        <Text>2</Text>
+      </Card>
+      <Card {...props} radius={3}>
+        <Text>3</Text>
+      </Card>
+      <Card {...props} radius={4}>
+        <Text>4</Text>
+      </Card>
+      <Card {...props} radius={5}>
+        <Text>5</Text>
+      </Card>
+      <Card {...props} radius={6}>
+        <Text>6</Text>
+      </Card>
+    </Flex>
+  ),
+}
+
+export const Shadows: Story = {
+  args: {
+    tone: 'transparent',
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding'],
+    },
+  },
+  render: (props) => (
+    <Flex gap={7} padding={5} wrap="wrap">
+      <Card {...props} shadow={0}>
+        <Text>0</Text>
+      </Card>
+      <Card {...props} shadow={1}>
+        <Text>1</Text>
+      </Card>
+      <Card {...props} shadow={2}>
+        <Text>2</Text>
+      </Card>
+      <Card {...props} shadow={3}>
+        <Text>3</Text>
+      </Card>
+      <Card {...props} shadow={4}>
+        <Text>4</Text>
+      </Card>
+      <Card {...props} shadow={5}>
+        <Text>5</Text>
+      </Card>
+    </Flex>
+  ),
+}
+
+export const Schemes: Story = {
+  args: {
+    scheme: 'light',
+    tone: 'transparent',
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
+    },
+  },
+  render: (props) => (
+    <Grid columns={5} gapX={2} gapY={3}>
+      <Card {...props}>
+        <Text>Light (Default)</Text>
+      </Card>
+      <Card {...props} tone="primary">
+        <Text>Light (Primary)</Text>
+      </Card>
+      <Card {...props} tone="positive">
+        <Text>Light (Positive)</Text>
+      </Card>
+      <Card {...props} tone="caution">
+        <Text>Light (Caution)</Text>
+      </Card>
+      <Card {...props} tone="critical">
+        <Text>Light (Critical)</Text>
+      </Card>
+      <Card {...props} scheme="dark">
+        <Text>Dark (Default)</Text>
+      </Card>
+      <Card {...props} scheme="dark" tone="primary">
+        <Text>Dark (Primary)</Text>
+      </Card>
+      <Card {...props} scheme="dark" tone="positive">
+        <Text>Dark (Positive)</Text>
+      </Card>
+      <Card {...props} scheme="dark" tone="caution">
+        <Text>Dark (Caution)</Text>
+      </Card>
+      <Card {...props} scheme="dark" tone="critical">
+        <Text>Dark (Critical)</Text>
+      </Card>
+    </Grid>
+  ),
 }
 
 export const Tones: Story = {
@@ -36,7 +181,7 @@ export const Tones: Story = {
   },
   parameters: {
     controls: {
-      include: ['fontSize', 'mode', 'padding', 'radius', 'shadow'],
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
     },
   },
   render: (props) => (

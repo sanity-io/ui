@@ -1,6 +1,5 @@
 import type {Preview} from '@storybook/react'
 import {themes} from '@storybook/theming'
-import {DocsPage} from './components/DocsPage'
 import {withSanityTheme} from './decorators/withSanityTheme.decorator'
 
 const preview: Preview = {
@@ -20,13 +19,17 @@ const preview: Preview = {
       },
     },
     docs: {
-      page: DocsPage,
       theme: {
         ...themes.dark,
         fontBase: 'Inter, sans-serif',
       },
     },
     layout: 'fullscreen',
+    options: {
+      storySort: {
+        order: ['primitives', 'components', '*'],
+      },
+    },
   },
 }
 

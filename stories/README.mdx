@@ -1,0 +1,25 @@
+import {Meta} from '@storybook/blocks'
+
+<Meta title="README" />
+
+# Sanity UI
+
+_This is a work in progress_
+
+## Storybook guidelines
+
+- All stories must export either a named `Default` or `Basic` story.
+- Avoid creating custom titles for stories - these should be inferred via folder structure alone.
+  - The only exception to this rule are docs / pages that are ['unattached'](https://storybook.js.org/docs/react/api/doc-block-meta#attached-vs-unattached) such as this page or pages adjacent to `@sanity/ui` (such as the one outlining `@sanity/color` palettes).
+- Where possible, stories should be kept as simple as possible with minimal custom / presentational props.
+- Prefer setting component values via storybook [args](https://storybook.js.org/docs/react/writing-stories/args) instead of passing them manually in props.
+
+## Things to note
+
+- All stories are wrapped with a [common decorator](https://storybook.js.org/docs/react/writing-stories/decorators#story-decorators) which wraps stories in both a `<ThemeProvider>` but also a `<Card>` with padding. This may change in future.
+
+## Areas of improvement
+
+- Scheme (dark / light mode) toggles should be removed on non-applicable pages (such as non-story pages like this one).
+- We may want to reconsider whether scheme toggling impacts the 'manager' (or general interface) as well.
+- This Storybook should not load the Nunito Sans font, which is not being used in this current theme.

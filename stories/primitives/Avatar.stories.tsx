@@ -1,8 +1,10 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Avatar, Flex} from '../../src/primitives'
+import {Avatar, Flex, Stack} from '../../src/primitives'
 
 const meta: Meta<typeof Avatar> = {
-  component: Avatar,
+  args: {
+    initials: 'AB',
+  },
   argTypes: {
     size: {
       control: {
@@ -13,29 +15,18 @@ const meta: Meta<typeof Avatar> = {
       options: [0, 1, 2],
     },
   },
+  component: Avatar,
   tags: ['autodocs'],
 }
 
 export default meta
 type Story = StoryObj<typeof Avatar>
 
-export const Docs: Story = {
+export const Default: Story = {
   render: (props) => <Avatar {...props} />,
 }
 
-export const Basic: Story = {
-  parameters: {
-    controls: {
-      include: ['animateArrowFrom', 'arrowPosition', 'color', 'initials', 'size', 'status'],
-    },
-  },
-  render: (props) => <Avatar {...props} />,
-}
-
-export const Tones: Story = {
-  args: {
-    initials: 'AB',
-  },
+export const Colors: Story = {
   parameters: {
     controls: {
       include: ['initials', 'size', 'status'],
@@ -54,5 +45,20 @@ export const Tones: Story = {
       <Avatar {...props} color="red" />
       <Avatar {...props} color="yellow" />
     </Flex>
+  ),
+}
+
+export const Sizes: Story = {
+  parameters: {
+    controls: {
+      include: ['color', 'initials', 'status'],
+    },
+  },
+  render: (props) => (
+    <Stack space={3}>
+      <Avatar {...props} size={0} />
+      <Avatar {...props} size={1} />
+      <Avatar {...props} size={2} />
+    </Stack>
   ),
 }

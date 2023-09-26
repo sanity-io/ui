@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {ChangeEvent, useCallback, useState} from 'react'
-import {Card, Inline, Radio} from '../../src/primitives'
+import {Flex, Radio, Stack} from '../../src/primitives'
 
 const meta: Meta<typeof Radio> = {
   argTypes: {
@@ -16,12 +16,8 @@ const meta: Meta<typeof Radio> = {
 export default meta
 type Story = StoryObj<typeof Radio>
 
-export const Docs: Story = {
-  render: (props) => (
-    <Card padding={3}>
-      <Radio {...props} />
-    </Card>
-  ),
+export const Default: Story = {
+  render: (props) => <Radio {...props} />,
 }
 
 export const Controlled: Story = {
@@ -38,13 +34,33 @@ export const Controlled: Story = {
     }, [])
 
     return (
-      <Card padding={3}>
-        <Inline space={3}>
-          <Radio {...props} checked={value === 'a'} name="foo" onChange={handleChange} value="a" />
-          <Radio {...props} checked={value === 'b'} name="foo" onChange={handleChange} value="b" />
-          <Radio {...props} checked={value === 'c'} name="foo" onChange={handleChange} value="c" />
-        </Inline>
-      </Card>
+      <Flex gap={3}>
+        <Radio {...props} checked={value === 'a'} name="foo" onChange={handleChange} value="a" />
+        <Radio {...props} checked={value === 'b'} name="foo" onChange={handleChange} value="b" />
+        <Radio {...props} checked={value === 'c'} name="foo" onChange={handleChange} value="c" />
+      </Flex>
+    )
+  },
+}
+
+export const InputStates: Story = {
+  parameters: {
+    controls: {
+      include: ['customValidity'],
+    },
+  },
+  render: (props) => {
+    return (
+      <Stack space={3}>
+        <Flex gap={3}>
+          <Radio {...props} />
+          <Radio {...props} defaultChecked />
+        </Flex>
+        <Flex gap={3}>
+          <Radio {...props} disabled />
+          <Radio {...props} defaultChecked disabled />
+        </Flex>
+      </Stack>
     )
   },
 }
