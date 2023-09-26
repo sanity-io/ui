@@ -1,9 +1,11 @@
 {
   "extends": "./tsconfig.settings",
   "include": [
+    "./.storybook",
     "./package.config.ts",
     "./scripts",
     "./src",
+    "./stories",
     "./test",
     "./typings",
     "./workshop.config.ts",
