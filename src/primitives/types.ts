@@ -131,7 +131,7 @@ export interface ResponsiveWidthProps {
 }
 
 /**
- * @beta
+ * @public
  */
 export type Delay =
   | number
