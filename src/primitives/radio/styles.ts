@@ -18,7 +18,8 @@ export function radioBaseStyle(): ReturnType<typeof css> {
 
 export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
-  const {focusRing, input} = theme.sanity
+  const {input} = theme.sanity
+  const {focusRing} = input
   const color = theme.sanity.color.input
   const dist = (input.radio.size - input.radio.markSize) / 2
 

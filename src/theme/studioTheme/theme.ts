@@ -12,16 +12,17 @@ export const studioTheme: RootTheme = {
       {distance: -6, size: 35},
       {distance: -9, size: 55},
     ],
+    focusRing: {offset: 1, width: 2},
   },
   button: {
     textWeight: 'medium',
+    focusRing: {offset: 1, width: 2},
+  },
+  card: {
+    focusRing: {offset: 1, width: 2},
   },
   color,
   container: [320, 640, 960, 1280, 1600, 1920],
-  focusRing: {
-    offset: 1,
-    width: 2,
-  },
   fonts,
   media: [360, 600, 900, 1200, 1800, 2400],
   radius: [0, 1, 3, 6, 9, 12, 21],
@@ -52,6 +53,7 @@ export const studioTheme: RootTheme = {
     border: {
       width: 1,
     },
+    focusRing: {offset: 1, width: 2},
   },
   // styles: {
   //   button: {

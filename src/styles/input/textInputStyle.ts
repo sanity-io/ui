@@ -130,7 +130,8 @@ export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
   const {$hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
-  const {focusRing, input} = theme.sanity
+  const {input} = theme.sanity
+  const {focusRing} = input
   const color = theme.sanity.color.input
 
   return css`

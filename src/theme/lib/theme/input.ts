@@ -1,3 +1,5 @@
+import {FocusRing} from '../../types'
+
 /**
  * @public
  */
@@ -19,4 +21,5 @@ export interface ThemeInput {
   border: {
     width: number
   }
+  focusRing: FocusRing
 }

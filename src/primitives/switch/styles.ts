@@ -36,7 +36,8 @@ export function switchInputStyles(): ReturnType<typeof css> {
 /* Representation */
 export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
-  const {focusRing, input} = theme.sanity
+  const {input} = theme.sanity
+  const {focusRing} = input
   const color = theme.sanity.color.button.default
 
   return css`
