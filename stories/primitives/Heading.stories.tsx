@@ -21,7 +21,7 @@ const meta: Meta<typeof Heading> = {
 export default meta
 type Story = StoryObj<typeof Text>
 
-export const Docs: Story = {
+export const Default: Story = {
   render: (props) => {
     return <Heading {...props} />
   },
