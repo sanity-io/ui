@@ -13,7 +13,7 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const color = theme.sanity.color.input
   const {input, radius} = theme.sanity
-  const {focusRing} = input
+  const {focusRing} = input.checkbox
 
   return css`
     position: absolute;

@@ -8,8 +8,8 @@ export default function PropsStory() {
   const indeterminate = useBoolean('Indeterminate', false)
   const readOnly = useBoolean('Read only', false)
   const theme = useTheme()
-  const focusRingOffset = useNumber('Focus ring offset', theme.sanity.input.focusRing.offset)
-  const focusRingWidth = useNumber('Focus ring width', theme.sanity.input.focusRing.width)
+  const focusRingOffset = useNumber('Focus ring offset', theme.sanity.input.switch.focusRing.offset)
+  const focusRingWidth = useNumber('Focus ring width', theme.sanity.input.switch.focusRing.width)
   const handleChange = useCallback(() => undefined, [])
 
   const customTheme = useMemo(
@@ -18,8 +18,8 @@ export default function PropsStory() {
       sanity: {
         ...theme.sanity,
         focusRing: {
-          offset: focusRingOffset || theme.sanity.input.focusRing.offset,
-          width: focusRingWidth || theme.sanity.input.focusRing.width,
+          offset: focusRingOffset || theme.sanity.input.switch.focusRing.offset,
+          width: focusRingWidth || theme.sanity.input.switch.focusRing.width,
         },
       },
     }),
