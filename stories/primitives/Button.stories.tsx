@@ -6,7 +6,7 @@ import {
 } from '../../src/__workshop__/constants'
 import {Button, Flex} from '../../src/primitives'
 import {FONT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
-import {MatrixBuilder} from '../helpers/Components/MatrixBuilder'
+import {matrixBuilder} from '../helpers/matrixBuilder'
 import {capitalize} from '../helpers/utils'
 
 const meta: Meta<typeof Button> = {
@@ -94,24 +94,24 @@ export const MultipleStyles: Story = {
   },
   render: (props) => (
     <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
-      <MatrixBuilder
-        scheme="light"
-        columns={buttonModes}
-        rows={buttonTones}
-        title="Tone / Mode"
-        renderItem={({row, column}) => (
+      {matrixBuilder({
+        scheme: 'light',
+        columns: buttonModes,
+        rows: buttonTones,
+        title: 'Tone / Mode',
+        renderItem: ({row, column}) => (
           <Button {...props} tone={row} mode={column} text={capitalize(column)} />
-        )}
-      />
-      <MatrixBuilder
-        scheme="dark"
-        columns={buttonModes}
-        rows={buttonTones}
-        title="Tone / Mode"
-        renderItem={({row, column}) => (
+        ),
+      })}
+      {matrixBuilder({
+        scheme: 'dark',
+        columns: buttonModes,
+        rows: buttonTones,
+        title: 'Tone / Mode',
+        renderItem: ({row, column}) => (
           <Button {...props} tone={row} mode={column} text={capitalize(column)} />
-        )}
-      />
+        ),
+      })}
     </Flex>
   ),
 }
