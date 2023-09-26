@@ -12,14 +12,14 @@ export const studioTheme: RootTheme = {
       {distance: -6, size: 35},
       {distance: -9, size: 55},
     ],
-    focusRing: {offset: 1, width: 2},
+    focusRing: {offset: 1, width: 1},
   },
   button: {
     textWeight: 'medium',
-    focusRing: {offset: 1, width: 2},
+    focusRing: {offset: -1, width: 1},
   },
   card: {
-    focusRing: {offset: 1, width: 2},
+    focusRing: {offset: -1, width: 1},
   },
   color,
   container: [320, 640, 960, 1280, 1600, 1920],
@@ -38,10 +38,12 @@ export const studioTheme: RootTheme = {
   input: {
     checkbox: {
       size: 17,
+      focusRing: {offset: 1, width: 1},
     },
     radio: {
       size: 17,
       markSize: 9,
+      focusRing: {offset: 1, width: 1},
     },
     switch: {
       width: 33,
@@ -49,11 +51,17 @@ export const studioTheme: RootTheme = {
       padding: 4,
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
+      focusRing: {offset: 1, width: 1},
     },
     border: {
       width: 1,
     },
-    focusRing: {offset: 1, width: 2},
+    select: {
+      focusRing: {offset: -1, width: 1},
+    },
+    text: {
+      focusRing: {offset: -1, width: 1},
+    },
   },
   // styles: {
   //   button: {

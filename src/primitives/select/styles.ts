@@ -44,7 +44,7 @@ function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
 function inputColorStyle(props: ThemeProps) {
   const {theme} = props
   const {input} = theme.sanity
-  const {focusRing} = input
+  const {focusRing} = input.select
   const color = theme.sanity.color.input
 
   return css`
