@@ -1,15 +1,13 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Container, Stack, Text} from '../../src/primitives'
-import {OVERFLOW_CONTROLS, WIDTH_CONTROLS} from '../constants'
+import {HEIGHT_CONTROLS, OVERFLOW_CONTROLS, WIDTH_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Container> = {
   args: {
     children: <Text>Contained text</Text>,
   },
   argTypes: {
-    height: {
-      options: ['fill', 'stretch'],
-    },
+    height: HEIGHT_CONTROLS,
     overflow: OVERFLOW_CONTROLS,
     width: WIDTH_CONTROLS,
   },

@@ -1,19 +1,13 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Avatar, Flex, Stack} from '../../src/primitives'
+import {AVATAR_SIZE_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Avatar> = {
   args: {
     initials: 'AB',
   },
   argTypes: {
-    size: {
-      control: {
-        type: 'number',
-        min: 0,
-        max: 2,
-      },
-      options: [0, 1, 2],
-    },
+    size: AVATAR_SIZE_CONTROLS,
   },
   component: Avatar,
   tags: ['autodocs'],

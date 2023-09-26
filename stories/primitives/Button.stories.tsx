@@ -8,14 +8,7 @@ import {
 } from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Button, Flex, Stack} from '../../src/primitives'
-import {
-  BUTTON_MODE_CONTROLS,
-  BUTTON_TONE_CONTROLS,
-  FONT_SIZE_CONTROLS,
-  ICON_CONTROLS,
-  RADIUS_CONTROLS,
-  SPACE_CONTROLS,
-} from '../constants'
+import {FONT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Button> = {
   args: {
@@ -25,12 +18,10 @@ const meta: Meta<typeof Button> = {
     fontSize: FONT_SIZE_CONTROLS,
     icon: ICON_CONTROLS,
     iconRight: ICON_CONTROLS,
-    mode: BUTTON_MODE_CONTROLS,
     padding: SPACE_CONTROLS,
     radius: RADIUS_CONTROLS,
     space: SPACE_CONTROLS,
     text: {control: 'text'},
-    tone: BUTTON_TONE_CONTROLS,
   },
   component: Button,
   tags: ['autodocs'],

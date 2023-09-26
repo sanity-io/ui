@@ -1,7 +1,7 @@
 import {AddCircleIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Flex, Stack, Text} from '../../src/primitives'
-import {ALIGN_CONTROLS, FONT_SIZE_CONTROLS} from '../constants'
+import {ALIGN_CONTROLS, FONT_SIZE_CONTROLS, TEXT_OVERFLOW_CONTROLS} from '../constants'
 
 const meta: Meta<typeof Text> = {
   args: {
@@ -10,9 +10,7 @@ const meta: Meta<typeof Text> = {
   argTypes: {
     align: ALIGN_CONTROLS,
     size: FONT_SIZE_CONTROLS,
-    textOverflow: {
-      control: 'text',
-    },
+    textOverflow: TEXT_OVERFLOW_CONTROLS,
   },
   component: Text,
   tags: ['autodocs'],

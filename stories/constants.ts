@@ -1,24 +1,26 @@
 import {icons} from '@sanity/icons'
 
 export const ALIGN_CONTROLS = {
-  controls: {
-    type: 'check',
+  control: {
+    type: 'radio',
   },
   options: ['left', 'center', 'right', 'initial'],
 }
 
-export const BUTTON_MODE_CONTROLS = {
-  controls: {
-    type: 'select',
+export const AVATAR_SIZE_CONTROLS = {
+  control: {
+    type: 'number',
+    min: 0,
+    max: 2,
   },
-  options: ['default', 'ghost', 'bleed'],
+  options: [0, 1, 2],
 }
 
-export const BUTTON_TONE_CONTROLS = {
-  controls: {
-    type: 'select',
+export const HEIGHT_CONTROLS = {
+  control: {
+    type: 'radio',
   },
-  options: ['default', 'primary', 'positive', 'caution', 'critical'],
+  options: ['fill', 'stretch'],
 }
 
 export const ICON_CONTROLS = {
@@ -39,13 +41,6 @@ export const FONT_SIZE_CONTROLS = {
     max: 4,
   },
   options: [0, 1, 2, 3, 4],
-}
-
-export const FONT_WEIGHT_CONTROLS = {
-  control: {
-    type: 'select',
-  },
-  options: ['regular', 'medium', 'semibold', 'bold'],
 }
 
 export const OVERFLOW_CONTROLS = {
@@ -80,6 +75,15 @@ export const SPACE_CONTROLS = {
     max: 9,
   },
   options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+}
+
+export const TEXT_OVERFLOW_CONTROLS = {
+  control: 'radio',
+  mapping: {
+    '(none)': '',
+    ellipsis: 'ellipsis',
+  },
+  options: ['(none)', 'ellipsis'],
 }
 
 export const WIDTH_CONTROLS = {
