@@ -1,14 +1,13 @@
-import {
-  ArrowUpIcon,
-  CheckmarkIcon,
-  CloseIcon,
-  ErrorOutlineIcon,
-  SearchIcon,
-  WarningOutlineIcon,
-} from '@sanity/icons'
+import {CloseIcon, SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
+import {
+  WORKSHOP_BUTTON_MODE_OPTIONS,
+  WORKSHOP_BUTTON_TONE_OPTIONS,
+} from '../../src/__workshop__/constants'
 import {Button, Flex, Stack} from '../../src/primitives'
 import {FONT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {MatrixBuilder} from '../helpers/Components/MatrixBuilder'
+import {capitalize} from '../helpers/utils'
 
 const meta: Meta<typeof Button> = {
   args: {
@@ -84,35 +83,40 @@ export const Tones: Story = {
   ),
 }
 
+const buttonModes = Object.values(WORKSHOP_BUTTON_MODE_OPTIONS)
+const buttonTones = Object.values(WORKSHOP_BUTTON_TONE_OPTIONS)
+
 export const MultipleStyles: Story = {
   parameters: {
     controls: {
-      include: ['fontSize', 'padding', 'radius'],
+      include: ['fontSize', 'padding', 'radius', 'icon', 'iconRight'],
     },
   },
   render: (props) => (
-    <Stack space={3}>
-      <Flex gap={2}>
-        <Button {...props} icon={SearchIcon} text="Default" />
-        <Button {...props} icon={ArrowUpIcon} text="Primary" tone="primary" />
-        <Button {...props} icon={CheckmarkIcon} text="Positive" tone="positive" />
-        <Button {...props} icon={WarningOutlineIcon} text="Caution" tone="caution" />
-        <Button {...props} icon={ErrorOutlineIcon} text="Critical" tone="critical" />
-      </Flex>
-      <Flex gap={2}>
-        <Button {...props} icon={SearchIcon} mode="bleed" text="Default" />
-        <Button {...props} icon={ArrowUpIcon} mode="bleed" text="Primary" tone="primary" />
-        <Button {...props} icon={CheckmarkIcon} mode="bleed" text="Positive" tone="positive" />
-        <Button {...props} icon={WarningOutlineIcon} mode="bleed" text="Caution" tone="caution" />
-        <Button {...props} icon={ErrorOutlineIcon} mode="bleed" text="Critical" tone="critical" />
-      </Flex>
-      <Flex gap={2}>
-        <Button {...props} icon={SearchIcon} mode="ghost" text="Default" />
-        <Button {...props} icon={ArrowUpIcon} mode="ghost" text="Primary" tone="primary" />
-        <Button {...props} icon={CheckmarkIcon} mode="ghost" text="Positive" tone="positive" />
-        <Button {...props} icon={WarningOutlineIcon} mode="ghost" text="Caution" tone="caution" />
-        <Button {...props} icon={ErrorOutlineIcon} mode="ghost" text="Critical" tone="critical" />
-      </Flex>
+    <Stack
+      space={3}
+      style={{
+        maxWidth: '640px',
+      }}
+    >
+      <MatrixBuilder
+        scheme="light"
+        columns={buttonModes}
+        rows={buttonTones}
+        title="Tone / Mode"
+        renderItem={({row, column}) => (
+          <Button {...props} tone={row} mode={column} text={capitalize(column)} />
+        )}
+      />
+      <MatrixBuilder
+        scheme="dark"
+        columns={buttonModes}
+        rows={buttonTones}
+        title="Tone / Mode"
+        renderItem={({row, column}) => (
+          <Button {...props} tone={row} mode={column} text={capitalize(column)} />
+        )}
+      />
     </Stack>
   ),
 }
