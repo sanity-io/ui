@@ -1,3 +1,4 @@
+import {FocusRing} from '../../types'
 import {ThemeAvatar} from './avatar'
 import {ThemeColorSchemes} from './color'
 import {ThemeFonts, ThemeFontWeightKey} from './fonts'
@@ -15,13 +16,10 @@ export interface BaseTheme<
   avatar: ThemeAvatar
   button: {
     textWeight: ThemeFontWeightKey
+    focusRing: FocusRing
   }
   color: ThemeColorSchemes
   container: number[]
-  focusRing: {
-    offset: number
-    width: number
-  }
   fonts: ThemeFonts
   /**
    * THIS API MAY BE UNSTABLE. DO NOT USE IN PRODUCTION.
@@ -33,5 +31,8 @@ export interface BaseTheme<
   shadows: Array<ThemeShadow | null>
   space: number[]
   input: ThemeInput
+  card: {
+    focusRing: FocusRing
+  }
   styles?: Styles
 }

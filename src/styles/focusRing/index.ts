@@ -1,3 +1,5 @@
+import {FocusRing} from '../../theme'
+
 export function focusRingBorderStyle(border: {color: string; width: number}): string {
   return `inset 0 0 0 ${border.width}px ${border.color}`
 }
@@ -5,7 +7,7 @@ export function focusRingBorderStyle(border: {color: string; width: number}): st
 export function focusRingStyle(opts: {
   base?: {bg: string}
   border?: {color: string; width: number}
-  focusRing: {offset: number; width: number}
+  focusRing: FocusRing
 }): string {
   const {base, border, focusRing} = opts
   const focusRingOutsetWidth = focusRing.offset + focusRing.width

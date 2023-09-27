@@ -48,7 +48,7 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$checkered, $focusRing, theme} = props
-  const {focusRing} = theme.sanity
+  const {focusRing} = theme.sanity.card
   const {base, card, dark} = theme.sanity.color
   const border = {width: 0, color: 'var(--card-border-color)'}
 

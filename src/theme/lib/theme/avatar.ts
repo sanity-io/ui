@@ -1,3 +1,5 @@
+import {FocusRing} from '../../types'
+
 /**
  * @public
  */
@@ -6,4 +8,5 @@ export interface ThemeAvatar {
     distance: number
     size: number
   }[]
+  focusRing: FocusRing
 }
