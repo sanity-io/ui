@@ -11,11 +11,13 @@ function ucfirst(str: string) {
 export function ColorPalette(): ReactNode {
   return (
     <ThemeProvider theme={studioTheme}>
-      <Grid columns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
-        {COLOR_HUES.map((hueKey) => (
-          <ColorHuePreview tints={hues[hueKey]} hueKey={hueKey} key={hueKey} />
-        ))}
-      </Grid>
+      <Card scheme="light">
+        <Grid columns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
+          {COLOR_HUES.map((hueKey) => (
+            <ColorHuePreview tints={hues[hueKey]} hueKey={hueKey} key={hueKey} />
+          ))}
+        </Grid>
+      </Card>
     </ThemeProvider>
   )
 }

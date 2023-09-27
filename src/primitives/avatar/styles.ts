@@ -57,7 +57,7 @@ function avatarArrowStyle(): CSSObject {
 
 export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSObject {
   const {$color, theme} = props
-  const {focusRing} = theme.sanity
+  const {focusRing} = theme.sanity.avatar
 
   return {
     backgroundColor: $color,
