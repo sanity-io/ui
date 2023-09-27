@@ -37,3 +37,11 @@ export interface ThemeContextValue {
   theme: RootTheme
   tone: ThemeColorName
 }
+
+/**
+ * @public
+ */
+export interface FocusRing {
+  offset: number
+  width: number
+}

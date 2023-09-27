@@ -29,6 +29,25 @@ export const Default: Story = {
   },
 }
 
+/**
+ * Displays focus ring, hover styles and receives focus events. Requires `__unstable_focusRing`.
+ */
+export const AsButton: Story = {
+  args: {
+    __unstable_focusRing: true,
+    as: 'button',
+    children: <Text>Card as a button</Text>,
+    tone: 'transparent',
+  },
+  render: (props) => (
+    <Flex gap={2}>
+      <Card {...props} />
+      <Card {...props} />
+      <Card {...props} />
+    </Flex>
+  ),
+}
+
 export const Borders: Story = {
   args: {
     tone: 'transparent',
