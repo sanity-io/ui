@@ -50,7 +50,7 @@ export function buttonColorStyles(
   props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps,
 ): CSSObject[] {
   const {$mode, theme} = props
-  const {focusRing} = theme.sanity
+  const {focusRing} = theme.sanity.button
   const base = theme.sanity.color.base
   const mode = theme.sanity.color.button[$mode] || theme.sanity.color.button.default
   const color = mode[props.$tone] || mode.default

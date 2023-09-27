@@ -20,6 +20,19 @@ export const Default: Story = {
   render: (props) => <Avatar {...props} />,
 }
 
+/**
+ * Displays focus ring and receives focus events. Unlike `<Card>` components, no hover states are displayed.
+ */
+export const AsButton: Story = {
+  render: (props) => (
+    <Flex gap={3}>
+      <Avatar {...props} as="button" />
+      <Avatar {...props} as="button" />
+      <Avatar {...props} as="button" />
+    </Flex>
+  ),
+}
+
 export const Colors: Story = {
   parameters: {
     controls: {
