@@ -135,8 +135,9 @@ const buttonTones = Object.values(WORKSHOP_BUTTON_TONE_OPTIONS)
 
 export const MultipleStyles: Story = {
   args: {
-    text: 'Button',
+    // Defaults button props.
     padding: 3,
+    space: 3,
     fontSize: 1,
     radius: 2,
     icon: 'square',
@@ -145,6 +146,10 @@ export const MultipleStyles: Story = {
     // For small buttons:
     // space: 2,
     // padding: 2,
+
+    text: 'Button',
+    icon: 'square',
+    iconRight: 'square',
   },
   parameters: {
     controls: {
