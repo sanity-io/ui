@@ -48,7 +48,8 @@
     "workshop:dev": "node -r esbuild-register -r tsconfig-paths/register scripts/dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "serve-storybook": "serve storybook-static"
   },
   "dependencies": {
     "@floating-ui/react-dom": "2.0.0",

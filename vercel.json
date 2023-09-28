@@ -12,5 +12,7 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "framework": "storybook",
+  "buildCommand": "storybook build"
 }
