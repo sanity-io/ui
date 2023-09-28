@@ -26,7 +26,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "run-s clean build-storybook serve-storybook build:pkg check:pkg ",
+    "build": "run-s clean build:pkg check:pkg ",
     "build:pkg": "pkg build --strict",
     "check:pkg": "pkg --strict",
     "check:types": "tsc",
@@ -44,7 +44,7 @@
     "test": "jest",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
     "watch": "pkg watch --strict",
-    "workshop:build": "node -r esbuild-register -r tsconfig-paths/register scripts/build",
+    "workshop:build": "node -r esbuild-register -r tsconfig-paths/register scripts/build && storybook build",
     "workshop:dev": "node -r esbuild-register -r tsconfig-paths/register scripts/dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist",
     "storybook": "storybook dev -p 6006",
