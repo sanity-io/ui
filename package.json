@@ -26,7 +26,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "run-s clean build:pkg check:pkg build-storybook",
+    "build": "run-s clean build-storybook serve-storybook build:pkg check:pkg ",
     "build:pkg": "pkg build --strict",
     "check:pkg": "pkg --strict",
     "check:types": "tsc",
