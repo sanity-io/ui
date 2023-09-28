@@ -11,9 +11,10 @@
     {
       "src": "/(.*)",
       "dest": "/index.html"
+    },
+    {
+      "src": "/storybook/(.*)",
+      "dest": "/storybook-static/$1"
     }
-  ],
-  "framework": "storybook",
-  "buildCommand": "storybook build",
-  "outputDirectory": "/storybook-static"
+  ]
 }
