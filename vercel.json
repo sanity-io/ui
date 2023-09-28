@@ -14,5 +14,6 @@
     }
   ],
   "framework": "storybook",
-  "buildCommand": "storybook build"
+  "buildCommand": "storybook build",
+  "outputDirectory": "/storybook-static"
 }
