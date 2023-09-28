@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   ArrowUpIcon,
   CheckmarkIcon,
@@ -7,8 +8,13 @@ import {
   WarningOutlineIcon,
 } from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
-import {Button, Flex, Stack} from '../../src/primitives'
+import {
+  WORKSHOP_BUTTON_MODE_OPTIONS,
+  WORKSHOP_BUTTON_TONE_OPTIONS,
+} from '../../src/__workshop__/constants'
+import {Button, Flex, Grid, Stack, Text} from '../../src/primitives'
 import {FONT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Button> = {
   args: {
@@ -84,34 +90,119 @@ export const Tones: Story = {
   ),
 }
 
+
+const SubHeader = () => (
+  <>
+    <div />
+    <Grid columns={2} marginY={2}>
+      <Text size={0} align={'center'}>
+        Default
+      </Text>
+      <Text size={0} align={'center'}>
+        Size small
+      </Text>
+    </Grid>
+    <Grid columns={3} marginY={2}>
+      <Text size={0} align={'center'}>
+        Default
+      </Text>
+      <Text size={0} align={'center'}>
+        Font secondary
+      </Text>
+      <Text size={0} align={'center'}>
+        {' '}
+        Size small
+      </Text>
+    </Grid>
+    <Grid columns={3} marginY={2}>
+      <Text size={0} align={'center'}>
+        Default
+      </Text>
+      <Text size={0} align={'center'}>
+        Font secondary
+      </Text>
+
+      <Text size={0} align={'center'}>
+        {' '}
+        Size small
+      </Text>
+    </Grid>
+  </>
+)
+
+const buttonModes = Object.values(WORKSHOP_BUTTON_MODE_OPTIONS)
+const buttonTones = Object.values(WORKSHOP_BUTTON_TONE_OPTIONS)
+
 export const MultipleStyles: Story = {
+  args: {
+    text: 'Button',
+    padding: 3,
+    fontSize: 1,
+    radius: 2,
+    icon: 'square',
+    iconRight: 'square',
+
+    // For small buttons:
+    // space: 2,
+    // padding: 2,
+  },
   parameters: {
     controls: {
-      include: ['fontSize', 'padding', 'radius'],
+      include: ['text', 'icon', 'iconRight', 'fontSize'],
     },
   },
   render: (props) => (
     <Stack space={3}>
-      <Flex gap={2}>
-        <Button {...props} icon={SearchIcon} text="Default" />
-        <Button {...props} icon={ArrowUpIcon} text="Primary" tone="primary" />
-        <Button {...props} icon={CheckmarkIcon} text="Positive" tone="positive" />
-        <Button {...props} icon={WarningOutlineIcon} text="Caution" tone="caution" />
-        <Button {...props} icon={ErrorOutlineIcon} text="Critical" tone="critical" />
-      </Flex>
-      <Flex gap={2}>
-        <Button {...props} icon={SearchIcon} mode="bleed" text="Default" />
-        <Button {...props} icon={ArrowUpIcon} mode="bleed" text="Primary" tone="primary" />
-        <Button {...props} icon={CheckmarkIcon} mode="bleed" text="Positive" tone="positive" />
-        <Button {...props} icon={WarningOutlineIcon} mode="bleed" text="Caution" tone="caution" />
-        <Button {...props} icon={ErrorOutlineIcon} mode="bleed" text="Critical" tone="critical" />
-      </Flex>
-      <Flex gap={2}>
-        <Button {...props} icon={SearchIcon} mode="ghost" text="Default" />
-        <Button {...props} icon={ArrowUpIcon} mode="ghost" text="Primary" tone="primary" />
-        <Button {...props} icon={CheckmarkIcon} mode="ghost" text="Positive" tone="positive" />
-        <Button {...props} icon={WarningOutlineIcon} mode="ghost" text="Caution" tone="caution" />
-        <Button {...props} icon={ErrorOutlineIcon} mode="ghost" text="Critical" tone="critical" />
+      <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
+        {matrixBuilder({
+          scheme: 'light',
+          columns: buttonModes,
+          rows: buttonTones,
+          title: 'Tone / Mode',
+          subHeader: <SubHeader />,
+          renderItem: ({row, column}) => (
+            <Flex gap={1} justify={'center'} align={'center'}>
+              <Button {...props} tone={row} mode={column} text={props.text} textStyle="primary" />
+
+              {column !== 'default' && (
+                <Button
+                  {...props}
+                  tone={row}
+                  mode={column}
+                  text={props.text}
+                  textStyle="secondary"
+                />
+              )}
+              {/* Small button */}
+              <Button {...props} space={2} padding={2} tone={row} mode={column} text={props.text} />
+            </Flex>
+          ),
+        })}
+        {matrixBuilder({
+          scheme: 'dark',
+          columns: buttonModes,
+          rows: buttonTones,
+          title: 'Tone / Mode',
+          subHeader: <SubHeader />,
+
+          renderItem: ({row, column}) => (
+            <Flex gap={1} justify={'center'} align={'center'}>
+              <Button {...props} tone={row} mode={column} text={props.text} textStyle="primary" />
+
+              {column !== 'default' && (
+                <Button
+                  {...props}
+                  tone={row}
+                  mode={column}
+                  text={props.text}
+                  textStyle="secondary"
+                />
+              )}
+              {/* Small button */}
+              <Button {...props} space={2} padding={2} tone={row} mode={column} text={props.text} />
+            </Flex>
+          ),
+        })}
       </Flex>
     </Stack>
   ),
