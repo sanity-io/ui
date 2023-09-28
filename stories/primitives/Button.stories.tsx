@@ -169,15 +169,18 @@ const modesConversion: {
 const rows: Array<(typeof buttonTones)[number]> = ['default', 'positive', 'caution', 'critical']
 export const StudioButtons: Story = {
   args: {
-    text: 'Button',
+    // Defaults button props.
     padding: 3,
+    space: 3,
     fontSize: 1,
     radius: 2,
-    icon: 'square',
-    iconRight: 'square',
-    // For small buttons:
+    // Small buttons:
     // space: 2,
     // padding: 2,
+
+    text: 'Button',
+    icon: 'square',
+    iconRight: 'square',
   },
   parameters: {
     controls: {
@@ -194,7 +197,7 @@ export const StudioButtons: Story = {
           title: 'Tone / Mode',
           subHeader: <SubHeader />,
           renderItem: ({row, column}) => (
-            <Flex gap={1} justify={'center'} align={'center'}>
+            <Flex gap={1} justify={'center'} align={'center'} wrap={'wrap'}>
               <Button
                 {...props}
                 tone={row}
@@ -232,7 +235,7 @@ export const StudioButtons: Story = {
           subHeader: <SubHeader />,
 
           renderItem: ({row, column}) => (
-            <Flex gap={1} justify={'center'} align={'center'}>
+            <Flex gap={1} justify={'center'} align={'center'} wrap={'wrap'}>
               <Button
                 {...props}
                 tone={row}

@@ -30,9 +30,6 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   selected?: boolean
   space?: number | number[]
   textAlign?: ButtonTextAlign
-  /**
-   * @default primary
-   */
   textStyle?: ButtonTextStyle
   text?: React.ReactNode
   tone?: ButtonTone
@@ -140,7 +137,7 @@ export const Button = forwardRef(function Button(
 
       {(icon || text || iconRight) && (
         <Box as="span" {...boxProps}>
-          <Flex as="span" justify={justify}>
+          <Flex as="span" justify={justify} gap={space}>
             {icon && (
               <Text size={fontSize} muted={textStyle === 'secondary'}>
                 {isValidElement(icon) && icon}
@@ -149,11 +146,7 @@ export const Button = forwardRef(function Button(
             )}
 
             {text && (
-              <Box
-                flex={iconRight ? 1 : undefined}
-                marginLeft={icon ? space : undefined}
-                marginRight={iconRight ? space : undefined}
-              >
+              <Box flex={iconRight ? 1 : undefined}>
                 <Text
                   muted={textStyle === 'secondary'}
                   align={textAlign}
