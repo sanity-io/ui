@@ -59,7 +59,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
         height: ${rem(input.radio.markSize)};
         width: ${rem(input.radio.markSize)};
         border-radius: ${rem(input.radio.markSize / 2)};
-        background: ${color.default.enabled.fg};
+        background: ${color.default.enabled.bg2};
         opacity: 0;
       }
     }
@@ -89,7 +89,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
       background: ${color.default.readOnly.bg};
 
       &::after {
-        background: ${color.default.readOnly.fg};
+        background: ${color.default.readOnly.border};
       }
     }
 
@@ -99,7 +99,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
       background: ${color.default.disabled.bg};
 
       &::after {
-        background: ${color.default.disabled.fg};
+        background: ${color.default.disabled.border};
       }
     }
   `
