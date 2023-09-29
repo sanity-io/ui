@@ -524,7 +524,7 @@ export const color = createColorTheme({
     if (state === 'disabled') {
       return {
         bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
+        fg: getColor(tones.default, dark, 'default', 'text_secondary'),
         border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
         placeholder: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
       }
@@ -533,7 +533,7 @@ export const color = createColorTheme({
     if (state === 'readOnly') {
       return {
         bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 200 : 800].hex),
+        fg: getColor(tones.default, dark, 'default', 'text_secondary'),
         border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
         placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
       }
