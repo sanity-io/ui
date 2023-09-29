@@ -2,6 +2,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 import {Checkbox, Flex, Stack} from '../../src/primitives'
+import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Checkbox> = {
   argTypes: {
@@ -46,15 +47,47 @@ export const InputStates: Story = {
   render: (props) => {
     return (
       <Stack space={3}>
-        <Flex gap={3}>
-          <Checkbox {...props} />
-          <Checkbox {...props} indeterminate />
-          <Checkbox {...props} defaultChecked />
-        </Flex>
-        <Flex gap={3}>
-          <Checkbox {...props} disabled />
-          <Checkbox {...props} disabled indeterminate />
-          <Checkbox {...props} defaultChecked disabled />
+        <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
+          {matrixBuilder({
+            scheme: 'light',
+            columns: ['default', 'indeterminate', 'checked'],
+            rows: ['enabled', 'disabled', 'readOnly'],
+            title: '',
+            renderItem({row, column}) {
+              return (
+                <Flex justify="center" marginTop={2}>
+                  <Checkbox
+                    {...props}
+                    defaultChecked={column === 'checked'}
+                    disabled={row === 'disabled'}
+                    indeterminate={column === 'indeterminate'}
+                    readOnly={row === 'readOnly'}
+                    key={row + column}
+                  />
+                </Flex>
+              )
+            },
+          })}
+          {matrixBuilder({
+            scheme: 'dark',
+            columns: ['default', 'indeterminate', 'checked'],
+            rows: ['enabled', 'disabled', 'readOnly'],
+            title: '',
+            renderItem({row, column}) {
+              return (
+                <Flex justify="center" marginTop={2}>
+                  <Checkbox
+                    {...props}
+                    defaultChecked={column === 'checked'}
+                    disabled={row === 'disabled'}
+                    indeterminate={column === 'indeterminate'}
+                    readOnly={row === 'readOnly'}
+                    key={row + column}
+                  />
+                </Flex>
+              )
+            },
+          })}
         </Flex>
       </Stack>
     )

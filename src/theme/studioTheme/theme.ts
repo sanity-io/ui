@@ -38,7 +38,7 @@ export const studioTheme: RootTheme = {
   input: {
     checkbox: {
       size: 17,
-      focusRing: {offset: 1, width: 1},
+      focusRing: {offset: -1, width: 1},
     },
     radio: {
       size: 17,

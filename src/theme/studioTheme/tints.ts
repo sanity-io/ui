@@ -58,7 +58,7 @@ const defaultTints: {
   },
 }
 
-export const colorTints: {
+const colorTints: {
   light: {
     [key in validTones]: ColorTintsDictionary
   }
