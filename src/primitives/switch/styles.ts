@@ -38,11 +38,11 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
   const {theme} = props
   const {input} = theme.sanity
   const {focusRing} = input.switch
-  const color = theme.sanity.color.button.default
+  const color = theme.sanity.color.input
 
   return css`
-    --switch-bg-color: ${color.default.enabled.bg};
-    --switch-fg-color: ${color.default.enabled.fg};
+    --switch-bg-color: ${color.default.enabled.border};
+    --switch-fg-color: ${color.default.enabled.bg};
     --switch-box-shadow: none;
 
     &:not([hidden]) {
@@ -79,25 +79,30 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
     }
 
     input:checked + && {
-      --switch-bg-color: ${color.positive.enabled.bg};
-      --switch-fg-color: ${color.positive.enabled.fg};
+      --switch-bg-color: var(--card-focus-ring-color);
+      --switch-fg-color: ${color.default.enabled.bg};
     }
 
     @media (hover: hover) {
       input:not(:disabled):hover + && {
-        --switch-bg-color: ${color.default.hovered.bg};
-        --switch-fg-color: ${color.default.hovered.fg};
+        --switch-bg-color: ${color.default.hovered.border};
+        --switch-fg-color: ${color.default.hovered.bg};
       }
 
       input:not(:disabled):checked:hover + && {
-        --switch-bg-color: ${color.positive.hovered.bg};
-        --switch-fg-color: ${color.positive.hovered.fg};
+        --switch-bg-color: var(--card-focus-ring-color);
+        --switch-fg-color: ${color.default.enabled.bg};
       }
     }
 
     input:not([data-read-only]):disabled + && {
-      --switch-bg-color: ${color.default.disabled.bg};
-      --switch-fg-color: ${color.default.disabled.fg};
+      --switch-bg-color: ${color.default.disabled.border};
+      --switch-fg-color: ${color.default.disabled.bg};
+    }
+
+    input[data-read-only]:disabled + && {
+      --switch-bg-color: ${color.default.readOnly.border};
+      --switch-fg-color: ${color.default.readOnly.bg};
     }
   `
 }
@@ -150,6 +155,7 @@ export function switchThumbStyles(
     transition-timing-function: ${input.switch.transitionTimingFunction};
     background: var(--switch-fg-color);
     transform: translate3d(0, 0, 0);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
 
     ${checked &&
     css`

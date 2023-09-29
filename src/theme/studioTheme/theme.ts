@@ -46,9 +46,9 @@ export const studioTheme: RootTheme = {
       focusRing: {offset: -1, width: 1},
     },
     switch: {
-      width: 33,
-      height: 17,
-      padding: 4,
+      width: 21,
+      height: 13,
+      padding: 2,
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
       focusRing: {offset: 1, width: 1},
