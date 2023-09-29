@@ -43,7 +43,7 @@ export const studioTheme: RootTheme = {
     radio: {
       size: 17,
       markSize: 9,
-      focusRing: {offset: 1, width: 1},
+      focusRing: {offset: -1, width: 1},
     },
     switch: {
       width: 33,

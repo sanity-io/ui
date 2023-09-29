@@ -2,6 +2,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {ChangeEvent, useCallback, useState} from 'react'
 import {Flex, Radio, Stack} from '../../src/primitives'
+import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Radio> = {
   argTypes: {
@@ -52,13 +53,45 @@ export const InputStates: Story = {
   render: (props) => {
     return (
       <Stack space={3}>
-        <Flex gap={3}>
-          <Radio {...props} />
-          <Radio {...props} defaultChecked />
-        </Flex>
-        <Flex gap={3}>
-          <Radio {...props} disabled />
-          <Radio {...props} defaultChecked disabled />
+        <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
+          {matrixBuilder({
+            scheme: 'light',
+            columns: ['default', 'checked'],
+            rows: ['enabled', 'disabled', 'readOnly'],
+            title: '',
+            renderItem({row, column}) {
+              return (
+                <Flex justify="center" marginTop={2}>
+                  <Radio
+                    {...props}
+                    defaultChecked={column === 'checked'}
+                    disabled={row === 'disabled'}
+                    readOnly={row === 'readOnly'}
+                    key={row + column}
+                  />
+                </Flex>
+              )
+            },
+          })}
+          {matrixBuilder({
+            scheme: 'dark',
+            columns: ['default', 'checked'],
+            rows: ['enabled', 'disabled', 'readOnly'],
+            title: '',
+            renderItem({row, column}) {
+              return (
+                <Flex justify="center" marginTop={2}>
+                  <Radio
+                    {...props}
+                    defaultChecked={column === 'checked'}
+                    disabled={row === 'disabled'}
+                    readOnly={row === 'readOnly'}
+                    key={row + column}
+                  />
+                </Flex>
+              )
+            },
+          })}
         </Flex>
       </Stack>
     )
