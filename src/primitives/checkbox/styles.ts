@@ -50,22 +50,35 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
 
         & > path {
           vector-effect: non-scaling-stroke;
-          stroke-width: 2 !important;
+          stroke-width: 1.2 !important;
         }
       }
     }
 
-    &:not(:disabled):focus + span {
+    &:not(:checked)&:not(:disabled):focus + span {
       box-shadow: ${focusRingStyle({
         border: {width: input.border.width, color: color.default.enabled.border},
         focusRing,
       })};
     }
 
-    &:not(:disabled):focus:not(:focus-visible) + span {
+    &:not(:checked)&:not(:disabled):focus:not(:focus-visible) + span {
       box-shadow: ${focusRingBorderStyle({
         color: color.default.enabled.border,
         width: input.border.width,
+      })};
+    }
+    &:checked + span {
+      background: ${color.default.enabled.bg2};
+      box-shadow: ${focusRingBorderStyle({
+        color: color.default.enabled.bg2,
+        width: input.border.width,
+      })};
+      color: ${color.default.enabled.bg};
+    }
+    &:checked&:not(:disabled):focus + span {
+      box-shadow: ${focusRingStyle({
+        focusRing: {width: 1, offset: 1},
       })};
     }
 
@@ -81,6 +94,9 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       })};
       color: ${color.default.readOnly.fg};
     }
+    &:checked&[data-read-only]:disabled + span {
+      background-color: ${color.default.readOnly.bg2};
+    }
 
     &:not([data-read-only]):disabled + span {
       background-color: ${color.default.disabled.bg};
@@ -89,6 +105,9 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
         color: color.default.disabled.border,
       })};
       color: ${color.default.disabled.fg};
+    }
+    &:checked&:not([data-read-only]):disabled + span {
+      background-color: ${color.default.disabled.bg2};
     }
 
     &:indeterminate + span > svg:last-child {
