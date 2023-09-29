@@ -5,10 +5,6 @@
       "handle": "filesystem"
     },
     {
-      "src": "/storybook/(.*)",
-      "dest": "/storybook-static/$1"
-    },
-    {
       "src": "/frame/(.*)",
       "dest": "/frame/index.html"
     },
@@ -16,5 +12,8 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "framework": "storybook",
+  "buildCommand": "storybook build",
+  "outputDirectory": "/storybook-static"
 }
