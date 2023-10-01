@@ -12,7 +12,7 @@ import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
-import {DialogPosition} from '../../types'
+import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {
   dialogStyle,
@@ -33,7 +33,7 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
    * @beta
    */
   __unstable_hideCloseButton?: boolean
-  cardRadius?: number | number[]
+  cardRadius?: Radius | Radius[]
   cardShadow?: number | number[]
   contentRef?: React.ForwardedRef<HTMLDivElement>
   footer?: React.ReactNode
@@ -66,7 +66,7 @@ interface DialogCardProps extends ResponsiveWidthProps {
   onClickOutside?: () => void
   onClose?: () => void
   portal?: string
-  radius: number | number[]
+  radius: Radius | Radius[]
   scheme?: ThemeColorSchemeKey
   shadow: number | number[]
 }

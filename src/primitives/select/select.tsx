@@ -2,6 +2,7 @@ import {SelectIcon} from '@sanity/icons'
 import {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
+import {Radius} from '../../types'
 import {Box} from '../box'
 import {Text} from '../text'
 import {selectStyle} from './styles'
@@ -12,7 +13,7 @@ import {selectStyle} from './styles'
 export interface SelectProps {
   fontSize?: number | number[]
   padding?: number | number[]
-  radius?: number | number[]
+  radius?: Radius | Radius[]
   space?: number | number[]
   customValidity?: string
 }
@@ -22,7 +23,7 @@ const Root = styled.div(selectStyle.root)
 const Input = styled.select<{
   $fontSize: number[]
   $padding: number[]
-  $radius: number[]
+  $radius: Radius[]
   $space: number[]
 }>(selectStyle.input)
 

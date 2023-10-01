@@ -4,7 +4,7 @@ import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
-import {SelectableTone} from '../../types/selectable'
+import {Radius, SelectableTone} from '../../types'
 import {Menu} from './menu'
 import {useMenu} from './useMenu'
 
@@ -17,7 +17,7 @@ export interface MenuGroupProps {
   icon?: React.ElementType | React.ReactNode
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
-  radius?: number | number[]
+  radius?: Radius | Radius[]
   space?: number | number[]
   text: React.ReactNode
   tone?: SelectableTone
