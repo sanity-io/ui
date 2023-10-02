@@ -2,6 +2,7 @@ import {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
+import {Radius} from '../../types'
 import {Box} from '../box'
 import {Code} from '../code'
 
@@ -12,7 +13,7 @@ export interface KBDProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   padding?: number | number[]
-  radius?: number | number[]
+  radius?: Radius | Radius[]
 }
 
 function kbdStyle() {

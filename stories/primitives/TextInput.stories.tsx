@@ -1,7 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
-import {Box, Grid, Text, TextInput} from '../../src/primitives'
-import {FONT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {Box, Flex, Grid, Text, TextInput} from '../../src/primitives'
+import {
+  getFontSizeControls,
+  getIconControls,
+  getRadiusControls,
+  getSpaceControls,
+} from '../controls'
+import {radiusBuilder} from '../helpers/radiusBuilder'
 import {FieldWrapper} from './components/FieldWrapper'
 
 const meta: Meta<typeof TextInput> = {
@@ -9,11 +15,11 @@ const meta: Meta<typeof TextInput> = {
     placeholder: 'Placeholder text...',
   },
   argTypes: {
-    fontSize: FONT_SIZE_CONTROLS,
-    icon: ICON_CONTROLS,
-    iconRight: ICON_CONTROLS,
-    radius: RADIUS_CONTROLS,
-    space: SPACE_CONTROLS,
+    fontSize: getFontSizeControls('text'),
+    icon: getIconControls(),
+    iconRight: getIconControls(),
+    radius: getRadiusControls(),
+    space: getSpaceControls(),
   },
   component: TextInput,
   tags: ['autodocs'],
@@ -39,6 +45,23 @@ export const CustomValidity: Story = {
   },
   render: (props) => {
     return <TextInput {...props} />
+  },
+}
+
+export const Radius: Story = {
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'tone'],
+    },
+  },
+  render: (props) => {
+    return (
+      <Flex gap={2} wrap="wrap">
+        {radiusBuilder({
+          renderItem: ({radius}) => <TextInput {...props} radius={radius} value={radius} />,
+        })}
+      </Flex>
+    )
   },
 }
 
