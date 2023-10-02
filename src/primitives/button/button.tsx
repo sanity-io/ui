@@ -5,7 +5,7 @@ import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
-import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify, ButtonTextStyle} from '../../types'
+import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Spinner} from '../spinner'
@@ -30,7 +30,7 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   selected?: boolean
   space?: number | number[]
   textAlign?: ButtonTextAlign
-  textStyle?: ButtonTextStyle
+  muted?: boolean
   text?: React.ReactNode
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
@@ -85,7 +85,7 @@ export const Button = forwardRef(function Button(
     textAlign,
     tone = 'default',
     type = 'button',
-    textStyle = 'primary',
+    muted = false,
     ...restProps
   } = props
 
@@ -139,7 +139,7 @@ export const Button = forwardRef(function Button(
         <Box as="span" {...boxProps}>
           <Flex as="span" justify={justify} gap={space}>
             {icon && (
-              <Text size={fontSize} muted={textStyle === 'secondary'}>
+              <Text size={fontSize}>
                 {isValidElement(icon) && icon}
                 {isValidElementType(icon) && createElement(icon)}
               </Text>
@@ -148,7 +148,7 @@ export const Button = forwardRef(function Button(
             {text && (
               <Box flex={iconRight ? 1 : undefined}>
                 <Text
-                  muted={textStyle === 'secondary'}
+                  muted={muted}
                   align={textAlign}
                   size={fontSize}
                   textOverflow="ellipsis"
@@ -160,7 +160,7 @@ export const Button = forwardRef(function Button(
             )}
 
             {iconRight && (
-              <Text size={fontSize} muted={textStyle === 'secondary'}>
+              <Text size={fontSize}>
                 {isValidElement(iconRight) && iconRight}
                 {isValidElementType(iconRight) && createElement(iconRight)}
               </Text>

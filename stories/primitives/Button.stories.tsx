@@ -101,7 +101,7 @@ const SubHeader = () => (
         Default
       </Text>
       <Text size={0} align={'center'}>
-        Font secondary
+        Muted
       </Text>
       <Text size={0} align={'center'}>
         {' '}
@@ -113,7 +113,7 @@ const SubHeader = () => (
         Default
       </Text>
       <Text size={0} align={'center'}>
-        Font secondary
+        Muted
       </Text>
 
       <Text size={0} align={'center'}>
@@ -158,16 +158,10 @@ export const MultipleStyles: Story = {
           subHeader: <SubHeader />,
           renderItem: ({row, column}) => (
             <Flex gap={1} justify={'center'} align={'center'}>
-              <Button {...props} tone={row} mode={column} text={props.text} textStyle="primary" />
+              <Button {...props} tone={row} mode={column} text={props.text} />
 
               {column !== 'default' && (
-                <Button
-                  {...props}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                  textStyle="secondary"
-                />
+                <Button {...props} tone={row} mode={column} text={props.text} muted />
               )}
               {/* Small button */}
               <Button {...props} space={2} padding={2} tone={row} mode={column} text={props.text} />
@@ -183,16 +177,10 @@ export const MultipleStyles: Story = {
 
           renderItem: ({row, column}) => (
             <Flex gap={1} justify={'center'} align={'center'}>
-              <Button {...props} tone={row} mode={column} text={props.text} textStyle="primary" />
+              <Button {...props} tone={row} mode={column} text={props.text} />
 
               {column !== 'default' && (
-                <Button
-                  {...props}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                  textStyle="secondary"
-                />
+                <Button {...props} tone={row} mode={column} text={props.text} muted />
               )}
               {/* Small button */}
               <Button {...props} space={2} padding={2} tone={row} mode={column} text={props.text} />

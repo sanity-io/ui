@@ -101,6 +101,7 @@ export const color = createColorTheme({
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
         fg: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
         muted: {
           fg: mix(base.bg, tints[dark ? 950 : 50].hex),
         },
@@ -129,7 +130,8 @@ export const color = createColorTheme({
         bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
-        fg: mix(base.bg, dark ? black.hex : white.hex),
+        fg: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
@@ -158,7 +160,8 @@ export const color = createColorTheme({
         bg: bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
-        fg: mix(base.bg, dark ? black.hex : white.hex),
+        fg: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
@@ -191,7 +194,8 @@ export const color = createColorTheme({
         bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
-        fg: mix(base.bg, dark ? black.hex : white.hex),
+        fg: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
@@ -220,7 +224,8 @@ export const color = createColorTheme({
       bg,
       bg2: mix2(bg, tints[dark ? 50 : 950].hex),
       border: bg,
-      fg: mix(base.bg, dark ? black.hex : white.hex),
+      fg: getColorHex(tints, dark, 'default', 'bg_base'),
+      iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
       muted: {
         fg: mix(base.bg, tints[dark ? 900 : 100].hex),
       },
@@ -259,6 +264,7 @@ export const color = createColorTheme({
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: mix(bg, tints[dark ? 950 : 50].hex),
         fg: getColorHex(tints, dark, tone, 'text_primary'),
+        iconColor: getColorHex(tints, dark, name, 'icon_default'),
         muted: {
           fg: getColorHex(tints, dark, tone, 'text_secondary'),
         },
@@ -287,10 +293,8 @@ export const color = createColorTheme({
         bg,
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: mix(bg, tints[dark ? 900 : 100].hex),
-        fg:
-          tone !== 'default' && tone !== 'primary'
-            ? getColorHex(tints, dark, tone, 'text_secondary')
-            : getColorHex(tints, dark, tone, 'text_primary'),
+        fg: getColorHex(tints, dark, tone, 'text_primary'),
+        iconColor: getColorHex(tints, dark, name, 'icon_default'),
         muted: {
           fg: getColorHex(tints, dark, tone, 'text_secondary'),
         },
@@ -323,10 +327,8 @@ export const color = createColorTheme({
         bg,
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: getColorHex(tints, dark, name, 'border_base'),
-        fg:
-          tone !== 'default' && tone !== 'primary'
-            ? getColorHex(tints, dark, tone, 'text_secondary')
-            : getColorHex(tints, dark, tone, 'text_primary'),
+        fg: getColorHex(tints, dark, tone, 'text_primary'),
+        iconColor: getColorHex(tints, dark, name, 'icon_default'),
         muted: {
           fg: getColorHex(tints, dark, tone, 'text_secondary'),
         },
@@ -359,10 +361,8 @@ export const color = createColorTheme({
         bg,
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
         border: getColorHex(tints, dark, name, 'border_base'),
-        fg:
-          tone !== 'default' && tone !== 'primary'
-            ? getColorHex(tints, dark, tone, 'text_secondary')
-            : getColorHex(tints, dark, tone, 'text_primary'),
+        fg: getColorHex(tints, dark, tone, 'text_primary'),
+        iconColor: getColorHex(tints, dark, name, 'icon_default'),
         muted: {
           fg: getColorHex(tints, dark, tone, 'text_secondary'),
         },
@@ -390,10 +390,8 @@ export const color = createColorTheme({
       bg,
       bg2: mix(bg, tints[dark ? 950 : 50].hex),
       border: mix(bg, getColorHex(tints, dark, name, 'bg_base')),
-      fg:
-        tone !== 'default' && tone !== 'primary'
-          ? getColorHex(tints, dark, tone, 'text_secondary')
-          : getColorHex(tints, dark, tone, 'text_primary'),
+      fg: getColorHex(tints, dark, tone, 'text_primary'),
+      iconColor: getColorHex(tints, dark, name, 'icon_default'),
       muted: {
         fg: getColorHex(tints, dark, tone, 'text_secondary'),
       },
@@ -489,6 +487,7 @@ export const color = createColorTheme({
       bg,
       bg2: mix(bg, tints[dark ? 950 : 50].hex),
       fg: base.fg,
+      iconColor: getColorHex(tints, dark, name, 'icon_default'),
       border: base.border,
       muted: {
         fg: mix(base.bg, tints[dark ? 400 : 600].hex),

@@ -12,8 +12,3 @@ export type ButtonTextAlign = 'left' | 'right' | 'center'
  * @public
  */
 export type ButtonTone = 'default' | 'primary' | 'positive' | 'caution' | 'critical'
-
-/**
- * @public
- */
-export type ButtonTextStyle = 'primary' | 'secondary'
