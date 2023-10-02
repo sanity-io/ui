@@ -8,19 +8,25 @@ import {
 } from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Button, Flex, Stack} from '../../src/primitives'
-import {FONT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {
+  getFontSizeControls,
+  getIconControls,
+  getRadiusControls,
+  getSpaceControls,
+} from '../controls'
+import {radiusBuilder} from '../helpers/radiusBuilder'
 
 const meta: Meta<typeof Button> = {
   args: {
     text: 'Label',
   },
   argTypes: {
-    fontSize: FONT_SIZE_CONTROLS,
-    icon: ICON_CONTROLS,
-    iconRight: ICON_CONTROLS,
-    padding: SPACE_CONTROLS,
-    radius: RADIUS_CONTROLS,
-    space: SPACE_CONTROLS,
+    fontSize: getFontSizeControls('text'),
+    icon: getIconControls(),
+    iconRight: getIconControls(),
+    padding: getSpaceControls(),
+    radius: getRadiusControls(),
+    space: getSpaceControls(),
     text: {control: 'text'},
   },
   component: Button,
@@ -50,6 +56,21 @@ export const WithIcons: Story = {
     },
   },
   render: (props) => <Button {...props} />,
+}
+
+export const Radius: Story = {
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'tone'],
+    },
+  },
+  render: (props) => (
+    <Flex gap={2} wrap="wrap">
+      {radiusBuilder({
+        renderItem: ({radius}) => <Button {...props} radius={radius} text={radius} />,
+      })}
+    </Flex>
+  ),
 }
 
 export const Modes: Story = {

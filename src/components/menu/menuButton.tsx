@@ -2,7 +2,7 @@ import {cloneElement, forwardRef, useCallback, useMemo, useState, useEffect, use
 import {isElement} from 'react-is'
 import {Popover, PopoverProps} from '../../primitives'
 import {ThemeColorSchemeKey} from '../../theme'
-import {Placement} from '../../types'
+import {Placement, Radius} from '../../types'
 import {MenuProps} from './menu'
 
 /**
@@ -34,7 +34,7 @@ export interface MenuButtonProps {
   /**
    * @deprecated Use `popover={{radius: 2}}` instead.
    */
-  popoverRadius?: number | number[]
+  popoverRadius?: Radius | Radius[]
   /**
    * @beta Do not use in production.
    * @deprecated Use `popover={{portal: true}}` instead.

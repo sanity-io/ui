@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Badge, Flex, Stack} from '../../src/primitives'
-import {FONT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {radiusBuilder} from '../helpers/radiusBuilder'
 
 const meta: Meta<typeof Badge> = {
   component: Badge,
@@ -8,9 +9,9 @@ const meta: Meta<typeof Badge> = {
     children: 'Jackdaws love my big sphinx of quartz',
   },
   argTypes: {
-    fontSize: FONT_SIZE_CONTROLS,
-    padding: SPACE_CONTROLS,
-    radius: RADIUS_CONTROLS,
+    fontSize: getFontSizeControls('label'),
+    padding: getSpaceControls(),
+    radius: getRadiusControls(),
   },
   tags: ['autodocs'],
 }
@@ -20,6 +21,25 @@ type Story = StoryObj<typeof Badge>
 
 export const Default: Story = {
   render: (props) => <Badge {...props} />,
+}
+
+export const Radius: Story = {
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'tone'],
+    },
+  },
+  render: (props) => (
+    <Flex gap={2} wrap="wrap">
+      {radiusBuilder({
+        renderItem: ({radius}) => (
+          <Badge {...props} radius={radius}>
+            {radius}
+          </Badge>
+        ),
+      })}
+    </Flex>
+  ),
 }
 
 export const Modes: Story = {
