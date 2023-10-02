@@ -2,7 +2,7 @@ import {ReactNode} from 'react'
 import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
 import {ThemeProvider, studioTheme} from '../../src/theme'
 import {tones} from '../../src/theme/studioTheme/color'
-import {ColorKey, getColor, getColorValue, colorKeys} from '../../src/theme/studioTheme/tints'
+import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/studioTheme/tints'
 
 const studioTones = ['default', 'positive', 'critical', 'caution'] as const
 
@@ -72,14 +72,14 @@ function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
                   boxShadow: ['Black', 'White'].includes(
                     getColorValue(tones[tone], theme === 'dark', tone, colorKey)?.title,
                   )
-                    ? `0 0 0 1px ${getColor(
+                    ? `0 0 0 1px ${getColorHex(
                         tones['default'],
                         theme === 'dark',
                         'default',
                         'border_base',
                       )}`
                     : undefined,
-                  backgroundColor: getColor(tones[tone], theme === 'dark', tone, colorKey),
+                  backgroundColor: getColorHex(tones[tone], theme === 'dark', tone, colorKey),
                 }}
               />
               <Flex

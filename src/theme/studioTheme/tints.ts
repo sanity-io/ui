@@ -124,7 +124,7 @@ export const colorTints: Record<
   },
 }
 
-export const getColor = (
+export const getColorHex = (
   tints: ColorTints,
   dark: boolean,
   tone: ThemeColorName,
