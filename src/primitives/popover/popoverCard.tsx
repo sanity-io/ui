@@ -3,7 +3,7 @@ import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
 import {ThemeColorSchemeKey} from '../../theme'
-import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
+import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {useLayer} from '../../utils'
 import {Card} from '../card'
 import {Flex} from '../flex'
@@ -34,7 +34,7 @@ export const PopoverCard = memo(
       overflow?: BoxOverflow
       padding?: number | number[]
       placement?: Placement
-      radius?: number | number[]
+      radius?: Radius | Radius[]
       scheme?: ThemeColorSchemeKey
       shadow?: number | number[]
       strategy: Strategy
