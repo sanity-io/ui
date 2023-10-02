@@ -26,6 +26,7 @@ export function buttonBaseStyles(): ReturnType<typeof css> {
     white-space: nowrap;
     text-align: left;
     position: relative;
+
     & > span {
       display: block;
       flex: 1;
@@ -41,11 +42,6 @@ export function buttonBaseStyles(): ReturnType<typeof css> {
 }
 
 const buttonTheme = {border: {width: 1}}
-const defaultBoxShadow = '0px 2px 0px 0px rgba(112, 128, 155, 0.19);'
-
-function combineBoxShadow(...boxShadows: (string | undefined)[]): string {
-  return boxShadows.filter(Boolean).join(',')
-}
 
 /**
  * @internal
@@ -55,7 +51,6 @@ export function buttonColorStyles(
 ): CSSObject[] {
   const {$mode, theme} = props
   const {focusRing} = theme.sanity.button
-  const shadow = props.$mode !== 'bleed'
   const base = theme.sanity.color.base
   const mode = theme.sanity.color.button[$mode] || theme.sanity.color.button.default
   const color = mode[props.$tone] || mode.default
@@ -69,27 +64,11 @@ export function buttonColorStyles(
       boxShadow: focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': _colorVarsStyle(base, color.disabled),
       "&:not([data-disabled='true'])": {
-        boxShadow: combineBoxShadow(
-          focusRingBorderStyle(border),
-          shadow ? defaultBoxShadow : undefined,
-        ),
         '&:focus': {
-          boxShadow: combineBoxShadow(
-            focusRingStyle({base, border, focusRing}),
-            shadow ? defaultBoxShadow : undefined,
-          ),
-          '&:active': {
-            boxShadow: 'none',
-          },
+          boxShadow: focusRingStyle({base, border, focusRing}),
         },
         '&:focus:not(:focus-visible)': {
-          boxShadow: combineBoxShadow(
-            focusRingBorderStyle(border),
-            shadow ? defaultBoxShadow : undefined,
-          ),
-          '&:active': {
-            boxShadow: 'none',
-          },
+          boxShadow: focusRingBorderStyle(border),
         },
         '@media (hover: hover)': {
           '&:hover': _colorVarsStyle(base, color.hovered),

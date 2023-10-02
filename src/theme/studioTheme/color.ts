@@ -1,11 +1,10 @@
 import {ColorTints, black, hues, white} from '@sanity/color'
 import {rgba} from '../lib/color-fns'
-import {createColorTheme} from '../lib/theme'
+import {ThemeColorName, createColorTheme} from '../lib/theme'
 import {multiply, screen} from './helpers'
 import {getColor} from './tints'
 
-export type validTones = 'default' | 'transparent' | 'primary' | 'positive' | 'caution' | 'critical'
-const tones: {[key in validTones]: ColorTints} = {
+export const tones: Record<ThemeColorName, ColorTints> = {
   default: hues.gray,
   transparent: hues.gray,
   primary: hues.gray,

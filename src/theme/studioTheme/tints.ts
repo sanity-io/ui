@@ -1,29 +1,33 @@
+/**
+ * This file creates a translation between the tints and the studio colors
+ * Providing readable names, and allowing to mix colors and tints in the same ThemeColor.
+ * e.g. for positive theme: `{"bg_base": "white", "bg_base_hover": "gray/50", "bg_base_active": "cyan/50"}
+ * This is not possible in the previous configuration, as each ThemeColor uses only one tint.
+ */
 import {ColorTintKey, ColorTints, ColorValue, black, hues, white} from '@sanity/color'
-import {validTones} from './color'
+import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 
-type colorsKeys =
-  | 'text_primary'
-  | 'text_secondary'
-  | 'bg_base'
-  | 'bg_base_hover'
-  | 'bg_base_active'
-  | 'bg_accent'
-  | 'bg_accent_hover'
-  | 'bg_accent_active'
-  | 'bg_tint'
-  | 'icon_default'
-  | 'icon_inverted'
-  | 'border_base'
-  | 'border_accent'
-  | 'border_accent_inverted'
+export const colorKeys = [
+  'text_primary',
+  'text_secondary',
+  'bg_base',
+  'bg_base_hover',
+  'bg_base_active',
+  'bg_accent',
+  'bg_accent_hover',
+  'bg_accent_active',
+  'bg_tint',
+  'icon_default',
+  'icon_inverted',
+  'border_base',
+  'border_accent',
+  'border_accent_inverted',
+] as const
 
-type ColorTintsDictionary = {
-  [key in colorsKeys]: ColorTintKey | ColorValue
-}
-const defaultTints: {
-  light: ColorTintsDictionary
-  dark: ColorTintsDictionary
-} = {
+export type ColorKey = (typeof colorKeys)[number]
+
+type ColorTintsDictionary = Record<ColorKey, ColorTintKey | ColorValue>
+const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
   light: {
     text_primary: '900',
     text_secondary: '600',
@@ -58,14 +62,10 @@ const defaultTints: {
   },
 }
 
-export const colorTints: {
-  light: {
-    [key in validTones]: ColorTintsDictionary
-  }
-  dark: {
-    [key in validTones]: ColorTintsDictionary
-  }
-} = {
+export const colorTints: Record<
+  ThemeColorSchemeKey,
+  Record<ThemeColorName, ColorTintsDictionary>
+> = {
   light: {
     default: {
       ...defaultTints.light,
@@ -127,8 +127,8 @@ export const colorTints: {
 export const getColor = (
   tints: ColorTints,
   dark: boolean,
-  tone: validTones,
-  key: colorsKeys,
+  tone: ThemeColorName,
+  key: ColorKey,
 ): string => {
   const value = colorTints[dark ? 'dark' : 'light'][tone][key]
 
@@ -137,4 +137,19 @@ export const getColor = (
   }
 
   return value.hex
+}
+
+export const getColorValue = (
+  tints: ColorTints,
+  dark: boolean,
+  tone: ThemeColorName,
+  key: ColorKey,
+): ColorValue => {
+  const value = colorTints[dark ? 'dark' : 'light'][tone][key]
+
+  if (typeof value === 'string') {
+    return tints[value]
+  }
+
+  return value
 }
