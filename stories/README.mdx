@@ -23,3 +23,4 @@ _This is a work in progress_
 - We may want to reconsider whether scheme toggling impacts the 'manager' (or general interface) as well.
 - This Storybook should not load the Nunito Sans font, which is not being used in this current theme.
 - Custom components in _unattached_ MDX docs need to be wrapped with an `<Unstyled>` [component](https://storybook.js.org/docs/react/api/doc-block-unstyled) to ensure they render correctly. (There may be a more idiomatic way to have custom components ignore MDX text styles).
+- We currently override some manager + preview CSS to prevent unslightly flashes of white backgrounds on mount.
