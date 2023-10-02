@@ -509,7 +509,7 @@ export const color = createColorTheme({
         bg2: getColorHex(tints, dark, 'critical', 'text_secondary'),
         fg: mix(base.bg, tints[dark ? 400 : 600].hex),
         border: mix(base.bg, tints[dark ? 800 : 200].hex),
-        placeholder: mix(base.bg, tints[dark ? 600 : 400].hex),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
@@ -519,7 +519,7 @@ export const color = createColorTheme({
         bg2: getColorHex(tones.default, dark, 'default', 'text_secondary'),
         fg: base.fg,
         border: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
@@ -529,7 +529,7 @@ export const color = createColorTheme({
         bg2: getColorHex(tones.default, dark, 'default', 'border_base'),
         fg: getColorHex(tones.default, dark, 'default', 'text_secondary'),
         border: getColorHex(tones.default, dark, 'default', 'border_base'),
-        placeholder: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
@@ -539,7 +539,7 @@ export const color = createColorTheme({
         bg2: getColorHex(tones.default, dark, 'default', 'border_base'),
         fg: getColorHex(tones.default, dark, 'default', 'text_secondary'),
         border: getColorHex(tones.default, dark, 'default', 'border_base'),
-        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
@@ -548,7 +548,7 @@ export const color = createColorTheme({
       bg2: getColorHex(tones.default, dark, 'default', 'text_secondary'),
       fg: base.fg,
       border: base.border,
-      placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+      placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
     }
   },
 
