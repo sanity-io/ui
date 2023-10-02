@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Flex, Grid, Text} from '../../src/primitives'
-import {RADIUS_CONTROLS, SHADOW_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
+import {radiusBuilder} from '../helpers/radiusBuilder'
 
 const meta: Meta<typeof Card> = {
   args: {
@@ -8,13 +9,13 @@ const meta: Meta<typeof Card> = {
     padding: 4,
   },
   argTypes: {
-    padding: SPACE_CONTROLS,
-    paddingBottom: SPACE_CONTROLS,
-    paddingLeft: SPACE_CONTROLS,
-    paddingRight: SPACE_CONTROLS,
-    paddingTop: SPACE_CONTROLS,
-    radius: RADIUS_CONTROLS,
-    shadow: SHADOW_CONTROLS,
+    padding: getSpaceControls(),
+    paddingBottom: getSpaceControls(),
+    paddingLeft: getSpaceControls(),
+    paddingRight: getSpaceControls(),
+    paddingTop: getSpaceControls(),
+    radius: getRadiusControls(),
+    shadow: getShadowControls(),
   },
   component: Card,
   tags: ['autodocs'],
@@ -78,38 +79,25 @@ export const Borders: Story = {
   ),
 }
 
-export const Radii: Story = {
+export const Radius: Story = {
   args: {
+    shadow: 1,
     tone: 'transparent',
   },
   parameters: {
     controls: {
-      include: ['fontSize', 'padding'],
+      include: ['fontSize', 'padding', 'shadow', 'tone'],
     },
   },
   render: (props) => (
-    <Flex gap={2}>
-      <Card {...props} radius={0}>
-        <Text>0</Text>
-      </Card>
-      <Card {...props} radius={1}>
-        <Text>1</Text>
-      </Card>
-      <Card {...props} radius={2}>
-        <Text>2</Text>
-      </Card>
-      <Card {...props} radius={3}>
-        <Text>3</Text>
-      </Card>
-      <Card {...props} radius={4}>
-        <Text>4</Text>
-      </Card>
-      <Card {...props} radius={5}>
-        <Text>5</Text>
-      </Card>
-      <Card {...props} radius={6}>
-        <Text>6</Text>
-      </Card>
+    <Flex gap={2} wrap="wrap">
+      {radiusBuilder({
+        renderItem: ({radius}) => (
+          <Card {...props} radius={radius}>
+            <Text>{radius}</Text>
+          </Card>
+        ),
+      })}
     </Flex>
   ),
 }

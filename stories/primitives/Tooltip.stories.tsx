@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {userEvent, within} from '@storybook/testing-library'
 import {Button, Card, Text, Tooltip} from '../../src/primitives'
-import {SHADOW_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {getShadowControls, getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Tooltip> = {
   args: {
@@ -14,8 +14,8 @@ const meta: Meta<typeof Tooltip> = {
     content: {
       type: 'string',
     },
-    padding: SPACE_CONTROLS,
-    shadow: SHADOW_CONTROLS,
+    padding: getSpaceControls(),
+    shadow: getShadowControls(),
   },
   parameters: {
     controls: {

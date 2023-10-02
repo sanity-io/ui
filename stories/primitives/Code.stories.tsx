@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Code, Stack} from '../../src/primitives'
-import {FONT_SIZE_CONTROLS} from '../constants'
+import {getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Code> = {
   args: {
@@ -8,7 +8,7 @@ const meta: Meta<typeof Code> = {
     language: 'javascript',
   },
   argTypes: {
-    size: FONT_SIZE_CONTROLS,
+    size: getFontSizeControls('code'),
   },
   component: Code,
   tags: ['autodocs'],
