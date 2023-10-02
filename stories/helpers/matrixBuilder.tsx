@@ -1,7 +1,7 @@
 import {Card, Flex, Grid, Text} from '../../src/primitives'
 
 interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {
-  scheme: 'light' | 'dark'
+  scheme?: 'light' | 'dark'
   columns: Cols
   rows: Rows
   title: string
