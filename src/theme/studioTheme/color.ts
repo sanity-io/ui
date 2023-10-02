@@ -122,7 +122,7 @@ export const color = createColorTheme({
     }
 
     if (state === 'hovered') {
-      const bg = mix(base.bg, getColorHex(tints, dark, tone, 'bg_accent_hover'))
+      const bg = getColorHex(tints, dark, tone, 'bg_accent_hover')
       const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {
@@ -151,7 +151,7 @@ export const color = createColorTheme({
     }
 
     if (state === 'pressed') {
-      const bg = mix(base.bg, getColorHex(tints, dark, tone, 'bg_accent_active'))
+      const bg = getColorHex(tints, dark, tone, 'bg_accent_active')
       const skeletonFrom = mix2(bg, tints[dark ? 200 : 600].hex)
 
       return {
@@ -213,7 +213,7 @@ export const color = createColorTheme({
     }
 
     // state: "enabled" | unknown
-    const bg = mix(base.bg, getColorHex(tints, dark, tone, 'bg_accent'))
+    const bg = getColorHex(tints, dark, tone, 'bg_accent')
     const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
     return {
@@ -280,7 +280,7 @@ export const color = createColorTheme({
     }
 
     if (state === 'hovered') {
-      const bg = mix(base.bg, getColorHex(tints, dark, name, 'bg_base_hover'))
+      const bg = getColorHex(tints, dark, name, 'bg_base_hover')
       const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {
@@ -316,13 +316,13 @@ export const color = createColorTheme({
         tints = tones.primary
       }
 
-      const bg = mix(base.bg, getColorHex(tints, dark, name, 'bg_base_active'))
+      const bg = getColorHex(tints, dark, name, 'bg_base_active')
       const skeletonFrom = mix(bg, getColorHex(tints, dark, name, 'bg_base_active'))
 
       return {
         bg,
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
-        border: mix(bg, getColorHex(tints, dark, name, 'bg_base_active')),
+        border: getColorHex(tints, dark, name, 'border_base'),
         fg:
           tone !== 'default' && tone !== 'primary'
             ? getColorHex(tints, dark, tone, 'text_secondary')
@@ -358,7 +358,7 @@ export const color = createColorTheme({
       return {
         bg,
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
-        border: mix(bg, tints[dark ? 900 : 100].hex),
+        border: getColorHex(tints, dark, name, 'border_base'),
         fg:
           tone !== 'default' && tone !== 'primary'
             ? getColorHex(tints, dark, tone, 'text_secondary')

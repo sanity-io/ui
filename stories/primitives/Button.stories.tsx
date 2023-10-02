@@ -1,12 +1,4 @@
-import React from 'react'
-import {
-  ArrowUpIcon,
-  CheckmarkIcon,
-  CloseIcon,
-  ErrorOutlineIcon,
-  SearchIcon,
-  WarningOutlineIcon,
-} from '@sanity/icons'
+import {CloseIcon, SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
@@ -28,6 +20,7 @@ const meta: Meta<typeof Button> = {
     radius: RADIUS_CONTROLS,
     space: SPACE_CONTROLS,
     text: {control: 'text'},
+    disabled: {control: 'boolean'},
   },
   component: Button,
   tags: ['autodocs'],
@@ -37,7 +30,9 @@ export default meta
 type Story = StoryObj<typeof Button>
 
 export const Default: Story = {
-  render: (props) => <Button {...props} />,
+  render: (props) => {
+    return <Button {...props} />
+  },
 }
 
 export const Loading: Story = {
@@ -90,7 +85,6 @@ export const Tones: Story = {
   ),
 }
 
-
 const SubHeader = () => (
   <>
     <div />
@@ -140,20 +134,17 @@ export const MultipleStyles: Story = {
     space: 3,
     fontSize: 1,
     radius: 2,
-    icon: 'square',
-    iconRight: 'square',
-
     // For small buttons:
     // space: 2,
     // padding: 2,
 
-    text: 'Button',
     icon: 'square',
     iconRight: 'square',
+    text: 'Button',
   },
   parameters: {
     controls: {
-      include: ['text', 'icon', 'iconRight', 'fontSize'],
+      include: ['text', 'icon', 'iconRight', 'disabled'],
     },
   },
   render: (props) => (
