@@ -17,6 +17,7 @@ import {
   GridItemRow,
   GridItemRowEnd,
   GridItemRowStart,
+  Radius,
 } from '../types'
 
 /**
@@ -113,7 +114,7 @@ export interface ResponsivePaddingProps {
  * @public
  */
 export interface ResponsiveRadiusProps {
-  radius?: number | number[]
+  radius?: Radius | Radius[]
 }
 
 /**

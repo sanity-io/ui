@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Box, Card, Grid, Text, TextArea} from '../../src/primitives'
-import {FONT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {Box, Card, Flex, Grid, Text, TextArea} from '../../src/primitives'
+import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {radiusBuilder} from '../helpers/radiusBuilder'
 import {FieldWrapper} from './components/FieldWrapper'
 
 const meta: Meta<typeof TextArea> = {
@@ -8,9 +9,9 @@ const meta: Meta<typeof TextArea> = {
     placeholder: 'Placeholder text...',
   },
   argTypes: {
-    fontSize: FONT_SIZE_CONTROLS,
-    padding: SPACE_CONTROLS,
-    radius: RADIUS_CONTROLS,
+    fontSize: getFontSizeControls('text'),
+    padding: getSpaceControls(),
+    radius: getRadiusControls(),
   },
   component: TextArea,
   tags: ['autodocs'],
@@ -41,6 +42,25 @@ export const CustomValidity: Story = {
   render: (props) => {
     return <TextArea {...props} />
   },
+}
+
+export const Radius: Story = {
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'tone'],
+    },
+  },
+  render: (props) => (
+    <Flex gap={2} wrap="wrap">
+      {radiusBuilder({
+        renderItem: ({radius}) => (
+          <TextArea {...props} radius={radius}>
+            {radius}
+          </TextArea>
+        ),
+      })}
+    </Flex>
+  ),
 }
 
 export const InputStates: Story = {

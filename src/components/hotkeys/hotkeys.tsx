@@ -2,6 +2,7 @@ import {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Inline, KBD} from '../../primitives'
+import {Radius} from '../../types'
 
 /**
  * @public
@@ -9,7 +10,7 @@ import {Inline, KBD} from '../../primitives'
 export interface HotkeysProps {
   fontSize?: number | number[]
   padding?: number | number[]
-  radius?: number | number[]
+  radius?: Radius | Radius[]
   space?: number | number[]
   keys?: string[]
 }

@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Box, Text} from '../../src/primitives'
-import {SPACE_CONTROLS} from '../constants'
+import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Box> = {
   args: {
@@ -9,11 +9,11 @@ const meta: Meta<typeof Box> = {
     style: {border: '1px solid red'},
   },
   argTypes: {
-    padding: SPACE_CONTROLS,
-    paddingBottom: SPACE_CONTROLS,
-    paddingLeft: SPACE_CONTROLS,
-    paddingRight: SPACE_CONTROLS,
-    paddingTop: SPACE_CONTROLS,
+    padding: getSpaceControls(),
+    paddingBottom: getSpaceControls(),
+    paddingLeft: getSpaceControls(),
+    paddingRight: getSpaceControls(),
+    paddingTop: getSpaceControls(),
   },
   component: Box,
   tags: ['autodocs'],
