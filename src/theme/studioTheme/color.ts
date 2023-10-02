@@ -1,16 +1,17 @@
-import {black, ColorTints, hues, white} from '@sanity/color'
+import {ColorTints, black, hues, white} from '@sanity/color'
 import {rgba} from '../lib/color-fns'
-import {createColorTheme} from '../lib/theme'
+import {ThemeColorName, createColorTheme} from '../lib/theme'
 import {multiply, screen} from './helpers'
+import {getColorHex} from './tints'
 
-const tones: {[key: string]: ColorTints} = {
+export const tones: Record<ThemeColorName, ColorTints> = {
   default: hues.gray,
   transparent: hues.gray,
-  primary: hues.blue,
-  positive: hues.green,
+  primary: hues.gray,
+  positive: hues.cyan,
   caution: hues.yellow,
   critical: hues.red,
-}
+} as const
 
 const NEUTRAL_TONES = ['default', 'transparent']
 
@@ -65,8 +66,8 @@ export const color = createColorTheme({
 
     return {
       fg: tints[dark ? 100 : 900].hex,
-      bg: tints[dark ? 950 : 50].hex,
-      border: tints[dark ? 800 : 200].hex,
+      bg: getColorHex(tints, dark, name, 'bg_base'),
+      border: getColorHex(tints, dark, name, 'border_base'),
       focusRing: tints[500].hex,
       shadow: {
         outline: rgba(tints[500].hex, 0.4),
@@ -98,7 +99,7 @@ export const color = createColorTheme({
       return {
         bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
-        border: mix(base.bg, tints[dark ? 800 : 200].hex),
+        border: bg,
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
           fg: mix(base.bg, tints[dark ? 950 : 50].hex),
@@ -121,13 +122,13 @@ export const color = createColorTheme({
     }
 
     if (state === 'hovered') {
-      const bg = mix(base.bg, tints[dark ? 300 : 600].hex)
+      const bg = mix(base.bg, getColorHex(tints, dark, tone, 'bg_accent_hover'))
       const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {
         bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
-        border: mix(base.bg, tints[dark ? 300 : 600].hex),
+        border: bg,
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
@@ -150,13 +151,13 @@ export const color = createColorTheme({
     }
 
     if (state === 'pressed') {
-      const bg = mix(base.bg, tints[dark ? 200 : 800].hex)
-      const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
+      const bg = mix(base.bg, getColorHex(tints, dark, tone, 'bg_accent_active'))
+      const skeletonFrom = mix2(bg, tints[dark ? 200 : 600].hex)
 
       return {
-        bg: mix(base.bg, tints[dark ? 200 : 800].hex),
+        bg: bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
-        border: mix(base.bg, tints[dark ? 200 : 800].hex),
+        border: bg,
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
@@ -189,7 +190,7 @@ export const color = createColorTheme({
       return {
         bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
-        border: mix(base.bg, tints[dark ? 200 : 800].hex),
+        border: bg,
         fg: mix(base.bg, dark ? black.hex : white.hex),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
@@ -212,13 +213,13 @@ export const color = createColorTheme({
     }
 
     // state: "enabled" | unknown
-    const bg = mix(base.bg, tints[dark ? 400 : 500].hex)
+    const bg = mix(base.bg, getColorHex(tints, dark, tone, 'bg_accent'))
     const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
     return {
       bg,
       bg2: mix2(bg, tints[dark ? 50 : 950].hex),
-      border: mix(base.bg, tints[dark ? 400 : 500].hex),
+      border: bg,
       fg: mix(base.bg, dark ? black.hex : white.hex),
       muted: {
         fg: mix(base.bg, tints[dark ? 900 : 100].hex),
@@ -279,11 +280,7 @@ export const color = createColorTheme({
     }
 
     if (state === 'hovered') {
-      // if (isNeutral) {
-      //   tints = tones.primary
-      // }
-
-      const bg = mix(base.bg, tints[dark ? 950 : 50].hex)
+      const bg = mix(base.bg, getColorHex(tints, dark, name, 'bg_base_hover'))
       const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
 
       return {
@@ -316,13 +313,13 @@ export const color = createColorTheme({
         tints = tones.primary
       }
 
-      const bg = mix(base.bg, tints[dark ? 900 : 100].hex)
-      const skeletonFrom = mix(bg, tints[dark ? 900 : 100].hex)
+      const bg = mix(base.bg, getColorHex(tints, dark, name, 'bg_base_active'))
+      const skeletonFrom = mix(bg, getColorHex(tints, dark, name, 'bg_base_active'))
 
       return {
         bg,
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
-        border: mix(bg, tints[dark ? 900 : 100].hex),
+        border: mix(bg, getColorHex(tints, dark, name, 'bg_base_active')),
         fg: mix(base.bg, tints[dark ? 200 : 800].hex),
         muted: {
           fg: mix(base.bg, tints[dark ? 400 : 600].hex),
@@ -383,7 +380,7 @@ export const color = createColorTheme({
     return {
       bg,
       bg2: mix(bg, tints[dark ? 950 : 50].hex),
-      border: mix(bg, tints[dark ? 900 : 100].hex),
+      border: mix(bg, getColorHex(tints, dark, name, 'bg_base')),
       fg: mix(base.bg, tints[dark ? 300 : 700].hex),
       muted: {
         fg: mix(base.bg, tints[dark ? 400 : 600].hex),
@@ -433,12 +430,11 @@ export const color = createColorTheme({
 
     if (mode === 'ghost') {
       return {
-        ...solid,
+        ...muted,
         enabled: {
           ...muted.enabled,
           border: base.border,
         },
-        disabled: muted.disabled,
       }
     }
 
