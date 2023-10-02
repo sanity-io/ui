@@ -31,6 +31,7 @@ import {
   Text,
   TextInput,
 } from '../../primitives'
+import {Radius} from '../../types'
 import {AnimatedSpinnerIcon, ListBox, Root} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
@@ -64,7 +65,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'> &
     Omit<HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'ref' | 'width'>
   prefix?: ReactNode
-  radius?: number | number[]
+  radius?: Radius | Radius[]
   /** @beta */
   relatedElements?: HTMLElement[]
   renderOption?: (option: Option) => ReactElement

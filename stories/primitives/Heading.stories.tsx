@@ -1,15 +1,15 @@
 import {AddCircleIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Flex, Heading, Stack, Text} from '../../src/primitives'
-import {ALIGN_CONTROLS, FONT_SIZE_CONTROLS} from '../constants'
+import {getAlignControls, getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Heading> = {
   args: {
     children: 'Jackdaws love my big sphinx of quartz',
   },
   argTypes: {
-    align: ALIGN_CONTROLS,
-    size: FONT_SIZE_CONTROLS,
+    align: getAlignControls(),
+    size: getFontSizeControls('heading'),
     textOverflow: {
       control: 'text',
     },
