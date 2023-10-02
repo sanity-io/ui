@@ -124,21 +124,6 @@ export const colorTints: Record<
   },
 }
 
-export const getColorHex = (
-  tints: ColorTints,
-  dark: boolean,
-  tone: ThemeColorName,
-  key: ColorKey,
-): string => {
-  const value = colorTints[dark ? 'dark' : 'light'][tone][key]
-
-  if (typeof value === 'string') {
-    return tints[value].hex
-  }
-
-  return value.hex
-}
-
 export const getColorValue = (
   tints: ColorTints,
   dark: boolean,
@@ -152,4 +137,13 @@ export const getColorValue = (
   }
 
   return value
+}
+
+export const getColorHex = (
+  tints: ColorTints,
+  dark: boolean,
+  tone: ThemeColorName,
+  key: ColorKey,
+): string => {
+  return getColorValue(tints, dark, tone, key).hex
 }
