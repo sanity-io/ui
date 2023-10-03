@@ -83,6 +83,18 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
       opacity: 1;
     }
 
+    /* customValidity */
+    &[data-error] + span {
+      background-color: ${color.invalid.enabled.border};
+      box-shadow: ${focusRingBorderStyle({
+        width: input.border.width,
+        color: color.invalid.enabled.bg2,
+      })};
+      &::after {
+        background: ${color.invalid.enabled.bg2};
+      }
+    }
+
     /* read only */
     &[data-read-only] + span {
       box-shadow: 0 0 0 1px ${color.default.readOnly.border};

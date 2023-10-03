@@ -86,6 +86,15 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       opacity: 1;
     }
 
+    &[data-error] + span {
+      background-color: ${color.invalid.enabled.border};
+      box-shadow: ${focusRingBorderStyle({
+        width: input.border.width,
+        color: color.invalid.readOnly.bg2,
+      })};
+      color: ${color.default.disabled.fg};
+    }
+
     &[data-read-only] + span {
       background-color: ${color.default.readOnly.bg};
       box-shadow: ${focusRingBorderStyle({

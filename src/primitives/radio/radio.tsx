@@ -29,6 +29,7 @@ export const Radio = forwardRef(function Radio(
     <Root className={className} data-ui="Radio" style={style}>
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
+        data-error={customValidity ? '' : undefined}
         {...restProps}
         disabled={disabled || readOnly}
         readOnly={readOnly}

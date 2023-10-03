@@ -41,7 +41,7 @@ export const Controlled: Story = {
 export const InputStates: Story = {
   parameters: {
     controls: {
-      include: ['customValidity'],
+      include: [],
     },
   },
   render: (props) => {
@@ -51,7 +51,7 @@ export const InputStates: Story = {
           {matrixBuilder({
             scheme: 'light',
             columns: ['default', 'indeterminate', 'checked'],
-            rows: ['enabled', 'disabled', 'readOnly'],
+            rows: ['enabled', 'disabled', 'readOnly', 'customValidity'],
             title: '',
             renderItem({row, column}) {
               return (
@@ -62,6 +62,7 @@ export const InputStates: Story = {
                     disabled={row === 'disabled'}
                     indeterminate={column === 'indeterminate'}
                     readOnly={row === 'readOnly'}
+                    customValidity={row === 'customValidity' ? 'error' : undefined}
                     key={row + column}
                   />
                 </Flex>
@@ -71,7 +72,7 @@ export const InputStates: Story = {
           {matrixBuilder({
             scheme: 'dark',
             columns: ['default', 'indeterminate', 'checked'],
-            rows: ['enabled', 'disabled', 'readOnly'],
+            rows: ['enabled', 'disabled', 'readOnly', 'customValidity'],
             title: '',
             renderItem({row, column}) {
               return (
@@ -82,6 +83,7 @@ export const InputStates: Story = {
                     disabled={row === 'disabled'}
                     indeterminate={column === 'indeterminate'}
                     readOnly={row === 'readOnly'}
+                    customValidity={row === 'customValidity' ? 'error' : undefined}
                     key={row + column}
                   />
                 </Flex>

@@ -508,7 +508,7 @@ export const color = createColorTheme({
         bg: mix(base.bg, tints[dark ? 950 : 50].hex),
         bg2: getColorHex(tints, dark, 'critical', 'text_secondary'),
         fg: mix(base.bg, tints[dark ? 400 : 600].hex),
-        border: mix(base.bg, tints[dark ? 800 : 200].hex),
+        border: getColorHex(tints, dark, 'critical', 'border_base'),
         placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
