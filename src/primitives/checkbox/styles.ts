@@ -54,20 +54,6 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
         }
       }
     }
-
-    &:not(:checked)&:not(:disabled):focus + span {
-      box-shadow: ${focusRingStyle({
-        border: {width: input.border.width, color: color.default.enabled.border},
-        focusRing,
-      })};
-    }
-
-    &:not(:checked)&:not(:disabled):focus:not(:focus-visible) + span {
-      box-shadow: ${focusRingBorderStyle({
-        color: color.default.enabled.border,
-        width: input.border.width,
-      })};
-    }
     &:checked + span {
       background: ${color.default.enabled.bg2};
       box-shadow: ${focusRingBorderStyle({
@@ -76,23 +62,46 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       })};
       color: ${color.default.enabled.bg};
     }
-    &:checked&:not(:disabled):focus + span {
-      box-shadow: ${focusRingStyle({
-        focusRing: {width: 1, offset: 1},
-      })};
+
+    /* focus */
+    &:not(:disabled):focus:focus-visible + span {
+      box-shadow: ${focusRingStyle({focusRing})};
     }
 
-    &:checked + span > svg:first-child {
-      opacity: 1;
+    /* focus when checked - uses a different offset */
+    &:not(:disabled):focus:focus-visible&:checked + span {
+      box-shadow: ${focusRingStyle({focusRing: {width: 1, offset: 1}})};
     }
 
     &[data-error] + span {
       background-color: ${color.invalid.enabled.border};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
-        color: color.invalid.readOnly.bg2,
+        color: color.invalid.enabled.bg2,
       })};
       color: ${color.default.disabled.fg};
+    }
+    &[data-error]&:checked + span {
+      background-color: ${color.invalid.enabled.bg2};
+      color: ${color.default.enabled.bg};
+    }
+    &[data-error]&:checked&:not(:disabled):focus:focus-visible + span {
+      box-shadow: ${focusRingStyle({
+        border: {width: input.border.width, color: color.invalid.readOnly.bg2},
+        focusRing: {width: 1, offset: 1},
+      })};
+    }
+
+    &:disabled + span {
+      background-color: ${color.default.disabled.bg};
+      box-shadow: ${focusRingBorderStyle({
+        width: input.border.width,
+        color: color.default.disabled.border,
+      })};
+      color: ${color.default.disabled.fg};
+    }
+    &:disabled&:checked + span {
+      background-color: ${color.default.disabled.bg2};
     }
 
     &[data-read-only] + span {
@@ -103,22 +112,14 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       })};
       color: ${color.default.readOnly.fg};
     }
-    &:checked&[data-read-only]:disabled + span {
+
+    &[data-read-only]&:checked + span {
       background-color: ${color.default.readOnly.bg2};
     }
 
-    &:not([data-read-only]):disabled + span {
-      background-color: ${color.default.disabled.bg};
-      box-shadow: ${focusRingBorderStyle({
-        width: input.border.width,
-        color: color.default.disabled.border,
-      })};
-      color: ${color.default.disabled.fg};
+    &:checked + span > svg:first-child {
+      opacity: 1;
     }
-    &:checked&:not([data-read-only]):disabled + span {
-      background-color: ${color.default.disabled.bg2};
-    }
-
     &:indeterminate + span > svg:last-child {
       opacity: 1;
     }
