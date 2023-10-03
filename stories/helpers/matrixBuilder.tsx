@@ -5,6 +5,7 @@ interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {
   columns: Cols
   rows: Rows
   title: string
+  subHeader?: React.ReactNode
   renderItem: ({row, column}: {row: Rows[number]; column: Cols[number]}) => React.ReactNode
 }
 
@@ -49,7 +50,7 @@ const Row = ({row, children}: RowProps) => {
 
 type TableProps<Rows extends string[], Cols extends string[]> = Pick<
   MatrixBuilderProps<Rows, Cols>,
-  'scheme' | 'columns' | 'rows' | 'title'
+  'scheme' | 'columns' | 'rows' | 'title' | 'subHeader'
 > & {
   children: React.ReactNode
 }
@@ -60,12 +61,21 @@ const Table = <Rows extends string[], Cols extends string[]>({
   columns,
   rows,
   title,
+  subHeader,
 }: TableProps<Rows, Cols>) => {
   return (
     <Card scheme={scheme} padding={4} border radius={2}>
-      <Grid columns={columns.length + 1} rows={rows.length + 1} gap={2}>
+      <Grid
+        gapX={3}
+        gapY={2}
+        style={{
+          gridTemplateColumns: `repeat(${columns.length + 1}, auto)`,
+          gridTemplateRows: `repeat(${rows.length + 1}, auto)`,
+        }}
+      >
         {/* First row, columns titles */}
         <FirstRow title={title} columns={columns} />
+        {subHeader}
         {/* Rows titles and items */}
         {children}
       </Grid>
@@ -83,9 +93,10 @@ export function matrixBuilder<Rows extends string[], Cols extends string[]>({
   rows,
   title,
   renderItem,
+  subHeader,
 }: MatrixBuilderProps<Rows, Cols>): JSX.Element {
   return (
-    <Table scheme={scheme} columns={columns} rows={rows} title={title}>
+    <Table scheme={scheme} columns={columns} rows={rows} title={title} subHeader={subHeader}>
       {rows.map((row) => (
         <Row row={row} key={row}>
           {columns.map((column) => renderItem({row, column}))}
