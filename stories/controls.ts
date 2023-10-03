@@ -66,7 +66,7 @@ export const getRadiusControls = () => {
   const numRadiusSizes = studioTheme.radius.length
 
   return {
-    control: {type: 'number', min: 0, max: numRadiusSizes - 1},
+    control: {type: 'select'},
     options: [...Array(numRadiusSizes).keys(), 'full'],
   }
 }
