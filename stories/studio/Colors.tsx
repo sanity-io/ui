@@ -14,7 +14,7 @@ function toTitleCase(str: string): string {
     .join(' ')
 }
 
-export function StudioColors(): ReactNode {
+export function Colors(): ReactNode {
   return (
     <ThemeProvider theme={studioTheme}>
       <Stack space={5}>

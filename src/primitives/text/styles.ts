@@ -62,6 +62,7 @@ export function textBaseStyle(
 
     & [data-sanity-icon] {
       vertical-align: baseline;
+      color: var(--card-icon-color);
     }
   `
 }
