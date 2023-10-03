@@ -17,6 +17,7 @@ import {
   textInputRootStyle,
 } from '../../styles/internal'
 import {ThemeFontWeightKey, useRootTheme} from '../../theme'
+import {Radius} from '../../types'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
 import {Card} from '../card'
@@ -64,7 +65,7 @@ export interface TextInputProps {
   onClear?: () => void
   padding?: number | number[]
   prefix?: React.ReactNode
-  radius?: number | number[]
+  radius?: Radius | Radius[]
   space?: number | number[]
   suffix?: React.ReactNode
   type?: TextInputType

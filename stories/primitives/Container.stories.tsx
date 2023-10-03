@@ -1,15 +1,15 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Container, Stack, Text} from '../../src/primitives'
-import {HEIGHT_CONTROLS, OVERFLOW_CONTROLS, WIDTH_CONTROLS} from '../constants'
+import {getContainerWidthControls, getHeightControls, getOverflowControls} from '../controls'
 
 const meta: Meta<typeof Container> = {
   args: {
     children: <Text>Contained text</Text>,
   },
   argTypes: {
-    height: HEIGHT_CONTROLS,
-    overflow: OVERFLOW_CONTROLS,
-    width: WIDTH_CONTROLS,
+    height: getHeightControls(),
+    overflow: getOverflowControls(),
+    width: getContainerWidthControls(),
   },
   component: Container,
   tags: ['autodocs'],

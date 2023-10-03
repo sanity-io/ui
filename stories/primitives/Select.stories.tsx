@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
-import {Select} from '../../src/primitives'
-import {FONT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../constants'
+import {Flex, Select} from '../../src/primitives'
+import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {radiusBuilder} from '../helpers/radiusBuilder'
 
 const meta: Meta<typeof Select> = {
   args: {
@@ -16,10 +17,10 @@ const meta: Meta<typeof Select> = {
     ),
   },
   argTypes: {
-    fontSize: FONT_SIZE_CONTROLS,
-    padding: SPACE_CONTROLS,
-    radius: RADIUS_CONTROLS,
-    space: SPACE_CONTROLS,
+    fontSize: getFontSizeControls('text'),
+    padding: getSpaceControls(),
+    radius: getRadiusControls(),
+    space: getSpaceControls(),
   },
   component: Select,
   tags: ['autodocs'],
@@ -38,4 +39,23 @@ export const ReadOnly: Story = {
 
 export const Disabled: Story = {
   render: (props) => <Select {...props} disabled />,
+}
+
+export const Radius: Story = {
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'tone'],
+    },
+  },
+  render: (props) => (
+    <Flex gap={2} wrap="wrap">
+      {radiusBuilder({
+        renderItem: ({radius}) => (
+          <Select {...props} radius={radius}>
+            <option>{radius}</option>
+          </Select>
+        ),
+      })}
+    </Flex>
+  ),
 }
