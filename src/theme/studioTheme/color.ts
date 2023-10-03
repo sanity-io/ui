@@ -101,7 +101,7 @@ export const color = createColorTheme({
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
         fg: getColorHex(tints, dark, 'default', 'bg_base'),
-        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'icon_inverted'),
         muted: {
           fg: mix(base.bg, tints[dark ? 950 : 50].hex),
         },
@@ -131,7 +131,7 @@ export const color = createColorTheme({
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
         fg: getColorHex(tints, dark, 'default', 'bg_base'),
-        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'icon_inverted'),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
@@ -161,7 +161,7 @@ export const color = createColorTheme({
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
         fg: getColorHex(tints, dark, 'default', 'bg_base'),
-        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'icon_inverted'),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
@@ -195,7 +195,7 @@ export const color = createColorTheme({
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
         border: bg,
         fg: getColorHex(tints, dark, 'default', 'bg_base'),
-        iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
+        iconColor: getColorHex(tints, dark, 'default', 'icon_inverted'),
         muted: {
           fg: mix(base.bg, tints[dark ? 800 : 200].hex),
         },
@@ -225,7 +225,7 @@ export const color = createColorTheme({
       bg2: mix2(bg, tints[dark ? 50 : 950].hex),
       border: bg,
       fg: getColorHex(tints, dark, 'default', 'bg_base'),
-      iconColor: getColorHex(tints, dark, 'default', 'bg_base'),
+      iconColor: getColorHex(tints, dark, 'default', 'icon_inverted'),
       muted: {
         fg: mix(base.bg, tints[dark ? 900 : 100].hex),
       },
