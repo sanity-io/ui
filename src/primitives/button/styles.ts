@@ -75,10 +75,11 @@ export function buttonColorStyles(
           shadow ? defaultBoxShadow : undefined,
         ),
         '&:focus': {
-          boxShadow: combineBoxShadow(
-            focusRingStyle({base, border, focusRing}),
-            shadow ? defaultBoxShadow : undefined,
-          ),
+          boxShadow: focusRingStyle({
+            base,
+            border: {width: 2, color: base.bg},
+            focusRing,
+          }),
         },
         '&:focus:not(:focus-visible)': {
           boxShadow: combineBoxShadow(
