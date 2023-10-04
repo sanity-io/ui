@@ -10,6 +10,7 @@ import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 export const colorKeys = [
   'text_primary',
   'text_secondary',
+  'text_inactive',
   'bg_base',
   'bg_base_hover',
   'bg_base_active',
@@ -31,6 +32,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
   light: {
     text_primary: '900',
     text_secondary: '600',
+    text_inactive: '500',
     bg_base: white,
     bg_base_hover: '50',
     bg_base_active: '100',
@@ -47,6 +49,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
   dark: {
     text_primary: '50',
     text_secondary: '300',
+    text_inactive: '400',
     bg_base: black,
     bg_base_hover: '900',
     bg_base_active: '800',
