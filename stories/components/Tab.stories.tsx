@@ -1,7 +1,9 @@
 import {SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Tab} from '../../src/components'
+import {BUTTON_TONES} from '../constants'
 import {getFontSizeControls, getIconControls, getSpaceControls} from '../controls'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Tab> = {
   args: {
@@ -42,6 +44,17 @@ export const Selected: Story = {
   render: (props) => {
     return <Tab {...props} />
   },
+}
+
+export const Tones: Story = {
+  render: (props) => (
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => <Tab {...props} key={value} label={value} tone={value} />,
+        rows: BUTTON_TONES,
+      })}
+    </>
+  ),
 }
 
 export const WithIcon: Story = {

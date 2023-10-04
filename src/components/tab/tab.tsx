@@ -42,7 +42,7 @@ export const Tab = forwardRef(function Tab(
     label,
     onClick,
     onFocus,
-    padding = 3,
+    padding = 2,
     selected,
     ...restProps
   } = props
