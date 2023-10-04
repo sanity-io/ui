@@ -103,11 +103,6 @@ export const Tones: Story = {
 
 export const MultipleStyles: Story = {
   args: {
-    // Defaults button props.
-    padding: 3,
-    space: 3,
-    fontSize: 1,
-    radius: 2,
     icon: 'square',
     iconRight: 'square',
     text: 'Button',
