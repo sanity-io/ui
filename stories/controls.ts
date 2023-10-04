@@ -35,6 +35,13 @@ export const getHeightControls = () => {
   }
 }
 
+export const getPositionControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['fixed', 'absolute'],
+  }
+}
+
 export const getIconControls = () => {
   return {
     control: {type: 'select'},
