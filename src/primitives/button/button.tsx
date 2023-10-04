@@ -65,7 +65,7 @@ export const Button = forwardRef(function Button(
   const {
     children,
     disabled,
-    fontSize,
+    fontSize = 1,
     icon,
     iconRight,
     justify: justifyProp = 'center',
