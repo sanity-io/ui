@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
-import {Box, Flex, Grid, Text, TextInput} from '../../src/primitives'
+import {Box, Grid, Text, TextInput} from '../../src/primitives'
+import {RADII} from '../constants'
 import {
   getFontSizeControls,
   getIconControls,
   getRadiusControls,
   getSpaceControls,
 } from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 import {FieldWrapper} from './components/FieldWrapper'
 
 const meta: Meta<typeof TextInput> = {
@@ -56,11 +57,12 @@ export const Radius: Story = {
   },
   render: (props) => {
     return (
-      <Flex gap={2} wrap="wrap">
-        {radiusBuilder({
-          renderItem: ({radius}) => <TextInput {...props} radius={radius} value={radius} />,
+      <>
+        {rowBuilder({
+          renderItem: ({value}) => <TextInput {...props} radius={value} value={value} />,
+          rows: RADII,
         })}
-      </Flex>
+      </>
     )
   },
 }

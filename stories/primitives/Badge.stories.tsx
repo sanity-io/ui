@@ -1,7 +1,9 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Badge, Flex, Stack} from '../../src/primitives'
+import {BADGE_MODES, BADGE_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {matrixBuilder} from '../helpers/matrixBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Badge> = {
   component: Badge,
@@ -30,15 +32,16 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <Badge {...props} radius={radius}>
-            {radius}
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Badge {...props} radius={value}>
+            {value}
           </Badge>
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }
 
@@ -64,26 +67,25 @@ export const Tones: Story = {
       include: ['fontSize', 'mode', 'padding', 'radius'],
     },
   },
+
   render: (props) => (
-    <Flex gap={2}>
-      <Badge {...props}>Default</Badge>
-      <Badge {...props} tone="primary">
-        Primary
-      </Badge>
-      <Badge {...props} tone="positive">
-        Positive
-      </Badge>
-      <Badge {...props} tone="caution">
-        Caution
-      </Badge>
-      <Badge {...props} tone="critical">
-        Critical
-      </Badge>
-    </Flex>
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Badge {...props} tone={value}>
+            {value}
+          </Badge>
+        ),
+        rows: BADGE_TONES,
+      })}
+    </>
   ),
 }
 
 export const MultipleStyles: Story = {
+  args: {
+    children: 'Badge',
+  },
   parameters: {
     controls: {
       include: ['fontSize', 'padding', 'radius'],
@@ -91,38 +93,28 @@ export const MultipleStyles: Story = {
   },
   render: (props) => (
     <Stack space={3}>
-      <Flex gap={2}>
-        <Badge {...props}>Default</Badge>
-        <Badge {...props} tone="primary">
-          Primary
-        </Badge>
-        <Badge {...props} tone="positive">
-          Positive
-        </Badge>
-        <Badge {...props} tone="caution">
-          Caution
-        </Badge>
-        <Badge {...props} tone="critical">
-          Critical
-        </Badge>
-      </Flex>
-      <Flex gap={2}>
-        <Badge {...props} mode="outline">
-          Default
-        </Badge>
-        <Badge {...props} mode="outline" tone="primary">
-          Primary
-        </Badge>
-        <Badge {...props} mode="outline" tone="positive">
-          Positive
-        </Badge>
-        <Badge {...props} mode="outline" tone="caution">
-          Caution
-        </Badge>
-        <Badge {...props} mode="outline" tone="critical">
-          Critical
-        </Badge>
-      </Flex>
+      {matrixBuilder({
+        scheme: 'light',
+        columns: BADGE_TONES,
+        rows: BADGE_MODES,
+        title: 'Mode / Tone',
+        renderItem: ({row, column}) => (
+          <Flex gap={1} justify={'center'} align={'center'}>
+            <Badge {...props} mode={row} tone={column} />
+          </Flex>
+        ),
+      })}
+      {matrixBuilder({
+        scheme: 'dark',
+        columns: BADGE_TONES,
+        rows: BADGE_MODES,
+        title: 'Mode / Tone',
+        renderItem: ({row, column}) => (
+          <Flex gap={1} justify={'center'} align={'center'}>
+            <Badge {...props} mode={row} tone={column} />
+          </Flex>
+        ),
+      })}
     </Stack>
   ),
 }

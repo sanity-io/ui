@@ -1,7 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Flex, Grid, Text} from '../../src/primitives'
+import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Card> = {
   args: {
@@ -90,15 +91,16 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <Card {...props} radius={radius}>
-            <Text>{radius}</Text>
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Card {...props} radius={value}>
+            <Text>{value}</Text>
           </Card>
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }
 
@@ -192,22 +194,15 @@ export const Tones: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2}>
-      <Card {...props}>
-        <Text>Default</Text>
-      </Card>
-      <Card {...props} tone="primary">
-        <Text>Primary</Text>
-      </Card>
-      <Card {...props} tone="positive">
-        <Text>Positive</Text>
-      </Card>
-      <Card {...props} tone="caution">
-        <Text>Caution</Text>
-      </Card>
-      <Card {...props} tone="critical">
-        <Text>Critical</Text>
-      </Card>
-    </Flex>
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Card {...props} tone={value}>
+            <Text>{value}</Text>
+          </Card>
+        ),
+        rows: CARD_TONES,
+      })}
+    </>
   ),
 }

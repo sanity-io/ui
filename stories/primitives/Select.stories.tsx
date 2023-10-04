@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
-import {Flex, Select} from '../../src/primitives'
+import {Select} from '../../src/primitives'
+import {RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Select> = {
   args: {
@@ -48,14 +49,15 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <Select {...props} radius={radius}>
-            <option>{radius}</option>
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Select {...props} radius={value}>
+            <option>{value}</option>
           </Select>
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }

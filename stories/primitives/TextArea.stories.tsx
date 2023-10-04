@@ -1,7 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Box, Card, Flex, Grid, Text, TextArea} from '../../src/primitives'
+import {Box, Card, Grid, Text, TextArea} from '../../src/primitives'
+import {RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 import {FieldWrapper} from './components/FieldWrapper'
 
 const meta: Meta<typeof TextArea> = {
@@ -51,15 +52,16 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <TextArea {...props} radius={radius}>
-            {radius}
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <TextArea {...props} radius={value}>
+            {value}
           </TextArea>
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }
 

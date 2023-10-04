@@ -1,7 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Flex, KBD} from '../../src/primitives'
+import {Card, KBD, Stack} from '../../src/primitives'
+import {CARD_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof KBD> = {
   args: {
@@ -32,14 +33,34 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <KBD {...props} radius={radius}>
-            {radius}
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <KBD {...props} radius={value}>
+            {value}
           </KBD>
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
+}
+
+export const InheritedTones: Story = {
+  render: (props) => {
+    return (
+      <Stack space={3}>
+        {rowBuilder({
+          renderItem: ({value}) => (
+            <Card border padding={4} tone={value}>
+              <KBD {...props} style={{verticalAlign: 'top'}}>
+                {value}
+              </KBD>
+            </Card>
+          ),
+          rows: CARD_TONES,
+        })}
+      </Stack>
+    )
+  },
 }
