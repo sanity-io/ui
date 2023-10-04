@@ -1,7 +1,6 @@
+import {ColorTints} from '@sanity/color'
 import {ThemeColorBase} from './base'
-import {ThemeColorButton} from './button'
 import {ThemeColorCard} from './card'
-import {ThemeColorInput} from './input'
 import {ThemeColorMuted} from './muted'
 import {ThemeColorSelectable} from './selectable'
 import {ThemeColorSolid} from './solid'
@@ -41,9 +40,7 @@ export type ThemeColorToneKey =
 export interface ThemeColor {
   dark: boolean
   base: ThemeColorBase
-  button: ThemeColorButton
   card: ThemeColorCard
-  input: ThemeColorInput
   selectable?: ThemeColorSelectable
   spot: ThemeColorSpot
   syntax: ThemeColorSyntax
@@ -67,6 +64,7 @@ export interface ThemeColorScheme {
  * @public
  */
 export interface ThemeColorSchemes {
+  tones: Record<ThemeColorName, ColorTints>
   dark: ThemeColorScheme
   light: ThemeColorScheme
 }

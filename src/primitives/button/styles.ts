@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
+import {cssVars} from '../../theme/lib/theme/color/cssVars'
 import {ButtonMode, ButtonTone} from '../../types'
 import {CSSObject} from '../../types/styled'
 
@@ -54,21 +54,35 @@ function combineBoxShadow(...boxShadows: (string | undefined)[]): string {
 export function buttonColorStyles(
   props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps,
 ): CSSObject[] {
-  const {$mode, theme} = props
+  const {$mode, theme, $tone} = props
   const {focusRing} = theme.sanity.button
   const shadow = props.$mode !== 'bleed'
-  const base = theme.sanity.color.base
-  const mode = theme.sanity.color.button[$mode] || theme.sanity.color.button.default
-  const color = mode[props.$tone] || mode.default
-  const border = {width: buttonTheme.border.width, color: 'var(--card-border-color)'}
+  const border = {
+    width: buttonTheme.border.width,
+    color:
+      $mode === 'default'
+        ? cssVars[$tone].bg_accent
+        : $mode === 'ghost'
+        ? cssVars[$tone].border_base
+        : cssVars[$tone].bg_base,
+  }
 
   return [
-    _colorVarsStyle(base, color.enabled),
     {
-      backgroundColor: 'var(--card-bg-color)',
-      color: 'var(--card-fg-color)',
+      // This is going to be used by the text elements inside the button
+      '--card-fg-color': $mode === 'default' ? cssVars[$tone].bg_base : cssVars[$tone].text_primary,
+      '--card-muted-fg-color':
+        $mode === 'default' ? cssVars[$tone].bg_base : cssVars[$tone].text_secondary,
+      '--card-icon-color':
+        $mode === 'default' ? cssVars[$tone].icon_inverted : cssVars[$tone].icon_default,
+    },
+    {
+      backgroundColor: $mode === 'default' ? cssVars[$tone].bg_accent : cssVars[$tone].bg_base,
+      color: $mode === 'default' ? cssVars[$tone].bg_base : cssVars[$tone].text_primary,
       boxShadow: focusRingBorderStyle(border),
-      '&:disabled, &[data-disabled="true"]': _colorVarsStyle(base, color.disabled),
+      '&:disabled, &[data-disabled="true"]': {
+        opacity: 0.7,
+      },
       "&:not([data-disabled='true'])": {
         boxShadow: combineBoxShadow(
           focusRingBorderStyle(border),
@@ -76,7 +90,7 @@ export function buttonColorStyles(
         ),
         '&:focus': {
           boxShadow: combineBoxShadow(
-            focusRingStyle({base, border, focusRing}),
+            focusRingStyle({base: {bg: cssVars.positive.border_accent}, border, focusRing}),
             shadow ? defaultBoxShadow : undefined,
           ),
         },
@@ -87,11 +101,23 @@ export function buttonColorStyles(
           ),
         },
         '@media (hover: hover)': {
-          '&:hover': _colorVarsStyle(base, color.hovered),
-          '&:active': _colorVarsStyle(base, color.pressed),
-          '&[data-hovered]': _colorVarsStyle(base, color.hovered),
+          '&:hover': {
+            backgroundColor:
+              $mode === 'default' ? cssVars[$tone].bg_accent_hover : cssVars[$tone].bg_base_hover,
+          },
+          '&:active': {
+            backgroundColor:
+              $mode === 'default' ? cssVars[$tone].bg_accent_active : cssVars[$tone].bg_base_active,
+          },
+          '&[data-hovered]': {
+            backgroundColor:
+              $mode === 'default' ? cssVars[$tone].bg_accent_hover : cssVars[$tone].bg_base_hover,
+          },
         },
-        '&[data-selected]': _colorVarsStyle(base, color.pressed),
+        '&[data-selected]': {
+          backgroundColor:
+            $mode === 'default' ? cssVars[$tone].bg_accent_active : cssVars[$tone].bg_base_active,
+        },
       },
     },
     theme.sanity.styles?.button?.root,

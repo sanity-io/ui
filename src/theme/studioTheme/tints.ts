@@ -10,6 +10,7 @@ import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 export const colorKeys = [
   'text_primary',
   'text_secondary',
+  'text_tertiary', // Added for placeholders, could change.
   'bg_base',
   'bg_base_hover',
   'bg_base_active',
@@ -20,6 +21,7 @@ export const colorKeys = [
   'icon_default',
   'icon_inverted',
   'border_base',
+  'border_base_hover',
   'border_accent',
   'border_accent_inverted',
 ] as const
@@ -31,6 +33,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
   light: {
     text_primary: '900',
     text_secondary: '600',
+    text_tertiary: '300',
     bg_base: white,
     bg_base_hover: '50',
     bg_base_active: '100',
@@ -41,12 +44,14 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     icon_default: '500',
     icon_inverted: white,
     border_base: '100',
+    border_base_hover: '200',
     border_accent: '500',
     border_accent_inverted: white,
   },
   dark: {
     text_primary: '50',
     text_secondary: '300',
+    text_tertiary: '600',
     bg_base: black,
     bg_base_hover: '900',
     bg_base_active: '800',
@@ -57,6 +62,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     icon_default: '300',
     icon_inverted: hues.gray[900],
     border_base: '800',
+    border_base_hover: '700',
     border_accent: '300',
     border_accent_inverted: hues.gray[900],
   },

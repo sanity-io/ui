@@ -16,6 +16,7 @@ export const tones: Record<ThemeColorName, ColorTints> = {
 const NEUTRAL_TONES = ['default', 'transparent']
 
 export const color = createColorTheme({
+  tones,
   base: ({dark, name}) => {
     if (name === 'default') {
       const tints = hues.gray
@@ -412,45 +413,6 @@ export const color = createColorTheme({
     }
   },
 
-  button: ({base, mode, muted, solid}) => {
-    if (mode === 'bleed') {
-      return {
-        enabled: {
-          ...muted.enabled,
-          border: muted.enabled.bg,
-        },
-        hovered: {
-          ...muted.hovered,
-          border: muted.hovered.bg,
-        },
-        pressed: {
-          ...muted.pressed,
-          border: muted.pressed.bg,
-        },
-        selected: {
-          ...muted.selected,
-          border: muted.selected.bg,
-        },
-        disabled: {
-          ...muted.disabled,
-          border: muted.disabled.bg,
-        },
-      }
-    }
-
-    if (mode === 'ghost') {
-      return {
-        ...muted,
-        enabled: {
-          ...muted.enabled,
-          border: base.border,
-        },
-      }
-    }
-
-    return solid
-  },
-
   card: ({base, dark, muted, name, solid, state}) => {
     if (state === 'hovered') {
       return muted[name].hovered
@@ -506,60 +468,6 @@ export const color = createColorTheme({
         from: skeletonFrom,
         to: rgba(skeletonFrom, 0.5),
       },
-    }
-  },
-
-  input: ({base, dark, mode, state}) => {
-    const mix = dark ? screen : multiply
-
-    if (mode === 'invalid') {
-      const tints = tones.critical
-
-      return {
-        bg: mix(base.bg, tints[dark ? 950 : 50].hex),
-        bg2: getColorHex(tints, dark, 'critical', 'text_secondary'),
-        fg: mix(base.bg, tints[dark ? 400 : 600].hex),
-        border: getColorHex(tints, dark, 'critical', 'border_base'),
-        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
-      }
-    }
-
-    if (state === 'hovered') {
-      return {
-        bg: base.bg,
-        bg2: getColorHex(tones.default, dark, 'default', 'text_secondary'),
-        fg: base.fg,
-        border: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
-        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
-      }
-    }
-
-    if (state === 'disabled') {
-      return {
-        bg: getColorHex(tones.default, dark, 'default', 'bg_tint'),
-        bg2: getColorHex(tones.default, dark, 'default', 'border_base'),
-        fg: getColorHex(tones.default, dark, 'default', 'text_secondary'),
-        border: getColorHex(tones.default, dark, 'default', 'border_base'),
-        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
-      }
-    }
-
-    if (state === 'readOnly') {
-      return {
-        bg: getColorHex(tones.default, dark, 'default', 'bg_tint'),
-        bg2: getColorHex(tones.default, dark, 'default', 'border_base'),
-        fg: getColorHex(tones.default, dark, 'default', 'text_secondary'),
-        border: getColorHex(tones.default, dark, 'default', 'border_base'),
-        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
-      }
-    }
-
-    return {
-      bg: base.bg,
-      bg2: getColorHex(tones.default, dark, 'default', 'text_secondary'),
-      fg: base.fg,
-      border: base.border,
-      placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
     }
   },
 

@@ -1,6 +1,7 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
+import {cssVars} from '../../theme/lib/theme/color/cssVars'
 
 export function radioBaseStyle(): ReturnType<typeof css> {
   return css`
@@ -20,7 +21,6 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
   const {theme} = props
   const {input} = theme.sanity
   const {focusRing} = input.radio
-  const color = theme.sanity.color.input
   const dist = (input.radio.size - input.radio.markSize) / 2
 
   return css`
@@ -45,9 +45,9 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
       height: ${rem(input.radio.size)};
       width: ${rem(input.radio.size)};
       border-radius: ${rem(input.radio.size / 2)};
-      background: ${color.default.enabled.bg};
+      background: ${cssVars.default.bg_base};
       box-shadow: ${focusRingBorderStyle({
-        color: color.default.enabled.border,
+        color: cssVars.default.border_base,
         width: input.border.width,
       })};
 
@@ -59,7 +59,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
         height: ${rem(input.radio.markSize)};
         width: ${rem(input.radio.markSize)};
         border-radius: ${rem(input.radio.markSize / 2)};
-        background: ${color.default.enabled.bg2};
+        background: ${cssVars.default.text_secondary}
         opacity: 0;
       }
     }
@@ -67,14 +67,14 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
     /* focused */
     &:not(:disabled):focus + span {
       box-shadow: ${focusRingStyle({
-        border: {width: input.border.width, color: color.default.enabled.border},
+        border: {width: input.border.width, color: cssVars.default.border_base},
         focusRing,
       })};
     }
 
     &:not(:disabled):focus:not(:focus-visible) + span {
       box-shadow: ${focusRingBorderStyle({
-        color: color.default.enabled.border,
+        color: cssVars.default.border_base,
         width: input.border.width,
       })};
     }
@@ -85,33 +85,33 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
 
     /* customValidity */
     &[data-error] + span {
-      background-color: ${color.invalid.enabled.border};
+      background-color: ${cssVars.critical.border_base};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
-        color: color.invalid.enabled.bg2,
+        color: cssVars.critical.text_secondary,
       })};
       &::after {
-        background: ${color.invalid.enabled.bg2};
+        background: ${cssVars.critical.text_secondary};
       }
     }
 
     /* read only */
     &[data-read-only] + span {
-      box-shadow: 0 0 0 1px ${color.default.readOnly.border};
-      background: ${color.default.readOnly.bg};
+      box-shadow: 0 0 0 1px ${cssVars.default.border_base};
+      background: ${cssVars.default.bg_tint};
 
       &::after {
-        background: ${color.default.readOnly.border};
+        background: ${cssVars.default.border_base};
       }
     }
 
     /* disabled */
     &:not([data-read-only]):disabled + span {
-      box-shadow: 0 0 0 1px ${color.default.disabled.border};
-      background: ${color.default.disabled.bg};
+      box-shadow: 0 0 0 1px ${cssVars.default.border_base};
+      background: ${cssVars.default.bg_tint};
 
       &::after {
-        background: ${color.default.disabled.border};
+        background: ${cssVars.default.border_base};
       }
     }
   `

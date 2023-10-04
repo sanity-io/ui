@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {ThemeColorSchemeKey, ThemeFontWeightKey} from '../../theme'
+import {cssVars} from '../../theme/lib/theme/color/cssVars'
 import {CardTone} from '../../types'
 import {CSSObject} from '../../types/styled'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
@@ -43,7 +44,6 @@ export function textInputBaseStyle(
 ): ReturnType<typeof css> {
   const {theme, $scheme, $tone, $weight} = props
   const font = theme.sanity.fonts.text
-  const color = theme.sanity.color.input
 
   return css`
     appearance: none;
@@ -80,35 +80,37 @@ export function textInputBaseStyle(
     &::placeholder {
       color: var(--input-placeholder-color);
     }
-
+    ${$tone !== 'inherit' &&
+    `
     &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
-      --input-fg-color: ${color.default.enabled.fg};
-      --input-placeholder-color: ${color.default.enabled.placeholder};
+      --input-fg-color: ${cssVars[$tone].text_primary};
+      --input-placeholder-color: ${cssVars[$tone].text_tertiary};
 
       /* enabled */
       &:not(:invalid):not(:disabled):not(:read-only) {
-        --input-fg-color: ${color.default.enabled.fg};
-        --input-placeholder-color: ${color.default.enabled.placeholder};
+        --input-fg-color: ${cssVars[$tone].text_primary};
+        --input-placeholder-color: ${cssVars[$tone].text_tertiary};
       }
 
       /* disabled */
       &:not(:invalid):disabled {
-        --input-fg-color: ${color.default.disabled.fg};
-        --input-placeholder-color: ${color.default.disabled.placeholder};
+        --input-fg-color: ${cssVars[$tone].text_primary};
+        --input-placeholder-color: ${cssVars[$tone].text_tertiary};
       }
 
       /* invalid */
       &:invalid {
-        --input-fg-color: ${color.invalid.enabled.fg};
-        --input-placeholder-color: ${color.invalid.enabled.placeholder};
+        --input-fg-color: ${cssVars.critical.text_primary};
+        --input-placeholder-color: ${cssVars.critical.text_tertiary};
       }
 
       /* readOnly */
       &:read-only {
-        --input-fg-color: ${color.default.readOnly.fg};
-        --input-placeholder-color: ${color.default.readOnly.placeholder};
+        --input-fg-color: ${cssVars[$tone].text_primary};
+        --input-placeholder-color: ${cssVars[$tone].text_tertiary};
       }
     }
+    `}
   `
 }
 
@@ -132,7 +134,6 @@ export function textInputRepresentationStyle(
   const {$hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
   const {input} = theme.sanity
   const {focusRing} = input.text
-  const color = theme.sanity.color.input
 
   return css`
     --input-box-shadow: none;
@@ -154,26 +155,28 @@ export function textInputRepresentationStyle(
     border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
+    ${$tone !== 'inherit' &&
+    `
     &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
-      --card-bg-color: ${color.default.enabled.bg};
-      --card-fg-color: ${color.default.enabled.fg};
+      --card-bg-color: ${cssVars[$tone].bg_base};
+      --card-fg-color: ${cssVars[$tone].text_primary};
 
       /* enabled */
-      *:not(:disabled) + &[data-border] {
+      &[data-border] {
         --input-box-shadow: ${focusRingBorderStyle({
-          color: color.default.enabled.border,
+          color: cssVars[$tone].border_base,
           width: input.border.width,
         })};
       }
 
       /* invalid */
       *:not(:disabled):invalid + & {
-        --card-bg-color: ${color.invalid.enabled.bg};
-        --card-fg-color: ${color.invalid.enabled.fg};
+        --card-bg-color: ${cssVars.critical.bg_tint};
+        --card-fg-color: ${cssVars.critical.text_primary};
 
         &[data-border] {
           --input-box-shadow: ${focusRingBorderStyle({
-            color: color.invalid.enabled.border,
+            color: cssVars.critical.border_base,
             width: input.border.width,
           })};
         }
@@ -183,7 +186,7 @@ export function textInputRepresentationStyle(
       *:not(:disabled):focus + & {
         &[data-border] {
           --input-box-shadow: ${focusRingStyle({
-            border: {color: color.default.enabled.border, width: input.border.width},
+            border: {color: cssVars.positive.border_base, width: input.border.width},
             focusRing,
           })};
         }
@@ -195,37 +198,27 @@ export function textInputRepresentationStyle(
 
       /* disabled */
       *:disabled + & {
-        --card-bg-color: ${color.default.disabled.bg} !important;
-        --card-fg-color: ${color.default.disabled.fg} !important;
-
-        &[data-border] {
-          --input-box-shadow: ${focusRingBorderStyle({
-            color: color.default.disabled.border,
-            width: input.border.width,
-          })};
-        }
+        --card-bg-color: ${cssVars.default.bg_tint} !important;
+        --card-fg-color: ${cssVars.default.text_primary} !important;
       }
 
       /* readOnly */
       *:read-only + & {
-        --card-bg-color: ${color.default.readOnly.bg} !important;
-        --card-fg-color: ${color.default.readOnly.fg} !important;
+        --card-bg-color: ${cssVars.default.bg_tint} !important;
+        --card-fg-color: ${cssVars.default.text_primary} !important;
       }
 
       /* hovered */
       @media (hover: hover) {
-        *:not(:disabled):not(:read-only):not(:invalid):hover + & {
-          --card-bg-color: ${color.default.hovered.bg};
-          --card-fg-color: ${color.default.hovered.fg};
-        }
 
         *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + &[data-border] {
           --input-box-shadow: ${focusRingBorderStyle({
-            color: color.default.hovered.border,
+            color: cssVars.default.border_base_hover,
             width: input.border.width,
           })};
         }
       }
     }
+    `}
   `
 }

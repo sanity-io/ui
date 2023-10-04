@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {_colorVarsStyle} from '../../styles/colorVars'
+import {_colorVarsStyle, _cssVarStyles} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {CardStyleProps} from './types'
 
@@ -52,6 +52,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
   const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
+    ${_cssVarStyles(theme.scheme, theme.tones)}
     color-scheme: ${dark ? 'dark' : 'light'};
 
     ${_colorVarsStyle(base, card.enabled, $checkered)}

@@ -1,3 +1,4 @@
+import {hues} from '@sanity/color'
 import {ThemeColorBuilderOpts} from './factory'
 
 const black = 'hsl(0, 0%, 0%)'
@@ -106,6 +107,15 @@ const tones = {
 }
 
 export const defaultOpts: ThemeColorBuilderOpts = {
+  tones: {
+    // TODO: Should this be agnostic of the sanity colors?
+    default: hues.gray,
+    transparent: hues.gray,
+    primary: hues.gray,
+    positive: hues.cyan,
+    caution: hues.yellow,
+    critical: hues.red,
+  },
   base: ({dark, name}) => {
     if (name === 'default') {
       return {
@@ -249,64 +259,6 @@ export const defaultOpts: ThemeColorBuilderOpts = {
     }
   },
 
-  button: ({base, mode, muted, solid}) => {
-    if (mode === 'bleed') {
-      return {
-        ...muted,
-        enabled: {
-          bg: 'transparent',
-          bg2: 'transparent',
-          fg: muted.enabled.fg,
-          iconColor: muted.enabled.fg,
-          border: 'transparent',
-          muted: {
-            fg: black,
-          },
-          accent: {
-            fg: black,
-          },
-          link: {
-            fg: black,
-          },
-          code: {
-            bg: black,
-            fg: black,
-          },
-          skeleton: base.skeleton,
-        },
-        hovered: {
-          bg: muted.enabled.bg,
-          bg2: muted.enabled.bg,
-          fg: muted.hovered.fg,
-          iconColor: muted.hovered.fg,
-          border: 'transparent',
-          muted: {
-            fg: black,
-          },
-          accent: {
-            fg: black,
-          },
-          link: {
-            fg: black,
-          },
-          code: {
-            bg: black,
-            fg: black,
-          },
-          skeleton: base.skeleton,
-        },
-      }
-    }
-
-    if (mode === 'ghost')
-      return {
-        ...solid,
-        enabled: muted.enabled,
-      }
-
-    return solid
-  },
-
   card: ({base}) => {
     return {
       bg: black,
@@ -328,16 +280,6 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         fg: black,
       },
       skeleton: base.skeleton,
-    }
-  },
-
-  input: () => {
-    return {
-      bg: black,
-      bg2: black,
-      fg: black,
-      border: black,
-      placeholder: black,
     }
   },
 

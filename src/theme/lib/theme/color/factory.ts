@@ -1,17 +1,14 @@
+import {ColorTints} from '@sanity/color'
 import {ThemeColorGenericState} from './_generic'
 import {ThemeColorBase} from './base'
-import {ThemeColorButtonModeKey, ThemeColorButtonStates} from './button'
-import {createButtonModes} from './button/createButtonModes'
 import {ThemeColorCardState} from './card'
 import {createCardStates} from './card/createCardStates'
 import {defaultOpts} from './defaults'
-import {ThemeColorInputState} from './input'
-import {createInputModes} from './input/createInputModes'
-import {ThemeColorMuted, ThemeColorMutedTone} from './muted'
+import {ThemeColorMuted} from './muted'
 import {createMutedTones} from './muted/createMuted'
 import {ThemeColorSelectableState} from './selectable'
 import {createSelectableTones} from './selectable/createSelectableTones'
-import {ThemeColorSolid, ThemeColorSolidTone} from './solid'
+import {ThemeColorSolid} from './solid'
 import {createSolidTones} from './solid/createSolidTones'
 import {ThemeColorSpotKey} from './spot'
 import {createSpot} from './spot/createSpot'
@@ -28,6 +25,7 @@ import {
  * @public
  */
 export interface ThemeColorBuilderOpts {
+  tones: Record<ThemeColorName, ColorTints>
   base: (opts: {dark: boolean; name: ThemeColorName}) => ThemeColorBase
   solid: (opts: {
     base: ThemeColorBase
@@ -51,21 +49,6 @@ export interface ThemeColorBuilderOpts {
     solid: ThemeColorSolid
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
   }) => ThemeColorCardState
-  button: (opts: {
-    dark: boolean
-    mode: ThemeColorButtonModeKey
-    base: ThemeColorBase
-    solid: ThemeColorSolidTone
-    muted: ThemeColorMutedTone
-  }) => ThemeColorButtonStates
-  input: (opts: {
-    base: ThemeColorBase
-    solid: ThemeColorSolidTone
-    muted: ThemeColorMutedTone
-    dark: boolean
-    mode: 'default' | 'invalid'
-    state: 'enabled' | 'disabled' | 'hovered' | 'readOnly'
-  }) => ThemeColorInputState
   selectable: (opts: {
     dark: boolean
     base: ThemeColorBase
@@ -92,6 +75,7 @@ export function createColorTheme(
   const builders: ThemeColorBuilderOpts = {...defaultOpts, ...partialOpts}
 
   return {
+    tones: partialOpts.tones || defaultOpts.tones,
     light: _createColorScheme(builders, false),
     dark: _createColorScheme(builders, true),
   }
@@ -125,10 +109,8 @@ function _createColor(
 
   return {
     base,
-    button: createButtonModes(opts, base, dark, solid, muted),
     card: createCardStates(opts, base, dark, name, solid, muted),
     dark,
-    input: createInputModes(opts, base, dark, solid, muted),
     selectable: createSelectableTones(opts, base, dark, solid, muted),
     spot: createSpot(opts, base, dark),
     syntax: opts.syntax({base, dark}),

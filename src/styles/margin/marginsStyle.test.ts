@@ -4,6 +4,8 @@ import {studioTheme, Theme} from '../../theme'
 import {responsiveMarginStyle} from './marginStyle'
 
 const {color, ...restTheme} = studioTheme
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- Work in progress
+// @ts-ignore
 const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
 
 describe('styles/margin', () => {

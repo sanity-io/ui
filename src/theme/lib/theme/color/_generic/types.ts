@@ -9,7 +9,6 @@ export interface ThemeColorGenericState {
   bg2?: string
   border: string
   fg: string
-  iconColor: string
   muted: {
     fg: string
   }

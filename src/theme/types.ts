@@ -1,3 +1,4 @@
+import {ColorTints} from '@sanity/color'
 import {CSSObject} from '../types/styled'
 import {BaseTheme, ThemeColor, ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
 
@@ -26,6 +27,8 @@ export interface Theme {
   sanity: Omit<RootTheme, 'color'> & {
     color: ThemeColor
   }
+  tones: Record<ThemeColorName, ColorTints>
+  scheme: ThemeColorSchemeKey
 }
 
 /**
