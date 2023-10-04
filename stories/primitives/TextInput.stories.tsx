@@ -59,7 +59,9 @@ export const Radius: Story = {
     return (
       <>
         {rowBuilder({
-          renderItem: ({value}) => <TextInput {...props} radius={value} value={value} />,
+          renderItem: ({value}) => (
+            <TextInput {...props} key={value} radius={value} value={value} />
+          ),
           rows: RADII,
         })}
       </>

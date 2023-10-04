@@ -43,8 +43,8 @@ export const Radius: Story = {
     <>
       {rowBuilder({
         gap: 4,
-        renderItem: ({value}) => (
-          <Autocomplete {...props} placeholder={String(value)} radius={value} />
+        renderItem: ({value, index}) => (
+          <Autocomplete {...props} key={index} placeholder={String(value)} radius={value} />
         ),
         rows: RADII,
       })}

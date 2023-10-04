@@ -94,7 +94,7 @@ export const Radius: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => (
-          <Card {...props} radius={value}>
+          <Card {...props} key={value} radius={value}>
             <Text>{value}</Text>
           </Card>
         ),
@@ -197,7 +197,7 @@ export const Tones: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => (
-          <Card {...props} tone={value}>
+          <Card {...props} key={value} tone={value}>
             <Text>{value}</Text>
           </Card>
         ),

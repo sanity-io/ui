@@ -45,7 +45,7 @@ export const Radius: Story = {
       {rowBuilder({
         gap: 8,
         renderItem: ({value}) => (
-          <Popover {...props} radius={value}>
+          <Popover {...props} key={value} radius={value}>
             <Button text={String(value)} />
           </Popover>
         ),

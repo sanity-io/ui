@@ -4,7 +4,7 @@ import {ThemeColorSchemeKey} from '../../src/theme'
 
 interface RowBuilderProps<T> {
   gap?: ComponentProps<typeof Flex>['gap']
-  renderItem: ({value}: {value: T}) => ReactNode
+  renderItem: ({value, index}: {value: T; index: number}) => ReactNode
   rows: T[]
   scheme?: ThemeColorSchemeKey
 }
@@ -18,7 +18,7 @@ export const rowBuilder = function <T>({
   return (
     <Card border={!!scheme} padding={scheme ? 4 : 0} radius={scheme ? 2 : 0} scheme={scheme}>
       <Flex gap={gap} wrap="wrap">
-        {rows.map((value) => renderItem({value}))}
+        {rows.map((value, index) => renderItem({index, value}))}
       </Flex>
     </Card>
   )

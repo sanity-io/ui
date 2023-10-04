@@ -31,7 +31,7 @@ export const Radius: Story = {
       {rowBuilder({
         gap: 4,
         renderItem: ({value}) => (
-          <Hotkeys {...props} keys={['Radius', String(value)]} radius={value} />
+          <Hotkeys {...props} key={value} keys={['Radius', String(value)]} radius={value} />
         ),
         rows: RADII,
       })}

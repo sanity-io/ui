@@ -55,7 +55,7 @@ export const Radius: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => (
-          <TextArea {...props} radius={value}>
+          <TextArea {...props} key={value} radius={value}>
             {value}
           </TextArea>
         ),

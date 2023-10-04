@@ -52,7 +52,7 @@ export const Radius: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => (
-          <Select {...props} radius={value}>
+          <Select {...props} key={value} radius={value}>
             <option>{value}</option>
           </Select>
         ),

@@ -35,7 +35,7 @@ export const Radius: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => (
-          <Badge {...props} radius={value}>
+          <Badge {...props} key={value} radius={value}>
             {value}
           </Badge>
         ),
@@ -72,7 +72,7 @@ export const Tones: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => (
-          <Badge {...props} tone={value}>
+          <Badge {...props} key={value} tone={value}>
             {value}
           </Badge>
         ),
@@ -99,7 +99,7 @@ export const MultipleStyles: Story = {
         rows: BADGE_MODES,
         title: 'Mode / Tone',
         renderItem: ({row, column}) => (
-          <Flex gap={1} justify={'center'} align={'center'}>
+          <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
             <Badge {...props} mode={row} tone={column} />
           </Flex>
         ),
@@ -110,7 +110,7 @@ export const MultipleStyles: Story = {
         rows: BADGE_MODES,
         title: 'Mode / Tone',
         renderItem: ({row, column}) => (
-          <Flex gap={1} justify={'center'} align={'center'}>
+          <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
             <Badge {...props} mode={row} tone={column} />
           </Flex>
         ),

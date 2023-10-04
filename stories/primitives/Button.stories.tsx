@@ -63,7 +63,7 @@ export const Radius: Story = {
   render: (props) => (
     <>
       {rowBuilder({
-        renderItem: ({value}) => <Button {...props} radius={value} text={value} />,
+        renderItem: ({value}) => <Button {...props} key={value} radius={value} text={value} />,
         rows: RADII,
       })}
     </>
@@ -79,7 +79,7 @@ export const Modes: Story = {
   render: (props) => (
     <>
       {rowBuilder({
-        renderItem: ({value}) => <Button {...props} mode={value} text={value} />,
+        renderItem: ({value}) => <Button {...props} key={value} mode={value} text={value} />,
         rows: BUTTON_MODES,
       })}
     </>
@@ -95,7 +95,7 @@ export const Tones: Story = {
   render: (props) => (
     <>
       {rowBuilder({
-        renderItem: ({value}) => <Button {...props} text={value} tone={value} />,
+        renderItem: ({value}) => <Button {...props} key={value} text={value} tone={value} />,
         rows: BUTTON_TONES,
       })}
     </>
@@ -168,7 +168,7 @@ export const MultipleStyles: Story = {
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
             renderItem: ({row, column}) => (
-              <Flex gap={1} justify={'center'} align={'center'}>
+              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
                 <Button {...props} tone={row} mode={column} text={props.text} />
 
                 {column !== 'default' && (
@@ -194,7 +194,7 @@ export const MultipleStyles: Story = {
             subHeader: <SubHeader />,
 
             renderItem: ({row, column}) => (
-              <Flex gap={1} justify={'center'} align={'center'}>
+              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
                 <Button {...props} tone={row} mode={column} text={props.text} />
 
                 {column !== 'default' && (

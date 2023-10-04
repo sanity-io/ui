@@ -7,6 +7,7 @@ import {rowBuilder} from '../helpers/rowBuilder'
 const meta: Meta<typeof KBD> = {
   args: {
     children: 'Ctrl',
+    style: {verticalAlign: 'top'},
   },
   argTypes: {
     fontSize: getFontSizeControls('code'),
@@ -36,7 +37,7 @@ export const Radius: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => (
-          <KBD {...props} radius={value}>
+          <KBD {...props} key={value} radius={value}>
             {value}
           </KBD>
         ),
@@ -52,10 +53,8 @@ export const InheritedTones: Story = {
       <Stack space={3}>
         {rowBuilder({
           renderItem: ({value}) => (
-            <Card border padding={4} tone={value}>
-              <KBD {...props} style={{verticalAlign: 'top'}}>
-                {value}
-              </KBD>
+            <Card border key={value} padding={4} tone={value}>
+              <KBD {...props}>{value}</KBD>
             </Card>
           ),
           rows: CARD_TONES,
