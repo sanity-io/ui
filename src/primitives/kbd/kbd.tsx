@@ -4,7 +4,7 @@ import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {Radius} from '../../types'
 import {Box} from '../box'
-import {Code} from '../code'
+import {Text} from '../text'
 
 /**
  * @public
@@ -18,9 +18,8 @@ export interface KBDProps {
 
 function kbdStyle() {
   return css`
-    background: var(--card-bg-color);
+    background: var(--card-bg2-color);
     font: inherit;
-    box-shadow: inset 0 0 0 1px var(--card-hairline-hard-color);
 
     &:not([hidden]) {
       display: inline-block;
@@ -42,9 +41,9 @@ export const KBD = forwardRef(function KBD(
   return (
     <Root data-ui="KBD" {...restProps} $radius={useArrayProp(radius)} ref={ref}>
       <Box as="span" padding={padding}>
-        <Code as="span" muted size={fontSize}>
+        <Text as="span" muted size={fontSize} weight="medium">
           {children}
-        </Code>
+        </Text>
       </Box>
     </Root>
   )

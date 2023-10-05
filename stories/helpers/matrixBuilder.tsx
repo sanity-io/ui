@@ -1,7 +1,8 @@
 import {Card, Flex, Grid, Text} from '../../src/primitives'
+import {ThemeColorSchemeKey} from '../../src/theme'
 
 interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {
-  scheme?: 'light' | 'dark'
+  scheme?: ThemeColorSchemeKey
   columns: Cols
   rows: Rows
   title: string
