@@ -1,6 +1,6 @@
 'use strict'
 
-/** @type {import('@jest/types').Config.InitialOptions} */
+/** @type {import('jest').Config} */
 module.exports = {
   moduleFileExtensions: ['cjs', 'js', 'jsx', 'mjs', 'ts', 'tsx'],
   modulePathIgnorePatterns: ['<rootDir>/dist/'],

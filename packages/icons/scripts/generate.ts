@@ -5,8 +5,8 @@ import path from 'path'
 import util from 'util'
 import {transform} from '@svgr/core'
 import camelCase from 'camelcase'
-import globby from 'globby'
-import mkdirp from 'mkdirp'
+import {globby} from 'globby'
+import {mkdirp} from 'mkdirp'
 import {format} from 'prettier'
 
 const ROOT_PATH = path.resolve(__dirname, '..')
@@ -42,7 +42,7 @@ async function readIcon(filePath: string) {
   let code = await transform(
     svgMarkupBuf.toString(),
     {icon: true, ref: true, typescript: true},
-    {componentName}
+    {componentName},
   )
 
   // replace: prettify importing
@@ -54,7 +54,7 @@ async function readIcon(filePath: string) {
   // replace: add `@public` tag and wrap in `forwardRef`
   code = code.replace(
     `const ${componentName} = (`,
-    `/**\n * @public\n */\nexport const ${componentName} = forwardRef(function ${componentName} (`
+    `/**\n * @public\n */\nexport const ${componentName} = forwardRef(function ${componentName} (`,
   )
 
   // replace: fix typing
@@ -64,7 +64,7 @@ async function readIcon(filePath: string) {
   code = code.replace(
     'ref: Ref<SVGSVGElement>) =>',
     // @todo: use `React.ForwardedRef` here (breaking change)
-    'ref: React.Ref<SVGSVGElement>) {\nreturn ('
+    'ref: React.Ref<SVGSVGElement>) {\nreturn (',
   )
 
   // replace: wrap in `forwardRef`
@@ -85,7 +85,7 @@ async function readIcon(filePath: string) {
     .replace(/"#101112"/g, '"currentColor"')
     .replace('<svg ', `<svg data-sanity-icon="${name}" `)
 
-  code = format(code, {...prettierConfig, filepath: targetPath})
+  code = await format(code, {...prettierConfig, filepath: targetPath})
 
   return {
     basename,
@@ -144,7 +144,7 @@ async function generate() {
 
   const indexPath = path.resolve(DEST_PATH, `index.ts`)
 
-  const indexTsCode = format(
+  const indexTsCode = await format(
     [
       GENERATED_BANNER,
       '/* eslint-disable import/order */',
@@ -158,7 +158,7 @@ async function generate() {
     {
       ...prettierConfig,
       filepath: indexPath,
-    }
+    },
   )
 
   await writeFile(indexPath, indexTsCode)
