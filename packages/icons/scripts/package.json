@@ -1,0 +1,7 @@
+{
+  "//": [
+    "https://github.com/egoist/esbuild-register/issues/26",
+    "https://github.com/egoist/esbuild-register/issues/96"
+  ],
+  "type": "commonjs"
+}
