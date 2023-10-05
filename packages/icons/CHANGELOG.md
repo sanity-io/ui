@@ -5,6 +5,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.0](https://github.com/sanity-io/icons/compare/v2.4.1...v2.5.0) (2023-10-05)
+
+### Features
+
+- add icons ([49ad09b](https://github.com/sanity-io/icons/commit/49ad09b6f44f16b00cfe31061d21ee9299b05dbd))
+
+### Bug Fixes
+
+- **build:** add workaround for Node v20.6+ ([5ace860](https://github.com/sanity-io/icons/commit/5ace860071527b2407927916433961a309c97a94))
+- **deps:** update dependencies ([2142ebd](https://github.com/sanity-io/icons/commit/2142ebd4beb5ee430860fec39c5bc3f3586e2439))
+
 ## [2.4.1](https://github.com/sanity-io/icons/compare/v2.4.0...v2.4.1) (2023-06-22)
 
 ### Bug Fixes
