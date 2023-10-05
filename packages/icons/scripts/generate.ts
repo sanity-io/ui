@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 
-import fs from 'fs'
+import {readFileSync} from 'fs'
+import {readFile, writeFile} from 'fs/promises'
 import path from 'path'
-import util from 'util'
 import {transform} from '@svgr/core'
 import camelCase from 'camelcase'
 import {globby} from 'globby'
@@ -10,16 +10,12 @@ import {mkdirp} from 'mkdirp'
 import {format} from 'prettier'
 
 const ROOT_PATH = path.resolve(__dirname, '..')
-
-const readFile = util.promisify(fs.readFile)
-const writeFile = util.promisify(fs.writeFile)
-
-const IMPORT_PATH = path.resolve(__dirname, '../export')
-const DEST_PATH = path.resolve(__dirname, '../src/icons')
+const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
+const SRC_ICONS_PATH = path.resolve(ROOT_PATH, 'src/icons')
 
 const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
-const prettierConfig = JSON.parse(fs.readFileSync(path.resolve(ROOT_PATH, '.prettierrc'), 'utf8'))
+const prettierConfig = JSON.parse(readFileSync(path.resolve(ROOT_PATH, '.prettierrc'), 'utf8'))
 
 async function readIcon(filePath: string) {
   const relativePath = path.relative(IMPORT_PATH, filePath)
@@ -34,7 +30,7 @@ async function readIcon(filePath: string) {
   const name = nameSegments.join('-')
   const componentName = camelCase(`${name}-icon`, {pascalCase: true})
   const basename = camelCase(name) + 'Icon'
-  const targetPath = path.resolve(DEST_PATH, `${basename}.tsx`)
+  const targetPath = path.resolve(SRC_ICONS_PATH, `${basename}.tsx`)
 
   // Read SVG markup
   const svgMarkupBuf = await readFile(filePath)
@@ -103,7 +99,7 @@ async function writeIcon(file: {code: string; targetPath: string}) {
 }
 
 async function generate() {
-  await mkdirp(DEST_PATH)
+  await mkdirp(SRC_ICONS_PATH)
 
   const filePaths = await globby(path.join(IMPORT_PATH, '**/*.svg'))
   const files = await Promise.all(filePaths.map(readIcon))
@@ -142,7 +138,7 @@ async function generate() {
     .map((f) => `'${f.name}': ${f.componentName}`)
     .join(',')}}`
 
-  const indexPath = path.resolve(DEST_PATH, `index.ts`)
+  const indexPath = path.resolve(SRC_ICONS_PATH, `index.ts`)
 
   const indexTsCode = await format(
     [
