@@ -55,6 +55,7 @@ import {ControlsIcon} from './controlsIcon'
 import {CopyIcon} from './copyIcon'
 import {CreditCardIcon} from './creditCardIcon'
 import {CropIcon} from './cropIcon'
+import {CubeIcon} from './cubeIcon'
 import {DashboardIcon} from './dashboardIcon'
 import {DatabaseIcon} from './databaseIcon'
 import {DesktopIcon} from './desktopIcon'
@@ -126,6 +127,8 @@ import {OkHandIcon} from './okHandIcon'
 import {OlistIcon} from './olistIcon'
 import {OverageIcon} from './overageIcon'
 import {PackageIcon} from './packageIcon'
+import {PanelLeftIcon} from './panelLeftIcon'
+import {PanelRightIcon} from './panelRightIcon'
 import {PauseIcon} from './pauseIcon'
 import {PinIcon} from './pinIcon'
 import {PinRemovedIcon} from './pinRemovedIcon'
@@ -162,9 +165,11 @@ import {StrikethroughIcon} from './strikethroughIcon'
 import {StringIcon} from './stringIcon'
 import {SunIcon} from './sunIcon'
 import {SyncIcon} from './syncIcon'
+import {TabletDeviceIcon} from './tabletDeviceIcon'
 import {TagIcon} from './tagIcon'
 import {TagsIcon} from './tagsIcon'
 import {TerminalIcon} from './terminalIcon'
+import {TextIcon} from './textIcon'
 import {ThLargeIcon} from './thLargeIcon'
 import {ThListIcon} from './thListIcon'
 import {TiersIcon} from './tiersIcon'
@@ -246,6 +251,7 @@ export type IconSymbol =
   | 'copy'
   | 'credit-card'
   | 'crop'
+  | 'cube'
   | 'dashboard'
   | 'database'
   | 'desktop'
@@ -317,6 +323,8 @@ export type IconSymbol =
   | 'olist'
   | 'overage'
   | 'package'
+  | 'panel-left'
+  | 'panel-right'
   | 'pause'
   | 'pin'
   | 'pin-removed'
@@ -353,9 +361,11 @@ export type IconSymbol =
   | 'string'
   | 'sun'
   | 'sync'
+  | 'tablet-device'
   | 'tag'
   | 'tags'
   | 'terminal'
+  | 'text'
   | 'th-large'
   | 'th-list'
   | 'tiers'
@@ -434,6 +444,7 @@ export {
   CopyIcon,
   CreditCardIcon,
   CropIcon,
+  CubeIcon,
   DashboardIcon,
   DatabaseIcon,
   DesktopIcon,
@@ -505,6 +516,8 @@ export {
   OlistIcon,
   OverageIcon,
   PackageIcon,
+  PanelLeftIcon,
+  PanelRightIcon,
   PauseIcon,
   PinIcon,
   PinRemovedIcon,
@@ -541,9 +554,11 @@ export {
   StringIcon,
   SunIcon,
   SyncIcon,
+  TabletDeviceIcon,
   TagIcon,
   TagsIcon,
   TerminalIcon,
+  TextIcon,
   ThLargeIcon,
   ThListIcon,
   TiersIcon,
@@ -626,6 +641,7 @@ export interface IconMap {
   copy: IconComponent
   'credit-card': IconComponent
   crop: IconComponent
+  cube: IconComponent
   dashboard: IconComponent
   database: IconComponent
   desktop: IconComponent
@@ -697,6 +713,8 @@ export interface IconMap {
   olist: IconComponent
   overage: IconComponent
   package: IconComponent
+  'panel-left': IconComponent
+  'panel-right': IconComponent
   pause: IconComponent
   pin: IconComponent
   'pin-removed': IconComponent
@@ -733,9 +751,11 @@ export interface IconMap {
   string: IconComponent
   sun: IconComponent
   sync: IconComponent
+  'tablet-device': IconComponent
   tag: IconComponent
   tags: IconComponent
   terminal: IconComponent
+  text: IconComponent
   'th-large': IconComponent
   'th-list': IconComponent
   tiers: IconComponent
@@ -818,6 +838,7 @@ export const icons: IconMap = {
   copy: CopyIcon,
   'credit-card': CreditCardIcon,
   crop: CropIcon,
+  cube: CubeIcon,
   dashboard: DashboardIcon,
   database: DatabaseIcon,
   desktop: DesktopIcon,
@@ -889,6 +910,8 @@ export const icons: IconMap = {
   olist: OlistIcon,
   overage: OverageIcon,
   package: PackageIcon,
+  'panel-left': PanelLeftIcon,
+  'panel-right': PanelRightIcon,
   pause: PauseIcon,
   pin: PinIcon,
   'pin-removed': PinRemovedIcon,
@@ -925,9 +948,11 @@ export const icons: IconMap = {
   string: StringIcon,
   sun: SunIcon,
   sync: SyncIcon,
+  'tablet-device': TabletDeviceIcon,
   tag: TagIcon,
   tags: TagsIcon,
   terminal: TerminalIcon,
+  text: TextIcon,
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
   tiers: TiersIcon,
