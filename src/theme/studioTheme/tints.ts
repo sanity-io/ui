@@ -35,8 +35,8 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     text_secondary: '600',
     text_tertiary: '300',
     bg_base: white,
-    bg_base_hover: '50',
-    bg_base_active: '100',
+    bg_base_hover: '100', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
+    bg_base_active: '200', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
     bg_accent: '500',
     bg_accent_hover: '600',
     bg_accent_active: '700',

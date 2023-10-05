@@ -1,5 +1,25 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Button, Card, Flex, Grid, Stack, Text} from '../../src/primitives'
+import {Hotkeys, Menu, MenuButton, MenuDivider, MenuItem, Tab, TabList} from '../../src/components'
+import {
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Checkbox,
+  Flex,
+  Grid,
+  Heading,
+  Inline,
+  Label,
+  Radio,
+  Select,
+  Spinner,
+  Stack,
+  Switch,
+  Text,
+  TextArea,
+  TextInput,
+} from '../../src/primitives'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {radiusBuilder} from '../helpers/radiusBuilder'
 
@@ -180,7 +200,7 @@ export const Schemes: Story = {
     </Grid>
   ),
 }
-
+const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 export const Tones: Story = {
   args: {
     radius: 1,
@@ -193,47 +213,81 @@ export const Tones: Story = {
   },
   render: (props) => {
     return (
-      <Flex gap={2}>
-        <Card {...props}>
-          <Stack space={2}>
-            <Text>Default</Text>
-            <Button text="Default" />
-            <Button text="Default" mode="bleed" />
-            <Button text="Default" mode="ghost" />
-          </Stack>
-        </Card>
-        <Card {...props} tone="primary">
-          <Stack space={2}>
-            <Text>Primary</Text>
-            <Button text="Primary" />
-            <Button text="Primary" mode="bleed" />
-            <Button text="Primary" mode="ghost" />
-          </Stack>
-        </Card>
-        <Card {...props} tone="positive">
-          <Stack space={2}>
-            <Text>Positive</Text>
-            <Button text="Positive" />
-            <Button text="Positive" mode="bleed" />
-            <Button text="Positive" mode="ghost" />
-          </Stack>
-        </Card>
-        <Card {...props} tone="caution">
-          <Stack space={2}>
-            <Text>Caution</Text>
-            <Button text="Caution" />
-            <Button text="Caution" mode="bleed" />
-            <Button text="Caution" mode="ghost" />
-          </Stack>
-        </Card>
-        <Card {...props} tone="critical">
-          <Stack space={2}>
-            <Text>Critical</Text>
-            <Button text="Critical" />
-            <Button text="Critical" mode="bleed" />
-            <Button text="Critical" mode="ghost" />
-          </Stack>
-        </Card>
+      <Flex gap={2} paddingTop={2}>
+        {tones.map((tone) => (
+          <Card tone={tone} {...props} key={tone}>
+            <Stack space={2}>
+              <Heading>Heading</Heading>
+              <Text>Text</Text>
+              <Label>Label</Label>
+              <Flex>
+                <Badge>Badge</Badge>
+              </Flex>
+              <TextInput placeholder="placeholder" />
+              <TextInput value="Value" />
+              <TextArea value="TextArea" />
+
+              <Select>
+                <option>Think</option>
+              </Select>
+              <Flex gap={2} align={'center'} padding={2}>
+                <Text>Avatar</Text>
+                <Avatar size={0} />
+              </Flex>
+              <Flex gap={2} align={'center'} padding={2}>
+                <Text>Radio</Text>
+                <Flex justify="center" padding={1} gap={2}>
+                  {/* TODO: Why is this defaultChecked not showing? */}
+                  <Radio defaultChecked={false} />
+                  <Radio defaultChecked={true} />
+                </Flex>
+              </Flex>
+              <Flex gap={2} align={'center'} padding={2}>
+                <Text>Checkbox</Text>
+                <Flex justify="center" padding={1} gap={2}>
+                  <Checkbox checked />
+                  <Checkbox checked={false} />
+                  <Checkbox indeterminate />
+                </Flex>
+              </Flex>
+              <Flex gap={2} align={'center'} padding={2}>
+                <Text>Select</Text>
+                <Flex justify={'center'} paddingY={2}>
+                  <Inline space={[3, 3, 4, 5]}>
+                    <Switch checked />
+                    <Switch indeterminate />
+                    <Switch />
+                  </Inline>
+                </Flex>
+              </Flex>
+              <Flex gap={4} align={'center'} padding={2}>
+                <Text>Spinner</Text>
+                <Spinner muted />
+              </Flex>
+              <Button text={tone} />
+              <Button text={tone} mode="bleed" />
+              <Button text={tone} mode="ghost" />
+              <Hotkeys keys={['Ctrl', 'Shift', 'P']} padding={2} />
+              <Text>Tabs </Text>
+              <TabList space={2}>
+                <Tab label="Content" selected id={''} aria-controls={''} />
+                <Tab label="Preview" aria-controls={''} id={''} />
+              </TabList>
+              <MenuButton
+                button={<Button text="Open menu" />}
+                id="menu-button-example"
+                menu={
+                  <Menu>
+                    <MenuItem text="Option 1" />
+                    <MenuItem text="Option 2" />
+                    <MenuDivider />
+                    <MenuItem text="Option 3" />
+                  </Menu>
+                }
+              />
+            </Stack>
+          </Card>
+        ))}
       </Flex>
     )
   },
