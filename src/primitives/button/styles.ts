@@ -75,13 +75,24 @@ export function buttonColorStyles(
         $mode === 'default' ? cssVars[$tone].bg_base : cssVars[$tone].text_secondary,
       '--card-icon-color':
         $mode === 'default' ? cssVars[$tone].icon_inverted : cssVars[$tone].icon_default,
+      '&:disabled, &[data-disabled="true"]': {
+        /* Updates the variables for the */
+        '--card-fg-color': cssVars.primary.text_tertiary,
+        '--card-muted-fg-color': cssVars.primary.text_tertiary,
+        '--card-icon-color': cssVars.primary.text_tertiary,
+      },
     },
     {
       backgroundColor: $mode === 'default' ? cssVars[$tone].bg_accent : cssVars[$tone].bg_base,
       color: $mode === 'default' ? cssVars[$tone].bg_base : cssVars[$tone].text_primary,
       boxShadow: focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': {
-        opacity: 0.7,
+        backgroundColor: $mode === 'default' ? cssVars.primary.bg_tint : cssVars.default.bg_base,
+        color: cssVars.primary.text_tertiary,
+        boxShadow: focusRingBorderStyle({
+          ...border,
+          color: $mode === 'default' ? cssVars.primary.bg_tint : cssVars.primary.border_base,
+        }),
       },
       "&:not([data-disabled='true'])": {
         boxShadow: combineBoxShadow(
@@ -89,10 +100,11 @@ export function buttonColorStyles(
           shadow ? defaultBoxShadow : undefined,
         ),
         '&:focus': {
-          boxShadow: combineBoxShadow(
-            focusRingStyle({base: {bg: cssVars.positive.border_accent}, border, focusRing}),
-            shadow ? defaultBoxShadow : undefined,
-          ),
+          boxShadow: focusRingStyle({
+            base: {bg: cssVars.positive.border_accent},
+            border: {width: 2, color: cssVars.default.bg_base},
+            focusRing,
+          }),
         },
         '&:focus:not(:focus-visible)': {
           boxShadow: combineBoxShadow(
