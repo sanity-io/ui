@@ -1,5 +1,13 @@
 import {studioTheme} from '../src/theme'
-import {BadgeMode, BadgeTone, ButtonMode, ButtonTone, CardTone, Radius} from '../src/types'
+import {
+  BadgeMode,
+  BadgeTone,
+  ButtonMode,
+  ButtonTone,
+  CardTone,
+  Placement,
+  Radius,
+} from '../src/types'
 
 export const BADGE_MODES: BadgeMode[] = ['default', 'outline']
 
@@ -16,6 +24,21 @@ export const CARD_TONES: CardTone[] = [
   'positive',
   'caution',
   'critical',
+]
+
+export const PLACEMENT_OPTIONS: Placement[] = [
+  'top',
+  'top-start',
+  'top-end',
+  'right',
+  'right-start',
+  'right-end',
+  'left',
+  'left-start',
+  'left-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
 ]
 
 export const RADII: Radius[] = [...Array(studioTheme.radius.length).keys(), 'full']
