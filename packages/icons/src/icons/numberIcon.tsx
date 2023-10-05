@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const NumberIcon = forwardRef(function NumberIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const ChevronRightIcon = forwardRef(function ChevronRightIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

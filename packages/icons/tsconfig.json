@@ -1,6 +1,13 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./package.config.ts", "./src", "./scripts", "./test", "./workshop.config.ts"],
+  "include": [
+    "./jest.config.mjs",
+    "./package.config.ts",
+    "./scripts",
+    "./src",
+    "./test",
+    "./workshop.config.ts"
+  ],
   "compilerOptions": {
     "rootDir": ".",
     "noEmit": true,

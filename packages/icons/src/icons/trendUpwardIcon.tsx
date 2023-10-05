@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const TrendUpwardIcon = forwardRef(function TrendUpwardIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

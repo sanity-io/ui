@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const DocumentPdfIcon = forwardRef(function DocumentPdfIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

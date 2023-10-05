@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const TagIcon = forwardRef(function TagIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

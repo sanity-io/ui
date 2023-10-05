@@ -52,7 +52,7 @@ export default function OverviewStory() {
                 </Flex>
                 <Card overflow="auto" padding={4} tone="transparent">
                   <Code language="typescript">{`import {${toPascalCase(
-                    iconKey
+                    iconKey,
                   )}Icon} from '@sanity/icons'`}</Code>
                 </Card>
               </Card>

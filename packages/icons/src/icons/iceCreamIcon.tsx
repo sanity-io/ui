@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const IceCreamIcon = forwardRef(function IceCreamIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

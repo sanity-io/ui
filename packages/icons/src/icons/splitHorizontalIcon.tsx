@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const SplitHorizontalIcon = forwardRef(function SplitHorizontalIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

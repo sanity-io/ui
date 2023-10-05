@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const RobotIcon = forwardRef(function RobotIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

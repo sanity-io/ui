@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const EllipsisVerticalIcon = forwardRef(function EllipsisVerticalIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

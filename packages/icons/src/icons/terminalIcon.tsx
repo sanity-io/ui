@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const TerminalIcon = forwardRef(function TerminalIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

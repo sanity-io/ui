@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const AddCircleIcon = forwardRef(function AddCircleIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const SpinnerIcon = forwardRef(function SpinnerIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

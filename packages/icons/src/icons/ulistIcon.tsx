@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const UlistIcon = forwardRef(function UlistIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

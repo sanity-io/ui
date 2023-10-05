@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const ClipboardIcon = forwardRef(function ClipboardIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

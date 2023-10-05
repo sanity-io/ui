@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export const OverageIcon = forwardRef(function OverageIcon(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg
