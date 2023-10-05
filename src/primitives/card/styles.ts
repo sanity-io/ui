@@ -46,13 +46,17 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
 }
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
-  const {$checkered, $focusRing, theme} = props
+  const {$checkered, $focusRing, theme, $tone} = props
   const {focusRing} = theme.sanity.card
   const {base, card, dark} = theme.sanity.color
   const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
-    ${_cssVarStyles(theme.scheme, theme.tones)}
+    ${_cssVarStyles(theme.scheme, theme.tones, $tone)}
+    /* Other necessary overrides TODO: Move this to the _cssVarStyles function?  */
+    --default-bg_base: ${base.bg};
+    /* Other necessary overrides */
+
     color-scheme: ${dark ? 'dark' : 'light'};
 
     ${_colorVarsStyle(base, card.enabled, $checkered)}

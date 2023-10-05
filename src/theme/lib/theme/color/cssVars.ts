@@ -7,6 +7,7 @@ export const getCssVar = (tone: ThemeColorName, key: ColorKey): string => `--${t
 export const createVars = (
   scheme: ThemeColorSchemeKey,
   tones: Record<ThemeColorName, ColorTints>,
+  defaultTone: ThemeColorName = 'default',
 ): {
   name: string
   value: string
@@ -17,12 +18,13 @@ export const createVars = (
   }[] = []
   const keys = Object.keys(tones) as ThemeColorName[]
 
-  keys.forEach((tone: ThemeColorName) => {
+  keys.forEach((_tone: ThemeColorName) => {
+    const tone = _tone == 'default' ? defaultTone : _tone
     const tint = tones[tone]
 
     colorKeys.forEach((key) => {
       vars.push({
-        name: getCssVar(tone, key),
+        name: getCssVar(_tone, key),
         value: getColorHex(tint, scheme === 'dark', tone, key),
       })
     })

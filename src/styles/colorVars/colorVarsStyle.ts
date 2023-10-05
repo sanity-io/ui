@@ -54,8 +54,9 @@ export function _colorVarsStyle(
 export function _cssVarStyles(
   scheme: ThemeColorSchemeKey,
   tones: Record<ThemeColorName, ColorTints>,
+  defaultTone: ThemeColorName = 'default',
 ): CSSObject {
-  const cssVariables = createVars(scheme, tones)
+  const cssVariables = createVars(scheme, tones, defaultTone)
 
   return cssVariables.reduce((acc: CSSObject, cssVar) => {
     acc[cssVar.name] = cssVar.value

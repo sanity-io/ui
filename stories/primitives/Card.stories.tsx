@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Flex, Grid, Text} from '../../src/primitives'
+import {Button, Card, Flex, Grid, Stack, Text} from '../../src/primitives'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {radiusBuilder} from '../helpers/radiusBuilder'
 
@@ -191,23 +191,50 @@ export const Tones: Story = {
       include: ['fontSize', 'padding', 'radius', 'shadow'],
     },
   },
-  render: (props) => (
-    <Flex gap={2}>
-      <Card {...props}>
-        <Text>Default</Text>
-      </Card>
-      <Card {...props} tone="primary">
-        <Text>Primary</Text>
-      </Card>
-      <Card {...props} tone="positive">
-        <Text>Positive</Text>
-      </Card>
-      <Card {...props} tone="caution">
-        <Text>Caution</Text>
-      </Card>
-      <Card {...props} tone="critical">
-        <Text>Critical</Text>
-      </Card>
-    </Flex>
-  ),
+  render: (props) => {
+    return (
+      <Flex gap={2}>
+        <Card {...props}>
+          <Stack space={2}>
+            <Text>Default</Text>
+            <Button text="Default" />
+            <Button text="Default" mode="bleed" />
+            <Button text="Default" mode="ghost" />
+          </Stack>
+        </Card>
+        <Card {...props} tone="primary">
+          <Stack space={2}>
+            <Text>Primary</Text>
+            <Button text="Primary" />
+            <Button text="Primary" mode="bleed" />
+            <Button text="Primary" mode="ghost" />
+          </Stack>
+        </Card>
+        <Card {...props} tone="positive">
+          <Stack space={2}>
+            <Text>Positive</Text>
+            <Button text="Positive" />
+            <Button text="Positive" mode="bleed" />
+            <Button text="Positive" mode="ghost" />
+          </Stack>
+        </Card>
+        <Card {...props} tone="caution">
+          <Stack space={2}>
+            <Text>Caution</Text>
+            <Button text="Caution" />
+            <Button text="Caution" mode="bleed" />
+            <Button text="Caution" mode="ghost" />
+          </Stack>
+        </Card>
+        <Card {...props} tone="critical">
+          <Stack space={2}>
+            <Text>Critical</Text>
+            <Button text="Critical" />
+            <Button text="Critical" mode="bleed" />
+            <Button text="Critical" mode="ghost" />
+          </Stack>
+        </Card>
+      </Flex>
+    )
+  },
 }
