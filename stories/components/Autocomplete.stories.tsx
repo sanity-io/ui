@@ -1,8 +1,9 @@
 import {SearchIcon} from '@sanity/icons'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {Autocomplete} from '../../src/components'
-import {Card, Flex} from '../../src/primitives'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {Card} from '../../src/primitives'
+import {RADII} from '../constants'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Autocomplete> = {
   args: {
@@ -39,12 +40,14 @@ export const Loading: Story = {
 
 export const Radius: Story = {
   render: (props) => (
-    <Flex gap={4} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <Autocomplete {...props} placeholder={String(radius)} radius={radius} />
+    <>
+      {rowBuilder({
+        gap: 4,
+        renderItem: ({value, index}) => (
+          <Autocomplete {...props} key={index} placeholder={String(value)} radius={value} />
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }

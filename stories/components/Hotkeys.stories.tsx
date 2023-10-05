@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Hotkeys} from '../../src/components'
-import {Flex} from '../../src/primitives'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {RADII} from '../constants'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Hotkeys> = {
   args: {
@@ -27,12 +27,14 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={4} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <Hotkeys {...props} keys={['Radius', String(radius)]} radius={radius} />
+    <>
+      {rowBuilder({
+        gap: 4,
+        renderItem: ({value}) => (
+          <Hotkeys {...props} key={value} keys={['Radius', String(value)]} radius={value} />
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }
