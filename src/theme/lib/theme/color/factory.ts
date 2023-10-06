@@ -10,9 +10,6 @@ import {ThemeColorSelectableState} from './selectable'
 import {createSelectableTones} from './selectable/createSelectableTones'
 import {ThemeColorSolid} from './solid'
 import {createSolidTones} from './solid/createSolidTones'
-import {ThemeColorSpotKey} from './spot'
-import {createSpot} from './spot/createSpot'
-import {ThemeColorSyntax} from './syntax'
 import {
   ThemeColorName,
   ThemeColorScheme,
@@ -57,8 +54,6 @@ export interface ThemeColorBuilderOpts {
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
     tone: 'default' | 'primary' | 'positive' | 'caution' | 'critical'
   }) => ThemeColorSelectableState
-  syntax: (opts: {base: ThemeColorBase; dark: boolean}) => ThemeColorSyntax
-  spot: (opts: {base: ThemeColorBase; dark: boolean; key: ThemeColorSpotKey}) => string
 }
 
 /**
@@ -112,8 +107,6 @@ function _createColor(
     card: createCardStates(opts, base, dark, name, solid, muted),
     dark,
     selectable: createSelectableTones(opts, base, dark, solid, muted),
-    spot: createSpot(opts, base, dark),
-    syntax: opts.syntax({base, dark}),
     solid,
     muted,
   }

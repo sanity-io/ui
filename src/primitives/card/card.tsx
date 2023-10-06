@@ -77,7 +77,6 @@ export const Card = forwardRef(function Card(
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
 
   return (
-    // TODO: Can we remove this provider? It's used to update the base color, maybe it can be handled by css variables overrides.
     <ThemeColorProvider scheme={scheme} tone={tone}>
       <Root
         data-as={typeof as === 'string' ? as : undefined}

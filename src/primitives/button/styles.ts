@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
-import {cssVars} from '../../theme/lib/theme/color/cssVars'
+import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {ButtonMode, ButtonTone} from '../../types'
 import {CSSObject} from '../../types/styled'
 

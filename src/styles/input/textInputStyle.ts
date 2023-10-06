@@ -1,6 +1,6 @@
 import {css} from 'styled-components'
 import {ThemeColorToneKey, ThemeFontWeightKey} from '../../theme'
-import {cssVars} from '../../theme/lib/theme/color/cssVars'
+import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'

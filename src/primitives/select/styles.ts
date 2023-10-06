@@ -8,7 +8,7 @@ import {
   ResponsiveRadiusStyleProps,
 } from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
-import {cssVars} from '../../theme/lib/theme/color/cssVars'
+import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
 
 function rootStyle(): ReturnType<typeof css> {

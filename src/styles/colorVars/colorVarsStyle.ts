@@ -1,11 +1,4 @@
-import {ColorTints} from '@sanity/color'
-import {
-  ThemeColorBase,
-  ThemeColorGenericState,
-  ThemeColorName,
-  ThemeColorSchemeKey,
-} from '../../theme'
-import {createVars} from '../../theme/lib/theme/color/cssVars'
+import {ThemeColorBase, ThemeColorGenericState} from '../../theme'
 import {CSSObject} from '../../types/styled'
 
 /**
@@ -45,22 +38,4 @@ export function _colorVarsStyle(
     '--card-hairline-soft-color': color.border,
     '--card-hairline-hard-color': color.border,
   }
-}
-
-/**
- * @internal
- * Creates CSS variables for the given theme color scheme and tones, used in cards to create a new context for variables.
- */
-export function _cssVarStyles(
-  scheme: ThemeColorSchemeKey,
-  tones: Record<ThemeColorName, ColorTints>,
-  defaultTone: ThemeColorName = 'default',
-): CSSObject {
-  const cssVariables = createVars(scheme, tones, defaultTone)
-
-  return cssVariables.reduce((acc: CSSObject, cssVar) => {
-    acc[cssVar.name] = cssVar.value
-
-    return acc
-  }, {})
 }

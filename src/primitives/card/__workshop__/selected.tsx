@@ -7,26 +7,22 @@ import {
   Inline,
   Stack,
   Text,
-  Theme,
   ThemeColorToneKey,
   useRootTheme,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
+import {cssVars} from '../../../theme/lib/theme/color/cssVariables/createCssVars'
 
 const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(({
   $tone,
-  theme,
 }: {
   $tone: ThemeColorToneKey
-  theme: Theme
 }) => {
-  const tone = theme.sanity.color.solid[$tone]
-
   return css`
     &:not([data-selected]) {
-      --card-fg-color: ${tone ? tone.enabled.bg : undefined};
-      --card-muted-fg-color: ${tone ? tone.enabled.bg : undefined};
+      --card-fg-color: ${$tone ? cssVars[$tone].text_secondary : undefined};
+      --card-muted-fg-color: ${$tone ? cssVars[$tone].text_secondary : undefined};
     }
 
     [data-ui='Card']:disabled & {

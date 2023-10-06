@@ -1,7 +1,8 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {_colorVarsStyle, _cssVarStyles} from '../../styles/colorVars'
+import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
+import {createCssVars} from '../../theme/lib/theme/color/cssVariables'
 import {CardStyleProps} from './types'
 
 export function cardStyle(
@@ -53,11 +54,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
 
   return css`
     /* A new css vars context is created, allowing for override of the default tone and changing the scheme */
-    ${$tone !== 'inherit' && _cssVarStyles(theme.scheme, theme.tones, $tone)}
-    /* Other necessary overrides TODO: Move this to the _cssVarStyles function?  */
-    --default-bg_base: ${base.bg};
-    /* Other necessary overrides */
-
+    ${$tone !== 'inherit' && createCssVars(theme.scheme, theme.tones, $tone)}
     color-scheme: ${dark ? 'dark' : 'light'};
 
     ${_colorVarsStyle(base, card.enabled, $checkered)}

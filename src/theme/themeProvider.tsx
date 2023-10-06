@@ -2,7 +2,7 @@ import {useContext, useEffect, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
-import {createVars} from './lib/theme/color/cssVars'
+import {createCssVars} from './lib/theme/color/cssVariables'
 import {ThemeContext} from './themeContext'
 import {RootTheme, Theme, ThemeContextValue} from './types'
 
@@ -41,14 +41,13 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
 
   useEffect(() => {
     if (!themeProp?.color.tones) return
-    const cssVariables = createVars(scheme, themeProp?.color.tones)
+    const cssVariables = createCssVars(scheme, themeProp?.color.tones)
 
     // Add the vars to the body
     const root = document.body
 
-    cssVariables.forEach((varDef) => root.style.setProperty(varDef.name, varDef.value))
-
-    // darkVars.forEach((varDef) => root.style.setProperty(varDef.name, varDef.value))
+    // Set the css variables to the root object
+    Object.keys(cssVariables).forEach((key) => root.style.setProperty(key, cssVariables[key]))
   }, [themeProp?.color.tones, scheme])
 
   const value: ThemeContextValue | null = useMemo(

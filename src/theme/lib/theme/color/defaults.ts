@@ -61,18 +61,6 @@ const colors = {
   },
 }
 
-const spots = {
-  gray: 'hsl(0, 0%, 50%)',
-  red: 'hsl(0, 100%, 50%)',
-  orange: 'hsl(30, 100%, 50%)',
-  yellow: 'hsl(60, 100%, 50%)',
-  green: 'hsl(120, 100%, 50%)',
-  cyan: 'hsl(180, 100%, 50%)',
-  blue: 'hsl(240, 100%, 50%)',
-  purple: 'hsl(270, 100%, 50%)',
-  magenta: 'hsl(300, 100%, 50%)',
-}
-
 const tones = {
   transparent: {
     bg: [colors.transparent.darkest, colors.transparent.lightest],
@@ -286,47 +274,4 @@ export const defaultOpts: ThemeColorBuilderOpts = {
   selectable: ({muted, state, tone}) => {
     return muted[tone][state]
   },
-
-  spot: ({key}) => {
-    return spots[key]
-  },
-
-  syntax: () => ({
-    atrule: black,
-    attrName: black,
-    attrValue: black,
-    attribute: black,
-    boolean: black,
-    builtin: black,
-    cdata: black,
-    char: black,
-    class: black,
-    className: black,
-    comment: black,
-    constant: black,
-    deleted: black,
-    doctype: black,
-    entity: black,
-    function: black,
-    hexcode: black,
-    id: black,
-    important: black,
-    inserted: black,
-    keyword: black,
-    number: black,
-    operator: black,
-    prolog: black,
-    property: black,
-    pseudoClass: black,
-    pseudoElement: black,
-    punctuation: black,
-    regex: black,
-    selector: black,
-    string: black,
-    symbol: black,
-    tag: black,
-    unit: black,
-    url: black,
-    variable: black,
-  }),
 }

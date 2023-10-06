@@ -20,7 +20,7 @@ import {
   TextArea,
   TextInput,
 } from '../../src/primitives'
-import {cssVars} from '../../src/theme/lib/theme/color/cssVars'
+import {cssVars} from '../../src/theme/lib/theme/color/cssVariables/createCssVars'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {radiusBuilder} from '../helpers/radiusBuilder'
 
@@ -201,7 +201,7 @@ export const Schemes: Story = {
     </Grid>
   ),
 }
-const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
+const tones = ['default', 'critical'] as const
 export const Tones: Story = {
   args: {
     radius: 1,
@@ -221,19 +221,21 @@ export const Tones: Story = {
               <Heading>Heading</Heading>
               <Text>Text</Text>
               <Label>Label</Label>
-              <Flex>
+              <Flex gap={2}>
                 <Badge>Badge</Badge>
+                <Badge mode="outline">Badge</Badge>
               </Flex>
               <TextInput placeholder="placeholder" />
               <TextInput value="Value" />
               <TextArea value="TextArea" />
+              {/* <TextArea value="CAUTION TONE" tone="caution" /> */}
 
               <Select>
                 <option>Think</option>
               </Select>
               <Flex gap={2} align={'center'} padding={2}>
                 <Text>Avatar</Text>
-                <Avatar size={0} />
+                <Avatar size={0} initials="PB" />
               </Flex>
               <Flex gap={2} align={'center'} padding={2}>
                 <Text>Radio</Text>
@@ -312,10 +314,44 @@ export const Tones: Story = {
                   </Menu>
                 }
               />
+              <Text weight="semibold" size={2} muted>
+                Avatars
+              </Text>
+              <Flex gap={2}>
+                <Avatar initials="AB" />
+                <Avatar initials="AB" color="blue" />
+                <Avatar initials="AB" color="cyan" />
+                <Avatar initials="AB" color="gray" />
+                <Avatar initials="AB" color="green" />
+                <Avatar initials="AB" color="magenta" />
+                <Avatar initials="AB" color="orange" />
+                <Avatar initials="AB" color="purple" />
+                <Avatar initials="AB" color="red" />
+                <Avatar initials="AB" color="yellow" />
+              </Flex>
             </Stack>
           </Card>
         ))}
       </Flex>
+    )
+  },
+}
+
+export const TextHeights: Story = {
+  args: {
+    radius: 1,
+    shadow: 1,
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
+    },
+  },
+  render: (props) => {
+    return (
+      <Card {...props}>
+        <Text>Text</Text>
+      </Card>
     )
   },
 }

@@ -1,5 +1,6 @@
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
+import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
@@ -123,14 +124,11 @@ export function responsiveAvatarSizeStyle(
   })
 }
 
-export function avatarInitialsStyle(props: ThemeProps): CSSObject {
-  const {theme} = props
-  const {base} = theme.sanity.color
-
+export function avatarInitialsStyle(): CSSObject {
   return {
     width: '100%',
     height: '100%',
-    color: base.fg,
+    color: cssVars.default.text_primary,
     alignItems: 'center',
     justifyContent: 'center',
     textTransform: 'uppercase',

@@ -4,8 +4,6 @@ import {ThemeColorCard} from './card'
 import {ThemeColorMuted} from './muted'
 import {ThemeColorSelectable} from './selectable'
 import {ThemeColorSolid} from './solid'
-import {ThemeColorSpot} from './spot'
-import {ThemeColorSyntax} from './syntax'
 
 /**
  * @public
@@ -42,8 +40,6 @@ export interface ThemeColor {
   base: ThemeColorBase
   card: ThemeColorCard
   selectable?: ThemeColorSelectable
-  spot: ThemeColorSpot
-  syntax: ThemeColorSyntax
   solid: ThemeColorSolid
   muted: ThemeColorMuted
 }

@@ -24,6 +24,9 @@ export const colorKeys = [
   'border_base_hover',
   'border_accent',
   'border_accent_inverted',
+  // TODO: Find if we can remove this variables, they are a replacement for the base colors
+  'card_base_bg',
+  'card_base_fg',
 ] as const
 
 export type ColorKey = (typeof colorKeys)[number]
@@ -35,8 +38,8 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     text_secondary: '600',
     text_tertiary: '300',
     bg_base: white,
-    bg_base_hover: '100', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
-    bg_base_active: '200', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
+    bg_base_hover: '50', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
+    bg_base_active: '100', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
     bg_accent: '500',
     bg_accent_hover: '600',
     bg_accent_active: '700',
@@ -47,6 +50,8 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     border_base_hover: '200',
     border_accent: '500',
     border_accent_inverted: white,
+    card_base_bg: '50',
+    card_base_fg: '900',
   },
   dark: {
     text_primary: '50',
@@ -65,6 +70,8 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     border_base_hover: '700',
     border_accent: '300',
     border_accent_inverted: hues.gray[900],
+    card_base_bg: '950',
+    card_base_fg: '100',
   },
 }
 
@@ -75,6 +82,7 @@ export const colorTints: Record<
   light: {
     default: {
       ...defaultTints.light,
+      card_base_bg: white,
       bg_accent: '900',
       bg_accent_hover: '950',
       bg_accent_active: black,
@@ -103,6 +111,7 @@ export const colorTints: Record<
   dark: {
     default: {
       ...defaultTints.dark,
+      card_base_bg: black,
       text_primary: white,
       bg_accent: white,
       bg_accent_hover: '50',

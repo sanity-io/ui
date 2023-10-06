@@ -1,16 +1,16 @@
-import {Flex, Text, Theme, ThemeColorSpotKey, useTheme} from '@sanity/ui'
+import {Flex, Text, useTheme} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
 import {WORKSHOP_SPOT_COLOR_OPTIONS} from '../../../__workshop__/constants'
+import {ThemeColorSpotKey, cssVars} from '../../../theme/lib/theme/color/cssVariables'
 
 const ColoredText = styled(Text)<{color?: ThemeColorSpotKey}>((props: {
   color?: ThemeColorSpotKey
-  theme: Theme
 }) => {
-  const {spot} = props.theme.sanity.color
+  const {color} = props
 
   return css`
-    color: ${spot[props.color || 'gray']};
+    color: ${color ? cssVars.spot[color] : cssVars.spot.gray};
   `
 })
 

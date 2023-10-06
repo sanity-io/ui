@@ -27,7 +27,7 @@ export interface Theme {
   sanity: Omit<RootTheme, 'color'> & {
     color: ThemeColor
   }
-  tones: Record<ThemeColorName, ColorTints>
+  tones: Record<ThemeColorName, ColorTints> // TODO: Find a better way to expose this
   scheme: ThemeColorSchemeKey
 }
 

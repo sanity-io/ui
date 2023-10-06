@@ -9,9 +9,7 @@ export interface ResponsiveDialogPositionStyleProps {
   $position: DialogPosition[]
 }
 
-export function dialogStyle({theme}: ThemeProps): CSSObject {
-  const color = theme.sanity.color.base
-
+export function dialogStyle(): CSSObject {
   return {
     '&:not([hidden])': {
       display: 'flex',
@@ -24,7 +22,7 @@ export function dialogStyle({theme}: ThemeProps): CSSObject {
     alignItems: 'center',
     justifyContent: 'center',
     outline: 'none',
-    background: color.shadow.umbra,
+    background: '--card-shadow-umbra-color',
   }
 }
 
