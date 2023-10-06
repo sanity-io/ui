@@ -81,7 +81,7 @@ export const Tooltip = forwardRef(function Tooltip(
     disabled,
     fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
       DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
-    padding,
+    padding = 3,
     placement: placementProp = 'bottom',
     portal,
     scheme,
@@ -323,7 +323,7 @@ export const Tooltip = forwardRef(function Tooltip(
         data-ui="Tooltip__card"
         data-placement={placement}
         padding={padding}
-        radius={2}
+        radius={3}
         scheme={scheme}
         shadow={shadow}
       >

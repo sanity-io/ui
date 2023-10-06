@@ -1,25 +1,29 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {userEvent, within} from '@storybook/testing-library'
 import {Button, Card, Text, Tooltip} from '../../src/primitives'
+import {PLACEMENT_OPTIONS} from '../constants'
 import {getShadowControls, getSpaceControls} from '../controls'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Tooltip> = {
   args: {
     children: <Button mode="bleed" text="Hover me" />,
-    content: "I'm a tooltip",
-    padding: 2,
-    shadow: 2,
+    content: <Text size={1}>I'm a tooltip</Text>,
   },
   argTypes: {
-    content: {
-      type: 'string',
-    },
     padding: getSpaceControls(),
     shadow: getShadowControls(),
   },
+  decorators: [
+    (Story: StoryFn): JSX.Element => (
+      <Card padding={6}>
+        <Story />
+      </Card>
+    ),
+  ],
   parameters: {
     controls: {
-      exclude: ['children', 'allowedAutoPlacements'],
+      exclude: ['allowedAutoPlacements', 'children', 'content'],
     },
   },
   component: Tooltip,
@@ -31,17 +35,24 @@ type Story = StoryObj<typeof Tooltip>
 
 export const Basic: Story = {
   render: (props) => {
+    return <Tooltip {...props} />
+  },
+}
+
+export const Placements: Story = {
+  render: (props) => {
     return (
-      <Card padding={6}>
-        <Tooltip
-          {...props}
-          content={
-            <Text muted size={1}>
-              {props.content}
-            </Text>
-          }
-        />
-      </Card>
+      <>
+        {rowBuilder({
+          gap: 4,
+          renderItem: ({value}) => (
+            <Tooltip {...props} key={value} placement={value}>
+              <Button mode="bleed" text={value} />
+            </Tooltip>
+          ),
+          rows: PLACEMENT_OPTIONS,
+        })}
+      </>
     )
   },
 }
@@ -49,9 +60,6 @@ export const Basic: Story = {
 export const WithOpenDelay: Story = {
   args: {
     delay: {open: 200},
-    shadow: 2,
-    padding: 2,
-    content: 'Content',
   },
   parameters: {
     controls: {
@@ -59,18 +67,7 @@ export const WithOpenDelay: Story = {
     },
   },
   render: (props) => {
-    return (
-      <Card padding={6}>
-        <Tooltip
-          {...props}
-          content={
-            <Text muted size={1}>
-              {props.content}
-            </Text>
-          }
-        />
-      </Card>
-    )
+    return <Tooltip {...props} />
   },
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement)
