@@ -79,30 +79,30 @@ export function textInputBaseStyle(
     }
 
     --input-fg-color: ${cssVars[$tone].text_primary};
-    --input-placeholder-color: ${cssVars[$tone].text_tertiary};
+    --input-placeholder-color: ${cssVars[$tone].text_inactive};
 
     /* enabled */
     &:not(:invalid):not(:disabled):not(:read-only) {
       --input-fg-color: ${cssVars[$tone].text_primary};
-      --input-placeholder-color: ${cssVars[$tone].text_tertiary};
+      --input-placeholder-color: ${cssVars[$tone].text_inactive};
     }
 
     /* disabled */
     &:not(:invalid):disabled {
       --input-fg-color: ${cssVars[$tone].text_primary};
-      --input-placeholder-color: ${cssVars[$tone].text_tertiary};
+      --input-placeholder-color: ${cssVars[$tone].text_inactive};
     }
 
     /* invalid */
     &:invalid {
       --input-fg-color: ${cssVars.critical.text_primary};
-      --input-placeholder-color: ${cssVars.critical.text_tertiary};
+      --input-placeholder-color: ${cssVars.critical.text_inactive};
     }
 
     /* readOnly */
     &:read-only {
       --input-fg-color: ${cssVars[$tone].text_primary};
-      --input-placeholder-color: ${cssVars[$tone].text_tertiary};
+      --input-placeholder-color: ${cssVars[$tone].text_inactive};
     }
   `
 }

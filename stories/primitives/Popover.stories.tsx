@@ -1,7 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Button, Card, Flex, Popover, Text} from '../../src/primitives'
-import {getRadiusControls, getShadowControls} from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {Button, Card, Popover, Text} from '../../src/primitives'
+import {RADII} from '../constants'
+import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Popover> = {
   args: {
@@ -11,6 +12,7 @@ const meta: Meta<typeof Popover> = {
     padding: 3,
   },
   argTypes: {
+    padding: getSpaceControls(),
     radius: getRadiusControls(),
     shadow: getShadowControls(),
   },
@@ -40,14 +42,16 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={8} padding={6} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <Popover {...props} radius={radius}>
-            <Button text={String(radius)} />
+    <Card padding={6}>
+      {rowBuilder({
+        gap: 8,
+        renderItem: ({value}) => (
+          <Popover {...props} key={value} radius={value}>
+            <Button text={String(value)} />
           </Popover>
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </Card>
   ),
 }

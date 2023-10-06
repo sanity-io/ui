@@ -20,6 +20,7 @@ export function _colorVarsStyle(
 
     // Card
     '--card-bg-color': color.bg,
+    '--card-bg2-color': color.bg2,
     '--card-bg-image': checkered
       ? `repeating-conic-gradient(${color.bg} 0% 25%, ${color.bg2 || color.bg} 0% 50%)`
       : undefined,

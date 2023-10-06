@@ -77,9 +77,9 @@ export function buttonColorStyles(
         $mode === 'default' ? cssVars[$tone].icon_inverted : cssVars[$tone].icon_default,
       '&:disabled, &[data-disabled="true"]': {
         /* Updates the variables for the */
-        '--card-fg-color': cssVars.primary.text_tertiary,
-        '--card-muted-fg-color': cssVars.primary.text_tertiary,
-        '--card-icon-color': cssVars.primary.text_tertiary,
+        '--card-fg-color': cssVars.primary.text_inactive,
+        '--card-muted-fg-color': cssVars.primary.text_inactive,
+        '--card-icon-color': cssVars.primary.border_base,
       },
     },
     {
@@ -88,7 +88,7 @@ export function buttonColorStyles(
       boxShadow: focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': {
         backgroundColor: $mode === 'default' ? cssVars.primary.bg_tint : cssVars.default.bg_base,
-        color: cssVars.primary.text_tertiary,
+        color: cssVars.primary.text_inactive,
         boxShadow: focusRingBorderStyle({
           ...border,
           color: $mode === 'default' ? cssVars.primary.bg_tint : cssVars.primary.border_base,

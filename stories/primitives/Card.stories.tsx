@@ -1,28 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Hotkeys, Menu, MenuButton, MenuDivider, MenuItem, Tab, TabList} from '../../src/components'
-import {
-  Avatar,
-  Badge,
-  Button,
-  Card,
-  Checkbox,
-  Flex,
-  Grid,
-  Heading,
-  Inline,
-  Label,
-  Radio,
-  Select,
-  Spinner,
-  Stack,
-  Switch,
-  Text,
-  TextArea,
-  TextInput,
-} from '../../src/primitives'
-import {cssVars} from '../../src/theme/lib/theme/color/cssVariables/createCssVars'
+import {Card, Flex, Grid, Text} from '../../src/primitives'
+import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Card> = {
   args: {
@@ -111,15 +91,16 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => (
-          <Card {...props} radius={radius}>
-            <Text>{radius}</Text>
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Card {...props} key={value} radius={value}>
+            <Text>{value}</Text>
           </Card>
         ),
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }
 
@@ -201,7 +182,7 @@ export const Schemes: Story = {
     </Grid>
   ),
 }
-const tones = ['default', 'critical'] as const
+
 export const Tones: Story = {
   args: {
     radius: 1,
@@ -212,146 +193,16 @@ export const Tones: Story = {
       include: ['fontSize', 'padding', 'radius', 'shadow'],
     },
   },
-  render: (props) => {
-    return (
-      <Flex gap={2} paddingTop={2}>
-        {tones.map((tone) => (
-          <Card tone={tone} {...props} key={tone}>
-            <Stack space={2}>
-              <Heading>Heading</Heading>
-              <Text>Text</Text>
-              <Label>Label</Label>
-              <Flex gap={2}>
-                <Badge>Badge</Badge>
-                <Badge mode="outline">Badge</Badge>
-              </Flex>
-              <TextInput placeholder="placeholder" />
-              <TextInput value="Value" />
-              <TextArea value="TextArea" />
-              {/* <TextArea value="CAUTION TONE" tone="caution" /> */}
-
-              <Select>
-                <option>Think</option>
-              </Select>
-              <Flex gap={2} align={'center'} padding={2}>
-                <Text>Avatar</Text>
-                <Avatar size={0} initials="PB" />
-              </Flex>
-              <Flex gap={2} align={'center'} padding={2}>
-                <Text>Radio</Text>
-                <Flex justify="center" padding={1} gap={2}>
-                  {/* TODO: Why is this defaultChecked not showing? */}
-                  <Radio defaultChecked={false} />
-                  <Radio defaultChecked={true} />
-                </Flex>
-              </Flex>
-              <Flex gap={2} align={'center'} padding={2}>
-                <Text>Checkbox</Text>
-                <Flex justify="center" padding={1} gap={2}>
-                  <Checkbox checked />
-                  <Checkbox checked={false} />
-                  <Checkbox indeterminate />
-                </Flex>
-              </Flex>
-              <Flex gap={2} align={'center'} padding={2}>
-                <Text>Select</Text>
-                <Flex justify={'center'} paddingY={2}>
-                  <Inline space={[3, 3, 4, 5]}>
-                    <Switch checked />
-                    <Switch indeterminate />
-                    <Switch />
-                  </Inline>
-                </Flex>
-              </Flex>
-              <Flex gap={4} align={'center'} padding={2}>
-                <Text>Spinner</Text>
-                <Spinner muted />
-              </Flex>
-              <Hotkeys keys={['Ctrl', 'Shift', 'P']} padding={2} />
-              <Stack
-                space={2}
-                padding={2}
-                marginY={2}
-                style={{
-                  boxShadow: `0 0 0 2px ${cssVars.default.border_base}`, // You can access the vars from custom components :rocket:
-                  borderRadius: '4px',
-                }}
-              >
-                <Text weight="semibold" size={2} muted>
-                  Buttons
-                </Text>
-                <Button text={tone} />
-                <Button text={tone} mode="bleed" />
-                <Button text={tone + '-muted'} muted mode="bleed" />
-                <Button text={tone} mode="ghost" />
-                <Button text={tone + '-muted'} muted mode="ghost" />
-              </Stack>
-              <Stack
-                space={2}
-                padding={2}
-                style={{
-                  boxShadow: `0 0 0 2px ${cssVars.default.border_base}`, // You can access the vars from custom components :rocket:
-                  borderRadius: '4px',
-                }}
-              >
-                <Text weight="semibold" size={2} muted>
-                  Tabs
-                </Text>
-                <TabList space={2}>
-                  <Tab label="Content" selected id={''} aria-controls={''} />
-                  <Tab label="Preview" aria-controls={''} id={''} />
-                </TabList>
-              </Stack>
-              <MenuButton
-                button={<Button text="Open menu" />}
-                id="menu-button-example"
-                menu={
-                  <Menu>
-                    <MenuItem text="Option 1" />
-                    <MenuItem text="Option 2" />
-                    <MenuDivider />
-                    <MenuItem text="Option 3" />
-                  </Menu>
-                }
-              />
-              <Text weight="semibold" size={2} muted>
-                Avatars
-              </Text>
-              <Flex gap={2}>
-                <Avatar initials="AB" />
-                <Avatar initials="AB" color="blue" />
-                <Avatar initials="AB" color="cyan" />
-                <Avatar initials="AB" color="gray" />
-                <Avatar initials="AB" color="green" />
-                <Avatar initials="AB" color="magenta" />
-                <Avatar initials="AB" color="orange" />
-                <Avatar initials="AB" color="purple" />
-                <Avatar initials="AB" color="red" />
-                <Avatar initials="AB" color="yellow" />
-              </Flex>
-            </Stack>
+  render: (props) => (
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Card {...props} key={value} tone={value}>
+            <Text>{value}</Text>
           </Card>
-        ))}
-      </Flex>
-    )
-  },
-}
-
-export const TextHeights: Story = {
-  args: {
-    radius: 1,
-    shadow: 1,
-  },
-  parameters: {
-    controls: {
-      include: ['fontSize', 'padding', 'radius', 'shadow'],
-    },
-  },
-  render: (props) => {
-    return (
-      <Card {...props}>
-        <Text>Text</Text>
-      </Card>
-    )
-  },
+        ),
+        rows: CARD_TONES,
+      })}
+    </>
+  ),
 }

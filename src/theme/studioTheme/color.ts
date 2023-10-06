@@ -94,7 +94,7 @@ export const color = createColorTheme({
     if (state === 'disabled') {
       tints = defaultTints
 
-      const bg = mix(base.bg, tints[dark ? 800 : 200].hex)
+      const bg = getColorHex(tones.default, dark, 'default', 'bg_tint')
       const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {

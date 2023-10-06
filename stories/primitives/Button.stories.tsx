@@ -1,7 +1,7 @@
 import {CloseIcon, SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Button, Flex, Grid, Stack, Text} from '../../src/primitives'
-import {ButtonMode, ButtonTone} from '../../src/types'
+import {BUTTON_MODES, BUTTON_TONES, RADII} from '../constants'
 import {
   getFontSizeControls,
   getIconControls,
@@ -9,7 +9,7 @@ import {
   getSpaceControls,
 } from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
-import {radiusBuilder} from '../helpers/radiusBuilder'
+import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Button> = {
   args: {
@@ -61,11 +61,12 @@ export const Radius: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2} wrap="wrap">
-      {radiusBuilder({
-        renderItem: ({radius}) => <Button {...props} radius={radius} text={radius} />,
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => <Button {...props} key={value} radius={value} text={value} />,
+        rows: RADII,
       })}
-    </Flex>
+    </>
   ),
 }
 
@@ -76,11 +77,12 @@ export const Modes: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2}>
-      <Button {...props} text="Default" />
-      <Button {...props} mode="bleed" text="Bleed" />
-      <Button {...props} mode="ghost" text="Default" />
-    </Flex>
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => <Button {...props} key={value} mode={value} text={value} />,
+        rows: BUTTON_MODES,
+      })}
+    </>
   ),
 }
 
@@ -91,23 +93,17 @@ export const Tones: Story = {
     },
   },
   render: (props) => (
-    <Flex gap={2}>
-      <Button {...props} text="Default" />
-      <Button {...props} text="Primary" tone="primary" />
-      <Button {...props} text="Positive" tone="positive" />
-      <Button {...props} text="Caution" tone="caution" />
-      <Button {...props} text="Critical" tone="critical" />
-    </Flex>
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => <Button {...props} key={value} text={value} tone={value} />,
+        rows: BUTTON_TONES,
+      })}
+    </>
   ),
 }
 
 export const MultipleStyles: Story = {
   args: {
-    // Defaults button props.
-    padding: 3,
-    space: 3,
-    fontSize: 1,
-    radius: 2,
     icon: 'square',
     iconRight: 'square',
     text: 'Button',
@@ -118,9 +114,6 @@ export const MultipleStyles: Story = {
     },
   },
   render: (props) => {
-    const buttonModes: ButtonMode[] = ['default', 'ghost', 'bleed']
-    const buttonTones: ButtonTone[] = ['default', 'primary', 'positive', 'caution', 'critical']
-
     const SubHeader = () => (
       <>
         <div />
@@ -165,12 +158,12 @@ export const MultipleStyles: Story = {
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',
-            columns: buttonModes,
-            rows: buttonTones,
+            columns: BUTTON_MODES,
+            rows: BUTTON_TONES,
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
             renderItem: ({row, column}) => (
-              <Flex gap={1} justify={'center'} align={'center'}>
+              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
                 <Button {...props} tone={row} mode={column} text={props.text} />
 
                 {column !== 'default' && (
@@ -190,13 +183,13 @@ export const MultipleStyles: Story = {
           })}
           {matrixBuilder({
             scheme: 'dark',
-            columns: buttonModes,
-            rows: buttonTones,
+            columns: BUTTON_MODES,
+            rows: BUTTON_TONES,
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
 
             renderItem: ({row, column}) => (
-              <Flex gap={1} justify={'center'} align={'center'}>
+              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
                 <Button {...props} tone={row} mode={column} text={props.text} />
 
                 {column !== 'default' && (

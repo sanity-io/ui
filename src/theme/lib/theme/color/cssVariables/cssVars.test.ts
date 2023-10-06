@@ -17,7 +17,7 @@ describe('css variables', () => {
     const expected = {
       '--default-text_primary': '#272a2e',
       '--default-text_secondary': '#6e7683',
-      '--default-text_tertiary': '#b6bcc6',
+      '--default-text_inactive': '#8690a0',
       '--default-bg_base': '#fff',
       '--default-bg_base_hover': '#f2f3f5',
       '--default-bg_base_active': '#e6e8ec',
@@ -35,7 +35,7 @@ describe('css variables', () => {
       '--default-card_base_fg': '#272a2e',
       '--transparent-text_primary': '#272a2e',
       '--transparent-text_secondary': '#6e7683',
-      '--transparent-text_tertiary': '#b6bcc6',
+      '--transparent-text_inactive': '#8690a0',
       '--transparent-bg_base': '#fff',
       '--transparent-bg_base_hover': '#f2f3f5',
       '--transparent-bg_base_active': '#e6e8ec',
@@ -53,7 +53,7 @@ describe('css variables', () => {
       '--transparent-card_base_fg': '#272a2e',
       '--primary-text_primary': '#272a2e',
       '--primary-text_secondary': '#6e7683',
-      '--primary-text_tertiary': '#b6bcc6',
+      '--primary-text_inactive': '#8690a0',
       '--primary-bg_base': '#fff',
       '--primary-bg_base_hover': '#f2f3f5',
       '--primary-bg_base_active': '#e6e8ec',
@@ -71,7 +71,7 @@ describe('css variables', () => {
       '--primary-card_base_fg': '#272a2e',
       '--positive-text_primary': '#133237',
       '--positive-text_secondary': '#1c97a8',
-      '--positive-text_tertiary': '#59e3f6',
+      '--positive-text_inactive': '#1fb8ce',
       '--positive-bg_base': '#fff',
       '--positive-bg_base_hover': '#f2f3f5',
       '--positive-bg_base_active': '#e3fafd',
@@ -89,7 +89,7 @@ describe('css variables', () => {
       '--positive-card_base_fg': '#133237',
       '--caution-text_primary': '#312c14',
       '--caution-text_secondary': '#967e1c',
-      '--caution-text_tertiary': '#fbd024',
+      '--caution-text_inactive': '#b7991e',
       '--caution-bg_base': '#fff',
       '--caution-bg_base_hover': '#fef7da',
       '--caution-bg_base_active': '#fdefb6',
@@ -107,7 +107,7 @@ describe('css variables', () => {
       '--caution-card_base_fg': '#312c14',
       '--critical-text_primary': '#3c1a17',
       '--critical-text_secondary': '#c33529',
-      '--critical-text_tertiary': '#f68b82',
+      '--critical-text_inactive': '#f03e2f',
       '--critical-bg_base': '#fff',
       '--critical-bg_base_hover': '#fdebea',
       '--critical-bg_base_active': '#fcd8d5',
@@ -169,12 +169,28 @@ describe('css variables', () => {
       '--syntax-url': '#c33529',
       '--syntax-variable': '#c33529',
     }
-    
+
     expect(result).toEqual(expected)
   })
-  it('Should create the variables when a default tone is provided', () => {
+  it('Should create the variables when a default tone is provided in light mode', () => {
     const defaultVariables = createCssVars('light', tones)
     const result = createCssVars('light', tones, 'caution')
+
+    expect(result['--default-text_primary']).toEqual(result['--caution-text_primary'])
+    // It's not equal because it has been mixed with the default bg
+    expect(result['--default-text_primary']).not.toEqual(defaultVariables['--caution-text_primary'])
+
+    expect(result['--default-text_secondary']).toEqual(result['--caution-text_secondary'])
+    // It's not equal because it has been mixed with the default bg
+    expect(result['--default-text_secondary']).not.toEqual(
+      defaultVariables['--caution-text_secondary'],
+    )
+    // The base bg should not be mixed
+    expect(result['--default-bg_base']).toEqual(defaultVariables['--caution-card_base_bg'])
+  })
+  it('Should create the variables when a default tone is provided in dark mdoe', () => {
+    const defaultVariables = createCssVars('dark', tones)
+    const result = createCssVars('dark', tones, 'caution')
 
     expect(result['--default-text_primary']).toEqual(result['--caution-text_primary'])
     // It's not equal because it has been mixed with the default bg

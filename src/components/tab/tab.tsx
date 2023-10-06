@@ -38,7 +38,7 @@ export const Tab = forwardRef(function Tab(
     icon,
     id,
     focused,
-    fontSize,
+    fontSize = 1,
     label,
     onClick,
     onFocus,
@@ -88,6 +88,7 @@ export const Tab = forwardRef(function Tab(
       onBlur={handleBlur}
       onFocus={handleFocus}
       padding={padding}
+      radius="full"
       ref={setRef}
       role="tab"
       selected={selected}
