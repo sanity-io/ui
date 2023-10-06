@@ -1,7 +1,6 @@
 import {css} from 'styled-components'
-import {ThemeColorSchemeKey, ThemeFontWeightKey} from '../../theme'
+import {ThemeColorToneKey, ThemeFontWeightKey} from '../../theme'
 import {cssVars} from '../../theme/lib/theme/color/cssVars'
-import {CardTone} from '../../types'
 import {CSSObject} from '../../types/styled'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'
@@ -12,8 +11,7 @@ import {ThemeProps} from '../types'
  */
 export interface TextInputInputStyleProps {
   $fontSize: number[]
-  $scheme: ThemeColorSchemeKey
-  $tone: CardTone
+  $tone: ThemeColorToneKey
   $weight?: ThemeFontWeightKey
 }
 
@@ -23,8 +21,7 @@ export interface TextInputInputStyleProps {
 export interface TextInputRepresentationStyleProps {
   $hasPrefix?: boolean
   $hasSuffix?: boolean
-  $scheme: ThemeColorSchemeKey
-  $tone: CardTone
+  $tone: ThemeColorToneKey
 }
 
 const ROOT_STYLE = css`
@@ -42,7 +39,7 @@ export function textInputRootStyle(): ReturnType<typeof css> {
 export function textInputBaseStyle(
   props: TextInputInputStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {theme, $scheme, $tone, $weight} = props
+  const {theme, $tone, $weight} = props
   const font = theme.sanity.fonts.text
 
   return css`
@@ -80,37 +77,33 @@ export function textInputBaseStyle(
     &::placeholder {
       color: var(--input-placeholder-color);
     }
-    ${$tone !== 'inherit' &&
-    `
-    &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
+
+    --input-fg-color: ${cssVars[$tone].text_primary};
+    --input-placeholder-color: ${cssVars[$tone].text_tertiary};
+
+    /* enabled */
+    &:not(:invalid):not(:disabled):not(:read-only) {
       --input-fg-color: ${cssVars[$tone].text_primary};
       --input-placeholder-color: ${cssVars[$tone].text_tertiary};
-
-      /* enabled */
-      &:not(:invalid):not(:disabled):not(:read-only) {
-        --input-fg-color: ${cssVars[$tone].text_primary};
-        --input-placeholder-color: ${cssVars[$tone].text_tertiary};
-      }
-
-      /* disabled */
-      &:not(:invalid):disabled {
-        --input-fg-color: ${cssVars[$tone].text_primary};
-        --input-placeholder-color: ${cssVars[$tone].text_tertiary};
-      }
-
-      /* invalid */
-      &:invalid {
-        --input-fg-color: ${cssVars.critical.text_primary};
-        --input-placeholder-color: ${cssVars.critical.text_tertiary};
-      }
-
-      /* readOnly */
-      &:read-only {
-        --input-fg-color: ${cssVars[$tone].text_primary};
-        --input-placeholder-color: ${cssVars[$tone].text_tertiary};
-      }
     }
-    `}
+
+    /* disabled */
+    &:not(:invalid):disabled {
+      --input-fg-color: ${cssVars[$tone].text_primary};
+      --input-placeholder-color: ${cssVars[$tone].text_tertiary};
+    }
+
+    /* invalid */
+    &:invalid {
+      --input-fg-color: ${cssVars.critical.text_primary};
+      --input-placeholder-color: ${cssVars.critical.text_tertiary};
+    }
+
+    /* readOnly */
+    &:read-only {
+      --input-fg-color: ${cssVars[$tone].text_primary};
+      --input-placeholder-color: ${cssVars[$tone].text_tertiary};
+    }
   `
 }
 
@@ -131,7 +124,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
+  const {$hasPrefix, $hasSuffix, $tone, theme} = props
   const {input} = theme.sanity
   const {focusRing} = input.text
 
@@ -147,7 +140,7 @@ export function textInputRepresentationStyle(
     pointer-events: none;
     z-index: 0;
 
-    background-color: var(--card-bg-color);
+    background-color: ${cssVars[$tone].bg_base};
     box-shadow: var(--input-box-shadow);
 
     border-top-left-radius: ${$hasPrefix ? 0 : undefined};
@@ -155,70 +148,66 @@ export function textInputRepresentationStyle(
     border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
-    ${$tone !== 'inherit' &&
-    `
-    &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
-      --card-bg-color: ${cssVars[$tone].bg_base};
-      --card-fg-color: ${cssVars[$tone].text_primary};
+    --card-bg-color: ${cssVars[$tone].bg_base};
+    --card-fg-color: ${cssVars[$tone].text_primary};
 
-      /* enabled */
+    /* enabled */
+    &[data-border] {
+      --input-box-shadow: ${focusRingBorderStyle({
+        color: cssVars[$tone].border_base,
+        width: input.border.width,
+      })};
+    }
+
+    /* invalid */
+    *:not(:disabled):invalid + & {
+      --card-bg-color: ${cssVars.critical.bg_tint};
+      --card-fg-color: ${cssVars.critical.text_primary};
+
       &[data-border] {
         --input-box-shadow: ${focusRingBorderStyle({
-          color: cssVars[$tone].border_base,
+          color: cssVars.critical.border_base,
           width: input.border.width,
         })};
       }
+    }
 
-      /* invalid */
-      *:not(:disabled):invalid + & {
-        --card-bg-color: ${cssVars.critical.bg_tint};
-        --card-fg-color: ${cssVars.critical.text_primary};
-
-        &[data-border] {
-          --input-box-shadow: ${focusRingBorderStyle({
-            color: cssVars.critical.border_base,
-            width: input.border.width,
-          })};
-        }
+    /* focused */
+    *:not(:disabled):focus + & {
+      &[data-border] {
+        --input-box-shadow: ${focusRingStyle({
+          border: {color: cssVars.positive.border_base, width: input.border.width},
+          focusRing,
+        })};
       }
 
-      /* focused */
-      *:not(:disabled):focus + & {
-        &[data-border] {
-          --input-box-shadow: ${focusRingStyle({
-            border: {color: cssVars.positive.border_base, width: input.border.width},
-            focusRing,
-          })};
-        }
-
-        &:not([data-border]) {
-          --input-box-shadow: ${focusRingStyle({focusRing})};
-        }
-      }
-
-      /* disabled */
-      *:disabled + & {
-        --card-bg-color: ${cssVars.default.bg_tint} !important;
-        --card-fg-color: ${cssVars.default.text_primary} !important;
-      }
-
-      /* readOnly */
-      *:read-only + & {
-        --card-bg-color: ${cssVars.default.bg_tint} !important;
-        --card-fg-color: ${cssVars.default.text_primary} !important;
-      }
-
-      /* hovered */
-      @media (hover: hover) {
-
-        *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + &[data-border] {
-          --input-box-shadow: ${focusRingBorderStyle({
-            color: cssVars.default.border_base_hover,
-            width: input.border.width,
-          })};
-        }
+      &:not([data-border]) {
+        --input-box-shadow: ${focusRingStyle({focusRing})};
       }
     }
-    `}
+
+    /* disabled */
+    *:disabled + & {
+      --card-bg-color: ${cssVars.default.bg_tint} !important;
+      --card-fg-color: ${cssVars.default.text_primary} !important;
+    }
+
+    /* readOnly */
+    *:read-only + & {
+      --card-bg-color: ${cssVars.default.bg_tint} !important;
+      --card-fg-color: ${cssVars.default.text_primary} !important;
+    }
+
+    /* hovered */
+    @media (hover: hover) {
+
+      *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + &[data-border] {
+        --input-box-shadow: ${focusRingBorderStyle({
+          color: cssVars.default.border_base_hover,
+          width: input.border.width,
+        })};
+      }
+    }
+    }
   `
 }

@@ -20,6 +20,7 @@ import {
   TextArea,
   TextInput,
 } from '../../src/primitives'
+import {cssVars} from '../../src/theme/lib/theme/color/cssVars'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {radiusBuilder} from '../helpers/radiusBuilder'
 
@@ -264,15 +265,41 @@ export const Tones: Story = {
                 <Text>Spinner</Text>
                 <Spinner muted />
               </Flex>
-              <Button text={tone} />
-              <Button text={tone} mode="bleed" />
-              <Button text={tone} mode="ghost" />
               <Hotkeys keys={['Ctrl', 'Shift', 'P']} padding={2} />
-              <Text>Tabs </Text>
-              <TabList space={2}>
-                <Tab label="Content" selected id={''} aria-controls={''} />
-                <Tab label="Preview" aria-controls={''} id={''} />
-              </TabList>
+              <Stack
+                space={2}
+                padding={2}
+                marginY={2}
+                style={{
+                  boxShadow: `0 0 0 2px ${cssVars.default.border_base}`, // You can access the vars from custom components :rocket:
+                  borderRadius: '4px',
+                }}
+              >
+                <Text weight="semibold" size={2} muted>
+                  Buttons
+                </Text>
+                <Button text={tone} />
+                <Button text={tone} mode="bleed" />
+                <Button text={tone + '-muted'} muted mode="bleed" />
+                <Button text={tone} mode="ghost" />
+                <Button text={tone + '-muted'} muted mode="ghost" />
+              </Stack>
+              <Stack
+                space={2}
+                padding={2}
+                style={{
+                  boxShadow: `0 0 0 2px ${cssVars.default.border_base}`, // You can access the vars from custom components :rocket:
+                  borderRadius: '4px',
+                }}
+              >
+                <Text weight="semibold" size={2} muted>
+                  Tabs
+                </Text>
+                <TabList space={2}>
+                  <Tab label="Content" selected id={''} aria-controls={''} />
+                  <Tab label="Preview" aria-controls={''} id={''} />
+                </TabList>
+              </Stack>
               <MenuButton
                 button={<Button text="Open menu" />}
                 id="menu-button-example"

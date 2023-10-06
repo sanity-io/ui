@@ -52,7 +52,8 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
   const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
-    ${_cssVarStyles(theme.scheme, theme.tones, $tone)}
+    /* A new css vars context is created, allowing for override of the default tone and changing the scheme */
+    ${$tone !== 'inherit' && _cssVarStyles(theme.scheme, theme.tones, $tone)}
     /* Other necessary overrides TODO: Move this to the _cssVarStyles function?  */
     --default-bg_base: ${base.bg};
     /* Other necessary overrides */
