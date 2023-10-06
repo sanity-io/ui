@@ -16,7 +16,7 @@ export const studioTheme: RootTheme = {
   },
   button: {
     textWeight: 'medium',
-    focusRing: {offset: -1, width: 1},
+    focusRing: {offset: -1, width: 2},
   },
   card: {
     focusRing: {offset: -1, width: 1},

@@ -93,15 +93,15 @@ export const color = createColorTheme({
     if (state === 'disabled') {
       tints = defaultTints
 
-      const bg = mix(base.bg, tints[dark ? 800 : 200].hex)
+      const bg = getColorHex(tones.default, dark, 'default', 'bg_tint')
       const skeletonFrom = mix2(bg, tints[dark ? 200 : 800].hex)
 
       return {
         bg,
         bg2: mix2(bg, tints[dark ? 50 : 950].hex),
-        border: bg,
-        fg: getColorHex(tints, dark, 'default', 'bg_base'),
-        iconColor: getColorHex(tints, dark, 'default', 'icon_inverted'),
+        border: getColorHex(tones.default, dark, 'default', 'bg_base'),
+        fg: getColorHex(tones.default, dark, 'default', 'text_inactive'),
+        iconColor: getColorHex(tones.default, dark, 'default', 'border_base'),
         muted: {
           fg: mix(base.bg, tints[dark ? 950 : 50].hex),
         },
@@ -262,11 +262,11 @@ export const color = createColorTheme({
       return {
         bg,
         bg2: mix(bg, tints[dark ? 950 : 50].hex),
-        border: mix(bg, tints[dark ? 950 : 50].hex),
-        fg: getColorHex(tints, dark, tone, 'text_primary'),
-        iconColor: getColorHex(tints, dark, name, 'icon_default'),
+        border: getColorHex(tones.default, dark, 'default', 'border_base'),
+        fg: getColorHex(tones.default, dark, 'default', 'text_inactive'),
+        iconColor: getColorHex(tones.default, dark, 'default', 'border_base'),
         muted: {
-          fg: getColorHex(tints, dark, tone, 'text_secondary'),
+          fg: getColorHex(tones.default, dark, 'default', 'text_inactive'),
         },
         accent: {
           fg: getColorHex(tints, dark, tone, 'text_secondary'),
