@@ -1,6 +1,22 @@
-import {ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
+import {
+  ClockIcon,
+  CommentIcon,
+  ExpandIcon,
+  OkHandIcon,
+  RocketIcon,
+  SearchIcon,
+  SunIcon,
+} from '@sanity/icons'
 import {ReactNode} from 'react'
-import {Autocomplete, Menu, MenuButton, MenuDivider, MenuItem} from '../../src/components'
+import {
+  Autocomplete,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  Tab,
+  TabList,
+} from '../../src/components'
 import {
   Avatar,
   Button,
@@ -166,6 +182,34 @@ export function FocusRings(): ReactNode {
                   </Menu>
                 }
               />
+            </Wrapper>
+            <Wrapper title="TabList">
+              <TabList space={2}>
+                <Tab
+                  aria-controls="example-panel-foo"
+                  icon={SunIcon}
+                  id="foo"
+                  label="Foo"
+                  key="foo"
+                  selected
+                />
+                <Tab
+                  aria-controls="example-panel-bar"
+                  icon={RocketIcon}
+                  id="bar"
+                  label="Bar"
+                  key="bar"
+                  selected
+                />
+                <Tab
+                  aria-controls="example-panel-baz"
+                  icon={OkHandIcon}
+                  id="baz"
+                  label="Baz"
+                  key="baz"
+                  selected
+                />
+              </TabList>
             </Wrapper>
           </Stack>
         </Stack>
