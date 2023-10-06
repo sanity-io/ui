@@ -3,6 +3,7 @@
  */
 export interface ThemeColorInputState {
   bg: string
+  bg2: string
   fg: string
   border: string
   placeholder: string

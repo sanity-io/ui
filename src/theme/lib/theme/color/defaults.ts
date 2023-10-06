@@ -334,6 +334,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
   input: () => {
     return {
       bg: black,
+      bg2: black,
       fg: black,
       border: black,
       placeholder: black,

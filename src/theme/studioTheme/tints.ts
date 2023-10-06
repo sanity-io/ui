@@ -59,7 +59,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     bg_tint: '900',
     icon_default: '300',
     icon_inverted: hues.gray[900],
-    border_base: '900',
+    border_base: '800',
     border_accent: '300',
     border_accent_inverted: hues.gray[900],
   },
