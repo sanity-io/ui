@@ -38,17 +38,17 @@ export const studioTheme: RootTheme = {
   input: {
     checkbox: {
       size: 17,
-      focusRing: {offset: 1, width: 1},
+      focusRing: {offset: -1, width: 1},
     },
     radio: {
       size: 17,
       markSize: 9,
-      focusRing: {offset: 1, width: 1},
+      focusRing: {offset: -1, width: 1},
     },
     switch: {
-      width: 33,
-      height: 17,
-      padding: 4,
+      width: 21,
+      height: 13,
+      padding: 2,
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
       focusRing: {offset: 1, width: 1},

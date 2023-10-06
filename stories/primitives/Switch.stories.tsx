@@ -2,6 +2,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 import {Flex, Stack, Switch} from '../../src/primitives'
+import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Switch> = {
   args: {
@@ -35,21 +36,23 @@ export const Indeterminate: Story = {
   render: (props) => <Switch {...props} />,
 }
 
+const ControlledSwitch = (props: React.ComponentProps<typeof Switch>) => {
+  const [checked, setChecked] = useState(!!props.defaultChecked)
+
+  const handleChange = useCallback(() => {
+    setChecked((prev) => !prev)
+  }, [])
+
+  return <Switch {...props} checked={checked} onChange={handleChange} />
+}
+
 export const Controlled: Story = {
   parameters: {
     controls: {
       include: ['indeterminate'],
     },
   },
-  render: (props) => {
-    const [checked, setChecked] = useState(false)
-
-    const handleChange = useCallback(() => {
-      setChecked((prev) => !prev)
-    }, [])
-
-    return <Switch {...props} checked={checked} onChange={handleChange} />
-  },
+  render: (props) => <ControlledSwitch {...props} />,
 }
 
 export const InputStates: Story = {
@@ -61,15 +64,45 @@ export const InputStates: Story = {
   render: (props) => {
     return (
       <Stack space={3}>
-        <Flex gap={3}>
-          <Switch {...props} />
-          <Switch {...props} indeterminate />
-          <Switch {...props} defaultChecked />
-        </Flex>
-        <Flex gap={3}>
-          <Switch {...props} disabled />
-          <Switch {...props} disabled indeterminate />
-          <Switch {...props} defaultChecked disabled />
+        <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
+          {matrixBuilder({
+            scheme: 'light',
+            columns: ['default', 'checked'],
+            rows: ['enabled', 'disabled', 'readOnly'],
+            title: '',
+            renderItem({row, column}) {
+              return (
+                <Flex justify="center" marginTop={2}>
+                  <ControlledSwitch
+                    {...props}
+                    defaultChecked={column === 'checked'}
+                    disabled={row === 'disabled'}
+                    readOnly={row === 'readOnly'}
+                    key={row + column}
+                  />
+                </Flex>
+              )
+            },
+          })}
+          {matrixBuilder({
+            scheme: 'dark',
+            columns: ['default', 'checked'],
+            rows: ['enabled', 'disabled', 'readOnly'],
+            title: '',
+            renderItem({row, column}) {
+              return (
+                <Flex justify="center" marginTop={2}>
+                  <ControlledSwitch
+                    {...props}
+                    defaultChecked={column === 'checked'}
+                    disabled={row === 'disabled'}
+                    readOnly={row === 'readOnly'}
+                    key={row + column}
+                  />
+                </Flex>
+              )
+            },
+          })}
         </Flex>
       </Stack>
     )

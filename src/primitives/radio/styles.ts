@@ -59,7 +59,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
         height: ${rem(input.radio.markSize)};
         width: ${rem(input.radio.markSize)};
         border-radius: ${rem(input.radio.markSize / 2)};
-        background: ${color.default.enabled.fg};
+        background: ${color.default.enabled.bg2};
         opacity: 0;
       }
     }
@@ -83,13 +83,25 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
       opacity: 1;
     }
 
+    /* customValidity */
+    &[data-error] + span {
+      background-color: ${color.invalid.enabled.border};
+      box-shadow: ${focusRingBorderStyle({
+        width: input.border.width,
+        color: color.invalid.enabled.bg2,
+      })};
+      &::after {
+        background: ${color.invalid.enabled.bg2};
+      }
+    }
+
     /* read only */
     &[data-read-only] + span {
       box-shadow: 0 0 0 1px ${color.default.readOnly.border};
       background: ${color.default.readOnly.bg};
 
       &::after {
-        background: ${color.default.readOnly.fg};
+        background: ${color.default.readOnly.border};
       }
     }
 
@@ -99,7 +111,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
       background: ${color.default.disabled.bg};
 
       &::after {
-        background: ${color.default.disabled.fg};
+        background: ${color.default.disabled.border};
       }
     }
   `
