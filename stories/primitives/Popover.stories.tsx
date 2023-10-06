@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Button, Card, Popover, Text} from '../../src/primitives'
 import {RADII} from '../constants'
-import {getRadiusControls, getShadowControls} from '../controls'
+import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Popover> = {
@@ -12,6 +12,7 @@ const meta: Meta<typeof Popover> = {
     padding: 3,
   },
   argTypes: {
+    padding: getSpaceControls(),
     radius: getRadiusControls(),
     shadow: getShadowControls(),
   },
