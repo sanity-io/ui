@@ -47,6 +47,7 @@ export const Checkbox = forwardRef(function Checkbox(
     <Root className={className} data-ui="Checkbox" style={style}>
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
+        data-error={customValidity ? '' : undefined}
         {...restProps}
         checked={checked}
         disabled={disabled || readOnly}

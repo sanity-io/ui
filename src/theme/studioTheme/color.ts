@@ -23,8 +23,8 @@ export const color = createColorTheme({
 
       return {
         fg: dark ? white.hex : black.hex,
-        bg: dark ? black.hex : white.hex,
-        border: tints[dark ? 800 : 200].hex,
+        bg: getColorHex(tones['default'], dark, 'default', 'bg_base'),
+        border: getColorHex(tones['default'], dark, 'default', 'border_base'),
         focusRing: getColorHex(tones['positive'], dark, 'positive', 'border_accent'),
         shadow: {
           outline: rgba(tints[500].hex, 0.4),
@@ -517,44 +517,49 @@ export const color = createColorTheme({
 
       return {
         bg: mix(base.bg, tints[dark ? 950 : 50].hex),
+        bg2: getColorHex(tints, dark, 'critical', 'text_secondary'),
         fg: mix(base.bg, tints[dark ? 400 : 600].hex),
-        border: mix(base.bg, tints[dark ? 800 : 200].hex),
-        placeholder: mix(base.bg, tints[dark ? 600 : 400].hex),
+        border: getColorHex(tints, dark, 'critical', 'border_base'),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
     if (state === 'hovered') {
       return {
         bg: base.bg,
+        bg2: getColorHex(tones.default, dark, 'default', 'text_secondary'),
         fg: base.fg,
         border: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
     if (state === 'disabled') {
       return {
-        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 700 : 300].hex),
-        border: mix(base.bg, hues.gray[dark ? 900 : 100].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
+        bg: getColorHex(tones.default, dark, 'default', 'bg_tint'),
+        bg2: getColorHex(tones.default, dark, 'default', 'border_base'),
+        fg: getColorHex(tones.default, dark, 'default', 'text_secondary'),
+        border: getColorHex(tones.default, dark, 'default', 'border_base'),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
     if (state === 'readOnly') {
       return {
-        bg: mix(base.bg, hues.gray[dark ? 950 : 50].hex),
-        fg: mix(base.bg, hues.gray[dark ? 200 : 800].hex),
-        border: mix(base.bg, hues.gray[dark ? 800 : 200].hex),
-        placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+        bg: getColorHex(tones.default, dark, 'default', 'bg_tint'),
+        bg2: getColorHex(tones.default, dark, 'default', 'border_base'),
+        fg: getColorHex(tones.default, dark, 'default', 'text_secondary'),
+        border: getColorHex(tones.default, dark, 'default', 'border_base'),
+        placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
       }
     }
 
     return {
       bg: base.bg,
+      bg2: getColorHex(tones.default, dark, 'default', 'text_secondary'),
       fg: base.fg,
       border: base.border,
-      placeholder: mix(base.bg, hues.gray[dark ? 600 : 400].hex),
+      placeholder: getColorHex(tones.default, !dark, 'default', 'text_secondary'),
     }
   },
 
