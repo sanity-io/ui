@@ -1,6 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {HeadingStyleProps} from './types'
+import {cssVars} from '../../theme'
 
 export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$accent, $muted, theme} = props
@@ -36,7 +37,7 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
       &:focus {
         box-shadow:
           0 0 0 1px var(--card-bg-color),
-          0 0 0 3px var(--card-focus-ring-color);
+          0 0 0 3px ${cssVars.positive.border_accent};
       }
 
       &:focus:not(:focus-visible) {

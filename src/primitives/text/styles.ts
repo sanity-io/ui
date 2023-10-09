@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {cssVars} from '../../theme'
 
 export function textBaseStyle(
   props: {$accent?: boolean; $muted?: boolean} & ThemeProps,
@@ -42,7 +43,7 @@ export function textBaseStyle(
       &:focus {
         box-shadow:
           0 0 0 1px var(--card-bg-color),
-          0 0 0 3px var(--card-focus-ring-color);
+          0 0 0 3px ${cssVars.positive.border_accent};
       }
 
       &:focus:not(:focus-visible) {

@@ -16,7 +16,6 @@ export function _colorVarsStyle(
     '--card-shadow-umbra-color': base.shadow.umbra,
     '--card-shadow-penumbra-color': base.shadow.penumbra,
     '--card-shadow-ambient-color': base.shadow.ambient,
-    '--card-focus-ring-color': base.focusRing,
 
     // Card
     '--card-bg-color': color.bg,

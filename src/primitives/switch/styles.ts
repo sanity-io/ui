@@ -79,7 +79,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
     }
 
     input:checked + && {
-      --switch-bg-color: var(--card-focus-ring-color);
+      --switch-bg-color: ${cssVars.positive.border_accent};
       --switch-fg-color: ${cssVars.positive.bg_base};
     }
 
@@ -90,7 +90,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
       }
 
       input:not(:disabled):checked:hover + && {
-        --switch-bg-color: var(--card-focus-ring-color);
+        --switch-bg-color: ${cssVars.positive.border_accent};
         --switch-fg-color: ${cssVars.positive.bg_base};
       }
     }
