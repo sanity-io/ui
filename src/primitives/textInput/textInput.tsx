@@ -16,7 +16,8 @@ import {
   textInputRepresentationStyle,
   textInputRootStyle,
 } from '../../styles/internal'
-import {ThemeColorToneKey, ThemeFontWeightKey, useRootTheme} from '../../theme'
+import {ThemeColorToneKey, ThemeFontWeightKey} from '../../theme'
+import {useToneContext} from '../../theme/toneContext/useToneContext'
 import {Radius} from '../../types'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
@@ -170,7 +171,7 @@ export const TextInput = forwardRef(function TextInput(
 
   const ref = useForwardedRef(forwardedRef)
 
-  const rootTheme = useRootTheme()
+  const toneContext = useToneContext()
 
   const fontSize = useArrayProp(fontSizeProp)
   const padding = useArrayProp(paddingProp)
@@ -340,7 +341,7 @@ export const TextInput = forwardRef(function TextInput(
 
   return (
     // TODO: this creates a new instance of a card, is it really needed?
-    <Root data-ui="TextInput" tone={tone !== 'default' ? tone : rootTheme.tone}>
+    <Root data-ui="TextInput" tone={tone !== 'default' ? tone : toneContext.tone}>
       {prefixNode}
 
       <InputRoot>

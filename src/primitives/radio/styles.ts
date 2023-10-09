@@ -45,9 +45,9 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
       height: ${rem(input.radio.size)};
       width: ${rem(input.radio.size)};
       border-radius: ${rem(input.radio.size / 2)};
-      background: ${cssVars.default.bg_base};
+      background: ${cssVars.default['bg-base']};
       box-shadow: ${focusRingBorderStyle({
-        color: cssVars.default.border_base,
+        color: cssVars.default['border-base'],
         width: input.border.width,
       })};
 
@@ -59,7 +59,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
         height: ${rem(input.radio.markSize)};
         width: ${rem(input.radio.markSize)};
         border-radius: ${rem(input.radio.markSize / 2)};
-        background: ${cssVars.default.text_secondary}
+        background: ${cssVars.default['text-secondary']}
         opacity: 0;
       }
     }
@@ -67,14 +67,14 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
     /* focused */
     &:not(:disabled):focus + span {
       box-shadow: ${focusRingStyle({
-        border: {width: input.border.width, color: cssVars.default.border_base},
+        border: {width: input.border.width, color: cssVars.default['border-base']},
         focusRing,
       })};
     }
 
     &:not(:disabled):focus:not(:focus-visible) + span {
       box-shadow: ${focusRingBorderStyle({
-        color: cssVars.default.border_base,
+        color: cssVars.default['border-base'],
         width: input.border.width,
       })};
     }
@@ -85,33 +85,33 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
 
     /* customValidity */
     &[data-error] + span {
-      background-color: ${cssVars.critical.border_base};
+      background-color: ${cssVars.critical['border-base']};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
-        color: cssVars.critical.text_secondary,
+        color: cssVars.critical['text-secondary'],
       })};
       &::after {
-        background: ${cssVars.critical.text_secondary};
+        background: ${cssVars.critical['text-secondary']};
       }
     }
 
     /* read only */
     &[data-read-only] + span {
-      box-shadow: 0 0 0 1px ${cssVars.default.border_base};
-      background: ${cssVars.default.bg_tint};
+      box-shadow: 0 0 0 1px ${cssVars.default['border-base']};
+      background: ${cssVars.default['bg-tint']};
 
       &::after {
-        background: ${cssVars.default.border_base};
+        background: ${cssVars.default['border-base']};
       }
     }
 
     /* disabled */
     &:not([data-read-only]):disabled + span {
-      box-shadow: 0 0 0 1px ${cssVars.default.border_base};
-      background: ${cssVars.default.bg_tint};
+      box-shadow: 0 0 0 1px ${cssVars.default['border-base']};
+      background: ${cssVars.default['bg-tint']};
 
       &::after {
-        background: ${cssVars.default.border_base};
+        background: ${cssVars.default['border-base']};
       }
     }
   `

@@ -1,6 +1,12 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
-import {_colorVarsStyle} from '../../styles/colorVars'
+import {
+  _colorVarsStyle,
+  _colorVarStyleActive,
+  _colorVarStyleHover,
+  _colorVarStyleSelected,
+  cardCssVariables,
+} from '../../styles/colorVars'
 
 export function treeItemRootStyle(): ReturnType<typeof css> {
   return css`
@@ -29,34 +35,28 @@ export function treeItemRootStyle(): ReturnType<typeof css> {
   `
 }
 
-export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {theme} = props
-  const $tone = 'default'
-  const {base, muted, selectable} = theme.sanity.color
-  // @todo: remove use of `muted` here
-  const tone = selectable ? selectable[$tone] || selectable.default : muted[$tone] || muted.default
-
+export function treeItemRootColorStyle(): ReturnType<typeof css> {
   return css`
     /* <div role="none"><a data-ui="TreeItem__box" role="treeitem" tabIndex="0"></div> */
     &[role='none'] {
       & > [role='treeitem'] {
-        ${_colorVarsStyle(base, tone.enabled)}
+        ${_colorVarsStyle()}
 
-        background-color: var(--card-bg-color);
+        background-color:${cardCssVariables['bg-color']};
         color: var(--treeitem-fg-color);
       }
 
       &[data-selected] > [role='treeitem'] {
-        ${_colorVarsStyle(base, tone.pressed)}
+        ${_colorVarStyleActive()}
       }
 
       @media (hover: hover) {
         &:not([data-selected]) > [role='treeitem']:not(:focus):hover {
-          ${_colorVarsStyle(base, tone.hovered)}
+          ${_colorVarStyleHover()}
         }
 
         & > [role='treeitem']:focus {
-          ${_colorVarsStyle(base, tone.selected)}
+          ${_colorVarStyleSelected()}
         }
       }
     }
@@ -64,23 +64,23 @@ export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css
     /* <div role="treeitem" tabIndex="0"><div data-ui="TreeItem__box"></div> */
     &[role='treeitem'] {
       & > [data-ui='TreeItem__box'] {
-        ${_colorVarsStyle(base, tone.enabled)}
+        ${_colorVarsStyle()}
 
-        background-color: var(--card-bg-color);
-        color: var(--card-fg-color);
+        background-color:${cardCssVariables['bg-color']};
+        color: ${cardCssVariables['fg-color']};
       }
 
       &[data-selected] > [data-ui='TreeItem__box'] {
-        ${_colorVarsStyle(base, tone.pressed)}
+        ${_colorVarStyleActive()}
       }
 
       @media (hover: hover) {
         &:not([data-selected]):not(:focus) > [data-ui='TreeItem__box']:hover {
-          ${_colorVarsStyle(base, tone.hovered)}
+          ${_colorVarStyleHover()}
         }
 
         &:focus > [data-ui='TreeItem__box'] {
-          ${_colorVarsStyle(base, tone.selected)}
+          ${_colorVarStyleSelected()}
         }
       }
     }

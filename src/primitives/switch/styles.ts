@@ -41,8 +41,8 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
   const {focusRing} = input.switch
 
   return css`
-    --switch-bg-color: ${cssVars.default.border_base};
-    --switch-fg-color: ${cssVars.default.bg_base};
+    --switch-bg-color: ${cssVars.default['border-base']};
+    --switch-fg-color: ${cssVars.default['bg-base']};
     --switch-box-shadow: none;
 
     &:not([hidden]) {
@@ -79,30 +79,30 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
     }
 
     input:checked + && {
-      --switch-bg-color: ${cssVars.positive.border_accent};
-      --switch-fg-color: ${cssVars.positive.bg_base};
+      --switch-bg-color: ${cssVars.positive['border-accent']};
+      --switch-fg-color: ${cssVars.positive['bg-base']};
     }
 
     @media (hover: hover) {
       input:not(:disabled):hover + && {
-        --switch-bg-color: ${cssVars.default.border_base};
-        --switch-fg-color: ${cssVars.default.bg_base};
+        --switch-bg-color: ${cssVars.default['border-base']};
+        --switch-fg-color: ${cssVars.default['bg-base']};
       }
 
       input:not(:disabled):checked:hover + && {
-        --switch-bg-color: ${cssVars.positive.border_accent};
-        --switch-fg-color: ${cssVars.positive.bg_base};
+        --switch-bg-color: ${cssVars.positive['border-accent']};
+        --switch-fg-color: ${cssVars.positive['bg-base']};
       }
     }
 
     input:not([data-read-only]):disabled + && {
-      --switch-bg-color: ${cssVars.default.border_base};
-      --switch-fg-color: ${cssVars.default.bg_tint};
+      --switch-bg-color: ${cssVars.default['border-base']};
+      --switch-fg-color: ${cssVars.default['bg-tint']};
     }
 
     input[data-read-only]:disabled + && {
-      --switch-bg-color: ${cssVars.default.border_base};
-      --switch-fg-color: ${cssVars.default.bg_tint};
+      --switch-bg-color: ${cssVars.default['border-base']};
+      --switch-fg-color: ${cssVars.default['bg-tint']};
     }
   `
 }

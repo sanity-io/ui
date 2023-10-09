@@ -2,7 +2,10 @@ import {hues} from '@sanity/color'
 import {multiply, screen} from '../../../../studioTheme/helpers'
 import {ThemeColorSchemeKey} from '../types'
 
-const spotsColors = [
+/**
+ * @beta
+ */
+export const spotsColors = [
   'gray',
   'blue',
   'purple',
@@ -23,6 +26,7 @@ const getSpotCssVar = (spotColor: ThemeColorSpotKey): string => `--spot-${spotCo
 
 /**
  * This is necessary to allow mixins with the base background color, which can change when you add a card with a tone.
+ * @beta
  */
 export const createSpotVars = (
   scheme: ThemeColorSchemeKey,
@@ -43,6 +47,9 @@ export const createSpotVars = (
   )
 }
 
+/**
+ * @beta
+ */
 export const spotCssVariables: Record<ThemeColorSpotKey, string> = spotsColors.reduce(
   (acc, spotColor) => {
     acc[spotColor] = `var(${getSpotCssVar(spotColor)})`

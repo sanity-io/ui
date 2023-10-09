@@ -2,6 +2,7 @@ import {css} from 'styled-components'
 import {ThemeColorToneKey, ThemeFontWeightKey} from '../../theme'
 import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
+import {mutableCardVariables} from '../colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -78,31 +79,31 @@ export function textInputBaseStyle(
       color: var(--input-placeholder-color);
     }
 
-    --input-fg-color: ${cssVars[$tone].text_primary};
-    --input-placeholder-color: ${cssVars[$tone].text_inactive};
+    --input-fg-color: ${cssVars[$tone]['text-primary']};
+    --input-placeholder-color: ${cssVars[$tone]['text-inactive']};
 
     /* enabled */
     &:not(:invalid):not(:disabled):not(:read-only) {
-      --input-fg-color: ${cssVars[$tone].text_primary};
-      --input-placeholder-color: ${cssVars[$tone].text_inactive};
+      --input-fg-color: ${cssVars[$tone]['text-primary']};
+      --input-placeholder-color: ${cssVars[$tone]['text-inactive']};
     }
 
     /* disabled */
     &:not(:invalid):disabled {
-      --input-fg-color: ${cssVars[$tone].text_primary};
-      --input-placeholder-color: ${cssVars[$tone].text_inactive};
+      --input-fg-color: ${cssVars[$tone]['text-primary']};
+      --input-placeholder-color: ${cssVars[$tone]['text-inactive']};
     }
 
     /* invalid */
     &:invalid {
-      --input-fg-color: ${cssVars.critical.text_primary};
-      --input-placeholder-color: ${cssVars.critical.text_inactive};
+      --input-fg-color: ${cssVars.critical['text-primary']};
+      --input-placeholder-color: ${cssVars.critical['text-inactive']};
     }
 
     /* readOnly */
     &:read-only {
-      --input-fg-color: ${cssVars[$tone].text_primary};
-      --input-placeholder-color: ${cssVars[$tone].text_inactive};
+      --input-fg-color: ${cssVars[$tone]['text-primary']};
+      --input-placeholder-color: ${cssVars[$tone]['text-inactive']};
     }
   `
 }
@@ -140,7 +141,7 @@ export function textInputRepresentationStyle(
     pointer-events: none;
     z-index: 0;
 
-    background-color: ${cssVars[$tone].bg_base};
+    background-color: ${cssVars[$tone]['bg-base']};
     box-shadow: var(--input-box-shadow);
 
     border-top-left-radius: ${$hasPrefix ? 0 : undefined};
@@ -148,25 +149,25 @@ export function textInputRepresentationStyle(
     border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
-    --card-bg-color: ${cssVars[$tone].bg_base};
-    --card-fg-color: ${cssVars[$tone].text_primary};
+    ${mutableCardVariables['bg-color']}: ${cssVars[$tone]['bg-base']};
+    ${mutableCardVariables['fg-color']}: ${cssVars[$tone]['text-primary']};
 
     /* enabled */
     &[data-border] {
       --input-box-shadow: ${focusRingBorderStyle({
-        color: cssVars[$tone].border_base,
+        color: cssVars[$tone]['border-base'],
         width: input.border.width,
       })};
     }
 
     /* invalid */
     *:not(:disabled):invalid + & {
-      --card-bg-color: ${cssVars.critical.bg_tint};
-      --card-fg-color: ${cssVars.critical.text_primary};
+      ${mutableCardVariables['bg-color']}: ${cssVars.critical['bg-tint']};
+      ${mutableCardVariables['fg-color']}: ${cssVars.critical['text-primary']};
 
       &[data-border] {
         --input-box-shadow: ${focusRingBorderStyle({
-          color: cssVars.critical.border_base,
+          color: cssVars.critical['border-base'],
           width: input.border.width,
         })};
       }
@@ -176,7 +177,7 @@ export function textInputRepresentationStyle(
     *:not(:disabled):focus + & {
       &[data-border] {
         --input-box-shadow: ${focusRingStyle({
-          border: {color: cssVars.positive.border_base, width: input.border.width},
+          border: {color: cssVars.positive['border-base'], width: input.border.width},
           focusRing,
         })};
       }
@@ -188,14 +189,14 @@ export function textInputRepresentationStyle(
 
     /* disabled */
     *:disabled + & {
-      --card-bg-color: ${cssVars.default.bg_tint} !important;
-      --card-fg-color: ${cssVars.default.text_primary} !important;
+      ${mutableCardVariables['bg-color']}: ${cssVars.default['bg-tint']} !important;
+     ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']} !important;
     }
 
     /* readOnly */
     *:read-only + & {
-      --card-bg-color: ${cssVars.default.bg_tint} !important;
-      --card-fg-color: ${cssVars.default.text_primary} !important;
+      ${mutableCardVariables['bg-color']}: ${cssVars.default['bg-tint']} !important;
+     ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']} !important;
     }
 
     /* hovered */
@@ -203,7 +204,7 @@ export function textInputRepresentationStyle(
 
       *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + &[data-border] {
         --input-box-shadow: ${focusRingBorderStyle({
-          color: cssVars.default.border_base_hover,
+          color: cssVars.default['border-base-hover'],
           width: input.border.width,
         })};
       }

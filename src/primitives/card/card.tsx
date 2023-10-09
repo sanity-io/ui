@@ -10,7 +10,9 @@ import {
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
-import {ThemeColorProvider, ThemeColorSchemeKey, useRootTheme} from '../../theme'
+import {ThemeColorSchemeKey} from '../../theme'
+import {ToneProvider} from '../../theme/toneContext/toneProvider'
+import {useToneContext} from '../../theme/toneContext/useToneContext'
 import {CardTone} from '../../types'
 import {Box, BoxProps} from '../box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
@@ -73,16 +75,17 @@ export const Card = forwardRef(function Card(
   } = props
 
   const as = isValidElementType(asProp) ? asProp : 'div'
-  const rootTheme = useRootTheme()
-  const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
+  const toneContext = useToneContext()
+  const tone = toneProp === 'inherit' ? toneContext.tone : toneProp
 
   return (
-    <ThemeColorProvider scheme={scheme} tone={tone}>
+    <ToneProvider scheme={scheme} tone={tone}>
       <Root
         data-as={typeof as === 'string' ? as : undefined}
         data-scheme={scheme}
         data-ui="Card"
         data-tone={tone}
+        $scheme={scheme ?? toneContext.scheme}
         {...restProps}
         $border={useArrayProp(border)}
         $borderTop={useArrayProp(borderTop)}
@@ -101,6 +104,6 @@ export const Card = forwardRef(function Card(
         ref={ref}
         selected={selected}
       />
-    </ThemeColorProvider>
+    </ToneProvider>
   )
 })

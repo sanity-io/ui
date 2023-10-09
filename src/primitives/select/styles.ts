@@ -1,5 +1,6 @@
 import {css} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
+import {mutableCardVariables} from '../../styles/colorVars'
 import {
   focusRingBorderStyle,
   focusRingStyle,
@@ -49,20 +50,20 @@ function inputColorStyle(props: ThemeProps) {
 
   return css`
     /* enabled */
-    background-color: ${cssVars.default.bg_base};
-    color: ${cssVars.default.text_primary};
+    background-color: ${cssVars.default['bg-base']};
+    color: ${cssVars.default['text-primary']};
     box-shadow: ${focusRingBorderStyle({
-      color: cssVars.default.border_base,
+      color: cssVars.default['border-base'],
       width: input.border.width,
     })};
 
     /* hovered */
     @media (hover: hover) {
       &:not(:disabled):hover {
-        background-color: ${cssVars.default.bg_base_hover};
-        color: ${cssVars.default.text_primary};
+        background-color: ${cssVars.default['bg-base-hover']};
+        color: ${cssVars.default['text-primary']};
         box-shadow: ${focusRingBorderStyle({
-          color: cssVars.default.border_base_hover,
+          color: cssVars.default['border-base-hover'],
           width: input.border.width,
         })};
       }
@@ -71,27 +72,27 @@ function inputColorStyle(props: ThemeProps) {
     /* focused */
     &:not(:disabled):focus {
       box-shadow: ${focusRingStyle({
-        border: {width: input.border.width, color: cssVars.default.border_base},
+        border: {width: input.border.width, color: cssVars.default['border-base']},
         focusRing,
       })};
     }
 
     /* read-only */
     &[data-read-only] {
-      background-color: ${cssVars.default.bg_tint};
-      color: ${cssVars.default.text_primary};
+      background-color: ${cssVars.default['bg-tint']};
+      color: ${cssVars.default['text-primary']};
       box-shadow: ${focusRingBorderStyle({
-        color: cssVars.default.border_base,
+        color: cssVars.default['border-base'],
         width: input.border.width,
       })};
     }
 
     /* disabled */
     &:not([data-read-only]):disabled {
-      background-color: ${cssVars.default.bg_tint};
-      color: ${cssVars.default.text_primary};
+      background-color: ${cssVars.default['bg-tint']};
+      color: ${cssVars.default['text-primary']};
       box-shadow: ${focusRingBorderStyle({
-        color: cssVars.default.border_base,
+        color: cssVars.default['border-base'],
         width: input.border.width,
       })};
     }
@@ -138,23 +139,23 @@ function iconBoxStyle(): ReturnType<typeof css> {
     right: 0;
 
     /* enabled */
-    --card-fg-color: ${cssVars.default.text_primary};
+    ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
 
     /* hover */
     @media (hover: hover) {
       select:not(disabled):not(:read-only):hover + && {
-        --card-fg-color: ${cssVars.default.text_primary};
+        ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
       }
     }
 
     /* disabled */
     select:disabled + && {
-      --card-fg-color: ${cssVars.default.text_primary};
+      ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
     }
 
     /* read-only */
     select[data-read-only] + && {
-      --card-fg-color: ${cssVars.default.text_primary};
+      ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
     }
   `
 }

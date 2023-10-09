@@ -1,7 +1,8 @@
 import {forwardRef} from 'react'
 import styled from 'styled-components'
-import {DEFAULT_POPOVER_ARROW_HEIGHT, DEFAULT_POPOVER_ARROW_WIDTH} from './constants'
+import {cardCssVariables} from '../../styles/colorVars'
 import {cssVars} from '../../theme'
+import {DEFAULT_POPOVER_ARROW_HEIGHT, DEFAULT_POPOVER_ARROW_WIDTH} from './constants'
 
 const Root = styled.div`
   position: absolute;
@@ -53,7 +54,7 @@ const BorderPath = styled.path`
 `
 
 const ShapePath = styled.path`
-  fill: var(--card-bg-color);
+  fill: ${cardCssVariables['bg-color']};
 `
 
 export const PopoverArrow = forwardRef(function PopoverArrow(

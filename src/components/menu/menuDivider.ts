@@ -7,6 +7,6 @@ import {cssVars} from '../../theme'
 export const MenuDivider = styled.hr`
   height: 1px;
   border: 0;
-  background: ${cssVars.default.border_base};
+  background: ${cssVars.default['border-base']};
   margin: 0;
 `

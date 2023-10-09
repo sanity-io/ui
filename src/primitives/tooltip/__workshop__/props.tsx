@@ -38,7 +38,7 @@ export default function PropsStory() {
         <Stack
           padding={4}
           style={{
-            outline: `1px solid ${cssVars.default.border_base}`,
+            outline: `1px solid ${cssVars.default['border-base']}`,
             width: '100%',
             maxWidth: '640px',
           }}
@@ -66,7 +66,7 @@ export default function PropsStory() {
         <Stack
           padding={4}
           style={{
-            outline: `1px solid ${cssVars.default.border_base}`,
+            outline: `1px solid ${cssVars.default['border-base']}`,
             width: '100%',
             maxWidth: '640px',
           }}

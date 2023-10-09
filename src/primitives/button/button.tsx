@@ -12,6 +12,7 @@ import {Spinner} from '../spinner'
 import {Text} from '../text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
+import {cardCssVariables} from '../../styles/colorVars'
 
 /**
  * @public
@@ -49,7 +50,7 @@ const LoadingBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--card-bg-color);
+  background-color: ${cardCssVariables['bg-color']};
   border-radius: inherit;
   z-index: 1;
   box-shadow: inherit;

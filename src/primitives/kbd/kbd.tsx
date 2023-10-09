@@ -19,7 +19,7 @@ export interface KBDProps {
 
 function kbdStyle() {
   return css`
-    background: ${cssVars.default.bg_tint};
+    background: ${cssVars.default['bg-tint']};
     font: inherit;
 
     &:not([hidden]) {

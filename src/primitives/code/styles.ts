@@ -44,7 +44,7 @@ function codeSyntaxHighlightingStyle() {
 
 export function codeBaseStyle(): ReturnType<typeof css> {
   return css`
-    color: var(--card-code-fg-color);
+    color: ${cssVars.default['text-code']};
 
     & code {
       font-family: inherit;

@@ -12,6 +12,7 @@ import {
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
+import {mutableCardVariables} from '../../../styles/colorVars'
 import {cssVars} from '../../../theme/lib/theme/color/cssVariables/createCssVars'
 
 const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(({
@@ -21,13 +22,15 @@ const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(({
 }) => {
   return css`
     &:not([data-selected]) {
-      --card-fg-color: ${$tone ? cssVars[$tone].text_secondary : undefined};
-      --card-muted-fg-color: ${$tone ? cssVars[$tone].text_secondary : undefined};
+      ${mutableCardVariables['fg-color']}: ${$tone ? cssVars[$tone]['text-secondary'] : undefined};
+      ${mutableCardVariables['muted-fg-color']} ${$tone
+        ? cssVars[$tone]['text-secondary']
+        : undefined};
     }
 
     [data-ui='Card']:disabled & {
-      --card-fg-color: inherit;
-      --card-muted-fg-color: inherit;
+      ${mutableCardVariables['fg-color']}: inherit;
+      ${mutableCardVariables['muted-fg-color']} inherit;
     }
   `
 })

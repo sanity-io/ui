@@ -4,14 +4,13 @@ import React from 'react'
 import {createGlobalStyle} from 'styled-components'
 import {Card} from '../../src/primitives'
 import {studioTheme, ThemeProvider} from '../../src/theme'
-import { cssVars } from '../../src/theme/lib/theme/color/cssVariables'
-
+import {cssVars} from '../../src/theme/lib/theme/color/cssVariables'
 
 const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${cssVars.default.card_base_bg};
+    background-color: ${cssVars.default['card-base-bg']};
   }
 `
 

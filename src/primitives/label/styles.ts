@@ -1,5 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
+import {cardCssVariables} from '../../styles/colorVars'
+import {cssVars} from '../../theme'
 
 export function labelBaseStyle(
   props: {$accent?: boolean; $muted: boolean} & ThemeProps,
@@ -12,12 +14,12 @@ export function labelBaseStyle(
 
     ${$accent &&
     css`
-      color: var(--card-accent-fg-color);
+      color: ${cssVars.card['accent-color']}};
     `}
 
     ${$muted &&
     css`
-      color: var(--card-muted-fg-color);
+      color: ${cardCssVariables['muted-fg-color']};
     `}
 
     & code {

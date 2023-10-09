@@ -7,10 +7,10 @@ import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/s
 
 const studioTones = ['default', 'positive', 'critical', 'caution'] as const
 
-// Create a function that transform text_primary to "Text Primary"
+// Create a function that transform text.primary to "Text Primary"
 function toTitleCase(str: string): string {
   return str
-    .split('_')
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
@@ -77,7 +77,7 @@ function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
                         tones['default'],
                         theme === 'dark',
                         'default',
-                        'border_base',
+                        'border-base',
                       )}`
                     : undefined,
                   backgroundColor: `var(${getToneCssVar(tone, colorKey)})`,

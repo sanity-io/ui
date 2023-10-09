@@ -23,6 +23,9 @@ export function hexToRgb(hex: string): RGB {
   }
 }
 
+/**
+ * @internal
+ */
 export function rgbaToRGBA(rgba: string): RGBA {
   const values = rgba.replace(/rgba\(|\)/g, '').split(',')
 

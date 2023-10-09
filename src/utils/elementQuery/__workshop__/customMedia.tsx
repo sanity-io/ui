@@ -1,15 +1,16 @@
 import {Box, Card, ElementQuery, Text} from '@sanity/ui'
 import styled from 'styled-components'
+import {mutableCardVariables} from '../../../styles/colorVars'
 
 const TestCard = styled(Card)`
-  --card-fg-color: orange;
+  ${mutableCardVariables['fg-color']}: orange;
 
   [data-eq-min~='0'] > & {
-    --card-fg-color: green;
+    ${mutableCardVariables['fg-color']}: green;
   }
 
   [data-eq-min~='1'] > & {
-    --card-fg-color: blue;
+    ${mutableCardVariables['fg-color']}: blue;
   }
 `
 

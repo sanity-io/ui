@@ -12,7 +12,7 @@ import {useArrayProp, useForwardedRef} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {SelectableTone} from '../../types/selectable'
+import {ThemeColorToneKey} from '../../theme'
 import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
 
@@ -29,7 +29,7 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   selected?: boolean
   space?: number | number[]
   text?: React.ReactNode
-  tone?: SelectableTone
+  tone?: ThemeColorToneKey
 }
 
 /**

@@ -129,7 +129,7 @@ const DialogHeader = styled(Card)`
     left: 0;
     right: 0;
     bottom: -1px;
-    border-bottom: 1px solid ${cssVars.default.border_base};
+    border-bottom: 1px solid ${cssVars.default['border-base']};
   }
 `
 
@@ -143,7 +143,7 @@ const DialogContent = styled(Box)`
 const DialogFooter = styled(Box)`
   position: relative;
   z-index: 3;
-  border-top: 1px solid ${cssVars.default.border_base};
+  border-top: 1px solid ${cssVars.default['border-base']};
 `
 
 const DialogCard = forwardRef(function DialogCard(

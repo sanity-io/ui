@@ -1,7 +1,7 @@
 /**
  * This file creates a translation between the tints and the studio colors
  * Providing readable names, and allowing to mix colors and tints in the same ThemeColor.
- * e.g. for positive theme: `{"bg_base": "white", "bg_base_hover": "gray/50", "bg_base_active": "cyan/50"}
+ * e.g. for positive theme: `{"bg_base": "white", ""bg-base-hover"": "gray/50", ""bg-base-active"": "cyan/50"}
  * This is not possible in the previous configuration, as each ThemeColor uses only one tint.
  */
 import {ColorTintKey, ColorTints, ColorValue, black, hues, white} from '@sanity/color'
@@ -9,27 +9,32 @@ import {rgba} from '../lib/color-fns'
 import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 
 export const colorKeys = [
-  'text_primary',
-  'text_secondary',
-  'text_inactive',
-  'bg_base',
-  'bg_base_hover',
-  'bg_base_active',
-  'bg_accent',
-  'bg_accent_hover',
-  'bg_accent_active',
-  'bg_tint',
-  'icon_default',
-  'icon_inverted',
-  'border_base',
-  'border_base_hover',
-  'border_accent',
-  'border_accent_inverted',
-  // TODO: Find if we can remove this variables, they are a replacement for the card-base colors
-  'card_base_bg',
-  'card_base_fg',
+  'text-primary',
+  'text-secondary',
+  'text-inactive',
+  'text-code',
+  'text-muted',
+  'bg-base',
+  'bg-base-hover',
+  'bg-base-active',
+  'bg-accent',
+  'bg-accent-hover',
+  'bg-accent-active',
+  'bg-tint',
+  // TODO: Can we replace this with bg_tint?
+  'bg-tint-code',
 
-  // Base colors won't be affected by the mix or multiply function
+  'icon-default',
+  'icon-inverted',
+  'border-base',
+  'border-base-hover',
+  'border-accent',
+  'border-accent-inverted',
+  'card-base-bg',
+  // TODO: Do we need this, could it be replaced by text-primary ?
+  'card-base-fg',
+
+  // Colors starting with -base won't be affected by the mix function
   'base-shadow-outline-color',
   'base-shadow-umbra-color',
   'base-shadow-penumbra-color',
@@ -58,33 +63,37 @@ type DefaultColor = {
 type ColorTintsDictionary = Record<ColorKey, ColorTintKey | DefaultColor | ColorWithOpacity>
 const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
   light: {
-    text_primary: '900',
-    text_secondary: '600',
-    text_inactive: '500',
-    bg_base: {
+    'text-primary': '900',
+    'text-secondary': '600',
+    'text-inactive': '500',
+    'text-code': '600',
+    'text-muted': '600',
+    'bg-base': {
       type: 'colorValue',
       value: white,
     },
-    bg_base_hover: '50', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
-    bg_base_active: '100', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
-    bg_accent: '500',
-    bg_accent_hover: '600',
-    bg_accent_active: '700',
-    bg_tint: '50',
-    icon_default: '500',
-    icon_inverted: {
+    'bg-base-hover': '50', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
+    'bg-base-active': '100', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
+    'bg-accent': '500',
+    'bg-accent-hover': '600',
+    'bg-accent-active': '700',
+    'bg-tint': '50',
+    'bg-tint-code': '50',
+    'icon-default': '500',
+    'icon-inverted': {
       type: 'colorValue',
       value: white,
     },
-    border_base: '100',
-    border_base_hover: '200',
-    border_accent: '500',
-    border_accent_inverted: {
+    'border-base': '100',
+    'border-base-hover': '200',
+    'border-accent': '500',
+    'border-accent-inverted': {
       type: 'colorValue',
       value: white,
     },
-    card_base_bg: '50',
-    card_base_fg: '900',
+    'card-base-bg': '50',
+
+    'card-base-fg': '900',
 
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
@@ -114,24 +123,27 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     },
   },
   dark: {
-    text_primary: '50',
-    text_secondary: '300',
-    text_inactive: '400',
-    bg_base: {type: 'colorValue', value: black},
-    bg_base_hover: '900',
-    bg_base_active: '800',
-    bg_accent: '500',
-    bg_accent_hover: '400',
-    bg_accent_active: '300',
-    bg_tint: '900',
-    icon_default: '300',
-    icon_inverted: {type: 'colorValue', value: hues.gray[900]},
-    border_base: '800',
-    border_base_hover: '700',
-    border_accent: '300',
-    border_accent_inverted: {type: 'colorValue', value: hues.gray[900]},
-    card_base_bg: '950',
-    card_base_fg: '100',
+    'text-primary': '50',
+    'text-secondary': '300',
+    'text-inactive': '400',
+    'text-code': '400',
+    'text-muted': '400',
+    'bg-base': {type: 'colorValue', value: black},
+    'bg-base-hover': '900',
+    'bg-base-active': '800',
+    'bg-accent': '500',
+    'bg-accent-hover': '400',
+    'bg-accent-active': '300',
+    'bg-tint': '900',
+    'bg-tint-code': '950',
+    'icon-default': '300',
+    'icon-inverted': {type: 'colorValue', value: hues.gray[900]},
+    'border-base': '800',
+    'border-base-hover': '700',
+    'border-accent': '300',
+    'border-accent-inverted': {type: 'colorValue', value: hues.gray[900]},
+    'card-base-bg': '950',
+    'card-base-fg': '100',
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',
@@ -168,27 +180,27 @@ export const colorTints: Record<
   light: {
     default: {
       ...defaultTints.light,
-      card_base_bg: {type: 'colorValue', value: white},
-      bg_accent: '900',
-      bg_accent_hover: '950',
-      bg_accent_active: {type: 'colorValue', value: black},
-      border_accent: '600',
+      'card-base-bg': {type: 'colorValue', value: white},
+      'bg-accent': '900',
+      'bg-accent-hover': '950',
+      'bg-accent-active': {type: 'colorValue', value: black},
+      'border-accent': '600',
     },
     primary: {
       ...defaultTints.light,
-      bg_accent: '900',
-      bg_accent_hover: '950',
-      bg_accent_active: {type: 'colorValue', value: black},
-      border_accent: '600',
+      'bg-accent': '900',
+      'bg-accent-hover': '950',
+      'bg-accent-active': {type: 'colorValue', value: black},
+      'border-accent': '600',
     },
     positive: {
       ...defaultTints.light,
-      bg_base_hover: {type: 'colorValue', value: hues.gray[50]},
-      bg_base_active: '50',
-      bg_accent: '400',
-      bg_accent_hover: '500',
-      bg_accent_active: '600',
-      border_accent: '400',
+      'bg-base-hover': {type: 'colorValue', value: hues.gray[50]},
+      'bg-base-active': '50',
+      'bg-accent': '400',
+      'bg-accent-hover': '500',
+      'bg-accent-active': '600',
+      'border-accent': '400',
     },
     transparent: defaultTints.light,
     caution: defaultTints.light,
@@ -197,11 +209,11 @@ export const colorTints: Record<
   dark: {
     default: {
       ...defaultTints.dark,
-      card_base_bg: {type: 'colorValue', value: black},
-      text_primary: {type: 'colorValue', value: white},
-      bg_accent: {type: 'colorValue', value: white},
-      bg_accent_hover: '50',
-      bg_accent_active: '100',
+      'card-base-bg': {type: 'colorValue', value: black},
+      'text-primary': {type: 'colorValue', value: white},
+      'bg-accent': {type: 'colorValue', value: white},
+      'bg-accent-hover': '50',
+      'bg-accent-active': '100',
       'base-shadow-umbra-color': {
         type: 'colorWithOpacity',
         tint: '950',
@@ -220,19 +232,19 @@ export const colorTints: Record<
     },
     primary: {
       ...defaultTints.dark,
-      text_primary: {type: 'colorValue', value: white},
-      bg_accent: {type: 'colorValue', value: white},
-      bg_accent_hover: '50',
-      bg_accent_active: '100',
+      'text-primary': {type: 'colorValue', value: white},
+      'bg-accent': {type: 'colorValue', value: white},
+      'bg-accent-hover': '50',
+      'bg-accent-active': '100',
     },
     positive: {
       ...defaultTints.dark,
-      bg_base_hover: {type: 'colorValue', value: hues.gray[900]},
-      bg_base_active: '900',
-      bg_accent: '400',
-      bg_accent_hover: '300',
-      bg_accent_active: '200',
-      border_accent: '400',
+      'bg-base-hover': {type: 'colorValue', value: hues.gray[900]},
+      'bg-base-active': '900',
+      'bg-accent': '400',
+      'bg-accent-hover': '300',
+      'bg-accent-active': '200',
+      'border-accent': '400',
     },
     transparent: defaultTints.dark,
     caution: defaultTints.dark,
@@ -257,7 +269,7 @@ export const getColorValue = (
 
     return {
       hex: rgba(base.hex, 0.4),
-      title: `${base.title} at ${value.opacity * 100}% opacity`,
+      title: `${base.title} ${Math.round(value.opacity * 100)}%`,
     }
   }
 

@@ -23,14 +23,15 @@ export const createTonesVariables = (
     colorKeys.forEach((key) => {
       const colorHex = getColorHex(tint, scheme === 'dark', tone, key)
       const varName = getToneCssVar(_tone, key)
+      const willBeMixed = needsMixing && !key.startsWith('base-')
 
-      tonesVariables[varName] = needsMixing ? mix(baseBg, colorHex) : colorHex
+      tonesVariables[varName] = willBeMixed ? mix(baseBg, colorHex) : colorHex
     })
   })
 
   // Overrides when defaultTone is not default
   if (defaultTone !== 'default') {
-    tonesVariables[getToneCssVar('default', 'bg_base')] = baseBg
+    tonesVariables[getToneCssVar('default', 'bg-base')] = baseBg
   }
 
   return tonesVariables

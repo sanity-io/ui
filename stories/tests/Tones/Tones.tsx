@@ -1,21 +1,29 @@
 import {ReactNode} from 'react'
 
 import {
+  CodeSkeleton,
+  HeadingSkeleton,
   Hotkeys,
+  LabelSkeleton,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
+  Skeleton,
   Tab,
   TabList,
+  TextSkeleton,
 } from '../../../src/components'
 import {
   Avatar,
   Badge,
+  Box,
   Button,
   Card,
   Checkbox,
+  Container,
   Flex,
+  Grid,
   Heading,
   Inline,
   Label,
@@ -33,16 +41,30 @@ import {cssVars} from '../../../src/theme/lib/theme/color/cssVariables/createCss
 
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
-// const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
-//   return (
-//     <Stack space={3}>
-//       <Text size={1} weight="semibold">
-//         {title}
-//       </Text>
-//       {children}
-//     </Stack>
-//   )
-// }
+const SkeletonComponent = () => (
+  <Box padding={[4, 5, 6]}>
+    <Container width={1}>
+      <Flex align="center">
+        <Grid gap={2} columns={2} marginRight={3}>
+          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
+          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
+          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
+          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
+        </Grid>
+        <Stack space={2} flex={1}>
+          <HeadingSkeleton style={{width: '100%'}} radius={1} animated />
+          <TextSkeleton style={{width: '100%'}} radius={1} animated />
+          <LabelSkeleton style={{width: '100%'}} radius={1} animated />
+          <CodeSkeleton style={{width: '100%'}} radius={1} animated />
+        </Stack>
+      </Flex>
+      <Flex marginTop={2}>
+        <Skeleton style={{height: 50}} flex={1} marginRight={1} radius={2} animated />
+        <Skeleton style={{height: 50}} flex={1} marginLeft={1} radius={2} animated />
+      </Flex>
+    </Container>
+  </Box>
+)
 
 export function Tones({scheme}: {scheme: ThemeColorSchemeKey}): ReactNode {
   const props = {
@@ -53,10 +75,9 @@ export function Tones({scheme}: {scheme: ThemeColorSchemeKey}): ReactNode {
 
   return (
     <ThemeProvider scheme={scheme} theme={studioTheme}>
-      <Flex gap={2} paddingTop={2} wrap={'wrap'} width={1400}>
-        {tones
-          // .slice(0, 1)
-          .map((tone) => (
+      <Card padding={2} radius={2}>
+        <Flex gap={2} paddingTop={2} wrap={'wrap'} width={1400}>
+          {tones.map((tone) => (
             <Card tone={tone} {...props} key={tone}>
               <Stack space={2}>
                 <Heading>Heading</Heading>
@@ -95,7 +116,7 @@ export function Tones({scheme}: {scheme: ThemeColorSchemeKey}): ReactNode {
                   </Flex>
                 </Flex>
                 <Flex gap={2} align={'center'} padding={2}>
-                  <Text>Select</Text>
+                  <Text>Switch</Text>
                   <Flex justify={'center'} paddingY={2}>
                     <Inline space={[3, 3, 4, 5]}>
                       <Switch checked />
@@ -114,7 +135,7 @@ export function Tones({scheme}: {scheme: ThemeColorSchemeKey}): ReactNode {
                   padding={2}
                   marginY={2}
                   style={{
-                    boxShadow: `0 0 0 2px ${cssVars.default.border_base}`, // You can access the vars from custom components :rocket:
+                    boxShadow: `0 0 0 2px ${cssVars.default['border-base']}`, // You can access the vars from custom components :rocket:
                     borderRadius: '4px',
                   }}
                 >
@@ -131,7 +152,7 @@ export function Tones({scheme}: {scheme: ThemeColorSchemeKey}): ReactNode {
                   space={2}
                   padding={2}
                   style={{
-                    boxShadow: `0 0 0 2px ${cssVars.default.border_base}`, // You can access the vars from custom components :rocket:
+                    boxShadow: `0 0 0 2px ${cssVars.default['border-base']}`, // You can access the vars from custom components :rocket:
                     borderRadius: '4px',
                   }}
                 >
@@ -170,10 +191,21 @@ export function Tones({scheme}: {scheme: ThemeColorSchemeKey}): ReactNode {
                   <Avatar initials="AB" color="red" />
                   <Avatar initials="AB" color="yellow" />
                 </Flex>
+                <Flex gap={2} padding={2}>
+                  <Text weight="semibold" size={2} muted>
+                    Card as button
+                  </Text>
+                  <Card tone="inherit" shadow={1} as="button" padding={2} radius={2}>
+                    <Text>tone inherit</Text>
+                  </Card>
+                </Flex>
+
+                <SkeletonComponent />
               </Stack>
             </Card>
           ))}
-      </Flex>
+        </Flex>
+      </Card>
     </ThemeProvider>
   )
 }

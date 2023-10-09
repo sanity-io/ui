@@ -1,4 +1,5 @@
 import {rem, _responsive, ThemeProps} from '../../styles'
+import {cardCssVariables} from '../../styles/colorVars'
 import {focusRingStyle} from '../../styles/internal'
 import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
@@ -65,7 +66,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
     position: 'relative',
     boxSizing: 'border-box',
     userSelect: 'none',
-    boxShadow: '0 0 0 1px var(--card-bg-color)',
+    boxShadow: `0 0 0 1px ${cardCssVariables['bg-color']}`,
 
     '&[data-status="inactive"]': {
       opacity: 0.5,
@@ -128,7 +129,7 @@ export function avatarInitialsStyle(): CSSObject {
   return {
     width: '100%',
     height: '100%',
-    color: cssVars.default.text_primary,
+    color: cssVars.default['text-primary'],
     alignItems: 'center',
     justifyContent: 'center',
     textTransform: 'uppercase',
@@ -144,7 +145,7 @@ export function avatarInitialsStyle(): CSSObject {
 function avatarBgStrokeStyle(): CSSObject {
   return {
     strokeWidth: '4px',
-    stroke: 'var(--card-bg-color)',
+    stroke: cardCssVariables['bg-color'],
   }
 }
 

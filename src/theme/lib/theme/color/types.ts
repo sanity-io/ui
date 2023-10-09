@@ -1,9 +1,4 @@
 import {ColorTints} from '@sanity/color'
-import {ThemeColorBase} from './base'
-import {ThemeColorCard} from './card'
-import {ThemeColorMuted} from './muted'
-import {ThemeColorSelectable} from './selectable'
-import {ThemeColorSolid} from './solid'
 
 /**
  * @public
@@ -35,32 +30,7 @@ export type ThemeColorToneKey =
 /**
  * @public
  */
-export interface ThemeColor {
-  dark: boolean
-  base: ThemeColorBase
-  card: ThemeColorCard
-  selectable?: ThemeColorSelectable
-  solid: ThemeColorSolid
-  muted: ThemeColorMuted
-}
-
-/**
- * @public
- */
-export interface ThemeColorScheme {
-  default: ThemeColor
-  transparent: ThemeColor
-  primary: ThemeColor
-  positive: ThemeColor
-  caution: ThemeColor
-  critical: ThemeColor
-}
-
-/**
- * @public
- */
 export interface ThemeColorSchemes {
+  // Could we update this to only return Record<ThemeColorName ,  keyof typeof hues> ? Then the function that assigns the color would search the ColorTint
   tones: Record<ThemeColorName, ColorTints>
-  dark: ThemeColorScheme
-  light: ThemeColorScheme
 }

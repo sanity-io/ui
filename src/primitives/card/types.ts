@@ -1,3 +1,4 @@
+import {ThemeColorSchemeKey} from '../../theme'
 import {CardTone} from '../../types'
 
 /**
@@ -7,4 +8,5 @@ export interface CardStyleProps {
   $checkered: boolean
   $focusRing: boolean
   $tone: CardTone
+  $scheme: ThemeColorSchemeKey
 }

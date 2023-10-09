@@ -2,6 +2,7 @@ import {COLOR_HUES, ColorTints, ColorValue, black, hues, white} from '@sanity/co
 import {ReactNode} from 'react'
 import styled from 'styled-components'
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/primitives'
+import {mutableCardVariables} from '../../src/styles/colorVars'
 import {ThemeProvider, hexToRgb, rgbToHsl, studioTheme} from '../../src/theme'
 
 function ucfirst(str: string) {
@@ -43,13 +44,13 @@ function ColorHuePreview(props: {hueKey: string; tints: ColorTints}) {
 const ColorCard = styled(Card)<{$bg: string; $fg: string}>`
   cursor: pointer;
 
-  --card-bg-color: ${({$bg}) => $bg};
-  --card-fg-color: ${({$fg}) => $fg};
+  ${mutableCardVariables['bg-color']}: ${({$bg}) => $bg};
+  ${mutableCardVariables['fg-color']}: ${({$fg}) => $fg};
 
   &:not(:disabled):active,
   &:not(:disabled):hover {
-    --card-bg-color: ${({$bg}) => $bg} !important;
-    --card-fg-color: ${({$fg}) => $fg} !important;
+    ${mutableCardVariables['bg-color']}: ${({$bg}) => $bg} !important;
+    ${mutableCardVariables['fg-color']}: ${({$fg}) => $fg} !important;
   }
 `
 

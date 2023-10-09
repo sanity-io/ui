@@ -4,6 +4,7 @@ import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
 import {createCssVars} from './lib/theme/color/cssVariables'
 import {ThemeContext} from './themeContext'
+import {ToneProvider} from './toneContext/toneProvider'
 import {RootTheme, Theme, ThemeContextValue} from './types'
 
 /**
@@ -31,13 +32,12 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
   const theme: Theme | null = useMemo(() => {
     if (!themeProp) return null
 
-    const {color: rootColor, layer: rootLayer, ...restTheme} = themeProp
-    const colorScheme = rootColor[scheme] || rootColor.light
-    const color = colorScheme[tone] || colorScheme.default
+    const {layer: rootLayer, ...restTheme} = themeProp
+
     const layer = rootLayer || DEFAULT_THEME_LAYER
 
-    return {sanity: {...restTheme, color, layer}, tones: themeProp?.color.tones, scheme: scheme}
-  }, [scheme, themeProp, tone])
+    return {sanity: {...restTheme, layer}, tones: themeProp?.color.tones, scheme: scheme}
+  }, [scheme, themeProp])
 
   useEffect(() => {
     if (!themeProp?.color.tones) return
@@ -46,7 +46,7 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
     // Add the vars to the body
     const root = document.body
 
-    // Set the css variables to the root object
+    // Set the css variables to the root object TODO: Can this be done in a more performant way?
     Object.keys(cssVariables).forEach((key) => root.style.setProperty(key, cssVariables[key]))
   }, [themeProp?.color.tones, scheme])
 
@@ -60,7 +60,6 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
       },
     [themeProp, scheme, tone],
   )
-  // Add vars to the body
 
   if (!theme) {
     return <pre>ThemeProvider: no "theme" property provided</pre>
@@ -68,7 +67,11 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
 
   return (
     <ThemeContext.Provider value={value}>
-      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+      <StyledThemeProvider theme={theme}>
+        <ToneProvider tone={tone} scheme={scheme}>
+          {children}
+        </ToneProvider>
+      </StyledThemeProvider>
     </ThemeContext.Provider>
   )
 }

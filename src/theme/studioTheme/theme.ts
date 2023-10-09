@@ -1,5 +1,5 @@
 import {RootTheme} from '../types'
-import {color} from './color'
+import {tones} from './color'
 import {fonts} from './fonts'
 
 /**
@@ -21,7 +21,9 @@ export const studioTheme: RootTheme = {
   card: {
     focusRing: {offset: -1, width: 1},
   },
-  color,
+  color: {
+    tones: tones,
+  },
   container: [320, 640, 960, 1280, 1600, 1920],
   fonts,
   media: [360, 600, 900, 1200, 1800, 2400],
