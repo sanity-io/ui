@@ -14,6 +14,7 @@ import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
+import {BORDER_OFFSET_X} from './constants'
 import {
   dialogStyle,
   responsiveDialogPositionStyle,
@@ -72,12 +73,12 @@ interface DialogCardProps extends ResponsiveWidthProps {
 }
 
 interface DialogHeaderProps extends CardProps {
-  hasScrolledFromTop: boolean
-  isContentScrollable: boolean
+  $hasScrolledFromTop: boolean
+  $isContentScrollable: boolean
 }
 interface DialogFooterProps extends CardProps {
-  hasScrolledToBottom: boolean
-  isContentScrollable: boolean
+  $hasScrolledToBottom: boolean
+  $isContentScrollable: boolean
 }
 
 function isTargetWithinScope(
@@ -135,15 +136,13 @@ const DialogHeader = styled(Card)<DialogHeaderProps>`
     content: '';
     display: block;
     position: absolute;
-    left: 0;
-    right: 0;
+    left: ${BORDER_OFFSET_X}px;
+    right: ${BORDER_OFFSET_X}px;
     bottom: -1px;
-    border-bottom: ${(props) =>
-      props.isContentScrollable &&
-      props.hasScrolledFromTop &&
-      '1px solid var(--card-border-color)'};
-    width: calc(100% - 24px);
-    margin-left: 12px;
+    border-bottom: 1px solid var(--card-border-color);
+    width: auto;
+    opacity: ${(props) => (props.$isContentScrollable && props.$hasScrolledFromTop ? 1 : 0)};
+    transition: opacity 200ms ease-in;
   }
 `
 
@@ -157,12 +156,19 @@ const DialogContent = styled(Box)`
 const DialogFooter = styled(Box)<DialogFooterProps>`
   position: relative;
   z-index: 3;
-  border-top: ${(props) =>
-    !props.hasScrolledToBottom &&
-    props.isContentScrollable &&
-    '1px solid var(--card-border-color)'};
-  width: calc(100% - 24px);
-  margin-left: 12px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: ${BORDER_OFFSET_X}px;
+    right: ${BORDER_OFFSET_X}px;
+    top: -1px;
+    border-top: 1px solid var(--card-border-color);
+    width: auto;
+    opacity: ${(props) => (props.$isContentScrollable && !props.$hasScrolledToBottom ? 1 : 0)};
+    transition: opacity 200ms ease-in;
+  }
 `
 
 const DialogCard = forwardRef(function DialogCard(
@@ -276,7 +282,7 @@ const DialogCard = forwardRef(function DialogCard(
     [contentRef],
   )
 
-  const handleScroll = useCallback(() => {
+  const handleContentUpdate = useCallback(() => {
     if (localContentRef.current) {
       setIsContentScrollable(
         localContentRef.current.clientHeight < localContentRef.current.scrollHeight,
@@ -290,25 +296,16 @@ const DialogCard = forwardRef(function DialogCard(
   }, [])
 
   useEffect(() => {
-    const handleResize = () => {
-      if (localContentRef.current) {
-        setIsContentScrollable(
-          localContentRef.current.clientHeight < localContentRef.current.scrollHeight,
-        )
-        setHasScrolledFromTop(localContentRef.current.scrollTop > 0)
-        setHasScrolledToBottom(
-          localContentRef.current.scrollTop >=
-            localContentRef.current.scrollHeight - localContentRef.current.clientHeight,
-        )
-      }
-    }
+    const resizeObserver = new ResizeObserver(handleContentUpdate)
 
-    window.addEventListener('resize', handleResize)
+    if (localContentRef.current) {
+      resizeObserver.observe(localContentRef.current)
+    }
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      resizeObserver.disconnect()
     }
-  }, [])
+  }, [contentRef, handleContentUpdate])
 
   return (
     <DialogContainer data-ui="DialogCard" width={width}>
@@ -316,13 +313,13 @@ const DialogCard = forwardRef(function DialogCard(
         <DialogLayout direction="column">
           {showHeader && (
             <DialogHeader
-              isContentScrollable={isContentScrollable}
-              hasScrolledFromTop={hasScrolledFromTop}
+              $isContentScrollable={isContentScrollable}
+              $hasScrolledFromTop={hasScrolledFromTop}
             >
               <Flex>
                 <Box flex={1} padding={4}>
                   {header && (
-                    <Text id={labelId} weight="semibold">
+                    <Text id={labelId} size={1} weight="medium">
                       {header}
                     </Text>
                   )}
@@ -343,14 +340,14 @@ const DialogCard = forwardRef(function DialogCard(
             </DialogHeader>
           )}
 
-          <DialogContent flex={1} ref={setContentRef} tabIndex={-1} onScroll={handleScroll}>
+          <DialogContent flex={1} ref={setContentRef} tabIndex={-1} onScroll={handleContentUpdate}>
             {children}
           </DialogContent>
 
           {footer && (
             <DialogFooter
-              isContentScrollable={isContentScrollable}
-              hasScrolledToBottom={hasScrolledToBottom}
+              $isContentScrollable={isContentScrollable}
+              $hasScrolledToBottom={hasScrolledToBottom}
             >
               {footer}
             </DialogFooter>
