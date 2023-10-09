@@ -34,6 +34,9 @@ export const colorKeys = [
   'base-shadow-umbra-color',
   'base-shadow-penumbra-color',
   'base-shadow-ambient-color',
+
+  'skeleton-from',
+  'skeleton-to',
 ] as const
 
 export type ColorKey = (typeof colorKeys)[number]
@@ -103,6 +106,12 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       tint: '500',
       opacity: 0.12,
     },
+    'skeleton-from': '50',
+    'skeleton-to': {
+      type: 'colorWithOpacity',
+      tint: '50',
+      opacity: 0.5,
+    },
   },
   dark: {
     text_primary: '50',
@@ -142,6 +151,12 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       type: 'colorWithOpacity',
       tint: '900',
       opacity: 0.24,
+    },
+    'skeleton-from': '900',
+    'skeleton-to': {
+      type: 'colorWithOpacity',
+      tint: '50',
+      opacity: 0.5,
     },
   },
 }
