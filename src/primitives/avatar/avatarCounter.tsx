@@ -5,6 +5,7 @@ import {useArrayProp} from '../../hooks'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {AvatarSize} from '../../types'
 import {Text} from '../text'
+import { cssVars } from '../../theme'
 
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {theme} = props
@@ -36,7 +37,7 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
     background: var(--card-bg-color);
     box-shadow:
       0 0 0 1px var(--card-bg-color),
-      inset 0 0 0 1.5px var(--card-hairline-hard-color);
+      inset 0 0 0 1.5px ${cssVars.default.border_base});
     padding: 0 ${rem(theme.sanity.space[2])};
 
     &:not([hidden]) {

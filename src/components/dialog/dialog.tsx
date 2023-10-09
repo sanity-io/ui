@@ -11,7 +11,7 @@ import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
-import {ThemeColorSchemeKey, useTheme} from '../../theme'
+import {ThemeColorSchemeKey, cssVars, useTheme} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {
@@ -129,7 +129,7 @@ const DialogHeader = styled(Card)`
     left: 0;
     right: 0;
     bottom: -1px;
-    border-bottom: 1px solid var(--card-hairline-soft-color);
+    border-bottom: 1px solid ${cssVars.default.border_base};
   }
 `
 
@@ -143,7 +143,7 @@ const DialogContent = styled(Box)`
 const DialogFooter = styled(Box)`
   position: relative;
   z-index: 3;
-  border-top: 1px solid var(--card-hairline-soft-color);
+  border-top: 1px solid ${cssVars.default.border_base};
 `
 
 const DialogCard = forwardRef(function DialogCard(

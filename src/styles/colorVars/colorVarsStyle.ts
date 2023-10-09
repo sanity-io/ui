@@ -23,7 +23,6 @@ export function _colorVarsStyle(
       ? `repeating-conic-gradient(${color.bg} 0% 25%, ${color.bg2 || color.bg} 0% 50%)`
       : undefined,
     '--card-fg-color': color.fg,
-    '--card-border-color': color.border,
     '--card-muted-fg-color': color.muted?.fg,
     '--card-accent-fg-color': color.accent?.fg,
     '--card-link-fg-color': color.link?.fg,
