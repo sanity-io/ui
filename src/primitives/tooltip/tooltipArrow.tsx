@@ -1,5 +1,6 @@
 import {forwardRef} from 'react'
 import styled from 'styled-components'
+import {cssVars} from '../../theme'
 
 const Root = styled.div`
   position: absolute;
@@ -63,7 +64,7 @@ const Root = styled.div`
 `
 
 const Border = styled.path`
-  fill: var(--card-shadow-outline-color);
+  fill: ${cssVars.default['base-shadow-outline-color']};
 `
 
 const Shape = styled.path`

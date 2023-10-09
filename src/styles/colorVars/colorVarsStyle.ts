@@ -5,18 +5,11 @@ import {CSSObject} from '../../types/styled'
  * @internal
  */
 export function _colorVarsStyle(
-  base: ThemeColorBase,
+  _base: ThemeColorBase,
   color: ThemeColorGenericState,
   checkered = false,
 ): CSSObject {
   return {
-    // Base
-    // @todo: rename to "--base-"?
-    '--card-shadow-outline-color': base.shadow.outline,
-    '--card-shadow-umbra-color': base.shadow.umbra,
-    '--card-shadow-penumbra-color': base.shadow.penumbra,
-    '--card-shadow-ambient-color': base.shadow.ambient,
-
     // Card
     '--card-bg-color': color.bg,
     '--card-bg-image': checkered

@@ -1,6 +1,7 @@
 import {forwardRef} from 'react'
 import styled from 'styled-components'
 import {DEFAULT_POPOVER_ARROW_HEIGHT, DEFAULT_POPOVER_ARROW_WIDTH} from './constants'
+import {cssVars} from '../../theme'
 
 const Root = styled.div`
   position: absolute;
@@ -48,7 +49,7 @@ const Root = styled.div`
 `
 
 const BorderPath = styled.path`
-  fill: var(--card-shadow-outline-color);
+  fill: ${cssVars.default['base-shadow-outline-color']};
 `
 
 const ShapePath = styled.path`

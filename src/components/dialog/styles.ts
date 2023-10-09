@@ -1,4 +1,5 @@
 import {_responsive, ThemeProps} from '../../styles'
+import {cssVars} from '../../theme'
 import {DialogPosition} from '../../types'
 import {CSSObject} from '../../types/styled'
 
@@ -22,7 +23,7 @@ export function dialogStyle(): CSSObject {
     alignItems: 'center',
     justifyContent: 'center',
     outline: 'none',
-    background: '--card-shadow-umbra-color',
+    background: cssVars.default['base-shadow-umbra-color'],
   }
 }
 

@@ -5,6 +5,7 @@
  * This is not possible in the previous configuration, as each ThemeColor uses only one tint.
  */
 import {ColorTintKey, ColorTints, ColorValue, black, hues, white} from '@sanity/color'
+import {rgba} from '../lib/color-fns'
 import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 
 export const colorKeys = [
@@ -24,20 +25,43 @@ export const colorKeys = [
   'border_base_hover',
   'border_accent',
   'border_accent_inverted',
-  // TODO: Find if we can remove this variables, they are a replacement for the base colors
+  // TODO: Find if we can remove this variables, they are a replacement for the card-base colors
   'card_base_bg',
   'card_base_fg',
+
+  // Base colors won't be affected by the mix or multiply function
+  'base-shadow-outline-color',
+  'base-shadow-umbra-color',
+  'base-shadow-penumbra-color',
+  'base-shadow-ambient-color',
 ] as const
 
 export type ColorKey = (typeof colorKeys)[number]
 
-type ColorTintsDictionary = Record<ColorKey, ColorTintKey | ColorValue>
+type ColorWithOpacity = {
+  type: 'colorWithOpacity'
+  tint: ColorTintKey
+  /**
+   * Number between 0 and 1
+   */
+  opacity: number
+}
+
+type DefaultColor = {
+  type: 'colorValue'
+  value: ColorValue
+}
+
+type ColorTintsDictionary = Record<ColorKey, ColorTintKey | DefaultColor | ColorWithOpacity>
 const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
   light: {
     text_primary: '900',
     text_secondary: '600',
     text_inactive: '500',
-    bg_base: white,
+    bg_base: {
+      type: 'colorValue',
+      value: white,
+    },
     bg_base_hover: '50', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
     bg_base_active: '100', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
     bg_accent: '500',
@@ -45,19 +69,46 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     bg_accent_active: '700',
     bg_tint: '50',
     icon_default: '500',
-    icon_inverted: white,
+    icon_inverted: {
+      type: 'colorValue',
+      value: white,
+    },
     border_base: '100',
     border_base_hover: '200',
     border_accent: '500',
-    border_accent_inverted: white,
+    border_accent_inverted: {
+      type: 'colorValue',
+      value: white,
+    },
     card_base_bg: '50',
     card_base_fg: '900',
+
+    'base-shadow-outline-color': {
+      type: 'colorWithOpacity',
+      tint: '500',
+      opacity: 0.4,
+    },
+    'base-shadow-umbra-color': {
+      type: 'colorWithOpacity',
+      tint: '500',
+      opacity: 0.2,
+    },
+    'base-shadow-penumbra-color': {
+      type: 'colorWithOpacity',
+      tint: '500',
+      opacity: 0.14,
+    },
+    'base-shadow-ambient-color': {
+      type: 'colorWithOpacity',
+      tint: '500',
+      opacity: 0.12,
+    },
   },
   dark: {
     text_primary: '50',
     text_secondary: '300',
     text_inactive: '400',
-    bg_base: black,
+    bg_base: {type: 'colorValue', value: black},
     bg_base_hover: '900',
     bg_base_active: '800',
     bg_accent: '500',
@@ -65,13 +116,33 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     bg_accent_active: '300',
     bg_tint: '900',
     icon_default: '300',
-    icon_inverted: hues.gray[900],
+    icon_inverted: {type: 'colorValue', value: hues.gray[900]},
     border_base: '800',
     border_base_hover: '700',
     border_accent: '300',
-    border_accent_inverted: hues.gray[900],
+    border_accent_inverted: {type: 'colorValue', value: hues.gray[900]},
     card_base_bg: '950',
     card_base_fg: '100',
+    'base-shadow-outline-color': {
+      type: 'colorWithOpacity',
+      tint: '500',
+      opacity: 0.4,
+    },
+    'base-shadow-umbra-color': {
+      type: 'colorWithOpacity',
+      tint: '900',
+      opacity: 0.4,
+    },
+    'base-shadow-penumbra-color': {
+      type: 'colorWithOpacity',
+      tint: '900',
+      opacity: 0.28,
+    },
+    'base-shadow-ambient-color': {
+      type: 'colorWithOpacity',
+      tint: '900',
+      opacity: 0.24,
+    },
   },
 }
 
@@ -82,22 +153,22 @@ export const colorTints: Record<
   light: {
     default: {
       ...defaultTints.light,
-      card_base_bg: white,
+      card_base_bg: {type: 'colorValue', value: white},
       bg_accent: '900',
       bg_accent_hover: '950',
-      bg_accent_active: black,
+      bg_accent_active: {type: 'colorValue', value: black},
       border_accent: '600',
     },
     primary: {
       ...defaultTints.light,
       bg_accent: '900',
       bg_accent_hover: '950',
-      bg_accent_active: black,
+      bg_accent_active: {type: 'colorValue', value: black},
       border_accent: '600',
     },
     positive: {
       ...defaultTints.light,
-      bg_base_hover: hues.gray[50],
+      bg_base_hover: {type: 'colorValue', value: hues.gray[50]},
       bg_base_active: '50',
       bg_accent: '400',
       bg_accent_hover: '500',
@@ -111,22 +182,37 @@ export const colorTints: Record<
   dark: {
     default: {
       ...defaultTints.dark,
-      card_base_bg: black,
-      text_primary: white,
-      bg_accent: white,
+      card_base_bg: {type: 'colorValue', value: black},
+      text_primary: {type: 'colorValue', value: white},
+      bg_accent: {type: 'colorValue', value: white},
       bg_accent_hover: '50',
       bg_accent_active: '100',
+      'base-shadow-umbra-color': {
+        type: 'colorWithOpacity',
+        tint: '950',
+        opacity: 0.4,
+      },
+      'base-shadow-penumbra-color': {
+        type: 'colorWithOpacity',
+        tint: '950',
+        opacity: 0.28,
+      },
+      'base-shadow-ambient-color': {
+        type: 'colorWithOpacity',
+        tint: '950',
+        opacity: 0.24,
+      },
     },
     primary: {
       ...defaultTints.dark,
-      text_primary: white,
-      bg_accent: white,
+      text_primary: {type: 'colorValue', value: white},
+      bg_accent: {type: 'colorValue', value: white},
       bg_accent_hover: '50',
       bg_accent_active: '100',
     },
     positive: {
       ...defaultTints.dark,
-      bg_base_hover: hues.gray[900],
+      bg_base_hover: {type: 'colorValue', value: hues.gray[900]},
       bg_base_active: '900',
       bg_accent: '400',
       bg_accent_hover: '300',
@@ -151,7 +237,16 @@ export const getColorValue = (
     return tints[value]
   }
 
-  return value
+  if (value.type === 'colorWithOpacity') {
+    const base = tints[value.tint]
+
+    return {
+      hex: rgba(base.hex, 0.4),
+      title: `${base.title} at ${value.opacity * 100}% opacity`,
+    }
+  }
+
+  return value.value
 }
 
 export const getColorHex = (
