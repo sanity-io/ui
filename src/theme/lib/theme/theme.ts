@@ -18,9 +18,18 @@ export interface BaseTheme<
     textWeight: ThemeFontWeightKey
     focusRing: FocusRing
   }
+  card: {
+    focusRing: FocusRing
+  }
   color: ThemeColorSchemes
   container: number[]
+  /** @deprecated Use component-specific `focusRing` values instead */
+  focusRing: {
+    offset: number
+    width: number
+  }
   fonts: ThemeFonts
+  input: ThemeInput
   /**
    * THIS API MAY BE UNSTABLE. DO NOT USE IN PRODUCTION.
    * @beta
@@ -30,9 +39,5 @@ export interface BaseTheme<
   radius: number[]
   shadows: Array<ThemeShadow | null>
   space: number[]
-  input: ThemeInput
-  card: {
-    focusRing: FocusRing
-  }
   styles?: Styles
 }
