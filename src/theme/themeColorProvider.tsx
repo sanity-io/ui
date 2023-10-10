@@ -21,7 +21,7 @@ export function ThemeColorProvider(props: ThemeColorProviderProps): React.ReactE
   const root = useRootTheme()
 
   return (
-    <ThemeProvider scheme={scheme || root.scheme} tone={tone}>
+    <ThemeProvider scheme={scheme || root.scheme} theme={root.theme} tone={tone}>
       {children}
     </ThemeProvider>
   )
