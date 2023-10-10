@@ -3,7 +3,7 @@ import {ReactNode} from 'react'
 import styled from 'styled-components'
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/primitives'
 import {mutableCardVariables} from '../../src/styles/colorVars'
-import {ThemeProvider, hexToRgb, rgbToHsl, studioTheme} from '../../src/theme'
+import {ThemeProvider, cssVars, hexToRgb, rgbToHsl, studioTheme} from '../../src/theme'
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -45,12 +45,12 @@ const ColorCard = styled(Card)<{$bg: string; $fg: string}>`
   cursor: pointer;
 
   ${mutableCardVariables['bg-color']}: ${({$bg}) => $bg};
-  ${mutableCardVariables['fg-color']}: ${({$fg}) => $fg};
+  --default-text-primary: ${({$fg}) => $fg};
 
   &:not(:disabled):active,
   &:not(:disabled):hover {
     ${mutableCardVariables['bg-color']}: ${({$bg}) => $bg} !important;
-    ${mutableCardVariables['fg-color']}: ${({$fg}) => $fg} !important;
+    --default-text-primary: ${({$fg}) => $fg} !important;
   }
 `
 

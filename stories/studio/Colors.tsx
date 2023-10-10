@@ -1,6 +1,6 @@
 import {ReactNode} from 'react'
 import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
-import {ThemeProvider, studioTheme} from '../../src/theme'
+import {ThemeProvider, cssVars, studioTheme} from '../../src/theme'
 import {getToneCssVar} from '../../src/theme/lib/theme/color/cssVariables/tones'
 import {tones} from '../../src/theme/studioTheme/color'
 import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/studioTheme/tints'
@@ -80,7 +80,7 @@ function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
                         'border-base',
                       )}`
                     : undefined,
-                  backgroundColor: `var(${getToneCssVar(tone, colorKey)})`,
+                  backgroundColor: cssVars[tone][colorKey],
                 }}
               />
               <Flex
