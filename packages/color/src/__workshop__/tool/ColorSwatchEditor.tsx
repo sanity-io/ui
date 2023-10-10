@@ -20,7 +20,7 @@ export const ColorSwatchesEditor = memo(function ColorSwatchesEditor(props: {
     (tint: ColorTintKey, hsl: HSL) => {
       updateSwatch(hue, tint, hsl)
     },
-    [hue, updateSwatch]
+    [hue, updateSwatch],
   )
 
   return (

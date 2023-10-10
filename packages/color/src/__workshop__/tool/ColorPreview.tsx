@@ -18,7 +18,7 @@ export const ColorPreview = memo(function ColorPreview(props: {expanded: boolean
       height: expanded ? 100 : 50,
       backgroundColor: `hsl(${hsl[0]}deg ${hsl[1]}% ${hsl[2]}%)`,
     }),
-    [expanded, hsl]
+    [expanded, hsl],
   )
 
   return (

@@ -60,7 +60,7 @@ export function HSLSlider(props: {onHSLChange: (hsl: HSL) => void; value: HSL}):
         //
       }
     },
-    [onHSLChange]
+    [onHSLChange],
   )
 
   return (
