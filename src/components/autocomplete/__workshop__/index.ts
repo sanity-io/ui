@@ -1,6 +1,5 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
-import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'components/autocomplete',
@@ -9,32 +8,32 @@ export default defineScope({
     {
       name: 'example',
       title: 'Example',
-      component: withStudioTheme(lazy(() => import('./example'))),
+      component: lazy(() => import('./example')),
     },
     {
       name: 'custom',
       title: 'Custom',
-      component: withStudioTheme(lazy(() => import('./custom'))),
+      component: lazy(() => import('./custom')),
     },
     {
       name: 'async',
       title: 'Async',
-      component: withStudioTheme(lazy(() => import('./async'))),
+      component: lazy(() => import('./async')),
     },
     {
       name: 'constrained-height',
       title: 'Constrained height',
-      component: withStudioTheme(lazy(() => import('./constrainedHeight'))),
+      component: lazy(() => import('./constrainedHeight')),
     },
     {
       name: 'focus-and-blur',
       title: 'Focus and blur',
-      component: withStudioTheme(lazy(() => import('./focusAndBlur'))),
+      component: lazy(() => import('./focusAndBlur')),
     },
     {
       name: 'fullscreen',
       title: 'Fullscreen',
-      component: withStudioTheme(lazy(() => import('./fullscreen'))),
+      component: lazy(() => import('./fullscreen')),
     },
   ],
 })

@@ -1,6 +1,5 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
-import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'utils/layer',
@@ -9,17 +8,17 @@ export default defineScope({
     {
       name: 'nested',
       title: 'Nested',
-      component: withStudioTheme(lazy(() => import('./nested'))),
+      component: lazy(() => import('./nested')),
     },
     {
       name: 'multiple-roots',
       title: 'Multiple roots',
-      component: withStudioTheme(lazy(() => import('./multipleRoots'))),
+      component: lazy(() => import('./multipleRoots')),
     },
     {
       name: 'responsive-z-offset',
       title: 'Responsive z-offset',
-      component: withStudioTheme(lazy(() => import('./responsiveZOffset'))),
+      component: lazy(() => import('./responsiveZOffset')),
     },
   ],
 })

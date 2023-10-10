@@ -1,6 +1,5 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
-import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'primitives/text',
@@ -9,17 +8,17 @@ export default defineScope({
     {
       name: 'default',
       title: 'Text',
-      component: withStudioTheme(lazy(() => import('./example'))),
+      component: lazy(() => import('./example')),
     },
     {
       name: 'colored',
       title: 'Colored text',
-      component: withStudioTheme(lazy(() => import('./colored'))),
+      component: lazy(() => import('./colored')),
     },
     {
       name: 'optical-alignment',
       title: 'Optical alignment',
-      component: withStudioTheme(lazy(() => import('./opticalAlignment'))),
+      component: lazy(() => import('./opticalAlignment')),
     },
   ],
 })

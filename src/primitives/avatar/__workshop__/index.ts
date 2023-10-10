@@ -1,6 +1,5 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
-import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'primitives/avatar',
@@ -9,12 +8,12 @@ export default defineScope({
     {
       name: 'as-button',
       title: 'As button',
-      component: withStudioTheme(lazy(() => import('./asButton'))),
+      component: lazy(() => import('./asButton')),
     },
     {
       name: 'avatar-stack',
       title: 'Avatar stack',
-      component: withStudioTheme(lazy(() => import('./stack'))),
+      component: lazy(() => import('./stack')),
     },
   ],
 })

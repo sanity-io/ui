@@ -1,6 +1,5 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
-import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'primitives/popover',
@@ -9,42 +8,42 @@ export default defineScope({
     {
       name: 'test',
       title: 'Test',
-      component: withStudioTheme(lazy(() => import('./TestStory'))),
+      component: lazy(() => import('./TestStory')),
     },
     {
       name: 'plain',
       title: 'Plain',
-      component: withStudioTheme(lazy(() => import('./PlainStory'))),
+      component: lazy(() => import('./PlainStory')),
     },
     {
       name: 'recursive',
       title: 'Recursive',
-      component: withStudioTheme(lazy(() => import('./RecursiveStory'))),
+      component: lazy(() => import('./RecursiveStory')),
     },
     {
       name: 'match-ref-width',
       title: 'Match reference width',
-      component: withStudioTheme(lazy(() => import('./MatchReferenceWidthStory'))),
+      component: lazy(() => import('./MatchReferenceWidthStory')),
     },
     {
       name: 'margins',
       title: 'Margins',
-      component: withStudioTheme(lazy(() => import('./MarginsStory'))),
+      component: lazy(() => import('./MarginsStory')),
     },
     {
       name: 'aligned',
       title: 'Aligned',
-      component: withStudioTheme(lazy(() => import('./AlignedStory'))),
+      component: lazy(() => import('./AlignedStory')),
     },
     {
       name: 'openOnMountStory',
       title: 'Open on mount',
-      component: withStudioTheme(lazy(() => import('./OpenOnMountStory'))),
+      component: lazy(() => import('./OpenOnMountStory')),
     },
     {
       name: 'side-panel',
       title: 'Side panel',
-      component: withStudioTheme(lazy(() => import('./SidePanelStory'))),
+      component: lazy(() => import('./SidePanelStory')),
     },
   ],
 })

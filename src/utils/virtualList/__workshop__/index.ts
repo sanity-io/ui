@@ -1,6 +1,5 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
-import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'utils/virtual-list',
@@ -9,22 +8,22 @@ export default defineScope({
     {
       name: 'window-scroll',
       title: 'Window scroll',
-      component: withStudioTheme(lazy(() => import('./windowScrolll'))),
+      component: lazy(() => import('./windowScrolll')),
     },
     {
       name: 'element-scroll',
       title: 'Element scroll',
-      component: withStudioTheme(lazy(() => import('./elementScroll'))),
+      component: lazy(() => import('./elementScroll')),
     },
     {
       name: 'infinite-list',
       title: 'Infinite list',
-      component: withStudioTheme(lazy(() => import('./infiniteList'))),
+      component: lazy(() => import('./infiniteList')),
     },
     {
       name: 'changing-props',
       title: 'Changing props',
-      component: withStudioTheme(lazy(() => import('./changingProps'))),
+      component: lazy(() => import('./changingProps')),
     },
   ],
 })
