@@ -1,3 +1,4 @@
+import {expect, test} from 'vitest'
 import {hues} from './color'
 import {COLOR_HUES} from './constants'
 
