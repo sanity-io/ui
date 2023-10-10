@@ -38,6 +38,7 @@ export const colorKeys = [
   'base-shadow-umbra-color',
   'base-shadow-penumbra-color',
   'base-shadow-ambient-color',
+  'base-text-color', // Color used by the buttons for default mode text
 
   'skeleton-from',
   'skeleton-to',
@@ -91,6 +92,8 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       value: white,
     },
     'base-bg-card': '50',
+    'base-text-color': {type: 'colorValue', value: white},
+
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',
@@ -139,7 +142,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'border-accent': '300',
     'border-accent-inverted': {type: 'colorValue', value: hues.gray[900]},
     'base-bg-card': '950',
-
+    'base-text-color': {type: 'colorValue', value: black},
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',

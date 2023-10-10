@@ -128,6 +128,7 @@ export function _colorVarStyleSelected(): CSSObject {
     [mutableCardVariables['fg-color']]: cssVars.default['bg-base'],
     [mutableCardVariables['muted-fg-color']]: cssVars.default['base-bg-card'],
     [mutableCardVariables['accent-color']]: cssVars.default['base-bg-card'],
+    [mutableCardVariables['icon-color']]: cssVars.primary['bg-base'],
   }
 }
 

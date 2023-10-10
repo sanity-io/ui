@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
+import {Button, Card, Flex, Grid, Stack, Text} from '../../src/primitives'
 import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
@@ -200,6 +200,34 @@ export const Tones: Story = {
         renderItem: ({value}) => (
           <Card {...props} key={value} tone={value}>
             <Text>{value}</Text>
+          </Card>
+        ),
+        rows: CARD_TONES,
+      })}
+    </>
+  ),
+}
+export const WithButtonsAndTones: Story = {
+  args: {
+    radius: 1,
+    shadow: 1,
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
+    },
+  },
+  render: (props) => (
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Card {...props} key={value} tone={value}>
+            <Stack space={4}>
+              <Text>{value}</Text>
+              <Button text={'Primary'} tone="primary" />
+              <Button text={'Positive'} tone="positive" />
+              <Button text={'Caution'} tone="caution" />
+            </Stack>
           </Card>
         ),
         rows: CARD_TONES,

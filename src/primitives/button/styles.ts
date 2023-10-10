@@ -72,9 +72,9 @@ export function buttonColorStyles(
     {
       // This is going to be used by the text elements inside the button
       [mutableCardVariables['fg-color']]:
-        $mode === 'default' ? cssVars[$tone]['bg-base'] : cssVars[$tone]['text-primary'],
+        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-primary'],
       [mutableCardVariables['muted-fg-color']]:
-        $mode === 'default' ? cssVars[$tone]['bg-base'] : cssVars[$tone]['text-secondary'],
+        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-secondary'],
       [mutableCardVariables['icon-color']]:
         $mode === 'default' ? cssVars[$tone]['icon-inverted'] : cssVars[$tone]['icon-default'],
       [mutableCardVariables['bg-color']]:
@@ -92,7 +92,8 @@ export function buttonColorStyles(
     {
       backgroundColor:
         $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-base'],
-      color: $mode === 'default' ? cssVars[$tone]['bg-base'] : cssVars[$tone]['text-primary'],
+      color:
+        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-primary'],
       boxShadow: focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': {
         backgroundColor:
