@@ -14,7 +14,12 @@ const clipboard = {
   write(text: string) {
     const type = 'text/plain'
     const blob = new Blob([text], {type})
-    const data = [new ClipboardItem({[type]: blob as any})]
+    const data = [
+      new ClipboardItem({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [type]: blob as any,
+      }),
+    ]
 
     return navigator.clipboard.write(data)
   },
