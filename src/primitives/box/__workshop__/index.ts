@@ -1,5 +1,6 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
+import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'primitives/box',
@@ -8,12 +9,12 @@ export default defineScope({
     {
       name: 'props',
       title: 'Props',
-      component: lazy(() => import('./props')),
+      component: withStudioTheme(lazy(() => import('./props'))),
     },
     {
       name: 'responsive',
       title: 'Responsive',
-      component: lazy(() => import('./responsive')),
+      component: withStudioTheme(lazy(() => import('./responsive'))),
     },
   ],
 })

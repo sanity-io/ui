@@ -1,5 +1,6 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
+import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'utils/portal',
@@ -8,7 +9,7 @@ export default defineScope({
     {
       name: 'named',
       title: 'Named portals',
-      component: lazy(() => import('./named')),
+      component: withStudioTheme(lazy(() => import('./named'))),
     },
   ],
 })

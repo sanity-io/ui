@@ -1,5 +1,6 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
+import withStudioTheme from '../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'theme',
@@ -8,17 +9,17 @@ export default defineScope({
     {
       name: 'nested-provider',
       title: 'Nested provider',
-      component: lazy(() => import('./nestedProvider')),
+      component: withStudioTheme(lazy(() => import('./nestedProvider'))),
     },
     {
       name: 'layer',
       title: 'Layer',
-      component: lazy(() => import('./layer')),
+      component: withStudioTheme(lazy(() => import('./layer'))),
     },
     {
       name: 'color',
       title: 'Color',
-      component: lazy(() => import('./color')),
+      component: withStudioTheme(lazy(() => import('./color'))),
     },
   ],
 })

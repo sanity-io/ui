@@ -1,5 +1,6 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
+import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'components/toast',
@@ -8,12 +9,12 @@ export default defineScope({
     {
       name: 'toast',
       title: 'Toast',
-      component: lazy(() => import('./toast')),
+      component: withStudioTheme(lazy(() => import('./toast'))),
     },
     {
       name: 'hook',
       title: 'Hook',
-      component: lazy(() => import('./hook')),
+      component: withStudioTheme(lazy(() => import('./hook'))),
     },
   ],
 })

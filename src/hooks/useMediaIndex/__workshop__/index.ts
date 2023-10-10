@@ -1,5 +1,6 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
+import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'hooks/use-media-index',
@@ -8,7 +9,7 @@ export default defineScope({
     {
       name: 'test',
       title: 'Test',
-      component: lazy(() => import('./test')),
+      component: withStudioTheme(lazy(() => import('./test'))),
     },
   ],
 })

@@ -1,5 +1,6 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
+import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'components/menu',
@@ -8,72 +9,72 @@ export default defineScope({
     {
       name: 'menu-button',
       title: 'MenuButton',
-      component: lazy(() => import('./menuButton')),
+      component: withStudioTheme(lazy(() => import('./menuButton'))),
     },
     {
       name: 'nested-menu-items',
       title: 'Nested MenuItems',
-      component: lazy(() => import('./nestedMenu')),
+      component: withStudioTheme(lazy(() => import('./nestedMenu'))),
     },
     {
       name: 'custom-menu-item',
       title: 'Custom MenuItem',
-      component: lazy(() => import('./customMenuItem')),
+      component: withStudioTheme(lazy(() => import('./customMenuItem'))),
     },
     {
       name: 'groups',
       title: 'Groups',
-      component: lazy(() => import('./groups')),
+      component: withStudioTheme(lazy(() => import('./groups'))),
     },
     {
       name: 'menu-group-right',
       title: 'Menu group (right)',
-      component: lazy(() => import('./menuGroupRight')),
+      component: withStudioTheme(lazy(() => import('./menuGroupRight'))),
     },
     {
       name: 'tones',
       title: 'Tones',
-      component: lazy(() => import('./tones')),
+      component: withStudioTheme(lazy(() => import('./tones'))),
     },
     {
       name: 'selected-item',
       title: 'Selected item',
-      component: lazy(() => import('./selectedItem')),
+      component: withStudioTheme(lazy(() => import('./selectedItem'))),
     },
     {
       name: 'closable',
       title: 'Closeable',
-      component: lazy(() => import('./closableMenuButton')),
+      component: withStudioTheme(lazy(() => import('./closableMenuButton'))),
     },
     {
       name: 'without-arrow',
       title: 'Without arrow',
-      component: lazy(() => import('./withoutArrow')),
+      component: withStudioTheme(lazy(() => import('./withoutArrow'))),
     },
     {
       name: 'constrained-in-boundary',
       title: 'Constrained in boundary',
-      component: lazy(() => import('./constrainedInBoundary')),
+      component: withStudioTheme(lazy(() => import('./constrainedInBoundary'))),
     },
     {
       name: 'as-component',
       title: 'As component',
-      component: lazy(() => import('./asComponent')),
+      component: withStudioTheme(lazy(() => import('./asComponent'))),
     },
     {
       name: 'disable-focus-on-close',
       title: 'Disable focus on close',
-      component: lazy(() => import('./disableFocusOnClose')),
+      component: withStudioTheme(lazy(() => import('./disableFocusOnClose'))),
     },
     {
       name: 'menu-button-with-on-close',
       title: 'MenuButton with on close',
-      component: lazy(() => import('./onCloseMenuButton')),
+      component: withStudioTheme(lazy(() => import('./onCloseMenuButton'))),
     },
     {
       name: 'shouldFocus',
       title: 'Menu with shouldFocus',
-      component: lazy(() => import('./shouldFocus')),
+      component: withStudioTheme(lazy(() => import('./shouldFocus'))),
     },
   ],
 })

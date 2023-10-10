@@ -1,5 +1,6 @@
 import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
+import withStudioTheme from '../../../helpers/withStudioTheme'
 
 export default defineScope({
   name: 'components/tree',
@@ -8,13 +9,13 @@ export default defineScope({
     {
       name: 'basic',
       title: 'Basic',
-      component: lazy(() => import('./basic')),
+      component: withStudioTheme(lazy(() => import('./basic'))),
       // options: {perfTests: () => import('./basic.perf')},
     },
     {
       name: 'tab',
       title: 'Tab',
-      component: lazy(() => import('./tabFromElement')),
+      component: withStudioTheme(lazy(() => import('./tabFromElement'))),
       // options: {perfTests: () => import('./basic.perf')},
     },
   ],
