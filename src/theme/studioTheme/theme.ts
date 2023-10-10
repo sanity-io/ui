@@ -23,6 +23,10 @@ export const studioTheme: RootTheme = {
   },
   color: {
     tones: tones,
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore This is necessary until workshop is updated.
+    base: {bg: '#fffff'},
   },
   container: [320, 640, 960, 1280, 1600, 1920],
   focusRing: {

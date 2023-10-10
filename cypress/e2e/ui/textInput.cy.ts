@@ -7,7 +7,7 @@ context('Primitives/TextInput', () => {
     cy.get('#text-input-example + span').should(
       'have.css',
       'boxShadow',
-      'rgb(34, 218, 244) 0px 0px 0px 1px inset, rgb(230, 232, 236) 0px 0px 0px 1px inset',
+      'rgb(30, 210, 180) 0px 0px 0px 1px inset, rgb(186, 252, 241) 0px 0px 0px 1px inset',
     )
   })
 })
