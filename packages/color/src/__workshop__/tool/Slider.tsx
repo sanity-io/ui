@@ -1,6 +1,7 @@
-import {Box, Code, Flex, TextInput, ThemeColorSpotKey, Tooltip} from '@sanity/ui'
-import {ReactElement, useEffect, useRef} from 'react'
+import {Code, Flex, Stack, TextInput, ThemeColorSpotKey, Tooltip} from '@sanity/ui'
+import {ChangeEvent, ReactElement, useCallback, useEffect, useRef} from 'react'
 import styled from 'styled-components'
+import {hexToRgb, hslToRgb, rgbToHex, rgbToHsl} from '../../lib/convert'
 import {HSL} from '../../types'
 import {SLIDER_H} from './constants'
 import {useHandle} from './useHandle'
@@ -24,6 +25,9 @@ const Handle = styled.button<{$color: ThemeColorSpotKey}>`
 
 export function HSLSlider(props: {onHSLChange: (hsl: HSL) => void; value: HSL}): ReactElement {
   const {onHSLChange, value} = props
+
+  const hexValue = rgbToHex(hslToRgb(value))
+
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   const {
@@ -46,6 +50,19 @@ export function HSLSlider(props: {onHSLChange: (hsl: HSL) => void; value: HSL}):
 
   useEffect(() => onHSLChange([h, s, l]), [h, s, l, onHSLChange])
 
+  const handleHexChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      try {
+        const rgb = hexToRgb(event.currentTarget.value)
+
+        onHSLChange(rgbToHsl(rgb))
+      } catch (_) {
+        //
+      }
+    },
+    [onHSLChange]
+  )
+
   return (
     <div style={{flex: 1}}>
       <div
@@ -66,13 +83,16 @@ export function HSLSlider(props: {onHSLChange: (hsl: HSL) => void; value: HSL}):
         </Tooltip>
       </div>
 
-      <Box padding={1} style={{borderTop: '1px solid var(--card-border-color)'}}>
+      <Stack padding={1} space={1} style={{borderTop: '1px solid var(--card-border-color)'}}>
         <Flex gap={1}>
           <TextInput fontSize={0} padding={1} readOnly value={h} />
           <TextInput fontSize={0} padding={1} readOnly value={s} />
           <TextInput fontSize={0} padding={1} readOnly value={l} />
         </Flex>
-      </Box>
+        <Flex gap={1}>
+          <TextInput fontSize={0} onChange={handleHexChange} padding={1} value={hexValue} />
+        </Flex>
+      </Stack>
     </div>
   )
 }

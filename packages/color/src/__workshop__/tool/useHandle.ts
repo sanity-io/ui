@@ -13,6 +13,10 @@ export function useHandle(props: {
   const [top, setTop] = useState((propValue / (max - min)) * SLIDER_H)
 
   useEffect(() => {
+    setTop((propValue / (max - min)) * SLIDER_H)
+  }, [max, min, propValue])
+
+  useEffect(() => {
     const wrapper = wrapperRef.current
     const handle = ref.current
 
