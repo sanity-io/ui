@@ -24,7 +24,6 @@ export interface Styles {
  */
 export interface Theme {
   sanity: RootTheme
-  scheme: ThemeColorSchemeKey
 }
 
 /**

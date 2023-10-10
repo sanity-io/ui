@@ -3,6 +3,7 @@ import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
 import {createCssVars} from './lib/theme/color/cssVariables'
+import {tones} from './studioTheme/color'
 import {ThemeContext} from './themeContext'
 import {ToneProvider} from './toneContext/toneProvider'
 import {RootTheme, Theme, ThemeContextValue} from './types'
@@ -36,8 +37,8 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
 
     const layer = rootLayer || DEFAULT_THEME_LAYER
 
-    return {sanity: {...restTheme, layer}, tones: themeProp?.color.tones, scheme: scheme}
-  }, [scheme, themeProp])
+    return {sanity: {...restTheme, layer}}
+  }, [themeProp])
 
   useEffect(() => {
     if (!themeProp?.color.tones) return

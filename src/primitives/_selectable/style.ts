@@ -9,13 +9,14 @@ import {
   cardCssVariables,
 } from '../../styles/colorVars'
 
-import {ThemeColorToneKey, createCssVars} from '../../theme'
+import {ThemeColorSchemeKey, ThemeColorToneKey, createCssVars} from '../../theme'
 
 /**
  * @internal
  */
 export interface SelectableStyleProps {
   $tone: ThemeColorToneKey
+  $scheme: ThemeColorSchemeKey
 }
 
 export function selectableBaseStyle(): ReturnType<typeof css> {
@@ -43,10 +44,10 @@ export function selectableBaseStyle(): ReturnType<typeof css> {
 export function selectableColorStyle(
   props: SelectableStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {theme, $tone} = props
+  const {theme, $tone, $scheme} = props
 
   return css`
-    ${$tone !== 'default' && createCssVars(theme.scheme, theme.sanity.color.tones, $tone)}
+    ${$tone !== 'default' && createCssVars($scheme, theme.sanity.color.tones, $tone)}
     ${_colorVarsStyle()}
 
     background-color:  ${cardCssVariables['bg-color']};
