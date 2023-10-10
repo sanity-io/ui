@@ -1,4 +1,4 @@
-import {COLOR_HUES, ColorTints, ColorValue, black, hues, white} from '@sanity/color'
+import {COLOR_HUES, ColorTints, ColorTint, black, hues, white} from '@sanity/color'
 import {ReactNode} from 'react'
 import styled from 'styled-components'
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/primitives'
@@ -54,7 +54,7 @@ const ColorCard = styled(Card)<{$bg: string; $fg: string}>`
   }
 `
 
-function ColorTintPreview(props: {tint: ColorValue}) {
+function ColorTintPreview(props: {tint: ColorTint}) {
   const {tint} = props
   const hsl = rgbToHsl(hexToRgb(tint.hex))
 

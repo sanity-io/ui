@@ -4,7 +4,7 @@
  * e.g. for positive theme: `{"bg_base": "white", ""bg-base-hover"": "gray/50", ""bg-base-active"": "cyan/50"}
  * This is not possible in the previous configuration, as each ThemeColor uses only one tint.
  */
-import {ColorTintKey, ColorTints, ColorValue, black, hues, white} from '@sanity/color'
+import {ColorTintKey, ColorTints, ColorTint, black, hues, white} from '@sanity/color'
 import {rgba} from '../lib/color-fns'
 import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 
@@ -56,8 +56,8 @@ type ColorWithOpacity = {
 }
 
 type DefaultColor = {
-  type: 'colorValue'
-  value: ColorValue
+  type: 'colorTint'
+  value: ColorTint
 }
 
 type ColorTintsDictionary = Record<ColorKey, ColorTintKey | DefaultColor | ColorWithOpacity>
@@ -69,7 +69,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'text-code': '600',
     'text-muted': '600',
     'bg-base': {
-      type: 'colorValue',
+      type: 'colorTint',
       value: white,
     },
     'bg-base-hover': '50', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
@@ -81,18 +81,18 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'bg-tint-code': '50',
     'icon-default': '500',
     'icon-inverted': {
-      type: 'colorValue',
+      type: 'colorTint',
       value: white,
     },
     'border-base': '100',
     'border-base-hover': '200',
     'border-accent': '500',
     'border-accent-inverted': {
-      type: 'colorValue',
+      type: 'colorTint',
       value: white,
     },
     'base-bg-card': '50',
-    'base-text-color': {type: 'colorValue', value: white},
+    'base-text-color': {type: 'colorTint', value: white},
 
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
@@ -127,7 +127,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'text-inactive': '400',
     'text-code': '400',
     'text-muted': '400',
-    'bg-base': {type: 'colorValue', value: black},
+    'bg-base': {type: 'colorTint', value: black},
     'bg-base-hover': '900',
     'bg-base-active': '800',
     'bg-accent': '500',
@@ -136,13 +136,13 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'bg-tint': '900',
     'bg-tint-code': '950',
     'icon-default': '300',
-    'icon-inverted': {type: 'colorValue', value: hues.gray[900]},
+    'icon-inverted': {type: 'colorTint', value: hues.gray[900]},
     'border-base': '800',
     'border-base-hover': '700',
     'border-accent': '300',
-    'border-accent-inverted': {type: 'colorValue', value: hues.gray[900]},
+    'border-accent-inverted': {type: 'colorTint', value: hues.gray[900]},
     'base-bg-card': '950',
-    'base-text-color': {type: 'colorValue', value: black},
+    'base-text-color': {type: 'colorTint', value: black},
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',
@@ -179,22 +179,22 @@ export const colorTints: Record<
   light: {
     default: {
       ...defaultTints.light,
-      'base-bg-card': {type: 'colorValue', value: white},
+      'base-bg-card': {type: 'colorTint', value: white},
       'bg-accent': '900',
       'bg-accent-hover': '950',
-      'bg-accent-active': {type: 'colorValue', value: black},
+      'bg-accent-active': {type: 'colorTint', value: black},
       'border-accent': '600',
     },
     primary: {
       ...defaultTints.light,
       'bg-accent': '900',
       'bg-accent-hover': '950',
-      'bg-accent-active': {type: 'colorValue', value: black},
+      'bg-accent-active': {type: 'colorTint', value: black},
       'border-accent': '600',
     },
     positive: {
       ...defaultTints.light,
-      'bg-base-hover': {type: 'colorValue', value: hues.gray[50]},
+      'bg-base-hover': {type: 'colorTint', value: hues.gray[50]},
       'bg-base-active': '50',
       'bg-accent': '400',
       'bg-accent-hover': '500',
@@ -208,9 +208,9 @@ export const colorTints: Record<
   dark: {
     default: {
       ...defaultTints.dark,
-      'base-bg-card': {type: 'colorValue', value: black},
-      'text-primary': {type: 'colorValue', value: white},
-      'bg-accent': {type: 'colorValue', value: white},
+      'base-bg-card': {type: 'colorTint', value: black},
+      'text-primary': {type: 'colorTint', value: white},
+      'bg-accent': {type: 'colorTint', value: white},
       'bg-accent-hover': '50',
       'bg-accent-active': '100',
       'base-shadow-umbra-color': {
@@ -231,14 +231,14 @@ export const colorTints: Record<
     },
     primary: {
       ...defaultTints.dark,
-      'text-primary': {type: 'colorValue', value: white},
-      'bg-accent': {type: 'colorValue', value: white},
+      'text-primary': {type: 'colorTint', value: white},
+      'bg-accent': {type: 'colorTint', value: white},
       'bg-accent-hover': '50',
       'bg-accent-active': '100',
     },
     positive: {
       ...defaultTints.dark,
-      'bg-base-hover': {type: 'colorValue', value: hues.gray[900]},
+      'bg-base-hover': {type: 'colorTint', value: hues.gray[900]},
       'bg-base-active': '900',
       'bg-accent': '400',
       'bg-accent-hover': '300',
@@ -256,7 +256,7 @@ export const getColorValue = (
   dark: boolean,
   tone: ThemeColorName,
   key: ColorKey,
-): ColorValue => {
+): ColorTint => {
   const value = colorTints[dark ? 'dark' : 'light'][tone][key]
 
   if (typeof value === 'string') {
