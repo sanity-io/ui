@@ -67,7 +67,7 @@ export const Card = forwardRef(function Card(
     borderLeft,
     pressed,
     radius = 0,
-    scheme,
+    scheme: schemeProp,
     selected,
     shadow,
     tone: toneProp = 'default',
@@ -77,6 +77,7 @@ export const Card = forwardRef(function Card(
   const as = isValidElementType(asProp) ? asProp : 'div'
   const toneContext = useToneContext()
   const tone = toneProp === 'inherit' ? toneContext.tone : toneProp
+  const scheme = schemeProp ?? toneContext.scheme
 
   return (
     <ToneProvider scheme={scheme} tone={tone}>
