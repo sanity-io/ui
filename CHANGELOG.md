@@ -5,6 +5,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.1](https://github.com/sanity-io/ui/compare/v1.8.2...v2.0.0-alpha.1) (2023-10-10)
+
+### ⚠ BREAKING CHANGES
+
+- **default-theme:** add support for component-level focus ring configuration (#1140)
+- add inter to default (non-code) font stack
+
+### Features
+
+- add inter to default (non-code) font stack ([877e678](https://github.com/sanity-io/ui/commit/877e678c7b012e08f71263a0dd41e1d89d0d2bb8))
+- add radius='full' support and supporting stories ([#1150](https://github.com/sanity-io/ui/issues/1150)) ([a2e93b1](https://github.com/sanity-io/ui/commit/a2e93b1170b4ebc947a4578920a7f4da47a44f7f))
+- **button:** change focus ring width ([#1158](https://github.com/sanity-io/ui/issues/1158)) ([59a0222](https://github.com/sanity-io/ui/commit/59a02226556fd0e9ed022f0686bbf2aeadbd191a))
+- **button:** update defaults ([116ec82](https://github.com/sanity-io/ui/commit/116ec823452f57b2ffed5855897ba8d7bab49c99))
+- **button:** update styles to match facelift designs ([#1142](https://github.com/sanity-io/ui/issues/1142)) ([16644d4](https://github.com/sanity-io/ui/commit/16644d439e3b12108a736764eff9ed44616013f3)), closes [#1143](https://github.com/sanity-io/ui/issues/1143)
+- **default-theme:** add support for component-level focus ring configuration ([#1140](https://github.com/sanity-io/ui/issues/1140)) ([8d2038d](https://github.com/sanity-io/ui/commit/8d2038daee1fd4ddd83dc039ad3fbb91a4682e57)), closes [#1141](https://github.com/sanity-io/ui/issues/1141)
+- **default-theme:** update color palette ([#1137](https://github.com/sanity-io/ui/issues/1137)) ([b2b442f](https://github.com/sanity-io/ui/commit/b2b442f7e47ca25aaeeaf73df49d2e9dcd15de84))
+- **kbd:** update primitive style, minor storybook cleanup ([#1157](https://github.com/sanity-io/ui/issues/1157)) ([3a41561](https://github.com/sanity-io/ui/commit/3a41561665b55b52d6993047ebfadb5d6b467fa9))
+- **tab:** update styles and add corresponding stories ([#1159](https://github.com/sanity-io/ui/issues/1159)) ([8a52be0](https://github.com/sanity-io/ui/commit/8a52be0af49103a310990baa0966bbec5455cea6))
+- **tooltip:** update styles and corresponding stories ([#1160](https://github.com/sanity-io/ui/issues/1160)) ([c80e3a0](https://github.com/sanity-io/ui/commit/c80e3a05dc55fd3bc2e462a679a07bd64dbe8986))
+- update various input styles ([#1147](https://github.com/sanity-io/ui/issues/1147)) ([cdb25e7](https://github.com/sanity-io/ui/commit/cdb25e78cef67330fb3322220347692740237bc1)), closes [#1144](https://github.com/sanity-io/ui/issues/1144) [#1145](https://github.com/sanity-io/ui/issues/1145) [#1146](https://github.com/sanity-io/ui/issues/1146)
+
 ## [1.9.3](https://github.com/sanity-io/ui/compare/v1.9.2...v1.9.3) (2023-11-13)
 
 ### Bug Fixes
