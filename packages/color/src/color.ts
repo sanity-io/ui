@@ -354,47 +354,47 @@ export const yellow: ColorTints = {
 export const green: ColorTints = {
   '50': {
     title: 'Green 50',
-    hex: '#e0faea',
+    hex: '#e0fae3',
   },
   '100': {
     title: 'Green 100',
-    hex: '#c3f4d5',
+    hex: '#c3f4c7',
   },
   '200': {
     title: 'Green 200',
-    hex: '#88e7ab',
+    hex: '#88e790',
   },
   '300': {
     title: 'Green 300',
-    hex: '#5cdb8b',
+    hex: '#5cdb67',
   },
   '400': {
     title: 'Green 400',
-    hex: '#2fca68',
+    hex: '#2fca3c',
   },
   '500': {
     title: 'Green 500',
-    hex: '#26a153',
+    hex: '#26a130',
   },
   '600': {
     title: 'Green 600',
-    hex: '#157e3c',
+    hex: '#157e1e',
   },
   '700': {
     title: 'Green 700',
-    hex: '#09632a',
+    hex: '#096310',
   },
   '800': {
     title: 'Green 800',
-    hex: '#094920',
+    hex: '#09490e',
   },
   '900': {
     title: 'Green 900',
-    hex: '#0d301b',
+    hex: '#0d3010',
   },
   '950': {
     title: 'Green 950',
-    hex: '#0d2118',
+    hex: '#0d210f',
   },
 }
 
@@ -402,47 +402,47 @@ export const green: ColorTints = {
 export const cyan: ColorTints = {
   '50': {
     title: 'Cyan 50',
-    hex: '#d5f9fb',
+    hex: '#dcfef8',
   },
   '100': {
     title: 'Cyan 100',
-    hex: '#b9f1f8',
+    hex: '#bafcf1',
   },
   '200': {
     title: 'Cyan 200',
-    hex: '#6ae1f1',
+    hex: '#72f8e1',
   },
   '300': {
     title: 'Cyan 300',
-    hex: '#25d2e9',
+    hex: '#35edcf',
   },
   '400': {
     title: 'Cyan 400',
-    hex: '#16b5ca',
+    hex: '#1ed2b4',
   },
   '500': {
     title: 'Cyan 500',
-    hex: '#1597a8',
+    hex: '#15ac93',
   },
   '600': {
     title: 'Cyan 600',
-    hex: '#157c8a',
+    hex: '#099079',
   },
   '700': {
     title: 'Cyan 700',
-    hex: '#14616c',
+    hex: '#0a6b5b',
   },
   '800': {
     title: 'Cyan 800',
-    hex: '#12474e',
+    hex: '#0d4a40',
   },
   '900': {
     title: 'Cyan 900',
-    hex: '#112e32',
+    hex: '#0f2f2a',
   },
   '950': {
     title: 'Cyan 950',
-    hex: '#122021',
+    hex: '#112220',
   },
 }
 
