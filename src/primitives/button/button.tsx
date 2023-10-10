@@ -3,6 +3,7 @@ import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
+import {cardCssVariables} from '../../styles/colorVars'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
@@ -12,7 +13,6 @@ import {Spinner} from '../spinner'
 import {Text} from '../text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
-import {cardCssVariables} from '../../styles/colorVars'
 
 /**
  * @public

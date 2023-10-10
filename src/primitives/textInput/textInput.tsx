@@ -165,13 +165,14 @@ export const TextInput = forwardRef(function TextInput(
     customValidity,
     type = 'text',
     weight,
-    tone = 'default',
+    tone: toneProp = 'default',
     ...restProps
   } = props
 
   const ref = useForwardedRef(forwardedRef)
 
   const toneContext = useToneContext()
+  const tone = toneProp === 'default' ? toneContext.tone : toneProp
 
   const fontSize = useArrayProp(fontSizeProp)
   const padding = useArrayProp(paddingProp)
@@ -340,8 +341,7 @@ export const TextInput = forwardRef(function TextInput(
   )
 
   return (
-    // TODO: this creates a new instance of a card, is it really needed?
-    <Root data-ui="TextInput" tone={tone !== 'default' ? tone : toneContext.tone}>
+    <Root data-ui="TextInput" tone={tone}>
       {prefixNode}
 
       <InputRoot>
