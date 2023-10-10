@@ -1,11 +1,9 @@
 ---
-name: Release Please
+name: Release (beta)
 
 on:
   push:
     branches:
-      - main
-      - alpha
       - beta
 
 permissions:
