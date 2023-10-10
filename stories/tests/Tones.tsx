@@ -44,7 +44,7 @@ const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (
   <Stack space={2} marginTop={2} paddingY={2}>
-    <Text weight="semibold" size={2} muted>
+    <Text weight="semibold" size={2}>
       {title}
     </Text>
     {children}
@@ -97,7 +97,7 @@ export function Tones(): ReactNode {
           {tones.map((tone) => (
             <Card tone={tone} {...props} key={tone}>
               <Stack space={2}>
-                <Heading>Heading</Heading>
+                <Heading style={{textTransform: 'capitalize'}}>{tone}</Heading>
                 <Text>Text</Text>
                 <Label>Label</Label>
                 <Flex gap={2}>

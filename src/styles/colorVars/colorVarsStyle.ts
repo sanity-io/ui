@@ -76,7 +76,7 @@ export function _colorVarsStyle(checkered = false): Record<VariablesNames, strin
     '--card-bg-color': cssVars.default['bg-base'],
 
     '--card-bg-image': checkered
-      ? `repeating-conic-gradient(${cssVars.default['card-base-bg']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`
+      ? `repeating-conic-gradient(${cssVars.default['base-bg-card']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`
       : undefined,
 
     '--card-fg-color': cssVars.default['text-primary'],
@@ -114,10 +114,10 @@ export function _colorVarStyleDisabled(checkered = false): CSSObject {
     [mutableCardVariables['fg-color']]: cssVars.primary['text-inactive'],
     [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-inactive'],
     [mutableCardVariables['icon-color']]: cssVars.primary['border-base'],
-    [mutableCardVariables['accent-color']]: cssVars.primary['card-base-bg'],
+    [mutableCardVariables['accent-color']]: cssVars.primary['base-bg-card'],
     [mutableCardVariables['bg-color']]: cssVars.primary['bg-tint'],
     [mutableCardVariables['bg-image']]: checkered
-      ? `repeating-conic-gradient(${cssVars.default['card-base-bg']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`
+      ? `repeating-conic-gradient(${cssVars.default['base-bg-card']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`
       : undefined,
   }
 }
@@ -126,8 +126,8 @@ export function _colorVarStyleSelected(): CSSObject {
   return {
     [mutableCardVariables['bg-color']]: cssVars.default['bg-accent'],
     [mutableCardVariables['fg-color']]: cssVars.default['bg-base'],
-    [mutableCardVariables['muted-fg-color']]: cssVars.default['card-base-bg'],
-    [mutableCardVariables['accent-color']]: cssVars.default['card-base-bg'],
+    [mutableCardVariables['muted-fg-color']]: cssVars.default['base-bg-card'],
+    [mutableCardVariables['accent-color']]: cssVars.default['base-bg-card'],
   }
 }
 

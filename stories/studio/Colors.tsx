@@ -19,7 +19,7 @@ export function Colors(): ReactNode {
   return (
     <ThemeProvider theme={studioTheme}>
       <Stack space={5}>
-        <Card scheme="light" padding={3} radius={3}>
+        <Card padding={3} radius={3}>
           <Stack space={3}>
             <Text size={0} weight="medium" muted>
               LIGHT MODE

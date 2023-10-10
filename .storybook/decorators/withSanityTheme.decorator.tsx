@@ -10,7 +10,7 @@ const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = Decora
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${cssVars.default['card-base-bg']};
+    background-color: ${cssVars.default['base-bg-card']};
   }
 `
 

@@ -15,7 +15,7 @@ export const createCssVars = (
   tones: Record<ThemeColorName, ColorTints>,
   defaultTone: ThemeColorName = 'default',
 ): Record<string, string> => {
-  const baseBg = getColorHex(tones[defaultTone], scheme === 'dark', defaultTone, 'card-base-bg')
+  const baseBg = getColorHex(tones[defaultTone], scheme === 'dark', defaultTone, 'base-bg-card')
   const tonesVars = createTonesVariables(scheme, tones, defaultTone, baseBg)
   const spotVars = createSpotVars(scheme, baseBg)
   const syntaxVars = createSyntaxVariables(scheme, baseBg)

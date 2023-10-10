@@ -29,9 +29,10 @@ export const createTonesVariables = (
     })
   })
 
-  // Overrides when defaultTone is not default
+  // If we are changing the default tone, we need to update the bg-base to match with the new base bg color.
+  // As components are using this bg-base for the background color, and it needs to match with the card bg color.
   if (defaultTone !== 'default') {
-    tonesVariables[getToneCssVar('default', 'bg-base')] = baseBg
+    tonesVariables[getToneCssVar('default', 'bg-base')] = tonesCssVariables.default['base-bg-card']
   }
 
   return tonesVariables

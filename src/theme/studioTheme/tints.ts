@@ -12,6 +12,7 @@ export const colorKeys = [
   'text-primary',
   'text-secondary',
   'text-inactive',
+  // TODO: Can this be replaced by other of the text colors? It's used by the code html element if it's inside a text
   'text-code',
   'text-muted',
   'bg-base',
@@ -21,7 +22,7 @@ export const colorKeys = [
   'bg-accent-hover',
   'bg-accent-active',
   'bg-tint',
-  // TODO: Can we replace this with bg_tint?
+  // TODO: Can we replace this with bg_tint?  It's used by the code html element if it's inside a text
   'bg-tint-code',
 
   'icon-default',
@@ -30,11 +31,9 @@ export const colorKeys = [
   'border-base-hover',
   'border-accent',
   'border-accent-inverted',
-  'card-base-bg',
-  // TODO: Do we need this, could it be replaced by text-primary ?
-  'card-base-fg',
 
   // Colors starting with -base won't be affected by the mix function
+  'base-bg-card', // This is used by the card when a tone is defined, it will also override the bg-base in the rest of the components.
   'base-shadow-outline-color',
   'base-shadow-umbra-color',
   'base-shadow-penumbra-color',
@@ -91,10 +90,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       type: 'colorValue',
       value: white,
     },
-    'card-base-bg': '50',
-
-    'card-base-fg': '900',
-
+    'base-bg-card': '50',
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',
@@ -115,7 +111,7 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       tint: '500',
       opacity: 0.12,
     },
-    'skeleton-from': '50',
+    'skeleton-from': '100',
     'skeleton-to': {
       type: 'colorWithOpacity',
       tint: '50',
@@ -142,8 +138,8 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'border-base-hover': '700',
     'border-accent': '300',
     'border-accent-inverted': {type: 'colorValue', value: hues.gray[900]},
-    'card-base-bg': '950',
-    'card-base-fg': '100',
+    'base-bg-card': '950',
+
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',
@@ -180,7 +176,7 @@ export const colorTints: Record<
   light: {
     default: {
       ...defaultTints.light,
-      'card-base-bg': {type: 'colorValue', value: white},
+      'base-bg-card': {type: 'colorValue', value: white},
       'bg-accent': '900',
       'bg-accent-hover': '950',
       'bg-accent-active': {type: 'colorValue', value: black},
@@ -209,7 +205,7 @@ export const colorTints: Record<
   dark: {
     default: {
       ...defaultTints.dark,
-      'card-base-bg': {type: 'colorValue', value: black},
+      'base-bg-card': {type: 'colorValue', value: black},
       'text-primary': {type: 'colorValue', value: white},
       'bg-accent': {type: 'colorValue', value: white},
       'bg-accent-hover': '50',
