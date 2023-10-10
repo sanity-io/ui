@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.2](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2023-10-10)
+
+### Bug Fixes
+
+- **theme:** re-introduce base focusRing value and mark as deprecated ([#1162](https://github.com/sanity-io/ui/issues/1162)) ([d38b6b5](https://github.com/sanity-io/ui/commit/d38b6b58b4d20f3a7412a81cb8f83b76f76d413f))
+
 ## [2.0.0-alpha.1](https://github.com/sanity-io/ui/compare/v1.8.2...v2.0.0-alpha.1) (2023-10-10)
 
 ### ⚠ BREAKING CHANGES
