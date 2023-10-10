@@ -1,102 +1,17 @@
 {
+  "private": true,
   "type": "module",
-  "name": "@sanity/color",
-  "version": "3.0.0-beta.2",
-  "description": "The Sanity color palette.",
-  "sideEffects": false,
-  "types": "./dist/index.d.ts",
-  "source": "./src/index.ts",
-  "module": "./dist/index.js",
-  "main": "./dist/index.cjs",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "source": "./src/index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
   "scripts": {
-    "build": "rimraf dist && run-s generate pkg:build pkg:check",
-    "clean": "rimraf dist",
-    "commit": "cz",
-    "dev": "run-p workshop:dev",
-    "format": "prettier --write --cache --ignore-unknown .",
-    "generate": "node -r esbuild-register scripts/generate.ts",
-    "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
-    "pkg:build": "pkg build --strict",
-    "pkg:check": "pkg --strict",
-    "pkg:watch": "pkg watch --strict",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "format": "prettier --cache --write .",
+    "lint": "turbo run lint",
+    "lint:fix": "pnpm lint -- --fix",
     "prepare": "husky install",
-    "prepublishOnly": "pnpm build",
-    "release": "semantic-release",
-    "test": "run-s ts:check vitest:run",
-    "ts:check": "tsc --build",
-    "watch": "run-p pkg:watch",
-    "vitest:run": "vitest run",
-    "workshop:build": "workshop build",
-    "workshop:dev": "workshop dev"
+    "preview": "turbo run preview",
+    "test": "turbo run test",
+    "watch": "turbo run watch"
   },
-  "devDependencies": {
-    "@commitlint/cli": "^17.7.2",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@sanity/icons": "^2.5.0",
-    "@sanity/pkg-utils": "^3.0.0",
-    "@sanity/semantic-release-preset": "^4.1.4",
-    "@sanity/ui": "^1.8.2",
-    "@sanity/ui-workshop": "^1.2.11",
-    "@types/node": "^20.8.4",
-    "@types/react": "^18.2.27",
-    "@types/react-dom": "^18.2.12",
-    "@types/styled-components": "^5.1.28",
-    "@typescript-eslint/eslint-plugin": "^6.7.5",
-    "@typescript-eslint/parser": "^6.7.5",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "esbuild": "^0.19.4",
-    "esbuild-register": "^3.5.0",
-    "eslint": "^8.51.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-prettier": "^5.0.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "npm-run-all": "^4.1.5",
-    "polished": "^4.2.2",
-    "prettier": "^3.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "rimraf": "^5.0.5",
-    "semantic-release": "^21.1.2",
-    "styled-components": "^6.0.8",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/color.git"
-  },
-  "keywords": [
-    "sanity",
-    "color",
-    "palette"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sanity-io/color/issues"
-  },
-  "homepage": "https://www.sanity.io/",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -107,23 +22,26 @@
       "prettier --write --cache --ignore-unknown"
     ]
   },
-  "packageManager": "pnpm@8.8.0",
-  "publishConfig": {
-    "access": "public"
+  "prettier": {
+    "bracketSpacing": false,
+    "plugins": [
+      "prettier-plugin-packagejson"
+    ],
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true
   },
-  "release": {
-    "extends": "@sanity/semantic-release-preset",
-    "branches": [
-      "+([0-9])?(.{+([0-9]),x}).x",
-      "main",
-      {
-        "name": "beta",
-        "prerelease": true
-      },
-      {
-        "name": "alpha",
-        "prerelease": true
-      }
-    ]
-  }
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@sanity/pkg-utils": "^3.0.0",
+    "commitlint": "^17.7.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-packagejson": "^2.4.6",
+    "syncpack": "^11.2.1",
+    "turbo": "^1.10.15"
+  },
+  "packageManager": "pnpm@8.8.0"
 }

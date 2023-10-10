@@ -1,0 +1,46 @@
+---
+name: Fix linting issues
+
+on:
+  push:
+    branches:
+      - main
+      - alpha
+      - beta
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  run:
+    name: Are there issues that linters can fix? 🤔
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          cache: pnpm
+          node-version: lts/*
+      - run: pnpm install --ignore-scripts
+      - run: git restore pnpm-lock.yaml
+      - run: pnpm lint:fix
+      - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.ECOSPARK_APP_ID }}
+          private_key: ${{ secrets.ECOSPARK_APP_PRIVATE_KEY }}
+      - uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # v5
+        with:
+          author: github-actions <41898282+github-actions[bot]@users.noreply.github.com>
+          body: I ran `pnpm lint:fix` 🧑‍💻
+          branch: actions/lint-fix
+          commit-message: 'chore(lint): --fix 🤖 ✨'
+          labels: 🤖 bot
+          title: 'chore(lint): --fix 🤖 ✨'
+          token: ${{ steps.generate-token.outputs.token }}

@@ -1,8 +1,9 @@
+*.log
+*.tgz
+
 .DS_Store
+.turbo
+.vercel
 .workshop
 dist
 node_modules
-
-/*.log
-/*.tgz
-/.workshop

@@ -1,0 +1,115 @@
+{
+  "name": "@sanity/color",
+  "version": "3.0.0-beta.2",
+  "description": "The Sanity color palette.",
+  "keywords": [
+    "sanity",
+    "color",
+    "palette"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/color/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/color.git"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rimraf dist && run-s generate pkg:build pkg:check",
+    "clean": "rimraf dist",
+    "commit": "cz",
+    "dev": "run-p workshop:dev",
+    "format": "prettier --write --cache --ignore-unknown .",
+    "generate": "node -r esbuild-register scripts/generate.ts",
+    "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
+    "pkg:build": "pkg build --strict",
+    "pkg:check": "pkg --strict",
+    "pkg:watch": "pkg watch --strict",
+    "prepublishOnly": "pnpm build",
+    "release": "semantic-release",
+    "test": "run-s ts:check vitest:run",
+    "ts:check": "tsc --build",
+    "watch": "run-p pkg:watch",
+    "vitest:run": "vitest run",
+    "workshop:build": "workshop build",
+    "workshop:dev": "workshop dev"
+  },
+  "release": {
+    "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "main",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
+    "extends": "@sanity/semantic-release-preset"
+  },
+  "devDependencies": {
+    "@sanity/icons": "^2.5.0",
+    "@sanity/pkg-utils": "^3.0.0",
+    "@sanity/semantic-release-preset": "^4.1.4",
+    "@sanity/ui": "^1.8.2",
+    "@sanity/ui-workshop": "^1.2.11",
+    "@types/node": "^20.8.4",
+    "@types/react": "^18.2.27",
+    "@types/react-dom": "^18.2.12",
+    "@types/styled-components": "^5.1.28",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "esbuild": "^0.19.4",
+    "esbuild-register": "^3.5.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "npm-run-all": "^4.1.5",
+    "polished": "^4.2.2",
+    "prettier": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "semantic-release": "^21.1.2",
+    "styled-components": "^6.0.8",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
