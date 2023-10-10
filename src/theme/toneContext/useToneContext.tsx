@@ -12,11 +12,7 @@ export function useToneContext(): ToneContextValue {
   const value: unknown = useContext(ToneContext)
 
   if (!value) {
-    return {
-      scheme: 'light',
-      tone: 'default',
-      version: 0.0,
-    }
+    throw new Error('useToneContext(): missing context value')
   }
 
   // NOTE: This check is for future-compatiblity
