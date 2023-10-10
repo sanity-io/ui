@@ -2,6 +2,7 @@ import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
 import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
+import {matrixBuilder} from '../helpers/matrixBuilder'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Card> = {
@@ -194,7 +195,7 @@ export const Tones: Story = {
     },
   },
   render: (props) => (
-    <Stack space={3}>
+    <>
       {rowBuilder({
         renderItem: ({value}) => (
           <Card {...props} key={value} tone={value}>
@@ -203,30 +204,56 @@ export const Tones: Story = {
         ),
         rows: CARD_TONES,
       })}
-      {rowBuilder({
-        renderItem: ({value}) => (
-          <Card {...props} key={value} tone={value} selected={false} as="button">
-            <Text>Enabled button</Text>
-          </Card>
-        ),
-        rows: CARD_TONES,
-      })}
+    </>
+  ),
+}
 
-      {rowBuilder({
-        renderItem: ({value}) => (
-          <Card {...props} key={value} tone={value} disabled as="button">
-            <Text>Disabled button</Text>
+export const MultipleStyles: Story = {
+  args: {
+    radius: 1,
+    shadow: 1,
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
+    },
+  },
+
+  render: (props) => (
+    <Stack space={4}>
+      {matrixBuilder({
+        columns: ['card', 'enabled button', 'disabled button', 'selected button'],
+        rows: CARD_TONES,
+        title: 'State / Tone',
+        renderItem: ({row, column}) => (
+          <Card
+            {...props}
+            key={row + column}
+            as={column !== 'card' ? 'button' : undefined}
+            tone={row}
+            disabled={column === 'disabled button'}
+            selected={column === 'selected button'}
+          >
+            <Text>{column !== 'card' ? 'As <button>' : 'Card'}</Text>
           </Card>
         ),
-        rows: CARD_TONES,
       })}
-      {rowBuilder({
-        renderItem: ({value}) => (
-          <Card {...props} key={value} tone={value} selected as="button">
-            <Text>Selected button</Text>
+      {matrixBuilder({
+        columns: ['card', 'enabled link', 'disabled link', 'selected link'],
+        rows: CARD_TONES,
+        title: 'State / Tone',
+        renderItem: ({row, column}) => (
+          <Card
+            {...props}
+            key={row + column}
+            as={column !== 'card' ? 'a' : undefined}
+            tone={row}
+            disabled={column === 'disabled link'}
+            selected={column === 'selected link'}
+          >
+            <Text>{column !== 'card' ? 'As <a>' : 'Card'}</Text>
           </Card>
         ),
-        rows: CARD_TONES,
       })}
     </Stack>
   ),
