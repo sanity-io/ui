@@ -3,7 +3,7 @@ import {ReactNode} from 'react'
 import styled from 'styled-components'
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/primitives'
 import {mutableCardVariables} from '../../src/styles/colorVars'
-import {ThemeProvider, cssVars, hexToRgb, rgbToHsl, studioTheme} from '../../src/theme'
+import {ThemeProvider, hexToRgb, rgbToHsl, studioTheme} from '../../src/theme'
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)

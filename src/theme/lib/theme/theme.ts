@@ -20,6 +20,11 @@ export interface BaseTheme<
   }
   color: ThemeColorSchemes
   container: number[]
+  /** @deprecated Use component-specific `focusRing` values instead */
+  focusRing: {
+    offset: number
+    width: number
+  }
   fonts: ThemeFonts
   /**
    * THIS API MAY BE UNSTABLE. DO NOT USE IN PRODUCTION.
