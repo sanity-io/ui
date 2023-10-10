@@ -1,0 +1,27 @@
+{
+  "name": "figma-plugin-sanity-color",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Figma plugin for syncing from `@sanity/color` to color variables in Figma.",
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "manifest.json",
+    "src"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && pkg build --strict",
+    "watch": "pkg watch --strict"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.79.0",
+    "@sanity/color": "workspace:*",
+    "@sanity/pkg-utils": "^3.0.0",
+    "typescript": "^5.2.2"
+  }
+}

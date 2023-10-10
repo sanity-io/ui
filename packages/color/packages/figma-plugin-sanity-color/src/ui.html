@@ -1,0 +1,21 @@
+<link
+  rel="stylesheet"
+  href="https://static.figma.com/api/figma-extension-api-0.0.1.css"
+/>
+
+<h2 hidden>Sanity Color</h2>
+
+<div style="display: grid; gap: 0.5em; grid-template-columns: repeat(2, 1fr)">
+  <button id="styles-sync">Sync styles</button>
+  <button id="variables-sync">Sync variables</button>
+</div>
+
+<script>
+  document.getElementById("styles-sync").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "styles:sync" } }, "*");
+  };
+
+  document.getElementById("variables-sync").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "variables:sync" } }, "*");
+  };
+</script>

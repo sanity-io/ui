@@ -138,6 +138,21 @@ importers:
         specifier: ^0.34.6
         version: 0.34.6
 
+  packages/figma-plugin-sanity-color:
+    devDependencies:
+      '@figma/plugin-typings':
+        specifier: ^1.79.0
+        version: 1.79.0
+      '@sanity/color':
+        specifier: workspace:*
+        version: link:../@sanity/color
+      '@sanity/pkg-utils':
+        specifier: ^3.0.0
+        version: 3.0.0(@types/node@20.5.1)(typescript@5.2.2)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -2166,6 +2181,10 @@ packages:
   /@eslint/js@8.51.0:
     resolution: {integrity: sha512-HxjQ8Qn+4SI3/AFv6sOrDB+g6PpUTDwSJiQqOrnneEk8L71161srI9gjzzZvYVbzHiVg/BvcH95+cK/zfIt4pg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@figma/plugin-typings@1.79.0:
+    resolution: {integrity: sha512-Nzi+ShWOs/0IHWQqUwBS4xydglgcgqNEKPSUhTXM+io4o4vSspwpKWy7XBrl5azqqoCozzBa10aPhwXsA+tJfg==}
     dev: true
 
   /@floating-ui/core@1.4.1:

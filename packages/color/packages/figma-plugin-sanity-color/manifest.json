@@ -1,0 +1,8 @@
+{
+  "name": "Sanity Color",
+  "id": "1174998087045912382",
+  "api": "1.0.0",
+  "main": "dist/index.mjs",
+  "editorType": ["figma"],
+  "ui": "src/ui.html"
+}
