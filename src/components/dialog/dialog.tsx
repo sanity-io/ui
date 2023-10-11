@@ -272,12 +272,6 @@ const DialogCard = forwardRef(function DialogCard(
       localContentRef.current = el
       if (typeof contentRef === 'function') contentRef(el)
       else if (contentRef) contentRef.current = el
-
-      if (el) {
-        setIsContentScrollable(el.clientHeight < el.scrollHeight)
-        setHasScrolledFromTop(el.scrollTop > 0)
-        setHasScrolledToBottom(el.scrollTop >= el.scrollHeight - el.clientHeight)
-      }
     },
     [contentRef],
   )
