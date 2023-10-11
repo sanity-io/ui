@@ -1,7 +1,7 @@
 import {ColorTints} from '@sanity/color'
-import {mutableCardVariables} from '../../../../../styles/colorVars'
 import {getColorHex} from '../../../../studioTheme/tints'
 import {ThemeColorName, ThemeColorSchemeKey} from '../types'
+import {cardVariables, mutableVariables} from './cardVariables'
 import {createSpotVars, spotCssVariables} from './spot'
 import {createSyntaxVariables, syntaxCssVariables} from './syntax'
 import {createTonesVariables, tonesCssVariables} from './tones'
@@ -20,25 +20,8 @@ export const createCssVars = (
   const spotVars = createSpotVars(scheme, baseBg)
   const syntaxVars = createSyntaxVariables(scheme, baseBg)
 
-  return {...tonesVars, ...spotVars, ...syntaxVars}
+  return {...tonesVars, ...spotVars, ...syntaxVars, ...cardVariables}
 }
-
-/**
- * @internal
- * This are the only variables that are exposed, as they can be updated and used by other components.
- */
-const mutableVariables: Record<keyof typeof mutableCardVariables, string> = Object.keys(
-  mutableCardVariables,
-).reduce(
-  (acc, key) => {
-    const item = key as keyof typeof mutableCardVariables
-
-    acc[item] = `var(${mutableCardVariables[item]})`
-
-    return acc
-  },
-  {} as Record<keyof typeof mutableCardVariables, string>,
-)
 
 /**
  * @beta
@@ -49,7 +32,7 @@ export const cssVars = {
   syntax: syntaxCssVariables,
   /**
    * This variables are mutable, they can be updated by other components.
-   * The main component that updates them is the card
+   * The main component that updates them is the card, these are the only ones that should be exposed for use from the cards.
    */
   mutable: mutableVariables,
 }

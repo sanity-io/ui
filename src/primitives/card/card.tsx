@@ -40,6 +40,12 @@ export interface CardProps
   pressed?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
+  /**
+   * @internal
+   * Used by the popover, as it creates a new html element that it's ouside of the previous scope of the card.
+   * So if it's inheriting styles from the parent, it needs to create a new cars context
+   */
+  updateCssVars?: boolean
 }
 
 const Root = styled(Box)<
@@ -94,6 +100,7 @@ export const Card = forwardRef(function Card(
     selected,
     shadow,
     tone: toneProp = 'default',
+    updateCssVars = false,
     ...restProps
   } = props
 
@@ -122,7 +129,7 @@ export const Card = forwardRef(function Card(
         $radius={useArrayProp(radius)}
         $shadow={useArrayProp(shadow)}
         $tone={tone}
-        $createNewVars={shouldAddContext}
+        $updateCssVars={updateCssVars || shouldAddContext}
         data-checkered={checkered ? '' : undefined}
         data-pressed={pressed ? '' : undefined}
         data-selected={selected ? '' : undefined}

@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
-import {mutableCardVariables} from '../../styles/colorVars'
 import {
   focusRingBorderStyle,
   focusRingStyle,
@@ -9,6 +8,7 @@ import {
   ResponsiveRadiusStyleProps,
 } from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
+import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
 import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
 

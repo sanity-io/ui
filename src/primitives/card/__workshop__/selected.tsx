@@ -12,7 +12,7 @@ import {
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
-import {mutableCardVariables} from '../../../styles/colorVars'
+import {mutableCardVariables} from '../../../theme/lib/theme/color/cssVariables/cardVariables'
 import {cssVars} from '../../../theme/lib/theme/color/cssVariables/createCssVars'
 
 const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(({

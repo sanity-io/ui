@@ -29,6 +29,7 @@ import {
   Inline,
   KBD,
   Label,
+  Popover,
   Radio,
   Select,
   Spinner,
@@ -75,6 +76,28 @@ const SkeletonComponent = () => (
     </Container>
   </Box>
 )
+
+const PopoverExample = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Popover
+      content={<Text size={2}>I'm a popover with a different tone than my parent card</Text>}
+      padding={4}
+      placement="top"
+      portal
+      open={isOpen}
+      tone="critical"
+    >
+      <Button
+        mode="ghost"
+        padding={[3, 3, 4]}
+        text="Popover! "
+        onClick={() => setIsOpen(!isOpen)}
+      />
+    </Popover>
+  )
+}
 
 export function Tones(): ReactNode {
   const props = {
@@ -179,6 +202,7 @@ export function Tones(): ReactNode {
                       </Menu>
                     }
                   />
+                  <PopoverExample />
                 </Wrapper>
                 <Wrapper title="Avatars">
                   <Flex gap={2} wrap={'wrap'}>

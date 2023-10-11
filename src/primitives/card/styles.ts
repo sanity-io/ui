@@ -5,7 +5,6 @@ import {
   _colorVarStyleDisabled,
   _colorVarStyleHover,
   _colorVarStyleSelected,
-  _colorVarsStyle,
 } from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {createCssVars, cssVars} from '../../theme/lib/theme/color/cssVariables'
@@ -53,16 +52,17 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
 }
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
-  const {$checkered, $focusRing, theme, $tone, $scheme, $createNewVars} = props
+  const {$checkered, $focusRing, theme, $tone, $scheme, $updateCssVars} = props
   const {focusRing} = theme.sanity.card
 
   const border = {width: 0, color: cssVars.positive['border-accent']}
 
   return css`
     /* A new css vars context is created, allowing for override of the default tone and changing the scheme */
-    ${$createNewVars && createCssVars($scheme, theme.sanity.color.tones, $tone)}
+    ${$updateCssVars && createCssVars($scheme, theme.sanity.color.tones, $tone)}
     color-scheme: ${$scheme === 'dark' ? 'dark' : 'light'};
-    ${_colorVarsStyle($checkered)}
+    ${$checkered &&
+    `--card-bg-image: repeating-conic-gradient(${cssVars.default['base-bg-card']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`}
 
     background-color: ${cssVars.mutable['bg-color']};
     color: ${cssVars.default['text-primary']};

@@ -2,8 +2,8 @@ import {COLOR_HUES, ColorTints, ColorTint, black, hues, white} from '@sanity/col
 import {ReactNode} from 'react'
 import styled from 'styled-components'
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/primitives'
-import {mutableCardVariables} from '../../src/styles/colorVars'
 import {ThemeProvider, hexToRgb, rgbToHsl, studioTheme} from '../../src/theme'
+import {mutableCardVariables} from '../../src/theme/lib/theme/color/cssVariables/cardVariables'
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)

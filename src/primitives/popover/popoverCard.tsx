@@ -118,9 +118,10 @@ export const PopoverCard = memo(
         scheme={scheme}
         shadow={shadow}
         sizing="border"
-        style={rootStyle}
         // The popover creates a new html element, so it's out of context of the css variables generated in the cards.
+        updateCssVars
         tone={tone === 'inherit' ? toneContext.tone : tone}
+        style={rootStyle}
       >
         <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
           <Flex direction="column" flex={1} padding={padding}>

@@ -1,7 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {mutableCardVariables} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
+import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
 import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
 import {ButtonMode, ButtonTone} from '../../types'

@@ -1,85 +1,7 @@
 import {cssVars} from '../../theme'
+import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
 import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
 import {CSSObject} from '../../types/styled'
-
-/**
- * @internal
- * This variables can be changed by other components besides the `Card` component itself.
- */
-export const mutableCardVariables = {
-  'bg-color': '--card-bg-color',
-  'muted-fg-color': '--card-muted-fg-color',
-  'icon-color': '--card-icon-color',
-  'fg-color': '--card-fg-color',
-  'bg-image': '--card-bg-image',
-  'accent-color': '--card-accent-fg-color',
-} as const
-
-/**
- * @internal
- * This variables can not be changed by other components, they are here for backwards compatibility.
- * Shouldn't be used inside any component in @sanity/ui
- */
-const legacyFixedVariables = [
-  '--card-shadow-outline-color',
-  '--card-shadow-umbra-color',
-  '--card-shadow-penumbra-color',
-  '--card-shadow-ambient-color',
-  '--card-focus-ring-color',
-  '--card-link-fg-color',
-  '--card-code-bg-color',
-  '--card-code-fg-color',
-  '--card-skeleton-color-from',
-  '--card-skeleton-color-to',
-  '--card-link-color',
-  '--card-hairline-soft-color',
-  '--card-hairline-hard-color',
-  '--card-bg2-color',
-] as const
-
-const allVariables = [...Object.values(mutableCardVariables), ...legacyFixedVariables] as const
-
-type CardCssVariable = (typeof allVariables)[number]
-
-/**
- * @internal
- */
-export function _colorVarsStyle(checkered = false): Record<CardCssVariable, string | undefined> {
-  return {
-    '--card-shadow-outline-color': cssVars.default['base-shadow-outline-color'],
-    '--card-shadow-umbra-color': cssVars.default['base-shadow-umbra-color'],
-    '--card-shadow-penumbra-color': cssVars.default['base-shadow-penumbra-color'],
-    '--card-shadow-ambient-color': cssVars.default['base-shadow-ambient-color'],
-    '--card-focus-ring-color': cssVars.positive['bg-accent'],
-    '--card-icon-color': cssVars.default['icon-default'],
-
-    // Card
-    '--card-bg-color': cssVars.default['bg-base'],
-
-    '--card-bg-image': checkered
-      ? `repeating-conic-gradient(${cssVars.default['base-bg-card']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`
-      : undefined,
-
-    '--card-fg-color': cssVars.default['text-primary'],
-
-    '--card-muted-fg-color': cssVars.default['text-secondary'],
-    '--card-accent-fg-color': cssVars.default['text-accent'],
-    '--card-link-fg-color': cssVars.default['text-link'],
-    '--card-code-bg-color': cssVars.default['bg-tint-code'],
-    '--card-code-fg-color': cssVars.default['text-code'],
-
-    '--card-skeleton-color-from': cssVars.default['skeleton-from'],
-    '--card-skeleton-color-to': cssVars.default['skeleton-to'],
-
-    // @todo: deprecate
-    '--card-link-color': cssVars.default['text-link'],
-    '--card-hairline-soft-color': cssVars.default['border-base'],
-    '--card-hairline-hard-color': cssVars.default['border-base'],
-
-    // Card
-    '--card-bg2-color': cssVars.default['bg-tint'],
-  }
-}
 
 /**
  * @internal
@@ -103,6 +25,10 @@ export function _colorVarStyleDisabled(checkered = false): CSSObject {
   }
 }
 
+/**
+ * @internal
+ * Card overrides in selected states
+ */
 export function _colorVarStyleSelected(): CSSObject {
   return {
     [mutableCardVariables['bg-color']]: cssVars.default['bg-accent'],
@@ -113,12 +39,20 @@ export function _colorVarStyleSelected(): CSSObject {
   }
 }
 
+/**
+ * @internal
+ * Card overrides in hover
+ */
 export function _colorVarStyleHover(): CSSObject {
   return {
     [mutableCardVariables['bg-color']]: cssVars.default['bg-base-hover'],
   }
 }
 
+/**
+ * @internal
+ * Card overrides in active / pressed states
+ */
 export function _colorVarStyleActive(): CSSObject {
   return {
     [mutableCardVariables['bg-color']]: cssVars.default['bg-base-active'],
@@ -127,12 +61,11 @@ export function _colorVarStyleActive(): CSSObject {
 
 /**
  * @internal
- * Selectable , same as card but with different bg-color
+ * Selectable needs to redefine bg-color and fg-color
  */
-export function _selectableVarStyle(): Record<CardCssVariable, string | undefined> {
+export function _selectableVarStyle(): CSSObject {
   return {
-    ..._colorVarsStyle(),
-    [mutableCardVariables['bg-color']]: 'transparent',
+    [mutableCardVariables['bg-color']]: 'inherit',
     [mutableCardVariables['fg-color']]: cssVars.default['text-secondary'],
   }
 }

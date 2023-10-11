@@ -8,5 +8,5 @@ export interface CardStyleProps {
   $focusRing: boolean
   $tone: ThemeColorToneKey
   $scheme: ThemeColorSchemeKey
-  $createNewVars: boolean
+  $updateCssVars: boolean
 }
