@@ -82,8 +82,8 @@ export function _colorVarsStyle(checkered = false): Record<VariablesNames, strin
     '--card-fg-color': cssVars.default['text-primary'],
 
     '--card-muted-fg-color': cssVars.default['text-secondary'],
-    '--card-accent-fg-color': cssVars.card['accent-color'],
-    '--card-link-fg-color': cssVars.card['link-color'],
+    '--card-accent-fg-color': cssVars.card['text-accent-color'],
+    '--card-link-fg-color': cssVars.card['text-link-color'],
     '--card-code-bg-color': cssVars.default['bg-tint-code'],
     '--card-code-fg-color': cssVars.default['text-code'],
 
@@ -91,7 +91,7 @@ export function _colorVarsStyle(checkered = false): Record<VariablesNames, strin
     '--card-skeleton-color-to': cssVars.default['skeleton-to'],
 
     // @todo: deprecate
-    '--card-link-color': cssVars.card['link-color'],
+    '--card-link-color': cssVars.card['text-link-color'],
     '--card-hairline-soft-color': cssVars.default['border-base'],
     '--card-hairline-hard-color': cssVars.default['border-base'],
 
@@ -106,8 +106,8 @@ export function _colorVarsStyle(checkered = false): Record<VariablesNames, strin
  */
 export function _colorVarStyleDisabled(checkered = false): CSSObject {
   return {
-    [getCardCssVariable('link-color')]: cssVars.default['text-secondary'],
-    [getCardCssVariable('accent-color')]: cssVars.default['text-secondary'],
+    [getCardCssVariable('text-link-color')]: cssVars.default['text-secondary'],
+    [getCardCssVariable('text-accent-color')]: cssVars.default['text-secondary'],
     [getToneCssVar('default', 'text-code')]: cssVars.default['text-secondary'],
     [getToneCssVar('default', 'text-primary')]: cssVars.default['text-secondary'],
 

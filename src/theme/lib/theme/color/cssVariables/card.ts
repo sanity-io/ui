@@ -3,16 +3,16 @@ import {hues} from '@sanity/color'
 import {multiply, screen} from '../../../../studioTheme/helpers'
 import {ThemeColorSchemeKey} from '../types'
 
-const cardsVariables = ['link-color', 'accent-color'] as const
+const cardsVariables = ['text-link-color', 'text-accent-color'] as const
 
 const colors: Record<ThemeColorSchemeKey, Record<(typeof cardsVariables)[number], string>> = {
   dark: {
-    'link-color': hues.blue[400].hex,
-    'accent-color': hues.red[400].hex,
+    'text-link-color': hues.blue[400].hex,
+    'text-accent-color': hues.red[400].hex,
   },
   light: {
-    'link-color': hues.blue[600].hex,
-    'accent-color': hues.red[500].hex,
+    'text-link-color': hues.blue[600].hex,
+    'text-accent-color': hues.red[500].hex,
   },
 }
 

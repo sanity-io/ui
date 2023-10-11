@@ -14,7 +14,7 @@ export function labelBaseStyle(
 
     ${$accent &&
     css`
-      color: ${cssVars.card['accent-color']}};
+      color: ${cssVars.card['text-accent-color']}};
     `}
 
     ${$muted &&
