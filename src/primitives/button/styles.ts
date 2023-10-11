@@ -2,7 +2,9 @@ import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {mutableCardVariables} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
+import {getCardCssVariable} from '../../theme/lib/theme/color/cssVariables/card'
 import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
+import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
 import {ButtonMode, ButtonTone} from '../../types'
 import {CSSObject} from '../../types/styled'
 
@@ -79,6 +81,16 @@ export function buttonColorStyles(
         $mode === 'default' ? cssVars[$tone]['icon-inverted'] : cssVars[$tone]['icon-default'],
       [mutableCardVariables['bg-color']]:
         $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-base'],
+
+      // Override the default variables for elements used inside buttons
+      [getToneCssVar('default', 'bg-tint-code')]:
+        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-tint-code'],
+      ...($mode === 'default' && {
+        [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
+        [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
+        [getCardCssVariable('text-link-color')]: cssVars[$tone]['base-text-color'],
+        [getCardCssVariable('text-accent-color')]: cssVars[$tone]['base-text-color'],
+      }),
 
       '&:disabled, &[data-disabled="true"]': {
         /* Updates the variables for the */

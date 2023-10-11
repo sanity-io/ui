@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Button, Card, Flex, Grid, Stack, Text} from '../../src/primitives'
+import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '../../src/primitives'
 import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
@@ -285,4 +285,90 @@ export const MultipleStyles: Story = {
       })}
     </Stack>
   ),
+}
+
+export const MatrixAsButton: Story = {
+  render: () => {
+    return (
+      <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+        <Container>
+          <Grid columns={3} gap={2}>
+            <Box>
+              <Text align="center" size={1} weight="semibold">
+                Enabled
+              </Text>
+              <Stack marginTop={3} space={2}>
+                {CARD_TONES.map((tone) => (
+                  <Card
+                    __unstable_focusRing
+                    as="button"
+                    key={tone}
+                    padding={4}
+                    style={{textAlign: 'center'}}
+                    tone={tone}
+                  >
+                    <Stack space={2}>
+                      <Text weight="semibold">{tone}</Text>
+                      <Text muted>Muted</Text>
+                      <Text accent>Accent</Text>
+                    </Stack>
+                  </Card>
+                ))}
+              </Stack>
+            </Box>
+
+            <Box>
+              <Text align="center" size={1} weight="semibold">
+                Disabled
+              </Text>
+              <Stack marginTop={3} space={2}>
+                {CARD_TONES.map((tone) => (
+                  <Card
+                    __unstable_focusRing
+                    as="button"
+                    disabled
+                    key={tone}
+                    padding={4}
+                    style={{textAlign: 'center'}}
+                    tone={tone}
+                  >
+                    <Stack space={2}>
+                      <Text weight="semibold">{tone}</Text>
+                      <Text muted>Muted</Text>
+                      <Text accent>Accent</Text>
+                    </Stack>
+                  </Card>
+                ))}
+              </Stack>
+            </Box>
+
+            <Box>
+              <Text align="center" size={1} weight="semibold">
+                Selected
+              </Text>
+              <Stack marginTop={3} space={2}>
+                {CARD_TONES.map((tone) => (
+                  <div aria-selected key={tone}>
+                    <Card
+                      __unstable_focusRing
+                      as="button"
+                      padding={4}
+                      style={{textAlign: 'center'}}
+                      tone={tone}
+                    >
+                      <Stack space={2}>
+                        <Text weight="semibold">{tone}</Text>
+                        <Text muted>Muted</Text>
+                        <Text accent>Accent</Text>
+                      </Stack>
+                    </Card>
+                  </div>
+                ))}
+              </Stack>
+            </Box>
+          </Grid>
+        </Container>
+      </Flex>
+    )
+  },
 }
