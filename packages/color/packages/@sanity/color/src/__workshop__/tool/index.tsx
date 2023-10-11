@@ -15,6 +15,8 @@ export default function ToolStory(): ReactElement {
   const red = useBoolean('Red', true)
 
   const showCode = useBoolean('Show code', false)
+  const showAABadges = useBoolean('Show AA badges', false)
+  const showContrast = useBoolean('Show contrast ratio', false)
 
   const visibleHues: ColorHueKey[] = useMemo(
     () =>
@@ -32,5 +34,12 @@ export default function ToolStory(): ReactElement {
     [gray, magenta, purple, blue, cyan, green, yellow, orange, red],
   )
 
-  return <ColorTool showCode={showCode} visibleHues={visibleHues} />
+  return (
+    <ColorTool
+      showAABadges={showAABadges}
+      showCode={showCode}
+      showContrast={showContrast}
+      visibleHues={visibleHues}
+    />
+  )
 }

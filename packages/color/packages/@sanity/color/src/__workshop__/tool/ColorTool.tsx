@@ -55,15 +55,20 @@ function reducer(state: State, msg: ColorToolMsg) {
   return state
 }
 
-export function ColorTool(props: {showCode?: boolean; visibleHues: ColorHueKey[]}): ReactElement {
-  const {showCode, visibleHues} = props
+export function ColorTool(props: {
+  showAABadges?: boolean
+  showCode?: boolean
+  showContrast?: boolean
+  visibleHues: ColorHueKey[]
+}): ReactElement {
+  const {showAABadges, showCode, showContrast, visibleHues} = props
 
   const [state, dispatch] = useReducer(reducer, undefined, buildInitialState)
 
   const code = showCode ? compileCode(state.palette) : ''
 
   return (
-    <Stack padding={4} space={1}>
+    <Stack padding={2} space={1}>
       <Stack space={1}>
         {state.palette
           .filter((t) => visibleHues.includes(t.hue))
@@ -72,6 +77,8 @@ export function ColorTool(props: {showCode?: boolean; visibleHues: ColorHueKey[]
               hue={t.hue}
               dispatch={dispatch}
               key={t.hue}
+              showAABadges={showAABadges}
+              showContrast={showContrast}
               swatches={t.swatches}
             />
           ))}

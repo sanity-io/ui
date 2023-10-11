@@ -9,9 +9,11 @@ import {ColorToolMsg, ColorToolSwatch} from './types'
 export const ColorSwatchesEditor = memo(function ColorSwatchesEditor(props: {
   dispatch: Dispatch<ColorToolMsg>
   hue: ColorHueKey
+  showAABadges?: boolean
+  showContrast?: boolean
   swatches: ColorToolSwatch[]
 }): ReactElement {
-  const {dispatch, hue, swatches} = props
+  const {dispatch, hue, showAABadges, showContrast, swatches} = props
   const [expanded, setExpanded] = useState(false)
   const handleToggle = useCallback(() => setExpanded((prev) => !prev), [])
   const [wrapper, setWrapper] = useState<HTMLDivElement | null>(null)
@@ -23,9 +25,15 @@ export const ColorSwatchesEditor = memo(function ColorSwatchesEditor(props: {
 
   return (
     <div>
-      <Flex gap={1} onClick={handleToggle}>
+      <Flex onClick={handleToggle}>
         {swatches.map((t) => (
-          <ColorPreview expanded={expanded} key={t.key} hsl={t.hsl} />
+          <ColorPreview
+            expanded={expanded}
+            key={t.key}
+            hsl={t.hsl}
+            showAABadges={showAABadges}
+            showContrast={showContrast}
+          />
         ))}
       </Flex>
       <div hidden={!expanded} ref={setWrapper}>
