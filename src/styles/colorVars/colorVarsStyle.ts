@@ -143,3 +143,32 @@ export function _colorVarStyleActive(): CSSObject {
     [mutableCardVariables['bg-color']]: cssVars.default['bg-base-active'],
   }
 }
+
+/**
+ * @internal
+ * selectable styles
+ */
+export function _selectableVarStyle(): Partial<Record<VariablesNames, string | undefined>> {
+  return {
+    ..._colorVarsStyle(),
+    '--card-bg-color': cssVars.default['base-bg-raw'],
+  }
+}
+
+/**
+ * @internal
+ * Selectable overrides in disabled states
+ */
+export function _selectableVarStyleDisabled(): CSSObject {
+  return {
+    [getCardCssVariable('text-link-color')]: cssVars.default['text-secondary'],
+    [getCardCssVariable('text-accent-color')]: cssVars.default['text-secondary'],
+    [getToneCssVar('default', 'text-code')]: cssVars.default['text-secondary'],
+    [getToneCssVar('default', 'text-primary')]: cssVars.default['text-secondary'],
+
+    [mutableCardVariables['fg-color']]: cssVars.primary['text-inactive'],
+    [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-inactive'],
+    [mutableCardVariables['icon-color']]: cssVars.primary['border-base'],
+    [mutableCardVariables['accent-color']]: cssVars.primary['base-bg-card'],
+  }
+}

@@ -34,6 +34,8 @@ export const colorKeys = [
 
   // Colors starting with -base won't be affected by the mix function
   'base-bg-card', // This is used by the card when a tone is defined, it will also override the bg-base in the rest of the components.
+  'base-bg-raw', // This is the same color as bg-base, but it won't be overridden by the card bg color, used in selectable items.
+
   'base-shadow-outline-color',
   'base-shadow-umbra-color',
   'base-shadow-penumbra-color',
@@ -72,8 +74,8 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       type: 'colorTint',
       value: white,
     },
-    'bg-base-hover': '50', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
-    'bg-base-active': '100', // Changed due to the cards bg color, hover won't be noticeable as cards use a hue.50
+    'bg-base-hover': '50',
+    'bg-base-active': '100',
     'bg-accent': '500',
     'bg-accent-hover': '600',
     'bg-accent-active': '700',
@@ -92,8 +94,11 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       value: white,
     },
     'base-bg-card': '50',
+    'base-bg-raw': {
+      type: 'colorTint',
+      value: white,
+    },
     'base-text-color': {type: 'colorTint', value: white},
-
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',
@@ -162,6 +167,10 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
       type: 'colorWithOpacity',
       tint: '900',
       opacity: 0.24,
+    },
+    'base-bg-raw': {
+      type: 'colorTint',
+      value: black,
     },
     'skeleton-from': '900',
     'skeleton-to': {

@@ -2,14 +2,14 @@ import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {
   _colorVarStyleActive,
-  _colorVarStyleDisabled,
   _colorVarStyleHover,
   _colorVarStyleSelected,
-  _colorVarsStyle,
+  _selectableVarStyle,
+  _selectableVarStyleDisabled,
   cardCssVariables,
 } from '../../styles/colorVars'
 
-import {ThemeColorSchemeKey, ThemeColorToneKey, createCssVars} from '../../theme'
+import {ThemeColorSchemeKey, ThemeColorToneKey, createCssVars, cssVars} from '../../theme'
 
 /**
  * @internal
@@ -48,16 +48,17 @@ export function selectableColorStyle(
 
   return css`
     ${$tone !== 'default' && createCssVars($scheme, theme.sanity.color.tones, $tone)}
-    ${_colorVarsStyle()}
+    ${_selectableVarStyle()}
 
     background-color:  ${cardCssVariables['bg-color']};
-    color: ${cardCssVariables['fg-color']};
+    color: ${cssVars[$tone]['text-secondary']};
+    --card-fg-color: ${cssVars.default['text-secondary']};
     outline: none;
 
     /* &:is(button) - Looks like a button in default mode */
     &[data-as='button'] {
       &:disabled {
-        ${_colorVarStyleDisabled()}
+        ${_selectableVarStyleDisabled()}
       }
 
       &:not(:disabled) {
@@ -88,7 +89,7 @@ export function selectableColorStyle(
     /* &:is(a) */
     &[data-as='a'] {
       &[data-disabled] {
-        ${_colorVarStyleDisabled()}
+        ${_selectableVarStyleDisabled()}
       }
 
       &:not([data-disabled]) {
