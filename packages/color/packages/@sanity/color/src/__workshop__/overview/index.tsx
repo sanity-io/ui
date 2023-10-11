@@ -1,10 +1,13 @@
-import {Box, Card, Code, Flex, Grid, Heading, Stack, useToast} from '@sanity/ui'
-import {ReactElement, useCallback} from 'react'
+import {Box, Card, Code, Flex, Grid, Heading, Stack, Text, useToast} from '@sanity/ui'
+import {getContrast} from 'polished'
+import {ReactElement, useCallback, useMemo} from 'react'
 import styled from 'styled-components'
-import {color} from '../color'
-import {COLOR_HUES} from '../constants'
-import {hexToRgb, rgbToHsl} from '../lib/convert'
-import {ColorTints, ColorTint} from '../types'
+import {color} from '../../color'
+import {COLOR_HUES} from '../../constants'
+import {hexToRgb, rgbToHsl} from '../../lib/convert'
+import {ColorTints, ColorTint} from '../../types'
+
+const AA_CONTRAST_THRESHOLD = 4.5
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -71,6 +74,14 @@ function ColorTintPreview(props: {tint: ColorTint}) {
   const hsl = rgbToHsl(hexToRgb(tint.hex))
   const {push: pushToast} = useToast()
 
+  const contrast = useMemo(
+    () => ({
+      dark: getContrast(tint.hex, color.black.hex),
+      light: getContrast(tint.hex, color.white.hex),
+    }),
+    [tint.hex],
+  )
+
   const handleClick = useCallback(() => {
     clipboard
       .write(tint.hex)
@@ -93,6 +104,9 @@ function ColorTintPreview(props: {tint: ColorTint}) {
       })
   }, [pushToast, tint])
 
+  const darkAA = AA_CONTRAST_THRESHOLD <= contrast.dark
+  const lightAA = AA_CONTRAST_THRESHOLD <= contrast.light
+
   return (
     <ColorCard
       $bg={tint.hex}
@@ -104,10 +118,35 @@ function ColorTintPreview(props: {tint: ColorTint}) {
     >
       <Flex padding={3}>
         <Box flex={1}>
-          <Code size={1} style={{color: 'inherit'}}>
-            {tint.title}
-          </Code>
+          <Flex gap={2}>
+            <Box flex="none">
+              <Code size={1} style={{color: 'inherit'}}>
+                {tint.title}
+              </Code>
+            </Box>
+
+            {(darkAA || lightAA) && (
+              <Flex gap={1}>
+                {darkAA && (
+                  <Card padding={1} radius={1} scheme="dark" style={{margin: '-3px 0'}}>
+                    <Text size={0} weight="bold">
+                      AA &middot; {contrast.dark.toFixed(1)}:1
+                    </Text>
+                  </Card>
+                )}
+
+                {lightAA && (
+                  <Card padding={1} radius={1} scheme="light" style={{margin: '-3px 0'}}>
+                    <Text size={0} weight="bold">
+                      AA &middot; {contrast.light.toFixed(1)}:1
+                    </Text>
+                  </Card>
+                )}
+              </Flex>
+            )}
+          </Flex>
         </Box>
+
         <Box>
           <Code size={1} style={{color: 'inherit'}}>
             {tint.hex}

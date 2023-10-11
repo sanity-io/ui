@@ -1,26 +1,24 @@
 import {Flex} from '@sanity/ui'
-import {memo, ReactElement, useCallback, useState} from 'react'
+import {Dispatch, memo, ReactElement, useCallback, useState} from 'react'
 import {ColorHueKey, ColorTintKey, HSL} from '../../types'
 import {ColorPreview} from './ColorPreview'
 import {Connectors} from './Connectors'
 import {SwatchSlider} from './SwatchSlider'
-import {ColorToolSwatch} from './types'
+import {ColorToolMsg, ColorToolSwatch} from './types'
 
 export const ColorSwatchesEditor = memo(function ColorSwatchesEditor(props: {
+  dispatch: Dispatch<ColorToolMsg>
   hue: ColorHueKey
   swatches: ColorToolSwatch[]
-  updateSwatch: (hue: ColorHueKey, tint: ColorTintKey, hsl: HSL) => void
 }): ReactElement {
-  const {hue, swatches, updateSwatch} = props
+  const {dispatch, hue, swatches} = props
   const [expanded, setExpanded] = useState(false)
   const handleToggle = useCallback(() => setExpanded((prev) => !prev), [])
   const [wrapper, setWrapper] = useState<HTMLDivElement | null>(null)
 
   const _updateSwatch = useCallback(
-    (tint: ColorTintKey, hsl: HSL) => {
-      updateSwatch(hue, tint, hsl)
-    },
-    [hue, updateSwatch],
+    (tint: ColorTintKey, hsl: HSL) => dispatch({type: 'swatch/update', hue, tint, hsl}),
+    [dispatch, hue],
   )
 
   return (

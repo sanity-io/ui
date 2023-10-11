@@ -1,6 +1,6 @@
 import {memo, useCallback} from 'react'
 import {ColorTintKey, HSL} from '../../types'
-import {HSLSlider} from './Slider'
+import {HSLSlider} from './HSLSlider'
 import {ColorToolSwatch} from './types'
 
 export const SwatchSlider = memo(function SwatchSlider(props: {
@@ -12,5 +12,5 @@ export const SwatchSlider = memo(function SwatchSlider(props: {
 
   const handleChange = useCallback((hsl: HSL) => updateSwatch(tint, hsl), [updateSwatch, tint])
 
-  return <HSLSlider onHSLChange={handleChange} value={swatch.hsl} />
+  return <HSLSlider onChange={handleChange} value={swatch.hsl} />
 })

@@ -1,20 +1,32 @@
 import {RefObject, useEffect, useRef, useState} from 'react'
 import {SLIDER_H} from './constants'
 
+function calcValueFromTop(min: number, max: number, top: number) {
+  return Math.round((top / SLIDER_H) * (max - min))
+}
+
+function calcTopFromValue(min: number, max: number, value: number) {
+  return (value / (max - min)) * SLIDER_H
+}
+
 export function useHandle(props: {
+  onChange?: (value: number) => void
+  onEnd?: () => void
+  onStart?: () => void
   propValue: number
   wrapperRef: RefObject<HTMLDivElement>
   min: number
   max: number
-}): {ref: RefObject<HTMLButtonElement>; top: number; value: number} {
-  const {min, max, propValue, wrapperRef} = props
+}): {
+  ref: RefObject<HTMLButtonElement>
+  top: number
+} {
+  const {min, max, onChange, onEnd, onStart, propValue, wrapperRef} = props
   const ref = useRef<HTMLButtonElement>(null)
-  const [value, setValue] = useState(propValue)
-  const [top, setTop] = useState((propValue / (max - min)) * SLIDER_H)
+  const [top, setTop] = useState(() => (propValue / (max - min)) * SLIDER_H)
 
-  useEffect(() => {
-    setTop((propValue / (max - min)) * SLIDER_H)
-  }, [max, min, propValue])
+  // update `top` when props change
+  useEffect(() => setTop(calcTopFromValue(min, max, propValue)), [max, min, propValue])
 
   useEffect(() => {
     const wrapper = wrapperRef.current
@@ -28,23 +40,33 @@ export function useHandle(props: {
       if (!handle) return
       if (!wrapper) return
 
+      onStart?.()
+
       handle.focus()
 
       let scrollY = window.scrollY
 
       offsetTop = wrapper.offsetTop
 
-      setTop(Math.min(Math.max(event.clientY - offsetTop + scrollY - 6, 0), SLIDER_H))
+      const nextTop = Math.min(Math.max(event.clientY - offsetTop + scrollY - 6, 0), SLIDER_H)
+
+      setTop(nextTop)
+      onChange?.(calcValueFromTop(min, max, nextTop))
 
       function handleMouseMove(moveEvent: MouseEvent) {
         scrollY = window.scrollY
         moveEvent.preventDefault()
-        setTop(Math.min(Math.max(moveEvent.clientY - offsetTop + scrollY - 6, 0), SLIDER_H))
+        const nextTop = Math.min(Math.max(moveEvent.clientY - offsetTop + scrollY - 6, 0), SLIDER_H)
+
+        setTop(nextTop)
+        onChange?.(calcValueFromTop(min, max, nextTop))
       }
 
       function handleMouseUp() {
         window.removeEventListener('mousemove', handleMouseMove)
         window.removeEventListener('mouseup', handleMouseUp)
+
+        onEnd?.()
       }
 
       window.addEventListener('mousemove', handleMouseMove)
@@ -54,12 +76,24 @@ export function useHandle(props: {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'ArrowDown') {
         event.preventDefault()
-        setTop((prev) => Math.min(prev + 1, SLIDER_H))
+        setTop((prev) => {
+          const nextTop = Math.min(prev + 1, SLIDER_H)
+
+          onChange?.(calcValueFromTop(min, max, nextTop))
+
+          return nextTop
+        })
       }
 
       if (event.key === 'ArrowUp') {
         event.preventDefault()
-        setTop((prev) => Math.max(prev - 1, 0))
+        setTop((prev) => {
+          const nextTop = Math.max(prev - 1, 0)
+
+          onChange?.(calcValueFromTop(min, max, nextTop))
+
+          return nextTop
+        })
       }
     }
 
@@ -70,11 +104,7 @@ export function useHandle(props: {
       handle?.removeEventListener('mousedown', handleMouseDown)
       handle?.removeEventListener('keydown', handleKeyDown)
     }
-  }, [min, max, wrapperRef])
+  }, [min, max, onEnd, onStart, wrapperRef])
 
-  useEffect(() => {
-    setValue(Math.round((top / SLIDER_H) * (max - min)))
-  }, [max, min, top])
-
-  return {ref, top, value}
+  return {ref, top}
 }
