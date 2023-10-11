@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.4](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.3...v2.0.0-alpha.4) (2023-10-11)
+
+### Features
+
+- **dialog:** update styles and add corresponding stories ([#1155](https://github.com/sanity-io/ui/issues/1155)) ([d4d798b](https://github.com/sanity-io/ui/commit/d4d798b23ac35b50ec48e82fdf404e93c33a6bfa)), closes [#1156](https://github.com/sanity-io/ui/issues/1156) [#1161](https://github.com/sanity-io/ui/issues/1161)
+
 ## [2.0.0-alpha.3](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2023-10-11)
 
 ### Bug Fixes
