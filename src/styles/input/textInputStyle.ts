@@ -177,7 +177,7 @@ export function textInputRepresentationStyle(
     *:not(:disabled):focus + & {
       &[data-border] {
         --input-box-shadow: ${focusRingStyle({
-          border: {color: cssVars.positive['border-base'], width: input.border.width},
+          border: {color: cssVars[$tone]['border-base'], width: input.border.width},
           focusRing,
         })};
       }
