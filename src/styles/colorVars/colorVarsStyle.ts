@@ -40,25 +40,7 @@ const legacyFixedVariables = [
 
 const allVariables = [...Object.values(mutableCardVariables), ...legacyFixedVariables] as const
 
-type CardVariable = keyof typeof mutableCardVariables
 type VariablesNames = (typeof allVariables)[number]
-
-/**
- * @internal
- * This are the only variables that are exposed, as they can be updated and used by other components.
- */
-export const cardCssVariables: Record<CardVariable, string> = Object.keys(
-  mutableCardVariables,
-).reduce(
-  (acc, key) => {
-    const item = key as CardVariable
-
-    acc[item] = `var(${mutableCardVariables[item]})`
-
-    return acc
-  },
-  {} as Record<CardVariable, string>,
-)
 
 /**
  * @internal

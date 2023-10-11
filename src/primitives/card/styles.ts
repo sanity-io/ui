@@ -6,7 +6,6 @@ import {
   _colorVarStyleHover,
   _colorVarStyleSelected,
   _colorVarsStyle,
-  cardCssVariables,
 } from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {createCssVars, cssVars} from '../../theme/lib/theme/color/cssVariables'
@@ -27,7 +26,7 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
     css`
       background-size: ${space[3]}px ${space[3]}px;
       background-position: 50% 50%;
-      background-image: ${cardCssVariables['bg-image']};
+      background-image: ${cssVars.mutable['bg-image']};
     `}
 
     &[data-as='button'] {
@@ -66,7 +65,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
 
     ${_colorVarsStyle($checkered)}
 
-    background-color: ${cardCssVariables['bg-color']};
+    background-color: ${cssVars.mutable['bg-color']};
     color: ${cssVars.default['text-primary']};
 
     /* &:is(button) */

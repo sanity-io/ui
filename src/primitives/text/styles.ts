@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {cardCssVariables} from '../../styles/colorVars'
 import {cssVars} from '../../theme'
 
 export function textBaseStyle(
@@ -10,7 +9,7 @@ export function textBaseStyle(
   const {weights} = theme.sanity.fonts.text
 
   return css`
-    color: ${cardCssVariables['fg-color']};
+    color: ${cssVars.mutable['fg-color']};
 
     ${$accent &&
     css`
@@ -19,7 +18,7 @@ export function textBaseStyle(
 
     ${$muted &&
     css`
-      color: ${cardCssVariables['muted-fg-color']};
+      color: ${cssVars.mutable['muted-fg-color']};
     `}
 
     & code {
@@ -43,7 +42,7 @@ export function textBaseStyle(
 
       &:focus {
         box-shadow:
-          0 0 0 1px ${cardCssVariables['bg-color']},
+          0 0 0 1px ${cssVars.mutable['bg-color']},
           0 0 0 3px ${cssVars.positive['border-accent']};
       }
 
@@ -64,7 +63,7 @@ export function textBaseStyle(
 
     & [data-sanity-icon] {
       vertical-align: baseline;
-      color: ${cardCssVariables['icon-color']};
+      color: ${cssVars.mutable['icon-color']};
     }
   `
 }

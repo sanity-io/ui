@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {cardCssVariables} from '../../styles/colorVars'
 import {cssVars} from '../../theme'
 
 export function labelBaseStyle(
@@ -19,7 +18,7 @@ export function labelBaseStyle(
 
     ${$muted &&
     css`
-      color: ${cardCssVariables['muted-fg-color']};
+      color: ${cssVars.mutable['muted-fg-color']};
     `}
 
     & code {

@@ -5,8 +5,8 @@ import {
   _colorVarStyleActive,
   _colorVarStyleHover,
   _colorVarStyleSelected,
-  cardCssVariables,
 } from '../../styles/colorVars'
+import {cssVars} from '../../theme'
 
 export function treeItemRootStyle(): ReturnType<typeof css> {
   return css`
@@ -42,7 +42,7 @@ export function treeItemRootColorStyle(): ReturnType<typeof css> {
       & > [role='treeitem'] {
         ${_colorVarsStyle()}
 
-        background-color:${cardCssVariables['bg-color']};
+        background-color:${cssVars.mutable['bg-color']};
         color: var(--treeitem-fg-color);
       }
 
@@ -66,8 +66,8 @@ export function treeItemRootColorStyle(): ReturnType<typeof css> {
       & > [data-ui='TreeItem__box'] {
         ${_colorVarsStyle()}
 
-        background-color:${cardCssVariables['bg-color']};
-        color: ${cardCssVariables['fg-color']};
+        background-color:${cssVars.mutable['bg-color']};
+        color: ${cssVars.mutable['fg-color']};
       }
 
       &[data-selected] > [data-ui='TreeItem__box'] {

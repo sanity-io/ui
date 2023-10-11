@@ -2,7 +2,7 @@ import {css} from 'styled-components'
 import {ThemeColorToneKey, ThemeFontWeightKey} from '../../theme'
 import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
-import {cardCssVariables, mutableCardVariables} from '../colorVars'
+import {mutableCardVariables} from '../colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -141,7 +141,7 @@ export function textInputRepresentationStyle(
     pointer-events: none;
     z-index: 0;
 
-    background-color: ${cardCssVariables['bg-color']};
+    background-color: ${cssVars.mutable['bg-color']};
     box-shadow: var(--input-box-shadow);
 
     border-top-left-radius: ${$hasPrefix ? 0 : undefined};

@@ -3,9 +3,8 @@ import {isValidElementType} from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
-import {cardCssVariables} from '../../styles/colorVars'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {useTheme} from '../../theme'
+import {cssVars, useTheme} from '../../theme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
@@ -50,7 +49,7 @@ const LoadingBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${cardCssVariables['bg-color']};
+  background-color: ${cssVars.mutable['bg-color']};
   border-radius: inherit;
   z-index: 1;
   box-shadow: inherit;

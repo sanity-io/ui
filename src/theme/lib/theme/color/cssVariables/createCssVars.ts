@@ -1,4 +1,5 @@
 import {ColorTints} from '@sanity/color'
+import {mutableCardVariables} from '../../../../../styles/colorVars'
 import {getColorHex} from '../../../../studioTheme/tints'
 import {ThemeColorName, ThemeColorSchemeKey} from '../types'
 import {cardCssVariables, createCardVariables} from './card'
@@ -25,6 +26,23 @@ export const createCssVars = (
 }
 
 /**
+ * @internal
+ * This are the only variables that are exposed, as they can be updated and used by other components.
+ */
+const mutableVariables: Record<keyof typeof mutableCardVariables, string> = Object.keys(
+  mutableCardVariables,
+).reduce(
+  (acc, key) => {
+    const item = key as keyof typeof mutableCardVariables
+
+    acc[item] = `var(${mutableCardVariables[item]})`
+
+    return acc
+  },
+  {} as Record<keyof typeof mutableCardVariables, string>,
+)
+
+/**
  * @beta
  */
 export const cssVars = {
@@ -32,4 +50,9 @@ export const cssVars = {
   spot: spotCssVariables,
   syntax: syntaxCssVariables,
   card: cardCssVariables,
+  /**
+   * This variables are mutable, they can be updated by other components.
+   * The main component that updates them is the card
+   */
+  mutable: mutableVariables,
 }

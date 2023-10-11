@@ -6,7 +6,6 @@ import {
   _colorVarStyleSelected,
   _selectableVarStyle,
   _selectableVarStyleDisabled,
-  cardCssVariables,
 } from '../../styles/colorVars'
 
 import {ThemeColorSchemeKey, ThemeColorToneKey, createCssVars, cssVars} from '../../theme'
@@ -50,7 +49,7 @@ export function selectableColorStyle(
     ${$tone !== 'default' && createCssVars($scheme, theme.sanity.color.tones, $tone)}
     ${_selectableVarStyle()}
 
-    background-color: ${cardCssVariables['bg-color']};
+    background-color: ${cssVars.mutable['bg-color']};
     color: ${cssVars[$tone]['text-secondary']};
     outline: none;
 

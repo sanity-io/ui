@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {cardCssVariables} from '../../styles/colorVars'
 import {cssVars} from '../../theme'
 import {HeadingStyleProps} from './types'
 
@@ -15,7 +14,7 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
 
     ${$muted &&
     css`
-      color: ${cardCssVariables['muted-fg-color']};
+      color: ${cssVars.mutable['muted-fg-color']};
     `}
 
     & code {
@@ -37,7 +36,7 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
 
       &:focus {
         box-shadow:
-          0 0 0 1px ${cardCssVariables['bg-color']},
+          0 0 0 1px ${cssVars.mutable['bg-color']},
           0 0 0 3px ${cssVars.positive['border-accent']};
       }
 

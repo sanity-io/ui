@@ -1,6 +1,5 @@
 import {forwardRef} from 'react'
 import styled from 'styled-components'
-import {cardCssVariables} from '../../styles/colorVars'
 import {cssVars} from '../../theme'
 
 const Root = styled.div`
@@ -69,7 +68,7 @@ const Border = styled.path`
 `
 
 const Shape = styled.path`
-  fill: ${cardCssVariables['bg-color']};
+  fill: ${cssVars.mutable['bg-color']};
 `
 
 interface TooltipArrowProps {}

@@ -1,5 +1,4 @@
 import {FocusRing, cssVars} from '../../theme'
-import {cardCssVariables} from '../colorVars'
 
 export function focusRingBorderStyle(border: {color: string; width: number}): string {
   return `inset 0 0 0 ${border.width}px ${border.color}`
@@ -13,7 +12,7 @@ export function focusRingStyle(opts: {
   const {base, border, focusRing} = opts
   const focusRingOutsetWidth = focusRing.offset + focusRing.width
   const focusRingInsetWidth = 0 - focusRing.offset
-  const bgColor = base ? base.bg : cardCssVariables['bg-color']
+  const bgColor = base ? base.bg : cssVars.mutable['bg-color']
 
   return [
     focusRingInsetWidth > 0 &&
