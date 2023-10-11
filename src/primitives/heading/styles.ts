@@ -9,7 +9,7 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
   return css`
     ${$accent &&
     css`
-      color: ${cssVars.card['text-accent-color']}};
+      color: ${cssVars.default['text-accent']}};
     `}
 
     ${$muted &&
@@ -25,7 +25,7 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
     & a {
       text-decoration: none;
       border-radius: 1px;
-      color: ${cssVars.card['text-link-color']};
+      color: ${cssVars.default['text-link']};
       outline: none;
 
       @media (hover: hover) {

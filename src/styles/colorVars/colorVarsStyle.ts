@@ -1,5 +1,4 @@
 import {cssVars} from '../../theme'
-import {getCardCssVariable} from '../../theme/lib/theme/color/cssVariables/card'
 import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
 import {CSSObject} from '../../types/styled'
 
@@ -64,8 +63,8 @@ export function _colorVarsStyle(checkered = false): Record<VariablesNames, strin
     '--card-fg-color': cssVars.default['text-primary'],
 
     '--card-muted-fg-color': cssVars.default['text-secondary'],
-    '--card-accent-fg-color': cssVars.card['text-accent-color'],
-    '--card-link-fg-color': cssVars.card['text-link-color'],
+    '--card-accent-fg-color': cssVars.default['text-accent'],
+    '--card-link-fg-color': cssVars.default['text-link'],
     '--card-code-bg-color': cssVars.default['bg-tint-code'],
     '--card-code-fg-color': cssVars.default['text-code'],
 
@@ -73,7 +72,7 @@ export function _colorVarsStyle(checkered = false): Record<VariablesNames, strin
     '--card-skeleton-color-to': cssVars.default['skeleton-to'],
 
     // @todo: deprecate
-    '--card-link-color': cssVars.card['text-link-color'],
+    '--card-link-color': cssVars.default['text-link'],
     '--card-hairline-soft-color': cssVars.default['border-base'],
     '--card-hairline-hard-color': cssVars.default['border-base'],
 
@@ -88,8 +87,8 @@ export function _colorVarsStyle(checkered = false): Record<VariablesNames, strin
  */
 export function _colorVarStyleDisabled(checkered = false): CSSObject {
   return {
-    [getCardCssVariable('text-link-color')]: cssVars.default['text-secondary'],
-    [getCardCssVariable('text-accent-color')]: cssVars.default['text-secondary'],
+    [getToneCssVar('default', 'text-link')]: cssVars.default['text-secondary'],
+    [getToneCssVar('default', 'text-accent')]: cssVars.default['text-secondary'],
     [getToneCssVar('default', 'text-code')]: cssVars.default['text-secondary'],
     [getToneCssVar('default', 'text-primary')]: cssVars.default['text-secondary'],
 

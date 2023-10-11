@@ -15,6 +15,8 @@ export const colorKeys = [
   // TODO: Can this be replaced by other of the text colors? It's used by the code html element if it's inside a text
   'text-code',
   'text-muted',
+  'text-link',
+  'text-accent',
   'bg-base',
   'bg-base-hover',
   'bg-base-active',
@@ -70,6 +72,14 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'text-inactive': '500',
     'text-code': '600',
     'text-muted': '600',
+    'text-link': {
+      type: 'colorTint',
+      value: hues.blue['600'],
+    },
+    'text-accent': {
+      type: 'colorTint',
+      value: hues.red['500'],
+    },
     'bg-base': {
       type: 'colorTint',
       value: white,
@@ -132,6 +142,14 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'text-inactive': '400',
     'text-code': '400',
     'text-muted': '400',
+    'text-link': {
+      type: 'colorTint',
+      value: hues.blue['400'],
+    },
+    'text-accent': {
+      type: 'colorTint',
+      value: hues.red['400'],
+    },
     'bg-base': {type: 'colorTint', value: black},
     'bg-base-hover': '900',
     'bg-base-active': '800',

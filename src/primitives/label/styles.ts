@@ -13,7 +13,7 @@ export function labelBaseStyle(
 
     ${$accent &&
     css`
-      color: ${cssVars.card['text-accent-color']}};
+      color: ${cssVars.default['text-accent']}};
     `}
 
     ${$muted &&

@@ -2,7 +2,6 @@ import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {mutableCardVariables} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
-import {getCardCssVariable} from '../../theme/lib/theme/color/cssVariables/card'
 import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
 import {ButtonMode, ButtonTone} from '../../types'
@@ -88,8 +87,8 @@ export function buttonColorStyles(
       ...($mode === 'default' && {
         [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
         [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
-        [getCardCssVariable('text-link-color')]: cssVars[$tone]['base-text-color'],
-        [getCardCssVariable('text-accent-color')]: cssVars[$tone]['base-text-color'],
+        [getToneCssVar('default', 'text-link')]: cssVars[$tone]['base-text-color'],
+        [getToneCssVar('default', 'text-accent')]: cssVars[$tone]['base-text-color'],
       }),
 
       '&:disabled, &[data-disabled="true"]': {
