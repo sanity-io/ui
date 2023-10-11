@@ -212,7 +212,7 @@ export const colorTints: Record<
     },
     transparent: defaultTints.light,
     caution: defaultTints.light,
-    critical: defaultTints.light,
+    critical: {...defaultTints.light, 'text-inactive': '300'},
   },
   dark: {
     default: {
@@ -256,7 +256,7 @@ export const colorTints: Record<
     },
     transparent: defaultTints.dark,
     caution: defaultTints.dark,
-    critical: defaultTints.dark,
+    critical: {...defaultTints.dark, 'text-inactive': '700'},
   },
 }
 
