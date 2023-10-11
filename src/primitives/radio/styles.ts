@@ -59,7 +59,7 @@ export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
         height: ${rem(input.radio.markSize)};
         width: ${rem(input.radio.markSize)};
         border-radius: ${rem(input.radio.markSize / 2)};
-        background: ${cssVars.default['text-secondary']}
+        background: ${cssVars.default['text-secondary']};
         opacity: 0;
       }
     }
