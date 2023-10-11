@@ -4,7 +4,7 @@
  * e.g. for positive theme: `{"bg_base": "white", "bg_base_hover": "gray/50", "bg_base_active": "cyan/50"}
  * This is not possible in the previous configuration, as each ThemeColor uses only one tint.
  */
-import {ColorTintKey, ColorTints, ColorValue, black, hues, white} from '@sanity/color'
+import {ColorTintKey, ColorTint, ColorTints, black, hues, white} from '@sanity/color'
 import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 
 export const colorKeys = [
@@ -27,7 +27,7 @@ export const colorKeys = [
 
 export type ColorKey = (typeof colorKeys)[number]
 
-type ColorTintsDictionary = Record<ColorKey, ColorTintKey | ColorValue>
+type ColorTintsDictionary = Record<ColorKey, ColorTint | ColorTintKey>
 const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
   light: {
     text_primary: '900',
@@ -132,7 +132,7 @@ export const getColorValue = (
   dark: boolean,
   tone: ThemeColorName,
   key: ColorKey,
-): ColorValue => {
+): ColorTint => {
   const value = colorTints[dark ? 'dark' : 'light'][tone][key]
 
   if (typeof value === 'string') {
