@@ -6,7 +6,6 @@ import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/s
 
 const studioTones = ['default', 'positive', 'critical', 'caution'] as const
 
-// Create a function that transform text.primary to "Text Primary"
 function toTitleCase(str: string): string {
   return str
     .split('-')
