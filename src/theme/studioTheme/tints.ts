@@ -276,7 +276,7 @@ export const getColorValue = (
     const base = tints[value.tint]
 
     return {
-      hex: rgba(base.hex, 0.4),
+      hex: rgba(base.hex, value.opacity),
       title: `${base.title} ${Math.round(value.opacity * 100)}%`,
     }
   }
