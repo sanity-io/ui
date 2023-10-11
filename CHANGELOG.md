@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.3](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.2...v2.0.0-alpha.3) (2023-10-11)
+
+### Bug Fixes
+
+- update types [skip ci] ([7cb1b68](https://github.com/sanity-io/ui/commit/7cb1b686bd8c9d122284d2d84f02528748463242))
+
 ## [2.0.0-alpha.2](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2023-10-10)
 
 ### Bug Fixes
