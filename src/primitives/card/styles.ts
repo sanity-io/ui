@@ -53,16 +53,15 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
 }
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
-  const {$checkered, $focusRing, theme, $tone, $scheme} = props
+  const {$checkered, $focusRing, theme, $tone, $scheme, $createNewVars} = props
   const {focusRing} = theme.sanity.card
 
   const border = {width: 0, color: cssVars.positive['border-accent']}
 
   return css`
     /* A new css vars context is created, allowing for override of the default tone and changing the scheme */
-    ${$tone !== 'inherit' && createCssVars($scheme, theme.sanity.color.tones, $tone)}
+    ${$createNewVars && createCssVars($scheme, theme.sanity.color.tones, $tone)}
     color-scheme: ${$scheme === 'dark' ? 'dark' : 'light'};
-
     ${_colorVarsStyle($checkered)}
 
     background-color: ${cssVars.mutable['bg-color']};

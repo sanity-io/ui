@@ -372,3 +372,39 @@ export const MatrixAsButton: Story = {
     )
   },
 }
+
+export const SchemeChanges: Story = {
+  render: () => {
+    return (
+      <Flex gap={4} wrap={'wrap'}>
+        <Card scheme="light" padding={4} margin={4} shadow={1}>
+          <Text>Light default</Text>
+          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+            <Text>Dark inherit</Text>
+            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+              <Text>Light inherit</Text>
+            </Card>
+          </Card>
+        </Card>
+        <Card scheme="light" tone="caution" padding={4} margin={4} shadow={1}>
+          <Text>Light caution</Text>
+          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+            <Text>Dark inherit</Text>
+            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+              <Text>Light inherit</Text>
+            </Card>
+          </Card>
+        </Card>
+        <Card scheme="light" tone="primary" padding={4} margin={4} shadow={1}>
+          <Text>Primary caution</Text>
+          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+            <Text>Dark inherit</Text>
+            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+              <Text>Light inherit</Text>
+            </Card>
+          </Card>
+        </Card>
+      </Flex>
+    )
+  },
+}

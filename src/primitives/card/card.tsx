@@ -10,7 +10,7 @@ import {
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
-import {ThemeColorSchemeKey} from '../../theme'
+import {ThemeColorName, ThemeColorSchemeKey} from '../../theme'
 import {ToneProvider} from '../../theme/toneContext/toneProvider'
 import {useToneContext} from '../../theme/toneContext/useToneContext'
 import {CardTone} from '../../types'
@@ -49,6 +49,29 @@ const Root = styled(Box)<
     ResponsiveShadowStyleProps
 >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
+const Wrapper = ({
+  shouldAddContext,
+  scheme,
+  tone,
+  children,
+}: {
+  shouldAddContext: boolean
+  scheme: ThemeColorSchemeKey
+  tone: ThemeColorName
+  children: React.ReactNode
+}) => {
+  // Avoid creating a new react context if the card is just inheriting styles from the parent.
+  if (shouldAddContext) {
+    return (
+      <ToneProvider scheme={scheme} tone={tone}>
+        {children}
+      </ToneProvider>
+    )
+  }
+
+  return children
+}
+
 /**
  * @public
  */
@@ -78,9 +101,10 @@ export const Card = forwardRef(function Card(
   const toneContext = useToneContext()
   const tone = toneProp === 'inherit' ? toneContext.tone : toneProp
   const scheme = schemeProp ?? toneContext.scheme
+  const shouldAddContext = scheme !== toneContext.scheme || tone !== toneContext.tone
 
   return (
-    <ToneProvider scheme={scheme} tone={tone}>
+    <Wrapper shouldAddContext={shouldAddContext} scheme={scheme} tone={tone}>
       <Root
         data-as={typeof as === 'string' ? as : undefined}
         data-scheme={scheme}
@@ -97,7 +121,8 @@ export const Card = forwardRef(function Card(
         $focusRing={focusRing}
         $radius={useArrayProp(radius)}
         $shadow={useArrayProp(shadow)}
-        $tone={toneProp}
+        $tone={tone}
+        $createNewVars={shouldAddContext}
         data-checkered={checkered ? '' : undefined}
         data-pressed={pressed ? '' : undefined}
         data-selected={selected ? '' : undefined}
@@ -105,6 +130,6 @@ export const Card = forwardRef(function Card(
         ref={ref}
         selected={selected}
       />
-    </ToneProvider>
+    </Wrapper>
   )
 })

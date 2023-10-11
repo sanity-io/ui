@@ -39,12 +39,12 @@ const legacyFixedVariables = [
 
 const allVariables = [...Object.values(mutableCardVariables), ...legacyFixedVariables] as const
 
-type VariablesNames = (typeof allVariables)[number]
+type CardCssVariable = (typeof allVariables)[number]
 
 /**
  * @internal
  */
-export function _colorVarsStyle(checkered = false): Record<VariablesNames, string | undefined> {
+export function _colorVarsStyle(checkered = false): Record<CardCssVariable, string | undefined> {
   return {
     '--card-shadow-outline-color': cssVars.default['base-shadow-outline-color'],
     '--card-shadow-umbra-color': cssVars.default['base-shadow-umbra-color'],
@@ -129,7 +129,7 @@ export function _colorVarStyleActive(): CSSObject {
  * @internal
  * Selectable , same as card but with different bg-color
  */
-export function _selectableVarStyle(): Record<VariablesNames, string | undefined> {
+export function _selectableVarStyle(): Record<CardCssVariable, string | undefined> {
   return {
     ..._colorVarsStyle(),
     [mutableCardVariables['bg-color']]: 'transparent',
