@@ -120,7 +120,6 @@ export function Tones(): ReactNode {
                   <Flex gap={2} align={'center'} padding={2}>
                     <Text>Radio</Text>
                     <Flex justify="center" padding={1} gap={2}>
-                      {/* TODO: Why is this defaultChecked not showing? */}
                       <Radio defaultChecked={false} />
                       <Radio defaultChecked={true} />
                     </Flex>

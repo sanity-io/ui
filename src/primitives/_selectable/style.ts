@@ -50,9 +50,8 @@ export function selectableColorStyle(
     ${$tone !== 'default' && createCssVars($scheme, theme.sanity.color.tones, $tone)}
     ${_selectableVarStyle()}
 
-    background-color:  ${cardCssVariables['bg-color']};
+    background-color: ${cardCssVariables['bg-color']};
     color: ${cssVars[$tone]['text-secondary']};
-    --card-fg-color: ${cssVars.default['text-secondary']};
     outline: none;
 
     /* &:is(button) - Looks like a button in default mode */

@@ -146,29 +146,23 @@ export function _colorVarStyleActive(): CSSObject {
 
 /**
  * @internal
- * selectable styles
+ * Selectable , same as card but with different bg-color
  */
-export function _selectableVarStyle(): Partial<Record<VariablesNames, string | undefined>> {
+export function _selectableVarStyle(): Record<VariablesNames, string | undefined> {
   return {
     ..._colorVarsStyle(),
-    '--card-bg-color': cssVars.default['base-bg-raw'],
+    [mutableCardVariables['bg-color']]: 'transparent',
+    [mutableCardVariables['fg-color']]: cssVars.default['text-secondary'],
   }
 }
 
 /**
  * @internal
- * Selectable overrides in disabled states
+ * Selectable overrides in disabled states, same as card but with different bg-color
  */
 export function _selectableVarStyleDisabled(): CSSObject {
   return {
-    [getCardCssVariable('text-link-color')]: cssVars.default['text-secondary'],
-    [getCardCssVariable('text-accent-color')]: cssVars.default['text-secondary'],
-    [getToneCssVar('default', 'text-code')]: cssVars.default['text-secondary'],
-    [getToneCssVar('default', 'text-primary')]: cssVars.default['text-secondary'],
-
-    [mutableCardVariables['fg-color']]: cssVars.primary['text-inactive'],
-    [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-inactive'],
-    [mutableCardVariables['icon-color']]: cssVars.primary['border-base'],
-    [mutableCardVariables['accent-color']]: cssVars.primary['base-bg-card'],
+    ..._colorVarStyleDisabled(),
+    [mutableCardVariables['bg-color']]: undefined,
   }
 }
