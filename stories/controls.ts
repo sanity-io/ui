@@ -10,6 +10,20 @@ export const getAlignControls = () => {
   }
 }
 
+export const getFlexAlignControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+  }
+}
+
+export const getDirectionControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['row', 'column', 'row-reverse', 'column-reverse'],
+  }
+}
+
 export const getAvatarSizeControls = () => {
   const numSizes = studioTheme.avatar.sizes.length
 
@@ -96,6 +110,13 @@ export const getSpaceControls = () => {
   }
 }
 
+export const getJustifyControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'initial'],
+  }
+}
+
 export const getTextOverflowControls = () => {
   return {
     control: 'radio',
@@ -104,5 +125,12 @@ export const getTextOverflowControls = () => {
       ellipsis: 'ellipsis',
     },
     options: ['(none)', 'ellipsis'],
+  }
+}
+
+export const getWrapControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['wrap', 'nowrap', 'wrap-reverse'],
   }
 }
