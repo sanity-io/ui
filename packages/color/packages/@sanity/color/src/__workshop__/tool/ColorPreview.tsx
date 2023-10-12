@@ -1,4 +1,4 @@
-import {Box, Card, Flex, Text} from '@sanity/ui'
+import {Box, Card, Flex, Text, useTheme} from '@sanity/ui'
 import {getContrast} from 'polished'
 import {memo, useMemo} from 'react'
 import {color} from '../../color'
@@ -14,6 +14,7 @@ export const ColorPreview = memo(function ColorPreview(props: {
   showContrast?: boolean
 }) {
   const {expanded, hsl, showAABadges, showContrast} = props
+  const {dark} = useTheme().sanity.color
 
   const hex = rgbToHex(hslToRgb(hsl))
 
@@ -67,7 +68,7 @@ export const ColorPreview = memo(function ColorPreview(props: {
           {showContrast && (
             <Box padding={1}>
               <Text size={0} weight="bold">
-                {contrast.light.toFixed(1)}:1
+                {contrast[dark ? 'dark' : 'light'].toFixed(1)}:1
               </Text>
             </Box>
           )}
