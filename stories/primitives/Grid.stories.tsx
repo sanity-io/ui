@@ -1,30 +1,26 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Flex, Text} from '../../src/primitives'
+import {Card, Code, Grid} from '../../src/primitives'
 import {
-  getDirectionControls,
-  getFlexAlignControls,
   getHeightControls,
-  getJustifyControls,
   getOverflowControls,
   getSpaceControls,
   getWrapControls,
 } from '../controls'
 
-const meta: Meta<typeof Flex> = {
-  component: Flex,
+const meta: Meta<typeof Grid> = {
+  component: Grid,
   args: {
+    columns: [1, 2, 3, 4, 5, 6, 7],
+    gap: [0, 1, 2, 3, 4, 5, 6],
     children: [
-      Array.from({length: 5}, (_, index) => (
-        <Card key={`card${index}`} padding={3}>
-          <Text size={index}>{`Card ${index}`} </Text>
+      Array.from({length: 12}, (_, index) => (
+        <Card key={`grid${index + 1}`} padding={[1, 2, 3]} tone="transparent">
+          <Code>{index + 1}</Code>
         </Card>
       )),
     ],
   },
   argTypes: {
-    align: getFlexAlignControls(),
-    direction: getDirectionControls(),
-    justify: getJustifyControls(),
     wrap: getWrapControls(),
     padding: getSpaceControls(),
     paddingBottom: getSpaceControls(),
@@ -48,8 +44,8 @@ const meta: Meta<typeof Flex> = {
 }
 
 export default meta
-type Story = StoryObj<typeof Flex>
+type Story = StoryObj<typeof Grid>
 
 export const Default: Story = {
-  render: (props) => <Flex {...props} />,
+  render: (props) => <Grid {...props} />,
 }
