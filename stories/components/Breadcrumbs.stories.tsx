@@ -6,8 +6,6 @@ import {getSpaceControls} from '../controls'
 const meta: Meta<typeof Breadcrumbs> = {
   args: {
     separator: <Text>/</Text>,
-    maxLength: 6,
-    space: 2,
     children: [
       <Text key="root">Root</Text>,
       <Text key="catA">Category A</Text>,
