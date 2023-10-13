@@ -44,7 +44,7 @@ export const MenuItem = forwardRef(function MenuItem(
     as = 'button',
     children,
     disabled,
-    fontSize = 2,
+    fontSize = 1,
     hotkeys,
     icon,
     iconRight,
