@@ -26,7 +26,7 @@ export const Default: Story = {
   },
 }
 
-export const WithButton: Story = {
+export const OpenOnButtonClick: Story = {
   render: (props) => {
     const [showToast, setShowToast] = useState(false)
 
@@ -36,15 +36,8 @@ export const WithButton: Story = {
 
     return (
       <>
-        <Button onClick={handleClick}>Show Toast</Button>
-        {showToast && (
-          <Toast
-            {...props}
-            title="Toast Title"
-            description="This is a toast message."
-            onClose={() => setShowToast(false)}
-          />
-        )}
+        <Button text="Show toast" onClick={handleClick} />
+        {showToast && <Toast {...props} onClose={() => setShowToast(false)} />}
       </>
     )
   },
