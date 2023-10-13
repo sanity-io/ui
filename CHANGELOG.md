@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.5](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.4...v2.0.0-alpha.5) (2023-10-13)
+
+### Bug Fixes
+
+- update default values for <MenuItem>, <TextArea> and <TextInput> ([a133b56](https://github.com/sanity-io/ui/commit/a133b5696cff501c5b0a3bb99cfcc90014695c56))
+
 ## [2.0.0-alpha.4](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.3...v2.0.0-alpha.4) (2023-10-11)
 
 ### Features
