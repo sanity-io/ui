@@ -6,9 +6,9 @@ import {LayerProvider} from '../../src/utils'
 const meta: Meta<typeof Menu> = {
   args: {
     children: [
-      <MenuItem key="item1" fontSize={[2, 2, 3, 4]} text="First option" />,
-      <MenuItem key="item2" fontSize={[2, 2, 3, 4]} text="Second option" />,
-      <MenuItem key="item3" fontSize={[2, 2, 3, 4]} text="Third option" />,
+      <MenuItem key="item1" text="First option" />,
+      <MenuItem key="item2" text="Second option" />,
+      <MenuItem key="item3" text="Third option" />,
     ],
   },
   component: Menu,

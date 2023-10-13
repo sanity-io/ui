@@ -27,13 +27,6 @@ const meta: Meta<typeof Skeleton> = {
     marginTop: getSpaceControls(),
     marginY: getSpaceControls(),
     marginX: getSpaceControls(),
-    // tone: {
-    //   control: {
-    //     type: 'inline-radio',
-    //     options: ['default', 'transparent', 'positive', 'caution', 'critical'],
-    //   },
-    //   defaultValue: 'default',
-    // },
   },
   tags: ['autodocs'],
 }
@@ -56,7 +49,6 @@ export const CardSkeleton: Story = {
           <Stack space={4}>
             {[1, 2, 3].map((item) => (
               <Card key={item} padding={2} radius={2} border>
-                {/* Want to show that the card can have tones */}
                 <Flex align="center">
                   <Grid gap={2} columns={2} marginRight={3}>
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />

@@ -1,26 +1,18 @@
-import {LemonIcon, TrolleyIcon} from '@sanity/icons'
+import {BottleIcon, IceCreamIcon, LemonIcon, TrolleyIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Tree, TreeItem} from '../../src/components'
+import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Tree> = {
   args: {
-    space: 2,
     children: [
-      <TreeItem icon={TrolleyIcon} key="shoppingcart" expanded text="Shopping Cart">
-        <TreeItem text="Rice" />
-        <TreeItem text="Chicken" />
-        <TreeItem text="Shampoo" />
-        <TreeItem key="fruit" text="Fruit">
-          <TreeItem icon={LemonIcon} text="Lemon" />
-          <TreeItem text="Apples" />
-          <TreeItem text="Pineapples" />
-          <TreeItem data-testid="grapes" text="Grapes">
-            <TreeItem data-testid="grapes/red" text="Red" />
-            <TreeItem data-testid="grapes/green" text="Green" />
-          </TreeItem>
-        </TreeItem>
-      </TreeItem>,
+      <TreeItem key="item1" text="Item 1" />,
+      <TreeItem key="item2" text="Item 2" />,
+      <TreeItem key="item3" text="Item 3" />,
     ],
+  },
+  argTypes: {
+    space: getSpaceControls(),
   },
   component: Tree,
   tags: ['autodocs'],
@@ -32,5 +24,40 @@ type Story = StoryObj<typeof Tree>
 export const Default: Story = {
   render: (props) => {
     return <Tree {...props}></Tree>
+  },
+}
+
+export const WithNestedItems: Story = {
+  render: (props) => {
+    return (
+      <Tree {...props}>
+        <TreeItem key="item1" text="Item 1">
+          <TreeItem text="Item 1.1" />
+          <TreeItem text="Item 1.2" />
+          <TreeItem key="Item13" text="Item 1.3">
+            <TreeItem text="Item 1.3.1" />
+            <TreeItem text="Item 1.3.2" />
+            <TreeItem data-testid="item133" text="Item 1.3.3">
+              <TreeItem text="Item 1.3.3.1" />
+              <TreeItem text="Item 1.3.3.2" />
+            </TreeItem>
+          </TreeItem>
+        </TreeItem>
+      </Tree>
+    )
+  },
+}
+
+export const WithIcons: Story = {
+  render: (props) => {
+    return (
+      <Tree {...props}>
+        <TreeItem icon={TrolleyIcon} key="Item1" text="Item 1" expanded>
+          <TreeItem text="Item 1.1" icon={IceCreamIcon} />
+          <TreeItem text="Item 1.2" icon={LemonIcon} />
+          <TreeItem text="Item 1.3" icon={BottleIcon} />
+        </TreeItem>
+      </Tree>
+    )
   },
 }

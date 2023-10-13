@@ -10,11 +10,9 @@ import {
 const meta: Meta<typeof Grid> = {
   component: Grid,
   args: {
-    columns: [1, 2, 3, 4, 5, 6, 7],
-    gap: [0, 1, 2, 3, 4, 5, 6],
     children: [
       Array.from({length: 12}, (_, index) => (
-        <Card key={`grid${index + 1}`} padding={[1, 2, 3]} tone="transparent">
+        <Card key={`grid${index + 1}`} padding={2}>
           <Code>{index + 1}</Code>
         </Card>
       )),
@@ -47,5 +45,10 @@ export default meta
 type Story = StoryObj<typeof Grid>
 
 export const Default: Story = {
+  render: (props) => <Grid {...props} />,
+}
+
+export const WithColumns: Story = {
+  args: {columns: [1, 2, 3, 4, 5, 6, 7]},
   render: (props) => <Grid {...props} />,
 }
