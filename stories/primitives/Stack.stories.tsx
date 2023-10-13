@@ -1,28 +1,24 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Stack, Text} from '../../src/primitives'
-import {
-  getHeightControls,
-  getOverflowControls,
-  getSpaceControls,
-  getWrapControls,
-} from '../controls'
+import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Stack> = {
   component: Stack,
   args: {
     space: 0,
     children: [
-      Array.from({length: 4}, (_, index) => (
-        <Card key={`card${index}`} padding={[2, 3, 4]} shadow={1}>
-          <Text align="center" muted>
-            {`Stak item ${index}`}
-          </Text>
-        </Card>
-      )),
+      <Card key="card1" padding={2}>
+        <Text align="center">Stack item 3</Text>
+      </Card>,
+      <Card key="card2" padding={2}>
+        <Text align="center">Stack item 2</Text>
+      </Card>,
+      <Card key="card2" padding={2}>
+        <Text align="center">Stack item 1</Text>
+      </Card>,
     ],
   },
   argTypes: {
-    wrap: getWrapControls(),
     padding: getSpaceControls(),
     paddingBottom: getSpaceControls(),
     paddingLeft: getSpaceControls(),

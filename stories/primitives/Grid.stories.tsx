@@ -1,11 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Card, Code, Grid} from '../../src/primitives'
-import {
-  getHeightControls,
-  getOverflowControls,
-  getSpaceControls,
-  getWrapControls,
-} from '../controls'
+import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Grid> = {
   component: Grid,
@@ -19,7 +14,6 @@ const meta: Meta<typeof Grid> = {
     ],
   },
   argTypes: {
-    wrap: getWrapControls(),
     padding: getSpaceControls(),
     paddingBottom: getSpaceControls(),
     paddingLeft: getSpaceControls(),
@@ -48,7 +42,7 @@ export const Default: Story = {
   render: (props) => <Grid {...props} />,
 }
 
-export const WithColumns: Story = {
+export const Columns: Story = {
   args: {columns: [1, 2, 3, 4, 5, 6, 7]},
   render: (props) => <Grid {...props} />,
 }

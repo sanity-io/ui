@@ -6,13 +6,13 @@ const meta: Meta<typeof Inline> = {
   component: Inline,
   args: {
     children: [
-      <Card key="Card1" padding={1} shadow={1}>
+      <Card key="Card1" padding={2}>
         <Text>Inline item</Text>
       </Card>,
-      <Card key="Card2" padding={2} shadow={1}>
+      <Card key="Card2" padding={2}>
         <Text>Inline item</Text>
       </Card>,
-      <Card key="Card3" padding={3} shadow={1}>
+      <Card key="Card3" padding={2}>
         <Text>Inline item</Text>
       </Card>,
     ],

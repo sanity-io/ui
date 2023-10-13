@@ -27,7 +27,7 @@ export const Default: Story = {
   },
 }
 
-export const WithNestedItems: Story = {
+export const NestedItems: Story = {
   render: (props) => {
     return (
       <Tree {...props}>

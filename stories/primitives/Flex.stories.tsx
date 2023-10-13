@@ -7,7 +7,6 @@ import {
   getJustifyControls,
   getOverflowControls,
   getSpaceControls,
-  getWrapControls,
 } from '../controls'
 
 const meta: Meta<typeof Flex> = {
@@ -25,7 +24,6 @@ const meta: Meta<typeof Flex> = {
     align: getFlexAlignControls(),
     direction: getDirectionControls(),
     justify: getJustifyControls(),
-    wrap: getWrapControls(),
     padding: getSpaceControls(),
     paddingBottom: getSpaceControls(),
     paddingLeft: getSpaceControls(),
