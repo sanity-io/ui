@@ -5,12 +5,12 @@ import {createGlobalStyle} from 'styled-components'
 import {Box} from '../../src/primitives'
 import {studioTheme, ThemeProvider} from '../../src/theme'
 import {cssVars} from '../../src/theme/lib/theme/color/cssVariables'
-import {black, white} from '@sanity/color'
 
 const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
 
 export const GlobalStyle = createGlobalStyle`
-  body {
+  body,
+  .docs-story {
     background-color: ${cssVars.default['base-bg-card']};
   }
 `
@@ -34,7 +34,7 @@ export const withSanityTheme = ({themes, defaultTheme}) => {
     return (
       <ThemeProvider scheme={selected} theme={studioTheme}>
         <GlobalStyle />
-        <Box padding={4} style={{background: selected === 'dark' ? black.hex : white.hex}}>
+        <Box padding={4}>
           <Story />
         </Box>
       </ThemeProvider>
