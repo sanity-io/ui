@@ -1,6 +1,6 @@
 import {ReactNode} from 'react'
 import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
-import {ThemeProvider, cssVars, studioTheme} from '../../src/theme'
+import {ThemeColorSchemeKey, ThemeProvider, cssVars, studioTheme} from '../../src/theme'
 import {tones} from '../../src/theme/studioTheme/color'
 import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/studioTheme/tints'
 
@@ -25,7 +25,7 @@ export function Colors(): ReactNode {
             <Card padding={3} radius={3} border>
               <Stack space={4}>
                 {colorKeys.map((colorKey) => (
-                  <ColorPreview key={colorKey} colorKey={colorKey} theme="light" />
+                  <ColorPreview key={colorKey} colorKey={colorKey} scheme="light" />
                 ))}
               </Stack>
             </Card>
@@ -39,7 +39,7 @@ export function Colors(): ReactNode {
             <Card padding={3} radius={3} border>
               <Stack space={4}>
                 {colorKeys.map((colorKey) => (
-                  <ColorPreview key={colorKey} colorKey={colorKey} theme="dark" />
+                  <ColorPreview key={colorKey} colorKey={colorKey} scheme="dark" />
                 ))}
               </Stack>
             </Card>
@@ -50,8 +50,8 @@ export function Colors(): ReactNode {
   )
 }
 
-function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
-  const {colorKey, theme} = props
+function ColorPreview(props: {colorKey: ColorKey; scheme: ThemeColorSchemeKey}) {
+  const {colorKey, scheme} = props
 
   return (
     <Stack space={3}>
@@ -69,14 +69,9 @@ function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
                   width: '48px',
                   borderRadius: '4px',
                   boxShadow: ['Black', 'White'].includes(
-                    getColorValue(tones[tone], theme === 'dark', tone, colorKey)?.title,
+                    getColorValue(tones[tone], scheme, tone, colorKey)?.title,
                   )
-                    ? `0 0 0 1px ${getColorHex(
-                        tones['default'],
-                        theme === 'dark',
-                        'default',
-                        'border-base',
-                      )}`
+                    ? `0 0 0 1px ${getColorHex(tones['default'], scheme, 'default', 'border-base')}`
                     : undefined,
                   backgroundColor: cssVars[tone][colorKey],
                 }}
@@ -99,9 +94,7 @@ function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
                   </Text>
                 </Flex>
                 <Text size={0} muted>
-                  {getColorValue(tones[tone], theme === 'dark', tone, colorKey)
-                    .title.split(' ')
-                    .join('/')}
+                  {getColorValue(tones[tone], scheme, tone, colorKey).title.split(' ').join('/')}
                 </Text>
               </Flex>
             </Flex>

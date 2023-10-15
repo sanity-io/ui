@@ -34,3 +34,8 @@ export interface ThemeColorSchemes {
   // Could we update this to only return Record<ThemeColorName ,  keyof typeof hues> ? Then the function that assigns the color would search the ColorTint
   tones: Record<ThemeColorName, ColorTints>
 }
+
+/**
+ * @beta
+ */
+export type CSSVariableKey = ThemeColorName & ('spot' | 'syntax' | 'mutable')

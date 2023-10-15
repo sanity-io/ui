@@ -374,7 +374,7 @@ export const MatrixAsButton: Story = {
   },
 }
 
-export const SchemeChanges: Story = {
+export const NestedSchemeChanges: Story = {
   render: () => {
     return (
       <Flex gap={4} wrap={'wrap'}>
@@ -410,7 +410,7 @@ export const SchemeChanges: Story = {
   },
 }
 
-export const ToneChanges: Story = {
+export const NestedToneChanges: Story = {
   render: () => {
     const TONES: (CardTone | undefined)[] = [
       'critical',

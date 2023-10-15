@@ -280,11 +280,11 @@ export const colorTints: Record<
 
 export const getColorValue = (
   tints: ColorTints,
-  dark: boolean,
+  scheme: ThemeColorSchemeKey,
   tone: ThemeColorName,
   key: ColorKey,
 ): ColorTint => {
-  const value = colorTints[dark ? 'dark' : 'light'][tone][key]
+  const value = colorTints[scheme][tone][key]
 
   if (typeof value === 'string') {
     return tints[value]
@@ -304,9 +304,9 @@ export const getColorValue = (
 
 export const getColorHex = (
   tints: ColorTints,
-  dark: boolean,
+  scheme: ThemeColorSchemeKey,
   tone: ThemeColorName,
   key: ColorKey,
 ): string => {
-  return getColorValue(tints, dark, tone, key).hex
+  return getColorValue(tints, scheme, tone, key).hex
 }
