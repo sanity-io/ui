@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '../../src/primitives'
+import {CardTone} from '../../src/types'
 import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
@@ -373,7 +374,7 @@ export const MatrixAsButton: Story = {
   },
 }
 
-export const SchemeChanges: Story = {
+export const NestedSchemeChanges: Story = {
   render: () => {
     return (
       <Flex gap={4} wrap={'wrap'}>
@@ -404,6 +405,47 @@ export const SchemeChanges: Story = {
             </Card>
           </Card>
         </Card>
+      </Flex>
+    )
+  },
+}
+
+export const NestedToneChanges: Story = {
+  render: () => {
+    const TONES: (CardTone | undefined)[] = [
+      'critical',
+      'inherit',
+      undefined,
+      'caution',
+      'inherit',
+      undefined,
+      'primary',
+      'inherit',
+      undefined,
+      'positive',
+      'inherit',
+      undefined,
+      'default',
+      'inherit',
+      undefined,
+    ]
+
+    const renderCard = (tones: (CardTone | undefined)[]) => {
+      const currentTone = tones[0]
+
+      return (
+        <Card border margin={3} padding={3} tone={currentTone}>
+          <Text muted={!currentTone} size={1}>
+            {currentTone ?? <em>(empty)</em>}
+          </Text>
+          {tones.length > 1 && renderCard(tones.slice(1))}
+        </Card>
+      )
+    }
+
+    return (
+      <Flex gap={4} wrap={'wrap'}>
+        {renderCard(TONES)}
       </Flex>
     )
   },

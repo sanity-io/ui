@@ -21,7 +21,7 @@ export const createTonesVariables = (
     const tint = tones[tone]
 
     colorKeys.forEach((key) => {
-      const colorHex = getColorHex(tint, scheme === 'dark', tone, key)
+      const colorHex = getColorHex(tint, scheme, tone, key)
       const varName = getToneCssVar(_tone, key)
       const willBeMixed = needsMixing && !key.startsWith('base-')
 
