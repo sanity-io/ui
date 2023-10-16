@@ -2,7 +2,6 @@ import {ColorTints} from '@sanity/color'
 import {getColorHex} from '../../../../studioTheme/tints'
 import {ThemeColorName, ThemeColorSchemeKey} from '../types'
 import {cardVariables, mutableVariables} from './cardVariables'
-import {createSyntaxVariables, syntaxCssVariables} from './syntax'
 import {createTonesVariables, tonesCssVariables} from './tones'
 
 /**
@@ -15,9 +14,8 @@ export const createCssVars = (
 ): Record<string, string> => {
   const baseBg = getColorHex(tones[defaultTone], scheme, defaultTone, 'base-bg-card')
   const tonesVars = createTonesVariables(scheme, tones, defaultTone, baseBg)
-  const syntaxVars = createSyntaxVariables(scheme, baseBg)
 
-  return {...tonesVars, ...syntaxVars, ...cardVariables}
+  return {...tonesVars, ...cardVariables}
 }
 
 /**
@@ -25,7 +23,6 @@ export const createCssVars = (
  */
 export const cssVars = {
   ...tonesCssVariables,
-  syntax: syntaxCssVariables,
   /**
    * This variables are mutable, they can be updated by other components.
    * The main component that updates them is the card, these are the only ones that should be exposed for use from the cards.
