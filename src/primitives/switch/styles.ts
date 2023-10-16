@@ -80,7 +80,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
 
     input:checked + && {
       --switch-bg-color: ${cssVars.positive['border-accent']};
-      --switch-fg-color: ${cssVars.positive['bg-base']};
+      --switch-fg-color: ${cssVars.default['bg-base']};
     }
 
     @media (hover: hover) {
@@ -91,7 +91,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
 
       input:not(:disabled):checked:hover + && {
         --switch-bg-color: ${cssVars.positive['border-accent']};
-        --switch-fg-color: ${cssVars.positive['bg-base']};
+        --switch-fg-color: ${cssVars.default['bg-base']};
       }
     }
 

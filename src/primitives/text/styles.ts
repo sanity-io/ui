@@ -24,8 +24,8 @@ export function textBaseStyle(
     & code {
       font-family: ${theme.sanity.fonts.code.family};
       border-radius: 1px;
-      background-color: ${cssVars.default['bg-tint-code']};
-      color: ${cssVars.default['text-code']};
+      background-color: ${cssVars.default['bg-tint']};
+      color: ${cssVars.default['text-secondary']};
     }
 
     & a {

@@ -76,8 +76,8 @@ export const cardVariables: Record<CardCssVariable, string> = {
   '--card-muted-fg-color': tonesCssVariables.default['text-secondary'],
   '--card-accent-fg-color': tonesCssVariables.default['text-accent'],
   '--card-link-fg-color': tonesCssVariables.default['text-link'],
-  '--card-code-bg-color': tonesCssVariables.default['bg-tint-code'],
-  '--card-code-fg-color': tonesCssVariables.default['text-code'],
+  '--card-code-bg-color': tonesCssVariables.default['bg-tint'],
+  '--card-code-fg-color': tonesCssVariables.default['text-secondary'],
 
   '--card-skeleton-color-from': tonesCssVariables.default['skeleton-from'],
   '--card-skeleton-color-to': tonesCssVariables.default['skeleton-to'],

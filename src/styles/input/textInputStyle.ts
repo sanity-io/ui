@@ -149,7 +149,7 @@ export function textInputRepresentationStyle(
     border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
-    ${mutableCardVariables['bg-color']}: ${cssVars[$tone]['bg-base']};
+    ${mutableCardVariables['bg-color']}: ${cssVars.default['bg-base']};
     ${mutableCardVariables['fg-color']}: ${cssVars[$tone]['text-primary']};
 
     /* enabled */

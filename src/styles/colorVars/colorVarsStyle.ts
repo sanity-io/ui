@@ -11,13 +11,13 @@ export function _colorVarStyleDisabled(checkered = false): CSSObject {
   return {
     [getToneCssVar('default', 'text-link')]: cssVars.default['text-secondary'],
     [getToneCssVar('default', 'text-accent')]: cssVars.default['text-secondary'],
-    [getToneCssVar('default', 'text-code')]: cssVars.default['text-secondary'],
+    [getToneCssVar('default', 'text-secondary')]: cssVars.default['text-secondary'],
     [getToneCssVar('default', 'text-primary')]: cssVars.default['text-secondary'],
 
     [mutableCardVariables['fg-color']]: cssVars.primary['text-inactive'],
     [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-inactive'],
     [mutableCardVariables['icon-color']]: cssVars.primary['border-base'],
-    [mutableCardVariables['accent-color']]: cssVars.primary['base-bg-card'],
+    [mutableCardVariables['accent-color']]: cssVars.primary['text-inactive'],
     [mutableCardVariables['bg-color']]: cssVars.primary['bg-tint'],
     [mutableCardVariables['bg-image']]: checkered
       ? `repeating-conic-gradient(${cssVars.default['base-bg-card']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`
@@ -35,7 +35,7 @@ export function _colorVarStyleSelected(): CSSObject {
     [mutableCardVariables['fg-color']]: cssVars.default['bg-base'],
     [mutableCardVariables['muted-fg-color']]: cssVars.default['base-bg-card'],
     [mutableCardVariables['accent-color']]: cssVars.default['base-bg-card'],
-    [mutableCardVariables['icon-color']]: cssVars.primary['bg-base'],
+    [mutableCardVariables['icon-color']]: cssVars.default['bg-base'],
   }
 }
 

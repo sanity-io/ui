@@ -66,29 +66,28 @@ export function buttonColorStyles(
         ? cssVars[$tone]['bg-accent']
         : $mode === 'ghost'
         ? cssVars[$tone]['border-base']
-        : cssVars[$tone]['bg-base'],
+        : cssVars.default['bg-base'],
   }
 
   return [
     {
       // This is going to be used by the text elements inside the button
       [mutableCardVariables['fg-color']]:
-        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-primary'],
+        $mode === 'default' ? cssVars.default['base-text-color'] : cssVars[$tone]['text-primary'],
       [mutableCardVariables['muted-fg-color']]:
-        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-secondary'],
+        $mode === 'default' ? cssVars.default['base-text-color'] : cssVars[$tone]['text-secondary'],
       [mutableCardVariables['icon-color']]:
-        $mode === 'default' ? cssVars[$tone]['icon-inverted'] : cssVars[$tone]['icon-default'],
+        $mode === 'default' ? cssVars.default['icon-inverted'] : cssVars.default['icon-default'],
       [mutableCardVariables['bg-color']]:
-        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-base'],
+        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars.default['bg-base'],
 
       // Override the default variables for elements used inside buttons
-      [getToneCssVar('default', 'bg-tint-code')]:
-        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-tint-code'],
+      [getToneCssVar('default', 'bg-tint')]:
+        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-tint'],
       ...($mode === 'default' && {
-        [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
-        [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
-        [getToneCssVar('default', 'text-link')]: cssVars[$tone]['base-text-color'],
-        [getToneCssVar('default', 'text-accent')]: cssVars[$tone]['base-text-color'],
+        [getToneCssVar('default', 'text-secondary')]: cssVars.default['base-text-color'],
+        [getToneCssVar('default', 'text-link')]: cssVars.default['base-text-color'],
+        [getToneCssVar('default', 'text-accent')]: cssVars.default['base-text-color'],
       }),
 
       '&:disabled, &[data-disabled="true"]': {
@@ -102,9 +101,9 @@ export function buttonColorStyles(
     },
     {
       backgroundColor:
-        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-base'],
+        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars.default['bg-base'],
       color:
-        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-primary'],
+        $mode === 'default' ? cssVars.default['base-text-color'] : cssVars[$tone]['text-primary'],
       boxShadow: focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': {
         backgroundColor:

@@ -54,7 +54,7 @@ export interface CodeBaseStyleProps {
 
 export function codeBaseStyle(props: CodeBaseStyleProps): ReturnType<typeof css> {
   return css`
-    color: ${cssVars.default['text-code']};
+    color: ${cssVars.default['text-secondary']};
 
     & code {
       font-family: inherit;

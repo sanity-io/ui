@@ -7,7 +7,7 @@ export function badgeStyle(props: BadgeStyleProps): CSSObject {
 
   return {
     // backgroundColor: color.enabled.bg,
-    backgroundColor: $mode === 'outline' ? cssVars[$tone]['bg-base'] : cssVars[$tone]['bg-tint'],
+    backgroundColor: $mode === 'outline' ? cssVars.default['bg-base'] : cssVars[$tone]['bg-tint'],
     color: cssVars[$tone]['text-secondary'],
     boxShadow: $mode === 'outline' ? `inset 0 0 0 1px ${cssVars[$tone]['border-base']}` : undefined,
     cursor: 'default',

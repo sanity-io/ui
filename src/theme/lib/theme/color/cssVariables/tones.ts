@@ -1,9 +1,16 @@
 import {ColorTints} from '@sanity/color'
 import {multiply, screen} from '../../../../studioTheme/helpers'
-import {ColorKey, colorKeys, getColorHex} from '../../../../studioTheme/tints'
+import {
+  ColorKey,
+  DefaultColorKey,
+  allKeys,
+  colorKeys,
+  getColorHex,
+} from '../../../../studioTheme/tints'
 import {ThemeColorName, ThemeColorSchemeKey} from '../types'
 
-export const getToneCssVar = (tone: ThemeColorName, key: ColorKey): string => `--${tone}-${key}`
+export const getToneCssVar = (tone: ThemeColorName, key: DefaultColorKey): string =>
+  `--${tone}-${key}`
 
 export const createTonesVariables = (
   scheme: ThemeColorSchemeKey,
@@ -18,9 +25,11 @@ export const createTonesVariables = (
 
   keys.forEach((_tone: ThemeColorName) => {
     const tone = _tone == 'default' ? defaultTone : _tone
-    const tint = tones[tone]
 
-    colorKeys.forEach((key) => {
+    const tint = tones[tone]
+    const keysToGenerate = _tone === 'default' ? allKeys : colorKeys
+
+    keysToGenerate.forEach((key) => {
       const colorHex = getColorHex(tint, scheme, tone, key)
       const varName = getToneCssVar(_tone, key)
       const willBeMixed = needsMixing && !key.startsWith('base-')
@@ -32,31 +41,22 @@ export const createTonesVariables = (
   // If we are changing the default tone, we need to update the bg-base to match with the new base bg color.
   // As components are using this bg-base for the background color, and it needs to match with the card bg color.
   if (defaultTone !== 'default') {
-    tonesVariables[getToneCssVar('default', 'bg-base')] = tonesCssVariables.default['base-bg-card']
+    tonesVariables[getToneCssVar('default', 'bg-base')] = defaultToneCssVariables['base-bg-card']
   }
 
   return tonesVariables
 }
 
-const themeNames: ThemeColorName[] = [
-  'default',
-  'transparent',
-  'primary',
-  'positive',
-  'caution',
-  'critical',
-]
+const themeTones = ['transparent', 'primary', 'positive', 'caution', 'critical'] as const
+type tones = (typeof themeTones)[number]
 
-export const tonesCssVariables: Record<
-  ThemeColorName,
-  Record<ColorKey, string>
-> = themeNames.reduce(
+const colorsCssVariables: Record<tones, Record<ColorKey, string>> = themeTones.reduce(
   (acc, tone) => {
     acc[tone] = colorKeys.reduce(
-      (acc, key) => {
-        acc[key] = `var(${getToneCssVar(tone, key)})`
+      (toneAcc, key) => {
+        toneAcc[key] = `var(${getToneCssVar(tone, key)})`
 
-        return acc
+        return toneAcc
       },
       {} as Record<ColorKey, string>,
     )
@@ -65,3 +65,17 @@ export const tonesCssVariables: Record<
   },
   {} as Record<ThemeColorName, Record<ColorKey, string>>,
 )
+
+const defaultToneCssVariables = allKeys.reduce(
+  (acc, key) => {
+    acc[key] = `var(${getToneCssVar('default', key)})`
+
+    return acc
+  },
+  {} as Record<DefaultColorKey, string>,
+)
+
+export const tonesCssVariables = {
+  default: defaultToneCssVariables,
+  ...colorsCssVariables,
+}
