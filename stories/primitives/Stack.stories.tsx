@@ -8,13 +8,13 @@ const meta: Meta<typeof Stack> = {
     space: 0,
     children: [
       <Card key="card1" padding={2}>
-        <Text align="center">Stack item 3</Text>
+        <Text align="center">Stack item 1</Text>
       </Card>,
       <Card key="card2" padding={2}>
         <Text align="center">Stack item 2</Text>
       </Card>,
       <Card key="card2" padding={2}>
-        <Text align="center">Stack item 1</Text>
+        <Text align="center">Stack item 3</Text>
       </Card>,
     ],
   },

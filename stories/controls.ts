@@ -10,20 +10,6 @@ export const getAlignControls = () => {
   }
 }
 
-export const getFlexAlignControls = () => {
-  return {
-    control: {type: 'radio'},
-    options: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
-  }
-}
-
-export const getDirectionControls = () => {
-  return {
-    control: {type: 'radio'},
-    options: ['row', 'column', 'row-reverse', 'column-reverse'],
-  }
-}
-
 export const getAvatarSizeControls = () => {
   const numSizes = studioTheme.avatar.sizes.length
 
@@ -39,6 +25,20 @@ export const getContainerWidthControls = () => {
   return {
     control: {type: 'number', min: 0, max: numContainerSizes - 1},
     options: [...Array(numContainerSizes).keys()],
+  }
+}
+
+export const getDirectionControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['row', 'column', 'row-reverse', 'column-reverse'],
+  }
+}
+
+export const getFlexAlignControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
   }
 }
 

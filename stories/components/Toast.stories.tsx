@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import {useState} from 'react'
 import {Toast, ToastProvider, useToast} from '../../src/components'
 import {Button, Inline} from '../../src/primitives'
 
@@ -26,24 +25,15 @@ export const Default: Story = {
   },
 }
 
-export const OpenOnButtonClick: Story = {
-  render: (props) => {
-    const [showToast, setShowToast] = useState(false)
-
-    const handleClick = () => {
-      setShowToast(true)
-    }
-
-    return (
-      <>
-        <Button text="Show toast" onClick={handleClick} />
-        {showToast && <Toast {...props} onClose={() => setShowToast(false)} />}
-      </>
-    )
-  },
-}
-
 export const WithHook: Story = {
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 250,
+      },
+    },
+  },
   render: () => {
     const toast = useToast()
 
