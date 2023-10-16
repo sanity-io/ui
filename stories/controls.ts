@@ -28,6 +28,20 @@ export const getContainerWidthControls = () => {
   }
 }
 
+export const getDirectionControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['row', 'column', 'row-reverse', 'column-reverse'],
+  }
+}
+
+export const getFlexAlignControls = () => {
+  return {
+    control: {type: 'radio'},
+    options: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+  }
+}
+
 export const getHeightControls = () => {
   return {
     control: {type: 'radio'},
