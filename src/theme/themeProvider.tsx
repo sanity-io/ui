@@ -3,6 +3,7 @@ import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
 import {createCssVars} from './lib/theme/color/cssVariables'
+import {cssObjectToCssString} from './lib/theme/color/cssVariables/utils'
 import {ThemeContext} from './themeContext'
 import {ToneProvider} from './toneContext/toneProvider'
 import {RootTheme, Theme, ThemeContextValue} from './types'
@@ -41,13 +42,22 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
 
   useEffect(() => {
     if (!themeProp?.color.tones) return
-    const cssVariables = createCssVars(scheme, themeProp?.color.tones)
+    const cssVariables = cssObjectToCssString(createCssVars(scheme, themeProp?.color.tones))
+    // Add the vars to the style sheet
+    const sheet = document.styleSheets[0]
 
-    // Add the vars to the body
-    const root = document.body
+    if (sheet) {
+      sheet.insertRule(`:root{${cssVariables}}`)
+    } else {
+      // Create a new sheet and add the vars to it
+      const style = document.createElement('style')
 
-    // Set the css variables to the root object TODO: Can this be done in a more performant way?
-    Object.keys(cssVariables).forEach((key) => root.style.setProperty(key, cssVariables[key]))
+      document.head.appendChild(style)
+      // Get a reference to the stylesheet object
+      const sheet = style.sheet
+
+      sheet?.insertRule(`:root{${cssVariables}}`)
+    }
   }, [themeProp?.color.tones, scheme])
 
   const value: ThemeContextValue | null = useMemo(
