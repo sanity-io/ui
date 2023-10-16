@@ -64,8 +64,8 @@ const Wrapper = ({
   shouldAddContext: boolean
   scheme: ThemeColorSchemeKey
   tone: ThemeColorName
-  children: React.ReactNode
-}) => {
+  children: React.ReactElement
+}): React.ReactElement => {
   // Avoid creating a new react context if the card is just inheriting styles from the parent.
   if (shouldAddContext) {
     return (

@@ -2,7 +2,6 @@ import {ColorTints} from '@sanity/color'
 import {getColorHex} from '../../../../studioTheme/tints'
 import {ThemeColorName, ThemeColorSchemeKey} from '../types'
 import {cardVariables, mutableVariables} from './cardVariables'
-import {createSpotVars, spotCssVariables} from './spot'
 import {createSyntaxVariables, syntaxCssVariables} from './syntax'
 import {createTonesVariables, tonesCssVariables} from './tones'
 
@@ -16,10 +15,9 @@ export const createCssVars = (
 ): Record<string, string> => {
   const baseBg = getColorHex(tones[defaultTone], scheme, defaultTone, 'base-bg-card')
   const tonesVars = createTonesVariables(scheme, tones, defaultTone, baseBg)
-  const spotVars = createSpotVars(scheme, baseBg)
   const syntaxVars = createSyntaxVariables(scheme, baseBg)
 
-  return {...tonesVars, ...spotVars, ...syntaxVars, ...cardVariables}
+  return {...tonesVars, ...syntaxVars, ...cardVariables}
 }
 
 /**
@@ -27,7 +25,6 @@ export const createCssVars = (
  */
 export const cssVars = {
   ...tonesCssVariables,
-  spot: spotCssVariables,
   syntax: syntaxCssVariables,
   /**
    * This variables are mutable, they can be updated by other components.
