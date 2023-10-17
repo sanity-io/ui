@@ -61,7 +61,7 @@ export const TextArea = forwardRef(function TextArea(
     disabled = false,
     fontSize = 2,
     padding = 3,
-    radius = 1,
+    radius = 2,
     weight,
     tone = 'default',
     ...restProps

@@ -158,7 +158,7 @@ export const TextInput = forwardRef(function TextInput(
     onClear,
     padding: paddingProp = 3,
     prefix,
-    radius: radiusProp = 1,
+    radius: radiusProp = 2,
     readOnly,
     space: spaceProp = 3,
     suffix,
