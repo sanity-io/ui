@@ -6,10 +6,7 @@ import {LayerProvider} from '../../src/utils'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Menu> = {
-  args: {
-    padding: 1,
-    space: 1,
-  },
+  args: {},
   argTypes: {
     padding: getSpaceControls(),
     space: getSpaceControls(),
