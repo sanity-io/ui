@@ -1,7 +1,7 @@
 import {ColorTints} from '@sanity/color'
 import {multiply, screen} from '../../../../studioTheme/helpers'
-import {ColorKey, colorKeys, getColorHex} from '../../../../studioTheme/tints'
 import {ThemeColorName, ThemeColorSchemeKey} from '../types'
+import {ColorKey, colorKeys, getColorHex} from './tints'
 
 export const getToneCssVar = (tone: ThemeColorName, key: ColorKey): string => `--${tone}-${key}`
 

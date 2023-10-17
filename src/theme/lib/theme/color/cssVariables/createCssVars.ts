@@ -1,7 +1,7 @@
 import {ColorTints} from '@sanity/color'
-import {getColorHex} from '../../../../studioTheme/tints'
 import {ThemeColorName, ThemeColorSchemeKey} from '../types'
 import {cardVariables, mutableVariables} from './cardVariables'
+import {getColorHex} from './tints'
 import {createTonesVariables, tonesCssVariables} from './tones'
 
 /**
