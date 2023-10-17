@@ -1,28 +1,27 @@
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import {Menu, MenuItem, MenuDivider} from '../../src/components'
-import {Box, Card, Stack, Text} from '../../src/primitives'
+import {BinaryDocumentIcon, RestoreIcon} from '@sanity/icons'
+import type {Meta, StoryObj} from '@storybook/react'
+import {Menu, MenuDivider, MenuGroup, MenuItem} from '../../src/components'
+import {Card, Container} from '../../src/primitives'
 import {LayerProvider} from '../../src/utils'
+import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Menu> = {
   args: {
-    children: [
-      <MenuItem key="item1" text="First option" />,
-      <MenuItem key="item2" text="Second option" />,
-      <MenuItem key="item3" text="Third option" />,
-    ],
+    padding: 1,
+    space: 1,
+  },
+  argTypes: {
+    padding: getSpaceControls(),
+    space: getSpaceControls(),
+    disabled: {control: 'boolean'},
+    paddingX: getSpaceControls(),
+    paddingY: getSpaceControls(),
+    paddingBottom: getSpaceControls(),
+    paddingLeft: getSpaceControls(),
+    paddingRight: getSpaceControls(),
+    paddingTop: getSpaceControls(),
   },
   component: Menu,
-  decorators: [
-    (Story: StoryFn): JSX.Element => (
-      <Box padding={4}>
-        <Card radius={3} shadow={2}>
-          <LayerProvider>
-            <Story />
-          </LayerProvider>
-        </Card>
-      </Box>
-    ),
-  ],
   tags: ['autodocs'],
 }
 
@@ -31,46 +30,26 @@ type Story = StoryObj<typeof Menu>
 
 export const Default: Story = {
   render: (props) => {
-    return <Menu {...props} />
-  },
-}
-
-export const CustomMenuItem: Story = {
-  render: (props) => {
     return (
-      <Menu {...props}>
-        <MenuItem>
-          <Box padding={3}>
-            <Stack space={3}>
-              <Text weight="semibold">First option</Text>
-              <Text muted size={1}>
-                Description
-              </Text>
-            </Stack>
-          </Box>
-        </MenuItem>
-        <MenuItem>
-          <Box padding={3}>
-            <Stack space={3}>
-              <Text weight="semibold">Second option</Text>
-              <Text muted size={1}>
-                Description
-              </Text>
-            </Stack>
-          </Box>
-        </MenuItem>
-        <MenuDivider />
-        <MenuItem tone="critical">
-          <Box padding={3}>
-            <Stack space={3}>
-              <Text weight="semibold">Dangerous option</Text>
-              <Text muted size={1}>
-                Description
-              </Text>
-            </Stack>
-          </Box>
-        </MenuItem>
-      </Menu>
+      <Container width={0}>
+        <Card radius={3} shadow={2}>
+          <LayerProvider>
+            <Menu {...props}>
+              <MenuItem icon={RestoreIcon} id="menu-item-1" text="Review changes" />
+              <MenuItem icon={BinaryDocumentIcon} id="menu-item-2" text="Inspect" />
+              <MenuDivider />
+              <MenuGroup
+                id="menu-item-2"
+                text="Menu item with submenu"
+                popover={{placement: 'right'}}
+              >
+                <MenuItem id="menu-item-2-1" text="Menu item" />
+                <MenuItem id="menu-item-2-2" text="Menu item" />
+              </MenuGroup>
+            </Menu>
+          </LayerProvider>
+        </Card>
+      </Container>
     )
   },
 }
