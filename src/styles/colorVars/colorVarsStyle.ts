@@ -1,4 +1,4 @@
-import {cssVars} from '../../theme'
+import {ThemeColorToneKey, cssVars} from '../../theme'
 import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
 import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
 import {CSSObject} from '../../types/styled'
@@ -14,8 +14,8 @@ export function _colorVarStyleDisabled(checkered = false): CSSObject {
     [getToneCssVar('default', 'text-code')]: cssVars.default['text-secondary'],
     [getToneCssVar('default', 'text-primary')]: cssVars.default['text-secondary'],
 
-    [mutableCardVariables['fg-color']]: cssVars.primary['text-inactive'],
-    [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-inactive'],
+    [mutableCardVariables['fg-color']]: cssVars.primary['text-secondary'],
+    [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-secondary'],
     [mutableCardVariables['icon-color']]: cssVars.primary['border-base'],
     [mutableCardVariables['accent-color']]: cssVars.primary['base-bg-card'],
     [mutableCardVariables['bg-color']]: cssVars.primary['bg-tint'],
@@ -46,6 +46,7 @@ export function _colorVarStyleSelected(): CSSObject {
 export function _colorVarStyleHover(): CSSObject {
   return {
     [mutableCardVariables['bg-color']]: cssVars.default['bg-base-hover'],
+    [getToneCssVar('default', 'bg-tint')]: cssVars.default['bg-base-active'],
   }
 }
 
@@ -63,10 +64,11 @@ export function _colorVarStyleActive(): CSSObject {
  * @internal
  * Selectable needs to redefine bg-color and fg-color
  */
-export function _selectableVarStyle(): CSSObject {
+export function _selectableVarStyle(tone: ThemeColorToneKey): CSSObject {
   return {
     [mutableCardVariables['bg-color']]: 'inherit',
-    [mutableCardVariables['fg-color']]: cssVars.default['text-secondary'],
+    [mutableCardVariables['fg-color']]:
+      tone === 'default' ? cssVars.default['text-primary'] : cssVars.default['text-secondary'],
   }
 }
 

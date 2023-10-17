@@ -9,7 +9,7 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp, useForwardedRef} from '../../hooks'
-import {Box, Flex, Text} from '../../primitives'
+import {Badge, Box, Flex, Stack, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
 import {ThemeColorToneKey} from '../../theme'
@@ -31,6 +31,8 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   space?: number | number[]
   text?: React.ReactNode
   tone?: ThemeColorToneKey
+  subText?: React.ReactNode
+  badgeText?: React.ReactNode
 }
 
 /**
@@ -62,6 +64,8 @@ export const MenuItem = forwardRef(function MenuItem(
     selected: selectedProp,
     space = 3,
     text,
+    subText,
+    badgeText,
     tone = 'default',
     ...restProps
   } = props
@@ -122,7 +126,7 @@ export const MenuItem = forwardRef(function MenuItem(
       forwardedAs={as}
       $radius={useArrayProp(radius)}
       $padding={useArrayProp(0)}
-      $tone={tone}
+      $tone={disabled ? 'default' : tone}
       $scheme={scheme}
       disabled={disabled}
       onClick={handleClick}
@@ -134,43 +138,45 @@ export const MenuItem = forwardRef(function MenuItem(
       type={as === 'button' ? 'button' : undefined}
     >
       {(icon || text || iconRight) && (
-        <Box as="span" {...paddingProps}>
-          <Flex as="span">
-            {icon && (
-              <Text size={fontSize}>
-                {isValidElement(icon) && icon}
-                {isValidElementType(icon) && createElement(icon)}
-              </Text>
-            )}
+        <Flex as="span" gap={space} align="center" {...paddingProps}>
+          {icon && (
+            <Text size={fontSize}>
+              {isValidElement(icon) && icon}
+              {isValidElementType(icon) && createElement(icon)}
+            </Text>
+          )}
 
-            {text && (
-              <Box
-                flex={1}
-                marginLeft={icon ? space : undefined}
-                marginRight={iconRight ? space : undefined}
-              >
-                <Text size={fontSize} textOverflow="ellipsis">
-                  {text}
+          {text && (
+            <Stack flex={1} space={2}>
+              <Text size={fontSize} textOverflow="ellipsis" weight="medium">
+                {text}
+              </Text>
+              {subText && (
+                <Text size={fontSize} textOverflow="ellipsis" weight={'regular'} muted>
+                  {subText}
                 </Text>
-              </Box>
-            )}
+              )}
+            </Stack>
+          )}
 
-            {hotkeys && (
-              <Box marginLeft={space} style={{marginTop: -4, marginBottom: -4}}>
-                <Hotkeys fontSize={fontSize} keys={hotkeys} />
-              </Box>
-            )}
+          {hotkeys && (
+            <Hotkeys fontSize={fontSize} keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />
+          )}
 
-            {iconRight && (
-              <Text size={fontSize}>
-                {isValidElement(iconRight) && iconRight}
-                {isValidElementType(iconRight) && createElement(iconRight)}
-              </Text>
-            )}
-          </Flex>
-        </Box>
+          {iconRight && (
+            <Text size={fontSize}>
+              {isValidElement(iconRight) && iconRight}
+              {isValidElementType(iconRight) && createElement(iconRight)}
+            </Text>
+          )}
+
+          {badgeText && (
+            <Badge fontSize={fontSize} mode="default">
+              {badgeText}
+            </Badge>
+          )}
+        </Flex>
       )}
-
       {children && (
         <Box as="span" {...paddingProps}>
           {children}

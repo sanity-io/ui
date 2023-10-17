@@ -34,7 +34,7 @@ export function MenuGroup(
   const {
     as = 'button',
     children,
-    fontSize,
+    fontSize = 1,
     icon,
     onClick,
     padding = 3,
@@ -177,7 +177,7 @@ export function MenuGroup(
         type={as === 'button' ? 'button' : undefined}
       >
         <Box padding={padding}>
-          <Flex>
+          <Flex gap={space}>
             {icon && (
               <Text size={fontSize}>
                 {isValidElement(icon) && icon}
@@ -185,17 +185,15 @@ export function MenuGroup(
               </Text>
             )}
 
-            <Box flex={1} marginLeft={icon ? space : undefined}>
-              <Text size={fontSize} textOverflow="ellipsis">
+            <Box flex={1}>
+              <Text size={fontSize} textOverflow="ellipsis" weight="medium">
                 {text}
               </Text>
             </Box>
 
-            <Box marginLeft={space}>
-              <Text size={fontSize}>
-                <ChevronRightIcon />
-              </Text>
-            </Box>
+            <Text size={fontSize}>
+              <ChevronRightIcon />
+            </Text>
           </Flex>
         </Box>
       </Selectable>
