@@ -34,7 +34,7 @@ export function MenuGroup(
   const {
     as = 'button',
     children,
-    fontSize,
+    fontSize = 1,
     icon,
     onClick,
     padding = 3,
@@ -176,28 +176,24 @@ export function MenuGroup(
         tabIndex={-1}
         type={as === 'button' ? 'button' : undefined}
       >
-        <Box padding={padding}>
-          <Flex>
-            {icon && (
-              <Text size={fontSize}>
-                {isValidElement(icon) && icon}
-                {isValidElementType(icon) && createElement(icon)}
-              </Text>
-            )}
+        <Flex gap={space} padding={padding}>
+          {icon && (
+            <Text size={fontSize}>
+              {isValidElement(icon) && icon}
+              {isValidElementType(icon) && createElement(icon)}
+            </Text>
+          )}
 
-            <Box flex={1} marginLeft={icon ? space : undefined}>
-              <Text size={fontSize} textOverflow="ellipsis">
-                {text}
-              </Text>
-            </Box>
+          <Box flex={1}>
+            <Text size={fontSize} textOverflow="ellipsis" weight="medium">
+              {text}
+            </Text>
+          </Box>
 
-            <Box marginLeft={space}>
-              <Text size={fontSize}>
-                <ChevronRightIcon />
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
+          <Text size={fontSize}>
+            <ChevronRightIcon />
+          </Text>
+        </Flex>
       </Selectable>
     </Popover>
   )

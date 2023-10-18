@@ -4,7 +4,7 @@ import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {BadgeMode, BadgeTone} from '../../types'
 import {Box, BoxProps} from '../box'
-import {Label} from '../label'
+import {Text} from '../text'
 import {ResponsiveRadiusProps} from '../types'
 import {badgeStyle} from './styles'
 import {BadgeStyleProps} from './types'
@@ -51,7 +51,9 @@ export const Badge = forwardRef(function Badge(
       padding={useArrayProp(padding)}
       ref={ref}
     >
-      <Label size={fontSize}>{children}</Label>
+      <Text size={fontSize} weight="medium">
+        {children}
+      </Text>
     </Root>
   )
 })

@@ -1,9 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {
-  _colorVarStyleActive,
   _colorVarStyleHover,
-  _colorVarStyleSelected,
   _selectableVarStyle,
   _selectableVarStyleDisabled,
 } from '../../styles/colorVars'
@@ -48,7 +46,7 @@ export function selectableColorStyle(
 
   return css`
     ${$tone !== 'default' && createCssVars($scheme, theme.sanity.color.tones, $tone)}
-    ${_selectableVarStyle()}
+    ${_selectableVarStyle($tone)}
 
     background-color: ${cssVars.mutable['bg-color']};
     color: ${cssVars[$tone]['text-secondary']};
@@ -62,12 +60,12 @@ export function selectableColorStyle(
 
       &:not(:disabled) {
         &[aria-pressed='true'] {
-          ${_colorVarStyleActive()}
+          ${_colorVarStyleHover()}
         }
 
         &[data-selected],
         &[aria-selected='true'] > & {
-          ${_colorVarStyleSelected()}
+          ${_colorVarStyleHover()}
         }
 
         @media (hover: hover) {
@@ -78,7 +76,7 @@ export function selectableColorStyle(
             }
 
             &:active {
-              ${_colorVarStyleActive()}
+              ${_colorVarStyleHover()}
             }
           }
         }
@@ -93,11 +91,11 @@ export function selectableColorStyle(
 
       &:not([data-disabled]) {
         &[data-pressed] {
-          ${_colorVarStyleActive()}
+          ${_colorVarStyleHover()}
         }
 
         &[data-selected] {
-          ${_colorVarStyleSelected()}
+          ${_colorVarStyleHover()}
         }
 
         @media (hover: hover) {
@@ -106,9 +104,8 @@ export function selectableColorStyle(
             &:hover {
               ${_colorVarStyleHover()}
             }
-
             &:active {
-              ${_colorVarStyleActive()}
+              ${_colorVarStyleHover()}
             }
           }
         }
