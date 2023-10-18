@@ -215,7 +215,7 @@ describe('css variables', () => {
       '--card-link-color': 'var(--default-text-link)',
       '--card-hairline-soft-color': 'var(--default-border-base)',
       '--card-hairline-hard-color': 'var(--default-border-base)',
-      '--card-bg2-color': 'var(--default-bg-tint)',
+      '--card-border-color': 'var(--default-border-base)',
     }
 
     expect(result).toEqual(expected)
