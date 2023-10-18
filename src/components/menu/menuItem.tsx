@@ -122,7 +122,7 @@ export const MenuItem = forwardRef(function MenuItem(
       forwardedAs={as}
       $radius={useArrayProp(radius)}
       $padding={useArrayProp(0)}
-      $tone={tone}
+      $tone={disabled ? 'default' : tone}
       $scheme={scheme}
       disabled={disabled}
       onClick={handleClick}
@@ -134,43 +134,34 @@ export const MenuItem = forwardRef(function MenuItem(
       type={as === 'button' ? 'button' : undefined}
     >
       {(icon || text || iconRight) && (
-        <Box as="span" {...paddingProps}>
-          <Flex as="span">
-            {icon && (
-              <Text size={fontSize}>
-                {isValidElement(icon) && icon}
-                {isValidElementType(icon) && createElement(icon)}
+        <Flex as="span" gap={space} align="center" {...paddingProps}>
+          {icon && (
+            <Text size={fontSize}>
+              {isValidElement(icon) && icon}
+              {isValidElementType(icon) && createElement(icon)}
+            </Text>
+          )}
+
+          {text && (
+            <Box flex={1}>
+              <Text size={fontSize} textOverflow="ellipsis" weight="medium">
+                {text}
               </Text>
-            )}
+            </Box>
+          )}
 
-            {text && (
-              <Box
-                flex={1}
-                marginLeft={icon ? space : undefined}
-                marginRight={iconRight ? space : undefined}
-              >
-                <Text size={fontSize} textOverflow="ellipsis">
-                  {text}
-                </Text>
-              </Box>
-            )}
+          {hotkeys && (
+            <Hotkeys fontSize={fontSize} keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />
+          )}
 
-            {hotkeys && (
-              <Box marginLeft={space} style={{marginTop: -4, marginBottom: -4}}>
-                <Hotkeys fontSize={fontSize} keys={hotkeys} />
-              </Box>
-            )}
-
-            {iconRight && (
-              <Text size={fontSize}>
-                {isValidElement(iconRight) && iconRight}
-                {isValidElementType(iconRight) && createElement(iconRight)}
-              </Text>
-            )}
-          </Flex>
-        </Box>
+          {iconRight && (
+            <Text size={fontSize}>
+              {isValidElement(iconRight) && iconRight}
+              {isValidElementType(iconRight) && createElement(iconRight)}
+            </Text>
+          )}
+        </Flex>
       )}
-
       {children && (
         <Box as="span" {...paddingProps}>
           {children}
