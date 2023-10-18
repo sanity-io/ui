@@ -2,14 +2,16 @@ import {DecoratorHelpers} from '@storybook/addon-themes'
 import {StoryFn} from '@storybook/react'
 import React from 'react'
 import {createGlobalStyle} from 'styled-components'
-import {Card} from '../../src/primitives'
+import {Box} from '../../src/primitives'
 import {studioTheme, ThemeProvider} from '../../src/theme'
+import {cssVars} from '../../src/theme/lib/theme/color/cssVariables'
 
 const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
 
 export const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${({theme}) => theme.sanity.color.base.bg};
+  body,
+  .docs-story {
+    background-color: ${cssVars.default['base-bg-card']};
   }
 `
 
@@ -32,9 +34,9 @@ export const withSanityTheme = ({themes, defaultTheme}) => {
     return (
       <ThemeProvider scheme={selected} theme={studioTheme}>
         <GlobalStyle />
-        <Card padding={4}>
+        <Box padding={4}>
           <Story />
-        </Card>
+        </Box>
       </ThemeProvider>
     )
   }

@@ -13,3 +13,17 @@ export interface AvatarRootStyleProps {
 export interface ResponsiveAvatarSizeStyleProps {
   $size: AvatarSize[]
 }
+
+/**
+ * @public
+ */
+export type ThemeColorSpotKey =
+  | 'gray'
+  | 'blue'
+  | 'purple'
+  | 'magenta'
+  | 'red'
+  | 'orange'
+  | 'yellow'
+  | 'green'
+  | 'cyan'
