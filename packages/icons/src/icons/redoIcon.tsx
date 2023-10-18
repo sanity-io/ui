@@ -5,13 +5,13 @@ import {forwardRef} from 'react'
 /**
  * @public
  */
-export const RevertIcon = forwardRef(function RevertIcon(
+export const RedoIcon = forwardRef(function RedoIcon(
   props: React.SVGProps<SVGSVGElement>,
   ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg
-      data-sanity-icon="revert"
+      data-sanity-icon="redo"
       width="1em"
       height="1em"
       viewBox="0 0 25 25"
@@ -21,13 +21,13 @@ export const RevertIcon = forwardRef(function RevertIcon(
       {...props}
     >
       <path
-        d="M6 9.5L15 9.5C17.4853 9.5 19.5 11.5147 19.5 14C19.5 16.4853 17.4853 18.5 15 18.5H6"
+        d="M19 9.5L10 9.5C7.51472 9.5 5.5 11.5147 5.5 14C5.5 16.4853 7.51472 18.5 10 18.5H19"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"
       />
       <path
-        d="M10 13.5L6 9.5L10 5.5"
+        d="M15 13.5L19 9.5L15 5.5"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"

@@ -110,6 +110,7 @@ import {InsertAboveIcon} from './insertAboveIcon'
 import {InsertBelowIcon} from './insertBelowIcon'
 import {ItalicIcon} from './italicIcon'
 import {JoystickIcon} from './joystickIcon'
+import {JsonIcon} from './jsonIcon'
 import {LaunchIcon} from './launchIcon'
 import {LeaveIcon} from './leaveIcon'
 import {LemonIcon} from './lemonIcon'
@@ -137,6 +138,8 @@ import {PlugIcon} from './plugIcon'
 import {PresentationIcon} from './presentationIcon'
 import {PublishIcon} from './publishIcon'
 import {ReadOnlyIcon} from './readOnlyIcon'
+import {RedoIcon} from './redoIcon'
+import {RefreshIcon} from './refreshIcon'
 import {RemoveCircleIcon} from './removeCircleIcon'
 import {RemoveIcon} from './removeIcon'
 import {ResetIcon} from './resetIcon'
@@ -306,6 +309,7 @@ export type IconSymbol =
   | 'insert-below'
   | 'italic'
   | 'joystick'
+  | 'json'
   | 'launch'
   | 'leave'
   | 'lemon'
@@ -333,6 +337,8 @@ export type IconSymbol =
   | 'presentation'
   | 'publish'
   | 'read-only'
+  | 'redo'
+  | 'refresh'
   | 'remove-circle'
   | 'remove'
   | 'reset'
@@ -499,6 +505,7 @@ export {
   InsertBelowIcon,
   ItalicIcon,
   JoystickIcon,
+  JsonIcon,
   LaunchIcon,
   LeaveIcon,
   LemonIcon,
@@ -526,6 +533,8 @@ export {
   PresentationIcon,
   PublishIcon,
   ReadOnlyIcon,
+  RedoIcon,
+  RefreshIcon,
   RemoveCircleIcon,
   RemoveIcon,
   ResetIcon,
@@ -696,6 +705,7 @@ export interface IconMap {
   'insert-below': IconComponent
   italic: IconComponent
   joystick: IconComponent
+  json: IconComponent
   launch: IconComponent
   leave: IconComponent
   lemon: IconComponent
@@ -723,6 +733,8 @@ export interface IconMap {
   presentation: IconComponent
   publish: IconComponent
   'read-only': IconComponent
+  redo: IconComponent
+  refresh: IconComponent
   'remove-circle': IconComponent
   remove: IconComponent
   reset: IconComponent
@@ -893,6 +905,7 @@ export const icons: IconMap = {
   'insert-below': InsertBelowIcon,
   italic: ItalicIcon,
   joystick: JoystickIcon,
+  json: JsonIcon,
   launch: LaunchIcon,
   leave: LeaveIcon,
   lemon: LemonIcon,
@@ -920,6 +933,8 @@ export const icons: IconMap = {
   presentation: PresentationIcon,
   publish: PublishIcon,
   'read-only': ReadOnlyIcon,
+  redo: RedoIcon,
+  refresh: RefreshIcon,
   'remove-circle': RemoveCircleIcon,
   remove: RemoveIcon,
   reset: ResetIcon,
