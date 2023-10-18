@@ -17,3 +17,11 @@ export const FLOATING_STATIC_SIDES: Record<string, 'bottom' | 'left' | 'top' | '
   bottom: 'top',
   left: 'right',
 }
+
+/**
+ * @internal
+ */
+export const IS_APPLE_DEVICE =
+  typeof navigator === 'undefined' || typeof navigator.platform !== 'string'
+    ? false
+    : /Mac|iPod|iPhone|iPad/.test(navigator.platform || '')
