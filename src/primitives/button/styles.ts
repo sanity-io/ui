@@ -1,7 +1,9 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
+import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
+import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
+import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
 import {ButtonMode, ButtonTone} from '../../types'
 import {CSSObject} from '../../types/styled'
 
@@ -54,21 +56,65 @@ function combineBoxShadow(...boxShadows: (string | undefined)[]): string {
 export function buttonColorStyles(
   props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps,
 ): CSSObject[] {
-  const {$mode, theme} = props
+  const {$mode, theme, $tone} = props
   const {focusRing} = theme.sanity.button
   const shadow = props.$mode !== 'bleed'
-  const base = theme.sanity.color.base
-  const mode = theme.sanity.color.button[$mode] || theme.sanity.color.button.default
-  const color = mode[props.$tone] || mode.default
-  const border = {width: buttonTheme.border.width, color: 'var(--card-border-color)'}
+  const border = {
+    width: buttonTheme.border.width,
+    color:
+      $mode === 'default'
+        ? cssVars[$tone]['bg-accent']
+        : $mode === 'ghost'
+        ? cssVars[$tone]['border-base']
+        : cssVars[$tone]['bg-base'],
+  }
 
   return [
-    _colorVarsStyle(base, color.enabled),
     {
-      backgroundColor: 'var(--card-bg-color)',
-      color: 'var(--card-fg-color)',
+      // This is going to be used by the text elements inside the button
+      [mutableCardVariables['fg-color']]:
+        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-primary'],
+      [mutableCardVariables['muted-fg-color']]:
+        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-secondary'],
+      [mutableCardVariables['icon-color']]:
+        $mode === 'default' ? cssVars[$tone]['icon-inverted'] : cssVars[$tone]['icon-default'],
+      [mutableCardVariables['bg-color']]:
+        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-base'],
+
+      // Override the default variables for elements used inside buttons
+      [getToneCssVar('default', 'bg-tint-code')]:
+        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-tint-code'],
+      ...($mode === 'default' && {
+        [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
+        [getToneCssVar('default', 'text-code')]: cssVars[$tone]['base-text-color'],
+        [getToneCssVar('default', 'text-link')]: cssVars[$tone]['base-text-color'],
+        [getToneCssVar('default', 'text-accent')]: cssVars[$tone]['base-text-color'],
+      }),
+
+      '&:disabled, &[data-disabled="true"]': {
+        /* Updates the variables for the */
+        [mutableCardVariables['fg-color']]: cssVars.primary['text-inactive'],
+        [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-inactive'],
+        [mutableCardVariables['icon-color']]: cssVars.primary['border-base'],
+        [mutableCardVariables['bg-color']]:
+          $mode === 'default' ? cssVars.primary['bg-tint'] : cssVars.default['bg-base'],
+      },
+    },
+    {
+      backgroundColor:
+        $mode === 'default' ? cssVars[$tone]['bg-accent'] : cssVars[$tone]['bg-base'],
+      color:
+        $mode === 'default' ? cssVars[$tone]['base-text-color'] : cssVars[$tone]['text-primary'],
       boxShadow: focusRingBorderStyle(border),
-      '&:disabled, &[data-disabled="true"]': _colorVarsStyle(base, color.disabled),
+      '&:disabled, &[data-disabled="true"]': {
+        backgroundColor:
+          $mode === 'default' ? cssVars.primary['bg-tint'] : cssVars.default['bg-base'],
+        color: cssVars.primary['text-inactive'],
+        boxShadow: focusRingBorderStyle({
+          ...border,
+          color: $mode === 'default' ? cssVars.primary['bg-tint'] : cssVars.primary['border-base'],
+        }),
+      },
       "&:not([data-disabled='true'])": {
         boxShadow: combineBoxShadow(
           focusRingBorderStyle(border),
@@ -76,8 +122,8 @@ export function buttonColorStyles(
         ),
         '&:focus': {
           boxShadow: focusRingStyle({
-            base,
-            border: {width: 2, color: base.bg},
+            base: {bg: cssVars.positive['border-accent']},
+            border: {width: 2, color: cssVars.default['bg-base']},
             focusRing,
           }),
         },
@@ -88,11 +134,31 @@ export function buttonColorStyles(
           ),
         },
         '@media (hover: hover)': {
-          '&:hover': _colorVarsStyle(base, color.hovered),
-          '&:active': _colorVarsStyle(base, color.pressed),
-          '&[data-hovered]': _colorVarsStyle(base, color.hovered),
+          '&:hover': {
+            backgroundColor:
+              $mode === 'default'
+                ? cssVars[$tone]['bg-accent-hover']
+                : cssVars[$tone]['bg-base-hover'],
+          },
+          '&:active': {
+            backgroundColor:
+              $mode === 'default'
+                ? cssVars[$tone]['bg-accent-active']
+                : cssVars[$tone]['bg-base-active'],
+          },
+          '&[data-hovered]': {
+            backgroundColor:
+              $mode === 'default'
+                ? cssVars[$tone]['bg-accent-hover']
+                : cssVars[$tone]['bg-base-hover'],
+          },
         },
-        '&[data-selected]': _colorVarsStyle(base, color.pressed),
+        '&[data-selected]': {
+          backgroundColor:
+            $mode === 'default'
+              ? cssVars[$tone]['bg-accent-active']
+              : cssVars[$tone]['bg-base-active'],
+        },
       },
     },
     theme.sanity.styles?.button?.root,

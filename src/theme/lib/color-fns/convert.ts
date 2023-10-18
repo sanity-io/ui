@@ -1,4 +1,4 @@
-import {HSL, RGB} from './types'
+import {HSL, RGB, RGBA} from './types'
 
 /**
  * @internal
@@ -20,6 +20,20 @@ export function hexToRgb(hex: string): RGB {
     r: parseInt(hex.slice(1, 3), 16),
     g: parseInt(hex.slice(3, 5), 16),
     b: parseInt(hex.slice(5, 7), 16),
+  }
+}
+
+/**
+ * @internal
+ */
+export function rgbaToRGBA(rgba: string): RGBA {
+  const values = rgba.replace(/rgba\(|\)/g, '').split(',')
+
+  return {
+    r: parseInt(values[0]),
+    g: parseInt(values[1]),
+    b: parseInt(values[2]),
+    a: parseFloat(values[3]),
   }
 }
 

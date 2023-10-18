@@ -2,10 +2,14 @@ import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'reac
 import ReactIs from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
-import {ThemeColorSpotKey, useTheme} from '../../theme'
+import {useTheme} from '../../theme'
+
+import {useToneContext} from '../../theme/toneContext/useToneContext'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
 import {Text} from '../text'
+import {spotColor} from './spotColors'
 import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
+import {ThemeColorSpotKey} from './types'
 
 /**
  * @public
@@ -63,9 +67,10 @@ export const Avatar = forwardRef(function Avatar(
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = useArrayProp(sizeProp)
   const theme = useTheme()
-  const color = theme.sanity.color.spot[colorKey] || theme.sanity.color.spot.gray
+  const {scheme} = useToneContext()
 
-  // @todo: remove this
+  const color = spotColor[colorKey][scheme].hex
+
   const avatarSize = theme.sanity.avatar.sizes[size[0]] || theme.sanity.avatar.sizes[0]
   const _sizeRem = avatarSize.size
   const _radius = _sizeRem / 2

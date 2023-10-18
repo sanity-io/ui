@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
 import {rem, _responsive, ThemeProps} from '../../styles'
+import {cssVars} from '../../theme'
 import {AvatarSize} from '../../types'
 import {Text} from '../text'
 
@@ -32,11 +33,11 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
     box-sizing: border-box;
     user-select: none;
     color: inherit;
-    color: var(--card-fg-color);
-    background: var(--card-bg-color);
+    color: ${cssVars.mutable['fg-color']};
+    background:  ${cssVars.mutable['bg-color']};
     box-shadow:
-      0 0 0 1px var(--card-bg-color),
-      inset 0 0 0 1.5px var(--card-hairline-hard-color);
+      0 0 0 1px  ${cssVars.mutable['bg-color']},
+      inset 0 0 0 1.5px ${cssVars.default['border-base']});
     padding: 0 ${rem(theme.sanity.space[2])};
 
     &:not([hidden]) {
