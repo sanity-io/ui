@@ -3,6 +3,7 @@ import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
 import {ThemeColorSchemeKey} from '../../theme'
+import {useToneContext} from '../../theme/toneContext/useToneContext'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {useLayer} from '../../utils'
 import {Card} from '../card'
@@ -66,8 +67,8 @@ export const PopoverCard = memo(
       y: yProp,
       ...restProps
     } = props
-
     const {zIndex} = useLayer()
+    const toneContext = useToneContext()
 
     // Get margins: [top, right, bottom, left]
     const margins: PopoverMargins = useMemo(
@@ -110,14 +111,17 @@ export const PopoverCard = memo(
       <Root
         data-ui="Popover"
         {...restProps}
+        data-tone={tone}
         data-placement={placement}
         radius={radius}
         ref={ref}
         scheme={scheme}
         shadow={shadow}
         sizing="border"
+        // The popover creates a new html element, so it's out of context of the css variables generated in the cards.
+        updateCssVars
+        tone={tone === 'inherit' ? toneContext.tone : tone}
         style={rootStyle}
-        tone={tone}
       >
         <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
           <Flex direction="column" flex={1} padding={padding}>

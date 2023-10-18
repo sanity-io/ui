@@ -135,3 +135,23 @@ export const OpticalAlignment: Story = {
     )
   },
 }
+
+export const TextInCard: Story = {
+  render: () => {
+    return (
+      <Flex>
+        <Stack space={4} wrap={'wrap'}>
+          <Text>Text without card</Text>
+          <Text muted>Text muted</Text>
+
+          <Card padding={4} shadow={1}>
+            <Stack space={4}>
+              <Text>Text wrapped in card</Text>
+              <Text muted>Text muted</Text>
+            </Stack>
+          </Card>
+        </Stack>
+      </Flex>
+    )
+  },
+}

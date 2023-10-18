@@ -12,7 +12,8 @@ import {useArrayProp, useForwardedRef} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {SelectableTone} from '../../types/selectable'
+import {ThemeColorToneKey} from '../../theme'
+import {useToneContext} from '../../theme/toneContext/useToneContext'
 import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
 
@@ -29,7 +30,7 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   selected?: boolean
   space?: number | number[]
   text?: React.ReactNode
-  tone?: SelectableTone
+  tone?: ThemeColorToneKey
 }
 
 /**
@@ -64,6 +65,7 @@ export const MenuItem = forwardRef(function MenuItem(
     tone = 'default',
     ...restProps
   } = props
+  const {scheme} = useToneContext()
   const menu = useMenu()
   const {
     activeElement,
@@ -121,6 +123,7 @@ export const MenuItem = forwardRef(function MenuItem(
       $radius={useArrayProp(radius)}
       $padding={useArrayProp(0)}
       $tone={tone}
+      $scheme={scheme}
       disabled={disabled}
       onClick={handleClick}
       onMouseEnter={onItemMouseEnter}

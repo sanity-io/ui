@@ -1,4 +1,4 @@
-import {RGB} from '../types'
+import {RGB, RGBA} from '../types'
 
 function multiplyChannel(b: number, s: number) {
   return b * s
@@ -9,7 +9,7 @@ function multiplyChannel(b: number, s: number) {
  * Source: https://www.w3.org/TR/compositing-1/#blendingmultiply
  * @internal
  */
-export function multiply(b: RGB, s: RGB): RGB {
+export function multiply(b: RGB | RGBA, s: RGB | RGBA): RGB {
   return {
     r: Math.round(clamp(multiplyChannel(b.r / 255, s.r / 255) * 255)),
     g: Math.round(clamp(multiplyChannel(b.g / 255, s.g / 255) * 255)),

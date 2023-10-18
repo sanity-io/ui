@@ -1,9 +1,18 @@
 import {useContext, useMemo} from 'react'
-import {ThemeProvider as StyledThemeProvider} from 'styled-components'
+import {ThemeProvider as StyledThemeProvider, createGlobalStyle} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
-import {ThemeColorSchemeKey, ThemeColorName} from './lib/theme'
+import {ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
+import {createCssVars} from './lib/theme/color/cssVariables'
+import {cssObjectToCssString} from './lib/theme/color/cssVariables/utils'
 import {ThemeContext} from './themeContext'
+import {ToneProvider} from './toneContext/toneProvider'
 import {RootTheme, Theme, ThemeContextValue} from './types'
+
+const GlobalVariables = createGlobalStyle<{$vars?: string}>`
+  :root {
+    ${({$vars}) => $vars}
+  }
+`
 
 /**
  * @public
@@ -30,13 +39,12 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
   const theme: Theme | null = useMemo(() => {
     if (!themeProp) return null
 
-    const {color: rootColor, layer: rootLayer, ...restTheme} = themeProp
-    const colorScheme = rootColor[scheme] || rootColor.light
-    const color = colorScheme[tone] || colorScheme.default
+    const {layer: rootLayer, ...restTheme} = themeProp
+
     const layer = rootLayer || DEFAULT_THEME_LAYER
 
-    return {sanity: {...restTheme, color, layer}}
-  }, [scheme, themeProp, tone])
+    return {sanity: {...restTheme, layer}}
+  }, [themeProp])
 
   const value: ThemeContextValue | null = useMemo(
     () =>
@@ -49,13 +57,24 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
     [themeProp, scheme, tone],
   )
 
+  const cssVariables = useMemo(() => {
+    if (!themeProp?.color.tones) return
+
+    return cssObjectToCssString(createCssVars(scheme, themeProp?.color.tones))
+  }, [scheme, themeProp?.color.tones])
+
   if (!theme) {
     return <pre>ThemeProvider: no "theme" property provided</pre>
   }
 
   return (
     <ThemeContext.Provider value={value}>
-      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+      <GlobalVariables $vars={cssVariables} />
+      <StyledThemeProvider theme={theme}>
+        <ToneProvider tone={tone} scheme={scheme}>
+          {children}
+        </ToneProvider>
+      </StyledThemeProvider>
     </ThemeContext.Provider>
   )
 }

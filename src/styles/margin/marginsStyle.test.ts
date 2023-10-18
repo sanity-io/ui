@@ -3,8 +3,7 @@
 import {studioTheme, Theme} from '../../theme'
 import {responsiveMarginStyle} from './marginStyle'
 
-const {color, ...restTheme} = studioTheme
-const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
+const theme: Theme = {sanity: studioTheme}
 
 describe('styles/margin', () => {
   it('should 1', () => {

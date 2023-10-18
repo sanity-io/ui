@@ -1,7 +1,9 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Flex, Grid, Text} from '../../src/primitives'
+import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '../../src/primitives'
+import {CardTone} from '../../src/types'
 import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
+import {matrixBuilder} from '../helpers/matrixBuilder'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Card> = {
@@ -205,4 +207,246 @@ export const Tones: Story = {
       })}
     </>
   ),
+}
+export const WithButtonsAndTones: Story = {
+  args: {
+    radius: 1,
+    shadow: 1,
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
+    },
+  },
+  render: (props) => (
+    <>
+      {rowBuilder({
+        renderItem: ({value}) => (
+          <Card {...props} key={value} tone={value}>
+            <Stack space={4}>
+              <Text>{value}</Text>
+              <Button text={'Primary'} tone="primary" />
+              <Button text={'Positive'} tone="positive" />
+              <Button text={'Caution'} tone="caution" />
+            </Stack>
+          </Card>
+        ),
+        rows: CARD_TONES,
+      })}
+    </>
+  ),
+}
+
+export const MultipleStyles: Story = {
+  args: {
+    radius: 1,
+    shadow: 1,
+  },
+  parameters: {
+    controls: {
+      include: ['fontSize', 'padding', 'radius', 'shadow'],
+    },
+  },
+
+  render: (props) => (
+    <Stack space={4}>
+      {matrixBuilder({
+        columns: ['card', 'enabled button', 'disabled button', 'selected button'],
+        rows: CARD_TONES,
+        title: 'State / Tone',
+        renderItem: ({row, column}) => (
+          <Card
+            {...props}
+            key={row + column}
+            as={column !== 'card' ? 'button' : undefined}
+            tone={row}
+            disabled={column === 'disabled button'}
+            selected={column === 'selected button'}
+          >
+            <Text>{column !== 'card' ? 'As <button>' : 'Card'}</Text>
+          </Card>
+        ),
+      })}
+      {matrixBuilder({
+        columns: ['card', 'enabled link', 'disabled link', 'selected link'],
+        rows: CARD_TONES,
+        title: 'State / Tone',
+        renderItem: ({row, column}) => (
+          <Card
+            {...props}
+            key={row + column}
+            as={column !== 'card' ? 'a' : undefined}
+            tone={row}
+            disabled={column === 'disabled link'}
+            selected={column === 'selected link'}
+          >
+            <Text>{column !== 'card' ? 'As <a>' : 'Card'}</Text>
+          </Card>
+        ),
+      })}
+    </Stack>
+  ),
+}
+
+export const MatrixAsButton: Story = {
+  render: () => {
+    return (
+      <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+        <Container>
+          <Grid columns={3} gap={2}>
+            <Box>
+              <Text align="center" size={1} weight="semibold">
+                Enabled
+              </Text>
+              <Stack marginTop={3} space={2}>
+                {CARD_TONES.map((tone) => (
+                  <Card
+                    __unstable_focusRing
+                    as="button"
+                    key={tone}
+                    padding={4}
+                    style={{textAlign: 'center'}}
+                    tone={tone}
+                  >
+                    <Stack space={2}>
+                      <Text weight="semibold">{tone}</Text>
+                      <Text muted>Muted</Text>
+                      <Text accent>Accent</Text>
+                    </Stack>
+                  </Card>
+                ))}
+              </Stack>
+            </Box>
+
+            <Box>
+              <Text align="center" size={1} weight="semibold">
+                Disabled
+              </Text>
+              <Stack marginTop={3} space={2}>
+                {CARD_TONES.map((tone) => (
+                  <Card
+                    __unstable_focusRing
+                    as="button"
+                    disabled
+                    key={tone}
+                    padding={4}
+                    style={{textAlign: 'center'}}
+                    tone={tone}
+                  >
+                    <Stack space={2}>
+                      <Text weight="semibold">{tone}</Text>
+                      <Text muted>Muted</Text>
+                      <Text accent>Accent</Text>
+                    </Stack>
+                  </Card>
+                ))}
+              </Stack>
+            </Box>
+
+            <Box>
+              <Text align="center" size={1} weight="semibold">
+                Selected
+              </Text>
+              <Stack marginTop={3} space={2}>
+                {CARD_TONES.map((tone) => (
+                  <div aria-selected key={tone}>
+                    <Card
+                      __unstable_focusRing
+                      as="button"
+                      padding={4}
+                      style={{textAlign: 'center'}}
+                      tone={tone}
+                    >
+                      <Stack space={2}>
+                        <Text weight="semibold">{tone}</Text>
+                        <Text muted>Muted</Text>
+                        <Text accent>Accent</Text>
+                      </Stack>
+                    </Card>
+                  </div>
+                ))}
+              </Stack>
+            </Box>
+          </Grid>
+        </Container>
+      </Flex>
+    )
+  },
+}
+
+export const NestedSchemeChanges: Story = {
+  render: () => {
+    return (
+      <Flex gap={4} wrap={'wrap'}>
+        <Card scheme="light" padding={4} margin={4} shadow={1}>
+          <Text>Light default</Text>
+          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+            <Text>Dark inherit</Text>
+            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+              <Text>Light inherit</Text>
+            </Card>
+          </Card>
+        </Card>
+        <Card scheme="light" tone="caution" padding={4} margin={4} shadow={1}>
+          <Text>Light caution</Text>
+          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+            <Text>Dark inherit</Text>
+            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+              <Text>Light inherit</Text>
+            </Card>
+          </Card>
+        </Card>
+        <Card scheme="light" tone="primary" padding={4} margin={4} shadow={1}>
+          <Text>Primary caution</Text>
+          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+            <Text>Dark inherit</Text>
+            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+              <Text>Light inherit</Text>
+            </Card>
+          </Card>
+        </Card>
+      </Flex>
+    )
+  },
+}
+
+export const NestedToneChanges: Story = {
+  render: () => {
+    const TONES: (CardTone | undefined)[] = [
+      'critical',
+      'inherit',
+      undefined,
+      'caution',
+      'inherit',
+      undefined,
+      'primary',
+      'inherit',
+      undefined,
+      'positive',
+      'inherit',
+      undefined,
+      'default',
+      'inherit',
+      undefined,
+    ]
+
+    const renderCard = (tones: (CardTone | undefined)[]) => {
+      const currentTone = tones[0]
+
+      return (
+        <Card border margin={3} padding={3} tone={currentTone}>
+          <Text muted={!currentTone} size={1}>
+            {currentTone ?? <em>(empty)</em>}
+          </Text>
+          {tones.length > 1 && renderCard(tones.slice(1))}
+        </Card>
+      )
+    }
+
+    return (
+      <Flex gap={4} wrap={'wrap'}>
+        {renderCard(TONES)}
+      </Flex>
+    )
+  },
 }

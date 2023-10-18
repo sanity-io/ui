@@ -1,16 +1,15 @@
-import {ThemeProps} from '../../styles'
+import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
 import {BadgeStyleProps} from './types'
 
-export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {
-  const {$mode, $tone, theme} = props
-  const palette = theme.sanity.color[$mode === 'outline' ? 'muted' : 'solid']
-  const color = palette[$tone] || palette.default
+export function badgeStyle(props: BadgeStyleProps): CSSObject {
+  const {$mode, $tone} = props
 
   return {
-    backgroundColor: color.enabled.bg,
-    color: color.enabled.fg,
-    boxShadow: `inset 0 0 0 1px ${color.enabled.border}`,
+    // backgroundColor: color.enabled.bg,
+    backgroundColor: $mode === 'outline' ? cssVars[$tone]['bg-base'] : cssVars[$tone]['bg-tint'],
+    color: cssVars[$tone]['text-secondary'],
+    boxShadow: $mode === 'outline' ? `inset 0 0 0 1px ${cssVars[$tone]['border-base']}` : undefined,
     cursor: 'default',
 
     '&:not([hidden])': {
