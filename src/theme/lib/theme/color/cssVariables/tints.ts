@@ -112,22 +112,22 @@ const defaultTints: Record<ThemeColorSchemeKey, ColorTintsDictionary> = {
     'base-shadow-outline-color': {
       type: 'colorWithOpacity',
       tint: '500',
-      opacity: 0.4,
+      opacity: 0.2,
     },
     'base-shadow-umbra-color': {
       type: 'colorWithOpacity',
       tint: '500',
-      opacity: 0.2,
+      opacity: 0.1,
     },
     'base-shadow-penumbra-color': {
       type: 'colorWithOpacity',
       tint: '500',
-      opacity: 0.14,
+      opacity: 0.07,
     },
     'base-shadow-ambient-color': {
       type: 'colorWithOpacity',
       tint: '500',
-      opacity: 0.12,
+      opacity: 0.06,
     },
     'skeleton-from': '100',
     'skeleton-to': {
