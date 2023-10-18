@@ -4,6 +4,7 @@ import {useRootTheme} from './useRootTheme'
 
 /**
  * @public
+ * @deprecated
  */
 export interface ThemeColorProviderProps {
   children?: React.ReactNode
@@ -13,6 +14,7 @@ export interface ThemeColorProviderProps {
 
 /**
  * @public
+ * @deprecated Use `toneContext` instead.
  */
 export function ThemeColorProvider(props: ThemeColorProviderProps): React.ReactElement {
   const {children, scheme, tone} = props

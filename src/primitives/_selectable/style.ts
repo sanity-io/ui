@@ -1,13 +1,21 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {_colorVarsStyle} from '../../styles/colorVars'
-import {SelectableTone} from '../../types/selectable'
+import {
+  _colorVarStyleActive,
+  _colorVarStyleHover,
+  _colorVarStyleSelected,
+  _selectableVarStyle,
+  _selectableVarStyleDisabled,
+} from '../../styles/colorVars'
+
+import {ThemeColorSchemeKey, ThemeColorToneKey, createCssVars, cssVars} from '../../theme'
 
 /**
  * @internal
  */
 export interface SelectableStyleProps {
-  $tone: SelectableTone
+  $tone: ThemeColorToneKey
+  $scheme: ThemeColorSchemeKey
 }
 
 export function selectableBaseStyle(): ReturnType<typeof css> {
@@ -36,43 +44,41 @@ export function selectableBaseStyle(): ReturnType<typeof css> {
 export function selectableColorStyle(
   props: SelectableStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$tone, theme} = props
-  const {base, muted, selectable} = theme.sanity.color
-  // @todo: remove use of `muted` here
-  const tone = selectable ? selectable[$tone] || selectable.default : muted[$tone] || muted.default
+  const {theme, $tone, $scheme} = props
 
   return css`
-    ${_colorVarsStyle(base, tone.enabled)}
+    ${$tone !== 'default' && createCssVars($scheme, theme.sanity.color.tones, $tone)}
+    ${_selectableVarStyle()}
 
-    background-color: var(--card-bg-color);
-    color: var(--card-fg-color);
+    background-color: ${cssVars.mutable['bg-color']};
+    color: ${cssVars[$tone]['text-secondary']};
     outline: none;
 
-    /* &:is(button) */
+    /* &:is(button) - Looks like a button in default mode */
     &[data-as='button'] {
       &:disabled {
-        ${_colorVarsStyle(base, tone.disabled)}
+        ${_selectableVarStyleDisabled()}
       }
 
       &:not(:disabled) {
         &[aria-pressed='true'] {
-          ${_colorVarsStyle(base, tone.pressed)}
+          ${_colorVarStyleActive()}
         }
 
         &[data-selected],
         &[aria-selected='true'] > & {
-          ${_colorVarsStyle(base, tone.selected)}
+          ${_colorVarStyleSelected()}
         }
 
         @media (hover: hover) {
           &:not([data-selected]) {
             &[data-hovered],
             &:hover {
-              ${_colorVarsStyle(base, tone.hovered)}
+              ${_colorVarStyleHover()}
             }
 
             &:active {
-              ${_colorVarsStyle(base, tone.pressed)}
+              ${_colorVarStyleActive()}
             }
           }
         }
@@ -82,27 +88,27 @@ export function selectableColorStyle(
     /* &:is(a) */
     &[data-as='a'] {
       &[data-disabled] {
-        ${_colorVarsStyle(base, tone.disabled)}
+        ${_selectableVarStyleDisabled()}
       }
 
       &:not([data-disabled]) {
         &[data-pressed] {
-          ${_colorVarsStyle(base, tone.pressed)}
+          ${_colorVarStyleActive()}
         }
 
         &[data-selected] {
-          ${_colorVarsStyle(base, tone.selected)}
+          ${_colorVarStyleSelected()}
         }
 
         @media (hover: hover) {
           &:not([data-selected]) {
             &[data-hovered],
             &:hover {
-              ${_colorVarsStyle(base, tone.hovered)}
+              ${_colorVarStyleHover()}
             }
 
             &:active {
-              ${_colorVarsStyle(base, tone.pressed)}
+              ${_colorVarStyleActive()}
             }
           }
         }

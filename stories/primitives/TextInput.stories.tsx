@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
-import {Box, Grid, Text, TextInput} from '../../src/primitives'
+import {useCallback, useState} from 'react'
+import {Box, Container, Grid, Text, TextInput} from '../../src/primitives'
 import {RADII} from '../constants'
 import {
   getFontSizeControls,
@@ -65,6 +66,36 @@ export const Radius: Story = {
           rows: RADII,
         })}
       </>
+    )
+  },
+}
+
+export const WithClearButton: Story = {
+  render: (props) => {
+    const [value, setValue] = useState('')
+
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.currentTarget.value)
+    }, [])
+
+    const handleClear = useCallback(() => {
+      setValue('')
+    }, [])
+
+    return (
+      <Container>
+        <Box padding={4}>
+          <TextInput
+            {...props}
+            clearButton
+            customValidity={props.customValidity}
+            onChange={handleChange}
+            onClear={handleClear}
+            placeholder={props.placeholder}
+            value={value}
+          />
+        </Box>
+      </Container>
     )
   },
 }

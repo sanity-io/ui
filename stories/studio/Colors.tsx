@@ -1,15 +1,19 @@
 import {ReactNode} from 'react'
 import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
-import {ThemeProvider, studioTheme} from '../../src/theme'
+import {ThemeColorSchemeKey, ThemeProvider, cssVars, studioTheme} from '../../src/theme'
+import {
+  ColorKey,
+  getColorHex,
+  getColorValue,
+  colorKeys,
+} from '../../src/theme/lib/theme/color/cssVariables/tints'
 import {tones} from '../../src/theme/studioTheme/color'
-import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/studioTheme/tints'
 
 const studioTones = ['default', 'positive', 'critical', 'caution'] as const
 
-// Create a function that transform text_primary to "Text Primary"
 function toTitleCase(str: string): string {
   return str
-    .split('_')
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
@@ -18,7 +22,7 @@ export function Colors(): ReactNode {
   return (
     <ThemeProvider theme={studioTheme}>
       <Stack space={5}>
-        <Card scheme="light" padding={3} radius={3}>
+        <Card padding={3} radius={3}>
           <Stack space={3}>
             <Text size={0} weight="medium" muted>
               LIGHT MODE
@@ -26,7 +30,7 @@ export function Colors(): ReactNode {
             <Card padding={3} radius={3} border>
               <Stack space={4}>
                 {colorKeys.map((colorKey) => (
-                  <ColorPreview key={colorKey} colorKey={colorKey} theme="light" />
+                  <ColorPreview key={colorKey} colorKey={colorKey} scheme="light" />
                 ))}
               </Stack>
             </Card>
@@ -40,7 +44,7 @@ export function Colors(): ReactNode {
             <Card padding={3} radius={3} border>
               <Stack space={4}>
                 {colorKeys.map((colorKey) => (
-                  <ColorPreview key={colorKey} colorKey={colorKey} theme="dark" />
+                  <ColorPreview key={colorKey} colorKey={colorKey} scheme="dark" />
                 ))}
               </Stack>
             </Card>
@@ -51,8 +55,8 @@ export function Colors(): ReactNode {
   )
 }
 
-function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
-  const {colorKey, theme} = props
+function ColorPreview(props: {colorKey: ColorKey; scheme: ThemeColorSchemeKey}) {
+  const {colorKey, scheme} = props
 
   return (
     <Stack space={3}>
@@ -70,16 +74,11 @@ function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
                   width: '48px',
                   borderRadius: '4px',
                   boxShadow: ['Black', 'White'].includes(
-                    getColorValue(tones[tone], theme === 'dark', tone, colorKey)?.title,
+                    getColorValue(tones[tone], scheme, tone, colorKey)?.title,
                   )
-                    ? `0 0 0 1px ${getColorHex(
-                        tones['default'],
-                        theme === 'dark',
-                        'default',
-                        'border_base',
-                      )}`
+                    ? `0 0 0 1px ${getColorHex(tones['default'], scheme, 'default', 'border-base')}`
                     : undefined,
-                  backgroundColor: getColorHex(tones[tone], theme === 'dark', tone, colorKey),
+                  backgroundColor: cssVars[tone][colorKey],
                 }}
               />
               <Flex
@@ -100,9 +99,7 @@ function ColorPreview(props: {colorKey: ColorKey; theme: 'light' | 'dark'}) {
                   </Text>
                 </Flex>
                 <Text size={0} muted>
-                  {getColorValue(tones[tone], theme === 'dark', tone, colorKey)
-                    .title.split(' ')
-                    .join('/')}
+                  {getColorValue(tones[tone], scheme, tone, colorKey).title.split(' ').join('/')}
                 </Text>
               </Flex>
             </Flex>

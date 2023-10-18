@@ -1,5 +1,5 @@
 context('Utils/Layer', () => {
-  it('should support responsize z-offset', () => {
+  it('should support responsive z-offset', () => {
     cy.visit('/frame/?path=/utils/layer/responsive-z-offset')
 
     const sizes = [

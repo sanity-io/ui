@@ -4,6 +4,7 @@ import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
+import {useToneContext} from '../../theme/toneContext/useToneContext'
 import {Radius, SelectableTone} from '../../types'
 import {Menu} from './menu'
 import {useMenu} from './useMenu'
@@ -44,6 +45,7 @@ export function MenuGroup(
     tone = 'default',
     ...restProps
   } = props
+  const {scheme} = useToneContext()
   const menu = useMenu()
   const {
     activeElement,
@@ -166,6 +168,7 @@ export function MenuGroup(
         data-selected={!withinMenu && active ? '' : undefined}
         $radius={useArrayProp(radius)}
         $tone={tone}
+        $scheme={scheme}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}

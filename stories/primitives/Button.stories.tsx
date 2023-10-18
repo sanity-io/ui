@@ -212,3 +212,66 @@ export const MultipleStyles: Story = {
     )
   },
 }
+
+export const CustomButton: Story = {
+  render: (props) => {
+    return (
+      <Flex align="center" height="fill" justify="center">
+        <Stack space={2}>
+          <Grid columns={5} gap={1}>
+            {BUTTON_TONES.map((tone) => (
+              <Button {...props} key={tone} mode="bleed" padding={3} tone={tone} text={undefined}>
+                <Stack space={2}>
+                  <Text>{tone}</Text>
+                  <Text muted>Muted</Text>
+                  <Text muted>
+                    <a href="">Link</a>
+                  </Text>
+                  <Text>
+                    <code>Code</code>
+                  </Text>
+                  <Text accent>Accent</Text>
+                </Stack>
+              </Button>
+            ))}
+          </Grid>
+          <Grid columns={5} gap={1}>
+            {BUTTON_TONES.map((tone) => (
+              <Button {...props} key={tone} mode="ghost" padding={3} tone={tone} text={undefined}>
+                <Stack space={2}>
+                  <Text>{tone}</Text>
+                  <Text muted>Muted</Text>
+                  <Text muted>
+                    <a href="">Link</a>
+                  </Text>
+                  <Text>
+                    <code>Code</code>
+                  </Text>
+                  <Text accent>Accent</Text>
+                </Stack>
+              </Button>
+            ))}
+          </Grid>
+
+          <Grid columns={5} gap={1}>
+            {BUTTON_TONES.map((tone) => (
+              <Button {...props} key={tone} mode="default" padding={3} tone={tone} text={undefined}>
+                <Stack space={2}>
+                  <Text>{tone}</Text>
+                  <Text muted>Muted</Text>
+                  <Text muted>
+                    <a href="">Link</a>
+                  </Text>
+                  <Text>
+                    <code>Code</code>
+                  </Text>
+                  <Text accent>Accent</Text>
+                </Stack>
+              </Button>
+            ))}
+          </Grid>
+        </Stack>
+      </Flex>
+    )
+  },
+}

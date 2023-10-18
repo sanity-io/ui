@@ -1,5 +1,5 @@
 import {RootTheme} from '../types'
-import {color} from './color'
+import {tones} from './color'
 import {fonts} from './fonts'
 
 /**
@@ -21,7 +21,13 @@ export const studioTheme: RootTheme = {
   card: {
     focusRing: {offset: -1, width: 1},
   },
-  color,
+  color: {
+    tones: tones,
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore This is necessary until workshop is updated.
+    base: {bg: '#fffff'},
+  },
   container: [320, 640, 960, 1280, 1600, 1920],
   focusRing: {
     offset: 1,
