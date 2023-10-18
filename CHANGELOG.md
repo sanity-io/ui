@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.6](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.5...v2.0.0-alpha.6) (2023-10-18)
+
+### Features
+
+- **cssvars:** replace color theming through styled-components for css vars. ([#1152](https://github.com/sanity-io/ui/issues/1152)) ([384acf1](https://github.com/sanity-io/ui/commit/384acf10003fc08adad7495531eba1500c145b3d))
+
 ## [2.0.0-alpha.5](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.4...v2.0.0-alpha.5) (2023-10-13)
 
 ### Bug Fixes
