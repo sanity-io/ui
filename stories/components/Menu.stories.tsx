@@ -1,7 +1,7 @@
 import {BinaryDocumentIcon, CircleIcon, RestoreIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {Menu, MenuDivider, MenuGroup, MenuItem} from '../../src/components'
-import {Card, Container, Flex} from '../../src/primitives'
+import {Badge, Card, Container, Flex, Stack, Text} from '../../src/primitives'
 import {LayerProvider} from '../../src/utils'
 import {getSpaceControls} from '../controls'
 
@@ -53,6 +53,44 @@ export const Default: Story = {
 
 export const MenuItemsVariants: Story = {
   render: (props) => {
+    // This is a representation of the LargeMenuItem that we will need to build into the Studio UI.
+    const LargeMenuItem = (
+      props: Omit<React.ComponentProps<typeof MenuItem>, 'hotkeys' | 'icon' | 'iconRight'> & {
+        text: string
+        subText: string
+        badgeText?: string
+      },
+    ) => {
+      const {subText, disabled, text, badgeText, tone} = props
+      const fontSize = 1
+
+      return (
+        <MenuItem disabled={disabled} id="menu-item-1" tone={tone}>
+          <Flex as="span" gap={3} align="center">
+            {(text || subText) && (
+              <Stack flex={1} space={2}>
+                {text && (
+                  <Text size={fontSize} textOverflow="ellipsis" weight="medium">
+                    {text}
+                  </Text>
+                )}
+                {subText && (
+                  <Text size={fontSize} textOverflow="ellipsis" weight={'regular'} muted>
+                    {subText}
+                  </Text>
+                )}
+              </Stack>
+            )}
+            {badgeText && (
+              <Badge fontSize={fontSize} mode="default">
+                {badgeText}
+              </Badge>
+            )}
+          </Flex>
+        </MenuItem>
+      )
+    }
+
     const MenuWithVariants = (
       props: React.ComponentProps<typeof Menu> & {
         disabled: boolean
@@ -82,13 +120,13 @@ export const MenuItemsVariants: Story = {
               text="With hotkeys"
               hotkeys={['Cmd', 'Alt', 'D']}
             />
-            <MenuItem
+            <LargeMenuItem
               disabled={props.disabled}
               id="menu-item-5"
               text="Menu item title"
               subText="Menu item subtitle"
             />
-            <MenuItem
+            <LargeMenuItem
               disabled={props.disabled}
               id="menu-item-6"
               text="Menu item title"
@@ -133,14 +171,14 @@ export const MenuItemsVariants: Story = {
               text="With hotkeys"
               hotkeys={['Cmd', 'Alt', 'D']}
             />
-            <MenuItem
+            <LargeMenuItem
               disabled={props.disabled}
               id="menu-item-5-critical"
               tone="critical"
               text="Menu item title"
               subText="Menu item subtitle"
             />
-            <MenuItem
+            <LargeMenuItem
               disabled={props.disabled}
               id="menu-item-6-critical"
               tone="critical"

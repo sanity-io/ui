@@ -9,7 +9,7 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp, useForwardedRef} from '../../hooks'
-import {Badge, Box, Flex, Stack, Text} from '../../primitives'
+import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
 import {ThemeColorToneKey} from '../../theme'
@@ -31,8 +31,6 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   space?: number | number[]
   text?: React.ReactNode
   tone?: ThemeColorToneKey
-  subText?: React.ReactNode
-  badgeText?: React.ReactNode
 }
 
 /**
@@ -64,8 +62,6 @@ export const MenuItem = forwardRef(function MenuItem(
     selected: selectedProp,
     space = 3,
     text,
-    subText,
-    badgeText,
     tone = 'default',
     ...restProps
   } = props
@@ -147,16 +143,11 @@ export const MenuItem = forwardRef(function MenuItem(
           )}
 
           {text && (
-            <Stack flex={1} space={2}>
+            <Box flex={1}>
               <Text size={fontSize} textOverflow="ellipsis" weight="medium">
                 {text}
               </Text>
-              {subText && (
-                <Text size={fontSize} textOverflow="ellipsis" weight={'regular'} muted>
-                  {subText}
-                </Text>
-              )}
-            </Stack>
+            </Box>
           )}
 
           {hotkeys && (
@@ -168,12 +159,6 @@ export const MenuItem = forwardRef(function MenuItem(
               {isValidElement(iconRight) && iconRight}
               {isValidElementType(iconRight) && createElement(iconRight)}
             </Text>
-          )}
-
-          {badgeText && (
-            <Badge fontSize={fontSize} mode="default">
-              {badgeText}
-            </Badge>
           )}
         </Flex>
       )}
