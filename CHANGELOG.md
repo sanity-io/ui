@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.8](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.7...v2.0.0-alpha.8) (2023-10-19)
+
+### Bug Fixes
+
+- **vars:** minimum implementation for colors legacy support ([#1167](https://github.com/sanity-io/ui/issues/1167)) ([7cdd0cd](https://github.com/sanity-io/ui/commit/7cdd0cdf3f46cbff14c711e433db8f26e7abfdc3))
+
 ## [2.0.0-alpha.7](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.6...v2.0.0-alpha.7) (2023-10-18)
 
 ### Features
