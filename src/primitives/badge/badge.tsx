@@ -33,7 +33,7 @@ export const Badge = forwardRef(function Badge(
 ) {
   const {
     children,
-    fontSize,
+    fontSize = 1,
     mode = 'default',
     padding = 1,
     radius = 2,
