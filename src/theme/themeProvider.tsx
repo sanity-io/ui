@@ -2,6 +2,7 @@ import {useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider, createGlobalStyle} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
+import {legacyColors} from './lib/theme/color/_legacy/legacyColor'
 import {createCssVars} from './lib/theme/color/cssVariables'
 import {cssObjectToCssString} from './lib/theme/color/cssVariables/utils'
 import {ThemeContext} from './themeContext'
@@ -43,7 +44,7 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
 
     const layer = rootLayer || DEFAULT_THEME_LAYER
 
-    return {sanity: {...restTheme, layer}}
+    return {sanity: {...restTheme, layer, color: {...legacyColors, tones: restTheme.color.tones}}}
   }, [themeProp])
 
   const value: ThemeContextValue | null = useMemo(
