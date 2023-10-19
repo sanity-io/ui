@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.9](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.8...v2.0.0-alpha.9) (2023-10-19)
+
+### Bug Fixes
+
+- update default values for <Badge> ([86fd92b](https://github.com/sanity-io/ui/commit/86fd92bb50bc2bdc23ae3f9812bc23bc08aaeb4a))
+
 ## [2.0.0-alpha.8](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.7...v2.0.0-alpha.8) (2023-10-19)
 
 ### Bug Fixes
