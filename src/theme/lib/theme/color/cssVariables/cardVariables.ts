@@ -49,7 +49,7 @@ const legacyFixedVariables = [
   '--card-link-color',
   '--card-hairline-soft-color',
   '--card-hairline-hard-color',
-  '--card-bg2-color',
+  '--card-border-color',
 ] as const
 
 const allVariables = [...Object.values(mutableCardVariables), ...legacyFixedVariables] as const
@@ -65,20 +65,19 @@ export const cardVariables: Record<CardCssVariable, string> = {
   '--card-shadow-penumbra-color': tonesCssVariables.default['base-shadow-penumbra-color'],
   '--card-shadow-ambient-color': tonesCssVariables.default['base-shadow-ambient-color'],
   '--card-focus-ring-color': tonesCssVariables.positive['bg-accent'],
+
   '--card-icon-color': tonesCssVariables.default['icon-default'],
-  '--card-bg-image': 'inherit',
 
   // Card
   '--card-bg-color': tonesCssVariables.default['bg-base'],
-
+  '--card-bg-image': 'inherit',
   '--card-fg-color': tonesCssVariables.default['text-primary'],
-
+  '--card-border-color': tonesCssVariables.default['border-base'],
   '--card-muted-fg-color': tonesCssVariables.default['text-secondary'],
   '--card-accent-fg-color': tonesCssVariables.default['text-accent'],
   '--card-link-fg-color': tonesCssVariables.default['text-link'],
   '--card-code-bg-color': tonesCssVariables.default['bg-tint-code'],
   '--card-code-fg-color': tonesCssVariables.default['text-code'],
-
   '--card-skeleton-color-from': tonesCssVariables.default['skeleton-from'],
   '--card-skeleton-color-to': tonesCssVariables.default['skeleton-to'],
 
@@ -86,7 +85,4 @@ export const cardVariables: Record<CardCssVariable, string> = {
   '--card-link-color': tonesCssVariables.default['text-link'],
   '--card-hairline-soft-color': tonesCssVariables.default['border-base'],
   '--card-hairline-hard-color': tonesCssVariables.default['border-base'],
-
-  // Card
-  '--card-bg2-color': tonesCssVariables.default['bg-tint'],
 }
