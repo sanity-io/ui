@@ -29,6 +29,7 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
       font: inherit;
       text-align: inherit;
       border: 0;
+      width: -webkit-fill-available;
       width: stretch;
     }
 

@@ -22,6 +22,7 @@ export function selectableBaseStyle(): ReturnType<typeof css> {
       font: inherit;
       text-align: inherit;
       border: 0;
+      width: -webkit-fill-available;
       width: stretch;
     }
 

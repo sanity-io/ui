@@ -13,6 +13,7 @@ import {CSSObject} from '../../types/styled'
 function rootStyle(): ReturnType<typeof css> {
   return css`
     position: relative;
+    width: -webkit-fill-available;
     width: stretch;
 
     &:not([hidden]) {
