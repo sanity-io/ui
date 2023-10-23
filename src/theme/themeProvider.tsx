@@ -2,6 +2,7 @@ import {useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider, createGlobalStyle} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
+import {createTonesWithLegacyColor} from './lib/theme/color/_legacy/createTints'
 import {legacyColors} from './lib/theme/color/_legacy/legacyColor'
 import {createCssVars} from './lib/theme/color/cssVariables'
 import {cssObjectToCssString} from './lib/theme/color/cssVariables/utils'
@@ -37,15 +38,26 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
     tone = parentTheme?.tone || 'default',
   } = props
 
+  const isLegacyTheme = !themeProp?.color.tones
+  const tones = useMemo(() => {
+    return isLegacyTheme ? createTonesWithLegacyColor(themeProp?.color) : themeProp?.color.tones
+  }, [themeProp?.color, isLegacyTheme])
+
   const theme: Theme | null = useMemo(() => {
     if (!themeProp) return null
 
     const {layer: rootLayer, ...restTheme} = themeProp
-
     const layer = rootLayer || DEFAULT_THEME_LAYER
 
-    return {sanity: {...restTheme, layer, color: {...legacyColors, tones: restTheme.color.tones}}}
-  }, [themeProp])
+    return {
+      sanity: {
+        ...restTheme,
+        layer,
+        color: {...legacyColors, tones: tones},
+        isLegacyTheme: isLegacyTheme,
+      },
+    }
+  }, [themeProp, tones, isLegacyTheme])
 
   const value: ThemeContextValue | null = useMemo(
     () =>
@@ -59,10 +71,10 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
   )
 
   const cssVariables = useMemo(() => {
-    if (!themeProp?.color.tones) return
+    if (!tones) return
 
-    return cssObjectToCssString(createCssVars(scheme, themeProp?.color.tones))
-  }, [scheme, themeProp?.color.tones])
+    return cssObjectToCssString(createCssVars(scheme, tones))
+  }, [scheme, tones])
 
   if (!theme) {
     return <pre>ThemeProvider: no "theme" property provided</pre>
