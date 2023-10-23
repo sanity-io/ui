@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://github.com/sanity-io/ui/compare/v1.8.2...v1.8.3) (2023-10-23)
+
+### Bug Fixes
+
+- add `width: stretch` fallbacks ([1588887](https://github.com/sanity-io/ui/commit/1588887e17a13fb4ae950070e7b89636c1ded5af))
+
 ## [1.8.2](https://github.com/sanity-io/ui/compare/v1.8.1...v1.8.2) (2023-09-01)
 
 ### Bug Fixes
