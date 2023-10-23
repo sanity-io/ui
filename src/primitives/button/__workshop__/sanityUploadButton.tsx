@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`
   & input {
-    -webkit-appearance: none;
+    appearance: none;
     overflow: hidden;
     overflow: clip;
     top: 0;
@@ -14,6 +14,7 @@ const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`
     opacity: 0;
     position: absolute;
     max-width: 0;
+    width: -webkit-fill-available;
     width: stretch;
   }
 
