@@ -48,7 +48,6 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
   zOffset?: number | number[]
-  children?: React.ReactNode
 }
 
 interface DialogCardProps extends ResponsiveWidthProps {
