@@ -28,7 +28,7 @@ export const studioTheme: RootTheme = {
     // @ts-ignore This is necessary until workshop is updated.
     base: {bg: '#fffff'},
   },
-  container: [360, 600, 960, 1280, 1600, 1920],
+  container: [320, 640, 960, 1280, 1600, 1920],
   focusRing: {
     offset: 1,
     width: 2,
