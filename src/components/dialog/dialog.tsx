@@ -128,7 +128,7 @@ const DialogLayout = styled(Flex)`
   width: 100%;
 `
 
-const DialogHeader = styled(Card)<DialogHeaderProps>`
+const DialogHeader = styled(Box)<DialogHeaderProps>`
   position: relative;
   z-index: 2;
 
@@ -309,9 +309,10 @@ const DialogCard = forwardRef(function DialogCard(
             <DialogHeader
               $isContentScrollable={isContentScrollable}
               $hasScrolledFromTop={hasScrolledFromTop}
+              padding={3}
             >
-              <Flex>
-                <Box flex={1} padding={4}>
+              <Flex align="center">
+                <Box flex={1} padding={3}>
                   {header && (
                     <Text id={labelId} size={1} weight="medium">
                       {header}
@@ -319,16 +320,14 @@ const DialogCard = forwardRef(function DialogCard(
                   )}
                 </Box>
                 {showCloseButton && (
-                  <Box padding={2}>
-                    <Button
-                      aria-label="Close dialog"
-                      disabled={!onClose}
-                      icon={CloseIcon}
-                      mode="bleed"
-                      onClick={onClose}
-                      padding={3}
-                    />
-                  </Box>
+                  <Button
+                    aria-label="Close dialog"
+                    disabled={!onClose}
+                    icon={CloseIcon}
+                    mode="bleed"
+                    onClick={onClose}
+                    padding={3}
+                  />
                 )}
               </Flex>
             </DialogHeader>

@@ -194,3 +194,38 @@ export const Positioning: Story = {
     )
   },
 }
+
+export const DeleteDocumentDialog: Story = {
+  render: (props) => {
+    const [open, setOpen] = useState(true)
+    const onClose = useCallback(() => setOpen(false), [])
+    const onOpen = useCallback(() => setOpen(true), [])
+
+    return (
+      <>
+        <Button onClick={onOpen} text="Open dialog" />
+        {open && (
+          <Dialog
+            {...props}
+            onClose={onClose}
+            header="Delete document"
+            padding={3}
+            footer={
+              <Flex width="full" gap={3} justify={'flex-end'} padding={3}>
+                <Button onClick={onClose} mode="bleed" text="Cancel" tone="default" />
+                <Button onClick={onClose} mode="default" text="Close" tone="critical" />
+              </Flex>
+            }
+            open={open}
+          >
+            <Box paddingX={3}>
+              <Box paddingX={3} paddingY={5}>
+                <Text size={1}>Are you sure you want to delete “Untitled”?</Text>
+              </Box>
+            </Box>
+          </Dialog>
+        )}
+      </>
+    )
+  },
+}
