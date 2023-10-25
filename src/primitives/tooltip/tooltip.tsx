@@ -8,7 +8,6 @@ import {
   useFloating,
   Middleware,
   RootBoundary,
-  size,
 } from '@floating-ui/react-dom'
 import {
   cloneElement,
@@ -75,7 +74,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const boundaryElementContext = useBoundaryElement()
   const theme = useTheme()
   const {
-    boundaryElement = boundaryElementContext?.element,
+    boundaryElement,
     children: childProp,
     content,
     disabled,
@@ -106,29 +105,14 @@ export const Tooltip = forwardRef(function Tooltip(
         fallbackPlacements,
         padding: 4,
         rootBoundary,
-        mainAxis: false,
       }),
     )
-
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: 3}))
-
-    // Set width and height on the floating element
-    ret.push(
-      size({
-        apply({availableWidth, availableHeight, elements}) {
-          Object.assign(elements.floating.style, {
-            maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
-            maxHeight: `${availableHeight - 4 * 2}px`, // the padding is `4px`
-          })
-        },
-      }),
-    )
-
-    // Shift the tooltip so its sits with the boundary eleement
+    // Shift the tooltip so its sits with the boundary element
     ret.push(
       shift({
-        boundary: boundaryElement || undefined,
+        boundary: boundaryElement || boundaryElementContext?.element || undefined,
         rootBoundary,
         padding: 4,
       }),
@@ -138,7 +122,7 @@ export const Tooltip = forwardRef(function Tooltip(
     ret.push(arrow({element: arrowRef, padding: 2}))
 
     return ret
-  }, [boundaryElement, fallbackPlacements])
+  }, [boundaryElement, fallbackPlacements, boundaryElementContext?.element])
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
