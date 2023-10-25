@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.10](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.9...v2.0.0-alpha.10) (2023-10-25)
+
+### Bug Fixes
+
+- **dialog:** update dialog design ([#1169](https://github.com/sanity-io/ui/issues/1169)) ([a02e15c](https://github.com/sanity-io/ui/commit/a02e15c869143f967db9b2c45c4f3a052bdd8350))
+
 ## [2.0.0-alpha.9](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.8...v2.0.0-alpha.9) (2023-10-19)
 
 ### Bug Fixes
