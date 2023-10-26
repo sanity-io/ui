@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0-beta.6](https://github.com/sanity-io/color/compare/color-v3.0.0-beta.5...color-v3.0.0-beta.6) (2023-10-26)
+
+### Bug Fixes
+
+- update color config ([b51129d](https://github.com/sanity-io/color/commit/b51129d85bc0d480b9346dd617f073cd27623bd9))
+
 ## [3.0.0-beta.5](https://github.com/sanity-io/color/compare/color-v3.0.0-beta.4...color-v3.0.0-beta.5) (2023-10-12)
 
 ### Bug Fixes
