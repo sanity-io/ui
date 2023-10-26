@@ -1,3 +1,4 @@
+import {config} from '../../config'
 import {ColorHueKey} from '../../types'
 import {ColorToolSwatch} from './types'
 
@@ -10,13 +11,13 @@ export function compileCode(palette: {hue: ColorHueKey; swatches: ColorToolSwatc
   // black
   code += `  black: {\n`
   code += `    title: 'Black',\n`
-  code += `    hsl: [210, 6, 7],\n`
+  code += `    hsl: [${config.black.hsl[0]}, ${config.black.hsl[1]}, ${config.black.hsl[2]}],\n`
   code += `  },\n`
 
   // white
   code += `  white: {\n`
   code += `    title: 'White',\n`
-  code += `    hsl: [0, 0, 100],\n`
+  code += `    hsl: [${config.white.hsl[0]}, ${config.white.hsl[1]}, ${config.white.hsl[2]}],\n`
   code += `  },\n`
 
   for (const color of palette) {
