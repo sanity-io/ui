@@ -8,6 +8,7 @@ import {
   useFloating,
   Middleware,
   RootBoundary,
+  size,
 } from '@floating-ui/react-dom'
 import {
   cloneElement,
@@ -109,6 +110,17 @@ export const Tooltip = forwardRef(function Tooltip(
     )
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: 3}))
+
+    ret.push(
+      size({
+        apply({availableWidth, elements}) {
+          Object.assign(elements.floating.style, {
+            maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
+          })
+        },
+      }),
+    )
+
     // Shift the tooltip so its sits with the boundary element
     ret.push(
       shift({
