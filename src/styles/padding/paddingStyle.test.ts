@@ -3,7 +3,8 @@
 import {studioTheme, Theme} from '../../theme'
 import {responsivePaddingStyle} from './paddingStyle'
 
-const theme: Theme = {sanity: studioTheme}
+const {color, ...restTheme} = studioTheme
+const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
 
 describe('styles/padding', () => {
   it('should 1', () => {

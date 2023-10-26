@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {cssVars} from '../../theme'
 import {HeadingStyleProps} from './types'
 
 export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnType<typeof css> {
@@ -9,12 +8,12 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
   return css`
     ${$accent &&
     css`
-      color: ${cssVars.default['text-accent']}};
+      color: var(--card-accent-fg-color);
     `}
 
     ${$muted &&
     css`
-      color: ${cssVars.mutable['muted-fg-color']};
+      color: var(--card-muted-fg-color);
     `}
 
     & code {
@@ -25,7 +24,7 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
     & a {
       text-decoration: none;
       border-radius: 1px;
-      color: ${cssVars.default['text-link']};
+      color: var(--card-link-color);
       outline: none;
 
       @media (hover: hover) {
@@ -36,8 +35,8 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
 
       &:focus {
         box-shadow:
-          0 0 0 1px ${cssVars.mutable['bg-color']},
-          0 0 0 3px ${cssVars.positive['border-accent']};
+          0 0 0 1px var(--card-bg-color),
+          0 0 0 3px var(--card-focus-ring-color);
       }
 
       &:focus:not(:focus-visible) {

@@ -1,5 +1,5 @@
 import {CSSObject} from '../types/styled'
-import {BaseTheme, ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
+import {BaseTheme, ThemeColor, ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
 
 /**
  * @public
@@ -23,7 +23,9 @@ export interface Styles {
  * @public
  */
 export interface Theme {
-  sanity: RootTheme
+  sanity: Omit<RootTheme, 'color'> & {
+    color: ThemeColor
+  }
 }
 
 /**

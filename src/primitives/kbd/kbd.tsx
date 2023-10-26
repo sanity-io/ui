@@ -2,7 +2,6 @@ import {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {cssVars} from '../../theme'
 import {Radius} from '../../types'
 import {Box} from '../box'
 import {Text} from '../text'
@@ -19,7 +18,7 @@ export interface KBDProps {
 
 function kbdStyle() {
   return css`
-    background: ${cssVars.default['bg-tint']};
+    background: var(--card-bg2-color);
     font: inherit;
 
     &:not([hidden]) {

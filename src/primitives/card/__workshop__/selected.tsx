@@ -7,30 +7,31 @@ import {
   Inline,
   Stack,
   Text,
+  Theme,
   ThemeColorToneKey,
   useRootTheme,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
-import {mutableCardVariables} from '../../../theme/lib/theme/color/cssVariables/cardVariables'
-import {cssVars} from '../../../theme/lib/theme/color/cssVariables/createCssVars'
 
 const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(({
   $tone,
+  theme,
 }: {
   $tone: ThemeColorToneKey
+  theme: Theme
 }) => {
+  const tone = theme.sanity.color.solid[$tone]
+
   return css`
     &:not([data-selected]) {
-      ${mutableCardVariables['fg-color']}: ${$tone ? cssVars[$tone]['text-secondary'] : undefined};
-      ${mutableCardVariables['muted-fg-color']} ${$tone
-        ? cssVars[$tone]['text-secondary']
-        : undefined};
+      --card-fg-color: ${tone ? tone.enabled.bg : undefined};
+      --card-muted-fg-color: ${tone ? tone.enabled.bg : undefined};
     }
 
     [data-ui='Card']:disabled & {
-      ${mutableCardVariables['fg-color']}: inherit;
-      ${mutableCardVariables['muted-fg-color']} inherit;
+      --card-fg-color: inherit;
+      --card-muted-fg-color: inherit;
     }
   `
 })

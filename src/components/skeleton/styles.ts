@@ -1,5 +1,4 @@
 import {css, keyframes} from 'styled-components'
-import {cssVars} from '../../theme'
 
 const keyframe = keyframes`
   0% {
@@ -13,11 +12,11 @@ const keyframe = keyframes`
 const animation = css`
   background-image: linear-gradient(
     to right,
-    ${cssVars.default['skeleton-from']},
-    ${cssVars.default['skeleton-to']},
-    ${cssVars.default['skeleton-from']},
-    ${cssVars.default['skeleton-from']},
-    ${cssVars.default['skeleton-from']}
+    var(--card-skeleton-color-from),
+    var(--card-skeleton-color-to),
+    var(--card-skeleton-color-from),
+    var(--card-skeleton-color-from),
+    var(--card-skeleton-color-from)
   );
   background-position: 100%;
   background-size: 200% 100%;
@@ -41,11 +40,11 @@ export const skeletonStyle = css<{$animated: boolean; $visible: boolean}>`
       $animated
         ? animation
         : css`
-            background-color: ${cssVars.default['skeleton-from']};
+            background-color: var(--card-skeleton-color-from);
           `}
   }
 
   @media screen and (prefers-reduced-motion: reduce) {
-    background-color: ${cssVars.default['skeleton-from']};
+    background-color: var(--card-skeleton-color-from);
   }
 `
