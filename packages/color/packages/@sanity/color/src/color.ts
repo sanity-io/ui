@@ -5,7 +5,7 @@ import {Color, ColorHues, ColorTint, ColorTints} from './types'
 /** @public */
 export const black: ColorTint = {
   title: 'Black',
-  hex: '#111213',
+  hex: '#0e1011',
 }
 
 /** @public */
@@ -18,47 +18,47 @@ export const white: ColorTint = {
 export const gray: ColorTints = {
   '50': {
     title: 'Gray 50',
-    hex: '#f9f9fa',
+    hex: '#f6f8f8',
   },
   '100': {
     title: 'Gray 100',
-    hex: '#f3f4f6',
+    hex: '#f0f4f4',
   },
   '200': {
     title: 'Gray 200',
-    hex: '#e2e6e9',
+    hex: '#dce3e4',
   },
   '300': {
     title: 'Gray 300',
-    hex: '#bec3cb',
+    hex: '#bec9cb',
   },
   '400': {
     title: 'Gray 400',
-    hex: '#9aa1ac',
+    hex: '#9eabae',
   },
   '500': {
     title: 'Gray 500',
-    hex: '#788191',
+    hex: '#7e8e91',
   },
   '600': {
     title: 'Gray 600',
-    hex: '#5e6573',
+    hex: '#657376',
   },
   '700': {
     title: 'Gray 700',
-    hex: '#464c58',
+    hex: '#4b5658',
   },
   '800': {
     title: 'Gray 800',
-    hex: '#31353f',
+    hex: '#363e3f',
   },
   '900': {
     title: 'Gray 900',
-    hex: '#1f2228',
+    hex: '#212627',
   },
   '950': {
     title: 'Gray 950',
-    hex: '#17191c',
+    hex: '#171b1c',
   },
 }
 
@@ -118,15 +118,15 @@ export const purple: ColorTints = {
   },
   '100': {
     title: 'Purple 100',
-    hex: '#f4ebff',
+    hex: '#f7f0ff',
   },
   '200': {
     title: 'Purple 200',
-    hex: '#e5cdfe',
+    hex: '#ead7fe',
   },
   '300': {
     title: 'Purple 300',
-    hex: '#d1aef4',
+    hex: '#d4b1f6',
   },
   '400': {
     title: 'Purple 400',
@@ -166,15 +166,15 @@ export const magenta: ColorTints = {
   },
   '100': {
     title: 'Magenta 100',
-    hex: '#fde8ef',
+    hex: '#fdecf2',
   },
   '200': {
     title: 'Magenta 200',
-    hex: '#fbd0df',
+    hex: '#fbd5e2',
   },
   '300': {
     title: 'Magenta 300',
-    hex: '#f7abc5',
+    hex: '#f7b0c8',
   },
   '400': {
     title: 'Magenta 400',
@@ -214,19 +214,19 @@ export const red: ColorTints = {
   },
   '100': {
     title: 'Red 100',
-    hex: '#fee8e7',
+    hex: '#feeceb',
   },
   '200': {
     title: 'Red 200',
-    hex: '#fbccc6',
+    hex: '#fcd7d4',
   },
   '300': {
     title: 'Red 300',
-    hex: '#f6a098',
+    hex: '#f7ada6',
   },
   '400': {
     title: 'Red 400',
-    hex: '#f17165',
+    hex: '#f2796e',
   },
   '500': {
     title: 'Red 500',
@@ -238,11 +238,11 @@ export const red: ColorTints = {
   },
   '700': {
     title: 'Red 700',
-    hex: '#a52112',
+    hex: '#a51f12',
   },
   '800': {
     title: 'Red 800',
-    hex: '#6f1a11',
+    hex: '#6f1811',
   },
   '900': {
     title: 'Red 900',
@@ -314,15 +314,15 @@ export const yellow: ColorTints = {
   },
   '200': {
     title: 'Yellow 200',
-    hex: '#fbf1a7',
+    hex: '#fbf09d',
   },
   '300': {
     title: 'Yellow 300',
-    hex: '#f6dd79',
+    hex: '#f6dc74',
   },
   '400': {
     title: 'Yellow 400',
-    hex: '#f3cc49',
+    hex: '#f3ca44',
   },
   '500': {
     title: 'Yellow 500',
@@ -402,47 +402,47 @@ export const green: ColorTints = {
 export const cyan: ColorTints = {
   '50': {
     title: 'Cyan 50',
-    hex: '#ebfdff',
+    hex: '#e5ffff',
   },
   '100': {
     title: 'Cyan 100',
-    hex: '#d2fcfe',
+    hex: '#cdfefe',
   },
   '200': {
     title: 'Cyan 200',
-    hex: '#aaf8fd',
+    hex: '#92fcfc',
   },
   '300': {
     title: 'Cyan 300',
-    hex: '#74edfb',
+    hex: '#59f8f8',
   },
   '400': {
     title: 'Cyan 400',
-    hex: '#41e1f6',
+    hex: '#25f4f4',
   },
   '500': {
     title: 'Cyan 500',
-    hex: '#0ecff1',
+    hex: '#0dd9d9',
   },
   '600': {
     title: 'Cyan 600',
-    hex: '#0e9ebe',
+    hex: '#09a4aa',
   },
   '700': {
     title: 'Cyan 700',
-    hex: '#0f708a',
+    hex: '#04717b',
   },
   '800': {
     title: 'Cyan 800',
-    hex: '#0d4d5e',
+    hex: '#04474e',
   },
   '900': {
     title: 'Cyan 900',
-    hex: '#0b2a32',
+    hex: '#052429',
   },
   '950': {
     title: 'Cyan 950',
-    hex: '#101e23',
+    hex: '#0d1e21',
   },
 }
 
