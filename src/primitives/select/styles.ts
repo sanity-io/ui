@@ -8,8 +8,6 @@ import {
   ResponsiveRadiusStyleProps,
 } from '../../styles/internal'
 import {ThemeFontSize} from '../../theme'
-import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
-import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
 
 function rootStyle(): ReturnType<typeof css> {
@@ -48,23 +46,24 @@ function inputColorStyle(props: ThemeProps) {
   const {theme} = props
   const {input} = theme.sanity
   const {focusRing} = input.select
+  const color = theme.sanity.color.input
 
   return css`
     /* enabled */
-    background-color: ${cssVars.default['bg-base']};
-    color: ${cssVars.default['text-primary']};
+    background-color: ${color.default.enabled.bg};
+    color: ${color.default.enabled.fg};
     box-shadow: ${focusRingBorderStyle({
-      color: cssVars.default['border-base'],
+      color: color.default.enabled.border,
       width: input.border.width,
     })};
 
     /* hovered */
     @media (hover: hover) {
       &:not(:disabled):hover {
-        background-color: ${cssVars.default['bg-base-hover']};
-        color: ${cssVars.default['text-primary']};
+        background-color: ${color.default.hovered.bg};
+        color: ${color.default.hovered.fg};
         box-shadow: ${focusRingBorderStyle({
-          color: cssVars.default['border-base-hover'],
+          color: color.default.hovered.border,
           width: input.border.width,
         })};
       }
@@ -73,27 +72,27 @@ function inputColorStyle(props: ThemeProps) {
     /* focused */
     &:not(:disabled):focus {
       box-shadow: ${focusRingStyle({
-        border: {width: input.border.width, color: cssVars.default['border-base']},
+        border: {width: input.border.width, color: color.default.enabled.border},
         focusRing,
       })};
     }
 
     /* read-only */
     &[data-read-only] {
-      background-color: ${cssVars.default['bg-tint']};
-      color: ${cssVars.default['text-primary']};
+      background-color: ${color.default.readOnly.bg};
+      color: ${color.default.readOnly.fg};
       box-shadow: ${focusRingBorderStyle({
-        color: cssVars.default['border-base'],
+        color: color.default.readOnly.border,
         width: input.border.width,
       })};
     }
 
     /* disabled */
     &:not([data-read-only]):disabled {
-      background-color: ${cssVars.default['bg-tint']};
-      color: ${cssVars.default['text-primary']};
+      background-color: ${color.default.disabled.bg};
+      color: ${color.default.disabled.fg};
       box-shadow: ${focusRingBorderStyle({
-        color: cssVars.default['border-base'],
+        color: color.default.disabled.border,
         width: input.border.width,
       })};
     }
@@ -132,7 +131,10 @@ function inputStyle(): Array<
   ]
 }
 
-function iconBoxStyle(): ReturnType<typeof css> {
+function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {
+  const {theme} = props
+  const color = theme.sanity.color.input
+
   return css`
     pointer-events: none;
     position: absolute;
@@ -140,23 +142,23 @@ function iconBoxStyle(): ReturnType<typeof css> {
     right: 0;
 
     /* enabled */
-    ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
+    --card-fg-color: ${color.default.enabled.fg};
 
     /* hover */
     @media (hover: hover) {
       select:not(disabled):not(:read-only):hover + && {
-        ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
+        --card-fg-color: ${color.default.hovered.fg};
       }
     }
 
     /* disabled */
     select:disabled + && {
-      ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
+      --card-fg-color: ${color.default.disabled.fg};
     }
 
     /* read-only */
     select[data-read-only] + && {
-      ${mutableCardVariables['fg-color']}: ${cssVars.default['text-primary']};
+      --card-fg-color: ${color.default.readOnly.fg};
     }
   `
 }

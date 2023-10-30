@@ -16,8 +16,7 @@ import {
   textInputRepresentationStyle,
   textInputRootStyle,
 } from '../../styles/internal'
-import {ThemeColorToneKey, ThemeFontWeightKey} from '../../theme'
-import {useToneContext} from '../../theme/toneContext/useToneContext'
+import {ThemeFontWeightKey, useRootTheme} from '../../theme'
 import {Radius} from '../../types'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
@@ -71,7 +70,6 @@ export interface TextInputProps {
   suffix?: React.ReactNode
   type?: TextInputType
   weight?: ThemeFontWeightKey
-  tone?: ThemeColorToneKey
 }
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
@@ -165,14 +163,12 @@ export const TextInput = forwardRef(function TextInput(
     customValidity,
     type = 'text',
     weight,
-    tone: toneProp = 'default',
     ...restProps
   } = props
 
   const ref = useForwardedRef(forwardedRef)
 
-  const toneContext = useToneContext()
-  const tone = toneProp === 'default' ? toneContext.tone : toneProp
+  const rootTheme = useRootTheme()
 
   const fontSize = useArrayProp(fontSizeProp)
   const padding = useArrayProp(paddingProp)
@@ -225,9 +221,11 @@ export const TextInput = forwardRef(function TextInput(
         $hasPrefix={$hasPrefix}
         $hasSuffix={$hasSuffix}
         $radius={radius}
-        $tone={tone}
+        $scheme={rootTheme.scheme}
+        $tone={rootTheme.tone}
         data-border={border ? '' : undefined}
-        data-tone={tone}
+        data-scheme={rootTheme.scheme}
+        data-tone={rootTheme.tone}
       >
         {icon && (
           <LeftBox padding={padding}>
@@ -255,10 +253,10 @@ export const TextInput = forwardRef(function TextInput(
       iconRight,
       padding,
       radius,
+      rootTheme,
       $hasClearButton,
       $hasPrefix,
       $hasSuffix,
-      tone,
     ],
   )
 
@@ -341,20 +339,22 @@ export const TextInput = forwardRef(function TextInput(
   )
 
   return (
-    <Root data-ui="TextInput" tone={tone}>
+    <Root data-ui="TextInput" tone={rootTheme.tone}>
       {prefixNode}
 
       <InputRoot>
         <Input
           data-as="input"
-          data-tone={tone}
+          data-scheme={rootTheme.scheme}
+          data-tone={rootTheme.tone}
           {...restProps}
           $fontSize={fontSize}
           $iconLeft={$hasIcon}
           $iconRight={$hasIconRight || $hasClearButton}
           $padding={padding}
+          $scheme={rootTheme.scheme}
           $space={space}
-          $tone={tone}
+          $tone={rootTheme.tone}
           $weight={weight}
           disabled={disabled}
           readOnly={readOnly}

@@ -5,8 +5,8 @@
  * This is not possible in the previous configuration, as each ThemeColor uses only one tint.
  */
 import {ColorTintKey, ColorTints, ColorTint, black, hues, white} from '@sanity/color'
-import {rgba} from '../../../color-fns'
-import {ThemeColorName, ThemeColorSchemeKey} from '../types'
+import {rgba} from '../lib/color-fns'
+import {ThemeColorName, ThemeColorSchemeKey} from '../lib/theme'
 
 export const colorKeys = [
   'text-primary',

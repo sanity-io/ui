@@ -1,16 +1,12 @@
 import {ReactNode} from 'react'
 import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
-import {ThemeColorSchemeKey, ThemeProvider, cssVars, studioTheme} from '../../src/theme'
-import {
-  ColorKey,
-  getColorHex,
-  getColorValue,
-  colorKeys,
-} from '../../src/theme/lib/theme/color/cssVariables/tints'
+import {ThemeColorSchemeKey, ThemeProvider, studioTheme} from '../../src/theme'
 import {tones} from '../../src/theme/studioTheme/color'
+import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/studioTheme/tints'
 
 const studioTones = ['default', 'positive', 'critical', 'caution'] as const
 
+// Create a function that transform text_primary to "Text Primary"
 function toTitleCase(str: string): string {
   return str
     .split('-')
@@ -78,7 +74,7 @@ function ColorPreview(props: {colorKey: ColorKey; scheme: ThemeColorSchemeKey}) 
                   )
                     ? `0 0 0 1px ${getColorHex(tones['default'], scheme, 'default', 'border-base')}`
                     : undefined,
-                  backgroundColor: cssVars[tone][colorKey],
+                  backgroundColor: getColorHex(tones[tone], scheme, tone, colorKey),
                 }}
               />
               <Flex

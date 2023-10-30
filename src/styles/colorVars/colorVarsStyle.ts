@@ -1,84 +1,43 @@
-import {ThemeColorToneKey, cssVars} from '../../theme'
-import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
-import {getToneCssVar} from '../../theme/lib/theme/color/cssVariables/tones'
+import {ThemeColorBase, ThemeColorGenericState} from '../../theme'
 import {CSSObject} from '../../types/styled'
 
 /**
  * @internal
- * Card overrides in disabled states
  */
-export function _colorVarStyleDisabled(checkered = false): CSSObject {
+export function _colorVarsStyle(
+  base: ThemeColorBase,
+  color: ThemeColorGenericState,
+  checkered = false,
+): CSSObject {
   return {
-    [getToneCssVar('default', 'text-link')]: cssVars.default['text-secondary'],
-    [getToneCssVar('default', 'text-accent')]: cssVars.default['text-secondary'],
-    [getToneCssVar('default', 'text-code')]: cssVars.default['text-secondary'],
-    [getToneCssVar('default', 'text-primary')]: cssVars.default['text-secondary'],
+    // Base
+    // @todo: rename to "--base-"?
+    '--card-shadow-outline-color': base.shadow.outline,
+    '--card-shadow-umbra-color': base.shadow.umbra,
+    '--card-shadow-penumbra-color': base.shadow.penumbra,
+    '--card-shadow-ambient-color': base.shadow.ambient,
+    '--card-focus-ring-color': base.focusRing,
+    '--card-icon-color': color.iconColor,
 
-    [mutableCardVariables['fg-color']]: cssVars.primary['text-secondary'],
-    [mutableCardVariables['muted-fg-color']]: cssVars.primary['text-secondary'],
-    [mutableCardVariables['icon-color']]: cssVars.primary['border-base'],
-    [mutableCardVariables['accent-color']]: cssVars.primary['base-bg-card'],
-    [mutableCardVariables['bg-color']]: cssVars.primary['bg-tint'],
-    [mutableCardVariables['bg-image']]: checkered
-      ? `repeating-conic-gradient(${cssVars.default['base-bg-card']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`
+    // Card
+    '--card-bg-color': color.bg,
+    '--card-bg2-color': color.bg2,
+    '--card-bg-image': checkered
+      ? `repeating-conic-gradient(${color.bg} 0% 25%, ${color.bg2 || color.bg} 0% 50%)`
       : undefined,
-  }
-}
+    '--card-fg-color': color.fg,
+    '--card-border-color': color.border,
+    '--card-muted-fg-color': color.muted?.fg,
+    '--card-accent-fg-color': color.accent?.fg,
+    '--card-link-fg-color': color.link?.fg,
+    '--card-code-bg-color': color.code?.bg,
+    '--card-code-fg-color': color.code?.fg,
+    '--card-skeleton-color-from': color.skeleton?.from,
+    '--card-skeleton-color-to': color.skeleton?.to,
 
-/**
- * @internal
- * Card overrides in selected states
- */
-export function _colorVarStyleSelected(): CSSObject {
-  return {
-    [mutableCardVariables['bg-color']]: cssVars.default['bg-accent'],
-    [mutableCardVariables['fg-color']]: cssVars.default['bg-base'],
-    [mutableCardVariables['muted-fg-color']]: cssVars.default['base-bg-card'],
-    [mutableCardVariables['accent-color']]: cssVars.default['base-bg-card'],
-    [mutableCardVariables['icon-color']]: cssVars.primary['bg-base'],
-  }
-}
-
-/**
- * @internal
- * Card overrides in hover
- */
-export function _colorVarStyleHover(): CSSObject {
-  return {
-    [mutableCardVariables['bg-color']]: cssVars.default['bg-base-hover'],
-    [getToneCssVar('default', 'bg-tint')]: cssVars.default['bg-base-active'],
-  }
-}
-
-/**
- * @internal
- * Card overrides in active / pressed states
- */
-export function _colorVarStyleActive(): CSSObject {
-  return {
-    [mutableCardVariables['bg-color']]: cssVars.default['bg-base-active'],
-  }
-}
-
-/**
- * @internal
- * Selectable needs to redefine bg-color and fg-color
- */
-export function _selectableVarStyle(tone: ThemeColorToneKey): CSSObject {
-  return {
-    [mutableCardVariables['bg-color']]: 'inherit',
-    [mutableCardVariables['fg-color']]:
-      tone === 'default' ? cssVars.default['text-primary'] : cssVars.default['text-secondary'],
-  }
-}
-
-/**
- * @internal
- * Selectable overrides in disabled states, same as card but with different bg-color
- */
-export function _selectableVarStyleDisabled(): CSSObject {
-  return {
-    ..._colorVarStyleDisabled(),
-    [mutableCardVariables['bg-color']]: undefined,
+    // @todo: deprecate
+    '--card-link-color': color.link?.fg,
+    '--card-hairline-soft-color': color.border,
+    '--card-hairline-hard-color': color.border,
   }
 }
