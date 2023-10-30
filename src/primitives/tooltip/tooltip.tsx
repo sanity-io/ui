@@ -22,6 +22,7 @@ import {
   ForwardedRef,
   useId,
 } from 'react'
+import {createPortal} from 'react-dom'
 import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
 import {useArrayProp, useForwardedRef} from '../../hooks'
@@ -63,6 +64,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
 
 const Root = styled(Layer)`
   pointer-events: none;
+  max-width: calc(100vw - 8px);
 `
 
 /**
@@ -98,11 +100,12 @@ export const Tooltip = forwardRef(function Tooltip(
 
   const middleware = useMemo(() => {
     const ret: Middleware[] = []
+    const isConstrainedToBoundary = !portal
 
     // Flip the floating element when leaving the boundary box
     ret.push(
       flip({
-        boundary: boundaryElement || undefined,
+        boundary: isConstrainedToBoundary ? boundaryElement || undefined : undefined,
         fallbackPlacements,
         padding: 4,
         rootBoundary,
@@ -111,20 +114,24 @@ export const Tooltip = forwardRef(function Tooltip(
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: 3}))
 
-    ret.push(
-      size({
-        apply({availableWidth, elements}) {
-          Object.assign(elements.floating.style, {
-            maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
-          })
-        },
-      }),
-    )
+    if (isConstrainedToBoundary) {
+      ret.push(
+        size({
+          apply({availableWidth, elements}) {
+            Object.assign(elements.floating.style, {
+              maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
+            })
+          },
+        }),
+      )
+    }
 
     // Shift the tooltip so its sits with the boundary element
     ret.push(
       shift({
-        boundary: boundaryElement || boundaryElementContext?.element || undefined,
+        boundary: isConstrainedToBoundary
+          ? boundaryElement || boundaryElementContext?.element || undefined
+          : undefined,
         rootBoundary,
         padding: 4,
       }),
@@ -134,7 +141,7 @@ export const Tooltip = forwardRef(function Tooltip(
     ret.push(arrow({element: arrowRef, padding: 2}))
 
     return ret
-  }, [boundaryElement, fallbackPlacements, boundaryElementContext?.element])
+  }, [boundaryElement, fallbackPlacements, boundaryElementContext?.element, portal])
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
@@ -335,7 +342,10 @@ export const Tooltip = forwardRef(function Tooltip(
 
       {showTooltip && (
         <>
-          {portal ? (
+          {portal === true && typeof document !== 'undefined' ? (
+            // By default the portal is attached to the body in tooltips.
+            createPortal(root, document.body)
+          ) : portal ? (
             <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
               {root}
             </Portal>
