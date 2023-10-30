@@ -6,8 +6,8 @@ import {multiply, screen} from './helpers'
 export const tones: {[key: string]: ColorTints} = {
   default: hues.gray,
   transparent: hues.gray,
-  primary: hues.gray,
-  positive: hues.cyan,
+  primary: hues.blue,
+  positive: hues.green,
   caution: hues.yellow,
   critical: hues.red,
 }
