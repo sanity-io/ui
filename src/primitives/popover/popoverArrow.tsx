@@ -1,6 +1,5 @@
 import {forwardRef} from 'react'
 import styled from 'styled-components'
-import {cssVars} from '../../theme'
 import {DEFAULT_POPOVER_ARROW_HEIGHT, DEFAULT_POPOVER_ARROW_WIDTH} from './constants'
 
 const Root = styled.div`
@@ -49,11 +48,11 @@ const Root = styled.div`
 `
 
 const BorderPath = styled.path`
-  fill: ${cssVars.default['base-shadow-outline-color']};
+  fill: var(--card-shadow-outline-color);
 `
 
 const ShapePath = styled.path`
-  fill: ${cssVars.mutable['bg-color']};
+  fill: var(--card-bg-color);
 `
 
 export const PopoverArrow = forwardRef(function PopoverArrow(

@@ -1,13 +1,7 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {
-  _colorVarStyleActive,
-  _colorVarStyleDisabled,
-  _colorVarStyleHover,
-  _colorVarStyleSelected,
-} from '../../styles/colorVars'
+import {_colorVarsStyle} from '../../styles/colorVars'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
-import {createCssVars, cssVars} from '../../theme/lib/theme/color/cssVariables'
 import {CardStyleProps} from './types'
 
 export function cardStyle(
@@ -25,7 +19,7 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
     css`
       background-size: ${space[3]}px ${space[3]}px;
       background-position: 50% 50%;
-      background-image: ${cssVars.mutable['bg-image']};
+      background-image: var(--card-bg-image);
     `}
 
     &[data-as='button'] {
@@ -53,20 +47,18 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
 }
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
-  const {$checkered, $focusRing, theme, $tone, $scheme, $updateCssVars} = props
+  const {$checkered, $focusRing, theme} = props
   const {focusRing} = theme.sanity.card
-
-  const border = {width: 0, color: cssVars.positive['border-accent']}
+  const {base, card, dark} = theme.sanity.color
+  const border = {width: 0, color: 'var(--card-border-color)'}
 
   return css`
-    /* A new css vars context is created, allowing for override of the default tone and changing the scheme */
-    ${$updateCssVars && createCssVars($scheme, theme.sanity.color.tones, $tone)}
-    color-scheme: ${$scheme === 'dark' ? 'dark' : 'light'};
-    ${$checkered &&
-    `--card-bg-image: repeating-conic-gradient(${cssVars.default['base-bg-card']} 0% 25%, ${cssVars.default['bg-tint']} 0% 50%)`}
+    color-scheme: ${dark ? 'dark' : 'light'};
 
-    background-color: ${cssVars.mutable['bg-color']};
-    color: ${cssVars.default['text-primary']};
+    ${_colorVarsStyle(base, card.enabled, $checkered)}
+
+    background-color: var(--card-bg-color);
+    color: var(--card-fg-color);
 
     /* &:is(button) */
     &[data-as='button'] {
@@ -76,34 +68,34 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
       box-shadow: var(--card-focus-ring-box-shadow);
 
       &:disabled {
-        ${_colorVarStyleDisabled($checkered)}
+        ${_colorVarsStyle(base, card.disabled, $checkered)}
       }
 
       &:not(:disabled) {
         &[data-pressed] {
-          ${_colorVarStyleActive()}
+          ${_colorVarsStyle(base, card.pressed, $checkered)}
         }
 
         &[data-selected] {
-          ${_colorVarStyleSelected()}
+          ${_colorVarsStyle(base, card.selected, $checkered)}
         }
 
         @media (hover: hover) {
           &:not([data-pressed]):not([data-selected]) {
             &[data-hovered],
             &:hover {
-              ${_colorVarStyleHover()}
+              ${_colorVarsStyle(base, card.hovered, $checkered)}
             }
 
             &:active {
-              ${_colorVarStyleActive()}
+              ${_colorVarsStyle(base, card.pressed, $checkered)}
             }
           }
         }
 
         &:focus {
           --card-focus-ring-box-shadow: ${$focusRing
-            ? focusRingStyle({border, focusRing})
+            ? focusRingStyle({base, border, focusRing})
             : undefined};
         }
 
@@ -119,34 +111,34 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
       box-shadow: var(--card-focus-ring-box-shadow);
 
       &[data-disabled] {
-        ${_colorVarStyleDisabled($checkered)}
+        ${_colorVarsStyle(base, card.disabled, $checkered)}
       }
 
       &:not([data-disabled]) {
         &[data-pressed] {
-          ${_colorVarStyleActive()}
+          ${_colorVarsStyle(base, card.pressed, $checkered)}
         }
 
         &[data-selected] {
-          ${_colorVarStyleSelected()}
+          ${_colorVarsStyle(base, card.selected, $checkered)}
         }
 
         @media (hover: hover) {
           &:not([data-pressed]):not([data-selected]) {
             &[data-hovered],
             &:hover {
-              ${_colorVarStyleHover()}
+              ${_colorVarsStyle(base, card.hovered, $checkered)}
             }
 
             &:active {
-              ${_colorVarStyleActive()}
+              ${_colorVarsStyle(base, card.pressed, $checkered)}
             }
           }
         }
 
         &:focus {
           --card-focus-ring-box-shadow: ${$focusRing
-            ? focusRingStyle({border, focusRing})
+            ? focusRingStyle({base, border, focusRing})
             : undefined};
         }
 

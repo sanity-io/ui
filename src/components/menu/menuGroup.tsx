@@ -4,7 +4,7 @@ import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
-import {useToneContext} from '../../theme/toneContext/useToneContext'
+import {useRootTheme} from '../../theme'
 import {Radius, SelectableTone} from '../../types'
 import {Menu} from './menu'
 import {useMenu} from './useMenu'
@@ -45,8 +45,8 @@ export function MenuGroup(
     tone = 'default',
     ...restProps
   } = props
-  const {scheme} = useToneContext()
   const menu = useMenu()
+  const {scheme} = useRootTheme()
   const {
     activeElement,
     mount,

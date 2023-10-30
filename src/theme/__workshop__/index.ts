@@ -6,6 +6,11 @@ export default defineScope({
   title: 'Theme',
   stories: [
     {
+      name: 'canvas',
+      title: 'Canvas',
+      component: lazy(() => import('./canvas')),
+    },
+    {
       name: 'nested-provider',
       title: 'Nested provider',
       component: lazy(() => import('./nestedProvider')),

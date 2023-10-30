@@ -1,10 +1,9 @@
-import {cssVars} from '../../theme'
 import {CSSObject} from '../../types/styled'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBorderStyleProps} from './types'
 
-const BORDER_VALUE = `1px solid ${cssVars.default['border-base']}`
+const BORDER_VALUE = '1px solid var(--card-border-color)'
 
 export function responsiveBorderStyle(): Array<
   (props: ResponsiveBorderStyleProps & ThemeProps) => CSSObject[]

@@ -1,13 +1,4 @@
-import {
-  Button,
-  Card,
-  Flex,
-  Text,
-  Tooltip,
-  TooltipDelayGroupProvider,
-  Stack,
-  cssVars,
-} from '@sanity/ui'
+import {Button, Card, Flex, Text, Tooltip, TooltipDelayGroupProvider, Stack} from '@sanity/ui'
 import {useBoolean, useSelect, useText, useNumber} from '@sanity/ui-workshop'
 import {
   WORKSHOP_PLACEMENT_OPTIONS,
@@ -37,11 +28,7 @@ export default function PropsStory() {
       >
         <Stack
           padding={4}
-          style={{
-            outline: `1px solid ${cssVars.default['border-base']}`,
-            width: '100%',
-            maxWidth: '640px',
-          }}
+          style={{outline: '1px solid var(--card-border-color)', width: '100%', maxWidth: '640px'}}
           space={4}
         >
           <Text align="center" size={3}>
@@ -65,11 +52,7 @@ export default function PropsStory() {
         </Stack>
         <Stack
           padding={4}
-          style={{
-            outline: `1px solid ${cssVars.default['border-base']}`,
-            width: '100%',
-            maxWidth: '640px',
-          }}
+          style={{outline: '1px solid var(--card-border-color)', width: '100%', maxWidth: '640px'}}
           space={4}
         >
           <Text align="center" size={3}>
