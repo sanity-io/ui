@@ -1,7 +1,6 @@
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
-import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 
 /* Root */
 export function switchBaseStyles(): ReturnType<typeof css> {
@@ -39,10 +38,11 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
   const {theme} = props
   const {input} = theme.sanity
   const {focusRing} = input.switch
+  const color = theme.sanity.color.input
 
   return css`
-    --switch-bg-color: ${cssVars.default['border-base']};
-    --switch-fg-color: ${cssVars.default['bg-base']};
+    --switch-bg-color: ${color.default.enabled.border};
+    --switch-fg-color: ${color.default.enabled.bg};
     --switch-box-shadow: none;
 
     &:not([hidden]) {
@@ -79,30 +79,30 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
     }
 
     input:checked + && {
-      --switch-bg-color: ${cssVars.positive['border-accent']};
-      --switch-fg-color: ${cssVars.positive['bg-base']};
+      --switch-bg-color: var(--card-focus-ring-color);
+      --switch-fg-color: ${color.default.enabled.bg};
     }
 
     @media (hover: hover) {
       input:not(:disabled):hover + && {
-        --switch-bg-color: ${cssVars.default['border-base']};
-        --switch-fg-color: ${cssVars.default['bg-base']};
+        --switch-bg-color: ${color.default.hovered.border};
+        --switch-fg-color: ${color.default.hovered.bg};
       }
 
       input:not(:disabled):checked:hover + && {
-        --switch-bg-color: ${cssVars.positive['border-accent']};
-        --switch-fg-color: ${cssVars.positive['bg-base']};
+        --switch-bg-color: var(--card-focus-ring-color);
+        --switch-fg-color: ${color.default.enabled.bg};
       }
     }
 
     input:not([data-read-only]):disabled + && {
-      --switch-bg-color: ${cssVars.default['border-base']};
-      --switch-fg-color: ${cssVars.default['bg-tint']};
+      --switch-bg-color: ${color.default.disabled.border};
+      --switch-fg-color: ${color.default.disabled.bg};
     }
 
     input[data-read-only]:disabled + && {
-      --switch-bg-color: ${cssVars.default['border-base']};
-      --switch-fg-color: ${cssVars.default['bg-tint']};
+      --switch-bg-color: ${color.default.readOnly.border};
+      --switch-fg-color: ${color.default.readOnly.bg};
     }
   `
 }

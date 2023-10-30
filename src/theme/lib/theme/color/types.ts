@@ -1,4 +1,12 @@
-import {ColorTints} from '@sanity/color'
+import {ThemeColorBase} from './base'
+import {ThemeColorButton} from './button'
+import {ThemeColorCard} from './card'
+import {ThemeColorInput} from './input'
+import {ThemeColorMuted} from './muted'
+import {ThemeColorSelectable} from './selectable'
+import {ThemeColorSolid} from './solid'
+import {ThemeColorSpot} from './spot'
+import {ThemeColorSyntax} from './syntax'
 
 /**
  * @public
@@ -30,12 +38,35 @@ export type ThemeColorToneKey =
 /**
  * @public
  */
-export interface ThemeColorSchemes {
-  // Could we update this to only return Record<ThemeColorName ,  keyof typeof hues> ? Then the function that assigns the color would search the ColorTint
-  tones: Record<ThemeColorName, ColorTints>
+export interface ThemeColor {
+  dark: boolean
+  base: ThemeColorBase
+  button: ThemeColorButton
+  card: ThemeColorCard
+  input: ThemeColorInput
+  selectable?: ThemeColorSelectable
+  spot: ThemeColorSpot
+  syntax: ThemeColorSyntax
+  solid: ThemeColorSolid
+  muted: ThemeColorMuted
 }
 
 /**
- * @beta
+ * @public
  */
-export type CSSVariableKey = ThemeColorName & ('spot' | 'syntax' | 'mutable')
+export interface ThemeColorScheme {
+  default: ThemeColor
+  transparent: ThemeColor
+  primary: ThemeColor
+  positive: ThemeColor
+  caution: ThemeColor
+  critical: ThemeColor
+}
+
+/**
+ * @public
+ */
+export interface ThemeColorSchemes {
+  dark: ThemeColorScheme
+  light: ThemeColorScheme
+}

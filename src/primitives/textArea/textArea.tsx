@@ -13,7 +13,7 @@ import {
   textInputFontSizeStyle,
   textInputRepresentationStyle,
 } from '../../styles/internal'
-import {ThemeColorToneKey, ThemeFontWeightKey} from '../../theme'
+import {ThemeFontWeightKey, useRootTheme} from '../../theme'
 import {ResponsiveRadiusProps} from '../types'
 
 /**
@@ -25,7 +25,6 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
   fontSize?: number | number[]
   padding?: number | number[]
   weight?: ThemeFontWeightKey
-  tone?: ThemeColorToneKey
 }
 
 const Root = styled.span(textInputRootStyle)
@@ -63,11 +62,12 @@ export const TextArea = forwardRef(function TextArea(
     padding = 3,
     radius = 2,
     weight,
-    tone = 'default',
     ...restProps
   } = props
 
   const ref = useForwardedRef(forwardedRef)
+
+  const rootTheme = useRootTheme()
 
   useCustomValidity(ref, customValidity)
 
@@ -76,21 +76,25 @@ export const TextArea = forwardRef(function TextArea(
       <InputRoot>
         <Input
           data-as="textarea"
-          data-tone={tone}
+          data-scheme={rootTheme.scheme}
+          data-tone={rootTheme.tone}
           {...restProps}
           $fontSize={useArrayProp(fontSize)}
           $padding={useArrayProp(padding)}
+          $scheme={rootTheme.scheme}
           $space={useArrayProp(0)}
-          $tone={tone}
+          $tone={rootTheme.tone}
           $weight={weight}
           disabled={disabled}
           ref={ref}
         />
         <Presentation
           $radius={useArrayProp(radius)}
-          $tone={tone}
+          $scheme={rootTheme.scheme}
+          $tone={rootTheme.tone}
           data-border={border ? '' : undefined}
-          data-tone={tone}
+          data-scheme={rootTheme.scheme}
+          data-tone={rootTheme.tone}
         />
       </InputRoot>
     </Root>

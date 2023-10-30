@@ -11,7 +11,7 @@ import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '
 import {Box, Button, Card, CardProps, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
-import {ThemeColorSchemeKey, cssVars, useTheme} from '../../theme'
+import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {BORDER_OFFSET_X} from './constants'
@@ -139,7 +139,7 @@ const DialogHeader = styled(Box)<DialogHeaderProps>`
     left: ${BORDER_OFFSET_X}px;
     right: ${BORDER_OFFSET_X}px;
     bottom: -1px;
-    border-bottom: 1px solid ${cssVars.default['border-base']};
+    border-bottom: 1px solid var(--card-border-color);
     width: auto;
     opacity: ${(props) => (props.$isContentScrollable && props.$hasScrolledFromTop ? 1 : 0)};
     transition: opacity 200ms ease-in;
@@ -164,7 +164,7 @@ const DialogFooter = styled(Box)<DialogFooterProps>`
     left: ${BORDER_OFFSET_X}px;
     right: ${BORDER_OFFSET_X}px;
     top: -1px;
-    border-top: 1px solid ${cssVars.default['border-base']};
+    border-top: 1px solid var(--card-border-color);
     width: auto;
     opacity: ${(props) => (props.$isContentScrollable && !props.$hasScrolledToBottom ? 1 : 0)};
     transition: opacity 200ms ease-in;

@@ -1,6 +1,5 @@
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {cssVars} from '../../theme'
 
 export function textBaseStyle(
   props: {$accent?: boolean; $muted?: boolean} & ThemeProps,
@@ -9,29 +8,29 @@ export function textBaseStyle(
   const {weights} = theme.sanity.fonts.text
 
   return css`
-    color: ${cssVars.mutable['fg-color']};
+    color: var(--card-fg-color);
 
     ${$accent &&
     css`
-      color: ${cssVars.default['text-accent']};
+      color: var(--card-accent-fg-color);
     `}
 
     ${$muted &&
     css`
-      color: ${cssVars.mutable['muted-fg-color']};
+      color: var(--card-muted-fg-color);
     `}
 
     & code {
       font-family: ${theme.sanity.fonts.code.family};
       border-radius: 1px;
-      background-color: ${cssVars.default['bg-tint-code']};
-      color: ${cssVars.default['text-code']};
+      background-color: var(--card-code-bg-color);
+      color: var(--card-code-fg-color);
     }
 
     & a {
       text-decoration: none;
       border-radius: 1px;
-      color: ${cssVars.default['text-link']};
+      color: var(--card-link-color);
       outline: none;
 
       @media (hover: hover) {
@@ -42,8 +41,8 @@ export function textBaseStyle(
 
       &:focus {
         box-shadow:
-          0 0 0 1px ${cssVars.mutable['bg-color']},
-          0 0 0 3px ${cssVars.positive['border-accent']};
+          0 0 0 1px var(--card-bg-color),
+          0 0 0 3px var(--card-focus-ring-color);
       }
 
       &:focus:not(:focus-visible) {
@@ -63,7 +62,7 @@ export function textBaseStyle(
 
     & [data-sanity-icon] {
       vertical-align: baseline;
-      color: ${cssVars.mutable['icon-color']};
+      color: var(--card-icon-color);
     }
   `
 }

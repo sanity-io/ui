@@ -1,6 +1,5 @@
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
-import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
 import {CSSObject} from '../../types/styled'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
@@ -65,7 +64,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
     position: 'relative',
     boxSizing: 'border-box',
     userSelect: 'none',
-    boxShadow: `0 0 0 1px ${cssVars.mutable['bg-color']}`,
+    boxShadow: '0 0 0 1px var(--card-bg-color)',
 
     '&[data-status="inactive"]': {
       opacity: 0.5,
@@ -124,11 +123,14 @@ export function responsiveAvatarSizeStyle(
   })
 }
 
-export function avatarInitialsStyle(): CSSObject {
+export function avatarInitialsStyle(props: ThemeProps): CSSObject {
+  const {theme} = props
+  const {base} = theme.sanity.color
+
   return {
     width: '100%',
     height: '100%',
-    color: cssVars.default['text-primary'],
+    color: base.fg,
     alignItems: 'center',
     justifyContent: 'center',
     textTransform: 'uppercase',
@@ -144,7 +146,7 @@ export function avatarInitialsStyle(): CSSObject {
 function avatarBgStrokeStyle(): CSSObject {
   return {
     strokeWidth: '4px',
-    stroke: cssVars.mutable['bg-color'],
+    stroke: 'var(--card-bg-color)',
   }
 }
 
