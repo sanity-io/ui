@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Box, Card, Tree, TreeItem, cssVars, useRootTheme} from '@sanity/ui'
+import {Box, Card, Tree, TreeItem, useRootTheme} from '@sanity/ui'
 
 export default function ColorStory() {
   const {theme} = useRootTheme()
@@ -48,7 +48,7 @@ function ColorPreview({name, value}: {name: string; value: string}) {
         radius={2}
         style={{
           backgroundColor: value,
-          boxShadow: `inset 0 0 0 1px ${cssVars.default['base-shadow-outline-color']}`,
+          boxShadow: 'inset 0 0 0 1px var(--card-shadow-outline-color)',
           display: 'inline-block',
           height: 17,
           width: 25,

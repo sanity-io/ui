@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {cssVars, useTheme} from '../../theme'
+import {useTheme} from '../../theme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
@@ -49,7 +49,7 @@ const LoadingBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${cssVars.mutable['bg-color']};
+  background-color: var(--card-bg-color);
   border-radius: inherit;
   z-index: 1;
   box-shadow: inherit;

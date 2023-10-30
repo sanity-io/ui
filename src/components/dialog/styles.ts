@@ -1,5 +1,4 @@
 import {_responsive, ThemeProps} from '../../styles'
-import {cssVars} from '../../theme'
 import {DialogPosition} from '../../types'
 import {CSSObject} from '../../types/styled'
 
@@ -10,7 +9,9 @@ export interface ResponsiveDialogPositionStyleProps {
   $position: DialogPosition[]
 }
 
-export function dialogStyle(): CSSObject {
+export function dialogStyle({theme}: ThemeProps): CSSObject {
+  const color = theme.sanity.color.base
+
   return {
     '&:not([hidden])': {
       display: 'flex',
@@ -23,7 +24,7 @@ export function dialogStyle(): CSSObject {
     alignItems: 'center',
     justifyContent: 'center',
     outline: 'none',
-    background: cssVars.default['base-shadow-umbra-color'],
+    background: color.shadow.umbra,
   }
 }
 

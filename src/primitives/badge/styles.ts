@@ -1,15 +1,16 @@
-import {mutableCardVariables} from '../../theme/lib/theme/color/cssVariables/cardVariables'
-import {cssVars} from '../../theme/lib/theme/color/cssVariables/createCssVars'
+import {ThemeProps} from '../../styles'
 import {CSSObject} from '../../types/styled'
 import {BadgeStyleProps} from './types'
 
-export function badgeStyle(props: BadgeStyleProps): CSSObject {
-  const {$mode, $tone} = props
+export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {
+  const {$mode, $tone, theme} = props
+  const palette = theme.sanity.color[$mode === 'outline' ? 'muted' : 'solid']
+  const color = palette[$tone] || palette.default
 
   return {
-    backgroundColor: $mode === 'outline' ? cssVars[$tone]['bg-base'] : cssVars[$tone]['bg-tint'],
-    [mutableCardVariables['fg-color']]: cssVars[$tone]['text-secondary'],
-    boxShadow: $mode === 'outline' ? `inset 0 0 0 1px ${cssVars[$tone]['border-base']}` : undefined,
+    backgroundColor: color.enabled.bg,
+    color: color.enabled.fg,
+    boxShadow: `inset 0 0 0 1px ${color.enabled.border}`,
     cursor: 'default',
 
     '&:not([hidden])': {

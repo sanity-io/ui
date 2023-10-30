@@ -130,9 +130,7 @@ export function Tones(): ReactNode {
                 <Wrapper title="Inputs">
                   <TextInput placeholder="placeholder" />
                   <TextInput value="Value" />
-                  <TextInput value="with tone (caution)" tone="caution" />
                   <TextArea value="TextArea" />
-                  <TextArea value="TextArea" tone="caution" />
                   <Select>
                     <option>Think</option>
                   </Select>
