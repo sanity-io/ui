@@ -27,7 +27,26 @@ export interface StateColorTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueValue
   bg?: ColorTokenValue
+  bg2?: ColorTokenValue
   fg?: ColorTokenValue
+  border?: ColorTokenValue
+  muted?: {
+    fg?: ColorTokenValue
+  }
+  accent?: {
+    fg?: ColorTokenValue
+  }
+  link?: {
+    fg?: ColorTokenValue
+  }
+  code?: {
+    bg?: ColorTokenValue
+    fg?: ColorTokenValue
+  }
+  skeleton?: {
+    from?: ColorTokenValue
+    to?: ColorTokenValue
+  }
 }
 
 export type ButtonModeColorTokens = Partial<Record<'*' | ColorState, StateColorTokens>>

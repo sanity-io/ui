@@ -33,9 +33,11 @@ export const defaultColorTokens: ColorTokens = {
         '*': {
           _blend: ['screen', 'multiply'],
           bg: ['500', '400'],
+          border: ['500/0', '400/0'],
         },
         hovered: {
           bg: ['600', '300'],
+          border: ['600/0', '300/0'],
         },
         pressed: {
           bg: ['700', '200'],
@@ -53,6 +55,7 @@ export const defaultColorTokens: ColorTokens = {
           _blend: ['multiply', 'screen'],
           bg: ['white', 'black'],
           fg: ['600', '400'],
+          border: ['200', '800'],
         },
         hovered: {
           bg: ['50', '950'],
@@ -69,6 +72,7 @@ export const defaultColorTokens: ColorTokens = {
         disabled: {
           _hue: 'gray',
           fg: ['100', '900'],
+          border: ['100', '900'],
         },
       },
       bleed: {
@@ -76,6 +80,7 @@ export const defaultColorTokens: ColorTokens = {
           _blend: ['multiply', 'screen'],
           bg: ['white', 'black'],
           fg: ['600', '400'],
+          border: ['white/0', 'black/0'],
         },
         hovered: {
           bg: ['50', '950'],
