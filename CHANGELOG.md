@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.12](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.11...v2.0.0-alpha.12) (2023-10-31)
+
+### Reverts
+
+- Revert "build: temporarily skip actions on current node version (21.0.0)" (#1174) ([5e1b141](https://github.com/sanity-io/ui/commit/5e1b141ac8a21565016f975e9f59466e95aeb320)), closes [#1174](https://github.com/sanity-io/ui/issues/1174)
+
 ## [2.0.0-alpha.11](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.10...v2.0.0-alpha.11) (2023-10-31)
 
 ### Bug Fixes
