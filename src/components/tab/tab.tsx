@@ -31,7 +31,10 @@ const CustomButton = styled(Button)`
  */
 export const Tab = forwardRef(function Tab(
   props: TabProps &
-    Omit<React.HTMLProps<HTMLButtonElement>, 'aria-controls' | 'as' | 'id' | 'label' | 'type'>,
+    Omit<
+      React.HTMLProps<HTMLButtonElement>,
+      'aria-controls' | 'as' | 'id' | 'label' | 'type' | 'width'
+    >,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
