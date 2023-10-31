@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.11](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.10...v2.0.0-alpha.11) (2023-10-31)
+
+### Bug Fixes
+
+- revert changes for css variables ([#1172](https://github.com/sanity-io/ui/issues/1172)) ([0a7c597](https://github.com/sanity-io/ui/commit/0a7c597ad16d40cdaf22ceafec8fd3a2ca8170e3))
+
 ## [2.0.0-alpha.10](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.9...v2.0.0-alpha.10) (2023-10-25)
 
 ### Bug Fixes
