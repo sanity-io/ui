@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-latest]
-        node-version: [lts/*]
+        node-version: [lts/*, current]
         include:
           - platform: macos-latest
             node-version: lts/*
