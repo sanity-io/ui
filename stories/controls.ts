@@ -19,6 +19,17 @@ export const getAvatarSizeControls = () => {
   }
 }
 
+export const getButtonWidthControls = () => {
+  return {
+    control: {type: 'select'},
+    options: ['(none)', 'fill'],
+    mapping: {
+      '(none)': '',
+      fill: 'fill',
+    },
+  }
+}
+
 export const getContainerWidthControls = () => {
   const numContainerSizes = studioTheme.container.length
 
