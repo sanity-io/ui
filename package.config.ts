@@ -5,6 +5,7 @@ export default defineConfig({
     rules: {
       'ae-internal-missing-underscore': 'off',
       'ae-incompatible-release-tags': 'warn',
+      'ae-missing-release-tag': 'warn',
     },
   },
   legacyExports: true,
