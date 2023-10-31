@@ -62,6 +62,7 @@ function renderColorBase(
 
   return {
     _blend: value._blend,
+    dark: value.dark,
     base: {
       bg: nestedBg,
       fg: renderColorValue(colorPalette, nestedBg, value._blend, value.base.fg),
@@ -134,14 +135,44 @@ function renderStateColorTheme(
           value.bg,
         )
 
+  const bg2 = renderColorValue(colorPalette, bg, blendMode, value.bg2 || value.bg)
   const fg = renderColorValue(colorPalette, bg, blendMode, value.fg)
+  const border = renderColorValue(colorPalette, bg, blendMode, value.border)
+  const muted = {
+    fg: renderColorValue(colorPalette, bg, blendMode, value.muted.fg),
+  }
+  const accent = {
+    fg: renderColorValue(colorPalette, bg, blendMode, value.accent.fg),
+  }
+  const link = {
+    fg: renderColorValue(colorPalette, bg, blendMode, value.link.fg),
+  }
+  const code = {
+    bg: renderColorValue(colorPalette, bg, blendMode, value.code.bg),
+    fg: renderColorValue(colorPalette, bg, blendMode, value.code.fg),
+  }
 
   const blend = rootBlendMode === 'multiply' ? multiply : screen
 
   return {
     _blend: blendMode,
     bg: blend(baseBg, bg),
+    bg2: blend(baseBg, bg2),
     fg: blend(baseBg, fg),
+    border: blend(baseBg, border),
+    muted: {
+      fg: blend(baseBg, muted.fg),
+    },
+    accent: {
+      fg: blend(baseBg, accent.fg),
+    },
+    link: {
+      fg: blend(baseBg, link.fg),
+    },
+    code: {
+      bg: blend(baseBg, code.bg),
+      fg: blend(baseBg, code.fg),
+    },
   }
 }
 
