@@ -5,7 +5,7 @@ import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
-import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
+import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth, FlexJustify} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Spinner} from '../spinner'
@@ -34,11 +34,12 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   text?: React.ReactNode
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
-  width?: 'fill'
+  width?: ButtonWidth
 }
 
 const Root = styled.button<
-  {$mode: ButtonMode; $tone: ButtonTone; $width?: 'fill'} & ResponsiveRadiusStyleProps & ThemeProps
+  {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps &
+    ThemeProps
 >(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
 
 const LoadingBox = styled.div`
