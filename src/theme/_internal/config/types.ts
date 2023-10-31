@@ -40,6 +40,11 @@ export interface ColorTokens extends Partial<Record<ColorConfigBaseTone, BaseCol
   button?: Partial<Record<ColorConfigStateTone, ButtonColorTokens>>
 }
 
+export interface ColorTokensResolved
+  extends Record<(typeof COLOR_BASE_TONES)[number], BaseColorTokens> {
+  button: Record<(typeof COLOR_STATE_TONES)[number], ButtonColorTokens>
+}
+
 export type TMP_ColorPalette = {
   black: string | ColorPaletteValue
   white: string | ColorPaletteValue
