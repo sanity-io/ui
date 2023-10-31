@@ -5,7 +5,7 @@ import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme} from '../../theme'
-import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
+import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth, FlexJustify} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Spinner} from '../spinner'
@@ -34,10 +34,12 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   text?: React.ReactNode
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
+  width?: ButtonWidth
 }
 
 const Root = styled.button<
-  {$mode: ButtonMode; $tone: ButtonTone} & ResponsiveRadiusStyleProps & ThemeProps
+  {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps &
+    ThemeProps
 >(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
 
 const LoadingBox = styled.div`
@@ -59,7 +61,7 @@ const LoadingBox = styled.div`
  * @public
  */
 export const Button = forwardRef(function Button(
-  props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as'>,
+  props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'width'>,
   ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
@@ -86,6 +88,7 @@ export const Button = forwardRef(function Button(
     tone = 'default',
     type = 'button',
     muted = false,
+    width,
     ...restProps
   } = props
 
@@ -128,6 +131,7 @@ export const Button = forwardRef(function Button(
       disabled={Boolean(loading || disabled)}
       ref={ref}
       type={type}
+      $width={width}
     >
       {Boolean(loading) && (
         <LoadingBox>
