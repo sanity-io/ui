@@ -3,6 +3,7 @@ import type {Meta, StoryObj} from '@storybook/react'
 import {Button, Flex, Grid, Stack, Text} from '../../src/primitives'
 import {BUTTON_MODES, BUTTON_TONES, RADII} from '../constants'
 import {
+  getButtonWidthControls,
   getFontSizeControls,
   getIconControls,
   getRadiusControls,
@@ -16,6 +17,7 @@ const meta: Meta<typeof Button> = {
     text: 'Label',
   },
   argTypes: {
+    disabled: {control: 'boolean'},
     fontSize: getFontSizeControls('text'),
     icon: getIconControls(),
     iconRight: getIconControls(),
@@ -23,7 +25,7 @@ const meta: Meta<typeof Button> = {
     radius: getRadiusControls(),
     space: getSpaceControls(),
     text: {control: 'text'},
-    disabled: {control: 'boolean'},
+    width: getButtonWidthControls(),
   },
   component: Button,
   tags: ['autodocs'],
@@ -274,4 +276,12 @@ export const CustomButton: Story = {
       </Flex>
     )
   },
+}
+
+export const FullWidth: Story = {
+  args: {
+    text: 'Full width',
+    width: 'fill',
+  },
+  render: (props) => <Button {...props} />,
 }
