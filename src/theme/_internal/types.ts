@@ -23,7 +23,26 @@ export type ColorStateTone = (typeof COLOR_STATE_TONES)[number]
 export interface TMP_StateColorTheme {
   _blend: ColorBlendModeValue
   bg: string
+  bg2?: string
   fg: string
+  border: string
+  muted: {
+    fg: string
+  }
+  accent: {
+    fg: string
+  }
+  link: {
+    fg: string
+  }
+  code: {
+    bg: string
+    fg: string
+  }
+  skeleton?: {
+    from: string
+    to: string
+  }
 }
 
 export type TMP_ButtonStatesColorTheme = Record<ColorState, TMP_StateColorTheme>
@@ -34,6 +53,7 @@ export type TMP_ButtonColorTheme = Record<ColorStateTone, TMP_ButtonModesColorTh
 
 export interface TMP_BaseColorTheme {
   _blend: ColorBlendModeValue
+  dark: boolean
   base: {
     bg: string
     fg: string

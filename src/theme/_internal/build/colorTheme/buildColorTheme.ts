@@ -51,6 +51,7 @@ export function buildBaseColorTheme(
 
   return {
     _blend: _blend[scheme === 'light' ? 0 : 1],
+    dark: scheme === 'dark',
     base: {
       bg,
       fg: resolveColorTokenValue({
@@ -154,10 +155,68 @@ function buildButtonStateColorTheme(
       scheme,
       value: spec0?.bg || spec1?.bg || spec2?.bg || spec3?.bg || ['500', '400'],
     }),
+    bg2: resolveColorTokenValue({
+      hue,
+      scheme,
+      value: spec0?.bg2 || spec1?.bg2 || spec2?.bg2 || spec3?.bg2 || ['500', '400'],
+    }),
     fg: resolveColorTokenValue({
       hue,
       scheme,
       value: spec0?.fg || spec1?.fg || spec2?.fg || spec3?.fg || ['white', 'black'],
     }),
+    border: resolveColorTokenValue({
+      hue,
+      scheme,
+      value: spec0?.border || spec1?.border || spec2?.border || spec3?.border || ['500', '400'],
+    }),
+    muted: {
+      fg: resolveColorTokenValue({
+        hue,
+        scheme,
+        value: spec0?.muted?.fg ||
+          spec1?.muted?.fg ||
+          spec2?.muted?.fg ||
+          spec3?.muted?.fg || ['500', '400'],
+      }),
+    },
+    accent: {
+      fg: resolveColorTokenValue({
+        hue,
+        scheme,
+        value: spec0?.accent?.fg ||
+          spec1?.accent?.fg ||
+          spec2?.accent?.fg ||
+          spec3?.accent?.fg || ['500', '400'],
+      }),
+    },
+    link: {
+      fg: resolveColorTokenValue({
+        hue,
+        scheme,
+        value: spec0?.link?.fg ||
+          spec1?.link?.fg ||
+          spec2?.link?.fg ||
+          spec3?.link?.fg || ['500', '400'],
+      }),
+    },
+    code: {
+      bg: resolveColorTokenValue({
+        hue,
+        scheme,
+        value: spec0?.code?.bg ||
+          spec1?.code?.bg ||
+          spec2?.code?.bg ||
+          spec3?.code?.bg || ['500', '400'],
+      }),
+      fg: resolveColorTokenValue({
+        hue,
+        scheme,
+        value: spec0?.code?.fg ||
+          spec1?.code?.fg ||
+          spec2?.code?.fg ||
+          spec3?.code?.fg || ['500', '400'],
+      }),
+    },
   }
 }
