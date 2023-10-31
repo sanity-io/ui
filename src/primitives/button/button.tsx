@@ -34,10 +34,11 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   text?: React.ReactNode
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
+  width?: 'fill'
 }
 
 const Root = styled.button<
-  {$mode: ButtonMode; $tone: ButtonTone} & ResponsiveRadiusStyleProps & ThemeProps
+  {$mode: ButtonMode; $tone: ButtonTone; $width?: 'fill'} & ResponsiveRadiusStyleProps & ThemeProps
 >(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
 
 const LoadingBox = styled.div`
@@ -86,6 +87,7 @@ export const Button = forwardRef(function Button(
     tone = 'default',
     type = 'button',
     muted = false,
+    width,
     ...restProps
   } = props
 
@@ -128,6 +130,7 @@ export const Button = forwardRef(function Button(
       disabled={Boolean(loading || disabled)}
       ref={ref}
       type={type}
+      $width={width}
     >
       {Boolean(loading) && (
         <LoadingBox>

@@ -275,3 +275,11 @@ export const CustomButton: Story = {
     )
   },
 }
+
+export const FullWidth: Story = {
+  args: {
+    text: 'Full width',
+    width: 'fill',
+  },
+  render: (props) => <Button {...props} />,
+}
