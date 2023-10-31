@@ -94,7 +94,7 @@ test('buildColorTheme: base', () => {
   })
 })
 
-test.only('buildColorTheme: button', () => {
+test('buildColorTheme: button', () => {
   const colorConfig: ColorThemeConfig = {
     tokens: {
       '*': {
