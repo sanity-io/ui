@@ -9,8 +9,8 @@ dependencies:
     specifier: 2.0.0
     version: 2.0.0(react-dom@18.2.0)(react@18.2.0)
   '@sanity/color':
-    specifier: 3.0.0-beta.5
-    version: 3.0.0-beta.5
+    specifier: 3.0.0-beta.6
+    version: 3.0.0-beta.6
   '@sanity/icons':
     specifier: ^2.4.1
     version: 2.4.1(react@18.2.0)
@@ -5045,8 +5045,8 @@ packages:
     resolution: {integrity: sha512-tTi22KoKuER3sldXYl4c1Dq2zU7tMLDkljFiaUKVkBbu4PBvRGCFw75kXZnD2b4Bsp6vin+7sI+AKdCKRhfRuw==}
     dev: true
 
-  /@sanity/color@3.0.0-beta.5:
-    resolution: {integrity: sha512-fJz61gJ1ESE9CWhjXe7EvV5oFB42diuo4z8UQHZzGyhJrJOg3gXInhYUib5y/qunarvSNo3PpPOGt/JbuA7tVQ==}
+  /@sanity/color@3.0.0-beta.6:
+    resolution: {integrity: sha512-F4jG6xSa5QvOO4zGMqlSdgoWl/Sok+V5rEx0vEZkekGYKcqMTZEYIYLmD3CfQmpU/DnWxToCB/5uyFBH/fbYug==}
     engines: {node: '>=18.0.0'}
     dev: false
 
