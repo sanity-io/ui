@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.13](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.12...v2.0.0-alpha.13) (2023-10-31)
+
+### Features
+
+- **buttons:** add support for width=fill prop ([#1175](https://github.com/sanity-io/ui/issues/1175)) ([38afa84](https://github.com/sanity-io/ui/commit/38afa8400cf2b4bb0c94405fbf15643abd0a01d2))
+
 ## [2.0.0-alpha.12](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.11...v2.0.0-alpha.12) (2023-10-31)
 
 ### Reverts
