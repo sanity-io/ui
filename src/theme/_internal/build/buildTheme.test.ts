@@ -28,7 +28,7 @@ test('build theme', () => {
         button: {
           ghost: {
             enabled: {
-              border: color.light.default.button.default.ghost.enabled.border,
+              border: color.light.default.button.ghost.default.enabled.border,
             },
           },
         },
@@ -41,7 +41,7 @@ test('build theme', () => {
         button: {
           ghost: {
             enabled: {
-              border: color.dark.default.button.default.ghost.enabled.border,
+              border: color.dark.default.button.ghost.default.enabled.border,
             },
           },
         },

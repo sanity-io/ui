@@ -1,3 +1,4 @@
+import {ThemeColorBase, ThemeColorButton} from '../lib/theme'
 import {ColorBlendModeValue} from './config'
 import {
   COLOR_BASE_TONES,
@@ -20,58 +21,12 @@ export type ColorState = (typeof COLOR_STATES)[number]
 
 export type ColorStateTone = (typeof COLOR_STATE_TONES)[number]
 
-export interface TMP_StateColorTheme {
-  _blend: ColorBlendModeValue
-  bg: string
-  bg2?: string
-  fg: string
-  border: string
-  muted: {
-    fg: string
-  }
-  accent: {
-    fg: string
-  }
-  link: {
-    fg: string
-  }
-  code: {
-    bg: string
-    fg: string
-  }
-  skeleton?: {
-    from: string
-    to: string
-  }
-}
-
-export type TMP_ButtonStatesColorTheme = Record<ColorState, TMP_StateColorTheme>
-
-export type TMP_ButtonModesColorTheme = Record<ColorButtonMode, TMP_ButtonStatesColorTheme>
-
-export type TMP_ButtonColorTheme = Record<ColorStateTone, TMP_ButtonModesColorTheme>
-
+// todo: replace with `ThemeColor`
 export interface TMP_BaseColorTheme {
   _blend: ColorBlendModeValue
   dark: boolean
-  // base: ThemeColorBase
-  base: {
-    bg: string
-    fg: string
-    border: string
-    focusRing: string
-    shadow: {
-      outline: string
-      umbra: string
-      penumbra: string
-      ambient: string
-    }
-    skeleton: {
-      from: string
-      to: string
-    }
-  }
-  button: TMP_ButtonColorTheme
+  base: ThemeColorBase
+  button: ThemeColorButton
   // card: ThemeColorCard
   // input: ThemeColorInput
   // selectable?: ThemeColorSelectable

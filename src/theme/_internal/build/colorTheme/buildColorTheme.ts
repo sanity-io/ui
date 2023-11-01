@@ -1,3 +1,9 @@
+import {
+  ThemeColorButton,
+  ThemeColorButtonStates,
+  ThemeColorButtonTones,
+  ThemeColorGenericState,
+} from '../../../lib/theme'
 import {ThemeConfig} from '../../config'
 import {COLOR_BUTTON_MODES, COLOR_STATE_TONES, COLOR_STATES} from '../../constants'
 import {
@@ -6,11 +12,7 @@ import {
   ColorState,
   ColorStateTone,
   TMP_BaseColorTheme,
-  TMP_ButtonColorTheme,
-  TMP_ButtonModesColorTheme,
-  TMP_ButtonStatesColorTheme,
   TMP_ColorTheme,
-  TMP_StateColorTheme,
 } from '../../types'
 import {defaultColorTokens} from '../defaults/colorTokens'
 import {ColorTokenContext, resolveColorTokenValue as _color} from '../helpers'
@@ -77,53 +79,53 @@ export function buildBaseColorTheme(
 function buildButtonColorTheme(
   options: {scheme: 'light' | 'dark'},
   config?: ThemeConfig,
-): TMP_ButtonColorTheme {
+): ThemeColorButton {
   const {scheme} = options
 
-  const tones = COLOR_STATE_TONES.map((tone): Partial<TMP_ButtonColorTheme> => {
+  const modes = COLOR_BUTTON_MODES.map((mode): Partial<ThemeColorButton> => {
     return {
-      [tone]: buildButtonColorToneTheme({scheme, tone}, config),
+      [mode]: buildButtonTonesColorTheme({scheme, mode}, config),
     }
   })
 
-  return Object.assign({}, ...tones) as TMP_ButtonColorTheme
+  return Object.assign({}, ...modes) as ThemeColorButton
 }
 
-function buildButtonColorToneTheme(
+function buildButtonTonesColorTheme(
   options: {
     scheme: 'light' | 'dark'
-    tone: ColorStateTone
+    mode: ColorButtonMode
   },
   config?: ThemeConfig,
-): TMP_ButtonModesColorTheme {
-  const {scheme, tone} = options
+): ThemeColorButtonTones {
+  const {mode, scheme} = options
 
-  const modes = COLOR_BUTTON_MODES.map((mode): Partial<TMP_ButtonModesColorTheme> => {
+  const tones = COLOR_STATE_TONES.map((tone): Partial<ThemeColorButtonTones> => {
     return {
-      [mode]: buildButtonModeColorTheme({mode, scheme, tone}, config),
+      [mode]: buildButtonStatesColorTheme({mode, scheme, tone}, config),
     }
   })
 
-  return Object.assign({}, ...modes) as TMP_ButtonModesColorTheme
+  return Object.assign({}, ...tones) as ThemeColorButtonTones
 }
 
-function buildButtonModeColorTheme(
+function buildButtonStatesColorTheme(
   options: {
     mode: ColorButtonMode
     scheme: 'light' | 'dark'
     tone: ColorStateTone
   },
   config?: ThemeConfig,
-): TMP_ButtonStatesColorTheme {
+): ThemeColorButtonStates {
   const {mode, scheme, tone} = options
 
-  const states = COLOR_STATES.map((state): Partial<TMP_ButtonStatesColorTheme> => {
+  const states = COLOR_STATES.map((state): Partial<ThemeColorButtonStates> => {
     return {
       [state]: buildButtonStateColorTheme({mode, tone, scheme, state}, config),
     }
   })
 
-  return Object.assign({}, ...states) as TMP_ButtonStatesColorTheme
+  return Object.assign({}, ...states) as ThemeColorButtonStates
 }
 
 function buildButtonStateColorTheme(
@@ -134,7 +136,7 @@ function buildButtonStateColorTheme(
     state: ColorState
   },
   config?: ThemeConfig,
-): TMP_StateColorTheme {
+): ThemeColorGenericState {
   const {mode, tone, scheme, state} = options
   const tokens = config?.color?.tokens?.button?.[tone]?.[mode]?.[state]
   const hue = tokens?._hue || 'gray'
@@ -147,6 +149,7 @@ function buildButtonStateColorTheme(
     bg2: _color(context, tokens?.bg2 || ['500', '400']),
     fg: _color(context, tokens?.fg || ['white', 'black']),
     border: _color(context, tokens?.border || ['500', '400']),
+    iconColor: _color(context, tokens?.fg || ['500', '400']),
     muted: {
       fg: _color(context, tokens?.fg || ['500', '400']),
     },

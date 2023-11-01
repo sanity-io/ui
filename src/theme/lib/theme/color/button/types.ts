@@ -15,11 +15,11 @@ export type ThemeColorButtonState = ThemeColorGenericState
  * @public
  */
 export interface ThemeColorButtonStates {
-  enabled: ThemeColorButtonState
-  hovered: ThemeColorButtonState
-  pressed: ThemeColorButtonState
-  selected: ThemeColorButtonState
-  disabled: ThemeColorButtonState
+  enabled: ThemeColorGenericState
+  hovered: ThemeColorGenericState
+  pressed: ThemeColorGenericState
+  selected: ThemeColorGenericState
+  disabled: ThemeColorGenericState
 }
 
 /**

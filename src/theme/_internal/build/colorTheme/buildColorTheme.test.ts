@@ -142,22 +142,22 @@ test('buildColorTheme: button', () => {
   expect({
     light: {
       enabled: {
-        bg: light.default.button.primary.default.enabled.bg,
-        fg: light.default.button.primary.default.enabled.fg,
+        bg: light.default.button.default.primary.enabled.bg,
+        fg: light.default.button.default.primary.enabled.fg,
       },
       hovered: {
-        bg: light.default.button.primary.default.hovered.bg,
-        fg: light.default.button.primary.default.hovered.fg,
+        bg: light.default.button.default.primary.hovered.bg,
+        fg: light.default.button.default.primary.hovered.fg,
       },
     },
     dark: {
       enabled: {
-        bg: dark.default.button.primary.default.enabled.bg,
-        fg: dark.default.button.primary.default.enabled.fg,
+        bg: dark.default.button.default.primary.enabled.bg,
+        fg: dark.default.button.default.primary.enabled.fg,
       },
       hovered: {
-        bg: dark.default.button.primary.default.hovered.bg,
-        fg: dark.default.button.primary.default.hovered.fg,
+        bg: dark.default.button.default.primary.hovered.bg,
+        fg: dark.default.button.default.primary.hovered.fg,
       },
     },
   }).toEqual({

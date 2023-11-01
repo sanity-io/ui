@@ -1,7 +1,11 @@
+import {ColorBlendModeValue} from '../../../../_internal'
+
 /**
  * @public
  */
 export interface ThemeColorGenericState {
+  /** @internal */
+  _blend?: ColorBlendModeValue
   bg: string
   /**
    * @beta

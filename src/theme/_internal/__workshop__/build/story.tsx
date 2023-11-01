@@ -145,8 +145,8 @@ function BaseTonePreview(props: {
           '--shadow-umbra': color[baseTone].base.shadow.umbra,
           '--shadow-penumbra': color[baseTone].base.shadow.penumbra,
           '--shadow-ambient': color[baseTone].base.shadow.ambient,
-          '--skeleton-from': color[baseTone].base.skeleton.from,
-          '--skeleton-to': color[baseTone].base.skeleton.to,
+          '--skeleton-from': color[baseTone].base.skeleton?.from,
+          '--skeleton-to': color[baseTone].base.skeleton?.to,
         } as any
       }
     >
@@ -174,7 +174,7 @@ function BaseTonePreview(props: {
           {COLOR_BUTTON_MODES.map((mode) => (
             <div key={mode} style={{display: 'flex', flexDirection: 'column'}}>
               {COLOR_STATE_TONES.map((tone) => {
-                const button = color[baseTone].button[tone][mode]
+                const button = color[baseTone].button[mode]?.[tone]
 
                 return (
                   <div

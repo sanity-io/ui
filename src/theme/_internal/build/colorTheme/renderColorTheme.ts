@@ -1,15 +1,13 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
 import {rgba} from '../../../lib/color-fns'
-import {ColorBlendModeValue, parseTokenValue, ThemeConfig, TMP_ColorPalette} from '../../config'
 import {
-  TMP_BaseColorTheme,
-  TMP_ButtonColorTheme,
-  TMP_ButtonModesColorTheme,
-  TMP_ButtonStatesColorTheme,
-  TMP_ColorTheme,
-  TMP_StateColorTheme,
-  TMP_Theme,
-} from '../../types'
+  ThemeColorButton,
+  ThemeColorButtonStates,
+  ThemeColorButtonTones,
+  ThemeColorGenericState,
+} from '../../../lib/theme'
+import {ColorBlendModeValue, parseTokenValue, ThemeConfig, TMP_ColorPalette} from '../../config'
+import {TMP_BaseColorTheme, TMP_ColorTheme, TMP_Theme} from '../../types'
 import {defaultColorPalette} from '../defaults/colorPalette'
 import {multiply, screen} from '../helpers'
 
@@ -77,9 +75,9 @@ function renderColorBase(
         ),
         ambient: renderColorValue(colorPalette, nestedBg, value._blend, value.base.shadow.ambient),
       },
-      skeleton: {
-        from: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton.from),
-        to: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton.to),
+      skeleton: value.base.skeleton && {
+        from: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton?.from),
+        to: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton?.to),
       },
     },
     button: renderButtonColorTheme(colorPalette, nestedBg, value._blend, value.button),
@@ -90,14 +88,12 @@ function renderButtonColorTheme(
   colorPalette: TMP_ColorPalette,
   bg: string,
   baseBlendMode: ColorBlendModeValue,
-  value: TMP_ButtonColorTheme,
-): TMP_ButtonColorTheme {
+  value: ThemeColorButton,
+): ThemeColorButton {
   return {
     default: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.default),
-    primary: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.primary),
-    positive: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.positive),
-    caution: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.caution),
-    critical: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.critical),
+    ghost: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.ghost),
+    bleed: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.bleed),
   }
 }
 
@@ -105,12 +101,14 @@ function renderButtonStateColorTheme(
   colorPalette: TMP_ColorPalette,
   bg: string,
   baseBlendMode: ColorBlendModeValue,
-  value: TMP_ButtonModesColorTheme,
-): TMP_ButtonModesColorTheme {
+  value: ThemeColorButtonTones,
+): ThemeColorButtonTones {
   return {
     default: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.default),
-    ghost: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.ghost),
-    bleed: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.bleed),
+    primary: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.primary),
+    positive: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.positive),
+    caution: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.caution),
+    critical: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.critical),
   }
 }
 
@@ -118,8 +116,8 @@ function renderStatesColorTheme(
   colorPalette: TMP_ColorPalette,
   bg: string,
   baseBlendMode: ColorBlendModeValue,
-  value: TMP_ButtonStatesColorTheme,
-) {
+  value: ThemeColorButtonStates,
+): ThemeColorButtonStates {
   return {
     enabled: renderStateColorTheme(colorPalette, bg, baseBlendMode, value.enabled),
     hovered: renderStateColorTheme(colorPalette, bg, baseBlendMode, value.hovered),
@@ -133,9 +131,9 @@ function renderStateColorTheme(
   colorPalette: TMP_ColorPalette,
   baseBg: string,
   rootBlendMode: ColorBlendModeValue,
-  value: TMP_StateColorTheme,
-): TMP_StateColorTheme {
-  const blendMode = value._blend
+  value: ThemeColorGenericState,
+): ThemeColorGenericState {
+  const blendMode = value._blend || 'multiply'
 
   const bg =
     rootBlendMode === 'multiply' && value.bg === 'white'
@@ -176,6 +174,7 @@ function renderStateColorTheme(
     bg2: blend(baseBg, unmixed.bg2),
     fg: blend(baseBg, unmixed.fg),
     border: blend(baseBg, unmixed.border),
+    iconColor: blend(baseBg, unmixed.fg),
     muted: {
       fg: blend(baseBg, unmixed.muted.fg),
     },
