@@ -54,12 +54,31 @@ export type TMP_ButtonColorTheme = Record<ColorStateTone, TMP_ButtonModesColorTh
 export interface TMP_BaseColorTheme {
   _blend: ColorBlendModeValue
   dark: boolean
+  // base: ThemeColorBase
   base: {
     bg: string
     fg: string
     border: string
+    focusRing: string
+    shadow: {
+      outline: string
+      umbra: string
+      penumbra: string
+      ambient: string
+    }
+    skeleton: {
+      from: string
+      to: string
+    }
   }
   button: TMP_ButtonColorTheme
+  // card: ThemeColorCard
+  // input: ThemeColorInput
+  // selectable?: ThemeColorSelectable
+  // spot: ThemeColorSpot
+  // syntax: ThemeColorSyntax
+  // solid: ThemeColorSolid
+  // muted: ThemeColorMuted
 }
 
 export type TMP_ColorTheme = Record<ColorBaseTone, TMP_BaseColorTheme>
