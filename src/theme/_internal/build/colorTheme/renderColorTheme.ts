@@ -1,6 +1,6 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
 import {rgba} from '../../../lib/color-fns'
-import {ColorBlendModeValue, parseTokenValue, TMP_ColorPalette} from '../../config'
+import {ColorBlendModeValue, parseTokenValue, ThemeConfig, TMP_ColorPalette} from '../../config'
 import {
   TMP_BaseColorTheme,
   TMP_ButtonColorTheme,
@@ -8,19 +8,17 @@ import {
   TMP_ButtonStatesColorTheme,
   TMP_ColorTheme,
   TMP_StateColorTheme,
+  TMP_Theme,
 } from '../../types'
+import {defaultColorPalette} from '../defaults/colorPalette'
 import {multiply, screen} from '../helpers'
 
 export function renderColorTheme(
-  colorPalette: TMP_ColorPalette,
-  value: {
-    light: TMP_ColorTheme
-    dark: TMP_ColorTheme
-  },
-): {
-  light: TMP_ColorTheme
-  dark: TMP_ColorTheme
-} {
+  value: TMP_Theme['color'],
+  config?: ThemeConfig,
+): TMP_Theme['color'] {
+  const colorPalette = config?.color?.palette ?? defaultColorPalette
+
   return {
     light: renderColorScheme(colorPalette, value.light),
     dark: renderColorScheme(colorPalette, value.dark),
@@ -151,43 +149,45 @@ function renderStateColorTheme(
           value.bg,
         )
 
-  const bg2 = renderColorValue(colorPalette, bg, blendMode, value.bg2 || value.bg)
-  const fg = renderColorValue(colorPalette, bg, blendMode, value.fg)
-  const border = renderColorValue(colorPalette, bg, blendMode, value.border)
-  const muted = {
-    fg: renderColorValue(colorPalette, bg, blendMode, value.muted.fg),
-  }
-  const accent = {
-    fg: renderColorValue(colorPalette, bg, blendMode, value.accent.fg),
-  }
-  const link = {
-    fg: renderColorValue(colorPalette, bg, blendMode, value.link.fg),
-  }
-  const code = {
-    bg: renderColorValue(colorPalette, bg, blendMode, value.code.bg),
-    fg: renderColorValue(colorPalette, bg, blendMode, value.code.fg),
-  }
-
   const blend = rootBlendMode === 'multiply' ? multiply : screen
+
+  const unmixed = {
+    bg2: renderColorValue(colorPalette, bg, blendMode, value.bg2 || value.bg),
+    fg: renderColorValue(colorPalette, bg, blendMode, value.fg),
+    border: renderColorValue(colorPalette, bg, blendMode, value.border),
+    muted: {
+      fg: renderColorValue(colorPalette, bg, blendMode, value.muted.fg),
+    },
+    accent: {
+      fg: renderColorValue(colorPalette, bg, blendMode, value.accent.fg),
+    },
+    link: {
+      fg: renderColorValue(colorPalette, bg, blendMode, value.link.fg),
+    },
+    code: {
+      bg: renderColorValue(colorPalette, bg, blendMode, value.code.bg),
+      fg: renderColorValue(colorPalette, bg, blendMode, value.code.fg),
+    },
+  }
 
   return {
     _blend: blendMode,
     bg: blend(baseBg, bg),
-    bg2: blend(baseBg, bg2),
-    fg: blend(baseBg, fg),
-    border: blend(baseBg, border),
+    bg2: blend(baseBg, unmixed.bg2),
+    fg: blend(baseBg, unmixed.fg),
+    border: blend(baseBg, unmixed.border),
     muted: {
-      fg: blend(baseBg, muted.fg),
+      fg: blend(baseBg, unmixed.muted.fg),
     },
     accent: {
-      fg: blend(baseBg, accent.fg),
+      fg: blend(baseBg, unmixed.accent.fg),
     },
     link: {
-      fg: blend(baseBg, link.fg),
+      fg: blend(baseBg, unmixed.link.fg),
     },
     code: {
-      bg: blend(baseBg, code.bg),
-      fg: blend(baseBg, code.fg),
+      bg: blend(baseBg, unmixed.code.bg),
+      fg: blend(baseBg, unmixed.code.fg),
     },
   }
 }
