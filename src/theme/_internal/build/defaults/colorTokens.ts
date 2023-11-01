@@ -6,6 +6,17 @@ export const defaultColorTokens: ColorTokens = {
     bg: ['50', '950'],
     fg: ['800', '200'],
     border: ['200', '800'],
+    focusRing: ['cyan/500', 'cyan/500'],
+    shadow: {
+      outline: ['500/0.25', '400/0.3'],
+      umbra: ['500/0.1', 'black/0.4'],
+      penumbra: ['500/0.07', 'black/0.28'],
+      ambient: ['500/0.06', 'black/0.24'],
+    },
+    skeleton: {
+      from: ['100', '900'],
+      to: ['100/0.5', '900/0.5'],
+    },
   },
   transparent: {
     bg: ['50', 'black'],
@@ -33,7 +44,11 @@ export const defaultColorTokens: ColorTokens = {
         '*': {
           _blend: ['screen', 'multiply'],
           bg: ['500', '400'],
+          bg2: ['950', '50'],
           border: ['500/0', '400/0'],
+          muted: {
+            fg: ['200', '700'],
+          },
         },
         hovered: {
           bg: ['600', '300'],
@@ -54,8 +69,12 @@ export const defaultColorTokens: ColorTokens = {
         '*': {
           _blend: ['multiply', 'screen'],
           bg: ['white', 'black'],
+          bg2: ['50', '950'],
           fg: ['600', '400'],
           border: ['200', '800'],
+          muted: {
+            fg: ['600/0.6', '400/0.6'],
+          },
         },
         hovered: {
           bg: ['50', '950'],
@@ -79,8 +98,12 @@ export const defaultColorTokens: ColorTokens = {
         '*': {
           _blend: ['multiply', 'screen'],
           bg: ['white', 'black'],
+          bg2: ['50', '950'],
           fg: ['600', '400'],
           border: ['white/0', 'black/0'],
+          muted: {
+            fg: ['600/0.6', '400/0.6'],
+          },
         },
         hovered: {
           bg: ['50', '950'],

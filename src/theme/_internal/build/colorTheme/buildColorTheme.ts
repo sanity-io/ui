@@ -64,6 +64,45 @@ export function buildBaseColorTheme(
         scheme,
         value: toneTokens?.border || any?.border || ['black', 'white'],
       }),
+      focusRing: resolveColorTokenValue({
+        hue,
+        scheme,
+        value: toneTokens?.focusRing || any?.focusRing || ['black', 'white'],
+      }),
+      shadow: {
+        outline: resolveColorTokenValue({
+          hue,
+          scheme,
+          value: toneTokens?.shadow?.outline || any?.shadow?.outline || ['500/0.2', '500/0.2'],
+        }),
+        umbra: resolveColorTokenValue({
+          hue,
+          scheme,
+          value: toneTokens?.shadow?.umbra || any?.shadow?.umbra || ['500/0.2', '500/0.2'],
+        }),
+        penumbra: resolveColorTokenValue({
+          hue,
+          scheme,
+          value: toneTokens?.shadow?.penumbra || any?.shadow?.penumbra || ['500/0.2', '500/0.2'],
+        }),
+        ambient: resolveColorTokenValue({
+          hue,
+          scheme,
+          value: toneTokens?.shadow?.ambient || any?.shadow?.ambient || ['500/0.2', '500/0.2'],
+        }),
+      },
+      skeleton: {
+        from: resolveColorTokenValue({
+          hue,
+          scheme,
+          value: toneTokens?.skeleton?.from || any?.skeleton?.from || ['500/0.2', '500/0.2'],
+        }),
+        to: resolveColorTokenValue({
+          hue,
+          scheme,
+          value: toneTokens?.skeleton?.to || any?.skeleton?.to || ['500/0.2', '500/0.2'],
+        }),
+      },
     },
     button: buildButtonColorTheme({scheme}, config),
   }
