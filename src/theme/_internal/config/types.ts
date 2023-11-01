@@ -21,6 +21,17 @@ export interface BaseColorTokens {
   bg?: ColorTokenValue
   fg?: ColorTokenValue
   border?: ColorTokenValue
+  focusRing?: ColorTokenValue
+  shadow?: {
+    outline?: ColorTokenValue
+    umbra?: ColorTokenValue
+    penumbra?: ColorTokenValue
+    ambient?: ColorTokenValue
+  }
+  skeleton?: {
+    from?: ColorTokenValue
+    to?: ColorTokenValue
+  }
 }
 
 export interface StateColorTokens {
