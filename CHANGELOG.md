@@ -5,6 +5,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.14](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.13...v2.0.0-alpha.14) (2023-11-01)
+
+### Features
+
+- add `buildTheme` function ([ee6043f](https://github.com/sanity-io/ui/commit/ee6043f9d5527516d38c660174baf63bc8f9f069))
+
+### Bug Fixes
+
+- **deps:** upgrade `@sanity/color` ([646633d](https://github.com/sanity-io/ui/commit/646633d17d9088f3f34541ba05228643de8686c0))
+- **theme:** support 0 opacity ([c9650ee](https://github.com/sanity-io/ui/commit/c9650eeb76199eb3cfb649b75b2876efad22ff26))
+
 ## [2.0.0-alpha.13](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.12...v2.0.0-alpha.13) (2023-10-31)
 
 ### Features
