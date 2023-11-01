@@ -62,7 +62,7 @@ export const defaultColorTokens: ColorTokens = {
         },
         disabled: {
           _hue: 'gray',
-          bg: ['100', '900'],
+          bg: ['200', '900'],
         },
       },
       ghost: {
@@ -90,8 +90,8 @@ export const defaultColorTokens: ColorTokens = {
         },
         disabled: {
           _hue: 'gray',
-          fg: ['100', '900'],
-          border: ['100', '900'],
+          fg: ['200', '900'],
+          border: ['100', '950'],
         },
       },
       bleed: {
@@ -119,7 +119,7 @@ export const defaultColorTokens: ColorTokens = {
         },
         disabled: {
           _hue: 'gray',
-          fg: ['100', '900'],
+          fg: ['200', '900'],
         },
       },
     },
@@ -139,7 +139,7 @@ export const defaultColorTokens: ColorTokens = {
         },
         disabled: {
           _hue: 'gray',
-          bg: ['100', '900'],
+          bg: ['200', '900'],
         },
       },
     },
