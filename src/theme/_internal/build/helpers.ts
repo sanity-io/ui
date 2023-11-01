@@ -8,12 +8,13 @@ import {
 import {ColorTokenValue, parseTokenValue, TokenColorValueNode} from '../config'
 import {ColorHueValue} from '../types'
 
-export function resolveColorTokenValue(options: {
+export interface ColorTokenContext {
   hue: ColorHueValue
   scheme: 'light' | 'dark'
-  value: ColorTokenValue
-}): string {
-  const {hue, scheme, value} = options
+}
+
+export function resolveColorTokenValue(context: ColorTokenContext, value: ColorTokenValue): string {
+  const {hue, scheme} = context
   const node = parseTokenValue(value[scheme === 'light' ? 0 : 1])
 
   if (!node || node.type !== 'color') {
