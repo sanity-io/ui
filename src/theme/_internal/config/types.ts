@@ -1,5 +1,6 @@
-import {ColorTint as ColorPaletteValue} from '@sanity/color'
+import {ColorHueKey, ColorTint as ColorPaletteValue} from '@sanity/color'
 
+import {ThemeColorSyntax} from '../../lib/theme'
 import {
   COLOR_BASE_TONES,
   COLOR_BLEND_MODES,
@@ -102,6 +103,8 @@ export interface ColorTokens {
   button?: Partial<Record<ColorConfigStateTone, ButtonColorTokens>>
   card?: Partial<Record<ColorConfigState, StateColorTokens>>
   input?: Partial<Record<ColorConfigInputMode, InputColorTokens>>
+  spot?: Partial<Record<ColorHueKey, ColorTokenValue>>
+  syntax?: Partial<Record<keyof ThemeColorSyntax, ColorTokenValue>>
 }
 
 export type TMP_ColorPalette = {

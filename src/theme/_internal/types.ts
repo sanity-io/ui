@@ -1,4 +1,14 @@
-import {ThemeColorBase, ThemeColorButton, ThemeColorCard, ThemeColorInput} from '../lib/theme'
+import {
+  ThemeColorBase,
+  ThemeColorButton,
+  ThemeColorCard,
+  ThemeColorInput,
+  ThemeColorMuted,
+  ThemeColorSelectable,
+  ThemeColorSolid,
+  ThemeColorSpot,
+  ThemeColorSyntax,
+} from '../lib/theme'
 import {ColorBlendModeValue} from './config'
 import {
   COLOR_BASE_TONES,
@@ -35,11 +45,11 @@ export interface TMP_BaseColorTheme {
   button: ThemeColorButton
   card: ThemeColorCard
   input: ThemeColorInput
-  // selectable?: ThemeColorSelectable
-  // spot: ThemeColorSpot
-  // syntax: ThemeColorSyntax
-  // solid: ThemeColorSolid
-  // muted: ThemeColorMuted
+  selectable?: ThemeColorSelectable
+  spot: ThemeColorSpot
+  syntax: ThemeColorSyntax
+  solid: ThemeColorSolid
+  muted: ThemeColorMuted
 }
 
 export type TMP_ColorTheme = Record<ColorBaseTone, TMP_BaseColorTheme>

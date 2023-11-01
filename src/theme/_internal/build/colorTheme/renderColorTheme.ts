@@ -8,6 +8,8 @@ import {
   ThemeColorInput,
   ThemeColorInputState,
   ThemeColorInputStates,
+  ThemeColorSpot,
+  ThemeColorSyntax,
 } from '../../../lib/theme'
 import {ColorBlendModeValue, parseTokenValue, ThemeConfig, TMP_ColorPalette} from '../../config'
 import {TMP_BaseColorTheme, TMP_ColorTheme, TMP_Theme} from '../../types'
@@ -59,6 +61,9 @@ function renderColorBase(
 ): TMP_BaseColorTheme {
   const nestedBg = renderColorValue(colorPalette, bg, value._blend, value.base.bg)
 
+  //
+  const button = renderButtonColorTheme(colorPalette, nestedBg, value._blend, value.button)
+
   return {
     _blend: value._blend,
     dark: value.dark,
@@ -83,9 +88,19 @@ function renderColorBase(
         to: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton?.to),
       },
     },
-    button: renderButtonColorTheme(colorPalette, nestedBg, value._blend, value.button),
+    button,
     card: renderStatesColorTheme(colorPalette, nestedBg, value._blend, value.card),
     input: renderInputColorTheme(colorPalette, nestedBg, value._blend, value.input),
+    spot: renderSpotColorTheme(colorPalette, nestedBg, value._blend, value.spot),
+    syntax: renderSyntaxColorTheme(colorPalette, nestedBg, value._blend, value.syntax),
+    solid: {
+      ...button.default,
+      transparent: button.default.default,
+    },
+    muted: {
+      ...button.bleed,
+      transparent: button.bleed.default,
+    },
   }
 }
 
@@ -236,6 +251,75 @@ function renderInputStateColorTheme(
     fg: renderColorValue(colorPalette, baseBg, _blend, value.fg),
     border: renderColorValue(colorPalette, baseBg, _blend, value.border),
     placeholder: renderColorValue(colorPalette, baseBg, _blend, value.placeholder),
+  }
+}
+
+function renderSpotColorTheme(
+  colorPalette: TMP_ColorPalette,
+  baseBg: string,
+  _rootBlendMode: ColorBlendModeValue,
+  value: ThemeColorSpot,
+): ThemeColorSpot {
+  const _blend = _rootBlendMode // value._blend || 'multiply'
+
+  return {
+    gray: renderColorValue(colorPalette, baseBg, _blend, value.gray),
+    cyan: renderColorValue(colorPalette, baseBg, _blend, value.cyan),
+    blue: renderColorValue(colorPalette, baseBg, _blend, value.blue),
+    purple: renderColorValue(colorPalette, baseBg, _blend, value.purple),
+    magenta: renderColorValue(colorPalette, baseBg, _blend, value.magenta),
+    red: renderColorValue(colorPalette, baseBg, _blend, value.red),
+    orange: renderColorValue(colorPalette, baseBg, _blend, value.orange),
+    yellow: renderColorValue(colorPalette, baseBg, _blend, value.yellow),
+    green: renderColorValue(colorPalette, baseBg, _blend, value.green),
+  }
+}
+
+function renderSyntaxColorTheme(
+  colorPalette: TMP_ColorPalette,
+  baseBg: string,
+  _rootBlendMode: ColorBlendModeValue,
+  value: ThemeColorSyntax,
+): ThemeColorSyntax {
+  const _blend = _rootBlendMode // value._blend || 'multiply'
+
+  return {
+    atrule: renderColorValue(colorPalette, baseBg, _blend, value.atrule),
+    attrName: renderColorValue(colorPalette, baseBg, _blend, value.attrName),
+    attrValue: renderColorValue(colorPalette, baseBg, _blend, value.attrValue),
+    attribute: renderColorValue(colorPalette, baseBg, _blend, value.attribute),
+    boolean: renderColorValue(colorPalette, baseBg, _blend, value.boolean),
+    builtin: renderColorValue(colorPalette, baseBg, _blend, value.builtin),
+    cdata: renderColorValue(colorPalette, baseBg, _blend, value.cdata),
+    char: renderColorValue(colorPalette, baseBg, _blend, value.char),
+    class: renderColorValue(colorPalette, baseBg, _blend, value.class),
+    className: renderColorValue(colorPalette, baseBg, _blend, value.className),
+    comment: renderColorValue(colorPalette, baseBg, _blend, value.comment),
+    constant: renderColorValue(colorPalette, baseBg, _blend, value.constant),
+    deleted: renderColorValue(colorPalette, baseBg, _blend, value.deleted),
+    doctype: renderColorValue(colorPalette, baseBg, _blend, value.doctype),
+    entity: renderColorValue(colorPalette, baseBg, _blend, value.entity),
+    function: renderColorValue(colorPalette, baseBg, _blend, value.function),
+    hexcode: renderColorValue(colorPalette, baseBg, _blend, value.hexcode),
+    id: renderColorValue(colorPalette, baseBg, _blend, value.id),
+    important: renderColorValue(colorPalette, baseBg, _blend, value.important),
+    inserted: renderColorValue(colorPalette, baseBg, _blend, value.inserted),
+    keyword: renderColorValue(colorPalette, baseBg, _blend, value.keyword),
+    number: renderColorValue(colorPalette, baseBg, _blend, value.number),
+    operator: renderColorValue(colorPalette, baseBg, _blend, value.operator),
+    prolog: renderColorValue(colorPalette, baseBg, _blend, value.prolog),
+    property: renderColorValue(colorPalette, baseBg, _blend, value.property),
+    pseudoClass: renderColorValue(colorPalette, baseBg, _blend, value.pseudoClass),
+    pseudoElement: renderColorValue(colorPalette, baseBg, _blend, value.pseudoElement),
+    punctuation: renderColorValue(colorPalette, baseBg, _blend, value.punctuation),
+    regex: renderColorValue(colorPalette, baseBg, _blend, value.regex),
+    selector: renderColorValue(colorPalette, baseBg, _blend, value.selector),
+    string: renderColorValue(colorPalette, baseBg, _blend, value.string),
+    symbol: renderColorValue(colorPalette, baseBg, _blend, value.symbol),
+    tag: renderColorValue(colorPalette, baseBg, _blend, value.tag),
+    unit: renderColorValue(colorPalette, baseBg, _blend, value.unit),
+    url: renderColorValue(colorPalette, baseBg, _blend, value.url),
+    variable: renderColorValue(colorPalette, baseBg, _blend, value.variable),
   }
 }
 

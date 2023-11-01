@@ -1,6 +1,8 @@
+import {buildTheme} from '../_internal'
 import {RootTheme} from '../types'
-import {color} from './color'
 import {fonts} from './fonts'
+
+const {color} = buildTheme()
 
 /**
  * @public

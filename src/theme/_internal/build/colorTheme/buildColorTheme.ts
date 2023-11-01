@@ -7,6 +7,8 @@ import {
   ThemeColorInput,
   ThemeColorInputState,
   ThemeColorInputStates,
+  ThemeColorSpot,
+  ThemeColorSyntax,
 } from '../../../lib/theme'
 import {ThemeConfig} from '../../config'
 import {COLOR_BUTTON_MODES, COLOR_STATE_TONES, COLOR_STATES} from '../../constants'
@@ -57,6 +59,9 @@ export function buildBaseColorTheme(
   const bg = _color(context, tokens?.bg || ['gray/50', 'black'])
   const blendMode = tokens?._blend || ['screen', 'multiply']
 
+  //
+  const button = buildButtonColorTheme({scheme}, config)
+
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
     dark: scheme === 'dark',
@@ -76,9 +81,19 @@ export function buildBaseColorTheme(
         to: _color(context, tokens?.skeleton?.to || ['500/0.2', '500/0.2']),
       },
     },
-    button: buildButtonColorTheme({scheme}, config),
+    button,
     card: buildCardColorTheme({scheme, tone}, config),
     input: buildInputColorTheme({scheme, tone}, config),
+    spot: buildSpotColorTheme({scheme}, config),
+    syntax: buildSyntaxColorTheme({scheme}, config),
+    solid: {
+      ...button.default,
+      transparent: button.default.default,
+    },
+    muted: {
+      ...button.bleed,
+      transparent: button.bleed.default,
+    },
   }
 }
 
@@ -272,5 +287,74 @@ function buildInputStateColorTheme(
     fg: _color(context, tokens?.fg || ['white', 'black']),
     border: _color(context, tokens?.border || ['500', '400']),
     placeholder: _color(context, tokens?.placeholder || ['500', '400']),
+  }
+}
+
+function buildSpotColorTheme(
+  options: {scheme: 'light' | 'dark'},
+  config?: ThemeConfig,
+): ThemeColorSpot {
+  const {scheme} = options
+  const tokens = config?.color?.tokens?.spot
+  const context: ColorTokenContext = {hue: 'gray', scheme}
+
+  return {
+    gray: _color(context, tokens?.gray || ['gray/500', 'gray/500']),
+    cyan: _color(context, tokens?.cyan || ['cyan/500', 'cyan/500']),
+    blue: _color(context, tokens?.blue || ['blue/500', 'blue/500']),
+    purple: _color(context, tokens?.purple || ['purple/500', 'purple/500']),
+    magenta: _color(context, tokens?.magenta || ['magenta/500', 'magenta/500']),
+    red: _color(context, tokens?.red || ['red/500', 'red/500']),
+    orange: _color(context, tokens?.orange || ['orange/500', 'orange/500']),
+    yellow: _color(context, tokens?.yellow || ['yellow/500', 'yellow/500']),
+    green: _color(context, tokens?.green || ['green/500', 'green/500']),
+  }
+}
+
+function buildSyntaxColorTheme(
+  options: {scheme: 'light' | 'dark'},
+  config?: ThemeConfig,
+): ThemeColorSyntax {
+  const {scheme} = options
+  const tokens = config?.color?.tokens?.syntax
+  const context: ColorTokenContext = {hue: 'gray', scheme}
+
+  return {
+    atrule: _color(context, tokens?.atrule || ['purple/600', 'purple/300']),
+    attrName: _color(context, tokens?.attrName || ['purple/600', 'purple/300']),
+    attrValue: _color(context, tokens?.attrValue || ['purple/600', 'purple/300']),
+    attribute: _color(context, tokens?.attribute || ['purple/600', 'purple/300']),
+    boolean: _color(context, tokens?.boolean || ['purple/600', 'purple/300']),
+    builtin: _color(context, tokens?.builtin || ['purple/600', 'purple/300']),
+    cdata: _color(context, tokens?.cdata || ['purple/600', 'purple/300']),
+    char: _color(context, tokens?.char || ['purple/600', 'purple/300']),
+    class: _color(context, tokens?.class || ['purple/600', 'purple/300']),
+    className: _color(context, tokens?.className || ['purple/600', 'purple/300']),
+    comment: _color(context, tokens?.comment || ['purple/600', 'purple/300']),
+    constant: _color(context, tokens?.constant || ['purple/600', 'purple/300']),
+    deleted: _color(context, tokens?.deleted || ['purple/600', 'purple/300']),
+    doctype: _color(context, tokens?.doctype || ['purple/600', 'purple/300']),
+    entity: _color(context, tokens?.entity || ['purple/600', 'purple/300']),
+    function: _color(context, tokens?.function || ['purple/600', 'purple/300']),
+    hexcode: _color(context, tokens?.hexcode || ['purple/600', 'purple/300']),
+    id: _color(context, tokens?.id || ['purple/600', 'purple/300']),
+    important: _color(context, tokens?.important || ['purple/600', 'purple/300']),
+    inserted: _color(context, tokens?.inserted || ['purple/600', 'purple/300']),
+    keyword: _color(context, tokens?.keyword || ['purple/600', 'purple/300']),
+    number: _color(context, tokens?.number || ['purple/600', 'purple/300']),
+    operator: _color(context, tokens?.operator || ['purple/600', 'purple/300']),
+    prolog: _color(context, tokens?.prolog || ['purple/600', 'purple/300']),
+    property: _color(context, tokens?.property || ['purple/600', 'purple/300']),
+    pseudoClass: _color(context, tokens?.pseudoClass || ['purple/600', 'purple/300']),
+    pseudoElement: _color(context, tokens?.pseudoElement || ['purple/600', 'purple/300']),
+    punctuation: _color(context, tokens?.punctuation || ['purple/600', 'purple/300']),
+    regex: _color(context, tokens?.regex || ['purple/600', 'purple/300']),
+    selector: _color(context, tokens?.selector || ['purple/600', 'purple/300']),
+    string: _color(context, tokens?.string || ['purple/600', 'purple/300']),
+    symbol: _color(context, tokens?.symbol || ['purple/600', 'purple/300']),
+    tag: _color(context, tokens?.tag || ['purple/600', 'purple/300']),
+    unit: _color(context, tokens?.unit || ['purple/600', 'purple/300']),
+    url: _color(context, tokens?.url || ['purple/600', 'purple/300']),
+    variable: _color(context, tokens?.variable || ['purple/600', 'purple/300']),
   }
 }
