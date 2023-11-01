@@ -12,8 +12,7 @@ import {
   TMP_ColorTheme,
   TMP_StateColorTheme,
 } from '../../types'
-import {defaultColorTokens} from '../defaults/colorTokens'
-import {resolveColorTokenValue} from '../helpers'
+import {ColorTokenContext, resolveColorTokenValue as _color} from '../helpers'
 
 export function buildColorTheme(
   options: {scheme: 'light' | 'dark'},
@@ -36,72 +35,29 @@ export function buildBaseColorTheme(
   config?: ThemeConfig,
 ): TMP_BaseColorTheme {
   const {scheme, tone} = options
-  const tokens = config?.color?.tokens ?? defaultColorTokens
-  const any = tokens?.['*']
-  const toneTokens = tokens?.[tone]
-  const hue = toneTokens?._hue || any?._hue || 'gray'
-
-  const bg = resolveColorTokenValue({
-    hue,
-    scheme,
-    value: toneTokens?.bg || any?.bg || ['gray/50', 'black'],
-  })
-
-  const _blend = toneTokens?._blend || any?._blend || ['screen', 'multiply']
+  const tokens = config?.color?.tokens?.[tone]
+  const hue = tokens?._hue || 'gray'
+  const context: ColorTokenContext = {hue, scheme}
+  const bg = _color(context, tokens?.bg || ['gray/50', 'black'])
+  const blendMode = tokens?._blend || ['screen', 'multiply']
 
   return {
-    _blend: _blend[scheme === 'light' ? 0 : 1],
+    _blend: blendMode[scheme === 'light' ? 0 : 1],
     dark: scheme === 'dark',
     base: {
       bg,
-      fg: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: toneTokens?.fg || any?.fg || ['black', 'white'],
-      }),
-      border: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: toneTokens?.border || any?.border || ['black', 'white'],
-      }),
-      focusRing: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: toneTokens?.focusRing || any?.focusRing || ['black', 'white'],
-      }),
+      fg: _color(context, tokens?.fg || ['black', 'white']),
+      border: _color(context, tokens?.border || ['black', 'white']),
+      focusRing: _color(context, tokens?.focusRing || ['black', 'white']),
       shadow: {
-        outline: resolveColorTokenValue({
-          hue,
-          scheme,
-          value: toneTokens?.shadow?.outline || any?.shadow?.outline || ['500/0.2', '500/0.2'],
-        }),
-        umbra: resolveColorTokenValue({
-          hue,
-          scheme,
-          value: toneTokens?.shadow?.umbra || any?.shadow?.umbra || ['500/0.2', '500/0.2'],
-        }),
-        penumbra: resolveColorTokenValue({
-          hue,
-          scheme,
-          value: toneTokens?.shadow?.penumbra || any?.shadow?.penumbra || ['500/0.2', '500/0.2'],
-        }),
-        ambient: resolveColorTokenValue({
-          hue,
-          scheme,
-          value: toneTokens?.shadow?.ambient || any?.shadow?.ambient || ['500/0.2', '500/0.2'],
-        }),
+        outline: _color(context, tokens?.shadow?.outline || ['500/0.2', '500/0.2']),
+        umbra: _color(context, tokens?.shadow?.umbra || ['500/0.2', '500/0.2']),
+        penumbra: _color(context, tokens?.shadow?.penumbra || ['500/0.2', '500/0.2']),
+        ambient: _color(context, tokens?.shadow?.ambient || ['500/0.2', '500/0.2']),
       },
       skeleton: {
-        from: resolveColorTokenValue({
-          hue,
-          scheme,
-          value: toneTokens?.skeleton?.from || any?.skeleton?.from || ['500/0.2', '500/0.2'],
-        }),
-        to: resolveColorTokenValue({
-          hue,
-          scheme,
-          value: toneTokens?.skeleton?.to || any?.skeleton?.to || ['500/0.2', '500/0.2'],
-        }),
+        from: _color(context, tokens?.skeleton?.from || ['500/0.2', '500/0.2']),
+        to: _color(context, tokens?.skeleton?.to || ['500/0.2', '500/0.2']),
       },
     },
     button: buildButtonColorTheme({scheme}, config),
@@ -170,92 +126,29 @@ function buildButtonStateColorTheme(
   config?: ThemeConfig,
 ): TMP_StateColorTheme {
   const {mode, tone, scheme, state} = options
-  const tokens = config?.color?.tokens ?? defaultColorTokens
-  const hue =
-    tokens?.button?.[tone]?.[mode]?.[state]?._hue ||
-    tokens?.button?.['*']?.[mode]?.[state]?._hue ||
-    tokens?.button?.[tone]?._hue ||
-    tokens?.[tone]?._hue ||
-    'gray'
-  const spec3 = tokens?.button?.['*']?.[mode]?.['*']
-  const spec2 = tokens?.button?.['*']?.[mode]?.[state]
-  const spec1 = tokens?.button?.[tone]?.[mode]?.['*']
-  const spec0 = tokens?.button?.[tone]?.[mode]?.[state]
-
-  const _blend = spec0?._blend ||
-    spec1?._blend ||
-    spec2?._blend ||
-    spec3?._blend || ['screen', 'multiply']
+  const tokens = config?.color?.tokens?.button?.[tone]?.[mode]?.[state]
+  const hue = tokens?._hue || 'gray'
+  const blendMode = tokens?._blend || ['screen', 'multiply']
+  const context: ColorTokenContext = {hue, scheme}
 
   return {
-    _blend: _blend[scheme === 'light' ? 0 : 1],
-    bg: resolveColorTokenValue({
-      hue,
-      scheme,
-      value: spec0?.bg || spec1?.bg || spec2?.bg || spec3?.bg || ['500', '400'],
-    }),
-    bg2: resolveColorTokenValue({
-      hue,
-      scheme,
-      value: spec0?.bg2 || spec1?.bg2 || spec2?.bg2 || spec3?.bg2 || ['500', '400'],
-    }),
-    fg: resolveColorTokenValue({
-      hue,
-      scheme,
-      value: spec0?.fg || spec1?.fg || spec2?.fg || spec3?.fg || ['white', 'black'],
-    }),
-    border: resolveColorTokenValue({
-      hue,
-      scheme,
-      value: spec0?.border || spec1?.border || spec2?.border || spec3?.border || ['500', '400'],
-    }),
+    _blend: blendMode[scheme === 'light' ? 0 : 1],
+    bg: _color(context, tokens?.bg || ['500', '400']),
+    bg2: _color(context, tokens?.bg2 || ['500', '400']),
+    fg: _color(context, tokens?.fg || ['white', 'black']),
+    border: _color(context, tokens?.border || ['500', '400']),
     muted: {
-      fg: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: spec0?.muted?.fg ||
-          spec1?.muted?.fg ||
-          spec2?.muted?.fg ||
-          spec3?.muted?.fg || ['500', '400'],
-      }),
+      fg: _color(context, tokens?.fg || ['500', '400']),
     },
     accent: {
-      fg: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: spec0?.accent?.fg ||
-          spec1?.accent?.fg ||
-          spec2?.accent?.fg ||
-          spec3?.accent?.fg || ['500', '400'],
-      }),
+      fg: _color(context, tokens?.fg || ['500', '400']),
     },
     link: {
-      fg: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: spec0?.link?.fg ||
-          spec1?.link?.fg ||
-          spec2?.link?.fg ||
-          spec3?.link?.fg || ['500', '400'],
-      }),
+      fg: _color(context, tokens?.fg || ['500', '400']),
     },
     code: {
-      bg: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: spec0?.code?.bg ||
-          spec1?.code?.bg ||
-          spec2?.code?.bg ||
-          spec3?.code?.bg || ['500', '400'],
-      }),
-      fg: resolveColorTokenValue({
-        hue,
-        scheme,
-        value: spec0?.code?.fg ||
-          spec1?.code?.fg ||
-          spec2?.code?.fg ||
-          spec3?.code?.fg || ['500', '400'],
-      }),
+      bg: _color(context, tokens?.bg || ['500', '400']),
+      fg: _color(context, tokens?.fg || ['500', '400']),
     },
   }
 }
