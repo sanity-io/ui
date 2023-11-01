@@ -34,45 +34,71 @@ const Root = styled.div`
   }
 
   .button {
-    background-color: var(--button-enabled-bg);
-    color: var(--button-enabled-fg);
+    background-color: var(--bg);
+    color: var(--fg);
     box-shadow:
-      inset 0 0 0 1px var(--border-color),
-      0 1px 0 0 color-mix(in srgb, var(--border-color), transparent 75%);
+      inset 0 0 0 1px var(--border),
+      0 1px 0 0 color-mix(in srgb, var(--border), transparent 75%);
     text-align: center;
     border-radius: 3px;
     font-weight: 500;
     cursor: default;
-    transition: box-shadow 80ms ease-in-out;
+    transition: box-shadow 50ms ease-in-out;
 
-    --border-color: var(--button-enabled-border);
+    --bg: var(--button-enabled-bg);
+    --fg: var(--button-enabled-fg);
+    --border: var(--button-enabled-border);
+    --bg2: var(--button-enabled-bg2);
+    --muted-fg: var(--button-enabled-muted-fg);
   }
 
   .button:hover {
-    background-color: var(--button-hovered-bg);
-    color: var(--button-hovered-fg);
-    --border-color: var(--button-hovered-border);
+    --bg: var(--button-hovered-bg);
+    --fg: var(--button-hovered-fg);
+    --border: var(--button-hovered-border);
+    --bg2: var(--button-hovered-bg2);
+    --muted-fg: var(--button-hovered-muted-fg);
+  }
+
+  .button:focus {
+    outline: none;
+    box-shadow:
+      inset 0 0 0 1px var(--border),
+      0 0 0 1px var(--base-bg),
+      0 0 0 3px var(--focus-ring);
+
+    --bg: var(--button-hovered-bg);
+    --fg: var(--button-hovered-fg);
+    --border: var(--button-hovered-border);
+    --bg2: var(--button-hovered-bg2);
+    --muted-fg: var(--button-hovered-muted-fg);
   }
 
   .button:active {
     background-color: var(--button-pressed-bg);
     color: var(--button-pressed-fg);
-    --border-color: var(--button-pressed-border);
-    box-shadow: inset 0 0 0 1px var(--border-color);
+    box-shadow: inset 0 0 0 1px var(--border);
+    --border: var(--button-pressed-border);
+    --bg2: var(--button-pressed-bg2);
+    --muted-fg: var(--button-pressed-muted-fg);
   }
 
   .button.selected {
     background-color: var(--button-selected-bg);
     color: var(--button-selected-fg);
-    --border-color: var(--button-selected-border);
-    box-shadow: inset 0 0 0 1px var(--border-color);
+    box-shadow: inset 0 0 0 1px var(--border);
+    --border: var(--button-selected-border);
+    --bg2: var(--button-selected-bg2);
+    --muted-fg: var(--button-selected-muted-fg);
   }
 
   .button.disabled {
     background-color: var(--button-disabled-bg);
     color: var(--button-disabled-fg);
-    --border-color: var(--button-disabled-border);
-    box-shadow: inset 0 0 0 1px var(--border-color);
+    box-shadow: inset 0 0 0 1px var(--border);
+    --border: var(--button-disabled-border);
+    --bg2: var(--button-disabled-bg2);
+    --muted-fg: var(--button-disabled-muted-fg);
   }
 `
 
@@ -107,17 +133,44 @@ function BaseTonePreview(props: {
     <div
       style={
         {
-          backgroundColor: color[baseTone].base.bg,
-          color: color[baseTone].base.fg,
-          '--border-color': color[baseTone].base.border,
+          backgroundColor: 'var(--bg)',
+          color: 'var(--fg)',
+
+          '--base-bg': color[baseTone].base.bg,
+          '--bg': 'var(--base-bg)',
+          '--fg': color[baseTone].base.fg,
+          '--border': color[baseTone].base.border,
+          '--focus-ring': color[baseTone].base.focusRing,
+          '--shadow-outline': color[baseTone].base.shadow.outline,
+          '--shadow-umbra': color[baseTone].base.shadow.umbra,
+          '--shadow-penumbra': color[baseTone].base.shadow.penumbra,
+          '--shadow-ambient': color[baseTone].base.shadow.ambient,
+          '--skeleton-from': color[baseTone].base.skeleton.from,
+          '--skeleton-to': color[baseTone].base.skeleton.to,
         } as any
       }
     >
-      <div style={{maxWidth: 540, margin: 'auto', padding: '20px 0'}}>
+      <div style={{maxWidth: 320, margin: 'auto', padding: '20px 0'}}>
         <pre style={{padding: 12}}>
           color/{scheme}/{baseTone}
         </pre>
-        <div style={{padding: '1px 12px 12px 12px'}}>
+        <div style={{padding: 12}}>
+          <div
+            style={{
+              boxShadow: [
+                `0 0 0 1px var(--shadow-outline)`,
+                `0 6px 8px -4px var(--shadow-umbra)`,
+                `0 12px 17px 2px var(--shadow-penumbra)`,
+                `0 5px 22px 4px var(--shadow-ambient)`,
+              ].join(', '),
+              padding: 12,
+              borderRadius: 3,
+            }}
+          >
+            Shadow
+          </div>
+        </div>
+        <div style={{marginTop: 20, padding: '1px 12px 12px 12px'}}>
           {COLOR_BUTTON_MODES.map((mode) => (
             <div key={mode} style={{display: 'flex', flexDirection: 'column'}}>
               {COLOR_STATE_TONES.map((tone) => {
@@ -128,43 +181,100 @@ function BaseTonePreview(props: {
                     key={tone}
                     style={
                       {
-                        border: '1px solid var(--border-color)',
+                        border: '1px solid var(--border)',
                         padding: 4,
                         display: 'flex',
+                        flexDirection: 'column',
                         marginTop: -1,
-                        gap: 4,
 
                         '--button-enabled-bg': button.enabled.bg,
+                        '--button-enabled-bg2': button.enabled.bg2,
                         '--button-enabled-fg': button.enabled.fg,
                         '--button-enabled-border': button.enabled.border,
+                        '--button-enabled-muted-fg': button.enabled.muted.fg,
 
                         '--button-hovered-bg': button.hovered.bg,
+                        '--button-hovered-bg2': button.hovered.bg2,
                         '--button-hovered-fg': button.hovered.fg,
                         '--button-hovered-border': button.hovered.border,
+                        '--button-hovered-muted-fg': button.hovered.muted.fg,
 
                         '--button-pressed-bg': button.pressed.bg,
+                        '--button-pressed-bg2': button.pressed.bg2,
                         '--button-pressed-fg': button.pressed.fg,
                         '--button-pressed-border': button.pressed.border,
+                        '--button-pressed-muted-fg': button.pressed.muted.fg,
 
                         '--button-selected-bg': button.selected.bg,
+                        '--button-selected-bg2': button.selected.bg2,
                         '--button-selected-fg': button.selected.fg,
                         '--button-selected-border': button.selected.border,
+                        '--button-selected-muted-fg': button.selected.muted.fg,
 
                         '--button-disabled-bg': button.disabled.bg,
+                        '--button-disabled-bg2': button.disabled.bg2,
                         '--button-disabled-fg': button.disabled.fg,
                         '--button-disabled-border': button.disabled.border,
+                        '--button-disabled-muted-fg': button.disabled.muted.fg,
                       } as any
                     }
                   >
-                    <pre style={{flex: 2, padding: 8}}>{`mode="${mode}" tone="${tone}"`}</pre>
-                    <div className="button" style={{flex: 'none', padding: 8}}>
-                      Button
-                    </div>
-                    <div className="button selected" style={{flex: 'none', padding: 8}}>
-                      Button
-                    </div>
-                    <div className="button disabled" style={{flex: 'none', padding: 8}}>
-                      Button
+                    <pre style={{padding: 8}}>{`mode="${mode}" tone="${tone}"`}</pre>
+                    <div
+                      style={{
+                        display: 'flex',
+                        gap: 4,
+                      }}
+                    >
+                      <div
+                        className="button"
+                        style={{flex: 'none', padding: 8, display: 'flex', gap: 4}}
+                        tabIndex={0}
+                      >
+                        <div style={{flex: 'none'}}>Button</div>
+                        <div style={{flex: 'none', color: 'var(--muted-fg)'}}>m</div>
+                        <div style={{flex: 'none'}}>
+                          <div
+                            style={{
+                              width: 4,
+                              height: 9,
+                              backgroundColor: 'var(--button-enabled-bg2)',
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="button selected"
+                        style={{flex: 'none', padding: 8, display: 'flex', gap: 4}}
+                      >
+                        <div style={{flex: 'none'}}>Button</div>
+                        <div style={{flex: 'none', color: 'var(--muted-fg)'}}>m</div>
+                        <div style={{flex: 'none'}}>
+                          <div
+                            style={{
+                              width: 4,
+                              height: 9,
+                              backgroundColor: 'var(--bg2)',
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="button disabled"
+                        style={{flex: 'none', padding: 8, display: 'flex', gap: 4}}
+                      >
+                        <div style={{flex: 'none'}}>Button</div>
+                        <div style={{flex: 'none', color: 'var(--muted-fg)'}}>m</div>
+                        <div style={{flex: 'none'}}>
+                          <div
+                            style={{
+                              width: 4,
+                              height: 9,
+                              backgroundColor: 'var(--bg2)',
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )
