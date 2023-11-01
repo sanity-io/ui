@@ -12,7 +12,9 @@ import {
   TMP_ColorTheme,
   TMP_StateColorTheme,
 } from '../../types'
+import {defaultColorTokens} from '../defaults/colorTokens'
 import {ColorTokenContext, resolveColorTokenValue as _color} from '../helpers'
+import {resolveColorTokens} from './resolveColorTokens'
 
 export function buildColorTheme(
   options: {scheme: 'light' | 'dark'},
@@ -20,13 +22,21 @@ export function buildColorTheme(
 ): TMP_ColorTheme {
   const {scheme} = options
 
+  const resolvedConfig = {
+    ...config,
+    color: {
+      ...config?.color,
+      tokens: resolveColorTokens(config?.color?.tokens ?? defaultColorTokens),
+    },
+  }
+
   return {
-    transparent: buildBaseColorTheme({scheme, tone: 'transparent'}, config),
-    default: buildBaseColorTheme({scheme, tone: 'default'}, config),
-    primary: buildBaseColorTheme({scheme, tone: 'primary'}, config),
-    positive: buildBaseColorTheme({scheme, tone: 'positive'}, config),
-    caution: buildBaseColorTheme({scheme, tone: 'caution'}, config),
-    critical: buildBaseColorTheme({scheme, tone: 'critical'}, config),
+    transparent: buildBaseColorTheme({scheme, tone: 'transparent'}, resolvedConfig),
+    default: buildBaseColorTheme({scheme, tone: 'default'}, resolvedConfig),
+    primary: buildBaseColorTheme({scheme, tone: 'primary'}, resolvedConfig),
+    positive: buildBaseColorTheme({scheme, tone: 'positive'}, resolvedConfig),
+    caution: buildBaseColorTheme({scheme, tone: 'caution'}, resolvedConfig),
+    critical: buildBaseColorTheme({scheme, tone: 'critical'}, resolvedConfig),
   }
 }
 
