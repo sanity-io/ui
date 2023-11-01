@@ -10,9 +10,9 @@ export type ThemeColorCardState = ThemeColorGenericState
  * @public
  */
 export interface ThemeColorCard {
-  enabled: ThemeColorCardState
-  hovered: ThemeColorCardState
-  pressed: ThemeColorCardState
-  selected: ThemeColorCardState
-  disabled: ThemeColorCardState
+  enabled: ThemeColorGenericState
+  hovered: ThemeColorGenericState
+  pressed: ThemeColorGenericState
+  selected: ThemeColorGenericState
+  disabled: ThemeColorGenericState
 }

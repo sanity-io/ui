@@ -2,6 +2,7 @@ import {
   BaseColorTokens,
   ButtonColorTokens,
   ButtonModeColorTokens,
+  ColorConfigState,
   ColorConfigStateTone,
   ColorTokens,
   StateColorTokens,
@@ -27,6 +28,7 @@ export function resolveColorTokens(sparseTokens: ColorTokens): ColorTokens {
 
   // button
   denseTokens.button = resolveButtonColorTokens(sparseTokens)
+  denseTokens.card = resolveCardColorTokens(sparseTokens)
 
   return denseTokens
 }
@@ -117,5 +119,37 @@ function resolveButtonStateColorTokens(
     link: {...spec3?.link, ...spec2?.link, ...spec1?.link, ...spec0?.link},
     code: {...spec3?.code, ...spec2?.code, ...spec1?.code, ...spec0?.code},
     skeleton: {...spec3?.skeleton, ...spec2?.skeleton, ...spec1?.skeleton, ...spec0?.skeleton},
+  }
+}
+
+function resolveCardColorTokens(
+  sparseTokens: ColorTokens,
+): Partial<Record<ColorConfigState, StateColorTokens>> {
+  const tokens: Partial<Record<ColorConfigState, StateColorTokens>> = {
+    ...sparseTokens,
+  }
+
+  for (const state of COLOR_STATES) {
+    tokens[state] = resolveCardStateColorTokens(sparseTokens, state)
+  }
+
+  return tokens
+}
+
+function resolveCardStateColorTokens(tokens: ColorTokens, state: ColorState): StateColorTokens {
+  const spec0 = tokens?.card?.[state]
+  const spec1 = tokens?.card?.['*']
+
+  const hue = spec0?._hue || spec1?._hue
+
+  return {
+    ...spec1,
+    ...spec0,
+    _hue: hue,
+    muted: {...spec1?.muted, ...spec0?.muted},
+    accent: {...spec1?.accent, ...spec0?.accent},
+    link: {...spec1?.link, ...spec0?.link},
+    code: {...spec1?.code, ...spec0?.code},
+    skeleton: {...spec1?.skeleton, ...spec0?.skeleton},
   }
 }

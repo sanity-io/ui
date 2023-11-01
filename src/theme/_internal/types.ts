@@ -1,4 +1,4 @@
-import {ThemeColorBase, ThemeColorButton} from '../lib/theme'
+import {ThemeColorBase, ThemeColorButton, ThemeColorCard} from '../lib/theme'
 import {ColorBlendModeValue} from './config'
 import {
   COLOR_BASE_TONES,
@@ -27,7 +27,7 @@ export interface TMP_BaseColorTheme {
   dark: boolean
   base: ThemeColorBase
   button: ThemeColorButton
-  // card: ThemeColorCard
+  card: ThemeColorCard
   // input: ThemeColorInput
   // selectable?: ThemeColorSelectable
   // spot: ThemeColorSpot

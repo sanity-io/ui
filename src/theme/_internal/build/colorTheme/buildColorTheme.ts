@@ -2,6 +2,7 @@ import {
   ThemeColorButton,
   ThemeColorButtonStates,
   ThemeColorButtonTones,
+  ThemeColorCard,
   ThemeColorGenericState,
 } from '../../../lib/theme'
 import {ThemeConfig} from '../../config'
@@ -73,6 +74,7 @@ export function buildBaseColorTheme(
       },
     },
     button: buildButtonColorTheme({scheme}, config),
+    card: buildCardColorTheme({scheme, tone}, config),
   }
 }
 
@@ -82,13 +84,13 @@ function buildButtonColorTheme(
 ): ThemeColorButton {
   const {scheme} = options
 
-  const modes = COLOR_BUTTON_MODES.map((mode): Partial<ThemeColorButton> => {
-    return {
-      [mode]: buildButtonTonesColorTheme({scheme, mode}, config),
-    }
-  })
+  const modes: Partial<ThemeColorButton> = {}
 
-  return Object.assign({}, ...modes) as ThemeColorButton
+  for (const mode of COLOR_BUTTON_MODES) {
+    modes[mode] = buildButtonTonesColorTheme({scheme, mode}, config)
+  }
+
+  return modes as ThemeColorButton
 }
 
 function buildButtonTonesColorTheme(
@@ -100,13 +102,13 @@ function buildButtonTonesColorTheme(
 ): ThemeColorButtonTones {
   const {mode, scheme} = options
 
-  const tones = COLOR_STATE_TONES.map((tone): Partial<ThemeColorButtonTones> => {
-    return {
-      [mode]: buildButtonStatesColorTheme({mode, scheme, tone}, config),
-    }
-  })
+  const tones: Partial<ThemeColorButtonTones> = {}
 
-  return Object.assign({}, ...tones) as ThemeColorButtonTones
+  for (const tone of COLOR_STATE_TONES) {
+    tones[tone] = buildButtonStatesColorTheme({mode, scheme, tone}, config)
+  }
+
+  return tones as ThemeColorButtonTones
 }
 
 function buildButtonStatesColorTheme(
@@ -119,13 +121,13 @@ function buildButtonStatesColorTheme(
 ): ThemeColorButtonStates {
   const {mode, scheme, tone} = options
 
-  const states = COLOR_STATES.map((state): Partial<ThemeColorButtonStates> => {
-    return {
-      [state]: buildButtonStateColorTheme({mode, tone, scheme, state}, config),
-    }
-  })
+  const states: Partial<ThemeColorButtonStates> = {}
 
-  return Object.assign({}, ...states) as ThemeColorButtonStates
+  for (const state of COLOR_STATES) {
+    states[state] = buildButtonStateColorTheme({mode, tone, scheme, state}, config)
+  }
+
+  return states as ThemeColorButtonStates
 }
 
 function buildButtonStateColorTheme(
@@ -140,6 +142,54 @@ function buildButtonStateColorTheme(
   const {mode, tone, scheme, state} = options
   const tokens = config?.color?.tokens?.button?.[tone]?.[mode]?.[state]
   const hue = tokens?._hue || 'gray'
+  const blendMode = tokens?._blend || ['screen', 'multiply']
+  const context: ColorTokenContext = {hue, scheme}
+
+  return {
+    _blend: blendMode[scheme === 'light' ? 0 : 1],
+    bg: _color(context, tokens?.bg || ['500', '400']),
+    bg2: _color(context, tokens?.bg2 || ['500', '400']),
+    fg: _color(context, tokens?.fg || ['white', 'black']),
+    border: _color(context, tokens?.border || ['500', '400']),
+    iconColor: _color(context, tokens?.fg || ['500', '400']),
+    muted: {
+      fg: _color(context, tokens?.fg || ['500', '400']),
+    },
+    accent: {
+      fg: _color(context, tokens?.fg || ['500', '400']),
+    },
+    link: {
+      fg: _color(context, tokens?.fg || ['500', '400']),
+    },
+    code: {
+      bg: _color(context, tokens?.bg || ['500', '400']),
+      fg: _color(context, tokens?.fg || ['500', '400']),
+    },
+  }
+}
+
+function buildCardColorTheme(
+  options: {scheme: 'light' | 'dark'; tone: ColorBaseTone},
+  config?: ThemeConfig,
+): ThemeColorCard {
+  const {scheme, tone} = options
+
+  const states: Partial<ThemeColorCard> = {}
+
+  for (const state of COLOR_STATES) {
+    states[state] = buildCardStateColorTheme({scheme, state, tone}, config)
+  }
+
+  return states as ThemeColorCard
+}
+
+function buildCardStateColorTheme(
+  options: {scheme: 'light' | 'dark'; state: ColorState; tone: ColorBaseTone},
+  config?: ThemeConfig,
+): ThemeColorGenericState {
+  const {scheme, state, tone} = options
+  const tokens = config?.color?.tokens?.card?.[state]
+  const hue = tokens?._hue || config?.color?.tokens?.[tone]?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 

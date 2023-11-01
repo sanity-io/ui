@@ -144,4 +144,24 @@ export const defaultColorTokens: ColorTokens = {
       },
     },
   },
+  card: {
+    '*': {
+      _blend: ['multiply', 'screen'],
+      bg: ['white', 'black'],
+      fg: ['black', 'white'],
+      border: ['200', '800'],
+    },
+    hovered: {
+      bg: ['50', '950'],
+    },
+    pressed: {
+      bg: ['100', '900'],
+    },
+    selected: {
+      _blend: ['screen', 'multiply'],
+      bg: ['500', '400'],
+      fg: ['white', 'black'],
+      border: ['500/0', '400/0'],
+    },
+  },
 }

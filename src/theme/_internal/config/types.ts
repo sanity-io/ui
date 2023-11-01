@@ -1,7 +1,7 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
 
-import {COLOR_BASE_TONES, COLOR_BLEND_MODES, COLOR_STATE_TONES} from '../constants'
-import {ColorButtonMode, ColorHueValue, ColorState, ColorTintValue} from '../types'
+import {COLOR_BASE_TONES, COLOR_BLEND_MODES, COLOR_STATES, COLOR_STATE_TONES} from '../constants'
+import {ColorButtonMode, ColorHueValue, ColorTintValue} from '../types'
 
 export type ColorBlendModeValue = (typeof COLOR_BLEND_MODES)[number]
 
@@ -14,6 +14,9 @@ export type ColorConfigBaseTone = (typeof COLOR_CONFIG_BASE_TONES)[number]
 
 export const COLOR_CONFIG_STATE_TONES = ['*', ...COLOR_STATE_TONES] as const
 export type ColorConfigStateTone = (typeof COLOR_CONFIG_STATE_TONES)[number]
+
+export const COLOR_CONFIG_STATES = ['*', ...COLOR_STATES] as const
+export type ColorConfigState = (typeof COLOR_CONFIG_STATES)[number]
 
 export interface BaseColorTokens {
   _blend?: ColorBlendModeTokenValue
@@ -60,7 +63,7 @@ export interface StateColorTokens {
   }
 }
 
-export type ButtonModeColorTokens = Partial<Record<'*' | ColorState, StateColorTokens>>
+export type ButtonModeColorTokens = Partial<Record<ColorConfigState, StateColorTokens>>
 
 export interface ButtonColorTokens extends Partial<Record<ColorButtonMode, ButtonModeColorTokens>> {
   _hue?: ColorHueValue
@@ -68,6 +71,7 @@ export interface ButtonColorTokens extends Partial<Record<ColorButtonMode, Butto
 
 export interface ColorTokens extends Partial<Record<ColorConfigBaseTone, BaseColorTokens>> {
   button?: Partial<Record<ColorConfigStateTone, ButtonColorTokens>>
+  card?: Partial<Record<ColorConfigState, StateColorTokens>>
 }
 
 export type TMP_ColorPalette = {

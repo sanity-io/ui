@@ -81,6 +81,7 @@ function renderColorBase(
       },
     },
     button: renderButtonColorTheme(colorPalette, nestedBg, value._blend, value.button),
+    card: renderStatesColorTheme(colorPalette, nestedBg, value._blend, value.card),
   }
 }
 
