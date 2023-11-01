@@ -67,6 +67,22 @@ function renderColorBase(
       bg: nestedBg,
       fg: renderColorValue(colorPalette, nestedBg, value._blend, value.base.fg),
       border: renderColorValue(colorPalette, nestedBg, value._blend, value.base.border),
+      focusRing: renderColorValue(colorPalette, nestedBg, value._blend, value.base.focusRing),
+      shadow: {
+        outline: renderColorValue(colorPalette, nestedBg, value._blend, value.base.shadow.outline),
+        umbra: renderColorValue(colorPalette, nestedBg, value._blend, value.base.shadow.umbra),
+        penumbra: renderColorValue(
+          colorPalette,
+          nestedBg,
+          value._blend,
+          value.base.shadow.penumbra,
+        ),
+        ambient: renderColorValue(colorPalette, nestedBg, value._blend, value.base.shadow.ambient),
+      },
+      skeleton: {
+        from: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton.from),
+        to: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton.to),
+      },
     },
     button: renderButtonColorTheme(colorPalette, nestedBg, value._blend, value.button),
   }
