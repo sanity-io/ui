@@ -4,28 +4,30 @@ import {buildColorTheme} from './buildColorTheme'
 test('buildColorTheme: base', () => {
   const colorConfig: ColorThemeConfig = {
     tokens: {
-      '*': {
-        bg: ['50', '900'],
-        fg: ['800', '200'],
-      },
-      transparent: {
-        bg: ['50', 'black'],
-      },
-      default: {
-        bg: ['white', '950'],
-        fg: ['black', '200'],
-      },
-      primary: {
-        _hue: 'purple',
-      },
-      positive: {
-        _hue: 'cyan',
-      },
-      caution: {
-        _hue: 'yellow',
-      },
-      critical: {
-        _hue: 'red',
+      base: {
+        '*': {
+          bg: ['50', '900'],
+          fg: ['800', '200'],
+        },
+        transparent: {
+          bg: ['50', 'black'],
+        },
+        default: {
+          bg: ['white', '950'],
+          fg: ['black', '200'],
+        },
+        primary: {
+          _hue: 'purple',
+        },
+        positive: {
+          _hue: 'cyan',
+        },
+        caution: {
+          _hue: 'yellow',
+        },
+        critical: {
+          _hue: 'red',
+        },
       },
     },
   }
@@ -97,28 +99,30 @@ test('buildColorTheme: base', () => {
 test('buildColorTheme: button', () => {
   const colorConfig: ColorThemeConfig = {
     tokens: {
-      '*': {
-        bg: ['50', '900'],
-        fg: ['800', '200'],
-      },
-      transparent: {
-        bg: ['50', 'black'],
-      },
-      default: {
-        bg: ['white', '950'],
-        fg: ['black', '200'],
-      },
-      primary: {
-        _hue: 'purple',
-      },
-      positive: {
-        _hue: 'cyan',
-      },
-      caution: {
-        _hue: 'yellow',
-      },
-      critical: {
-        _hue: 'red',
+      base: {
+        '*': {
+          bg: ['50', '900'],
+          fg: ['800', '200'],
+        },
+        transparent: {
+          bg: ['50', 'black'],
+        },
+        default: {
+          bg: ['white', '950'],
+          fg: ['black', '200'],
+        },
+        primary: {
+          _hue: 'purple',
+        },
+        positive: {
+          _hue: 'cyan',
+        },
+        caution: {
+          _hue: 'yellow',
+        },
+        critical: {
+          _hue: 'red',
+        },
       },
       button: {
         '*': {

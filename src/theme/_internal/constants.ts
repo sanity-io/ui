@@ -1,3 +1,5 @@
+export const COLOR_BLEND_MODES = ['multiply', 'screen'] as const
+
 export const COLOR_HUES = [
   'gray',
   'cyan',
@@ -45,4 +47,6 @@ export const COLOR_STATES = ['enabled', 'hovered', 'pressed', 'selected', 'disab
 
 export const COLOR_BUTTON_MODES = ['default', 'ghost', 'bleed'] as const
 
-export const COLOR_BLEND_MODES = ['multiply', 'screen'] as const
+export const COLOR_INPUT_MODES = ['default', 'invalid'] as const
+
+export const COLOR_INPUT_STATES = ['enabled', 'hovered', 'readOnly', 'disabled'] as const

@@ -4,8 +4,10 @@ test('build theme', () => {
   const {color} = buildTheme({
     color: {
       tokens: {
-        default: {
-          bg: ['white/0', 'black/0'],
+        base: {
+          default: {
+            bg: ['white/0', 'black/0'],
+          },
         },
         button: {
           default: {

@@ -1,42 +1,44 @@
 import {ColorTokens} from '../../config'
 
 export const defaultColorTokens: ColorTokens = {
-  '*': {
-    _blend: ['multiply', 'screen'],
-    bg: ['50', '950'],
-    fg: ['800', '200'],
-    border: ['200', '800'],
-    focusRing: ['cyan/500', 'cyan/500'],
-    shadow: {
-      outline: ['500/0.25', '400/0.3'],
-      umbra: ['500/0.1', 'black/0.4'],
-      penumbra: ['500/0.07', 'black/0.28'],
-      ambient: ['500/0.06', 'black/0.24'],
+  base: {
+    '*': {
+      _blend: ['multiply', 'screen'],
+      bg: ['50', '950'],
+      fg: ['800', '200'],
+      border: ['200', '800'],
+      focusRing: ['cyan/500', 'cyan/500'],
+      shadow: {
+        outline: ['500/0.25', '400/0.3'],
+        umbra: ['500/0.1', 'black/0.4'],
+        penumbra: ['500/0.07', 'black/0.28'],
+        ambient: ['500/0.06', 'black/0.24'],
+      },
+      skeleton: {
+        from: ['100', '900'],
+        to: ['100/0.5', '900/0.5'],
+      },
     },
-    skeleton: {
-      from: ['100', '900'],
-      to: ['100/0.5', '900/0.5'],
+    transparent: {
+      bg: ['50', 'black'],
+      fg: ['600', '400'],
     },
-  },
-  transparent: {
-    bg: ['50', 'black'],
-    fg: ['600', '400'],
-  },
-  default: {
-    bg: ['white', '950'],
-    fg: ['black', '200'],
-  },
-  primary: {
-    _hue: 'cyan',
-  },
-  positive: {
-    _hue: 'cyan',
-  },
-  caution: {
-    _hue: 'yellow',
-  },
-  critical: {
-    _hue: 'red',
+    default: {
+      bg: ['white', '950'],
+      fg: ['black', '200'],
+    },
+    primary: {
+      _hue: 'cyan',
+    },
+    positive: {
+      _hue: 'cyan',
+    },
+    caution: {
+      _hue: 'yellow',
+    },
+    critical: {
+      _hue: 'red',
+    },
   },
   button: {
     '*': {
@@ -162,6 +164,40 @@ export const defaultColorTokens: ColorTokens = {
       bg: ['500', '400'],
       fg: ['white', 'black'],
       border: ['500/0', '400/0'],
+    },
+  },
+  input: {
+    '*': {
+      '*': {
+        _blend: ['multiply', 'screen'],
+        bg: ['white', 'black'],
+        bg2: ['50', '950'],
+        fg: ['black', '200'],
+        border: ['200', '800'],
+        placeholder: ['400', '600/0.5'],
+      },
+
+      hovered: {
+        border: ['300', '700'],
+      },
+
+      readOnly: {
+        bg: ['50', '950'],
+        fg: ['600', '400'],
+      },
+
+      disabled: {
+        fg: ['200', '800'],
+        border: ['100', '900'],
+      },
+    },
+
+    invalid: {
+      '*': {
+        _hue: 'red',
+        bg: ['50', '950'],
+        fg: ['800', '200'],
+      },
     },
   },
 }

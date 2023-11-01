@@ -5,6 +5,9 @@ import {
   ThemeColorButtonStates,
   ThemeColorButtonTones,
   ThemeColorGenericState,
+  ThemeColorInput,
+  ThemeColorInputState,
+  ThemeColorInputStates,
 } from '../../../lib/theme'
 import {ColorBlendModeValue, parseTokenValue, ThemeConfig, TMP_ColorPalette} from '../../config'
 import {TMP_BaseColorTheme, TMP_ColorTheme, TMP_Theme} from '../../types'
@@ -82,6 +85,7 @@ function renderColorBase(
     },
     button: renderButtonColorTheme(colorPalette, nestedBg, value._blend, value.button),
     card: renderStatesColorTheme(colorPalette, nestedBg, value._blend, value.card),
+    input: renderInputColorTheme(colorPalette, nestedBg, value._blend, value.input),
   }
 }
 
@@ -189,6 +193,49 @@ function renderStateColorTheme(
       bg: blend(baseBg, unmixed.code.bg),
       fg: blend(baseBg, unmixed.code.fg),
     },
+  }
+}
+
+function renderInputColorTheme(
+  colorPalette: TMP_ColorPalette,
+  baseBg: string,
+  rootBlendMode: ColorBlendModeValue,
+  value: ThemeColorInput,
+): ThemeColorInput {
+  return {
+    default: renderInputStatesColorTheme(colorPalette, baseBg, rootBlendMode, value.default),
+    invalid: renderInputStatesColorTheme(colorPalette, baseBg, rootBlendMode, value.invalid),
+  }
+}
+
+function renderInputStatesColorTheme(
+  colorPalette: TMP_ColorPalette,
+  baseBg: string,
+  rootBlendMode: ColorBlendModeValue,
+  value: ThemeColorInputStates,
+): ThemeColorInputStates {
+  return {
+    enabled: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.enabled),
+    hovered: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.hovered),
+    readOnly: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.readOnly),
+    disabled: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.disabled),
+  }
+}
+
+function renderInputStateColorTheme(
+  colorPalette: TMP_ColorPalette,
+  baseBg: string,
+  _rootBlendMode: ColorBlendModeValue,
+  value: ThemeColorInputState,
+): ThemeColorInputState {
+  const _blend = value._blend || 'multiply'
+
+  return {
+    bg: renderColorValue(colorPalette, baseBg, _blend, value.bg),
+    bg2: renderColorValue(colorPalette, baseBg, _blend, value.bg2),
+    fg: renderColorValue(colorPalette, baseBg, _blend, value.fg),
+    border: renderColorValue(colorPalette, baseBg, _blend, value.border),
+    placeholder: renderColorValue(colorPalette, baseBg, _blend, value.placeholder),
   }
 }
 

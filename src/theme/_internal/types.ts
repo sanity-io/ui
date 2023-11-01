@@ -1,9 +1,11 @@
-import {ThemeColorBase, ThemeColorButton, ThemeColorCard} from '../lib/theme'
+import {ThemeColorBase, ThemeColorButton, ThemeColorCard, ThemeColorInput} from '../lib/theme'
 import {ColorBlendModeValue} from './config'
 import {
   COLOR_BASE_TONES,
   COLOR_BUTTON_MODES,
   COLOR_HUES,
+  COLOR_INPUT_MODES,
+  COLOR_INPUT_STATES,
   COLOR_STATE_TONES,
   COLOR_STATES,
   COLOR_TINTS,
@@ -21,6 +23,10 @@ export type ColorState = (typeof COLOR_STATES)[number]
 
 export type ColorStateTone = (typeof COLOR_STATE_TONES)[number]
 
+export type ColorInputMode = (typeof COLOR_INPUT_MODES)[number]
+
+export type ColorInputState = (typeof COLOR_INPUT_STATES)[number]
+
 // todo: replace with `ThemeColor`
 export interface TMP_BaseColorTheme {
   _blend: ColorBlendModeValue
@@ -28,7 +34,7 @@ export interface TMP_BaseColorTheme {
   base: ThemeColorBase
   button: ThemeColorButton
   card: ThemeColorCard
-  // input: ThemeColorInput
+  input: ThemeColorInput
   // selectable?: ThemeColorSelectable
   // spot: ThemeColorSpot
   // syntax: ThemeColorSyntax

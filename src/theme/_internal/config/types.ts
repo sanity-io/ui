@@ -1,6 +1,13 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
 
-import {COLOR_BASE_TONES, COLOR_BLEND_MODES, COLOR_STATES, COLOR_STATE_TONES} from '../constants'
+import {
+  COLOR_BASE_TONES,
+  COLOR_BLEND_MODES,
+  COLOR_INPUT_MODES,
+  COLOR_INPUT_STATES,
+  COLOR_STATES,
+  COLOR_STATE_TONES,
+} from '../constants'
 import {ColorButtonMode, ColorHueValue, ColorTintValue} from '../types'
 
 export type ColorBlendModeValue = (typeof COLOR_BLEND_MODES)[number]
@@ -17,6 +24,12 @@ export type ColorConfigStateTone = (typeof COLOR_CONFIG_STATE_TONES)[number]
 
 export const COLOR_CONFIG_STATES = ['*', ...COLOR_STATES] as const
 export type ColorConfigState = (typeof COLOR_CONFIG_STATES)[number]
+
+export const COLOR_CONFIG_INPUT_MODES = ['*', ...COLOR_INPUT_MODES] as const
+export type ColorConfigInputMode = (typeof COLOR_CONFIG_INPUT_MODES)[number]
+
+export const COLOR_CONFIG_INPUT_STATES = ['*', ...COLOR_INPUT_STATES] as const
+export type ColorConfigInputState = (typeof COLOR_CONFIG_INPUT_STATES)[number]
 
 export interface BaseColorTokens {
   _blend?: ColorBlendModeTokenValue
@@ -69,9 +82,26 @@ export interface ButtonColorTokens extends Partial<Record<ColorButtonMode, Butto
   _hue?: ColorHueValue
 }
 
-export interface ColorTokens extends Partial<Record<ColorConfigBaseTone, BaseColorTokens>> {
+export interface InputStateColorTokens {
+  _blend?: ColorBlendModeTokenValue
+  _hue?: ColorHueValue
+  bg?: ColorTokenValue
+  bg2?: ColorTokenValue
+  fg?: ColorTokenValue
+  border?: ColorTokenValue
+  placeholder?: ColorTokenValue
+}
+
+export interface InputColorTokens
+  extends Partial<Record<ColorConfigInputState, InputStateColorTokens>> {
+  _hue?: ColorHueValue
+}
+
+export interface ColorTokens {
+  base?: Partial<Record<ColorConfigBaseTone, BaseColorTokens>>
   button?: Partial<Record<ColorConfigStateTone, ButtonColorTokens>>
   card?: Partial<Record<ColorConfigState, StateColorTokens>>
+  input?: Partial<Record<ColorConfigInputMode, InputColorTokens>>
 }
 
 export type TMP_ColorPalette = {

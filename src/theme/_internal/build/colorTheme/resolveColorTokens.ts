@@ -2,14 +2,21 @@ import {
   BaseColorTokens,
   ButtonColorTokens,
   ButtonModeColorTokens,
+  ColorConfigBaseTone,
+  ColorConfigInputMode,
+  ColorConfigInputState,
   ColorConfigState,
   ColorConfigStateTone,
   ColorTokens,
+  InputColorTokens,
+  InputStateColorTokens,
   StateColorTokens,
 } from '../../config'
 import {
   COLOR_BASE_TONES,
   COLOR_BUTTON_MODES,
+  COLOR_INPUT_MODES,
+  COLOR_INPUT_STATES,
   COLOR_STATES,
   COLOR_STATE_TONES,
 } from '../../constants'
@@ -21,21 +28,29 @@ import {ColorBaseTone, ColorButtonMode, ColorState, ColorStateTone} from '../../
 export function resolveColorTokens(sparseTokens: ColorTokens): ColorTokens {
   const denseTokens: ColorTokens = {...sparseTokens}
 
-  // base tones
-  for (const tone of COLOR_BASE_TONES) {
-    denseTokens[tone] = resolveBaseColorTones(sparseTokens, tone)
-  }
-
   // button
+  denseTokens.base = resolveBaseColorTokens(sparseTokens)
   denseTokens.button = resolveButtonColorTokens(sparseTokens)
   denseTokens.card = resolveCardColorTokens(sparseTokens)
+  denseTokens.input = resolveInputColorTokens(sparseTokens)
 
   return denseTokens
 }
 
+function resolveBaseColorTokens(sparseTokens: ColorTokens) {
+  const tokens: Partial<Record<ColorConfigBaseTone, BaseColorTokens>> = {}
+
+  // base tones
+  for (const tone of COLOR_BASE_TONES) {
+    tokens[tone] = resolveBaseColorTones(sparseTokens, tone)
+  }
+
+  return tokens
+}
+
 function resolveBaseColorTones(sparseTokens: ColorTokens, tone: ColorBaseTone): BaseColorTokens {
-  const spec0 = sparseTokens?.[tone]
-  const spec1 = sparseTokens?.['*']
+  const spec0 = sparseTokens?.base?.[tone]
+  const spec1 = sparseTokens?.base?.['*']
 
   return {
     ...spec1,
@@ -106,7 +121,7 @@ function resolveButtonStateColorTokens(
     spec2?._hue ||
     spec3?._hue ||
     tokens?.button?.[tone]?._hue ||
-    tokens?.[tone]?._hue
+    tokens?.base?.[tone]?._hue
 
   return {
     ...spec3,
@@ -125,9 +140,7 @@ function resolveButtonStateColorTokens(
 function resolveCardColorTokens(
   sparseTokens: ColorTokens,
 ): Partial<Record<ColorConfigState, StateColorTokens>> {
-  const tokens: Partial<Record<ColorConfigState, StateColorTokens>> = {
-    ...sparseTokens,
-  }
+  const tokens: Partial<Record<ColorConfigState, StateColorTokens>> = {}
 
   for (const state of COLOR_STATES) {
     tokens[state] = resolveCardStateColorTokens(sparseTokens, state)
@@ -151,5 +164,52 @@ function resolveCardStateColorTokens(tokens: ColorTokens, state: ColorState): St
     link: {...spec1?.link, ...spec0?.link},
     code: {...spec1?.code, ...spec0?.code},
     skeleton: {...spec1?.skeleton, ...spec0?.skeleton},
+  }
+}
+
+function resolveInputColorTokens(
+  sparseTokens: ColorTokens,
+): Partial<Record<ColorConfigInputMode, InputColorTokens>> {
+  const tokens: Partial<Record<ColorConfigInputMode, InputColorTokens>> = {}
+
+  for (const mode of COLOR_INPUT_MODES) {
+    tokens[mode] = resolveInputModeColorTokens(sparseTokens, mode)
+  }
+
+  return tokens
+}
+
+function resolveInputModeColorTokens(
+  sparseTokens: ColorTokens,
+  mode: ColorConfigInputMode,
+): InputColorTokens {
+  const states: InputColorTokens = {}
+
+  for (const state of COLOR_INPUT_STATES) {
+    states[state] = resolveInputStateColorTokens(sparseTokens, mode, state)
+  }
+
+  return states
+}
+
+function resolveInputStateColorTokens(
+  tokens: ColorTokens,
+  mode: ColorConfigInputMode,
+  state: ColorConfigInputState,
+): InputStateColorTokens {
+  const spec0 = tokens?.input?.[mode]?.[state]
+  const spec1 = tokens?.input?.['*']?.[state]
+  const spec2 = tokens?.input?.['*']?.['*']
+  const spec3 = tokens?.input?.[mode]?.['*']
+
+  const hue =
+    spec0?._hue || spec1?._hue || spec2?._hue || spec3?._hue || tokens?.input?.[mode]?._hue
+
+  return {
+    ...spec3,
+    ...spec2,
+    ...spec1,
+    ...spec0,
+    _hue: hue,
   }
 }

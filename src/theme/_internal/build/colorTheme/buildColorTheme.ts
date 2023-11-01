@@ -4,6 +4,9 @@ import {
   ThemeColorButtonTones,
   ThemeColorCard,
   ThemeColorGenericState,
+  ThemeColorInput,
+  ThemeColorInputState,
+  ThemeColorInputStates,
 } from '../../../lib/theme'
 import {ThemeConfig} from '../../config'
 import {COLOR_BUTTON_MODES, COLOR_STATE_TONES, COLOR_STATES} from '../../constants'
@@ -48,7 +51,7 @@ export function buildBaseColorTheme(
   config?: ThemeConfig,
 ): TMP_BaseColorTheme {
   const {scheme, tone} = options
-  const tokens = config?.color?.tokens?.[tone]
+  const tokens = config?.color?.tokens?.base?.[tone]
   const hue = tokens?._hue || 'gray'
   const context: ColorTokenContext = {hue, scheme}
   const bg = _color(context, tokens?.bg || ['gray/50', 'black'])
@@ -75,6 +78,7 @@ export function buildBaseColorTheme(
     },
     button: buildButtonColorTheme({scheme}, config),
     card: buildCardColorTheme({scheme, tone}, config),
+    input: buildInputColorTheme({scheme, tone}, config),
   }
 }
 
@@ -189,7 +193,7 @@ function buildCardStateColorTheme(
 ): ThemeColorGenericState {
   const {scheme, state, tone} = options
   const tokens = config?.color?.tokens?.card?.[state]
-  const hue = tokens?._hue || config?.color?.tokens?.[tone]?._hue || 'gray'
+  const hue = tokens?._hue || config?.color?.tokens?.base?.[tone]?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 
@@ -213,5 +217,60 @@ function buildCardStateColorTheme(
       bg: _color(context, tokens?.bg || ['500', '400']),
       fg: _color(context, tokens?.fg || ['500', '400']),
     },
+  }
+}
+
+function buildInputColorTheme(
+  options: {scheme: 'light' | 'dark'; tone: ColorBaseTone},
+  config?: ThemeConfig,
+): ThemeColorInput {
+  const {scheme, tone} = options
+
+  return {
+    default: buildInputStatesColorTheme({mode: 'default', scheme, tone}, config),
+    invalid: buildInputStatesColorTheme({mode: 'invalid', scheme, tone}, config),
+  }
+}
+
+function buildInputStatesColorTheme(
+  options: {
+    mode: 'default' | 'invalid'
+    scheme: 'light' | 'dark'
+    tone: ColorBaseTone
+  },
+  config?: ThemeConfig,
+): ThemeColorInputStates {
+  const {mode, scheme, tone} = options
+
+  return {
+    enabled: buildInputStateColorTheme({mode, scheme, state: 'enabled', tone}, config),
+    hovered: buildInputStateColorTheme({mode, scheme, state: 'hovered', tone}, config),
+    readOnly: buildInputStateColorTheme({mode, scheme, state: 'readOnly', tone}, config),
+    disabled: buildInputStateColorTheme({mode, scheme, state: 'disabled', tone}, config),
+  }
+}
+
+function buildInputStateColorTheme(
+  options: {
+    mode: 'default' | 'invalid'
+    scheme: 'light' | 'dark'
+    state: 'enabled' | 'hovered' | 'readOnly' | 'disabled'
+    tone: ColorBaseTone
+  },
+  config?: ThemeConfig,
+): ThemeColorInputState {
+  const {mode, tone, scheme, state} = options
+  const tokens = config?.color?.tokens?.input?.[mode]?.[state]
+  const hue = tokens?._hue || config?.color?.tokens?.base?.[tone]?._hue || 'gray'
+  const blendMode = tokens?._blend || ['screen', 'multiply']
+  const context: ColorTokenContext = {hue, scheme}
+
+  return {
+    _blend: blendMode[scheme === 'light' ? 0 : 1],
+    bg: _color(context, tokens?.bg || ['500', '400']),
+    bg2: _color(context, tokens?.bg2 || ['500', '400']),
+    fg: _color(context, tokens?.fg || ['white', 'black']),
+    border: _color(context, tokens?.border || ['500', '400']),
+    placeholder: _color(context, tokens?.placeholder || ['500', '400']),
   }
 }
