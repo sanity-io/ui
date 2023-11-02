@@ -1,6 +1,7 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
 import {rgba} from '../../../lib/color-fns'
 import {
+  ThemeColor,
   ThemeColorButton,
   ThemeColorButtonStates,
   ThemeColorButtonTones,
@@ -8,19 +9,20 @@ import {
   ThemeColorInput,
   ThemeColorInputState,
   ThemeColorInputStates,
+  ThemeColorScheme,
+  ThemeColorSchemes,
   ThemeColorSpot,
   ThemeColorSyntax,
 } from '../../../lib/theme'
-import {ColorBlendModeValue, parseTokenValue, ThemeConfig, TMP_ColorPalette} from '../../config'
-import {TMP_BaseColorTheme, TMP_ColorTheme, TMP_Theme} from '../../types'
-import {defaultColorPalette} from '../defaults/colorPalette'
+import {ColorBlendModeValue, parseTokenValue, ThemeConfig, ColorThemePalette} from '../../config'
 import {multiply, screen} from '../helpers'
+import {defaultColorPalette} from './defaults/colorPalette'
 
 export function renderColorTheme(
-  value: TMP_Theme['color'],
+  value: ThemeColorSchemes,
   config?: ThemeConfig,
-): TMP_Theme['color'] {
-  const colorPalette = config?.color?.palette ?? defaultColorPalette
+): ThemeColorSchemes {
+  const colorPalette = config?.palette ?? defaultColorPalette
 
   return {
     light: renderColorScheme(colorPalette, value.light),
@@ -28,7 +30,10 @@ export function renderColorTheme(
   }
 }
 
-function renderColorScheme(colorPalette: TMP_ColorPalette, value: TMP_ColorTheme): TMP_ColorTheme {
+function renderColorScheme(
+  colorPalette: ColorThemePalette,
+  value: ThemeColorScheme,
+): ThemeColorScheme {
   const toneEntries = Object.entries(value)
   const [, transparentTone] = toneEntries.find(([k]) => k === 'transparent')!
   const [, defaultTone] = toneEntries.find(([k]) => k === 'default')!
@@ -51,48 +56,42 @@ function renderColorScheme(colorPalette: TMP_ColorPalette, value: TMP_ColorTheme
     ...toneEntries
       .filter(([k]) => k !== 'default' && k !== 'transparent')
       .map(([k, v]) => [k, renderColorBase(colorPalette, v, renderedDefaultTone.base.bg)]),
-  ]) as TMP_ColorTheme
+  ]) as ThemeColorScheme
 }
 
 function renderColorBase(
-  colorPalette: TMP_ColorPalette,
-  value: TMP_BaseColorTheme,
+  colorPalette: ColorThemePalette,
+  value: ThemeColor,
   bg: string,
-): TMP_BaseColorTheme {
-  const nestedBg = renderColorValue(colorPalette, bg, value._blend, value.base.bg)
-
-  //
-  const button = renderButtonColorTheme(colorPalette, nestedBg, value._blend, value.button)
+): ThemeColor {
+  const _blend = value._blend || 'multiply'
+  const nestedBg = renderColorValue(colorPalette, bg, _blend, value.base.bg)
+  const button = renderButtonColorTheme(colorPalette, nestedBg, _blend, value.button)
 
   return {
-    _blend: value._blend,
+    _blend,
     dark: value.dark,
     base: {
       bg: nestedBg,
-      fg: renderColorValue(colorPalette, nestedBg, value._blend, value.base.fg),
-      border: renderColorValue(colorPalette, nestedBg, value._blend, value.base.border),
-      focusRing: renderColorValue(colorPalette, nestedBg, value._blend, value.base.focusRing),
+      fg: renderColorValue(colorPalette, nestedBg, _blend, value.base.fg),
+      border: renderColorValue(colorPalette, nestedBg, _blend, value.base.border),
+      focusRing: renderColorValue(colorPalette, nestedBg, _blend, value.base.focusRing),
       shadow: {
-        outline: renderColorValue(colorPalette, nestedBg, value._blend, value.base.shadow.outline),
-        umbra: renderColorValue(colorPalette, nestedBg, value._blend, value.base.shadow.umbra),
-        penumbra: renderColorValue(
-          colorPalette,
-          nestedBg,
-          value._blend,
-          value.base.shadow.penumbra,
-        ),
-        ambient: renderColorValue(colorPalette, nestedBg, value._blend, value.base.shadow.ambient),
+        outline: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.outline),
+        umbra: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.umbra),
+        penumbra: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.penumbra),
+        ambient: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.ambient),
       },
       skeleton: value.base.skeleton && {
-        from: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton?.from),
-        to: renderColorValue(colorPalette, nestedBg, value._blend, value.base.skeleton?.to),
+        from: renderColorValue(colorPalette, nestedBg, _blend, value.base.skeleton?.from),
+        to: renderColorValue(colorPalette, nestedBg, _blend, value.base.skeleton?.to),
       },
     },
     button,
-    card: renderStatesColorTheme(colorPalette, nestedBg, value._blend, value.card),
-    input: renderInputColorTheme(colorPalette, nestedBg, value._blend, value.input),
-    spot: renderSpotColorTheme(colorPalette, nestedBg, value._blend, value.spot),
-    syntax: renderSyntaxColorTheme(colorPalette, nestedBg, value._blend, value.syntax),
+    card: renderStatesColorTheme(colorPalette, nestedBg, _blend, value.card),
+    input: renderInputColorTheme(colorPalette, nestedBg, _blend, value.input),
+    spot: renderSpotColorTheme(colorPalette, nestedBg, _blend, value.spot),
+    syntax: renderSyntaxColorTheme(colorPalette, nestedBg, _blend, value.syntax),
     solid: {
       ...button.default,
       transparent: button.default.default,
@@ -105,7 +104,7 @@ function renderColorBase(
 }
 
 function renderButtonColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   bg: string,
   baseBlendMode: ColorBlendModeValue,
   value: ThemeColorButton,
@@ -118,7 +117,7 @@ function renderButtonColorTheme(
 }
 
 function renderButtonStateColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   bg: string,
   baseBlendMode: ColorBlendModeValue,
   value: ThemeColorButtonTones,
@@ -133,7 +132,7 @@ function renderButtonStateColorTheme(
 }
 
 function renderStatesColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   bg: string,
   baseBlendMode: ColorBlendModeValue,
   value: ThemeColorButtonStates,
@@ -148,7 +147,7 @@ function renderStatesColorTheme(
 }
 
 function renderStateColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   baseBg: string,
   rootBlendMode: ColorBlendModeValue,
   value: ThemeColorGenericState,
@@ -212,7 +211,7 @@ function renderStateColorTheme(
 }
 
 function renderInputColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   baseBg: string,
   rootBlendMode: ColorBlendModeValue,
   value: ThemeColorInput,
@@ -224,7 +223,7 @@ function renderInputColorTheme(
 }
 
 function renderInputStatesColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   baseBg: string,
   rootBlendMode: ColorBlendModeValue,
   value: ThemeColorInputStates,
@@ -238,7 +237,7 @@ function renderInputStatesColorTheme(
 }
 
 function renderInputStateColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   baseBg: string,
   _rootBlendMode: ColorBlendModeValue,
   value: ThemeColorInputState,
@@ -255,7 +254,7 @@ function renderInputStateColorTheme(
 }
 
 function renderSpotColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   baseBg: string,
   _rootBlendMode: ColorBlendModeValue,
   value: ThemeColorSpot,
@@ -276,7 +275,7 @@ function renderSpotColorTheme(
 }
 
 function renderSyntaxColorTheme(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   baseBg: string,
   _rootBlendMode: ColorBlendModeValue,
   value: ThemeColorSyntax,
@@ -324,7 +323,7 @@ function renderSyntaxColorTheme(
 }
 
 function renderColorValue(
-  colorPalette: TMP_ColorPalette,
+  colorPalette: ColorThemePalette,
   bg: string,
   blendMode: ColorBlendModeValue,
   str: string,

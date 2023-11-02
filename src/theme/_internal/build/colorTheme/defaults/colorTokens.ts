@@ -1,4 +1,4 @@
-import {ColorTokens} from '../../config'
+import {ColorTokens} from '../../../config'
 
 export const defaultColorTokens: ColorTokens = {
   base: {
@@ -49,8 +49,8 @@ export const defaultColorTokens: ColorTokens = {
     },
   },
   button: {
-    '*': {
-      default: {
+    default: {
+      '*': {
         '*': {
           _blend: ['screen', 'multiply'],
           bg: ['500', '400'],
@@ -71,11 +71,10 @@ export const defaultColorTokens: ColorTokens = {
           border: ['600/0', '300/0'],
         },
         pressed: {
-          // _hue: 'cyan',
           bg: ['700', '200'],
         },
         selected: {
-          _hue: 'cyan',
+          // _hue: 'cyan',
           bg: ['700', '200'],
         },
         disabled: {
@@ -83,7 +82,24 @@ export const defaultColorTokens: ColorTokens = {
           bg: ['200', '900'],
         },
       },
-      ghost: {
+      default: {
+        '*': {
+          bg: ['900', '200'],
+        },
+        hovered: {
+          bg: ['black', '100'],
+        },
+        pressed: {
+          bg: ['900', '200'],
+        },
+        selected: {
+          // _hue: 'cyan',
+          bg: ['black', '200'],
+        },
+      },
+    },
+    ghost: {
+      '*': {
         '*': {
           _blend: ['multiply', 'screen'],
           bg: ['white', 'black'],
@@ -109,7 +125,7 @@ export const defaultColorTokens: ColorTokens = {
           fg: ['800', '200'],
         },
         selected: {
-          _hue: 'cyan',
+          // _hue: 'cyan',
           bg: ['100', '900'],
           fg: ['800', '200'],
         },
@@ -119,7 +135,14 @@ export const defaultColorTokens: ColorTokens = {
           border: ['100', '950'],
         },
       },
-      bleed: {
+      default: {
+        selected: {
+          _hue: 'cyan',
+        },
+      },
+    },
+    bleed: {
+      '*': {
         '*': {
           _blend: ['multiply', 'screen'],
           bg: ['white', 'black'],
@@ -145,7 +168,7 @@ export const defaultColorTokens: ColorTokens = {
           fg: ['800', '200'],
         },
         selected: {
-          _hue: 'cyan',
+          // _hue: 'cyan',
           bg: ['100', '900'],
           fg: ['800', '200'],
         },
@@ -154,25 +177,9 @@ export const defaultColorTokens: ColorTokens = {
           fg: ['200', '900'],
         },
       },
-    },
-    default: {
       default: {
-        '*': {
-          bg: ['900', '200'],
-        },
-        hovered: {
-          bg: ['black', '100'],
-        },
-        pressed: {
-          bg: ['900', '200'],
-        },
         selected: {
           _hue: 'cyan',
-          bg: ['black', '200'],
-        },
-        disabled: {
-          _hue: 'gray',
-          bg: ['200', '900'],
         },
       },
     },
@@ -243,7 +250,6 @@ export const defaultColorTokens: ColorTokens = {
         border: ['100', '900'],
       },
     },
-
     invalid: {
       '*': {
         _hue: 'red',
@@ -251,5 +257,41 @@ export const defaultColorTokens: ColorTokens = {
         fg: ['800', '200'],
       },
     },
+  },
+  syntax: {
+    atrule: ['purple/700', 'purple/400'],
+    attrName: ['green/700', 'green/400'],
+    attrValue: ['yellow/700', 'yellow/400'],
+    attribute: ['yellow/700', 'yellow/400'],
+    boolean: ['purple/700', 'purple/400'],
+    builtin: ['purple/700', 'purple/400'],
+    cdata: ['yellow/700', 'yellow/400'],
+    char: ['yellow/700', 'yellow/400'],
+    class: ['orange/700', 'orange/400'],
+    className: ['cyan/700', 'cyan/400'],
+    comment: ['gray/700/0.5', 'gray/400/0.5'],
+    constant: ['purple/700', 'purple/400'],
+    deleted: ['red/700', 'red/400'],
+    entity: ['red/700', 'red/400'],
+    function: ['green/700', 'green/400'],
+    hexcode: ['blue/700', 'blue/400'],
+    id: ['purple/700', 'purple/400'],
+    important: ['purple/700', 'purple/400'],
+    inserted: ['yellow/700', 'yellow/400'],
+    keyword: ['magenta/700', 'magenta/400'],
+    number: ['purple/700', 'purple/400'],
+    operator: ['magenta/700', 'magenta/400'],
+    property: ['blue/700', 'blue/400'],
+    pseudoClass: ['yellow/700', 'yellow/400'],
+    pseudoElement: ['yellow/700', 'yellow/400'],
+    punctuation: ['gray/700', 'gray/400'],
+    regex: ['blue/700', 'blue/400'],
+    selector: ['red/700', 'red/400'],
+    string: ['yellow/700', 'yellow/400'],
+    symbol: ['purple/700', 'purple/400'],
+    tag: ['red/700', 'red/400'],
+    unit: ['orange/700', 'orange/400'],
+    url: ['red/700', 'red/400'],
+    variable: ['red/700', 'red/400'],
   },
 }

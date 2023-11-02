@@ -6,7 +6,6 @@ import {
   ColorConfigInputMode,
   ColorConfigInputState,
   ColorConfigState,
-  ColorConfigStateTone,
   ColorTokens,
   InputColorTokens,
   InputStateColorTokens,
@@ -20,7 +19,7 @@ import {
   COLOR_STATES,
   COLOR_STATE_TONES,
 } from '../../constants'
-import {ColorBaseTone, ColorButtonMode, ColorState, ColorStateTone} from '../../types'
+import {ColorBaseTone, ColorButtonMode, ColorState, ColorStateTone} from '../../system'
 
 /**
  * Convert a tree of color tokens from a sparse format to a dense format.
@@ -33,6 +32,8 @@ export function resolveColorTokens(sparseTokens: ColorTokens): ColorTokens {
   denseTokens.button = resolveButtonColorTokens(sparseTokens)
   denseTokens.card = resolveCardColorTokens(sparseTokens)
   denseTokens.input = resolveInputColorTokens(sparseTokens)
+  // denseTokens.spot = resolveSpotColorTokens(sparseTokens)
+  // denseTokens.syntax = resolveSyntaxColorTokens(sparseTokens)
 
   return denseTokens
 }
@@ -62,11 +63,11 @@ function resolveBaseColorTones(sparseTokens: ColorTokens, tone: ColorBaseTone): 
 
 function resolveButtonColorTokens(
   sparseTokens: ColorTokens,
-): Partial<Record<ColorConfigStateTone, ButtonColorTokens>> {
-  const tokens: Partial<Record<ColorConfigStateTone, ButtonColorTokens>> = {}
+): Partial<Record<ColorButtonMode, ButtonColorTokens>> {
+  const tokens: Partial<Record<ColorButtonMode, ButtonColorTokens>> = {}
 
-  for (const tone of COLOR_STATE_TONES) {
-    tokens[tone] = resolveButtonToneColorTokens(sparseTokens, tone)
+  for (const mode of COLOR_BUTTON_MODES) {
+    tokens[mode] = resolveButtonToneColorTokens(sparseTokens, mode)
   }
 
   return tokens
@@ -74,15 +75,12 @@ function resolveButtonColorTokens(
 
 function resolveButtonToneColorTokens(
   sparseTokens: ColorTokens,
-  tone: ColorStateTone,
+  mode: ColorButtonMode,
 ): ButtonColorTokens {
-  const tokens: ButtonColorTokens = {
-    ...sparseTokens.button?.[tone],
-    ...sparseTokens.button?.['*'],
-  }
+  const tokens: ButtonColorTokens = {}
 
-  for (const mode of COLOR_BUTTON_MODES) {
-    tokens[mode] = resolveButtonModeColorTokens(sparseTokens, tone, mode)
+  for (const tone of COLOR_STATE_TONES) {
+    tokens[tone] = resolveButtonModeColorTokens(sparseTokens, mode, tone)
   }
 
   return tokens
@@ -90,11 +88,11 @@ function resolveButtonToneColorTokens(
 
 function resolveButtonModeColorTokens(
   sparseTokens: ColorTokens,
-  tone: ColorStateTone,
   mode: ColorButtonMode,
+  tone: ColorStateTone,
 ): ButtonModeColorTokens {
-  const spec0 = sparseTokens.button?.[tone]?.[mode]
-  const spec1 = sparseTokens.button?.['*']?.[mode]
+  const spec0 = sparseTokens.button?.[mode]?.[tone]
+  const spec1 = sparseTokens.button?.[mode]?.['*']
   const tokens = {...spec1, ...spec0}
 
   for (const state of COLOR_STATES) {
@@ -110,18 +108,12 @@ function resolveButtonStateColorTokens(
   mode: ColorButtonMode,
   state: ColorState,
 ): StateColorTokens {
-  const spec0 = tokens?.button?.[tone]?.[mode]?.[state]
-  const spec1 = tokens?.button?.[tone]?.[mode]?.['*']
-  const spec2 = tokens?.button?.['*']?.[mode]?.[state]
-  const spec3 = tokens?.button?.['*']?.[mode]?.['*']
+  const spec0 = tokens?.button?.[mode]?.[tone]?.[state]
+  const spec1 = tokens?.button?.[mode]?.['*']?.[state]
+  const spec2 = tokens?.button?.[mode]?.['*']?.['*']
+  const spec3 = tokens?.button?.[mode]?.[tone]?.['*']
 
-  const hue =
-    spec0?._hue ||
-    spec1?._hue ||
-    spec2?._hue ||
-    spec3?._hue ||
-    tokens?.button?.[tone]?._hue ||
-    tokens?.base?.[tone]?._hue
+  const hue = spec0?._hue || spec1?._hue || spec2?._hue || spec3?._hue || tokens?.base?.[tone]?._hue
 
   return {
     ...spec3,

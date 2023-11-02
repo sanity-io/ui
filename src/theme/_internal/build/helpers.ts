@@ -6,7 +6,7 @@ import {
   rgba,
 } from '../../lib/color-fns'
 import {ColorTokenValue, parseTokenValue, TokenColorValueNode} from '../config'
-import {ColorHueValue} from '../types'
+import {ColorHueValue} from '../system'
 
 export interface ColorTokenContext {
   hue: ColorHueValue

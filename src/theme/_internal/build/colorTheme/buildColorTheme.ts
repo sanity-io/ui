@@ -1,4 +1,5 @@
 import {
+  ThemeColor,
   ThemeColorButton,
   ThemeColorButtonStates,
   ThemeColorButtonTones,
@@ -7,34 +8,35 @@ import {
   ThemeColorInput,
   ThemeColorInputState,
   ThemeColorInputStates,
+  ThemeColorScheme,
+  ThemeColorSchemes,
   ThemeColorSpot,
   ThemeColorSyntax,
 } from '../../../lib/theme'
 import {ThemeConfig} from '../../config'
 import {COLOR_BUTTON_MODES, COLOR_STATE_TONES, COLOR_STATES} from '../../constants'
-import {
-  ColorBaseTone,
-  ColorButtonMode,
-  ColorState,
-  ColorStateTone,
-  TMP_BaseColorTheme,
-  TMP_ColorTheme,
-} from '../../types'
-import {defaultColorTokens} from '../defaults/colorTokens'
+import {ColorBaseTone, ColorButtonMode, ColorState, ColorStateTone} from '../../system'
 import {ColorTokenContext, resolveColorTokenValue as _color} from '../helpers'
+import {defaultColorTokens} from './defaults/colorTokens'
 import {resolveColorTokens} from './resolveColorTokens'
 
-export function buildColorTheme(
+export function buildColorTheme(config?: ThemeConfig): ThemeColorSchemes {
+  return {
+    light: buildColorScheme({scheme: 'light'}, config),
+    dark: buildColorScheme({scheme: 'dark'}, config),
+  }
+}
+
+export function buildColorScheme(
   options: {scheme: 'light' | 'dark'},
   config?: ThemeConfig,
-): TMP_ColorTheme {
+): ThemeColorScheme {
   const {scheme} = options
 
   const resolvedConfig = {
     ...config,
     color: {
-      ...config?.color,
-      tokens: resolveColorTokens(config?.color?.tokens ?? defaultColorTokens),
+      ...resolveColorTokens(config?.color ?? defaultColorTokens),
     },
   }
 
@@ -51,15 +53,16 @@ export function buildColorTheme(
 export function buildBaseColorTheme(
   options: {scheme: 'light' | 'dark'; tone: ColorBaseTone},
   config?: ThemeConfig,
-): TMP_BaseColorTheme {
+): ThemeColor {
   const {scheme, tone} = options
-  const tokens = config?.color?.tokens?.base?.[tone]
+  const tokens = config?.color?.base?.[tone]
   const hue = tokens?._hue || 'gray'
   const context: ColorTokenContext = {hue, scheme}
   const bg = _color(context, tokens?.bg || ['gray/50', 'black'])
   const blendMode = tokens?._blend || ['screen', 'multiply']
 
-  //
+  // Build `button` color theme
+  // Also used for `solid` and `muted` color themes
   const button = buildButtonColorTheme({scheme}, config)
 
   return {
@@ -159,7 +162,7 @@ function buildButtonStateColorTheme(
   config?: ThemeConfig,
 ): ThemeColorGenericState {
   const {mode, tone, scheme, state} = options
-  const tokens = config?.color?.tokens?.button?.[tone]?.[mode]?.[state]
+  const tokens = config?.color?.button?.[mode]?.[tone]?.[state]
   const hue = tokens?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
@@ -207,8 +210,8 @@ function buildCardStateColorTheme(
   config?: ThemeConfig,
 ): ThemeColorGenericState {
   const {scheme, state, tone} = options
-  const tokens = config?.color?.tokens?.card?.[state]
-  const hue = tokens?._hue || config?.color?.tokens?.base?.[tone]?._hue || 'gray'
+  const tokens = config?.color?.card?.[state]
+  const hue = tokens?._hue || config?.color?.base?.[tone]?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 
@@ -275,8 +278,8 @@ function buildInputStateColorTheme(
   config?: ThemeConfig,
 ): ThemeColorInputState {
   const {mode, tone, scheme, state} = options
-  const tokens = config?.color?.tokens?.input?.[mode]?.[state]
-  const hue = tokens?._hue || config?.color?.tokens?.base?.[tone]?._hue || 'gray'
+  const tokens = config?.color?.input?.[mode]?.[state]
+  const hue = tokens?._hue || config?.color?.base?.[tone]?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 
@@ -295,7 +298,7 @@ function buildSpotColorTheme(
   config?: ThemeConfig,
 ): ThemeColorSpot {
   const {scheme} = options
-  const tokens = config?.color?.tokens?.spot
+  const tokens = config?.color?.spot
   const context: ColorTokenContext = {hue: 'gray', scheme}
 
   return {
@@ -316,7 +319,7 @@ function buildSyntaxColorTheme(
   config?: ThemeConfig,
 ): ThemeColorSyntax {
   const {scheme} = options
-  const tokens = config?.color?.tokens?.syntax
+  const tokens = config?.color?.syntax
   const context: ColorTokenContext = {hue: 'gray', scheme}
 
   return {

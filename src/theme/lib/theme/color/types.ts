@@ -1,3 +1,4 @@
+import {ColorBlendModeValue} from '../../../_internal'
 import {ThemeColorBase} from './base'
 import {ThemeColorButton} from './button'
 import {ThemeColorCard} from './card'
@@ -39,6 +40,8 @@ export type ThemeColorToneKey =
  * @public
  */
 export interface ThemeColor {
+  /** @internal */
+  _blend?: ColorBlendModeValue
   dark: boolean
   base: ThemeColorBase
   button: ThemeColorButton

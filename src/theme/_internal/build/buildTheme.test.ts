@@ -3,18 +3,16 @@ import {buildTheme} from './buildTheme'
 test('build theme', () => {
   const {color} = buildTheme({
     color: {
-      tokens: {
-        base: {
-          default: {
-            bg: ['white/0', 'black/0'],
-          },
+      base: {
+        default: {
+          bg: ['white/0', 'black/0'],
         },
-        button: {
+      },
+      button: {
+        ghost: {
           default: {
-            ghost: {
-              '*': {
-                border: ['white/0', 'black/0'],
-              },
+            '*': {
+              border: ['white/0', 'black/0'],
             },
           },
         },

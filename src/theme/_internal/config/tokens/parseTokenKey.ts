@@ -1,5 +1,4 @@
 import {isColorButtonMode} from '../../helpers'
-import {ColorButtonMode} from '../../types'
 import {
   isColorConfigBaseKey,
   isColorConfigBaseTone,
@@ -7,28 +6,7 @@ import {
   isColorConfigStateKey,
   isColorConfigStateTone,
 } from '../helpers'
-import {
-  ColorConfigBaseKey,
-  ColorConfigBaseTone,
-  ColorConfigBlendKey,
-  ColorConfigStateKey,
-  ColorConfigStateTone,
-} from '../types'
-
-export interface TokenBaseKeyNode {
-  type: 'base'
-  tone: ColorConfigBaseTone
-  key: ColorConfigBaseKey | ColorConfigBlendKey
-}
-
-export interface TokenButtonKeyNode {
-  type: 'button'
-  tone: ColorConfigStateTone
-  mode: ColorButtonMode
-  key: ColorConfigStateKey | ColorConfigBlendKey
-}
-
-export type TokenKeyNode = TokenBaseKeyNode | TokenButtonKeyNode
+import {TokenKeyNode} from './types'
 
 export function parseTokenKey(str: string): TokenKeyNode | undefined {
   const segments = str.split('/')

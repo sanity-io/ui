@@ -1,27 +1,6 @@
 import {isColorBlendModeValue, isColorHueValue, isColorTintValue} from '../../helpers'
-import {ColorHueValue, ColorTintValue} from '../../types'
 import {isColorOpacityValue, isColorValue} from '../helpers'
-import {ColorBlendModeValue} from '../types'
-
-export interface TokenColorValueNode {
-  type: 'color'
-  key?: 'black' | 'white' | `${ColorHueValue}/${ColorTintValue}` | ColorTintValue
-  hue?: ColorHueValue
-  tint?: ColorTintValue
-  opacity?: number
-}
-
-export interface TokenHueValueNode {
-  type: 'hue'
-  value?: ColorHueValue
-}
-
-export interface TokenBlendModeValueNode {
-  type: 'blendMode'
-  value?: ColorBlendModeValue
-}
-
-export type TokenValueNode = TokenColorValueNode | TokenHueValueNode | TokenBlendModeValueNode
+import {TokenValueNode} from './types'
 
 export function parseTokenValue(str: string): TokenValueNode | undefined {
   const segments = str.split('/')

@@ -1,16 +1,10 @@
+import {ThemeColorSchemes} from '../../lib/theme'
 import {ThemeConfig} from '../config'
-import {TMP_Theme} from '../types'
-import {buildColorTheme} from './colorTheme/buildColorTheme'
-import {renderColorTheme} from './colorTheme/renderColorTheme'
+import {buildColorTheme, renderColorTheme} from './colorTheme'
 
 /** @internal */
-export function buildTheme(config?: ThemeConfig): TMP_Theme {
-  const color: TMP_Theme['color'] = {
-    light: buildColorTheme({scheme: 'light'}, config),
-    dark: buildColorTheme({scheme: 'dark'}, config),
-  }
-
+export function buildTheme(config?: ThemeConfig): {color: ThemeColorSchemes} {
   return {
-    color: renderColorTheme(color, config),
+    color: renderColorTheme(buildColorTheme(config), config),
   }
 }

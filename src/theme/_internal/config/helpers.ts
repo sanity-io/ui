@@ -1,4 +1,3 @@
-import {parseTokenValue} from './token'
 import {
   COLOR_CONFIG_BASE_KEYS,
   COLOR_CONFIG_BASE_TONES,
@@ -12,7 +11,8 @@ import {
   ColorConfigStateKey,
   ColorConfigStateTone,
   ColorConfigValue,
-} from './types'
+} from './system'
+import {parseTokenValue} from './tokens'
 
 export function isColorConfigBaseTone(str: string): str is ColorConfigBaseTone {
   return COLOR_CONFIG_BASE_TONES.includes(str as ColorConfigBaseTone)
