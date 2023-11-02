@@ -1,4 +1,4 @@
-import {ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
+import {ThemeColorName, ThemeColorSchemeKey} from './types'
 import {ThemeProvider} from './themeProvider'
 import {useRootTheme} from './useRootTheme'
 

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {render} from '../../test'
-import {studioTheme} from './studioTheme'
+import {studioTheme} from './themes/studio'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 import {useRootTheme} from './useRootTheme'
