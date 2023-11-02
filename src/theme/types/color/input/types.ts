@@ -1,4 +1,4 @@
-import {ColorBlendModeValue} from '../../../_internal'
+import {ColorBlendModeValue} from '../../../system'
 
 /**
  * @public

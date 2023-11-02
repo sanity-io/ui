@@ -4,5 +4,5 @@ import {ColorThemePalette} from '../../../config'
 
 export const defaultColorPalette: ColorThemePalette = {
   ...color,
-  black: '#000000',
+  // black: '#000000',
 }

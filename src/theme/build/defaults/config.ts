@@ -16,7 +16,6 @@ export const defaultThemeConfig: Omit<RootTheme, 'color' | 'fonts'> = {
   card: {
     focusRing: {offset: -1, width: 1},
   },
-  // color,
   container: [320, 640, 960, 1280, 1600, 1920],
   focusRing: {
     offset: 1,

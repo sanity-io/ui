@@ -1,3 +1,13 @@
+import {ThemeConfig} from '../../config'
+import {
+  COLOR_BUTTON_MODES,
+  COLOR_STATE_TONES,
+  COLOR_STATES,
+  ColorBaseTone,
+  ColorButtonMode,
+  ColorState,
+  ColorStateTone,
+} from '../../system'
 import {
   ThemeColor,
   ThemeColorButton,
@@ -13,16 +23,6 @@ import {
   ThemeColorSpot,
   ThemeColorSyntax,
 } from '../../types'
-import {ThemeConfig} from '../../config'
-import {
-  COLOR_BUTTON_MODES,
-  COLOR_STATE_TONES,
-  COLOR_STATES,
-  ColorBaseTone,
-  ColorButtonMode,
-  ColorState,
-  ColorStateTone,
-} from '../../system'
 import {ColorTokenContext, resolveColorTokenValue as _color} from '../helpers'
 import {defaultColorTokens} from './defaults/colorTokens'
 import {resolveColorTokens} from './resolveColorTokens'
@@ -81,10 +81,10 @@ export function buildBaseColorTheme(
       border: _color(context, tokens?.border || ['black', 'white']),
       focusRing: _color(context, tokens?.focusRing || ['black', 'white']),
       shadow: {
-        outline: _color(context, tokens?.shadow?.outline || ['500/0.2', '500/0.2']),
-        umbra: _color(context, tokens?.shadow?.umbra || ['500/0.2', '500/0.2']),
-        penumbra: _color(context, tokens?.shadow?.penumbra || ['500/0.2', '500/0.2']),
-        ambient: _color(context, tokens?.shadow?.ambient || ['500/0.2', '500/0.2']),
+        outline: _color(context, tokens?.shadow?.outline || ['500/0.3', '500/0.3']),
+        umbra: _color(context, tokens?.shadow?.umbra || ['500/0.2', 'black/0.4']),
+        penumbra: _color(context, tokens?.shadow?.penumbra || ['500/0.07', 'black/0.14']),
+        ambient: _color(context, tokens?.shadow?.ambient || ['500/0.06', 'black/0.12']),
       },
       skeleton: {
         from: _color(context, tokens?.skeleton?.from || ['500/0.2', '500/0.2']),
@@ -92,7 +92,7 @@ export function buildBaseColorTheme(
       },
     },
     button,
-    card: buildCardColorTheme({scheme, tone}, config),
+    card: buildCardColorTheme({scheme, baseTone: tone}, config),
     input: buildInputColorTheme({scheme, tone}, config),
     spot: buildSpotColorTheme({scheme}, config),
     syntax: buildSyntaxColorTheme({scheme}, config),
@@ -177,70 +177,78 @@ function buildButtonStateColorTheme(
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
     bg: _color(context, tokens?.bg || ['500', '400']),
-    bg2: _color(context, tokens?.bg2 || ['500', '400']),
+    bg2: _color(context, tokens?.bg2 || ['950', '50']),
     fg: _color(context, tokens?.fg || ['white', 'black']),
     border: _color(context, tokens?.border || ['500', '400']),
     iconColor: _color(context, tokens?.fg || ['500', '400']),
     muted: {
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      fg: _color(context, tokens?.muted?.fg || ['500', '400']),
     },
     accent: {
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      fg: _color(context, tokens?.accent?.fg || ['500', '400']),
     },
     link: {
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      fg: _color(context, tokens?.link?.fg || ['500', '400']),
     },
     code: {
-      bg: _color(context, tokens?.bg || ['500', '400']),
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      bg: _color(context, tokens?.code?.bg || ['500', '400']),
+      fg: _color(context, tokens?.code?.fg || ['500', '400']),
+    },
+    skeleton: {
+      from: _color(context, tokens?.skeleton?.from || ['500', '400']),
+      to: _color(context, tokens?.skeleton?.to || ['500', '400']),
     },
   }
 }
 
 function buildCardColorTheme(
-  options: {scheme: 'light' | 'dark'; tone: ColorBaseTone},
+  options: {scheme: 'light' | 'dark'; baseTone: ColorBaseTone},
   config?: ThemeConfig,
 ): ThemeColorCard {
-  const {scheme, tone} = options
+  const {scheme, baseTone} = options
 
   const states: Partial<ThemeColorCard> = {}
 
   for (const state of COLOR_STATES) {
-    states[state] = buildCardStateColorTheme({scheme, state, tone}, config)
+    states[state] = buildCardStateColorTheme({scheme, state, baseTone}, config)
   }
 
   return states as ThemeColorCard
 }
 
 function buildCardStateColorTheme(
-  options: {scheme: 'light' | 'dark'; state: ColorState; tone: ColorBaseTone},
+  options: {scheme: 'light' | 'dark'; state: ColorState; baseTone: ColorBaseTone},
   config?: ThemeConfig,
 ): ThemeColorGenericState {
-  const {scheme, state, tone} = options
+  const {scheme, state, baseTone} = options
   const tokens = config?.color?.card?.[state]
-  const hue = tokens?._hue || config?.color?.base?.[tone]?._hue || 'gray'
+  const hue = tokens?._hue || config?.color?.base?.[baseTone]?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
-    bg: _color(context, tokens?.bg || ['500', '400']),
-    bg2: _color(context, tokens?.bg2 || ['500', '400']),
-    fg: _color(context, tokens?.fg || ['white', 'black']),
-    border: _color(context, tokens?.border || ['500', '400']),
+    bg: _color(context, tokens?.bg || ['50', '950']),
+    bg2: _color(context, tokens?.bg2 || ['50', '950']),
+    fg: _color(context, tokens?.fg || ['black', 'white']),
+    border: _color(context, tokens?.border || ['200', '800']),
     iconColor: _color(context, tokens?.fg || ['500', '400']),
     muted: {
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      fg: _color(context, tokens?.muted?.fg || ['600', '400']),
     },
     accent: {
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      fg: _color(context, tokens?.accent?.fg || ['600', '400']),
     },
     link: {
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      fg: _color(context, tokens?.link?.fg || ['600', '400']),
     },
     code: {
-      bg: _color(context, tokens?.bg || ['500', '400']),
-      fg: _color(context, tokens?.fg || ['500', '400']),
+      bg: _color(context, tokens?.code?.bg || ['600', '400']),
+      fg: _color(context, tokens?.code?.fg || ['600', '400']),
+    },
+    skeleton: {
+      from: _color(context, tokens?.skeleton?.from || ['100', '900']),
+      to: _color(context, tokens?.skeleton?.to || ['100/0.5', '900/0.5']),
     },
   }
 }
@@ -292,10 +300,10 @@ function buildInputStateColorTheme(
 
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
-    bg: _color(context, tokens?.bg || ['500', '400']),
-    bg2: _color(context, tokens?.bg2 || ['500', '400']),
-    fg: _color(context, tokens?.fg || ['white', 'black']),
-    border: _color(context, tokens?.border || ['500', '400']),
+    bg: _color(context, tokens?.bg || ['white', 'black']),
+    bg2: _color(context, tokens?.bg2 || ['50', '950']),
+    fg: _color(context, tokens?.fg || ['black', 'white']),
+    border: _color(context, tokens?.border || ['200', '900']),
     placeholder: _color(context, tokens?.placeholder || ['500', '400']),
   }
 }

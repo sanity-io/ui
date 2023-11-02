@@ -8,8 +8,8 @@ export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {
   const color = palette[$tone] || palette.default
 
   return {
-    backgroundColor: color.enabled.bg,
-    color: color.enabled.fg,
+    backgroundColor: color.enabled.bg2,
+    '--card-fg-color': color.enabled.fg,
     boxShadow: `inset 0 0 0 1px ${color.enabled.border}`,
     cursor: 'default',
 

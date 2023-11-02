@@ -55,9 +55,9 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       }
     }
     &:checked + span {
-      background: ${color.default.enabled.bg2};
+      background: ${color.default.enabled.fg};
       box-shadow: ${focusRingBorderStyle({
-        color: color.default.enabled.bg2,
+        color: color.default.enabled.fg,
         width: input.border.width,
       })};
       color: ${color.default.enabled.bg};

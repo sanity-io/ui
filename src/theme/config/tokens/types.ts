@@ -1,6 +1,5 @@
-import {ColorButtonMode, ColorHueValue, ColorTintValue} from '../../system'
+import {ColorBlendModeValue, ColorButtonMode, ColorHueValue, ColorTintValue} from '../../system'
 import {
-  ColorBlendModeValue,
   ColorConfigBaseKey,
   ColorConfigBaseTone,
   ColorConfigBlendKey,

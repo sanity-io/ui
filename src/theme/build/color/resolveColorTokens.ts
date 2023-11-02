@@ -30,13 +30,10 @@ import {
 export function resolveColorTokens(sparseTokens: ColorTokens): ColorTokens {
   const denseTokens: ColorTokens = {...sparseTokens}
 
-  // button
   denseTokens.base = resolveBaseColorTokens(sparseTokens)
   denseTokens.button = resolveButtonColorTokens(sparseTokens)
   denseTokens.card = resolveCardColorTokens(sparseTokens)
   denseTokens.input = resolveInputColorTokens(sparseTokens)
-  // denseTokens.spot = resolveSpotColorTokens(sparseTokens)
-  // denseTokens.syntax = resolveSyntaxColorTokens(sparseTokens)
 
   return denseTokens
 }
@@ -113,8 +110,8 @@ function resolveButtonStateColorTokens(
 ): StateColorTokens {
   const spec0 = tokens?.button?.[mode]?.[tone]?.[state]
   const spec1 = tokens?.button?.[mode]?.['*']?.[state]
-  const spec2 = tokens?.button?.[mode]?.['*']?.['*']
-  const spec3 = tokens?.button?.[mode]?.[tone]?.['*']
+  const spec2 = tokens?.button?.[mode]?.[tone]?.['*']
+  const spec3 = tokens?.button?.[mode]?.['*']?.['*']
 
   const hue = spec0?._hue || spec1?._hue || spec2?._hue || spec3?._hue || tokens?.base?.[tone]?._hue
 

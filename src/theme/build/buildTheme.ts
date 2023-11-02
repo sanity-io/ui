@@ -6,9 +6,11 @@ import {defaultThemeFonts} from './defaults/fonts'
 
 /** @internal */
 export function buildTheme(config?: ThemeConfig): RootTheme {
+  const colorTheme = buildColorTheme(config)
+
   return {
     ...defaultThemeConfig,
-    color: renderColorTheme(buildColorTheme(config), config),
+    color: renderColorTheme(colorTheme, config),
     fonts: defaultThemeFonts,
   }
 }

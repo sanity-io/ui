@@ -1,3 +1,4 @@
+export * from './_legacy/color'
 export * from './build'
 export * from './config'
 export * from './helpers'

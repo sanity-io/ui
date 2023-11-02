@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {icons} from '@sanity/icons'
 import {ThemeFontKey, studioTheme} from '../src/theme'
-import {fonts} from '../src/theme/build/defaults/fonts'
 
 export const getAlignControls = () => {
   return {
@@ -79,7 +78,7 @@ export const getIconControls = () => {
 }
 
 export const getFontSizeControls = (themeFontKey: ThemeFontKey) => {
-  const numSizes = fonts[themeFontKey].sizes.length
+  const numSizes = studioTheme.fonts[themeFontKey].sizes.length
 
   return {
     control: {type: 'number', min: 0, max: numSizes - 1},

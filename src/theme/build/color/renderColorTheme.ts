@@ -1,5 +1,7 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
+import {ColorThemePalette, ThemeConfig, parseTokenValue} from '../../config'
 import {rgba} from '../../lib/color-fns'
+import {ColorBlendModeValue} from '../../system'
 import {
   ThemeColor,
   ThemeColorButton,
@@ -14,7 +16,6 @@ import {
   ThemeColorSpot,
   ThemeColorSyntax,
 } from '../../types'
-import {ColorBlendModeValue, parseTokenValue, ThemeConfig, ColorThemePalette} from '../../config'
 import {multiply, screen} from '../helpers'
 import {defaultColorPalette} from './defaults/colorPalette'
 
@@ -67,10 +68,11 @@ function renderColorBase(
   const _blend = value._blend || 'multiply'
   const nestedBg = renderColorValue(colorPalette, bg, _blend, value.base.bg)
   const button = renderButtonColorTheme(colorPalette, nestedBg, _blend, value.button)
+  const _bg = _blend === 'multiply' ? '#ffffff' : '#000000'
 
   return {
+    ...value,
     _blend,
-    dark: value.dark,
     base: {
       bg: nestedBg,
       fg: renderColorValue(colorPalette, nestedBg, _blend, value.base.fg),
@@ -78,9 +80,9 @@ function renderColorBase(
       focusRing: renderColorValue(colorPalette, nestedBg, _blend, value.base.focusRing),
       shadow: {
         outline: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.outline),
-        umbra: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.umbra),
-        penumbra: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.penumbra),
-        ambient: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.ambient),
+        umbra: renderColorValue(colorPalette, _bg, _blend, value.base.shadow.umbra),
+        penumbra: renderColorValue(colorPalette, _bg, _blend, value.base.shadow.penumbra),
+        ambient: renderColorValue(colorPalette, _bg, _blend, value.base.shadow.ambient),
       },
       skeleton: value.base.skeleton && {
         from: renderColorValue(colorPalette, nestedBg, _blend, value.base.skeleton?.from),
@@ -185,6 +187,10 @@ function renderStateColorTheme(
       bg: renderColorValue(colorPalette, bg, blendMode, value.code.bg),
       fg: renderColorValue(colorPalette, bg, blendMode, value.code.fg),
     },
+    skeleton: value.skeleton && {
+      from: renderColorValue(colorPalette, bg, blendMode, value.skeleton?.from),
+      to: renderColorValue(colorPalette, bg, blendMode, value.skeleton?.to),
+    },
   }
 
   return {
@@ -206,6 +212,10 @@ function renderStateColorTheme(
     code: {
       bg: blend(baseBg, unmixed.code.bg),
       fg: blend(baseBg, unmixed.code.fg),
+    },
+    skeleton: unmixed.skeleton && {
+      from: blend(baseBg, unmixed.skeleton.from),
+      to: blend(baseBg, unmixed.skeleton.to),
     },
   }
 }
@@ -243,13 +253,24 @@ function renderInputStateColorTheme(
   value: ThemeColorInputState,
 ): ThemeColorInputState {
   const _blend = value._blend || 'multiply'
+  const blend = _rootBlendMode === 'multiply' ? multiply : screen
+
+  const bg = renderColorValue(colorPalette, baseBg, _blend, value.bg)
+
+  const unmixed = {
+    bg,
+    bg2: renderColorValue(colorPalette, bg, _blend, value.bg2),
+    fg: renderColorValue(colorPalette, bg, _blend, value.fg),
+    border: renderColorValue(colorPalette, bg, _blend, value.border),
+    placeholder: renderColorValue(colorPalette, bg, _blend, value.placeholder),
+  }
 
   return {
-    bg: renderColorValue(colorPalette, baseBg, _blend, value.bg),
-    bg2: renderColorValue(colorPalette, baseBg, _blend, value.bg2),
-    fg: renderColorValue(colorPalette, baseBg, _blend, value.fg),
-    border: renderColorValue(colorPalette, baseBg, _blend, value.border),
-    placeholder: renderColorValue(colorPalette, baseBg, _blend, value.placeholder),
+    bg: value.bg === 'black' || value.bg === 'white' ? baseBg : bg,
+    bg2: blend(baseBg, unmixed.bg2),
+    fg: blend(baseBg, unmixed.fg),
+    border: blend(baseBg, unmixed.border),
+    placeholder: blend(baseBg, unmixed.placeholder),
   }
 }
 
