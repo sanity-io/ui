@@ -1,3 +1,4 @@
+import path from 'path'
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
 
@@ -13,9 +14,7 @@ Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
 export default defineConfig({
-  alias: {
-    '@sanity/ui': typeof __dirname !== 'undefined' ? __dirname + '/src' : '',
-  },
+  alias: _getAlias(),
   collections: [
     {
       name: 'components',
@@ -37,3 +36,11 @@ export default defineConfig({
   plugins: [perfPlugin()],
   title: '@sanity/ui',
 })
+
+function _getAlias() {
+  if (typeof window !== 'undefined') return undefined
+
+  return {
+    '@sanity/ui': path.resolve(__dirname, 'src'),
+  }
+}
