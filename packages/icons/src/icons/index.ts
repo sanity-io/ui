@@ -24,6 +24,7 @@ import {BlockContentIcon} from './blockContentIcon'
 import {BlockElementIcon} from './blockElementIcon'
 import {BlockquoteIcon} from './blockquoteIcon'
 import {BoldIcon} from './boldIcon'
+import {BoltIcon} from './boltIcon'
 import {BookIcon} from './bookIcon'
 import {BottleIcon} from './bottleIcon'
 import {BulbFilledIcon} from './bulbFilledIcon'
@@ -223,6 +224,7 @@ export type IconSymbol =
   | 'block-element'
   | 'blockquote'
   | 'bold'
+  | 'bolt'
   | 'book'
   | 'bottle'
   | 'bulb-filled'
@@ -419,6 +421,7 @@ export {
   BlockElementIcon,
   BlockquoteIcon,
   BoldIcon,
+  BoltIcon,
   BookIcon,
   BottleIcon,
   BulbFilledIcon,
@@ -619,6 +622,7 @@ export interface IconMap {
   'block-element': IconComponent
   blockquote: IconComponent
   bold: IconComponent
+  bolt: IconComponent
   book: IconComponent
   bottle: IconComponent
   'bulb-filled': IconComponent
@@ -819,6 +823,7 @@ export const icons: IconMap = {
   'block-element': BlockElementIcon,
   blockquote: BlockquoteIcon,
   bold: BoldIcon,
+  bolt: BoltIcon,
   book: BookIcon,
   bottle: BottleIcon,
   'bulb-filled': BulbFilledIcon,
