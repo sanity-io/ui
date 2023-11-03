@@ -103,8 +103,8 @@ export default function AsyncStory() {
           />
         </LayerProvider>
 
-        <Card border overflow="auto" padding={3} radius={1}>
-          <Code language="json" size={[1, 1, 2]}>
+        <Card overflow="auto" padding={3} radius={2} tone="transparent">
+          <Code language="json" size={1}>
             {JSON.stringify({loading, options, query, value}, null, 2)}
           </Code>
         </Card>

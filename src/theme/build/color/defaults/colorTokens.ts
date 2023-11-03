@@ -9,10 +9,10 @@ export const defaultColorTokens: ColorTokens = {
       border: ['200', '900'],
       focusRing: ['cyan/500', 'cyan/500'],
       shadow: {
-        outline: ['500/0.2', '400/0.3'],
-        umbra: ['500/0.1', 'black/0.2'],
-        penumbra: ['500/0.07', 'black/0.14'],
-        ambient: ['500/0.06', 'black/0.12'],
+        outline: ['gray/500/0.5', '400/0.5'],
+        umbra: ['gray/500/0.1', 'black/0.2'],
+        penumbra: ['gray/500/0.07', 'black/0.14'],
+        ambient: ['gray/500/0.06', 'black/0.12'],
       },
       skeleton: {
         from: ['100', '900'],
@@ -28,7 +28,7 @@ export const defaultColorTokens: ColorTokens = {
       fg: ['black', '200'],
     },
     primary: {
-      _hue: 'purple',
+      _hue: 'cyan',
     },
     positive: {
       _hue: 'cyan',
@@ -61,7 +61,7 @@ export const defaultColorTokens: ColorTokens = {
             fg: ['200', '700'],
           },
           accent: {
-            fg: ['purple/200', '700'],
+            fg: ['purple/200', 'purple/700'],
           },
           link: {
             fg: ['cyan/200', 'cyan/700'],
@@ -98,10 +98,52 @@ export const defaultColorTokens: ColorTokens = {
           bg: ['black', '100'],
         },
         pressed: {
-          bg: ['900', '200'],
+          bg: ['black', '200'],
         },
         selected: {
           bg: ['black', '200'],
+        },
+      },
+      primary: {
+        '*': {
+          bg: ['600', '400'],
+        },
+        hovered: {
+          bg: ['700', '300'],
+        },
+        pressed: {
+          bg: ['800', '200'],
+        },
+        selected: {
+          bg: ['800', '200'],
+        },
+      },
+      positive: {
+        '*': {
+          bg: ['600', '400'],
+        },
+        hovered: {
+          bg: ['700', '300'],
+        },
+        pressed: {
+          bg: ['800', '200'],
+        },
+        selected: {
+          bg: ['800', '200'],
+        },
+      },
+      caution: {
+        '*': {
+          bg: ['600', '400'],
+        },
+        hovered: {
+          bg: ['700', '300'],
+        },
+        pressed: {
+          bg: ['800', '200'],
+        },
+        selected: {
+          bg: ['800', '200'],
         },
       },
     },
@@ -112,9 +154,9 @@ export const defaultColorTokens: ColorTokens = {
           bg: ['white', 'black'],
           bg2: ['50', '950'],
           fg: ['600', '400'],
-          border: ['200', '900'],
+          border: ['300', '800'],
           muted: {
-            fg: ['600/0.6', '400/0.6'],
+            fg: ['700/0.6', '400/0.6'],
           },
           accent: {
             fg: ['purple/600', 'purple/300'],
@@ -147,11 +189,40 @@ export const defaultColorTokens: ColorTokens = {
           _hue: 'gray',
           fg: ['200', '900'],
           border: ['100', '950'],
+          muted: {
+            fg: ['200/0.6', '900/0.6'],
+          },
+          accent: {
+            fg: ['200/0.6', '900/0.6'],
+          },
+          link: {
+            fg: ['200/0.6', '900/0.6'],
+          },
+          code: {
+            bg: ['50/0.5', '950/0.5'],
+            fg: ['200/0.6', '900/0.6'],
+          },
         },
       },
       default: {
         selected: {
-          _hue: 'purple',
+          _hue: 'cyan',
+          border: ['400', '800'],
+        },
+      },
+      primary: {
+        '*': {
+          border: ['400', '800'],
+        },
+      },
+      positive: {
+        '*': {
+          border: ['400', '800'],
+        },
+      },
+      caution: {
+        '*': {
+          border: ['400', '800'],
         },
       },
     },
@@ -196,11 +267,14 @@ export const defaultColorTokens: ColorTokens = {
         disabled: {
           _hue: 'gray',
           fg: ['200', '900'],
+          muted: {
+            fg: ['200/0.6', '900/0.6'],
+          },
         },
       },
       default: {
         selected: {
-          _hue: 'purple',
+          _hue: 'cyan',
         },
       },
     },
@@ -216,14 +290,14 @@ export const defaultColorTokens: ColorTokens = {
         fg: ['gray/600', 'gray/400'],
       },
       accent: {
-        fg: ['purple/600', '300'],
+        fg: ['purple/600', 'purple/300'],
       },
       link: {
         fg: ['cyan/600', 'cyan/300'],
       },
       code: {
         bg: ['50', '950'],
-        fg: ['600', '400'],
+        fg: ['gray/600', 'gray/400'],
       },
       skeleton: {
         from: ['100', '900'],
@@ -237,9 +311,8 @@ export const defaultColorTokens: ColorTokens = {
       bg: ['100', '900'],
     },
     selected: {
-      _hue: 'purple',
-      // _blend: ['screen', 'multiply'],
-      bg: ['50', '950'],
+      // _hue: 'cyan',
+      bg: ['100', '900'],
       bg2: ['50', '950'],
       fg: ['black', 'white'],
       border: ['200', '900'],
@@ -266,7 +339,7 @@ export const defaultColorTokens: ColorTokens = {
         bg: ['white', 'black'],
         bg2: ['50', '950'],
         fg: ['black', '200'],
-        border: ['200', '900'],
+        border: ['300', '800'],
         placeholder: ['400', '600/0.5'],
       },
 

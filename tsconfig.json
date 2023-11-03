@@ -2,6 +2,7 @@
   "extends": "./tsconfig.settings",
   "include": [
     "./.storybook",
+    "./figma",
     "./package.config.ts",
     "./scripts",
     "./src",
@@ -18,6 +19,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@sanity/ui": ["./src"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
   }
 }

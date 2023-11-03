@@ -1,0 +1,16 @@
+{
+  "name": "Sanity UI Ops",
+  "id": "1299019429550896990",
+  "api": "1.0.0",
+  "main": "./dist/index.js",
+  "capabilities": [],
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": [
+      "https://static.figma.com",
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com"
+    ]
+  },
+  "ui": "ui.html"
+}

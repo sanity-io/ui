@@ -12,7 +12,7 @@ function toBoxShadow(shadow: BoxShadow, color: string) {
 function shadowStyle(shadow: ThemeShadow | null): CSSObject {
   if (!shadow) return EMPTY_RECORD
 
-  const outline = `0 0 0 ${rem(1)} var(--card-shadow-outline-color)`
+  const outline = `0 0 0 ${rem(0.5)} var(--card-shadow-outline-color)`
   const umbra = toBoxShadow(shadow.umbra, 'var(--card-shadow-umbra-color)')
   const penumbra = toBoxShadow(shadow.penumbra, 'var(--card-shadow-penumbra-color)')
   const ambient = toBoxShadow(shadow.ambient, 'var(--card-shadow-ambient-color)')

@@ -49,6 +49,7 @@ const Root = styled.div`
 
 const BorderPath = styled.path`
   fill: var(--card-shadow-outline-color);
+  stroke-width: 0.5px;
 `
 
 const ShapePath = styled.path`

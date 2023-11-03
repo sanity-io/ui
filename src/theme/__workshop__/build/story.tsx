@@ -2,12 +2,6 @@
 
 import {ReactElement} from 'react'
 import {
-  ThemeColor,
-  ThemeColorButtonStates,
-  ThemeColorCard,
-  ThemeColorInputStates,
-} from '../../types'
-import {
   COLOR_BASE_TONES,
   COLOR_BUTTON_MODES,
   COLOR_INPUT_MODES,
@@ -17,6 +11,12 @@ import {
   ColorInputMode,
   ColorStateTone,
 } from '../../system'
+import {
+  ThemeColor,
+  ThemeColorButtonStates,
+  ThemeColorCard,
+  ThemeColorInputStates,
+} from '../../types'
 import {Root} from './Root'
 import {theme} from './theme'
 
@@ -91,7 +91,7 @@ function BaseTonePreview(props: {
           <div
             style={{
               boxShadow: [
-                `0 0 0 1px var(--shadow-outline)`,
+                `0 0 0 0.5px var(--shadow-outline)`,
                 `0 6px 8px -4px var(--shadow-umbra)`,
                 `0 12px 17px 2px var(--shadow-penumbra)`,
                 `0 5px 22px 4px var(--shadow-ambient)`,

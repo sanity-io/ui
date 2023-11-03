@@ -1,6 +1,12 @@
 import {defineConfig} from '@sanity/pkg-utils'
 
 export default defineConfig({
+  bundles: [
+    {
+      source: './figma/index.ts',
+      import: './dist/figma/index.mjs',
+    },
+  ],
   extract: {
     rules: {
       'ae-internal-missing-underscore': 'off',

@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="https://static.figma.com/api/figma-extension-api-0.0.1.css" />
+
+<style>
+  body {
+    background-color: var(--figma-color-bg);
+    color: var(--figma-color-text);
+  }
+
+  button {
+    max-width: none;
+  }
+
+  .fill-w {
+    width: stretch;
+    width: -webkit-fill-available;
+  }
+
+  .gap-2 {
+    gap: 0.5em;
+  }
+
+  .stack {
+    display: grid;
+    gap: 0.5em;
+    grid-template-columns: minmax(0px, 1fr);
+    grid-auto-rows: min-content;
+  }
+</style>
+
+<h2 hidden>Sanity UI Theme</h2>
+
+<div class="stack gap-2">
+  <!-- <button class="fill-w" id="variables-sync">Sync to Figma (1)</button> -->
+  <!-- <button class="fill-w" id="config-sync">Sync config to Figma</button> -->
+  <button class="fill-w" id="config-sync2">Sync config to Figma</button>
+  <!-- <button class="fill-w" id="overview-draw">Draw overview</button> -->
+  <button class="fill-w" id="config-import">Import config</button>
+</div>
+
+<script>
+  // document.getElementById('variables-sync').onclick = () => {
+  //   parent.postMessage({pluginMessage: {type: 'variables:sync'}}, '*')
+  // }
+
+  // document.getElementById('config-sync').onclick = () => {
+  //   parent.postMessage({pluginMessage: {type: 'config:sync'}}, '*')
+  // }
+
+  document.getElementById('config-sync2').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'config:sync2'}}, '*')
+  }
+
+  // document.getElementById('overview-draw').onclick = () => {
+  //   parent.postMessage({pluginMessage: {type: 'overview:draw'}}, '*')
+  // }
+
+  document.getElementById('config-import').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'config:import'}}, '*')
+  }
+</script>

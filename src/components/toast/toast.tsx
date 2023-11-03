@@ -59,7 +59,11 @@ export function Toast(
       <Flex align="flex-start">
         <TextBox flex={1} padding={3}>
           <Stack space={3}>
-            {title && <Text weight="semibold">{title}</Text>}
+            {title && (
+              <Text size={1} weight="semibold">
+                {title}
+              </Text>
+            )}
             {description && (
               <Text muted size={1}>
                 {description}

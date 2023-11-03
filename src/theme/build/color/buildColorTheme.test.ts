@@ -1,37 +1,39 @@
 import {ColorTokens} from '../../config'
-import {buildColorScheme} from './buildColorTheme'
+import {buildColorScheme, buildColorTheme} from './buildColorTheme'
 
 test('buildColorTheme: base', () => {
-  const tokens: ColorTokens = {
-    base: {
-      '*': {
-        bg: ['50', '900'],
-        fg: ['800', '200'],
-      },
-      transparent: {
-        bg: ['50', 'black'],
-      },
-      default: {
-        bg: ['white', '950'],
-        fg: ['black', '200'],
-      },
-      primary: {
-        _hue: 'purple',
-      },
-      positive: {
-        _hue: 'cyan',
-      },
-      caution: {
-        _hue: 'yellow',
-      },
-      critical: {
-        _hue: 'red',
+  const {light, dark} = buildColorTheme({
+    color: {
+      base: {
+        '*': {
+          bg: ['50', '900'],
+          fg: ['800', '200'],
+        },
+        transparent: {
+          bg: ['50', 'black'],
+        },
+        default: {
+          bg: ['white', '950'],
+          fg: ['black', '200'],
+        },
+        primary: {
+          _hue: 'purple',
+        },
+        positive: {
+          _hue: 'cyan',
+        },
+        caution: {
+          _hue: 'yellow',
+        },
+        critical: {
+          _hue: 'red',
+        },
       },
     },
-  }
+  })
 
-  const light = buildColorScheme({scheme: 'light'}, {color: tokens})
-  const dark = buildColorScheme({scheme: 'dark'}, {color: tokens})
+  // const light = buildColorScheme({scheme: 'light'}, {color: tokens})
+  // const dark = buildColorScheme({scheme: 'dark'}, {color: tokens})
 
   expect({
     light: {

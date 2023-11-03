@@ -31,8 +31,8 @@ export const Root = styled.div`
     background-color: var(--bg);
     color: var(--fg);
     box-shadow:
-      inset 0 0 0 1px var(--border),
-      0 1px 0 0 color-mix(in srgb, var(--border), transparent 75%);
+      inset 0 0 0 0.5px var(--border),
+      0 1.5px 0 0 color-mix(in srgb, var(--border), transparent 75%);
     text-align: center;
     border-radius: 3px;
     font-weight: 500;
@@ -56,7 +56,7 @@ export const Root = styled.div`
     &:focus-visible {
       outline: none;
       box-shadow:
-        inset 0 0 0 1px var(--border),
+        inset 0 0 0 0.5px var(--border),
         0 0 0 1px var(--base-bg),
         0 0 0 3px var(--focus-ring);
 
@@ -70,7 +70,7 @@ export const Root = styled.div`
     &:active {
       background-color: var(--button-pressed-bg);
       color: var(--button-pressed-fg);
-      box-shadow: inset 0 0 0 1px var(--border);
+      box-shadow: inset 0 0 0 0.5px var(--border);
       --border: var(--button-pressed-border);
       --bg2: var(--button-pressed-bg2);
       --muted-fg: var(--button-pressed-muted-fg);
@@ -79,7 +79,7 @@ export const Root = styled.div`
     &.selected {
       background-color: var(--button-selected-bg);
       color: var(--button-selected-fg);
-      box-shadow: inset 0 0 0 1px var(--border);
+      box-shadow: inset 0 0 0 0.5px var(--border);
       --border: var(--button-selected-border);
       --bg2: var(--button-selected-bg2);
       --muted-fg: var(--button-selected-muted-fg);
@@ -88,7 +88,7 @@ export const Root = styled.div`
     &.disabled {
       background-color: var(--button-disabled-bg);
       color: var(--button-disabled-fg);
-      box-shadow: inset 0 0 0 1px var(--border);
+      box-shadow: inset 0 0 0 0.5px var(--border);
       --border: var(--button-disabled-border);
       --bg2: var(--button-disabled-bg2);
       --muted-fg: var(--button-disabled-muted-fg);
@@ -165,7 +165,7 @@ export const Root = styled.div`
     background-color: var(--bg);
     color: var(--fg);
     padding: 12px;
-    box-shadow: inset 0 0 0 1px var(--border);
+    box-shadow: inset 0 0 0 0.5px var(--border);
     font-size: 16px;
     line-height: 11px;
     /* text-align: center; */

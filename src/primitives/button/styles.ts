@@ -47,8 +47,7 @@ export function buttonBaseStyles({$width}: {$width?: ButtonWidth}): ReturnType<t
   `
 }
 
-const buttonTheme = {border: {width: 1}}
-const defaultBoxShadow = '0px 2px 0px 0px rgba(112, 128, 155, 0.19);'
+const buttonTheme = {border: {width: 0.5}}
 
 function combineBoxShadow(...boxShadows: (string | undefined)[]): string {
   return boxShadows.filter(Boolean).join(',')
@@ -62,11 +61,15 @@ export function buttonColorStyles(
 ): CSSObject[] {
   const {$mode, theme} = props
   const {focusRing} = theme.sanity.button
-  const shadow = props.$mode !== 'bleed'
+  const shadow = props.$mode === 'ghost'
   const base = theme.sanity.color.base
   const mode = theme.sanity.color.button[$mode] || theme.sanity.color.button.default
   const color = mode[props.$tone] || mode.default
-  const border = {width: buttonTheme.border.width, color: 'var(--card-border-color)'}
+  const border = {
+    width: buttonTheme.border.width,
+    color: 'var(--card-border-color)',
+  }
+  const defaultBoxShadow = `inset 0px -1.5px 0px ${buttonTheme.border.width}px color-mix(in srgb, var(--card-border-color) 25%, var(--card-bg-color))`
 
   return [
     _colorVarsStyle(base, color.enabled),
