@@ -309,10 +309,12 @@ const DialogCard = forwardRef(function DialogCard(
             <DialogHeader
               $isContentScrollable={isContentScrollable}
               $hasScrolledFromTop={hasScrolledFromTop}
-              padding={3}
+              paddingLeft={4}
+              paddingRight={3}
+              paddingY={3}
             >
               <Flex align="center">
-                <Box flex={1} padding={3}>
+                <Box flex={1}>
                   {header && (
                     <Text id={labelId} size={1} weight="medium">
                       {header}
