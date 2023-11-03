@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.0](https://github.com/sanity-io/icons/compare/v2.6.0...v2.7.0) (2023-11-03)
+
+### Features
+
+- add `bolt` icon ([900d68c](https://github.com/sanity-io/icons/commit/900d68cf5af8d76ed97973b5466267937f877057))
+
+### Bug Fixes
+
+- update icons ([916faba](https://github.com/sanity-io/icons/commit/916fabab8cb170ab3525e7c56f4ab0eefc637be4))
+
 ## [2.6.0](https://github.com/sanity-io/icons/compare/v2.5.0...v2.6.0) (2023-10-18)
 
 ### Features
