@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.15](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.14...v2.0.0-alpha.15) (2023-11-03)
+
+### Bug Fixes
+
+- simplify dialog header padding ([a358ded](https://github.com/sanity-io/ui/commit/a358ded15cf6efc8a1f6e381b2e508bc50891853))
+
 ## [2.0.0-alpha.14](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.13...v2.0.0-alpha.14) (2023-11-01)
 
 ### Features
