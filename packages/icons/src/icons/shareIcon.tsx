@@ -21,17 +21,12 @@ export const ShareIcon = forwardRef(function ShareIcon(
       {...props}
     >
       <path
-        d="M15 9.5H18.5V19.5H6.5L6.5 9.5H10M12.5 16V3.5"
+        d="M15 10.5H18.5V19.5H6.5L6.5 10.5H10M12.5 16V3.5"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"
       />
-      <path
-        d="M9.5 6.5L12.5 3.5L15.5 6.5"
-        stroke="currentColor"
-        strokeWidth={1.2}
-        strokeLinejoin="round"
-      />
+      <path d="M9 7L12.5 3.5L16 7" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
 })

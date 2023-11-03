@@ -21,12 +21,12 @@ export const LaunchIcon = forwardRef(function LaunchIcon(
       {...props}
     >
       <path
-        d="M14 6.5H5.5V19.5H18.5V11M20.5 4.5L10.5 14.5"
+        d="M12 7.5H6.5V18.5H17.5V13M19.5 5.5L10.5 14.5"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"
       />
-      <path d="M16 4.5H20.5V9" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
+      <path d="M14 5.5H19.5V11" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
 })
