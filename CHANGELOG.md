@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.16](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.15...v2.0.0-alpha.16) (2023-11-03)
+
+### Bug Fixes
+
+- revert dialog padding, include margins, add hidden close button story ([84ba800](https://github.com/sanity-io/ui/commit/84ba800772e1470de4c0cd853260c41f836878c8))
+
 ## [2.0.0-alpha.15](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.14...v2.0.0-alpha.15) (2023-11-03)
 
 ### Bug Fixes
