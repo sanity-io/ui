@@ -17,7 +17,7 @@ const meta: Meta<typeof Dialog> = {
   args: {
     __unstable_autoFocus: false,
     children: (
-      <Box padding={4}>
+      <Box marginX={1} padding={4}>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
           hendrerit scelerisque ut libero. Maecenas iaculis efficitur lorem, ac faucibus mi
@@ -33,7 +33,7 @@ const meta: Meta<typeof Dialog> = {
       </Box>
     ),
     footer: (
-      <Card padding={4}>
+      <Card margin={1} padding={4}>
         <Inline>
           <Text size={1} weight="medium">
             Dialog footer
@@ -89,6 +89,15 @@ export default meta
 type Story = StoryObj<typeof Dialog>
 
 export const Default: Story = {
+  render: (props) => {
+    return <Dialog {...props} />
+  },
+}
+
+export const WithoutClose: Story = {
+  args: {
+    __unstable_hideCloseButton: true,
+  },
   render: (props) => {
     return <Dialog {...props} />
   },
