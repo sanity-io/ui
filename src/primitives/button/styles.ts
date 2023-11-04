@@ -29,6 +29,7 @@ export function buttonBaseStyles({$width}: {$width?: ButtonWidth}): ReturnType<t
 
     ${$width === 'fill' &&
     css`
+      width: -moz-available;
       width: -webkit-fill-available;
       width: stretch;
     `}
