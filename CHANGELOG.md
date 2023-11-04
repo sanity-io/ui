@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.17](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.16...v2.0.0-alpha.17) (2023-11-04)
+
+### Bug Fixes
+
+- add stretch fallbacks on card + selectable button styles, add mozilla fallback ([c59c560](https://github.com/sanity-io/ui/commit/c59c560fc56d5b34f649ccdc04df970d0edf520a))
+
 ## [2.0.0-alpha.16](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.15...v2.0.0-alpha.16) (2023-11-03)
 
 ### Bug Fixes
