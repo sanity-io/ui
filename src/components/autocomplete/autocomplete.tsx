@@ -60,6 +60,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   onSelect?: (value: string) => void
   /** @beta */
   openButton?: boolean | AutocompleteOpenButtonProps
+  /** The options to render. */
   options?: Option[]
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'> &
@@ -68,6 +69,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   radius?: Radius | Radius[]
   /** @beta */
   relatedElements?: HTMLElement[]
+  /** The callback function for rendering each option. */
   renderOption?: (option: Option) => ReactElement
   /** @beta */
   renderPopover?: (
@@ -82,6 +84,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   ) => ReactNode
   renderValue?: (value: string, option?: Option) => string
   suffix?: ReactNode
+  /** The current value. */
   value?: string
 }
 
@@ -684,6 +687,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 })
 
 /**
+ * The Autocomplete component is typically used for search components.
+ * It consists of a text input for writing a query, and properties for rendering suggestions.
+ *
  * @public
  */
 export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(

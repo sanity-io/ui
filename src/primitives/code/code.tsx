@@ -11,6 +11,7 @@ import {codeBaseStyle} from './styles'
  */
 export interface CodeProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  /** Define the language to use for syntax highlighting. */
   language?: string
   size?: number | number[]
   weight?: string

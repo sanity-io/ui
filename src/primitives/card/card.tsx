@@ -48,6 +48,9 @@ const Root = styled(Box)<
 >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
 /**
+ * The `Card` component acts much like a `Box`, but with a background and foreground color.
+ * Components within a `Card` inherit its colors.
+ *
  * @public
  */
 export const Card = forwardRef(function Card(

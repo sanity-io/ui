@@ -10,12 +10,15 @@ import {ResponsiveInlineSpaceStyleProps} from './types'
  * @public
  */
 export interface InlineProps extends Omit<BoxProps, 'display'> {
+  /** The spacing between children. */
   space?: number | number[]
 }
 
 const Root = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
 
 /**
+ * The `Inline` component is a layout utility for aligning and spacing items horizontally.
+ *
  * @public
  */
 export const Inline = forwardRef(function Inline(

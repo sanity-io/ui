@@ -55,6 +55,7 @@ export interface ResponsiveFlexProps {
  * @public
  */
 export interface ResponsiveFlexItemProps {
+  /** Sets the flex CSS attribute. The property is responsive. */
   flex?: FlexValue | FlexValue[]
 }
 
@@ -88,8 +89,11 @@ export interface ResponsiveGridItemProps {
  * @public
  */
 export interface ResponsiveMarginProps {
+  /** Applies margins to all sides. The property is responsive. */
   margin?: number | number[]
+  /** Applies margins to the left and right sides. The property is responsive. */
   marginX?: number | number[]
+  /** Applies margins to the top and bottom sides. The property is responsive. */
   marginY?: number | number[]
   marginTop?: number | number[]
   marginRight?: number | number[]

@@ -48,6 +48,9 @@ const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresenta
 )
 
 /**
+ * A multiline text input.
+ *
+
  * @public
  */
 export const TextArea = forwardRef(function TextArea(

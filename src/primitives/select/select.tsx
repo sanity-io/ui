@@ -30,6 +30,8 @@ const Input = styled.select<{
 const IconBox = styled(Box)(selectStyle.iconBox)
 
 /**
+ * The `Select` component provides control of options.
+ *
  * @public
  */
 export const Select = forwardRef(function Select(

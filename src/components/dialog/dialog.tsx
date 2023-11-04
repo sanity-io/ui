@@ -352,6 +352,8 @@ const DialogCard = forwardRef(function DialogCard(
 })
 
 /**
+ * The Dialog component.
+ *
  * @public
  */
 export const Dialog = forwardRef(function Dialog(

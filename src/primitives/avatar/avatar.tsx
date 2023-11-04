@@ -41,6 +41,8 @@ const Stroke = styled.ellipse(avatarStyle.stroke)
 const Initials = styled.div(avatarStyle.initials)
 
 /**
+ * Avatars are used to represent people and other agents (e.g. bots).
+ *
  * @public
  */
 export const Avatar = forwardRef(function Avatar(

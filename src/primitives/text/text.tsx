@@ -17,6 +17,7 @@ export interface TextProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  /** When `true` the text color will be muted. */
   muted?: boolean
   size?: number | number[]
   /**
@@ -43,6 +44,8 @@ const SpanWithTextOverflow = styled.span`
 `
 
 /**
+ * The `Text` component is an agile, themed typographic element.
+ *
  * @public
  */
 export const Text = forwardRef(function Text(

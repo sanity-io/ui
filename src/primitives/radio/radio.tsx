@@ -14,6 +14,8 @@ const Root = styled.div(radioBaseStyle)
 const Input = styled.input(inputElementStyle)
 
 /**
+ * The `Radio` component allows the user to select one option from a set.
+ *
  * @public
  */
 export const Radio = forwardRef(function Radio(

@@ -30,6 +30,8 @@ function kbdStyle() {
 const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
 
 /**
+ * Used to define some text as keyboard input.
+ *
  * @public
  */
 export const KBD = forwardRef(function KBD(
