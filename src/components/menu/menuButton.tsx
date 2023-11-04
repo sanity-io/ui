@@ -47,6 +47,8 @@ export interface MenuButtonProps {
 }
 
 /**
+ * The `MenuButton` component follows the WAI-ARIA specification for menu buttons.
+ *
  * @public
  */
 export const MenuButton = forwardRef(function MenuButton(

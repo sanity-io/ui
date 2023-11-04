@@ -26,6 +26,8 @@ const Root = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
 )
 
 /**
+ * The `Flex` component is a wrapper component for flexible elements (`Box`, `Card` and `Flex`).
+ *
  * @public
  */
 export const Flex = forwardRef(function Flex(

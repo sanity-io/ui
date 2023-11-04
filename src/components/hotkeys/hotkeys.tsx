@@ -29,6 +29,8 @@ const Key = styled(KBD)`
 `
 
 /**
+ * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
+ *
  * @public
  */
 export const Hotkeys = forwardRef(function Hotkeys(

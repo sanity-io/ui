@@ -13,6 +13,8 @@ export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProp
 const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 
 /**
+ * The `Grid` component is for building 2-dimensional layers (based on CSS grid).
+ *
  * @public
  */
 export const Grid = forwardRef(function Grid(

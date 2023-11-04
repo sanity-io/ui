@@ -28,6 +28,8 @@ const Root = styled(Text)`
 `
 
 /**
+ * Indicate that something is loading for an indeterminate amount of time.
+ *
  * @public
  */
 export const Spinner = forwardRef(function Spinner(

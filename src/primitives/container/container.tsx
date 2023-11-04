@@ -17,6 +17,8 @@ const Root = styled(Box)<ResponsiveWidthStyleProps>(
 )
 
 /**
+ * The `Container` component wraps content layout in a defined set of widths.
+ *
  * @public
  */
 export const Container = forwardRef(function Container(

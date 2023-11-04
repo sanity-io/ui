@@ -37,6 +37,10 @@ const TextBox = styled(Flex)`
 `
 
 /**
+ * The `Toast` component gives feedback to users when an action has taken place.
+ *
+ * Toasts can be closed with a close button, or auto-dismiss after a certain timeout.
+ *
  * @public
  */
 export function Toast(

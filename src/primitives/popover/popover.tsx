@@ -59,6 +59,7 @@ export interface PopoverProps
   overflow?: BoxOverflow
   padding?: number | number[]
   placement?: Placement
+  /** Whether or not to render the popover in a portal element. */
   portal?: boolean | string
   preventOverflow?: boolean
   referenceBoundary?: HTMLElement | null
@@ -72,7 +73,11 @@ export interface PopoverProps
   width?: PopoverWidth | PopoverWidth[]
 }
 
-/** @public */
+/**
+ * The `Popover` component is used to display some content on top of another.
+ *
+ * @public
+ */
 export const Popover = memo(
   forwardRef(function Popover(
     props: PopoverProps &

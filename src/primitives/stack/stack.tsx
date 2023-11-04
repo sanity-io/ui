@@ -15,6 +15,8 @@ export interface StackProps extends BoxProps {
 const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
 
 /**
+ * The `Stack` component is used to place elements on top of each other.
+ *
  * @public
  */
 export const Stack = forwardRef(function Stack(

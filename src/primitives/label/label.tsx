@@ -40,6 +40,8 @@ const SpanWithTextOverflow = styled.span`
 `
 
 /**
+ * Typographic labels.
+ *
  * @public
  */
 export const Label = forwardRef(function Label(

@@ -16,6 +16,8 @@ const Root = styled.div(checkboxBaseStyles)
 const Input = styled.input(inputElementStyles)
 
 /**
+ * Checkboxes allow the user to select one or more items from a set.
+ *
  * @public
  */
 export const Checkbox = forwardRef(function Checkbox(

@@ -140,6 +140,8 @@ const TextInputClearButton = styled(Button)({
 })
 
 /**
+ * Single line text input.
+ *
  * @public
  */
 export const TextInput = forwardRef(function TextInput(

@@ -23,6 +23,10 @@ const Track = styled.span(switchTrackStyles)
 const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
 
 /**
+ * The `Switch` component allows the user to toggle a setting on and off.
+ *
+ * Extends all properties of an `<input type="checkbox" />` element, except type.
+ *
  * @public
  */
 export const Switch = forwardRef(function Switch(

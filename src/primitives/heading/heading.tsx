@@ -43,6 +43,8 @@ const SpanWithTextOverflow = styled.span`
 `
 
 /**
+ * Typographic headings.
+ *
  * @public
  */
 export const Heading = forwardRef(function Heading(

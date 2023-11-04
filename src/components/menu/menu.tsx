@@ -35,6 +35,8 @@ const Root = styled(Box)`
 `
 
 /**
+ * The `Menu` component is a building block for application menus.
+ *
  * @public
  */
 export const Menu = forwardRef(function Menu(

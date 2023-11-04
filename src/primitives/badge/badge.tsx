@@ -25,6 +25,8 @@ const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
 )
 
 /**
+ * Badges are used to tag resources.
+ *
  * @public
  */
 export const Badge = forwardRef(function Badge(

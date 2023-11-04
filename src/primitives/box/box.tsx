@@ -51,6 +51,9 @@ const Root = styled.div<
 )
 
 /**
+ * The `Box` component is a basic layout wrapper component which provides utility properties
+ * for flex, margins and padding.
+ *
  * @public
  */
 export const Box = forwardRef(function Box(

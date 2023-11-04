@@ -48,6 +48,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   fallbackPlacements?: Placement[]
   padding?: number | number[]
   placement?: Placement
+  /** Whether or not to render the tooltip in a portal element. */
   portal?: boolean | string
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
@@ -66,6 +67,8 @@ const Root = styled(Layer)`
 `
 
 /**
+ * Tooltips display information when hovering, focusing or tapping.
+ *
  * @public
  */
 export const Tooltip = forwardRef(function Tooltip(
