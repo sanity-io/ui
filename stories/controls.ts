@@ -53,6 +53,15 @@ export const getFlexAlignControls = () => {
   }
 }
 
+export const getFontSizeControls = (themeFontKey: ThemeFontKey) => {
+  const numSizes = fonts[themeFontKey].sizes.length
+
+  return {
+    control: {type: 'number', min: 0, max: numSizes - 1},
+    options: [...Array(numSizes).keys()],
+  }
+}
+
 export const getHeightControls = () => {
   return {
     control: {type: 'radio'},
@@ -75,15 +84,6 @@ export const getIconControls = () => {
       ...icons,
     },
     options: ['(none)', ...Object.keys(icons)],
-  }
-}
-
-export const getFontSizeControls = (themeFontKey: ThemeFontKey) => {
-  const numSizes = fonts[themeFontKey].sizes.length
-
-  return {
-    control: {type: 'number', min: 0, max: numSizes - 1},
-    options: [...Array(numSizes).keys()],
   }
 }
 
