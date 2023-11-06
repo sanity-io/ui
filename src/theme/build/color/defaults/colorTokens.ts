@@ -9,7 +9,7 @@ export const defaultColorTokens: ColorTokens = {
       border: ['200', '900'],
       focusRing: ['cyan/500', 'cyan/500'],
       shadow: {
-        outline: ['500/0.2', '400/0.25'],
+        outline: ['500/0.2', '500/0.2'],
         umbra: ['gray/500/0.1', 'black/0.1'],
         penumbra: ['gray/500/0.07', 'black/0.07'],
         ambient: ['gray/500/0.06', 'black/0.06'],

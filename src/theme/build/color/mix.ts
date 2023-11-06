@@ -7,15 +7,10 @@ export function mix(
     bg?: string
     blendMode: 'multiply' | 'screen'
     black: string
-    scheme: 'light' | 'dark'
     white: string
   },
 ): string {
-  const {
-    blendMode,
-    // scheme
-  } = options
-  // const dark = scheme === 'dark'
+  const {blendMode} = options
 
   const color = parseColor(value)
   const black = parseColor(options.black)
@@ -24,9 +19,6 @@ export function mix(
   const bg = options.bg ? parseColor(options.bg) : blendMode === 'multiply' ? white : black
 
   const _range: {r: [number, number]; g: [number, number]; b: [number, number]} = {
-    // r: dark ? [bg.r, white.r] : [black.r, bg.r],
-    // g: dark ? [bg.g, white.g] : [black.g, bg.g],
-    // b: dark ? [bg.b, white.b] : [black.b, bg.b],
     r: [black.r, white.r],
     g: [black.g, white.g],
     b: [black.b, white.b],

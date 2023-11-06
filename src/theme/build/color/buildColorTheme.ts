@@ -23,7 +23,7 @@ import {
   ThemeColorSpot,
   ThemeColorSyntax,
 } from '../../types'
-import {ColorTokenContext, resolveColorTokenValue as _color} from '../helpers'
+import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
 import {defaultColorTokens} from './defaults/colorTokens'
 import {resolveColorTokens} from './resolveColorTokens'
 

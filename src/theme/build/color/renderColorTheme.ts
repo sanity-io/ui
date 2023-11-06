@@ -26,15 +26,14 @@ export function renderThemeColorSchemes(
   const colorPalette = config?.palette ?? defaultColorPalette
 
   return {
-    light: renderThemeColorScheme(colorPalette, value.light, 'light'),
-    dark: renderThemeColorScheme(colorPalette, value.dark, 'dark'),
+    light: renderThemeColorScheme(colorPalette, value.light),
+    dark: renderThemeColorScheme(colorPalette, value.dark),
   }
 }
 
 function renderThemeColorScheme(
   colorPalette: ColorThemePalette,
   value: ThemeColorScheme,
-  scheme: 'light' | 'dark',
 ): ThemeColorScheme {
   const toneEntries = Object.entries(value) as [ThemeColorToneKey, ThemeColor][]
 
@@ -44,8 +43,8 @@ function renderThemeColorScheme(
   // The `transparent` and `default` tones are special cases, so we render them first
   // (rendered without a `bg` option).
   // But the rest of the tones are rendered on top of the `default` tone's `bg`.
-  const renderedTransparentTone = renderThemeColor(transparentTone, {colorPalette, scheme})
-  const renderedDefaultTone = renderThemeColor(defaultTone, {colorPalette, scheme})
+  const renderedTransparentTone = renderThemeColor(transparentTone, {colorPalette})
+  const renderedDefaultTone = renderThemeColor(defaultTone, {colorPalette})
 
   // Get the `default` tone's `bg` property
   const bg = renderedDefaultTone.base.bg
@@ -55,7 +54,7 @@ function renderThemeColorScheme(
     ['default', renderedDefaultTone],
     ...toneEntries
       .filter(([k]) => k !== 'default' && k !== 'transparent')
-      .map(([k, v]) => [k, renderThemeColor(v, {bg, colorPalette, scheme})]),
+      .map(([k, v]) => [k, renderThemeColor(v, {bg, colorPalette})]),
   ]) as ThemeColorScheme
 }
 
@@ -64,26 +63,15 @@ function renderThemeColor(
   options: {
     bg?: string
     colorPalette: ColorThemePalette
-    scheme: 'light' | 'dark'
   },
 ): ThemeColor {
-  const {colorPalette, bg, scheme} = options
+  const {colorPalette, bg} = options
 
   const blendMode = value._blend || 'multiply'
 
-  const baseBg = renderColorValue(value.base.bg, {
-    colorPalette,
-    baseBg: bg,
-    blendMode: blendMode,
-    scheme,
-  })
+  const baseBg = renderColorValue(value.base.bg, {colorPalette, bg, blendMode})
 
-  const colorOptions: RenderColorValueOptions = {
-    colorPalette,
-    baseBg,
-    blendMode,
-    scheme,
-  }
+  const colorOptions: RenderColorValueOptions = {colorPalette, bg: baseBg, blendMode}
 
   const base: ThemeColorBase = {
     bg: baseBg,
@@ -94,14 +82,17 @@ function renderThemeColor(
       outline: renderColorValue(value.base.shadow.outline, colorOptions),
       umbra: renderColorValue(value.base.shadow.umbra, {
         ...colorOptions,
+        bg: undefined,
         colorPalette: {...colorPalette, black: '#000000'},
       }),
       penumbra: renderColorValue(value.base.shadow.penumbra, {
         ...colorOptions,
+        bg: undefined,
         colorPalette: {...colorPalette, black: '#000000'},
       }),
       ambient: renderColorValue(value.base.shadow.ambient, {
         ...colorOptions,
+        bg: undefined,
         colorPalette: {...colorPalette, black: '#000000'},
       }),
     },
@@ -111,17 +102,17 @@ function renderThemeColor(
     },
   }
 
-  const button = renderThemeColorButton(value.button, {colorPalette, base, blendMode, scheme})
+  const button = renderThemeColorButton(value.button, {colorPalette, base, blendMode})
 
   return {
     ...value,
     _blend: blendMode,
     base,
     button,
-    card: renderThemeColorButtonStates(value.card, {base, colorPalette, blendMode, scheme}),
-    input: renderThemeColorInput(value.input, {base, colorPalette, blendMode, scheme}),
-    spot: renderSpotColorTheme(value.spot, {base, colorPalette, blendMode, scheme}),
-    syntax: renderSyntaxColorTheme(value.syntax, {base, colorPalette, blendMode, scheme}),
+    card: renderThemeColorButtonStates(value.card, {base, colorPalette, blendMode}),
+    input: renderThemeColorInput(value.input, {base, colorPalette, blendMode}),
+    spot: renderSpotColorTheme(value.spot, {base, colorPalette, blendMode}),
+    syntax: renderSyntaxColorTheme(value.syntax, {base, colorPalette, blendMode}),
     solid: {
       ...button.default,
       transparent: button.default.default,
@@ -135,12 +126,7 @@ function renderThemeColor(
 
 function renderThemeColorButton(
   value: ThemeColorButton,
-  options: {
-    colorPalette: ColorThemePalette
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorButton {
   return {
     default: renderThemeColorButtonTones(value.default, options),
@@ -151,12 +137,7 @@ function renderThemeColorButton(
 
 function renderThemeColorButtonTones(
   value: ThemeColorButtonTones,
-  options: {
-    colorPalette: ColorThemePalette
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorButtonTones {
   return {
     default: renderThemeColorButtonStates(value.default, options),
@@ -169,12 +150,7 @@ function renderThemeColorButtonTones(
 
 function renderThemeColorButtonStates(
   value: ThemeColorButtonStates,
-  options: {
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    colorPalette: ColorThemePalette
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorButtonStates {
   return {
     enabled: renderThemeColorGenericState(value.enabled, options),
@@ -187,31 +163,16 @@ function renderThemeColorButtonStates(
 
 function renderThemeColorGenericState(
   value: ThemeColorGenericState,
-  options: {
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    colorPalette: ColorThemePalette
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorGenericState {
-  const {base, blendMode: rootBlendMode, colorPalette, scheme} = options
+  const {base, blendMode: rootBlendMode, colorPalette} = options
   const blendMode = value._blend || 'multiply'
 
-  const rootOptions: RenderColorValueOptions = {
-    colorPalette,
-    baseBg: base.bg,
-    blendMode: rootBlendMode,
-    scheme,
-  }
+  const rootOptions: RenderColorValueOptions = {colorPalette, bg: base.bg, blendMode: rootBlendMode}
 
   const bg = renderColorValue(value.bg, rootOptions)
 
-  const colorOptions: RenderColorValueOptions = {
-    colorPalette,
-    baseBg: bg,
-    blendMode,
-    scheme,
-  }
+  const colorOptions: RenderColorValueOptions = {colorPalette, bg, blendMode}
 
   return {
     _blend: blendMode,
@@ -242,12 +203,7 @@ function renderThemeColorGenericState(
 
 function renderThemeColorInput(
   value: ThemeColorInput,
-  options: {
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    colorPalette: ColorThemePalette
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorInput {
   return {
     default: renderInputStatesColorTheme(value.default, options),
@@ -257,12 +213,7 @@ function renderThemeColorInput(
 
 function renderInputStatesColorTheme(
   value: ThemeColorInputStates,
-  options: {
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    colorPalette: ColorThemePalette
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorInputStates {
   return {
     enabled: renderInputStateColorTheme(value.enabled, options),
@@ -274,32 +225,17 @@ function renderInputStatesColorTheme(
 
 function renderInputStateColorTheme(
   value: ThemeColorInputState,
-  options: {
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    colorPalette: ColorThemePalette
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorInputState {
-  const {colorPalette, base, blendMode: rootBlendMode, scheme} = options
+  const {colorPalette, base, blendMode: rootBlendMode} = options
 
   const blendMode = value._blend || 'multiply'
 
-  const rootOptions: RenderColorValueOptions = {
-    colorPalette,
-    baseBg: base.bg,
-    blendMode: rootBlendMode,
-    scheme,
-  }
+  const rootOptions: RenderColorValueOptions = {colorPalette, bg: base.bg, blendMode: rootBlendMode}
 
   const bg = renderColorValue(value.bg, rootOptions)
 
-  const colorOptions: RenderColorValueOptions = {
-    colorPalette,
-    baseBg: bg,
-    blendMode,
-    scheme,
-  }
+  const colorOptions: RenderColorValueOptions = {colorPalette, bg, blendMode}
 
   return {
     _blend: blendMode,
@@ -313,16 +249,11 @@ function renderInputStateColorTheme(
 
 function renderSpotColorTheme(
   value: ThemeColorSpot,
-  options: {
-    colorPalette: ColorThemePalette
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorSpot {
-  const {colorPalette, base, blendMode, scheme} = options
+  const {colorPalette, base, blendMode} = options
 
-  const colorOptions: RenderColorValueOptions = {colorPalette, baseBg: base.bg, blendMode, scheme}
+  const colorOptions: RenderColorValueOptions = {colorPalette, bg: base.bg, blendMode}
 
   return {
     gray: renderColorValue(value.gray, colorOptions),
@@ -339,16 +270,11 @@ function renderSpotColorTheme(
 
 function renderSyntaxColorTheme(
   value: ThemeColorSyntax,
-  options: {
-    colorPalette: ColorThemePalette
-    base: ThemeColorBase
-    blendMode: ColorBlendModeValue
-    scheme: 'light' | 'dark'
-  },
+  options: {base: ThemeColorBase; blendMode: ColorBlendModeValue; colorPalette: ColorThemePalette},
 ): ThemeColorSyntax {
-  const {colorPalette, base, blendMode, scheme} = options
+  const {colorPalette, base, blendMode} = options
 
-  const colorOptions: RenderColorValueOptions = {colorPalette, baseBg: base.bg, blendMode, scheme}
+  const colorOptions: RenderColorValueOptions = {colorPalette, bg: base.bg, blendMode}
 
   return {
     atrule: renderColorValue(value.atrule, colorOptions),

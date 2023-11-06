@@ -5,14 +5,13 @@ import {ColorBlendModeValue} from '../../system'
 import {mix} from './mix'
 
 export interface RenderColorValueOptions {
-  colorPalette: ColorThemePalette
-  baseBg?: string
+  bg?: string
   blendMode: ColorBlendModeValue
-  scheme: 'light' | 'dark'
+  colorPalette: ColorThemePalette
 }
 
 export function renderColorValue(str: string, options: RenderColorValueOptions): string {
-  const {colorPalette, baseBg: bg, blendMode, scheme} = options
+  const {bg, blendMode, colorPalette} = options
 
   const node = parseTokenValue(str)
 
@@ -45,7 +44,6 @@ export function renderColorValue(str: string, options: RenderColorValueOptions):
       blendMode,
       bg,
       black: renderColorHex(colorPalette.black),
-      scheme,
       white: renderColorHex(colorPalette.white),
     })
   } catch (err) {
