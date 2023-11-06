@@ -1,5 +1,5 @@
-import {ThemeColorName, ThemeColorSchemeKey} from './types'
 import {ThemeProvider} from './themeProvider'
+import {ThemeColorName, ThemeColorSchemeKey} from './types'
 import {useRootTheme} from './useRootTheme'
 
 /**
