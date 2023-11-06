@@ -26,7 +26,7 @@ function Root(props: {config: WorkshopConfig}) {
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>(prefersDark ? 'dark' : 'light')
 
   return (
-    <ThemeProvider scheme={scheme} theme={studioTheme}>
+    <ThemeProvider scheme={scheme} theme={config.theme || studioTheme}>
       <GlobalStyle />
       <WorkshopFrame config={config} setScheme={setScheme} />
     </ThemeProvider>

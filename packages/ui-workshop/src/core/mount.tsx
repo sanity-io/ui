@@ -32,7 +32,7 @@ function Root(props: {config: WorkshopConfig}) {
   }, [prefersDark])
 
   return (
-    <ThemeProvider scheme={scheme} theme={studioTheme}>
+    <ThemeProvider scheme={scheme} theme={config.theme || studioTheme}>
       <GlobalStyle />
       <Workshop
         config={config}
