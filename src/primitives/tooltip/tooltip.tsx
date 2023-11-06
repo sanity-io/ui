@@ -177,23 +177,27 @@ export const Tooltip = forwardRef(function Tooltip(
   const closeDelay = isInsideGroup ? delayGroupContext.closeDelay : closeDelayProp
 
   const handleIsOpenChange = useCallback(
-    (open: boolean) => {
+    (open: boolean, immediate?: boolean) => {
       if (isInsideGroup) {
         //  When it's inside a group, the open or close status will be handled by the group.
         if (open) {
-          delayGroupContext.setIsGroupActive(open, openDelay)
-          delayGroupContext.setOpenTooltipId(tooltipId, openDelay)
+          const groupedOpenDelay = immediate ? 0 : openDelay
+
+          delayGroupContext.setIsGroupActive(open, groupedOpenDelay)
+          delayGroupContext.setOpenTooltipId(tooltipId, groupedOpenDelay)
         } else {
           const minimumGroupDeactivateDelay = 200 // We should provide some delay to allow the user to reach the next tooltip.
           const groupDeactivateDelay =
             closeDelay > minimumGroupDeactivateDelay ? closeDelay : minimumGroupDeactivateDelay
 
           delayGroupContext.setIsGroupActive(open, groupDeactivateDelay)
-          delayGroupContext.setOpenTooltipId(null, closeDelay)
+          delayGroupContext.setOpenTooltipId(null, immediate ? 0 : closeDelay)
         }
       } else {
+        const standaloneDelay = immediate ? 0 : open ? openDelay : closeDelay
+
         // When it's not inside a group, the open or close status will be handled by the tooltip itself.
-        setIsOpen(open, open ? openDelay : closeDelay)
+        setIsOpen(open, standaloneDelay)
       }
     },
     [isInsideGroup, delayGroupContext, openDelay, tooltipId, closeDelay, setIsOpen],
@@ -243,6 +247,22 @@ export const Tooltip = forwardRef(function Tooltip(
   // Update reference
   useEffect(() => refs.setReference(referenceElement), [referenceElement, refs])
 
+  useEffect(() => {
+    // If the user clicks on escape key, close the tooltip.
+    if (!showTooltip) return
+
+    function handleWindowKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        handleIsOpenChange(false, true)
+      }
+    }
+
+    window.addEventListener('keydown', handleWindowKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleWindowKeyDown)
+    }
+  }, [handleIsOpenChange, showTooltip])
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
       arrowRef.current = arrowEl
