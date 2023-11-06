@@ -359,8 +359,9 @@ export const defaultColorTokens: ColorTokens = {
       },
 
       readOnly: {
+        border: ['200/0', '900/0'],
         bg: ['50', '950'],
-        fg: ['600', '400'],
+        fg: ['900/0.7', '200/0.7'],
       },
 
       disabled: {
@@ -372,7 +373,12 @@ export const defaultColorTokens: ColorTokens = {
       '*': {
         _hue: 'red',
         bg: ['50', '950'],
-        fg: ['800', '200'],
+        // fg: ['800', '200'],
+        // border: ['200', '900'],
+      },
+
+      readOnly: {
+        // bg: ['100', '900'],
       },
     },
   },

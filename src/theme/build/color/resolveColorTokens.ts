@@ -191,8 +191,8 @@ function resolveInputStateColorTokens(
 ): InputStateColorTokens {
   const spec0 = tokens?.input?.[mode]?.[state]
   const spec1 = tokens?.input?.['*']?.[state]
-  const spec2 = tokens?.input?.['*']?.['*']
-  const spec3 = tokens?.input?.[mode]?.['*']
+  const spec2 = tokens?.input?.[mode]?.['*']
+  const spec3 = tokens?.input?.['*']?.['*']
 
   const hue =
     spec0?._hue || spec1?._hue || spec2?._hue || spec3?._hue || tokens?.input?.[mode]?._hue
