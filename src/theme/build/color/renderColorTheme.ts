@@ -1,9 +1,8 @@
-import {ColorTint as ColorPaletteValue} from '@sanity/color'
-import {ColorThemePalette, ThemeConfig, parseTokenValue} from '../../config'
-import {rgba} from '../../lib/color-fns'
+import {ColorThemePalette, ThemeConfig} from '../../config'
 import {ColorBlendModeValue} from '../../system'
 import {
   ThemeColor,
+  ThemeColorBase,
   ThemeColorButton,
   ThemeColorButtonStates,
   ThemeColorButtonTones,
@@ -15,85 +14,114 @@ import {
   ThemeColorSchemes,
   ThemeColorSpot,
   ThemeColorSyntax,
+  ThemeColorToneKey,
 } from '../../types'
-import {multiply, screen} from '../helpers'
 import {defaultColorPalette} from './defaults/colorPalette'
+import {RenderColorValueOptions, renderColorValue} from './renderColorValue'
 
-export function renderColorTheme(
+export function renderThemeColorSchemes(
   value: ThemeColorSchemes,
   config?: ThemeConfig,
 ): ThemeColorSchemes {
   const colorPalette = config?.palette ?? defaultColorPalette
 
   return {
-    light: renderColorScheme(colorPalette, value.light),
-    dark: renderColorScheme(colorPalette, value.dark),
+    light: renderThemeColorScheme(colorPalette, value.light, 'light'),
+    dark: renderThemeColorScheme(colorPalette, value.dark, 'dark'),
   }
 }
 
-function renderColorScheme(
+function renderThemeColorScheme(
   colorPalette: ColorThemePalette,
   value: ThemeColorScheme,
+  scheme: 'light' | 'dark',
 ): ThemeColorScheme {
-  const toneEntries = Object.entries(value)
+  const toneEntries = Object.entries(value) as [ThemeColorToneKey, ThemeColor][]
+
   const [, transparentTone] = toneEntries.find(([k]) => k === 'transparent')!
   const [, defaultTone] = toneEntries.find(([k]) => k === 'default')!
 
-  const renderedTransparentTone = renderColorBase(
-    colorPalette,
-    transparentTone,
-    transparentTone._blend === 'multiply' ? '#ffffff' : '#000000',
-  )
+  // The `transparent` and `default` tones are special cases, so we render them first
+  // (rendered without a `bg` option).
+  // But the rest of the tones are rendered on top of the `default` tone's `bg`.
+  const renderedTransparentTone = renderThemeColor(transparentTone, {colorPalette, scheme})
+  const renderedDefaultTone = renderThemeColor(defaultTone, {colorPalette, scheme})
 
-  const renderedDefaultTone = renderColorBase(
-    colorPalette,
-    defaultTone,
-    defaultTone._blend === 'multiply' ? '#ffffff' : '#000000',
-  )
+  // Get the `default` tone's `bg` property
+  const bg = renderedDefaultTone.base.bg
 
   return Object.fromEntries([
     ['transparent', renderedTransparentTone],
     ['default', renderedDefaultTone],
     ...toneEntries
       .filter(([k]) => k !== 'default' && k !== 'transparent')
-      .map(([k, v]) => [k, renderColorBase(colorPalette, v, renderedDefaultTone.base.bg)]),
+      .map(([k, v]) => [k, renderThemeColor(v, {bg, colorPalette, scheme})]),
   ]) as ThemeColorScheme
 }
 
-function renderColorBase(
-  colorPalette: ColorThemePalette,
+function renderThemeColor(
   value: ThemeColor,
-  bg: string,
+  options: {
+    bg?: string
+    colorPalette: ColorThemePalette
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColor {
-  const _blend = value._blend || 'multiply'
-  const nestedBg = renderColorValue(colorPalette, bg, _blend, value.base.bg)
-  const button = renderButtonColorTheme(colorPalette, nestedBg, _blend, value.button)
-  const _bg = _blend === 'multiply' ? '#ffffff' : '#000000'
+  const {colorPalette, bg, scheme} = options
+
+  const blendMode = value._blend || 'multiply'
+
+  const baseBg = renderColorValue(value.base.bg, {
+    colorPalette,
+    baseBg: bg,
+    blendMode: blendMode,
+    scheme,
+  })
+
+  const colorOptions: RenderColorValueOptions = {
+    colorPalette,
+    baseBg,
+    blendMode,
+    scheme,
+  }
+
+  const base: ThemeColorBase = {
+    bg: baseBg,
+    fg: renderColorValue(value.base.fg, colorOptions),
+    border: renderColorValue(value.base.border, colorOptions),
+    focusRing: renderColorValue(value.base.focusRing, colorOptions),
+    shadow: {
+      outline: renderColorValue(value.base.shadow.outline, colorOptions),
+      umbra: renderColorValue(value.base.shadow.umbra, {
+        ...colorOptions,
+        colorPalette: {...colorPalette, black: '#000000'},
+      }),
+      penumbra: renderColorValue(value.base.shadow.penumbra, {
+        ...colorOptions,
+        colorPalette: {...colorPalette, black: '#000000'},
+      }),
+      ambient: renderColorValue(value.base.shadow.ambient, {
+        ...colorOptions,
+        colorPalette: {...colorPalette, black: '#000000'},
+      }),
+    },
+    skeleton: value.base.skeleton && {
+      from: renderColorValue(value.base.skeleton?.from, colorOptions),
+      to: renderColorValue(value.base.skeleton?.to, colorOptions),
+    },
+  }
+
+  const button = renderThemeColorButton(value.button, {colorPalette, base, blendMode, scheme})
 
   return {
     ...value,
-    _blend,
-    base: {
-      bg: nestedBg,
-      fg: renderColorValue(colorPalette, nestedBg, _blend, value.base.fg),
-      border: renderColorValue(colorPalette, nestedBg, _blend, value.base.border),
-      focusRing: renderColorValue(colorPalette, nestedBg, _blend, value.base.focusRing),
-      shadow: {
-        outline: renderColorValue(colorPalette, nestedBg, _blend, value.base.shadow.outline),
-        umbra: renderColorValue(colorPalette, _bg, _blend, value.base.shadow.umbra),
-        penumbra: renderColorValue(colorPalette, _bg, _blend, value.base.shadow.penumbra),
-        ambient: renderColorValue(colorPalette, _bg, _blend, value.base.shadow.ambient),
-      },
-      skeleton: value.base.skeleton && {
-        from: renderColorValue(colorPalette, nestedBg, _blend, value.base.skeleton?.from),
-        to: renderColorValue(colorPalette, nestedBg, _blend, value.base.skeleton?.to),
-      },
-    },
+    _blend: blendMode,
+    base,
     button,
-    card: renderStatesColorTheme(colorPalette, nestedBg, _blend, value.card),
-    input: renderInputColorTheme(colorPalette, nestedBg, _blend, value.input),
-    spot: renderSpotColorTheme(colorPalette, nestedBg, _blend, value.spot),
-    syntax: renderSyntaxColorTheme(colorPalette, nestedBg, _blend, value.syntax),
+    card: renderThemeColorButtonStates(value.card, {base, colorPalette, blendMode, scheme}),
+    input: renderThemeColorInput(value.input, {base, colorPalette, blendMode, scheme}),
+    spot: renderSpotColorTheme(value.spot, {base, colorPalette, blendMode, scheme}),
+    syntax: renderSyntaxColorTheme(value.syntax, {base, colorPalette, blendMode, scheme}),
     solid: {
       ...button.default,
       transparent: button.default.default,
@@ -105,289 +133,259 @@ function renderColorBase(
   }
 }
 
-function renderButtonColorTheme(
-  colorPalette: ColorThemePalette,
-  bg: string,
-  baseBlendMode: ColorBlendModeValue,
+function renderThemeColorButton(
   value: ThemeColorButton,
+  options: {
+    colorPalette: ColorThemePalette
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorButton {
   return {
-    default: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.default),
-    ghost: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.ghost),
-    bleed: renderButtonStateColorTheme(colorPalette, bg, baseBlendMode, value.bleed),
+    default: renderThemeColorButtonTones(value.default, options),
+    ghost: renderThemeColorButtonTones(value.ghost, options),
+    bleed: renderThemeColorButtonTones(value.bleed, options),
   }
 }
 
-function renderButtonStateColorTheme(
-  colorPalette: ColorThemePalette,
-  bg: string,
-  baseBlendMode: ColorBlendModeValue,
+function renderThemeColorButtonTones(
   value: ThemeColorButtonTones,
+  options: {
+    colorPalette: ColorThemePalette
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorButtonTones {
   return {
-    default: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.default),
-    primary: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.primary),
-    positive: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.positive),
-    caution: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.caution),
-    critical: renderStatesColorTheme(colorPalette, bg, baseBlendMode, value.critical),
+    default: renderThemeColorButtonStates(value.default, options),
+    primary: renderThemeColorButtonStates(value.primary, options),
+    positive: renderThemeColorButtonStates(value.positive, options),
+    caution: renderThemeColorButtonStates(value.caution, options),
+    critical: renderThemeColorButtonStates(value.critical, options),
   }
 }
 
-function renderStatesColorTheme(
-  colorPalette: ColorThemePalette,
-  bg: string,
-  baseBlendMode: ColorBlendModeValue,
+function renderThemeColorButtonStates(
   value: ThemeColorButtonStates,
+  options: {
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    colorPalette: ColorThemePalette
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorButtonStates {
   return {
-    enabled: renderStateColorTheme(colorPalette, bg, baseBlendMode, value.enabled),
-    hovered: renderStateColorTheme(colorPalette, bg, baseBlendMode, value.hovered),
-    pressed: renderStateColorTheme(colorPalette, bg, baseBlendMode, value.pressed),
-    selected: renderStateColorTheme(colorPalette, bg, baseBlendMode, value.selected),
-    disabled: renderStateColorTheme(colorPalette, bg, baseBlendMode, value.disabled),
+    enabled: renderThemeColorGenericState(value.enabled, options),
+    hovered: renderThemeColorGenericState(value.hovered, options),
+    pressed: renderThemeColorGenericState(value.pressed, options),
+    selected: renderThemeColorGenericState(value.selected, options),
+    disabled: renderThemeColorGenericState(value.disabled, options),
   }
 }
 
-function renderStateColorTheme(
-  colorPalette: ColorThemePalette,
-  baseBg: string,
-  rootBlendMode: ColorBlendModeValue,
+function renderThemeColorGenericState(
   value: ThemeColorGenericState,
+  options: {
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    colorPalette: ColorThemePalette
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorGenericState {
+  const {base, blendMode: rootBlendMode, colorPalette, scheme} = options
   const blendMode = value._blend || 'multiply'
 
-  const bg =
-    rootBlendMode === 'multiply' && value.bg === 'white'
-      ? '#ffffff'
-      : rootBlendMode === 'screen' && value.bg === 'black'
-      ? '#000000'
-      : renderColorValue(
-          colorPalette,
-          rootBlendMode === 'multiply' ? '#ffffff' : '#000000',
-          rootBlendMode,
-          value.bg,
-        )
+  const rootOptions: RenderColorValueOptions = {
+    colorPalette,
+    baseBg: base.bg,
+    blendMode: rootBlendMode,
+    scheme,
+  }
 
-  const blend = rootBlendMode === 'multiply' ? multiply : screen
+  const bg = renderColorValue(value.bg, rootOptions)
 
-  const unmixed = {
-    bg2: renderColorValue(colorPalette, bg, blendMode, value.bg2 || value.bg),
-    fg: renderColorValue(colorPalette, bg, blendMode, value.fg),
-    border: renderColorValue(colorPalette, bg, blendMode, value.border),
-    muted: {
-      fg: renderColorValue(colorPalette, bg, blendMode, value.muted.fg),
-    },
-    accent: {
-      fg: renderColorValue(colorPalette, bg, blendMode, value.accent.fg),
-    },
-    link: {
-      fg: renderColorValue(colorPalette, bg, blendMode, value.link.fg),
-    },
-    code: {
-      bg: renderColorValue(colorPalette, bg, blendMode, value.code.bg),
-      fg: renderColorValue(colorPalette, bg, blendMode, value.code.fg),
-    },
-    skeleton: value.skeleton && {
-      from: renderColorValue(colorPalette, bg, blendMode, value.skeleton?.from),
-      to: renderColorValue(colorPalette, bg, blendMode, value.skeleton?.to),
-    },
+  const colorOptions: RenderColorValueOptions = {
+    colorPalette,
+    baseBg: bg,
+    blendMode,
+    scheme,
   }
 
   return {
     _blend: blendMode,
-    bg: blend(baseBg, bg),
-    bg2: blend(baseBg, unmixed.bg2),
-    fg: blend(baseBg, unmixed.fg),
-    border: blend(baseBg, unmixed.border),
-    iconColor: blend(baseBg, unmixed.fg),
+    bg,
+    bg2: renderColorValue(value.bg2 || value.bg, colorOptions),
+    fg: renderColorValue(value.fg, colorOptions),
+    border: renderColorValue(value.border, colorOptions),
+    icon: renderColorValue(value.icon, colorOptions),
     muted: {
-      fg: blend(baseBg, unmixed.muted.fg),
+      fg: renderColorValue(value.muted.fg, colorOptions),
     },
     accent: {
-      fg: blend(baseBg, unmixed.accent.fg),
+      fg: renderColorValue(value.accent.fg, colorOptions),
     },
     link: {
-      fg: blend(baseBg, unmixed.link.fg),
+      fg: renderColorValue(value.link.fg, colorOptions),
     },
     code: {
-      bg: blend(baseBg, unmixed.code.bg),
-      fg: blend(baseBg, unmixed.code.fg),
+      bg: renderColorValue(value.code.bg, colorOptions),
+      fg: renderColorValue(value.code.fg, colorOptions),
     },
-    skeleton: unmixed.skeleton && {
-      from: blend(baseBg, unmixed.skeleton.from),
-      to: blend(baseBg, unmixed.skeleton.to),
+    skeleton: value.skeleton && {
+      from: renderColorValue(value.skeleton?.from, colorOptions),
+      to: renderColorValue(value.skeleton?.to, colorOptions),
     },
   }
 }
 
-function renderInputColorTheme(
-  colorPalette: ColorThemePalette,
-  baseBg: string,
-  rootBlendMode: ColorBlendModeValue,
+function renderThemeColorInput(
   value: ThemeColorInput,
+  options: {
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    colorPalette: ColorThemePalette
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorInput {
   return {
-    default: renderInputStatesColorTheme(colorPalette, baseBg, rootBlendMode, value.default),
-    invalid: renderInputStatesColorTheme(colorPalette, baseBg, rootBlendMode, value.invalid),
+    default: renderInputStatesColorTheme(value.default, options),
+    invalid: renderInputStatesColorTheme(value.invalid, options),
   }
 }
 
 function renderInputStatesColorTheme(
-  colorPalette: ColorThemePalette,
-  baseBg: string,
-  rootBlendMode: ColorBlendModeValue,
   value: ThemeColorInputStates,
+  options: {
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    colorPalette: ColorThemePalette
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorInputStates {
   return {
-    enabled: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.enabled),
-    hovered: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.hovered),
-    readOnly: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.readOnly),
-    disabled: renderInputStateColorTheme(colorPalette, baseBg, rootBlendMode, value.disabled),
+    enabled: renderInputStateColorTheme(value.enabled, options),
+    hovered: renderInputStateColorTheme(value.hovered, options),
+    readOnly: renderInputStateColorTheme(value.readOnly, options),
+    disabled: renderInputStateColorTheme(value.disabled, options),
   }
 }
 
 function renderInputStateColorTheme(
-  colorPalette: ColorThemePalette,
-  baseBg: string,
-  _rootBlendMode: ColorBlendModeValue,
   value: ThemeColorInputState,
+  options: {
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    colorPalette: ColorThemePalette
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorInputState {
-  const _blend = value._blend || 'multiply'
-  const blend = _rootBlendMode === 'multiply' ? multiply : screen
+  const {colorPalette, base, blendMode: rootBlendMode, scheme} = options
 
-  const bg = renderColorValue(colorPalette, baseBg, _blend, value.bg)
+  const blendMode = value._blend || 'multiply'
 
-  const unmixed = {
-    bg,
-    bg2: renderColorValue(colorPalette, bg, _blend, value.bg2),
-    fg: renderColorValue(colorPalette, bg, _blend, value.fg),
-    border: renderColorValue(colorPalette, bg, _blend, value.border),
-    placeholder: renderColorValue(colorPalette, bg, _blend, value.placeholder),
+  const rootOptions: RenderColorValueOptions = {
+    colorPalette,
+    baseBg: base.bg,
+    blendMode: rootBlendMode,
+    scheme,
+  }
+
+  const bg = renderColorValue(value.bg, rootOptions)
+
+  const colorOptions: RenderColorValueOptions = {
+    colorPalette,
+    baseBg: bg,
+    blendMode,
+    scheme,
   }
 
   return {
-    bg: value.bg === 'black' || value.bg === 'white' ? baseBg : bg,
-    bg2: blend(baseBg, unmixed.bg2),
-    fg: blend(baseBg, unmixed.fg),
-    border: blend(baseBg, unmixed.border),
-    placeholder: blend(baseBg, unmixed.placeholder),
+    _blend: blendMode,
+    bg,
+    bg2: renderColorValue(value.bg2, colorOptions),
+    fg: renderColorValue(value.fg, colorOptions),
+    border: renderColorValue(value.border, colorOptions),
+    placeholder: renderColorValue(value.placeholder, colorOptions),
   }
 }
 
 function renderSpotColorTheme(
-  colorPalette: ColorThemePalette,
-  baseBg: string,
-  _rootBlendMode: ColorBlendModeValue,
   value: ThemeColorSpot,
+  options: {
+    colorPalette: ColorThemePalette
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorSpot {
-  const _blend = _rootBlendMode // value._blend || 'multiply'
+  const {colorPalette, base, blendMode, scheme} = options
+
+  const colorOptions: RenderColorValueOptions = {colorPalette, baseBg: base.bg, blendMode, scheme}
 
   return {
-    gray: renderColorValue(colorPalette, baseBg, _blend, value.gray),
-    cyan: renderColorValue(colorPalette, baseBg, _blend, value.cyan),
-    blue: renderColorValue(colorPalette, baseBg, _blend, value.blue),
-    purple: renderColorValue(colorPalette, baseBg, _blend, value.purple),
-    magenta: renderColorValue(colorPalette, baseBg, _blend, value.magenta),
-    red: renderColorValue(colorPalette, baseBg, _blend, value.red),
-    orange: renderColorValue(colorPalette, baseBg, _blend, value.orange),
-    yellow: renderColorValue(colorPalette, baseBg, _blend, value.yellow),
-    green: renderColorValue(colorPalette, baseBg, _blend, value.green),
+    gray: renderColorValue(value.gray, colorOptions),
+    cyan: renderColorValue(value.cyan, colorOptions),
+    blue: renderColorValue(value.blue, colorOptions),
+    purple: renderColorValue(value.purple, colorOptions),
+    magenta: renderColorValue(value.magenta, colorOptions),
+    red: renderColorValue(value.red, colorOptions),
+    orange: renderColorValue(value.orange, colorOptions),
+    yellow: renderColorValue(value.yellow, colorOptions),
+    green: renderColorValue(value.green, colorOptions),
   }
 }
 
 function renderSyntaxColorTheme(
-  colorPalette: ColorThemePalette,
-  baseBg: string,
-  _rootBlendMode: ColorBlendModeValue,
   value: ThemeColorSyntax,
+  options: {
+    colorPalette: ColorThemePalette
+    base: ThemeColorBase
+    blendMode: ColorBlendModeValue
+    scheme: 'light' | 'dark'
+  },
 ): ThemeColorSyntax {
-  const _blend = _rootBlendMode // value._blend || 'multiply'
+  const {colorPalette, base, blendMode, scheme} = options
+
+  const colorOptions: RenderColorValueOptions = {colorPalette, baseBg: base.bg, blendMode, scheme}
 
   return {
-    atrule: renderColorValue(colorPalette, baseBg, _blend, value.atrule),
-    attrName: renderColorValue(colorPalette, baseBg, _blend, value.attrName),
-    attrValue: renderColorValue(colorPalette, baseBg, _blend, value.attrValue),
-    attribute: renderColorValue(colorPalette, baseBg, _blend, value.attribute),
-    boolean: renderColorValue(colorPalette, baseBg, _blend, value.boolean),
-    builtin: renderColorValue(colorPalette, baseBg, _blend, value.builtin),
-    cdata: renderColorValue(colorPalette, baseBg, _blend, value.cdata),
-    char: renderColorValue(colorPalette, baseBg, _blend, value.char),
-    class: renderColorValue(colorPalette, baseBg, _blend, value.class),
-    className: renderColorValue(colorPalette, baseBg, _blend, value.className),
-    comment: renderColorValue(colorPalette, baseBg, _blend, value.comment),
-    constant: renderColorValue(colorPalette, baseBg, _blend, value.constant),
-    deleted: renderColorValue(colorPalette, baseBg, _blend, value.deleted),
-    doctype: renderColorValue(colorPalette, baseBg, _blend, value.doctype),
-    entity: renderColorValue(colorPalette, baseBg, _blend, value.entity),
-    function: renderColorValue(colorPalette, baseBg, _blend, value.function),
-    hexcode: renderColorValue(colorPalette, baseBg, _blend, value.hexcode),
-    id: renderColorValue(colorPalette, baseBg, _blend, value.id),
-    important: renderColorValue(colorPalette, baseBg, _blend, value.important),
-    inserted: renderColorValue(colorPalette, baseBg, _blend, value.inserted),
-    keyword: renderColorValue(colorPalette, baseBg, _blend, value.keyword),
-    number: renderColorValue(colorPalette, baseBg, _blend, value.number),
-    operator: renderColorValue(colorPalette, baseBg, _blend, value.operator),
-    prolog: renderColorValue(colorPalette, baseBg, _blend, value.prolog),
-    property: renderColorValue(colorPalette, baseBg, _blend, value.property),
-    pseudoClass: renderColorValue(colorPalette, baseBg, _blend, value.pseudoClass),
-    pseudoElement: renderColorValue(colorPalette, baseBg, _blend, value.pseudoElement),
-    punctuation: renderColorValue(colorPalette, baseBg, _blend, value.punctuation),
-    regex: renderColorValue(colorPalette, baseBg, _blend, value.regex),
-    selector: renderColorValue(colorPalette, baseBg, _blend, value.selector),
-    string: renderColorValue(colorPalette, baseBg, _blend, value.string),
-    symbol: renderColorValue(colorPalette, baseBg, _blend, value.symbol),
-    tag: renderColorValue(colorPalette, baseBg, _blend, value.tag),
-    unit: renderColorValue(colorPalette, baseBg, _blend, value.unit),
-    url: renderColorValue(colorPalette, baseBg, _blend, value.url),
-    variable: renderColorValue(colorPalette, baseBg, _blend, value.variable),
+    atrule: renderColorValue(value.atrule, colorOptions),
+    attrName: renderColorValue(value.attrName, colorOptions),
+    attrValue: renderColorValue(value.attrValue, colorOptions),
+    attribute: renderColorValue(value.attribute, colorOptions),
+    boolean: renderColorValue(value.boolean, colorOptions),
+    builtin: renderColorValue(value.builtin, colorOptions),
+    cdata: renderColorValue(value.cdata, colorOptions),
+    char: renderColorValue(value.char, colorOptions),
+    class: renderColorValue(value.class, colorOptions),
+    className: renderColorValue(value.className, colorOptions),
+    comment: renderColorValue(value.comment, colorOptions),
+    constant: renderColorValue(value.constant, colorOptions),
+    deleted: renderColorValue(value.deleted, colorOptions),
+    doctype: renderColorValue(value.doctype, colorOptions),
+    entity: renderColorValue(value.entity, colorOptions),
+    function: renderColorValue(value.function, colorOptions),
+    hexcode: renderColorValue(value.hexcode, colorOptions),
+    id: renderColorValue(value.id, colorOptions),
+    important: renderColorValue(value.important, colorOptions),
+    inserted: renderColorValue(value.inserted, colorOptions),
+    keyword: renderColorValue(value.keyword, colorOptions),
+    number: renderColorValue(value.number, colorOptions),
+    operator: renderColorValue(value.operator, colorOptions),
+    prolog: renderColorValue(value.prolog, colorOptions),
+    property: renderColorValue(value.property, colorOptions),
+    pseudoClass: renderColorValue(value.pseudoClass, colorOptions),
+    pseudoElement: renderColorValue(value.pseudoElement, colorOptions),
+    punctuation: renderColorValue(value.punctuation, colorOptions),
+    regex: renderColorValue(value.regex, colorOptions),
+    selector: renderColorValue(value.selector, colorOptions),
+    string: renderColorValue(value.string, colorOptions),
+    symbol: renderColorValue(value.symbol, colorOptions),
+    tag: renderColorValue(value.tag, colorOptions),
+    unit: renderColorValue(value.unit, colorOptions),
+    url: renderColorValue(value.url, colorOptions),
+    variable: renderColorValue(value.variable, colorOptions),
   }
-}
-
-function renderColorValue(
-  colorPalette: ColorThemePalette,
-  bg: string,
-  blendMode: ColorBlendModeValue,
-  str: string,
-): string {
-  const node = parseTokenValue(str)
-
-  if (!node || node.type !== 'color') {
-    throw new Error(`Invalid color token value: ${str}`)
-  }
-
-  let hex = ''
-
-  if (node.key === 'black') {
-    hex = renderColorHex(colorPalette.black)
-  }
-
-  if (node.key === 'white') {
-    hex = renderColorHex(colorPalette.white)
-  }
-
-  if (node.hue && node.tint) {
-    hex = renderColorHex(colorPalette[node.hue][node.tint])
-  }
-
-  if (!hex) {
-    throw new Error(`Invalid color token value: ${str}`)
-  }
-
-  // apply blend mode
-  try {
-    hex = blendMode === 'multiply' ? multiply(bg, hex) : screen(bg, hex)
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log('could not blend', hex)
-  }
-
-  if (node.opacity !== undefined) {
-    hex = rgba(hex, node.opacity)
-  }
-
-  return hex
-}
-
-function renderColorHex(color: string | ColorPaletteValue) {
-  return typeof color === 'string' ? color : color.hex
 }

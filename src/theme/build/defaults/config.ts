@@ -1,5 +1,7 @@
 import {RootTheme} from '../../types'
 
+const STROKE_WIDTH = 1
+
 export const defaultThemeConfig: Omit<RootTheme, 'color' | 'fonts'> = {
   avatar: {
     sizes: [
@@ -11,12 +13,15 @@ export const defaultThemeConfig: Omit<RootTheme, 'color' | 'fonts'> = {
   },
   button: {
     textWeight: 'medium',
+    border: {width: STROKE_WIDTH},
     focusRing: {offset: -1, width: 2},
   },
   card: {
+    border: {width: STROKE_WIDTH},
     focusRing: {offset: -1, width: 1},
+    shadow: {outline: STROKE_WIDTH},
   },
-  container: [320, 640, 960, 1280, 1600, 1920],
+  container: [480, 640, 960, 1280, 1600, 1920],
   focusRing: {
     offset: 1,
     width: 2,
@@ -33,6 +38,9 @@ export const defaultThemeConfig: Omit<RootTheme, 'color' | 'fonts'> = {
   ],
   space: [0, 4, 8, 12, 20, 32, 52, 84, 136, 220],
   input: {
+    border: {
+      width: STROKE_WIDTH,
+    },
     checkbox: {
       size: 17,
       focusRing: {offset: -1, width: 1},
@@ -49,9 +57,6 @@ export const defaultThemeConfig: Omit<RootTheme, 'color' | 'fonts'> = {
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
       focusRing: {offset: 1, width: 1},
-    },
-    border: {
-      width: 1,
     },
     select: {
       focusRing: {offset: -1, width: 1},

@@ -309,7 +309,7 @@ const DialogCard = forwardRef(function DialogCard(
             <DialogHeader
               $isContentScrollable={isContentScrollable}
               $hasScrolledFromTop={hasScrolledFromTop}
-              padding={3}
+              padding={2}
             >
               <Flex align="center">
                 <Box flex={1} padding={3}>
@@ -374,7 +374,7 @@ export const Dialog = forwardRef(function Dialog(
     onClickOutside,
     onClose,
     onFocus,
-    padding: paddingProp = 4,
+    padding: paddingProp = 3,
     portal: portalProp,
     position: positionProp = dialog.position || 'fixed',
     scheme,

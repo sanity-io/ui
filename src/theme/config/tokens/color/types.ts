@@ -1,6 +1,6 @@
 import {ColorHueKey} from '@sanity/color'
-import {ThemeColorSyntax} from '../../../types'
 import {ColorButtonMode, ColorHueValue} from '../../../system'
+import {ThemeColorSyntax} from '../../../types'
 import {
   ColorBlendModeTokenValue,
   ColorConfigBaseTone,
@@ -36,6 +36,7 @@ export interface StateColorTokens {
   bg?: ColorTokenValue
   bg2?: ColorTokenValue
   fg?: ColorTokenValue
+  icon?: ColorTokenValue
   border?: ColorTokenValue
   muted?: {
     fg?: ColorTokenValue

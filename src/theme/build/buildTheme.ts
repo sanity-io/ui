@@ -1,6 +1,6 @@
 import {ThemeConfig} from '../config'
 import {RootTheme} from '../types'
-import {buildColorTheme, renderColorTheme} from './color'
+import {buildColorTheme, renderThemeColorSchemes} from './color'
 import {defaultThemeConfig} from './defaults/config'
 import {defaultThemeFonts} from './defaults/fonts'
 
@@ -10,7 +10,7 @@ export function buildTheme(config?: ThemeConfig): RootTheme {
 
   return {
     ...defaultThemeConfig,
-    color: renderColorTheme(colorTheme, config),
+    color: renderThemeColorSchemes(colorTheme, config),
     fonts: defaultThemeFonts,
   }
 }

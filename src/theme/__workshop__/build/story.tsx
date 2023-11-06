@@ -17,6 +17,7 @@ import {
   ThemeColorCard,
   ThemeColorInputStates,
 } from '../../types'
+import {useTheme} from '../../useTheme'
 import {Root} from './Root'
 import {theme} from './theme'
 
@@ -55,6 +56,7 @@ function BaseTonePreview(props: {
   theme: ThemeColor
 }) {
   const {baseTone, scheme, theme: color} = props
+  const theme = useTheme()
 
   return (
     <div
@@ -91,7 +93,7 @@ function BaseTonePreview(props: {
           <div
             style={{
               boxShadow: [
-                `0 0 0 0.5px var(--shadow-outline)`,
+                `0 0 0 ${theme.sanity.card.shadow.outline}px var(--shadow-outline)`,
                 `0 6px 8px -4px var(--shadow-umbra)`,
                 `0 12px 17px 2px var(--shadow-penumbra)`,
                 `0 5px 22px 4px var(--shadow-ambient)`,
@@ -238,12 +240,13 @@ function ButtonPreview(props: {
   theme: ThemeColorButtonStates
 }) {
   const {tone, mode, theme: button} = props
+  const theme = useTheme()
 
   return (
     <div
       style={
         {
-          border: '1px solid var(--border)',
+          border: `${theme.sanity.card.border.width}px solid var(--border)`,
           padding: 4,
           display: 'flex',
           flexDirection: 'column',

@@ -17,11 +17,14 @@ export interface BaseTheme<
 > {
   avatar: ThemeAvatar
   button: {
-    textWeight: ThemeFontWeightKey
+    border: {width: number}
     focusRing: FocusRing
+    textWeight: ThemeFontWeightKey
   }
   card: {
+    border: {width: number}
     focusRing: FocusRing
+    shadow: {outline: number}
   }
   color: ThemeColorSchemes
   container: number[]

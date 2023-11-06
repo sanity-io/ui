@@ -180,7 +180,7 @@ function buildButtonStateColorTheme(
     bg2: _color(context, tokens?.bg2 || ['950', '50']),
     fg: _color(context, tokens?.fg || ['white', 'black']),
     border: _color(context, tokens?.border || ['500', '400']),
-    iconColor: _color(context, tokens?.fg || ['500', '400']),
+    icon: _color(context, tokens?.fg || ['500', '400']),
     muted: {
       fg: _color(context, tokens?.muted?.fg || ['500', '400']),
     },
@@ -232,7 +232,7 @@ function buildCardStateColorTheme(
     bg2: _color(context, tokens?.bg2 || ['50', '950']),
     fg: _color(context, tokens?.fg || ['black', 'white']),
     border: _color(context, tokens?.border || ['200', '800']),
-    iconColor: _color(context, tokens?.fg || ['500', '400']),
+    icon: _color(context, tokens?.fg || ['500', '400']),
     muted: {
       fg: _color(context, tokens?.muted?.fg || ['600', '400']),
     },

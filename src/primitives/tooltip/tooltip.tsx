@@ -23,16 +23,15 @@ import {
   useId,
 } from 'react'
 import styled from 'styled-components'
-import {FLOATING_STATIC_SIDES} from '../../constants'
+// import {FLOATING_STATIC_SIDES} from '../../constants'
 import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
+import {Arrow, Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
 import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
-import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
 /**
@@ -146,23 +145,19 @@ export const Tooltip = forwardRef(function Tooltip(
     whileElementsMounted: autoUpdate,
   })
 
-  const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
+  // const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
 
   const arrowX = middlewareData.arrow?.x
   const arrowY = middlewareData.arrow?.y
 
   const arrowStyle: CSSProperties = useMemo(() => {
-    const style: CSSProperties = {
+    return {
       left: arrowX !== null ? arrowX : undefined,
       top: arrowY !== null ? arrowY : undefined,
       right: undefined,
       bottom: undefined,
     }
-
-    if (staticSide) style[staticSide] = -15
-
-    return style
-  }, [arrowX, arrowY, staticSide])
+  }, [arrowX, arrowY])
 
   const tooltipId = useId()
   const [isOpen, setIsOpen] = useDelayedState(false)
@@ -308,7 +303,7 @@ export const Tooltip = forwardRef(function Tooltip(
         shadow={shadow}
       >
         {content}
-        <TooltipArrow ref={setArrow} style={arrowStyle} />
+        <Arrow ref={setArrow} style={arrowStyle} width={15} height={6} radius={2} />
       </Card>
     </Root>
   )

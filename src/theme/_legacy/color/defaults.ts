@@ -158,7 +158,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         bg2: dark ? color.light : color.dark,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.darkest : color.lightest,
-        iconColor: dark ? color.darkest : color.lightest,
+        icon: dark ? color.darkest : color.lightest,
         muted: {
           fg: black,
         },
@@ -181,7 +181,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       bg2: color.base,
       border: dark ? color.light : color.dark,
       fg: dark ? color.darkest : color.lightest,
-      iconColor: dark ? color.darkest : color.lightest,
+      icon: dark ? color.darkest : color.lightest,
       muted: {
         fg: black,
       },
@@ -208,7 +208,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
         bg2: dark ? color.darker : color.lighter,
         border: dark ? color.lighter : color.darker,
         fg: dark ? color.lightest : color.darkest,
-        iconColor: dark ? color.lightest : color.darkest,
+        icon: dark ? color.lightest : color.darkest,
         muted: {
           fg: black,
         },
@@ -231,7 +231,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       bg2: dark ? color.darkest : color.lightest,
       border: dark ? color.darker : color.lighter,
       fg: dark ? color.lighter : color.darker,
-      iconColor: dark ? color.lighter : color.darker,
+      icon: dark ? color.lighter : color.darker,
       muted: {
         fg: black,
       },
@@ -257,7 +257,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
           bg: 'transparent',
           bg2: 'transparent',
           fg: muted.enabled.fg,
-          iconColor: muted.enabled.fg,
+          icon: muted.enabled.fg,
           border: 'transparent',
           muted: {
             fg: black,
@@ -278,7 +278,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
           bg: muted.enabled.bg,
           bg2: muted.enabled.bg,
           fg: muted.hovered.fg,
-          iconColor: muted.hovered.fg,
+          icon: muted.hovered.fg,
           border: 'transparent',
           muted: {
             fg: black,
@@ -312,7 +312,7 @@ export const defaultOpts: ThemeColorBuilderOpts = {
       bg: black,
       bg2: black,
       fg: black,
-      iconColor: black,
+      icon: black,
       border: black,
       muted: {
         fg: black,

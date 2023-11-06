@@ -39,7 +39,7 @@ describe('color', () => {
         bg2: 'hsl(0, 0%, 95%)',
         border: 'hsl(0, 0%, 70%)',
         fg: 'hsl(0, 0%, 20%)',
-        iconColor: 'hsl(0, 0%, 20%)',
+        icon: 'hsl(0, 0%, 20%)',
         muted: {
           fg: 'hsl(0, 0%, 0%)',
         },

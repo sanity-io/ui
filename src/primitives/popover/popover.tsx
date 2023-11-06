@@ -186,7 +186,8 @@ export const Popover = memo(
       // Define distance between reference and floating element
       ret.push(
         offset({
-          mainAxis: arrowProp ? DEFAULT_POPOVER_DISTANCE : 0,
+          // mainAxis: arrowProp ? DEFAULT_POPOVER_DISTANCE : 0,
+          mainAxis: DEFAULT_POPOVER_DISTANCE,
         }),
       )
 
@@ -335,7 +336,7 @@ export const Popover = memo(
         <PopoverCard
           {...restProps}
           __unstable_margins={margins}
-          arrow={arrowProp}
+          arrow={arrowProp ?? false}
           arrowRef={setArrow}
           arrowX={arrowX}
           arrowY={arrowY}

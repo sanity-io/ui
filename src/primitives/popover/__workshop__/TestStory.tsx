@@ -22,6 +22,7 @@ export default function TestStory(): ReactElement {
   const matchReferenceWidth = useBoolean('Match reference width', false)
   const open = useBoolean('Open', true)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
+  const portal = useBoolean('Render in portal', true)
   const preventOverflow = useBoolean('Prevent overflow', true)
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
   const referenceWide = useBoolean('Reference wide?', false)
@@ -75,7 +76,7 @@ export default function TestStory(): ReactElement {
                   overflow="hidden"
                   padding={3}
                   placement={placement}
-                  portal
+                  portal={portal}
                   preventOverflow={preventOverflow}
                   radius={radius}
                   updateRef={updateRef}
