@@ -423,7 +423,7 @@ export const Dialog = forwardRef(function Dialog(
 
   const labelId = `${id}_label`
 
-  const rootClickTimeoutRef = useRef<NodeJS.Timeout>()
+  const rootClickTimeoutRef = useRef<number>()
 
   // If the resulting active element (a.k.a. focused element) is not withing scope when clicking
   // within the dialog, then we want to focus the previously interactive element in the dialog instead.

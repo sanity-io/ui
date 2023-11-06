@@ -52,7 +52,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
   const {children, padding = 4, paddingX, paddingY, zOffset} = props
   const [state, _setState] = useState<ToastState>([])
 
-  const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
+  const toastsRef = useRef<{[key: string]: {timeoutId: number}}>({})
 
   const push = useCallback((params: ToastParams) => {
     // Wrap setState in startTransition to allow React to give input state updates higher priority

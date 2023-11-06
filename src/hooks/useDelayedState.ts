@@ -8,7 +8,7 @@ export function useDelayedState<S>(
   initialState: S | (() => S),
 ): [S, (nextState: SetStateAction<S>, delay?: number) => void] {
   const [state, setState] = useState(initialState)
-  const delayedAction = useRef<NodeJS.Timeout | undefined>()
+  const delayedAction = useRef<number | undefined>()
 
   const onStateChange = useCallback((nextState: SetStateAction<S>, delay?: number) => {
     const action = () => {
