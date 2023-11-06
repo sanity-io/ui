@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.0](https://github.com/sanity-io/ui/compare/v1.8.3...v1.9.0) (2023-11-06)
+
+### Features
+
+- **tooltip:** allows for the tooltip to be dismissed on Escape ([#1134](https://github.com/sanity-io/ui/issues/1134)) ([b6db815](https://github.com/sanity-io/ui/commit/b6db815cf50b9547915ffa6c6e9f3eff689e02b2))
+
 ## [1.8.3](https://github.com/sanity-io/ui/compare/v1.8.2...v1.8.3) (2023-10-23)
 
 ### Bug Fixes
