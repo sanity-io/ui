@@ -72,7 +72,7 @@ export const Button = forwardRef(function Button(
     iconRight,
     justify: justifyProp = 'center',
     loading,
-    mode = 'default',
+    mode = 'ghost',
     padding: paddingProp = 3,
     paddingX: paddingXProp,
     paddingY: paddingYProp,
