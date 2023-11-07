@@ -44,8 +44,8 @@
     "test": "jest",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
     "watch": "pkg watch --strict",
-    "workshop:build": "node -r esbuild-register -r tsconfig-paths/register scripts/build",
-    "workshop:dev": "node -r esbuild-register -r tsconfig-paths/register scripts/dev",
+    "workshop:build": "workshop build",
+    "workshop:dev": "workshop dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
   "dependencies": {
@@ -66,7 +66,7 @@
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/pkg-utils": "^2.4.8",
     "@sanity/semantic-release-preset": "^4.1.4",
-    "@sanity/ui-workshop": "^1.2.11",
+    "@sanity/ui-workshop": "^2.0.0",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
@@ -84,8 +84,6 @@
     "cypress": "^13.1.0",
     "cypress-real-events": "^1.10.1",
     "cz-conventional-changelog": "^3.3.0",
-    "esbuild": "^0.19.2",
-    "esbuild-register": "^3.4.2",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.28.1",

@@ -6,7 +6,8 @@
     "./src",
     "./test",
     "./typings",
-    "./workshop.config.ts"
+    "./workshop.config.ts",
+    "./workshop.runtime.ts"
   ],
   "compilerOptions": {
     "composite": true,

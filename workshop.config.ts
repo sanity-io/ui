@@ -13,9 +13,6 @@ Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
 export default defineConfig({
-  alias: {
-    '@sanity/ui': typeof __dirname !== 'undefined' ? __dirname + '/src' : '',
-  },
   collections: [
     {
       name: 'components',
