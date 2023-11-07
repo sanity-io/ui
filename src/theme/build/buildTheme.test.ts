@@ -1,11 +1,18 @@
 import {buildTheme} from './buildTheme'
+import {defaultColorPalette} from './color/defaults/colorPalette'
 
 test('build theme', () => {
   const {color} = buildTheme({
+    palette: {
+      ...defaultColorPalette,
+      black: '#000000',
+      white: '#ffffff',
+    },
     color: {
       base: {
         default: {
           bg: ['white/0', 'black/0'],
+          fg: ['black', 'white'],
         },
       },
       button: {
@@ -50,12 +57,12 @@ test('build theme', () => {
   }).toEqual({
     light: {
       bg: 'rgba(255,255,255,0)',
-      fg: '#ffffff',
+      fg: '#000000',
       default: {
         button: {
           ghost: {
             enabled: {
-              border: 'rgba(255,255,255,0)',
+              border: 'rgba(240,244,244,0)',
             },
           },
         },
@@ -63,12 +70,12 @@ test('build theme', () => {
     },
     dark: {
       bg: 'rgba(0,0,0,0)',
-      fg: '#000000',
+      fg: '#ffffff',
       default: {
         button: {
           ghost: {
             enabled: {
-              border: 'rgba(0,0,0,0)',
+              border: 'rgba(23,27,28,0)',
             },
           },
         },

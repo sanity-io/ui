@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import {hexToRgb, multiply, parseColor, rgba, screen} from '.'
+import {hexToRgb, multiply, parseColor, rgbToHex, rgba, screen} from '.'
 
 const hues = {
   gray: {
@@ -17,7 +17,7 @@ describe('color-fns', () => {
       const hex = '#ff0000'
       const rgb = hexToRgb(hex)
 
-      expect(rgb).toEqual({r: 255, g: 0, b: 0})
+      expect(rgbToHex(rgb)).toEqual('#ff0000')
     })
   })
 
@@ -27,7 +27,7 @@ describe('color-fns', () => {
       const source = hexToRgb(hues.gray[600])
       const rgb = screen(backdrop, source)
 
-      expect(rgb).toEqual({r: 129, g: 181, b: 254})
+      expect(rgbToHex(rgb)).toEqual('#81b5fe')
     })
   })
 
@@ -37,7 +37,7 @@ describe('color-fns', () => {
       const source = hexToRgb(hues.gray[600])
       const rgb = multiply(backdrop, source)
 
-      expect(rgb).toEqual({r: 15, g: 55, b: 129})
+      expect(rgbToHex(rgb)).toEqual('#0f3781')
     })
   })
 
@@ -45,15 +45,15 @@ describe('color-fns', () => {
     it('should parse a hex to RGB', () => {
       const rgb = parseColor('#ccc')
 
-      expect(rgb).toEqual({r: 204, g: 204, b: 204})
+      expect(rgbToHex(rgb)).toEqual('#cccccc')
     })
 
     it('should parse a HSL to RGB', () => {
       const rgb1 = parseColor('hsl(210, 20%, 50%)')
       const rgb2 = parseColor('hsl(210, 10%, 0%)')
 
-      expect(rgb1).toEqual({r: 102, g: 128, b: 153})
-      expect(rgb2).toEqual({r: 0, g: 0, b: 0})
+      expect(rgbToHex(rgb1)).toEqual('#668099')
+      expect(rgbToHex(rgb2)).toEqual('#000000')
     })
   })
 

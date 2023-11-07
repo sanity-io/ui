@@ -68,7 +68,7 @@ test('buildColorTheme: base', () => {
     light: {
       transparent: {
         bg: 'gray/50',
-        fg: 'gray/800',
+        fg: 'gray/600',
       },
       default: {
         bg: 'white',
@@ -82,7 +82,7 @@ test('buildColorTheme: base', () => {
     dark: {
       transparent: {
         bg: 'black',
-        fg: 'gray/200',
+        fg: 'gray/400',
       },
       default: {
         bg: 'gray/950',
