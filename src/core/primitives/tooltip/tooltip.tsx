@@ -29,7 +29,7 @@ import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {useTheme} from '../../theme'
 import {Placement} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
+import {Arrow, Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
 import {ConditionalWrapper} from './conditionalWrapper'
@@ -39,7 +39,6 @@ import {
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
-import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
 /**
@@ -419,7 +418,9 @@ export const Tooltip = forwardRef(function Tooltip(
           shadow={shadow}
         >
           {content}
-          {arrowProp && <TooltipArrow ref={setArrow} style={arrowStyle} />}
+          {arrowProp && (
+            <Arrow ref={setArrow} style={arrowStyle} width={15} height={6} radius={2} />
+          )}
         </Card>
       </ConditionalWrapper>
     </Root>
