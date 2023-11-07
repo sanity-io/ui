@@ -23,7 +23,6 @@ import {
   useId,
 } from 'react'
 import styled from 'styled-components'
-import {FLOATING_STATIC_SIDES} from '../../constants'
 import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
@@ -31,7 +30,14 @@ import {Placement} from '../../types'
 import {Arrow, Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
-import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
+import {
+  DEFAULT_FALLBACK_PLACEMENTS,
+  DEFAULT_TOOLTIP_ARROW_HEIGHT,
+  DEFAULT_TOOLTIP_ARROW_RADIUS,
+  DEFAULT_TOOLTIP_ARROW_WIDTH,
+  DEFAULT_TOOLTIP_DISTANCE,
+  DEFAULT_TOOLTIP_PADDING,
+} from './constants'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
 /**
@@ -49,6 +55,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   placement?: Placement
   /** Whether or not to render the tooltip in a portal element. */
   portal?: boolean | string
+  radius?: number | number[]
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
   /**
@@ -86,6 +93,7 @@ export const Tooltip = forwardRef(function Tooltip(
     padding = 3,
     placement: placementProp = 'bottom',
     portal,
+    radius = 2,
     scheme,
     shadow = 2,
     zOffset = theme.sanity.layer?.tooltip.zOffset,
@@ -106,14 +114,14 @@ export const Tooltip = forwardRef(function Tooltip(
       flip({
         boundary: boundaryElement || undefined,
         fallbackPlacements,
-        padding: 4,
+        padding: DEFAULT_TOOLTIP_PADDING,
         rootBoundary,
         mainAxis: false,
       }),
     )
 
     // Define distance between reference and floating element
-    ret.push(offset({mainAxis: 3}))
+    ret.push(offset({mainAxis: DEFAULT_TOOLTIP_DISTANCE}))
 
     // Set width and height on the floating element
     ret.push(
@@ -137,7 +145,7 @@ export const Tooltip = forwardRef(function Tooltip(
     )
 
     // Place arrow
-    ret.push(arrow({element: arrowRef, padding: 2}))
+    ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
 
     return ret
   }, [boundaryElement, fallbackPlacements])
@@ -148,23 +156,18 @@ export const Tooltip = forwardRef(function Tooltip(
     whileElementsMounted: autoUpdate,
   })
 
-  const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
-
   const arrowX = middlewareData.arrow?.x
   const arrowY = middlewareData.arrow?.y
 
-  const arrowStyle: CSSProperties = useMemo(() => {
-    const style: CSSProperties = {
+  const arrowStyle: CSSProperties = useMemo(
+    () => ({
       left: arrowX !== null ? arrowX : undefined,
       top: arrowY !== null ? arrowY : undefined,
       right: undefined,
       bottom: undefined,
-    }
-
-    if (staticSide) style[staticSide] = -15
-
-    return style
-  }, [arrowX, arrowY, staticSide])
+    }),
+    [arrowX, arrowY],
+  )
 
   const tooltipId = useId()
   const [isOpen, setIsOpen] = useDelayedState(false)
@@ -325,12 +328,18 @@ export const Tooltip = forwardRef(function Tooltip(
         data-ui="Tooltip__card"
         data-placement={placement}
         padding={padding}
-        radius={3}
+        radius={radius}
         scheme={scheme}
         shadow={shadow}
       >
         {content}
-        <Arrow ref={setArrow} style={arrowStyle} width={15} height={6} radius={2} />
+        <Arrow
+          ref={setArrow}
+          style={arrowStyle}
+          width={DEFAULT_TOOLTIP_ARROW_WIDTH}
+          height={DEFAULT_TOOLTIP_ARROW_HEIGHT}
+          radius={DEFAULT_TOOLTIP_ARROW_RADIUS}
+        />
       </Card>
     </Root>
   )
