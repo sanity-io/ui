@@ -9,7 +9,7 @@ export default function AsButtonStory() {
       <Container>
         <Grid columns={3} gap={2}>
           <Box>
-            <Text align="center" size={1} weight="semibold">
+            <Text align="center" size={1} weight="medium">
               Enabled
             </Text>
             <Stack marginTop={3} space={2}>
@@ -23,7 +23,7 @@ export default function AsButtonStory() {
                   tone={tone}
                 >
                   <Stack space={2}>
-                    <Text weight="semibold">{title}</Text>
+                    <Text weight="medium">{title}</Text>
                     <Text muted>Muted</Text>
                     <Text accent>Accent</Text>
                   </Stack>
@@ -33,7 +33,7 @@ export default function AsButtonStory() {
           </Box>
 
           <Box>
-            <Text align="center" size={1} weight="semibold">
+            <Text align="center" size={1} weight="medium">
               Disabled
             </Text>
             <Stack marginTop={3} space={2}>
@@ -48,7 +48,7 @@ export default function AsButtonStory() {
                   tone={tone}
                 >
                   <Stack space={2}>
-                    <Text weight="semibold">{title}</Text>
+                    <Text weight="medium">{title}</Text>
                     <Text muted>Muted</Text>
                     <Text accent>Accent</Text>
                   </Stack>
@@ -58,7 +58,7 @@ export default function AsButtonStory() {
           </Box>
 
           <Box>
-            <Text align="center" size={1} weight="semibold">
+            <Text align="center" size={1} weight="medium">
               Selected
             </Text>
             <Stack marginTop={3} space={2}>
@@ -72,7 +72,7 @@ export default function AsButtonStory() {
                     tone={tone}
                   >
                     <Stack space={2}>
-                      <Text weight="semibold">{title}</Text>
+                      <Text weight="medium">{title}</Text>
                       <Text muted>Muted</Text>
                       <Text accent>Accent</Text>
                     </Stack>

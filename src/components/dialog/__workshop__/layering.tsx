@@ -33,5 +33,9 @@ export default function LayeringStory() {
 function DebugLayer() {
   const layer = useLayer()
 
-  return <Code language="json">{JSON.stringify(layer, null, 2)}</Code>
+  return (
+    <Code language="json" size={1}>
+      {JSON.stringify(layer, null, 2)}
+    </Code>
+  )
 }

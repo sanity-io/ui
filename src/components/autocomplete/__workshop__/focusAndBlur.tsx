@@ -21,12 +21,14 @@ export default function FocusAndBlurStory() {
           placeholder="Search"
           value={value}
         />
-        <Stack space={1}>
+        <Stack space={3}>
           <Card overflow="auto" padding={3} radius={2} tone="transparent">
-            <Code id="focus-and-blur-log">{JSON.stringify(log)}</Code>
+            <Code id="focus-and-blur-log" language="json" size={1}>
+              {JSON.stringify(log)}
+            </Code>
           </Card>
 
-          <Button id="focus-and-blur-clear-btn" onClick={handleClear} text="Clear" />
+          <Button id="focus-and-blur-clear-btn" mode="ghost" onClick={handleClear} text="Clear" />
         </Stack>
       </Stack>
     </Box>

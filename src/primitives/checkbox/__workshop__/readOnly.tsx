@@ -6,7 +6,7 @@ export default function ReadOnlyStory() {
       <Flex align="center" as="label">
         <Checkbox id="checkbox-example" readOnly />
         <Box marginLeft={2}>
-          <Text size={1} weight="semibold">
+          <Text size={1} weight="medium">
             Toggle
           </Text>
         </Box>

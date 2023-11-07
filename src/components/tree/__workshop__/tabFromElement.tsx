@@ -26,7 +26,7 @@ export default function BasicStory() {
   return (
     <Box padding={[4, 5, 6]}>
       <Box paddingY={3}>
-        <Text>
+        <Text muted size={1}>
           This example is to demonstrate that when you tab from an outside element (using the
           keyboard to navigate), you can still access the tree and tree item. Press the input
           beneath and start tabbing / using the arrow.

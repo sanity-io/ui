@@ -1,4 +1,4 @@
-import {Autocomplete, Box, Button, Card, Code, Stack, Text} from '@sanity/ui'
+import {Autocomplete, Box, Button, Card, Code, Container, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 import {
@@ -48,36 +48,41 @@ export default function CustomStory() {
   const options = data.map((item) => ({value: item.value, title: item.title}))
 
   return (
-    <Box padding={[4, 5, 6]}>
-      <Stack space={3}>
-        <Text as="label" htmlFor="custom" id="custom-label" size={1} weight="semibold">
-          Country
-        </Text>
-        <Autocomplete
-          aria-describedby="custom-label"
-          border={border}
-          disabled={disabled}
-          filterOption={filterOption}
-          fontSize={fontSize}
-          id="custom"
-          onChange={setValue}
-          openButton={openButton}
-          options={options}
-          padding={padding}
-          placeholder="Search"
-          radius={radius}
-          readOnly={readOnly}
-          renderOption={renderOption}
-          renderValue={renderValue}
-          value={value}
-        />
-        <Card padding={3} radius={1} tone="transparent">
-          <Code>{JSON.stringify(value)}</Code>
-        </Card>
-        <Box>
-          <Button id="set-value-btn" onClick={() => setValue('NO')} text="Set to NO" />
-        </Box>
-      </Stack>
+    <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
+      <Container width={0}>
+        <Stack space={5}>
+          <Stack space={3}>
+            <Text as="label" htmlFor="custom" id="custom-label" size={1} weight="medium">
+              Country
+            </Text>
+            <Autocomplete
+              aria-describedby="custom-label"
+              border={border}
+              disabled={disabled}
+              filterOption={filterOption}
+              fontSize={fontSize}
+              id="custom"
+              onChange={setValue}
+              openButton={openButton}
+              options={options}
+              padding={padding}
+              placeholder="Search"
+              radius={radius}
+              readOnly={readOnly}
+              renderOption={renderOption}
+              renderValue={renderValue}
+              value={value}
+            />
+          </Stack>
+
+          <Card padding={3} radius={2} tone="transparent">
+            <Code size={1}>{JSON.stringify(value)}</Code>
+          </Card>
+          <Box>
+            <Button id="set-value-btn" onClick={() => setValue('NO')} text="Set to NO" />
+          </Box>
+        </Stack>
+      </Container>
     </Box>
   )
 }

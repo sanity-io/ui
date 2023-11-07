@@ -13,7 +13,7 @@ export default function ExampleStory() {
       <Flex align="center" as="label">
         <Switch checked={checked || false} indeterminate={indeterminate} onChange={handleChange} />
         <Box marginLeft={3}>
-          <Text size={1} weight="semibold">
+          <Text size={1} weight="medium">
             Label
           </Text>
         </Box>

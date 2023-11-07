@@ -23,7 +23,7 @@ import {
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import {createContext, useContext} from 'react'
-import {ThemeColorCard} from '../lib/theme'
+import {ThemeColorCard} from '../types'
 
 interface Features {
   light: boolean

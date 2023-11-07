@@ -24,16 +24,16 @@ export default function AsComponentStory() {
         id="test"
         menu={
           <Menu>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} tone="primary">
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
               <Text>Component 1</Text>
             </MenuItem>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} tone="primary">
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
               <Text>Component 2</Text>
             </MenuItem>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} tone="primary">
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
               <Text>Component 3</Text>
             </MenuItem>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} tone="primary">
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
               <Text>Component 3</Text>
             </MenuItem>
           </Menu>

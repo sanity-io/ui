@@ -17,7 +17,7 @@ export default function NamedStory() {
       <Container width={1}>
         <Card height="fill" padding={4}>
           <Stack space={2}>
-            <Text size={1} weight="semibold">
+            <Text size={1} weight="medium">
               Portal 1
             </Text>
             <Card border padding={3} ref={setPortal1Element} />
@@ -25,7 +25,7 @@ export default function NamedStory() {
         </Card>
         <Card height="fill" padding={4}>
           <Stack space={2}>
-            <Text size={1} weight="semibold">
+            <Text size={1} weight="medium">
               Portal 2
             </Text>
             <Card border padding={3} ref={setPortal2Element} />
@@ -33,7 +33,7 @@ export default function NamedStory() {
         </Card>
         <Card height="fill" padding={4}>
           <Stack space={2}>
-            <Text size={1} weight="semibold">
+            <Text size={1} weight="medium">
               Portal 3
             </Text>
             <Card border padding={3} ref={setPortal3Element} />

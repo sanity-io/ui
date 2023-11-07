@@ -25,7 +25,7 @@ export default function StackedStory() {
   const space = useSelect('Space', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
 
   return (
-    <Card height="fill" tone="transparent">
+    <Card height="fill">
       <Flex align="center" height="fill" justify="center">
         <Container width={0} style={{textAlign: 'center'}}>
           <Box padding={4}>
