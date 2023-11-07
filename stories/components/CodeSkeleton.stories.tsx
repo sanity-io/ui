@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {CodeSkeleton, Skeleton} from '../../src/components'
-import {fonts} from '../../src/theme/studioTheme/fonts'
+import {studioTheme} from '../../src/theme'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
 
@@ -41,7 +41,7 @@ export const Sizes: Story = {
         {columnBuilder({
           gap: 4,
           renderItem: ({value, index}) => <CodeSkeleton {...props} key={index} size={value} />,
-          rows: [...Array(fonts['code'].sizes.length).keys()],
+          rows: [...Array(studioTheme.fonts['code'].sizes.length).keys()],
         })}
       </>
     )
