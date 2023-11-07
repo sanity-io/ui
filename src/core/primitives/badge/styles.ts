@@ -11,7 +11,6 @@ export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {
     '--card-fg-color': color.enabled.fg,
 
     backgroundColor: color.enabled.bg2,
-    color: color.enabled.fg,
     boxShadow: `inset 0 0 0 1px ${color.enabled.border}`,
     cursor: 'default',
 
