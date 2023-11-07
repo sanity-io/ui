@@ -28,11 +28,10 @@ import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
+import {Arrow, Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
 import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
-import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
 /**
@@ -331,7 +330,7 @@ export const Tooltip = forwardRef(function Tooltip(
         shadow={shadow}
       >
         {content}
-        <TooltipArrow ref={setArrow} style={arrowStyle} />
+        <Arrow ref={setArrow} style={arrowStyle} width={15} height={6} radius={2} />
       </Card>
     </Root>
   )

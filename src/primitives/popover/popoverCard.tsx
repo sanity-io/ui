@@ -4,11 +4,15 @@ import styled from 'styled-components'
 import {FLOATING_STATIC_SIDES} from '../../constants'
 import {ThemeColorSchemeKey} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
-import {useLayer} from '../../utils'
+import {Arrow, useLayer} from '../../utils'
 import {Card} from '../card'
 import {Flex} from '../flex'
-import {DEFAULT_POPOVER_ARROW_WIDTH, DEFAULT_POPOVER_MARGINS} from './constants'
-import {PopoverArrow} from './popoverArrow'
+import {
+  DEFAULT_POPOVER_ARROW_HEIGHT,
+  DEFAULT_POPOVER_ARROW_RADIUS,
+  DEFAULT_POPOVER_ARROW_WIDTH,
+  DEFAULT_POPOVER_MARGINS,
+} from './constants'
 
 const Root = styled(Card)({
   '&:not([hidden])': {
@@ -125,7 +129,15 @@ export const PopoverCard = memo(
           </Flex>
         </Flex>
 
-        {arrow && <PopoverArrow ref={arrowRef} style={arrowStyle} />}
+        {arrow && (
+          <Arrow
+            ref={arrowRef}
+            style={arrowStyle}
+            width={DEFAULT_POPOVER_ARROW_WIDTH}
+            height={DEFAULT_POPOVER_ARROW_HEIGHT}
+            radius={DEFAULT_POPOVER_ARROW_RADIUS}
+          />
+        )}
       </Root>
     )
   }),
