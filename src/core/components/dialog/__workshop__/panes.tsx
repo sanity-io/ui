@@ -46,12 +46,7 @@ function Pane(props: {borderLeft?: boolean; id: string}) {
       <PortalProvider element={portalElement}>
         <PaneRoot borderLeft={borderLeft} flex={1} ref={setElement}>
           <Box padding={4}>
-            <Button
-              onClick={() => setDialogOpen(true)}
-              selected={dialogOpen}
-              text="Open dialog"
-              tone="primary"
-            />
+            <Button onClick={() => setDialogOpen(true)} selected={dialogOpen} text="Open dialog" />
           </Box>
 
           <PanePortal ref={setPortalElement} />
@@ -67,7 +62,7 @@ function Pane(props: {borderLeft?: boolean; id: string}) {
           >
             <Box padding={4}>
               <MenuButton
-                button={<Button text="Open menu" tone="primary" />}
+                button={<Button text="Open menu" />}
                 id={`${id}-menu`}
                 menu={
                   <Menu>

@@ -26,7 +26,7 @@ export default function PlainStory() {
       <Container width={0}>
         <Card padding={3} tone={tone}>
           <Stack space={3}>
-            <Text as="label" htmlFor="text-area-example" size={1} weight="semibold">
+            <Text as="label" htmlFor="text-area-example" size={1} weight="medium">
               TextArea
             </Text>
             <TextArea

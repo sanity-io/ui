@@ -9,14 +9,14 @@ export default function StatesStory() {
       <Container width={1}>
         <Stack space={5}>
           <Stack space={3}>
-            <Text size={1} weight="semibold">
+            <Text size={1} weight="medium">
               <label htmlFor="enabled-example">Enabled (default)</label>
             </Text>
             <TextInput id="enabled-example" onChange={onChange} value="This is some text" />
           </Stack>
 
           <Stack space={3}>
-            <Text size={1} weight="semibold">
+            <Text size={1} weight="medium">
               <label htmlFor="disabled-example">Disabled</label>
             </Text>
             <TextInput
@@ -28,7 +28,7 @@ export default function StatesStory() {
           </Stack>
 
           <Stack space={3}>
-            <Text size={1} weight="semibold">
+            <Text size={1} weight="medium">
               <label htmlFor="read-only-example">Read-only</label>
             </Text>
             <TextInput

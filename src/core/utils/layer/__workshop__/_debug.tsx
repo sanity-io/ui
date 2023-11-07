@@ -5,7 +5,7 @@ export function LayerDebugInfo(props: {id?: string}) {
   const layer = useLayer()
 
   return (
-    <Code id={id}>
+    <Code id={id} size={1}>
       {[
         //
         `isTopLayer=${layer.isTopLayer}`,

@@ -17,7 +17,6 @@ export default function LayeringFocusStory() {
           <Button
             text="Open dialog 1"
             onClick={() => setFirstDialogOpen(true)}
-            tone="primary"
             id="open-dialog-1-button"
           />
 

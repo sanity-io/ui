@@ -34,7 +34,7 @@ export default function MenuButtonStory() {
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>
             <MenuButton
-              button={<Button tone="primary" text="Open" />}
+              button={<Button text="Open" />}
               id="menu-button"
               menu={
                 <Menu>

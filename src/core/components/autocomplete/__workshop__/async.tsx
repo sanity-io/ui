@@ -79,9 +79,9 @@ export default function AsyncStory() {
   }, [doSearch, optionTitle])
 
   return (
-    <Box padding={[4, 5, 6]}>
+    <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
       <Stack space={[3, 3, 4]}>
-        <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="semibold">
+        <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
           Country
         </Text>
         <LayerProvider zOffset={100}>
@@ -96,15 +96,14 @@ export default function AsyncStory() {
             openButton={{onClick: handleOpenButtonClick}}
             options={options}
             placeholder="Search"
-            radius={1}
             renderOption={renderOption}
             renderValue={renderValue}
             value={value}
           />
         </LayerProvider>
 
-        <Card border overflow="auto" padding={3} radius={1}>
-          <Code language="json" size={[1, 1, 2]}>
+        <Card overflow="auto" padding={3} radius={2} tone="transparent">
+          <Code language="json" size={1}>
             {JSON.stringify({loading, options, query, value}, null, 2)}
           </Code>
         </Card>

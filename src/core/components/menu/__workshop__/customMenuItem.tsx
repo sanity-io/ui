@@ -8,7 +8,9 @@ export default function CustomMenuItemStory() {
           <Menu>
             <MenuItem padding={3}>
               <Stack space={3}>
-                <Text weight="semibold">First option</Text>
+                <Text weight="medium" size={1}>
+                  First option
+                </Text>
                 <Text muted size={1}>
                   Description
                 </Text>
@@ -16,7 +18,9 @@ export default function CustomMenuItemStory() {
             </MenuItem>
             <MenuItem padding={3}>
               <Stack space={3}>
-                <Text weight="semibold">Second option</Text>
+                <Text weight="medium" size={1}>
+                  Second option
+                </Text>
                 <Text muted size={1}>
                   Description
                 </Text>
@@ -25,7 +29,9 @@ export default function CustomMenuItemStory() {
             <MenuDivider />
             <MenuItem padding={3} tone="critical">
               <Stack space={3}>
-                <Text weight="semibold">Dangerous option</Text>
+                <Text weight="medium" size={1}>
+                  Dangerous option
+                </Text>
                 <Text muted size={1}>
                   Description
                 </Text>
