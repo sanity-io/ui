@@ -2,7 +2,6 @@ import {Strategy} from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import styled from 'styled-components'
-import {FLOATING_STATIC_SIDES} from '../../constants'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {Arrow, useLayer} from '../../utils'
 import {Card} from '../card'
@@ -95,20 +94,15 @@ export const PopoverCard = memo(
       [strategy, style, width, x, y, zIndex],
     )
 
-    const staticSide = placement && FLOATING_STATIC_SIDES[placement.split('-')[0]]
-
-    const arrowStyle: CSSProperties = useMemo(() => {
-      const style: CSSProperties = {
+    const arrowStyle: CSSProperties = useMemo(
+      () => ({
         left: arrowX !== null ? arrowX : undefined,
         top: arrowY !== null ? arrowY : undefined,
         right: undefined,
         bottom: undefined,
-      }
-
-      if (staticSide) style[staticSide] = 0 - DEFAULT_POPOVER_ARROW_WIDTH
-
-      return style
-    }, [arrowX, arrowY, staticSide])
+      }),
+      [arrowX, arrowY],
+    )
 
     return (
       <Root
