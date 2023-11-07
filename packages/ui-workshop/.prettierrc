@@ -1,0 +1,17 @@
+{
+  "bracketSpacing": false,
+  "plugins": ["prettier-plugin-packagejson"],
+  "printWidth": 100,
+  "quoteProps": "consistent",
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": ["*.yml"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}

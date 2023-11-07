@@ -1,7 +1,9 @@
-/** @jest-environment jsdom */
-
+import {describe, expect, it} from 'vitest'
 import {decode, encode} from './zlib'
 
+/**
+ * @vitest-environment jsdom
+ */
 describe('zlib', () => {
   it('should encode and decode a simple string', () => {
     const encoded = encode('test')
