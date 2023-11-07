@@ -311,7 +311,7 @@ const DialogCard = forwardRef(function DialogCard(
               $hasScrolledFromTop={hasScrolledFromTop}
             >
               <Flex align="center">
-                <Box flex={1} margin={1} padding={4}>
+                <Box flex={1} padding={4}>
                   {header && (
                     <Text id={labelId} size={1} weight="medium">
                       {header}
@@ -376,7 +376,7 @@ export const Dialog = forwardRef(function Dialog(
     onClickOutside,
     onClose,
     onFocus,
-    padding: paddingProp = 4,
+    padding: paddingProp = 3,
     portal: portalProp,
     position: positionProp = dialog.position || 'fixed',
     scheme,
