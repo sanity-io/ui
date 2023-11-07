@@ -1,4 +1,5 @@
 import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
 import {isEqual} from '../../lib/isEqual'
 import {useWorkshop} from '../../useWorkshop'
 import {decodeValue, encodeValue} from './helpers'
@@ -36,8 +37,8 @@ export const PropsProvider = memo(function PropsProvider(props: {
   )
 
   const setPropValue = useCallback(
-    (name: string, value: unknown) => {
-      broadcast({type: 'workshop/props/setPropValue', name, value})
+    (name: string, _value: unknown) => {
+      broadcast({type: 'workshop/props/setPropValue', name, value: _value})
     },
     [broadcast],
   )
