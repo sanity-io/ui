@@ -15,7 +15,7 @@ export default function ExampleStory() {
           onChange={handleChange}
         />
         <Box marginLeft={2}>
-          <Text size={1} weight="semibold">
+          <Text size={1} weight="medium">
             Toggle
           </Text>
         </Box>

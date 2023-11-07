@@ -35,7 +35,7 @@ export default function PlainStory() {
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={0}>
         <Stack space={3}>
-          <Text as="label" htmlFor="text-input-example" size={1} weight="semibold">
+          <Text as="label" htmlFor="text-input-example" size={1} weight="medium">
             TextInput
           </Text>
           <Wrapper>
