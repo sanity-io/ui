@@ -10,7 +10,7 @@ export const EMPTY_RECORD: Record<string, never> = {}
 
 /**
  * @internal
- * @deprecated - no longer used
+ * @deprecated No longer used.
  */
 export const FLOATING_STATIC_SIDES: Record<string, 'bottom' | 'left' | 'top' | 'right'> = {
   top: 'bottom',

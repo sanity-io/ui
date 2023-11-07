@@ -7,12 +7,12 @@ import {
   ThemeColorInputStates,
 } from '@sanity/ui/theme'
 import {
-  COLOR_BASE_TONES,
-  COLOR_BUTTON_MODES,
-  COLOR_INPUT_MODES,
-  COLOR_STATE_TONES,
-  ColorBaseTone,
-  ColorInputMode,
+  THEME_COLOR_BASE_TONES,
+  THEME_COLOR_BUTTON_MODES,
+  THEME_COLOR_INPUT_MODES,
+  THEME_COLOR_STATE_TONES,
+  ThemeColorBaseToneKey,
+  ThemeColorInputModeKey,
 } from '@sanity/ui/theme'
 import {studioTheme} from '@sanity/ui/theme'
 import {ReactElement} from 'react'
@@ -45,7 +45,7 @@ export default function BuildStory(): ReactElement {
         }}
       >
         <div style={{flex: 1}}>
-          {COLOR_BASE_TONES.map((baseTone) => (
+          {THEME_COLOR_BASE_TONES.map((baseTone) => (
             <BaseTonePreview
               baseTone={baseTone}
               key={baseTone}
@@ -55,7 +55,7 @@ export default function BuildStory(): ReactElement {
           ))}
         </div>
         <div style={{flex: 1}}>
-          {COLOR_BASE_TONES.map((baseTone) => (
+          {THEME_COLOR_BASE_TONES.map((baseTone) => (
             <BaseTonePreview
               baseTone={baseTone}
               key={baseTone}
@@ -70,7 +70,7 @@ export default function BuildStory(): ReactElement {
 }
 
 function BaseTonePreview(props: {
-  baseTone: ColorBaseTone
+  baseTone: ThemeColorBaseToneKey
   scheme: 'light' | 'dark'
   theme: ThemeColor
 }) {
@@ -116,7 +116,7 @@ function BaseTonePreview(props: {
             gap: 'var(--space-4)',
           }}
         >
-          {COLOR_INPUT_MODES.map((mode) => (
+          {THEME_COLOR_INPUT_MODES.map((mode) => (
             <InputPreview key={mode} mode={mode} theme={color.input[mode]} />
           ))}
         </div>
@@ -129,12 +129,12 @@ function BaseTonePreview(props: {
             gap: 'var(--space-4)',
           }}
         >
-          {COLOR_BUTTON_MODES.map((mode) => (
+          {THEME_COLOR_BUTTON_MODES.map((mode) => (
             <div
               key={mode}
               style={{display: 'flex', flexDirection: 'column', gap: 'var(--space-1)'}}
             >
-              {COLOR_STATE_TONES.map((tone) => {
+              {THEME_COLOR_STATE_TONES.map((tone) => {
                 return <ButtonPreview key={tone} theme={color.button[mode][tone]} />
               })}
             </div>
@@ -428,7 +428,7 @@ function Skeleton() {
   )
 }
 
-function InputPreview(props: {mode: ColorInputMode; theme: ThemeColorInputStates}) {
+function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInputStates}) {
   const {mode, theme: input} = props
 
   return (

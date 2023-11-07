@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {HeadingSkeleton, Skeleton} from '../../src/core/components'
-import {fonts} from '../../src/theme/studioTheme/fonts'
+import {fonts} from '../../src/theme/themes/studio/fonts'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
 

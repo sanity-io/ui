@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {icons} from '@sanity/icons'
 import {ThemeFontKey, studioTheme} from '../src/theme'
-import {fonts} from '../src/theme/studioTheme/fonts'
+import {fonts} from '../src/theme/themes/studio/fonts'
 
 export const getAlignControls = () => {
   return {
