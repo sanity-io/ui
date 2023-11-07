@@ -1,6 +1,6 @@
-'use strict'
-
+/** @type import('eslint').Linter.Config */
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es6: true,
@@ -11,49 +11,70 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'eslint:recommended',
     'plugin:prettier/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', '@typescript-eslint', 'prettier'],
+  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', 'simple-import-sort', 'prettier'],
   rules: {
-    '@typescript-eslint/explicit-module-boundary-types': 'error',
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/member-delimiter-style': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-    'import/order': [
-      'error',
+    'no-console': 'error',
+    'no-shadow': 'error',
+    'no-warning-comments': [
+      'warn',
       {
-        alphabetize: {
-          caseInsensitive: true,
-          order: 'asc',
-        },
+        location: 'start',
+        terms: ['todo', 'fixme'],
       },
     ],
-    'no-console': 'error',
-    'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
-    'padding-line-between-statements': [
-      'warn',
-      {blankLine: 'always', prev: '*', next: 'block'},
-      {blankLine: 'always', prev: '*', next: 'block-like'},
-      {blankLine: 'always', prev: 'const', next: 'expression'},
-      {blankLine: 'always', prev: 'let', next: 'expression'},
-      {blankLine: 'always', prev: 'var', next: 'expression'},
-      {blankLine: 'always', prev: 'block', next: '*'},
-      {blankLine: 'always', prev: 'block-like', next: '*'},
-      {blankLine: 'always', prev: '*', next: 'return'},
-    ],
+    'quote-props': ['warn', 'consistent'],
     'react/prop-types': 'off',
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react/no-unescaped-entities': 'off',
+    'simple-import-sort/exports': 'warn',
+    'simple-import-sort/imports': 'warn',
+    'strict': ['warn', 'global'],
   },
-  settings: {react: {version: 'detect'}},
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        project: ['./tsconfig.json'],
+      },
+      extends: [
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
+        'eslint:recommended',
+        'plugin:prettier/recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+      ],
+      plugins: [
+        'import',
+        'jsx-a11y',
+        'react',
+        'react-hooks',
+        '@typescript-eslint',
+        'simple-import-sort',
+        'prettier',
+      ],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'error',
+        '@typescript-eslint/interface-name-prefix': 'off',
+        '@typescript-eslint/member-delimiter-style': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
+  ],
 }

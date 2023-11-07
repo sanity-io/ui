@@ -3,6 +3,7 @@
   "include": [
     "./exports",
     "./package.json",
+    "./package.config.ts",
     "./scripts",
     "./src",
     "./typings",

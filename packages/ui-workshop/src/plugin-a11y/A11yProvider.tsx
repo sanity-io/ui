@@ -1,6 +1,7 @@
 import {useWorkshop} from '@sanity/ui-workshop'
 import axe, {AxeResults} from 'axe-core'
 import {memo, useEffect, useMemo, useState} from 'react'
+
 import {A11yContext, A11yContextValue} from './A11yContext'
 import {A11yMsg} from './msg'
 
@@ -25,11 +26,11 @@ export const A11yProvider = memo(function A11yProvider(props: {
 
     axe
       .run()
-      .then((results) => {
-        broadcast({type: 'workshop/a11y/setResults', path, results})
+      .then((_results) => {
+        broadcast({type: 'workshop/a11y/setResults', path, results: _results})
       })
-      .catch((error) => {
-        broadcast({type: 'workshop/a11y/setError', message: error.message})
+      .catch((_error) => {
+        broadcast({type: 'workshop/a11y/setError', message: _error.message})
       })
   }, [broadcast, origin, path])
 

@@ -21,18 +21,18 @@ export function useAxeResults(props: {
 
       axe
         .run()
-        .then((results) => {
+        .then((_results) => {
           // Remove ignored violations
-          for (let i = 0; results.violations.length; i += 1) {
-            const v = results.violations[i]
+          for (let i = 0; _results.violations.length; i += 1) {
+            const v = _results.violations[i]
 
             if (v && IGNORE_VIOLATION_IDS.includes(v.id)) {
-              results.violations.splice(i, 1)
+              _results.violations.splice(i, 1)
               i -= 1
             }
           }
 
-          setResults(results)
+          setResults(_results)
         })
         .catch((err) => {
           // eslint-disable-next-line no-console

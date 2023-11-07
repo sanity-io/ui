@@ -1,29 +1,30 @@
 {
   "compilerOptions": {
-    "module": "ES2020",
-    "target": "ES2017",
-    "declaration": true,
-    "declarationMap": true,
-
-    // Strict type-checking
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-
-    // Additional checks
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    // Completeness
     "skipLibCheck": true,
 
-    // Module resolution
-    "moduleResolution": "node",
+    // Interop constraints
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    // Language and environment
+    "target": "ES2020",
+
+    // Modules
+    "module": "ES2020",
+    "moduleResolution": "Node",
+
+    // Type checking
+    "alwaysStrict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true
   }
 }

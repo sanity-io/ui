@@ -1,13 +1,12 @@
-# Root level ignores
-/*.log
-/*.tgz
-/.vscode
-/.workshop
-/package-lock.json
-/yarn.lock
+*.local
+*.log
+*.tgz
 
-# Global ignores
 .DS_Store
+.turbo
+.vercel
+.vscode
+.workshop
 dist
 etc
 node_modules
