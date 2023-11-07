@@ -1,3 +1,5 @@
+export * from './_compat'
+
 export * from './primitives'
 export * from './components'
 export * from './helpers'

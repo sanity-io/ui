@@ -1,4 +1,6 @@
+import {ThemeColorStateToneKey} from '@sanity/ui/theme'
+
 /**
  * @public
  */
-export type SelectableTone = 'default' | 'primary' | 'positive' | 'caution' | 'critical'
+export type SelectableTone = ThemeColorStateToneKey

@@ -1,4 +1,4 @@
-import {RootTheme, Theme, ThemeColorName, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {RootTheme, Theme, ThemeColorBaseToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 import {DEFAULT_THEME_LAYER} from './defaults'
@@ -12,7 +12,7 @@ export interface ThemeProviderProps {
   children?: React.ReactNode
   scheme?: ThemeColorSchemeKey
   theme?: RootTheme
-  tone?: ThemeColorName
+  tone?: ThemeColorBaseToneKey
 }
 
 /**

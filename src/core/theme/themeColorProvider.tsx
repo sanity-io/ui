@@ -1,4 +1,4 @@
-import {ThemeColorName, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {ThemeColorBaseToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {ThemeProvider} from './themeProvider'
 import {useRootTheme} from './useRootTheme'
 
@@ -8,7 +8,7 @@ import {useRootTheme} from './useRootTheme'
 export interface ThemeColorProviderProps {
   children?: React.ReactNode
   scheme?: ThemeColorSchemeKey
-  tone?: ThemeColorName
+  tone?: ThemeColorBaseToneKey
 }
 
 /**

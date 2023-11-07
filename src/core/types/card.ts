@@ -1,6 +1,6 @@
-import {ThemeColorToneKey} from '@sanity/ui/theme'
+import {ThemeColorBaseToneKey} from '@sanity/ui/theme'
 
 /**
  * @public
  */
-export type CardTone = ThemeColorToneKey | 'inherit'
+export type CardTone = ThemeColorBaseToneKey | 'inherit'

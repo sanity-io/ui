@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {useContext} from 'react'
 import {isRecord} from '../lib/isRecord'
 import {ThemeContext} from './themeContext'
@@ -21,5 +20,5 @@ export function useRootTheme(): ThemeContextValue {
     throw new Error('useRootTheme(): the context value is not compatible')
   }
 
-  return value as any as ThemeContextValue
+  return value as unknown as ThemeContextValue
 }
