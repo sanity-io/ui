@@ -11,12 +11,8 @@ function screenChannel(b: number, s: number) {
  */
 export function screen(b: RGB | RGBA, s: RGB | RGBA): RGB {
   return {
-    r: Math.round(clamp(screenChannel(b.r / 255, s.r / 255) * 255)),
-    g: Math.round(clamp(screenChannel(b.g / 255, s.g / 255) * 255)),
-    b: Math.round(clamp(screenChannel(b.b / 255, s.b / 255) * 255)),
+    r: screenChannel(b.r / 255, s.r / 255) * 255,
+    g: screenChannel(b.g / 255, s.g / 255) * 255,
+    b: screenChannel(b.b / 255, s.b / 255) * 255,
   }
-}
-
-function clamp(num: number) {
-  return Math.max(Math.min(num, 255), 0)
 }

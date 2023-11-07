@@ -1,3 +1,4 @@
+import {clamp, round} from '../utils'
 import {HSL, RGB, RGBA} from './types'
 
 /**
@@ -40,7 +41,11 @@ export function rgbaToRGBA(rgba: string): RGBA {
 /**
  * @internal
  */
-export function rgbToHex({r, g, b}: RGB): string {
+export function rgbToHex(color: RGB): string {
+  const r = round(clamp(Math.round(color.r), 0, 255))
+  const g = round(clamp(Math.round(color.g), 0, 255))
+  const b = round(clamp(Math.round(color.b), 0, 255))
+
   return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 

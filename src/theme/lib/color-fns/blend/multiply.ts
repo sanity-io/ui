@@ -11,12 +11,8 @@ function multiplyChannel(b: number, s: number) {
  */
 export function multiply(b: RGB | RGBA, s: RGB | RGBA): RGB {
   return {
-    r: Math.round(clamp(multiplyChannel(b.r / 255, s.r / 255) * 255)),
-    g: Math.round(clamp(multiplyChannel(b.g / 255, s.g / 255) * 255)),
-    b: Math.round(clamp(multiplyChannel(b.b / 255, s.b / 255) * 255)),
+    r: multiplyChannel(b.r / 255, s.r / 255) * 255,
+    g: multiplyChannel(b.g / 255, s.g / 255) * 255,
+    b: multiplyChannel(b.b / 255, s.b / 255) * 255,
   }
-}
-
-function clamp(num: number) {
-  return Math.max(Math.min(num, 255), 0)
 }
