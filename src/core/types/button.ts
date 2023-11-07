@@ -1,7 +1,10 @@
+import {ThemeColorStateToneKey} from '@sanity/ui/theme'
+import {ThemeColorButtonModeKey} from '../_compat'
+
 /**
  * @public
  */
-export type ButtonMode = 'default' | 'ghost' | 'bleed'
+export type ButtonMode = ThemeColorButtonModeKey
 
 /**
  * @public
@@ -11,7 +14,7 @@ export type ButtonTextAlign = 'left' | 'right' | 'center'
 /**
  * @public
  */
-export type ButtonTone = 'default' | 'primary' | 'positive' | 'caution' | 'critical'
+export type ButtonTone = ThemeColorStateToneKey
 
 /**
  * @public

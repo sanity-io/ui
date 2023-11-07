@@ -1,11 +1,11 @@
-import {BoxShadow, ThemeShadow} from '@sanity/ui/theme'
+import {ThemeBoxShadow, ThemeShadow} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {EMPTY_RECORD} from '../../constants'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveShadowStyleProps} from './types'
 
-function toBoxShadow(shadow: BoxShadow, color: string) {
+function toBoxShadow(shadow: ThemeBoxShadow, color: string) {
   return `${shadow.map(rem).join(' ')} ${color}`
 }
 

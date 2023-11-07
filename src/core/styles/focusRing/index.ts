@@ -1,4 +1,4 @@
-import {FocusRing} from '@sanity/ui/theme'
+import {ThemeFocusRing} from '@sanity/ui/theme'
 
 export function focusRingBorderStyle(border: {color: string; width: number}): string {
   return `inset 0 0 0 ${border.width}px ${border.color}`
@@ -7,7 +7,7 @@ export function focusRingBorderStyle(border: {color: string; width: number}): st
 export function focusRingStyle(opts: {
   base?: {bg: string}
   border?: {color: string; width: number}
-  focusRing: FocusRing
+  focusRing: ThemeFocusRing
 }): string {
   const {base, border, focusRing} = opts
   const focusRingOutsetWidth = focusRing.offset + focusRing.width
