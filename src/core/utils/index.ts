@@ -1,3 +1,4 @@
+export * from './arrow'
 export * from './boundaryElement'
 export * from './elementQuery'
 export * from './errorBoundary'
