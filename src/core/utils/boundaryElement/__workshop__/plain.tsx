@@ -1,4 +1,4 @@
-import {Box, BoundaryElementProvider, Button, Card, Text, Tooltip} from '@sanity/ui'
+import {BoundaryElementProvider, Button, Card, Text, Tooltip} from '@sanity/ui'
 import {useState} from 'react'
 
 export default function PlainStory() {
@@ -8,11 +8,7 @@ export default function PlainStory() {
     <Card padding={7} ref={setBoundaryElement}>
       <BoundaryElementProvider element={boundaryElement}>
         <Tooltip
-          content={
-            <Box padding={2}>
-              <Text>Test aldsakm alkdmal dmalskdm alkdmlakds</Text>
-            </Box>
-          }
+          content={<Text size={1}>Test aldsakm alkdmal dmalskdm alkdmlakds</Text>}
           placement="top"
         >
           <Button text={<>Hover me</>} />

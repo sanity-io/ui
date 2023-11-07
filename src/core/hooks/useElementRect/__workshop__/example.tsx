@@ -21,7 +21,9 @@ export default function ExampleStory() {
             <Card scheme="dark" style={{position: 'absolute', ...size}} />
           </div>
 
-          <Code language="json">{JSON.stringify(size)}</Code>
+          <Code language="json" size={1}>
+            {JSON.stringify(size)}
+          </Code>
         </Stack>
       </Container>
     </Box>

@@ -22,6 +22,7 @@ export default function TestStory(): ReactElement {
   const matchReferenceWidth = useBoolean('Match reference width', false)
   const open = useBoolean('Open', true)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
+  const portal = useBoolean('Render in portal', true)
   const preventOverflow = useBoolean('Prevent overflow', true)
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
   const referenceWide = useBoolean('Reference wide?', false)
@@ -31,7 +32,9 @@ export default function TestStory(): ReactElement {
 
   const updateRef = useRef<PopoverUpdateCallback>()
 
-  const button = <Button text="reference" style={{width: referenceWide ? 300 : undefined}} />
+  const button = (
+    <Button text="reference" selected style={{width: referenceWide ? 300 : undefined}} />
+  )
 
   return (
     <Card
@@ -67,7 +70,7 @@ export default function TestStory(): ReactElement {
               {mount && (
                 <Popover
                   arrow={arrow}
-                  content={<Text>{text}</Text>}
+                  content={<Text size={1}>{text}</Text>}
                   constrainSize={constrainSize}
                   fallbackPlacements={['left', 'bottom', 'right', 'top']}
                   matchReferenceWidth={matchReferenceWidth}
@@ -75,7 +78,7 @@ export default function TestStory(): ReactElement {
                   overflow="hidden"
                   padding={3}
                   placement={placement}
-                  portal
+                  portal={portal}
                   preventOverflow={preventOverflow}
                   radius={radius}
                   updateRef={updateRef}
