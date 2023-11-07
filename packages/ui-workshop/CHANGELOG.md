@@ -5,6 +5,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/sanity-io/ui-workshop/compare/v1.2.11...v2.0.0) (2023-11-07)
+
+### ⚠ BREAKING CHANGES
+
+- configure runtime separately
+
+### Features
+
+- `Inter` font face ([f8be340](https://github.com/sanity-io/ui-workshop/commit/f8be34007d039e3c0220d0df891b0063a614086f))
+- **core:** add `theme` config option ([57b3684](https://github.com/sanity-io/ui-workshop/commit/57b3684f5b6fd5cc533bb378491debacb9f0cb09))
+
+### Bug Fixes
+
+- **build:** update configuration ([3ba6163](https://github.com/sanity-io/ui-workshop/commit/3ba6163106e3b1ff59fdb2af17723695051996e0))
+
+### Code Refactoring
+
+- configure runtime separately ([abe0737](https://github.com/sanity-io/ui-workshop/commit/abe07373c28b7d279c0b441aa724478e00da3be8))
+
 ## [1.2.11](https://github.com/sanity-io/ui-workshop/compare/v1.2.10...v1.2.11) (2023-08-26)
 
 ### Bug Fixes
