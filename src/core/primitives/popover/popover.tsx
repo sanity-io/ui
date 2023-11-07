@@ -90,7 +90,7 @@ export const Popover = memo(
 
     const {
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
-      arrow: arrowProp = true,
+      arrow: arrowProp = false,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
       constrainSize = false,
@@ -192,11 +192,7 @@ export const Popover = memo(
       }
 
       // Define distance between reference and floating element
-      ret.push(
-        offset({
-          mainAxis: arrowProp ? DEFAULT_POPOVER_DISTANCE : 0,
-        }),
-      )
+      ret.push(offset({mainAxis: DEFAULT_POPOVER_DISTANCE}))
 
       // Track sizes
       if (constrainSize || matchReferenceWidth) {
