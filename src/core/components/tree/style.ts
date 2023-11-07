@@ -9,6 +9,9 @@ export function treeItemRootStyle(): ReturnType<typeof css> {
       cursor: default;
       border-radius: 3px;
 
+      background-color: var(--card-bg-color);
+      color: var(--treeitem-fg-color);
+
       &:focus {
         position: relative;
       }
@@ -20,6 +23,9 @@ export function treeItemRootStyle(): ReturnType<typeof css> {
       & > div {
         cursor: default;
         border-radius: 3px;
+
+        background-color: var(--card-bg-color);
+        color: var(--treeitem-fg-color);
       }
 
       &:focus > div {
@@ -41,9 +47,6 @@ export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css
     &[role='none'] {
       & > [role='treeitem'] {
         ${_colorVarsStyle(base, tone.enabled)}
-
-        background-color: var(--card-bg-color);
-        color: var(--treeitem-fg-color);
       }
 
       &[data-selected] > [role='treeitem'] {
@@ -65,9 +68,6 @@ export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css
     &[role='treeitem'] {
       & > [data-ui='TreeItem__box'] {
         ${_colorVarsStyle(base, tone.enabled)}
-
-        background-color: var(--card-bg-color);
-        color: var(--card-fg-color);
       }
 
       &[data-selected] > [data-ui='TreeItem__box'] {
