@@ -19,9 +19,9 @@
     "watch": "pkg watch --strict"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.79.0",
+    "@figma/plugin-typings": "^1.80.0",
     "@sanity/color": "workspace:*",
-    "@sanity/pkg-utils": "^3.0.0",
+    "@sanity/pkg-utils": "^3.2.3",
     "typescript": "^5.2.2"
   }
 }
