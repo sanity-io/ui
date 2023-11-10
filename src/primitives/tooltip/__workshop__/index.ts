@@ -15,5 +15,10 @@ export default defineScope({
       title: 'Resizable Boundary',
       component: lazy(() => import('./resizableBoundary')),
     },
+    {
+      name: 'overflowBoundary',
+      title: 'Overflowing Boundary',
+      component: lazy(() => import('./overflowingBoundary')),
+    },
   ],
 })
