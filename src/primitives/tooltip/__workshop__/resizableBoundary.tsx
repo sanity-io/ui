@@ -10,12 +10,13 @@ export default function PropsStory() {
   )
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'right')
   const portal = useBoolean('Portal', true)
+  const useBoundaryElement = useBoolean('Use boundary element', true)
 
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (
     <Flex align="center" height="fill" justify="center">
-      <BoundaryElementProvider element={boundaryElement}>
+      <BoundaryElementProvider element={useBoundaryElement ? boundaryElement : undefined}>
         <Card
           border
           ref={setBoundaryElement}
