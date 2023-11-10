@@ -1,6 +1,5 @@
 import {Placement} from '@floating-ui/react-dom'
 
-export const DEFAULT_TOOLTIP_PADDING = 4
 export const DEFAULT_FALLBACK_PLACEMENTS: Record<Placement, Placement[]> = {
   top: ['bottom', 'left', 'right'],
   'top-start': ['bottom-start', 'left-start', 'right-start'],

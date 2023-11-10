@@ -8,6 +8,7 @@ import {
   useFloating,
   Middleware,
   RootBoundary,
+  size,
 } from '@floating-ui/react-dom'
 import {
   cloneElement,
@@ -30,7 +31,7 @@ import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
-import {DEFAULT_FALLBACK_PLACEMENTS, DEFAULT_TOOLTIP_PADDING} from './constants'
+import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
 import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
@@ -62,9 +63,6 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
 
 const Root = styled(Layer)`
   pointer-events: none;
-  // Note that 100vw doesn't exclude system scrollbars.
-  // This should be sufficiently small enough to not trigger overflow-x scrollbars when portalled.
-  max-width: calc(100vw - ${DEFAULT_TOOLTIP_PADDING * 10}px);
 `
 
 /**
@@ -104,22 +102,35 @@ export const Tooltip = forwardRef(function Tooltip(
     // Flip the floating element when leaving the boundary box
     ret.push(
       flip({
-        boundary: portal ? undefined : boundaryElement || undefined,
+        boundary: boundaryElement || undefined,
         fallbackPlacements,
-        padding: DEFAULT_TOOLTIP_PADDING,
+        padding: 4,
         rootBoundary,
+        mainAxis: false,
       }),
     )
 
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: 3}))
 
-    // Shift the tooltip so its sits with the boundary element
+    // Set width and height on the floating element
+    ret.push(
+      size({
+        apply({availableWidth, availableHeight, elements}) {
+          Object.assign(elements.floating.style, {
+            maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
+            maxHeight: `${availableHeight - 4 * 2}px`, // the padding is `4px`
+          })
+        },
+      }),
+    )
+
+    // Shift the tooltip so its sits with the boundary eleement
     ret.push(
       shift({
-        boundary: portal ? undefined : boundaryElement || undefined,
+        boundary: boundaryElement || undefined,
         rootBoundary,
-        padding: DEFAULT_TOOLTIP_PADDING,
+        padding: 4,
       }),
     )
 
@@ -127,7 +138,7 @@ export const Tooltip = forwardRef(function Tooltip(
     ret.push(arrow({element: arrowRef, padding: 2}))
 
     return ret
-  }, [boundaryElement, fallbackPlacements, portal])
+  }, [boundaryElement, fallbackPlacements])
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
