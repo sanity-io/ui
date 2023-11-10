@@ -15,7 +15,7 @@ export default function OverflowingBoundaryStory() {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (
-    <Flex align="center" height="fill" justify="center">
+    <Flex align="center" height="fill" justify="center" style={{height: '200vh'}}>
       <BoundaryElementProvider element={useBoundaryElement ? boundaryElement : null}>
         <Card
           border
