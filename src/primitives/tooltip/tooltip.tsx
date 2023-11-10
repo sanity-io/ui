@@ -36,6 +36,8 @@ import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
 import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
+const TOOLTIP_PADDING = 4 // px
+
 /**
  * @public
  */
@@ -64,7 +66,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
 
 const Root = styled(Layer)`
   pointer-events: none;
-  max-width: calc(100vw - 8px);
+  max-width: calc(100vw - ${TOOLTIP_PADDING * 2}px);
 `
 
 /**
@@ -107,7 +109,7 @@ export const Tooltip = forwardRef(function Tooltip(
       flip({
         boundary: isConstrainedToBoundary ? boundaryElement || undefined : undefined,
         fallbackPlacements,
-        padding: 4,
+        padding: TOOLTIP_PADDING,
         rootBoundary,
       }),
     )
@@ -119,7 +121,7 @@ export const Tooltip = forwardRef(function Tooltip(
         size({
           apply({availableWidth, elements}) {
             Object.assign(elements.floating.style, {
-              maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
+              maxWidth: `${availableWidth - TOOLTIP_PADDING * 2}px`,
             })
           },
         }),
@@ -133,7 +135,7 @@ export const Tooltip = forwardRef(function Tooltip(
           ? boundaryElement || boundaryElementContext?.element || undefined
           : undefined,
         rootBoundary,
-        padding: 4,
+        padding: TOOLTIP_PADDING,
       }),
     )
 
