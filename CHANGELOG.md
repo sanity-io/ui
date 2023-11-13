@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/sanity-io/ui/compare/v1.9.2...v1.9.3) (2023-11-13)
+
+### Bug Fixes
+
+- update tooltip position middleware, close tooltips on click ([#1182](https://github.com/sanity-io/ui/issues/1182)) ([a596700](https://github.com/sanity-io/ui/commit/a596700c668e9270518aa3bb23b46479468db7da))
+
 ## [1.9.2](https://github.com/sanity-io/ui/compare/v1.9.1...v1.9.2) (2023-11-10)
 
 ### Reverts
