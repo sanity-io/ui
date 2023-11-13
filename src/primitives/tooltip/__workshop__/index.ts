@@ -20,5 +20,10 @@ export default defineScope({
       title: 'Overflowing Boundary',
       component: lazy(() => import('./overflowingBoundary')),
     },
+    {
+      name: 'customPortalStory',
+      title: 'Custom Portal',
+      component: lazy(() => import('./customPortal')),
+    },
   ],
 })

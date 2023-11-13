@@ -373,7 +373,7 @@ describe('Tooltip', () => {
 
       act(() => jest.advanceTimersByTime(delay))
 
-      // Assertion: the tooltip is no visible
+      // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
       act(() => fireEvent.click(button))
@@ -399,7 +399,7 @@ describe('Tooltip', () => {
 
       act(() => jest.advanceTimersByTime(delay))
 
-      // Assertion: the tooltip is no visible
+      // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
       act(() => fireEvent.contextMenu(button))

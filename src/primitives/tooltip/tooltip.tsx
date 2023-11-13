@@ -27,7 +27,7 @@ import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
+import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
 import {DEFAULT_FALLBACK_PLACEMENTS, DEFAULT_TOOLTIP_PADDING} from './constants'
@@ -60,11 +60,9 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   delay?: Delay
 }
 
-const Root = styled(Layer)`
+const Root = styled(Layer)<{$maxWidth: number}>`
   pointer-events: none;
-  // Note that 100vw doesn't exclude system scrollbars.
-  // This should be sufficiently small enough to not trigger overflow-x scrollbars when portalled.
-  max-width: calc(100vw - ${DEFAULT_TOOLTIP_PADDING * 10}px);
+  max-width: ${({$maxWidth}) => $maxWidth}px;
 `
 
 /**
@@ -85,7 +83,7 @@ export const Tooltip = forwardRef(function Tooltip(
       DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     padding,
     placement: placementProp = 'bottom',
-    portal,
+    portal: portalProp,
     scheme,
     shadow = 2,
     zOffset = theme.sanity.layer?.tooltip.zOffset,
@@ -98,13 +96,29 @@ export const Tooltip = forwardRef(function Tooltip(
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
 
+  const portal = usePortal()
+  const portalElement =
+    typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
+
+  // Get the maximum tooltip width (sans tooltip padding)
+  // Tooltip width should never exceed the width of either any supplied boundary or portal element.
+  // If both portal and boundary elements are provided, use the smaller width of the two.
+  const tooltipWidth = useMemo(() => {
+    const availableWidths = [
+      ...(boundaryElement ? [boundaryElement.offsetWidth] : []),
+      portalElement?.offsetWidth || document.body.offsetWidth,
+    ]
+
+    return Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2
+  }, [boundaryElement, portalElement?.offsetWidth])
+
   const middleware = useMemo(() => {
     const ret: Middleware[] = []
 
     // Flip the floating element when leaving the boundary box
     ret.push(
       flip({
-        boundary: portal ? undefined : boundaryElement || undefined,
+        boundary: boundaryElement || undefined,
         fallbackPlacements,
         padding: DEFAULT_TOOLTIP_PADDING,
         rootBoundary,
@@ -117,7 +131,7 @@ export const Tooltip = forwardRef(function Tooltip(
     // Shift the tooltip so its sits with the boundary element
     ret.push(
       shift({
-        boundary: portal ? undefined : boundaryElement || undefined,
+        boundary: boundaryElement || undefined,
         rootBoundary,
         padding: DEFAULT_TOOLTIP_PADDING,
       }),
@@ -127,7 +141,7 @@ export const Tooltip = forwardRef(function Tooltip(
     ret.push(arrow({element: arrowRef, padding: 2}))
 
     return ret
-  }, [boundaryElement, fallbackPlacements, portal])
+  }, [boundaryElement, fallbackPlacements])
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
@@ -356,6 +370,7 @@ export const Tooltip = forwardRef(function Tooltip(
       ref={setFloating}
       style={floatingStyles}
       zOffset={zOffset}
+      $maxWidth={tooltipWidth}
     >
       <Card
         data-ui="Tooltip__card"
@@ -377,8 +392,8 @@ export const Tooltip = forwardRef(function Tooltip(
 
       {showTooltip && (
         <>
-          {portal ? (
-            <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
+          {portalProp ? (
+            <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
               {root}
             </Portal>
           ) : (
