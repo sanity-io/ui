@@ -8,7 +8,6 @@ import {
   useFloating,
   Middleware,
   RootBoundary,
-  size,
 } from '@floating-ui/react-dom'
 import {
   cloneElement,
@@ -28,10 +27,10 @@ import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {ThemeColorSchemeKey, useTheme} from '../../theme'
 import {Placement} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement} from '../../utils'
+import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
-import {DEFAULT_FALLBACK_PLACEMENTS} from './constants'
+import {DEFAULT_FALLBACK_PLACEMENTS, DEFAULT_TOOLTIP_PADDING} from './constants'
 import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
@@ -61,8 +60,9 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   delay?: Delay
 }
 
-const Root = styled(Layer)`
+const Root = styled(Layer)<{$maxWidth: number}>`
   pointer-events: none;
+  max-width: ${({$maxWidth}) => $maxWidth}px;
 `
 
 /**
@@ -83,7 +83,7 @@ export const Tooltip = forwardRef(function Tooltip(
       DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     padding,
     placement: placementProp = 'bottom',
-    portal,
+    portal: portalProp,
     scheme,
     shadow = 2,
     zOffset = theme.sanity.layer?.tooltip.zOffset,
@@ -96,6 +96,22 @@ export const Tooltip = forwardRef(function Tooltip(
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
 
+  const portal = usePortal()
+  const portalElement =
+    typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
+
+  // Get the maximum tooltip width (sans tooltip padding)
+  // Tooltip width should never exceed the width of either any supplied boundary or portal element.
+  // If both portal and boundary elements are provided, use the smaller width of the two.
+  const tooltipWidth = useMemo(() => {
+    const availableWidths = [
+      ...(boundaryElement ? [boundaryElement.offsetWidth] : []),
+      portalElement?.offsetWidth || document.body.offsetWidth,
+    ]
+
+    return Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2
+  }, [boundaryElement, portalElement?.offsetWidth])
+
   const middleware = useMemo(() => {
     const ret: Middleware[] = []
 
@@ -104,33 +120,20 @@ export const Tooltip = forwardRef(function Tooltip(
       flip({
         boundary: boundaryElement || undefined,
         fallbackPlacements,
-        padding: 4,
+        padding: DEFAULT_TOOLTIP_PADDING,
         rootBoundary,
-        mainAxis: false,
       }),
     )
 
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: 3}))
 
-    // Set width and height on the floating element
-    ret.push(
-      size({
-        apply({availableWidth, availableHeight, elements}) {
-          Object.assign(elements.floating.style, {
-            maxWidth: `${availableWidth - 4 * 2}px`, // the padding is `4px`
-            maxHeight: `${availableHeight - 4 * 2}px`, // the padding is `4px`
-          })
-        },
-      }),
-    )
-
-    // Shift the tooltip so its sits with the boundary eleement
+    // Shift the tooltip so its sits with the boundary element
     ret.push(
       shift({
         boundary: boundaryElement || undefined,
         rootBoundary,
-        padding: 4,
+        padding: DEFAULT_TOOLTIP_PADDING,
       }),
     )
 
@@ -203,10 +206,48 @@ export const Tooltip = forwardRef(function Tooltip(
     [isInsideGroup, delayGroupContext, openDelay, tooltipId, closeDelay, setIsOpen],
   )
 
-  const handleBlur = useCallback(() => handleIsOpenChange(false), [handleIsOpenChange])
-  const handleFocus = useCallback(() => handleIsOpenChange(true), [handleIsOpenChange])
-  const handleMouseEnter = useCallback(() => handleIsOpenChange(true), [handleIsOpenChange])
-  const handleMouseLeave = useCallback(() => handleIsOpenChange(false), [handleIsOpenChange])
+  const handleBlur = useCallback(
+    (e: FocusEvent) => {
+      handleIsOpenChange(false)
+      childProp?.props?.onBlur?.(e)
+    },
+    [childProp?.props, handleIsOpenChange],
+  )
+  const handleClick = useCallback(
+    (e: MouseEvent) => {
+      handleIsOpenChange(false, true), [handleIsOpenChange]
+      childProp?.props.onClick?.(e)
+    },
+    [childProp?.props, handleIsOpenChange],
+  )
+  const handleContextMenu = useCallback(
+    (e: MouseEvent) => {
+      handleIsOpenChange(false, true), [handleIsOpenChange]
+      childProp?.props.onContextMenu?.(e)
+    },
+    [childProp?.props, handleIsOpenChange],
+  )
+  const handleFocus = useCallback(
+    (e: FocusEvent) => {
+      handleIsOpenChange(true)
+      childProp?.props?.onFocus?.(e)
+    },
+    [childProp?.props, handleIsOpenChange],
+  )
+  const handleMouseEnter = useCallback(
+    (e: MouseEvent) => {
+      handleIsOpenChange(true)
+      childProp?.props?.onMouseEnter?.(e)
+    },
+    [childProp?.props, handleIsOpenChange],
+  )
+  const handleMouseLeave = useCallback(
+    (e: MouseEvent) => {
+      handleIsOpenChange(false)
+      childProp?.props?.onMouseLeave?.(e)
+    },
+    [childProp?.props, handleIsOpenChange],
+  )
 
   // Detect whether the mouse is moving outside of the reference element. This is sometimes
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
@@ -303,9 +344,20 @@ export const Tooltip = forwardRef(function Tooltip(
       onFocus: handleFocus,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
+      onClick: handleClick,
+      onContextMenu: handleContextMenu,
       ref: setReference,
     })
-  }, [childProp, handleBlur, handleFocus, handleMouseEnter, handleMouseLeave, setReference])
+  }, [
+    childProp,
+    handleBlur,
+    handleClick,
+    handleContextMenu,
+    handleFocus,
+    handleMouseEnter,
+    handleMouseLeave,
+    setReference,
+  ])
 
   if (!child) return <></>
 
@@ -318,6 +370,7 @@ export const Tooltip = forwardRef(function Tooltip(
       ref={setFloating}
       style={floatingStyles}
       zOffset={zOffset}
+      $maxWidth={tooltipWidth}
     >
       <Card
         data-ui="Tooltip__card"
@@ -339,8 +392,8 @@ export const Tooltip = forwardRef(function Tooltip(
 
       {showTooltip && (
         <>
-          {portal ? (
-            <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
+          {portalProp ? (
+            <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
               {root}
             </Portal>
           ) : (
