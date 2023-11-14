@@ -24,6 +24,7 @@ export interface TextInputRepresentationStyleProps {
   $hasSuffix?: boolean
   $scheme: ThemeColorSchemeKey
   $tone: CardTone
+  $unstableDisableFocusRing?: boolean
 }
 
 const ROOT_STYLE = css`
@@ -129,7 +130,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$hasPrefix, $hasSuffix, $scheme, $tone, theme} = props
+  const {$hasPrefix, $hasSuffix, $scheme, $tone, $unstableDisableFocusRing, theme} = props
   const {input} = theme.sanity
   const {focusRing} = input.text
   const color = theme.sanity.color.input
@@ -182,14 +183,18 @@ export function textInputRepresentationStyle(
       /* focused */
       *:not(:disabled):focus + & {
         &[data-border] {
-          --input-box-shadow: ${focusRingStyle({
-            border: {color: color.default.enabled.border, width: input.border.width},
-            focusRing,
-          })};
+          --input-box-shadow: ${$unstableDisableFocusRing
+            ? undefined
+            : focusRingStyle({
+                border: {color: color.default.enabled.border, width: input.border.width},
+                focusRing,
+              })};
         }
 
         &:not([data-border]) {
-          --input-box-shadow: ${focusRingStyle({focusRing})};
+          --input-box-shadow: ${$unstableDisableFocusRing
+            ? undefined
+            : focusRingStyle({focusRing})};
         }
       }
 
