@@ -50,6 +50,10 @@ export type TextInputType =
  * @public
  */
 export interface TextInputProps {
+  /**
+   * @beta
+   */
+  __unstable_disableFocusRing?: boolean
   border?: boolean
   /**
    * @beta
@@ -70,10 +74,6 @@ export interface TextInputProps {
   suffix?: React.ReactNode
   type?: TextInputType
   weight?: ThemeFontWeightKey
-  /**
-   * @beta
-   */
-  unstableDisableFocusRing?: boolean
 }
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
@@ -153,6 +153,7 @@ export const TextInput = forwardRef(function TextInput(
   forwardedRef: React.Ref<HTMLInputElement>,
 ) {
   const {
+    __unstable_disableFocusRing,
     border = true,
     clearButton,
     disabled = false,
@@ -169,7 +170,6 @@ export const TextInput = forwardRef(function TextInput(
     customValidity,
     type = 'text',
     weight,
-    unstableDisableFocusRing,
     ...restProps
   } = props
 
@@ -226,7 +226,7 @@ export const TextInput = forwardRef(function TextInput(
     () => (
       <Presentation
         $hasPrefix={$hasPrefix}
-        $unstableDisableFocusRing={unstableDisableFocusRing}
+        $unstableDisableFocusRing={__unstable_disableFocusRing}
         $hasSuffix={$hasSuffix}
         $radius={radius}
         $scheme={rootTheme.scheme}
@@ -255,6 +255,7 @@ export const TextInput = forwardRef(function TextInput(
       </Presentation>
     ),
     [
+      __unstable_disableFocusRing,
       border,
       fontSize,
       icon,
@@ -265,7 +266,6 @@ export const TextInput = forwardRef(function TextInput(
       $hasClearButton,
       $hasPrefix,
       $hasSuffix,
-      unstableDisableFocusRing,
     ],
   )
 

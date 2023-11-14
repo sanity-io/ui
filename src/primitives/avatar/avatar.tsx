@@ -11,12 +11,12 @@ import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
  * @public
  */
 export interface AvatarProps {
+  /** @beta */
+  __unstable_hideInnerStroke?: boolean
   animateArrowFrom?: AvatarPosition
   arrowPosition?: AvatarPosition
   as?: React.ElementType | keyof JSX.IntrinsicElements
   color?: ThemeColorSpotKey
-  /** @beta */
-  hideInnerStroke?: boolean
   initials?: string
   onImageLoadError?: (event: Error) => void
   size?: AvatarSize | AvatarSize[]
@@ -52,6 +52,7 @@ export const Avatar = forwardRef(function Avatar(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
+    __unstable_hideInnerStroke,
     as: asProp,
     color: colorKey = 'gray',
     src,
@@ -60,7 +61,6 @@ export const Avatar = forwardRef(function Avatar(
     onImageLoadError,
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
-    hideInnerStroke,
     status = 'online',
     size: sizeProp = 0,
     ...restProps
@@ -145,7 +145,7 @@ export const Avatar = forwardRef(function Avatar(
           </defs>
 
           <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
-          {!hideInnerStroke && (
+          {!__unstable_hideInnerStroke && (
             <BgStroke
               cx={_radius}
               cy={_radius}
