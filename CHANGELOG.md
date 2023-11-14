@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.20](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.19...v2.0.0-alpha.20) (2023-11-14)
+
+### Bug Fixes
+
+- correctly prefix unstable props ([4e07db8](https://github.com/sanity-io/ui/commit/4e07db8bf7f55de693497a98514d3fb651af7164))
+
 ## [2.0.0-alpha.19](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.18...v2.0.0-alpha.19) (2023-11-14)
 
 ### Bug Fixes
