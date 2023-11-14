@@ -152,7 +152,7 @@ function avatarBgStrokeStyle(): CSSObject {
 
 function avatarStrokeStyle(): CSSObject {
   return {
-    strokeWidth: '3px',
+    strokeWidth: '2px',
 
     '[data-status="editing"] &': {
       strokeDasharray: '2 4',

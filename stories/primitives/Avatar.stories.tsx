@@ -1,10 +1,12 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Avatar, Flex, Stack} from '../../src/primitives'
+import {AVATAR_SRC} from '../constants'
 import {getAvatarSizeControls} from '../controls'
 
 const meta: Meta<typeof Avatar> = {
   args: {
     initials: 'AB',
+    src: AVATAR_SRC,
   },
   argTypes: {
     size: getAvatarSizeControls(),
@@ -17,6 +19,13 @@ export default meta
 type Story = StoryObj<typeof Avatar>
 
 export const Default: Story = {
+  render: (props) => <Avatar {...props} />,
+}
+
+export const NoSrc: Story = {
+  args: {
+    src: undefined,
+  },
   render: (props) => <Avatar {...props} />,
 }
 
@@ -36,7 +45,7 @@ export const AsButton: Story = {
 export const Colors: Story = {
   parameters: {
     controls: {
-      include: ['initials', 'size', 'status'],
+      exclude: ['color'],
     },
   },
   render: (props) => (
@@ -58,7 +67,7 @@ export const Colors: Story = {
 export const Sizes: Story = {
   parameters: {
     controls: {
-      include: ['color', 'initials', 'status'],
+      exclude: ['size'],
     },
   },
   render: (props) => (
@@ -66,6 +75,9 @@ export const Sizes: Story = {
       <Avatar {...props} size={0} />
       <Avatar {...props} size={1} />
       <Avatar {...props} size={2} />
+      <Avatar {...props} size={0} src={undefined} />
+      <Avatar {...props} size={1} src={undefined} />
+      <Avatar {...props} size={2} src={undefined} />
     </Stack>
   ),
 }
