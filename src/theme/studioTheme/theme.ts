@@ -8,11 +8,11 @@ import {fonts} from './fonts'
 export const studioTheme: RootTheme = {
   avatar: {
     sizes: [
-      {distance: -3, size: 25},
-      {distance: -6, size: 35},
-      {distance: -9, size: 55},
+      {distance: -3, size: 23},
+      {distance: -6, size: 33},
+      {distance: -9, size: 53},
     ],
-    focusRing: {offset: 1, width: 1},
+    focusRing: {offset: 0, width: 1},
   },
   button: {
     textWeight: 'medium',
