@@ -15,6 +15,8 @@ export interface AvatarProps {
   arrowPosition?: AvatarPosition
   as?: React.ElementType | keyof JSX.IntrinsicElements
   color?: ThemeColorSpotKey
+  /** @beta */
+  hideInnerStroke?: boolean
   initials?: string
   onImageLoadError?: (event: Error) => void
   size?: AvatarSize | AvatarSize[]
@@ -58,6 +60,7 @@ export const Avatar = forwardRef(function Avatar(
     onImageLoadError,
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
+    hideInnerStroke,
     status = 'online',
     size: sizeProp = 0,
     ...restProps
@@ -142,13 +145,15 @@ export const Avatar = forwardRef(function Avatar(
           </defs>
 
           <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
-          <BgStroke
-            cx={_radius}
-            cy={_radius}
-            rx={_radius}
-            ry={_radius}
-            vectorEffect="non-scaling-stroke"
-          />
+          {!hideInnerStroke && (
+            <BgStroke
+              cx={_radius}
+              cy={_radius}
+              rx={_radius}
+              ry={_radius}
+              vectorEffect="non-scaling-stroke"
+            />
+          )}
           <Stroke
             cx={_radius}
             cy={_radius}
@@ -163,8 +168,8 @@ export const Avatar = forwardRef(function Avatar(
       {(imageFailed || !src) && initials && (
         <>
           <Initials>
-            <Text as="span" size={initialsSize}>
-              <strong>{initials}</strong>
+            <Text as="span" size={initialsSize} weight="medium">
+              {initials}
             </Text>
           </Initials>
         </>

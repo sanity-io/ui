@@ -36,7 +36,7 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
     background: var(--card-bg-color);
     box-shadow:
       0 0 0 1px var(--card-bg-color),
-      inset 0 0 0 1.5px var(--card-hairline-hard-color);
+      inset 0 0 0 1px var(--card-hairline-hard-color);
     padding: 0 ${rem(theme.sanity.space[2])};
 
     &:not([hidden]) {
@@ -73,8 +73,8 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
 
   return (
     <Root $size={size} data-ui="AvatarCounter" ref={ref}>
-      <Text as="span" size={counterSize}>
-        <strong>{count}</strong>
+      <Text as="span" size={counterSize} weight="medium">
+        {count}
       </Text>
     </Root>
   )
