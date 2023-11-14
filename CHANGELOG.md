@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.19](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.18...v2.0.0-alpha.19) (2023-11-14)
+
+### Bug Fixes
+
+- **facelift:** add unstableDisableFocusRing prop to text inputs ([#1184](https://github.com/sanity-io/ui/issues/1184)) ([a609fb3](https://github.com/sanity-io/ui/commit/a609fb3f3f16a3db44c6f4800533489a56895077))
+
 ## [2.0.0-alpha.18](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.17...v2.0.0-alpha.18) (2023-11-14)
 
 ### Features
