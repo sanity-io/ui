@@ -145,6 +145,24 @@ All notable changes to this project will be documented in this file. See
 - **tooltip:** update styles and corresponding stories ([#1160](https://github.com/sanity-io/ui/issues/1160)) ([c80e3a0](https://github.com/sanity-io/ui/commit/c80e3a05dc55fd3bc2e462a679a07bd64dbe8986))
 - update various input styles ([#1147](https://github.com/sanity-io/ui/issues/1147)) ([cdb25e7](https://github.com/sanity-io/ui/commit/cdb25e78cef67330fb3322220347692740237bc1)), closes [#1144](https://github.com/sanity-io/ui/issues/1144) [#1145](https://github.com/sanity-io/ui/issues/1145) [#1146](https://github.com/sanity-io/ui/issues/1146)
 
+## [1.9.3](https://github.com/sanity-io/ui/compare/v1.9.2...v1.9.3) (2023-11-13)
+
+### Bug Fixes
+
+- update tooltip position middleware, close tooltips on click ([#1182](https://github.com/sanity-io/ui/issues/1182)) ([a596700](https://github.com/sanity-io/ui/commit/a596700c668e9270518aa3bb23b46479468db7da))
+
+## [1.9.2](https://github.com/sanity-io/ui/compare/v1.9.1...v1.9.2) (2023-11-10)
+
+### Reverts
+
+- Revert "fix(tooltip): update tooltip position middleware (#1171)" ([ea68fde](https://github.com/sanity-io/ui/commit/ea68fde5ce20b63d05de90a24825b61939922b49)), closes [#1171](https://github.com/sanity-io/ui/issues/1171)
+
+## [1.9.1](https://github.com/sanity-io/ui/compare/v1.9.0...v1.9.1) (2023-11-10)
+
+### Bug Fixes
+
+- **tooltip:** update tooltip position middleware ([#1171](https://github.com/sanity-io/ui/issues/1171)) ([b00957c](https://github.com/sanity-io/ui/commit/b00957c5d1dc23b7e76a217efce28d8da59780b1))
+
 ## [1.9.0](https://github.com/sanity-io/ui/compare/v1.8.3...v1.9.0) (2023-11-06)
 
 ### Features

@@ -6,6 +6,17 @@ import {render} from '../../../test'
 import {Text, Button} from '../../primitives'
 import {Tooltip, TooltipDelayGroupProvider} from '../tooltip'
 
+// Fake timers using Jest
+beforeEach(() => {
+  jest.useFakeTimers()
+})
+
+// Running all pending timers and switching to real timers using Jest
+afterEach(() => {
+  jest.runOnlyPendingTimers()
+  jest.useRealTimers()
+})
+
 describe('Tooltip', () => {
   describe('Using same delay for open and close', () => {
     it('should hide and show the tooltip content when hovered, with no delay', () => {
@@ -275,6 +286,7 @@ describe('Tooltip', () => {
       jest.clearAllMocks()
     })
   })
+
   describe('Closing the <Tooltip /> with the Escape key', () => {
     it('Standalone tooltip closes immediately with Escape key', () => {
       const delay = 150
@@ -340,6 +352,119 @@ describe('Tooltip', () => {
       })
       // Validate tooltip content is not rendered anymore
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('Clicking the <Tooltip /> child should close the tooltip', () => {
+    it('Should close the tooltip when clicked', () => {
+      const delay = 150
+
+      render(
+        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} delay={delay}>
+          <Button mode="bleed" text="Hover me" />
+        </Tooltip>,
+      )
+
+      const button = screen.getByText('Hover me')
+
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      fireEvent.focus(button)
+
+      act(() => jest.advanceTimersByTime(delay))
+
+      // Assertion: the tooltip is not visible
+      expect(screen.queryByText('Tooltip content')).toBeVisible()
+
+      act(() => fireEvent.click(button))
+
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    })
+
+    it('Should close the tooltip when the context menu is opened (right click)', () => {
+      const delay = 150
+
+      render(
+        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} delay={delay}>
+          <Button mode="bleed" text="Hover me" />
+        </Tooltip>,
+      )
+
+      const button = screen.getByText('Hover me')
+
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      fireEvent.focus(button)
+
+      act(() => jest.advanceTimersByTime(delay))
+
+      // Assertion: the tooltip is not visible
+      expect(screen.queryByText('Tooltip content')).toBeVisible()
+
+      act(() => fireEvent.contextMenu(button))
+
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('Used defined events on <Tooltip /> child should fire correctly', () => {
+    const handleBlur = jest.fn()
+    const handleClick = jest.fn()
+    const handleContextMenu = jest.fn()
+    const handleFocus = jest.fn()
+    const handleMouseEnter = jest.fn()
+    const handleMouseLeave = jest.fn()
+
+    beforeEach(() => {
+      render(
+        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>}>
+          <Button
+            data-testid="btn"
+            mode="bleed"
+            onBlur={handleBlur}
+            onClick={handleClick}
+            onContextMenu={handleContextMenu}
+            onFocus={handleFocus}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            text="Hover me"
+          />
+        </Tooltip>,
+      )
+    })
+
+    afterEach(() => jest.clearAllMocks())
+
+    it('should fire the onBlur event', () => {
+      fireEvent.blur(screen.getByTestId('btn'))
+      expect(handleBlur).toHaveBeenCalledTimes(1)
+    })
+
+    it('should fire the onClick event', () => {
+      fireEvent.click(screen.getByTestId('btn'))
+      expect(handleClick).toHaveBeenCalledTimes(1)
+    })
+
+    it('should fire the onContextMenu event', () => {
+      fireEvent.contextMenu(screen.getByTestId('btn'))
+      expect(handleContextMenu).toHaveBeenCalledTimes(1)
+    })
+
+    it('should fire the onFocus event', () => {
+      fireEvent.focus(screen.getByTestId('btn'))
+      expect(handleFocus).toHaveBeenCalledTimes(1)
+    })
+
+    it('should fire the onMouseEnter event', () => {
+      fireEvent.mouseEnter(screen.getByTestId('btn'))
+      expect(handleMouseEnter).toHaveBeenCalledTimes(1)
+    })
+
+    it('should fire the onMouseLeave event', () => {
+      fireEvent.mouseLeave(screen.getByTestId('btn'))
+      expect(handleMouseLeave).toHaveBeenCalledTimes(1)
     })
   })
 })
