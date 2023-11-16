@@ -5,6 +5,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.22](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.21...v2.0.0-alpha.22) (2023-11-16)
+
+### Features
+
+- allow tooltip arrows to be hidden ([16d264c](https://github.com/sanity-io/ui/commit/16d264cbdfb0c65a9de2a132b8ab7c8a037c13d5))
+- reduce autocomplete radii ([27ca86e](https://github.com/sanity-io/ui/commit/27ca86e700fa3c8eda85ae90b6f33ade8c35b550))
+- update badge background colors ([960d1dd](https://github.com/sanity-io/ui/commit/960d1ddf274d1a757526b9779bb20fe9d790c7dc))
+- update toast styles ([ce802b8](https://github.com/sanity-io/ui/commit/ce802b86d2a3d240695873b8341b663309fe7445))
+
 ## [2.0.0-alpha.21](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.20...v2.0.0-alpha.21) (2023-11-16)
 
 ### Bug Fixes
