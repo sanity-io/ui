@@ -10,6 +10,7 @@ export interface ToastProps {
   closable?: boolean
   description?: React.ReactNode
   onClose?: () => void
+  radius?: number | number[]
   title?: React.ReactNode
   status?: 'error' | 'warning' | 'success' | 'info'
 }
@@ -46,7 +47,7 @@ const TextBox = styled(Flex)`
 export function Toast(
   props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>,
 ): React.ReactElement {
-  const {closable, description, onClose, title, status, ...restProps} = props
+  const {closable, description, onClose, radius = 3, title, status, ...restProps} = props
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
 
@@ -56,14 +57,18 @@ export function Toast(
       role={role}
       {...restProps}
       marginTop={3}
-      radius={2}
+      radius={radius}
       shadow={2}
       tone={cardTone}
     >
       <Flex align="flex-start">
         <TextBox flex={1} padding={3}>
           <Stack space={3}>
-            {title && <Text weight="semibold">{title}</Text>}
+            {title && (
+              <Text size={1} weight="medium">
+                {title}
+              </Text>
+            )}
             {description && (
               <Text muted size={1}>
                 {description}
