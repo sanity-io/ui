@@ -30,7 +30,11 @@ import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
-import {DEFAULT_FALLBACK_PLACEMENTS, DEFAULT_TOOLTIP_PADDING} from './constants'
+import {
+  DEFAULT_FALLBACK_PLACEMENTS,
+  DEFAULT_TOOLTIP_DISTANCE,
+  DEFAULT_TOOLTIP_PADDING,
+} from './constants'
 import {TooltipArrow} from './tooltipArrow'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
@@ -40,6 +44,7 @@ import {useTooltipDelayGroup} from './tooltipDelayGroup'
 export interface TooltipProps extends Omit<LayerProps, 'as'> {
   /** @deprecated Use `fallbackPlacements` instead. */
   allowedAutoPlacements?: Placement[]
+  arrow?: boolean
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
   content?: React.ReactNode
@@ -78,6 +83,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const boundaryElementContext = useBoundaryElement()
   const theme = useTheme()
   const {
+    arrow: arrowProp = true,
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
     content,
@@ -129,7 +135,7 @@ export const Tooltip = forwardRef(function Tooltip(
     )
 
     // Define distance between reference and floating element
-    ret.push(offset({mainAxis: 3}))
+    ret.push(offset({mainAxis: DEFAULT_TOOLTIP_DISTANCE}))
 
     // Shift the tooltip so its sits with the boundary element
     ret.push(
@@ -141,10 +147,12 @@ export const Tooltip = forwardRef(function Tooltip(
     )
 
     // Place arrow
-    ret.push(arrow({element: arrowRef, padding: 2}))
+    if (arrowProp) {
+      ret.push(arrow({element: arrowRef, padding: 2}))
+    }
 
     return ret
-  }, [boundaryElement, fallbackPlacements])
+  }, [arrowProp, boundaryElement, fallbackPlacements])
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
@@ -384,7 +392,7 @@ export const Tooltip = forwardRef(function Tooltip(
         shadow={shadow}
       >
         {content}
-        <TooltipArrow ref={setArrow} style={arrowStyle} />
+        {arrowProp && <TooltipArrow ref={setArrow} style={arrowStyle} />}
       </Card>
     </Root>
   )
