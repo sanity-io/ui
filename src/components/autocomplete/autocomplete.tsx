@@ -141,7 +141,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     padding: paddingProp = 3,
     popover = EMPTY_RECORD,
     prefix,
-    radius = 3,
+    radius = 2,
     readOnly,
     relatedElements,
     renderOption: renderOptionProp,
