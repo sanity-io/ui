@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.21](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.20...v2.0.0-alpha.21) (2023-11-16)
+
+### Bug Fixes
+
+- update tooltip position middleware, close tooltips on click ([#1182](https://github.com/sanity-io/ui/issues/1182)) ([a596700](https://github.com/sanity-io/ui/commit/a596700c668e9270518aa3bb23b46479468db7da))
+
 ## [2.0.0-alpha.20](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.19...v2.0.0-alpha.20) (2023-11-14)
 
 ### Bug Fixes
