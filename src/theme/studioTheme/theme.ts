@@ -8,9 +8,9 @@ import {fonts} from './fonts'
 export const studioTheme: RootTheme = {
   avatar: {
     sizes: [
-      {distance: -3, size: 23},
-      {distance: -6, size: 33},
-      {distance: -9, size: 53},
+      {distance: -3, size: 19},
+      {distance: -6, size: 31},
+      {distance: -9, size: 51},
     ],
     focusRing: {offset: 0, width: 1},
   },
