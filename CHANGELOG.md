@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.23](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.22...v2.0.0-alpha.23) (2023-11-17)
+
+### Features
+
+- tweak default avatar image sizes, fix avatar arrow stacking context ([da5cdca](https://github.com/sanity-io/ui/commit/da5cdca389dab5706e6097f2516aba96e16c4398))
+
 ## [2.0.0-alpha.22](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.21...v2.0.0-alpha.22) (2023-11-16)
 
 ### Features
