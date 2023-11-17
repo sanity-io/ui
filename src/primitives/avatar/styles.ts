@@ -9,6 +9,7 @@ export const avatarStyle = {
   bgStroke: avatarBgStrokeStyle,
   stroke: avatarStrokeStyle,
   initials: avatarInitialsStyle,
+  image: avatarImageStyle,
 }
 
 function avatarArrowStyle(): CSSObject {
@@ -121,6 +122,12 @@ export function responsiveAvatarSizeStyle(
       },
     }
   })
+}
+
+export function avatarImageStyle(): CSSObject {
+  return {
+    position: 'relative',
+  }
 }
 
 export function avatarInitialsStyle(props: ThemeProps): CSSObject {

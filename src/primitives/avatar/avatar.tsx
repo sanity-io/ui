@@ -42,6 +42,8 @@ const Stroke = styled.ellipse(avatarStyle.stroke)
 
 const Initials = styled.div(avatarStyle.initials)
 
+const Image = styled.svg(avatarStyle.image)
+
 /**
  * Avatars are used to represent people and other agents (e.g. bots).
  *
@@ -131,7 +133,7 @@ export const Avatar = forwardRef(function Avatar(
       </Arrow>
 
       {!imageFailed && src && (
-        <svg viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
+        <Image viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
           <defs>
             <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
               <image
@@ -162,7 +164,7 @@ export const Avatar = forwardRef(function Avatar(
             stroke={color}
             vectorEffect="non-scaling-stroke"
           />
-        </svg>
+        </Image>
       )}
 
       {(imageFailed || !src) && initials && (
