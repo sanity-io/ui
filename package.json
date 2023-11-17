@@ -105,7 +105,7 @@
     "react-is": "^18.2.0",
     "refractor": "^4.8.1",
     "rimraf": "^5.0.1",
-    "semantic-release": "^21.1.1",
+    "semantic-release": "^22.0.8",
     "start-server-and-test": "^2.0.0",
     "styled-components": "^6.0.7",
     "tsconfig-paths": "^4.2.0",
