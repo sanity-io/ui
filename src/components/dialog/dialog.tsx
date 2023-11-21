@@ -16,6 +16,8 @@ import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {BORDER_OFFSET_X} from './constants'
 import {
+  animationDialogStyle,
+  AnimationDialogStyleProps,
   dialogStyle,
   responsiveDialogPositionStyle,
   ResponsiveDialogPositionStyleProps,
@@ -48,6 +50,10 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
   zOffset?: number | number[]
+  /**
+   * @beta If true, the tooltip will animate in and out. Defaults to false.
+   */
+  animate?: boolean
 }
 
 interface DialogCardProps extends ResponsiveWidthProps {
@@ -94,11 +100,9 @@ function isTargetWithinScope(
   )
 }
 
-const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
-  responsivePaddingStyle,
-  dialogStyle,
-  responsiveDialogPositionStyle,
-)
+const Root = styled(Layer)<
+  ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps & AnimationDialogStyleProps
+>(responsivePaddingStyle, dialogStyle, responsiveDialogPositionStyle, animationDialogStyle)
 
 const DialogContainer = styled(Container)`
   &:not([hidden]) {
@@ -382,6 +386,7 @@ export const Dialog = forwardRef(function Dialog(
     scheme,
     width: widthProp = 0,
     zOffset: zOffsetProp = dialog.zOffset || theme.sanity.layer?.dialog.zOffset,
+    animate = false,
     ...restProps
   } = props
   const portal = usePortal()
@@ -470,6 +475,7 @@ export const Dialog = forwardRef(function Dialog(
         ref={ref}
         role="dialog"
         zOffset={zOffset}
+        animate={animate}
       >
         <div ref={preDivRef} tabIndex={0} />
         <DialogCard
