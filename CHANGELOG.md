@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.24](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.23...v2.0.0-alpha.24) (2023-11-22)
+
+### Bug Fixes
+
+- **tooltips:** fixes for TooltipDelayGroup, onClose and nested ([#1186](https://github.com/sanity-io/ui/issues/1186)) ([843c064](https://github.com/sanity-io/ui/commit/843c0649afcf0c3d011a1a4a1d9f3fceaa544ff2))
+
 ## [2.0.0-alpha.23](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.22...v2.0.0-alpha.23) (2023-11-17)
 
 ### Features
