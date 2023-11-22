@@ -10,11 +10,13 @@ import {TooltipDelayGroupContextValue} from './types'
 export interface TooltipDelayGroupProviderProps {
   children?: React.ReactNode
   /**
-   * @public Handles the delays to open or close a tooltip inside a group
+   * Handles the delays to open or close a tooltip inside a group
    *
    * If only a `number` is passed, it will be used for both opening and closing.
    *
    * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
+   *
+   * @public
    */
   delay: Delay
 }
