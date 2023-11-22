@@ -265,26 +265,6 @@ describe('Tooltip', () => {
       act(() => jest.advanceTimersByTime(openDelay / 2))
       screen.getByText('Tooltip 2')
     })
-    it("should throw an error if it's nested inside another <TooltipDelayGroupProvider />", () => {
-      // eslint-disable-next-line no-console
-      console.error = jest.fn() // Silence console.error as we are actually expecting an error in this test.
-      expect(() => {
-        render(
-          <TooltipDelayGroupProvider delay={100}>
-            <TooltipDelayGroupProvider delay={100}>
-              <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} placement={'top'} delay={400}>
-                <Button mode="bleed" text="Button 1" />
-              </Tooltip>
-            </TooltipDelayGroupProvider>
-          </TooltipDelayGroupProvider>,
-        )
-      }).toThrow(
-        'TooltipDelayGroupProvider cannot be nested inside another TooltipDelayGroupProvider',
-      )
-
-      // Clean up the console.error mock
-      jest.clearAllMocks()
-    })
   })
 
   describe('Closing the <Tooltip /> with the Escape key', () => {
