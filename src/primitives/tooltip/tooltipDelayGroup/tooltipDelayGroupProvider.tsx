@@ -3,7 +3,7 @@ import {useDelayedState} from '../../../hooks/useDelayedState'
 import {Delay} from '../../types'
 import {TooltipDelayGroupContext} from './tooltipDelayGroupContext'
 import {TooltipDelayGroupContextValue} from './types'
-import {useTooltipDelayGroup} from './useTooltipDelayGroup'
+
 /**
  * @public
  * */
@@ -30,14 +30,6 @@ export function TooltipDelayGroupProvider(
   const {children, delay} = props
   const [isGroupActive, setIsGroupActive] = useDelayedState(false)
   const [openTooltipId, setOpenTooltipId] = useDelayedState<string | null>(null)
-
-  const isInsideContext = useTooltipDelayGroup()
-
-  if (isInsideContext) {
-    throw new Error(
-      'TooltipDelayGroupProvider cannot be nested inside another TooltipDelayGroupProvider',
-    )
-  }
 
   const openDelay = typeof delay === 'number' ? delay : delay?.open || 0
   const closeDelay = typeof delay === 'number' ? delay : delay?.close || 0

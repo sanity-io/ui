@@ -264,7 +264,7 @@ export const Tooltip = forwardRef(function Tooltip(
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
   // the reference element triggers a CPU-heavy operation.)
   useEffect(() => {
-    if (!isOpen) return
+    if (!showTooltip) return
 
     function handleWindowMouseMove(event: MouseEvent) {
       if (!referenceElement) return
@@ -284,17 +284,17 @@ export const Tooltip = forwardRef(function Tooltip(
     return () => {
       window.removeEventListener('mousemove', handleWindowMouseMove)
     }
-  }, [isOpen, referenceElement, handleIsOpenChange])
+  }, [showTooltip, referenceElement, handleIsOpenChange])
 
   // Close when `disabled` changes to `true`
   useEffect(() => {
-    if (disabled) handleIsOpenChange(false)
-  }, [disabled, handleIsOpenChange])
+    if (disabled && showTooltip) handleIsOpenChange(false)
+  }, [disabled, handleIsOpenChange, showTooltip])
 
   // Close when `content` changes to falsy
   useEffect(() => {
-    if (!content) handleIsOpenChange(false)
-  }, [content, handleIsOpenChange])
+    if (!content && showTooltip) handleIsOpenChange(false)
+  }, [content, handleIsOpenChange, showTooltip])
 
   // Update reference
   useEffect(() => refs.setReference(referenceElement), [referenceElement, refs])
