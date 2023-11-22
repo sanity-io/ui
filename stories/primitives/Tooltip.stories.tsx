@@ -1,6 +1,6 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {userEvent, within} from '@storybook/testing-library'
-import {Button, Card, Text, Tooltip} from '../../src/primitives'
+import {Button, Card, Flex, Text, Tooltip, TooltipDelayGroupProvider} from '../../src/primitives'
 import {PLACEMENT_OPTIONS} from '../constants'
 import {getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
@@ -9,6 +9,7 @@ const meta: Meta<typeof Tooltip> = {
   args: {
     children: <Button mode="bleed" text="Hover me" />,
     content: <Text size={1}>I'm a tooltip</Text>,
+    arrow: false,
   },
   argTypes: {
     padding: getSpaceControls(),
@@ -68,6 +69,57 @@ export const WithOpenDelay: Story = {
   },
   render: (props) => {
     return <Tooltip {...props} />
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement)
+
+    const button = canvas.getByText('Hover me')
+
+    await userEvent.hover(button)
+    await canvas.findByText('Content', undefined, {timeout: 300})
+  },
+}
+
+export const Animated: Story = {
+  args: {
+    animate: true,
+    delay: {open: 200},
+  },
+  parameters: {
+    controls: {
+      include: ['content', 'delay', 'animate'],
+    },
+  },
+  render: (props) => {
+    return (
+      <Card
+        style={{
+          height: 'calc(100vh - 100px)',
+          overflow: 'hidden',
+          position: 'relative',
+          resize: 'both',
+          width: '500px',
+          padding: '20px',
+        }}
+        border
+      >
+        <Flex direction="column" align="flex-start" gap={2}>
+          <Flex direction="column" gap={2}>
+            <Text size={1}>Standalone tooltip</Text>
+            <Tooltip {...props} />
+          </Flex>
+          <Flex direction={'column'} gap={2} width="fill">
+            <Text size={1}>Grouped tooltips</Text>
+            <Flex>
+              <TooltipDelayGroupProvider delay={{open: 200}}>
+                <Tooltip {...props} />
+                <Tooltip {...props} />
+              </TooltipDelayGroupProvider>
+            </Flex>
+          </Flex>
+        </Flex>
+      </Card>
+    )
   },
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement)

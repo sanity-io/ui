@@ -1,3 +1,4 @@
+import {css} from 'styled-components'
 import {_responsive, ThemeProps} from '../../styles'
 import {DialogPosition} from '../../types'
 import {CSSObject} from '../../types/styled'
@@ -35,4 +36,42 @@ export function responsiveDialogPositionStyle(
   const {media} = theme.sanity
 
   return _responsive(media, props.$position, (position) => ({'&&': {position}}))
+}
+
+/**
+ * @internal
+ */
+export interface AnimationDialogStyleProps {
+  animate: boolean
+}
+
+export function animationDialogStyle(props: AnimationDialogStyleProps): ReturnType<typeof css> {
+  if (!props.animate) return css``
+
+  return css`
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    animation: fadeIn 200ms ease-out;
+    // Animates the dialog card.
+    & > [data-ui='DialogCard'] {
+      animation: zoomIn 200ms ease-out;
+    }
+  `
 }

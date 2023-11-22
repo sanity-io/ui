@@ -9,6 +9,7 @@ import {
   Middleware,
   RootBoundary,
 } from '@floating-ui/react-dom'
+import {AnimatePresence, motion} from 'framer-motion'
 import {
   cloneElement,
   forwardRef,
@@ -30,6 +31,7 @@ import {Placement} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
 import {Delay} from '../types'
+import {ConditionalWrapper} from './conditionalWrapper'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DISTANCE,
@@ -57,13 +59,23 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
   /**
-   * @public Adds a delay to open or close the tooltip.  Defaults to 0.
+   * Adds a delay to open or close the tooltip.
    *
    * If only a `number` is passed, it will be used for both opening and closing.
    *
    * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
+   *
+   * @public
+   * @defaultValue 0
    */
   delay?: Delay
+  /**
+   * Whether the tooltip should animate in and out.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  animate?: boolean
 }
 
 const Root = styled(Layer)<{$maxWidth: number}>`
@@ -97,6 +109,7 @@ export const Tooltip = forwardRef(function Tooltip(
     shadow = 2,
     zOffset = theme.sanity.layer?.tooltip.zOffset,
     delay,
+    animate = false,
     ...restProps
   } = props
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
@@ -383,35 +396,53 @@ export const Tooltip = forwardRef(function Tooltip(
       zOffset={zOffset}
       $maxWidth={tooltipWidth}
     >
-      <Card
-        data-ui="Tooltip__card"
-        data-placement={placement}
-        padding={padding}
-        radius={3}
-        scheme={scheme}
-        shadow={shadow}
+      <ConditionalWrapper
+        condition={animate} // Add animation wrapper if it should animate
+        wrapper={(children) => (
+          <motion.div
+            initial={{opacity: 0.5, scale: 0.95}}
+            animate={{opacity: 1, scale: 1}}
+            exit={{opacity: 0, scale: 0.95, transition: {duration: 0.4, type: 'spring'}}}
+          >
+            {children}
+          </motion.div>
+        )}
       >
-        {content}
-        {arrowProp && <TooltipArrow ref={setArrow} style={arrowStyle} />}
-      </Card>
+        <Card
+          data-ui="Tooltip__card"
+          data-placement={placement}
+          padding={padding}
+          radius={3}
+          scheme={scheme}
+          shadow={shadow}
+        >
+          {content}
+          {arrowProp && <TooltipArrow ref={setArrow} style={arrowStyle} />}
+        </Card>
+      </ConditionalWrapper>
     </Root>
   )
 
   return (
     <>
       {child}
-
-      {showTooltip && (
-        <>
-          {portalProp ? (
-            <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-              {root}
-            </Portal>
-          ) : (
-            root
-          )}
-        </>
-      )}
+      <ConditionalWrapper
+        condition={animate}
+        wrapper={(children) => <AnimatePresence>{children}</AnimatePresence>} // Add AnimatePresence if it should animate
+      >
+        {showTooltip && (
+          <ConditionalWrapper
+            condition={!!portalProp} // Add portal if portalProp is set
+            wrapper={(children) => (
+              <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
+                {children}
+              </Portal>
+            )}
+          >
+            {root}
+          </ConditionalWrapper>
+        )}
+      </ConditionalWrapper>
     </>
   )
 })
