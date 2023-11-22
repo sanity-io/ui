@@ -59,15 +59,21 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
   /**
-   * @public Adds a delay to open or close the tooltip.  Defaults to 0.
+   * Adds a delay to open or close the tooltip.
    *
    * If only a `number` is passed, it will be used for both opening and closing.
    *
    * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
+   *
+   * @public
+   * @default 0
    */
   delay?: Delay
   /**
-   * @beta If true, the tooltip will animate in and out. Defaults to false.
+   * Whether the tooltip should animate in and out.
+   *
+   * @beta
+   * @default false
    */
   animate?: boolean
 }

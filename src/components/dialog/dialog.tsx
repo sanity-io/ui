@@ -51,7 +51,10 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   scheme?: ThemeColorSchemeKey
   zOffset?: number | number[]
   /**
-   * @beta If true, the tooltip will animate in and out. Defaults to false.
+   * Whether the dialog should animate in on mount.
+   *
+   * @beta
+   * @default false
    */
   animate?: boolean
 }
