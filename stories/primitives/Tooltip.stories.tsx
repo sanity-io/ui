@@ -111,7 +111,7 @@ export const Animated: Story = {
           <Flex direction={'column'} gap={2} width="fill">
             <Text size={1}>Grouped tooltips</Text>
             <Flex>
-              <TooltipDelayGroupProvider delay={props.delay || 0}>
+              <TooltipDelayGroupProvider delay={{open: 200}}>
                 <Tooltip {...props} />
                 <Tooltip {...props} />
               </TooltipDelayGroupProvider>
