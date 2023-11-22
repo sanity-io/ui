@@ -54,7 +54,7 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
    * Whether the dialog should animate in on mount.
    *
    * @beta
-   * @default false
+   * @defaultValue false
    */
   animate?: boolean
 }

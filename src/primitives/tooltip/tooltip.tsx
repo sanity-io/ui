@@ -66,14 +66,14 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
    * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
    *
    * @public
-   * @default 0
+   * @defaultValue 0
    */
   delay?: Delay
   /**
    * Whether the tooltip should animate in and out.
    *
    * @beta
-   * @default false
+   * @defaultValue false
    */
   animate?: boolean
 }
