@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.25](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.24...v2.0.0-alpha.25) (2023-11-22)
+
+### Bug Fixes
+
+- **tooltips:** update default fallback placements ([#1185](https://github.com/sanity-io/ui/issues/1185)) ([732d3a1](https://github.com/sanity-io/ui/commit/732d3a1a68715edc95e54b87850b6f2548e71755))
+
 ## [2.0.0-alpha.24](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.23...v2.0.0-alpha.24) (2023-11-22)
 
 ### Bug Fixes
