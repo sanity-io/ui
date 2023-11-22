@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.26](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.25...v2.0.0-alpha.26) (2023-11-22)
+
+### Features
+
+- **animations:** add animations to dialog and tooltips. ([#1187](https://github.com/sanity-io/ui/issues/1187)) ([0e10f43](https://github.com/sanity-io/ui/commit/0e10f43d1128513ef267b25324ef0f9edd1987a4))
+
 ## [2.0.0-alpha.25](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.24...v2.0.0-alpha.25) (2023-11-22)
 
 ### Bug Fixes
