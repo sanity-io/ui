@@ -1,6 +1,6 @@
 import {OkHandIcon, RocketIcon, SunIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
-import {Tab, TabList} from '../../src/components'
+import {Tab, TabList} from '../../src/core/components'
 import {getOverflowControls, getSpaceControls} from '../controls'
 
 const meta: Meta<typeof TabList> = {

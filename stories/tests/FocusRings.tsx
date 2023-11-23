@@ -16,7 +16,7 @@ import {
   MenuItem,
   Tab,
   TabList,
-} from '../../src/components'
+} from '../../src/core/components'
 import {
   Avatar,
   Button,
@@ -31,8 +31,9 @@ import {
   Text,
   TextArea,
   TextInput,
-} from '../../src/primitives'
-import {ThemeProvider, studioTheme} from '../../src/theme'
+} from '../../src/core/primitives'
+import {ThemeProvider} from '../../src/core/theme'
+import {studioTheme} from '../../src/theme'
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
   return (

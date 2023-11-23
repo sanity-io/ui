@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import {Toast, ToastProvider, useToast} from '../../src/components'
-import {Button, Inline} from '../../src/primitives'
+import {Toast, ToastProvider, useToast} from '../../src/core/components'
+import {Button, Inline} from '../../src/core/primitives'
 
 const meta: Meta<typeof Toast> = {
   args: {title: 'Toast title', description: 'Toast description'},

@@ -1,7 +1,7 @@
 import path from 'path'
 import {defineRuntime} from '@sanity/ui-workshop'
 
-const SRC_PATH = path.resolve(__dirname, 'src')
+const EXPORTS_PATH = path.resolve(__dirname, 'exports')
 
 export default defineRuntime({
   vite: (viteConfig) => ({
@@ -10,7 +10,7 @@ export default defineRuntime({
       ...viteConfig.resolve,
       alias: {
         ...viteConfig.resolve?.alias,
-        '@sanity/ui': SRC_PATH,
+        '@sanity/ui': EXPORTS_PATH,
       },
     },
   }),

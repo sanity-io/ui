@@ -3,13 +3,13 @@
   "version": "2.0.0-alpha.26",
   "sideEffects": false,
   "types": "./dist/index.d.ts",
-  "source": "./src/index.ts",
+  "source": "./exports/index.ts",
   "module": "./dist/index.esm.js",
   "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "source": "./src/index.ts",
+      "source": "./exports/index.ts",
       "require": "./dist/index.js",
       "node": {
         "module": "./dist/index.esm.js",
@@ -18,10 +18,29 @@
       "import": "./dist/index.esm.js",
       "default": "./dist/index.esm.js"
     },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "source": "./exports/theme.ts",
+      "require": "./dist/theme.js",
+      "node": {
+        "module": "./dist/theme.esm.js",
+        "import": "./dist/theme.cjs.mjs"
+      },
+      "import": "./dist/theme.esm.js",
+      "default": "./dist/theme.esm.js"
+    },
     "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "theme": [
+        "./dist/theme.d.ts"
+      ]
+    }
   },
   "files": [
     "dist",
+    "exports",
     "src"
   ],
   "license": "MIT",

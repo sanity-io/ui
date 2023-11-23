@@ -5,8 +5,8 @@ import {
   TextSkeleton,
   CodeSkeleton,
   LabelSkeleton,
-} from '../../src/components'
-import {Flex, Grid, Box, Container, Stack, Card} from '../../src/primitives'
+} from '../../src/core/components'
+import {Flex, Grid, Box, Container, Stack, Card} from '../../src/core/primitives'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {

@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Code, Stack} from '../../src/primitives'
+import {Code, Stack} from '../../src/core/primitives'
 import {getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Code> = {
