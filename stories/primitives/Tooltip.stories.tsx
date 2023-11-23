@@ -9,7 +9,6 @@ const meta: Meta<typeof Tooltip> = {
   args: {
     children: <Button mode="bleed" text="Hover me" />,
     content: <Text size={1}>I'm a tooltip</Text>,
-    arrow: false,
   },
   argTypes: {
     padding: getSpaceControls(),

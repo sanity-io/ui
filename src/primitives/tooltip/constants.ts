@@ -2,6 +2,7 @@ import {Placement} from '@floating-ui/react-dom'
 
 export const DEFAULT_TOOLTIP_DISTANCE = 4
 export const DEFAULT_TOOLTIP_PADDING = 4
+export const DEFAULT_TOOLTIP_ARROW_SIZE = 15
 export const DEFAULT_FALLBACK_PLACEMENTS: Record<Placement, Placement[]> = {
   top: ['top-end', 'top-start', 'bottom', 'left', 'right'],
   'top-start': ['top', 'top-end', 'bottom-start', 'left-start', 'right-start'],
