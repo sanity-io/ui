@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
+import {useState} from 'react'
 import {Button, Card, Popover, Text} from '../../src/primitives'
 import {RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
@@ -54,4 +56,18 @@ export const Radius: Story = {
       })}
     </Card>
   ),
+}
+
+export const Controlled: Story = {
+  render: (props) => {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <Card padding={6}>
+        <Popover {...props} open={open}>
+          <Button onClick={() => setOpen(!open)} text="Toggle popover" />
+        </Popover>
+      </Card>
+    )
+  },
 }
