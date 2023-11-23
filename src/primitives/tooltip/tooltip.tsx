@@ -34,6 +34,7 @@ import {Delay} from '../types'
 import {ConditionalWrapper} from './conditionalWrapper'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
+  DEFAULT_TOOLTIP_ARROW_SIZE,
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
@@ -161,7 +162,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
     // Place arrow
     if (arrowProp) {
-      ret.push(arrow({element: arrowRef, padding: 2}))
+      ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
     }
 
     return ret
@@ -186,7 +187,7 @@ export const Tooltip = forwardRef(function Tooltip(
       bottom: undefined,
     }
 
-    if (staticSide) style[staticSide] = -15
+    if (staticSide) style[staticSide] = -DEFAULT_TOOLTIP_ARROW_SIZE
 
     return style
   }, [arrowX, arrowY, staticSide])
