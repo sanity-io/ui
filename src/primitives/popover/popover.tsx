@@ -99,6 +99,8 @@ export const Popover = memo(
         DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
       matchReferenceWidth,
       floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      onActivate,
       open,
       overflow = 'hidden',
       padding: paddingProp,
