@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./src", "./typings"],
+  "include": ["./exports", "./src", "./typings"],
   "exclude": [
     "./dist",
     "./src/**/__fixtures__",

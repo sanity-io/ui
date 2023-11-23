@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Hotkeys} from '../../src/components'
+import {Hotkeys} from '../../src/core/components'
 import {RADII} from '../constants'
 import {rowBuilder} from '../helpers/rowBuilder'
 

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
-import {Select} from '../../src/primitives'
+import {Select} from '../../src/core/primitives'
 import {RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'

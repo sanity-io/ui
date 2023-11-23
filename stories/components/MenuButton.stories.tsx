@@ -1,7 +1,7 @@
 import {ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
-import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/components'
-import {Button, Flex} from '../../src/primitives'
+import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
+import {Button, Flex} from '../../src/core/primitives'
 
 const meta: Meta<typeof MenuButton> = {
   args: {

@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Inline, Text} from '../../src/primitives'
+import {Card, Inline, Text} from '../../src/core/primitives'
 import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Inline> = {

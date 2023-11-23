@@ -4,7 +4,7 @@
 .env.local
 .workshop
 dist
+etc
 node_modules
-
-/etc
 storybook-static
+theme.js

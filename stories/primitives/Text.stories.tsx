@@ -1,6 +1,6 @@
 import {AddCircleIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Flex, Stack, Text} from '../../src/primitives'
+import {Card, Flex, Stack, Text} from '../../src/core/primitives'
 import {getAlignControls, getFontSizeControls, getTextOverflowControls} from '../controls'
 
 const meta: Meta<typeof Text> = {

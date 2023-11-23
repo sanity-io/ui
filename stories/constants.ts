@@ -1,4 +1,3 @@
-import {studioTheme} from '../src/theme'
 import {
   BadgeMode,
   BadgeTone,
@@ -7,7 +6,8 @@ import {
   CardTone,
   Placement,
   Radius,
-} from '../src/types'
+} from '../src/core/types'
+import {studioTheme} from '../src/theme'
 
 export const AVATAR_SRC =
   'https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4'
