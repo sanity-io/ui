@@ -1,5 +1,13 @@
-import {CSSObject} from '../types/styled'
-import {BaseTheme, ThemeColor, ThemeColorName, ThemeColorSchemeKey} from './lib/theme'
+import type {StyledObject} from 'styled-components'
+import {BaseTheme, ThemeColor} from './lib/theme'
+
+/**
+ * Workaround types that are missing in v6
+ * https://github.com/styled-components/styled-components/issues/4062
+ * @internal
+ * */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CSSObject = StyledObject<any>
 
 /**
  * @public
@@ -26,16 +34,6 @@ export interface Theme {
   sanity: Omit<RootTheme, 'color'> & {
     color: ThemeColor
   }
-}
-
-/**
- * @public
- */
-export interface ThemeContextValue {
-  version: 0.0
-  scheme: ThemeColorSchemeKey
-  theme: RootTheme
-  tone: ThemeColorName
 }
 
 /**

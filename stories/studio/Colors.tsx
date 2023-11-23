@@ -1,6 +1,7 @@
 import {ReactNode} from 'react'
-import {Card, Flex, Grid, Stack, Text} from '../../src/primitives'
-import {ThemeColorSchemeKey, ThemeProvider, studioTheme} from '../../src/theme'
+import {Card, Flex, Grid, Stack, Text} from '../../src/core/primitives'
+import {ThemeProvider} from '../../src/core/theme'
+import {ThemeColorSchemeKey, studioTheme} from '../../src/theme'
 import {tones} from '../../src/theme/studioTheme/color'
 import {ColorKey, getColorHex, getColorValue, colorKeys} from '../../src/theme/studioTheme/tints'
 

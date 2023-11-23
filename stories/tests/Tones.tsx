@@ -13,7 +13,7 @@ import {
   Tab,
   TabList,
   TextSkeleton,
-} from '../../src/components'
+} from '../../src/core/components'
 import {
   Avatar,
   Badge,
@@ -38,8 +38,9 @@ import {
   Text,
   TextArea,
   TextInput,
-} from '../../src/primitives'
-import {ThemeColorSchemeKey, ThemeProvider, studioTheme} from '../../src/theme'
+} from '../../src/core/primitives'
+import {ThemeProvider} from '../../src/core/theme'
+import {ThemeColorSchemeKey, studioTheme} from '../../src/theme'
 
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 

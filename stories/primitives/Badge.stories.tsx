@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Badge, Flex, Stack} from '../../src/primitives'
+import {Badge, Flex, Stack} from '../../src/core/primitives'
 import {BADGE_MODES, BADGE_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'

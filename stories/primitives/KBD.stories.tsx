@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, KBD, Stack} from '../../src/primitives'
+import {Card, KBD, Stack} from '../../src/core/primitives'
 import {CARD_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'

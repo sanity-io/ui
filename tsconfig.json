@@ -2,6 +2,7 @@
   "extends": "./tsconfig.settings",
   "include": [
     "./.storybook",
+    "./exports",
     "./package.config.ts",
     "./scripts",
     "./src",
@@ -18,7 +19,8 @@
     "module": "ES2020",
     "jsx": "react-jsx",
     "paths": {
-      "@sanity/ui": ["./src"]
+      "@sanity/ui/*": ["./exports/*"],
+      "@sanity/ui": ["./exports"]
     }
   }
 }
