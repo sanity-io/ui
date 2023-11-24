@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.settings",
+  "include": ["./src"],
+  "exclude": ["./src/**/*.test.ts"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+    "target": "ES6",
+    "lib": ["ES2020"],
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
+    "resolveJsonModule": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "figma-plugin-sanity-ui",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "module": "./dist/index.js",
+  "source": "./src/index.ts",
+  "author": "Sanity.io <hello@sanity.io>",
+  "license": "MIT",
+  "scripts": {
+    "build": "pkg build --strict && pkg --strict",
+    "watch": "pkg watch --strict"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-object-rest-spread": "^7.23.3",
+    "@figma/plugin-typings": "^1.81.0",
+    "@sanity/color": "3.0.0-beta.6",
+    "@sanity/ui": "workspace:*",
+    "segmented-property": "^4.0.0"
+  }
+}
