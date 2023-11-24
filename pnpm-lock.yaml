@@ -156,6 +156,9 @@ importers:
       eslint-config-prettier:
         specifier: ^9.0.0
         version: 9.0.0(eslint@8.55.0)
+      eslint-plugin-boundaries:
+        specifier: ^3.4.1
+        version: 3.4.1(@typescript-eslint/parser@6.13.2)(eslint@8.55.0)
       eslint-plugin-import:
         specifier: ^2.29.0
         version: 2.29.0(@typescript-eslint/parser@6.13.2)(eslint@8.55.0)
@@ -9527,6 +9530,25 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-plugin-boundaries@3.4.1(@typescript-eslint/parser@6.13.2)(eslint@8.55.0):
+    resolution: {integrity: sha512-T6HAYo6bOTeBgIKLvRTY004i3X6w81DxukTyXot+2Zw6taq11gKPcDuB5gHUamB/UzqAzHTOW2ojjnD3aqfQmQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      eslint: '>=6.0.0'
+    dependencies:
+      chalk: 4.1.2
+      eslint: 8.55.0
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.13.2)(eslint-import-resolver-node@0.3.9)(eslint@8.55.0)
+      is-core-module: 2.13.1
+      micromatch: 4.0.5
+    transitivePeerDependencies:
+      - '@typescript-eslint/parser'
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+    dev: true
+
   /eslint-plugin-import@2.29.0(@typescript-eslint/parser@6.13.2)(eslint@8.55.0):
     resolution: {integrity: sha512-QPOO5NO6Odv5lpoTkddtutccQjysJuFxoPS7fAHO+9m9udNHvTCPSAMW9zGAYj8lAIdr40I8yPCdUYrncXtrwg==}
     engines: {node: '>=4'}
@@ -11463,12 +11485,6 @@ packages:
     hasBin: true
     dependencies:
       ci-info: 3.8.0
-    dev: true
-
-  /is-core-module@2.13.0:
-    resolution: {integrity: sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==}
-    dependencies:
-      has: 1.0.3
     dev: true
 
   /is-core-module@2.13.1:
@@ -15234,7 +15250,7 @@ packages:
     resolution: {integrity: sha512-iMDbmAWtfU+MHpxt/I5iWI7cY6YVEZUQ3MBgPQ++XD1PELuJHIl82xBmObyP2KyQmkNB2dsqF7seoQQiAn5yDQ==}
     hasBin: true
     dependencies:
-      is-core-module: 2.13.0
+      is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     dev: true
