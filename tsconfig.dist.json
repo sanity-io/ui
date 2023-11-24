@@ -2,7 +2,6 @@
   "extends": "./tsconfig.settings",
   "include": ["./exports", "./src", "./typings"],
   "exclude": [
-    "./dist",
     "./src/**/__fixtures__",
     "./src/**/__mocks__",
     "./src/**/__workshop__",
