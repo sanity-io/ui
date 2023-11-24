@@ -7,6 +7,7 @@ module.exports = {
     node: true,
   },
   extends: [
+    'plugin:boundaries/recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'eslint:recommended',
@@ -23,12 +24,46 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', '@typescript-eslint', 'prettier'],
+  plugins: [
+    'boundaries',
+    'import',
+    'jsx-a11y',
+    'react',
+    'react-hooks',
+    '@typescript-eslint',
+    'prettier',
+  ],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
+    'boundaries/element-types': [
+      'error',
+      {
+        default: 'disallow',
+        rules: [
+          {
+            // export
+            from: '@sanity/ui',
+            allow: ['@sanity/ui__contents'],
+          },
+          {
+            from: '@sanity/ui__contents',
+            allow: ['@sanity/ui__contents', '@sanity/ui/theme'],
+          },
+          {
+            // export
+            from: '@sanity/ui/theme',
+            allow: ['@sanity/ui/theme__contents'],
+          },
+          {
+            from: '@sanity/ui/theme__contents',
+            allow: ['@sanity/ui/theme__contents'],
+          },
+        ],
+      },
+    ],
     'import/order': [
       'error',
       {
@@ -56,5 +91,29 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react/no-unescaped-entities': 'off',
   },
-  settings: {react: {version: 'detect'}},
+  settings: {
+    'boundaries/elements': [
+      {
+        type: '@sanity/ui',
+        pattern: ['exports/index.ts'],
+        mode: 'full',
+      },
+      {
+        type: '@sanity/ui__contents',
+        pattern: ['src/core/**/*.*'],
+        mode: 'full',
+      },
+      {
+        type: '@sanity/ui/theme',
+        pattern: ['exports/theme.ts'],
+        mode: 'full',
+      },
+      {
+        type: '@sanity/ui/theme__contents',
+        pattern: ['src/theme/**/*.*'],
+        mode: 'full',
+      },
+    ],
+    react: {version: 'detect'},
+  },
 }
