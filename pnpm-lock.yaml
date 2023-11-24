@@ -242,13 +242,13 @@ importers:
     devDependencies:
       '@babel/plugin-transform-object-rest-spread':
         specifier: ^7.23.3
-        version: 7.23.4(@babel/core@7.23.3)
+        version: 7.23.4(@babel/core@7.23.5)
       '@figma/plugin-typings':
         specifier: ^1.81.0
         version: 1.81.0
       '@sanity/color':
-        specifier: 3.0.0-beta.7
-        version: 3.0.0-beta.7
+        specifier: 3.0.0-beta.6
+        version: 3.0.0-beta.6
       '@sanity/ui':
         specifier: workspace:*
         version: link:..
@@ -5176,12 +5176,6 @@ packages:
   /@sanity/color@3.0.0-beta.6:
     resolution: {integrity: sha512-F4jG6xSa5QvOO4zGMqlSdgoWl/Sok+V5rEx0vEZkekGYKcqMTZEYIYLmD3CfQmpU/DnWxToCB/5uyFBH/fbYug==}
     engines: {node: '>=18.0.0'}
-    dev: false
-
-  /@sanity/color@3.0.0-beta.7:
-    resolution: {integrity: sha512-cLC0qcFWCe5ClQZ+iGorz2iKMIzAE728L4ZRgZuRKp+Hzsm4/Vl6qMwV2Xa0RipjKuSysSaLUyx2b1oAOG33SA==}
-    engines: {node: '>=18.0.0'}
-    dev: true
 
   /@sanity/icons@2.7.0(react@18.2.0):
     resolution: {integrity: sha512-vW/G8CB3+R1gww8C8ZjNchhpXrXSDLIJ0KnWy9iDlSWaFEnUrbi18yzCCrHRMFzXTPl2QtqZhjtE+A5Gyhf2QA==}

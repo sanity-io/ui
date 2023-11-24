@@ -1,0 +1,17 @@
+{
+  "name": "Sanity UI",
+  "id": "1308127102029904003",
+  "api": "1.0.0",
+  "main": "dist/index.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "ui": "src/index.html",
+  "networkAccess": {
+    "allowedDomains": [
+      "https://static.figma.com",
+      "https://fonts.googleapis.com",
+      "https://fonts.gstatic.com"
+    ]
+  }
+}

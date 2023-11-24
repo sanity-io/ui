@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="https://static.figma.com/api/figma-extension-api-0.0.1.css" />
+
+<button id="vars-write">Write variables</button>
+<button id="styles-write">Write styles</button>
+<button id="cancel">Cancel</button>
+
+<script>
+  document.getElementById('vars-write').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'vars:write'}}, '*')
+  }
+
+  document.getElementById('styles-write').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'styles:write'}}, '*')
+  }
+
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'cancel'}}, '*')
+  }
+</script>
