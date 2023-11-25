@@ -318,8 +318,8 @@ const DialogCard = forwardRef(function DialogCard(
               $isContentScrollable={isContentScrollable}
               $hasScrolledFromTop={hasScrolledFromTop}
             >
-              <Flex align="center">
-                <Box flex={1} padding={4}>
+              <Flex align="center" padding={3}>
+                <Box flex={1} padding={2}>
                   {header && (
                     <Text id={labelId} size={1} weight="medium">
                       {header}
@@ -327,13 +327,14 @@ const DialogCard = forwardRef(function DialogCard(
                   )}
                 </Box>
                 {showCloseButton && (
-                  <Box padding={2}>
+                  <Box flex="none">
                     <Button
                       aria-label="Close dialog"
                       disabled={!onClose}
                       icon={CloseIcon}
                       mode="bleed"
                       onClick={onClose}
+                      padding={2}
                     />
                   </Box>
                 )}
