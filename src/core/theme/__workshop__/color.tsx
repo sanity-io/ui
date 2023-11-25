@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Card, Tree, TreeItem, useRootTheme} from '@sanity/ui'
 
 export default function ColorStory() {
@@ -11,11 +10,9 @@ export default function ColorStory() {
   return (
     <Box padding={[4, 5, 6]}>
       <Tree space={1}>
-        {Object.entries(theme.color)
-          // .filter((v) => v[0] !== 'dark')
-          .map(([key, value]) => (
-            <ColorGroup key={key} name={key} value={value as any} />
-          ))}
+        {Object.entries(theme.color).map(([key, value]) => (
+          <ColorGroup key={key} name={key} value={value} />
+        ))}
       </Tree>
     </Box>
   )
