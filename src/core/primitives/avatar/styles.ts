@@ -61,7 +61,10 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
   const {focusRing} = theme.sanity.avatar
 
   return {
-    backgroundColor: $color,
+    '--avatar-bg-color': theme.sanity.color.avatar?.[$color]?.bg || theme.sanity.color.spot[$color],
+    '--avatar-fg-color': theme.sanity.color.avatar?.[$color]?.fg || 'var(--card-bg-color)',
+
+    backgroundColor: 'var(--avatar-bg-color)',
     position: 'relative',
     boxSizing: 'border-box',
     userSelect: 'none',
@@ -130,14 +133,11 @@ export function avatarImageStyle(): CSSObject {
   }
 }
 
-export function avatarInitialsStyle(props: ThemeProps): CSSObject {
-  const {theme} = props
-  const {base} = theme.sanity.color
-
+export function avatarInitialsStyle(): CSSObject {
   return {
     width: '100%',
     height: '100%',
-    color: base.fg,
+    color: 'var(--avatar-fg-color)',
     alignItems: 'center',
     justifyContent: 'center',
     textTransform: 'uppercase',
@@ -160,6 +160,7 @@ function avatarBgStrokeStyle(): CSSObject {
 function avatarStrokeStyle(): CSSObject {
   return {
     strokeWidth: '2px',
+    stroke: 'var(--avatar-bg-color)',
 
     '[data-status="editing"] &': {
       strokeDasharray: '2 4',

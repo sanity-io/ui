@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {useTheme} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
-import {Text} from '../text'
+import {Label} from '../label'
 import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
 
 /**
@@ -30,7 +30,7 @@ export interface AvatarProps {
   title?: string
 }
 
-const Root = styled.div<{$color: string; $size: AvatarSize[]}>(
+const Root = styled.div<{$color: ThemeColorSpotKey; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
   avatarStyle.root,
 )
@@ -42,6 +42,10 @@ const BgStroke = styled.ellipse(avatarStyle.bgStroke)
 const Stroke = styled.ellipse(avatarStyle.stroke)
 
 const Initials = styled.div(avatarStyle.initials)
+
+const InitialsLabel = styled(Label)({
+  color: 'inherit',
+})
 
 const Image = styled.svg(avatarStyle.image)
 
@@ -57,7 +61,7 @@ export const Avatar = forwardRef(function Avatar(
   const {
     __unstable_hideInnerStroke,
     as: asProp,
-    color: colorKey = 'gray',
+    color = 'gray',
     src,
     title,
     initials,
@@ -71,7 +75,6 @@ export const Avatar = forwardRef(function Avatar(
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = useArrayProp(sizeProp)
   const theme = useTheme()
-  const color = theme.sanity.color.spot[colorKey] || theme.sanity.color.spot.gray
 
   // @todo: remove this
   const avatarSize = theme.sanity.avatar.sizes[size[0]] || theme.sanity.avatar.sizes[0]
@@ -116,8 +119,8 @@ export const Avatar = forwardRef(function Avatar(
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Avatar"
       {...restProps}
-      $size={size}
       $color={color}
+      $size={size}
       aria-label={title}
       data-arrow-position={arrowPosition}
       data-status={status}
@@ -148,6 +151,7 @@ export const Avatar = forwardRef(function Avatar(
           </defs>
 
           <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
+
           {!__unstable_hideInnerStroke && (
             <BgStroke
               cx={_radius}
@@ -157,12 +161,12 @@ export const Avatar = forwardRef(function Avatar(
               vectorEffect="non-scaling-stroke"
             />
           )}
+
           <Stroke
             cx={_radius}
             cy={_radius}
             rx={_radius}
             ry={_radius}
-            stroke={color}
             vectorEffect="non-scaling-stroke"
           />
         </Image>
@@ -171,9 +175,9 @@ export const Avatar = forwardRef(function Avatar(
       {(imageFailed || !src) && initials && (
         <>
           <Initials>
-            <Text as="span" size={initialsSize} weight="medium">
+            <InitialsLabel as="span" size={initialsSize}>
               {initials}
-            </Text>
+            </InitialsLabel>
           </Initials>
         </>
       )}
