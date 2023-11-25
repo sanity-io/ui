@@ -148,7 +148,9 @@
     "storybook": "^7.5.2",
     "styled-components": "^6.0.7",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vite": "^5.0.2",
+    "vite-tsconfig-paths": "^4.2.1"
   },
   "peerDependencies": {
     "react": "^18",
