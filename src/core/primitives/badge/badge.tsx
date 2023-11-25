@@ -15,6 +15,7 @@ import {BadgeStyleProps} from './types'
 export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
+  /** @deprecated No longer used. */
   mode?: BadgeMode
   tone?: BadgeTone
 }
@@ -36,7 +37,8 @@ export const Badge = forwardRef(function Badge(
   const {
     children,
     fontSize = 1,
-    mode = 'default',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    mode: _deprecated_mode,
     padding = 1,
     radius = 2,
     tone = 'default',
@@ -47,7 +49,6 @@ export const Badge = forwardRef(function Badge(
     <Root
       data-ui="Badge"
       {...restProps}
-      $mode={mode}
       $tone={tone}
       $radius={useArrayProp(radius)}
       padding={useArrayProp(padding)}

@@ -1,9 +1,8 @@
-import {BadgeMode, BadgeTone} from '../../types'
+import {BadgeTone} from '../../types'
 
 /**
  * @internal
  */
 export interface BadgeStyleProps {
-  $mode: BadgeMode
   $tone: BadgeTone
 }
