@@ -3,15 +3,14 @@ import {ThemeProps} from '../../styles'
 import {BadgeStyleProps} from './types'
 
 export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {
-  const {$mode, $tone, theme} = props
-  const palette = theme.sanity.color[$mode === 'outline' ? 'muted' : 'solid']
-  const color = palette[$tone] || palette.default
+  const {$tone, theme} = props
+  const color = theme.sanity.color.badge?.[$tone] || theme.sanity.color.muted[$tone].enabled
 
   return {
-    '--card-fg-color': color.enabled.fg,
+    '--card-bg-color': color.bg,
+    '--card-fg-color': color.fg,
 
-    backgroundColor: color.enabled.bg2,
-    boxShadow: `inset 0 0 0 1px ${color.enabled.border}`,
+    backgroundColor: 'var(--card-bg-color)',
     cursor: 'default',
 
     '&:not([hidden])': {
