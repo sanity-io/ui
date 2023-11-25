@@ -33,6 +33,7 @@ export function buttonBaseStyles({
     white-space: nowrap;
     text-align: left;
     position: relative;
+    vertical-align: top;
 
     ${$width === 'fill' &&
     css`
