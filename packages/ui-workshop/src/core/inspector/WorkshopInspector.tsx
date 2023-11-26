@@ -2,6 +2,7 @@
 import {Box, BoxDisplay, Card, Flex, TabPanel} from '@sanity/ui'
 import {createElement, ElementType, memo, ReactElement, useMemo, useState} from 'react'
 import styled from 'styled-components'
+
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'

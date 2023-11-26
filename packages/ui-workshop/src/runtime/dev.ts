@@ -2,6 +2,7 @@
 
 import fs from 'fs'
 import path from 'path'
+
 import {_watchScopes} from './_watchScopes'
 import {_loadRuntime} from './config/_loadRuntime'
 import {DEFAULT_PATTERN} from './constants'

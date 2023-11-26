@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Select, Text} from '@sanity/ui'
 import {memo, useMemo} from 'react'
+
 import {SelectPropSchema} from '../types'
 import {useProps} from '../useProps'
 

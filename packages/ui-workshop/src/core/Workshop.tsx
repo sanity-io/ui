@@ -7,6 +7,7 @@ import {
   useMediaIndex,
 } from '@sanity/ui'
 import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
 import {WorkshopConfig} from './config'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector'

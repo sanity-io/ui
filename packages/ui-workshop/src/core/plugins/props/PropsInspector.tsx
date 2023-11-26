@@ -1,5 +1,6 @@
 import {Box, Text} from '@sanity/ui'
 import {memo} from 'react'
+
 import {Prop} from './components/prop'
 import {useProps} from './useProps'
 
