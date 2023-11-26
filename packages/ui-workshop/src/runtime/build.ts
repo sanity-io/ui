@@ -1,8 +1,9 @@
+import cpx from 'cpx'
 import {writeFile} from 'fs/promises'
 import path from 'path'
-import cpx from 'cpx'
 import rimraf from 'rimraf'
 import {build as viteBuild} from 'vite'
+
 import {_loadRuntime} from './config/_loadRuntime'
 import {DEFAULT_PATTERN} from './constants'
 import {_getFiles} from './lib/_getFiles'

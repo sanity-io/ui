@@ -1,6 +1,7 @@
 import {PlayIcon, TrashIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import {memo} from 'react'
+
 import {usePerf} from './hooks'
 
 /** @internal */

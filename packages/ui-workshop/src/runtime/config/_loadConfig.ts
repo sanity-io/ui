@@ -1,5 +1,6 @@
 import {WorkshopConfigOptions} from '@sanity/ui-workshop'
 import {TransformOptions} from 'esbuild'
+
 import {_findConfigFile} from './_findConfigFile'
 
 /** @internal */

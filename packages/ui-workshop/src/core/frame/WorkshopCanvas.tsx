@@ -1,5 +1,6 @@
 import {Box, Button, Card, Code, ErrorBoundary, Flex, Heading, Spinner, Stack} from '@sanity/ui'
 import {createElement, memo, Suspense, useCallback, useState} from 'react'
+
 import {WorkshopStory} from '../config'
 import {useWorkshop} from '../useWorkshop'
 import {formatStack} from './formatStack'
@@ -81,7 +82,7 @@ const ErrorScreen = memo(function ErrorScreen(props: {
           <Button onClick={onRetry} text="Retry" />
         </Box>
         {error.stack && <Code size={1}>{formatStack(error.stack)}</Code>}
-        {errorInfo && (
+        {errorInfo?.componentStack && (
           <Code size={1}>{'Component stack:' + formatStack(errorInfo.componentStack)}</Code>
         )}
       </Stack>
