@@ -53,7 +53,10 @@ export const PropsProvider = memo(function PropsProvider(props: {
     () =>
       channel.subscribe((msg) => {
         setState((prevState) => {
-          const nextState = propsReducer(prevState, msg)
+          const nextState =
+            msg.type === 'workshop/setPath'
+              ? {schemas: EMPTY_ARRAY, value: EMPTY_RECORD}
+              : propsReducer(prevState, msg)
 
           if (isEqual(prevState, nextState)) {
             return prevState
