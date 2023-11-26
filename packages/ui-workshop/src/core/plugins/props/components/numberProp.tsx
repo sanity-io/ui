@@ -1,5 +1,6 @@
 import {Box, Text, TextInput} from '@sanity/ui'
 import {memo} from 'react'
+
 import {NumberPropSchema} from '../types'
 import {useProps} from '../useProps'
 

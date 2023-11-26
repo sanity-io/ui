@@ -1,6 +1,7 @@
 import {studioTheme, ThemeColorSchemeKey, ThemeProvider, usePrefersDark} from '@sanity/ui'
 import {StrictMode, useEffect, useMemo, useState} from 'react'
 import {createRoot} from 'react-dom/client'
+
 import {WorkshopConfig} from './config'
 import {GlobalStyle} from './GlobalStyle'
 import {createLocationStore} from './location'

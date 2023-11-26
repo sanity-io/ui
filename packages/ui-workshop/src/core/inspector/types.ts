@@ -1,5 +1,6 @@
 import {ButtonTone} from '@sanity/ui'
 import {ReactNode} from 'react'
+
 import {WorkshopPlugin} from '../config'
 
 export interface InspectorTab {
