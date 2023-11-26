@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/sanity-io/ui-workshop/compare/v2.0.1...v2.0.2) (2023-11-26)
+
+### Bug Fixes
+
+- **props:** improve reducer ([29d9ad5](https://github.com/sanity-io/ui-workshop/commit/29d9ad50d5055e539907ce3e16b1cf8d3681a8e8))
+
 ## [2.0.1](https://github.com/sanity-io/ui-workshop/compare/v2.0.0...v2.0.1) (2023-11-26)
 
 ### Bug Fixes
