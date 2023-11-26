@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/sanity-io/ui-workshop/compare/v2.0.0...v2.0.1) (2023-11-26)
+
+### Bug Fixes
+
+- **deps:** update dependencies ([989a9cf](https://github.com/sanity-io/ui-workshop/commit/989a9cf92023842f2c6b0eae13f2c46959cc21f4))
+- **props:** do not clear state on mount ([8bb198b](https://github.com/sanity-io/ui-workshop/commit/8bb198b0aff0167ca932c7e2ef2655207115ea5c))
+- **props:** improve perf ([722e461](https://github.com/sanity-io/ui-workshop/commit/722e461e46813648703029b4ad3095fcd6193adb))
+
 ## [2.0.0](https://github.com/sanity-io/ui-workshop/compare/v1.2.11...v2.0.0) (2023-11-07)
 
 ### ⚠ BREAKING CHANGES
