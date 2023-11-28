@@ -88,7 +88,7 @@
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/pkg-utils": "^2.4.8",
     "@sanity/semantic-release-preset": "^4.1.4",
-    "@sanity/ui-workshop": "^2.0.0",
+    "@sanity/ui-workshop": "^2.0.2",
     "@storybook/addon-a11y": "^7.4.5",
     "@storybook/addon-docs": "^7.4.5",
     "@storybook/addon-essentials": "^7.4.5",
