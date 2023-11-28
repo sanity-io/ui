@@ -98,7 +98,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const boundaryElementContext = useBoundaryElement()
   const theme = useTheme()
   const {
-    arrow: arrowProp = true,
+    arrow: arrowProp = false,
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
     content,
