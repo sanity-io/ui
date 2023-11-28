@@ -35,7 +35,6 @@ export const Flex = forwardRef(function Flex(
   const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
 
   return (
-    // @ts-expect-error -- some dollar prefixed typings aren't inferred correctly https://github.com/styled-components/styled-components/issues/4062
     <Root
       data-ui="Flex"
       {...restProps}
