@@ -79,7 +79,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
     }
 
     input:checked + && {
-      --switch-bg-color: var(--card-focus-ring-color);
+      --switch-bg-color: ${color.default.enabled.fg};
       --switch-fg-color: ${color.default.enabled.bg};
     }
 
@@ -90,7 +90,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
       }
 
       input:not(:disabled):checked:hover + && {
-        --switch-bg-color: var(--card-focus-ring-color);
+        --switch-bg-color: ${color.default.enabled.fg};
         --switch-fg-color: ${color.default.enabled.bg};
       }
     }
