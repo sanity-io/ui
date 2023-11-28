@@ -3,6 +3,7 @@ import {
   BoundaryElementProvider,
   Box,
   Card,
+  Container,
   LayerProvider,
   Stack,
   Text,
@@ -18,28 +19,32 @@ export default function ConstrainedHeightStory() {
 
   return (
     <Card height="fill" tone="transparent">
-      <Card
-        ref={setBoundaryElement}
-        radius={3}
-        shadow={3}
-        style={{position: 'absolute', top: 20, right: 20, bottom: 20, left: 20}}
-      >
-        <Box height="fill" overflow="auto" padding={[3, 4, 5]} sizing="border">
-          <Stack space={5}>
-            <BoundaryElementProvider element={boundaryElement}>
-              <ConstrainedHeightExampleField id="example-1" label="Example 1" />
-              <ConstrainedHeightExampleField id="example-2" label="Example 2" />
-              <ConstrainedHeightExampleField id="example-3" label="Example 3" />
-              <ConstrainedHeightExampleField id="example-4" label="Example 4" />
-              <ConstrainedHeightExampleField id="example-5" label="Example 5" />
-              <ConstrainedHeightExampleField id="example-6" label="Example 6" />
-              <ConstrainedHeightExampleField id="example-7" label="Example 7" />
-              <ConstrainedHeightExampleField id="example-8" label="Example 8" />
-              <ConstrainedHeightExampleField id="example-9" label="Example 9" />
-            </BoundaryElementProvider>
-          </Stack>
-        </Box>
-      </Card>
+      <Container height="fill" padding={3} sizing="border" width={1}>
+        <Card
+          height="fill"
+          ref={setBoundaryElement}
+          radius={3}
+          shadow={3}
+          style={{position: 'relative'}}
+          // style={{position: 'absolute', top: 12, right: 12, bottom: 12, left: 12}}
+        >
+          <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
+            <Stack space={5}>
+              <BoundaryElementProvider element={boundaryElement}>
+                <ConstrainedHeightExampleField id="example-1" label="Example 1" />
+                <ConstrainedHeightExampleField id="example-2" label="Example 2" />
+                <ConstrainedHeightExampleField id="example-3" label="Example 3" />
+                <ConstrainedHeightExampleField id="example-4" label="Example 4" />
+                <ConstrainedHeightExampleField id="example-5" label="Example 5" />
+                <ConstrainedHeightExampleField id="example-6" label="Example 6" />
+                <ConstrainedHeightExampleField id="example-7" label="Example 7" />
+                <ConstrainedHeightExampleField id="example-8" label="Example 8" />
+                <ConstrainedHeightExampleField id="example-9" label="Example 9" />
+              </BoundaryElementProvider>
+            </Stack>
+          </Box>
+        </Card>
+      </Container>
     </Card>
   )
 }
