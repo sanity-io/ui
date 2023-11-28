@@ -11,18 +11,19 @@ import {
 } from '@sanity/ui'
 import {
   ThemeColor,
+  ThemeColorBase,
   ThemeColorButton,
   ThemeColorButtonState,
   ThemeColorButtonStates,
   ThemeColorButtonTones,
   ThemeColorCard,
-  ThemeColorMuted,
-  ThemeColorMutedTone,
   ThemeColorScheme,
   ThemeColorSelectable,
   ThemeColorSelectableStates,
-  ThemeColorSolid,
-  ThemeColorSolidTone,
+  getContrastRatio,
+  mix,
+  parseColor,
+  rgbToHex,
 } from '@sanity/ui/theme'
 import {useBoolean} from '@sanity/ui-workshop'
 import {createContext, useContext} from 'react'
@@ -35,9 +36,7 @@ interface Features {
   button: boolean
   card: boolean
   input: boolean
-  muted: boolean
   selectable: boolean
-  solid: boolean
   spot: boolean
 }
 
@@ -49,9 +48,7 @@ const defaultFeatures: Features = {
   button: false,
   card: false,
   input: false,
-  muted: true,
   selectable: false,
-  solid: false,
   spot: false,
 }
 
@@ -71,11 +68,11 @@ export default function CanvasStory() {
     button: useBoolean('Button', defaultFeatures.button, 'Props') ?? defaultFeatures.button,
     card: useBoolean('Card', defaultFeatures.card, 'Props') ?? defaultFeatures.card,
     input: useBoolean('Input', defaultFeatures.input, 'Props') ?? defaultFeatures.input,
-    muted: useBoolean('Muted', defaultFeatures.muted, 'Props') ?? defaultFeatures.muted,
+    // muted: useBoolean('Muted', defaultFeatures.muted, 'Props') ?? defaultFeatures.muted,
     selectable:
       useBoolean('Selectable', defaultFeatures.selectable, 'Props') ?? defaultFeatures.selectable,
-    solid: useBoolean('Solid', defaultFeatures.solid, 'Props') ?? defaultFeatures.solid,
-    spot: useBoolean('Spot', defaultFeatures.spot, 'Props') ?? defaultFeatures.spot,
+    // solid: useBoolean('Solid', defaultFeatures.solid, 'Props') ?? defaultFeatures.solid,
+    spot: useBoolean('Avatar', defaultFeatures.spot, 'Props') ?? defaultFeatures.spot,
   }
 
   return (
@@ -122,32 +119,7 @@ function Color(props: {color: ThemeColor; tone: CardTone}) {
         space={[3, 4]}
         // style={{outline: '1px solid #ccc'}}
       >
-        {features.base && (
-          <Stack
-            padding={3}
-            space={2}
-            style={{
-              borderRadius: 3,
-              boxShadow: `inset 0 0 0 1px ${color.base.border}`,
-            }}
-          >
-            <Text>Text</Text>
-            <Text muted>Muted</Text>
-            <Text accent>Accent</Text>
-            <Text>
-              <a href="#">Link</a>
-            </Text>
-            <Text>
-              <code>Code</code>
-            </Text>
-            <div
-              style={{
-                height: 9,
-                background: `linear-gradient(to right, ${color.base.skeleton?.from}, ${color.base.skeleton?.to})`,
-              }}
-            />
-          </Stack>
-        )}
+        {features.base && <ColorBase color={color.base} />}
 
         {features.button && <ColorButton color={color.button} />}
 
@@ -159,27 +131,71 @@ function Color(props: {color: ThemeColor; tone: CardTone}) {
           </Box>
         )}
 
-        {features.muted && <ColorMuted color={color.muted} />}
+        {/* {features.muted && <ColorMuted color={color.muted} />} */}
 
         {/* @todo: remove use of `muted` here */}
         {features.selectable && <ColorSelectable color={color.selectable || color.muted} />}
 
-        {features.solid && <ColorSolid color={color.solid} />}
+        {/* {features.solid && <ColorSolid color={color.solid} />} */}
 
         {features.spot && (
           <Flex gap={1}>
-            <Box flex={1} style={{backgroundColor: color.spot.blue, width: 25, height: 25}} />
-            <Box flex={1} style={{backgroundColor: color.spot.purple, width: 25, height: 25}} />
-            <Box flex={1} style={{backgroundColor: color.spot.magenta, width: 25, height: 25}} />
-            <Box flex={1} style={{backgroundColor: color.spot.red, width: 25, height: 25}} />
-            <Box flex={1} style={{backgroundColor: color.spot.yellow, width: 25, height: 25}} />
-            <Box flex={1} style={{backgroundColor: color.spot.green, width: 25, height: 25}} />
-            <Box flex={1} style={{backgroundColor: color.spot.cyan, width: 25, height: 25}} />
-            <Box flex={1} style={{backgroundColor: color.spot.gray, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.avatar?.blue.bg, width: 25, height: 25}} />
+            <Box
+              flex={1}
+              style={{backgroundColor: color.avatar?.purple.bg, width: 25, height: 25}}
+            />
+            <Box
+              flex={1}
+              style={{backgroundColor: color.avatar?.magenta.bg, width: 25, height: 25}}
+            />
+            <Box flex={1} style={{backgroundColor: color.avatar?.red.bg, width: 25, height: 25}} />
+            <Box
+              flex={1}
+              style={{backgroundColor: color.avatar?.yellow.bg, width: 25, height: 25}}
+            />
+            <Box
+              flex={1}
+              style={{backgroundColor: color.avatar?.green.bg, width: 25, height: 25}}
+            />
+            <Box flex={1} style={{backgroundColor: color.avatar?.cyan.bg, width: 25, height: 25}} />
+            <Box flex={1} style={{backgroundColor: color.avatar?.gray.bg, width: 25, height: 25}} />
           </Flex>
         )}
       </Stack>
     </Card>
+  )
+}
+
+function ColorBase(props: {color: ThemeColorBase}) {
+  const {color} = props
+
+  return (
+    <Stack
+      padding={3}
+      space={2}
+      style={{
+        borderRadius: 3,
+        boxShadow: `inset 0 0 0 1px ${color.border}`,
+      }}
+    >
+      <Text>Text</Text>
+      <Text muted>Muted</Text>
+
+      <Text accent>Accent</Text>
+      <Text>
+        <a href="#">Link</a>
+      </Text>
+      <Text>
+        <code>Code</code>
+      </Text>
+      <div
+        style={{
+          height: 9,
+          background: `linear-gradient(to right, ${color.skeleton?.from}, ${color.skeleton?.to})`,
+        }}
+      />
+    </Stack>
   )
 }
 
@@ -260,6 +276,17 @@ function ColorGenericStates(props: {color: ThemeColorButtonStates}) {
   )
 }
 
+function _contrast(baseBg: string, bg: string, fg: string) {
+  const baseBgRgb = parseColor(baseBg)
+  let bgRgb = parseColor(bg)
+
+  if (typeof bgRgb.a === 'number') {
+    bgRgb = mix(baseBgRgb, bgRgb, bgRgb.a)
+  }
+
+  return getContrastRatio(rgbToHex(bgRgb), fg)
+}
+
 function ColorGenericState(props: {color: ThemeColorButtonState}) {
   const {color} = props
 
@@ -287,20 +314,21 @@ function ColorGenericState(props: {color: ThemeColorButtonState}) {
         </Box>
       </Flex>
 
-      <Text align="center" style={{color: 'inherit'}}>
-        Text
+      <Text align="center" size={1} style={{color: 'inherit'}}>
+        Text &ndash; {_contrast(color.bg, color.bg, color.fg).toFixed(2)}
       </Text>
       <Text align="center" size={1} style={{color: color.muted.fg}}>
-        Muted
+        Muted &ndash; {_contrast(color.bg, color.bg, color.muted.fg).toFixed(2)}
       </Text>
       <Text align="center" size={1} style={{color: color.link.fg}}>
-        Link
+        Link &ndash; {_contrast(color.bg, color.bg, color.link.fg).toFixed(2)}
       </Text>
       <Text align="center" size={1} style={{color: color.accent.fg}}>
-        Accent
+        Accent &ndash; {_contrast(color.bg, color.bg, color.accent.fg).toFixed(2)}
       </Text>
       <Text align="center" size={1} style={{color: color.code.fg}}>
-        <span style={{backgroundColor: color.code.bg}}>Code</span>
+        <span style={{backgroundColor: color.code.bg}}>Code</span> &ndash;{' '}
+        {_contrast(color.bg, color.code.bg, color.code.fg).toFixed(2)}
       </Text>
       <div
         style={{
@@ -309,62 +337,6 @@ function ColorGenericState(props: {color: ThemeColorButtonState}) {
         }}
       />
     </Stack>
-  )
-}
-
-function ColorMuted(props: {color: ThemeColorMuted}) {
-  const {color} = props
-
-  return (
-    <Stack space={1}>
-      <ColorMutedTone color={color.default} />
-      <ColorMutedTone color={color.primary} />
-      <ColorMutedTone color={color.positive} />
-      <ColorMutedTone color={color.caution} />
-      <ColorMutedTone color={color.critical} />
-    </Stack>
-  )
-}
-
-function ColorMutedTone(props: {color: ThemeColorMutedTone}) {
-  const {color} = props
-
-  return (
-    <Grid columns={5} gap={1}>
-      <ColorGenericState color={color.enabled} />
-      <ColorGenericState color={color.hovered} />
-      <ColorGenericState color={color.pressed} />
-      <ColorGenericState color={color.selected} />
-      <ColorGenericState color={color.disabled} />
-    </Grid>
-  )
-}
-
-function ColorSolid(props: {color: ThemeColorSolid}) {
-  const {color} = props
-
-  return (
-    <Stack space={1}>
-      <ColorSolidTone color={color.default} />
-      <ColorSolidTone color={color.primary} />
-      <ColorSolidTone color={color.positive} />
-      <ColorSolidTone color={color.caution} />
-      <ColorSolidTone color={color.critical} />
-    </Stack>
-  )
-}
-
-function ColorSolidTone(props: {color: ThemeColorSolidTone}) {
-  const {color} = props
-
-  return (
-    <Grid columns={5} gap={1}>
-      <ColorGenericState color={color.enabled} />
-      <ColorGenericState color={color.hovered} />
-      <ColorGenericState color={color.pressed} />
-      <ColorGenericState color={color.selected} />
-      <ColorGenericState color={color.disabled} />
-    </Grid>
   )
 }
 
