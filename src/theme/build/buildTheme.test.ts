@@ -62,7 +62,7 @@ test('build theme', () => {
         button: {
           ghost: {
             enabled: {
-              border: 'rgba(246,248,248,0)',
+              border: 'rgba(246,246,248,0)',
             },
           },
         },
@@ -75,7 +75,7 @@ test('build theme', () => {
         button: {
           ghost: {
             enabled: {
-              border: 'rgba(23,27,28,0)',
+              border: 'rgba(19,19,27,0)',
             },
           },
         },
