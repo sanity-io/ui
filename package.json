@@ -64,7 +64,7 @@
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@juggle/resize-observer": "^3.4.0",
-    "@sanity/pkg-utils": "^2.4.8",
+    "@sanity/pkg-utils": "^3.2.5",
     "@sanity/semantic-release-preset": "^4.1.4",
     "@sanity/ui-workshop": "^2.0.0",
     "@testing-library/dom": "^9.3.1",
