@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/sanity-io/ui-workshop/compare/v2.0.2...v2.0.3) (2023-11-28)
+
+### Bug Fixes
+
+- **deps:** lock file maintenance ([#73](https://github.com/sanity-io/ui-workshop/issues/73)) ([3046760](https://github.com/sanity-io/ui-workshop/commit/3046760682f1cc288b57da06d89b2fd3357e5ceb))
+
 ## [2.0.2](https://github.com/sanity-io/ui-workshop/compare/v2.0.1...v2.0.2) (2023-11-26)
 
 ### Bug Fixes
