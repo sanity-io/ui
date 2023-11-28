@@ -327,7 +327,7 @@ const DialogCard = forwardRef(function DialogCard(
                   )}
                 </Box>
                 {showCloseButton && (
-                  <Box padding={3}>
+                  <Box padding={2}>
                     <Button
                       aria-label="Close dialog"
                       disabled={!onClose}
