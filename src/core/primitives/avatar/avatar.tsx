@@ -1,4 +1,4 @@
-import {ThemeColorSpotKey} from '@sanity/ui/theme'
+import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import styled from 'styled-components'
@@ -17,7 +17,7 @@ export interface AvatarProps {
   animateArrowFrom?: AvatarPosition
   arrowPosition?: AvatarPosition
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  color?: ThemeColorSpotKey
+  color?: ThemeColorAvatarColorKey
   initials?: string
   onImageLoadError?: (event: Error) => void
   size?: AvatarSize | AvatarSize[]
@@ -30,7 +30,7 @@ export interface AvatarProps {
   title?: string
 }
 
-const Root = styled.div<{$color: ThemeColorSpotKey; $size: AvatarSize[]}>(
+const Root = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
   avatarStyle.root,
 )
