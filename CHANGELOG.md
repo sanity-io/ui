@@ -5,6 +5,29 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.27](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.26...v2.0.0-alpha.27) (2023-11-28)
+
+### Features
+
+- **figma:** initialize figma plugin ([8e82caa](https://github.com/sanity-io/ui/commit/8e82caaf970f5db7d3bd1ef77360cc492613c9ae))
+- introduce `'@sanity/ui/theme'` export ([fdc6f71](https://github.com/sanity-io/ui/commit/fdc6f7149a625b4bbe6bd2247368d2c955d45973))
+
+### Bug Fixes
+
+- adjust colors ([d2077c0](https://github.com/sanity-io/ui/commit/d2077c0a570f2860b7fe668e82f6e0ab44f5c7bc))
+- **avatar:** use label font ([66e2e70](https://github.com/sanity-io/ui/commit/66e2e704cf6a78b325936b1bbb7cdd5124f67c0d))
+- **badge:** set color using variable ([8c2d472](https://github.com/sanity-io/ui/commit/8c2d472064cbfdc89e0317a6f887cb385dadcdbc))
+- **button:** default mode ([000d7ed](https://github.com/sanity-io/ui/commit/000d7edf4b0423792170424ac4ef3bc4ed1b7081))
+- **button:** render styles ([018d1e5](https://github.com/sanity-io/ui/commit/018d1e5ee90b9d747f16a92d389a40afd371a522))
+- **button:** set vertical alignment to fix unwanted margin ([438acd0](https://github.com/sanity-io/ui/commit/438acd0a73e46054bbd6bef02df4bd47ee6fc94c))
+- **checkbox:** adjust colors ([9c1941f](https://github.com/sanity-io/ui/commit/9c1941f5a20586572aa859303b0693ec1d82cadd))
+- **deps:** upgrade `@sanity/ui-workshop` ([52f6a87](https://github.com/sanity-io/ui/commit/52f6a8736095e1e180072f6438c22cc6f8ad54f2))
+- **dialog:** adjust padding ([6fb0828](https://github.com/sanity-io/ui/commit/6fb08288eb26f263477066b24b7d510d819893da))
+- **dialog:** fix padding ([02e3377](https://github.com/sanity-io/ui/commit/02e33772284660d4ee43b32e04fd069adad702a9))
+- **popover:** disable `arrow` by default ([113e6cf](https://github.com/sanity-io/ui/commit/113e6cf2842bb516c216b4698ae0b6b9fee2407d))
+- **tooltip:** disable arrow by default ([1b9fb7f](https://github.com/sanity-io/ui/commit/1b9fb7f31e3885ccc0d776076545174c84c1e6cb))
+- **tree:** default font size and padding ([1fb7330](https://github.com/sanity-io/ui/commit/1fb733041ba2e5eb6a899871ede0890fb3f35427))
+
 ## [2.0.0-alpha.26](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.25...v2.0.0-alpha.26) (2023-11-22)
 
 ### Features
