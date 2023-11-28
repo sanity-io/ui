@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.28](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.27...v2.0.0-alpha.28) (2023-11-28)
+
+### Bug Fixes
+
+- **deps:** update `@sanity/color` ([6b97f0a](https://github.com/sanity-io/ui/commit/6b97f0a84e0e9eeae493a1819e0784ba42b2461d))
+
 ## [2.0.0-alpha.27](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.26...v2.0.0-alpha.27) (2023-11-28)
 
 ### Features
