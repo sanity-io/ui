@@ -8,8 +8,15 @@ import {ButtonMode, ButtonTone, ButtonWidth} from '../../types'
 /**
  * @internal
  */
-export function buttonBaseStyles({$width}: {$width?: ButtonWidth}): ReturnType<typeof css> {
+export function buttonBaseStyles({
+  $width,
+  theme,
+}: {$width?: ButtonWidth} & ThemeProps): ReturnType<typeof css> {
+  const {styles} = theme.sanity
+
   return css`
+    ${styles?.button};
+
     -webkit-font-smoothing: inherit;
     appearance: none;
     display: inline-flex;
