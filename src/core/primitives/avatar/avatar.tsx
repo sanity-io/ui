@@ -111,7 +111,7 @@ export const Avatar = forwardRef(function Avatar(
     }
   }, [onImageLoadError])
 
-  const initialsSize = useMemo(() => size.map((s) => (s === 0 ? 0 : s + 1)), [size])
+  const initialsSize = useMemo(() => size.map((s) => (s === 0 ? 0 : s * 2)), [size])
 
   return (
     <Root
@@ -175,7 +175,7 @@ export const Avatar = forwardRef(function Avatar(
       {(imageFailed || !src) && initials && (
         <>
           <Initials>
-            <InitialsLabel as="span" size={initialsSize}>
+            <InitialsLabel forwardedAs="span" size={initialsSize}>
               {initials}
             </InitialsLabel>
           </Initials>
