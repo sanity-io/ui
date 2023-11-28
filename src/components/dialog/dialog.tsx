@@ -84,6 +84,10 @@ function isTargetWithinScope(
   )
 }
 
+function onDragEnter(event: React.DragEvent<HTMLDivElement>) {
+  return event.stopPropagation()
+}
+
 const Root = styled(Layer)<ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps>(
   responsivePaddingStyle,
   dialogStyle,
@@ -402,6 +406,7 @@ export const Dialog = forwardRef(function Dialog(
         id={id}
         onActivate={onActivate}
         onClick={handleRootClick}
+        onDragEnter={onDragEnter}
         onFocus={handleFocus}
         ref={ref}
         role="dialog"
