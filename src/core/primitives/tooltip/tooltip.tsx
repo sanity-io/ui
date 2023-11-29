@@ -401,7 +401,8 @@ export const Tooltip = forwardRef(function Tooltip(
           <motion.div
             initial={{opacity: 0.5, scale: 0.95}}
             animate={{opacity: 1, scale: 1}}
-            exit={{opacity: 0, scale: 0.95, transition: {duration: 0.4, type: 'spring'}}}
+            exit={{opacity: 0, scale: 0.95}}
+            transition={{duration: 0.3, type: 'spring'}}
           >
             {children}
           </motion.div>
