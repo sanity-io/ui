@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.29](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.28...v2.0.0-alpha.29) (2023-11-29)
+
+### Bug Fixes
+
+- revert rounded border style in tabs ([f811740](https://github.com/sanity-io/ui/commit/f811740f69e4bfdb62cc55c070eb062a9ec17e7c))
+- tweak default tooltip motion values ([6ba3913](https://github.com/sanity-io/ui/commit/6ba39139e1d227c2a8f67d8ea571a1e0abd88c26))
+- update legacy focusRing values ([d976c65](https://github.com/sanity-io/ui/commit/d976c65ce876aff0925b728c2e88991aad607213))
+
 ## [2.0.0-alpha.28](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.27...v2.0.0-alpha.28) (2023-11-28)
 
 ### Bug Fixes
