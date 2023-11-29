@@ -24,8 +24,8 @@ export const config: Omit<RootTheme, 'color' | 'fonts'> = {
   },
   container: [480, 640, 960, 1280, 1600, 1920],
   focusRing: {
-    offset: 1,
-    width: 2,
+    offset: -1,
+    width: 1,
   },
   media: [360, 600, 900, 1200, 1800, 2400],
   radius: [0, 1, 3, 6, 9, 12, 21],
