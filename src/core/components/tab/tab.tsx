@@ -91,7 +91,6 @@ export const Tab = forwardRef(function Tab(
       onBlur={handleBlur}
       onFocus={handleFocus}
       padding={padding}
-      radius="full"
       ref={setRef}
       role="tab"
       selected={selected}
