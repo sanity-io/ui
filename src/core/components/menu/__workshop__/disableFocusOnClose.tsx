@@ -1,4 +1,4 @@
-import {SelectIcon} from '@sanity/icons'
+import {ChevronDownIcon} from '@sanity/icons'
 import {Button, Flex, Menu, MenuButton, MenuButtonProps, MenuItem} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
@@ -16,7 +16,7 @@ export default function DisableFocusOnCloseStory() {
         __unstable_disableRestoreFocusOnClose={disableRestoreFocusOnClose}
         button={
           <Button
-            iconRight={SelectIcon}
+            iconRight={ChevronDownIcon}
             mode="ghost"
             text={
               disableRestoreFocusOnClose

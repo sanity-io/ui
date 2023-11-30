@@ -1,4 +1,4 @@
-import {SelectIcon} from '@sanity/icons'
+import {ChevronDownIcon} from '@sanity/icons'
 import {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
@@ -72,7 +72,7 @@ export const Select = forwardRef(function Select(
 
       <IconBox padding={padding}>
         <Text size={fontSize}>
-          <SelectIcon />
+          <ChevronDownIcon />
         </Text>
       </IconBox>
     </Root>
