@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.31](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.30...v2.0.0-alpha.31) (2023-11-30)
+
+### Features
+
+- update select component icon ([39bc446](https://github.com/sanity-io/ui/commit/39bc4465424754e0af3600c736c44e7dc5f19adf))
+
 ## [2.0.0-alpha.30](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.29...v2.0.0-alpha.30) (2023-11-30)
 
 ### Features
