@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.32](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.31...v2.0.0-alpha.32) (2023-11-30)
+
+### Features
+
+- force semibold on dialog headers ([3c56396](https://github.com/sanity-io/ui/commit/3c5639675b81430f52057f1c22c0edab5b820f21))
+
 ## [2.0.0-alpha.31](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.30...v2.0.0-alpha.31) (2023-11-30)
 
 ### Features
