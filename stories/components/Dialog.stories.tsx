@@ -17,7 +17,7 @@ const meta: Meta<typeof Dialog> = {
   args: {
     __unstable_autoFocus: false,
     children: (
-      <Box marginX={1} padding={4}>
+      <Box padding={4}>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
           hendrerit scelerisque ut libero. Maecenas iaculis efficitur lorem, ac faucibus mi
@@ -33,7 +33,7 @@ const meta: Meta<typeof Dialog> = {
       </Box>
     ),
     footer: (
-      <Card margin={1} padding={4}>
+      <Card padding={4}>
         <Inline>
           <Text size={1} weight="medium">
             Dialog footer
@@ -227,10 +227,8 @@ export const DeleteDocumentDialog: Story = {
             }
             open={open}
           >
-            <Box paddingX={3}>
-              <Box paddingX={3} paddingY={5}>
-                <Text size={1}>Are you sure you want to delete “Untitled”?</Text>
-              </Box>
+            <Box padding={4}>
+              <Text size={1}>Are you sure you want to delete “Untitled”?</Text>
             </Box>
           </Dialog>
         )}
