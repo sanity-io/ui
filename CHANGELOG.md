@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.30](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.29...v2.0.0-alpha.30) (2023-11-30)
+
+### Features
+
+- remove dialog header + footer borders ([fc077a8](https://github.com/sanity-io/ui/commit/fc077a89e0811e53e924a91eb86f506e0c7d8b7f))
+
 ## [2.0.0-alpha.29](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.28...v2.0.0-alpha.29) (2023-11-29)
 
 ### Bug Fixes
