@@ -254,7 +254,7 @@ const DialogCard = forwardRef(function DialogCard(
               <Flex align="center" padding={3}>
                 <Box flex={1} padding={2}>
                   {header && (
-                    <Text id={labelId} size={1} weight="medium">
+                    <Text id={labelId} size={1} weight="semibold">
                       {header}
                     </Text>
                   )}
