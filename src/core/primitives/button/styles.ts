@@ -1,21 +1,21 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
-import {_colorVarsStyle} from '../../styles/colorVars'
+import {_cardColorStyle} from '../../styles/card'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
 import {ButtonMode, ButtonTone, ButtonWidth} from '../../types'
 
 /**
  * @internal
  */
-export function buttonBaseStyles({
-  $width,
-  theme,
-}: {$width?: ButtonWidth} & ThemeProps): ReturnType<typeof css> {
-  const {styles} = theme.sanity
+export function buttonBaseStyles(
+  props: {$width?: ButtonWidth} & ThemeProps,
+): ReturnType<typeof css> {
+  const {$width} = props
+  const {style} = getTheme_v2(props.theme)
 
   return css`
-    ${styles?.button};
+    ${style?.button};
 
     -webkit-font-smoothing: inherit;
     appearance: none;
@@ -66,26 +66,25 @@ function combineBoxShadow(...boxShadows: (string | undefined)[]): string {
 export function buttonColorStyles(
   props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps,
 ): CSSObject[] {
-  const {$mode, theme} = props
-  const buttonTheme = theme.sanity.button
+  const {$mode} = props
+  const {button, color: baseColor, style} = getTheme_v2(props.theme)
   const shadow = props.$mode === 'ghost'
-  const base = theme.sanity.color.base
-  const mode = theme.sanity.color.button[$mode] || theme.sanity.color.button.default
+  const mode = baseColor.button[$mode] || baseColor.button.default
   const color = mode[props.$tone] || mode.default
   const border = {
-    width: buttonTheme.border.width,
+    width: button.border.width,
     color: 'var(--card-border-color)',
   }
   // const defaultBoxShadow = `inset 0px -1.5px 0px ${buttonTheme.border.width}px color-mix(in srgb, var(--card-border-color) 25%, var(--card-bg-color))`
   const defaultBoxShadow = undefined
 
   return [
-    _colorVarsStyle(base, color.enabled),
+    _cardColorStyle(baseColor, color.enabled),
     {
       backgroundColor: 'var(--card-bg-color)',
       color: 'var(--card-fg-color)',
       boxShadow: focusRingBorderStyle(border),
-      '&:disabled, &[data-disabled="true"]': _colorVarsStyle(base, color.disabled),
+      '&:disabled, &[data-disabled="true"]': _cardColorStyle(baseColor, color.disabled),
       "&:not([data-disabled='true'])": {
         boxShadow: combineBoxShadow(
           focusRingBorderStyle(border),
@@ -93,9 +92,9 @@ export function buttonColorStyles(
         ),
         '&:focus': {
           boxShadow: focusRingStyle({
-            base,
-            border: {width: 2, color: base.bg},
-            focusRing: buttonTheme.focusRing,
+            base: baseColor,
+            border: {width: 2, color: baseColor.bg},
+            focusRing: button.focusRing,
           }),
         },
         '&:focus:not(:focus-visible)': {
@@ -105,13 +104,13 @@ export function buttonColorStyles(
           ),
         },
         '@media (hover: hover)': {
-          '&:hover': _colorVarsStyle(base, color.hovered),
-          '&:active': _colorVarsStyle(base, color.pressed),
-          '&[data-hovered]': _colorVarsStyle(base, color.hovered),
+          '&:hover': _cardColorStyle(baseColor, color.hovered),
+          '&:active': _cardColorStyle(baseColor, color.pressed),
+          '&[data-hovered]': _cardColorStyle(baseColor, color.hovered),
         },
-        '&[data-selected]': _colorVarsStyle(base, color.pressed),
+        '&[data-selected]': _cardColorStyle(baseColor, color.pressed),
       },
     },
-    theme.sanity.styles?.button?.root,
+    style?.button?.root,
   ].filter(Boolean) as CSSObject[]
 }

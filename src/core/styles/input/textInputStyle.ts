@@ -1,4 +1,4 @@
-import {ThemeColorSchemeKey, ThemeFontWeightKey} from '@sanity/ui/theme'
+import {ThemeColorSchemeKey, ThemeFontWeightKey, getTheme_v2} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {CardTone} from '../../types'
@@ -42,9 +42,8 @@ export function textInputRootStyle(): ReturnType<typeof css> {
 export function textInputBaseStyle(
   props: TextInputInputStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {theme, $scheme, $tone, $weight} = props
-  const font = theme.sanity.fonts.text
-  const color = theme.sanity.color.input
+  const {$scheme, $tone, $weight} = props
+  const {color, font} = getTheme_v2(props.theme)
 
   return css`
     appearance: none;
@@ -54,8 +53,8 @@ export function textInputBaseStyle(
     outline: none;
     width: 100%;
     box-sizing: border-box;
-    font-family: ${font.family};
-    font-weight: ${($weight && font.weights[$weight]) || font.weights.regular};
+    font-family: ${font.text.family};
+    font-weight: ${($weight && font.text.weights[$weight]) || font.text.weights.regular};
     margin: 0;
     position: relative;
     z-index: 1;
@@ -83,42 +82,41 @@ export function textInputBaseStyle(
     }
 
     &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
-      --input-fg-color: ${color.default.enabled.fg};
-      --input-placeholder-color: ${color.default.enabled.placeholder};
+      --input-fg-color: ${color.input.default.enabled.fg};
+      --input-placeholder-color: ${color.input.default.enabled.placeholder};
 
       /* enabled */
       &:not(:invalid):not(:disabled):not(:read-only) {
-        --input-fg-color: ${color.default.enabled.fg};
-        --input-placeholder-color: ${color.default.enabled.placeholder};
+        --input-fg-color: ${color.input.default.enabled.fg};
+        --input-placeholder-color: ${color.input.default.enabled.placeholder};
       }
 
       /* disabled */
       &:not(:invalid):disabled {
-        --input-fg-color: ${color.default.disabled.fg};
-        --input-placeholder-color: ${color.default.disabled.placeholder};
+        --input-fg-color: ${color.input.default.disabled.fg};
+        --input-placeholder-color: ${color.input.default.disabled.placeholder};
       }
 
       /* invalid */
       &:invalid {
-        --input-fg-color: ${color.invalid.enabled.fg};
-        --input-placeholder-color: ${color.invalid.enabled.placeholder};
+        --input-fg-color: ${color.input.invalid.enabled.fg};
+        --input-placeholder-color: ${color.input.invalid.enabled.placeholder};
       }
 
       /* readOnly */
       &:read-only {
-        --input-fg-color: ${color.default.readOnly.fg};
-        --input-placeholder-color: ${color.default.readOnly.placeholder};
+        --input-fg-color: ${color.input.default.readOnly.fg};
+        --input-placeholder-color: ${color.input.default.readOnly.placeholder};
       }
     }
   `
 }
 
 export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject[] {
-  const {theme} = props
-  const {fonts, media} = theme.sanity
+  const {font, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$fontSize, (sizeIndex) => {
-    const size = fonts.text.sizes[sizeIndex] || fonts.text.sizes[2]
+    const size = font.text.sizes[sizeIndex] || font.text.sizes[2]
 
     return {
       fontSize: rem(size.fontSize),
@@ -130,10 +128,8 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$hasPrefix, $hasSuffix, $scheme, $tone, $unstableDisableFocusRing, theme} = props
-  const {input} = theme.sanity
-  const {focusRing} = input.text
-  const color = theme.sanity.color.input
+  const {$hasPrefix, $hasSuffix, $scheme, $tone, $unstableDisableFocusRing} = props
+  const {color, input} = getTheme_v2(props.theme)
 
   return css`
     --input-box-shadow: none;
@@ -156,25 +152,25 @@ export function textInputRepresentationStyle(
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
 
     &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
-      --card-bg-color: ${color.default.enabled.bg};
-      --card-fg-color: ${color.default.enabled.fg};
+      --card-bg-color: ${color.input.default.enabled.bg};
+      --card-fg-color: ${color.input.default.enabled.fg};
 
       /* enabled */
       *:not(:disabled) + &[data-border] {
         --input-box-shadow: ${focusRingBorderStyle({
-          color: color.default.enabled.border,
+          color: color.input.default.enabled.border,
           width: input.border.width,
         })};
       }
 
       /* invalid */
       *:not(:disabled):invalid + & {
-        --card-bg-color: ${color.invalid.enabled.bg};
-        --card-fg-color: ${color.invalid.enabled.fg};
+        --card-bg-color: ${color.input.invalid.enabled.bg};
+        --card-fg-color: ${color.input.invalid.enabled.fg};
 
         &[data-border] {
           --input-box-shadow: ${focusRingBorderStyle({
-            color: color.invalid.enabled.border,
+            color: color.input.invalid.enabled.border,
             width: input.border.width,
           })};
         }
@@ -186,26 +182,26 @@ export function textInputRepresentationStyle(
           --input-box-shadow: ${$unstableDisableFocusRing
             ? undefined
             : focusRingStyle({
-                border: {color: color.default.enabled.border, width: input.border.width},
-                focusRing,
+                border: {color: color.input.default.enabled.border, width: input.border.width},
+                focusRing: input.text.focusRing,
               })};
         }
 
         &:not([data-border]) {
           --input-box-shadow: ${$unstableDisableFocusRing
             ? undefined
-            : focusRingStyle({focusRing})};
+            : focusRingStyle({focusRing: input.text.focusRing})};
         }
       }
 
       /* disabled */
       *:disabled + & {
-        --card-bg-color: ${color.default.disabled.bg} !important;
-        --card-fg-color: ${color.default.disabled.fg} !important;
+        --card-bg-color: ${color.input.default.disabled.bg} !important;
+        --card-fg-color: ${color.input.default.disabled.fg} !important;
 
         &[data-border] {
           --input-box-shadow: ${focusRingBorderStyle({
-            color: color.default.disabled.border,
+            color: color.input.default.disabled.border,
             width: input.border.width,
           })};
         }
@@ -213,20 +209,20 @@ export function textInputRepresentationStyle(
 
       /* readOnly */
       *:read-only + & {
-        --card-bg-color: ${color.default.readOnly.bg} !important;
-        --card-fg-color: ${color.default.readOnly.fg} !important;
+        --card-bg-color: ${color.input.default.readOnly.bg} !important;
+        --card-fg-color: ${color.input.default.readOnly.fg} !important;
       }
 
       /* hovered */
       @media (hover: hover) {
         *:not(:disabled):not(:read-only):not(:invalid):hover + & {
-          --card-bg-color: ${color.default.hovered.bg};
-          --card-fg-color: ${color.default.hovered.fg};
+          --card-bg-color: ${color.input.default.hovered.bg};
+          --card-fg-color: ${color.input.default.hovered.fg};
         }
 
         *:not(:disabled):not(:read-only):not(:invalid):not(:focus):hover + &[data-border] {
           --input-box-shadow: ${focusRingBorderStyle({
-            color: color.default.hovered.border,
+            color: color.input.default.hovered.border,
             width: input.border.width,
           })};
         }

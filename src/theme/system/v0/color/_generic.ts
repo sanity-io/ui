@@ -1,7 +1,8 @@
-import {ThemeColorBlendModeKey} from './_system'
+import {ThemeColorBlendModeKey} from '../../color/_system'
 
 /**
  * @public
+ * @deprecated Use `ThemeColorState_v2` instead.
  */
 export interface ThemeColorGenericState {
   /** @internal */

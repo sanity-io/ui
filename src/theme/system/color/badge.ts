@@ -1,9 +1,20 @@
-import {ThemeColorBlendModeKey} from './_system'
+/**
+ * @public
+ */
+export interface ThemeColorBadgeTone_v2 {
+  bg: string
+  fg: string
+  dot: string
+  icon: string
+}
 
-export interface ThemeColorBadge {
-  default: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  primary: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  positive: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  caution: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  critical: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
+/**
+ * @public
+ */
+export interface ThemeColorBadge_v2 {
+  default: ThemeColorBadgeTone_v2
+  primary: ThemeColorBadgeTone_v2
+  positive: ThemeColorBadgeTone_v2
+  caution: ThemeColorBadgeTone_v2
+  critical: ThemeColorBadgeTone_v2
 }

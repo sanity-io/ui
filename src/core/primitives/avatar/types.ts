@@ -1,11 +1,11 @@
-import {ThemeColorSpotKey} from '@sanity/ui/theme'
+import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
 import {AvatarSize} from '../../types'
 
 /**
  * @internal
  */
 export interface AvatarRootStyleProps {
-  $color: ThemeColorSpotKey
+  $color: ThemeColorAvatarColorKey
 }
 
 /**

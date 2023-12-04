@@ -1,7 +1,7 @@
 import {ColorHueKey, ColorTintKey} from '@sanity/color'
 import {
   THEME_COLOR_AVATAR_COLORS,
-  THEME_COLOR_BASE_TONES,
+  THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_INPUT_STATES,
   THEME_COLOR_STATES,
@@ -9,25 +9,7 @@ import {
   ThemeColorBlendModeKey,
 } from '../system'
 
-export const COLOR_CONFIG_BASE_KEYS = [
-  '_hue',
-  'bg',
-  'fg',
-  'border',
-  'focusRing',
-  'muted/fg',
-  'link/fg',
-  'code/bg',
-  'code/fg',
-  'shadow/outline',
-  'shadow/umbra',
-  'shadow/penumbra',
-  'shadow/ambient',
-  'skeleton/from',
-  'skeleton/to',
-] as const
-export type ColorConfigBaseKey = (typeof COLOR_CONFIG_BASE_KEYS)[number]
-
+/** @internal */
 export const COLOR_CONFIG_STATE_KEYS = [
   '_hue',
   'bg',
@@ -35,19 +17,46 @@ export const COLOR_CONFIG_STATE_KEYS = [
   'border',
   'focusRing',
   'muted/fg',
+  'accent/fg',
   'link/fg',
   'code/bg',
   'code/fg',
   'skeleton/from',
   'skeleton/to',
+  'status/dot',
+  'status/icon',
 ] as const
+
+/** @public */
 export type ColorConfigStateKey = (typeof COLOR_CONFIG_STATE_KEYS)[number]
 
+/** @internal */
+export const COLOR_CONFIG_CARD_KEYS = [
+  ...COLOR_CONFIG_STATE_KEYS,
+  '_hue',
+  'bg',
+  'fg',
+  'border',
+  'focusRing',
+  'shadow/outline',
+  'shadow/umbra',
+  'shadow/penumbra',
+  'shadow/ambient',
+] as const
+
+/** @public */
+export type ColorConfigCardKey = (typeof COLOR_CONFIG_CARD_KEYS)[number]
+
+/** @internal */
 export const COLOR_CONFIG_BLEND_KEYS = ['_blend'] as const
+
+/** @public */
 export type ColorConfigBlendKey = (typeof COLOR_CONFIG_BLEND_KEYS)[number]
 
+/** @public */
 export type ColorConfigOpacityValue = `0` | `0.${number}` | `1`
 
+/** @public */
 export type ColorConfigValue =
   | `black`
   | `white`
@@ -60,24 +69,44 @@ export type ColorConfigValue =
   | `${ColorTintKey}/${ColorConfigOpacityValue}`
   | ThemeColorBlendModeKey
 
+/** @public */
 export type ThemeColorTokenValue = [ColorConfigValue, ColorConfigValue]
 
+/** @public */
 export type ColorBlendModeTokenValue = [ThemeColorBlendModeKey, ThemeColorBlendModeKey]
 
+/** @internal */
 export const COLOR_CONFIG_AVATAR_COLORS = ['*', ...THEME_COLOR_AVATAR_COLORS] as const
+
+/** @public */
 export type ColorConfigAvatarColor = (typeof COLOR_CONFIG_AVATAR_COLORS)[number]
 
-export const COLOR_CONFIG_BASE_TONES = ['*', ...THEME_COLOR_BASE_TONES] as const
-export type ColorConfigBaseTone = (typeof COLOR_CONFIG_BASE_TONES)[number]
+/** @internal */
+export const COLOR_CONFIG_CARD_TONES = ['*', ...THEME_COLOR_CARD_TONES] as const
 
+/** @public */
+export type ColorConfigCardTone = (typeof COLOR_CONFIG_CARD_TONES)[number]
+
+/** @internal */
 export const COLOR_CONFIG_STATE_TONES = ['*', ...THEME_COLOR_STATE_TONES] as const
+
+/** @public */
 export type ColorConfigStateTone = (typeof COLOR_CONFIG_STATE_TONES)[number]
 
+/** @internal */
 export const COLOR_CONFIG_STATES = ['*', ...THEME_COLOR_STATES] as const
+
+/** @public */
 export type ColorConfigState = (typeof COLOR_CONFIG_STATES)[number]
 
+/** @internal */
 export const COLOR_CONFIG_INPUT_MODES = ['*', ...THEME_COLOR_INPUT_MODES] as const
+
+/** @public */
 export type ColorConfigInputMode = (typeof COLOR_CONFIG_INPUT_MODES)[number]
 
+/** @internal */
 export const COLOR_CONFIG_INPUT_STATES = ['*', ...THEME_COLOR_INPUT_STATES] as const
+
+/** @public */
 export type ColorConfigInputState = (typeof COLOR_CONFIG_INPUT_STATES)[number]

@@ -1,6 +1,6 @@
 import {ForwardedRef, HTMLProps, ReactElement, forwardRef} from 'react'
 import styled, {css} from 'styled-components'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 import {Point, compileCommands, getRoundedCommands} from './cmds'
 
 const Root = styled.div<{$w: number}>(
@@ -70,8 +70,8 @@ export const Arrow = forwardRef(function Arrow(
   ref: ForwardedRef<HTMLDivElement>,
 ): ReactElement {
   const {width: w, height: h, radius = 0, ...restProps} = props
-  const theme = useTheme()
-  const strokeWidth = theme.sanity.card.shadow.outline
+  const {card} = useTheme_v2()
+  const strokeWidth = card.shadow.outline
 
   const center = w / 2
 

@@ -1,3 +1,4 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
@@ -10,9 +11,7 @@ export function checkboxBaseStyles(): ReturnType<typeof css> {
 }
 
 export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
-  const {theme} = props
-  const color = theme.sanity.color.input
-  const {input, radius} = theme.sanity
+  const {color, input, radius} = getTheme_v2(props.theme)
   const {focusRing} = input.checkbox
 
   return css`
@@ -34,12 +33,12 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       width: ${rem(input.checkbox.size)};
       box-sizing: border-box;
       box-shadow: ${focusRingBorderStyle({
-        color: color.default.enabled.border,
+        color: color.input.default.enabled.border,
         width: input.border.width,
       })};
       border-radius: ${rem(radius[2])};
       line-height: 1;
-      background-color: ${color.default.enabled.bg};
+      background-color: ${color.input.default.enabled.bg};
 
       & > svg {
         display: block;
@@ -56,12 +55,12 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
     }
 
     &:checked + span {
-      background: ${color.default.enabled.fg};
+      background: ${color.input.default.enabled.fg};
       box-shadow: ${focusRingBorderStyle({
-        color: color.default.enabled.fg,
+        color: color.input.default.enabled.fg,
         width: input.border.width,
       })};
-      color: ${color.default.enabled.bg};
+      color: ${color.input.default.enabled.bg};
     }
 
     /* focus */
@@ -75,47 +74,47 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
     }
 
     &[data-error] + span {
-      background-color: ${color.invalid.enabled.border};
+      background-color: ${color.input.invalid.enabled.border};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
-        color: color.invalid.enabled.bg2,
+        color: color.input.invalid.enabled.muted.bg,
       })};
-      color: ${color.default.disabled.fg};
+      color: ${color.input.default.disabled.fg};
     }
     &[data-error]&:checked + span {
-      background-color: ${color.invalid.enabled.bg2};
-      color: ${color.default.enabled.bg};
+      background-color: ${color.input.invalid.enabled.muted.bg};
+      color: ${color.input.default.enabled.bg};
     }
     &[data-error]&:checked&:not(:disabled):focus:focus-visible + span {
       box-shadow: ${focusRingStyle({
-        border: {width: input.border.width, color: color.invalid.readOnly.bg2},
+        border: {width: input.border.width, color: color.input.invalid.readOnly.muted.bg},
         focusRing: {width: 1, offset: 1},
       })};
     }
 
     &:disabled + span {
-      background-color: ${color.default.disabled.bg};
+      background-color: ${color.input.default.disabled.bg};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
-        color: color.default.disabled.border,
+        color: color.input.default.disabled.border,
       })};
-      color: ${color.default.disabled.fg};
+      color: ${color.input.default.disabled.fg};
     }
     &:disabled&:checked + span {
-      background-color: ${color.default.disabled.bg2};
+      background-color: ${color.input.default.disabled.muted.bg};
     }
 
     &[data-read-only] + span {
-      background-color: ${color.default.readOnly.bg};
+      background-color: ${color.input.default.readOnly.bg};
       box-shadow: ${focusRingBorderStyle({
         width: input.border.width,
-        color: color.default.readOnly.border,
+        color: color.input.default.readOnly.border,
       })};
-      color: ${color.default.readOnly.fg};
+      color: ${color.input.default.readOnly.fg};
     }
 
     &[data-read-only]&:checked + span {
-      background-color: ${color.default.readOnly.bg2};
+      background-color: ${color.input.default.readOnly.muted.bg};
     }
 
     &:checked + span > svg:first-child {

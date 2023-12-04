@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {ResponsiveInlineSpaceStyleProps} from './types'
 
@@ -18,14 +18,14 @@ export function inlineBaseStyle(): CSSObject {
 }
 
 export function inlineSpaceStyle(props: ResponsiveInlineSpaceStyleProps & ThemeProps): CSSObject[] {
-  const {theme} = props
+  const {media, space} = getTheme_v2(props.theme)
 
-  return _responsive(theme.sanity.media, props.$space, (spaceIndex) => {
-    const space = rem(theme.sanity.space[spaceIndex])
+  return _responsive(media, props.$space, (spaceIndex) => {
+    const _space = rem(spaceIndex === 0.5 ? space[1] / 2 : space[spaceIndex])
 
     return {
-      margin: `-${space} 0 0 -${space}`,
-      '& > div': {padding: `${space} 0 0 ${space}`},
+      margin: `-${_space} 0 0 -${_space}`,
+      '& > div': {padding: `${_space} 0 0 ${_space}`},
     }
   })
 }

@@ -1,4 +1,4 @@
-import {ThemeFontSize, ThemeFontKey} from '@sanity/ui/theme'
+import {ThemeFontSize, ThemeFontKey, getTheme_v2} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -12,9 +12,9 @@ export function responsiveFont(
   fontKey: ThemeFontKey,
   props: ResponsiveFontStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {$size, $weight, theme} = props
-  const {fonts, media} = theme.sanity
-  const {family, sizes, weights} = fonts[fontKey]
+  const {$size, $weight} = props
+  const {font, media} = getTheme_v2(props.theme)
+  const {family, sizes, weights} = font[fontKey]
   const fontWeight = ($weight && weights[$weight]) || weights.regular
 
   // @todo: make this configurable

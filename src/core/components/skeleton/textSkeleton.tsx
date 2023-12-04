@@ -1,24 +1,22 @@
-import {Theme, ThemeFontKey} from '@sanity/ui/theme'
+import {ThemeFontKey, getTheme_v2} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
-import {_responsive} from '../../styles'
+import {ThemeProps, _responsive} from '../../styles'
 import {Skeleton, SkeletonProps} from './skeleton'
 
-const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>(({
-  $size,
-  $style,
-  theme,
-}: {
-  $size: number[]
-  $style: ThemeFontKey
-  theme: Theme
-}) => {
-  const {media} = theme.sanity
-  const font = theme.sanity.fonts[$style]
+const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
+  props: {
+    $size: number[]
+    $style: ThemeFontKey
+  } & ThemeProps,
+) => {
+  const {$size, $style} = props
+  const {font, media} = getTheme_v2(props.theme)
+  const fontStyle = font[$style]
 
   const styles = _responsive(media, $size, (sizeIndex) => {
-    const fontSize = font.sizes[sizeIndex]
+    const fontSize = fontStyle.sizes[sizeIndex]
     const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
 
     return {height: capHeight}

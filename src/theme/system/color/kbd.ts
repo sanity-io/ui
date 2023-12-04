@@ -1,7 +1,7 @@
-import {ThemeColorBlendModeKey} from './_system'
-
+/**
+ * @public
+ */
 export interface ThemeColorKBD {
-  _blend?: ThemeColorBlendModeKey
   bg: string
   fg: string
   border: string

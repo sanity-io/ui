@@ -1,11 +1,12 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
 export function labelBaseStyle(
   props: {$accent?: boolean; $muted: boolean} & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$accent, $muted, theme} = props
-  const {fonts} = theme.sanity
+  const {$accent, $muted} = props
+  const {font} = getTheme_v2(props.theme)
 
   return css`
     text-transform: uppercase;
@@ -21,7 +22,7 @@ export function labelBaseStyle(
     `}
 
     & code {
-      font-family: ${fonts.code.family};
+      font-family: ${font.code.family};
       border-radius: 1px;
     }
 

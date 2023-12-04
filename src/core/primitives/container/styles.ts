@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {ResponsiveWidthStyleProps} from './types'
 
@@ -14,8 +14,7 @@ export function containerBaseStyle(): CSSObject {
 export function responsiveContainerWidthStyle(
   props: ResponsiveWidthStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {theme} = props
-  const {container, media} = theme.sanity
+  const {container, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$width, (val) => ({
     maxWidth: val === 'auto' ? 'none' : rem(container[val]),

@@ -1,6 +1,6 @@
-import {ThemeFonts} from '../../system'
+import {ThemeFonts} from '../system'
 
-export const fonts: ThemeFonts = {
+export const defaultThemeFonts: ThemeFonts = {
   code: {
     family: 'ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace',
     weights: {
@@ -193,15 +193,15 @@ export const fonts: ThemeFonts = {
       {
         ascenderHeight: 6,
         descenderHeight: 6,
-        fontSize: 16,
+        fontSize: 15,
         iconSize: 25,
         lineHeight: 23,
         letterSpacing: 0,
       },
       {
-        ascenderHeight: 7.5,
-        descenderHeight: 6.5,
-        fontSize: 19,
+        ascenderHeight: 7,
+        descenderHeight: 7,
+        fontSize: 18,
         iconSize: 29,
         lineHeight: 27,
         letterSpacing: 0,
@@ -209,7 +209,7 @@ export const fonts: ThemeFonts = {
       {
         ascenderHeight: 8.5,
         descenderHeight: 7.5,
-        fontSize: 22,
+        fontSize: 21,
         iconSize: 33,
         lineHeight: 31,
         letterSpacing: 0,

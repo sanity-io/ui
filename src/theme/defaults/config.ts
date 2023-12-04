@@ -1,35 +1,37 @@
-import {RootTheme} from '../../system'
+import {RootTheme_v2} from '../system'
 
-const STROKE_WIDTH = 1
+const BORDER_WIDTH = 1
 const OUTLINE_WIDTH = 0.5
 
-export const config: Omit<RootTheme, 'color' | 'fonts'> = {
+export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {
+  _version: 2,
   avatar: {
     sizes: [
-      {distance: -3, size: 19},
-      {distance: -6, size: 25},
-      {distance: -9, size: 35},
+      {distance: -4, size: 25},
+      {distance: -8, size: 33},
+      {distance: -12, size: 49},
     ],
-    focusRing: {offset: 0, width: 1},
+    focusRing: {offset: 1, width: 1},
   },
   button: {
     textWeight: 'medium',
-    border: {width: STROKE_WIDTH},
+    border: {width: BORDER_WIDTH},
     focusRing: {offset: -1, width: 1},
   },
   card: {
-    border: {width: STROKE_WIDTH},
+    border: {width: BORDER_WIDTH},
     focusRing: {offset: -1, width: 1},
     shadow: {outline: OUTLINE_WIDTH},
   },
   container: [480, 640, 960, 1280, 1600, 1920],
-  focusRing: {
-    offset: -1,
-    width: 1,
-  },
   media: [360, 600, 900, 1200, 1800, 2400],
+  layer: {
+    dialog: {zOffset: 600},
+    popover: {zOffset: 400},
+    tooltip: {zOffset: 200},
+  },
   radius: [0, 1, 3, 6, 9, 12, 21],
-  shadows: [
+  shadow: [
     null,
     {umbra: [0, 0, 0, 0], penumbra: [0, 0, 0, 0], ambient: [0, 0, 0, 0]},
     {umbra: [0, 3, 5, -2], penumbra: [0, 6, 10, 0], ambient: [0, 1, 18, 1]},
@@ -40,7 +42,7 @@ export const config: Omit<RootTheme, 'color' | 'fonts'> = {
   space: [0, 4, 8, 12, 20, 32, 52, 84, 136, 220],
   input: {
     border: {
-      width: STROKE_WIDTH,
+      width: BORDER_WIDTH,
     },
     checkbox: {
       size: 17,
@@ -52,8 +54,8 @@ export const config: Omit<RootTheme, 'color' | 'fonts'> = {
       focusRing: {offset: -1, width: 1},
     },
     switch: {
-      width: 21,
-      height: 13,
+      width: 25,
+      height: 17,
       padding: 2,
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
@@ -65,5 +67,17 @@ export const config: Omit<RootTheme, 'color' | 'fonts'> = {
     text: {
       focusRing: {offset: -1, width: 1},
     },
+  },
+  style: {
+    button: {
+      root: {
+        transition: 'background-color 100ms,border-color 100ms,color 100ms',
+      },
+    },
+    // card: {
+    //   root: {
+    //     transition: 'background-color 100ms,border-color 100ms,color 100ms',
+    //   },
+    // },
   },
 }

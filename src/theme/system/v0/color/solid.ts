@@ -1,4 +1,4 @@
-import {ThemeColorGenericState} from '../_generic'
+import {ThemeColorGenericState} from './_generic'
 
 /**
  * @public

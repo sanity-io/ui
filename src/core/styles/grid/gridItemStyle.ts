@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridItemStyleProps} from './types'
@@ -27,8 +27,7 @@ const GRID_ITEM_COLUMN = {
 }
 
 function responsiveGridItemRowStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$row, (row) => {
     if (typeof row === 'number') {
@@ -40,8 +39,7 @@ function responsiveGridItemRowStyle(props: ResponsiveGridItemStyleProps & ThemeP
 }
 
 function responsiveGridItemRowStartStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$rowStart, (rowStart) => ({
     gridRowStart: rowStart,
@@ -49,15 +47,13 @@ function responsiveGridItemRowStartStyle(props: ResponsiveGridItemStyleProps & T
 }
 
 function responsiveGridItemRowEndStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$rowEnd, (rowEnd) => ({gridRowEnd: rowEnd}))
 }
 
 function responsiveGridItemColumnStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$column, (column) => {
     if (typeof column === 'number') {
@@ -69,8 +65,7 @@ function responsiveGridItemColumnStyle(props: ResponsiveGridItemStyleProps & The
 }
 
 function responsiveGridItemColumnStartStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$columnStart, (columnStart) => ({
     gridColumnStart: columnStart,
@@ -78,8 +73,7 @@ function responsiveGridItemColumnStartStyle(props: ResponsiveGridItemStyleProps 
 }
 
 function responsiveGridItemColumnEndStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$columnEnd, (columnEnd) => ({
     gridColumnEnd: columnEnd,

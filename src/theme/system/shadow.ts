@@ -10,6 +10,7 @@ export type ThemeBoxShadow = [
 ]
 
 /**
+ * @public
  * @deprecated Use `ThemeBoxShadow` instead
  */
 export type BoxShadow = ThemeBoxShadow

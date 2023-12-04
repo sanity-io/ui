@@ -1,11 +1,12 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
 export function textBaseStyle(
   props: {$accent?: boolean; $muted?: boolean} & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$accent, $muted, theme} = props
-  const {weights} = theme.sanity.fonts.text
+  const {$accent, $muted} = props
+  const {font} = getTheme_v2(props.theme)
 
   return css`
     color: var(--card-fg-color);
@@ -21,7 +22,7 @@ export function textBaseStyle(
     `}
 
     & code {
-      font-family: ${theme.sanity.fonts.code.family};
+      font-family: ${font.code.family};
       border-radius: 1px;
       background-color: var(--card-code-bg-color);
       color: var(--card-code-fg-color);
@@ -51,7 +52,7 @@ export function textBaseStyle(
     }
 
     & strong {
-      font-weight: ${weights.bold};
+      font-weight: ${font.text.weights.bold};
     }
 
     & svg {

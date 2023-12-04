@@ -12,7 +12,7 @@ import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {
@@ -296,7 +296,7 @@ export const Dialog = forwardRef(function Dialog(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const dialog = useDialog()
-  const theme = useTheme()
+  const {layer} = useTheme_v2()
   const {
     __unstable_autoFocus: autoFocus = true,
     __unstable_hideCloseButton: hideCloseButton = false,
@@ -316,7 +316,7 @@ export const Dialog = forwardRef(function Dialog(
     position: positionProp = dialog.position || 'fixed',
     scheme,
     width: widthProp = 0,
-    zOffset: zOffsetProp = dialog.zOffset || theme.sanity.layer?.dialog.zOffset,
+    zOffset: zOffsetProp = dialog.zOffset || layer.dialog.zOffset,
     animate = false,
     ...restProps
   } = props

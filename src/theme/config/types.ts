@@ -11,11 +11,13 @@ import {
 } from '../system'
 import {ThemeColorTokens} from './tokens'
 
+/** @public */
 export type ThemeColorPalette = {
   black: string | ColorPaletteValue
   white: string | ColorPaletteValue
 } & Record<ColorHueKey, Record<ColorTintKey, string | ColorPaletteValue>>
 
+/** @public */
 export interface ThemeConfig {
   avatar?: ThemeAvatar
   button?: {
@@ -30,22 +32,14 @@ export interface ThemeConfig {
   }
   color?: ThemeColorTokens
   container?: number[]
-  /** @deprecated Use component-specific `focusRing` values instead */
-  focusRing?: {
-    offset: number
-    width: number
-  }
   fonts?: ThemeFonts
   input?: ThemeInput
-  /**
-   * THIS API MAY BE UNSTABLE. DO NOT USE IN PRODUCTION.
-   * @beta
-   */
   layer?: ThemeLayer
   media?: number[]
   palette?: ThemeColorPalette
   radius?: number[]
-  shadows?: Array<ThemeShadow | null>
+  shadow?: Array<ThemeShadow | null>
   space?: number[]
-  styles?: ThemeStyles
+  /** @internal */
+  style?: ThemeStyles
 }

@@ -1,20 +1,19 @@
 import {CSSObject} from '@sanity/ui/theme'
-import {ThemeProps} from '../../styles'
 import {BadgeStyleProps} from './types'
 
-export function badgeStyle(props: BadgeStyleProps & ThemeProps): CSSObject {
-  const {$tone, theme} = props
-  const color = theme.sanity.color.badge?.[$tone] || theme.sanity.color.muted[$tone].enabled
+export function badgeStyle(props: BadgeStyleProps): CSSObject {
+  const {$tone} = props
 
   return {
-    '--card-bg-color': color.bg,
-    '--card-fg-color': color.fg,
+    '--card-bg-color': `var(--card-badge-${$tone}-bg-color)`,
+    '--card-fg-color': `var(--card-badge-${$tone}-fg-color)`,
 
     backgroundColor: 'var(--card-bg-color)',
     cursor: 'default',
 
     '&:not([hidden])': {
       display: 'inline-block',
+      verticalAlign: 'top',
     },
   }
 }

@@ -6,9 +6,11 @@ export interface ColorTokenContext {
   scheme: 'light' | 'dark'
 }
 
+const DEFAULT_COLOR_TOKEN_VALUE: ThemeColorTokenValue = ['500', '500']
+
 export function resolveColorTokenValue(
   context: ColorTokenContext,
-  value: ThemeColorTokenValue,
+  value: ThemeColorTokenValue = DEFAULT_COLOR_TOKEN_VALUE,
 ): string {
   const {hue, scheme} = context
   const node = parseTokenValue(value[scheme === 'light' ? 0 : 1])

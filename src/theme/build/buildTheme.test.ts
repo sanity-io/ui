@@ -1,8 +1,8 @@
+import {defaultColorPalette} from '../defaults/colorPalette'
 import {buildTheme} from './buildTheme'
-import {defaultColorPalette} from './defaults/colorPalette'
 
 test('build theme', () => {
-  const {color} = buildTheme({
+  const rootTheme = buildTheme({
     palette: {
       ...defaultColorPalette,
       black: '#000000',
@@ -27,10 +27,12 @@ test('build theme', () => {
     },
   })
 
+  const {color} = rootTheme.v2!
+
   expect({
     light: {
-      bg: color.light.default.base.bg,
-      fg: color.light.default.base.fg,
+      bg: color.light.default.bg,
+      fg: color.light.default.fg,
       default: {
         button: {
           ghost: {
@@ -42,8 +44,8 @@ test('build theme', () => {
       },
     },
     dark: {
-      bg: color.dark.default.base.bg,
-      fg: color.dark.default.base.fg,
+      bg: color.dark.default.bg,
+      fg: color.dark.default.fg,
       default: {
         button: {
           ghost: {
@@ -75,7 +77,7 @@ test('build theme', () => {
         button: {
           ghost: {
             enabled: {
-              border: 'rgba(19,19,27,0)',
+              border: 'rgba(19,20,27,0)',
             },
           },
         },

@@ -22,7 +22,7 @@ import {
   useRef,
 } from 'react'
 import {useForwardedRef, useArrayProp, useElementSize, useMediaIndex} from '../../hooks'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
@@ -85,7 +85,7 @@ export const Popover = memo(
       Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
     ref: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
-    const theme = useTheme()
+    const {container, layer} = useTheme_v2()
     const boundaryElementContext = useBoundaryElement()
 
     const {
@@ -115,7 +115,7 @@ export const Popover = memo(
       shadow: shadowProp = 3,
       tone = 'inherit',
       width: widthProp = 'auto',
-      zOffset: zOffsetProp = theme.sanity.layer?.popover.zOffset,
+      zOffset: zOffsetProp = layer.popover.zOffset,
       updateRef,
       ...restProps
     } = props
@@ -135,7 +135,11 @@ export const Popover = memo(
     // Update width when
     // - media index changes
     // - `width` property changes
-    const width = calcCurrentWidth({mediaIndex, theme, width: widthArrayProp})
+    const width = calcCurrentWidth({
+      container,
+      mediaIndex,
+      width: widthArrayProp,
+    })
     const widthRef = useRef(width)
 
     useEffect(() => {

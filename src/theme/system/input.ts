@@ -1,4 +1,4 @@
-import {ThemeFocusRing} from './_system'
+import {ThemeFocusRing} from './focusRing'
 
 /**
  * @public

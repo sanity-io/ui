@@ -26,7 +26,7 @@ import {
 import styled from 'styled-components'
 import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 import {Placement} from '../../types'
 import {Arrow, Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {Card} from '../card'
@@ -96,7 +96,7 @@ export const Tooltip = forwardRef(function Tooltip(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
-  const theme = useTheme()
+  const {layer} = useTheme_v2()
   const {
     arrow: arrowProp = false,
     boundaryElement = boundaryElementContext?.element,
@@ -111,7 +111,7 @@ export const Tooltip = forwardRef(function Tooltip(
     radius = 2,
     scheme,
     shadow = 2,
-    zOffset = theme.sanity.layer?.tooltip.zOffset,
+    zOffset = layer.tooltip.zOffset,
     delay,
     animate = false,
     ...restProps

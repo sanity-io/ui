@@ -33,7 +33,7 @@ import {
   TextInput,
 } from '../../src/core/primitives'
 import {ThemeProvider} from '../../src/core/theme'
-import {studioTheme} from '../../src/theme'
+import {defaultTheme} from '../../src/theme'
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
   return (
@@ -48,7 +48,7 @@ const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
 
 export function FocusRings(): ReactNode {
   return (
-    <ThemeProvider scheme="light" theme={studioTheme}>
+    <ThemeProvider scheme="light" theme={defaultTheme}>
       <Card padding={5}>
         <Stack space={7}>
           <Stack space={6}>

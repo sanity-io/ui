@@ -1,5 +1,5 @@
 import {useSyncExternalStore} from 'react'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 
 /**
  * @internal
@@ -96,8 +96,7 @@ function getServerSnapshot() {
  * @beta
  */
 export function useMediaIndex(): number {
-  const theme = useTheme()
-  const {media} = theme.sanity
+  const {media} = useTheme_v2()
 
   let store = MEDIA_STORE_CACHE.get(media)
 
