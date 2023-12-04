@@ -1,10 +1,9 @@
 /** @jest-environment jsdom */
 
-import {studioTheme, Theme} from '@sanity/ui/theme'
+import {getScopedTheme, defaultTheme} from '@sanity/ui/theme'
 import {responsiveMarginStyle} from './marginStyle'
 
-const {color, ...restTheme} = studioTheme
-const theme: Theme = {sanity: {...restTheme, color: color.light.default}}
+const theme = getScopedTheme(defaultTheme, 'light', 'default')
 
 describe('styles/margin', () => {
   it('should 1', () => {

@@ -1,22 +1,22 @@
 import {EditIcon, PublishIcon} from '@sanity/icons'
-import {Box, Card, Container, Flex, Inline, Stack, Text, useRootTheme} from '@sanity/ui'
-import {Theme, ThemeColorToneKey} from '@sanity/ui/theme'
+import {Box, Card, Container, Flex, Inline, Stack, Text, ThemeProps, useRootTheme} from '@sanity/ui'
+import {ThemeColorStateToneKey, getTheme_v2} from '@sanity/ui/theme'
 import {useBoolean} from '@sanity/ui-workshop'
 import styled, {css} from 'styled-components'
 
-const TextWithTone = styled(Text)<{$tone: ThemeColorToneKey}>(({
-  $tone,
-  theme,
-}: {
-  $tone: ThemeColorToneKey
-  theme: Theme
-}) => {
-  const tone = theme.sanity.color.solid[$tone]
+const TextWithTone = styled(Text)<{$tone: ThemeColorStateToneKey}>((
+  props: {
+    $tone: ThemeColorStateToneKey
+  } & ThemeProps,
+) => {
+  const {$tone} = props
+  const {color} = getTheme_v2(props.theme)
+  const tone = color.button.default[$tone]
 
   return css`
     &:not([data-selected]) {
-      --card-fg-color: ${tone ? tone.enabled.bg : undefined};
-      --card-muted-fg-color: ${tone ? tone.enabled.bg : undefined};
+      --card-fg-color: ${tone.enabled.bg};
+      --card-muted-fg-color: ${tone.enabled.bg};
     }
 
     [data-ui='Card']:disabled & {
@@ -63,7 +63,7 @@ export default function SelectedStory() {
 }
 
 function Preview({selected}: {selected: boolean}) {
-  const theme = useRootTheme()
+  const rootTheme = useRootTheme()
 
   return (
     <Flex>
@@ -74,14 +74,14 @@ function Preview({selected}: {selected: boolean}) {
         <TextWithTone
           data-selected={selected ? '' : undefined}
           muted
-          $tone={theme.tone === 'default' ? 'caution' : 'default'}
+          $tone={rootTheme.tone === 'default' ? 'caution' : 'default'}
         >
           <EditIcon />
         </TextWithTone>
         <TextWithTone
           data-selected={selected ? '' : undefined}
           muted
-          $tone={theme.tone === 'default' ? 'positive' : 'default'}
+          $tone={rootTheme.tone === 'default' ? 'positive' : 'default'}
         >
           <PublishIcon />
         </TextWithTone>

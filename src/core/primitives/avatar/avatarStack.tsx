@@ -1,3 +1,4 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {cloneElement, forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
@@ -24,8 +25,7 @@ function avatarStackStyle() {
 }
 
 function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
-  const {theme} = props
-  const {avatar, media} = theme.sanity
+  const {avatar, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size]

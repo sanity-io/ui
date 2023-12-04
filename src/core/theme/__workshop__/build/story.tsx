@@ -1,27 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  ThemeColor,
-  ThemeColorButtonStates,
-  ThemeColorCard,
-  ThemeColorInputStates,
+  ThemeColorButtonStates_v2,
+  ThemeColorCard_v2,
+  ThemeColorInputStates_v2,
+  ThemeColorState_v2,
 } from '@sanity/ui/theme'
 import {
-  THEME_COLOR_BASE_TONES,
+  THEME_COLOR_CARD_TONES,
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_STATE_TONES,
-  ThemeColorBaseToneKey,
+  ThemeColorCardToneKey,
   ThemeColorInputModeKey,
 } from '@sanity/ui/theme'
-import {studioTheme} from '@sanity/ui/theme'
+import {defaultTheme} from '@sanity/ui/theme'
 import {ReactElement} from 'react'
 import {rem} from '../../../styles'
-import {useTheme} from '../../useTheme'
+import {useTheme_v2} from '../../useTheme'
 import {getCSSProps} from './helpers'
 import {Root} from './Root'
 
-const theme = studioTheme
+const theme = defaultTheme
 
 export default function BuildStory(): ReactElement {
   return (
@@ -45,22 +45,22 @@ export default function BuildStory(): ReactElement {
         }}
       >
         <div style={{flex: 1}}>
-          {THEME_COLOR_BASE_TONES.map((baseTone) => (
+          {THEME_COLOR_CARD_TONES.map((baseTone) => (
             <BaseTonePreview
               baseTone={baseTone}
               key={baseTone}
               scheme="light"
-              theme={theme.color.light[baseTone]}
+              theme={theme.v2!.color.light[baseTone]}
             />
           ))}
         </div>
         <div style={{flex: 1}}>
-          {THEME_COLOR_BASE_TONES.map((baseTone) => (
+          {THEME_COLOR_CARD_TONES.map((baseTone) => (
             <BaseTonePreview
               baseTone={baseTone}
               key={baseTone}
               scheme="dark"
-              theme={theme.color.dark[baseTone]}
+              theme={theme.v2!.color.dark[baseTone]}
             />
           ))}
         </div>
@@ -70,15 +70,15 @@ export default function BuildStory(): ReactElement {
 }
 
 function BaseTonePreview(props: {
-  baseTone: ThemeColorBaseToneKey
+  baseTone: ThemeColorCardToneKey
   scheme: 'light' | 'dark'
-  theme: ThemeColor
+  theme: ThemeColorCard_v2
 }) {
   const {baseTone, scheme, theme: color} = props
-  const theme = useTheme()
+  const theme = useTheme_v2()
 
   return (
-    <div className="base" style={getCSSProps(color.base as unknown as Record<string, unknown>)}>
+    <div className="base" style={getCSSProps(color as unknown as Record<string, unknown>)}>
       <div
         style={{
           maxWidth: 600,
@@ -93,7 +93,7 @@ function BaseTonePreview(props: {
           <div
             style={{
               boxShadow: [
-                `0 0 0 ${theme.sanity.card.shadow.outline}px var(--shadow-outline)`,
+                `0 0 0 ${theme.card.shadow.outline}px var(--shadow-outline)`,
                 `0 6px 8px -4px var(--shadow-umbra)`,
                 `0 12px 17px 2px var(--shadow-penumbra)`,
                 `0 5px 22px 4px var(--shadow-ambient)`,
@@ -106,7 +106,7 @@ function BaseTonePreview(props: {
           </div>
         </div>
         <div style={{padding: 'var(--space-3)'}}>
-          <CardPreview theme={color.card} />
+          <StatePreview theme={color.selectable.default.enabled} />
         </div>
         <div
           style={{
@@ -145,7 +145,7 @@ function BaseTonePreview(props: {
   )
 }
 
-function CardPreview(props: {theme: ThemeColorCard}) {
+function StatePreview(props: {theme: ThemeColorState_v2}) {
   const {theme: card} = props
 
   return (
@@ -268,11 +268,7 @@ function CardPreview(props: {theme: ThemeColorCard}) {
   )
 }
 
-function ButtonPreview(props: {
-  // tone: ColorStateTone
-  // mode: ColorButtonMode
-  theme: ThemeColorButtonStates
-}) {
+function ButtonPreview(props: {theme: ThemeColorButtonStates_v2}) {
   const {theme: button} = props
 
   return (
@@ -428,7 +424,7 @@ function Skeleton() {
   )
 }
 
-function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInputStates}) {
+function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInputStates_v2}) {
   const {mode, theme: input} = props
 
   return (

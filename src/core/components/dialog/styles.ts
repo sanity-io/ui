@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {_responsive, ThemeProps} from '../../styles'
 import {DialogPosition} from '../../types'
@@ -11,7 +11,7 @@ export interface ResponsiveDialogPositionStyleProps {
 }
 
 export function dialogStyle({theme}: ThemeProps): CSSObject {
-  const color = theme.sanity.color.base
+  const {color} = getTheme_v2(theme)
 
   return {
     '&:not([hidden])': {
@@ -25,15 +25,14 @@ export function dialogStyle({theme}: ThemeProps): CSSObject {
     alignItems: 'center',
     justifyContent: 'center',
     outline: 'none',
-    background: color.shadow.umbra,
+    background: color.backdrop,
   }
 }
 
 export function responsiveDialogPositionStyle(
   props: ResponsiveDialogPositionStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$position, (position) => ({'&&': {position}}))
 }

@@ -1,7 +1,7 @@
 /** @jest-environment jsdom */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {studioTheme} from '@sanity/ui/theme'
+import {defaultTheme} from '@sanity/ui/theme'
 import {render} from '../../../test'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
@@ -24,7 +24,7 @@ describe('theme', () => {
         const value: ThemeContextValue = {
           version: 0.0,
           scheme: 'light',
-          theme: studioTheme,
+          theme: defaultTheme,
           tone: 'default',
         }
 
@@ -68,39 +68,6 @@ describe('theme', () => {
       render(<Root />)
 
       expect(log.mock.calls[0][0].message).toEqual('useRootTheme(): missing context value')
-    })
-
-    it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
-
-      function Debug() {
-        try {
-          useRootTheme()
-        } catch (err) {
-          log(err)
-        }
-
-        return null
-      }
-
-      function Root() {
-        // NOTE: we’re testing this because the context value may be a function in the future
-        const value = () => {
-          return {version: 1}
-        }
-
-        return (
-          <ThemeContext.Provider value={value as any}>
-            <Debug />
-          </ThemeContext.Provider>
-        )
-      }
-
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual(
-        'useRootTheme(): the context value is not compatible',
-      )
     })
   })
 })

@@ -1,6 +1,7 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
-import {_colorVarsStyle} from '../../styles/colorVars'
+import {_cardColorStyle} from '../../styles/card'
 
 export function treeItemRootStyle(): ReturnType<typeof css> {
   return css`
@@ -36,51 +37,47 @@ export function treeItemRootStyle(): ReturnType<typeof css> {
 }
 
 export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {theme} = props
   const $tone = 'default'
-  const {base, muted, selectable} = theme.sanity.color
-  // @todo: remove use of `muted` here
-  const tone = selectable ? selectable[$tone] || selectable.default : muted[$tone] || muted.default
+  const {color} = getTheme_v2(props.theme)
+  const tone = color.selectable[$tone]
 
   return css`
-    /* <div role="none"><a data-ui="TreeItem__box" role="treeitem" tabIndex="0"></div> */
     &[role='none'] {
       & > [role='treeitem'] {
-        ${_colorVarsStyle(base, tone.enabled)}
+        ${_cardColorStyle(color, tone.enabled)}
       }
 
       &[data-selected] > [role='treeitem'] {
-        ${_colorVarsStyle(base, tone.pressed)}
+        ${_cardColorStyle(color, tone.pressed)}
       }
 
       @media (hover: hover) {
         &:not([data-selected]) > [role='treeitem']:not(:focus):hover {
-          ${_colorVarsStyle(base, tone.hovered)}
+          ${_cardColorStyle(color, tone.hovered)}
         }
 
         & > [role='treeitem']:focus {
-          ${_colorVarsStyle(base, tone.selected)}
+          ${_cardColorStyle(color, tone.selected)}
         }
       }
     }
 
-    /* <div role="treeitem" tabIndex="0"><div data-ui="TreeItem__box"></div> */
     &[role='treeitem'] {
       & > [data-ui='TreeItem__box'] {
-        ${_colorVarsStyle(base, tone.enabled)}
+        ${_cardColorStyle(color, tone.enabled)}
       }
 
       &[data-selected] > [data-ui='TreeItem__box'] {
-        ${_colorVarsStyle(base, tone.pressed)}
+        ${_cardColorStyle(color, tone.pressed)}
       }
 
       @media (hover: hover) {
         &:not([data-selected]):not(:focus) > [data-ui='TreeItem__box']:hover {
-          ${_colorVarsStyle(base, tone.hovered)}
+          ${_cardColorStyle(color, tone.hovered)}
         }
 
         &:focus > [data-ui='TreeItem__box'] {
-          ${_colorVarsStyle(base, tone.selected)}
+          ${_cardColorStyle(color, tone.selected)}
         }
       }
     }
@@ -94,8 +91,8 @@ export interface TreeItemBoxStyleProps {
 export function treeItemBoxStyle(
   props: TreeItemBoxStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$level, theme} = props
-  const {space} = theme.sanity
+  const {$level} = props
+  const {space} = getTheme_v2(props.theme)
 
   return css`
     padding-left: ${rem(space[2] * $level)};

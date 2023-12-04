@@ -5,7 +5,7 @@ import {_isScrollable} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
 import {_ResizeObserver} from '../../observers'
 import {StackProps} from '../../primitives'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 
 /**
  * @beta
@@ -51,7 +51,7 @@ export const VirtualList = forwardRef(function VirtualList(
   ref: React.ForwardedRef<HTMLDivElement>,
 ): React.ReactElement {
   const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
-  const {space} = useTheme().sanity
+  const {space} = useTheme_v2()
   const forwardedRef = useForwardedRef(ref)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const [scrollTop, setScrollTop] = useState(0)

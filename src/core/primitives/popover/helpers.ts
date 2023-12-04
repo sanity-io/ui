@@ -1,18 +1,17 @@
-import {Theme} from '@sanity/ui/theme'
 import {DEFAULT_POPOVER_PADDING} from './constants'
 import {PopoverWidth} from './types'
 
 export function calcCurrentWidth(params: {
   mediaIndex: number
-  theme: Theme
+  container: number[]
   width: PopoverWidth[]
 }): number | undefined {
-  const {mediaIndex, theme, width} = params
+  const {container, mediaIndex, width} = params
 
   const w = width[mediaIndex]
   const currentWidth: PopoverWidth | undefined = w === undefined ? width[width.length - 1] : w
 
-  return typeof currentWidth === 'number' ? theme.sanity.container[currentWidth] : undefined
+  return typeof currentWidth === 'number' ? container[currentWidth] : undefined
 }
 
 export function calcMaxWidth(params: {

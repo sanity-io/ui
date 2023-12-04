@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {Property} from 'csstype'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -36,8 +36,7 @@ export function responsiveBoxStyle(): Array<
 }
 
 function responsiveBoxDisplayStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$display, (display) => ({
     '&:not([hidden])': {display},
@@ -45,8 +44,7 @@ function responsiveBoxDisplayStyle(props: ResponsiveBoxStyleProps & ThemeProps) 
 }
 
 function responsiveBoxSizingStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$sizing, (sizing) => ({
     boxSizing: BOX_SIZING[sizing],
@@ -54,8 +52,7 @@ function responsiveBoxSizingStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
 }
 
 function responsiveBoxHeightStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$height, (height) => ({
     height: BOX_HEIGHT[height],
@@ -63,8 +60,7 @@ function responsiveBoxHeightStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
 }
 
 function responsiveBoxOverflowStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
-  const {theme} = props
-  const {media} = theme.sanity
+  const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$overflow, (overflow) => ({
     overflow,

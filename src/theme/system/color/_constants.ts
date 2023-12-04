@@ -1,38 +1,38 @@
 import {COLOR_HUES} from '@sanity/color'
 
-/** @internal */
+/** @public */
 export const THEME_COLOR_BLEND_MODES = ['multiply', 'screen'] as const
 
-/** @internal */
-export const THEME_COLOR_BASE_TONES = [
+/** @public */
+export const THEME_COLOR_CARD_TONES = [
   'transparent',
   'default',
-  'primary', // todo: rename to `accent`
+  'primary', // todo: rename to `accent` in the next breaking major version
   'positive',
   'caution',
   'critical',
 ] as const
 
-/** @internal */
+/** @public */
 export const THEME_COLOR_STATE_TONES = [
   'default',
-  'primary', // todo: rename to `accent`
+  'primary', // todo: rename to `accent` in the next breaking major version
   'positive',
   'caution',
   'critical',
 ] as const
 
-/** @internal */
+/** @public */
 export const THEME_COLOR_STATES = ['enabled', 'hovered', 'pressed', 'selected', 'disabled'] as const
 
-/** @internal */
+/** @public */
 export const THEME_COLOR_BUTTON_MODES = ['default', 'ghost', 'bleed'] as const
 
-/** @internal */
+/** @public */
 export const THEME_COLOR_INPUT_MODES = ['default', 'invalid'] as const
 
-/** @internal */
+/** @public */
 export const THEME_COLOR_INPUT_STATES = ['enabled', 'hovered', 'readOnly', 'disabled'] as const
 
-/** @internal */
+/** @public */
 export const THEME_COLOR_AVATAR_COLORS = COLOR_HUES

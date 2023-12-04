@@ -1,4 +1,4 @@
-import {ThemeFontSize} from '@sanity/ui/theme'
+import {ThemeFontSize, getTheme_v2} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
@@ -24,14 +24,13 @@ function rootStyle(): ReturnType<typeof css> {
 }
 
 function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {theme} = props
-  const font = theme.sanity.fonts.text
+  const {font} = getTheme_v2(props.theme)
 
   return css`
     -webkit-font-smoothing: antialiased;
     appearance: none;
     border: 0;
-    font-family: ${font.family};
+    font-family: ${font.text.family};
     color: inherit;
     width: 100%;
     outline: none;
@@ -44,27 +43,24 @@ function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
 }
 
 function inputColorStyle(props: ThemeProps) {
-  const {theme} = props
-  const {input} = theme.sanity
-  const {focusRing} = input.select
-  const color = theme.sanity.color.input
+  const {color, input} = getTheme_v2(props.theme)
 
   return css`
     /* enabled */
-    background-color: ${color.default.enabled.bg};
-    color: ${color.default.enabled.fg};
+    background-color: ${color.input.default.enabled.bg};
+    color: ${color.input.default.enabled.fg};
     box-shadow: ${focusRingBorderStyle({
-      color: color.default.enabled.border,
+      color: color.input.default.enabled.border,
       width: input.border.width,
     })};
 
     /* hovered */
     @media (hover: hover) {
       &:not(:disabled):hover {
-        background-color: ${color.default.hovered.bg};
-        color: ${color.default.hovered.fg};
+        background-color: ${color.input.default.hovered.bg};
+        color: ${color.input.default.hovered.fg};
         box-shadow: ${focusRingBorderStyle({
-          color: color.default.hovered.border,
+          color: color.input.default.hovered.border,
           width: input.border.width,
         })};
       }
@@ -73,27 +69,27 @@ function inputColorStyle(props: ThemeProps) {
     /* focused */
     &:not(:disabled):focus {
       box-shadow: ${focusRingStyle({
-        border: {width: input.border.width, color: color.default.enabled.border},
-        focusRing,
+        border: {width: input.border.width, color: color.input.default.enabled.border},
+        focusRing: input.select.focusRing,
       })};
     }
 
     /* read-only */
     &[data-read-only] {
-      background-color: ${color.default.readOnly.bg};
-      color: ${color.default.readOnly.fg};
+      background-color: ${color.input.default.readOnly.bg};
+      color: ${color.input.default.readOnly.fg};
       box-shadow: ${focusRingBorderStyle({
-        color: color.default.readOnly.border,
+        color: color.input.default.readOnly.border,
         width: input.border.width,
       })};
     }
 
     /* disabled */
     &:not([data-read-only]):disabled {
-      background-color: ${color.default.disabled.bg};
-      color: ${color.default.disabled.fg};
+      background-color: ${color.input.default.disabled.bg};
+      color: ${color.input.default.disabled.fg};
       box-shadow: ${focusRingBorderStyle({
-        color: color.default.disabled.border,
+        color: color.input.default.disabled.border,
         width: input.border.width,
       })};
     }
@@ -105,11 +101,11 @@ function textSize(size: ThemeFontSize) {
 }
 
 function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
-  const {theme, $fontSize} = props
-  const {sizes} = theme.sanity.fonts.text
+  const {$fontSize} = props
+  const {font, media} = getTheme_v2(props.theme)
 
-  return _responsive(theme.sanity.media, $fontSize, (sizeIndex) =>
-    textSize(sizes[sizeIndex] || sizes[2]),
+  return _responsive(media, $fontSize, (sizeIndex) =>
+    textSize(font.text.sizes[sizeIndex] || font.text.sizes[2]),
   )
 }
 
@@ -133,8 +129,7 @@ function inputStyle(): Array<
 }
 
 function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {theme} = props
-  const color = theme.sanity.color.input
+  const {color} = getTheme_v2(props.theme)
 
   return css`
     pointer-events: none;
@@ -143,23 +138,23 @@ function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {
     right: 0;
 
     /* enabled */
-    --card-fg-color: ${color.default.enabled.fg};
+    --card-fg-color: ${color.input.default.enabled.fg};
 
     /* hover */
     @media (hover: hover) {
       select:not(disabled):not(:read-only):hover + && {
-        --card-fg-color: ${color.default.hovered.fg};
+        --card-fg-color: ${color.input.default.hovered.fg};
       }
     }
 
     /* disabled */
     select:disabled + && {
-      --card-fg-color: ${color.default.disabled.fg};
+      --card-fg-color: ${color.input.default.disabled.fg};
     }
 
     /* read-only */
     select[data-read-only] + && {
-      --card-fg-color: ${color.default.readOnly.fg};
+      --card-fg-color: ${color.input.default.readOnly.fg};
     }
   `
 }

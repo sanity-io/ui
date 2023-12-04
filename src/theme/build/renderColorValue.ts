@@ -13,6 +13,10 @@ export interface RenderColorValueOptions {
 export function renderColorValue(str: string, options: RenderColorValueOptions): string {
   const {bg, blendMode, colorPalette} = options
 
+  if (bg === 'white') {
+    throw new Error('Cannot blend with white background')
+  }
+
   const node = parseTokenValue(str)
 
   if (!node || node.type !== 'color') {
@@ -39,17 +43,20 @@ export function renderColorValue(str: string, options: RenderColorValueOptions):
 
   const hexBeforeMix = hex
 
+  const mixOptions = {
+    blendMode,
+    bg,
+    black: renderColorHex(colorPalette.black),
+    // opacity: node.opacity,
+    white: renderColorHex(colorPalette.white),
+  }
+
   try {
-    hex = mixThemeColor(hex, {
-      blendMode,
-      bg,
-      black: renderColorHex(colorPalette.black),
-      // opacity: node.opacity,
-      white: renderColorHex(colorPalette.white),
-    })
+    hex = mixThemeColor(hex, mixOptions)
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log('could not blend', hex)
+    console.log('could not blend', hex, mixOptions)
+    throw err
   }
 
   if (hex === '#aN') {

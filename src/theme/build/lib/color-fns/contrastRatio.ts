@@ -1,6 +1,7 @@
 import {parseColor} from './parse'
 import {RGB, RGBA} from './types'
 
+/** @internal */
 export function getContrastRatio(bg: string, fg: string): number {
   const rgb1 = parseColor(bg) // bg: RGB | RGBA, fg: RGB | RGBA
   const rgb2 = parseColor(fg)

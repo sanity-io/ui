@@ -1,6 +1,5 @@
 /**
- * THIS API MAY BE UNSTABLE. DO NOT USE IN PRODUCTION.
- * @beta
+ * @public
  */
 export interface ThemeLayer {
   dialog: {zOffset: number}

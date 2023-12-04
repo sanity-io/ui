@@ -10,16 +10,14 @@ import {
   useRootTheme,
 } from '@sanity/ui'
 import {
-  ThemeColor,
-  ThemeColorBase,
-  ThemeColorButton,
-  ThemeColorButtonState,
-  ThemeColorButtonStates,
-  ThemeColorButtonTones,
-  ThemeColorCard,
-  ThemeColorScheme,
-  ThemeColorSelectable,
-  ThemeColorSelectableStates,
+  ThemeColorButtonStates_v2,
+  ThemeColorButtonTones_v2,
+  ThemeColorButton_v2,
+  ThemeColorScheme_v2,
+  ThemeColorSelectableStates_v2,
+  ThemeColorSelectable_v2,
+  ThemeColorState_v2,
+  ThemeColorCard_v2,
   getContrastRatio,
   mix,
   parseColor,
@@ -34,7 +32,6 @@ interface Features {
 
   base: boolean
   button: boolean
-  card: boolean
   input: boolean
   selectable: boolean
   spot: boolean
@@ -46,7 +43,6 @@ const defaultFeatures: Features = {
 
   base: false,
   button: false,
-  card: false,
   input: false,
   selectable: false,
   spot: false,
@@ -66,12 +62,9 @@ export default function CanvasStory() {
     dark: useBoolean('Dark', defaultFeatures.dark, 'Props') ?? defaultFeatures.dark,
     base: useBoolean('Base', defaultFeatures.base, 'Props') ?? defaultFeatures.base,
     button: useBoolean('Button', defaultFeatures.button, 'Props') ?? defaultFeatures.button,
-    card: useBoolean('Card', defaultFeatures.card, 'Props') ?? defaultFeatures.card,
     input: useBoolean('Input', defaultFeatures.input, 'Props') ?? defaultFeatures.input,
-    // muted: useBoolean('Muted', defaultFeatures.muted, 'Props') ?? defaultFeatures.muted,
     selectable:
       useBoolean('Selectable', defaultFeatures.selectable, 'Props') ?? defaultFeatures.selectable,
-    // solid: useBoolean('Solid', defaultFeatures.solid, 'Props') ?? defaultFeatures.solid,
     spot: useBoolean('Avatar', defaultFeatures.spot, 'Props') ?? defaultFeatures.spot,
   }
 
@@ -80,13 +73,13 @@ export default function CanvasStory() {
       <Flex>
         {features.light && (
           <ThemeColorProvider scheme="light">
-            <ColorScheme scheme={theme.color.light} />
+            <ColorScheme scheme={theme.v2!.color.light} />
           </ThemeColorProvider>
         )}
 
         {features.dark && (
           <ThemeColorProvider scheme="dark">
-            <ColorScheme scheme={theme.color.dark} />
+            <ColorScheme scheme={theme.v2!.color.dark} />
           </ThemeColorProvider>
         )}
       </Flex>
@@ -94,7 +87,7 @@ export default function CanvasStory() {
   )
 }
 
-function ColorScheme(props: {scheme: ThemeColorScheme}) {
+function ColorScheme(props: {scheme: ThemeColorScheme_v2}) {
   const {scheme} = props
 
   return (
@@ -109,7 +102,7 @@ function ColorScheme(props: {scheme: ThemeColorScheme}) {
   )
 }
 
-function Color(props: {color: ThemeColor; tone: CardTone}) {
+function Color(props: {color: ThemeColorCard_v2; tone: CardTone}) {
   const {color, tone} = props
   const features = useFeatures()
 
@@ -119,11 +112,9 @@ function Color(props: {color: ThemeColor; tone: CardTone}) {
         space={[3, 4]}
         // style={{outline: '1px solid #ccc'}}
       >
-        {features.base && <ColorBase color={color.base} />}
+        {features.base && <ColorBase color={color} />}
 
         {features.button && <ColorButton color={color.button} />}
-
-        {features.card && <ColorCard color={color.card} />}
 
         {features.input && (
           <Box padding={2} style={{backgroundColor: color.input.default.enabled.bg}}>
@@ -167,7 +158,7 @@ function Color(props: {color: ThemeColor; tone: CardTone}) {
   )
 }
 
-function ColorBase(props: {color: ThemeColorBase}) {
+function ColorBase(props: {color: ThemeColorCard_v2}) {
   const {color} = props
 
   return (
@@ -199,17 +190,7 @@ function ColorBase(props: {color: ThemeColorBase}) {
   )
 }
 
-function ColorCard(props: {color: ThemeColorCard}) {
-  const {color} = props
-
-  return (
-    <Box style={{backgroundColor: color.enabled.bg}}>
-      <ColorGenericStates color={color} />
-    </Box>
-  )
-}
-
-function ColorButton(props: {color: ThemeColorButton}) {
+function ColorButton(props: {color: ThemeColorButton_v2}) {
   const {color} = props
 
   return (
@@ -221,7 +202,7 @@ function ColorButton(props: {color: ThemeColorButton}) {
   )
 }
 
-function ColorButtonMode(props: {color: ThemeColorButtonTones}) {
+function ColorButtonMode(props: {color: ThemeColorButtonTones_v2}) {
   const {color} = props
 
   return (
@@ -262,7 +243,7 @@ function ColorButtonMode(props: {color: ThemeColorButtonTones}) {
   )
 }
 
-function ColorGenericStates(props: {color: ThemeColorButtonStates}) {
+function ColorGenericStates(props: {color: ThemeColorButtonStates_v2}) {
   const {color} = props
 
   return (
@@ -287,7 +268,7 @@ function _contrast(baseBg: string, bg: string, fg: string) {
   return getContrastRatio(rgbToHex(bgRgb), fg)
 }
 
-function ColorGenericState(props: {color: ThemeColorButtonState}) {
+function ColorGenericState(props: {color: ThemeColorState_v2}) {
   const {color} = props
 
   return (
@@ -307,7 +288,7 @@ function ColorGenericState(props: {color: ThemeColorButtonState}) {
             bg
           </Text>
         </Box>
-        <Box flex={1} padding={3} style={{backgroundColor: color.bg2}}>
+        <Box flex={1} padding={3} style={{backgroundColor: color.muted.bg}}>
           <Text align="center" size={1} style={{color: 'inherit'}}>
             bg2
           </Text>
@@ -340,7 +321,7 @@ function ColorGenericState(props: {color: ThemeColorButtonState}) {
   )
 }
 
-function ColorSelectable(props: {color: ThemeColorSelectable}) {
+function ColorSelectable(props: {color: ThemeColorSelectable_v2}) {
   const {color} = props
 
   return (
@@ -354,7 +335,7 @@ function ColorSelectable(props: {color: ThemeColorSelectable}) {
   )
 }
 
-function ColorSelectableTone(props: {color: ThemeColorSelectableStates}) {
+function ColorSelectableTone(props: {color: ThemeColorSelectableStates_v2}) {
   const {color} = props
 
   return (

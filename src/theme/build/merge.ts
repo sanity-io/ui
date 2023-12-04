@@ -1,23 +1,28 @@
-export function merge(
-  target: Record<string, unknown>,
-  source: Record<string, unknown>,
-): Record<string, unknown> {
-  const ret = {...target}
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+import {isRecord} from './lib/isRecord'
+
+export function merge<T extends Record<string, any>>(...records: (T | undefined)[]): T {
+  const _records = records.filter(Boolean) as T[]
+
+  if (_records.length === 0) {
+    return {} as T
+  }
+
+  return _records.reduce(_merge, {} as T)
+}
+
+function _merge<T extends Record<string, any>>(acc: T, source: T): T {
   for (const key of Object.keys(source)) {
-    const prevValue = target[key]
+    const prevValue = acc[key]
     const nextValue = source[key]
 
     if (isRecord(prevValue) && isRecord(nextValue)) {
-      ret[key] = merge(prevValue, nextValue)
+      ;(acc as any)[key] = merge(prevValue, nextValue)
     } else {
-      ret[key] = nextValue
+      ;(acc as any)[key] = nextValue
     }
   }
 
-  return ret
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return Boolean(value && typeof value === 'object' && !Array.isArray(value))
+  return acc
 }

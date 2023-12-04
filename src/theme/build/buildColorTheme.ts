@@ -1,256 +1,260 @@
-import {ThemeColorTokenValue, ThemeConfig} from '../config'
+import {ThemeColorBadgeTokens, ThemeColorStateTokens, ThemeConfig} from '../config'
 import {
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_STATES,
   THEME_COLOR_STATE_TONES,
   ThemeColorAvatarColorKey,
-  ThemeColorBaseToneKey,
+  ThemeColorCardToneKey,
   ThemeColorButtonModeKey,
   ThemeColorStateKey,
   ThemeColorStateToneKey,
-  ThemeColor,
-  ThemeColorAvatar,
-  ThemeColorBadge,
-  ThemeColorButton,
-  ThemeColorButtonStates,
-  ThemeColorButtonTones,
-  ThemeColorCard,
-  ThemeColorGenericState,
-  ThemeColorInput,
-  ThemeColorInputState,
-  ThemeColorInputStates,
-  ThemeColorScheme,
-  ThemeColorSchemes,
-  ThemeColorSpot,
+  ThemeColorAvatar_v2,
+  ThemeColorBadge_v2,
   ThemeColorSyntax,
+  ThemeColorSchemes_v2,
+  ThemeColorScheme_v2,
+  ThemeColorCard_v2,
+  ThemeColorSchemeKey,
+  ThemeColorShadow,
+  ThemeColorState_v2,
+  ThemeColorButton_v2,
+  ThemeColorButtonTones_v2,
+  ThemeColorButtonStates_v2,
+  ThemeColorAvatarHue_v2,
+  ThemeColorInput_v2,
+  ThemeColorInputStates_v2,
+  ThemeColorInputState_v2,
 } from '../system'
 import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
 import {resolveColorTokens} from './resolveColorTokens'
 
-const DEFAULT_COLOR_TOKEN_VALUE: ThemeColorTokenValue = ['500', '500']
-
-export function buildColorTheme(config?: ThemeConfig): ThemeColorSchemes {
-  return {
-    light: buildColorScheme({scheme: 'light'}, config),
-    dark: buildColorScheme({scheme: 'dark'}, config),
-  }
-}
-
-export function buildColorScheme(
-  options: {scheme: 'light' | 'dark'},
-  config?: ThemeConfig,
-): ThemeColorScheme {
-  const {scheme} = options
-
+export function buildColorTheme(config?: ThemeConfig): ThemeColorSchemes_v2 {
   const resolvedConfig: ThemeConfig = {
     ...config,
     color: resolveColorTokens(config?.color),
   }
 
   return {
-    transparent: buildBaseColorTheme({scheme, tone: 'transparent'}, resolvedConfig),
-    default: buildBaseColorTheme({scheme, tone: 'default'}, resolvedConfig),
-    primary: buildBaseColorTheme({scheme, tone: 'primary'}, resolvedConfig),
-    positive: buildBaseColorTheme({scheme, tone: 'positive'}, resolvedConfig),
-    caution: buildBaseColorTheme({scheme, tone: 'caution'}, resolvedConfig),
-    critical: buildBaseColorTheme({scheme, tone: 'critical'}, resolvedConfig),
+    light: buildColorScheme({scheme: 'light'}, resolvedConfig),
+    dark: buildColorScheme({scheme: 'dark'}, resolvedConfig),
   }
 }
 
-export function buildBaseColorTheme(
-  options: {scheme: 'light' | 'dark'; tone: ThemeColorBaseToneKey},
+function buildColorScheme(
+  options: {scheme: ThemeColorSchemeKey},
+  config: ThemeConfig,
+): ThemeColorScheme_v2 {
+  const {scheme} = options
+
+  return {
+    transparent: buildCardColorTheme({scheme, tone: 'transparent'}, config),
+    default: buildCardColorTheme({scheme, tone: 'default'}, config),
+    primary: buildCardColorTheme({scheme, tone: 'primary'}, config),
+    positive: buildCardColorTheme({scheme, tone: 'positive'}, config),
+    caution: buildCardColorTheme({scheme, tone: 'caution'}, config),
+    critical: buildCardColorTheme({scheme, tone: 'critical'}, config),
+  }
+}
+
+function buildCardColorTheme(
+  options: {scheme: ThemeColorSchemeKey; tone: ThemeColorCardToneKey},
   config?: ThemeConfig,
-): ThemeColor {
+): ThemeColorCard_v2 {
   const {scheme, tone} = options
   const tokens = config?.color?.base?.[tone]
   const hue = tokens?._hue || 'gray'
   const context: ColorTokenContext = {hue, scheme}
-  const bg = _color(context, tokens?.bg || DEFAULT_COLOR_TOKEN_VALUE)
-  const blendMode = tokens?._blend || ['screen', 'multiply']
-
-  // Build `button` color theme
-  // Also used for `solid` and `muted` color themes
-  const button = buildButtonColorTheme({scheme}, config)
-
-  const selectable = buildSelectableColorTheme({scheme}, config)
-
-  const _dark = scheme === 'dark'
+  const blendMode = tokens?._blend || ['multiply', 'screen']
 
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
-    _dark,
-    avatar: buildAvatarColorTheme({scheme}, config),
-    badge: buildBadgeColorTheme({scheme}, config),
-    base: {
-      bg,
-      fg: _color(context, tokens?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-      border: _color(context, tokens?.border || DEFAULT_COLOR_TOKEN_VALUE),
-      focusRing: _color(context, tokens?.focusRing || DEFAULT_COLOR_TOKEN_VALUE),
-      shadow: {
-        outline: _color(context, tokens?.shadow?.outline || DEFAULT_COLOR_TOKEN_VALUE),
-        umbra: _color(context, tokens?.shadow?.umbra || DEFAULT_COLOR_TOKEN_VALUE),
-        penumbra: _color(context, tokens?.shadow?.penumbra || DEFAULT_COLOR_TOKEN_VALUE),
-        ambient: _color(context, tokens?.shadow?.ambient || DEFAULT_COLOR_TOKEN_VALUE),
-      },
-      skeleton: {
-        from: _color(context, tokens?.skeleton?.from || DEFAULT_COLOR_TOKEN_VALUE),
-        to: _color(context, tokens?.skeleton?.to || DEFAULT_COLOR_TOKEN_VALUE),
-      },
+    _dark: scheme === 'dark',
+    accent: {
+      fg: _color(context, tokens?.accent?.fg),
     },
-    button,
-    // card: buildCardColorTheme({scheme, baseTone: tone}, config),
-    card: selectable.default satisfies ThemeColorCard,
+    avatar: buildAvatarColorTheme({scheme}, tokens),
+    backdrop: _color(context, tokens?.backdrop),
+    badge: buildBadgeColorTheme(tokens?.badge, {scheme}, config),
+    bg: _color(context, tokens?.bg),
+    border: _color(context, tokens?.border),
+    button: buildButtonColorTheme({scheme}, config),
+    code: {
+      bg: _color(context, tokens?.code?.bg),
+      fg: _color(context, tokens?.code?.fg),
+    },
+    fg: _color(context, tokens?.fg),
+    focusRing: _color(context, tokens?.focusRing),
+    icon: _color(context, tokens?.icon),
     input: buildInputColorTheme({scheme, tone}, config),
     kbd: {
-      _blend: (config?.color?.kbd?._blend || ['multiply', 'screen'])[scheme === 'light' ? 0 : 1],
-      bg: _color(context, config?.color?.kbd?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-      fg: _color(context, config?.color?.kbd?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-      border: _color(context, config?.color?.kbd?.border || DEFAULT_COLOR_TOKEN_VALUE),
+      bg: _color(context, tokens?.kbd?.bg),
+      fg: _color(context, tokens?.kbd?.fg),
+      border: _color(context, tokens?.kbd?.border),
     },
-    spot: buildSpotColorTheme({scheme}, config),
-    syntax: buildSyntaxColorTheme({scheme}, config),
-    solid: {
-      ...button.default,
-      transparent: button.default.default,
+    link: {
+      fg: _color(context, tokens?.link?.fg),
     },
     muted: {
-      ...button.bleed,
-      transparent: button.bleed.default,
+      bg: _color(context, tokens?.muted?.bg),
+      fg: _color(context, tokens?.muted?.fg),
     },
-    selectable,
+    selectable: buildSelectableColorTheme({scheme}, config),
+    shadow: buildShadowColorTheme({scheme, tone}, config),
+    skeleton: {
+      from: _color(context, tokens?.skeleton?.from),
+      to: _color(context, tokens?.skeleton?.to),
+    },
+    syntax: buildSyntaxColorTheme({scheme}, config),
+  }
+}
 
-    dark: _dark, // deprecated
+function buildShadowColorTheme(
+  options: {scheme: ThemeColorSchemeKey; tone: ThemeColorCardToneKey},
+  config?: ThemeConfig,
+): ThemeColorShadow {
+  const {scheme, tone} = options
+  const tokens = config?.color?.base?.[tone]
+  const hue = tokens?._hue || 'gray'
+  const context: ColorTokenContext = {hue, scheme}
+
+  return {
+    outline: _color(context, tokens?.shadow?.outline),
+    umbra: _color(context, tokens?.shadow?.umbra),
+    penumbra: _color(context, tokens?.shadow?.penumbra),
+    ambient: _color(context, tokens?.shadow?.ambient),
   }
 }
 
 function buildAvatarColorTheme(
-  options: {scheme: 'light' | 'dark'},
-  config?: ThemeConfig,
-): ThemeColorAvatar {
+  options: {scheme: ThemeColorSchemeKey},
+  stateTokens?: ThemeColorStateTokens,
+): ThemeColorAvatar_v2 {
   const {scheme} = options
 
   return {
-    gray: _buildAvatarColorTheme({color: 'gray', scheme}, config),
-    blue: _buildAvatarColorTheme({color: 'blue', scheme}, config),
-    purple: _buildAvatarColorTheme({color: 'purple', scheme}, config),
-    magenta: _buildAvatarColorTheme({color: 'magenta', scheme}, config),
-    red: _buildAvatarColorTheme({color: 'red', scheme}, config),
-    orange: _buildAvatarColorTheme({color: 'orange', scheme}, config),
-    yellow: _buildAvatarColorTheme({color: 'yellow', scheme}, config),
-    green: _buildAvatarColorTheme({color: 'green', scheme}, config),
-    cyan: _buildAvatarColorTheme({color: 'cyan', scheme}, config),
+    gray: _buildAvatarColorTheme({color: 'gray', scheme}, stateTokens),
+    blue: _buildAvatarColorTheme({color: 'blue', scheme}, stateTokens),
+    purple: _buildAvatarColorTheme({color: 'purple', scheme}, stateTokens),
+    magenta: _buildAvatarColorTheme({color: 'magenta', scheme}, stateTokens),
+    red: _buildAvatarColorTheme({color: 'red', scheme}, stateTokens),
+    orange: _buildAvatarColorTheme({color: 'orange', scheme}, stateTokens),
+    yellow: _buildAvatarColorTheme({color: 'yellow', scheme}, stateTokens),
+    green: _buildAvatarColorTheme({color: 'green', scheme}, stateTokens),
+    cyan: _buildAvatarColorTheme({color: 'cyan', scheme}, stateTokens),
   }
 }
 
 function _buildAvatarColorTheme(
-  options: {color: ThemeColorAvatarColorKey; scheme: 'light' | 'dark'},
-  config?: ThemeConfig,
-): ThemeColorAvatar['gray'] {
+  options: {color: ThemeColorAvatarColorKey; scheme: ThemeColorSchemeKey},
+  stateTokens?: ThemeColorStateTokens,
+): ThemeColorAvatarHue_v2 {
   const {color, scheme} = options
-  const tokens = config?.color?.avatar?.[color]
+  const tokens = stateTokens?.avatar?.[color]
   const context: ColorTokenContext = {hue: tokens?._hue || 'gray', scheme}
-  const blendMode = tokens?._blend || ['multiply', 'screen']
+  const blendMode = tokens?._blend || ['screen', 'multiply']
 
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
-    bg: _color(context, tokens?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    fg: _color(context, tokens?.fg || DEFAULT_COLOR_TOKEN_VALUE),
+    bg: _color(context, tokens?.bg),
+    fg: _color(context, tokens?.fg),
   }
 }
 
 function buildBadgeColorTheme(
-  options: {scheme: 'light' | 'dark'},
+  tokens: ThemeColorBadgeTokens | undefined,
+  options: {scheme: ThemeColorSchemeKey},
   config?: ThemeConfig,
-): ThemeColorBadge {
+): ThemeColorBadge_v2 {
   const {scheme} = options
 
   return {
-    default: _buildBadgeColorTheme({scheme, tone: 'default'}, config),
-    primary: _buildBadgeColorTheme({scheme, tone: 'primary'}, config),
-    positive: _buildBadgeColorTheme({scheme, tone: 'positive'}, config),
-    caution: _buildBadgeColorTheme({scheme, tone: 'caution'}, config),
-    critical: _buildBadgeColorTheme({scheme, tone: 'critical'}, config),
+    default: _buildBadgeColorTheme(tokens, {scheme, tone: 'default'}, config),
+    primary: _buildBadgeColorTheme(tokens, {scheme, tone: 'primary'}, config),
+    positive: _buildBadgeColorTheme(tokens, {scheme, tone: 'positive'}, config),
+    caution: _buildBadgeColorTheme(tokens, {scheme, tone: 'caution'}, config),
+    critical: _buildBadgeColorTheme(tokens, {scheme, tone: 'critical'}, config),
   }
 }
 
 function _buildBadgeColorTheme(
-  options: {scheme: 'light' | 'dark'; tone: ThemeColorStateToneKey},
+  parentTokens: ThemeColorBadgeTokens | undefined,
+  options: {scheme: ThemeColorSchemeKey; tone: ThemeColorStateToneKey},
   config?: ThemeConfig,
-): ThemeColorBadge['default'] {
+): ThemeColorBadge_v2['default'] {
   const {scheme, tone} = options
-  const tokens = config?.color?.badge?.[tone]
+  const tokens = parentTokens?.[tone]
   const hue = tokens?._hue || config?.color?.base?.[tone]?._hue || 'gray'
   const context: ColorTokenContext = {hue, scheme}
-  const blendMode = tokens?._blend || ['multiply', 'screen']
 
   return {
-    _blend: blendMode[scheme === 'light' ? 0 : 1],
-    bg: _color(context, tokens?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    fg: _color(context, tokens?.fg || DEFAULT_COLOR_TOKEN_VALUE),
+    bg: _color(context, tokens?.bg),
+    fg: _color(context, tokens?.fg),
+    dot: _color(context, tokens?.dot),
+    icon: _color(context, tokens?.icon),
   }
 }
 
 function buildButtonColorTheme(
-  options: {scheme: 'light' | 'dark'},
+  options: {scheme: ThemeColorSchemeKey},
   config?: ThemeConfig,
-): ThemeColorButton {
+): ThemeColorButton_v2 {
   const {scheme} = options
 
-  const modes: Partial<ThemeColorButton> = {}
+  const modes: Partial<ThemeColorButton_v2> = {}
 
   for (const mode of THEME_COLOR_BUTTON_MODES) {
     modes[mode] = buildButtonTonesColorTheme({scheme, mode}, config)
   }
 
-  return modes as ThemeColorButton
+  return modes as ThemeColorButton_v2
 }
 
 function buildButtonTonesColorTheme(
   options: {
-    scheme: 'light' | 'dark'
+    scheme: ThemeColorSchemeKey
     mode: ThemeColorButtonModeKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonTones {
+): ThemeColorButtonTones_v2 {
   const {mode, scheme} = options
 
-  const tones: Partial<ThemeColorButtonTones> = {}
+  const tones: Partial<ThemeColorButtonTones_v2> = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
     tones[tone] = buildButtonStatesColorTheme({mode, scheme, tone}, config)
   }
 
-  return tones as ThemeColorButtonTones
+  return tones as ThemeColorButtonTones_v2
 }
 
 function buildButtonStatesColorTheme(
   options: {
     mode: ThemeColorButtonModeKey
-    scheme: 'light' | 'dark'
+    scheme: ThemeColorSchemeKey
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonStates {
+): ThemeColorButtonStates_v2 {
   const {mode, scheme, tone} = options
 
-  const states: Partial<ThemeColorButtonStates> = {}
+  const states: Partial<ThemeColorButtonStates_v2> = {}
 
   for (const state of THEME_COLOR_STATES) {
     states[state] = buildButtonStateColorTheme({mode, tone, scheme, state}, config)
   }
 
-  return states as ThemeColorButtonStates
+  return states as ThemeColorButtonStates_v2
 }
 
 function buildButtonStateColorTheme(
   options: {
     mode: ThemeColorButtonModeKey
     tone: ThemeColorStateToneKey
-    scheme: 'light' | 'dark'
+    scheme: ThemeColorSchemeKey
     state: ThemeColorStateKey
   },
   config?: ThemeConfig,
-): ThemeColorGenericState {
+): ThemeColorState_v2 {
   const {mode, tone, scheme, state} = options
   const tokens = config?.color?.button?.[mode]?.[tone]?.[state]
   const hue = tokens?._hue || 'gray'
@@ -259,87 +263,42 @@ function buildButtonStateColorTheme(
 
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
-    bg: _color(context, tokens?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    bg2: _color(context, tokens?.bg2 || DEFAULT_COLOR_TOKEN_VALUE),
-    fg: _color(context, tokens?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-    border: _color(context, tokens?.border || DEFAULT_COLOR_TOKEN_VALUE),
-    icon: _color(context, tokens?.icon || DEFAULT_COLOR_TOKEN_VALUE),
-    muted: {
-      fg: _color(context, tokens?.muted?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-    },
     accent: {
-      fg: _color(context, tokens?.accent?.fg || DEFAULT_COLOR_TOKEN_VALUE),
+      fg: _color(context, tokens?.accent?.fg),
+    },
+    avatar: buildAvatarColorTheme({scheme}, tokens),
+    badge: buildBadgeColorTheme(tokens?.badge, {scheme}, config),
+    bg: _color(context, tokens?.bg),
+    border: _color(context, tokens?.border),
+    code: {
+      bg: _color(context, tokens?.code?.bg),
+      fg: _color(context, tokens?.code?.fg),
+    },
+    fg: _color(context, tokens?.fg),
+    icon: _color(context, tokens?.icon),
+    muted: {
+      bg: _color(context, tokens?.muted?.bg),
+      fg: _color(context, tokens?.muted?.fg),
+    },
+    kbd: {
+      bg: _color(context, tokens?.kbd?.bg),
+      fg: _color(context, tokens?.kbd?.fg),
+      border: _color(context, tokens?.kbd?.border),
     },
     link: {
-      fg: _color(context, tokens?.link?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-    },
-    code: {
-      bg: _color(context, tokens?.code?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-      fg: _color(context, tokens?.code?.fg || DEFAULT_COLOR_TOKEN_VALUE),
+      fg: _color(context, tokens?.link?.fg),
     },
     skeleton: {
-      from: _color(context, tokens?.skeleton?.from || DEFAULT_COLOR_TOKEN_VALUE),
-      to: _color(context, tokens?.skeleton?.to || DEFAULT_COLOR_TOKEN_VALUE),
+      from: _color(context, tokens?.skeleton?.from),
+      to: _color(context, tokens?.skeleton?.to),
     },
   }
 }
 
-// function buildCardColorTheme(
-//   options: {scheme: 'light' | 'dark'; baseTone: ColorBaseTone},
-//   config?: ThemeConfig,
-// ): ThemeColorCard {
-//   const {scheme, baseTone} = options
-
-//   const states: Partial<ThemeColorCard> = {}
-
-//   for (const state of COLOR_STATES) {
-//     states[state] = buildCardStateColorTheme({scheme, state, baseTone}, config)
-//   }
-
-//   return states as ThemeColorCard
-// }
-
-// function buildCardStateColorTheme(
-//   options: {scheme: 'light' | 'dark'; state: ColorState; baseTone: ColorBaseTone},
-//   config?: ThemeConfig,
-// ): ThemeColorGenericState {
-//   const {scheme, state, baseTone} = options
-//   const tokens = config?.color?.card?.[state]
-//   const hue = tokens?._hue || config?.color?.base?.[baseTone]?._hue || 'gray'
-//   const blendMode = tokens?._blend || ['screen', 'multiply']
-//   const context: ColorTokenContext = {hue, scheme}
-
-//   return {
-//     _blend: blendMode[scheme === 'light' ? 0 : 1],
-//     bg: _color(context, tokens?.bg || ['50', '950']),
-//     bg2: _color(context, tokens?.bg2 || ['50', '950']),
-//     fg: _color(context, tokens?.fg || ['black', 'white']),
-//     border: _color(context, tokens?.border || ['200', '800']),
-//     icon: _color(context, tokens?.icon || ['500', '400']),
-//     muted: {
-//       fg: _color(context, tokens?.muted?.fg || ['600', '400']),
-//     },
-//     accent: {
-//       fg: _color(context, tokens?.accent?.fg || ['600', '400']),
-//     },
-//     link: {
-//       fg: _color(context, tokens?.link?.fg || ['600', '400']),
-//     },
-//     code: {
-//       bg: _color(context, tokens?.code?.bg || ['600', '400']),
-//       fg: _color(context, tokens?.code?.fg || ['600', '400']),
-//     },
-//     skeleton: {
-//       from: _color(context, tokens?.skeleton?.from || ['100', '900']),
-//       to: _color(context, tokens?.skeleton?.to || ['100/0.5', '900/0.5']),
-//     },
-//   }
-// }
-
 function buildInputColorTheme(
-  options: {scheme: 'light' | 'dark'; tone: ThemeColorBaseToneKey},
+  options: {scheme: ThemeColorSchemeKey; tone: ThemeColorCardToneKey},
   config?: ThemeConfig,
-): ThemeColorInput {
+): ThemeColorInput_v2 {
   const {scheme, tone} = options
 
   return {
@@ -351,11 +310,11 @@ function buildInputColorTheme(
 function buildInputStatesColorTheme(
   options: {
     mode: 'default' | 'invalid'
-    scheme: 'light' | 'dark'
-    tone: ThemeColorBaseToneKey
+    scheme: ThemeColorSchemeKey
+    tone: ThemeColorCardToneKey
   },
   config?: ThemeConfig,
-): ThemeColorInputStates {
+): ThemeColorInputStates_v2 {
   const {mode, scheme, tone} = options
 
   return {
@@ -369,12 +328,12 @@ function buildInputStatesColorTheme(
 function buildInputStateColorTheme(
   options: {
     mode: 'default' | 'invalid'
-    scheme: 'light' | 'dark'
+    scheme: ThemeColorSchemeKey
     state: 'enabled' | 'hovered' | 'readOnly' | 'disabled'
-    tone: ThemeColorBaseToneKey
+    tone: ThemeColorCardToneKey
   },
   config?: ThemeConfig,
-): ThemeColorInputState {
+): ThemeColorInputState_v2 {
   const {mode, tone, scheme, state} = options
   const tokens = config?.color?.input?.[mode]?.[state]
   const hue = tokens?._hue || config?.color?.base?.[tone]?._hue || 'gray'
@@ -383,57 +342,59 @@ function buildInputStateColorTheme(
 
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
-    bg: _color(context, tokens?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    bg2: _color(context, tokens?.bg2 || DEFAULT_COLOR_TOKEN_VALUE),
-    fg: _color(context, tokens?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-    border: _color(context, tokens?.border || DEFAULT_COLOR_TOKEN_VALUE),
-    placeholder: _color(context, tokens?.placeholder || DEFAULT_COLOR_TOKEN_VALUE),
+    bg: _color(context, tokens?.bg),
+    border: _color(context, tokens?.border),
+    fg: _color(context, tokens?.fg),
+    muted: {
+      bg: _color(context, tokens?.muted?.bg),
+    },
+    placeholder: _color(context, tokens?.placeholder),
   }
 }
 
 function buildSelectableColorTheme(
   options: {
-    scheme: 'light' | 'dark'
+    scheme: ThemeColorSchemeKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonTones {
+): ThemeColorButtonTones_v2 {
   const {scheme} = options
 
-  const tones: Partial<ThemeColorButtonTones> = {}
+  const tones: Partial<ThemeColorButtonTones_v2> = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
     tones[tone] = buildSelectableStatesColorTheme({scheme, tone}, config)
   }
 
-  return tones as ThemeColorButtonTones
+  return tones as ThemeColorButtonTones_v2
 }
 
 function buildSelectableStatesColorTheme(
   options: {
-    scheme: 'light' | 'dark'
+    scheme: ThemeColorSchemeKey
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonStates {
+): ThemeColorButtonStates_v2 {
   const {scheme, tone} = options
 
-  const states: Partial<ThemeColorButtonStates> = {}
+  const states: Partial<ThemeColorButtonStates_v2> = {}
 
   for (const state of THEME_COLOR_STATES) {
     states[state] = buildSelectableStateColorTheme({tone, scheme, state}, config)
   }
 
-  return states as ThemeColorButtonStates
+  return states as ThemeColorButtonStates_v2
 }
 
 function buildSelectableStateColorTheme(
   options: {
-    scheme: 'light' | 'dark'
+    scheme: ThemeColorSchemeKey
     state: ThemeColorStateKey
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
-): ThemeColorGenericState {
+): ThemeColorState_v2 {
   const {scheme, state, tone} = options
   const tokens = config?.color?.selectable?.[tone]?.[state]
   const hue = tokens?._hue || 'gray'
@@ -442,54 +403,40 @@ function buildSelectableStateColorTheme(
 
   return {
     _blend: blendMode[scheme === 'light' ? 0 : 1],
-    bg: _color(context, tokens?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    bg2: _color(context, tokens?.bg2 || DEFAULT_COLOR_TOKEN_VALUE),
-    fg: _color(context, tokens?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-    border: _color(context, tokens?.border || DEFAULT_COLOR_TOKEN_VALUE),
-    icon: _color(context, tokens?.icon || DEFAULT_COLOR_TOKEN_VALUE),
-    muted: {
-      fg: _color(context, tokens?.muted?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-    },
     accent: {
-      fg: _color(context, tokens?.accent?.fg || DEFAULT_COLOR_TOKEN_VALUE),
+      fg: _color(context, tokens?.accent?.fg),
+    },
+    avatar: buildAvatarColorTheme({scheme}, tokens),
+    badge: buildBadgeColorTheme(tokens?.badge, {scheme}, config),
+    bg: _color(context, tokens?.bg),
+    border: _color(context, tokens?.border),
+    code: {
+      bg: _color(context, tokens?.code?.bg),
+      fg: _color(context, tokens?.code?.fg),
+    },
+    fg: _color(context, tokens?.fg),
+    icon: _color(context, tokens?.icon),
+    muted: {
+      bg: _color(context, tokens?.muted?.bg),
+      fg: _color(context, tokens?.muted?.fg),
+    },
+    kbd: {
+      bg: _color(context, tokens?.kbd?.bg),
+      fg: _color(context, tokens?.kbd?.fg),
+      border: _color(context, tokens?.kbd?.border),
     },
     link: {
-      fg: _color(context, tokens?.link?.fg || DEFAULT_COLOR_TOKEN_VALUE),
-    },
-    code: {
-      bg: _color(context, tokens?.code?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-      fg: _color(context, tokens?.code?.fg || DEFAULT_COLOR_TOKEN_VALUE),
+      fg: _color(context, tokens?.link?.fg),
     },
     skeleton: {
-      from: _color(context, tokens?.skeleton?.from || DEFAULT_COLOR_TOKEN_VALUE),
-      to: _color(context, tokens?.skeleton?.to || DEFAULT_COLOR_TOKEN_VALUE),
+      from: _color(context, tokens?.skeleton?.from),
+      to: _color(context, tokens?.skeleton?.to),
     },
-  }
-}
-
-function buildSpotColorTheme(
-  options: {scheme: 'light' | 'dark'},
-  config?: ThemeConfig,
-): ThemeColorSpot {
-  const {scheme} = options
-  const tokens = config?.color?.avatar
-  const context: ColorTokenContext = {hue: 'gray', scheme}
-
-  return {
-    gray: _color(context, tokens?.gray?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    cyan: _color(context, tokens?.cyan?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    blue: _color(context, tokens?.blue?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    purple: _color(context, tokens?.purple?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    magenta: _color(context, tokens?.magenta?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    red: _color(context, tokens?.red?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    orange: _color(context, tokens?.orange?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    yellow: _color(context, tokens?.yellow?.bg || DEFAULT_COLOR_TOKEN_VALUE),
-    green: _color(context, tokens?.green?.bg || DEFAULT_COLOR_TOKEN_VALUE),
   }
 }
 
 function buildSyntaxColorTheme(
-  options: {scheme: 'light' | 'dark'},
+  options: {scheme: ThemeColorSchemeKey},
   config?: ThemeConfig,
 ): ThemeColorSyntax {
   const {scheme} = options
@@ -497,41 +444,41 @@ function buildSyntaxColorTheme(
   const context: ColorTokenContext = {hue: 'gray', scheme}
 
   return {
-    atrule: _color(context, tokens?.atrule || DEFAULT_COLOR_TOKEN_VALUE),
-    attrName: _color(context, tokens?.attrName || DEFAULT_COLOR_TOKEN_VALUE),
-    attrValue: _color(context, tokens?.attrValue || DEFAULT_COLOR_TOKEN_VALUE),
-    attribute: _color(context, tokens?.attribute || DEFAULT_COLOR_TOKEN_VALUE),
-    boolean: _color(context, tokens?.boolean || DEFAULT_COLOR_TOKEN_VALUE),
-    builtin: _color(context, tokens?.builtin || DEFAULT_COLOR_TOKEN_VALUE),
-    cdata: _color(context, tokens?.cdata || DEFAULT_COLOR_TOKEN_VALUE),
-    char: _color(context, tokens?.char || DEFAULT_COLOR_TOKEN_VALUE),
-    class: _color(context, tokens?.class || DEFAULT_COLOR_TOKEN_VALUE),
-    className: _color(context, tokens?.className || DEFAULT_COLOR_TOKEN_VALUE),
-    comment: _color(context, tokens?.comment || DEFAULT_COLOR_TOKEN_VALUE),
-    constant: _color(context, tokens?.constant || DEFAULT_COLOR_TOKEN_VALUE),
-    deleted: _color(context, tokens?.deleted || DEFAULT_COLOR_TOKEN_VALUE),
-    doctype: _color(context, tokens?.doctype || DEFAULT_COLOR_TOKEN_VALUE),
-    entity: _color(context, tokens?.entity || DEFAULT_COLOR_TOKEN_VALUE),
-    function: _color(context, tokens?.function || DEFAULT_COLOR_TOKEN_VALUE),
-    hexcode: _color(context, tokens?.hexcode || DEFAULT_COLOR_TOKEN_VALUE),
-    id: _color(context, tokens?.id || DEFAULT_COLOR_TOKEN_VALUE),
-    important: _color(context, tokens?.important || DEFAULT_COLOR_TOKEN_VALUE),
-    inserted: _color(context, tokens?.inserted || DEFAULT_COLOR_TOKEN_VALUE),
-    keyword: _color(context, tokens?.keyword || DEFAULT_COLOR_TOKEN_VALUE),
-    number: _color(context, tokens?.number || DEFAULT_COLOR_TOKEN_VALUE),
-    operator: _color(context, tokens?.operator || DEFAULT_COLOR_TOKEN_VALUE),
-    prolog: _color(context, tokens?.prolog || DEFAULT_COLOR_TOKEN_VALUE),
-    property: _color(context, tokens?.property || DEFAULT_COLOR_TOKEN_VALUE),
-    pseudoClass: _color(context, tokens?.pseudoClass || DEFAULT_COLOR_TOKEN_VALUE),
-    pseudoElement: _color(context, tokens?.pseudoElement || DEFAULT_COLOR_TOKEN_VALUE),
-    punctuation: _color(context, tokens?.punctuation || DEFAULT_COLOR_TOKEN_VALUE),
-    regex: _color(context, tokens?.regex || DEFAULT_COLOR_TOKEN_VALUE),
-    selector: _color(context, tokens?.selector || DEFAULT_COLOR_TOKEN_VALUE),
-    string: _color(context, tokens?.string || DEFAULT_COLOR_TOKEN_VALUE),
-    symbol: _color(context, tokens?.symbol || DEFAULT_COLOR_TOKEN_VALUE),
-    tag: _color(context, tokens?.tag || DEFAULT_COLOR_TOKEN_VALUE),
-    unit: _color(context, tokens?.unit || DEFAULT_COLOR_TOKEN_VALUE),
-    url: _color(context, tokens?.url || DEFAULT_COLOR_TOKEN_VALUE),
-    variable: _color(context, tokens?.variable || DEFAULT_COLOR_TOKEN_VALUE),
+    atrule: _color(context, tokens?.atrule),
+    attrName: _color(context, tokens?.attrName),
+    attrValue: _color(context, tokens?.attrValue),
+    attribute: _color(context, tokens?.attribute),
+    boolean: _color(context, tokens?.boolean),
+    builtin: _color(context, tokens?.builtin),
+    cdata: _color(context, tokens?.cdata),
+    char: _color(context, tokens?.char),
+    class: _color(context, tokens?.class),
+    className: _color(context, tokens?.className),
+    comment: _color(context, tokens?.comment),
+    constant: _color(context, tokens?.constant),
+    deleted: _color(context, tokens?.deleted),
+    doctype: _color(context, tokens?.doctype),
+    entity: _color(context, tokens?.entity),
+    function: _color(context, tokens?.function),
+    hexcode: _color(context, tokens?.hexcode),
+    id: _color(context, tokens?.id),
+    important: _color(context, tokens?.important),
+    inserted: _color(context, tokens?.inserted),
+    keyword: _color(context, tokens?.keyword),
+    number: _color(context, tokens?.number),
+    operator: _color(context, tokens?.operator),
+    prolog: _color(context, tokens?.prolog),
+    property: _color(context, tokens?.property),
+    pseudoClass: _color(context, tokens?.pseudoClass),
+    pseudoElement: _color(context, tokens?.pseudoElement),
+    punctuation: _color(context, tokens?.punctuation),
+    regex: _color(context, tokens?.regex),
+    selector: _color(context, tokens?.selector),
+    string: _color(context, tokens?.string),
+    symbol: _color(context, tokens?.symbol),
+    tag: _color(context, tokens?.tag),
+    unit: _color(context, tokens?.unit),
+    url: _color(context, tokens?.url),
+    variable: _color(context, tokens?.variable),
   }
 }

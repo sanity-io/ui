@@ -1,9 +1,13 @@
 import {css, styled} from 'styled-components'
+import {getTheme_v2} from '../../../../theme'
 
-export const Root = styled.div(
-  ({theme}) => css`
+export const Root = styled.div((props) => {
+  const {button, card, input} = getTheme_v2(props.theme)
+
+  return css`
     background: #000;
     font-family:
+      Inter,
       system-ui,
       -apple-system,
       BlinkMacSystemFont,
@@ -34,13 +38,13 @@ export const Root = styled.div(
     }
 
     .button {
-      --border-width: ${theme.sanity.button.border.width}px;
+      --border-width: ${button.border.width}px;
 
       --bg: var(--button-enabled-bg);
-      --bg2: var(--button-enabled-bg2);
       --fg: var(--button-enabled-fg);
       --icon: var(--button-enabled-icon);
       --border: var(--button-enabled-border);
+      --muted-bg: var(--button-enabled-muted-bg);
       --muted-fg: var(--button-enabled-muted-fg);
       --accent-fg: var(--button-enabled-accent-fg);
       --link-fg: var(--button-enabled-link-fg);
@@ -63,10 +67,10 @@ export const Root = styled.div(
 
       &:hover {
         --bg: var(--button-hovered-bg);
-        --bg2: var(--button-hovered-bg2);
         --fg: var(--button-hovered-fg);
         --icon: var(--button-hovered-icon);
         --border: var(--button-hovered-border);
+        --muted-bg: var(--button-hovered-muted-bg);
         --muted-fg: var(--button-hovered-muted-fg);
         --accent-fg: var(--button-hovered-accent-fg);
         --link-fg: var(--button-hovered-link-fg);
@@ -83,10 +87,10 @@ export const Root = styled.div(
           0 0 0 3px var(--focus-ring);
 
         --bg: var(--button-hovered-bg);
-        --bg2: var(--button-hovered-bg2);
         --fg: var(--button-hovered-fg);
         --icon: var(--button-hovered-icon);
         --border: var(--button-hovered-border);
+        --muted-bg: var(--button-hovered-muted-bg);
         --muted-fg: var(--button-hovered-muted-fg);
         --accent-fg: var(--button-hovered-accent-fg);
         --link-fg: var(--button-hovered-link-fg);
@@ -98,10 +102,10 @@ export const Root = styled.div(
 
       &:active {
         --bg: var(--button-pressed-bg);
-        --bg2: var(--button-pressed-bg2);
         --fg: var(--button-pressed-fg);
         --icon: var(--button-pressed-icon);
         --border: var(--button-pressed-border);
+        --muted-bg: var(--button-pressed-muted-bg);
         --muted-fg: var(--button-pressed-muted-fg);
         --accent-fg: var(--button-pressed-accent-fg);
         --link-fg: var(--button-pressed-link-fg);
@@ -113,10 +117,10 @@ export const Root = styled.div(
 
       &.selected {
         --bg: var(--button-selected-bg);
-        --bg2: var(--button-selected-bg2);
         --fg: var(--button-selected-fg);
         --icon: var(--button-selected-icon);
         --border: var(--button-selected-border);
+        --muted-bg: var(--button-selected-muted-bg);
         --muted-fg: var(--button-selected-muted-fg);
         --accent-fg: var(--button-selected-accent-fg);
         --link-fg: var(--button-selected-link-fg);
@@ -128,10 +132,10 @@ export const Root = styled.div(
 
       &.disabled {
         --bg: var(--button-disabled-bg);
-        --bg2: var(--button-disabled-bg2);
         --fg: var(--button-disabled-fg);
         --icon: var(--button-disabled-icon);
         --border: var(--button-disabled-border);
+        --muted-bg: var(--button-disabled-muted-bg);
         --muted-fg: var(--button-disabled-muted-fg);
         --accent-fg: var(--button-disabled-accent-fg);
         --link-fg: var(--button-disabled-link-fg);
@@ -143,13 +147,13 @@ export const Root = styled.div(
     }
 
     .card {
-      --border-width: ${theme.sanity.card.border.width}px;
+      --border-width: ${card.border.width}px;
 
       --bg: var(--card-enabled-bg);
-      --bg2: var(--card-enabled-bg2);
       --fg: var(--card-enabled-fg);
       --icon: var(--card-enabled-icon);
       --border: var(--card-enabled-border);
+      --muted-bg: var(--card-enabled-muted-bg);
       --muted-fg: var(--card-enabled-muted-fg);
       --accent-fg: var(--card-enabled-accent-fg);
       --link-fg: var(--card-enabled-link-fg);
@@ -169,10 +173,10 @@ export const Root = styled.div(
 
       &:hover {
         --bg: var(--card-hovered-bg);
-        --bg2: var(--card-hovered-bg2);
         --fg: var(--card-hovered-fg);
         --icon: var(--card-hovered-icon);
         --border: var(--card-hovered-border);
+        --muted-bg: var(--card-hovered-muted-bg);
         --muted-fg: var(--card-hovered-muted-fg);
         --accent-fg: var(--card-hovered-accent-fg);
         --link-fg: var(--card-hovered-link-fg);
@@ -189,10 +193,10 @@ export const Root = styled.div(
           0 0 0 3px var(--focus-ring);
 
         /* --bg: var(--card-hovered-bg);
-        --bg2: var(--card-hovered-bg2);
         --fg: var(--card-hovered-fg);
         --icon: var(--card-hovered-icon);
         --border: var(--card-hovered-border);
+        --muted-bg: var(--card-hovered-muted-bg);
         --muted-fg: var(--card-hovered-muted-fg);
         --accent-fg: var(--card-hovered-accent-fg);
         --link-fg: var(--card-hovered-link-fg);
@@ -204,10 +208,10 @@ export const Root = styled.div(
 
       &:active {
         --bg: var(--card-pressed-bg);
-        --bg2: var(--card-pressed-bg2);
         --fg: var(--card-pressed-fg);
         --icon: var(--card-pressed-icon);
         --border: var(--card-pressed-border);
+        --muted-bg: var(--card-pressed-muted-bg);
         --muted-fg: var(--card-pressed-muted-fg);
         --accent-fg: var(--card-pressed-accent-fg);
         --link-fg: var(--card-pressed-link-fg);
@@ -219,10 +223,10 @@ export const Root = styled.div(
 
       &.selected {
         --bg: var(--card-selected-bg);
-        --bg2: var(--card-selected-bg2);
         --fg: var(--card-selected-fg);
         --icon: var(--card-selected-icon);
         --border: var(--card-selected-border);
+        --muted-bg: var(--card-selected-muted-bg);
         --muted-fg: var(--card-selected-muted-fg);
         --accent-fg: var(--card-selected-accent-fg);
         --link-fg: var(--card-selected-link-fg);
@@ -234,10 +238,10 @@ export const Root = styled.div(
 
       &.disabled {
         --bg: var(--card-disabled-bg);
-        --bg2: var(--card-disabled-bg2);
         --fg: var(--card-disabled-fg);
         --icon: var(--card-disabled-icon);
         --border: var(--card-disabled-border);
+        --muted-bg: var(--card-disabled-muted-bg);
         --muted-fg: var(--card-disabled-muted-fg);
         --accent-fg: var(--card-disabled-accent-fg);
         --link-fg: var(--card-disabled-link-fg);
@@ -252,7 +256,7 @@ export const Root = styled.div(
       background-color: var(--bg);
       color: var(--fg);
       padding: var(--space-3);
-      box-shadow: inset 0 0 0 ${theme.sanity.input.border.width}px var(--border);
+      box-shadow: inset 0 0 0 ${input.border.width}px var(--border);
       font-size: 16px;
       line-height: 11px;
       border-radius: var(--radius-2);
@@ -307,7 +311,7 @@ export const Root = styled.div(
     }
 
     .bg2 {
-      background-color: var(--bg2);
+      background-color: var(--muted-bg);
     }
 
     .border {
@@ -342,5 +346,5 @@ export const Root = styled.div(
     .skeleton-to {
       color: var(--skeleton-to);
     }
-  `,
-)
+  `
+})

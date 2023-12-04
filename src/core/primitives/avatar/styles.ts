@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
@@ -57,12 +57,12 @@ function avatarArrowStyle(): CSSObject {
 }
 
 export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSObject {
-  const {$color, theme} = props
-  const {focusRing} = theme.sanity.avatar
+  const {$color} = props
+  const {avatar} = getTheme_v2(props.theme)
 
   return {
-    '--avatar-bg-color': theme.sanity.color.avatar?.[$color]?.bg || theme.sanity.color.spot[$color],
-    '--avatar-fg-color': theme.sanity.color.avatar?.[$color]?.fg || 'var(--card-bg-color)',
+    '--avatar-bg-color': `var(--card-avatar-${$color}-bg-color)`,
+    '--avatar-fg-color': `var(--card-avatar-${$color}-fg-color)`,
 
     backgroundColor: 'var(--avatar-bg-color)',
     position: 'relative',
@@ -94,7 +94,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 
       // @ts-expect-error -- TODO wait for CSSObject types to be fixed in `styled-components` itself
       '&:focus': {
-        boxShadow: focusRingStyle({focusRing}),
+        boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
       },
 
       '&:focus:not(:focus-visible)': {
@@ -107,8 +107,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 export function responsiveAvatarSizeStyle(
   props: ResponsiveAvatarSizeStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {theme} = props
-  const {avatar, media} = theme.sanity
+  const {avatar, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size] || avatar.sizes[0]

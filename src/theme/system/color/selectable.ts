@@ -1,29 +1,23 @@
-import {ThemeColorGenericState} from './_generic'
-
-/**
- * @deprecated Use `ThemeColorGenericState` instead.
- * @public
- */
-export type ThemeColorSelectableState = ThemeColorGenericState
+import {ThemeColorState_v2} from './state'
 
 /**
  * @public
  */
-export interface ThemeColorSelectableStates {
-  enabled: ThemeColorSelectableState
-  hovered: ThemeColorSelectableState
-  pressed: ThemeColorSelectableState
-  selected: ThemeColorSelectableState
-  disabled: ThemeColorSelectableState
+export interface ThemeColorSelectableStates_v2 {
+  enabled: ThemeColorState_v2
+  hovered: ThemeColorState_v2
+  pressed: ThemeColorState_v2
+  selected: ThemeColorState_v2
+  disabled: ThemeColorState_v2
 }
 
 /**
  * @public
  */
-export interface ThemeColorSelectable {
-  default: ThemeColorSelectableStates
-  primary: ThemeColorSelectableStates
-  positive: ThemeColorSelectableStates
-  caution: ThemeColorSelectableStates
-  critical: ThemeColorSelectableStates
+export interface ThemeColorSelectable_v2 {
+  default: ThemeColorSelectableStates_v2
+  primary: ThemeColorSelectableStates_v2
+  positive: ThemeColorSelectableStates_v2
+  caution: ThemeColorSelectableStates_v2
+  critical: ThemeColorSelectableStates_v2
 }

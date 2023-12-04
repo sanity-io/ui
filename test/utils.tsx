@@ -1,5 +1,5 @@
 import {Card, ThemeProvider} from '@sanity/ui'
-import {studioTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {defaultTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {
   render as _testRender,
   RenderOptions as _TestRenderOptions,
@@ -30,7 +30,7 @@ export function render(rootElement: ReactElement, options: TestRenderOptions = {
     return (
       <Strictness>
         <InnerWrapper>
-          <ThemeProvider theme={studioTheme}>
+          <ThemeProvider theme={defaultTheme}>
             <Card padding={4} scheme={scheme}>
               {children}
             </Card>

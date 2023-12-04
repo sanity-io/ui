@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 
@@ -13,8 +13,8 @@ export interface TextInputResponsivePaddingStyleProps {
 export function responsiveInputPaddingStyle(
   props: TextInputResponsivePaddingStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {$fontSize, $iconLeft, $iconRight, $padding, $space, theme} = props
-  const {fonts, media, space: spaceScale} = theme.sanity
+  const {$fontSize, $iconLeft, $iconRight, $padding, $space} = props
+  const {font, media, space} = getTheme_v2(props.theme)
   const len = Math.max($padding.length, $space.length, $fontSize.length)
   const _padding: number[] = []
   const _space: number[] = []
@@ -27,10 +27,10 @@ export function responsiveInputPaddingStyle(
   }
 
   return _responsive(media, _padding, (_, i) => {
-    const size = fonts.text.sizes[_fontSize[i]] || fonts.text.sizes[2]
+    const size = font.text.sizes[_fontSize[i]] || font.text.sizes[2]
     const emSize = size.lineHeight - size.ascenderHeight - size.descenderHeight
-    const p = spaceScale[_padding[i]]
-    const s = spaceScale[_space[i]]
+    const p = space[_padding[i]]
+    const s = space[_space[i]]
 
     const styles = {
       paddingTop: rem(p - size.ascenderHeight),

@@ -3,7 +3,7 @@ import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'reac
 import ReactIs from 'react-is'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
 import {Label} from '../label'
 import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
@@ -74,10 +74,10 @@ export const Avatar = forwardRef(function Avatar(
   } = props
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = useArrayProp(sizeProp)
-  const theme = useTheme()
+  const {avatar} = useTheme_v2()
 
   // @todo: remove this
-  const avatarSize = theme.sanity.avatar.sizes[size[0]] || theme.sanity.avatar.sizes[0]
+  const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
   const _sizeRem = avatarSize.size
   const _radius = _sizeRem / 2
 

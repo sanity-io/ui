@@ -1,5 +1,5 @@
 import {ThemeColorTokens} from '../config'
-import {buildColorScheme, buildColorTheme} from './buildColorTheme'
+import {buildColorTheme} from './buildColorTheme'
 
 test('buildColorTheme: base', () => {
   const {light, dark} = buildColorTheme({
@@ -35,30 +35,30 @@ test('buildColorTheme: base', () => {
   expect({
     light: {
       transparent: {
-        bg: light.transparent.base.bg,
-        fg: light.transparent.base.fg,
+        bg: light.transparent.bg,
+        fg: light.transparent.fg,
       },
       default: {
-        bg: light.default.base.bg,
-        fg: light.default.base.fg,
+        bg: light.default.bg,
+        fg: light.default.fg,
       },
       primary: {
-        bg: light.primary.base.bg,
-        fg: light.primary.base.fg,
+        bg: light.primary.bg,
+        fg: light.primary.fg,
       },
     },
     dark: {
       transparent: {
-        bg: dark.transparent.base.bg,
-        fg: dark.transparent.base.fg,
+        bg: dark.transparent.bg,
+        fg: dark.transparent.fg,
       },
       default: {
-        bg: dark.default.base.bg,
-        fg: dark.default.base.fg,
+        bg: dark.default.bg,
+        fg: dark.default.fg,
       },
       primary: {
-        bg: dark.primary.base.bg,
-        fg: dark.primary.base.fg,
+        bg: dark.primary.bg,
+        fg: dark.primary.fg,
       },
     },
   }).toEqual({
@@ -135,8 +135,7 @@ test('buildColorTheme: button', () => {
     },
   }
 
-  const light = buildColorScheme({scheme: 'light'}, {color: tokens})
-  const dark = buildColorScheme({scheme: 'dark'}, {color: tokens})
+  const {dark, light} = buildColorTheme({color: tokens})
 
   expect({
     light: {

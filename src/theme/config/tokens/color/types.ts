@@ -2,8 +2,7 @@ import {ColorHueKey} from '@sanity/color'
 import {ThemeColorSyntax, ThemeColorButtonModeKey} from '../../../system'
 import {
   ColorBlendModeTokenValue,
-  ColorConfigAvatarColor,
-  ColorConfigBaseTone,
+  ColorConfigCardTone,
   ColorConfigInputMode,
   ColorConfigInputState,
   ColorConfigState,
@@ -11,57 +10,89 @@ import {
   ThemeColorTokenValue,
 } from '../../system'
 
-export interface ThemeColorAvatarTokens {
+export interface ThemeColorAvatarHueTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
   bg?: ThemeColorTokenValue
   fg?: ThemeColorTokenValue
+}
+
+export interface ThemeColorAvatarTokens {
+  '*'?: ThemeColorAvatarHueTokens
+  gray?: ThemeColorAvatarHueTokens
+  blue?: ThemeColorAvatarHueTokens
+  purple?: ThemeColorAvatarHueTokens
+  magenta?: ThemeColorAvatarHueTokens
+  red?: ThemeColorAvatarHueTokens
+  orange?: ThemeColorAvatarHueTokens
+  yellow?: ThemeColorAvatarHueTokens
+  green?: ThemeColorAvatarHueTokens
+  cyan?: ThemeColorAvatarHueTokens
 }
 
 export interface ThemeColorBadgeTokens {
-  _blend?: ColorBlendModeTokenValue
+  // _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
   bg?: ThemeColorTokenValue
   fg?: ThemeColorTokenValue
+  dot?: ThemeColorTokenValue
+  icon?: ThemeColorTokenValue
 }
 
-export interface ThemeColorBaseTokens {
-  _blend?: ColorBlendModeTokenValue
-  _hue?: ColorHueKey
-  bg?: ThemeColorTokenValue
-  fg?: ThemeColorTokenValue
-  border?: ThemeColorTokenValue
+export interface ThemeColorBaseTokens extends ThemeColorStateTokens {
   focusRing?: ThemeColorTokenValue
+  backdrop?: ThemeColorTokenValue
   shadow?: {
     outline?: ThemeColorTokenValue
     umbra?: ThemeColorTokenValue
     penumbra?: ThemeColorTokenValue
     ambient?: ThemeColorTokenValue
   }
-  skeleton?: {
-    from?: ThemeColorTokenValue
-    to?: ThemeColorTokenValue
-  }
+}
+
+export interface ThemeColorBadgeToneTokens {
+  _blend?: ColorBlendModeTokenValue
+  _hue?: ColorHueKey
+  bg?: ThemeColorTokenValue
+  dot?: ThemeColorTokenValue
+  fg?: ThemeColorTokenValue
+  icon?: ThemeColorTokenValue
+}
+
+export interface ThemeColorBadgeTokens {
+  '*'?: ThemeColorBadgeToneTokens
+  default?: ThemeColorBadgeToneTokens
+  primary?: ThemeColorBadgeToneTokens
+  positive?: ThemeColorBadgeToneTokens
+  caution?: ThemeColorBadgeToneTokens
+  critical?: ThemeColorBadgeToneTokens
 }
 
 export interface ThemeColorStateTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
-  bg?: ThemeColorTokenValue
-  bg2?: ThemeColorTokenValue
-  fg?: ThemeColorTokenValue
-  icon?: ThemeColorTokenValue
-  border?: ThemeColorTokenValue
-  muted?: {
-    fg?: ThemeColorTokenValue
-  }
   accent?: {
     fg?: ThemeColorTokenValue
+  }
+  avatar?: ThemeColorAvatarTokens
+  badge?: ThemeColorBadgeTokens
+  bg?: ThemeColorTokenValue
+  border?: ThemeColorTokenValue
+  code?: {
+    bg?: ThemeColorTokenValue
+    fg?: ThemeColorTokenValue
+  }
+  fg?: ThemeColorTokenValue
+  icon?: ThemeColorTokenValue
+  kbd?: {
+    bg?: ThemeColorTokenValue
+    fg?: ThemeColorTokenValue
+    border?: ThemeColorTokenValue
   }
   link?: {
     fg?: ThemeColorTokenValue
   }
-  code?: {
+  muted?: {
     bg?: ThemeColorTokenValue
     fg?: ThemeColorTokenValue
   }
@@ -82,9 +113,11 @@ export interface ThemeColorInputStateTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
   bg?: ThemeColorTokenValue
-  bg2?: ThemeColorTokenValue
-  fg?: ThemeColorTokenValue
   border?: ThemeColorTokenValue
+  fg?: ThemeColorTokenValue
+  muted?: {
+    bg?: ThemeColorTokenValue
+  }
   placeholder?: ThemeColorTokenValue
 }
 
@@ -94,19 +127,9 @@ export interface ThemeColorInputTokens
 }
 
 export interface ThemeColorTokens {
-  avatar?: Partial<Record<ColorConfigAvatarColor, ThemeColorAvatarTokens>>
-  badge?: Partial<Record<ColorConfigStateTone, ThemeColorBadgeTokens>>
-  base?: Partial<Record<ColorConfigBaseTone, ThemeColorBaseTokens>>
+  base?: Partial<Record<ColorConfigCardTone, ThemeColorBaseTokens>>
   button?: Partial<Record<ThemeColorButtonModeKey, ThemeColorButtonTokens>>
-  card?: Partial<Record<ColorConfigState, ThemeColorStateTokens>>
   input?: Partial<Record<ColorConfigInputMode, ThemeColorInputTokens>>
-  kbd?: {
-    _blend?: ColorBlendModeTokenValue
-    bg?: ThemeColorTokenValue
-    fg?: ThemeColorTokenValue
-    border?: ThemeColorTokenValue
-  }
   selectable?: Partial<Record<ColorConfigStateTone, {_hue?: ColorHueKey} & ThemeColorStatesTokens>>
-  spot?: Partial<Record<ColorHueKey, ThemeColorTokenValue>>
   syntax?: Partial<Record<keyof ThemeColorSyntax, ThemeColorTokenValue>>
 }

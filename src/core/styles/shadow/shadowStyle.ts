@@ -1,4 +1,4 @@
-import {ThemeBoxShadow, ThemeShadow} from '@sanity/ui/theme'
+import {ThemeBoxShadow, ThemeShadow, getTheme_v2} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {EMPTY_RECORD} from '../../constants'
 import {rem, _responsive} from '../helpers'
@@ -21,10 +21,9 @@ function shadowStyle(shadow: ThemeShadow | null, outlineWidth: number = 1): CSSO
 }
 
 export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps): CSSObject[] {
-  const {theme} = props
-  const {card, media, shadows} = theme.sanity
+  const {card, media, shadow} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$shadow, (shadow) =>
-    shadowStyle(shadows[shadow], card.shadow.outline),
+  return _responsive(media, props.$shadow, (index) =>
+    shadowStyle(shadow[index], card.shadow.outline),
   )
 }

@@ -1,3 +1,4 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
@@ -35,14 +36,11 @@ export function switchInputStyles(): ReturnType<typeof css> {
 
 /* Representation */
 export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof css> {
-  const {theme} = props
-  const {input} = theme.sanity
-  const {focusRing} = input.switch
-  const color = theme.sanity.color.input
+  const {color, input} = getTheme_v2(props.theme)
 
   return css`
-    --switch-bg-color: ${color.default.enabled.border};
-    --switch-fg-color: ${color.default.enabled.bg};
+    --switch-bg-color: ${color.input.default.enabled.border};
+    --switch-fg-color: ${color.input.default.enabled.bg};
     --switch-box-shadow: none;
 
     &:not([hidden]) {
@@ -71,7 +69,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
 
     /* Focus styles */
     input:focus + && {
-      --switch-box-shadow: ${focusRingStyle({focusRing})};
+      --switch-box-shadow: ${focusRingStyle({focusRing: input.switch.focusRing})};
     }
 
     input:focus:not(:focus-visible) + && {
@@ -79,38 +77,37 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
     }
 
     input:checked + && {
-      --switch-bg-color: ${color.default.enabled.fg};
-      --switch-fg-color: ${color.default.enabled.bg};
+      --switch-bg-color: ${color.input.default.enabled.fg};
+      --switch-fg-color: ${color.input.default.enabled.bg};
     }
 
     @media (hover: hover) {
       input:not(:disabled):hover + && {
-        --switch-bg-color: ${color.default.hovered.border};
-        --switch-fg-color: ${color.default.hovered.bg};
+        --switch-bg-color: ${color.input.default.hovered.border};
+        --switch-fg-color: ${color.input.default.hovered.bg};
       }
 
       input:not(:disabled):checked:hover + && {
-        --switch-bg-color: ${color.default.enabled.fg};
-        --switch-fg-color: ${color.default.enabled.bg};
+        --switch-bg-color: ${color.input.default.enabled.fg};
+        --switch-fg-color: ${color.input.default.enabled.bg};
       }
     }
 
     input:not([data-read-only]):disabled + && {
-      --switch-bg-color: ${color.default.disabled.border};
-      --switch-fg-color: ${color.default.disabled.bg};
+      --switch-bg-color: ${color.input.default.disabled.border};
+      --switch-fg-color: ${color.input.default.disabled.bg};
     }
 
     input[data-read-only]:disabled + && {
-      --switch-bg-color: ${color.default.readOnly.border};
-      --switch-fg-color: ${color.default.readOnly.bg};
+      --switch-bg-color: ${color.input.default.readOnly.border};
+      --switch-fg-color: ${color.input.default.readOnly.bg};
     }
   `
 }
 
 /* Track */
 export function switchTrackStyles(props: ThemeProps): ReturnType<typeof css> {
-  const {theme} = props
-  const {input} = theme.sanity
+  const {input} = getTheme_v2(props.theme)
 
   return css`
     &:not([hidden]) {
@@ -130,8 +127,8 @@ export function switchTrackStyles(props: ThemeProps): ReturnType<typeof css> {
 export function switchThumbStyles(
   props: {$checked?: boolean; $indeterminate?: boolean} & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$indeterminate, theme} = props
-  const {input} = theme.sanity
+  const {$indeterminate} = props
+  const {input} = getTheme_v2(props.theme)
   const trackWidth = input.switch.width
   const trackHeight = input.switch.height
   const trackPadding = input.switch.padding

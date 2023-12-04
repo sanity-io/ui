@@ -1,6 +1,6 @@
 import {forwardRef, useCallback, useMemo, useState} from 'react'
 import {useElementSize, useForwardedRef} from '../../hooks'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
 /**
@@ -20,8 +20,8 @@ export const ElementQuery = forwardRef(function ElementQuery(
   props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'media'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const theme = useTheme()
-  const {children, media = theme.sanity.media, ...restProps} = props
+  const theme = useTheme_v2()
+  const {children, media = theme.media, ...restProps} = props
 
   const forwardedRef = useForwardedRef(ref)
   const [element, setElement] = useState<HTMLDivElement | null>(null)

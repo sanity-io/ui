@@ -1,5 +1,6 @@
 import {ReactNode, useState} from 'react'
 
+import {LayerProvider} from '../../src/core'
 import {
   CodeSkeleton,
   HeadingSkeleton,
@@ -40,8 +41,7 @@ import {
   TextInput,
 } from '../../src/core/primitives'
 import {ThemeProvider} from '../../src/core/theme'
-import {ThemeColorSchemeKey, studioTheme} from '../../src/theme'
-import {LayerProvider} from '../../src/core'
+import {ThemeColorSchemeKey, defaultTheme} from '../../src/theme'
 
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
@@ -112,7 +112,7 @@ export function Tones(): ReactNode {
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>('light')
 
   return (
-    <ThemeProvider scheme={scheme} theme={studioTheme}>
+    <ThemeProvider scheme={scheme} theme={defaultTheme}>
       <Card padding={2} radius={2}>
         <Box padding={3}>
           <Button

@@ -3,29 +3,31 @@ import {ThemeColorBlendModeKey} from './_system'
 /**
  * @public
  */
-export interface ThemeColorInputState {
+export interface ThemeColorInputState_v2 {
   _blend?: ThemeColorBlendModeKey
   bg: string
-  bg2: string
-  fg: string
   border: string
+  fg: string
+  muted: {
+    bg: string
+  }
   placeholder: string
 }
 
 /**
  * @public
  */
-export interface ThemeColorInputStates {
-  enabled: ThemeColorInputState
-  disabled: ThemeColorInputState
-  hovered: ThemeColorInputState
-  readOnly: ThemeColorInputState
+export interface ThemeColorInputStates_v2 {
+  enabled: ThemeColorInputState_v2
+  disabled: ThemeColorInputState_v2
+  hovered: ThemeColorInputState_v2
+  readOnly: ThemeColorInputState_v2
 }
 
 /**
  * @public
  */
-export interface ThemeColorInput {
-  default: ThemeColorInputStates
-  invalid: ThemeColorInputStates
+export interface ThemeColorInput_v2 {
+  default: ThemeColorInputStates_v2
+  invalid: ThemeColorInputStates_v2
 }

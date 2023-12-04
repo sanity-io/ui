@@ -1,4 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBorderStyleProps} from './types'
@@ -10,8 +10,7 @@ export function responsiveBorderStyle(): Array<
 }
 
 function border(props: ResponsiveBorderStyleProps & ThemeProps) {
-  const {theme} = props
-  const {card, media} = theme.sanity
+  const {card, media} = getTheme_v2(props.theme)
   const borderStyle = `${card.border?.width ?? 1}px solid var(--card-border-color)`
 
   return _responsive(media, props.$border, (value) =>
@@ -20,8 +19,7 @@ function border(props: ResponsiveBorderStyleProps & ThemeProps) {
 }
 
 function borderTop(props: ResponsiveBorderStyleProps & ThemeProps) {
-  const {theme} = props
-  const {card, media} = theme.sanity
+  const {card, media} = getTheme_v2(props.theme)
   const borderStyle = `${card.border?.width ?? 1}px solid var(--card-border-color)`
 
   return _responsive(media, props.$borderTop, (value) =>
@@ -30,8 +28,7 @@ function borderTop(props: ResponsiveBorderStyleProps & ThemeProps) {
 }
 
 function borderRight(props: ResponsiveBorderStyleProps & ThemeProps) {
-  const {theme} = props
-  const {card, media} = theme.sanity
+  const {card, media} = getTheme_v2(props.theme)
   const borderStyle = `${card.border?.width ?? 1}px solid var(--card-border-color)`
 
   return _responsive(media, props.$borderRight, (value) =>
@@ -40,8 +37,7 @@ function borderRight(props: ResponsiveBorderStyleProps & ThemeProps) {
 }
 
 function borderBottom(props: ResponsiveBorderStyleProps & ThemeProps) {
-  const {theme} = props
-  const {card, media} = theme.sanity
+  const {card, media} = getTheme_v2(props.theme)
   const borderStyle = `${card.border?.width ?? 1}px solid var(--card-border-color)`
 
   return _responsive(media, props.$borderBottom, (value) =>
@@ -50,8 +46,7 @@ function borderBottom(props: ResponsiveBorderStyleProps & ThemeProps) {
 }
 
 function borderLeft(props: ResponsiveBorderStyleProps & ThemeProps) {
-  const {theme} = props
-  const {card, media} = theme.sanity
+  const {card, media} = getTheme_v2(props.theme)
   const borderStyle = `${card.border?.width ?? 1}px solid var(--card-border-color)`
 
   return _responsive(media, props.$borderLeft, (value) =>

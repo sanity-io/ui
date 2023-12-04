@@ -1,7 +1,6 @@
 import {forwardRef} from 'react'
 import styled, {css} from 'styled-components'
 import {useArrayProp} from '../../hooks'
-import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {Radius} from '../../types'
 import {Box} from '../box'
@@ -17,17 +16,14 @@ export interface KBDProps {
   radius?: Radius | Radius[]
 }
 
-function kbdStyle(props: ThemeProps) {
-  const {theme} = props
-  const color = theme.sanity.color.kbd || theme.sanity.color.base
-
+function kbdStyle() {
   return css`
-    --card-fg-color: ${color.fg};
-    --kbd-box-bg: ${color.bg};
-    --kbd-box-shadow: ${color.border};
+    --card-bg-color: var(--card-kbd-bg-color);
+    --card-border-color: var(--card-kbd-border-color);
+    --card-fg-color: var(--card-kbd-fg-color);
 
-    box-shadow: inset 0 0 0 1px var(--kbd-box-shadow);
-    background: var(--kbd-box-bg);
+    box-shadow: inset 0 0 0 1px var(--card-border-color);
+    background: var(--card-bg-color);
     font: inherit;
 
     &:not([hidden]) {
@@ -52,7 +48,7 @@ export const KBD = forwardRef(function KBD(
   return (
     <Root data-ui="KBD" {...restProps} $radius={useArrayProp(radius)} ref={ref}>
       <Box as="span" padding={padding}>
-        <Text as="span" size={fontSize} weight="medium">
+        <Text as="span" size={fontSize} weight="semibold">
           {children}
         </Text>
       </Box>

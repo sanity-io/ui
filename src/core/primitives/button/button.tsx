@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {useTheme} from '../../theme'
+import {useTheme_v2} from '../../theme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth, FlexJustify} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
@@ -91,6 +91,7 @@ export const Button = forwardRef(function Button(
     width,
     ...restProps
   } = props
+  const {button} = useTheme_v2()
 
   const justify = useArrayProp(justifyProp)
   const padding = useArrayProp(paddingProp)
@@ -102,8 +103,6 @@ export const Button = forwardRef(function Button(
   const paddingRight = useArrayProp(paddingRightProp)
   const radius = useArrayProp(radiusProp)
   const space = useArrayProp(spaceProp)
-
-  const theme = useTheme()
 
   const boxProps = useMemo(
     () => ({
@@ -156,7 +155,7 @@ export const Button = forwardRef(function Button(
                   align={textAlign}
                   size={fontSize}
                   textOverflow="ellipsis"
-                  weight={theme.sanity.button.textWeight}
+                  weight={button.textWeight}
                 >
                   {text}
                 </Text>

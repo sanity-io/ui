@@ -1,4 +1,4 @@
-import {createContext} from 'react'
+import {Context, createContext} from 'react'
 import {globalScope} from '../lib/globalScope'
 import {ThemeContextValue} from './types'
 
@@ -9,4 +9,4 @@ globalScope[key] = globalScope[key] || createContext<ThemeContextValue | null>(n
 /**
  * @internal
  */
-export const ThemeContext: React.Context<ThemeContextValue | null> = globalScope[key]
+export const ThemeContext: Context<ThemeContextValue | null> = globalScope[key]

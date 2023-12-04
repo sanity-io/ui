@@ -1,13 +1,25 @@
 import {ThemeColorBlendModeKey} from './_system'
 
-export interface ThemeColorAvatar {
-  gray: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  blue: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  purple: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  magenta: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  red: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  orange: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  yellow: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  green: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
-  cyan: {_blend?: ThemeColorBlendModeKey; bg: string; fg: string}
+/**
+ * @public
+ */
+export interface ThemeColorAvatarHue_v2 {
+  _blend?: ThemeColorBlendModeKey
+  bg: string
+  fg: string
+}
+
+/**
+ * @public
+ */
+export interface ThemeColorAvatar_v2 {
+  gray: ThemeColorAvatarHue_v2
+  blue: ThemeColorAvatarHue_v2
+  purple: ThemeColorAvatarHue_v2
+  magenta: ThemeColorAvatarHue_v2
+  red: ThemeColorAvatarHue_v2
+  orange: ThemeColorAvatarHue_v2
+  yellow: ThemeColorAvatarHue_v2
+  green: ThemeColorAvatarHue_v2
+  cyan: ThemeColorAvatarHue_v2
 }

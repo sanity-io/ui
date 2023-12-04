@@ -1,7 +1,12 @@
-import {RootTheme, Theme, ThemeColorBaseToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {
+  RootTheme,
+  ThemeColorCardToneKey,
+  ThemeColorSchemeKey,
+  Theme,
+  getScopedTheme,
+} from '@sanity/ui/theme'
 import {useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
-import {DEFAULT_THEME_LAYER} from './defaults'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 
@@ -12,7 +17,7 @@ export interface ThemeProviderProps {
   children?: React.ReactNode
   scheme?: ThemeColorSchemeKey
   theme?: RootTheme
-  tone?: ThemeColorBaseToneKey
+  tone?: ThemeColorCardToneKey
 }
 
 /**
@@ -23,38 +28,33 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
   const {
     children,
     scheme = parentTheme?.scheme || 'light',
-    theme: themeProp = parentTheme?.theme || null,
+    theme: rootTheme = parentTheme?.theme || null,
     tone = parentTheme?.tone || 'default',
   } = props
 
+  const themeContext: ThemeContextValue | null = useMemo(() => {
+    if (!rootTheme) return null
+
+    return {
+      version: 0.0,
+      theme: rootTheme,
+      scheme,
+      tone,
+    }
+  }, [rootTheme, scheme, tone])
+
   const theme: Theme | null = useMemo(() => {
-    if (!themeProp) return null
+    if (!rootTheme) return null
 
-    const {color: rootColor, layer: rootLayer, ...restTheme} = themeProp
-    const colorScheme = rootColor[scheme] || rootColor.light
-    const color = colorScheme[tone] || colorScheme.default
-    const layer = rootLayer || DEFAULT_THEME_LAYER
-
-    return {sanity: {...restTheme, color, layer}}
-  }, [scheme, themeProp, tone])
-
-  const value: ThemeContextValue | null = useMemo(
-    () =>
-      themeProp && {
-        version: 0.0,
-        theme: themeProp,
-        scheme,
-        tone,
-      },
-    [themeProp, scheme, tone],
-  )
+    return getScopedTheme(rootTheme, scheme, tone)
+  }, [scheme, rootTheme, tone])
 
   if (!theme) {
     return <pre>ThemeProvider: no "theme" property provided</pre>
   }
 
   return (
-    <ThemeContext.Provider value={value}>
+    <ThemeContext.Provider value={themeContext}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   )

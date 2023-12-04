@@ -1,118 +1,52 @@
 import {ColorHueKey} from '@sanity/color'
 import {
-  ColorConfigAvatarColor,
-  ColorConfigBaseTone,
+  ColorConfigCardTone,
   ColorConfigInputMode,
   ColorConfigInputState,
-  ColorConfigState,
   ColorConfigStateTone,
-  ThemeColorAvatarTokens,
-  ThemeColorBadgeTokens,
   ThemeColorBaseTokens,
   ThemeColorButtonTokens,
   ThemeColorInputStateTokens,
   ThemeColorInputTokens,
   ThemeColorStateTokens,
   ThemeColorStatesTokens,
-  ThemeColorTokenValue,
   ThemeColorTokens,
 } from '../config'
+import {defaultColorTokens} from '../defaults/colorTokens'
 import {
-  THEME_COLOR_AVATAR_COLORS,
-  THEME_COLOR_BASE_TONES,
+  THEME_COLOR_CARD_TONES,
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_INPUT_STATES,
   THEME_COLOR_STATES,
   THEME_COLOR_STATE_TONES,
-  ThemeColorAvatarColorKey,
-  ThemeColorBaseToneKey,
+  ThemeColorCardToneKey,
   ThemeColorButtonModeKey,
   ThemeColorStateKey,
   ThemeColorStateToneKey,
-  ThemeColorSyntax,
 } from '../system'
-import {defaultColorTokens} from './defaults/colorTokens'
 import {merge} from './merge'
 
 /**
  * Convert a tree of color tokens from a sparse format to a dense format.
  */
 export function resolveColorTokens(inputTokens?: ThemeColorTokens): ThemeColorTokens {
-  const sparseTokens = merge(
-    defaultColorTokens as unknown as Record<string, unknown>,
-    (inputTokens ?? {}) as unknown as Record<string, unknown>,
-  )
+  const tokens = merge(defaultColorTokens, inputTokens)
 
   return {
-    avatar: resolveAvatarColorTokens(sparseTokens),
-    badge: resolveBadgeColorTokens(sparseTokens),
-    base: resolveBaseColorTokens(sparseTokens),
-    button: resolveButtonColorTokens(sparseTokens),
-    card: resolveCardColorTokens(sparseTokens),
-    input: resolveInputColorTokens(sparseTokens),
-    kbd: resolveKBDColorTokens(sparseTokens),
-    selectable: resolveSelectableColorTokens(sparseTokens),
-    spot: resolveSpotColorTokens(sparseTokens),
-    syntax: resolveSyntaxColorTokens(sparseTokens),
-  }
-}
-
-function resolveKBDColorTokens(sparseTokens: ThemeColorTokens) {
-  return sparseTokens?.kbd
-}
-
-function resolveAvatarColorTokens(sparseTokens: ThemeColorTokens) {
-  const tokens: Partial<Record<ColorConfigAvatarColor, ThemeColorAvatarTokens>> = {}
-
-  for (const color of THEME_COLOR_AVATAR_COLORS) {
-    tokens[color] = _resolveAvatarColorTokens(sparseTokens, color)
-  }
-
-  return tokens
-}
-
-function _resolveAvatarColorTokens(
-  sparseTokens: ThemeColorTokens,
-  color: ThemeColorAvatarColorKey,
-): ThemeColorAvatarTokens {
-  const spec0 = sparseTokens?.avatar?.[color]
-  const spec1 = sparseTokens?.avatar?.['*']
-
-  return {
-    ...spec1,
-    ...spec0,
-  }
-}
-
-function resolveBadgeColorTokens(sparseTokens: ThemeColorTokens) {
-  const tokens: Partial<Record<ColorConfigStateTone, ThemeColorAvatarTokens>> = {}
-
-  for (const tone of THEME_COLOR_STATE_TONES) {
-    tokens[tone] = _resolveBadgeColorTokens(sparseTokens, tone)
-  }
-
-  return tokens
-}
-
-function _resolveBadgeColorTokens(
-  sparseTokens: ThemeColorTokens,
-  tone: ThemeColorStateToneKey,
-): ThemeColorBadgeTokens {
-  const spec0 = sparseTokens?.badge?.[tone]
-  const spec1 = sparseTokens?.badge?.['*']
-
-  return {
-    ...spec1,
-    ...spec0,
+    base: resolveBaseColorTokens(tokens),
+    button: resolveButtonColorTokens(tokens),
+    input: resolveInputColorTokens(tokens),
+    selectable: resolveSelectableColorTokens(tokens),
+    syntax: tokens.syntax,
   }
 }
 
 function resolveBaseColorTokens(sparseTokens: ThemeColorTokens) {
-  const tokens: Partial<Record<ColorConfigBaseTone, ThemeColorBaseTokens>> = {}
+  const tokens: Partial<Record<ColorConfigCardTone, ThemeColorBaseTokens>> = {}
 
   // base tones
-  for (const tone of THEME_COLOR_BASE_TONES) {
+  for (const tone of THEME_COLOR_CARD_TONES) {
     tokens[tone] = resolveBaseColorTones(sparseTokens, tone)
   }
 
@@ -120,233 +54,278 @@ function resolveBaseColorTokens(sparseTokens: ThemeColorTokens) {
 }
 
 function resolveBaseColorTones(
-  sparseTokens: ThemeColorTokens,
-  tone: ThemeColorBaseToneKey,
+  inputTokens: ThemeColorTokens,
+  tone: ThemeColorCardToneKey,
 ): ThemeColorBaseTokens {
-  const spec0 = sparseTokens?.base?.[tone]
-  const spec1 = sparseTokens?.base?.['*']
+  const spec = merge(inputTokens?.base?.['*'], inputTokens?.base?.[tone])
+
+  const hue = spec._hue || inputTokens?.base?.[tone]?._hue || 'gray'
 
   return {
-    ...spec1,
-    ...spec0,
-    shadow: {...spec1?.shadow, ...spec0?.shadow},
-    skeleton: {...spec1?.skeleton, ...spec0?.skeleton},
+    ...spec,
+    _hue: hue,
+    avatar: {
+      gray: merge({_hue: 'gray'}, spec.avatar?.['*'], spec.avatar?.gray),
+      blue: merge({_hue: 'blue'}, spec.avatar?.['*'], spec.avatar?.blue),
+      purple: merge({_hue: 'purple'}, spec.avatar?.['*'], spec.avatar?.purple),
+      magenta: merge({_hue: 'magenta'}, spec.avatar?.['*'], spec.avatar?.magenta),
+      red: merge({_hue: 'red'}, spec.avatar?.['*'], spec.avatar?.red),
+      orange: merge({_hue: 'orange'}, spec.avatar?.['*'], spec.avatar?.orange),
+      yellow: merge({_hue: 'yellow'}, spec.avatar?.['*'], spec.avatar?.yellow),
+      green: merge({_hue: 'green'}, spec.avatar?.['*'], spec.avatar?.green),
+      cyan: merge({_hue: 'cyan'}, spec.avatar?.['*'], spec.avatar?.cyan),
+    },
+    badge: {
+      default: {
+        _hue: inputTokens?.base?.default?._hue || hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.default,
+      },
+      primary: {
+        _hue: inputTokens?.base?.primary?._hue || hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.primary,
+      },
+      positive: {
+        _hue: inputTokens?.base?.positive?._hue || hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.positive,
+      },
+      caution: {
+        _hue: inputTokens?.base?.caution?._hue || hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.caution,
+      },
+      critical: {
+        _hue: inputTokens?.base?.critical?._hue || hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.critical,
+      },
+    },
   }
 }
 
 function resolveButtonColorTokens(
-  sparseTokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
 ): Partial<Record<ThemeColorButtonModeKey, ThemeColorButtonTokens>> {
   const tokens: Partial<Record<ThemeColorButtonModeKey, ThemeColorButtonTokens>> = {}
 
   for (const mode of THEME_COLOR_BUTTON_MODES) {
-    tokens[mode] = resolveButtonToneColorTokens(sparseTokens, mode)
+    tokens[mode] = resolveButtonToneColorTokens(inputTokens, mode)
   }
 
   return tokens
 }
 
 function resolveButtonToneColorTokens(
-  sparseTokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
   mode: ThemeColorButtonModeKey,
 ): ThemeColorButtonTokens {
   const tokens: ThemeColorButtonTokens = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
-    tokens[tone] = resolveButtonModeColorTokens(sparseTokens, mode, tone)
+    tokens[tone] = resolveButtonModeColorTokens(inputTokens, mode, tone)
   }
 
   return tokens
 }
 
 function resolveButtonModeColorTokens(
-  sparseTokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
   mode: ThemeColorButtonModeKey,
   tone: ThemeColorStateToneKey,
 ): ThemeColorStatesTokens {
-  const spec0 = sparseTokens.button?.[mode]?.[tone]
-  const spec1 = sparseTokens.button?.[mode]?.['*']
-  const tokens = {...spec1, ...spec0}
+  const tokens: ThemeColorStatesTokens = {}
 
   for (const state of THEME_COLOR_STATES) {
-    tokens[state] = resolveButtonStateColorTokens(sparseTokens, tone, mode, state)
+    tokens[state] = resolveButtonStateColorTokens(inputTokens, tone, mode, state)
   }
 
   return tokens
 }
 
 function resolveButtonStateColorTokens(
-  tokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
   tone: ThemeColorStateToneKey,
   mode: ThemeColorButtonModeKey,
   state: ThemeColorStateKey,
 ): ThemeColorStateTokens {
-  const spec0 = tokens?.button?.[mode]?.[tone]?.[state]
-  const spec1 = tokens?.button?.[mode]?.['*']?.[state]
-  const spec2 = tokens?.button?.[mode]?.[tone]?.['*']
-  const spec3 = tokens?.button?.[mode]?.['*']?.['*']
+  const spec = merge(
+    inputTokens?.button?.[mode]?.['*']?.['*'],
+    inputTokens?.button?.[mode]?.[tone]?.['*'],
+    inputTokens?.button?.[mode]?.['*']?.[state],
+    inputTokens?.button?.[mode]?.[tone]?.[state],
+  )
 
-  const hue = spec0?._hue || spec1?._hue || spec2?._hue || spec3?._hue || tokens?.base?.[tone]?._hue
-
-  return {
-    ...spec3,
-    ...spec2,
-    ...spec1,
-    ...spec0,
-    _hue: hue,
-    muted: {...spec3?.muted, ...spec2?.muted, ...spec1?.muted, ...spec0?.muted},
-    accent: {...spec3?.accent, ...spec2?.accent, ...spec1?.accent, ...spec0?.accent},
-    link: {...spec3?.link, ...spec2?.link, ...spec1?.link, ...spec0?.link},
-    code: {...spec3?.code, ...spec2?.code, ...spec1?.code, ...spec0?.code},
-    skeleton: {...spec3?.skeleton, ...spec2?.skeleton, ...spec1?.skeleton, ...spec0?.skeleton},
-  }
-}
-
-function resolveCardColorTokens(
-  sparseTokens: ThemeColorTokens,
-): Partial<Record<ColorConfigState, ThemeColorStateTokens>> {
-  const tokens: Partial<Record<ColorConfigState, ThemeColorStateTokens>> = {}
-
-  for (const state of THEME_COLOR_STATES) {
-    tokens[state] = resolveCardStateColorTokens(sparseTokens, state)
-  }
-
-  return tokens
-}
-
-function resolveCardStateColorTokens(
-  tokens: ThemeColorTokens,
-  state: ThemeColorStateKey,
-): ThemeColorStateTokens {
-  const spec0 = tokens?.card?.[state]
-  const spec1 = tokens?.card?.['*']
-
-  const hue = spec0?._hue || spec1?._hue
+  const hue = spec._hue || inputTokens?.base?.[tone]?._hue
 
   return {
-    ...spec1,
-    ...spec0,
+    ...spec,
     _hue: hue,
-    muted: {...spec1?.muted, ...spec0?.muted},
-    accent: {...spec1?.accent, ...spec0?.accent},
-    link: {...spec1?.link, ...spec0?.link},
-    code: {...spec1?.code, ...spec0?.code},
-    skeleton: {...spec1?.skeleton, ...spec0?.skeleton},
+    avatar: {
+      gray: merge({_hue: 'gray'}, spec.avatar?.['*'], spec.avatar?.gray),
+      blue: merge({_hue: 'blue'}, spec.avatar?.['*'], spec.avatar?.blue),
+      purple: merge({_hue: 'purple'}, spec.avatar?.['*'], spec.avatar?.purple),
+      magenta: merge({_hue: 'magenta'}, spec.avatar?.['*'], spec.avatar?.magenta),
+      red: merge({_hue: 'red'}, spec.avatar?.['*'], spec.avatar?.red),
+      orange: merge({_hue: 'orange'}, spec.avatar?.['*'], spec.avatar?.orange),
+      yellow: merge({_hue: 'yellow'}, spec.avatar?.['*'], spec.avatar?.yellow),
+      green: merge({_hue: 'green'}, spec.avatar?.['*'], spec.avatar?.green),
+      cyan: merge({_hue: 'cyan'}, spec.avatar?.['*'], spec.avatar?.cyan),
+    },
+    badge: {
+      default: {
+        _hue: inputTokens?.base?.default?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.default,
+      },
+      primary: {
+        _hue: inputTokens?.base?.primary?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.primary,
+      },
+      positive: {
+        _hue: inputTokens?.base?.positive?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.positive,
+      },
+      caution: {
+        _hue: inputTokens?.base?.caution?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.caution,
+      },
+      critical: {
+        _hue: inputTokens?.base?.critical?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.critical,
+      },
+    },
   }
 }
 
 function resolveInputColorTokens(
-  sparseTokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
 ): Partial<Record<ColorConfigInputMode, ThemeColorInputTokens>> {
   const tokens: Partial<Record<ColorConfigInputMode, ThemeColorInputTokens>> = {}
 
   for (const mode of THEME_COLOR_INPUT_MODES) {
-    tokens[mode] = resolveInputModeColorTokens(sparseTokens, mode)
+    tokens[mode] = resolveInputModeColorTokens(inputTokens, mode)
   }
 
   return tokens
 }
 
 function resolveInputModeColorTokens(
-  sparseTokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
   mode: ColorConfigInputMode,
 ): ThemeColorInputTokens {
   const states: ThemeColorInputTokens = {}
 
   for (const state of THEME_COLOR_INPUT_STATES) {
-    states[state] = resolveInputStateColorTokens(sparseTokens, mode, state)
+    states[state] = resolveInputStateColorTokens(inputTokens, mode, state)
   }
 
   return states
 }
 
 function resolveInputStateColorTokens(
-  tokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
   mode: ColorConfigInputMode,
   state: ColorConfigInputState,
 ): ThemeColorInputStateTokens {
-  const spec0 = tokens?.input?.[mode]?.[state]
-  const spec1 = tokens?.input?.['*']?.[state]
-  const spec2 = tokens?.input?.[mode]?.['*']
-  const spec3 = tokens?.input?.['*']?.['*']
+  const spec = merge(
+    inputTokens?.input?.['*']?.['*'],
+    inputTokens?.input?.[mode]?.['*'],
+    inputTokens?.input?.['*']?.[state],
+    inputTokens?.input?.[mode]?.[state],
+  )
 
-  const hue =
-    spec0?._hue || spec1?._hue || spec2?._hue || spec3?._hue || tokens?.input?.[mode]?._hue
+  const hue = spec._hue || inputTokens?.input?.[mode]?._hue
 
-  return {
-    ...spec3,
-    ...spec2,
-    ...spec1,
-    ...spec0,
-    _hue: hue,
-  }
+  return {...spec, _hue: hue}
 }
 
 function resolveSelectableColorTokens(
-  sparseTokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
 ): Partial<Record<ColorConfigStateTone, {_hue?: ColorHueKey} & ThemeColorStatesTokens>> {
   const tokens: ThemeColorButtonTokens = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
-    tokens[tone] = resolveSelectableToneColorTokens(sparseTokens, tone)
+    tokens[tone] = resolveSelectableToneColorTokens(inputTokens, tone)
   }
 
   return tokens
 }
 
 function resolveSelectableToneColorTokens(
-  sparseTokens: ThemeColorTokens,
+  inputTokens: ThemeColorTokens,
   tone: ThemeColorStateToneKey,
 ): {_hue?: ColorHueKey} & ThemeColorStatesTokens {
   const states: {_hue?: ColorHueKey} & ThemeColorStatesTokens = {
-    _hue: sparseTokens?.selectable?.[tone]?._hue || sparseTokens?.base?.[tone]?._hue,
+    _hue: inputTokens?.selectable?.[tone]?._hue || inputTokens?.base?.[tone]?._hue,
   }
 
   for (const state of THEME_COLOR_STATES) {
-    states[state] = resolveSelectableStateColorTokens(sparseTokens, state, tone)
+    states[state] = resolveSelectableStateColorTokens(inputTokens, tone, state)
   }
 
   return states
 }
 
 function resolveSelectableStateColorTokens(
-  tokens: ThemeColorTokens,
-  state: ThemeColorStateKey,
+  inputTokens: ThemeColorTokens,
   tone: ThemeColorStateToneKey,
+  state: ThemeColorStateKey,
 ) {
-  const spec0 = tokens?.selectable?.[tone]?.[state]
-  const spec1 = tokens?.selectable?.['*']?.[state]
-  const spec2 = tokens?.selectable?.[tone]?.['*']
-  const spec3 = tokens?.selectable?.['*']?.['*']
+  const spec = merge(
+    inputTokens?.selectable?.['*']?.['*'],
+    inputTokens?.selectable?.[tone]?.['*'],
+    inputTokens?.selectable?.['*']?.[state],
+    inputTokens?.selectable?.[tone]?.[state],
+  )
 
-  const hue = spec0?._hue || spec1?._hue || spec2?._hue || spec3?._hue || tokens?.base?.[tone]?._hue
+  const hue = spec._hue || inputTokens?.base?.[tone]?._hue
 
   return {
-    ...spec3,
-    ...spec2,
-    ...spec1,
-    ...spec0,
+    ...spec,
     _hue: hue,
-    muted: {...spec3?.muted, ...spec2?.muted, ...spec1?.muted, ...spec0?.muted},
-    accent: {...spec3?.accent, ...spec2?.accent, ...spec1?.accent, ...spec0?.accent},
-    link: {...spec3?.link, ...spec2?.link, ...spec1?.link, ...spec0?.link},
-    code: {...spec3?.code, ...spec2?.code, ...spec1?.code, ...spec0?.code},
-    skeleton: {...spec3?.skeleton, ...spec2?.skeleton, ...spec1?.skeleton, ...spec0?.skeleton},
-  }
-}
-
-function resolveSpotColorTokens(
-  sparseTokens: ThemeColorTokens,
-): Partial<Record<ColorHueKey, ThemeColorTokenValue>> {
-  return {
-    ...sparseTokens.spot,
-  }
-}
-
-function resolveSyntaxColorTokens(
-  sparseTokens: ThemeColorTokens,
-): Partial<Record<keyof ThemeColorSyntax, ThemeColorTokenValue>> {
-  return {
-    ...sparseTokens.syntax,
+    avatar: {
+      gray: merge({_hue: 'gray'}, spec.avatar?.['*'], spec.avatar?.gray),
+      blue: merge({_hue: 'blue'}, spec.avatar?.['*'], spec.avatar?.blue),
+      purple: merge({_hue: 'purple'}, spec.avatar?.['*'], spec.avatar?.purple),
+      magenta: merge({_hue: 'magenta'}, spec.avatar?.['*'], spec.avatar?.magenta),
+      red: merge({_hue: 'red'}, spec.avatar?.['*'], spec.avatar?.red),
+      orange: merge({_hue: 'orange'}, spec.avatar?.['*'], spec.avatar?.orange),
+      yellow: merge({_hue: 'yellow'}, spec.avatar?.['*'], spec.avatar?.yellow),
+      green: merge({_hue: 'green'}, spec.avatar?.['*'], spec.avatar?.green),
+      cyan: merge({_hue: 'cyan'}, spec.avatar?.['*'], spec.avatar?.cyan),
+    },
+    badge: {
+      default: {
+        _hue: inputTokens?.base?.default?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.default,
+      },
+      primary: {
+        _hue: inputTokens?.base?.primary?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.primary,
+      },
+      positive: {
+        _hue: inputTokens?.base?.positive?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.positive,
+      },
+      caution: {
+        _hue: inputTokens?.base?.caution?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.caution,
+      },
+      critical: {
+        _hue: inputTokens?.base?.critical?._hue,
+        ...spec.badge?.['*'],
+        ...spec.badge?.critical,
+      },
+    },
   }
 }

@@ -1,3 +1,4 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {forwardRef, useMemo} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
@@ -7,8 +8,7 @@ import {AvatarSize} from '../../types'
 import {Text} from '../text'
 
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
-  const {theme} = props
-  const {avatar, media} = theme.sanity
+  const {avatar, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size]
@@ -24,7 +24,7 @@ function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeP
 }
 
 function _avatarCounterBaseStyle(props: ThemeProps) {
-  const {theme} = props
+  const {space} = getTheme_v2(props.theme)
 
   return css`
     align-items: center;
@@ -37,7 +37,7 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
     box-shadow:
       0 0 0 1px var(--card-bg-color),
       inset 0 0 0 1px var(--card-hairline-hard-color);
-    padding: 0 ${rem(theme.sanity.space[2])};
+    padding: 0 ${rem(space[2])};
 
     &:not([hidden]) {
       display: flex;
