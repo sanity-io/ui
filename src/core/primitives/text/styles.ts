@@ -64,6 +64,10 @@ export function textBaseStyle(
     & [data-sanity-icon] {
       vertical-align: baseline;
       color: var(--card-icon-color);
+
+      & path {
+        vector-effect: non-scaling-stroke !important;
+      }
     }
   `
 }
