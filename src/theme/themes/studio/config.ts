@@ -7,8 +7,8 @@ export const config: Omit<RootTheme, 'color' | 'fonts'> = {
   avatar: {
     sizes: [
       {distance: -3, size: 19},
-      {distance: -6, size: 31},
-      {distance: -9, size: 51},
+      {distance: -6, size: 25},
+      {distance: -9, size: 35},
     ],
     focusRing: {offset: 0, width: 1},
   },
