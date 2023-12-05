@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.33](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.32...v2.0.0-alpha.33) (2023-12-05)
+
+### Features
+
+- reduce default button focus width ([3dfd9d9](https://github.com/sanity-io/ui/commit/3dfd9d9d52dac439da935e0c0e60554c76e3c26d))
+- update default avatar sizes ([bca18e9](https://github.com/sanity-io/ui/commit/bca18e970d371bcd9effad039273ada6bfba1d4b))
+
 ## [2.0.0-alpha.32](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.31...v2.0.0-alpha.32) (2023-11-30)
 
 ### Features
