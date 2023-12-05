@@ -15,7 +15,7 @@ export const config: Omit<RootTheme, 'color' | 'fonts'> = {
   button: {
     textWeight: 'medium',
     border: {width: STROKE_WIDTH},
-    focusRing: {offset: -1, width: 2},
+    focusRing: {offset: -1, width: 1},
   },
   card: {
     border: {width: STROKE_WIDTH},
