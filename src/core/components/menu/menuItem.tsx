@@ -103,6 +103,8 @@ export const MenuItem = forwardRef(function MenuItem(
     [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
   )
 
+  const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
+
   const setRef = useCallback(
     (el: HTMLDivElement | null) => {
       ref.current = el
@@ -151,7 +153,11 @@ export const MenuItem = forwardRef(function MenuItem(
           )}
 
           {hotkeys && (
-            <Hotkeys fontSize={fontSize} keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />
+            <Hotkeys
+              fontSize={hotkeysFontSize}
+              keys={hotkeys}
+              style={{marginTop: -4, marginBottom: -4}}
+            />
           )}
 
           {iconRight && (

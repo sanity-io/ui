@@ -16,10 +16,12 @@ export interface HotkeysProps {
 }
 
 const Root = styled.kbd`
+  font: inherit;
+  padding: 1px;
+
   &:not([hidden]) {
     display: block;
   }
-  font: inherit;
 `
 
 const Key = styled(KBD)`
@@ -37,7 +39,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
   props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
   ref: React.Ref<HTMLElement>,
 ) {
-  const {fontSize, keys, padding, radius, space: spaceProp = 1, ...restProps} = props
+  const {fontSize, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
   const space = useArrayProp(spaceProp)
 
   if (!keys || keys.length === 0) {

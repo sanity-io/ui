@@ -40,7 +40,7 @@ export const Badge = forwardRef(function Badge(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     mode: _deprecated_mode,
     padding = 1,
-    radius = 2,
+    radius = 'full',
     tone = 'default',
     ...restProps
   } = props
