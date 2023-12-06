@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.0.4",
-    "@sanity/color": "3.0.0-beta.7",
+    "@sanity/color": "3.0.0-beta.8",
     "@sanity/icons": "^2.4.1",
     "csstype": "^3.1.2",
     "framer-motion": "^10.16.2",
@@ -88,7 +88,7 @@
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/pkg-utils": "^2.4.8",
     "@sanity/semantic-release-preset": "^4.1.4",
-    "@sanity/ui-workshop": "^2.0.2",
+    "@sanity/ui-workshop": "^2.0.3",
     "@storybook/addon-a11y": "^7.6.1",
     "@storybook/addon-docs": "^7.6.1",
     "@storybook/addon-essentials": "^7.6.1",
