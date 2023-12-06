@@ -68,7 +68,7 @@ export const ColorPreview = memo(function ColorPreview(props: {
           {showContrast && (
             <Box padding={1}>
               <Text size={0} weight="bold">
-                {contrast[dark ? 'dark' : 'light'].toFixed(1)}:1
+                {contrast[dark ? 'dark' : 'light'].toFixed(2)}:1
               </Text>
             </Box>
           )}
