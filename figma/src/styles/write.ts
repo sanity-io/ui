@@ -1,29 +1,30 @@
 import {
-  THEME_COLOR_BASE_TONES,
-  ThemeColorBase,
+  THEME_COLOR_CARD_TONES,
+  ThemeColorCard_v2,
+  ThemeColorShadow,
   ThemeShadow,
   parseColor,
-  studioTheme,
+  defaultTheme,
 } from '@sanity/ui/theme'
 import {SCHEMES} from '../vars/types'
+
+const theme = defaultTheme.v2!
 
 export function writeStyles(): void {
   const figmaEffectStyles = figma.getLocalEffectStyles()
 
-  const len = studioTheme.shadows.length
+  const len = theme.shadow.length
 
-  for (const tone of THEME_COLOR_BASE_TONES) {
+  for (const tone of THEME_COLOR_CARD_TONES) {
     for (const scheme of SCHEMES) {
+      const color = theme.color[scheme][tone]
+
       // focus ring
-      createOrReplaceFocusRingStyle(
-        figmaEffectStyles,
-        `${scheme}/${tone}/focus-ring`,
-        studioTheme.color[scheme][tone].base,
-      )
+      createOrReplaceFocusRingStyle(figmaEffectStyles, `${scheme}/${tone}/focus-ring`, color)
 
       // shadow
       for (let i = 0; i < len; i += 1) {
-        const shadow = studioTheme.shadows[i]
+        const shadow = theme.shadow[i]
 
         if (!shadow) {
           continue
@@ -34,7 +35,7 @@ export function writeStyles(): void {
           figmaEffectStyles,
           `${scheme}/${tone}/shadow-${i}`,
           shadow,
-          studioTheme.color[scheme][tone].base.shadow,
+          color.shadow,
         )
       }
     }
@@ -44,7 +45,7 @@ export function writeStyles(): void {
 function createOrReplaceFocusRingStyle(
   figmaEffectStyles: EffectStyle[],
   name: string,
-  baseColor: ThemeColorBase,
+  cardColor: ThemeColorCard_v2,
 ) {
   let style = figmaEffectStyles.find((style) => style.name === name)
 
@@ -53,8 +54,8 @@ function createOrReplaceFocusRingStyle(
     style.name = name
   }
 
-  const bgColor = parseColor(baseColor.bg)
-  const outlineColor = parseColor(baseColor.focusRing)
+  const bgColor = parseColor(cardColor.bg)
+  const outlineColor = parseColor(cardColor.focusRing)
 
   style.effects = [
     // outline
@@ -95,7 +96,7 @@ function createOrReplaceShadowStyle(
   figmaEffectStyles: EffectStyle[],
   name: string,
   shadow: ThemeShadow,
-  shadowColor: ThemeColorBase['shadow'],
+  shadowColor: ThemeColorShadow,
 ) {
   let style = figmaEffectStyles.find((style) => style.name === name)
 
@@ -169,7 +170,7 @@ function createOrReplaceShadowStyle(
       },
       offset: {x: 0, y: 0},
       radius: 0,
-      spread: studioTheme.card.shadow.outline,
+      spread: theme.card.shadow.outline,
       visible: true,
       blendMode: 'PASS_THROUGH',
     },
