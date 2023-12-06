@@ -45,10 +45,12 @@ import {ThemeColorSchemeKey, studioTheme} from '../../src/theme'
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (
-  <Stack space={2} marginTop={2} paddingY={2}>
-    <Text weight="semibold" size={2}>
-      {title}
-    </Text>
+  <Stack space={2}>
+    <Box marginBottom={3}>
+      <Text weight="semibold" size={1}>
+        {title}
+      </Text>
+    </Box>
     {children}
   </Stack>
 )
@@ -120,90 +122,18 @@ export function Tones(): ReactNode {
         <Flex gap={2} paddingTop={2} wrap={'wrap'} width={1400}>
           {tones.map((tone) => (
             <Card tone={tone} {...props} key={tone}>
-              <Stack space={2}>
-                <Heading style={{textTransform: 'capitalize'}}>{tone}</Heading>
-                <Text>Text</Text>
-                <Label>Label</Label>
-                <Flex gap={2}>
-                  <Badge>Badge</Badge>
-                  <Badge mode="outline">Badge</Badge>
-                </Flex>
-                <Wrapper title="Inputs">
-                  <TextInput placeholder="placeholder" />
-                  <TextInput value="Value" />
-                  <TextArea value="TextArea" />
-                  <Select>
-                    <option>Think</option>
-                  </Select>
-                  <Flex gap={2} align={'center'} padding={2}>
-                    <Text>Avatar</Text>
-                    <Avatar size={0} initials="PB" />
-                  </Flex>
-                  <Flex gap={2} align={'center'} padding={2}>
-                    <Text>Radio</Text>
-                    <Flex justify="center" padding={1} gap={2}>
-                      <Radio defaultChecked={false} />
-                      <Radio defaultChecked={true} />
-                    </Flex>
-                  </Flex>
-                  <Flex gap={2} align={'center'} padding={2}>
-                    <Text>Checkbox</Text>
-                    <Flex justify="center" padding={1} gap={2}>
-                      <Checkbox checked />
-                      <Checkbox checked={false} />
-                      <Checkbox indeterminate />
-                    </Flex>
-                  </Flex>
-                  <Flex gap={2} align={'center'} padding={2}>
-                    <Text>Switch</Text>
-                    <Flex justify={'center'} paddingY={2}>
-                      <Inline space={[3, 3, 4, 5]}>
-                        <Switch checked />
-                        <Switch indeterminate />
-                        <Switch />
-                      </Inline>
-                    </Flex>
-                  </Flex>
-                  <Flex gap={4} align={'center'} padding={2}>
-                    <Text>Spinner</Text>
-                    <Spinner muted />
-                  </Flex>
-                </Wrapper>
-                <Wrapper title="Buttons">
-                  <Button text={tone} />
-                  <Button text={tone} mode="bleed" />
-                  <Button text={tone + '-muted'} muted mode="bleed" />
-                  <Button text={tone} mode="ghost" />
-                  <Button text={tone + '-muted'} muted mode="ghost" />
-                </Wrapper>
-                <Wrapper title="Hotkeys and KBD">
-                  <Hotkeys keys={['Ctrl', 'Shift', 'P']} padding={2} />
-                  <Flex>
-                    <KBD padding={2}> Ctrl </KBD>
-                  </Flex>
-                </Wrapper>
-                <Wrapper title="Tabs">
-                  <TabList space={2}>
-                    <Tab label="Content" selected id={''} aria-controls={''} />
-                    <Tab label="Preview" aria-controls={''} id={''} />
-                  </TabList>
-                </Wrapper>
-                <Wrapper title="Menu">
-                  <MenuButton
-                    button={<Button text="Open menu" />}
-                    id="menu-button-example"
-                    menu={
-                      <Menu>
-                        <MenuItem text="Option 1" />
-                        <MenuItem text="Option 2" />
-                        <MenuDivider />
-                        <MenuItem text="Option 3" />
-                      </Menu>
-                    }
-                  />
-                  <PopoverExample />
-                </Wrapper>
-                <Wrapper title="Avatars">
+              <Stack space={6}>
+                <Card border padding={2} radius={2} tone={tone}>
+                  <Text
+                    align="center"
+                    size={1}
+                    style={{textTransform: 'capitalize'}}
+                    weight="semibold"
+                  >
+                    {tone}
+                  </Text>
+                </Card>
+                <Wrapper title="Avatar">
                   <Flex gap={2} wrap={'wrap'}>
                     <Avatar initials="AB" />
                     <Avatar initials="AB" color="blue" />
@@ -217,6 +147,18 @@ export function Tones(): ReactNode {
                     <Avatar initials="AB" color="yellow" />
                   </Flex>
                 </Wrapper>
+                <Wrapper title="Badge">
+                  <Flex>
+                    <Badge>Badge</Badge>
+                  </Flex>
+                </Wrapper>
+                <Wrapper title="Button">
+                  <Button text={tone} />
+                  <Button text={tone} mode="bleed" />
+                  <Button text={tone + '-muted'} muted mode="bleed" />
+                  <Button text={tone} mode="ghost" />
+                  <Button text={tone + '-muted'} muted mode="ghost" />
+                </Wrapper>
                 <Wrapper title="Card as button (Tone inherit)">
                   <Card tone="inherit" shadow={1} as="button" padding={2} radius={2}>
                     <Text>Enabled</Text>
@@ -227,6 +169,13 @@ export function Tones(): ReactNode {
                   <Card tone="inherit" selected shadow={1} as="button" padding={2} radius={2}>
                     <Text>Selected</Text>
                   </Card>
+                </Wrapper>
+                <Wrapper title="Checkbox">
+                  <Flex gap={2}>
+                    <Checkbox checked />
+                    <Checkbox checked={false} />
+                    <Checkbox indeterminate />
+                  </Flex>
                 </Wrapper>
                 <Wrapper title="Code">
                   <Code size={2} language="javascript">
@@ -241,8 +190,74 @@ export function Tones(): ReactNode {
                     </Text>
                   </Flex>
                 </Wrapper>
+                <Wrapper title="Heading">
+                  <Heading>Heading</Heading>
+                </Wrapper>
+                <Wrapper title="Hotkeys">
+                  <Hotkeys keys={['Ctrl', 'Shift', 'P']} />
+                </Wrapper>
+                <Wrapper title="KBD">
+                  <Flex>
+                    <KBD> Ctrl </KBD>
+                  </Flex>
+                </Wrapper>
+                <Wrapper title="Label">
+                  <Label>Label</Label>
+                </Wrapper>
+                <Wrapper title="Menu / MenuButton / MenuDivider / MenuItem">
+                  <MenuButton
+                    button={<Button text="Open menu" />}
+                    id="menu-button-example"
+                    menu={
+                      <Menu>
+                        <MenuItem text="Option 1" />
+                        <MenuItem text="Option 2" />
+                        <MenuDivider />
+                        <MenuItem text="Option 3" />
+                      </Menu>
+                    }
+                  />
+                  <PopoverExample />
+                </Wrapper>
+                <Wrapper title="Radio">
+                  <Flex gap={2}>
+                    <Radio defaultChecked={false} />
+                    <Radio defaultChecked={true} />
+                  </Flex>
+                </Wrapper>
+                <Wrapper title="Select">
+                  <Select>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </Select>
+                </Wrapper>
                 <Wrapper title="Skeleton">
                   <SkeletonComponent />
+                </Wrapper>
+                <Wrapper title="Spinner">
+                  <Spinner muted />
+                </Wrapper>
+                <Wrapper title="Switch">
+                  <Inline space={3}>
+                    <Switch checked />
+                    <Switch indeterminate />
+                    <Switch />
+                  </Inline>
+                </Wrapper>
+                <Wrapper title="Tab / TabList">
+                  <TabList space={2}>
+                    <Tab label="Content" selected id={''} aria-controls={''} />
+                    <Tab label="Preview" aria-controls={''} id={''} />
+                  </TabList>
+                </Wrapper>
+                <Wrapper title="Text / TextArea / TextInput ">
+                  <Box paddingY={2}>
+                    <Text>Text</Text>
+                  </Box>
+                  <TextArea value="TextArea" />
+                  <TextInput placeholder="placeholder" />
+                  <TextInput value="Value" />
                 </Wrapper>
               </Stack>
             </Card>
