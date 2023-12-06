@@ -300,8 +300,8 @@ export const Dialog = forwardRef(function Dialog(
   const {
     __unstable_autoFocus: autoFocus = true,
     __unstable_hideCloseButton: hideCloseButton = false,
-    cardRadius: cardRadiusProp = 3,
-    cardShadow = 4,
+    cardRadius: cardRadiusProp = 4,
+    cardShadow = 3,
     children,
     contentRef,
     footer,
