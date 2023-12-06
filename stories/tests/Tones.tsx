@@ -41,6 +41,7 @@ import {
 } from '../../src/core/primitives'
 import {ThemeProvider} from '../../src/core/theme'
 import {ThemeColorSchemeKey, studioTheme} from '../../src/theme'
+import {LayerProvider} from '../../src/core'
 
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
@@ -198,7 +199,7 @@ export function Tones(): ReactNode {
                 </Wrapper>
                 <Wrapper title="KBD">
                   <Flex>
-                    <KBD> Ctrl </KBD>
+                    <KBD>Ctrl</KBD>
                   </Flex>
                 </Wrapper>
                 <Wrapper title="Label">
@@ -218,6 +219,50 @@ export function Tones(): ReactNode {
                     }
                   />
                   <PopoverExample />
+
+                  <Card radius={3} shadow={2} tone="inherit">
+                    <LayerProvider>
+                      <Menu>
+                        <MenuItem text="Plain text" />
+                        <MenuItem>
+                          <Stack space={2}>
+                            <Text size={1} weight="medium">
+                              Badge
+                            </Text>
+                            <Flex>
+                              <Badge>Badge</Badge>
+                            </Flex>
+                          </Stack>
+                        </MenuItem>
+                        <MenuItem>
+                          <Stack space={2}>
+                            <Text size={1} weight="medium">
+                              KBD
+                            </Text>
+                            <Flex>
+                              <KBD>Ctrl</KBD>
+                            </Flex>
+                          </Stack>
+                        </MenuItem>
+                        <MenuItem>
+                          <Stack space={2}>
+                            <Text size={1} weight="medium">
+                              Label
+                            </Text>
+                            <Label>Label</Label>
+                          </Stack>
+                        </MenuItem>
+                        <MenuItem>
+                          <Stack space={2}>
+                            <Text size={1} weight="medium">
+                              Hotkeys
+                            </Text>
+                            <Hotkeys keys={['Ctrl', 'Shift', 'P']} />
+                          </Stack>
+                        </MenuItem>
+                      </Menu>
+                    </LayerProvider>
+                  </Card>
                 </Wrapper>
                 <Wrapper title="Radio">
                   <Flex gap={2}>
