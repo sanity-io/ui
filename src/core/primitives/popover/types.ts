@@ -2,5 +2,5 @@
 export type PopoverUpdateCallback = () => void
 
 /** @public */
-// TODO: remove `auto` from PopoverWidth
+// todo: remove `auto` from PopoverWidth
 export type PopoverWidth = number | 'auto'
