@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.34](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.33...v2.0.0-alpha.34) (2023-12-06)
+
+### Features
+
+- update KBD styles and default props ([f405b03](https://github.com/sanity-io/ui/commit/f405b031a404aff8a95ce2e96ca56787999ce419))
+
 ## [2.0.0-alpha.33](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.32...v2.0.0-alpha.33) (2023-12-05)
 
 ### Features
