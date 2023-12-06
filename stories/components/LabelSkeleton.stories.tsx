@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {LabelSkeleton, Skeleton} from '../../src/core/components'
-import {fonts} from '../../src/theme/themes/studio/fonts'
+import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
 
@@ -41,7 +41,7 @@ export const Sizes: Story = {
         {columnBuilder({
           gap: 4,
           renderItem: ({value, index}) => <LabelSkeleton {...props} key={index} size={value} />,
-          rows: [...Array(fonts['code'].sizes.length).keys()],
+          rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
         })}
       </>
     )

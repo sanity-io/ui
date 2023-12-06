@@ -7,7 +7,7 @@ import {
 } from '../../../__workshop__/constants'
 
 export default function PropsStory() {
-  const mode = useSelect('Mode', WORKSHOP_BADGE_MODE_OPTIONS, 'default', 'Props')
+  const mode = useSelect('Mode (deprecated)', WORKSHOP_BADGE_MODE_OPTIONS, 'default', 'Props')
   const paddingX = useSelect('Padding X', WORKSHOP_SPACE_OPTIONS, 1, 'Props')
   const paddingY = useSelect('Padding Y', WORKSHOP_SPACE_OPTIONS, 1, 'Props')
   const tone = useSelect('Tone', WORKSHOP_BADGE_TONE_OPTIONS, 'default', 'Props')
