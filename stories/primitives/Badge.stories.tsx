@@ -1,8 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Badge, Flex, Stack} from '../../src/core/primitives'
-import {BADGE_MODES, BADGE_TONES, RADII} from '../constants'
+import {Badge, Card, Flex, Stack} from '../../src/core/primitives'
+import {BADGE_TONES, CARD_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
-import {matrixBuilder} from '../helpers/matrixBuilder'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Badge> = {
@@ -45,22 +44,6 @@ export const Radius: Story = {
   ),
 }
 
-export const Modes: Story = {
-  parameters: {
-    controls: {
-      include: ['fontSize', 'padding', 'radius'],
-    },
-  },
-  render: (props) => (
-    <Flex gap={3}>
-      <Badge {...props}>Default</Badge>
-      <Badge {...props} mode="outline">
-        Outline
-      </Badge>
-    </Flex>
-  ),
-}
-
 export const Tones: Story = {
   parameters: {
     controls: {
@@ -82,39 +65,21 @@ export const Tones: Story = {
   ),
 }
 
-export const MultipleStyles: Story = {
-  args: {
-    children: 'Badge',
+export const InheritedTones: Story = {
+  render: (props) => {
+    return (
+      <Stack space={3}>
+        {rowBuilder({
+          renderItem: ({value}) => (
+            <Card border key={value} padding={4} tone={value}>
+              <Flex align="center">
+                <Badge {...props}>{value}</Badge>
+              </Flex>
+            </Card>
+          ),
+          rows: CARD_TONES,
+        })}
+      </Stack>
+    )
   },
-  parameters: {
-    controls: {
-      include: ['fontSize', 'padding', 'radius'],
-    },
-  },
-  render: (props) => (
-    <Stack space={3}>
-      {matrixBuilder({
-        scheme: 'light',
-        columns: BADGE_TONES,
-        rows: BADGE_MODES,
-        title: 'Mode / Tone',
-        renderItem: ({row, column}) => (
-          <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
-            <Badge {...props} mode={row} tone={column} />
-          </Flex>
-        ),
-      })}
-      {matrixBuilder({
-        scheme: 'dark',
-        columns: BADGE_TONES,
-        rows: BADGE_MODES,
-        title: 'Mode / Tone',
-        renderItem: ({row, column}) => (
-          <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
-            <Badge {...props} mode={row} tone={column} />
-          </Flex>
-        ),
-      })}
-    </Stack>
-  ),
 }
