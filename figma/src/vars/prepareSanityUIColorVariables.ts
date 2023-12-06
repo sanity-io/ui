@@ -1,130 +1,82 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
-  THEME_COLOR_BASE_TONES,
   THEME_COLOR_BUTTON_MODES,
+  THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_INPUT_STATES,
   THEME_COLOR_STATES,
   THEME_COLOR_STATE_TONES,
-  ThemeColorSpotKey,
-  studioTheme,
+  defaultTheme,
 } from '@sanity/ui/theme'
 import {get} from 'segmented-property'
 import {WriteConfig} from '../config'
 import {BASE_KEYS, FigmaSanityUIColorVariable, INPUT_KEYS, SCHEMES, STATE_KEYS} from './types'
 
-const AVATAR_COLORS: ThemeColorSpotKey[] = [
-  'gray',
-  'blue',
-  'purple',
-  'magenta',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'cyan',
-]
+const theme = defaultTheme.v2!
 
 export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityUIColorVariable[] {
   const variables: FigmaSanityUIColorVariable[] = []
 
   for (const scheme of SCHEMES) {
-    for (const tone of THEME_COLOR_BASE_TONES) {
+    for (const tone of THEME_COLOR_CARD_TONES) {
       const toneConfig = config.tones[tone]
 
       if (!toneConfig) continue
 
-      const toneColor = studioTheme.color[scheme][tone]
+      const toneColor = theme.color[scheme][tone]
 
       // base
       for (const key of BASE_KEYS) {
-        const baseColor = toneColor.base
+        if (key.startsWith('accent') && !toneConfig.accent) continue
+        if (key.startsWith('avatar') && !toneConfig.avatar) continue
+        if (key.startsWith('badge') && !toneConfig.badge) continue
+        if (key.startsWith('code') && !toneConfig.code) continue
+        if (key.startsWith('kbd') && !toneConfig.kbd) continue
+        if (key.startsWith('link') && !toneConfig.link) continue
+        if (key.startsWith('skeleton') && !toneConfig.skeleton) continue
 
         variables.push({
           scheme,
           tone,
           key,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          value: get(baseColor as any, key.replace(/-/g, '/')) as any,
+          value: get(toneColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
         })
-      }
-
-      // avatar
-      if (toneConfig.avatar) {
-        for (const color of AVATAR_COLORS) {
-          const avatarColor = toneColor.avatar?.[color]
-
-          variables.push({
-            scheme,
-            tone,
-            key: `avatar/${color}/bg`,
-            value: avatarColor?.bg,
-          })
-
-          variables.push({
-            scheme,
-            tone,
-            key: `avatar/${color}/fg`,
-            value: avatarColor?.fg,
-          })
-        }
-      }
-
-      // badge
-      if (toneConfig.badge) {
-        for (const badgeTone of THEME_COLOR_STATE_TONES) {
-          const badgeColor = toneColor.badge?.[badgeTone]
-
-          variables.push({
-            scheme,
-            tone,
-            key: `badge/${badgeTone}/bg`,
-            value: badgeColor?.bg,
-          })
-
-          variables.push({
-            scheme,
-            tone,
-            key: `badge/${badgeTone}/fg`,
-            value: badgeColor?.fg,
-          })
-        }
       }
 
       // button
       if (toneConfig.button) {
         for (const mode of THEME_COLOR_BUTTON_MODES) {
+          if (!toneConfig?.button?.modes?.[mode]) {
+            continue
+          }
+
           for (const buttonTone of THEME_COLOR_STATE_TONES) {
+            const buttonToneConfig = toneConfig.button.modes[mode]?.[buttonTone]
+
+            if (!buttonToneConfig) {
+              continue
+            }
+
             for (const state of THEME_COLOR_STATES) {
               for (const key of STATE_KEYS) {
+                if (key.startsWith('accent') && !buttonToneConfig.accent) continue
+                if (key.startsWith('avatar') && !buttonToneConfig.avatar) continue
+                if (key.startsWith('badge') && !buttonToneConfig.badge) continue
+                if (key.startsWith('code') && !buttonToneConfig.code) continue
+                if (key.startsWith('kbd') && !buttonToneConfig.kbd) continue
+                if (key.startsWith('link') && !buttonToneConfig.link) continue
+                if (key.startsWith('skeleton') && !buttonToneConfig.skeleton) continue
+
                 const buttonColor = toneColor.button[mode][buttonTone][state]
 
                 variables.push({
                   scheme,
                   tone,
                   key: `button/${mode}/${buttonTone}/${state}/${key}`,
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  value: get(buttonColor as any, key.replace(/-/g, '/')) as any,
+                  value: get(buttonColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
                 })
               }
-            }
-          }
-        }
-      }
-
-      // card
-      if (toneConfig.card) {
-        for (const state of THEME_COLOR_STATES) {
-          if (toneConfig.card[state]) {
-            for (const key of STATE_KEYS) {
-              const cardColor = toneColor.card[state]
-
-              variables.push({
-                scheme,
-                tone,
-                key: `card/${state}/${key}`,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                value: get(cardColor as any, key.replace(/-/g, '/')) as any,
-              })
             }
           }
         }
@@ -141,53 +93,42 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
                 scheme,
                 tone,
                 key: `input/${mode}/${state}/${key}`,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                value: get(inputColor as any, key.replace(/-/g, '/')) as any,
+                value: get(inputColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
               })
             }
           }
         }
       }
 
-      // kbd
-      if (toneConfig.kbd) {
-        const kbdColor = toneColor.kbd
-
-        variables.push(
-          {
-            scheme,
-            tone,
-            key: `kbd/bg`,
-            value: kbdColor?.bg,
-          },
-          {
-            scheme,
-            tone,
-            key: `kbd/fg`,
-            value: kbdColor?.fg,
-          },
-          {
-            scheme,
-            tone,
-            key: `kbd/border`,
-            value: kbdColor?.border,
-          },
-        )
-      }
-
       // selectable
       if (toneConfig.selectable) {
         for (const selectableTone of THEME_COLOR_STATE_TONES) {
+          const selectableToneConfig = toneConfig.selectable[selectableTone]
+
+          if (!selectableToneConfig) {
+            continue
+          }
+
           for (const state of THEME_COLOR_STATES) {
             for (const key of STATE_KEYS) {
+              if (key.startsWith('accent') && !selectableToneConfig.accent) continue
+              if (key.startsWith('avatar') && !selectableToneConfig.avatar) continue
+              if (key.startsWith('badge') && !selectableToneConfig.badge) continue
+              if (key.startsWith('code') && !selectableToneConfig.code) continue
+              if (key.startsWith('kbd') && !selectableToneConfig.kbd) continue
+              if (key.startsWith('link') && !selectableToneConfig.link) continue
+              if (key.startsWith('skeleton') && !selectableToneConfig.skeleton) continue
+
               const selectableColor = toneColor.selectable?.[selectableTone][state]
 
               variables.push({
                 scheme,
                 tone,
                 key: `selectable/${selectableTone}/${state}/${key}`,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                value: get(selectableColor as any, key.replace(/-/g, '/')) as any,
+                value: get(
+                  selectableColor as any,
+                  key.replace(/\./g, '/').replace(/-/g, '/'),
+                ) as any,
               })
             }
           }

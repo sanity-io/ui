@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
 import {WriteConfig} from '../config'
-import {DRY_RUN} from './constants'
 import {
   ensureModeExists,
   getFigmaVariables,
@@ -14,6 +13,8 @@ export function writeVars(config: WriteConfig): void {
   const collection = getOrCreateColorVariableCollection('Color')
   const figmaVariables = getFigmaVariables(collection)
   const variables = prepareSanityUIColorVariables(config)
+
+  console.log('# of variables', variables.length)
 
   // make sure modes exist
   const lightMode = ensureModeExists(collection, 'light')
@@ -36,7 +37,7 @@ export function writeVars(config: WriteConfig): void {
       figmaVariables,
       variable.scheme === 'dark' ? darkMode : lightMode,
       variable,
-      {dryRun: DRY_RUN},
+      {dryRun: config.dryRun},
     )
 
     if (name) colorVariableNames.push(name)
@@ -50,7 +51,7 @@ export function writeVars(config: WriteConfig): void {
     }
 
     if (!colorVariableNames.includes(variable.name)) {
-      if (DRY_RUN) {
+      if (config.dryRun) {
         console.log('remove', variable.name)
       } else {
         variable.remove()
