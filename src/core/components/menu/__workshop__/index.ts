@@ -75,5 +75,10 @@ export default defineScope({
       title: 'Menu with shouldFocus',
       component: lazy(() => import('./shouldFocus')),
     },
+    {
+      name: 'avatar',
+      title: 'Avatar menu',
+      component: lazy(() => import('./avatarMenu')),
+    },
   ],
 })
