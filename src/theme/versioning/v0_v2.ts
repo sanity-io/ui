@@ -31,7 +31,10 @@ export function v0_v2(v0: RootTheme): RootTheme_v2 {
 
   const v2: RootTheme_v2 = {
     _version: 2,
-    avatar,
+    avatar: {
+      ...defaultThemeConfig.avatar,
+      ...avatar,
+    },
     button: {
       ...defaultThemeConfig.button,
       ...button,
@@ -57,7 +60,22 @@ export function v0_v2(v0: RootTheme): RootTheme_v2 {
     },
     container,
     font,
-    input,
+    input: {
+      ...defaultThemeConfig.input,
+      ...input,
+      checkbox: {
+        ...defaultThemeConfig.input.checkbox,
+        ...input.checkbox,
+      },
+      radio: {
+        ...defaultThemeConfig.input.radio,
+        ...input.radio,
+      },
+      switch: {
+        ...defaultThemeConfig.input.switch,
+        ...input.switch,
+      },
+    },
     layer: layer ?? defaultThemeConfig.layer,
     media,
     radius,

@@ -1,19 +1,19 @@
-import {ThemeAvatar} from './avatar'
+import {ThemeAvatar_v2} from './avatar'
 import {ThemeColorSchemes_v2, ThemeColorCard_v2} from './color'
 import {ThemeFocusRing} from './focusRing'
-import {ThemeFontWeightKey, ThemeFonts} from './fonts'
-import {ThemeInput} from './input'
+import {ThemeFontWeightKey, ThemeFonts} from './font'
+import {ThemeInput_v2} from './input'
 import {ThemeLayer} from './layer'
 import {ThemeShadow} from './shadow'
 import {ThemeStyles} from './styles'
-import {ThemeColor, ThemeColorSchemes} from './v0'
+import {ThemeAvatar, ThemeColor, ThemeColorSchemes, ThemeInput} from './v0'
 
 /**
  * @public
  */
 export interface RootTheme_v2 {
   _version: 2
-  avatar: ThemeAvatar
+  avatar: ThemeAvatar_v2
   button: {
     border: {width: number}
     focusRing: ThemeFocusRing
@@ -27,7 +27,7 @@ export interface RootTheme_v2 {
   color: ThemeColorSchemes_v2
   container: number[]
   font: ThemeFonts
-  input: ThemeInput
+  input: ThemeInput_v2
   layer: ThemeLayer
   media: number[]
   radius: number[]

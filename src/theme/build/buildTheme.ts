@@ -15,9 +15,14 @@ export function buildTheme(config?: ThemeConfig): RootTheme {
     avatar: config?.avatar ?? defaultThemeConfig.avatar,
     button: config?.button ?? defaultThemeConfig.button,
     card: config?.card ?? defaultThemeConfig.card,
+    // How colors are generated:
+    // 1. Merge custom tokens with default tokens
+    // 2. Generate tree of color keys (gray/500, black, white, etc.)
+    // 3. Apply mixing and render to hex values
+    // render(build(mergeWithDefaults()))
     color: renderThemeColorSchemes(colorTheme, config),
     container: config?.container ?? defaultThemeConfig.container,
-    font: config?.fonts ?? defaultThemeFonts,
+    font: config?.font ?? defaultThemeFonts,
     input: config?.input ?? defaultThemeConfig.input,
     layer: config?.layer ?? defaultThemeConfig.layer,
     media: config?.media ?? defaultThemeConfig.media,
