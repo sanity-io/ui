@@ -7,6 +7,7 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
+import {fontsPlugin} from './src/core/__workshop__/fontsPlugin'
 
 Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
@@ -32,7 +33,7 @@ export default defineConfig({
       title: 'Utils',
     },
   ],
-  plugins: [perfPlugin()],
+  plugins: [fontsPlugin(), perfPlugin()],
   theme: defaultTheme,
   title: '@sanity/ui',
 })
