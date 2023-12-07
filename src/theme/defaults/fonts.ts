@@ -207,8 +207,8 @@ export const defaultThemeFonts: ThemeFonts = {
         letterSpacing: 0,
       },
       {
-        ascenderHeight: 8.5,
-        descenderHeight: 7.5,
+        ascenderHeight: 8,
+        descenderHeight: 8,
         fontSize: 21,
         iconSize: 33,
         lineHeight: 31,
