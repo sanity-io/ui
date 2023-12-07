@@ -15,8 +15,11 @@ export function getTheme_v2(theme: Theme): Theme_v2 {
   const v2: Theme_v2 = {
     _version: 2,
     avatar: theme.sanity.avatar,
-    button: theme.sanity.button,
-    card: theme.sanity.card,
+    button: {
+      ...defaultThemeConfig.button,
+      ...theme.sanity.button,
+    },
+    card: defaultThemeConfig.card,
     color: themeColor_v0_v2(theme.sanity.color),
     container: theme.sanity.container,
     font: theme.sanity.fonts,
