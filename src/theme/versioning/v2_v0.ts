@@ -20,7 +20,6 @@ export function v2_v0(v2: RootTheme_v2): RootTheme {
   const {
     avatar,
     button,
-    card,
     color,
     container,
     font: fonts,
@@ -36,7 +35,6 @@ export function v2_v0(v2: RootTheme_v2): RootTheme {
     _version: 0,
     avatar,
     button,
-    card,
     container,
     color: {
       light: {

@@ -41,36 +41,64 @@ export interface RootTheme_v2 {
  */
 export interface BaseTheme {
   _version?: 0
+  /**
+   * @deprecated Use `v2.avatar` instead
+   */
   avatar: ThemeAvatar
+  /**
+   * @deprecated Use `v2.button` instead
+   */
   button: {
-    border: {width: number}
-    focusRing: ThemeFocusRing
     textWeight: ThemeFontWeightKey
   }
-  card: {
-    border: {width: number}
-    focusRing: ThemeFocusRing
-    shadow: {outline: number}
-  }
+  /**
+   * @deprecated Use `v2.color` instead
+   */
   color: ThemeColorSchemes
+  /**
+   * @deprecated Use `v2.container` instead
+   */
   container: number[]
-  /** @deprecated Use component-specific `focusRing` values instead */
+  /**
+   * @deprecated Use component-specific `v2.{button | card | input}.focusRing` values instead
+   */
   focusRing: {
     offset: number
     width: number
   }
+  /**
+   * @deprecated Use `v2.font` instead
+   */
   fonts: ThemeFonts
+  /**
+   * @deprecated Use `v2.input` instead
+   */
   input: ThemeInput
   /**
    * THIS API MAY BE UNSTABLE. DO NOT USE IN PRODUCTION.
    * @beta
+   * @deprecated Use `v2.layer` instead
    */
   layer?: ThemeLayer
+  /**
+   * @deprecated Use `v2.media` instead
+   */
   media: number[]
+  /**
+   * @deprecated Use `v2.radius` instead
+   */
   radius: number[]
+  /**
+   * @deprecated Use `v2.shadow` instead
+   */
   shadows: Array<ThemeShadow | null>
+  /**
+   * @deprecated Use `v2.space` instead
+   */
   space: number[]
-  /** @internal */
+  /**
+   * @deprecated Use `v2.style` instead
+   */
   styles?: ThemeStyles
 
   v2?: RootTheme_v2
@@ -91,6 +119,9 @@ export type Theme_v2 = Omit<RootTheme_v2, 'color'> & {color: ThemeColorCard_v2}
  */
 export interface Theme {
   sanity: Omit<RootTheme, 'color' | 'v2'> & {
+    /**
+     * @deprecated Use `v2.color` instead
+     */
     color: ThemeColor
     v2?: Theme_v2
   }

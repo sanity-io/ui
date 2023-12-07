@@ -15,7 +15,6 @@ export function v0_v2(v0: RootTheme): RootTheme_v2 {
   const {
     avatar,
     button,
-    card,
     color,
     container,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -33,8 +32,11 @@ export function v0_v2(v0: RootTheme): RootTheme_v2 {
   const v2: RootTheme_v2 = {
     _version: 2,
     avatar,
-    button,
-    card,
+    button: {
+      ...defaultThemeConfig.button,
+      ...button,
+    },
+    card: defaultThemeConfig.card,
     color: {
       light: {
         transparent: themeColor_v0_v2(color.light.transparent),
