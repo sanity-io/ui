@@ -1,10 +1,10 @@
 import {ColorHueKey, ColorTint as ColorPaletteValue, ColorTintKey} from '@sanity/color'
 import {
-  ThemeAvatar,
+  ThemeAvatar_v2,
   ThemeFocusRing,
   ThemeFontWeightKey,
   ThemeFonts,
-  ThemeInput,
+  ThemeInput_v2,
   ThemeLayer,
   ThemeShadow,
   ThemeStyles,
@@ -19,7 +19,7 @@ export type ThemeColorPalette = {
 
 /** @public */
 export interface ThemeConfig {
-  avatar?: ThemeAvatar
+  avatar?: ThemeAvatar_v2
   button?: {
     border: {width: number}
     focusRing: ThemeFocusRing
@@ -32,8 +32,8 @@ export interface ThemeConfig {
   }
   color?: ThemeColorTokens
   container?: number[]
-  fonts?: ThemeFonts
-  input?: ThemeInput
+  font?: ThemeFonts
+  input?: ThemeInput_v2
   layer?: ThemeLayer
   media?: number[]
   palette?: ThemeColorPalette
