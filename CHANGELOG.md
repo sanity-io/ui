@@ -5,6 +5,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.35](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.34...v2.0.0-alpha.35) (2023-12-07)
+
+### Bug Fixes
+
+- **core:** improve defaults ([58459a7](https://github.com/sanity-io/ui/commit/58459a7c4f8dc60230bae737787eb0d4de2bf417))
+- **deps:** update `@sanity/color` ([74181d7](https://github.com/sanity-io/ui/commit/74181d7da01030c9ea56e9ccaf984549e0a4d0d5))
+- do not scale icon strokes ([02b31c3](https://github.com/sanity-io/ui/commit/02b31c313867f256ab8f69800d5e6f07291165a6))
+- **figma:** update plugin ([4b801d7](https://github.com/sanity-io/ui/commit/4b801d757e0ff05b95d4334414e7ba5cef4e107b))
+
 ## [2.0.0-alpha.34](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.33...v2.0.0-alpha.34) (2023-12-06)
 
 ### Features
