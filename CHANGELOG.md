@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-alpha.37](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.36...v2.0.0-alpha.37) (2023-12-07)
+
+### Bug Fixes
+
+- **theme:** improve backwards compatibility ([aa87abc](https://github.com/sanity-io/ui/commit/aa87abc4e350b3db2906aa9542886a669ab1360d))
+
 ## [2.0.0-alpha.36](https://github.com/sanity-io/ui/compare/v2.0.0-alpha.35...v2.0.0-alpha.36) (2023-12-07)
 
 ### Bug Fixes
