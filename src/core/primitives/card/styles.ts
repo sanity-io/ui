@@ -2,7 +2,7 @@ import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_cardColorStyle} from '../../styles/card'
-import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
+import {focusRingStyle} from '../../styles/focusRing'
 import {CardStyleProps} from './types'
 
 export function cardStyle(
@@ -94,14 +94,10 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
           }
         }
 
-        &:focus {
+        &:focus-visible {
           --card-focus-ring-box-shadow: ${$focusRing
             ? focusRingStyle({base: color, border, focusRing: card.focusRing})
             : undefined};
-        }
-
-        &:focus:not(:focus-visible) {
-          --card-focus-ring-box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
         }
       }
     }
@@ -137,14 +133,10 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
           }
         }
 
-        &:focus {
+        &:focus-visible {
           --card-focus-ring-box-shadow: ${$focusRing
             ? focusRingStyle({base: color, border, focusRing: card.focusRing})
             : undefined};
-        }
-
-        &:focus:not(:focus-visible) {
-          --card-focus-ring-box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
         }
       }
     }
