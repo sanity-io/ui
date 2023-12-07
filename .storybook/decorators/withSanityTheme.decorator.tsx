@@ -2,8 +2,7 @@ import {DecoratorHelpers} from '@storybook/addon-themes'
 import {StoryFn} from '@storybook/react'
 import React from 'react'
 import {createGlobalStyle} from 'styled-components'
-import {Card, ThemeProvider} from '../../src/core'
-import {studioTheme} from '../../src/theme'
+import {Card, ThemeProvider, studioTheme} from '../../src/core'
 
 const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
 
