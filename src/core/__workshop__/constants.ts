@@ -17,9 +17,10 @@ import {
 import {ThemeColorSpotKey, ThemeColorToneKey, ThemeFontWeightKey} from '@sanity/ui/theme'
 
 export const WORKSHOP_AVATAR_SIZE_OPTIONS: {[key: string]: AvatarSize} = {
-  '0 (default)': 0,
-  '1': 1,
+  '0': 0,
+  '1 (default)': 1,
   '2': 2,
+  '3': 3,
 }
 
 export const WORKSHOP_BADGE_MODE_OPTIONS: {[key: string]: BadgeMode} = {
