@@ -125,7 +125,15 @@ export const defaultThemeFonts: ThemeFonts = {
       {
         ascenderHeight: 2,
         descenderHeight: 2,
-        fontSize: 9.8,
+        fontSize: 8.1,
+        iconSize: 13,
+        lineHeight: 10,
+        letterSpacing: 0.5,
+      },
+      {
+        ascenderHeight: 2,
+        descenderHeight: 2,
+        fontSize: 9.5,
         iconSize: 15,
         lineHeight: 11,
         letterSpacing: 0.5,
@@ -133,7 +141,7 @@ export const defaultThemeFonts: ThemeFonts = {
       {
         ascenderHeight: 2,
         descenderHeight: 2,
-        fontSize: 11.25,
+        fontSize: 10.8,
         iconSize: 17,
         lineHeight: 12,
         letterSpacing: 0.5,
@@ -141,7 +149,7 @@ export const defaultThemeFonts: ThemeFonts = {
       {
         ascenderHeight: 2,
         descenderHeight: 2,
-        fontSize: 12.75,
+        fontSize: 12.25,
         iconSize: 19,
         lineHeight: 13,
         letterSpacing: 0.5,
@@ -149,7 +157,7 @@ export const defaultThemeFonts: ThemeFonts = {
       {
         ascenderHeight: 2,
         descenderHeight: 2,
-        fontSize: 14,
+        fontSize: 13.6,
         iconSize: 21,
         lineHeight: 14,
         letterSpacing: 0.5,
@@ -157,7 +165,7 @@ export const defaultThemeFonts: ThemeFonts = {
       {
         ascenderHeight: 2,
         descenderHeight: 2,
-        fontSize: 15.5,
+        fontSize: 15,
         iconSize: 23,
         lineHeight: 15,
         letterSpacing: 0.5,
