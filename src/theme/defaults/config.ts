@@ -7,6 +7,7 @@ export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {
   _version: 2,
   avatar: {
     sizes: [
+      {distance: -4, size: 19},
       {distance: -4, size: 25},
       {distance: -8, size: 33},
       {distance: -12, size: 49},
