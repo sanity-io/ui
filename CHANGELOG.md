@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.2](https://github.com/sanity-io/ui/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-12-08)
+
+### Features
+
+- **avatar:** implement avatar sizes ([8deb370](https://github.com/sanity-io/ui/commit/8deb3709b9c7f3cdfb66d88a67d7bfacafa4382f))
+- **theme:** add avatar size ([9129e6f](https://github.com/sanity-io/ui/commit/9129e6fffab9b3f132ba2ec189d19ae05f47662c))
+- **theme:** add label font size ([abb9bb2](https://github.com/sanity-io/ui/commit/abb9bb23a0cbf7326b8ad804f092d3df0c155610))
+
 ## [2.0.0-beta.1](https://github.com/sanity-io/ui/compare/v1.9.3...v2.0.0-beta.1) (2023-12-07)
 
 ### ⚠ BREAKING CHANGES
