@@ -63,7 +63,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
   const {
     children: childrenProp,
     maxLength: maxLengthProp = 4,
-    size: sizeProp = 0,
+    size: sizeProp = 1,
     ...restProps
   } = props
   const children = childrenToElementArray(childrenProp).filter(
@@ -81,7 +81,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
     <Root data-ui="AvatarStack" {...restProps} ref={ref} $size={size}>
       {len === 0 && (
         <div>
-          <AvatarCounter count={len} />
+          <AvatarCounter count={len} size={size} />
         </div>
       )}
 

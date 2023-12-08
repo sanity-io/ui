@@ -5,7 +5,7 @@ import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {AvatarSize} from '../../types'
-import {Text} from '../text'
+import {Label} from '../label'
 
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {avatar, media} = getTheme_v2(props.theme)
@@ -67,15 +67,26 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   props: AvatarCounterProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {count, size: sizeProp = 0} = props
+  const {count, size: sizeProp = 1} = props
   const size = useArrayProp(sizeProp)
-  const counterSize = useMemo(() => size.map((s) => (s === 0 ? 0 : s + 1)), [size])
+
+  const fontSize = useMemo(
+    () =>
+      size.map((s) => {
+        if (s === 1) return 1
+        if (s === 2) return 3
+        if (s === 3) return 5
+
+        return 0
+      }),
+    [size],
+  )
 
   return (
     <Root $size={size} data-ui="AvatarCounter" ref={ref}>
-      <Text as="span" size={counterSize} weight="medium">
+      <Label as="span" size={fontSize} weight="medium">
         {count}
-      </Text>
+      </Label>
     </Root>
   )
 })

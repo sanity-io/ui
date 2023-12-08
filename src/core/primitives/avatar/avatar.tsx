@@ -69,12 +69,12 @@ export const Avatar = forwardRef(function Avatar(
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
     status = 'online',
-    size: sizeProp = 0,
+    size: sizeProp = 1,
     ...restProps
   } = props
+  const {avatar} = useTheme_v2()
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = useArrayProp(sizeProp)
-  const {avatar} = useTheme_v2()
 
   // @todo: remove this
   const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
@@ -111,7 +111,17 @@ export const Avatar = forwardRef(function Avatar(
     }
   }, [onImageLoadError])
 
-  const initialsSize = useMemo(() => size.map((s) => (s === 0 ? 0 : s * 2)), [size])
+  const initialsSize = useMemo(
+    () =>
+      size.map((s) => {
+        if (s === 1) return 1
+        if (s === 2) return 3
+        if (s === 3) return 5
+
+        return 0
+      }),
+    [size],
+  )
 
   return (
     <Root
@@ -175,7 +185,7 @@ export const Avatar = forwardRef(function Avatar(
       {(imageFailed || !src) && initials && (
         <>
           <Initials>
-            <InitialsLabel forwardedAs="span" size={initialsSize}>
+            <InitialsLabel forwardedAs="span" size={initialsSize} weight="medium">
               {initials}
             </InitialsLabel>
           </Initials>
