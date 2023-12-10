@@ -366,7 +366,7 @@ function renderThemeColorState(
       fg: renderColorValue(value.accent.fg, colorOptions),
     },
     avatar: renderThemeColorAvatar(value.avatar, {baseBg, colorPalette, blendMode}),
-    badge: renderThemeColorBadge(value.badge, {baseBg, colorPalette, blendMode}),
+    badge: renderThemeColorBadge(value.badge, {baseBg: bg, colorPalette, blendMode}),
     bg,
     border: renderColorValue(value.border, colorOptions),
     code: {
