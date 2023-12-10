@@ -13,10 +13,10 @@ export type InputColorKey = (typeof INPUT_KEYS)[number]
 
 export const STATE_KEYS = [
   'bg',
-  'bg2',
   'fg',
   'icon',
   'border',
+  'muted-bg',
   'muted-fg',
   'accent-fg',
   'link-fg',
