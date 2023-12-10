@@ -26,6 +26,8 @@ function kbdStyle() {
     background: var(--card-bg-color);
     font: inherit;
 
+    vertical-align: top;
+
     &:not([hidden]) {
       display: inline-block;
     }
