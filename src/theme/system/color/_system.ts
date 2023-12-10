@@ -5,6 +5,7 @@ import {
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_INPUT_STATES,
+  THEME_COLOR_SCHEMES,
   THEME_COLOR_STATES,
   THEME_COLOR_STATE_TONES,
 } from './_constants'
@@ -12,7 +13,7 @@ import {
 /**
  * @public
  */
-export type ThemeColorSchemeKey = 'dark' | 'light'
+export type ThemeColorSchemeKey = (typeof THEME_COLOR_SCHEMES)[number]
 
 /** @public */
 export type ThemeColorBlendModeKey = (typeof THEME_COLOR_BLEND_MODES)[number]

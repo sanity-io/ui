@@ -1,6 +1,9 @@
 import {COLOR_HUES} from '@sanity/color'
 
 /** @public */
+export const THEME_COLOR_SCHEMES = ['light', 'dark'] as const
+
+/** @public */
 export const THEME_COLOR_BLEND_MODES = ['multiply', 'screen'] as const
 
 /** @public */
