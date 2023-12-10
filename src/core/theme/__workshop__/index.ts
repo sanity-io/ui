@@ -6,6 +6,11 @@ export default defineScope({
   title: 'Theme',
   stories: [
     {
+      name: 'debug',
+      title: 'Debug',
+      component: lazy(() => import('./debug/story')),
+    },
+    {
       name: 'build',
       title: 'Build theme',
       component: lazy(() => import('./build/story')),

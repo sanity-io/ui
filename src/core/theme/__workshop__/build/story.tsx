@@ -289,17 +289,23 @@ function ButtonPreview(props: {theme: ThemeColorButtonStates_v2}) {
         <div className="icon" style={{flex: 'none'}}>
           &copy;
         </div>
-        <div className="muted-fg" style={{flex: 'none'}}>
+        <div className="muted" style={{flex: 'none'}}>
           m
         </div>
-        <div className="accent-fg" style={{flex: 'none'}}>
+        <div className="accent" style={{flex: 'none'}}>
           a
         </div>
-        <div className="link-fg" style={{flex: 'none'}}>
+        <div className="link" style={{flex: 'none'}}>
           l
         </div>
         <div className="code" style={{flex: 'none'}}>
           c
+        </div>
+        <div className="kbd" style={{flex: 'none'}}>
+          k
+        </div>
+        <div className="badge badge--default" style={{flex: 'none'}}>
+          b
         </div>
         <div style={{flex: 'none'}}>
           <CheckeredBackground />

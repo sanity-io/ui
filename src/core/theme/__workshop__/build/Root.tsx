@@ -159,6 +159,7 @@ export const Root = styled.div((props) => {
       --link-fg: var(--card-enabled-link-fg);
       --code-bg: var(--card-enabled-code-bg);
       --code-fg: var(--card-enabled-code-fg);
+      --kbd-bg: var(--card-enabled-kbd-bg);
       --skeleton-from: var(--card-enabled-skeleton-from);
       --skeleton-to: var(--card-enabled-skeleton-to);
 
@@ -322,21 +323,37 @@ export const Root = styled.div((props) => {
       color: var(--icon);
     }
 
-    .muted-fg {
+    .muted {
       color: var(--muted-fg);
     }
 
-    .accent-fg {
+    .accent {
       color: var(--accent-fg);
     }
 
-    .link-fg {
+    .link {
       color: var(--link-fg);
     }
 
     .code {
       background-color: var(--code-bg);
       color: var(--code-fg);
+    }
+
+    .kbd {
+      background-color: var(--kbd-bg);
+      color: var(--kbd-fg);
+    }
+
+    .badge {
+      background-color: var(--badge-bg);
+      color: var(--badge-fg);
+    }
+
+    .badge--default {
+      --badge-bg: var(--badge-default-bg);
+      --badge-fg: var(--badge-default-fg);
+      --badge-border: var(--badge-default-border);
     }
 
     .skeleton-from {
