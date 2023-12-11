@@ -10,14 +10,14 @@ import {
   useRootTheme,
 } from '@sanity/ui'
 import {
-  ThemeColorButtonStates_v2,
-  ThemeColorButtonTones_v2,
+  ThemeColorButtonMode_v2,
+  ThemeColorButtonTone_v2,
   ThemeColorButton_v2,
+  ThemeColorCard_v2,
   ThemeColorScheme_v2,
-  ThemeColorSelectableStates_v2,
+  ThemeColorSelectableTone_v2,
   ThemeColorSelectable_v2,
   ThemeColorState_v2,
-  ThemeColorCard_v2,
   getContrastRatio,
   mix,
   parseColor,
@@ -202,7 +202,7 @@ function ColorButton(props: {color: ThemeColorButton_v2}) {
   )
 }
 
-function ColorButtonMode(props: {color: ThemeColorButtonTones_v2}) {
+function ColorButtonMode(props: {color: ThemeColorButtonMode_v2}) {
   const {color} = props
 
   return (
@@ -243,7 +243,7 @@ function ColorButtonMode(props: {color: ThemeColorButtonTones_v2}) {
   )
 }
 
-function ColorGenericStates(props: {color: ThemeColorButtonStates_v2}) {
+function ColorGenericStates(props: {color: ThemeColorButtonTone_v2}) {
   const {color} = props
 
   return (
@@ -335,7 +335,7 @@ function ColorSelectable(props: {color: ThemeColorSelectable_v2}) {
   )
 }
 
-function ColorSelectableTone(props: {color: ThemeColorSelectableStates_v2}) {
+function ColorSelectableTone(props: {color: ThemeColorSelectableTone_v2}) {
   const {color} = props
 
   return (

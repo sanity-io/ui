@@ -3,10 +3,10 @@ import {
   RootTheme_v2,
   ThemeColor,
   ThemeColorCard_v2,
+  ThemeColorInputMode_v2,
   ThemeColorInputState,
   ThemeColorInputState_v2,
   ThemeColorInputStates,
-  ThemeColorInputStates_v2,
 } from '../system'
 
 const cache = new WeakMap<RootTheme_v2, RootTheme>()
@@ -106,7 +106,7 @@ function themeColor_v2_v0(color_v2: ThemeColorCard_v2): ThemeColor {
   }
 }
 
-function inputStatesThemeColor_v2_v0(t: ThemeColorInputStates_v2): ThemeColorInputStates {
+function inputStatesThemeColor_v2_v0(t: ThemeColorInputMode_v2): ThemeColorInputStates {
   return {
     enabled: inputStateThemeColor_v2_v0(t.enabled),
     disabled: inputStateThemeColor_v2_v0(t.disabled),

@@ -2,7 +2,7 @@ import {ThemeColorBlendModeKey} from '../../color/_system'
 
 /**
  * @public
- * @deprecated
+ * @deprecated Use `ThemeColorInputState_v2` instead.
  */
 export interface ThemeColorInputState {
   _blend?: ThemeColorBlendModeKey
@@ -15,7 +15,7 @@ export interface ThemeColorInputState {
 
 /**
  * @public
- * @deprecated
+ * @deprecated Use `ThemeColorInputMode_v2` instead.
  */
 export interface ThemeColorInputStates {
   enabled: ThemeColorInputState
@@ -26,7 +26,7 @@ export interface ThemeColorInputStates {
 
 /**
  * @public
- * @deprecated
+ * @deprecated Use `ThemeColorInput_v2` instead.
  */
 export interface ThemeColorInput {
   default: ThemeColorInputStates

@@ -2,13 +2,13 @@ import {ThemeColorGenericState} from './_generic'
 
 /**
  * @public
- * @deprecated Use `ThemeColorGenericState` instead.
+ * @deprecated Use `ThemeColorState_v2` instead.
  */
 export type ThemeColorButtonState = ThemeColorGenericState
 
 /**
  * @public
- * @deprecated
+ * @deprecated Use `ThemeColorButtonStates_v2` instead.
  */
 export interface ThemeColorButtonStates {
   enabled: ThemeColorGenericState
@@ -21,7 +21,7 @@ export interface ThemeColorButtonStates {
 /**
  * TODO: Rename to `ThemeColorButtonMode`.
  * @public
- * @deprecated
+ * @deprecated Use `ThemeColorButtonTones_v2` instead.
  */
 export interface ThemeColorButtonTones {
   default: ThemeColorButtonStates
@@ -33,7 +33,7 @@ export interface ThemeColorButtonTones {
 
 /**
  * @public
- * @deprecated
+ * @deprecated Use `ThemeColorButton_v2` instead.
  */
 export interface ThemeColorButton {
   default: ThemeColorButtonTones

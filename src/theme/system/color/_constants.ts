@@ -10,7 +10,7 @@ export const THEME_COLOR_BLEND_MODES = ['multiply', 'screen'] as const
 export const THEME_COLOR_CARD_TONES = [
   'transparent',
   'default',
-  'primary', // todo: rename to `accent` in the next breaking major version
+  'primary',
   'positive',
   'caution',
   'critical',
@@ -19,7 +19,7 @@ export const THEME_COLOR_CARD_TONES = [
 /** @public */
 export const THEME_COLOR_STATE_TONES = [
   'default',
-  'primary', // todo: rename to `accent` in the next breaking major version
+  'primary',
   'positive',
   'caution',
   'critical',

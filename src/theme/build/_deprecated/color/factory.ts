@@ -27,7 +27,7 @@ import {createSpot} from './spot/createSpot'
 
 /**
  * @public
- * @deprecated
+ * @deprecated Use `buildColorTheme` instead.
  */
 export interface ThemeColorBuilderOpts {
   base: (opts: {dark: boolean; name: ThemeColorName}) => ThemeColorBase
@@ -82,13 +82,13 @@ export interface ThemeColorBuilderOpts {
 
 /**
  * @public
- * @deprecated
+ * @deprecated Use `ThemeConfig` instead.
  */
 export type PartialThemeColorBuilderOpts = Partial<ThemeColorBuilderOpts>
 
 /**
  * @public
- * @deprecated Use `buildTheme` instead
+ * @deprecated Use `buildColorTheme` instead.
  */
 export function createColorTheme(
   partialOpts: PartialThemeColorBuilderOpts = {},

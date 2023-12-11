@@ -5,18 +5,18 @@ import {
   ThemeColorBadgeTone_v2,
   ThemeColorBadge_v2,
   ThemeColorBlendModeKey,
-  ThemeColorButtonStates_v2,
-  ThemeColorButtonTones_v2,
+  ThemeColorButtonMode_v2,
+  ThemeColorButtonTone_v2,
   ThemeColorButton_v2,
   ThemeColorCardToneKey,
   ThemeColorCard_v2,
+  ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
-  ThemeColorInputStates_v2,
   ThemeColorInput_v2,
   ThemeColorKBD,
   ThemeColorScheme_v2,
   ThemeColorSchemes_v2,
-  ThemeColorSelectableStates_v2,
+  ThemeColorSelectableTone_v2,
   ThemeColorSelectable_v2,
   ThemeColorShadow,
   ThemeColorState_v2,
@@ -278,10 +278,9 @@ function renderThemeColorBadgeColor(
   }
 
   return {
-    // _blend: blendMode,
     bg,
-    fg: renderColorValue(value.fg, colorOptions),
     dot: renderColorValue(value.dot, colorOptions),
+    fg: renderColorValue(value.fg, colorOptions),
     icon: renderColorValue(value.icon, colorOptions),
   }
 }
@@ -302,13 +301,13 @@ function renderThemeColorButton(
 }
 
 function renderThemeColorButtonTones(
-  value: ThemeColorButtonTones_v2,
+  value: ThemeColorButtonMode_v2,
   options: {
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
   },
-): ThemeColorButtonTones_v2 {
+): ThemeColorButtonMode_v2 {
   return {
     default: renderThemeColorButtonStates(value.default, options),
     primary: renderThemeColorButtonStates(value.primary, options),
@@ -319,13 +318,13 @@ function renderThemeColorButtonTones(
 }
 
 function renderThemeColorButtonStates(
-  value: ThemeColorButtonStates_v2,
+  value: ThemeColorButtonTone_v2,
   options: {
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
   },
-): ThemeColorButtonStates_v2 {
+): ThemeColorButtonTone_v2 {
   return {
     enabled: renderThemeColorState(value.enabled, options),
     hovered: renderThemeColorState(value.hovered, options),
@@ -409,13 +408,13 @@ function renderThemeColorInput(
 }
 
 function renderInputStatesColorTheme(
-  value: ThemeColorInputStates_v2,
+  value: ThemeColorInputMode_v2,
   options: {
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
   },
-): ThemeColorInputStates_v2 {
+): ThemeColorInputMode_v2 {
   return {
     enabled: renderInputStateColorTheme(value.enabled, options),
     hovered: renderInputStateColorTheme(value.hovered, options),
@@ -468,13 +467,13 @@ function renderThemeColorSelectable(
 }
 
 function renderThemeColorSelectableStates(
-  value: ThemeColorSelectableStates_v2,
+  value: ThemeColorSelectableTone_v2,
   options: {
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
   },
-): ThemeColorSelectableStates_v2 {
+): ThemeColorSelectableTone_v2 {
   return {
     enabled: renderThemeColorState(value.enabled, options),
     hovered: renderThemeColorState(value.hovered, options),

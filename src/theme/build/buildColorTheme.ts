@@ -18,11 +18,11 @@ import {
   ThemeColorShadow,
   ThemeColorState_v2,
   ThemeColorButton_v2,
-  ThemeColorButtonTones_v2,
-  ThemeColorButtonStates_v2,
+  ThemeColorButtonMode_v2,
+  ThemeColorButtonTone_v2,
   ThemeColorAvatarHue_v2,
   ThemeColorInput_v2,
-  ThemeColorInputStates_v2,
+  ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
 } from '../system'
 import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
@@ -215,16 +215,16 @@ function buildButtonTonesColorTheme(
     mode: ThemeColorButtonModeKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonTones_v2 {
+): ThemeColorButtonMode_v2 {
   const {mode, scheme} = options
 
-  const tones: Partial<ThemeColorButtonTones_v2> = {}
+  const tones: Partial<ThemeColorButtonMode_v2> = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
     tones[tone] = buildButtonStatesColorTheme({mode, scheme, tone}, config)
   }
 
-  return tones as ThemeColorButtonTones_v2
+  return tones as ThemeColorButtonMode_v2
 }
 
 function buildButtonStatesColorTheme(
@@ -234,16 +234,16 @@ function buildButtonStatesColorTheme(
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonStates_v2 {
+): ThemeColorButtonTone_v2 {
   const {mode, scheme, tone} = options
 
-  const states: Partial<ThemeColorButtonStates_v2> = {}
+  const states: Partial<ThemeColorButtonTone_v2> = {}
 
   for (const state of THEME_COLOR_STATES) {
     states[state] = buildButtonStateColorTheme({mode, tone, scheme, state}, config)
   }
 
-  return states as ThemeColorButtonStates_v2
+  return states as ThemeColorButtonTone_v2
 }
 
 function buildButtonStateColorTheme(
@@ -314,7 +314,7 @@ function buildInputStatesColorTheme(
     tone: ThemeColorCardToneKey
   },
   config?: ThemeConfig,
-): ThemeColorInputStates_v2 {
+): ThemeColorInputMode_v2 {
   const {mode, scheme, tone} = options
 
   return {
@@ -357,16 +357,16 @@ function buildSelectableColorTheme(
     scheme: ThemeColorSchemeKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonTones_v2 {
+): ThemeColorButtonMode_v2 {
   const {scheme} = options
 
-  const tones: Partial<ThemeColorButtonTones_v2> = {}
+  const tones: Partial<ThemeColorButtonMode_v2> = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
     tones[tone] = buildSelectableStatesColorTheme({scheme, tone}, config)
   }
 
-  return tones as ThemeColorButtonTones_v2
+  return tones as ThemeColorButtonMode_v2
 }
 
 function buildSelectableStatesColorTheme(
@@ -375,16 +375,16 @@ function buildSelectableStatesColorTheme(
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
-): ThemeColorButtonStates_v2 {
+): ThemeColorButtonTone_v2 {
   const {scheme, tone} = options
 
-  const states: Partial<ThemeColorButtonStates_v2> = {}
+  const states: Partial<ThemeColorButtonTone_v2> = {}
 
   for (const state of THEME_COLOR_STATES) {
     states[state] = buildSelectableStateColorTheme({tone, scheme, state}, config)
   }
 
-  return states as ThemeColorButtonStates_v2
+  return states as ThemeColorButtonTone_v2
 }
 
 function buildSelectableStateColorTheme(

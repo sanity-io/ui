@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  ThemeColorButtonStates_v2,
+  ThemeColorButtonTone_v2,
   ThemeColorCard_v2,
-  ThemeColorInputStates_v2,
+  ThemeColorInputMode_v2,
   ThemeColorState_v2,
 } from '@sanity/ui/theme'
 import {
-  THEME_COLOR_CARD_TONES,
   THEME_COLOR_BUTTON_MODES,
+  THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_STATE_TONES,
   ThemeColorCardToneKey,
@@ -268,7 +268,7 @@ function StatePreview(props: {theme: ThemeColorState_v2}) {
   )
 }
 
-function ButtonPreview(props: {theme: ThemeColorButtonStates_v2}) {
+function ButtonPreview(props: {theme: ThemeColorButtonTone_v2}) {
   const {theme: button} = props
 
   return (
@@ -430,7 +430,7 @@ function Skeleton() {
   )
 }
 
-function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInputStates_v2}) {
+function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInputMode_v2}) {
   const {mode, theme: input} = props
 
   return (

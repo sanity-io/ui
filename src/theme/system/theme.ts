@@ -33,6 +33,7 @@ export interface RootTheme_v2 {
   radius: number[]
   shadow: Array<ThemeShadow | null>
   space: number[]
+  /** @internal */
   style?: ThemeStyles
 }
 
@@ -97,6 +98,7 @@ export interface BaseTheme {
    */
   space: number[]
   /**
+   * @internal
    * @deprecated Use `v2.style` instead
    */
   styles?: ThemeStyles

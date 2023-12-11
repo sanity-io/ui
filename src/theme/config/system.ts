@@ -9,7 +9,7 @@ import {
   ThemeColorBlendModeKey,
 } from '../system'
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_STATE_KEYS = [
   '_hue',
   'bg',
@@ -30,7 +30,7 @@ export const COLOR_CONFIG_STATE_KEYS = [
 /** @public */
 export type ColorConfigStateKey = (typeof COLOR_CONFIG_STATE_KEYS)[number]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_CARD_KEYS = [
   ...COLOR_CONFIG_STATE_KEYS,
   '_hue',
@@ -47,7 +47,7 @@ export const COLOR_CONFIG_CARD_KEYS = [
 /** @public */
 export type ColorConfigCardKey = (typeof COLOR_CONFIG_CARD_KEYS)[number]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_BLEND_KEYS = ['_blend'] as const
 
 /** @public */
@@ -75,37 +75,37 @@ export type ThemeColorTokenValue = [ColorConfigValue, ColorConfigValue]
 /** @public */
 export type ColorBlendModeTokenValue = [ThemeColorBlendModeKey, ThemeColorBlendModeKey]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_AVATAR_COLORS = ['*', ...THEME_COLOR_AVATAR_COLORS] as const
 
 /** @public */
 export type ColorConfigAvatarColor = (typeof COLOR_CONFIG_AVATAR_COLORS)[number]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_CARD_TONES = ['*', ...THEME_COLOR_CARD_TONES] as const
 
 /** @public */
 export type ColorConfigCardTone = (typeof COLOR_CONFIG_CARD_TONES)[number]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_STATE_TONES = ['*', ...THEME_COLOR_STATE_TONES] as const
 
 /** @public */
 export type ColorConfigStateTone = (typeof COLOR_CONFIG_STATE_TONES)[number]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_STATES = ['*', ...THEME_COLOR_STATES] as const
 
 /** @public */
 export type ColorConfigState = (typeof COLOR_CONFIG_STATES)[number]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_INPUT_MODES = ['*', ...THEME_COLOR_INPUT_MODES] as const
 
 /** @public */
 export type ColorConfigInputMode = (typeof COLOR_CONFIG_INPUT_MODES)[number]
 
-/** @internal */
+/** @public */
 export const COLOR_CONFIG_INPUT_STATES = ['*', ...THEME_COLOR_INPUT_STATES] as const
 
 /** @public */

@@ -10,6 +10,7 @@ import {
   ThemeColorTokenValue,
 } from '../../system'
 
+/** @public */
 export interface ThemeColorAvatarHueTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
@@ -17,6 +18,7 @@ export interface ThemeColorAvatarHueTokens {
   fg?: ThemeColorTokenValue
 }
 
+/** @public */
 export interface ThemeColorAvatarTokens {
   '*'?: ThemeColorAvatarHueTokens
   gray?: ThemeColorAvatarHueTokens
@@ -30,8 +32,8 @@ export interface ThemeColorAvatarTokens {
   cyan?: ThemeColorAvatarHueTokens
 }
 
+/** @public */
 export interface ThemeColorBadgeTokens {
-  // _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
   bg?: ThemeColorTokenValue
   fg?: ThemeColorTokenValue
@@ -39,6 +41,7 @@ export interface ThemeColorBadgeTokens {
   icon?: ThemeColorTokenValue
 }
 
+/** @public */
 export interface ThemeColorBaseTokens extends ThemeColorStateTokens {
   focusRing?: ThemeColorTokenValue
   backdrop?: ThemeColorTokenValue
@@ -50,6 +53,7 @@ export interface ThemeColorBaseTokens extends ThemeColorStateTokens {
   }
 }
 
+/** @public */
 export interface ThemeColorBadgeToneTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
@@ -59,6 +63,7 @@ export interface ThemeColorBadgeToneTokens {
   icon?: ThemeColorTokenValue
 }
 
+/** @public */
 export interface ThemeColorBadgeTokens {
   '*'?: ThemeColorBadgeToneTokens
   default?: ThemeColorBadgeToneTokens
@@ -68,6 +73,7 @@ export interface ThemeColorBadgeTokens {
   critical?: ThemeColorBadgeToneTokens
 }
 
+/** @public */
 export interface ThemeColorStateTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
@@ -102,13 +108,16 @@ export interface ThemeColorStateTokens {
   }
 }
 
+/** @public */
 export type ThemeColorStatesTokens = Partial<Record<ColorConfigState, ThemeColorStateTokens>>
 
+/** @public */
 export interface ThemeColorButtonTokens
   extends Partial<Record<ColorConfigStateTone, ThemeColorStatesTokens>> {
   _hue?: ColorHueKey
 }
 
+/** @public */
 export interface ThemeColorInputStateTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
@@ -121,11 +130,13 @@ export interface ThemeColorInputStateTokens {
   placeholder?: ThemeColorTokenValue
 }
 
+/** @public */
 export interface ThemeColorInputTokens
   extends Partial<Record<ColorConfigInputState, ThemeColorInputStateTokens>> {
   _hue?: ColorHueKey
 }
 
+/** @public */
 export interface ThemeColorTokens {
   base?: Partial<Record<ColorConfigCardTone, ThemeColorBaseTokens>>
   button?: Partial<Record<ThemeColorButtonModeKey, ThemeColorButtonTokens>>

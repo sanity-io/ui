@@ -8,6 +8,7 @@ import {
 } from '../helpers'
 import {TokenKeyNode} from './types'
 
+/** @internal */
 export function parseTokenKey(str: string): TokenKeyNode | undefined {
   const segments = str.split('/')
   const segment0 = segments.shift() || ''

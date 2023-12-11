@@ -6,7 +6,7 @@ import {
   ThemeColorState_v2,
   ThemeColorCard_v2,
   ThemeColorInputStates,
-  ThemeColorInputStates_v2,
+  ThemeColorInputMode_v2,
   ThemeColorInputState,
   ThemeColorInputState_v2,
 } from '../system'
@@ -195,7 +195,7 @@ function stateThemeColor_v0_v2(v0: ThemeColor, state: ThemeColorGenericState): T
   }
 }
 
-function inputStatesThemeColor_v0_v2(states: ThemeColorInputStates): ThemeColorInputStates_v2 {
+function inputStatesThemeColor_v0_v2(states: ThemeColorInputStates): ThemeColorInputMode_v2 {
   return {
     enabled: inputStateThemeColor_v0_v2(states.enabled),
     disabled: inputStateThemeColor_v0_v2(states.disabled),

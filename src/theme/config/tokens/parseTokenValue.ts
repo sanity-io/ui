@@ -2,6 +2,7 @@ import {isColorBlendModeValue, isColorHueKey, isColorTintKey} from '../../system
 import {isColorOpacityValue, isColorValue} from '../helpers'
 import {TokenValueNode} from './types'
 
+/** @internal */
 export function parseTokenValue(str: string): TokenValueNode | undefined {
   const segments = str.split('/')
   const segment0 = segments.shift() || ''

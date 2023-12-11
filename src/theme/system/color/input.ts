@@ -1,4 +1,4 @@
-import {ThemeColorBlendModeKey} from './_system'
+import {ThemeColorBlendModeKey, ThemeColorInputModeKey, ThemeColorInputStateKey} from './_system'
 
 /**
  * @public
@@ -17,17 +17,9 @@ export interface ThemeColorInputState_v2 {
 /**
  * @public
  */
-export interface ThemeColorInputStates_v2 {
-  enabled: ThemeColorInputState_v2
-  disabled: ThemeColorInputState_v2
-  hovered: ThemeColorInputState_v2
-  readOnly: ThemeColorInputState_v2
-}
+export type ThemeColorInputMode_v2 = Record<ThemeColorInputStateKey, ThemeColorInputState_v2>
 
 /**
  * @public
  */
-export interface ThemeColorInput_v2 {
-  default: ThemeColorInputStates_v2
-  invalid: ThemeColorInputStates_v2
-}
+export type ThemeColorInput_v2 = Record<ThemeColorInputModeKey, ThemeColorInputMode_v2>
