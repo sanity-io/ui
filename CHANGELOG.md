@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.3](https://github.com/sanity-io/ui/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2023-12-11)
+
+### Bug Fixes
+
+- **figma:** export muted bg ([0a3a9e2](https://github.com/sanity-io/ui/commit/0a3a9e286adf6d0af3cc94e3492f997cb1d0e890))
+- **kbd:** vertical alignment ([cc8bc61](https://github.com/sanity-io/ui/commit/cc8bc61f8ba35e2954392bdb11e31a76f2493f1e))
+- **theme:** improve colors ([6eed99d](https://github.com/sanity-io/ui/commit/6eed99d2af9250b45a1b53624c8f40bcf4a2599f))
+
 ## [2.0.0-beta.2](https://github.com/sanity-io/ui/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-12-08)
 
 ### Features
