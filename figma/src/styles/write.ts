@@ -4,11 +4,9 @@ import {
   ThemeColorShadow,
   ThemeShadow,
   parseColor,
-  defaultTheme,
 } from '@sanity/ui/theme'
+import {theme} from '../theme'
 import {SCHEMES} from '../vars/types'
-
-const theme = defaultTheme.v2!
 
 export function writeStyles(): void {
   const figmaEffectStyles = figma.getLocalEffectStyles()
