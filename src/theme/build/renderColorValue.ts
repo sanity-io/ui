@@ -55,7 +55,7 @@ export function renderColorValue(str: string, options: RenderColorValueOptions):
     hex = mixThemeColor(hex, mixOptions)
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log('could not blend', hex, mixOptions)
+    console.warn('could not blend', hex, mixOptions)
     throw err
   }
 
