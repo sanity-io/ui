@@ -1,5 +1,5 @@
 import {Card, ThemeProvider} from '@sanity/ui'
-import {defaultTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {
   render as _testRender,
   RenderOptions as _TestRenderOptions,
@@ -11,6 +11,8 @@ export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ThemeColorSchemeKey
   strict?: boolean
 }
+
+const theme = buildTheme()
 
 function DefaultWrapper({children}: {children?: ReactNode}) {
   return <main>{children}</main>
@@ -30,7 +32,7 @@ export function render(rootElement: ReactElement, options: TestRenderOptions = {
     return (
       <Strictness>
         <InnerWrapper>
-          <ThemeProvider theme={defaultTheme}>
+          <ThemeProvider theme={theme}>
             <Card padding={4} scheme={scheme}>
               {children}
             </Card>

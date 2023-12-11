@@ -11,9 +11,3 @@ export interface ThemeStyles {
     root?: CSSObject
   }
 }
-
-/**
- * @deprecated Use `ThemeStyles` instead
- * @internal
- */
-export type Styles = ThemeStyles

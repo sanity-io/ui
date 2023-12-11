@@ -7,7 +7,9 @@ import {
   Placement,
   Radius,
 } from '../src/core/types'
-import {defaultTheme} from '../src/theme'
+import {buildTheme} from '../src/theme'
+
+const theme = buildTheme()
 
 export const AVATAR_SRC =
   'https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4'
@@ -44,4 +46,4 @@ export const PLACEMENT_OPTIONS: Placement[] = [
   'bottom-end',
 ]
 
-export const RADII: Radius[] = [...Array(defaultTheme.radius.length).keys(), 'full']
+export const RADII: Radius[] = [...Array(theme.radius.length).keys(), 'full']

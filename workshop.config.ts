@@ -1,4 +1,4 @@
-import {defaultTheme} from '@sanity/ui/theme'
+import {buildTheme} from '@sanity/ui/theme'
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
 
@@ -34,6 +34,6 @@ export default defineConfig({
     },
   ],
   plugins: [fontsPlugin(), perfPlugin()],
-  theme: defaultTheme,
+  theme: buildTheme(),
   title: '@sanity/ui',
 })

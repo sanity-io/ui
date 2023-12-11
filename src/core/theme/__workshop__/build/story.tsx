@@ -14,14 +14,14 @@ import {
   ThemeColorCardToneKey,
   ThemeColorInputModeKey,
 } from '@sanity/ui/theme'
-import {defaultTheme} from '@sanity/ui/theme'
+import {buildTheme} from '@sanity/ui/theme'
 import {ReactElement} from 'react'
 import {rem} from '../../../styles'
 import {useTheme_v2} from '../../useTheme'
 import {getCSSProps} from './helpers'
 import {Root} from './Root'
 
-const theme = defaultTheme
+const theme = buildTheme()
 
 export default function BuildStory(): ReactElement {
   return (

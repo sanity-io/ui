@@ -1,7 +1,7 @@
 /** @jest-environment jsdom */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {defaultTheme} from '@sanity/ui/theme'
+import {buildTheme} from '@sanity/ui/theme'
 import {render} from '../../../test'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
@@ -24,7 +24,7 @@ describe('theme', () => {
         const value: ThemeContextValue = {
           version: 0.0,
           scheme: 'light',
-          theme: defaultTheme,
+          theme: buildTheme(),
           tone: 'default',
         }
 

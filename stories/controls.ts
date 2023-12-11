@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {icons} from '@sanity/icons'
-import {ThemeFontKey, defaultTheme} from '../src/theme'
-import {defaultThemeFonts} from '../src/theme/defaults/fonts'
+import {buildTheme, ThemeFontKey} from '../src/theme'
+
+const theme = buildTheme()
 
 export const getAlignControls = () => {
   return {
@@ -11,7 +12,7 @@ export const getAlignControls = () => {
 }
 
 export const getAvatarSizeControls = () => {
-  const numSizes = defaultTheme.avatar.sizes.length
+  const numSizes = theme.avatar.sizes.length
 
   return {
     control: {type: 'number', min: 0, max: numSizes - 1},
@@ -31,7 +32,7 @@ export const getButtonWidthControls = () => {
 }
 
 export const getContainerWidthControls = () => {
-  const numContainerSizes = defaultTheme.container.length
+  const numContainerSizes = theme.container.length
 
   return {
     control: {type: 'number', min: 0, max: numContainerSizes - 1},
@@ -54,7 +55,7 @@ export const getFlexAlignControls = () => {
 }
 
 export const getFontSizeControls = (themeFontKey: ThemeFontKey) => {
-  const numSizes = defaultThemeFonts[themeFontKey].sizes.length
+  const numSizes = theme.fonts[themeFontKey].sizes.length
 
   return {
     control: {type: 'number', min: 0, max: numSizes - 1},
@@ -95,7 +96,7 @@ export const getOverflowControls = () => {
 }
 
 export const getRadiusControls = () => {
-  const numRadiusSizes = defaultTheme.radius.length
+  const numRadiusSizes = theme.radius.length
 
   return {
     control: {type: 'select'},
@@ -104,7 +105,7 @@ export const getRadiusControls = () => {
 }
 
 export const getShadowControls = () => {
-  const numShadowSizes = defaultTheme.shadows.length
+  const numShadowSizes = theme.shadows.length
 
   return {
     control: {type: 'number', min: 0, max: numShadowSizes - 1},
@@ -113,7 +114,7 @@ export const getShadowControls = () => {
 }
 
 export const getSpaceControls = () => {
-  const numSpaceSizes = defaultTheme.space.length
+  const numSpaceSizes = theme.space.length
 
   return {
     control: {type: 'number', min: 0, max: numSpaceSizes - 1},

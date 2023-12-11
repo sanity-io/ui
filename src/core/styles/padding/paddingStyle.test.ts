@@ -1,9 +1,9 @@
 /** @jest-environment jsdom */
 
-import {getScopedTheme, defaultTheme} from '@sanity/ui/theme'
+import {buildTheme, getScopedTheme} from '@sanity/ui/theme'
 import {responsivePaddingStyle} from './paddingStyle'
 
-const theme = getScopedTheme(defaultTheme, 'light', 'default')
+const theme = getScopedTheme(buildTheme(), 'light', 'default')
 
 describe('styles/padding', () => {
   it('should 1', () => {

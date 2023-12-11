@@ -41,7 +41,9 @@ import {
   TextInput,
 } from '../../src/core/primitives'
 import {ThemeProvider} from '../../src/core/theme'
-import {ThemeColorSchemeKey, defaultTheme} from '../../src/theme'
+import {buildTheme, ThemeColorSchemeKey} from '../../src/theme'
+
+const theme = buildTheme()
 
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
@@ -112,7 +114,7 @@ export function Tones(): ReactNode {
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>('light')
 
   return (
-    <ThemeProvider scheme={scheme} theme={defaultTheme}>
+    <ThemeProvider scheme={scheme} theme={theme}>
       <Card padding={2} radius={2}>
         <Box padding={3}>
           <Button
