@@ -23,7 +23,7 @@ export const DotIcon = forwardRef(function DotIcon(
       <circle
         cx={12.5}
         cy={12.5}
-        r={1.5}
+        r={2.5}
         fill="currentColor"
         stroke="currentColor"
         strokeWidth={1.2}
