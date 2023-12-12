@@ -99,6 +99,16 @@ export const MenuButton = forwardRef(function MenuButton(
     setShouldFocus(null)
   }, [])
 
+  // Prevent mouse event propagation when the menu is open.
+  // This is to ensure that `handleBlur` isn't triggered when clicking the menu button whilst open,
+  // which can lead to `setOpen` being triggered multiple times (once by `handleBlur`, and again by `handleButtonClick`).
+  const handleMouseDown = useCallback(
+    (event: PointerEvent) => {
+      if (open) event.preventDefault()
+    },
+    [open],
+  )
+
   const handleButtonKeyDown = useCallback((event: React.KeyboardEvent<HTMLButtonElement>) => {
     // On `ArrowDown`, `Enter` and `Space`
     // - Opens menu and moves focus to first menuitem
@@ -152,7 +162,6 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const handleBlur = useCallback(
     (event: React.FocusEvent<HTMLButtonElement>) => {
-      // The EventTarget receiving focus
       const target = event.relatedTarget
 
       if (!(target instanceof Node)) {
@@ -165,12 +174,9 @@ export const MenuButton = forwardRef(function MenuButton(
         }
       }
 
-      // Only close the menu if the new target receiving focus is not the button itself
-      if (!buttonElement?.contains(target)) {
-        setOpen(false)
-      }
+      setOpen(false)
     },
-    [buttonElement, menuElements],
+    [menuElements],
   )
 
   const handleItemClick = useCallback(() => {
@@ -235,13 +241,14 @@ export const MenuButton = forwardRef(function MenuButton(
             id,
             onClick: handleButtonClick,
             onKeyDown: handleButtonKeyDown,
+            onMouseDown: handleMouseDown,
             'aria-haspopup': true,
             'aria-expanded': open,
             ref: setButtonRef,
             selected: open,
           })
         : null,
-    [buttonProp, handleButtonClick, handleButtonKeyDown, id, open, setButtonRef],
+    [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open, setButtonRef],
   )
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
