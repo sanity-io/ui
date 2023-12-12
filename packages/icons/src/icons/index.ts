@@ -7,6 +7,7 @@ import {IconComponent} from '../types'
 import {AccessDeniedIcon} from './accessDeniedIcon'
 import {ActivityIcon} from './activityIcon'
 import {AddCircleIcon} from './addCircleIcon'
+import {AddCommentIcon} from './addCommentIcon'
 import {AddIcon} from './addIcon'
 import {ApiIcon} from './apiIcon'
 import {ArchiveIcon} from './archiveIcon'
@@ -207,6 +208,7 @@ export type IconSymbol =
   | 'access-denied'
   | 'activity'
   | 'add-circle'
+  | 'add-comment'
   | 'add'
   | 'api'
   | 'archive'
@@ -404,6 +406,7 @@ export {
   AccessDeniedIcon,
   ActivityIcon,
   AddCircleIcon,
+  AddCommentIcon,
   AddIcon,
   ApiIcon,
   ArchiveIcon,
@@ -605,6 +608,7 @@ export interface IconMap {
   'access-denied': IconComponent
   activity: IconComponent
   'add-circle': IconComponent
+  'add-comment': IconComponent
   add: IconComponent
   api: IconComponent
   archive: IconComponent
@@ -806,6 +810,7 @@ export const icons: IconMap = {
   'access-denied': AccessDeniedIcon,
   activity: ActivityIcon,
   'add-circle': AddCircleIcon,
+  'add-comment': AddCommentIcon,
   add: AddIcon,
   api: ApiIcon,
   archive: ArchiveIcon,
