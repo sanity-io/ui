@@ -46,15 +46,41 @@ export interface PopoverProps
     ResponsiveShadowProps {
   /** @beta */
   __unstable_margins?: PopoverMargins
+  /**
+   * Whether the popover should animate in and out.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  animate?: boolean
   arrow?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
+  /**
+   * When `true`, prevent overflow within the current boundary:
+   * - by flipping on its side axis
+   * - by resizing
+  /*
+   * Note that:
+   * - setting `preventOverflow` to `true` also prevents overflow on its side axis
+   * - setting `matchReferenceWidth` to `true` also causes the popover to resize
+   *
+   * @defaultValue false
+   */
   constrainSize?: boolean
   content?: React.ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]
   floatingBoundary?: HTMLElement | null
+  /**
+   * When `true`, set the maximum width to match the reference element, and also prevent overflow within
+   * the current boundary by resizing.
+   *
+   * Note that setting `constrainSize` to `true` also causes the popover to resize
+   *
+   * @defaultValue false
+   */
   matchReferenceWidth?: boolean
   open?: boolean
   overflow?: BoxOverflow
