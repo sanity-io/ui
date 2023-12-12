@@ -17,6 +17,23 @@ const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
 const prettierConfig = JSON.parse(readFileSync(path.resolve(ROOT_PATH, '.prettierrc'), 'utf8'))
 
+const __TEMPLATE__ = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import {forwardRef} from 'react'
+
+/**
+ * @public
+ */
+export const __NAME__ = forwardRef(function __NAME__(
+  props: React.SVGProps<SVGSVGElement>,
+  ref: React.Ref<SVGSVGElement>,
+) {
+  return (
+    __JSX__
+  )
+})
+`
+
 async function readIcon(filePath: string) {
   const relativePath = path.relative(IMPORT_PATH, filePath)
   const nameSegments = relativePath.split('/')
@@ -41,37 +58,26 @@ async function readIcon(filePath: string) {
     {componentName},
   )
 
-  // replace: prettify importing
-  code = code.replace('import * as React from "react";', 'import {forwardRef} from "react";')
+  code = __TEMPLATE__.replace(/__JSX__/g, code)
 
-  // replace: remove unnecessary imports
-  code = code.replace('import { SVGProps, Ref, forwardRef } from "react";', '')
+  code = code.replace(/__NAME__/g, componentName)
 
-  // replace: add `@public` tag and wrap in `forwardRef`
   code = code.replace(
-    `const ${componentName} = (`,
-    `/**\n * @public\n */\nexport const ${componentName} = forwardRef(function ${componentName} (`,
+    /xmlns="http:\/\/www.w3.org\/2000\/svg"/g,
+    ' xmlns="http://www.w3.org/2000/svg" ref={ref} {...props}',
   )
 
-  // replace: fix typing
-  code = code.replace('props: SVGProps<SVGSVGElement>', 'props: React.SVGProps<SVGSVGElement>')
+  code = code.replace(/width="25"/g, `width="1em"`)
+  code = code.replace(/height="25"/g, `height="1em"`)
 
-  // replace: fix typing
-  code = code.replace(
-    'ref: Ref<SVGSVGElement>) =>',
-    // @todo: use `React.ForwardedRef` here (breaking change)
-    'ref: React.Ref<SVGSVGElement>) {\nreturn (',
-  )
+  code = code.replace(/stroke-width=/g, `strokeWidth=`)
+  code = code.replace(/stroke-linecap=/g, `strokeLinecap=`)
+  code = code.replace(/stroke-linejoin=/g, `strokeLinejoin=`)
+  code = code.replace(/clip-rule=/g, `clipRule=`)
+  code = code.replace(/fill-rule=/g, `fillRule=`)
 
-  // replace: wrap in `forwardRef`
-  code = code.replace('</svg>;', '</svg>); })')
-
-  // replace: emove unecessary code
-  code = code.replace(`const ForwardRef = forwardRef(${componentName});`, '')
-  code = code.replace('export default ForwardRef;', '')
-
-  // replace: add generated banner
-  code = GENERATED_BANNER + '\n\n' + code
+  // replace `="0.5"` with `={0.5}`
+  code = code.replace(/="(\d+(?:\.\d+)?)"/g, '={$1}')
 
   // Replace Sanity black hex value with `currentColor`
   code = code
