@@ -152,6 +152,7 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const handleBlur = useCallback(
     (event: React.FocusEvent<HTMLButtonElement>) => {
+      // The EventTarget receiving focus
       const target = event.relatedTarget
 
       if (!(target instanceof Node)) {
@@ -164,9 +165,12 @@ export const MenuButton = forwardRef(function MenuButton(
         }
       }
 
-      setOpen(false)
+      // Only close the menu if the new target receiving focus is not the button itself
+      if (!buttonElement?.contains(target)) {
+        setOpen(false)
+      }
     },
-    [menuElements],
+    [buttonElement, menuElements],
   )
 
   const handleItemClick = useCallback(() => {
