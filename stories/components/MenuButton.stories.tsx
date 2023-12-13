@@ -31,6 +31,15 @@ export const Default: Story = {
   },
 }
 
+export const AnimatedPopover: Story = {
+  args: {
+    popover: {animate: true},
+  },
+  render: (props) => {
+    return <MenuButton {...props} />
+  },
+}
+
 export const PopoverRadius: Story = {
   parameters: {
     controls: {

@@ -1,13 +1,6 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {userEvent, within} from '@storybook/testing-library'
-import {
-  Button,
-  Card,
-  Flex,
-  Text,
-  Tooltip,
-  TooltipDelayGroupProvider,
-} from '../../src/core/primitives'
+import {Button, Card, Text, Tooltip, TooltipDelayGroupProvider} from '../../src/core/primitives'
 import {PLACEMENT_OPTIONS} from '../constants'
 import {getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
@@ -40,13 +33,21 @@ const meta: Meta<typeof Tooltip> = {
 export default meta
 type Story = StoryObj<typeof Tooltip>
 
-export const Basic: Story = {
+export const Default: Story = {
+  render: (props) => {
+    return <Tooltip {...props} />
+  },
+}
+
+export const Animated: Story = {
+  args: {animate: true},
   render: (props) => {
     return <Tooltip {...props} />
   },
 }
 
 export const Placements: Story = {
+  args: {animate: true},
   render: (props) => {
     return (
       <>
@@ -86,7 +87,7 @@ export const WithOpenDelay: Story = {
   },
 }
 
-export const Animated: Story = {
+export const WithDelayGroup: Story = {
   args: {
     animate: true,
     delay: {open: 200},
@@ -98,33 +99,12 @@ export const Animated: Story = {
   },
   render: (props) => {
     return (
-      <Card
-        style={{
-          height: 'calc(100vh - 100px)',
-          overflow: 'hidden',
-          position: 'relative',
-          resize: 'both',
-          width: '500px',
-          padding: '20px',
-        }}
-        border
-      >
-        <Flex direction="column" align="flex-start" gap={2}>
-          <Flex direction="column" gap={2}>
-            <Text size={1}>Standalone tooltip</Text>
-            <Tooltip {...props} />
-          </Flex>
-          <Flex direction={'column'} gap={2} width="fill">
-            <Text size={1}>Grouped tooltips</Text>
-            <Flex>
-              <TooltipDelayGroupProvider delay={{open: 200}}>
-                <Tooltip {...props} />
-                <Tooltip {...props} />
-              </TooltipDelayGroupProvider>
-            </Flex>
-          </Flex>
-        </Flex>
-      </Card>
+      <TooltipDelayGroupProvider delay={{open: 200}}>
+        <Tooltip {...props} />
+        <Tooltip {...props} />
+        <Tooltip {...props} />
+        <Tooltip {...props} />
+      </TooltipDelayGroupProvider>
     )
   },
   play: async ({canvasElement}) => {
