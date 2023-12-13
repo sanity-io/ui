@@ -5,7 +5,7 @@ import {Button, Flex} from '../../src/core/primitives'
 
 const meta: Meta<typeof MenuButton> = {
   args: {
-    button: <Button tone="primary" text="Open" />,
+    button: <Button text="Open" />,
     menu: (
       <Menu>
         <MenuItem icon={SearchIcon} id="menu-item-1" text="Search" />
@@ -24,6 +24,15 @@ export default meta
 type Story = StoryObj<typeof MenuButton>
 
 export const Default: Story = {
+  render: (props) => {
+    return <MenuButton {...props} />
+  },
+}
+
+export const AnimatedPopover: Story = {
+  args: {
+    popover: {animate: true},
+  },
   render: (props) => {
     return <MenuButton {...props} />
   },
