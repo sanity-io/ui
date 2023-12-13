@@ -1,11 +1,13 @@
 import {ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
+import {expect} from '@storybook/jest'
 import type {Meta, StoryObj} from '@storybook/react'
+import {userEvent, within} from '@storybook/testing-library'
 import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
 import {Button, Flex} from '../../src/core/primitives'
 
 const meta: Meta<typeof MenuButton> = {
   args: {
-    button: <Button tone="primary" text="Open" />,
+    button: <Button text="Open" />,
     menu: (
       <Menu>
         <MenuItem icon={SearchIcon} id="menu-item-1" text="Search" />
@@ -67,5 +69,35 @@ export const WithMenuGroup: Story = {
   },
   render: (props) => {
     return <MenuButton {...props} />
+  },
+}
+
+export const WithSelectedItem: Story = {
+  args: {
+    menu: (
+      <Menu data-testid="menu">
+        <MenuItem id="menu-item-1" selected text="Search" />
+        <MenuItem id="menu-item-2" text="Clock" />
+        <MenuDivider />
+        <MenuItem id="menu-item-3" text="Comment" />
+        <MenuItem id="menu-item-4" text="Expand" />
+      </Menu>
+    ),
+  },
+  render: (props) => {
+    return <MenuButton {...props} />
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement)
+
+    const button = canvas.getByRole('button', {name: 'Open'})
+
+    await userEvent.click(button)
+    await userEvent.click(button)
+
+    const menu = within(document.documentElement).queryByTestId('menu')
+
+    // Assertion: <Menu> with a selected item should not be visible when clicking the original <MenuButton> to close
+    expect(menu).toBeNull()
   },
 }

@@ -77,4 +77,23 @@ context('Components/MenuButton', () => {
     cy.get('#menu-item-2').focus()
     cy.get('#menu-button[aria-expanded="true"]').should('exist')
   })
+
+  it('clicking should open/close menu (with selected items)', () => {
+    cy.visit('/frame/?path=/components/menu/selected-item')
+
+    // click button
+    cy.get('#menu-button').click()
+    cy.get('#menu-button[aria-expanded="true"]').should('exist')
+
+    // click the same button again
+    cy.get('#menu-button').click()
+    cy.get('#menu-button[aria-expanded="false"]').should('exist')
+  })
+
+  it('should show the selected menu item when opened', () => {
+    cy.visit('/frame/?path=/components/menu/selected-item')
+
+    cy.get('#menu-button').click()
+    cy.get('#menu-item-2').should('be.focused')
+  })
 })
