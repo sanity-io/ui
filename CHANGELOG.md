@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.4](https://github.com/sanity-io/ui/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2023-12-13)
+
+### Bug Fixes
+
+- **menu-button:** close menus containing selected items when re-clicking the menu button ([#1193](https://github.com/sanity-io/ui/issues/1193)) ([7b60c32](https://github.com/sanity-io/ui/commit/7b60c328a1ab00a1637e71de293affef5d4cbb9d))
+
 ## [2.0.0-beta.3](https://github.com/sanity-io/ui/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2023-12-11)
 
 ### Bug Fixes
