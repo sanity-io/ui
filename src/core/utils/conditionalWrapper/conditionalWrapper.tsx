@@ -1,3 +1,6 @@
+/**
+ * @internal
+ */
 export function ConditionalWrapper({
   children,
   condition,

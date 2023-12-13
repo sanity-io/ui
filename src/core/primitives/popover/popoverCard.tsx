@@ -1,10 +1,12 @@
 import {Strategy} from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import styled from 'styled-components'
+import {POPOVER_MOTION_PROPS} from '../../constants'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {Arrow, useLayer} from '../../utils'
-import {Card} from '../card'
+import {Card, CardProps} from '../card'
 import {Flex} from '../flex'
 import {
   DEFAULT_POPOVER_ARROW_HEIGHT,
@@ -13,14 +15,14 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
-const Root = styled(Card)({
-  '&:not([hidden])': {
-    display: 'flex',
-  },
-  flexDirection: 'column',
-  width: 'max-content',
-  minWidth: 'min-content',
-})
+const MotionCard = styled(motion(Card))`
+  &:not([hidden]) {
+    display: flex;
+  }
+  flex-direction: column;
+  width: max-content;
+  min-width: min-content;
+`
 
 /**
  * @internal
@@ -30,13 +32,16 @@ export const PopoverCard = memo(
     props: {
       /** @beta*/
       __unstable_margins?: PopoverMargins
+      animate?: boolean
       arrow: boolean
       arrowRef: React.Ref<HTMLDivElement>
       arrowX?: number
       arrowY?: number
+      originX?: number
+      originY?: number
       overflow?: BoxOverflow
       padding?: number | number[]
-      placement?: Placement
+      placement: Placement
       radius?: Radius | Radius[]
       scheme?: ThemeColorSchemeKey
       shadow?: number | number[]
@@ -50,6 +55,7 @@ export const PopoverCard = memo(
   ) {
     const {
       __unstable_margins: marginsProp,
+      animate,
       arrow,
       arrowRef,
       arrowX,
@@ -57,6 +63,8 @@ export const PopoverCard = memo(
       children,
       padding,
       placement,
+      originX,
+      originY,
       overflow,
       radius,
       scheme,
@@ -84,14 +92,16 @@ export const PopoverCard = memo(
 
     const rootStyle: CSSProperties = useMemo(
       () => ({
+        left: x,
+        originX,
+        originY,
         position: strategy,
         top: y,
-        left: x,
         width,
         zIndex,
         ...style,
       }),
-      [strategy, style, width, x, y, zIndex],
+      [originX, originY, strategy, style, width, x, y, zIndex],
     )
 
     const arrowStyle: CSSProperties = useMemo(
@@ -105,9 +115,9 @@ export const PopoverCard = memo(
     )
 
     return (
-      <Root
+      <MotionCard
         data-ui="Popover"
-        {...restProps}
+        {...(restProps as CardProps & MotionProps)}
         data-placement={placement}
         radius={radius}
         ref={ref}
@@ -116,6 +126,7 @@ export const PopoverCard = memo(
         sizing="border"
         style={rootStyle}
         tone={tone}
+        {...(animate ? POPOVER_MOTION_PROPS : {})}
       >
         <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
           <Flex direction="column" flex={1} padding={padding}>
@@ -132,7 +143,7 @@ export const PopoverCard = memo(
             radius={DEFAULT_POPOVER_ARROW_RADIUS}
           />
         )}
-      </Root>
+      </MotionCard>
     )
   }),
 )

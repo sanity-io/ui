@@ -10,7 +10,7 @@ import {
   RootBoundary,
 } from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {AnimatePresence, motion} from 'framer-motion'
+import {AnimatePresence} from 'framer-motion'
 import {
   cloneElement,
   forwardRef,
@@ -19,27 +19,30 @@ import {
   useMemo,
   useRef,
   useState,
-  CSSProperties,
   ForwardedRef,
   useId,
 } from 'react'
 import styled from 'styled-components'
 import {useArrayProp, useForwardedRef} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
+import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {Placement} from '../../types'
-import {Arrow, Layer, LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
-import {Card} from '../card'
+import {
+  ConditionalWrapper,
+  Layer,
+  LayerProps,
+  Portal,
+  useBoundaryElement,
+  usePortal,
+} from '../../utils'
 import {Delay} from '../types'
-import {ConditionalWrapper} from './conditionalWrapper'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
-  DEFAULT_TOOLTIP_ARROW_HEIGHT,
-  DEFAULT_TOOLTIP_ARROW_RADIUS,
-  DEFAULT_TOOLTIP_ARROW_WIDTH,
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
+import {TooltipCard} from './tooltipCard'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
 /**
@@ -98,6 +101,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const boundaryElementContext = useBoundaryElement()
   const {layer} = useTheme_v2()
   const {
+    animate = false,
     arrow: arrowProp = false,
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
@@ -113,7 +117,6 @@ export const Tooltip = forwardRef(function Tooltip(
     shadow = 2,
     zOffset = layer.tooltip.zOffset,
     delay,
-    animate = false,
     ...restProps
   } = props
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
@@ -168,8 +171,14 @@ export const Tooltip = forwardRef(function Tooltip(
       ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
     }
 
+    // Determine the origin to scale from.
+    // Must be placed after `@sanity/ui/size` and `shift` middleware.
+    if (animate) {
+      ret.push(origin)
+    }
+
     return ret
-  }, [arrowProp, boundaryElement, fallbackPlacements])
+  }, [animate, arrowProp, boundaryElement, fallbackPlacements])
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
@@ -180,15 +189,8 @@ export const Tooltip = forwardRef(function Tooltip(
   const arrowX = middlewareData.arrow?.x
   const arrowY = middlewareData.arrow?.y
 
-  const arrowStyle: CSSProperties = useMemo(
-    () => ({
-      left: arrowX !== null ? arrowX : undefined,
-      top: arrowY !== null ? arrowY : undefined,
-      right: undefined,
-      bottom: undefined,
-    }),
-    [arrowX, arrowY],
-  )
+  const originX = middlewareData['@sanity/ui/origin']?.originX
+  const originY = middlewareData['@sanity/ui/origin']?.originY
 
   const tooltipId = useId()
   const [isOpen, setIsOpen] = useDelayedState(false)
@@ -386,7 +388,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
   if (disabled) return child
 
-  const root = (
+  const tooltip = (
     <Root
       data-ui="Tooltip"
       {...restProps}
@@ -395,62 +397,50 @@ export const Tooltip = forwardRef(function Tooltip(
       zOffset={zOffset}
       $maxWidth={tooltipWidth}
     >
-      <ConditionalWrapper
-        condition={animate} // Add animation wrapper if it should animate
-        wrapper={(children) => (
-          <motion.div
-            initial={{opacity: 0.5, scale: 0.95}}
-            animate={{opacity: 1, scale: 1}}
-            exit={{opacity: 0, scale: 0.95}}
-            transition={{duration: 0.3, type: 'spring'}}
-          >
-            {children}
-          </motion.div>
-        )}
+      <TooltipCard
+        {...restProps}
+        animate={animate}
+        arrow={arrowProp}
+        arrowRef={setArrow}
+        arrowX={arrowX}
+        arrowY={arrowY}
+        originX={originX}
+        originY={originY}
+        padding={padding}
+        placement={placement}
+        radius={radius}
+        ref={setFloating}
+        scheme={scheme}
+        shadow={shadow}
       >
-        <Card
-          data-ui="Tooltip__card"
-          data-placement={placement}
-          padding={padding}
-          radius={radius}
-          scheme={scheme}
-          shadow={shadow}
-        >
-          {content}
-          {arrowProp && (
-            <Arrow
-              ref={setArrow}
-              style={arrowStyle}
-              width={DEFAULT_TOOLTIP_ARROW_WIDTH}
-              height={DEFAULT_TOOLTIP_ARROW_HEIGHT}
-              radius={DEFAULT_TOOLTIP_ARROW_RADIUS}
-            />
-          )}
-        </Card>
-      </ConditionalWrapper>
+        {content}
+      </TooltipCard>
     </Root>
   )
 
   return (
     <>
-      {child}
+      {/* the tooltip */}
       <ConditionalWrapper
         condition={animate}
-        wrapper={(children) => <AnimatePresence>{children}</AnimatePresence>} // Add AnimatePresence if it should animate
+        wrapper={(children) => <AnimatePresence>{children}</AnimatePresence>}
       >
         {showTooltip && (
           <ConditionalWrapper
-            condition={!!portalProp} // Add portal if portalProp is set
+            condition={!!portalProp}
             wrapper={(children) => (
               <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
                 {children}
               </Portal>
             )}
           >
-            {root}
+            {tooltip}
           </ConditionalWrapper>
         )}
       </ConditionalWrapper>
+
+      {/* the referred element */}
+      {child}
     </>
   )
 })

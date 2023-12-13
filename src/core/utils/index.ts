@@ -1,5 +1,6 @@
 export * from './arrow'
 export * from './boundaryElement'
+export * from './conditionalWrapper'
 export * from './elementQuery'
 export * from './errorBoundary'
 export * from './layer'

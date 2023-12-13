@@ -2,7 +2,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {useState} from 'react'
 import {Button, Card, Popover, Text} from '../../src/core/primitives'
-import {RADII} from '../constants'
+import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
@@ -67,6 +67,34 @@ export const Controlled: Story = {
         <Popover {...props} open={open}>
           <Button onClick={() => setOpen(!open)} text="Toggle popover" />
         </Popover>
+      </Card>
+    )
+  },
+}
+
+export const Placements: Story = {
+  args: {
+    animate: true,
+    content: <Text size={1}>Lorem ipsum dolor sit amet, consectetur adipiscing elit</Text>,
+    style: {
+      maxWidth: '150px',
+      wordBreak: 'break-all',
+    },
+  },
+  render: (props) => {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <Card padding={7}>
+        {rowBuilder({
+          gap: 9,
+          renderItem: ({index, value}) => (
+            <Popover {...props} key={index} open={open} placement={value}>
+              <Button onClick={() => setOpen(!open)} text={value} />
+            </Popover>
+          ),
+          rows: PLACEMENT_OPTIONS,
+        })}
       </Card>
     )
   },

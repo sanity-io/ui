@@ -10,6 +10,7 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {AnimatePresence} from 'framer-motion'
 import {
   MutableRefObject,
   RefCallback,
@@ -22,9 +23,16 @@ import {
   useRef,
 } from 'react'
 import {useForwardedRef, useArrayProp, useElementSize, useMediaIndex} from '../../hooks'
+import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
-import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
+import {
+  ConditionalWrapper,
+  LayerProps,
+  LayerProvider,
+  Portal,
+  useBoundaryElement,
+} from '../../utils'
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_POPOVER_DISTANCE,
@@ -116,6 +124,7 @@ export const Popover = memo(
 
     const {
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
+      animate = false,
       arrow: arrowProp = false,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
@@ -260,7 +269,7 @@ export const Popover = memo(
         )
       }
 
-      // Shift the popover so its sits within the boundary eleement
+      // Shift the popover so its sits within the boundary element
       if (preventOverflow) {
         ret.push(
           shift({
@@ -281,6 +290,12 @@ export const Popover = memo(
         )
       }
 
+      // Determine the origin to scale from.
+      // Must be placed after `@sanity/ui/size` and `shift` middleware.
+      if (animate) {
+        ret.push(origin)
+      }
+
       ret.push(
         hide({
           boundary: referenceBoundary || undefined,
@@ -291,6 +306,7 @@ export const Popover = memo(
 
       return ret
     }, [
+      animate,
       arrowProp,
       constrainSize,
       fallbackPlacements,
@@ -311,6 +327,9 @@ export const Popover = memo(
 
     const arrowX = middlewareData.arrow?.x
     const arrowY = middlewareData.arrow?.y
+
+    const originX = middlewareData['@sanity/ui/origin']?.originX
+    const originY = middlewareData['@sanity/ui/origin']?.originY
 
     const setArrow = useCallback((arrowEl: HTMLDivElement | null) => {
       arrowRef.current = arrowEl
@@ -369,6 +388,7 @@ export const Popover = memo(
         <PopoverCard
           {...restProps}
           __unstable_margins={margins}
+          animate={animate}
           arrow={arrowProp}
           arrowRef={setArrow}
           arrowX={arrowX}
@@ -381,6 +401,8 @@ export const Popover = memo(
           ref={setFloating}
           scheme={scheme}
           shadow={shadow}
+          originX={originX}
+          originY={originY}
           strategy={strategy}
           tone={tone}
           width={matchReferenceWidth ? referenceWidthRef.current : width}
@@ -395,17 +417,23 @@ export const Popover = memo(
     return (
       <>
         {/* the popover */}
-        {open && (
-          <>
-            {portal ? (
-              <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
-                {popover}
-              </Portal>
-            ) : (
-              popover
-            )}
-          </>
-        )}
+        <ConditionalWrapper
+          condition={animate}
+          wrapper={(children) => <AnimatePresence>{children}</AnimatePresence>}
+        >
+          {open && (
+            <ConditionalWrapper
+              condition={!!portal}
+              wrapper={(children) => (
+                <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
+                  {children}
+                </Portal>
+              )}
+            >
+              {popover}
+            </ConditionalWrapper>
+          )}
+        </ConditionalWrapper>
 
         {/* the referred element */}
         {child}
