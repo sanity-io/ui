@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.5](https://github.com/sanity-io/ui/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2023-12-13)
+
+### Features
+
+- add animate support to popovers, add custom origin middleware and animate from reference origin ([#1194](https://github.com/sanity-io/ui/issues/1194)) ([9ee54ba](https://github.com/sanity-io/ui/commit/9ee54ba959c4530309e9be91639c1ecab1f8b9d8))
+
 ## [2.0.0-beta.4](https://github.com/sanity-io/ui/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2023-12-13)
 
 ### Bug Fixes
