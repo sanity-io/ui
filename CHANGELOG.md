@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.9](https://github.com/sanity-io/ui/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2023-12-14)
+
+### Bug Fixes
+
+- **deps:** add `react-is` peer dependency ([a9549a8](https://github.com/sanity-io/ui/commit/a9549a8b8d614e394319491302de54eb7b3f1072))
+
 ## [2.0.0-beta.8](https://github.com/sanity-io/ui/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2023-12-14)
 
 ### Features
