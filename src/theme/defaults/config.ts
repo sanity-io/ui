@@ -57,7 +57,7 @@ export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {
     switch: {
       width: 25,
       height: 17,
-      padding: 2,
+      padding: 5,
       transitionDurationMs: 150,
       transitionTimingFunction: 'ease-out',
       focusRing: {offset: 1, width: 1},
