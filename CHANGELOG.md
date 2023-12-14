@@ -5,6 +5,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.6](https://github.com/sanity-io/ui/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2023-12-14)
+
+### Bug Fixes
+
+- **badge:** use regular font weight ([b72b338](https://github.com/sanity-io/ui/commit/b72b338c6d7c9b157e17b4d4c4b7290be30124ff))
+- **build:** update keywords ([74cfd4d](https://github.com/sanity-io/ui/commit/74cfd4d985199a4dad5404b58b76b649b1c61f45))
+- **build:** update node version ([e54707c](https://github.com/sanity-io/ui/commit/e54707cc8d8e3905c242f1e1cf18ba8f719b2557))
+- **card:** add color backdrop variable ([dbcdccd](https://github.com/sanity-io/ui/commit/dbcdccde3f227bd034b944a44568377dd53031a8))
+- **peer-deps:** remove `react-is` from peer deps ([49a832c](https://github.com/sanity-io/ui/commit/49a832c47d0da8a17bed049993784a6318580d9a))
+- **select:** default to `radius=2` ([8ac48c2](https://github.com/sanity-io/ui/commit/8ac48c2f8c972449a689f70ee9ccc770ae4b7bcf))
+- **theme:** adjust syntax colors ([a264240](https://github.com/sanity-io/ui/commit/a264240dd1834397c37b7008a7edc8d6eaaec3a0))
+
 ## [2.0.0-beta.5](https://github.com/sanity-io/ui/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2023-12-13)
 
 ### Features
