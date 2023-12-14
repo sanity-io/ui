@@ -12,8 +12,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(react-dom@18.2.0)(react@18.2.0)
       '@sanity/color':
-        specifier: 3.0.0-beta.8
-        version: 3.0.0-beta.8
+        specifier: 3.0.0-beta.9
+        version: 3.0.0-beta.9
       '@sanity/icons':
         specifier: ^2.7.0
         version: 2.7.0(react@18.2.0)
@@ -4847,8 +4847,8 @@ packages:
     engines: {node: '>=18.0.0'}
     dev: true
 
-  /@sanity/color@3.0.0-beta.8:
-    resolution: {integrity: sha512-jsbef6oey7PlCHmU0/0MABtumcF8eqvxCtMxzkqBNobbSTHqGN+DpZjYX5wBCWF8SvAvSzdf/6tQiX3BSd8Q1Q==}
+  /@sanity/color@3.0.0-beta.9:
+    resolution: {integrity: sha512-Mk7FRDtxz/U2SRlRM0BvUI62jU26W62aYsipaKFt/dk0rOyYa9yzfaojSM/QmW0E4W/nOw74RBA/HrapXUw+2Q==}
     engines: {node: '>=18.0.0'}
     dev: false
 
