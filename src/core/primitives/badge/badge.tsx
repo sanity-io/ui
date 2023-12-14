@@ -54,9 +54,7 @@ export const Badge = forwardRef(function Badge(
       padding={useArrayProp(padding)}
       ref={ref}
     >
-      <Text size={fontSize} weight="medium">
-        {children}
-      </Text>
+      <Text size={fontSize}>{children}</Text>
     </Root>
   )
 })
