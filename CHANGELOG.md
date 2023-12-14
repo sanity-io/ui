@@ -5,6 +5,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.8](https://github.com/sanity-io/ui/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2023-12-14)
+
+### Features
+
+- **theme:** parse parse compile color mix ([2d049be](https://github.com/sanity-io/ui/commit/2d049be2af1e97a9ccf25341d8b462df116245b6))
+
+### Bug Fixes
+
+- **deps:** update `@sanity/color` ([2207abf](https://github.com/sanity-io/ui/commit/2207abf621e3bac7bc3fb4cf1caa145375084371))
+- **switch:** adjust handle shadow ([604ac42](https://github.com/sanity-io/ui/commit/604ac42245c5dd5520245003dc2d7e25216287c4))
+- **theme:** increase switch padding ([e99251d](https://github.com/sanity-io/ui/commit/e99251d6de53c0a50cd1e4b81bc170ce8945803f))
+- **theme:** tweak colors ([6bbfa8a](https://github.com/sanity-io/ui/commit/6bbfa8a0b4c50207bd204be5eb17ac56ae741f4e))
+
 ## [2.0.0-beta.7](https://github.com/sanity-io/ui/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2023-12-14)
 
 ### Bug Fixes
