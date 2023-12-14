@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.10](https://github.com/sanity-io/ui/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2023-12-14)
+
+### Bug Fixes
+
+- **switch:** improve checked read-only state ([6320d59](https://github.com/sanity-io/ui/commit/6320d592b288a36c901cd475482ba21ec5d851d0))
+
 ## [2.0.0-beta.9](https://github.com/sanity-io/ui/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2023-12-14)
 
 ### Bug Fixes
