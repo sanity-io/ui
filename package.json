@@ -155,6 +155,7 @@
   "peerDependencies": {
     "react": "^18",
     "react-dom": "^18",
+    "react-is": "^18",
     "styled-components": "^5.2 || ^6"
   },
   "engines": {
