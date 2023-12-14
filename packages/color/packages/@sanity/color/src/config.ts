@@ -47,11 +47,11 @@ export const config: ColorConfig = {
       },
       800: {
         title: 'Gray 800',
-        hsl: [229, 20, 17],
+        hsl: [229, 19, 18],
       },
       900: {
         title: 'Gray 900',
-        hsl: [228, 21, 13],
+        hsl: [228, 19, 13],
       },
       950: {
         title: 'Gray 950',
@@ -76,31 +76,31 @@ export const config: ColorConfig = {
       },
       300: {
         title: 'Blue 300',
-        hsl: [224, 100, 82],
+        hsl: [224, 100, 83],
       },
       400: {
         title: 'Blue 400',
-        hsl: [226, 100, 72],
+        hsl: [226, 100, 73],
       },
       500: {
         title: 'Blue 500',
-        hsl: [232, 97, 66],
+        hsl: [232, 96, 66],
       },
       600: {
         title: 'Blue 600',
-        hsl: [244, 88, 58],
+        hsl: [239, 78, 58],
       },
       700: {
         title: 'Blue 700',
-        hsl: [247, 75, 41],
+        hsl: [241, 63, 41],
       },
       800: {
         title: 'Blue 800',
-        hsl: [236, 59, 24],
+        hsl: [230, 55, 22],
       },
       900: {
         title: 'Blue 900',
-        hsl: [234, 53, 17],
+        hsl: [234, 49, 17],
       },
       950: {
         title: 'Blue 950',
@@ -113,11 +113,11 @@ export const config: ColorConfig = {
     tints: {
       50: {
         title: 'Purple 50',
-        hsl: [260, 100, 98],
+        hsl: [260, 95, 98],
       },
       100: {
         title: 'Purple 100',
-        hsl: [260, 100, 96],
+        hsl: [260, 98, 96],
       },
       200: {
         title: 'Purple 200',
@@ -145,11 +145,11 @@ export const config: ColorConfig = {
       },
       800: {
         title: 'Purple 800',
-        hsl: [258, 60, 23],
+        hsl: [258, 60, 24],
       },
       900: {
         title: 'Purple 900',
-        hsl: [257, 46, 15],
+        hsl: [257, 46, 17],
       },
       950: {
         title: 'Purple 950',
@@ -190,7 +190,7 @@ export const config: ColorConfig = {
       },
       700: {
         title: 'Magenta 700',
-        hsl: [333, 73, 27],
+        hsl: [333, 73, 28],
       },
       800: {
         title: 'Magenta 800',
@@ -198,7 +198,7 @@ export const config: ColorConfig = {
       },
       900: {
         title: 'Magenta 900',
-        hsl: [327, 46, 12],
+        hsl: [327, 46, 14],
       },
       950: {
         title: 'Magenta 950',
@@ -219,19 +219,19 @@ export const config: ColorConfig = {
       },
       200: {
         title: 'Red 200',
-        hsl: [4, 100, 93],
+        hsl: [4, 98, 93],
       },
       300: {
         title: 'Red 300',
-        hsl: [5, 91, 82],
+        hsl: [5, 95, 82],
       },
       400: {
         title: 'Red 400',
-        hsl: [6, 86, 69],
+        hsl: [6, 90, 69],
       },
       500: {
         title: 'Red 500',
-        hsl: [5, 83, 57],
+        hsl: [5, 85, 57],
       },
       600: {
         title: 'Red 600',
@@ -243,11 +243,11 @@ export const config: ColorConfig = {
       },
       800: {
         title: 'Red 800',
-        hsl: [3, 58, 18],
+        hsl: [3, 58, 19],
       },
       900: {
         title: 'Red 900',
-        hsl: [2, 41, 13],
+        hsl: [2, 41, 14],
       },
       950: {
         title: 'Red 950',
@@ -268,39 +268,39 @@ export const config: ColorConfig = {
       },
       200: {
         title: 'Orange 200',
-        hsl: [24, 100, 90],
+        hsl: [24, 100, 89],
       },
       300: {
         title: 'Orange 300',
-        hsl: [22, 100, 80],
+        hsl: [24, 100, 76],
       },
       400: {
         title: 'Orange 400',
-        hsl: [21, 100, 69],
+        hsl: [24, 100, 63],
       },
       500: {
         title: 'Orange 500',
-        hsl: [20, 100, 58],
+        hsl: [24, 100, 49],
       },
       600: {
         title: 'Orange 600',
-        hsl: [20, 98, 45],
+        hsl: [24, 98, 35],
       },
       700: {
         title: 'Orange 700',
-        hsl: [20, 94, 30],
+        hsl: [24, 94, 25],
       },
       800: {
         title: 'Orange 800',
-        hsl: [18, 82, 15],
+        hsl: [22, 82, 15],
       },
       900: {
         title: 'Orange 900',
-        hsl: [18, 65, 12],
+        hsl: [17, 65, 12],
       },
       950: {
         title: 'Orange 950',
-        hsl: [15, 43, 9],
+        hsl: [14, 43, 9],
       },
     },
   },
@@ -309,39 +309,39 @@ export const config: ColorConfig = {
     tints: {
       50: {
         title: 'Yellow 50',
-        hsl: [51, 100, 97],
+        hsl: [51, 94, 94],
       },
       100: {
         title: 'Yellow 100',
-        hsl: [52, 97, 93],
+        hsl: [52, 91, 86],
       },
       200: {
         title: 'Yellow 200',
-        hsl: [50, 97, 85],
+        hsl: [50, 90, 78],
       },
       300: {
         title: 'Yellow 300',
-        hsl: [47, 98, 76],
+        hsl: [47, 91, 65],
       },
       400: {
         title: 'Yellow 400',
-        hsl: [44, 99, 65],
+        hsl: [44, 95, 53],
       },
       500: {
         title: 'Yellow 500',
-        hsl: [41, 97, 54],
+        hsl: [39, 96, 42],
       },
       600: {
         title: 'Yellow 600',
-        hsl: [38, 90, 42],
+        hsl: [34, 90, 31],
       },
       700: {
         title: 'Yellow 700',
-        hsl: [34, 80, 28],
+        hsl: [31, 80, 22],
       },
       800: {
         title: 'Yellow 800',
-        hsl: [30, 66, 14],
+        hsl: [28, 66, 14],
       },
       900: {
         title: 'Yellow 900',
@@ -358,43 +358,43 @@ export const config: ColorConfig = {
     tints: {
       50: {
         title: 'Green 50',
-        hsl: [161, 89, 97],
+        hsl: [157, 89, 95],
       },
       100: {
         title: 'Green 100',
-        hsl: [160, 100, 93],
+        hsl: [158, 89, 88],
       },
       200: {
         title: 'Green 200',
-        hsl: [162, 90, 82],
+        hsl: [158, 87, 82],
       },
       300: {
         title: 'Green 300',
-        hsl: [162, 92, 69],
+        hsl: [158, 86, 65],
       },
       400: {
         title: 'Green 400',
-        hsl: [162, 94, 57],
+        hsl: [159, 88, 50],
       },
       500: {
         title: 'Green 500',
-        hsl: [162, 96, 45],
+        hsl: [159, 96, 37],
       },
       600: {
         title: 'Green 600',
-        hsl: [162, 98, 33],
+        hsl: [159, 98, 24],
       },
       700: {
         title: 'Green 700',
-        hsl: [162, 98, 21],
+        hsl: [158, 98, 16],
       },
       800: {
         title: 'Green 800',
-        hsl: [162, 91, 9],
+        hsl: [158, 91, 10],
       },
       900: {
         title: 'Green 900',
-        hsl: [162, 72, 7],
+        hsl: [162, 72, 8],
       },
       950: {
         title: 'Green 950',
@@ -407,43 +407,43 @@ export const config: ColorConfig = {
     tints: {
       50: {
         title: 'Cyan 50',
-        hsl: [185, 92, 95],
+        hsl: [180, 92, 95],
       },
       100: {
         title: 'Cyan 100',
-        hsl: [185, 92, 90],
+        hsl: [180, 91, 88],
       },
       200: {
         title: 'Cyan 200',
-        hsl: [185, 91, 83],
+        hsl: [180, 87, 78],
       },
       300: {
         title: 'Cyan 300',
-        hsl: [185, 91, 73],
+        hsl: [180, 81, 66],
       },
       400: {
         title: 'Cyan 400',
-        hsl: [185, 92, 61],
+        hsl: [180, 81, 49],
       },
       500: {
         title: 'Cyan 500',
-        hsl: [187, 93, 49],
+        hsl: [182, 96, 38],
       },
       600: {
         title: 'Cyan 600',
-        hsl: [191, 95, 37],
+        hsl: [185, 96, 26],
       },
       700: {
         title: 'Cyan 700',
-        hsl: [194, 95, 24],
+        hsl: [185, 95, 16],
       },
       800: {
         title: 'Cyan 800',
-        hsl: [194, 86, 11],
+        hsl: [187, 86, 11],
       },
       900: {
         title: 'Cyan 900',
-        hsl: [195, 68, 9],
+        hsl: [188, 68, 9],
       },
       950: {
         title: 'Cyan 950',
