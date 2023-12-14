@@ -11,10 +11,22 @@ test('parse color value', () => {
     tint: '50',
   })
 
+  expect(parseTokenValue('50 50%')).toEqual({
+    type: 'color',
+    tint: '50',
+    mix: 0.5,
+  })
+
   expect(parseTokenValue('cyan/500')).toEqual({
     type: 'color',
-    key: 'cyan/500',
     hue: 'cyan',
+    tint: '500',
+  })
+
+  expect(parseTokenValue('cyan/500 50%')).toEqual({
+    type: 'color',
+    hue: 'cyan',
+    mix: 0.5,
     tint: '500',
   })
 
@@ -26,20 +38,5 @@ test('parse color value', () => {
   expect(parseTokenValue('multiply')).toEqual({
     type: 'blendMode',
     value: 'multiply',
-  })
-
-  expect(parseTokenValue('0')).toEqual({
-    type: 'color',
-    opacity: 0,
-  })
-
-  expect(parseTokenValue('0.1')).toEqual({
-    type: 'color',
-    opacity: 0.1,
-  })
-
-  expect(parseTokenValue('1')).toEqual({
-    type: 'color',
-    opacity: 1,
   })
 })

@@ -63,11 +63,13 @@ export type ColorConfigValue =
   | `black/${ColorConfigOpacityValue}`
   | `white/${ColorConfigOpacityValue}`
   | `${ColorHueKey}`
+  | `${ColorHueKey} ${number}%`
   | `${ColorHueKey}/${ColorTintKey}`
+  | `${ColorHueKey}/${ColorTintKey} ${number}%`
   | `${ColorHueKey}/${ColorTintKey}/${ColorConfigOpacityValue}`
   | `${ColorTintKey}`
+  | `${ColorTintKey} ${number}%`
   | `${ColorTintKey}/${ColorConfigOpacityValue}`
-  | ThemeColorBlendModeKey
 
 /** @public */
 export type ThemeColorTokenValue = [ColorConfigValue, ColorConfigValue]

@@ -29,10 +29,11 @@ export type TokenKeyNode = TokenBaseKeyNode | TokenButtonKeyNode
 /** @internal */
 export interface TokenColorValueNode {
   type: 'color'
-  key?: 'black' | 'white' | `${ColorHueKey}/${ColorTintKey}` | ColorTintKey
+  key?: 'black' | 'white'
   hue?: ColorHueKey
-  tint?: ColorTintKey
+  mix?: number
   opacity?: number
+  tint?: ColorTintKey
 }
 
 /** @internal */

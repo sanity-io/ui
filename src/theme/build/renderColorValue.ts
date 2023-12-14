@@ -1,7 +1,7 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
 import {ThemeColorPalette, parseTokenValue} from '../config'
 import {ThemeColorBlendModeKey} from '../system'
-import {rgba} from './lib/color-fns'
+import {hexToRgb, mix, rgbToHex, rgba} from './lib/color-fns'
 import {mixThemeColor} from './mixThemeColor'
 
 export interface RenderColorValueOptions {
@@ -53,6 +53,13 @@ export function renderColorValue(str: string, options: RenderColorValueOptions):
 
   try {
     hex = mixThemeColor(hex, mixOptions)
+
+    if (bg && node.mix !== undefined) {
+      const from = hexToRgb(bg)
+      const to = hexToRgb(hex)
+
+      hex = rgbToHex(mix(from, to, node.mix))
+    }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.warn('could not blend', hex, mixOptions)
