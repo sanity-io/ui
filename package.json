@@ -170,7 +170,10 @@
   "keywords": [
     "sanity",
     "ui",
-    "components"
+    "primitives",
+    "react",
+    "components",
+    "design-system"
   ],
   "author": "Sanity.io <hello@sanity.io>",
   "homepage": "https://www.sanity.io/",
