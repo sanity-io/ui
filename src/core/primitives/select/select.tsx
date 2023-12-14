@@ -44,7 +44,7 @@ export const Select = forwardRef(function Select(
     disabled,
     fontSize = 2,
     padding = 3,
-    radius = 1,
+    radius = 2,
     readOnly,
     space = 3,
     ...restProps
