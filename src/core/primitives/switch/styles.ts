@@ -102,6 +102,11 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
       --switch-bg-color: ${color.input.default.readOnly.border};
       --switch-fg-color: ${color.input.default.readOnly.bg};
     }
+
+    input:checked[data-read-only]:disabled + && {
+      --switch-bg-color: ${color.input.default.readOnly.fg};
+      --switch-fg-color: ${color.input.default.readOnly.bg};
+    }
   `
 }
 
