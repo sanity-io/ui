@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.7](https://github.com/sanity-io/ui/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2023-12-14)
+
+### Bug Fixes
+
+- **build:** update node version ([ce69f9d](https://github.com/sanity-io/ui/commit/ce69f9dbf5b006b9b739cc65961901408a320f79))
+
 ## [2.0.0-beta.6](https://github.com/sanity-io/ui/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2023-12-14)
 
 ### Bug Fixes
