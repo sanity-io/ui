@@ -12,6 +12,8 @@ export function _cardColorStyle(
   return {
     // from base
 
+    '--card-backdrop-color': base.backdrop,
+
     '--card-focus-ring-color': base.focusRing,
 
     '--card-shadow-outline-color': base.shadow.outline,
