@@ -152,7 +152,7 @@ export function switchThumbStyles(
     transition-timing-function: ${input.switch.transitionTimingFunction};
     background: var(--switch-fg-color);
     transform: translate3d(0, 0, 0);
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 
     ${checked &&
     css`
