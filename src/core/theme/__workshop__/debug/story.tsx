@@ -1,3 +1,4 @@
+import {CropIcon} from '@sanity/icons'
 import {
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_CARD_TONES,
@@ -8,6 +9,7 @@ import {
   ThemeColorScheme_v2,
   ThemeColorState_v2,
 } from '@sanity/ui/theme'
+import {useBoolean} from '@sanity/ui-workshop'
 import {CSSProperties} from 'react'
 import {Badge, Box, Flex, KBD, Stack, Text} from '../../../primitives'
 import {useRootTheme} from '../../useRootTheme'
@@ -27,17 +29,23 @@ export default function DebugStory() {
 function DebugScheme(props: {scheme: ThemeColorScheme_v2}) {
   const {scheme} = props
 
+  const button = useBoolean('Button', false, 'Props') || false
+  const selectable = useBoolean('Selectable', false, 'Props') || false
+
   return (
     <Box flex={1} style={{backgroundColor: scheme.default.bg}}>
       {THEME_COLOR_CARD_TONES.map((tone) => (
-        <DebugCard card={scheme[tone]} key={tone} />
+        <DebugCard card={scheme[tone]} features={{button, selectable}} key={tone} />
       ))}
     </Box>
   )
 }
 
-function DebugCard(props: {card: ThemeColorCard_v2}) {
-  const {card} = props
+function DebugCard(props: {
+  card: ThemeColorCard_v2
+  features: {button: boolean; selectable: boolean}
+}) {
+  const {card, features} = props
 
   // card.avatar
   // card.backdrop
@@ -56,27 +64,44 @@ function DebugCard(props: {card: ThemeColorCard_v2}) {
   return (
     <Box style={getStateVars(card)}>
       <DebugState />
-      <Stack padding={2} space={1}>
-        {THEME_COLOR_BUTTON_MODES.map((mode) => (
-          <Stack key={mode} space={1}>
-            {THEME_COLOR_STATE_TONES.map((stateTone) => (
-              <Flex key={stateTone} gap={1}>
-                {/* {mode} */}
-                {THEME_COLOR_STATES.map((state) => (
-                  <Box
-                    flex={1}
-                    key={state}
-                    style={getStateVars(card.button[mode][stateTone][state])}
-                  >
-                    <DebugState />
-                    {/* {state} */}
-                  </Box>
-                ))}
-              </Flex>
-            ))}
-          </Stack>
-        ))}
-      </Stack>
+
+      {features.button && (
+        <Stack padding={2} space={1}>
+          {THEME_COLOR_BUTTON_MODES.map((mode) => (
+            <Stack key={mode} space={1}>
+              {THEME_COLOR_STATE_TONES.map((stateTone) => (
+                <Flex key={stateTone} gap={1}>
+                  {/* {mode} */}
+                  {THEME_COLOR_STATES.map((state) => (
+                    <Box
+                      flex={1}
+                      key={state}
+                      style={getStateVars(card.button[mode][stateTone][state])}
+                    >
+                      <DebugState />
+                    </Box>
+                  ))}
+                </Flex>
+              ))}
+            </Stack>
+          ))}
+        </Stack>
+      )}
+
+      {features.selectable && (
+        <Stack padding={2} space={1}>
+          {THEME_COLOR_STATE_TONES.map((stateTone) => (
+            <Flex key={stateTone} gap={1}>
+              {/* {mode} */}
+              {THEME_COLOR_STATES.map((state) => (
+                <Box flex={1} key={state} style={getStateVars(card.selectable[stateTone][state])}>
+                  <DebugState />
+                </Box>
+              ))}
+            </Flex>
+          ))}
+        </Stack>
+      )}
     </Box>
   )
 }
@@ -89,7 +114,12 @@ function DebugState() {
       space={3}
       style={{border: '1px solid var(--card-border-color)'}}
     >
-      <Text size={1}>Text</Text>
+      <Flex gap={3}>
+        <Text size={1}>Text</Text>
+        <Text size={1}>
+          <CropIcon />
+        </Text>
+      </Flex>
       <Text muted size={1}>
         Muted
       </Text>
@@ -116,13 +146,20 @@ function DebugState() {
 
 function getStateVars(state: ThemeColorState_v2) {
   return {
-    '--card-bg-color': state.bg,
-    '--card-border-color': state.border,
-    '--card-fg-color': state.fg,
     '--card-accent-fg-color': state.accent.fg,
-    '--card-muted-fg-color': state.muted.fg,
+
     '--card-code-bg-color': state.code.bg,
     '--card-code-fg-color': state.code.fg,
+
+    '--card-bg-color': state.bg,
+
+    '--card-border-color': state.border,
+
+    '--card-fg-color': state.fg,
+
+    '--card-icon-color': state.icon,
+
+    '--card-muted-fg-color': state.muted.fg,
 
     '--card-kbd-bg-color': state.kbd.bg,
     '--card-kbd-border-color': state.kbd.border,

@@ -62,7 +62,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   ) as IconSymbol
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const placeholder = useText('Placeholder', '', 'Props') || undefined
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0, 'Props')
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props')
   const readOnly = useBoolean('Read only', false, 'Props')
   const space = useSelect('Space', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const weight = useSelect('Weight', WORKSHOP_FONT_WEIGHT_OPTIONS, '', 'Props') || undefined
