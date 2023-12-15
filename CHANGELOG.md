@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.11](https://github.com/sanity-io/ui/compare/v2.0.0-beta.10...v2.0.0-beta.11) (2023-12-15)
+
+### Bug Fixes
+
+- **text-input:** improve styles ([eacee35](https://github.com/sanity-io/ui/commit/eacee356cab613f0c1435e1d8da7428fb33f77b6))
+- **theme:** improve color tokens ([27bea7d](https://github.com/sanity-io/ui/commit/27bea7d28c3e979b680fe8716e5e83adf4c48930))
+
 ## [2.0.0-beta.10](https://github.com/sanity-io/ui/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2023-12-14)
 
 ### Bug Fixes
