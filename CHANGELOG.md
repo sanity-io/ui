@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.12](https://github.com/sanity-io/ui/compare/v2.0.0-beta.11...v2.0.0-beta.12) (2023-12-15)
+
+### Bug Fixes
+
+- **button:** button with right icon is pushed to the end ([#1195](https://github.com/sanity-io/ui/issues/1195)) ([ad87933](https://github.com/sanity-io/ui/commit/ad87933f9cb1b58ad96d1b7f0154cd9a36b0158e))
+
 ## [2.0.0-beta.11](https://github.com/sanity-io/ui/compare/v2.0.0-beta.10...v2.0.0-beta.11) (2023-12-15)
 
 ### Bug Fixes
