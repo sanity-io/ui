@@ -35,10 +35,11 @@ export const defaultColorTokens: ThemeColorTokens = {
       border: ['200', '800'],
       code: {
         bg: ['50', '950'],
-        fg: ['600', '300'],
+        fg: ['600', '400'],
       },
       fg: ['800', '200'],
       focusRing: ['blue/500', 'blue/500'],
+      icon: ['600', '400'],
       kbd: {
         bg: ['white', 'black'],
         fg: ['600', '400'],
@@ -49,7 +50,7 @@ export const defaultColorTokens: ThemeColorTokens = {
       },
       muted: {
         bg: ['50', '950'],
-        fg: ['700 70%', '300 70%'],
+        fg: ['700 75%', '300 75%'],
       },
       shadow: {
         outline: ['500/0.3', '500/0.4'],
@@ -64,14 +65,10 @@ export const defaultColorTokens: ThemeColorTokens = {
     },
     transparent: {
       bg: ['50', 'black'],
-      fg: ['600', '400'],
-      muted: {
-        fg: ['600', '400'],
-      },
     },
     default: {
       bg: ['white', '950'],
-      fg: ['black', '200'],
+      fg: ['800', '200'],
       muted: {
         fg: ['600', '400'],
       },
@@ -95,6 +92,13 @@ export const defaultColorTokens: ThemeColorTokens = {
           accent: {
             fg: ['purple/300', 'purple/700'],
           },
+          avatar: {
+            '*': {
+              _blend: ['multiply', 'screen'],
+              bg: ['white', 'black'],
+              fg: ['black', 'white'],
+            },
+          },
           badge: {
             '*': {
               bg: ['900', '100'],
@@ -110,18 +114,18 @@ export const defaultColorTokens: ThemeColorTokens = {
             fg: ['200', '600'],
           },
           fg: ['white', 'black'],
-          icon: ['200', '800'],
+          icon: ['100 70%', '900 70%'],
           kbd: {
             bg: ['black', 'white'],
-            fg: ['200', '800'],
+            fg: ['200', '600'],
             border: ['800', '200'],
           },
           link: {
-            fg: ['blue/200', 'blue/700'],
+            fg: ['blue/200', 'blue/600'],
           },
           muted: {
             bg: ['950', '50'],
-            fg: ['100 70%', '600'],
+            fg: ['100 70%', '900 70%'],
           },
           skeleton: {
             from: ['900', '100'],
@@ -140,6 +144,9 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
         disabled: {
           _hue: 'gray',
+          accent: {
+            fg: ['100 70%', '900 70%'],
+          },
           badge: {
             '*': {
               bg: ['gray/700', 'gray/300'],
@@ -149,11 +156,13 @@ export const defaultColorTokens: ThemeColorTokens = {
             },
           },
           bg: ['200', '800'],
-          icon: ['white', 'black'],
           kbd: {
             bg: ['black', 'white'],
             fg: ['white', 'black'],
             border: ['700', '300'],
+          },
+          link: {
+            fg: ['100 70%', '900 70%'],
           },
         },
       },
@@ -198,7 +207,7 @@ export const defaultColorTokens: ThemeColorTokens = {
             fg: ['700 60%', '400 60%'],
           },
           fg: ['600', '400'],
-          icon: ['600', '500'],
+          icon: ['700 60%', '300 60%'],
           kbd: {
             bg: ['white', 'black'],
             fg: ['600', '400'],
@@ -291,14 +300,14 @@ export const defaultColorTokens: ThemeColorTokens = {
           bg: ['white', 'black'],
           border: ['white/0', 'black/0'],
           code: {
-            bg: ['100', '950'],
-            fg: ['600', '300'],
+            bg: ['50', '950'],
+            fg: ['700 75%', '300 75%'],
           },
           fg: ['700', '300'],
-          icon: ['700 70%', '300 70%'],
+          icon: ['700 75%', '300 75%'],
           kbd: {
             bg: ['white', 'black'],
-            fg: ['600', '400'],
+            fg: ['700', '300'],
             border: ['200', '800'],
           },
           link: {
@@ -306,7 +315,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           },
           muted: {
             bg: ['100', '950'],
-            fg: ['700 70%', '300 70%'],
+            fg: ['700 75%', '300 75%'],
           },
           skeleton: {
             from: ['100', '900'],
@@ -315,7 +324,6 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
         hovered: {
           bg: ['50', '950'],
-          fg: ['700', '300'],
           icon: ['700 70%', '400 70%'],
         },
         pressed: {
@@ -330,6 +338,9 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
         disabled: {
           _hue: 'gray',
+          accent: {
+            fg: ['200', '800'],
+          },
           badge: {
             '*': {
               _hue: 'gray',
@@ -339,13 +350,12 @@ export const defaultColorTokens: ThemeColorTokens = {
               icon: ['gray/200', 'gray/800'],
             },
           },
+          code: {
+            bg: ['50', '950'],
+            fg: ['200', '800'],
+          },
           fg: ['200', '800'],
-          muted: {
-            fg: ['200', '800'],
-          },
-          accent: {
-            fg: ['200', '800'],
-          },
+          icon: ['200', '800'],
           kbd: {
             bg: ['white', 'black'],
             fg: ['200', '800'],
@@ -354,8 +364,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           link: {
             fg: ['200', '800'],
           },
-          code: {
-            bg: ['50', '950'],
+          muted: {
             fg: ['200', '800'],
           },
         },
@@ -398,15 +407,8 @@ export const defaultColorTokens: ThemeColorTokens = {
     '*': {
       '*': {
         _blend: ['multiply', 'screen'],
-        bg: ['white', 'black'],
-        fg: ['800', '200'],
-        icon: ['700 70%', '300 70%'],
-        avatar: {
-          '*': {
-            _blend: ['screen', 'multiply'],
-            bg: ['500', '400'],
-            fg: ['white', 'black'],
-          },
+        accent: {
+          fg: ['purple/700 70%', 'purple/300 70%'],
         },
         badge: {
           '*': {
@@ -416,25 +418,25 @@ export const defaultColorTokens: ThemeColorTokens = {
             icon: ['500', '500'],
           },
         },
+        bg: ['white', 'black'],
         border: ['200', '800'],
-        muted: {
+        code: {
           bg: ['50', '950'],
-          fg: ['700', '300'],
+          fg: ['600', '400'],
         },
-        accent: {
-          fg: ['purple/600', 'purple/400'],
-        },
+        fg: ['700', '300'],
+        icon: ['700 75%', '300 75%'],
         kbd: {
           bg: ['white', 'black'],
           fg: ['600', '400'],
           border: ['200', '800'],
         },
         link: {
-          fg: ['blue/700', 'blue/300'],
+          fg: ['blue/700 70%', 'blue/300 70%'],
         },
-        code: {
-          bg: ['50', '950'],
-          fg: ['700', '300'],
+        muted: {
+          bg: ['100', '950'],
+          fg: ['700 75%', '300 75%'],
         },
         skeleton: {
           from: ['100', '900'],
@@ -449,9 +451,9 @@ export const defaultColorTokens: ThemeColorTokens = {
       },
       selected: {
         _blend: ['screen', 'multiply'],
-        bg: ['500', '400'],
-        fg: ['white', 'black'],
-        icon: ['200', '800'],
+        accent: {
+          fg: ['purple/300', 'purple/700'],
+        },
         avatar: {
           '*': {
             _blend: ['multiply', 'screen'],
@@ -461,31 +463,31 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
         badge: {
           '*': {
-            bg: ['700', '300'],
-            fg: ['white', 'black'],
-            dot: ['300', '700'],
-            icon: ['300', '700'],
+            bg: ['900', '100'],
+            fg: ['400', '600'],
+            dot: ['500', '500'],
+            icon: ['500', '500'],
           },
         },
+        bg: ['500', '400'],
         border: ['500 20%', '400 20%'],
-        muted: {
-          bg: ['950', '50'],
-          fg: ['200', '800'],
-        },
-        accent: {
-          fg: ['purple/200', 'purple/800'],
-        },
-        kbd: {
-          bg: ['black/0', 'white/0'],
-          fg: ['white', 'black'],
-          border: ['gray/700', 'gray/300'],
-        },
-        link: {
-          fg: ['blue/200', 'blue/800'],
-        },
         code: {
           bg: ['500 20%', '400 20%'],
-          fg: ['300', '700'],
+          fg: ['200', '600'],
+        },
+        fg: ['white', 'black'],
+        icon: ['100 70%', '900 70%'],
+        kbd: {
+          bg: ['black', 'white'],
+          fg: ['200', '600'],
+          border: ['800', '200'],
+        },
+        link: {
+          fg: ['blue/200', 'blue/600'],
+        },
+        muted: {
+          bg: ['950', '50'],
+          fg: ['100 70%', '900 70%'],
         },
         skeleton: {
           from: ['900', '100'],
@@ -493,19 +495,35 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
       },
       disabled: {
-        fg: ['200', '800'],
-        icon: ['200', '800'],
-        muted: {
+        _hue: 'gray',
+        accent: {
           fg: ['200', '800'],
         },
-        accent: {
-          fg: ['purple/200', 'purple/800'],
+        badge: {
+          '*': {
+            _hue: 'gray',
+            bg: ['50', '950'],
+            fg: ['gray/200', 'gray/800'],
+            dot: ['gray/200', 'gray/800'],
+            icon: ['gray/200', 'gray/800'],
+          },
         },
-        link: {
-          fg: ['blue/200', 'blue/800'],
-        },
+        border: ['100', '900'],
         code: {
           bg: ['50', '950'],
+          fg: ['200', '800'],
+        },
+        fg: ['200', '800'],
+        icon: ['200', '800'],
+        kbd: {
+          bg: ['white', 'black'],
+          fg: ['200', '800'],
+          border: ['100', '900'],
+        },
+        link: {
+          fg: ['200', '800'],
+        },
+        muted: {
           fg: ['200', '800'],
         },
       },
