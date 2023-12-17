@@ -24,7 +24,7 @@ export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {
     focusRing: {offset: -1, width: 1},
     shadow: {outline: OUTLINE_WIDTH},
   },
-  container: [480, 640, 960, 1280, 1600, 1920],
+  container: [320, 640, 960, 1280, 1600, 1920],
   media: [360, 600, 900, 1200, 1800, 2400],
   layer: {
     dialog: {zOffset: 600},
