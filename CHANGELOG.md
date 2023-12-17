@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.13](https://github.com/sanity-io/ui/compare/v2.0.0-beta.12...v2.0.0-beta.13) (2023-12-17)
+
+### Bug Fixes
+
+- **theme:** update container width size ([#1198](https://github.com/sanity-io/ui/issues/1198)) ([9ba891e](https://github.com/sanity-io/ui/commit/9ba891eae34a4d1444f4c48138ce92f78ee2a67e))
+
 ## [2.0.0-beta.12](https://github.com/sanity-io/ui/compare/v2.0.0-beta.11...v2.0.0-beta.12) (2023-12-15)
 
 ### Bug Fixes
