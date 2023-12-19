@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/sanity-io/logos/compare/v2.1.2...v2.1.3) (2023-12-19)
+
+### Bug Fixes
+
+- **deps:** widen @sanity/color peer dep range ([#38](https://github.com/sanity-io/logos/issues/38)) ([b1a9760](https://github.com/sanity-io/logos/commit/b1a9760b42c626bd07052948fe2942b208cb5c72))
+
 ## [2.1.2](https://github.com/sanity-io/logos/compare/v2.1.1...v2.1.2) (2023-01-04)
 
 ### Bug Fixes
