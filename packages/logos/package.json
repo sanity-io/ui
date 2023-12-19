@@ -49,7 +49,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
-    "@sanity/color": "^2.2.3",
+    "@sanity/color": "^3.0.0-beta",
     "@sanity/icons": "^2.2.2",
     "@sanity/pkg-utils": "^2.2.5",
     "@sanity/semantic-release-preset": "^4.0.0",
@@ -92,7 +92,7 @@
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "@sanity/color": "^2.0",
+    "@sanity/color": "^2.0 || ^3.0 || ^3.0-beta",
     "react": "^18"
   },
   "engines": {
