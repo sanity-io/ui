@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/sanity-io/logos/compare/v2.1.3...v2.1.4) (2023-12-20)
+
+### Bug Fixes
+
+- **deps:** use correct semver range for @sanity/color 3.0.0-beta ([d9d5608](https://github.com/sanity-io/logos/commit/d9d5608687d34b40bb9b7b9bb1a125851e772cfb))
+
 ## [2.1.3](https://github.com/sanity-io/logos/compare/v2.1.2...v2.1.3) (2023-12-19)
 
 ### Bug Fixes
