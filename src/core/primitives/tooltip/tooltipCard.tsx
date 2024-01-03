@@ -57,9 +57,10 @@ export const TooltipCard = memo(
       () => ({
         originX,
         originY,
+        willChange: animate ? 'transform' : undefined,
         ...style,
       }),
-      [originX, originY, style],
+      [animate, originX, originY, style],
     )
 
     const arrowStyle: CSSProperties = useMemo(

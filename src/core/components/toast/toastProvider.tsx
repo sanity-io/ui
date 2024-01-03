@@ -134,7 +134,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
                   <motion.div
                     animate={{opacity: 1, y: 0, scale: 1}}
                     exit={{opacity: 0, scale: 0.5, transition: {duration: 0.2}}}
-                    initial={{opacity: 0, y: 32, scale: 0.25}}
+                    initial={{opacity: 0, y: 32, scale: 0.25, willChange: 'transform'}}
                     key={id}
                     layout="position"
                     transition={{type: 'spring', damping: 30, stiffness: 400}}
