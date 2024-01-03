@@ -99,9 +99,10 @@ export const PopoverCard = memo(
         top: y,
         width,
         zIndex,
+        willChange: animate ? 'transform' : undefined,
         ...style,
       }),
-      [originX, originY, strategy, style, width, x, y, zIndex],
+      [animate, originX, originY, strategy, style, width, x, y, zIndex],
     )
 
     const arrowStyle: CSSProperties = useMemo(
