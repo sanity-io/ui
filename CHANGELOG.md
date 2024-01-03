@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.14](https://github.com/sanity-io/ui/compare/v2.0.0-beta.13...v2.0.0-beta.14) (2024-01-03)
+
+### Bug Fixes
+
+- improve scale transitions for non-retina screens ([#1200](https://github.com/sanity-io/ui/issues/1200)) ([3e52721](https://github.com/sanity-io/ui/commit/3e52721691157a61ec7b02aacb0289870a0d55cd))
+
 ## [2.0.0-beta.13](https://github.com/sanity-io/ui/compare/v2.0.0-beta.12...v2.0.0-beta.13) (2023-12-17)
 
 ### Bug Fixes
