@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.15](https://github.com/sanity-io/ui/compare/v2.0.0-beta.14...v2.0.0-beta.15) (2024-01-05)
+
+### Bug Fixes
+
+- remove crossfade pollution on fade in transitions ([#1201](https://github.com/sanity-io/ui/issues/1201)) ([591cea3](https://github.com/sanity-io/ui/commit/591cea343d72278a087bb19e9313d2d0cd16716c))
+
 ## [2.0.0-beta.14](https://github.com/sanity-io/ui/compare/v2.0.0-beta.13...v2.0.0-beta.14) (2024-01-03)
 
 ### Bug Fixes
