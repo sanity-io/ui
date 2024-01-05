@@ -1,6 +1,7 @@
 import {AnimatePresence, motion} from 'framer-motion'
 import {useCallback, useEffect, useMemo, useRef, useState, startTransition} from 'react'
 import styled from 'styled-components'
+import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {useMounted} from '../../hooks/useMounted'
 import {Box} from '../../primitives'
 import {Layer} from '../../utils'
@@ -132,9 +133,25 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
               <AnimatePresence initial={false}>
                 {state.map(({dismiss, id, params}) => (
                   <motion.div
-                    animate={{opacity: 1, y: 0, scale: 1}}
-                    exit={{opacity: 0, scale: 0.5, transition: {duration: 0.2}}}
-                    initial={{opacity: 0, y: 32, scale: 0.25, willChange: 'transform'}}
+                    animate={{
+                      opacity: [0, 1, 1],
+                      [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [0, 0, 1],
+                      y: 0,
+                      scale: 1,
+                    }}
+                    exit={{
+                      opacity: [1, 1, 0],
+                      [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [1, 0, 0],
+                      scale: 0.5,
+                      transition: {duration: 0.2},
+                    }}
+                    initial={{
+                      opacity: 0,
+                      [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: 0,
+                      y: 32,
+                      scale: 0.25,
+                      willChange: 'transform',
+                    }}
                     key={id}
                     layout="position"
                     transition={{type: 'spring', damping: 30, stiffness: 400}}

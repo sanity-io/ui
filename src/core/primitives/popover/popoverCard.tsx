@@ -3,7 +3,7 @@ import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import styled from 'styled-components'
-import {POPOVER_MOTION_PROPS} from '../../constants'
+import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY, POPOVER_MOTION_PROPS} from '../../constants'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {Arrow, useLayer} from '../../utils'
 import {Card, CardProps} from '../card'
@@ -22,6 +22,10 @@ const MotionCard = styled(motion(Card))`
   flex-direction: column;
   width: max-content;
   min-width: min-content;
+  & > * {
+    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
+    will-change: opacity;
+  }
 `
 
 /**
