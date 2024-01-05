@@ -2,7 +2,7 @@ import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import styled from 'styled-components'
-import {POPOVER_MOTION_PROPS} from '../../constants'
+import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY, POPOVER_MOTION_PROPS} from '../../constants'
 import {Placement, Radius} from '../../types'
 import {Arrow} from '../../utils'
 import {Card, CardProps} from '../card'
@@ -12,7 +12,12 @@ import {
   DEFAULT_TOOLTIP_ARROW_WIDTH,
 } from './constants'
 
-const MotionCard = styled(motion(Card))``
+const MotionCard = styled(motion(Card))`
+  & > * {
+    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
+    will-change: opacity;
+  }
+`
 
 /**
  * @internal

@@ -1,7 +1,9 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeColorToneKey} from '@sanity/ui/theme'
 import styled from 'styled-components'
+import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
+import type {ButtonTone} from '../../types'
 
 /**
  * @public
@@ -20,17 +22,28 @@ const STATUS_CARD_TONE: {[key: string]: ThemeColorToneKey} = {
   warning: 'caution',
   success: 'positive',
   info: 'primary',
-}
+} as const
+
+const BUTTON_TONE = {
+  error: 'critical',
+  warning: 'caution',
+  success: 'positive',
+  info: 'primary',
+} satisfies {[key: string]: ButtonTone}
 
 const ROLES = {
   error: 'alert',
   warning: 'alert',
   success: 'alert',
   info: 'alert',
-}
+} as const
 
 const Root = styled(Card)`
   pointer-events: all;
+  & > * {
+    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
+    will-change: opacity;
+  }
 `
 
 const TextBox = styled(Flex)`
@@ -49,6 +62,7 @@ export function Toast(
 ): React.ReactElement {
   const {closable, description, onClose, radius = 3, title, status, ...restProps} = props
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
+  const buttonTone = status ? BUTTON_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
 
   return (
@@ -84,6 +98,7 @@ export function Toast(
               icon={CloseIcon}
               mode="bleed"
               padding={2}
+              tone={buttonTone}
               onClick={onClose}
               style={{verticalAlign: 'top'}}
             />
