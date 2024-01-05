@@ -21,8 +21,8 @@ export const POPOVER_MOTION_PROPS: {
   transition: Transition
 } = {
   initial: {opacity: 0.5, scale: 0.97},
-  animate: {opacity: 1, scale: 1},
-  exit: {opacity: 0, scale: 0.97},
+  animate: {opacity: 1, scale: 1, transition: {duration: 2}},
+  exit: {opacity: 0, scale: 0.97, transition: {duration: 2}},
   transition: {duration: 0.4, type: 'spring'},
 }
 
