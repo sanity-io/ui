@@ -114,7 +114,7 @@ export type RootTheme = BaseTheme
 /**
  * @public
  */
-export type Theme_v2 = Omit<RootTheme_v2, 'color'> & {color: ThemeColorCard_v2}
+export type Theme_v2 = Omit<RootTheme_v2, 'color'> & {color: ThemeColorCard_v2; _resolved: boolean}
 
 /**
  * @public

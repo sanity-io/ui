@@ -6,7 +6,7 @@ const cache = new WeakMap<Theme, Theme_v2>()
 
 /** @public */
 export function getTheme_v2(theme: Theme): Theme_v2 {
-  if (theme.sanity.v2) return theme.sanity.v2
+  if (theme.sanity.v2?._resolved) return theme.sanity.v2
 
   const cached_v2 = cache.get(theme)
 
@@ -14,6 +14,7 @@ export function getTheme_v2(theme: Theme): Theme_v2 {
 
   const v2: Theme_v2 = {
     _version: 2,
+    _resolved: true,
     avatar: {
       ...defaultThemeConfig.avatar,
       ...theme.sanity.avatar,
