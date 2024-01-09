@@ -1,4 +1,4 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+import {CSSObject} from '@sanity/ui/theme'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveTextAlignStyleProps} from './types'
@@ -10,7 +10,7 @@ import {ResponsiveTextAlignStyleProps} from './types'
 export function responsiveTextAlignStyle(
   props: ResponsiveTextAlignStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {media} = getTheme_v2(props.theme)
+  const {media} = props.theme.sanity.v2
 
   return _responsive(media, props.$align, (textAlign) => {
     return {textAlign}

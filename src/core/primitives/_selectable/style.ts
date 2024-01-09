@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_cardColorStyle} from '../../styles/card'
@@ -39,7 +38,7 @@ export function selectableColorStyle(
   props: SelectableStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
   const {$tone} = props
-  const {color, style} = getTheme_v2(props.theme)
+  const {color, style} = props.theme.sanity.v2
   const tone = color.selectable[$tone]
 
   return css`

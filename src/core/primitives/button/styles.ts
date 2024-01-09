@@ -1,4 +1,4 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+import {CSSObject} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_cardColorStyle} from '../../styles/card'
@@ -12,7 +12,7 @@ export function buttonBaseStyles(
   props: {$width?: ButtonWidth} & ThemeProps,
 ): ReturnType<typeof css> {
   const {$width} = props
-  const {style} = getTheme_v2(props.theme)
+  const {style} = props.theme.sanity.v2
 
   return css`
     ${style?.button};
@@ -67,7 +67,7 @@ export function buttonColorStyles(
   props: {$mode: ButtonMode; $tone: ButtonTone} & ThemeProps,
 ): CSSObject[] {
   const {$mode} = props
-  const {button, color: baseColor, style} = getTheme_v2(props.theme)
+  const {button, color: baseColor, style} = props.theme.sanity.v2
   const shadow = props.$mode === 'ghost'
   const mode = baseColor.button[$mode] || baseColor.button.default
   const color = mode[props.$tone] || mode.default

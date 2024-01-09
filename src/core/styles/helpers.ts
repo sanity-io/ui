@@ -1,4 +1,4 @@
-import {Theme, getTheme_v2} from '@sanity/ui/theme'
+import {Theme} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {EMPTY_ARRAY} from '../constants'
 
@@ -64,7 +64,7 @@ export function _getResponsiveSpace(
     return null
   }
 
-  const {media, space} = getTheme_v2(theme)
+  const {media, space} = theme.sanity.v2
 
   return _responsive(media, spaceIndexes, (spaceIndex) =>
     _fillCSSObject(props, rem(space[spaceIndex])),

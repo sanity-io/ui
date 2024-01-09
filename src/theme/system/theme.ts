@@ -133,6 +133,6 @@ export interface Theme {
      * @deprecated Use `v2.color` instead
      */
     color: ThemeColor
-    v2?: Theme_v2
+    v2: Theme_v2
   }
 }

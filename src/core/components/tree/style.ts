@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {_cardColorStyle} from '../../styles/card'
@@ -38,7 +37,7 @@ export function treeItemRootStyle(): ReturnType<typeof css> {
 
 export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css> {
   const $tone = 'default'
-  const {color} = getTheme_v2(props.theme)
+  const {color} = props.theme.sanity.v2
   const tone = color.selectable[$tone]
 
   return css`
@@ -92,7 +91,7 @@ export function treeItemBoxStyle(
   props: TreeItemBoxStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
   const {$level} = props
-  const {space} = getTheme_v2(props.theme)
+  const {space} = props.theme.sanity.v2
 
   return css`
     padding-left: ${rem(space[2] * $level)};

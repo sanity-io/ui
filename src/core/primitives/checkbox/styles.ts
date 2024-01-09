@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
@@ -11,7 +10,7 @@ export function checkboxBaseStyles(): ReturnType<typeof css> {
 }
 
 export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
-  const {color, input, radius} = getTheme_v2(props.theme)
+  const {color, input, radius} = props.theme.sanity.v2
   const {focusRing} = input.checkbox
 
   return css`

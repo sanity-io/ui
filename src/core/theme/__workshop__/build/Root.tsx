@@ -1,8 +1,7 @@
 import {css, styled} from 'styled-components'
-import {getTheme_v2} from '../../../../theme'
 
 export const Root = styled.div((props) => {
-  const {button, card, input} = getTheme_v2(props.theme)
+  const {button, card, input} = props.theme.sanity.v2
 
   return css`
     background: #000;

@@ -1,4 +1,4 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+import {CSSObject} from '@sanity/ui/theme'
 import {rem, _responsive, ThemeProps} from '../../styles'
 
 export interface ResponsiveStackSpaceStyleProps {
@@ -23,7 +23,7 @@ export function stackBaseStyle(): CSSObject {
 export function responsiveStackSpaceStyle(
   props: ResponsiveStackSpaceStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {media, space} = getTheme_v2(props.theme)
+  const {media, space} = props.theme.sanity.v2
 
   return _responsive(media, props.$space, (spaceIndex) => ({
     gridGap: rem(space[spaceIndex]),

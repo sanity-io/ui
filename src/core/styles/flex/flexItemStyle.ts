@@ -1,4 +1,4 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+import {CSSObject} from '@sanity/ui/theme'
 import {EMPTY_ARRAY} from '../../constants'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
@@ -18,7 +18,7 @@ export function flexItemStyle(): Array<
 export function responsiveFlexItemStyle(
   props: ResponsiveFlexItemStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {media} = getTheme_v2(props.theme)
+  const {media} = props.theme.sanity.v2
 
   if (!props.$flex) return EMPTY_ARRAY
 

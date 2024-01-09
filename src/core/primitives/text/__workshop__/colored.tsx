@@ -1,5 +1,5 @@
 import {Flex, Text, ThemeProps} from '@sanity/ui'
-import {ThemeColorAvatarColorKey, ThemeColorSpotKey, getTheme_v2} from '@sanity/ui/theme'
+import {ThemeColorAvatarColorKey, ThemeColorSpotKey} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 import {styled, css} from 'styled-components'
 import {WORKSHOP_SPOT_COLOR_OPTIONS} from '../../../__workshop__/constants'
@@ -9,7 +9,7 @@ const ColoredText = styled(Text)<{$color?: ThemeColorSpotKey}>((
     $color?: ThemeColorAvatarColorKey
   } & ThemeProps,
 ) => {
-  const {color} = getTheme_v2(props.theme)
+  const {color} = props.theme.sanity.v2
 
   return css`
     color: ${color.avatar[props.$color || 'gray'].bg};

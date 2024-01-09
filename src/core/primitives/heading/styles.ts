@@ -1,11 +1,10 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {HeadingStyleProps} from './types'
 
 export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$accent, $muted} = props
-  const {font} = getTheme_v2(props.theme)
+  const {font} = props.theme.sanity.v2
 
   return css`
     ${$accent &&
