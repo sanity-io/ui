@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.16](https://github.com/sanity-io/ui/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2024-01-09)
+
+### Bug Fixes
+
+- **theme:** add resolved key to v2 theme ([#1203](https://github.com/sanity-io/ui/issues/1203)) ([c81bc6d](https://github.com/sanity-io/ui/commit/c81bc6d4a43bacb35ab7653abb5340106597fa78))
+
 ## [2.0.0-beta.15](https://github.com/sanity-io/ui/compare/v2.0.0-beta.14...v2.0.0-beta.15) (2024-01-05)
 
 ### Bug Fixes
