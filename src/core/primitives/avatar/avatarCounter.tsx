@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {forwardRef, useMemo} from 'react'
 import styled, {css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
@@ -8,7 +7,7 @@ import {AvatarSize} from '../../types'
 import {Label} from '../label'
 
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
-  const {avatar, media} = getTheme_v2(props.theme)
+  const {avatar, media} = props.theme.sanity.v2
 
   return _responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size]
@@ -24,7 +23,7 @@ function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeP
 }
 
 function _avatarCounterBaseStyle(props: ThemeProps) {
-  const {space} = getTheme_v2(props.theme)
+  const {space} = props.theme.sanity.v2
 
   return css`
     align-items: center;

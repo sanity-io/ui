@@ -1,4 +1,4 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+import {CSSObject} from '@sanity/ui/theme'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
@@ -25,7 +25,7 @@ export function responsiveFlexStyle(): Array<
 export function responsiveFlexAlignStyle(
   props: ResponsiveFlexStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {media} = getTheme_v2(props.theme)
+  const {media} = props.theme.sanity.v2
 
   return _responsive(media, props.$align, (align) => {
     return {alignItems: align}
@@ -33,7 +33,7 @@ export function responsiveFlexAlignStyle(
 }
 
 function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
-  const {media, space} = getTheme_v2(props.theme)
+  const {media, space} = props.theme.sanity.v2
 
   return _responsive(media, props.$gap, (gap) => ({
     gap: gap ? rem(space[gap]) : undefined,
@@ -41,7 +41,7 @@ function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
 }
 
 export function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
-  const {media} = getTheme_v2(props.theme)
+  const {media} = props.theme.sanity.v2
 
   return _responsive(media, props.$wrap, (wrap) => {
     return {flexWrap: wrap}
@@ -51,7 +51,7 @@ export function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeP
 export function responsiveFlexJustifyStyle(
   props: ResponsiveFlexStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {media} = getTheme_v2(props.theme)
+  const {media} = props.theme.sanity.v2
 
   return _responsive(media, props.$justify, (justify) => {
     return {justifyContent: justify}
@@ -61,7 +61,7 @@ export function responsiveFlexJustifyStyle(
 export function responsiveFlexDirectionStyle(
   props: ResponsiveFlexStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {media} = getTheme_v2(props.theme)
+  const {media} = props.theme.sanity.v2
 
   return _responsive(media, props.$direction, (direction) => {
     return {flexDirection: direction}

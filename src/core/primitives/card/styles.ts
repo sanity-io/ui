@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 import {_cardColorStyle} from '../../styles/card'
@@ -13,7 +12,7 @@ export function cardStyle(
 
 export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$checkered} = props
-  const {space} = getTheme_v2(props.theme)
+  const {space} = props.theme.sanity.v2
 
   return css`
     ${$checkered &&
@@ -50,7 +49,7 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
   const {$checkered, $focusRing} = props
-  const {card, color, style} = getTheme_v2(props.theme)
+  const {card, color, style} = props.theme.sanity.v2
   const border = {width: card.border.width, color: 'var(--card-border-color)'}
 
   return css`

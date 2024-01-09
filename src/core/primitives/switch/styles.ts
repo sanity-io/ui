@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
@@ -36,7 +35,7 @@ export function switchInputStyles(): ReturnType<typeof css> {
 
 /* Representation */
 export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof css> {
-  const {color, input} = getTheme_v2(props.theme)
+  const {color, input} = props.theme.sanity.v2
 
   return css`
     --switch-bg-color: ${color.input.default.enabled.border};
@@ -112,7 +111,7 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
 
 /* Track */
 export function switchTrackStyles(props: ThemeProps): ReturnType<typeof css> {
-  const {input} = getTheme_v2(props.theme)
+  const {input} = props.theme.sanity.v2
 
   return css`
     &:not([hidden]) {
@@ -133,7 +132,7 @@ export function switchThumbStyles(
   props: {$checked?: boolean; $indeterminate?: boolean} & ThemeProps,
 ): ReturnType<typeof css> {
   const {$indeterminate} = props
-  const {input} = getTheme_v2(props.theme)
+  const {input} = props.theme.sanity.v2
   const trackWidth = input.switch.width
   const trackHeight = input.switch.height
   const trackPadding = input.switch.padding

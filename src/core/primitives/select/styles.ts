@@ -1,4 +1,4 @@
-import {ThemeFontSize, getTheme_v2} from '@sanity/ui/theme'
+import {ThemeFontSize} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, _responsive, ThemeProps} from '../../styles'
@@ -24,7 +24,7 @@ function rootStyle(): ReturnType<typeof css> {
 }
 
 function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {font} = getTheme_v2(props.theme)
+  const {font} = props.theme.sanity.v2
 
   return css`
     -webkit-font-smoothing: antialiased;
@@ -43,7 +43,7 @@ function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
 }
 
 function inputColorStyle(props: ThemeProps) {
-  const {color, input} = getTheme_v2(props.theme)
+  const {color, input} = props.theme.sanity.v2
 
   return css`
     /* enabled */
@@ -102,7 +102,7 @@ function textSize(size: ThemeFontSize) {
 
 function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
   const {$fontSize} = props
-  const {font, media} = getTheme_v2(props.theme)
+  const {font, media} = props.theme.sanity.v2
 
   return _responsive(media, $fontSize, (sizeIndex) =>
     textSize(font.text.sizes[sizeIndex] || font.text.sizes[2]),
@@ -129,7 +129,7 @@ function inputStyle(): Array<
 }
 
 function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {color} = getTheme_v2(props.theme)
+  const {color} = props.theme.sanity.v2
 
   return css`
     pointer-events: none;

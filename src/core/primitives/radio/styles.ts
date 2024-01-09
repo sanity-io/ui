@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {rem, ThemeProps} from '../../styles'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
@@ -18,7 +17,7 @@ export function radioBaseStyle(): ReturnType<typeof css> {
 }
 
 export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {color, input} = getTheme_v2(props.theme)
+  const {color, input} = props.theme.sanity.v2
   const dist = (input.radio.size - input.radio.markSize) / 2
 
   return css`

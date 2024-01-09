@@ -1,10 +1,10 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+import {CSSObject} from '@sanity/ui/theme'
 import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveRadiusStyleProps} from './types'
 
 export function responsiveRadiusStyle(props: ResponsiveRadiusStyleProps & ThemeProps): CSSObject[] {
-  const {media, radius} = getTheme_v2(props.theme)
+  const {media, radius} = props.theme.sanity.v2
 
   return _responsive(media, props.$radius, (value) => {
     let borderRadius: string | 0 = 0

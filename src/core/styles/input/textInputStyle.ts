@@ -1,4 +1,4 @@
-import {ThemeColorSchemeKey, ThemeFontWeightKey, getTheme_v2} from '@sanity/ui/theme'
+import {ThemeColorSchemeKey, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {CardTone} from '../../types'
@@ -43,7 +43,7 @@ export function textInputBaseStyle(
   props: TextInputInputStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
   const {$scheme, $tone, $weight} = props
-  const {color, font} = getTheme_v2(props.theme)
+  const {color, font} = props.theme.sanity.v2
 
   return css`
     appearance: none;
@@ -113,7 +113,7 @@ export function textInputBaseStyle(
 }
 
 export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject[] {
-  const {font, media} = getTheme_v2(props.theme)
+  const {font, media} = props.theme.sanity.v2
 
   return _responsive(media, props.$fontSize, (sizeIndex) => {
     const size = font.text.sizes[sizeIndex] || font.text.sizes[2]
@@ -129,7 +129,7 @@ export function textInputRepresentationStyle(
   props: TextInputRepresentationStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
   const {$hasPrefix, $hasSuffix, $scheme, $tone, $unstableDisableFocusRing} = props
-  const {color, input} = getTheme_v2(props.theme)
+  const {color, input} = props.theme.sanity.v2
 
   return css`
     --input-box-shadow: none;

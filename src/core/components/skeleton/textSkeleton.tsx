@@ -1,4 +1,4 @@
-import {ThemeFontKey, getTheme_v2} from '@sanity/ui/theme'
+import {ThemeFontKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import styled from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -12,7 +12,7 @@ const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
   } & ThemeProps,
 ) => {
   const {$size, $style} = props
-  const {font, media} = getTheme_v2(props.theme)
+  const {font, media} = props.theme.sanity.v2
   const fontStyle = font[$style]
 
   const styles = _responsive(media, $size, (sizeIndex) => {

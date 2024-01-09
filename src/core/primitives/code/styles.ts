@@ -1,10 +1,7 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css, ExecutionContext} from 'styled-components'
 
 function codeSyntaxHighlightingStyle({theme}: ExecutionContext) {
-  const {
-    color: {syntax: color},
-  } = getTheme_v2(theme)
+  const color = theme.sanity.v2.color.syntax
 
   return {
     '&.atrule': {color: color.atrule},

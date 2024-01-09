@@ -49,8 +49,15 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
     return getScopedTheme(rootTheme, scheme, tone)
   }, [scheme, rootTheme, tone])
 
+  // eslint-disable-next-line no-console
+  console.log('THEME', theme)
+
   if (!theme) {
     return <pre>ThemeProvider: no "theme" property provided</pre>
+  }
+
+  if (!theme.sanity.v2) {
+    return <pre>ThemeProvider: no "theme.sanity.v2" property in theme</pre>
   }
 
   return (

@@ -1,4 +1,3 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 import {ThemeProps} from '../../styles'
 
@@ -6,7 +5,7 @@ export function textBaseStyle(
   props: {$accent?: boolean; $muted?: boolean} & ThemeProps,
 ): ReturnType<typeof css> {
   const {$accent, $muted} = props
-  const {font} = getTheme_v2(props.theme)
+  const {font} = props.theme.sanity.v2
 
   return css`
     color: var(--card-fg-color);

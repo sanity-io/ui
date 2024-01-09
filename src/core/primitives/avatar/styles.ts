@@ -1,4 +1,4 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+import {CSSObject} from '@sanity/ui/theme'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {focusRingStyle} from '../../styles/internal'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
@@ -58,7 +58,7 @@ function avatarArrowStyle(): CSSObject {
 
 export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSObject {
   const {$color} = props
-  const {avatar} = getTheme_v2(props.theme)
+  const {avatar} = props.theme.sanity.v2
 
   return {
     '--avatar-bg-color': `var(--card-avatar-${$color}-bg-color)`,
@@ -107,7 +107,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 export function responsiveAvatarSizeStyle(
   props: ResponsiveAvatarSizeStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {avatar, media} = getTheme_v2(props.theme)
+  const {avatar, media} = props.theme.sanity.v2
 
   return _responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size] || avatar.sizes[0]
