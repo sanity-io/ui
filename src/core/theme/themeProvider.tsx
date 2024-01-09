@@ -1,12 +1,7 @@
-import {
-  RootTheme,
-  ThemeColorCardToneKey,
-  ThemeColorSchemeKey,
-  Theme,
-  getScopedTheme,
-} from '@sanity/ui/theme'
+import {RootTheme, ThemeColorCardToneKey, ThemeColorSchemeKey, Theme} from '@sanity/ui/theme'
 import {useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
+import {getScopedTheme} from '../../theme'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 
@@ -48,9 +43,6 @@ export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
 
     return getScopedTheme(rootTheme, scheme, tone)
   }, [scheme, rootTheme, tone])
-
-  // eslint-disable-next-line no-console
-  console.log('THEME', theme)
 
   if (!theme) {
     return <pre>ThemeProvider: no "theme" property provided</pre>

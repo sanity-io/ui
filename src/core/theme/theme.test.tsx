@@ -1,8 +1,8 @@
 /** @jest-environment jsdom */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {buildTheme} from '@sanity/ui/theme'
 import {render} from '../../../test'
+import {buildTheme} from '../../theme'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 import {useRootTheme} from './useRootTheme'
