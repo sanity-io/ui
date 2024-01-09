@@ -114,7 +114,15 @@ export type RootTheme = BaseTheme
 /**
  * @public
  */
-export type Theme_v2 = Omit<RootTheme_v2, 'color'> & {color: ThemeColorCard_v2}
+export type Theme_v2 = Omit<RootTheme_v2, 'color'> & {
+  color: ThemeColorCard_v2
+  /**
+   * Indicates whether the theme is resolved or raw, it's necessary to avoid issues
+   * with sanity V2 components accessing a v1 <ThemeProvider>.
+   * See https://github.com/sanity-io/ui/pull/1203 for more info.
+   */
+  _resolved: boolean
+}
 
 /**
  * @public

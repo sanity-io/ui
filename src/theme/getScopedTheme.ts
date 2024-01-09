@@ -36,6 +36,7 @@ export function getScopedTheme(
       layer: layer_v0,
       v2: {
         ...v2,
+        _resolved: true,
         color: color_v2,
         layer: layer_v2,
       },
