@@ -114,6 +114,7 @@ export const OpenDialogWithButton: Story = {
         <Button onClick={onOpen} text="Open dialog" />
         {open && (
           <Dialog
+            animate
             {...props}
             onClose={onClose}
             footer={
