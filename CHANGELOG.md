@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.17](https://github.com/sanity-io/ui/compare/v2.0.0-beta.16...v2.0.0-beta.17) (2024-01-10)
+
+### Bug Fixes
+
+- remove `unknown prop "animate"` console warning ([aaa353c](https://github.com/sanity-io/ui/commit/aaa353cc58efb83351074c8ffcce270fd4b41b7b))
+
 ## [2.0.0-beta.16](https://github.com/sanity-io/ui/compare/v2.0.0-beta.15...v2.0.0-beta.16) (2024-01-09)
 
 ### Bug Fixes
