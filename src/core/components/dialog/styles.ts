@@ -41,11 +41,11 @@ export function responsiveDialogPositionStyle(
  * @internal
  */
 export interface AnimationDialogStyleProps {
-  animate: boolean
+  $animate: boolean
 }
 
 export function animationDialogStyle(props: AnimationDialogStyleProps): ReturnType<typeof css> {
-  if (!props.animate) return css``
+  if (!props.$animate) return css``
 
   return css`
     @keyframes zoomIn {
