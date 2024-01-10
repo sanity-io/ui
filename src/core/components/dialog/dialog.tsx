@@ -394,6 +394,7 @@ export const Dialog = forwardRef(function Dialog(
     <Portal __unstable_name={portalProp}>
       <Root
         {...restProps}
+        $animate={animate}
         $padding={padding}
         $position={position}
         aria-labelledby={labelId}
@@ -406,7 +407,6 @@ export const Dialog = forwardRef(function Dialog(
         ref={ref}
         role="dialog"
         zOffset={zOffset}
-        animate={animate}
       >
         <div ref={preDivRef} tabIndex={0} />
         <DialogCard
