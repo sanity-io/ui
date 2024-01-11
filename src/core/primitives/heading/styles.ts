@@ -46,6 +46,10 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
       }
     }
 
+    & strong {
+      font-weight: ${font.heading.weights.bold};
+    }
+
     & svg {
       /* Certain popular CSS libraries changes the defaults for SVG display */
       /* Make sure SVGs are rendered as inline elements */
