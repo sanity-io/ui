@@ -5,6 +5,31 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/sanity-io/color/compare/color-v3.0.0-beta.9...color-v3.0.0) (2024-01-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* optimized colors for @sanity/ui 2.0
+
+### Bug Fixes
+
+* **build:** fix source path ([9295b62](https://github.com/sanity-io/color/commit/9295b6235e948da98aec90cdb6a677c29b607c40))
+* **deps:** update dependencies ([148880b](https://github.com/sanity-io/color/commit/148880b5846d18570a086584c310e8c64d01aa02))
+* **deps:** update dependencies ([09752d2](https://github.com/sanity-io/color/commit/09752d2239d1a8d2ddf60c3479662095183ece75))
+* optimized colors for @sanity/ui 2.0 ([c9a880a](https://github.com/sanity-io/color/commit/c9a880a44b48f0625824d420819aa4656095d316))
+* update color config ([1244b12](https://github.com/sanity-io/color/commit/1244b120c42580cf6ee8d30be1f35a3705373d0d))
+* update color config ([43653d3](https://github.com/sanity-io/color/commit/43653d377c01234ad423012c30bbbbd9b603f021))
+* update color config ([7ae0ee3](https://github.com/sanity-io/color/commit/7ae0ee38096edff8974c7670870ca2e276927de7))
+* update config ([7f0ec8e](https://github.com/sanity-io/color/commit/7f0ec8e991bfb44bf9e88b11c6faa115218ef42d))
+* update config ([189ce50](https://github.com/sanity-io/color/commit/189ce5033aa0b952355e12cfdd9846476b4845d1))
+* update config ([ad378be](https://github.com/sanity-io/color/commit/ad378be0ffca9c4e6b67559945c6a37c72932853))
+
+
+### Miscellaneous Chores
+
+* release 3.0.0 ([8044365](https://github.com/sanity-io/color/commit/80443652fb2d6c2e9ff048b2fd7a640eb236479c))
+
 ## [3.0.0-beta.9](https://github.com/sanity-io/color/compare/color-v3.0.0-beta.8...color-v3.0.0-beta.9) (2023-12-14)
 
 ### Bug Fixes
