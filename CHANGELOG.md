@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.19](https://github.com/sanity-io/ui/compare/v2.0.0-beta.18...v2.0.0-beta.19) (2024-01-14)
+
+### Bug Fixes
+
+- darken backdrop color in light mode ([a12a0df](https://github.com/sanity-io/ui/commit/a12a0df746b0764dffd9c14455a7e98f64e82155))
+- **deps:** update @sanity/color ([a357c77](https://github.com/sanity-io/ui/commit/a357c772d21c2a71cdb29de01ace041aad95bd3b))
+
 ## [2.0.0-beta.18](https://github.com/sanity-io/ui/compare/v2.0.0-beta.17...v2.0.0-beta.18) (2024-01-11)
 
 ### Bug Fixes
