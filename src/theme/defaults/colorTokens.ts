@@ -14,7 +14,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           fg: ['white', 'black'],
         },
       },
-      backdrop: ['gray/200/0.2', 'black/0.5'],
+      backdrop: ['gray/200/0.5', 'black/0.5'],
       badge: {
         '*': {
           bg: ['100', '900'],
