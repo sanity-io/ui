@@ -18,7 +18,6 @@ export interface ThemeColor extends Partial<Omit<ThemeColorGenericState, 'muted'
   button: ThemeColorButton
   card: ThemeColorCard
   dark: boolean
-  focusRing?: string
   input: ThemeColorInput
   muted: ThemeColorMuted
   selectable?: ThemeColorSelectable
