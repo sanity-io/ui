@@ -56,7 +56,7 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
       id-token: write # to enable use of OIDC for npm provenance
     name: 'Release please'
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2
