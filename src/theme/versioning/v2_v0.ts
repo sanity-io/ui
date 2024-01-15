@@ -91,6 +91,7 @@ function themeColor_v2_v0(color_v2: ThemeColorCard_v2): ThemeColor {
       ...color_v2.button.default,
       transparent: color_v2.button.default.default,
     },
+    selectable: color_v2.selectable,
     spot: {
       gray: color_v2.avatar.gray.bg,
       blue: color_v2.avatar.blue.bg,
