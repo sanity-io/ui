@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.23](https://github.com/sanity-io/ui/compare/v2.0.0-beta.22...v2.0.0-beta.23) (2024-01-15)
+
+### Bug Fixes
+
+- ensure button primitives use the correct default mode ([ccdb59e](https://github.com/sanity-io/ui/commit/ccdb59ea64dc1be857a5947819391c805b1c7622))
+
 ## [2.0.0-beta.22](https://github.com/sanity-io/ui/compare/v2.0.0-beta.21...v2.0.0-beta.22) (2024-01-15)
 
 ### Bug Fixes
