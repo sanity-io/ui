@@ -12,7 +12,13 @@ export interface ThemeColorState_v2 {
   accent: {
     fg: string
   }
+  /**
+   * @internal  This may be removed in a future release
+   * */
   avatar: ThemeColorAvatar_v2
+  /**
+   * @internal  This may be removed in a future release
+   * */
   badge: ThemeColorBadge_v2
   bg: string
   border: string
