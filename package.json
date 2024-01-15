@@ -206,6 +206,10 @@
       {
         "name": "alpha",
         "prerelease": true
+      },
+      {
+        "name": "gamma",
+        "prerelease": true
       }
     ]
   }
