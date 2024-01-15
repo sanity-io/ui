@@ -5,6 +5,24 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0-beta.18](https://github.com/sanity-io/ui/compare/v2.0.0-beta.18...v3.0.0-beta.18) (2024-01-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* force release in gamma
+
+### Features
+
+* force release in gamma ([bdac389](https://github.com/sanity-io/ui/commit/bdac389081c0829bce45ef83b38dc937f3adf5a4))
+
+
+### Bug Fixes
+
+* downgrade to release please v3, remove release action ([56a19f7](https://github.com/sanity-io/ui/commit/56a19f7a2e3ea41860553656539ab8e7c540f2c9))
+* **release:** update tibdex to v2 ([80bc91e](https://github.com/sanity-io/ui/commit/80bc91e2794468db79a7bfc8807e0c632951d5ec))
+* upgrade release please to v4 ([177b038](https://github.com/sanity-io/ui/commit/177b038c2d814e876b5bdd3d8fe78f1a59020f05))
+
 ## [2.0.0-beta.18](https://github.com/sanity-io/ui/compare/v2.0.0-beta.17...v2.0.0-beta.18) (2024-01-11)
 
 ### Bug Fixes
