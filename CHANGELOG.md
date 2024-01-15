@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.21](https://github.com/sanity-io/ui/compare/v2.0.0-beta.20...v2.0.0-beta.21) (2024-01-15)
+
+### Bug Fixes
+
+- remove unused `focusRing` from legacy ThemeColor interface ([#1207](https://github.com/sanity-io/ui/issues/1207)) ([2a4d9b6](https://github.com/sanity-io/ui/commit/2a4d9b6e7b152ce786198f6080f7752ffeda8413))
+
 ## [2.0.0-beta.20](https://github.com/sanity-io/ui/compare/v2.0.0-beta.19...v2.0.0-beta.20) (2024-01-15)
 
 ### Bug Fixes
