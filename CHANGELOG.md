@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-beta.20](https://github.com/sanity-io/ui/compare/v2.0.0-beta.19...v2.0.0-beta.20) (2024-01-15)
+
+### Bug Fixes
+
+- **theme:** restore selectable in v0 theme ([#1206](https://github.com/sanity-io/ui/issues/1206)) ([98447fe](https://github.com/sanity-io/ui/commit/98447fe6dbd3bf58c2905f5cbe593316b8cbe89c))
+
 ## [2.0.0-beta.19](https://github.com/sanity-io/ui/compare/v2.0.0-beta.18...v2.0.0-beta.19) (2024-01-14)
 
 ### Bug Fixes
