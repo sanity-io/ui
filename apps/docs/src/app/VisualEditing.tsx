@@ -38,13 +38,14 @@ export function VisualEditing(props: {dataset: string; projectId: string}) {
           return () => setNavigate(undefined)
         },
         update: (update) => {
+          const url = update.url.replace(/^(\/ui)/, '')
           switch (update.type) {
             case 'push':
-              return routerRef.current.push(update.url)
+              return routerRef.current.push(url)
             case 'pop':
               return routerRef.current.back()
             case 'replace':
-              return routerRef.current.replace(update.url)
+              return routerRef.current.replace(url)
             default:
               throw new Error(`Unknown update type: ${update.type}`)
           }
@@ -56,10 +57,10 @@ export function VisualEditing(props: {dataset: string; projectId: string}) {
 
   useEffect(() => {
     if (navigate) {
-      navigate({
-        type: 'push',
-        url: `${pathname}${searchParams?.size ? `?${searchParams}` : ''}`,
-      })
+      const basePath = '/ui'
+      const path = pathname === '/' ? basePath : `${basePath}${pathname}`
+      const url = `${path}${searchParams?.size ? `?${searchParams}` : ''}`
+      navigate({type: 'push', url})
     }
   }, [navigate, pathname, searchParams])
 
