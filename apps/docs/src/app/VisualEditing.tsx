@@ -1,10 +1,10 @@
 'use client'
 
 import {createClient} from '@sanity/client'
-import {enableOverlays, HistoryAdapter, HistoryAdapterNavigate} from '@sanity/overlays'
+import {enableOverlays, HistoryAdapterNavigate} from '@sanity/overlays'
 import {useLiveMode} from '@sanity/react-loader/rsc'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
-import {useEffect, useMemo, useRef} from 'react'
+import {useEffect, useMemo, useRef, useState} from 'react'
 
 export function VisualEditing(props: {dataset: string; projectId: string}) {
   const {dataset, projectId} = props
@@ -24,42 +24,44 @@ export function VisualEditing(props: {dataset: string; projectId: string}) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const routerRef = useRef(router)
-  const navigateRef = useRef<HistoryAdapterNavigate>()
-
-  routerRef.current = router
-
-  const history: HistoryAdapter = useMemo(
-    () => ({
-      subscribe(navigate) {
-        navigateRef.current = navigate
-        return () => {
-          navigateRef.current = undefined
-        }
-      },
-      update(update) {
-        switch (update.type) {
-          case 'push':
-            return routerRef.current.push(update.url)
-          case 'pop':
-            return routerRef.current.back()
-          case 'replace':
-            return routerRef.current.replace(update.url)
-          default:
-            throw new Error(`Unknown update type: ${update.type}`)
-        }
-      },
-    }),
-    [],
-  )
-
-  useEffect(() => enableOverlays({history}), [history])
+  const [navigate, setNavigate] = useState<HistoryAdapterNavigate | undefined>()
 
   useEffect(() => {
-    navigateRef.current?.({
-      type: 'push',
-      url: `${pathname}${searchParams?.size ? `?${searchParams}` : ''}`,
+    routerRef.current = router
+  }, [router])
+
+  useEffect(() => {
+    const disable = enableOverlays({
+      history: {
+        subscribe: (navigate) => {
+          setNavigate(() => navigate)
+          return () => setNavigate(undefined)
+        },
+        update: (update) => {
+          switch (update.type) {
+            case 'push':
+              return routerRef.current.push(update.url)
+            case 'pop':
+              return routerRef.current.back()
+            case 'replace':
+              return routerRef.current.replace(update.url)
+            default:
+              throw new Error(`Unknown update type: ${update.type}`)
+          }
+        },
+      },
     })
-  }, [pathname, searchParams])
+    return () => disable()
+  }, [])
+
+  useEffect(() => {
+    if (navigate) {
+      navigate({
+        type: 'push',
+        url: `${pathname}${searchParams?.size ? `?${searchParams}` : ''}`,
+      })
+    }
+  }, [navigate, pathname, searchParams])
 
   useLiveMode({client})
 
