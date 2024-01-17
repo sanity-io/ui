@@ -19,14 +19,14 @@
     "@portabletext/react": "^3.0.11",
     "@sanity/client": "^6.10.0",
     "@sanity/code-input": "^4.1.1",
-    "@sanity/color": "3.0.0-beta.9",
+    "@sanity/color": "^3.0.0",
     "@sanity/icons": "^2.8.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/logos": "^2.1.2",
     "@sanity/overlays": "^2.2.2",
     "@sanity/preview-url-secret": "^1.3.6",
     "@sanity/react-loader": "^1.6.3",
-    "@sanity/ui": "2.0.0-beta.11",
+    "@sanity/ui": "^2.0.0",
     "@sindresorhus/slugify": "^2.2.1",
     "@uiw/codemirror-themes": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
@@ -40,7 +40,7 @@
     "react-dom": "^18.2.0",
     "react-refractor": "^2.1.7",
     "refractor": "^4.8.1",
-    "sanity": "3.21.4-facelift.147",
+    "sanity": "^3.25.0",
     "styled-components": "^6.1.1"
   },
   "devDependencies": {
@@ -60,12 +60,5 @@
     "typescript": "^5.3.3",
     "vitest": "^1.0.4"
   },
-  "packageManager": "pnpm@8.10.2",
-  "pnpm": {
-    "overrides": {
-      "@sanity/color": "3.0.0-beta.9",
-      "@sanity/presentation": "^1.2.2",
-      "@sanity/ui": "2.0.0-beta.11"
-    }
-  }
+  "packageManager": "pnpm@8.10.2"
 }
