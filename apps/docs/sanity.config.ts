@@ -46,6 +46,7 @@ const devStudio = defineConfig<WorkspaceOptions>({
     deskTool({structure}),
     presentationTool({
       previewUrl: {
+        preview: '/ui',
         draftMode: {
           enable: '/ui/api/draft?dataset=development',
           disable: '/ui/api/disable-draft',
