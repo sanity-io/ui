@@ -55,6 +55,7 @@ export function RootLayout(props: {
 
   const app: AppContextValue = useMemo(
     () => ({
+      basePath: '/ui',
       colorScheme,
       dataset,
       features: {hintHiddenContent},

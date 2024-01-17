@@ -13,7 +13,7 @@ export default function StudioRoute() {
 
   return (
     <Studio
-      basePath="/studio"
+      basePath="/ui/studio"
       config={studioConfig}
       onSchemeChange={(nextScheme) => setColorScheme(nextScheme)}
       scheme={colorScheme}
