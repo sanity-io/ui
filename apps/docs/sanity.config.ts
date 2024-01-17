@@ -24,8 +24,8 @@ const prodStudio = defineConfig<WorkspaceOptions>({
     presentationTool({
       previewUrl: {
         draftMode: {
-          enable: '/api/draft',
-          disable: '/api/disable-draft',
+          enable: '/ui/api/draft',
+          disable: '/ui/api/disable-draft',
         },
       },
     }),
@@ -46,8 +46,8 @@ const devStudio = defineConfig<WorkspaceOptions>({
     presentationTool({
       previewUrl: {
         draftMode: {
-          enable: '/api/draft?dataset=development',
-          disable: '/api/disable-draft',
+          enable: '/ui/api/draft?dataset=development',
+          disable: '/ui/api/disable-draft',
         },
       },
     }),
