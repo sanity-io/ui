@@ -23,6 +23,7 @@ const prodStudio = defineConfig<WorkspaceOptions>({
     deskTool({structure}),
     presentationTool({
       previewUrl: {
+        preview: '/ui',
         draftMode: {
           enable: '/ui/api/draft',
           disable: '/ui/api/disable-draft',
