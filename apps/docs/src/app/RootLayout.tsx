@@ -1,7 +1,7 @@
 'use client'
 
 import {WrappedValue} from '@sanity/react-loader/jsx'
-import {ThemeProvider, ToastProvider, usePrefersDark} from '@sanity/ui'
+import {LayerProvider, ThemeProvider, ToastProvider, usePrefersDark} from '@sanity/ui'
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {Inter} from 'next/font/google'
 import {ReactNode, useMemo, useState} from 'react'
@@ -86,7 +86,9 @@ export function RootLayout(props: {
           >
             <GlobalStyle />
             <AppContext.Provider value={app}>
-              <ToastProvider>{children}</ToastProvider>
+              <LayerProvider>
+                <ToastProvider>{children}</ToastProvider>
+              </LayerProvider>
             </AppContext.Provider>
           </ThemeProvider>
         </StyledComponentsRegistry>
