@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/sanity-io/ui/compare/v2.0.0...v2.0.1) (2024-01-18)
+
+### Bug Fixes
+
+- **popover:** default open popover has incorrect position ([#1217](https://github.com/sanity-io/ui/issues/1217)) ([953d789](https://github.com/sanity-io/ui/commit/953d789691bc6c2c19c6cc29629d77ee51ba3c1c))
+
 ## [2.0.0](https://github.com/sanity-io/ui/compare/v1.9.3...v2.0.0) (2024-01-16)
 
 ### ⚠ BREAKING CHANGES
