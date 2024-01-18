@@ -6,7 +6,7 @@ import {forwardRef} from 'react'
  */
 export const GroqLogo = forwardRef(function GroqLogo(
   props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg

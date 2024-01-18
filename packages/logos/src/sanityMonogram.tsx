@@ -28,7 +28,7 @@ const SANITY_MONOGRAM_COLOR: SanityMonogramColor = {
  */
 export const SanityMonogram = forwardRef(function SanityMonogram(
   props: SanityMonogramProps & Omit<React.SVGProps<SVGSVGElement>, 'color'>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   const {color = SANITY_MONOGRAM_COLOR, ...restProps} = props
 

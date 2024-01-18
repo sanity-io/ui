@@ -18,7 +18,7 @@ const schemes = {
  */
 export const SanityLogo = forwardRef(function SanityLogo(
   props: SanityLogoProps & React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>
+  ref: React.Ref<SVGSVGElement>,
 ) {
   const {dark, ...svgProps} = props
   const scheme = schemes[dark ? 'dark' : 'light']
