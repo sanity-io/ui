@@ -98,6 +98,10 @@ export interface PopoverProps
   portal?: boolean | string
   preventOverflow?: boolean
   referenceBoundary?: HTMLElement | null
+  /**
+   * When defined, the popover will be positioned relative to this element.
+   * The children of the popover won't be rendered.
+   */
   referenceElement?: HTMLElement | null
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
@@ -376,8 +380,9 @@ export const Popover = memo(
     }, [update, updateRef])
 
     useEffect(() => {
+      if (child) return
       refs.setReference(referenceElement || null)
-    }, [referenceElement, refs])
+    }, [referenceElement, refs, child])
 
     if (disabled) {
       return childProp || <></>
