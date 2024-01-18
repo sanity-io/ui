@@ -98,6 +98,10 @@ export interface PopoverProps
   portal?: boolean | string
   preventOverflow?: boolean
   referenceBoundary?: HTMLElement | null
+  /**
+   * When defined, the popover will be positioned relative to this element.
+   * The children of the popover won't be rendered.
+   */
   referenceElement?: HTMLElement | null
   scheme?: ThemeColorSchemeKey
   tone?: CardTone

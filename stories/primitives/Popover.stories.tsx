@@ -117,3 +117,31 @@ export const DefaultOpen: Story = {
     )
   },
 }
+
+export const WithReferenceElement: Story = {
+  render: () => {
+    const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null)
+
+    return (
+      <Box padding={4} style={{textAlign: 'center'}}>
+        <Box ref={setReferenceElement}>
+          <Text>Reference element</Text>
+        </Box>
+        <Popover
+          content={<Text size={[2, 2, 3, 4]}>Hello, world</Text>}
+          padding={4}
+          placement="top"
+          referenceElement={referenceElement}
+          portal
+          open
+        >
+          <Button
+            mode="ghost"
+            padding={[3, 3, 4]}
+            text="This button won't be rendered, the popover has a reference element"
+          />
+        </Popover>
+      </Box>
+    )
+  },
+}
