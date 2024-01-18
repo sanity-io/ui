@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {useState} from 'react'
-import {Button, Card, Popover, Text} from '../../src/core/primitives'
+import {Box, Button, Card, Popover, Text} from '../../src/core/primitives'
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
@@ -96,6 +96,24 @@ export const Placements: Story = {
           rows: PLACEMENT_OPTIONS,
         })}
       </Card>
+    )
+  },
+}
+
+export const DefaultOpen: Story = {
+  render: () => {
+    return (
+      <Box padding={4} style={{textAlign: 'center'}}>
+        <Popover
+          content={<Text size={[2, 2, 3, 4]}>Hello, world</Text>}
+          padding={4}
+          placement="top"
+          portal
+          open
+        >
+          <Button mode="ghost" padding={[3, 3, 4]} text="Reference" />
+        </Popover>
+      </Box>
     )
   },
 }
