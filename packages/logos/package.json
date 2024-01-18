@@ -45,7 +45,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@commitlint/cli": "^18.4.4",
     "@commitlint/config-conventional": "^18.4.4",
-    "@sanity/color": "^3.0.0-beta",
+    "@sanity/color": "^3.0.0",
     "@sanity/icons": "^2.8.0",
     "@sanity/pkg-utils": "^3.3.8",
     "@sanity/semantic-release-preset": "^4.1.6",
