@@ -76,9 +76,35 @@ export function ArticleContent(props: {
   content: WrappedValue<NonNullable<ArticleData['content']>>
   headings: HeadingType[]
 }): ReactElement {
+  /**
+   * HACK: Returns all content with `markDefs` attached to each block child.
+   *
+   * This is done as <PortableText /> receives 'wrapped' data and in turn will render custom
+   * `<Span>` components defined in `components.types`.
+   *
+   * Whilst this span component is required for _Presentation_ overlays, it only has access
+   * to the child value and NOT mark definitions (needed for custom annotations such as links).
+   * Attaching `markDefs` to each child allows the span component to access these, albeit in
+   * a hacky way.
+   *
+   * Ideally, `react-portabletext` would support receiving `wrapped` data and allow definition
+   * of custom mark components via `components.marks`.
+   */
+  const contentWithChildMarkDefs = props.content.reduce<any[]>((acc, val) => {
+    const blockChildren =
+      val._type === 'block'
+        ? val.children?.map((child) => {
+            return {...child, markDefs: val?.markDefs}
+          })
+        : null
+
+    acc.push({...val, children: blockChildren})
+    return acc
+  }, [])
+
   return (
     <Root>
-      <PortableText components={components} value={props.content} />
+      <PortableText components={components} value={contentWithChildMarkDefs} />
     </Root>
   )
 }

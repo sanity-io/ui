@@ -2,23 +2,41 @@ import {PortableTextTypeComponent} from '@portabletext/react'
 import {sanity, unwrapData} from '@sanity/react-loader/jsx'
 
 export const Span: PortableTextTypeComponent = (props) => {
-  // return props.value.text.value
-
+  const markDefs = props.value.markDefs
   const marks = unwrapData(props.value.marks) as string[]
 
-  let node = <sanity.span>{props.value.text}</sanity.span>
+  const node = marks.reduce(
+    (acc, mark) => {
+      switch (mark) {
+        case 'code':
+          acc = <code>{acc}</code>
+          break
+        case 'em':
+          acc = <em>{acc}</em>
+          break
+        case 'strong':
+          acc = <strong>{acc}</strong>
+          break
+        default:
+          const markDef = markDefs.find((m) => m._key === mark)
+          if (markDef?._type === 'link') {
+            const target = (markDef?.href?.value || '').startsWith('http') ? '_blank' : undefined
+            return (
+              <a
+                href={markDef?.href?.value}
+                target={target}
+                rel={target === '_blank' ? 'noindex nofollow' : undefined}
+              >
+                {acc}
+              </a>
+            )
+          }
+          break
+      }
+      return acc
+    },
 
-  if (marks.includes('italic')) {
-    node = <em>{node}</em>
-  }
-
-  if (marks.includes('strong')) {
-    node = <strong>{node}</strong>
-  }
-
-  if (marks.includes('code')) {
-    node = <code>{node}</code>
-  }
-
+    <sanity.span>{props.value.text}</sanity.span>,
+  )
   return node
 }

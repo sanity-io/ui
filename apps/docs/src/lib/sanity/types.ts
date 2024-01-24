@@ -1,3 +1,5 @@
+import {PortableTextObject} from 'sanity'
+
 export interface SanityImageValue {
   _type: 'image'
   asset: SanityReferenceValue | null
@@ -34,6 +36,7 @@ export interface SanitySpanValue {
 export interface SanityBlockValue {
   _type: 'block'
   children: SanitySpanValue[]
+  markDefs: PortableTextObject[]
   style: string
 }
 
