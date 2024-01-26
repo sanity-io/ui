@@ -96,6 +96,7 @@ import {FilterIcon} from './filterIcon'
 import {FolderIcon} from './folderIcon'
 import {GenerateIcon} from './generateIcon'
 import {GroqIcon} from './groqIcon'
+import {HashIcon} from './hashIcon'
 import {HeartFilledIcon} from './heartFilledIcon'
 import {HeartIcon} from './heartIcon'
 import {HelpCircleIcon} from './helpCircleIcon'
@@ -138,6 +139,7 @@ import {PinRemovedIcon} from './pinRemovedIcon'
 import {PlayIcon} from './playIcon'
 import {PlugIcon} from './plugIcon'
 import {PresentationIcon} from './presentationIcon'
+import {ProjectsIcon} from './projectsIcon'
 import {PublishIcon} from './publishIcon'
 import {ReadOnlyIcon} from './readOnlyIcon'
 import {RedoIcon} from './redoIcon'
@@ -297,6 +299,7 @@ export type IconSymbol =
   | 'folder'
   | 'generate'
   | 'groq'
+  | 'hash'
   | 'heart-filled'
   | 'heart'
   | 'help-circle'
@@ -339,6 +342,7 @@ export type IconSymbol =
   | 'play'
   | 'plug'
   | 'presentation'
+  | 'projects'
   | 'publish'
   | 'read-only'
   | 'redo'
@@ -495,6 +499,7 @@ export {
   FolderIcon,
   GenerateIcon,
   GroqIcon,
+  HashIcon,
   HeartFilledIcon,
   HeartIcon,
   HelpCircleIcon,
@@ -537,6 +542,7 @@ export {
   PlayIcon,
   PlugIcon,
   PresentationIcon,
+  ProjectsIcon,
   PublishIcon,
   ReadOnlyIcon,
   RedoIcon,
@@ -697,6 +703,7 @@ export interface IconMap {
   folder: IconComponent
   generate: IconComponent
   groq: IconComponent
+  hash: IconComponent
   'heart-filled': IconComponent
   heart: IconComponent
   'help-circle': IconComponent
@@ -739,6 +746,7 @@ export interface IconMap {
   play: IconComponent
   plug: IconComponent
   presentation: IconComponent
+  projects: IconComponent
   publish: IconComponent
   'read-only': IconComponent
   redo: IconComponent
@@ -899,6 +907,7 @@ export const icons: IconMap = {
   folder: FolderIcon,
   generate: GenerateIcon,
   groq: GroqIcon,
+  hash: HashIcon,
   'heart-filled': HeartFilledIcon,
   heart: HeartIcon,
   'help-circle': HelpCircleIcon,
@@ -941,6 +950,7 @@ export const icons: IconMap = {
   play: PlayIcon,
   plug: PlugIcon,
   presentation: PresentationIcon,
+  projects: ProjectsIcon,
   publish: PublishIcon,
   'read-only': ReadOnlyIcon,
   redo: RedoIcon,
