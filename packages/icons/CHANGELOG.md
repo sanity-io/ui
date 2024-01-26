@@ -5,6 +5,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.0](https://github.com/sanity-io/icons/compare/v2.9.0...v2.10.0) (2024-01-26)
+
+### Features
+
+- 4 new icons ([77e3ca8](https://github.com/sanity-io/icons/commit/77e3ca8aafcef4be77d78209ace800ab9d106883))
+
+### Bug Fixes
+
+- adjust projects icon ([0d1ba7c](https://github.com/sanity-io/icons/commit/0d1ba7ca68fa626965ab956607cefa27353ac5e2))
+- highlight icon ([d9cec04](https://github.com/sanity-io/icons/commit/d9cec04c629e6036ed989e41a2f14bbcd21adace))
+
 ## [2.9.0](https://github.com/sanity-io/icons/compare/v2.8.0...v2.9.0) (2024-01-26)
 
 ### Features
