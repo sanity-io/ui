@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.0](https://github.com/sanity-io/icons/compare/v2.8.0...v2.9.0) (2024-01-26)
+
+### Features
+
+- add icons ([#47](https://github.com/sanity-io/icons/issues/47)) ([5bbf48e](https://github.com/sanity-io/icons/commit/5bbf48ee08ca7ddb82869aeb824ac42bb3ee3470))
+
 ## [2.8.0](https://github.com/sanity-io/icons/compare/v2.7.0...v2.8.0) (2023-12-12)
 
 ### Features
