@@ -16,6 +16,7 @@ import {ArrowLeftIcon} from './arrowLeftIcon'
 import {ArrowRightIcon} from './arrowRightIcon'
 import {ArrowTopRightIcon} from './arrowTopRightIcon'
 import {ArrowUpIcon} from './arrowUpIcon'
+import {AsteriskIcon} from './asteriskIcon'
 import {BarChartIcon} from './barChartIcon'
 import {BasketIcon} from './basketIcon'
 import {BellIcon} from './bellIcon'
@@ -53,6 +54,7 @@ import {ColorWheelIcon} from './colorWheelIcon'
 import {CommentIcon} from './commentIcon'
 import {ComponentIcon} from './componentIcon'
 import {ComposeIcon} from './composeIcon'
+import {ConfettiIcon} from './confettiIcon'
 import {ControlsIcon} from './controlsIcon'
 import {CopyIcon} from './copyIcon'
 import {CreditCardIcon} from './creditCardIcon'
@@ -61,6 +63,7 @@ import {CubeIcon} from './cubeIcon'
 import {DashboardIcon} from './dashboardIcon'
 import {DatabaseIcon} from './databaseIcon'
 import {DesktopIcon} from './desktopIcon'
+import {DiamondIcon} from './diamondIcon'
 import {DocumentIcon} from './documentIcon'
 import {DocumentPdfIcon} from './documentPdfIcon'
 import {DocumentRemoveIcon} from './documentRemoveIcon'
@@ -100,6 +103,7 @@ import {HashIcon} from './hashIcon'
 import {HeartFilledIcon} from './heartFilledIcon'
 import {HeartIcon} from './heartIcon'
 import {HelpCircleIcon} from './helpCircleIcon'
+import {HighlightIcon} from './highlightIcon'
 import {HomeIcon} from './homeIcon'
 import {IceCreamIcon} from './iceCreamIcon'
 import {ImageIcon} from './imageIcon'
@@ -219,6 +223,7 @@ export type IconSymbol =
   | 'arrow-right'
   | 'arrow-top-right'
   | 'arrow-up'
+  | 'asterisk'
   | 'bar-chart'
   | 'basket'
   | 'bell'
@@ -256,6 +261,7 @@ export type IconSymbol =
   | 'comment'
   | 'component'
   | 'compose'
+  | 'confetti'
   | 'controls'
   | 'copy'
   | 'credit-card'
@@ -264,6 +270,7 @@ export type IconSymbol =
   | 'dashboard'
   | 'database'
   | 'desktop'
+  | 'diamond'
   | 'document'
   | 'document-pdf'
   | 'document-remove'
@@ -303,6 +310,7 @@ export type IconSymbol =
   | 'heart-filled'
   | 'heart'
   | 'help-circle'
+  | 'highlight'
   | 'home'
   | 'ice-cream'
   | 'image'
@@ -419,6 +427,7 @@ export {
   ArrowRightIcon,
   ArrowTopRightIcon,
   ArrowUpIcon,
+  AsteriskIcon,
   BarChartIcon,
   BasketIcon,
   BellIcon,
@@ -456,6 +465,7 @@ export {
   CommentIcon,
   ComponentIcon,
   ComposeIcon,
+  ConfettiIcon,
   ControlsIcon,
   CopyIcon,
   CreditCardIcon,
@@ -464,6 +474,7 @@ export {
   DashboardIcon,
   DatabaseIcon,
   DesktopIcon,
+  DiamondIcon,
   DocumentIcon,
   DocumentPdfIcon,
   DocumentRemoveIcon,
@@ -503,6 +514,7 @@ export {
   HeartFilledIcon,
   HeartIcon,
   HelpCircleIcon,
+  HighlightIcon,
   HomeIcon,
   IceCreamIcon,
   ImageIcon,
@@ -623,6 +635,7 @@ export interface IconMap {
   'arrow-right': IconComponent
   'arrow-top-right': IconComponent
   'arrow-up': IconComponent
+  asterisk: IconComponent
   'bar-chart': IconComponent
   basket: IconComponent
   bell: IconComponent
@@ -660,6 +673,7 @@ export interface IconMap {
   comment: IconComponent
   component: IconComponent
   compose: IconComponent
+  confetti: IconComponent
   controls: IconComponent
   copy: IconComponent
   'credit-card': IconComponent
@@ -668,6 +682,7 @@ export interface IconMap {
   dashboard: IconComponent
   database: IconComponent
   desktop: IconComponent
+  diamond: IconComponent
   document: IconComponent
   'document-pdf': IconComponent
   'document-remove': IconComponent
@@ -707,6 +722,7 @@ export interface IconMap {
   'heart-filled': IconComponent
   heart: IconComponent
   'help-circle': IconComponent
+  highlight: IconComponent
   home: IconComponent
   'ice-cream': IconComponent
   image: IconComponent
@@ -827,6 +843,7 @@ export const icons: IconMap = {
   'arrow-right': ArrowRightIcon,
   'arrow-top-right': ArrowTopRightIcon,
   'arrow-up': ArrowUpIcon,
+  asterisk: AsteriskIcon,
   'bar-chart': BarChartIcon,
   basket: BasketIcon,
   bell: BellIcon,
@@ -864,6 +881,7 @@ export const icons: IconMap = {
   comment: CommentIcon,
   component: ComponentIcon,
   compose: ComposeIcon,
+  confetti: ConfettiIcon,
   controls: ControlsIcon,
   copy: CopyIcon,
   'credit-card': CreditCardIcon,
@@ -872,6 +890,7 @@ export const icons: IconMap = {
   dashboard: DashboardIcon,
   database: DatabaseIcon,
   desktop: DesktopIcon,
+  diamond: DiamondIcon,
   document: DocumentIcon,
   'document-pdf': DocumentPdfIcon,
   'document-remove': DocumentRemoveIcon,
@@ -911,6 +930,7 @@ export const icons: IconMap = {
   'heart-filled': HeartFilledIcon,
   heart: HeartIcon,
   'help-circle': HelpCircleIcon,
+  highlight: HighlightIcon,
   home: HomeIcon,
   'ice-cream': IceCreamIcon,
   image: ImageIcon,

@@ -5,13 +5,13 @@ import {forwardRef} from 'react'
 /**
  * @public
  */
-export const HashIcon = forwardRef(function HashIcon(
+export const AsteriskIcon = forwardRef(function AsteriskIcon(
   props: React.SVGProps<SVGSVGElement>,
   ref: React.Ref<SVGSVGElement>,
 ) {
   return (
     <svg
-      data-sanity-icon="hash"
+      data-sanity-icon="asterisk"
       width="1em"
       height="1em"
       viewBox="0 0 25 25"
@@ -21,10 +21,10 @@ export const HashIcon = forwardRef(function HashIcon(
       {...props}
     >
       <path
-        d="M6 15.5H19M6 9.5H19M8.5 19L10.5 6M14.5 19L16.5 6"
+        d="M12.5 4V21M16.75 5.13879L8.25 19.8612M19.8612 8.25L5.13878 16.75M4.00002 12.5H21M5.13881 8.25L19.8612 16.75M8.25002 5.13879L16.75 19.8612"
         stroke="currentColor"
         strokeWidth={1.2}
-        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

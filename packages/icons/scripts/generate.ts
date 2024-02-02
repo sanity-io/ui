@@ -79,12 +79,9 @@ async function readIcon(filePath: string) {
   // replace `="0.5"` with `={0.5}`
   code = code.replace(/="(\d+(?:\.\d+)?)"/g, '={$1}')
 
-  // Replace Sanity black hex value with `currentColor`
+  // Replace hex values with `currentColor`
   code = code
-    .replace(/"#000000"/g, '"currentColor"')
-    .replace(/"#111213"/g, '"currentColor"')
-    .replace(/"#121923"/g, '"currentColor"')
-    .replace(/"#101112"/g, '"currentColor"')
+    .replace(/"#([0-9a-fA-F]{6})"/g, '"currentColor"')
     .replace('<svg ', `<svg data-sanity-icon="${name}" `)
 
   code = await format(code, {...prettierConfig, filepath: targetPath})
