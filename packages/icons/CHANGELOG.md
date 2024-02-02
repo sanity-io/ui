@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/sanity-io/icons/compare/v2.10.0...v2.10.1) (2024-02-02)
+
+### Bug Fixes
+
+- missing icons and wrong colors ([aec0930](https://github.com/sanity-io/icons/commit/aec0930451d37b41b589d84170c9052493947b6e))
+
 ## [2.10.0](https://github.com/sanity-io/icons/compare/v2.9.0...v2.10.0) (2024-01-26)
 
 ### Features
