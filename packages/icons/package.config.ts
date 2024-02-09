@@ -6,6 +6,5 @@ export default defineConfig({
       'ae-internal-missing-underscore': 'off',
     },
   },
-  minify: false,
   tsconfig: 'tsconfig.dist.json',
 })
