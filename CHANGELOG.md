@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/sanity-io/ui/compare/v2.0.2...v2.0.3) (2024-02-16)
+
+### Bug Fixes
+
+- **a11y:** support the `prefers-reduced-motion: reduce` media query ([#1222](https://github.com/sanity-io/ui/issues/1222)) ([c3f60a5](https://github.com/sanity-io/ui/commit/c3f60a5b0f5ebf1e68d08ec5569c843391043f53))
+- reduce toast context rerenders ([#1221](https://github.com/sanity-io/ui/issues/1221)) ([9362961](https://github.com/sanity-io/ui/commit/9362961ee34154ffe4af8193371c0d12e6f9052e))
+
 ## [2.0.2](https://github.com/sanity-io/ui/compare/v2.0.1...v2.0.2) (2024-02-08)
 
 ### Bug Fixes
