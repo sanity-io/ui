@@ -22,7 +22,13 @@ import {
   useMemo,
   useRef,
 } from 'react'
-import {useForwardedRef, useArrayProp, useElementSize, useMediaIndex} from '../../hooks'
+import {
+  useForwardedRef,
+  useArrayProp,
+  useElementSize,
+  useMediaIndex,
+  usePrefersReducedMotion,
+} from '../../hooks'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
@@ -128,7 +134,7 @@ export const Popover = memo(
 
     const {
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
-      animate = false,
+      animate: _animate = false,
       arrow: arrowProp = false,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
@@ -158,6 +164,8 @@ export const Popover = memo(
       updateRef,
       ...restProps
     } = props
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const animate = prefersReducedMotion ? false : _animate
     const boundarySize = useElementSize(boundaryElement)?.border
     const padding = useArrayProp(paddingProp)
     const radius = useArrayProp(radiusProp)

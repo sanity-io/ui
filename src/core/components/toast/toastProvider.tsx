@@ -1,8 +1,9 @@
-import {AnimatePresence, motion} from 'framer-motion'
+import {AnimatePresence, motion, type Variants} from 'framer-motion'
 import {useMemo, useRef, useState, startTransition, useEffect} from 'react'
 import styled from 'styled-components'
 import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {useMounted} from '../../hooks/useMounted'
+import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box} from '../../primitives'
 import {Layer} from '../../utils'
 import {Toast} from './toast'
@@ -54,6 +55,31 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
   const [state, _setState] = useState<ToastState>([])
   const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
   const mounted = useMounted()
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const variants = useMemo<Variants>(
+    () => ({
+      initial: {
+        opacity: 0,
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: 0,
+        y: 32,
+        scale: 0.25,
+        willChange: 'transform',
+      },
+      animate: {
+        opacity: [0, 1, 1],
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [0, 0, 1],
+        y: 0,
+        scale: 1,
+      },
+      exit: {
+        opacity: [1, 1, 0],
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [1, 0, 0],
+        scale: 0.5,
+        transition: prefersReducedMotion ? {duration: 0} : {duration: 0.2},
+      },
+    }),
+    [prefersReducedMotion],
+  )
 
   const value: ToastContextValue = useMemo(() => {
     const push = (params: ToastParams) => {
@@ -133,28 +159,17 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
               <AnimatePresence initial={false}>
                 {state.map(({dismiss, id, params}) => (
                   <motion.div
-                    animate={{
-                      opacity: [0, 1, 1],
-                      [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [0, 0, 1],
-                      y: 0,
-                      scale: 1,
-                    }}
-                    exit={{
-                      opacity: [1, 1, 0],
-                      [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [1, 0, 0],
-                      scale: 0.5,
-                      transition: {duration: 0.2},
-                    }}
-                    initial={{
-                      opacity: 0,
-                      [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: 0,
-                      y: 32,
-                      scale: 0.25,
-                      willChange: 'transform',
-                    }}
                     key={id}
                     layout="position"
-                    transition={{type: 'spring', damping: 30, stiffness: 400}}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={variants}
+                    transition={
+                      prefersReducedMotion
+                        ? {duration: 0}
+                        : {type: 'spring', damping: 30, stiffness: 400}
+                    }
                   >
                     <Toast
                       closable={params.closable}

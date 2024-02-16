@@ -33,7 +33,6 @@ function avatarArrowStyle(): CSSObject {
       left: '50%',
       transform: 'translateX(-6px)',
 
-      // @ts-expect-error -- TODO wait for CSSObject types to be fixed in `styled-components` itself
       '&:not([hidden])': {
         display: 'block',
       },
@@ -75,7 +74,6 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
     },
 
     '&>svg': {
-      // @ts-expect-error -- TODO wait for CSSObject types to be fixed in `styled-components` itself
       '&:not([hidden])': {
         display: 'block',
       },
@@ -92,7 +90,6 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
       color: 'inherit',
       outline: 'none',
 
-      // @ts-expect-error -- TODO wait for CSSObject types to be fixed in `styled-components` itself
       '&:focus': {
         boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
       },

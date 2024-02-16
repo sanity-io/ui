@@ -8,7 +8,13 @@ import {
   focusLastDescendant,
   isHTMLElement,
 } from '../../helpers'
-import {useArrayProp, useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
+import {
+  useArrayProp,
+  useClickOutside,
+  useForwardedRef,
+  useGlobalKeyDown,
+  usePrefersReducedMotion,
+} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
@@ -317,9 +323,11 @@ export const Dialog = forwardRef(function Dialog(
     scheme,
     width: widthProp = 0,
     zOffset: zOffsetProp = dialog.zOffset || layer.dialog.zOffset,
-    animate = false,
+    animate: _animate = false,
     ...restProps
   } = props
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
