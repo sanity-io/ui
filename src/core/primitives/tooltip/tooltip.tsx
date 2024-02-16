@@ -23,7 +23,7 @@ import {
   useId,
 } from 'react'
 import styled from 'styled-components'
-import {useArrayProp, useForwardedRef} from '../../hooks'
+import {useArrayProp, useForwardedRef, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
@@ -101,7 +101,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const boundaryElementContext = useBoundaryElement()
   const {layer} = useTheme_v2()
   const {
-    animate = false,
+    animate: _animate = false,
     arrow: arrowProp = false,
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
@@ -119,6 +119,8 @@ export const Tooltip = forwardRef(function Tooltip(
     delay,
     ...restProps
   } = props
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
   const forwardedRef = useForwardedRef(ref)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)

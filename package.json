@@ -1,11 +1,25 @@
 {
   "name": "@sanity/ui",
   "version": "2.0.2",
+  "keywords": [
+    "sanity",
+    "ui",
+    "primitives",
+    "react",
+    "components",
+    "design-system"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/ui.git"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": false,
-  "types": "./dist/index.d.ts",
-  "source": "./exports/index.ts",
-  "module": "./dist/index.esm.js",
-  "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -31,6 +45,10 @@
     },
     "./package.json": "./package.json"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "source": "./exports/index.ts",
+  "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
       "theme": [
@@ -43,7 +61,6 @@
     "exports",
     "src"
   ],
-  "license": "MIT",
   "scripts": {
     "build": "run-s clean pkg:build pkg:check figma:pkg:build",
     "clean": "rimraf .workshop dist",
@@ -69,6 +86,33 @@
     "workshop:build": "workshop build",
     "workshop:dev": "workshop dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ]
+  },
+  "browserslist": "extends @sanity/browserslist-config",
+  "release": {
+    "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "main",
+      "next",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
+    "extends": "@sanity/semantic-release-preset"
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.0.8",
@@ -138,6 +182,7 @@
     "module-alias": "^2.2.3",
     "npm-run-all2": "^5.0.0",
     "prettier": "^3.2.5",
+    "prettier-plugin-packagejson": "^2.4.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
@@ -158,55 +203,12 @@
     "react-is": "^18",
     "styled-components": "^5.2 || ^6"
   },
+  "packageManager": "pnpm@8.11.0",
   "engines": {
     "node": ">=14.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/ui.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/ui/issues"
-  },
-  "keywords": [
-    "sanity",
-    "ui",
-    "primitives",
-    "react",
-    "components",
-    "design-system"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "homepage": "https://www.sanity.io/",
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "*": [
-      "prettier --write --cache --ignore-unknown"
-    ]
-  },
-  "packageManager": "pnpm@8.11.0",
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "release": {
-    "extends": "@sanity/semantic-release-preset",
-    "branches": [
-      "+([0-9])?(.{+([0-9]),x}).x",
-      "main",
-      "next",
-      {
-        "name": "beta",
-        "prerelease": true
-      },
-      {
-        "name": "alpha",
-        "prerelease": true
-      }
-    ]
   }
 }
