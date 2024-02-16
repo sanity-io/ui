@@ -1,5 +1,5 @@
 import {AnimatePresence, motion} from 'framer-motion'
-import {useCallback, useEffect, useMemo, useRef, useState, startTransition} from 'react'
+import {useMemo, useRef, useState, startTransition, useEffect} from 'react'
 import styled from 'styled-components'
 import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {useMounted} from '../../hooks/useMounted'
@@ -52,59 +52,63 @@ let toastId = 0
 export function ToastProvider(props: ToastProviderProps): React.ReactElement {
   const {children, padding = 4, paddingX, paddingY, zOffset} = props
   const [state, _setState] = useState<ToastState>([])
-
   const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
+  const mounted = useMounted()
 
-  const push = useCallback((params: ToastParams) => {
-    // Wrap setState in startTransition to allow React to give input state updates higher priority
-    const setState: typeof _setState = (state) => startTransition(() => _setState(state))
+  const value: ToastContextValue = useMemo(() => {
+    const push = (params: ToastParams) => {
+      // Wrap setState in startTransition to allow React to give input state updates higher priority
+      const setState: typeof _setState = (state) => startTransition(() => _setState(state))
 
-    const id = params.id || String(toastId++)
-    const duration = params.duration || 5000
+      const id = params.id || String(toastId++)
+      const duration = params.duration || 5000
 
-    const dismiss = () => {
-      const timeoutId = toastsRef.current[id]?.timeoutId
+      const dismiss = () => {
+        const timeoutId = toastsRef.current[id]?.timeoutId
+
+        setState((prevState): ToastState => {
+          const idx = prevState.findIndex((t) => t.id === id)
+
+          if (idx > -1) {
+            const toasts = prevState.slice(0)
+
+            toasts.splice(idx, 1)
+
+            return toasts
+          }
+
+          return prevState
+        })
+
+        if (timeoutId !== undefined) {
+          clearTimeout(timeoutId)
+          delete toastsRef.current[id]
+        }
+      }
 
       setState((prevState): ToastState => {
-        const idx = prevState.findIndex((t) => t.id === id)
-
-        if (idx > -1) {
-          const toasts = prevState.slice(0)
-
-          toasts.splice(idx, 1)
-
-          return toasts
-        }
-
         return prevState
+          .filter((t) => t.id !== id)
+          .concat([
+            {
+              dismiss,
+              id,
+              params: {...params, duration},
+            },
+          ])
       })
 
-      if (timeoutId !== undefined) {
-        clearTimeout(timeoutId)
+      if (toastsRef.current[id]) {
+        clearTimeout(toastsRef.current[id].timeoutId)
         delete toastsRef.current[id]
       }
+
+      toastsRef.current[id] = {timeoutId: setTimeout(dismiss, duration)}
+
+      return id
     }
 
-    setState((prevState): ToastState => {
-      return prevState
-        .filter((t) => t.id !== id)
-        .concat([
-          {
-            dismiss,
-            id,
-            params: {...params, duration},
-          },
-        ])
-    })
-
-    if (toastsRef.current[id]) {
-      clearTimeout(toastsRef.current[id].timeoutId)
-      delete toastsRef.current[id]
-    }
-
-    toastsRef.current[id] = {timeoutId: setTimeout(dismiss, duration)}
-
-    return id
+    return {version: 0.0, push}
   }, [])
 
   // clear timeouts on unmount
@@ -119,13 +123,9 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
     [],
   )
 
-  const value: ToastContextValue = useMemo(() => ({version: 0.0, push}), [push])
-  const mounted = useMounted()
-
   return (
     <ToastContext.Provider value={value}>
       {children}
-
       {mounted && (
         <Root data-ui="ToastProvider" zOffset={zOffset}>
           <ToastContainer>
