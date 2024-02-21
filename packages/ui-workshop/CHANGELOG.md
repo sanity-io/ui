@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/sanity-io/ui-workshop/compare/v2.0.3...v2.0.4) (2024-02-21)
+
+### Bug Fixes
+
+- minify bundle ([4ac3ba9](https://github.com/sanity-io/ui-workshop/commit/4ac3ba9fa2f4157e95a89e7f8878a4621aa89a3e))
+
 ## [2.0.3](https://github.com/sanity-io/ui-workshop/compare/v2.0.2...v2.0.3) (2023-11-28)
 
 ### Bug Fixes
