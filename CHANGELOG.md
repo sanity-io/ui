@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/sanity-io/ui/compare/v2.0.3...v2.0.4) (2024-02-21)
+
+### Bug Fixes
+
+- minify bundle ([1a4cbfc](https://github.com/sanity-io/ui/commit/1a4cbfc3a6d378555a52003640f6832cfd98ff7f))
+
 ## [2.0.3](https://github.com/sanity-io/ui/compare/v2.0.2...v2.0.3) (2024-02-16)
 
 ### Bug Fixes
