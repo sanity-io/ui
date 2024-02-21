@@ -202,7 +202,7 @@
     "react-dom": "^18",
     "styled-components": "^5.2 || ^6"
   },
-  "packageManager": "pnpm@8.11.0",
+  "packageManager": "pnpm@8.15.3",
   "publishConfig": {
     "access": "public",
     "provenance": true
