@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/sanity-io/ui/compare/v2.0.4...v2.0.5) (2024-02-21)
+
+### Bug Fixes
+
+- **deps:** update non-major ([#1224](https://github.com/sanity-io/ui/issues/1224)) ([f978c3c](https://github.com/sanity-io/ui/commit/f978c3ca2fe6cc730992fe8493599ccc02da8ae6))
+
 ## [2.0.4](https://github.com/sanity-io/ui/compare/v2.0.3...v2.0.4) (2024-02-21)
 
 ### Bug Fixes
