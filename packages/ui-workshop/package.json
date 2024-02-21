@@ -113,6 +113,7 @@
     "workshop:dev": "node -r dotenv-flow/config -r esbuild-register -r tsconfig-paths/register scripts/dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
+  "browserslist": "extends @sanity/browserslist-config",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -159,7 +160,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^18.6.2",
     "@sanity/icons": "^2.10.2",
-    "@sanity/pkg-utils": "^3.3.8",
+    "@sanity/pkg-utils": "^4.2.6",
     "@sanity/semantic-release-preset": "^4.1.6",
     "@sanity/ui": "^2.0.4",
     "@types/cpx": "^1.5.5",
