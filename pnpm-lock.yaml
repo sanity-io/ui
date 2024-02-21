@@ -49,14 +49,14 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0
       '@sanity/pkg-utils':
-        specifier: ^4.2.5
-        version: 4.2.5(@types/node@20.5.9)(typescript@5.3.3)
+        specifier: ^4.2.6
+        version: 4.2.6(@types/node@20.5.9)(typescript@5.3.3)
       '@sanity/semantic-release-preset':
         specifier: ^4.1.6
         version: 4.1.6(semantic-release@22.0.12)
       '@sanity/ui-workshop':
-        specifier: ^2.0.3
-        version: 2.0.3(@sanity/icons@2.10.2)(@sanity/ui@1.8.2)(@types/node@20.5.9)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+        specifier: ^2.0.4
+        version: 2.0.4(@sanity/icons@2.10.2)(@sanity/ui@1.8.2)(@types/node@20.5.9)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       '@storybook/addon-a11y':
         specifier: ^7.6.17
         version: 7.6.17
@@ -3996,8 +3996,8 @@ packages:
     dependencies:
       react: 18.2.0
 
-  /@sanity/pkg-utils@4.2.5(@types/node@20.5.9)(typescript@5.3.3):
-    resolution: {integrity: sha512-NwOZzEUvxVE5tQoC/3285y/QVnzYJ3AUhjjf1KphpyWsSAGuW8ggfXrWaAkKv9x4yHqM4H7cTJvt3wpMDJCVRg==}
+  /@sanity/pkg-utils@4.2.6(@types/node@20.5.9)(typescript@5.3.3):
+    resolution: {integrity: sha512-r6gQj3RWqjlmtaBAkSTPQIaQyf1HQo0qoNZebohh7/bUXqTOA6ErA461/1j1GzlGPolGu3ocrRNk/vDMBmE75w==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
@@ -4064,8 +4064,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop@2.0.3(@sanity/icons@2.10.2)(@sanity/ui@1.8.2)(@types/node@20.5.9)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-3Ha2+nCebTm3KYbkV+O4FvdKZVZuGIJisRFvWKU7/zwCflyKvLxT6Ec+cuR9Byw9dcAaOIfhdSYSykVZXK6FSg==}
+  /@sanity/ui-workshop@2.0.4(@sanity/icons@2.10.2)(@sanity/ui@1.8.2)(@types/node@20.5.9)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-AD4GtNtnh2BRAeolThcdYcVO5wzPlo1QqZMkVg7WVm09JWh3iHNWM83i93FezclfF5/jfPWLbE5e37bFg6C3jQ==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2
