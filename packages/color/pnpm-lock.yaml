@@ -102,7 +102,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.2
       polished:
-        specifier: ^4.2.2
+        specifier: ^4.3.1
         version: 4.3.1
       prettier:
         specifier: ^3.0.3
