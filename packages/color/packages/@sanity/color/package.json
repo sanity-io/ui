@@ -52,8 +52,8 @@
     "release": "semantic-release",
     "test": "run-s ts:check vitest:run",
     "ts:check": "tsc --build",
-    "watch": "run-p pkg:watch",
     "vitest:run": "vitest run",
+    "watch": "run-p pkg:watch",
     "workshop:build": "workshop build",
     "workshop:dev": "workshop dev"
   },
