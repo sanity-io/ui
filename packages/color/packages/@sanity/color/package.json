@@ -73,7 +73,7 @@
     "extends": "@sanity/semantic-release-preset"
   },
   "devDependencies": {
-    "@sanity/icons": "^2.7.0",
+    "@sanity/icons": "^2.10.2",
     "@sanity/pkg-utils": "^3.2.5",
     "@sanity/semantic-release-preset": "^4.1.6",
     "@sanity/ui": "^1.9.3",

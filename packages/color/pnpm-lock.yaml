@@ -39,8 +39,8 @@ importers:
   packages/@sanity/color:
     devDependencies:
       '@sanity/icons':
-        specifier: ^2.7.0
-        version: 2.7.0(react@18.2.0)
+        specifier: ^2.10.2
+        version: 2.10.2(react@18.2.0)
       '@sanity/pkg-utils':
         specifier: ^3.2.5
         version: 3.3.2(@types/node@20.9.0)(typescript@5.2.2)
@@ -52,7 +52,7 @@ importers:
         version: 1.9.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.1)
       '@sanity/ui-workshop':
         specifier: ^2.0.6
-        version: 2.0.6(@sanity/icons@2.7.0)(@sanity/ui@1.9.3)(@types/node@20.9.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1)
+        version: 2.0.6(@sanity/icons@2.10.2)(@sanity/ui@1.9.3)(@types/node@20.9.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1)
       '@types/node':
         specifier: ^20.9.0
         version: 20.9.0
@@ -2615,8 +2615,8 @@ packages:
     resolution: {integrity: sha512-tTi22KoKuER3sldXYl4c1Dq2zU7tMLDkljFiaUKVkBbu4PBvRGCFw75kXZnD2b4Bsp6vin+7sI+AKdCKRhfRuw==}
     dev: true
 
-  /@sanity/icons@2.7.0(react@18.2.0):
-    resolution: {integrity: sha512-vW/G8CB3+R1gww8C8ZjNchhpXrXSDLIJ0KnWy9iDlSWaFEnUrbi18yzCCrHRMFzXTPl2QtqZhjtE+A5Gyhf2QA==}
+  /@sanity/icons@2.10.2(react@18.2.0):
+    resolution: {integrity: sha512-9lAYAhUpwfa7BIomwAtHpbHdn7GRl1Y1ynoUyV718X10wjcNg49xxxsH/0nfHXdbmdy3Th3pvde0J3vrRg4gjA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
@@ -2744,7 +2744,7 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop@2.0.6(@sanity/icons@2.7.0)(@sanity/ui@1.9.3)(@types/node@20.9.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1):
+  /@sanity/ui-workshop@2.0.6(@sanity/icons@2.10.2)(@sanity/ui@1.9.3)(@types/node@20.9.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1):
     resolution: {integrity: sha512-XIP2Wd8Wld5bMM+jo18mNQetpRkzMj0RIzUEeGmiIAosj8jorJLBEeRi8+DAndLAnWHmzSCB7IwHMYg7Y+vWfw==}
     hasBin: true
     peerDependencies:
@@ -2754,7 +2754,7 @@ packages:
       react-dom: ^18
       styled-components: ^5.2 || ^6
     dependencies:
-      '@sanity/icons': 2.7.0(react@18.2.0)
+      '@sanity/icons': 2.10.2(react@18.2.0)
       '@sanity/ui': 1.9.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.1)
       '@vitejs/plugin-react': 4.2.1(vite@5.1.4)
       axe-core: 4.8.4
@@ -2797,7 +2797,7 @@ packages:
     dependencies:
       '@floating-ui/react-dom': 2.0.0(react-dom@18.2.0)(react@18.2.0)
       '@sanity/color': 2.2.5
-      '@sanity/icons': 2.7.0(react@18.2.0)
+      '@sanity/icons': 2.10.2(react@18.2.0)
       csstype: 3.1.2
       framer-motion: 10.16.4(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
