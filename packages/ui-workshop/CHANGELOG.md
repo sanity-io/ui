@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/sanity-io/ui-workshop/compare/v2.0.4...v2.0.5) (2024-02-21)
+
+### Bug Fixes
+
+- **deps:** Update dependency @sanity/ui to v2 ([#76](https://github.com/sanity-io/ui-workshop/issues/76)) ([95a5282](https://github.com/sanity-io/ui-workshop/commit/95a528259949c2d5d7a0594c5b8ee100f04978ef))
+
 ## [2.0.4](https://github.com/sanity-io/ui-workshop/compare/v2.0.3...v2.0.4) (2024-02-21)
 
 ### Bug Fixes
