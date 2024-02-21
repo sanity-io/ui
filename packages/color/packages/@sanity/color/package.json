@@ -74,7 +74,7 @@
   },
   "devDependencies": {
     "@sanity/icons": "^2.10.2",
-    "@sanity/pkg-utils": "^3.2.5",
+    "@sanity/pkg-utils": "^4.2.8",
     "@sanity/semantic-release-preset": "^4.1.6",
     "@sanity/ui": "^1.9.3",
     "@sanity/ui-workshop": "^2.0.6",
