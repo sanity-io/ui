@@ -179,6 +179,7 @@ import {SyncIcon} from './syncIcon'
 import {TabletDeviceIcon} from './tabletDeviceIcon'
 import {TagIcon} from './tagIcon'
 import {TagsIcon} from './tagsIcon'
+import {TaskIcon} from './taskIcon'
 import {TerminalIcon} from './terminalIcon'
 import {TextIcon} from './textIcon'
 import {ThLargeIcon} from './thLargeIcon'
@@ -386,6 +387,7 @@ export type IconSymbol =
   | 'tablet-device'
   | 'tag'
   | 'tags'
+  | 'task'
   | 'terminal'
   | 'text'
   | 'th-large'
@@ -590,6 +592,7 @@ export {
   TabletDeviceIcon,
   TagIcon,
   TagsIcon,
+  TaskIcon,
   TerminalIcon,
   TextIcon,
   ThLargeIcon,
@@ -798,6 +801,7 @@ export interface IconMap {
   'tablet-device': IconComponent
   tag: IconComponent
   tags: IconComponent
+  task: IconComponent
   terminal: IconComponent
   text: IconComponent
   'th-large': IconComponent
@@ -1006,6 +1010,7 @@ export const icons: IconMap = {
   'tablet-device': TabletDeviceIcon,
   tag: TagIcon,
   tags: TagsIcon,
+  task: TaskIcon,
   terminal: TerminalIcon,
   text: TextIcon,
   'th-large': ThLargeIcon,
