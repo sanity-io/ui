@@ -12,11 +12,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
-      "require": "./dist/index.cjs",
-      "node": {
-        "import": "./dist/index.cjs.js"
-      },
       "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
@@ -53,7 +50,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@commitlint/cli": "^19.0.3",
     "@commitlint/config-conventional": "^19.0.3",
-    "@sanity/pkg-utils": "^4.4.1",
+    "@sanity/pkg-utils": "^5.0.0",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.0.7",
     "@sanity/ui-workshop": "^2.0.6",
@@ -93,7 +90,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "rimraf": "^5.0.5",
-    "semantic-release": "^22.0.12",
+    "semantic-release": "^23.0.2",
     "styled-components": "^6.1.8",
     "typescript": "^5.4.2"
   },
