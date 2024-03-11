@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@sanity/icons",
-  "version": "2.11.1",
+  "version": "2.11.2",
   "description": "The Sanity icons.",
   "sideEffects": false,
   "types": "./dist/index.d.ts",

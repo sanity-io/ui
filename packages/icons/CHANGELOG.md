@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.2](https://github.com/sanity-io/icons/compare/v2.11.1...v2.11.2) (2024-03-11)
+
+### Bug Fixes
+
+- enable provenance ([#59](https://github.com/sanity-io/icons/issues/59)) ([77d2afd](https://github.com/sanity-io/icons/commit/77d2afd44849b3ccb949c1e5c71ae790991650d7))
+
 ## [2.11.1](https://github.com/sanity-io/icons/compare/v2.11.0...v2.11.1) (2024-03-11)
 
 ### Bug Fixes
