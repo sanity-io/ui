@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.0](https://github.com/sanity-io/icons/compare/v2.10.3...v2.11.0) (2024-03-11)
+
+### Features
+
+- add task icon ([#54](https://github.com/sanity-io/icons/issues/54)) ([faa033d](https://github.com/sanity-io/icons/commit/faa033dfa3e228ab3f86f8dd2beafa8eccafc52a))
+
 ## [2.10.3](https://github.com/sanity-io/icons/compare/v2.10.2...v2.10.3) (2024-02-21)
 
 ### Bug Fixes
