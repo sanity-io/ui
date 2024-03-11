@@ -46,5 +46,6 @@ jobs:
       # Branches that will release new versions are defined in .releaserc.json
       - run: pnpm exec semantic-release
         env:
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
