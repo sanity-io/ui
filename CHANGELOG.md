@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://github.com/sanity-io/ui/compare/v2.0.9...v2.0.10) (2024-03-12)
+
+### Bug Fixes
+
+- **deps:** downgrade `framer-motion` as it breaks `sanity/presentation` ([0b644dd](https://github.com/sanity-io/ui/commit/0b644dd5270469c9b502b250db0c2d148051c266))
+
 ## [2.0.9](https://github.com/sanity-io/ui/compare/v2.0.8...v2.0.9) (2024-03-12)
 
 ### Bug Fixes
