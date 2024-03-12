@@ -180,7 +180,7 @@
     "react-is": "^18.2.0",
     "refractor": "^4.8.1",
     "rimraf": "^5.0.1",
-    "semantic-release": "^22.0.12",
+    "semantic-release": "^23.0.2",
     "start-server-and-test": "^2.0.3",
     "storybook": "^7.6.17",
     "styled-components": "^6.1.8",
