@@ -24,23 +24,15 @@
     ".": {
       "types": "./dist/index.d.ts",
       "source": "./exports/index.ts",
-      "require": "./dist/index.js",
-      "node": {
-        "module": "./dist/index.esm.js",
-        "import": "./dist/index.cjs.mjs"
-      },
       "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
       "default": "./dist/index.esm.js"
     },
     "./theme": {
       "types": "./dist/theme.d.ts",
       "source": "./exports/theme.ts",
-      "require": "./dist/theme.js",
-      "node": {
-        "module": "./dist/theme.esm.js",
-        "import": "./dist/theme.cjs.mjs"
-      },
       "import": "./dist/theme.esm.js",
+      "require": "./dist/theme.js",
       "default": "./dist/theme.esm.js"
     },
     "./package.json": "./package.json"
@@ -59,7 +51,8 @@
   "files": [
     "dist",
     "exports",
-    "src"
+    "src",
+    "theme.js"
   ],
   "scripts": {
     "build": "run-s clean pkg:build pkg:check figma:pkg:build",
@@ -97,6 +90,7 @@
       "prettier --write --cache --ignore-unknown"
     ]
   },
+  "browserslist": "extends @sanity/browserslist-config",
   "release": {
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
