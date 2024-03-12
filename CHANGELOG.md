@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.8](https://github.com/sanity-io/ui/compare/v2.0.7...v2.0.8) (2024-03-12)
+
+### Bug Fixes
+
+- add missing `theme.js` legacy export ([7e04c57](https://github.com/sanity-io/ui/commit/7e04c574ab8d5a5184fb2c4b6f83bbe623b2642d))
+
 ## [2.0.7](https://github.com/sanity-io/ui/compare/v2.0.6...v2.0.7) (2024-02-21)
 
 ### Bug Fixes
