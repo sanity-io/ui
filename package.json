@@ -26,14 +26,22 @@
       "source": "./exports/index.ts",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js",
-      "default": "./dist/index.esm.js"
+      "default": "./dist/index.esm.js",
+      "node": {
+        "module": "./dist/index.esm.js",
+        "import": "./dist/index.cjs.mjs"
+      }
     },
     "./theme": {
       "types": "./dist/theme.d.ts",
       "source": "./exports/theme.ts",
       "import": "./dist/theme.esm.js",
       "require": "./dist/theme.js",
-      "default": "./dist/theme.esm.js"
+      "default": "./dist/theme.esm.js",
+      "node": {
+        "module": "./dist/theme.esm.js",
+        "import": "./dist/theme.cjs.mjs"
+      }
     },
     "./package.json": "./package.json"
   },
