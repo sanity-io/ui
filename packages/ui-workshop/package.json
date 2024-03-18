@@ -158,7 +158,7 @@
     "vite": "^5.1.4"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^18.6.2",
+    "@commitlint/config-conventional": "^19.1.0",
     "@sanity/icons": "^2.10.2",
     "@sanity/pkg-utils": "^4.2.8",
     "@sanity/semantic-release-preset": "^4.1.6",
@@ -173,7 +173,7 @@
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "commitizen": "^4.3.0",
-    "commitlint": "^18.6.1",
+    "commitlint": "^19.2.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
