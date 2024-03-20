@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {forwardRef, useEffect, useMemo, useRef, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {_isScrollable} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
 import {_ResizeObserver} from '../../observers'

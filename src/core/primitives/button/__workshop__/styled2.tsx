@@ -1,5 +1,5 @@
 import {Button, Flex} from '@sanity/ui'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 const StyledButton2 = styled(Button)<{$color?: boolean}>`
   &:hover {

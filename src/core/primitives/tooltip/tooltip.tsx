@@ -22,7 +22,7 @@ import {
   ForwardedRef,
   useId,
 } from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {useArrayProp, useForwardedRef, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'

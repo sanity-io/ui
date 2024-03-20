@@ -1,5 +1,5 @@
 import {Box, Card, ElementQuery, Text} from '@sanity/ui'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 const TestCard = styled(Card)`
   --card-fg-color: orange;

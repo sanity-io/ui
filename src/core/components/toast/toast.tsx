@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeColorToneKey} from '@sanity/ui/theme'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
 import type {ButtonTone} from '../../types'

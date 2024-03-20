@@ -1,6 +1,6 @@
 import {Card, Code, Flex} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {WORKSHOP_FLEX_DIRECTION_OPTIONS} from '../../../__workshop__/constants'
 
 const DebugCard = styled(Card)`

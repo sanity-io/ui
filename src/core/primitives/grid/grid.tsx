@@ -1,5 +1,5 @@
 import {forwardRef} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
 import {Box, BoxProps} from '../box'

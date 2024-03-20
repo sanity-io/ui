@@ -1,6 +1,6 @@
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
 import {TextAlign} from '../../types'

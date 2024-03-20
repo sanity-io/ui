@@ -1,5 +1,5 @@
 import {FocusEvent, forwardRef, useCallback, useEffect, useRef} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
 import {useForwardedRef} from '../../hooks'

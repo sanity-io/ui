@@ -1,5 +1,5 @@
 import {forwardRef, useEffect} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {useForwardedRef} from '../../hooks'
 import {
   switchBaseStyles,

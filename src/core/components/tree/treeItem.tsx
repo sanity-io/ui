@@ -1,7 +1,7 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Box, BoxProps, Flex, Text} from '../../primitives'
 import {
   treeItemRootStyle,

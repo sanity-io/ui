@@ -1,5 +1,5 @@
 import {cloneElement, forwardRef, useCallback, useMemo, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Inline, InlineProps} from '../../primitives'
 
 /**

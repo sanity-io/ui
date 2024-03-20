@@ -1,7 +1,7 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {
   containsOrEqualsElement,
   focusFirstDescendant,

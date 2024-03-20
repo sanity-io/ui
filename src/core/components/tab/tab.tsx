@@ -1,5 +1,5 @@
 import {forwardRef, useCallback, useEffect, useRef} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {useForwardedRef} from '../../hooks'
 import {Button} from '../../primitives'
 import {ButtonTone} from '../../types'

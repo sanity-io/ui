@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Box, Button, Card, Flex} from '../../../primitives'
 import {BoundaryElementProvider, PortalProvider} from '../../../utils'
 import {Menu, MenuButton, MenuItem} from '../../menu'

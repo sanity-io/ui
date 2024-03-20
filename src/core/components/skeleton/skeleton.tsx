@@ -1,5 +1,5 @@
 import {forwardRef, useEffect, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Box} from '../../primitives'
 import {BoxProps, ResponsiveRadiusProps} from '../../primitives'

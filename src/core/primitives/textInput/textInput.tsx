@@ -2,7 +2,7 @@ import {CloseIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {createElement, forwardRef, isValidElement, useCallback, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp, useForwardedRef, useCustomValidity} from '../../hooks'
 import {

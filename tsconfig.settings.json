@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "module": "ES2022",
-    "target": "ES2022",
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationMap": true,
+    "jsx": "preserve",
 
     // Strict type-checking
     "strict": true,
@@ -20,10 +23,5 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-
-    // Module resolution
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
   }
 }

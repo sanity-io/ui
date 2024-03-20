@@ -1,7 +1,7 @@
 import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {useTheme_v2} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'

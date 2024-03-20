@@ -1,6 +1,6 @@
 import {getTheme_v2} from '@sanity/ui/theme'
 import {cloneElement, forwardRef} from 'react'
-import styled, {css} from 'styled-components'
+import {styled, css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
 import {rem, _responsive, ThemeProps} from '../../styles'

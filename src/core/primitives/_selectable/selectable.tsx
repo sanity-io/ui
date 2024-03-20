@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/radius'
 import {Box} from '../box'
 import {selectableBaseStyle, selectableColorStyle, SelectableStyleProps} from './style'

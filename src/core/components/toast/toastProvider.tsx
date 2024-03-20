@@ -1,6 +1,6 @@
 import {AnimatePresence, motion, type Variants} from 'framer-motion'
 import {useMemo, useRef, useState, startTransition, useEffect} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {useMounted} from '../../hooks/useMounted'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
