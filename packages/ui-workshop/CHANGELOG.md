@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/sanity-io/ui-workshop/compare/v2.0.6...v2.0.7) (2024-03-20)
+
+### Bug Fixes
+
+- **deps:** update dependency @sanity/pkg-utils to v5 ([#86](https://github.com/sanity-io/ui-workshop/issues/86)) ([effe557](https://github.com/sanity-io/ui-workshop/commit/effe5573dda9387904171d2c945e8c9a07380f33))
+
 ## [2.0.6](https://github.com/sanity-io/ui-workshop/compare/v2.0.5...v2.0.6) (2024-02-21)
 
 ### Bug Fixes
