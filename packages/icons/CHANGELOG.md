@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.3](https://github.com/sanity-io/icons/compare/v2.11.2...v2.11.3) (2024-03-20)
+
+### Bug Fixes
+
+- improve ESM export ([0c411c5](https://github.com/sanity-io/icons/commit/0c411c514ce3e5a63ea6e6aec9ed86323488cba3))
+
 ## [2.11.2](https://github.com/sanity-io/icons/compare/v2.11.1...v2.11.2) (2024-03-11)
 
 ### Bug Fixes
