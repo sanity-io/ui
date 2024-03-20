@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.4](https://github.com/sanity-io/icons/compare/v2.11.3...v2.11.4) (2024-03-20)
+
+### Bug Fixes
+
+- **deps:** update dependency @sanity/pkg-utils to ^5.1.4 ([#62](https://github.com/sanity-io/icons/issues/62)) ([049266e](https://github.com/sanity-io/icons/commit/049266e6fa23da09036ea6fd98e6ba80366fe08f))
+
 ## [2.11.3](https://github.com/sanity-io/icons/compare/v2.11.2...v2.11.3) (2024-03-20)
 
 ### Bug Fixes
