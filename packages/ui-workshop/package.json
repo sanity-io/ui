@@ -24,47 +24,27 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "source": "./exports/index.ts",
-      "require": "./dist/index.cjs",
-      "node": {
-        "module": "./dist/index.js",
-        "import": "./dist/node/index.cjs.js"
-      },
       "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./plugin-a11y": {
-      "types": "./dist/plugin-a11y.d.ts",
       "source": "./exports/plugin-a11y.ts",
-      "require": "./dist/plugin-a11y.cjs",
-      "node": {
-        "module": "./dist/plugin-a11y.js",
-        "import": "./dist/node/plugin-a11y.cjs.js"
-      },
       "import": "./dist/plugin-a11y.js",
+      "require": "./dist/plugin-a11y.cjs",
       "default": "./dist/plugin-a11y.js"
     },
     "./plugin-perf": {
-      "types": "./dist/plugin-perf.d.ts",
       "source": "./exports/plugin-perf.ts",
-      "require": "./dist/plugin-perf.cjs",
-      "node": {
-        "module": "./dist/plugin-perf.js",
-        "import": "./dist/node/plugin-perf.cjs.js"
-      },
       "import": "./dist/plugin-perf.js",
+      "require": "./dist/plugin-perf.cjs",
       "default": "./dist/plugin-perf.js"
     },
     "./runtime": {
-      "types": "./dist/runtime.d.ts",
       "source": "./exports/runtime.ts",
-      "require": "./dist/runtime.cjs",
-      "node": {
-        "module": "./dist/runtime.js",
-        "import": "./dist/node/runtime.cjs.js"
-      },
       "import": "./dist/runtime.js",
+      "require": "./dist/runtime.cjs",
       "default": "./dist/runtime.js"
     },
     "./package.json": "./package.json"
@@ -144,7 +124,7 @@
     "axe-core": "^4.8.4",
     "cac": "^6.7.14",
     "chokidar": "^3.6.0",
-    "cpx2": "^2.0.0",
+    "cpx": "^1.5.0",
     "dotenv-flow": "^4.0.1",
     "esbuild": "^0.20.2",
     "esbuild-register": "^3.5.0",
@@ -160,7 +140,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.1.0",
     "@sanity/icons": "^2.11.3",
-    "@sanity/pkg-utils": "^4.4.4",
+    "@sanity/pkg-utils": "^5.1.4",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.0.11",
     "@types/cpx": "^1.5.5",
