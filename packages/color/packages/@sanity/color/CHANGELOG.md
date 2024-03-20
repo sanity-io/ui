@@ -7,10 +7,9 @@ All notable changes to this project will be documented in this file. See
 
 ## [3.0.2](https://github.com/sanity-io/color/compare/color-v3.0.1...color-v3.0.2) (2024-03-20)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @sanity/pkg-utils to v5 ([#73](https://github.com/sanity-io/color/issues/73)) ([15cfb30](https://github.com/sanity-io/color/commit/15cfb3057450f47b7d3f76216d034ba20a8bb27d))
+- **deps:** update dependency @sanity/pkg-utils to v5 ([#73](https://github.com/sanity-io/color/issues/73)) ([15cfb30](https://github.com/sanity-io/color/commit/15cfb3057450f47b7d3f76216d034ba20a8bb27d))
 
 ## [3.0.1](https://github.com/sanity-io/color/compare/color-v3.0.0...color-v3.0.1) (2024-02-21)
 
