@@ -21,7 +21,6 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "source": "./src/index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
@@ -74,7 +73,7 @@
   },
   "devDependencies": {
     "@sanity/icons": "^2.11.2",
-    "@sanity/pkg-utils": "^4.2.8",
+    "@sanity/pkg-utils": "^5.1.4",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.0.7",
     "@sanity/ui-workshop": "^2.0.6",
