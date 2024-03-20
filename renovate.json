@@ -5,6 +5,10 @@
     {
       "matchDepTypes": ["dependencies"],
       "rangeStrategy": "bump"
+    },
+    {
+      "allowedVersions": "<=11.0.8",
+      "matchPackageNames": ["framer-motion"]
     }
   ]
 }
