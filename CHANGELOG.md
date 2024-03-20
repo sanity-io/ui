@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.11](https://github.com/sanity-io/ui/compare/v2.0.10...v2.0.11) (2024-03-20)
+
+### Bug Fixes
+
+- ship ESM with `.mjs` extensions, import `styled-components` correctly ([1ad5a02](https://github.com/sanity-io/ui/commit/1ad5a02320434104dbe15dbd519e2db488fb15e7))
+
 ## [2.0.10](https://github.com/sanity-io/ui/compare/v2.0.9...v2.0.10) (2024-03-12)
 
 ### Bug Fixes
