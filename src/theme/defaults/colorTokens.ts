@@ -1,4 +1,13 @@
-import {ThemeColorTokens} from '../config'
+import {ColorConfigValue, ThemeColorTokens} from '../config'
+
+const DISABLED_BUTTON_TOKENS: Record<
+  'fg' | 'fgMuted' | 'icon',
+  [ColorConfigValue, ColorConfigValue]
+> = {
+  icon: ['300', '700'],
+  fg: ['400', '600'],
+  fgMuted: ['400', '600'],
+}
 
 export const defaultColorTokens: ThemeColorTokens = {
   base: {
@@ -155,7 +164,7 @@ export const defaultColorTokens: ThemeColorTokens = {
               icon: ['white', 'black'],
             },
           },
-          bg: ['200', '800'],
+          bg: ['300', '700'],
           kbd: {
             bg: ['black', 'white'],
             fg: ['white', 'black'],
@@ -256,18 +265,20 @@ export const defaultColorTokens: ThemeColorTokens = {
             bg: ['50', '950'],
             fg: ['200', '800'],
           },
-          fg: ['200', '800'],
-          icon: ['200', '800'],
+          // fg: ['200', '800'],
+          // icon: ['200', '800'],
+          fg: DISABLED_BUTTON_TOKENS.fg,
+          icon: DISABLED_BUTTON_TOKENS.icon,
           kbd: {
             bg: ['white', 'black'],
             fg: ['200', '800'],
             border: ['100', '900'],
           },
           link: {
-            fg: ['200', '800'],
+            fg: DISABLED_BUTTON_TOKENS.fg,
           },
           muted: {
-            fg: ['200', '800'],
+            fg: DISABLED_BUTTON_TOKENS.fgMuted,
           },
         },
       },
@@ -354,18 +365,18 @@ export const defaultColorTokens: ThemeColorTokens = {
             bg: ['50', '950'],
             fg: ['200', '800'],
           },
-          fg: ['200', '800'],
-          icon: ['200', '800'],
+          fg: DISABLED_BUTTON_TOKENS.fg,
+          icon: DISABLED_BUTTON_TOKENS.icon,
           kbd: {
             bg: ['white', 'black'],
             fg: ['200', '800'],
             border: ['100', '900'],
           },
           link: {
-            fg: ['200', '800'],
+            fg: DISABLED_BUTTON_TOKENS.fg,
           },
           muted: {
-            fg: ['200', '800'],
+            fg: DISABLED_BUTTON_TOKENS.fgMuted,
           },
         },
       },
