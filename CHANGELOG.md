@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13-alpha.1](https://github.com/sanity-io/ui/compare/v2.0.12...v2.0.13-alpha.1) (2024-03-26)
+
+### Bug Fixes
+
+- **theme:** release alpha ([8c3b65e](https://github.com/sanity-io/ui/commit/8c3b65e58b59f7488ade746871e045252959e1ac))
+- **theme:** remove internal uses of getTheme_v2 ([e5eb6a1](https://github.com/sanity-io/ui/commit/e5eb6a14c8713077465e99a0a3d540dad50849a7))
+- **theme:** update imports from internal theme package ([a20bc86](https://github.com/sanity-io/ui/commit/a20bc86bcebba501ee9bcd0daa41b750f2c4ec1c))
+
 ## [2.0.12](https://github.com/sanity-io/ui/compare/v2.0.11...v2.0.12) (2024-03-20)
 
 ### Bug Fixes
