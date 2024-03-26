@@ -104,6 +104,11 @@ export const Tones: Story = {
   ),
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MULTIPLE_BUTTONS_ROWS: any[] = [...BUTTON_TONES, 'disabled'].filter(
+  (v) => v === 'default' || v === 'disabled',
+)
+
 export const MultipleStyles: Story = {
   args: {
     icon: 'square',
@@ -127,6 +132,7 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
+
         <Grid columns={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
@@ -139,16 +145,17 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
+
         <Grid columns={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
           </Text>
+
           <Text size={0} align={'center'}>
             Muted
           </Text>
 
           <Text size={0} align={'center'}>
-            {' '}
             Size small
           </Text>
         </Grid>
@@ -161,53 +168,91 @@ export const MultipleStyles: Story = {
           {matrixBuilder({
             scheme: 'light',
             columns: BUTTON_MODES,
-            rows: BUTTON_TONES,
+            rows: MULTIPLE_BUTTONS_ROWS,
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
-            renderItem: ({row, column}) => (
-              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
-                <Button {...props} tone={row} mode={column} text={props.text} />
+            renderItem: ({row, column}) => {
+              const tone = row === 'disabled' ? 'default' : row
 
-                {column !== 'default' && (
-                  <Button {...props} tone={row} mode={column} text={props.text} muted />
-                )}
-                {/* Small button */}
-                <Button
-                  {...props}
-                  space={2}
-                  padding={2}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                />
-              </Flex>
-            ),
+              return (
+                <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
+                  <Button
+                    {...props}
+                    disabled={row === 'disabled'}
+                    mode={column}
+                    text={props.text}
+                    tone={tone}
+                  />
+
+                  {column !== 'default' && (
+                    <Button
+                      {...props}
+                      disabled={row === 'disabled'}
+                      mode={column}
+                      muted
+                      text={props.text}
+                      tone={tone}
+                    />
+                  )}
+
+                  {/* Small button */}
+                  <Button
+                    {...props}
+                    disabled={row === 'disabled'}
+                    mode={column}
+                    padding={2}
+                    space={2}
+                    text={props.text}
+                    tone={tone}
+                  />
+                </Flex>
+              )
+            },
           })}
           {matrixBuilder({
             scheme: 'dark',
             columns: BUTTON_MODES,
-            rows: BUTTON_TONES,
+            rows: MULTIPLE_BUTTONS_ROWS,
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
 
-            renderItem: ({row, column}) => (
-              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
-                <Button {...props} tone={row} mode={column} text={props.text} />
+            renderItem: ({row, column}) => {
+              const tone = row === 'disabled' ? 'default' : row
 
-                {column !== 'default' && (
-                  <Button {...props} tone={row} mode={column} text={props.text} muted />
-                )}
-                {/* Small button */}
-                <Button
-                  {...props}
-                  space={2}
-                  padding={2}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                />
-              </Flex>
-            ),
+              return (
+                <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
+                  <Button
+                    {...props}
+                    disabled={row === 'disabled'}
+                    mode={column}
+                    text={props.text}
+                    tone={tone}
+                  />
+
+                  {column !== 'default' && (
+                    <Button
+                      {...props}
+                      disabled={row === 'disabled'}
+                      mode={column}
+                      muted
+                      text={props.text}
+                      tone={tone}
+                    />
+                  )}
+
+                  {/* Small button */}
+                  <Button
+                    {...props}
+                    disabled={row === 'disabled'}
+                    mode={column}
+                    padding={2}
+                    space={2}
+                    text={props.text}
+                    tone={tone}
+                  />
+                </Flex>
+              )
+            },
           })}
         </Flex>
       </Stack>
