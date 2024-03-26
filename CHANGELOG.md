@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13-alpha.2](https://github.com/sanity-io/ui/compare/v2.0.13-alpha.1...v2.0.13-alpha.2) (2024-03-26)
+
+### Bug Fixes
+
+- use default `styled-components` export to restore `styled-components@5` compatibility ([823db4a](https://github.com/sanity-io/ui/commit/823db4abf05c95fcb008ba7d8925934083c2485c))
+
 ## [2.0.13-alpha.1](https://github.com/sanity-io/ui/compare/v2.0.12...v2.0.13-alpha.1) (2024-03-26)
 
 ### Bug Fixes
