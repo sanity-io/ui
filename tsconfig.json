@@ -16,6 +16,8 @@
     "composite": true,
     "rootDir": ".",
     "outDir": "./dist/types",
+    "module": "ES2020",
+    "jsx": "react-jsx",
     "paths": {
       "@sanity/ui/*": ["./exports/*"],
       "@sanity/ui": ["./exports"]
