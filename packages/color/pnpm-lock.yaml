@@ -48,7 +48,7 @@ importers:
         specifier: ^4.1.7
         version: 4.1.7(semantic-release@23.0.6)
       '@sanity/ui':
-        specifier: ^2.0.12
+        specifier: ^2.0.13
         version: 2.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       '@sanity/ui-workshop':
         specifier: ^2.0.6
