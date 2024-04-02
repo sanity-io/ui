@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.8](https://github.com/sanity-io/logos/compare/v2.1.7...v2.1.8) (2024-04-02)
+
+### Bug Fixes
+
+- add provenance ([0b93a50](https://github.com/sanity-io/logos/commit/0b93a502793a3e004e4eef42706df466d3c10fc7))
+
 ## [2.1.7](https://github.com/sanity-io/logos/compare/v2.1.6...v2.1.7) (2024-03-18)
 
 ### Bug Fixes
