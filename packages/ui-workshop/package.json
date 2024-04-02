@@ -128,7 +128,7 @@
     "dotenv-flow": "^4.0.1",
     "esbuild": "^0.20.2",
     "esbuild-register": "^3.5.0",
-    "express": "^4.19.1",
+    "express": "^4.19.2",
     "globby": "^11.1.0",
     "lodash": "^4.17.21",
     "mkdirp": "^2.1.6",
@@ -139,7 +139,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.1.0",
-    "@sanity/icons": "^2.11.4",
+    "@sanity/icons": "^2.11.6",
     "@sanity/pkg-utils": "^5.1.6",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.0.13",
