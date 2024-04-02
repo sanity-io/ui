@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.6](https://github.com/sanity-io/icons/compare/v2.11.5...v2.11.6) (2024-04-02)
+
+### Bug Fixes
+
+- include LICENSE ([66eaf7b](https://github.com/sanity-io/icons/commit/66eaf7b07210875bfa1d72ac7fe7fb74589375eb))
+
 ## [2.11.5](https://github.com/sanity-io/icons/compare/v2.11.4...v2.11.5) (2024-04-02)
 
 ### Bug Fixes
