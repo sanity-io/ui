@@ -183,7 +183,7 @@
     "react-dom": "^18",
     "styled-components": "^5.2 || ^6"
   },
-  "packageManager": "pnpm@8.15.5",
+  "packageManager": "pnpm@8.15.6",
   "publishConfig": {
     "access": "public",
     "provenance": true
