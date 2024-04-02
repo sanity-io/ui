@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/sanity-io/color/compare/color-v3.0.2...color-v3.0.3) (2024-04-02)
+
+
+### Bug Fixes
+
+* **deps:** update `@sanity/pkg-utils` to `5.1.6` ([0ce3260](https://github.com/sanity-io/color/commit/0ce3260e48c8b9075a3153824f20a6b3aa4685b7))
+
 ## [3.0.2](https://github.com/sanity-io/color/compare/color-v3.0.1...color-v3.0.2) (2024-03-20)
 
 ### Bug Fixes
