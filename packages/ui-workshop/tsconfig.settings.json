@@ -11,8 +11,8 @@
     "target": "ES2020",
 
     // Modules
-    "module": "ES2020",
-    "moduleResolution": "Node",
+    "module": "Preserve",
+    "moduleDetection": "force",
 
     // Type checking
     "alwaysStrict": true,
