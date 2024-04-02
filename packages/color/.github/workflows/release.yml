@@ -11,6 +11,8 @@ permissions:
 
 jobs:
   release-please:
+    permissions:
+      id-token: write # to enable use of OIDC for npm provenance
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v1
