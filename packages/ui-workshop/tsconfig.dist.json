@@ -5,7 +5,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "resolveJsonModule": true,
     "sourceMap": true,
     "emitDeclarationOnly": true

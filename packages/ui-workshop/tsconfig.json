@@ -13,7 +13,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
 
     "paths": {
       "@sanity/ui-workshop/plugin-a11y": ["./exports/plugin-a11y"],
