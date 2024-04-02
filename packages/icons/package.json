@@ -34,7 +34,8 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "LICENSE"
   ],
   "scripts": {
     "build": "run-s clean generate pkg:build pkg:check",
