@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9](https://github.com/sanity-io/ui-workshop/compare/v2.0.8...v2.0.9) (2024-04-02)
+
+### Bug Fixes
+
+- **types:** use "jsx: preserve" and "module: preserve" ([2d2af81](https://github.com/sanity-io/ui-workshop/commit/2d2af81b501a31e729d5c2411a724f7a1bd52bbe))
+
 ## [2.0.8](https://github.com/sanity-io/ui-workshop/compare/v2.0.7...v2.0.8) (2024-04-02)
 
 ### Bug Fixes
