@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/sanity-io/ui/compare/v2.0.12...v2.0.13) (2024-04-02)
+
+### Bug Fixes
+
+- remove `type: commonjs` to fix regression affecting Next.js ([#1247](https://github.com/sanity-io/ui/issues/1247)) ([c7b7915](https://github.com/sanity-io/ui/commit/c7b7915759157763a9dad890e920e843ee585349))
+
 ## [2.0.12](https://github.com/sanity-io/ui/compare/v2.0.11...v2.0.12) (2024-03-20)
 
 ### Bug Fixes
