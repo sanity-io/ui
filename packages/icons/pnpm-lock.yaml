@@ -33,8 +33,8 @@ devDependencies:
     specifier: ^2.0.13
     version: 2.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
   '@sanity/ui-workshop':
-    specifier: ^2.0.7
-    version: 2.0.7(@sanity/icons@2.11.4)(@sanity/ui@2.0.13)(@types/node@20.11.25)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+    specifier: ^2.0.8
+    version: 2.0.8(@sanity/icons@2.11.4)(@sanity/ui@2.0.13)(@types/node@20.11.25)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
   '@svgr/core':
     specifier: ^8.1.0
     version: 8.1.0(typescript@5.4.2)
@@ -2821,8 +2821,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop@2.0.7(@sanity/icons@2.11.4)(@sanity/ui@2.0.13)(@types/node@20.11.25)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-iVtrAps3iO4w1/4jBPYAKMdDseeu3GpM73dGGb+9uxJ+s4adqNaJtiGKOih3dtT2kKs4tVJaV8NxCZNw0Jf+8w==}
+  /@sanity/ui-workshop@2.0.8(@sanity/icons@2.11.4)(@sanity/ui@2.0.13)(@types/node@20.11.25)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-+Z+6d75nMMtIinGXM0GuKcO9cWzaGVl3ororysJVl38tygb66A2UQKmtCbF5Jkq6PdgY0XCx8Q1OpjD8xGWQXw==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2
@@ -2834,7 +2834,7 @@ packages:
       '@sanity/icons': 2.11.4(react@18.2.0)
       '@sanity/ui': 2.0.13(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       '@vitejs/plugin-react': 4.2.1(vite@5.2.7)
-      axe-core: 4.8.4
+      axe-core: 4.9.0
       cac: 6.7.14
       chokidar: 3.6.0
       cpx: 1.5.0
@@ -3945,8 +3945,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /axe-core@4.8.4:
-    resolution: {integrity: sha512-CZLSKisu/bhJ2awW4kJndluz2HLZYIHh5Uy1+ZwDRkJi69811xgIXXfdU9HSLX0Th+ILrHj8qfL/5wzamsFtQg==}
+  /axe-core@4.9.0:
+    resolution: {integrity: sha512-H5orY+M2Fr56DWmMFpMrq5Ge93qjNdPVqzBv5gWK3aD1OvjBEJlEzxf09z93dGVQeI0LiW+aCMIx1QtShC/zUw==}
     engines: {node: '>=4'}
     dev: true
 

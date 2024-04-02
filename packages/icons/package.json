@@ -91,7 +91,7 @@
     "@sanity/pkg-utils": "^5.1.6",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.0.13",
-    "@sanity/ui-workshop": "^2.0.7",
+    "@sanity/ui-workshop": "^2.0.8",
     "@svgr/core": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
