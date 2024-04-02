@@ -4,6 +4,7 @@
     "github>sanity-io/renovate-config",
     ":reviewer(team:ecosystem)"
   ],
+  "ignorePresets": ["replacements:cpx-to-maintenance-fork"],
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
