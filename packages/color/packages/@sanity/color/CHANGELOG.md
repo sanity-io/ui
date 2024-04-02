@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.4](https://github.com/sanity-io/color/compare/color-v3.0.3...color-v3.0.4) (2024-04-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sanity/icons to ^2.11.4 ([#78](https://github.com/sanity-io/color/issues/78)) ([c827ae9](https://github.com/sanity-io/color/commit/c827ae9e2c0dab5993ac8eb5a91e4440e32dacf4))
+
 ## [3.0.3](https://github.com/sanity-io/color/compare/color-v3.0.2...color-v3.0.3) (2024-04-02)
 
 
