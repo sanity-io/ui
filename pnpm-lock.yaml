@@ -49,8 +49,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0
       '@sanity/pkg-utils':
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@20.5.9)(typescript@5.4.2)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@20.5.9)(typescript@5.4.2)
       '@sanity/semantic-release-preset':
         specifier: ^4.1.7
         version: 4.1.7(semantic-release@23.0.6)
@@ -3085,8 +3085,8 @@ packages:
     dependencies:
       react: 18.2.0
 
-  /@sanity/pkg-utils@5.1.5(@types/node@20.5.9)(typescript@5.4.2):
-    resolution: {integrity: sha512-oApifnhuFzZmqOCMYpc0HMQZRJy+i8FBNUDsH9jISkkTw0XO2CmUAhbTJJ6u2SbliFzmwQwipSqQgDx4A/BIMA==}
+  /@sanity/pkg-utils@5.1.6(@types/node@20.5.9)(typescript@5.4.2):
+    resolution: {integrity: sha512-Tx0+3hrIFFQOCRQC+lxRFs6YGZfrGAnNsUo0UHeJrtT8nmdWn+2L/Oh4X3LJXP9FzybPaN+1YKZVhd0bA0v3uw==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
