@@ -90,6 +90,18 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react/no-unescaped-entities': 'off',
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'styled-components',
+            importNames: ['default'],
+            message: 'Please use `import {styled} from "styled-components"` instead.',
+          },
+        ],
+      },
+    ],
   },
   settings: {
     'boundaries/elements': [
