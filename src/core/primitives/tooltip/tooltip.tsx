@@ -6,10 +6,10 @@ import {
   offset,
   shift,
   useFloating,
-  Middleware,
-  RootBoundary,
+  type Middleware,
+  type RootBoundary,
 } from '@floating-ui/react-dom'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
   cloneElement,
@@ -19,24 +19,25 @@ import {
   useMemo,
   useRef,
   useState,
-  ForwardedRef,
+  type ForwardedRef,
   useId,
+  useSyncExternalStore,
 } from 'react'
 import {styled} from 'styled-components'
 import {useArrayProp, useForwardedRef, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
-import {Placement} from '../../types'
+import type {Placement} from '../../types'
 import {
   ConditionalWrapper,
   Layer,
-  LayerProps,
+  type LayerProps,
   Portal,
   useBoundaryElement,
   usePortal,
 } from '../../utils'
-import {Delay} from '../types'
+import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DISTANCE,
@@ -131,17 +132,23 @@ export const Tooltip = forwardRef(function Tooltip(
   const portalElement =
     typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
 
+  const documentBodyOffsetWidth = useSyncExternalStore(
+    emptySubscribe,
+    () => document.body.offsetWidth,
+    // We don't actually know what the width of the body is during SSR, so we'll just assume it's 800px or larger
+    () => 800,
+  )
   // Get the maximum tooltip width (sans tooltip padding)
   // Tooltip width should never exceed the width of either any supplied boundary or portal element.
   // If both portal and boundary elements are provided, use the smaller width of the two.
   const tooltipWidth = useMemo(() => {
     const availableWidths = [
       ...(boundaryElement ? [boundaryElement.offsetWidth] : []),
-      portalElement?.offsetWidth || document.body.offsetWidth,
+      portalElement?.offsetWidth || documentBodyOffsetWidth,
     ]
 
     return Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2
-  }, [boundaryElement, portalElement?.offsetWidth])
+  }, [boundaryElement, documentBodyOffsetWidth, portalElement?.offsetWidth])
 
   const middleware = useMemo(() => {
     const ret: Middleware[] = []
@@ -242,14 +249,14 @@ export const Tooltip = forwardRef(function Tooltip(
   )
   const handleClick = useCallback(
     (e: MouseEvent) => {
-      handleIsOpenChange(false, true), [handleIsOpenChange]
+      handleIsOpenChange(false, true)
       childProp?.props.onClick?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )
   const handleContextMenu = useCallback(
     (e: MouseEvent) => {
-      handleIsOpenChange(false, true), [handleIsOpenChange]
+      handleIsOpenChange(false, true)
       childProp?.props.onContextMenu?.(e)
     },
     [childProp?.props, handleIsOpenChange],
@@ -446,3 +453,5 @@ export const Tooltip = forwardRef(function Tooltip(
     </>
   )
 })
+
+const emptySubscribe = () => () => {}
