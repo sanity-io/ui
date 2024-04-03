@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.14](https://github.com/sanity-io/ui/compare/v2.0.13...v2.0.14) (2024-04-03)
+
+### Bug Fixes
+
+- allow using Tooltips in SSR apps ([889ea42](https://github.com/sanity-io/ui/commit/889ea42b51df469be47da427f2489f85905f0480))
+
 ## [2.0.13](https://github.com/sanity-io/ui/compare/v2.0.12...v2.0.13) (2024-04-02)
 
 ### Bug Fixes
