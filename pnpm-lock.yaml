@@ -12,10 +12,10 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8(react-dom@18.2.0)(react@18.2.0)
       '@sanity/color':
-        specifier: ^3.0.2
+        specifier: ^3.0.4
         version: 3.0.4
       '@sanity/icons':
-        specifier: ^2.11.4
+        specifier: ^2.11.6
         version: 2.11.6(react@18.2.0)
       csstype:
         specifier: ^3.1.3
@@ -49,13 +49,13 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0
       '@sanity/pkg-utils':
-        specifier: ^5.1.6
-        version: 5.1.6(@types/node@20.12.2)(typescript@5.4.2)
+        specifier: ^5.1.7
+        version: 5.1.7(@types/node@20.12.2)(typescript@5.4.2)
       '@sanity/semantic-release-preset':
         specifier: ^4.1.7
         version: 4.1.7(semantic-release@23.0.6)
       '@sanity/ui-workshop':
-        specifier: ^2.0.7
+        specifier: ^2.0.10
         version: 2.0.10(@sanity/icons@2.11.6)(@sanity/ui@)(@types/node@20.12.2)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       '@storybook/addon-a11y':
         specifier: ^8.0.5
@@ -118,7 +118,7 @@ importers:
         specifier: ^20.5.9
         version: 20.12.2
       '@types/react':
-        specifier: ^18.2.73
+        specifier: ^18.2.74
         version: 18.2.74
       '@types/react-dom':
         specifier: ^18.2.23
@@ -142,11 +142,11 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(@types/node@20.12.2)(typescript@5.4.2)
       cypress:
-        specifier: ^13.7.1
-        version: 13.7.1
+        specifier: ^13.7.2
+        version: 13.7.2
       cypress-real-events:
         specifier: ^1.12.0
-        version: 1.12.0(cypress@13.7.1)
+        version: 1.12.0(cypress@13.7.2)
       cz-conventional-changelog:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@20.12.2)(typescript@5.4.2)
@@ -256,7 +256,7 @@ importers:
         specifier: ^1.89.0
         version: 1.89.0
       '@sanity/color':
-        specifier: ^3.0.2
+        specifier: ^3.0.4
         version: 3.0.4
       '@sanity/ui':
         specifier: workspace:*
@@ -3069,8 +3069,8 @@ packages:
     dependencies:
       react: 18.2.0
 
-  /@sanity/pkg-utils@5.1.6(@types/node@20.12.2)(typescript@5.4.2):
-    resolution: {integrity: sha512-Tx0+3hrIFFQOCRQC+lxRFs6YGZfrGAnNsUo0UHeJrtT8nmdWn+2L/Oh4X3LJXP9FzybPaN+1YKZVhd0bA0v3uw==}
+  /@sanity/pkg-utils@5.1.7(@types/node@20.12.2)(typescript@5.4.2):
+    resolution: {integrity: sha512-PYO2I99PLCD+wbCnleqgIhP2yaykaYxa5X7etm+clDm2pCTK57Jl32ihlPEKDm9c0SCiPQOw1U7D4TiKXPYjMQ==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
@@ -6511,16 +6511,16 @@ packages:
   /csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
-  /cypress-real-events@1.12.0(cypress@13.7.1):
+  /cypress-real-events@1.12.0(cypress@13.7.2):
     resolution: {integrity: sha512-oiy+4kGKkzc2PT36k3GGQqkGxNiVypheWjMtfyi89iIk6bYmTzeqxapaLHS3pnhZOX1IEbTDUVxh8T4Nhs1tyQ==}
     peerDependencies:
       cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x
     dependencies:
-      cypress: 13.7.1
+      cypress: 13.7.2
     dev: true
 
-  /cypress@13.7.1:
-    resolution: {integrity: sha512-4u/rpFNxOFCoFX/Z5h+uwlkBO4mWzAjveURi3vqdSu56HPvVdyGTxGw4XKGWt399Y1JwIn9E1L9uMXQpc0o55w==}
+  /cypress@13.7.2:
+    resolution: {integrity: sha512-FF5hFI5wlRIHY8urLZjJjj/YvfCBrRpglbZCLr/cYcL9MdDe0+5usa8kTIrDHthlEc9lwihbkb5dmwqBDNS2yw==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     requiresBuild: true
