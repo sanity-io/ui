@@ -50,5 +50,10 @@ export default defineScope({
       title: 'Custom icons',
       component: lazy(() => import('./customIcons')),
     },
+    {
+      name: 'disabled',
+      title: 'Disabled',
+      component: lazy(() => import('./disabled')),
+    },
   ],
 })
