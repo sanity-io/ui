@@ -113,8 +113,8 @@
     "react-refractor": "^2.1.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.3",
-    "@babel/preset-env": "^7.24.3",
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@commitlint/cli": "^19.2.1",
@@ -144,7 +144,7 @@
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.5.9",
     "@types/react": "^18.2.74",
-    "@types/react-dom": "^18.2.23",
+    "@types/react-dom": "^18.2.24",
     "@types/react-is": "^18.2.4",
     "@types/refractor": "^3.4.1",
     "@types/testing-library__jest-dom": "^5.14.9",
@@ -178,13 +178,13 @@
     "react-is": "^18.2.0",
     "refractor": "^4.8.1",
     "rimraf": "^5.0.1",
-    "semantic-release": "^23.0.6",
+    "semantic-release": "^23.0.7",
     "start-server-and-test": "^2.0.3",
     "storybook": "^8.0.5",
     "styled-components": "^6.1.8",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.4.2",
-    "vite": "^5.2.7",
+    "vite": "^5.2.8",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "peerDependencies": {
