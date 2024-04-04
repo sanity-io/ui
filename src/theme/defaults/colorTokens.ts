@@ -155,7 +155,12 @@ export const defaultColorTokens: ThemeColorTokens = {
               icon: ['white', 'black'],
             },
           },
-          bg: ['200', '800'],
+          bg: ['300', '600'],
+          fg: ['300', '600'],
+          muted: {
+            bg: ['300', '600'],
+            fg: ['300', '600'],
+          },
           kbd: {
             bg: ['black', 'white'],
             fg: ['white', 'black'],
@@ -256,17 +261,17 @@ export const defaultColorTokens: ThemeColorTokens = {
             bg: ['50', '950'],
             fg: ['200', '800'],
           },
-          fg: ['200', '800'],
-          icon: ['200', '800'],
+          fg: ['400', '600'],
+          icon: ['300', '700'],
+          muted: {
+            fg: ['400', '600'],
+          },
           kbd: {
             bg: ['white', 'black'],
             fg: ['200', '800'],
             border: ['100', '900'],
           },
           link: {
-            fg: ['200', '800'],
-          },
-          muted: {
             fg: ['200', '800'],
           },
         },
@@ -354,17 +359,17 @@ export const defaultColorTokens: ThemeColorTokens = {
             bg: ['50', '950'],
             fg: ['200', '800'],
           },
-          fg: ['200', '800'],
-          icon: ['200', '800'],
+          fg: ['400', '600'],
+          icon: ['300', '700'],
+          muted: {
+            fg: ['400', '600'],
+          },
           kbd: {
             bg: ['white', 'black'],
             fg: ['200', '800'],
             border: ['100', '900'],
           },
           link: {
-            fg: ['200', '800'],
-          },
-          muted: {
             fg: ['200', '800'],
           },
         },
