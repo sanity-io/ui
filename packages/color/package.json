@@ -32,10 +32,10 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/cli": "^18.6.1",
+    "@commitlint/config-conventional": "^18.6.3",
     "@sanity/pkg-utils": "^5.1.6",
-    "commitlint": "^18.4.3",
+    "commitlint": "^18.6.1",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "prettier": "^3.2.5",

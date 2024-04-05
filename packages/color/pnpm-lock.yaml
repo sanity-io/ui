@@ -9,16 +9,16 @@ importers:
   .:
     devDependencies:
       '@commitlint/cli':
-        specifier: ^18.4.3
+        specifier: ^18.6.1
         version: 18.6.1(@types/node@20.12.2)(typescript@5.4.2)
       '@commitlint/config-conventional':
-        specifier: ^18.4.3
+        specifier: ^18.6.3
         version: 18.6.3
       '@sanity/pkg-utils':
         specifier: ^5.1.6
         version: 5.1.6(@types/node@20.12.2)(typescript@5.4.2)
       commitlint:
-        specifier: ^18.4.3
+        specifier: ^18.6.1
         version: 18.6.1(@types/node@20.12.2)(typescript@5.4.2)
       husky:
         specifier: ^8.0.3
