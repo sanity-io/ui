@@ -68,8 +68,8 @@ devDependencies:
     specifier: ^4.1.7
     version: 4.1.7(semantic-release@23.0.7)
   '@sanity/ui':
-    specifier: ^2.0.14
-    version: 2.0.14(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+    specifier: ^2.0.15
+    version: 2.0.15(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
   '@types/cpx':
     specifier: ^1.5.5
     version: 1.5.5
@@ -1440,8 +1440,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui@2.0.14(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-MS82W0zGUNbhzyl4jbA2DhmAywHtjtlB8v45AZrf2Mu/FbD9HqW4HfFj9+aKomrVc+toXuKPy4STP/0DKggPhg==}
+  /@sanity/ui@2.0.15(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-oQKq7ffoAxcaRhbbwVHjjrNPXtnunXBWOL0pxGrRwTSRuEZbV2nmbwKrQadFQkQ3w+GwMI97Mr5X88QbT+Bxww==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
