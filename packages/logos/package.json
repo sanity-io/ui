@@ -46,7 +46,7 @@
     "@commitlint/config-conventional": "^19.1.0",
     "@sanity/color": "^3.0.4",
     "@sanity/icons": "^2.11.6",
-    "@sanity/pkg-utils": "^5.1.6",
+    "@sanity/pkg-utils": "^5.1.11",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.0.14",
     "@sanity/ui-workshop": "^2.0.10",
