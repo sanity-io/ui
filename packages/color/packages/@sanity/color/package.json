@@ -100,7 +100,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "rimraf": "^5.0.5",
-    "semantic-release": "^23.0.6",
+    "semantic-release": "^23.0.7",
     "styled-components": "^6.1.8",
     "typescript": "5.4.2",
     "vitest": "^1.4.0"
