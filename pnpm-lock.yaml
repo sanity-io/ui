@@ -49,8 +49,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0
       '@sanity/pkg-utils':
-        specifier: ^5.1.8
-        version: 5.1.8(@types/node@20.12.2)(typescript@5.4.2)
+        specifier: ^5.1.11
+        version: 5.1.11(@types/node@20.12.2)(typescript@5.4.2)
       '@sanity/semantic-release-preset':
         specifier: ^4.1.7
         version: 4.1.7(semantic-release@23.0.7)
@@ -253,8 +253,8 @@ importers:
         specifier: ^7.24.1
         version: 7.24.1(@babel/core@7.24.4)
       '@figma/plugin-typings':
-        specifier: ^1.89.0
-        version: 1.89.0
+        specifier: ^1.90.0
+        version: 1.90.0
       '@sanity/color':
         specifier: ^3.0.4
         version: 3.0.4
@@ -2151,8 +2151,8 @@ packages:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
     dev: true
 
-  /@figma/plugin-typings@1.89.0:
-    resolution: {integrity: sha512-79L6UQTbb5MEfL6QeVqKTgLW1rYRPNvb1Dt+zt4XJ/vy89zgY69jYUYVAlEm+sLiYFzJqofyH5k+7xPXy9Wwhw==}
+  /@figma/plugin-typings@1.90.0:
+    resolution: {integrity: sha512-RvZrSkuV0SABRaYuRFO/S30u9+RGKJm6+CPjSG7MaMo60p8S1sX5YOWT+zDWZC6mqNEaxLkrbXdiyqWXsfdHQg==}
     dev: true
 
   /@floating-ui/core@1.6.0:
@@ -3081,8 +3081,8 @@ packages:
     dependencies:
       react: 18.2.0
 
-  /@sanity/pkg-utils@5.1.8(@types/node@20.12.2)(typescript@5.4.2):
-    resolution: {integrity: sha512-emaireu4HWlp3oN34HSAs4Nre7fEyYSIf8yWS7iqzeSIhfReJfGsrpruP4GaGKvcO6n6+07UOF5wE4koUkBESA==}
+  /@sanity/pkg-utils@5.1.11(@types/node@20.12.2)(typescript@5.4.2):
+    resolution: {integrity: sha512-zLLtIECEcjGFmyP4GFpPWVpAVqwMkGHdY+NnL0oXdrzmHAO+VGftCo8YDdq2BZZ6UIXuZyMoRo0AOJxnzyV9qQ==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:

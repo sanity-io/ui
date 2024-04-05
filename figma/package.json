@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-object-rest-spread": "^7.24.1",
-    "@figma/plugin-typings": "^1.89.0",
+    "@figma/plugin-typings": "^1.90.0",
     "@sanity/color": "^3.0.4",
     "@sanity/ui": "workspace:*",
     "segmented-property": "^4.0.0"
