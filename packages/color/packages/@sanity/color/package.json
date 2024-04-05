@@ -75,7 +75,7 @@
     "@sanity/icons": "^2.11.6",
     "@sanity/pkg-utils": "^5.1.11",
     "@sanity/semantic-release-preset": "^4.1.7",
-    "@sanity/ui": "^2.0.14",
+    "@sanity/ui": "^2.0.16",
     "@sanity/ui-workshop": "^2.0.10",
     "@types/node": "^20.12.2",
     "@types/react": "^18.2.74",
