@@ -139,10 +139,10 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.1.0",
-    "@sanity/icons": "^2.11.6",
+    "@sanity/icons": "^2.11.7",
     "@sanity/pkg-utils": "^5.1.11",
     "@sanity/semantic-release-preset": "^4.1.7",
-    "@sanity/ui": "^2.0.15",
+    "@sanity/ui": "^2.0.16",
     "@types/cpx": "^1.5.5",
     "@types/express": "^4.17.21",
     "@types/lodash": "^4.17.0",
