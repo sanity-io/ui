@@ -88,7 +88,7 @@
     "@babel/preset-typescript": "^7.24.1",
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
-    "@sanity/pkg-utils": "^5.1.12",
+    "@sanity/pkg-utils": "^6.0.2",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.1.0",
     "@sanity/ui-workshop": "^2.0.11",
