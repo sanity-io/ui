@@ -22,7 +22,7 @@
   "devDependencies": {
     "@figma/plugin-typings": "^1.90.0",
     "@sanity/color": "workspace:*",
-    "@sanity/pkg-utils": "^5.1.12",
+    "@sanity/pkg-utils": "^6.0.2",
     "typescript": "5.4.2"
   }
 }
