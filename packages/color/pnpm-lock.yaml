@@ -39,7 +39,7 @@ importers:
   packages/@sanity/color:
     devDependencies:
       '@sanity/icons':
-        specifier: ^2.11.6
+        specifier: ^2.11.7
         version: 2.11.7(react@18.2.0)
       '@sanity/pkg-utils':
         specifier: ^5.1.11
