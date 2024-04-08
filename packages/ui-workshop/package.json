@@ -140,7 +140,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.1.0",
     "@sanity/icons": "^2.11.7",
-    "@sanity/pkg-utils": "^5.1.12",
+    "@sanity/pkg-utils": "^6.0.2",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.1.0",
     "@types/cpx": "^1.5.5",
