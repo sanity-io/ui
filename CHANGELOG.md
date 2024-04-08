@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/sanity-io/ui/compare/v2.0.16...v2.1.0) (2024-04-08)
+
+### Features
+
+- **ui:** improve disabled button contrast ([fc328b6](https://github.com/sanity-io/ui/commit/fc328b620412bdd9217679f455c825079656cd80))
+
 ## [2.0.16](https://github.com/sanity-io/ui/compare/v2.0.15...v2.0.16) (2024-04-05)
 
 ### Bug Fixes
