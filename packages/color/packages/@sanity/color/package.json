@@ -110,5 +110,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "esm.sh": {
+    "bundle": false
   }
 }
