@@ -24,8 +24,8 @@ devDependencies:
     specifier: ^19.1.0
     version: 19.1.0
   '@sanity/pkg-utils':
-    specifier: ^6.0.2
-    version: 6.0.2(@types/node@20.12.2)(typescript@5.4.2)
+    specifier: ^6.1.0
+    version: 6.1.0(@types/node@20.12.2)(typescript@5.4.2)
   '@sanity/semantic-release-preset':
     specifier: ^4.1.7
     version: 4.1.7(semantic-release@23.0.7)
@@ -51,8 +51,8 @@ devDependencies:
     specifier: ^20.10.4
     version: 20.12.2
   '@types/react':
-    specifier: ^18.2.74
-    version: 18.2.74
+    specifier: ^18.2.75
+    version: 18.2.75
   '@types/react-dom':
     specifier: ^18.2.24
     version: 18.2.24
@@ -2802,8 +2802,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /@sanity/pkg-utils@6.0.2(@types/node@20.12.2)(typescript@5.4.2):
-    resolution: {integrity: sha512-dikzDQXV3dADbhuPPr1VNkua+Qbg42nOQoDCE7m6SJ1HNhUtTS8d/2MqvH+E6v073roiiWJsBbl4QOj6mRRyzA==}
+  /@sanity/pkg-utils@6.1.0(@types/node@20.12.2)(typescript@5.4.2):
+    resolution: {integrity: sha512-p4RrSKEOcSCXc3mu4vthIbUCVfhmQ7q9ntQ4khbiTbUpVHaUFPAB1lI5nd+r0/YzgnydxamCLpiWCP9qtG1gHQ==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -3338,7 +3338,7 @@ packages:
   /@types/hoist-non-react-statics@3.3.5:
     resolution: {integrity: sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==}
     dependencies:
-      '@types/react': 18.2.74
+      '@types/react': 18.2.75
       hoist-non-react-statics: 3.3.2
     dev: true
 
@@ -3398,11 +3398,11 @@ packages:
   /@types/react-dom@18.2.24:
     resolution: {integrity: sha512-cN6upcKd8zkGy4HU9F1+/s98Hrp6D4MOcippK4PoE8OZRngohHZpbJn1GsaDLz87MqvHNoT13nHvNqM9ocRHZg==}
     dependencies:
-      '@types/react': 18.2.74
+      '@types/react': 18.2.75
     dev: true
 
-  /@types/react@18.2.74:
-    resolution: {integrity: sha512-9AEqNZZyBx8OdZpxzQlaFEVCSFUM2YXJH46yPOiOpm078k6ZLOCcuAzGum/zK8YBwY+dbahVNbHrbgrAwIRlqw==}
+  /@types/react@18.2.75:
+    resolution: {integrity: sha512-+DNnF7yc5y0bHkBTiLKqXFe+L4B3nvOphiMY3tuA5X10esmjqk7smyBZzbGTy2vsiy/Bnzj8yFIBL8xhRacoOg==}
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -3424,7 +3424,7 @@ packages:
     resolution: {integrity: sha512-mmiVvwpYklFIv9E8qfxuPyIt/OuyIrn6gMOAMOFUO3WJfSrSE+sGUoa4PiZj77Ut7bKZpaa6o1fBKS/4TOEvnA==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.5
-      '@types/react': 18.2.74
+      '@types/react': 18.2.75
       csstype: 3.1.3
     dev: true
 
