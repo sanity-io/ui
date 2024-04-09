@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.8](https://github.com/sanity-io/icons/compare/v2.11.7...v2.11.8) (2024-04-09)
+
+### Bug Fixes
+
+- improve esm.sh compat ([ce00433](https://github.com/sanity-io/icons/commit/ce00433d0feb756e622c972875f8c37c04bd3a88))
+
 ## [2.11.7](https://github.com/sanity-io/icons/compare/v2.11.6...v2.11.7) (2024-04-05)
 
 ### Bug Fixes
