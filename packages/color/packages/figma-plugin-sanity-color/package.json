@@ -6,15 +6,6 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "type": "commonjs",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "source": "./src/index.ts",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "manifest.json",
-    "src"
-  ],
   "exports": {
     ".": {
       "source": "./src/index.ts",
@@ -24,6 +15,15 @@
     },
     "./package.json": "./package.json"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "manifest.json",
+    "src"
+  ],
   "scripts": {
     "build": "rm -rf dist && pkg build --strict",
     "watch": "pkg watch --strict"
