@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6](https://github.com/sanity-io/color/compare/color-v3.0.5...color-v3.0.6) (2024-04-09)
+
+
+### Bug Fixes
+
+* improve esm.sh compat ([6193876](https://github.com/sanity-io/color/commit/61938762c54621c862c8d403a573581361e92385))
+
 ## [3.0.5](https://github.com/sanity-io/color/compare/color-v3.0.4...color-v3.0.5) (2024-04-05)
 
 
