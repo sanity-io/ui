@@ -135,5 +135,8 @@
         "prerelease": true
       }
     ]
+  },
+  "esm.sh": {
+    "bundle": false
   }
 }
