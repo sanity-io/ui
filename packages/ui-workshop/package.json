@@ -186,5 +186,8 @@
   "packageManager": "pnpm@8.15.6",
   "publishConfig": {
     "access": "public"
+  },
+  "esm.sh": {
+    "bundle": false
   }
 }
