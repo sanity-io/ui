@@ -197,6 +197,9 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "esm.sh": {
+    "bundle": false
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
