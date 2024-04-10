@@ -32,6 +32,6 @@
     "@figma/plugin-typings": "^1.90.0",
     "@sanity/color": "workspace:*",
     "@sanity/pkg-utils": "^6.1.0",
-    "typescript": "5.4.2"
+    "typescript": "5.4.5"
   }
 }
