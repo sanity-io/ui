@@ -51,7 +51,6 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "source": "./exports/index.ts",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -140,7 +139,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.1.0",
     "@sanity/icons": "^2.11.8",
-    "@sanity/pkg-utils": "^6.1.0",
+    "@sanity/pkg-utils": "^6.4.1",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.1.2",
     "@types/cpx": "^1.5.5",
@@ -173,7 +172,7 @@
     "semantic-release": "^23.0.8",
     "styled-components": "^6.1.8",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.4.2",
+    "typescript": "^5.4.5",
     "vitest": "^1.4.0"
   },
   "peerDependencies": {
