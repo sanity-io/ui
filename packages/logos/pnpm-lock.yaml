@@ -39,8 +39,8 @@ devDependencies:
     specifier: ^2.1.1
     version: 2.1.1(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
   '@sanity/ui-workshop':
-    specifier: ^2.0.11
-    version: 2.0.11(@sanity/icons@2.11.7)(@sanity/ui@2.1.1)(@types/node@18.13.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+    specifier: ^2.0.12
+    version: 2.0.12(@sanity/icons@2.11.7)(@sanity/ui@2.1.1)(@types/node@18.13.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
   '@testing-library/jest-dom':
     specifier: ^5.17.0
     version: 5.17.0
@@ -2870,8 +2870,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop@2.0.11(@sanity/icons@2.11.7)(@sanity/ui@2.1.1)(@types/node@18.13.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-YuctLWzRK6lHoujN44YlnD/9eRu+C8tNHGS/wHhAJirXxurVHmOmMyelxmQOn13IgzdyX+Rol46Wa/7fxKm4oA==}
+  /@sanity/ui-workshop@2.0.12(@sanity/icons@2.11.7)(@sanity/ui@2.1.1)(@types/node@18.13.0)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-adMmfkY3zyVq6ni+vyq1f0M16S+sor5Kgsg+oLxewRZ2u5Wu0tLZ50blqnmqisNPnI2WRlxsFbPxHsmRXvEphg==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2
