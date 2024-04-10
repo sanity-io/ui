@@ -87,7 +87,7 @@
     "@babel/preset-typescript": "^7.24.1",
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
-    "@sanity/pkg-utils": "^6.1.0",
+    "@sanity/pkg-utils": "^6.4.1",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.1.2",
     "@sanity/ui-workshop": "^2.0.12",
@@ -130,7 +130,7 @@
     "rimraf": "^5.0.5",
     "semantic-release": "^23.0.8",
     "styled-components": "^6.1.8",
-    "typescript": "5.4.2"
+    "typescript": "5.4.5"
   },
   "peerDependencies": {
     "react": "^18"
