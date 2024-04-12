@@ -1,4 +1,4 @@
-import {createContext} from 'react'
+import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {globalScope} from '../../lib/globalScope'
 import {PortalContextValue} from './types'
 
@@ -28,6 +28,4 @@ export const defaultContextValue: PortalContextValue = {
   },
 }
 
-globalScope[key] = globalScope[key] || createContext<PortalContextValue>(defaultContextValue)
-
-export const PortalContext: React.Context<PortalContextValue> = globalScope[key]
+export const PortalContext = createGlobalScopedContext<PortalContextValue>(key, defaultContextValue)

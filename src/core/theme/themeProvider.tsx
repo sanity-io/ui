@@ -1,8 +1,8 @@
 import {
-  RootTheme,
-  ThemeColorCardToneKey,
-  ThemeColorSchemeKey,
-  Theme,
+  type RootTheme,
+  type ThemeColorCardToneKey,
+  type ThemeColorSchemeKey,
+  type Theme,
   getScopedTheme,
 } from '@sanity/ui/theme'
 import {useContext, useMemo} from 'react'

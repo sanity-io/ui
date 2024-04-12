@@ -1,5 +1,4 @@
-import {createContext} from 'react'
-import {globalScope} from '../../lib/globalScope'
+import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {DialogPosition} from '../../types'
 
 /**
@@ -14,9 +13,9 @@ export interface DialogContextValue {
 
 const key = Symbol.for('@sanity/ui/context/dialog')
 
-globalScope[key] = globalScope[key] || createContext<DialogContextValue>({version: 0.0})
-
 /**
  * @internal
  */
-export const DialogContext: React.Context<DialogContextValue> = globalScope[key]
+export const DialogContext = createGlobalScopedContext<DialogContextValue>(key, {
+  version: 0.0,
+})
