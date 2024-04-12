@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/sanity-io/ui/compare/v2.1.2...v2.1.3) (2024-04-12)
+
+### Bug Fixes
+
+- remove ssr warning "Detected multiple renderers" ([#1262](https://github.com/sanity-io/ui/issues/1262)) ([c48155b](https://github.com/sanity-io/ui/commit/c48155b23b387b85aed5d309633bfb83f611373b))
+
 ## [2.1.2](https://github.com/sanity-io/ui/compare/v2.1.1...v2.1.2) (2024-04-09)
 
 ### Bug Fixes
