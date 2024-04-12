@@ -1,9 +1,6 @@
-import {createContext} from 'react'
-import {globalScope} from '../../lib/globalScope'
+import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {ToastContextValue} from './types'
 
 const key = Symbol.for('@sanity/ui/context/toast')
 
-globalScope[key] = globalScope[key] || createContext<ToastContextValue | null>(null)
-
-export const ToastContext: React.Context<ToastContextValue | null> = globalScope[key]
+export const ToastContext = createGlobalScopedContext<ToastContextValue | null>(key, null)
