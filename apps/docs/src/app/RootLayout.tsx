@@ -5,7 +5,7 @@ import {LayerProvider, ThemeProvider, ToastProvider, usePrefersDark} from '@sani
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {Inter} from 'next/font/google'
 import {ReactNode, useMemo, useState} from 'react'
-import Refractor from 'react-refractor'
+import {registerLanguage} from 'react-refractor'
 import bash from 'refractor/lang/bash'
 import json from 'refractor/lang/json'
 import tsx from 'refractor/lang/tsx'
@@ -19,9 +19,9 @@ import {AppContext, AppContextValue} from './AppContext'
 import {GlobalStyle} from './GlobalStyle'
 import {VisualEditing} from './VisualEditing'
 
-Refractor.registerLanguage(bash)
-Refractor.registerLanguage(json)
-Refractor.registerLanguage(tsx)
+registerLanguage(bash)
+registerLanguage(json)
+registerLanguage(tsx)
 
 const inter = Inter({subsets: ['latin']})
 

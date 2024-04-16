@@ -3,8 +3,8 @@ import {gray} from '@sanity/color'
 import {SanityMonogram} from '@sanity/logos'
 import {createElement} from 'react'
 import {defineConfig, type WorkspaceOptions} from 'sanity'
-import {deskTool} from 'sanity/desk'
 import {presentationTool} from 'sanity/presentation'
+import {structureTool} from 'sanity/structure'
 
 import {schema} from '@/studio/schema'
 import {structure} from '@/studio/structure'
@@ -20,7 +20,7 @@ const prodStudio = defineConfig<WorkspaceOptions>({
   dataset: 'production',
   plugins: [
     codeInput(),
-    deskTool({structure}),
+    structureTool({structure}),
     presentationTool({
       previewUrl: {
         preview: '/ui',
@@ -43,7 +43,7 @@ const devStudio = defineConfig<WorkspaceOptions>({
   dataset: 'development',
   plugins: [
     codeInput(),
-    deskTool({structure}),
+    structureTool({structure}),
     presentationTool({
       previewUrl: {
         preview: '/ui',
