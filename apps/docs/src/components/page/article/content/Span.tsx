@@ -2,7 +2,7 @@ import {PortableTextTypeComponent} from '@portabletext/react'
 import {sanity, unwrapData} from '@sanity/react-loader/jsx'
 
 export const Span: PortableTextTypeComponent = (props) => {
-  const markDefs = props.value.markDefs
+  const markDefs = props.value.markDefs as any[]
   const marks = unwrapData(props.value.marks) as string[]
 
   const node = marks.reduce(
