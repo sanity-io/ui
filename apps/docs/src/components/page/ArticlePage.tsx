@@ -32,7 +32,7 @@ const NavCard = styled(Card)((props) => {
 })
 
 const BreadcrumbsNavCard = styled(Card)<{$menuOpen: boolean}>((props) => {
-  const {$menuOpen} = props
+  // const {$menuOpen} = props
 
   const {media} = getTheme_v2(props.theme)
 
