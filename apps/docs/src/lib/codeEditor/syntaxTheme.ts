@@ -1,6 +1,5 @@
 import {tags as t} from '@lezer/highlight'
-import {rgba} from '@sanity/ui'
-import {Theme_v2} from '@sanity/ui/theme'
+import {rgba, Theme_v2} from '@sanity/ui/theme'
 import {createTheme} from '@uiw/codemirror-themes'
 import {Extension} from '@uiw/react-codemirror'
 
