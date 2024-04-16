@@ -9,9 +9,6 @@ import {structureTool} from 'sanity/structure'
 import {schema} from '@/studio/schema'
 import {structure} from '@/studio/structure'
 
-const DevSanityMonogram = () =>
-  createElement(SanityMonogram, {color: {bg1: gray[200].hex, bg2: gray[100].hex, fg: gray[50].hex}})
-
 const prodStudio = defineConfig<WorkspaceOptions>({
   basePath: '/production',
   name: 'production',
@@ -55,7 +52,10 @@ const devStudio = defineConfig<WorkspaceOptions>({
     }),
   ],
   schema,
-  icon: DevSanityMonogram,
+  icon: () =>
+    createElement(SanityMonogram, {
+      color: {bg1: gray[200].hex, bg2: gray[100].hex, fg: gray[50].hex},
+    }),
 })
 
 export default defineConfig<WorkspaceOptions[]>([prodStudio, devStudio])
