@@ -63,7 +63,10 @@ const components: Partial<PortableTextReactComponents> = {
     'content.figmaButton': ({value}) => (
       <FigmaButton data={value as WrappedValue<FigmaButtonData>} />
     ),
-    image: ({value}) => <Image data={value as WrappedValue<ImageData>} />,
+    image: ({value}) => (
+      // eslint-disable-next-line jsx-a11y/alt-text
+      <Image data={value as WrappedValue<ImageData>} />
+    ),
     npmPackageBadge: ({value}) => (
       <NpmPackageBadge data={value as WrappedValue<NpmPackageBadgeData>} />
     ),
