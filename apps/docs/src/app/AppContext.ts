@@ -2,7 +2,7 @@
 
 import {ImageUrlBuilder} from '@sanity/image-url/lib/types/builder'
 import {WrappedValue} from '@sanity/react-loader/jsx'
-import {ThemeColorSchemeKey} from '@sanity/ui'
+import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {createContext} from 'react'
 
 import {SettingsData} from '@/lib/data'
