@@ -11,6 +11,10 @@
   "compilerOptions": {
     "sourceMap": true,
     "rootDir": ".",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "paths": {
+      "@sanity/ui/theme": ["./exports/theme.ts"],
+      "@sanity/ui": ["./exports"]
+    }
   }
 }
