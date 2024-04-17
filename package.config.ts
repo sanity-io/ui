@@ -9,5 +9,9 @@ export default defineConfig({
     },
   },
   legacyExports: true,
+  strictOptions: {
+    // disable warning when not using browserslist in package.json
+    noImplicitBrowsersList: 'off',
+  },
   tsconfig: 'tsconfig.dist.json',
 })
