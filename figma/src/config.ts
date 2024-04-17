@@ -1,4 +1,4 @@
-import {ThemeColorBaseToneKey} from '@sanity/ui/theme'
+import {ThemeColorCardToneKey} from '@sanity/ui/theme'
 
 interface StateWriteConfig {
   accent?: boolean
@@ -14,7 +14,7 @@ export interface WriteConfig {
   dryRun?: boolean
   tones: Partial<
     Record<
-      ThemeColorBaseToneKey,
+      ThemeColorCardToneKey,
       StateWriteConfig & {
         button?: StateWriteConfig & {
           modes?: {

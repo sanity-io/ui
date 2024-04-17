@@ -10,4 +10,7 @@ export default defineConfig({
   },
   legacyExports: true,
   tsconfig: 'tsconfig.dist.json',
+  strictOptions: {
+    noImplicitBrowsersList: 'off',
+  },
 })

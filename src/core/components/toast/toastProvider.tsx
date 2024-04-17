@@ -53,7 +53,7 @@ let toastId = 0
 export function ToastProvider(props: ToastProviderProps): React.ReactElement {
   const {children, padding = 4, paddingX, paddingY, zOffset} = props
   const [state, _setState] = useState<ToastState>([])
-  const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
+  const toastsRef = useRef<{[key: string]: {timeoutId: number}}>({})
   const mounted = useMounted()
   const prefersReducedMotion = usePrefersReducedMotion()
   const variants = useMemo<Variants>(
@@ -129,7 +129,9 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
         delete toastsRef.current[id]
       }
 
-      toastsRef.current[id] = {timeoutId: setTimeout(dismiss, duration)}
+      toastsRef.current[id] = {
+        timeoutId: (setTimeout as typeof window.setTimeout)(dismiss, duration),
+      }
 
       return id
     }

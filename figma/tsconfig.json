@@ -2,14 +2,11 @@
   "extends": "../tsconfig.settings",
   "include": ["../exports", "../src", "../typings", "./src"],
   "compilerOptions": {
-    "composite": true,
     "rootDir": "..",
-    "outDir": "./dist/types",
-    "target": "ES6",
-    "lib": ["ES2020"],
+    "outDir": "./dist",
     "paths": {
-      "@sanity/ui/*": ["../exports/*"],
-      "@sanity/ui": ["../exports"]
+      "@sanity/ui/theme": ["../exports/theme.ts"],
+      "@sanity/ui": ["../exports/index.ts"]
     }
   }
 }

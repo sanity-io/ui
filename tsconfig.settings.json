@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "outDir": "./dist",
+    "paths": {
+      "@sanity/ui/*": ["./exports/*"],
+      "@sanity/ui": ["./exports"]
+    },
+
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "declarationMap": true,
     "jsx": "preserve",
 
     // Strict type-checking

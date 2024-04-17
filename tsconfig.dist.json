@@ -7,10 +7,5 @@
     "./src/**/__workshop__",
     "./src/**/*.test.ts",
     "./src/**/*.test.tsx"
-  ],
-  "compilerOptions": {
-    "sourceMap": true,
-    "rootDir": ".",
-    "outDir": "./dist"
-  }
+  ]
 }

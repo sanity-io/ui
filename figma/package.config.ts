@@ -6,7 +6,7 @@ export default defineConfig({
   },
   dist: './dist',
   src: './src',
-  tsconfig: './tsconfig.dist.json',
+  tsconfig: './tsconfig.json',
   strictOptions: {
     alwaysPackageJsonMain: 'off',
     alwaysPackageJsonFiles: 'off',
