@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/sanity-io/ui/compare/v2.1.3...v2.1.4) (2024-04-17)
+
+### Bug Fixes
+
+- **build:** add aliases for named exports ([767b7a7](https://github.com/sanity-io/ui/commit/767b7a7e8ae916082d04c8a65a0c21fafb607d3f))
+- **docs:** refer to existing type ([06ddbf2](https://github.com/sanity-io/ui/commit/06ddbf22925da68b2ed667fd53f7638e0e8273ee))
+
 ## [2.1.3](https://github.com/sanity-io/ui/compare/v2.1.2...v2.1.3) (2024-04-12)
 
 ### Bug Fixes
