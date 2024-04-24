@@ -8,7 +8,7 @@ import {
   ThemeColorStateToneKey,
 } from '@sanity/ui/theme'
 
-export const INPUT_KEYS = ['bg', 'fg', 'border'] as const
+export const INPUT_KEYS = ['bg', 'border', 'fg', 'muted-bg', 'placeholder'] as const
 export type InputColorKey = (typeof INPUT_KEYS)[number]
 
 export const STATE_KEYS = [
