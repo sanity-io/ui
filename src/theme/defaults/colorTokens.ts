@@ -163,9 +163,13 @@ export const defaultColorTokens: ThemeColorTokens = {
             },
           },
           bg: ['300', '600'],
+          code: {
+            bg: ['950', '50'],
+            fg: ['300', '600'],
+          },
           fg: ['300', '600'],
           muted: {
-            bg: ['300', '600'],
+            bg: ['950', '50'],
             fg: ['300', '600'],
           },
           kbd: {
@@ -292,7 +296,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           fg: ['400', '600'],
           icon: ['300', '700'],
           muted: {
-            fg: ['400', '600'],
+            fg: ['300', '700'],
           },
           kbd: {
             bg: ['white', 'black'],
@@ -489,7 +493,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           fg: ['blue/700 70%', 'blue/300 70%'],
         },
         muted: {
-          bg: ['100', '950'],
+          bg: ['50', '950'],
           fg: ['700 75%', '300 75%'],
         },
         skeleton: {
@@ -540,7 +544,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           fg: ['blue/200', 'blue/600'],
         },
         muted: {
-          bg: ['950', '50'],
+          bg: ['500 10%', '400 10%'],
           fg: ['100 70%', '900 70%'],
         },
         skeleton: {
@@ -585,6 +589,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           fg: ['200', '800'],
         },
         muted: {
+          bg: ['50 50%', '950 50%'],
           fg: ['200', '800'],
         },
       },
