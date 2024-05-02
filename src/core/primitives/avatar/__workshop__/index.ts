@@ -15,5 +15,15 @@ export default defineScope({
       title: 'Avatar stack',
       component: lazy(() => import('./stack')),
     },
+    {
+      name: 'within-button',
+      title: 'Within button',
+      component: lazy(() => import('./withinButton')),
+    },
+    {
+      name: 'within-menu-item',
+      title: 'Within menu item',
+      component: lazy(() => import('./withinMenuItem')),
+    },
   ],
 })
