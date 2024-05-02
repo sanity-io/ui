@@ -94,9 +94,9 @@ export const defaultColorTokens: ThemeColorTokens = {
           },
           avatar: {
             '*': {
-              _blend: ['multiply', 'screen'],
-              bg: ['white', 'black'],
-              fg: ['black', 'white'],
+              _blend: ['screen', 'multiply'],
+              bg: ['500', '400'],
+              fg: ['white', 'black'],
             },
           },
           badge: {
@@ -147,6 +147,13 @@ export const defaultColorTokens: ThemeColorTokens = {
           accent: {
             fg: ['100 70%', '900 70%'],
           },
+          avatar: {
+            '*': {
+              _blend: ['screen', 'multiply'],
+              bg: ['gray/500', 'gray/400'],
+              fg: ['white', 'black'],
+            },
+          },
           badge: {
             '*': {
               bg: ['gray/700', 'gray/300'],
@@ -173,6 +180,13 @@ export const defaultColorTokens: ThemeColorTokens = {
       },
       default: {
         '*': {
+          avatar: {
+            '*': {
+              _blend: ['screen', 'multiply'],
+              bg: ['500', '400'],
+              fg: ['white', 'black'],
+            },
+          },
           bg: ['800', '200'],
           muted: {
             bg: ['950', '50'],
@@ -196,6 +210,13 @@ export const defaultColorTokens: ThemeColorTokens = {
           _blend: ['multiply', 'screen'],
           accent: {
             fg: ['purple/700 60%', 'purple/300 70%'],
+          },
+          avatar: {
+            '*': {
+              _blend: ['screen', 'multiply'],
+              bg: ['500', '400'],
+              fg: ['white', 'black'],
+            },
           },
           badge: {
             '*': {
@@ -247,6 +268,13 @@ export const defaultColorTokens: ThemeColorTokens = {
           accent: {
             fg: ['200', '800'],
           },
+          avatar: {
+            '*': {
+              _blend: ['screen', 'multiply'],
+              bg: ['gray/100', 'gray/900'],
+              fg: ['white', 'black'],
+            },
+          },
           badge: {
             '*': {
               _hue: 'gray',
@@ -293,6 +321,13 @@ export const defaultColorTokens: ThemeColorTokens = {
           _blend: ['multiply', 'screen'],
           accent: {
             fg: ['purple/700 70%', 'purple/300 70%'],
+          },
+          avatar: {
+            '*': {
+              _blend: ['screen', 'multiply'],
+              bg: ['500', '400'],
+              fg: ['white', 'black'],
+            },
           },
           badge: {
             '*': {
@@ -345,6 +380,13 @@ export const defaultColorTokens: ThemeColorTokens = {
           _hue: 'gray',
           accent: {
             fg: ['200', '800'],
+          },
+          avatar: {
+            '*': {
+              _blend: ['screen', 'multiply'],
+              bg: ['gray/100', 'gray/900'],
+              fg: ['white', 'black'],
+            },
           },
           badge: {
             '*': {
@@ -414,6 +456,13 @@ export const defaultColorTokens: ThemeColorTokens = {
         _blend: ['multiply', 'screen'],
         accent: {
           fg: ['purple/700 70%', 'purple/300 70%'],
+        },
+        avatar: {
+          '*': {
+            _blend: ['screen', 'multiply'],
+            bg: ['500', '400'],
+            fg: ['white', 'black'],
+          },
         },
         badge: {
           '*': {
@@ -503,6 +552,13 @@ export const defaultColorTokens: ThemeColorTokens = {
         _hue: 'gray',
         accent: {
           fg: ['200', '800'],
+        },
+        avatar: {
+          '*': {
+            _blend: ['screen', 'multiply'],
+            bg: ['gray/100', 'gray/900'],
+            fg: ['white', 'black'],
+          },
         },
         badge: {
           '*': {
