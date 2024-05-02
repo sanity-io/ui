@@ -443,8 +443,9 @@ export const defaultColorTokens: ThemeColorTokens = {
         fg: ['800', '200'],
       },
       disabled: {
-        fg: ['200', '800'],
+        fg: ['400', '600'],
         border: ['100', '900'],
+        placeholder: ['200', '800 50%'],
       },
     },
     invalid: {
