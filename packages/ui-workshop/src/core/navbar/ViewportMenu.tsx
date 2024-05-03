@@ -21,7 +21,6 @@ export const ViewportMenu = memo(function ViewportMenu() {
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,
-  matchReferenceWidth: true,
   placement: 'bottom',
   portal: true,
 }
@@ -42,7 +41,6 @@ const ViewportMenuView = memo(function ViewportMenuView(props: {
           iconRight={SelectIcon}
           mode="ghost"
           padding={2}
-          style={{minWidth: 80}}
           text={VIEWPORT_OPTIONS.find((o) => o.name === viewport)?.title}
         />
       }
