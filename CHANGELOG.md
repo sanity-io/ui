@@ -5,6 +5,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/sanity-io/ui/compare/v2.1.4...v2.1.5) (2024-05-03)
+
+### Bug Fixes
+
+- **theme:** align disabled input colors with button colors ([98710cc](https://github.com/sanity-io/ui/commit/98710cca0e93b255a4eff69e3e3944bae629aa99))
+- **theme:** improve avatar colors ([4bbb42a](https://github.com/sanity-io/ui/commit/4bbb42a42ac4d776b2ee08ab0b2043a1fe424791))
+- **theme:** improve code and muted colors ([1e33341](https://github.com/sanity-io/ui/commit/1e333414da99e306248379a5eaaff18f22222fa2))
+- **theme:** use correct base bg for avatar ([618c194](https://github.com/sanity-io/ui/commit/618c1942aa1e315af22379fbe7c984fc04426e11))
+
 ## [2.1.4](https://github.com/sanity-io/ui/compare/v2.1.3...v2.1.4) (2024-04-17)
 
 ### Bug Fixes
