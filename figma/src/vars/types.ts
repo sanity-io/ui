@@ -46,26 +46,31 @@ export const STATE_KEYS = [
   'avatar/cyan/fg',
 
   'badge/default/bg',
+  'badge/default/border',
   'badge/default/dot',
   'badge/default/fg',
   'badge/default/icon',
 
   'badge/primary/bg',
+  'badge/primary/border',
   'badge/primary/dot',
   'badge/primary/fg',
   'badge/primary/icon',
 
   'badge/positive/bg',
+  'badge/positive/border',
   'badge/positive/dot',
   'badge/positive/fg',
   'badge/positive/icon',
 
   'badge/caution/bg',
+  'badge/caution/border',
   'badge/caution/dot',
   'badge/caution/fg',
   'badge/caution/icon',
 
   'badge/critical/bg',
+  'badge/critical/border',
   'badge/critical/dot',
   'badge/critical/fg',
   'badge/critical/icon',
