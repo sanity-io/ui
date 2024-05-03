@@ -40,7 +40,7 @@ export const Badge = forwardRef(function Badge(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     mode: _deprecated_mode,
     padding = 1,
-    radius = 'full',
+    radius = 2,
     tone = 'default',
     ...restProps
   } = props
@@ -54,7 +54,9 @@ export const Badge = forwardRef(function Badge(
       padding={useArrayProp(padding)}
       ref={ref}
     >
-      <Text size={fontSize}>{children}</Text>
+      <Text size={fontSize} weight="medium">
+        {children}
+      </Text>
     </Root>
   )
 })

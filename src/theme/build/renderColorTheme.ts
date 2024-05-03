@@ -279,6 +279,7 @@ function renderThemeColorBadgeColor(
 
   return {
     bg,
+    border: value.border && renderColorValue(value.border, colorOptions),
     dot: renderColorValue(value.dot, colorOptions),
     fg: renderColorValue(value.fg, colorOptions),
     icon: renderColorValue(value.icon, colorOptions),

@@ -8,6 +8,10 @@ function isColorMixPercentValue(str: string): str is `${number}%` {
 
 /** @internal */
 export function parseTokenValue(str: string): TokenValueNode | undefined {
+  if (!str) {
+    throw new Error('Token value cannot be empty')
+  }
+
   const segments = str.split('/')
 
   let nextSegment = segments.shift() || ''

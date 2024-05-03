@@ -188,6 +188,7 @@ function _buildBadgeColorTheme(
 
   return {
     bg: _color(context, tokens?.bg),
+    border: _color(context, tokens?.border),
     fg: _color(context, tokens?.fg),
     dot: _color(context, tokens?.dot),
     icon: _color(context, tokens?.icon),

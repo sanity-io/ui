@@ -6,9 +6,11 @@ export function badgeStyle(props: BadgeStyleProps): CSSObject {
 
   return {
     '--card-bg-color': `var(--card-badge-${$tone}-bg-color)`,
+    '--card-border-color': `var(--card-badge-${$tone}-border-color)`,
     '--card-fg-color': `var(--card-badge-${$tone}-fg-color)`,
 
     backgroundColor: 'var(--card-bg-color)',
+    boxShadow: '0 0 0 1px var(--card-border-color)',
     cursor: 'default',
 
     '&:not([hidden])': {

@@ -348,26 +348,31 @@ function getStateVars(state: ThemeColorState_v2) {
     '--card-avatar-magenta-fg-color': state.avatar.magenta.fg,
 
     '--card-badge-default-bg-color': state.badge.default.bg,
+    '--card-badge-default-border-color': state.badge.default.border,
     '--card-badge-default-dot-color': state.badge.default.dot,
     '--card-badge-default-fg-color': state.badge.default.fg,
     '--card-badge-default-icon-color': state.badge.default.icon,
 
     '--card-badge-primary-bg-color': state.badge.primary.bg,
+    '--card-badge-primary-border-color': state.badge.primary.border,
     '--card-badge-primary-dot-color': state.badge.primary.dot,
     '--card-badge-primary-fg-color': state.badge.primary.fg,
     '--card-badge-primary-icon-color': state.badge.primary.icon,
 
     '--card-badge-positive-bg-color': state.badge.positive.bg,
+    '--card-badge-positive-border-color': state.badge.positive.border,
     '--card-badge-positive-dot-color': state.badge.positive.dot,
     '--card-badge-positive-fg-color': state.badge.positive.fg,
     '--card-badge-positive-icon-color': state.badge.positive.icon,
 
     '--card-badge-caution-bg-color': state.badge.caution.bg,
+    '--card-badge-caution-border-color': state.badge.caution.border,
     '--card-badge-caution-dot-color': state.badge.caution.dot,
     '--card-badge-caution-fg-color': state.badge.caution.fg,
     '--card-badge-caution-icon-color': state.badge.caution.icon,
 
     '--card-badge-critical-bg-color': state.badge.critical.bg,
+    '--card-badge-critical-border-color': state.badge.critical.border,
     '--card-badge-critical-dot-color': state.badge.critical.dot,
     '--card-badge-critical-fg-color': state.badge.critical.fg,
     '--card-badge-critical-icon-color': state.badge.critical.icon,

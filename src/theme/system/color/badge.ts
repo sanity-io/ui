@@ -3,6 +3,7 @@
  */
 export interface ThemeColorBadgeTone_v2 {
   bg: string
+  border?: string // optional for backwards compatibility
   fg: string
   dot: string
   icon: string

@@ -58,6 +58,7 @@ export interface ThemeColorBadgeToneTokens {
   _blend?: ColorBlendModeTokenValue
   _hue?: ColorHueKey
   bg?: ThemeColorTokenValue
+  border?: ThemeColorTokenValue
   dot?: ThemeColorTokenValue
   fg?: ThemeColorTokenValue
   icon?: ThemeColorTokenValue

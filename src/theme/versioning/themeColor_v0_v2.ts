@@ -150,30 +150,35 @@ function stateThemeColor_v0_v2(v0: ThemeColor, state: ThemeColorGenericState): T
     badge: {
       default: {
         bg: v0.muted.default.enabled.bg,
+        border: v0.muted.default.enabled.border,
         fg: v0.muted.default.enabled.fg,
         dot: v0.muted.default.enabled.muted.fg,
         icon: v0.muted.default.enabled.muted.fg,
       },
       primary: {
         bg: v0.muted.primary.enabled.bg,
+        border: v0.muted.primary.enabled.border,
         fg: v0.muted.primary.enabled.fg,
         dot: v0.muted.primary.enabled.muted.fg,
         icon: v0.muted.primary.enabled.muted.fg,
       },
       positive: {
         bg: v0.muted.positive.enabled.bg,
+        border: v0.muted.positive.enabled.border,
         fg: v0.muted.positive.enabled.fg,
         dot: v0.muted.positive.enabled.muted.fg,
         icon: v0.muted.positive.enabled.muted.fg,
       },
       caution: {
         bg: v0.muted.caution.enabled.bg,
+        border: v0.muted.caution.enabled.border,
         fg: v0.muted.caution.enabled.fg,
         dot: v0.muted.caution.enabled.muted.fg,
         icon: v0.muted.caution.enabled.muted.fg,
       },
       critical: {
         bg: v0.muted.critical.enabled.bg,
+        border: v0.muted.critical.enabled.border,
         fg: v0.muted.critical.enabled.fg,
         dot: v0.muted.critical.enabled.muted.fg,
         icon: v0.muted.critical.enabled.muted.fg,
