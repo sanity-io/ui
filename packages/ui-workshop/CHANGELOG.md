@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/sanity-io/ui-workshop/compare/v2.0.12...v2.0.13) (2024-05-03)
+
+### Bug Fixes
+
+- **build:** update dependencies and build config ([c84657e](https://github.com/sanity-io/ui-workshop/commit/c84657ee6ba8efedfc0deb12faf67fdb25e976c4))
+- **navbar:** remove min-width on buttons ([3c722bb](https://github.com/sanity-io/ui-workshop/commit/3c722bb326a40cf552784a0701365c7db680775f))
+- **plugin-perf:** update profiler api ([315e1a1](https://github.com/sanity-io/ui-workshop/commit/315e1a11efbe50e25911d8668547e6c256505d2a))
+
 ## [2.0.12](https://github.com/sanity-io/ui-workshop/compare/v2.0.11...v2.0.12) (2024-04-09)
 
 ### Bug Fixes
