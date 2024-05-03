@@ -19,7 +19,6 @@ export function ZoomMenu(): React.ReactElement {
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,
-  matchReferenceWidth: true,
   placement: 'bottom',
   portal: true,
 }
@@ -40,7 +39,6 @@ const ZoomMenuView = memo(function ZoomMenuView(props: {
           iconRight={SelectIcon}
           mode="ghost"
           padding={2}
-          style={{minWidth: 80}}
           text={ZOOM_OPTIONS.find((o) => o.value === zoom)?.title}
         />
       }
