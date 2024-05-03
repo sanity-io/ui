@@ -11,17 +11,7 @@
     "./workshop.runtime.ts"
   ],
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist",
     "jsx": "preserve",
-
-    "paths": {
-      "@sanity/ui-workshop/plugin-a11y": ["./exports/plugin-a11y"],
-      "@sanity/ui-workshop/plugin-perf": ["./exports/plugin-perf"],
-      "@sanity/ui-workshop/runtime": ["./exports/runtime"],
-      "@sanity/ui-workshop": ["./exports"]
-    },
-
     "noEmit": true,
     "resolveJsonModule": true
   }

@@ -3,8 +3,6 @@
   "include": ["./exports", "./package.json", "./src", "./typings"],
   "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist",
     "jsx": "preserve",
     "resolveJsonModule": true,
     "sourceMap": true,
