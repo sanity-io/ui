@@ -34,7 +34,7 @@ export function usePerfTest<TargetType = unknown>(
   )
 
   const handleRender: React.ProfilerOnRenderCallback = useCallback(
-    (id, phase, actualDuration, baseDuration, startTime, commitTime, interactions) => {
+    (id, phase, actualDuration, baseDuration, startTime, commitTime) => {
       const result: PerfTestRenderResult = {
         id,
         phase,
@@ -42,7 +42,7 @@ export function usePerfTest<TargetType = unknown>(
         baseDuration,
         startTime,
         commitTime,
-        interactions,
+        interactions: new Set(),
       }
 
       setTimeout(() => {
