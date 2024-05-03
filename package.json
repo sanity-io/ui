@@ -52,7 +52,7 @@
     "theme.js"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build pkg:check figma:pkg:build",
+    "build": "run-s clean pkg:build figma:pkg:build",
     "clean": "rimraf .workshop dist",
     "commit": "cz",
     "cypress:dev": "run-p dev cypress:open",
@@ -62,8 +62,7 @@
     "figma:pkg:build": "cd figma && pnpm build",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
-    "pkg:build": "pkg build --strict",
-    "pkg:check": "pkg --strict",
+    "pkg:build": "pkg build --check --strict",
     "prepare": "husky install",
     "prepublishOnly": "pnpm build",
     "release": "semantic-release",
@@ -121,7 +120,7 @@
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/pkg-utils": "^6.8.1",
     "@sanity/semantic-release-preset": "^4.1.7",
-    "@sanity/ui-workshop": "^2.0.12",
+    "@sanity/ui-workshop": "^2.0.13",
     "@storybook/addon-a11y": "^8.0.8",
     "@storybook/addon-docs": "^8.0.8",
     "@storybook/addon-essentials": "^8.0.8",
