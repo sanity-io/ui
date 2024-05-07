@@ -55,8 +55,8 @@ importers:
         specifier: ^4.1.7
         version: 4.1.7(semantic-release@23.0.8(typescript@5.4.5))
       '@sanity/ui-workshop':
-        specifier: ^2.0.12
-        version: 2.0.12(@sanity/icons@2.11.8(react@18.3.1))(@sanity/ui@2.1.6(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)
+        specifier: ^2.0.13
+        version: 2.0.13(@sanity/icons@2.11.8(react@18.3.1))(@sanity/ui@2.1.6(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)
       '@storybook/addon-a11y':
         specifier: ^8.0.8
         version: 8.0.8
@@ -1863,8 +1863,8 @@ packages:
     peerDependencies:
       semantic-release: ^22.0.12 || ^23.0.2
 
-  '@sanity/ui-workshop@2.0.12':
-    resolution: {integrity: sha512-adMmfkY3zyVq6ni+vyq1f0M16S+sor5Kgsg+oLxewRZ2u5Wu0tLZ50blqnmqisNPnI2WRlxsFbPxHsmRXvEphg==}
+  '@sanity/ui-workshop@2.0.13':
+    resolution: {integrity: sha512-mGEhUce+0R0YWM02glTH7aONTPf8OzR6SCz2AOGNsb6XILMzvzzlTbEY+EgVj+PqKEXtM8aPftFYMkACP7M8zw==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2
@@ -9656,7 +9656,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.0.12(@sanity/icons@2.11.8(react@18.3.1))(@sanity/ui@2.1.6(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)':
+  '@sanity/ui-workshop@2.0.13(@sanity/icons@2.11.8(react@18.3.1))(@sanity/ui@2.1.6(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)':
     dependencies:
       '@sanity/icons': 2.11.8(react@18.3.1)
       '@sanity/ui': 2.1.6(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
