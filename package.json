@@ -180,7 +180,7 @@
     "semantic-release": "^23.0.8",
     "start-server-and-test": "^2.0.3",
     "storybook": "^8.0.8",
-    "styled-components": "^6.1.8",
+    "styled-components": "^6.1.10",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.4.5",
     "vite": "^5.2.11",
