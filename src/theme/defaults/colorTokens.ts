@@ -23,14 +23,6 @@ export const defaultColorTokens: ThemeColorTokens = {
           icon: ['500', '500'],
           dot: ['500', '500'],
         },
-        // positive: {
-        //   bg: ['200 50%', '900'],
-        //   fg: ['600', '500'],
-        // },
-        // caution: {
-        //   bg: ['200 50%', '900'],
-        //   fg: ['600', '500'],
-        // },
       },
       bg: ['50', '950'],
       border: ['200', '800'],
@@ -100,14 +92,6 @@ export const defaultColorTokens: ThemeColorTokens = {
               fg: ['white', 'black'],
             },
           },
-          // badge: {
-          //   '*': {
-          //     bg: ['900', '100'],
-          //     fg: ['400', '600'],
-          //     dot: ['500', '500'],
-          //     icon: ['500', '500'],
-          //   },
-          // },
           bg: ['500', '400'],
           border: ['500/0', '400/0'],
           code: {
@@ -312,22 +296,22 @@ export const defaultColorTokens: ThemeColorTokens = {
           bg: ['white', 'black'],
           border: ['white/0', 'black/0'],
           code: {
-            bg: ['50', '950'],
-            fg: ['700 75%', '300 75%'],
+            bg: ['500 10%', '400 10%'],
+            fg: ['700 60%', '400 60%'],
           },
-          fg: ['700', '300'],
-          icon: ['700 75%', '300 75%'],
+          fg: ['600', '400'],
+          icon: ['700 60%', '300 60%'],
           kbd: {
             bg: ['white', 'black'],
-            fg: ['700', '300'],
+            fg: ['600', '400'],
             border: ['200', '800'],
           },
           link: {
-            fg: ['blue/700 70%', 'blue/300 70%'],
+            fg: ['blue/700 60%', 'blue/300 60%'],
           },
           muted: {
             bg: ['100', '950'],
-            fg: ['700 75%', '300 75%'],
+            fg: ['700 60%', '300 60%'],
           },
           skeleton: {
             from: ['100', '900'],
@@ -471,14 +455,6 @@ export const defaultColorTokens: ThemeColorTokens = {
             fg: ['black', 'white'],
           },
         },
-        // badge: {
-        //   '*': {
-        //     bg: ['900', '100'],
-        //     fg: ['400', '600'],
-        //     dot: ['500', '500'],
-        //     icon: ['500', '500'],
-        //   },
-        // },
         bg: ['500', '400'],
         border: ['500 20%', '400 20%'],
         code: {
