@@ -1,6 +1,5 @@
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {cloneElement, forwardRef, useCallback, useMemo, useState, useEffect, useRef} from 'react'
-import {isElement} from 'react-is'
 import {Popover, PopoverProps} from '../../primitives'
 import {Placement, Radius} from '../../types'
 import {MenuProps} from './menu'
@@ -218,7 +217,7 @@ export const MenuButton = forwardRef(function MenuButton(
     ],
   )
 
-  const menu = isElement(menuProp) ? cloneElement(menuProp, menuProps) : null
+  const menu = menuProp && cloneElement(menuProp, menuProps)
 
   const setButtonRef = useCallback(
     (el: HTMLButtonElement | null) => {
@@ -235,19 +234,18 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const button = useMemo(
     () =>
-      isElement(buttonProp)
-        ? cloneElement(buttonProp, {
-            'data-ui': 'MenuButton',
-            id,
-            onClick: handleButtonClick,
-            onKeyDown: handleButtonKeyDown,
-            onMouseDown: handleMouseDown,
-            'aria-haspopup': true,
-            'aria-expanded': open,
-            ref: setButtonRef,
-            selected: open,
-          })
-        : null,
+      buttonProp &&
+      cloneElement(buttonProp, {
+        'data-ui': 'MenuButton',
+        id,
+        onClick: handleButtonClick,
+        onKeyDown: handleButtonKeyDown,
+        onMouseDown: handleMouseDown,
+        'aria-haspopup': true,
+        'aria-expanded': open,
+        ref: setButtonRef,
+        selected: open,
+      }),
     [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open, setButtonRef],
   )
 
