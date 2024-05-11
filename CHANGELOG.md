@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.7](https://github.com/sanity-io/ui/compare/v2.1.6...v2.1.7) (2024-05-11)
+
+### Bug Fixes
+
+- **menu:** remove use of `isElement` ([68f9620](https://github.com/sanity-io/ui/commit/68f9620c0da28847f0d1b0491bda36464866c02e))
+
 ## [2.1.6](https://github.com/sanity-io/ui/compare/v2.1.5...v2.1.6) (2024-05-03)
 
 ### Bug Fixes
