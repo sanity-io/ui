@@ -18,7 +18,7 @@ const SIDE_PANEL_WIDTH = {
 export default function SidePanelStory() {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
-  const updateRef = useRef<PopoverUpdateCallback>()
+  const updateRef = useRef<PopoverUpdateCallback>(undefined)
 
   useEffect(() => updateRef.current?.(), [sidePanelWidth])
 

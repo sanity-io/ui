@@ -6,7 +6,8 @@ import {
   useEffect,
   useMemo,
   useState,
-} from 'react'
+  type JSX,
+} from 'react';
 import {isValidElementType} from 'react-is'
 import {useArrayProp, useForwardedRef} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'

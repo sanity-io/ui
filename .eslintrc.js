@@ -30,10 +30,12 @@ module.exports = {
     'jsx-a11y',
     'react',
     'react-hooks',
+    'eslint-plugin-react-compiler',
     '@typescript-eslint',
     'prettier',
   ],
   rules: {
+    'react-compiler/react-compiler': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/member-delimiter-style': 'off',

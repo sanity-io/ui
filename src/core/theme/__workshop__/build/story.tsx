@@ -23,7 +23,7 @@ import {Root} from './Root'
 
 const theme = buildTheme()
 
-export default function BuildStory(): ReactElement {
+export default function BuildStory(): ReactElement<any> {
   return (
     <Root>
       <div

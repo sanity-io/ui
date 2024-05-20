@@ -15,7 +15,7 @@ export interface LayerProviderProps {
 /**
  * @public
  */
-export function LayerProvider(props: LayerProviderProps): React.ReactElement {
+export function LayerProvider(props: LayerProviderProps): React.ReactElement<any> {
   const {children, zOffset: zOffsetProp = 0} = props
 
   // Get parent context values

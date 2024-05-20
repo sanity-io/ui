@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {forwardRef, useEffect, useMemo, useRef, useState} from 'react'
+import {forwardRef, useEffect, useMemo, useRef, useState, type JSX} from 'react'
 import {styled} from 'styled-components'
 import {_isScrollable} from '../../helpers'
 import {useForwardedRef} from '../../hooks'
@@ -49,7 +49,7 @@ export const VirtualList = forwardRef(function VirtualList(
     StackProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange' | 'ref'>,
   ref: React.ForwardedRef<HTMLDivElement>,
-): React.ReactElement {
+): React.ReactElement<any> {
   const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
   const {space} = useTheme_v2()
   const forwardedRef = useForwardedRef(ref)
@@ -149,7 +149,7 @@ export const VirtualList = forwardRef(function VirtualList(
 
       return (
         <ItemWrapper key={key} style={{top: itemIndex * (itemHeight + space[gap])}}>
-          {node}
+          {node as any}
         </ItemWrapper>
       )
     })
@@ -158,7 +158,7 @@ export const VirtualList = forwardRef(function VirtualList(
   const wrapperStyle = useMemo(() => ({height}), [height])
 
   return (
-    <Root as={as} data-ui="VirtualList" {...restProps} ref={forwardedRef}>
+    <Root as={as as any} data-ui="VirtualList" {...restProps} ref={forwardedRef}>
       <div ref={wrapperRef} style={wrapperStyle}>
         {children}
       </div>

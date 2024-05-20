@@ -14,7 +14,7 @@ export interface ThemeColorProviderProps {
 /**
  * @public
  */
-export function ThemeColorProvider(props: ThemeColorProviderProps): React.ReactElement {
+export function ThemeColorProvider(props: ThemeColorProviderProps): React.ReactElement<any> {
   const {children, scheme, tone} = props
   const root = useRootTheme()
 

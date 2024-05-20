@@ -50,7 +50,7 @@ let toastId = 0
 /**
  * @public
  */
-export function ToastProvider(props: ToastProviderProps): React.ReactElement {
+export function ToastProvider(props: ToastProviderProps): React.ReactElement<any> {
   const {children, padding = 4, paddingX, paddingY, zOffset} = props
   const [state, _setState] = useState<ToastState>([])
   const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})

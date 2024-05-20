@@ -6,10 +6,10 @@ import {Inline, InlineProps} from '../../primitives'
  * @public
  */
 export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
-  children: Array<React.ReactElement | null | undefined | false>
+  children: Array<React.ReactElement<any> | null | undefined | false>
 }
 
-function _isReactElement(node: unknown): node is React.ReactElement {
+function _isReactElement(node: unknown): node is React.ReactElement<any> {
   return Boolean(node)
 }
 

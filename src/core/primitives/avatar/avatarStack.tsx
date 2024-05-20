@@ -68,7 +68,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
   } = props
   const children = childrenToElementArray(childrenProp).filter(
     (child) => typeof child !== 'string',
-  ) as React.ReactElement[]
+  ) as React.ReactElement<any>[]
   const maxLength = Math.max(maxLengthProp, 0)
   const size = useArrayProp(sizeProp)
 

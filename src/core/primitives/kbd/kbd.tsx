@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import { forwardRef, type JSX } from 'react';
 import {styled, css} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'

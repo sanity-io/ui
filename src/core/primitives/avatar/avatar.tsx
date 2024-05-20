@@ -1,5 +1,5 @@
 import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
+import { forwardRef, useCallback, useEffect, useId, useMemo, useState, type JSX } from 'react';
 import ReactIs from 'react-is'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'

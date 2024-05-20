@@ -1,5 +1,9 @@
 import {defineConfig} from '@sanity/pkg-utils'
 
+const ReactCompilerConfig = {
+  /* ... */
+}
+
 export default defineConfig({
   extract: {
     rules: {
@@ -14,4 +18,7 @@ export default defineConfig({
     noImplicitBrowsersList: 'off',
   },
   tsconfig: 'tsconfig.dist.json',
+  babel: {
+    plugins: [['babel-plugin-react-compiler', ReactCompilerConfig]],
+  },
 })

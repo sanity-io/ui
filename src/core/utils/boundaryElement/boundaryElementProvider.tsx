@@ -13,7 +13,7 @@ export interface BoundaryElementProviderProps {
 /**
  * @public
  */
-export function BoundaryElementProvider(props: BoundaryElementProviderProps): React.ReactElement {
+export function BoundaryElementProvider(props: BoundaryElementProviderProps): React.ReactElement<any> {
   const {children, element} = props
   const value: BoundaryElementContextValue = useMemo(() => ({version: 0.0, element}), [element])
 
