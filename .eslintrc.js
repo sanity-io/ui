@@ -30,6 +30,7 @@ module.exports = {
     'jsx-a11y',
     'react',
     'react-hooks',
+    'react-compiler',
     '@typescript-eslint',
     'prettier',
   ],
@@ -87,8 +88,9 @@ module.exports = {
       {blankLine: 'always', prev: '*', next: 'return'},
     ],
     'react/prop-types': 'off',
-    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-compiler/react-compiler': 'error',
     'react/no-unescaped-entities': 'off',
     'no-restricted-imports': [
       'error',
