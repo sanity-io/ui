@@ -20,11 +20,18 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   )
 }
 
+function ensureBasePath(path: string, basePath: string = '') {
+  if (path.startsWith(basePath)) return path
+  
+  return `${basePath}${path}`
+}
+
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
   const router = useRouter()
-  const {features} = useApp()
+  const {features, basePath} = useApp()
   const href = node.targetId && node.href ? node.href : undefined
+  const hrefWithBasePath = node.targetId && node.href ? ensureBasePath(node.href, basePath) : undefined
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLLIElement>) => {
@@ -43,7 +50,7 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   return (
     <TreeItem
       expanded={node.collapsed !== true || path.startsWith(`${node.href}/`)}
-      href={href}
+      href={hrefWithBasePath}
       onClick={handleClick}
       selected={href ? href === path : false}
       style={{opacity: node.hidden ? 0.25 : undefined}}
