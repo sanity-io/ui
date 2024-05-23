@@ -8,8 +8,17 @@ module.exports = {
   transform: {
     '\\.[jt]sx?$': [
       'babel-jest',
-      // rootMode upwards makes use of the global babel.config.js
-      {rootMode: 'upward'},
+      {
+        // Don't look for babel.config.{ts,js,json} files or .babelrc files
+        configFile: false,
+        babelrc: false,
+        // The rest is only needed by Jest, if Jest is updated to no longer need babel then this can be removed as well as related dependencies
+        presets: [
+          ['@babel/preset-env', {modules: 'commonjs'}],
+          ['@babel/preset-react', {runtime: 'automatic'}],
+          '@babel/preset-typescript',
+        ],
+      },
     ],
   },
 }
