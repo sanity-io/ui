@@ -1,8 +1,8 @@
 name: CI & Release
 
 on:
-  push:
   pull_request:
+  push:
     branches:
       - alpha
       - beta
