@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.13](https://github.com/sanity-io/ui/compare/v2.1.12...v2.1.13) (2024-05-28)
+
+### Bug Fixes
+
+- **deps:** update dependency react-refractor to ^2.2.0 ([#1316](https://github.com/sanity-io/ui/issues/1316)) ([a156277](https://github.com/sanity-io/ui/commit/a156277ea35f58a35ddd827442d095c389df9c42))
+
 ## [2.1.12](https://github.com/sanity-io/ui/compare/v2.1.11...v2.1.12) (2024-05-23)
 
 ### Bug Fixes
