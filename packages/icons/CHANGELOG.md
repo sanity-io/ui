@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/sanity-io/icons/compare/v2.11.8...v3.0.0) (2024-05-29)
+
+### ⚠ BREAKING CHANGES
+
+- add support for React 19 (#77)
+
+### Features
+
+- add support for React 19 ([#77](https://github.com/sanity-io/icons/issues/77)) ([fbd5a7c](https://github.com/sanity-io/icons/commit/fbd5a7c5d75ef47d95af3c73ea506b93f3f43875))
+
 ## [2.11.8](https://github.com/sanity-io/icons/compare/v2.11.7...v2.11.8) (2024-04-09)
 
 ### Bug Fixes
