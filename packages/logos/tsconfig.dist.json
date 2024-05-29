@@ -12,6 +12,6 @@
     "rootDir": ".",
     "outDir": "./dist",
     "emitDeclarationOnly": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   }
 }
