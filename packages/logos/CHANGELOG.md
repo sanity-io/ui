@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.12](https://github.com/sanity-io/logos/compare/v2.1.11...v2.1.12) (2024-05-29)
+
+### Bug Fixes
+
+- support react 19 ([#96](https://github.com/sanity-io/logos/issues/96)) ([0447adc](https://github.com/sanity-io/logos/commit/0447adc93736cbca126c584139be7ad5a8ffbc4c))
+
 ## [2.1.11](https://github.com/sanity-io/logos/compare/v2.1.10...v2.1.11) (2024-04-25)
 
 ### Bug Fixes
