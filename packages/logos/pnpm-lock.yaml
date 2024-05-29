@@ -78,11 +78,11 @@ devDependencies:
     specifier: ^3.3.0
     version: 3.3.0(@types/node@18.13.0)(typescript@5.4.5)
   esbuild:
-    specifier: ^0.20.2
-    version: 0.20.2
+    specifier: ^0.21.4
+    version: 0.21.4
   esbuild-register:
     specifier: ^3.5.0
-    version: 3.5.0(esbuild@0.20.2)
+    version: 3.5.0(esbuild@0.21.4)
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
