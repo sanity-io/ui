@@ -47,7 +47,7 @@
     "@sanity/icons": "^2.11.8",
     "@sanity/pkg-utils": "^6.8.18",
     "@sanity/semantic-release-preset": "^4.1.7",
-    "@sanity/ui": "^2.1.4",
+    "@sanity/ui": "^2.1.13",
     "@sanity/ui-workshop": "^2.0.12",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
