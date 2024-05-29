@@ -61,8 +61,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2
       '@sanity/icons':
-        specifier: ^2.11.8
-        version: 2.11.8(react@18.3.1)
+        specifier: ^3.0.0
+        version: 3.0.0(react@18.3.1)
       '@sanity/pkg-utils':
         specifier: ^6.8.18
         version: 6.8.18(@types/babel__core@7.20.5)(@types/node@20.12.8)(typescript@5.4.5)
@@ -1013,6 +1013,12 @@ packages:
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
+
+  '@sanity/icons@3.0.0':
+    resolution: {integrity: sha512-tvAxP5XaqZ6lG3JpAe+ZHWF4JqjFHnvtheY64VyLLO/8lwbiy7Q/Xhh0hYw9Anm0k0HCONcahyMvO+Q18n05tw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: ^18.3 || >=19.0.0-rc
 
   '@sanity/pkg-utils@6.8.18':
     resolution: {integrity: sha512-DOrZT5e6917FqJLQiJGRC9+M6VmIbo86dFKjKjG361mI53JHv9rE53qRT9DBk8GwnisbAEN7BJ6NCLzItfBDzA==}
@@ -5913,6 +5919,10 @@ snapshots:
   '@sanity/color@3.0.6': {}
 
   '@sanity/icons@2.11.8(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
+  '@sanity/icons@3.0.0(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
