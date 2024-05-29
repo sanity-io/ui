@@ -1,4 +1,4 @@
-import {createElement, forwardRef} from 'react'
+import {forwardRef} from 'react'
 import {icons} from './icons'
 import type {IconSymbol} from './icons'
 
@@ -17,11 +17,11 @@ export const Icon = forwardRef(function Icon(
   ref: React.Ref<SVGSVGElement>,
 ) {
   const {symbol, ...restProps} = props
-  const iconComponent = icons[symbol]
+  const IconComponent = icons[symbol]
 
-  if (!iconComponent) {
+  if (!IconComponent) {
     return null
   }
 
-  return createElement(iconComponent, {...restProps, ref})
+  return <IconComponent {...restProps} ref={ref} />
 })

@@ -12,6 +12,6 @@
     "rootDir": ".",
     "outDir": "./dist",
     "sourceMap": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   }
 }

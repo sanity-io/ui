@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "ES2022",
+    "module": "Preserve",
     "target": "ES2022",
     "declaration": true,
     "declarationMap": true,
@@ -22,7 +22,7 @@
     "skipLibCheck": true,
 
     // Module resolution
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   }
