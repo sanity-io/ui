@@ -27,8 +27,8 @@ devDependencies:
     specifier: ^3.0.6
     version: 3.0.6
   '@sanity/icons':
-    specifier: ^2.11.8
-    version: 2.11.8(react@18.3.1)
+    specifier: ^3.0.0
+    version: 3.0.0(react@18.3.1)
   '@sanity/pkg-utils':
     specifier: ^6.8.18
     version: 6.8.18(@types/node@18.13.0)(typescript@5.4.5)
@@ -40,7 +40,7 @@ devDependencies:
     version: 2.1.14(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11)
   '@sanity/ui-workshop':
     specifier: ^2.0.13
-    version: 2.0.13(@sanity/icons@2.11.8)(@sanity/ui@2.1.14)(@types/node@18.13.0)(react-dom@18.3.1)(react@18.3.1)(styled-components@6.1.11)
+    version: 2.0.13(@sanity/icons@3.0.0)(@sanity/ui@2.1.14)(@types/node@18.13.0)(react-dom@18.3.1)(react@18.3.1)(styled-components@6.1.11)
   '@testing-library/jest-dom':
     specifier: ^5.17.0
     version: 5.17.0
@@ -3006,15 +3006,6 @@ packages:
     engines: {node: '>=18.0.0'}
     dev: true
 
-  /@sanity/icons@2.11.8(react@18.3.1):
-    resolution: {integrity: sha512-C4ViXtk6eyiNTQ5OmxpfmcK6Jw+LLTi9zg9XBUD15DzC4xTHaGW9SVfUa43YtPGs3WC3M0t0K59r0GDjh52HIg==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: ^18
-    dependencies:
-      react: 18.3.1
-    dev: true
-
   /@sanity/icons@3.0.0(react@18.3.1):
     resolution: {integrity: sha512-tvAxP5XaqZ6lG3JpAe+ZHWF4JqjFHnvtheY64VyLLO/8lwbiy7Q/Xhh0hYw9Anm0k0HCONcahyMvO+Q18n05tw==}
     engines: {node: '>=14.0.0'}
@@ -3094,7 +3085,7 @@ packages:
       - supports-color
     dev: true
 
-  /@sanity/ui-workshop@2.0.13(@sanity/icons@2.11.8)(@sanity/ui@2.1.14)(@types/node@18.13.0)(react-dom@18.3.1)(react@18.3.1)(styled-components@6.1.11):
+  /@sanity/ui-workshop@2.0.13(@sanity/icons@3.0.0)(@sanity/ui@2.1.14)(@types/node@18.13.0)(react-dom@18.3.1)(react@18.3.1)(styled-components@6.1.11):
     resolution: {integrity: sha512-mGEhUce+0R0YWM02glTH7aONTPf8OzR6SCz2AOGNsb6XILMzvzzlTbEY+EgVj+PqKEXtM8aPftFYMkACP7M8zw==}
     hasBin: true
     peerDependencies:
@@ -3104,7 +3095,7 @@ packages:
       react-dom: ^18
       styled-components: ^5.2 || ^6
     dependencies:
-      '@sanity/icons': 2.11.8(react@18.3.1)
+      '@sanity/icons': 3.0.0(react@18.3.1)
       '@sanity/ui': 2.1.14(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11)
       '@vitejs/plugin-react': 4.2.1(vite@5.2.12)
       axe-core: 4.9.0
