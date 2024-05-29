@@ -6,5 +6,6 @@ import {ThemeColorToneKey} from '@sanity/ui/theme'
 export interface CardStyleProps {
   $checkered: boolean
   $focusRing: boolean
+  $muted: boolean
   $tone: ThemeColorToneKey
 }
