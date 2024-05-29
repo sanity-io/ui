@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.15](https://github.com/sanity-io/ui-workshop/compare/v2.0.14...v2.0.15) (2024-05-29)
+
+### Bug Fixes
+
+- **deps:** Update dependency @sanity/icons to v3 ([#107](https://github.com/sanity-io/ui-workshop/issues/107)) ([a8fc3c7](https://github.com/sanity-io/ui-workshop/commit/a8fc3c7759db9c2405f18f0720f035e2fdb0c786))
+
 ## [2.0.14](https://github.com/sanity-io/ui-workshop/compare/v2.0.13...v2.0.14) (2024-05-29)
 
 ### Bug Fixes
