@@ -133,7 +133,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.2.2",
-    "@sanity/icons": "^2.11.8",
+    "@sanity/icons": "^3.0.0",
     "@sanity/pkg-utils": "^6.8.18",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui": "^2.1.13",
@@ -171,7 +171,7 @@
     "vitest": "^1.6.0"
   },
   "peerDependencies": {
-    "@sanity/icons": "^2",
+    "@sanity/icons": "^2 || ^3.0.0",
     "@sanity/ui": "^1 || ^2.0.0",
     "react": "^18",
     "react-dom": "^18",
