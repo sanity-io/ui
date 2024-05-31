@@ -13,13 +13,14 @@ import {
   forwardRef,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useReducer,
   useRef,
 } from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {useArrayProp, useForwardedRef} from '../../hooks'
+import {useArrayProp} from '../../hooks'
 import {
   Box,
   BoxProps,
@@ -119,7 +120,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'type'
       | 'value'
     >,
-  ref: Ref<HTMLInputElement>,
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     border = true,
@@ -191,7 +192,11 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const valuePropRef = useRef(valueProp)
   const popoverMouseWithinRef = useRef(false)
 
-  const forwardedRef = useForwardedRef(ref)
+  // Forward ref to parent
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
+    forwardedRef,
+    () => inputElementRef.current,
+  )
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
@@ -432,14 +437,6 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     }
   }, [activeValue, filteredOptions])
 
-  const setRef = useCallback(
-    (el: HTMLInputElement | null) => {
-      inputElementRef.current = el
-      forwardedRef.current = el
-    },
-    [forwardedRef],
-  )
-
   const clearButton = useMemo(() => {
     if (!loading && !disabled && value) {
       return {
@@ -549,7 +546,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       prefix={prefix}
       radius={radius}
       readOnly={readOnly}
-      ref={setRef}
+      ref={inputElementRef}
       role="combobox"
       spellCheck={false}
       suffix={suffix || openButtonNode}

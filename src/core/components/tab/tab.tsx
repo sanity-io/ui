@@ -1,6 +1,5 @@
-import {forwardRef, useCallback, useEffect, useRef} from 'react'
+import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useForwardedRef} from '../../hooks'
 import {Button} from '../../primitives'
 import {ButtonTone} from '../../types'
 
@@ -49,8 +48,13 @@ export const Tab = forwardRef(function Tab(
     selected,
     ...restProps
   } = props
-  const elementRef = useRef<HTMLButtonElement | null>(null)
+  const ref = useRef<HTMLButtonElement | null>(null)
   const focusedRef = useRef(false)
+
+  useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   const handleBlur = useCallback(() => {
     focusedRef.current = false
@@ -64,19 +68,12 @@ export const Tab = forwardRef(function Tab(
     [onFocus],
   )
 
-  const ref = useForwardedRef(forwardedRef)
-
   useEffect(() => {
     if (focused && !focusedRef.current) {
-      if (elementRef.current) elementRef.current.focus()
+      if (ref.current) ref.current.focus()
       focusedRef.current = true
     }
   }, [focused])
-
-  const setRef = (el: HTMLButtonElement | null) => {
-    elementRef.current = el
-    ref.current = el
-  }
 
   return (
     <CustomButton
@@ -91,7 +88,7 @@ export const Tab = forwardRef(function Tab(
       onBlur={handleBlur}
       onFocus={handleFocus}
       padding={padding}
-      ref={setRef}
+      ref={ref}
       role="tab"
       selected={selected}
       tabIndex={selected ? 0 : -1}

@@ -1,7 +1,7 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import {forwardRef} from 'react'
+import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
+import {useCustomValidity, useArrayProp} from '../../hooks'
 import {Radius} from '../../types'
 import {Box} from '../box'
 import {Text} from '../text'
@@ -50,7 +50,12 @@ export const Select = forwardRef(function Select(
     ...restProps
   } = props
 
-  const ref = useForwardedRef(forwardedRef)
+  const ref = useRef<HTMLSelectElement | null>(null)
+
+  useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   useCustomValidity(ref, customValidity)
 
