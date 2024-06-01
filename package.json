@@ -171,7 +171,7 @@
     "lint-staged": "^14.0.1",
     "module-alias": "^2.2.3",
     "npm-run-all2": "^5.0.2",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.0",
     "prettier-plugin-packagejson": "^2.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
