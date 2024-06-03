@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "2.1.15-canary.1",
+  "version": "2.1.15-canary.4",
   "keywords": [
     "sanity",
     "ui",
@@ -108,7 +108,7 @@
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.0.0",
     "csstype": "^3.1.3",
-    "framer-motion": "11.0.8",
+    "framer-motion": "11.2.10",
     "react-refractor": "^2.2.0"
   },
   "devDependencies": {
@@ -119,7 +119,7 @@
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@juggle/resize-observer": "^3.4.0",
-    "@sanity/pkg-utils": "6.8.19-canary.1",
+    "@sanity/pkg-utils": "6.8.20-canary.0",
     "@sanity/semantic-release-preset": "^4.1.7",
     "@sanity/ui-workshop": "^2.0.13",
     "@storybook/addon-a11y": "^8.0.8",
@@ -174,9 +174,9 @@
     "npm-run-all2": "^5.0.2",
     "prettier": "^3.2.5",
     "prettier-plugin-packagejson": "^2.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-is": "^18.3.1",
+    "react": "19.0.0-rc-6d3110b4d9-20240531",
+    "react-dom": "19.0.0-rc-6d3110b4d9-20240531",
+    "react-is": "19.0.0-rc-6d3110b4d9-20240531",
     "refractor": "^4.8.1",
     "rimraf": "^5.0.5",
     "semantic-release": "^23.1.1",
@@ -189,10 +189,10 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "peerDependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "react-is": "^18",
-    "styled-components": "^5.2 || ^6"
+    "react": ">=19.0.0-rc",
+    "react-dom": ">=19.0.0-rc",
+    "react-is": ">=19.0.0-rc",
+    "styled-components": "^6.1"
   },
   "packageManager": "pnpm@9.1.3",
   "engines": {
