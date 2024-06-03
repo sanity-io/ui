@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "2.1.15-canary.4",
+  "version": "2.1.15-canary.5",
   "keywords": [
     "sanity",
     "ui",
@@ -149,7 +149,7 @@
     "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
-    "babel-plugin-react-compiler": "0.0.0-experimental-487cb0e-20240529",
+    "babel-plugin-react-compiler": "0.0.0-experimental-938cd9a-20240601",
     "commitizen": "^4.3.0",
     "cypress": "^13.10.0",
     "cypress-real-events": "^1.12.0",
