@@ -14,4 +14,7 @@ export default defineConfig({
     noImplicitBrowsersList: 'off',
   },
   tsconfig: 'tsconfig.dist.json',
+  babel: {
+    reactCompiler: true,
+  },
 })
