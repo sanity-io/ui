@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/sanity-io/ui/compare/v2.1.14...v2.2.0) (2024-06-04)
+
+### Features
+
+- **card:** add `muted` property ([f70bff6](https://github.com/sanity-io/ui/commit/f70bff6422639dc6fe76a03bd67f09caf9b58c9b))
+
 ## [2.1.14](https://github.com/sanity-io/ui/compare/v2.1.13...v2.1.14) (2024-05-29)
 
 ### Bug Fixes
