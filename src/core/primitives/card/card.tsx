@@ -36,6 +36,7 @@ export interface CardProps
    * @beta
    */
   __unstable_focusRing?: boolean
+  muted?: boolean
   pressed?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
@@ -67,6 +68,7 @@ export const Card = forwardRef(function Card(
     borderRight,
     borderBottom,
     borderLeft,
+    muted,
     pressed,
     radius = 0,
     scheme,
@@ -96,6 +98,7 @@ export const Card = forwardRef(function Card(
         $borderLeft={useArrayProp(borderLeft)}
         $checkered={checkered}
         $focusRing={focusRing}
+        $muted={muted}
         $radius={useArrayProp(radius)}
         $shadow={useArrayProp(shadow)}
         $tone={tone}
