@@ -52,11 +52,11 @@ importers:
         specifier: ^6.8.19
         version: 6.8.19(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.4.5)
       '@sanity/semantic-release-preset':
-        specifier: ^4.1.7
-        version: 4.1.7(semantic-release@23.1.1(typescript@5.4.5))
+        specifier: ^4.1.8
+        version: 4.1.8(semantic-release@23.1.1(typescript@5.4.5))
       '@sanity/ui-workshop':
         specifier: ^2.0.13
-        version: 2.0.13(@sanity/icons@3.0.0(react@18.3.1))(@sanity/ui@2.1.14(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)
+        version: 2.0.13(@sanity/icons@3.0.0(react@18.3.1))(@sanity/ui@2.2.0(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)
       '@storybook/addon-a11y':
         specifier: ^8.0.8
         version: 8.0.8
@@ -1867,11 +1867,11 @@ packages:
     peerDependencies:
       typescript: 5.4.x
 
-  '@sanity/semantic-release-preset@4.1.7':
-    resolution: {integrity: sha512-cj78W8G2Y34V3zivvW5YrPKCtLQ/dd+y62M0Gg9Zl+xH3O+srtzbINrsD5qe+27en05B7gYv5CAjoWoWCq2y9w==}
+  '@sanity/semantic-release-preset@4.1.8':
+    resolution: {integrity: sha512-D9M2R7sDj3cMEIcCdvCMpFqr8yIAkFbpbMSE5m9LrPgnFl12sfaSeMCeFHM5/ArHsJVIcQIVsQFbP+c1m1a8vg==}
     engines: {node: '>= 20.8'}
     peerDependencies:
-      semantic-release: ^22.0.12 || ^23.0.2
+      semantic-release: ^22.0.12 || ^23.0.2 || ^24.0.0
 
   '@sanity/ui-workshop@2.0.13':
     resolution: {integrity: sha512-mGEhUce+0R0YWM02glTH7aONTPf8OzR6SCz2AOGNsb6XILMzvzzlTbEY+EgVj+PqKEXtM8aPftFYMkACP7M8zw==}
@@ -1883,8 +1883,8 @@ packages:
       react-dom: ^18
       styled-components: ^5.2 || ^6
 
-  '@sanity/ui@2.1.14':
-    resolution: {integrity: sha512-aWrFbB94yeK1han9PL88wP/Ytd2RlsLKjpaX+da1yBkxY//JEr7EltiEuz6+9cMFulTmSC0FkouhemoVtB9zPw==}
+  '@sanity/ui@2.2.0':
+    resolution: {integrity: sha512-RrlKxfhyFVeMzX4kN1j7eV0mejs4RVKHawRifffeIGdHgXXC4gQ2QQKUxSRUC1BRSMnhW+Mn3idFVr3rqBSaSw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18
@@ -3321,6 +3321,10 @@ packages:
   conventional-changelog-conventionalcommits@7.0.2:
     resolution: {integrity: sha512-NKXYmMR/Hr1DevQegFB4MwfM5Vv0m4UIxKZTTYuD98lpTknaZlSRrDOG4X7wIXpGkfsYxZTghUN+Qq+T0YQI7w==}
     engines: {node: '>=16'}
+
+  conventional-changelog-conventionalcommits@8.0.0:
+    resolution: {integrity: sha512-eOvlTO6OcySPyyyk8pKz2dP4jjElYunj9hn9/s0OB+gapTO8zwS9UQWrZ1pmF2hFs3vw1xhonOLGcGjy/zgsuA==}
+    engines: {node: '>=18'}
 
   conventional-changelog-writer@7.0.1:
     resolution: {integrity: sha512-Uo+R9neH3r/foIvQ0MKcsXkX642hdm9odUp7TqgFS7BsalTcjzRlIfWZrZR1gbxOozKucaKt5KAbjW8J8xRSmA==}
@@ -9703,21 +9707,21 @@ snapshots:
       - '@types/node'
       - supports-color
 
-  '@sanity/semantic-release-preset@4.1.7(semantic-release@23.1.1(typescript@5.4.5))':
+  '@sanity/semantic-release-preset@4.1.8(semantic-release@23.1.1(typescript@5.4.5))':
     dependencies:
       '@semantic-release/changelog': 6.0.3(semantic-release@23.1.1(typescript@5.4.5))
       '@semantic-release/exec': 6.0.3(semantic-release@23.1.1(typescript@5.4.5))
       '@semantic-release/git': 10.0.1(semantic-release@23.1.1(typescript@5.4.5))
-      conventional-changelog-conventionalcommits: 7.0.2
+      conventional-changelog-conventionalcommits: 8.0.0
       semantic-release: 23.1.1(typescript@5.4.5)
       semantic-release-license: 1.0.3
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.0.13(@sanity/icons@3.0.0(react@18.3.1))(@sanity/ui@2.1.14(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)':
+  '@sanity/ui-workshop@2.0.13(@sanity/icons@3.0.0(react@18.3.1))(@sanity/ui@2.2.0(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)':
     dependencies:
       '@sanity/icons': 3.0.0(react@18.3.1)
-      '@sanity/ui': 2.1.14(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@sanity/ui': 2.2.0(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@vitejs/plugin-react': 4.2.1(vite@5.2.12(@types/node@20.12.7)(terser@5.30.3))
       axe-core: 4.9.0
       cac: 6.7.14
@@ -9747,7 +9751,7 @@ snapshots:
       - supports-color
       - terser
 
-  '@sanity/ui@2.1.14(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@sanity/ui@2.2.0(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@floating-ui/react-dom': 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sanity/color': 3.0.6
@@ -11859,6 +11863,10 @@ snapshots:
       compare-func: 2.0.0
 
   conventional-changelog-conventionalcommits@7.0.2:
+    dependencies:
+      compare-func: 2.0.0
+
+  conventional-changelog-conventionalcommits@8.0.0:
     dependencies:
       compare-func: 2.0.0
 
