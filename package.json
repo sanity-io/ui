@@ -138,7 +138,7 @@
     "@storybook/theming": "^8.0.8",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^15.0.7",
+    "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.12.7",
