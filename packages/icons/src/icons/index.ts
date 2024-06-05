@@ -199,6 +199,7 @@ import {UlistIcon} from './ulistIcon'
 import {UnderlineIcon} from './underlineIcon'
 import {UndoIcon} from './undoIcon'
 import {UnknownIcon} from './unknownIcon'
+import {UnlinkIcon} from './unlinkIcon'
 import {UnlockIcon} from './unlockIcon'
 import {UnpublishIcon} from './unpublishIcon'
 import {UploadIcon} from './uploadIcon'
@@ -407,6 +408,7 @@ export type IconSymbol =
   | 'underline'
   | 'undo'
   | 'unknown'
+  | 'unlink'
   | 'unlock'
   | 'unpublish'
   | 'upload'
@@ -612,6 +614,7 @@ export {
   UnderlineIcon,
   UndoIcon,
   UnknownIcon,
+  UnlinkIcon,
   UnlockIcon,
   UnpublishIcon,
   UploadIcon,
@@ -821,6 +824,7 @@ export interface IconMap {
   underline: IconComponent
   undo: IconComponent
   unknown: IconComponent
+  unlink: IconComponent
   unlock: IconComponent
   unpublish: IconComponent
   upload: IconComponent
@@ -1030,6 +1034,7 @@ export const icons: IconMap = {
   underline: UnderlineIcon,
   undo: UndoIcon,
   unknown: UnknownIcon,
+  unlink: UnlinkIcon,
   unlock: UnlockIcon,
   unpublish: UnpublishIcon,
   upload: UploadIcon,
