@@ -167,7 +167,7 @@ importers:
         version: 6.8.0(eslint@8.57.0)
       eslint-plugin-prettier:
         specifier: ^5.1.3
-        version: 5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.0)
+        version: 5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.1)
       eslint-plugin-react:
         specifier: ^7.34.2
         version: 7.34.2(eslint@8.57.0)
@@ -205,11 +205,11 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2
       prettier:
-        specifier: ^3.3.0
-        version: 3.3.0
+        specifier: ^3.3.1
+        version: 3.3.1
       prettier-plugin-packagejson:
         specifier: ^2.5.0
-        version: 2.5.0(prettier@3.3.0)
+        version: 2.5.0(prettier@3.3.1)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -6456,8 +6456,8 @@ packages:
       prettier:
         optional: true
 
-  prettier@3.3.0:
-    resolution: {integrity: sha512-J9odKxERhCQ10OC2yb93583f6UnYutOeiV5i0zEDS7UGTdUt0u+y8erxl3lBKvwo/JHyyoEdXjwp4dke9oyZ/g==}
+  prettier@3.3.1:
+    resolution: {integrity: sha512-7CAwy5dRsxs8PHXT3twixW9/OEll8MLE0VRPCJyl7CkS6VHGPSlsVaWTiASPTyGyYRyApxlaWTzwUxVNrhcwDg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -6932,11 +6932,6 @@ packages:
 
   semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
-  semver@7.6.0:
-    resolution: {integrity: sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -9711,7 +9706,7 @@ snapshots:
       outdent: 0.8.0
       parse-git-config: 3.0.0
       pkg-up: 3.1.0
-      prettier: 3.3.0
+      prettier: 3.3.1
       pretty-bytes: 5.6.0
       prompts: 2.4.2
       recast: 0.23.9
@@ -9876,7 +9871,7 @@ snapshots:
       read-pkg: 9.0.1
       registry-auth-token: 5.0.2
       semantic-release: 24.0.0(typescript@5.4.5)
-      semver: 7.6.0
+      semver: 7.6.2
       tempy: 3.1.0
 
   '@semantic-release/release-notes-generator@14.0.0(semantic-release@24.0.0(typescript@5.4.5))':
@@ -10173,7 +10168,7 @@ snapshots:
       jscodeshift: 0.15.2(@babel/preset-env@7.24.6(@babel/core@7.24.6))
       leven: 3.1.0
       ora: 5.4.1
-      prettier: 3.3.0
+      prettier: 3.3.1
       prompts: 2.4.2
       read-pkg-up: 7.0.1
       semver: 7.6.2
@@ -10208,7 +10203,7 @@ snapshots:
       globby: 11.1.0
       jscodeshift: 0.15.2(@babel/preset-env@7.24.6(@babel/core@7.24.6))
       lodash: 4.17.21
-      prettier: 3.3.0
+      prettier: 3.3.1
       recast: 0.23.9
       tiny-invariant: 1.3.3
     transitivePeerDependencies:
@@ -10255,7 +10250,7 @@ snapshots:
       pkg-dir: 5.0.0
       pretty-hrtime: 1.0.3
       resolve-from: 5.0.0
-      semver: 7.6.0
+      semver: 7.6.2
       tempy: 1.0.1
       tiny-invariant: 1.3.3
       ts-dedent: 2.2.0
@@ -10491,7 +10486,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-element-to-jsx-string: 15.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      semver: 7.6.0
+      semver: 7.6.2
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       util-deprecate: 1.0.2
@@ -10513,7 +10508,7 @@ snapshots:
       '@storybook/types': 8.0.8
       estraverse: 5.3.0
       lodash: 4.17.21
-      prettier: 3.3.0
+      prettier: 3.3.1
 
   '@storybook/telemetry@8.0.8':
     dependencies:
@@ -11903,7 +11898,7 @@ snapshots:
       conventional-commits-filter: 5.0.0
       handlebars: 4.7.8
       meow: 13.2.0
-      semver: 7.6.0
+      semver: 7.6.2
 
   conventional-commit-types@3.0.0: {}
 
@@ -12064,7 +12059,7 @@ snapshots:
       process: 0.11.10
       proxy-from-env: 1.0.0
       request-progress: 3.0.0
-      semver: 7.6.0
+      semver: 7.6.2
       supports-color: 8.1.1
       tmp: 0.2.3
       untildify: 4.0.0
@@ -12636,10 +12631,10 @@ snapshots:
       object.entries: 1.1.8
       object.fromentries: 2.0.8
 
-  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.0):
+  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.1):
     dependencies:
       eslint: 8.57.0
-      prettier: 3.3.0
+      prettier: 3.3.1
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
     optionalDependencies:
@@ -15101,7 +15096,7 @@ snapshots:
     dependencies:
       hosted-git-info: 7.0.1
       is-core-module: 2.13.1
-      semver: 7.6.0
+      semver: 7.6.2
       validate-npm-package-license: 3.0.4
 
   normalize-path@2.1.1:
@@ -15525,14 +15520,14 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-packagejson@2.5.0(prettier@3.3.0):
+  prettier-plugin-packagejson@2.5.0(prettier@3.3.1):
     dependencies:
       sort-package-json: 2.10.0
       synckit: 0.9.0
     optionalDependencies:
-      prettier: 3.3.0
+      prettier: 3.3.1
 
-  prettier@3.3.0: {}
+  prettier@3.3.1: {}
 
   pretty-bytes@5.6.0: {}
 
@@ -16084,7 +16079,7 @@ snapshots:
       p-reduce: 3.0.0
       read-package-up: 11.0.0
       resolve-from: 5.0.0
-      semver: 7.6.0
+      semver: 7.6.2
       semver-diff: 4.0.0
       signale: 1.4.0
       yargs: 17.7.2
@@ -16094,7 +16089,7 @@ snapshots:
 
   semver-diff@4.0.0:
     dependencies:
-      semver: 7.6.0
+      semver: 7.6.2
 
   semver-regex@4.0.5: {}
 
@@ -16103,10 +16098,6 @@ snapshots:
   semver@6.3.1: {}
 
   semver@7.5.4:
-    dependencies:
-      lru-cache: 6.0.0
-
-  semver@7.6.0:
     dependencies:
       lru-cache: 6.0.0
 
