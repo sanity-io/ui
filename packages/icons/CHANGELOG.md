@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/sanity-io/icons/compare/v3.0.0...v3.1.0) (2024-06-06)
+
+### Features
+
+- add `unlink` icon ([bf48c21](https://github.com/sanity-io/icons/commit/bf48c21e52719ecf186bb27fee9e2921581d70eb))
+
 ## [3.0.0](https://github.com/sanity-io/icons/compare/v2.11.8...v3.0.0) (2024-05-29)
 
 ### ⚠ BREAKING CHANGES
