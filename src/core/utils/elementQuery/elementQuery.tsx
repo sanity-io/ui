@@ -1,5 +1,5 @@
-import {forwardRef, useCallback, useMemo, useState} from 'react'
-import {useElementSize, useForwardedRef} from '../../hooks'
+import {forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react'
+import {useElementSize} from '../../hooks'
 import {useTheme_v2} from '../../theme'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
@@ -18,12 +18,12 @@ export interface MediaQueryProps {
  */
 export const ElementQuery = forwardRef(function ElementQuery(
   props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'media'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const theme = useTheme_v2()
   const {children, media = theme.media, ...restProps} = props
 
-  const forwardedRef = useForwardedRef(ref)
+  const ref = useRef<HTMLDivElement | null>(null)
   const [element, setElement] = useState<HTMLDivElement | null>(null)
   const elementSize = useElementSize(element)
   const width = useMemo(() => elementSize?.border.width ?? window.innerWidth, [elementSize])
@@ -31,13 +31,12 @@ export const ElementQuery = forwardRef(function ElementQuery(
   const max = useMemo(() => findMaxBreakpoints(media, width), [media, width])
   const min = useMemo(() => findMinBreakpoints(media, width), [media, width])
 
-  const setRef = useCallback(
-    (el: HTMLDivElement | null) => {
-      forwardedRef.current = el
-      setElement(el)
-    },
-    [forwardedRef],
-  )
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+
+  const setRef = useCallback((el: HTMLDivElement | null) => {
+    ref.current = el
+    setElement(el)
+  }, [])
 
   return (
     <div

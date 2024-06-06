@@ -19,16 +19,11 @@ import {
   memo,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useRef,
 } from 'react'
-import {
-  useForwardedRef,
-  useArrayProp,
-  useElementSize,
-  useMediaIndex,
-  usePrefersReducedMotion,
-} from '../../hooks'
+import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
@@ -127,7 +122,7 @@ export const Popover = memo(
   forwardRef(function Popover(
     props: PopoverProps &
       Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-    ref: React.ForwardedRef<HTMLDivElement>,
+    forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
     const {container, layer} = useTheme_v2()
     const boundaryElementContext = useBoundaryElement()
@@ -172,9 +167,14 @@ export const Popover = memo(
     const shadow = useArrayProp(shadowProp)
     const widthArrayProp = useArrayProp(widthProp)
     const zOffset = useArrayProp(zOffsetProp)
-    const forwardedRef = useForwardedRef(ref)
+    const ref = useRef<HTMLDivElement | null>(null)
     const arrowRef = useRef<HTMLDivElement | null>(null)
     const rootBoundary: RootBoundary = 'viewport'
+
+    useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
+      forwardedRef,
+      () => ref.current,
+    )
 
     const mediaIndex = useMediaIndex()
     const boundaryWidth = constrainSize || preventOverflow ? boundarySize?.width : undefined
@@ -208,7 +208,7 @@ export const Popover = memo(
 
     // Force apply width & max width to floating element
     useEffect(() => {
-      const floatingElement = forwardedRef.current
+      const floatingElement = ref.current
 
       if (!open || !floatingElement) return
 
@@ -225,7 +225,7 @@ export const Popover = memo(
       if (typeof maxWidth === 'number') {
         floatingElement.style.maxWidth = `${maxWidth}px`
       }
-    }, [width, forwardedRef, matchReferenceWidth, maxWidth, open])
+    }, [width, matchReferenceWidth, maxWidth, open])
 
     const middleware = useMemo(() => {
       const ret: Middleware[] = []
@@ -349,10 +349,10 @@ export const Popover = memo(
 
     const setFloating = useCallback(
       (node: HTMLDivElement | null) => {
-        forwardedRef.current = node
+        ref.current = node
         refs.setFloating(node)
       },
-      [forwardedRef, refs],
+      [refs],
     )
 
     const setReference = useCallback(

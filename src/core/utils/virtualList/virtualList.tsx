@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {forwardRef, useEffect, useMemo, useRef, useState} from 'react'
+import {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 import {_isScrollable} from '../../helpers'
-import {useForwardedRef} from '../../hooks'
 import {_ResizeObserver} from '../../observers'
 import {StackProps} from '../../primitives'
 import {useTheme_v2} from '../../theme'
@@ -48,15 +47,18 @@ export const VirtualList = forwardRef(function VirtualList(
   props: VirtualListProps &
     StackProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ): React.ReactElement {
   const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
   const {space} = useTheme_v2()
-  const forwardedRef = useForwardedRef(ref)
+  const ref = useRef<HTMLDivElement | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const [scrollTop, setScrollTop] = useState(0)
   const [scrollHeight, setScrollHeight] = useState(0)
   const [itemHeight, setItemHeight] = useState(-1)
+
+  // Sync ref to parent
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   useEffect(() => {
     if (!wrapperRef.current) return
@@ -69,9 +71,9 @@ export const VirtualList = forwardRef(function VirtualList(
   }, [renderItem])
 
   useEffect(() => {
-    if (!forwardedRef.current) return
+    if (!ref.current) return
 
-    let _scrollEl = forwardedRef.current.parentNode
+    let _scrollEl = ref.current.parentNode
 
     while (_scrollEl && !_isScrollable(_scrollEl)) {
       _scrollEl = _scrollEl.parentNode
@@ -123,7 +125,7 @@ export const VirtualList = forwardRef(function VirtualList(
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
     }
-  }, [forwardedRef])
+  }, [])
 
   const len = items.length
   const height = itemHeight ? len * (itemHeight + space[gap]) - space[gap] : 0
@@ -158,7 +160,7 @@ export const VirtualList = forwardRef(function VirtualList(
   const wrapperStyle = useMemo(() => ({height}), [height])
 
   return (
-    <Root as={as} data-ui="VirtualList" {...restProps} ref={forwardedRef}>
+    <Root as={as} data-ui="VirtualList" {...restProps} ref={ref}>
       <div ref={wrapperRef} style={wrapperStyle}>
         {children}
       </div>

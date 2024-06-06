@@ -22,9 +22,10 @@ import {
   type ForwardedRef,
   useId,
   useSyncExternalStore,
+  useImperativeHandle,
 } from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp, useForwardedRef, usePrefersReducedMotion} from '../../hooks'
+import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
@@ -97,7 +98,7 @@ const Root = styled(Layer)<{$maxWidth: number}>`
  */
 export const Tooltip = forwardRef(function Tooltip(
   props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
   const {layer} = useTheme_v2()
@@ -123,10 +124,12 @@ export const Tooltip = forwardRef(function Tooltip(
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
-  const forwardedRef = useForwardedRef(ref)
+  const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   const portal = usePortal()
   const portalElement =
@@ -348,10 +351,10 @@ export const Tooltip = forwardRef(function Tooltip(
 
   const setFloating = useCallback(
     (node: HTMLDivElement | null) => {
-      forwardedRef.current = node
+      ref.current = node
       refs.setFloating(node)
     },
-    [forwardedRef, refs],
+    [refs],
   )
 
   const childRef: ForwardedRef<HTMLElement | null> = (childProp as any)?.ref

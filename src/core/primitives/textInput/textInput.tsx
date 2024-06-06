@@ -1,10 +1,18 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {createElement, forwardRef, isValidElement, useCallback, useMemo} from 'react'
+import {
+  createElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useForwardedRef, useCustomValidity} from '../../hooks'
+import {useArrayProp, useCustomValidity} from '../../hooks'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
@@ -173,8 +181,7 @@ export const TextInput = forwardRef(function TextInput(
     weight,
     ...restProps
   } = props
-
-  const ref = useForwardedRef(forwardedRef)
+  const ref = useRef<HTMLInputElement | null>(null)
 
   const rootTheme = useRootTheme()
 
@@ -189,6 +196,11 @@ export const TextInput = forwardRef(function TextInput(
   const $hasIconRight = Boolean(iconRight)
   const $hasSuffix = Boolean(suffix)
   const $hasPrefix = Boolean(prefix)
+
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   useCustomValidity(ref, customValidity)
 

@@ -1,8 +1,7 @@
-import {FocusEvent, forwardRef, useCallback, useEffect, useRef} from 'react'
+import {FocusEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
-import {useForwardedRef} from '../../hooks'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 
@@ -25,13 +24,15 @@ const Root = styled.div({position: 'relative'})
 
 const LayerChildren = forwardRef(function LayerChildren(
   props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-  ref: React.Ref<HTMLDivElement>,
+  forwardedRef: React.Ref<HTMLDivElement>,
 ) {
   const {children, onActivate, onFocus, style = EMPTY_RECORD, ...restProps} = props
   const {zIndex, isTopLayer} = useLayer()
   const lastFocusedRef = useRef<HTMLElement | null>(null)
-  const forwardedRef = useForwardedRef(ref)
+  const ref = useRef<HTMLDivElement | null>(null)
   const isTopLayerRef = useRef<boolean>(isTopLayer)
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   // When the layer very first mounts, it will be the top layer, but we don't want to fire
   // the callback in that case. We use a ref to track the previous value of isTopLayer to
@@ -51,7 +52,7 @@ const LayerChildren = forwardRef(function LayerChildren(
       // Call the user-provided onFocus handler if any
       onFocus?.(event)
 
-      const rootElement = forwardedRef.current
+      const rootElement = ref.current
       const target = document.activeElement
 
       if (!isTopLayer || !rootElement || !target) return
@@ -60,17 +61,11 @@ const LayerChildren = forwardRef(function LayerChildren(
         lastFocusedRef.current = target
       }
     },
-    [forwardedRef, isTopLayer, onFocus],
+    [isTopLayer, onFocus],
   )
 
   return (
-    <Root
-      {...restProps}
-      data-ui="Layer"
-      onFocus={handleFocus}
-      ref={forwardedRef}
-      style={{...style, zIndex}}
-    >
+    <Root {...restProps} data-ui="Layer" onFocus={handleFocus} ref={ref} style={{...style, zIndex}}>
       {children}
     </Root>
   )

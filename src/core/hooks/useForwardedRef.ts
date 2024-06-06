@@ -1,21 +1,19 @@
-import {useRef} from 'react'
-import {useIsomorphicEffect} from './useIsomorphicEffect'
+import {useImperativeHandle, useRef} from 'react'
 
 /**
  * @beta
+ * @deprecated use `useImperativeHandle` instead
+ * @example
+ * ```diff
+ * -const ref = useForwardedRef(forwardedRef)
+ * +const ref = useRef(null)
+ * +useImperativeHandle(forwardedRef, () => ref.current)
+ * ```
  */
 export function useForwardedRef<T>(ref: React.ForwardedRef<T>): React.MutableRefObject<T | null> {
   const innerRef = useRef<T | null>(null)
 
-  useIsomorphicEffect(() => {
-    if (!ref) return
-
-    if (typeof ref === 'function') {
-      ref(innerRef.current)
-    } else {
-      ref.current = innerRef.current
-    }
-  })
+  useImperativeHandle(ref, () => innerRef.current!)
 
   return innerRef
 }

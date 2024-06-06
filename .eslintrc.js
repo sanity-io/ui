@@ -105,6 +105,15 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    // Ignore Storybook stories and test files for the react compiler
+    {
+      files: [`**/*.stories.{js,ts,tsx}`, '**/*.test.{js,ts,tsx}'],
+      rules: {
+        'react-compiler/react-compiler': 'off',
+      },
+    },
+  ],
   settings: {
     'boundaries/elements': [
       {

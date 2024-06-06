@@ -1,6 +1,5 @@
-import {forwardRef, useEffect} from 'react'
+import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useForwardedRef} from '../../hooks'
 import {
   switchBaseStyles,
   switchRepresentationStyles,
@@ -34,14 +33,19 @@ export const Switch = forwardRef(function Switch(
   forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {checked, className, disabled, indeterminate, readOnly, style, ...restProps} = props
-  const ref = useForwardedRef(forwardedRef)
+  const ref = useRef<HTMLInputElement | null>(null)
+
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   useEffect(() => {
     if (ref.current) {
       // Set the indeterminate state
       ref.current.indeterminate = indeterminate || false
     }
-  }, [indeterminate, ref])
+  }, [indeterminate])
 
   return (
     <Root className={className} data-ui="Switch" style={style}>

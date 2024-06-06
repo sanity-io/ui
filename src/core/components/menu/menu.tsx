@@ -1,6 +1,6 @@
-import {forwardRef, useCallback, useEffect, useMemo} from 'react'
+import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useClickOutside, useForwardedRef, useGlobalKeyDown} from '../../hooks'
+import {useClickOutside, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
 import {ResponsivePaddingProps} from '../../primitives/types'
 import {useLayer} from '../../utils'
@@ -41,7 +41,7 @@ const Root = styled(Box)`
  */
 export const Menu = forwardRef(function Menu(
   props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     children,
@@ -62,7 +62,9 @@ export const Menu = forwardRef(function Menu(
     ...restProps
   } = props
 
-  const forwardedRef = useForwardedRef(ref)
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   const {isTopLayer} = useLayer()
 
@@ -80,9 +82,9 @@ export const Menu = forwardRef(function Menu(
   const handleRefChange = useCallback(
     (el: HTMLDivElement | null) => {
       setRootElement(el)
-      forwardedRef.current = el
+      ref.current = el
     },
-    [forwardedRef, setRootElement],
+    [setRootElement],
   )
 
   // Trigger `onItemSelect` when active index changes
