@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.0](https://github.com/sanity-io/icons/compare/v3.1.0...v3.2.0) (2024-06-06)
+
+### Features
+
+- add `add-document` icon ([18f2aa6](https://github.com/sanity-io/icons/commit/18f2aa62c9fba6c6a0d5a7b6c6da0dfc7a811982))
+
 ## [3.1.0](https://github.com/sanity-io/icons/compare/v3.0.0...v3.1.0) (2024-06-06)
 
 ### Features
