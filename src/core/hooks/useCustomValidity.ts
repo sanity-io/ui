@@ -8,8 +8,6 @@ export function useCustomValidity(
   customValidity: string | undefined,
 ): void {
   useEffect(() => {
-    if (ref.current) {
-      ref.current.setCustomValidity(customValidity || '')
-    }
+    ref.current?.setCustomValidity(customValidity || '')
   }, [customValidity, ref])
 }
