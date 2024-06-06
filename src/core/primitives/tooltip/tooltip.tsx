@@ -19,7 +19,6 @@ import {
   useMemo,
   useRef,
   useState,
-  type ForwardedRef,
   useId,
   useSyncExternalStore,
   useImperativeHandle,
@@ -357,22 +356,7 @@ export const Tooltip = forwardRef(function Tooltip(
     [refs],
   )
 
-  const childRef: ForwardedRef<HTMLElement | null> = (childProp as any)?.ref
-
-  const setReference = useCallback(
-    (node: HTMLElement | null) => {
-      if (typeof childRef === 'function') {
-        childRef(node)
-      } else if (childRef) {
-        childRef.current = node
-      }
-
-      // childRef.current = node
-      setReferenceElement(node)
-    },
-    [childRef],
-  )
-
+  const childRef = useRef<HTMLElement | null>(null)
   const child = useMemo(() => {
     if (!childProp) return null
 
@@ -383,7 +367,7 @@ export const Tooltip = forwardRef(function Tooltip(
       onMouseLeave: handleMouseLeave,
       onClick: handleClick,
       onContextMenu: handleContextMenu,
-      ref: setReference,
+      ref: childRef,
     })
   }, [
     childProp,
@@ -393,8 +377,17 @@ export const Tooltip = forwardRef(function Tooltip(
     handleFocus,
     handleMouseEnter,
     handleMouseLeave,
-    setReference,
   ])
+
+  // If there's a child then we need to set the reference element to the cloned child ref
+  // and if child changes we make sure to update or remove the reference element.
+  useEffect(() => {
+    if (!child) return undefined
+
+    setReferenceElement(childRef.current)
+
+    return () => setReferenceElement(null)
+  }, [child])
 
   if (!child) return <></>
 
