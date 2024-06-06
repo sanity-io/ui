@@ -45,8 +45,6 @@ const ToastContainer = styled.div`
   width: 100%;
 `
 
-let toastId = 0
-
 /**
  * @public
  */
@@ -86,7 +84,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
       // Wrap setState in startTransition to allow React to give input state updates higher priority
       const setState: typeof _setState = (state) => startTransition(() => _setState(state))
 
-      const id = params.id || String(toastId++)
+      const id = params.id || crypto.randomUUID()
       const duration = params.duration || 5000
 
       const dismiss = () => {
