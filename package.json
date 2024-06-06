@@ -202,5 +202,10 @@
   },
   "esm.sh": {
     "bundle": false
+  },
+  "pnpm": {
+    "overrides": {
+      "conventional-changelog-conventionalcommits": ">= 8.0.0"
+    }
   }
 }
