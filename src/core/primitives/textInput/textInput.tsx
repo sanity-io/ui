@@ -1,14 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {
-  createElement,
-  forwardRef,
-  isValidElement,
-  useCallback,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from 'react'
+import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
@@ -167,8 +159,8 @@ export const TextInput = forwardRef(function TextInput(
     clearButton,
     disabled = false,
     fontSize: fontSizeProp = 2,
-    icon,
-    iconRight,
+    icon: IconComponent,
+    iconRight: IconRightComponent,
     onClear,
     padding: paddingProp = 3,
     prefix,
@@ -192,8 +184,8 @@ export const TextInput = forwardRef(function TextInput(
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)
-  const $hasIcon = Boolean(icon)
-  const $hasIconRight = Boolean(iconRight)
+  const $hasIcon = Boolean(IconComponent)
+  const $hasIconRight = Boolean(IconRightComponent)
   const $hasSuffix = Boolean(suffix)
   const $hasPrefix = Boolean(prefix)
 
@@ -248,20 +240,20 @@ export const TextInput = forwardRef(function TextInput(
         data-scheme={rootTheme.scheme}
         data-tone={rootTheme.tone}
       >
-        {icon && (
+        {IconComponent && (
           <LeftBox padding={padding}>
             <Text size={fontSize}>
-              {isValidElement(icon) && icon}
-              {isValidElementType(icon) && createElement(icon)}
+              {isValidElement(IconComponent) && IconComponent}
+              {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
           </LeftBox>
         )}
 
-        {!$hasClearButton && iconRight && (
+        {!$hasClearButton && IconRightComponent && (
           <RightBox padding={padding}>
             <Text size={fontSize}>
-              {isValidElement(iconRight) && iconRight}
-              {isValidElementType(iconRight) && createElement(iconRight)}
+              {isValidElement(IconRightComponent) && IconRightComponent}
+              {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
           </RightBox>
         )}
@@ -271,8 +263,8 @@ export const TextInput = forwardRef(function TextInput(
       __unstable_disableFocusRing,
       border,
       fontSize,
-      icon,
-      iconRight,
+      IconComponent,
+      IconRightComponent,
       padding,
       radius,
       rootTheme,
