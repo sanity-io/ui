@@ -1,5 +1,4 @@
 import {
-  createElement,
   forwardRef,
   isValidElement,
   useCallback,
@@ -49,8 +48,8 @@ export const MenuItem = forwardRef(function MenuItem(
     disabled,
     fontSize = 1,
     hotkeys,
-    icon,
-    iconRight,
+    icon: IconComponent,
+    iconRight: IconRightComponent,
     onClick,
     padding = 3,
     paddingX,
@@ -135,12 +134,12 @@ export const MenuItem = forwardRef(function MenuItem(
       tabIndex={-1}
       type={as === 'button' ? 'button' : undefined}
     >
-      {(icon || text || iconRight) && (
+      {(IconComponent || text || IconRightComponent) && (
         <Flex as="span" gap={space} align="center" {...paddingProps}>
-          {icon && (
+          {IconComponent && (
             <Text size={fontSize}>
-              {isValidElement(icon) && icon}
-              {isValidElementType(icon) && createElement(icon)}
+              {isValidElement(IconComponent) && IconComponent}
+              {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
           )}
 
@@ -160,10 +159,10 @@ export const MenuItem = forwardRef(function MenuItem(
             />
           )}
 
-          {iconRight && (
+          {IconRightComponent && (
             <Text size={fontSize}>
-              {isValidElement(iconRight) && iconRight}
-              {isValidElementType(iconRight) && createElement(iconRight)}
+              {isValidElement(IconRightComponent) && IconRightComponent}
+              {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
           )}
         </Flex>
