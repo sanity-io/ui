@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/sanity-io/ui/compare/v2.2.0...v2.3.0) (2024-06-06)
+
+### Features
+
+- deprecate `useForwardedRef` ([#1324](https://github.com/sanity-io/ui/issues/1324)) ([62146b6](https://github.com/sanity-io/ui/commit/62146b6d4de04dc96c5a433d4925b9dbe0f81663))
+
 ## [2.2.0](https://github.com/sanity-io/ui/compare/v2.1.14...v2.2.0) (2024-06-04)
 
 ### Features
