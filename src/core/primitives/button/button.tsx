@@ -1,4 +1,4 @@
-import {createElement, forwardRef, isValidElement, useMemo} from 'react'
+import {forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -68,8 +68,8 @@ export const Button = forwardRef(function Button(
     children,
     disabled,
     fontSize = 1,
-    icon,
-    iconRight,
+    icon: IconComponent,
+    iconRight: IconRightComponent,
     justify: justifyProp = 'center',
     loading,
     mode = 'default',
@@ -138,13 +138,13 @@ export const Button = forwardRef(function Button(
         </LoadingBox>
       )}
 
-      {(icon || text || iconRight) && (
+      {(IconComponent || text || IconRightComponent) && (
         <Box as="span" {...boxProps}>
           <Flex as="span" justify={justify} gap={space}>
-            {icon && (
+            {IconComponent && (
               <Text size={fontSize}>
-                {isValidElement(icon) && icon}
-                {isValidElementType(icon) && createElement(icon)}
+                {isValidElement(IconComponent) && IconComponent}
+                {isValidElementType(IconComponent) && <IconComponent />}
               </Text>
             )}
 
@@ -160,10 +160,10 @@ export const Button = forwardRef(function Button(
               </Text>
             )}
 
-            {iconRight && (
+            {IconRightComponent && (
               <Text size={fontSize}>
-                {isValidElement(iconRight) && iconRight}
-                {isValidElementType(iconRight) && createElement(iconRight)}
+                {isValidElement(IconRightComponent) && IconRightComponent}
+                {isValidElementType(IconRightComponent) && <IconRightComponent />}
               </Text>
             )}
           </Flex>
