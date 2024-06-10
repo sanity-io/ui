@@ -5,6 +5,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.2](https://github.com/sanity-io/ui/compare/v2.3.1...v2.3.2) (2024-06-10)
+
+### Bug Fixes
+
+- **button:** use JSX instead of createElement ([d1f5648](https://github.com/sanity-io/ui/commit/d1f56481f639861687baab6b4b08713142df1012))
+- **menu-button:** handle child refs safely ([9ca1312](https://github.com/sanity-io/ui/commit/9ca13128b5d010b694196e2c5082c1189edd6a11))
+- **menu-group:** use JSX instead of createElement ([061f67d](https://github.com/sanity-io/ui/commit/061f67d6de5ca57345b7b1e7bce88e92f64b9c66))
+- **menu-item:** use JSX instead of createElement ([c61aa10](https://github.com/sanity-io/ui/commit/c61aa103d479df3f042bb6b60017ccbdc97fd00d))
+- **text-input:** use JSX instead of createElement ([45c1fcf](https://github.com/sanity-io/ui/commit/45c1fcfa897992a511f7593109bdd1e1287e680a))
+- **tooltip:** handle child refs safely ([92b12a7](https://github.com/sanity-io/ui/commit/92b12a779e04dc3c0c4f67c464a1d969dda070af))
+- **tree-item:** use JSX instead of createElement ([c4d66c5](https://github.com/sanity-io/ui/commit/c4d66c5edb12d3826fd0c878fe7562f1192660b1))
+
 ## [2.3.1](https://github.com/sanity-io/ui/compare/v2.3.0...v2.3.1) (2024-06-06)
 
 ### Bug Fixes
