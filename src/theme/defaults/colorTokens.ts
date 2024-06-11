@@ -432,7 +432,7 @@ export const defaultColorTokens: ThemeColorTokens = {
         muted: {
           bg: ['50', '950'],
         },
-        placeholder: ['400', '600 50%'],
+        placeholder: ['400', '600'],
       },
       hovered: {
         border: ['300', '700'],
