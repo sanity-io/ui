@@ -177,6 +177,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
                       onClose={dismiss}
                       status={params.status}
                       title={params.title}
+                      duration={params.duration}
                     />
                   </motion.div>
                 ))}
