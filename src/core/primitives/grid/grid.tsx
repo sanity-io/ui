@@ -1,6 +1,6 @@
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
 import {Box, BoxProps} from '../box'
 import {ResponsiveGridProps} from '../types'
@@ -24,19 +24,28 @@ export const Grid = forwardRef(function Grid(
   const {as, autoRows, autoCols, autoFlow, columns, gap, gapX, gapY, rows, children, ...restProps} =
     props
 
+  const $autoRows = useMemo(() => _getArrayProp(autoRows), [autoRows])
+  const $autoCols = useMemo(() => _getArrayProp(autoCols), [autoCols])
+  const $autoFlow = useMemo(() => _getArrayProp(autoFlow), [autoFlow])
+  const $columns = useMemo(() => _getArrayProp(columns), [columns])
+  const $gap = useMemo(() => _getArrayProp(gap), [gap])
+  const $gapX = useMemo(() => _getArrayProp(gapX), [gapX])
+  const $gapY = useMemo(() => _getArrayProp(gapY), [gapY])
+  const $rows = useMemo(() => _getArrayProp(rows), [rows])
+
   return (
     <Root
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Grid"
       {...restProps}
-      $autoRows={useArrayProp(autoRows)}
-      $autoCols={useArrayProp(autoCols)}
-      $autoFlow={useArrayProp(autoFlow)}
-      $columns={useArrayProp(columns)}
-      $gap={useArrayProp(gap)}
-      $gapX={useArrayProp(gapX)}
-      $gapY={useArrayProp(gapY)}
-      $rows={useArrayProp(rows)}
+      $autoRows={$autoRows}
+      $autoCols={$autoCols}
+      $autoFlow={$autoFlow}
+      $columns={$columns}
+      $gap={$gap}
+      $gapX={$gapX}
+      $gapY={$gapY}
+      $rows={$rows}
       forwardedAs={as}
       ref={ref}
     >

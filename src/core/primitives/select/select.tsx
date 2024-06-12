@@ -1,7 +1,8 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import {forwardRef, useImperativeHandle, useRef} from 'react'
+import {forwardRef, useImperativeHandle, useMemo, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useCustomValidity, useArrayProp} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {Radius} from '../../types'
 import {Box} from '../box'
 import {Text} from '../text'
@@ -59,16 +60,21 @@ export const Select = forwardRef(function Select(
 
   useCustomValidity(ref, customValidity)
 
+  const $fontSize = useMemo(() => _getArrayProp(fontSize), [fontSize])
+  const $padding = useMemo(() => _getArrayProp(padding), [padding])
+  const $radius = useMemo(() => _getArrayProp(radius), [radius])
+  const $space = useMemo(() => _getArrayProp(space), [space])
+
   return (
     <Root data-ui="Select">
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-ui="Select"
         {...restProps}
-        $fontSize={useArrayProp(fontSize)}
-        $padding={useArrayProp(padding)}
-        $radius={useArrayProp(radius)}
-        $space={useArrayProp(space)}
+        $fontSize={$fontSize}
+        $padding={$padding}
+        $radius={$radius}
+        $space={$space}
         disabled={disabled || readOnly}
         ref={ref}
       >

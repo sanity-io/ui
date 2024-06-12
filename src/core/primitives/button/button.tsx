@@ -1,8 +1,7 @@
 import {forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {ThemeProps} from '../../styles'
+import {ThemeProps, _getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme_v2} from '../../theme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth, FlexJustify} from '../../types'
@@ -93,16 +92,16 @@ export const Button = forwardRef(function Button(
   } = props
   const {button} = useTheme_v2()
 
-  const justify = useArrayProp(justifyProp)
-  const padding = useArrayProp(paddingProp)
-  const paddingX = useArrayProp(paddingXProp)
-  const paddingY = useArrayProp(paddingYProp)
-  const paddingTop = useArrayProp(paddingTopProp)
-  const paddingBottom = useArrayProp(paddingBottomProp)
-  const paddingLeft = useArrayProp(paddingLeftProp)
-  const paddingRight = useArrayProp(paddingRightProp)
-  const radius = useArrayProp(radiusProp)
-  const space = useArrayProp(spaceProp)
+  const justify = useMemo(() => _getArrayProp(justifyProp), [justifyProp])
+  const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
+  const paddingX = useMemo(() => _getArrayProp(paddingXProp), [paddingXProp])
+  const paddingY = useMemo(() => _getArrayProp(paddingYProp), [paddingYProp])
+  const paddingTop = useMemo(() => _getArrayProp(paddingTopProp), [paddingTopProp])
+  const paddingBottom = useMemo(() => _getArrayProp(paddingBottomProp), [paddingBottomProp])
+  const paddingLeft = useMemo(() => _getArrayProp(paddingLeftProp), [paddingLeftProp])
+  const paddingRight = useMemo(() => _getArrayProp(paddingRightProp), [paddingRightProp])
+  const radius = useMemo(() => _getArrayProp(radiusProp), [radiusProp])
+  const space = useMemo(() => _getArrayProp(spaceProp), [spaceProp])
 
   const boxProps = useMemo(
     () => ({

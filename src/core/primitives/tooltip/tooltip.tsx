@@ -24,9 +24,10 @@ import {
   useImperativeHandle,
 } from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
+import {usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
+import {_getArrayProp} from '../../styles'
 import {useTheme_v2} from '../../theme'
 import type {Placement} from '../../types'
 import {
@@ -122,7 +123,10 @@ export const Tooltip = forwardRef(function Tooltip(
   } = props
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
-  const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
+  const fallbackPlacements = useMemo(
+    () => _getArrayProp(fallbackPlacementsProp),
+    [fallbackPlacementsProp],
+  )
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)

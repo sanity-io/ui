@@ -23,8 +23,9 @@ import {
   useMemo,
   useRef,
 } from 'react'
-import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
+import {useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
+import {_getArrayProp} from '../../styles'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {
@@ -162,11 +163,11 @@ export const Popover = memo(
     const prefersReducedMotion = usePrefersReducedMotion()
     const animate = prefersReducedMotion ? false : _animate
     const boundarySize = useElementSize(boundaryElement)?.border
-    const padding = useArrayProp(paddingProp)
-    const radius = useArrayProp(radiusProp)
-    const shadow = useArrayProp(shadowProp)
-    const widthArrayProp = useArrayProp(widthProp)
-    const zOffset = useArrayProp(zOffsetProp)
+    const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
+    const radius = useMemo(() => _getArrayProp(radiusProp), [radiusProp])
+    const shadow = useMemo(() => _getArrayProp(shadowProp), [shadowProp])
+    const widthArrayProp = useMemo(() => _getArrayProp(widthProp), [widthProp])
+    const zOffset = useMemo(() => _getArrayProp(zOffsetProp), [zOffsetProp])
     const ref = useRef<HTMLDivElement | null>(null)
     const arrowRef = useRef<HTMLDivElement | null>(null)
     const rootBoundary: RootBoundary = 'viewport'

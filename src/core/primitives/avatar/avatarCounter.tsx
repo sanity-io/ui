@@ -2,8 +2,7 @@ import {getTheme_v2} from '@sanity/ui/theme'
 import {forwardRef, useMemo} from 'react'
 import {styled, css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp} from '../../hooks'
-import {rem, _responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps, _getArrayProp} from '../../styles'
 import {AvatarSize} from '../../types'
 import {Label} from '../label'
 
@@ -68,7 +67,7 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {count, size: sizeProp = 1} = props
-  const size = useArrayProp(sizeProp)
+  const size = useMemo(() => _getArrayProp(sizeProp), [sizeProp])
 
   const fontSize = useMemo(
     () =>

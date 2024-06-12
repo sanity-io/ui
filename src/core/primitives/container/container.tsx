@@ -1,6 +1,6 @@
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {Box, BoxProps} from '../box'
 import {ResponsiveWidthProps} from '../types'
 import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
@@ -26,14 +26,7 @@ export const Container = forwardRef(function Container(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {as, width = 2, ...restProps} = props
+  const $width = useMemo(() => _getArrayProp(width), [width])
 
-  return (
-    <Root
-      data-ui="Container"
-      {...restProps}
-      $width={useArrayProp(width)}
-      forwardedAs={as}
-      ref={ref}
-    />
-  )
+  return <Root data-ui="Container" {...restProps} $width={$width} forwardedAs={as} ref={ref} />
 })

@@ -4,7 +4,8 @@ import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, u
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useCustomValidity} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
@@ -177,10 +178,10 @@ export const TextInput = forwardRef(function TextInput(
 
   const rootTheme = useRootTheme()
 
-  const fontSize = useArrayProp(fontSizeProp)
-  const padding = useArrayProp(paddingProp)
-  const radius = useArrayProp(radiusProp)
-  const space = useArrayProp(spaceProp)
+  const fontSize = useMemo(() => _getArrayProp(fontSizeProp), [fontSizeProp])
+  const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
+  const radius = useMemo(() => _getArrayProp(radiusProp), [radiusProp])
+  const space = useMemo(() => _getArrayProp(spaceProp), [spaceProp])
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)

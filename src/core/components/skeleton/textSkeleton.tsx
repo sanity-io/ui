@@ -1,8 +1,7 @@
 import {ThemeFontKey, getTheme_v2} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {ThemeProps, _responsive} from '../../styles'
+import {ThemeProps, _getArrayProp, _responsive} from '../../styles'
 import {Skeleton, SkeletonProps} from './skeleton'
 
 const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
@@ -67,7 +66,7 @@ export const TextSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const $size = useMemo(() => _getArrayProp(size), [size])
 
   return <Root {...restProps} $size={$size} ref={ref} $style="text" />
 })
@@ -82,7 +81,7 @@ export const LabelSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const $size = useMemo(() => _getArrayProp(size), [size])
 
   return <Root {...restProps} $size={$size} ref={ref} $style="label" />
 })
@@ -97,7 +96,7 @@ export const HeadingSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const $size = useMemo(() => _getArrayProp(size), [size])
 
   return <Root {...restProps} $size={$size} ref={ref} $style="heading" />
 })
@@ -112,7 +111,7 @@ export const CodeSkeleton = forwardRef(function TextSkeleton(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const $size = useMemo(() => _getArrayProp(size), [size])
 
   return <Root {...restProps} $size={$size} ref={ref} $style="code" />
 })

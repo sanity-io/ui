@@ -1,8 +1,8 @@
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   responsiveBorderStyle,
   ResponsiveBorderStyleProps,
@@ -82,6 +82,14 @@ export const Card = forwardRef(function Card(
   const rootTheme = useRootTheme()
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
 
+  const $border = useMemo(() => _getArrayProp(border), [border])
+  const $borderTop = useMemo(() => _getArrayProp(borderTop), [borderTop])
+  const $borderRight = useMemo(() => _getArrayProp(borderRight), [borderRight])
+  const $borderBottom = useMemo(() => _getArrayProp(borderBottom), [borderBottom])
+  const $borderLeft = useMemo(() => _getArrayProp(borderLeft), [borderLeft])
+  const $radius = useMemo(() => _getArrayProp(radius), [radius])
+  const $shadow = useMemo(() => _getArrayProp(shadow), [shadow])
+
   // todo: Consider adding the wrapper approach for nested cards in which the tones are not changing, avoid unnecessary ThemeColorProvider
   return (
     <ThemeColorProvider scheme={scheme} tone={tone}>
@@ -91,16 +99,16 @@ export const Card = forwardRef(function Card(
         data-ui="Card"
         data-tone={tone}
         {...restProps}
-        $border={useArrayProp(border)}
-        $borderTop={useArrayProp(borderTop)}
-        $borderRight={useArrayProp(borderRight)}
-        $borderBottom={useArrayProp(borderBottom)}
-        $borderLeft={useArrayProp(borderLeft)}
+        $border={$border}
+        $borderTop={$borderTop}
+        $borderRight={$borderRight}
+        $borderBottom={$borderBottom}
+        $borderLeft={$borderLeft}
+        $radius={$radius}
+        $shadow={$shadow}
         $checkered={checkered}
         $focusRing={focusRing}
         $muted={muted}
-        $radius={useArrayProp(radius)}
-        $shadow={useArrayProp(shadow)}
         $tone={tone}
         data-checkered={checkered ? '' : undefined}
         data-pressed={pressed ? '' : undefined}

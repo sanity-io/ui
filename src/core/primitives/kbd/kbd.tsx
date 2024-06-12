@@ -1,6 +1,6 @@
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {styled, css} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {Radius} from '../../types'
 import {Box} from '../box'
@@ -46,9 +46,10 @@ export const KBD = forwardRef(function KBD(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {children, fontSize = 0, padding = 1, radius = 2, ...restProps} = props
+  const $radius = useMemo(() => _getArrayProp(radius), [radius])
 
   return (
-    <Root data-ui="KBD" {...restProps} $radius={useArrayProp(radius)} ref={ref}>
+    <Root data-ui="KBD" {...restProps} $radius={$radius} ref={ref}>
       <Box as="span" padding={padding}>
         <Text as="span" size={fontSize} weight="semibold">
           {children}

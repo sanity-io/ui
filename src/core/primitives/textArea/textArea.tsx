@@ -1,7 +1,8 @@
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef, useImperativeHandle, useRef} from 'react'
+import {forwardRef, useImperativeHandle, useMemo, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useCustomValidity, useArrayProp} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
@@ -80,6 +81,11 @@ export const TextArea = forwardRef(function TextArea(
 
   useCustomValidity(ref, customValidity)
 
+  const $radius = useMemo(() => _getArrayProp(radius), [radius])
+  const $fontSize = useMemo(() => _getArrayProp(fontSize), [fontSize])
+  const $padding = useMemo(() => _getArrayProp(padding), [padding])
+  const $space = useMemo(() => _getArrayProp(0), [])
+
   return (
     <Root data-ui="TextArea">
       <InputRoot>
@@ -88,17 +94,17 @@ export const TextArea = forwardRef(function TextArea(
           data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
           {...restProps}
-          $fontSize={useArrayProp(fontSize)}
-          $padding={useArrayProp(padding)}
+          $fontSize={$fontSize}
+          $padding={$padding}
+          $space={$space}
           $scheme={rootTheme.scheme}
-          $space={useArrayProp(0)}
           $tone={rootTheme.tone}
           $weight={weight}
           disabled={disabled}
           ref={ref}
         />
         <Presentation
-          $radius={useArrayProp(radius)}
+          $radius={$radius}
           $scheme={rootTheme.scheme}
           $tone={rootTheme.tone}
           data-border={border ? '' : undefined}

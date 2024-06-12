@@ -1,6 +1,6 @@
 import {forwardRef, useMemo, Children} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {Box, BoxProps} from '../box'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
 import {ResponsiveInlineSpaceStyleProps} from './types'
@@ -26,6 +26,7 @@ export const Inline = forwardRef(function Inline(
 ) {
   const {as, children: childrenProp, space, ...restProps} = props
 
+  const $space = useMemo(() => _getArrayProp(space), [space])
   const children = useMemo(
     () => Children.map(childrenProp, (child) => child && <div>{child}</div>),
     [childrenProp],
@@ -35,7 +36,7 @@ export const Inline = forwardRef(function Inline(
     <Root
       data-ui="Inline"
       {...restProps}
-      $space={useArrayProp(space)}
+      $space={$space}
       forwardedAs={as}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}

@@ -1,7 +1,7 @@
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   ResponsiveFontStyleProps,
   responsiveTextAlignStyle,
@@ -63,6 +63,9 @@ export const Text = forwardRef(function Text(
     ...restProps
   } = props
 
+  const $size = useMemo(() => _getArrayProp(size), [size])
+  const $align = useMemo(() => _getArrayProp(align), [align])
+
   let children = childrenProp
 
   if (textOverflow === 'ellipsis') {
@@ -74,10 +77,10 @@ export const Text = forwardRef(function Text(
       data-ui="Text"
       {...restProps}
       $accent={accent}
-      $align={useArrayProp(align)}
+      $align={$align}
+      $size={$size}
       $muted={muted}
       ref={ref}
-      $size={useArrayProp(size)}
       $weight={weight}
     >
       <span>{children}</span>

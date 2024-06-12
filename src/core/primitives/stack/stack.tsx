@@ -1,6 +1,6 @@
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {Box, BoxProps} from '../box'
 import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
@@ -24,13 +24,14 @@ export const Stack = forwardRef(function Stack(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {as, space, ...restProps} = props
+  const $space = useMemo(() => _getArrayProp(space), [space])
 
   return (
     <Root
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
-      $space={useArrayProp(space)}
+      $space={$space}
       forwardedAs={as}
       ref={ref}
     />

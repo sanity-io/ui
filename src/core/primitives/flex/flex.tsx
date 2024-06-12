@@ -1,6 +1,6 @@
-import {forwardRef} from 'react'
+import {forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   flexItemStyle,
   FlexItemStyleProps,
@@ -36,15 +36,21 @@ export const Flex = forwardRef(function Flex(
 ) {
   const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
 
+  const $align = useMemo(() => _getArrayProp(align), [align])
+  const $direction = useMemo(() => _getArrayProp(direction), [direction])
+  const $gap = useMemo(() => _getArrayProp(gap), [gap])
+  const $justify = useMemo(() => _getArrayProp(justify), [justify])
+  const $wrap = useMemo(() => _getArrayProp(wrap), [wrap])
+
   return (
     <Root
       data-ui="Flex"
       {...restProps}
-      $align={useArrayProp(align)}
-      $direction={useArrayProp(direction)}
-      $gap={useArrayProp(gap)}
-      $justify={useArrayProp(justify)}
-      $wrap={useArrayProp(wrap)}
+      $align={$align}
+      $direction={$direction}
+      $gap={$gap}
+      $justify={$justify}
+      $wrap={$wrap}
       forwardedAs={as}
       ref={ref}
     />

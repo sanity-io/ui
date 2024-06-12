@@ -20,7 +20,6 @@ import {
 } from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {useArrayProp} from '../../hooks'
 import {
   Box,
   BoxProps,
@@ -32,6 +31,7 @@ import {
   Text,
   TextInput,
 } from '../../primitives'
+import {_getArrayProp} from '../../styles'
 import {Radius} from '../../types'
 import {AnimatedSpinnerIcon, ListBox, Root} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
@@ -200,7 +200,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const padding = useArrayProp(paddingProp)
+  const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],

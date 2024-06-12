@@ -2,8 +2,7 @@ import {getTheme_v2} from '@sanity/ui/theme'
 import {Children, cloneElement, forwardRef, isValidElement, useMemo} from 'react'
 import {styled, css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp} from '../../hooks'
-import {rem, _responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps, _getArrayProp} from '../../styles'
 import {AvatarSize} from '../../types'
 import {AvatarCounter} from './avatarCounter'
 
@@ -70,7 +69,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
     [childrenProp],
   )
   const maxLength = Math.max(maxLengthProp, 0)
-  const size = useArrayProp(sizeProp)
+  const size = useMemo(() => _getArrayProp(sizeProp), [sizeProp])
 
   const len = children.length
   const visibleCount = maxLength - 1

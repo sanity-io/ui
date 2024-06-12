@@ -1,6 +1,14 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {styled} from 'styled-components'
 import {
   containsOrEqualsElement,
@@ -8,9 +16,10 @@ import {
   focusLastDescendant,
   isHTMLElement,
 } from '../../helpers'
-import {useArrayProp, useClickOutside, useGlobalKeyDown, usePrefersReducedMotion} from '../../hooks'
+import {useClickOutside, useGlobalKeyDown, usePrefersReducedMotion} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
+import {_getArrayProp} from '../../styles'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {useTheme_v2} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
@@ -166,9 +175,9 @@ const DialogCard = forwardRef(function DialogCard(
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
-  const radius = useArrayProp(radiusProp)
-  const shadow = useArrayProp(shadowProp)
-  const width = useArrayProp(widthProp)
+  const radius = useMemo(() => _getArrayProp(radiusProp), [radiusProp])
+  const shadow = useMemo(() => _getArrayProp(shadowProp), [shadowProp])
+  const width = useMemo(() => _getArrayProp(widthProp), [widthProp])
   const ref = useRef<HTMLDivElement | null>(null)
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLDivElement | null>(null)
@@ -319,11 +328,11 @@ export const Dialog = forwardRef(function Dialog(
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
-  const cardRadius = useArrayProp(cardRadiusProp)
-  const padding = useArrayProp(paddingProp)
-  const position = useArrayProp(positionProp)
-  const width = useArrayProp(widthProp)
-  const zOffset = useArrayProp(zOffsetProp)
+  const cardRadius = useMemo(() => _getArrayProp(cardRadiusProp), [cardRadiusProp])
+  const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
+  const position = useMemo(() => _getArrayProp(positionProp), [positionProp])
+  const width = useMemo(() => _getArrayProp(widthProp), [widthProp])
+  const zOffset = useMemo(() => _getArrayProp(zOffsetProp), [zOffsetProp])
   const preDivRef = useRef<HTMLDivElement | null>(null)
   const postDivRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)

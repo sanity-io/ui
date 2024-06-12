@@ -15,8 +15,9 @@ export default defineConfig({
     noImplicitBrowsersList: 'off',
   },
   tsconfig: 'tsconfig.dist.json',
+  /*
   reactCompilerOptions: {
-    panicThreshold: 'ALL_ERRORS',
+    panicThreshold: 'NONE',
     logger: {
       logEvent(filename, event) {
         if (event.kind === 'CompileError') {
@@ -25,15 +26,13 @@ export default defineConfig({
           const {reason, description, severity, loc, suggestions} = event.detail as any
 
           console.error(`[${severity}] ${reason}`)
-          console.log(`${filename}:${loc.start.line}:${loc.start.column} ${description}`)
-
-          for (const suggestion of suggestions) {
-            console.log(suggestion.description)
-          }
+          console.log(`${filename}:${loc.start?.line}:${loc.start?.column} ${description}`)
+          console.log(suggestions)
 
           console.groupEnd()
         }
       },
     },
   },
+  // */
 })

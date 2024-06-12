@@ -1,6 +1,7 @@
 import {Children, forwardRef, Fragment, isValidElement, useCallback, useMemo, useState} from 'react'
-import {useArrayProp, useClickOutside} from '../../hooks'
+import {useClickOutside} from '../../hooks'
 import {Box, Popover, Stack, Text} from '../../primitives'
+import {_getArrayProp} from '../../styles'
 import {ExpandButton, Root} from './breadcrumbs.styles'
 
 /**
@@ -20,7 +21,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   ref: React.ForwardedRef<HTMLOListElement>,
 ) {
   const {children, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
-  const space = useArrayProp(spaceRaw)
+  const space = useMemo(() => _getArrayProp(spaceRaw), [spaceRaw])
   const [open, setOpen] = useState(false)
   const [expandElement, setExpandElement] = useState<HTMLButtonElement | null>(null)
   const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
