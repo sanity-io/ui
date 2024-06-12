@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.3](https://github.com/sanity-io/ui/compare/v2.3.2...v2.3.3) (2024-06-12)
+
+### Bug Fixes
+
+- **theme:** placeholder color in dark mode ([94c5887](https://github.com/sanity-io/ui/commit/94c58870b7ca0f21c35a91cb7e1796a00e3e675d))
+
 ## [2.3.2](https://github.com/sanity-io/ui/compare/v2.3.1...v2.3.2) (2024-06-10)
 
 ### Bug Fixes
