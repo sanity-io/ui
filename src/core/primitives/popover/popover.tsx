@@ -23,7 +23,7 @@ import {
   useMemo,
   useRef,
 } from 'react'
-import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
+import {useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'

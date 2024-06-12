@@ -1,7 +1,7 @@
 import {ChevronDownIcon} from '@sanity/icons'
 import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useCustomValidity, useArrayProp} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
 import {Radius} from '../../types'
 import {Box} from '../box'
 import {Text} from '../text'

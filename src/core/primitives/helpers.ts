@@ -1,5 +1,6 @@
 import {isElement, isFragment} from 'react-is'
 
+// @TODO this is breaking the image input menu
 export function childrenToElementArray(
   children: React.ReactNode,
 ): Array<React.ReactElement | string> {

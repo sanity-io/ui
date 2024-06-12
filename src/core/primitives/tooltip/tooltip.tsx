@@ -24,7 +24,7 @@ import {
   useImperativeHandle,
 } from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
+import {usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'

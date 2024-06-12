@@ -1,5 +1,6 @@
 import {useCallback, useContext, useEffect, useMemo, useState} from 'react'
-import {useMediaIndex, useArrayProp} from '../../hooks'
+import {useMediaIndex} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'
@@ -28,7 +29,7 @@ export function LayerProvider(props: LayerProviderProps): React.ReactElement {
   const level = parentLevel + 1
 
   // Get z-index offset
-  const zOffset = useArrayProp(zOffsetProp)
+  const zOffset = useMemo(() => _getArrayProp(zOffsetProp), [zOffsetProp])
 
   // Get responsive z-index value
   const maxMediaIndex = zOffset.length - 1
