@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
-import {ThemeColorToneKey} from '@sanity/ui/theme'
+import {ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {styled} from 'styled-components'
 import {Box, Button, Flex, Stack, Text, Card} from '../../primitives'
 import {ThemeProps} from '../../styles'
@@ -19,7 +19,7 @@ export interface ToastProps {
   duration?: number
 }
 
-const STATUS_CARD_TONE: {[key: string]: ThemeColorToneKey} = {
+const STATUS_CARD_TONE: {[key: string]: ThemeColorStateToneKey} = {
   error: 'critical',
   warning: 'caution',
   success: 'positive',
@@ -40,7 +40,9 @@ const ROLES = {
   info: 'alert',
 } as const
 
-const Root = styled(Card)<{$duration?: number; tone: string} & ThemeProps>(rootStyles)
+const Root = styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps>(
+  rootStyles,
+)
 
 /**
  * The `Toast` component gives feedback to users when an action has taken place.
