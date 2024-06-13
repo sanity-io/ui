@@ -57,10 +57,12 @@ export const Menu = forwardRef(function Menu(
     originElement,
     padding = 1,
     registerElement,
-    shouldFocus = (props.focusFirst && 'first') || (props.focusLast && 'last') || null,
+    shouldFocus: _shouldFocus,
     space = 1,
     ...restProps
   } = props
+  const shouldFocus =
+    _shouldFocus ?? ((props.focusFirst && 'first') || (props.focusLast && 'last') || null)
 
   const ref = useRef<HTMLDivElement | null>(null)
 

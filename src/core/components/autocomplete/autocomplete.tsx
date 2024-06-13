@@ -200,7 +200,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
+  const padding = _getArrayProp(paddingProp)
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],
@@ -213,44 +213,41 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
   const expanded = (query !== null && loading) || (focused && query !== null)
 
-  const handleRootBlur = useCallback(
-    (event: FocusEvent<HTMLInputElement>) => {
-      setTimeout(() => {
-        // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
-        // closes the results in certain situations):
-        // - Do not handle blur if the mouse is within the popover
-        if (popoverMouseWithinRef.current) {
-          return
-        }
+  const handleRootBlur = (event: FocusEvent<HTMLInputElement>) => {
+    setTimeout(() => {
+      // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
+      // closes the results in certain situations):
+      // - Do not handle blur if the mouse is within the popover
+      if (popoverMouseWithinRef.current) {
+        return
+      }
 
-        const elements: HTMLElement[] = (relatedElements || []).concat(
-          rootElementRef.current ? [rootElementRef.current] : [],
-          resultsPopoverElementRef.current ? [resultsPopoverElementRef.current] : [],
-        )
+      const elements: HTMLElement[] = (relatedElements || []).concat(
+        rootElementRef.current ? [rootElementRef.current] : [],
+        resultsPopoverElementRef.current ? [resultsPopoverElementRef.current] : [],
+      )
 
-        let focusInside = false
+      let focusInside = false
 
-        if (document.activeElement) {
-          for (const e of elements) {
-            if (e === document.activeElement || e.contains(document.activeElement)) {
-              focusInside = true
-              break
-            }
+      if (document.activeElement) {
+        for (const e of elements) {
+          if (e === document.activeElement || e.contains(document.activeElement)) {
+            focusInside = true
+            break
           }
         }
+      }
 
-        if (focusInside === false) {
-          dispatch({type: 'root/blur'})
-          popoverMouseWithinRef.current = false
-          if (onQueryChange) onQueryChange(null)
-          if (onBlur) onBlur(event)
-        }
-      }, 0)
-    },
-    [onBlur, onQueryChange, relatedElements],
-  )
+      if (focusInside === false) {
+        dispatch({type: 'root/blur'})
+        popoverMouseWithinRef.current = false
+        if (onQueryChange) onQueryChange(null)
+        if (onBlur) onBlur(event)
+      }
+    }, 0)
+  }
 
-  const handleRootFocus = useCallback((event: FocusEvent<HTMLDivElement>) => {
+  const handleRootFocus = (event: FocusEvent<HTMLDivElement>) => {
     const listBoxElement = listBoxElementRef.current
     const focusedElement = event.target instanceof HTMLElement ? event.target : null
     const listFocused = listBoxElement?.contains(focusedElement) || false
@@ -260,7 +257,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
       dispatch({type: 'root/setListFocused', listFocused})
     }
-  }, [])
+  }
 
   const handleOptionSelect = useCallback(
     (v: string) => {

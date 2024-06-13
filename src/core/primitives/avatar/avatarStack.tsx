@@ -64,10 +64,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
     size: sizeProp = 1,
     ...restProps
   } = props
-  const children = useMemo<React.ReactElement[]>(
-    () => Children.toArray(childrenProp).filter(isValidElement),
-    [childrenProp],
-  )
+  const children: React.ReactElement[] = Children.toArray(childrenProp).filter(isValidElement)
   const maxLength = Math.max(maxLengthProp, 0)
   const size = useMemo(() => _getArrayProp(sizeProp), [sizeProp])
 

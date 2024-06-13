@@ -21,15 +21,16 @@ export const ElementQuery = forwardRef(function ElementQuery(
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const theme = useTheme_v2()
-  const {children, media = theme.media, ...restProps} = props
+  const {children, media: _media, ...restProps} = props
+  const media = _media ?? theme.media
 
   const ref = useRef<HTMLDivElement | null>(null)
   const [element, setElement] = useState<HTMLDivElement | null>(null)
   const elementSize = useElementSize(element)
   const width = useMemo(() => elementSize?.border.width ?? window.innerWidth, [elementSize])
 
-  const max = useMemo(() => findMaxBreakpoints(media, width), [media, width])
-  const min = useMemo(() => findMinBreakpoints(media, width), [media, width])
+  const max = findMaxBreakpoints(media, width)
+  const min = findMinBreakpoints(media, width)
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 

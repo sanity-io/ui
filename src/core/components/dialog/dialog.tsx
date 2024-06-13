@@ -316,13 +316,15 @@ export const Dialog = forwardRef(function Dialog(
     onFocus,
     padding: paddingProp = 3,
     portal: portalProp,
-    position: positionProp = dialog.position || 'fixed',
+    position: _position,
     scheme,
     width: widthProp = 0,
-    zOffset: zOffsetProp = dialog.zOffset || layer.dialog.zOffset,
+    zOffset: _zOffset,
     animate: _animate = false,
     ...restProps
   } = props
+  const positionProp = _position ?? (dialog.position || 'fixed')
+  const zOffsetProp = _zOffset ?? (dialog.zOffset || layer.dialog.zOffset)
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()

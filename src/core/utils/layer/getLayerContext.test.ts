@@ -8,9 +8,6 @@ describe('getLayerContext', () => {
         version: 0.0,
         isTopLayer: true,
         level: 0,
-        registerChild: () => () => {
-          //
-        },
         size: 0,
         zIndex: 0,
       }
@@ -21,7 +18,6 @@ describe('getLayerContext', () => {
         version: 0.0,
         isTopLayer: true,
         level: 0,
-        registerChild: expect.any(Function),
         size: 0,
         zIndex: 0,
       })

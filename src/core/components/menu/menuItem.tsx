@@ -72,9 +72,11 @@ export const MenuItem = forwardRef(function MenuItem(
     activeElement,
     mount,
     onItemClick,
-    onItemMouseEnter = menu.onMouseEnter,
-    onItemMouseLeave = menu.onMouseLeave,
+    onItemMouseEnter: _onItemMouseEnter,
+    onItemMouseLeave: _onItemMouseLeave,
   } = menu
+  const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
+  const onItemMouseLeave = _onItemMouseLeave ?? menu.onMouseLeave
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
   const ref = useRef<HTMLDivElement | null>(null)

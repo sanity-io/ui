@@ -1,9 +1,8 @@
-import {useCallback, useContext, useEffect, useMemo, useState} from 'react'
+import {createContext, useCallback, useContext, useEffect, useMemo, useState} from 'react'
 import {useMediaIndex} from '../../hooks'
 import {_getArrayProp} from '../../styles'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
-import {LayerContextValue} from './types'
 
 /**
  * @public
@@ -21,8 +20,8 @@ export function LayerProvider(props: LayerProviderProps): React.ReactElement {
 
   // Get parent context values
   const parentContextValue = useContext(LayerContext)
+  const parentRegisterChild = useContext(LayerContextRegisterChild)
   const parent = parentContextValue && getLayerContext(parentContextValue)
-  const parentRegisterChild = parent?.registerChild
   const parentLevel = parent?.level ?? 0
 
   // Get level
@@ -37,51 +36,36 @@ export function LayerProvider(props: LayerProviderProps): React.ReactElement {
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
 
   // A state value that is used to keep track of the number of child layers on each level
-  const [, setChildLayers] = useState<Record<number, number>>({})
-
-  // A state value that is used to keep track of the number of child levels
-  const [size, setSize] = useState(0)
+  const [childLayers, setChildLayers] = useState<Record<number, number>>({})
+  // A memo value that is used to keep track of the number of child levels
+  const size = useMemo(() => Object.keys(childLayers).length, [childLayers])
 
   const isTopLayer = size === 0
 
   const registerChild = useCallback(
-    (childLevel?: number) => {
+    (childLevel: number) => {
       // Register child layers to the parent layer
       const parentDispose = parentRegisterChild?.(childLevel)
 
-      if (childLevel !== undefined) {
-        setChildLayers((state) => {
-          const prevLen = state[childLevel] ?? 0
-          const nextState = {...state, [childLevel]: prevLen + 1}
+      setChildLayers((state) => {
+        const prevLen = state[childLevel] ?? 0
+        const nextState = {...state, [childLevel]: prevLen + 1}
 
-          setSize(Object.keys(nextState).length)
+        return nextState
+      })
+
+      return () => {
+        setChildLayers((state) => {
+          const nextState = {...state}
+
+          if (nextState[childLevel] === 1) {
+            delete nextState[childLevel]
+          } else {
+            nextState[childLevel] -= 1
+          }
 
           return nextState
         })
-      } else {
-        // Legacy behavior: if no child level is provided, increment the size by 1
-        setSize((v) => v + 1)
-      }
-
-      return () => {
-        if (childLevel !== undefined) {
-          setChildLayers((state) => {
-            const nextState = {...state}
-
-            if (nextState[childLevel] === 1) {
-              delete nextState[childLevel]
-
-              setSize(Object.keys(nextState).length)
-            } else {
-              nextState[childLevel] -= 1
-            }
-
-            return nextState
-          })
-        } else {
-          // Legacy behavior: if no child level is provided, decrement the size by 1
-          setSize((v) => v - 1)
-        }
 
         parentDispose?.()
       }
@@ -92,17 +76,24 @@ export function LayerProvider(props: LayerProviderProps): React.ReactElement {
   // Register this layer on mount
   useEffect(() => parentRegisterChild?.(level), [level, parentRegisterChild])
 
-  const value: LayerContextValue = useMemo(
+  const value = useMemo(
     () => ({
-      version: 0.0,
+      version: 0.0 as const,
       isTopLayer,
       level,
-      registerChild,
       size,
       zIndex,
     }),
-    [isTopLayer, level, registerChild, size, zIndex],
+    [isTopLayer, level, size, zIndex],
   )
 
-  return <LayerContext.Provider value={value}>{children}</LayerContext.Provider>
+  return (
+    <LayerContext.Provider value={value}>
+      <LayerContextRegisterChild.Provider value={registerChild}>
+        {children}
+      </LayerContextRegisterChild.Provider>
+    </LayerContext.Provider>
+  )
 }
+
+const LayerContextRegisterChild = createContext<((childLevel: number) => () => void) | null>(null)

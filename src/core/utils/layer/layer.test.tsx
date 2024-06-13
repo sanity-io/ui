@@ -24,7 +24,6 @@ describe('utils/layer', () => {
           version: 0.0,
           isTopLayer: true,
           level: 0,
-          registerChild: () => () => undefined,
           size: 0,
           zIndex: 0,
         }
@@ -40,7 +39,6 @@ describe('utils/layer', () => {
 
       expect(log.mock.calls[0][0].version).toBe(0.0)
       expect(log.mock.calls[0][0].isTopLayer).toBe(true)
-      expect(typeof log.mock.calls[0][0].registerChild).toBe('function')
       expect(log.mock.calls[0][0].size).toBe(0)
       expect(log.mock.calls[0][0].zIndex).toBe(0)
     })

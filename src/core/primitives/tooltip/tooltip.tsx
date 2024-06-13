@@ -105,22 +105,25 @@ export const Tooltip = forwardRef(function Tooltip(
   const {
     animate: _animate = false,
     arrow: arrowProp = false,
-    boundaryElement = boundaryElementContext?.element,
+    boundaryElement: _boundaryElement,
     children: childProp,
     content,
     disabled,
-    fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
-      DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
+    fallbackPlacements: _fallbackPlacements,
     padding = 2,
     placement: placementProp = 'bottom',
     portal: portalProp,
     radius = 2,
     scheme,
     shadow = 2,
-    zOffset = layer.tooltip.zOffset,
+    zOffset: _zOffset,
     delay,
     ...restProps
   } = props
+  const zOffset = _zOffset ?? layer.tooltip.zOffset
+  const fallbackPlacementsProp =
+    _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
+  const boundaryElement = _boundaryElement ?? boundaryElementContext?.element
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = useMemo(
@@ -295,7 +298,7 @@ export const Tooltip = forwardRef(function Tooltip(
   useEffect(() => {
     if (!showTooltip) return
 
-    function handleWindowMouseMove(event: MouseEvent) {
+    const handleWindowMouseMove = (event: MouseEvent) => {
       if (!referenceElement) return
 
       const isHoveringReference =

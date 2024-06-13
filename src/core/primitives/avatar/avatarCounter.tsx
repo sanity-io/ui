@@ -1,5 +1,5 @@
 import {getTheme_v2} from '@sanity/ui/theme'
-import {forwardRef, useMemo} from 'react'
+import {forwardRef} from 'react'
 import {styled, css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {rem, _responsive, ThemeProps, _getArrayProp} from '../../styles'
@@ -66,23 +66,18 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   props: AvatarCounterProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {count, size: sizeProp = 1} = props
-  const size = useMemo(() => _getArrayProp(sizeProp), [sizeProp])
+  const {count, size} = props
+  const $size = _getArrayProp(size ?? 1)
+  const fontSize = $size.map((s) => {
+    if (s === 1) return 1
+    if (s === 2) return 3
+    if (s === 3) return 5
 
-  const fontSize = useMemo(
-    () =>
-      size.map((s) => {
-        if (s === 1) return 1
-        if (s === 2) return 3
-        if (s === 3) return 5
-
-        return 0
-      }),
-    [size],
-  )
+    return 0
+  })
 
   return (
-    <Root $size={size} data-ui="AvatarCounter" ref={ref}>
+    <Root $size={$size} data-ui="AvatarCounter" ref={ref}>
       <Label as="span" size={fontSize} weight="medium">
         {count}
       </Label>

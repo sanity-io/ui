@@ -1,5 +1,5 @@
 import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
+import {forwardRef, useCallback, useEffect, useId, useState} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {_getArrayProp} from '../../styles'
@@ -74,7 +74,7 @@ export const Avatar = forwardRef(function Avatar(
   } = props
   const {avatar} = useTheme_v2()
   const as = isValidElementType(asProp) ? asProp : 'div'
-  const size = useMemo(() => _getArrayProp(sizeProp), [sizeProp])
+  const size = _getArrayProp(sizeProp)
 
   // @todo: remove this
   const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
@@ -111,17 +111,13 @@ export const Avatar = forwardRef(function Avatar(
     }
   }, [onImageLoadError])
 
-  const initialsSize = useMemo(
-    () =>
-      size.map((s) => {
-        if (s === 1) return 1
-        if (s === 2) return 3
-        if (s === 3) return 5
+  const initialsSize = size.map((s) => {
+    if (s === 1) return 1
+    if (s === 2) return 3
+    if (s === 3) return 5
 
-        return 0
-      }),
-    [size],
-  )
+    return 0
+  })
 
   return (
     <Root

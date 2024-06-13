@@ -14,7 +14,6 @@ import {AnimatePresence} from 'framer-motion'
 import {
   MutableRefObject,
   RefCallback,
-  cloneElement,
   forwardRef,
   memo,
   useCallback,
@@ -66,6 +65,7 @@ export interface PopoverProps
   arrow?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
+  /** @deprecated Use `referenceElement` instead */
   children?: React.ReactElement
   /**
    * When `true`, prevent overflow within the current boundary:
@@ -132,15 +132,14 @@ export const Popover = memo(
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
       animate: _animate = false,
       arrow: arrowProp = false,
-      boundaryElement = boundaryElementContext.element,
-      children: childProp,
+      boundaryElement: _boundaryElement,
+      children,
       constrainSize = false,
       content,
       disabled,
-      fallbackPlacements = props.fallbackPlacements ??
-        DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
+      fallbackPlacements: _fallbackPlacements,
       matchReferenceWidth,
-      floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
+      floatingBoundary: _floatingBoundary,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onActivate,
       open,
@@ -150,23 +149,31 @@ export const Popover = memo(
       portal,
       preventOverflow = true,
       radius: radiusProp = 3,
-      referenceBoundary = props.boundaryElement ?? boundaryElementContext.element,
+      referenceBoundary: _referenceBoundary,
       referenceElement,
       scheme,
       shadow: shadowProp = 3,
       tone = 'inherit',
       width: widthProp = 'auto',
-      zOffset: zOffsetProp = layer.popover.zOffset,
+      zOffset: _zOffset,
       updateRef,
       ...restProps
     } = props
+    const boundaryElement = _boundaryElement ?? boundaryElementContext.element
+    const referenceBoundary =
+      _referenceBoundary ?? props.boundaryElement ?? boundaryElementContext.element
+    const floatingBoundary =
+      _floatingBoundary ?? props.boundaryElement ?? boundaryElementContext.element
+    const fallbackPlacements =
+      _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
+    const zOffsetProp = _zOffset ?? layer.popover.zOffset
     const prefersReducedMotion = usePrefersReducedMotion()
     const animate = prefersReducedMotion ? false : _animate
     const boundarySize = useElementSize(boundaryElement)?.border
     const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
     const radius = useMemo(() => _getArrayProp(radiusProp), [radiusProp])
     const shadow = useMemo(() => _getArrayProp(shadowProp), [shadowProp])
-    const widthArrayProp = useMemo(() => _getArrayProp(widthProp), [widthProp])
+    const widthArrayProp = _getArrayProp(widthProp)
     const zOffset = useMemo(() => _getArrayProp(zOffsetProp), [zOffsetProp])
     const ref = useRef<HTMLDivElement | null>(null)
     const arrowRef = useRef<HTMLDivElement | null>(null)
@@ -356,45 +363,15 @@ export const Popover = memo(
       [refs],
     )
 
-    const setReference = useCallback(
-      (node: HTMLElement | null) => {
-        refs.setReference(node)
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const childRef = (childProp as any)?.ref
-
-        if (typeof childRef === 'function') {
-          childRef(node)
-        } else if (childRef) {
-          childRef.current = node
-        }
-      },
-      [childProp, refs],
-    )
-
-    const child = useMemo(() => {
-      if (!childProp || referenceElement) return null
-
-      return cloneElement(childProp, {ref: setReference})
-    }, [childProp, referenceElement, setReference])
+    useImperativeHandle(updateRef, () => update, [update])
 
     useEffect(() => {
-      if (updateRef) {
-        if (typeof updateRef === 'function') {
-          updateRef(update)
-        } else if (updateRef) {
-          updateRef.current = update
-        }
-      }
-    }, [update, updateRef])
-
-    useEffect(() => {
-      if (child) return
+      if (children) return
       refs.setReference(referenceElement || null)
-    }, [referenceElement, refs, child])
+    }, [children, referenceElement, refs])
 
     if (disabled) {
-      return childProp || <></>
+      return children || <></>
     }
 
     const popover = (
@@ -450,10 +427,30 @@ export const Popover = memo(
         </ConditionalWrapper>
 
         {/* the referred element */}
-        {child}
+        {children && !referenceElement && (
+          <div
+            ref={(node) => {
+              logDeprecatedWarning()
+              refs.setReference(node)
+            }}
+            style={{display: 'contents'}}
+          >
+            {children}
+          </div>
+        )}
       </>
     )
   }),
 )
 
 Popover.displayName = 'Popover'
+
+let didWarn = false
+
+function logDeprecatedWarning() {
+  if (!didWarn) {
+    // eslint-disable-next-line no-console
+    console.warn('Popover: Please use the `referenceElement` prop instead of passing a children.')
+    didWarn = true
+  }
+}

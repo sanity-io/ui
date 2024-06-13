@@ -1,16 +1,10 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
 import {Box, BoxProps, Flex, Text} from '../../primitives'
-import {
-  treeItemRootStyle,
-  treeItemRootColorStyle,
-  treeItemBoxStyle,
-  TreeItemBoxStyleProps,
-} from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
+import {Root, ToggleArrowText, TreeItemBox} from './treeItem.styles'
 import {useTree} from './useTree'
 
 /**
@@ -29,16 +23,6 @@ export interface TreeItemProps {
   text?: React.ReactNode
   weight?: ThemeFontWeightKey
 }
-
-const Root = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
-
-const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
-
-const ToggleArrowText = styled(Text)`
-  & > svg {
-    transition: transform 100ms;
-  }
-`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -70,7 +54,7 @@ export const TreeItem = memo(function TreeItem(
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const _id = useId()
   const id = idProp || _id
-  const itemPath = useMemo(() => path.concat([id || '']), [id, path])
+  const itemPath = useMemo(() => [...path, id || ''], [id, path])
   const itemKey = itemPath.join('/')
   const itemState = tree.state[itemKey]
   const focused = tree.focusedElement === rootRef.current
@@ -83,7 +67,7 @@ export const TreeItem = memo(function TreeItem(
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLLIElement>) => {
-      if (onClick) onClick(event)
+      onClick?.(event)
 
       const target = event.target
 
@@ -117,32 +101,35 @@ export const TreeItem = memo(function TreeItem(
     return registerItem(rootRef.current, itemPath.join('/'), expanded, selected)
   }, [expanded, itemPath, registerItem, selected])
 
-  const content = (
-    <Flex padding={padding}>
-      <Box
-        marginRight={space}
-        style={{
-          visibility: IconComponent || children ? 'visible' : 'hidden',
-          pointerEvents: 'none',
-        }}
-      >
-        {IconComponent && (
-          <Text muted={muted} size={fontSize} weight={weight}>
-            <IconComponent />
+  const content = useMemo(
+    () => (
+      <Flex padding={padding}>
+        <Box
+          marginRight={space}
+          style={{
+            visibility: IconComponent || children ? 'visible' : 'hidden',
+            pointerEvents: 'none',
+          }}
+        >
+          {IconComponent && (
+            <Text muted={muted} size={fontSize} weight={weight}>
+              <IconComponent />
+            </Text>
+          )}
+          {!IconComponent && (
+            <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
+              <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
+            </ToggleArrowText>
+          )}
+        </Box>
+        <Box flex={1}>
+          <Text muted={muted} size={fontSize} textOverflow="ellipsis" weight={weight}>
+            {text}
           </Text>
-        )}
-        {!IconComponent && (
-          <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
-            <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </ToggleArrowText>
-        )}
-      </Box>
-      <Box flex={1}>
-        <Text muted={muted} size={fontSize} textOverflow="ellipsis" weight={weight}>
-          {text}
-        </Text>
-      </Box>
-    </Flex>
+        </Box>
+      </Flex>
+    ),
+    [IconComponent, children, expanded, fontSize, muted, padding, space, text, weight],
   )
 
   if (href) {
