@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.4](https://github.com/sanity-io/ui/compare/v2.3.3...v2.3.4) (2024-06-13)
+
+### Bug Fixes
+
+- **menu:** allow overriding `selected` property on `MenuButton` ([eae34c1](https://github.com/sanity-io/ui/commit/eae34c1e74c20c8e39644b387fed2a1697c09d85))
+
 ## [2.3.3](https://github.com/sanity-io/ui/compare/v2.3.2...v2.3.3) (2024-06-12)
 
 ### Bug Fixes
