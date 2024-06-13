@@ -80,5 +80,10 @@ export default defineScope({
       title: 'Avatar menu',
       component: lazy(() => import('./avatarMenu')),
     },
+    {
+      name: 'custom-selected-state',
+      title: 'Custom selected state',
+      component: lazy(() => import('./customSelectedState')),
+    },
   ],
 })
