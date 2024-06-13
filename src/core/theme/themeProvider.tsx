@@ -24,14 +24,11 @@ export interface ThemeProviderProps {
  * @public
  */
 export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
+  const {children} = props
   const parentTheme = useContext(ThemeContext)
-  const {
-    children,
-    // scheme = parentTheme?.scheme || 'light',
-    theme: rootTheme = parentTheme?.theme || null,
-    tone = parentTheme?.tone || 'default',
-  } = props
   const scheme = props.scheme ?? (parentTheme?.scheme || 'light')
+  const rootTheme = parentTheme?.theme || null
+  const tone = parentTheme?.tone || 'default'
 
   const themeContext: ThemeContextValue | null = useMemo(() => {
     if (!rootTheme) return null

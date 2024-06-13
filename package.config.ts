@@ -15,9 +15,9 @@ export default defineConfig({
     noImplicitBrowsersList: 'off',
   },
   tsconfig: 'tsconfig.dist.json',
-  /*
+  // /*
   reactCompilerOptions: {
-    panicThreshold: 'NONE',
+    // panicThreshold: 'NONE',
     logger: {
       logEvent(filename, event) {
         if (event.kind === 'CompileError') {
