@@ -241,7 +241,7 @@ export const MenuButton = forwardRef(function MenuButton(
         'aria-haspopup': true,
         'aria-expanded': open,
         ref: ref,
-        selected: open,
+        selected: buttonProp.props.selected ?? open,
       }),
     [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open],
   )
