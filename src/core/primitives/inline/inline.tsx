@@ -1,8 +1,7 @@
-import {forwardRef, useMemo} from 'react'
+import {forwardRef, useMemo, Children} from 'react'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'
-import {childrenToElementArray} from '../helpers'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
 import {ResponsiveInlineSpaceStyleProps} from './types'
 
@@ -28,10 +27,7 @@ export const Inline = forwardRef(function Inline(
   const {as, children: childrenProp, space, ...restProps} = props
 
   const children = useMemo(
-    () =>
-      childrenToElementArray(childrenProp)
-        .filter(Boolean)
-        .map((child, idx) => <div key={idx}>{child}</div>),
+    () => Children.map(childrenProp, (child) => child && <div>{child}</div>),
     [childrenProp],
   )
 
