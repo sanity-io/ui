@@ -213,7 +213,7 @@ export const Tree = memo(
       ) as HTMLElement[]
 
       setItemElements(_itemElements)
-    }, [children, ref])
+    }, [children])
 
     return (
       <TreeContext.Provider value={contextValue}>

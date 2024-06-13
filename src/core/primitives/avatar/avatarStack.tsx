@@ -1,11 +1,10 @@
 import {getTheme_v2} from '@sanity/ui/theme'
-import {cloneElement, forwardRef} from 'react'
+import {Children, cloneElement, forwardRef, isValidElement, useMemo} from 'react'
 import {styled, css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
 import {rem, _responsive, ThemeProps} from '../../styles'
 import {AvatarSize} from '../../types'
-import {childrenToElementArray} from '../helpers'
 import {AvatarCounter} from './avatarCounter'
 
 const BASE_STYLES = css`
@@ -66,9 +65,10 @@ export const AvatarStack = forwardRef(function AvatarStack(
     size: sizeProp = 1,
     ...restProps
   } = props
-  const children = childrenToElementArray(childrenProp).filter(
-    (child) => typeof child !== 'string',
-  ) as React.ReactElement[]
+  const children = useMemo<React.ReactElement[]>(
+    () => Children.toArray(childrenProp).filter(isValidElement),
+    [childrenProp],
+  )
   const maxLength = Math.max(maxLengthProp, 0)
   const size = useArrayProp(sizeProp)
 

@@ -30,13 +30,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
 
   useClickOutside(collapse, [expandElement, popoverElement])
 
-  const rawItems = useMemo(
-    () =>
-      Children.toArray(children).filter((child) => {
-        return isValidElement(child)
-      }),
-    [children],
-  )
+  const rawItems = useMemo(() => Children.toArray(children).filter(isValidElement), [children])
 
   const items = useMemo(() => {
     const len = rawItems.length
