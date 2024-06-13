@@ -11,6 +11,7 @@ import {useMenuController} from './useMenuController'
  * @public
  */
 export interface MenuProps extends ResponsivePaddingProps {
+  'aria-labelledby'?: string
   /**
    * @deprecated Use `shouldFocus="first"` instead.
    */
@@ -20,6 +21,7 @@ export interface MenuProps extends ResponsivePaddingProps {
    */
   focusLast?: boolean
   onClickOutside?: (event: MouseEvent) => void
+  onBlurCapture?: (event: React.FocusEvent<HTMLButtonElement>) => void
   onEscape?: () => void
   onItemClick?: () => void
   onItemSelect?: (index: number) => void

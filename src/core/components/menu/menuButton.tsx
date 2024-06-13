@@ -203,8 +203,9 @@ export const MenuButton = forwardRef(function MenuButton(
     }
   }, [])
 
-  const menuProps: MenuProps = useMemo(
-    () => ({
+  const menu =
+    menuProp &&
+    cloneElement<MenuProps>(menuProp, {
       'aria-labelledby': id,
       onBlurCapture: handleBlur,
       onClickOutside: handleMenuClickOutside,
@@ -213,22 +214,8 @@ export const MenuButton = forwardRef(function MenuButton(
       originElement: buttonElement,
       registerElement,
       shouldFocus,
-    }),
-    [
-      buttonElement,
-      handleMenuClickOutside,
-      handleMenuEscape,
-      handleItemClick,
-      id,
-      handleBlur,
-      registerElement,
-      shouldFocus,
-    ],
-  )
+    })
 
-  const menu = menuProp && cloneElement(menuProp, menuProps)
-
-  const ref = useRef<HTMLButtonElement | null>(null)
   const button = useMemo(
     () =>
       buttonProp &&
@@ -240,7 +227,7 @@ export const MenuButton = forwardRef(function MenuButton(
         onMouseDown: handleMouseDown,
         'aria-haspopup': true,
         'aria-expanded': open,
-        ref: ref,
+        ref: setButtonElement,
         selected: buttonProp.props.selected ?? open,
       }),
     [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open],
@@ -249,18 +236,9 @@ export const MenuButton = forwardRef(function MenuButton(
   // Forward button ref to parent
   useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
     forwardedRef,
-    () => ref.current,
+    () => buttonElement,
+    [buttonElement],
   )
-
-  // If there's a button then we need to set the reference element to the cloned button ref
-  // and if button changes we make sure to update or remove the reference element.
-  useEffect(() => {
-    if (!button) return undefined
-
-    setButtonElement(ref.current)
-
-    return () => setButtonElement(null)
-  }, [button])
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
     () => ({
@@ -285,8 +263,15 @@ export const MenuButton = forwardRef(function MenuButton(
   )
 
   return (
-    <Popover data-ui="MenuButton__popover" {...popoverProps} content={menu} open={open}>
-      {button || <></>}
-    </Popover>
+    <>
+      <Popover
+        data-ui="MenuButton__popover"
+        referenceElement={buttonElement}
+        {...popoverProps}
+        content={menu}
+        open={open}
+      />
+      {button}
+    </>
   )
 })
