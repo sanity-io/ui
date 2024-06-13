@@ -17,6 +17,8 @@ const loadingAnimation = keyframes`
   } 
 `
 
+const LOADING_BAR_HEIGHT = 2
+
 export function rootStyles(
   props: {$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps,
 ): ReturnType<typeof css> {
@@ -39,15 +41,16 @@ export function rootStyles(
     position: relative;
     overflow: hidden;
     overflow: clip;
-    padding-bottom: 3px;
+    padding-bottom: ${LOADING_BAR_HEIGHT}px;
     &::before {
       content: '';
       position: absolute;
       bottom: 0px;
-      height: 3px;
+      height: ${LOADING_BAR_HEIGHT}px;
       background: ${loadingBarColor};
       animation-name: ${loadingAnimation};
       animation-duration: ${props.$duration}ms;
+      animation-fill-mode: both;
     }
 
     & > * {
