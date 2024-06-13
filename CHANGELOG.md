@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.5](https://github.com/sanity-io/ui/compare/v2.3.4...v2.3.5) (2024-06-13)
+
+### Bug Fixes
+
+- react 19 compat issues with children prop ([#1349](https://github.com/sanity-io/ui/issues/1349)) ([98cdd3f](https://github.com/sanity-io/ui/commit/98cdd3f9c986f9b2a7cc70cdbee42d17705868f5))
+
 ## [2.3.4](https://github.com/sanity-io/ui/compare/v2.3.3...v2.3.4) (2024-06-13)
 
 ### Bug Fixes
