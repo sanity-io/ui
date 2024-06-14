@@ -14,6 +14,7 @@ import {AnimatePresence} from 'framer-motion'
 import {
   MutableRefObject,
   RefCallback,
+  cloneElement,
   forwardRef,
   memo,
   useCallback,
@@ -133,7 +134,7 @@ export const Popover = memo(
       animate: _animate = false,
       arrow: arrowProp = false,
       boundaryElement: _boundaryElement,
-      children,
+      children: _children,
       constrainSize = false,
       content,
       disabled,
@@ -366,12 +367,23 @@ export const Popover = memo(
     useImperativeHandle(updateRef, () => update, [update])
 
     useEffect(() => {
-      if (children) return
+      if (_children) return
       refs.setReference(referenceElement || null)
-    }, [children, referenceElement, refs])
+    }, [_children, referenceElement, refs])
+
+    const children = useMemo(() => {
+      if (!_children || referenceElement) return null
+
+      return cloneElement(_children, {
+        ref: (node: HTMLDivElement | null): void => {
+          logDeprecatedWarning()
+          refs.setReference(node)
+        },
+      })
+    }, [_children, referenceElement, refs])
 
     if (disabled) {
-      return children || <></>
+      return _children || <></>
     }
 
     const popover = (
@@ -426,18 +438,8 @@ export const Popover = memo(
           )}
         </ConditionalWrapper>
 
-        {/* the referred element */}
-        {children && !referenceElement && (
-          <div
-            ref={(node) => {
-              logDeprecatedWarning()
-              refs.setReference(node)
-            }}
-            style={{display: 'contents'}}
-          >
-            {children}
-          </div>
-        )}
+        {/* the referred element (legacy, use referenceElement instead) */}
+        {children}
       </>
     )
   }),
