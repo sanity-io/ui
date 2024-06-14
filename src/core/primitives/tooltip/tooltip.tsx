@@ -357,6 +357,10 @@ export const Tooltip = forwardRef(function Tooltip(
   )
 
   const childRef = useRef<HTMLElement | null>(null)
+
+  // Merge refs so that any ref we are overriding is called as well
+  useImperativeHandle((childProp as any)?.ref, () => childRef.current)
+
   const child = useMemo(() => {
     if (!childProp) return null
 
