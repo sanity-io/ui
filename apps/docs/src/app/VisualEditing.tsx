@@ -1,8 +1,8 @@
 'use client'
 
 import {createClient} from '@sanity/client'
-import {enableOverlays, HistoryAdapterNavigate} from '@sanity/overlays'
 import {useLiveMode} from '@sanity/react-loader/rsc'
+import {enableVisualEditing, HistoryAdapterNavigate} from '@sanity/visual-editing'
 import {usePathname, useRouter, useSearchParams} from 'next/navigation'
 import {useEffect, useMemo, useRef, useState} from 'react'
 
@@ -31,7 +31,7 @@ export function VisualEditing(props: {dataset: string; projectId: string}) {
   }, [router])
 
   useEffect(() => {
-    const disable = enableOverlays({
+    return enableVisualEditing({
       history: {
         subscribe: (navigate) => {
           setNavigate(() => navigate)
@@ -52,7 +52,6 @@ export function VisualEditing(props: {dataset: string; projectId: string}) {
         },
       },
     })
-    return () => disable()
   }, [])
 
   useEffect(() => {
