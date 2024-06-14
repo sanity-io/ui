@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.6](https://github.com/sanity-io/ui/compare/v2.3.5...v2.3.6) (2024-06-14)
+
+### Bug Fixes
+
+- forward child refs to fix regression in [#1343](https://github.com/sanity-io/ui/issues/1343) ([#1350](https://github.com/sanity-io/ui/issues/1350)) ([cab318e](https://github.com/sanity-io/ui/commit/cab318eac9ee9d3036db56eb972442e10fe877b0))
+
 ## [2.3.5](https://github.com/sanity-io/ui/compare/v2.3.4...v2.3.5) (2024-06-13)
 
 ### Bug Fixes
