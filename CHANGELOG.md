@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.0](https://github.com/sanity-io/ui/compare/v2.3.6...v2.4.0) (2024-06-17)
+
+### Features
+
+- add loading bar to toast ([#1346](https://github.com/sanity-io/ui/issues/1346)) ([06f9107](https://github.com/sanity-io/ui/commit/06f910756e8d25d8ea0e175ac6023fc3f27cfcb0))
+
 ## [2.3.6](https://github.com/sanity-io/ui/compare/v2.3.5...v2.3.6) (2024-06-14)
 
 ### Bug Fixes
