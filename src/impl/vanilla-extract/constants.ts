@@ -1,0 +1,6 @@
+export const MEDIA_1 = 'screen and (min-width: 360px)'
+export const MEDIA_2 = 'screen and (min-width: 600px)'
+export const MEDIA_3 = 'screen and (min-width: 900px)'
+export const MEDIA_4 = 'screen and (min-width: 1200px)'
+export const MEDIA_5 = 'screen and (min-width: 1800px)'
+export const MEDIA_6 = 'screen and (min-width: 2400px)'
