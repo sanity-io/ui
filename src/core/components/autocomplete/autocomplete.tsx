@@ -61,6 +61,8 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   onSelect?: (value: string) => void
   /** @beta */
   openButton?: boolean | AutocompleteOpenButtonProps
+  /** @beta */
+  openOnFocus?: boolean
   /** The options to render. */
   options?: Option[]
   padding?: number | number[]
@@ -138,6 +140,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     onQueryChange,
     onSelect,
     openButton,
+    openOnFocus,
     options: optionsProp,
     padding: paddingProp = 3,
     popover = EMPTY_RECORD,
@@ -354,15 +357,23 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     [onQueryChange],
   )
 
+  const handleDispatchOpen = useCallback(() => {
+    dispatch({
+      type: 'root/open',
+      query: value ? renderValue(value, currentOption) : '',
+    })
+  }, [currentOption, renderValue, value])
+
   const handleInputFocus = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
       if (!focused) {
         dispatch({type: 'input/focus'})
 
         if (onFocus) onFocus(event)
+        if (openOnFocus) handleDispatchOpen()
       }
     },
-    [focused, onFocus],
+    [focused, onFocus, openOnFocus, handleDispatchOpen],
   )
 
   const handlePopoverMouseEnter = useCallback(() => {
@@ -467,16 +478,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const handleOpenClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      dispatch({
-        type: 'root/open',
-        query: value ? renderValue(value, currentOption) : '',
-      })
+      handleDispatchOpen()
 
       if (openButtonProps.onClick) openButtonProps.onClick(event)
 
       _raf(() => inputElementRef.current?.focus())
     },
-    [currentOption, openButtonProps, renderValue, value],
+    [openButtonProps, handleDispatchOpen],
   )
 
   const openButtonNode = useMemo(
