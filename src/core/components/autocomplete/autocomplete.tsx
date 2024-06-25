@@ -357,7 +357,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     [onQueryChange],
   )
 
-  const handleDispatchOpen = useCallback(() => {
+  const dispatchOpen = useCallback(() => {
     dispatch({
       type: 'root/open',
       query: value ? renderValue(value, currentOption) : '',
@@ -370,10 +370,10 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         dispatch({type: 'input/focus'})
 
         if (onFocus) onFocus(event)
-        if (openOnFocus) handleDispatchOpen()
+        if (openOnFocus) dispatchOpen()
       }
     },
-    [focused, onFocus, openOnFocus, handleDispatchOpen],
+    [focused, onFocus, openOnFocus, dispatchOpen],
   )
 
   const handlePopoverMouseEnter = useCallback(() => {
@@ -478,13 +478,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const handleOpenClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      handleDispatchOpen()
+      dispatchOpen()
 
       if (openButtonProps.onClick) openButtonProps.onClick(event)
 
       _raf(() => inputElementRef.current?.focus())
     },
-    [openButtonProps, handleDispatchOpen],
+    [openButtonProps, dispatchOpen],
   )
 
   const openButtonNode = useMemo(
