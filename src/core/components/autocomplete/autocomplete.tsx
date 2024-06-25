@@ -13,13 +13,14 @@ import {
   forwardRef,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useReducer,
   useRef,
 } from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {useArrayProp, useForwardedRef} from '../../hooks'
+import {useArrayProp} from '../../hooks'
 import {
   Box,
   BoxProps,
@@ -60,6 +61,8 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   onSelect?: (value: string) => void
   /** @beta */
   openButton?: boolean | AutocompleteOpenButtonProps
+  /** @beta */
+  openOnFocus?: boolean
   /** The options to render. */
   options?: Option[]
   padding?: number | number[]
@@ -119,7 +122,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'type'
       | 'value'
     >,
-  ref: Ref<HTMLInputElement>,
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     border = true,
@@ -137,6 +140,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     onQueryChange,
     onSelect,
     openButton,
+    openOnFocus,
     options: optionsProp,
     padding: paddingProp = 3,
     popover = EMPTY_RECORD,
@@ -191,7 +195,11 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const valuePropRef = useRef(valueProp)
   const popoverMouseWithinRef = useRef(false)
 
-  const forwardedRef = useForwardedRef(ref)
+  // Forward ref to parent
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
+    forwardedRef,
+    () => inputElementRef.current,
+  )
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
@@ -349,15 +357,23 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     [onQueryChange],
   )
 
+  const dispatchOpen = useCallback(() => {
+    dispatch({
+      type: 'root/open',
+      query: value ? renderValue(value, currentOption) : '',
+    })
+  }, [currentOption, renderValue, value])
+
   const handleInputFocus = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
       if (!focused) {
         dispatch({type: 'input/focus'})
 
         if (onFocus) onFocus(event)
+        if (openOnFocus) dispatchOpen()
       }
     },
-    [focused, onFocus],
+    [focused, onFocus, openOnFocus, dispatchOpen],
   )
 
   const handlePopoverMouseEnter = useCallback(() => {
@@ -432,14 +448,6 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     }
   }, [activeValue, filteredOptions])
 
-  const setRef = useCallback(
-    (el: HTMLInputElement | null) => {
-      inputElementRef.current = el
-      forwardedRef.current = el
-    },
-    [forwardedRef],
-  )
-
   const clearButton = useMemo(() => {
     if (!loading && !disabled && value) {
       return {
@@ -470,16 +478,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const handleOpenClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      dispatch({
-        type: 'root/open',
-        query: value ? renderValue(value, currentOption) : '',
-      })
+      dispatchOpen()
 
       if (openButtonProps.onClick) openButtonProps.onClick(event)
 
       _raf(() => inputElementRef.current?.focus())
     },
-    [currentOption, openButtonProps, renderValue, value],
+    [openButtonProps, dispatchOpen],
   )
 
   const openButtonNode = useMemo(
@@ -549,7 +554,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       prefix={prefix}
       radius={radius}
       readOnly={readOnly}
-      ref={setRef}
+      ref={inputElementRef}
       role="combobox"
       spellCheck={false}
       suffix={suffix || openButtonNode}

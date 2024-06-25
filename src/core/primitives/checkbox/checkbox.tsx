@@ -1,7 +1,7 @@
 import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
-import {forwardRef, useEffect} from 'react'
+import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useForwardedRef, useCustomValidity} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 
 /**
@@ -34,16 +34,21 @@ export const Checkbox = forwardRef(function Checkbox(
     style,
     ...restProps
   } = props
-  const ref = useForwardedRef(forwardedRef)
+  const ref = useRef<HTMLInputElement | null>(null)
 
-  useCustomValidity(ref, customValidity)
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   useEffect(() => {
     if (ref.current) {
       // Set the indeterminate state
       ref.current.indeterminate = indeterminate || false
     }
-  }, [indeterminate, ref])
+  }, [indeterminate])
+
+  useCustomValidity(ref, customValidity)
 
   return (
     <Root className={className} data-ui="Checkbox" style={style}>

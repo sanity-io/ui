@@ -1,5 +1,13 @@
-import {forwardRef, memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
-import {useForwardedRef} from '../../hooks'
+import {
+  forwardRef,
+  memo,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {Stack} from '../../primitives'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './treeContext'
@@ -21,16 +29,21 @@ export const Tree = memo(
   forwardRef(function Tree(
     props: TreeProps &
       Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-    ref: React.ForwardedRef<HTMLDivElement>,
+    forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
     const {children, space = 1, onFocus, ...restProps} = props
-    const forwardedRef = useForwardedRef(ref)
+    const ref = useRef<HTMLDivElement | null>(null)
     const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
     const focusedElementRef = useRef(focusedElement)
     const path: string[] = useMemo(() => [], [])
     const [itemElements, setItemElements] = useState<HTMLElement[]>([])
     const [state, setState] = useState<TreeState>({})
     const stateRef = useRef(state)
+
+    useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
+      forwardedRef,
+      () => ref.current,
+    )
 
     useEffect(() => {
       focusedElementRef.current = focusedElement
@@ -194,13 +207,13 @@ export const Tree = memo(
     )
 
     useEffect(() => {
-      if (!forwardedRef.current) return
+      if (!ref.current) return
       const _itemElements = Array.from(
-        forwardedRef.current.querySelectorAll('[data-ui="TreeItem"]'),
+        ref.current.querySelectorAll('[data-ui="TreeItem"]'),
       ) as HTMLElement[]
 
       setItemElements(_itemElements)
-    }, [children, forwardedRef])
+    }, [children])
 
     return (
       <TreeContext.Provider value={contextValue}>
@@ -210,7 +223,7 @@ export const Tree = memo(
           {...restProps}
           onFocus={handleFocus}
           onKeyDown={handleKeyDown}
-          ref={forwardedRef}
+          ref={ref}
           role="tree"
           space={space}
         >

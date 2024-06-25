@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
+import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 import {
   containsOrEqualsElement,
@@ -8,13 +8,7 @@ import {
   focusLastDescendant,
   isHTMLElement,
 } from '../../helpers'
-import {
-  useArrayProp,
-  useClickOutside,
-  useForwardedRef,
-  useGlobalKeyDown,
-  usePrefersReducedMotion,
-} from '../../hooks'
+import {useArrayProp, useClickOutside, useGlobalKeyDown, usePrefersReducedMotion} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
@@ -151,13 +145,13 @@ const DialogFooter = styled(Box)`
 
 const DialogCard = forwardRef(function DialogCard(
   props: DialogCardProps,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     __unstable_autoFocus: autoFocus,
     __unstable_hideCloseButton: hideCloseButton,
     children,
-    contentRef,
+    contentRef: forwardedContentRef,
     footer,
     header,
     id,
@@ -175,23 +169,29 @@ const DialogCard = forwardRef(function DialogCard(
   const radius = useArrayProp(radiusProp)
   const shadow = useArrayProp(shadowProp)
   const width = useArrayProp(widthProp)
-  const forwardedRef = useForwardedRef(ref)
+  const ref = useRef<HTMLDivElement | null>(null)
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const localContentRef = useRef<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
   const layer = useLayer()
   const {isTopLayer} = layer
   const labelId = `${id}_label`
   const showCloseButton = Boolean(onClose) && hideCloseButton === false
   const showHeader = Boolean(header) || showCloseButton
 
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
+    forwardedContentRef,
+    () => contentRef.current,
+  )
+
   useEffect(() => {
     if (!autoFocus) return
 
     // On mount: focus the first focusable element
-    if (forwardedRef.current) {
-      focusFirstDescendant(forwardedRef.current)
+    if (ref.current) {
+      focusFirstDescendant(ref.current)
     }
-  }, [autoFocus, forwardedRef])
+  }, [autoFocus, ref])
 
   useGlobalKeyDown(
     useCallback(
@@ -234,22 +234,10 @@ const DialogCard = forwardRef(function DialogCard(
     [rootElement],
   )
 
-  const setRef = useCallback(
-    (el: HTMLDivElement | null) => {
-      setRootElement(el)
-      forwardedRef.current = el
-    },
-    [forwardedRef],
-  )
-
-  const setContentRef = useCallback(
-    (el: HTMLDivElement | null) => {
-      localContentRef.current = el
-      if (typeof contentRef === 'function') contentRef(el)
-      else if (contentRef) contentRef.current = el
-    },
-    [contentRef],
-  )
+  const setRef = useCallback((el: HTMLDivElement | null) => {
+    setRootElement(el)
+    ref.current = el
+  }, [])
 
   return (
     <DialogContainer data-ui="DialogCard" width={width}>
@@ -281,7 +269,7 @@ const DialogCard = forwardRef(function DialogCard(
             </DialogHeader>
           )}
 
-          <DialogContent flex={1} ref={setContentRef} tabIndex={-1}>
+          <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
             {children}
           </DialogContent>
 

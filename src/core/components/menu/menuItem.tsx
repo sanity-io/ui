@@ -1,14 +1,15 @@
 import {
-  createElement,
   forwardRef,
   isValidElement,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
-import {useArrayProp, useForwardedRef} from '../../hooks'
+import {useArrayProp} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
@@ -47,8 +48,8 @@ export const MenuItem = forwardRef(function MenuItem(
     disabled,
     fontSize = 1,
     hotkeys,
-    icon,
-    iconRight,
+    icon: IconComponent,
+    iconRight: IconRightComponent,
     onClick,
     padding = 3,
     paddingX,
@@ -76,10 +77,11 @@ export const MenuItem = forwardRef(function MenuItem(
   } = menu
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   useEffect(() => mount(rootElement, selectedProp), [mount, rootElement, selectedProp])
-
-  const ref = useForwardedRef(forwardedRef)
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
@@ -105,13 +107,10 @@ export const MenuItem = forwardRef(function MenuItem(
 
   const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
 
-  const setRef = useCallback(
-    (el: HTMLDivElement | null) => {
-      ref.current = el
-      setRootElement(el)
-    },
-    [ref],
-  )
+  const setRef = useCallback((el: HTMLDivElement | null) => {
+    ref.current = el
+    setRootElement(el)
+  }, [])
 
   return (
     <Selectable
@@ -135,12 +134,12 @@ export const MenuItem = forwardRef(function MenuItem(
       tabIndex={-1}
       type={as === 'button' ? 'button' : undefined}
     >
-      {(icon || text || iconRight) && (
+      {(IconComponent || text || IconRightComponent) && (
         <Flex as="span" gap={space} align="center" {...paddingProps}>
-          {icon && (
+          {IconComponent && (
             <Text size={fontSize}>
-              {isValidElement(icon) && icon}
-              {isValidElementType(icon) && createElement(icon)}
+              {isValidElement(IconComponent) && IconComponent}
+              {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
           )}
 
@@ -160,10 +159,10 @@ export const MenuItem = forwardRef(function MenuItem(
             />
           )}
 
-          {iconRight && (
+          {IconRightComponent && (
             <Text size={fontSize}>
-              {isValidElement(iconRight) && iconRight}
-              {isValidElementType(iconRight) && createElement(iconRight)}
+              {isValidElement(IconRightComponent) && IconRightComponent}
+              {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
           )}
         </Flex>

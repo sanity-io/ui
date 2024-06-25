@@ -7,6 +7,7 @@ describe('useDelayedState', () => {
   it('should update state immediately if delay is not provided', () => {
     const {result} = renderHook(() => useDelayedState(false))
     const [, setState] = result.current
+
     act(() => {
       setState(true)
     })

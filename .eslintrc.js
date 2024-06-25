@@ -30,6 +30,7 @@ module.exports = {
     'jsx-a11y',
     'react',
     'react-hooks',
+    'react-compiler',
     '@typescript-eslint',
     'prettier',
   ],
@@ -87,8 +88,9 @@ module.exports = {
       {blankLine: 'always', prev: '*', next: 'return'},
     ],
     'react/prop-types': 'off',
-    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-compiler/react-compiler': 'warn', // Set to error once existing warnings are fixed
     'react/no-unescaped-entities': 'off',
     'no-restricted-imports': [
       'error',
@@ -103,6 +105,15 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    // Ignore Storybook stories and test files for the react compiler
+    {
+      files: [`**/*.stories.{js,ts,tsx}`, '**/*.test.{js,ts,tsx}'],
+      rules: {
+        'react-compiler/react-compiler': 'off',
+      },
+    },
+  ],
   settings: {
     'boundaries/elements': [
       {

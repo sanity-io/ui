@@ -49,7 +49,7 @@ export function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<ty
 }
 
 export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
-  const {$checkered, $focusRing} = props
+  const {$checkered, $focusRing, $muted} = props
   const {card, color, style} = getTheme_v2(props.theme)
   const border = {width: card.border.width, color: 'var(--card-border-color)'}
 
@@ -58,7 +58,7 @@ export function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<t
 
     ${_cardColorStyle(color, color, $checkered)}
 
-    background-color: var(--card-bg-color);
+    background-color: ${$muted ? 'var(--card-muted-bg-color)' : 'var(--card-bg-color)'};
     color: var(--card-fg-color);
 
     /* &:is(button) */

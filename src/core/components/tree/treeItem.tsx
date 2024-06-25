@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {createElement, memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
+import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import {styled} from 'styled-components'
 import {Box, BoxProps, Flex, Text} from '../../primitives'
 import {
@@ -52,7 +52,7 @@ export const TreeItem = memo(function TreeItem(
     expanded: expandedProp = false,
     fontSize = 1,
     href,
-    icon,
+    icon: IconComponent,
     id: idProp,
     linkAs,
     muted,
@@ -121,14 +121,17 @@ export const TreeItem = memo(function TreeItem(
     <Flex padding={padding}>
       <Box
         marginRight={space}
-        style={{visibility: icon || children ? 'visible' : 'hidden', pointerEvents: 'none'}}
+        style={{
+          visibility: IconComponent || children ? 'visible' : 'hidden',
+          pointerEvents: 'none',
+        }}
       >
-        {icon && (
+        {IconComponent && (
           <Text muted={muted} size={fontSize} weight={weight}>
-            {createElement(icon)}
+            <IconComponent />
           </Text>
         )}
-        {!icon && (
+        {!IconComponent && (
           <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
           </ToggleArrowText>

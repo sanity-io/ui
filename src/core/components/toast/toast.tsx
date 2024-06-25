@@ -1,9 +1,10 @@
 import {CloseIcon} from '@sanity/icons'
-import {ThemeColorToneKey} from '@sanity/ui/theme'
+import {ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {styled} from 'styled-components'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
-import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
+import {Box, Button, Flex, Stack, Text, Card} from '../../primitives'
+import {ThemeProps} from '../../styles'
 import type {ButtonTone} from '../../types'
+import {rootStyles, TextBox} from './styles'
 
 /**
  * @public
@@ -15,9 +16,10 @@ export interface ToastProps {
   radius?: number | number[]
   title?: React.ReactNode
   status?: 'error' | 'warning' | 'success' | 'info'
+  duration?: number
 }
 
-const STATUS_CARD_TONE: {[key: string]: ThemeColorToneKey} = {
+const STATUS_CARD_TONE: {[key: string]: ThemeColorStateToneKey} = {
   error: 'critical',
   warning: 'caution',
   success: 'positive',
@@ -38,17 +40,9 @@ const ROLES = {
   info: 'alert',
 } as const
 
-const Root = styled(Card)`
-  pointer-events: all;
-  & > * {
-    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
-    will-change: opacity;
-  }
-`
-
-const TextBox = styled(Flex)`
-  overflow-x: auto;
-`
+const Root = styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps>(
+  rootStyles,
+)
 
 /**
  * The `Toast` component gives feedback to users when an action has taken place.
@@ -60,7 +54,7 @@ const TextBox = styled(Flex)`
 export function Toast(
   props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>,
 ): React.ReactElement {
-  const {closable, description, onClose, radius = 3, title, status, ...restProps} = props
+  const {closable, description, duration, onClose, radius = 3, title, status, ...restProps} = props
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const buttonTone = status ? BUTTON_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
@@ -74,6 +68,7 @@ export function Toast(
       radius={radius}
       shadow={2}
       tone={cardTone}
+      $duration={duration}
     >
       <Flex align="flex-start">
         <TextBox flex={1} padding={3}>

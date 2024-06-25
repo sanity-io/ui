@@ -12,6 +12,7 @@ export default function PropsStory() {
   const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div', 'Props')
   const border = useBoolean('Border', false, 'Props')
   const checkered = useBoolean('Checkered', false, 'Props')
+  const muted = useBoolean('Muted', false, 'Props')
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 0, 'Props')
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0, 'Props')
   const selected = useBoolean('Selected', false, 'Props')
@@ -24,6 +25,7 @@ export default function PropsStory() {
         __unstable_checkered={checkered}
         as={as}
         border={border}
+        muted={muted}
         onClick={useAction('onClick')}
         padding={padding}
         radius={radius}

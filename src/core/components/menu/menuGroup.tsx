@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import {createElement, isValidElement, useCallback, useEffect, useRef, useState} from 'react'
+import {isValidElement, useCallback, useEffect, useRef, useState} from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
@@ -35,7 +35,7 @@ export function MenuGroup(
     as = 'button',
     children,
     fontSize = 1,
-    icon,
+    icon: IconComponent,
     onClick,
     padding = 3,
     popover,
@@ -177,10 +177,10 @@ export function MenuGroup(
         type={as === 'button' ? 'button' : undefined}
       >
         <Flex gap={space} padding={padding}>
-          {icon && (
+          {IconComponent && (
             <Text size={fontSize}>
-              {isValidElement(icon) && icon}
-              {isValidElementType(icon) && createElement(icon)}
+              {isValidElement(IconComponent) && IconComponent}
+              {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
           )}
 

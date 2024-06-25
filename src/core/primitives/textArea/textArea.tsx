@@ -1,7 +1,7 @@
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
+import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useForwardedRef, useCustomValidity, useArrayProp} from '../../hooks'
+import {useCustomValidity, useArrayProp} from '../../hooks'
 import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
@@ -74,9 +74,14 @@ export const TextArea = forwardRef(function TextArea(
     ...restProps
   } = props
 
-  const ref = useForwardedRef(forwardedRef)
+  const ref = useRef<HTMLTextAreaElement | null>(null)
 
   const rootTheme = useRootTheme()
+
+  useImperativeHandle<HTMLTextAreaElement | null, HTMLTextAreaElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   useCustomValidity(ref, customValidity)
 
