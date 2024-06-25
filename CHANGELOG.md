@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.0](https://github.com/sanity-io/ui/compare/v2.4.0...v2.5.0) (2024-06-25)
+
+### Features
+
+- open on focus prop ([28086f4](https://github.com/sanity-io/ui/commit/28086f481e2499c28452bcf5979cefa4d9c7ece4))
+- rename func ([321b4d6](https://github.com/sanity-io/ui/commit/321b4d6fba7ff5828d32a239eaef4a00bae8a955))
+
 ## [2.4.0](https://github.com/sanity-io/ui/compare/v2.3.6...v2.4.0) (2024-06-17)
 
 ### Features
