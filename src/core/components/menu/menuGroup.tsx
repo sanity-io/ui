@@ -28,7 +28,7 @@ export interface MenuGroupProps {
  * @public
  */
 export function MenuGroup(
-  props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'tabIndex'> &
+  props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
     MenuGroupProps,
 ): React.ReactElement {
   const {
