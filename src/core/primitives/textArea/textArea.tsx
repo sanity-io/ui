@@ -21,6 +21,10 @@ import {ResponsiveRadiusProps} from '../types'
  * @public
  */
 export interface TextAreaProps extends ResponsiveRadiusProps {
+  /**
+   * @beta
+   */
+  __unstable_disableFocusRing?: boolean
   border?: boolean
   customValidity?: string
   fontSize?: number | number[]
@@ -66,6 +70,7 @@ export const TextArea = forwardRef(function TextArea(
     padding = 3,
     radius = 2,
     weight,
+    __unstable_disableFocusRing,
     ...restProps
   } = props
 
@@ -99,6 +104,7 @@ export const TextArea = forwardRef(function TextArea(
         />
         <Presentation
           $radius={useArrayProp(radius)}
+          $unstableDisableFocusRing={__unstable_disableFocusRing}
           $scheme={rootTheme.scheme}
           $tone={rootTheme.tone}
           data-border={border ? '' : undefined}
