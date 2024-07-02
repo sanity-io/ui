@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/sanity-io/ui/compare/v2.6.0...v2.6.1) (2024-07-02)
+
+### Bug Fixes
+
+- **menu:** override popover html attribute ([#1351](https://github.com/sanity-io/ui/issues/1351)) ([dc30bc4](https://github.com/sanity-io/ui/commit/dc30bc420a999cee2b5651512edf7ddabad59c32))
+
 ## [2.6.0](https://github.com/sanity-io/ui/compare/v2.5.0...v2.6.0) (2024-07-02)
 
 ### Features
