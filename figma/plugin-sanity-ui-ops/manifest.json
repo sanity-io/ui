@@ -1,5 +1,5 @@
 {
-  "name": "Sanity UI",
+  "name": "Sanity UI Ops",
   "id": "1308127102029904003",
   "api": "1.0.0",
   "main": "dist/index.js",
@@ -7,6 +7,7 @@
   "enableProposedApi": false,
   "editorType": ["figma"],
   "ui": "src/index.html",
+  "permissions": ["teamlibrary"],
   "networkAccess": {
     "allowedDomains": [
       "https://static.figma.com",

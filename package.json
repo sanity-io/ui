@@ -59,7 +59,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "dev": "run-p storybook:dev workshop:dev",
-    "figma:pkg:build": "cd figma && pnpm build",
+    "figma:pkg:build": "pnpm --filter \"figma-plugin-*\" build",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
     "pkg:build": "pkg build --strict",
@@ -200,12 +200,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "esm.sh": {
-    "bundle": false
-  },
   "pnpm": {
     "overrides": {
       "conventional-changelog-conventionalcommits": ">= 8.0.0"
     }
+  },
+  "esm.sh": {
+    "bundle": false
   }
 }
