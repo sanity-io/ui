@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="https://static.figma.com/api/figma-extension-api-0.0.1.css" />
+
+<button id="colors-scope">Scope colors</button>
+<button id="cancel">Cancel</button>
+
+<script>
+  document.getElementById('colors-scope').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'colors:scope'}}, '*')
+  }
+
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'cancel'}}, '*')
+  }
+</script>

@@ -253,6 +253,15 @@ importers:
         specifier: ^4.3.2
         version: 4.3.2(typescript@5.4.5)(vite@5.2.13(@types/node@20.12.7)(terser@5.30.3))
 
+  figma/plugin-sanity-ui:
+    devDependencies:
+      '@babel/plugin-transform-object-rest-spread':
+        specifier: ^7.24.7
+        version: 7.24.7(@babel/core@7.24.7)
+      '@figma/plugin-typings':
+        specifier: ^1.95.0
+        version: 1.97.0
+
   figma/plugin-sanity-ui-ops:
     devDependencies:
       '@babel/plugin-transform-object-rest-spread':
