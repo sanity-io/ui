@@ -1,9 +1,14 @@
 <link rel="stylesheet" href="https://static.figma.com/api/figma-extension-api-0.0.1.css" />
-
+<button id="colors-sync">Sync colors</button>
 <button id="colors-scope">Scope colors</button>
 <button id="cancel">Cancel</button>
 
+
 <script>
+  document.getElementById('colors-sync').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'colors:sync'}}, '*')
+  }
+
   document.getElementById('colors-scope').onclick = () => {
     parent.postMessage({pluginMessage: {type: 'colors:scope'}}, '*')
   }

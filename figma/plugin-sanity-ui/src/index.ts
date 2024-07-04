@@ -3,6 +3,7 @@
 /// <reference types="@figma/plugin-typings" />
 
 import {scopeColors} from './colors/scope'
+import {syncColors} from './colors/sync'
 
 async function runCommand(command: string) {
   // console.log('run', command)
@@ -13,6 +14,9 @@ async function runCommand(command: string) {
 
   if (command === 'colors:scope') {
     return scopeColors()
+  }
+  if (command === 'colors:sync') {
+    return syncColors()
   }
 }
 
