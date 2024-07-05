@@ -9,21 +9,32 @@ import {structureTool} from 'sanity/structure'
 import {schema} from '@/studio/schema'
 import {structure} from '@/studio/structure'
 
+const localStudioRuntime =
+  typeof window !== 'undefined' && window.location.origin === 'http://localhost:3333'
+const previewOrigin = localStudioRuntime ? 'http://localhost:3000' : ''
+
 const prodStudio = defineConfig<WorkspaceOptions>({
   basePath: '/production',
+  features: {
+    beta: {
+      treeArrayEditing: {
+        enabled: true,
+      },
+    },
+  },
   name: 'production',
   title: 'Sanity UI',
   projectId: 'mos42crl',
   dataset: 'production',
   plugins: [
-    codeInput(),
+    codeInput() as any,
     structureTool({structure}),
     presentationTool({
       previewUrl: {
-        preview: '/ui',
+        preview: `${previewOrigin}/ui`,
         draftMode: {
-          enable: '/ui/api/draft',
-          disable: '/ui/api/disable-draft',
+          enable: `${previewOrigin}/ui/api/draft`,
+          disable: `${previewOrigin}/ui/api/disable-draft`,
         },
       },
     }),
@@ -39,14 +50,14 @@ const devStudio = defineConfig<WorkspaceOptions>({
   projectId: 'mos42crl',
   dataset: 'development',
   plugins: [
-    codeInput(),
+    codeInput() as any,
     structureTool({structure}),
     presentationTool({
       previewUrl: {
-        preview: '/ui',
+        preview: `${previewOrigin}/ui`,
         draftMode: {
-          enable: '/ui/api/draft?dataset=development',
-          disable: '/ui/api/disable-draft',
+          enable: `${previewOrigin}/ui/api/draft?dataset=development`,
+          disable: `${previewOrigin}/ui/api/disable-draft`,
         },
       },
     }),
