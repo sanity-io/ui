@@ -7,9 +7,11 @@
   "author": "Sanity.io <hello@sanity.io>",
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "run-p next:dev sanity:dev",
     "format": "prettier --write --cache --ignore-unknown . && eslint . --ext .cjs,.js,.ts,.tsx --fix --quiet",
     "lint": "next lint",
+    "next:dev": "next dev",
+    "sanity:dev": "sanity dev",
     "start": "next start",
     "ts:check": "tsc --build"
   },
@@ -23,7 +25,6 @@
     "@sanity/icons": "^3.2.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/logos": "^2.1.12",
-
     "@sanity/preview-url-secret": "^1.6.17",
     "@sanity/react-loader": "^1.10.3",
     "@sanity/ui": "^2.3.5",
@@ -58,6 +59,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-simple-import-sort": "^12.1.0",
+    "npm-run-all": "^4.1.5",
     "prettier-plugin-packagejson": "^2.5.0",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
