@@ -21,7 +21,7 @@ export const StarIcon = forwardRef(function StarIcon(
       {...props}
     >
       <path
-        d="M13 4L15.2747 9.8691L21.5595 10.2188L16.6806 14.1959L18.2901 20.2812L13 16.87L7.70993 20.2812L9.31941 14.1959L4.44049 10.2188L10.7253 9.8691L13 4Z"
+        d="M12.5 5L14.522 10.217L20.1085 10.5279L15.7716 14.063L17.2023 19.4721L12.5 16.44L7.79772 19.4721L9.22837 14.063L4.89155 10.5279L10.478 10.217L12.5 5Z"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"

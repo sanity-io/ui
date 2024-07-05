@@ -21,7 +21,7 @@ export const ProjectsIcon = forwardRef(function ProjectsIcon(
       {...props}
     >
       <path
-        d="M21 17.5H14M17.5 14V21M4.5 14.5H10.5V20.5H4.5V14.5ZM14.5 4.5H20.5V10.5H14.5V4.5ZM4.5 4.5H10.5V10.5H4.5V4.5Z"
+        d="M21 17.5H14M17.5 14V21M5.5 14.5H10.5V19.5H5.5V14.5ZM14.5 5.5H19.5V10.5H14.5V5.5ZM5.5 5.5H10.5V10.5H5.5V5.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"

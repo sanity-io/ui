@@ -21,7 +21,7 @@ export const SelectIcon = forwardRef(function SelectIcon(
       {...props}
     >
       <path
-        d="M16.5 15.5L12.5 19.5L8.5 15.5M8.5 9.5L12.5 5.5L16.5 9.5"
+        d="M16 15L12.5 18.5L9 15M9 10L12.5 6.5L16 10"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"

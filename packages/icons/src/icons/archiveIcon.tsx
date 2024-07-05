@@ -21,7 +21,7 @@ export const ArchiveIcon = forwardRef(function ArchiveIcon(
       {...props}
     >
       <path
-        d="M12.5 10.5V17M20.5 7.5V20.5H4.5V7.5L7.5 4.5H17.5L20.5 7.5Z"
+        d="M12.5 10V17M20.5 7.5V20.5H4.5V7.5L7.5 4.5H17.5L20.5 7.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"
