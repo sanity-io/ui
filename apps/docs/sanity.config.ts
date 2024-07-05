@@ -9,6 +9,10 @@ import {structureTool} from 'sanity/structure'
 import {schema} from '@/studio/schema'
 import {structure} from '@/studio/structure'
 
+const localStudioRuntime =
+  typeof window !== 'undefined' && window.location.origin === 'http://localhost:3333'
+const previewOrigin = localStudioRuntime ? 'http://localhost:3000' : ''
+
 const prodStudio = defineConfig<WorkspaceOptions>({
   basePath: '/production',
   name: 'production',
@@ -20,10 +24,10 @@ const prodStudio = defineConfig<WorkspaceOptions>({
     structureTool({structure}),
     presentationTool({
       previewUrl: {
-        preview: '/ui',
+        preview: `${previewOrigin}/ui`,
         draftMode: {
-          enable: '/ui/api/draft',
-          disable: '/ui/api/disable-draft',
+          enable: `${previewOrigin}/ui/api/draft`,
+          disable: `${previewOrigin}/ui/api/disable-draft`,
         },
       },
     }),
@@ -43,10 +47,10 @@ const devStudio = defineConfig<WorkspaceOptions>({
     structureTool({structure}),
     presentationTool({
       previewUrl: {
-        preview: '/ui',
+        preview: `${previewOrigin}/ui`,
         draftMode: {
-          enable: '/ui/api/draft?dataset=development',
-          disable: '/ui/api/disable-draft',
+          enable: `${previewOrigin}/ui/api/draft?dataset=development`,
+          disable: `${previewOrigin}/ui/api/disable-draft`,
         },
       },
     }),
