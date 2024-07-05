@@ -15,12 +15,19 @@ const previewOrigin = localStudioRuntime ? 'http://localhost:3000' : ''
 
 const prodStudio = defineConfig<WorkspaceOptions>({
   basePath: '/production',
+  features: {
+    beta: {
+      treeArrayEditing: {
+        enabled: true,
+      },
+    },
+  },
   name: 'production',
   title: 'Sanity UI',
   projectId: 'mos42crl',
   dataset: 'production',
   plugins: [
-    codeInput(),
+    codeInput() as any,
     structureTool({structure}),
     presentationTool({
       previewUrl: {
@@ -43,7 +50,7 @@ const devStudio = defineConfig<WorkspaceOptions>({
   projectId: 'mos42crl',
   dataset: 'development',
   plugins: [
-    codeInput(),
+    codeInput() as any,
     structureTool({structure}),
     presentationTool({
       previewUrl: {
