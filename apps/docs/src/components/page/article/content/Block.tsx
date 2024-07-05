@@ -10,13 +10,24 @@ import {blocksToText} from '@/lib/blocksToText'
 import {SanityBlockValue} from '@/lib/sanity/types'
 
 import {ArticleHeadingsContext} from '../ArticleHeadingsContext'
+import {ListItem} from './ListItem'
 import {Paragraph} from './Paragraph'
+
+type BlockType = Omit<WrappedValue<SanityBlockValue>, 'level' | 'listItem'> & {
+  _listItem?: 'bullet' | 'number'
+  level?: number
+  listItem?: 'bullet' | 'number'
+}
 
 export const Block: PortableTextBlockComponent = (props) => {
   const {children, value} = props
-  const block = value as unknown as WrappedValue<SanityBlockValue>
+  const block = value as unknown as BlockType
   const style = unwrapData<string>(block.style)
   const headings = useContext(ArticleHeadingsContext)
+
+  if (block._listItem) {
+    return <ListItem>{children}</ListItem>
+  }
 
   if (style === 'normal') {
     return <Paragraph>{children}</Paragraph>

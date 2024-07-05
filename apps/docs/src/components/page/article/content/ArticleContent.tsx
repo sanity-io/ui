@@ -1,6 +1,7 @@
 import {PortableText, PortableTextReactComponents} from '@portabletext/react'
 import {GroqLogo, GroqMonogram, SanityLogo, SanityMonogram} from '@sanity/logos'
 import {WrappedValue} from '@sanity/react-loader/jsx'
+import {Box} from '@sanity/ui'
 import {ReactElement} from 'react'
 import styled from 'styled-components'
 
@@ -39,6 +40,33 @@ const Root = styled.div`
     margin-bottom: 0;
   }
 `
+
+const BulletList = styled(Box)`
+  & > li [data-ui='Text'] > span:before {
+    position: absolute;
+    content: '•';
+    width: 1em;
+    margin-left: -1.5em;
+    text-align: right;
+  }
+`
+
+const NumberedList = styled(Box)`
+  counter-reset: list;
+
+  & > li {
+    counter-increment: list;
+  }
+
+  & > li [data-ui='Text'] > span:before {
+    position: absolute;
+    content: counter(list) '.';
+    width: 1em;
+    margin-left: -1.5em;
+    text-align: right;
+  }
+`
+
 const groqLogos = [
   {name: 'GroqLogo', component: GroqLogo as any},
   {name: 'GroqMonogram', component: GroqMonogram},
@@ -51,6 +79,32 @@ const sanityLogos = [
 
 const components: Partial<PortableTextReactComponents> = {
   block: Block,
+
+  list: {
+    bullet: ({children}) => (
+      <BulletList forwardedAs="ul" marginY={[4, 4, 5]} paddingLeft={5}>
+        {children}
+      </BulletList>
+    ),
+    number: ({children}) => (
+      <NumberedList forwardedAs="ol" marginY={[4, 4, 5]} paddingLeft={5}>
+        {children}
+      </NumberedList>
+    ),
+  },
+
+  listItem: {
+    bullet: ({children}) => (
+      <Box as="li" marginY={[3, 3, 4]}>
+        {children}
+      </Box>
+    ),
+    number: ({children}) => (
+      <Box as="li" marginY={[3, 3, 4]}>
+        {children}
+      </Box>
+    ),
+  },
 
   types: {
     callout: ({value}) => <Callout data={value as WrappedValue<CalloutData>} />,
@@ -94,14 +148,22 @@ export function ArticleContent(props: {
    * of custom mark components via `components.marks`.
    */
   const contentWithChildMarkDefs = props.content.reduce<any[]>((acc, val) => {
-    const blockChildren =
-      val._type === 'block'
-        ? val.children?.map((child) => {
-            return {...child, markDefs: val?.markDefs}
-          })
-        : null
+    if (val._type === 'block') {
+      const blockChildren = val.children?.map((child) => {
+        return {...child, markDefs: val?.markDefs}
+      })
 
-    acc.push({...val, children: blockChildren})
+      acc.push({
+        ...val,
+        children: blockChildren,
+        level: val.level?.value,
+        listItem: val.listItem?.value,
+        _listItem: val.listItem?.value,
+      })
+    } else {
+      acc.push(val)
+    }
+
     return acc
   }, [])
 
