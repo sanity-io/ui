@@ -87,6 +87,7 @@ import {EarthGlobeIcon} from './earthGlobeIcon'
 import {EditIcon} from './editIcon'
 import {EllipsisHorizontalIcon} from './ellipsisHorizontalIcon'
 import {EllipsisVerticalIcon} from './ellipsisVerticalIcon'
+import {EmptyIcon} from './emptyIcon'
 import {EnterIcon} from './enterIcon'
 import {EnterRightIcon} from './enterRightIcon'
 import {EnvelopeIcon} from './envelopeIcon'
@@ -144,6 +145,8 @@ import {PinRemovedIcon} from './pinRemovedIcon'
 import {PlayIcon} from './playIcon'
 import {PlugIcon} from './plugIcon'
 import {PresentationIcon} from './presentationIcon'
+import {Progress50Icon} from './progress50Icon'
+import {Progress75Icon} from './progress75Icon'
 import {ProjectsIcon} from './projectsIcon'
 import {PublishIcon} from './publishIcon'
 import {ReadOnlyIcon} from './readOnlyIcon'
@@ -171,6 +174,7 @@ import {SplitVerticalIcon} from './splitVerticalIcon'
 import {SquareIcon} from './squareIcon'
 import {StackCompactIcon} from './stackCompactIcon'
 import {StackIcon} from './stackIcon'
+import {StarFilledIcon} from './starFilledIcon'
 import {StarIcon} from './starIcon'
 import {StopIcon} from './stopIcon'
 import {StrikethroughIcon} from './strikethroughIcon'
@@ -197,6 +201,7 @@ import {TrolleyIcon} from './trolleyIcon'
 import {TruncateIcon} from './truncateIcon'
 import {TwitterIcon} from './twitterIcon'
 import {UlistIcon} from './ulistIcon'
+import {UnarchiveIcon} from './unarchiveIcon'
 import {UnderlineIcon} from './underlineIcon'
 import {UndoIcon} from './undoIcon'
 import {UnknownIcon} from './unknownIcon'
@@ -297,6 +302,7 @@ export type IconSymbol =
   | 'edit'
   | 'ellipsis-horizontal'
   | 'ellipsis-vertical'
+  | 'empty'
   | 'enter'
   | 'enter-right'
   | 'envelope'
@@ -354,6 +360,8 @@ export type IconSymbol =
   | 'play'
   | 'plug'
   | 'presentation'
+  | 'progress-50'
+  | 'progress-75'
   | 'projects'
   | 'publish'
   | 'read-only'
@@ -381,6 +389,7 @@ export type IconSymbol =
   | 'square'
   | 'stack-compact'
   | 'stack'
+  | 'star-filled'
   | 'star'
   | 'stop'
   | 'strikethrough'
@@ -407,6 +416,7 @@ export type IconSymbol =
   | 'truncate'
   | 'twitter'
   | 'ulist'
+  | 'unarchive'
   | 'underline'
   | 'undo'
   | 'unknown'
@@ -504,6 +514,7 @@ export {
   EditIcon,
   EllipsisHorizontalIcon,
   EllipsisVerticalIcon,
+  EmptyIcon,
   EnterIcon,
   EnterRightIcon,
   EnvelopeIcon,
@@ -561,6 +572,8 @@ export {
   PlayIcon,
   PlugIcon,
   PresentationIcon,
+  Progress50Icon,
+  Progress75Icon,
   ProjectsIcon,
   PublishIcon,
   ReadOnlyIcon,
@@ -588,6 +601,7 @@ export {
   SquareIcon,
   StackCompactIcon,
   StackIcon,
+  StarFilledIcon,
   StarIcon,
   StopIcon,
   StrikethroughIcon,
@@ -614,6 +628,7 @@ export {
   TruncateIcon,
   TwitterIcon,
   UlistIcon,
+  UnarchiveIcon,
   UnderlineIcon,
   UndoIcon,
   UnknownIcon,
@@ -715,6 +730,7 @@ export interface IconMap {
   edit: IconComponent
   'ellipsis-horizontal': IconComponent
   'ellipsis-vertical': IconComponent
+  empty: IconComponent
   enter: IconComponent
   'enter-right': IconComponent
   envelope: IconComponent
@@ -772,6 +788,8 @@ export interface IconMap {
   play: IconComponent
   plug: IconComponent
   presentation: IconComponent
+  'progress-50': IconComponent
+  'progress-75': IconComponent
   projects: IconComponent
   publish: IconComponent
   'read-only': IconComponent
@@ -799,6 +817,7 @@ export interface IconMap {
   square: IconComponent
   'stack-compact': IconComponent
   stack: IconComponent
+  'star-filled': IconComponent
   star: IconComponent
   stop: IconComponent
   strikethrough: IconComponent
@@ -825,6 +844,7 @@ export interface IconMap {
   truncate: IconComponent
   twitter: IconComponent
   ulist: IconComponent
+  unarchive: IconComponent
   underline: IconComponent
   undo: IconComponent
   unknown: IconComponent
@@ -926,6 +946,7 @@ export const icons: IconMap = {
   edit: EditIcon,
   'ellipsis-horizontal': EllipsisHorizontalIcon,
   'ellipsis-vertical': EllipsisVerticalIcon,
+  empty: EmptyIcon,
   enter: EnterIcon,
   'enter-right': EnterRightIcon,
   envelope: EnvelopeIcon,
@@ -983,6 +1004,8 @@ export const icons: IconMap = {
   play: PlayIcon,
   plug: PlugIcon,
   presentation: PresentationIcon,
+  'progress-50': Progress50Icon,
+  'progress-75': Progress75Icon,
   projects: ProjectsIcon,
   publish: PublishIcon,
   'read-only': ReadOnlyIcon,
@@ -1010,6 +1033,7 @@ export const icons: IconMap = {
   square: SquareIcon,
   'stack-compact': StackCompactIcon,
   stack: StackIcon,
+  'star-filled': StarFilledIcon,
   star: StarIcon,
   stop: StopIcon,
   strikethrough: StrikethroughIcon,
@@ -1036,6 +1060,7 @@ export const icons: IconMap = {
   truncate: TruncateIcon,
   twitter: TwitterIcon,
   ulist: UlistIcon,
+  unarchive: UnarchiveIcon,
   underline: UnderlineIcon,
   undo: UndoIcon,
   unknown: UnknownIcon,
