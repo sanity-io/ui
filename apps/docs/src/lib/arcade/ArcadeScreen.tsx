@@ -34,7 +34,10 @@ export function ArcadeScreen(props: {title: string; description: string}): React
   // Create `saveFn` callback
   useEffect(() => {
     const saveFn = debounce((params: ArcadeQueryParams) => {
-      routerRef.current.replace(`/arcade?${compileSearch(getArcadeQuery(params))}`)
+      const href = `/arcade?${compileSearch(getArcadeQuery(params))}`
+      document.title = `${params.title ?? 'Arcade'} | Sanity UI`
+      window.history.replaceState({}, '', `/ui${href}`)
+      routerRef.current.replace(href, {scroll: false})
     }, 100)
 
     saveFnRef.current = saveFn
@@ -48,12 +51,12 @@ export function ArcadeScreen(props: {title: string; description: string}): React
 
     if (saveFn) {
       saveFn({
-        mode: state.codeMode,
-        jsx: state.jsxCode,
-        hook: state.hookCode,
-        title: state.meta.title,
-        description: state.meta.description,
-        width: state.canvasWidth,
+        mode: state.codeMode || undefined,
+        jsx: state.jsxCode || undefined,
+        hook: state.hookCode || undefined,
+        title: state.meta.title || undefined,
+        description: state.meta.description || undefined,
+        width: state.canvasWidth || undefined,
       })
     }
   }, [state])
