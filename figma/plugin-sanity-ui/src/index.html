@@ -1,14 +1,15 @@
-<link rel="stylesheet" href="https://static.figma.com/api/figma-extension-api-0.0.1.css" />
+<!-- <link rel="stylesheet" href="https://static.figma.com/api/figma-extension-api-0.0.1.css" /> -->
 
 <div class="buttons">
   <button id="colors-sync">Sync colors</button>
   <button id="colors-scope">Scope colors</button>
-  <button id="cancel">Cancel</button>
+  <!-- <button id="cancel">Cancel</button> -->
+
+  <div id="file-name-display"></div>
 </div>
 
-
-
 <script>
+
   document.getElementById('colors-sync').onclick = () => {
     parent.postMessage({pluginMessage: {type: 'colors:sync'}}, '*')
   }
@@ -17,15 +18,114 @@
     parent.postMessage({pluginMessage: {type: 'colors:scope'}}, '*')
   }
 
-  document.getElementById('cancel').onclick = () => {
-    parent.postMessage({pluginMessage: {type: 'cancel'}}, '*')
-  }
+  // document.getElementById('cancel').onclick = () => {
+  //   parent.postMessage({pluginMessage: {type: 'cancel'}}, '*')
+  // }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.onmessage = (event) => {
+      const message = event.data.pluginMessage;
+      if (message && message.type === 'load-data') {
+        // console.log('load-data', message.key.fileName);
+        document.getElementById('file-name-display').textContent = "Sycned with: " + message.key.fileName;
+      }
+    };
+  });
+
+  
+
 </script>
 
 <style>
+  :root {
+  --font-stack: 'Inter', sans-serif;
+  --font-mono: 'Courier New', Courier, Consolas, monaco, monospace;
+  --zindex-base: -1;
+  --zindex-1: 1;
+  --zindex-content: 50;
+  --zindex-modal-base: 80;
+  --zindex-modal: 90;
+  --zindex-top: 100;
+  --font-sm: 11px;
+  --font-sd: 12px;
+  --font-sd-lh: 16px;
+  --font-lg: 16px;
+  --font-xl: 22px;
+  --font-w-sd: 400;
+  --font-w-md: 500;
+  --font-w-bd: 600;
+  --font-ls-sm: 0.12px;
+  --radius-sd: 2px;
+  --radius-lg: 4px;
+  --size-md: 30px;
+  --pad-xs: 10px;
+  --pad-sm: 16px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    position: relative;
+  }
+
+  body {
+    padding: var(--pad-sm);
+    margin: 0;
+    font-family: var(--font-stack);
+    background: var(--figma-color-bg);
+    color: var(--figma-color-text);
+    font-size: var(--font-sd);
+    position: relative;
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--figma-color-border-selected);
+    outline-offset: 1px;
+    border-radius: 1px;
+    opacity: 1;
+  }
+  
+  a:active, button:active, input:active {
+    outline: none;
+  }
+  
   .buttons {
     display: flex;
     justify-content: center;
     gap: 8px;
   }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    color: var(--figma-color-text);
+    background: var(--figma-color-bg);
+    flex-shrink: 0;
+    font-family: var(--font-stack);
+    font-size: var(--font-sm);
+    font-weight: var(--font-w-md);
+    letter-spacing: var(--font-ls-sm);
+    line-height: 1;
+    height: var(--size-md);
+    padding: 0 calc(var(--pad-sm) - 2px) 0 calc(var(--pad-sm) - 2px);
+    text-decoration: none;
+    outline: none;
+    border: 1px solid var(--figma-color-border);
+    user-select: none;
+  }
+
+  button:hover {
+    background: var(--figma-color-bg-hover);
+  }
+
+  #file-name-display {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+  }
+
 </style>
