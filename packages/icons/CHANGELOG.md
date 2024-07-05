@@ -5,6 +5,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.0](https://github.com/sanity-io/icons/compare/v3.2.0...v3.3.0) (2024-07-05)
+
+### Features
+
+- add icons ([878f5f6](https://github.com/sanity-io/icons/commit/878f5f6b084639b0be0a368fe6e0f29fb732d8e3))
+
+### Bug Fixes
+
+- **build:** update pnpm ([526663b](https://github.com/sanity-io/icons/commit/526663bcbc832ea1c2c27f38a2cd9709cf91c668))
+- update icons ([4a8ac9b](https://github.com/sanity-io/icons/commit/4a8ac9b049d04620d4b34c99fa9acf877f782f1e))
+
 ## [3.2.0](https://github.com/sanity-io/icons/compare/v3.1.0...v3.2.0) (2024-06-06)
 
 ### Features
