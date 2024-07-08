@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.3](https://github.com/sanity-io/ui/compare/v2.6.2...v2.6.3) (2024-07-08)
+
+### Bug Fixes
+
+- **deps:** update dependency @sanity/icons to ^3.3.0 ([#1364](https://github.com/sanity-io/ui/issues/1364)) ([4bf02f5](https://github.com/sanity-io/ui/commit/4bf02f5495301f567bdace3e32d27bef61b00148))
+
 ## [2.6.2](https://github.com/sanity-io/ui/compare/v2.6.1...v2.6.2) (2024-07-08)
 
 ### Bug Fixes
