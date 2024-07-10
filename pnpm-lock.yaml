@@ -55,8 +55,8 @@ importers:
         specifier: ^6.10.3
         version: 6.10.3(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.5.3)
       '@sanity/semantic-release-preset':
-        specifier: ^4.1.8
-        version: 4.1.8(semantic-release@24.0.0(typescript@5.5.3))
+        specifier: ^5.0.0
+        version: 5.0.0(semantic-release@24.0.0(typescript@5.5.3))
       '@sanity/ui-workshop':
         specifier: ^2.0.15
         version: 2.0.15(@sanity/icons@3.3.0(react@18.3.1))(@sanity/ui@2.6.3(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.12.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.30.3)
@@ -2023,11 +2023,11 @@ packages:
     peerDependencies:
       typescript: 5.4.x || 5.5.x
 
-  '@sanity/semantic-release-preset@4.1.8':
-    resolution: {integrity: sha512-D9M2R7sDj3cMEIcCdvCMpFqr8yIAkFbpbMSE5m9LrPgnFl12sfaSeMCeFHM5/ArHsJVIcQIVsQFbP+c1m1a8vg==}
+  '@sanity/semantic-release-preset@5.0.0':
+    resolution: {integrity: sha512-2lCuU57OZW6WY7O8d4vjbpghQIc9lnxS9+dLnzrBYh8e6pA467DxlCNum4NgDeDyHxNh9HGXNalXEWJz8tec+A==}
     engines: {node: '>= 20.8'}
     peerDependencies:
-      semantic-release: ^22.0.12 || ^23.0.2 || ^24.0.0
+      semantic-release: ^24
 
   '@sanity/ui-workshop@2.0.15':
     resolution: {integrity: sha512-mlfD85OzEf35wZMMriX56S91Iu84oavbjAfj2Rs0xTCrkCuAzAmiaua0Szh+8+C9mnWSsqht3t7rn4SWjtQD6Q==}
@@ -10091,7 +10091,7 @@ snapshots:
       - '@types/node'
       - supports-color
 
-  '@sanity/semantic-release-preset@4.1.8(semantic-release@24.0.0(typescript@5.5.3))':
+  '@sanity/semantic-release-preset@5.0.0(semantic-release@24.0.0(typescript@5.5.3))':
     dependencies:
       '@semantic-release/changelog': 6.0.3(semantic-release@24.0.0(typescript@5.5.3))
       '@semantic-release/exec': 6.0.3(semantic-release@24.0.0(typescript@5.5.3))
