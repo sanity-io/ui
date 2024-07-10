@@ -87,6 +87,7 @@
       "prettier --write --cache --ignore-unknown"
     ]
   },
+  "prettier": "@sanity/prettier-config",
   "release": {
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
@@ -120,6 +121,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/pkg-utils": "^6.10.3",
+    "@sanity/prettier-config": "^1.0.2",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^2.0.15",
     "@storybook/addon-a11y": "^8.2.1",
@@ -171,7 +173,6 @@
     "module-alias": "^2.2.3",
     "npm-run-all2": "^5.0.2",
     "prettier": "^3.3.2",
-    "prettier-plugin-packagejson": "^2.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
@@ -199,12 +200,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "esm.sh": {
-    "bundle": false
-  },
   "pnpm": {
     "overrides": {
       "conventional-changelog-conventionalcommits": ">= 8.0.0"
     }
+  },
+  "esm.sh": {
+    "bundle": false
   }
 }

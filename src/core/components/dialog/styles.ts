@@ -18,14 +18,14 @@ export function dialogStyle({theme}: ThemeProps): CSSObject {
       display: 'flex',
     },
 
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    outline: 'none',
-    background: color.backdrop,
+    'top': 0,
+    'left': 0,
+    'right': 0,
+    'bottom': 0,
+    'alignItems': 'center',
+    'justifyContent': 'center',
+    'outline': 'none',
+    'background': color.backdrop,
   }
 }
 

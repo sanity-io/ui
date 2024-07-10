@@ -26,7 +26,7 @@ export const getButtonWidthControls = () => {
     options: ['(none)', 'fill'],
     mapping: {
       '(none)': '',
-      fill: 'fill',
+      'fill': 'fill',
     },
   } as const
 }
@@ -127,7 +127,7 @@ export const getTextOverflowControls = () => {
     control: 'radio',
     mapping: {
       '(none)': '',
-      ellipsis: 'ellipsis',
+      'ellipsis': 'ellipsis',
     },
     options: ['(none)', 'ellipsis'],
   } as const

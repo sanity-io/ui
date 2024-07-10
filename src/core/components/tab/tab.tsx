@@ -11,14 +11,14 @@ export interface TabProps {
    * The `id` of the correlating `TabPanel` component.
    */
   'aria-controls': string
-  id: string
-  icon?: React.ElementType | React.ReactNode
-  focused?: boolean
-  fontSize?: number | number[]
-  label?: React.ReactNode
-  padding?: number | number[]
-  selected?: boolean
-  tone?: ButtonTone
+  'id': string
+  'icon'?: React.ElementType | React.ReactNode
+  'focused'?: boolean
+  'fontSize'?: number | number[]
+  'label'?: React.ReactNode
+  'padding'?: number | number[]
+  'selected'?: boolean
+  'tone'?: ButtonTone
 }
 
 const CustomButton = styled(Button)`

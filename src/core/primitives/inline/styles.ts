@@ -4,7 +4,7 @@ import {ResponsiveInlineSpaceStyleProps} from './types'
 
 export function inlineBaseStyle(): CSSObject {
   return {
-    lineHeight: 0,
+    'lineHeight': 0,
 
     '&&:not([hidden])': {
       display: 'block',
@@ -24,7 +24,7 @@ export function inlineSpaceStyle(props: ResponsiveInlineSpaceStyleProps & ThemeP
     const _space = rem(spaceIndex === 0.5 ? space[1] / 2 : space[spaceIndex])
 
     return {
-      margin: `-${_space} 0 0 -${_space}`,
+      'margin': `-${_space} 0 0 -${_space}`,
       '& > div': {padding: `${_space} 0 0 ${_space}`},
     }
   })
