@@ -44,9 +44,9 @@ export const WORKSHOP_BUTTON_MODE_OPTIONS: {[key: string]: ButtonMode} = {
 
 export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS: {[key: string]: ButtonTextAlign | ''} = {
   '(none)': '',
-  'Left': 'left',
-  'Right': 'right',
-  'Center': 'center',
+  Left: 'left',
+  Right: 'right',
+  Center: 'center',
 }
 
 export const WORKSHOP_BUTTON_TONE_OPTIONS: {[key: string]: ButtonTone} = {
@@ -61,11 +61,11 @@ export const WORKSHOP_CARD_AS_OPTIONS: {
   [key: string]: 'div' | 'button' | 'span' | 'ol' | 'pre' | 'ul'
 } = {
   'DIV (default)': 'div',
-  'BUTTON': 'button',
-  'SPAN': 'span',
-  'OL': 'ol',
-  'PRE': 'pre',
-  'UL': 'ul',
+  BUTTON: 'button',
+  SPAN: 'span',
+  OL: 'ol',
+  PRE: 'pre',
+  UL: 'ul',
 }
 
 export const WORKSHOP_CARD_TONE_OPTIONS: {[key: string]: CardTone} = {
@@ -92,7 +92,7 @@ export const WORKSHOP_CONTAINER_WIDTH_OPTIONS: {[key: string]: number | 'auto'} 
   '3': 3,
   '4': 4,
   '5': 5,
-  'auto': 'auto',
+  auto: 'auto',
 }
 
 export const WORKSHOP_DIALOG_POSITION_OPTIONS: {[key: string]: DialogPosition} = {
@@ -106,15 +106,15 @@ export const WORKSHOP_FLEX_DIRECTION_OPTIONS: {[key: string]: 'row' | 'column'} 
 }
 
 export const WORKSHOP_FLEX_ALIGN_OPTIONS: Record<FlexAlign, FlexAlign> = {
-  'baseline': 'baseline',
-  'center': 'center',
+  baseline: 'baseline',
+  center: 'center',
   'flex-end': 'flex-end',
   'flex-start': 'flex-start',
-  'stretch': 'stretch',
+  stretch: 'stretch',
 }
 
 export const WORKSHOP_FLEX_JUSTIFY_OPTIONS: Record<FlexJustify, FlexJustify> = {
-  'center': 'center',
+  center: 'center',
   'flex-end': 'flex-end',
   'flex-start': 'flex-start',
   'space-around': 'space-around',
@@ -157,16 +157,16 @@ export const WORKSHOP_LABEL_FONT_SIZE_OPTIONS = {
 }
 
 export const WORKSHOP_PLACEMENT_OPTIONS: Record<Placement, Placement> = {
-  'top': 'top',
+  top: 'top',
   'top-start': 'top-start',
   'top-end': 'top-end',
-  'right': 'right',
+  right: 'right',
   'right-start': 'right-start',
   'right-end': 'right-end',
-  'left': 'left',
+  left: 'left',
   'left-start': 'left-start',
   'left-end': 'left-end',
-  'bottom': 'bottom',
+  bottom: 'bottom',
   'bottom-start': 'bottom-start',
   'bottom-end': 'bottom-end',
 }
@@ -217,11 +217,11 @@ export const WORKSHOP_SPOT_COLOR_OPTIONS: {[key: string]: ThemeColorSpotKey} = {
 
 export const WORKSHOP_TEXT_ALIGN_OPTIONS: {[key: string]: TextAlign | ''} = {
   '(none)': '',
-  'Initial': 'initial',
-  'Left': 'left',
-  'Right': 'right',
-  'Center': 'center',
-  'Justify': 'justify',
+  Initial: 'initial',
+  Left: 'left',
+  Right: 'right',
+  Center: 'center',
+  Justify: 'justify',
 }
 
 export const WORKSHOP_TEXT_FONT_SIZE_OPTIONS = {
@@ -233,17 +233,17 @@ export const WORKSHOP_TEXT_FONT_SIZE_OPTIONS = {
 }
 
 export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS: {[key: string]: TextInputType} = {
-  'date': 'date',
+  date: 'date',
   'datetime-local': 'datetime-local',
-  'email': 'email',
-  'month': 'month',
-  'number': 'number',
-  'password': 'password',
-  'tel': 'tel',
-  'time': 'time',
-  'text': 'text',
-  'week': 'week',
-  'color': 'color',
+  email: 'email',
+  month: 'month',
+  number: 'number',
+  password: 'password',
+  tel: 'tel',
+  time: 'time',
+  text: 'text',
+  week: 'week',
+  color: 'color',
 }
 
 export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | ''} = {
@@ -261,9 +261,9 @@ export const WORKSHOP_TEXT_SIZE_OPTIONS = {
 
 export const WORKSHOP_TEXT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey | ''} = {
   'Regular (default)': '',
-  'Medium': 'medium',
-  'Semibold': 'semibold',
-  'Bold': 'bold',
+  Medium: 'medium',
+  Semibold: 'semibold',
+  Bold: 'bold',
 }
 
 export const WORKSHOP_THEME_COLOR_TONE_OPTIONS: {[key: string]: ThemeColorToneKey} = {
@@ -286,7 +286,7 @@ export const WORKSHOP_TOAST_STATUS_OPTIONS: {
 }
 
 export const WORKSHOP_WIDTH_OPTIONS: {[key: string]: number | 'auto'} = {
-  'Auto': 'auto',
+  Auto: 'auto',
   '0': 0,
   '1': 1,
   '2': 2,

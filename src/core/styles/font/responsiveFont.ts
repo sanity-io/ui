@@ -21,11 +21,11 @@ export function responsiveFont(
   const defaultSize = sizes[2]
 
   const base: CSSObject = {
-    'position': 'relative',
-    'fontFamily': family,
+    position: 'relative',
+    fontFamily: family,
     fontWeight,
-    'padding': '1px 0',
-    'margin': 0,
+    padding: '1px 0',
+    margin: 0,
 
     '&:before': {
       content: '""',
@@ -75,10 +75,10 @@ export function fontSize(size: ThemeFontSize): CSSObject {
   const customIconOffset = (capHeight - customIconSize) / 2
 
   return {
-    'fontSize': rem(fontSize),
-    'lineHeight': `calc(${lineHeight} / ${fontSize})`,
-    'letterSpacing': rem(letterSpacing),
-    'transform': `translateY(${rem(descenderHeight)})`,
+    fontSize: rem(fontSize),
+    lineHeight: `calc(${lineHeight} / ${fontSize})`,
+    letterSpacing: rem(letterSpacing),
+    transform: `translateY(${rem(descenderHeight)})`,
 
     '&:before': {
       marginTop: `calc(${rem(0 - negHeight)} - 1px)`,

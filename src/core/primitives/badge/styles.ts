@@ -8,8 +8,8 @@ export function badgeStyle(props: BadgeStyleProps): CSSObject {
     '--card-bg-color': `var(--card-badge-${$tone}-bg-color)`,
     '--card-fg-color': `var(--card-badge-${$tone}-fg-color)`,
 
-    'backgroundColor': 'var(--card-bg-color)',
-    'cursor': 'default',
+    backgroundColor: 'var(--card-bg-color)',
+    cursor: 'default',
 
     '&:not([hidden])': {
       display: 'inline-block',

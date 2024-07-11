@@ -9,23 +9,23 @@ test('buildColorTheme: base', () => {
           bg: ['50', '900'],
           fg: ['800', '200'],
         },
-        'transparent': {
+        transparent: {
           bg: ['50', 'black'],
         },
-        'default': {
+        default: {
           bg: ['white', '950'],
           fg: ['black', '200'],
         },
-        'primary': {
+        primary: {
           _hue: 'purple',
         },
-        'positive': {
+        positive: {
           _hue: 'cyan',
         },
-        'caution': {
+        caution: {
           _hue: 'yellow',
         },
-        'critical': {
+        critical: {
           _hue: 'red',
         },
       },
@@ -100,23 +100,23 @@ test('buildColorTheme: button', () => {
         bg: ['50', '900'],
         fg: ['800', '200'],
       },
-      'transparent': {
+      transparent: {
         bg: ['50', 'black'],
       },
-      'default': {
+      default: {
         bg: ['white', '950'],
         fg: ['black', '200'],
       },
-      'primary': {
+      primary: {
         _hue: 'purple',
       },
-      'positive': {
+      positive: {
         _hue: 'cyan',
       },
-      'caution': {
+      caution: {
         _hue: 'yellow',
       },
-      'critical': {
+      critical: {
         _hue: 'red',
       },
     },
@@ -127,7 +127,7 @@ test('buildColorTheme: button', () => {
             bg: ['500', '400'],
             fg: ['white', 'black'],
           },
-          'hovered': {
+          hovered: {
             bg: ['600', '300'],
           },
         },
