@@ -12,8 +12,8 @@ const BASE_STYLE: CSSObject = {
   '&[data-as="ul"],&[data-as="ol"]': {
     listStyle: 'none',
   },
-  'gridTemplateColumns': 'minmax(0, 1fr)',
-  'gridAutoRows': 'min-content',
+  gridTemplateColumns: 'minmax(0, 1fr)',
+  gridAutoRows: 'min-content',
 }
 
 export function stackBaseStyle(): CSSObject {

@@ -191,7 +191,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-gray-fg-color)',
-              'backgroundColor': 'var(--card-avatar-gray-bg-color)',
+              backgroundColor: 'var(--card-avatar-gray-bg-color)',
             } as any
           }
         >
@@ -206,7 +206,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-red-fg-color)',
-              'backgroundColor': 'var(--card-avatar-red-bg-color)',
+              backgroundColor: 'var(--card-avatar-red-bg-color)',
             } as any
           }
         >
@@ -221,7 +221,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-orange-fg-color)',
-              'backgroundColor': 'var(--card-avatar-orange-bg-color)',
+              backgroundColor: 'var(--card-avatar-orange-bg-color)',
             } as any
           }
         >
@@ -236,7 +236,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-yellow-fg-color)',
-              'backgroundColor': 'var(--card-avatar-yellow-bg-color)',
+              backgroundColor: 'var(--card-avatar-yellow-bg-color)',
             } as any
           }
         >
@@ -251,7 +251,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-green-fg-color)',
-              'backgroundColor': 'var(--card-avatar-green-bg-color)',
+              backgroundColor: 'var(--card-avatar-green-bg-color)',
             } as any
           }
         >
@@ -266,7 +266,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-cyan-fg-color)',
-              'backgroundColor': 'var(--card-avatar-cyan-bg-color)',
+              backgroundColor: 'var(--card-avatar-cyan-bg-color)',
             } as any
           }
         >
@@ -281,7 +281,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-blue-fg-color)',
-              'backgroundColor': 'var(--card-avatar-blue-bg-color)',
+              backgroundColor: 'var(--card-avatar-blue-bg-color)',
             } as any
           }
         >
@@ -296,7 +296,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-purple-fg-color)',
-              'backgroundColor': 'var(--card-avatar-purple-bg-color)',
+              backgroundColor: 'var(--card-avatar-purple-bg-color)',
             } as any
           }
         >
@@ -311,7 +311,7 @@ function DebugState() {
           style={
             {
               '--card-fg-color': 'var(--card-avatar-magenta-fg-color)',
-              'backgroundColor': 'var(--card-avatar-magenta-bg-color)',
+              backgroundColor: 'var(--card-avatar-magenta-bg-color)',
             } as any
           }
         >
@@ -395,7 +395,7 @@ function getStateVars(state: ThemeColorState_v2) {
     '--card-skeleton-from-color': state.skeleton.from,
     '--card-skeleton-to-color': state.skeleton.to,
 
-    'backgroundColor': 'var(--card-bg-color)',
-    'color': 'var(--card-fg-color)',
+    backgroundColor: 'var(--card-bg-color)',
+    color: 'var(--card-fg-color)',
   } as CSSProperties
 }

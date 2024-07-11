@@ -22,11 +22,11 @@ export const defaultColorTokens: ThemeColorTokens = {
           icon: ['500', '500'],
           dot: ['500', '500'],
         },
-        'positive': {
+        positive: {
           bg: ['200 50%', '900'],
           fg: ['600', '500'],
         },
-        'caution': {
+        caution: {
           bg: ['200 50%', '900'],
           fg: ['600', '500'],
         },
@@ -63,26 +63,26 @@ export const defaultColorTokens: ThemeColorTokens = {
         to: ['100 50%', '900 50%'],
       },
     },
-    'transparent': {
+    transparent: {
       bg: ['50', 'black'],
     },
-    'default': {
+    default: {
       bg: ['white', '950'],
       fg: ['800', '200'],
       muted: {
         fg: ['600', '400'],
       },
     },
-    'primary': {_hue: 'blue'},
-    'positive': {
+    primary: {_hue: 'blue'},
+    positive: {
       _hue: 'green',
       shadow: {outline: ['500/0.4', '500/0.4']},
     },
-    'caution': {
+    caution: {
       _hue: 'yellow',
       shadow: {outline: ['600/0.3', '500/0.4']},
     },
-    'critical': {_hue: 'red'},
+    critical: {_hue: 'red'},
   },
   button: {
     default: {
@@ -132,17 +132,17 @@ export const defaultColorTokens: ThemeColorTokens = {
             to: ['900 50%', '100 50%'],
           },
         },
-        'hovered': {
+        hovered: {
           bg: ['700', '300'],
           border: ['700/0', '300/0'],
         },
-        'pressed': {
+        pressed: {
           bg: ['700', '300'],
         },
-        'selected': {
+        selected: {
           bg: ['700', '300'],
         },
-        'disabled': {
+        disabled: {
           _hue: 'gray',
           accent: {
             fg: ['100 70%', '900 70%'],
@@ -182,7 +182,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           },
         },
       },
-      'default': {
+      default: {
         '*': {
           avatar: {
             '*': {
@@ -197,13 +197,13 @@ export const defaultColorTokens: ThemeColorTokens = {
             fg: ['400', '600'],
           },
         },
-        'hovered': {
+        hovered: {
           bg: ['900', '100'],
         },
-        'pressed': {
+        pressed: {
           bg: ['black', 'white'],
         },
-        'selected': {
+        selected: {
           bg: ['black', 'white'],
         },
       },
@@ -255,19 +255,19 @@ export const defaultColorTokens: ThemeColorTokens = {
             to: ['100 50%', '900 50%'],
           },
         },
-        'hovered': {
+        hovered: {
           bg: ['100', '900'],
           fg: ['700', '300'],
         },
-        'pressed': {
+        pressed: {
           bg: ['100', '900'],
           fg: ['800', '200'],
         },
-        'selected': {
+        selected: {
           bg: ['100', '900'],
           fg: ['800', '200'],
         },
-        'disabled': {
+        disabled: {
           _hue: 'gray',
           accent: {
             fg: ['200', '800'],
@@ -308,12 +308,12 @@ export const defaultColorTokens: ThemeColorTokens = {
           },
         },
       },
-      'positive': {
+      positive: {
         '*': {
           border: ['600 20%', '800'],
         },
       },
-      'caution': {
+      caution: {
         '*': {
           border: ['600 20%', '800'],
         },
@@ -366,21 +366,21 @@ export const defaultColorTokens: ThemeColorTokens = {
             to: ['100 50%', '900 50%'],
           },
         },
-        'hovered': {
+        hovered: {
           bg: ['50', '950'],
           icon: ['700 70%', '400 70%'],
         },
-        'pressed': {
+        pressed: {
           bg: ['100', '900'],
           fg: ['800', '200'],
           icon: ['800 70%', '200 70%'],
         },
-        'selected': {
+        selected: {
           bg: ['100', '900'],
           fg: ['800', '200'],
           icon: ['800 60%', '200 60%'],
         },
-        'disabled': {
+        disabled: {
           _hue: 'gray',
           accent: {
             fg: ['200', '800'],
@@ -434,21 +434,21 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
         placeholder: ['400', '600'],
       },
-      'hovered': {
+      hovered: {
         border: ['300', '700'],
       },
-      'readOnly': {
+      readOnly: {
         bg: ['50', '950'],
         border: ['200', '800'],
         fg: ['800', '200'],
       },
-      'disabled': {
+      disabled: {
         fg: ['400', '600'],
         border: ['100', '900'],
         placeholder: ['200', '800 50%'],
       },
     },
-    'invalid': {
+    invalid: {
       '*': {
         _hue: 'red',
         bg: ['100', '950'],
@@ -502,13 +502,13 @@ export const defaultColorTokens: ThemeColorTokens = {
           to: ['100 50%', '900 50%'],
         },
       },
-      'hovered': {
+      hovered: {
         bg: ['50', '950'],
       },
-      'pressed': {
+      pressed: {
         bg: ['100', '900'],
       },
-      'selected': {
+      selected: {
         _blend: ['screen', 'multiply'],
         accent: {
           fg: ['purple/300', 'purple/700'],
@@ -553,7 +553,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           to: ['900 50%', '100 50%'],
         },
       },
-      'disabled': {
+      disabled: {
         _hue: 'gray',
         accent: {
           fg: ['200', '800'],
@@ -595,12 +595,12 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
       },
     },
-    'default': {
+    default: {
       selected: {
         _hue: 'blue',
       },
     },
-    'critical': {
+    critical: {
       disabled: {
         bg: ['50 50%', '950 50%'],
       },

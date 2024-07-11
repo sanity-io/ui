@@ -1,5 +1,5 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import {userEvent, within} from '@storybook/test'
+import {userEvent, within} from '@storybook/testing-library'
 import {Button, Card, Text, Tooltip, TooltipDelayGroupProvider} from '../../src/core/primitives'
 import {PLACEMENT_OPTIONS} from '../constants'
 import {getShadowControls, getSpaceControls} from '../controls'
