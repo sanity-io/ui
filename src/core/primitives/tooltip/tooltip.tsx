@@ -21,12 +21,12 @@ import {
   useState,
   useId,
   useImperativeHandle,
-  useLayoutEffect,
 } from 'react'
 import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
 import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
+import {useMounted} from '../../hooks/useMounted'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import type {Placement} from '../../types'
@@ -86,8 +86,9 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   animate?: boolean
 }
 
-const Root = styled(Layer)`
+const Root = styled(Layer)<{$maxWidth: number}>`
   pointer-events: none;
+  max-width: ${({$maxWidth}) => $maxWidth}px;
 `
 
 /**
@@ -127,13 +128,28 @@ export const Tooltip = forwardRef(function Tooltip(
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
-  const [tooltipMaxWidth, setTooltipMaxWidth] = useState(0)
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   const portal = usePortal()
   const portalElement =
     typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
+
+  const mounted = useMounted()
+  // Get the maximum tooltip width (sans tooltip padding)
+  // Tooltip width should never exceed the width of either any supplied boundary or portal element.
+  // If both portal and boundary elements are provided, use the smaller width of the two.
+  const tooltipWidth = useMemo(() => {
+    const availableWidths = [
+      ...(boundaryElement ? [boundaryElement.offsetWidth] : []),
+      portalElement?.offsetWidth || mounted
+        ? document.body.offsetWidth
+        : // We don't actually know what the width of the body is during SSR, so we'll just assume it's 800px or larger
+          800,
+    ]
+
+    return Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2
+  }, [boundaryElement, mounted, portalElement])
 
   const middleware = useMemo(() => {
     const ret: Middleware[] = []
@@ -301,19 +317,6 @@ export const Tooltip = forwardRef(function Tooltip(
   // Handle closing the tooltip when the mouse leaves the referenceElement
   useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip})
 
-  // // Set the max width of the tooltip based on boundaries and portals
-  useLayoutEffect(() => {
-    // Get the maximum tooltip width (sans tooltip padding)
-    // Tooltip width should never exceed the width of either any supplied boundary or portal element.
-    // If both portal and boundary elements are provided, use the smaller width of the two.
-    const availableWidths = [
-      ...(boundaryElement ? [boundaryElement.offsetWidth] : []),
-      portalElement?.offsetWidth || document.body.offsetWidth,
-    ]
-
-    setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
-  }, [boundaryElement, portalElement])
-
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
       arrowRef.current = arrowEl
@@ -376,11 +379,9 @@ export const Tooltip = forwardRef(function Tooltip(
       data-ui="Tooltip"
       {...restProps}
       ref={setFloating}
-      style={{
-        ...floatingStyles,
-        maxWidth: tooltipMaxWidth > 0 ? `${tooltipMaxWidth}px` : undefined,
-      }}
+      style={floatingStyles}
       zOffset={zOffset}
+      $maxWidth={tooltipWidth}
     >
       <TooltipCard
         {...restProps}
@@ -446,11 +447,12 @@ function useCloseOnMouseLeave({
   // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
   // we use a "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
   // in order to always see the latest `referenceElement` value inside the event handler itself.
-  const onMouseMove = useEffectEvent((target: EventTarget | null) => {
+  const handleWindowMouseMove = useEffectEvent((event: MouseEvent) => {
     if (!referenceElement) return
 
     const isHoveringReference =
-      referenceElement === target || (target instanceof Node && referenceElement.contains(target))
+      referenceElement === event.target ||
+      (event.target instanceof Node && referenceElement.contains(event.target))
 
     if (!isHoveringReference) {
       handleIsOpenChange(false)
@@ -463,12 +465,8 @@ function useCloseOnMouseLeave({
   useEffect(() => {
     if (!showTooltip) return
 
-    const handleMouseMove = (event: MouseEvent) => {
-      onMouseMove(event.target)
-    }
+    window.addEventListener('mousemove', handleWindowMouseMove)
 
-    window.addEventListener('mousemove', handleMouseMove)
-
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [onMouseMove, showTooltip])
+    return () => window.removeEventListener('mousemove', handleWindowMouseMove)
+  }, [handleWindowMouseMove, showTooltip])
 }
