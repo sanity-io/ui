@@ -268,6 +268,9 @@ export const Tooltip = forwardRef(function Tooltip(
     [childProp?.props, handleIsOpenChange],
   )
 
+  // Handle closing the tooltip when the mouse leaves the referenceElement
+  useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip})
+
   // Close when `disabled` changes to `true`
   useEffect(() => {
     if (disabled && showTooltip) handleIsOpenChange(false)
@@ -297,9 +300,6 @@ export const Tooltip = forwardRef(function Tooltip(
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
   }, [handleIsOpenChange, showTooltip])
-
-  // Handle closing the tooltip when the mouse leaves the referenceElement
-  useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip})
 
   // // Set the max width of the tooltip based on boundaries and portals
   useLayoutEffect(() => {
@@ -446,7 +446,7 @@ function useCloseOnMouseLeave({
   // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
   // we use a "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
   // in order to always see the latest `referenceElement` value inside the event handler itself.
-  const onMouseMove = useEffectEvent((target: EventTarget | null) => {
+  const onMouseMove = useEffectEvent((target: EventTarget | null, teardown: () => void) => {
     if (!referenceElement) return
 
     const isHoveringReference =
@@ -454,6 +454,8 @@ function useCloseOnMouseLeave({
 
     if (!isHoveringReference) {
       handleIsOpenChange(false)
+      // Allow removing the event listener eagerly, to avoid race conditions
+      teardown()
     }
   })
 
@@ -464,7 +466,7 @@ function useCloseOnMouseLeave({
     if (!showTooltip) return
 
     const handleMouseMove = (event: MouseEvent) => {
-      onMouseMove(event.target)
+      onMouseMove(event.target, () => window.removeEventListener('mousemove', handleMouseMove))
     }
 
     window.addEventListener('mousemove', handleMouseMove)
