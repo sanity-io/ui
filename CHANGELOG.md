@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.7](https://github.com/sanity-io/ui/compare/v2.6.6...v2.6.7) (2024-07-11)
+
+### Bug Fixes
+
+- revert recent portal/tooltip changes ([#1372](https://github.com/sanity-io/ui/issues/1372)) ([627003e](https://github.com/sanity-io/ui/commit/627003e6929c809434b0b72fe8efeff6b0b577fd)), closes [#1371](https://github.com/sanity-io/ui/issues/1371) [#1370](https://github.com/sanity-io/ui/issues/1370) [#1369](https://github.com/sanity-io/ui/issues/1369)
+
 ## [2.6.6](https://github.com/sanity-io/ui/compare/v2.6.5...v2.6.6) (2024-07-11)
 
 ### Bug Fixes
