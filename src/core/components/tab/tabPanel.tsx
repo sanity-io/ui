@@ -9,7 +9,7 @@ export interface TabPanelProps extends BoxProps {
    * The `id` of the correlating `Tab` component.
    */
   'aria-labelledby': string
-  id: string
+  'id': string
 }
 
 /**

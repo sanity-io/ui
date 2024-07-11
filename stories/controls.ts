@@ -8,7 +8,7 @@ export const getAlignControls = () => {
   return {
     control: {type: 'radio'},
     options: ['left', 'center', 'right', 'initial'],
-  }
+  } as const
 }
 
 export const getAvatarSizeControls = () => {
@@ -17,7 +17,7 @@ export const getAvatarSizeControls = () => {
   return {
     control: {type: 'number', min: 0, max: numSizes - 1},
     options: [...Array(numSizes).keys()],
-  }
+  } as const
 }
 
 export const getButtonWidthControls = () => {
@@ -26,9 +26,9 @@ export const getButtonWidthControls = () => {
     options: ['(none)', 'fill'],
     mapping: {
       '(none)': '',
-      fill: 'fill',
+      'fill': 'fill',
     },
-  }
+  } as const
 }
 
 export const getContainerWidthControls = () => {
@@ -37,21 +37,21 @@ export const getContainerWidthControls = () => {
   return {
     control: {type: 'number', min: 0, max: numContainerSizes - 1},
     options: [...Array(numContainerSizes).keys()],
-  }
+  } as const
 }
 
 export const getDirectionControls = () => {
   return {
     control: {type: 'radio'},
     options: ['row', 'column', 'row-reverse', 'column-reverse'],
-  }
+  } as const
 }
 
 export const getFlexAlignControls = () => {
   return {
     control: {type: 'radio'},
     options: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
-  }
+  } as const
 }
 
 export const getFontSizeControls = (themeFontKey: ThemeFontKey) => {
@@ -60,21 +60,21 @@ export const getFontSizeControls = (themeFontKey: ThemeFontKey) => {
   return {
     control: {type: 'number', min: 0, max: numSizes - 1},
     options: [...Array(numSizes).keys()],
-  }
+  } as const
 }
 
 export const getHeightControls = () => {
   return {
     control: {type: 'radio'},
     options: ['fill', 'stretch'],
-  }
+  } as const
 }
 
 export const getPositionControls = () => {
   return {
     control: {type: 'radio'},
     options: ['fixed', 'absolute'],
-  }
+  } as const
 }
 
 export const getIconControls = () => {
@@ -85,14 +85,14 @@ export const getIconControls = () => {
       ...icons,
     },
     options: ['(none)', ...Object.keys(icons)],
-  }
+  } as const
 }
 
 export const getOverflowControls = () => {
   return {
     control: {type: 'radio'},
     options: ['visible', 'hidden', 'auto'],
-  }
+  } as const
 }
 
 export const getRadiusControls = () => {
@@ -101,7 +101,7 @@ export const getRadiusControls = () => {
   return {
     control: {type: 'select'},
     options: [...Array(numRadiusSizes).keys(), 'full'],
-  }
+  } as const
 }
 
 export const getShadowControls = () => {
@@ -110,7 +110,7 @@ export const getShadowControls = () => {
   return {
     control: {type: 'number', min: 0, max: numShadowSizes - 1},
     options: [...Array(numShadowSizes).keys()],
-  }
+  } as const
 }
 
 export const getSpaceControls = () => {
@@ -119,7 +119,7 @@ export const getSpaceControls = () => {
   return {
     control: {type: 'number', min: 0, max: numSpaceSizes - 1},
     options: [...Array(numSpaceSizes).keys()],
-  }
+  } as const
 }
 
 export const getTextOverflowControls = () => {
@@ -127,8 +127,8 @@ export const getTextOverflowControls = () => {
     control: 'radio',
     mapping: {
       '(none)': '',
-      ellipsis: 'ellipsis',
+      'ellipsis': 'ellipsis',
     },
     options: ['(none)', 'ellipsis'],
-  }
+  } as const
 }

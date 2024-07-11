@@ -21,15 +21,15 @@ export interface ThemeColorAvatarHueTokens {
 /** @public */
 export interface ThemeColorAvatarTokens {
   '*'?: ThemeColorAvatarHueTokens
-  gray?: ThemeColorAvatarHueTokens
-  blue?: ThemeColorAvatarHueTokens
-  purple?: ThemeColorAvatarHueTokens
-  magenta?: ThemeColorAvatarHueTokens
-  red?: ThemeColorAvatarHueTokens
-  orange?: ThemeColorAvatarHueTokens
-  yellow?: ThemeColorAvatarHueTokens
-  green?: ThemeColorAvatarHueTokens
-  cyan?: ThemeColorAvatarHueTokens
+  'gray'?: ThemeColorAvatarHueTokens
+  'blue'?: ThemeColorAvatarHueTokens
+  'purple'?: ThemeColorAvatarHueTokens
+  'magenta'?: ThemeColorAvatarHueTokens
+  'red'?: ThemeColorAvatarHueTokens
+  'orange'?: ThemeColorAvatarHueTokens
+  'yellow'?: ThemeColorAvatarHueTokens
+  'green'?: ThemeColorAvatarHueTokens
+  'cyan'?: ThemeColorAvatarHueTokens
 }
 
 /** @public */
@@ -66,11 +66,11 @@ export interface ThemeColorBadgeToneTokens {
 /** @public */
 export interface ThemeColorBadgeTokens {
   '*'?: ThemeColorBadgeToneTokens
-  default?: ThemeColorBadgeToneTokens
-  primary?: ThemeColorBadgeToneTokens
-  positive?: ThemeColorBadgeToneTokens
-  caution?: ThemeColorBadgeToneTokens
-  critical?: ThemeColorBadgeToneTokens
+  'default'?: ThemeColorBadgeToneTokens
+  'primary'?: ThemeColorBadgeToneTokens
+  'positive'?: ThemeColorBadgeToneTokens
+  'caution'?: ThemeColorBadgeToneTokens
+  'critical'?: ThemeColorBadgeToneTokens
 }
 
 /** @public */

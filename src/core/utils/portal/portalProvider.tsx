@@ -1,5 +1,6 @@
-import {useMemo, useSyncExternalStore} from 'react'
+import {useMemo} from 'react'
 import {useUnique} from '../../hooks/_internal'
+import {useMounted} from '../../hooks/useMounted'
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'
 
@@ -25,22 +26,16 @@ export interface PortalProviderProps {
 export function PortalProvider(props: PortalProviderProps): React.ReactElement {
   const {boundaryElement, children, element, __unstable_elements: elementsProp} = props
   const elements = useUnique(elementsProp)
-  const fallbackElement = useSyncExternalStore(
-    emptySubscribe,
-    () => document.body,
-    () => null,
-  )
+  const mounted = useMounted()
 
   const value: PortalContextValue = useMemo(() => {
     return {
       version: 0.0,
       boundaryElement: boundaryElement || null,
-      element: element || fallbackElement,
+      element: element || mounted ? document.body : null,
       elements,
     }
-  }, [boundaryElement, element, elements, fallbackElement])
+  }, [boundaryElement, element, elements, mounted])
 
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>
 }
-
-const emptySubscribe = () => () => {}

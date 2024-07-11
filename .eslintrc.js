@@ -137,6 +137,6 @@ module.exports = {
         mode: 'full',
       },
     ],
-    react: {version: 'detect'},
+    'react': {version: 'detect'},
   },
 }
