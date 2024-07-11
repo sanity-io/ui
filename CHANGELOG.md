@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.5](https://github.com/sanity-io/ui/compare/v2.6.4...v2.6.5) (2024-07-11)
+
+### Bug Fixes
+
+- **tooltip:** use layout effect to calculate width ([#1370](https://github.com/sanity-io/ui/issues/1370)) ([e39ddbe](https://github.com/sanity-io/ui/commit/e39ddbea9e310fcbd87a43a7a5986261650855fb))
+
 ## [2.6.4](https://github.com/sanity-io/ui/compare/v2.6.3...v2.6.4) (2024-07-11)
 
 ### Bug Fixes
