@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.4](https://github.com/sanity-io/ui/compare/v2.6.3...v2.6.4) (2024-07-11)
+
+### Bug Fixes
+
+- reduce layout trashing ([#1369](https://github.com/sanity-io/ui/issues/1369)) ([0cb1cb1](https://github.com/sanity-io/ui/commit/0cb1cb133fbf7f10ee821e9bcfce3a82bca6e5ae))
+
 ## [2.6.3](https://github.com/sanity-io/ui/compare/v2.6.2...v2.6.3) (2024-07-08)
 
 ### Bug Fixes
