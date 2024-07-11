@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.6](https://github.com/sanity-io/ui/compare/v2.6.5...v2.6.6) (2024-07-11)
+
+### Bug Fixes
+
+- **tooltip:** regression where hover to open stops working ([#1371](https://github.com/sanity-io/ui/issues/1371)) ([038011b](https://github.com/sanity-io/ui/commit/038011b496b02a84992360a73b5f556cf92d870c))
+
 ## [2.6.5](https://github.com/sanity-io/ui/compare/v2.6.4...v2.6.5) (2024-07-11)
 
 ### Bug Fixes
