@@ -16,7 +16,7 @@ import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
 const PORTAL_OPTIONS = {
   '(true)': true,
   '(false)': false,
-  portal1: 'portal1',
+  'portal1': 'portal1',
 }
 
 export default function CustomPortalStory() {

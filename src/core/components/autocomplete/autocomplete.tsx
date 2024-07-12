@@ -452,7 +452,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     if (!loading && !disabled && value) {
       return {
         'aria-label': 'Clear',
-        onFocus: handleClearButtonFocus,
+        'onFocus': handleClearButtonFocus,
       }
     }
 

@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   lint:
-    name: 'ESLint'
+    name: "ESLint"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
           - platform: macos-latest
             node-version: lts/*
     env:
-      CYPRESS_CACHE_FOLDER: '~/.cache/Cypress'
+      CYPRESS_CACHE_FOLDER: "~/.cache/Cypress"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -65,7 +65,7 @@ jobs:
   release:
     permissions:
       id-token: write # to enable use of OIDC for npm provenance
-    name: 'Semantic release'
+    name: "Semantic release"
     needs: [lint, test]
     runs-on: ubuntu-latest
     steps:

@@ -1,7 +1,7 @@
 import {ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
-import {expect} from '@storybook/jest'
 import type {Meta, StoryObj} from '@storybook/react'
-import {userEvent, within} from '@storybook/testing-library'
+import {expect} from '@storybook/test'
+import {userEvent, within} from '@storybook/test'
 import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
 import {Button, Flex} from '../../src/core/primitives'
 

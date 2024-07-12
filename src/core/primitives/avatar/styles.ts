@@ -14,24 +14,24 @@ export const avatarStyle = {
 
 function avatarArrowStyle(): CSSObject {
   return {
-    position: 'absolute',
-    boxSizing: 'border-box',
-    zIndex: 0,
-    opacity: 0,
-    transition: 'all 0.2s linear',
-    transform: 'rotate(-90deg) translate3d(0, 6px, 0)',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    'position': 'absolute',
+    'boxSizing': 'border-box',
+    'zIndex': 0,
+    'opacity': 0,
+    'transition': 'all 0.2s linear',
+    'transform': 'rotate(-90deg) translate3d(0, 6px, 0)',
+    'left': 0,
+    'right': 0,
+    'top': 0,
+    'bottom': 0,
 
     '& > svg': {
-      width: '11px',
-      height: '7px',
-      position: 'absolute',
-      top: '-5px',
-      left: '50%',
-      transform: 'translateX(-6px)',
+      'width': '11px',
+      'height': '7px',
+      'position': 'absolute',
+      'top': '-5px',
+      'left': '50%',
+      'transform': 'translateX(-6px)',
 
       '&:not([hidden])': {
         display: 'block',
@@ -63,11 +63,11 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
     '--avatar-bg-color': `var(--card-avatar-${$color}-bg-color)`,
     '--avatar-fg-color': `var(--card-avatar-${$color}-fg-color)`,
 
-    backgroundColor: 'var(--avatar-bg-color)',
-    position: 'relative',
-    boxSizing: 'border-box',
-    userSelect: 'none',
-    boxShadow: '0 0 0 1px var(--card-bg-color)',
+    'backgroundColor': 'var(--avatar-bg-color)',
+    'position': 'relative',
+    'boxSizing': 'border-box',
+    'userSelect': 'none',
+    'boxShadow': '0 0 0 1px var(--card-bg-color)',
 
     '&[data-status="inactive"]': {
       opacity: 0.5,
@@ -81,14 +81,14 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 
     /* &:is(button) */
     '&[data-as="button"]': {
-      WebkitFontSmoothing: 'inherit',
-      appearance: 'none',
-      margin: 0,
-      padding: 0,
-      border: 0,
-      font: 'inherit',
-      color: 'inherit',
-      outline: 'none',
+      'WebkitFontSmoothing': 'inherit',
+      'appearance': 'none',
+      'margin': 0,
+      'padding': 0,
+      'border': 0,
+      'font': 'inherit',
+      'color': 'inherit',
+      'outline': 'none',
 
       '&:focus': {
         boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
@@ -110,9 +110,9 @@ export function responsiveAvatarSizeStyle(
     const avatarSize = avatar.sizes[size] || avatar.sizes[0]
 
     return {
-      width: rem(avatarSize.size),
-      height: rem(avatarSize.size),
-      borderRadius: rem(avatarSize.size / 2),
+      'width': rem(avatarSize.size),
+      'height': rem(avatarSize.size),
+      'borderRadius': rem(avatarSize.size / 2),
 
       '&>svg': {
         width: rem(avatarSize.size),
@@ -131,14 +131,14 @@ export function avatarImageStyle(): CSSObject {
 
 export function avatarInitialsStyle(): CSSObject {
   return {
-    width: '100%',
-    height: '100%',
-    color: 'var(--avatar-fg-color)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    borderRadius: '50%',
+    'width': '100%',
+    'height': '100%',
+    'color': 'var(--avatar-fg-color)',
+    'alignItems': 'center',
+    'justifyContent': 'center',
+    'textTransform': 'uppercase',
+    'textAlign': 'center',
+    'borderRadius': '50%',
 
     '&:not([hidden])': {
       display: 'flex',
@@ -155,8 +155,8 @@ function avatarBgStrokeStyle(): CSSObject {
 
 function avatarStrokeStyle(): CSSObject {
   return {
-    strokeWidth: '2px',
-    stroke: 'var(--avatar-bg-color)',
+    'strokeWidth': '2px',
+    'stroke': 'var(--avatar-bg-color)',
 
     '[data-status="editing"] &': {
       strokeDasharray: '2 4',
