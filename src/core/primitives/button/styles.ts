@@ -81,12 +81,12 @@ export function buttonColorStyles(
   return [
     _cardColorStyle(baseColor, color.enabled),
     {
-      backgroundColor: 'var(--card-bg-color)',
-      color: 'var(--card-fg-color)',
-      boxShadow: focusRingBorderStyle(border),
+      'backgroundColor': 'var(--card-bg-color)',
+      'color': 'var(--card-fg-color)',
+      'boxShadow': focusRingBorderStyle(border),
       '&:disabled, &[data-disabled="true"]': _cardColorStyle(baseColor, color.disabled),
       "&:not([data-disabled='true'])": {
-        boxShadow: combineBoxShadow(
+        'boxShadow': combineBoxShadow(
           focusRingBorderStyle(border),
           shadow ? defaultBoxShadow : undefined,
         ),
