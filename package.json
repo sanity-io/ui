@@ -114,8 +114,8 @@
     "use-effect-event": "^1.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
+    "@babel/core": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@commitlint/cli": "^19.3.0",
