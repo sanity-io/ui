@@ -55,8 +55,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0
       '@sanity/pkg-utils':
-        specifier: ^6.10.3
-        version: 6.10.3(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.5.3)
+        specifier: ^6.10.4
+        version: 6.10.4(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.5.3)
       '@sanity/prettier-config':
         specifier: ^1.0.2
         version: 1.0.2(prettier@3.3.3)
@@ -1833,8 +1833,8 @@ packages:
     peerDependencies:
       react: ^18.3 || >=19.0.0-rc
 
-  '@sanity/pkg-utils@6.10.3':
-    resolution: {integrity: sha512-LdNAZr0voDMv0R9hHF1K/E8n1WEjTs++dXxWB1p9gwYIhzAmdL8BVrXHMwmqw7EWevQ2DeuRo1DTUMGRNpqt1A==}
+  '@sanity/pkg-utils@6.10.4':
+    resolution: {integrity: sha512-gLwD0dvuyd3wNu+uR8WaXdQ4EMZhejV2tOQcnjhC3qZkyIwGLsaaIF5vsesXE3+iHbBS/00kof9TlIPNjWjtlw==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -9606,7 +9606,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@sanity/pkg-utils@6.10.3(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.5.3)':
+  '@sanity/pkg-utils@6.10.4(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.5.3)':
     dependencies:
       '@babel/core': 7.24.8
       '@babel/preset-typescript': 7.24.7(@babel/core@7.24.8)
