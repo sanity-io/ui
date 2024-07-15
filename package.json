@@ -65,7 +65,7 @@
     "pkg:build": "pkg build --strict",
     "pkg:check": "pkg --strict",
     "prepare": "husky install",
-    "prepublishOnly": "pnpm build",
+    "prepack": "pnpm build",
     "release": "semantic-release",
     "storybook:build": "storybook build",
     "storybook:dev": "storybook dev -p 6006",
