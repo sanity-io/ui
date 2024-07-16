@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import {useState} from 'react'
+import {useMemo, useState} from 'react'
 import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
 
 const PORTAL_OPTIONS = {
@@ -30,13 +30,15 @@ export default function CustomPortalStory() {
 
   const [portal1Element, setPortal1Element] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+  const __unstable_elements = useMemo(
+    () => ({
+      portal1: portal1Element,
+    }),
+    [portal1Element],
+  )
 
   return (
-    <PortalProvider
-      __unstable_elements={{
-        portal1: portal1Element,
-      }}
-    >
+    <PortalProvider __unstable_elements={__unstable_elements}>
       <Flex align="center" height="fill" justify="center">
         <BoundaryElementProvider element={useBoundaryElement ? boundaryElement : null}>
           <Card
