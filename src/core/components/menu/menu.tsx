@@ -93,13 +93,7 @@ export const Menu = forwardRef(function Menu(
   }, [activeIndex, onItemSelect])
 
   // Close menu when clicking outside
-  useClickOutside(
-    useCallback(
-      (event) => isTopLayer && onClickOutside && onClickOutside(event),
-      [isTopLayer, onClickOutside],
-    ),
-    [rootElement],
-  )
+  useClickOutside((event) => isTopLayer && onClickOutside && onClickOutside(event), [rootElement])
 
   // Close menu when pressing Escape
   useGlobalKeyDown(
