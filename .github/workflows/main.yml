@@ -13,21 +13,35 @@ permissions:
   contents: read # for checkout
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - run: pnpm install
+      - run: pnpm ts:check
+      - run: pnpm build
+
   lint:
+    needs: [build]
     name: "ESLint"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - run: corepack enable && pnpm --version
       - run: pnpm install
       - name: Register Problem Matcher for ESLint that handles -f compact and shows warnings and errors inline on PRs
         run: echo "::add-matcher::.github/eslint-compact.json"
       - run: "pnpm lint -f compact --rule 'no-warning-comments: [off]' --max-warnings 1"
 
   test:
+    needs: [build]
     runs-on: ${{ matrix.platform }}
     name: Node.js ${{ matrix.node-version }} / ${{ matrix.platform }}
     strategy:
@@ -43,12 +57,11 @@ jobs:
       CYPRESS_CACHE_FOLDER: "~/.cache/Cypress"
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: corepack enable && pnpm --version
       - run: pnpm install
-      - run: pnpm ts:check
       - run: pnpm build
       - run: pnpm test
       - run: pnpm test:browser
@@ -61,6 +74,15 @@ jobs:
           path: |
             cypress/screenshots
             cypress/videos
+
+  sanity-e2e:
+    if: ${{ github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
+      actions: write
+    name: "Run Studio End-to-end tests"
+    uses: sanity-io/sanity/.github/workflows/e2e-ui.yml@next
+    secrets: inherit
 
   release:
     permissions:
