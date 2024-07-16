@@ -1,6 +1,6 @@
 import {wrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Metadata} from 'next'
-import {draftMode} from 'next/headers'
+import {draftMode, headers} from 'next/headers'
 import {PropsWithChildren} from 'react'
 
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 export default async function RootLayoutLoader(props: PropsWithChildren) {
   const {data: rawData, sourceMap} = await loadQuery<GlobalData>(GLOBAL_QUERY)
   const data: WrappedValue<GlobalData> = wrapData({baseUrl: '/studio'}, rawData, sourceMap)
+  const prefersDarkServerSnapshot = headers().get('sec-ch-prefers-color-scheme') === 'dark'
 
   return (
     <RootLayout
@@ -43,6 +44,7 @@ export default async function RootLayoutLoader(props: PropsWithChildren) {
       hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
       projectId={process.env.SANITY_PROJECT_ID!}
       studioOrigin={process.env.SANITY_STUDIO_ORIGIN}
+      prefersDarkServerSnapshot={prefersDarkServerSnapshot}
     />
   )
 }

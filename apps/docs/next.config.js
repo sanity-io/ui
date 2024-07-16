@@ -14,6 +14,27 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Accept-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme, Sec-CH-Prefers-Reduced-Motion',
+          },
+          {
+            key: 'Vary',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+          {
+            key: 'Critical-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

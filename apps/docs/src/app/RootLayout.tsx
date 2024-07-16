@@ -4,7 +4,7 @@ import {WrappedValue} from '@sanity/react-loader/jsx'
 import {LayerProvider, ThemeProvider, ToastProvider, usePrefersDark} from '@sanity/ui'
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {Inter} from 'next/font/google'
-import {ReactNode, useMemo, useState} from 'react'
+import {ReactNode, useEffect, useMemo, useState} from 'react'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'
 import json from 'refractor/lang/json'
@@ -35,19 +35,37 @@ export function RootLayout(props: {
   hintHiddenContent: boolean
   projectId: string
   studioOrigin?: string
+  prefersDarkServerSnapshot: boolean
 }) {
-  const {children, data, dataset, draftMode, hintHiddenContent, projectId} = props
-  const prefersDark = usePrefersDark()
+  const {
+    children,
+    data,
+    dataset,
+    draftMode,
+    hintHiddenContent,
+    projectId,
+    prefersDarkServerSnapshot,
+  } = props
+  const prefersDark = usePrefersDark(() => prefersDarkServerSnapshot)
 
-  const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey | 'system'>(() => {
-    if (typeof window === 'undefined') {
-      return 'system'
+  const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey | 'system'>('system')
+
+  useEffect(() => {
+    const localColorScheme = window.localStorage.getItem('sanityStudio:ui:colorScheme') || 'system'
+    if (
+      localColorScheme !== 'system' &&
+      localColorScheme !== 'dark' &&
+      localColorScheme !== 'light'
+    ) {
+      // If the restored value is invalid then ignore it
+      return
     }
-
-    return (window.localStorage.getItem('sanityStudio:ui:colorScheme') || 'system') as
-      | ThemeColorSchemeKey
-      | 'system'
-  })
+    if (localColorScheme !== colorScheme) {
+      // If the value from local storage is different from the current state, update the state
+      // this typically only happens on mount
+      setColorScheme(localColorScheme)
+    }
+  }, [colorScheme])
 
   const {nav: navNode = null, settings = null} = data || {}
 
