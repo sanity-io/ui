@@ -1,4 +1,4 @@
-import {useSyncExternalStore} from 'react'
+import {useMemo, useSyncExternalStore} from 'react'
 import {useTheme_v2} from '../../theme'
 
 /**
@@ -8,8 +8,6 @@ export interface _MediaStore {
   subscribe: (onStoreChange: () => void) => () => void
   getSnapshot: () => number
 }
-
-const MEDIA_STORE_CACHE = new WeakMap<number[], _MediaStore>()
 
 type MediaQueryMinWidth = `(min-width: ${number}px)`
 type MediaQueryMaxWidth = `(max-width: ${number}px)`
@@ -97,13 +95,7 @@ function getServerSnapshot() {
  */
 export function useMediaIndex(): number {
   const {media} = useTheme_v2()
-
-  let store = MEDIA_STORE_CACHE.get(media)
-
-  if (!store) {
-    store = _createMediaStore(media)
-    MEDIA_STORE_CACHE.set(media, store)
-  }
+  const store = useMemo(() => _createMediaStore(media), [media])
 
   return useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)
 }
