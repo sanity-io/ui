@@ -1,19 +1,21 @@
 import {Card, Container, Portal, PortalProvider, Stack, Text} from '@sanity/ui'
-import {useState} from 'react'
+import {useMemo, useState} from 'react'
 
 export default function NamedStory() {
   const [portal1Element, setPortal1Element] = useState<HTMLDivElement | null>(null)
   const [portal2Element, setPortal2Element] = useState<HTMLDivElement | null>(null)
   const [portal3Element, setPortal3Element] = useState<HTMLDivElement | null>(null)
+  const __unstable_elements = useMemo(
+    () => ({
+      portal1: portal1Element,
+      portal2: portal2Element,
+      portal3: portal3Element,
+    }),
+    [portal1Element, portal2Element, portal3Element],
+  )
 
   return (
-    <PortalProvider
-      __unstable_elements={{
-        portal1: portal1Element,
-        portal2: portal2Element,
-        portal3: portal3Element,
-      }}
-    >
+    <PortalProvider __unstable_elements={__unstable_elements}>
       <Container width={1}>
         <Card height="fill" padding={4}>
           <Stack space={2}>
