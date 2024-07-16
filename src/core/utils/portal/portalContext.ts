@@ -2,8 +2,8 @@ import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {globalScope} from '../../lib/globalScope'
 import {PortalContextValue} from './types'
 
-const key = Symbol.for('@sanity/ui/context/portal')
-const elementKey = Symbol.for('@sanity/ui/context/portal/element')
+const key = '@sanity/ui/context/portal'
+const elementKey = Symbol.for(`${key}/element`)
 
 globalScope[elementKey] = null
 

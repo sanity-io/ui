@@ -23,6 +23,7 @@ export interface MenuContextValue {
   onMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-const key = Symbol.for('@sanity/ui/context/menu')
-
-export const MenuContext = createGlobalScopedContext<MenuContextValue | null>(key, null)
+export const MenuContext = createGlobalScopedContext<MenuContextValue | null>(
+  '@sanity/ui/context/menu',
+  null,
+)

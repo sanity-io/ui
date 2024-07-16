@@ -1,6 +1,7 @@
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {ToastContextValue} from './types'
 
-const key = Symbol.for('@sanity/ui/context/toast')
-
-export const ToastContext = createGlobalScopedContext<ToastContextValue | null>(key, null)
+export const ToastContext = createGlobalScopedContext<ToastContextValue | null>(
+  '@sanity/ui/context/toast',
+  null,
+)
