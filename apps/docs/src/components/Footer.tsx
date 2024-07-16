@@ -8,7 +8,7 @@ export function AppFooter(): ReactElement {
 
   return (
     <Card flex="none" paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} shadow={1} style={{zIndex: 10}}>
-      <Flex align="center" as="p" gap={1} justify="center">
+      <Flex align="center" gap={1} justify="center">
         <Text as="span" muted size={1}>
           Made with
         </Text>

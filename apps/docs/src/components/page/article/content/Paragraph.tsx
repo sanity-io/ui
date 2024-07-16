@@ -5,7 +5,7 @@ export function Paragraph(props: {children?: ReactNode}): ReactElement {
   const {children} = props
 
   return (
-    <Box as="p" marginY={[4, 4, 5]}>
+    <Box marginY={[4, 4, 5]}>
       <Text muted size={[2, 2, 3]}>
         {children}
       </Text>
