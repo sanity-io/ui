@@ -4,6 +4,7 @@
 export function _isScrollable(el: Node): boolean {
   if (!(el instanceof Element)) return false
 
+  // @TODO check if this is called during render
   const style = window.getComputedStyle(el)
 
   return (

@@ -19,6 +19,7 @@ const loadingAnimation = keyframes`
 
 const LOADING_BAR_HEIGHT = 2
 
+// @TODO get rid of $duration modifier, set data attribute instead and use stable selector
 export function rootStyles(
   props: {$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps,
 ): ReturnType<typeof css> {

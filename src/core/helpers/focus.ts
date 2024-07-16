@@ -15,6 +15,7 @@ import {
  * @internal
  */
 export function _hasFocus(element: HTMLElement): boolean {
+  // @TODO verify this is not called during render
   return Boolean(document.activeElement) && element.contains(document.activeElement)
 }
 

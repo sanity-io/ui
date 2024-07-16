@@ -6,6 +6,7 @@ import {ElementSize, _elementSizeObserver} from '../observers/elementSizeObserve
  * @beta
  */
 export function useElementSize(element: HTMLElement | null): ElementSize | null {
+  // @TODO we can probably use something in framer-motion or @floating-ui instead of rolling our own
   const [size, setSize] = useState<ElementSize | null>(null)
 
   useEffect(() => {
