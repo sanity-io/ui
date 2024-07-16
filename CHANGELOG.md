@@ -5,6 +5,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.0](https://github.com/sanity-io/ui/compare/v2.6.8...v2.7.0) (2024-07-16)
+
+### Features
+
+- add `useMatchMedia` hook ([0f61001](https://github.com/sanity-io/ui/commit/0f6100174ad2f90bb46e411279c94e7b57c6b57b))
+- **usePrefersDark:** support custom getServerSnapshot ([3a02eeb](https://github.com/sanity-io/ui/commit/3a02eebc97175807520141ab7d2e74b59563a8ea))
+- **usePrefersReducedMotion:** support custom getServerSnapshot ([5c45dac](https://github.com/sanity-io/ui/commit/5c45dac2d3659637eafc0bcdcb16344c48422867))
+
+### Bug Fixes
+
+- **useMediaIndex:** reduce memory usage ([#1386](https://github.com/sanity-io/ui/issues/1386)) ([f47ca6e](https://github.com/sanity-io/ui/commit/f47ca6e9f6f16471a7fc4adfb93068d9ce9f4f5a))
+
 ## [2.6.8](https://github.com/sanity-io/ui/compare/v2.6.7...v2.6.8) (2024-07-12)
 
 ### Bug Fixes
