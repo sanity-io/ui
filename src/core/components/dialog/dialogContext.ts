@@ -11,11 +11,10 @@ export interface DialogContextValue {
   zOffset?: number | number[]
 }
 
-const key = Symbol.for('@sanity/ui/context/dialog')
-
 /**
  * @internal
  */
-export const DialogContext = createGlobalScopedContext<DialogContextValue>(key, {
-  version: 0.0,
-})
+export const DialogContext = createGlobalScopedContext<DialogContextValue>(
+  '@sanity/ui/context/dialog',
+  {version: 0.0},
+)
