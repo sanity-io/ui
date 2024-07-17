@@ -216,18 +216,21 @@ const DialogCard = forwardRef(function DialogCard(
   )
 
   useClickOutside(
-    (event: MouseEvent) => {
-      if (!isTopLayer || !onClickOutside) return
+    useCallback(
+      (event) => {
+        if (!isTopLayer || !onClickOutside) return
 
-      const target = event.target as Node | null
+        const target = event.target as Node | null
 
-      if (target && !isTargetWithinScope(boundaryElement, portalElement, target)) {
-        // Ignore clicks outside of the scope
-        return
-      }
+        if (target && !isTargetWithinScope(boundaryElement, portalElement, target)) {
+          // Ignore clicks outside of the scope
+          return
+        }
 
-      onClickOutside()
-    },
+        onClickOutside()
+      },
+      [boundaryElement, isTopLayer, onClickOutside, portalElement],
+    ),
     [rootElement],
   )
 
