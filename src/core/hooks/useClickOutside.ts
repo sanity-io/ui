@@ -1,4 +1,5 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
+import {useEffectEvent} from 'use-effect-event'
 import {EMPTY_ARRAY} from '../constants'
 
 /**
@@ -6,94 +7,143 @@ import {EMPTY_ARRAY} from '../constants'
  */
 export type ClickOutsideListener = (event: MouseEvent) => void
 
-function _getElements(
-  element: HTMLElement | null,
-  elementsArg: (HTMLElement | null | (HTMLElement | null)[])[],
-): HTMLElement[] {
-  const ret = [element]
+/**
+ * @public
+ */
+export type ClickOutsideElements = (HTMLElement | null | (HTMLElement | null)[])[]
 
-  for (const el of elementsArg) {
-    if (Array.isArray(el)) {
-      ret.push(...el)
-    } else {
-      ret.push(el)
-    }
-  }
-
-  return ret.filter(Boolean) as HTMLElement[]
-}
+/**
+ * @public
+ * @deprecated - use your own `const [element, setElement] = useState(null)` logic instead
+ */
+export type UseClickOutsideSetElement = (el: HTMLElement | null) => void
 
 /**
  * @public
  */
 export function useClickOutside(
-  listener: ClickOutsideListener,
-  elementsArg: (HTMLElement | null | (HTMLElement | null)[])[] = EMPTY_ARRAY,
+  listener: ClickOutsideListener | false | undefined,
+  elementsArg: () => ClickOutsideElements,
+  boundaryElement?: () => HTMLElement | null,
+): void
+/**
+ * @public
+ * @deprecated - change `useClickOutside(handler, () => [...], boundary)` to `useClickOutside(handler, () => [...], () => boundary)`
+ */
+export function useClickOutside(
+  listener: ClickOutsideListener | false | undefined,
+  elementsArg: () => ClickOutsideElements,
+  boundaryElement: HTMLElement | null,
+): void
+/**
+ * @public
+ * @deprecated - change `useClickOutside(handler, [...], () => boundary)` to `useClickOutside(handler, () => [...], () => boundary)`
+ */
+export function useClickOutside(
+  listener: ClickOutsideListener | false | undefined,
+  elementsArg: ClickOutsideElements,
+  boundaryElement: () => HTMLElement | null,
+): UseClickOutsideSetElement
+/**
+ * @public
+ * @deprecated
+ * Instead of:
+ * ```tsx
+ * const buttonRef = useRef(null)
+ * const setElement = useClickOutside(() => {}, [buttonRef.current])
+ * return (
+ *   <>
+ *     <button ref={buttonRef} />
+ *     {open && <div ref={setElement} />}
+ *   </>
+ * )
+ * ```
+ * Use:
+ * ```tsx
+ * const buttonRef = useRef()
+ * const [element, setElement] = useState(null)
+ * useClickOutside(() => {}, () => [buttonRef.current, element])
+ * return (
+ *   <>
+ *     <button ref={buttonRef} />
+ *     {open && <div ref={setElement} />}
+ *   </>
+ * )
+ * ```
+ */
+export function useClickOutside(
+  listener: ClickOutsideListener | false | undefined,
+  elementsArg: ClickOutsideElements,
   boundaryElement?: HTMLElement | null,
-): (el: HTMLElement | null) => void {
-  const [element, setElement] = useState<HTMLElement | null>(null)
-  const [elements, setElements] = useState(() => _getElements(element, elementsArg))
-  const elementsRef = useRef(elements)
+): UseClickOutsideSetElement
 
-  useEffect(() => {
-    const prevElements = elementsRef.current
-    const nextElements = _getElements(element, elementsArg)
+/**
+ * @public
+ */
+export function useClickOutside(
+  listener: ClickOutsideListener | false | undefined,
+  elementsArg: ClickOutsideElements | (() => ClickOutsideElements) = EMPTY_ARRAY,
+  boundaryElement?: HTMLElement | null | (() => HTMLElement | null),
+): UseClickOutsideSetElement | void {
+  /** @deprecated */
+  const [legacyElement, setLegacyElement] = useState<HTMLElement | null>(null)
 
-    if (prevElements.length !== nextElements.length) {
-      setElements(nextElements)
-      elementsRef.current = nextElements
-
+  /**
+   * The `useEffectEvent` hook allow us to always see the latest value of `listener`, `elementsArg` and `boundaryElement` without needing to
+   * juggle `useState`, `useRef` and `useState` to make sure the `mousedown` event listener isn't constantly being added and removed.
+   */
+  const onEvent = useEffectEvent((evt: MouseEvent) => {
+    if (!listener) {
       return
     }
 
-    for (const el of prevElements) {
-      if (!nextElements.includes(el)) {
-        setElements(nextElements)
-        elementsRef.current = nextElements
+    const target = evt.target
 
+    if (!(target instanceof Node)) {
+      return
+    }
+
+    const resolvedBoundaryElement =
+      typeof boundaryElement === 'function' ? boundaryElement() : boundaryElement
+
+    if (resolvedBoundaryElement && !resolvedBoundaryElement.contains(target)) {
+      return
+    }
+
+    const resolvedElements = Array.isArray(elementsArg)
+      ? [legacyElement, ...elementsArg]
+      : elementsArg()
+    const elements = resolvedElements.flat()
+
+    for (const el of elements) {
+      if (!el) continue
+
+      if (target === el || el.contains(target)) {
         return
       }
     }
 
-    for (const el of nextElements) {
-      if (!prevElements.includes(el)) {
-        setElements(nextElements)
-        elementsRef.current = nextElements
+    listener(evt)
+  })
 
-        return
-      }
-    }
-  }, [element, elementsArg])
+  const hasListener = Boolean(listener)
 
   useEffect(() => {
-    if (!listener) return undefined
+    if (!hasListener) return undefined
 
-    const handleWindowMouseDown = (evt: MouseEvent) => {
-      const target = evt.target
+    const handleEvent = (evt: MouseEvent) => onEvent(evt)
 
-      if (!(target instanceof Node)) {
-        return
-      }
-
-      if (boundaryElement && !boundaryElement.contains(target)) {
-        return
-      }
-
-      for (const el of elements) {
-        if (target === el || el.contains(target)) {
-          return
-        }
-      }
-
-      listener(evt)
-    }
-
-    window.addEventListener('mousedown', handleWindowMouseDown)
+    document.addEventListener('mousedown', handleEvent)
 
     return () => {
-      window.removeEventListener('mousedown', handleWindowMouseDown)
+      document.removeEventListener('mousedown', handleEvent)
     }
-  }, [boundaryElement, listener, elements])
+  }, [hasListener, onEvent])
 
-  return setElement
+  /**
+   * Only return the legacy setElement function if the elementsArg is an array
+   */
+  if (Array.isArray(elementsArg)) {
+    return setLegacyElement as UseClickOutsideSetElement
+  }
 }

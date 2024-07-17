@@ -1,7 +1,7 @@
 import {EllipsisVerticalIcon} from '@sanity/icons'
 import {Button, Card, Flex, Popover, Text, useClickOutside} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
-import {useCallback, useState} from 'react'
+import {useCallback, useRef, useState} from 'react'
 import {
   WORKSHOP_FLEX_ALIGN_OPTIONS,
   WORKSHOP_FLEX_JUSTIFY_OPTIONS,
@@ -20,8 +20,8 @@ export default function AlignedStory() {
 
   const [open, setOpen] = useState(false)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
-  const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
-  const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
+  const buttonElementRef = useRef<HTMLButtonElement | null>(null)
+  const popoverElementRef = useRef<HTMLDivElement | null>(null)
 
   const content = (
     <Text>
@@ -39,9 +39,11 @@ export default function AlignedStory() {
   )
 
   const handleToggleOpen = useCallback(() => setOpen((v) => !v), [])
-  const handleClose = useCallback(() => setOpen(false), [])
 
-  useClickOutside(handleClose, [buttonElement, popoverElement])
+  useClickOutside(
+    () => setOpen(false),
+    () => [buttonElementRef.current, popoverElementRef.current],
+  )
 
   return (
     <Card height="fill" padding={[4, 5, 6]} sizing="border" tone="transparent">
@@ -56,14 +58,14 @@ export default function AlignedStory() {
             padding={3}
             portal={portal}
             placement={placement}
-            ref={setPopoverElement}
+            ref={popoverElementRef}
             width={width}
           >
             <Button
               icon={EllipsisVerticalIcon}
               mode="bleed"
               onClick={handleToggleOpen}
-              ref={setButtonElement}
+              ref={buttonElementRef}
               selected={open}
             />
           </Popover>
