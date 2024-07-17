@@ -1,5 +1,6 @@
 export * from './useArrayProp'
 export * from './useClickOutside'
+export * from './useClickOutsideEvent'
 export * from './useCustomValidity'
 export * from './useElementRect'
 export * from './useElementSize'

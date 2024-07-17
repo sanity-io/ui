@@ -1,5 +1,5 @@
 import {EllipsisVerticalIcon} from '@sanity/icons'
-import {Button, Card, Flex, Popover, Text, useClickOutside} from '@sanity/ui'
+import {Button, Card, Flex, Popover, Text, useClickOutsideEvent} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useRef, useState} from 'react'
 import {
@@ -40,7 +40,7 @@ export default function AlignedStory() {
 
   const handleToggleOpen = useCallback(() => setOpen((v) => !v), [])
 
-  useClickOutside(
+  useClickOutsideEvent(
     () => setOpen(false),
     () => [buttonElementRef.current, popoverElementRef.current],
   )
