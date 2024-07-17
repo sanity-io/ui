@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.0](https://github.com/sanity-io/ui/compare/v2.7.0...v2.8.0) (2024-07-17)
+
+### Features
+
+- **useClickOutside:** support react refs ([#1390](https://github.com/sanity-io/ui/issues/1390)) ([cb182db](https://github.com/sanity-io/ui/commit/cb182db8bc3caf5347a33acc2ae8ffc6a69f39b0))
+
 ## [2.7.0](https://github.com/sanity-io/ui/compare/v2.6.8...v2.7.0) (2024-07-16)
 
 ### Features
