@@ -8,7 +8,7 @@ export type ClickOutsideListener = (event: MouseEvent) => void
 
 function _getElements(
   element: HTMLElement | null,
-  elementsArg: Array<HTMLElement | HTMLElement[] | null>,
+  elementsArg: (HTMLElement | null | (HTMLElement | null)[])[],
 ): HTMLElement[] {
   const ret = [element]
 
@@ -28,7 +28,7 @@ function _getElements(
  */
 export function useClickOutside(
   listener: ClickOutsideListener,
-  elementsArg: Array<HTMLElement | HTMLElement[] | null> = EMPTY_ARRAY,
+  elementsArg: (HTMLElement | null | (HTMLElement | null)[])[] = EMPTY_ARRAY,
   boundaryElement?: HTMLElement | null,
 ): (el: HTMLElement | null) => void {
   const [element, setElement] = useState<HTMLElement | null>(null)
