@@ -1,12 +1,14 @@
 import {ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
-import {expect} from '@storybook/test'
+import {expect, fn} from '@storybook/test'
 import {userEvent, within} from '@storybook/test'
 import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
 import {Button, Flex} from '../../src/core/primitives'
 
 const meta: Meta<typeof MenuButton> = {
   args: {
+    onOpen: fn(),
+    onClose: fn(),
     button: <Button text="Open" />,
     menu: (
       <Menu>
