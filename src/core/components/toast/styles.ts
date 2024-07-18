@@ -14,7 +14,7 @@ const loadingAnimation = keyframes`
   }
   100% {
     width: 100%;
-  } 
+  }
 `
 
 const LOADING_BAR_HEIGHT = 2

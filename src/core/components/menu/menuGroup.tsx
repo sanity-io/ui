@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import {isValidElement, useCallback, useEffect, useRef, useState} from 'react'
+import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
@@ -58,7 +58,7 @@ export function MenuGroup(
   } = menu
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
   const [open, setOpen] = useState(false)
-  const shouldFocusRef = useRef<'first' | 'last' | null>(null)
+  const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
   const [withinMenu, setWithinMenu] = useState(false)
 
@@ -88,22 +88,17 @@ export function MenuGroup(
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      if (onClick) onClick(event)
+      onClick?.(event)
 
-      shouldFocusRef.current = 'first'
-
+      setShouldFocus('first')
       setOpen(true)
-
-      requestAnimationFrame(() => {
-        shouldFocusRef.current = null
-      })
     },
     [onClick],
   )
 
   const handleChildItemClick = useCallback(() => {
     setOpen(false)
-    if (onItemClick) onItemClick()
+    onItemClick?.()
   }, [onItemClick])
 
   const handleMenuMouseEnter = useCallback(() => setWithinMenu(true), [])
@@ -121,6 +116,16 @@ export function MenuGroup(
     if (!open) setWithinMenu(false)
   }, [open])
 
+  // Reset the shouldFocus state after it has been used
+  useEffect(() => {
+    if (!shouldFocus) return
+    // The useMenuController effect that handles `shouldFocus` schedules a request animation frame where it's processed.
+    // By doing the same here, we ensure that the reset is processed after the focus change.
+    const rafId = requestAnimationFrame(() => setShouldFocus(null))
+
+    return () => cancelAnimationFrame(rafId)
+  }, [shouldFocus])
+
   const childMenu = (
     <Menu
       onClickOutside={onClickOutside}
@@ -129,7 +134,7 @@ export function MenuGroup(
       onKeyDown={handleMenuKeyDown}
       onMouseEnter={handleMenuMouseEnter}
       registerElement={registerElement}
-      shouldFocus={shouldFocusRef.current}
+      shouldFocus={shouldFocus}
     >
       {children}
     </Menu>
@@ -143,14 +148,9 @@ export function MenuGroup(
     }
 
     if (event.key === 'ArrowRight') {
-      shouldFocusRef.current = 'first'
-
+      setShouldFocus('first')
       setOpen(true)
       setWithinMenu(true)
-
-      requestAnimationFrame(() => {
-        shouldFocusRef.current = null
-      })
 
       return
     }

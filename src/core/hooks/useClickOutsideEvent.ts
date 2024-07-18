@@ -35,15 +35,13 @@ export function useClickOutsideEvent(
       return
     }
 
-    const resolvedBoundaryElement =
-      typeof boundaryElement === 'function' ? boundaryElement() : boundaryElement
+    const resolvedBoundaryElement = boundaryElement?.()
 
     if (resolvedBoundaryElement && !resolvedBoundaryElement.contains(target)) {
       return
     }
 
-    const resolvedElements = Array.isArray(elementsArg) ? elementsArg : elementsArg()
-    const elements = resolvedElements.flat()
+    const elements = elementsArg().flat()
 
     for (const el of elements) {
       if (!el) continue
