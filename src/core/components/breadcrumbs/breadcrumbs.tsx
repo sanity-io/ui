@@ -1,5 +1,14 @@
-import {Children, forwardRef, Fragment, isValidElement, useCallback, useMemo, useState} from 'react'
-import {useArrayProp, useClickOutside} from '../../hooks'
+import {
+  Children,
+  forwardRef,
+  Fragment,
+  isValidElement,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import {useArrayProp, useClickOutsideEvent} from '../../hooks'
 import {Box, Popover, Stack, Text} from '../../primitives'
 import {ExpandButton, Root} from './breadcrumbs.styles'
 
@@ -22,13 +31,13 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   const {children, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
   const space = useArrayProp(spaceRaw)
   const [open, setOpen] = useState(false)
-  const [expandElement, setExpandElement] = useState<HTMLButtonElement | null>(null)
-  const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
+  const expandElementRef = useRef<HTMLButtonElement | null>(null)
+  const popoverElementRef = useRef<HTMLDivElement | null>(null)
 
   const collapse = useCallback(() => setOpen(false), [])
   const expand = useCallback(() => setOpen(true), [])
 
-  useClickOutside(collapse, [expandElement, popoverElement])
+  useClickOutsideEvent(collapse, () => [expandElementRef.current, popoverElementRef.current])
 
   const rawItems = useMemo(() => Children.toArray(children).filter(isValidElement), [children])
 
@@ -52,14 +61,14 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
           open={open}
           placement="top"
           portal
-          ref={setPopoverElement}
+          ref={popoverElementRef}
         >
           <ExpandButton
             fontSize={1}
             mode="bleed"
             onClick={open ? collapse : expand}
             padding={1}
-            ref={setExpandElement}
+            ref={expandElementRef}
             selected={open}
             text="…"
           />
