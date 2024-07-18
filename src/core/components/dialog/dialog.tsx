@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 import {
   containsOrEqualsElement,
@@ -8,7 +8,12 @@ import {
   focusLastDescendant,
   isHTMLElement,
 } from '../../helpers'
-import {useArrayProp, useClickOutside, useGlobalKeyDown, usePrefersReducedMotion} from '../../hooks'
+import {
+  useArrayProp,
+  useClickOutsideEvent,
+  useGlobalKeyDown,
+  usePrefersReducedMotion,
+} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
@@ -170,7 +175,6 @@ const DialogCard = forwardRef(function DialogCard(
   const shadow = useArrayProp(shadowProp)
   const width = useArrayProp(widthProp)
   const ref = useRef<HTMLDivElement | null>(null)
-  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLDivElement | null>(null)
   const layer = useLayer()
   const {isTopLayer} = layer
@@ -215,11 +219,10 @@ const DialogCard = forwardRef(function DialogCard(
     ),
   )
 
-  useClickOutside(
-    useCallback(
-      (event) => {
-        if (!isTopLayer || !onClickOutside) return
-
+  useClickOutsideEvent(
+    isTopLayer &&
+      onClickOutside &&
+      ((event) => {
         const target = event.target as Node | null
 
         if (target && !isTargetWithinScope(boundaryElement, portalElement, target)) {
@@ -228,20 +231,13 @@ const DialogCard = forwardRef(function DialogCard(
         }
 
         onClickOutside()
-      },
-      [boundaryElement, isTopLayer, onClickOutside, portalElement],
-    ),
-    [rootElement],
+      }),
+    () => [ref.current],
   )
-
-  const setRef = useCallback((el: HTMLDivElement | null) => {
-    setRootElement(el)
-    ref.current = el
-  }, [])
 
   return (
     <DialogContainer data-ui="DialogCard" width={width}>
-      <DialogCardRoot radius={radius} ref={setRef} scheme={scheme} shadow={shadow}>
+      <DialogCardRoot radius={radius} ref={ref} scheme={scheme} shadow={shadow}>
         <DialogLayout direction="column">
           {showHeader && (
             <DialogHeader>
