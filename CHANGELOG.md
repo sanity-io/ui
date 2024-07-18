@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.6](https://github.com/sanity-io/ui/compare/v2.8.5...v2.8.6) (2024-07-18)
+
+### Bug Fixes
+
+- **MenuGroup:** reduce rerenders when opening groups ([#1399](https://github.com/sanity-io/ui/issues/1399)) ([9c982ea](https://github.com/sanity-io/ui/commit/9c982eaad50e7cf11dbecb20962c0f63fd4dd9ff))
+- **menu:** refactor to `useClickOutsideEvent` ([#1397](https://github.com/sanity-io/ui/issues/1397)) ([b830db1](https://github.com/sanity-io/ui/commit/b830db1fd83fa58b8941b3bb3652fa4eca06ee4b))
+
 ## [2.8.5](https://github.com/sanity-io/ui/compare/v2.8.4...v2.8.5) (2024-07-18)
 
 ### Bug Fixes
