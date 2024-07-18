@@ -1,12 +1,18 @@
 import {BinaryDocumentIcon, CircleIcon, RestoreIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
+import {fn} from '@storybook/test'
 import {Menu, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
 import {Badge, Card, Container, Flex, Stack, Text} from '../../src/core/primitives'
 import {LayerProvider} from '../../src/core/utils'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Menu> = {
-  args: {},
+  args: {
+    onClickOutside: fn(),
+    onEscape: fn(),
+    onItemClick: fn(),
+    onItemSelect: fn(),
+  },
   argTypes: {
     padding: getSpaceControls(),
     space: getSpaceControls(),

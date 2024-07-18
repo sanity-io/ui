@@ -196,11 +196,7 @@ export const MenuButton = forwardRef(function MenuButton(
   const registerElement = useCallback((el: HTMLElement) => {
     setChildMenuElements((els) => els.concat([el]))
 
-    return () => {
-      setChildMenuElements((els) => {
-        return els.filter((_el) => _el !== el)
-      })
-    }
+    return () => setChildMenuElements((els) => els.filter((_el) => _el !== el))
   }, [])
 
   const menuProps: MenuProps = useMemo(

@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {_getFocusableElements, _sortElements} from './helpers'
 
 /**
@@ -11,8 +11,6 @@ export interface MenuController {
   handleItemMouseLeave: () => void
   handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void
   mount: (element: HTMLElement | null, selected?: boolean) => () => void
-  rootElement: HTMLDivElement | null
-  setRootElement: (el: HTMLDivElement | null) => void
 }
 
 /**
@@ -24,14 +22,14 @@ export function useMenuController(props: {
   onKeyDown?: React.KeyboardEventHandler
   originElement?: HTMLElement | null
   shouldFocus: 'first' | 'last' | null
+  rootElementRef: React.MutableRefObject<HTMLDivElement | null>
 }): MenuController {
-  const {onKeyDown, originElement, shouldFocus} = props
+  const {onKeyDown, originElement, shouldFocus, rootElementRef} = props
   const elementsRef = useRef<HTMLElement[]>([])
-  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const [activeIndex, _setActiveIndex] = useState(-1)
   const activeIndexRef = useRef(activeIndex)
-  const activeElement = elementsRef.current[activeIndex] || null
-  const mounted = Boolean(rootElement)
+  const activeElement = useMemo(() => elementsRef.current[activeIndex] || null, [activeIndex])
+  const mounted = Boolean(rootElementRef.current)
 
   const setActiveIndex = useCallback((nextActiveIndex: number) => {
     _setActiveIndex(nextActiveIndex)
@@ -44,7 +42,7 @@ export function useMenuController(props: {
 
       if (elementsRef.current.indexOf(element) === -1) {
         elementsRef.current.push(element)
-        _sortElements(rootElement, elementsRef.current)
+        _sortElements(rootElementRef.current, elementsRef.current)
       }
 
       if (selected) {
@@ -61,7 +59,7 @@ export function useMenuController(props: {
         }
       }
     },
-    [rootElement, setActiveIndex],
+    [rootElementRef, setActiveIndex],
   )
 
   const handleKeyDown = useCallback(
@@ -179,17 +177,15 @@ export function useMenuController(props: {
     // which would be incorrect when the user hovers over a gap
     // between two menu items or a menu divider.
     setActiveIndex(-2)
-    rootElement?.focus()
-  }, [setActiveIndex, rootElement])
+    rootElementRef.current?.focus()
+  }, [rootElementRef, setActiveIndex])
 
   // Set focus on the currently active element
   useEffect(() => {
     if (!mounted) return
 
     const rafId = window.requestAnimationFrame(() => {
-      const _activeIndex = activeIndexRef.current
-
-      if (_activeIndex === -1) {
+      if (activeIndex === -1) {
         if (shouldFocus === 'first') {
           const focusableElements = _getFocusableElements(elementsRef.current)
           const el = focusableElements[0]
@@ -217,7 +213,7 @@ export function useMenuController(props: {
         return
       }
 
-      const element = elementsRef.current[_activeIndex] || null
+      const element = elementsRef.current[activeIndex] || null
 
       element?.focus()
     })
@@ -234,7 +230,5 @@ export function useMenuController(props: {
     handleItemMouseLeave,
     handleKeyDown,
     mount,
-    rootElement,
-    setRootElement,
   }
 }
