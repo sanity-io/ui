@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.5](https://github.com/sanity-io/ui/compare/v2.8.4...v2.8.5) (2024-07-18)
+
+### Bug Fixes
+
+- **useClickOutsideEvent:** implement `useDebugValue` to report enabled status ([#1398](https://github.com/sanity-io/ui/issues/1398)) ([67fe3de](https://github.com/sanity-io/ui/commit/67fe3def20b3a39ebdbbfac5c80a8b4e7a276b90))
+
 ## [2.8.4](https://github.com/sanity-io/ui/compare/v2.8.3...v2.8.4) (2024-07-18)
 
 ### Bug Fixes
