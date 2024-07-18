@@ -16,3 +16,5 @@ export function ConditionalWrapper({
 
   return wrapper(children)
 }
+
+ConditionalWrapper.displayName = 'ConditionalWrapper'

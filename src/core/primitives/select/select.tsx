@@ -83,3 +83,4 @@ export const Select = forwardRef(function Select(
     </Root>
   )
 })
+Select.displayName = 'ForwardRef(Select)'

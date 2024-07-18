@@ -95,3 +95,4 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     </Root>
   )
 })
+Breadcrumbs.displayName = 'ForwardRef(Breadcrumbs)'

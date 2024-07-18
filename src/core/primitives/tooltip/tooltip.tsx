@@ -429,6 +429,7 @@ export const Tooltip = forwardRef(function Tooltip(
     </>
   )
 })
+Tooltip.displayName = 'ForwardRef(Tooltip)'
 
 /**
  * As `useEffectEvent` should never be passed to other components or hooks, this custom hook groups together the `useEffectEvent` and the `useEffect` hook using it.

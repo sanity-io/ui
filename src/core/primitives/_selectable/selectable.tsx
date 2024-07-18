@@ -11,3 +11,4 @@ export const Selectable = styled(Box)<SelectableStyleProps & ResponsiveRadiusSty
   selectableBaseStyle,
   selectableColorStyle,
 )
+Selectable.displayName = 'Selectable'

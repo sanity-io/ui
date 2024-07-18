@@ -69,3 +69,4 @@ export const Checkbox = forwardRef(function Checkbox(
     </Root>
   )
 })
+Checkbox.displayName = 'ForwardRef(Checkbox)'

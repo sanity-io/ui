@@ -691,6 +691,8 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   )
 })
 
+InnerAutocomplete.displayName = 'ForwardRef(Autocomplete)'
+
 /**
  * The Autocomplete component is typically used for search components.
  * It consists of a text input for writing a query, and properties for rendering suggestions.

@@ -286,3 +286,4 @@ export const MenuButton = forwardRef(function MenuButton(
     </Popover>
   )
 })
+MenuButton.displayName = 'ForwardRef(MenuButton)'

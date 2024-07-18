@@ -175,3 +175,4 @@ export const MenuItem = forwardRef(function MenuItem(
     </Selectable>
   )
 })
+MenuItem.displayName = 'ForwardRef(MenuItem)'

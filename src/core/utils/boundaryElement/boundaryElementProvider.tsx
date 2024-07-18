@@ -19,3 +19,5 @@ export function BoundaryElementProvider(props: BoundaryElementProviderProps): Re
 
   return <BoundaryElementContext.Provider value={value}>{children}</BoundaryElementContext.Provider>
 }
+
+BoundaryElementProvider.displayName = 'BoundaryElementProvider'

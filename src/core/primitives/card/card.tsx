@@ -112,3 +112,4 @@ export const Card = forwardRef(function Card(
     </ThemeColorProvider>
   )
 })
+Card.displayName = 'ForwardRef(Card)'

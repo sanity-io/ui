@@ -106,5 +106,4 @@ export const TooltipCard = memo(
     )
   }),
 )
-
-TooltipCard.displayName = 'TooltipCard'
+TooltipCard.displayName = 'Memo(ForwardRef(TooltipCard))'

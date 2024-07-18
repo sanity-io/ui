@@ -9,3 +9,4 @@ export const MenuDivider = styled.hr`
   background: var(--card-hairline-soft-color);
   margin: 0;
 `
+MenuDivider.displayName = 'MenuDivider'

@@ -64,3 +64,4 @@ export const Switch = forwardRef(function Switch(
     </Root>
   )
 })
+Switch.displayName = 'ForwardRef(Switch)'

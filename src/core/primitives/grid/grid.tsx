@@ -44,3 +44,4 @@ export const Grid = forwardRef(function Grid(
     </Root>
   )
 })
+Grid.displayName = 'ForwardRef(Grid)'

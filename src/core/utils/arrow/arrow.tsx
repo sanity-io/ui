@@ -119,3 +119,4 @@ export const Arrow = forwardRef(function Arrow(
     </Root>
   )
 })
+Arrow.displayName = 'ForwardRef(Arrow)'

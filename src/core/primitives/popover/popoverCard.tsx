@@ -152,5 +152,4 @@ export const PopoverCard = memo(
     )
   }),
 )
-
-PopoverCard.displayName = 'PopoverCard'
+PopoverCard.displayName = 'Memo(ForwardRef(PopoverCard))'

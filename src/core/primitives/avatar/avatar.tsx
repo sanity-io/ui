@@ -194,3 +194,4 @@ export const Avatar = forwardRef(function Avatar(
     </Root>
   )
 })
+Avatar.displayName = 'ForwardRef(Avatar)'

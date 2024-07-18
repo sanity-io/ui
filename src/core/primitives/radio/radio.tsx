@@ -47,3 +47,4 @@ export const Radio = forwardRef(function Radio(
     </Root>
   )
 })
+Radio.displayName = 'ForwardRef(Radio)'

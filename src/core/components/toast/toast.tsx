@@ -103,3 +103,5 @@ export function Toast(
     </Root>
   )
 }
+
+Toast.displayName = 'Toast'

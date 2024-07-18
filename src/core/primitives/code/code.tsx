@@ -37,3 +37,4 @@ export const Code = forwardRef(function Code(
     </Root>
   )
 })
+Code.displayName = 'ForwardRef(Code)'

@@ -74,3 +74,4 @@ export const TabList = forwardRef(function TabList(
     </CustomInline>
   )
 })
+TabList.displayName = 'ForwardRef(TabList)'

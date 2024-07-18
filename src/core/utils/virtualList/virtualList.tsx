@@ -167,3 +167,4 @@ export const VirtualList = forwardRef(function VirtualList(
     </Root>
   )
 })
+VirtualList.displayName = 'ForwardRef(VirtualList)'

@@ -189,3 +189,5 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
     </ToastContext.Provider>
   )
 }
+
+ToastProvider.displayName = 'ToastProvider'

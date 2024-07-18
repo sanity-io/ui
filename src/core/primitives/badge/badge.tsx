@@ -58,3 +58,4 @@ export const Badge = forwardRef(function Badge(
     </Root>
   )
 })
+Badge.displayName = 'ForwardRef(Badge)'

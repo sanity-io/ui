@@ -178,3 +178,4 @@ export const Button = forwardRef(function Button(
     </Root>
   )
 })
+Button.displayName = 'ForwardRef(Button)'

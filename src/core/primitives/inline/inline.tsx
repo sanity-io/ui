@@ -44,3 +44,4 @@ export const Inline = forwardRef(function Inline(
     </Root>
   )
 })
+Inline.displayName = 'ForwardRef(Inline)'

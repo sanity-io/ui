@@ -454,5 +454,4 @@ export const Popover = memo(
     )
   }),
 )
-
-Popover.displayName = 'Popover'
+Popover.displayName = 'Memo(ForwardRef(Popover))'

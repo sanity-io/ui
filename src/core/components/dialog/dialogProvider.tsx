@@ -30,3 +30,5 @@ export function DialogProvider(props: DialogProviderProps): React.ReactElement {
 
   return <DialogContext.Provider value={contextValue}>{children}</DialogContext.Provider>
 }
+
+DialogProvider.displayName = 'DialogProvider'
