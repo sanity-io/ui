@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.3](https://github.com/sanity-io/ui/compare/v2.8.2...v2.8.3) (2024-07-18)
+
+### Bug Fixes
+
+- **breadcrumbs:** refactor to `useClickOutsideEvent` ([#1395](https://github.com/sanity-io/ui/issues/1395)) ([a4f313d](https://github.com/sanity-io/ui/commit/a4f313d586a03dd349462740dfcd06b00169db1e))
+
 ## [2.8.2](https://github.com/sanity-io/ui/compare/v2.8.1...v2.8.2) (2024-07-17)
 
 ### Bug Fixes
