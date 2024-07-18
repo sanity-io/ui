@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useDebugValue, useEffect} from 'react'
 import {useEffectEvent} from 'use-effect-event'
 import {EMPTY_ARRAY} from '../constants'
 
@@ -69,4 +69,6 @@ export function useClickOutsideEvent(
       document.removeEventListener('mousedown', handleEvent)
     }
   }, [hasListener, onEvent])
+
+  useDebugValue(listener ? 'MouseDown On' : 'MouseDown Off')
 }
