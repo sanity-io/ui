@@ -184,7 +184,7 @@ export function useMenuController(props: {
   useEffect(() => {
     if (!mounted) return
 
-    const rafId = window.requestAnimationFrame(() => {
+    const rafId = requestAnimationFrame(() => {
       if (activeIndex === -1) {
         if (shouldFocus === 'first') {
           const focusableElements = _getFocusableElements(elementsRef.current)
@@ -194,7 +194,6 @@ export function useMenuController(props: {
             const currentIndex = elementsRef.current.indexOf(el)
 
             setActiveIndex(currentIndex)
-            activeIndexRef.current = currentIndex
           }
         }
 
@@ -206,7 +205,6 @@ export function useMenuController(props: {
             const currentIndex = elementsRef.current.indexOf(el)
 
             setActiveIndex(currentIndex)
-            activeIndexRef.current = currentIndex
           }
         }
 
@@ -218,9 +216,7 @@ export function useMenuController(props: {
       element?.focus()
     })
 
-    return () => {
-      window.cancelAnimationFrame(rafId)
-    }
+    return () => cancelAnimationFrame(rafId)
   }, [activeIndex, mounted, setActiveIndex, shouldFocus])
 
   return {
