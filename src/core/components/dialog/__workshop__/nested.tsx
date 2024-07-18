@@ -20,28 +20,38 @@ export default function NestedStory() {
   return (
     <LayerProvider>
       {open1 && (
-        <Dialog cardShadow={1} header="Dialog 1" id="dialog1">
+        <Dialog animate cardShadow={1} header="Dialog 1" id="dialog1">
           <Box padding={4}>
             <Button onClick={() => setOpen2(true)} ref={dialog2Button} text="Open Dialog 2" />
           </Box>
 
           {open2 && (
-            <Dialog cardShadow={2} header="Dialog 2" id="dialog2" onClose={() => setOpen2(false)}>
+            <Dialog
+              animate
+              cardShadow={2}
+              header="Dialog 2"
+              id="dialog2"
+              onClose={() => setOpen2(false)}
+              onClickOutside={() => setOpen2(false)}
+            >
               <Box padding={4}>
                 <Button onClick={() => setOpen3(true)} ref={dialog3Button} text="Open Dialog 3" />
               </Box>
 
               {open3 && (
                 <Dialog
+                  animate
                   cardShadow={4}
                   header="Dialog 3"
                   id="dialog3"
                   onClose={() => setOpen3(false)}
+                  onClickOutside={() => setOpen3(false)}
                 >
                   <Box padding={4}>
                     <MenuButton
                       button={<Button text="Test" />}
                       id="menu3"
+                      popover={{animate: true}}
                       menu={
                         <Menu>
                           <MenuItem text="Test" />
