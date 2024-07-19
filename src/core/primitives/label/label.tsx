@@ -82,3 +82,4 @@ export const Label = forwardRef(function Label(
     </Root>
   )
 })
+Label.displayName = 'ForwardRef(Label)'

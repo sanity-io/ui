@@ -50,3 +50,4 @@ export const Flex = forwardRef(function Flex(
     />
   )
 })
+Flex.displayName = 'ForwardRef(Flex)'

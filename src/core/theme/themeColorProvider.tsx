@@ -24,3 +24,5 @@ export function ThemeColorProvider(props: ThemeColorProviderProps): React.ReactE
     </ThemeProvider>
   )
 }
+
+ThemeColorProvider.displayName = 'ThemeColorProvider'

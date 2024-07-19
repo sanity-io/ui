@@ -97,3 +97,4 @@ export const Tab = forwardRef(function Tab(
     />
   )
 })
+Tab.displayName = 'ForwardRef(Tab)'

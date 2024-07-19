@@ -233,5 +233,4 @@ export const Tree = memo(
     )
   }),
 )
-
-Tree.displayName = 'Tree'
+Tree.displayName = 'Memo(ForwardRef(Tree))'

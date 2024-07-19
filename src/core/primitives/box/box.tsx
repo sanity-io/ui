@@ -127,3 +127,4 @@ export const Box = forwardRef(function Box(
     </Root>
   )
 })
+Box.displayName = 'ForwardRef(Box)'

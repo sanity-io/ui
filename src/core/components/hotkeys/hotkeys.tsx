@@ -58,3 +58,4 @@ export const Hotkeys = forwardRef(function Hotkeys(
     </Root>
   )
 })
+Hotkeys.displayName = 'ForwardRef(Hotkeys)'

@@ -198,3 +198,5 @@ export function MenuGroup(
     </Popover>
   )
 }
+
+MenuGroup.displayName = 'MenuGroup'

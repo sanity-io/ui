@@ -384,3 +384,4 @@ export const TextInput = forwardRef(function TextInput(
     </Root>
   )
 })
+TextInput.displayName = 'ForwardRef(TextInput)'

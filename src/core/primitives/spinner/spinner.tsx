@@ -42,3 +42,4 @@ export const Spinner = forwardRef(function Spinner(
     </Root>
   )
 })
+Spinner.displayName = 'ForwardRef(Spinner)'

@@ -84,3 +84,4 @@ export const Text = forwardRef(function Text(
     </Root>
   )
 })
+Text.displayName = 'ForwardRef(Text)'

@@ -201,3 +201,4 @@ export const TreeItem = memo(function TreeItem(
     </Root>
   )
 })
+TreeItem.displayName = 'Memo(TreeItem)'

@@ -90,3 +90,4 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
     </Root>
   )
 })
+AvatarCounter.displayName = 'ForwardRef(AvatarCounter)'

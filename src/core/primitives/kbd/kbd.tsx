@@ -57,3 +57,4 @@ export const KBD = forwardRef(function KBD(
     </Root>
   )
 })
+KBD.displayName = 'ForwardRef(KBD)'

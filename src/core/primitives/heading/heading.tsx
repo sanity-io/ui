@@ -83,3 +83,4 @@ export const Heading = forwardRef(function Heading(
     </Root>
   )
 })
+Heading.displayName = 'ForwardRef(Heading)'

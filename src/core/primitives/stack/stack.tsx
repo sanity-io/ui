@@ -36,3 +36,4 @@ export const Stack = forwardRef(function Stack(
     />
   )
 })
+Stack.displayName = 'ForwardRef(Stack)'
