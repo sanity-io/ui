@@ -27,3 +27,4 @@ export const GroqMonogram = forwardRef(function GroqMonogram(
     </svg>
   )
 })
+GroqMonogram.displayName = 'ForwardRef(GroqMonogram)'

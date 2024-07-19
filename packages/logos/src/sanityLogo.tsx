@@ -79,3 +79,4 @@ export const SanityLogo = forwardRef(function SanityLogo(
     </svg>
   )
 })
+SanityLogo.displayName = 'ForwardRef(SanityLogo)'

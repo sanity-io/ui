@@ -59,3 +59,4 @@ export const SanityMonogram = forwardRef(function SanityMonogram(
     </svg>
   )
 })
+SanityMonogram.displayName = 'ForwardRef(SanityMonogram)'

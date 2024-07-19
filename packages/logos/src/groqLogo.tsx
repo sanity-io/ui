@@ -39,3 +39,4 @@ export const GroqLogo = forwardRef(function GroqLogo(
     </svg>
   )
 })
+GroqLogo.displayName = 'ForwardRef(GroqLogo)'
