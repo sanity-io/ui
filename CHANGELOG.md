@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.7](https://github.com/sanity-io/ui/compare/v2.8.6...v2.8.7) (2024-07-19)
+
+### Bug Fixes
+
+- add `displayName` to all components to improve debugging ([#1401](https://github.com/sanity-io/ui/issues/1401)) ([1ab0c18](https://github.com/sanity-io/ui/commit/1ab0c18f851e1ca4d2b45fb45edc7e386858aff0))
+
 ## [2.8.6](https://github.com/sanity-io/ui/compare/v2.8.5...v2.8.6) (2024-07-18)
 
 ### Bug Fixes
