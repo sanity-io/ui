@@ -32,3 +32,4 @@ export const StrikethroughIcon = forwardRef(function StrikethroughIcon(
     </svg>
   )
 })
+StrikethroughIcon.displayName = 'ForwardRef(StrikethroughIcon)'

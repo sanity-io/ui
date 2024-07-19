@@ -29,3 +29,4 @@ export const ChartUpwardIcon = forwardRef(function ChartUpwardIcon(
     </svg>
   )
 })
+ChartUpwardIcon.displayName = 'ForwardRef(ChartUpwardIcon)'

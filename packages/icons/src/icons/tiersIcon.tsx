@@ -29,3 +29,4 @@ export const TiersIcon = forwardRef(function TiersIcon(
     </svg>
   )
 })
+TiersIcon.displayName = 'ForwardRef(TiersIcon)'

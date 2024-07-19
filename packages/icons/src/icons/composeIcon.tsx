@@ -29,3 +29,4 @@ export const ComposeIcon = forwardRef(function ComposeIcon(
     </svg>
   )
 })
+ComposeIcon.displayName = 'ForwardRef(ComposeIcon)'

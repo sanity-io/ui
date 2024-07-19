@@ -29,3 +29,4 @@ export const AsteriskIcon = forwardRef(function AsteriskIcon(
     </svg>
   )
 })
+AsteriskIcon.displayName = 'ForwardRef(AsteriskIcon)'

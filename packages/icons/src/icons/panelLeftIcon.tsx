@@ -29,3 +29,4 @@ export const PanelLeftIcon = forwardRef(function PanelLeftIcon(
     </svg>
   )
 })
+PanelLeftIcon.displayName = 'ForwardRef(PanelLeftIcon)'

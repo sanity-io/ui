@@ -36,3 +36,4 @@ export const CreditCardIcon = forwardRef(function CreditCardIcon(
     </svg>
   )
 })
+CreditCardIcon.displayName = 'ForwardRef(CreditCardIcon)'

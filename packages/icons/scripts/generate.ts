@@ -31,7 +31,8 @@ export const __NAME__ = forwardRef(function __NAME__(
   return (
     __JSX__
   )
-})
+});
+__NAME__.displayName = 'ForwardRef(__NAME__)'
 `
 
 async function readIcon(filePath: string) {

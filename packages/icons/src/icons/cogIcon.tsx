@@ -35,3 +35,4 @@ export const CogIcon = forwardRef(function CogIcon(
     </svg>
   )
 })
+CogIcon.displayName = 'ForwardRef(CogIcon)'

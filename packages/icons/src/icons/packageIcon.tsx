@@ -29,3 +29,4 @@ export const PackageIcon = forwardRef(function PackageIcon(
     </svg>
   )
 })
+PackageIcon.displayName = 'ForwardRef(PackageIcon)'

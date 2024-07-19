@@ -35,3 +35,4 @@ export const TaskIcon = forwardRef(function TaskIcon(
     </svg>
   )
 })
+TaskIcon.displayName = 'ForwardRef(TaskIcon)'

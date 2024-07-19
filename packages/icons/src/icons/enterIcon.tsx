@@ -30,3 +30,4 @@ export const EnterIcon = forwardRef(function EnterIcon(
     </svg>
   )
 })
+EnterIcon.displayName = 'ForwardRef(EnterIcon)'

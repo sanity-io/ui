@@ -34,3 +34,4 @@ export const DocumentPdfIcon = forwardRef(function DocumentPdfIcon(
     </svg>
   )
 })
+DocumentPdfIcon.displayName = 'ForwardRef(DocumentPdfIcon)'

@@ -29,3 +29,4 @@ export const AccessDeniedIcon = forwardRef(function AccessDeniedIcon(
     </svg>
   )
 })
+AccessDeniedIcon.displayName = 'ForwardRef(AccessDeniedIcon)'

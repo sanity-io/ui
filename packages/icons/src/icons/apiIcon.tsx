@@ -35,3 +35,4 @@ export const ApiIcon = forwardRef(function ApiIcon(
     </svg>
   )
 })
+ApiIcon.displayName = 'ForwardRef(ApiIcon)'

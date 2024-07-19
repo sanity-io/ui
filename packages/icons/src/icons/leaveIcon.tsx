@@ -35,3 +35,4 @@ export const LeaveIcon = forwardRef(function LeaveIcon(
     </svg>
   )
 })
+LeaveIcon.displayName = 'ForwardRef(LeaveIcon)'

@@ -25,3 +25,4 @@ export const Icon = forwardRef(function Icon(
 
   return <IconComponent {...restProps} ref={ref} />
 })
+Icon.displayName = 'ForwardRef(Icon)'

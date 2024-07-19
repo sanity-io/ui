@@ -29,3 +29,4 @@ export const BasketIcon = forwardRef(function BasketIcon(
     </svg>
   )
 })
+BasketIcon.displayName = 'ForwardRef(BasketIcon)'

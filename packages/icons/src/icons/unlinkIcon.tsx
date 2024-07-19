@@ -29,3 +29,4 @@ export const UnlinkIcon = forwardRef(function UnlinkIcon(
     </svg>
   )
 })
+UnlinkIcon.displayName = 'ForwardRef(UnlinkIcon)'

@@ -29,3 +29,4 @@ export const BlockquoteIcon = forwardRef(function BlockquoteIcon(
     </svg>
   )
 })
+BlockquoteIcon.displayName = 'ForwardRef(BlockquoteIcon)'

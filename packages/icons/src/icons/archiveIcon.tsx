@@ -35,3 +35,4 @@ export const ArchiveIcon = forwardRef(function ArchiveIcon(
     </svg>
   )
 })
+ArchiveIcon.displayName = 'ForwardRef(ArchiveIcon)'

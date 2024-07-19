@@ -29,3 +29,4 @@ export const UnknownIcon = forwardRef(function UnknownIcon(
     </svg>
   )
 })
+UnknownIcon.displayName = 'ForwardRef(UnknownIcon)'

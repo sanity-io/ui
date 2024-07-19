@@ -30,3 +30,4 @@ export const InsertAboveIcon = forwardRef(function InsertAboveIcon(
     </svg>
   )
 })
+InsertAboveIcon.displayName = 'ForwardRef(InsertAboveIcon)'

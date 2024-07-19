@@ -25,3 +25,4 @@ export const ArrowTopRightIcon = forwardRef(function ArrowTopRightIcon(
     </svg>
   )
 })
+ArrowTopRightIcon.displayName = 'ForwardRef(ArrowTopRightIcon)'

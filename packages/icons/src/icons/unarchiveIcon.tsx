@@ -35,3 +35,4 @@ export const UnarchiveIcon = forwardRef(function UnarchiveIcon(
     </svg>
   )
 })
+UnarchiveIcon.displayName = 'ForwardRef(UnarchiveIcon)'

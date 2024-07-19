@@ -29,3 +29,4 @@ export const RobotIcon = forwardRef(function RobotIcon(
     </svg>
   )
 })
+RobotIcon.displayName = 'ForwardRef(RobotIcon)'

@@ -27,3 +27,4 @@ export const EqualIcon = forwardRef(function EqualIcon(
     </svg>
   )
 })
+EqualIcon.displayName = 'ForwardRef(EqualIcon)'

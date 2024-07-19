@@ -29,3 +29,4 @@ export const SpinnerIcon = forwardRef(function SpinnerIcon(
     </svg>
   )
 })
+SpinnerIcon.displayName = 'ForwardRef(SpinnerIcon)'

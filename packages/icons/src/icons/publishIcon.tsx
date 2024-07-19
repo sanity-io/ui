@@ -35,3 +35,4 @@ export const PublishIcon = forwardRef(function PublishIcon(
     </svg>
   )
 })
+PublishIcon.displayName = 'ForwardRef(PublishIcon)'

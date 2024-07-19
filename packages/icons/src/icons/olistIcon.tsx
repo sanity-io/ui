@@ -29,3 +29,4 @@ export const OlistIcon = forwardRef(function OlistIcon(
     </svg>
   )
 })
+OlistIcon.displayName = 'ForwardRef(OlistIcon)'

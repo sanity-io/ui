@@ -30,3 +30,4 @@ export const ShareIcon = forwardRef(function ShareIcon(
     </svg>
   )
 })
+ShareIcon.displayName = 'ForwardRef(ShareIcon)'

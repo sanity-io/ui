@@ -29,3 +29,4 @@ export const UnlockIcon = forwardRef(function UnlockIcon(
     </svg>
   )
 })
+UnlockIcon.displayName = 'ForwardRef(UnlockIcon)'

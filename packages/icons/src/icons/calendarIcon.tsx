@@ -29,3 +29,4 @@ export const CalendarIcon = forwardRef(function CalendarIcon(
     </svg>
   )
 })
+CalendarIcon.displayName = 'ForwardRef(CalendarIcon)'

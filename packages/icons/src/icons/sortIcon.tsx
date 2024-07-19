@@ -29,3 +29,4 @@ export const SortIcon = forwardRef(function SortIcon(
     </svg>
   )
 })
+SortIcon.displayName = 'ForwardRef(SortIcon)'

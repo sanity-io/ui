@@ -29,3 +29,4 @@ export const BillIcon = forwardRef(function BillIcon(
     </svg>
   )
 })
+BillIcon.displayName = 'ForwardRef(BillIcon)'

@@ -29,3 +29,4 @@ export const InlineElementIcon = forwardRef(function InlineElementIcon(
     </svg>
   )
 })
+InlineElementIcon.displayName = 'ForwardRef(InlineElementIcon)'

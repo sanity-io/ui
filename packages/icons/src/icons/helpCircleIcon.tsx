@@ -29,3 +29,4 @@ export const HelpCircleIcon = forwardRef(function HelpCircleIcon(
     </svg>
   )
 })
+HelpCircleIcon.displayName = 'ForwardRef(HelpCircleIcon)'

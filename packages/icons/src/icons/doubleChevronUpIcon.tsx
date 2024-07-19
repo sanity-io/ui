@@ -29,3 +29,4 @@ export const DoubleChevronUpIcon = forwardRef(function DoubleChevronUpIcon(
     </svg>
   )
 })
+DoubleChevronUpIcon.displayName = 'ForwardRef(DoubleChevronUpIcon)'

@@ -28,3 +28,4 @@ export const UnderlineIcon = forwardRef(function UnderlineIcon(
     </svg>
   )
 })
+UnderlineIcon.displayName = 'ForwardRef(UnderlineIcon)'

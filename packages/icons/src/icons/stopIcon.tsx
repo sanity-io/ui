@@ -33,3 +33,4 @@ export const StopIcon = forwardRef(function StopIcon(
     </svg>
   )
 })
+StopIcon.displayName = 'ForwardRef(StopIcon)'

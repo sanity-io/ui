@@ -47,3 +47,4 @@ export const UlistIcon = forwardRef(function UlistIcon(
     </svg>
   )
 })
+UlistIcon.displayName = 'ForwardRef(UlistIcon)'

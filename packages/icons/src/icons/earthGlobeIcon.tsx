@@ -29,3 +29,4 @@ export const EarthGlobeIcon = forwardRef(function EarthGlobeIcon(
     </svg>
   )
 })
+EarthGlobeIcon.displayName = 'ForwardRef(EarthGlobeIcon)'

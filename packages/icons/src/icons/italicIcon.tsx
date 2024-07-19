@@ -27,3 +27,4 @@ export const ItalicIcon = forwardRef(function ItalicIcon(
     </svg>
   )
 })
+ItalicIcon.displayName = 'ForwardRef(ItalicIcon)'

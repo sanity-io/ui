@@ -27,3 +27,4 @@ export const PauseIcon = forwardRef(function PauseIcon(
     </svg>
   )
 })
+PauseIcon.displayName = 'ForwardRef(PauseIcon)'

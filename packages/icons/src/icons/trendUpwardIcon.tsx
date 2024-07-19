@@ -30,3 +30,4 @@ export const TrendUpwardIcon = forwardRef(function TrendUpwardIcon(
     </svg>
   )
 })
+TrendUpwardIcon.displayName = 'ForwardRef(TrendUpwardIcon)'

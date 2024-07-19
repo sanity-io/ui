@@ -29,3 +29,4 @@ export const BlockElementIcon = forwardRef(function BlockElementIcon(
     </svg>
   )
 })
+BlockElementIcon.displayName = 'ForwardRef(BlockElementIcon)'

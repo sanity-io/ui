@@ -29,3 +29,4 @@ export const BellIcon = forwardRef(function BellIcon(
     </svg>
   )
 })
+BellIcon.displayName = 'ForwardRef(BellIcon)'

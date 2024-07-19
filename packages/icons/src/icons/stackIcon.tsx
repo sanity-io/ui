@@ -29,3 +29,4 @@ export const StackIcon = forwardRef(function StackIcon(
     </svg>
   )
 })
+StackIcon.displayName = 'ForwardRef(StackIcon)'

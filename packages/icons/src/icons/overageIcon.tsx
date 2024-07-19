@@ -30,3 +30,4 @@ export const OverageIcon = forwardRef(function OverageIcon(
     </svg>
   )
 })
+OverageIcon.displayName = 'ForwardRef(OverageIcon)'

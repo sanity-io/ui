@@ -35,3 +35,4 @@ export const CubeIcon = forwardRef(function CubeIcon(
     </svg>
   )
 })
+CubeIcon.displayName = 'ForwardRef(CubeIcon)'

@@ -29,3 +29,4 @@ export const JsonIcon = forwardRef(function JsonIcon(
     </svg>
   )
 })
+JsonIcon.displayName = 'ForwardRef(JsonIcon)'

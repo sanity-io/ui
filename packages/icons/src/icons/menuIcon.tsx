@@ -29,3 +29,4 @@ export const MenuIcon = forwardRef(function MenuIcon(
     </svg>
   )
 })
+MenuIcon.displayName = 'ForwardRef(MenuIcon)'

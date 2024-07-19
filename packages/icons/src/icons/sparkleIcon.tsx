@@ -29,3 +29,4 @@ export const SparkleIcon = forwardRef(function SparkleIcon(
     </svg>
   )
 })
+SparkleIcon.displayName = 'ForwardRef(SparkleIcon)'

@@ -29,3 +29,4 @@ export const AddCommentIcon = forwardRef(function AddCommentIcon(
     </svg>
   )
 })
+AddCommentIcon.displayName = 'ForwardRef(AddCommentIcon)'

@@ -30,3 +30,4 @@ export const DocumentZipIcon = forwardRef(function DocumentZipIcon(
     </svg>
   )
 })
+DocumentZipIcon.displayName = 'ForwardRef(DocumentZipIcon)'

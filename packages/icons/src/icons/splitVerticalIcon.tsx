@@ -29,3 +29,4 @@ export const SplitVerticalIcon = forwardRef(function SplitVerticalIcon(
     </svg>
   )
 })
+SplitVerticalIcon.displayName = 'ForwardRef(SplitVerticalIcon)'

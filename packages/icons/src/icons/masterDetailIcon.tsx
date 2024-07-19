@@ -29,3 +29,4 @@ export const MasterDetailIcon = forwardRef(function MasterDetailIcon(
     </svg>
   )
 })
+MasterDetailIcon.displayName = 'ForwardRef(MasterDetailIcon)'

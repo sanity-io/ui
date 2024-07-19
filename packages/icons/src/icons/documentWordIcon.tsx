@@ -34,3 +34,4 @@ export const DocumentWordIcon = forwardRef(function DocumentWordIcon(
     </svg>
   )
 })
+DocumentWordIcon.displayName = 'ForwardRef(DocumentWordIcon)'

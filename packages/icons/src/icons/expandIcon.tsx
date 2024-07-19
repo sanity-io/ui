@@ -35,3 +35,4 @@ export const ExpandIcon = forwardRef(function ExpandIcon(
     </svg>
   )
 })
+ExpandIcon.displayName = 'ForwardRef(ExpandIcon)'

@@ -30,3 +30,4 @@ export const FilterIcon = forwardRef(function FilterIcon(
     </svg>
   )
 })
+FilterIcon.displayName = 'ForwardRef(FilterIcon)'

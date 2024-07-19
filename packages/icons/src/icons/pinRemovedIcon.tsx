@@ -29,3 +29,4 @@ export const PinRemovedIcon = forwardRef(function PinRemovedIcon(
     </svg>
   )
 })
+PinRemovedIcon.displayName = 'ForwardRef(PinRemovedIcon)'

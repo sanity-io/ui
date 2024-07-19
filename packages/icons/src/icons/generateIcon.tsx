@@ -35,3 +35,4 @@ export const GenerateIcon = forwardRef(function GenerateIcon(
     </svg>
   )
 })
+GenerateIcon.displayName = 'ForwardRef(GenerateIcon)'

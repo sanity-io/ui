@@ -29,3 +29,4 @@ export const TriangleOutlineIcon = forwardRef(function TriangleOutlineIcon(
     </svg>
   )
 })
+TriangleOutlineIcon.displayName = 'ForwardRef(TriangleOutlineIcon)'

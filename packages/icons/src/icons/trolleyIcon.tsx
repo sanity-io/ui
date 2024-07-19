@@ -29,3 +29,4 @@ export const TrolleyIcon = forwardRef(function TrolleyIcon(
     </svg>
   )
 })
+TrolleyIcon.displayName = 'ForwardRef(TrolleyIcon)'

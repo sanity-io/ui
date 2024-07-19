@@ -33,3 +33,4 @@ export const BulbFilledIcon = forwardRef(function BulbFilledIcon(
     </svg>
   )
 })
+BulbFilledIcon.displayName = 'ForwardRef(BulbFilledIcon)'

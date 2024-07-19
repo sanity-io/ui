@@ -35,3 +35,4 @@ export const RevertIcon = forwardRef(function RevertIcon(
     </svg>
   )
 })
+RevertIcon.displayName = 'ForwardRef(RevertIcon)'

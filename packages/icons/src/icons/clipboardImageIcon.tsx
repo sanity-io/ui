@@ -29,3 +29,4 @@ export const ClipboardImageIcon = forwardRef(function ClipboardImageIcon(
     </svg>
   )
 })
+ClipboardImageIcon.displayName = 'ForwardRef(ClipboardImageIcon)'

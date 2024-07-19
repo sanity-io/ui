@@ -29,3 +29,4 @@ export const SchemaIcon = forwardRef(function SchemaIcon(
     </svg>
   )
 })
+SchemaIcon.displayName = 'ForwardRef(SchemaIcon)'

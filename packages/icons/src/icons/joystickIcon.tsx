@@ -29,3 +29,4 @@ export const JoystickIcon = forwardRef(function JoystickIcon(
     </svg>
   )
 })
+JoystickIcon.displayName = 'ForwardRef(JoystickIcon)'

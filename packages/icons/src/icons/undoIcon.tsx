@@ -35,3 +35,4 @@ export const UndoIcon = forwardRef(function UndoIcon(
     </svg>
   )
 })
+UndoIcon.displayName = 'ForwardRef(UndoIcon)'

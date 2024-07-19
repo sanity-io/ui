@@ -36,3 +36,4 @@ export const Progress75Icon = forwardRef(function Progress75Icon(
     </svg>
   )
 })
+Progress75Icon.displayName = 'ForwardRef(Progress75Icon)'

@@ -29,3 +29,4 @@ export const ActivityIcon = forwardRef(function ActivityIcon(
     </svg>
   )
 })
+ActivityIcon.displayName = 'ForwardRef(ActivityIcon)'

@@ -29,3 +29,4 @@ export const DesktopIcon = forwardRef(function DesktopIcon(
     </svg>
   )
 })
+DesktopIcon.displayName = 'ForwardRef(DesktopIcon)'

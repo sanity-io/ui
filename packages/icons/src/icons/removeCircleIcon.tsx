@@ -29,3 +29,4 @@ export const RemoveCircleIcon = forwardRef(function RemoveCircleIcon(
     </svg>
   )
 })
+RemoveCircleIcon.displayName = 'ForwardRef(RemoveCircleIcon)'

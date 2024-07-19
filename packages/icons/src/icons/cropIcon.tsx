@@ -29,3 +29,4 @@ export const CropIcon = forwardRef(function CropIcon(
     </svg>
   )
 })
+CropIcon.displayName = 'ForwardRef(CropIcon)'

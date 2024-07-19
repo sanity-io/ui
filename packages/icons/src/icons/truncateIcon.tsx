@@ -29,3 +29,4 @@ export const TruncateIcon = forwardRef(function TruncateIcon(
     </svg>
   )
 })
+TruncateIcon.displayName = 'ForwardRef(TruncateIcon)'

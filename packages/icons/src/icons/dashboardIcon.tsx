@@ -29,3 +29,4 @@ export const DashboardIcon = forwardRef(function DashboardIcon(
     </svg>
   )
 })
+DashboardIcon.displayName = 'ForwardRef(DashboardIcon)'

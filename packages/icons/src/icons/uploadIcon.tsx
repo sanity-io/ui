@@ -35,3 +35,4 @@ export const UploadIcon = forwardRef(function UploadIcon(
     </svg>
   )
 })
+UploadIcon.displayName = 'ForwardRef(UploadIcon)'

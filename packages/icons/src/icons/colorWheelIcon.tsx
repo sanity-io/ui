@@ -29,3 +29,4 @@ export const ColorWheelIcon = forwardRef(function ColorWheelIcon(
     </svg>
   )
 })
+ColorWheelIcon.displayName = 'ForwardRef(ColorWheelIcon)'

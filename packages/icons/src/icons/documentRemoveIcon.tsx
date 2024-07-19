@@ -30,3 +30,4 @@ export const DocumentRemoveIcon = forwardRef(function DocumentRemoveIcon(
     </svg>
   )
 })
+DocumentRemoveIcon.displayName = 'ForwardRef(DocumentRemoveIcon)'

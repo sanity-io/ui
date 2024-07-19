@@ -29,3 +29,4 @@ export const TerminalIcon = forwardRef(function TerminalIcon(
     </svg>
   )
 })
+TerminalIcon.displayName = 'ForwardRef(TerminalIcon)'

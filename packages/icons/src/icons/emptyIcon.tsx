@@ -28,3 +28,4 @@ export const EmptyIcon = forwardRef(function EmptyIcon(
     </svg>
   )
 })
+EmptyIcon.displayName = 'ForwardRef(EmptyIcon)'

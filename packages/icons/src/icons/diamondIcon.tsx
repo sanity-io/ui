@@ -29,3 +29,4 @@ export const DiamondIcon = forwardRef(function DiamondIcon(
     </svg>
   )
 })
+DiamondIcon.displayName = 'ForwardRef(DiamondIcon)'

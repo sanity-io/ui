@@ -29,3 +29,4 @@ export const TrashIcon = forwardRef(function TrashIcon(
     </svg>
   )
 })
+TrashIcon.displayName = 'ForwardRef(TrashIcon)'

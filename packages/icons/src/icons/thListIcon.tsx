@@ -29,3 +29,4 @@ export const ThListIcon = forwardRef(function ThListIcon(
     </svg>
   )
 })
+ThListIcon.displayName = 'ForwardRef(ThListIcon)'

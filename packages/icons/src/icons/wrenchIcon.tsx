@@ -27,3 +27,4 @@ export const WrenchIcon = forwardRef(function WrenchIcon(
     </svg>
   )
 })
+WrenchIcon.displayName = 'ForwardRef(WrenchIcon)'

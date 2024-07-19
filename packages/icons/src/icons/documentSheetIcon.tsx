@@ -30,3 +30,4 @@ export const DocumentSheetIcon = forwardRef(function DocumentSheetIcon(
     </svg>
   )
 })
+DocumentSheetIcon.displayName = 'ForwardRef(DocumentSheetIcon)'

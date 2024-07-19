@@ -32,3 +32,4 @@ export const SquareIcon = forwardRef(function SquareIcon(
     </svg>
   )
 })
+SquareIcon.displayName = 'ForwardRef(SquareIcon)'

@@ -29,3 +29,4 @@ export const HighlightIcon = forwardRef(function HighlightIcon(
     </svg>
   )
 })
+HighlightIcon.displayName = 'ForwardRef(HighlightIcon)'

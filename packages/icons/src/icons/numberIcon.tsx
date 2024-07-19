@@ -41,3 +41,4 @@ export const NumberIcon = forwardRef(function NumberIcon(
     </svg>
   )
 })
+NumberIcon.displayName = 'ForwardRef(NumberIcon)'

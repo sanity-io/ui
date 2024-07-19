@@ -29,3 +29,4 @@ export const ReadOnlyIcon = forwardRef(function ReadOnlyIcon(
     </svg>
   )
 })
+ReadOnlyIcon.displayName = 'ForwardRef(ReadOnlyIcon)'

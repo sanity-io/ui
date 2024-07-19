@@ -47,3 +47,4 @@ export const DragHandleIcon = forwardRef(function DragHandleIcon(
     </svg>
   )
 })
+DragHandleIcon.displayName = 'ForwardRef(DragHandleIcon)'

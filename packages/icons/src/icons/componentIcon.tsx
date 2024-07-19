@@ -29,3 +29,4 @@ export const ComponentIcon = forwardRef(function ComponentIcon(
     </svg>
   )
 })
+ComponentIcon.displayName = 'ForwardRef(ComponentIcon)'

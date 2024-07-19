@@ -29,3 +29,4 @@ export const BarChartIcon = forwardRef(function BarChartIcon(
     </svg>
   )
 })
+BarChartIcon.displayName = 'ForwardRef(BarChartIcon)'

@@ -36,3 +36,4 @@ export const DocumentVideoIcon = forwardRef(function DocumentVideoIcon(
     </svg>
   )
 })
+DocumentVideoIcon.displayName = 'ForwardRef(DocumentVideoIcon)'

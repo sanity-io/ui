@@ -35,3 +35,4 @@ export const TabletDeviceIcon = forwardRef(function TabletDeviceIcon(
     </svg>
   )
 })
+TabletDeviceIcon.displayName = 'ForwardRef(TabletDeviceIcon)'

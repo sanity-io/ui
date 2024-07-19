@@ -29,3 +29,4 @@ export const CopyIcon = forwardRef(function CopyIcon(
     </svg>
   )
 })
+CopyIcon.displayName = 'ForwardRef(CopyIcon)'

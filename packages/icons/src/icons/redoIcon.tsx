@@ -35,3 +35,4 @@ export const RedoIcon = forwardRef(function RedoIcon(
     </svg>
   )
 })
+RedoIcon.displayName = 'ForwardRef(RedoIcon)'

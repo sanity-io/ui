@@ -29,3 +29,4 @@ export const InfoFilledIcon = forwardRef(function InfoFilledIcon(
     </svg>
   )
 })
+InfoFilledIcon.displayName = 'ForwardRef(InfoFilledIcon)'

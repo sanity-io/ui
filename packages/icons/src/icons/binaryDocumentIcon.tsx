@@ -31,3 +31,4 @@ export const BinaryDocumentIcon = forwardRef(function BinaryDocumentIcon(
     </svg>
   )
 })
+BinaryDocumentIcon.displayName = 'ForwardRef(BinaryDocumentIcon)'

@@ -29,3 +29,4 @@ export const LockIcon = forwardRef(function LockIcon(
     </svg>
   )
 })
+LockIcon.displayName = 'ForwardRef(LockIcon)'

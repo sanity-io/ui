@@ -29,3 +29,4 @@ export const CaseIcon = forwardRef(function CaseIcon(
     </svg>
   )
 })
+CaseIcon.displayName = 'ForwardRef(CaseIcon)'

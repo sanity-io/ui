@@ -29,3 +29,4 @@ export const HashIcon = forwardRef(function HashIcon(
     </svg>
   )
 })
+HashIcon.displayName = 'ForwardRef(HashIcon)'

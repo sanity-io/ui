@@ -26,3 +26,4 @@ export const GroqIcon = forwardRef(function GroqIcon(
     </svg>
   )
 })
+GroqIcon.displayName = 'ForwardRef(GroqIcon)'

@@ -29,3 +29,4 @@ export const IceCreamIcon = forwardRef(function IceCreamIcon(
     </svg>
   )
 })
+IceCreamIcon.displayName = 'ForwardRef(IceCreamIcon)'

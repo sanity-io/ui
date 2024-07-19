@@ -29,3 +29,4 @@ export const WarningOutlineIcon = forwardRef(function WarningOutlineIcon(
     </svg>
   )
 })
+WarningOutlineIcon.displayName = 'ForwardRef(WarningOutlineIcon)'

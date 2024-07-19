@@ -29,3 +29,4 @@ export const EyeClosedIcon = forwardRef(function EyeClosedIcon(
     </svg>
   )
 })
+EyeClosedIcon.displayName = 'ForwardRef(EyeClosedIcon)'

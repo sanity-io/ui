@@ -27,3 +27,4 @@ export const BoldIcon = forwardRef(function BoldIcon(
     </svg>
   )
 })
+BoldIcon.displayName = 'ForwardRef(BoldIcon)'

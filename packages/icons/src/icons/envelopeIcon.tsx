@@ -35,3 +35,4 @@ export const EnvelopeIcon = forwardRef(function EnvelopeIcon(
     </svg>
   )
 })
+EnvelopeIcon.displayName = 'ForwardRef(EnvelopeIcon)'

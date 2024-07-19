@@ -29,3 +29,4 @@ export const DatabaseIcon = forwardRef(function DatabaseIcon(
     </svg>
   )
 })
+DatabaseIcon.displayName = 'ForwardRef(DatabaseIcon)'

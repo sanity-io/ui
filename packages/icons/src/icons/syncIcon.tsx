@@ -35,3 +35,4 @@ export const SyncIcon = forwardRef(function SyncIcon(
     </svg>
   )
 })
+SyncIcon.displayName = 'ForwardRef(SyncIcon)'

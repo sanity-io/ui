@@ -35,3 +35,4 @@ export const EllipsisHorizontalIcon = forwardRef(function EllipsisHorizontalIcon
     </svg>
   )
 })
+EllipsisHorizontalIcon.displayName = 'ForwardRef(EllipsisHorizontalIcon)'

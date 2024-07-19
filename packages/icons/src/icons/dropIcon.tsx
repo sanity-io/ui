@@ -29,3 +29,4 @@ export const DropIcon = forwardRef(function DropIcon(
     </svg>
   )
 })
+DropIcon.displayName = 'ForwardRef(DropIcon)'

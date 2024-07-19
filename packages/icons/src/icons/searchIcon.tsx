@@ -29,3 +29,4 @@ export const SearchIcon = forwardRef(function SearchIcon(
     </svg>
   )
 })
+SearchIcon.displayName = 'ForwardRef(SearchIcon)'

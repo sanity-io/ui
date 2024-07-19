@@ -29,3 +29,4 @@ export const CloseCircleIcon = forwardRef(function CloseCircleIcon(
     </svg>
   )
 })
+CloseCircleIcon.displayName = 'ForwardRef(CloseCircleIcon)'

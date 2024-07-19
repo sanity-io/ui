@@ -29,3 +29,4 @@ export const FolderIcon = forwardRef(function FolderIcon(
     </svg>
   )
 })
+FolderIcon.displayName = 'ForwardRef(FolderIcon)'

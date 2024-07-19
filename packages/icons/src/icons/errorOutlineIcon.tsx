@@ -29,3 +29,4 @@ export const ErrorOutlineIcon = forwardRef(function ErrorOutlineIcon(
     </svg>
   )
 })
+ErrorOutlineIcon.displayName = 'ForwardRef(ErrorOutlineIcon)'

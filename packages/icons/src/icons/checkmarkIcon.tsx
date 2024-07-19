@@ -29,3 +29,4 @@ export const CheckmarkIcon = forwardRef(function CheckmarkIcon(
     </svg>
   )
 })
+CheckmarkIcon.displayName = 'ForwardRef(CheckmarkIcon)'

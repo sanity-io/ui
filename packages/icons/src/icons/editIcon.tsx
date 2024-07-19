@@ -29,3 +29,4 @@ export const EditIcon = forwardRef(function EditIcon(
     </svg>
   )
 })
+EditIcon.displayName = 'ForwardRef(EditIcon)'

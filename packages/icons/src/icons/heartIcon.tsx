@@ -29,3 +29,4 @@ export const HeartIcon = forwardRef(function HeartIcon(
     </svg>
   )
 })
+HeartIcon.displayName = 'ForwardRef(HeartIcon)'

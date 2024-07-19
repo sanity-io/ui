@@ -29,3 +29,4 @@ export const MoonIcon = forwardRef(function MoonIcon(
     </svg>
   )
 })
+MoonIcon.displayName = 'ForwardRef(MoonIcon)'

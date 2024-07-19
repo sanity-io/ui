@@ -43,3 +43,4 @@ export const ConfettiIcon = forwardRef(function ConfettiIcon(
     </svg>
   )
 })
+ConfettiIcon.displayName = 'ForwardRef(ConfettiIcon)'

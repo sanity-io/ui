@@ -30,3 +30,4 @@ export const PlayIcon = forwardRef(function PlayIcon(
     </svg>
   )
 })
+PlayIcon.displayName = 'ForwardRef(PlayIcon)'

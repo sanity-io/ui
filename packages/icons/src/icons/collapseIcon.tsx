@@ -35,3 +35,4 @@ export const CollapseIcon = forwardRef(function CollapseIcon(
     </svg>
   )
 })
+CollapseIcon.displayName = 'ForwardRef(CollapseIcon)'

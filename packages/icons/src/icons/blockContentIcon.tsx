@@ -51,3 +51,4 @@ export const BlockContentIcon = forwardRef(function BlockContentIcon(
     </svg>
   )
 })
+BlockContentIcon.displayName = 'ForwardRef(BlockContentIcon)'

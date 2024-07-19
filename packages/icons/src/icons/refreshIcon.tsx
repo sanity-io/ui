@@ -35,3 +35,4 @@ export const RefreshIcon = forwardRef(function RefreshIcon(
     </svg>
   )
 })
+RefreshIcon.displayName = 'ForwardRef(RefreshIcon)'

@@ -29,3 +29,4 @@ export const TranslateIcon = forwardRef(function TranslateIcon(
     </svg>
   )
 })
+TranslateIcon.displayName = 'ForwardRef(TranslateIcon)'

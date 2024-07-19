@@ -29,3 +29,4 @@ export const SunIcon = forwardRef(function SunIcon(
     </svg>
   )
 })
+SunIcon.displayName = 'ForwardRef(SunIcon)'

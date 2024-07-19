@@ -28,3 +28,4 @@ export const BulbOutlineIcon = forwardRef(function BulbOutlineIcon(
     </svg>
   )
 })
+BulbOutlineIcon.displayName = 'ForwardRef(BulbOutlineIcon)'

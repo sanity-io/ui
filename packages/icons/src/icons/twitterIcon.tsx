@@ -27,3 +27,4 @@ export const TwitterIcon = forwardRef(function TwitterIcon(
     </svg>
   )
 })
+TwitterIcon.displayName = 'ForwardRef(TwitterIcon)'

@@ -29,3 +29,4 @@ export const ThLargeIcon = forwardRef(function ThLargeIcon(
     </svg>
   )
 })
+ThLargeIcon.displayName = 'ForwardRef(ThLargeIcon)'

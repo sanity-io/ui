@@ -29,3 +29,4 @@ export const StackCompactIcon = forwardRef(function StackCompactIcon(
     </svg>
   )
 })
+StackCompactIcon.displayName = 'ForwardRef(StackCompactIcon)'

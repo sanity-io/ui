@@ -35,3 +35,4 @@ export const RetryIcon = forwardRef(function RetryIcon(
     </svg>
   )
 })
+RetryIcon.displayName = 'ForwardRef(RetryIcon)'

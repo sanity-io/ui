@@ -29,3 +29,4 @@ export const ClockIcon = forwardRef(function ClockIcon(
     </svg>
   )
 })
+ClockIcon.displayName = 'ForwardRef(ClockIcon)'

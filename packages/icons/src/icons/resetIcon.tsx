@@ -27,3 +27,4 @@ export const ResetIcon = forwardRef(function ResetIcon(
     </svg>
   )
 })
+ResetIcon.displayName = 'ForwardRef(ResetIcon)'

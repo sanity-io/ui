@@ -29,3 +29,4 @@ export const CloseIcon = forwardRef(function CloseIcon(
     </svg>
   )
 })
+CloseIcon.displayName = 'ForwardRef(CloseIcon)'

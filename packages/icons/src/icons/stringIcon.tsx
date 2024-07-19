@@ -37,3 +37,4 @@ export const StringIcon = forwardRef(function StringIcon(
     </svg>
   )
 })
+StringIcon.displayName = 'ForwardRef(StringIcon)'
