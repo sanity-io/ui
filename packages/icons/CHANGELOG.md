@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.1](https://github.com/sanity-io/icons/compare/v3.3.0...v3.3.1) (2024-07-19)
+
+### Bug Fixes
+
+- add displayName to aid debugging ([#92](https://github.com/sanity-io/icons/issues/92)) ([5e3e1cd](https://github.com/sanity-io/icons/commit/5e3e1cd58e2628627f8258c5f44f542360197721))
+
 ## [3.3.0](https://github.com/sanity-io/icons/compare/v3.2.0...v3.3.0) (2024-07-05)
 
 ### Features
