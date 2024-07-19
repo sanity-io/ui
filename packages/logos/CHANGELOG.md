@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.13](https://github.com/sanity-io/logos/compare/v2.1.12...v2.1.13) (2024-07-19)
+
+### Bug Fixes
+
+- add displayName to aid debugging ([#123](https://github.com/sanity-io/logos/issues/123)) ([a82e301](https://github.com/sanity-io/logos/commit/a82e301a4dd3e5ae3974c30aa66c801c7a5545e3))
+
 ## [2.1.12](https://github.com/sanity-io/logos/compare/v2.1.11...v2.1.12) (2024-05-29)
 
 ### Bug Fixes
