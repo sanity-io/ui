@@ -168,7 +168,7 @@
     "styled-components": "^6.1.12",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.3",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.4"
   },
   "peerDependencies": {
     "@sanity/icons": "^2 || ^3.0.0",
