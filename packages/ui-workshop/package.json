@@ -115,7 +115,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.1",
-    "axe-core": "^4.9.1",
+    "axe-core": "^4.10.0",
     "cac": "^6.7.14",
     "chokidar": "^3.6.0",
     "cpx": "^1.5.0",
@@ -134,7 +134,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.2.2",
     "@sanity/icons": "^3.3.1",
-    "@sanity/pkg-utils": "^6.10.6",
+    "@sanity/pkg-utils": "^6.10.7",
     "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^2.8.8",
     "@types/cpx": "^1.5.5",
@@ -144,8 +144,8 @@
     "@types/pako": "^2.0.3",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "@typescript-eslint/parser": "^7.17.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "commitizen": "^4.3.0",
     "commitlint": "^19.3.0",
     "eslint": "^8.57.0",
