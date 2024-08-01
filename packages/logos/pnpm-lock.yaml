@@ -84,8 +84,8 @@ importers:
         specifier: ^0.21.4
         version: 0.21.4
       esbuild-register:
-        specifier: ^3.5.0
-        version: 3.5.0(esbuild@0.21.4)
+        specifier: ^3.6.0
+        version: 3.6.0(esbuild@0.21.4)
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -2843,8 +2843,8 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
 
-  esbuild-register@3.5.0:
-    resolution: {integrity: sha512-+4G/XmakeBAsvJuDugJvtyF1x+XJT4FMocynNpxrvEBViirpfUn2PgNpCHedfWhF4WokNsO/OvMKrmJOIJsI5A==}
+  esbuild-register@3.6.0:
+    resolution: {integrity: sha512-H2/S7Pm8a9CL1uhp9OvjwrBh5Pvx0H8qVOxNu8Wed9Y7qv56MPtq+GGM8RJpq6glYJn9Wspr8uw7l55uyinNeg==}
     peerDependencies:
       esbuild: '>=0.12 <1'
 
@@ -7875,7 +7875,7 @@ snapshots:
       chalk: 4.1.2
       chokidar: 3.6.0
       esbuild: 0.21.4
-      esbuild-register: 3.5.0(esbuild@0.21.4)
+      esbuild-register: 3.6.0(esbuild@0.21.4)
       find-config: 1.0.0
       get-latest-version: 5.1.0
       git-url-parse: 14.0.0
@@ -7925,7 +7925,7 @@ snapshots:
       cpx: 1.5.0
       dotenv-flow: 4.1.0
       esbuild: 0.21.4
-      esbuild-register: 3.5.0(esbuild@0.21.4)
+      esbuild-register: 3.6.0(esbuild@0.21.4)
       express: 4.19.2
       globby: 11.1.0
       lodash: 4.17.21
@@ -9405,7 +9405,7 @@ snapshots:
       is-date-object: 1.0.5
       is-symbol: 1.0.4
 
-  esbuild-register@3.5.0(esbuild@0.21.4):
+  esbuild-register@3.6.0(esbuild@0.21.4):
     dependencies:
       debug: 4.3.4
       esbuild: 0.21.4
