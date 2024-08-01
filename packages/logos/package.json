@@ -49,7 +49,7 @@
     "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^2.1.14",
     "@sanity/ui-workshop": "^2.0.15",
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^18.13.0",
