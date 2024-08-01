@@ -48,7 +48,7 @@
     "@sanity/pkg-utils": "^6.10.8",
     "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^2.8.8",
-    "@sanity/ui-workshop": "^2.0.15",
+    "@sanity/ui-workshop": "^2.0.16",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.5.12",
