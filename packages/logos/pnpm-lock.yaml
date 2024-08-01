@@ -36,8 +36,8 @@ importers:
         specifier: ^6.8.18
         version: 6.8.18(@types/babel__core@7.20.5)(@types/node@18.13.0)(typescript@5.4.5)
       '@sanity/semantic-release-preset':
-        specifier: ^4.1.7
-        version: 4.1.7(semantic-release@23.1.1(typescript@5.4.5))
+        specifier: ^4.1.8
+        version: 4.1.8(semantic-release@23.1.1(typescript@5.4.5))
       '@sanity/ui':
         specifier: ^2.1.14
         version: 2.1.14(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -1632,11 +1632,11 @@ packages:
     peerDependencies:
       typescript: 5.4.x
 
-  '@sanity/semantic-release-preset@4.1.7':
-    resolution: {integrity: sha512-cj78W8G2Y34V3zivvW5YrPKCtLQ/dd+y62M0Gg9Zl+xH3O+srtzbINrsD5qe+27en05B7gYv5CAjoWoWCq2y9w==}
+  '@sanity/semantic-release-preset@4.1.8':
+    resolution: {integrity: sha512-D9M2R7sDj3cMEIcCdvCMpFqr8yIAkFbpbMSE5m9LrPgnFl12sfaSeMCeFHM5/ArHsJVIcQIVsQFbP+c1m1a8vg==}
     engines: {node: '>= 20.8'}
     peerDependencies:
-      semantic-release: ^22.0.12 || ^23.0.2
+      semantic-release: ^22.0.12 || ^23.0.2 || ^24.0.0
 
   '@sanity/ui-workshop@2.0.15':
     resolution: {integrity: sha512-mlfD85OzEf35wZMMriX56S91Iu84oavbjAfj2Rs0xTCrkCuAzAmiaua0Szh+8+C9mnWSsqht3t7rn4SWjtQD6Q==}
@@ -2470,6 +2470,10 @@ packages:
   conventional-changelog-conventionalcommits@7.0.2:
     resolution: {integrity: sha512-NKXYmMR/Hr1DevQegFB4MwfM5Vv0m4UIxKZTTYuD98lpTknaZlSRrDOG4X7wIXpGkfsYxZTghUN+Qq+T0YQI7w==}
     engines: {node: '>=16'}
+
+  conventional-changelog-conventionalcommits@8.0.0:
+    resolution: {integrity: sha512-eOvlTO6OcySPyyyk8pKz2dP4jjElYunj9hn9/s0OB+gapTO8zwS9UQWrZ1pmF2hFs3vw1xhonOLGcGjy/zgsuA==}
+    engines: {node: '>=18'}
 
   conventional-changelog-writer@7.0.1:
     resolution: {integrity: sha512-Uo+R9neH3r/foIvQ0MKcsXkX642hdm9odUp7TqgFS7BsalTcjzRlIfWZrZR1gbxOozKucaKt5KAbjW8J8xRSmA==}
@@ -7878,12 +7882,12 @@ snapshots:
       - '@types/node'
       - supports-color
 
-  '@sanity/semantic-release-preset@4.1.7(semantic-release@23.1.1(typescript@5.4.5))':
+  '@sanity/semantic-release-preset@4.1.8(semantic-release@23.1.1(typescript@5.4.5))':
     dependencies:
       '@semantic-release/changelog': 6.0.3(semantic-release@23.1.1(typescript@5.4.5))
       '@semantic-release/exec': 6.0.3(semantic-release@23.1.1(typescript@5.4.5))
       '@semantic-release/git': 10.0.1(semantic-release@23.1.1(typescript@5.4.5))
-      conventional-changelog-conventionalcommits: 7.0.2
+      conventional-changelog-conventionalcommits: 8.0.0
       semantic-release: 23.1.1(typescript@5.4.5)
       semantic-release-license: 1.0.3
     transitivePeerDependencies:
@@ -8951,6 +8955,10 @@ snapshots:
       compare-func: 2.0.0
 
   conventional-changelog-conventionalcommits@7.0.2:
+    dependencies:
+      compare-func: 2.0.0
+
+  conventional-changelog-conventionalcommits@8.0.0:
     dependencies:
       compare-func: 2.0.0
 
