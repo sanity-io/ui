@@ -83,7 +83,7 @@
     "rimraf": "^5.0.5",
     "semantic-release": "^23.1.1",
     "styled-components": "^6.1.12",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.3"
   },
   "peerDependencies": {
     "@sanity/color": "^2.0 || ^3.0 || ^3.0.0-beta",
