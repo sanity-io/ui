@@ -73,7 +73,7 @@
   "devDependencies": {
     "@sanity/icons": "^2.11.8",
     "@sanity/pkg-utils": "^6.8.6",
-    "@sanity/semantic-release-preset": "^4.1.7",
+    "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^2.8.8",
     "@sanity/ui-workshop": "^2.0.16",
     "@types/node": "^20.12.2",
@@ -99,7 +99,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "rimraf": "^5.0.5",
-    "semantic-release": "^23.0.8",
+    "semantic-release": "^23.1.1",
     "styled-components": "^6.1.12",
     "typescript": "5.4.5",
     "vitest": "^1.5.2"
