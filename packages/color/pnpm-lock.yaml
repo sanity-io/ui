@@ -75,11 +75,11 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@20.12.2)(typescript@5.4.5)
       esbuild:
-        specifier: ^0.20.2
-        version: 0.20.2
+        specifier: ^0.23.0
+        version: 0.23.0
       esbuild-register:
         specifier: ^3.5.0
-        version: 3.6.0(esbuild@0.20.2)
+        version: 3.6.0(esbuild@0.23.0)
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
