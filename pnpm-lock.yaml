@@ -253,8 +253,8 @@ importers:
         specifier: ^5.3.5
         version: 5.3.5(@types/node@20.12.7)(terser@5.30.3)
       vite-tsconfig-paths:
-        specifier: ^4.3.2
-        version: 4.3.2(typescript@5.5.3)(vite@5.3.5(@types/node@20.12.7)(terser@5.30.3))
+        specifier: ^5.0.1
+        version: 5.0.1(typescript@5.5.3)(vite@5.3.5(@types/node@20.12.7)(terser@5.30.3))
 
   figma:
     devDependencies:
@@ -7577,8 +7577,8 @@ packages:
   vfile@6.0.1:
     resolution: {integrity: sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==}
 
-  vite-tsconfig-paths@4.3.2:
-    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
+  vite-tsconfig-paths@5.0.1:
+    resolution: {integrity: sha512-yqwv+LstU7NwPeNqajZzLEBVpUFU6Dugtb2P84FXuvaoYA+/70l9MHE+GYfYAycVyPSDYZ7mjOFuYBRqlEpTig==}
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -16654,7 +16654,7 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite-tsconfig-paths@4.3.2(typescript@5.5.3)(vite@5.3.5(@types/node@20.12.7)(terser@5.30.3)):
+  vite-tsconfig-paths@5.0.1(typescript@5.5.3)(vite@5.3.5(@types/node@20.12.7)(terser@5.30.3)):
     dependencies:
       debug: 4.3.6(supports-color@8.1.1)
       globrex: 0.1.2

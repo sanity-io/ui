@@ -187,7 +187,7 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.5.3",
     "vite": "^5.3.5",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-tsconfig-paths": "^5.0.1"
   },
   "peerDependencies": {
     "react": "^18",
