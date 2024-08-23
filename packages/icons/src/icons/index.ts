@@ -10,6 +10,7 @@ import {AddCircleIcon} from './addCircleIcon'
 import {AddCommentIcon} from './addCommentIcon'
 import {AddDocumentIcon} from './addDocumentIcon'
 import {AddIcon} from './addIcon'
+import {AddUserIcon} from './addUserIcon'
 import {ApiIcon} from './apiIcon'
 import {ArchiveIcon} from './archiveIcon'
 import {ArrowDownIcon} from './arrowDownIcon'
@@ -225,6 +226,7 @@ export type IconSymbol =
   | 'add-comment'
   | 'add-document'
   | 'add'
+  | 'add-user'
   | 'api'
   | 'archive'
   | 'arrow-down'
@@ -437,6 +439,7 @@ export {
   AddCommentIcon,
   AddDocumentIcon,
   AddIcon,
+  AddUserIcon,
   ApiIcon,
   ArchiveIcon,
   ArrowDownIcon,
@@ -653,6 +656,7 @@ export interface IconMap {
   'add-comment': IconComponent
   'add-document': IconComponent
   add: IconComponent
+  'add-user': IconComponent
   api: IconComponent
   archive: IconComponent
   'arrow-down': IconComponent
@@ -869,6 +873,7 @@ export const icons: IconMap = {
   'add-comment': AddCommentIcon,
   'add-document': AddDocumentIcon,
   add: AddIcon,
+  'add-user': AddUserIcon,
   api: ApiIcon,
   archive: ArchiveIcon,
   'arrow-down': ArrowDownIcon,
