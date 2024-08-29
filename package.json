@@ -163,7 +163,7 @@
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-react-compiler": "0.0.0-experimental-a97cca1-20240529",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-0924e7a-20240827",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-storybook": "^0.8.0",
     "http-server": "^14.1.1",
