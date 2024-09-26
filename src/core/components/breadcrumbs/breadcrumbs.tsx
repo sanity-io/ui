@@ -1,23 +1,19 @@
-import {
-  Children,
-  forwardRef,
-  Fragment,
-  isValidElement,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
-import {useArrayProp, useClickOutsideEvent} from '../../hooks'
-import {Box, Popover, Stack, Text} from '../../primitives'
-import {ExpandButton, Root} from './breadcrumbs.styles'
+import {Children, forwardRef, isValidElement, useCallback, useMemo, useRef, useState} from 'react'
+import {useClickOutsideEvent} from '../../hooks'
+import {Box, Button, ButtonProps, Flex, Popover, Stack, Text} from '../../primitives'
+import {Root} from './breadcrumbs.styles'
 
 /**
  * @beta
  */
 export interface BreadcrumbsProps {
+  expandButton?: Omit<ButtonProps, 'onClick' | 'selected'>
+  gap?: number | number[]
+  gapX?: number | number[]
+  gapY?: number | number[]
   maxLength?: number
   separator?: React.ReactNode
+  /** @deprecated - Use `gap`, `gapX`, `gapY` instead */
   space?: number | number[]
 }
 
@@ -28,8 +24,19 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
   ref: React.ForwardedRef<HTMLOListElement>,
 ) {
-  const {children, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
-  const space = useArrayProp(spaceRaw)
+  const {
+    children,
+    expandButton: expandButtonProps,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    gap: _gapProp,
+    gapX = props.gap ?? props.space ?? 2,
+    gapY = props.gap ?? props.space ?? 2,
+    maxLength,
+    separator,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    space: _spaceProp,
+    ...restProps
+  } = props
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
   const popoverElementRef = useRef<HTMLDivElement | null>(null)
@@ -53,24 +60,25 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
         <Popover
           constrainSize
           content={
-            <Stack as="ol" overflow="auto" padding={space} space={space}>
+            <Stack as="ol" overflow="auto" space={gapY}>
               {rawItems.slice(beforeLength - 1, len - afterLength)}
             </Stack>
           }
           key="button"
           open={open}
+          padding={2}
           placement="top"
           portal
           ref={popoverElementRef}
         >
-          <ExpandButton
-            fontSize={1}
+          <Button
             mode="bleed"
+            padding={0}
+            text="…"
+            {...expandButtonProps}
             onClick={open ? collapse : expand}
-            padding={1}
             ref={expandElementRef}
             selected={open}
-            text="…"
           />
         </Popover>,
         ...rawItems.slice(len - afterLength),
@@ -78,20 +86,20 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     }
 
     return rawItems
-  }, [collapse, expand, maxLength, open, rawItems, space])
+  }, [collapse, expand, expandButtonProps, gapY, maxLength, open, rawItems])
+
+  const len = items.length
 
   return (
     <Root data-ui="Breadcrumbs" {...restProps} ref={ref}>
-      {items.map((item, itemIndex) => (
-        <Fragment key={itemIndex}>
-          {itemIndex > 0 && (
-            <Box aria-hidden as="li" paddingX={space}>
-              {separator || <Text muted>/</Text>}
-            </Box>
-          )}
-          <Box as="li">{item}</Box>
-        </Fragment>
-      ))}
+      <Flex align="flex-start" as="ol" gapX={gapX} gapY={gapY} wrap="wrap">
+        {items.map((item, itemIndex) => (
+          <Flex align="flex-start" as="li" gapX={gapX} gapY={gapY} key={itemIndex}>
+            <Box>{item}</Box>
+            {itemIndex < len - 1 && <Box aria-hidden>{separator || <Text muted>/</Text>}</Box>}
+          </Flex>
+        ))}
+      </Flex>
     </Root>
   )
 })

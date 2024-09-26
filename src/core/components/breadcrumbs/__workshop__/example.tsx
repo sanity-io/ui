@@ -19,13 +19,15 @@ export default function Example() {
   return (
     <Flex align="center" height="fill" justify="center">
       <Breadcrumbs
+        gapX={1}
+        gapY={3}
         maxLength={maxLength}
         separator={
           <Text muted size={1}>
             /
           </Text>
         }
-        space={2}
+        // space={2}
       >
         <Text size={1}>
           <a href="#">Root</a>

@@ -13,7 +13,7 @@ import {
 
 export default function ButtonStory() {
   const disabled = useBoolean('Disabled', false, 'Props')
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_SIZE_OPTIONS, 2, 'Props')
+  const fontSize = useSelect('Font size', WORKSHOP_TEXT_SIZE_OPTIONS, 1, 'Props')
   const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS, 'add-circle', 'Props')
   const iconRight = useSelect('Icon (right)', WORKSHOP_ICON_SYMBOL_OPTIONS, '', 'Props')
   const justify = useSelect('Justify', WORKSHOP_FLEX_JUSTIFY_OPTIONS, 'center', 'Props')

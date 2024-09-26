@@ -366,9 +366,9 @@ export const Popover = memo(
     )
 
     const child = useMemo(() => {
-      if (!childProp || referenceElement) return null
+      if (!childProp) return null
 
-      return cloneElement(childProp, {ref: setReference})
+      return cloneElement(childProp, {ref: referenceElement ? undefined : setReference})
     }, [childProp, referenceElement, setReference])
 
     useEffect(() => {
@@ -382,8 +382,9 @@ export const Popover = memo(
     }, [update, updateRef])
 
     useEffect(() => {
-      if (child) return
-      refs.setReference(referenceElement || null)
+      if (referenceElement) {
+        refs.setReference(referenceElement)
+      }
     }, [referenceElement, refs, child])
 
     if (disabled) {

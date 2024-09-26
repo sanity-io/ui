@@ -1,6 +1,7 @@
 import {ThemeColorPalette, ThemeConfig} from '../config'
 import {defaultColorPalette} from '../defaults/colorPalette'
 import {
+  THEME_COLOR_STATE_TONES,
   ThemeColorAvatar_v2,
   ThemeColorBadgeTone_v2,
   ThemeColorBadge_v2,
@@ -31,15 +32,18 @@ export function renderThemeColorSchemes(
   const colorPalette = config?.palette ?? defaultColorPalette
 
   return {
-    light: renderThemeColorScheme(colorPalette, value.light),
-    dark: renderThemeColorScheme(colorPalette, value.dark),
+    light: renderThemeColorScheme(colorPalette, value.light, {debugPath: 'light'}),
+    dark: renderThemeColorScheme(colorPalette, value.dark, {debugPath: 'dark'}),
   }
 }
 
 function renderThemeColorScheme(
   colorPalette: ThemeColorPalette,
   value: ThemeColorScheme_v2,
+  options: {debugPath: string},
 ): ThemeColorScheme_v2 {
+  const {debugPath} = options
+
   const toneEntries = Object.entries(value) as [ThemeColorCardToneKey, ThemeColorCard_v2][]
 
   const [, transparentTone] = toneEntries.find(([k]) => k === 'transparent')!
@@ -48,8 +52,14 @@ function renderThemeColorScheme(
   // The `transparent` and `default` tones are special cases, so we render them first
   // (rendered without a `bg` option).
   // But the rest of the tones are rendered on top of the `default` tone's `bg`.
-  const renderedTransparentTone = renderThemeColor(transparentTone, {colorPalette})
-  const renderedDefaultTone = renderThemeColor(defaultTone, {colorPalette})
+  const renderedTransparentTone = renderThemeColor(transparentTone, {
+    colorPalette,
+    debugPath: `${debugPath}.transparent`,
+  })
+  const renderedDefaultTone = renderThemeColor(defaultTone, {
+    colorPalette,
+    debugPath: `${debugPath}.default`,
+  })
 
   // Get the `default` tone's `bg` property
   const bg = renderedDefaultTone.bg
@@ -63,7 +73,14 @@ function renderThemeColorScheme(
     ['default', renderedDefaultTone],
     ...toneEntries
       .filter(([k]) => k !== 'default' && k !== 'transparent')
-      .map(([k, v]) => [k, renderThemeColor(v, {bg, colorPalette})]),
+      .map(([k, v]) => [
+        k,
+        renderThemeColor(v, {
+          bg,
+          colorPalette,
+          debugPath: `${debugPath}.${k}`,
+        }),
+      ]),
   ]) as ThemeColorScheme_v2
 }
 
@@ -72,10 +89,12 @@ function renderThemeColor(
   options: {
     bg?: string
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorCard_v2 {
-  const {colorPalette, bg} = options
+  const {colorPalette, bg, debugPath} = options
   const blendMode = value._blend || 'multiply'
+
   const baseBg = renderColorValue(value.bg, {colorPalette, bg, blendMode})
   const colorOptions: RenderColorValueOptions = {colorPalette, bg: baseBg, blendMode}
 
@@ -83,12 +102,14 @@ function renderThemeColor(
     baseBg,
     blendMode,
     colorPalette,
+    debugPath: `${debugPath}.button`,
   })
 
   const selectable = renderThemeColorSelectable(value.selectable, {
     colorPalette,
     baseBg,
     blendMode,
+    debugPath: `${debugPath}.selectable`,
   })
 
   const shadow: ThemeColorShadow = {
@@ -116,9 +137,19 @@ function renderThemeColor(
     accent: {
       fg: renderColorValue(value.accent.fg, colorOptions),
     },
-    avatar: renderThemeColorAvatar(value.avatar, {baseBg, colorPalette, blendMode}),
+    avatar: renderThemeColorAvatar(value.avatar, {
+      baseBg,
+      colorPalette,
+      blendMode,
+      debugPath: `${debugPath}.avatar`,
+    }),
     backdrop: renderColorValue(value.backdrop, colorOptions),
-    badge: renderThemeColorBadge(value.badge, {baseBg, colorPalette, blendMode}),
+    badge: renderThemeColorBadge(value.badge, {
+      baseBg,
+      colorPalette,
+      blendMode,
+      debugPath: `${debugPath}.badge`,
+    }),
     bg: baseBg,
     border: renderColorValue(value.border, colorOptions),
     button,
@@ -129,8 +160,18 @@ function renderThemeColor(
     fg: renderColorValue(value.fg, colorOptions),
     focusRing: renderColorValue(value.focusRing, colorOptions),
     icon: renderColorValue(value.icon, colorOptions),
-    input: renderThemeColorInput(value.input, {baseBg, colorPalette, blendMode}),
-    kbd: renderThemeColorKBD(value.kbd, {baseBg, colorPalette, blendMode}),
+    input: renderThemeColorInput(value.input, {
+      baseBg,
+      colorPalette,
+      blendMode,
+      debugPath: `${debugPath}.input`,
+    }),
+    kbd: renderThemeColorKBD(value.kbd, {
+      baseBg,
+      colorPalette,
+      blendMode,
+      debugPath: `${debugPath}.kbd`,
+    }),
     link: {
       fg: renderColorValue(value.link.fg, colorOptions),
     },
@@ -143,7 +184,12 @@ function renderThemeColor(
       from: renderColorValue(value.skeleton.from, colorOptions),
       to: renderColorValue(value.skeleton.to, colorOptions),
     },
-    syntax: renderSyntaxColorTheme(value.syntax, {baseBg, colorPalette, blendMode}),
+    syntax: renderSyntaxColorTheme(value.syntax, {
+      baseBg,
+      colorPalette,
+      blendMode,
+      debugPath: `${debugPath}.syntax`,
+    }),
     selectable,
   }
 }
@@ -154,6 +200,7 @@ function renderThemeColorKBD(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorKBD {
   const {baseBg, blendMode, colorPalette} = options
@@ -185,18 +232,48 @@ function renderThemeColorAvatar(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorAvatar_v2 {
+  const {debugPath} = options
+
   return {
-    gray: renderThemeColorAvatarColor(value.gray, options),
-    blue: renderThemeColorAvatarColor(value.blue, options),
-    purple: renderThemeColorAvatarColor(value.purple, options),
-    magenta: renderThemeColorAvatarColor(value.magenta, options),
-    red: renderThemeColorAvatarColor(value.red, options),
-    orange: renderThemeColorAvatarColor(value.orange, options),
-    yellow: renderThemeColorAvatarColor(value.yellow, options),
-    green: renderThemeColorAvatarColor(value.green, options),
-    cyan: renderThemeColorAvatarColor(value.cyan, options),
+    gray: renderThemeColorAvatarColor(value.gray, {
+      ...options,
+      debugPath: `${debugPath}.gray`,
+    }),
+    blue: renderThemeColorAvatarColor(value.blue, {
+      ...options,
+      debugPath: `${debugPath}.blue`,
+    }),
+    purple: renderThemeColorAvatarColor(value.purple, {
+      ...options,
+      debugPath: `${debugPath}.purple`,
+    }),
+    magenta: renderThemeColorAvatarColor(value.magenta, {
+      ...options,
+      debugPath: `${debugPath}.magenta`,
+    }),
+    red: renderThemeColorAvatarColor(value.red, {
+      ...options,
+      debugPath: `${debugPath}.red`,
+    }),
+    orange: renderThemeColorAvatarColor(value.orange, {
+      ...options,
+      debugPath: `${debugPath}.orange`,
+    }),
+    yellow: renderThemeColorAvatarColor(value.yellow, {
+      ...options,
+      debugPath: `${debugPath}.yellow`,
+    }),
+    green: renderThemeColorAvatarColor(value.green, {
+      ...options,
+      debugPath: `${debugPath}.green`,
+    }),
+    cyan: renderThemeColorAvatarColor(value.cyan, {
+      ...options,
+      debugPath: `${debugPath}.cyan`,
+    }),
   }
 }
 
@@ -206,6 +283,7 @@ function renderThemeColorAvatarColor(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorAvatar_v2['gray'] {
   const {baseBg, blendMode: rootBlendMode, colorPalette} = options
@@ -238,15 +316,19 @@ function renderThemeColorBadge(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorBadge_v2 {
-  return {
-    default: renderThemeColorBadgeColor(value.default, options),
-    primary: renderThemeColorBadgeColor(value.primary, options),
-    positive: renderThemeColorBadgeColor(value.positive, options),
-    caution: renderThemeColorBadgeColor(value.caution, options),
-    critical: renderThemeColorBadgeColor(value.critical, options),
-  }
+  const {debugPath} = options
+
+  return THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+    acc[tone] = renderThemeColorBadgeColor(value[tone], {
+      ...options,
+      debugPath: `${debugPath}.${tone}`,
+    })
+
+    return acc
+  }, {} as ThemeColorBadge_v2)
 }
 
 function renderThemeColorBadgeColor(
@@ -255,11 +337,10 @@ function renderThemeColorBadgeColor(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorBadgeTone_v2 {
   const {baseBg, blendMode: rootBlendMode, colorPalette} = options
-
-  // const blendMode = value._blend || 'multiply'
 
   const blendMode = rootBlendMode
 
@@ -291,12 +372,24 @@ function renderThemeColorButton(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorButton_v2 {
+  const {debugPath} = options
+
   return {
-    default: renderThemeColorButtonTones(value.default, options),
-    ghost: renderThemeColorButtonTones(value.ghost, options),
-    bleed: renderThemeColorButtonTones(value.bleed, options),
+    default: renderThemeColorButtonTones(value.default, {
+      ...options,
+      debugPath: `${debugPath}.default`,
+    }),
+    ghost: renderThemeColorButtonTones(value.ghost, {
+      ...options,
+      debugPath: `${debugPath}.ghost`,
+    }),
+    bleed: renderThemeColorButtonTones(value.bleed, {
+      ...options,
+      debugPath: `${debugPath}.bleed`,
+    }),
   }
 }
 
@@ -306,15 +399,19 @@ function renderThemeColorButtonTones(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorButtonMode_v2 {
-  return {
-    default: renderThemeColorButtonStates(value.default, options),
-    primary: renderThemeColorButtonStates(value.primary, options),
-    positive: renderThemeColorButtonStates(value.positive, options),
-    caution: renderThemeColorButtonStates(value.caution, options),
-    critical: renderThemeColorButtonStates(value.critical, options),
-  }
+  const {debugPath} = options
+
+  return THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+    acc[tone] = renderThemeColorButtonStates(value[tone], {
+      ...options,
+      debugPath: `${debugPath}.${tone}`,
+    })
+
+    return acc
+  }, {} as ThemeColorButtonMode_v2)
 }
 
 function renderThemeColorButtonStates(
@@ -323,14 +420,32 @@ function renderThemeColorButtonStates(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorButtonTone_v2 {
+  const {debugPath} = options
+
   return {
-    enabled: renderThemeColorState(value.enabled, options),
-    hovered: renderThemeColorState(value.hovered, options),
-    pressed: renderThemeColorState(value.pressed, options),
-    selected: renderThemeColorState(value.selected, options),
-    disabled: renderThemeColorState(value.disabled, options),
+    enabled: renderThemeColorState(value.enabled, {
+      ...options,
+      debugPath: `${debugPath}.enabled`,
+    }),
+    hovered: renderThemeColorState(value.hovered, {
+      ...options,
+      debugPath: `${debugPath}.hovered`,
+    }),
+    pressed: renderThemeColorState(value.pressed, {
+      ...options,
+      debugPath: `${debugPath}.pressed`,
+    }),
+    selected: renderThemeColorState(value.selected, {
+      ...options,
+      debugPath: `${debugPath}.selected`,
+    }),
+    disabled: renderThemeColorState(value.disabled, {
+      ...options,
+      debugPath: `${debugPath}.disabled`,
+    }),
   }
 }
 
@@ -340,9 +455,10 @@ function renderThemeColorState(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorState_v2 {
-  const {baseBg, blendMode: rootBlendMode, colorPalette} = options
+  const {baseBg, blendMode: rootBlendMode, colorPalette, debugPath} = options
   const blendMode = value._blend || 'multiply'
 
   const rootOptions: RenderColorValueOptions = {
@@ -364,8 +480,18 @@ function renderThemeColorState(
     accent: {
       fg: renderColorValue(value.accent.fg, colorOptions),
     },
-    avatar: renderThemeColorAvatar(value.avatar, {baseBg: bg, colorPalette, blendMode}),
-    badge: renderThemeColorBadge(value.badge, {baseBg: bg, colorPalette, blendMode}),
+    avatar: renderThemeColorAvatar(value.avatar, {
+      baseBg: bg,
+      colorPalette,
+      blendMode,
+      debugPath: `${debugPath}.avatar`,
+    }),
+    badge: renderThemeColorBadge(value.badge, {
+      baseBg: bg,
+      colorPalette,
+      blendMode,
+      debugPath: `${debugPath}.badge`,
+    }),
     bg,
     border: renderColorValue(value.border, colorOptions),
     code: {
@@ -399,11 +525,20 @@ function renderThemeColorInput(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorInput_v2 {
+  const {debugPath} = options
+
   return {
-    default: renderInputStatesColorTheme(value.default, options),
-    invalid: renderInputStatesColorTheme(value.invalid, options),
+    default: renderInputStatesColorTheme(value.default, {
+      ...options,
+      debugPath: `${debugPath}.default`,
+    }),
+    invalid: renderInputStatesColorTheme(value.invalid, {
+      ...options,
+      debugPath: `${debugPath}.invalid`,
+    }),
   }
 }
 
@@ -413,13 +548,28 @@ function renderInputStatesColorTheme(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorInputMode_v2 {
+  const {debugPath} = options
+
   return {
-    enabled: renderInputStateColorTheme(value.enabled, options),
-    hovered: renderInputStateColorTheme(value.hovered, options),
-    readOnly: renderInputStateColorTheme(value.readOnly, options),
-    disabled: renderInputStateColorTheme(value.disabled, options),
+    enabled: renderInputStateColorTheme(value.enabled, {
+      ...options,
+      debugPath: `${debugPath}.enabled`,
+    }),
+    hovered: renderInputStateColorTheme(value.hovered, {
+      ...options,
+      debugPath: `${debugPath}.hovered`,
+    }),
+    readOnly: renderInputStateColorTheme(value.readOnly, {
+      ...options,
+      debugPath: `${debugPath}.readOnly`,
+    }),
+    disabled: renderInputStateColorTheme(value.disabled, {
+      ...options,
+      debugPath: `${debugPath}.disabled`,
+    }),
   }
 }
 
@@ -429,6 +579,7 @@ function renderInputStateColorTheme(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorInputState_v2 {
   const {baseBg, blendMode: rootBlendMode, colorPalette} = options
@@ -455,15 +606,19 @@ function renderThemeColorSelectable(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorSelectable_v2 {
-  return {
-    default: renderThemeColorSelectableStates(value.default, options),
-    primary: renderThemeColorSelectableStates(value.primary, options),
-    positive: renderThemeColorSelectableStates(value.positive, options),
-    caution: renderThemeColorSelectableStates(value.caution, options),
-    critical: renderThemeColorSelectableStates(value.critical, options),
-  }
+  const {debugPath} = options
+
+  return THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+    acc[tone] = renderThemeColorSelectableStates(value[tone], {
+      ...options,
+      debugPath: `${debugPath}.${tone}`,
+    })
+
+    return acc
+  }, {} as ThemeColorSelectable_v2)
 }
 
 function renderThemeColorSelectableStates(
@@ -472,14 +627,32 @@ function renderThemeColorSelectableStates(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorSelectableTone_v2 {
+  const {debugPath} = options
+
   return {
-    enabled: renderThemeColorState(value.enabled, options),
-    hovered: renderThemeColorState(value.hovered, options),
-    pressed: renderThemeColorState(value.pressed, options),
-    selected: renderThemeColorState(value.selected, options),
-    disabled: renderThemeColorState(value.disabled, options),
+    enabled: renderThemeColorState(value.enabled, {
+      ...options,
+      debugPath: `${debugPath}.enabled`,
+    }),
+    hovered: renderThemeColorState(value.hovered, {
+      ...options,
+      debugPath: `${debugPath}.hovered`,
+    }),
+    pressed: renderThemeColorState(value.pressed, {
+      ...options,
+      debugPath: `${debugPath}.pressed`,
+    }),
+    selected: renderThemeColorState(value.selected, {
+      ...options,
+      debugPath: `${debugPath}.selected`,
+    }),
+    disabled: renderThemeColorState(value.disabled, {
+      ...options,
+      debugPath: `${debugPath}.disabled`,
+    }),
   }
 }
 
@@ -489,6 +662,7 @@ function renderSyntaxColorTheme(
     baseBg: string
     blendMode: ThemeColorBlendModeKey
     colorPalette: ThemeColorPalette
+    debugPath: string
   },
 ): ThemeColorSyntax {
   const {colorPalette, baseBg, blendMode} = options

@@ -5,6 +5,7 @@
 .workshop
 dist
 etc
+local-registry
 node_modules
 storybook-static
 theme.js

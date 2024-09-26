@@ -9,7 +9,7 @@ import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth, FlexJustify} from 
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Spinner} from '../spinner'
-import {Text} from '../text'
+import {Text, TextProps} from '../text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 
@@ -32,6 +32,8 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   textAlign?: ButtonTextAlign
   muted?: boolean
   text?: React.ReactNode
+  textOverflow?: TextProps['textOverflow']
+  textWeight?: TextProps['weight']
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
   width?: ButtonWidth
@@ -85,6 +87,8 @@ export const Button = forwardRef(function Button(
     space: spaceProp = 3,
     text,
     textAlign,
+    textOverflow = 'ellipsis',
+    textWeight,
     tone = 'default',
     type = 'button',
     muted = false,
@@ -142,20 +146,21 @@ export const Button = forwardRef(function Button(
         <Box as="span" {...boxProps}>
           <Flex as="span" justify={justify} gap={space}>
             {IconComponent && (
-              <Text size={fontSize}>
+              <Text as="span" size={fontSize} style={{flex: 'none'}}>
                 {isValidElement(IconComponent) && IconComponent}
                 {isValidElementType(IconComponent) && <IconComponent />}
               </Text>
             )}
 
             {text && (
-              <Box>
+              <Box as="span">
                 <Text
+                  as="span"
                   muted={muted}
                   align={textAlign}
                   size={fontSize}
-                  textOverflow="ellipsis"
-                  weight={button.textWeight}
+                  textOverflow={textOverflow}
+                  weight={textWeight ?? button.textWeight}
                 >
                   {text}
                 </Text>
@@ -163,7 +168,7 @@ export const Button = forwardRef(function Button(
             )}
 
             {IconRightComponent && (
-              <Text size={fontSize}>
+              <Text as="span" size={fontSize} style={{flex: 'none'}}>
                 {isValidElement(IconRightComponent) && IconRightComponent}
                 {isValidElementType(IconRightComponent) && <IconRightComponent />}
               </Text>

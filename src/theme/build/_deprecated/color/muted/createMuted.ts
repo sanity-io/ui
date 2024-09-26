@@ -1,11 +1,11 @@
-import {ThemeColorBase, ThemeColorCardToneKey, ThemeColorMuted} from '../../../../system'
+import {ThemeColorBase, ThemeColorMuted, ThemeColorToneKey} from '../../../../system'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createMutedTones(
   opts: ThemeColorBuilderOpts,
   base: ThemeColorBase,
   dark: boolean,
-  name: ThemeColorCardToneKey,
+  name: ThemeColorToneKey,
 ): ThemeColorMuted {
   return {
     default: {

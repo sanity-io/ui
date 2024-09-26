@@ -14,6 +14,10 @@ export const THEME_COLOR_CARD_TONES = [
   'positive',
   'caution',
   'critical',
+
+  // new
+  'prospect',
+  'explore',
 ] as const
 
 /** @public */
@@ -23,6 +27,10 @@ export const THEME_COLOR_STATE_TONES = [
   'positive',
   'caution',
   'critical',
+
+  // new
+  'prospect',
+  'explore',
 ] as const
 
 /** @public */

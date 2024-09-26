@@ -1,5 +1,12 @@
 import {defaultThemeConfig} from './defaults/config'
-import {RootTheme, RootTheme_v2, Theme, ThemeColorCardToneKey, ThemeColorSchemeKey} from './system'
+import {
+  RootTheme,
+  RootTheme_v2,
+  Theme,
+  ThemeColor,
+  ThemeColorCardToneKey,
+  ThemeColorSchemeKey,
+} from './system'
 import {is_v2, v0_v2, v2_v0} from './versioning'
 
 // cache[scheme][tone][rootTheme] = theme
@@ -22,7 +29,7 @@ export function getScopedTheme(
   const v2 = is_v2(themeProp) ? themeProp : v0_v2(themeProp)
 
   const colorScheme_v0 = v0.color[scheme] || v0.color.light
-  const color_v0 = colorScheme_v0[tone] || colorScheme_v0.default
+  const color_v0 = (colorScheme_v0 as Record<string, ThemeColor>)[tone] || colorScheme_v0.default
   const layer_v0 = v0.layer || defaultThemeConfig.layer
 
   const colorScheme_v2 = v2.color[scheme] || v2.color.light

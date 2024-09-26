@@ -22,6 +22,9 @@ export const defaultColorTokens: ThemeColorTokens = {
           icon: ['500', '500'],
           dot: ['500', '500'],
         },
+        'default': {
+          _hue: 'gray',
+        },
         'positive': {
           bg: ['200 50%', '900'],
           fg: ['600', '500'],
@@ -38,7 +41,7 @@ export const defaultColorTokens: ThemeColorTokens = {
         fg: ['600', '400'],
       },
       fg: ['800', '200'],
-      focusRing: ['blue/500', 'blue/500'],
+      focusRing: ['purple/500', 'purple/500'],
       icon: ['600', '400'],
       kbd: {
         bg: ['white', 'black'],
@@ -46,7 +49,7 @@ export const defaultColorTokens: ThemeColorTokens = {
         border: ['200', '800'],
       },
       link: {
-        fg: ['blue/600', 'blue/300'],
+        fg: ['purple/600', 'purple/300'],
       },
       muted: {
         bg: ['50', '950'],
@@ -73,7 +76,7 @@ export const defaultColorTokens: ThemeColorTokens = {
         fg: ['600', '400'],
       },
     },
-    'primary': {_hue: 'blue'},
+    'primary': {_hue: 'purple'},
     'positive': {
       _hue: 'green',
       shadow: {outline: ['500/0.4', '500/0.4']},
@@ -83,6 +86,8 @@ export const defaultColorTokens: ThemeColorTokens = {
       shadow: {outline: ['600/0.3', '500/0.4']},
     },
     'critical': {_hue: 'red'},
+    'prospect': {_hue: 'purple'},
+    'explore': {_hue: 'cyan'},
   },
   button: {
     default: {
@@ -121,7 +126,7 @@ export const defaultColorTokens: ThemeColorTokens = {
             border: ['800', '200'],
           },
           link: {
-            fg: ['blue/200', 'blue/600'],
+            fg: ['purple/200', 'purple/600'],
           },
           muted: {
             bg: ['950', '50'],
@@ -244,7 +249,7 @@ export const defaultColorTokens: ThemeColorTokens = {
             border: ['200', '800'],
           },
           link: {
-            fg: ['blue/700 60%', 'blue/300 60%'],
+            fg: ['purple/700 60%', 'purple/300 60%'],
           },
           muted: {
             bg: ['100', '950'],
@@ -355,7 +360,7 @@ export const defaultColorTokens: ThemeColorTokens = {
             border: ['200', '800'],
           },
           link: {
-            fg: ['blue/700 70%', 'blue/300 70%'],
+            fg: ['purple/700 70%', 'purple/300 70%'],
           },
           muted: {
             bg: ['100', '950'],
@@ -368,7 +373,8 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
         'hovered': {
           bg: ['50', '950'],
-          icon: ['700 70%', '400 70%'],
+          fg: ['800', '200'],
+          icon: ['800 70%', '300 70%'],
         },
         'pressed': {
           bg: ['100', '900'],
@@ -492,7 +498,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           border: ['200', '800'],
         },
         link: {
-          fg: ['blue/700 70%', 'blue/300 70%'],
+          fg: ['purple/700 70%', 'purple/300 70%'],
         },
         muted: {
           bg: ['50', '950'],
@@ -507,6 +513,7 @@ export const defaultColorTokens: ThemeColorTokens = {
         bg: ['50', '950'],
       },
       'pressed': {
+        // _hue: 'purple',
         bg: ['100', '900'],
       },
       'selected': {
@@ -543,7 +550,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           border: ['800', '200'],
         },
         link: {
-          fg: ['blue/200', 'blue/600'],
+          fg: ['purple/200', 'purple/600'],
         },
         muted: {
           bg: ['500 10%', '400 10%'],
@@ -598,7 +605,7 @@ export const defaultColorTokens: ThemeColorTokens = {
     },
     'default': {
       selected: {
-        _hue: 'blue',
+        _hue: 'purple',
       },
     },
     'critical': {

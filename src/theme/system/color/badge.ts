@@ -1,3 +1,5 @@
+import {ThemeColorStateToneKey} from './_system'
+
 /**
  * @public
  */
@@ -11,10 +13,4 @@ export interface ThemeColorBadgeTone_v2 {
 /**
  * @public
  */
-export interface ThemeColorBadge_v2 {
-  default: ThemeColorBadgeTone_v2
-  primary: ThemeColorBadgeTone_v2
-  positive: ThemeColorBadgeTone_v2
-  caution: ThemeColorBadgeTone_v2
-  critical: ThemeColorBadgeTone_v2
-}
+export type ThemeColorBadge_v2 = Record<ThemeColorStateToneKey, ThemeColorBadgeTone_v2>

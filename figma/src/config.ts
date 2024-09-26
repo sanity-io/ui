@@ -24,6 +24,8 @@ export interface WriteConfig {
               positive?: StateWriteConfig
               caution?: StateWriteConfig
               critical?: StateWriteConfig
+              prospect?: StateWriteConfig
+              explore?: StateWriteConfig
             }
             ghost?: {
               default?: StateWriteConfig
@@ -31,6 +33,8 @@ export interface WriteConfig {
               positive?: StateWriteConfig
               caution?: StateWriteConfig
               critical?: StateWriteConfig
+              prospect?: StateWriteConfig
+              explore?: StateWriteConfig
             }
             bleed?: {
               default?: StateWriteConfig
@@ -38,6 +42,8 @@ export interface WriteConfig {
               positive?: StateWriteConfig
               caution?: StateWriteConfig
               critical?: StateWriteConfig
+              prospect?: StateWriteConfig
+              explore?: StateWriteConfig
             }
           }
         }
@@ -48,6 +54,8 @@ export interface WriteConfig {
           positive?: StateWriteConfig
           caution?: StateWriteConfig
           critical?: StateWriteConfig
+          prospect?: StateWriteConfig
+          explore?: StateWriteConfig
         }
       }
     >
@@ -69,6 +77,8 @@ export const config: WriteConfig = {
             positive: {},
             caution: {},
             critical: {},
+            prospect: {},
+            explore: {},
           },
           ghost: {
             default: {},
@@ -76,6 +86,8 @@ export const config: WriteConfig = {
             positive: {},
             caution: {},
             critical: {},
+            prospect: {},
+            explore: {},
           },
           bleed: {
             default: {},
@@ -83,6 +95,8 @@ export const config: WriteConfig = {
             positive: {},
             caution: {},
             critical: {},
+            prospect: {},
+            explore: {},
           },
         },
       },
@@ -96,6 +110,8 @@ export const config: WriteConfig = {
         positive: {avatar: true, badge: true, kbd: true},
         caution: {avatar: true, badge: true, kbd: true},
         critical: {avatar: true, badge: true, kbd: true},
+        prospect: {avatar: true, badge: true, kbd: true},
+        explore: {avatar: true, badge: true, kbd: true},
       },
       skeleton: true,
     },
@@ -104,5 +120,7 @@ export const config: WriteConfig = {
     positive: {},
     caution: {},
     critical: {},
+    prospect: {},
+    explore: {},
   },
 }

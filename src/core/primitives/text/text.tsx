@@ -25,7 +25,7 @@ export interface TextProps {
    * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
    * @beta
    */
-  textOverflow?: 'ellipsis'
+  textOverflow?: 'ellipsis' | 'none'
   weight?: ThemeFontWeightKey
 }
 
@@ -67,6 +67,8 @@ export const Text = forwardRef(function Text(
 
   if (textOverflow === 'ellipsis') {
     children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
+  } else {
+    children = <span>{children}</span>
   }
 
   return (
@@ -80,7 +82,7 @@ export const Text = forwardRef(function Text(
       $size={useArrayProp(size)}
       $weight={weight}
     >
-      <span>{children}</span>
+      {children}
     </Root>
   )
 })
