@@ -31,6 +31,7 @@ import {BoldIcon} from './boldIcon'
 import {BoltIcon} from './boltIcon'
 import {BookIcon} from './bookIcon'
 import {BottleIcon} from './bottleIcon'
+import {BugIcon} from './bugIcon'
 import {BulbFilledIcon} from './bulbFilledIcon'
 import {BulbOutlineIcon} from './bulbOutlineIcon'
 import {CalendarIcon} from './calendarIcon'
@@ -126,9 +127,12 @@ import {LeaveIcon} from './leaveIcon'
 import {LemonIcon} from './lemonIcon'
 import {LinkIcon} from './linkIcon'
 import {LinkRemovedIcon} from './linkRemovedIcon'
+import {ListIcon} from './listIcon'
 import {LockIcon} from './lockIcon'
 import {LogoJsIcon} from './logoJsIcon'
 import {LogoTsIcon} from './logoTsIcon'
+import {MarkerIcon} from './markerIcon'
+import {MarkerRemovedIcon} from './markerRemovedIcon'
 import {MasterDetailIcon} from './masterDetailIcon'
 import {MenuIcon} from './menuIcon'
 import {MobileDeviceIcon} from './mobileDeviceIcon'
@@ -141,6 +145,7 @@ import {PackageIcon} from './packageIcon'
 import {PanelLeftIcon} from './panelLeftIcon'
 import {PanelRightIcon} from './panelRightIcon'
 import {PauseIcon} from './pauseIcon'
+import {PinFilledIcon} from './pinFilledIcon'
 import {PinIcon} from './pinIcon'
 import {PinRemovedIcon} from './pinRemovedIcon'
 import {PlayIcon} from './playIcon'
@@ -191,6 +196,7 @@ import {TextIcon} from './textIcon'
 import {ThLargeIcon} from './thLargeIcon'
 import {ThListIcon} from './thListIcon'
 import {TiersIcon} from './tiersIcon'
+import {TimelineIcon} from './timelineIcon'
 import {ToggleArrowRightIcon} from './toggleArrowRightIcon'
 import {TokenIcon} from './tokenIcon'
 import {TransferIcon} from './transferIcon'
@@ -247,6 +253,7 @@ export type IconSymbol =
   | 'bolt'
   | 'book'
   | 'bottle'
+  | 'bug'
   | 'bulb-filled'
   | 'bulb-outline'
   | 'calendar'
@@ -342,9 +349,12 @@ export type IconSymbol =
   | 'lemon'
   | 'link'
   | 'link-removed'
+  | 'list'
   | 'lock'
   | 'logo-js'
   | 'logo-ts'
+  | 'marker'
+  | 'marker-removed'
   | 'master-detail'
   | 'menu'
   | 'mobile-device'
@@ -357,6 +367,7 @@ export type IconSymbol =
   | 'panel-left'
   | 'panel-right'
   | 'pause'
+  | 'pin-filled'
   | 'pin'
   | 'pin-removed'
   | 'play'
@@ -407,6 +418,7 @@ export type IconSymbol =
   | 'th-large'
   | 'th-list'
   | 'tiers'
+  | 'timeline'
   | 'toggle-arrow-right'
   | 'token'
   | 'transfer'
@@ -460,6 +472,7 @@ export {
   BoltIcon,
   BookIcon,
   BottleIcon,
+  BugIcon,
   BulbFilledIcon,
   BulbOutlineIcon,
   CalendarIcon,
@@ -555,9 +568,12 @@ export {
   LemonIcon,
   LinkIcon,
   LinkRemovedIcon,
+  ListIcon,
   LockIcon,
   LogoJsIcon,
   LogoTsIcon,
+  MarkerIcon,
+  MarkerRemovedIcon,
   MasterDetailIcon,
   MenuIcon,
   MobileDeviceIcon,
@@ -570,6 +586,7 @@ export {
   PanelLeftIcon,
   PanelRightIcon,
   PauseIcon,
+  PinFilledIcon,
   PinIcon,
   PinRemovedIcon,
   PlayIcon,
@@ -620,6 +637,7 @@ export {
   ThLargeIcon,
   ThListIcon,
   TiersIcon,
+  TimelineIcon,
   ToggleArrowRightIcon,
   TokenIcon,
   TransferIcon,
@@ -677,6 +695,7 @@ export interface IconMap {
   bolt: IconComponent
   book: IconComponent
   bottle: IconComponent
+  bug: IconComponent
   'bulb-filled': IconComponent
   'bulb-outline': IconComponent
   calendar: IconComponent
@@ -772,9 +791,12 @@ export interface IconMap {
   lemon: IconComponent
   link: IconComponent
   'link-removed': IconComponent
+  list: IconComponent
   lock: IconComponent
   'logo-js': IconComponent
   'logo-ts': IconComponent
+  marker: IconComponent
+  'marker-removed': IconComponent
   'master-detail': IconComponent
   menu: IconComponent
   'mobile-device': IconComponent
@@ -787,6 +809,7 @@ export interface IconMap {
   'panel-left': IconComponent
   'panel-right': IconComponent
   pause: IconComponent
+  'pin-filled': IconComponent
   pin: IconComponent
   'pin-removed': IconComponent
   play: IconComponent
@@ -837,6 +860,7 @@ export interface IconMap {
   'th-large': IconComponent
   'th-list': IconComponent
   tiers: IconComponent
+  timeline: IconComponent
   'toggle-arrow-right': IconComponent
   token: IconComponent
   transfer: IconComponent
@@ -894,6 +918,7 @@ export const icons: IconMap = {
   bolt: BoltIcon,
   book: BookIcon,
   bottle: BottleIcon,
+  bug: BugIcon,
   'bulb-filled': BulbFilledIcon,
   'bulb-outline': BulbOutlineIcon,
   calendar: CalendarIcon,
@@ -989,9 +1014,12 @@ export const icons: IconMap = {
   lemon: LemonIcon,
   link: LinkIcon,
   'link-removed': LinkRemovedIcon,
+  list: ListIcon,
   lock: LockIcon,
   'logo-js': LogoJsIcon,
   'logo-ts': LogoTsIcon,
+  marker: MarkerIcon,
+  'marker-removed': MarkerRemovedIcon,
   'master-detail': MasterDetailIcon,
   menu: MenuIcon,
   'mobile-device': MobileDeviceIcon,
@@ -1004,6 +1032,7 @@ export const icons: IconMap = {
   'panel-left': PanelLeftIcon,
   'panel-right': PanelRightIcon,
   pause: PauseIcon,
+  'pin-filled': PinFilledIcon,
   pin: PinIcon,
   'pin-removed': PinRemovedIcon,
   play: PlayIcon,
@@ -1054,6 +1083,7 @@ export const icons: IconMap = {
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
   tiers: TiersIcon,
+  timeline: TimelineIcon,
   'toggle-arrow-right': ToggleArrowRightIcon,
   token: TokenIcon,
   transfer: TransferIcon,
