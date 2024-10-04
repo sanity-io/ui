@@ -427,7 +427,7 @@ export const defaultColorTokens: ThemeColorTokens = {
       '*': {
         _blend: ['multiply', 'screen'],
         bg: ['white', 'black'],
-        border: ['200', '800'],
+        border: ['300', '700'],
         fg: ['black', '200'],
         muted: {
           bg: ['50', '950'],
@@ -443,6 +443,7 @@ export const defaultColorTokens: ThemeColorTokens = {
         fg: ['800', '200'],
       },
       'disabled': {
+        bg: ['50', '950'],
         fg: ['400', '600'],
         border: ['100', '900'],
         placeholder: ['200', '800 50%'],
