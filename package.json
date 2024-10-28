@@ -121,7 +121,7 @@
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@juggle/resize-observer": "^3.4.0",
-    "@sanity/pkg-utils": "^6.10.9",
+    "@sanity/pkg-utils": "^6.11.6",
     "@sanity/prettier-config": "^1.0.2",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^2.0.16",
