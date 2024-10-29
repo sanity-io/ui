@@ -164,7 +164,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-compiler": "beta",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-storybook": "^0.8.0",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
