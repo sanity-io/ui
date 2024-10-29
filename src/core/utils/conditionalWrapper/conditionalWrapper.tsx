@@ -1,5 +1,6 @@
 /**
  * @internal
+ * @deprecated this component will be removed in the next major release
  */
 export function ConditionalWrapper({
   children,

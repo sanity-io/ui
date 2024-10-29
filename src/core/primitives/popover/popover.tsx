@@ -28,13 +28,7 @@ import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} fr
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
-import {
-  ConditionalWrapper,
-  LayerProps,
-  LayerProvider,
-  Portal,
-  useBoundaryElement,
-} from '../../utils'
+import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_POPOVER_DISTANCE,
@@ -427,26 +421,18 @@ export const Popover = memo(
       </LayerProvider>
     )
 
+    const children =
+      open &&
+      (portal ? (
+        <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{popover}</Portal>
+      ) : (
+        popover
+      ))
+
     return (
       <>
         {/* the popover */}
-        <ConditionalWrapper
-          condition={animate}
-          wrapper={(children) => <AnimatePresence>{children}</AnimatePresence>}
-        >
-          {open && (
-            <ConditionalWrapper
-              condition={!!portal}
-              wrapper={(children) => (
-                <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
-                  {children}
-                </Portal>
-              )}
-            >
-              {popover}
-            </ConditionalWrapper>
-          )}
-        </ConditionalWrapper>
+        {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
 
         {/* the referred element */}
         {child}
