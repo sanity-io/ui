@@ -105,7 +105,7 @@
     "extends": "@sanity/semantic-release-preset"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "^2.1.1",
+    "@floating-ui/react-dom": "^2.1.2",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.4.0",
     "csstype": "^3.1.3",
