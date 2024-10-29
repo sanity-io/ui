@@ -30,14 +30,7 @@ import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import type {Placement} from '../../types'
-import {
-  ConditionalWrapper,
-  Layer,
-  type LayerProps,
-  Portal,
-  useBoundaryElement,
-  usePortal,
-} from '../../utils'
+import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -403,26 +396,20 @@ export const Tooltip = forwardRef(function Tooltip(
     </Root>
   )
 
+  const children =
+    showTooltip &&
+    (portalProp ? (
+      <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
+        {tooltip}
+      </Portal>
+    ) : (
+      tooltip
+    ))
+
   return (
     <>
       {/* the tooltip */}
-      <ConditionalWrapper
-        condition={animate}
-        wrapper={(children) => <AnimatePresence>{children}</AnimatePresence>}
-      >
-        {showTooltip && (
-          <ConditionalWrapper
-            condition={!!portalProp}
-            wrapper={(children) => (
-              <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-                {children}
-              </Portal>
-            )}
-          >
-            {tooltip}
-          </ConditionalWrapper>
-        )}
-      </ConditionalWrapper>
+      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
 
       {/* the referred element */}
       {child}

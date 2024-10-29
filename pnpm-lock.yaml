@@ -56,7 +56,7 @@ importers:
         version: 3.4.0
       '@sanity/pkg-utils':
         specifier: ^6.11.7
-        version: 6.11.7(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.5.3)
+        version: 6.11.7(@types/babel__core@7.20.5)(@types/node@20.12.7)(babel-plugin-react-compiler@19.0.0-beta-6fc168f-20241025)(typescript@5.5.3)
       '@sanity/prettier-config':
         specifier: ^1.0.2
         version: 1.0.2(prettier@3.3.3)
@@ -147,6 +147,12 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.18.0
         version: 7.18.0(eslint@8.57.1)(typescript@5.5.3)
+      '@vitejs/plugin-react':
+        specifier: ^4.3.3
+        version: 4.3.3(vite@5.4.2(@types/node@20.12.7)(terser@5.30.3))
+      babel-plugin-react-compiler:
+        specifier: beta
+        version: 19.0.0-beta-6fc168f-20241025
       commitizen:
         specifier: ^4.3.0
         version: 4.3.0(@types/node@20.12.7)(typescript@5.5.3)
@@ -219,6 +225,9 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
+      react-compiler-runtime:
+        specifier: beta
+        version: 19.0.0-beta-6fc168f-20241025(react@18.3.1)
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -773,14 +782,14 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/plugin-transform-react-jsx-self@7.24.6':
-    resolution: {integrity: sha512-FfZfHXtQ5jYPQsCRyLpOv2GeLIIJhs8aydpNh39vRDjhD411XcfWDni5i7OjP/Rs8GAtTn7sWFFELJSHqkIxYg==}
+  '@babel/plugin-transform-react-jsx-self@7.25.9':
+    resolution: {integrity: sha512-y8quW6p0WHkEhmErnfe58r7x0A70uKphQm8Sp8cV7tjNQwK56sNVK0M73LK3WuYmsuyrftut4xAkjjgU0twaMg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/plugin-transform-react-jsx-source@7.24.1':
-    resolution: {integrity: sha512-1v202n7aUq4uXAieRTKcwPzNyphlCuqHHDcdSNc+vdhoTEZcFMh+L5yZuCmGaIO7bs1nJUNfHB89TZyoL48xNA==}
+  '@babel/plugin-transform-react-jsx-source@7.25.9':
+    resolution: {integrity: sha512-+iqjT8xmXhhYv4/uiYd8FNQsraMFZIfxVSqxxVSZP0WbbSAWvBXAul0m/zu+7Vv4O/3WtApy9pmaTMiumEZgfg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2560,8 +2569,8 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vitejs/plugin-react@4.3.1':
-    resolution: {integrity: sha512-m/V2syj5CuVnaxcUJOQRel/Wr31FFXRFlnOoq1TVtkCxsY5veGMTEmpWHndrhB2U8ScHtCQB1e+4hWYExQc6Lg==}
+  '@vitejs/plugin-react@4.3.3':
+    resolution: {integrity: sha512-NooDe9GpHGqNns1i8XDERg0Vsg5SSYRhRxxyTGogUdkdNt47jal+fbuYi+Yfq6pzRCKXyoPcWisfxE6RIM3GKA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0
@@ -2905,6 +2914,9 @@ packages:
     resolution: {integrity: sha512-JfTApdE++cgcTWjsiCQlLyFBMbTUft9ja17saCc93lgV33h4tuCVj7tlvu//qpLwaG+3yEz7/KhahGrUMkVq9g==}
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
+
+  babel-plugin-react-compiler@19.0.0-beta-6fc168f-20241025:
+    resolution: {integrity: sha512-wFVeXhF0hkiRe4bEM0jzeTFMlMbcKNTwhXcFvqUIVB6WXf+3vdwOWGWnw7jwvDb2mzvsIZOFt/96itOFt1rwjw==}
 
   babel-preset-current-node-syntax@1.0.1:
     resolution: {integrity: sha512-M7LQ0bxarkxQoN+vz5aJPsLBn77n8QgTFmo8WK0/44auK2xlCXrYcUxHFxgU7qW5Yzw/CjmLRK2uJzaCd7LvqQ==}
@@ -6453,6 +6465,11 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
+  react-compiler-runtime@19.0.0-beta-6fc168f-20241025:
+    resolution: {integrity: sha512-XY5p6GUVaz8P0c/B/2ebqz/xdp0YOtidtOSuiYyQB05fMws0Qys+zubDH7IKQBEtw4AKoCzrJ6ReeTtFLOKniw==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
   react-docgen-typescript@2.2.2:
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
     peerDependencies:
@@ -8322,12 +8339,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/plugin-transform-react-jsx-self@7.24.6(@babel/core@7.26.0)':
+  '@babel/plugin-transform-react-jsx-self@7.25.9(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
 
-  '@babel/plugin-transform-react-jsx-source@7.24.1(@babel/core@7.26.0)':
+  '@babel/plugin-transform-react-jsx-source@7.25.9(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
@@ -9519,7 +9536,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@sanity/pkg-utils@6.11.7(@types/babel__core@7.20.5)(@types/node@20.12.7)(typescript@5.5.3)':
+  '@sanity/pkg-utils@6.11.7(@types/babel__core@7.20.5)(@types/node@20.12.7)(babel-plugin-react-compiler@19.0.0-beta-6fc168f-20241025)(typescript@5.5.3)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.0)
@@ -9563,6 +9580,8 @@ snapshots:
       uuid: 10.0.0
       zod: 3.23.8
       zod-validation-error: 3.4.0(zod@3.23.8)
+    optionalDependencies:
+      babel-plugin-react-compiler: 19.0.0-beta-6fc168f-20241025
     transitivePeerDependencies:
       - '@types/babel__core'
       - '@types/node'
@@ -9588,7 +9607,7 @@ snapshots:
     dependencies:
       '@sanity/icons': 3.4.0(react@18.3.1)
       '@sanity/ui': 2.8.11(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@vitejs/plugin-react': 4.3.1(vite@5.4.2(@types/node@20.12.7)(terser@5.30.3))
+      '@vitejs/plugin-react': 4.3.3(vite@5.4.2(@types/node@20.12.7)(terser@5.30.3))
       axe-core: 4.10.2
       cac: 6.7.14
       chokidar: 3.6.0
@@ -10440,11 +10459,11 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react@4.3.1(vite@5.4.2(@types/node@20.12.7)(terser@5.30.3))':
+  '@vitejs/plugin-react@4.3.3(vite@5.4.2(@types/node@20.12.7)(terser@5.30.3))':
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/plugin-transform-react-jsx-self': 7.24.6(@babel/core@7.26.0)
-      '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.26.0)
+      '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
+      '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
       vite: 5.4.2(@types/node@20.12.7)(terser@5.30.3)
@@ -10819,6 +10838,10 @@ snapshots:
       '@babel/helper-define-polyfill-provider': 0.6.2(@babel/core@7.26.0)
     transitivePeerDependencies:
       - supports-color
+
+  babel-plugin-react-compiler@19.0.0-beta-6fc168f-20241025:
+    dependencies:
+      '@babel/types': 7.26.0
 
   babel-preset-current-node-syntax@1.0.1(@babel/core@7.26.0):
     dependencies:
@@ -15051,6 +15074,10 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  react-compiler-runtime@19.0.0-beta-6fc168f-20241025(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-docgen-typescript@2.2.2(typescript@5.5.3):
     dependencies:
