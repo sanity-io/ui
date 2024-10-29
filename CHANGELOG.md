@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.12](https://github.com/sanity-io/ui/compare/v2.8.11...v2.8.12) (2024-10-29)
+
+### Bug Fixes
+
+- **primitives:** button text ellipsis ([#1432](https://github.com/sanity-io/ui/issues/1432)) ([b8c16cc](https://github.com/sanity-io/ui/commit/b8c16cc6b9a441d7bf0ece5ab073da8dd4a06f9f))
+
 ## [2.8.11](https://github.com/sanity-io/ui/compare/v2.8.10...v2.8.11) (2024-10-29)
 
 ### Bug Fixes
