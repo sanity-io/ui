@@ -1,13 +1,4 @@
-import {
-  Children,
-  forwardRef,
-  Fragment,
-  isValidElement,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {Children, forwardRef, Fragment, isValidElement, useCallback, useRef, useState} from 'react'
 import {useArrayProp, useClickOutsideEvent} from '../../hooks'
 import {Box, Popover, Stack, Text} from '../../primitives'
 import {ExpandButton, Root} from './breadcrumbs.styles'
@@ -39,46 +30,43 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
 
   useClickOutsideEvent(collapse, () => [expandElementRef.current, popoverElementRef.current])
 
-  const rawItems = useMemo(() => Children.toArray(children).filter(isValidElement), [children])
+  const rawItems = Children.toArray(children).filter(isValidElement)
 
-  const items = useMemo(() => {
-    const len = rawItems.length
+  let items = rawItems
+  const len = rawItems.length
 
-    if (maxLength && len > maxLength) {
-      const beforeLength = Math.ceil(maxLength / 2)
-      const afterLength = Math.floor(maxLength / 2)
+  if (maxLength && rawItems.length > maxLength) {
+    const beforeLength = Math.ceil(maxLength / 2)
+    const afterLength = Math.floor(maxLength / 2)
 
-      return [
-        ...rawItems.slice(0, beforeLength - 1),
-        <Popover
-          constrainSize
-          content={
-            <Stack as="ol" overflow="auto" padding={space} space={space}>
-              {rawItems.slice(beforeLength - 1, len - afterLength)}
-            </Stack>
-          }
-          key="button"
-          open={open}
-          placement="top"
-          portal
-          ref={popoverElementRef}
-        >
-          <ExpandButton
-            fontSize={1}
-            mode="bleed"
-            onClick={open ? collapse : expand}
-            padding={1}
-            ref={expandElementRef}
-            selected={open}
-            text="…"
-          />
-        </Popover>,
-        ...rawItems.slice(len - afterLength),
-      ]
-    }
-
-    return rawItems
-  }, [collapse, expand, maxLength, open, rawItems, space])
+    items = [
+      ...rawItems.slice(0, beforeLength - 1),
+      <Popover
+        constrainSize
+        content={
+          <Stack as="ol" overflow="auto" padding={space} space={space}>
+            {rawItems.slice(beforeLength - 1, len - afterLength)}
+          </Stack>
+        }
+        key="button"
+        open={open}
+        placement="top"
+        portal
+        ref={popoverElementRef}
+      >
+        <ExpandButton
+          fontSize={1}
+          mode="bleed"
+          onClick={open ? collapse : expand}
+          padding={1}
+          ref={expandElementRef}
+          selected={open}
+          text="…"
+        />
+      </Popover>,
+      ...rawItems.slice(len - afterLength),
+    ]
+  }
 
   return (
     <Root data-ui="Breadcrumbs" {...restProps} ref={ref}>
