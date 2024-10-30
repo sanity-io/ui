@@ -241,7 +241,7 @@ const DialogCard = forwardRef(function DialogCard(
         <DialogLayout direction="column">
           {showHeader && (
             <DialogHeader>
-              <Flex align="center" padding={3}>
+              <Flex align="flex-start" padding={3}>
                 <Box flex={1} padding={2}>
                   {header && (
                     <Text id={labelId} size={1} weight="semibold">
