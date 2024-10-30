@@ -1,4 +1,5 @@
 import type {StorybookConfig} from '@storybook/react-vite'
+import viteReact from '@vitejs/plugin-react'
 import {mergeConfig} from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -22,7 +23,12 @@ const config: StorybookConfig = {
   },
   viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [tsconfigPaths()],
+      plugins: [
+        viteReact({
+          babel: {plugins: [['babel-plugin-react-compiler', {target: '18'}]]},
+        }),
+        tsconfigPaths(),
+      ],
     })
   },
 }

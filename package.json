@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "2.8.11",
+  "version": "2.8.13",
   "keywords": [
     "sanity",
     "ui",
@@ -152,6 +152,8 @@
     "@types/refractor": "^3.4.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "babel-plugin-react-compiler": "beta",
     "commitizen": "^4.3.0",
     "cypress": "^13.13.2",
     "cypress-real-events": "^1.13.0",
@@ -176,6 +178,7 @@
     "npm-run-all2": "^5.0.2",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
+    "react-compiler-runtime": "beta",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
     "refractor": "^4.8.1",

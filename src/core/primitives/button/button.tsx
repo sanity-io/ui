@@ -149,15 +149,17 @@ export const Button = forwardRef(function Button(
             )}
 
             {text && (
-              <Text
-                muted={muted}
-                align={textAlign}
-                size={fontSize}
-                textOverflow="ellipsis"
-                weight={button.textWeight}
-              >
-                {text}
-              </Text>
+              <Box>
+                <Text
+                  muted={muted}
+                  align={textAlign}
+                  size={fontSize}
+                  textOverflow="ellipsis"
+                  weight={button.textWeight}
+                >
+                  {text}
+                </Text>
+              </Box>
             )}
 
             {IconRightComponent && (
