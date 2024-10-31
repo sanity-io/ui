@@ -1,9 +1,8 @@
-import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-
-import {AvatarSize} from '../../types'
+import type {AvatarSize, ThemeColorAvatarColorKey} from '@sanity/ui/theme'
 
 /**
  * @internal
+ * @deprecated This will be removed in next major version.
  */
 export interface AvatarRootStyleProps {
   $color: ThemeColorAvatarColorKey
@@ -11,6 +10,7 @@ export interface AvatarRootStyleProps {
 
 /**
  * @internal
+ * @deprecated This will be removed in next major version.
  */
 export interface ResponsiveAvatarSizeStyleProps {
   $size: AvatarSize[]

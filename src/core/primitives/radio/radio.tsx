@@ -1,29 +1,42 @@
-import {forwardRef, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
+import {_composeClassNames, radio} from '@sanity/ui/css'
+import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks'
-import {inputElementStyle, radioBaseStyle} from './styles'
+import type {ComponentType, Props} from '../../types'
 
-/**
- * @public
- */
-export interface RadioProps {
+/** @public */
+export const DEFAULT_RADIO_ELEMENT = 'input'
+
+/** @public */
+export type RadioOwnProps = {
   customValidity?: string
 }
 
-const StyledRadio = styled.div(radioBaseStyle)
-const Input = styled.input(inputElementStyle)
+/** @public */
+export type RadioElementType = 'input' | ComponentType
+
+/** @public */
+export type RadioProps<E extends RadioElementType = RadioElementType> = Props<RadioOwnProps, E>
 
 /**
  * The `Radio` component allows the user to select one option from a set.
  *
  * @public
  */
-export const Radio = forwardRef(function Radio(
-  props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>,
+export function Radio<E extends RadioElementType = typeof DEFAULT_RADIO_ELEMENT>(
+  props: RadioProps<E>,
 ) {
-  const {className, disabled, style, customValidity, readOnly, ...restProps} = props
+  const {
+    as: Element = DEFAULT_RADIO_ELEMENT,
+    className,
+    disabled,
+    style,
+    customValidity,
+    readOnly,
+    ref: forwardedRef,
+    ...rest
+  } = props as RadioProps<typeof DEFAULT_RADIO_ELEMENT>
+
   const ref = useRef<HTMLInputElement | null>(null)
 
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
@@ -34,18 +47,19 @@ export const Radio = forwardRef(function Radio(
   useCustomValidity(ref, customValidity)
 
   return (
-    <StyledRadio className={className} data-ui="Radio" style={style}>
-      <Input
+    <div className={_composeClassNames(className, radio())} data-ui="Radio" style={style}>
+      <Element
+        {...rest}
+        data-invalid={customValidity ? '' : undefined}
         data-read-only={!disabled && readOnly ? '' : undefined}
-        data-error={customValidity ? '' : undefined}
-        {...restProps}
         disabled={disabled || readOnly}
         readOnly={readOnly}
         ref={ref}
         type="radio"
       />
       <span />
-    </StyledRadio>
+    </div>
   )
-})
-Radio.displayName = 'ForwardRef(Radio)'
+}
+
+Radio.displayName = 'Radio'

@@ -1,7 +1,7 @@
+import {Flex, Stack, Switch} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 
-import {Flex, Stack, Switch} from '../../src/core/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Switch> = {
@@ -37,7 +37,7 @@ export const Indeterminate: Story = {
 }
 
 const ControlledSwitch = (props: React.ComponentProps<typeof Switch>) => {
-  const [checked, setChecked] = useState(!!props.defaultChecked)
+  const [checked, setChecked] = useState(!!props['defaultChecked'])
 
   const handleChange = useCallback(() => {
     setChecked((prev) => !prev)
@@ -63,7 +63,7 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',

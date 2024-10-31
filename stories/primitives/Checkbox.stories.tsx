@@ -1,7 +1,7 @@
+import {Checkbox, Flex, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 
-import {Checkbox, Flex, Stack} from '../../src/core/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Checkbox> = {
@@ -46,7 +46,7 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',

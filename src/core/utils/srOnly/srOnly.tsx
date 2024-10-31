@@ -1,36 +1,40 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {_composeClassNames, srOnly} from '@sanity/ui/css'
 
-/**
- * @public
- */
-export interface SrOnlyProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  children?: React.ReactNode
-}
+import type {ComponentType, Props} from '../../types'
 
-const StyledSrOnly = styled.div`
-  display: block;
-  width: 0;
-  height: 0;
-  position: absolute;
-  overflow: hidden;
-  overflow: clip;
-`
+/** @public */
+export const DEFAULT_SR_ONLY_ELEMENT = 'span'
 
-/**
- * @public
- */
-export const SrOnly = forwardRef(function SrOnly(
-  props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden' | 'as'>,
-  ref: React.Ref<HTMLDivElement>,
+/** @public */
+export type SrOnlyOwnProps = {} // eslint-disable-line @typescript-eslint/no-empty-object-type
+
+/** @public */
+export type SrOnlyElementType = 'span' | ComponentType
+
+/** @public */
+export type SrOnlyProps<E extends SrOnlyElementType = SrOnlyElementType> = Props<SrOnlyOwnProps, E>
+
+/** @public */
+export function SrOnly<E extends SrOnlyElementType = typeof DEFAULT_SR_ONLY_ELEMENT>(
+  props: SrOnlyProps<E>,
 ) {
-  const {as, children} = props
+  const {
+    as: Element = DEFAULT_SR_ONLY_ELEMENT,
+    children,
+    className,
+    ...rest
+  } = props as SrOnlyProps<typeof DEFAULT_SR_ONLY_ELEMENT>
 
   return (
-    <StyledSrOnly aria-hidden as={as} data-ui="SrOnly" ref={ref}>
+    <Element
+      data-ui="SrOnly"
+      {...rest}
+      aria-hidden
+      className={_composeClassNames(className, srOnly())}
+    >
       {children}
-    </StyledSrOnly>
+    </Element>
   )
-})
-SrOnly.displayName = 'ForwardRef(SrOnly)'
+}
+
+SrOnly.displayName = 'SrOnly'

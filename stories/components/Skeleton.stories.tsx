@@ -1,33 +1,42 @@
+import {
+  Box,
+  Card,
+  CodeSkeleton,
+  type CodeSkeletonProps,
+  Container,
+  Flex,
+  Grid,
+  HeadingSkeleton,
+  type HeadingSkeletonProps,
+  LabelSkeleton,
+  type LabelSkeletonProps,
+  Skeleton,
+  Stack,
+  TextSkeleton,
+  type TextSkeletonProps,
+} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {
-  CodeSkeleton,
-  HeadingSkeleton,
-  LabelSkeleton,
-  Skeleton,
-  TextSkeleton,
-} from '../../src/core/components'
-import {Box, Card, Container, Flex, Grid, Stack} from '../../src/core/primitives'
-import {getSpaceControls} from '../controls'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {
   component: Skeleton,
   args: {animated: true},
   argTypes: {
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    margin: getSpaceControls(),
-    marginBottom: getSpaceControls(),
-    marginLeft: getSpaceControls(),
-    marginRight: getSpaceControls(),
-    marginTop: getSpaceControls(),
-    marginY: getSpaceControls(),
-    marginX: getSpaceControls(),
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    margin: SPACE_CONTROLS,
+    marginBottom: SPACE_CONTROLS,
+    marginLeft: SPACE_CONTROLS,
+    marginRight: SPACE_CONTROLS,
+    marginTop: SPACE_CONTROLS,
+    marginY: SPACE_CONTROLS,
+    marginX: SPACE_CONTROLS,
   },
   tags: ['autodocs'],
 }
@@ -47,7 +56,7 @@ export const CardSkeleton: Story = {
     return (
       <Box padding={[4, 5, 6]}>
         <Container width={1}>
-          <Stack space={4}>
+          <Stack gap={4}>
             {[1, 2, 3].map((item) => (
               <Card key={item} padding={2} radius={2} border>
                 <Flex align="center">
@@ -57,11 +66,27 @@ export const CardSkeleton: Story = {
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                   </Grid>
-                  <Stack space={2} flex={1}>
-                    <HeadingSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <TextSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <LabelSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <CodeSkeleton style={{width: '100%'}} radius={1} {...props} />
+                  <Stack gap={2} flex={1}>
+                    <HeadingSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as HeadingSkeletonProps)}
+                    />
+                    <TextSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as TextSkeletonProps)}
+                    />
+                    <LabelSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as LabelSkeletonProps)}
+                    />
+                    <CodeSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as CodeSkeletonProps)}
+                    />
                   </Stack>
                 </Flex>
                 <Flex marginTop={2}>

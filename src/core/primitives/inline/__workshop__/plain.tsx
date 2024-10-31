@@ -1,15 +1,12 @@
 import {Card, Flex, Inline, Text} from '@sanity/ui'
 import {useAction, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_SPACE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_SPACE_OPTIONS} from '$workshop'
 
 export default function PlainStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <Inline
-        onClick={useAction('onClick')}
-        space={useSelect('Space', WORKSHOP_SPACE_OPTIONS, 0, 'Props')}
-      >
+      <Inline gap={useSelect('Gap', WORKSHOP_SPACE_OPTIONS, 0)} onClick={useAction('onClick')}>
         <Card padding={1} shadow={1}>
           <Text size={1}>Inline item</Text>
         </Card>

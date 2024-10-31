@@ -1,22 +1,26 @@
-import {useCallback, useContext, useEffect, useMemo, useState} from 'react'
+import {
+  type ReactElement,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import {useArrayProp, useMediaIndex} from '../../hooks'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
-import {LayerContextValue} from './types'
+import type {LayerContextValue} from './types'
 
-/**
- * @public
- */
+/** @public */
 export interface LayerProviderProps {
-  children?: React.ReactNode
+  children?: ReactNode
   zOffset?: number | number[]
 }
 
-/**
- * @public
- */
-export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
+/** @public */
+export function LayerProvider(props: LayerProviderProps): ReactElement {
   const {children, zOffset: zOffsetProp = 0} = props
 
   // Get parent context values
@@ -34,7 +38,7 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   // Get responsive z-index value
   const maxMediaIndex = zOffset.length - 1
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
-  const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
+  const zIndex = parent ? parent.zIndex + (zOffset[mediaIndex] ?? 0) : (zOffset[mediaIndex] ?? 0)
 
   // A state value that is used to keep track of the number of child layers on each level
   const [, setChildLayers] = useState<Record<number, number>>({})

@@ -1,17 +1,15 @@
-import {useMemo, useRef, useSyncExternalStore} from 'react'
+import {type ReactElement, type ReactNode, useMemo, useRef, useSyncExternalStore} from 'react'
 
 import {PortalContext} from './portalContext'
-import {PortalContextValue} from './types'
+import type {PortalContextValue} from './types'
 
-/**
- * @public
- */
+/** @public */
 export interface PortalProviderProps {
   /**
    * @deprecated Use `<BoundaryElementProvider element={...} />` instead
    */
   boundaryElement?: HTMLElement | null
-  children: React.ReactNode
+  children: ReactNode
   element?: HTMLElement | null
   /**
    * @beta
@@ -19,10 +17,8 @@ export interface PortalProviderProps {
   __unstable_elements?: Record<string, HTMLElement | null | undefined>
 }
 
-/**
- * @public
- */
-export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
+/** @public */
+export function PortalProvider(props: PortalProviderProps): ReactElement {
   const {boundaryElement, children, element, __unstable_elements: elementsProp} = props
   const elements = useUnique(elementsProp)
   const fallbackElement = useSyncExternalStore(

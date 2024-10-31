@@ -1,5 +1,5 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import {Button, Flex, Menu, MenuButton, MenuButtonProps, MenuItem} from '@sanity/ui'
+import {Button, Flex, Menu, MenuButton, type MenuButtonProps, MenuItem} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {

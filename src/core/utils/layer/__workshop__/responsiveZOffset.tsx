@@ -1,13 +1,17 @@
-import {Card, Layer} from '@sanity/ui'
+import {Layer} from '@sanity/ui'
 
 import {LayerDebugInfo} from './_debug'
 
 export default function ResponsiveZOffsetStory() {
   return (
-    <Layer id="responsive-layer" zOffset={[1, 2, 3, 4, 5, 6, 7]}>
-      <Card padding={[1, 2, 3, 4, 5, 6, 7]} shadow={1}>
-        <LayerDebugInfo />
-      </Card>
+    <Layer
+      id="responsive-layer"
+      padding={[1, 2, 3, 4, 5, 6, 7]}
+      sizing="border"
+      shadow={1}
+      zOffset={[1, 2, 3, 4, 5, 6, 7]}
+    >
+      <LayerDebugInfo />
     </Layer>
   )
 }

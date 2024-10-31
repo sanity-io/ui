@@ -1,8 +1,7 @@
+import {Breadcrumbs, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Breadcrumbs} from '../../src/core/components'
-import {Text} from '../../src/core/primitives'
-import {getSpaceControls} from '../controls'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Breadcrumbs> = {
   args: {
@@ -18,7 +17,7 @@ const meta: Meta<typeof Breadcrumbs> = {
       <Text key="item">Item</Text>,
     ],
   },
-  argTypes: {space: getSpaceControls()},
+  argTypes: {gap: SPACE_CONTROLS},
   component: Breadcrumbs,
   tags: ['autodocs'],
 }

@@ -1,7 +1,7 @@
+import {Flex, Radio, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
-import {ChangeEvent, useCallback, useState} from 'react'
+import {type ChangeEvent, useCallback, useState} from 'react'
 
-import {Flex, Radio, Stack} from '../../src/core/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Radio> = {
@@ -52,7 +52,7 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',

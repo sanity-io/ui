@@ -1,33 +1,46 @@
-import {forwardRef, useEffect, useState} from 'react'
-import {styled} from 'styled-components'
+import {_composeClassNames, skeleton, type SkeletonStyleProps} from '@sanity/ui/css'
+import {useEffect, useState} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {Box, BoxProps, ResponsiveRadiusProps} from '../../primitives'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {skeletonStyle} from './styles'
+import {Box, type BoxOwnProps} from '../../primitives'
+import type {ComponentType, Props} from '../../types'
 
-const StyledSkeleton = styled(Box)<
-  {$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps
->(responsiveRadiusStyle, skeletonStyle)
+/** @beta */
+export const DEFAULT_SKELETON_ELEMENT = 'div'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxProps, 'children'> {
-  animated?: boolean
-  delay?: number
-}
+export type SkeletonOwnProps = BoxOwnProps &
+  SkeletonStyleProps & {
+    animated?: boolean
+    delay?: number
+  }
+
+/** @beta */
+export type SkeletonElementType = 'div' | 'span' | ComponentType
+
+/** @beta */
+export type SkeletonProps<E extends SkeletonElementType = SkeletonElementType> = Props<
+  SkeletonOwnProps,
+  E
+>
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const Skeleton = forwardRef(function Skeleton(
-  props: SkeletonProps & React.HTMLProps<HTMLDivElement>,
-  ref: React.Ref<HTMLDivElement>,
+export function Skeleton<E extends SkeletonElementType = typeof DEFAULT_SKELETON_ELEMENT>(
+  props: SkeletonProps<E>,
 ) {
-  const {animated = false, delay, radius, ...restProps} = props
+  const {
+    animated = false,
+    className,
+    delay,
+    radius,
+    ...rest
+  } = props as SkeletonProps<typeof DEFAULT_SKELETON_ELEMENT>
+
   const [visible, setVisible] = useState<boolean>(delay ? false : true)
 
   useEffect(() => {
@@ -45,13 +58,19 @@ export const Skeleton = forwardRef(function Skeleton(
   }, [delay])
 
   return (
-    <StyledSkeleton
-      {...restProps}
-      $animated={animated}
-      $radius={useArrayProp(radius)}
-      $visible={visible}
-      ref={ref}
+    <Box
+      data-ui="Skeleton"
+      {...rest}
+      className={_composeClassNames(
+        className,
+        skeleton({
+          radius,
+        }),
+      )}
+      data-animated={animated ? '' : undefined}
+      data-visible={visible ? '' : undefined}
     />
   )
-})
-Skeleton.displayName = 'ForwardRef(Skeleton)'
+}
+
+Skeleton.displayName = 'Skeleton'

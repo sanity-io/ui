@@ -1,42 +1,36 @@
-/* eslint-disable react-refresh/only-export-components */
-
-import {Card, studioTheme, ThemeProvider} from '@sanity/ui'
+import {Card, StyleTags} from '@sanity/ui'
+import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {DecoratorHelpers} from '@storybook/addon-themes'
-import {StoryFn} from '@storybook/react'
-import {createGlobalStyle} from 'styled-components'
+import type {Decorator} from '@storybook/react'
 
-const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
-
-export const GlobalStyle = createGlobalStyle`
-  body,
-  .docs-story {
-    background-color: ${({theme}) => theme.sanity.color.base.bg};
-  }
-`
+const {initializeThemeState, pluckThemeFromContext} = DecoratorHelpers
 
 /**
- * Story decorator which wraps all stories in a Sanity <ThemeProvider> and passes the current theme
- * value defined in Story.
- *
- * Stories are also wrapped in a <Card> for layout.
+ * Story decorator which render global CSS and the root `Card` component, and passes the
+ * current scheme value defined in `Story`.
  */
-
-export const withSanityTheme = ({themes, defaultTheme}) => {
+export const withSanityTheme = ({
+  themes,
+  defaultTheme,
+}: {
+  themes: Record<string, string>
+  defaultTheme: string
+}): Decorator => {
   initializeThemeState(Object.keys(themes), defaultTheme)
 
-  return (Story: StoryFn, context) => {
+  return (Story, context) => {
     const selectedTheme = pluckThemeFromContext(context)
-    const {themeOverride} = useThemeParameters()
-
-    const selected = themeOverride || selectedTheme || defaultTheme
+    const {themeOverride} = context.parameters['themes'] ?? {}
+    const scheme = (themeOverride || selectedTheme || defaultTheme) as ThemeColorSchemeKey
 
     return (
-      <ThemeProvider scheme={selected} theme={studioTheme}>
-        <GlobalStyle />
-        <Card padding={4}>
+      <>
+        <StyleTags />
+
+        <Card padding={[4, 4, 5, 6]} scheme={scheme} tone="default">
           <Story />
         </Card>
-      </ThemeProvider>
+      </>
     )
   }
 }

@@ -1,16 +1,16 @@
+import {Card, Container, Stack, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, Container, Stack, Text} from '../../src/core/primitives'
-import {getContainerWidthControls, getHeightControls, getOverflowControls} from '../controls'
+import {CONTAINER_WIDTH_CONTROLS, HEIGHT_CONTROLS, OVERFLOW_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Container> = {
   args: {
     children: <Text>Contained text</Text>,
   },
   argTypes: {
-    height: getHeightControls(),
-    overflow: getOverflowControls(),
-    width: getContainerWidthControls(),
+    height: HEIGHT_CONTROLS,
+    overflow: OVERFLOW_CONTROLS,
+    width: CONTAINER_WIDTH_CONTROLS,
   },
   component: Container,
   tags: ['autodocs'],
@@ -33,7 +33,7 @@ export const Widths: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={2}>
+      <Stack gap={2}>
         <Container {...props} width="auto">
           <Card padding={4} tone="transparent">
             <Text align="center">Auto</Text>

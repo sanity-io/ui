@@ -1,27 +1,31 @@
-import {
-  BoxDisplay,
-  BoxHeight,
-  BoxOverflow,
-  BoxSizing,
+import type {
   FlexAlign,
   FlexDirection,
   FlexJustify,
   FlexValue,
   FlexWrap,
-  GridAutoCols,
-  GridAutoFlow,
-  GridAutoRows,
   GridItemColumn,
   GridItemColumnEnd,
   GridItemColumnStart,
   GridItemRow,
   GridItemRowEnd,
   GridItemRowStart,
+} from '@sanity/ui/css'
+
+import type {
+  BoxDisplay,
+  BoxHeight,
+  BoxOverflow,
+  BoxSizing,
+  GridAutoCols,
+  GridAutoFlow,
+  GridAutoRows,
   Radius,
 } from '../types'
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveBorderProps {
   border?: boolean | boolean[]
@@ -33,6 +37,7 @@ export interface ResponsiveBorderProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveBoxProps {
   display?: BoxDisplay | BoxDisplay[]
@@ -43,6 +48,7 @@ export interface ResponsiveBoxProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveFlexProps {
   align?: FlexAlign | FlexAlign[]
@@ -53,6 +59,7 @@ export interface ResponsiveFlexProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveFlexItemProps {
   /** Sets the flex CSS attribute. The property is responsive. */
@@ -61,20 +68,19 @@ export interface ResponsiveFlexItemProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveGridProps {
   autoRows?: GridAutoRows | GridAutoRows[]
   autoCols?: GridAutoCols | GridAutoCols[]
   autoFlow?: GridAutoFlow | GridAutoFlow[]
   columns?: number | number[]
-  gap?: number | number[]
-  gapX?: number | number[]
-  gapY?: number | number[]
   rows?: number | number[]
 }
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveGridItemProps {
   column?: GridItemColumn | GridItemColumn[]
@@ -87,6 +93,7 @@ export interface ResponsiveGridItemProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveMarginProps {
   /** Applies margins to all sides. The property is responsive. */
@@ -103,6 +110,7 @@ export interface ResponsiveMarginProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsivePaddingProps {
   padding?: number | number[]
@@ -116,6 +124,7 @@ export interface ResponsivePaddingProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveRadiusProps {
   radius?: Radius | Radius[]
@@ -123,6 +132,7 @@ export interface ResponsiveRadiusProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveShadowProps {
   shadow?: number | number[]
@@ -130,14 +140,13 @@ export interface ResponsiveShadowProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveWidthProps {
   width?: number | 'auto' | (number | 'auto')[]
 }
 
-/**
- * @public
- */
+/** @public */
 export type Delay =
   | number
   | Partial<{

@@ -38,7 +38,7 @@ export default function BasicStory() {
       </Box>
       <Wrapper>
         <TextInput />
-        <Tree ref={ref} space={1} onFocus={handleFocus}>
+        <Tree gap={1} onFocus={handleFocus} ref={ref}>
           <TreeItem data-testid="fruit" onClick={handleClick} expanded text="Fruit">
             <TreeItem
               data-testid="oranges"

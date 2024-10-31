@@ -1,41 +1,46 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {_composeClassNames, container, type ContainerStyleProps} from '@sanity/ui/css'
 
-import {useArrayProp} from '../../hooks'
-import {Box, BoxProps} from '../box'
-import {ResponsiveWidthProps} from '../types'
-import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
-import {ResponsiveWidthStyleProps} from './types'
+import type {Props} from '../../types'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box'
 
-/**
- * @public
- */
-export interface ContainerProps extends BoxProps, ResponsiveWidthProps {}
+/** @public */
+export const DEFAULT_CONTAINER_ELEMENT = 'div'
 
-const StyledContainer = styled(Box)<ResponsiveWidthStyleProps>(
-  containerBaseStyle,
-  responsiveContainerWidthStyle,
-)
+/** @public */
+export type ContainerOwnProps = Omit<BoxOwnProps, 'width'> & ContainerStyleProps
+
+/** @public */
+export type ContainerElementType = BoxElementType
+
+/** @public */
+export type ContainerProps<E extends ContainerElementType = ContainerElementType> = Props<
+  ContainerOwnProps,
+  E
+>
 
 /**
  * The `Container` component wraps content layout in a defined set of widths.
  *
  * @public
  */
-export const Container = forwardRef(function Container(
-  props: ContainerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+export function Container<E extends ContainerElementType = typeof DEFAULT_CONTAINER_ELEMENT>(
+  props: ContainerProps<E>,
 ) {
-  const {as, width = 2, ...restProps} = props
+  const {
+    as = DEFAULT_CONTAINER_ELEMENT,
+    className,
+    width = 2,
+    ...rest
+  } = props as ContainerProps<typeof DEFAULT_CONTAINER_ELEMENT>
 
   return (
-    <StyledContainer
+    <Box
       data-ui="Container"
-      {...restProps}
-      $width={useArrayProp(width)}
-      forwardedAs={as}
-      ref={ref}
+      {...rest}
+      as={as}
+      className={_composeClassNames(className, container({width}))}
     />
   )
-})
-Container.displayName = 'ForwardRef(Container)'
+}
+
+Container.displayName = 'Container'

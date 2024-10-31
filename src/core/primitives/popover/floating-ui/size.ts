@@ -1,6 +1,6 @@
-import {detectOverflow, Elements, Middleware} from '@floating-ui/react-dom'
+import {detectOverflow, type Elements, type Middleware} from '@floating-ui/react-dom'
 
-import {PopoverMargins} from '../../../types'
+import type {PopoverMargins} from '../../../types'
 
 export interface SizeMiddlewareApplyOptions {
   availableWidth: number

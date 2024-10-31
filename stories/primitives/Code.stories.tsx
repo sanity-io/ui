@@ -1,7 +1,7 @@
+import {Code, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Code, Stack} from '../../src/core/primitives'
-import {getFontSizeControls} from '../controls'
+import {FONT_CODE_SIZE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Code> = {
   args: {
@@ -9,7 +9,7 @@ const meta: Meta<typeof Code> = {
     language: 'javascript',
   },
   argTypes: {
-    size: getFontSizeControls('code'),
+    size: FONT_CODE_SIZE_CONTROLS,
   },
   component: Code,
   tags: ['autodocs'],
@@ -32,7 +32,7 @@ export const Sizes: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         <Code {...props} size={4} />
         <Code {...props} size={3} />
         <Code {...props} size={2} />
@@ -51,7 +51,7 @@ export const Weights: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         <Code {...props} />
         <Code {...props} weight="medium" />
         <Code {...props} weight="semibold" />

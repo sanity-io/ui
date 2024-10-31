@@ -1,55 +1,53 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import type {
+  BoxStyleProps,
+  GapStyleProps,
+  InsetStyleProps,
+  PositionStyleProps,
+} from '@sanity/ui/css'
+import {_composeClassNames, box} from '@sanity/ui/css'
 
-import {useArrayProp} from '../../hooks'
-import {
-  boxStyle,
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveBoxStyle,
-  ResponsiveBoxStyleProps,
-  responsiveGridItemStyle,
-  ResponsiveGridItemStyleProps,
-  responsiveMarginStyle,
-  ResponsiveMarginStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-} from '../../styles/internal'
-import {
-  ResponsiveBoxProps,
-  ResponsiveFlexItemProps,
-  ResponsiveGridItemProps,
-  ResponsiveMarginProps,
-  ResponsivePaddingProps,
-} from '../types'
+import type {ComponentType, Props} from '../../types'
 
-/**
- * @public
- */
-export interface BoxProps
-  extends ResponsiveFlexItemProps,
-    ResponsiveBoxProps,
-    ResponsiveGridItemProps,
-    ResponsiveMarginProps,
-    ResponsivePaddingProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  forwardedAs?: React.ElementType | keyof React.JSX.IntrinsicElements
-}
+/** @public */
+export const DEFAULT_BOX_ELEMENT = 'div'
 
-const StyledBox = styled.div<
-  FlexItemStyleProps &
-    ResponsiveBoxStyleProps &
-    ResponsiveGridItemStyleProps &
-    ResponsiveMarginStyleProps &
-    ResponsivePaddingStyleProps
->(
-  boxStyle,
-  flexItemStyle,
-  responsiveBoxStyle,
-  responsiveGridItemStyle,
-  responsiveMarginStyle,
-  responsivePaddingStyle,
-)
+/** @public */
+export type BoxOwnProps = BoxStyleProps & GapStyleProps & InsetStyleProps & PositionStyleProps
+
+/** @public */
+export type BoxElementType =
+  | 'a'
+  | 'article'
+  | 'aside'
+  | 'blockquote'
+  | 'body'
+  | 'button'
+  | 'details'
+  | 'div'
+  | 'header'
+  | 'fieldset'
+  | 'figure'
+  | 'figcaption'
+  | 'footer'
+  | 'form'
+  | 'html'
+  | 'iframe'
+  | 'kbd'
+  | 'label'
+  | 'legend'
+  | 'li'
+  | 'main'
+  | 'nav'
+  | 'ol'
+  | 'pre'
+  | 'section'
+  | 'span'
+  | 'summary'
+  | 'ul'
+  | ComponentType
+
+/** @public */
+export type BoxProps<E extends BoxElementType = BoxElementType> = Props<BoxOwnProps, E>
 
 /**
  * The `Box` component is a basic layout wrapper component which provides utility properties
@@ -57,18 +55,37 @@ const StyledBox = styled.div<
  *
  * @public
  */
-export const Box = forwardRef(function Box(
-  props: BoxProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
+export function Box<E extends BoxElementType = typeof DEFAULT_BOX_ELEMENT>(props: BoxProps<E>) {
   const {
-    as: asProp = 'div',
+    align,
+    as: Element = DEFAULT_BOX_ELEMENT,
+    autoCols,
+    autoFlow,
+    autoRows,
+    border = false,
+    borderTop,
+    borderRight,
+    borderBottom,
+    borderLeft,
+    className,
+    children,
     column,
     columnStart,
     columnEnd,
+    columns,
+    direction,
     display = 'block',
     flex,
+    gap,
+    gapX,
+    gapY,
     height,
+    inset,
+    insetBottom,
+    insetLeft,
+    insetRight,
+    insetTop,
+    justify,
     margin = 0,
     marginX,
     marginY,
@@ -76,7 +93,14 @@ export const Box = forwardRef(function Box(
     marginRight,
     marginBottom,
     marginLeft,
+    maxWidth,
+    minHeight = 0,
+    minWidth = 0,
+    muted,
+    outline,
     overflow,
+    overflowX,
+    overflowY,
     padding = 0,
     paddingX,
     paddingY,
@@ -84,48 +108,92 @@ export const Box = forwardRef(function Box(
     paddingRight,
     paddingBottom,
     paddingLeft,
+    pointerEvents,
+    position,
+    radius,
     row,
+    rows,
     rowStart,
     rowEnd,
-    sizing,
-    ...restProps
-  } = props
+    sizing = 'border',
+    textAlign,
+    width,
+    wrap,
+    ...rest
+  } = props as BoxProps<typeof DEFAULT_BOX_ELEMENT>
 
   return (
-    <StyledBox
-      data-as={typeof asProp === 'string' ? asProp : undefined}
+    <Element
       data-ui="Box"
-      {...restProps}
-      $column={useArrayProp(column)}
-      $columnStart={useArrayProp(columnStart)}
-      $columnEnd={useArrayProp(columnEnd)}
-      $display={useArrayProp(display)}
-      $flex={useArrayProp(flex)}
-      $height={useArrayProp(height)}
-      $margin={useArrayProp(margin)}
-      $marginX={useArrayProp(marginX)}
-      $marginY={useArrayProp(marginY)}
-      $marginTop={useArrayProp(marginTop)}
-      $marginRight={useArrayProp(marginRight)}
-      $marginBottom={useArrayProp(marginBottom)}
-      $marginLeft={useArrayProp(marginLeft)}
-      $overflow={useArrayProp(overflow)}
-      $padding={useArrayProp(padding)}
-      $paddingX={useArrayProp(paddingX)}
-      $paddingY={useArrayProp(paddingY)}
-      $paddingTop={useArrayProp(paddingTop)}
-      $paddingRight={useArrayProp(paddingRight)}
-      $paddingBottom={useArrayProp(paddingBottom)}
-      $paddingLeft={useArrayProp(paddingLeft)}
-      $row={useArrayProp(row)}
-      $rowStart={useArrayProp(rowStart)}
-      $rowEnd={useArrayProp(rowEnd)}
-      $sizing={useArrayProp(sizing)}
-      as={asProp}
-      ref={ref}
+      {...rest}
+      className={_composeClassNames(
+        className,
+        box({
+          align,
+          autoCols,
+          autoFlow,
+          autoRows,
+          border,
+          borderTop,
+          borderRight,
+          borderBottom,
+          borderLeft,
+          column,
+          columnStart,
+          columnEnd,
+          columns,
+          direction,
+          display,
+          flex,
+          gap,
+          gapX,
+          gapY,
+          height,
+          inset,
+          insetBottom,
+          insetLeft,
+          insetRight,
+          insetTop,
+          justify,
+          margin,
+          marginX,
+          marginY,
+          marginTop,
+          marginRight,
+          marginBottom,
+          marginLeft,
+          maxWidth,
+          minHeight,
+          minWidth,
+          muted,
+          outline,
+          overflow,
+          overflowX,
+          overflowY,
+          padding,
+          paddingX,
+          paddingY,
+          paddingTop,
+          paddingRight,
+          paddingBottom,
+          paddingLeft,
+          pointerEvents,
+          position,
+          radius,
+          row,
+          rows,
+          rowStart,
+          rowEnd,
+          sizing,
+          textAlign,
+          width,
+          wrap,
+        }),
+      )}
     >
-      {props.children}
-    </StyledBox>
+      {children}
+    </Element>
   )
-})
-Box.displayName = 'ForwardRef(Box)'
+}
+
+Box.displayName = 'Box'

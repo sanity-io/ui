@@ -1,5 +1,5 @@
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
-import {DialogPosition} from '../../types'
+import type {DialogPosition} from '../../types'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

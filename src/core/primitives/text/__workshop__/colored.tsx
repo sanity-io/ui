@@ -1,24 +1,17 @@
-import {Flex, Text, ThemeProps} from '@sanity/ui'
-import {getTheme_v2, ThemeColorAvatarColorKey, ThemeColorSpotKey} from '@sanity/ui/theme'
+import {Flex, Text} from '@sanity/ui'
+import {varNames, vars} from '@sanity/ui/css'
+import type {AvatarColor} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
-import {css, styled} from 'styled-components'
+import {styled} from 'styled-components'
 
-import {WORKSHOP_SPOT_COLOR_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_AVATAR_COLOR_OPTIONS} from '$workshop'
 
-const ColoredText = styled(Text)<{$color?: ThemeColorSpotKey}>((
-  props: {
-    $color?: ThemeColorAvatarColorKey
-  } & ThemeProps,
-) => {
-  const {color} = getTheme_v2(props.theme)
-
-  return css`
-    color: ${color.avatar[props.$color || 'gray'].bg};
-  `
-})
+const ColoredText = styled(Text)<{$color: AvatarColor}>`
+  ${varNames.color.fg}: ${({$color}) => vars.color.avatar[$color].bg};
+`
 
 export default function ColoredTextStory() {
-  const color = useSelect('Color', WORKSHOP_SPOT_COLOR_OPTIONS, 'gray')
+  const color = useSelect('Color', WORKSHOP_AVATAR_COLOR_OPTIONS, 'gray') ?? 'gray'
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">

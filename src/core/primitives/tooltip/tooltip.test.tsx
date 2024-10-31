@@ -1,22 +1,24 @@
-/** @jest-environment jsdom */
 import '../../../../test/mocks/resizeObserver.mock'
 import '../../../../test/mocks/matchMedia.mock'
 
 import {act, fireEvent, screen} from '@testing-library/react'
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
-import {Button, Text} from '../../primitives'
-import {Tooltip, TooltipDelayGroupProvider} from '../tooltip'
+import {Button} from '../button'
+import {Text} from '../text'
+import {Tooltip} from './tooltip'
+import {TooltipDelayGroupProvider} from './tooltipDelayGroup'
 
-// Fake timers using Jest
+// Fake timers
 beforeEach(() => {
-  jest.useFakeTimers()
+  vi.useFakeTimers()
 })
 
-// Running all pending timers and switching to real timers using Jest
+// Running all pending timers and switching to real timers
 afterEach(() => {
-  jest.runOnlyPendingTimers()
-  jest.useRealTimers()
+  vi.runOnlyPendingTimers()
+  vi.useRealTimers()
 })
 
 describe('Tooltip', () => {
@@ -43,7 +45,7 @@ describe('Tooltip', () => {
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
     it('should support delays to show and hide the tooltip.', () => {
-      jest.useFakeTimers()
+      vi.useFakeTimers()
       const delay = 200
 
       render(
@@ -63,10 +65,10 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(button)
 
-      act(() => jest.advanceTimersByTime(delay / 2))
+      act(() => vi.advanceTimersByTime(delay / 2))
       // Content should not be rendered yet
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      act(() => jest.advanceTimersByTime(delay / 2))
+      act(() => vi.advanceTimersByTime(delay / 2))
 
       // Validate tooltip content is rendered
       screen.getByText('Tooltip content')
@@ -74,12 +76,12 @@ describe('Tooltip', () => {
       fireEvent.mouseOut(button)
       // Validate tooltip content is still showing.
       screen.getByText('Tooltip content')
-      act(() => jest.advanceTimersByTime(delay))
+      act(() => vi.advanceTimersByTime(delay))
       // Validate tooltip content is not rendered anymore
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
     it('should support different open and close delays to show and hide the tooltip.', () => {
-      jest.useFakeTimers()
+      vi.useFakeTimers()
       const openDelay = 200
       const closeDelay = 150
 
@@ -103,10 +105,10 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(button)
 
-      act(() => jest.advanceTimersByTime(openDelay / 2))
+      act(() => vi.advanceTimersByTime(openDelay / 2))
       // Content should not be rendered yet
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      act(() => jest.advanceTimersByTime(openDelay / 2))
+      act(() => vi.advanceTimersByTime(openDelay / 2))
 
       // Validate tooltip content is rendered
       screen.getByText('Tooltip content')
@@ -114,7 +116,7 @@ describe('Tooltip', () => {
       fireEvent.mouseOut(button)
       // Validate tooltip content is still showing.
       screen.getByText('Tooltip content')
-      act(() => jest.advanceTimersByTime(closeDelay))
+      act(() => vi.advanceTimersByTime(closeDelay))
       // Validate tooltip content is not rendered anymore
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
@@ -124,7 +126,7 @@ describe('Tooltip', () => {
     it('should support groups with the same delay to open and close.', () => {
       const delay = 150
 
-      jest.useFakeTimers()
+      vi.useFakeTimers()
       render(
         <TooltipDelayGroupProvider delay={delay}>
           <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} placement={'top'} delay={400}>
@@ -149,11 +151,11 @@ describe('Tooltip', () => {
 
       // Hovers on first button, it should show first tooltip only
       fireEvent.mouseEnter(button1)
-      act(() => jest.advanceTimersByTime(delay / 2))
+      act(() => vi.advanceTimersByTime(delay / 2))
       // Content should not be rendered yet, we have a delay of 150ms
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
-      act(() => jest.advanceTimersByTime(delay / 2))
+      act(() => vi.advanceTimersByTime(delay / 2))
 
       // Validate Tooltip 1 is rendered
       screen.getByText('Tooltip 1')
@@ -164,38 +166,38 @@ describe('Tooltip', () => {
       fireEvent.mouseEnter(button2)
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
-      act(() => jest.advanceTimersByTime(1))
+      act(() => vi.advanceTimersByTime(1))
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
-      act(() => jest.advanceTimersByTime(delay + 1))
+      act(() => vi.advanceTimersByTime(delay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
-      act(() => jest.advanceTimersByTime(1))
+      act(() => vi.advanceTimersByTime(1))
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
-      act(() => jest.advanceTimersByTime(delay + 1))
+      act(() => vi.advanceTimersByTime(delay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Wait 200ms, the group is deactivated, hovering again should trigger the delay
-      act(() => jest.advanceTimersByTime(200))
+      act(() => vi.advanceTimersByTime(200))
       fireEvent.mouseEnter(button2)
-      act(() => jest.advanceTimersByTime(delay / 2))
+      act(() => vi.advanceTimersByTime(delay / 2))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
-      act(() => jest.advanceTimersByTime(delay / 2))
+      act(() => vi.advanceTimersByTime(delay / 2))
       screen.getByText('Tooltip 2')
     })
     it('should support groups with different open and close delay.', () => {
       const openDelay = 250
       const closeDelay = 150
 
-      jest.useFakeTimers()
+      vi.useFakeTimers()
       render(
         <TooltipDelayGroupProvider
           delay={{
@@ -225,11 +227,11 @@ describe('Tooltip', () => {
 
       // Hovers on first button, it should show first tooltip only
       fireEvent.mouseEnter(button1)
-      act(() => jest.advanceTimersByTime(openDelay / 2))
+      act(() => vi.advanceTimersByTime(openDelay / 2))
       // Content should not be rendered yet, we have a delay of2150ms
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
-      act(() => jest.advanceTimersByTime(openDelay / 2))
+      act(() => vi.advanceTimersByTime(openDelay / 2))
 
       // Validate Tooltip 1 is rendered
       screen.getByText('Tooltip 1')
@@ -240,31 +242,31 @@ describe('Tooltip', () => {
       fireEvent.mouseEnter(button2)
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
-      act(() => jest.advanceTimersByTime(1))
+      act(() => vi.advanceTimersByTime(1))
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
-      act(() => jest.advanceTimersByTime(closeDelay + 1))
+      act(() => vi.advanceTimersByTime(closeDelay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
-      act(() => jest.advanceTimersByTime(1))
+      act(() => vi.advanceTimersByTime(1))
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
-      act(() => jest.advanceTimersByTime(closeDelay + 1))
+      act(() => vi.advanceTimersByTime(closeDelay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Wait 200ms, the group is deactivated, hovering again should trigger the delay
-      act(() => jest.advanceTimersByTime(200))
+      act(() => vi.advanceTimersByTime(200))
       fireEvent.mouseEnter(button2)
-      act(() => jest.advanceTimersByTime(openDelay / 2))
+      act(() => vi.advanceTimersByTime(openDelay / 2))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
-      act(() => jest.advanceTimersByTime(openDelay / 2))
+      act(() => vi.advanceTimersByTime(openDelay / 2))
       screen.getByText('Tooltip 2')
     })
   })
@@ -273,7 +275,7 @@ describe('Tooltip', () => {
     it('Standalone tooltip closes immediately with Escape key', () => {
       const delay = 150
 
-      jest.useFakeTimers()
+      vi.useFakeTimers()
 
       render(
         <Tooltip
@@ -289,8 +291,8 @@ describe('Tooltip', () => {
 
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      fireEvent.focus(button)
-      act(() => jest.advanceTimersByTime(delay))
+      act(() => fireEvent.focus(button))
+      act(() => vi.advanceTimersByTime(delay))
 
       // Validate tooltip content is rendered
       screen.getByText('Tooltip content')
@@ -304,7 +306,7 @@ describe('Tooltip', () => {
     it('With <TooltipDelayGroupProvider />  closes immediately with Escape key', () => {
       const delay = 150
 
-      jest.useFakeTimers()
+      vi.useFakeTimers()
 
       render(
         <TooltipDelayGroupProvider delay={{close: delay}}>
@@ -322,9 +324,9 @@ describe('Tooltip', () => {
 
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      fireEvent.focus(button)
+      act(() => fireEvent.focus(button))
 
-      act(() => jest.advanceTimersByTime(delay))
+      act(() => vi.advanceTimersByTime(delay))
 
       // Validate tooltip content is rendered
       screen.getByText('Tooltip content')
@@ -351,9 +353,9 @@ describe('Tooltip', () => {
 
       // Assertion: tooltip does not exist in the document
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      fireEvent.focus(button)
+      act(() => fireEvent.focus(button))
 
-      act(() => jest.advanceTimersByTime(delay))
+      act(() => vi.advanceTimersByTime(delay))
 
       // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
@@ -377,9 +379,9 @@ describe('Tooltip', () => {
 
       // Assertion: tooltip does not exist in the document
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      fireEvent.focus(button)
+      act(() => fireEvent.focus(button))
 
-      act(() => jest.advanceTimersByTime(delay))
+      act(() => vi.advanceTimersByTime(delay))
 
       // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
@@ -392,12 +394,12 @@ describe('Tooltip', () => {
   })
 
   describe('Used defined events on <Tooltip /> child should fire correctly', () => {
-    const handleBlur = jest.fn()
-    const handleClick = jest.fn()
-    const handleContextMenu = jest.fn()
-    const handleFocus = jest.fn()
-    const handleMouseEnter = jest.fn()
-    const handleMouseLeave = jest.fn()
+    const handleBlur = vi.fn()
+    const handleClick = vi.fn()
+    const handleContextMenu = vi.fn()
+    const handleFocus = vi.fn()
+    const handleMouseEnter = vi.fn()
+    const handleMouseLeave = vi.fn()
 
     beforeEach(() => {
       render(
@@ -417,35 +419,35 @@ describe('Tooltip', () => {
       )
     })
 
-    afterEach(() => jest.clearAllMocks())
+    afterEach(() => vi.clearAllMocks())
 
     it('should fire the onBlur event', () => {
-      fireEvent.blur(screen.getByTestId('btn'))
+      act(() => fireEvent.blur(screen.getByTestId('btn')))
       expect(handleBlur).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onClick event', () => {
-      fireEvent.click(screen.getByTestId('btn'))
+      act(() => fireEvent.click(screen.getByTestId('btn')))
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onContextMenu event', () => {
-      fireEvent.contextMenu(screen.getByTestId('btn'))
+      act(() => fireEvent.contextMenu(screen.getByTestId('btn')))
       expect(handleContextMenu).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onFocus event', () => {
-      fireEvent.focus(screen.getByTestId('btn'))
+      act(() => fireEvent.focus(screen.getByTestId('btn')))
       expect(handleFocus).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onMouseEnter event', () => {
-      fireEvent.mouseEnter(screen.getByTestId('btn'))
+      act(() => fireEvent.mouseEnter(screen.getByTestId('btn')))
       expect(handleMouseEnter).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onMouseLeave event', () => {
-      fireEvent.mouseLeave(screen.getByTestId('btn'))
+      act(() => fireEvent.mouseLeave(screen.getByTestId('btn')))
       expect(handleMouseLeave).toHaveBeenCalledTimes(1)
     })
   })

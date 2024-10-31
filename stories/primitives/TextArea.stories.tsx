@@ -1,8 +1,8 @@
+import {Box, Card, Grid, Text, TextArea} from '@sanity/ui'
+import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Box, Card, Grid, Text, TextArea} from '../../src/core/primitives'
-import {RADII} from '../constants'
-import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 import {FieldWrapper} from './components/FieldWrapper'
 
@@ -11,9 +11,9 @@ const meta: Meta<typeof TextArea> = {
     placeholder: 'Placeholder text...',
   },
   argTypes: {
-    fontSize: getFontSizeControls('text'),
-    padding: getSpaceControls(),
-    radius: getRadiusControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    padding: SPACE_CONTROLS,
+    radius: RADIUS_CONTROLS,
   },
   component: TextArea,
   tags: ['autodocs'],
@@ -60,7 +60,7 @@ export const Radius: Story = {
             {value}
           </TextArea>
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),

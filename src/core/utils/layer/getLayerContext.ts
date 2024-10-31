@@ -1,5 +1,5 @@
 import {isRecord} from '../../lib/isRecord'
-import {LayerContextValue} from './types'
+import type {LayerContextValue} from './types'
 
 export function getLayerContext(contextValue: LayerContextValue): LayerContextValue {
   // NOTE: This check is for future-compatiblity

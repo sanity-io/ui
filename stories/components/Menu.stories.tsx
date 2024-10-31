@@ -1,11 +1,21 @@
 import {BinaryDocumentIcon, CircleIcon, RestoreIcon} from '@sanity/icons'
+import {
+  Badge,
+  Card,
+  Container,
+  Flex,
+  LayerProvider,
+  Menu,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 import {fn} from '@storybook/test'
 
-import {Menu, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
-import {Badge, Card, Container, Flex, Stack, Text} from '../../src/core/primitives'
-import {LayerProvider} from '../../src/core/utils'
-import {getSpaceControls} from '../controls'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Menu> = {
   args: {
@@ -15,15 +25,14 @@ const meta: Meta<typeof Menu> = {
     onItemSelect: fn(),
   },
   argTypes: {
-    padding: getSpaceControls(),
-    space: getSpaceControls(),
-    disabled: {control: 'boolean'},
-    paddingX: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
+    padding: SPACE_CONTROLS,
+    gap: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
   },
   component: Menu,
   tags: ['autodocs'],
@@ -75,7 +84,7 @@ export const MenuItemsVariants: Story = {
         <MenuItem disabled={disabled} id="menu-item-1" tone={tone}>
           <Flex as="span" gap={3} align="center">
             {(text || subText) && (
-              <Stack flex={1} space={2}>
+              <Stack flex={1} gap={2}>
                 {text && (
                   <Text size={fontSize} textOverflow="ellipsis" weight="medium">
                     {text}
@@ -88,11 +97,7 @@ export const MenuItemsVariants: Story = {
                 )}
               </Stack>
             )}
-            {badgeText && (
-              <Badge fontSize={fontSize} mode="default">
-                {badgeText}
-              </Badge>
-            )}
+            {badgeText && <Badge fontSize={fontSize}>{badgeText}</Badge>}
           </Flex>
         </MenuItem>
       )

@@ -6,11 +6,21 @@ import {
   LaunchIcon,
   SearchIcon,
 } from '@sanity/icons'
+import {
+  Box,
+  Button,
+  Card,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 import {expect, fn, userEvent, within} from '@storybook/test'
-
-import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
-import {Box, Button, Card, Flex, Stack, Text} from '../../src/core/primitives'
 
 const meta: Meta<typeof MenuButton> = {
   args: {
@@ -116,7 +126,7 @@ export const WithSelectedItem: Story = {
     const menu = within(document.documentElement).queryByTestId('menu')
 
     // Assertion: <Menu> with a selected item should not be visible when clicking the original <MenuButton> to close
-    expect(menu).toBeNull()
+    await expect(menu).toBeNull()
   },
 }
 
@@ -134,7 +144,7 @@ export const PopoverModal: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={4}>
+      <Stack gap={4}>
         <Flex gap={4} wrap="wrap">
           <MenuButton {...props} button={<Button text="Default " />} />
           <MenuButton
@@ -166,7 +176,7 @@ export const PopoverModal: Story = {
           target="_blank"
           tone="default"
         >
-          <Flex align="center" gap={2} justify="space-between">
+          <Flex align="center" gap={2}>
             <Box padding={2}>
               <Text size={1}>Open sanity.io in a new window</Text>
             </Box>

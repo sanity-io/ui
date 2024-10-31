@@ -1,62 +1,65 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import type {PaddingStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {_composeClassNames, badge} from '@sanity/ui/css'
+import type {FontTextSize} from '@sanity/ui/theme'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {BadgeMode, BadgeTone} from '../../types'
-import {Box, BoxProps} from '../box'
+import type {BadgeTone, ComponentType, Props} from '../../types'
+import {Box} from '../box'
 import {Text} from '../text'
-import {ResponsiveRadiusProps} from '../types'
-import {badgeStyle} from './styles'
-import {BadgeStyleProps} from './types'
 
-/**
- * @public
- */
-export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  fontSize?: number | number[]
-  /** @deprecated No longer used. */
-  mode?: BadgeMode
-  tone?: BadgeTone
-}
+/** @public */
+export const DEFAULT_BADGE_ELEMENT = 'span'
 
-const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  badgeStyle,
-)
+/** @public */
+export type BadgeOwnProps = PaddingStyleProps &
+  RadiusStyleProps & {
+    fontSize?: ResponsiveProp<FontTextSize>
+    tone?: BadgeTone
+  }
+
+/** @public */
+export type BadgeElementType = 'div' | 'span' | ComponentType
+
+/** @public */
+export type BadgeProps<E extends BadgeElementType = BadgeElementType> = Props<BadgeOwnProps, E>
 
 /**
  * Badges are used to tag resources.
  *
  * @public
  */
-export const Badge = forwardRef(function Badge(
-  props: BadgeProps & React.HTMLProps<HTMLDivElement>,
-  ref,
+export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>(
+  props: BadgeProps<E>,
 ) {
   const {
+    as = DEFAULT_BADGE_ELEMENT,
     children,
+    className,
     fontSize = 1,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    mode: _deprecated_mode,
     padding = 1,
-    radius = 'full',
+    radius = 2,
     tone = 'default',
-    ...restProps
-  } = props
+    ...rest
+  } = props as BadgeProps<typeof DEFAULT_BADGE_ELEMENT>
 
   return (
-    <StyledBadge
+    <Box
       data-ui="Badge"
-      {...restProps}
-      $tone={tone}
-      $radius={useArrayProp(radius)}
-      padding={useArrayProp(padding)}
-      ref={ref}
+      {...rest}
+      as={as}
+      className={_composeClassNames(
+        className,
+        badge({
+          radius,
+          tone,
+        }),
+      )}
+      display="inline-flex"
+      maxWidth="fill"
+      padding={padding}
     >
       <Text size={fontSize}>{children}</Text>
-    </StyledBadge>
+    </Box>
   )
-})
-Badge.displayName = 'ForwardRef(Badge)'
+}
+
+Badge.displayName = 'Badge'

@@ -1,7 +1,7 @@
+import {Box, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Box, Text} from '../../src/core/primitives'
-import {getSpaceControls} from '../controls'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Box> = {
   args: {
@@ -10,11 +10,11 @@ const meta: Meta<typeof Box> = {
     style: {border: '1px solid red'},
   },
   argTypes: {
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
   },
   component: Box,
   tags: ['autodocs'],

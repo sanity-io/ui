@@ -1,8 +1,8 @@
+import {Card, KBD, Stack} from '@sanity/ui'
+import {RADIUS, THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, KBD, Stack} from '../../src/core/primitives'
-import {CARD_TONES, RADII} from '../constants'
-import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof KBD> = {
@@ -11,9 +11,9 @@ const meta: Meta<typeof KBD> = {
     style: {verticalAlign: 'top'},
   },
   argTypes: {
-    fontSize: getFontSizeControls('code'),
-    padding: getSpaceControls(),
-    radius: getRadiusControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    padding: SPACE_CONTROLS,
+    radius: RADIUS_CONTROLS,
   },
   component: KBD,
   tags: ['autodocs'],
@@ -42,7 +42,7 @@ export const Radius: Story = {
             {value}
           </KBD>
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),
@@ -51,14 +51,14 @@ export const Radius: Story = {
 export const InheritedTones: Story = {
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         {rowBuilder({
           renderItem: ({value}) => (
             <Card border key={value} padding={4} tone={value}>
               <KBD {...props}>{value}</KBD>
             </Card>
           ),
-          rows: CARD_TONES,
+          rows: [...THEME_COLOR_CARD_TONES],
         })}
       </Stack>
     )

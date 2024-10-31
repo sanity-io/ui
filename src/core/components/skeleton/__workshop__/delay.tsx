@@ -13,10 +13,10 @@ import {
 } from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 export default function SkeletonDelayStory() {
-  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, '', 'Props') || 'default'
+  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS)
   const animated = useBoolean('Animated', true)
 
   return (
@@ -32,7 +32,7 @@ export default function SkeletonDelayStory() {
               marginRight={3}
               delay={1000}
             />
-            <Stack space={2} flex={1}>
+            <Stack flex={1} gap={2}>
               <HeadingSkeleton
                 size={4}
                 style={{width: '100%'}}

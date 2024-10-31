@@ -2,12 +2,13 @@
   "name": "@sanity/ui",
   "version": "2.15.18",
   "keywords": [
-    "sanity",
-    "ui",
-    "primitives",
     "react",
+    "ui",
+    "kit",
+    "library",
+    "primitives",
     "components",
-    "design-system"
+    "utils"
   ],
   "homepage": "https://www.sanity.io/",
   "bugs": {
@@ -20,40 +21,55 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": false,
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "source": "./exports/index.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./_visual-editing": {
       "source": "./exports/_visual-editing.ts",
-      "import": "./dist/_visual-editing.mjs",
-      "require": "./dist/_visual-editing.js",
+      "import": "./dist/_visual-editing.js",
+      "require": "./dist/_visual-editing.cjs",
       "default": "./dist/_visual-editing.js"
     },
+    "./css": {
+      "source": "./exports/css.ts",
+      "import": "./dist/css.js",
+      "require": "./dist/css.cjs",
+      "default": "./dist/css.js"
+    },
+    "./package.json": "./package.json",
     "./theme": {
       "source": "./exports/theme.ts",
-      "import": "./dist/theme.mjs",
-      "require": "./dist/theme.js",
+      "import": "./dist/theme.js",
+      "require": "./dist/theme.cjs",
       "default": "./dist/theme.js"
     },
-    "./package.json": "./package.json"
+    "./ui-theme.css": "./dist/ui-theme.css",
+    "./ui-system.css": "./dist/ui-system.css",
+    "./ui.css": "./dist/ui.css"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
       "_visual-editing": [
         "./dist/_visual-editing.d.ts"
       ],
+      "css": [
+        "./dist/css.d.ts"
+      ],
       "theme": [
         "./dist/theme.d.ts"
       ]
     }
+  },
+  "bin": {
+    "sanity-ui": "./bin/sanity-ui.cjs"
   },
   "files": [
     "dist",
@@ -61,13 +77,14 @@
     "src"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build pkg:check figma:pkg:build",
-    "clean": "rimraf .workshop dist",
+    "build": "run-s clean css:build pkg:build pkg:check figma:pkg:build",
+    "clean": "rimraf dist",
+    "css:build": "node -r esbuild-register scripts/build",
     "commit": "cz",
     "cypress:dev": "run-p dev cypress:open",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "dev": "run-p storybook:dev workshop:dev",
+    "dev": "run-p workshop:clean workshop:dev",
     "figma:pkg:build": "cd figma && pnpm build",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
@@ -78,12 +95,13 @@
     "release": "semantic-release",
     "storybook:build": "storybook build",
     "storybook:dev": "storybook dev -p 6006",
-    "test": "jest",
+    "test": "vitest run",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
-    "ts:check": "tsc",
+    "typecheck": "tsc",
     "watch": "pkg watch --strict",
     "workshop:build": "workshop build",
-    "workshop:dev": "workshop dev",
+    "workshop:clean": "rimraf .workshop",
+    "workshop:dev": "node -r esbuild-register ../ui-workshop/scripts/dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
   "commitlint": {
@@ -118,8 +136,13 @@
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.0",
+    "cssnano": "^7.0.7",
     "csstype": "^3.1.3",
     "framer-motion": "^12.9.7",
+    "gzip-size": "^7.0.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "pretty-bytes": "^7.0.0",
     "react-compiler-runtime": "19.1.0-rc.2",
     "react-refractor": "^2.2.0",
     "use-effect-event": "^1.0.2"
@@ -134,7 +157,6 @@
     "@eslint/js": "^9.26.0",
     "@sanity/pkg-utils": "^7.2.2",
     "@sanity/prettier-config": "^1.0.3",
-    "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^2.1.2",
     "@storybook/addon-a11y": "^8.6.12",
     "@storybook/addon-docs": "^8.6.12",
@@ -154,20 +176,21 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/jest": "^29.5.14",
-    "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.12.7",
     "@types/react": "^19.1.3",
     "@types/react-dom": "^19.1.3",
     "@types/react-is": "^19.0.0",
     "@types/refractor": "^3.4.1",
     "@vitejs/plugin-react": "^4.4.1",
+    "@vitest/browser": "^3.1.4",
     "babel-plugin-react-compiler": "19.1.0-rc.2",
-    "babel-plugin-styled-components": "^2.1.4",
+    "cac": "^6.7.14",
     "commitizen": "^4.3.1",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv-flow": "^4.1.0",
+    "esbuild-register": "^3.6.0",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-formatter-compact": "^8.40.0",
@@ -182,13 +205,8 @@
     "globals": "^16.0.0",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
-    "jest": "^29.7.0",
-    "jest-axe": "^10.0.0",
-    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^14.0.1",
-    "module-alias": "^2.2.3",
     "npm-run-all2": "^5.0.2",
-    "prettier": "^3.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-is": "^19.1.0",
@@ -202,13 +220,15 @@
     "typescript": "5.8.3",
     "typescript-eslint": "^8.32.0",
     "vite": "^5.4.19",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.4",
+    "vitest-axe": "1.0.0-pre.5"
   },
   "peerDependencies": {
-    "react": "^18 || >=19.0.0-0",
-    "react-dom": "^18 || >=19.0.0-0",
-    "react-is": "^18 || >=19.0.0-0",
-    "styled-components": "^5.2 || ^6"
+    "react": "^19",
+    "react-dom": "^19",
+    "react-is": "^19",
+    "styled-components": "^6"
   },
   "packageManager": "pnpm@9.15.9",
   "engines": {
@@ -219,6 +239,7 @@
   },
   "pnpm": {
     "overrides": {
+      "@sanity/ui-workshop": "file:registry/sanity-ui-workshop-3.0.0-local.4.tgz",
       "@types/react": "$@types/react",
       "@types/react-dom": "$@types/react-dom",
       "@types/react-is": "$@types/react-is",

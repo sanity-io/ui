@@ -1,14 +1,9 @@
+import {Box, Container, Grid, Text, TextInput} from '@sanity/ui'
+import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 
-import {Box, Container, Grid, Text, TextInput} from '../../src/core/primitives'
-import {RADII} from '../constants'
-import {
-  getFontSizeControls,
-  getIconControls,
-  getRadiusControls,
-  getSpaceControls,
-} from '../controls'
+import {FONT_TEXT_SIZE_CONTROLS, ICON_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 import {FieldWrapper} from './components/FieldWrapper'
 
@@ -17,11 +12,11 @@ const meta: Meta<typeof TextInput> = {
     placeholder: 'Placeholder text...',
   },
   argTypes: {
-    fontSize: getFontSizeControls('text'),
-    icon: getIconControls(),
-    iconRight: getIconControls(),
-    radius: getRadiusControls(),
-    space: getSpaceControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    gap: SPACE_CONTROLS,
+    icon: ICON_CONTROLS,
+    iconRight: ICON_CONTROLS,
+    radius: RADIUS_CONTROLS,
   },
   component: TextInput,
   tags: ['autodocs'],
@@ -63,7 +58,7 @@ export const Radius: Story = {
           renderItem: ({value}) => (
             <TextInput {...props} key={value} radius={value} value={value} />
           ),
-          rows: RADII,
+          rows: [...RADIUS],
         })}
       </>
     )
@@ -91,7 +86,7 @@ export const WithClearButton: Story = {
             customValidity={props.customValidity}
             onChange={handleChange}
             onClear={handleClear}
-            placeholder={props.placeholder}
+            placeholder={props['placeholder']}
             value={value}
           />
         </Box>

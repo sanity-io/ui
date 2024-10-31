@@ -1,30 +1,50 @@
-import {memo} from 'react'
+import {memo, type ReactElement} from 'react'
 
 import {Stack} from '../../primitives'
+import type {ComponentType, Props} from '../../types'
 import {useTree} from './useTree'
 
-export interface TreeGroupProps {
+/** @public */
+export const DEFAULT_TREE_GROUP_ELEMENT = 'div'
+
+/** @public */
+export type TreeGroupElementType = 'div' | ComponentType
+
+/** @public */
+export type TreeGroupOwnProps = {
   expanded?: boolean
 }
 
+/** @public */
+export type TreeGroupProps<E extends TreeGroupElementType = TreeGroupElementType> = Props<
+  TreeGroupOwnProps,
+  E
+>
+
 export const TreeGroup = memo(function TreeGroup(
-  props: TreeGroupProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-): React.JSX.Element {
-  const {children, expanded = false, ...restProps} = props
+  props: Props<TreeGroupProps, 'div'>,
+): ReactElement {
+  const {
+    children,
+    expanded = false,
+    ...rest
+  } = props as TreeGroupProps<typeof DEFAULT_TREE_GROUP_ELEMENT>
+
   const tree = useTree()
 
   return (
     <Stack
       as="ul"
       data-ui="TreeGroup"
-      {...restProps}
+      {...rest}
       hidden={!expanded}
       marginTop={tree.space}
       role="group"
-      space={tree.space}
+      gap={tree.space}
     >
       {children}
     </Stack>
   )
 })
+
+TreeGroup.displayName = 'TreeGroup'

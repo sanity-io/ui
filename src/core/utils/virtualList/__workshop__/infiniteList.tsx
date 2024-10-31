@@ -1,4 +1,4 @@
-import {Box, Card, Text, VirtualList, VirtualListChangeOpts} from '@sanity/ui'
+import {Box, Card, Text, VirtualList, type VirtualListChangeOpts} from '@sanity/ui'
 import {useCallback, useRef, useState} from 'react'
 
 interface Item {

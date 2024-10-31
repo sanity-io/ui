@@ -1,16 +1,25 @@
 import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
+import {
+  BoundaryElementProvider,
+  Box,
+  Button,
+  Card,
+  Dialog,
+  Flex,
+  Inline,
+  PortalProvider,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 
-import {Dialog} from '../../src/core/components'
-import {Box, Button, Card, Flex, Inline, Stack, Text} from '../../src/core/primitives'
-import {BoundaryElementProvider, PortalProvider} from '../../src/core/utils'
 import {
-  getContainerWidthControls,
-  getPositionControls,
-  getRadiusControls,
-  getShadowControls,
-  getSpaceControls,
+  CONTAINER_WIDTH_CONTROLS,
+  POSITION_CONTROLS,
+  RADIUS_CONTROLS,
+  SHADOW_CONTROLS,
+  SPACE_CONTROLS,
 } from '../controls'
 
 const meta: Meta<typeof Dialog> = {
@@ -44,17 +53,17 @@ const meta: Meta<typeof Dialog> = {
     header: 'Dialog header',
   },
   argTypes: {
-    cardRadius: getRadiusControls(),
-    cardShadow: getShadowControls(),
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    position: getPositionControls(),
-    width: getContainerWidthControls(),
+    cardRadius: RADIUS_CONTROLS,
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    position: POSITION_CONTROLS,
+    shadow: SHADOW_CONTROLS,
+    width: CONTAINER_WIDTH_CONTROLS,
   },
   component: Dialog,
   decorators: [
@@ -156,7 +165,7 @@ export const DynamicContent: Story = {
           </Flex>
         }
       >
-        <Stack padding={4} space={4}>
+        <Stack padding={4} gap={4}>
           {numParagraphs === 0 && (
             <Text muted size={1}>
               (No content)
@@ -191,7 +200,7 @@ export const Positioning: Story = {
   render: (props) => {
     return (
       <Box>
-        <Stack space={3} style={{padding: 'calc(100vh - 100px) 0 '}}>
+        <Stack gap={3} style={{padding: 'calc(100vh - 100px) 0 '}}>
           <Text align="center">
             <ArrowUpIcon />
           </Text>
@@ -222,7 +231,7 @@ export const DeleteDocumentDialog: Story = {
             header="Delete document"
             padding={3}
             footer={
-              <Flex width="full" gap={3} justify={'flex-end'} padding={3}>
+              <Flex width="fill" gap={3} justify={'flex-end'} padding={3}>
                 <Button onClick={onClose} mode="bleed" text="Cancel" tone="default" />
                 <Button onClick={onClose} mode="default" text="Close" tone="critical" />
               </Flex>

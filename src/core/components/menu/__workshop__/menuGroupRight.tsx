@@ -14,7 +14,7 @@ import {
   Flex,
   Menu,
   MenuButton,
-  MenuButtonProps,
+  type MenuButtonProps,
   MenuDivider,
   MenuGroup,
   MenuItem,

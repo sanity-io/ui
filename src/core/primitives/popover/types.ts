@@ -1,6 +1,7 @@
+import type {ContainerWidth} from '@sanity/ui/theme'
+
 /** @beta */
 export type PopoverUpdateCallback = () => void
 
 /** @public */
-// todo: remove `auto` from PopoverWidth
-export type PopoverWidth = number | 'auto'
+export type PopoverWidth = Exclude<ContainerWidth, 'auto'>

@@ -7,18 +7,18 @@ import {
   LayerProvider,
   Menu,
   MenuButton,
-  MenuButtonProps,
+  type MenuButtonProps,
   MenuDivider,
   MenuItem,
 } from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useMemo} from 'react'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 export default function MenuButtonStory() {
-  const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Props')
-  const portal = useBoolean('Portal', false, 'Props')
+  const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
+  const portal = useBoolean('Portal', false)
 
   const popover: MenuButtonProps['popover'] = useMemo(
     () => ({

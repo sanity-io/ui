@@ -1,75 +1,53 @@
-import {getTheme_v2} from '@sanity/ui/theme'
-import {Children, cloneElement, forwardRef, isValidElement} from 'react'
-import {css, styled} from 'styled-components'
+import {_composeClassNames, avatarStack, type ResponsiveProp} from '@sanity/ui/css'
+import type {AvatarSize} from '@sanity/ui/theme'
+import {Children, cloneElement, isValidElement, type ReactElement} from 'react'
 
-import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
-import {_responsive, rem, ThemeProps} from '../../styles'
-import {AvatarSize} from '../../types'
+import type {ComponentType, Props} from '../../types'
+import {Box, type BoxOwnProps} from '../box'
+import type {AvatarProps} from './avatar'
 import {AvatarCounter} from './avatarCounter'
 
-const BASE_STYLES = css`
-  white-space: nowrap;
+/** @public */
+export const DEFAULT_AVATAR_STACK_ELEMENT = 'div'
 
-  & > div {
-    vertical-align: top;
+/** @public */
+export type AvatarStackChild = ReactElement<AvatarProps<'div'>> | null | undefined | false
 
-    &:not([hidden]) {
-      display: inline-block;
-    }
-  }
-`
-
-function avatarStackStyle() {
-  return BASE_STYLES
-}
-
-function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
-  const {avatar, media} = getTheme_v2(props.theme)
-
-  return _responsive(media, props.$size, (size) => {
-    const avatarSize = avatar.sizes[size]
-
-    if (!avatarSize) return EMPTY_RECORD
-
-    return {
-      '& > div + div': {
-        marginLeft: rem(avatarSize.distance),
-      },
-    }
-  })
-}
-
-const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>(
-  responsiveAvatarStackSizeStyle,
-  avatarStackStyle,
-)
-
-/**
- * @public
- */
-export interface AvatarStackProps {
-  children: React.ReactNode
+/** @public */
+export type AvatarStackOwnProps = Omit<BoxOwnProps, 'align' | 'display'> & {
+  children: AvatarStackChild | AvatarStackChild[]
   maxLength?: number
-  size?: AvatarSize | AvatarSize[]
+  size?: ResponsiveProp<AvatarSize>
   /** @deprecated No longer supported. */
   tone?: 'navbar'
 }
 
-/**
- * @public
- */
-export const AvatarStack = forwardRef(function AvatarStack(
-  props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+/** @public */
+export type AvatarStackElementType = 'div' | 'span' | ComponentType
+
+/** @public */
+export type AvatarStackProps<E extends AvatarStackElementType = AvatarStackElementType> = Props<
+  AvatarStackOwnProps,
+  E
+>
+
+/** @public */
+export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AVATAR_STACK_ELEMENT>(
+  props: AvatarStackProps<E>,
 ) {
   const {
+    as = DEFAULT_AVATAR_STACK_ELEMENT,
     children: childrenProp,
+    className,
     maxLength: maxLengthProp = 4,
     size: sizeProp = 1,
-    ...restProps
-  } = props
-  const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
+    ...rest
+  } = props as AvatarStackProps<typeof DEFAULT_AVATAR_STACK_ELEMENT>
+
+  const children = Children.toArray(childrenProp).filter(isValidElement) as ReactElement<
+    AvatarProps<'div'>
+  >[]
   const maxLength = Math.max(maxLengthProp, 0)
   const size = useArrayProp(sizeProp)
 
@@ -79,23 +57,33 @@ export const AvatarStack = forwardRef(function AvatarStack(
   const visibleChildren = extraCount > 1 ? children.slice(extraCount, len) : children
 
   return (
-    <StyledAvatarStack data-ui="AvatarStack" {...restProps} ref={ref} $size={size}>
+    <Box
+      data-ui="AvatarStack"
+      {...rest}
+      align="center"
+      as={as}
+      className={_composeClassNames(className, avatarStack({size}))}
+      display="flex"
+    >
       {len === 0 && (
-        <div>
+        <Box flex="none">
           <AvatarCounter count={len} size={size} />
-        </div>
+        </Box>
       )}
 
       {len !== 0 && extraCount > 1 && (
-        <div>
+        <Box flex="none">
           <AvatarCounter count={extraCount} size={size} />
-        </div>
+        </Box>
       )}
 
       {visibleChildren.map((child, childIndex) => (
-        <div key={String(childIndex)}>{cloneElement(child, {size})}</div>
+        <Box flex="none" key={String(childIndex)}>
+          {cloneElement(child, {size})}
+        </Box>
       ))}
-    </StyledAvatarStack>
+    </Box>
   )
-})
-AvatarStack.displayName = 'ForwardRef(AvatarStack)'
+}
+
+AvatarStack.displayName = 'AvatarStack'

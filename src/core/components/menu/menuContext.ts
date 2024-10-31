@@ -1,3 +1,5 @@
+import {type MouseEvent as ReactMouseEvent} from 'react'
+
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 
 export interface MenuContextValue {
@@ -8,19 +10,19 @@ export interface MenuContextValue {
   onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
   onItemClick?: () => void
-  onItemMouseEnter?: (event: React.MouseEvent<HTMLElement>) => void
-  onItemMouseLeave?: (event: React.MouseEvent<HTMLElement>) => void
+  onItemMouseEnter?: (event: ReactMouseEvent<HTMLElement>) => void
+  onItemMouseLeave?: (event: ReactMouseEvent<HTMLElement>) => void
   registerElement?: (el: HTMLElement) => () => void
 
   /**
    * @deprecated Use `onItemMouseEnter` instead
    */
-  onMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
+  onMouseEnter: (event: ReactMouseEvent<HTMLElement>) => void
 
   /**
    * @deprecated Use `onItemMouseLeave` instead
    */
-  onMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
+  onMouseLeave: (event: ReactMouseEvent<HTMLElement>) => void
 }
 
 export const MenuContext = createGlobalScopedContext<MenuContextValue | null>(

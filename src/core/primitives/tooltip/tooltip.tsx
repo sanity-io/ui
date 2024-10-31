@@ -8,11 +8,22 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {
+  _composeClassNames,
+  type RadiusStyleProps,
+  type ShadowStyleProps,
+  tooltip,
+} from '@sanity/ui/css'
+import type {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
   cloneElement,
-  forwardRef,
+  type FocusEvent,
+  type HTMLAttributes,
+  type MouseEvent as ReactMouseEvent,
+  type ReactElement,
+  type ReactNode,
+  type RefAttributes,
   useCallback,
   useEffect,
   useId,
@@ -22,98 +33,109 @@ import {
   useRef,
   useState,
 } from 'react'
-import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
 
+import {Z_OFFSETS} from '../../constants'
 import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
-import {useTheme_v2} from '../../theme'
-import type {Placement} from '../../types'
-import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
+import type {ComponentType, Placement, Props} from '../../types'
+import {type LayerOwnProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {getElementRef} from '../../utils/getElementRef'
+import {CardProvider, useCard} from '../card'
 import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
-import {TooltipCard} from './tooltipCard'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
+import {TooltipLayer} from './tooltipLayer'
 
-/**
- * @public
- */
-export interface TooltipProps extends Omit<LayerProps, 'as'> {
-  /** @deprecated Use `fallbackPlacements` instead. */
-  allowedAutoPlacements?: Placement[]
-  arrow?: boolean
-  boundaryElement?: HTMLElement | null
-  children?: React.JSX.Element
-  content?: React.ReactNode
-  disabled?: boolean
-  fallbackPlacements?: Placement[]
-  padding?: number | number[]
-  placement?: Placement
-  /** Whether or not to render the tooltip in a portal element. */
-  portal?: boolean | string
-  radius?: number | number[]
-  scheme?: ThemeColorSchemeKey
-  shadow?: number | number[]
-  /**
-   * Adds a delay to open or close the tooltip.
-   *
-   * If only a `number` is passed, it will be used for both opening and closing.
-   *
-   * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
-   *
-   * @public
-   * @defaultValue 0
-   */
-  delay?: Delay
-  /**
-   * Whether the tooltip should animate in and out.
-   *
-   * @beta
-   * @defaultValue false
-   */
-  animate?: boolean
-}
+/** @public */
+export const DEFAULT_TOOLTIP_ELEMENT = 'div'
 
-const StyledTooltip = styled(Layer)`
-  pointer-events: none;
-`
+/** @public */
+export type TooltipOwnProps = LayerOwnProps &
+  RadiusStyleProps &
+  ShadowStyleProps & {
+    /** @deprecated Use `fallbackPlacements` instead. */
+    allowedAutoPlacements?: Placement[]
+    /**
+     * Whether the tooltip should animate in and out.
+     *
+     * @beta
+     * @defaultValue false
+     */
+    animate?: boolean
+    arrow?: boolean
+    boundaryElement?: HTMLElement | null
+    children?: ReactElement<HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>>
+    content?: ReactNode
+    /**
+     * Adds a delay to open or close the tooltip.
+     *
+     * If only a `number` is passed, it will be used for both opening and closing.
+     *
+     * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
+     *
+     * @public
+     * @defaultValue 0
+     */
+    delay?: Delay
+    disabled?: boolean
+    fallbackPlacements?: Placement[]
+    placement?: Placement
+    /** Whether or not to render the tooltip in a portal element. */
+    portal?: boolean | string
+    scheme?: ThemeColorSchemeKey
+    tone?: ThemeColorCardToneKey
+  }
+
+/** @public */
+export type TooltipElementType = 'div' | 'span' | ComponentType
+
+/** @public */
+export type TooltipProps<E extends TooltipElementType = TooltipElementType> = Props<
+  TooltipOwnProps,
+  E
+>
 
 /**
  * Tooltips display information when hovering, focusing or tapping.
  *
  * @public
  */
-export const Tooltip = forwardRef(function Tooltip(
-  props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_ELEMENT>(
+  props: TooltipProps<E>,
 ) {
   const boundaryElementContext = useBoundaryElement()
-  const {layer} = useTheme_v2()
+
   const {
     animate: _animate = false,
     arrow: arrowProp = false,
+    as = DEFAULT_TOOLTIP_ELEMENT,
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
+    className,
     content,
+    delay,
     disabled,
     fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
       DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     padding = 2,
     placement: placementProp = 'bottom',
     portal: portalProp,
-    radius = 2,
+    radius = 3,
+    ref: forwardedRef,
     scheme,
     shadow = 2,
-    zOffset = layer.tooltip.zOffset,
-    delay,
-    ...restProps
-  } = props
+    zOffset = Z_OFFSETS.tooltip,
+    tone = 'inherit',
+    ...rest
+  } = props as TooltipProps<typeof DEFAULT_TOOLTIP_ELEMENT>
+
+  const card = useCard()
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
@@ -173,6 +195,7 @@ export const Tooltip = forwardRef(function Tooltip(
     placement: placementProp,
     whileElementsMounted: autoUpdate,
     elements: {reference: referenceElement},
+    transform: false,
   })
 
   const arrowX = middlewareData.arrow?.x
@@ -230,42 +253,42 @@ export const Tooltip = forwardRef(function Tooltip(
   )
 
   const handleBlur = useCallback(
-    (e: FocusEvent) => {
+    (e: FocusEvent<HTMLElement>) => {
       handleIsOpenChange(false)
       childProp?.props?.onBlur?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )
   const handleClick = useCallback(
-    (e: MouseEvent) => {
+    (e: ReactMouseEvent<HTMLElement>) => {
       handleIsOpenChange(false, true)
       childProp?.props.onClick?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )
   const handleContextMenu = useCallback(
-    (e: MouseEvent) => {
+    (e: ReactMouseEvent<HTMLElement>) => {
       handleIsOpenChange(false, true)
       childProp?.props.onContextMenu?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )
   const handleFocus = useCallback(
-    (e: FocusEvent) => {
+    (e: FocusEvent<HTMLElement>) => {
       handleIsOpenChange(true)
       childProp?.props?.onFocus?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )
   const handleMouseEnter = useCallback(
-    (e: MouseEvent) => {
+    (e: ReactMouseEvent<HTMLElement>) => {
       handleIsOpenChange(true)
       childProp?.props?.onMouseEnter?.(e)
     },
     [childProp?.props, handleIsOpenChange],
   )
   const handleMouseLeave = useCallback(
-    (e: MouseEvent) => {
+    (e: ReactMouseEvent<HTMLElement>) => {
       handleIsOpenChange(false)
       childProp?.props?.onMouseLeave?.(e)
     },
@@ -363,46 +386,49 @@ export const Tooltip = forwardRef(function Tooltip(
 
   if (disabled) return child
 
-  const tooltip = (
-    <StyledTooltip
+  const node = (
+    <TooltipLayer
       data-ui="Tooltip"
-      {...restProps}
+      {...rest}
+      animate={animate}
+      arrow={arrowProp}
+      arrowRef={setArrow}
+      arrowX={arrowX}
+      arrowY={arrowY}
+      as={as}
+      className={_composeClassNames(className, tooltip())}
+      originX={originX}
+      originY={originY}
+      padding={padding}
+      placement={placement}
+      radius={radius}
       ref={setFloating}
+      scheme={scheme}
+      shadow={shadow}
       style={{
         ...floatingStyles,
         maxWidth: tooltipMaxWidth > 0 ? `${tooltipMaxWidth}px` : undefined,
       }}
+      tone={tone}
       zOffset={zOffset}
     >
-      <TooltipCard
-        {...restProps}
-        animate={animate}
-        arrow={arrowProp}
-        arrowRef={setArrow}
-        arrowX={arrowX}
-        arrowY={arrowY}
-        originX={originX}
-        originY={originY}
-        padding={padding}
-        placement={placement}
-        radius={radius}
-        ref={setFloating}
-        scheme={scheme}
-        shadow={shadow}
-      >
-        {content}
-      </TooltipCard>
-    </StyledTooltip>
+      {content}
+    </TooltipLayer>
   )
 
   const children =
     showTooltip &&
     (portalProp ? (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        {tooltip}
+        <CardProvider
+          tone={tone === 'inherit' ? (card?.tone ?? 'default') : tone}
+          scheme={scheme ?? 'light'}
+        >
+          {node}
+        </CardProvider>
       </Portal>
     ) : (
-      tooltip
+      node
     ))
 
   return (
@@ -414,12 +440,11 @@ export const Tooltip = forwardRef(function Tooltip(
       {child}
     </>
   )
-})
-Tooltip.displayName = 'ForwardRef(Tooltip)'
+}
 
 /**
  * As `useEffectEvent` should never be passed to other components or hooks, this custom hook groups together the `useEffectEvent` and the `useEffect` hook using it.
- * @see https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events:~:text=Never%20pass%20them%20to%20other%20components%20or%20Hooks
+ * @see https://19.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events:~:text=Never%20pass%20them%20to%20other%20components%20or%20Hooks
  */
 function useCloseOnMouseLeave({
   handleIsOpenChange,
@@ -433,7 +458,7 @@ function useCloseOnMouseLeave({
   isInsideGroup: boolean
 }) {
   // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
-  // we use a "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
+  // we use a "effect event" (https://19.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
   // in order to always see the latest `referenceElement` value inside the event handler itself.
   const onMouseMove = useEffectEvent((target: EventTarget | null, teardown: () => void) => {
     if (!referenceElement) return
@@ -463,3 +488,5 @@ function useCloseOnMouseLeave({
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [isInsideGroup, showTooltip])
 }
+
+Tooltip.displayName = 'Tooltip'

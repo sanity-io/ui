@@ -1,7 +1,7 @@
+import {Hotkeys} from '@sanity/ui'
+import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Hotkeys} from '../../src/core/components'
-import {RADII} from '../constants'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Hotkeys> = {
@@ -34,7 +34,7 @@ export const Radius: Story = {
         renderItem: ({value}) => (
           <Hotkeys {...props} key={value} keys={['Radius', String(value)]} radius={value} />
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),

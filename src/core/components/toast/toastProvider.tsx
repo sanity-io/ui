@@ -7,7 +7,7 @@ import {Toast} from './toast'
 import {ToastContext} from './toastContext'
 import {ToastLayer, type ToastLayerProps} from './toastLayer'
 import {generateToastId} from './toastState'
-import {ToastContextValue, ToastParams} from './types'
+import type {ToastContextValue, ToastParams} from './types'
 
 type ToastState = {
   dismiss: () => void
@@ -16,17 +16,13 @@ type ToastState = {
   params: ToastParams
 }[]
 
-/**
- * @public
- */
+/** @public */
 export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
   children?: React.ReactNode
   zOffset?: number | number[]
 }
 
-/**
- * @public
- */
+/** @public */
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const {children, padding, paddingX, paddingY, gap, zOffset = 1} = props
   const [state, setState] = useState<ToastState>([])

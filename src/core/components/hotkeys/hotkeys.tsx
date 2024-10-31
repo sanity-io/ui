@@ -1,62 +1,72 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import type {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import type {FontTextSize, Space} from '@sanity/ui/theme'
 
-import {useArrayProp} from '../../hooks'
-import {Inline, KBD} from '../../primitives'
-import {Radius} from '../../types'
+import {Box, KBD} from '../../primitives'
+import type {ComponentType, Props} from '../../types'
 
-/**
- * @public
- */
-export interface HotkeysProps {
-  fontSize?: number | number[]
-  padding?: number | number[]
-  radius?: Radius | Radius[]
-  space?: number | number[]
+/** @public */
+export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
+
+/** @public */
+export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
+  fontSize?: ResponsiveProp<FontTextSize>
+  padding?: ResponsiveProp<Space>
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
   keys?: string[]
 }
 
-const StyledHotkeys = styled.kbd`
-  font: inherit;
-  padding: 1px;
+/** @public */
+export type HotkeysElementType = 'kbd' | ComponentType
 
-  &:not([hidden]) {
-    display: block;
-  }
-`
-
-const Key = styled(KBD)`
-  &:not([hidden]) {
-    display: block;
-  }
-`
+/** @public */
+export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Props<
+  HotkeysOwnProps,
+  E
+>
 
 /**
  * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
  *
  * @public
  */
-export const Hotkeys = forwardRef(function Hotkeys(
-  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.Ref<HTMLElement>,
+export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_ELEMENT>(
+  props: HotkeysProps<E>,
 ) {
-  const {fontSize, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
-  const space = useArrayProp(spaceProp)
+  const {
+    as = DEFAULT_HOTKEYS_ELEMENT,
+    fontSize,
+    gap,
+    gapX,
+    gapY,
+    keys,
+    padding,
+    radius,
+    space = 1,
+    ...rest
+  } = props as HotkeysProps<typeof DEFAULT_HOTKEYS_ELEMENT>
 
   if (!keys || keys.length === 0) {
-    return <></>
+    return undefined
   }
 
   return (
-    <StyledHotkeys data-ui="Hotkeys" {...restProps} ref={ref}>
-      <Inline as="span" space={space}>
-        {keys.map((key, i) => (
-          <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
-            {key}
-          </Key>
-        ))}
-      </Inline>
-    </StyledHotkeys>
+    <Box
+      as={as}
+      data-ui="Hotkeys"
+      {...rest}
+      display="flex"
+      gap={gap ?? space}
+      gapX={gapX}
+      gapY={gapY}
+    >
+      {keys.map((key, i) => (
+        <KBD fontSize={fontSize} key={i} padding={padding} radius={radius}>
+          {key}
+        </KBD>
+      ))}
+    </Box>
   )
-})
-Hotkeys.displayName = 'ForwardRef(Hotkeys)'
+}
+
+Hotkeys.displayName = 'Hotkeys'

@@ -1,7 +1,6 @@
-import {ComponentProps, ReactNode} from 'react'
-
-import {Card, Flex} from '../../src/core/primitives'
-import {ThemeColorSchemeKey} from '../../src/theme'
+import {Card, Flex} from '@sanity/ui'
+import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ComponentProps, ReactNode} from 'react'
 
 interface RowBuilderProps<T> {
   gap?: ComponentProps<typeof Flex>['gap']

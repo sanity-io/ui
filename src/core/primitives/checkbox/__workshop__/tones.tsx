@@ -1,27 +1,18 @@
-import {Card, Checkbox, Flex, Stack} from '@sanity/ui'
+import {Card, Checkbox, Flex, Stack, Text} from '@sanity/ui'
+import {THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
 
 export default function MultipleTonesStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <Stack>
-        <Card padding={3} tone="neutral">
-          <Checkbox />
-        </Card>
-        <Card padding={3} tone="primary">
-          <Checkbox />
-        </Card>
-        <Card padding={3} tone="suggest">
-          <Checkbox />
-        </Card>
-        <Card padding={3} tone="positive">
-          <Checkbox />
-        </Card>
-        <Card padding={3} tone="caution">
-          <Checkbox />
-        </Card>
-        <Card padding={3} tone="critical">
-          <Checkbox />
-        </Card>
+      <Stack gap={1}>
+        {THEME_COLOR_CARD_TONES.map((tone) => (
+          <Card align="center" as="label" display="flex" gap={2} padding={3} radius={3} tone={tone}>
+            <Checkbox />
+            <Text muted size={1}>
+              {tone}
+            </Text>
+          </Card>
+        ))}
       </Stack>
     </Flex>
   )

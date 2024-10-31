@@ -11,7 +11,7 @@ export default function ExampleStory() {
   return (
     <Box padding={[3, 4, 5]}>
       <Container width={1}>
-        <Stack space={4}>
+        <Stack gap={4}>
           <Grid columns={[1, 2, 3]}>
             <Card ref={setElement} tone="transparent">
               <Text>rect</Text>

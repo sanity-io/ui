@@ -1,4 +1,4 @@
-import {SetStateAction, useCallback, useRef, useState} from 'react'
+import {type SetStateAction, useCallback, useRef, useState} from 'react'
 
 /**
  * @beta

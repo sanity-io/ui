@@ -1,187 +1,207 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef, isValidElement, useMemo} from 'react'
+import type {
+  ButtonStyleProps,
+  DisplayStyleProps,
+  FlexStyleProps,
+  GapStyleProps,
+  PaddingStyleProps,
+  ResponsiveProp,
+  Width,
+} from '@sanity/ui/css'
+import {_composeClassNames, button, buttonLoadingBox} from '@sanity/ui/css'
+import type {
+  FontTextSize,
+  Space,
+  ThemeColorButtonModeKey,
+  ThemeColorStateToneKey,
+} from '@sanity/ui/theme'
+import {type ElementType as ReactElementType, isValidElement, type ReactNode} from 'react'
 import {isValidElementType} from 'react-is'
-import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
-import {ThemeProps} from '../../styles'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {useTheme_v2} from '../../theme'
-import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth, FlexJustify} from '../../types'
+import type {ButtonTextAlign, ComponentType, Props} from '../../types'
 import {Box} from '../box'
-import {Flex} from '../flex'
 import {Spinner} from '../spinner'
+import type {TextOwnProps} from '../text'
 import {Text} from '../text'
-import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
-import {buttonBaseStyles, buttonColorStyles} from './styles'
 
-/**
- * @public
- */
-export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  fontSize?: number | number[]
-  mode?: ButtonMode
-  icon?: React.ElementType | React.ReactNode
-  iconRight?: React.ElementType | React.ReactNode
-  justify?: FlexJustify | FlexJustify[]
-  /**
-   * @beta Do not use in production, as this might change.
-   */
-  loading?: boolean
-  selected?: boolean
-  space?: number | number[]
-  muted?: boolean
-  text?: React.ReactNode
-  textAlign?: ButtonTextAlign
-  textWeight?: ThemeFontWeightKey
-  tone?: ButtonTone
-  type?: 'button' | 'reset' | 'submit'
-  width?: ButtonWidth
-}
+/** @public */
+export const DEFAULT_BUTTON_ELEMENT = 'button'
 
-const StyledButton = styled.button<
-  {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps &
-    ThemeProps
->(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
+/** @public */
+export type ButtonOwnProps = ButtonStyleProps &
+  DisplayStyleProps &
+  GapStyleProps &
+  PaddingStyleProps & {
+    'align'?: FlexStyleProps['align']
+    'data-ui'?: string
+    'disabled'?: boolean
+    'fontSize'?: ResponsiveProp<FontTextSize>
+    'mode'?: ThemeColorButtonModeKey
+    'icon'?: ReactElementType | ReactNode
+    'iconRight'?: ReactElementType | ReactNode
+    'justify'?: FlexStyleProps['justify']
+    /** @beta Do not use in production, as this might change.*/
+    'loading'?: boolean
+    'selected'?: boolean
+    /** @deprecated Use `gap` instead. */
+    'space'?: ResponsiveProp<Space>
+    'textAlign'?: ButtonTextAlign
+    'muted'?: boolean
+    'target'?: string
+    'text'?: ReactNode
+    'textOverflow'?: TextOwnProps['textOverflow']
+    'textWeight'?: TextOwnProps['weight']
+    'tone'?: ThemeColorStateToneKey
+    'width'?: ResponsiveProp<Width>
+  }
 
-const LoadingBox = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--card-bg-color);
-  border-radius: inherit;
-  z-index: 1;
-  box-shadow: inherit;
-`
+/** @public */
+export type ButtonElementType = 'a' | 'button' | 'label' | ComponentType
 
-/**
- * @public
- */
-export const Button = forwardRef(function Button(
-  props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'width'>,
-  ref: React.ForwardedRef<HTMLButtonElement>,
+/** @public */
+export type ButtonProps<E extends ButtonElementType = ButtonElementType> = Props<ButtonOwnProps, E>
+
+/** @public */
+export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEMENT>(
+  props: ButtonProps<E>,
 ) {
   const {
+    align = 'center',
+    as: Element = DEFAULT_BUTTON_ELEMENT,
     children,
+    className,
     disabled,
+    display = 'inline-flex',
+    flex,
     fontSize = 1,
+    gap = props.space ?? props.padding ?? 3,
+    gapX,
+    gapY,
     icon: IconComponent,
     iconRight: IconRightComponent,
-    justify: justifyProp = 'center',
+    justify = 'center',
     loading,
     mode = 'default',
-    padding: paddingProp = 3,
-    paddingX: paddingXProp,
-    paddingY: paddingYProp,
-    paddingTop: paddingTopProp,
-    paddingBottom: paddingBottomProp,
-    paddingLeft: paddingLeftProp,
-    paddingRight: paddingRightProp,
-    radius: radiusProp = 2,
+    padding = 3,
+    paddingX,
+    paddingY,
+    paddingTop,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    radius = 2,
     selected,
-    space: spaceProp = 3,
+    space = props.gap ?? props.space ?? props.padding ?? 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     text,
     textAlign,
-    textWeight,
+    textOverflow = 'ellipsis',
+    textWeight = 'medium',
     tone = 'default',
     type = 'button',
     muted = false,
     width,
-    ...restProps
-  } = props
-  const {button} = useTheme_v2()
+    ...rest
+  } = props as ButtonProps<typeof DEFAULT_BUTTON_ELEMENT>
 
-  const justify = useArrayProp(justifyProp)
-  const padding = useArrayProp(paddingProp)
-  const paddingX = useArrayProp(paddingXProp)
-  const paddingY = useArrayProp(paddingYProp)
-  const paddingTop = useArrayProp(paddingTopProp)
-  const paddingBottom = useArrayProp(paddingBottomProp)
-  const paddingLeft = useArrayProp(paddingLeftProp)
-  const paddingRight = useArrayProp(paddingRightProp)
-  const radius = useArrayProp(radiusProp)
-  const space = useArrayProp(spaceProp)
+  let href: string | undefined = undefined
 
-  const boxProps = useMemo(
-    () => ({
-      // flex: 1,
-      padding,
-      paddingX,
-      paddingY,
-      paddingTop,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-    }),
-    [padding, paddingX, paddingY, paddingTop, paddingBottom, paddingLeft, paddingRight],
-  )
+  if ('href' in rest) {
+    href = typeof rest.href === 'string' ? rest.href : href
+    delete rest.href
+  }
 
   return (
-    <StyledButton
+    <Element
       data-ui="Button"
-      {...restProps}
-      $mode={mode}
-      $radius={radius}
-      $tone={tone}
-      data-disabled={Boolean(loading || disabled)}
+      {...rest}
+      className={_composeClassNames(className, button({display, flex, radius, width}))}
+      data-disabled={loading || disabled ? '' : undefined}
+      data-mode={mode}
+      data-tone={tone}
       data-selected={selected ? '' : undefined}
       disabled={Boolean(loading || disabled)}
-      ref={ref}
+      // @ts-expect-error - TODO: fix this
+      href={disabled ? undefined : href}
       type={type}
-      $width={width}
     >
       {Boolean(loading) && (
-        <LoadingBox>
-          <Spinner />
-        </LoadingBox>
+        <Box
+          align="center"
+          as="span"
+          className={buttonLoadingBox()}
+          display="flex"
+          flex={1}
+          justify="center"
+          width="fill"
+        >
+          <Spinner size={fontSize} />
+        </Box>
       )}
 
       {(IconComponent || text || IconRightComponent) && (
-        <Box as="span" {...boxProps}>
-          <Flex as="span" justify={justify} gap={space}>
-            {IconComponent && (
-              <Text size={fontSize}>
-                {isValidElement(IconComponent) && IconComponent}
-                {isValidElementType(IconComponent) && <IconComponent />}
-              </Text>
-            )}
+        <Box
+          align={align}
+          as="span"
+          display="flex"
+          flex={1}
+          gap={gap}
+          gapX={gapX}
+          gapY={gapY}
+          justify={justify}
+          padding={padding}
+          paddingX={paddingX}
+          paddingY={paddingY}
+          paddingTop={paddingTop}
+          paddingBottom={paddingBottom}
+          paddingLeft={paddingLeft}
+          paddingRight={paddingRight}
+        >
+          {IconComponent && (
+            <Text as="span" flex="none" muted size={fontSize}>
+              {isValidElement(IconComponent) && IconComponent}
+              {isValidElementType(IconComponent) && <IconComponent />}
+            </Text>
+          )}
 
-            {text && (
-              <Box>
-                <Text
-                  muted={muted}
-                  align={textAlign}
-                  size={fontSize}
-                  textOverflow="ellipsis"
-                  weight={textWeight ?? button.textWeight}
-                >
-                  {text}
-                </Text>
-              </Box>
-            )}
+          {text && (
+            <Text
+              align={textAlign}
+              as="span"
+              flex="none"
+              muted={muted}
+              size={fontSize}
+              textOverflow={textOverflow}
+              weight={textWeight}
+            >
+              {text}
+            </Text>
+          )}
 
-            {IconRightComponent && (
-              <Text size={fontSize}>
-                {isValidElement(IconRightComponent) && IconRightComponent}
-                {isValidElementType(IconRightComponent) && <IconRightComponent />}
-              </Text>
-            )}
-          </Flex>
+          {IconRightComponent && (
+            <Text as="span" flex="none" muted size={fontSize}>
+              {isValidElement(IconRightComponent) && IconRightComponent}
+              {isValidElementType(IconRightComponent) && <IconRightComponent />}
+            </Text>
+          )}
         </Box>
       )}
 
       {children && (
-        <Box as="span" {...boxProps}>
+        <Box
+          as="span"
+          flex={1}
+          padding={padding}
+          paddingX={paddingX}
+          paddingY={paddingY}
+          paddingTop={paddingTop}
+          paddingBottom={paddingBottom}
+          paddingLeft={paddingLeft}
+          paddingRight={paddingRight}
+        >
           {children}
         </Box>
       )}
-    </StyledButton>
+    </Element>
   )
-})
-Button.displayName = 'ForwardRef(Button)'
+}
+
+Button.displayName = 'Button'

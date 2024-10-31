@@ -3,19 +3,13 @@ import {useEffectEvent} from 'use-effect-event'
 
 import {EMPTY_ARRAY} from '../constants'
 
-/**
- * @public
- */
+/** @public */
 export type ClickOutsideEventListener = (event: MouseEvent) => void
 
-/**
- * @public
- */
+/** @public */
 export type ClickOutsideEventElements = (HTMLElement | null | (HTMLElement | null)[])[]
 
-/**
- * @public
- */
+/** @public */
 export function useClickOutsideEvent(
   listener: ClickOutsideEventListener | false | undefined,
   elementsArg: () => ClickOutsideEventElements = () => EMPTY_ARRAY,

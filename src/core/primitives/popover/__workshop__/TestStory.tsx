@@ -3,15 +3,17 @@ import {useRef, useState} from 'react'
 
 import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
+  // WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '$workshop'
+
 import {BoundaryElementProvider, PortalProvider} from '../../../utils'
 import {Button} from '../../button'
 import {Card} from '../../card'
 import {Text} from '../../text'
 import {Popover} from '../popover'
-import {PopoverUpdateCallback} from '../types'
+import type {PopoverUpdateCallback} from '../types'
 
 export default function TestStory(): React.JSX.Element {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)

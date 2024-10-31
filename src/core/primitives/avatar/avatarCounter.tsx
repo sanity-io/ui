@@ -1,77 +1,42 @@
-import {getTheme_v2} from '@sanity/ui/theme'
-import {forwardRef, useMemo} from 'react'
-import {css, styled} from 'styled-components'
+import {_composeClassNames, avatarCounter, type ResponsiveProp} from '@sanity/ui/css'
+import type {AvatarSize, FontLabelSize} from '@sanity/ui/theme'
+import {useMemo} from 'react'
 
-import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
-import {_responsive, rem, ThemeProps} from '../../styles'
-import {AvatarSize} from '../../types'
+import type {ComponentType, Props} from '../../types'
+import {Box} from '../box'
 import {Label} from '../label'
 
-function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
-  const {avatar, media} = getTheme_v2(props.theme)
+/** @public */
+export const DEFAULT_AVATAR_COUNTER_ELEMENT = 'div'
 
-  return _responsive(media, props.$size, (size) => {
-    const avatarSize = avatar.sizes[size]
-
-    if (!avatarSize) return EMPTY_RECORD
-
-    return {
-      borderRadius: rem(avatarSize.size / 2),
-      minWidth: rem(avatarSize.size),
-      height: rem(avatarSize.size),
-    }
-  })
-}
-
-function _avatarCounterBaseStyle(props: ThemeProps) {
-  const {space} = getTheme_v2(props.theme)
-
-  return css`
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    user-select: none;
-    color: inherit;
-    color: var(--card-fg-color);
-    background: var(--card-bg-color);
-    box-shadow:
-      0 0 0 1px var(--card-bg-color),
-      inset 0 0 0 1px var(--card-hairline-hard-color);
-    padding: 0 ${rem(space[2])};
-
-    &:not([hidden]) {
-      display: flex;
-    }
-  `
-}
-
-const StyledAvatarCounter = styled.div<{$size: AvatarSize[]}>(
-  _responsiveAvatarCounterSizeStyle,
-  _avatarCounterBaseStyle,
-)
-
-/**
- * @public
- */
-export interface AvatarCounterProps {
+/** @public */
+export interface AvatarCounterOwnProps {
   count: number
-  size?: AvatarSize | AvatarSize[]
-  /** @deprecated No longer supported. */
-  tone?: 'navbar'
+  size?: ResponsiveProp<AvatarSize>
 }
 
-/**
- * @public
- */
-export const AvatarCounter = forwardRef(function AvatarCounter(
-  props: AvatarCounterProps,
-  ref: React.Ref<HTMLDivElement>,
-) {
-  const {count, size: sizeProp = 1} = props
+/** @public */
+export type AvatarCounterElementType = 'button' | 'div' | 'span' | ComponentType
+
+/** @public */
+export type AvatarCounterProps<E extends AvatarCounterElementType = AvatarCounterElementType> =
+  Props<AvatarCounterOwnProps, E>
+
+/** @public */
+export function AvatarCounter<
+  E extends AvatarCounterElementType = typeof DEFAULT_AVATAR_COUNTER_ELEMENT,
+>(props: AvatarCounterProps<E>) {
+  const {
+    as = DEFAULT_AVATAR_COUNTER_ELEMENT,
+    className,
+    count,
+    size: sizeProp = 1,
+    ...rest
+  } = props as AvatarCounterProps<typeof DEFAULT_AVATAR_COUNTER_ELEMENT>
   const size = useArrayProp(sizeProp)
 
-  const fontSize = useMemo(
+  const labelSize: FontLabelSize[] = useMemo(
     () =>
       size.map((s) => {
         if (s === 1) return 1
@@ -84,11 +49,22 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   )
 
   return (
-    <StyledAvatarCounter $size={size} data-ui="AvatarCounter" ref={ref}>
-      <Label as="span" size={fontSize} weight="medium">
+    <Box
+      data-ui="AvatarCounter"
+      {...rest}
+      align="center"
+      as={as}
+      className={_composeClassNames(className, avatarCounter({size}))}
+      display="flex"
+      justify="center"
+      paddingX={2}
+      sizing="border"
+    >
+      <Label align="center" as="span" size={labelSize} weight="medium">
         {count}
       </Label>
-    </StyledAvatarCounter>
+    </Box>
   )
-})
-AvatarCounter.displayName = 'ForwardRef(AvatarCounter)'
+}
+
+AvatarCounter.displayName = 'AvatarCounter'

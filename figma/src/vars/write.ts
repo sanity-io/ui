@@ -1,4 +1,4 @@
-import {WriteConfig} from '../config'
+import type {WriteConfig} from '../config'
 import {
   ensureModeExists,
   getFigmaVariables,

@@ -6,7 +6,7 @@ export default function HookStory() {
   return (
     <ToastProvider>
       <Box padding={[4, 5, 6]}>
-        <Inline space={2}>
+        <Inline gap={2}>
           <Button
             onClick={() =>
               toast.push({

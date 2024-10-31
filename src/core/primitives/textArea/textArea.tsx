@@ -1,83 +1,66 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
-
-import {useArrayProp, useCustomValidity} from '../../hooks'
 import {
-  responsiveInputPaddingStyle,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-  TextInputInputStyleProps,
-  textInputRepresentationStyle,
-  TextInputRepresentationStyleProps,
-  TextInputResponsivePaddingStyleProps,
-  textInputRootStyle,
-} from '../../styles/internal'
-import {useRootTheme} from '../../theme'
-import {ResponsiveRadiusProps} from '../types'
+  _inputElement,
+  _inputPresentation,
+  type ResponsiveProp,
+  textArea,
+  type TextAreaStyleProps,
+} from '@sanity/ui/css'
+import type {Space} from '@sanity/ui/theme'
+import {useImperativeHandle, useRef} from 'react'
 
-/**
- * @public
- */
-export interface TextAreaProps extends ResponsiveRadiusProps {
+import {useCustomValidity} from '../../hooks'
+import type {ComponentType, Props} from '../../types'
+
+/** @public */
+export const DEFAULT_TEXT_AREA_ELEMENT = 'textarea'
+
+/** @public */
+export type TextAreaOwnProps = TextAreaStyleProps & {
   /**
    * @beta
    */
   __unstable_disableFocusRing?: boolean
-  border?: boolean
   customValidity?: string
-  fontSize?: number | number[]
-  padding?: number | number[]
-  weight?: ThemeFontWeightKey
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
 }
 
-const StyledTextArea = styled.span(textInputRootStyle)
+/** @public */
+export type TextAreaElementType = 'textarea' | ComponentType
 
-const InputRoot = styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`
-
-const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-)
-
-const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle,
-)
+/** @public */
+export type TextAreaProps<E extends TextAreaElementType = TextAreaElementType> = Props<
+  TextAreaOwnProps,
+  E
+>
 
 /**
  * A multiline text input.
  *
-
  * @public
  */
-export const TextArea = forwardRef(function TextArea(
-  props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
-  forwardedRef: React.ForwardedRef<HTMLTextAreaElement>,
+export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_AREA_ELEMENT>(
+  props: TextAreaProps<E>,
 ) {
   const {
+    // TODO: fix this
+
+    __unstable_disableFocusRing,
+    as: Element = DEFAULT_TEXT_AREA_ELEMENT,
     border = true,
     customValidity,
     disabled = false,
     fontSize = 2,
+    gap,
     padding = 3,
     radius = 2,
-    weight,
-    __unstable_disableFocusRing,
-    ...restProps
-  } = props
+    readOnly,
+    ref: forwardedRef,
+    space = 3,
+    ...rest
+  } = props as TextAreaProps<typeof DEFAULT_TEXT_AREA_ELEMENT>
 
   const ref = useRef<HTMLTextAreaElement | null>(null)
-
-  const rootTheme = useRootTheme()
 
   useImperativeHandle<HTMLTextAreaElement | null, HTMLTextAreaElement | null>(
     forwardedRef,
@@ -87,33 +70,29 @@ export const TextArea = forwardRef(function TextArea(
   useCustomValidity(ref, customValidity)
 
   return (
-    <StyledTextArea data-ui="TextArea">
-      <InputRoot>
-        <Input
-          data-as="textarea"
-          data-scheme={rootTheme.scheme}
-          data-tone={rootTheme.tone}
-          {...restProps}
-          $fontSize={useArrayProp(fontSize)}
-          $padding={useArrayProp(padding)}
-          $scheme={rootTheme.scheme}
-          $space={useArrayProp(0)}
-          $tone={rootTheme.tone}
-          $weight={weight}
-          disabled={disabled}
-          ref={ref}
-        />
-        <Presentation
-          $radius={useArrayProp(radius)}
-          $unstableDisableFocusRing={__unstable_disableFocusRing}
-          $scheme={rootTheme.scheme}
-          $tone={rootTheme.tone}
-          data-border={border ? '' : undefined}
-          data-scheme={rootTheme.scheme}
-          data-tone={rootTheme.tone}
-        />
-      </InputRoot>
-    </StyledTextArea>
+    <span
+      className={textArea({
+        border,
+        fontSize,
+        padding,
+        radius,
+        gap: gap ?? space,
+      })}
+      data-invalid={customValidity ? '' : undefined}
+      data-read-only={!disabled && readOnly ? '' : undefined}
+      data-ui="TextArea"
+    >
+      <Element
+        {...rest}
+        className={_inputElement()}
+        data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
+        disabled={disabled}
+        readOnly={readOnly}
+        ref={ref}
+      />
+      <span className={_inputPresentation()} />
+    </span>
   )
-})
-TextArea.displayName = 'ForwardRef(TextArea)'
+}
+
+TextArea.displayName = 'TextArea'

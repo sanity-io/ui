@@ -1,79 +1,82 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {
+  _composeClassNames,
+  label,
+  type LabelStyleProps,
+  textOverflow,
+  type TextOverflowStyleProps,
+} from '@sanity/ui/css'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
-import {TextAlign} from '../../types'
-import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
-import {labelBaseStyle} from './styles'
+import type {ComponentType, Props} from '../../types'
 
-/**
- * @public
- */
-export interface LabelProps {
-  accent?: boolean
-  align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  muted?: boolean
-  size?: number | number[]
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis'
-  weight?: ThemeFontWeightKey
-}
+/** @public */
+export const DEFAULT_LABEL_ELEMENT = 'div'
 
-const StyledLabel = styled.div<{
-  $accent?: boolean
-  $align: TextAlign[]
-  $muted: boolean
-  $size: number[]
-}>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
+/** @public */
+export type LabelOwnProps = LabelStyleProps & TextOverflowStyleProps
+
+/** @public */
+export type LabelElementType =
+  | 'div'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'label'
+  | 'li'
+  | 'p'
+  | 'span'
+  | ComponentType
+
+/** @public */
+export type LabelProps<E extends LabelElementType = LabelElementType> = Props<LabelOwnProps, E>
 
 /**
  * Typographic labels.
  *
  * @public
  */
-export const Label = forwardRef(function Label(
-  props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+export function Label<E extends LabelElementType = typeof DEFAULT_LABEL_ELEMENT>(
+  props: LabelProps<E>,
 ) {
   const {
     accent,
     align,
-    children: childrenProp,
+    as: Element = DEFAULT_LABEL_ELEMENT,
+    children,
+    className,
     muted = false,
-    size = 2,
-    textOverflow,
-    weight,
-    ...restProps
+    size = 1,
+    textOverflow: textOverflowProp,
+    weight = 'regular',
+    ...rest
   } = props
 
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  } else {
-    children = <span>{children}</span>
-  }
-
   return (
-    <StyledLabel
+    <Element
       data-ui="Label"
-      {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
-      $size={useArrayProp(size)}
-      $weight={weight}
-      ref={ref}
+      {...rest}
+      className={_composeClassNames(
+        className,
+        label({
+          accent,
+          align,
+          muted,
+          size,
+          weight,
+        }),
+      )}
     >
-      {children}
-    </StyledLabel>
+      <span
+        className={textOverflow({
+          textOverflow: textOverflowProp,
+        })}
+      >
+        {children}
+      </span>
+    </Element>
   )
-})
-Label.displayName = 'ForwardRef(Label)'
+}
+
+Label.displayName = 'Label'

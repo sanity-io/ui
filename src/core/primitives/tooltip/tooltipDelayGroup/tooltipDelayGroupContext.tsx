@@ -1,5 +1,5 @@
 import {createGlobalScopedContext} from '../../../lib/createGlobalScopedContext'
-import {TooltipDelayGroupContextValue} from './types'
+import type {TooltipDelayGroupContextValue} from './types'
 
 /**
  * @beta

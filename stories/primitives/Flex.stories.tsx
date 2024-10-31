@@ -1,12 +1,12 @@
+import {Card, Flex, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, Flex, Text} from '../../src/core/primitives'
 import {
-  getDirectionControls,
-  getFlexAlignControls,
-  getHeightControls,
-  getOverflowControls,
-  getSpaceControls,
+  FLEX_ALIGN_CONTROLS,
+  FLEX_DIRECTION_CONTROLS,
+  HEIGHT_CONTROLS,
+  OVERFLOW_CONTROLS,
+  SPACE_CONTROLS,
 } from '../controls'
 
 const meta: Meta<typeof Flex> = {
@@ -21,25 +21,25 @@ const meta: Meta<typeof Flex> = {
     ],
   },
   argTypes: {
-    align: getFlexAlignControls(),
-    direction: getDirectionControls(),
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    margin: getSpaceControls(),
-    marginBottom: getSpaceControls(),
-    marginLeft: getSpaceControls(),
-    marginRight: getSpaceControls(),
-    marginTop: getSpaceControls(),
-    marginY: getSpaceControls(),
-    marginX: getSpaceControls(),
-    height: getHeightControls(),
-    overflow: getOverflowControls(),
-    gap: getSpaceControls(),
+    align: FLEX_ALIGN_CONTROLS,
+    direction: FLEX_DIRECTION_CONTROLS,
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    margin: SPACE_CONTROLS,
+    marginBottom: SPACE_CONTROLS,
+    marginLeft: SPACE_CONTROLS,
+    marginRight: SPACE_CONTROLS,
+    marginTop: SPACE_CONTROLS,
+    marginY: SPACE_CONTROLS,
+    marginX: SPACE_CONTROLS,
+    height: HEIGHT_CONTROLS,
+    overflow: OVERFLOW_CONTROLS,
+    gap: SPACE_CONTROLS,
   },
   tags: ['autodocs'],
 }

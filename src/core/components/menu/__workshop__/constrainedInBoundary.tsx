@@ -8,12 +8,12 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  SelectableTone,
+  type SelectableTone,
   Text,
 } from '@sanity/ui'
 import {useState} from 'react'
 
-import {MenuButtonProps} from '../menuButton'
+import type {MenuButtonProps} from '../menuButton'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,

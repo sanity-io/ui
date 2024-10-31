@@ -1,37 +1,57 @@
 import {CloseIcon} from '@sanity/icons'
+import {
+  type RadiusStyleProps,
+  toast,
+  toastLoadingBar,
+  toastLoadingBarMask,
+  toastLoadingBarProgress,
+} from '@sanity/ui/css'
 import {motion, type Variant, type Variants} from 'framer-motion'
+import type {ReactNode} from 'react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box, Button, Flex, Stack, Text} from '../../primitives'
-import {
-  BUTTON_TONE,
-  LoadingBar,
-  LoadingBarMask,
-  LoadingBarProgress,
-  STATUS_CARD_TONE,
-  StyledToast,
-  TextBox,
-} from './styles'
+import {Box, Button, Card, Flex, Stack, Text} from '../../primitives'
+import type {ComponentType, Props} from '../../types'
 
-/**
- * @public
- */
-export interface ToastProps {
+/** @public */
+export const DEFAULT_TOAST_ELEMENT = 'li'
+
+/** @public */
+export type ToastOwnProps = RadiusStyleProps & {
   closable?: boolean
-  description?: React.ReactNode
-  onClose: () => void
-  radius?: number | number[]
-  title?: React.ReactNode
+  description?: ReactNode
+  onClose?: () => void
+  title?: ReactNode
   status?: 'error' | 'warning' | 'success' | 'info'
   duration?: number
   updatedAt?: number
 }
+
+/** @public */
+export type ToastElementType = 'li' | ComponentType
+
+/** @public */
+export type ToastProps<E extends ToastElementType = ToastElementType> = Props<ToastOwnProps, E>
 
 const ROLES = {
   error: 'alert',
   warning: 'alert',
   success: 'alert',
   info: 'alert',
+} as const
+
+const STATUS_CARD_TONE = {
+  error: 'critical',
+  warning: 'caution',
+  success: 'positive',
+  info: 'neutral',
+} as const
+
+const BUTTON_TONE = {
+  error: 'critical',
+  warning: 'caution',
+  success: 'positive',
+  info: 'neutral',
 } as const
 
 // Support pattern used by Sanity Studio, that works around the lack of `duration: Infinity` support in older @sanity/ui versions
@@ -45,21 +65,11 @@ const LONG_ENOUGH_BUT_NOT_TOO_LONG = 1000 * 60 * 60 * 24 * 24
  *
  * @public
  */
-export function Toast(
-  props: ToastProps &
-    Omit<
-      React.HTMLProps<HTMLDivElement>,
-      | 'as'
-      | 'height'
-      | 'ref'
-      | 'title'
-      | 'onAnimationStart'
-      | 'onDragStart'
-      | 'onDragEnd'
-      | 'onDrag'
-    >,
-): React.JSX.Element {
+export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>(
+  props: ToastProps<E>,
+) {
   const {
+    as = DEFAULT_TOAST_ELEMENT,
     closable,
     description,
     duration,
@@ -68,8 +78,9 @@ export function Toast(
     title,
     status,
     updatedAt,
-    ...restProps
-  } = props
+    ...rest
+  } = props as ToastProps<typeof DEFAULT_TOAST_ELEMENT>
+
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const buttonTone = status ? BUTTON_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
@@ -85,26 +96,28 @@ export function Toast(
   const exit: ContainerVariants[] = ['hidden', 'slideOut']
 
   return (
-    <MotionToast
+    <MotionCard
+      as={as}
+      className={toast()}
       data-ui="Toast"
       role={role}
-      {...restProps}
+      {...rest}
       data-has-duration={hasDuration ? '' : undefined}
       custom={visualDuration}
       radius={radius}
       shadow={2}
       tone={cardTone}
-      forwardedAs="li"
       layout="position"
       variants={container}
       initial={initial}
       animate={animate}
       exit={exit}
       transition={transition}
+      position="relative"
     >
       <MotionFlex align="flex-start" variants={content} transition={transition}>
-        <TextBox flex={1} padding={3}>
-          <Stack space={3}>
+        <Flex flex={1} overflowX="auto" padding={3}>
+          <Stack gap={3}>
             {title && (
               <Text size={1} weight="medium">
                 {title}
@@ -116,7 +129,7 @@ export function Toast(
               </MotionText>
             )}
           </Stack>
-        </TextBox>
+        </Flex>
 
         {closable && (
           <Box padding={1}>
@@ -133,9 +146,16 @@ export function Toast(
         )}
       </MotionFlex>
       {hasDuration && (
-        <MotionLoadingBar variants={content} transition={transition}>
-          <LoadingBarMask tone={cardTone} radius={radius} />
-          <MotionLoadingBarProgress
+        <MotionBox className={toastLoadingBar()} variants={content} transition={transition}>
+          <Card className={toastLoadingBarMask()} tone={cardTone} radius={radius} />
+          <MotionCard
+            // const MotionToast = motion.create(Card) // StyledToast
+            // const MotionFlex = motion.create(Flex)
+            // const MotionText = motion.create(Text)
+            // const MotionLoadingBar = motion.create(Box) // LoadingBar
+            // const MotionLoadingBarProgress = motion.create(Card)
+
+            className={toastLoadingBarProgress()}
             key={`progress-${updatedAt}`}
             tone={cardTone}
             initial={{scaleX: 0}}
@@ -143,9 +163,9 @@ export function Toast(
             transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
             onAnimationComplete={onClose}
           />
-        </MotionLoadingBar>
+        </MotionBox>
       )}
-    </MotionToast>
+    </MotionCard>
   )
 }
 
@@ -189,8 +209,7 @@ const content = {
   },
 } satisfies Partial<Record<ContainerVariants, Variant>>
 
-const MotionToast = motion.create(StyledToast)
+const MotionCard = motion.create(Card)
 const MotionFlex = motion.create(Flex)
 const MotionText = motion.create(Text)
-const MotionLoadingBar = motion.create(LoadingBar)
-const MotionLoadingBarProgress = motion.create(LoadingBarProgress)
+const MotionBox = motion.create(Box)

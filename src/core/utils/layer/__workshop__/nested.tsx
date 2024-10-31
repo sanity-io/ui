@@ -28,7 +28,7 @@ function Root() {
           </Text>
         </Box>
         <Box padding={3}>
-          <Stack space={3}>
+          <Stack gap={3}>
             <LayerDebugInfo id="layer-debug-info-1" />
             <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
             {open && (
@@ -61,7 +61,7 @@ function Layer1({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
-        <Stack space={3}>
+        <Stack gap={3}>
           <LayerDebugInfo />
           <Button id="open-layer-2" mode="ghost" onClick={handleOpen} text="Open layer 2" />
           {open && (
@@ -89,7 +89,7 @@ function Layer2({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
-        <Stack space={3}>
+        <Stack gap={3}>
           <LayerDebugInfo />
         </Stack>
       </Box>
