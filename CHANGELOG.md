@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.14](https://github.com/sanity-io/ui/compare/v2.8.13...v2.8.14) (2024-10-31)
+
+### Features
+
+- **Input tokens:** Bump input border colors for increased contrast ([#1429](https://github.com/sanity-io/ui/issues/1429)) ([239be91](https://github.com/sanity-io/ui/commit/239be9108f608edd7e52d12ee3a06b4319c38c05))
+
+### Bug Fixes
+
+- **Dialog:** start alignment on dialog header ([#1440](https://github.com/sanity-io/ui/issues/1440)) ([2f6f95e](https://github.com/sanity-io/ui/commit/2f6f95ea36af3c0c8dccb338163c60059d8a25fc))
+
 ## [2.8.13](https://github.com/sanity-io/ui/compare/v2.8.12...v2.8.13) (2024-10-29)
 
 ### Bug Fixes
