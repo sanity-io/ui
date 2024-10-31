@@ -178,7 +178,7 @@
     "npm-run-all2": "^5.0.2",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
-    "react-compiler-runtime": "beta",
+    "react-compiler-runtime": "19.0.0-beta-6fc168f-20241025",
     "react-dom": "^18.3.1",
     "react-is": "^18.3.1",
     "refractor": "^4.8.1",
