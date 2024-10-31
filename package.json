@@ -193,9 +193,9 @@
     "vite-tsconfig-paths": "^5.0.1"
   },
   "peerDependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "react-is": "^18",
+    "react": "^18 || >=19.0.0-0",
+    "react-dom": "^18 || >=19.0.0-0",
+    "react-is": "^18 || >=19.0.0-0",
     "styled-components": "^5.2 || ^6"
   },
   "packageManager": "pnpm@9.12.3",
