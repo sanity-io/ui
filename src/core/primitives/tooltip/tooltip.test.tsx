@@ -1,4 +1,5 @@
 /** @jest-environment jsdom */
+
 import '../../../../test/mocks/resizeObserver.mock'
 import '../../../../test/mocks/matchMedia.mock'
 

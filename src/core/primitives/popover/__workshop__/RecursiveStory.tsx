@@ -62,7 +62,6 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
         mode="bleed"
         onKeyDown={handleKeyDown}
         onClick={handleOpen}
-        radius={3}
         ref={buttonRef}
         text="Open"
       />

@@ -12,7 +12,7 @@ import {
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useMemo, useState} from 'react'
 
-import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../../../workshop/constants'
 
 const PORTAL_OPTIONS = {
   '(true)': true,

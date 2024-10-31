@@ -1,13 +1,15 @@
-import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
-
 import {
-  switchBaseStyles,
-  switchInputStyles,
-  switchRepresentationStyles,
-  switchThumbStyles,
-  switchTrackStyles,
-} from './styles'
+  _switch,
+  _switchElement,
+  _switchPresentation,
+  _switchThumb,
+  _switchTrack,
+  composeClassNames,
+} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
+
+import {Props} from '../../types'
+import {Box} from '../box'
 
 /**
  * @public
@@ -15,12 +17,6 @@ import {
 export interface SwitchProps {
   indeterminate?: boolean
 }
-
-const StyledSwitch = styled.span(switchBaseStyles)
-const Input = styled.input(switchInputStyles)
-const Representation = styled.span(switchRepresentationStyles)
-const Track = styled.span(switchTrackStyles)
-const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.
@@ -30,8 +26,8 @@ const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switch
  * @public
  */
 export const Switch = forwardRef(function Switch(
-  props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>,
+  props: Props<SwitchProps, 'input'>,
+  forwardedRef: ForwardedRef<HTMLInputElement>,
 ) {
   const {checked, className, disabled, indeterminate, readOnly, style, ...restProps} = props
   const ref = useRef<HTMLInputElement | null>(null)
@@ -49,20 +45,31 @@ export const Switch = forwardRef(function Switch(
   }, [indeterminate])
 
   return (
-    <StyledSwitch className={className} data-ui="Switch" style={style}>
-      <Input
-        data-read-only={!disabled && readOnly ? '' : undefined}
+    <Box
+      className={composeClassNames(className, _switch())}
+      data-checked={checked ? '' : undefined}
+      data-indeterminate={indeterminate ? '' : undefined}
+      data-ui="Switch"
+      display="inline-block"
+      position="relative"
+      style={style}
+    >
+      <input
         {...restProps}
         checked={indeterminate !== true && checked}
+        className={_switchElement()}
+        data-disabled={disabled ? '' : undefined}
+        data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         type="checkbox"
         ref={ref}
       />
-      <Representation aria-hidden data-name="representation">
-        <Track />
-        <Thumb $checked={checked} $indeterminate={indeterminate} />
-      </Representation>
-    </StyledSwitch>
+      <span aria-hidden className={_switchPresentation()}>
+        <span className={_switchTrack()} />
+        <span className={_switchThumb()} />
+      </span>
+    </Box>
   )
 })
+
 Switch.displayName = 'ForwardRef(Switch)'

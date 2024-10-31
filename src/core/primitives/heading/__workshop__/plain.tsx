@@ -5,7 +5,7 @@ import {
   WORKSHOP_FONT_WEIGHT_OPTIONS,
   WORKSHOP_HEADING_FONT_SIZE_OPTIONS,
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PlainStory() {
   const accent = useBoolean('Accent', false, 'Props')

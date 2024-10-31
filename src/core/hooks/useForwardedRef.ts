@@ -1,4 +1,4 @@
-import {useImperativeHandle, useRef} from 'react'
+import {ForwardedRef, MutableRefObject, useImperativeHandle, useRef} from 'react'
 
 /**
  * @beta
@@ -10,7 +10,7 @@ import {useImperativeHandle, useRef} from 'react'
  * +useImperativeHandle(forwardedRef, () => ref.current)
  * ```
  */
-export function useForwardedRef<T>(ref: React.ForwardedRef<T>): React.MutableRefObject<T | null> {
+export function useForwardedRef<T>(ref: ForwardedRef<T>): MutableRefObject<T | null> {
   const innerRef = useRef<T | null>(null)
 
   useImperativeHandle(ref, () => innerRef.current!)

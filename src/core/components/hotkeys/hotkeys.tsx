@@ -1,35 +1,20 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize, Space} from '@sanity/ui/theme'
+import {ForwardedRef, forwardRef} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {Inline, KBD} from '../../primitives'
-import {Radius} from '../../types'
+import {Box, Inline, KBD} from '../../primitives'
+import {Props} from '../../types'
 
 /**
  * @public
  */
-export interface HotkeysProps {
-  fontSize?: number | number[]
-  padding?: number | number[]
-  radius?: Radius | Radius[]
-  space?: number | number[]
+export interface HotkeysProps extends GapStyleProps, RadiusStyleProps {
+  fontSize?: ResponsiveProp<FontTextSize>
+  padding?: ResponsiveProp<Space>
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
   keys?: string[]
 }
-
-const StyledHotkeys = styled.kbd`
-  font: inherit;
-  padding: 1px;
-
-  &:not([hidden]) {
-    display: block;
-  }
-`
-
-const Key = styled(KBD)`
-  &:not([hidden]) {
-    display: block;
-  }
-`
 
 /**
  * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
@@ -37,26 +22,35 @@ const Key = styled(KBD)`
  * @public
  */
 export const Hotkeys = forwardRef(function Hotkeys(
-  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.Ref<HTMLElement>,
+  props: Props<HotkeysProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {fontSize, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
-  const space = useArrayProp(spaceProp)
+  const {fontSize, gap, gapX, gapY, keys, padding, radius, space = 1, ...restProps} = props
 
   if (!keys || keys.length === 0) {
     return <></>
   }
 
   return (
-    <StyledHotkeys data-ui="Hotkeys" {...restProps} ref={ref}>
-      <Inline as="span" space={space}>
+    <Box
+      as="kbd"
+      data-ui="Hotkeys"
+      {...restProps}
+      display="flex"
+      gap={gap ?? space}
+      gapX={gapX}
+      gapY={gapY}
+      ref={ref}
+    >
+      <Inline as="span" gap={gap}>
         {keys.map((key, i) => (
-          <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
+          <KBD display="block" fontSize={fontSize} key={i} padding={padding} radius={radius}>
             {key}
-          </Key>
+          </KBD>
         ))}
       </Inline>
-    </StyledHotkeys>
+    </Box>
   )
 })
+
 Hotkeys.displayName = 'ForwardRef(Hotkeys)'

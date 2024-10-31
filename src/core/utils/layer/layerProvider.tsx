@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useMemo, useState} from 'react'
+import {ReactElement, ReactNode, useCallback, useContext, useEffect, useMemo, useState} from 'react'
 
 import {useArrayProp, useMediaIndex} from '../../hooks'
 import {getLayerContext} from './getLayerContext'
@@ -9,14 +9,14 @@ import {LayerContextValue} from './types'
  * @public
  */
 export interface LayerProviderProps {
-  children?: React.ReactNode
+  children?: ReactNode
   zOffset?: number | number[]
 }
 
 /**
  * @public
  */
-export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
+export function LayerProvider(props: LayerProviderProps): ReactElement {
   const {children, zOffset: zOffsetProp = 0} = props
 
   // Get parent context values

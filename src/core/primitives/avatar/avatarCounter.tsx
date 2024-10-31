@@ -1,62 +1,19 @@
-import {getTheme_v2} from '@sanity/ui/theme'
-import {forwardRef, useMemo} from 'react'
-import {css, styled} from 'styled-components'
+import {avatarCounter, composeClassNames, ResponsiveProp} from '@sanity/ui/css'
+import {AvatarSize} from '@sanity/ui/theme'
+import {ForwardedRef, forwardRef, useMemo} from 'react'
 
-import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
-import {_responsive, rem, ThemeProps} from '../../styles'
-import {AvatarSize} from '../../types'
+import {Props} from '../../types'
+import {Box, BoxProps} from '../box'
 import {Label} from '../label'
-
-function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
-  const {avatar, media} = getTheme_v2(props.theme)
-
-  return _responsive(media, props.$size, (size) => {
-    const avatarSize = avatar.sizes[size]
-
-    if (!avatarSize) return EMPTY_RECORD
-
-    return {
-      borderRadius: rem(avatarSize.size / 2),
-      minWidth: rem(avatarSize.size),
-      height: rem(avatarSize.size),
-    }
-  })
-}
-
-function _avatarCounterBaseStyle(props: ThemeProps) {
-  const {space} = getTheme_v2(props.theme)
-
-  return css`
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    user-select: none;
-    color: inherit;
-    color: var(--card-fg-color);
-    background: var(--card-bg-color);
-    box-shadow:
-      0 0 0 1px var(--card-bg-color),
-      inset 0 0 0 1px var(--card-hairline-hard-color);
-    padding: 0 ${rem(space[2])};
-
-    &:not([hidden]) {
-      display: flex;
-    }
-  `
-}
-
-const StyledAvatarCounter = styled.div<{$size: AvatarSize[]}>(
-  _responsiveAvatarCounterSizeStyle,
-  _avatarCounterBaseStyle,
-)
 
 /**
  * @public
  */
-export interface AvatarCounterProps {
+export interface AvatarCounterProps
+  extends Omit<BoxProps, 'align' | 'className' | 'display' | 'justify' | 'paddingX' | 'sizing'> {
   count: number
-  size?: AvatarSize | AvatarSize[]
+  size?: ResponsiveProp<AvatarSize>
   /** @deprecated No longer supported. */
   tone?: 'navbar'
 }
@@ -65,10 +22,10 @@ export interface AvatarCounterProps {
  * @public
  */
 export const AvatarCounter = forwardRef(function AvatarCounter(
-  props: AvatarCounterProps,
-  ref: React.Ref<HTMLDivElement>,
+  props: Props<AvatarCounterProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {count, size: sizeProp = 1} = props
+  const {className, count, size: sizeProp = 1, ...restProps} = props
   const size = useArrayProp(sizeProp)
 
   const fontSize = useMemo(
@@ -84,11 +41,22 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   )
 
   return (
-    <StyledAvatarCounter $size={size} data-ui="AvatarCounter" ref={ref}>
-      <Label as="span" size={fontSize} weight="medium">
+    <Box
+      data-ui="AvatarCounter"
+      {...restProps}
+      align="center"
+      className={composeClassNames(className, avatarCounter({size}))}
+      display="flex"
+      justify="center"
+      paddingX={2}
+      ref={ref}
+      sizing="border"
+    >
+      <Label align="center" as="span" size={fontSize} weight="medium">
         {count}
       </Label>
-    </StyledAvatarCounter>
+    </Box>
   )
 })
+
 AvatarCounter.displayName = 'ForwardRef(AvatarCounter)'

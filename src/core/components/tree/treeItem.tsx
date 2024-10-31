@@ -1,15 +1,23 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
-
-import {Box, BoxProps, Flex, Text} from '../../primitives'
+import {composeClassNames, ResponsiveProp, treeItem} from '@sanity/ui/css'
+import {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {
-  treeItemBoxStyle,
-  TreeItemBoxStyleProps,
-  treeItemRootColorStyle,
-  treeItemRootStyle,
-} from './style'
+  ElementType,
+  KeyboardEvent,
+  memo,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+} from 'react'
+
+import {Box, CardProps, Flex, Text} from '../../primitives'
+import {Selectable} from '../../primitives/_selectable'
+import {Props} from '../../types'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
@@ -17,55 +25,47 @@ import {useTree} from './useTree'
 /**
  * @beta
  */
-export interface TreeItemProps {
+export interface TreeItemProps extends CardProps {
   expanded?: boolean
-  fontSize?: number | number[]
-  icon?: React.ElementType
+  fontSize?: ResponsiveProp<FontTextSize>
+  icon?: ElementType
   /**
    * Allows passing a custom element type to the link component
    */
-  linkAs?: BoxProps['as']
-  padding?: number | number[]
-  space?: number | number[]
-  text?: React.ReactNode
+  linkAs?: ElementType
+  padding?: ResponsiveProp<Space>
+  space?: ResponsiveProp<Space>
+  text?: ReactNode
   weight?: ThemeFontWeightKey
 }
-
-const StyledTreeItem = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
-
-const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
-
-const ToggleArrowText = styled(Text)`
-  & > svg {
-    transition: transform 100ms;
-  }
-`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
 export const TreeItem = memo(function TreeItem(
-  props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>,
-): React.JSX.Element {
+  props: Omit<Props<TreeItemProps, 'div'>, 'as'>,
+): ReactElement {
   const {
     children,
+    className,
     expanded: expandedProp = false,
     fontSize = 1,
     href,
     icon: IconComponent,
     id: idProp,
-    linkAs,
+    linkAs = 'a',
     muted,
     onClick,
     padding = 2,
+    radius = 2,
     selected = false,
     space = 2,
     text,
     weight,
     ...restProps
   } = props
-  const rootRef = useRef<HTMLLIElement | null>(null)
+  const rootRef = useRef<HTMLDivElement | null>(null)
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
@@ -83,7 +83,7 @@ export const TreeItem = memo(function TreeItem(
   )
 
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLLIElement>) => {
+    (event: MouseEvent<HTMLDivElement>) => {
       if (onClick) onClick(event)
 
       const target = event.target
@@ -102,7 +102,7 @@ export const TreeItem = memo(function TreeItem(
   )
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLElement>) => {
+    (event: KeyboardEvent<HTMLElement>) => {
       if (focused && event.key === 'Enter') {
         const el = treeitemRef.current || rootRef.current
 
@@ -119,9 +119,8 @@ export const TreeItem = memo(function TreeItem(
   }, [expanded, itemPath, registerItem, selected])
 
   const content = (
-    <Flex padding={padding}>
+    <Flex gap={space} padding={padding}>
       <Box
-        marginRight={space}
         style={{
           visibility: IconComponent || children ? 'visible' : 'hidden',
           pointerEvents: 'none',
@@ -133,9 +132,9 @@ export const TreeItem = memo(function TreeItem(
           </Text>
         )}
         {!IconComponent && (
-          <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
+          <Text muted={muted} size={fontSize} weight={weight}>
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </ToggleArrowText>
+          </Text>
         )}
       </Box>
       <Box flex={1}>
@@ -148,58 +147,74 @@ export const TreeItem = memo(function TreeItem(
 
   if (href) {
     return (
-      <StyledTreeItem
+      <Box
         data-selected={selected ? '' : undefined}
         data-tree-id={id}
         data-tree-key={itemKey}
         data-ui="TreeItem"
         {...restProps}
+        as="li"
+        className={composeClassNames(className, treeItem())}
         onClick={handleClick}
         ref={rootRef}
         role="none"
       >
-        <TreeItemBox
-          $level={tree.level}
+        <Selectable
           aria-expanded={expanded}
           as={linkAs}
+          data-pressed={selected ? '' : undefined}
           data-ui="TreeItem__box"
           href={href}
+          radius={radius}
           ref={treeitemRef}
           role="treeitem"
           tabIndex={tabIndex}
+          style={{
+            paddingLeft: `calc(var(--space-2) * ${tree.level})`,
+          }}
         >
           {content}
-        </TreeItemBox>
+        </Selectable>
 
         <TreeContext.Provider value={contextValue}>
           {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
         </TreeContext.Provider>
-      </StyledTreeItem>
+      </Box>
     )
   }
 
   return (
-    <StyledTreeItem
+    <Box
       data-selected={selected ? '' : undefined}
       data-ui="TreeItem"
       data-tree-id={id}
       data-tree-key={itemKey}
       {...restProps}
       aria-expanded={expanded}
+      className={composeClassNames(className, treeItem())}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       ref={rootRef}
       role="treeitem"
       tabIndex={tabIndex}
     >
-      <TreeItemBox $level={tree.level} as="div" data-ui="TreeItem__box">
+      <Selectable
+        as="button"
+        data-pressed={selected ? '' : undefined}
+        data-ui="TreeItem__box"
+        radius={radius}
+        style={{
+          paddingLeft: `calc(var(--space-2) * ${tree.level})`,
+        }}
+      >
         {content}
-      </TreeItemBox>
+      </Selectable>
 
       <TreeContext.Provider value={contextValue}>
         {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}
       </TreeContext.Provider>
-    </StyledTreeItem>
+    </Box>
   )
 })
+
 TreeItem.displayName = 'Memo(TreeItem)'

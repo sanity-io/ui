@@ -1,7 +1,8 @@
-import {forwardRef, useImperativeHandle, useMemo, useState} from 'react'
+import {ForwardedRef, forwardRef, useImperativeHandle, useMemo, useState} from 'react'
 
+import {useTheme_v2} from '../../_compat'
 import {useElementSize} from '../../hooks'
-import {useTheme_v2} from '../../theme'
+import {Props} from '../../types'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
 /**
@@ -9,7 +10,6 @@ import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
  * @beta
  */
 export interface MediaQueryProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   media?: number[]
 }
 
@@ -18,8 +18,8 @@ export interface MediaQueryProps {
  * @beta
  */
 export const ElementQuery = forwardRef(function ElementQuery(
-  props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'media'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+  props: Props<MediaQueryProps, 'div'>,
+  forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   const theme = useTheme_v2()
   const {children, media: _media, ...restProps} = props

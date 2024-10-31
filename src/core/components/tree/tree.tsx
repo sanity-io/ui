@@ -1,6 +1,12 @@
+import {GapStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {
+  FocusEvent,
+  ForwardedRef,
   forwardRef,
+  KeyboardEvent,
   memo,
+  ReactElement,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -10,6 +16,7 @@ import {
 } from 'react'
 
 import {Stack} from '../../primitives'
+import {Props} from '../../types'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './treeContext'
 import {TreeContextValue, TreeState} from './types'
@@ -18,8 +25,9 @@ import {TreeContextValue, TreeState} from './types'
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export interface TreeProps {
-  space?: number | number[]
+export interface TreeProps extends Pick<GapStyleProps, 'gap'> {
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
 }
 
 /**
@@ -28,11 +36,10 @@ export interface TreeProps {
  */
 export const Tree = memo(
   forwardRef(function Tree(
-    props: TreeProps &
-      Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-    forwardedRef: React.ForwardedRef<HTMLDivElement>,
-  ): React.JSX.Element {
-    const {children, space = 1, onFocus, ...restProps} = props
+    props: Props<TreeProps, 'div'>,
+    forwardedRef: ForwardedRef<HTMLDivElement>,
+  ): ReactElement {
+    const {children, gap, space = 1, onFocus, ...restProps} = props
     const ref = useRef<HTMLDivElement | null>(null)
     const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
     const focusedElementRef = useRef(focusedElement)
@@ -101,7 +108,7 @@ export const Tree = memo(
     )
 
     const handleKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
+      (event: KeyboardEvent<HTMLDivElement>) => {
         if (!focusedElementRef.current) return
 
         if (event.key === 'ArrowDown') {
@@ -198,7 +205,7 @@ export const Tree = memo(
     )
 
     const handleFocus = useCallback(
-      (event: React.FocusEvent<HTMLDivElement>) => {
+      (event: FocusEvent<HTMLDivElement>) => {
         setFocusedElement(event.target)
 
         // Call the element's `focus` handler
@@ -222,11 +229,11 @@ export const Tree = memo(
           as="ul"
           data-ui="Tree"
           {...restProps}
+          gap={gap ?? space}
           onFocus={handleFocus}
           onKeyDown={handleKeyDown}
           ref={ref}
           role="tree"
-          space={space}
         >
           {children}
         </Stack>

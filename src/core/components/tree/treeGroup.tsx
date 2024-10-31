@@ -1,6 +1,7 @@
-import {memo} from 'react'
+import {memo, ReactElement} from 'react'
 
 import {Stack} from '../../primitives'
+import {Props} from '../../types'
 import {useTree} from './useTree'
 
 export interface TreeGroupProps {
@@ -8,9 +9,8 @@ export interface TreeGroupProps {
 }
 
 export const TreeGroup = memo(function TreeGroup(
-  props: TreeGroupProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-): React.JSX.Element {
+  props: Props<TreeGroupProps, 'div'>,
+): ReactElement {
   const {children, expanded = false, ...restProps} = props
   const tree = useTree()
 

@@ -1,30 +1,20 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {badge, composeClassNames, RadiusStyleProps} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {BadgeMode, BadgeTone} from '../../types'
+import {BadgeMode, BadgeTone, Props} from '../../types'
 import {Box, BoxProps} from '../box'
-import {Text} from '../text'
-import {ResponsiveRadiusProps} from '../types'
-import {badgeStyle} from './styles'
-import {BadgeStyleProps} from './types'
+import {Text, TextProps} from '../text'
 
 /**
  * @public
  */
-export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface BadgeProps extends BoxProps, RadiusStyleProps {
   fontSize?: number | number[]
   /** @deprecated No longer used. */
   mode?: BadgeMode
+  textAlign?: TextProps['align']
   tone?: BadgeTone
 }
-
-const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  badgeStyle,
-)
 
 /**
  * Badges are used to tag resources.
@@ -32,31 +22,43 @@ const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
  * @public
  */
 export const Badge = forwardRef(function Badge(
-  props: BadgeProps & React.HTMLProps<HTMLDivElement>,
-  ref,
+  props: Props<BadgeProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const {
     children,
+    className,
+    display = 'inline-block',
     fontSize = 1,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     mode: _deprecated_mode,
     padding = 1,
-    radius = 'full',
+    radius = 2,
+    textAlign,
     tone = 'default',
     ...restProps
   } = props
 
   return (
-    <StyledBadge
+    <Box
       data-ui="Badge"
       {...restProps}
-      $tone={tone}
-      $radius={useArrayProp(radius)}
-      padding={useArrayProp(padding)}
+      className={composeClassNames(
+        className,
+        badge({
+          radius,
+          tone,
+        }),
+      )}
+      display={display}
+      padding={padding}
       ref={ref}
     >
-      <Text size={fontSize}>{children}</Text>
-    </StyledBadge>
+      <Text align={textAlign} size={fontSize}>
+        {children}
+      </Text>
+    </Box>
   )
 })
+
 Badge.displayName = 'ForwardRef(Badge)'

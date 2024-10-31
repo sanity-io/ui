@@ -1,3 +1,4 @@
+import {ReactNode, ReactPortal} from 'react'
 import {createPortal} from 'react-dom'
 
 import {usePortal} from './usePortal'
@@ -6,7 +7,7 @@ import {usePortal} from './usePortal'
  * @public
  */
 export interface PortalProps {
-  children: React.ReactNode
+  children: ReactNode
   /**
    * @beta This API might change. DO NOT USE IN PRODUCTION.
    */
@@ -16,7 +17,7 @@ export interface PortalProps {
 /**
  * @public
  */
-export function Portal(props: PortalProps): React.ReactPortal | null {
+export function Portal(props: PortalProps): ReactPortal | null {
   const {children, __unstable_name: name} = props
   const portal = usePortal()
   const portalElement =

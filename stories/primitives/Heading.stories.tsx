@@ -1,7 +1,7 @@
 import {AddCircleIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, Flex, Heading, Stack, Text} from '../../src/core/primitives'
+import {Card, Flex, Heading, HeadingProps, Stack, Text} from '../../src/core/primitives'
 import {getAlignControls, getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Heading> = {
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof Text>
 
 export const Default: Story = {
   render: (props) => {
-    return <Heading {...props} />
+    return <Heading {...(props as HeadingProps)} />
   },
 }
 
@@ -38,7 +38,7 @@ export const Accent: Story = {
     },
   },
   render: (props) => {
-    return <Heading {...props} />
+    return <Heading {...(props as HeadingProps)} />
   },
 }
 
@@ -52,7 +52,7 @@ export const Muted: Story = {
     },
   },
   render: (props) => {
-    return <Heading {...props} />
+    return <Heading {...(props as HeadingProps)} />
   },
 }
 
@@ -65,11 +65,11 @@ export const Sizes: Story = {
   render: (props) => {
     return (
       <Stack space={4}>
-        <Heading size={4} {...props} />
-        <Heading size={3} {...props} />
-        <Heading size={2} {...props} />
-        <Heading size={1} {...props} />
-        <Heading size={0} {...props} />
+        <Heading size={4} {...(props as HeadingProps)} />
+        <Heading size={3} {...(props as HeadingProps)} />
+        <Heading size={2} {...(props as HeadingProps)} />
+        <Heading size={1} {...(props as HeadingProps)} />
+        <Heading size={0} {...(props as HeadingProps)} />
       </Stack>
     )
   },
@@ -84,10 +84,10 @@ export const Weights: Story = {
   render: (props) => {
     return (
       <Stack space={4}>
-        <Heading {...props} />
-        <Heading weight="medium" {...props} />
-        <Heading weight="semibold" {...props} />
-        <Heading weight="bold" {...props} />
+        <Heading {...(props as HeadingProps)} />
+        <Heading weight="medium" {...(props as HeadingProps)} />
+        <Heading weight="semibold" {...(props as HeadingProps)} />
+        <Heading weight="bold" {...(props as HeadingProps)} />
       </Stack>
     )
   },
@@ -103,37 +103,37 @@ export const OpticalAlignment: Story = {
       <Stack space={1}>
         <Flex>
           <Card padding={0}>
-            <Heading {...props} size={5} />
+            <Heading {...(props as HeadingProps)} size={5} />
           </Card>
         </Flex>
         <Flex>
           <Card padding={0}>
-            <Heading {...props} size={4} />
+            <Heading {...(props as HeadingProps)} size={4} />
           </Card>
         </Flex>
         <Flex>
           <Card padding={0}>
-            <Heading {...props} size={3} />
+            <Heading {...(props as HeadingProps)} size={3} />
           </Card>
         </Flex>
         <Flex>
           <Card padding={0}>
-            <Heading {...props} size={2} />
+            <Heading {...(props as HeadingProps)} size={2} />
           </Card>
         </Flex>
         <Flex>
           <Card padding={0}>
-            <Heading {...props} size={1} />
+            <Heading {...(props as HeadingProps)} size={1} />
           </Card>
         </Flex>
         <Flex>
           <Card padding={0}>
-            <Heading {...props} size={0} />
+            <Heading {...(props as HeadingProps)} size={0} />
           </Card>
         </Flex>
         <Flex>
           <Card padding={2}>
-            <Heading {...props}>
+            <Heading {...(props as HeadingProps)}>
               <AddCircleIcon />
             </Heading>
           </Card>

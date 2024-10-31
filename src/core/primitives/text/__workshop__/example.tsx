@@ -6,7 +6,7 @@ import {
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
   WORKSHOP_TEXT_SIZE_OPTIONS,
   WORKSHOP_TEXT_WEIGHT_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function TextStory() {
   const accent = useBoolean('Accent', false, 'Props')

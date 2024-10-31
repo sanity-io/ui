@@ -46,4 +46,4 @@ export const PLACEMENT_OPTIONS: Placement[] = [
   'bottom-end',
 ]
 
-export const RADII: Radius[] = [...Array(theme.radius.length).keys(), 'full']
+export const RADII = [...Array(theme.radius.length).keys(), 'full'] as Radius[]

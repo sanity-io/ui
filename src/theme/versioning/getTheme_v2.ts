@@ -1,5 +1,6 @@
 import {defaultThemeConfig} from '../defaults/config'
-import {Theme, Theme_v2} from '../system'
+import {Theme} from '../types'
+import {Theme_v2} from '../v2'
 import {themeColor_v0_v2} from './themeColor_v0_v2'
 
 const cache = new WeakMap<Theme, Theme_v2>()

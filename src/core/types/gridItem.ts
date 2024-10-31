@@ -1,29 +1,32 @@
-/**
- * @public
- */
-export type GridItemColumn = 'auto' | 'full' | number
-
-/**
- * @public
- */
-export type GridItemColumnStart = 'auto' | number
-
-/**
- * @public
- */
-export type GridItemColumnEnd = 'auto' | number
-
-/**
- * @public
- */
-export type GridItemRow = 'auto' | 'full' | number
-
-/**
- * @public
- */
-export type GridItemRowStart = 'auto' | number
-
-/**
- * @public
- */
-export type GridItemRowEnd = 'auto' | number
+export {
+  /**
+   * @public
+   * @deprecated
+   */
+  type GridItemColumn,
+  /**
+   * @public
+   * @deprecated
+   */
+  type GridItemColumnEnd,
+  /**
+   * @public
+   * @deprecated
+   */
+  type GridItemColumnStart,
+  /**
+   * @public
+   * @deprecated
+   */
+  type GridItemRow,
+  /**
+   * @public
+   * @deprecated
+   */
+  type GridItemRowEnd,
+  /**
+   * @public
+   * @deprecated
+   */
+  type GridItemRowStart,
+} from '@sanity/ui/css'

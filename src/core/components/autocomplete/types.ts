@@ -1,10 +1,10 @@
 import {ButtonProps} from '../../primitives'
+import {Props} from '../../types'
 
 /**
  * @public
  */
-export type AutocompleteOpenButtonProps = Omit<ButtonProps, 'as'> &
-  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
+export type AutocompleteOpenButtonProps = Omit<Props<ButtonProps, 'button'>, 'as'>
 
 /**
  * @public

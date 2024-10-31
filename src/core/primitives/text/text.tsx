@@ -1,41 +1,20 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-
-import {useArrayProp} from '../../hooks'
 import {
-  ResponsiveFontStyleProps,
-  responsiveTextAlignStyle,
-  responsiveTextFont,
-} from '../../styles/internal'
-import {TextAlign} from '../../types'
-import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
-import {textBaseStyle} from './styles'
+  composeClassNames,
+  text,
+  textOverflow,
+  TextOverflowStyleProps,
+  TextStyleProps,
+} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef} from 'react'
+
+import {Props} from '../../types'
 
 /**
  * @public
  */
-export interface TextProps {
-  accent?: boolean
-  align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  /** When `true` the text color will be muted. */
-  muted?: boolean
-  size?: number | number[]
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis'
-  weight?: ThemeFontWeightKey
+export interface TextProps extends TextStyleProps, TextOverflowStyleProps {
+  htmlFor?: string
 }
-
-const StyledText = styled.div<ResponsiveFontStyleProps>(
-  responsiveTextFont,
-  responsiveTextAlignStyle,
-  textBaseStyle,
-)
 
 /**
  * The `Text` component is an agile, themed typographic element.
@@ -43,39 +22,43 @@ const StyledText = styled.div<ResponsiveFontStyleProps>(
  * @public
  */
 export const Text = forwardRef(function Text(
-  props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  props: Props<TextProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent = false,
     align,
-    children: childrenProp,
+    as: As = 'div',
+    children,
+    className,
+    flex,
     muted = false,
-    size = 2,
-    textOverflow,
+    size = 1,
+    textOverflow: textOverflowProp,
     weight,
     ...restProps
   } = props
 
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  }
-
   return (
-    <StyledText
+    <As
       data-ui="Text"
       {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
       ref={ref}
-      $size={useArrayProp(size)}
-      $weight={weight}
+      className={composeClassNames(
+        className,
+        text({
+          accent,
+          align,
+          flex,
+          muted,
+          size,
+          weight,
+        }),
+      )}
     >
-      <span>{children}</span>
-    </StyledText>
+      <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
+    </As>
   )
 })
+
 Text.displayName = 'ForwardRef(Text)'

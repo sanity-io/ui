@@ -1,4 +1,4 @@
-import {Button, Card, Popover, PortalProvider, Text} from '@sanity/ui'
+import {Button, Card, Popover, PortalProvider, Radius, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useState} from 'react'
 
@@ -7,7 +7,7 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PlainStory() {
   const arrow = useBoolean('Arrow', true)
@@ -57,7 +57,7 @@ export default function PlainStory() {
               placement={placement}
               portal={portal}
               preventOverflow={preventOverflow}
-              radius={radius}
+              radius={radius as Radius}
               width={width}
             >
               <Button text="This button is the popover reference" />

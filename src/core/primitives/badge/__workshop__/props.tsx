@@ -5,7 +5,7 @@ import {
   WORKSHOP_BADGE_MODE_OPTIONS,
   WORKSHOP_BADGE_TONE_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PropsStory() {
   const mode = useSelect('Mode (deprecated)', WORKSHOP_BADGE_MODE_OPTIONS, 'default', 'Props')

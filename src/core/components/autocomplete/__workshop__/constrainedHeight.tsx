@@ -27,6 +27,7 @@ export default function ConstrainedHeightStory() {
           radius={3}
           shadow={3}
           style={{position: 'relative'}}
+          tone="default"
           // style={{position: 'absolute', top: 12, right: 12, bottom: 12, left: 12}}
         >
           <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">

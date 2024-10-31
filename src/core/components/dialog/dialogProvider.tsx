@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import {ReactElement, ReactNode, useMemo} from 'react'
 
 import {DialogPosition} from '../../types'
 import {DialogContext, DialogContextValue} from './dialogContext'
@@ -8,7 +8,7 @@ import {DialogContext, DialogContextValue} from './dialogContext'
  * @beta
  */
 export interface DialogProviderProps {
-  children?: React.ReactNode
+  children?: ReactNode
   position?: DialogPosition | DialogPosition[]
   zOffset?: number | number[]
 }
@@ -17,7 +17,7 @@ export interface DialogProviderProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export function DialogProvider(props: DialogProviderProps): React.JSX.Element {
+export function DialogProvider(props: DialogProviderProps): ReactElement {
   const {children, position, zOffset} = props
 
   const contextValue: DialogContextValue = useMemo(

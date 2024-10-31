@@ -1,6 +1,6 @@
 import {useMemo, useSyncExternalStore} from 'react'
 
-import {useTheme_v2} from '../../theme'
+import {useTheme_v2} from '../../_compat'
 
 /**
  * @internal

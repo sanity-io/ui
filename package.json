@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "2.15.17",
+  "version": "3.0.0-alpha.0",
   "keywords": [
     "sanity",
     "ui",
@@ -34,13 +34,22 @@
       "require": "./dist/_visual-editing.js",
       "default": "./dist/_visual-editing.js"
     },
+    "./css": {
+      "source": "./exports/css.ts",
+      "import": "./dist/css.mjs",
+      "require": "./dist/css.js",
+      "default": "./dist/css.js"
+    },
+    "./package.json": "./package.json",
     "./theme": {
       "source": "./exports/theme.ts",
       "import": "./dist/theme.mjs",
       "require": "./dist/theme.js",
       "default": "./dist/theme.js"
     },
-    "./package.json": "./package.json"
+    "./sanity-palette.css": "./dist/sanity-palette.css",
+    "./sanity-theme.css": "./dist/sanity-theme.css",
+    "./system.css": "./dist/system.css"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -50,24 +59,31 @@
       "_visual-editing": [
         "./dist/_visual-editing.d.ts"
       ],
+      "css": [
+        "./dist/css.d.ts"
+      ],
       "theme": [
         "./dist/theme.d.ts"
       ]
     }
   },
+  "bin": {
+    "ui": "./bin/ui.js"
+  },
   "files": [
+    "css.js",
     "dist",
     "exports",
     "src"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build pkg:check figma:pkg:build",
-    "clean": "rimraf .workshop dist",
+    "build": "run-s clean ui:build pkg:build pkg:check figma:pkg:build",
+    "clean": "rimraf .workshop css.js dist theme.js",
     "commit": "cz",
     "cypress:dev": "run-p dev cypress:open",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "dev": "run-p storybook:dev workshop:dev",
+    "dev": "run-p workshop:dev",
     "figma:pkg:build": "cd figma && pnpm build",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
@@ -81,6 +97,7 @@
     "test": "jest",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
     "ts:check": "tsc",
+    "ui:build": "node -r esbuild-register scripts/build",
     "watch": "pkg watch --strict",
     "workshop:build": "workshop build",
     "workshop:dev": "workshop dev",
@@ -163,11 +180,13 @@
     "@types/refractor": "^3.4.1",
     "@vitejs/plugin-react": "^4.4.1",
     "babel-plugin-react-compiler": "19.1.0-rc.1",
-    "babel-plugin-styled-components": "^2.1.4",
+    "cac": "^6.7.14",
     "commitizen": "^4.3.1",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv-flow": "^4.1.0",
+    "esbuild-register": "^3.6.0",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-formatter-compact": "^8.40.0",

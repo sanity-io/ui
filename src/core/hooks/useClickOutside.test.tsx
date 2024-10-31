@@ -2,7 +2,7 @@
 
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {useEffect, useRef, useState} from 'react'
+import {MutableRefObject, useEffect, useRef, useState} from 'react'
 
 import {useClickOutside} from './useClickOutside'
 
@@ -289,7 +289,7 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
-    const useElementsFromRefs = (refs: React.MutableRefObject<HTMLElement | null>[]) => {
+    const useElementsFromRefs = (refs: MutableRefObject<HTMLElement | null>[]) => {
       const [elements, setElements] = useState(() => refs.map((ref) => ref.current))
 
       useEffect(() => {
@@ -438,7 +438,7 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
-    const useBoundaryElementFromRef = (ref: React.MutableRefObject<HTMLElement | null>) => {
+    const useBoundaryElementFromRef = (ref: MutableRefObject<HTMLElement | null>) => {
       const [element, setElement] = useState(() => ref.current)
 
       // eslint-disable-next-line react-hooks/exhaustive-deps

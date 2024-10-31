@@ -1,4 +1,5 @@
-import {styled} from 'styled-components'
+import {GapStyleProps, PaddingStyleProps, toastLayer} from '@sanity/ui/css'
+import {ReactNode} from 'react'
 
 import {Grid} from '../../primitives/grid'
 import {useLayer} from '../../utils'
@@ -6,12 +7,8 @@ import {useLayer} from '../../utils'
 /**
  * @public
  */
-export interface ToastLayerProps {
-  children: React.ReactNode
-  padding?: number | number[]
-  paddingX?: number | number[]
-  paddingY?: number | number[]
-  gap?: number | number[]
+export interface ToastLayerProps extends GapStyleProps, PaddingStyleProps {
+  children: ReactNode
 }
 
 /**
@@ -22,8 +19,9 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
   const {zIndex} = useLayer()
 
   return (
-    <StyledLayer
-      forwardedAs="ul"
+    <Grid
+      as="ul"
+      className={toastLayer()}
       data-ui="ToastProvider"
       padding={padding}
       paddingX={paddingX}
@@ -33,19 +31,8 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
       style={{zIndex}}
     >
       {children}
-    </StyledLayer>
+    </Grid>
   )
 }
 
 ToastLayer.displayName = 'ToastLayer'
-
-const StyledLayer = styled(Grid)`
-  box-sizing: border-box;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  list-style: none;
-  pointer-events: none;
-  max-width: 420px;
-  width: 100%;
-`

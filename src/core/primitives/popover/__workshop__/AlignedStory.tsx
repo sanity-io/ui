@@ -8,7 +8,7 @@ import {
   WORKSHOP_FLEX_JUSTIFY_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_WIDTH_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function AlignedStory() {
   const constrainSize = useBoolean('Constrain size', false)

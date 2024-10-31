@@ -1,22 +1,32 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import {isValidElement, useCallback, useEffect, useState} from 'react'
+import {GapStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize, Space} from '@sanity/ui/theme'
+import {
+  ElementType,
+  isValidElement,
+  KeyboardEvent,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import {isValidElementType} from 'react-is'
 
-import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
-import {useRootTheme} from '../../theme'
-import {Radius, SelectableTone} from '../../types'
+import {Props, Radius, SelectableTone} from '../../types'
 import {Menu, MenuProps} from './menu'
 import {useMenu} from './useMenu'
 
 /**
  * @public
  */
-export interface MenuGroupProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  fontSize?: number | number[]
-  icon?: React.ElementType | React.ReactNode
+export interface MenuGroupProps extends GapStyleProps {
+  disabled?: boolean
+  fontSize?: ResponsiveProp<FontTextSize>
+  icon?: ElementType | ReactNode
   menu?: Omit<
     MenuProps,
     | 'onClickOutside'
@@ -28,25 +38,26 @@ export interface MenuGroupProps {
     | 'shouldFocus'
     | 'onBlurCapture'
   >
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: Radius | Radius[]
-  space?: number | number[]
-  text: React.ReactNode
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
+  text: ReactNode
   tone?: SelectableTone
 }
 
 /**
  * @public
  */
-export function MenuGroup(
-  props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
-    MenuGroupProps,
-): React.JSX.Element {
+export function MenuGroup(props: Props<MenuGroupProps, 'div'>): ReactElement {
   const {
     as = 'button',
     children,
     fontSize = 1,
+    gap,
+    gapX,
+    gapY,
     icon: IconComponent,
     menu: menuProps,
     onClick,
@@ -59,7 +70,7 @@ export function MenuGroup(
     ...restProps
   } = props
   const menu = useMenu()
-  const {scheme} = useRootTheme()
+
   const {
     activeElement,
     mount,
@@ -77,7 +88,7 @@ export function MenuGroup(
   const [withinMenu, setWithinMenu] = useState(false)
 
   const handleMouseEnter = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+    (event: MouseEvent<HTMLElement>) => {
       setWithinMenu(false)
       onItemMouseEnter(event)
       setOpen(true)
@@ -86,7 +97,7 @@ export function MenuGroup(
   )
 
   const handleMenuKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'ArrowLeft') {
         event.stopPropagation()
 
@@ -101,7 +112,7 @@ export function MenuGroup(
   )
 
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: MouseEvent<HTMLDivElement>) => {
       onClick?.(event)
 
       setShouldFocus('first')
@@ -155,7 +166,7 @@ export function MenuGroup(
     </Menu>
   )
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
     const target = event.currentTarget
 
     if (document.activeElement !== target) {
@@ -174,24 +185,24 @@ export function MenuGroup(
   return (
     <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
       <Selectable
-        data-as={as}
+        // data-as={as}
         data-ui="MenuGroup"
-        forwardedAs={as}
+        // forwardedAs={as}
         {...restProps}
         aria-pressed={as === 'button' ? withinMenu : undefined}
+        as={as}
         data-pressed={as !== 'button' ? withinMenu : undefined}
         data-selected={!withinMenu && active ? '' : undefined}
-        $radius={useArrayProp(radius)}
-        $tone={tone}
-        $scheme={scheme}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
+        radius={radius}
         ref={setRootElement}
         tabIndex={-1}
+        tone={tone}
         type={as === 'button' ? 'button' : undefined}
       >
-        <Flex gap={space} padding={padding}>
+        <Flex gap={gap ?? space} gapX={gapX} gapY={gapY} padding={padding}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}

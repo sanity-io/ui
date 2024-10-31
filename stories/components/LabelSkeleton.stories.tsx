@@ -1,6 +1,7 @@
+import {FontLabelSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {LabelSkeleton, Skeleton} from '../../src/core/components'
+import {LabelSkeleton, LabelSkeletonProps, Skeleton} from '../../src/core/components'
 import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
@@ -31,7 +32,7 @@ export default meta
 type Story = StoryObj<typeof Skeleton>
 
 export const Default: Story = {
-  render: (props) => <LabelSkeleton {...props} />,
+  render: (props) => <LabelSkeleton {...(props as LabelSkeletonProps)} />,
 }
 
 export const Sizes: Story = {
@@ -41,7 +42,9 @@ export const Sizes: Story = {
       <>
         {columnBuilder({
           gap: 4,
-          renderItem: ({value, index}) => <LabelSkeleton {...props} key={index} size={value} />,
+          renderItem: ({value, index}) => (
+            <LabelSkeleton {...props} key={index} size={value as FontLabelSize} />
+          ),
           rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
         })}
       </>

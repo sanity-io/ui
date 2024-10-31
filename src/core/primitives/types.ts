@@ -1,27 +1,37 @@
 import {
-  BoxDisplay,
-  BoxHeight,
-  BoxOverflow,
-  BoxSizing,
-  FlexAlign,
-  FlexDirection,
-  FlexJustify,
-  FlexValue,
-  FlexWrap,
-  GridAutoCols,
-  GridAutoFlow,
-  GridAutoRows,
+  type FlexAlign,
+  type FlexDirection,
+  type FlexJustify,
+  type FlexValue,
+  type FlexWrap,
   GridItemColumn,
   GridItemColumnEnd,
   GridItemColumnStart,
   GridItemRow,
   GridItemRowEnd,
   GridItemRowStart,
-  Radius,
+} from '@sanity/ui/css'
+
+import {
+  type BoxDisplay,
+  type BoxHeight,
+  type BoxOverflow,
+  type BoxSizing,
+  type GridAutoCols,
+  type GridAutoFlow,
+  type GridAutoRows,
+  // type GridItemColumn,
+  // type GridItemColumnEnd,
+  // type GridItemColumnStart,
+  // type GridItemRow,
+  // type GridItemRowEnd,
+  // type GridItemRowStart,
+  type Radius,
 } from '../types'
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveBorderProps {
   border?: boolean | boolean[]
@@ -33,6 +43,7 @@ export interface ResponsiveBorderProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveBoxProps {
   display?: BoxDisplay | BoxDisplay[]
@@ -43,6 +54,7 @@ export interface ResponsiveBoxProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveFlexProps {
   align?: FlexAlign | FlexAlign[]
@@ -53,6 +65,7 @@ export interface ResponsiveFlexProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveFlexItemProps {
   /** Sets the flex CSS attribute. The property is responsive. */
@@ -61,20 +74,22 @@ export interface ResponsiveFlexItemProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveGridProps {
   autoRows?: GridAutoRows | GridAutoRows[]
   autoCols?: GridAutoCols | GridAutoCols[]
   autoFlow?: GridAutoFlow | GridAutoFlow[]
   columns?: number | number[]
-  gap?: number | number[]
-  gapX?: number | number[]
-  gapY?: number | number[]
+  // gap?: number | number[]
+  // gapX?: number | number[]
+  // gapY?: number | number[]
   rows?: number | number[]
 }
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveGridItemProps {
   column?: GridItemColumn | GridItemColumn[]
@@ -87,6 +102,7 @@ export interface ResponsiveGridItemProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveMarginProps {
   /** Applies margins to all sides. The property is responsive. */
@@ -103,6 +119,7 @@ export interface ResponsiveMarginProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsivePaddingProps {
   padding?: number | number[]
@@ -116,6 +133,7 @@ export interface ResponsivePaddingProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveRadiusProps {
   radius?: Radius | Radius[]
@@ -123,6 +141,7 @@ export interface ResponsiveRadiusProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveShadowProps {
   shadow?: number | number[]
@@ -130,6 +149,7 @@ export interface ResponsiveShadowProps {
 
 /**
  * @public
+ * @deprecated
  */
 export interface ResponsiveWidthProps {
   width?: number | 'auto' | (number | 'auto')[]

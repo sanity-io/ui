@@ -1,9 +1,24 @@
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
+import {
+  composeClassNames,
+  GapStyleProps,
+  menu,
+  PaddingStyleProps,
+  ResponsiveProp,
+} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
+import {
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react'
 
 import {useClickOutsideEvent, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
-import {ResponsivePaddingProps} from '../../primitives/types'
+import {Props} from '../../types'
 import {useLayer} from '../../utils'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenuController} from './useMenuController'
@@ -11,7 +26,7 @@ import {useMenuController} from './useMenuController'
 /**
  * @public
  */
-export interface MenuProps extends ResponsivePaddingProps {
+export interface MenuProps extends PaddingStyleProps, Pick<GapStyleProps, 'gap'> {
   /**
    * @deprecated Use `shouldFocus="first"` instead.
    */
@@ -27,15 +42,11 @@ export interface MenuProps extends ResponsivePaddingProps {
   'originElement'?: HTMLElement | null
   'registerElement'?: (el: HTMLElement) => () => void
   'shouldFocus'?: 'first' | 'last' | null
-  'space'?: number | number[]
+  /** @deprecated Use `gap` property instead. */
+  'space'?: ResponsiveProp<Space>
   'aria-labelledby'?: string
-  'onBlurCapture'?: (event: FocusEvent) => void
+  // 'onBlurCapture'?: (event: FocusEvent) => void
 }
-
-const StyledMenu = styled(Box)`
-  outline: none;
-  overflow: auto;
-`
 
 /**
  * The `Menu` component is a building block for application menus.
@@ -43,15 +54,18 @@ const StyledMenu = styled(Box)`
  * @public
  */
 export const Menu = forwardRef(function Menu(
-  props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+  props: Props<MenuProps, 'div'>,
+  forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   const {
     children,
+    className,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusFirst,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusLast,
+    gap,
+    // onBlurCapture,
     onClickOutside,
     onEscape,
     onItemClick,
@@ -80,7 +94,12 @@ export const Menu = forwardRef(function Menu(
     handleItemMouseLeave,
     handleKeyDown,
     mount,
-  } = useMenuController({onKeyDown, originElement, shouldFocus, rootElementRef: ref})
+  } = useMenuController({
+    onKeyDown,
+    originElement,
+    shouldFocus,
+    rootElementRef: ref,
+  })
 
   const unregisterElementRef = useRef<(() => void) | null>(null)
   const handleRefChange = useCallback(
@@ -160,18 +179,22 @@ export const Menu = forwardRef(function Menu(
 
   return (
     <MenuContext.Provider value={value}>
-      <StyledMenu
+      <Box
         data-ui="Menu"
         {...restProps}
+        className={composeClassNames(className, menu())}
         onKeyDown={handleKeyDown}
+        overflow="auto"
+        outline="none"
         padding={padding}
         ref={handleRefChange}
         role="menu"
         tabIndex={-1}
       >
-        <Stack space={space}>{children}</Stack>
-      </StyledMenu>
+        <Stack gap={gap ?? space}>{children}</Stack>
+      </Box>
     </MenuContext.Provider>
   )
 })
+
 Menu.displayName = 'ForwardRef(Menu)'

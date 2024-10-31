@@ -1,3 +1,4 @@
+import {Radius} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useRef, useState} from 'react'
 
@@ -5,7 +6,7 @@ import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 import {BoundaryElementProvider, PortalProvider} from '../../../utils'
 import {Button} from '../../button'
 import {Card} from '../../card'
@@ -81,7 +82,7 @@ export default function TestStory(): React.JSX.Element {
                   placement={placement}
                   portal={portal}
                   preventOverflow={preventOverflow}
-                  radius={radius}
+                  radius={radius as Radius}
                   updateRef={updateRef}
                   width={width}
                 >

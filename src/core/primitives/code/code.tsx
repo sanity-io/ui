@@ -1,40 +1,49 @@
-import {forwardRef, lazy, Suspense} from 'react'
-import {styled} from 'styled-components'
+import {code, composeClassNames, FontStyleProps} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef, lazy, Suspense} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
-import {codeBaseStyle} from './styles'
+import {Props} from '../../types'
 
 const LazyRefractor = lazy(() => import('./refractor'))
 
 /**
  * @public
  */
-export interface CodeProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface CodeProps extends Omit<FontStyleProps, 'align'> {
   /** Define the language to use for syntax highlighting. */
   language?: string
   size?: number | number[]
-  weight?: string
 }
-
-const StyledCode = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
 
 /**
  * @public
  */
 export const Code = forwardRef(function Code(
-  props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLElement>,
+  props: Props<CodeProps, 'pre'>,
+  ref: ForwardedRef<HTMLPreElement>,
 ) {
-  const {children, language, size = 2, weight, ...restProps} = props
+  const {
+    as: As = 'pre',
+    children,
+    className,
+    language: languageProp,
+    size = 1,
+    weight,
+    ...restProps
+  } = props
+  const language = typeof languageProp === 'string' ? languageProp : undefined
 
   return (
-    <StyledCode data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
+    <As
+      data-ui="Code"
+      {...restProps}
+      className={composeClassNames(className, code({size, weight}))}
+      ref={ref}
+    >
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>
-    </StyledCode>
+    </As>
   )
 })
+
 Code.displayName = 'ForwardRef(Code)'

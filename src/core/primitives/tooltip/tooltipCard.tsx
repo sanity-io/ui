@@ -1,10 +1,9 @@
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {motion, type MotionProps} from 'framer-motion'
-import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
-import {styled} from 'styled-components'
+import {tooltipCard} from '@sanity/ui/css'
+import {motion} from 'framer-motion'
+import {CSSProperties, ForwardedRef, forwardRef, memo, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'
-import {Placement, Radius} from '../../types'
+import {Placement, Props} from '../../types'
 import {Arrow} from '../../utils'
 import {Card, CardProps} from '../card'
 import {
@@ -13,30 +12,30 @@ import {
   DEFAULT_TOOLTIP_ARROW_WIDTH,
 } from './constants'
 
-const MotionCard = styled(motion.create(Card))`
-  will-change: transform;
-`
+const MotionCard = motion.create(Card)
+
+/* @internal */
+export interface TooltipCardProps extends CardProps {
+  animate?: boolean
+  arrow: boolean
+  arrowRef: ForwardedRef<HTMLDivElement>
+  arrowX?: number
+  arrowY?: number
+  originX?: number
+  originY?: number
+  placement?: Placement
+}
 
 /**
  * @internal
  */
 export const TooltipCard = memo(
   forwardRef(function TooltipCard(
-    props: {
-      animate?: boolean
-      arrow: boolean
-      arrowRef: React.Ref<HTMLDivElement>
-      arrowX?: number
-      arrowY?: number
-      originX?: number
-      originY?: number
-      padding?: number | number[]
-      placement?: Placement
-      radius?: Radius | Radius[]
-      scheme?: ThemeColorSchemeKey
-      shadow?: number | number[]
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-    ref: React.ForwardedRef<HTMLDivElement>,
+    props: Omit<
+      Props<TooltipCardProps, 'div'>,
+      'onDrag' | 'onDragEnd' | 'onDragStart' | 'onAnimationStart'
+    >,
+    ref: ForwardedRef<HTMLDivElement>,
   ) {
     const {
       animate,
@@ -53,6 +52,7 @@ export const TooltipCard = memo(
       scheme,
       shadow,
       style,
+      tone,
       ...restProps
     } = props
 
@@ -79,7 +79,9 @@ export const TooltipCard = memo(
     return (
       <MotionCard
         data-ui="Tooltip__card"
-        {...(restProps as CardProps & MotionProps)}
+        {...restProps}
+        data-animate={animate ? '' : undefined}
+        className={tooltipCard()}
         data-placement={placement}
         padding={padding}
         radius={radius}
@@ -92,6 +94,7 @@ export const TooltipCard = memo(
         initial={animate ? ['hidden', 'initial'] : undefined}
         animate={animate ? ['visible', 'scaleIn'] : undefined}
         exit={animate ? ['hidden', 'scaleOut'] : undefined}
+        tone={tone}
       >
         {children}
 
@@ -108,4 +111,5 @@ export const TooltipCard = memo(
     )
   }),
 )
+
 TooltipCard.displayName = 'Memo(ForwardRef(TooltipCard))'

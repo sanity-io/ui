@@ -1,8 +1,11 @@
 import {Card, Container, Label, Select, Stack} from '@sanity/ui'
-import {useBoolean} from '@sanity/ui-workshop'
+import {useBoolean, useSelect} from '@sanity/ui-workshop'
+
+import {WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '../../../../../workshop/constants'
 
 export default function PlainStory() {
   const disabled = useBoolean('Disabled', false, 'Props')
+  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2, 'Props')
   const readOnly = useBoolean('Read only', false, 'Props')
 
   return (
@@ -13,7 +16,7 @@ export default function PlainStory() {
             Select
           </Label>
 
-          <Select disabled={disabled} id="select-example" readOnly={readOnly}>
+          <Select disabled={disabled} fontSize={fontSize} id="select-example" readOnly={readOnly}>
             <option value="a">Option A</option>
             <option value="b">Option B</option>
             <option value="c">Option C</option>

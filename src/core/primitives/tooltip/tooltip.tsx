@@ -8,11 +8,15 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {composeClassNames, RadiusStyleProps, ShadowStyleProps, tooltip} from '@sanity/ui/css'
+import type {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
   cloneElement,
+  ForwardedRef,
   forwardRef,
+  ReactElement,
+  ReactNode,
   useCallback,
   useEffect,
   useId,
@@ -22,14 +26,13 @@ import {
   useRef,
   useState,
 } from 'react'
-import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
 
+import {useTheme_v2} from '../../_compat'
 import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
-import {useTheme_v2} from '../../theme'
-import type {Placement} from '../../types'
+import type {Placement, Props} from '../../types'
 import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {getElementRef} from '../../utils/getElementRef'
 import type {Delay} from '../types'
@@ -44,22 +47,20 @@ import {useTooltipDelayGroup} from './tooltipDelayGroup'
 /**
  * @public
  */
-export interface TooltipProps extends Omit<LayerProps, 'as'> {
+export interface TooltipProps extends Omit<LayerProps, 'as'>, RadiusStyleProps, ShadowStyleProps {
   /** @deprecated Use `fallbackPlacements` instead. */
   allowedAutoPlacements?: Placement[]
+  /**
+   * Whether the tooltip should animate in and out.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  animate?: boolean
   arrow?: boolean
   boundaryElement?: HTMLElement | null
-  children?: React.JSX.Element
-  content?: React.ReactNode
-  disabled?: boolean
-  fallbackPlacements?: Placement[]
-  padding?: number | number[]
-  placement?: Placement
-  /** Whether or not to render the tooltip in a portal element. */
-  portal?: boolean | string
-  radius?: number | number[]
-  scheme?: ThemeColorSchemeKey
-  shadow?: number | number[]
+  children?: ReactElement<Props>
+  content?: ReactNode
   /**
    * Adds a delay to open or close the tooltip.
    *
@@ -71,18 +72,14 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
    * @defaultValue 0
    */
   delay?: Delay
-  /**
-   * Whether the tooltip should animate in and out.
-   *
-   * @beta
-   * @defaultValue false
-   */
-  animate?: boolean
+  disabled?: boolean
+  fallbackPlacements?: Placement[]
+  placement?: Placement
+  /** Whether or not to render the tooltip in a portal element. */
+  portal?: boolean | string
+  scheme?: ThemeColorSchemeKey
+  tone?: ThemeColorCardToneKey
 }
-
-const StyledTooltip = styled(Layer)`
-  pointer-events: none;
-`
 
 /**
  * Tooltips display information when hovering, focusing or tapping.
@@ -90,8 +87,8 @@ const StyledTooltip = styled(Layer)`
  * @public
  */
 export const Tooltip = forwardRef(function Tooltip(
-  props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+  props: Props<TooltipProps, 'div'>,
+  forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
   const {layer} = useTheme_v2()
@@ -100,18 +97,20 @@ export const Tooltip = forwardRef(function Tooltip(
     arrow: arrowProp = false,
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
+    className,
     content,
+    delay,
     disabled,
     fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
       DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     padding = 2,
     placement: placementProp = 'bottom',
     portal: portalProp,
-    radius = 2,
+    radius = 3,
     scheme,
     shadow = 2,
     zOffset = layer.tooltip.zOffset,
-    delay,
+    tone,
     ...restProps
   } = props
   const prefersReducedMotion = usePrefersReducedMotion()
@@ -363,10 +362,11 @@ export const Tooltip = forwardRef(function Tooltip(
 
   if (disabled) return child
 
-  const tooltip = (
-    <StyledTooltip
+  const node = (
+    <Layer
       data-ui="Tooltip"
-      {...restProps}
+      // {...restProps}
+      className={composeClassNames(className, tooltip())}
       ref={setFloating}
       style={{
         ...floatingStyles,
@@ -389,20 +389,21 @@ export const Tooltip = forwardRef(function Tooltip(
         ref={setFloating}
         scheme={scheme}
         shadow={shadow}
+        tone={tone}
       >
         {content}
       </TooltipCard>
-    </StyledTooltip>
+    </Layer>
   )
 
   const children =
     showTooltip &&
     (portalProp ? (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        {tooltip}
+        {node}
       </Portal>
     ) : (
-      tooltip
+      node
     ))
 
   return (
@@ -415,11 +416,12 @@ export const Tooltip = forwardRef(function Tooltip(
     </>
   )
 })
+
 Tooltip.displayName = 'ForwardRef(Tooltip)'
 
 /**
  * As `useEffectEvent` should never be passed to other components or hooks, this custom hook groups together the `useEffectEvent` and the `useEffect` hook using it.
- * @see https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events:~:text=Never%20pass%20them%20to%20other%20components%20or%20Hooks
+ * @see https://19.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events:~:text=Never%20pass%20them%20to%20other%20components%20or%20Hooks
  */
 function useCloseOnMouseLeave({
   handleIsOpenChange,
@@ -433,7 +435,7 @@ function useCloseOnMouseLeave({
   isInsideGroup: boolean
 }) {
   // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
-  // we use a "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
+  // we use a "effect event" (https://19.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
   // in order to always see the latest `referenceElement` value inside the event handler itself.
   const onMouseMove = useEffectEvent((target: EventTarget | null, teardown: () => void) => {
     if (!referenceElement) return

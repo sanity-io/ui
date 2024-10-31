@@ -1,16 +1,16 @@
-import {useCallback} from 'react'
+import {KeyboardEvent, ReactElement, ReactNode, useCallback} from 'react'
 
 import {_isEnterToClickElement} from '../../helpers'
 
 export interface AutocompleteOptionProps {
-  children: React.ReactNode
+  children: ReactNode
   id: string
   onSelect: (v: string) => void
   selected: boolean
   value: string
 }
 
-export function AutocompleteOption(props: AutocompleteOptionProps): React.JSX.Element {
+export function AutocompleteOption(props: AutocompleteOptionProps): ReactElement {
   const {children, id, onSelect, selected, value} = props
 
   const handleClick = useCallback(() => {
@@ -22,7 +22,7 @@ export function AutocompleteOption(props: AutocompleteOptionProps): React.JSX.El
   }, [onSelect, value])
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLLIElement>) => {
+    (event: KeyboardEvent<HTMLLIElement>) => {
       if (event.key === 'Enter' && !_isEnterToClickElement(event.currentTarget)) {
         handleClick()
       }

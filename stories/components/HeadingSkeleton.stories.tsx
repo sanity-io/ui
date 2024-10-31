@@ -1,6 +1,7 @@
+import {FontHeadingSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {HeadingSkeleton, Skeleton} from '../../src/core/components'
+import {HeadingSkeleton, HeadingSkeletonProps, Skeleton} from '../../src/core/components'
 import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
@@ -31,7 +32,7 @@ export default meta
 type Story = StoryObj<typeof Skeleton>
 
 export const Default: Story = {
-  render: (props) => <HeadingSkeleton {...props} />,
+  render: (props) => <HeadingSkeleton {...(props as HeadingSkeletonProps)} />,
 }
 
 export const Sizes: Story = {
@@ -41,7 +42,9 @@ export const Sizes: Story = {
       <>
         {columnBuilder({
           gap: 4,
-          renderItem: ({value, index}) => <HeadingSkeleton {...props} key={index} size={value} />,
+          renderItem: ({value, index}) => (
+            <HeadingSkeleton {...props} key={index} size={value as FontHeadingSize} />
+          ),
           rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
         })}
       </>

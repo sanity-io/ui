@@ -1,10 +1,20 @@
-import {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
-import {styled} from 'styled-components'
+import {
+  ForwardedRef,
+  forwardRef,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
+import {useTheme_v2} from '../../_compat'
 import {_isScrollable} from '../../helpers'
 import {_ResizeObserver} from '../../observers'
-import {StackProps} from '../../primitives'
-import {useTheme_v2} from '../../theme'
+import {Box, StackProps} from '../../primitives'
+import {Props} from '../../types'
 
 /**
  * @beta
@@ -21,34 +31,21 @@ export interface VirtualListChangeOpts {
 /**
  * @beta
  */
-export interface VirtualListProps<Item = any> {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface VirtualListProps<Item = any> extends Omit<StackProps, 'gap'> {
   gap?: number
   getItemKey?: (item: Item, itemIndex: number) => string
   items?: Item[]
   onChange?: (opts: VirtualListChangeOpts) => void
-  renderItem?: (item: Item) => React.ReactNode
+  renderItem?: (item: Item) => ReactNode
 }
-
-const StyledVirtualList = styled.div`
-  position: relative;
-`
-
-const ItemWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-`
 
 /**
  * @beta
  */
 export const VirtualList = forwardRef(function VirtualList(
-  props: VirtualListProps &
-    StackProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange' | 'ref'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
-): React.JSX.Element {
+  props: Props<VirtualListProps, 'div'>,
+  forwardedRef: ForwardedRef<HTMLDivElement>,
+): ReactElement {
   const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
   const {space} = useTheme_v2()
   const ref = useRef<HTMLDivElement | null>(null)
@@ -135,7 +132,11 @@ export const VirtualList = forwardRef(function VirtualList(
     if (!renderItem || items.length === 0) return null
 
     if (itemHeight === -1) {
-      return [<ItemWrapper key={0}>{renderItem(items[0])}</ItemWrapper>]
+      return [
+        <Box insetTop={0} insetLeft={0} key={0} position="absolute">
+          {renderItem(items[0])}
+        </Box>,
+      ]
     }
 
     return items.slice(fromIndex, toIndex).map((item, _itemIndex) => {
@@ -144,9 +145,14 @@ export const VirtualList = forwardRef(function VirtualList(
       const key = getItemKey ? getItemKey(item, itemIndex) : itemIndex
 
       return (
-        <ItemWrapper key={key} style={{top: itemIndex * (itemHeight + space[gap])}}>
+        <Box
+          insetLeft={0}
+          key={key}
+          position="absolute"
+          style={{top: itemIndex * (itemHeight + space[gap])}}
+        >
           {node}
-        </ItemWrapper>
+        </Box>
       )
     })
   }, [fromIndex, gap, getItemKey, itemHeight, items, renderItem, space, toIndex])
@@ -154,13 +160,21 @@ export const VirtualList = forwardRef(function VirtualList(
   const wrapperStyle = useMemo(() => ({height}), [height])
 
   return (
-    <StyledVirtualList as={as} data-ui="VirtualList" {...restProps} ref={ref}>
+    <Box
+      // Root
+      as={as}
+      data-ui="VirtualList"
+      {...restProps}
+      position="relative"
+      ref={ref}
+    >
       <div ref={wrapperRef} style={wrapperStyle}>
         {children}
       </div>
-    </StyledVirtualList>
+    </Box>
   )
 })
+
 VirtualList.displayName = 'ForwardRef(VirtualList)'
 
 function findScrollable(parentNode: ParentNode | null) {
