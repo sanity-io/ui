@@ -1,39 +1,25 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
+import {composeClassNames, FontStyleProps, heading, ResponsiveProp} from '@sanity/ui/css'
+import {FontHeadingSize} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {
-  ResponsiveFontStyleProps,
-  responsiveHeadingFont,
-  responsiveTextAlignStyle,
-  ResponsiveTextAlignStyleProps,
-} from '../../styles/internal'
-import {TextAlign} from '../../types'
-import {headingBaseStyle} from './styles'
-import {HeadingStyleProps} from './types'
+import {styled} from '../../lib/styled'
 
 /**
  * @public
  */
-export interface HeadingProps {
+export interface HeadingProps extends FontStyleProps {
   accent?: boolean
-  align?: TextAlign | TextAlign[]
   as?: React.ElementType | keyof JSX.IntrinsicElements
   muted?: boolean
-  size?: number | number[]
+  size?: ResponsiveProp<FontHeadingSize>
   /**
    * Controls how overflowing text is treated.
    * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
    * @beta
    */
   textOverflow?: 'ellipsis'
-  weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div<
-  HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
->(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
-
+// todo
 const SpanWithTextOverflow = styled.span`
   display: block;
   white-space: nowrap;
@@ -54,7 +40,9 @@ export const Heading = forwardRef(function Heading(
   const {
     accent = false,
     align,
+    as: As = 'div',
     children: childrenProp,
+    className,
     muted = false,
     size = 2,
     textOverflow,
@@ -69,18 +57,26 @@ export const Heading = forwardRef(function Heading(
   }
 
   return (
-    <Root
+    <As
       data-ui="Heading"
       {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
-      $size={useArrayProp(size)}
-      $weight={weight}
+      // todo
+      // $align={useArrayProp(align)}
+      className={composeClassNames(
+        className,
+        heading({
+          accent,
+          align,
+          muted,
+          size,
+          weight,
+        }),
+      )}
       ref={ref}
     >
       <span>{children}</span>
-    </Root>
+    </As>
   )
 })
+
 Heading.displayName = 'ForwardRef(Heading)'

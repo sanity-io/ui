@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
-import {styled} from 'styled-components'
 import {_isScrollable} from '../../helpers'
+import {styled} from '../../lib/styled'
 import {_ResizeObserver} from '../../observers'
 import {StackProps} from '../../primitives'
 import {useTheme_v2} from '../../theme'

@@ -1,24 +1,18 @@
 import {CloseIcon} from '@sanity/icons'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
+import {
+  composeClassNames,
+  RadiusStyleProps,
+  ResponsiveProp,
+  textInput,
+  textInputElement,
+} from '@sanity/ui/css'
+import {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
-import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp, useCustomValidity} from '../../hooks'
-import {
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-  responsiveInputPaddingStyle,
-  TextInputInputStyleProps,
-  TextInputRepresentationStyleProps,
-  TextInputResponsivePaddingStyleProps,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-  textInputRepresentationStyle,
-  textInputRootStyle,
-} from '../../styles/internal'
+import {styled} from '../../lib/styled'
 import {useRootTheme} from '../../theme'
-import {Radius} from '../../types'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
 import {Card} from '../card'
@@ -50,7 +44,7 @@ export type TextInputType =
 /**
  * @public
  */
-export interface TextInputProps {
+export interface TextInputProps extends RadiusStyleProps {
   /**
    * @beta
    */
@@ -61,82 +55,27 @@ export interface TextInputProps {
    */
   clearButton?: boolean | TextInputClearButtonProps
   customValidity?: string
-  fontSize?: number | number[]
+  fontSize?: ResponsiveProp<FontTextSize>
   icon?: React.ElementType | React.ReactNode
   iconRight?: React.ElementType | React.ReactNode
   /**
    * @beta
    */
   onClear?: () => void
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   prefix?: React.ReactNode
-  radius?: Radius | Radius[]
-  space?: number | number[]
+  space?: ResponsiveProp<Space>
   suffix?: React.ReactNode
   type?: TextInputType
   weight?: ThemeFontWeightKey
 }
 
-const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
-
-const Root = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
-
-const InputRoot = styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`
-
-const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
-const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
-const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-)
-
-const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle,
-)
-
-const LeftBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`
-
-const RightBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
-const RightCard = styled(Card)`
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-`
+const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {
+  backgroundColor: 'transparent',
+  top: 0,
+  right: 0,
+  zIndex: 2,
+}
 
 const TextInputClearButton = styled(Button)({
   '&:not([hidden])': {
@@ -156,6 +95,7 @@ export const TextInput = forwardRef(function TextInput(
   const {
     __unstable_disableFocusRing,
     border = true,
+    className,
     clearButton,
     disabled = false,
     fontSize: fontSizeProp = 2,
@@ -166,11 +106,11 @@ export const TextInput = forwardRef(function TextInput(
     prefix,
     radius: radiusProp = 2,
     readOnly,
-    space: spaceProp = 3,
+    space: _space = 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     suffix,
     customValidity,
     type = 'text',
-    weight,
+    weight: _width, // eslint-disable-line @typescript-eslint/no-unused-vars
     ...restProps
   } = props
   const ref = useRef<HTMLInputElement | null>(null)
@@ -180,14 +120,14 @@ export const TextInput = forwardRef(function TextInput(
   const fontSize = useArrayProp(fontSizeProp)
   const padding = useArrayProp(paddingProp)
   const radius = useArrayProp(radiusProp)
-  const space = useArrayProp(spaceProp)
+  // const space = useArrayProp(spaceProp)
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)
-  const $hasIcon = Boolean(IconComponent)
-  const $hasIconRight = Boolean(IconRightComponent)
-  const $hasSuffix = Boolean(suffix)
-  const $hasPrefix = Boolean(prefix)
+  // const $hasIcon = Boolean(IconComponent)
+  // const $hasIconRight = Boolean(IconRightComponent)
+  // const $hasSuffix = Boolean(suffix)
+  // const $hasPrefix = Boolean(prefix)
 
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
     forwardedRef,
@@ -219,9 +159,18 @@ export const TextInput = forwardRef(function TextInput(
   const prefixNode = useMemo(
     () =>
       prefix && (
-        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border" tone="inherit">
+        <Card
+          as="span"
+          borderTop
+          borderLeft
+          borderBottom
+          className="text-input-prefix"
+          radius={radius}
+          sizing="border"
+          tone="inherit"
+        >
           <span>{prefix}</span>
-        </Prefix>
+        </Card>
       ),
     [prefix, radius],
   )
@@ -229,35 +178,41 @@ export const TextInput = forwardRef(function TextInput(
   // Render presentation (memoized)
   const presentationNode = useMemo(
     () => (
-      <Presentation
-        $hasPrefix={$hasPrefix}
-        $unstableDisableFocusRing={__unstable_disableFocusRing}
-        $hasSuffix={$hasSuffix}
-        $radius={radius}
-        $scheme={rootTheme.scheme}
-        $tone={rootTheme.tone}
+      <Card
+        as="span"
+        // $hasPrefix={$hasPrefix}
+        // $unstableDisableFocusRing={__unstable_disableFocusRing}
+        // $hasSuffix={$hasSuffix}
+        // $radius={radius}
+        // $scheme={rootTheme.scheme}
+        // $tone={rootTheme.tone}
+        // border={border}
+        className="text-input-presentation"
         data-border={border ? '' : undefined}
+        data-disable-focus-ring={__unstable_disableFocusRing ? '' : undefined}
         data-scheme={rootTheme.scheme}
         data-tone={rootTheme.tone}
+        position="absolute"
+        radius={radius}
       >
         {IconComponent && (
-          <LeftBox padding={padding}>
+          <Box as="span" padding={padding} position="absolute" style={{top: 0, left: 0}}>
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
               {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
-          </LeftBox>
+          </Box>
         )}
 
         {!$hasClearButton && IconRightComponent && (
-          <RightBox padding={padding}>
+          <Box as="span" padding={padding} position="absolute" style={{top: 0, right: 0}}>
             <Text size={fontSize}>
               {isValidElement(IconRightComponent) && IconRightComponent}
               {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
-          </RightBox>
+          </Box>
         )}
-      </Presentation>
+      </Card>
     ),
     [
       __unstable_disableFocusRing,
@@ -269,8 +224,8 @@ export const TextInput = forwardRef(function TextInput(
       radius,
       rootTheme,
       $hasClearButton,
-      $hasPrefix,
-      $hasSuffix,
+      // $hasPrefix,
+      // $hasSuffix,
     ],
   )
 
@@ -282,10 +237,11 @@ export const TextInput = forwardRef(function TextInput(
         if (v === 1) return 1
         if (v === 2) return 1
 
-        return v - 2
+        return (v as Space) - 2
       }),
     [padding],
   )
+
   const clearButtonPadding = useMemo(
     () =>
       padding.map((v) => {
@@ -293,7 +249,7 @@ export const TextInput = forwardRef(function TextInput(
         if (v === 1) return 0
         if (v === 2) return 1
 
-        return v - 1
+        return (v as Space) - 1
       }),
     [padding],
   )
@@ -306,11 +262,16 @@ export const TextInput = forwardRef(function TextInput(
       !disabled &&
       !readOnly &&
       clearButton && (
-        <RightCard
-          forwardedAs="span"
+        <Card
+          // forwardedAs="span"
           padding={clearButtonBoxPadding}
+          position="absolute"
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
+
+          // position: absolute;
+          // top: 0;
+          // right: 0;
         >
           <TextInputClearButton
             aria-label="Clear"
@@ -324,7 +285,7 @@ export const TextInput = forwardRef(function TextInput(
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
           />
-        </RightCard>
+        </Card>
       ),
     [
       clearButton,
@@ -345,31 +306,55 @@ export const TextInput = forwardRef(function TextInput(
   const suffixNode = useMemo(
     () =>
       suffix && (
-        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border" tone="inherit">
+        <Card
+          as="span"
+          borderTop
+          borderRight
+          borderBottom
+          className="text-input-suffix"
+          radius={radius}
+          sizing="border"
+          tone="inherit"
+        >
           <span>{suffix}</span>
-        </Suffix>
+        </Card>
       ),
     [radius, suffix],
   )
 
   return (
-    <Root data-ui="TextInput" tone={rootTheme.tone}>
+    <Card
+      align="center"
+      as="span"
+      className={composeClassNames(className, textInput({padding, size: fontSizeProp}))}
+      data-ui="TextInput"
+      display="flex"
+      tone={rootTheme.tone}
+    >
       {prefixNode}
 
-      <InputRoot>
-        <Input
+      <Box
+        as="span"
+        // className="text-input-wrapper"
+        flex={1}
+        // todo
+        // minWidth={0}
+        position="relative"
+      >
+        <input
           data-as="input"
-          data-scheme={rootTheme.scheme}
-          data-tone={rootTheme.tone}
+          // data-scheme={rootTheme.scheme}
+          // data-tone={rootTheme.tone}
           {...restProps}
-          $fontSize={fontSize}
-          $iconLeft={$hasIcon}
-          $iconRight={$hasIconRight || $hasClearButton}
-          $padding={padding}
-          $scheme={rootTheme.scheme}
-          $space={space}
-          $tone={rootTheme.tone}
-          $weight={weight}
+          className={textInputElement()}
+          // $fontSize={fontSize}
+          // $iconLeft={$hasIcon}
+          // $iconRight={$hasIconRight || $hasClearButton}
+          // $padding={padding}
+          // $scheme={rootTheme.scheme}
+          // $space={space}
+          // $tone={rootTheme.tone}
+          // $weight={weight}
           disabled={disabled}
           readOnly={readOnly}
           ref={ref}
@@ -378,10 +363,11 @@ export const TextInput = forwardRef(function TextInput(
 
         {presentationNode}
         {clearButtonNode}
-      </InputRoot>
+      </Box>
 
       {suffixNode}
-    </Root>
+    </Card>
   )
 })
+
 TextInput.displayName = 'ForwardRef(TextInput)'

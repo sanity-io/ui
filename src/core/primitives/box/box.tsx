@@ -1,54 +1,14 @@
+import {box, BoxStyleProps, composeClassNames, PositionStyleProps} from '@sanity/ui/css'
+import {GapStyleProps} from '@sanity/ui/css'
 import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {
-  boxStyle,
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveBoxStyle,
-  ResponsiveBoxStyleProps,
-  responsiveGridItemStyle,
-  ResponsiveGridItemStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-  responsiveMarginStyle,
-  ResponsiveMarginStyleProps,
-} from '../../styles/internal'
-import {
-  ResponsiveBoxProps,
-  ResponsiveFlexItemProps,
-  ResponsiveGridItemProps,
-  ResponsiveMarginProps,
-  ResponsivePaddingProps,
-} from '../types'
 
 /**
  * @public
  */
-export interface BoxProps
-  extends ResponsiveFlexItemProps,
-    ResponsiveBoxProps,
-    ResponsiveGridItemProps,
-    ResponsiveMarginProps,
-    ResponsivePaddingProps {
+export interface BoxProps extends BoxStyleProps, GapStyleProps, PositionStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   forwardedAs?: React.ElementType | keyof JSX.IntrinsicElements
 }
-
-const Root = styled.div<
-  FlexItemStyleProps &
-    ResponsiveBoxStyleProps &
-    ResponsiveGridItemStyleProps &
-    ResponsiveMarginStyleProps &
-    ResponsivePaddingStyleProps
->(
-  boxStyle,
-  flexItemStyle,
-  responsiveBoxStyle,
-  responsiveGridItemStyle,
-  responsiveMarginStyle,
-  responsivePaddingStyle,
-)
 
 /**
  * The `Box` component is a basic layout wrapper component which provides utility properties
@@ -57,17 +17,26 @@ const Root = styled.div<
  * @public
  */
 export const Box = forwardRef(function Box(
-  props: BoxProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
+  props: BoxProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows' | 'wrap' | 'width'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
-    as: asProp = 'div',
+    align,
+    as: As = 'div',
+    className,
     column,
     columnStart,
     columnEnd,
+    direction,
     display = 'block',
     flex,
+    gap,
+    gapX,
+    gapY,
     height,
+    inset,
+    justify,
     margin = 0,
     marginX,
     marginY,
@@ -75,6 +44,7 @@ export const Box = forwardRef(function Box(
     marginRight,
     marginBottom,
     marginLeft,
+    maxWidth,
     overflow,
     padding = 0,
     paddingX,
@@ -83,48 +53,69 @@ export const Box = forwardRef(function Box(
     paddingRight,
     paddingBottom,
     paddingLeft,
+    pointerEvents,
+    position,
     row,
     rowStart,
     rowEnd,
     sizing,
+    width,
+    wrap,
     ...restProps
   } = props
 
   return (
-    <Root
-      data-as={typeof asProp === 'string' ? asProp : undefined}
+    <As
+      data-as={typeof As === 'string' ? As : undefined}
       data-ui="Box"
       {...restProps}
-      $column={useArrayProp(column)}
-      $columnStart={useArrayProp(columnStart)}
-      $columnEnd={useArrayProp(columnEnd)}
-      $display={useArrayProp(display)}
-      $flex={useArrayProp(flex)}
-      $height={useArrayProp(height)}
-      $margin={useArrayProp(margin)}
-      $marginX={useArrayProp(marginX)}
-      $marginY={useArrayProp(marginY)}
-      $marginTop={useArrayProp(marginTop)}
-      $marginRight={useArrayProp(marginRight)}
-      $marginBottom={useArrayProp(marginBottom)}
-      $marginLeft={useArrayProp(marginLeft)}
-      $overflow={useArrayProp(overflow)}
-      $padding={useArrayProp(padding)}
-      $paddingX={useArrayProp(paddingX)}
-      $paddingY={useArrayProp(paddingY)}
-      $paddingTop={useArrayProp(paddingTop)}
-      $paddingRight={useArrayProp(paddingRight)}
-      $paddingBottom={useArrayProp(paddingBottom)}
-      $paddingLeft={useArrayProp(paddingLeft)}
-      $row={useArrayProp(row)}
-      $rowStart={useArrayProp(rowStart)}
-      $rowEnd={useArrayProp(rowEnd)}
-      $sizing={useArrayProp(sizing)}
-      as={asProp}
+      className={composeClassNames(
+        className,
+        box({
+          align,
+          column,
+          columnStart,
+          columnEnd,
+          direction,
+          display,
+          flex,
+          gap,
+          gapX,
+          gapY,
+          height,
+          inset,
+          justify,
+          overflow,
+          margin,
+          marginX,
+          marginY,
+          marginTop,
+          marginRight,
+          marginBottom,
+          marginLeft,
+          maxWidth,
+          padding,
+          paddingX,
+          paddingY,
+          paddingTop,
+          paddingRight,
+          paddingBottom,
+          paddingLeft,
+          pointerEvents,
+          position,
+          row,
+          rowStart,
+          rowEnd,
+          sizing,
+          width,
+          wrap,
+        }),
+      )}
       ref={ref}
     >
       {props.children}
-    </Root>
+    </As>
   )
 })
+
 Box.displayName = 'ForwardRef(Box)'

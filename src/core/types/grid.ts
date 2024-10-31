@@ -1,14 +1,19 @@
-/**
- * @public
- */
-export type GridAutoRows = 'auto' | 'min' | 'max' | 'fr'
+export {
+  /**
+   * @public
+   * @deprecated Use `GridAutoRows` from `@sanity/ui/css` instead.
+   */
+  type GridAutoRows,
 
-/**
- * @public
- */
-export type GridAutoCols = 'auto' | 'min' | 'max' | 'fr'
+  /**
+   * @public
+   * @deprecated Use `GridAutoCols` from `@sanity/ui/css` instead.
+   */
+  type GridAutoCols,
 
-/**
- * @public
- */
-export type GridAutoFlow = 'row' | 'column' | 'row dense' | 'column dense'
+  /**
+   * @public
+   * @deprecated Use `GridAutoFlow` from `@sanity/ui/css` instead.
+   */
+  type GridAutoFlow,
+} from '@sanity/ui/css'

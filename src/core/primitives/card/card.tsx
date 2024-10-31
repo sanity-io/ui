@@ -1,31 +1,16 @@
+import {card, CardStyleProps, composeClassNames} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
+import {forwardRef, useContext} from 'react'
 import {isValidElementType} from 'react-is'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {
-  responsiveBorderStyle,
-  ResponsiveBorderStyleProps,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-  responsiveShadowStyle,
-  ResponsiveShadowStyleProps,
-} from '../../styles/internal'
 import {ThemeColorProvider, useRootTheme} from '../../theme'
 import {CardTone} from '../../types'
 import {Box, BoxProps} from '../box'
-import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
-import {cardStyle} from './styles'
-import {CardStyleProps} from './types'
+import {RootCardContext} from './RootCardContext'
 
 /**
  * @public
  */
-export interface CardProps
-  extends BoxProps,
-    ResponsiveBorderProps,
-    ResponsiveRadiusProps,
-    ResponsiveShadowProps {
+export interface CardProps extends BoxProps, CardStyleProps {
   /**
    * Do not use in production.
    * @beta
@@ -42,13 +27,6 @@ export interface CardProps
   tone?: CardTone
 }
 
-const Root = styled(Box)<
-  CardStyleProps &
-    ResponsiveRadiusStyleProps &
-    ResponsiveBorderStyleProps &
-    ResponsiveShadowStyleProps
->(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
-
 /**
  * The `Card` component acts much like a `Box`, but with a background and foreground color.
  * Components within a `Card` inherit its colors.
@@ -56,7 +34,7 @@ const Root = styled(Box)<
  * @public
  */
 export const Card = forwardRef(function Card(
-  props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
+  props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width' | 'wrap'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -68,48 +46,65 @@ export const Card = forwardRef(function Card(
     borderRight,
     borderBottom,
     borderLeft,
+    className,
     muted,
     pressed,
     radius = 0,
     scheme,
     selected,
     shadow,
+    style,
     tone: toneProp = 'default',
     ...restProps
   } = props
 
   const as = isValidElementType(asProp) ? asProp : 'div'
+  const rootCard = useContext(RootCardContext)
   const rootTheme = useRootTheme()
+
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
 
-  // todo: Consider adding the wrapper approach for nested cards in which the tones are not changing, avoid unnecessary ThemeColorProvider
-  return (
+  // todo: Consider adding the wrapper approach for nested cards in which the tones are not
+  // changing, avoid unnecessary ThemeColorProvider
+  const node = (
     <ThemeColorProvider scheme={scheme} tone={tone}>
-      <Root
+      <Box
         data-as={typeof as === 'string' ? as : undefined}
         data-scheme={rootTheme.scheme}
         data-ui="Card"
         data-tone={tone}
         {...restProps}
-        $border={useArrayProp(border)}
-        $borderTop={useArrayProp(borderTop)}
-        $borderRight={useArrayProp(borderRight)}
-        $borderBottom={useArrayProp(borderBottom)}
-        $borderLeft={useArrayProp(borderLeft)}
-        $checkered={checkered}
-        $focusRing={focusRing}
-        $muted={muted}
-        $radius={useArrayProp(radius)}
-        $shadow={useArrayProp(shadow)}
-        $tone={tone}
+        as={as}
+        className={composeClassNames(
+          className,
+          // rootCard ? undefined : 'root',
+          card({
+            border,
+            borderTop,
+            borderRight,
+            borderBottom,
+            borderLeft,
+            radius,
+            shadow,
+          }),
+        )}
         data-checkered={checkered ? '' : undefined}
+        data-focus-ring={focusRing ? '' : undefined}
+        data-muted={muted ? '' : undefined}
         data-pressed={pressed ? '' : undefined}
         data-selected={selected ? '' : undefined}
-        forwardedAs={as}
         ref={ref}
         selected={selected}
+        style={style}
       />
     </ThemeColorProvider>
   )
+
+  if (!rootCard) {
+    return <RootCardContext.Provider value={{renderedVars: true}}>{node}</RootCardContext.Provider>
+  }
+
+  return node
 })
+
 Card.displayName = 'ForwardRef(Card)'

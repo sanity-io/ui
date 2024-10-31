@@ -1,5 +1,6 @@
 import {icons, IconSymbol} from '@sanity/icons'
 import {Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
+import {FontTextSize, Radius} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
@@ -79,14 +80,15 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       border={border}
       customValidity={customValidity}
       disabled={disabled}
-      fontSize={fontSize}
+      fontSize={fontSize as FontTextSize}
       icon={icon && icons[icon]}
       iconRight={iconRight && icons[iconRight]}
       id="text-input-example"
+      name="test"
       onChange={handleChange}
       padding={padding}
       placeholder={placeholder}
-      radius={radius}
+      radius={radius as Radius}
       readOnly={readOnly}
       ref={ref}
       space={space}

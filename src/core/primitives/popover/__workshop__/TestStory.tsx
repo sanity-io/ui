@@ -1,3 +1,4 @@
+import {Radius} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {ReactElement, useRef, useState} from 'react'
 import {
@@ -80,7 +81,7 @@ export default function TestStory(): ReactElement {
                   placement={placement}
                   portal={portal}
                   preventOverflow={preventOverflow}
-                  radius={radius}
+                  radius={radius as Radius}
                   updateRef={updateRef}
                   width={width}
                 >

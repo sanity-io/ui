@@ -1,19 +1,16 @@
 import {CloseIcon} from '@sanity/icons'
+import {RadiusStyleProps} from '@sanity/ui/css'
 import {ThemeColorStateToneKey} from '@sanity/ui/theme'
-import {styled} from 'styled-components'
 import {Box, Button, Flex, Stack, Text, Card} from '../../primitives'
-import {ThemeProps} from '../../styles'
 import type {ButtonTone} from '../../types'
-import {rootStyles, TextBox} from './styles'
 
 /**
  * @public
  */
-export interface ToastProps {
+export interface ToastProps extends RadiusStyleProps {
   closable?: boolean
   description?: React.ReactNode
   onClose?: () => void
-  radius?: number | number[]
   title?: React.ReactNode
   status?: 'error' | 'warning' | 'success' | 'info'
   duration?: number
@@ -40,10 +37,6 @@ const ROLES = {
   info: 'alert',
 } as const
 
-const Root = styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps>(
-  rootStyles,
-)
-
 /**
  * The `Toast` component gives feedback to users when an action has taken place.
  *
@@ -52,26 +45,48 @@ const Root = styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & T
  * @public
  */
 export function Toast(
-  props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>,
+  props: ToastProps &
+    Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'ref' | 'rows' | 'title' | 'width' | 'wrap'
+    >,
 ): React.ReactElement {
-  const {closable, description, duration, onClose, radius = 3, title, status, ...restProps} = props
+  const {
+    closable,
+    description,
+    duration, // eslint-disable-line @typescript-eslint/no-unused-vars
+    onClose,
+    radius = 3,
+    title,
+    status,
+    ...restProps
+  } = props
+
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const buttonTone = status ? BUTTON_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
 
   return (
-    <Root
+    <Card
+      // root
       data-ui="Toast"
       role={role}
       {...restProps}
       marginTop={3}
+      pointerEvents="auto"
       radius={radius}
       shadow={2}
       tone={cardTone}
-      $duration={duration}
+      // todo
+      // $duration={duration}
     >
       <Flex align="flex-start">
-        <TextBox flex={1} padding={3}>
+        <Box
+          // text-box
+          flex={1}
+          overflowX="auto"
+          padding={3}
+        >
           <Stack space={3}>
             {title && (
               <Text size={1} weight="medium">
@@ -84,7 +99,7 @@ export function Toast(
               </Text>
             )}
           </Stack>
-        </TextBox>
+        </Box>
 
         {closable && (
           <Box padding={1}>
@@ -100,7 +115,7 @@ export function Toast(
           </Box>
         )}
       </Flex>
-    </Root>
+    </Card>
   )
 }
 

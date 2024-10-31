@@ -1,6 +1,6 @@
 import {getTheme_v2} from '@sanity/ui/theme'
-import {css} from 'styled-components'
-import {ThemeProps} from '../../styles'
+import {ThemeProps} from '../../_compat'
+import {css} from '../../lib/styled'
 
 export function labelBaseStyle(
   props: {$accent?: boolean; $muted: boolean} & ThemeProps,

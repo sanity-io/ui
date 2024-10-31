@@ -1,6 +1,6 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
-import {rem, _responsive, ThemeProps} from '../../styles'
-import {focusRingStyle} from '../../styles/internal'
+import {rem, _responsive, ThemeProps} from '../../_compat'
+import {focusRingStyle} from '../../_compat/styles/internal'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
 export const avatarStyle = {

@@ -1,5 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Button, Flex} from '@sanity/ui'
+import {FontTextSize} from '@sanity/ui/theme'
 import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
@@ -17,6 +18,7 @@ export default function ButtonStory() {
   const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS, 'add-circle', 'Props')
   const iconRight = useSelect('Icon (right)', WORKSHOP_ICON_SYMBOL_OPTIONS, '', 'Props')
   const justify = useSelect('Justify', WORKSHOP_FLEX_JUSTIFY_OPTIONS, 'center', 'Props')
+  const loading = useBoolean('Loading', false, 'Props')
   const mode = useSelect('Mode', WORKSHOP_BUTTON_MODE_OPTIONS, 'default', 'Props')
   const paddingX = useSelect('Padding X', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const paddingY = useSelect('Padding Y', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
@@ -31,10 +33,11 @@ export default function ButtonStory() {
     <Flex align="center" height="fill" justify="center">
       <Button
         disabled={disabled}
-        fontSize={fontSize}
+        fontSize={fontSize as FontTextSize}
         icon={icon && icons[icon]}
         iconRight={iconRight && icons[iconRight]}
         justify={justify}
+        loading={loading}
         mode={mode}
         onClick={useAction('onClick')}
         paddingX={paddingX}

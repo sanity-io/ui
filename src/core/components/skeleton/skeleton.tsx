@@ -1,21 +1,12 @@
-import {forwardRef, useEffect, useState} from 'react'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {Box} from '../../primitives'
-import {BoxProps, ResponsiveRadiusProps} from '../../primitives'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {skeletonStyle} from './styles'
-
-const Root = styled(Box)<{$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  skeletonStyle,
-)
+import {composeClassNames, skeleton, SkeletonStyleProps} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef, HTMLProps, useEffect, useState} from 'react'
+import {Box, BoxProps} from '../../primitives'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxProps, 'children'> {
+export interface SkeletonProps extends SkeletonStyleProps, Omit<BoxProps, 'children'> {
   animated?: boolean
   delay?: number
 }
@@ -25,10 +16,11 @@ export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxProps, 'ch
  * @beta
  */
 export const Skeleton = forwardRef(function Skeleton(
-  props: SkeletonProps & React.HTMLProps<HTMLDivElement>,
-  ref: React.Ref<HTMLDivElement>,
+  props: SkeletonProps &
+    Omit<HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows' | 'width' | 'wrap'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {animated = false, delay, radius, ...restProps} = props
+  const {animated = false, className, delay, radius, ...restProps} = props
   const [visible, setVisible] = useState<boolean>(delay ? false : true)
 
   useEffect(() => {
@@ -46,13 +38,15 @@ export const Skeleton = forwardRef(function Skeleton(
   }, [delay])
 
   return (
-    <Root
+    <Box
+      data-ui="Skeleton"
       {...restProps}
-      $animated={animated}
-      $radius={useArrayProp(radius)}
-      $visible={visible}
+      className={composeClassNames(className, skeleton({radius}))}
+      data-animated={animated ? '' : undefined}
+      data-visible={visible ? '' : undefined}
       ref={ref}
     />
   )
 })
+
 Skeleton.displayName = 'ForwardRef(Skeleton)'

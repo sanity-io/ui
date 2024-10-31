@@ -1,4 +1,5 @@
 import {Autocomplete, Box, Card, Container, Stack, Text} from '@sanity/ui'
+import {FontTextSize, Radius} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
@@ -57,14 +58,14 @@ export default function ExampleStory() {
                 border={border}
                 customValidity={customValidity}
                 disabled={disabled}
-                fontSize={fontSize}
+                fontSize={fontSize as FontTextSize}
                 onChange={handleChange}
                 id="default"
                 openButton={openButton}
                 options={options}
                 padding={padding}
                 placeholder="Search"
-                radius={radius}
+                radius={radius as Radius}
                 readOnly={readOnly}
                 ref={ref}
                 value={value}

@@ -9,6 +9,7 @@ import {
   type Middleware,
   type RootBoundary,
 } from '@floating-ui/react-dom'
+import {composeClassNames, RadiusStyleProps, tooltip} from '@sanity/ui/css'
 import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
@@ -23,7 +24,6 @@ import {
   useImperativeHandle,
   useLayoutEffect,
 } from 'react'
-import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
 import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
@@ -43,7 +43,7 @@ import {useTooltipDelayGroup} from './tooltipDelayGroup'
 /**
  * @public
  */
-export interface TooltipProps extends Omit<LayerProps, 'as'> {
+export interface TooltipProps extends Omit<LayerProps, 'as'>, RadiusStyleProps {
   /** @deprecated Use `fallbackPlacements` instead. */
   allowedAutoPlacements?: Placement[]
   arrow?: boolean
@@ -56,7 +56,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   placement?: Placement
   /** Whether or not to render the tooltip in a portal element. */
   portal?: boolean | string
-  radius?: number | number[]
+  // radius?: number | number[]
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
   /**
@@ -79,17 +79,14 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   animate?: boolean
 }
 
-const Root = styled(Layer)`
-  pointer-events: none;
-`
-
 /**
  * Tooltips display information when hovering, focusing or tapping.
  *
  * @public
  */
 export const Tooltip = forwardRef(function Tooltip(
-  props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
+  props: TooltipProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width' | 'wrap'>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
@@ -99,6 +96,7 @@ export const Tooltip = forwardRef(function Tooltip(
     arrow: arrowProp = false,
     boundaryElement = boundaryElementContext?.element,
     children: childProp,
+    className,
     content,
     disabled,
     fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
@@ -364,10 +362,11 @@ export const Tooltip = forwardRef(function Tooltip(
 
   if (disabled) return child
 
-  const tooltip = (
-    <Root
+  const node = (
+    <Layer
       data-ui="Tooltip"
       {...restProps}
+      className={composeClassNames(className, tooltip())}
       ref={setFloating}
       style={{
         ...floatingStyles,
@@ -393,17 +392,17 @@ export const Tooltip = forwardRef(function Tooltip(
       >
         {content}
       </TooltipCard>
-    </Root>
+    </Layer>
   )
 
   const children =
     showTooltip &&
     (portalProp ? (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        {tooltip}
+        {node}
       </Portal>
     ) : (
-      tooltip
+      node
     ))
 
   return (
@@ -416,6 +415,7 @@ export const Tooltip = forwardRef(function Tooltip(
     </>
   )
 })
+
 Tooltip.displayName = 'ForwardRef(Tooltip)'
 
 /**

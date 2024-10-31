@@ -1,4 +1,5 @@
 /** @jest-environment jsdom */
+
 import {screen, act, fireEvent} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 import '../../../../test/mocks/matchMedia.mock'

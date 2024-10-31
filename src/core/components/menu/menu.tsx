@@ -1,8 +1,8 @@
+import {PaddingStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
 import {useClickOutsideEvent, useGlobalKeyDown} from '../../hooks'
 import {Box, Stack} from '../../primitives'
-import {ResponsivePaddingProps} from '../../primitives/types'
 import {useLayer} from '../../utils'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenuController} from './useMenuController'
@@ -10,7 +10,7 @@ import {useMenuController} from './useMenuController'
 /**
  * @public
  */
-export interface MenuProps extends ResponsivePaddingProps {
+export interface MenuProps extends PaddingStyleProps {
   /**
    * @deprecated Use `shouldFocus="first"` instead.
    */
@@ -26,15 +26,10 @@ export interface MenuProps extends ResponsivePaddingProps {
   'originElement'?: HTMLElement | null
   'registerElement'?: (el: HTMLElement) => () => void
   'shouldFocus'?: 'first' | 'last' | null
-  'space'?: number | number[]
+  'space'?: ResponsiveProp<Space>
   'aria-labelledby'?: string
   'onBlurCapture'?: (event: FocusEvent) => void
 }
-
-const Root = styled(Box)`
-  outline: none;
-  overflow: auto;
-`
 
 /**
  * The `Menu` component is a building block for application menus.
@@ -42,7 +37,11 @@ const Root = styled(Box)`
  * @public
  */
 export const Menu = forwardRef(function Menu(
-  props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
+  props: MenuProps &
+    Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'role' | 'rows' | 'tabIndex' | 'width' | 'wrap'
+    >,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -79,7 +78,12 @@ export const Menu = forwardRef(function Menu(
     handleItemMouseLeave,
     handleKeyDown,
     mount,
-  } = useMenuController({onKeyDown, originElement, shouldFocus, rootElementRef: ref})
+  } = useMenuController({
+    onKeyDown,
+    originElement,
+    shouldFocus,
+    rootElementRef: ref,
+  })
 
   const unregisterElementRef = useRef<(() => void) | null>(null)
   const handleRefChange = useCallback(
@@ -159,17 +163,19 @@ export const Menu = forwardRef(function Menu(
 
   return (
     <MenuContext.Provider value={value}>
-      <Root
+      <Box
         data-ui="Menu"
         {...restProps}
         onKeyDown={handleKeyDown}
+        overflow="auto"
+        outline="none"
         padding={padding}
         ref={handleRefChange}
         role="menu"
         tabIndex={-1}
       >
         <Stack space={space}>{children}</Stack>
-      </Root>
+      </Box>
     </MenuContext.Provider>
   )
 })

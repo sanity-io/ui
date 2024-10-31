@@ -1,8 +1,7 @@
 import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
+import {checkbox, checkboxInput, composeClassNames} from '@sanity/ui/css'
 import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 import {useCustomValidity} from '../../hooks'
-import {checkboxBaseStyles, inputElementStyles} from './styles'
 
 /**
  * @public
@@ -11,9 +10,6 @@ export interface CheckboxProps {
   indeterminate?: boolean
   customValidity?: string
 }
-
-const Root = styled.div(checkboxBaseStyles)
-const Input = styled.input(inputElementStyles)
 
 /**
  * Checkboxes allow the user to select one or more items from a set.
@@ -51,12 +47,13 @@ export const Checkbox = forwardRef(function Checkbox(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root className={className} data-ui="Checkbox" style={style}>
-      <Input
+    <span className={composeClassNames(className, checkbox())} data-ui="Checkbox" style={style}>
+      <input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
         {...restProps}
         checked={checked}
+        className={composeClassNames(className, checkboxInput())}
         disabled={disabled || readOnly}
         type="checkbox"
         readOnly={readOnly}
@@ -66,7 +63,8 @@ export const Checkbox = forwardRef(function Checkbox(
         <CheckmarkIcon />
         <RemoveIcon />
       </span>
-    </Root>
+    </span>
   )
 })
+
 Checkbox.displayName = 'ForwardRef(Checkbox)'

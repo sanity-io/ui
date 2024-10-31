@@ -1,19 +1,25 @@
-/**
- * @public
- */
-export type BoxSizing = 'content' | 'border'
+export {
+  /**
+   * @public
+   * @deprecated use `Display` from `@sanity/ui/css` instead.
+   */
+  type Display as BoxDisplay,
 
-/**
- * @public
- */
-export type BoxDisplay = 'none' | 'block' | 'grid' | 'flex' | 'inline-block'
+  /**
+   * @public
+   * @deprecated use `BoxHeight` from `@sanity/ui/css` instead.
+   */
+  type BoxHeight,
 
-/**
- * @public
- */
-export type BoxHeight = 'stretch' | 'fill'
+  /**
+   * @public
+   * @deprecated use `Overflow` from `@sanity/ui/css` instead.
+   */
+  type BoxOverflow,
 
-/**
- * @public
- */
-export type BoxOverflow = 'visible' | 'hidden' | 'auto'
+  /**
+   * @public
+   * @deprecated use `BoxSizing` from `@sanity/ui/css` instead.
+   */
+  type BoxSizing,
+} from '@sanity/ui/css'

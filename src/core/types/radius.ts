@@ -1,4 +1,7 @@
-/**
- * @public
- */
-export type Radius = number | 'full'
+export {
+  /**
+   * @public
+   * @deprecated
+   */
+  type Radius,
+} from '@sanity/ui/theme'

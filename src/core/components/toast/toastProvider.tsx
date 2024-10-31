@@ -1,6 +1,5 @@
 import {AnimatePresence, motion, type Variants} from 'framer-motion'
 import {useMemo, useRef, useState, startTransition, useEffect} from 'react'
-import {styled} from 'styled-components'
 import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {useMounted} from '../../hooks/useMounted'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
@@ -27,24 +26,6 @@ export interface ToastProviderProps {
   paddingY?: number | number[]
   zOffset?: number | number[]
 }
-
-const Root = styled(Layer)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-`
-
-const ToastContainer = styled.div`
-  box-sizing: border-box;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  max-width: 420px;
-  width: 100%;
-`
 
 /**
  * @public
@@ -152,8 +133,27 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
     <ToastContext.Provider value={value}>
       {children}
       {mounted && (
-        <Root data-ui="ToastProvider" zOffset={zOffset}>
-          <ToastContainer>
+        <Layer
+          // root
+          data-ui="ToastProvider"
+          inset={0}
+          pointerEvents="none"
+          position="fixed"
+          zOffset={zOffset}
+          width="fill"
+        >
+          <Box
+            // container
+            position="absolute"
+            sizing="border"
+            style={{
+              // todo: move to css?
+              right: 0,
+              bottom: 0,
+              maxWidth: 420,
+            }}
+            width="fill"
+          >
             <Box padding={padding} paddingX={paddingX} paddingY={paddingY}>
               <AnimatePresence initial={false}>
                 {state.map(({dismiss, id, params}) => (
@@ -182,8 +182,8 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
                 ))}
               </AnimatePresence>
             </Box>
-          </ToastContainer>
-        </Root>
+          </Box>
+        </Layer>
       )}
     </ToastContext.Provider>
   )

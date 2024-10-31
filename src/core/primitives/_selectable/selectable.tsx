@@ -1,14 +1,27 @@
-import {styled} from 'styled-components'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/radius'
-import {Box} from '../box'
-import {selectableBaseStyle, selectableColorStyle, SelectableStyleProps} from './style'
+import {composeClassNames, selectable, SelectableStyleProps} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef, HTMLProps} from 'react'
+import {SelectableTone} from '../../types'
+import {Box, BoxProps} from '../box'
 
-/**
- * @internal
- */
-export const Selectable = styled(Box)<SelectableStyleProps & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  selectableBaseStyle,
-  selectableColorStyle,
-)
-Selectable.displayName = 'Selectable'
+/** @internal */
+export interface SelectableProps extends BoxProps, SelectableStyleProps {
+  tone?: SelectableTone
+}
+
+/** @internal */
+export const Selectable = forwardRef(function Selectable(
+  props: SelectableProps & Omit<HTMLProps<HTMLDivElement>, 'as' | 'height' | 'wrap' | 'width'>,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
+  const {className, radius, tone, ...restProps} = props
+
+  return (
+    <Box
+      {...restProps}
+      className={composeClassNames(className, selectable({radius, tone}))}
+      ref={ref}
+    />
+  )
+})
+
+Selectable.displayName = 'ForwardRef(Selectable)'

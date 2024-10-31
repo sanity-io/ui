@@ -5,18 +5,16 @@ import {
   ThemeColorCard_v2,
   ThemeColorInputMode_v2,
   ThemeColorState_v2,
-} from '@sanity/ui/theme'
-import {
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_STATE_TONES,
   ThemeColorCardToneKey,
   ThemeColorInputModeKey,
+  buildTheme,
 } from '@sanity/ui/theme'
-import {buildTheme} from '@sanity/ui/theme'
 import {ReactElement} from 'react'
-import {rem} from '../../../styles'
+import {rem} from '../../../_compat'
 import {useTheme_v2} from '../../useTheme'
 import {getCSSProps} from './helpers'
 import {Root} from './Root'

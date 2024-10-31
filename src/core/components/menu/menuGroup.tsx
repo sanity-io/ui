@@ -1,10 +1,10 @@
 import {ChevronRightIcon} from '@sanity/icons'
+import {ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
-import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
-import {useRootTheme} from '../../theme'
 import {Radius, SelectableTone} from '../../types'
 import {Menu} from './menu'
 import {useMenu} from './useMenu'
@@ -19,7 +19,7 @@ export interface MenuGroupProps {
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: Radius | Radius[]
-  space?: number | number[]
+  space?: ResponsiveProp<Space>
   text: React.ReactNode
   tone?: SelectableTone
 }
@@ -28,7 +28,10 @@ export interface MenuGroupProps {
  * @public
  */
 export function MenuGroup(
-  props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
+  props: Omit<
+    React.HTMLProps<HTMLDivElement>,
+    'as' | 'height' | 'popover' | 'ref' | 'rows' | 'tabIndex' | 'width' | 'wrap'
+  > &
     MenuGroupProps,
 ): React.ReactElement {
   const {
@@ -46,7 +49,7 @@ export function MenuGroup(
     ...restProps
   } = props
   const menu = useMenu()
-  const {scheme} = useRootTheme()
+
   const {
     activeElement,
     mount,
@@ -167,14 +170,13 @@ export function MenuGroup(
         aria-pressed={as === 'button' ? withinMenu : undefined}
         data-pressed={as !== 'button' ? withinMenu : undefined}
         data-selected={!withinMenu && active ? '' : undefined}
-        $radius={useArrayProp(radius)}
-        $tone={tone}
-        $scheme={scheme}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
+        radius={radius}
         ref={setRootElement}
         tabIndex={-1}
+        tone={tone}
         type={as === 'button' ? 'button' : undefined}
       >
         <Flex gap={space} padding={padding}>

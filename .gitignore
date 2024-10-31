@@ -3,6 +3,7 @@
 .DS_Store
 .env.local
 .workshop
+css.js
 dist
 etc
 node_modules

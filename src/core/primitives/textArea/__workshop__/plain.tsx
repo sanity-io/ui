@@ -1,4 +1,4 @@
-import {Card, Container, Flex, Stack, Text, TextArea} from '@sanity/ui'
+import {Card, Container, Flex, Radius, Stack, Text, TextArea} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {
   WORKSHOP_CARD_TONE_OPTIONS,
@@ -37,7 +37,7 @@ export default function PlainStory() {
               id="text-area-example"
               padding={padding}
               placeholder={placeholder}
-              radius={radius}
+              radius={radius as Radius}
               readOnly={readOnly}
               weight={weight}
             />

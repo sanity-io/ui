@@ -4,6 +4,7 @@ import {useCallback, useRef, useState} from 'react'
 import {WORKSHOP_WIDTH_OPTIONS} from '../../../__workshop__/constants'
 
 export default function PropsStory() {
+  const animate = useBoolean('Animate', false, 'Props')
   const header = useText('Header', 'Props example', 'Props')
   const onClickOutside = useBoolean('Close when click outside', false, 'Props') || false
   const hideCloseButton = useBoolean('Hide close button', false, 'Props') || false
@@ -29,6 +30,7 @@ export default function PropsStory() {
         {open && (
           <Dialog
             __unstable_hideCloseButton={hideCloseButton}
+            animate={animate}
             header={header}
             id="dialog"
             onClickOutside={onClickOutside ? handleClose : undefined}

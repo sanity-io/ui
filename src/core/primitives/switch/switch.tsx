@@ -1,12 +1,6 @@
+import {_switch, composeClassNames} from '@sanity/ui/css'
 import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
-import {
-  switchBaseStyles,
-  switchRepresentationStyles,
-  switchThumbStyles,
-  switchTrackStyles,
-  switchInputStyles,
-} from './styles'
+import {Box} from '../box'
 
 /**
  * @public
@@ -14,12 +8,6 @@ import {
 export interface SwitchProps {
   indeterminate?: boolean
 }
-
-const Root = styled.span(switchBaseStyles)
-const Input = styled.input(switchInputStyles)
-const Representation = styled.span(switchRepresentationStyles)
-const Track = styled.span(switchTrackStyles)
-const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.
@@ -48,20 +36,31 @@ export const Switch = forwardRef(function Switch(
   }, [indeterminate])
 
   return (
-    <Root className={className} data-ui="Switch" style={style}>
-      <Input
+    <Box
+      className={composeClassNames(className, _switch())}
+      data-ui="Switch"
+      display="inline-block"
+      position="relative"
+      style={style}
+    >
+      <input
         data-read-only={!disabled && readOnly ? '' : undefined}
         {...restProps}
         checked={indeterminate !== true && checked}
+        className="switch-input"
         disabled={disabled || readOnly}
         type="checkbox"
         ref={ref}
       />
-      <Representation aria-hidden data-name="representation">
-        <Track />
-        <Thumb $checked={checked} $indeterminate={indeterminate} />
-      </Representation>
-    </Root>
+      <span aria-hidden className="switch-presentation" data-name="representation">
+        <span className="switch-track" />
+        <span
+          className="switch-thumb"
+          data-checked={checked ? '' : undefined}
+          data-indeterminate={indeterminate ? '' : undefined}
+        />
+      </span>
+    </Box>
   )
 })
 Switch.displayName = 'ForwardRef(Switch)'

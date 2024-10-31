@@ -17,5 +17,6 @@ export type ButtonTone = ThemeColorStateToneKey
 
 /**
  * @public
+ * @deprecated Use `Width` from `@sanity/ui/css` instead.
  */
 export type ButtonWidth = 'fill'

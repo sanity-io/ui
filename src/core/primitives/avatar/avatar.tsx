@@ -1,12 +1,19 @@
+import {
+  avatar,
+  avatarArrow,
+  avatarBgStroke,
+  avatarImage,
+  avatarInitials,
+  avatarStroke,
+  composeClassNames,
+} from '@sanity/ui/css'
 import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
-import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {useTheme_v2} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
 import {Label} from '../label'
-import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
 
 /**
  * @public
@@ -30,25 +37,6 @@ export interface AvatarProps {
   title?: string
 }
 
-const Root = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
-  responsiveAvatarSizeStyle,
-  avatarStyle.root,
-)
-
-const Arrow = styled.div(avatarStyle.arrow)
-
-const BgStroke = styled.ellipse(avatarStyle.bgStroke)
-
-const Stroke = styled.ellipse(avatarStyle.stroke)
-
-const Initials = styled.div(avatarStyle.initials)
-
-const InitialsLabel = styled(Label)({
-  color: 'inherit',
-})
-
-const Image = styled.svg(avatarStyle.image)
-
 /**
  * Avatars are used to represent people and other agents (e.g. bots).
  *
@@ -61,6 +49,7 @@ export const Avatar = forwardRef(function Avatar(
   const {
     __unstable_hideInnerStroke,
     as: asProp,
+    className,
     color = 'gray',
     src,
     title,
@@ -72,12 +61,12 @@ export const Avatar = forwardRef(function Avatar(
     size: sizeProp = 1,
     ...restProps
   } = props
-  const {avatar} = useTheme_v2()
-  const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
+  const {avatar: avatarTheme} = useTheme_v2()
+  const As = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = useArrayProp(sizeProp)
 
   // @todo: remove this
-  const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
+  const avatarSize = avatarTheme.sizes[size[0]] || avatarTheme.sizes[0]
   const _sizeRem = avatarSize.size
   const _radius = _sizeRem / 2
 
@@ -124,30 +113,37 @@ export const Avatar = forwardRef(function Avatar(
   )
 
   return (
-    <Root
-      as={as}
-      data-as={typeof as === 'string' ? as : undefined}
+    <As
+      data-as={typeof As === 'string' ? As : undefined}
       data-ui="Avatar"
       {...restProps}
       $color={color}
       $size={size}
       aria-label={title}
-      data-arrow-position={arrowPosition}
+      className={composeClassNames(
+        className,
+        avatar({
+          arrowPosition,
+          color,
+          size: sizeProp,
+        }),
+      )}
+      // data-arrow-position={arrowPosition}
       data-status={status}
       ref={ref}
       title={title}
     >
-      <Arrow>
+      <span className={avatarArrow()}>
         <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
           <path
             d="M6.67948 1.50115L11 7L0 7L4.32052 1.50115C4.92109 0.736796 6.07891 0.736795 6.67948 1.50115Z"
             fill={color}
           />
         </svg>
-      </Arrow>
+      </span>
 
       {!imageFailed && src && (
-        <Image viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
+        <svg className={avatarImage()} viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
           <defs>
             <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
               <image
@@ -163,7 +159,8 @@ export const Avatar = forwardRef(function Avatar(
           <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
 
           {!__unstable_hideInnerStroke && (
-            <BgStroke
+            <ellipse
+              className={avatarBgStroke()}
               cx={_radius}
               cy={_radius}
               rx={_radius}
@@ -172,26 +169,28 @@ export const Avatar = forwardRef(function Avatar(
             />
           )}
 
-          <Stroke
+          <ellipse
+            className={avatarStroke()}
             cx={_radius}
             cy={_radius}
             rx={_radius}
             ry={_radius}
             vectorEffect="non-scaling-stroke"
           />
-        </Image>
+        </svg>
       )}
 
       {(imageFailed || !src) && initials && (
         <>
-          <Initials>
-            <InitialsLabel forwardedAs="span" size={initialsSize} weight="medium">
+          <span className={avatarInitials()}>
+            <Label as="span" size={initialsSize} style={{color: 'inherit'}} weight="medium">
               {initials}
-            </InitialsLabel>
-          </Initials>
+            </Label>
+          </span>
         </>
       )}
-    </Root>
+    </As>
   )
 })
+
 Avatar.displayName = 'ForwardRef(Avatar)'

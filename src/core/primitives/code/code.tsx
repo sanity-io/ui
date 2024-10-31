@@ -1,40 +1,49 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import {code, composeClassNames, FontStyleProps} from '@sanity/ui/css'
 import {forwardRef} from 'react'
 import Refractor from 'react-refractor'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
-import {codeBaseStyle} from './styles'
 
 /**
  * @public
  */
-export interface CodeProps {
+export interface CodeProps extends Omit<FontStyleProps, 'align'> {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   /** Define the language to use for syntax highlighting. */
   language?: string
   size?: number | number[]
-  weight?: string
 }
-
-const Root = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
 
 /**
  * @public
  */
 export const Code = forwardRef(function Code(
-  props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLElement>,
+  props: CodeProps & Omit<React.HTMLProps<HTMLPreElement>, 'as' | 'size'>,
+  ref: React.ForwardedRef<HTMLPreElement>,
 ) {
-  const {children, language: languageProp, size = 2, weight, ...restProps} = props
+  const {
+    as: As = 'pre',
+    children,
+    className,
+    language: languageProp,
+    size = 2,
+    weight,
+    ...restProps
+  } = props
   const language = typeof languageProp === 'string' ? languageProp : undefined
   const registered = language ? Refractor.hasLanguage(language as any) : false
 
   return (
-    <Root data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
+    <As
+      data-ui="Code"
+      {...restProps}
+      className={composeClassNames(className, code({size, weight}))}
+      ref={ref}
+    >
       {!(language && registered) && <code>{children}</code>}
       {language && registered && <Refractor inline language={language} value={String(children)} />}
-    </Root>
+    </As>
   )
 })
+
 Code.displayName = 'ForwardRef(Code)'

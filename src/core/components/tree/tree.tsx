@@ -1,3 +1,5 @@
+import {ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {
   forwardRef,
   memo,
@@ -18,7 +20,7 @@ import {TreeContextValue, TreeState} from './types'
  * @beta
  */
 export interface TreeProps {
-  space?: number | number[]
+  space?: ResponsiveProp<Space>
 }
 
 /**
@@ -28,7 +30,10 @@ export interface TreeProps {
 export const Tree = memo(
   forwardRef(function Tree(
     props: TreeProps &
-      Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
+      Omit<
+        React.HTMLProps<HTMLDivElement>,
+        'align' | 'as' | 'height' | 'ref' | 'rows' | 'role' | 'width' | 'wrap'
+      >,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
     const {children, space = 1, onFocus, ...restProps} = props

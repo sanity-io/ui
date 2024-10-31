@@ -1,10 +1,13 @@
 import {Strategy} from '@floating-ui/react-dom'
+import {RadiusStyleProps} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
-import {styled} from 'styled-components'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY, POPOVER_MOTION_PROPS} from '../../constants'
-import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
+import {
+  // POPOVER_MOTION_CONTENT_OPACITY_PROPERTY,
+  POPOVER_MOTION_PROPS,
+} from '../../constants'
+import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {Arrow, useLayer} from '../../utils'
 import {Card, CardProps} from '../card'
 import {Flex} from '../flex'
@@ -15,46 +18,38 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
-const MotionCard = styled(motion(Card))`
-  &:not([hidden]) {
-    display: flex;
-  }
-  flex-direction: column;
-  width: max-content;
-  min-width: min-content;
-  & > * {
-    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
-    will-change: opacity;
-  }
-`
+/** @internal */
+export interface PopoverCardProps extends RadiusStyleProps {
+  /** @beta*/
+  __unstable_margins?: PopoverMargins
+  animate?: boolean
+  arrow: boolean
+  arrowRef: React.Ref<HTMLDivElement>
+  arrowX?: number
+  arrowY?: number
+  originX?: number
+  originY?: number
+  overflow?: BoxOverflow
+  padding?: number | number[]
+  placement: Placement
+  scheme?: ThemeColorSchemeKey
+  shadow?: number | number[]
+  strategy: Strategy
+  tone: CardTone
+  width: number | undefined
+  x: number | null
+  y: number | null
+}
+
+const MotionCard = motion(Card)
 
 /**
  * @internal
  */
 export const PopoverCard = memo(
   forwardRef(function PopoverCard(
-    props: {
-      /** @beta*/
-      __unstable_margins?: PopoverMargins
-      animate?: boolean
-      arrow: boolean
-      arrowRef: React.Ref<HTMLDivElement>
-      arrowX?: number
-      arrowY?: number
-      originX?: number
-      originY?: number
-      overflow?: BoxOverflow
-      padding?: number | number[]
-      placement: Placement
-      radius?: Radius | Radius[]
-      scheme?: ThemeColorSchemeKey
-      shadow?: number | number[]
-      strategy: Strategy
-      tone: CardTone
-      width: number | undefined
-      x: number | null
-      y: number | null
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
+    props: PopoverCardProps &
+      Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows' | 'width' | 'wrap'>,
     ref: React.ForwardedRef<HTMLDivElement>,
   ) {
     const {
@@ -121,6 +116,7 @@ export const PopoverCard = memo(
 
     return (
       <MotionCard
+        className="popover-card"
         data-ui="Popover"
         {...(restProps as CardProps & MotionProps)}
         data-placement={placement}
@@ -131,7 +127,9 @@ export const PopoverCard = memo(
         sizing="border"
         style={rootStyle}
         tone={tone}
-        {...(animate ? POPOVER_MOTION_PROPS : {})}
+        // todo
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...((animate ? POPOVER_MOTION_PROPS : {}) as any)}
       >
         <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
           <Flex direction="column" flex={1} padding={padding}>

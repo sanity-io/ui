@@ -1,34 +1,18 @@
+import {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize, Space} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
-import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
-import {Inline, KBD} from '../../primitives'
-import {Radius} from '../../types'
+import {Box, Inline, KBD} from '../../primitives'
 
 /**
  * @public
  */
-export interface HotkeysProps {
-  fontSize?: number | number[]
-  padding?: number | number[]
-  radius?: Radius | Radius[]
-  space?: number | number[]
+export interface HotkeysProps extends RadiusStyleProps {
+  fontSize?: ResponsiveProp<FontTextSize>
+  padding?: ResponsiveProp<Space>
+  space?: ResponsiveProp<Space>
   keys?: string[]
 }
-
-const Root = styled.kbd`
-  font: inherit;
-  padding: 1px;
-
-  &:not([hidden]) {
-    display: block;
-  }
-`
-
-const Key = styled(KBD)`
-  &:not([hidden]) {
-    display: block;
-  }
-`
 
 /**
  * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
@@ -36,8 +20,12 @@ const Key = styled(KBD)`
  * @public
  */
 export const Hotkeys = forwardRef(function Hotkeys(
-  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.Ref<HTMLElement>,
+  props: HotkeysProps &
+    Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'display' | 'height' | 'ref' | 'rows' | 'size' | 'width' | 'wrap'
+    >,
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {fontSize, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
   const space = useArrayProp(spaceProp)
@@ -47,15 +35,16 @@ export const Hotkeys = forwardRef(function Hotkeys(
   }
 
   return (
-    <Root data-ui="Hotkeys" {...restProps} ref={ref}>
+    <Box as="kbd" data-ui="Hotkeys" {...restProps} display="flex" gap={spaceProp} ref={ref}>
       <Inline as="span" space={space}>
         {keys.map((key, i) => (
-          <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
+          <KBD display="block" fontSize={fontSize} key={i} padding={padding} radius={radius}>
             {key}
-          </Key>
+          </KBD>
         ))}
       </Inline>
-    </Root>
+    </Box>
   )
 })
+
 Hotkeys.displayName = 'ForwardRef(Hotkeys)'

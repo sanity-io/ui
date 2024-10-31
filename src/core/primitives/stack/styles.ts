@@ -1,5 +1,5 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
-import {rem, _responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps} from '../../_compat'
 
 export interface ResponsiveStackSpaceStyleProps {
   $space: number[]

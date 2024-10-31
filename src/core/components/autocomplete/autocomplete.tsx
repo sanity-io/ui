@@ -1,4 +1,6 @@
 import {ChevronDownIcon} from '@sanity/icons'
+import {ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize, Space} from '@sanity/ui/theme'
 import {
   ChangeEvent,
   ElementType,
@@ -32,8 +34,8 @@ import {
   Text,
   TextInput,
 } from '../../primitives'
+import {AnimatedSpinnerIcon} from '../../primitives/spinner/animatedSpinnerIcon'
 import {Radius} from '../../types'
-import {AnimatedSpinnerIcon, ListBox, Root} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {
@@ -50,7 +52,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   border?: boolean
   customValidity?: string
   filterOption?: (query: string, option: Option) => boolean
-  fontSize?: number | number[]
+  fontSize?: ResponsiveProp<FontTextSize>
   icon?: ElementType | ReactNode
   id: string
   /** @beta */
@@ -65,7 +67,8 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   openOnFocus?: boolean
   /** The options to render. */
   options?: Option[]
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
+  // padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'> &
     Omit<HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'ref' | 'width'>
   prefix?: ReactNode
@@ -466,11 +469,16 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         if (v === 1) return 1
         if (v === 2) return 1
 
-        return v - 2
+        return (v as Space) - 2
       }),
     [padding],
   )
-  const openButtonPadding = useMemo(() => padding.map((v) => Math.max(v - 1, 0)), [padding])
+
+  const openButtonPadding = useMemo(
+    () => padding.map((v) => Math.max((v as Space) - 1, 0)),
+    [padding],
+  )
+
   const openButtonProps: AutocompleteOpenButtonProps = useMemo(
     () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
     [openButton],
@@ -576,7 +584,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     if (filteredOptions.length === 0) return null
 
     return (
-      <ListBox
+      <Box
         data-ui="AutoComplete__results"
         onKeyDown={handleListBoxKeyDown}
         padding={1}
@@ -613,7 +621,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
             )
           })}
         </Stack>
-      </ListBox>
+      </Box>
     )
   }, [
     activeValue,
@@ -678,7 +686,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   ])
 
   return (
-    <Root
+    <div
       data-ui="Autocomplete"
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
@@ -687,7 +695,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     >
       {input}
       {results}
-    </Root>
+    </div>
   )
 })
 

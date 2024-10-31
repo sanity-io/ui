@@ -1,14 +1,14 @@
 import {ThemeFontSize, getTheme_v2} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
-import {css} from 'styled-components'
-import {rem, _responsive, ThemeProps} from '../../styles'
+import {rem, _responsive, ThemeProps} from '../../_compat'
 import {
   focusRingBorderStyle,
   focusRingStyle,
   responsiveInputPaddingIconRightStyle,
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,
-} from '../../styles/internal'
+} from '../../_compat/styles/internal'
+import {css} from '../../lib/styled'
 
 function rootStyle(): ReturnType<typeof css> {
   return css`

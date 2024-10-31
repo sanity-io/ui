@@ -1,6 +1,6 @@
 import {COLOR_HUES, ColorTint, ColorTints, black, hues, white} from '@sanity/color'
 import {ReactNode} from 'react'
-import {styled} from 'styled-components'
+import {styled} from '../../src/core/lib/styled'
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/core/primitives'
 import {ThemeProvider} from '../../src/core/theme'
 import {buildTheme, hexToRgb, rgbToHsl} from '../../src/theme'

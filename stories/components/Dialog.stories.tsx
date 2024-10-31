@@ -221,7 +221,7 @@ export const DeleteDocumentDialog: Story = {
             header="Delete document"
             padding={3}
             footer={
-              <Flex width="full" gap={3} justify={'flex-end'} padding={3}>
+              <Flex width="fill" gap={3} justify={'flex-end'} padding={3}>
                 <Button onClick={onClose} mode="bleed" text="Cancel" tone="default" />
                 <Button onClick={onClose} mode="default" text="Close" tone="critical" />
               </Flex>

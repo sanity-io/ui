@@ -2,6 +2,9 @@ import type {Preview} from '@storybook/react'
 import {themes} from '@storybook/theming'
 import {withSanityTheme} from './decorators/withSanityTheme.decorator'
 
+import '../dist/sanity-theme.css'
+import '../dist/system.css'
+
 const preview: Preview = {
   decorators: [
     withSanityTheme({

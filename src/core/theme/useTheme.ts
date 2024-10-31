@@ -1,5 +1,5 @@
 import {Theme, Theme_v2, getTheme_v2} from '@sanity/ui/theme'
-import {useTheme as useStyledTheme} from 'styled-components'
+import {useTheme as useStyledTheme} from '../lib/styled'
 
 /**
  * @public

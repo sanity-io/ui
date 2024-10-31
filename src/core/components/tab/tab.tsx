@@ -1,5 +1,6 @@
+import {ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 import {Button} from '../../primitives'
 import {ButtonTone} from '../../types'
 
@@ -14,16 +15,12 @@ export interface TabProps {
   'id': string
   'icon'?: React.ElementType | React.ReactNode
   'focused'?: boolean
-  'fontSize'?: number | number[]
+  'fontSize'?: ResponsiveProp<FontTextSize>
   'label'?: React.ReactNode
   'padding'?: number | number[]
   'selected'?: boolean
   'tone'?: ButtonTone
 }
-
-const CustomButton = styled(Button)`
-  max-width: 100%;
-`
 
 /**
  * @public
@@ -76,7 +73,7 @@ export const Tab = forwardRef(function Tab(
   }, [focused])
 
   return (
-    <CustomButton
+    <Button
       data-ui="Tab"
       {...restProps}
       aria-selected={selected ? 'true' : 'false'}
@@ -97,4 +94,5 @@ export const Tab = forwardRef(function Tab(
     />
   )
 })
+
 Tab.displayName = 'ForwardRef(Tab)'

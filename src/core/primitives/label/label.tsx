@@ -1,17 +1,16 @@
+import {composeClassNames, FontStyleProps, label} from '@sanity/ui/css'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
+import {responsiveLabelFont, responsiveTextAlignStyle} from '../../_compat/styles/internal'
+import {styled} from '../../lib/styled'
 import {TextAlign} from '../../types'
 import {labelBaseStyle} from './styles'
 
 /**
  * @public
  */
-export interface LabelProps {
+export interface LabelProps extends FontStyleProps {
   accent?: boolean
-  align?: TextAlign | TextAlign[]
   as?: React.ElementType | keyof JSX.IntrinsicElements
   muted?: boolean
   size?: number | number[]
@@ -52,6 +51,7 @@ export const Label = forwardRef(function Label(
     accent,
     align,
     children: childrenProp,
+    className,
     muted = false,
     size = 2,
     textOverflow,
@@ -71,15 +71,21 @@ export const Label = forwardRef(function Label(
     <Root
       data-ui="Label"
       {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
-      $size={useArrayProp(size)}
       $weight={weight}
+      className={composeClassNames(
+        className,
+        label({
+          accent,
+          align,
+          muted,
+          size,
+        }),
+      )}
       ref={ref}
     >
       {children}
     </Root>
   )
 })
+
 Label.displayName = 'ForwardRef(Label)'

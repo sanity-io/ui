@@ -1,5 +1,6 @@
+import {FontTextSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
-import {Skeleton, TextSkeleton} from '../../src/core/components'
+import {Skeleton, TextSkeleton, TextSkeletonProps} from '../../src/core/components'
 import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
@@ -30,7 +31,7 @@ export default meta
 type Story = StoryObj<typeof Skeleton>
 
 export const Default: Story = {
-  render: (props) => <TextSkeleton {...props} />,
+  render: (props) => <TextSkeleton {...(props as TextSkeletonProps)} />,
 }
 
 export const Sizes: Story = {
@@ -40,7 +41,9 @@ export const Sizes: Story = {
       <>
         {columnBuilder({
           gap: 4,
-          renderItem: ({value, index}) => <TextSkeleton {...props} key={index} size={value} />,
+          renderItem: ({value, index}) => (
+            <TextSkeleton {...props} key={index} size={value as FontTextSize} />
+          ),
           rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
         })}
       </>

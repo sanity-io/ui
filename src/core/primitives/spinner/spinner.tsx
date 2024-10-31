@@ -1,31 +1,16 @@
-import {SpinnerIcon} from '@sanity/icons'
+import {ResponsiveProp, spinner} from '@sanity/ui/css'
+import {FontTextSize} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
-import {styled, keyframes} from 'styled-components'
 import {Text} from '../text'
+import {AnimatedSpinnerIcon} from './animatedSpinnerIcon'
 
 /**
  * @public
  */
 export interface SpinnerProps {
   muted?: boolean
-  size?: number | number[]
+  size?: ResponsiveProp<FontTextSize>
 }
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-const Root = styled(Text)`
-  & > span > svg {
-    animation: ${rotate} 500ms linear infinite;
-  }
-`
 
 /**
  * Indicate that something is loading for an indeterminate amount of time.
@@ -37,9 +22,10 @@ export const Spinner = forwardRef(function Spinner(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
-    <Root data-ui="Spinner" {...props} ref={ref}>
-      <SpinnerIcon />
-    </Root>
+    <Text data-ui="Spinner" {...props} className={spinner()} ref={ref}>
+      <AnimatedSpinnerIcon />
+    </Text>
   )
 })
+
 Spinner.displayName = 'ForwardRef(Spinner)'

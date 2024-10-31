@@ -1,7 +1,18 @@
 import {CloseIcon} from '@sanity/icons'
+import {
+  composeClassNames,
+  ContainerStyleProps,
+  dialog,
+  dialogCardRoot,
+  dialogContainer,
+  dialogContent,
+  dialogFooter,
+  dialogHeader,
+  dialogLayout,
+  PaddingStyleProps,
+} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 import {
   containsOrEqualsElement,
   focusFirstDescendant,
@@ -15,24 +26,15 @@ import {
   usePrefersReducedMotion,
 } from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
-import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
-import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {useTheme_v2} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
-import {
-  animationDialogStyle,
-  AnimationDialogStyleProps,
-  dialogStyle,
-  responsiveDialogPositionStyle,
-  ResponsiveDialogPositionStyleProps,
-} from './styles'
 import {useDialog} from './useDialog'
 
 /**
  * @public
  */
-export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProps {
+export interface DialogProps extends PaddingStyleProps, ContainerStyleProps {
   /**
    * @beta
    */
@@ -41,6 +43,13 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
    * @beta
    */
   __unstable_hideCloseButton?: boolean
+  /**
+   * Whether the dialog should animate in on mount.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  animate?: boolean
   cardRadius?: Radius | Radius[]
   cardShadow?: number | number[]
   contentRef?: React.ForwardedRef<HTMLDivElement>
@@ -55,16 +64,9 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
   zOffset?: number | number[]
-  /**
-   * Whether the dialog should animate in on mount.
-   *
-   * @beta
-   * @defaultValue false
-   */
-  animate?: boolean
 }
 
-interface DialogCardProps extends ResponsiveWidthProps {
+interface DialogCardProps extends ContainerStyleProps {
   /**
    * @beta
    */
@@ -98,55 +100,6 @@ function isTargetWithinScope(
     containsOrEqualsElement(portalElement, target)
   )
 }
-
-const Root = styled(Layer)<
-  ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps & AnimationDialogStyleProps
->(responsivePaddingStyle, dialogStyle, responsiveDialogPositionStyle, animationDialogStyle)
-
-const DialogContainer = styled(Container)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-const DialogCardRoot = styled(Card)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  min-height: 0;
-  max-height: 100%;
-  overflow: hidden;
-  overflow: clip;
-`
-
-const DialogLayout = styled(Flex)`
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-`
-
-const DialogHeader = styled(Box)`
-  position: relative;
-  z-index: 2;
-`
-
-const DialogContent = styled(Box)`
-  position: relative;
-  z-index: 1;
-  overflow: auto;
-  outline: none;
-`
-
-const DialogFooter = styled(Box)`
-  position: relative;
-  z-index: 3;
-`
 
 const DialogCard = forwardRef(function DialogCard(
   props: DialogCardProps,
@@ -236,11 +189,26 @@ const DialogCard = forwardRef(function DialogCard(
   )
 
   return (
-    <DialogContainer data-ui="DialogCard" width={width}>
-      <DialogCardRoot radius={radius} ref={ref} scheme={scheme} shadow={shadow}>
-        <DialogLayout direction="column">
+    <Container
+      align="center"
+      className={dialogContainer()}
+      data-ui="DialogCard"
+      direction="column"
+      display="flex"
+      justify="center"
+      width={width}
+    >
+      <Card
+        className={dialogCardRoot()}
+        display="flex"
+        radius={radius}
+        ref={ref}
+        scheme={scheme}
+        shadow={shadow}
+      >
+        <Flex className={dialogLayout()} direction="column" flex={1}>
           {showHeader && (
-            <DialogHeader>
+            <Box className={dialogHeader()} position="relative">
               <Flex align="flex-start" padding={3}>
                 <Box flex={1} padding={2}>
                   {header && (
@@ -262,17 +230,26 @@ const DialogCard = forwardRef(function DialogCard(
                   </Box>
                 )}
               </Flex>
-            </DialogHeader>
+            </Box>
           )}
-
-          <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
+          <Box
+            className={dialogContent()}
+            flex={1}
+            overflow="auto"
+            position="relative"
+            ref={contentRef}
+            tabIndex={-1}
+          >
             {children}
-          </DialogContent>
-
-          {footer && <DialogFooter>{footer}</DialogFooter>}
-        </DialogLayout>
-      </DialogCardRoot>
-    </DialogContainer>
+          </Box>
+          {footer && (
+            <Box className={dialogFooter()} position="relative">
+              {footer}
+            </Box>
+          )}
+        </Flex>
+      </Card>
+    </Container>
   )
 })
 
@@ -284,10 +261,11 @@ DialogCard.displayName = 'ForwardRef(DialogCard)'
  * @public
  */
 export const Dialog = forwardRef(function Dialog(
-  props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
+  props: DialogProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'id' | 'rows' | 'width' | 'wrap'>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const dialog = useDialog()
+  const context = useDialog()
   const {layer} = useTheme_v2()
   const {
     __unstable_autoFocus: autoFocus = true,
@@ -295,6 +273,7 @@ export const Dialog = forwardRef(function Dialog(
     cardRadius: cardRadiusProp = 4,
     cardShadow = 3,
     children,
+    className,
     contentRef,
     footer,
     header,
@@ -303,7 +282,7 @@ export const Dialog = forwardRef(function Dialog(
     onClickOutside,
     onClose,
     onFocus,
-    padding: paddingProp = 3,
+    padding = 3,
     portal: portalProp,
     position: _positionProp,
     scheme,
@@ -312,15 +291,14 @@ export const Dialog = forwardRef(function Dialog(
     animate: _animate = false,
     ...restProps
   } = props
-  const positionProp = _positionProp ?? (dialog.position || 'fixed')
-  const zOffsetProp = _zOffsetProp ?? (dialog.zOffset || layer.dialog.zOffset)
+  const positionProp = _positionProp ?? (context.position || 'fixed')
+  const zOffsetProp = _zOffsetProp ?? (context.zOffset || layer.dialog.zOffset)
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
   const cardRadius = useArrayProp(cardRadiusProp)
-  const padding = useArrayProp(paddingProp)
   const position = useArrayProp(positionProp)
   const width = useArrayProp(widthProp)
   const zOffset = useArrayProp(zOffsetProp)
@@ -388,18 +366,20 @@ export const Dialog = forwardRef(function Dialog(
 
   return (
     <Portal __unstable_name={portalProp}>
-      <Root
+      <Layer
         {...restProps}
-        $animate={animate}
-        $padding={padding}
-        $position={position}
         aria-labelledby={labelId}
         aria-modal
+        className={composeClassNames(className, dialog())}
+        data-animate={animate ? '' : undefined}
         data-ui="Dialog"
+        display="flex"
         id={id}
         onActivate={onActivate}
         onClick={handleRootClick}
         onFocus={handleFocus}
+        padding={padding}
+        position={position}
         ref={ref}
         role="dialog"
         zOffset={zOffset}
@@ -424,8 +404,9 @@ export const Dialog = forwardRef(function Dialog(
           {children}
         </DialogCard>
         <div ref={postDivRef} tabIndex={0} />
-      </Root>
+      </Layer>
     </Portal>
   )
 })
+
 Dialog.displayName = 'ForwardRef(Dialog)'

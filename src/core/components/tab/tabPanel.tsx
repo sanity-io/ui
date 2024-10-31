@@ -35,4 +35,5 @@ export const TabPanel = forwardRef(function TabPanel(
     </Box>
   )
 })
+
 TabPanel.displayName = 'ForwardRef(TabPanel)'

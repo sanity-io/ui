@@ -1,4 +1,5 @@
-import {Autocomplete, Box, Button, Card, Code, Container, Stack, Text} from '@sanity/ui'
+import {Autocomplete, Box, Button, Card, Code, Container, Radius, Stack, Text} from '@sanity/ui'
+import {FontTextSize} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 import {
@@ -29,7 +30,7 @@ export default function CustomStory() {
         key={option.value}
         onClick={(event) => event.preventDefault()}
         padding={padding}
-        radius={radius - 1}
+        radius={(radius - 1) as Radius}
       >
         <Text size={fontSize}>{option.title}</Text>
       </Card>
@@ -60,14 +61,14 @@ export default function CustomStory() {
               border={border}
               disabled={disabled}
               filterOption={filterOption}
-              fontSize={fontSize}
+              fontSize={fontSize as FontTextSize}
               id="custom"
               onChange={setValue}
               openButton={openButton}
               options={options}
               padding={padding}
               placeholder="Search"
-              radius={radius}
+              radius={radius as Radius}
               readOnly={readOnly}
               renderOption={renderOption}
               renderValue={renderValue}

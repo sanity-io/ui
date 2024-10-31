@@ -1,23 +1,21 @@
+import {RadiusStyleProps, tooltipCard} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {MotionProps, motion} from 'framer-motion'
+import {motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
-import {styled} from 'styled-components'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY, POPOVER_MOTION_PROPS} from '../../constants'
-import {Placement, Radius} from '../../types'
+import {
+  // POPOVER_MOTION_CONTENT_OPACITY_PROPERTY,
+  POPOVER_MOTION_PROPS,
+} from '../../constants'
+import {Placement} from '../../types'
 import {Arrow} from '../../utils'
-import {Card, CardProps} from '../card'
+import {Card} from '../card'
 import {
   DEFAULT_TOOLTIP_ARROW_HEIGHT,
   DEFAULT_TOOLTIP_ARROW_RADIUS,
   DEFAULT_TOOLTIP_ARROW_WIDTH,
 } from './constants'
 
-const MotionCard = styled(motion(Card))`
-  & > * {
-    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
-    will-change: opacity;
-  }
-`
+const MotionCard = motion(Card) as typeof Card
 
 /**
  * @internal
@@ -34,10 +32,10 @@ export const TooltipCard = memo(
       originY?: number
       padding?: number | number[]
       placement?: Placement
-      radius?: Radius | Radius[]
       scheme?: ThemeColorSchemeKey
       shadow?: number | number[]
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
+    } & RadiusStyleProps &
+      Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows' | 'width' | 'wrap'>,
     ref: React.ForwardedRef<HTMLDivElement>,
   ) {
     const {
@@ -81,7 +79,9 @@ export const TooltipCard = memo(
     return (
       <MotionCard
         data-ui="Tooltip__card"
-        {...(restProps as CardProps & MotionProps)}
+        {...restProps}
+        data-animate={animate ? '' : undefined}
+        className={tooltipCard()}
         data-placement={placement}
         padding={padding}
         radius={radius}
@@ -106,4 +106,5 @@ export const TooltipCard = memo(
     )
   }),
 )
+
 TooltipCard.displayName = 'Memo(ForwardRef(TooltipCard))'

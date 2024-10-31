@@ -9,12 +9,19 @@ import {
   CardTone,
   DialogPosition,
   FlexAlign,
+  FlexDirection,
   FlexJustify,
   Placement,
   TextAlign,
   TextInputType,
 } from '@sanity/ui'
-import {ThemeColorAvatarColorKey, ThemeFontWeightKey} from '@sanity/ui/theme'
+import {
+  ContainerWidth,
+  FontHeadingSize,
+  Space,
+  ThemeColorAvatarColorKey,
+  ThemeFontWeightKey,
+} from '@sanity/ui/theme'
 
 export const WORKSHOP_AVATAR_SIZE_OPTIONS: {[key: string]: AvatarSize} = {
   '0': 0,
@@ -43,7 +50,9 @@ export const WORKSHOP_BUTTON_MODE_OPTIONS: {[key: string]: ButtonMode} = {
   Bleed: 'bleed',
 }
 
-export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS: {[key: string]: ButtonTextAlign | ''} = {
+export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS: {
+  [key: string]: ButtonTextAlign | ''
+} = {
   '(none)': '',
   'Left': 'left',
   'Right': 'right',
@@ -90,7 +99,9 @@ export const WORKSHOP_CODE_LANGUAGE_OPTIONS = {
   TypeScript: 'typescript',
 }
 
-export const WORKSHOP_CONTAINER_WIDTH_OPTIONS: {[key: string]: number | 'auto'} = {
+export const WORKSHOP_CONTAINER_WIDTH_OPTIONS: {
+  [key: string]: ContainerWidth
+} = {
   '0': 0,
   '1': 1,
   '2': 2,
@@ -100,12 +111,14 @@ export const WORKSHOP_CONTAINER_WIDTH_OPTIONS: {[key: string]: number | 'auto'} 
   'auto': 'auto',
 }
 
-export const WORKSHOP_DIALOG_POSITION_OPTIONS: {[key: string]: DialogPosition} = {
+export const WORKSHOP_DIALOG_POSITION_OPTIONS: {
+  [key: string]: DialogPosition
+} = {
   Fixed: 'fixed',
   Absolute: 'absolute',
 }
 
-export const WORKSHOP_FLEX_DIRECTION_OPTIONS: {[key: string]: 'row' | 'column'} = {
+export const WORKSHOP_FLEX_DIRECTION_OPTIONS: {[key: string]: FlexDirection} = {
   Row: 'row',
   Column: 'column',
 }
@@ -127,19 +140,22 @@ export const WORKSHOP_FLEX_JUSTIFY_OPTIONS: Record<FlexJustify, FlexJustify> = {
   'space-evenly': 'space-evenly',
 }
 
-export const WORKSHOP_FONT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey} = {
+export const WORKSHOP_FONT_WEIGHT_OPTIONS: {
+  [key: string]: ThemeFontWeightKey
+} = {
   Regular: 'regular',
   Medium: 'medium',
   Semibold: 'semibold',
   Bold: 'bold',
 }
 
-export const WORKSHOP_HEADING_FONT_SIZE_OPTIONS = {
+export const WORKSHOP_HEADING_FONT_SIZE_OPTIONS: Record<string, FontHeadingSize> = {
   '0': 0,
   '1': 1,
   '2': 2,
   '3': 3,
   '4': 4,
+  '5': 5,
 }
 
 export const WORKSHOP_ICON_SYMBOL_OPTIONS: {[key: string]: IconSymbol | ''} = Object.keys(
@@ -195,7 +211,7 @@ export const WORKSHOP_SHADOW_OPTIONS = {
   '5': 5,
 }
 
-export const WORKSHOP_SPACE_OPTIONS = {
+export const WORKSHOP_SPACE_OPTIONS: Record<string, Space> = {
   '0': 0,
   '1': 1,
   '2': 2,
@@ -208,7 +224,9 @@ export const WORKSHOP_SPACE_OPTIONS = {
   '9': 9,
 }
 
-export const WORKSHOP_SPOT_COLOR_OPTIONS: {[key: string]: ThemeColorAvatarColorKey} = {
+export const WORKSHOP_SPOT_COLOR_OPTIONS: {
+  [key: string]: ThemeColorAvatarColorKey
+} = {
   Gray: 'gray',
   Blue: 'blue',
   Purple: 'purple',
@@ -237,7 +255,9 @@ export const WORKSHOP_TEXT_FONT_SIZE_OPTIONS = {
   '4': 4,
 }
 
-export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS: {[key: string]: TextInputType} = {
+export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS: {
+  [key: string]: TextInputType
+} = {
   'date': 'date',
   'datetime-local': 'datetime-local',
   'email': 'email',
@@ -251,7 +271,9 @@ export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS: {[key: string]: TextInputType} = 
   'color': 'color',
 }
 
-export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | ''} = {
+export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {
+  [key: string]: 'ellipsis' | ''
+} = {
   None: '',
   Ellipsis: 'ellipsis',
 }
@@ -264,7 +286,9 @@ export const WORKSHOP_TEXT_SIZE_OPTIONS = {
   '4': 4,
 }
 
-export const WORKSHOP_TEXT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey | ''} = {
+export const WORKSHOP_TEXT_WEIGHT_OPTIONS: {
+  [key: string]: ThemeFontWeightKey | ''
+} = {
   Regular: '',
   Medium: 'medium',
   Semibold: 'semibold',
@@ -281,7 +305,7 @@ export const WORKSHOP_TOAST_STATUS_OPTIONS: {
   Error: 'error',
 }
 
-export const WORKSHOP_WIDTH_OPTIONS: {[key: string]: number | 'auto'} = {
+export const WORKSHOP_WIDTH_OPTIONS: {[key: string]: ContainerWidth} = {
   'Auto': 'auto',
   '0': 0,
   '1': 1,

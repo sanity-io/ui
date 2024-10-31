@@ -1,6 +1,13 @@
 import {defineConfig} from '@sanity/pkg-utils'
 
 export default defineConfig({
+  bundles: [
+    {
+      source: './src/css/cli/index.ts',
+      require: './dist/cli.cjs',
+      runtime: 'node',
+    },
+  ],
   extract: {
     rules: {
       'ae-internal-missing-underscore': 'off',

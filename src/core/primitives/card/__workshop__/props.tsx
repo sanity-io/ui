@@ -1,4 +1,4 @@
-import {Card, Flex, Stack, Text} from '@sanity/ui'
+import {Card, Flex, Radius, Stack, Text} from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import {
   WORKSHOP_CARD_AS_OPTIONS,
@@ -28,7 +28,7 @@ export default function PropsStory() {
         muted={muted}
         onClick={useAction('onClick')}
         padding={padding}
-        radius={radius}
+        radius={radius as Radius}
         selected={selected}
         shadow={shadow}
         tone={tone}

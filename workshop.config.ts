@@ -9,6 +9,9 @@ import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
 import {fontsPlugin} from './src/core/__workshop__/fontsPlugin'
 
+import './dist/sanity-theme.css'
+import './dist/system.css'
+
 Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)

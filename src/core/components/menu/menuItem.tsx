@@ -1,3 +1,5 @@
+import {PaddingStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {
   forwardRef,
   isValidElement,
@@ -9,11 +11,10 @@ import {
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
-import {useArrayProp} from '../../hooks'
+// import {useArrayProp} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
-import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {useRootTheme} from '../../theme'
+// import {useRootTheme} from '../../theme'
 import {SelectableTone} from '../../types/selectable'
 import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
@@ -21,7 +22,7 @@ import {useMenu} from './useMenu'
 /**
  * @public
  */
-export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
+export interface MenuItemProps extends PaddingStyleProps, RadiusStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   hotkeys?: string[]
@@ -29,7 +30,8 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   iconRight?: React.ElementType | React.ReactNode
   pressed?: boolean
   selected?: boolean
-  space?: number | number[]
+  // space?: number | number[]
+  space?: ResponsiveProp<Space>
   text?: React.ReactNode
   tone?: SelectableTone
 }
@@ -39,7 +41,10 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
  */
 export const MenuItem = forwardRef(function MenuItem(
   props: MenuItemProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'selected' | 'tabIndex'>,
+    Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'ref' | 'rows' | 'selected' | 'tabIndex' | 'width' | 'wrap'
+    >,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -66,7 +71,7 @@ export const MenuItem = forwardRef(function MenuItem(
     tone = 'default',
     ...restProps
   } = props
-  const {scheme} = useRootTheme()
+  // const {scheme} = useRootTheme()
   const menu = useMenu()
   const {
     activeElement,
@@ -107,7 +112,7 @@ export const MenuItem = forwardRef(function MenuItem(
     [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
   )
 
-  const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
+  // const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
 
   const setRef = useCallback((el: HTMLDivElement | null) => {
     ref.current = el
@@ -119,14 +124,16 @@ export const MenuItem = forwardRef(function MenuItem(
       data-ui="MenuItem"
       {...restProps}
       aria-pressed={as === 'button' && pressed}
+      as={as}
       data-pressed={as !== 'button' && pressed ? '' : undefined}
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
-      forwardedAs={as}
-      $radius={useArrayProp(radius)}
-      $padding={useArrayProp(0)}
-      $tone={disabled ? 'default' : tone}
-      $scheme={scheme}
+      // forwardedAs={as}
+      radius={radius}
+      // $radius={useArrayProp(radius)}
+      // $padding={useArrayProp(0)}
+      // $tone={disabled ? 'default' : tone}
+      // $scheme={scheme}
       disabled={disabled}
       onClick={handleClick}
       onMouseEnter={onItemMouseEnter}
@@ -134,6 +141,7 @@ export const MenuItem = forwardRef(function MenuItem(
       ref={setRef}
       role="menuitem"
       tabIndex={-1}
+      tone={tone}
       type={as === 'button' ? 'button' : undefined}
     >
       {(IconComponent || text || IconRightComponent) && (
@@ -155,7 +163,7 @@ export const MenuItem = forwardRef(function MenuItem(
 
           {hotkeys && (
             <Hotkeys
-              fontSize={hotkeysFontSize}
+              // fontSize={hotkeysFontSize}
               keys={hotkeys}
               style={{marginTop: -4, marginBottom: -4}}
             />
@@ -177,4 +185,5 @@ export const MenuItem = forwardRef(function MenuItem(
     </Selectable>
   )
 })
+
 MenuItem.displayName = 'ForwardRef(MenuItem)'

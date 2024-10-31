@@ -1,14 +1,8 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
+import {composeClassNames, ResponsiveProp, treeItem} from '@sanity/ui/css'
+import {Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
 import {Box, BoxProps, Flex, Text} from '../../primitives'
-import {
-  treeItemRootStyle,
-  treeItemRootColorStyle,
-  treeItemBoxStyle,
-  TreeItemBoxStyleProps,
-} from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
@@ -25,30 +19,25 @@ export interface TreeItemProps {
    */
   linkAs?: BoxProps['as']
   padding?: number | number[]
-  space?: number | number[]
+  space?: ResponsiveProp<Space>
   text?: React.ReactNode
   weight?: ThemeFontWeightKey
 }
-
-const Root = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
-
-const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
-
-const ToggleArrowText = styled(Text)`
-  & > svg {
-    transition: transform 100ms;
-  }
-`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
 export const TreeItem = memo(function TreeItem(
-  props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>,
+  props: TreeItemProps &
+    Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'ref' | 'role' | 'rows' | 'width' | 'wrap'
+    >,
 ): React.ReactElement {
   const {
     children,
+    className,
     expanded: expandedProp = false,
     fontSize = 1,
     href,
@@ -64,7 +53,7 @@ export const TreeItem = memo(function TreeItem(
     weight,
     ...restProps
   } = props
-  const rootRef = useRef<HTMLLIElement | null>(null)
+  const rootRef = useRef<HTMLDivElement | null>(null)
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
@@ -82,7 +71,7 @@ export const TreeItem = memo(function TreeItem(
   )
 
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLLIElement>) => {
+    (event: React.MouseEvent<HTMLDivElement>) => {
       if (onClick) onClick(event)
 
       const target = event.target
@@ -118,9 +107,9 @@ export const TreeItem = memo(function TreeItem(
   }, [expanded, itemPath, registerItem, selected])
 
   const content = (
-    <Flex padding={padding}>
+    <Flex gap={space} padding={padding}>
       <Box
-        marginRight={space}
+        // marginRight={space}
         style={{
           visibility: IconComponent || children ? 'visible' : 'hidden',
           pointerEvents: 'none',
@@ -132,9 +121,14 @@ export const TreeItem = memo(function TreeItem(
           </Text>
         )}
         {!IconComponent && (
-          <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
+          <Text
+            // ToggleArrowText
+            muted={muted}
+            size={fontSize}
+            weight={weight}
+          >
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </ToggleArrowText>
+          </Text>
         )}
       </Box>
       <Box flex={1}>
@@ -147,18 +141,20 @@ export const TreeItem = memo(function TreeItem(
 
   if (href) {
     return (
-      <Root
+      <Box
         data-selected={selected ? '' : undefined}
         data-tree-id={id}
         data-tree-key={itemKey}
         data-ui="TreeItem"
         {...restProps}
+        as="li"
+        className={composeClassNames(className, treeItem())}
         onClick={handleClick}
         ref={rootRef}
         role="none"
       >
-        <TreeItemBox
-          $level={tree.level}
+        <Box
+          // $level={tree.level}
           aria-expanded={expanded}
           as={linkAs}
           data-ui="TreeItem__box"
@@ -166,19 +162,23 @@ export const TreeItem = memo(function TreeItem(
           ref={treeitemRef}
           role="treeitem"
           tabIndex={tabIndex}
+          // todo
+          style={{
+            paddingLeft: `calc(var(--space-2) * ${tree.level})`,
+          }}
         >
           {content}
-        </TreeItemBox>
+        </Box>
 
         <TreeContext.Provider value={contextValue}>
           {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
         </TreeContext.Provider>
-      </Root>
+      </Box>
     )
   }
 
   return (
-    <Root
+    <Box
       data-selected={selected ? '' : undefined}
       data-ui="TreeItem"
       data-tree-id={id}
@@ -191,14 +191,23 @@ export const TreeItem = memo(function TreeItem(
       role="treeitem"
       tabIndex={tabIndex}
     >
-      <TreeItemBox $level={tree.level} as="div" data-ui="TreeItem__box">
+      <Box
+        // $level={tree.level}
+        as="div"
+        data-ui="TreeItem__box"
+        // todo
+        style={{
+          paddingLeft: `calc(var(--space-2) * ${tree.level})`,
+        }}
+      >
         {content}
-      </TreeItemBox>
+      </Box>
 
       <TreeContext.Provider value={contextValue}>
         {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}
       </TreeContext.Provider>
-    </Root>
+    </Box>
   )
 })
+
 TreeItem.displayName = 'Memo(TreeItem)'

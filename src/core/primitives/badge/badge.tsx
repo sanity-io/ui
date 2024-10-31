@@ -1,29 +1,19 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
+import {badge, composeClassNames, RadiusStyleProps} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef} from 'react'
 import {BadgeMode, BadgeTone} from '../../types'
 import {Box, BoxProps} from '../box'
 import {Text} from '../text'
-import {ResponsiveRadiusProps} from '../types'
-import {badgeStyle} from './styles'
-import {BadgeStyleProps} from './types'
 
 /**
  * @public
  */
-export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
+export interface BadgeProps extends BoxProps, RadiusStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   /** @deprecated No longer used. */
   mode?: BadgeMode
   tone?: BadgeTone
 }
-
-const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  badgeStyle,
-)
 
 /**
  * Badges are used to tag resources.
@@ -32,30 +22,38 @@ const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
  */
 export const Badge = forwardRef(function Badge(
   props: BadgeProps & React.HTMLProps<HTMLDivElement>,
-  ref,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const {
     children,
+    className,
+    display = 'inline-block',
     fontSize = 1,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     mode: _deprecated_mode,
     padding = 1,
-    radius = 'full',
+    radius = 2,
     tone = 'default',
     ...restProps
   } = props
 
   return (
-    <Root
+    <Box
       data-ui="Badge"
       {...restProps}
-      $tone={tone}
-      $radius={useArrayProp(radius)}
-      padding={useArrayProp(padding)}
+      className={composeClassNames(
+        className,
+        badge({
+          radius,
+          tone,
+        }),
+      )}
+      display={display}
+      padding={padding}
       ref={ref}
     >
       <Text size={fontSize}>{children}</Text>
-    </Root>
+    </Box>
   )
 })
 Badge.displayName = 'ForwardRef(Badge)'

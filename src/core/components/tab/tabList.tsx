@@ -1,5 +1,4 @@
-import {cloneElement, forwardRef, useCallback, useState, Children, isValidElement} from 'react'
-import {styled} from 'styled-components'
+import {Children, cloneElement, ForwardedRef, forwardRef, useCallback, useState} from 'react'
 import {Inline, InlineProps} from '../../primitives'
 
 /**
@@ -9,27 +8,21 @@ export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
   children: Array<React.ReactElement | null | undefined | false>
 }
 
-//Limits the width of tabs in tablist
-const CustomInline = styled(Inline)`
-  & > div {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-`
+function _isReactElement(node: unknown): node is React.ReactElement {
+  return Boolean(node)
+}
 
 /**
  * @public
  */
 export const TabList = forwardRef(function TabList(
   props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const {children: childrenProp, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
 
-  const children: React.ReactElement[] = Children.toArray(childrenProp).filter(isValidElement)
+  const children: React.ReactElement[] = Children.toArray(childrenProp).filter(_isReactElement)
 
   const tabs = children.map((child, childIndex) =>
     cloneElement(child, {
@@ -55,15 +48,10 @@ export const TabList = forwardRef(function TabList(
   )
 
   return (
-    <CustomInline
-      data-ui="TabList"
-      {...restProps}
-      onKeyDown={handleKeyDown}
-      ref={ref}
-      role="tablist"
-    >
+    <Inline data-ui="TabList" {...restProps} onKeyDown={handleKeyDown} ref={ref} role="tablist">
       {tabs}
-    </CustomInline>
+    </Inline>
   )
 })
+
 TabList.displayName = 'ForwardRef(TabList)'

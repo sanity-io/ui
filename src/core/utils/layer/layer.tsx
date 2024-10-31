@@ -1,32 +1,41 @@
 import {FocusEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
+// import {styled} from '../../lib/styled'
+import {Box, BoxProps} from '../../primitives'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 
 /**
  * @public
  */
-export interface LayerProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+export interface LayerProps extends BoxProps {
+  // as?: React.ElementType | keyof JSX.IntrinsicElements
   /** A callback that fires when the layer becomes the top layer when it was not the top layer before. */
   onActivate?: (props: {activeElement: HTMLElement | null}) => void
   zOffset?: number | number[]
 }
 
-interface LayerChildrenProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+interface LayerChildrenProps extends BoxProps {
+  // as?: React.ElementType | keyof JSX.IntrinsicElements
   onActivate?: LayerProps['onActivate']
 }
 
-const Root = styled.div({position: 'relative'})
+// const Root = styled.div({position: 'relative'})
 
 const LayerChildren = forwardRef(function LayerChildren(
-  props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
+  props: LayerChildrenProps &
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows' | 'width' | 'wrap'>,
   forwardedRef: React.Ref<HTMLDivElement>,
 ) {
-  const {children, onActivate, onFocus, style = EMPTY_RECORD, ...restProps} = props
+  const {
+    children,
+    onActivate,
+    onFocus,
+    position = 'relative',
+    style = EMPTY_RECORD,
+    ...restProps
+  } = props
   const {zIndex, isTopLayer} = useLayer()
   const lastFocusedRef = useRef<HTMLElement | null>(null)
   const ref = useRef<HTMLDivElement | null>(null)
@@ -65,9 +74,16 @@ const LayerChildren = forwardRef(function LayerChildren(
   )
 
   return (
-    <Root {...restProps} data-ui="Layer" onFocus={handleFocus} ref={ref} style={{...style, zIndex}}>
+    <Box
+      data-ui="Layer"
+      {...restProps}
+      onFocus={handleFocus}
+      position={position}
+      ref={ref}
+      style={{...style, zIndex}}
+    >
       {children}
-    </Root>
+    </Box>
   )
 })
 
@@ -75,7 +91,7 @@ const LayerChildren = forwardRef(function LayerChildren(
  * @public
  */
 export const Layer = forwardRef(function Layer(
-  props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
+  props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'rows' | 'width' | 'wrap'>,
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {children, zOffset = 1, ...restProps} = props
@@ -88,4 +104,5 @@ export const Layer = forwardRef(function Layer(
     </LayerProvider>
   )
 })
+
 Layer.displayName = 'ForwardRef(Layer)'

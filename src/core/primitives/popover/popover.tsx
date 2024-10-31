@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   Middleware,
   RootBoundary,
@@ -10,6 +11,7 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
+import {RadiusStyleProps} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
@@ -29,7 +31,7 @@ import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
-import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
+import {ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_POPOVER_DISTANCE,
   DEFAULT_POPOVER_MARGINS,
@@ -45,8 +47,8 @@ export type {PopoverUpdateCallback}
 
 /** @public */
 export interface PopoverProps
-  extends Omit<LayerProps, 'as'>,
-    ResponsiveRadiusProps,
+  extends Omit<LayerProps, 'width'>,
+    RadiusStyleProps,
     ResponsiveShadowProps {
   /** @beta */
   __unstable_margins?: PopoverMargins
@@ -116,7 +118,10 @@ export interface PopoverProps
 export const Popover = memo(
   forwardRef(function Popover(
     props: PopoverProps &
-      Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
+      Omit<
+        React.HTMLProps<HTMLDivElement>,
+        'as' | 'children' | 'content' | 'height' | 'rows' | 'width' | 'wrap'
+      >,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
     const {container, layer} = useTheme_v2()
@@ -139,15 +144,15 @@ export const Popover = memo(
       onActivate,
       open,
       overflow = 'hidden',
-      padding: paddingProp,
+      padding,
       placement: placementProp = 'bottom',
       portal,
       preventOverflow = true,
-      radius: radiusProp = 3,
+      radius = 3,
       referenceBoundary = props.boundaryElement ?? boundaryElementContext.element,
       referenceElement,
       scheme,
-      shadow: shadowProp = 3,
+      shadow = 3,
       tone = 'inherit',
       width: widthProp = 'auto',
       zOffset: zOffsetProp = layer.popover.zOffset,
@@ -157,9 +162,9 @@ export const Popover = memo(
     const prefersReducedMotion = usePrefersReducedMotion()
     const animate = prefersReducedMotion ? false : _animate
     const boundarySize = useElementSize(boundaryElement)?.border
-    const padding = useArrayProp(paddingProp)
-    const radius = useArrayProp(radiusProp)
-    const shadow = useArrayProp(shadowProp)
+    // const padding = useArrayProp(paddingProp)
+    // const radius = useArrayProp(radiusProp)
+    // const shadow = useArrayProp(shadowProp)
     const widthArrayProp = useArrayProp(widthProp)
     const zOffset = useArrayProp(zOffsetProp)
     const ref = useRef<HTMLDivElement | null>(null)
@@ -354,6 +359,7 @@ export const Popover = memo(
       (node: HTMLElement | null) => {
         refs.setReference(node)
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const childRef = getElementRef(childProp as any)
 
         if (typeof childRef === 'function') {
@@ -442,6 +448,7 @@ export const Popover = memo(
     )
   }),
 )
+
 Popover.displayName = 'Memo(ForwardRef(Popover))'
 
 // Before React 19 accessing `element.props.ref` will throw a warning and suggest using `element.ref`

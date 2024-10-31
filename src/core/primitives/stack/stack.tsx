@@ -1,18 +1,16 @@
+import {ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'
-import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps} from './styles'
 
 /**
  * @public
  */
-export interface StackProps extends BoxProps {
+export interface StackProps
+  extends Omit<BoxProps, 'direction' | 'display' | 'gap' | 'gapX' | 'gapY'> {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  space?: number | number[]
+  space?: ResponsiveProp<Space>
 }
-
-const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
 
 /**
  * The `Stack` component is used to place elements on top of each other.
@@ -20,20 +18,24 @@ const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, respons
  * @public
  */
 export const Stack = forwardRef(function Stack(
-  props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
+  props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref' | 'width'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {as, space, ...restProps} = props
 
   return (
-    <Root
+    <Box
+      as={as}
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
-      $space={useArrayProp(space)}
+      direction="column"
+      display="flex"
       forwardedAs={as}
+      gapY={space}
       ref={ref}
     />
   )
 })
+
 Stack.displayName = 'ForwardRef(Stack)'

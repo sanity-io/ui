@@ -5,6 +5,10 @@ import {
   TextSkeleton,
   CodeSkeleton,
   LabelSkeleton,
+  HeadingSkeletonProps,
+  TextSkeletonProps,
+  LabelSkeletonProps,
+  CodeSkeletonProps,
 } from '../../src/core/components'
 import {Flex, Grid, Box, Container, Stack, Card} from '../../src/core/primitives'
 import {getSpaceControls} from '../controls'
@@ -57,10 +61,26 @@ export const CardSkeleton: Story = {
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                   </Grid>
                   <Stack space={2} flex={1}>
-                    <HeadingSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <TextSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <LabelSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <CodeSkeleton style={{width: '100%'}} radius={1} {...props} />
+                    <HeadingSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as HeadingSkeletonProps)}
+                    />
+                    <TextSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as TextSkeletonProps)}
+                    />
+                    <LabelSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as LabelSkeletonProps)}
+                    />
+                    <CodeSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as CodeSkeletonProps)}
+                    />
                   </Stack>
                 </Flex>
                 <Flex marginTop={2}>

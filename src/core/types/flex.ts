@@ -1,30 +1,31 @@
-/**
- * @public
- */
-export type FlexAlign = 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
+export {
+  /**
+   * @public
+   * @deprecated
+   */
+  type FlexAlign,
 
-/**
- * @public
- */
-export type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
+  /**
+   * @public
+   * @deprecated
+   */
+  type FlexDirection,
 
-/**
- * @public
- */
-export type FlexJustify =
-  | 'flex-start'
-  | 'flex-end'
-  | 'center'
-  | 'space-between'
-  | 'space-around'
-  | 'space-evenly'
+  /**
+   * @public
+   * @deprecated
+   */
+  type FlexJustify,
 
-/**
- * @public
- */
-export type FlexValue = number | 'none' | 'auto' | 'initial'
+  /**
+   * @public
+   * @deprecated
+   */
+  type FlexValue,
 
-/**
- * @public
- */
-export type FlexWrap = 'wrap' | 'wrap-reverse' | 'nowrap'
+  /**
+   * @public
+   * @deprecated
+   */
+  type FlexWrap,
+} from '@sanity/ui/css'

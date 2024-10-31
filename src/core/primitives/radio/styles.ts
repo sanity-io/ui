@@ -1,7 +1,7 @@
 import {getTheme_v2} from '@sanity/ui/theme'
-import {css} from 'styled-components'
-import {rem, ThemeProps} from '../../styles'
-import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
+import {rem, ThemeProps} from '../../_compat'
+import {focusRingBorderStyle, focusRingStyle} from '../../_compat/styles/internal'
+import {css} from '../../lib/styled'
 
 export function radioBaseStyle(): ReturnType<typeof css> {
   return css`
