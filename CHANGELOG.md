@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.17](https://github.com/sanity-io/ui/compare/v2.8.16...v2.8.17) (2024-10-31)
+
+### Bug Fixes
+
+- add react 19 to peer dep range ([#1447](https://github.com/sanity-io/ui/issues/1447)) ([b096f32](https://github.com/sanity-io/ui/commit/b096f3202bbe37fc1e3d78de028e7e8b91fc052d))
+
 ## [2.8.16](https://github.com/sanity-io/ui/compare/v2.8.15...v2.8.16) (2024-10-31)
 
 ### Bug Fixes
