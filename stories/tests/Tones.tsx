@@ -108,7 +108,7 @@ export function Tones(): ReactNode {
     padding: 4,
     radius: 2,
     shadow: 1,
-  }
+  } as const
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>('light')
 
   return (
@@ -120,7 +120,12 @@ export function Tones(): ReactNode {
             onClick={() => setScheme(scheme === 'light' ? 'dark' : 'light')}
           />
         </Box>
-        <Flex gap={2} paddingTop={2} wrap={'wrap'} width={1400}>
+        <Flex
+          gap={2}
+          paddingTop={2}
+          wrap={'wrap'}
+          // width={1400}
+        >
           {tones.map((tone) => (
             <Card tone={tone} {...props} key={tone}>
               <Stack space={6}>

@@ -1,41 +1,18 @@
-import {forwardRef} from 'react'
-import {css, styled} from 'styled-components'
+import {composeClassNames, kbd, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize, Space} from '@sanity/ui/theme'
+import {ForwardedRef, forwardRef} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {Radius} from '../../types'
-import {Box} from '../box'
+import {Props} from '../../types'
+import {Box, BoxProps} from '../box'
 import {Text} from '../text'
 
 /**
  * @public
  */
-export interface KBDProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  fontSize?: number | number[]
-  padding?: number | number[]
-  radius?: Radius | Radius[]
+export interface KBDProps extends BoxProps, RadiusStyleProps {
+  fontSize?: ResponsiveProp<FontTextSize>
+  padding?: ResponsiveProp<Space>
 }
-
-function kbdStyle() {
-  return css`
-    --card-bg-color: var(--card-kbd-bg-color);
-    --card-border-color: var(--card-kbd-border-color);
-    --card-fg-color: var(--card-kbd-fg-color);
-
-    box-shadow: inset 0 0 0 1px var(--card-border-color);
-    background: var(--card-bg-color);
-    font: inherit;
-
-    vertical-align: top;
-
-    &:not([hidden]) {
-      display: inline-block;
-    }
-  `
-}
-
-const StyledKBD = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
 
 /**
  * Used to define some text as keyboard input.
@@ -43,19 +20,36 @@ const StyledKBD = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, 
  * @public
  */
 export const KBD = forwardRef(function KBD(
-  props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  props: Props<KBDProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {children, fontSize = 0, padding = 1, radius = 2, ...restProps} = props
+  const {
+    as = 'kbd',
+    children,
+    className,
+    display = 'inline-block',
+    fontSize = 1,
+    padding = 1,
+    radius = 2,
+    ...restProps
+  } = props
 
   return (
-    <StyledKBD data-ui="KBD" {...restProps} $radius={useArrayProp(radius)} ref={ref}>
-      <Box as="span" padding={padding}>
-        <Text as="span" size={fontSize} weight="semibold">
-          {children}
-        </Text>
-      </Box>
-    </StyledKBD>
+    <Box
+      data-ui="KBD"
+      {...restProps}
+      as={as}
+      className={composeClassNames(className, kbd({radius}))}
+      display={display}
+      muted
+      padding={padding}
+      ref={ref}
+    >
+      <Text as="span" muted size={fontSize}>
+        {children}
+      </Text>
+    </Box>
   )
 })
+
 KBD.displayName = 'ForwardRef(KBD)'

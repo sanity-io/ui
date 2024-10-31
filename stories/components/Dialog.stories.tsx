@@ -45,7 +45,6 @@ const meta: Meta<typeof Dialog> = {
   },
   argTypes: {
     cardRadius: getRadiusControls(),
-    cardShadow: getShadowControls(),
     padding: getSpaceControls(),
     paddingBottom: getSpaceControls(),
     paddingLeft: getSpaceControls(),
@@ -54,6 +53,7 @@ const meta: Meta<typeof Dialog> = {
     paddingX: getSpaceControls(),
     paddingY: getSpaceControls(),
     position: getPositionControls(),
+    shadow: getShadowControls(),
     width: getContainerWidthControls(),
   },
   component: Dialog,
@@ -222,7 +222,7 @@ export const DeleteDocumentDialog: Story = {
             header="Delete document"
             padding={3}
             footer={
-              <Flex width="full" gap={3} justify={'flex-end'} padding={3}>
+              <Flex width="fill" gap={3} justify={'flex-end'} padding={3}>
                 <Button onClick={onClose} mode="bleed" text="Cancel" tone="default" />
                 <Button onClick={onClose} mode="default" text="Close" tone="critical" />
               </Flex>

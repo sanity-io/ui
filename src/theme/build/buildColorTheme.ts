@@ -25,7 +25,7 @@ import {
   ThemeColorStateKey,
   ThemeColorStateToneKey,
   ThemeColorSyntax,
-} from '../system'
+} from '../v2'
 import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
 import {resolveColorTokens} from './resolveColorTokens'
 

@@ -17,7 +17,8 @@ const meta: Meta<typeof Menu> = {
   argTypes: {
     padding: getSpaceControls(),
     space: getSpaceControls(),
-    disabled: {control: 'boolean'},
+    // todo
+    // disabled: {control: 'boolean'},
     paddingX: getSpaceControls(),
     paddingY: getSpaceControls(),
     paddingBottom: getSpaceControls(),

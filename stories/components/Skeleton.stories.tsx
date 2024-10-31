@@ -1,13 +1,22 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
 import {
+  Box,
+  Card,
   CodeSkeleton,
+  CodeSkeletonProps,
+  Container,
+  Flex,
+  Grid,
   HeadingSkeleton,
+  HeadingSkeletonProps,
   LabelSkeleton,
+  LabelSkeletonProps,
   Skeleton,
+  Stack,
   TextSkeleton,
-} from '../../src/core/components'
-import {Box, Card, Container, Flex, Grid, Stack} from '../../src/core/primitives'
+  TextSkeletonProps,
+} from '../../src/core'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {
@@ -58,10 +67,26 @@ export const CardSkeleton: Story = {
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                   </Grid>
                   <Stack space={2} flex={1}>
-                    <HeadingSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <TextSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <LabelSkeleton style={{width: '100%'}} radius={1} {...props} />
-                    <CodeSkeleton style={{width: '100%'}} radius={1} {...props} />
+                    <HeadingSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as HeadingSkeletonProps)}
+                    />
+                    <TextSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as TextSkeletonProps)}
+                    />
+                    <LabelSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as LabelSkeletonProps)}
+                    />
+                    <CodeSkeleton
+                      style={{width: '100%'}}
+                      radius={1}
+                      {...(props as CodeSkeletonProps)}
+                    />
                   </Stack>
                 </Flex>
                 <Flex marginTop={2}>

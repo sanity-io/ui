@@ -5,9 +5,10 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PropsStory() {
+  const arrow = useBoolean('Arrow', false)
   const content = useText('Content', 'Tooltip content')
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2, 'Props')
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
@@ -37,6 +38,7 @@ export default function PropsStory() {
           </Text>
           <Flex align="center" justify="center" padding={4} sizing="border">
             <Tooltip
+              arrow={arrow}
               content={<Text size={1}>{content}</Text>}
               padding={padding}
               placement={placement}
@@ -71,6 +73,7 @@ export default function PropsStory() {
               }}
             >
               <Tooltip
+                arrow={arrow}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
                 delay={{
                   open: 100,
@@ -85,6 +88,7 @@ export default function PropsStory() {
                 <Button mode="bleed" text="Hover me" />
               </Tooltip>
               <Tooltip
+                arrow={arrow}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
                 delay={{
                   open: 100,

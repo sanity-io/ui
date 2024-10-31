@@ -2,7 +2,7 @@
 
 /* eslint-disable no-console */
 
-import React, {useCallback, useMemo} from 'react'
+import {MouseEvent, useCallback, useMemo} from 'react'
 
 import {render} from '../../../../test'
 import {MenuContext, MenuContextValue} from './menuContext'
@@ -23,12 +23,12 @@ describe('components/menu', () => {
 
       function Root() {
         const handleItemMouseEnter = useCallback(
-          (event: React.MouseEvent<HTMLElement>) => console.log(event),
+          (event: MouseEvent<HTMLElement>) => console.log(event),
           [],
         )
 
         const handleItemMouseLeave = useCallback(
-          (event: React.MouseEvent<HTMLElement>) => console.log(event),
+          (event: MouseEvent<HTMLElement>) => console.log(event),
           [],
         )
 

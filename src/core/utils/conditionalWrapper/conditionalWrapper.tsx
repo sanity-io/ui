@@ -1,3 +1,5 @@
+import {ReactNode} from 'react'
+
 /**
  * @internal
  * @deprecated this component will be removed in the next major release
@@ -7,10 +9,10 @@ export function ConditionalWrapper({
   condition,
   wrapper,
 }: {
-  children: React.ReactNode
+  children: ReactNode
   condition: boolean
-  wrapper: (children: React.ReactNode) => React.ReactNode
-}): React.ReactNode {
+  wrapper: (children: ReactNode) => ReactNode
+}): ReactNode {
   if (!condition) {
     return children
   }

@@ -1,4 +1,4 @@
-import {isColorBlendModeValue, isColorHueKey, isColorTintKey} from '../../system'
+import {isColorBlendModeValue, isColorHueKey, isColorTintKey} from '../../v2'
 import {isColorOpacityValue, isColorValue} from '../helpers'
 import {TokenValueNode} from './types'
 

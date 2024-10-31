@@ -3,6 +3,7 @@
   "include": [
     "./.storybook",
     "./exports",
+    "./package.json",
     "./package.config.ts",
     "./scripts",
     "./src",
@@ -16,12 +17,13 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist/types",
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "paths": {
       "@sanity/ui/*": ["./exports/*"],
       "@sanity/ui": ["./exports"]
     },
     // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "resolveJsonModule": true
   }
 }

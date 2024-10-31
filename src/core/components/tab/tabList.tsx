@@ -1,36 +1,45 @@
-import {Children, cloneElement, forwardRef, isValidElement, useCallback, useState} from 'react'
-import {styled} from 'styled-components'
+import {
+  Children,
+  cloneElement,
+  ForwardedRef,
+  forwardRef,
+  KeyboardEvent,
+  ReactElement,
+  useCallback,
+  useState,
+} from 'react'
 
 import {Inline, InlineProps} from '../../primitives'
+import {Props} from '../../types'
+import {TabProps} from './tab'
+
+/**
+ * @public
+ */
+export type TabListChild = ReactElement<Props<TabProps, 'button'>> | null | undefined | false
 
 /**
  * @public
  */
 export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
-  children: Array<React.JSX.Element | null | undefined | false>
+  children: TabListChild[]
 }
 
-//Limits the width of tabs in tablist
-const CustomInline = styled(Inline)`
-  & > div {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-`
+function _isReactElement(node: unknown): node is ReactElement<Props<TabProps, 'button'>> {
+  return Boolean(node)
+}
 
 /**
  * @public
  */
 export const TabList = forwardRef(function TabList(
-  props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref,
+  props: Props<TabListProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const {children: childrenProp, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
 
-  const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
+  const children = Children.toArray(childrenProp).filter(_isReactElement)
 
   const tabs = children.map((child, childIndex) =>
     cloneElement(child, {
@@ -43,7 +52,7 @@ export const TabList = forwardRef(function TabList(
   const numTabs = tabs.length
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'ArrowLeft') {
         setFocusedIndex((prevIndex) => (prevIndex + numTabs - 1) % numTabs)
       }
@@ -56,15 +65,10 @@ export const TabList = forwardRef(function TabList(
   )
 
   return (
-    <CustomInline
-      data-ui="TabList"
-      {...restProps}
-      onKeyDown={handleKeyDown}
-      ref={ref}
-      role="tablist"
-    >
+    <Inline data-ui="TabList" {...restProps} onKeyDown={handleKeyDown} ref={ref} role="tablist">
       {tabs}
-    </CustomInline>
+    </Inline>
   )
 })
+
 TabList.displayName = 'ForwardRef(TabList)'

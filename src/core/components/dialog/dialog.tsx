@@ -1,8 +1,32 @@
 import {CloseIcon} from '@sanity/icons'
+import {
+  composeClassNames,
+  ContainerStyleProps,
+  dialog,
+  dialogCardRoot,
+  dialogContainer,
+  dialogContent,
+  dialogFooter,
+  dialogHeader,
+  dialogLayout,
+  PaddingStyleProps,
+  RadiusStyleProps,
+  ResponsiveProp,
+  ShadowStyleProps,
+} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
+import {
+  FocusEvent,
+  ForwardedRef,
+  forwardRef,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 
+import {useTheme_v2} from '../../_compat'
 import {
   containsOrEqualsElement,
   focusFirstDescendant,
@@ -16,24 +40,14 @@ import {
   usePrefersReducedMotion,
 } from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
-import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
-import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
-import {useTheme_v2} from '../../theme'
-import {DialogPosition, Radius} from '../../types'
+import {CardTone, DialogPosition, Props, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
-import {
-  animationDialogStyle,
-  AnimationDialogStyleProps,
-  dialogStyle,
-  responsiveDialogPositionStyle,
-  ResponsiveDialogPositionStyleProps,
-} from './styles'
 import {useDialog} from './useDialog'
 
 /**
  * @public
  */
-export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProps {
+export interface DialogProps extends ContainerStyleProps, PaddingStyleProps, ShadowStyleProps {
   /**
    * @beta
    */
@@ -42,20 +56,6 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
    * @beta
    */
   __unstable_hideCloseButton?: boolean
-  cardRadius?: Radius | Radius[]
-  cardShadow?: number | number[]
-  contentRef?: React.ForwardedRef<HTMLDivElement>
-  footer?: React.ReactNode
-  header?: React.ReactNode
-  id: string
-  /** A callback that fires when the dialog becomes the top layer when it was not the top layer before. */
-  onActivate?: LayerProps['onActivate']
-  onClickOutside?: () => void
-  onClose?: () => void
-  portal?: string
-  position?: DialogPosition | DialogPosition[]
-  scheme?: ThemeColorSchemeKey
-  zOffset?: number | number[]
   /**
    * Whether the dialog should animate in on mount.
    *
@@ -63,9 +63,24 @@ export interface DialogProps extends ResponsivePaddingProps, ResponsiveWidthProp
    * @defaultValue false
    */
   animate?: boolean
+  cardRadius?: ResponsiveProp<Radius>
+  contentRef?: ForwardedRef<HTMLDivElement>
+  footer?: ReactNode
+  header?: ReactNode
+  id: string
+  /** A callback that fires when the dialog becomes the top layer when it was not the top layer before. */
+  onActivate?: LayerProps['onActivate']
+  onClickOutside?: () => void
+  onClose?: () => void
+  open?: boolean
+  portal?: string
+  position?: DialogPosition | DialogPosition[]
+  scheme?: ThemeColorSchemeKey
+  tone?: CardTone
+  zOffset?: number | number[]
 }
 
-interface DialogCardProps extends ResponsiveWidthProps {
+interface DialogCardProps extends ContainerStyleProps, RadiusStyleProps, ShadowStyleProps {
   /**
    * @beta
    */
@@ -74,17 +89,18 @@ interface DialogCardProps extends ResponsiveWidthProps {
    * @beta
    */
   __unstable_hideCloseButton: boolean
-  children: React.ReactNode
-  contentRef?: React.ForwardedRef<HTMLDivElement>
-  footer: React.ReactNode
-  header: React.ReactNode
+  children: ReactNode
+  contentRef?: ForwardedRef<HTMLDivElement>
+  footer: ReactNode
+  header: ReactNode
   id: string
   onClickOutside?: () => void
   onClose?: () => void
   portal?: string
-  radius: Radius | Radius[]
+  // radius: Radius | Radius[]
   scheme?: ThemeColorSchemeKey
-  shadow: number | number[]
+  // shadow: number | number[]
+  tone?: CardTone
 }
 
 function isTargetWithinScope(
@@ -100,58 +116,9 @@ function isTargetWithinScope(
   )
 }
 
-const StyledDialog = styled(Layer)<
-  ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps & AnimationDialogStyleProps
->(responsivePaddingStyle, dialogStyle, responsiveDialogPositionStyle, animationDialogStyle)
-
-const DialogContainer = styled(Container)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-const DialogCardRoot = styled(Card)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  min-height: 0;
-  max-height: 100%;
-  overflow: hidden;
-  overflow: clip;
-`
-
-const DialogLayout = styled(Flex)`
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-`
-
-const DialogHeader = styled(Box)`
-  position: relative;
-  z-index: 2;
-`
-
-const DialogContent = styled(Box)`
-  position: relative;
-  z-index: 1;
-  overflow: auto;
-  outline: none;
-`
-
-const DialogFooter = styled(Box)`
-  position: relative;
-  z-index: 3;
-`
-
 const DialogCard = forwardRef(function DialogCard(
   props: DialogCardProps,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+  forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   const {
     __unstable_autoFocus: autoFocus,
@@ -166,7 +133,8 @@ const DialogCard = forwardRef(function DialogCard(
     portal: portalProp,
     radius: radiusProp,
     scheme,
-    shadow: shadowProp,
+    shadow: shadowProp = 4,
+    tone,
     width: widthProp,
   } = props
   const portal = usePortal()
@@ -237,11 +205,27 @@ const DialogCard = forwardRef(function DialogCard(
   )
 
   return (
-    <DialogContainer data-ui="DialogCard" width={width}>
-      <DialogCardRoot radius={radius} ref={ref} scheme={scheme} shadow={shadow}>
-        <DialogLayout direction="column">
+    <Container
+      align="center"
+      className={dialogContainer()}
+      data-ui="DialogCard"
+      direction="column"
+      display="flex"
+      justify="center"
+      width={width}
+    >
+      <Card
+        className={dialogCardRoot()}
+        display="flex"
+        radius={radius}
+        ref={ref}
+        scheme={scheme}
+        shadow={shadow}
+        tone={tone}
+      >
+        <Flex className={dialogLayout()} direction="column" flex={1}>
           {showHeader && (
-            <DialogHeader>
+            <Box className={dialogHeader()} position="relative">
               <Flex align="flex-start" padding={3}>
                 <Box flex={1} padding={2}>
                   {header && (
@@ -263,17 +247,26 @@ const DialogCard = forwardRef(function DialogCard(
                   </Box>
                 )}
               </Flex>
-            </DialogHeader>
+            </Box>
           )}
-
-          <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
+          <Box
+            className={dialogContent()}
+            flex={1}
+            overflow="auto"
+            position="relative"
+            ref={contentRef}
+            tabIndex={-1}
+          >
             {children}
-          </DialogContent>
-
-          {footer && <DialogFooter>{footer}</DialogFooter>}
-        </DialogLayout>
-      </DialogCardRoot>
-    </DialogContainer>
+          </Box>
+          {footer && (
+            <Box className={dialogFooter()} position="relative">
+              {footer}
+            </Box>
+          )}
+        </Flex>
+      </Card>
+    </Container>
   )
 })
 
@@ -285,17 +278,19 @@ DialogCard.displayName = 'ForwardRef(DialogCard)'
  * @public
  */
 export const Dialog = forwardRef(function Dialog(
-  props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
-  ref: React.Ref<HTMLDivElement>,
+  props: Props<DialogProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const dialog = useDialog()
+  const context = useDialog()
   const {layer} = useTheme_v2()
   const {
     __unstable_autoFocus: autoFocus = true,
     __unstable_hideCloseButton: hideCloseButton = false,
+    animate: _animate = false,
     cardRadius: cardRadiusProp = 4,
-    cardShadow = 3,
+    // cardShadow = 3,
     children,
+    className,
     contentRef,
     footer,
     header,
@@ -304,24 +299,24 @@ export const Dialog = forwardRef(function Dialog(
     onClickOutside,
     onClose,
     onFocus,
-    padding: paddingProp = 3,
+    padding = 3,
     portal: portalProp,
     position: _positionProp,
     scheme,
+    shadow: cardShadow,
     width: widthProp = 0,
     zOffset: _zOffsetProp,
-    animate: _animate = false,
+    tone,
     ...restProps
   } = props
-  const positionProp = _positionProp ?? (dialog.position || 'fixed')
-  const zOffsetProp = _zOffsetProp ?? (dialog.zOffset || layer.dialog.zOffset)
+  const positionProp = _positionProp ?? (context.position || 'fixed')
+  const zOffsetProp = _zOffsetProp ?? (context.zOffset || layer.dialog.zOffset)
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
   const cardRadius = useArrayProp(cardRadiusProp)
-  const padding = useArrayProp(paddingProp)
   const position = useArrayProp(positionProp)
   const width = useArrayProp(widthProp)
   const zOffset = useArrayProp(zOffsetProp)
@@ -331,7 +326,7 @@ export const Dialog = forwardRef(function Dialog(
   const focusedElementRef = useRef<HTMLElement | null>(null)
 
   const handleFocus = useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
+    (event: FocusEvent<HTMLDivElement>) => {
       onFocus?.(event)
 
       const target = event.target
@@ -389,18 +384,20 @@ export const Dialog = forwardRef(function Dialog(
 
   return (
     <Portal __unstable_name={portalProp}>
-      <StyledDialog
+      <Layer
         {...restProps}
-        $animate={animate}
-        $padding={padding}
-        $position={position}
         aria-labelledby={labelId}
         aria-modal
+        className={composeClassNames(className, dialog())}
+        data-animate={animate ? '' : undefined}
         data-ui="Dialog"
+        display="flex"
         id={id}
         onActivate={onActivate}
         onClick={handleRootClick}
         onFocus={handleFocus}
+        padding={padding}
+        position={position}
         ref={ref}
         role="dialog"
         zOffset={zOffset}
@@ -421,14 +418,16 @@ export const Dialog = forwardRef(function Dialog(
           ref={cardRef}
           scheme={scheme}
           shadow={cardShadow}
+          tone={tone}
           width={width}
         >
           {children}
         </DialogCard>
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div ref={postDivRef} tabIndex={0} />
-      </StyledDialog>
+      </Layer>
     </Portal>
   )
 })
+
 Dialog.displayName = 'ForwardRef(Dialog)'

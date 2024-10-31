@@ -1,7 +1,7 @@
 import {Card, Container, Flex, Text} from '@sanity/ui'
 import {useAction, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '../../../../../workshop/constants'
 
 export default function PlainStory() {
   const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 0, 'Props')

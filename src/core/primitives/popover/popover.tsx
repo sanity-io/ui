@@ -9,13 +9,15 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
   cloneElement,
+  ForwardedRef,
   forwardRef,
   memo,
   MutableRefObject,
+  ReactElement,
+  ReactNode,
   RefCallback,
   useCallback,
   useEffect,
@@ -24,13 +26,12 @@ import {
   useRef,
 } from 'react'
 
+import {useTheme_v2} from '../../_compat'
 import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
-import {useTheme_v2} from '../../theme'
-import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
+import {Placement, PopoverMargins, Props} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement, useLayer} from '../../utils'
-import {getElementRef} from '../../utils/getElementRef'
-import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
+import {CardProps} from '../card'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_POPOVER_DISTANCE,
@@ -40,13 +41,10 @@ import {
 import {size} from './floating-ui/size'
 import {calcCurrentWidth, calcMaxWidth} from './helpers'
 import {PopoverCard} from './popoverCard'
-import {PopoverUpdateCallback, PopoverWidth} from './types'
+import {PopoverUpdateCallback} from './types'
 
 /** @public */
-export interface PopoverProps
-  extends Omit<LayerProps, 'as'>,
-    ResponsiveRadiusProps,
-    ResponsiveShadowProps {
+export interface PopoverProps extends CardProps, LayerProps {
   /** @beta */
   __unstable_margins?: PopoverMargins
   /**
@@ -59,7 +57,7 @@ export interface PopoverProps
   arrow?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
-  children?: React.JSX.Element
+  children?: ReactElement<{ref: ForwardedRef<HTMLElement>}>
   /**
    * When `true`, prevent overflow within the current boundary:
    * - by flipping on its side axis
@@ -72,7 +70,7 @@ export interface PopoverProps
    * @defaultValue false
    */
   constrainSize?: boolean
-  content?: React.ReactNode
+  content?: ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]
   floatingBoundary?: HTMLElement | null
@@ -93,8 +91,6 @@ export interface PopoverProps
    */
   modal?: boolean
   open?: boolean
-  overflow?: BoxOverflow
-  padding?: number | number[]
   placement?: Placement
   /** Whether or not to render the popover in a portal element. */
   portal?: boolean | string
@@ -105,13 +101,10 @@ export interface PopoverProps
    * The children of the popover won't be rendered.
    */
   referenceElement?: HTMLElement | null
-  scheme?: ThemeColorSchemeKey
-  tone?: CardTone
   /** @beta */
   updateRef?:
     | MutableRefObject<PopoverUpdateCallback | undefined>
     | RefCallback<PopoverUpdateCallback | undefined>
-  width?: PopoverWidth | PopoverWidth[]
 }
 
 const ViewportOverlay = () => {
@@ -127,10 +120,9 @@ const ViewportOverlay = () => {
  */
 export const Popover = memo(
   forwardRef(function Popover(
-    props: PopoverProps &
-      Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-    forwardedRef: React.ForwardedRef<HTMLDivElement>,
-  ): React.JSX.Element {
+    props: Props<PopoverProps, 'div'>,
+    forwardedRef: ForwardedRef<HTMLDivElement>,
+  ): ReactElement {
     const {container, layer} = useTheme_v2()
     const boundaryElementContext = useBoundaryElement()
 
@@ -152,15 +144,15 @@ export const Popover = memo(
       onActivate,
       open,
       overflow = 'hidden',
-      padding: paddingProp,
+      padding,
       placement: placementProp = 'bottom',
       portal,
       preventOverflow = true,
-      radius: radiusProp = 3,
+      radius = 3,
       referenceBoundary = props.boundaryElement ?? boundaryElementContext.element,
       referenceElement,
       scheme,
-      shadow: shadowProp = 3,
+      shadow = 3,
       tone = 'inherit',
       width: widthProp = 'auto',
       zOffset: zOffsetProp = layer.popover.zOffset,
@@ -170,9 +162,9 @@ export const Popover = memo(
     const prefersReducedMotion = usePrefersReducedMotion()
     const animate = prefersReducedMotion ? false : _animate
     const boundarySize = useElementSize(boundaryElement)?.border
-    const padding = useArrayProp(paddingProp)
-    const radius = useArrayProp(radiusProp)
-    const shadow = useArrayProp(shadowProp)
+    // const padding = useArrayProp(paddingProp)
+    // const radius = useArrayProp(radiusProp)
+    // const shadow = useArrayProp(shadowProp)
     const widthArrayProp = useArrayProp(widthProp)
     const zOffset = useArrayProp(zOffsetProp)
     const ref = useRef<HTMLDivElement | null>(null)
@@ -425,13 +417,13 @@ export const Popover = memo(
           placement={placement}
           radius={radius}
           ref={setFloating}
+          referenceWidth={matchReferenceWidth ? referenceWidthRef.current : width}
           scheme={scheme}
           shadow={shadow}
           originX={originX}
           originY={originY}
           strategy={strategy}
           tone={tone}
-          width={matchReferenceWidth ? referenceWidthRef.current : width}
           x={x}
           y={y}
         >
@@ -459,4 +451,33 @@ export const Popover = memo(
     )
   }),
 )
+
 Popover.displayName = 'Memo(ForwardRef(Popover))'
+
+// Before React 19 accessing `element.props.ref` will throw a warning and suggest using `element.ref`
+// After React 19 accessing `element.ref` does the opposite.
+// https://github.com/facebook/react/pull/28348
+//
+// Access the ref using the method that doesn't yield a warning.
+function getElementRef(
+  element: ReactElement<{ref: ForwardedRef<HTMLElement>}>,
+): ForwardedRef<HTMLElement> {
+  // React <=18 in DEV
+  let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
+  let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning
+
+  if (mayWarn) {
+    return (element as any).ref
+  }
+
+  // React 19 in DEV
+  getter = Object.getOwnPropertyDescriptor(element, 'ref')?.get
+  mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning
+
+  if (mayWarn) {
+    return element.props.ref
+  }
+
+  // Not DEV
+  return element.props.ref || (element as any).ref
+}

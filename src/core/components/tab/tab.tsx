@@ -1,41 +1,44 @@
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
+import {ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize, Space} from '@sanity/ui/theme'
+import {
+  ElementType,
+  FocusEvent,
+  ForwardedRef,
+  forwardRef,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 
 import {Button} from '../../primitives'
-import {ButtonTone} from '../../types'
+import {ButtonTone, Props} from '../../types'
 
 /**
  * @public
  */
 export interface TabProps {
   /**
-   * The `id` of the correlating `TabPanel` component.
+   * The `id` of the corresponding `TabPanel` component.
    */
   'aria-controls': string
   'id': string
-  'icon'?: React.ElementType | React.ReactNode
+  'icon'?: ElementType | ReactNode
   'focused'?: boolean
-  'fontSize'?: number | number[]
-  'label'?: React.ReactNode
-  'padding'?: number | number[]
+  'fontSize'?: ResponsiveProp<FontTextSize>
+  'label'?: ReactNode
+  'padding'?: ResponsiveProp<Space>
   'selected'?: boolean
   'tone'?: ButtonTone
 }
-
-const CustomButton = styled(Button)`
-  max-width: 100%;
-`
 
 /**
  * @public
  */
 export const Tab = forwardRef(function Tab(
-  props: TabProps &
-    Omit<
-      React.HTMLProps<HTMLButtonElement>,
-      'aria-controls' | 'as' | 'id' | 'label' | 'type' | 'width'
-    >,
-  forwardedRef: React.ForwardedRef<HTMLButtonElement>,
+  props: Props<TabProps, 'button'>,
+  forwardedRef: ForwardedRef<HTMLButtonElement>,
 ) {
   const {
     icon,
@@ -62,7 +65,7 @@ export const Tab = forwardRef(function Tab(
   }, [])
 
   const handleFocus = useCallback(
-    (event: React.FocusEvent<HTMLButtonElement>) => {
+    (event: FocusEvent<HTMLButtonElement>) => {
       focusedRef.current = true
       if (onFocus) onFocus(event)
     },
@@ -77,7 +80,7 @@ export const Tab = forwardRef(function Tab(
   }, [focused])
 
   return (
-    <CustomButton
+    <Button
       data-ui="Tab"
       {...restProps}
       aria-selected={selected ? 'true' : 'false'}
@@ -98,4 +101,5 @@ export const Tab = forwardRef(function Tab(
     />
   )
 })
+
 Tab.displayName = 'ForwardRef(Tab)'
