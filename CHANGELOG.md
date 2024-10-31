@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.16](https://github.com/sanity-io/ui/compare/v2.8.15...v2.8.16) (2024-10-31)
+
+### Bug Fixes
+
+- **deps:** move `react-compiler-runtime` to regular deps ([#1446](https://github.com/sanity-io/ui/issues/1446)) ([8379b57](https://github.com/sanity-io/ui/commit/8379b57922b3db920565b988d7f9c5e2981beda4))
+
 ## [2.8.15](https://github.com/sanity-io/ui/compare/v2.8.14...v2.8.15) (2024-10-31)
 
 ### Bug Fixes
