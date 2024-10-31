@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.15](https://github.com/sanity-io/ui/compare/v2.8.14...v2.8.15) (2024-10-31)
+
+### Bug Fixes
+
+- optimise perf with react compiler ([#1444](https://github.com/sanity-io/ui/issues/1444)) ([26417b1](https://github.com/sanity-io/ui/commit/26417b1ed30a6461b3e1a05b20dd7ea1b16318aa))
+
 ## [2.8.14](https://github.com/sanity-io/ui/compare/v2.8.13...v2.8.14) (2024-10-31)
 
 ### Features
