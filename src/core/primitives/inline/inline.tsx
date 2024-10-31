@@ -1,20 +1,17 @@
-import {Children, forwardRef, useMemo} from 'react'
-import {styled} from 'styled-components'
+import {ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
+import {Children, ForwardedRef, forwardRef, useMemo} from 'react'
 
-import {useArrayProp} from '../../hooks'
+import {Props} from '../../types'
 import {Box, BoxProps} from '../box'
-import {inlineBaseStyle, inlineSpaceStyle} from './styles'
-import {ResponsiveInlineSpaceStyleProps} from './types'
 
 /**
  * @public
  */
-export interface InlineProps extends Omit<BoxProps, 'display'> {
-  /** The spacing between children. */
-  space?: number | number[]
+export interface InlineProps extends Omit<BoxProps, 'align' | 'display' | 'justify'> {
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
 }
-
-const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
 
 /**
  * The `Inline` component is a layout utility for aligning and spacing items horizontally.
@@ -22,26 +19,32 @@ const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyl
  * @public
  */
 export const Inline = forwardRef(function Inline(
-  props: InlineProps & React.HTMLProps<HTMLDivElement>,
-  ref,
+  props: Props<InlineProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, children: childrenProp, space, ...restProps} = props
+  const {as, children: childrenProp, gap, gapX, gapY, space, ...restProps} = props
 
   const children = useMemo(
-    () => Children.map(childrenProp, (child) => child && <div>{child}</div>),
+    () => Children.map(childrenProp, (child) => child && <Box maxWidth="fill">{child}</Box>),
     [childrenProp],
   )
 
   return (
-    <StyledInline
+    <Box
       data-ui="Inline"
       {...restProps}
-      $space={useArrayProp(space)}
-      forwardedAs={as}
-      ref={ref as any}
+      align="center"
+      as={as}
+      display="flex"
+      gap={gap ?? space}
+      gapX={gapX}
+      gapY={gapY}
+      ref={ref}
+      wrap="wrap"
     >
       {children}
-    </StyledInline>
+    </Box>
   )
 })
+
 Inline.displayName = 'ForwardRef(Inline)'

@@ -2,7 +2,7 @@ import {BoundaryElementProvider, Button, Card, Code, Flex, Stack, Text, Tooltip}
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
-import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../../../workshop/constants'
 
 export default function OverflowingBoundaryStory() {
   const content = useText(

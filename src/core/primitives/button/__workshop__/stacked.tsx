@@ -1,5 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Box, Button, Card, Container, Flex, Stack} from '@sanity/ui'
+import {FontTextSize} from '@sanity/ui/theme'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {
@@ -9,7 +10,7 @@ import {
   WORKSHOP_ICON_SYMBOL_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function StackedStory() {
   const tones = Object.entries(WORKSHOP_BUTTON_TONE_OPTIONS)
@@ -34,7 +35,7 @@ export default function StackedStory() {
               {tones.map(([title, tone]) => (
                 <Button
                   disabled={disabled}
-                  fontSize={fontSize}
+                  fontSize={fontSize as FontTextSize}
                   icon={icon && icons[icon]}
                   iconRight={iconRight && icons[iconRight]}
                   justify={justify}

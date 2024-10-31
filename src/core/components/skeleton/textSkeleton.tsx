@@ -1,37 +1,23 @@
-import {getTheme_v2, ThemeFontKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {
+  codeSkeleton,
+  composeClassNames,
+  headingSkeleton,
+  labelSkeleton,
+  ResponsiveProp,
+  textSkeleton,
+} from '@sanity/ui/css'
+import {FontCodeSize, FontHeadingSize, FontLabelSize, FontTextSize} from '@sanity/ui/theme'
+import {ForwardedRef, forwardRef} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {_responsive, ThemeProps} from '../../styles'
+import {Props} from '../../types'
 import {Skeleton, SkeletonProps} from './skeleton'
-
-const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
-  props: {
-    $size: number[]
-    $style: ThemeFontKey
-  } & ThemeProps,
-) => {
-  const {$size, $style} = props
-  const {font, media} = getTheme_v2(props.theme)
-  const fontStyle = font[$style]
-
-  const styles = _responsive(media, $size, (sizeIndex) => {
-    const fontSize = fontStyle.sizes[sizeIndex]
-    const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
-
-    return {height: capHeight}
-  })
-
-  return styles
-})
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
 export interface TextSkeletonProps extends SkeletonProps {
-  size?: number | number[]
+  size?: ResponsiveProp<FontTextSize>
 }
 
 /**
@@ -39,7 +25,7 @@ export interface TextSkeletonProps extends SkeletonProps {
  * @beta
  */
 export interface LabelSkeletonProps extends SkeletonProps {
-  size?: number | number[]
+  size?: ResponsiveProp<FontLabelSize>
 }
 
 /**
@@ -47,7 +33,7 @@ export interface LabelSkeletonProps extends SkeletonProps {
  * @beta
  */
 export interface HeadingSkeletonProps extends SkeletonProps {
-  size?: number | number[]
+  size?: ResponsiveProp<FontHeadingSize>
 }
 
 /**
@@ -55,7 +41,7 @@ export interface HeadingSkeletonProps extends SkeletonProps {
  * @beta
  */
 export interface CodeSkeletonProps extends SkeletonProps {
-  size?: number | number[]
+  size?: ResponsiveProp<FontCodeSize>
 }
 
 /**
@@ -63,15 +49,21 @@ export interface CodeSkeletonProps extends SkeletonProps {
  * @beta
  */
 export const TextSkeleton = forwardRef(function TextSkeleton(
-  props: TextSkeletonProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
+  props: Props<TextSkeletonProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const {className, size = 2, ...restProps} = props
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="text" />
+  return (
+    <Skeleton
+      data-ui="TextSkeleton"
+      {...restProps}
+      className={composeClassNames(className, textSkeleton({size}))}
+      ref={ref}
+    />
+  )
 })
+
 TextSkeleton.displayName = 'ForwardRef(TextSkeleton)'
 
 /**
@@ -79,15 +71,21 @@ TextSkeleton.displayName = 'ForwardRef(TextSkeleton)'
  * @beta
  */
 export const LabelSkeleton = forwardRef(function TextSkeleton(
-  props: LabelSkeletonProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
+  props: Props<LabelSkeletonProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const {className, size = 2, ...restProps} = props
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="label" />
+  return (
+    <Skeleton
+      data-ui="LabelSkeleton"
+      {...restProps}
+      className={composeClassNames(className, labelSkeleton({size}))}
+      ref={ref}
+    />
+  )
 })
+
 LabelSkeleton.displayName = 'ForwardRef(LabelSkeleton)'
 
 /**
@@ -95,15 +93,20 @@ LabelSkeleton.displayName = 'ForwardRef(LabelSkeleton)'
  * @beta
  */
 export const HeadingSkeleton = forwardRef(function TextSkeleton(
-  props: HeadingSkeletonProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
+  props: Props<HeadingSkeletonProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const {className, size = 2, ...restProps} = props
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="heading" />
+  return (
+    <Skeleton
+      {...restProps}
+      className={composeClassNames(className, headingSkeleton({size}))}
+      ref={ref}
+    />
+  )
 })
+
 HeadingSkeleton.displayName = 'ForwardRef(HeadingSkeleton)'
 
 /**
@@ -111,13 +114,19 @@ HeadingSkeleton.displayName = 'ForwardRef(HeadingSkeleton)'
  * @beta
  */
 export const CodeSkeleton = forwardRef(function TextSkeleton(
-  props: CodeSkeletonProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
+  props: Props<CodeSkeletonProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {size = 2, ...restProps} = props
-  const $size = useArrayProp(size)
+  const {className, size = 2, ...restProps} = props
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="code" />
+  return (
+    <Skeleton
+      // root
+      {...restProps}
+      className={composeClassNames(className, codeSkeleton({size}))}
+      ref={ref}
+    />
+  )
 })
+
 CodeSkeleton.displayName = 'ForwardRef(CodeSkeleton)'

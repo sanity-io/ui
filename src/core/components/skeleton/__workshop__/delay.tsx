@@ -13,7 +13,7 @@ import {
 } from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop/constants'
 
 export default function SkeletonDelayStory() {
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, '', 'Props') || 'default'

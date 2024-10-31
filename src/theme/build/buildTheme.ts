@@ -1,36 +1,12 @@
-import {ThemeConfig} from '../config'
-import {defaultThemeConfig} from '../defaults/config'
-import {defaultThemeFonts} from '../defaults/fonts'
-import {RootTheme, RootTheme_v2} from '../system'
-import {v2_v0} from '../versioning'
-import {buildColorTheme} from './buildColorTheme'
-import {renderThemeColorSchemes} from './renderColorTheme'
+import {type ThemeConfig} from '../config'
+import {type RootTheme} from '../types'
+import {buildTheme_v3, type Theme_v3} from '../v3'
+import {v2_v0} from '../versioning/v2_v0'
+import {v3_v2} from '../versioning/v3_v2'
 
 /** @internal */
-export function buildTheme(config?: ThemeConfig): RootTheme {
-  const colorTheme = buildColorTheme(config)
+export function buildTheme(_config?: ThemeConfig): RootTheme {
+  const v3: Theme_v3 = buildTheme_v3({v2: _config})
 
-  const v2: RootTheme_v2 = {
-    _version: 2,
-    avatar: config?.avatar ?? defaultThemeConfig.avatar,
-    button: config?.button ?? defaultThemeConfig.button,
-    card: config?.card ?? defaultThemeConfig.card,
-    // How colors are generated:
-    // 1. Merge custom tokens with default tokens
-    // 2. Generate tree of color keys (gray/500, black, white, etc.)
-    // 3. Apply mixing and render to hex values
-    // render(build(mergeWithDefaults()))
-    color: renderThemeColorSchemes(colorTheme, config),
-    container: config?.container ?? defaultThemeConfig.container,
-    font: config?.font ?? defaultThemeFonts,
-    input: config?.input ?? defaultThemeConfig.input,
-    layer: config?.layer ?? defaultThemeConfig.layer,
-    media: config?.media ?? defaultThemeConfig.media,
-    radius: config?.radius ?? defaultThemeConfig.radius,
-    shadow: config?.shadow ?? defaultThemeConfig.shadow,
-    space: config?.space ?? defaultThemeConfig.space,
-    style: config?.style ?? defaultThemeConfig.style,
-  }
-
-  return v2_v0(v2)
+  return v2_v0(v3_v2(v3), v3)
 }

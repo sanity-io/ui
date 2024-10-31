@@ -1,37 +1,25 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {
+  composeClassNames,
+  FontStyleProps,
+  label,
+  LabelSize,
+  ResponsiveProp,
+  textOverflow,
+  TextOverflowStyleProps,
+} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
-import {TextAlign} from '../../types'
-import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
-import {labelBaseStyle} from './styles'
+import {Props} from '../../types'
 
 /**
  * @public
  */
-export interface LabelProps {
+export interface LabelProps extends FontStyleProps, TextOverflowStyleProps {
   accent?: boolean
-  align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+  htmlFor?: string
   muted?: boolean
-  size?: number | number[]
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis'
-  weight?: ThemeFontWeightKey
+  size?: ResponsiveProp<LabelSize>
 }
-
-const StyledLabel = styled.div<{
-  $accent?: boolean
-  $align: TextAlign[]
-  $muted: boolean
-  $size: number[]
-}>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 
 /**
  * Typographic labels.
@@ -39,41 +27,41 @@ const StyledLabel = styled.div<{
  * @public
  */
 export const Label = forwardRef(function Label(
-  props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+  props: Props<LabelProps, 'div'>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent,
     align,
-    children: childrenProp,
+    as: As = 'div',
+    children,
+    className,
     muted = false,
-    size = 2,
-    textOverflow,
-    weight,
+    size = 1,
+    textOverflow: textOverflowProp,
+    weight = 'medium',
     ...restProps
   } = props
 
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  } else {
-    children = <span>{children}</span>
-  }
-
   return (
-    <StyledLabel
+    <As
       data-ui="Label"
       {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
-      $size={useArrayProp(size)}
-      $weight={weight}
+      className={composeClassNames(
+        className,
+        label({
+          accent,
+          align,
+          muted,
+          size,
+          weight,
+        }),
+      )}
       ref={ref}
     >
-      {children}
-    </StyledLabel>
+      <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
+    </As>
   )
 })
+
 Label.displayName = 'ForwardRef(Label)'

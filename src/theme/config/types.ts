@@ -1,15 +1,14 @@
 import {ColorHueKey, ColorTint as ColorPaletteValue, ColorTintKey} from '@sanity/color'
 
 import {
-  ThemeAvatar_v2,
   ThemeFocusRing,
   ThemeFonts,
   ThemeFontWeightKey,
-  ThemeInput_v2,
   ThemeLayer,
   ThemeShadow,
   ThemeStyles,
-} from '../system'
+} from '../v0'
+import {ThemeAvatar_v2, ThemeInput_v2} from '../v2'
 import {ThemeColorTokens} from './tokens'
 
 /** @public */

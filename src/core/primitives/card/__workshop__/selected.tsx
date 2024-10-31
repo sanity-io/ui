@@ -1,14 +1,13 @@
 import {EditIcon, PublishIcon} from '@sanity/icons'
-import {Box, Card, Container, Flex, Inline, Stack, Text, ThemeProps, useRootTheme} from '@sanity/ui'
-import {getTheme_v2, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import {Box, Card, Container, Flex, Inline, Stack, Text, useRootTheme} from '@sanity/ui'
+import {getTheme_v2, Theme, ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {useBoolean} from '@sanity/ui-workshop'
 import {css, styled} from 'styled-components'
 
-const TextWithTone = styled(Text)<{$tone: ThemeColorStateToneKey}>((
-  props: {
-    $tone: ThemeColorStateToneKey
-  } & ThemeProps,
-) => {
+const TextWithTone = styled(Text)<{$tone: ThemeColorStateToneKey}>((props: {
+  $tone: ThemeColorStateToneKey
+  theme: Theme
+}) => {
   const {$tone} = props
   const {color} = getTheme_v2(props.theme)
   const tone = color.button.default[$tone]

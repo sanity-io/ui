@@ -13,7 +13,7 @@
     "rootDir": ".",
     "outDir": "./dist",
     "paths": {
-      "@sanity/ui/theme": ["./exports/theme.ts"],
+      "@sanity/ui/*": ["./exports/*.ts"],
       "@sanity/ui": ["./exports"]
     }
   }

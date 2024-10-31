@@ -1,40 +1,18 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-
-import {useArrayProp} from '../../hooks'
 import {
-  ResponsiveFontStyleProps,
-  responsiveHeadingFont,
-  responsiveTextAlignStyle,
-  ResponsiveTextAlignStyleProps,
-} from '../../styles/internal'
-import {TextAlign} from '../../types'
-import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
-import {headingBaseStyle} from './styles'
-import {HeadingStyleProps} from './types'
+  composeClassNames,
+  heading,
+  type HeadingStyleProps,
+  textOverflow,
+  type TextOverflowStyleProps,
+} from '@sanity/ui/css'
+import {ForwardedRef, forwardRef} from 'react'
+
+import {Props} from '../../types'
 
 /**
  * @public
  */
-export interface HeadingProps {
-  accent?: boolean
-  align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  muted?: boolean
-  size?: number | number[]
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis'
-  weight?: ThemeFontWeightKey
-}
-
-const StyledHeading = styled.div<
-  HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
->(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
+export interface HeadingProps extends HeadingStyleProps, TextOverflowStyleProps {}
 
 /**
  * Typographic headings.
@@ -42,39 +20,43 @@ const StyledHeading = styled.div<
  * @public
  */
 export const Heading = forwardRef(function Heading(
-  props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLElement>,
+  props: Props<HeadingProps, 'div'>,
+  ref: ForwardedRef<HTMLElement>,
 ) {
   const {
     accent = false,
     align,
-    children: childrenProp,
+    as: As = 'div',
+    children,
+    className,
+    flex,
     muted = false,
-    size = 2,
-    textOverflow,
+    size = 1,
+    textOverflow: textOverflowProp,
     weight,
     ...restProps
   } = props
 
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  }
-
   return (
-    <StyledHeading
+    <As
       data-ui="Heading"
       {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
-      $size={useArrayProp(size)}
-      $weight={weight}
+      className={composeClassNames(
+        className,
+        heading({
+          accent,
+          align,
+          flex,
+          muted,
+          size,
+          weight,
+        }),
+      )}
       ref={ref}
     >
-      <span>{children}</span>
-    </StyledHeading>
+      <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
+    </As>
   )
 })
+
 Heading.displayName = 'ForwardRef(Heading)'

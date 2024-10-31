@@ -1,14 +1,11 @@
 import {defaultThemeConfig} from './defaults/config'
-import {
-  RootTheme,
-  RootTheme_v2,
-  Theme,
-  ThemeColor,
-  ThemeColorCardToneKey,
-  ThemeColorSchemeKey,
-} from './system'
-import {is_v2, v0_v2, v2_v0} from './versioning'
+import {RootTheme, Theme} from './types'
+import {ThemeColor} from './v0'
+import {RootTheme_v2, ThemeColorCardToneKey, ThemeColorSchemeKey} from './v2'
+import {is_v2} from './versioning/is_v2'
 import {themeColor_v0_v2_9} from './versioning/themeColor_v2_v2_9'
+import {v0_v2} from './versioning/v0_v2'
+import {v2_v0} from './versioning/v2_v0'
 
 // cache[scheme][tone][rootTheme] = theme
 const cache = new Map<

@@ -1,4 +1,4 @@
-import {ThemeFonts} from '../system'
+import {ThemeFonts} from '../v0'
 
 export const defaultThemeFonts: ThemeFonts = {
   code: {
@@ -55,11 +55,12 @@ export const defaultThemeFonts: ThemeFonts = {
   heading: {
     family:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
+    featureSettings: `'liga' 1, 'calt' 1, 'ss01' 1, 'ss03' 1, 'zero' 1`,
     weights: {
-      regular: 700,
-      medium: 800,
-      semibold: 900,
-      bold: 900,
+      regular: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
     },
     sizes: [
       {
@@ -84,7 +85,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 21,
         iconSize: 33,
         lineHeight: 29,
-        letterSpacing: 0,
+        letterSpacing: -0.25,
       },
       {
         ascenderHeight: 8,
@@ -92,7 +93,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 27,
         iconSize: 41,
         lineHeight: 35,
-        letterSpacing: 0,
+        letterSpacing: -0.5,
       },
       {
         ascenderHeight: 9.5,
@@ -100,7 +101,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 33,
         iconSize: 49,
         lineHeight: 41,
-        letterSpacing: 0,
+        letterSpacing: -1,
       },
       {
         ascenderHeight: 10.5,
@@ -108,7 +109,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 38,
         iconSize: 53,
         lineHeight: 47,
-        letterSpacing: 0,
+        letterSpacing: -1,
       },
     ],
   },
@@ -116,10 +117,10 @@ export const defaultThemeFonts: ThemeFonts = {
     family:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", system-ui, sans-serif',
     weights: {
-      regular: 600,
-      medium: 700,
-      semibold: 800,
-      bold: 900,
+      regular: 500,
+      medium: 600,
+      semibold: 700,
+      bold: 800,
     },
     sizes: [
       {
@@ -131,8 +132,8 @@ export const defaultThemeFonts: ThemeFonts = {
         letterSpacing: 0.5,
       },
       {
-        ascenderHeight: 2,
-        descenderHeight: 2,
+        ascenderHeight: 1.5,
+        descenderHeight: 2.5,
         fontSize: 9.5,
         iconSize: 15,
         lineHeight: 11,
@@ -155,8 +156,8 @@ export const defaultThemeFonts: ThemeFonts = {
         letterSpacing: 0.5,
       },
       {
-        ascenderHeight: 2,
-        descenderHeight: 2,
+        ascenderHeight: 1.5,
+        descenderHeight: 2.5,
         fontSize: 13.6,
         iconSize: 21,
         lineHeight: 14,

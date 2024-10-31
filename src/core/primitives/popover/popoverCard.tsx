@@ -1,11 +1,9 @@
 import {Strategy} from '@floating-ui/react-dom'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {motion, type MotionProps} from 'framer-motion'
-import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
-import {styled} from 'styled-components'
+import {motion, MotionProps} from 'framer-motion'
+import {CSSProperties, ForwardedRef, forwardRef, memo, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'
-import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
+import {Placement, PopoverMargins, Props} from '../../types'
 import {Arrow, useLayer} from '../../utils'
 import {Card, CardProps} from '../card'
 import {Flex} from '../flex'
@@ -16,48 +14,33 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
-const MotionCard = styled(motion.create(Card))`
-  &:not([hidden]) {
-    display: flex;
-  }
-  flex-direction: column;
-  width: max-content;
-  min-width: min-content;
-  will-change: transform;
-`
+/** @internal */
+export interface PopoverCardProps extends CardProps {
+  /** @beta*/
+  __unstable_margins?: PopoverMargins
+  animate?: boolean
+  arrow: boolean
+  arrowRef: ForwardedRef<HTMLDivElement>
+  arrowX?: number
+  arrowY?: number
+  originX?: number
+  originY?: number
+  placement: Placement
+  referenceWidth?: number
+  strategy: Strategy
+  x: number | null
+  y: number | null
+}
 
-const MotionFlex = styled(motion.create(Flex))`
-  will-change: opacity;
-`
+const MotionCard = motion.create(Card)
 
 /**
  * @internal
  */
 export const PopoverCard = memo(
   forwardRef(function PopoverCard(
-    props: {
-      /** @beta*/
-      __unstable_margins?: PopoverMargins
-      animate?: boolean
-      arrow: boolean
-      arrowRef: React.Ref<HTMLDivElement>
-      arrowX?: number
-      arrowY?: number
-      originX?: number
-      originY?: number
-      overflow?: BoxOverflow
-      padding?: number | number[]
-      placement: Placement
-      radius?: Radius | Radius[]
-      scheme?: ThemeColorSchemeKey
-      shadow?: number | number[]
-      strategy: Strategy
-      tone: CardTone
-      width: number | undefined
-      x: number | null
-      y: number | null
-    } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-    ref: React.ForwardedRef<HTMLDivElement>,
+    props: Props<PopoverCardProps, 'div'>,
+    ref: ForwardedRef<HTMLDivElement>,
   ) {
     const {
       __unstable_margins: marginsProp,
@@ -73,12 +56,13 @@ export const PopoverCard = memo(
       originY,
       overflow,
       radius,
+      referenceWidth,
       scheme,
       shadow,
       strategy,
       style,
       tone,
-      width,
+      // width,
       x: xProp,
       y: yProp,
       ...restProps
@@ -103,12 +87,12 @@ export const PopoverCard = memo(
         originY,
         position: strategy,
         top: y,
-        width,
+        width: referenceWidth,
         zIndex,
         willChange: animate ? 'transform' : undefined,
         ...style,
       }),
-      [animate, originX, originY, strategy, style, width, x, y, zIndex],
+      [animate, originX, originY, referenceWidth, strategy, style, x, y, zIndex],
     )
 
     const arrowStyle: CSSProperties = useMemo(
@@ -123,9 +107,12 @@ export const PopoverCard = memo(
 
     return (
       <MotionCard
+        className="popover-card"
         data-ui="Popover"
         {...(restProps as CardProps & MotionProps)}
         data-placement={placement}
+        direction="column"
+        display="flex"
         radius={radius}
         ref={ref}
         scheme={scheme}
@@ -139,18 +126,11 @@ export const PopoverCard = memo(
         animate={animate ? ['visible', 'scaleIn'] : undefined}
         exit={animate ? ['hidden', 'scaleOut'] : undefined}
       >
-        <MotionFlex
-          data-ui="Popover__wrapper"
-          direction="column"
-          flex={1}
-          overflow={overflow}
-          variants={POPOVER_MOTION_PROPS.children}
-          transition={POPOVER_MOTION_PROPS.transition}
-        >
+        <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
           <Flex direction="column" flex={1} padding={padding}>
             {children}
           </Flex>
-        </MotionFlex>
+        </Flex>
 
         {arrow && (
           <Arrow

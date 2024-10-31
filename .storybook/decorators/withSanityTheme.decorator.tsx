@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {Card, studioTheme, ThemeProvider} from '@sanity/ui'
+import {Card, studioTheme, StyleTags, ThemeProvider} from '@sanity/ui'
 import {DecoratorHelpers} from '@storybook/addon-themes'
 import {StoryFn} from '@storybook/react'
 import {createGlobalStyle} from 'styled-components'
@@ -32,6 +32,7 @@ export const withSanityTheme = ({themes, defaultTheme}) => {
 
     return (
       <ThemeProvider scheme={selected} theme={studioTheme}>
+        <StyleTags />
         <GlobalStyle />
         <Card padding={4}>
           <Story />

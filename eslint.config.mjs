@@ -124,6 +124,11 @@ export default ts.config(
             mode: 'file',
           },
           {
+            type: '@sanity/ui/css',
+            pattern: ['exports/css.ts'],
+            mode: 'file',
+          },
+          {
             type: '@sanity/ui/_visual-editing',
             pattern: ['exports/_visual-editing.ts'],
             mode: 'file',
@@ -136,8 +141,18 @@ export default ts.config(
 
           // modules
           {
+            type: 'src/cli',
+            pattern: ['src/cli/**/*'],
+            mode: 'full',
+          },
+          {
             type: 'src/core',
             pattern: ['src/core/**/*'],
+            mode: 'full',
+          },
+          {
+            type: 'src/css',
+            pattern: ['src/css/**/*'],
             mode: 'full',
           },
           {
@@ -200,7 +215,9 @@ export default ts.config(
               {from: '@sanity/ui', allow: ['@sanity/ui/theme', 'src/core']},
               {from: '@sanity/ui/_visual-editing', allow: ['src/core', 'src/theme']},
               {from: '@sanity/ui/theme', allow: ['src/theme']},
-              {from: 'src/core', allow: ['src/core', '@sanity/ui/theme']},
+              {from: 'src/cli', allow: []},
+              {from: 'src/core', allow: ['src/core', '@sanity/ui/css', '@sanity/ui/theme']},
+              {from: 'src/css', allow: ['src/css', '@sanity/ui/theme']},
               {from: 'src/theme', allow: ['src/theme']},
               {from: 'test', allow: ['@sanity/ui', '@sanity/ui/theme']},
               {from: 'test/storybook', allow: ['test/storybook']},
