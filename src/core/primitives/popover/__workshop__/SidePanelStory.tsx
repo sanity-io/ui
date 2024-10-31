@@ -1,6 +1,8 @@
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
+import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop/constants'
+import {CardTone} from '../../../types'
 import {BoundaryElementProvider} from '../../../utils'
 import {Box} from '../../box'
 import {Card} from '../../card'
@@ -21,6 +23,7 @@ export default function SidePanelStory() {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
+  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS) ?? 'inherit'
 
   useEffect(() => updateRef.current?.(), [sidePanelWidth])
 
@@ -42,7 +45,7 @@ export default function SidePanelStory() {
 
             <Card border padding={3}>
               <Text size={1}>
-                Some editor <InlineObject updateRef={updateRef} />
+                Some editor <InlineObject tone={tone} updateRef={updateRef} />
               </Text>
             </Card>
           </Stack>
@@ -52,8 +55,8 @@ export default function SidePanelStory() {
   )
 }
 
-function InlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
-  const {updateRef} = props
+function InlineObject(props: {tone: CardTone; updateRef?: PopoverProps['updateRef']}) {
+  const {tone, updateRef} = props
   const [open, setOpen] = useState(false)
 
   const handleClick = useCallback(() => {
@@ -79,6 +82,7 @@ function InlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
       open={open}
       overflow="auto"
       portal
+      tone={tone}
       width={0}
       updateRef={updateRef}
     >

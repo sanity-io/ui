@@ -1,17 +1,17 @@
 import {AddCircleIcon} from '@sanity/icons'
+import {Card, Flex, Stack, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, Flex, Stack, Text} from '../../src/core/primitives'
-import {getAlignControls, getFontSizeControls, getTextOverflowControls} from '../controls'
+import {FONT_TEXT_SIZE_CONTROLS, TEXT_ALIGN_CONTROLS, TEXT_OVERFLOW_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Text> = {
   args: {
     children: 'Jackdaws love my big sphinx of quartz',
   },
   argTypes: {
-    align: getAlignControls(),
-    size: getFontSizeControls('text'),
-    textOverflow: getTextOverflowControls(),
+    align: TEXT_ALIGN_CONTROLS,
+    size: FONT_TEXT_SIZE_CONTROLS,
+    textOverflow: TEXT_OVERFLOW_CONTROLS,
   },
   component: Text,
   tags: ['autodocs'],
@@ -62,7 +62,7 @@ export const Sizes: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         <Text {...props} size={4} />
         <Text {...props} size={3} />
         <Text {...props} size={2} />
@@ -81,7 +81,7 @@ export const Weights: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={3}>
+      <Stack gap={3}>
         <Text {...props} />
         <Text {...props} weight="medium" />
         <Text {...props} weight="semibold" />
@@ -99,7 +99,7 @@ export const OpticalAlignment: Story = {
   },
   render: (props) => {
     return (
-      <Stack space={1}>
+      <Stack gap={1}>
         <Flex>
           <Card padding={0}>
             <Text {...props} size={4} />
@@ -141,12 +141,12 @@ export const TextInCard: Story = {
   render: () => {
     return (
       <Flex>
-        <Stack space={4} wrap={'wrap'}>
+        <Stack gap={4} wrap={'wrap'}>
           <Text>Text without card</Text>
           <Text muted>Text muted</Text>
 
           <Card padding={4} shadow={1}>
-            <Stack space={4}>
+            <Stack gap={4}>
               <Text>Text wrapped in card</Text>
               <Text muted>Text muted</Text>
             </Stack>

@@ -1,8 +1,8 @@
+import {Avatar, Flex, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Avatar, Flex, Stack} from '../../src/core/primitives'
 import {AVATAR_SRC} from '../constants'
-import {getAvatarSizeControls} from '../controls'
+import {AVATAR_SIZE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Avatar> = {
   args: {
@@ -10,7 +10,7 @@ const meta: Meta<typeof Avatar> = {
     src: AVATAR_SRC,
   },
   argTypes: {
-    size: getAvatarSizeControls(),
+    size: AVATAR_SIZE_CONTROLS,
   },
   component: Avatar,
   tags: ['autodocs'],
@@ -53,14 +53,13 @@ export const Colors: Story = {
     <Flex gap={2}>
       <Avatar {...props} />
       <Avatar {...props} color="blue" />
-      <Avatar {...props} color="cyan" />
-      <Avatar {...props} color="gray" />
-      <Avatar {...props} color="green" />
-      <Avatar {...props} color="magenta" />
-      <Avatar {...props} color="orange" />
       <Avatar {...props} color="purple" />
+      <Avatar {...props} color="magenta" />
       <Avatar {...props} color="red" />
+      <Avatar {...props} color="orange" />
       <Avatar {...props} color="yellow" />
+      <Avatar {...props} color="green" />
+      <Avatar {...props} color="cyan" />
     </Flex>
   ),
 }
@@ -72,7 +71,7 @@ export const Sizes: Story = {
     },
   },
   render: (props) => (
-    <Stack space={3}>
+    <Stack gap={3}>
       <Avatar {...props} size={0} />
       <Avatar {...props} size={1} />
       <Avatar {...props} size={2} />

@@ -1,8 +1,8 @@
+import {Select} from '@sanity/ui'
+import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Select} from '../../src/core/primitives'
-import {RADII} from '../constants'
-import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Select> = {
@@ -18,10 +18,10 @@ const meta: Meta<typeof Select> = {
     ),
   },
   argTypes: {
-    fontSize: getFontSizeControls('text'),
-    padding: getSpaceControls(),
-    radius: getRadiusControls(),
-    space: getSpaceControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    gap: SPACE_CONTROLS,
+    padding: SPACE_CONTROLS,
+    radius: RADIUS_CONTROLS,
   },
   component: Select,
   tags: ['autodocs'],
@@ -56,7 +56,7 @@ export const Radius: Story = {
             <option>{value}</option>
           </Select>
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),

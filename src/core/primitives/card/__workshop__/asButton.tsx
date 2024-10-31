@@ -1,6 +1,6 @@
 import {Box, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop/constants'
 
 export default function AsButtonStory() {
   const tones = Object.entries(WORKSHOP_CARD_TONE_OPTIONS)
@@ -30,9 +30,6 @@ export default function AsButtonStory() {
                     <Text muted size={1}>
                       Muted
                     </Text>
-                    <Text accent size={1}>
-                      Accent
-                    </Text>
                   </Stack>
                 </Card>
               ))}
@@ -61,9 +58,6 @@ export default function AsButtonStory() {
                     <Text size={1} muted>
                       Muted
                     </Text>
-                    <Text accent size={1}>
-                      Accent
-                    </Text>
                   </Stack>
                 </Card>
               ))}
@@ -91,9 +85,6 @@ export default function AsButtonStory() {
                     </Text>
                     <Text size={1} muted>
                       Muted
-                    </Text>
-                    <Text accent size={1}>
-                      Accent
                     </Text>
                   </Stack>
                 </Card>

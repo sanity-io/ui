@@ -4,9 +4,7 @@ import {isRecord} from '../../lib/isRecord'
 import {ToastContext} from './toastContext'
 import {ToastContextValue} from './types'
 
-/**
- * @public
- */
+/** @public */
 export function useToast(): ToastContextValue {
   const value = useContext(ToastContext)
 

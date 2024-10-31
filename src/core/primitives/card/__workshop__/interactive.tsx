@@ -21,7 +21,6 @@ export default function InteractiveCardStory() {
               Text <code>Code</code>
             </Text>
             <Text muted>Muted</Text>
-            <Text accent>Accent</Text>
           </Stack>
         </Card>
       </div>

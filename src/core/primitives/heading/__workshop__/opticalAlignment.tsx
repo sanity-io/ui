@@ -43,7 +43,7 @@ export default function OpticalAlignment() {
 
         <Flex>
           <Card padding={2} tone="neutral">
-            <Heading accent>
+            <Heading>
               <AddCircleIcon />
             </Heading>
           </Card>

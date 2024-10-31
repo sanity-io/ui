@@ -1,9 +1,10 @@
+import {Box, Button, Card, Popover, Text} from '@sanity/ui'
+import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 import {useState} from 'react'
 
-import {Box, Button, Card, Popover, Text} from '../../src/core/primitives'
-import {PLACEMENT_OPTIONS, RADII} from '../constants'
-import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
+import {PLACEMENT_OPTIONS} from '../constants'
+import {RADIUS_CONTROLS, SHADOW_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Popover> = {
@@ -14,9 +15,9 @@ const meta: Meta<typeof Popover> = {
     padding: 3,
   },
   argTypes: {
-    padding: getSpaceControls(),
-    radius: getRadiusControls(),
-    shadow: getShadowControls(),
+    padding: SPACE_CONTROLS,
+    radius: RADIUS_CONTROLS,
+    shadow: SHADOW_CONTROLS,
   },
   component: Popover,
   tags: ['autodocs'],
@@ -52,7 +53,7 @@ export const Radius: Story = {
             <Button text={String(value)} />
           </Popover>
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </Card>
   ),

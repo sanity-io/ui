@@ -1,9 +1,7 @@
+import {Card, Container, LayerProvider, Menu, MenuItem} from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 
-import {Menu, MenuItem} from '../../src/core/components'
-import {Card, Container} from '../../src/core/primitives'
-import {LayerProvider} from '../../src/core/utils'
-import {getSpaceControls} from '../controls'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof MenuItem> = {
   args: {
@@ -11,14 +9,14 @@ const meta: Meta<typeof MenuItem> = {
   },
   argTypes: {
     disabled: {control: 'boolean'},
-    padding: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    space: getSpaceControls(),
+    gap: SPACE_CONTROLS,
+    padding: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
   },
   component: MenuItem,
   decorators: [

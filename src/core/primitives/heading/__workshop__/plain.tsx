@@ -5,10 +5,9 @@ import {
   WORKSHOP_FONT_WEIGHT_OPTIONS,
   WORKSHOP_HEADING_FONT_SIZE_OPTIONS,
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PlainStory() {
-  const accent = useBoolean('Accent', false, 'Props')
   const muted = useBoolean('Muted', false, 'Props')
   const size = useSelect('Size', WORKSHOP_HEADING_FONT_SIZE_OPTIONS, 2, 'Props')
   const textChild = useText('Text', 'Hello, world', 'Props')
@@ -18,13 +17,7 @@ export default function PlainStory() {
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <Heading
-        accent={accent}
-        muted={muted}
-        size={size}
-        textOverflow={textOverflow}
-        weight={weight}
-      >
+      <Heading muted={muted} size={size} textOverflow={textOverflow} weight={weight}>
         {textChild}
       </Heading>
     </Flex>

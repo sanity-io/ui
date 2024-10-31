@@ -6,7 +6,5 @@ import {ThemeColorStateToneKey} from '@sanity/ui/theme'
  */
 export type BadgeMode = 'default' | 'outline'
 
-/**
- * @public
- */
+/** @public */
 export type BadgeTone = ThemeColorStateToneKey

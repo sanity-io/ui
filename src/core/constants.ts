@@ -77,3 +77,9 @@ export const FLOATING_STATIC_SIDES: Record<string, 'bottom' | 'left' | 'top' | '
   bottom: 'top',
   left: 'right',
 }
+
+export const Z_OFFSETS = {
+  dialog: 600,
+  popover: 400,
+  tooltip: 200,
+}

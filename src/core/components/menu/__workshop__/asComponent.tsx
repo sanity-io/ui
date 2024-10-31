@@ -5,11 +5,11 @@ const CustomLink = forwardRef(function CustomLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
   ref: React.ForwardedRef<HTMLAnchorElement>,
 ): React.JSX.Element {
-  const {children, req, ...restProps} = props
+  const {children, req, ...rest} = props
 
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a data-required={req} {...restProps} href="#" ref={ref}>
+    <a data-required={req} {...rest} href="#" ref={ref}>
       {children}
     </a>
   )
@@ -25,16 +25,16 @@ export default function AsComponentStory() {
         id="test"
         menu={
           <Menu>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} req="1">
               <Text>Component 1</Text>
             </MenuItem>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} req="2">
               <Text>Component 2</Text>
             </MenuItem>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} req="3">
               <Text>Component 3</Text>
             </MenuItem>
-            <MenuItem as={CustomLink} data-as="a" {...props} padding={3}>
+            <MenuItem as={CustomLink} data-as="a" {...props} padding={3} req="4">
               <Text>Component 3</Text>
             </MenuItem>
           </Menu>

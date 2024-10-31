@@ -4,7 +4,7 @@ import {useSelect, useText} from '@sanity/ui-workshop'
 import {
   WORKSHOP_CODE_LANGUAGE_OPTIONS,
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PropsStory() {
   const code = useText('Code', `console.log('Hello, world')`, 'Props')

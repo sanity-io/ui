@@ -1,0 +1,8 @@
+import {_resp} from '../../_resp'
+import {composeClassNames} from '../../composeClassNames'
+import {PositionStyleProps} from './types'
+
+/** @internal */
+export function position(props: PositionStyleProps): string | undefined {
+  return composeClassNames(_resp('position', props.position))
+}

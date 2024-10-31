@@ -103,11 +103,11 @@ export default function AsyncStory() {
           />
         </LayerProvider>
 
-        <Card overflow="auto" padding={3} radius={2} tone="transparent">
+        <Box muted overflow="auto" padding={3} radius={2}>
           <Code language="json" size={1}>
             {JSON.stringify({loading, options, query, value}, null, 2)}
           </Code>
-        </Card>
+        </Box>
       </Stack>
     </Box>
   )
@@ -131,7 +131,7 @@ function AsyncOption(props: {
 
   return (
     <Card
-      data-as="button"
+      as="button"
       disabled={disabled}
       padding={3}
       radius={1}

@@ -1,4 +1,4 @@
-import {Component, PropsWithChildren} from 'react'
+import {Component, ErrorInfo, PropsWithChildren, ReactNode} from 'react'
 
 import {Code} from '../primitives/code'
 
@@ -7,7 +7,7 @@ import {Code} from '../primitives/code'
  * @beta
  */
 export type ErrorBoundaryProps = PropsWithChildren<{
-  onCatch: (params: {error: Error; info: React.ErrorInfo}) => void
+  onCatch: (params: {error: Error; info: ErrorInfo}) => void
 }>
 
 /**
@@ -25,16 +25,18 @@ export interface ErrorBoundaryState {
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = {error: null}
 
+  static displayName = 'ErrorBoundary'
+
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     // Update state so the next render will show the fallback UI.
     return {error}
   }
 
-  componentDidCatch(error: Error, info: React.ErrorInfo): void {
+  componentDidCatch(error: Error, info: ErrorInfo): void {
     this.props.onCatch({error, info})
   }
 
-  render(): React.ReactNode {
+  render(): ReactNode {
     const {error} = this.state
 
     if (error) {

@@ -4,9 +4,7 @@ import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'
 
-/**
- * @public
- */
+/** @public */
 export function useLayer(): LayerContextValue {
   const value = useContext(LayerContext)
 

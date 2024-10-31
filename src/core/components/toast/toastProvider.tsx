@@ -16,17 +16,13 @@ type ToastState = {
   params: ToastParams
 }[]
 
-/**
- * @public
- */
+/** @public */
 export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
   children?: React.ReactNode
   zOffset?: number | number[]
 }
 
-/**
- * @public
- */
+/** @public */
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const {children, padding, paddingX, paddingY, gap, zOffset = 1} = props
   const [state, setState] = useState<ToastState>([])

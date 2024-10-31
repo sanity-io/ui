@@ -1,5 +1,6 @@
 import {icons, IconSymbol} from '@sanity/icons'
 import {Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
+import {FontTextSize, Radius} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
@@ -11,7 +12,7 @@ import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   name: 'typing',
@@ -63,9 +64,11 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   ) as IconSymbol
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const placeholder = useText('Placeholder', '', 'Props') || undefined
+  const prefix = useBoolean('Prefix', false, 'Props')
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props')
   const readOnly = useBoolean('Read only', false, 'Props')
   const space = useSelect('Space', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
+  const suffix = useBoolean('Suffix', false, 'Props')
   const weight = useSelect('Weight', WORKSHOP_FONT_WEIGHT_OPTIONS, '', 'Props') || undefined
 
   const [value, setValue] = useState('')
@@ -80,17 +83,20 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       border={border}
       customValidity={customValidity}
       disabled={disabled}
-      fontSize={fontSize}
+      fontSize={fontSize as FontTextSize}
       icon={icon && icons[icon]}
       iconRight={iconRight && icons[iconRight]}
       id="text-input-example"
+      name="test"
       onChange={handleChange}
       padding={padding}
       placeholder={placeholder}
-      radius={radius}
+      prefix={prefix && <Text>Prefix</Text>}
+      radius={radius as Radius}
       readOnly={readOnly}
       ref={ref}
       space={space}
+      suffix={suffix && <Text>Suffix</Text>}
       value={value}
       weight={weight}
     />

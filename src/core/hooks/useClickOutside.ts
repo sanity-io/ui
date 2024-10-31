@@ -2,14 +2,10 @@ import {useEffect, useRef, useState} from 'react'
 
 import {EMPTY_ARRAY} from '../constants'
 
-/**
- * @public
- */
+/** @public */
 export type ClickOutsideListener = (event: MouseEvent) => void
 
-/**
- * @public
- */
+/** @public */
 export type ClickOutsideElements = (HTMLElement | null | (HTMLElement | null)[])[]
 
 function _getElements(

@@ -9,9 +9,7 @@ const DEFAULT_VALUE: BoundaryElementContextValue = {
   element: null,
 }
 
-/**
- * @public
- */
+/** @public */
 export function useBoundaryElement(): BoundaryElementContextValue {
   const value = useContext(BoundaryElementContext)
 

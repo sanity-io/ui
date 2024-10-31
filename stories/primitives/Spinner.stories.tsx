@@ -1,11 +1,11 @@
+import {Spinner} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Spinner} from '../../src/core/primitives'
-import {getFontSizeControls} from '../controls'
+import {FONT_TEXT_SIZE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Spinner> = {
   argTypes: {
-    size: getFontSizeControls('text'),
+    size: FONT_TEXT_SIZE_CONTROLS,
   },
   component: Spinner,
   tags: ['autodocs'],

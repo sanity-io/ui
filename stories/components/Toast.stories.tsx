@@ -1,8 +1,6 @@
+import {Box, Button, Grid, Heading, Inline, Toast, ToastProvider, useToast} from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {useId} from 'react'
-
-import {Toast, ToastProvider, useToast} from '../../src/core/components'
-import {Box, Button, Grid, Heading, Inline} from '../../src/core/primitives'
 
 const meta: Meta<typeof Toast> = {
   args: {title: 'Toast title', description: 'Toast description'},
@@ -67,7 +65,7 @@ export const WithHook: Story = {
       <Grid columns={1} gap={4}>
         <Grid columns={1} gap={2}>
           <Heading>Default duration</Heading>
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -124,7 +122,7 @@ export const WithHook: Story = {
         </Grid>
         <Grid columns={1} gap={2}>
           <Heading>10s duration</Heading>
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -185,7 +183,7 @@ export const WithHook: Story = {
         </Grid>
         <Grid columns={1} gap={2}>
           <Heading>Infinite duration</Heading>
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -246,7 +244,7 @@ export const WithHook: Story = {
         </Grid>
         <Grid columns={1} gap={2}>
           <Heading>Sanity Studio patterns</Heading>
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -256,7 +254,7 @@ export const WithHook: Story = {
                   description: (
                     <Box paddingTop={2}>
                       <Button
-                        space={3}
+                        gap={3}
                         padding={3}
                         onClick={() => window.location.reload()}
                         text="Push to reload"

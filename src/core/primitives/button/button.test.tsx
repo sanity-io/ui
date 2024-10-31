@@ -5,7 +5,7 @@ import {screen} from '@testing-library/react'
 import {axe} from 'jest-axe'
 
 import {render} from '../../../../test'
-import {Button, ButtonProps} from './button'
+import {Button} from './button'
 
 describe('atoms/button', () => {
   it('Axe: should have no violations', async () => {
@@ -24,20 +24,6 @@ describe('atoms/button', () => {
 
   it('should render text', () => {
     render(<Button text="Button text" />)
-
-    expect(screen.getByText('Button text')).toBeInTheDocument()
-  })
-
-  it('should wrap button', () => {
-    function WrappedButton({button: buttonProps}: {button: ButtonProps}) {
-      return <Button {...buttonProps} />
-    }
-
-    const buttonProps: ButtonProps = {
-      text: 'Button text',
-    }
-
-    render(<WrappedButton button={buttonProps} />)
 
     expect(screen.getByText('Button text')).toBeInTheDocument()
   })

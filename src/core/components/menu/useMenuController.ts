@@ -1,4 +1,14 @@
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {
+  KeyboardEvent,
+  KeyboardEventHandler,
+  MouseEvent,
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 import {_getFocusableElements, _sortElements} from './helpers'
 
@@ -8,9 +18,9 @@ import {_getFocusableElements, _sortElements} from './helpers'
 export interface MenuController {
   activeElement: HTMLElement | null
   activeIndex: number
-  handleItemMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
+  handleItemMouseEnter: (event: MouseEvent<HTMLElement>) => void
   handleItemMouseLeave: () => void
-  handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void
+  handleKeyDown: (event: KeyboardEvent<HTMLDivElement>) => void
   mount: (element: HTMLElement | null, selected?: boolean) => () => void
 }
 
@@ -20,10 +30,10 @@ export interface MenuController {
  * @internal
  */
 export function useMenuController(props: {
-  onKeyDown?: React.KeyboardEventHandler
+  onKeyDown?: KeyboardEventHandler
   originElement?: HTMLElement | null
   shouldFocus: 'first' | 'last' | null
-  rootElementRef: React.MutableRefObject<HTMLDivElement | null>
+  rootElementRef: MutableRefObject<HTMLDivElement | null>
 }): MenuController {
   const {onKeyDown, originElement, shouldFocus, rootElementRef} = props
   const elementsRef = useRef<HTMLElement[]>([])
@@ -64,7 +74,7 @@ export function useMenuController(props: {
   )
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       // Move focus to the element that opened the menu before handling the `Tab` press
       if (event.key === 'Tab') {
         if (originElement) {
@@ -162,7 +172,7 @@ export function useMenuController(props: {
   )
 
   const handleItemMouseEnter = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+    (event: MouseEvent<HTMLElement>) => {
       const element = event.currentTarget
       const currentIndex = elementsRef.current.indexOf(element)
 

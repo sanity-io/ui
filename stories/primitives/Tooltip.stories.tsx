@@ -1,9 +1,9 @@
+import {Button, Card, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {userEvent, within} from '@storybook/test'
 
-import {Button, Card, Text, Tooltip, TooltipDelayGroupProvider} from '../../src/core'
 import {PLACEMENT_OPTIONS} from '../constants'
-import {getShadowControls, getSpaceControls} from '../controls'
+import {SHADOW_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Tooltip> = {
@@ -12,8 +12,8 @@ const meta: Meta<typeof Tooltip> = {
     content: <Text size={1}>I'm a tooltip</Text>,
   },
   argTypes: {
-    padding: getSpaceControls(),
-    shadow: getShadowControls(),
+    padding: SPACE_CONTROLS,
+    shadow: SHADOW_CONTROLS,
   },
   decorators: [
     (Story: StoryFn): React.JSX.Element => (

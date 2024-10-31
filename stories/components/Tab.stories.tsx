@@ -1,9 +1,9 @@
 import {SearchIcon} from '@sanity/icons'
+import {Tab} from '@sanity/ui'
+import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Tab} from '../../src/core/components'
-import {BUTTON_TONES} from '../constants'
-import {getFontSizeControls, getIconControls, getSpaceControls} from '../controls'
+import {FONT_TEXT_SIZE_CONTROLS, ICON_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Tab> = {
@@ -11,9 +11,9 @@ const meta: Meta<typeof Tab> = {
     label: 'Example tab',
   },
   argTypes: {
-    fontSize: getFontSizeControls('text'),
-    icon: getIconControls(),
-    padding: getSpaceControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    icon: ICON_CONTROLS,
+    padding: SPACE_CONTROLS,
   },
   component: Tab,
   tags: ['autodocs'],
@@ -52,7 +52,7 @@ export const Tones: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => <Tab {...props} key={value} label={value} tone={value} />,
-        rows: BUTTON_TONES,
+        rows: [...THEME_COLOR_STATE_TONES],
       })}
     </>
   ),

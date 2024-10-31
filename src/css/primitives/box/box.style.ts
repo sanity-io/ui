@@ -1,0 +1,35 @@
+import {Style, StyleRules} from '../../types'
+import {vars} from '../../vars'
+
+const primitive: StyleRules = {
+  '.box': {
+    // todo: move to aspects
+    'minHeight': 0,
+
+    '@nest': {
+      'iframe&': {
+        border: 'none',
+      },
+
+      'ul&, ol&': {
+        listStyle: 'none',
+      },
+
+      '&.muted': {
+        backgroundColor: vars.color.muted.bg,
+      },
+    },
+  },
+
+  // sizing
+
+  '.box-content': {
+    boxSizing: 'content-box',
+  },
+
+  '.box-border': {
+    boxSizing: 'border-box',
+  },
+}
+
+export const boxStyle: Style = {layers: {primitive}}

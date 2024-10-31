@@ -1,0 +1,10 @@
+import {Context} from 'react'
+
+import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
+import {CardContextValue} from './types'
+
+/**
+ * @internal
+ */
+export const CardContext: Context<CardContextValue | null> =
+  createGlobalScopedContext<CardContextValue | null>('@sanity/ui/context/card', null)

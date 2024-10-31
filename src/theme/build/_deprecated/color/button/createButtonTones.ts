@@ -1,10 +1,10 @@
 import {
   ThemeColorBase,
-  ThemeColorButtonModeKey,
   ThemeColorButtonTones,
   ThemeColorMuted,
   ThemeColorSolid,
-} from '../../../../system'
+} from '../../../../v0'
+import {ThemeColorButtonModeKey} from '../../../../v2'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createButtonTones(

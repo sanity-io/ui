@@ -2,12 +2,13 @@
   "name": "@sanity/ui",
   "version": "2.15.18",
   "keywords": [
-    "sanity",
-    "ui",
-    "primitives",
     "react",
+    "ui",
+    "kit",
+    "library",
+    "primitives",
     "components",
-    "design-system"
+    "utils"
   ],
   "homepage": "https://www.sanity.io/",
   "bugs": {
@@ -20,40 +21,56 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": false,
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "source": "./exports/index.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./_visual-editing": {
       "source": "./exports/_visual-editing.ts",
-      "import": "./dist/_visual-editing.mjs",
-      "require": "./dist/_visual-editing.js",
+      "import": "./dist/_visual-editing.js",
+      "require": "./dist/_visual-editing.cjs",
       "default": "./dist/_visual-editing.js"
     },
+    "./css": {
+      "source": "./exports/css.ts",
+      "import": "./dist/css.js",
+      "require": "./dist/css.cjs",
+      "default": "./dist/css.js"
+    },
+    "./package.json": "./package.json",
     "./theme": {
       "source": "./exports/theme.ts",
-      "import": "./dist/theme.mjs",
-      "require": "./dist/theme.js",
+      "import": "./dist/theme.js",
+      "require": "./dist/theme.cjs",
       "default": "./dist/theme.js"
     },
-    "./package.json": "./package.json"
+    "./ui-palette.css": "./dist/ui-palette.css",
+    "./ui-theme.css": "./dist/ui-theme.css",
+    "./ui-system.css": "./dist/ui-system.css",
+    "./ui.css": "./dist/ui.css"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
       "_visual-editing": [
         "./dist/_visual-editing.d.ts"
       ],
+      "css": [
+        "./dist/css.d.ts"
+      ],
       "theme": [
         "./dist/theme.d.ts"
       ]
     }
+  },
+  "bin": {
+    "sanity-ui": "./bin/sanity-ui.cjs"
   },
   "files": [
     "dist",
@@ -61,13 +78,14 @@
     "src"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build pkg:check figma:pkg:build",
+    "build": "run-s clean css:build pkg:build pkg:check figma:pkg:build",
     "clean": "rimraf .workshop dist",
+    "css:build": "node -r esbuild-register scripts/build",
     "commit": "cz",
     "cypress:dev": "run-p dev cypress:open",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "dev": "run-p storybook:dev workshop:dev",
+    "dev": "run-p workshop:dev",
     "figma:pkg:build": "cd figma && pnpm build",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
@@ -118,8 +136,13 @@
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.0",
+    "cssnano": "^7.0.7",
     "csstype": "^3.1.3",
     "framer-motion": "^12.9.7",
+    "gzip-size": "^7.0.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "pretty-bytes": "^7.0.0",
     "react-compiler-runtime": "19.1.0-rc.2",
     "react-refractor": "^2.2.0",
     "use-effect-event": "^1.0.2"
@@ -132,9 +155,9 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.26.0",
+    "@rollup/plugin-replace": "^6.0.2",
     "@sanity/pkg-utils": "^7.2.2",
     "@sanity/prettier-config": "^1.0.3",
-    "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^2.1.2",
     "@storybook/addon-a11y": "^8.6.12",
     "@storybook/addon-docs": "^8.6.12",
@@ -163,11 +186,13 @@
     "@types/refractor": "^3.4.1",
     "@vitejs/plugin-react": "^4.4.1",
     "babel-plugin-react-compiler": "19.1.0-rc.2",
-    "babel-plugin-styled-components": "^2.1.4",
+    "cac": "^6.7.14",
     "commitizen": "^4.3.1",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv-flow": "^4.1.0",
+    "esbuild-register": "^3.6.0",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-formatter-compact": "^8.40.0",
@@ -186,9 +211,9 @@
     "jest-axe": "^10.0.0",
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^14.0.1",
+    "magic-string": "^0.30.17",
     "module-alias": "^2.2.3",
     "npm-run-all2": "^5.0.2",
-    "prettier": "^3.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-is": "^19.1.0",

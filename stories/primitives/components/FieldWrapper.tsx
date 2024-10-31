@@ -1,6 +1,5 @@
+import {Stack, Text} from '@sanity/ui'
 import {ReactNode} from 'react'
-
-import {Stack, Text} from '../../../src/core'
 
 export const FieldWrapper = ({
   children,
@@ -10,7 +9,7 @@ export const FieldWrapper = ({
   title: string
 }): ReactNode => {
   return (
-    <Stack space={3}>
+    <Stack gap={3}>
       <Text size={1} weight="semibold">
         {title}
       </Text>

@@ -7,33 +7,18 @@ import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
 
-import {fontsPlugin} from './workshop/fontsPlugin'
+import {cssPlugin} from './workshop/css'
+import {fontsPlugin} from './workshop/fonts'
 
 Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
+const theme = buildTheme()
+
 export default defineConfig({
-  collections: [
-    {
-      name: 'components',
-      title: 'Components',
-    },
-    {
-      name: 'hooks',
-      title: 'Hooks',
-    },
-    {
-      name: 'primitives',
-      title: 'Primitives',
-    },
-    {
-      name: 'utils',
-      title: 'Utils',
-    },
-  ],
-  plugins: [fontsPlugin(), perfPlugin()],
-  theme: buildTheme(),
+  plugins: [fontsPlugin(), cssPlugin({theme}), perfPlugin()],
   title: '@sanity/ui',
+  theme,
 })
