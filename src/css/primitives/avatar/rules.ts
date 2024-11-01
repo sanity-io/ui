@@ -1,4 +1,4 @@
-import {THEME_COLOR_AVATAR_COLORS} from '@sanity/ui/theme'
+import {AVATAR_SIZE, THEME_COLOR_AVATAR_COLORS} from '@sanity/ui/theme'
 import {responsiveRules} from '../../responsiveRules'
 import {Rules} from '../../types'
 
@@ -10,16 +10,16 @@ export const avatarRules: Rules = {
     'userSelect': 'none',
     'boxShadow': '0 0 0 1px var(--card-bg-color)',
 
+    'width': `var(--avatar-size)`,
+    'height': `var(--avatar-size)`,
+    'borderRadius': `var(--avatar-size)`,
+
     '@nest': {
       '&[data-status="inactive"]': {
         opacity: 0.5,
       },
 
-      '& > svg:not([hidden])': {
-        display: 'block',
-      },
-
-      /* &:is(button) */
+      // &:is(button)
       '&[data-as="button"]': {
         WebkitFontSmoothing: 'inherit',
         appearance: 'none',
@@ -32,6 +32,7 @@ export const avatarRules: Rules = {
       },
 
       '&[data-as="button"]:focus': {
+        // todo
         // boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
       },
 
@@ -51,6 +52,16 @@ export const avatarRules: Rules = {
     }
   }, {} as Rules),
 
+  ...(AVATAR_SIZE.reduce((acc, size) => {
+    return {
+      ...acc,
+      ...responsiveRules(`avatar-${size}`, {
+        '--avatar-distance': `var(--avatar-${size}-distance)`,
+        '--avatar-size': `var(--avatar-${size}-size)`,
+      }),
+    }
+  }, {} as Rules) as Rules),
+
   'avatar-arrow': {
     'position': 'absolute',
     'boxSizing': 'border-box',
@@ -65,6 +76,7 @@ export const avatarRules: Rules = {
 
     '@nest': {
       '& > svg': {
+        display: 'block',
         width: '11px',
         height: '7px',
         position: 'absolute',
@@ -73,118 +85,78 @@ export const avatarRules: Rules = {
         transform: 'translateX(-6px)',
       },
 
-      '& > svg:not([hidden])': {
-        display: 'block',
-      },
-
-      '.arrow-position-inside > &': {
+      '[data-arrow-position="inside"] > &': {
         transform: 'rotate(-90deg) translate3d(0, 6px, 0)',
         opacity: 0,
       },
 
-      '.arrow-position-top > &': {
+      '[data-arrow-position="top"] > &': {
         opacity: 1,
         transform: 'rotate(0deg)',
       },
 
-      '.arrow-position-bottom > &': {
+      '[data-arrow-position="bottom"] > &': {
         opacity: 1,
         transform: 'rotate(-180deg)',
       },
     },
   },
 
-  ...responsiveRules('avatar-0', {
-    'width': `var(--avatar-0-size)`,
-    'height': `var(--avatar-0-size)`,
-    'borderRadius': `var(--avatar-0-size)`,
-
+  'avatar-image': {
     '@nest': {
-      '& > svg': {
-        width: `var(--avatar-0-size)`,
-        height: `var(--avatar-0-size)`,
-        borderRadius: `var(--avatar-0-size)`,
+      '& > img': {
+        display: 'block',
+        position: 'absolute',
+        width: `var(--avatar-size)`,
+        height: `var(--avatar-size)`,
+        borderRadius: `var(--avatar-size)`,
+      },
+
+      '& > span': {
+        display: 'block',
+        position: 'absolute',
+        width: `var(--avatar-size)`,
+        height: `var(--avatar-size)`,
+        borderRadius: `var(--avatar-size)`,
+        boxShadow:
+          'inset 0 0 0 1px var(--avatar-bg-color), inset 0 0 0 1.75px var(--card-bg-color)',
+      },
+
+      '[data-image-error] &': {
+        display: 'none',
       },
     },
-  }),
-
-  ...responsiveRules('avatar-1', {
-    'width': `var(--avatar-1-size)`,
-    'height': `var(--avatar-1-size)`,
-    'borderRadius': `var(--avatar-1-size)`,
-
-    '@nest': {
-      '& > svg': {
-        width: `var(--avatar-1-size)`,
-        height: `var(--avatar-1-size)`,
-        borderRadius: `var(--avatar-1-size)`,
-      },
-    },
-  }),
-
-  ...responsiveRules('avatar-2', {
-    'width': `var(--avatar-2-size)`,
-    'height': `var(--avatar-2-size)`,
-    'borderRadius': `var(--avatar-2-size)`,
-
-    '@nest': {
-      '& > svg': {
-        width: `var(--avatar-2-size)`,
-        height: `var(--avatar-2-size)`,
-        borderRadius: `var(--avatar-2-size)`,
-      },
-    },
-  }),
-
-  ...responsiveRules('avatar-3', {
-    'width': `var(--avatar-3-size)`,
-    'height': `var(--avatar-3-size)`,
-    'borderRadius': `var(--avatar-3-size)`,
-
-    '@nest': {
-      '& > svg': {
-        width: `var(--avatar-3-size)`,
-        height: `var(--avatar-3-size)`,
-        borderRadius: `var(--avatar-3-size)`,
-      },
-    },
-  }),
+  },
 
   'avatar-initials': {
-    'width': '100%',
-    'height': '100%',
-    'color': 'var(--avatar-fg-color)',
-    'alignItems': 'center',
-    'justifyContent': 'center',
-    'textTransform': 'uppercase',
-    'textAlign': 'center',
-    'borderRadius': '50%',
+    color: 'var(--avatar-fg-color)',
+    borderRadius: 'var(--avatar-size)',
+  },
+
+  'avatar-counter': {
+    'color': 'var(--card-fg-color)',
+    'backgroundColor': 'var(--card-bg-color)',
+    'boxShadow': `0 0 0 1px var(--card-bg-color), inset 0 0 0 1px var(--card-border-color)`,
+    'userSelect': 'none',
+    'borderRadius': 'var(--avatar-size)',
+    'height': 'var(--avatar-size)',
 
     '@nest': {
-      '&:not([hidden])': {
-        display: 'flex',
+      '&&': {
+        minWidth: 'var(--avatar-size)',
+      },
+
+      '[data-hide-inner-stroke] &': {
+        boxShadow: `0 0 0 1px var(--card-bg-color)`,
       },
     },
   },
 
-  'avatar-bg-stroke': {
-    strokeWidth: '4px',
-    stroke: 'var(--card-bg-color)',
-  },
-
-  'avatar-stroke': {
-    'strokeWidth': '2px',
-    'stroke': 'var(--avatar-bg-color)',
-
+  'avatar-stack': {
     '@nest': {
-      '[data-status="editing"] &': {
-        strokeDasharray: '2 4',
-        strokeLinecap: 'round',
+      '& > div + div': {
+        marginLeft: 'var(--avatar-distance)',
       },
     },
-  },
-
-  'avatar-image': {
-    position: 'relative',
   },
 }

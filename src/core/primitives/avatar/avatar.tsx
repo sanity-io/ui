@@ -1,18 +1,10 @@
-import {
-  avatar,
-  avatarArrow,
-  avatarBgStroke,
-  avatarImage,
-  avatarInitials,
-  avatarStroke,
-  composeClassNames,
-} from '@sanity/ui/css'
-import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
+import {avatar, avatarArrow, avatarImage, avatarInitials, composeClassNames} from '@sanity/ui/css'
+import {AvatarSize, ThemeColorAvatarColorKey} from '@sanity/ui/theme'
+import {forwardRef, useCallback, useEffect, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import {useArrayProp} from '../../hooks'
-import {useTheme_v2} from '../../theme'
-import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
+import {AvatarPosition, AvatarStatus} from '../../types'
+import {Box} from '../box'
 import {Label} from '../label'
 
 /**
@@ -61,23 +53,14 @@ export const Avatar = forwardRef(function Avatar(
     size: sizeProp = 1,
     ...restProps
   } = props
-  const {avatar: avatarTheme} = useTheme_v2()
   const As = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = useArrayProp(sizeProp)
 
-  // @todo: remove this
-  const avatarSize = avatarTheme.sizes[size[0]] || avatarTheme.sizes[0]
-  const _sizeRem = avatarSize.size
-  const _radius = _sizeRem / 2
-
-  const elementId = useId()
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside',
   )
 
-  const [imageFailed, setImageFailed] = useState<boolean>(false)
-
-  const imageId = `avatar-image-${elementId}`
+  const [imageError, setImageError] = useState<boolean>(false)
 
   useEffect(() => {
     if (arrowPosition === arrowPositionProp) return undefined
@@ -89,11 +72,11 @@ export const Avatar = forwardRef(function Avatar(
   }, [arrowPosition, arrowPositionProp])
 
   useEffect(() => {
-    if (src) setImageFailed(false)
+    if (src) setImageError(false)
   }, [src])
 
   const handleImageError = useCallback(() => {
-    setImageFailed(true)
+    setImageError(true)
 
     if (onImageLoadError) {
       onImageLoadError(new Error('Avatar: the image failed to load'))
@@ -115,20 +98,13 @@ export const Avatar = forwardRef(function Avatar(
   return (
     <As
       data-as={typeof As === 'string' ? As : undefined}
+      data-hide-inner-stroke={__unstable_hideInnerStroke ? '' : undefined}
       data-ui="Avatar"
       {...restProps}
-      $color={color}
-      $size={size}
       aria-label={title}
-      className={composeClassNames(
-        className,
-        avatar({
-          arrowPosition,
-          color,
-          size: sizeProp,
-        }),
-      )}
-      // data-arrow-position={arrowPosition}
+      className={composeClassNames(className, avatar({color, size: sizeProp}))}
+      data-arrow-position={arrowPosition}
+      data-image-error={imageError ? '' : undefined}
       data-status={status}
       ref={ref}
       title={title}
@@ -142,52 +118,31 @@ export const Avatar = forwardRef(function Avatar(
         </svg>
       </span>
 
-      {!imageFailed && src && (
-        <svg className={avatarImage()} viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
-          <defs>
-            <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
-              <image
-                href={src}
-                width="1"
-                height="1"
-                // eslint-disable-next-line react/no-unknown-property
-                onError={handleImageError}
-              />
-            </pattern>
-          </defs>
+      <Box
+        align="center"
+        as="span"
+        className={avatarInitials()}
+        display="flex"
+        justify="center"
+        position="absolute"
+        inset={0}
+      >
+        <Label
+          align="center"
+          as="span"
+          size={initialsSize}
+          style={{color: 'inherit'}}
+          weight="medium"
+        >
+          {initials}
+        </Label>
+      </Box>
 
-          <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
-
-          {!__unstable_hideInnerStroke && (
-            <ellipse
-              className={avatarBgStroke()}
-              cx={_radius}
-              cy={_radius}
-              rx={_radius}
-              ry={_radius}
-              vectorEffect="non-scaling-stroke"
-            />
-          )}
-
-          <ellipse
-            className={avatarStroke()}
-            cx={_radius}
-            cy={_radius}
-            rx={_radius}
-            ry={_radius}
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
-      )}
-
-      {(imageFailed || !src) && initials && (
-        <>
-          <span className={avatarInitials()}>
-            <Label as="span" size={initialsSize} style={{color: 'inherit'}} weight="medium">
-              {initials}
-            </Label>
-          </span>
-        </>
+      {src && (
+        <Box className={avatarImage()} inset={0} position="absolute">
+          <img onError={handleImageError} src={src} />
+          <span />
+        </Box>
       )}
     </As>
   )

@@ -23,9 +23,7 @@ export interface ButtonProps extends PaddingStyleProps, RadiusStyleProps {
   icon?: React.ElementType | React.ReactNode
   iconRight?: React.ElementType | React.ReactNode
   justify?: ResponsiveProp<FlexJustify>
-  /**
-   * @beta Do not use in production, as this might change.
-   */
+  /** @beta Do not use in production, as this might change.*/
   loading?: boolean
   selected?: boolean
   space?: ResponsiveProp<Space>
@@ -36,7 +34,6 @@ export interface ButtonProps extends PaddingStyleProps, RadiusStyleProps {
   textWeight?: TextProps['weight']
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
-  // width?: ButtonWidth
   width?: ResponsiveProp<Width>
 }
 

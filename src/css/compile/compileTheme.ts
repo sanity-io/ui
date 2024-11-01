@@ -420,7 +420,7 @@ function compileCardCss(props: {scheme: Scheme; tone: CardTone}) {
     '--color-shadow-outline': cardVars.shadow.outline,
     '--color-shadow-umbra': cardVars.shadow.umbra,
     '--color-shadow-penumbra': cardVars.shadow.penumbra,
-    '--color-shadow-ambient': cardVars.shadow.outline,
+    '--color-shadow-ambient': cardVars.shadow.ambient,
     '--color-skeleton-from': cardVars.skeleton.from,
     '--color-skeleton-to': cardVars.skeleton.to,
     // todo: syntax

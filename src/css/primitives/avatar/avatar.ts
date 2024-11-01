@@ -3,12 +3,7 @@ import {composeClassNames} from '../../composeClassNames'
 import {AvatarStyleProps} from './types'
 
 export function avatar(props: AvatarStyleProps): string {
-  return composeClassNames(
-    'avatar',
-    `avatar-${props.color}`,
-    `avatar-arrow-${props.arrowPosition}`,
-    _resp('avatar', props.size),
-  )
+  return composeClassNames('avatar', `avatar-${props.color || 'gray'}`, _resp('avatar', props.size))
 }
 
 export function avatarArrow(): string {
@@ -19,14 +14,14 @@ export function avatarInitials(): string {
   return composeClassNames('avatar-initials')
 }
 
-export function avatarBgStroke(): string {
-  return composeClassNames('avatar-bg-stroke')
-}
-
-export function avatarStroke(): string {
-  return composeClassNames('avatar-stroke')
-}
-
 export function avatarImage(): string {
   return composeClassNames('avatar-image')
+}
+
+export function avatarCounter(props: {size?: AvatarStyleProps['size']}): string {
+  return composeClassNames('avatar-counter', _resp('avatar', props.size))
+}
+
+export function avatarStack(props: {size?: AvatarStyleProps['size']}): string {
+  return composeClassNames('avatar-stack', _resp('avatar', props.size))
 }

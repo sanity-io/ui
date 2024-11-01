@@ -290,6 +290,8 @@ export type CardScopedVarName =
   // todo
   | `--avatar-bg-color`
   | `--avatar-fg-color`
+  | `--avatar-distance`
+  | `--avatar-size`
   | `--color-checkbox-bg`
   | `--color-checkbox-fg`
   | `--color-checkbox-border`
