@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.18](https://github.com/sanity-io/ui/compare/v2.8.17...v2.8.18) (2024-11-01)
+
+### Bug Fixes
+
+- expand react compiler to dialog, menu, theme provider ([#1448](https://github.com/sanity-io/ui/issues/1448)) ([05748bd](https://github.com/sanity-io/ui/commit/05748bddc3e95fe145bb932959d2c7f917139246))
+- **performance:** auto memoize `TabList` ([#1449](https://github.com/sanity-io/ui/issues/1449)) ([3713c2e](https://github.com/sanity-io/ui/commit/3713c2e3e157ba4d214dd5a437a90f9ebeb080f5))
+
 ## [2.8.17](https://github.com/sanity-io/ui/compare/v2.8.16...v2.8.17) (2024-10-31)
 
 ### Bug Fixes
