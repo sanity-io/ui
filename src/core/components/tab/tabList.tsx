@@ -1,4 +1,4 @@
-import {cloneElement, forwardRef, useCallback, useMemo, useState} from 'react'
+import {cloneElement, forwardRef, useCallback, useState, Children, isValidElement} from 'react'
 import {styled} from 'styled-components'
 import {Inline, InlineProps} from '../../primitives'
 
@@ -7,10 +7,6 @@ import {Inline, InlineProps} from '../../primitives'
  */
 export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
   children: Array<React.ReactElement | null | undefined | false>
-}
-
-function _isReactElement(node: unknown): node is React.ReactElement {
-  return Boolean(node)
 }
 
 //Limits the width of tabs in tablist
@@ -33,21 +29,17 @@ export const TabList = forwardRef(function TabList(
   const {children: childrenProp, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
 
-  const children = useMemo(() => childrenProp.filter(_isReactElement), [childrenProp])
+  const children: React.ReactElement[] = Children.toArray(childrenProp).filter(isValidElement)
 
   const tabs = children.map((child, childIndex) =>
     cloneElement(child, {
       focused: focusedIndex === childIndex,
       key: childIndex,
-      onFocus: () => handleTabFocus(childIndex),
+      onFocus: () => setFocusedIndex(childIndex),
     }),
   )
 
   const numTabs = tabs.length
-
-  const handleTabFocus = useCallback((tabIdx: number) => {
-    setFocusedIndex(tabIdx)
-  }, [])
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
