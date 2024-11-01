@@ -1,4 +1,4 @@
-import {ThemeColorSchemeKey, ThemeColorSyntax} from '../../color'
+import {ThemeColorSchemeKey, ThemeColorSyntax} from '../../v2/color'
 import {ThemeColorGenericState} from './_generic'
 import {ThemeColorName} from './_system'
 import {ThemeColorBase} from './base'

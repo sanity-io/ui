@@ -1,4 +1,4 @@
-import {ThemeColorAvatarColorKey} from '../../color/_system'
+import {ThemeColorAvatarColorKey} from '../../v2/color/_system'
 
 /**
  * @public

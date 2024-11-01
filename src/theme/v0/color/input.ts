@@ -1,4 +1,4 @@
-import {ThemeColorBlendModeKey} from '../../color/_system'
+import {ThemeColorBlendModeKey} from '../../v2/color/_system'
 
 /**
  * @public

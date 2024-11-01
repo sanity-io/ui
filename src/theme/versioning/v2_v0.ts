@@ -1,13 +1,11 @@
+import {RootTheme} from '../types'
+import {ThemeColor, ThemeColorInputState, ThemeColorInputStates} from '../v0'
 import {
-  RootTheme,
   RootTheme_v2,
-  ThemeColor,
   ThemeColorCard_v2,
   ThemeColorInputMode_v2,
-  ThemeColorInputState,
   ThemeColorInputState_v2,
-  ThemeColorInputStates,
-} from '../system'
+} from '../v2'
 
 const cache = new WeakMap<RootTheme_v2, RootTheme>()
 
