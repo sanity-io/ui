@@ -22,8 +22,8 @@ export const Grid = forwardRef(function Grid(
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Grid"
       {...restProps}
+      as={as}
       display="grid"
-      forwardedAs={as}
       ref={ref}
     >
       {children}

@@ -1,32 +1,18 @@
-import {composeClassNames, FontStyleProps, heading, ResponsiveProp} from '@sanity/ui/css'
-import {FontHeadingSize} from '@sanity/ui/theme'
+import {
+  composeClassNames,
+  heading,
+  type HeadingStyleProps,
+  textOverflow,
+  type TextOverflowStyleProps,
+} from '@sanity/ui/css'
 import {forwardRef} from 'react'
-import {styled} from '../../lib/styled'
 
 /**
  * @public
  */
-export interface HeadingProps extends FontStyleProps {
-  accent?: boolean
+export interface HeadingProps extends HeadingStyleProps, TextOverflowStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  muted?: boolean
-  size?: ResponsiveProp<FontHeadingSize>
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis'
 }
-
-// todo
-const SpanWithTextOverflow = styled.span`
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  overflow: clip;
-`
 
 /**
  * Typographic headings.
@@ -41,32 +27,26 @@ export const Heading = forwardRef(function Heading(
     accent = false,
     align,
     as: As = 'div',
-    children: childrenProp,
+    children,
     className,
+    flex,
     muted = false,
-    size = 2,
-    textOverflow,
+    size = 1,
+    textOverflow: textOverflowProp,
     weight,
     ...restProps
   } = props
-
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  }
 
   return (
     <As
       data-ui="Heading"
       {...restProps}
-      // todo
-      // $align={useArrayProp(align)}
       className={composeClassNames(
         className,
         heading({
           accent,
           align,
+          flex,
           muted,
           size,
           weight,
@@ -74,7 +54,7 @@ export const Heading = forwardRef(function Heading(
       )}
       ref={ref}
     >
-      <span>{children}</span>
+      <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
     </As>
   )
 })

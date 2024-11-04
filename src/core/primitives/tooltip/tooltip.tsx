@@ -10,7 +10,7 @@ import {
   type RootBoundary,
 } from '@floating-ui/react-dom'
 import {composeClassNames, RadiusStyleProps, tooltip} from '@sanity/ui/css'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
   cloneElement,
@@ -25,10 +25,10 @@ import {
   useLayoutEffect,
 } from 'react'
 import {useEffectEvent} from 'use-effect-event'
+import {useTheme_v2} from '../../_compat'
 import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
-import {useTheme_v2} from '../../theme'
 import type {Placement} from '../../types'
 import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import type {Delay} from '../types'
@@ -46,19 +46,17 @@ import {useTooltipDelayGroup} from './tooltipDelayGroup'
 export interface TooltipProps extends Omit<LayerProps, 'as'>, RadiusStyleProps {
   /** @deprecated Use `fallbackPlacements` instead. */
   allowedAutoPlacements?: Placement[]
+  /**
+   * Whether the tooltip should animate in and out.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  animate?: boolean
   arrow?: boolean
   boundaryElement?: HTMLElement | null
   children?: React.ReactElement
   content?: React.ReactNode
-  disabled?: boolean
-  fallbackPlacements?: Placement[]
-  padding?: number | number[]
-  placement?: Placement
-  /** Whether or not to render the tooltip in a portal element. */
-  portal?: boolean | string
-  // radius?: number | number[]
-  scheme?: ThemeColorSchemeKey
-  shadow?: number | number[]
   /**
    * Adds a delay to open or close the tooltip.
    *
@@ -70,13 +68,16 @@ export interface TooltipProps extends Omit<LayerProps, 'as'>, RadiusStyleProps {
    * @defaultValue 0
    */
   delay?: Delay
-  /**
-   * Whether the tooltip should animate in and out.
-   *
-   * @beta
-   * @defaultValue false
-   */
-  animate?: boolean
+  disabled?: boolean
+  fallbackPlacements?: Placement[]
+  // padding?: number | number[]
+  placement?: Placement
+  /** Whether or not to render the tooltip in a portal element. */
+  portal?: boolean | string
+  // radius?: number | number[]
+  scheme?: ThemeColorSchemeKey
+  shadow?: number | number[]
+  tone?: ThemeColorCardToneKey
 }
 
 /**
@@ -98,17 +99,18 @@ export const Tooltip = forwardRef(function Tooltip(
     children: childProp,
     className,
     content,
+    delay,
     disabled,
     fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
       DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     padding = 2,
     placement: placementProp = 'bottom',
     portal: portalProp,
-    radius = 2,
+    radius = 3,
     scheme,
     shadow = 2,
     zOffset = layer.tooltip.zOffset,
-    delay,
+    tone,
     ...restProps
   } = props
   const prefersReducedMotion = usePrefersReducedMotion()
@@ -389,6 +391,7 @@ export const Tooltip = forwardRef(function Tooltip(
         ref={setFloating}
         scheme={scheme}
         shadow={shadow}
+        tone={tone}
       >
         {content}
       </TooltipCard>

@@ -27,7 +27,7 @@ export default defineRuntime({
       alias: {
         ...viteConfig.resolve?.alias,
         '@sanity/ui': EXPORTS_PATH,
-        '@sanity/ui-workshop': path.resolve(__dirname, '../ui-workshop/exports'),
+        // '@sanity/ui-workshop': path.resolve(__dirname, '../ui-workshop/exports'),
       },
     },
   }),

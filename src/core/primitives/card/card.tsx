@@ -1,11 +1,8 @@
 import {card, CardStyleProps, composeClassNames} from '@sanity/ui/css'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef, useContext} from 'react'
+import {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
-import {ThemeColorProvider, useRootTheme} from '../../theme'
-import {CardTone} from '../../types'
+import {ThemeColorProvider, useRootTheme} from '../../_compat'
 import {Box, BoxProps} from '../box'
-import {RootCardContext} from './RootCardContext'
 
 /**
  * @public
@@ -21,10 +18,7 @@ export interface CardProps extends BoxProps, CardStyleProps {
    * @beta
    */
   __unstable_focusRing?: boolean
-  muted?: boolean
   pressed?: boolean
-  scheme?: ThemeColorSchemeKey
-  tone?: CardTone
 }
 
 /**
@@ -41,70 +35,62 @@ export const Card = forwardRef(function Card(
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
     as: asProp,
-    border,
-    borderTop,
-    borderRight,
-    borderBottom,
-    borderLeft,
     className,
-    muted,
     pressed,
     radius = 0,
-    scheme,
+    scheme: schemeProp,
+    selectable,
     selected,
     shadow,
     style,
-    tone: toneProp = 'default',
+    tone: toneProp,
     ...restProps
   } = props
 
   const as = isValidElementType(asProp) ? asProp : 'div'
-  const rootCard = useContext(RootCardContext)
+
   const rootTheme = useRootTheme()
 
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
+  const scheme = schemeProp === undefined ? rootTheme.scheme : schemeProp
 
-  // todo: Consider adding the wrapper approach for nested cards in which the tones are not
-  // changing, avoid unnecessary ThemeColorProvider
   const node = (
-    <ThemeColorProvider scheme={scheme} tone={tone}>
-      <Box
-        data-as={typeof as === 'string' ? as : undefined}
-        data-scheme={rootTheme.scheme}
-        data-ui="Card"
-        data-tone={tone}
-        {...restProps}
-        as={as}
-        className={composeClassNames(
-          className,
-          // rootCard ? undefined : 'root',
-          card({
-            border,
-            borderTop,
-            borderRight,
-            borderBottom,
-            borderLeft,
-            radius,
-            shadow,
-          }),
-        )}
-        data-checkered={checkered ? '' : undefined}
-        data-focus-ring={focusRing ? '' : undefined}
-        data-muted={muted ? '' : undefined}
-        data-pressed={pressed ? '' : undefined}
-        data-selected={selected ? '' : undefined}
-        ref={ref}
-        selected={selected}
-        style={style}
-      />
-    </ThemeColorProvider>
+    <Box
+      data-as={typeof as === 'string' ? as : undefined}
+      data-ui="Card"
+      {...restProps}
+      as={as}
+      className={composeClassNames(
+        className,
+        card({
+          scheme: scheme === rootTheme.scheme ? undefined : scheme,
+          shadow,
+          tone: tone === rootTheme.tone ? undefined : tone,
+        }),
+      )}
+      data-checkered={checkered ? '' : undefined}
+      data-focus-ring={focusRing ? '' : undefined}
+      data-pressed={pressed ? '' : undefined}
+      data-selectable={selectable ? '' : undefined}
+      data-selected={selected ? '' : undefined}
+      radius={radius}
+      ref={ref}
+      selected={selected}
+      style={style}
+    />
   )
 
-  if (!rootCard) {
-    return <RootCardContext.Provider value={{renderedVars: true}}>{node}</RootCardContext.Provider>
+  if (scheme === rootTheme.scheme && tone === rootTheme.tone) {
+    return node
   }
 
-  return node
+  return (
+    // Render a theme provider around the card if the scheme or tone differs from the root theme.
+    // This is needed for backwards compatibility with the legacy theme API.
+    <ThemeColorProvider scheme={scheme} tone={tone ?? rootTheme.tone}>
+      {node}
+    </ThemeColorProvider>
+  )
 })
 
 Card.displayName = 'ForwardRef(Card)'

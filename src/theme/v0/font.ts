@@ -35,6 +35,7 @@ export interface ThemeFontWeight {
  */
 export interface ThemeFont {
   family: string
+  featureSettings?: string
   weights: ThemeFontWeight
   sizes: ThemeFontSize[]
   /** @deprecated No longer supported. */

@@ -10,6 +10,7 @@
     "./stories",
     "./test",
     "./typings",
+    "./workshop",
     "./workshop.config.ts",
     "./workshop.runtime.ts"
   ],

@@ -9,17 +9,37 @@ export const codeRules: Rules = {
     '--font-weight-bold': `var(--font-code-weight-bold)`,
 
     '--font-family': `var(--font-code-family)`,
+    '--font-feature-settings': `var(--font-code-feature-settings)`,
 
-    'color': 'var(--color-fg)',
+    'color': 'var(--color-code-fg)',
 
     '@nest': {
       '& > code': {
-        font: 'inherit',
+        fontFamily: 'inherit',
       },
+
+      // & code {
+      //   font-family: inherit;
+
+      //   &.refractor .token {
+      //     ${codeSyntaxHighlightingStyle}
+      //   }
+      // }
 
       '& a': {
         color: 'var(--color-link-fg)',
         textDecoration: 'none',
+        borderRadius: '1px',
+      },
+
+      '& svg': {
+        // Some popular CSS libraries change the defaults for SVG display
+        // Make sure SVGs are rendered as inline elements
+        display: 'inline',
+      },
+
+      '& [data-sanity-icon]': {
+        verticalAlign: 'baseline',
       },
     },
   },
@@ -31,6 +51,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-0-icon-size)',
     '--font-ascender-height': 'var(--font-code-0-ascender-height)',
     '--font-descender-height': 'var(--font-code-0-descender-height)',
+    // '--font-cap-height': 'var(--font-code-0-cap-height)',
   }),
 
   ...responsiveRules('code-1', {
@@ -40,6 +61,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-1-icon-size)',
     '--font-ascender-height': 'var(--font-code-1-ascender-height)',
     '--font-descender-height': 'var(--font-code-1-descender-height)',
+    // '--font-cap-height': 'var(--font-code-1-cap-height)',
   }),
 
   ...responsiveRules('code-2', {
@@ -49,6 +71,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-2-icon-size)',
     '--font-ascender-height': 'var(--font-code-2-ascender-height)',
     '--font-descender-height': 'var(--font-code-2-descender-height)',
+    // '--font-cap-height': 'var(--font-code-2-cap-height)',
   }),
 
   ...responsiveRules('code-3', {
@@ -58,6 +81,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-3-icon-size)',
     '--font-ascender-height': 'var(--font-code-3-ascender-height)',
     '--font-descender-height': 'var(--font-code-3-descender-height)',
+    // '--font-cap-height': 'var(--font-code-3-cap-height)',
   }),
 
   ...responsiveRules('code-4', {
@@ -67,5 +91,6 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-4-icon-size)',
     '--font-ascender-height': 'var(--font-code-4-ascender-height)',
     '--font-descender-height': 'var(--font-code-4-descender-height)',
+    // '--font-cap-height': 'var(--font-code-4-cap-height)',
   }),
 }

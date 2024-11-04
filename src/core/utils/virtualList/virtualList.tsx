@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
+import {useTheme_v2} from '../../_compat'
 import {_isScrollable} from '../../helpers'
 import {styled} from '../../lib/styled'
 import {_ResizeObserver} from '../../observers'
 import {StackProps} from '../../primitives'
-import {useTheme_v2} from '../../theme'
 
 /**
  * @beta
@@ -167,4 +168,5 @@ export const VirtualList = forwardRef(function VirtualList(
     </Root>
   )
 })
+
 VirtualList.displayName = 'ForwardRef(VirtualList)'

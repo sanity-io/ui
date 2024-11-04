@@ -2,7 +2,7 @@ import {_resp} from '../../_resp'
 import {composeClassNames} from '../../composeClassNames'
 import {MarginStyleProps} from './types'
 
-export function margin(props: MarginStyleProps): string {
+export function margin(props: MarginStyleProps): string | undefined {
   return composeClassNames(
     _resp('m', props.margin),
     _resp('mx', props.marginX),

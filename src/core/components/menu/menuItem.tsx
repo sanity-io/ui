@@ -1,4 +1,4 @@
-import {PaddingStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {GapStyleProps, PaddingStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
 import {Space} from '@sanity/ui/theme'
 import {
   forwardRef,
@@ -11,10 +11,8 @@ import {
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
-// import {useArrayProp} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
-// import {useRootTheme} from '../../theme'
 import {SelectableTone} from '../../types/selectable'
 import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
@@ -22,7 +20,7 @@ import {useMenu} from './useMenu'
 /**
  * @public
  */
-export interface MenuItemProps extends PaddingStyleProps, RadiusStyleProps {
+export interface MenuItemProps extends GapStyleProps, PaddingStyleProps, RadiusStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   hotkeys?: string[]
@@ -30,7 +28,7 @@ export interface MenuItemProps extends PaddingStyleProps, RadiusStyleProps {
   iconRight?: React.ElementType | React.ReactNode
   pressed?: boolean
   selected?: boolean
-  // space?: number | number[]
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
   text?: React.ReactNode
   tone?: SelectableTone
@@ -52,6 +50,9 @@ export const MenuItem = forwardRef(function MenuItem(
     children,
     disabled,
     fontSize = 1,
+    gap,
+    gapX,
+    gapY,
     hotkeys,
     icon: IconComponent,
     iconRight: IconRightComponent,
@@ -71,7 +72,7 @@ export const MenuItem = forwardRef(function MenuItem(
     tone = 'default',
     ...restProps
   } = props
-  // const {scheme} = useRootTheme()
+
   const menu = useMenu()
   const {
     activeElement,
@@ -112,8 +113,6 @@ export const MenuItem = forwardRef(function MenuItem(
     [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
   )
 
-  // const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
-
   const setRef = useCallback((el: HTMLDivElement | null) => {
     ref.current = el
     setRootElement(el)
@@ -125,15 +124,11 @@ export const MenuItem = forwardRef(function MenuItem(
       {...restProps}
       aria-pressed={as === 'button' && pressed}
       as={as}
-      data-pressed={as !== 'button' && pressed ? '' : undefined}
+      data-as={typeof as === 'string' ? as : undefined}
+      data-pressed={pressed ? '' : undefined}
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
-      // forwardedAs={as}
       radius={radius}
-      // $radius={useArrayProp(radius)}
-      // $padding={useArrayProp(0)}
-      // $tone={disabled ? 'default' : tone}
-      // $scheme={scheme}
       disabled={disabled}
       onClick={handleClick}
       onMouseEnter={onItemMouseEnter}
@@ -145,9 +140,9 @@ export const MenuItem = forwardRef(function MenuItem(
       type={as === 'button' ? 'button' : undefined}
     >
       {(IconComponent || text || IconRightComponent) && (
-        <Flex as="span" gap={space} align="center" {...paddingProps}>
+        <Flex as="span" gap={gap ?? space} gapX={gapX} gapY={gapY} align="center" {...paddingProps}>
           {IconComponent && (
-            <Text size={fontSize}>
+            <Text muted size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
               {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
@@ -162,21 +157,18 @@ export const MenuItem = forwardRef(function MenuItem(
           )}
 
           {hotkeys && (
-            <Hotkeys
-              // fontSize={hotkeysFontSize}
-              keys={hotkeys}
-              style={{marginTop: -4, marginBottom: -4}}
-            />
+            <Hotkeys gap={0.5} keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />
           )}
 
           {IconRightComponent && (
-            <Text size={fontSize}>
+            <Text muted size={fontSize}>
               {isValidElement(IconRightComponent) && IconRightComponent}
               {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
           )}
         </Flex>
       )}
+
       {children && (
         <Box as="span" {...paddingProps}>
           {children}

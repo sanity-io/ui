@@ -1,24 +1,31 @@
 import {_resp} from '../../_resp'
 import {composeClassNames} from '../../composeClassNames'
-import {flex} from '../../styles/flex'
-import {flexItem} from '../../styles/flexItem'
-import {gap} from '../../styles/gap'
-import {grid} from '../../styles/grid'
-import {gridItem} from '../../styles/gridItem'
-import {margin} from '../../styles/margin'
-import {maxWidth} from '../../styles/maxWidth'
-import {overflow} from '../../styles/overflow'
-import {padding} from '../../styles/padding'
-import {pointerEvents} from '../../styles/pointerEvents'
-import {position} from '../../styles/position'
-import {width} from '../../styles/width'
+import {
+  border,
+  display,
+  flex,
+  flexItem,
+  gap,
+  grid,
+  gridItem,
+  margin,
+  maxWidth,
+  overflow,
+  padding,
+  pointerEvents,
+  position,
+  radius,
+  width,
+} from '../../styles'
 import {BoxStyleProps} from './types'
 
 /** @public */
-export function box(props: BoxStyleProps): string {
+export function box(props: BoxStyleProps): string | undefined {
   return composeClassNames(
     'box',
-    _resp(undefined, props.display),
+    props.muted && 'muted',
+    border(props),
+    display(props),
     _resp(`h`, props.height),
     _resp(`box`, props.sizing),
     flex(props),
@@ -33,6 +40,7 @@ export function box(props: BoxStyleProps): string {
     padding(props),
     pointerEvents(props),
     position(props),
+    radius(props),
     width(props),
   )
 }

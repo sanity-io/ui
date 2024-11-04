@@ -1,25 +1,21 @@
 import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import type {Rules} from '../../types'
-import {varNames} from '../../varNames'
-import {vars} from '../../vars'
+
+const badgeToneRules: Rules = {}
+
+for (const tone of THEME_COLOR_STATE_TONES) {
+  badgeToneRules[`badge-${tone}`] = {
+    '--color-bg': `var(--color-tinted-${tone}-bg-4)`,
+    '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+  }
+}
 
 export const badgeRules: Rules = {
   badge: {
-    backgroundColor: vars.color.badge.bg,
-    color: vars.color.badge.fg,
+    backgroundColor: 'var(--color-bg)',
+    color: 'var(--color-fg)',
     verticalAlign: 'top',
   },
 
-  ...THEME_COLOR_STATE_TONES.reduce(
-    (acc, tone) => ({
-      ...acc,
-      [`badge-${tone}`]: {
-        [varNames.color.badge.bg]: vars.color.badge[tone].bg,
-        [varNames.color.badge.dot]: vars.color.badge[tone].dot,
-        [varNames.color.badge.fg]: vars.color.badge[tone].fg,
-        [varNames.color.badge.icon]: vars.color.badge[tone].icon,
-      },
-    }),
-    {} as Rules,
-  ),
+  ...badgeToneRules,
 }

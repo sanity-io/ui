@@ -1,4 +1,10 @@
-import {PaddingStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {
+  composeClassNames,
+  GapStyleProps,
+  menu,
+  PaddingStyleProps,
+  ResponsiveProp,
+} from '@sanity/ui/css'
 import {Space} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 import {useClickOutsideEvent, useGlobalKeyDown} from '../../hooks'
@@ -10,7 +16,7 @@ import {useMenuController} from './useMenuController'
 /**
  * @public
  */
-export interface MenuProps extends PaddingStyleProps {
+export interface MenuProps extends PaddingStyleProps, Pick<GapStyleProps, 'gap'> {
   /**
    * @deprecated Use `shouldFocus="first"` instead.
    */
@@ -26,6 +32,7 @@ export interface MenuProps extends PaddingStyleProps {
   'originElement'?: HTMLElement | null
   'registerElement'?: (el: HTMLElement) => () => void
   'shouldFocus'?: 'first' | 'last' | null
+  /** @deprecated Use `gap` property instead. */
   'space'?: ResponsiveProp<Space>
   'aria-labelledby'?: string
   'onBlurCapture'?: (event: FocusEvent) => void
@@ -46,10 +53,12 @@ export const Menu = forwardRef(function Menu(
 ) {
   const {
     children,
+    className,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusFirst,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusLast,
+    gap,
     onClickOutside,
     onEscape,
     onItemClick,
@@ -166,6 +175,7 @@ export const Menu = forwardRef(function Menu(
       <Box
         data-ui="Menu"
         {...restProps}
+        className={composeClassNames(className, menu())}
         onKeyDown={handleKeyDown}
         overflow="auto"
         outline="none"
@@ -174,9 +184,10 @@ export const Menu = forwardRef(function Menu(
         role="menu"
         tabIndex={-1}
       >
-        <Stack space={space}>{children}</Stack>
+        <Stack gap={gap ?? space}>{children}</Stack>
       </Box>
     </MenuContext.Provider>
   )
 })
+
 Menu.displayName = 'ForwardRef(Menu)'

@@ -6,7 +6,7 @@ import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PropsStory() {
   const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div', 'Props')
@@ -14,6 +14,7 @@ export default function PropsStory() {
   const checkered = useBoolean('Checkered', false, 'Props')
   const muted = useBoolean('Muted', false, 'Props')
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
+  const pressed = useBoolean('Pressed', false, 'Props')
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0, 'Props')
   const selected = useBoolean('Selected', false, 'Props')
   const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 0, 'Props')
@@ -28,6 +29,7 @@ export default function PropsStory() {
         muted={muted}
         onClick={useAction('onClick')}
         padding={padding}
+        pressed={pressed}
         radius={radius as Radius}
         selected={selected}
         shadow={shadow}

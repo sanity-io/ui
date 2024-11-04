@@ -9,7 +9,7 @@ import {
   WORKSHOP_ICON_SYMBOL_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function StackedStory() {
   const tones = Object.entries(WORKSHOP_BUTTON_TONE_OPTIONS)

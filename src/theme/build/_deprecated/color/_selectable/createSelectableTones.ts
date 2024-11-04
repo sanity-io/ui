@@ -4,7 +4,7 @@ import {
   ThemeColorSelectable,
   ThemeColorSelectableStates,
   ThemeColorSolid,
-} from '../../../../system'
+} from '../../../../v0'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createSelectableTones(

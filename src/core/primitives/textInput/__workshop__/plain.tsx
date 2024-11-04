@@ -11,7 +11,7 @@ import {
   WORKSHOP_ICON_SYMBOL_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   name: 'typing',
@@ -63,9 +63,11 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   ) as IconSymbol
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const placeholder = useText('Placeholder', '', 'Props') || undefined
+  const prefix = useBoolean('Prefix', false, 'Props')
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props')
   const readOnly = useBoolean('Read only', false, 'Props')
   const space = useSelect('Space', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
+  const suffix = useBoolean('Suffix', false, 'Props')
   const weight = useSelect('Weight', WORKSHOP_FONT_WEIGHT_OPTIONS, '', 'Props') || undefined
 
   const [value, setValue] = useState('')
@@ -88,10 +90,12 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       onChange={handleChange}
       padding={padding}
       placeholder={placeholder}
+      prefix={prefix && <Text>Prefix</Text>}
       radius={radius as Radius}
       readOnly={readOnly}
       ref={ref}
       space={space}
+      suffix={suffix && <Text>Suffix</Text>}
       value={value}
       weight={weight}
     />

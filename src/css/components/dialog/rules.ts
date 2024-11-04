@@ -1,4 +1,5 @@
 import {Rules} from '../../types'
+import {vars} from '../../vars'
 
 export const dialogRules: Rules = {
   'dialog': {
@@ -10,7 +11,7 @@ export const dialogRules: Rules = {
     'justifyContent': 'center',
     'outline': 'none',
 
-    'background': `var(--color-backdrop)`,
+    'background': vars.color.backdrop,
 
     '@keyframes': {
       'dialog-zoom-in': {

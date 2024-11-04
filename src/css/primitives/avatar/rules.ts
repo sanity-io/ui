@@ -1,18 +1,20 @@
 import {AVATAR_SIZE, THEME_COLOR_AVATAR_COLORS} from '@sanity/ui/theme'
 import {responsiveRules} from '../../responsiveRules'
-import {Rules} from '../../types'
+import {Properties, Rules} from '../../types'
+import {varNames} from '../../varNames'
+import {vars} from '../../vars'
 
 export const avatarRules: Rules = {
   'avatar': {
-    'backgroundColor': 'var(--avatar-bg-color)',
+    'backgroundColor': vars.color.avatar.bg,
     'position': 'relative',
     'boxSizing': 'border-box',
     'userSelect': 'none',
-    'boxShadow': '0 0 0 1px var(--card-bg-color)',
+    'boxShadow': `0 0 0 1px ${vars.color.bg}`,
 
-    'width': `var(--avatar-size)`,
-    'height': `var(--avatar-size)`,
-    'borderRadius': `var(--avatar-size)`,
+    'width': vars.avatar.size,
+    'height': vars.avatar.size,
+    'borderRadius': vars.avatar.size,
 
     '@nest': {
       '&[data-status="inactive"]': {
@@ -32,32 +34,40 @@ export const avatarRules: Rules = {
       },
 
       '&[data-as="button"]:focus': {
-        // todo
-        // boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
+        outline: 'var(--avatar-focus-ring-width) solid var(--color-focus-ring)',
+        outlineOffset: 'var(--avatar-focus-ring-offset)',
       },
 
       '&[data-as="button"]:focus:not(:focus-visible)': {
         boxShadow: 'none',
       },
+
+      ':disabled &, [data-disabled] &': {
+        [varNames.color.avatar.bg]: vars.color.border,
+        [varNames.color.avatar.fg]: vars.color.bg,
+      },
+
+      ...THEME_COLOR_AVATAR_COLORS.reduce(
+        (acc, color) => {
+          return {
+            ...acc,
+            [`&.${color}`]: {
+              [varNames.color.avatar.bg]: vars.color.avatar[color].bg,
+              [varNames.color.avatar.fg]: vars.color.avatar[color].fg,
+            },
+          }
+        },
+        {} as Record<string, Properties>,
+      ),
     },
   },
-
-  ...THEME_COLOR_AVATAR_COLORS.reduce((acc, color) => {
-    return {
-      ...acc,
-      [`avatar-${color}`]: {
-        '--avatar-bg-color': `var(--card-avatar-${color}-bg-color)`,
-        '--avatar-fg-color': `var(--card-avatar-${color}-fg-color)`,
-      },
-    }
-  }, {} as Rules),
 
   ...(AVATAR_SIZE.reduce((acc, size) => {
     return {
       ...acc,
       ...responsiveRules(`avatar-${size}`, {
-        '--avatar-distance': `var(--avatar-${size}-distance)`,
-        '--avatar-size': `var(--avatar-${size}-size)`,
+        [varNames.avatar.distance]: vars.avatar.sizes[size].distance,
+        [varNames.avatar.size]: vars.avatar.sizes[size].size,
       }),
     }
   }, {} as Rules) as Rules),
@@ -107,19 +117,21 @@ export const avatarRules: Rules = {
       '& > img': {
         display: 'block',
         position: 'absolute',
-        width: `var(--avatar-size)`,
-        height: `var(--avatar-size)`,
-        borderRadius: `var(--avatar-size)`,
+        width: vars.avatar.size,
+        height: vars.avatar.size,
+        borderRadius: vars.avatar.size,
       },
 
       '& > span': {
         display: 'block',
         position: 'absolute',
-        width: `var(--avatar-size)`,
-        height: `var(--avatar-size)`,
-        borderRadius: `var(--avatar-size)`,
-        boxShadow:
-          'inset 0 0 0 1px var(--avatar-bg-color), inset 0 0 0 1.75px var(--card-bg-color)',
+        width: vars.avatar.size,
+        height: vars.avatar.size,
+        borderRadius: vars.avatar.size,
+        boxShadow: [
+          `inset 0 0 0 1px ${vars.color.avatar.bg}`,
+          `inset 0 0 0 1.75px ${vars.color.bg}`,
+        ].join(', '),
       },
 
       '[data-image-error] &': {
@@ -129,25 +141,25 @@ export const avatarRules: Rules = {
   },
 
   'avatar-initials': {
-    color: 'var(--avatar-fg-color)',
-    borderRadius: 'var(--avatar-size)',
+    color: vars.color.avatar.fg,
+    borderRadius: vars.avatar.size,
   },
 
   'avatar-counter': {
-    'color': 'var(--card-fg-color)',
-    'backgroundColor': 'var(--card-bg-color)',
-    'boxShadow': `0 0 0 1px var(--card-bg-color), inset 0 0 0 1px var(--card-border-color)`,
+    'color': vars.color.fg,
+    'backgroundColor': vars.color.bg,
+    'boxShadow': [`0 0 0 1px ${vars.color.bg}`, `inset 0 0 0 1px ${vars.color.border}`].join(', '),
     'userSelect': 'none',
-    'borderRadius': 'var(--avatar-size)',
-    'height': 'var(--avatar-size)',
+    'borderRadius': vars.avatar.size,
+    'height': vars.avatar.size,
 
     '@nest': {
       '&&': {
-        minWidth: 'var(--avatar-size)',
+        minWidth: vars.avatar.size,
       },
 
       '[data-hide-inner-stroke] &': {
-        boxShadow: `0 0 0 1px var(--card-bg-color)`,
+        boxShadow: `0 0 0 1px ${vars.color.bg}`,
       },
     },
   },
@@ -155,7 +167,7 @@ export const avatarRules: Rules = {
   'avatar-stack': {
     '@nest': {
       '& > div + div': {
-        marginLeft: 'var(--avatar-distance)',
+        marginLeft: vars.avatar.distance,
       },
     },
   },

@@ -9,5 +9,5 @@ export const radiusRules: Rules = {
   ...responsiveRules('r-4', {borderRadius: 'var(--radius-4)'}),
   ...responsiveRules('r-5', {borderRadius: 'var(--radius-5)'}),
   ...responsiveRules('r-6', {borderRadius: 'var(--radius-6)'}),
-  ...responsiveRules('r-round', {borderRadius: '9999px'}),
+  ...responsiveRules('r-full', {borderRadius: '9999px'}),
 }

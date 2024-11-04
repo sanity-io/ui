@@ -1,10 +1,14 @@
 import {FONT_CODE_SIZE, FONT_HEADING_SIZE, FONT_LABEL_SIZE, FONT_TEXT_SIZE} from '@sanity/ui/theme'
 import {responsiveRules} from '../../responsiveRules'
 import {Rules} from '../../types'
+import {vars} from '../../vars'
 
 export const skeletonRules: Rules = {
   'skeleton': {
-    'backgroundColor': 'var(--card-skeleton-from-color)',
+    '--color-skeleton-from': `color-mix(in srgb, transparent, ${vars.color.muted.fg} 5%)`,
+    '--color-skeleton-to': `color-mix(in srgb, transparent, ${vars.color.muted.fg} 10%)`,
+
+    'backgroundColor': vars.color.skeleton.from,
     'backgroundPosition': '100%',
     'backgroundSize': '200% 100%',
     'backgroundAttachment': 'fixed',
@@ -24,14 +28,15 @@ export const skeletonRules: Rules = {
 
     '@nest': {
       '&[data-animated]': {
-        backgroundImage: `linear-gradient(
-          to right,
-          var(--card-skeleton-from-color),
-          var(--card-skeleton-to-color),
-          var(--card-skeleton-from-color),
-          var(--card-skeleton-from-color),
-          var(--card-skeleton-from-color)
-        )`,
+        backgroundImage: [
+          `linear-gradient(to right`,
+          vars.color.skeleton.from,
+          vars.color.skeleton.to,
+          vars.color.skeleton.from,
+          vars.color.skeleton.from,
+          vars.color.skeleton.from,
+          `)`,
+        ].join(', '),
         animationName: 'skeleton-pulse',
         animationTimingFunction: 'ease-in-out',
         animationIterationCount: 'infinite',
@@ -45,7 +50,7 @@ export const skeletonRules: Rules = {
 
     '@media': {
       'screen and (prefers-reduced-motion: no-preference)': {
-        backgroundColor: 'var(--card-skeleton-from-color)',
+        backgroundColor: vars.color.skeleton.from,
       },
     },
   },
@@ -64,9 +69,9 @@ export const skeletonRules: Rules = {
     return {
       ...acc,
       ...responsiveRules(`code-skeleton-${size}`, {
-        '--font-skeleton-line-height': `var(--font-code-${size}-line-height)`,
-        '--font-skeleton-ascender-height': `var(--font-code-${size}-ascender-height)`,
-        '--font-skeleton-descender-height': `var(--font-code-${size}-descender-height)`,
+        '--font-skeleton-line-height': vars.font.code.sizes[size].lineHeight,
+        '--font-skeleton-ascender-height': vars.font.code.sizes[size].ascenderHeight,
+        '--font-skeleton-descender-height': vars.font.code.sizes[size].descenderHeight,
       }),
     }
   }, {}),
@@ -75,9 +80,9 @@ export const skeletonRules: Rules = {
     return {
       ...acc,
       ...responsiveRules(`heading-skeleton-${size}`, {
-        '--font-skeleton-line-height': `var(--font-heading-${size}-line-height)`,
-        '--font-skeleton-ascender-height': `var(--font-heading-${size}-ascender-height)`,
-        '--font-skeleton-descender-height': `var(--font-heading-${size}-descender-height)`,
+        '--font-skeleton-line-height': vars.font.heading.sizes[size].lineHeight,
+        '--font-skeleton-ascender-height': vars.font.heading.sizes[size].ascenderHeight,
+        '--font-skeleton-descender-height': vars.font.heading.sizes[size].descenderHeight,
       }),
     }
   }, {}),
@@ -86,9 +91,9 @@ export const skeletonRules: Rules = {
     return {
       ...acc,
       ...responsiveRules(`label-skeleton-${size}`, {
-        '--font-skeleton-line-height': `var(--font-label-${size}-line-height)`,
-        '--font-skeleton-ascender-height': `var(--font-label-${size}-ascender-height)`,
-        '--font-skeleton-descender-height': `var(--font-label-${size}-descender-height)`,
+        '--font-skeleton-line-height': vars.font.label.sizes[size].lineHeight,
+        '--font-skeleton-ascender-height': vars.font.label.sizes[size].ascenderHeight,
+        '--font-skeleton-descender-height': vars.font.label.sizes[size].descenderHeight,
       }),
     }
   }, {}),
@@ -97,9 +102,9 @@ export const skeletonRules: Rules = {
     return {
       ...acc,
       ...responsiveRules(`text-skeleton-${size}`, {
-        '--font-skeleton-line-height': `var(--font-text-${size}-line-height)`,
-        '--font-skeleton-ascender-height': `var(--font-text-${size}-ascender-height)`,
-        '--font-skeleton-descender-height': `var(--font-text-${size}-descender-height)`,
+        '--font-skeleton-line-height': vars.font.text.sizes[size].lineHeight,
+        '--font-skeleton-ascender-height': vars.font.text.sizes[size].ascenderHeight,
+        '--font-skeleton-descender-height': vars.font.text.sizes[size].descenderHeight,
       }),
     }
   }, {}),

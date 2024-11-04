@@ -2,6 +2,8 @@ import {breadcrumbsRules} from './components/breadcrumbs/rules'
 import {dialogRules} from './components/dialog/rules'
 import {menuRules} from './components/menu/rules'
 import {skeletonRules} from './components/skeleton/rules'
+import {_inputRules} from './primitives/_input/rules'
+import {_selectableRules} from './primitives/_selectable/rules'
 import {avatarRules} from './primitives/avatar/rules'
 import {badgeRules} from './primitives/badge/rules'
 import {boxRules} from './primitives/box/rules'
@@ -16,7 +18,6 @@ import {labelRules} from './primitives/label/rules'
 import {popoverRules} from './primitives/popover/rules'
 import {radioRules} from './primitives/radio/rules'
 import {selectRules} from './primitives/select/rules'
-import {selectableRules} from './primitives/selectable/rules'
 import {spinnerRules} from './primitives/spinner/rules'
 import {switchRules} from './primitives/switch/rules'
 import {textRules} from './primitives/text/rules'
@@ -42,6 +43,7 @@ import {pointerEventsRules} from './styles/pointerEvents/rules'
 import {positionRules} from './styles/position/rules'
 import {radiusRules} from './styles/radius/rules'
 import {shadowRules} from './styles/shadow/rules'
+import {textOverflowRules} from './styles/textOverflow/rules'
 import {widthRules} from './styles/width/rules'
 import {type Rules} from './types'
 
@@ -67,6 +69,8 @@ export const rules: Rules = {
   ...widthRules,
 
   // primitives
+  ..._inputRules,
+  ..._selectableRules,
   ...avatarRules,
   ...badgeRules,
   ...boxRules,
@@ -82,11 +86,11 @@ export const rules: Rules = {
   ...popoverRules,
   ...radioRules,
   ...selectRules,
-  ...selectableRules,
   ...spinnerRules,
   ...switchRules,
   ...textAreaRules,
   ...textInputRules,
+  ...textOverflowRules,
   ...textRules,
   ...tokenRules,
   ...tooltipRules,

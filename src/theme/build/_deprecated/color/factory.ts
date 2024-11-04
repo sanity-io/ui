@@ -1,21 +1,22 @@
 import {
   ThemeColorGenericState,
   ThemeColorBase,
-  ThemeColorButtonModeKey,
+  // ThemeColorButtonModeKey,
   ThemeColorButtonStates,
   ThemeColorInputState,
   ThemeColorMuted,
   ThemeColorMutedTone,
   ThemeColorSolid,
   ThemeColorSolidTone,
-  ThemeColorSyntax,
+  // ThemeColorSyntax,
   ThemeColorName,
   ThemeColorScheme,
   ThemeColorSchemes,
   ThemeColor,
   ThemeColorToneKey,
   ThemeColorSpotKey,
-} from '../../../system'
+} from '../../../v0'
+import {ThemeColorButtonModeKey, ThemeColorSyntax} from '../../../v2'
 import {createSelectableTones} from './_selectable/createSelectableTones'
 import {createSolidTones} from './_solid/createSolidTones'
 import {createButtonModes} from './button/createButtonModes'

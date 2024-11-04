@@ -1,29 +1,30 @@
-import {COLOR_HUES} from '@sanity/color'
+// import {COLOR_HUES} from '@sanity/color'
 import {ThemeColorPalette, ThemeConfig} from '../config'
 import {defaultColorPalette} from '../defaults/colorPalette'
+import {HUES} from '../palette'
 import {
   THEME_COLOR_STATE_TONES,
   ThemeColorAvatar_v2,
-  ThemeColorBadgeTone_v2,
   ThemeColorBadge_v2,
+  ThemeColorBadgeTone_v2,
   ThemeColorBlendModeKey,
+  ThemeColorButton_v2,
   ThemeColorButtonMode_v2,
   ThemeColorButtonTone_v2,
-  ThemeColorButton_v2,
-  ThemeColorCardToneKey,
   ThemeColorCard_v2,
+  ThemeColorCardToneKey,
+  ThemeColorInput_v2,
   ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
-  ThemeColorInput_v2,
   ThemeColorKBD,
   ThemeColorScheme_v2,
   ThemeColorSchemes_v2,
-  ThemeColorSelectableTone_v2,
   ThemeColorSelectable_v2,
+  ThemeColorSelectableTone_v2,
   ThemeColorShadow,
   ThemeColorState_v2,
   ThemeColorSyntax,
-} from '../system'
+} from '../v2'
 import {RenderColorValueOptions, renderColorValue} from './renderColorValue'
 
 export function renderThemeColorSchemes(
@@ -191,7 +192,7 @@ function renderThemeColorAvatar(
 ): ThemeColorAvatar_v2 {
   const colorAvatar = {} as ThemeColorAvatar_v2
 
-  for (const hue of COLOR_HUES) {
+  for (const hue of HUES) {
     colorAvatar[hue] = renderThemeColorAvatarColor(value[hue], options)
   }
 

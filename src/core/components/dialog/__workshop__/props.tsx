@@ -1,7 +1,7 @@
 import {Box, Button, Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useCallback, useRef, useState} from 'react'
-import {WORKSHOP_WIDTH_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_WIDTH_OPTIONS} from '../../../../../workshop/constants'
 
 export default function PropsStory() {
   const animate = useBoolean('Animate', false, 'Props')

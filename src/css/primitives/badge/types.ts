@@ -1,6 +1,5 @@
-// import {BadgeTone} from '@sanity/ui'
-import {RadiusStyleProps} from '@sanity/ui/css'
 import {ThemeColorStateToneKey} from '@sanity/ui/theme'
+import {RadiusStyleProps} from '../../styles'
 
 /** @public */
 export interface BadgeStyleProps extends RadiusStyleProps {

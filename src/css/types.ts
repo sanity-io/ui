@@ -1,26 +1,49 @@
 import {
-  AvatarSize,
-  ContainerWidth,
-  FontCodeSize,
-  FontHeadingSize,
-  FontLabelSize,
-  FontTextSize,
-  FontWeight,
-  Radius,
-  Shadow,
-  Space,
-  ThemeColorAvatarColorKey,
-  ThemeColorButtonModeKey,
-  ThemeColorCardToneKey,
-  ThemeColorInputModeKey,
-  ThemeColorInputStateKey,
-  ThemeColorSchemeKey,
-  ThemeColorStateKey,
-  ThemeColorStateToneKey,
+  type AvatarSize,
+  type ContainerWidth,
+  type FontCodeSize,
+  type FontHeadingSize,
+  type FontLabelSize,
+  type FontTextSize,
+  type FontWeight,
+  type Hue,
+  type Radius,
+  type Shadow,
+  type Space,
+  type ThemeColorAvatarColorKey as AvatarColor,
+  type ThemeColorCardToneKey as CardTone,
+  type ThemeColorSchemeKey as Scheme,
+  type ThemeColorStateToneKey as ElementTone,
+  type Tint,
 } from '@sanity/ui/theme'
 import * as CSS from 'csstype'
 
+/** @public */
 export type ResponsiveProp<T> = T | Array<T | null | undefined>
+
+/** @public */
+export type PaletteVarName = `--black` | `--white` | `--${Hue}-${Tint}`
+
+/** @public */
+export type ElementColorVariant = 'solid' | 'tinted'
+
+/** @public */
+export type ElementColorVariantKey =
+  | 'bg-0'
+  | 'bg-1'
+  | 'bg-2'
+  | 'bg-3'
+  | 'bg-4'
+  | 'border-0'
+  | 'border-1'
+  | 'border-2'
+  | 'border-3'
+  | 'border-4'
+  | 'fg-0'
+  | 'fg-1'
+  | 'fg-2'
+  | 'fg-3'
+  | 'fg-4'
 
 /** @public */
 export type ThemeVarName =
@@ -35,121 +58,44 @@ export type ThemeVarName =
   | `--card-border-width`
   | `--card-focus-ring-offset`
   | `--card-focus-ring-width`
-  | `--card-shadow-outline`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-accent-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-avatar-${ThemeColorAvatarColorKey}-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-avatar-${ThemeColorAvatarColorKey}-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-backdrop`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-badge-${ThemeColorStateToneKey}-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-badge-${ThemeColorStateToneKey}-dot`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-badge-${ThemeColorStateToneKey}-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-badge-${ThemeColorStateToneKey}-icon`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-border`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-accent-fg`
-  // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ButtonMode}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-avatar`
-  // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ButtonMode}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-badge`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-border`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-code-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-code-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-icon`
-  // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ButtonMode}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-kbd`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-link-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-muted-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-muted-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-skeleton-from`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-skeleton-to`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-code-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-code-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-focus-ring`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-icon`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-kbd-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-kbd-border`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-kbd-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-link-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-muted-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-muted-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-skeleton-from`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-skeleton-to`
-  // input
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-border`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-fg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-muted-bg`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-placeholder`
-  // selectable
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-shadow-outline`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-shadow-umbra`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-shadow-penumbra`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-shadow-ambient`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-atrule`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-attrName`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-attrValue`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-attribute`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-boolean`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-builtin`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-cdata`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-char`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-class`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-className`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-comment`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-constant`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-deleted`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-doctype`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-entity`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-function`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-hexcode`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-id`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-important`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-inserted`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-keyword`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-number`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-operator`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-prolog`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-property`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-pseudoClass`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-pseudoElement`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-punctuation`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-regex`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-selector`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-string`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-symbol`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-tag`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-unit`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-url`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-syntax-variable`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-fg`
+  | `--shadow-outline`
   | `--container-${ContainerWidth}`
   | `--font-code-family`
+  | `--font-code-feature-settings`
   | `--font-code-weight-${FontWeight}`
   | `--font-code-${FontCodeSize}-ascender-height`
   | `--font-code-${FontCodeSize}-descender-height`
+  // | `--font-code-${FontCodeSize}-cap-height`
   | `--font-code-${FontCodeSize}-size`
   | `--font-code-${FontCodeSize}-line-height`
   | `--font-code-${FontCodeSize}-letter-spacing`
   | `--font-code-${FontCodeSize}-icon-size`
   | `--font-heading-family`
+  | `--font-heading-feature-settings`
   | `--font-heading-weight-${FontWeight}`
   | `--font-heading-${FontHeadingSize}-ascender-height`
   | `--font-heading-${FontHeadingSize}-descender-height`
+  // | `--font-heading-${FontHeadingSize}-cap-height`
   | `--font-heading-${FontHeadingSize}-size`
   | `--font-heading-${FontHeadingSize}-line-height`
   | `--font-heading-${FontHeadingSize}-letter-spacing`
   | `--font-heading-${FontHeadingSize}-icon-size`
   | `--font-label-family`
+  | `--font-label-feature-settings`
   | `--font-label-weight-${FontWeight}`
   | `--font-label-${FontLabelSize}-ascender-height`
   | `--font-label-${FontLabelSize}-descender-height`
+  // | `--font-label-${FontLabelSize}-cap-height`
   | `--font-label-${FontLabelSize}-size`
   | `--font-label-${FontLabelSize}-line-height`
   | `--font-label-${FontLabelSize}-letter-spacing`
   | `--font-label-${FontLabelSize}-icon-size`
   | `--font-text-family`
+  | `--font-text-feature-settings`
   | `--font-text-weight-${FontWeight}`
   | `--font-text-${FontTextSize}-ascender-height`
   | `--font-text-${FontTextSize}-descender-height`
+  // | `--font-text-${FontTextSize}-cap-height`
   | `--font-text-${FontTextSize}-size`
   | `--font-text-${FontTextSize}-line-height`
   | `--font-text-${FontTextSize}-letter-spacing`
@@ -181,34 +127,127 @@ export type ThemeVarName =
   | `--shadow-${Shadow}-penumbra`
   | `--shadow-${Shadow}-ambient`
 
+export type ColorCardVarName =
+  | `--color-${Scheme}-${CardTone}-accent-fg`
+  | `--color-${Scheme}-${CardTone}-avatar-${AvatarColor}-bg`
+  | `--color-${Scheme}-${CardTone}-avatar-${AvatarColor}-fg`
+  | `--color-${Scheme}-${CardTone}-backdrop`
+  | `--color-${Scheme}-${CardTone}-focus-ring`
+  | `--color-${Scheme}-${CardTone}-link-fg`
+  | `--color-${Scheme}-${CardTone}-muted-bg`
+  | `--color-${Scheme}-${CardTone}-muted-fg`
+  | `--color-${Scheme}-${CardTone}-${ElementColorVariant}-${ElementTone}-${ElementColorVariantKey}`
+  | `--color-${Scheme}-${CardTone}-shadow-outline`
+  | `--color-${Scheme}-${CardTone}-shadow-umbra`
+  | `--color-${Scheme}-${CardTone}-shadow-penumbra`
+  | `--color-${Scheme}-${CardTone}-shadow-ambient`
+  | `--color-${Scheme}-${CardTone}-skeleton-from`
+  | `--color-${Scheme}-${CardTone}-skeleton-to`
+  | `--color-${Scheme}-${CardTone}-token-atrule`
+  | `--color-${Scheme}-${CardTone}-token-attr-name`
+  | `--color-${Scheme}-${CardTone}-token-attr-value`
+  | `--color-${Scheme}-${CardTone}-token-attribute`
+  | `--color-${Scheme}-${CardTone}-token-boolean`
+  | `--color-${Scheme}-${CardTone}-token-builtin`
+  | `--color-${Scheme}-${CardTone}-token-cdata`
+  | `--color-${Scheme}-${CardTone}-token-char`
+  | `--color-${Scheme}-${CardTone}-token-class`
+  | `--color-${Scheme}-${CardTone}-token-class-name`
+  | `--color-${Scheme}-${CardTone}-token-comment`
+  | `--color-${Scheme}-${CardTone}-token-constant`
+  | `--color-${Scheme}-${CardTone}-token-deleted`
+  | `--color-${Scheme}-${CardTone}-token-doctype`
+  | `--color-${Scheme}-${CardTone}-token-entity`
+  | `--color-${Scheme}-${CardTone}-token-function`
+  | `--color-${Scheme}-${CardTone}-token-hexcode`
+  | `--color-${Scheme}-${CardTone}-token-id`
+  | `--color-${Scheme}-${CardTone}-token-important`
+  | `--color-${Scheme}-${CardTone}-token-inserted`
+  | `--color-${Scheme}-${CardTone}-token-keyword`
+  | `--color-${Scheme}-${CardTone}-token-number`
+  | `--color-${Scheme}-${CardTone}-token-operator`
+  | `--color-${Scheme}-${CardTone}-token-prolog`
+  | `--color-${Scheme}-${CardTone}-token-property`
+  | `--color-${Scheme}-${CardTone}-token-pseudo-class`
+  | `--color-${Scheme}-${CardTone}-token-pseudo-element`
+  | `--color-${Scheme}-${CardTone}-token-punctuation`
+  | `--color-${Scheme}-${CardTone}-token-regex`
+  | `--color-${Scheme}-${CardTone}-token-selector`
+  | `--color-${Scheme}-${CardTone}-token-string`
+  | `--color-${Scheme}-${CardTone}-token-symbol`
+  | `--color-${Scheme}-${CardTone}-token-tag`
+  | `--color-${Scheme}-${CardTone}-token-unit`
+  | `--color-${Scheme}-${CardTone}-token-url`
+  | `--color-${Scheme}-${CardTone}-token-variable`
+
+export type ColorCardToneScopedVarName =
+  | `--color-${CardTone}-accent-fg`
+  | `--color-${CardTone}-avatar-${AvatarColor}-bg`
+  | `--color-${CardTone}-avatar-${AvatarColor}-fg`
+  | `--color-${CardTone}-backdrop`
+  | `--color-${CardTone}-focus-ring`
+  | `--color-${CardTone}-link-fg`
+  | `--color-${CardTone}-muted-bg`
+  | `--color-${CardTone}-muted-fg`
+  | `--color-${CardTone}-${ElementColorVariant}-${ElementTone}-${ElementColorVariantKey}`
+  | `--color-${CardTone}-shadow-outline`
+  | `--color-${CardTone}-shadow-umbra`
+  | `--color-${CardTone}-shadow-penumbra`
+  | `--color-${CardTone}-shadow-ambient`
+  | `--color-${CardTone}-skeleton-from`
+  | `--color-${CardTone}-skeleton-to`
+  | `--color-${CardTone}-token-atrule`
+  | `--color-${CardTone}-token-attr-name`
+  | `--color-${CardTone}-token-attr-value`
+  | `--color-${CardTone}-token-attribute`
+  | `--color-${CardTone}-token-boolean`
+  | `--color-${CardTone}-token-builtin`
+  | `--color-${CardTone}-token-cdata`
+  | `--color-${CardTone}-token-char`
+  | `--color-${CardTone}-token-class`
+  | `--color-${CardTone}-token-class-name`
+  | `--color-${CardTone}-token-comment`
+  | `--color-${CardTone}-token-constant`
+  | `--color-${CardTone}-token-deleted`
+  | `--color-${CardTone}-token-doctype`
+  | `--color-${CardTone}-token-entity`
+  | `--color-${CardTone}-token-function`
+  | `--color-${CardTone}-token-hexcode`
+  | `--color-${CardTone}-token-id`
+  | `--color-${CardTone}-token-important`
+  | `--color-${CardTone}-token-inserted`
+  | `--color-${CardTone}-token-keyword`
+  | `--color-${CardTone}-token-number`
+  | `--color-${CardTone}-token-operator`
+  | `--color-${CardTone}-token-prolog`
+  | `--color-${CardTone}-token-property`
+  | `--color-${CardTone}-token-pseudo-class`
+  | `--color-${CardTone}-token-pseudo-element`
+  | `--color-${CardTone}-token-punctuation`
+  | `--color-${CardTone}-token-regex`
+  | `--color-${CardTone}-token-selector`
+  | `--color-${CardTone}-token-string`
+  | `--color-${CardTone}-token-symbol`
+  | `--color-${CardTone}-token-tag`
+  | `--color-${CardTone}-token-unit`
+  | `--color-${CardTone}-token-url`
+  | `--color-${CardTone}-token-variable`
+
+/** @public */
 export type CardScopedVarName =
   | `--color-accent-fg`
-  | `--color-avatar-${ThemeColorAvatarColorKey}-bg`
-  | `--color-avatar-${ThemeColorAvatarColorKey}-fg`
+  | `--color-avatar-bg`
+  | `--color-avatar-fg`
+  | `--color-avatar-${AvatarColor}-bg`
+  | `--color-avatar-${AvatarColor}-fg`
   | `--color-backdrop`
-  | `--color-badge-bg`
-  | `--color-badge-dot`
-  | `--color-badge-fg`
-  | `--color-badge-icon`
-  | `--color-badge-${ThemeColorStateToneKey}-bg`
-  | `--color-badge-${ThemeColorStateToneKey}-dot`
-  | `--color-badge-${ThemeColorStateToneKey}-fg`
-  | `--color-badge-${ThemeColorStateToneKey}-icon`
+  | `--color-${ElementColorVariant}-${ElementTone}-${ElementColorVariantKey}`
   | `--color-bg`
   | `--color-border`
   | `--color-code-bg`
   | `--color-code-fg`
   | `--color-fg`
   | `--color-focus-ring`
-  | `--color-icon`
-  | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-bg`
-  | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-border`
-  | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-fg`
-  | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-muted-bg`
-  | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-placeholder`
-  | `--color-kbd-bg`
-  | `--color-kbd-border`
-  | `--color-kbd-fg`
   | `--color-link-fg`
   | `--color-muted-bg`
   | `--color-muted-fg`
@@ -218,51 +257,86 @@ export type CardScopedVarName =
   | `--color-shadow-ambient`
   | `--color-skeleton-from`
   | `--color-skeleton-to`
-  | `--color-syntax-atrule`
-  | `--color-syntax-attrName`
-  | `--color-syntax-attrValue`
-  | `--color-syntax-attribute`
-  | `--color-syntax-boolean`
-  | `--color-syntax-builtin`
-  | `--color-syntax-cdata`
-  | `--color-syntax-char`
-  | `--color-syntax-class`
-  | `--color-syntax-className`
-  | `--color-syntax-comment`
-  | `--color-syntax-constant`
-  | `--color-syntax-deleted`
-  | `--color-syntax-doctype`
-  | `--color-syntax-entity`
-  | `--color-syntax-function`
-  | `--color-syntax-hexcode`
-  | `--color-syntax-id`
-  | `--color-syntax-important`
-  | `--color-syntax-inserted`
-  | `--color-syntax-keyword`
-  | `--color-syntax-number`
-  | `--color-syntax-operator`
-  | `--color-syntax-prolog`
-  | `--color-syntax-property`
-  | `--color-syntax-pseudoClass`
-  | `--color-syntax-pseudoElement`
-  | `--color-syntax-punctuation`
-  | `--color-syntax-regex`
-  | `--color-syntax-selector`
-  | `--color-syntax-string`
-  | `--color-syntax-symbol`
-  | `--color-syntax-tag`
-  | `--color-syntax-unit`
-  | `--color-syntax-url`
-  | `--color-syntax-variable`
+  | `--color-token-atrule`
+  | `--color-token-attr-name`
+  | `--color-token-attr-value`
+  | `--color-token-attribute`
+  | `--color-token-boolean`
+  | `--color-token-builtin`
+  | `--color-token-cdata`
+  | `--color-token-char`
+  | `--color-token-class`
+  | `--color-token-class-name`
+  | `--color-token-comment`
+  | `--color-token-constant`
+  | `--color-token-deleted`
+  | `--color-token-doctype`
+  | `--color-token-entity`
+  | `--color-token-function`
+  | `--color-token-hexcode`
+  | `--color-token-id`
+  | `--color-token-important`
+  | `--color-token-inserted`
+  | `--color-token-keyword`
+  | `--color-token-number`
+  | `--color-token-operator`
+  | `--color-token-prolog`
+  | `--color-token-property`
+  | `--color-token-pseudo-class`
+  | `--color-token-pseudo-element`
+  | `--color-token-punctuation`
+  | `--color-token-regex`
+  | `--color-token-selector`
+  | `--color-token-string`
+  | `--color-token-symbol`
+  | `--color-token-tag`
+  | `--color-token-unit`
+  | `--color-token-url`
+  | `--color-token-variable`
+  // todo
+  | `--color-checkbox-bg`
+  | `--color-checkbox-fg`
+  | `--color-checkbox-border`
+  | `--font-ascender-height`
+  // | `--font-cap-height`
+  | `--font-descender-height`
+  | `--font-family`
+  | `--font-feature-settings`
+  | `--font-icon-offset`
+  | `--font-icon-size`
+  | `--font-letter-spacing`
+  | `--font-line-height`
+  | `--font-size`
+  | `--font-skeleton-line-height`
+  | `--font-skeleton-ascender-height`
+  | `--font-skeleton-descender-height`
+  | `--font-weight-regular`
+  | `--font-weight-medium`
+  | `--font-weight-semibold`
+  | `--font-weight-bold`
+  | `--font-weight`
+  | `--fg-color`
+  | `--padding-top`
+  | `--padding-right`
+  | `--padding-bottom`
+  | `--padding-left`
+
+export type AvatarScopedVarName =
+  | `--avatar-bg-color`
+  | `--avatar-fg-color`
+  | `--avatar-distance`
+  | `--avatar-size`
+
+export type LegacyCardScopedVarName =
   // legacy
   | `--card-accent-fg-color`
-  | `--card-avatar-${ThemeColorAvatarColorKey}-bg-color`
-  | `--card-avatar-${ThemeColorAvatarColorKey}-fg-color`
+  | `--card-avatar-${AvatarColor}-bg-color`
+  | `--card-avatar-${AvatarColor}-fg-color`
   | `--card-backdrop-color`
-  | `--card-badge-${ThemeColorStateToneKey}-bg-color`
-  | `--card-badge-${ThemeColorStateToneKey}-dot-color`
-  | `--card-badge-${ThemeColorStateToneKey}-fg-color`
-  | `--card-badge-${ThemeColorStateToneKey}-icon-color`
+  | `--card-badge-${ElementTone}-bg-color`
+  | `--card-badge-${ElementTone}-dot-color`
+  | `--card-badge-${ElementTone}-fg-color`
+  | `--card-badge-${ElementTone}-icon-color`
   | `--card-bg-color`
   | `--card-bg-image`
   | `--card-bg2-color`
@@ -287,44 +361,45 @@ export type CardScopedVarName =
   | `--card-shadow-ambient-color`
   | `--card-skeleton-from-color`
   | `--card-skeleton-to-color`
-  // todo
-  | `--avatar-bg-color`
-  | `--avatar-fg-color`
-  | `--avatar-distance`
-  | `--avatar-size`
-  | `--color-checkbox-bg`
-  | `--color-checkbox-fg`
-  | `--color-checkbox-border`
-  | `--font-ascender-height`
-  | `--font-cap-height`
-  | `--font-descender-height`
-  | `--font-family`
-  | `--font-icon-offset`
-  | `--font-icon-size`
-  | `--font-letter-spacing`
-  | `--font-line-height`
-  | `--font-size`
-  | `--font-skeleton-line-height`
-  | `--font-skeleton-ascender-height`
-  | `--font-skeleton-descender-height`
-  | `--font-weight-regular`
-  | `--font-weight-medium`
-  | `--font-weight-semibold`
-  | `--font-weight-bold`
-  | `--font-weight`
-  | `--fg-color`
-  | `--input-bg-color`
-  | `--input-border-color`
-  | `--input-fg-color`
-  | `--padding-top`
-  | `--padding-right`
-  | `--padding-bottom`
-  | `--padding-left`
-
-// export type CardVarName = `--card-${CardSize}-${CardVariant}-${CardState}-${CardElement}`
 
 /** @public */
-export type CSSVarName = ThemeVarName | CardScopedVarName // `--${string}`
+export type ElementColorVariantScopedVarName =
+  `--color-${ElementColorVariant}-${ElementColorVariantKey}`
+
+/** @public */
+export type InputScopedVarName =
+  | `--color-input-bg`
+  | `--color-input-border`
+  | `--color-input-fg`
+  | `--color-input-placeholder`
+  | `--input-ascender-height`
+  | `--input-descender-height`
+  // | `--input-cap-height`
+  | `--input-font-size`
+  | `--input-gap`
+  | `--input-letter-spacing`
+  | `--input-line-height`
+  | `--input-padding`
+
+/** @public */
+export type SwitchScopedVarName =
+  | `--switch-bg-color`
+  | `--switch-fg-color`
+  | '--switch-thumb-offset'
+  | '--switch-thumb-size'
+
+/** @public */
+export type CSSVarName =
+  | AvatarScopedVarName
+  | LegacyCardScopedVarName
+  | PaletteVarName
+  | ThemeVarName
+  | ColorCardVarName
+  | ColorCardToneScopedVarName
+  | CardScopedVarName
+  | ElementColorVariantScopedVarName
+  | InputScopedVarName
+  | SwitchScopedVarName
 
 /** @public */
 export interface CustomCSSProperties extends Record<CSSVarName, string> {}
@@ -344,49 +419,49 @@ export interface Rules {
 /** @public */
 export type CSSVar = `var(${CSSVarName})`
 
+/** @public */
 export interface ColorAvatarColorVarNames {
   bg: CSSVarName
   fg: CSSVarName
 }
 
-export interface ColorBadgeToneVarNames {
-  bg: CSSVarName
-  dot: CSSVarName
-  fg: CSSVarName
-  icon: CSSVarName
-}
-
-export interface ColorInputStateVarNames {
-  bg: CSSVarName
-  border: CSSVarName
-  fg: CSSVarName
-  muted: {
-    bg: CSSVarName
+/** @public */
+export interface ColorElementVarNames {
+  bg: {
+    0: CSSVarName
+    1: CSSVarName
+    2: CSSVarName
+    3: CSSVarName
+    4: CSSVarName
   }
-  placeholder: CSSVarName
+  border: {
+    0: CSSVarName
+    1: CSSVarName
+    2: CSSVarName
+    3: CSSVarName
+    4: CSSVarName
+  }
+  fg: {
+    0: CSSVarName
+    1: CSSVarName
+    2: CSSVarName
+    3: CSSVarName
+    4: CSSVarName
+  }
 }
 
-export interface ColorStateVarNames {
+export interface ColorVariantVarNames
+  extends ColorElementVarNames,
+    Record<ElementTone, ColorElementVarNames> {}
+
+/** @public */
+export interface ColorCardVarNames {
   accent: {
     fg: CSSVarName
   }
-  avatar: Record<ThemeColorAvatarColorKey, ColorAvatarColorVarNames>
-  badge: Record<ThemeColorStateToneKey, ColorBadgeToneVarNames>
-  // badge
-  bg: CSSVarName
-  border: CSSVarName
-  code: {
-    bg: CSSVarName
-    fg: CSSVarName
-  }
-  fg: CSSVarName
-  icon: CSSVarName
-  // kbd
-  kbd: {
-    bg: CSSVarName
-    border: CSSVarName
-    fg: CSSVarName
-  }
+  avatar: Record<AvatarColor, ColorAvatarColorVarNames>
+  backdrop: CSSVarName
+  focusRing: CSSVarName
   link: {
     fg: CSSVarName
   }
@@ -404,7 +479,7 @@ export interface ColorStateVarNames {
     from: CSSVarName
     to: CSSVarName
   }
-  syntax: {
+  token: {
     atrule: CSSVarName
     attrName: CSSVarName
     attrValue: CSSVarName
@@ -442,32 +517,81 @@ export interface ColorStateVarNames {
     url: CSSVarName
     variable: CSSVarName
   }
+  // variant: {
+  solid: ColorVariantVarNames
+  tinted: ColorVariantVarNames
+  // }
 }
 
-export interface ColorCardVarNames extends ColorStateVarNames {
-  backdrop: ThemeVarName
-  focusRing: ThemeVarName
-  input: Record<ThemeColorInputModeKey, Record<ThemeColorInputStateKey, ColorInputStateVarNames>>
+/** @public */
+export type ColorSchemeVarNames = Record<CardTone, ColorCardVarNames>
+
+export interface ScopedColorVarNames extends Omit<ColorCardVarNames, 'avatar'> {
+  accent: {
+    fg: CSSVarName
+  }
+  avatar: Record<AvatarColor, ColorAvatarColorVarNames> & ColorAvatarColorVarNames
+  bg: CSSVarName
+  border: CSSVarName
+  fg: CSSVarName
+  input: {
+    bg: CSSVarName
+    border: CSSVarName
+    fg: CSSVarName
+    placeholder: CSSVarName
+  }
 }
 
-export type ColorSchemeVarNames = Record<ThemeColorCardToneKey, ColorCardVarNames>
+/** @public */
+export interface FontSizeVarNames {
+  ascenderHeight: CSSVarName
+  descenderHeight: CSSVarName
+  fontSize: CSSVarName
+  lineHeight: CSSVarName
+  letterSpacing: CSSVarName
+  iconSize: CSSVarName
+}
 
-export interface ScopedColorVarNames extends Omit<ColorStateVarNames, 'badge'> {
-  badge: Record<ThemeColorStateToneKey, ColorBadgeToneVarNames> & ColorBadgeToneVarNames
+export interface FontVarNames<Size extends number> {
+  family: CSSVarName
+  sizes: Record<Size, FontSizeVarNames>
 }
 
 /** @public */
 export interface VarNames {
-  color: Record<ThemeColorSchemeKey, ColorSchemeVarNames> & ScopedColorVarNames
+  color: Record<Scheme, ColorSchemeVarNames> &
+    ScopedColorVarNames &
+    Record<CardTone, ColorCardVarNames>
   avatar: {
+    distance: CSSVarName
     focusRing: {
       offset: CSSVarName
       width: CSSVarName
     }
+    size: CSSVarName
+    sizes: Record<AvatarSize, {distance: CSSVarName; size: CSSVarName}>
+  }
+  font: {
+    code: FontVarNames<FontCodeSize>
+    heading: FontVarNames<FontHeadingSize>
+    label: FontVarNames<FontLabelSize>
+    text: FontVarNames<FontTextSize>
+  }
+  input: {
+    fontSize: CSSVarName
+    lineHeight: CSSVarName
+    letterSpacing: CSSVarName
+    ascenderHeight: CSSVarName
+    descenderHeight: CSSVarName
+    // capHeight: CSSVarName
+
+    gap: CSSVarName
+    padding: CSSVarName
   }
   space: Record<Space, CSSVarName>
 }
 
+/** @public */
 export interface ColorInputStateVars {
   bg: CSSVar
   border: CSSVar
@@ -478,58 +602,42 @@ export interface ColorInputStateVars {
   placeholder: CSSVar
 }
 
-export interface ColorCardVars extends ColorStateVars {
-  backdrop: CSSVar
-  focusRing: CSSVar
-  input: Record<ThemeColorInputModeKey, Record<ThemeColorInputStateKey, ColorInputStateVars>>
-}
-
-export interface ColorBadgeToneVars {
-  bg: CSSVar
-  dot: CSSVar
-  fg: CSSVar
-  icon: CSSVar
-}
-
-export type ColorBadgeVars = Record<ThemeColorStateToneKey, ColorBadgeToneVars>
-
-export type ColorAvatarVars = Record<ThemeColorAvatarColorKey, ColorAvatarColorVars>
-
-export interface ColorInputStateVars {
-  bg: CSSVar
-  border: CSSVar
-  fg: CSSVar
-  muted: {
-    bg: CSSVar
+/** @public */
+export interface ColorElementVars {
+  bg: {
+    0: CSSVar
+    1: CSSVar
+    2: CSSVar
+    3: CSSVar
+    4: CSSVar
   }
-  placeholder: CSSVar
+  border: {
+    0: CSSVar
+    1: CSSVar
+    2: CSSVar
+    3: CSSVar
+    4: CSSVar
+  }
+  fg: {
+    0: CSSVar
+    1: CSSVar
+    2: CSSVar
+    3: CSSVar
+    4: CSSVar
+  }
 }
 
-export type ColorInputModeVars = Record<ThemeColorInputStateKey, ColorInputStateVars>
+/** @public */
+export interface ColorVariantVars extends Record<ElementTone, ColorElementVars>, ColorElementVars {}
 
-export type ColorInputVars = Record<ThemeColorInputModeKey, ColorInputModeVars>
-
-export interface ColorStateVars {
+/** @public */
+export interface ColorCardVars {
   accent: {
     fg: CSSVar
   }
   avatar: ColorAvatarVars
-  badge: Record<ThemeColorStateToneKey, ColorBadgeToneVars>
-  // badge
-  bg: CSSVar
-  border: CSSVar
-  code: {
-    bg: CSSVar
-    fg: CSSVar
-  }
-  fg: CSSVar
-  icon: CSSVar
-  input: ColorInputVars
-  kbd: {
-    bg: CSSVar
-    border: CSSVar
-    fg: CSSVar
-  }
+  backdrop: CSSVar
+  focusRing: CSSVar
   link: {
     fg: CSSVar
   }
@@ -547,7 +655,7 @@ export interface ColorStateVars {
     from: CSSVar
     to: CSSVar
   }
-  syntax: {
+  token: {
     atrule: CSSVar
     attrName: CSSVar
     attrValue: CSSVar
@@ -585,19 +693,49 @@ export interface ColorStateVars {
     url: CSSVar
     variable: CSSVar
   }
+  // variant: {
+  solid: ColorVariantVars
+  tinted: ColorVariantVars
+  // }
 }
 
+/** @public */
+export interface ColorBadgeToneVars {
+  bg: CSSVar
+  dot: CSSVar
+  fg: CSSVar
+  icon: CSSVar
+}
+
+/** @public */
+export type ColorBadgeVars = Record<ElementTone, ColorBadgeToneVars>
+
+/** @public */
+export type ColorAvatarVars = Record<AvatarColor, ColorAvatarColorVars>
+
+/** @public */
 export interface ColorAvatarColorVars {
   bg: CSSVar
   fg: CSSVar
 }
 
-export type ColorSchemeVars = Record<ThemeColorCardToneKey, ColorCardVars>
+/** @public */
+export interface ColorSchemeVars extends Record<CardTone, ColorCardVars> {}
 
-export interface ScopedColorVars extends Omit<ColorStateVars, 'badge'> {
-  badge: ColorBadgeVars & ColorBadgeToneVars
+export interface ScopedColorVars extends Omit<ColorCardVars, 'avatar'> {
+  avatar: ColorAvatarVars & ColorAvatarColorVars
+  bg: CSSVar
+  border: CSSVar
+  fg: CSSVar
+  input: {
+    bg: CSSVar
+    border: CSSVar
+    fg: CSSVar
+    placeholder: CSSVar
+  }
 }
 
+/** @public */
 export interface FontSizeVars {
   ascenderHeight: CSSVar
   descenderHeight: CSSVar
@@ -605,8 +743,10 @@ export interface FontSizeVars {
   lineHeight: CSSVar
   letterSpacing: CSSVar
   iconSize: CSSVar
+  // capHeight: CSSVar
 }
 
+/** @public */
 export interface FontVars<Size extends number> {
   family: CSSVar
   sizes: Record<Size, FontSizeVars>
@@ -614,15 +754,39 @@ export interface FontVars<Size extends number> {
 
 /** @public */
 export interface Vars {
+  avatar: {
+    distance: CSSVar
+    size: CSSVar
+    sizes: Record<AvatarSize, {distance: CSSVar; size: CSSVar}>
+  }
   color: {
     dark: ColorSchemeVars
     light: ColorSchemeVars
-  } & ScopedColorVars
+  } & ScopedColorVars &
+    Record<CardTone, ColorCardVars>
   font: {
     code: FontVars<FontCodeSize>
     heading: FontVars<FontHeadingSize>
     label: FontVars<FontLabelSize>
     text: FontVars<FontTextSize>
+  }
+  input: {
+    fontSize: CSSVar
+    lineHeight: CSSVar
+    letterSpacing: CSSVar
+    ascenderHeight: CSSVar
+    descenderHeight: CSSVar
+    // capHeight: CSSVar
+
+    gap: CSSVar
+    padding: CSSVar
+
+    text: {
+      focusRing: {
+        offset: CSSVar
+        width: CSSVar
+      }
+    }
   }
   space: Record<Space, CSSVar>
 }

@@ -1,15 +1,15 @@
-import {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
 import {FontTextSize, Space} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
-import {useArrayProp} from '../../hooks'
 import {Box, Inline, KBD} from '../../primitives'
 
 /**
  * @public
  */
-export interface HotkeysProps extends RadiusStyleProps {
+export interface HotkeysProps extends GapStyleProps, RadiusStyleProps {
   fontSize?: ResponsiveProp<FontTextSize>
   padding?: ResponsiveProp<Space>
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
   keys?: string[]
 }
@@ -27,16 +27,24 @@ export const Hotkeys = forwardRef(function Hotkeys(
     >,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {fontSize, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
-  const space = useArrayProp(spaceProp)
+  const {fontSize, gap, gapX, gapY, keys, padding, radius, space = 1, ...restProps} = props
 
   if (!keys || keys.length === 0) {
     return <></>
   }
 
   return (
-    <Box as="kbd" data-ui="Hotkeys" {...restProps} display="flex" gap={spaceProp} ref={ref}>
-      <Inline as="span" space={space}>
+    <Box
+      as="kbd"
+      data-ui="Hotkeys"
+      {...restProps}
+      display="flex"
+      gap={gap ?? space}
+      gapX={gapX}
+      gapY={gapY}
+      ref={ref}
+    >
+      <Inline as="span" gap={gap}>
         {keys.map((key, i) => (
           <KBD display="block" fontSize={fontSize} key={i} padding={padding} radius={radius}>
             {key}

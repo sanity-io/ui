@@ -6,7 +6,7 @@ import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PlainStory() {
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS)
@@ -19,7 +19,7 @@ export default function PlainStory() {
   const placeholder = useText('Placeholder', '', 'Props') || undefined
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props')
   const readOnly = useBoolean('Read only', false, 'Props')
-  const weight = useSelect('Weight', WORKSHOP_FONT_WEIGHT_OPTIONS, undefined, 'Props')
+  const weight = useSelect('Weight', WORKSHOP_FONT_WEIGHT_OPTIONS, undefined, 'Props') || undefined
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">

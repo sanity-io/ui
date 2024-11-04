@@ -49,11 +49,12 @@ export const Checkbox = forwardRef(function Checkbox(
   return (
     <span className={composeClassNames(className, checkbox())} data-ui="Checkbox" style={style}>
       <input
-        data-read-only={!disabled && readOnly ? '' : undefined}
-        data-error={customValidity ? '' : undefined}
         {...restProps}
         checked={checked}
         className={composeClassNames(className, checkboxInput())}
+        data-disabled={disabled ? '' : undefined}
+        data-read-only={!disabled && readOnly ? '' : undefined}
+        data-error={customValidity ? '' : undefined}
         disabled={disabled || readOnly}
         type="checkbox"
         readOnly={readOnly}

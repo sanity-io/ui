@@ -6,9 +6,9 @@ import {Box, BoxProps} from '../box'
 /**
  * @public
  */
-export interface StackProps
-  extends Omit<BoxProps, 'direction' | 'display' | 'gap' | 'gapX' | 'gapY'> {
+export interface StackProps extends Omit<BoxProps, 'direction' | 'display' | 'gapX' | 'gapY'> {
   as?: React.ElementType | keyof JSX.IntrinsicElements
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
 }
 
@@ -21,18 +21,17 @@ export const Stack = forwardRef(function Stack(
   props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref' | 'width'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, space, ...restProps} = props
+  const {as, gap, space, ...restProps} = props
 
   return (
     <Box
-      as={as}
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
+      as={as}
       direction="column"
       display="flex"
-      forwardedAs={as}
-      gapY={space}
+      gap={gap ?? space}
       ref={ref}
     />
   )

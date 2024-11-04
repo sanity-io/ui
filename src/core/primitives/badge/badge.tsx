@@ -2,7 +2,7 @@ import {badge, composeClassNames, RadiusStyleProps} from '@sanity/ui/css'
 import {ForwardedRef, forwardRef} from 'react'
 import {BadgeMode, BadgeTone} from '../../types'
 import {Box, BoxProps} from '../box'
-import {Text} from '../text'
+import {Text, TextProps} from '../text'
 
 /**
  * @public
@@ -12,6 +12,7 @@ export interface BadgeProps extends BoxProps, RadiusStyleProps {
   fontSize?: number | number[]
   /** @deprecated No longer used. */
   mode?: BadgeMode
+  textAlign?: TextProps['align']
   tone?: BadgeTone
 }
 
@@ -33,6 +34,7 @@ export const Badge = forwardRef(function Badge(
     mode: _deprecated_mode,
     padding = 1,
     radius = 2,
+    textAlign,
     tone = 'default',
     ...restProps
   } = props
@@ -52,7 +54,9 @@ export const Badge = forwardRef(function Badge(
       padding={padding}
       ref={ref}
     >
-      <Text size={fontSize}>{children}</Text>
+      <Text align={textAlign} size={fontSize}>
+        {children}
+      </Text>
     </Box>
   )
 })

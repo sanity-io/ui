@@ -7,7 +7,6 @@ import {forwardRef} from 'react'
  */
 export interface BoxProps extends BoxStyleProps, GapStyleProps, PositionStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  forwardedAs?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
 /**
@@ -24,10 +23,16 @@ export const Box = forwardRef(function Box(
   const {
     align,
     as: As = 'div',
+    border,
+    borderTop,
+    borderRight,
+    borderBottom,
+    borderLeft,
     className,
     column,
     columnStart,
     columnEnd,
+    columns,
     direction,
     display = 'block',
     flex,
@@ -55,10 +60,13 @@ export const Box = forwardRef(function Box(
     paddingLeft,
     pointerEvents,
     position,
+    muted,
+    radius,
     row,
+    rows,
     rowStart,
     rowEnd,
-    sizing,
+    sizing = 'border',
     width,
     wrap,
     ...restProps
@@ -73,9 +81,15 @@ export const Box = forwardRef(function Box(
         className,
         box({
           align,
+          border,
+          borderTop,
+          borderRight,
+          borderBottom,
+          borderLeft,
           column,
           columnStart,
           columnEnd,
+          columns,
           direction,
           display,
           flex,
@@ -94,6 +108,7 @@ export const Box = forwardRef(function Box(
           marginBottom,
           marginLeft,
           maxWidth,
+          muted,
           padding,
           paddingX,
           paddingY,
@@ -103,7 +118,9 @@ export const Box = forwardRef(function Box(
           paddingLeft,
           pointerEvents,
           position,
+          radius,
           row,
+          rows,
           rowStart,
           rowEnd,
           sizing,

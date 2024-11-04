@@ -1,26 +1,40 @@
 import {ButtonMode, ButtonTone} from '@sanity/ui'
-import {WidthStyleProps} from '@sanity/ui/css'
 import {composeClassNames} from '../../composeClassNames'
-import {radius, RadiusStyleProps} from '../../styles/radius'
-import {width} from '../../styles/width'
+import {
+  display,
+  DisplayStyleProps,
+  flexItem,
+  FlexItemStyleProps,
+  radius,
+  RadiusStyleProps,
+  width,
+  WidthStyleProps,
+} from '../../styles'
+import {toneMap, variantMap} from './_constants'
 
-export interface ButtonStyleProps extends RadiusStyleProps, WidthStyleProps {
+export interface ButtonStyleProps
+  extends DisplayStyleProps,
+    FlexItemStyleProps,
+    RadiusStyleProps,
+    WidthStyleProps {
   mode?: ButtonMode
   tone?: ButtonTone
 }
 
-export function button(props: ButtonStyleProps): string {
-  const {mode = 'default', tone = 'default'} = props
+export function button(props: ButtonStyleProps): string | undefined {
+  const {mode, tone} = props
 
   return composeClassNames(
     'button',
-    `button-mode-${mode}`,
-    `button-tone-${tone}`,
+    variantMap[mode ?? 'default'],
+    toneMap[tone ?? 'default'],
+    display(props),
+    flexItem(props),
     radius(props),
     width(props),
   )
 }
 
-export function buttonLoadingBox(): string {
+export function buttonLoadingBox(): string | undefined {
   return 'button-loading-box'
 }

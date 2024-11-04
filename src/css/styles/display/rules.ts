@@ -43,11 +43,11 @@ export const displayRules: Rules = {
     },
   }),
 
-  ...responsiveRules('grid-flex', {
+  ...responsiveRules('inline-grid', {
     'gridTemplateRows': 'auto',
     '@nest': {
       '&:not([hidden])': {
-        display: 'grid-flex',
+        display: 'inline-grid',
       },
     },
   }),

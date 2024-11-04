@@ -1,3 +1,5 @@
+import {ResponsiveProp} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {AnimatePresence, motion, type Variants} from 'framer-motion'
 import {useMemo, useRef, useState, startTransition, useEffect} from 'react'
 import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
@@ -21,9 +23,9 @@ type ToastState = {
  */
 export interface ToastProviderProps {
   children?: React.ReactNode
-  padding?: number | number[]
-  paddingX?: number | number[]
-  paddingY?: number | number[]
+  padding?: ResponsiveProp<Space>
+  paddingX?: ResponsiveProp<Space>
+  paddingY?: ResponsiveProp<Space>
   zOffset?: number | number[]
 }
 

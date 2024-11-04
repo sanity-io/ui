@@ -6,9 +6,8 @@ import {Box, BoxProps} from '../box'
 /**
  * @public
  */
-export interface InlineProps
-  extends Omit<BoxProps, 'align' | 'display' | 'gap' | 'gapX' | 'gapY' | 'justify'> {
-  /** The spacing between children. */
+export interface InlineProps extends Omit<BoxProps, 'align' | 'display' | 'justify'> {
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
 }
 
@@ -21,7 +20,7 @@ export const Inline = forwardRef(function Inline(
   props: InlineProps & Omit<React.HTMLProps<HTMLDivElement>, 'wrap'>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, children: childrenProp, space, ...restProps} = props
+  const {as, children: childrenProp, gap, gapX, gapY, space, ...restProps} = props
 
   const children = useMemo(
     () => Children.map(childrenProp, (child) => child && <Box maxWidth="fill">{child}</Box>),
@@ -35,7 +34,9 @@ export const Inline = forwardRef(function Inline(
       align="center"
       as={as}
       display="flex"
-      gap={space}
+      gap={gap ?? space}
+      gapX={gapX}
+      gapY={gapY}
       ref={ref}
       wrap="wrap"
     >

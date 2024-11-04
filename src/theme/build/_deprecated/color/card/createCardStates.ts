@@ -4,7 +4,7 @@ import {
   ThemeColorMuted,
   ThemeColorSolid,
   ThemeColorName,
-} from '../../../../system'
+} from '../../../../v0'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createCardStates(

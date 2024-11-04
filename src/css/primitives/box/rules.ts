@@ -10,6 +10,10 @@ export const boxRules: Rules = {
       '&[data-as="ul"], &[data-as="ol"]': {
         listStyle: 'none',
       },
+
+      '&.muted': {
+        backgroundColor: 'var(--color-muted-bg)',
+      },
     },
   },
 

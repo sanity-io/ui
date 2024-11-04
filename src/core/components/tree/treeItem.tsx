@@ -1,8 +1,9 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {composeClassNames, ResponsiveProp, treeItem} from '@sanity/ui/css'
-import {Space, ThemeFontWeightKey} from '@sanity/ui/theme'
+import {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
-import {Box, BoxProps, Flex, Text} from '../../primitives'
+import {Box, BoxProps, CardProps, Flex, Text} from '../../primitives'
+import {Selectable} from '../../primitives/_selectable'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
@@ -10,15 +11,15 @@ import {useTree} from './useTree'
 /**
  * @beta
  */
-export interface TreeItemProps {
+export interface TreeItemProps extends CardProps {
   expanded?: boolean
-  fontSize?: number | number[]
+  fontSize?: ResponsiveProp<FontTextSize>
   icon?: React.ElementType
   /**
    * Allows passing a custom element type to the link component
    */
   linkAs?: BoxProps['as']
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   space?: ResponsiveProp<Space>
   text?: React.ReactNode
   weight?: ThemeFontWeightKey
@@ -47,6 +48,7 @@ export const TreeItem = memo(function TreeItem(
     muted,
     onClick,
     padding = 2,
+    radius = 2,
     selected = false,
     space = 2,
     text,
@@ -109,7 +111,6 @@ export const TreeItem = memo(function TreeItem(
   const content = (
     <Flex gap={space} padding={padding}>
       <Box
-        // marginRight={space}
         style={{
           visibility: IconComponent || children ? 'visible' : 'hidden',
           pointerEvents: 'none',
@@ -121,12 +122,7 @@ export const TreeItem = memo(function TreeItem(
           </Text>
         )}
         {!IconComponent && (
-          <Text
-            // ToggleArrowText
-            muted={muted}
-            size={fontSize}
-            weight={weight}
-          >
+          <Text muted={muted} size={fontSize} weight={weight}>
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
           </Text>
         )}
@@ -153,22 +149,23 @@ export const TreeItem = memo(function TreeItem(
         ref={rootRef}
         role="none"
       >
-        <Box
-          // $level={tree.level}
+        <Selectable
           aria-expanded={expanded}
           as={linkAs}
+          data-as="a"
+          data-pressed={selected ? '' : undefined}
           data-ui="TreeItem__box"
           href={href}
+          radius={radius}
           ref={treeitemRef}
           role="treeitem"
           tabIndex={tabIndex}
-          // todo
           style={{
             paddingLeft: `calc(var(--space-2) * ${tree.level})`,
           }}
         >
           {content}
-        </Box>
+        </Selectable>
 
         <TreeContext.Provider value={contextValue}>
           {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
@@ -185,23 +182,24 @@ export const TreeItem = memo(function TreeItem(
       data-tree-key={itemKey}
       {...restProps}
       aria-expanded={expanded}
+      className={composeClassNames(className, treeItem())}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       ref={rootRef}
       role="treeitem"
       tabIndex={tabIndex}
     >
-      <Box
-        // $level={tree.level}
-        as="div"
+      <Selectable
+        as="button"
+        data-pressed={selected ? '' : undefined}
         data-ui="TreeItem__box"
-        // todo
+        radius={radius}
         style={{
           paddingLeft: `calc(var(--space-2) * ${tree.level})`,
         }}
       >
         {content}
-      </Box>
+      </Selectable>
 
       <TreeContext.Provider value={contextValue}>
         {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}

@@ -124,6 +124,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'spellCheck'
       | 'type'
       | 'value'
+      | 'width'
     >,
   forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
@@ -132,7 +133,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     customValidity,
     disabled,
     filterOption: filterOptionProp,
-    fontSize = 2,
+    fontSize = 1,
     icon,
     id,
     listBox = EMPTY_RECORD,
@@ -470,12 +471,12 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         if (v === 2) return 1
 
         return (v as Space) - 2
-      }),
+      }) as Space[],
     [padding],
   )
 
   const openButtonPadding = useMemo(
-    () => padding.map((v) => Math.max((v as Space) - 1, 0)),
+    () => padding.map((v) => Math.max((v as Space) - 1, 0)) as Space[],
     [padding],
   )
 
@@ -502,6 +503,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           <Button
             aria-label="Open"
             disabled={expanded}
+            display="block"
             fontSize={fontSize}
             icon={ChevronDownIcon}
             mode="bleed"

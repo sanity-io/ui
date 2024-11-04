@@ -1,6 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import {ResponsiveProp} from '@sanity/ui/css'
-import {Space} from '@sanity/ui/theme'
+import {GapStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {FontTextSize, Space} from '@sanity/ui/theme'
 import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
@@ -12,13 +12,14 @@ import {useMenu} from './useMenu'
 /**
  * @public
  */
-export interface MenuGroupProps {
+export interface MenuGroupProps extends GapStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  fontSize?: number | number[]
+  fontSize?: ResponsiveProp<FontTextSize>
   icon?: React.ElementType | React.ReactNode
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: Radius | Radius[]
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
   text: React.ReactNode
   tone?: SelectableTone
@@ -28,16 +29,19 @@ export interface MenuGroupProps {
  * @public
  */
 export function MenuGroup(
-  props: Omit<
-    React.HTMLProps<HTMLDivElement>,
-    'as' | 'height' | 'popover' | 'ref' | 'rows' | 'tabIndex' | 'width' | 'wrap'
-  > &
-    MenuGroupProps,
+  props: MenuGroupProps &
+    Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'popover' | 'ref' | 'rows' | 'tabIndex' | 'width' | 'wrap'
+    >,
 ): React.ReactElement {
   const {
     as = 'button',
     children,
     fontSize = 1,
+    gap,
+    gapX,
+    gapY,
     icon: IconComponent,
     onClick,
     padding = 3,
@@ -165,9 +169,10 @@ export function MenuGroup(
       <Selectable
         data-as={as}
         data-ui="MenuGroup"
-        forwardedAs={as}
+        // forwardedAs={as}
         {...restProps}
         aria-pressed={as === 'button' ? withinMenu : undefined}
+        as={as}
         data-pressed={as !== 'button' ? withinMenu : undefined}
         data-selected={!withinMenu && active ? '' : undefined}
         onClick={handleClick}
@@ -179,7 +184,7 @@ export function MenuGroup(
         tone={tone}
         type={as === 'button' ? 'button' : undefined}
       >
-        <Flex gap={space} padding={padding}>
+        <Flex gap={gap ?? space} gapX={gapX} gapY={gapY} padding={padding}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}

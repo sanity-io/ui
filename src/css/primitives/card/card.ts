@@ -1,21 +1,15 @@
 import {composeClassNames} from '../../composeClassNames'
-import {border, BorderStyleProps} from '../../styles/border'
-import {radius, RadiusStyleProps} from '../../styles/radius'
-import {ResponsiveProp} from '../../types'
-import {box, BoxStyleProps} from '../box'
+import {box} from '../box'
+import {toneMap} from './_constants'
+import {CardStyleProps} from './types'
 
-export interface CardStyleProps extends BoxStyleProps, BorderStyleProps, RadiusStyleProps {
-  checkered?: boolean
-  shadow?: ResponsiveProp<number>
-}
-
-export function card(props: CardStyleProps): string {
+export function card(props: CardStyleProps): string | undefined {
   return composeClassNames(
+    props.scheme,
+    toneMap[props.tone ?? 'inherit'],
     'card',
     props.checkered && 'card-checkered',
     box(props),
-    border(props),
-    radius(props),
     props.shadow === undefined ? undefined : `shadow-${props.shadow}`,
   )
 }

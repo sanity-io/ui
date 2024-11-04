@@ -1,4 +1,11 @@
-import {_switch, composeClassNames} from '@sanity/ui/css'
+import {
+  _switch,
+  _switchElement,
+  _switchPresentation,
+  _switchThumb,
+  _switchTrack,
+  composeClassNames,
+} from '@sanity/ui/css'
 import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
 import {Box} from '../box'
 
@@ -38,29 +45,29 @@ export const Switch = forwardRef(function Switch(
   return (
     <Box
       className={composeClassNames(className, _switch())}
+      data-checked={checked ? '' : undefined}
+      data-indeterminate={indeterminate ? '' : undefined}
       data-ui="Switch"
       display="inline-block"
       position="relative"
       style={style}
     >
       <input
-        data-read-only={!disabled && readOnly ? '' : undefined}
         {...restProps}
         checked={indeterminate !== true && checked}
-        className="switch-input"
+        className={_switchElement()}
+        data-disabled={disabled ? '' : undefined}
+        data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         type="checkbox"
         ref={ref}
       />
-      <span aria-hidden className="switch-presentation" data-name="representation">
-        <span className="switch-track" />
-        <span
-          className="switch-thumb"
-          data-checked={checked ? '' : undefined}
-          data-indeterminate={indeterminate ? '' : undefined}
-        />
+      <span aria-hidden className={_switchPresentation()}>
+        <span className={_switchTrack()} />
+        <span className={_switchThumb()} />
       </span>
     </Box>
   )
 })
+
 Switch.displayName = 'ForwardRef(Switch)'

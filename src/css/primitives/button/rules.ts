@@ -1,45 +1,165 @@
 import {THEME_COLOR_BUTTON_MODES, THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import {Rules} from '../../types'
+import {toneMap, variantMap} from './_constants'
+
+const buttonVariantRules: Rules = {}
+
+for (const mode of THEME_COLOR_BUTTON_MODES) {
+  for (const tone of THEME_COLOR_STATE_TONES) {
+    if (mode === 'default') {
+      buttonVariantRules[`&.${variantMap[mode]}.${toneMap[tone]}`] = {
+        'boxShadow': 'none',
+        '--color-bg': `var(--color-solid-${tone}-bg-0)`,
+        '--color-border': `var(--color-solid-${tone}-border-1)`,
+        '--color-fg': `var(--color-solid-${tone}-fg-0)`,
+        '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+
+        '@nest': {
+          '&:not([data-disabled]):hover': {
+            '--color-bg': `var(--color-solid-${tone}-bg-1)`,
+            '--color-border': `var(--color-solid-${tone}-border-2)`,
+            '--color-fg': `var(--color-solid-${tone}-fg-0)`,
+            '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+          },
+
+          '&:not([data-disabled]):active': {
+            '--color-bg': `var(--color-solid-${tone}-bg-2)`,
+            '--color-border': `var(--color-solid-${tone}-border-3)`,
+            '--color-fg': `var(--color-solid-${tone}-fg-0)`,
+            '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+          },
+
+          '&:not([data-disabled])[data-selected]': {
+            '--color-bg': `var(--color-solid-${tone}-bg-2)`,
+            '--color-border': `var(--color-solid-${tone}-border-3)`,
+            '--color-fg': `var(--color-solid-${tone}-fg-0)`,
+            '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+          },
+
+          '&[data-disabled]': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
+            '--color-border': `var(--color-tinted-${tone}-border-0)`,
+            '--color-fg': `var(--color-tinted-${tone}-border-2)`,
+            '--color-muted-fg': `var(--color-tinted-${tone}-border-1)`,
+          },
+        },
+      }
+    }
+
+    if (mode === 'bleed') {
+      buttonVariantRules[`&.${variantMap[mode]}.${toneMap[tone]}`] = {
+        'boxShadow': 'none',
+        '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
+        '--color-border': `var(--color-tinted-${tone}-border-1)`,
+        '--color-fg': `var(--color-tinted-${tone}-fg-2)`,
+        '--color-muted-fg': `var(--color-tinted-${tone}-fg-4)`,
+
+        '@nest': {
+          '&:not([data-disabled]):hover': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
+            '--color-border': `var(--color-tinted-${tone}-border-2)`,
+            '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+            '--color-muted-fg': `var(--color-tinted-${tone}-fg-3)`,
+          },
+
+          '&:not([data-disabled]):active': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+            '--color-border': `var(--color-tinted-${tone}-border-3)`,
+            '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+            '--color-muted-fg': `var(--color-tinted-${tone}-fg-3)`,
+          },
+
+          '&:not([data-disabled])[data-selected]': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+            '--color-border': `var(--color-tinted-${tone}-border-3)`,
+            '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+            '--color-muted-fg': `var(--color-tinted-${tone}-fg-3)`,
+          },
+
+          '&[data-disabled]': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
+            '--color-border': `var(--color-tinted-${tone}-border-0)`,
+            '--color-fg': `var(--color-tinted-${tone}-border-2)`,
+            '--color-muted-fg': `var(--color-tinted-${tone}-border-1)`,
+          },
+        },
+      }
+    }
+
+    if (mode === 'ghost') {
+      buttonVariantRules[`&.${variantMap[mode]}.${toneMap[tone]}`] = {
+        '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
+        '--color-border': `var(--color-tinted-${tone}-border-0)`,
+        '--color-fg': `var(--color-tinted-${tone}-fg-2)`,
+
+        '@nest': {
+          '&:not([data-disabled]):hover': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+            '--color-border': `var(--color-tinted-${tone}-border-1)`,
+            '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+          },
+
+          '&:not([data-disabled]):active': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
+            '--color-border': `var(--color-tinted-${tone}-border-2)`,
+            '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+          },
+
+          '&:not([data-disabled])[data-selected]': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
+            '--color-border': `var(--color-tinted-${tone}-border-2)`,
+            '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+          },
+
+          '&[data-disabled]': {
+            '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
+            '--color-border': `var(--color-tinted-${tone}-border-0)`,
+            '--color-fg': `var(--color-tinted-${tone}-border-2)`,
+          },
+        },
+      }
+    }
+  }
+}
 
 export const buttonRules: Rules = {
   'button': {
-    WebkitFontSmoothing: 'inherit',
-    appearance: 'none',
-    display: 'inline-flex',
-    alignItems: 'center',
-    font: 'inherit',
-    outline: 'none',
-    userSelect: 'none',
-    textDecoration: 'none',
-    border: 0,
-    boxSizing: 'border-box',
-    padding: 0,
-    overflow: 'hidden',
-    margin: 0,
-    textAlign: 'left',
-    position: 'relative',
-    verticalAlign: 'top',
-    backgroundColor: 'var(--card-bg-color)',
-    color: 'var(--card-fg-color)',
-  },
+    'WebkitFontSmoothing': 'inherit',
+    'appearance': 'none',
+    'font': 'inherit',
+    'outline': 'none',
+    'userSelect': 'none',
+    'textDecoration': 'none',
+    'border': 0,
+    'boxSizing': 'border-box',
+    'padding': 0,
+    'overflow': 'hidden',
+    'margin': 0,
+    'textAlign': 'left',
+    'position': 'relative',
+    'verticalAlign': 'top',
+    'backgroundColor': 'var(--color-bg)',
+    'color': 'var(--color-fg)',
+    'boxShadow': 'inset 0 0 0 var(--button-border-width) var(--color-border)',
 
-  // variants
-  ...THEME_COLOR_BUTTON_MODES.reduce((acc, mode) => {
-    return {
-      ...acc,
-      [`button-mode-${mode}`]: {
-        '@nest': THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
-          return {
-            ...acc,
-            [`&.button-tone-${tone}`]: {
-              '--card-bg-color': `var(--card-button-${mode}-${tone}-enabled-bg-color, rgba(127, 127, 127, 0.1))`,
-              '--card-fg-color': `var(--card-button-${mode}-${tone}-enabled-fg-color, currentColor)`,
-            },
-          }
-        }, {} as Rules),
+    '@nest': {
+      '&::-moz-focus-inner': {
+        border: 0,
+        padding: 0,
       },
-    }
-  }, {} as Rules),
+
+      '&:focus': {
+        outline: 'var(--button-focus-ring-width) solid var(--color-focus-ring)',
+        outlineOffset: 'var(--button-focus-ring-offset)',
+      },
+
+      '&:focus:not(:focus-visible)': {
+        outline: 'none',
+      },
+
+      ...buttonVariantRules,
+    },
+  },
 
   'button-loading-box': {
     position: 'absolute',
@@ -47,13 +167,10 @@ export const buttonRules: Rules = {
     left: 0,
     right: 0,
     bottom: 0,
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    backgroundColor: 'var(--card-bg-color)',
+    backgroundColor: 'var(--color-bg)',
     borderRadius: 'inherit',
     zIndex: 1,
-    // boxShadow: 'inherit',
+    opacity: 0.8,
   },
 }
 
@@ -132,18 +249,18 @@ export const buttonRules: Rules = {
 //   const color = mode[props.$tone] || mode.default
 //   const border = {
 //     width: button.border.width,
-//     color: 'var(--card-border-color)',
+//     color: 'var(--color-border)',
 //   }
-//   // const defaultBoxShadow = `inset 0px -1.5px 0px ${buttonTheme.border.width}px color-mix(in srgb, var(--card-border-color) 25%, var(--card-bg-color))`
+//   // const defaultBoxShadow = `inset 0px -1.5px 0px ${buttonTheme.border.width}px color-mix(in srgb, var(--color-border) 25%, var(--color-bg))`
 //   const defaultBoxShadow = undefined
 
 //   return [
 //     _cardColorStyle(baseColor, color.enabled),
 //     {
-//       'backgroundColor': 'var(--card-bg-color)',
-//       'color': 'var(--card-fg-color)',
+//       'backgroundColor': 'var(--color-bg)',
+//       'color': 'var(--color-fg)',
 //       'boxShadow': focusRingBorderStyle(border),
-//       '&:disabled, &[data-disabled="true"]': _cardColorStyle(baseColor, color.disabled),
+//       '&:disabled, &[data-disabled]': _cardColorStyle(baseColor, color.disabled),
 //       "&:not([data-disabled='true'])": {
 //         'boxShadow': combineBoxShadow(
 //           focusRingBorderStyle(border),

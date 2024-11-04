@@ -1,189 +1,202 @@
 import {
   FONT_CODE_SIZE,
   FONT_HEADING_SIZE,
+  FONT_LABEL_SIZE,
   FONT_TEXT_SIZE,
-  FontCodeSize,
-  FontHeadingSize,
-  FontLabelSize,
-  FontTextSize,
   SPACE,
-  type Space,
   THEME_COLOR_AVATAR_COLORS,
   THEME_COLOR_CARD_TONES,
-  THEME_COLOR_INPUT_MODES,
-  THEME_COLOR_INPUT_STATES,
   THEME_COLOR_STATE_TONES,
-  type ThemeColorCardToneKey,
-  type ThemeColorInputModeKey,
-  type ThemeColorInputStateKey,
-  type ThemeColorSchemeKey,
+  type FontCodeSize,
+  type FontHeadingSize,
+  type FontLabelSize,
+  type FontTextSize,
+  type Space,
+  type ThemeColorCardToneKey as CardTone,
+  type ThemeColorSchemeKey as Scheme,
+  AVATAR_SIZE,
+  AvatarSize,
 } from '@sanity/ui/theme'
 import {
-  FontSizeVars,
+  type ColorVariantVars,
+  type FontSizeVars,
   type ColorAvatarVars,
-  type ColorBadgeVars,
   type ColorCardVars,
-  type ColorInputModeVars,
-  type ColorInputStateVars,
-  type ColorInputVars,
   type ColorSchemeVars,
   type CSSVar,
   type Vars,
 } from './types'
 import {varNames} from './varNames'
 
-export const vars: Vars = {
-  color: {
-    dark: THEME_COLOR_CARD_TONES.reduce((acc, tone) => {
-      return {
-        ...acc,
-        [tone]: buildColorCardVars({scheme: 'dark', tone}),
-      }
-    }, {} as ColorSchemeVars),
-    light: THEME_COLOR_CARD_TONES.reduce((acc, tone) => {
-      return {
-        ...acc,
-        [tone]: buildColorCardVars({scheme: 'light', tone}),
-      }
-    }, {} as ColorSchemeVars),
+const darkColorVars = {} as ColorSchemeVars
 
-    accent: {
-      fg: `var(--color-accent-fg)`,
+for (const tone of THEME_COLOR_CARD_TONES) {
+  darkColorVars[tone] = buildColorCardVars({scheme: 'dark', tone})
+}
+
+const lightColorVars = {} as ColorSchemeVars
+
+for (const tone of THEME_COLOR_CARD_TONES) {
+  lightColorVars[tone] = buildColorCardVars({scheme: 'light', tone})
+}
+
+const colorVars: Vars['color'] = {
+  accent: {
+    fg: `var(${varNames.color.accent.fg})`,
+  },
+  avatar: {
+    bg: `var(${varNames.color.avatar.bg})`,
+    fg: `var(${varNames.color.avatar.fg})`,
+    gray: {
+      bg: `var(${varNames.color.avatar.gray.bg})`,
+      fg: `var(${varNames.color.avatar.gray.fg})`,
     },
-    avatar: {
-      ...THEME_COLOR_AVATAR_COLORS.reduce((acc, color) => {
-        return {
-          ...acc,
-          [color]: {
-            bg: `var(--color-avatar-${color}-bg)`,
-            fg: `var(--color-avatar-${color}-fg)`,
-          },
-        }
-      }, {} as ColorAvatarVars),
+    blue: {
+      bg: `var(${varNames.color.avatar.blue.bg})`,
+      fg: `var(${varNames.color.avatar.blue.fg})`,
     },
-    badge: {
-      bg: `var(--color-badge-bg)`,
-      dot: `var(--color-badge-dot)`,
-      fg: `var(--color-badge-fg)`,
-      icon: `var(--color-badge-icon)`,
-      ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
-        return {
-          ...acc,
-          [tone]: {
-            bg: `var(--color-badge-${tone}-bg)`,
-            dot: `var(--color-badge-${tone}-dot)`,
-            fg: `var(--color-badge-${tone}-fg)`,
-            icon: `var(--color-badge-${tone}-icon)`,
-          },
-        }
-      }, {} as ColorBadgeVars),
+    purple: {
+      bg: `var(${varNames.color.avatar.purple.bg})`,
+      fg: `var(${varNames.color.avatar.purple.fg})`,
     },
-    bg: `var(--color-bg)`,
-    border: `var(--color-border)`,
-    code: {
-      bg: `var(--color-code-bg)`,
-      fg: `var(--color-code-fg)`,
+    magenta: {
+      bg: `var(${varNames.color.avatar.magenta.bg})`,
+      fg: `var(${varNames.color.avatar.magenta.fg})`,
     },
-    fg: `var(--color-fg)`,
-    icon: `var(--color-icon)`,
-    input: {
-      ...THEME_COLOR_INPUT_MODES.reduce((acc, mode) => {
-        return {
-          ...acc,
-          [mode]: {
-            ...THEME_COLOR_INPUT_STATES.reduce((acc, state) => {
-              return {
-                ...acc,
-                [state]: {
-                  bg: `var(--color-bg)`,
-                  border: `var(--color-border)`,
-                  fg: `var(--color-fg)`,
-                  muted: {
-                    fg: `var(--color-muted-fg)`,
-                  },
-                  placeholder: `var(--color-placeholder)`,
-                },
-              }
-            }, {} as ColorInputModeVars),
-          },
-        }
-      }, {} as ColorInputVars),
+    red: {
+      bg: `var(${varNames.color.avatar.red.bg})`,
+      fg: `var(${varNames.color.avatar.red.fg})`,
     },
-    kbd: {
-      bg: `var(--color-kbd-bg)`,
-      border: `var(--color-kbd-border)`,
-      fg: `var(--color-kbd-fg)`,
+    orange: {
+      bg: `var(${varNames.color.avatar.orange.bg})`,
+      fg: `var(${varNames.color.avatar.orange.fg})`,
     },
-    link: {
-      fg: `var(--color-link-fg)`,
+    yellow: {
+      bg: `var(${varNames.color.avatar.yellow.bg})`,
+      fg: `var(${varNames.color.avatar.yellow.fg})`,
     },
-    muted: {
-      bg: `var(--color-muted-bg)`,
-      fg: `var(--color-muted-fg)`,
+    green: {
+      bg: `var(${varNames.color.avatar.green.bg})`,
+      fg: `var(${varNames.color.avatar.green.fg})`,
     },
-    shadow: {
-      outline: `var(--color-shadow-outline)`,
-      umbra: `var(--color-shadow-umbra)`,
-      penumbra: `var(--color-shadow-penumbra)`,
-      ambient: `var(--color-shadow-ambient)`,
-    },
-    skeleton: {
-      from: `var(--color-skeleton-from)`,
-      to: `var(--color-skeleton-to)`,
-    },
-    syntax: {
-      atrule: `var(--color-syntax-atrule)`,
-      attrName: `var(--color-syntax-attrName)`,
-      attrValue: `var(--color-syntax-attrValue)`,
-      attribute: `var(--color-syntax-attribute)`,
-      boolean: `var(--color-syntax-boolean)`,
-      builtin: `var(--color-syntax-builtin)`,
-      cdata: `var(--color-syntax-cdata)`,
-      char: `var(--color-syntax-char)`,
-      class: `var(--color-syntax-class)`,
-      className: `var(--color-syntax-className)`,
-      comment: `var(--color-syntax-comment)`,
-      constant: `var(--color-syntax-constant)`,
-      deleted: `var(--color-syntax-deleted)`,
-      doctype: `var(--color-syntax-doctype)`,
-      entity: `var(--color-syntax-entity)`,
-      function: `var(--color-syntax-function)`,
-      hexcode: `var(--color-syntax-hexcode)`,
-      id: `var(--color-syntax-id)`,
-      important: `var(--color-syntax-important)`,
-      inserted: `var(--color-syntax-inserted)`,
-      keyword: `var(--color-syntax-keyword)`,
-      number: `var(--color-syntax-number)`,
-      operator: `var(--color-syntax-operator)`,
-      prolog: `var(--color-syntax-prolog)`,
-      property: `var(--color-syntax-property)`,
-      pseudoClass: `var(--color-syntax-pseudoClass)`,
-      pseudoElement: `var(--color-syntax-pseudoElement)`,
-      punctuation: `var(--color-syntax-punctuation)`,
-      regex: `var(--color-syntax-regex)`,
-      selector: `var(--color-syntax-selector)`,
-      string: `var(--color-syntax-string)`,
-      symbol: `var(--color-syntax-symbol)`,
-      tag: `var(--color-syntax-tag)`,
-      unit: `var(--color-syntax-unit)`,
-      url: `var(--color-syntax-url)`,
-      variable: `var(--color-syntax-variable)`,
+    cyan: {
+      bg: `var(${varNames.color.avatar.cyan.bg})`,
+      fg: `var(${varNames.color.avatar.cyan.fg})`,
     },
   },
+  backdrop: `var(${varNames.color.backdrop})`,
+  bg: `var(${varNames.color.bg})`,
+  border: `var(${varNames.color.border})`,
+  fg: `var(${varNames.color.fg})`,
+  focusRing: `var(${varNames.color.focusRing})`,
+  input: {
+    bg: `var(${varNames.color.input.bg})`,
+    border: `var(${varNames.color.input.border})`,
+    fg: `var(${varNames.color.input.fg})`,
+    placeholder: `var(${varNames.color.input.placeholder})`,
+  },
+  link: {
+    fg: `var(${varNames.color.link.fg})`,
+  },
+  muted: {
+    bg: `var(${varNames.color.muted.bg})`,
+    fg: `var(${varNames.color.muted.fg})`,
+  },
+  shadow: {
+    outline: `var(${varNames.color.shadow.outline})`,
+    umbra: `var(${varNames.color.shadow.umbra})`,
+    penumbra: `var(${varNames.color.shadow.penumbra})`,
+    ambient: `var(${varNames.color.shadow.ambient})`,
+  },
+  skeleton: {
+    from: `var(${varNames.color.skeleton.from})`,
+    to: `var(${varNames.color.skeleton.to})`,
+  },
+  token: {
+    atrule: `var(${varNames.color.token.atrule})`,
+    attrName: `var(${varNames.color.token.attrName})`,
+    attrValue: `var(${varNames.color.token.attrValue})`,
+    attribute: `var(${varNames.color.token.attribute})`,
+    boolean: `var(${varNames.color.token.boolean})`,
+    builtin: `var(${varNames.color.token.builtin})`,
+    cdata: `var(${varNames.color.token.cdata})`,
+    char: `var(${varNames.color.token.char})`,
+    class: `var(${varNames.color.token.class})`,
+    className: `var(${varNames.color.token.className})`,
+    comment: `var(${varNames.color.token.comment})`,
+    constant: `var(${varNames.color.token.constant})`,
+    deleted: `var(${varNames.color.token.deleted})`,
+    doctype: `var(${varNames.color.token.doctype})`,
+    entity: `var(${varNames.color.token.entity})`,
+    function: `var(${varNames.color.token.function})`,
+    hexcode: `var(${varNames.color.token.hexcode})`,
+    id: `var(${varNames.color.token.id})`,
+    important: `var(${varNames.color.token.important})`,
+    inserted: `var(${varNames.color.token.inserted})`,
+    keyword: `var(${varNames.color.token.keyword})`,
+    number: `var(${varNames.color.token.number})`,
+    operator: `var(${varNames.color.token.operator})`,
+    prolog: `var(${varNames.color.token.prolog})`,
+    property: `var(${varNames.color.token.property})`,
+    pseudoClass: `var(${varNames.color.token.pseudoClass})`,
+    pseudoElement: `var(${varNames.color.token.pseudoElement})`,
+    punctuation: `var(${varNames.color.token.punctuation})`,
+    regex: `var(${varNames.color.token.regex})`,
+    selector: `var(${varNames.color.token.selector})`,
+    string: `var(${varNames.color.token.string})`,
+    symbol: `var(${varNames.color.token.symbol})`,
+    tag: `var(${varNames.color.token.tag})`,
+    unit: `var(${varNames.color.token.unit})`,
+    url: `var(${varNames.color.token.url})`,
+    variable: `var(${varNames.color.token.variable})`,
+  },
+
+  solid: buildColorVariantVars({variant: 'solid'}),
+  tinted: buildColorVariantVars({variant: 'tinted'}),
+
+  ...THEME_COLOR_CARD_TONES.reduce((acc, tone) => {
+    return {
+      ...acc,
+      [tone]: buildColorCardVars({tone}),
+    }
+  }, {} as ColorSchemeVars),
+
+  dark: darkColorVars,
+  light: lightColorVars,
+}
+
+export const vars: Vars = {
+  avatar: {
+    distance: `var(${varNames.avatar.distance})`,
+    size: `var(${varNames.avatar.size})`,
+    sizes: AVATAR_SIZE.reduce(
+      (acc, size) => {
+        return {
+          ...acc,
+          [size]: {
+            size: `var(${varNames.avatar.sizes[size].size})`,
+            distance: `var(${varNames.avatar.sizes[size].distance})`,
+          },
+        }
+      },
+      {} as Record<AvatarSize, {distance: CSSVar; size: CSSVar}>,
+    ),
+  },
+  color: colorVars,
   font: {
     code: {
-      family: `var(--font-code-family)`,
+      family: `var(${varNames.font.code.family})`,
       sizes: FONT_CODE_SIZE.reduce(
         (acc, size) => {
           return {
             ...acc,
             [size]: {
-              fontSize: `var(--font-code-${size}-size)`,
-              ascenderHeight: `var(--font-code-${size}-ascender-height)`,
-              descenderHeight: `var(--font-code-${size}-descender-height)`,
-              lineHeight: `var(--font-code-${size}-line-height)`,
-              letterSpacing: `var(--font-code-${size}-letter-spacing)`,
-              iconSize: `var(--font-code-${size}-icon-size)`,
+              fontSize: `var(${varNames.font.code.sizes[size].fontSize})`,
+              ascenderHeight: `var(${varNames.font.code.sizes[size].ascenderHeight})`,
+              descenderHeight: `var(${varNames.font.code.sizes[size].descenderHeight})`,
+              lineHeight: `var(${varNames.font.code.sizes[size].lineHeight})`,
+              letterSpacing: `var(${varNames.font.code.sizes[size].letterSpacing})`,
+              iconSize: `var(${varNames.font.code.sizes[size].iconSize})`,
             },
           }
         },
@@ -191,18 +204,18 @@ export const vars: Vars = {
       ),
     },
     heading: {
-      family: `var(--font-heading-family)`,
+      family: `var(${varNames.font.heading.family})`,
       sizes: FONT_HEADING_SIZE.reduce(
         (acc, size) => {
           return {
             ...acc,
             [size]: {
-              fontSize: `var(--font-code-${size}-size)`,
-              ascenderHeight: `var(--font-code-${size}-ascender-height)`,
-              descenderHeight: `var(--font-code-${size}-descender-height)`,
-              lineHeight: `var(--font-code-${size}-line-height)`,
-              letterSpacing: `var(--font-code-${size}-letter-spacing)`,
-              iconSize: `var(--font-code-${size}-icon-size)`,
+              fontSize: `var(${varNames.font.heading.sizes[size].fontSize})`,
+              ascenderHeight: `var(${varNames.font.heading.sizes[size].ascenderHeight})`,
+              descenderHeight: `var(${varNames.font.heading.sizes[size].descenderHeight})`,
+              lineHeight: `var(${varNames.font.heading.sizes[size].lineHeight})`,
+              letterSpacing: `var(${varNames.font.heading.sizes[size].letterSpacing})`,
+              iconSize: `var(${varNames.font.heading.sizes[size].iconSize})`,
             },
           }
         },
@@ -210,18 +223,18 @@ export const vars: Vars = {
       ),
     },
     label: {
-      family: `var(--font-label-family)`,
-      sizes: FONT_CODE_SIZE.reduce(
+      family: `var(${varNames.font.label.family})`,
+      sizes: FONT_LABEL_SIZE.reduce(
         (acc, size) => {
           return {
             ...acc,
             [size]: {
-              fontSize: `var(--font-code-${size}-size)`,
-              ascenderHeight: `var(--font-code-${size}-ascender-height)`,
-              descenderHeight: `var(--font-code-${size}-descender-height)`,
-              lineHeight: `var(--font-code-${size}-line-height)`,
-              letterSpacing: `var(--font-code-${size}-letter-spacing)`,
-              iconSize: `var(--font-code-${size}-icon-size)`,
+              fontSize: `var(${varNames.font.label.sizes[size].fontSize})`,
+              ascenderHeight: `var(${varNames.font.label.sizes[size].ascenderHeight})`,
+              descenderHeight: `var(${varNames.font.label.sizes[size].descenderHeight})`,
+              lineHeight: `var(${varNames.font.label.sizes[size].lineHeight})`,
+              letterSpacing: `var(${varNames.font.label.sizes[size].letterSpacing})`,
+              iconSize: `var(${varNames.font.label.sizes[size].iconSize})`,
             },
           }
         },
@@ -229,18 +242,18 @@ export const vars: Vars = {
       ),
     },
     text: {
-      family: `var(--font-text-family)`,
+      family: `var(${varNames.font.text.family})`,
       sizes: FONT_TEXT_SIZE.reduce(
         (acc, size) => {
           return {
             ...acc,
             [size]: {
-              fontSize: `var(--font-code-${size}-size)`,
-              ascenderHeight: `var(--font-code-${size}-ascender-height)`,
-              descenderHeight: `var(--font-code-${size}-descender-height)`,
-              lineHeight: `var(--font-code-${size}-line-height)`,
-              letterSpacing: `var(--font-code-${size}-letter-spacing)`,
-              iconSize: `var(--font-code-${size}-icon-size)`,
+              fontSize: `var(${varNames.font.text.sizes[size].fontSize})`,
+              ascenderHeight: `var(${varNames.font.text.sizes[size].ascenderHeight})`,
+              descenderHeight: `var(${varNames.font.text.sizes[size].descenderHeight})`,
+              lineHeight: `var(${varNames.font.text.sizes[size].lineHeight})`,
+              letterSpacing: `var(${varNames.font.text.sizes[size].letterSpacing})`,
+              iconSize: `var(${varNames.font.text.sizes[size].iconSize})`,
             },
           }
         },
@@ -248,152 +261,182 @@ export const vars: Vars = {
       ),
     },
   },
+  input: {
+    fontSize: `var(--input-font-size)`,
+    lineHeight: `var(--input-line-height)`,
+    letterSpacing: `var(--input-letter-spacing)`,
+    ascenderHeight: `var(--input-ascender-height)`,
+    descenderHeight: `var(--input-descender-height)`,
+    // capHeight: `var(--input-cap-height)`,
+
+    gap: `var(--input-gap)`,
+    padding: `var(--input-padding)`,
+
+    text: {
+      focusRing: {
+        width: `var(--input-text-focus-ring-width)`,
+        offset: `var(--input-text-focus-ring-offset)`,
+      },
+    },
+  },
   space: Object.fromEntries(
-    SPACE.map((space) => [space, `var(${varNames.space[space]})` satisfies CSSVar]),
+    SPACE.map((space) => [space, `var(${varNames.space[space]})` as const]),
   ) as Record<Space, CSSVar>,
 } as const
 
-function buildColorCardVars(props: {
-  scheme: ThemeColorSchemeKey
-  tone: ThemeColorCardToneKey
-}): ColorCardVars {
+function buildColorCardVars(props: {scheme?: Scheme; tone: CardTone}): ColorCardVars {
   const {scheme, tone} = props
 
-  const prefix = `--color-${scheme}-${tone}` as const
+  const prefix = scheme ? varNames.color[scheme][tone] : varNames.color[tone]
 
   return {
     accent: {
-      fg: `var(${prefix}-accent-fg)`,
+      fg: `var(${prefix.accent.fg})`,
     },
     avatar: {
       ...THEME_COLOR_AVATAR_COLORS.reduce((acc, color) => {
         return {
           ...acc,
           [color]: {
-            bg: `var(${prefix}-avatar-${color}-bg)`,
-            fg: `var(${prefix}-avatar-${color}-fg)`,
+            bg: `var(${prefix.avatar[color].bg})`,
+            fg: `var(${prefix.avatar[color].fg})`,
           },
         }
       }, {} as ColorAvatarVars),
     },
-    backdrop: `var(${prefix}-backdrop)`,
-    badge: {
-      ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
-        return {
-          ...acc,
-          [tone]: {
-            bg: `var(${prefix}-badge-${tone}-bg)`,
-            dot: `var(${prefix}-badge-${tone}-dot)`,
-            fg: `var(${prefix}-badge-${tone}-fg)`,
-            icon: `var(${prefix}-badge-${tone}-icon)`,
-          },
-        }
-      }, {} as ColorBadgeVars),
-    },
-    bg: `var(${prefix}-bg)`,
-    border: `var(${prefix}-border)`,
-    code: {
-      bg: `var(${prefix}-code-bg)`,
-      fg: `var(${prefix}-code-fg)`,
-    },
-    fg: `var(${prefix}-fg)`,
-    focusRing: `var(${prefix}-focus-ring)`,
-    icon: `var(${prefix}-icon)`,
-    input: {
-      ...THEME_COLOR_INPUT_MODES.reduce((acc, mode) => {
-        return {
-          ...acc,
-          [mode]: {
-            ...THEME_COLOR_INPUT_STATES.reduce((acc, state) => {
-              return {
-                ...acc,
-                [state]: buildColorInputStateVars({mode, scheme, state, tone}),
-              }
-            }, {} as ColorInputModeVars),
-          },
-        }
-      }, {} as ColorInputVars),
-    },
-    kbd: {
-      bg: `var(${prefix}-kbd-bg)`,
-      border: `var(${prefix}-kbd-border)`,
-      fg: `var(${prefix}-kbd-fg)`,
-    },
+    backdrop: `var(${prefix.backdrop})`,
+    focusRing: `var(${prefix.focusRing})`,
     link: {
-      fg: `var(${prefix}-link-fg)`,
+      fg: `var(${prefix.link.fg})`,
     },
     muted: {
-      bg: `var(${prefix}-muted-bg)`,
-      fg: `var(${prefix}-muted-fg)`,
-    },
-    skeleton: {
-      from: `var(${prefix}-skeleton-from)`,
-      to: `var(${prefix}-skeleton-to)`,
+      bg: `var(${prefix.muted.bg})`,
+      fg: `var(${prefix.muted.fg})`,
     },
     shadow: {
-      outline: `var(${prefix}-shadow-outline)`,
-      umbra: `var(${prefix}-shadow-umbra)`,
-      penumbra: `var(${prefix}-shadow-penumbra)`,
-      ambient: `var(${prefix}-shadow-ambient)`,
+      outline: `var(${prefix.shadow.outline})`,
+      umbra: `var(${prefix.shadow.umbra})`,
+      penumbra: `var(${prefix.shadow.penumbra})`,
+      ambient: `var(${prefix.shadow.ambient})`,
     },
-    syntax: {
-      atrule: `var(${prefix}-syntax-atrule)`,
-      attrName: `var(${prefix}-syntax-attrName)`,
-      attrValue: `var(${prefix}-syntax-attrValue)`,
-      attribute: `var(${prefix}-syntax-attribute)`,
-      boolean: `var(${prefix}-syntax-boolean)`,
-      builtin: `var(${prefix}-syntax-builtin)`,
-      cdata: `var(${prefix}-syntax-cdata)`,
-      char: `var(${prefix}-syntax-char)`,
-      class: `var(${prefix}-syntax-class)`,
-      className: `var(${prefix}-syntax-className)`,
-      comment: `var(${prefix}-syntax-comment)`,
-      constant: `var(${prefix}-syntax-constant)`,
-      deleted: `var(${prefix}-syntax-deleted)`,
-      doctype: `var(${prefix}-syntax-doctype)`,
-      entity: `var(${prefix}-syntax-entity)`,
-      function: `var(${prefix}-syntax-function)`,
-      hexcode: `var(${prefix}-syntax-hexcode)`,
-      id: `var(${prefix}-syntax-id)`,
-      important: `var(${prefix}-syntax-important)`,
-      inserted: `var(${prefix}-syntax-inserted)`,
-      keyword: `var(${prefix}-syntax-keyword)`,
-      number: `var(${prefix}-syntax-number)`,
-      operator: `var(${prefix}-syntax-operator)`,
-      prolog: `var(${prefix}-syntax-prolog)`,
-      property: `var(${prefix}-syntax-property)`,
-      pseudoClass: `var(${prefix}-syntax-pseudoClass)`,
-      pseudoElement: `var(${prefix}-syntax-pseudoElement)`,
-      punctuation: `var(${prefix}-syntax-punctuation)`,
-      regex: `var(${prefix}-syntax-regex)`,
-      selector: `var(${prefix}-syntax-selector)`,
-      string: `var(${prefix}-syntax-string)`,
-      symbol: `var(${prefix}-syntax-symbol)`,
-      tag: `var(${prefix}-syntax-tag)`,
-      unit: `var(${prefix}-syntax-unit)`,
-      url: `var(${prefix}-syntax-url)`,
-      variable: `var(${prefix}-syntax-variable)`,
+    skeleton: {
+      from: `var(${prefix.skeleton.from})`,
+      to: `var(${prefix.skeleton.to})`,
     },
+    token: {
+      atrule: `var(${prefix.token.atrule})`,
+      attrName: `var(${prefix.token.attrName})`,
+      attrValue: `var(${prefix.token.attrValue})`,
+      attribute: `var(${prefix.token.attribute})`,
+      boolean: `var(${prefix.token.boolean})`,
+      builtin: `var(${prefix.token.builtin})`,
+      cdata: `var(${prefix.token.cdata})`,
+      char: `var(${prefix.token.char})`,
+      class: `var(${prefix.token.class})`,
+      className: `var(${prefix.token.className})`,
+      comment: `var(${prefix.token.comment})`,
+      constant: `var(${prefix.token.constant})`,
+      deleted: `var(${prefix.token.deleted})`,
+      doctype: `var(${prefix.token.doctype})`,
+      entity: `var(${prefix.token.entity})`,
+      function: `var(${prefix.token.function})`,
+      hexcode: `var(${prefix.token.hexcode})`,
+      id: `var(${prefix.token.id})`,
+      important: `var(${prefix.token.important})`,
+      inserted: `var(${prefix.token.inserted})`,
+      keyword: `var(${prefix.token.keyword})`,
+      number: `var(${prefix.token.number})`,
+      operator: `var(${prefix.token.operator})`,
+      prolog: `var(${prefix.token.prolog})`,
+      property: `var(${prefix.token.property})`,
+      pseudoClass: `var(${prefix.token.pseudoClass})`,
+      pseudoElement: `var(${prefix.token.pseudoElement})`,
+      punctuation: `var(${prefix.token.punctuation})`,
+      regex: `var(${prefix.token.regex})`,
+      selector: `var(${prefix.token.selector})`,
+      string: `var(${prefix.token.string})`,
+      symbol: `var(${prefix.token.symbol})`,
+      tag: `var(${prefix.token.tag})`,
+      unit: `var(${prefix.token.unit})`,
+      url: `var(${prefix.token.url})`,
+      variable: `var(${prefix.token.variable})`,
+    },
+
+    solid: buildColorVariantVars({scheme, tone, variant: 'solid'}),
+    tinted: buildColorVariantVars({scheme, tone, variant: 'tinted'}),
   }
 }
 
-function buildColorInputStateVars(props: {
-  mode: ThemeColorInputModeKey
-  scheme: ThemeColorSchemeKey
-  state: ThemeColorInputStateKey
-  tone: ThemeColorCardToneKey
-}): ColorInputStateVars {
-  const {mode, scheme, state, tone} = props
+function buildColorVariantVars(options: {
+  scheme?: Scheme
+  tone?: CardTone
+  variant: 'solid' | 'tinted'
+}): ColorVariantVars {
+  const {scheme, tone, variant} = options
 
-  const prefix = `--color-${scheme}-${tone}-input-${mode}-${state}` as const
+  const _prefix =
+    scheme && tone
+      ? (`--color-${scheme}-${tone}-${variant}` as const)
+      : tone
+        ? (`--color-${tone}-${variant}` as const)
+        : (`--color-${variant}` as const)
 
-  return {
-    bg: `var(${prefix}-bg)`,
-    border: `var(${prefix}-border)`,
-    fg: `var(${prefix}-fg)`,
-    muted: {
-      bg: `var(${prefix}-muted-bg)`,
+  const vars = {
+    bg: {
+      0: `var(${_prefix}-bg-0)`,
+      1: `var(${_prefix}-bg-1)`,
+      2: `var(${_prefix}-bg-2)`,
+      3: `var(${_prefix}-bg-3)`,
+      4: `var(${_prefix}-bg-4)`,
     },
-    placeholder: `var(${prefix}-placeholder)`,
+    border: {
+      0: `var(${_prefix}-border-0)`,
+      1: `var(${_prefix}-border-1)`,
+      2: `var(${_prefix}-border-2)`,
+      3: `var(${_prefix}-border-3)`,
+      4: `var(${_prefix}-border-4)`,
+    },
+    fg: {
+      0: `var(${_prefix}-fg-0)`,
+      1: `var(${_prefix}-fg-1)`,
+      2: `var(${_prefix}-fg-2)`,
+      3: `var(${_prefix}-fg-3)`,
+      4: `var(${_prefix}-fg-4)`,
+    },
+  } as ColorVariantVars
+
+  for (const elementTone of THEME_COLOR_STATE_TONES) {
+    const prefix =
+      scheme && tone
+        ? (`--color-${scheme}-${tone}-${variant}-${elementTone}` as const)
+        : tone
+          ? (`--color-${tone}-${variant}-${elementTone}` as const)
+          : (`--color-${variant}-${elementTone}` as const)
+
+    vars[elementTone] = {
+      bg: {
+        0: `var(${prefix}-bg-0)`,
+        1: `var(${prefix}-bg-1)`,
+        2: `var(${prefix}-bg-2)`,
+        3: `var(${prefix}-bg-3)`,
+        4: `var(${prefix}-bg-4)`,
+      },
+      border: {
+        0: `var(${prefix}-border-0)`,
+        1: `var(${prefix}-border-1)`,
+        2: `var(${prefix}-border-2)`,
+        3: `var(${prefix}-border-3)`,
+        4: `var(${prefix}-border-4)`,
+      },
+      fg: {
+        0: `var(${prefix}-fg-0)`,
+        1: `var(${prefix}-fg-1)`,
+        2: `var(${prefix}-fg-2)`,
+        3: `var(${prefix}-fg-3)`,
+        4: `var(${prefix}-fg-4)`,
+      },
+    }
   }
+
+  return vars
 }

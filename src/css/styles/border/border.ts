@@ -11,7 +11,7 @@ const prefixes = {
 }
 
 /** @public */
-export function border(props: BorderStyleProps): string {
+export function border(props: BorderStyleProps): string | undefined {
   return composeClassNames(
     _resp(prefixes.border, props.border),
     _resp(prefixes.borderTop, props.borderTop),

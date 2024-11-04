@@ -26,9 +26,9 @@ import {
   useMemo,
   useRef,
 } from 'react'
+import {useTheme_v2} from '../../_compat'
 import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
-import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
 import {ResponsiveShadowProps} from '../types'
@@ -90,7 +90,7 @@ export interface PopoverProps
   matchReferenceWidth?: boolean
   open?: boolean
   overflow?: BoxOverflow
-  padding?: number | number[]
+  // padding?: number | number[]
   placement?: Placement
   /** Whether or not to render the popover in a portal element. */
   portal?: boolean | string

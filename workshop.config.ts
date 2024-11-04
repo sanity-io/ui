@@ -1,4 +1,3 @@
-import {buildTheme} from '@sanity/ui/theme'
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
 
@@ -7,10 +6,11 @@ import javascript from 'refractor/lang/javascript'
 import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
-import {fontsPlugin} from './src/core/__workshop__/fontsPlugin'
+import {cssPlugin} from './workshop/css'
+import {fontsPlugin} from './workshop/fonts'
 
-import './dist/sanity-theme.css'
-import './dist/system.css'
+// import './dist/sanity-theme.css'
+// import './dist/system.css'
 
 Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
@@ -36,7 +36,6 @@ export default defineConfig({
       title: 'Utils',
     },
   ],
-  plugins: [fontsPlugin(), perfPlugin()],
-  theme: buildTheme(),
+  plugins: [fontsPlugin(), cssPlugin(), perfPlugin()],
   title: '@sanity/ui',
 })

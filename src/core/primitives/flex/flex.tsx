@@ -21,9 +21,10 @@ export const Flex = forwardRef(function Flex(
     <Box
       data-ui="Flex"
       {...restProps}
+      as={as}
       direction={direction}
       display="flex"
-      forwardedAs={as}
+      // forwardedAs={as}
       ref={ref}
     />
   )

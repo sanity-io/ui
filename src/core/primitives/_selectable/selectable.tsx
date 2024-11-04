@@ -1,4 +1,4 @@
-import {composeClassNames, selectable, SelectableStyleProps} from '@sanity/ui/css'
+import {composeClassNames, _selectable, SelectableStyleProps} from '@sanity/ui/css'
 import {ForwardedRef, forwardRef, HTMLProps} from 'react'
 import {SelectableTone} from '../../types'
 import {Box, BoxProps} from '../box'
@@ -18,7 +18,7 @@ export const Selectable = forwardRef(function Selectable(
   return (
     <Box
       {...restProps}
-      className={composeClassNames(className, selectable({radius, tone}))}
+      className={composeClassNames(className, _selectable({radius, tone}))}
       ref={ref}
     />
   )

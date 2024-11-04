@@ -1,4 +1,5 @@
 import {Rules} from '../../types'
+import {vars} from '../../vars'
 
 export const treeRules: Rules = {
   'tree-item': {
@@ -8,7 +9,7 @@ export const treeRules: Rules = {
         cursor: 'default',
         borderRadius: '3px',
 
-        backgroundColor: 'var(--card-bg-color)',
+        backgroundColor: vars.color.bg, // 'var(--card-bg-color)',
         color: 'var(--treeitem-fg-color)',
       },
 
@@ -24,7 +25,7 @@ export const treeRules: Rules = {
         cursor: 'default',
         borderRadius: '3px',
 
-        backgroundColor: 'var(--card-bg-color)',
+        backgroundColor: vars.color.bg, // 'var(--card-bg-color)',
         color: 'var(--treeitem-fg-color)',
       },
 
