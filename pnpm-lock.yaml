@@ -196,7 +196,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(eslint@8.57.1)
       eslint-plugin-storybook:
-        specifier: ^0.10.1
+        specifier: ^0.10.2
         version: 0.10.2(eslint@8.57.1)(typescript@5.6.3)
       http-server:
         specifier: ^14.1.1
