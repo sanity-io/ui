@@ -70,46 +70,46 @@ importers:
         specifier: ^2.0.16
         version: 2.0.16(@sanity/icons@3.4.0(react@18.3.1))(@sanity/ui@2.8.18(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/node@20.17.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.36.0)
       '@storybook/addon-a11y':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@storybook/addon-docs':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(@types/react@18.3.12)(storybook@8.4.1(prettier@3.3.3))
       '@storybook/addon-essentials':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(@types/react@18.3.12)(storybook@8.4.1(prettier@3.3.3))
       '@storybook/addon-interactions':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@storybook/addon-links':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(react@18.3.1)(storybook@8.4.1(prettier@3.3.3))
       '@storybook/addon-mdx-gfm':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@storybook/addon-storysource':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@storybook/addon-themes':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@storybook/blocks':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.1(prettier@3.3.3))
       '@storybook/manager-api':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@storybook/react':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(@storybook/test@8.4.1(storybook@8.4.1(prettier@3.3.3)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.1(prettier@3.3.3))(typescript@5.6.3)
       '@storybook/react-vite':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(@storybook/test@8.4.1(storybook@8.4.1(prettier@3.3.3)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.24.4)(storybook@8.4.1(prettier@3.3.3))(typescript@5.6.3)(vite@5.4.10(@types/node@20.17.6)(terser@5.36.0))
       '@storybook/test':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@storybook/theming':
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(storybook@8.4.1(prettier@3.3.3))
       '@testing-library/dom':
         specifier: ^10.4.0
@@ -247,7 +247,7 @@ importers:
         specifier: ^2.0.5
         version: 2.0.8
       storybook:
-        specifier: ^8.4.0
+        specifier: ^8.4.1
         version: 8.4.1(prettier@3.3.3)
       styled-components:
         specifier: ^6.1.13
