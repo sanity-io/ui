@@ -1,4 +1,4 @@
-import {buildTheme} from '@sanity/ui/theme'
+// import {buildTheme, buildTheme_v3} from '@sanity/ui/theme'
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
 
@@ -16,6 +16,8 @@ Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
+
+// console.log('v3', buildTheme_v3())
 
 export default defineConfig({
   collections: [
@@ -37,6 +39,6 @@ export default defineConfig({
     },
   ],
   plugins: [fontsPlugin(), perfPlugin()],
-  theme: buildTheme(),
+  // theme: buildTheme(),
   title: '@sanity/ui',
 })

@@ -17,11 +17,13 @@ import {
   type ThemeColorInputModeKey,
   type ThemeColorInputStateKey,
   type ThemeColorSchemeKey,
+  ThemeColorStateToneKey,
 } from '@sanity/ui/theme'
 import {
+  ColorStateVars,
   FontSizeVars,
   type ColorAvatarVars,
-  type ColorBadgeVars,
+  // type ColorBadgeVars,
   type ColorCardVars,
   type ColorInputModeVars,
   type ColorInputStateVars,
@@ -61,24 +63,30 @@ export const vars: Vars = {
         }
       }, {} as ColorAvatarVars),
     },
-    badge: {
-      bg: `var(--color-badge-bg)`,
-      dot: `var(--color-badge-dot)`,
-      fg: `var(--color-badge-fg)`,
-      icon: `var(--color-badge-icon)`,
-      ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
-        return {
-          ...acc,
-          [tone]: {
-            bg: `var(--color-badge-${tone}-bg)`,
-            dot: `var(--color-badge-${tone}-dot)`,
-            fg: `var(--color-badge-${tone}-fg)`,
-            icon: `var(--color-badge-${tone}-icon)`,
-          },
-        }
-      }, {} as ColorBadgeVars),
+    // badge: {
+    //   bg: `var(--color-badge-bg)`,
+    //   dot: `var(--color-badge-dot)`,
+    //   fg: `var(--color-badge-fg)`,
+    //   icon: `var(--color-badge-icon)`,
+    //   ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+    //     return {
+    //       ...acc,
+    //       [tone]: {
+    //         bg: `var(--color-badge-${tone}-bg)`,
+    //         dot: `var(--color-badge-${tone}-dot)`,
+    //         fg: `var(--color-badge-${tone}-fg)`,
+    //         icon: `var(--color-badge-${tone}-icon)`,
+    //       },
+    //     }
+    //   }, {} as ColorBadgeVars),
+    // },
+    // bg: `var(--color-bg)`,
+    bg: {
+      1: `var(--color-bg-1)`,
+      2: `var(--color-bg-2)`,
+      3: `var(--color-bg-3)`,
+      4: `var(--color-bg-4)`,
     },
-    bg: `var(--color-bg)`,
     border: `var(--color-border)`,
     code: {
       bg: `var(--color-code-bg)`,
@@ -131,6 +139,30 @@ export const vars: Vars = {
       from: `var(--color-skeleton-from)`,
       to: `var(--color-skeleton-to)`,
     },
+    solid: {
+      ...THEME_COLOR_STATE_TONES.reduce(
+        (acc, tone) => {
+          return {
+            ...acc,
+            [tone]: {
+              bg: {
+                1: `var(--color-solid-${tone}-bg-1)`,
+                2: `var(--color-solid-${tone}-bg-2)`,
+                3: `var(--color-solid-${tone}-bg-3)`,
+                4: `var(--color-solid-${tone}-bg-4)`,
+              },
+              // fg: {
+              //   1: `var(--color-solid-${tone}-fg-1)`,
+              //   2: `var(--color-solid-${tone}-fg-2)`,
+              //   3: `var(--color-solid-${tone}-fg-3)`,
+              //   4: `var(--color-solid-${tone}-fg-4)`,
+              // },
+            },
+          }
+        },
+        {} as Record<ThemeColorStateToneKey, ColorStateVars>,
+      ),
+    },
     syntax: {
       atrule: `var(--color-syntax-atrule)`,
       attrName: `var(--color-syntax-attrName)`,
@@ -168,6 +200,30 @@ export const vars: Vars = {
       unit: `var(--color-syntax-unit)`,
       url: `var(--color-syntax-url)`,
       variable: `var(--color-syntax-variable)`,
+    },
+    tinted: {
+      ...THEME_COLOR_STATE_TONES.reduce(
+        (acc, tone) => {
+          return {
+            ...acc,
+            [tone]: {
+              bg: {
+                1: `var(--color-tinted-${tone}-bg-1)`,
+                2: `var(--color-tinted-${tone}-bg-2)`,
+                3: `var(--color-tinted-${tone}-bg-3)`,
+                4: `var(--color-tinted-${tone}-bg-4)`,
+              },
+              // fg: {
+              //   1: `var(--color-tinted-${tone}-fg-1)`,
+              //   2: `var(--color-tinted-${tone}-fg-2)`,
+              //   3: `var(--color-tinted-${tone}-fg-3)`,
+              //   4: `var(--color-tinted-${tone}-fg-4)`,
+              // },
+            },
+          }
+        },
+        {} as Record<ThemeColorStateToneKey, ColorStateVars>,
+      ),
     },
   },
   font: {
@@ -277,20 +333,26 @@ function buildColorCardVars(props: {
       }, {} as ColorAvatarVars),
     },
     backdrop: `var(${prefix}-backdrop)`,
-    badge: {
-      ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
-        return {
-          ...acc,
-          [tone]: {
-            bg: `var(${prefix}-badge-${tone}-bg)`,
-            dot: `var(${prefix}-badge-${tone}-dot)`,
-            fg: `var(${prefix}-badge-${tone}-fg)`,
-            icon: `var(${prefix}-badge-${tone}-icon)`,
-          },
-        }
-      }, {} as ColorBadgeVars),
+    // badge: {
+    //   ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+    //     return {
+    //       ...acc,
+    //       [tone]: {
+    //         bg: `var(${prefix}-badge-${tone}-bg)`,
+    //         dot: `var(${prefix}-badge-${tone}-dot)`,
+    //         fg: `var(${prefix}-badge-${tone}-fg)`,
+    //         icon: `var(${prefix}-badge-${tone}-icon)`,
+    //       },
+    //     }
+    //   }, {} as ColorBadgeVars),
+    // },
+    // bg: `var(${prefix}-bg)`,
+    bg: {
+      1: `var(${prefix}-bg-1)`,
+      2: `var(${prefix}-bg-2)`,
+      3: `var(${prefix}-bg-3)`,
+      4: `var(${prefix}-bg-4)`,
     },
-    bg: `var(${prefix}-bg)`,
     border: `var(${prefix}-border)`,
     code: {
       bg: `var(${prefix}-code-bg)`,

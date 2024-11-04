@@ -110,7 +110,13 @@ export const varNames: VarNames = {
         icon: `--color-badge-critical-icon`,
       },
     },
-    bg: `--color-bg`,
+    // bg: `--color-bg`,
+    bg: {
+      1: `--color-bg-1`,
+      2: `--color-bg-2`,
+      3: `--color-bg-3`,
+      4: `--color-bg-4`,
+    },
     border: `--color-border`,
     code: {
       bg: `--color-code-bg`,
@@ -273,7 +279,13 @@ function buildColorCardVarNames(props: {
         icon: `${prefix}-badge-critical-icon`,
       },
     },
-    bg: `${prefix}-bg`,
+    // bg: `${prefix}-bg`,
+    bg: {
+      1: `${prefix}-bg-1`,
+      2: `${prefix}-bg-2`,
+      3: `${prefix}-bg-3`,
+      4: `${prefix}-bg-4`,
+    },
     border: `${prefix}-border`,
     code: {
       bg: `${prefix}-code-bg`,

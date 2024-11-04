@@ -57,7 +57,8 @@ export const textInputRules: Rules = {
     'paddingBottom': 'var(--padding-bottom)',
     'paddingLeft': 'var(--padding-left)',
 
-    '--input-fg-color': 'var(--color-input-default-enabled-fg)',
+    // '--input-fg-color': 'var(--color-input-default-enabled-fg)',
+    '--input-fg-color': 'var(--color-fg-1)',
 
     '@nest': {
       // NOTE: This is a hack to disable Chrome’s autofill styles
@@ -74,7 +75,8 @@ export const textInputRules: Rules = {
       // },
 
       '&::placeholder': {
-        color: 'var(--input-placeholder-color)',
+        // color: 'var(--input-placeholder-color)',
+        color: 'var(--color-fg-4)',
       },
 
       // &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
@@ -129,8 +131,6 @@ export const textInputRules: Rules = {
   },
 
   'text-input-presentation': {
-    '--input-box-shadow': 'inset 0 0 0 1px var(--input-border-color)',
-
     'position': 'absolute',
     'top': 0,
     'left': 0,
@@ -143,7 +143,9 @@ export const textInputRules: Rules = {
     'backgroundColor': 'var(--input-bg-color)',
     'boxShadow': 'var(--input-box-shadow)',
 
-    '--input-border-color': 'var(--color-input-default-enabled-border)',
+    // '--input-border-color': 'var(--color-input-default-enabled-border)',
+    '--input-border-color': 'var(--color-border-1)',
+    '--input-box-shadow': 'inset 0 0 0 1px var(--input-border-color)',
 
     // border-top-left-radius: ${$hasPrefix ? 0 : undefined};
     // border-bottom-left-radius: ${$hasPrefix ? 0 : undefined};

@@ -35,7 +35,7 @@ export type ThemeVarName =
   | `--card-border-width`
   | `--card-focus-ring-offset`
   | `--card-focus-ring-width`
-  | `--card-shadow-outline`
+  | `--shadow-outline`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-accent-fg`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-avatar-${ThemeColorAvatarColorKey}-bg`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-avatar-${ThemeColorAvatarColorKey}-fg`
@@ -44,12 +44,20 @@ export type ThemeVarName =
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-badge-${ThemeColorStateToneKey}-dot`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-badge-${ThemeColorStateToneKey}-fg`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-badge-${ThemeColorStateToneKey}-icon`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-bg`
+  // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-bg`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-bg-1`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-bg-2`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-bg-3`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-bg-4`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-border`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-accent-fg`
   // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ButtonMode}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-avatar`
   // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ButtonMode}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-badge`
-  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-bg`
+  // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-bg`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-bg-1`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-bg-2`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-bg-3`
+  | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-bg-4`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-border`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-code-bg`
   | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-button-${ThemeColorButtonModeKey}-${ThemeColorStateToneKey}-${ThemeColorStateKey}-code-fg`
@@ -195,10 +203,22 @@ export type CardScopedVarName =
   | `--color-badge-${ThemeColorStateToneKey}-fg`
   | `--color-badge-${ThemeColorStateToneKey}-icon`
   | `--color-bg`
+  | `--color-bg-1`
+  | `--color-bg-2`
+  | `--color-bg-3`
+  | `--color-bg-4`
   | `--color-border`
+  | `--color-border-1`
+  | `--color-border-2`
+  | `--color-border-3`
+  | `--color-border-4`
   | `--color-code-bg`
   | `--color-code-fg`
   | `--color-fg`
+  | `--color-fg-1`
+  | `--color-fg-2`
+  | `--color-fg-3`
+  | `--color-fg-4`
   | `--color-focus-ring`
   | `--color-icon`
   | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-bg`
@@ -373,7 +393,13 @@ export interface ColorStateVarNames {
   avatar: Record<ThemeColorAvatarColorKey, ColorAvatarColorVarNames>
   badge: Record<ThemeColorStateToneKey, ColorBadgeToneVarNames>
   // badge
-  bg: CSSVarName
+  // bg: CSSVarName
+  bg: {
+    1: CSSVarName
+    2: CSSVarName
+    3: CSSVarName
+    4: CSSVarName
+  }
   border: CSSVarName
   code: {
     bg: CSSVarName
@@ -514,9 +540,15 @@ export interface ColorStateVars {
     fg: CSSVar
   }
   avatar: ColorAvatarVars
-  badge: Record<ThemeColorStateToneKey, ColorBadgeToneVars>
+  // badge: Record<ThemeColorStateToneKey, ColorBadgeToneVars>
   // badge
-  bg: CSSVar
+  // bg: CSSVar
+  bg: {
+    1: CSSVar
+    2: CSSVar
+    3: CSSVar
+    4: CSSVar
+  }
   border: CSSVar
   code: {
     bg: CSSVar
@@ -594,8 +626,13 @@ export interface ColorAvatarColorVars {
 
 export type ColorSchemeVars = Record<ThemeColorCardToneKey, ColorCardVars>
 
-export interface ScopedColorVars extends Omit<ColorStateVars, 'badge'> {
-  badge: ColorBadgeVars & ColorBadgeToneVars
+// export interface ScopedColorVars extends Omit<ColorStateVars, 'badge'> {
+//   badge: ColorBadgeVars & ColorBadgeToneVars
+// }
+
+export interface ScopedColorVars extends ColorStateVars {
+  tinted: Record<ThemeColorStateToneKey, ColorStateVars>
+  solid: Record<ThemeColorStateToneKey, ColorStateVars>
 }
 
 export interface FontSizeVars {

@@ -1,9 +1,4 @@
-import {
-  ThemeColorBase,
-  ThemeColorButton,
-  ThemeColorMuted,
-  ThemeColorSolid,
-} from '../../../../system'
+import {ThemeColorBase, ThemeColorButton, ThemeColorMuted, ThemeColorSolid} from '../../../../v0'
 import {ThemeColorBuilderOpts} from '../factory'
 import {createButtonTones} from './createButtonTones'
 

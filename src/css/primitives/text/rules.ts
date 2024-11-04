@@ -10,7 +10,7 @@ export const textRules: Rules = {
 
     '--font-family': `var(--font-text-family)`,
 
-    'color': 'var(--color-fg)',
+    'color': 'var(--color-fg-1)',
 
     '@nest': {
       '& a': {
@@ -25,7 +25,7 @@ export const textRules: Rules = {
   },
 
   'text-muted': {
-    '--fg-color': 'var(--color-muted-fg)',
+    '--fg-color': 'var(--color-fg-4)',
   },
 
   ...responsiveRules('text-0', {

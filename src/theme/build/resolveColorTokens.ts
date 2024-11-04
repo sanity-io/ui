@@ -26,7 +26,7 @@ import {
   ThemeColorButtonModeKey,
   ThemeColorStateKey,
   ThemeColorStateToneKey,
-} from '../system'
+} from '../v2'
 import {merge} from './merge'
 
 /**

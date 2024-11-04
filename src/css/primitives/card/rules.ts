@@ -3,8 +3,8 @@ import {Properties, Rules} from '../../types'
 
 export const cardRules: Rules = {
   card: {
-    'backgroundColor': 'var(--card-bg-color)',
-    'color': 'var(--card-fg-color)',
+    'backgroundColor': 'var(--color-bg-1)',
+    'color': 'var(--color-fg-1)',
 
     /* deprecated variables (kept for legacy) */
     '--card-accent-fg-color': 'var(--color-accent-fg)',
@@ -29,14 +29,14 @@ export const cardRules: Rules = {
       }
     }, {} as Properties),
 
-    '--card-bg-color': 'var(--color-bg)',
-    '--card-border-color': 'var(--color-border)',
-    '--card-code-bg-color': 'var(--color-code-bg)',
-    '--card-code-fg-color': 'var(--color-code-fg)',
-    '--card-fg-color': 'var(--color-fg)',
+    '--card-bg-color': 'var(--color-bg-1)',
+    '--card-border-color': 'var(--color-border-1)',
+    '--card-code-bg-color': 'var(--color-bg-2)',
+    '--card-code-fg-color': 'var(--color-fg-2)',
+    '--card-fg-color': 'var(--color-fg-1)',
     '--card-focus-ring-color': 'var(--color-focus-ring)',
 
-    '--card-icon-color': 'var(--color-icon)',
+    '--card-icon-color': 'var(--color-fg-4)',
 
     '--card-kbd-bg-color': 'var(--color-kbd-bg)',
     '--card-kbd-border-color': 'var(--color-kbd-border)',

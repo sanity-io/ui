@@ -6,6 +6,7 @@ import {ThemeLayer} from './layer'
 import {ThemeShadow} from './shadow'
 import {ThemeStyles} from './styles'
 
+/** @public */
 export interface RootTheme_v0 {
   _version?: 0
   /**

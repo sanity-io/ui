@@ -1,4 +1,4 @@
-import {ThemeColorBase, ThemeColorSolid, ThemeColorName} from '../../../../system'
+import {ThemeColorBase, ThemeColorSolid, ThemeColorName} from '../../../../v0'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createSolidTones(

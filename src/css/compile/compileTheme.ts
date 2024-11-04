@@ -5,6 +5,9 @@ import {
   type ThemeBoxShadow,
   THEME_COLOR_AVATAR_COLORS,
   THEME_COLOR_STATE_TONES,
+  type RootTheme,
+  buildThemeEntries_v3,
+  THEME_COLOR_CARD_TONES,
 } from '@sanity/ui/theme'
 import {Properties} from '../types'
 import {varNames} from '../varNames'
@@ -60,8 +63,87 @@ function countThemeEntries(obj: Record<string, unknown> | unknown[]): number {
   return count
 }
 
+export function compileTheme(theme: RootTheme): string {
+  if (theme.v2) {
+    return compileTheme_v2(theme.v2)
+  }
+
+  if (theme.v3) {
+    const entries = buildThemeEntries_v3(theme.v3._tokens)
+
+    return `:root {
+${entries.map(([key, value]) => `  ${key}:${value}`).join(';\n')}}
+
+${THEME_COLOR_CARD_TONES.map((tone) => compileCardCss_v3({scheme: 'dark', tone})).join('\n\n')}
+
+${THEME_COLOR_CARD_TONES.map((tone) => compileCardCss_v3({scheme: 'light', tone})).join('\n\n')}
+`
+  }
+
+  return `/* v0 */`
+}
+
+function compileCardCss_v3(options: {scheme: Scheme; tone: CardTone}) {
+  const {scheme, tone} = options
+
+  const prefix = `--color-${scheme}-${tone}`
+
+  return `/* ${scheme}/${tone} */
+[data-scheme='${scheme}'][data-tone='${tone}'] {
+  --color-bg-1: var(${prefix}-bg-1);
+  --color-bg-2: var(${prefix}-bg-2);
+  --color-bg-3: var(${prefix}-bg-3);
+  --color-bg-4: var(${prefix}-bg-4);
+  --color-border-1: var(${prefix}-border-1);
+  --color-border-2: var(${prefix}-border-2);
+  --color-border-3: var(${prefix}-border-3);
+  --color-border-4: var(${prefix}-border-4);
+  --color-fg-1: var(${prefix}-fg-1);
+  --color-fg-2: var(${prefix}-fg-2);
+  --color-fg-3: var(${prefix}-fg-3);
+  --color-fg-4: var(${prefix}-fg-4);
+  --color-focus-ring: var(${prefix}-focus-ring);
+  --color-shadow-outline: var(${prefix}-shadow-outline);
+  --color-shadow-umbra: var(${prefix}-shadow-umbra);
+  --color-shadow-penumbra: var(${prefix}-shadow-penumbra);
+  --color-shadow-ambient: var(${prefix}-shadow-ambient);
+${THEME_COLOR_STATE_TONES.map(
+  (tone) => `
+  --color-solid-${tone}-bg-1: var(${prefix}-solid-${tone}-bg-1);
+  --color-solid-${tone}-bg-2: var(${prefix}-solid-${tone}-bg-2);
+  --color-solid-${tone}-bg-3: var(${prefix}-solid-${tone}-bg-3);
+  --color-solid-${tone}-bg-4: var(${prefix}-solid-${tone}-bg-4);
+  --color-solid-${tone}-border-1: var(${prefix}-solid-${tone}-border-1);
+  --color-solid-${tone}-border-2: var(${prefix}-solid-${tone}-border-2);
+  --color-solid-${tone}-border-3: var(${prefix}-solid-${tone}-border-3);
+  --color-solid-${tone}-border-4: var(${prefix}-solid-${tone}-border-4);
+  --color-solid-${tone}-fg-1: var(${prefix}-solid-${tone}-fg-1);
+  --color-solid-${tone}-fg-2: var(${prefix}-solid-${tone}-fg-2);
+  --color-solid-${tone}-fg-3: var(${prefix}-solid-${tone}-fg-3);
+  --color-solid-${tone}-fg-4: var(${prefix}-solid-${tone}-fg-4);
+`,
+).join('')}
+${THEME_COLOR_STATE_TONES.map(
+  (tone) => `
+  --color-tinted-${tone}-bg-1: var(${prefix}-tinted-${tone}-bg-1);
+  --color-tinted-${tone}-bg-2: var(${prefix}-tinted-${tone}-bg-2);
+  --color-tinted-${tone}-bg-3: var(${prefix}-tinted-${tone}-bg-3);
+  --color-tinted-${tone}-bg-4: var(${prefix}-tinted-${tone}-bg-4);
+  --color-tinted-${tone}-border-1: var(${prefix}-tinted-${tone}-border-1);
+  --color-tinted-${tone}-border-2: var(${prefix}-tinted-${tone}-border-2);
+  --color-tinted-${tone}-border-3: var(${prefix}-tinted-${tone}-border-3);
+  --color-tinted-${tone}-border-4: var(${prefix}-tinted-${tone}-border-4);
+  --color-tinted-${tone}-fg-1: var(${prefix}-tinted-${tone}-fg-1);
+  --color-tinted-${tone}-fg-2: var(${prefix}-tinted-${tone}-fg-2);
+  --color-tinted-${tone}-fg-3: var(${prefix}-tinted-${tone}-fg-3);
+  --color-tinted-${tone}-fg-4: var(${prefix}-tinted-${tone}-fg-4);
+`,
+).join('')}
+}`
+}
+
 /** @public */
-export function compileTheme(theme: RootTheme_v2): string {
+export function compileTheme_v2(theme: RootTheme_v2): string {
   for (const [key, val] of Object.entries(theme.color.light.default)) {
     if (isRecord(val) || isArray(val)) {
       // eslint-disable-next-line no-console
@@ -90,7 +172,7 @@ export function compileTheme(theme: RootTheme_v2): string {
       '--card-border-width': px(theme.card.border.width),
       '--card-focus-ring-offset': px(theme.card.focusRing.offset),
       '--card-focus-ring-width': px(theme.card.focusRing.width),
-      '--card-shadow-outline': `0 0 0 ${px(theme.card.shadow.outline)}`,
+      // '--card-shadow-outline': `0 0 0 ${px(theme.card.shadow.outline)}`,
 
       '--font-code-family': theme.font.code.family,
       '--font-code-weight-regular': `${theme.font.code.weights.regular}`,
@@ -313,6 +395,7 @@ export function compileTheme(theme: RootTheme_v2): string {
       '--shadow-5-umbra': toBoxShadow(theme.shadow[5]?.umbra),
       '--shadow-5-penumbra': toBoxShadow(theme.shadow[5]?.penumbra),
       '--shadow-5-ambient': toBoxShadow(theme.shadow[5]?.ambient),
+
       ...Object.fromEntries(
         getThemeEntries(theme.color as unknown as Record<string, string>, ['color']),
       ),
