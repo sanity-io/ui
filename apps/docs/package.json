@@ -13,6 +13,7 @@
     "next:dev": "next dev",
     "sanity:dev": "sanity dev",
     "start": "next start",
+    "test": "vitest",
     "ts:check": "tsc --build"
   },
   "dependencies": {
