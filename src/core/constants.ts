@@ -13,7 +13,7 @@ export const EMPTY_RECORD: Record<string, never> = {}
 /**
  * @internal
  */
-export const POPOVER_MOTION_CONTENT_OPACITY_PROPERTY = '--motion-content-opacity'
+export const POPOVER_MOTION_CONTENT_OPACITY_PROPERTY = '--motion-content-opacity' as string
 
 /**
  * Shared `framer-motion` variants used by `Popover` and `Tooltip` components.

@@ -8,6 +8,7 @@ import {Box} from '../../primitives'
 import {Layer} from '../../utils'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
+import {generateToastId} from './toastState'
 import {ToastContextValue, ToastParams} from './types'
 
 type ToastState = {
@@ -45,8 +46,6 @@ const ToastContainer = styled.div`
   width: 100%;
 `
 
-let toastId = 0
-
 /**
  * @public
  */
@@ -60,20 +59,20 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
     () => ({
       initial: {
         opacity: 0,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: 0,
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: 0,
         y: 32,
         scale: 0.25,
         willChange: 'transform',
       },
       animate: {
         opacity: [0, 1, 1],
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [0, 0, 1],
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: [0, 0, 1],
         y: 0,
         scale: 1,
       },
       exit: {
         opacity: [1, 1, 0],
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [1, 0, 0],
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: [1, 0, 0],
         scale: 0.5,
         transition: prefersReducedMotion ? {duration: 0} : {duration: 0.2},
       },
@@ -86,7 +85,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
       // Wrap setState in startTransition to allow React to give input state updates higher priority
       const setState: typeof _setState = (state) => startTransition(() => _setState(state))
 
-      const id = params.id || String(toastId++)
+      const id = params.id || generateToastId()
       const duration = params.duration || 5000
 
       const dismiss = () => {
