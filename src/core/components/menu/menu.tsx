@@ -14,19 +14,21 @@ export interface MenuProps extends ResponsivePaddingProps {
   /**
    * @deprecated Use `shouldFocus="first"` instead.
    */
-  focusFirst?: boolean
+  'focusFirst'?: boolean
   /**
    * @deprecated Use `shouldFocus="last"` instead.
    */
-  focusLast?: boolean
-  onClickOutside?: (event: MouseEvent) => void
-  onEscape?: () => void
-  onItemClick?: () => void
-  onItemSelect?: (index: number) => void
-  originElement?: HTMLElement | null
-  registerElement?: (el: HTMLElement) => () => void
-  shouldFocus?: 'first' | 'last' | null
-  space?: number | number[]
+  'focusLast'?: boolean
+  'onClickOutside'?: (event: MouseEvent) => void
+  'onEscape'?: () => void
+  'onItemClick'?: () => void
+  'onItemSelect'?: (index: number) => void
+  'originElement'?: HTMLElement | null
+  'registerElement'?: (el: HTMLElement) => () => void
+  'shouldFocus'?: 'first' | 'last' | null
+  'space'?: number | number[]
+  'aria-labelledby'?: string
+  'onBlurCapture'?: (event: FocusEvent) => void
 }
 
 const Root = styled(Box)`
