@@ -5,6 +5,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.21](https://github.com/sanity-io/ui/compare/v2.8.20...v2.8.21) (2024-11-07)
+
+### Bug Fixes
+
+- **performance:** auto memoize `Autocomplete` ([#1464](https://github.com/sanity-io/ui/issues/1464)) ([9493837](https://github.com/sanity-io/ui/commit/949383786a09a49e70818708b3d09d2d04ad05ce))
+- **performance:** auto memoize `AvatarStack` ([#1462](https://github.com/sanity-io/ui/issues/1462)) ([0ae47eb](https://github.com/sanity-io/ui/commit/0ae47eb1c8d9091318b81f399f0695250332ee7c))
+- **performance:** auto memoize `ElementQuery` ([#1461](https://github.com/sanity-io/ui/issues/1461)) ([69a85b7](https://github.com/sanity-io/ui/commit/69a85b7989a39da15b8fa1edbeb90d37b53522b7))
+- **performance:** auto memoize `LayerProvider` ([#1460](https://github.com/sanity-io/ui/issues/1460)) ([4963838](https://github.com/sanity-io/ui/commit/4963838001a4c2dad67729dcfeaee42a54feafea))
+- **performance:** auto memoize `MenuButton` ([#1459](https://github.com/sanity-io/ui/issues/1459)) ([098d859](https://github.com/sanity-io/ui/commit/098d859a1db1017d65986cf08067e8f592b41801))
+- **performance:** auto memoize `ToastProvider` ([#1463](https://github.com/sanity-io/ui/issues/1463)) ([4f9aebf](https://github.com/sanity-io/ui/commit/4f9aebf35cce5527f29ac7b209c9cd1e9669c275))
+- **performance:** auto memoize `useArrayProp` ([#1465](https://github.com/sanity-io/ui/issues/1465)) ([ce5d407](https://github.com/sanity-io/ui/commit/ce5d407cd0db3a0c5e685d3a6859bb20a3af3709))
+
 ## [2.8.20](https://github.com/sanity-io/ui/compare/v2.8.19...v2.8.20) (2024-11-07)
 
 ### Bug Fixes
