@@ -1,4 +1,4 @@
-import {forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react'
+import {forwardRef, useImperativeHandle, useMemo, useState} from 'react'
 import {useElementSize} from '../../hooks'
 import {useTheme_v2} from '../../theme'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
@@ -21,31 +21,30 @@ export const ElementQuery = forwardRef(function ElementQuery(
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const theme = useTheme_v2()
-  const {children, media = theme.media, ...restProps} = props
+  const {children, media: _media, ...restProps} = props
+  const media = _media ?? theme.media
 
-  const ref = useRef<HTMLDivElement | null>(null)
   const [element, setElement] = useState<HTMLDivElement | null>(null)
   const elementSize = useElementSize(element)
   const width = useMemo(() => elementSize?.border.width ?? window.innerWidth, [elementSize])
 
-  const max = useMemo(() => findMaxBreakpoints(media, width), [media, width])
-  const min = useMemo(() => findMinBreakpoints(media, width), [media, width])
+  const max = useMemo(() => {
+    const eq = findMaxBreakpoints(media, width)
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+    return eq.length ? eq.join(' ') : undefined
+  }, [media, width])
+  const min = useMemo(() => {
+    const eq = findMinBreakpoints(media, width)
 
-  const setRef = useCallback((el: HTMLDivElement | null) => {
-    ref.current = el
-    setElement(el)
-  }, [])
+    return eq.length ? eq.join(' ') : undefined
+  }, [media, width])
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => element, [
+    element,
+  ])
 
   return (
-    <div
-      data-ui="ElementQuery"
-      {...restProps}
-      data-eq-max={max.length ? max.join(' ') : undefined}
-      data-eq-min={min.length ? min.join(' ') : undefined}
-      ref={setRef}
-    >
+    <div data-ui="ElementQuery" {...restProps} data-eq-max={max} data-eq-min={min} ref={setElement}>
       {children}
     </div>
   )
