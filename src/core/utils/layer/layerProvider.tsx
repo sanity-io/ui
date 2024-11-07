@@ -85,7 +85,7 @@ export function LayerProvider(props: LayerProviderProps): React.ReactElement {
         parentDispose?.()
       }
     },
-    [parentRegisterChild],
+    [parentRegisterChild, setSize, setChildLayers],
   )
 
   // Register this layer on mount
