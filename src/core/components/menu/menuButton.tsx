@@ -169,7 +169,7 @@ export const MenuButton = forwardRef(function MenuButton(
   }, [buttonElement, disableRestoreFocusOnClose])
 
   const handleBlur = useCallback(
-    (event: React.FocusEvent<HTMLButtonElement>) => {
+    (event: FocusEvent) => {
       const target = event.relatedTarget
 
       if (!(target instanceof Node)) {
@@ -199,32 +199,19 @@ export const MenuButton = forwardRef(function MenuButton(
     return () => setChildMenuElements((els) => els.filter((_el) => _el !== el))
   }, [])
 
-  const menuProps: MenuProps = useMemo(
-    () => ({
-      'aria-labelledby': id,
-      'onBlurCapture': handleBlur,
-      'onClickOutside': handleMenuClickOutside,
-      'onEscape': handleMenuEscape,
-      'onItemClick': handleItemClick,
-      'originElement': buttonElement,
-      registerElement,
-      shouldFocus,
-    }),
-    [
-      buttonElement,
-      handleMenuClickOutside,
-      handleMenuEscape,
-      handleItemClick,
-      id,
-      handleBlur,
-      registerElement,
-      shouldFocus,
-    ],
-  )
+  const menuProps: MenuProps = {
+    'aria-labelledby': id,
+    'onBlurCapture': handleBlur,
+    'onClickOutside': handleMenuClickOutside,
+    'onEscape': handleMenuEscape,
+    'onItemClick': handleItemClick,
+    'originElement': buttonElement,
+    registerElement,
+    shouldFocus,
+  }
 
   const menu = menuProp && cloneElement(menuProp, menuProps)
 
-  const ref = useRef<HTMLButtonElement | null>(null)
   const button = useMemo(
     () =>
       buttonProp &&
@@ -236,7 +223,7 @@ export const MenuButton = forwardRef(function MenuButton(
         'onMouseDown': handleMouseDown,
         'aria-haspopup': true,
         'aria-expanded': open,
-        'ref': ref,
+        'ref': setButtonElement,
         'selected': buttonProp.props.selected ?? open,
       }),
     [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open],
@@ -245,18 +232,9 @@ export const MenuButton = forwardRef(function MenuButton(
   // Forward button ref to parent
   useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
     forwardedRef,
-    () => ref.current,
+    () => buttonElement,
+    [buttonElement],
   )
-
-  // If there's a button then we need to set the reference element to the cloned button ref
-  // and if button changes we make sure to update or remove the reference element.
-  useEffect(() => {
-    if (!button) return undefined
-
-    setButtonElement(ref.current)
-
-    return () => setButtonElement(null)
-  }, [button])
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
     () => ({
