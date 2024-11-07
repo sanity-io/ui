@@ -27,8 +27,8 @@ importers:
         specifier: 11.0.8
         version: 11.0.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-compiler-runtime:
-        specifier: 19.0.0-beta-9ee70a1-20241017
-        version: 19.0.0-beta-9ee70a1-20241017(react@18.3.1)
+        specifier: 19.0.0-beta-63b359f-20241101
+        version: 19.0.0-beta-63b359f-20241101(react@18.3.1)
       react-refractor:
         specifier: ^2.2.0
         version: 2.2.0(react@18.3.1)
@@ -154,7 +154,7 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3(vite@5.4.10(@types/node@20.17.6)(terser@5.36.0))
       babel-plugin-react-compiler:
-        specifier: beta
+        specifier: 19.0.0-beta-63b359f-20241101
         version: 19.0.0-beta-63b359f-20241101
       commitizen:
         specifier: ^4.3.0
@@ -190,7 +190,7 @@ importers:
         specifier: ^7.37.2
         version: 7.37.2(eslint@8.57.1)
       eslint-plugin-react-compiler:
-        specifier: beta
+        specifier: 19.0.0-beta-63b359f-20241101
         version: 19.0.0-beta-63b359f-20241101(eslint@8.57.1)
       eslint-plugin-react-hooks:
         specifier: ^5.0.0
@@ -6363,10 +6363,10 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-compiler-runtime@19.0.0-beta-9ee70a1-20241017:
-    resolution: {integrity: sha512-hVrlYbVacwEdZi08RUxSwIzZR2/+WxUsWRa7mjViRhqcqUYK+7u8UEVZoJrF5/gsCHMU9PhJRvolygSCaaE0nA==}
+  react-compiler-runtime@19.0.0-beta-63b359f-20241101:
+    resolution: {integrity: sha512-XxxpP4gqvvn2TQLWFTTqCKcbNFNJhsj+1tT2IFTiR0e13yTm1EF+qm4JSSsaSq++QZ+bIYh2exXsCN3fthd7VA==}
     peerDependencies:
-      react: ^18.2.0 || ^19.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react-docgen-typescript@2.2.2:
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
@@ -14842,7 +14842,7 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-compiler-runtime@19.0.0-beta-9ee70a1-20241017(react@18.3.1):
+  react-compiler-runtime@19.0.0-beta-63b359f-20241101(react@18.3.1):
     dependencies:
       react: 18.3.1
 
