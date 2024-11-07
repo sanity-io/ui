@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import {useState} from 'react'
 import {_getArrayProp} from '../styles'
 
 /** @beta */
@@ -12,14 +12,19 @@ export function useArrayProp<T extends ArrayPropPrimitive = ArrayPropPrimitive>(
   val: T | T[] | undefined,
   defaultVal?: T[],
 ): T[] {
-  // JSON.stringify is fast, but it's not faster than useMemo's referencial equality check
-  const __perf_hash__ = useMemo(() => JSON.stringify(val ?? defaultVal), [defaultVal, val])
+  const [[cachedVal, cachedHash], setCache] = useState<[T[], string]>(() => [
+    _getArrayProp(val, defaultVal),
+    JSON.stringify(val ?? defaultVal),
+  ])
 
-  return useMemo(
-    () => _getArrayProp(val, defaultVal),
+  const hash = JSON.stringify(val ?? defaultVal)
 
-    // Improve performance: Keep object identify for a given hash of the value
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [__perf_hash__],
-  )
+  if (hash !== cachedHash) {
+    // If the cached hash has changed, update the cache right away.
+    // Calling setState during render is fine in this case, and preferred over a useEffect loop
+    // https://19.react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+    setCache([_getArrayProp(val, defaultVal), hash])
+  }
+
+  return cachedVal
 }
