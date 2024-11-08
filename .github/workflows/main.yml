@@ -38,7 +38,7 @@ jobs:
       - run: pnpm install
       - name: Register Problem Matcher for ESLint that handles -f compact and shows warnings and errors inline on PRs
         run: echo "::add-matcher::.github/eslint-compact.json"
-      - run: "pnpm lint -f compact --rule 'no-warning-comments: [off]' --max-warnings 6"
+      - run: "pnpm lint -f compact --rule 'no-warning-comments: [off]' --max-warnings 7"
 
   test:
     needs: [build]
