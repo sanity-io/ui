@@ -17,7 +17,6 @@ import {
   useMemo,
   useReducer,
   useRef,
-  useState,
 } from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
@@ -185,22 +184,21 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     typeof filterOptionProp === 'function' ? filterOptionProp : DEFAULT_FILTER_OPTION
 
   // Element refs
-  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const [resultsPopoverElement, setResultsPopoverElement] = useState<HTMLDivElement | null>(null)
-  const [inputElement, setInputElement] = useState<HTMLInputElement | null>(null)
+  const rootElementRef = useRef<HTMLDivElement | null>(null)
+  const resultsPopoverElementRef = useRef<HTMLDivElement | null>(null)
+  const inputElementRef = useRef<HTMLInputElement | null>(null)
   const listBoxElementRef = useRef<HTMLDivElement | null>(null)
 
   // Value refs
   const listFocusedRef = useRef(false)
   const valueRef = useRef(value)
   const valuePropRef = useRef(valueProp)
-  const [popoverMouseWithin, setPopoverMouseWithin] = useState(false)
+  const popoverMouseWithinRef = useRef(false)
 
   // Forward ref to parent
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
     forwardedRef,
-    () => inputElement,
-    [inputElement],
+    () => inputElementRef.current,
   )
 
   const listBoxId = `${id}-listbox`
@@ -224,13 +222,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         // NOTE: This is a workaround for a bug that may happen in Chrome (clicking the scrollbar
         // closes the results in certain situations):
         // - Do not handle blur if the mouse is within the popover
-        if (popoverMouseWithin) {
+        if (popoverMouseWithinRef.current) {
           return
         }
 
         const elements: HTMLElement[] = (relatedElements || []).concat(
-          rootElement ? [rootElement] : [],
-          resultsPopoverElement ? [resultsPopoverElement] : [],
+          rootElementRef.current ? [rootElementRef.current] : [],
+          resultsPopoverElementRef.current ? [resultsPopoverElementRef.current] : [],
         )
 
         let focusInside = false
@@ -246,20 +244,13 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
         if (focusInside === false) {
           dispatch({type: 'root/blur'})
-          setPopoverMouseWithin(false)
+          popoverMouseWithinRef.current = false
           if (onQueryChange) onQueryChange(null)
           if (onBlur) onBlur(event)
         }
       }, 0)
     },
-    [
-      onBlur,
-      onQueryChange,
-      popoverMouseWithin,
-      relatedElements,
-      resultsPopoverElement,
-      rootElement,
-    ],
+    [onBlur, onQueryChange, relatedElements],
   )
 
   const handleRootFocus = useCallback((event: FocusEvent<HTMLDivElement>) => {
@@ -278,7 +269,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     (v: string) => {
       dispatch({type: 'value/change', value: v})
 
-      setPopoverMouseWithin(false)
+      popoverMouseWithinRef.current = false
 
       if (onSelect) onSelect(v)
 
@@ -287,9 +278,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       if (onChange) onChange(v)
       if (onQueryChange) onQueryChange(null)
 
-      inputElement?.focus()
+      inputElementRef.current?.focus()
     },
-    [onSelect, onChange, onQueryChange, inputElement],
+    [onChange, onSelect, onQueryChange],
   )
 
   const handleRootKeyDown = useCallback(
@@ -333,9 +324,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
       if (event.key === 'Escape') {
         dispatch({type: 'root/escape'})
-        setPopoverMouseWithin(false)
+        popoverMouseWithinRef.current = false
         if (onQueryChange) onQueryChange(null)
-        inputElement?.focus()
+        inputElementRef.current?.focus()
 
         return
       }
@@ -347,12 +338,12 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         (listEl === target || listEl?.contains(target)) &&
         !AUTOCOMPLETE_LISTBOX_IGNORE_KEYS.includes(event.key)
       ) {
-        inputElement?.focus()
+        inputElementRef.current?.focus()
 
         return
       }
     },
-    [activeValue, filteredOptions, filteredOptionsLen, inputElement, onQueryChange],
+    [activeValue, filteredOptions, filteredOptionsLen, onQueryChange],
   )
 
   const handleInputChange = useCallback(
@@ -386,11 +377,11 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   )
 
   const handlePopoverMouseEnter = useCallback(() => {
-    setPopoverMouseWithin(true)
+    popoverMouseWithinRef.current = true
   }, [])
 
   const handlePopoverMouseLeave = useCallback(() => {
-    setPopoverMouseWithin(false)
+    popoverMouseWithinRef.current = false
   }, [])
 
   const handleClearButtonClick = useCallback(() => {
@@ -398,8 +389,8 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     valueRef.current = ''
     if (onChange) onChange('')
     if (onQueryChange) onQueryChange(null)
-    inputElement?.focus()
-  }, [inputElement, onChange, onQueryChange])
+    inputElementRef.current?.focus()
+  }, [onChange, onQueryChange])
 
   const handleClearButtonFocus = useCallback(() => {
     dispatch({type: 'input/focus'})
@@ -491,9 +482,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
       if (openButtonProps.onClick) openButtonProps.onClick(event)
 
-      _raf(() => inputElement?.focus())
+      _raf(() => inputElementRef.current?.focus())
     },
-    [dispatchOpen, openButtonProps, inputElement],
+    [openButtonProps, dispatchOpen],
   )
 
   const openButtonNode = useMemo(
@@ -563,7 +554,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       prefix={prefix}
       radius={radius}
       readOnly={readOnly}
-      ref={setInputElement}
+      ref={inputElementRef}
       role="combobox"
       spellCheck={false}
       suffix={suffix || openButtonNode}
@@ -575,10 +566,10 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     (event: KeyboardEvent<HTMLDivElement>) => {
       // If the focus is currently in the list, move focus to the input element
       if (event.key === 'Tab') {
-        if (listFocused) inputElement?.focus()
+        if (listFocused) inputElementRef.current?.focus()
       }
     },
-    [inputElement, listFocused],
+    [listFocused],
   )
 
   const content = useMemo(() => {
@@ -644,11 +635,11 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         {
           content,
           hidden: !expanded,
-          inputElement,
+          inputElement: inputElementRef.current,
           onMouseEnter: handlePopoverMouseEnter,
           onMouseLeave: handlePopoverMouseLeave,
         },
-        {current: resultsPopoverElement},
+        resultsPopoverElementRef,
       )
     }
 
@@ -670,8 +661,8 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         placement={AUTOCOMPLETE_POPOVER_PLACEMENT}
         portal
         radius={radius}
-        ref={setResultsPopoverElement}
-        referenceElement={inputElement}
+        ref={resultsPopoverElementRef}
+        referenceElement={inputElementRef.current}
         {...popover}
       />
     )
@@ -681,11 +672,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     filteredOptionsLen,
     handlePopoverMouseEnter,
     handlePopoverMouseLeave,
-    inputElement,
     popover,
     radius,
     renderPopover,
-    resultsPopoverElement,
   ])
 
   return (
@@ -694,7 +683,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
       onKeyDown={handleRootKeyDown}
-      ref={setRootElement}
+      ref={rootElementRef}
     >
       {input}
       {results}
