@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.22](https://github.com/sanity-io/ui/compare/v2.8.21...v2.8.22) (2024-11-08)
+
+### Bug Fixes
+
+- **performance:** revert auto memoize `Autocomplete` ([#1466](https://github.com/sanity-io/ui/issues/1466)) ([ecbf19f](https://github.com/sanity-io/ui/commit/ecbf19fd724be935709fdf81ef516481d705bef5)), closes [#1464](https://github.com/sanity-io/ui/issues/1464)
+
 ## [2.8.21](https://github.com/sanity-io/ui/compare/v2.8.20...v2.8.21) (2024-11-07)
 
 ### Bug Fixes
