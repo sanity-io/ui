@@ -12,7 +12,7 @@ import {
   ThemeColorState_v2,
 } from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
-import {CSSProperties, useMemo} from 'react'
+import {CSSProperties} from 'react'
 import {Badge, Box, Flex, KBD, Stack, Text} from '../../../primitives'
 import {useRootTheme} from '../../useRootTheme'
 
@@ -50,16 +50,13 @@ export default function DebugStory() {
   const button = useBoolean('Button', false, 'Props') || false
   const selectable = useBoolean('Selectable', false, 'Props') || false
 
-  const features: Features = useMemo(
-    () => ({
-      base,
-      button,
-      schemes: scheme == 'all' ? ['light', 'dark'] : [scheme],
-      selectable,
-      tones: tone == 'all' ? ['transparent', 'default'] : [tone],
-    }),
-    [base, button, scheme, selectable, tone],
-  )
+  const features: Features = {
+    base,
+    button,
+    schemes: scheme == 'all' ? ['light', 'dark'] : [scheme],
+    selectable,
+    tones: tone == 'all' ? ['transparent', 'default'] : [tone],
+  }
 
   return (
     <Flex>
