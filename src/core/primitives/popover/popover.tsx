@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  Middleware,
   RootBoundary,
   arrow,
   autoUpdate,
@@ -21,8 +20,10 @@ import {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useMemo,
   useRef,
+  useState,
 } from 'react'
 import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
@@ -126,15 +127,14 @@ export const Popover = memo(
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
       animate: _animate = false,
       arrow: arrowProp = false,
-      boundaryElement = boundaryElementContext.element,
+      boundaryElement: _boundaryElement,
       children: childProp,
       constrainSize = false,
       content,
       disabled,
-      fallbackPlacements = props.fallbackPlacements ??
-        DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
+      fallbackPlacements: _fallbackPlacements,
       matchReferenceWidth,
-      floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
+      floatingBoundary: _floatingBoundary,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onActivate,
       open,
@@ -144,16 +144,23 @@ export const Popover = memo(
       portal,
       preventOverflow = true,
       radius: radiusProp = 3,
-      referenceBoundary = props.boundaryElement ?? boundaryElementContext.element,
+      referenceBoundary: _referenceBoundary,
       referenceElement,
       scheme,
       shadow: shadowProp = 3,
       tone = 'inherit',
       width: widthProp = 'auto',
-      zOffset: zOffsetProp = layer.popover.zOffset,
+      zOffset: _zOffsetProp,
       updateRef,
       ...restProps
     } = props
+    const boundaryElement = _boundaryElement ?? boundaryElementContext.element
+    const fallbackPlacements =
+      _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
+    const floatingBoundary = _floatingBoundary ?? boundaryElement ?? boundaryElementContext.element
+    const referenceBoundary =
+      _referenceBoundary ?? boundaryElement ?? boundaryElementContext.element
+    const zOffsetProp = _zOffsetProp ?? layer.popover.zOffset
     const prefersReducedMotion = usePrefersReducedMotion()
     const animate = prefersReducedMotion ? false : _animate
     const boundarySize = useElementSize(boundaryElement)?.border
@@ -163,7 +170,7 @@ export const Popover = memo(
     const widthArrayProp = useArrayProp(widthProp)
     const zOffset = useArrayProp(zOffsetProp)
     const ref = useRef<HTMLDivElement | null>(null)
-    const arrowRef = useRef<HTMLDivElement | null>(null)
+    const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
     const rootBoundary: RootBoundary = 'viewport'
 
     useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
@@ -174,94 +181,70 @@ export const Popover = memo(
     const mediaIndex = useMediaIndex()
     const boundaryWidth = constrainSize || preventOverflow ? boundarySize?.width : undefined
 
-    // Update width when
-    // - media index changes
-    // - `width` property changes
-    const width = calcCurrentWidth({
-      container,
-      mediaIndex,
-      width: widthArrayProp,
-    })
-    const widthRef = useRef(width)
-
-    useEffect(() => {
-      widthRef.current = width
-    }, [width])
-
-    // Update max width when
-    // - boundary width changes
-    // - `width` property changes
-    const maxWidth = calcMaxWidth({boundaryWidth, currentWidth: width})
-    const maxWidthRef = useRef(maxWidth)
-
-    useEffect(() => {
-      maxWidthRef.current = maxWidth
-    }, [maxWidth])
-
-    // Keep track of reference element width (see `size` middleware below)
-    const referenceWidthRef = useRef<number>()
-
     // Force apply width & max width to floating element
-    useEffect(() => {
+    useLayoutEffect(() => {
       const floatingElement = ref.current
 
-      if (!open || !floatingElement) return
+      // If constrainSize or matchReferenceWidth is true, then the styles are set by the `size` middleware
+      if (!open || !floatingElement || constrainSize || matchReferenceWidth) return
 
-      const referenceWidth = referenceWidthRef.current
+      const currentWidth = calcCurrentWidth({
+        container,
+        mediaIndex,
+        width: widthArrayProp,
+      })
+      const maxWidth = calcMaxWidth({boundaryWidth, currentWidth})
 
-      if (matchReferenceWidth) {
-        if (referenceWidth !== undefined) {
-          floatingElement.style.width = `${referenceWidth}px`
-        }
-      } else if (width !== undefined) {
-        floatingElement.style.width = `${width}px`
+      if (currentWidth !== undefined) {
+        floatingElement.style.width = `${currentWidth}px`
       }
 
       if (typeof maxWidth === 'number') {
         floatingElement.style.maxWidth = `${maxWidth}px`
       }
-    }, [width, matchReferenceWidth, maxWidth, open])
+    }, [
+      boundaryWidth,
+      constrainSize,
+      container,
+      matchReferenceWidth,
+      mediaIndex,
+      open,
+      widthArrayProp,
+    ])
 
-    const middleware = useMemo(() => {
-      const ret: Middleware[] = []
-
-      // Flip the floating element when leaving the boundary box
-      if (constrainSize || preventOverflow) {
-        ret.push(
+    const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
+      middleware: [
+        // Flip the floating element when leaving the boundary box
+        (constrainSize || preventOverflow) &&
           flip({
             boundary: floatingBoundary || undefined,
             fallbackPlacements,
             padding: DEFAULT_POPOVER_PADDING,
             rootBoundary,
           }),
-        )
-      }
-
-      // Define distance between reference and floating element
-      ret.push(offset({mainAxis: DEFAULT_POPOVER_DISTANCE}))
-
-      // Track sizes
-      if (constrainSize || matchReferenceWidth) {
-        ret.push(
+        // Define distance between reference and floating element
+        offset({mainAxis: DEFAULT_POPOVER_DISTANCE}),
+        // Track sizes
+        (constrainSize || matchReferenceWidth) &&
           size({
             apply({availableWidth, availableHeight, elements, referenceWidth}) {
-              // not fresh, so use refs
-
-              referenceWidthRef.current = referenceWidth
-
-              const _currentWidth = widthRef.current
-              const _maxWidth = maxWidthRef.current
+              const currentWidth = calcCurrentWidth({
+                container,
+                mediaIndex,
+                width: widthArrayProp,
+              })
+              const maxWidth = calcMaxWidth({boundaryWidth, currentWidth})
 
               if (matchReferenceWidth) {
                 elements.floating.style.width = `${referenceWidth}px`
-              } else if (_currentWidth !== undefined) {
-                elements.floating.style.width = `${_currentWidth}px`
+              } else if (currentWidth !== undefined) {
+                elements.floating.style.width = `${currentWidth}px`
               }
 
               if (constrainSize) {
                 elements.floating.style.maxWidth = `${Math.min(
                   availableWidth,
-                  _maxWidth ?? Infinity,
+                  maxWidth ?? Infinity,
                 )}px`
 
                 elements.floating.style.maxHeight = `${availableHeight}px`
@@ -273,59 +256,28 @@ export const Popover = memo(
             matchReferenceWidth,
             padding: DEFAULT_POPOVER_PADDING,
           }),
-        )
-      }
-
-      // Shift the popover so its sits within the boundary element
-      if (preventOverflow) {
-        ret.push(
+        // Shift the popover so its sits within the boundary element
+        preventOverflow &&
           shift({
             boundary: floatingBoundary || undefined,
             rootBoundary,
             padding: DEFAULT_POPOVER_PADDING,
           }),
-        )
-      }
-
-      // Place arrow
-      if (arrowProp) {
-        ret.push(
+        // Place arrow
+        arrowProp &&
           arrow({
-            element: arrowRef,
+            element: arrowElement,
             padding: DEFAULT_POPOVER_PADDING,
           }),
-        )
-      }
-
-      // Determine the origin to scale from.
-      // Must be placed after `@sanity/ui/size` and `shift` middleware.
-      if (animate) {
-        ret.push(origin)
-      }
-
-      ret.push(
+        // Determine the origin to scale from.
+        // Must be placed after `@sanity/ui/size` and `shift` middleware.
+        animate && origin,
         hide({
           boundary: referenceBoundary || undefined,
           padding: DEFAULT_POPOVER_PADDING,
           strategy: 'referenceHidden',
         }),
-      )
-
-      return ret
-    }, [
-      animate,
-      arrowProp,
-      constrainSize,
-      fallbackPlacements,
-      floatingBoundary,
-      margins,
-      matchReferenceWidth,
-      preventOverflow,
-      referenceBoundary,
-    ])
-
-    const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
-      middleware,
+      ],
       placement: placementProp,
       whileElementsMounted: autoUpdate,
     })
@@ -338,10 +290,6 @@ export const Popover = memo(
     const originX = middlewareData['@sanity/ui/origin']?.originX
     const originY = middlewareData['@sanity/ui/origin']?.originY
 
-    const setArrow = useCallback((arrowEl: HTMLDivElement | null) => {
-      arrowRef.current = arrowEl
-    }, [])
-
     const setFloating = useCallback(
       (node: HTMLDivElement | null) => {
         ref.current = node
@@ -350,20 +298,16 @@ export const Popover = memo(
       [refs],
     )
 
+    const [childElement, setChildElement] = useState<HTMLElement | null>(null)
     const setReference = useCallback(
       (node: HTMLElement | null) => {
         refs.setReference(node)
-
-        const childRef = getElementRef(childProp as any)
-
-        if (typeof childRef === 'function') {
-          childRef(node)
-        } else if (childRef) {
-          childRef.current = node
-        }
+        setChildElement(node)
       },
-      [childProp, refs],
+      [refs],
     )
+
+    useImperativeHandle(getElementRef(childProp as any), () => childElement, [childElement])
 
     const child = useMemo(() => {
       if (!childProp || referenceElement) return null
@@ -371,15 +315,7 @@ export const Popover = memo(
       return cloneElement(childProp, {ref: setReference})
     }, [childProp, referenceElement, setReference])
 
-    useEffect(() => {
-      if (updateRef) {
-        if (typeof updateRef === 'function') {
-          updateRef(update)
-        } else if (updateRef) {
-          updateRef.current = update
-        }
-      }
-    }, [update, updateRef])
+    useImperativeHandle(updateRef, () => update, [update])
 
     useEffect(() => {
       if (child) return
@@ -397,7 +333,7 @@ export const Popover = memo(
           __unstable_margins={margins}
           animate={animate}
           arrow={arrowProp}
-          arrowRef={setArrow}
+          arrowRef={setArrowElement}
           arrowX={arrowX}
           arrowY={arrowY}
           hidden={referenceHidden}
@@ -412,7 +348,6 @@ export const Popover = memo(
           originY={originY}
           strategy={strategy}
           tone={tone}
-          width={matchReferenceWidth ? referenceWidthRef.current : width}
           x={x}
           y={y}
         >
@@ -447,7 +382,8 @@ Popover.displayName = 'Memo(ForwardRef(Popover))'
 // https://github.com/facebook/react/pull/28348
 //
 // Access the ref using the method that doesn't yield a warning.
-function getElementRef(element: React.ReactElement) {
+function getElementRef(element?: React.ReactElement) {
+  if (!element) return null
   // React <=18 in DEV
   let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
   let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning

@@ -36,31 +36,28 @@ export function useMenuController(props: {
     activeIndexRef.current = nextActiveIndex
   }, [])
 
-  const mount = useCallback(
-    (element: HTMLElement | null, selected?: boolean): (() => void) => {
-      if (!element) return () => undefined
+  const mount = (element: HTMLElement | null, selected?: boolean): (() => void) => {
+    if (!element) return () => undefined
 
-      if (elementsRef.current.indexOf(element) === -1) {
-        elementsRef.current.push(element)
-        _sortElements(rootElementRef.current, elementsRef.current)
+    if (elementsRef.current.indexOf(element) === -1) {
+      elementsRef.current.push(element)
+      _sortElements(rootElementRef.current, elementsRef.current)
+    }
+
+    if (selected) {
+      const selectedIndex = elementsRef.current.indexOf(element)
+
+      setActiveIndex(selectedIndex)
+    }
+
+    return () => {
+      const idx = elementsRef.current.indexOf(element)
+
+      if (idx > -1) {
+        elementsRef.current.splice(idx, 1)
       }
-
-      if (selected) {
-        const selectedIndex = elementsRef.current.indexOf(element)
-
-        setActiveIndex(selectedIndex)
-      }
-
-      return () => {
-        const idx = elementsRef.current.indexOf(element)
-
-        if (idx > -1) {
-          elementsRef.current.splice(idx, 1)
-        }
-      }
-    },
-    [rootElementRef, setActiveIndex],
-  )
+    }
+  }
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -170,7 +167,7 @@ export function useMenuController(props: {
     [setActiveIndex],
   )
 
-  const handleItemMouseLeave = useCallback(() => {
+  const handleItemMouseLeave = () => {
     // Set the active index to -2 to deactivate all menu items
     // when the user moves the mouse away from the menu item.
     // We avoid using -1 because it would focus the first menu item,
@@ -178,7 +175,7 @@ export function useMenuController(props: {
     // between two menu items or a menu divider.
     setActiveIndex(-2)
     rootElementRef.current?.focus()
-  }, [rootElementRef, setActiveIndex])
+  }
 
   // Set focus on the currently active element
   useEffect(() => {

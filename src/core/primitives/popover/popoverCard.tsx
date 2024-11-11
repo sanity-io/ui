@@ -51,7 +51,6 @@ export const PopoverCard = memo(
       shadow?: number | number[]
       strategy: Strategy
       tone: CardTone
-      width: number | undefined
       x: number | null
       y: number | null
     } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
@@ -76,7 +75,6 @@ export const PopoverCard = memo(
       strategy,
       style,
       tone,
-      width,
       x: xProp,
       y: yProp,
       ...restProps
@@ -101,12 +99,11 @@ export const PopoverCard = memo(
         originY,
         position: strategy,
         top: y,
-        width,
         zIndex,
         willChange: animate ? 'transform' : undefined,
         ...style,
       }),
-      [animate, originX, originY, strategy, style, width, x, y, zIndex],
+      [animate, originX, originY, strategy, style, x, y, zIndex],
     )
 
     const arrowStyle: CSSProperties = useMemo(

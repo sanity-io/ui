@@ -97,28 +97,31 @@ export const Tooltip = forwardRef(function Tooltip(
   const {
     animate: _animate = false,
     arrow: arrowProp = false,
-    boundaryElement = boundaryElementContext?.element,
+    boundaryElement: _boundaryElement,
     children: childProp,
     content,
     disabled,
-    fallbackPlacements: fallbackPlacementsProp = props.fallbackPlacements ??
-      DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
+    fallbackPlacements: _fallbackPlacementsProp,
     padding = 2,
     placement: placementProp = 'bottom',
     portal: portalProp,
     radius = 2,
     scheme,
     shadow = 2,
-    zOffset = layer.tooltip.zOffset,
+    zOffset: _zOffset,
     delay,
     ...restProps
   } = props
+  const boundaryElement = _boundaryElement ?? boundaryElementContext?.element
+  const fallbackPlacementsProp =
+    _fallbackPlacementsProp ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
+  const zOffset = _zOffset ?? layer.tooltip.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
-  const arrowRef = useRef<HTMLDivElement | null>(null)
+  const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
   const [tooltipMaxWidth, setTooltipMaxWidth] = useState(0)
 
@@ -155,7 +158,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
     // Place arrow
     if (arrowProp) {
-      ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
+      ret.push(arrow({element: arrowElement, padding: DEFAULT_TOOLTIP_PADDING}))
     }
 
     // Determine the origin to scale from.
@@ -165,7 +168,7 @@ export const Tooltip = forwardRef(function Tooltip(
     }
 
     return ret
-  }, [animate, arrowProp, boundaryElement, fallbackPlacements])
+  }, [animate, arrowElement, arrowProp, boundaryElement, fallbackPlacements])
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
@@ -223,42 +226,42 @@ export const Tooltip = forwardRef(function Tooltip(
       handleIsOpenChange(false)
       childProp?.props?.onBlur?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp, handleIsOpenChange],
   )
   const handleClick = useCallback(
     (e: MouseEvent) => {
       handleIsOpenChange(false, true)
       childProp?.props.onClick?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp, handleIsOpenChange],
   )
   const handleContextMenu = useCallback(
     (e: MouseEvent) => {
       handleIsOpenChange(false, true)
       childProp?.props.onContextMenu?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp, handleIsOpenChange],
   )
   const handleFocus = useCallback(
     (e: FocusEvent) => {
       handleIsOpenChange(true)
       childProp?.props?.onFocus?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp, handleIsOpenChange],
   )
   const handleMouseEnter = useCallback(
     (e: MouseEvent) => {
       handleIsOpenChange(true)
       childProp?.props?.onMouseEnter?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp, handleIsOpenChange],
   )
   const handleMouseLeave = useCallback(
     (e: MouseEvent) => {
       handleIsOpenChange(false)
       childProp?.props?.onMouseLeave?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp, handleIsOpenChange],
   )
 
   // Handle closing the tooltip when the mouse leaves the referenceElement
@@ -309,7 +312,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
-      arrowRef.current = arrowEl
+      setArrowElement(arrowEl)
       update()
     },
     [update],
@@ -324,9 +327,9 @@ export const Tooltip = forwardRef(function Tooltip(
   )
 
   const childRef = useRef<HTMLElement | null>(null)
+  const [childElement, setChildElement] = useState<HTMLElement | null>(null)
 
-  // Merge refs so that any ref we are overriding is called as well
-  useImperativeHandle((childProp as any)?.ref, () => childRef.current)
+  useImperativeHandle(getElementRef(childProp as any), () => childElement, [childElement])
 
   const child = useMemo(() => {
     if (!childProp) return null
@@ -338,7 +341,7 @@ export const Tooltip = forwardRef(function Tooltip(
       onMouseLeave: handleMouseLeave,
       onClick: handleClick,
       onContextMenu: handleContextMenu,
-      ref: childRef,
+      ref: setChildElement,
     })
   }, [
     childProp,
@@ -461,4 +464,31 @@ function useCloseOnMouseLeave({
 
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [onMouseMove, showTooltip])
+}
+
+// Before React 19 accessing `element.props.ref` will throw a warning and suggest using `element.ref`
+// After React 19 accessing `element.ref` does the opposite.
+// https://github.com/facebook/react/pull/28348
+//
+// Access the ref using the method that doesn't yield a warning.
+function getElementRef(element?: React.ReactElement) {
+  if (!element) return null
+  // React <=18 in DEV
+  let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
+  let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning
+
+  if (mayWarn) {
+    return (element as any).ref
+  }
+
+  // React 19 in DEV
+  getter = Object.getOwnPropertyDescriptor(element, 'ref')?.get
+  mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning
+
+  if (mayWarn) {
+    return element.props.ref
+  }
+
+  // Not DEV
+  return element.props.ref || (element as any).ref
 }

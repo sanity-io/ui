@@ -1,4 +1,4 @@
-import {useMemo, useRef, useSyncExternalStore} from 'react'
+import {useMemo, useState, useSyncExternalStore} from 'react'
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'
 
@@ -51,13 +51,13 @@ const emptySubscribe = () => () => {}
  * equality comparison (eg by identity), and only goes one level deep.
  */
 function useUnique<ValueType extends Comparable = Comparable>(value: ValueType): ValueType {
-  const valueRef = useRef<ValueType>(value)
+  const [cachedValue, setCachedValue] = useState(value)
 
-  if (!_isEqual(valueRef.current, value)) {
-    valueRef.current = value
+  if (!_isEqual(cachedValue, value)) {
+    setCachedValue(value)
   }
 
-  return valueRef.current
+  return cachedValue
 }
 
 function _isEqual(objA: Comparable, objB: Comparable): boolean {

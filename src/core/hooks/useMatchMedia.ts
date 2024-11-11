@@ -11,34 +11,24 @@ export function useMatchMedia(
   mediaQueryString: `(${string})`,
   getServerSnapshot?: () => boolean,
 ): boolean {
+  /**
+   * `subscribe` and `getSnapshot` are only called on the client and both need access to the same `matchMedia` instance
+   * we don't want to eagerly instantiate it to ensure it's only created when actually used
+   */
+  const cachedMatchMedia = useMemo(
+    () => (typeof window === 'undefined' ? null : window.matchMedia(mediaQueryString)),
+    [mediaQueryString],
+  )
   const {subscribe, getSnapshot} = useMemo(() => {
-    /**
-     * `subscribe` and `getSnapshot` are only called on the client and both need access to the same `matchMedia` instance
-     * we don't want to eagerly instantiate it to ensure it's only created when actually used
-     */
-    let MEDIA_QUERY_CACHE: MediaQueryList | undefined
-
-    const getMatchMedia = (): MediaQueryList => {
-      if (!MEDIA_QUERY_CACHE) {
-        // As this function is only called during `subscribe` and `getSnapshot`, we can assume that the
-        // the `window` global is available and we're in a browser environment
-        MEDIA_QUERY_CACHE = window.matchMedia(mediaQueryString)
-      }
-
-      return MEDIA_QUERY_CACHE
-    }
-
     return {
       subscribe: (onStoreChange: () => void): (() => void) => {
-        const matchMedia = getMatchMedia()
+        cachedMatchMedia!.addEventListener('change', onStoreChange)
 
-        matchMedia.addEventListener('change', onStoreChange)
-
-        return () => matchMedia.removeEventListener('change', onStoreChange)
+        return () => cachedMatchMedia!.removeEventListener('change', onStoreChange)
       },
-      getSnapshot: () => getMatchMedia().matches,
+      getSnapshot: () => cachedMatchMedia!.matches,
     }
-  }, [mediaQueryString])
+  }, [cachedMatchMedia])
 
   useDebugValue(mediaQueryString)
 
