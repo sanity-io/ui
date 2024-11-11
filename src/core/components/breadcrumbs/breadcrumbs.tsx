@@ -8,7 +8,8 @@ import {
   useRef,
   useState,
 } from 'react'
-import {useArrayProp, useClickOutsideEvent} from '../../hooks'
+import {useClickOutsideEvent} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {Box, Popover, Stack, Text} from '../../primitives'
 import {ExpandButton, Root} from './breadcrumbs.styles'
 

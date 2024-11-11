@@ -1,6 +1,6 @@
 import {forwardRef, useEffect, useState} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {Box} from '../../primitives'
 import {BoxProps, ResponsiveRadiusProps} from '../../primitives'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
