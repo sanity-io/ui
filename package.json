@@ -189,7 +189,7 @@
     "styled-components": "^6.1.13",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.6.3",
-    "vite": "^5.4.10",
+    "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.0.1"
   },
   "peerDependencies": {
