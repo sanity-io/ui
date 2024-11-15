@@ -7,6 +7,18 @@ import {ToastContextValue} from './types'
 import {useToast} from './useToast'
 
 describe('components/toast', () => {
+  let consoleErrorSpy: any
+
+  beforeEach(() => {
+    // Silence console.error
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    // Restore console.error
+    consoleErrorSpy.mockRestore()
+  })
+
   describe('useToast', () => {
     it('should get context value', async () => {
       const log = jest.fn()
@@ -39,14 +51,8 @@ describe('components/toast', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useToast()
-        } catch (err) {
-          log(err)
-        }
+        useToast()
 
         return null
       }
@@ -61,20 +67,12 @@ describe('components/toast', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual('useToast(): missing context value')
+      expect(() => render(<Root />)).toThrow('useToast(): missing context value')
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useToast()
-        } catch (err) {
-          log(err)
-        }
+        useToast()
 
         return null
       }
@@ -92,11 +90,7 @@ describe('components/toast', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual(
-        'useToast(): the context value is not compatible',
-      )
+      expect(() => render(<Root />)).toThrow('useToast(): the context value is not compatible')
     })
   })
 })

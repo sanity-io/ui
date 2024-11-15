@@ -7,6 +7,18 @@ import {LayerContextValue} from './types'
 import {useLayer} from './useLayer'
 
 describe('utils/layer', () => {
+  let consoleErrorSpy: any
+
+  beforeEach(() => {
+    // Silence console.error
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    // Restore console.error
+    consoleErrorSpy.mockRestore()
+  })
+
   describe('useLayer', () => {
     it('should get context value', async () => {
       const log = jest.fn()
@@ -46,14 +58,8 @@ describe('utils/layer', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useLayer()
-        } catch (err) {
-          log(err)
-        }
+        useLayer()
 
         return null
       }
@@ -68,20 +74,12 @@ describe('utils/layer', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual('useLayer(): missing context value')
+      expect(() => render(<Root />)).toThrow('useLayer(): missing context value')
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useLayer()
-        } catch (err) {
-          log(err)
-        }
+        useLayer()
 
         return null
       }
@@ -99,11 +97,7 @@ describe('utils/layer', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual(
-        'useLayer(): the context value is not compatible',
-      )
+      expect(() => render(<Root />)).toThrow('useLayer(): the context value is not compatible')
     })
   })
 })

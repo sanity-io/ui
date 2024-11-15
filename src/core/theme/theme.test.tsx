@@ -8,6 +8,18 @@ import {ThemeContextValue} from './types'
 import {useRootTheme} from './useRootTheme'
 
 describe('theme', () => {
+  let consoleErrorSpy: any
+
+  beforeEach(() => {
+    // Silence console.error
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    // Restore console.error
+    consoleErrorSpy.mockRestore()
+  })
+
   describe('useRootTheme', () => {
     it('should get context value', async () => {
       const log = jest.fn()
@@ -43,14 +55,8 @@ describe('theme', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useRootTheme()
-        } catch (err) {
-          log(err)
-        }
+        useRootTheme()
 
         return null
       }
@@ -65,9 +71,7 @@ describe('theme', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual('useRootTheme(): missing context value')
+      expect(() => render(<Root />)).toThrow('useRootTheme(): missing context value')
     })
   })
 })

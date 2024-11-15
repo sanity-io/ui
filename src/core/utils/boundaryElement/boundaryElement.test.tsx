@@ -7,6 +7,18 @@ import {BoundaryElementContextValue} from './types'
 import {useBoundaryElement} from './useBoundaryElement'
 
 describe('utils/boundaryElement', () => {
+  let consoleErrorSpy: any
+
+  beforeEach(() => {
+    // Silence console.error
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    // Restore console.error
+    consoleErrorSpy.mockRestore()
+  })
+
   describe('useBoundaryElement', () => {
     it('should get context value', async () => {
       const log = jest.fn()
@@ -66,14 +78,8 @@ describe('utils/boundaryElement', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useBoundaryElement()
-        } catch (err) {
-          log(err)
-        }
+        useBoundaryElement()
 
         return null
       }
@@ -91,9 +97,7 @@ describe('utils/boundaryElement', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual(
+      expect(() => render(<Root />)).toThrow(
         'useBoundaryElement(): the context value is not compatible',
       )
     })

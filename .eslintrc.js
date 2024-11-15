@@ -106,9 +106,9 @@ module.exports = {
     ],
   },
   overrides: [
-    // Ignore Storybook stories and test files for the react compiler
+    // Ignore test case that specifically targets unsafe React patterns
     {
-      files: [`**/*.stories.{js,ts,tsx}`, '**/*.test.{js,ts,tsx}'],
+      files: [`src/core/hooks/useClickOutside.test.tsx`],
       rules: {
         'react-compiler/react-compiler': 'off',
       },

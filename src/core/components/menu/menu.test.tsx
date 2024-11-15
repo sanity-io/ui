@@ -8,6 +8,19 @@ import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenu} from './useMenu'
 
 describe('components/menu', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let consoleErrorSpy: any
+
+  beforeEach(() => {
+    // Silence console.error
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    // Restore console.error
+    consoleErrorSpy.mockRestore()
+  })
+
   describe('useMenu', () => {
     it('should get context value', async () => {
       const log = jest.fn()
@@ -66,14 +79,8 @@ describe('components/menu', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useMenu()
-        } catch (err) {
-          log(err)
-        }
+        useMenu()
 
         return null
       }
@@ -89,20 +96,12 @@ describe('components/menu', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual('useMenu(): missing context value')
+      expect(() => render(<Root />)).toThrow('useMenu(): missing context value')
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          useMenu()
-        } catch (err) {
-          log(err)
-        }
+        useMenu()
 
         return null
       }
@@ -121,9 +120,7 @@ describe('components/menu', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual('useMenu(): the context value is not compatible')
+      expect(() => render(<Root />)).toThrow('useMenu(): the context value is not compatible')
     })
   })
 })

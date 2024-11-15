@@ -7,6 +7,18 @@ import {PortalContextValue} from './types'
 import {usePortal} from './usePortal'
 
 describe('utils/portal', () => {
+  let consoleErrorSpy: any
+
+  beforeEach(() => {
+    // Silence console.error
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    // Restore console.error
+    consoleErrorSpy.mockRestore()
+  })
+
   describe('usePortal', () => {
     it('should get context value', async () => {
       const log = jest.fn()
@@ -41,14 +53,8 @@ describe('utils/portal', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          usePortal()
-        } catch (err) {
-          log(err)
-        }
+        usePortal()
 
         return null
       }
@@ -63,20 +69,12 @@ describe('utils/portal', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual('usePortal(): missing context value')
+      expect(() => render(<Root />)).toThrow('usePortal(): missing context value')
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
-
       function Debug() {
-        try {
-          usePortal()
-        } catch (err) {
-          log(err)
-        }
+        usePortal()
 
         return null
       }
@@ -94,11 +92,7 @@ describe('utils/portal', () => {
         )
       }
 
-      render(<Root />)
-
-      expect(log.mock.calls[0][0].message).toEqual(
-        'usePortal(): the context value is not compatible',
-      )
+      expect(() => render(<Root />)).toThrow('usePortal(): the context value is not compatible')
     })
   })
 })
