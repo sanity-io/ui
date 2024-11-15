@@ -42,8 +42,8 @@ export function _responsive<T>(
 /**
  * @internal
  */
-export function _getArrayProp<T = number>(val: T | T[] | undefined, defaultVal?: T[]): T[] {
-  if (val === undefined) return defaultVal || EMPTY_ARRAY
+export function _getArrayProp<T = number>(val: T | T[] | undefined): T[] {
+  if (val === undefined) return EMPTY_ARRAY
 
   return Array.isArray(val) ? val : [val]
 }

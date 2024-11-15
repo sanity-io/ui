@@ -8,12 +8,8 @@ import {
   focusLastDescendant,
   isHTMLElement,
 } from '../../helpers'
-import {
-  useArrayProp,
-  useClickOutsideEvent,
-  useGlobalKeyDown,
-  usePrefersReducedMotion,
-} from '../../hooks'
+import {useClickOutsideEvent, useGlobalKeyDown, usePrefersReducedMotion} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'

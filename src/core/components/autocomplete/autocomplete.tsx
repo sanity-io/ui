@@ -20,7 +20,7 @@ import {
 } from 'react'
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {useArrayProp} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {
   Box,
   BoxProps,

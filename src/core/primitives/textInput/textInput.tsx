@@ -4,7 +4,8 @@ import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, u
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useCustomValidity} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {
   responsiveRadiusStyle,
   ResponsiveRadiusStyleProps,

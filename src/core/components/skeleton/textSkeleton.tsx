@@ -1,7 +1,7 @@
 import {ThemeFontKey, getTheme_v2} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {ThemeProps, _responsive} from '../../styles'
 import {Skeleton, SkeletonProps} from './skeleton'
 

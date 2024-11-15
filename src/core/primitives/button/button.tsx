@@ -1,7 +1,7 @@
 import {forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme_v2} from '../../theme'

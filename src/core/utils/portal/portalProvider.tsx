@@ -1,4 +1,4 @@
-import {useMemo, useRef, useSyncExternalStore} from 'react'
+import {useMemo, useState, useSyncExternalStore} from 'react'
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'
 
@@ -22,8 +22,8 @@ export interface PortalProviderProps {
  * @public
  */
 export function PortalProvider(props: PortalProviderProps): React.ReactElement {
-  const {boundaryElement, children, element, __unstable_elements: elementsProp} = props
-  const elements = useUnique(elementsProp)
+  const {boundaryElement, children, element} = props
+  const elements = useUnique(props.__unstable_elements)
   const fallbackElement = useSyncExternalStore(
     emptySubscribe,
     () => document.body,
@@ -51,16 +51,18 @@ const emptySubscribe = () => () => {}
  * equality comparison (eg by identity), and only goes one level deep.
  */
 function useUnique<ValueType extends Comparable = Comparable>(value: ValueType): ValueType {
-  const valueRef = useRef<ValueType>(value)
+  const [cachedValue, setCachedValue] = useState(value)
+  let result = cachedValue
 
-  if (!_isEqual(valueRef.current, value)) {
-    valueRef.current = value
+  if (!isEqual(cachedValue, value)) {
+    setCachedValue(value)
+    result = value
   }
 
-  return valueRef.current
+  return result
 }
 
-function _isEqual(objA: Comparable, objB: Comparable): boolean {
+function isEqual(objA: Comparable, objB: Comparable): boolean {
   if (!objA || !objB) {
     return objA === objB
   }

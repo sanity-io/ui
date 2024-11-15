@@ -1,6 +1,6 @@
 import {forwardRef, useMemo, Children} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import {useArrayProp} from '../../hooks/useArrayProp'
 import {Box, BoxProps} from '../box'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
 import {ResponsiveInlineSpaceStyleProps} from './types'

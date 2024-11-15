@@ -1,4 +1,4 @@
-export * from './useArrayProp'
+export * from './useArrayPropLegacy'
 export * from './useClickOutside'
 export * from './useClickOutsideEvent'
 export * from './useCustomValidity'
