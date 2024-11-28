@@ -57,7 +57,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   const iconRight = useSelect(
     'Icon (right)',
     WORKSHOP_ICON_SYMBOL_OPTIONS,
-    'close',
+    'cube',
     'Props',
   ) as IconSymbol
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
@@ -83,7 +83,6 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       icon={icon && icons[icon]}
       iconRight={iconRight && icons[iconRight]}
       id="text-input-example"
-      name="email"
       onChange={handleChange}
       padding={padding}
       placeholder={placeholder}

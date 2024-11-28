@@ -3,11 +3,12 @@ import {WORKSHOP_BUTTON_TONE_OPTIONS} from '../../../__workshop__/constants'
 
 export default function CustomStory() {
   const tones = Object.entries(WORKSHOP_BUTTON_TONE_OPTIONS)
+  const len = tones.length
 
   return (
-    <Flex align="center" height="fill" justify="center">
+    <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Stack space={2}>
-        <Grid columns={5} gap={1}>
+        <Grid columns={len} gap={1}>
           {tones.map(([title, tone]) => (
             <Button key={tone} mode="ghost" padding={3} tone={tone}>
               <Stack space={2}>
@@ -24,7 +25,7 @@ export default function CustomStory() {
             </Button>
           ))}
         </Grid>
-        <Grid columns={5} gap={1}>
+        <Grid columns={len} gap={1}>
           {tones.map(([title, tone]) => (
             <Button key={tone} mode="default" padding={3} tone={tone}>
               <Stack space={2}>

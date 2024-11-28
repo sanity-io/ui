@@ -64,10 +64,12 @@ function List2() {
 
 function Preview() {
   return (
-    <Flex align="center">
-      <Skeleton marginRight={2} radius={2} style={{width: 35, height: 35}} />
+    <Flex align="center" gap={2}>
+      <Skeleton radius="full" style={{width: 33, height: 33}} />
       <Stack flex={1} space={2}>
-        <Text>Preview</Text>
+        <Text size={1} weight="medium">
+          Preview
+        </Text>
         <Text muted size={1}>
           Preview
         </Text>

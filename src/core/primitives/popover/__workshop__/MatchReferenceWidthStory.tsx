@@ -11,8 +11,8 @@ export default function MatchReferenceWidthStory() {
       <Popover
         arrow={arrow}
         content={
-          <Box padding={2}>
-            <Text>Content</Text>
+          <Box padding={3}>
+            <Text size={1}>Content</Text>
           </Box>
         }
         matchReferenceWidth
@@ -22,7 +22,7 @@ export default function MatchReferenceWidthStory() {
       >
         <Container width={0}>
           <Stack>
-            <Button fontSize={3} text="Button" />
+            <Button fontSize={1} mode="ghost" selected text="Button" />
           </Stack>
         </Container>
       </Popover>

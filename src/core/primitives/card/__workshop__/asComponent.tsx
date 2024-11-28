@@ -20,7 +20,7 @@ export default function AsComponentStory() {
   return (
     <Flex align="center" height="fill" justify="center">
       <Card as={CustomLink} data-as="a" {...props} padding={3}>
-        <Text>As component</Text>
+        <Text size={1}>As component</Text>
       </Card>
     </Flex>
   )

@@ -9,7 +9,7 @@ export default function PlainStory() {
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container onClick={useAction('onClick')} width={width}>
         <Card padding={4} shadow={1}>
-          <Text>
+          <Text size={1}>
             Container with <code>max-width={width}</code>
           </Text>
         </Card>

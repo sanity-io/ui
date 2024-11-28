@@ -6,55 +6,43 @@ export default function OpticalAlignment() {
     <Box padding={[4, 5, 6]}>
       <Stack space={1}>
         <Flex>
-          <Card padding={0} scheme="dark">
-            <Heading accent size={5}>
-              Hamburgefonstiv M
-            </Heading>
+          <Card padding={0} tone="neutral">
+            <Heading size={5}>Hamburgefonstiv M</Heading>
           </Card>
         </Flex>
 
         <Flex>
-          <Card padding={0} scheme="dark">
-            <Heading accent size={4}>
-              Hamburgefonstiv M
-            </Heading>
+          <Card padding={0} tone="neutral">
+            <Heading size={4}>Hamburgefonstiv M</Heading>
           </Card>
         </Flex>
 
         <Flex>
-          <Card padding={0} scheme="dark">
-            <Heading accent size={3}>
-              Hamburgefonstiv M
-            </Heading>
+          <Card padding={0} tone="neutral">
+            <Heading size={3}>Hamburgefonstiv M</Heading>
           </Card>
         </Flex>
 
         <Flex>
-          <Card padding={0} scheme="dark">
-            <Heading accent size={2}>
-              Hamburgefonstiv M
-            </Heading>
+          <Card padding={0} tone="neutral">
+            <Heading size={2}>Hamburgefonstiv M</Heading>
           </Card>
         </Flex>
 
         <Flex>
-          <Card padding={0} scheme="dark">
-            <Heading accent size={1}>
-              Hamburgefonstiv M
-            </Heading>
+          <Card padding={0} tone="neutral">
+            <Heading size={1}>Hamburgefonstiv M</Heading>
           </Card>
         </Flex>
 
         <Flex>
-          <Card padding={0} scheme="dark">
-            <Heading accent size={0}>
-              Hamburgefonstiv M
-            </Heading>
+          <Card padding={0} tone="neutral">
+            <Heading size={0}>Hamburgefonstiv M</Heading>
           </Card>
         </Flex>
 
         <Flex>
-          <Card padding={2} scheme="dark">
+          <Card padding={2} tone="neutral">
             <Heading accent>
               <AddCircleIcon />
             </Heading>

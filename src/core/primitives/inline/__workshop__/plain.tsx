@@ -10,15 +10,15 @@ export default function PlainStory() {
         space={useSelect('Space', WORKSHOP_SPACE_OPTIONS, 0, 'Props')}
       >
         <Card padding={1} shadow={1}>
-          <Text>Inline item</Text>
+          <Text size={1}>Inline item</Text>
         </Card>
 
         <Card padding={2} shadow={1}>
-          <Text>Inline item</Text>
+          <Text size={1}>Inline item</Text>
         </Card>
 
         <Card padding={3} shadow={1}>
-          <Text>Inline item</Text>
+          <Text size={1}>Inline item</Text>
         </Card>
       </Inline>
     </Flex>

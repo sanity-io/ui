@@ -3,7 +3,9 @@ import {useBoolean} from '@sanity/ui-workshop'
 
 export default function TonesStory() {
   const transparentTone = useBoolean('Transparent', true)
+  const neutralTone = useBoolean('Neutral', true)
   const primaryTone = useBoolean('Primary', true)
+  const suggestTone = useBoolean('Suggest', true)
   const positiveTone = useBoolean('Positive', true)
   const cautionTone = useBoolean('Caution', true)
   const criticalTone = useBoolean('Critical', true)
@@ -49,10 +51,46 @@ export default function TonesStory() {
                   </Card>
                 )}
 
+                {neutralTone && (
+                  <Card padding={3} tone="neutral">
+                    <TextInput
+                      placeholder="neutral"
+                      prefix={
+                        <Box padding={3}>
+                          <Text>prefix</Text>
+                        </Box>
+                      }
+                      suffix={
+                        <Box padding={3}>
+                          <Text>suffix</Text>
+                        </Box>
+                      }
+                    />
+                  </Card>
+                )}
+
                 {primaryTone && (
                   <Card padding={3} tone="primary">
                     <TextInput
                       placeholder="primary"
+                      prefix={
+                        <Box padding={3}>
+                          <Text>prefix</Text>
+                        </Box>
+                      }
+                      suffix={
+                        <Box padding={3}>
+                          <Text>suffix</Text>
+                        </Box>
+                      }
+                    />
+                  </Card>
+                )}
+
+                {suggestTone && (
+                  <Card padding={3} tone="suggest">
+                    <TextInput
+                      placeholder="suggest"
                       prefix={
                         <Box padding={3}>
                           <Text>prefix</Text>

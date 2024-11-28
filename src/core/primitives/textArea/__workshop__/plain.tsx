@@ -17,7 +17,7 @@ export default function PlainStory() {
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2, 'Props')
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
   const placeholder = useText('Placeholder', '', 'Props') || undefined
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0, 'Props')
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props')
   const readOnly = useBoolean('Read only', false, 'Props')
   const weight = useSelect('Weight', WORKSHOP_FONT_WEIGHT_OPTIONS, undefined, 'Props')
 

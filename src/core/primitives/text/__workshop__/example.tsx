@@ -1,4 +1,4 @@
-import {Card, Container, Text} from '@sanity/ui'
+import {Container, Flex, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {
   WORKSHOP_TEXT_ALIGN_OPTIONS,
@@ -11,7 +11,7 @@ export default function TextStory() {
   const accent = useBoolean('Accent', false, 'Props')
   const align = useSelect('Align', WORKSHOP_TEXT_ALIGN_OPTIONS, '', 'Props') || undefined
   const muted = useBoolean('Muted', false, 'Props')
-  const size = useSelect('Size', WORKSHOP_TEXT_SIZE_OPTIONS, 2, 'Props')
+  const size = useSelect('Size', WORKSHOP_TEXT_SIZE_OPTIONS, 1, 'Props')
   const text = useText('Text', 'Hello, world', 'Props')
 
   const textOverflow =
@@ -20,8 +20,8 @@ export default function TextStory() {
   const weight = useSelect('Weight', WORKSHOP_TEXT_WEIGHT_OPTIONS, '', 'Props') || undefined
 
   return (
-    <Container width={0}>
-      <Card padding={4}>
+    <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
+      <Container width={0}>
         <Text
           accent={accent}
           align={align}
@@ -32,7 +32,7 @@ export default function TextStory() {
         >
           {text}
         </Text>
-      </Card>
-    </Container>
+      </Container>
+    </Flex>
   )
 }

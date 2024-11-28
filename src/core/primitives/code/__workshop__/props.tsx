@@ -8,7 +8,7 @@ import {
 export default function PropsStory() {
   const code = useText('Code', `console.log('Hello, world')`, 'Props')
   const language = useSelect('Language', WORKSHOP_CODE_LANGUAGE_OPTIONS, 'typescript', 'Props')
-  const size = useSelect('Size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2, 'Props')
+  const size = useSelect('Size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 1, 'Props')
 
   return (
     <Box padding={[4, 5, 6]}>

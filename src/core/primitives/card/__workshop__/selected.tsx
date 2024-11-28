@@ -68,12 +68,14 @@ function Preview({selected}: {selected: boolean}) {
   return (
     <Flex>
       <Box flex={1}>
-        <Text>Title</Text>
+        <Text size={1}>Title</Text>
       </Box>
       <Inline space={3}>
         <TextWithTone
           data-selected={selected ? '' : undefined}
           muted
+          size={1}
+          weight="medium"
           $tone={rootTheme.tone === 'default' ? 'caution' : 'default'}
         >
           <EditIcon />
@@ -81,6 +83,7 @@ function Preview({selected}: {selected: boolean}) {
         <TextWithTone
           data-selected={selected ? '' : undefined}
           muted
+          size={1}
           $tone={rootTheme.tone === 'default' ? 'positive' : 'default'}
         >
           <PublishIcon />

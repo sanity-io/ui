@@ -36,11 +36,6 @@ export default defineScope({
       component: lazy(() => import('./readOnly')),
     },
     {
-      name: 'multiple-tones',
-      title: 'Multiple tones',
-      component: lazy(() => import('./multipleTones')),
-    },
-    {
       name: 'states',
       title: 'States',
       component: lazy(() => import('./states')),

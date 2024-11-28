@@ -1,5 +1,6 @@
-import {SearchIcon} from '@sanity/icons'
+import {CubeIcon} from '@sanity/icons'
 import {Box, Card, LayerProvider, Menu, MenuItem} from '@sanity/ui'
+import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
 
@@ -12,11 +13,9 @@ export default function TonesStory() {
       <Box padding={[4, 5, 6]}>
         <Card radius={3} shadow={3} tone={parentTone}>
           <Menu>
-            <MenuItem disabled={disabled} icon={SearchIcon} text="Default" tone="default" />
-            <MenuItem disabled={disabled} icon={SearchIcon} text="Primary" tone="primary" />
-            <MenuItem disabled={disabled} icon={SearchIcon} text="Positive" tone="positive" />
-            <MenuItem disabled={disabled} icon={SearchIcon} text="Caution" tone="caution" />
-            <MenuItem disabled={disabled} icon={SearchIcon} text="Critical" tone="critical" />
+            {THEME_COLOR_STATE_TONES.map((tone) => (
+              <MenuItem disabled={disabled} icon={CubeIcon} key={tone} text={tone} tone={tone} />
+            ))}
           </Menu>
         </Card>
       </Box>
