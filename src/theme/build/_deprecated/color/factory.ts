@@ -34,7 +34,7 @@ export interface ThemeColorBuilderOpts {
   solid: (opts: {
     base: ThemeColorBase
     dark: boolean
-    tone: ThemeColorToneKey
+    tone: ThemeColorName
     name: ThemeColorName
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
   }) => ThemeColorGenericState
