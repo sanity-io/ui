@@ -5,6 +5,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.0](https://github.com/sanity-io/icons/compare/v3.4.0...v3.5.0) (2024-11-28)
+
+### Features
+
+- add icons ([2c462eb](https://github.com/sanity-io/icons/commit/2c462eb3648b0f0cada4b05e9ab87c8ad5997689))
+
+### Bug Fixes
+
+- update `pin` symbol ([29c72c0](https://github.com/sanity-io/icons/commit/29c72c0ae02e30f43b52a4a158d29c274a1a1da2))
+- update icons ([1f6f0ec](https://github.com/sanity-io/icons/commit/1f6f0ec7d36067bb5d01561e74f78e036c76f1c2))
+
 ## [3.4.0](https://github.com/sanity-io/icons/compare/v3.3.1...v3.4.0) (2024-08-23)
 
 ### Features
