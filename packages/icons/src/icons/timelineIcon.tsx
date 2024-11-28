@@ -22,7 +22,7 @@ export const TimelineIcon = forwardRef(function TimelineIcon(
     >
       <path d="M12.5 5V20" stroke="currentColor" strokeWidth={1.2} />
       <path
-        d="M5 8.5H11M7 12.5H11M9 16.5H11M14 16.5H20M14 12.5H18M14 8.5H16"
+        d="M5 8.5H11M7 12.5H11M9 16.5H11M13 16.5H20M13 12.5H18M13 8.5H16"
         stroke="currentColor"
         strokeWidth={1.2}
       />
