@@ -1,6 +1,8 @@
+import {COLOR_HUES} from '@sanity/color'
 import {ThemeColorPalette, ThemeConfig} from '../config'
 import {defaultColorPalette} from '../defaults/colorPalette'
 import {
+  THEME_COLOR_STATE_TONES,
   ThemeColorAvatar_v2,
   ThemeColorBadgeTone_v2,
   ThemeColorBadge_v2,
@@ -187,17 +189,13 @@ function renderThemeColorAvatar(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorAvatar_v2 {
-  return {
-    gray: renderThemeColorAvatarColor(value.gray, options),
-    blue: renderThemeColorAvatarColor(value.blue, options),
-    purple: renderThemeColorAvatarColor(value.purple, options),
-    magenta: renderThemeColorAvatarColor(value.magenta, options),
-    red: renderThemeColorAvatarColor(value.red, options),
-    orange: renderThemeColorAvatarColor(value.orange, options),
-    yellow: renderThemeColorAvatarColor(value.yellow, options),
-    green: renderThemeColorAvatarColor(value.green, options),
-    cyan: renderThemeColorAvatarColor(value.cyan, options),
+  const colorAvatar = {} as ThemeColorAvatar_v2
+
+  for (const hue of COLOR_HUES) {
+    colorAvatar[hue] = renderThemeColorAvatarColor(value[hue], options)
   }
+
+  return colorAvatar
 }
 
 function renderThemeColorAvatarColor(
@@ -240,13 +238,13 @@ function renderThemeColorBadge(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorBadge_v2 {
-  return {
-    default: renderThemeColorBadgeColor(value.default, options),
-    primary: renderThemeColorBadgeColor(value.primary, options),
-    positive: renderThemeColorBadgeColor(value.positive, options),
-    caution: renderThemeColorBadgeColor(value.caution, options),
-    critical: renderThemeColorBadgeColor(value.critical, options),
+  const colorBadge = {} as ThemeColorBadge_v2
+
+  for (const tone of THEME_COLOR_STATE_TONES) {
+    colorBadge[tone] = renderThemeColorBadgeColor(value[tone], options)
   }
+
+  return colorBadge
 }
 
 function renderThemeColorBadgeColor(
@@ -258,8 +256,6 @@ function renderThemeColorBadgeColor(
   },
 ): ThemeColorBadgeTone_v2 {
   const {baseBg, blendMode: rootBlendMode, colorPalette} = options
-
-  // const blendMode = value._blend || 'multiply'
 
   const blendMode = rootBlendMode
 
@@ -308,13 +304,13 @@ function renderThemeColorButtonTones(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorButtonMode_v2 {
-  return {
-    default: renderThemeColorButtonStates(value.default, options),
-    primary: renderThemeColorButtonStates(value.primary, options),
-    positive: renderThemeColorButtonStates(value.positive, options),
-    caution: renderThemeColorButtonStates(value.caution, options),
-    critical: renderThemeColorButtonStates(value.critical, options),
+  const colorButtonMode = {} as ThemeColorButtonMode_v2
+
+  for (const tone of THEME_COLOR_STATE_TONES) {
+    colorButtonMode[tone] = renderThemeColorButtonStates(value[tone], options)
   }
+
+  return colorButtonMode
 }
 
 function renderThemeColorButtonStates(
@@ -457,13 +453,13 @@ function renderThemeColorSelectable(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorSelectable_v2 {
-  return {
-    default: renderThemeColorSelectableStates(value.default, options),
-    primary: renderThemeColorSelectableStates(value.primary, options),
-    positive: renderThemeColorSelectableStates(value.positive, options),
-    caution: renderThemeColorSelectableStates(value.caution, options),
-    critical: renderThemeColorSelectableStates(value.critical, options),
+  const colorSelectable = {} as ThemeColorSelectable_v2
+
+  for (const tone of THEME_COLOR_STATE_TONES) {
+    colorSelectable[tone] = renderThemeColorSelectableStates(value[tone], options)
   }
+
+  return colorSelectable
 }
 
 function renderThemeColorSelectableStates(

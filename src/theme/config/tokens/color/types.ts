@@ -1,5 +1,5 @@
 import {ColorHueKey} from '@sanity/color'
-import {ThemeColorSyntax, ThemeColorButtonModeKey} from '../../../system'
+import {ThemeColorSyntax, ThemeColorButtonModeKey, ThemeColorStateToneKey} from '../../../system'
 import {
   ColorBlendModeTokenValue,
   ColorConfigCardTone,
@@ -33,15 +33,6 @@ export interface ThemeColorAvatarTokens {
 }
 
 /** @public */
-export interface ThemeColorBadgeTokens {
-  _hue?: ColorHueKey
-  bg?: ThemeColorTokenValue
-  fg?: ThemeColorTokenValue
-  dot?: ThemeColorTokenValue
-  icon?: ThemeColorTokenValue
-}
-
-/** @public */
 export interface ThemeColorBaseTokens extends ThemeColorStateTokens {
   focusRing?: ThemeColorTokenValue
   backdrop?: ThemeColorTokenValue
@@ -64,14 +55,9 @@ export interface ThemeColorBadgeToneTokens {
 }
 
 /** @public */
-export interface ThemeColorBadgeTokens {
-  '*'?: ThemeColorBadgeToneTokens
-  'default'?: ThemeColorBadgeToneTokens
-  'primary'?: ThemeColorBadgeToneTokens
-  'positive'?: ThemeColorBadgeToneTokens
-  'caution'?: ThemeColorBadgeToneTokens
-  'critical'?: ThemeColorBadgeToneTokens
-}
+export type ThemeColorBadgeTokens = Partial<
+  Record<'*' | ThemeColorStateToneKey, ThemeColorBadgeToneTokens>
+>
 
 /** @public */
 export interface ThemeColorStateTokens {
