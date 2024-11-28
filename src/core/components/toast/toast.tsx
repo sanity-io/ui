@@ -23,14 +23,14 @@ const STATUS_CARD_TONE: {[key: string]: ThemeColorStateToneKey} = {
   error: 'critical',
   warning: 'caution',
   success: 'positive',
-  info: 'primary',
+  info: 'neutral',
 } as const
 
 const BUTTON_TONE = {
   error: 'critical',
   warning: 'caution',
   success: 'positive',
-  info: 'primary',
+  info: 'neutral',
 } satisfies {[key: string]: ButtonTone}
 
 const ROLES = {
