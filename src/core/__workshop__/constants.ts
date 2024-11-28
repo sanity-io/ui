@@ -69,13 +69,15 @@ export const WORKSHOP_CARD_AS_OPTIONS: {
 }
 
 export const WORKSHOP_CARD_TONE_OPTIONS: {[key: string]: CardTone} = {
-  Default: 'default',
-  Inherit: 'inherit',
-  Transparent: 'transparent',
-  Primary: 'primary',
-  Positive: 'positive',
-  Caution: 'caution',
-  Critical: 'critical',
+  'Inherit': 'inherit',
+  'Transparent': 'transparent',
+  'Default': 'default',
+  'Neutral': 'neutral',
+  'Primary (deprecated)': 'primary',
+  'Potential': 'potential',
+  'Positive': 'positive',
+  'Caution': 'caution',
+  'Critical': 'critical',
 }
 
 export const WORKSHOP_CODE_LANGUAGE_OPTIONS = {
