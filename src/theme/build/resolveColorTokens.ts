@@ -1,9 +1,11 @@
-import {ColorHueKey} from '@sanity/color'
+import {COLOR_HUES, ColorHueKey} from '@sanity/color'
 import {
   ColorConfigCardTone,
   ColorConfigInputMode,
   ColorConfigInputState,
   ColorConfigStateTone,
+  ThemeColorAvatarTokens,
+  ThemeColorBadgeTokens,
   ThemeColorBaseTokens,
   ThemeColorButtonTokens,
   ThemeColorInputStateTokens,
@@ -64,44 +66,22 @@ function resolveBaseColorTones(
   return {
     ...spec,
     _hue: hue,
-    avatar: {
-      gray: merge({_hue: 'gray'}, spec.avatar?.['*'], spec.avatar?.gray),
-      blue: merge({_hue: 'blue'}, spec.avatar?.['*'], spec.avatar?.blue),
-      purple: merge({_hue: 'purple'}, spec.avatar?.['*'], spec.avatar?.purple),
-      magenta: merge({_hue: 'magenta'}, spec.avatar?.['*'], spec.avatar?.magenta),
-      red: merge({_hue: 'red'}, spec.avatar?.['*'], spec.avatar?.red),
-      orange: merge({_hue: 'orange'}, spec.avatar?.['*'], spec.avatar?.orange),
-      yellow: merge({_hue: 'yellow'}, spec.avatar?.['*'], spec.avatar?.yellow),
-      green: merge({_hue: 'green'}, spec.avatar?.['*'], spec.avatar?.green),
-      cyan: merge({_hue: 'cyan'}, spec.avatar?.['*'], spec.avatar?.cyan),
-    },
-    badge: {
-      default: {
-        _hue: inputTokens?.base?.default?._hue || hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.default,
-      },
-      primary: {
-        _hue: inputTokens?.base?.primary?._hue || hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.primary,
-      },
-      positive: {
-        _hue: inputTokens?.base?.positive?._hue || hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.positive,
-      },
-      caution: {
-        _hue: inputTokens?.base?.caution?._hue || hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.caution,
-      },
-      critical: {
-        _hue: inputTokens?.base?.critical?._hue || hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.critical,
-      },
-    },
+    avatar: COLOR_HUES.reduce((acc, hue) => {
+      return {
+        ...acc,
+        [hue]: merge({_hue: hue}, spec.avatar?.['*'], spec.avatar?.[hue]),
+      }
+    }, {} as ThemeColorAvatarTokens),
+    badge: THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+      return {
+        ...acc,
+        [tone]: {
+          _hue: inputTokens?.base?.[tone]?._hue || hue,
+          ...spec.badge?.['*'],
+          ...spec.badge?.[tone],
+        },
+      }
+    }, {} as ThemeColorBadgeTokens),
   }
 }
 
@@ -162,44 +142,22 @@ function resolveButtonStateColorTokens(
   return {
     ...spec,
     _hue: hue,
-    avatar: {
-      gray: merge({_hue: 'gray'}, spec.avatar?.['*'], spec.avatar?.gray),
-      blue: merge({_hue: 'blue'}, spec.avatar?.['*'], spec.avatar?.blue),
-      purple: merge({_hue: 'purple'}, spec.avatar?.['*'], spec.avatar?.purple),
-      magenta: merge({_hue: 'magenta'}, spec.avatar?.['*'], spec.avatar?.magenta),
-      red: merge({_hue: 'red'}, spec.avatar?.['*'], spec.avatar?.red),
-      orange: merge({_hue: 'orange'}, spec.avatar?.['*'], spec.avatar?.orange),
-      yellow: merge({_hue: 'yellow'}, spec.avatar?.['*'], spec.avatar?.yellow),
-      green: merge({_hue: 'green'}, spec.avatar?.['*'], spec.avatar?.green),
-      cyan: merge({_hue: 'cyan'}, spec.avatar?.['*'], spec.avatar?.cyan),
-    },
-    badge: {
-      default: {
-        _hue: inputTokens?.base?.default?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.default,
-      },
-      primary: {
-        _hue: inputTokens?.base?.primary?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.primary,
-      },
-      positive: {
-        _hue: inputTokens?.base?.positive?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.positive,
-      },
-      caution: {
-        _hue: inputTokens?.base?.caution?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.caution,
-      },
-      critical: {
-        _hue: inputTokens?.base?.critical?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.critical,
-      },
-    },
+    avatar: COLOR_HUES.reduce((acc, hue) => {
+      return {
+        ...acc,
+        [hue]: merge({_hue: hue}, spec.avatar?.['*'], spec.avatar?.[hue]),
+      }
+    }, {} as ThemeColorAvatarTokens),
+    badge: THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+      return {
+        ...acc,
+        [tone]: {
+          _hue: inputTokens?.base?.[tone]?._hue || hue,
+          ...spec.badge?.['*'],
+          ...spec.badge?.[tone],
+        },
+      }
+    }, {} as ThemeColorBadgeTokens),
   }
 }
 
@@ -289,43 +247,21 @@ function resolveSelectableStateColorTokens(
   return {
     ...spec,
     _hue: hue,
-    avatar: {
-      gray: merge({_hue: 'gray'}, spec.avatar?.['*'], spec.avatar?.gray),
-      blue: merge({_hue: 'blue'}, spec.avatar?.['*'], spec.avatar?.blue),
-      purple: merge({_hue: 'purple'}, spec.avatar?.['*'], spec.avatar?.purple),
-      magenta: merge({_hue: 'magenta'}, spec.avatar?.['*'], spec.avatar?.magenta),
-      red: merge({_hue: 'red'}, spec.avatar?.['*'], spec.avatar?.red),
-      orange: merge({_hue: 'orange'}, spec.avatar?.['*'], spec.avatar?.orange),
-      yellow: merge({_hue: 'yellow'}, spec.avatar?.['*'], spec.avatar?.yellow),
-      green: merge({_hue: 'green'}, spec.avatar?.['*'], spec.avatar?.green),
-      cyan: merge({_hue: 'cyan'}, spec.avatar?.['*'], spec.avatar?.cyan),
-    },
-    badge: {
-      default: {
-        _hue: inputTokens?.base?.default?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.default,
-      },
-      primary: {
-        _hue: inputTokens?.base?.primary?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.primary,
-      },
-      positive: {
-        _hue: inputTokens?.base?.positive?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.positive,
-      },
-      caution: {
-        _hue: inputTokens?.base?.caution?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.caution,
-      },
-      critical: {
-        _hue: inputTokens?.base?.critical?._hue,
-        ...spec.badge?.['*'],
-        ...spec.badge?.critical,
-      },
-    },
+    avatar: COLOR_HUES.reduce((acc, hue) => {
+      return {
+        ...acc,
+        [hue]: merge({_hue: hue}, spec.avatar?.['*'], spec.avatar?.[hue]),
+      }
+    }, {} as ThemeColorAvatarTokens),
+    badge: THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+      return {
+        ...acc,
+        [tone]: {
+          _hue: inputTokens?.base?.[tone]?._hue || hue,
+          ...spec.badge?.['*'],
+          ...spec.badge?.[tone],
+        },
+      }
+    }, {} as ThemeColorBadgeTokens),
   }
 }

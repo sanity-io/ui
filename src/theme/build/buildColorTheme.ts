@@ -24,6 +24,7 @@ import {
   ThemeColorInput_v2,
   ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
+  THEME_COLOR_CARD_TONES,
 } from '../system'
 import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
 import {resolveColorTokens} from './resolveColorTokens'
@@ -46,14 +47,13 @@ function buildColorScheme(
 ): ThemeColorScheme_v2 {
   const {scheme} = options
 
-  return {
-    transparent: buildCardColorTheme({scheme, tone: 'transparent'}, config),
-    default: buildCardColorTheme({scheme, tone: 'default'}, config),
-    primary: buildCardColorTheme({scheme, tone: 'primary'}, config),
-    positive: buildCardColorTheme({scheme, tone: 'positive'}, config),
-    caution: buildCardColorTheme({scheme, tone: 'caution'}, config),
-    critical: buildCardColorTheme({scheme, tone: 'critical'}, config),
+  const colorScheme = {} as ThemeColorScheme_v2
+
+  for (const tone of THEME_COLOR_CARD_TONES) {
+    colorScheme[tone] = buildCardColorTheme({scheme, tone}, config)
   }
+
+  return colorScheme
 }
 
 function buildCardColorTheme(
@@ -167,13 +167,13 @@ function buildBadgeColorTheme(
 ): ThemeColorBadge_v2 {
   const {scheme} = options
 
-  return {
-    default: _buildBadgeColorTheme(tokens, {scheme, tone: 'default'}, config),
-    primary: _buildBadgeColorTheme(tokens, {scheme, tone: 'primary'}, config),
-    positive: _buildBadgeColorTheme(tokens, {scheme, tone: 'positive'}, config),
-    caution: _buildBadgeColorTheme(tokens, {scheme, tone: 'caution'}, config),
-    critical: _buildBadgeColorTheme(tokens, {scheme, tone: 'critical'}, config),
+  const colorBadge = {} as ThemeColorBadge_v2
+
+  for (const tone of THEME_COLOR_STATE_TONES) {
+    colorBadge[tone] = _buildBadgeColorTheme(tokens, {scheme, tone}, config)
   }
+
+  return colorBadge
 }
 
 function _buildBadgeColorTheme(
