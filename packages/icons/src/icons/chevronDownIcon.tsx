@@ -21,7 +21,7 @@ export const ChevronDownIcon = forwardRef(function ChevronDownIcon(
       {...props}
     >
       <path
-        d="M17 10.5L12.5 15L8 10.5"
+        d="M16 10.5L12.5 14L9 10.5"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"

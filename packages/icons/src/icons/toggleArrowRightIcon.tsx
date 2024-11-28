@@ -21,7 +21,7 @@ export const ToggleArrowRightIcon = forwardRef(function ToggleArrowRightIcon(
       {...props}
     >
       <path
-        d="M10 16.5V8.5L16 12.5L10 16.5Z"
+        d="M10.5 16V9L16 12.5L10.5 16Z"
         fill="currentColor"
         stroke="currentColor"
         strokeLinejoin="round"

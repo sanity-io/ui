@@ -21,7 +21,13 @@ export const CalendarIcon = forwardRef(function CalendarIcon(
       {...props}
     >
       <path
-        d="M4.5 10.5V19.5H20.5V10.5M4.5 10.5V5.5H20.5V10.5M4.5 10.5H12.5H20.5M20.5 13.5H16.5M16.5 13.5H12.5M16.5 13.5V10.5M16.5 13.5V16.5M12.5 13.5H8.5M12.5 13.5V16.5M12.5 13.5V10.5M8.5 13.5H4.5M8.5 13.5V10.5M8.5 13.5V16.5M20.5 16.5H16.5M16.5 16.5H12.5M16.5 16.5V19.5M12.5 16.5H8.5M12.5 16.5V19.5M8.5 16.5H4.5M8.5 16.5V19.5M17.5 8V3M7.5 8V3"
+        d="M5.5 18.5H19.5V6.5H5.5V18.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16.5 8V4M8.5 8V4M8 12.5H10M8 15.5H10M11.5 12.5H13.5M11.5 15.5H13.5M15 12.5H17M15 15.5H17M12.5 8V4M5.5 9.5H19.5"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"
