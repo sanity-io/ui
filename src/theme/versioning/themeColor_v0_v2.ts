@@ -75,7 +75,21 @@ function stateTonesThemeColor_v0_v2(
       selected: stateThemeColor_v0_v2(v0, t.default.selected),
       disabled: stateThemeColor_v0_v2(v0, t.default.disabled),
     },
+    neutral: {
+      enabled: stateThemeColor_v0_v2(v0, t.default.enabled),
+      hovered: stateThemeColor_v0_v2(v0, t.default.hovered),
+      pressed: stateThemeColor_v0_v2(v0, t.default.pressed),
+      selected: stateThemeColor_v0_v2(v0, t.default.selected),
+      disabled: stateThemeColor_v0_v2(v0, t.default.disabled),
+    },
     primary: {
+      enabled: stateThemeColor_v0_v2(v0, t.primary.enabled),
+      hovered: stateThemeColor_v0_v2(v0, t.primary.hovered),
+      pressed: stateThemeColor_v0_v2(v0, t.primary.pressed),
+      selected: stateThemeColor_v0_v2(v0, t.primary.selected),
+      disabled: stateThemeColor_v0_v2(v0, t.primary.disabled),
+    },
+    suggest: {
       enabled: stateThemeColor_v0_v2(v0, t.primary.enabled),
       hovered: stateThemeColor_v0_v2(v0, t.primary.hovered),
       pressed: stateThemeColor_v0_v2(v0, t.primary.pressed),
@@ -154,7 +168,19 @@ function stateThemeColor_v0_v2(v0: ThemeColor, state: ThemeColorGenericState): T
         dot: v0.muted.default.enabled.muted.fg,
         icon: v0.muted.default.enabled.muted.fg,
       },
+      neutral: {
+        bg: v0.muted.transparent.enabled.bg,
+        fg: v0.muted.transparent.enabled.fg,
+        dot: v0.muted.transparent.enabled.muted.fg,
+        icon: v0.muted.transparent.enabled.muted.fg,
+      },
       primary: {
+        bg: v0.muted.primary.enabled.bg,
+        fg: v0.muted.primary.enabled.fg,
+        dot: v0.muted.primary.enabled.muted.fg,
+        icon: v0.muted.primary.enabled.muted.fg,
+      },
+      suggest: {
         bg: v0.muted.primary.enabled.bg,
         fg: v0.muted.primary.enabled.fg,
         dot: v0.muted.primary.enabled.muted.fg,
