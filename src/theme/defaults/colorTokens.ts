@@ -74,6 +74,7 @@ export const defaultColorTokens: ThemeColorTokens = {
       },
     },
     'primary': {_hue: 'blue'},
+    'suggest': {_hue: 'purple'},
     'positive': {
       _hue: 'green',
       shadow: {outline: ['500/0.4', '500/0.4']},
@@ -133,7 +134,7 @@ export const defaultColorTokens: ThemeColorTokens = {
           },
         },
         'hovered': {
-          bg: ['700', '300'],
+          bg: ['600', '300'],
           border: ['700/0', '300/0'],
         },
         'pressed': {
@@ -260,11 +261,11 @@ export const defaultColorTokens: ThemeColorTokens = {
           fg: ['700', '300'],
         },
         'pressed': {
-          bg: ['100', '900'],
+          bg: ['200', '800'],
           fg: ['800', '200'],
         },
         'selected': {
-          bg: ['100', '900'],
+          bg: ['200', '800'],
           fg: ['800', '200'],
         },
         'disabled': {
@@ -368,7 +369,8 @@ export const defaultColorTokens: ThemeColorTokens = {
         },
         'hovered': {
           bg: ['50', '950'],
-          icon: ['700 70%', '400 70%'],
+          fg: ['800', '200'],
+          icon: ['800 70%', '300 70%'],
         },
         'pressed': {
           bg: ['100', '900'],
