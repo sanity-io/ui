@@ -1,5 +1,6 @@
-import {ThemeColorCardToneKey, ThemeColorSchemeKey, ThemeColorSyntax} from '../../color'
+import {ThemeColorSchemeKey, ThemeColorSyntax} from '../../color'
 import {ThemeColorGenericState} from './_generic'
+import {ThemeColorName} from './_system'
 import {ThemeColorBase} from './base'
 import {ThemeColorButton} from './button'
 import {ThemeColorCard} from './card'
@@ -30,7 +31,7 @@ export interface ThemeColor extends Partial<Omit<ThemeColorGenericState, 'muted'
  * @public
  * @deprecated Use `ThemeColorScheme_v2` instead.
  */
-export type ThemeColorScheme = Record<ThemeColorCardToneKey, ThemeColor>
+export type ThemeColorScheme = Record<ThemeColorName, ThemeColor>
 
 /**
  * @public
