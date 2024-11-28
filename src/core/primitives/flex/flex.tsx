@@ -18,6 +18,8 @@ export interface FlexProps
     ResponsiveFlexProps,
     ResponsiveFlexItemProps {
   gap?: number | number[]
+  gapX?: number | number[]
+  gapY?: number | number[]
 }
 
 const Root = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
@@ -34,7 +36,7 @@ export const Flex = forwardRef(function Flex(
   props: FlexProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
+  const {align, as, direction = 'row', gap, gapX, gapY, justify, wrap, ...restProps} = props
 
   return (
     <Root
@@ -43,6 +45,8 @@ export const Flex = forwardRef(function Flex(
       $align={useArrayProp(align)}
       $direction={useArrayProp(direction)}
       $gap={useArrayProp(gap)}
+      $gapX={useArrayProp(gapX)}
+      $gapY={useArrayProp(gapY)}
       $justify={useArrayProp(justify)}
       $wrap={useArrayProp(wrap)}
       forwardedAs={as}
