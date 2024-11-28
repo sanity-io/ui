@@ -1,6 +1,7 @@
 import {
   ThemeColorAvatarColorKey,
   ThemeColorButtonModeKey,
+  ThemeColorCardToneKey,
   ThemeColorInputModeKey,
   ThemeColorInputStateKey,
   ThemeColorSchemeKey,
@@ -81,7 +82,7 @@ export type BaseColorKey = (typeof BASE_KEYS)[number]
 
 export interface FigmaSanityUIColorVariable {
   scheme: 'light' | 'dark'
-  tone: 'default' | 'transparent' | 'primary' | 'positive' | 'caution' | 'critical'
+  tone: ThemeColorCardToneKey
   key:
     | BaseColorKey
     | `avatar/${ThemeColorAvatarColorKey}/${'bg' | 'fg'}`

@@ -1,4 +1,5 @@
-import {ThemeColorCardToneKey} from '@sanity/ui/theme'
+import {ButtonMode} from '@sanity/ui'
+import {ThemeColorCardToneKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
 
 interface StateWriteConfig {
   accent?: boolean
@@ -17,38 +18,12 @@ export interface WriteConfig {
       ThemeColorCardToneKey,
       StateWriteConfig & {
         button?: StateWriteConfig & {
-          modes?: {
-            default?: {
-              default?: StateWriteConfig
-              primary?: StateWriteConfig
-              positive?: StateWriteConfig
-              caution?: StateWriteConfig
-              critical?: StateWriteConfig
-            }
-            ghost?: {
-              default?: StateWriteConfig
-              primary?: StateWriteConfig
-              positive?: StateWriteConfig
-              caution?: StateWriteConfig
-              critical?: StateWriteConfig
-            }
-            bleed?: {
-              default?: StateWriteConfig
-              primary?: StateWriteConfig
-              positive?: StateWriteConfig
-              caution?: StateWriteConfig
-              critical?: StateWriteConfig
-            }
-          }
+          modes?: Partial<
+            Record<ButtonMode, Partial<Record<ThemeColorStateToneKey, StateWriteConfig>>>
+          >
         }
         input?: boolean
-        selectable?: {
-          default?: StateWriteConfig
-          primary?: StateWriteConfig
-          positive?: StateWriteConfig
-          caution?: StateWriteConfig
-          critical?: StateWriteConfig
-        }
+        selectable?: Partial<Record<ThemeColorStateToneKey, StateWriteConfig>>
       }
     >
   >
@@ -65,21 +40,27 @@ export const config: WriteConfig = {
         modes: {
           default: {
             default: {},
+            neutral: {},
             primary: {},
+            potential: {},
             positive: {},
             caution: {},
             critical: {},
           },
           ghost: {
             default: {},
+            neutral: {},
             primary: {},
+            potential: {},
             positive: {},
             caution: {},
             critical: {},
           },
           bleed: {
             default: {},
+            neutral: {},
             primary: {},
+            potential: {},
             positive: {},
             caution: {},
             critical: {},
@@ -92,7 +73,9 @@ export const config: WriteConfig = {
       link: true,
       selectable: {
         default: {avatar: true, badge: true, kbd: true},
+        neutral: {avatar: true, badge: true, kbd: true},
         primary: {avatar: true, badge: true, kbd: true},
+        potential: {avatar: true, badge: true, kbd: true},
         positive: {avatar: true, badge: true, kbd: true},
         caution: {avatar: true, badge: true, kbd: true},
         critical: {avatar: true, badge: true, kbd: true},
@@ -100,7 +83,9 @@ export const config: WriteConfig = {
       skeleton: true,
     },
     transparent: {},
+    neutral: {},
     primary: {},
+    potential: {},
     positive: {},
     caution: {},
     critical: {},
