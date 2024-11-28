@@ -1,23 +1,21 @@
 import {Card, Container, Flex, Stack, Text} from '@sanity/ui'
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
 
 export default function AllTonesStory() {
-  const tones = Object.entries(WORKSHOP_CARD_TONE_OPTIONS)
-
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={0}>
-        <Stack space={5}>
-          {tones.map(([title, tone]) => (
+        <Stack space={3}>
+          {THEME_COLOR_CARD_TONES.map((tone) => (
             <Card
               key={tone}
-              padding={4}
+              padding={3}
               radius={2}
-              shadow={4}
+              shadow={2}
               style={{textAlign: 'center'}}
               tone={tone}
             >
-              <Text>{title}</Text>
+              <Text size={1}>{tone}</Text>
             </Card>
           ))}
         </Stack>

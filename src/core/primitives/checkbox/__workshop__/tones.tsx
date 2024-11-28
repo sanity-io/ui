@@ -4,7 +4,13 @@ export default function MultipleTonesStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Stack>
+        <Card padding={3} tone="neutral">
+          <Checkbox />
+        </Card>
         <Card padding={3} tone="primary">
+          <Checkbox />
+        </Card>
+        <Card padding={3} tone="suggest">
           <Checkbox />
         </Card>
         <Card padding={3} tone="positive">

@@ -2,8 +2,8 @@ import {Flex, Radio} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
 
 export default function PlainStory() {
-  const checked = useBoolean('Checked?', false, 'Props')
-  const disabled = useBoolean('Disabled?', false, 'Props')
+  const checked = useBoolean('Checked', false, 'Props')
+  const disabled = useBoolean('Disabled', false, 'Props')
   const id = 'radioStory'
   const name = 'radioStory'
   const onBlur = useAction('onBlur')

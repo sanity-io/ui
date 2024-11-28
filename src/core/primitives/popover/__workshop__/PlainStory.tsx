@@ -48,7 +48,7 @@ export default function PlainStory() {
               arrow={arrow}
               boundaryElement={boundaryElementFlag ? boundaryElement : undefined}
               constrainSize={constrainSize}
-              content={<Text>popover content</Text>}
+              content={<Text size={1}>popover content</Text>}
               fallbackPlacements={['top', 'bottom']}
               matchReferenceWidth={matchReferenceWidth}
               open={open}

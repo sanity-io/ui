@@ -18,15 +18,15 @@ export default function ExampleStory() {
   return (
     <Flex direction={direction} height="fill" style={{width: '100%'}}>
       <DebugCard flex={1}>
-        <Code>1</Code>
+        <Code size={1}>1</Code>
       </DebugCard>
 
       <DebugCard flex={[1, 2, 3]}>
-        <Code>[1,2,3]</Code>
+        <Code size={1}>[1,2,3]</Code>
       </DebugCard>
 
       <DebugCard flex={['none', 'none', 1]}>
-        <Code>['none', 'none', 1]</Code>
+        <Code size={1}>['none', 'none', 1]</Code>
       </DebugCard>
     </Flex>
   )

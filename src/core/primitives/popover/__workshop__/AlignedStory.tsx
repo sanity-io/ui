@@ -24,7 +24,7 @@ export default function AlignedStory() {
   const popoverElementRef = useRef<HTMLDivElement | null>(null)
 
   const content = (
-    <Text>
+    <Text size={1}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
       hendrerit scelerisque ut libero. Maecenas iaculis efficitur lorem, ac faucibus mi imperdiet
       quis. Cras a consectetur erat. Fusce imperdiet, dolor et pellentesque iaculis, ex quam luctus

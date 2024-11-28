@@ -9,7 +9,7 @@ export default function ReadOnlyStory() {
             Select
           </Label>
 
-          <Select id="select-example" radius={3} readOnly>
+          <Select id="select-example" readOnly>
             <option value="a">Option A</option>
             <option value="b">Option B</option>
             <option value="c">Option C</option>

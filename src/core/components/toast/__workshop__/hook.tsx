@@ -24,7 +24,7 @@ export default function HookStory() {
               })
             }
             text="Push info"
-            tone="primary"
+            tone="neutral"
           />
 
           <Button

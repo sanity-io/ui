@@ -14,11 +14,11 @@ import {
   TextAlign,
   TextInputType,
 } from '@sanity/ui'
-import {ThemeColorSpotKey, ThemeColorToneKey, ThemeFontWeightKey} from '@sanity/ui/theme'
+import {ThemeColorAvatarColorKey, ThemeFontWeightKey} from '@sanity/ui/theme'
 
 export const WORKSHOP_AVATAR_SIZE_OPTIONS: {[key: string]: AvatarSize} = {
   '0': 0,
-  '1 (default)': 1,
+  '1': 1,
   '2': 2,
   '3': 3,
 }
@@ -31,6 +31,7 @@ export const WORKSHOP_BADGE_MODE_OPTIONS: {[key: string]: BadgeMode} = {
 export const WORKSHOP_BADGE_TONE_OPTIONS: {[key: string]: BadgeTone} = {
   Default: 'default',
   Primary: 'primary',
+  Suggest: 'suggest',
   Positive: 'positive',
   Caution: 'caution',
   Critical: 'critical',
@@ -51,7 +52,9 @@ export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS: {[key: string]: ButtonTextAlign
 
 export const WORKSHOP_BUTTON_TONE_OPTIONS: {[key: string]: ButtonTone} = {
   Default: 'default',
+  Neutral: 'neutral',
   Primary: 'primary',
+  Suggest: 'suggest',
   Positive: 'positive',
   Caution: 'caution',
   Critical: 'critical',
@@ -60,22 +63,24 @@ export const WORKSHOP_BUTTON_TONE_OPTIONS: {[key: string]: ButtonTone} = {
 export const WORKSHOP_CARD_AS_OPTIONS: {
   [key: string]: 'div' | 'button' | 'span' | 'ol' | 'pre' | 'ul'
 } = {
-  'DIV (default)': 'div',
-  'BUTTON': 'button',
-  'SPAN': 'span',
-  'OL': 'ol',
-  'PRE': 'pre',
-  'UL': 'ul',
+  DIV: 'div',
+  BUTTON: 'button',
+  SPAN: 'span',
+  OL: 'ol',
+  PRE: 'pre',
+  UL: 'ul',
 }
 
 export const WORKSHOP_CARD_TONE_OPTIONS: {[key: string]: CardTone} = {
-  Default: 'default',
-  Inherit: 'inherit',
-  Transparent: 'transparent',
-  Primary: 'primary',
-  Positive: 'positive',
-  Caution: 'caution',
-  Critical: 'critical',
+  'Inherit': 'inherit',
+  'Transparent': 'transparent',
+  'Default': 'default',
+  'Neutral': 'neutral',
+  'Primary (deprecated)': 'primary',
+  'Suggest': 'suggest',
+  'Positive': 'positive',
+  'Caution': 'caution',
+  'Critical': 'critical',
 }
 
 export const WORKSHOP_CODE_LANGUAGE_OPTIONS = {
@@ -132,7 +137,7 @@ export const WORKSHOP_FONT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey} =
 export const WORKSHOP_HEADING_FONT_SIZE_OPTIONS = {
   '0': 0,
   '1': 1,
-  '2 (default)': 2,
+  '2': 2,
   '3': 3,
   '4': 4,
 }
@@ -203,7 +208,7 @@ export const WORKSHOP_SPACE_OPTIONS = {
   '9': 9,
 }
 
-export const WORKSHOP_SPOT_COLOR_OPTIONS: {[key: string]: ThemeColorSpotKey} = {
+export const WORKSHOP_SPOT_COLOR_OPTIONS: {[key: string]: ThemeColorAvatarColorKey} = {
   Gray: 'gray',
   Blue: 'blue',
   Purple: 'purple',
@@ -254,25 +259,16 @@ export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | ''} = 
 export const WORKSHOP_TEXT_SIZE_OPTIONS = {
   '0': 0,
   '1': 1,
-  '2 (default)': 2,
+  '2': 2,
   '3': 3,
   '4': 4,
 }
 
 export const WORKSHOP_TEXT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey | ''} = {
-  'Regular (default)': '',
-  'Medium': 'medium',
-  'Semibold': 'semibold',
-  'Bold': 'bold',
-}
-
-export const WORKSHOP_THEME_COLOR_TONE_OPTIONS: {[key: string]: ThemeColorToneKey} = {
-  Default: 'default',
-  Transparent: 'transparent',
-  Primary: 'primary',
-  Positive: 'positive',
-  Caution: 'caution',
-  Critical: 'critical',
+  Regular: '',
+  Medium: 'medium',
+  Semibold: 'semibold',
+  Bold: 'bold',
 }
 
 export const WORKSHOP_TOAST_STATUS_OPTIONS: {

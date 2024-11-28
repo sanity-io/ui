@@ -349,10 +349,20 @@ function getStateVars(state: ThemeColorState_v2) {
     '--card-badge-default-fg-color': state.badge.default.fg,
     '--card-badge-default-icon-color': state.badge.default.icon,
 
+    '--card-badge-neutral-bg-color': state.badge.neutral.bg,
+    '--card-badge-neutral-dot-color': state.badge.neutral.dot,
+    '--card-badge-neutral-fg-color': state.badge.neutral.fg,
+    '--card-badge-neutral-icon-color': state.badge.neutral.icon,
+
     '--card-badge-primary-bg-color': state.badge.primary.bg,
     '--card-badge-primary-dot-color': state.badge.primary.dot,
     '--card-badge-primary-fg-color': state.badge.primary.fg,
     '--card-badge-primary-icon-color': state.badge.primary.icon,
+
+    '--card-badge-suggest-bg-color': state.badge.suggest.bg,
+    '--card-badge-suggest-dot-color': state.badge.suggest.dot,
+    '--card-badge-suggest-fg-color': state.badge.suggest.fg,
+    '--card-badge-suggest-icon-color': state.badge.suggest.icon,
 
     '--card-badge-positive-bg-color': state.badge.positive.bg,
     '--card-badge-positive-dot-color': state.badge.positive.dot,
