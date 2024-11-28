@@ -33,6 +33,7 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   muted?: boolean
   text?: React.ReactNode
   textOverflow?: TextProps['textOverflow']
+  textWeight?: TextProps['weight']
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
   width?: ButtonWidth
@@ -87,6 +88,7 @@ export const Button = forwardRef(function Button(
     text,
     textAlign,
     textOverflow = 'ellipsis',
+    textWeight,
     tone = 'default',
     type = 'button',
     muted = false,
@@ -157,7 +159,7 @@ export const Button = forwardRef(function Button(
                   align={textAlign}
                   size={fontSize}
                   textOverflow={textOverflow}
-                  weight={button.textWeight}
+                  weight={textWeight ?? button.textWeight}
                 >
                   {text}
                 </Text>
