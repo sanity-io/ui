@@ -29,8 +29,8 @@ export function buttonBaseStyles(
     border: 0;
     box-sizing: border-box;
     padding: 0;
+    overflow: hidden;
     margin: 0;
-    white-space: nowrap;
     text-align: left;
     position: relative;
     vertical-align: top;

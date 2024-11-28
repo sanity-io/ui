@@ -108,9 +108,8 @@ export const Button = forwardRef(function Button(
   const radius = useArrayProp(radiusProp)
   const space = useArrayProp(spaceProp)
 
-  const boxProps = useMemo(
+  const paddingProps = useMemo(
     () => ({
-      // flex: 1,
       padding,
       paddingX,
       paddingY,
@@ -143,45 +142,49 @@ export const Button = forwardRef(function Button(
       )}
 
       {(IconComponent || text || IconRightComponent) && (
-        <Box as="span" {...boxProps}>
-          <Flex as="span" justify={justify} gap={space}>
-            {IconComponent && (
-              <Text size={fontSize}>
+        <Flex {...paddingProps} as="span" justify={justify} gap={space}>
+          {IconComponent && (
+            <Box as="span" flex="none">
+              <Text as="span" size={fontSize}>
                 {isValidElement(IconComponent) && IconComponent}
                 {isValidElementType(IconComponent) && <IconComponent />}
               </Text>
-            )}
+            </Box>
+          )}
 
-            {text && (
-              <Box>
-                <Text
-                  muted={muted}
-                  align={textAlign}
-                  size={fontSize}
-                  textOverflow={textOverflow}
-                  weight={textWeight ?? button.textWeight}
-                >
-                  {text}
-                </Text>
-              </Box>
-            )}
+          {text && (
+            <Box as="span">
+              <Text
+                as="span"
+                muted={muted}
+                align={textAlign}
+                size={fontSize}
+                textOverflow={textOverflow}
+                weight={textWeight ?? button.textWeight}
+              >
+                {text}
+              </Text>
+            </Box>
+          )}
 
-            {IconRightComponent && (
-              <Text size={fontSize}>
+          {IconRightComponent && (
+            <Box as="span" flex="none">
+              <Text as="span" size={fontSize}>
                 {isValidElement(IconRightComponent) && IconRightComponent}
                 {isValidElementType(IconRightComponent) && <IconRightComponent />}
               </Text>
-            )}
-          </Flex>
-        </Box>
+            </Box>
+          )}
+        </Flex>
       )}
 
       {children && (
-        <Box as="span" {...boxProps}>
+        <Box as="span" {...paddingProps}>
           {children}
         </Box>
       )}
     </Root>
   )
 })
+
 Button.displayName = 'ForwardRef(Button)'
