@@ -77,7 +77,7 @@ function buildCardColorTheme(
     badge: buildBadgeColorTheme(tokens?.badge, {scheme}, config),
     bg: _color(context, tokens?.bg),
     border: _color(context, tokens?.border),
-    button: buildButtonColorTheme({scheme}, config),
+    button: buildButtonColorTheme({scheme, tone}, config),
     code: {
       bg: _color(context, tokens?.code?.bg),
       fg: _color(context, tokens?.code?.fg),
@@ -98,7 +98,7 @@ function buildCardColorTheme(
       bg: _color(context, tokens?.muted?.bg),
       fg: _color(context, tokens?.muted?.fg),
     },
-    selectable: buildSelectableColorTheme({scheme}, config),
+    selectable: buildSelectableColorTheme({scheme, tone}, config),
     shadow: buildShadowColorTheme({scheme, tone}, config),
     skeleton: {
       from: _color(context, tokens?.skeleton?.from),
@@ -195,15 +195,15 @@ function _buildBadgeColorTheme(
 }
 
 function buildButtonColorTheme(
-  options: {scheme: ThemeColorSchemeKey},
+  options: {scheme: ThemeColorSchemeKey; tone: ThemeColorCardToneKey},
   config?: ThemeConfig,
 ): ThemeColorButton_v2 {
-  const {scheme} = options
+  const {scheme, tone: cardTone} = options
 
   const modes: Partial<ThemeColorButton_v2> = {}
 
   for (const mode of THEME_COLOR_BUTTON_MODES) {
-    modes[mode] = buildButtonTonesColorTheme({scheme, mode}, config)
+    modes[mode] = buildButtonTonesColorTheme({cardTone, scheme, mode}, config)
   }
 
   return modes as ThemeColorButton_v2
@@ -211,17 +211,18 @@ function buildButtonColorTheme(
 
 function buildButtonTonesColorTheme(
   options: {
+    cardTone: ThemeColorCardToneKey
     scheme: ThemeColorSchemeKey
     mode: ThemeColorButtonModeKey
   },
   config?: ThemeConfig,
 ): ThemeColorButtonMode_v2 {
-  const {mode, scheme} = options
+  const {cardTone, mode, scheme} = options
 
   const tones: Partial<ThemeColorButtonMode_v2> = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
-    tones[tone] = buildButtonStatesColorTheme({mode, scheme, tone}, config)
+    tones[tone] = buildButtonStatesColorTheme({cardTone, mode, scheme, tone}, config)
   }
 
   return tones as ThemeColorButtonMode_v2
@@ -229,18 +230,19 @@ function buildButtonTonesColorTheme(
 
 function buildButtonStatesColorTheme(
   options: {
+    cardTone: ThemeColorCardToneKey
     mode: ThemeColorButtonModeKey
     scheme: ThemeColorSchemeKey
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
 ): ThemeColorButtonTone_v2 {
-  const {mode, scheme, tone} = options
+  const {cardTone, mode, scheme, tone} = options
 
   const states: Partial<ThemeColorButtonTone_v2> = {}
 
   for (const state of THEME_COLOR_STATES) {
-    states[state] = buildButtonStateColorTheme({mode, tone, scheme, state}, config)
+    states[state] = buildButtonStateColorTheme({cardTone, mode, tone, scheme, state}, config)
   }
 
   return states as ThemeColorButtonTone_v2
@@ -248,6 +250,7 @@ function buildButtonStatesColorTheme(
 
 function buildButtonStateColorTheme(
   options: {
+    cardTone: ThemeColorCardToneKey
     mode: ThemeColorButtonModeKey
     tone: ThemeColorStateToneKey
     scheme: ThemeColorSchemeKey
@@ -255,9 +258,10 @@ function buildButtonStateColorTheme(
   },
   config?: ThemeConfig,
 ): ThemeColorState_v2 {
-  const {mode, tone, scheme, state} = options
+  const {cardTone, mode, tone, scheme, state} = options
+  const cardTokens = config?.color?.base?.[cardTone]
   const tokens = config?.color?.button?.[mode]?.[tone]?.[state]
-  const hue = tokens?._hue || 'gray'
+  const hue = tokens?._hue || cardTokens?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 
@@ -318,25 +322,26 @@ function buildInputStatesColorTheme(
   const {mode, scheme, tone} = options
 
   return {
-    enabled: buildInputStateColorTheme({mode, scheme, state: 'enabled', tone}, config),
-    hovered: buildInputStateColorTheme({mode, scheme, state: 'hovered', tone}, config),
-    readOnly: buildInputStateColorTheme({mode, scheme, state: 'readOnly', tone}, config),
-    disabled: buildInputStateColorTheme({mode, scheme, state: 'disabled', tone}, config),
+    enabled: buildInputStateColorTheme({mode, scheme, state: 'enabled', cardTone: tone}, config),
+    hovered: buildInputStateColorTheme({mode, scheme, state: 'hovered', cardTone: tone}, config),
+    readOnly: buildInputStateColorTheme({mode, scheme, state: 'readOnly', cardTone: tone}, config),
+    disabled: buildInputStateColorTheme({mode, scheme, state: 'disabled', cardTone: tone}, config),
   }
 }
 
 function buildInputStateColorTheme(
   options: {
+    cardTone: ThemeColorCardToneKey
     mode: 'default' | 'invalid'
     scheme: ThemeColorSchemeKey
     state: 'enabled' | 'hovered' | 'readOnly' | 'disabled'
-    tone: ThemeColorCardToneKey
   },
   config?: ThemeConfig,
 ): ThemeColorInputState_v2 {
-  const {mode, tone, scheme, state} = options
+  const {cardTone, mode, scheme, state} = options
+  const cardTokens = config?.color?.base?.[cardTone]
   const tokens = config?.color?.input?.[mode]?.[state]
-  const hue = tokens?._hue || config?.color?.base?.[tone]?._hue || 'gray'
+  const hue = tokens?._hue || cardTokens?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 
@@ -355,15 +360,16 @@ function buildInputStateColorTheme(
 function buildSelectableColorTheme(
   options: {
     scheme: ThemeColorSchemeKey
+    tone: ThemeColorCardToneKey
   },
   config?: ThemeConfig,
 ): ThemeColorButtonMode_v2 {
-  const {scheme} = options
+  const {scheme, tone: cardTone} = options
 
   const tones: Partial<ThemeColorButtonMode_v2> = {}
 
   for (const tone of THEME_COLOR_STATE_TONES) {
-    tones[tone] = buildSelectableStatesColorTheme({scheme, tone}, config)
+    tones[tone] = buildSelectableStatesColorTheme({cardTone, scheme, tone}, config)
   }
 
   return tones as ThemeColorButtonMode_v2
@@ -371,17 +377,18 @@ function buildSelectableColorTheme(
 
 function buildSelectableStatesColorTheme(
   options: {
+    cardTone: ThemeColorCardToneKey
     scheme: ThemeColorSchemeKey
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
 ): ThemeColorButtonTone_v2 {
-  const {scheme, tone} = options
+  const {cardTone, scheme, tone} = options
 
   const states: Partial<ThemeColorButtonTone_v2> = {}
 
   for (const state of THEME_COLOR_STATES) {
-    states[state] = buildSelectableStateColorTheme({tone, scheme, state}, config)
+    states[state] = buildSelectableStateColorTheme({cardTone, tone, scheme, state}, config)
   }
 
   return states as ThemeColorButtonTone_v2
@@ -389,15 +396,18 @@ function buildSelectableStatesColorTheme(
 
 function buildSelectableStateColorTheme(
   options: {
+    cardTone: ThemeColorCardToneKey
     scheme: ThemeColorSchemeKey
     state: ThemeColorStateKey
     tone: ThemeColorStateToneKey
   },
   config?: ThemeConfig,
 ): ThemeColorState_v2 {
-  const {scheme, state, tone} = options
+  const {cardTone, scheme, state, tone} = options
+  const cardTokens = config?.color?.base?.[cardTone]
   const tokens = config?.color?.selectable?.[tone]?.[state]
-  const hue = tokens?._hue || 'gray'
+
+  const hue = tokens?._hue || cardTokens?._hue || 'gray'
   const blendMode = tokens?._blend || ['screen', 'multiply']
   const context: ColorTokenContext = {hue, scheme}
 
