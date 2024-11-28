@@ -41,7 +41,7 @@ export default function PropsStory() {
           <Text>
             Text with <a>link</a>.
           </Text>
-          <Text accent>Accented text.</Text>
+          <Text accent>Accent text.</Text>
         </Stack>
       </Card>
     </Flex>

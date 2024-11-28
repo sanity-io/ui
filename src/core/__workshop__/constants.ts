@@ -18,7 +18,7 @@ import {ThemeColorSpotKey, ThemeColorToneKey, ThemeFontWeightKey} from '@sanity/
 
 export const WORKSHOP_AVATAR_SIZE_OPTIONS: {[key: string]: AvatarSize} = {
   '0': 0,
-  '1 (default)': 1,
+  '1': 1,
   '2': 2,
   '3': 3,
 }
@@ -51,7 +51,9 @@ export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS: {[key: string]: ButtonTextAlign
 
 export const WORKSHOP_BUTTON_TONE_OPTIONS: {[key: string]: ButtonTone} = {
   Default: 'default',
+  Neutral: 'neutral',
   Primary: 'primary',
+  Potential: 'potential',
   Positive: 'positive',
   Caution: 'caution',
   Critical: 'critical',
@@ -60,12 +62,12 @@ export const WORKSHOP_BUTTON_TONE_OPTIONS: {[key: string]: ButtonTone} = {
 export const WORKSHOP_CARD_AS_OPTIONS: {
   [key: string]: 'div' | 'button' | 'span' | 'ol' | 'pre' | 'ul'
 } = {
-  'DIV (default)': 'div',
-  'BUTTON': 'button',
-  'SPAN': 'span',
-  'OL': 'ol',
-  'PRE': 'pre',
-  'UL': 'ul',
+  DIV: 'div',
+  BUTTON: 'button',
+  SPAN: 'span',
+  OL: 'ol',
+  PRE: 'pre',
+  UL: 'ul',
 }
 
 export const WORKSHOP_CARD_TONE_OPTIONS: {[key: string]: CardTone} = {
@@ -134,7 +136,7 @@ export const WORKSHOP_FONT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey} =
 export const WORKSHOP_HEADING_FONT_SIZE_OPTIONS = {
   '0': 0,
   '1': 1,
-  '2 (default)': 2,
+  '2': 2,
   '3': 3,
   '4': 4,
 }
@@ -248,24 +250,24 @@ export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS: {[key: string]: TextInputType} = 
   'color': 'color',
 }
 
-export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | ''} = {
-  None: '',
+export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | 'none'} = {
+  None: 'none',
   Ellipsis: 'ellipsis',
 }
 
 export const WORKSHOP_TEXT_SIZE_OPTIONS = {
   '0': 0,
   '1': 1,
-  '2 (default)': 2,
+  '2': 2,
   '3': 3,
   '4': 4,
 }
 
 export const WORKSHOP_TEXT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey | ''} = {
-  'Regular (default)': '',
-  'Medium': 'medium',
-  'Semibold': 'semibold',
-  'Bold': 'bold',
+  Regular: 'regular',
+  Medium: 'medium',
+  Semibold: 'semibold',
+  Bold: 'bold',
 }
 
 export const WORKSHOP_THEME_COLOR_TONE_OPTIONS: {[key: string]: ThemeColorToneKey} = {
