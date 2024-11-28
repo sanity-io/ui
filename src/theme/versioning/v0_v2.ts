@@ -44,7 +44,9 @@ export function v0_v2(v0: RootTheme): RootTheme_v2 {
       light: {
         transparent: themeColor_v0_v2(color.light.transparent),
         default: themeColor_v0_v2(color.light.default),
+        neutral: themeColor_v0_v2(color.light.transparent),
         primary: themeColor_v0_v2(color.light.primary),
+        potential: themeColor_v0_v2(color.light.primary),
         positive: themeColor_v0_v2(color.light.positive),
         caution: themeColor_v0_v2(color.light.caution),
         critical: themeColor_v0_v2(color.light.critical),
@@ -52,7 +54,9 @@ export function v0_v2(v0: RootTheme): RootTheme_v2 {
       dark: {
         transparent: themeColor_v0_v2(color.dark.transparent),
         default: themeColor_v0_v2(color.dark.default),
+        neutral: themeColor_v0_v2(color.dark.transparent),
         primary: themeColor_v0_v2(color.dark.primary),
+        potential: themeColor_v0_v2(color.dark.primary),
         positive: themeColor_v0_v2(color.dark.positive),
         caution: themeColor_v0_v2(color.dark.caution),
         critical: themeColor_v0_v2(color.dark.critical),
