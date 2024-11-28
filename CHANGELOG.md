@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.26](https://github.com/sanity-io/ui/compare/v2.8.25...v2.8.26) (2024-11-28)
+
+### Bug Fixes
+
+- **popover:** render the child when a reference element is provided ([2c1bf33](https://github.com/sanity-io/ui/commit/2c1bf33751cfec782b20da6c5c3f51d166ebea0e))
+
 ## [2.8.25](https://github.com/sanity-io/ui/compare/v2.8.24...v2.8.25) (2024-11-25)
 
 ### Bug Fixes
