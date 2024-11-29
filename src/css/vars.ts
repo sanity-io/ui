@@ -20,6 +20,8 @@ import {
   ThemeColorStateToneKey,
 } from '@sanity/ui/theme'
 import {
+  ColorBadgeToneVars,
+  ColorBadgeVars,
   ColorStateVars,
   FontSizeVars,
   type ColorAvatarVars,
@@ -333,19 +335,27 @@ function buildColorCardVars(props: {
       }, {} as ColorAvatarVars),
     },
     backdrop: `var(${prefix}-backdrop)`,
-    // badge: {
-    //   ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
-    //     return {
-    //       ...acc,
-    //       [tone]: {
-    //         bg: `var(${prefix}-badge-${tone}-bg)`,
-    //         dot: `var(${prefix}-badge-${tone}-dot)`,
-    //         fg: `var(${prefix}-badge-${tone}-fg)`,
-    //         icon: `var(${prefix}-badge-${tone}-icon)`,
-    //       },
-    //     }
-    //   }, {} as ColorBadgeVars),
-    // },
+    badge: {
+      ...THEME_COLOR_STATE_TONES.reduce(
+        (acc, tone) => {
+          return {
+            ...acc,
+            [tone]: {
+              bg: `var(${prefix}-badge-${tone}-bg)`,
+              dot: `var(${prefix}-badge-${tone}-dot)`,
+              fg: `var(${prefix}-badge-${tone}-fg)`,
+              icon: `var(${prefix}-badge-${tone}-icon)`,
+            },
+          }
+        },
+        {
+          bg: `var(${prefix}-badge-bg)`,
+          dot: `var(${prefix}-badge-dot)`,
+          fg: `var(${prefix}-badge-fg)`,
+          icon: `var(${prefix}-badge-icon)`,
+        } as {} as ColorBadgeVars & ColorBadgeToneVars,
+      ),
+    },
     // bg: `var(${prefix}-bg)`,
     bg: {
       1: `var(${prefix}-bg-1)`,

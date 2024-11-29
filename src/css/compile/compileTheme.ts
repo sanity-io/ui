@@ -442,7 +442,7 @@ function compileCardCss(props: {scheme: Scheme; tone: CardTone}) {
       }
     }, {} as Properties),
 
-    '--color-bg': cardVars.bg,
+    '--color-bg': cardVars.bg[1],
     '--color-border': cardVars.border,
     // todo: button
     '--color-code-bg': cardVars.code.bg,

@@ -1,5 +1,6 @@
 import {defaultThemeConfig} from './defaults/config'
 import {RootTheme, Theme} from './types'
+import {ThemeColor} from './v0'
 import {RootTheme_v2, ThemeColorCardToneKey, ThemeColorSchemeKey} from './v2'
 import {is_v2, v0_v2, v2_v0} from './versioning'
 

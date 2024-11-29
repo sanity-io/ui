@@ -18,7 +18,9 @@ export const varNames: VarNames = {
     dark: {
       transparent: buildColorCardVarNames({scheme: 'dark', tone: 'transparent'}),
       default: buildColorCardVarNames({scheme: 'dark', tone: 'default'}),
+      neutral: buildColorCardVarNames({scheme: 'dark', tone: 'neutral'}),
       primary: buildColorCardVarNames({scheme: 'dark', tone: 'primary'}),
+      suggest: buildColorCardVarNames({scheme: 'dark', tone: 'neutral'}),
       positive: buildColorCardVarNames({scheme: 'dark', tone: 'positive'}),
       caution: buildColorCardVarNames({scheme: 'dark', tone: 'caution'}),
       critical: buildColorCardVarNames({scheme: 'dark', tone: 'critical'}),
@@ -26,7 +28,9 @@ export const varNames: VarNames = {
     light: {
       transparent: buildColorCardVarNames({scheme: 'light', tone: 'transparent'}),
       default: buildColorCardVarNames({scheme: 'light', tone: 'default'}),
+      neutral: buildColorCardVarNames({scheme: 'light', tone: 'neutral'}),
       primary: buildColorCardVarNames({scheme: 'light', tone: 'primary'}),
+      suggest: buildColorCardVarNames({scheme: 'light', tone: 'suggest'}),
       positive: buildColorCardVarNames({scheme: 'light', tone: 'positive'}),
       caution: buildColorCardVarNames({scheme: 'light', tone: 'caution'}),
       critical: buildColorCardVarNames({scheme: 'light', tone: 'critical'}),
@@ -85,11 +89,23 @@ export const varNames: VarNames = {
         fg: `--color-badge-default-fg`,
         icon: `--color-badge-default-icon`,
       },
+      neutral: {
+        bg: `--color-badge-neutral-bg`,
+        dot: `--color-badge-neutral-dot`,
+        fg: `--color-badge-neutral-fg`,
+        icon: `--color-badge-neutral-icon`,
+      },
       primary: {
         bg: `--color-badge-primary-bg`,
         dot: `--color-badge-primary-dot`,
         fg: `--color-badge-primary-fg`,
         icon: `--color-badge-primary-icon`,
+      },
+      suggest: {
+        bg: `--color-badge-suggest-bg`,
+        dot: `--color-badge-suggest-dot`,
+        fg: `--color-badge-suggest-fg`,
+        icon: `--color-badge-suggest-icon`,
       },
       positive: {
         bg: `--color-badge-positive-bg`,
@@ -254,11 +270,23 @@ function buildColorCardVarNames(props: {
         fg: `${prefix}-badge-default-fg`,
         icon: `${prefix}-badge-default-icon`,
       },
+      neutral: {
+        bg: `${prefix}-badge-neutral-bg`,
+        dot: `${prefix}-badge-neutral-dot`,
+        fg: `${prefix}-badge-neutral-fg`,
+        icon: `${prefix}-badge-neutral-icon`,
+      },
       primary: {
         bg: `${prefix}-badge-primary-bg`,
         dot: `${prefix}-badge-primary-dot`,
         fg: `${prefix}-badge-primary-fg`,
         icon: `${prefix}-badge-primary-icon`,
+      },
+      suggest: {
+        bg: `${prefix}-badge-suggest-bg`,
+        dot: `${prefix}-badge-suggest-dot`,
+        fg: `${prefix}-badge-suggest-fg`,
+        icon: `${prefix}-badge-suggest-icon`,
       },
       positive: {
         bg: `${prefix}-badge-positive-bg`,

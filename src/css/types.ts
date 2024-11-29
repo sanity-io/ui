@@ -506,6 +506,7 @@ export interface ColorInputStateVars {
 
 export interface ColorCardVars extends ColorStateVars {
   backdrop: CSSVar
+  badge: ColorBadgeVars & ColorBadgeToneVars
   focusRing: CSSVar
   input: Record<ThemeColorInputModeKey, Record<ThemeColorInputStateKey, ColorInputStateVars>>
 }
@@ -624,7 +625,7 @@ export interface ColorAvatarColorVars {
   fg: CSSVar
 }
 
-export type ColorSchemeVars = Record<ThemeColorCardToneKey, ColorCardVars>
+export interface ColorSchemeVars extends Record<ThemeColorCardToneKey, ColorCardVars> {}
 
 // export interface ScopedColorVars extends Omit<ColorStateVars, 'badge'> {
 //   badge: ColorBadgeVars & ColorBadgeToneVars

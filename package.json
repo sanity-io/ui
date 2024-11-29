@@ -27,33 +27,53 @@
       "require": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./css": {
+      "source": "./exports/css.ts",
+      "import": "./dist/css.mjs",
+      "require": "./dist/css.js",
+      "default": "./dist/css.js"
+    },
+    "./package.json": "./package.json",
     "./theme": {
       "source": "./exports/theme.ts",
       "import": "./dist/theme.mjs",
       "require": "./dist/theme.js",
       "default": "./dist/theme.js"
     },
-    "./package.json": "./package.json"
+    "./sanity-theme.css": {
+      "default": "./dist/sanity-theme.css"
+    },
+    "./system.css": {
+      "default": "./dist/system.css"
+    }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
+      "css": [
+        "./dist/css.d.ts"
+      ],
       "theme": [
         "./dist/theme.d.ts"
       ]
     }
   },
+  "bin": {
+    "ui": "./bin/ui.js"
+  },
   "files": [
+    "css.js",
     "dist",
     "exports",
     "src",
     "theme.js"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build pkg:check figma:pkg:build",
-    "clean": "rimraf .workshop dist",
+    "bin:build": "./bin/ui.js build",
+    "build": "run-s clean pkg:build bin:build pkg:check figma:pkg:build",
+    "clean": "rimraf .workshop css.js dist theme.js",
     "commit": "cz",
     "cypress:dev": "run-p dev cypress:open",
     "cypress:open": "cypress open",
@@ -155,6 +175,7 @@
     "@typescript-eslint/parser": "^7.18.0",
     "@vitejs/plugin-react": "^4.3.3",
     "babel-plugin-react-compiler": "19.0.0-beta-df7b47d-20241124",
+    "cac": "^6.7.14",
     "commitizen": "^4.3.0",
     "cypress": "^13.13.2",
     "cypress-real-events": "^1.13.0",
