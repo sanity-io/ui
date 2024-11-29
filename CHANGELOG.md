@@ -5,6 +5,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.0](https://github.com/sanity-io/ui/compare/v2.8.26...v2.9.0) (2024-11-29)
+
+### Features
+
+- support `neutral` and `suggest` tones ([18c08b8](https://github.com/sanity-io/ui/commit/18c08b88499db41302b596fab2853f13cc7d2905))
+- **theme:** add new tones ([fabe61c](https://github.com/sanity-io/ui/commit/fabe61c9a94f0442da8faf047c37ea0fba99ccec))
+
+### Bug Fixes
+
+- **figma:** support new color tones ([31d8c48](https://github.com/sanity-io/ui/commit/31d8c4878c4d6f674c6975e3966ecf15a18c2c2a))
+- **theme:** adjust color tokens ([d8b3181](https://github.com/sanity-io/ui/commit/d8b3181b90dfed1e1886de18001c07bb29ea56fc))
+- **theme:** generate tones based on constants ([7252249](https://github.com/sanity-io/ui/commit/72522498824530e7915c4dfac1115dc949f9a739))
+- **theme:** propagate hue based on tone setting ([c11dc3d](https://github.com/sanity-io/ui/commit/c11dc3d0a4c09763e0fd5cc1e7f0839824d6b172))
+- **theme:** use legacy types correctly ([79510fe](https://github.com/sanity-io/ui/commit/79510fe4a1f657a2ceb4475e5fbd9a0e945f77f1))
+- **toast:** use `neutral` tone for `info` status ([cb56633](https://github.com/sanity-io/ui/commit/cb56633f31ff076078b7ed4179e96428cbf51a1b))
+
 ## [2.8.26](https://github.com/sanity-io/ui/compare/v2.8.25...v2.8.26) (2024-11-28)
 
 ### Bug Fixes
