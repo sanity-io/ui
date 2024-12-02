@@ -25,13 +25,14 @@ export const Stack = forwardRef(function Stack(
 
   return (
     <Box
-      as={as}
+      // as={as}
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
+      as={as}
       direction="column"
       display="flex"
-      forwardedAs={as}
+      // forwardedAs={as}
       gapY={space}
       ref={ref}
     />

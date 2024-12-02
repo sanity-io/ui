@@ -44,7 +44,7 @@ export const Heading = forwardRef(function Heading(
     children: childrenProp,
     className,
     muted = false,
-    size = 2,
+    size = 1,
     textOverflow,
     weight,
     ...restProps

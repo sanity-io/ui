@@ -1,4 +1,4 @@
-import {PaddingStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {composeClassNames, menu, PaddingStyleProps, ResponsiveProp} from '@sanity/ui/css'
 import {Space} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 import {useClickOutsideEvent, useGlobalKeyDown} from '../../hooks'
@@ -46,6 +46,7 @@ export const Menu = forwardRef(function Menu(
 ) {
   const {
     children,
+    className,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     focusFirst,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -166,6 +167,7 @@ export const Menu = forwardRef(function Menu(
       <Box
         data-ui="Menu"
         {...restProps}
+        className={composeClassNames(className, menu())}
         onKeyDown={handleKeyDown}
         overflow="auto"
         outline="none"
@@ -179,4 +181,5 @@ export const Menu = forwardRef(function Menu(
     </MenuContext.Provider>
   )
 })
+
 Menu.displayName = 'ForwardRef(Menu)'

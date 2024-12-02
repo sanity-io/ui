@@ -1,46 +1,30 @@
-import {type Properties, type Rules} from '../types'
+import {type Rules} from '../types'
 import {compileRule, compileMediaQueryRule} from './compileRule'
+import {CompileRulesContext} from './types'
 
 /** @public */
 export function compileRules(rules: Rules): string {
   let css = ''
 
-  const keyframes: Record<string, Record<string, Properties>> = {}
-  const mediaQueries: Record<string, Record<string, Properties>> = {}
-
-  for (const [className, props] of Object.entries(rules)) {
-    const selectorCss = compileRule(`.${className}`.replace(/:/g, '\\:'), props)
-
-    css += selectorCss ? `${selectorCss}\n` : ''
-
-    if (props['@keyframes']) {
-      for (const name in props['@keyframes']) {
-        // if (!keyframes[name]) {
-        //   keyframes[name] = {from: {}, to: {}}
-        // }
-
-        keyframes[name] = props['@keyframes'][name]
-        // keyframes[name][className] = props['@keyframes'][key]
-      }
-    }
-
-    if (props['@media']) {
-      for (const key in props['@media']) {
-        if (!mediaQueries[key]) {
-          mediaQueries[key] = {}
-        }
-
-        mediaQueries[key][className] = props['@media'][key]
-      }
-    }
+  const context: CompileRulesContext = {
+    keyframes: {},
+    media: {},
   }
 
-  for (const [name, value] of Object.entries(keyframes)) {
+  for (const [className, props] of Object.entries(rules)) {
+    const ruleCss = compileRule(`.${className}`.replace(/:/g, '\\:'), props, context)
+
+    css += ruleCss ? `${ruleCss}\n` : ''
+  }
+
+  // console.log('context', context)
+
+  for (const [name, value] of Object.entries(context.keyframes)) {
     let keyframesCss = `@keyframes ${name} {\n`
 
     for (const [key, props] of Object.entries(value)) {
       keyframesCss += `  ${key}`
-      keyframesCss += compileRule('', props).replace(/\n/g, '\n    ') + '\n'
+      keyframesCss += compileRule('', props, context).replace(/\n/g, '\n    ') + '\n'
     }
 
     keyframesCss += `\n}\n`
@@ -48,7 +32,7 @@ export function compileRules(rules: Rules): string {
     css += keyframesCss
   }
 
-  for (const [query, queryRules] of Object.entries(mediaQueries)) {
+  for (const [query, queryRules] of Object.entries(context.media)) {
     css += compileMediaQueryRule(query, queryRules) + '\n'
   }
 

@@ -44,7 +44,7 @@ export const Text = forwardRef(function Text(
     children: childrenProp,
     className,
     muted = false,
-    size = 2,
+    size = 1,
     textOverflow,
     weight,
     ...restProps

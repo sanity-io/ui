@@ -2,12 +2,12 @@ import {Rules} from '../../types'
 
 export const kbdRules: Rules = {
   kbd: {
-    '--card-bg-color': 'var(--card-kbd-bg-color)',
-    '--card-border-color': 'var(--card-kbd-border-color)',
-    '--card-fg-color': 'var(--card-kbd-fg-color)',
+    // '--color-bg': 'var(--color-tinted-default-bg-1)',
+    // '--color-border': 'var(--color-tinted-default-border-2)',
+    // '--color-fg': 'var(--color-tinted-default-fg-3)',
 
-    'boxShadow': 'inset 0 0 0 1px var(--card-border-color)',
-    'background': 'var(--card-bg-color)',
+    'boxShadow': 'inset 0 0 0 1px var(--color-border)',
+    'background': 'var(--color-muted-bg)',
     'font': 'inherit',
     'verticalAlign': 'top',
 

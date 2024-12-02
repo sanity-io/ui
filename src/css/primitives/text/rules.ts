@@ -10,22 +10,27 @@ export const textRules: Rules = {
 
     '--font-family': `var(--font-text-family)`,
 
-    'color': 'var(--color-fg-1)',
+    'color': 'var(--color-fg)',
 
     '@nest': {
       '& a': {
         color: 'var(--color-link-fg)',
         textDecoration: 'none',
       },
+
+      '& svg': {
+        color: 'var(--color-icon)',
+      },
     },
   },
 
-  'text-accent': {
-    '--fg-color': 'var(--color-accent-fg)',
-  },
+  // 'text-accent': {
+  //   '--color-fg': 'var(--color-accent-fg)',
+  // },
 
   'text-muted': {
-    '--fg-color': 'var(--color-fg-4)',
+    color: 'var(--color-muted-fg)',
+    // '--color-fg': 'var(--color-tinted-default-fg-4)',
   },
 
   ...responsiveRules('text-0', {
@@ -73,3 +78,77 @@ export const textRules: Rules = {
     '--font-descender-height': 'var(--font-text-4-descender-height)',
   }),
 }
+
+// import {getTheme_v2} from '@sanity/ui/theme'
+// import {ThemeProps} from '../../_compat'
+// import {css} from '../../lib/styled'
+
+// export function textBaseStyle(
+//   props: {$accent?: boolean; $muted?: boolean} & ThemeProps,
+// ): ReturnType<typeof css> {
+//   const {$accent, $muted} = props
+//   const {font} = getTheme_v2(props.theme)
+
+//   return css`
+//     color: var(--card-fg-color);
+
+//     ${$accent &&
+//     css`
+//       color: var(--card-accent-fg-color);
+//     `}
+
+//     ${$muted &&
+//     css`
+//       color: var(--card-muted-fg-color);
+//     `}
+
+//     & code {
+//       font-family: ${font.code.family};
+//       border-radius: 1px;
+//       background-color: var(--card-code-bg-color);
+//       color: var(--card-code-fg-color);
+//     }
+
+//     & a {
+//       text-decoration: none;
+//       border-radius: 1px;
+//       color: var(--card-link-color);
+//       outline: none;
+
+//       @media (hover: hover) {
+//         &:hover {
+//           text-decoration: underline;
+//         }
+//       }
+
+//       &:focus {
+//         box-shadow:
+//           0 0 0 1px var(--card-bg-color),
+//           0 0 0 3px var(--card-focus-ring-color);
+//       }
+
+//       &:focus:not(:focus-visible) {
+//         box-shadow: none;
+//       }
+//     }
+
+//     & strong {
+//       font-weight: ${font.text.weights.bold};
+//     }
+
+//     & svg {
+//       /* Certain popular CSS libraries changes the defaults for SVG display */
+//       /* Make sure SVGs are rendered as inline elements */
+//       display: inline;
+//     }
+
+//     & [data-sanity-icon] {
+//       vertical-align: baseline;
+//       color: var(--card-icon-color);
+
+//       & path {
+//         vector-effect: non-scaling-stroke !important;
+//       }
+//     }
+//   `
+// }

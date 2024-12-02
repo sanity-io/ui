@@ -2,6 +2,8 @@ import {breadcrumbsRules} from './components/breadcrumbs/rules'
 import {dialogRules} from './components/dialog/rules'
 import {menuRules} from './components/menu/rules'
 import {skeletonRules} from './components/skeleton/rules'
+import {_inputRules} from './primitives/_input/rules'
+import {_selectableRules} from './primitives/_selectable/rules'
 import {avatarRules} from './primitives/avatar/rules'
 import {badgeRules} from './primitives/badge/rules'
 import {boxRules} from './primitives/box/rules'
@@ -16,7 +18,6 @@ import {labelRules} from './primitives/label/rules'
 import {popoverRules} from './primitives/popover/rules'
 import {radioRules} from './primitives/radio/rules'
 import {selectRules} from './primitives/select/rules'
-import {selectableRules} from './primitives/selectable/rules'
 import {spinnerRules} from './primitives/spinner/rules'
 import {switchRules} from './primitives/switch/rules'
 import {textRules} from './primitives/text/rules'
@@ -67,6 +68,8 @@ export const rules: Rules = {
   ...widthRules,
 
   // primitives
+  ..._inputRules,
+  ..._selectableRules,
   ...avatarRules,
   ...badgeRules,
   ...boxRules,
@@ -82,7 +85,6 @@ export const rules: Rules = {
   ...popoverRules,
   ...radioRules,
   ...selectRules,
-  ...selectableRules,
   ...spinnerRules,
   ...switchRules,
   ...textAreaRules,

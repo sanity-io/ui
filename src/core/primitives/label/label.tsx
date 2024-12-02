@@ -53,7 +53,7 @@ export const Label = forwardRef(function Label(
     children: childrenProp,
     className,
     muted = false,
-    size = 2,
+    size = 1,
     textOverflow,
     weight,
     ...restProps

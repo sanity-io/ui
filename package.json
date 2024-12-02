@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "2.9.0",
+  "version": "3.0.0-alpha.0",
   "keywords": [
     "sanity",
     "ui",
@@ -39,6 +39,9 @@
       "import": "./dist/theme.mjs",
       "require": "./dist/theme.js",
       "default": "./dist/theme.js"
+    },
+    "./sanity-palette.css": {
+      "default": "./dist/sanity-palette.css"
     },
     "./sanity-theme.css": {
       "default": "./dist/sanity-theme.css"
@@ -180,6 +183,7 @@
     "cypress": "^13.13.2",
     "cypress-real-events": "^1.13.0",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv-flow": "^4.1.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-boundaries": "^4.2.2",

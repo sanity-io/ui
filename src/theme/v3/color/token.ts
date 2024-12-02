@@ -1,15 +1,17 @@
-import {ColorHueKey, ColorTintKey} from '@sanity/color'
+import {Hue, Tint} from '../../palette'
 
+/** @public */
 export type ColorTokenOpacityValue = `0` | `0.${number}` | `1`
 
+/** @public */
 export type ColorToken =
   | `black`
   | `black/${ColorTokenOpacityValue}`
   | `white`
   | `white/${ColorTokenOpacityValue}`
-  | `${ColorHueKey}/${ColorTintKey}`
-  | `${ColorHueKey}/${ColorTintKey}/${ColorTokenOpacityValue}`
-  | `${ColorHueKey}/${ColorTintKey} ${number}%`
-  | `${ColorTintKey}`
-  | `${ColorTintKey}/${ColorTokenOpacityValue}`
-  | `${ColorTintKey} ${number}%`
+  | `${Hue}/${Tint}`
+  | `${Hue}/${Tint}/${ColorTokenOpacityValue}`
+  | `${Hue}/${Tint} ${number}%`
+  | `${Tint}`
+  | `${Tint}/${ColorTokenOpacityValue}`
+  | `${Tint} ${number}%`

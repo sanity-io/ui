@@ -1,61 +1,24 @@
+import {textArea, TextAreaStyleProps} from '@sanity/ui/css'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, useImperativeHandle, useRef} from 'react'
-import {
-  responsiveInputPaddingStyle,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-  TextInputResponsivePaddingStyleProps,
-  TextInputInputStyleProps,
-  TextInputRepresentationStyleProps,
-  textInputRootStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-  textInputRepresentationStyle,
-} from '../../_compat/styles/internal'
-import {useCustomValidity, useArrayProp} from '../../hooks'
-import {styled} from '../../lib/styled'
-import {useRootTheme} from '../../theme'
-import {ResponsiveRadiusProps} from '../types'
+import {useCustomValidity} from '../../hooks'
 
 /**
  * @public
  */
-export interface TextAreaProps extends ResponsiveRadiusProps {
+export interface TextAreaProps extends TextAreaStyleProps {
   /**
    * @beta
    */
   __unstable_disableFocusRing?: boolean
   border?: boolean
   customValidity?: string
-  fontSize?: number | number[]
-  padding?: number | number[]
   weight?: ThemeFontWeightKey
 }
-
-const Root = styled.span(textInputRootStyle)
-
-const InputRoot = styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`
-
-const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-)
-
-const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle,
-)
 
 /**
  * A multiline text input.
  *
-
  * @public
  */
 export const TextArea = forwardRef(function TextArea(
@@ -69,14 +32,13 @@ export const TextArea = forwardRef(function TextArea(
     fontSize = 2,
     padding = 3,
     radius = 2,
-    weight,
-    __unstable_disableFocusRing,
+    space = 3,
+    // weight,
+    // __unstable_disableFocusRing,
     ...restProps
   } = props
 
   const ref = useRef<HTMLTextAreaElement | null>(null)
-
-  const rootTheme = useRootTheme()
 
   useImperativeHandle<HTMLTextAreaElement | null, HTMLTextAreaElement | null>(
     forwardedRef,
@@ -86,33 +48,11 @@ export const TextArea = forwardRef(function TextArea(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root data-ui="TextArea">
-      <InputRoot>
-        <Input
-          data-as="textarea"
-          data-scheme={rootTheme.scheme}
-          data-tone={rootTheme.tone}
-          {...restProps}
-          $fontSize={useArrayProp(fontSize)}
-          $padding={useArrayProp(padding)}
-          $scheme={rootTheme.scheme}
-          $space={useArrayProp(0)}
-          $tone={rootTheme.tone}
-          $weight={weight}
-          disabled={disabled}
-          ref={ref}
-        />
-        <Presentation
-          $radius={useArrayProp(radius)}
-          $unstableDisableFocusRing={__unstable_disableFocusRing}
-          $scheme={rootTheme.scheme}
-          $tone={rootTheme.tone}
-          data-border={border ? '' : undefined}
-          data-scheme={rootTheme.scheme}
-          data-tone={rootTheme.tone}
-        />
-      </InputRoot>
-    </Root>
+    <span className={textArea({fontSize, padding, radius, space})} data-ui="TextArea">
+      <textarea {...restProps} disabled={disabled} ref={ref} />
+      <span data-border={border ? '' : undefined} />
+    </span>
   )
 })
+
 TextArea.displayName = 'ForwardRef(TextArea)'

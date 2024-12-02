@@ -5,7 +5,7 @@ import {resolveTokens} from './resolveTokens'
 import {ThemeOptions, Theme_v3} from './types'
 
 export function buildTheme_v3(options?: ThemeOptions): Theme_v3 {
-  const tokens = resolveTokens(options)
+  const tokens = resolveTokens(options?.tokens)
 
   return {
     _version: 3,

@@ -1,5 +1,5 @@
 import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
-import {WORKSHOP_BUTTON_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_BUTTON_TONE_OPTIONS} from '../../../../../workshop/constants'
 
 export default function CustomStory() {
   const tones = Object.entries(WORKSHOP_BUTTON_TONE_OPTIONS)

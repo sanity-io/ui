@@ -2,7 +2,7 @@ import {DecoratorHelpers} from '@storybook/addon-themes'
 import {StoryFn} from '@storybook/react'
 import React from 'react'
 import {createGlobalStyle} from 'styled-components'
-import {Card, ThemeProvider, studioTheme} from '../../src/core'
+import {Card, StyleTags, ThemeProvider, studioTheme} from '../../src/core'
 
 const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
 
@@ -31,6 +31,7 @@ export const withSanityTheme = ({themes, defaultTheme}) => {
 
     return (
       <ThemeProvider scheme={selected} theme={studioTheme}>
+        <StyleTags />
         <GlobalStyle />
         <Card padding={4}>
           <Story />

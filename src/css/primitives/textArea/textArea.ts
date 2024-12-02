@@ -1,5 +1,7 @@
 import {composeClassNames} from '../../composeClassNames'
+import {_input} from '../_input'
+import {TextAreaStyleProps} from './types'
 
-export function textArea(): string {
-  return composeClassNames('text-area')
+export function textArea(props: TextAreaStyleProps): string {
+  return composeClassNames('text-area', _input(props))
 }

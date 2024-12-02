@@ -1,8 +1,10 @@
-import {FontTextSize, Space} from '@sanity/ui/theme'
-import {ResponsiveProp} from '../../types'
+// import {FontTextSize, Space} from '@sanity/ui/theme'
+// import {ResponsiveProp} from '../../types'
+
+import {InputStyleProps} from '../_input'
 
 /** @public */
-export interface TextInputStyleProps {
-  padding: ResponsiveProp<Space>
-  size: ResponsiveProp<FontTextSize>
+export interface TextInputStyleProps extends InputStyleProps {
+  // padding: ResponsiveProp<Space>
+  // fontSize: ResponsiveProp<FontTextSize>
 }

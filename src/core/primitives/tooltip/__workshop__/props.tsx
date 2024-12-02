@@ -4,7 +4,7 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PropsStory() {
   const content = useText('Content', 'Tooltip content')

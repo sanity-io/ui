@@ -1,12 +1,10 @@
-import {COLOR_HUES, COLOR_TINTS, type ColorHueKey, type ColorTintKey} from '@sanity/color'
+import {Hue, HUES, Tint, TINTS} from '../../palette'
 
 const RE_PERCENTAGE = /^([0-9]+)%/
 const RE_OPACITY = /^(1|0\.[0-9]+)?/
 
 export interface TokenizeColorResult {
-  color:
-    | {type: 'black' | 'white'}
-    | {type: 'hue'; hue: ColorHueKey | undefined; tint: ColorTintKey | undefined}
+  color: {type: 'black' | 'white'} | {type: 'hue'; hue: Hue | undefined; tint: Tint | undefined}
   opacity: number | undefined
   mix: number | undefined
 }
@@ -54,7 +52,7 @@ export function parseColor(str: string): TokenizeColorResult {
       }
     }
 
-    for (const hue of COLOR_HUES) {
+    for (const hue of HUES) {
       v = _consume(String(hue))
 
       if (v) {
@@ -97,17 +95,17 @@ export function parseColor(str: string): TokenizeColorResult {
     // if (_peek() === '/') {
     //   cursor += 1
 
-    let v = str.slice(cursor, cursor + 3) as ColorTintKey
+    let v = Number(str.slice(cursor, cursor + 3)) as Tint
 
-    if (COLOR_TINTS.includes(v)) {
+    if (TINTS.includes(v)) {
       cursor += 3
 
       return v
     }
 
-    v = str.slice(cursor, cursor + 2) as ColorTintKey
+    v = Number(str.slice(cursor, cursor + 2)) as Tint
 
-    if (COLOR_TINTS.includes(v)) {
+    if (TINTS.includes(v)) {
       cursor += 2
 
       return v

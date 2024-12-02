@@ -20,12 +20,12 @@ export const headingRules: Rules = {
     },
   },
 
-  'heading-accent': {
-    '--fg-color': 'var(--color-accent-fg)',
-  },
+  // 'heading-accent': {
+  //   '--color-fg': 'var(--color-accent-fg)',
+  // },
 
   'heading-muted': {
-    '--fg-color': 'var(--color-muted-fg)',
+    '--color-fg': 'var(--color-tinted-default-fg-4)',
   },
 
   ...responsiveRules('heading-0', {

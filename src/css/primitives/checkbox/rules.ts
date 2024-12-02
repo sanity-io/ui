@@ -31,9 +31,14 @@ export const checkboxRules: Rules = {
         'boxShadow': `inset 0 0 0 1px var(--color-checkbox-border)`,
         'color': `var(--color-checkbox-fg)`,
 
-        '--color-checkbox-bg': 'var(--color-input-default-enabled-bg)',
-        '--color-checkbox-border': 'var(--color-input-default-enabled-border)',
-        '--color-checkbox-fg': 'var(--color-input-default-enabled-fg)',
+        // '--color-checkbox-bg': 'var(--color-input-default-enabled-bg)',
+        // '--color-checkbox-border': 'var(--color-input-default-enabled-border)',
+        // '--color-checkbox-fg': 'var(--color-input-default-enabled-fg)',
+
+        '--color-checkbox-bg': 'var(--color-tinted-default-bg-0)',
+        '--color-checkbox-border': 'var(--color-tinted-default-border-1)',
+        '--color-checkbox-fg': 'var(--color-tinted-default-fg-0)',
+
         // box-shadow: ${focusRingBorderStyle({
         //   color: color.input.default.enabled.border,
         //   width: input.border.width,
@@ -53,10 +58,19 @@ export const checkboxRules: Rules = {
         strokeWidth: '1.5px !important',
       },
 
+      '&:hover + span': {
+        '--color-checkbox-bg': 'var(--color-tinted-default-bg-1)',
+        '--color-checkbox-border': 'var(--color-tinted-default-border-2)',
+        '--color-checkbox-fg': 'var(--color-tinted-default-fg-0)',
+      },
+
       '&:checked + span': {
-        '--color-checkbox-bg': 'var(--color-input-default-enabled-fg)',
-        '--color-checkbox-border': 'var(--color-input-default-enabled-fg)',
-        '--color-checkbox-fg': 'var(--color-input-default-enabled-bg)',
+        '--color-checkbox-bg': 'var(--color-solid-default-bg-0)',
+        '--color-checkbox-border': 'var(--color-solid-default-bg-0)',
+        '--color-checkbox-fg': 'var(--color-solid-default-fg-0)',
+        // '--color-checkbox-bg': 'var(--color-input-default-enabled-fg)',
+        // '--color-checkbox-border': 'var(--color-input-default-enabled-fg)',
+        // '--color-checkbox-fg': 'var(--color-input-default-enabled-bg)',
         // box-shadow: ${focusRingBorderStyle({
         //   color: color.input.default.enabled.fg,
         //   width: input.border.width,
@@ -101,18 +115,18 @@ export const checkboxRules: Rules = {
       },
 
       '&:disabled + span': {
-        '--color-checkbox-bg': 'var(--color-input-default-disabled-bg)',
-        '--color-checkbox-border': 'var(--color-input-default-disabled-border)',
-        '--color-checkbox-fg': 'var(--color-input-default-disabled-fg)',
+        '--color-checkbox-bg': 'var(--color-tinted-default-bg-1)',
+        '--color-checkbox-border': 'var(--color-tinted-default-border-0)',
+        '--color-checkbox-fg': 'var(--color-tinted-default-border-2)',
         // box-shadow: ${focusRingBorderStyle({
         //   width: input.border.width,
         //   color: color.input.default.disabled.border,
         // })},
       },
 
-      '&:disabled:checked + span': {
-        '--color-checkbox-bg': 'var(--color-input-default-disabled-muted-bg)',
-      },
+      // '&:disabled:checked + span': {
+      //   '--color-checkbox-bg': 'var(--color-input-default-disabled-muted-bg)',
+      // },
 
       '&[data-read-only] + span': {
         '--color-checkbox-bg': 'var(--color-input-default-readOnly-bg)',

@@ -165,9 +165,10 @@ export function MenuGroup(
       <Selectable
         data-as={as}
         data-ui="MenuGroup"
-        forwardedAs={as}
+        // forwardedAs={as}
         {...restProps}
         aria-pressed={as === 'button' ? withinMenu : undefined}
+        as={as}
         data-pressed={as !== 'button' ? withinMenu : undefined}
         data-selected={!withinMenu && active ? '' : undefined}
         onClick={handleClick}

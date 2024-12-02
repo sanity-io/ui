@@ -8,7 +8,7 @@ export const avatarRules: Rules = {
     'position': 'relative',
     'boxSizing': 'border-box',
     'userSelect': 'none',
-    'boxShadow': '0 0 0 1px var(--card-bg-color)',
+    'boxShadow': '0 0 0 1px var(--color-bg)',
 
     'width': `var(--avatar-size)`,
     'height': `var(--avatar-size)`,
@@ -46,8 +46,8 @@ export const avatarRules: Rules = {
     return {
       ...acc,
       [`avatar-${color}`]: {
-        '--avatar-bg-color': `var(--card-avatar-${color}-bg-color)`,
-        '--avatar-fg-color': `var(--card-avatar-${color}-fg-color)`,
+        '--avatar-bg-color': `var(--color-avatar-${color}-bg)`,
+        '--avatar-fg-color': `var(--color-avatar-${color}-fg)`,
       },
     }
   }, {} as Rules),
@@ -118,8 +118,7 @@ export const avatarRules: Rules = {
         width: `var(--avatar-size)`,
         height: `var(--avatar-size)`,
         borderRadius: `var(--avatar-size)`,
-        boxShadow:
-          'inset 0 0 0 1px var(--avatar-bg-color), inset 0 0 0 1.75px var(--card-bg-color)',
+        boxShadow: 'inset 0 0 0 1px var(--avatar-bg-color), inset 0 0 0 1.75px var(--color-bg)',
       },
 
       '[data-image-error] &': {
@@ -134,9 +133,9 @@ export const avatarRules: Rules = {
   },
 
   'avatar-counter': {
-    'color': 'var(--card-fg-color)',
-    'backgroundColor': 'var(--card-bg-color)',
-    'boxShadow': `0 0 0 1px var(--card-bg-color), inset 0 0 0 1px var(--card-border-color)`,
+    'color': 'var(--color-fg)',
+    'backgroundColor': 'var(--color-bg)',
+    'boxShadow': `0 0 0 1px var(--color-bg), inset 0 0 0 1px var(--color-border)`,
     'userSelect': 'none',
     'borderRadius': 'var(--avatar-size)',
     'height': 'var(--avatar-size)',
@@ -147,7 +146,7 @@ export const avatarRules: Rules = {
       },
 
       '[data-hide-inner-stroke] &': {
-        boxShadow: `0 0 0 1px var(--card-bg-color)`,
+        boxShadow: `0 0 0 1px var(--color-bg)`,
       },
     },
   },

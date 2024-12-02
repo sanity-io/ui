@@ -1,6 +1,6 @@
 import {ForwardedRef, HTMLProps, ReactElement, forwardRef} from 'react'
+import {useTheme_v2} from '../../_compat'
 import {styled, css} from '../../lib/styled'
-import {useTheme_v2} from '../../theme'
 import {Point, compileCommands, getRoundedCommands} from './cmds'
 
 const Root = styled.div<{$w: number}>(

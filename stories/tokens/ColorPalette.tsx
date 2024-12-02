@@ -1,8 +1,8 @@
 import {COLOR_HUES, ColorTint, ColorTints, black, hues, white} from '@sanity/color'
 import {ReactNode} from 'react'
+import {ThemeProvider} from '../../src/core/_compat'
 import {styled} from '../../src/core/lib/styled'
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/core/primitives'
-import {ThemeProvider} from '../../src/core/theme'
 import {buildTheme, hexToRgb, rgbToHsl} from '../../src/theme'
 
 const theme = buildTheme()

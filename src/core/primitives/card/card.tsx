@@ -1,11 +1,10 @@
 import {card, CardStyleProps, composeClassNames} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef, useContext} from 'react'
+import {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
-import {ThemeColorProvider, useRootTheme} from '../../theme'
+import {ThemeColorProvider, useRootTheme} from '../../_compat'
 import {CardTone} from '../../types'
 import {Box, BoxProps} from '../box'
-import {RootCardContext} from './RootCardContext'
 
 /**
  * @public
@@ -41,7 +40,7 @@ export const Card = forwardRef(function Card(
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
     as: asProp,
-    border,
+    border = false,
     borderTop,
     borderRight,
     borderBottom,
@@ -54,25 +53,25 @@ export const Card = forwardRef(function Card(
     selected,
     shadow,
     style,
-    tone: toneProp = 'default',
+    tone: toneProp,
     ...restProps
   } = props
 
   const as = isValidElementType(asProp) ? asProp : 'div'
-  const rootCard = useContext(RootCardContext)
+
   const rootTheme = useRootTheme()
 
-  const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
+  const tone = toneProp === 'inherit' ? undefined : toneProp
 
   // todo: Consider adding the wrapper approach for nested cards in which the tones are not
   // changing, avoid unnecessary ThemeColorProvider
   const node = (
-    <ThemeColorProvider scheme={scheme} tone={tone}>
+    <ThemeColorProvider scheme={scheme} tone={tone ?? rootTheme.tone}>
       <Box
         data-as={typeof as === 'string' ? as : undefined}
-        data-scheme={rootTheme.scheme}
         data-ui="Card"
-        data-tone={tone}
+        data-scheme={scheme ?? rootTheme.scheme}
+        data-tone={tone ?? rootTheme.tone}
         {...restProps}
         as={as}
         className={composeClassNames(
@@ -99,10 +98,6 @@ export const Card = forwardRef(function Card(
       />
     </ThemeColorProvider>
   )
-
-  if (!rootCard) {
-    return <RootCardContext.Provider value={{renderedVars: true}}>{node}</RootCardContext.Provider>
-  }
 
   return node
 })

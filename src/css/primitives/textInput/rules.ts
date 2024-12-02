@@ -7,6 +7,12 @@ import {vars} from '../../vars'
 export const textInputRules: Rules = {
   'text-input': {
     '--font-family': vars.font.text.family,
+
+    '@nest': {
+      '& > span': {
+        borderRadius: 'inherit',
+      },
+    },
   },
 
   ...SPACE.reduce<Rules>((acc, space) => {
@@ -35,30 +41,30 @@ export const textInputRules: Rules = {
   }, {}),
 
   'text-input-element': {
-    'appearance': 'none',
-    'background': 'none',
-    'border': 0,
-    'borderRadius': 0,
-    'outline': 'none',
-    'width': '100%',
-    'boxSizing': 'border-box',
-    'fontFamily': 'var(--font-family)',
-    'fontSize': 'var(--font-size)',
+    // 'appearance': 'none',
+    // 'background': 'none',
+    // 'border': 0,
+    // 'borderRadius': 0,
+    // 'outline': 'none',
+    // 'width': '100%',
+    // 'boxSizing': 'border-box',
+    // 'fontFamily': 'var(--font-family)',
+    // 'fontSize': 'var(--font-size)',
     'fontWeight': 'var(--font-weight)',
-    'lineHeight': 'var(--font-line-height)',
-    'letterSpacing': 'var(--font-letter-spacing)',
-    'margin': 0,
-    'position': 'relative',
-    'zIndex': 1,
-    'display': 'block',
-    'color': 'var(--input-fg-color)',
-    'paddingTop': 'var(--padding-top)',
-    'paddingRight': 'var(--padding-right)',
-    'paddingBottom': 'var(--padding-bottom)',
-    'paddingLeft': 'var(--padding-left)',
+    // 'lineHeight': 'var(--font-line-height)',
+    // 'letterSpacing': 'var(--font-letter-spacing)',
+    // 'margin': 0,
+    // 'position': 'relative',
+    // 'zIndex': 1,
+    // 'display': 'block',
+    // 'color': 'var(--input-fg-color)',
+    // 'paddingTop': 'var(--padding-top)',
+    // 'paddingRight': 'var(--padding-right)',
+    // 'paddingBottom': 'var(--padding-bottom)',
+    // 'paddingLeft': 'var(--padding-left)',
 
     // '--input-fg-color': 'var(--color-input-default-enabled-fg)',
-    '--input-fg-color': 'var(--color-fg-1)',
+    // '--input-fg-color': 'var(--color-fg-1)',
 
     '@nest': {
       // NOTE: This is a hack to disable Chrome’s autofill styles
@@ -76,7 +82,7 @@ export const textInputRules: Rules = {
 
       '&::placeholder': {
         // color: 'var(--input-placeholder-color)',
-        color: 'var(--color-fg-4)',
+        color: 'var(--color-tinted-default-fg-4)',
       },
 
       // &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
@@ -107,8 +113,11 @@ export const textInputRules: Rules = {
   },
 
   'text-input-prefix': {
-    'borderTopRightRadius': 0,
-    'borderBottomRightRadius': 0,
+    'borderTop': '1px solid var(--color-border)',
+    'borderLeft': '1px solid var(--color-border)',
+    'borderBottom': '1px solid var(--color-border)',
+    'borderTopRightRadius': '0 !important',
+    'borderBottomRightRadius': '0 !important',
 
     '@nest': {
       '& > span': {
@@ -119,8 +128,11 @@ export const textInputRules: Rules = {
   },
 
   'text-input-suffix': {
-    'borderTopLeftRadius': 0,
-    'borderBottomLeftRadius': 0,
+    'borderTop': '1px solid var(--color-border)',
+    'borderRight': '1px solid var(--color-border)',
+    'borderBottom': '1px solid var(--color-border)',
+    'borderTopLeftRadius': '0 !important',
+    'borderBottomLeftRadius': '0 !important',
 
     '@nest': {
       '& > span': {
@@ -131,26 +143,36 @@ export const textInputRules: Rules = {
   },
 
   'text-input-presentation': {
-    'position': 'absolute',
-    'top': 0,
-    'left': 0,
-    'right': 0,
-    'bottom': 0,
-    'display': 'block',
-    'pointerEvents': 'none',
-    'zIndex': 0,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    display: 'block',
+    pointerEvents: 'none',
+    zIndex: 0,
 
-    'backgroundColor': 'var(--input-bg-color)',
-    'boxShadow': 'var(--input-box-shadow)',
+    // backgroundColor: 'var(--input-bg-color)',
+    // 'boxShadow': 'var(--input-box-shadow)',
 
     // '--input-border-color': 'var(--color-input-default-enabled-border)',
-    '--input-border-color': 'var(--color-border-1)',
-    '--input-box-shadow': 'inset 0 0 0 1px var(--input-border-color)',
+    // '--input-border-color': 'var(--color-tinted-default-border-1)',
+    // '--input-box-shadow': 'inset 0 0 0 1px var(--input-border-color)',
 
     // border-top-left-radius: ${$hasPrefix ? 0 : undefined};
     // border-bottom-left-radius: ${$hasPrefix ? 0 : undefined};
     // border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     // border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
+
+    // '@nest': {
+    //   'input:hover + &': {
+    //     '--input-border-color': 'var(--color-tinted-default-border-2)',
+    //   },
+
+    //   'input:focus + &': {
+    //     '--input-border-color': 'var(--color-tinted-default-border-2)',
+    //   },
+    // },
 
     // &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
     //   --card-bg-color: ${color.input.default.enabled.bg};

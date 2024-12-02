@@ -11,10 +11,8 @@ import {
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
-// import {useArrayProp} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
-// import {useRootTheme} from '../../theme'
 import {SelectableTone} from '../../types/selectable'
 import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
@@ -71,7 +69,7 @@ export const MenuItem = forwardRef(function MenuItem(
     tone = 'default',
     ...restProps
   } = props
-  // const {scheme} = useRootTheme()
+
   const menu = useMenu()
   const {
     activeElement,
@@ -112,8 +110,6 @@ export const MenuItem = forwardRef(function MenuItem(
     [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
   )
 
-  // const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
-
   const setRef = useCallback((el: HTMLDivElement | null) => {
     ref.current = el
     setRootElement(el)
@@ -125,15 +121,11 @@ export const MenuItem = forwardRef(function MenuItem(
       {...restProps}
       aria-pressed={as === 'button' && pressed}
       as={as}
-      data-pressed={as !== 'button' && pressed ? '' : undefined}
+      data-as={typeof as === 'string' ? as : undefined}
+      data-pressed={pressed ? '' : undefined}
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
-      // forwardedAs={as}
       radius={radius}
-      // $radius={useArrayProp(radius)}
-      // $padding={useArrayProp(0)}
-      // $tone={disabled ? 'default' : tone}
-      // $scheme={scheme}
       disabled={disabled}
       onClick={handleClick}
       onMouseEnter={onItemMouseEnter}
@@ -161,13 +153,7 @@ export const MenuItem = forwardRef(function MenuItem(
             </Box>
           )}
 
-          {hotkeys && (
-            <Hotkeys
-              // fontSize={hotkeysFontSize}
-              keys={hotkeys}
-              style={{marginTop: -4, marginBottom: -4}}
-            />
-          )}
+          {hotkeys && <Hotkeys keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />}
 
           {IconRightComponent && (
             <Text size={fontSize}>
@@ -177,6 +163,7 @@ export const MenuItem = forwardRef(function MenuItem(
           )}
         </Flex>
       )}
+
       {children && (
         <Box as="span" {...paddingProps}>
           {children}

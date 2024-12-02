@@ -13,6 +13,7 @@ import {
 } from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
+import {useTheme_v2} from '../../_compat'
 import {
   containsOrEqualsElement,
   focusFirstDescendant,
@@ -26,7 +27,6 @@ import {
   usePrefersReducedMotion,
 } from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
-import {useTheme_v2} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {useDialog} from './useDialog'

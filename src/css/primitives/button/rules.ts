@@ -19,9 +19,9 @@ export const buttonRules: Rules = {
     textAlign: 'left',
     position: 'relative',
     verticalAlign: 'top',
-    backgroundColor: 'var(--color-bg-1)',
-    color: 'var(--color-fg-1)',
-    boxShadow: 'inset 0 0 0 1px var(--color-border-1)',
+    backgroundColor: 'var(--color-bg)',
+    color: 'var(--color-fg)',
+    boxShadow: 'inset 0 0 0 1px var(--color-border)',
   },
 
   // variants
@@ -30,71 +30,112 @@ export const buttonRules: Rules = {
       ...acc,
       [`button-mode-${mode}`]: {
         '@nest': THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+          if (mode === 'default') {
+            acc[`&.button-tone-${tone}`] = {
+              'boxShadow': 'none',
+              '--color-bg': `var(--color-solid-${tone}-bg-0)`,
+              '--color-border': `var(--color-solid-${tone}-border-1)`,
+              '--color-fg': `var(--color-solid-${tone}-fg-1)`,
+              '--color-icon': `var(--color-solid-${tone}-fg-1)`,
+
+              '@nest': {
+                '&:not([data-disabled="true"]):hover': {
+                  '--color-bg': `var(--color-solid-${tone}-bg-1)`,
+                  '--color-border': `var(--color-solid-${tone}-border-2)`,
+                  '--color-fg': `var(--color-solid-${tone}-fg-0)`,
+                  '--color-icon': `var(--color-solid-${tone}-fg-0)`,
+                },
+
+                '&:not([data-disabled="true"]):active': {
+                  '--color-bg': `var(--color-solid-${tone}-bg-2)`,
+                  '--color-border': `var(--color-solid-${tone}-border-3)`,
+                  '--color-fg': `var(--color-solid-${tone}-fg-0)`,
+                  '--color-icon': `var(--color-solid-${tone}-fg-0)`,
+                },
+
+                '&:not([data-disabled="true"])[data-selected]': {
+                  '--color-bg': `var(--color-solid-${tone}-bg-2)`,
+                  '--color-border': `var(--color-solid-${tone}-border-3)`,
+                  '--color-fg': `var(--color-solid-${tone}-fg-0)`,
+                  '--color-icon': `var(--color-solid-${tone}-fg-0)`,
+                },
+              },
+            }
+          }
+
           if (mode === 'bleed') {
-            return {
-              ...acc,
-              [`&.button-tone-${tone}`]: {
-                'boxShadow': 'none',
-                '--color-bg-1': `var(--color-tinted-${tone}-bg-1)`,
-                '--color-bg-2': `var(--color-tinted-${tone}-bg-2)`,
-                '--color-bg-3': `var(--color-tinted-${tone}-bg-3)`,
-                '--color-bg-4': `var(--color-tinted-${tone}-bg-4)`,
-                '--color-border-1': `var(--color-tinted-${tone}-border-1)`,
-                '--color-border-2': `var(--color-tinted-${tone}-border-2)`,
-                '--color-border-3': `var(--color-tinted-${tone}-border-3)`,
-                '--color-border-4': `var(--color-tinted-${tone}-border-4)`,
-                '--color-fg-1': `var(--color-tinted-${tone}-fg-1)`,
-                '--color-fg-2': `var(--color-tinted-${tone}-fg-2)`,
-                '--color-fg-3': `var(--color-tinted-${tone}-fg-3)`,
-                '--color-fg-4': `var(--color-tinted-${tone}-fg-4)`,
-                // '--color-bg': `var(--card-button-${mode}-${tone}-enabled-bg-color, rgba(127, 127, 127, 0.1))`,
-                // '--color-fg': `var(--card-button-${mode}-${tone}-enabled-fg-color, currentColor)`,
+            acc[`&.button-tone-${tone}`] = {
+              'boxShadow': 'none',
+              '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
+              '--color-border': `var(--color-tinted-${tone}-border-1)`,
+              '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
+              '--color-icon': `var(--color-tinted-${tone}-fg-3)`,
+
+              '@nest': {
+                '&:not([data-disabled="true"]):hover': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-2)`,
+                  '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+                  '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
+                },
+
+                '&:not([data-disabled="true"]):active': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-3)`,
+                  '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+                  '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
+                },
+
+                '&:not([data-disabled="true"])[data-selected]': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-3)`,
+                  '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+                  '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
+                },
+
+                '&[data-disabled="true"]': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-1)`,
+                  '--color-fg': `var(--color-tinted-${tone}-border-3)`,
+                  '--color-icon': `var(--color-tinted-${tone}-border-2)`,
+                },
               },
             }
           }
 
           if (mode === 'ghost') {
-            return {
-              ...acc,
-              [`&.button-tone-${tone}`]: {
-                '--color-bg-1': `var(--color-tinted-${tone}-bg-1)`,
-                '--color-bg-2': `var(--color-tinted-${tone}-bg-2)`,
-                '--color-bg-3': `var(--color-tinted-${tone}-bg-3)`,
-                '--color-bg-4': `var(--color-tinted-${tone}-bg-4)`,
-                '--color-border-1': `var(--color-tinted-${tone}-border-1)`,
-                '--color-border-2': `var(--color-tinted-${tone}-border-2)`,
-                '--color-border-3': `var(--color-tinted-${tone}-border-3)`,
-                '--color-border-4': `var(--color-tinted-${tone}-border-4)`,
-                '--color-fg-1': `var(--color-tinted-${tone}-fg-1)`,
-                '--color-fg-2': `var(--color-tinted-${tone}-fg-2)`,
-                '--color-fg-3': `var(--color-tinted-${tone}-fg-3)`,
-                '--color-fg-4': `var(--color-tinted-${tone}-fg-4)`,
-                // '--color-bg': `var(--card-button-${mode}-${tone}-enabled-bg-color, rgba(127, 127, 127, 0.1))`,
-                // '--color-fg': `var(--card-button-${mode}-${tone}-enabled-fg-color, currentColor)`,
+            acc[`&.button-tone-${tone}`] = {
+              '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
+              '--color-border': `var(--color-tinted-${tone}-border-0)`,
+              '--color-fg': `var(--color-tinted-${tone}-fg-2)`,
+              '--color-icon': `var(--color-tinted-${tone}-fg-3)`,
+
+              '@nest': {
+                '&:not([data-disabled="true"]):hover': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-1)`,
+                  '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
+                  '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
+                },
+
+                '&:not([data-disabled="true"]):active': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-2)`,
+                  '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
+                  '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
+                },
+
+                '&:not([data-disabled="true"])[data-selected]': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-2)`,
+                  '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
+                  '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
+                },
               },
             }
           }
 
-          return {
-            ...acc,
-            [`&.button-tone-${tone}`]: {
-              'boxShadow': 'none',
-              '--color-bg-1': `var(--color-solid-${tone}-bg-1)`,
-              '--color-bg-2': `var(--color-solid-${tone}-bg-2)`,
-              '--color-bg-3': `var(--color-solid-${tone}-bg-3)`,
-              '--color-bg-4': `var(--color-solid-${tone}-bg-4)`,
-              '--color-border-1': `var(--color-solid-${tone}-border-1)`,
-              '--color-border-2': `var(--color-solid-${tone}-border-2)`,
-              '--color-border-3': `var(--color-solid-${tone}-border-3)`,
-              '--color-border-4': `var(--color-solid-${tone}-border-4)`,
-              '--color-fg-1': `var(--color-solid-${tone}-fg-1)`,
-              '--color-fg-2': `var(--color-solid-${tone}-fg-2)`,
-              '--color-fg-3': `var(--color-solid-${tone}-fg-3)`,
-              '--color-fg-4': `var(--color-solid-${tone}-fg-4)`,
-              // '--color-bg': `var(--card-button-${mode}-${tone}-enabled-bg-color, rgba(127, 127, 127, 0.1))`,
-              // '--color-fg': `var(--card-button-${mode}-${tone}-enabled-fg-color, currentColor)`,
-            },
-          }
+          return acc
         }, {} as Rules),
       },
     }

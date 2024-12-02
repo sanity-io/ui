@@ -6,7 +6,7 @@ import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '../../../../../workshop/constants'
 
 export default function PlainStory() {
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS)

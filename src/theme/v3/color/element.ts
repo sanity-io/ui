@@ -1,24 +1,19 @@
-import {ColorHueKey} from '@sanity/color'
+import {Hue} from '../../palette'
 import {ColorToken} from './token'
 
+/** @public */
 export interface ElementColorTokens {
-  _hue: ColorHueKey
+  _hue: Hue
   bg: {
-    1: [ColorToken, ColorToken] // enabled
-    2: [ColorToken, ColorToken] // hovered
-    3: [ColorToken, ColorToken] // pressed
-    4: [ColorToken, ColorToken] // disabled
+    0: [ColorToken, ColorToken]
+    4: [ColorToken, ColorToken]
   }
   border: {
-    1: [ColorToken, ColorToken] // enabled
-    2: [ColorToken, ColorToken] // hovered
-    3: [ColorToken, ColorToken] // pressed
-    4: [ColorToken, ColorToken] // disabled
+    0: [ColorToken, ColorToken]
+    4: [ColorToken, ColorToken]
   }
   fg: {
-    1: [ColorToken, ColorToken] // enabled
-    2: [ColorToken, ColorToken] // hovered
-    3: [ColorToken, ColorToken] // pressed
-    4: [ColorToken, ColorToken] // disabled
+    0: [ColorToken, ColorToken]
+    4: [ColorToken, ColorToken]
   }
 }

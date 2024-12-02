@@ -6,7 +6,14 @@ import {
   ThemeColorStateToneKey,
 } from '../../v2'
 import {CardColorTokens} from './card'
-import {ThemeColor_v3, ThemeColorCard_v3, ThemeColorElement_v3, ThemeColorScheme_v3} from './color'
+import {
+  ThemeColor_v3,
+  ThemeColorCard_v3,
+  ThemeColorElement,
+  // ThemeColorElement,
+  ThemeColorScheme_v3,
+  ThemeColorVariant,
+} from './color'
 import {ElementColorTokens} from './element'
 import {renderColor, RenderColorContext} from './renderColor'
 import {ColorTokens} from './tokens'
@@ -32,12 +39,13 @@ function buildColorScheme_v3(
   // console.log('buildColorScheme_v3', tokens)
 
   return {
-    ...THEME_COLOR_CARD_TONES.reduce(
-      (acc, tone) => ({
-        ...acc,
-        [tone]: buildColorCard_v3(tokens[tone], {cardTone: tone, scheme}),
-      }),
-      {} as ThemeColorScheme_v3,
+    card: THEME_COLOR_CARD_TONES.reduce(
+      (acc, tone) => {
+        acc[tone] = buildColorCard_v3(tokens[tone], {cardTone: tone, scheme})
+
+        return acc
+      },
+      {} as Record<ThemeColorCardToneKey, ThemeColorCard_v3>,
     ),
   }
 }
@@ -50,47 +58,47 @@ function buildColorCard_v3(
   },
 ): ThemeColorCard_v3 {
   const {cardTone, scheme} = options
-
-  const i = scheme === 'dark' ? 0 : 1
-
-  const context: RenderColorContext = {bgVar: `--color-bg-1`, hue: tokens._hue}
+  const context: RenderColorContext = {bgVar: `--color-bg-1`, hue: tokens._hue, scheme}
 
   return {
-    ...buildColorElement_v3(tokens, {cardTone, scheme}),
-    focusRing: renderColor(tokens.focusRing[i], context),
-    solid: {
-      ...THEME_COLOR_STATE_TONES.reduce(
-        (acc, tone) => ({
-          ...acc,
-          [tone]: buildColorElement_v3(tokens.solid[tone], {
-            cardTone,
-            debugId: `solid`,
-            scheme,
-            tone,
-          }),
-        }),
-        {} as Record<ThemeColorStateToneKey, ThemeColorElement_v3>,
-      ),
-    },
+    _hue: tokens._hue ?? 'gray',
+    // ...buildColorElement_v3(tokens, {cardTone, scheme}),
+    focusRing: renderColor(tokens.focusRing, context),
     shadow: {
-      outline: renderColor(tokens.shadow.outline[i], context),
-      umbra: renderColor(tokens.shadow.umbra[i], context),
-      penumbra: renderColor(tokens.shadow.penumbra[i], context),
-      ambient: renderColor(tokens.shadow.ambient[i], context),
+      outline: renderColor(tokens.shadow.outline, context),
+      umbra: renderColor(tokens.shadow.umbra, context),
+      penumbra: renderColor(tokens.shadow.penumbra, context),
+      ambient: renderColor(tokens.shadow.ambient, context),
     },
-    tinted: {
-      ...THEME_COLOR_STATE_TONES.reduce(
-        (acc, tone) => ({
-          ...acc,
-          [tone]: buildColorElement_v3(tokens.tinted[tone], {
-            cardTone,
-            debugId: `tinted`,
-            scheme,
-            tone,
+    variant: {
+      solid: {
+        ...THEME_COLOR_STATE_TONES.reduce(
+          (acc, tone) => ({
+            ...acc,
+            [tone]: buildColorElement_v3(tokens.variant.solid[tone], {
+              cardTone,
+              debugId: `solid`,
+              scheme,
+              tone,
+            }),
           }),
-        }),
-        {} as Record<ThemeColorStateToneKey, ThemeColorElement_v3>,
-      ),
+          {} as ThemeColorVariant,
+        ),
+      },
+      tinted: {
+        ...THEME_COLOR_STATE_TONES.reduce(
+          (acc, tone) => ({
+            ...acc,
+            [tone]: buildColorElement_v3(tokens.variant.tinted[tone], {
+              cardTone,
+              debugId: `tinted`,
+              scheme,
+              tone,
+            }),
+          }),
+          {} as ThemeColorVariant,
+        ),
+      },
     },
   }
 }
@@ -103,11 +111,8 @@ function buildColorElement_v3(
     scheme: ThemeColorSchemeKey
     tone?: ThemeColorStateToneKey
   },
-): ThemeColorElement_v3 {
+): ThemeColorElement {
   const {cardTone, debugId, scheme, tone} = options
-  const i = scheme === 'dark' ? 0 : 1
-
-  // console.log({card: cardTone, scheme, tone}, 'buildColorCard_v3', tokens._hue)
 
   const path = [scheme, cardTone, debugId, tone].filter(Boolean).join('/')
 
@@ -117,26 +122,21 @@ function buildColorElement_v3(
     nodeLen += 1
   }
 
-  const context: RenderColorContext = {bgVar: `--bg`, hue: tokens._hue}
+  const context: RenderColorContext = {bgVar: `--bg`, hue: tokens._hue, scheme}
 
   return {
+    _hue: tokens._hue ?? 'gray',
     bg: {
-      1: renderColor(tokens.bg[1][i], context),
-      2: renderColor(tokens.bg[2][i], context),
-      3: renderColor(tokens.bg[3][i], context),
-      4: renderColor(tokens.bg[4][i], context),
+      0: renderColor(tokens.bg[0], context),
+      4: renderColor(tokens.bg[4], context),
     },
     border: {
-      1: renderColor(tokens.border[1][i], context),
-      2: renderColor(tokens.border[2][i], context),
-      3: renderColor(tokens.border[3][i], context),
-      4: renderColor(tokens.border[4][i], context),
+      0: renderColor(tokens.border[0], context),
+      4: renderColor(tokens.border[4], context),
     },
     fg: {
-      1: renderColor(tokens.fg[1][i], context),
-      2: renderColor(tokens.fg[2][i], context),
-      3: renderColor(tokens.fg[3][i], context),
-      4: renderColor(tokens.fg[4][i], context),
+      0: renderColor(tokens.fg[0], context),
+      4: renderColor(tokens.fg[4], context),
     },
   }
 }

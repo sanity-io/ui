@@ -7,7 +7,9 @@ import {PartialTokens, Tokens} from './tokens'
 export type ThemeEntry = [`--${string}`, string]
 
 /** @public */
-export type ThemeOptions = PartialTokens<Tokens>
+export interface ThemeOptions {
+  tokens?: PartialTokens<Tokens>
+}
 
 /**
  * Supersedes `RootTheme` and `RootTheme_v2`.

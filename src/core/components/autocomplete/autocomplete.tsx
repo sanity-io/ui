@@ -132,7 +132,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     customValidity,
     disabled,
     filterOption: filterOptionProp,
-    fontSize = 2,
+    fontSize = 1,
     icon,
     id,
     listBox = EMPTY_RECORD,

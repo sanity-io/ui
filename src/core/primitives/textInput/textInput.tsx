@@ -9,13 +9,13 @@ import {
 import {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
+// import {useRootTheme} from '../../_compat'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useCustomValidity} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
 import {styled} from '../../lib/styled'
-import {useRootTheme} from '../../theme'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
-import {Card} from '../card'
+// import {Card} from '../card'
 import {Text} from '../text'
 
 /**
@@ -98,15 +98,15 @@ export const TextInput = forwardRef(function TextInput(
     className,
     clearButton,
     disabled = false,
-    fontSize: fontSizeProp = 2,
+    fontSize = 2,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClear,
-    padding: paddingProp = 3,
+    padding = 3,
     prefix,
-    radius: radiusProp = 2,
+    radius = 2,
     readOnly,
-    space: _space = 3, // eslint-disable-line @typescript-eslint/no-unused-vars
+    space = 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     suffix,
     customValidity,
     type = 'text',
@@ -115,11 +115,11 @@ export const TextInput = forwardRef(function TextInput(
   } = props
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const rootTheme = useRootTheme()
+  // const rootTheme = useRootTheme()
 
-  const fontSize = useArrayProp(fontSizeProp)
-  const padding = useArrayProp(paddingProp)
-  const radius = useArrayProp(radiusProp)
+  // const fontSize = useArrayProp(fontSizeProp)
+  // const padding = useArrayProp(paddingProp)
+  // const radius = useArrayProp(radiusProp)
   // const space = useArrayProp(spaceProp)
 
   // Transient properties
@@ -159,26 +159,26 @@ export const TextInput = forwardRef(function TextInput(
   const prefixNode = useMemo(
     () =>
       prefix && (
-        <Card
+        <Box
           as="span"
-          borderTop
-          borderLeft
-          borderBottom
+          // borderTop
+          // borderLeft
+          // borderBottom
           className="text-input-prefix"
-          radius={radius}
+          // radius={radius}
           sizing="border"
-          tone="inherit"
+          // tone="inherit"
         >
           <span>{prefix}</span>
-        </Card>
+        </Box>
       ),
-    [prefix, radius],
+    [prefix],
   )
 
   // Render presentation (memoized)
   const presentationNode = useMemo(
     () => (
-      <Card
+      <Box
         as="span"
         // $hasPrefix={$hasPrefix}
         // $unstableDisableFocusRing={__unstable_disableFocusRing}
@@ -190,10 +190,10 @@ export const TextInput = forwardRef(function TextInput(
         className="text-input-presentation"
         data-border={border ? '' : undefined}
         data-disable-focus-ring={__unstable_disableFocusRing ? '' : undefined}
-        data-scheme={rootTheme.scheme}
-        data-tone={rootTheme.tone}
+        // data-scheme={rootTheme.scheme}
+        // data-tone={rootTheme.tone}
         position="absolute"
-        radius={radius}
+        // radius={radius}
       >
         {IconComponent && (
           <Box as="span" padding={padding} position="absolute" style={{top: 0, left: 0}}>
@@ -212,7 +212,7 @@ export const TextInput = forwardRef(function TextInput(
             </Text>
           </Box>
         )}
-      </Card>
+      </Box>
     ),
     [
       __unstable_disableFocusRing,
@@ -221,8 +221,8 @@ export const TextInput = forwardRef(function TextInput(
       IconComponent,
       IconRightComponent,
       padding,
-      radius,
-      rootTheme,
+      // radius,
+      // rootTheme,
       $hasClearButton,
       // $hasPrefix,
       // $hasSuffix,
@@ -230,29 +230,30 @@ export const TextInput = forwardRef(function TextInput(
   )
 
   // Render clear button (memoized)
-  const clearButtonBoxPadding = useMemo(
-    () =>
-      padding.map((v) => {
-        if (v === 0) return 0
-        if (v === 1) return 1
-        if (v === 2) return 1
+  // const clearButtonBoxPadding = useMemo(
+  //   () =>
+  //     padding.map((v) => {
+  //       if (v === 0) return 0
+  //       if (v === 1) return 1
+  //       if (v === 2) return 1
 
-        return (v as Space) - 2
-      }),
-    [padding],
-  )
+  //       return (v as Space) - 2
+  //     }),
+  //   [padding],
+  // )
 
-  const clearButtonPadding = useMemo(
-    () =>
-      padding.map((v) => {
-        if (v === 0) return 0
-        if (v === 1) return 0
-        if (v === 2) return 1
+  // const clearButtonPadding = useMemo(
+  //   () =>
+  //     padding.map((v) => {
+  //       if (v === 0) return 0
+  //       if (v === 1) return 0
+  //       if (v === 2) return 1
 
-        return (v as Space) - 1
-      }),
-    [padding],
-  )
+  //       return (v as Space) - 1
+  //     }),
+  //   [padding],
+  // )
+
   const clearButtonProps: TextInputClearButtonProps = useMemo(
     () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
     [clearButton],
@@ -262,12 +263,12 @@ export const TextInput = forwardRef(function TextInput(
       !disabled &&
       !readOnly &&
       clearButton && (
-        <Card
+        <Box
           // forwardedAs="span"
-          padding={clearButtonBoxPadding}
+          // padding={clearButtonBoxPadding}
           position="absolute"
           style={CLEAR_BUTTON_BOX_STYLE}
-          tone={customValidity ? 'critical' : 'inherit'}
+          // tone={customValidity ? 'critical' : 'inherit'}
 
           // position: absolute;
           // top: 0;
@@ -279,20 +280,20 @@ export const TextInput = forwardRef(function TextInput(
             fontSize={fontSize}
             icon={CloseIcon}
             mode="bleed"
-            padding={clearButtonPadding}
+            // padding={clearButtonPadding}
             radius={radius}
             {...clearButtonProps}
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
           />
-        </Card>
+        </Box>
       ),
     [
       clearButton,
-      clearButtonBoxPadding,
-      clearButtonPadding,
+      // clearButtonBoxPadding,
+      // clearButtonPadding,
       clearButtonProps,
-      customValidity,
+      // customValidity,
       disabled,
       fontSize,
       handleClearClick,
@@ -306,30 +307,38 @@ export const TextInput = forwardRef(function TextInput(
   const suffixNode = useMemo(
     () =>
       suffix && (
-        <Card
+        <Box
           as="span"
-          borderTop
-          borderRight
-          borderBottom
+          // borderTop
+          // borderRight
+          // borderBottom
           className="text-input-suffix"
-          radius={radius}
+          // radius={radius}
           sizing="border"
-          tone="inherit"
+          // tone="inherit"
         >
           <span>{suffix}</span>
-        </Card>
+        </Box>
       ),
-    [radius, suffix],
+    [suffix],
   )
 
   return (
-    <Card
+    <Box
       align="center"
       as="span"
-      className={composeClassNames(className, textInput({padding, size: fontSizeProp}))}
+      className={composeClassNames(
+        className,
+        textInput({
+          fontSize,
+          padding,
+          radius,
+          space,
+        }),
+      )}
       data-ui="TextInput"
       display="flex"
-      tone={rootTheme.tone}
+      // tone={rootTheme.tone}
     >
       {prefixNode}
 
@@ -366,7 +375,7 @@ export const TextInput = forwardRef(function TextInput(
       </Box>
 
       {suffixNode}
-    </Card>
+    </Box>
   )
 })
 

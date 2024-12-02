@@ -12,21 +12,15 @@ import {PartialTokens, Tokens} from './tokens'
 const defaultElementTokens: ElementColorTokens = {
   _hue: 'gray',
   bg: {
-    1: ['950', '50'],
-    2: ['900', '100'],
-    3: ['800', '200'],
+    0: ['950', '50'],
     4: ['700', '300'],
   },
   border: {
-    1: ['700', '300'],
-    2: ['600', '400'],
-    3: ['500', '500'],
+    0: ['700', '300'],
     4: ['400', '600'],
   },
   fg: {
-    1: ['100', '900'],
-    2: ['200', '800'],
-    3: ['300', '700'],
+    0: ['100', '900'],
     4: ['400', '600'],
   },
 }
@@ -54,43 +48,88 @@ function resolveCardColorTokens(
   tokens: PartialTokens<CardColorTokens> | undefined,
 ): CardColorTokens {
   return {
-    ...resolveElementTokens(tokens),
-    focusRing: tokens?.focusRing ?? ['500', '500'],
-    tinted: {
-      '*': resolveElementTokens(tokens?.tinted?.['*']),
-      ...THEME_COLOR_STATE_TONES.reduce(
-        (acc, tone) => {
-          return {
-            ...acc,
-            [tone]: resolveElementTokens(
-              //
-              merge(tokens, tokens?.tinted?.['*'], tokens?.tinted?.[tone]),
-            ),
-          }
-        },
-        {} as Record<ThemeColorStateToneKey, ElementColorTokens>,
-      ),
+    _hue: tokens?._hue ?? 'gray',
+    avatar: {
+      gray: {
+        _hue: tokens?.avatar?.gray?._hue ?? 'gray',
+        bg: tokens?.avatar?.gray?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.gray?.fg ?? ['900', '900'],
+      },
+      blue: {
+        _hue: tokens?.avatar?.blue?._hue ?? 'blue',
+        bg: tokens?.avatar?.blue?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.blue?.fg ?? ['900', '900'],
+      },
+      purple: {
+        _hue: tokens?.avatar?.purple?._hue ?? 'gray',
+        bg: tokens?.avatar?.purple?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.purple?.fg ?? ['900', '900'],
+      },
+      magenta: {
+        _hue: tokens?.avatar?.magenta?._hue ?? 'magenta',
+        bg: tokens?.avatar?.magenta?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.magenta?.fg ?? ['900', '900'],
+      },
+      red: {
+        _hue: tokens?.avatar?.red?._hue ?? 'red',
+        bg: tokens?.avatar?.red?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.red?.fg ?? ['900', '900'],
+      },
+      orange: {
+        _hue: tokens?.avatar?.orange?._hue ?? 'orange',
+        bg: tokens?.avatar?.orange?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.orange?.fg ?? ['900', '900'],
+      },
+      yellow: {
+        _hue: tokens?.avatar?.yellow?._hue ?? 'yellow',
+        bg: tokens?.avatar?.yellow?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.yellow?.fg ?? ['900', '900'],
+      },
+      green: {
+        _hue: tokens?.avatar?.green?._hue ?? 'green',
+        bg: tokens?.avatar?.green?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.green?.fg ?? ['900', '900'],
+      },
+      cyan: {
+        _hue: tokens?.avatar?.cyan?._hue ?? 'cyan',
+        bg: tokens?.avatar?.cyan?.bg ?? ['400', '400'],
+        fg: tokens?.avatar?.cyan?.fg ?? ['900', '900'],
+      },
     },
+    focusRing: tokens?.focusRing ?? ['500', '500'],
     shadow: {
       outline: tokens?.shadow?.outline ?? ['500', '500'],
       umbra: tokens?.shadow?.umbra ?? ['500', '500'],
       penumbra: tokens?.shadow?.penumbra ?? ['500', '500'],
       ambient: tokens?.shadow?.ambient ?? ['500', '500'],
     },
-    solid: {
-      '*': resolveElementTokens(tokens?.solid?.['*']),
-      ...THEME_COLOR_STATE_TONES.reduce(
-        (acc, tone) => {
-          return {
-            ...acc,
-            [tone]: resolveElementTokens(
-              //
-              merge(tokens, tokens?.solid?.['*'], tokens?.solid?.[tone]),
-            ),
-          }
-        },
-        {} as Record<ThemeColorStateToneKey, ElementColorTokens>,
-      ),
+    variant: {
+      solid: {
+        '*': resolveElementTokens(tokens?.variant?.solid?.['*']),
+        ...THEME_COLOR_STATE_TONES.reduce(
+          (acc, tone) => {
+            acc[tone] = resolveElementTokens(
+              merge(tokens, tokens?.variant?.solid?.['*'], tokens?.variant?.solid?.[tone]),
+            )
+
+            return acc
+          },
+          {} as Record<ThemeColorStateToneKey, ElementColorTokens>,
+        ),
+      },
+      tinted: {
+        '*': resolveElementTokens(tokens?.variant?.tinted?.['*']),
+        ...THEME_COLOR_STATE_TONES.reduce(
+          (acc, tone) => {
+            acc[tone] = resolveElementTokens(
+              merge(tokens, tokens?.variant?.tinted?.['*'], tokens?.variant?.tinted?.[tone]),
+            )
+
+            return acc
+          },
+          {} as Record<ThemeColorStateToneKey, ElementColorTokens>,
+        ),
+      },
     },
   }
 }
@@ -99,21 +138,15 @@ function resolveElementTokens(tokens?: PartialTokens<ElementColorTokens>): Eleme
   return {
     _hue: tokens?._hue ?? 'gray',
     bg: {
-      1: tokens?.bg?.[1] ?? defaultElementTokens.bg[1],
-      2: tokens?.bg?.[2] ?? defaultElementTokens.bg[2],
-      3: tokens?.bg?.[3] ?? defaultElementTokens.bg[3],
+      0: tokens?.bg?.[0] ?? defaultElementTokens.bg[0],
       4: tokens?.bg?.[4] ?? defaultElementTokens.bg[4],
     },
     border: {
-      1: tokens?.border?.[1] ?? defaultElementTokens.border[1],
-      2: tokens?.border?.[2] ?? defaultElementTokens.border[2],
-      3: tokens?.border?.[3] ?? defaultElementTokens.border[3],
+      0: tokens?.border?.[0] ?? defaultElementTokens.border[0],
       4: tokens?.border?.[4] ?? defaultElementTokens.border[4],
     },
     fg: {
-      1: tokens?.fg?.[1] ?? defaultElementTokens.fg[1],
-      2: tokens?.fg?.[2] ?? defaultElementTokens.fg[2],
-      3: tokens?.fg?.[3] ?? defaultElementTokens.fg[3],
+      0: tokens?.fg?.[0] ?? defaultElementTokens.fg[0],
       4: tokens?.fg?.[4] ?? defaultElementTokens.fg[4],
     },
   }

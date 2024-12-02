@@ -4,7 +4,10 @@ import {Rules} from '../../types'
 
 export const skeletonRules: Rules = {
   'skeleton': {
-    'backgroundColor': 'var(--card-skeleton-from-color)',
+    '--color-skeleton-from': `color-mix(in srgb, transparent, var(--color-muted-fg) 5%)`,
+    '--color-skeleton-to': `color-mix(in srgb, transparent, var(--color-muted-fg) 10%)`,
+
+    'backgroundColor': 'var(--color-skeleton-from)',
     'backgroundPosition': '100%',
     'backgroundSize': '200% 100%',
     'backgroundAttachment': 'fixed',
@@ -26,11 +29,11 @@ export const skeletonRules: Rules = {
       '&[data-animated]': {
         backgroundImage: `linear-gradient(
           to right,
-          var(--card-skeleton-from-color),
-          var(--card-skeleton-to-color),
-          var(--card-skeleton-from-color),
-          var(--card-skeleton-from-color),
-          var(--card-skeleton-from-color)
+          var(--color-skeleton-from),
+          var(--color-skeleton-to),
+          var(--color-skeleton-from),
+          var(--color-skeleton-from),
+          var(--color-skeleton-from)
         )`,
         animationName: 'skeleton-pulse',
         animationTimingFunction: 'ease-in-out',
@@ -45,7 +48,7 @@ export const skeletonRules: Rules = {
 
     '@media': {
       'screen and (prefers-reduced-motion: no-preference)': {
-        backgroundColor: 'var(--card-skeleton-from-color)',
+        backgroundColor: 'var(--color-skeleton-from)',
       },
     },
   },

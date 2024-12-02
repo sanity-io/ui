@@ -1,33 +1,21 @@
 import {ChevronDownIcon} from '@sanity/icons'
+import {ResponsiveProp, select} from '@sanity/ui/css'
+import {FontTextSize, Radius, Space} from '@sanity/ui/theme'
 import {forwardRef, useImperativeHandle, useRef} from 'react'
-import {useCustomValidity, useArrayProp} from '../../hooks'
-import {styled} from '../../lib/styled'
-import {Radius} from '../../types'
+import {useCustomValidity} from '../../hooks'
 import {Box} from '../box'
 import {Text} from '../text'
-import {selectStyle} from './styles'
 
 /**
  * @public
  */
 export interface SelectProps {
-  fontSize?: number | number[]
-  padding?: number | number[]
-  radius?: Radius | Radius[]
-  space?: number | number[]
+  fontSize?: ResponsiveProp<FontTextSize>
+  padding?: ResponsiveProp<Space>
+  radius?: ResponsiveProp<Radius>
+  space?: ResponsiveProp<Space>
   customValidity?: string
 }
-
-const Root = styled.div(selectStyle.root)
-
-const Input = styled.select<{
-  $fontSize: number[]
-  $padding: number[]
-  $radius: Radius[]
-  $space: number[]
-}>(selectStyle.input)
-
-const IconBox = styled(Box)(selectStyle.iconBox)
 
 /**
  * The `Select` component provides control of options.
@@ -42,11 +30,11 @@ export const Select = forwardRef(function Select(
     children,
     customValidity,
     disabled,
-    fontSize = 2,
-    padding = 3,
+    fontSize = 1,
+    padding = 2,
     radius = 2,
     readOnly,
-    space = 3,
+    space = 2,
     ...restProps
   } = props
 
@@ -60,27 +48,37 @@ export const Select = forwardRef(function Select(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root data-ui="Select">
-      <Input
+    <div
+      // const Root = styled.div(selectStyle.root)
+      className={select({fontSize, padding, radius, space})}
+      data-ui="Select"
+    >
+      <select
+        // const Input = styled.select
         data-read-only={!disabled && readOnly ? '' : undefined}
-        data-ui="Select"
+        // data-ui="Select"
         {...restProps}
-        $fontSize={useArrayProp(fontSize)}
-        $padding={useArrayProp(padding)}
-        $radius={useArrayProp(radius)}
-        $space={useArrayProp(space)}
+        // $fontSize={useArrayProp(fontSize)}
+        // $padding={useArrayProp(padding)}
+        // $radius={useArrayProp(radius)}
+        // $space={useArrayProp(space)}
         disabled={disabled || readOnly}
         ref={ref}
       >
         {children}
-      </Input>
+      </select>
 
-      <IconBox padding={padding}>
+      <Box
+        display="inline-block"
+        // const IconBox = styled(Box)(selectStyle.iconBox)
+        padding={padding}
+      >
         <Text size={fontSize}>
           <ChevronDownIcon />
         </Text>
-      </IconBox>
-    </Root>
+      </Box>
+    </div>
   )
 })
+
 Select.displayName = 'ForwardRef(Select)'

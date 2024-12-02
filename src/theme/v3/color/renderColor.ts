@@ -1,4 +1,5 @@
-import {ColorHueKey} from '@sanity/color'
+import {Hue} from '../../palette'
+import {ThemeColorSchemeKey} from '../../v2'
 import {parseColor} from './parseColor'
 import {ColorToken} from './token'
 
@@ -6,13 +7,16 @@ type CSSVariableKey = `--${string}`
 
 export interface RenderColorContext {
   bgVar: CSSVariableKey
-  hue: ColorHueKey
+  hue: Hue
+  scheme: ThemeColorSchemeKey
 }
 
-export function renderColor(token: ColorToken, context: RenderColorContext): string {
-  const {bgVar, hue} = context
+export function renderColor(token: [ColorToken, ColorToken], context: RenderColorContext): string {
+  const {bgVar, hue, scheme} = context
 
-  const result = parseColor(token)
+  const i = scheme === 'dark' ? 0 : 1
+
+  const result = parseColor(token[i])
 
   const colorVar =
     result.color.type === 'hue'

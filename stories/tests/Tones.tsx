@@ -1,6 +1,7 @@
 import {ReactNode, useState} from 'react'
 
 import {LayerProvider} from '../../src/core'
+import {ThemeProvider} from '../../src/core/_compat'
 import {
   CodeSkeleton,
   HeadingSkeleton,
@@ -40,7 +41,6 @@ import {
   TextArea,
   TextInput,
 } from '../../src/core/primitives'
-import {ThemeProvider} from '../../src/core/theme'
 import {buildTheme, ThemeColorSchemeKey} from '../../src/theme'
 
 const theme = buildTheme()

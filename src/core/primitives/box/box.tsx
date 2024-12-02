@@ -7,7 +7,7 @@ import {forwardRef} from 'react'
  */
 export interface BoxProps extends BoxStyleProps, GapStyleProps, PositionStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  forwardedAs?: React.ElementType | keyof JSX.IntrinsicElements
+  // forwardedAs?: React.ElementType | keyof JSX.IntrinsicElements
 }
 
 /**
