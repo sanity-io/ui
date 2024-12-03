@@ -8,6 +8,7 @@ import {
   ThemeColorSchemeKey,
 } from './system'
 import {is_v2, v0_v2, v2_v0} from './versioning'
+import {themeColor_v0_v2_9} from './versioning/themeColor_v2_v2_9'
 
 // cache[scheme][tone][rootTheme] = theme
 const cache = new Map<
@@ -34,6 +35,7 @@ export function getScopedTheme(
 
   const colorScheme_v2 = v2.color[scheme] || v2.color.light
   const color_v2 = colorScheme_v2[tone] || colorScheme_v2.default
+  const color_v2_9 = themeColor_v0_v2_9(color_v2)
   const layer_v2 = v2.layer || defaultThemeConfig.layer
 
   const theme: Theme = {
@@ -44,7 +46,7 @@ export function getScopedTheme(
       v2: {
         ...v2,
         _resolved: true,
-        color: color_v2,
+        color: color_v2_9,
         layer: layer_v2,
       },
     },
