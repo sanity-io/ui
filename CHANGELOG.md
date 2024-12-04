@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.1](https://github.com/sanity-io/ui/compare/v2.9.0...v2.9.1) (2024-12-04)
+
+### Bug Fixes
+
+- **card:** guard when picking new nested theme properties ([963f09d](https://github.com/sanity-io/ui/commit/963f09d4e03595219ddf72894d76d391fc965835))
+
 ## [2.9.0](https://github.com/sanity-io/ui/compare/v2.8.26...v2.9.0) (2024-11-29)
 
 ### Features
