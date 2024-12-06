@@ -9,7 +9,7 @@ export default defineRuntime({
     ...viteConfig,
     plugins: [
       viteReact({
-        babel: {plugins: [['babel-plugin-react-compiler', {target: '18'}]]},
+        babel: {plugins: [['babel-plugin-react-compiler', {target: '19'}]]},
       }),
     ],
     resolve: {

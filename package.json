@@ -207,7 +207,13 @@
   },
   "pnpm": {
     "overrides": {
-      "conventional-changelog-conventionalcommits": ">= 8.0.0"
+      "@types/react": "$@types/react",
+      "@types/react-dom": "$@types/react-dom",
+      "@types/react-is": "$@types/react-is",
+      "conventional-changelog-conventionalcommits": ">= 8.0.0",
+      "react": "$react",
+      "react-dom": "$react-dom",
+      "react-is": "$react-is"
     }
   },
   "esm.sh": {
