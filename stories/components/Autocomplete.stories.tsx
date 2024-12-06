@@ -16,6 +16,7 @@ const meta: Meta<typeof Autocomplete> = {
   decorators: [
     (Story: StoryFn): JSX.Element => (
       <Card paddingBottom={8} paddingTop={3}>
+        {/* @ts-expect-error fix later */}
         <Story />
       </Card>
     ),

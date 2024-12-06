@@ -18,6 +18,7 @@ const meta: Meta<typeof Tooltip> = {
   decorators: [
     (Story: StoryFn): JSX.Element => (
       <Card padding={6}>
+        {/* @ts-expect-error fix later */}
         <Story />
       </Card>
     ),

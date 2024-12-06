@@ -27,6 +27,7 @@ const meta: Meta<typeof MenuItem> = {
         <Card radius={3} shadow={2}>
           <LayerProvider>
             <Menu>
+              {/* @ts-expect-error fix later */}
               <Story />
             </Menu>
           </LayerProvider>

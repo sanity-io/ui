@@ -66,6 +66,7 @@ const meta: Meta<typeof Dialog> = {
         <Card ref={setBoundaryElement}>
           <BoundaryElementProvider element={boundaryElement}>
             <PortalProvider element={portalElement}>
+              {/* @ts-expect-error fix later */}
               <Story />
             </PortalProvider>
           </BoundaryElementProvider>

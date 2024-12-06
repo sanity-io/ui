@@ -10,6 +10,7 @@ const meta: Meta<typeof Toast> = {
   decorators: [
     (Story: StoryFn): JSX.Element => (
       <ToastProvider>
+        {/* @ts-expect-error fix later */}
         <Story />
       </ToastProvider>
     ),

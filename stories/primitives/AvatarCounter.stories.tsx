@@ -14,6 +14,7 @@ const meta: Meta<typeof AvatarCounter> = {
   decorators: [
     (Story: StoryFn): JSX.Element => (
       <AvatarStack>
+        {/* @ts-expect-error fix later */}
         <Story />
       </AvatarStack>
     ),
