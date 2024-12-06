@@ -159,7 +159,7 @@
     "cypress": "^13.13.2",
     "cypress-real-events": "^1.13.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-boundaries": "^5.0.1",
     "eslint-plugin-import": "^2.31.0",
