@@ -663,6 +663,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         radius={radius}
         ref={resultsPopoverElementRef}
         referenceElement={inputElementRef.current}
+        // @ts-expect-error fix later
         {...popover}
       />
     )
