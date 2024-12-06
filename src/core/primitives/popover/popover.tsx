@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Middleware,
   RootBoundary,
@@ -60,7 +59,7 @@ export interface PopoverProps
   arrow?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
-  children?: React.ReactElement
+  children?: React.ReactElement<any>
   /**
    * When `true`, prevent overflow within the current boundary:
    * - by flipping on its side axis
@@ -118,7 +117,7 @@ export const Popover = memo(
     props: PopoverProps &
       Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
-  ): React.ReactElement {
+  ): React.ReactElement<any> {
     const {container, layer} = useTheme_v2()
     const boundaryElementContext = useBoundaryElement()
 
@@ -199,7 +198,7 @@ export const Popover = memo(
     }, [maxWidth])
 
     // Keep track of reference element width (see `size` middleware below)
-    const referenceWidthRef = useRef<number>()
+    const referenceWidthRef = useRef<number>(undefined)
 
     // Force apply width & max width to floating element
     useEffect(() => {
@@ -449,7 +448,7 @@ Popover.displayName = 'Memo(ForwardRef(Popover))'
 // https://github.com/facebook/react/pull/28348
 //
 // Access the ref using the method that doesn't yield a warning.
-function getElementRef(element: React.ReactElement) {
+function getElementRef(element: React.ReactElement<any>) {
   // React <=18 in DEV
   let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
   let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning

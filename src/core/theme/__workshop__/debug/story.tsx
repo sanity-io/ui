@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {CropIcon} from '@sanity/icons'
 import {
   THEME_COLOR_BUTTON_MODES,

@@ -18,7 +18,10 @@ function DefaultWrapper({children}: {children?: ReactNode}) {
   return <main>{children}</main>
 }
 
-export function render(rootElement: ReactElement, options: TestRenderOptions = {}): RenderResult {
+export function render(
+  rootElement: ReactElement<any>,
+  options: TestRenderOptions = {},
+): RenderResult {
   const {
     baseElement,
     scheme = 'light',

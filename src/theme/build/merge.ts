@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {isRecord} from './lib/isRecord'
 
 export function merge<T extends Record<string, any>>(...records: (T | undefined)[]): T {

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_CARD_TONES,

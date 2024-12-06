@@ -1,3 +1,4 @@
+import type {JSX} from 'react'
 import {Card, Flex, Grid, Text} from '../../src/core/primitives'
 import {ThemeColorSchemeKey} from '../../src/theme'
 

@@ -23,7 +23,7 @@ export interface ThemeProviderProps {
 /**
  * @public
  */
-export function ThemeProvider(props: ThemeProviderProps): React.ReactElement {
+export function ThemeProvider(props: ThemeProviderProps): React.ReactElement<any> {
   const parentTheme = useContext(ThemeContext)
   const {children} = props
   const scheme = props.scheme ?? (parentTheme?.scheme || 'light')

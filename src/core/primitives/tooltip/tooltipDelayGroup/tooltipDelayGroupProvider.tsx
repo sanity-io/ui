@@ -28,7 +28,7 @@ export interface TooltipDelayGroupProviderProps {
  */
 export function TooltipDelayGroupProvider(
   props: TooltipDelayGroupProviderProps,
-): React.ReactElement {
+): React.ReactElement<any> {
   const {children, delay} = props
   const [isGroupActive, setIsGroupActive] = useDelayedState(false)
   const [openTooltipId, setOpenTooltipId] = useDelayedState<string | null>(null)

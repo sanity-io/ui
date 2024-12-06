@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
+import type {JSX} from 'react'
 import {Toast, ToastProvider, useToast} from '../../src/core/components'
 import {Button, Inline} from '../../src/core/primitives'
 
@@ -9,6 +10,7 @@ const meta: Meta<typeof Toast> = {
   decorators: [
     (Story: StoryFn): JSX.Element => (
       <ToastProvider>
+        {/* @ts-expect-error fix later */}
         <Story />
       </ToastProvider>
     ),

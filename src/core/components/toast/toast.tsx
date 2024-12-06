@@ -53,7 +53,7 @@ const Root = styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & T
  */
 export function Toast(
   props: ToastProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'title'>,
-): React.ReactElement {
+): React.ReactElement<any> {
   const {closable, description, duration, onClose, radius = 3, title, status, ...restProps} = props
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const buttonTone = status ? BUTTON_TONE[status] : 'default'

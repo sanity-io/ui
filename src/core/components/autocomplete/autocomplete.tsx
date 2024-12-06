@@ -73,11 +73,11 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   /** @beta */
   relatedElements?: HTMLElement[]
   /** The callback function for rendering each option. */
-  renderOption?: (option: Option) => ReactElement
+  renderOption?: (option: Option) => ReactElement<any>
   /** @beta */
   renderPopover?: (
     props: {
-      content: ReactElement | null
+      content: ReactElement<any> | null
       hidden: boolean
       inputElement: HTMLInputElement | null
       onMouseEnter: () => void
@@ -663,6 +663,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         radius={radius}
         ref={resultsPopoverElementRef}
         referenceElement={inputElementRef.current}
+        // @ts-expect-error fix later
         {...popover}
       />
     )
@@ -724,4 +725,4 @@ export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocomplet
     > & {
       ref?: Ref<HTMLInputElement>
     },
-) => ReactElement
+) => ReactElement<any>

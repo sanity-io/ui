@@ -25,7 +25,7 @@ const config: StorybookConfig = {
     return mergeConfig(config, {
       plugins: [
         viteReact({
-          babel: {plugins: [['babel-plugin-react-compiler', {target: '18'}]]},
+          babel: {plugins: [['babel-plugin-react-compiler', {target: '19'}]]},
         }),
         tsconfigPaths(),
       ],

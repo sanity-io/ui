@@ -37,7 +37,6 @@ export const Inline = forwardRef(function Inline(
       {...restProps}
       $space={useArrayProp(space)}
       forwardedAs={as}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
     >
       {children}

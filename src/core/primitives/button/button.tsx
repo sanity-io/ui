@@ -1,4 +1,4 @@
-import {forwardRef, isValidElement, useMemo} from 'react'
+import {forwardRef, isValidElement, useMemo, type JSX} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'

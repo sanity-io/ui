@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
   ThemeColorButtonTone_v2,
   ThemeColorCard_v2,
@@ -23,7 +21,7 @@ import {Root} from './Root'
 
 const theme = buildTheme()
 
-export default function BuildStory(): ReactElement {
+export default function BuildStory(): ReactElement<any> {
   return (
     <Root>
       <div
