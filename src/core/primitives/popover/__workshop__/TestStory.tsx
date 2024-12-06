@@ -12,7 +12,7 @@ import {Text} from '../../text'
 import {Popover} from '../popover'
 import {PopoverUpdateCallback} from '../types'
 
-export default function TestStory(): ReactElement {
+export default function TestStory(): ReactElement<any> {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
@@ -30,7 +30,7 @@ export default function TestStory(): ReactElement {
 
   const text = useText('Text', 'Test')
 
-  const updateRef = useRef<PopoverUpdateCallback>()
+  const updateRef = useRef<PopoverUpdateCallback>(undefined)
 
   const button = (
     <Button text="reference" selected style={{width: referenceWide ? 300 : undefined}} />

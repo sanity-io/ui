@@ -30,7 +30,7 @@ export const Tree = memo(
     props: TreeProps &
       Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
-  ): React.ReactElement {
+  ): React.ReactElement<any> {
     const {children, space = 1, onFocus, ...restProps} = props
     const ref = useRef<HTMLDivElement | null>(null)
     const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)

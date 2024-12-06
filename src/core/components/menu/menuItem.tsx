@@ -7,6 +7,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type JSX,
 } from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'

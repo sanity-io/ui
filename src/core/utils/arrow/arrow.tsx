@@ -68,7 +68,7 @@ export const Arrow = forwardRef(function Arrow(
     'width' | 'height'
   >,
   ref: ForwardedRef<HTMLDivElement>,
-): ReactElement {
+): ReactElement<any> {
   const {width: w, height: h, radius = 0, ...restProps} = props
   const {card} = useTheme_v2()
   const strokeWidth = card.shadow.outline

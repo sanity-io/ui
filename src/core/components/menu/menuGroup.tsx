@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import {isValidElement, useCallback, useEffect, useState} from 'react'
+import {isValidElement, useCallback, useEffect, useState, type JSX} from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
@@ -30,7 +30,7 @@ export interface MenuGroupProps {
 export function MenuGroup(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
     MenuGroupProps,
-): React.ReactElement {
+): React.ReactElement<any> {
   const {
     as = 'button',
     children,

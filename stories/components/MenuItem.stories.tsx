@@ -1,4 +1,5 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
+import type {JSX} from 'react'
 import {Menu, MenuItem} from '../../src/core/components'
 import {Card, Container} from '../../src/core/primitives'
 import {LayerProvider} from '../../src/core/utils'

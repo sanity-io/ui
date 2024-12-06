@@ -1,4 +1,12 @@
-import {FocusEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
+import {
+  FocusEvent,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  type JSX,
+} from 'react'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers'

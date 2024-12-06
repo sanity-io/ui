@@ -48,7 +48,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   allowedAutoPlacements?: Placement[]
   arrow?: boolean
   boundaryElement?: HTMLElement | null
-  children?: React.ReactElement
+  children?: React.ReactElement<any>
   content?: React.ReactNode
   disabled?: boolean
   fallbackPlacements?: Placement[]

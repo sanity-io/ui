@@ -1,4 +1,4 @@
-import {forwardRef, useImperativeHandle, useMemo, useState} from 'react'
+import {forwardRef, useImperativeHandle, useMemo, useState, type JSX} from 'react'
 import {useElementSize} from '../../hooks'
 import {useTheme_v2} from '../../theme'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
