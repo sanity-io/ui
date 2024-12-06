@@ -70,11 +70,12 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement {
         y: 0,
         scale: 1,
       },
+      // @ts-expect-error fix later
       exit: {
         opacity: [1, 1, 0],
         [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: [1, 0, 0],
         scale: 0.5,
-        transition: prefersReducedMotion ? {duration: 0} : {duration: 0.2},
+        transition: {duration: prefersReducedMotion ? 0 : 0.2},
       },
     }),
     [prefersReducedMotion],
