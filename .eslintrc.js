@@ -36,8 +36,7 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'error',
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/member-delimiter-style': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-empty-interface': 'off',
     'boundaries/element-types': [
       'error',
