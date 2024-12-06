@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.0](https://github.com/sanity-io/ui/compare/v2.9.1...v2.10.0) (2024-12-06)
+
+### Features
+
+- support react 19 ([#1497](https://github.com/sanity-io/ui/issues/1497)) ([0c62d37](https://github.com/sanity-io/ui/commit/0c62d371f496754cedb65f02636f9dd86ebf98d9))
+
 ## [2.9.1](https://github.com/sanity-io/ui/compare/v2.9.0...v2.9.1) (2024-12-04)
 
 ### Bug Fixes
