@@ -35,8 +35,8 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    '@typescript-eslint/explicit-module-boundary-types': 'error',
-    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     'boundaries/element-types': [
       'error',

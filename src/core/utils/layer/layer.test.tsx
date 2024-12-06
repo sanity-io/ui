@@ -1,5 +1,4 @@
 /** @jest-environment jsdom */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {render} from '../../../../test'
 import {LayerContext} from './layerContext'

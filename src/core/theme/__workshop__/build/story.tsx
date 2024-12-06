@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
   ThemeColorButtonTone_v2,
   ThemeColorCard_v2,

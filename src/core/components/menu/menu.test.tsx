@@ -79,7 +79,6 @@ describe('components/menu', () => {
       }
 
       function Root() {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const value: any = undefined
 
         return (
@@ -109,7 +108,6 @@ describe('components/menu', () => {
 
       function Root() {
         // NOTE: we’re testing this because the context value may be a function in the future
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const value: any = () => {
           return {version: 1}
         }
