@@ -17,15 +17,17 @@ export default function Example() {
     useSelect('Max. length', BREADCRUMBS_MAX_LENGTH_OPTIONS, 0, 'Props') || undefined
 
   return (
-    <Flex align="center" height="fill" justify="center">
+    <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Breadcrumbs
+        gapX={1}
+        gapY={3}
         maxLength={maxLength}
         separator={
           <Text muted size={1}>
             /
           </Text>
         }
-        space={2}
+        // space={2}
       >
         <Text size={1}>
           <a href="#">Root</a>

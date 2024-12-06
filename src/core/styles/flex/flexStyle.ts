@@ -16,6 +16,8 @@ export function responsiveFlexStyle(): Array<
     BASE_STYLE,
     responsiveFlexAlignStyle,
     responsiveFlexGapStyle,
+    responsiveFlexGapXStyle,
+    responsiveFlexGapYStyle,
     responsiveFlexWrapStyle,
     responsiveFlexJustifyStyle,
     responsiveFlexDirectionStyle,
@@ -37,6 +39,22 @@ function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
 
   return _responsive(media, props.$gap, (gap) => ({
     gap: gap ? rem(space[gap]) : undefined,
+  }))
+}
+
+function responsiveFlexGapXStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
+  const {media, space} = getTheme_v2(props.theme)
+
+  return _responsive(media, props.$gapX, (gapX) => ({
+    columnGap: gapX ? rem(space[gapX]) : undefined,
+  }))
+}
+
+function responsiveFlexGapYStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
+  const {media, space} = getTheme_v2(props.theme)
+
+  return _responsive(media, props.$gapY, (gapY) => ({
+    rowGap: gapY ? rem(space[gapY]) : undefined,
   }))
 }
 
