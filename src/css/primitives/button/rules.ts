@@ -3,25 +3,36 @@ import {Rules} from '../../types'
 
 export const buttonRules: Rules = {
   'button': {
-    WebkitFontSmoothing: 'inherit',
-    appearance: 'none',
-    display: 'inline-flex',
-    alignItems: 'center',
-    font: 'inherit',
-    outline: 'none',
-    userSelect: 'none',
-    textDecoration: 'none',
-    border: 0,
-    boxSizing: 'border-box',
-    padding: 0,
-    overflow: 'hidden',
-    margin: 0,
-    textAlign: 'left',
-    position: 'relative',
-    verticalAlign: 'top',
-    backgroundColor: 'var(--color-bg)',
-    color: 'var(--color-fg)',
-    boxShadow: 'inset 0 0 0 1px var(--color-border)',
+    'WebkitFontSmoothing': 'inherit',
+    'appearance': 'none',
+    // display: 'inline-flex',
+    // 'alignItems': 'center',
+    'font': 'inherit',
+    'outline': 'none',
+    'userSelect': 'none',
+    'textDecoration': 'none',
+    'border': 0,
+    'boxSizing': 'border-box',
+    'padding': 0,
+    'overflow': 'hidden',
+    'margin': 0,
+    'textAlign': 'left',
+    'position': 'relative',
+    'verticalAlign': 'top',
+    'backgroundColor': 'var(--color-bg)',
+    'color': 'var(--color-fg)',
+    'boxShadow': 'inset 0 0 0 1px var(--color-border)',
+
+    '@nest': {
+      '&:not([hidden])': {
+        display: 'inline-flex',
+      },
+
+      '&::-moz-focus-inner': {
+        border: 0,
+        padding: 0,
+      },
+    },
   },
 
   // variants
@@ -36,28 +47,39 @@ export const buttonRules: Rules = {
               '--color-bg': `var(--color-solid-${tone}-bg-0)`,
               '--color-border': `var(--color-solid-${tone}-border-1)`,
               '--color-fg': `var(--color-solid-${tone}-fg-1)`,
-              '--color-icon': `var(--color-solid-${tone}-fg-1)`,
+              '--color-muted-fg': `var(--color-solid-${tone}-fg-5)`,
+              // '--color-icon': `var(--color-solid-${tone}-fg-1)`,
 
               '@nest': {
-                '&:not([data-disabled="true"]):hover': {
+                '&:not([data-disabled]):hover': {
                   '--color-bg': `var(--color-solid-${tone}-bg-1)`,
                   '--color-border': `var(--color-solid-${tone}-border-2)`,
                   '--color-fg': `var(--color-solid-${tone}-fg-0)`,
-                  '--color-icon': `var(--color-solid-${tone}-fg-0)`,
+                  '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+                  // '--color-icon': `var(--color-solid-${tone}-fg-0)`,
                 },
 
-                '&:not([data-disabled="true"]):active': {
+                '&:not([data-disabled]):active': {
                   '--color-bg': `var(--color-solid-${tone}-bg-2)`,
                   '--color-border': `var(--color-solid-${tone}-border-3)`,
                   '--color-fg': `var(--color-solid-${tone}-fg-0)`,
-                  '--color-icon': `var(--color-solid-${tone}-fg-0)`,
+                  '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+                  // '--color-icon': `var(--color-solid-${tone}-fg-0)`,
                 },
 
-                '&:not([data-disabled="true"])[data-selected]': {
+                '&:not([data-disabled])[data-selected]': {
                   '--color-bg': `var(--color-solid-${tone}-bg-2)`,
                   '--color-border': `var(--color-solid-${tone}-border-3)`,
                   '--color-fg': `var(--color-solid-${tone}-fg-0)`,
-                  '--color-icon': `var(--color-solid-${tone}-fg-0)`,
+                  '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+                  // '--color-icon': `var(--color-solid-${tone}-fg-0)`,
+                },
+
+                '&[data-disabled]': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-1)`,
+                  '--color-fg': `var(--color-tinted-${tone}-border-2)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-border-1)`,
                 },
               },
             }
@@ -69,35 +91,40 @@ export const buttonRules: Rules = {
               '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
               '--color-border': `var(--color-tinted-${tone}-border-1)`,
               '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
-              '--color-icon': `var(--color-tinted-${tone}-fg-3)`,
+              '--color-muted-fg': `var(--color-solid-${tone}-fg-5)`,
+              // '--color-icon': `var(--color-tinted-${tone}-fg-3)`,
 
               '@nest': {
-                '&:not([data-disabled="true"]):hover': {
+                '&:not([data-disabled]):hover': {
                   '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
                   '--color-border': `var(--color-tinted-${tone}-border-2)`,
                   '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
-                  '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
+                  '--color-muted-fg': `var(--color-solid-${tone}-fg-5)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
                 },
 
-                '&:not([data-disabled="true"]):active': {
+                '&:not([data-disabled]):active': {
                   '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
                   '--color-border': `var(--color-tinted-${tone}-border-3)`,
                   '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
-                  '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
+                  '--color-muted-fg': `var(--color-tinted-${tone}-fg-5)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
                 },
 
-                '&:not([data-disabled="true"])[data-selected]': {
+                '&:not([data-disabled])[data-selected]': {
                   '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
                   '--color-border': `var(--color-tinted-${tone}-border-3)`,
                   '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
-                  '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
+                  '--color-muted-fg': `var(--color-tinted-${tone}-fg-5)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-fg-1)`,
                 },
 
-                '&[data-disabled="true"]': {
+                '&[data-disabled]': {
                   '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
-                  '--color-border': `var(--color-tinted-${tone}-border-1)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-0)`,
                   '--color-fg': `var(--color-tinted-${tone}-border-3)`,
-                  '--color-icon': `var(--color-tinted-${tone}-border-2)`,
+                  '--color-muted-fg': `var(--color-solid-${tone}-border-2)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-border-2)`,
                 },
               },
             }
@@ -108,28 +135,35 @@ export const buttonRules: Rules = {
               '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
               '--color-border': `var(--color-tinted-${tone}-border-0)`,
               '--color-fg': `var(--color-tinted-${tone}-fg-2)`,
-              '--color-icon': `var(--color-tinted-${tone}-fg-3)`,
+              // '--color-icon': `var(--color-tinted-${tone}-fg-3)`,
 
               '@nest': {
-                '&:not([data-disabled="true"]):hover': {
+                '&:not([data-disabled]):hover': {
                   '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
                   '--color-border': `var(--color-tinted-${tone}-border-1)`,
                   '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
-                  '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
                 },
 
-                '&:not([data-disabled="true"]):active': {
+                '&:not([data-disabled]):active': {
                   '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
                   '--color-border': `var(--color-tinted-${tone}-border-2)`,
                   '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
-                  '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
                 },
 
-                '&:not([data-disabled="true"])[data-selected]': {
+                '&:not([data-disabled])[data-selected]': {
                   '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
                   '--color-border': `var(--color-tinted-${tone}-border-2)`,
                   '--color-fg': `var(--color-tinted-${tone}-fg-3)`,
-                  '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-fg-4)`,
+                },
+
+                '&[data-disabled]': {
+                  '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
+                  '--color-border': `var(--color-tinted-${tone}-border-0)`,
+                  '--color-fg': `var(--color-tinted-${tone}-border-3)`,
+                  // '--color-icon': `var(--color-tinted-${tone}-border-2)`,
                 },
               },
             }
@@ -243,7 +277,7 @@ export const buttonRules: Rules = {
 //       'backgroundColor': 'var(--color-bg)',
 //       'color': 'var(--color-fg)',
 //       'boxShadow': focusRingBorderStyle(border),
-//       '&:disabled, &[data-disabled="true"]': _cardColorStyle(baseColor, color.disabled),
+//       '&:disabled, &[data-disabled]': _cardColorStyle(baseColor, color.disabled),
 //       "&:not([data-disabled='true'])": {
 //         'boxShadow': combineBoxShadow(
 //           focusRingBorderStyle(border),

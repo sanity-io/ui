@@ -1,7 +1,6 @@
+import {composeClassNames, radio} from '@sanity/ui/css'
 import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {useCustomValidity} from '../../hooks'
-import {styled} from '../../lib/styled'
-import {radioBaseStyle, inputElementStyle} from './styles'
 
 /**
  * @public
@@ -9,9 +8,6 @@ import {radioBaseStyle, inputElementStyle} from './styles'
 export interface RadioProps {
   customValidity?: string
 }
-
-const Root = styled.div(radioBaseStyle)
-const Input = styled.input(inputElementStyle)
 
 /**
  * The `Radio` component allows the user to select one option from a set.
@@ -33,8 +29,14 @@ export const Radio = forwardRef(function Radio(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root className={className} data-ui="Radio" style={style}>
-      <Input
+    <div
+      // const Root = styled.div(radioBaseStyle)
+      className={composeClassNames(className, radio())}
+      data-ui="Radio"
+      style={style}
+    >
+      <input
+        // const Input = styled.input(inputElementStyle)
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
         {...restProps}
@@ -44,7 +46,7 @@ export const Radio = forwardRef(function Radio(
         type="radio"
       />
       <span />
-    </Root>
+    </div>
   )
 })
 Radio.displayName = 'ForwardRef(Radio)'

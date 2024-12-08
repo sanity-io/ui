@@ -14,7 +14,7 @@ export const badgeRules: Rules = {
       [`badge-${tone}`]: {
         [`--color-bg`]: `var(--color-tinted-${tone}-bg-2)`,
         [`--color-fg`]: `var(--color-tinted-${tone}-fg-2)`,
-        [`--color-icon`]: `var(--color-tinted-${tone}-fg-4)`,
+        // [`--color-icon`]: `var(--color-tinted-${tone}-fg-4)`,
       },
     }),
     {} as Rules,

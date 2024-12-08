@@ -5,13 +5,9 @@ import {TextInputStyleProps} from './types'
 
 export function textInput(props: TextInputStyleProps): string {
   return composeClassNames(
-    'text-input',
     _input(props),
+    'text-input',
     // _resp('text-input', props.fontSize),
     // _resp('text-input-p', props.padding),
   )
-}
-
-export function textInputElement(): string {
-  return composeClassNames('text-input-element')
 }

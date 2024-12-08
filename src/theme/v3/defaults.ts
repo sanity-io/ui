@@ -2,18 +2,18 @@ import {PaletteConfig} from '../palette'
 import {buildTheme_v3} from './buildTheme_v3'
 
 export const defaultPalette: PaletteConfig = {
-  chroma: {min: 0.005, max: 0.2325},
+  chroma: {min: 0.005, max: 0.145},
   luminosity: {min: 0.1875, max: 1},
   hues: {
-    gray: {h: 277, c: 0.04},
-    blue: {h: 273, c: 0.185},
-    purple: {h: 295, c: 0.4},
-    magenta: {h: 12, c: 0.4},
-    red: {h: 30, c: 0.4},
-    orange: {h: 68, c: 0.4},
-    yellow: {h: 90, c: 0.4},
+    gray: {h: 25.5, c: 0.015},
+    blue: {h: 251.5, c: 0.185},
+    purple: {h: 286, c: 0.4},
+    magenta: {h: 340, c: 0.4},
+    red: {h: 22, c: 0.4},
+    orange: {h: 57, c: 0.4},
+    yellow: {h: 85.5, c: 0.4},
     green: {h: 171, c: 0.4},
-    cyan: {h: 194, c: 0.4},
+    cyan: {h: 204.5, c: 0.4},
   },
 }
 
@@ -31,7 +31,7 @@ export const defaultTheme = buildTheme_v3({
           tinted: {
             '*': {
               bg: {
-                0: ['gray/900', 'gray/50'],
+                0: ['900', '50'],
                 4: ['800', '150'],
               },
               border: {
@@ -39,8 +39,8 @@ export const defaultTheme = buildTheme_v3({
                 4: ['600', '350'],
               },
               fg: {
-                0: ['white', 'black'],
-                4: ['400', '600'],
+                0: ['100', '900'],
+                4: ['300', '700'],
               },
             },
             'primary': {
@@ -62,12 +62,12 @@ export const defaultTheme = buildTheme_v3({
           solid: {
             '*': {
               bg: {
-                0: ['500', '500'],
-                4: ['400', '600'],
+                0: ['300', '500'],
+                4: ['200', '600'],
               },
               border: {
-                0: ['600', '400'],
-                4: ['200', '800'],
+                0: ['400', '400'],
+                4: ['600', '200'],
               },
               fg: {
                 0: ['black', 'white'],

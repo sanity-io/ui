@@ -4,6 +4,7 @@ import {ResponsiveProp} from '../../types'
 
 /** @public */
 export interface InputStyleProps extends RadiusStyleProps {
+  border?: boolean
   fontSize?: ResponsiveProp<FontTextSize>
   padding?: ResponsiveProp<Space>
   space?: ResponsiveProp<Space>

@@ -27,7 +27,7 @@ import {
   usePrefersReducedMotion,
 } from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
-import {DialogPosition, Radius} from '../../types'
+import {CardTone, DialogPosition, Radius} from '../../types'
 import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
 import {useDialog} from './useDialog'
 
@@ -63,6 +63,7 @@ export interface DialogProps extends PaddingStyleProps, ContainerStyleProps {
   portal?: string
   position?: DialogPosition | DialogPosition[]
   scheme?: ThemeColorSchemeKey
+  tone?: CardTone
   zOffset?: number | number[]
 }
 
@@ -86,6 +87,7 @@ interface DialogCardProps extends ContainerStyleProps {
   radius: Radius | Radius[]
   scheme?: ThemeColorSchemeKey
   shadow: number | number[]
+  tone?: CardTone
 }
 
 function isTargetWithinScope(
@@ -119,6 +121,7 @@ const DialogCard = forwardRef(function DialogCard(
     radius: radiusProp,
     scheme,
     shadow: shadowProp,
+    tone,
     width: widthProp,
   } = props
   const portal = usePortal()
@@ -205,6 +208,7 @@ const DialogCard = forwardRef(function DialogCard(
         ref={ref}
         scheme={scheme}
         shadow={shadow}
+        tone={tone}
       >
         <Flex className={dialogLayout()} direction="column" flex={1}>
           {showHeader && (
@@ -270,6 +274,7 @@ export const Dialog = forwardRef(function Dialog(
   const {
     __unstable_autoFocus: autoFocus = true,
     __unstable_hideCloseButton: hideCloseButton = false,
+    animate: _animate = false,
     cardRadius: cardRadiusProp = 4,
     cardShadow = 3,
     children,
@@ -288,7 +293,7 @@ export const Dialog = forwardRef(function Dialog(
     scheme,
     width: widthProp = 0,
     zOffset: _zOffsetProp,
-    animate: _animate = false,
+    tone,
     ...restProps
   } = props
   const positionProp = _positionProp ?? (context.position || 'fixed')
@@ -399,6 +404,7 @@ export const Dialog = forwardRef(function Dialog(
           ref={cardRef}
           scheme={scheme}
           shadow={cardShadow}
+          tone={tone}
           width={width}
         >
           {children}

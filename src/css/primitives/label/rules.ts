@@ -9,6 +9,7 @@ export const labelRules: Rules = {
     '--font-weight-bold': `var(--font-label-weight-bold)`,
 
     '--font-family': `var(--font-label-family)`,
+    '--font-feature-settings': `var(--font-label-feature-settings)`,
 
     'color': 'var(--color-fg)',
     'textTransform': 'uppercase',

@@ -9,6 +9,7 @@ export const codeRules: Rules = {
     '--font-weight-bold': `var(--font-code-weight-bold)`,
 
     '--font-family': `var(--font-code-family)`,
+    '--font-feature-settings': `var(--font-code-feature-settings)`,
 
     'color': 'var(--color-fg)',
 

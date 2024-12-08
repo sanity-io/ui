@@ -43,6 +43,7 @@ export const Text = forwardRef(function Text(
     as: As = 'div',
     children: childrenProp,
     className,
+    flex,
     muted = false,
     size = 1,
     textOverflow,
@@ -68,6 +69,7 @@ export const Text = forwardRef(function Text(
         text({
           accent,
           align,
+          flex,
           muted,
           size,
           weight,

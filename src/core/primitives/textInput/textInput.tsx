@@ -1,21 +1,13 @@
 import {CloseIcon} from '@sanity/icons'
-import {
-  composeClassNames,
-  RadiusStyleProps,
-  ResponsiveProp,
-  textInput,
-  textInputElement,
-} from '@sanity/ui/css'
+import {composeClassNames, RadiusStyleProps, ResponsiveProp, textInput} from '@sanity/ui/css'
 import {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
-// import {useRootTheme} from '../../_compat'
 import {EMPTY_RECORD} from '../../constants'
 import {useCustomValidity} from '../../hooks'
 import {styled} from '../../lib/styled'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
-// import {Card} from '../card'
 import {Text} from '../text'
 
 /**
@@ -188,7 +180,7 @@ export const TextInput = forwardRef(function TextInput(
         // $tone={rootTheme.tone}
         // border={border}
         className="text-input-presentation"
-        data-border={border ? '' : undefined}
+        // data-border={border ? '' : undefined}
         data-disable-focus-ring={__unstable_disableFocusRing ? '' : undefined}
         // data-scheme={rootTheme.scheme}
         // data-tone={rootTheme.tone}
@@ -216,7 +208,7 @@ export const TextInput = forwardRef(function TextInput(
     ),
     [
       __unstable_disableFocusRing,
-      border,
+      // border,
       fontSize,
       IconComponent,
       IconRightComponent,
@@ -330,12 +322,15 @@ export const TextInput = forwardRef(function TextInput(
       className={composeClassNames(
         className,
         textInput({
+          border,
           fontSize,
           padding,
           radius,
           space,
         }),
       )}
+      data-icon-left={IconComponent ? '' : undefined}
+      data-icon-right={IconRightComponent ? '' : undefined}
       data-ui="TextInput"
       display="flex"
       // tone={rootTheme.tone}
@@ -352,18 +347,7 @@ export const TextInput = forwardRef(function TextInput(
       >
         <input
           data-as="input"
-          // data-scheme={rootTheme.scheme}
-          // data-tone={rootTheme.tone}
           {...restProps}
-          className={textInputElement()}
-          // $fontSize={fontSize}
-          // $iconLeft={$hasIcon}
-          // $iconRight={$hasIconRight || $hasClearButton}
-          // $padding={padding}
-          // $scheme={rootTheme.scheme}
-          // $space={space}
-          // $tone={rootTheme.tone}
-          // $weight={weight}
           disabled={disabled}
           readOnly={readOnly}
           ref={ref}

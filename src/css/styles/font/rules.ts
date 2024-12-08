@@ -5,6 +5,7 @@ export const fontRules: Rules = {
   'font': {
     'position': 'relative',
     'fontFamily': 'var(--font-family)',
+    'fontFeatureSettings': 'var(--font-feature-settings)',
     'fontSize': 'var(--font-size)',
     'lineHeight': 'var(--font-line-height)',
     'letterSpacing': 'var(--font-letter-spacing)',

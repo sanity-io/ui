@@ -15,7 +15,7 @@ export const cardRules: Rules = {
     '--color-bg': 'var(--color-tinted-default-bg-0)',
     '--color-border': 'var(--color-tinted-default-border-1)',
     '--color-fg': 'var(--color-tinted-default-fg-0)',
-    '--color-icon': 'var(--color-tinted-default-fg-4)',
+    // '--color-icon': 'var(--color-tinted-default-fg-4)',
     '--color-muted-bg': 'var(--color-tinted-default-bg-1)',
     '--color-muted-fg': 'var(--color-tinted-default-fg-4)',
 
@@ -49,7 +49,7 @@ export const cardRules: Rules = {
     '--card-code-fg-color': 'var(--color-tinted-default-fg-4)',
     '--card-fg-color': 'var(--color-fg)',
     '--card-focus-ring-color': 'var(--color-focus-ring)',
-    '--card-icon-color': 'var(--color-icon)',
+    '--card-icon-color': 'var(--color-fg)',
     '--card-kbd-bg-color': 'var(--color-tinted-default-bg-1)',
     '--card-kbd-border-color': 'var(--color-tinted-default-border-1)',
     '--card-kbd-fg-color': 'var(--color-tinted-default-fg-4)',
@@ -90,25 +90,22 @@ export const cardRules: Rules = {
               '&:hover': {
                 '--color-bg': 'var(--color-tinted-default-bg-1)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-icon': 'var(--color-tinted-default-fg-1)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
-              '&:active': {
+              '&:active, &[data-pressed]': {
                 '--color-bg': 'var(--color-tinted-default-bg-2)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-icon': 'var(--color-tinted-default-fg-1)',
-              },
-
-              '&[data-pressed]': {
-                '--color-bg': 'var(--color-tinted-default-bg-2)',
-                '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-icon': 'var(--color-tinted-default-fg-1)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
               '&:focus, &[data-selected]': {
                 '--color-bg': 'var(--color-solid-default-bg-1)',
                 '--color-fg': 'var(--color-solid-default-fg-1)',
-                '--color-icon': 'var(--color-solid-default-fg-1)',
+                '--color-muted-fg': 'var(--color-solid-default-fg-5)',
+                // '--color-icon': 'var(--color-solid-default-fg-1)',
               },
             },
           },
@@ -130,25 +127,29 @@ export const cardRules: Rules = {
               '&:hover': {
                 '--color-bg': 'var(--color-tinted-default-bg-1)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-icon': 'var(--color-tinted-default-fg-1)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
               '&:active': {
                 '--color-bg': 'var(--color-tinted-default-bg-2)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-icon': 'var(--color-tinted-default-fg-1)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
               '&[data-pressed]': {
                 '--color-bg': 'var(--color-tinted-default-bg-2)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-icon': 'var(--color-tinted-default-fg-1)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
               '&:focus, &[data-selected]': {
                 '--color-bg': 'var(--color-solid-default-bg-1)',
                 '--color-fg': 'var(--color-solid-default-fg-1)',
-                '--color-icon': 'var(--color-solid-default-fg-1)',
+                '--color-muted-fg': 'var(--color-solid-default-fg-5)',
+                // '--color-icon': 'var(--color-solid-default-fg-1)',
               },
             },
           },

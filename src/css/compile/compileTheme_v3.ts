@@ -1,5 +1,6 @@
 import {
   FONT_CODE_SIZE,
+  FONT_HEADING_SIZE,
   HUES,
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_STATE_TONES,
@@ -79,6 +80,7 @@ function buildContainerThemeProperties(theme: Theme_v3): Properties {
 function buildFontCodeThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
     '--font-code-family': theme.font.code.family,
+    '--font-code-feature-settings': theme.font.code.featureSettings,
     '--font-code-weight-regular': `${theme.font.code.weights.regular}`,
     '--font-code-weight-medium': `${theme.font.code.weights.medium}`,
     '--font-code-weight-semibold': `${theme.font.code.weights.semibold}`,
@@ -100,13 +102,14 @@ function buildFontCodeThemeProperties(theme: Theme_v3): Properties {
 function buildFontHeadingThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
     '--font-heading-family': theme.font.heading.family,
+    '--font-heading-feature-settings': theme.font.heading.featureSettings,
     '--font-heading-weight-regular': `${theme.font.heading.weights.regular}`,
     '--font-heading-weight-medium': `${theme.font.heading.weights.medium}`,
     '--font-heading-weight-semibold': `${theme.font.heading.weights.semibold}`,
     '--font-heading-weight-bold': `${theme.font.heading.weights.bold}`,
   }
 
-  for (const size of FONT_CODE_SIZE) {
+  for (const size of FONT_HEADING_SIZE) {
     props[`--font-heading-${size}-size`] = rem(theme.font.heading.sizes[size].fontSize)
     props[`--font-heading-${size}-line-height`] = rem(theme.font.heading.sizes[size].lineHeight)
     props[`--font-heading-${size}-ascender-height`] = px(
@@ -127,6 +130,7 @@ function buildFontHeadingThemeProperties(theme: Theme_v3): Properties {
 function buildFontLabelThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
     '--font-label-family': theme.font.label.family,
+    '--font-label-feature-settings': theme.font.label.featureSettings,
     '--font-label-weight-regular': `${theme.font.label.weights.regular}`,
     '--font-label-weight-medium': `${theme.font.label.weights.medium}`,
     '--font-label-weight-semibold': `${theme.font.label.weights.semibold}`,
@@ -150,6 +154,7 @@ function buildFontLabelThemeProperties(theme: Theme_v3): Properties {
 function buildFontTextThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
     '--font-text-family': theme.font.text.family,
+    '--font-text-feature-settings': theme.font.text.featureSettings,
     '--font-text-weight-regular': `${theme.font.text.weights.regular}`,
     '--font-text-weight-medium': `${theme.font.text.weights.medium}`,
     '--font-text-weight-semibold': `${theme.font.text.weights.semibold}`,
@@ -170,7 +175,25 @@ function buildFontTextThemeProperties(theme: Theme_v3): Properties {
 
 function buildInputThemeProperties(theme: Theme_v3): Properties {
   return {
+    [`--input-border-width`]: px(theme.input.border.width),
+    [`--input-checkbox-focus-ring-offset`]: px(theme.input.checkbox.focusRing.offset),
+    [`--input-checkbox-focus-ring-width`]: px(theme.input.checkbox.focusRing.width),
     [`--input-checkbox-size`]: px(theme.input.checkbox.size),
+    [`--input-radio-focus-ring-offset`]: px(theme.input.radio.focusRing.offset),
+    [`--input-radio-focus-ring-width`]: px(theme.input.radio.focusRing.width),
+    [`--input-radio-mark-size`]: px(theme.input.radio.markSize),
+    [`--input-radio-size`]: px(theme.input.radio.size),
+    [`--input-select-focus-ring-offset`]: px(theme.input.select.focusRing.offset),
+    [`--input-select-focus-ring-width`]: px(theme.input.select.focusRing.width),
+    [`--input-switch-focus-ring-offset`]: px(theme.input.switch.focusRing.offset),
+    [`--input-switch-focus-ring-width`]: px(theme.input.switch.focusRing.width),
+    [`--input-switch-height`]: px(theme.input.switch.height),
+    [`--input-switch-padding`]: px(theme.input.switch.padding),
+    [`--input-switch-transition-duration-ms`]: `${theme.input.switch.transitionDurationMs}ms`,
+    [`--input-switch-transition-timing-function`]: theme.input.switch.transitionTimingFunction,
+    [`--input-switch-width`]: px(theme.input.switch.width),
+    [`--input-text-focus-ring-offset`]: px(theme.input.text.focusRing.offset),
+    [`--input-text-focus-ring-width`]: px(theme.input.text.focusRing.width),
   }
 }
 

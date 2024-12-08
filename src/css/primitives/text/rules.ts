@@ -9,6 +9,7 @@ export const textRules: Rules = {
     '--font-weight-bold': `var(--font-text-weight-bold)`,
 
     '--font-family': `var(--font-text-family)`,
+    '--font-feature-settings': `var(--font-text-feature-settings)`,
 
     'color': 'var(--color-fg)',
 
@@ -18,9 +19,9 @@ export const textRules: Rules = {
         textDecoration: 'none',
       },
 
-      '& svg': {
-        color: 'var(--color-icon)',
-      },
+      // '& svg': {
+      //   color: 'var(--color-icon)',
+      // },
     },
   },
 

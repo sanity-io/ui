@@ -40,36 +40,27 @@ export const _selectableRules: Rules = {
           '&:not([data-disabled]):hover': {
             '--color-bg': 'var(--color-tinted-bg-1)',
             '--color-border': 'var(--color-tinted-border-3)',
-            '--color-fg': 'var(--color-tinted-fg-2)',
-            '--color-icon': 'var(--color-tinted-fg-4)',
+            '--color-fg': 'var(--color-tinted-fg-1)',
+            // '--color-icon': 'var(--color-tinted-fg-4)',
+            '--color-muted-bg': 'var(--color-solid-bg-2)',
+            '--color-muted-fg': 'var(--color-solid-fg-4)',
           },
 
-          '&:not([data-disabled]):active': {
-            '--color-bg': 'var(--color-tinted-bg-2)',
-            '--color-border': 'var(--color-tinted-border-4)',
-            '--color-fg': 'var(--color-tinted-fg-2)',
-            '--color-icon': 'var(--color-tinted-fg-4)',
-          },
-
-          '&:not([data-disabled])[aria-pressed="true"]': {
-            '--color-bg': 'var(--color-tinted-bg-2)',
-            '--color-border': 'var(--color-tinted-border-4)',
-            '--color-fg': 'var(--color-tinted-fg-2)',
-            '--color-icon': 'var(--color-tinted-fg-4)',
-          },
-
-          '&:not([data-disabled])[data-pressed]': {
-            '--color-bg': 'var(--color-tinted-bg-2)',
-            '--color-border': 'var(--color-tinted-border-4)',
-            '--color-fg': 'var(--color-tinted-fg-2)',
-            '--color-icon': 'var(--color-tinted-fg-4)',
-          },
+          '&:not([data-disabled]):active, &:not([data-disabled])[aria-pressed="true"], &:not([data-disabled])[data-pressed]':
+            {
+              '--color-bg': 'var(--color-tinted-bg-2)',
+              '--color-border': 'var(--color-tinted-border-4)',
+              '--color-fg': 'var(--color-tinted-fg-0)',
+              // '--color-icon': 'var(--color-tinted-fg-4)',
+              '--color-muted-bg': 'var(--color-solid-bg-3)',
+              '--color-muted-fg': 'var(--color-solid-fg-5)',
+            },
 
           '&:not([data-disabled]):focus': {
             '--color-bg': 'var(--color-solid-bg-0)',
             '--color-border': 'var(--color-solid-border-2)',
             '--color-fg': 'var(--color-solid-fg-1)',
-            '--color-icon': 'var(--color-solid-fg-1)',
+            // '--color-icon': 'var(--color-solid-fg-1)',
             '--color-muted-bg': 'var(--color-solid-bg-1)',
             '--color-muted-fg': 'var(--color-solid-fg-4)',
           },
@@ -78,7 +69,7 @@ export const _selectableRules: Rules = {
             '--color-bg': 'var(--color-tinted-bg-0)',
             '--color-border': 'var(--color-tinted-border-1)',
             '--color-fg': 'var(--color-tinted-border-4)',
-            '--color-icon': 'var(--color-tinted-border-3)',
+            // '--color-icon': 'var(--color-tinted-border-3)',
           },
         },
       },

@@ -48,9 +48,9 @@ export const TextArea = forwardRef(function TextArea(
   useCustomValidity(ref, customValidity)
 
   return (
-    <span className={textArea({fontSize, padding, radius, space})} data-ui="TextArea">
+    <span className={textArea({border, fontSize, padding, radius, space})} data-ui="TextArea">
       <textarea {...restProps} disabled={disabled} ref={ref} />
-      <span data-border={border ? '' : undefined} />
+      <span />
     </span>
   )
 })

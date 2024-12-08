@@ -161,6 +161,7 @@ export type ThemeVarName =
   // | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-fg`
   | `--container-${ContainerWidth}`
   | `--font-code-family`
+  | `--font-code-feature-settings`
   | `--font-code-weight-${FontWeight}`
   | `--font-code-${FontCodeSize}-ascender-height`
   | `--font-code-${FontCodeSize}-descender-height`
@@ -169,6 +170,7 @@ export type ThemeVarName =
   | `--font-code-${FontCodeSize}-letter-spacing`
   | `--font-code-${FontCodeSize}-icon-size`
   | `--font-heading-family`
+  | `--font-heading-feature-settings`
   | `--font-heading-weight-${FontWeight}`
   | `--font-heading-${FontHeadingSize}-ascender-height`
   | `--font-heading-${FontHeadingSize}-descender-height`
@@ -177,6 +179,7 @@ export type ThemeVarName =
   | `--font-heading-${FontHeadingSize}-letter-spacing`
   | `--font-heading-${FontHeadingSize}-icon-size`
   | `--font-label-family`
+  | `--font-label-feature-settings`
   | `--font-label-weight-${FontWeight}`
   | `--font-label-${FontLabelSize}-ascender-height`
   | `--font-label-${FontLabelSize}-descender-height`
@@ -185,6 +188,7 @@ export type ThemeVarName =
   | `--font-label-${FontLabelSize}-letter-spacing`
   | `--font-label-${FontLabelSize}-icon-size`
   | `--font-text-family`
+  | `--font-text-feature-settings`
   | `--font-text-weight-${FontWeight}`
   | `--font-text-${FontTextSize}-ascender-height`
   | `--font-text-${FontTextSize}-descender-height`
@@ -255,7 +259,7 @@ export type CardScopedVarName =
   // | `--color-fg-3`
   // | `--color-fg-4`
   | `--color-focus-ring`
-  | `--color-icon`
+  // | `--color-icon`
   // | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-bg`
   // | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-border`
   // | `--color-input-${ThemeColorInputModeKey}-${ThemeColorInputStateKey}-fg`
@@ -354,6 +358,7 @@ export type CardScopedVarName =
   | `--font-cap-height`
   | `--font-descender-height`
   | `--font-family`
+  | `--font-feature-settings`
   | `--font-icon-offset`
   | `--font-icon-size`
   | `--font-letter-spacing`
@@ -368,9 +373,6 @@ export type CardScopedVarName =
   | `--font-weight-bold`
   | `--font-weight`
   | `--fg-color`
-  | `--input-bg-color`
-  | `--input-border-color`
-  | `--input-fg-color`
   | `--padding-top`
   | `--padding-right`
   | `--padding-bottom`
@@ -382,11 +384,16 @@ export type ElementColorVariantScopedVarName =
 
 /** @public */
 export type InputScopedVarName =
-  | `--input-padding`
+  | `--input-ascender-height`
+  | `--input-bg-color`
+  | `--input-border-color`
+  | `--input-descender-height`
+  | `--input-fg-color`
   | `--input-font-size`
   | `--input-line-height`
-  | `--input-ascender-height`
-  | `--input-descender-height`
+  | `--input-padding`
+  | `--input-placeholder-color`
+  | `--input-space`
 
 // export type CardVarName = `--card-${CardSize}-${CardVariant}-${CardState}-${CardElement}`
 

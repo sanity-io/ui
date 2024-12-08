@@ -55,11 +55,12 @@ export const defaultThemeFonts: ThemeFonts = {
   heading: {
     family:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
+    featureSettings: `'liga' 1, 'calt' 1, 'ss01' 1, 'ss03' 1, 'zero' 1`,
     weights: {
-      regular: 700,
-      medium: 800,
-      semibold: 900,
-      bold: 900,
+      regular: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
     },
     sizes: [
       {
@@ -84,7 +85,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 21,
         iconSize: 33,
         lineHeight: 29,
-        letterSpacing: 0,
+        letterSpacing: -0.25,
       },
       {
         ascenderHeight: 8,
@@ -92,7 +93,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 27,
         iconSize: 41,
         lineHeight: 35,
-        letterSpacing: 0,
+        letterSpacing: -0.5,
       },
       {
         ascenderHeight: 9.5,
@@ -100,7 +101,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 33,
         iconSize: 49,
         lineHeight: 41,
-        letterSpacing: 0,
+        letterSpacing: -1,
       },
       {
         ascenderHeight: 10.5,
@@ -108,7 +109,7 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 38,
         iconSize: 53,
         lineHeight: 47,
-        letterSpacing: 0,
+        letterSpacing: -1,
       },
     ],
   },

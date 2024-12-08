@@ -2,26 +2,26 @@ import {responsiveRules} from '../../responsiveRules'
 import {Rules} from '../../types'
 
 export const _inputRules: Rules = {
-  _input: {
+  '_input': {
     'position': 'relative',
     'width': ['-moz-available', '-webkit-fill-available', 'stretch'],
 
     '@nest': {
       '& input, & select, & textarea': {
+        '--input-fg-color': 'var(--color-tinted-default-fg-2)',
+        '--input-placeholder-color': 'var(--color-tinted-default-border-4)',
+
         'WebkitFontSmoothing': 'inherit',
         'appearance': 'none',
         'border': 0,
-        // 'color': 'inherit',
         'width': '100%',
         'outline': 'none',
         'margin': 0,
+        'fontFamily': 'var(--font-text-family)',
         'fontSize': 'var(--input-font-size)',
         'lineHeight': 'var(--input-line-height)',
-        // backgroundColor: '#ddd',
         'backgroundColor': 'transparent',
-        // 'backgroundColor': 'var(--input-bg-color)',
         'color': 'var(--input-fg-color)',
-        'boxShadow': 'inset 0 0 0 1px var(--input-border-color)',
         'padding': [
           'calc(var(--input-padding) - var(--input-ascender-height))',
           'var(--input-padding)',
@@ -34,45 +34,73 @@ export const _inputRules: Rules = {
         'display': 'block',
         'boxSizing': 'border-box',
         'resize': 'none',
-        // '--input-padding': '8px',
-        // -webkit-font-smoothing: antialiased;
-        // appearance: none;
-        // border: 0;
-        // font-family: ${font.text.family};
-        // color: inherit;
-        // width: 100%;
-        // outline: none;
-        // margin: 0;
+      },
 
-        '--input-bg-color': 'var(--color-tinted-default-bg-0)',
-        '--input-border-color': 'var(--color-tinted-default-border-1)',
-        '--input-fg-color': 'var(--color-tinted-default-fg-2)',
+      '&[data-icon-left] input, &[data-icon-left] select, &[data-icon-left] textarea': {
+        paddingLeft: `calc(var(--input-padding) + (var(--input-line-height) - var(--input-ascender-height) - var(--input-descender-height)) + var(--input-space))`,
+      },
+
+      '&[data-icon-right] input, &[data-icon-right] select, &[data-icon-right] textarea': {
+        paddingRight: `calc(var(--input-padding) + (var(--input-line-height) - var(--input-ascender-height) - var(--input-descender-height)) + var(--input-space))`,
       },
 
       '& input::placeholder, & textarea::placeholder': {
-        color: 'var(--color-tinted-default-border-4)',
+        color: 'var(--input-placeholder-color)',
+      },
+
+      '& input:placeholder-shown + span, & textarea:placeholder-shown + span': {
+        '--color-fg': 'var(--color-tinted-default-border-4)',
+      },
+
+      '& input + span, & select + span, & textarea + span': {
+        '--color-fg': 'var(--color-tinted-default-fg-4)',
+        '--input-bg-color': 'var(--color-tinted-default-bg-0)',
+        '--input-border-color': 'var(--color-tinted-default-border-1)',
+
+        'borderRadius': 'inherit',
+        // 'display': 'block',
+
+        'position': 'absolute',
+        'top': 0,
+        'left': 0,
+        'right': 0,
+        'bottom': 0,
+        'display': 'block',
+        'pointerEvents': 'none',
+        'zIndex': 0,
       },
 
       '& input:hover, & select:hover, & textarea:hover': {
-        // '--input-bg-color': 'var(--color-tinted-default-bg-0)',
+        '--input-fg-color': 'var(--color-tinted-default-fg-0)',
+      },
+
+      '& input:hover + span, & select:hover + span, & textarea:hover + span': {
         '--input-border-color': 'var(--color-tinted-default-border-2)',
         '--input-fg-color': 'var(--color-tinted-default-fg-1)',
+
+        'boxShadow': 'inset 0 0 0 1px var(--input-border-color)',
       },
 
       '& input:focus, & select:focus, & textarea:focus': {
-        // '--input-bg-color': 'var(--color-tinted-default-bg-0)',
+        '--input-fg-color': 'var(--color-tinted-default-fg-0)',
+      },
+
+      '& input:focus + span, & select:focus + span, & textarea:focus + span': {
         '--input-border-color': 'var(--color-tinted-default-border-2)',
         '--input-fg-color': 'var(--color-tinted-default-fg-1)',
+
+        'boxShadow': 'inset 0 0 0 1px var(--input-border-color)',
       },
 
       '& input:disabled, & select:disabled, & textarea:disabled': {
+        '--input-fg-color': 'var(--color-tinted-default-border-3)',
+      },
+
+      '& input:disabled + span, & select:disabled + span, & textarea:disabled + span': {
         '--input-bg-color': 'var(--color-tinted-default-bg-1)',
         '--input-border-color': 'var(--color-tinted-default-border-0)',
-        '--input-fg-color': 'var(--color-tinted-default-border-3)',
-        // 'opacity': 1,
-        // '&:disabled': {
-        //   opacity: 1;
-        // }
+
+        'opacity': 1,
       },
     },
   },
@@ -113,4 +141,28 @@ export const _inputRules: Rules = {
   ...responsiveRules('_input-p-2', {'--input-padding': 'var(--space-2)'}),
   ...responsiveRules('_input-p-3', {'--input-padding': 'var(--space-3)'}),
   ...responsiveRules('_input-p-4', {'--input-padding': 'var(--space-4)'}),
+  ...responsiveRules('_input-p-5', {'--input-padding': 'var(--space-5)'}),
+  ...responsiveRules('_input-p-6', {'--input-padding': 'var(--space-6)'}),
+  ...responsiveRules('_input-p-7', {'--input-padding': 'var(--space-7)'}),
+  ...responsiveRules('_input-p-8', {'--input-padding': 'var(--space-8)'}),
+  ...responsiveRules('_input-p-9', {'--input-padding': 'var(--space-9)'}),
+
+  ...responsiveRules('_input-space-0', {'--input-space': 'var(--space-0)'}),
+  ...responsiveRules('_input-space-1', {'--input-space': 'var(--space-1)'}),
+  ...responsiveRules('_input-space-2', {'--input-space': 'var(--space-2)'}),
+  ...responsiveRules('_input-space-3', {'--input-space': 'var(--space-3)'}),
+  ...responsiveRules('_input-space-4', {'--input-space': 'var(--space-4)'}),
+  ...responsiveRules('_input-space-5', {'--input-space': 'var(--space-5)'}),
+  ...responsiveRules('_input-space-6', {'--input-space': 'var(--space-6)'}),
+  ...responsiveRules('_input-space-7', {'--input-space': 'var(--space-7)'}),
+  ...responsiveRules('_input-space-8', {'--input-space': 'var(--space-8)'}),
+  ...responsiveRules('_input-space-9', {'--input-space': 'var(--space-9)'}),
+
+  '_input-border': {
+    '@nest': {
+      '& input + span, & select + span, & textarea + span': {
+        boxShadow: 'inset 0 0 0 1px var(--input-border-color)',
+      },
+    },
+  },
 }

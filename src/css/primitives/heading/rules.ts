@@ -9,6 +9,7 @@ export const headingRules: Rules = {
     '--font-weight-bold': `var(--font-heading-weight-bold)`,
 
     '--font-family': `var(--font-heading-family)`,
+    '--font-feature-settings': `var(--font-heading-feature-settings)`,
 
     'color': 'var(--color-fg)',
 

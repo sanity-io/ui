@@ -1,31 +1,40 @@
-import {buttonLoadingBox, composeClassNames, ResponsiveProp} from '@sanity/ui/css'
-import {button} from '@sanity/ui/css'
-import {PaddingStyleProps, RadiusStyleProps} from '@sanity/ui/css'
-import {Width} from '@sanity/ui/css'
+import {
+  ButtonStyleProps,
+  FlexStyleProps,
+  GapStyleProps,
+  PaddingStyleProps,
+  ResponsiveProp,
+  Width,
+  button,
+  buttonLoadingBox,
+  composeClassNames,
+} from '@sanity/ui/css'
 import {FontTextSize, Space} from '@sanity/ui/theme'
-import {forwardRef, isValidElement, useMemo} from 'react'
+import {forwardRef, isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 import {useTheme_v2} from '../../_compat'
-import {useArrayProp} from '../../hooks'
-import {ButtonMode, ButtonTextAlign, ButtonTone, FlexJustify} from '../../types'
+import {ButtonMode, ButtonTextAlign, ButtonTone} from '../../types'
 import {Box} from '../box'
-import {Flex} from '../flex'
 import {Spinner} from '../spinner'
 import {Text, TextProps} from '../text'
 
 /**
  * @public
  */
-export interface ButtonProps extends PaddingStyleProps, RadiusStyleProps {
+export interface ButtonProps
+  extends ButtonStyleProps,
+    FlexStyleProps,
+    GapStyleProps,
+    PaddingStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: ResponsiveProp<FontTextSize>
   mode?: ButtonMode
   icon?: React.ElementType | React.ReactNode
   iconRight?: React.ElementType | React.ReactNode
-  justify?: ResponsiveProp<FlexJustify>
   /** @beta Do not use in production, as this might change.*/
   loading?: boolean
   selected?: boolean
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
   textAlign?: ButtonTextAlign
   muted?: boolean
@@ -45,26 +54,33 @@ export const Button = forwardRef(function Button(
   ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
+    align = 'center',
     as: As = 'button',
     children,
     className,
+    direction,
     disabled,
+    flex,
     fontSize = 1,
+    gap = props.space ?? 3,
+    gapX,
+    gapY,
+    href,
     icon: IconComponent,
     iconRight: IconRightComponent,
-    justify: justifyProp = 'center',
+    justify = 'center',
     loading,
     mode = 'default',
-    padding: paddingProp = 3,
-    paddingX: paddingXProp,
-    paddingY: paddingYProp,
-    paddingTop: paddingTopProp,
-    paddingBottom: paddingBottomProp,
-    paddingLeft: paddingLeftProp,
-    paddingRight: paddingRightProp,
-    radius: radiusProp = 2,
+    padding = 3,
+    paddingX,
+    paddingY,
+    paddingTop,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    radius = 2,
     selected,
-    space: spaceProp = 3,
+    space = 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     text,
     textAlign,
     textOverflow = 'ellipsis',
@@ -73,101 +89,108 @@ export const Button = forwardRef(function Button(
     type = 'button',
     muted = false,
     width,
+    wrap,
     ...restProps
   } = props
   const {button: buttonTheme} = useTheme_v2()
-
-  const justify = useArrayProp(justifyProp)
-  const padding = useArrayProp(paddingProp)
-  const paddingX = useArrayProp(paddingXProp)
-  const paddingY = useArrayProp(paddingYProp)
-  const paddingTop = useArrayProp(paddingTopProp)
-  const paddingBottom = useArrayProp(paddingBottomProp)
-  const paddingLeft = useArrayProp(paddingLeftProp)
-  const paddingRight = useArrayProp(paddingRightProp)
-  // const radius = useArrayProp(radiusProp)
-  const space = useArrayProp(spaceProp)
-
-  const boxProps = useMemo(
-    () => ({
-      // flex: 1,
-      padding,
-      paddingX,
-      paddingY,
-      paddingTop,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-    }),
-    [padding, paddingX, paddingY, paddingTop, paddingBottom, paddingLeft, paddingRight],
-  )
 
   return (
     <As
       data-ui="Button"
       {...restProps}
-      // $mode={mode}
-      // $radius={radius}
-      // $tone={tone}
-      className={composeClassNames(
-        className,
-        button({
-          mode,
-          radius: radiusProp,
-          tone,
-          width,
-        }),
-      )}
-      data-disabled={Boolean(loading || disabled)}
+      className={composeClassNames(className, button({flex, mode, radius, tone, width}))}
+      data-disabled={loading || disabled ? '' : undefined}
       data-selected={selected ? '' : undefined}
       disabled={Boolean(loading || disabled)}
+      href={disabled ? undefined : href}
       ref={ref}
       type={type}
-      // $width={width}
     >
       {Boolean(loading) && (
-        <Box align="center" className={buttonLoadingBox()} display="flex" justify="center">
+        <Box
+          align={align}
+          as="span"
+          className={buttonLoadingBox()}
+          display="flex"
+          flex={1}
+          justify={justify}
+          width="fill"
+        >
           <Spinner size={fontSize} />
         </Box>
       )}
 
       {(IconComponent || text || IconRightComponent) && (
-        <Box as="span" {...boxProps}>
-          <Flex as="span" justify={justify} gap={space}>
-            {IconComponent && (
-              <Text as="span" size={fontSize} style={{flex: 'none'}}>
-                {isValidElement(IconComponent) && IconComponent}
-                {isValidElementType(IconComponent) && <IconComponent />}
-              </Text>
-            )}
+        <Box
+          as="span"
+          direction={direction}
+          display="flex"
+          flex={1}
+          gap={gap}
+          gapX={gapX}
+          gapY={gapY}
+          justify={justify}
+          padding={padding}
+          paddingX={paddingX}
+          paddingY={paddingY}
+          paddingTop={paddingTop}
+          paddingBottom={paddingBottom}
+          paddingLeft={paddingLeft}
+          paddingRight={paddingRight}
+          width="fill"
+          wrap={wrap}
+        >
+          {/* <Flex as="span" justify={justify} gap={gap}> */}
+          {IconComponent && (
+            <Text as="span" flex="none" size={fontSize}>
+              {isValidElement(IconComponent) && IconComponent}
+              {isValidElementType(IconComponent) && <IconComponent />}
+            </Text>
+          )}
 
-            {text && (
-              <Box>
-                <Text
-                  as="span"
-                  muted={muted}
-                  align={textAlign}
-                  size={fontSize}
-                  textOverflow={textOverflow}
-                  weight={textWeight ?? buttonTheme.textWeight}
-                >
-                  {text}
-                </Text>
-              </Box>
-            )}
+          {text && (
+            <Text
+              align={textAlign}
+              as="span"
+              flex="none"
+              muted={muted}
+              size={fontSize}
+              textOverflow={textOverflow}
+              weight={textWeight ?? buttonTheme.textWeight}
+            >
+              {text}
+            </Text>
+          )}
 
-            {IconRightComponent && (
-              <Text as="span" size={fontSize} style={{flex: 'none'}}>
-                {isValidElement(IconRightComponent) && IconRightComponent}
-                {isValidElementType(IconRightComponent) && <IconRightComponent />}
-              </Text>
-            )}
-          </Flex>
+          {IconRightComponent && (
+            <Text as="span" flex="none" size={fontSize}>
+              {isValidElement(IconRightComponent) && IconRightComponent}
+              {isValidElementType(IconRightComponent) && <IconRightComponent />}
+            </Text>
+          )}
+          {/* </Flex> */}
         </Box>
       )}
 
       {children && (
-        <Box as="span" {...boxProps}>
+        <Box
+          as="span"
+          direction={direction}
+          display="flex"
+          flex={1}
+          gap={gap}
+          gapX={gapX}
+          gapY={gapY}
+          padding={padding}
+          paddingX={paddingX}
+          paddingY={paddingY}
+          paddingTop={paddingTop}
+          paddingBottom={paddingBottom}
+          paddingLeft={paddingLeft}
+          paddingRight={paddingRight}
+          width="fill"
+          wrap={wrap}
+        >
           {children}
         </Box>
       )}

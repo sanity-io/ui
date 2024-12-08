@@ -10,6 +10,7 @@ export function _input(props: InputStyleProps): string {
     _resp(`_input`, props.fontSize),
     _resp(`_input-p`, props.padding),
     _resp(`_input-space`, props.space),
+    props.border && `_input-border`,
     radius(props),
   )
 }

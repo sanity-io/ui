@@ -9,7 +9,7 @@ import {ButtonTone} from '../../types'
  */
 export interface TabProps {
   /**
-   * The `id` of the correlating `TabPanel` component.
+   * The `id` of the corresponding `TabPanel` component.
    */
   'aria-controls': string
   'id': string
@@ -29,7 +29,7 @@ export const Tab = forwardRef(function Tab(
   props: TabProps &
     Omit<
       React.HTMLProps<HTMLButtonElement>,
-      'aria-controls' | 'as' | 'id' | 'label' | 'type' | 'width'
+      'aria-controls' | 'as' | 'id' | 'label' | 'type' | 'width' | 'wrap'
     >,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ) {
