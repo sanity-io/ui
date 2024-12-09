@@ -5,7 +5,7 @@ import {memo} from 'react'
 import {usePerf} from './hooks'
 
 /** @internal */
-export const PerfInspector = memo(function PerfInspector(): React.ReactElement {
+export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
   const {clearResults, results, runTest, testDetails} = usePerf()
 
   if (testDetails.length === 0) {

@@ -1,9 +1,8 @@
 import {Flex} from '@sanity/ui'
-import {ReactElement} from 'react'
 
 import {ZoomMenu} from '../ZoomMenu'
 
-export default function ZoomMenuStory(): ReactElement {
+export default function ZoomMenuStory(): React.ReactNode {
   return (
     <Flex align="center" height="fill" justify="center">
       <ZoomMenu />

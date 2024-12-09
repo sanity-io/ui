@@ -8,7 +8,7 @@ import {useProps} from '../useProps'
 export const StringProp = memo(function StringProp(props: {
   schema: StringPropSchema
   value?: string
-}): React.ReactElement {
+}): React.ReactNode {
   const {schema, value} = props
   const {setPropValue} = useProps()
 

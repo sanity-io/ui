@@ -17,7 +17,7 @@ const Frame = styled.iframe`
 export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
   frameRef: React.Ref<HTMLIFrameElement>
   hidden: boolean
-}): React.ReactElement {
+}): React.ReactNode {
   const {frameRef, hidden} = props
   const {frameReady, frameUrl, path, payload, scheme, title, viewport, zoom} = useWorkshop()
   const viewportOption = VIEWPORT_OPTIONS.find((o) => o.name === viewport) || VIEWPORT_OPTIONS[0]

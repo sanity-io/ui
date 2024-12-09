@@ -8,7 +8,7 @@ import {A11yMsg} from './msg'
 /** @internal */
 export const A11yProvider = memo(function A11yProvider(props: {
   children?: React.ReactNode
-}): React.ReactElement {
+}): React.ReactNode {
   const {children} = props
   const {broadcast, channel, origin, path} = useWorkshop<A11yMsg>()
   const [{error, results}, setState] = useState<{

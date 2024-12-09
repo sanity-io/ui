@@ -9,7 +9,7 @@ import {useProps} from '../useProps'
 export const SelectProp = memo(function SelectProp(props: {
   schema: SelectPropSchema
   value: any
-}): React.ReactElement {
+}): React.ReactNode {
   const {schema, value: valueProp} = props
   const {setPropValue} = useProps()
 
