@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, BoxDisplay, Card, Flex, TabPanel} from '@sanity/ui'
-import {createElement, ElementType, memo, useMemo, useState} from 'react'
+import {ElementType, memo, useState} from 'react'
 import styled from 'styled-components'
 
 import {EMPTY_RECORD} from '../constants'
@@ -20,7 +20,8 @@ const Root = styled(Card)`
 `
 
 const MemoRender = memo(function MemoRender(props: {component: ElementType; options: any}) {
-  return createElement(props.component, {options: props.options})
+  const {component: Component, options} = props
+  return <Component options={options} />
 })
 
 /** @internal */
@@ -30,27 +31,22 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
   const {expanded} = props
   const {plugins} = useWorkshop()
 
-  const tabs: InspectorTab[] = useMemo(() => {
-    return plugins
-      .filter((plugin) => plugin.inspector)
-      .map((plugin) => {
-        return {
-          id: plugin.name,
-          label: plugin.title,
-          tone: undefined,
-          plugin,
-        }
-      })
-  }, [plugins])
+  const tabs: InspectorTab[] = plugins
+    .filter((plugin) => plugin.inspector)
+    .map((plugin) => {
+      return {
+        id: plugin.name,
+        label: plugin.title,
+        tone: undefined,
+        plugin,
+      }
+    })
 
   const [tabId, setTabId] = useState<string | null>(tabs.length > 0 ? tabs[0].id : null)
   const currentTab = tabs.find((tab) => tab.id === tabId)
   const showTabs = tabs.length > 1
 
-  const display: BoxDisplay[] = useMemo(
-    () => (expanded ? ['block'] : ['none', 'none', 'block']),
-    [expanded],
-  )
+  const display: BoxDisplay[] = expanded ? ['block'] : ['none', 'none', 'block']
 
   return (
     <Root display={display} flex={1}>

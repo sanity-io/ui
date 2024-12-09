@@ -19,7 +19,15 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', 'simple-import-sort', 'prettier'],
+  plugins: [
+    'import',
+    'jsx-a11y',
+    'react',
+    'react-hooks',
+    'simple-import-sort',
+    'prettier',
+    'react-compiler',
+  ],
   rules: {
     'no-console': 'error',
     'no-shadow': 'error',
@@ -32,8 +40,9 @@ module.exports = {
     ],
     'quote-props': ['warn', 'consistent'],
     'react/prop-types': 'off',
-    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-compiler/react-compiler': ['error', {__unstable_donotuse_reportAllBailouts: true}],
     'react/no-unescaped-entities': 'off',
     'simple-import-sort/exports': 'warn',
     'simple-import-sort/imports': 'warn',

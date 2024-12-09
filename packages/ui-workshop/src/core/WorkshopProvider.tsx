@@ -1,5 +1,5 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
-import {createElement, memo, useMemo} from 'react'
+import {memo, useMemo} from 'react'
 
 import {WorkshopConfig, WorkshopPlugin} from './config'
 import {EMPTY_ARRAY, EMPTY_RECORD} from './constants'
@@ -7,7 +7,7 @@ import {resolveLocation} from './helpers'
 import {Pubsub} from './lib/pubsub'
 import {propsPlugin} from './plugins/props'
 import {WorkshopMsg} from './types'
-import {WorkshopContext, WorkshopContextValue} from './WorkshopContext'
+import {WorkshopContext} from './WorkshopContext'
 
 /** @internal */
 export interface WorkshopProviderProps {
@@ -57,56 +57,40 @@ export const WorkshopProvider = memo(function WorkshopProvider(
   const plugins: WorkshopPlugin[] = useMemo(() => [propsPlugin(), ...pluginsProp], [pluginsProp])
   const {scope, story} = useMemo(() => resolveLocation(scopes, path), [path, scopes])
 
-  const workshop: WorkshopContextValue = useMemo(
-    () => ({
-      plugins,
-      broadcast,
-      channel,
-      collections,
-      frameReady,
-      frameUrl,
-      origin,
-      path,
-      payload,
-      scheme,
-      scope,
-      scopes,
-      story,
-      title,
-      viewport,
-      zoom,
-    }),
-    [
-      plugins,
-      broadcast,
-      channel,
-      collections,
-      frameReady,
-      frameUrl,
-      origin,
-      path,
-      payload,
-      scheme,
-      scope,
-      scopes,
-      story,
-      title,
-      viewport,
-      zoom,
-    ],
-  )
-
   let wrappedChildren = children
-
   for (const plugin of plugins) {
     if (plugin.provider) {
-      wrappedChildren = createElement(
-        plugin.provider,
-        {options: plugin.options || EMPTY_RECORD},
-        wrappedChildren,
+      const Provider = plugin.provider
+      wrappedChildren = (
+        <Provider options={plugin.options || EMPTY_RECORD}>{wrappedChildren}</Provider>
       )
     }
   }
 
-  return <WorkshopContext.Provider value={workshop}>{wrappedChildren}</WorkshopContext.Provider>
+  return (
+    <WorkshopContext.Provider
+      value={{
+        plugins,
+        broadcast,
+        channel,
+        collections,
+        frameReady,
+        frameUrl,
+        origin,
+        path,
+        payload,
+        scheme,
+        scope,
+        scopes,
+        story,
+        title,
+        viewport,
+        zoom,
+      }}
+    >
+      {wrappedChildren}
+    </WorkshopContext.Provider>
+  )
 })
+
+WorkshopProvider.displayName = 'Memo(WorkshopProvider)'
