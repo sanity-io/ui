@@ -2,7 +2,6 @@ import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {isEqual} from '../../lib/isEqual'
-import {useUnique} from '../../lib/useUnique'
 import {useWorkshop} from '../../useWorkshop'
 import {decodeValue, encodeValue} from './helpers'
 import {PropsMsg} from './msg'
@@ -19,12 +18,10 @@ export const PropsProvider = memo(function PropsProvider(props: {
   const encodedValue = payload.value
   const encodedValueRef = useRef(encodedValue)
 
-  const [{schemas, value: unstable_value}, setState] = useState<PropsState>(() => ({
+  const [{schemas, value}, setState] = useState<PropsState>(() => ({
     schemas: EMPTY_ARRAY,
     value: decodeValue(String(encodedValue)),
   }))
-
-  const value = useUnique(unstable_value)
 
   const registerProp = useCallback(
     (schema: PropSchema) => {
@@ -93,10 +90,17 @@ export const PropsProvider = memo(function PropsProvider(props: {
 
     encodedValueRef.current = encodedValue
 
-    setState((prevState) => ({
-      ...prevState,
-      value: decodeValue(String(encodedValue)) || {},
-    }))
+    setState((prevState) => {
+      const nextValue = decodeValue(String(encodedValue)) || {}
+      if (isEqual(prevState.value, nextValue)) {
+        return prevState
+      }
+
+      return {
+        ...prevState,
+        value: nextValue,
+      }
+    })
   }, [encodedValue])
 
   return <PropsContext.Provider value={ctx}>{children}</PropsContext.Provider>
