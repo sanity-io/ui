@@ -247,7 +247,7 @@ importers:
         specifier: ^5.0.5
         version: 5.0.10
       semantic-release:
-        specifier: ^24.0.0
+        specifier: ^24.2.0
         version: 24.2.0(typescript@5.7.2)
       start-server-and-test:
         specifier: ^2.0.5
