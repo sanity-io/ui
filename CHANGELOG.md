@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.3](https://github.com/sanity-io/ui/compare/v2.10.2...v2.10.3) (2024-12-09)
+
+### Bug Fixes
+
+- use `motion.create` instead of `motion()` ([#1511](https://github.com/sanity-io/ui/issues/1511)) ([c018961](https://github.com/sanity-io/ui/commit/c0189610d0550b71fda645598be256887c886179))
+
 ## [2.10.2](https://github.com/sanity-io/ui/compare/v2.10.1...v2.10.2) (2024-12-09)
 
 ### Bug Fixes
