@@ -1,6 +1,6 @@
-import {Icon, icons, IconSymbol, SearchIcon} from '@sanity/icons'
+import {Icon, icons, type IconSymbol, SearchIcon, SpinnerIcon} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
-import {useCallback, useMemo, useState} from 'react'
+import {useState, useTransition} from 'react'
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -14,27 +14,47 @@ function toPascalCase(str: string) {
 
 export default function OverviewStory() {
   const [query, setQuery] = useState('')
+  const [pending, startTransition] = useTransition()
 
-  const iconKeys = useMemo(() => {
-    return Object.keys(icons).filter((iconKey) => {
-      return query === '' ? true : iconKey.includes(query.toLowerCase())
-    })
-  }, [query])
-
-  const handleQueryChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.currentTarget.value)
-  }, [])
+  const _query = query.toLowerCase()
+  const iconKeys = Object.keys(icons).filter((iconKey) => {
+    return _query === ''
+      ? true
+      : iconKey.includes(query.toLowerCase()) ||
+          // @ts-expect-error `displayName` is not typed
+          icons[iconKey]?.displayName?.toLowerCase().includes(_query)
+  })
 
   return (
     <Card padding={[4, 5, 6]}>
       <Container width={1}>
         <Box marginBottom={4}>
           <TextInput
-            icon={SearchIcon}
-            onChange={handleQueryChange}
+            icon={
+              pending ? (
+                <SpinnerIcon
+                  ref={(node) => {
+                    const animation = node!.animate(
+                      [{transform: 'rotate(0deg)'}, {transform: 'rotate(360deg)'}],
+                      {
+                        duration: 500,
+                        iterations: Infinity,
+                        easing: 'linear',
+                      },
+                    )
+
+                    return () => animation.cancel()
+                  }}
+                />
+              ) : (
+                SearchIcon
+              )
+            }
+            onChange={(event) => {
+              startTransition(() => setQuery(event.currentTarget.value))
+            }}
             placeholder="Filter by name…"
             radius={2}
-            value={query}
           />
         </Box>
 

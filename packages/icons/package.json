@@ -92,7 +92,7 @@
     "@sanity/prettier-config": "^1.0.3",
     "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^2.10.3",
-    "@sanity/ui-workshop": "^2.0.16",
+    "@sanity/ui-workshop": "^2.0.18",
     "@svgr/core": "^8.1.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
