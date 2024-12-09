@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.19](https://github.com/sanity-io/ui-workshop/compare/v2.0.18...v2.0.19) (2024-12-09)
+
+### Bug Fixes
+
+- **deps:** Update dependency vite to v6 ([#118](https://github.com/sanity-io/ui-workshop/issues/118)) ([8a04964](https://github.com/sanity-io/ui-workshop/commit/8a049643b67eea516cd8568c0caf79cb4388eb60))
+
 ## [2.0.18](https://github.com/sanity-io/ui-workshop/compare/v2.0.17...v2.0.18) (2024-12-09)
 
 ### Bug Fixes
