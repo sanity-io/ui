@@ -9,8 +9,14 @@ module.exports = {
   transform: {
     '\\.[jt]sx?$': [
       'babel-jest',
-      // rootMode upwards makes use of the global babel.config.js
-      {rootMode: 'upward'},
+      {
+        configFile: false,
+        presets: [
+          ['@babel/preset-env', {modules: 'commonjs'}],
+          ['@babel/preset-react', {runtime: 'automatic'}],
+          '@babel/preset-typescript',
+        ],
+      },
     ],
   },
 }
