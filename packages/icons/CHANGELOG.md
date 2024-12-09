@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.2](https://github.com/sanity-io/icons/compare/v3.5.1...v3.5.2) (2024-12-09)
+
+### Bug Fixes
+
+- add react compiler ([#100](https://github.com/sanity-io/icons/issues/100)) ([a631df1](https://github.com/sanity-io/icons/commit/a631df14e758e9cecd7b08f4fe5b4e8000c11be0))
+
 ## [3.5.1](https://github.com/sanity-io/icons/compare/v3.5.0...v3.5.1) (2024-12-09)
 
 ### Bug Fixes
