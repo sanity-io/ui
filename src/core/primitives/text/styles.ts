@@ -9,6 +9,7 @@ export function textBaseStyle(
   const {font} = getTheme_v2(props.theme)
 
   return css`
+    min-width: 0;
     color: var(--card-fg-color);
 
     ${$accent &&
