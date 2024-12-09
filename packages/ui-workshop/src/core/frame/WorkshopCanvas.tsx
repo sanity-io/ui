@@ -6,7 +6,7 @@ import {useWorkshop} from '../useWorkshop'
 import {formatStack} from './formatStack'
 
 /** @internal */
-export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactElement {
+export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactNode {
   const {story} = useWorkshop()
   const [state, setState] = useState<{error: Error | null; errorInfo: React.ErrorInfo | null}>({
     error: null,

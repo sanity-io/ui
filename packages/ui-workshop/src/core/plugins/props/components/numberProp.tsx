@@ -8,7 +8,7 @@ import {useProps} from '../useProps'
 export const NumberProp = memo(function NumberProp(props: {
   schema: NumberPropSchema
   value?: string
-}): React.ReactElement {
+}): React.ReactNode {
   const {schema, value = ''} = props
   const {setPropValue} = useProps()
 

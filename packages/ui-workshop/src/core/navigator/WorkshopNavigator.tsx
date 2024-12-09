@@ -30,7 +30,7 @@ const textInputFontSize = [2, 2, 1]
 export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
   collections?: MenuCollection[]
   expanded: boolean
-}): React.ReactElement {
+}): React.ReactNode {
   const {collections = [], expanded} = props
   const {broadcast, scopes} = useWorkshop()
   const menu = useMemo(() => buildMenu(collections, scopes), [collections, scopes])

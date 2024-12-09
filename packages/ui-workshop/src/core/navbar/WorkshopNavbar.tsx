@@ -15,7 +15,7 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
   navigatorExpanded: boolean
   onInspectorToggle: () => void
   onNavigatorToggle: () => void
-}): React.ReactElement {
+}): React.ReactNode {
   const {inspectorExpanded, navigatorExpanded, onInspectorToggle, onNavigatorToggle} = props
   const mediaIndex = useMediaIndex()
   const {story, title} = useWorkshop()

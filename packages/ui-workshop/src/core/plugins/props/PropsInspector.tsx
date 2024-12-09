@@ -5,7 +5,7 @@ import {Prop} from './components/prop'
 import {useProps} from './useProps'
 
 /** @internal */
-export const PropsInspector = memo(function PropsInspector(): React.ReactElement {
+export const PropsInspector = memo(function PropsInspector(): React.ReactNode {
   const {schemas, value} = useProps()
 
   return (

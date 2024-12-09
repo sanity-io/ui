@@ -4,7 +4,7 @@ import {memo, useCallback} from 'react'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
-export function NavbarBreadcrumbs(): React.ReactElement {
+export function NavbarBreadcrumbs(): React.ReactNode {
   const {broadcast, scope, story, title} = useWorkshop()
 
   const handleHomeClick = useCallback(

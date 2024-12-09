@@ -6,7 +6,7 @@ import {ZOOM_OPTIONS} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
-export function ZoomMenu(): React.ReactElement {
+export function ZoomMenu(): React.ReactNode {
   const {broadcast, story, zoom} = useWorkshop()
 
   const setZoom = useCallback(

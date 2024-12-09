@@ -39,7 +39,7 @@ function getStateFromLocation(): WorkshopState {
 /** @internal */
 export const WorkshopFrame = memo(function WorkshopFrame(
   props: WorkshopFrameProps,
-): React.ReactElement {
+): React.ReactNode {
   const {config, setScheme} = props
   const main = useMemo(() => createMainController(), [])
   const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])

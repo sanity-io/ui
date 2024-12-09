@@ -5,7 +5,7 @@ import {memo} from 'react'
 import {useA11y} from './useA11y'
 
 /** @internal */
-export const A11yInspector = memo(function A11yInspector(): React.ReactElement {
+export const A11yInspector = memo(function A11yInspector(): React.ReactNode {
   const {results} = useA11y()
 
   return (

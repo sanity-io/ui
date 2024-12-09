@@ -81,7 +81,7 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
 }
 
 /** @public */
-export const Workshop = memo(function Workshop(props: WorkshopProps): React.ReactElement {
+export const Workshop = memo(function Workshop(props: WorkshopProps): React.ReactNode {
   const {config, locationStore, onSchemeChange, scheme: schemeProp} = props
   const withNavbar = config.features?.navbar ?? true
   const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
