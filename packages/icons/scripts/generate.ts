@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 
-import {readFileSync} from 'fs'
 import {readFile, writeFile} from 'fs/promises'
 import path from 'path'
+import prettierConfig from '@sanity/prettier-config'
 import {transform} from '@svgr/core'
 import camelCase from 'camelcase'
 import {globby} from 'globby'
@@ -14,8 +14,6 @@ const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
 const SRC_ICONS_PATH = path.resolve(ROOT_PATH, 'src/icons')
 
 const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
-
-const prettierConfig = JSON.parse(readFileSync(path.resolve(ROOT_PATH, '.prettierrc'), 'utf8'))
 
 const __TEMPLATE__ = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
@@ -122,7 +120,7 @@ async function generate() {
 
   await Promise.all(files.map(writeIcon))
 
-  const importTypes = `import {IconComponent} from '../types'`
+  const importTypes = `import type {IconComponent} from '../types'`
 
   const iconImports = files
     .map((f) => `import {${f.componentName}} from './${f.basename}';`)

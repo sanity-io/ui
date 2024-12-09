@@ -2,7 +2,7 @@
 
 /* eslint-disable import/order */
 
-import {IconComponent} from '../types'
+import type {IconComponent} from '../types'
 
 import {AccessDeniedIcon} from './accessDeniedIcon'
 import {ActivityIcon} from './activityIcon'
@@ -669,69 +669,69 @@ export {
  */
 export interface IconMap {
   'access-denied': IconComponent
-  activity: IconComponent
+  'activity': IconComponent
   'add-circle': IconComponent
   'add-comment': IconComponent
   'add-document': IconComponent
-  add: IconComponent
+  'add': IconComponent
   'add-user': IconComponent
-  api: IconComponent
-  archive: IconComponent
+  'api': IconComponent
+  'archive': IconComponent
   'arrow-down': IconComponent
   'arrow-left': IconComponent
   'arrow-right': IconComponent
   'arrow-top-right': IconComponent
   'arrow-up': IconComponent
-  asterisk: IconComponent
+  'asterisk': IconComponent
   'bar-chart': IconComponent
-  basket: IconComponent
-  bell: IconComponent
-  bill: IconComponent
+  'basket': IconComponent
+  'bell': IconComponent
+  'bill': IconComponent
   'binary-document': IconComponent
   'block-content': IconComponent
   'block-element': IconComponent
-  blockquote: IconComponent
-  bold: IconComponent
-  bolt: IconComponent
-  book: IconComponent
-  bottle: IconComponent
-  bug: IconComponent
+  'blockquote': IconComponent
+  'bold': IconComponent
+  'bolt': IconComponent
+  'book': IconComponent
+  'bottle': IconComponent
+  'bug': IconComponent
   'bulb-filled': IconComponent
   'bulb-outline': IconComponent
-  calendar: IconComponent
-  case: IconComponent
+  'calendar': IconComponent
+  'case': IconComponent
   'chart-upward': IconComponent
   'checkmark-circle': IconComponent
-  checkmark: IconComponent
+  'checkmark': IconComponent
   'chevron-down': IconComponent
   'chevron-left': IconComponent
   'chevron-right': IconComponent
   'chevron-up': IconComponent
-  circle: IconComponent
-  clipboard: IconComponent
+  'circle': IconComponent
+  'clipboard': IconComponent
   'clipboard-image': IconComponent
-  clock: IconComponent
+  'clock': IconComponent
   'close-circle': IconComponent
-  close: IconComponent
+  'close': IconComponent
   'code-block': IconComponent
-  code: IconComponent
-  cog: IconComponent
-  collapse: IconComponent
+  'code': IconComponent
+  'cog': IconComponent
+  'collapse': IconComponent
   'color-wheel': IconComponent
-  comment: IconComponent
-  component: IconComponent
-  compose: IconComponent
-  confetti: IconComponent
-  controls: IconComponent
-  copy: IconComponent
+  'comment': IconComponent
+  'component': IconComponent
+  'compose': IconComponent
+  'confetti': IconComponent
+  'controls': IconComponent
+  'copy': IconComponent
   'credit-card': IconComponent
-  crop: IconComponent
-  cube: IconComponent
-  dashboard: IconComponent
-  database: IconComponent
-  desktop: IconComponent
-  diamond: IconComponent
-  document: IconComponent
+  'crop': IconComponent
+  'cube': IconComponent
+  'dashboard': IconComponent
+  'database': IconComponent
+  'desktop': IconComponent
+  'diamond': IconComponent
+  'document': IconComponent
   'document-pdf': IconComponent
   'document-remove': IconComponent
   'document-sheet': IconComponent
@@ -739,152 +739,152 @@ export interface IconMap {
   'document-video': IconComponent
   'document-word': IconComponent
   'document-zip': IconComponent
-  documents: IconComponent
-  dot: IconComponent
+  'documents': IconComponent
+  'dot': IconComponent
   'double-chevron-down': IconComponent
   'double-chevron-left': IconComponent
   'double-chevron-right': IconComponent
   'double-chevron-up': IconComponent
-  download: IconComponent
+  'download': IconComponent
   'drag-handle': IconComponent
-  drop: IconComponent
+  'drop': IconComponent
   'earth-americas': IconComponent
   'earth-globe': IconComponent
-  edit: IconComponent
+  'edit': IconComponent
   'ellipsis-horizontal': IconComponent
   'ellipsis-vertical': IconComponent
-  empty: IconComponent
-  enter: IconComponent
+  'empty': IconComponent
+  'enter': IconComponent
   'enter-right': IconComponent
-  envelope: IconComponent
-  equal: IconComponent
+  'envelope': IconComponent
+  'equal': IconComponent
   'error-filled': IconComponent
   'error-outline': IconComponent
-  expand: IconComponent
+  'expand': IconComponent
   'eye-closed': IconComponent
   'eye-open': IconComponent
-  filter: IconComponent
-  folder: IconComponent
-  generate: IconComponent
-  groq: IconComponent
-  hash: IconComponent
+  'filter': IconComponent
+  'folder': IconComponent
+  'generate': IconComponent
+  'groq': IconComponent
+  'hash': IconComponent
   'heart-filled': IconComponent
-  heart: IconComponent
+  'heart': IconComponent
   'help-circle': IconComponent
-  highlight: IconComponent
-  home: IconComponent
+  'highlight': IconComponent
+  'home': IconComponent
   'ice-cream': IconComponent
-  image: IconComponent
+  'image': IconComponent
   'image-remove': IconComponent
-  images: IconComponent
+  'images': IconComponent
   'info-filled': IconComponent
   'info-outline': IconComponent
   'inline-element': IconComponent
-  inline: IconComponent
+  'inline': IconComponent
   'insert-above': IconComponent
   'insert-below': IconComponent
-  italic: IconComponent
-  joystick: IconComponent
-  json: IconComponent
-  launch: IconComponent
-  leave: IconComponent
-  lemon: IconComponent
-  link: IconComponent
+  'italic': IconComponent
+  'joystick': IconComponent
+  'json': IconComponent
+  'launch': IconComponent
+  'leave': IconComponent
+  'lemon': IconComponent
+  'link': IconComponent
   'link-removed': IconComponent
-  list: IconComponent
-  lock: IconComponent
+  'list': IconComponent
+  'lock': IconComponent
   'logo-js': IconComponent
   'logo-ts': IconComponent
-  marker: IconComponent
+  'marker': IconComponent
   'marker-removed': IconComponent
   'master-detail': IconComponent
-  menu: IconComponent
+  'menu': IconComponent
   'mobile-device': IconComponent
-  moon: IconComponent
-  number: IconComponent
+  'moon': IconComponent
+  'number': IconComponent
   'ok-hand': IconComponent
-  olist: IconComponent
-  overage: IconComponent
-  package: IconComponent
+  'olist': IconComponent
+  'overage': IconComponent
+  'package': IconComponent
   'panel-left': IconComponent
   'panel-right': IconComponent
-  pause: IconComponent
+  'pause': IconComponent
   'pin-filled': IconComponent
-  pin: IconComponent
+  'pin': IconComponent
   'pin-removed': IconComponent
-  play: IconComponent
-  plug: IconComponent
-  presentation: IconComponent
+  'play': IconComponent
+  'plug': IconComponent
+  'presentation': IconComponent
   'progress-50': IconComponent
   'progress-75': IconComponent
-  projects: IconComponent
-  publish: IconComponent
+  'projects': IconComponent
+  'publish': IconComponent
   'read-only': IconComponent
-  redo: IconComponent
-  refresh: IconComponent
+  'redo': IconComponent
+  'refresh': IconComponent
   'remove-circle': IconComponent
-  remove: IconComponent
-  reset: IconComponent
-  restore: IconComponent
-  retrieve: IconComponent
-  retry: IconComponent
-  revert: IconComponent
-  robot: IconComponent
-  rocket: IconComponent
-  schema: IconComponent
-  search: IconComponent
-  select: IconComponent
-  share: IconComponent
-  sort: IconComponent
-  sparkle: IconComponent
-  sparkles: IconComponent
-  spinner: IconComponent
+  'remove': IconComponent
+  'reset': IconComponent
+  'restore': IconComponent
+  'retrieve': IconComponent
+  'retry': IconComponent
+  'revert': IconComponent
+  'robot': IconComponent
+  'rocket': IconComponent
+  'schema': IconComponent
+  'search': IconComponent
+  'select': IconComponent
+  'share': IconComponent
+  'sort': IconComponent
+  'sparkle': IconComponent
+  'sparkles': IconComponent
+  'spinner': IconComponent
   'split-horizontal': IconComponent
   'split-vertical': IconComponent
-  square: IconComponent
+  'square': IconComponent
   'stack-compact': IconComponent
-  stack: IconComponent
+  'stack': IconComponent
   'star-filled': IconComponent
-  star: IconComponent
-  stop: IconComponent
-  strikethrough: IconComponent
-  string: IconComponent
-  sun: IconComponent
-  sync: IconComponent
+  'star': IconComponent
+  'stop': IconComponent
+  'strikethrough': IconComponent
+  'string': IconComponent
+  'sun': IconComponent
+  'sync': IconComponent
   'tablet-device': IconComponent
-  tag: IconComponent
-  tags: IconComponent
-  task: IconComponent
-  terminal: IconComponent
-  text: IconComponent
+  'tag': IconComponent
+  'tags': IconComponent
+  'task': IconComponent
+  'terminal': IconComponent
+  'text': IconComponent
   'th-large': IconComponent
   'th-list': IconComponent
-  tiers: IconComponent
-  timeline: IconComponent
+  'tiers': IconComponent
+  'timeline': IconComponent
   'toggle-arrow-right': IconComponent
-  token: IconComponent
-  transfer: IconComponent
-  translate: IconComponent
-  trash: IconComponent
+  'token': IconComponent
+  'transfer': IconComponent
+  'translate': IconComponent
+  'trash': IconComponent
   'trend-upward': IconComponent
   'triangle-outline': IconComponent
-  trolley: IconComponent
-  truncate: IconComponent
-  twitter: IconComponent
-  ulist: IconComponent
-  unarchive: IconComponent
-  underline: IconComponent
-  undo: IconComponent
-  unknown: IconComponent
-  unlink: IconComponent
-  unlock: IconComponent
-  unpublish: IconComponent
-  upload: IconComponent
-  user: IconComponent
-  users: IconComponent
+  'trolley': IconComponent
+  'truncate': IconComponent
+  'twitter': IconComponent
+  'ulist': IconComponent
+  'unarchive': IconComponent
+  'underline': IconComponent
+  'undo': IconComponent
+  'unknown': IconComponent
+  'unlink': IconComponent
+  'unlock': IconComponent
+  'unpublish': IconComponent
+  'upload': IconComponent
+  'user': IconComponent
+  'users': IconComponent
   'warning-filled': IconComponent
   'warning-outline': IconComponent
-  wrench: IconComponent
+  'wrench': IconComponent
 }
 
 /**
@@ -892,69 +892,69 @@ export interface IconMap {
  */
 export const icons: IconMap = {
   'access-denied': AccessDeniedIcon,
-  activity: ActivityIcon,
+  'activity': ActivityIcon,
   'add-circle': AddCircleIcon,
   'add-comment': AddCommentIcon,
   'add-document': AddDocumentIcon,
-  add: AddIcon,
+  'add': AddIcon,
   'add-user': AddUserIcon,
-  api: ApiIcon,
-  archive: ArchiveIcon,
+  'api': ApiIcon,
+  'archive': ArchiveIcon,
   'arrow-down': ArrowDownIcon,
   'arrow-left': ArrowLeftIcon,
   'arrow-right': ArrowRightIcon,
   'arrow-top-right': ArrowTopRightIcon,
   'arrow-up': ArrowUpIcon,
-  asterisk: AsteriskIcon,
+  'asterisk': AsteriskIcon,
   'bar-chart': BarChartIcon,
-  basket: BasketIcon,
-  bell: BellIcon,
-  bill: BillIcon,
+  'basket': BasketIcon,
+  'bell': BellIcon,
+  'bill': BillIcon,
   'binary-document': BinaryDocumentIcon,
   'block-content': BlockContentIcon,
   'block-element': BlockElementIcon,
-  blockquote: BlockquoteIcon,
-  bold: BoldIcon,
-  bolt: BoltIcon,
-  book: BookIcon,
-  bottle: BottleIcon,
-  bug: BugIcon,
+  'blockquote': BlockquoteIcon,
+  'bold': BoldIcon,
+  'bolt': BoltIcon,
+  'book': BookIcon,
+  'bottle': BottleIcon,
+  'bug': BugIcon,
   'bulb-filled': BulbFilledIcon,
   'bulb-outline': BulbOutlineIcon,
-  calendar: CalendarIcon,
-  case: CaseIcon,
+  'calendar': CalendarIcon,
+  'case': CaseIcon,
   'chart-upward': ChartUpwardIcon,
   'checkmark-circle': CheckmarkCircleIcon,
-  checkmark: CheckmarkIcon,
+  'checkmark': CheckmarkIcon,
   'chevron-down': ChevronDownIcon,
   'chevron-left': ChevronLeftIcon,
   'chevron-right': ChevronRightIcon,
   'chevron-up': ChevronUpIcon,
-  circle: CircleIcon,
-  clipboard: ClipboardIcon,
+  'circle': CircleIcon,
+  'clipboard': ClipboardIcon,
   'clipboard-image': ClipboardImageIcon,
-  clock: ClockIcon,
+  'clock': ClockIcon,
   'close-circle': CloseCircleIcon,
-  close: CloseIcon,
+  'close': CloseIcon,
   'code-block': CodeBlockIcon,
-  code: CodeIcon,
-  cog: CogIcon,
-  collapse: CollapseIcon,
+  'code': CodeIcon,
+  'cog': CogIcon,
+  'collapse': CollapseIcon,
   'color-wheel': ColorWheelIcon,
-  comment: CommentIcon,
-  component: ComponentIcon,
-  compose: ComposeIcon,
-  confetti: ConfettiIcon,
-  controls: ControlsIcon,
-  copy: CopyIcon,
+  'comment': CommentIcon,
+  'component': ComponentIcon,
+  'compose': ComposeIcon,
+  'confetti': ConfettiIcon,
+  'controls': ControlsIcon,
+  'copy': CopyIcon,
   'credit-card': CreditCardIcon,
-  crop: CropIcon,
-  cube: CubeIcon,
-  dashboard: DashboardIcon,
-  database: DatabaseIcon,
-  desktop: DesktopIcon,
-  diamond: DiamondIcon,
-  document: DocumentIcon,
+  'crop': CropIcon,
+  'cube': CubeIcon,
+  'dashboard': DashboardIcon,
+  'database': DatabaseIcon,
+  'desktop': DesktopIcon,
+  'diamond': DiamondIcon,
+  'document': DocumentIcon,
   'document-pdf': DocumentPdfIcon,
   'document-remove': DocumentRemoveIcon,
   'document-sheet': DocumentSheetIcon,
@@ -962,150 +962,150 @@ export const icons: IconMap = {
   'document-video': DocumentVideoIcon,
   'document-word': DocumentWordIcon,
   'document-zip': DocumentZipIcon,
-  documents: DocumentsIcon,
-  dot: DotIcon,
+  'documents': DocumentsIcon,
+  'dot': DotIcon,
   'double-chevron-down': DoubleChevronDownIcon,
   'double-chevron-left': DoubleChevronLeftIcon,
   'double-chevron-right': DoubleChevronRightIcon,
   'double-chevron-up': DoubleChevronUpIcon,
-  download: DownloadIcon,
+  'download': DownloadIcon,
   'drag-handle': DragHandleIcon,
-  drop: DropIcon,
+  'drop': DropIcon,
   'earth-americas': EarthAmericasIcon,
   'earth-globe': EarthGlobeIcon,
-  edit: EditIcon,
+  'edit': EditIcon,
   'ellipsis-horizontal': EllipsisHorizontalIcon,
   'ellipsis-vertical': EllipsisVerticalIcon,
-  empty: EmptyIcon,
-  enter: EnterIcon,
+  'empty': EmptyIcon,
+  'enter': EnterIcon,
   'enter-right': EnterRightIcon,
-  envelope: EnvelopeIcon,
-  equal: EqualIcon,
+  'envelope': EnvelopeIcon,
+  'equal': EqualIcon,
   'error-filled': ErrorFilledIcon,
   'error-outline': ErrorOutlineIcon,
-  expand: ExpandIcon,
+  'expand': ExpandIcon,
   'eye-closed': EyeClosedIcon,
   'eye-open': EyeOpenIcon,
-  filter: FilterIcon,
-  folder: FolderIcon,
-  generate: GenerateIcon,
-  groq: GroqIcon,
-  hash: HashIcon,
+  'filter': FilterIcon,
+  'folder': FolderIcon,
+  'generate': GenerateIcon,
+  'groq': GroqIcon,
+  'hash': HashIcon,
   'heart-filled': HeartFilledIcon,
-  heart: HeartIcon,
+  'heart': HeartIcon,
   'help-circle': HelpCircleIcon,
-  highlight: HighlightIcon,
-  home: HomeIcon,
+  'highlight': HighlightIcon,
+  'home': HomeIcon,
   'ice-cream': IceCreamIcon,
-  image: ImageIcon,
+  'image': ImageIcon,
   'image-remove': ImageRemoveIcon,
-  images: ImagesIcon,
+  'images': ImagesIcon,
   'info-filled': InfoFilledIcon,
   'info-outline': InfoOutlineIcon,
   'inline-element': InlineElementIcon,
-  inline: InlineIcon,
+  'inline': InlineIcon,
   'insert-above': InsertAboveIcon,
   'insert-below': InsertBelowIcon,
-  italic: ItalicIcon,
-  joystick: JoystickIcon,
-  json: JsonIcon,
-  launch: LaunchIcon,
-  leave: LeaveIcon,
-  lemon: LemonIcon,
-  link: LinkIcon,
+  'italic': ItalicIcon,
+  'joystick': JoystickIcon,
+  'json': JsonIcon,
+  'launch': LaunchIcon,
+  'leave': LeaveIcon,
+  'lemon': LemonIcon,
+  'link': LinkIcon,
   'link-removed': LinkRemovedIcon,
-  list: ListIcon,
-  lock: LockIcon,
+  'list': ListIcon,
+  'lock': LockIcon,
   'logo-js': LogoJsIcon,
   'logo-ts': LogoTsIcon,
-  marker: MarkerIcon,
+  'marker': MarkerIcon,
   'marker-removed': MarkerRemovedIcon,
   'master-detail': MasterDetailIcon,
-  menu: MenuIcon,
+  'menu': MenuIcon,
   'mobile-device': MobileDeviceIcon,
-  moon: MoonIcon,
-  number: NumberIcon,
+  'moon': MoonIcon,
+  'number': NumberIcon,
   'ok-hand': OkHandIcon,
-  olist: OlistIcon,
-  overage: OverageIcon,
-  package: PackageIcon,
+  'olist': OlistIcon,
+  'overage': OverageIcon,
+  'package': PackageIcon,
   'panel-left': PanelLeftIcon,
   'panel-right': PanelRightIcon,
-  pause: PauseIcon,
+  'pause': PauseIcon,
   'pin-filled': PinFilledIcon,
-  pin: PinIcon,
+  'pin': PinIcon,
   'pin-removed': PinRemovedIcon,
-  play: PlayIcon,
-  plug: PlugIcon,
-  presentation: PresentationIcon,
+  'play': PlayIcon,
+  'plug': PlugIcon,
+  'presentation': PresentationIcon,
   'progress-50': Progress50Icon,
   'progress-75': Progress75Icon,
-  projects: ProjectsIcon,
-  publish: PublishIcon,
+  'projects': ProjectsIcon,
+  'publish': PublishIcon,
   'read-only': ReadOnlyIcon,
-  redo: RedoIcon,
-  refresh: RefreshIcon,
+  'redo': RedoIcon,
+  'refresh': RefreshIcon,
   'remove-circle': RemoveCircleIcon,
-  remove: RemoveIcon,
-  reset: ResetIcon,
-  restore: RestoreIcon,
-  retrieve: RetrieveIcon,
-  retry: RetryIcon,
-  revert: RevertIcon,
-  robot: RobotIcon,
-  rocket: RocketIcon,
-  schema: SchemaIcon,
-  search: SearchIcon,
-  select: SelectIcon,
-  share: ShareIcon,
-  sort: SortIcon,
-  sparkle: SparkleIcon,
-  sparkles: SparklesIcon,
-  spinner: SpinnerIcon,
+  'remove': RemoveIcon,
+  'reset': ResetIcon,
+  'restore': RestoreIcon,
+  'retrieve': RetrieveIcon,
+  'retry': RetryIcon,
+  'revert': RevertIcon,
+  'robot': RobotIcon,
+  'rocket': RocketIcon,
+  'schema': SchemaIcon,
+  'search': SearchIcon,
+  'select': SelectIcon,
+  'share': ShareIcon,
+  'sort': SortIcon,
+  'sparkle': SparkleIcon,
+  'sparkles': SparklesIcon,
+  'spinner': SpinnerIcon,
   'split-horizontal': SplitHorizontalIcon,
   'split-vertical': SplitVerticalIcon,
-  square: SquareIcon,
+  'square': SquareIcon,
   'stack-compact': StackCompactIcon,
-  stack: StackIcon,
+  'stack': StackIcon,
   'star-filled': StarFilledIcon,
-  star: StarIcon,
-  stop: StopIcon,
-  strikethrough: StrikethroughIcon,
-  string: StringIcon,
-  sun: SunIcon,
-  sync: SyncIcon,
+  'star': StarIcon,
+  'stop': StopIcon,
+  'strikethrough': StrikethroughIcon,
+  'string': StringIcon,
+  'sun': SunIcon,
+  'sync': SyncIcon,
   'tablet-device': TabletDeviceIcon,
-  tag: TagIcon,
-  tags: TagsIcon,
-  task: TaskIcon,
-  terminal: TerminalIcon,
-  text: TextIcon,
+  'tag': TagIcon,
+  'tags': TagsIcon,
+  'task': TaskIcon,
+  'terminal': TerminalIcon,
+  'text': TextIcon,
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
-  tiers: TiersIcon,
-  timeline: TimelineIcon,
+  'tiers': TiersIcon,
+  'timeline': TimelineIcon,
   'toggle-arrow-right': ToggleArrowRightIcon,
-  token: TokenIcon,
-  transfer: TransferIcon,
-  translate: TranslateIcon,
-  trash: TrashIcon,
+  'token': TokenIcon,
+  'transfer': TransferIcon,
+  'translate': TranslateIcon,
+  'trash': TrashIcon,
   'trend-upward': TrendUpwardIcon,
   'triangle-outline': TriangleOutlineIcon,
-  trolley: TrolleyIcon,
-  truncate: TruncateIcon,
-  twitter: TwitterIcon,
-  ulist: UlistIcon,
-  unarchive: UnarchiveIcon,
-  underline: UnderlineIcon,
-  undo: UndoIcon,
-  unknown: UnknownIcon,
-  unlink: UnlinkIcon,
-  unlock: UnlockIcon,
-  unpublish: UnpublishIcon,
-  upload: UploadIcon,
-  user: UserIcon,
-  users: UsersIcon,
+  'trolley': TrolleyIcon,
+  'truncate': TruncateIcon,
+  'twitter': TwitterIcon,
+  'ulist': UlistIcon,
+  'unarchive': UnarchiveIcon,
+  'underline': UnderlineIcon,
+  'undo': UndoIcon,
+  'unknown': UnknownIcon,
+  'unlink': UnlinkIcon,
+  'unlock': UnlockIcon,
+  'unpublish': UnpublishIcon,
+  'upload': UploadIcon,
+  'user': UserIcon,
+  'users': UsersIcon,
   'warning-filled': WarningFilledIcon,
   'warning-outline': WarningOutlineIcon,
-  wrench: WrenchIcon,
+  'wrench': WrenchIcon,
 }

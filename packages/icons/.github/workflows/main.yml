@@ -47,7 +47,7 @@ jobs:
   release:
     permissions:
       id-token: write # to enable use of OIDC for npm provenance
-    name: 'Semantic release'
+    name: "Semantic release"
     needs: test
     runs-on: ubuntu-latest
     steps:
