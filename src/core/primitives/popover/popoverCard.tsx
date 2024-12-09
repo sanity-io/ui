@@ -1,6 +1,6 @@
 import {Strategy} from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {MotionProps, motion} from 'framer-motion'
+import {type MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import {styled} from 'styled-components'
 import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY, POPOVER_MOTION_PROPS} from '../../constants'
@@ -15,7 +15,7 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
-const MotionCard = styled(motion(Card))`
+const MotionCard = styled(motion.create(Card))`
   &:not([hidden]) {
     display: flex;
   }
