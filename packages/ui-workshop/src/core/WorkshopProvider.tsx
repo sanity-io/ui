@@ -27,7 +27,7 @@ export interface WorkshopProviderProps {
 /** @internal */
 export const WorkshopProvider = memo(function WorkshopProvider(
   props: WorkshopProviderProps,
-): React.ReactElement {
+): React.ReactNode {
   const {
     broadcast,
     children,

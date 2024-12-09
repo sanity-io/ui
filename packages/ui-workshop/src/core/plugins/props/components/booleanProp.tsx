@@ -8,7 +8,7 @@ import {useProps} from '../useProps'
 export const BooleanProp = memo(function BooleanProp(props: {
   schema: BooleanPropSchema
   value?: boolean
-}): React.ReactElement {
+}): React.ReactNode {
   const {schema, value} = props
   const {setPropValue} = useProps()
 

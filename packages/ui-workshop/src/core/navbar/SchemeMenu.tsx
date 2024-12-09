@@ -5,7 +5,7 @@ import {memo, useCallback} from 'react'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
-export function SchemeMenu(): React.ReactElement {
+export function SchemeMenu(): React.ReactNode {
   const {broadcast, scheme} = useWorkshop()
 
   const handleToggleScheme = useCallback(() => {

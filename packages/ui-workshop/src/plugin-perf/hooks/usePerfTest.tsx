@@ -59,7 +59,7 @@ export function usePerfTest<TargetType = unknown>(
   const Wrapper = useMemo(() => {
     return memo(
       // eslint-disable-next-line no-shadow
-      function Wrapper({children}: {children?: React.ReactNode}): React.ReactElement {
+      function Wrapper({children}: {children?: React.ReactNode}): React.ReactNode {
         if (!active) {
           return <>{children}</>
         }

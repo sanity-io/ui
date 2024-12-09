@@ -13,7 +13,7 @@ import {PropSchema, PropsState} from './types'
 /** @internal */
 export const PropsProvider = memo(function PropsProvider(props: {
   children?: React.ReactNode
-}): React.ReactElement {
+}): React.ReactNode {
   const {children} = props
   const {channel, broadcast, payload} = useWorkshop<PropsMsg>()
   const encodedValue = payload.value

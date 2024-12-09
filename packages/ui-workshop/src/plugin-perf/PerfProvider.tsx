@@ -10,7 +10,7 @@ import {PerfState, PerfTest, PerfTestRenderResult} from './types'
 /** @internal */
 export const PerfProvider = memo(function PerfProvider(props: {
   children?: React.ReactNode
-}): React.ReactElement {
+}): React.ReactNode {
   const {children} = props
   const {broadcast, channel} = useWorkshop<PerfMsg>()
   const [{activeTest, results, testDetails, tests}, setState] = useState<PerfState>({

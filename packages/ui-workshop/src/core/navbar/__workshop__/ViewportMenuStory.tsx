@@ -1,9 +1,8 @@
 import {Flex} from '@sanity/ui'
-import {ReactElement} from 'react'
 
 import {ViewportMenu} from '../ViewportMenu'
 
-export default function ViewportMenuStory(): ReactElement {
+export default function ViewportMenuStory(): React.ReactNode {
   return (
     <Flex align="center" height="fill" justify="center">
       <ViewportMenu />

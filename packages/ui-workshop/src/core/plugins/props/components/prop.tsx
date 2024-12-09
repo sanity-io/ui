@@ -9,7 +9,7 @@ import {StringProp} from './stringProp'
 import {TextProp} from './textProp'
 
 /** @internal */
-export function Prop(props: {schema: PropSchema; value: any}): React.ReactElement {
+export function Prop(props: {schema: PropSchema; value: any}): React.ReactNode {
   const {schema, value} = props
 
   if (schema.type === 'boolean') {

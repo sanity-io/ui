@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, BoxDisplay, Card, Flex, TabPanel} from '@sanity/ui'
-import {createElement, ElementType, memo, ReactElement, useMemo, useState} from 'react'
+import {createElement, ElementType, memo, useMemo, useState} from 'react'
 import styled from 'styled-components'
 
 import {EMPTY_RECORD} from '../constants'
@@ -26,7 +26,7 @@ const MemoRender = memo(function MemoRender(props: {component: ElementType; opti
 /** @internal */
 export const WorkshopInspector = memo(function WorkshopInspector(props: {
   expanded: boolean
-}): ReactElement {
+}): React.ReactNode {
   const {expanded} = props
   const {plugins} = useWorkshop()
 
