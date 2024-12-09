@@ -1,6 +1,5 @@
 import path from 'path'
 import {defineRuntime} from '@sanity/ui-workshop'
-import viteReact from '@vitejs/plugin-react'
 
 const EXPORTS_PATH = path.resolve(__dirname, 'exports')
 
