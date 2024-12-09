@@ -136,7 +136,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.6.0",
     "@sanity/browserslist-config": "^1.0.3",
-    "@sanity/icons": "^3.5.1",
+    "@sanity/icons": "^3.5.2",
     "@sanity/pkg-utils": "^6.11.15",
     "@sanity/prettier-config": "^1.0.3",
     "@sanity/semantic-release-preset": "^4.1.8",
