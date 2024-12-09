@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.17](https://github.com/sanity-io/ui-workshop/compare/v2.0.16...v2.0.17) (2024-12-09)
+
+### Bug Fixes
+
+- allow react 19 in peer deps ([39daf6b](https://github.com/sanity-io/ui-workshop/commit/39daf6bafdd48d74825c1608bacca9d9fdcfa0f3))
+
 ## [2.0.16](https://github.com/sanity-io/ui-workshop/compare/v2.0.15...v2.0.16) (2024-07-29)
 
 ### Bug Fixes
