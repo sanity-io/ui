@@ -68,7 +68,7 @@ importers:
         version: 1.0.3
       '@sanity/icons':
         specifier: ^3.5.1
-        version: 3.5.1(react@19.0.0)
+        version: 3.5.2(react@19.0.0)
       '@sanity/pkg-utils':
         specifier: ^6.11.15
         version: 6.11.15(@types/babel__core@7.20.5)(@types/node@20.17.9)(babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206)(typescript@5.7.2)
@@ -1067,8 +1067,8 @@ packages:
     resolution: {integrity: sha512-2TjYEvOftD0v7ukx3Csdh9QIu44P2z7NDJtlC3qITJRYV36J7R6Vfd3trVhFnN77/7CZrGjqngrtohv8VqO5nw==}
     engines: {node: '>=18.0.0'}
 
-  '@sanity/icons@3.5.1':
-    resolution: {integrity: sha512-JXunb4QZ9uLSE+GKGIGCoPpjWGDAqL85PzoZeGNqrAow9B37NRGwZ+/STmGxM7cTV5nDeP08FgAletem1I7m5w==}
+  '@sanity/icons@3.5.2':
+    resolution: {integrity: sha512-ZPSBevYnmBvtjWvvM/Akpey+kreAvGhSUJYoqf4bJUwKvC1q/80s2o2EWL+xtZe1K3BJJI8HyBeL4WHQA3EMrA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^18.3 || ^19.0.0-0
@@ -2573,8 +2573,8 @@ packages:
     resolution: {integrity: sha512-GMBAbW9antB8iZRHLoGw0b3HANt57diZYFO/HL1JGIC1MjKrdmhxvrJbupnVvpys0zsz7yBApXdQyfepKly2kA==}
     engines: {node: '>=0.10.0'}
 
-  framer-motion@11.13.1:
-    resolution: {integrity: sha512-F40tpGTHByhn9h3zdBQPcEro+pSLtzARcocbNqAyfBI+u9S+KZuHH/7O9+z+GEkoF3eqFxfvVw0eBDytohwqmQ==}
+  framer-motion@11.13.3:
+    resolution: {integrity: sha512-3ZSNuYpDFeNxqVKUyYipOm5A1fXSbMje1XIfEWxKTJ4ughl5FEjvkp6gKmFHLjzwijCVU/PjsMNlTMVCmi+Twg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -6082,9 +6082,10 @@ snapshots:
 
   '@sanity/color@3.0.6': {}
 
-  '@sanity/icons@3.5.1(react@19.0.0)':
+  '@sanity/icons@3.5.2(react@19.0.0)':
     dependencies:
       react: 19.0.0
+      react-compiler-runtime: 19.0.0-beta-37ed2a7-20241206(react@19.0.0)
 
   '@sanity/pkg-utils@6.11.15(@types/babel__core@7.20.5)(@types/node@20.17.9)(babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206)(typescript@5.7.2)':
     dependencies:
@@ -6158,9 +6159,9 @@ snapshots:
     dependencies:
       '@floating-ui/react-dom': 2.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@sanity/color': 3.0.6
-      '@sanity/icons': 3.5.1(react@19.0.0)
+      '@sanity/icons': 3.5.2(react@19.0.0)
       csstype: 3.1.3
-      framer-motion: 11.13.1(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      framer-motion: 11.13.3(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
       react-compiler-runtime: 19.0.0-beta-37ed2a7-20241206(react@19.0.0)
       react-dom: 19.0.0(react@19.0.0)
@@ -8042,7 +8043,7 @@ snapshots:
     dependencies:
       map-cache: 0.2.2
 
-  framer-motion@11.13.1(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  framer-motion@11.13.3(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       motion-dom: 11.13.0
       motion-utils: 11.13.0
