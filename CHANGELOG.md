@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.7](https://github.com/sanity-io/ui/compare/v2.10.6...v2.10.7) (2024-12-10)
+
+### Bug Fixes
+
+- **deps:** update dependency framer-motion to ^11.13.5 ([19e049e](https://github.com/sanity-io/ui/commit/19e049e355f8b37a0bef734204cf62fd968bf537))
+- ensure `referenceElement` don't flash in the wrong position on mount ([c95c1c0](https://github.com/sanity-io/ui/commit/c95c1c014a311747286491781db0bd630f43d63b))
+
 ## [2.10.6](https://github.com/sanity-io/ui/compare/v2.10.5...v2.10.6) (2024-12-10)
 
 ### Bug Fixes
