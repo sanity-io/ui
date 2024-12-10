@@ -1,10 +1,10 @@
-import { CloseIcon } from '@sanity/icons'
-import { ThemeFontWeightKey } from '@sanity/ui/theme'
-import { forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef } from 'react'
-import { isValidElementType } from 'react-is'
-import { styled } from 'styled-components'
-import { EMPTY_RECORD } from '../../constants'
-import { useArrayProp, useCustomValidity } from '../../hooks'
+import {CloseIcon} from '@sanity/icons'
+import {ThemeFontWeightKey} from '@sanity/ui/theme'
+import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
+import {isValidElementType} from 'react-is'
+import {styled} from 'styled-components'
+import {EMPTY_RECORD} from '../../constants'
+import {useArrayProp, useCustomValidity} from '../../hooks'
 import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
@@ -17,12 +17,12 @@ import {
   TextInputResponsivePaddingStyleProps,
   textInputRootStyle,
 } from '../../styles/internal'
-import { useRootTheme } from '../../theme'
-import { Radius } from '../../types'
-import { Box } from '../box'
-import { Button, ButtonProps } from '../button'
-import { Card } from '../card'
-import { Text } from '../text'
+import {useRootTheme} from '../../theme'
+import {Radius} from '../../types'
+import {Box} from '../box'
+import {Button, ButtonProps} from '../button'
+import {Card} from '../card'
+import {Text} from '../text'
 
 /**
  * @public
