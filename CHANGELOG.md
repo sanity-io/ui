@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.8](https://github.com/sanity-io/ui/compare/v2.10.7...v2.10.8) (2024-12-10)
+
+### Bug Fixes
+
+- **types:** Addition of `search` to `TextInputType` ([#1518](https://github.com/sanity-io/ui/issues/1518)) ([872c36b](https://github.com/sanity-io/ui/commit/872c36b2e29a59f80add337e848bbeb988488318))
+
 ## [2.10.7](https://github.com/sanity-io/ui/compare/v2.10.6...v2.10.7) (2024-12-10)
 
 ### Bug Fixes
