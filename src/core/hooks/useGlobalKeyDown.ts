@@ -1,12 +1,17 @@
 import {useEffect} from 'react'
+import {useEffectEvent} from 'use-effect-event'
 
 /**
  * @beta
  */
 export function useGlobalKeyDown(onKeyDown: (event: KeyboardEvent) => void): void {
-  return useEffect(() => {
-    addEventListener('keydown', onKeyDown)
+  const handleKeyDown = useEffectEvent((event: KeyboardEvent) => onKeyDown(event))
 
-    return () => removeEventListener('keydown', onKeyDown)
-  }, [onKeyDown])
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => handleKeyDown(event)
+
+    window.addEventListener('keydown', handler)
+
+    return () => window.removeEventListener('keydown', handler)
+  }, [handleKeyDown])
 }
