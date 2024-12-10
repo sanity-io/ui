@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.6](https://github.com/sanity-io/ui/compare/v2.10.5...v2.10.6) (2024-12-10)
+
+### Bug Fixes
+
+- allow using `useGlobalKeyDown` without `useCallback` ([263c0a6](https://github.com/sanity-io/ui/commit/263c0a6bbf05a06c4110ed2801ff91105fdea216))
+
 ## [2.10.5](https://github.com/sanity-io/ui/compare/v2.10.4...v2.10.5) (2024-12-09)
 
 ### Bug Fixes
