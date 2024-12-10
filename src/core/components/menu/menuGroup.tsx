@@ -6,7 +6,7 @@ import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {useRootTheme} from '../../theme'
 import {Radius, SelectableTone} from '../../types'
-import {Menu} from './menu'
+import {Menu, MenuProps} from './menu'
 import {useMenu} from './useMenu'
 
 /**
@@ -16,6 +16,7 @@ export interface MenuGroupProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
   fontSize?: number | number[]
   icon?: React.ElementType | React.ReactNode
+  menu?: MenuProps
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: Radius | Radius[]
@@ -36,6 +37,7 @@ export function MenuGroup(
     children,
     fontSize = 1,
     icon: IconComponent,
+    menu: menuProps,
     onClick,
     padding = 3,
     popover,
@@ -136,6 +138,7 @@ export function MenuGroup(
       onMouseEnter={handleMenuMouseEnter}
       registerElement={registerElement}
       shouldFocus={shouldFocus}
+      {...menuProps}
     >
       {children}
     </Menu>
