@@ -1,0 +1,39 @@
+name: Prettier
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  run:
+    name: Can the code be prettier? 🤔
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          node-version: lts/*
+      - run: pnpm install
+      - run: pnpm format
+      - run: git restore .github/workflows pnpm-lock.yaml
+      - uses: actions/create-github-app-token@v1
+        id: generate-token
+        with:
+          app-id: ${{ secrets.ECOSPARK_APP_ID }}
+          private-key: ${{ secrets.ECOSPARK_APP_PRIVATE_KEY }}
+      - uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7
+        with:
+          body: I ran `pnpm format` 🧑‍💻
+          branch: actions/prettier
+          commit-message: "chore(prettier): 🤖 ✨"
+          labels: 🤖 bot
+          sign-commits: true
+          title: "chore(prettier): 🤖 ✨"
+          token: ${{ steps.generate-token.outputs.token }}

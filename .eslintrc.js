@@ -11,10 +11,10 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'eslint:recommended',
-    'plugin:prettier/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -32,7 +32,6 @@ module.exports = {
     'react-hooks',
     'react-compiler',
     '@typescript-eslint',
-    'prettier',
   ],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
