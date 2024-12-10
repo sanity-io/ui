@@ -170,6 +170,7 @@ export const Tooltip = forwardRef(function Tooltip(
     middleware,
     placement: placementProp,
     whileElementsMounted: autoUpdate,
+    elements: {reference: referenceElement},
   })
 
   const arrowX = middlewareData.arrow?.x
@@ -272,9 +273,6 @@ export const Tooltip = forwardRef(function Tooltip(
   useEffect(() => {
     if (!content && showTooltip) handleIsOpenChange(false)
   }, [content, handleIsOpenChange, showTooltip])
-
-  // Update reference
-  useEffect(() => refs.setReference(referenceElement), [referenceElement, refs])
 
   useEffect(() => {
     // If the user clicks on escape key, close the tooltip.

@@ -327,6 +327,11 @@ export const Popover = memo(
       middleware,
       placement: placementProp,
       whileElementsMounted: autoUpdate,
+      elements: referenceElement
+        ? {
+            reference: referenceElement,
+          }
+        : undefined,
     })
 
     const referenceHidden = middlewareData.hide?.referenceHidden
@@ -382,10 +387,6 @@ export const Popover = memo(
         }
       }
     }, [update, updateRef])
-
-    useEffect(() => {
-      if (referenceElement) refs.setReference(referenceElement)
-    }, [referenceElement, refs])
 
     if (disabled) {
       return childProp || <></>
