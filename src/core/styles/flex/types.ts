@@ -7,6 +7,8 @@ export interface ResponsiveFlexStyleProps {
   $align: FlexAlign[]
   $direction: FlexDirection[]
   $gap: number[]
+  $gapX: number[]
+  $gapY: number[]
   $justify: FlexJustify[]
   $wrap: FlexWrap[]
 }

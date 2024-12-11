@@ -251,8 +251,8 @@ export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS: {[key: string]: TextInputType} = 
   'color': 'color',
 }
 
-export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | ''} = {
-  None: '',
+export const WORKSHOP_TEXT_OVERFLOW_OPTIONS: {[key: string]: 'ellipsis' | 'none'} = {
+  None: 'none',
   Ellipsis: 'ellipsis',
 }
 
