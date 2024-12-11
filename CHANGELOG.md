@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.9](https://github.com/sanity-io/ui/compare/v2.10.8...v2.10.9) (2024-12-11)
+
+### Bug Fixes
+
+- **menu-item:** allow setting `role` attribute ([#1520](https://github.com/sanity-io/ui/issues/1520)) ([e4bb2e4](https://github.com/sanity-io/ui/commit/e4bb2e4d82c8fb2fb4ffa9dc3145eb09fc5cb4fc))
+
 ## [2.10.8](https://github.com/sanity-io/ui/compare/v2.10.7...v2.10.8) (2024-12-10)
 
 ### Bug Fixes
