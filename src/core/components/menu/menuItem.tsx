@@ -118,6 +118,7 @@ export const MenuItem = forwardRef(function MenuItem(
   return (
     <Selectable
       data-ui="MenuItem"
+      role="menuitem"
       {...restProps}
       aria-pressed={as === 'button' && pressed}
       data-pressed={as !== 'button' && pressed ? '' : undefined}
@@ -133,7 +134,6 @@ export const MenuItem = forwardRef(function MenuItem(
       onMouseEnter={onItemMouseEnter}
       onMouseLeave={onItemMouseLeave}
       ref={setRef}
-      role="menuitem"
       tabIndex={-1}
       type={as === 'button' ? 'button' : undefined}
     >
