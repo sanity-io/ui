@@ -1,6 +1,7 @@
 import {
   FONT_CODE_SIZE,
   FONT_HEADING_SIZE,
+  FONT_TEXT_SIZE,
   HUES,
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_STATE_TONES,
@@ -22,6 +23,7 @@ function compileThemeProperties(theme: Theme_v3): Properties {
 
   return {
     ...buildAvatarThemeProperties(theme),
+    ...buildButtonThemeProperties(theme),
     ...buildContainerThemeProperties(theme),
     ...buildFontCodeThemeProperties(theme),
     ...buildFontHeadingThemeProperties(theme),
@@ -66,6 +68,15 @@ function buildAvatarThemeProperties(theme: Theme_v3): Properties {
   }
 }
 
+function buildButtonThemeProperties(theme: Theme_v3): Properties {
+  return {
+    [`--button-border-width`]: px(theme.button.border.width),
+    [`--button-focus-ring-offset`]: px(theme.button.focusRing.offset),
+    [`--button-focus-ring-width`]: px(theme.button.focusRing.width),
+    // [`--button-text-weight`]: theme.button.textWeight,
+  }
+}
+
 function buildContainerThemeProperties(theme: Theme_v3): Properties {
   return {
     [`--container-0`]: px(theme.container[0]),
@@ -92,6 +103,8 @@ function buildFontCodeThemeProperties(theme: Theme_v3): Properties {
     props[`--font-code-${size}-line-height`] = rem(theme.font.code.sizes[size].lineHeight)
     props[`--font-code-${size}-ascender-height`] = px(theme.font.code.sizes[size].ascenderHeight)
     props[`--font-code-${size}-descender-height`] = px(theme.font.code.sizes[size].descenderHeight)
+    props[`--font-code-${size}-cap-height`] =
+      `calc(var(--font-code-${size}-line-height) - var(--font-code-${size}-ascender-height) - var(--font-code-${size}-descender-height))`
     props[`--font-code-${size}-letter-spacing`] = px(theme.font.code.sizes[size].letterSpacing)
     props[`--font-code-${size}-icon-size`] = px(theme.font.code.sizes[size].iconSize)
   }
@@ -121,6 +134,8 @@ function buildFontHeadingThemeProperties(theme: Theme_v3): Properties {
     props[`--font-heading-${size}-letter-spacing`] = px(
       theme.font.heading.sizes[size].letterSpacing,
     )
+    props[`--font-heading-${size}-cap-height`] =
+      `calc(var(--font-heading-${size}-line-height) - var(--font-heading-${size}-ascender-height) - var(--font-heading-${size}-descender-height))`
     props[`--font-heading-${size}-icon-size`] = px(theme.font.heading.sizes[size].iconSize)
   }
 
@@ -144,6 +159,8 @@ function buildFontLabelThemeProperties(theme: Theme_v3): Properties {
     props[`--font-label-${size}-descender-height`] = px(
       theme.font.label.sizes[size].descenderHeight,
     )
+    props[`--font-label-${size}-cap-height`] =
+      `calc(var(--font-label-${size}-line-height) - var(--font-label-${size}-ascender-height) - var(--font-label-${size}-descender-height))`
     props[`--font-label-${size}-letter-spacing`] = px(theme.font.label.sizes[size].letterSpacing)
     props[`--font-label-${size}-icon-size`] = px(theme.font.label.sizes[size].iconSize)
   }
@@ -161,11 +178,13 @@ function buildFontTextThemeProperties(theme: Theme_v3): Properties {
     '--font-text-weight-bold': `${theme.font.text.weights.bold}`,
   }
 
-  for (const size of FONT_CODE_SIZE) {
+  for (const size of FONT_TEXT_SIZE) {
     props[`--font-text-${size}-size`] = rem(theme.font.text.sizes[size].fontSize)
     props[`--font-text-${size}-line-height`] = rem(theme.font.text.sizes[size].lineHeight)
     props[`--font-text-${size}-ascender-height`] = px(theme.font.text.sizes[size].ascenderHeight)
     props[`--font-text-${size}-descender-height`] = px(theme.font.text.sizes[size].descenderHeight)
+    props[`--font-text-${size}-cap-height`] =
+      `calc(var(--font-text-${size}-line-height) - var(--font-text-${size}-ascender-height) - var(--font-text-${size}-descender-height))`
     props[`--font-text-${size}-letter-spacing`] = px(theme.font.text.sizes[size].letterSpacing)
     props[`--font-text-${size}-icon-size`] = px(theme.font.text.sizes[size].iconSize)
   }
@@ -236,6 +255,7 @@ function buildShadowThemeProperties(theme: Theme_v3): Properties {
 function buildSpaceThemeProperties(theme: Theme_v3): Properties {
   return {
     [`--space-0`]: rem(theme.space[0]),
+    [`--space-0_5`]: rem(theme.space[1] / 2),
     [`--space-1`]: rem(theme.space[1]),
     [`--space-2`]: rem(theme.space[2]),
     [`--space-3`]: rem(theme.space[3]),

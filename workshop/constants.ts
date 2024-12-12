@@ -142,12 +142,13 @@ export const WORKSHOP_FLEX_JUSTIFY_OPTIONS: Record<FlexJustify, FlexJustify> = {
 }
 
 export const WORKSHOP_FONT_WEIGHT_OPTIONS: {
-  [key: string]: ThemeFontWeightKey
+  [key: string]: ThemeFontWeightKey | ''
 } = {
-  Regular: 'regular',
-  Medium: 'medium',
-  Semibold: 'semibold',
-  Bold: 'bold',
+  '(none)': '',
+  'Regular': 'regular',
+  'Medium': 'medium',
+  'Semibold': 'semibold',
+  'Bold': 'bold',
 }
 
 export const WORKSHOP_HEADING_FONT_SIZE_OPTIONS: Record<string, FontHeadingSize> = {

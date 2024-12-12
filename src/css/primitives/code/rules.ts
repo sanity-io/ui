@@ -32,6 +32,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-0-icon-size)',
     '--font-ascender-height': 'var(--font-code-0-ascender-height)',
     '--font-descender-height': 'var(--font-code-0-descender-height)',
+    '--font-cap-height': 'var(--font-code-0-cap-height)',
   }),
 
   ...responsiveRules('code-1', {
@@ -41,6 +42,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-1-icon-size)',
     '--font-ascender-height': 'var(--font-code-1-ascender-height)',
     '--font-descender-height': 'var(--font-code-1-descender-height)',
+    '--font-cap-height': 'var(--font-code-1-cap-height)',
   }),
 
   ...responsiveRules('code-2', {
@@ -50,6 +52,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-2-icon-size)',
     '--font-ascender-height': 'var(--font-code-2-ascender-height)',
     '--font-descender-height': 'var(--font-code-2-descender-height)',
+    '--font-cap-height': 'var(--font-code-2-cap-height)',
   }),
 
   ...responsiveRules('code-3', {
@@ -59,6 +62,7 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-3-icon-size)',
     '--font-ascender-height': 'var(--font-code-3-ascender-height)',
     '--font-descender-height': 'var(--font-code-3-descender-height)',
+    '--font-cap-height': 'var(--font-code-3-cap-height)',
   }),
 
   ...responsiveRules('code-4', {
@@ -68,5 +72,6 @@ export const codeRules: Rules = {
     '--font-icon-size': 'var(--font-code-4-icon-size)',
     '--font-ascender-height': 'var(--font-code-4-ascender-height)',
     '--font-descender-height': 'var(--font-code-4-descender-height)',
+    '--font-cap-height': 'var(--font-code-4-cap-height)',
   }),
 }

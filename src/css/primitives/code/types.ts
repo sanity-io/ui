@@ -1,4 +1,4 @@
-import {FontStyleProps} from '@sanity/ui/css'
+import {FontStyleProps} from '../../styles'
 import {ResponsiveProp} from '../../types'
 
 /** @public */

@@ -10,7 +10,7 @@ const prefixes = {
 }
 
 /** @public */
-export function flex(props: FlexStyleProps): string {
+export function flex(props: FlexStyleProps): string | undefined {
   return composeClassNames(
     _resp(prefixes.align, props.align),
     _resp(prefixes.direction, props.direction),

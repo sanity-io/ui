@@ -502,6 +502,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           <Button
             aria-label="Open"
             disabled={expanded}
+            display="block"
             fontSize={fontSize}
             icon={ChevronDownIcon}
             mode="bleed"

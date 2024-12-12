@@ -1,32 +1,18 @@
-import {composeClassNames, text, TextStyleProps} from '@sanity/ui/css'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
+import {
+  composeClassNames,
+  text,
+  textOverflow,
+  TextOverflowStyleProps,
+  TextStyleProps,
+} from '@sanity/ui/css'
 import {forwardRef} from 'react'
-import {styled} from '../../lib/styled'
 
 /**
  * @public
  */
-export interface TextProps extends TextStyleProps {
-  accent?: boolean
+export interface TextProps extends TextStyleProps, TextOverflowStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  /** When `true` the text color will be muted. */
-  muted?: boolean
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis' | 'none'
-  weight?: ThemeFontWeightKey
 }
-
-const SpanWithTextOverflow = styled.span`
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  overflow: clip;
-`
 
 /**
  * The `Text` component is an agile, themed typographic element.
@@ -41,23 +27,15 @@ export const Text = forwardRef(function Text(
     accent = false,
     align,
     as: As = 'div',
-    children: childrenProp,
+    children,
     className,
     flex,
     muted = false,
     size = 1,
-    textOverflow,
+    textOverflow: textOverflowProp,
     weight,
     ...restProps
   } = props
-
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  } else {
-    children = <span>{children}</span>
-  }
 
   return (
     <As
@@ -76,7 +54,7 @@ export const Text = forwardRef(function Text(
         }),
       )}
     >
-      {children}
+      <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
     </As>
   )
 })

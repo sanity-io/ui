@@ -8,7 +8,7 @@ const prefixes = {
 } as const
 
 /** @public */
-export function font(props: FontStyleProps): string {
+export function font(props: FontStyleProps): string | undefined {
   return composeClassNames(
     'font',
     props.weight && `${prefixes.weight}-${props.weight}`,

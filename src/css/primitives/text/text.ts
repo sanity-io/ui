@@ -1,11 +1,10 @@
 import {_resp} from '../../_resp'
 import {composeClassNames} from '../../composeClassNames'
-import {flexItem} from '../../styles/flexItem'
-import {font} from '../../styles/font'
+import {flexItem, font} from '../../styles'
 import {TextStyleProps} from './types'
 
 /** @public */
-export function text(props: TextStyleProps): string {
+export function text(props: TextStyleProps): string | undefined {
   return composeClassNames(
     'text',
     'block',

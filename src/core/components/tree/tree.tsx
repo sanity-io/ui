@@ -1,4 +1,4 @@
-import {ResponsiveProp} from '@sanity/ui/css'
+import {GapStyleProps, ResponsiveProp} from '@sanity/ui/css'
 import {Space} from '@sanity/ui/theme'
 import {
   forwardRef,
@@ -19,7 +19,8 @@ import {TreeContextValue, TreeState} from './types'
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export interface TreeProps {
+export interface TreeProps extends Pick<GapStyleProps, 'gap'> {
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
 }
 
@@ -36,7 +37,7 @@ export const Tree = memo(
       >,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ): React.ReactElement {
-    const {children, space = 1, onFocus, ...restProps} = props
+    const {children, gap, space = 1, onFocus, ...restProps} = props
     const ref = useRef<HTMLDivElement | null>(null)
     const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
     const focusedElementRef = useRef(focusedElement)
@@ -226,11 +227,11 @@ export const Tree = memo(
           as="ul"
           data-ui="Tree"
           {...restProps}
+          gap={gap ?? space}
           onFocus={handleFocus}
           onKeyDown={handleKeyDown}
           ref={ref}
           role="tree"
-          space={space}
         >
           {children}
         </Stack>

@@ -6,7 +6,7 @@ export const kbdRules: Rules = {
     // '--color-border': 'var(--color-tinted-default-border-2)',
     // '--color-fg': 'var(--color-tinted-default-fg-3)',
 
-    'boxShadow': 'inset 0 0 0 1px var(--color-border)',
+    'boxShadow': 'inset 0 0 0 0.5px var(--color-border)',
     'background': 'var(--color-muted-bg)',
     'font': 'inherit',
     'verticalAlign': 'top',

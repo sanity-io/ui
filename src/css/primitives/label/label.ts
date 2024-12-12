@@ -1,10 +1,10 @@
 import {_resp} from '../../_resp'
 import {composeClassNames} from '../../composeClassNames'
-import {font} from '../../styles/font'
+import {font} from '../../styles'
 import {LabelStyleProps} from './types'
 
 /** @public */
-export function label(props: LabelStyleProps): string {
+export function label(props: LabelStyleProps): string | undefined {
   return composeClassNames(
     'label',
     'block',

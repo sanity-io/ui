@@ -1,16 +1,24 @@
 import {_resp} from '../../_resp'
 import {composeClassNames} from '../../composeClassNames'
-import {radius} from '../../styles/radius'
+import {radius} from '../../styles'
 import {InputStyleProps} from './types'
 
 /** @internal */
-export function _input(props: InputStyleProps): string {
+export function _input(props: InputStyleProps): string | undefined {
   return composeClassNames(
-    `_input`,
-    _resp(`_input`, props.fontSize),
-    _resp(`_input-p`, props.padding),
-    _resp(`_input-space`, props.space),
-    props.border && `_input-border`,
+    `input`,
+    _resp(`input`, props.fontSize),
+    props.border && `input-b`,
+    _resp(`input-p`, props.padding),
+    _resp(`input-g`, props.gap),
     radius(props),
   )
+}
+
+export function _inputElement(): string {
+  return 'input-element'
+}
+
+export function _inputPresentation(): string {
+  return 'input-presentation'
 }

@@ -1,5 +1,5 @@
 import {SelectableTone} from '@sanity/ui'
-import {RadiusStyleProps} from '../../styles/radius'
+import {RadiusStyleProps} from '../../styles'
 
 /** @internal */
 export interface SelectableStyleProps extends RadiusStyleProps {

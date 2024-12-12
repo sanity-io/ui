@@ -43,6 +43,7 @@ import {pointerEventsRules} from './styles/pointerEvents/rules'
 import {positionRules} from './styles/position/rules'
 import {radiusRules} from './styles/radius/rules'
 import {shadowRules} from './styles/shadow/rules'
+import {textOverflowRules} from './styles/textOverflow/rules'
 import {widthRules} from './styles/width/rules'
 import {type Rules} from './types'
 
@@ -89,6 +90,7 @@ export const rules: Rules = {
   ...switchRules,
   ...textAreaRules,
   ...textInputRules,
+  ...textOverflowRules,
   ...textRules,
   ...tokenRules,
   ...tooltipRules,

@@ -1,5 +1,6 @@
 import {
   ButtonStyleProps,
+  DisplayStyleProps,
   FlexStyleProps,
   GapStyleProps,
   PaddingStyleProps,
@@ -23,6 +24,7 @@ import {Text, TextProps} from '../text'
  */
 export interface ButtonProps
   extends ButtonStyleProps,
+    DisplayStyleProps,
     FlexStyleProps,
     GapStyleProps,
     PaddingStyleProps {
@@ -60,6 +62,7 @@ export const Button = forwardRef(function Button(
     className,
     direction,
     disabled,
+    display = 'inline-flex',
     flex,
     fontSize = 1,
     gap = props.space ?? 3,
@@ -98,7 +101,7 @@ export const Button = forwardRef(function Button(
     <As
       data-ui="Button"
       {...restProps}
-      className={composeClassNames(className, button({flex, mode, radius, tone, width}))}
+      className={composeClassNames(className, button({display, flex, mode, radius, tone, width}))}
       data-disabled={loading || disabled ? '' : undefined}
       data-selected={selected ? '' : undefined}
       disabled={Boolean(loading || disabled)}
@@ -140,9 +143,8 @@ export const Button = forwardRef(function Button(
           width="fill"
           wrap={wrap}
         >
-          {/* <Flex as="span" justify={justify} gap={gap}> */}
           {IconComponent && (
-            <Text as="span" flex="none" size={fontSize}>
+            <Text as="span" flex="none" muted size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
               {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
@@ -163,12 +165,11 @@ export const Button = forwardRef(function Button(
           )}
 
           {IconRightComponent && (
-            <Text as="span" flex="none" size={fontSize}>
+            <Text as="span" flex="none" muted size={fontSize}>
               {isValidElement(IconRightComponent) && IconRightComponent}
               {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
           )}
-          {/* </Flex> */}
         </Box>
       )}
 

@@ -27,7 +27,7 @@ export const KBD = forwardRef(function KBD(
     children,
     className,
     display = 'inline-block',
-    fontSize = 0,
+    fontSize = 1,
     padding = 1,
     radius = 2,
     ...restProps
@@ -40,10 +40,11 @@ export const KBD = forwardRef(function KBD(
       as={as}
       className={composeClassNames(className, kbd({radius}))}
       display={display}
+      muted
       padding={padding}
       ref={ref}
     >
-      <Text as="span" size={fontSize} weight="semibold">
+      <Text as="span" muted size={fontSize}>
         {children}
       </Text>
     </Box>

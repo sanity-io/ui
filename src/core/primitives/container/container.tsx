@@ -16,7 +16,7 @@ export const Container = forwardRef(function Container(
   props: ContainerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, className, width = 2, ...restProps} = props
+  const {as, className, sizing = 'border', width = 2, ...restProps} = props
 
   return (
     <Box
@@ -25,6 +25,7 @@ export const Container = forwardRef(function Container(
       as={as}
       className={composeClassNames(className, container({width}))}
       ref={ref}
+      sizing={sizing}
     />
   )
 })

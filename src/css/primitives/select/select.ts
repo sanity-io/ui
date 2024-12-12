@@ -1,7 +1,11 @@
 import {composeClassNames} from '../../composeClassNames'
-import {_input} from '../_input'
+import {_input, _inputPresentation} from '../_input'
 import {SelectStyleProps} from './types'
 
-export function select(props: SelectStyleProps): string {
+export function select(props: SelectStyleProps): string | undefined {
   return composeClassNames('select', _input(props))
+}
+
+export function selectPresentation(): string | undefined {
+  return composeClassNames('select-presentation', _inputPresentation())
 }

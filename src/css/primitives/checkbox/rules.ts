@@ -118,10 +118,12 @@ export const checkboxRules: Rules = {
         '--color-checkbox-bg': 'var(--color-tinted-default-bg-1)',
         '--color-checkbox-border': 'var(--color-tinted-default-border-0)',
         '--color-checkbox-fg': 'var(--color-tinted-default-border-2)',
-        // box-shadow: ${focusRingBorderStyle({
-        //   width: input.border.width,
-        //   color: color.input.default.disabled.border,
-        // })},
+      },
+
+      '&:checked:disabled + span': {
+        '--color-checkbox-bg': 'var(--color-tinted-default-border-2)',
+        '--color-checkbox-border': 'var(--color-tinted-default-border-2)',
+        '--color-checkbox-fg': 'var(--color-tinted-default-bg-0)',
       },
 
       // '&:disabled:checked + span': {

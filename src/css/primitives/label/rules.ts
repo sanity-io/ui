@@ -23,11 +23,11 @@ export const labelRules: Rules = {
   },
 
   'label-accent': {
-    '--fg-color': 'var(--color-accent-fg)',
+    '--color-fg': 'var(--color-accent-fg)',
   },
 
   'label-muted': {
-    '--fg-color': 'var(--color-muted-fg)',
+    '--color-fg': 'var(--color-muted-fg)',
   },
 
   ...responsiveRules('label-0', {
@@ -37,6 +37,7 @@ export const labelRules: Rules = {
     '--font-icon-size': 'var(--font-label-0-icon-size)',
     '--font-ascender-height': 'var(--font-label-0-ascender-height)',
     '--font-descender-height': 'var(--font-label-0-descender-height)',
+    '--font-cap-height': 'var(--font-label-0-cap-height)',
   }),
 
   ...responsiveRules('label-1', {
@@ -46,6 +47,7 @@ export const labelRules: Rules = {
     '--font-icon-size': 'var(--font-label-1-icon-size)',
     '--font-ascender-height': 'var(--font-label-1-ascender-height)',
     '--font-descender-height': 'var(--font-label-1-descender-height)',
+    '--font-cap-height': 'var(--font-label-1-cap-height)',
   }),
 
   ...responsiveRules('label-2', {
@@ -55,6 +57,7 @@ export const labelRules: Rules = {
     '--font-icon-size': 'var(--font-label-2-icon-size)',
     '--font-ascender-height': 'var(--font-label-2-ascender-height)',
     '--font-descender-height': 'var(--font-label-2-descender-height)',
+    '--font-cap-height': 'var(--font-label-2-cap-height)',
   }),
 
   ...responsiveRules('label-3', {
@@ -64,6 +67,7 @@ export const labelRules: Rules = {
     '--font-icon-size': 'var(--font-label-3-icon-size)',
     '--font-ascender-height': 'var(--font-label-3-ascender-height)',
     '--font-descender-height': 'var(--font-label-3-descender-height)',
+    '--font-cap-height': 'var(--font-label-3-cap-height)',
   }),
 
   ...responsiveRules('label-4', {
@@ -73,6 +77,7 @@ export const labelRules: Rules = {
     '--font-icon-size': 'var(--font-label-4-icon-size)',
     '--font-ascender-height': 'var(--font-label-4-ascender-height)',
     '--font-descender-height': 'var(--font-label-4-descender-height)',
+    '--font-cap-height': 'var(--font-label-4-cap-height)',
   }),
 
   ...responsiveRules('label-5', {
@@ -82,5 +87,51 @@ export const labelRules: Rules = {
     '--font-icon-size': 'var(--font-label-5-icon-size)',
     '--font-ascender-height': 'var(--font-label-5-ascender-height)',
     '--font-descender-height': 'var(--font-label-5-descender-height)',
+    '--font-cap-height': 'var(--font-label-5-cap-height)',
   }),
 }
+
+// import {getTheme_v2} from '@sanity/ui/theme'
+// import {ThemeProps} from '../../_compat'
+// import {css} from '../../lib/styled'
+
+// export function labelBaseStyle(
+//   props: {$accent?: boolean; $muted: boolean} & ThemeProps,
+// ): ReturnType<typeof css> {
+//   const {$accent, $muted} = props
+//   const {font} = getTheme_v2(props.theme)
+
+//   return css`
+//     text-transform: uppercase;
+
+//     ${$accent &&
+//     css`
+//       color: var(--card-accent-fg-color);
+//     `}
+
+//     ${$muted &&
+//     css`
+//       color: var(--card-muted-fg-color);
+//     `}
+
+//     & code {
+//       font-family: ${font.code.family};
+//       border-radius: 1px;
+//     }
+
+//     & a {
+//       text-decoration: none;
+//       border-radius: 1px;
+//     }
+
+//     & svg {
+//       /* Certain popular CSS libraries changes the defaults for SVG display */
+//       /* Make sure SVGs are rendered as inline elements */
+//       display: inline;
+//     }
+
+//     & [data-sanity-icon] {
+//       vertical-align: baseline;
+//     }
+//   `
+// }

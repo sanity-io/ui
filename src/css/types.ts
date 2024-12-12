@@ -165,6 +165,7 @@ export type ThemeVarName =
   | `--font-code-weight-${FontWeight}`
   | `--font-code-${FontCodeSize}-ascender-height`
   | `--font-code-${FontCodeSize}-descender-height`
+  | `--font-code-${FontCodeSize}-cap-height`
   | `--font-code-${FontCodeSize}-size`
   | `--font-code-${FontCodeSize}-line-height`
   | `--font-code-${FontCodeSize}-letter-spacing`
@@ -174,6 +175,7 @@ export type ThemeVarName =
   | `--font-heading-weight-${FontWeight}`
   | `--font-heading-${FontHeadingSize}-ascender-height`
   | `--font-heading-${FontHeadingSize}-descender-height`
+  | `--font-heading-${FontHeadingSize}-cap-height`
   | `--font-heading-${FontHeadingSize}-size`
   | `--font-heading-${FontHeadingSize}-line-height`
   | `--font-heading-${FontHeadingSize}-letter-spacing`
@@ -183,6 +185,7 @@ export type ThemeVarName =
   | `--font-label-weight-${FontWeight}`
   | `--font-label-${FontLabelSize}-ascender-height`
   | `--font-label-${FontLabelSize}-descender-height`
+  | `--font-label-${FontLabelSize}-cap-height`
   | `--font-label-${FontLabelSize}-size`
   | `--font-label-${FontLabelSize}-line-height`
   | `--font-label-${FontLabelSize}-letter-spacing`
@@ -192,6 +195,7 @@ export type ThemeVarName =
   | `--font-text-weight-${FontWeight}`
   | `--font-text-${FontTextSize}-ascender-height`
   | `--font-text-${FontTextSize}-descender-height`
+  | `--font-text-${FontTextSize}-cap-height`
   | `--font-text-${FontTextSize}-size`
   | `--font-text-${FontTextSize}-line-height`
   | `--font-text-${FontTextSize}-letter-spacing`
@@ -388,12 +392,13 @@ export type InputScopedVarName =
   | `--input-bg-color`
   | `--input-border-color`
   | `--input-descender-height`
+  | `--input-cap-height`
   | `--input-fg-color`
   | `--input-font-size`
+  | `--input-gap`
   | `--input-line-height`
   | `--input-padding`
   | `--input-placeholder-color`
-  | `--input-space`
 
 // export type CardVarName = `--card-${CardSize}-${CardVariant}-${CardState}-${CardElement}`
 

@@ -1,5 +1,11 @@
-import {textArea, TextAreaStyleProps} from '@sanity/ui/css'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
+import {
+  _inputElement,
+  _inputPresentation,
+  ResponsiveProp,
+  textArea,
+  TextAreaStyleProps,
+} from '@sanity/ui/css'
+import {Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {useCustomValidity} from '../../hooks'
 
@@ -11,8 +17,9 @@ export interface TextAreaProps extends TextAreaStyleProps {
    * @beta
    */
   __unstable_disableFocusRing?: boolean
-  border?: boolean
   customValidity?: string
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
   weight?: ThemeFontWeightKey
 }
 
@@ -30,6 +37,7 @@ export const TextArea = forwardRef(function TextArea(
     customValidity,
     disabled = false,
     fontSize = 2,
+    gap,
     padding = 3,
     radius = 2,
     space = 3,
@@ -48,9 +56,12 @@ export const TextArea = forwardRef(function TextArea(
   useCustomValidity(ref, customValidity)
 
   return (
-    <span className={textArea({border, fontSize, padding, radius, space})} data-ui="TextArea">
-      <textarea {...restProps} disabled={disabled} ref={ref} />
-      <span />
+    <span
+      className={textArea({border, fontSize, padding, radius, gap: gap ?? space})}
+      data-ui="TextArea"
+    >
+      <textarea {...restProps} className={_inputElement()} disabled={disabled} ref={ref} />
+      <span className={_inputPresentation()} />
     </span>
   )
 })

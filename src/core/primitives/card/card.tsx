@@ -20,7 +20,6 @@ export interface CardProps extends BoxProps, CardStyleProps {
    * @beta
    */
   __unstable_focusRing?: boolean
-  muted?: boolean
   pressed?: boolean
   scheme?: ThemeColorSchemeKey
   tone?: CardTone
@@ -40,16 +39,11 @@ export const Card = forwardRef(function Card(
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
     as: asProp,
-    border = false,
-    borderTop,
-    borderRight,
-    borderBottom,
-    borderLeft,
     className,
-    muted,
     pressed,
     radius = 0,
     scheme,
+    selectable,
     selected,
     shadow,
     style,
@@ -70,28 +64,17 @@ export const Card = forwardRef(function Card(
       <Box
         data-as={typeof as === 'string' ? as : undefined}
         data-ui="Card"
-        data-scheme={scheme ?? rootTheme.scheme}
-        data-tone={tone ?? rootTheme.tone}
         {...restProps}
         as={as}
-        className={composeClassNames(
-          className,
-          // rootCard ? undefined : 'root',
-          card({
-            border,
-            borderTop,
-            borderRight,
-            borderBottom,
-            borderLeft,
-            radius,
-            shadow,
-          }),
-        )}
+        className={composeClassNames(className, card({shadow}))}
         data-checkered={checkered ? '' : undefined}
         data-focus-ring={focusRing ? '' : undefined}
-        data-muted={muted ? '' : undefined}
         data-pressed={pressed ? '' : undefined}
+        data-scheme={scheme ?? rootTheme.scheme}
+        data-selectable={selectable ? '' : undefined}
         data-selected={selected ? '' : undefined}
+        data-tone={tone ?? rootTheme.tone}
+        radius={radius}
         ref={ref}
         selected={selected}
         style={style}

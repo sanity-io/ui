@@ -1,11 +1,17 @@
 import {CloseIcon} from '@sanity/icons'
-import {composeClassNames, RadiusStyleProps, ResponsiveProp, textInput} from '@sanity/ui/css'
-import {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
+import {
+  _inputElement,
+  _inputPresentation,
+  composeClassNames,
+  InputStyleProps,
+  ResponsiveProp,
+  textInput,
+} from '@sanity/ui/css'
+import {Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {EMPTY_RECORD} from '../../constants'
-import {useCustomValidity} from '../../hooks'
-import {styled} from '../../lib/styled'
+import {useArrayProp, useCustomValidity} from '../../hooks'
 import {Box} from '../box'
 import {Button, ButtonProps} from '../button'
 import {Text} from '../text'
@@ -36,26 +42,24 @@ export type TextInputType =
 /**
  * @public
  */
-export interface TextInputProps extends RadiusStyleProps {
+export interface TextInputProps extends InputStyleProps {
   /**
    * @beta
    */
   __unstable_disableFocusRing?: boolean
-  border?: boolean
   /**
    * @beta
    */
   clearButton?: boolean | TextInputClearButtonProps
   customValidity?: string
-  fontSize?: ResponsiveProp<FontTextSize>
   icon?: React.ElementType | React.ReactNode
   iconRight?: React.ElementType | React.ReactNode
   /**
    * @beta
    */
   onClear?: () => void
-  padding?: ResponsiveProp<Space>
   prefix?: React.ReactNode
+  /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
   suffix?: React.ReactNode
   type?: TextInputType
@@ -69,11 +73,11 @@ const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {
   zIndex: 2,
 }
 
-const TextInputClearButton = styled(Button)({
-  '&:not([hidden])': {
-    display: 'block',
-  },
-})
+// const TextInputClearButton = styled(Button)({
+//   '&:not([hidden])': {
+//     display: 'block',
+//   },
+// })
 
 /**
  * Single line text input.
@@ -90,7 +94,8 @@ export const TextInput = forwardRef(function TextInput(
     className,
     clearButton,
     disabled = false,
-    fontSize = 2,
+    fontSize = 1,
+    gap,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClear,
@@ -110,7 +115,7 @@ export const TextInput = forwardRef(function TextInput(
   // const rootTheme = useRootTheme()
 
   // const fontSize = useArrayProp(fontSizeProp)
-  // const padding = useArrayProp(paddingProp)
+  const paddingArray = useArrayProp(padding)
   // const radius = useArrayProp(radiusProp)
   // const space = useArrayProp(spaceProp)
 
@@ -179,7 +184,8 @@ export const TextInput = forwardRef(function TextInput(
         // $scheme={rootTheme.scheme}
         // $tone={rootTheme.tone}
         // border={border}
-        className="text-input-presentation"
+        className={_inputPresentation()}
+        // className="text-input-presentation"
         // data-border={border ? '' : undefined}
         data-disable-focus-ring={__unstable_disableFocusRing ? '' : undefined}
         // data-scheme={rootTheme.scheme}
@@ -222,57 +228,55 @@ export const TextInput = forwardRef(function TextInput(
   )
 
   // Render clear button (memoized)
-  // const clearButtonBoxPadding = useMemo(
-  //   () =>
-  //     padding.map((v) => {
-  //       if (v === 0) return 0
-  //       if (v === 1) return 1
-  //       if (v === 2) return 1
+  const clearButtonBoxPadding = useMemo(
+    () =>
+      paddingArray.map((v) => {
+        if (v === 0) return 0
+        if (v === 1) return 1
+        if (v === 2) return 1
 
-  //       return (v as Space) - 2
-  //     }),
-  //   [padding],
-  // )
+        return (v as Space) - 2
+      }),
+    [paddingArray],
+  )
 
-  // const clearButtonPadding = useMemo(
-  //   () =>
-  //     padding.map((v) => {
-  //       if (v === 0) return 0
-  //       if (v === 1) return 0
-  //       if (v === 2) return 1
+  const clearButtonPadding = useMemo(
+    () =>
+      paddingArray.map((v) => {
+        if (v === 0) return 0
+        if (v === 1) return 0
+        if (v === 2) return 1
 
-  //       return (v as Space) - 1
-  //     }),
-  //   [padding],
-  // )
+        return (v as Space) - 1
+      }),
+    [paddingArray],
+  )
 
   const clearButtonProps: TextInputClearButtonProps = useMemo(
     () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
     [clearButton],
   )
+
   const clearButtonNode = useMemo(
     () =>
       !disabled &&
       !readOnly &&
       clearButton && (
         <Box
-          // forwardedAs="span"
-          // padding={clearButtonBoxPadding}
+          as="span"
+          padding={clearButtonBoxPadding}
           position="absolute"
           style={CLEAR_BUTTON_BOX_STYLE}
           // tone={customValidity ? 'critical' : 'inherit'}
-
-          // position: absolute;
-          // top: 0;
-          // right: 0;
         >
-          <TextInputClearButton
+          <Button
             aria-label="Clear"
             data-qa="clear-button"
+            display="block"
             fontSize={fontSize}
             icon={CloseIcon}
             mode="bleed"
-            // padding={clearButtonPadding}
+            padding={clearButtonPadding}
             radius={radius}
             {...clearButtonProps}
             onClick={handleClearClick}
@@ -282,8 +286,8 @@ export const TextInput = forwardRef(function TextInput(
       ),
     [
       clearButton,
-      // clearButtonBoxPadding,
-      // clearButtonPadding,
+      clearButtonBoxPadding,
+      clearButtonPadding,
       clearButtonProps,
       // customValidity,
       disabled,
@@ -326,28 +330,23 @@ export const TextInput = forwardRef(function TextInput(
           fontSize,
           padding,
           radius,
-          space,
+          gap: gap ?? space,
         }),
       )}
       data-icon-left={IconComponent ? '' : undefined}
       data-icon-right={IconRightComponent ? '' : undefined}
+      data-prefix={prefix ? '' : undefined}
+      data-suffix={suffix ? '' : undefined}
       data-ui="TextInput"
       display="flex"
-      // tone={rootTheme.tone}
     >
       {prefixNode}
 
-      <Box
-        as="span"
-        // className="text-input-wrapper"
-        flex={1}
-        // todo
-        // minWidth={0}
-        position="relative"
-      >
+      <Box as="span" flex={1} position="relative">
         <input
           data-as="input"
           {...restProps}
+          className={_inputElement()}
           disabled={disabled}
           readOnly={readOnly}
           ref={ref}

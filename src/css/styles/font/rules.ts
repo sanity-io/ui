@@ -3,7 +3,7 @@ import {type Rules} from '../../types'
 
 export const fontRules: Rules = {
   'font': {
-    'position': 'relative',
+    // 'position': 'relative',
     'fontFamily': 'var(--font-family)',
     'fontFeatureSettings': 'var(--font-feature-settings)',
     'fontSize': 'var(--font-size)',
@@ -14,8 +14,6 @@ export const fontRules: Rules = {
     'padding': '1px 0',
     'margin': '0',
 
-    '--font-cap-height':
-      'calc(var(--font-line-height) - var(--font-ascender-height) - var(--font-descender-height))',
     '--font-icon-offset': 'calc((var(--font-cap-height) - var(--font-icon-size)) / 2)',
     '--font-weight': 'var(--font-weight-regular)',
 

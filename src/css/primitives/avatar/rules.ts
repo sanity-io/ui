@@ -32,12 +32,17 @@ export const avatarRules: Rules = {
       },
 
       '&[data-as="button"]:focus': {
-        // todo
-        // boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
+        outline: 'var(--avatar-focus-ring-width) solid var(--color-focus-ring)',
+        outlineOffset: 'var(--avatar-focus-ring-offset)',
       },
 
       '&[data-as="button"]:focus:not(:focus-visible)': {
         boxShadow: 'none',
+      },
+
+      ':disabled &, [data-disabled] &': {
+        '--avatar-bg-color': 'var(--color-border)',
+        '--avatar-fg-color': 'var(--color-bg)',
       },
     },
   },

@@ -120,6 +120,8 @@ export const PopoverCard = memo(
         data-ui="Popover"
         {...(restProps as CardProps & MotionProps)}
         data-placement={placement}
+        direction="column"
+        display="flex"
         radius={radius}
         ref={ref}
         scheme={scheme}
@@ -127,7 +129,6 @@ export const PopoverCard = memo(
         sizing="border"
         style={rootStyle}
         tone={tone}
-        // todo
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         {...((animate ? POPOVER_MOTION_PROPS : {}) as any)}
       >

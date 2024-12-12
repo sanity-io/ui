@@ -19,7 +19,7 @@ export default function OnScrollStory() {
   return (
     <LayerProvider>
       <Dialog contentRef={ref} header="On scroll example" id="on-scroll-example">
-        <Box padding={4}>
+        <Box padding={4} paddingTop={1}>
           <Text muted>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
             hendrerit scelerisque ut libero. Maecenas iaculis efficitur lorem, ac faucibus mi

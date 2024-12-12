@@ -2,7 +2,7 @@ import {_resp} from '../../_resp'
 import {composeClassNames} from '../../composeClassNames'
 import {PaddingStyleProps} from './types'
 
-export function padding(props: PaddingStyleProps): string {
+export function padding(props: PaddingStyleProps): string | undefined {
   return composeClassNames(
     _resp('p', props.padding),
     _resp('px', props.paddingX),

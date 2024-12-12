@@ -1,15 +1,20 @@
-import {GridStyleProps} from '@sanity/ui/css'
-import {FlexStyleProps} from '../../styles/flex'
-import {FlexItemStyleProps} from '../../styles/flexItem'
-import {GapStyleProps} from '../../styles/gap'
-import {GridItemStyleProps} from '../../styles/gridItem'
-import {MarginStyleProps} from '../../styles/margin'
-import {MaxWidthStyleProps} from '../../styles/maxWidth'
-import {OverflowStyleProps} from '../../styles/overflow'
-import {PaddingStyleProps} from '../../styles/padding'
-import {PointerEventsStyleProps} from '../../styles/pointerEvents'
-import {PositionStyleProps} from '../../styles/position'
-import {WidthStyleProps} from '../../styles/width'
+import {
+  BorderStyleProps,
+  DisplayStyleProps,
+  FlexStyleProps,
+  FlexItemStyleProps,
+  GapStyleProps,
+  GridStyleProps,
+  GridItemStyleProps,
+  MarginStyleProps,
+  MaxWidthStyleProps,
+  OverflowStyleProps,
+  PaddingStyleProps,
+  PointerEventsStyleProps,
+  PositionStyleProps,
+  RadiusStyleProps,
+  WidthStyleProps,
+} from '../../styles'
 import {ResponsiveProp} from '../../types'
 
 /**
@@ -20,16 +25,13 @@ export type BoxSizing = 'content' | 'border'
 /**
  * @public
  */
-export type Display = 'none' | 'block' | 'grid' | 'flex' | 'inline-block'
-
-/**
- * @public
- */
 export type BoxHeight = 'stretch' | 'fill'
 
 /** @public */
 export interface BoxStyleProps
-  extends FlexStyleProps,
+  extends BorderStyleProps,
+    DisplayStyleProps,
+    FlexStyleProps,
     FlexItemStyleProps,
     GapStyleProps,
     GridStyleProps,
@@ -40,9 +42,10 @@ export interface BoxStyleProps
     PaddingStyleProps,
     PointerEventsStyleProps,
     PositionStyleProps,
+    RadiusStyleProps,
     WidthStyleProps {
-  display?: ResponsiveProp<Display>
   height?: ResponsiveProp<BoxHeight>
+  muted?: boolean
   outline?: 'none'
   sizing?: ResponsiveProp<BoxSizing>
 }

@@ -1,4 +1,4 @@
-import {RadiusStyleProps} from '../../styles/radius'
+import {RadiusStyleProps} from '../../styles'
 
 export interface KBDStyleProps extends RadiusStyleProps {
   //

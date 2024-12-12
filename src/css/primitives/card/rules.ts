@@ -89,22 +89,26 @@ export const cardRules: Rules = {
             '@nest': {
               '&:hover': {
                 '--color-bg': 'var(--color-tinted-default-bg-1)',
-                '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                '--color-fg': 'var(--color-tinted-default-fg-0)',
+                '--color-muted-bg': 'var(--color-tinted-default-bg-2)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-3)',
                 // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
               '&:active, &[data-pressed]': {
                 '--color-bg': 'var(--color-tinted-default-bg-2)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                '--color-muted-bg': 'var(--color-tinted-default-bg-3)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-4)',
                 // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
-              '&:focus, &[data-selected]': {
+              //
+              '&[data-selectable]:focus, &[data-selected]': {
                 '--color-bg': 'var(--color-solid-default-bg-1)',
                 '--color-fg': 'var(--color-solid-default-fg-1)',
-                '--color-muted-fg': 'var(--color-solid-default-fg-5)',
+                '--color-muted-bg': 'var(--color-solid-default-bg-0)',
+                '--color-muted-fg': 'var(--color-solid-default-fg-3)',
                 // '--color-icon': 'var(--color-solid-default-fg-1)',
               },
             },
@@ -127,31 +131,42 @@ export const cardRules: Rules = {
               '&:hover': {
                 '--color-bg': 'var(--color-tinted-default-bg-1)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                '--color-muted-bg': 'var(--color-tinted-default-bg-2)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-3)',
                 // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
               '&:active': {
                 '--color-bg': 'var(--color-tinted-default-bg-2)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                '--color-muted-bg': 'var(--color-tinted-default-bg-3)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-4)',
                 // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
               '&[data-pressed]': {
                 '--color-bg': 'var(--color-tinted-default-bg-2)',
                 '--color-fg': 'var(--color-tinted-default-fg-1)',
-                '--color-muted-fg': 'var(--color-tinted-default-fg-5)',
+                '--color-muted-bg': 'var(--color-tinted-default-bg-3)',
+                '--color-muted-fg': 'var(--color-tinted-default-fg-4)',
                 // '--color-icon': 'var(--color-tinted-default-fg-1)',
               },
 
-              '&:focus, &[data-selected]': {
-                '--color-bg': 'var(--color-solid-default-bg-1)',
+              // &:focus,
+              '&[data-selectable]:focus, &[data-selected]': {
+                '--color-bg': 'var(--color-solid-default-bg-2)',
                 '--color-fg': 'var(--color-solid-default-fg-1)',
-                '--color-muted-fg': 'var(--color-solid-default-fg-5)',
+                '--color-muted-bg': 'var(--color-tinted-default-bg-3)',
+                '--color-muted-fg': 'var(--color-solid-default-fg-4)',
                 // '--color-icon': 'var(--color-solid-default-fg-1)',
               },
             },
+          },
+
+          '&:disabled': {
+            '--color-bg': 'var(--color-tinted-default-bg-0)',
+            '--color-fg': 'var(--color-tinted-default-border-2)',
+            '--color-muted-fg': 'var(--color-tinted-default-border-1)',
           },
         },
       },

@@ -1,4 +1,4 @@
-import {FlexItemStyleProps, FontStyleProps} from '@sanity/ui/css'
+import {FlexItemStyleProps, FontStyleProps} from '../../styles'
 import {ResponsiveProp} from '../../types'
 
 export type TextSize = number

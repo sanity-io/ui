@@ -106,7 +106,7 @@ export const Tooltip = forwardRef(function Tooltip(
     padding = 2,
     placement: placementProp = 'bottom',
     portal: portalProp,
-    radius = 2,
+    radius = 3,
     scheme,
     shadow = 2,
     zOffset = layer.tooltip.zOffset,
