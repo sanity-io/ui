@@ -85,7 +85,8 @@ const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {
  * @public
  */
 export const TextInput = forwardRef(function TextInput(
-  props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
+  props: TextInputProps &
+    Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type' | 'width'>,
   forwardedRef: React.Ref<HTMLInputElement>,
 ) {
   const {
@@ -108,6 +109,7 @@ export const TextInput = forwardRef(function TextInput(
     customValidity,
     type = 'text',
     weight: _width, // eslint-disable-line @typescript-eslint/no-unused-vars
+    width,
     ...restProps
   } = props
   const ref = useRef<HTMLInputElement | null>(null)
@@ -331,6 +333,7 @@ export const TextInput = forwardRef(function TextInput(
           padding,
           radius,
           gap: gap ?? space,
+          width,
         }),
       )}
       data-icon-left={IconComponent ? '' : undefined}

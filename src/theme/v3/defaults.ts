@@ -21,6 +21,7 @@ export const defaultTheme = buildTheme_v3({
   tokens: {
     color: {
       '*': {
+        backdrop: ['black/0.2', '200/0.2'],
         focusRing: ['blue/500', 'blue/300'],
         shadow: {
           outline: ['500/0.4', '500/0.3'],

@@ -191,6 +191,8 @@ function buildCardTonesRules() {
           cardTone: 'transparent',
         }),
 
+        '--color-backdrop': `var(${sourcePrefix}-backdrop)`,
+
         '--color-focus-ring': `var(${sourcePrefix}-focus-ring)`,
 
         '--color-shadow-outline': `var(${sourcePrefix}-shadow-outline)`,

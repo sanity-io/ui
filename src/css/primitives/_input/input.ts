@@ -1,6 +1,6 @@
 import {_resp} from '../../_resp'
 import {composeClassNames} from '../../composeClassNames'
-import {radius} from '../../styles'
+import {radius, width} from '../../styles'
 import {InputStyleProps} from './types'
 
 /** @internal */
@@ -12,6 +12,7 @@ export function _input(props: InputStyleProps): string | undefined {
     _resp(`input-p`, props.padding),
     _resp(`input-g`, props.gap),
     radius(props),
+    width(props),
   )
 }
 

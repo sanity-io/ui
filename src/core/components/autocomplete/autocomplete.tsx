@@ -124,6 +124,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'spellCheck'
       | 'type'
       | 'value'
+      | 'width'
     >,
   forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {

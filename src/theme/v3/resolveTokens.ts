@@ -96,6 +96,7 @@ function resolveCardColorTokens(
         fg: tokens?.avatar?.cyan?.fg ?? ['900', '900'],
       },
     },
+    backdrop: tokens?.backdrop ?? ['900', '100'],
     focusRing: tokens?.focusRing ?? ['500', '500'],
     shadow: {
       outline: tokens?.shadow?.outline ?? ['500', '500'],

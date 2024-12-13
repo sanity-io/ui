@@ -14,6 +14,7 @@ export interface CardColorTokens {
       fg: [ColorToken, ColorToken]
     }
   >
+  backdrop: [ColorToken, ColorToken]
   focusRing: [ColorToken, ColorToken]
   shadow: {
     outline: [ColorToken, ColorToken]

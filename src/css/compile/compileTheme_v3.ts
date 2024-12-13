@@ -354,6 +354,8 @@ function buildColorCardThemeProperties(
   const context: RenderColorContext = {bgVar: `${prefix}-bg-0`, hue: tokens._hue, scheme}
 
   const props: Properties = {
+    [`${prefix}-backdrop`]: renderColor(tokens.backdrop, context),
+
     [`${prefix}-focus-ring`]: renderColor(tokens.focusRing, context),
 
     [`${prefix}-shadow-outline`]: renderColor(tokens.shadow.outline, context),
