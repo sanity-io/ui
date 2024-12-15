@@ -53,7 +53,7 @@ export const cardRules: Rules = {
     '--card-kbd-bg-color': 'var(--color-tinted-default-bg-1)',
     '--card-kbd-border-color': 'var(--color-tinted-default-border-1)',
     '--card-kbd-fg-color': 'var(--color-tinted-default-fg-4)',
-    // '--card-link-fg-color': 'var(--color-link-fg)',
+    '--card-link-fg-color': 'var(--color-link-fg)',
     '--card-muted-bg-color': 'var(--color-tinted-default-bg-1)',
     '--card-muted-fg-color': 'var(--color-tinted-default-fg-4)',
 
@@ -192,8 +192,8 @@ function buildCardTonesRules() {
         }),
 
         '--color-backdrop': `var(${sourcePrefix}-backdrop)`,
-
         '--color-focus-ring': `var(${sourcePrefix}-focus-ring)`,
+        '--color-link-fg': `var(${sourcePrefix}-link-fg)`,
 
         '--color-shadow-outline': `var(${sourcePrefix}-shadow-outline)`,
         '--color-shadow-umbra': `var(${sourcePrefix}-shadow-umbra)`,

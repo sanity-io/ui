@@ -1,6 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import {GapStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import {Space} from '@sanity/ui/theme'
+import {FontTextSize, Space} from '@sanity/ui/theme'
 import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
@@ -14,9 +14,9 @@ import {useMenu} from './useMenu'
  */
 export interface MenuGroupProps extends GapStyleProps {
   as?: React.ElementType | keyof JSX.IntrinsicElements
-  fontSize?: number | number[]
+  fontSize?: ResponsiveProp<FontTextSize>
   icon?: React.ElementType | React.ReactNode
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: Radius | Radius[]
   /** @deprecated Use `gap` instead. */

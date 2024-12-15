@@ -23,6 +23,9 @@ export const defaultTheme = buildTheme_v3({
       '*': {
         backdrop: ['black/0.2', '200/0.2'],
         focusRing: ['blue/500', 'blue/300'],
+        link: {
+          fg: ['blue/400', 'blue/600'],
+        },
         shadow: {
           outline: ['500/0.4', '500/0.3'],
           umbra: ['black/0.2', '500/0.1'],

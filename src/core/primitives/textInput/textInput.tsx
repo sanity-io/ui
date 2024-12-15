@@ -237,8 +237,8 @@ export const TextInput = forwardRef(function TextInput(
         if (v === 1) return 1
         if (v === 2) return 1
 
-        return (v as Space) - 2
-      }),
+        return typeof v === 'number' ? v - 2 : 0
+      }) as Space[],
     [paddingArray],
   )
 
@@ -249,8 +249,8 @@ export const TextInput = forwardRef(function TextInput(
         if (v === 1) return 0
         if (v === 2) return 1
 
-        return (v as Space) - 1
-      }),
+        return typeof v === 'number' ? v - 1 : 0
+      }) as Space[],
     [paddingArray],
   )
 

@@ -65,7 +65,7 @@ export const Button = forwardRef(function Button(
     display = 'inline-flex',
     flex,
     fontSize = 1,
-    gap = props.space ?? 3,
+    gap = props.space ?? props.padding ?? 3,
     gapX,
     gapY,
     href,
@@ -83,7 +83,7 @@ export const Button = forwardRef(function Button(
     paddingRight,
     radius = 2,
     selected,
-    space = 3, // eslint-disable-line @typescript-eslint/no-unused-vars
+    space = props.gap ?? props.space ?? props.padding ?? 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     text,
     textAlign,
     textOverflow = 'ellipsis',

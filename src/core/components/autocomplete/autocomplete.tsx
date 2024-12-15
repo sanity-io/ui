@@ -471,12 +471,12 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         if (v === 2) return 1
 
         return (v as Space) - 2
-      }),
+      }) as Space[],
     [padding],
   )
 
   const openButtonPadding = useMemo(
-    () => padding.map((v) => Math.max((v as Space) - 1, 0)),
+    () => padding.map((v) => Math.max((v as Space) - 1, 0)) as Space[],
     [padding],
   )
 

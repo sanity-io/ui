@@ -31,7 +31,7 @@ export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {
     popover: {zOffset: 400},
     tooltip: {zOffset: 200},
   },
-  radius: [0, 1, 5, 9, 17, 25, 33],
+  radius: [0, 1, 5, 9, 13, 17, 25, 45, 77, 129],
   shadow: [
     null,
     {umbra: [0, 0, 0, 0], penumbra: [0, 0, 0, 0], ambient: [0, 0, 0, 0]},

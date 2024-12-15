@@ -1,5 +1,5 @@
-import {RadiusStyleProps, tooltipCard} from '@sanity/ui/css'
-import {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {RadiusStyleProps, ResponsiveProp, tooltipCard} from '@sanity/ui/css'
+import {Space, ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import {
@@ -30,7 +30,7 @@ export const TooltipCard = memo(
       arrowY?: number
       originX?: number
       originY?: number
-      padding?: number | number[]
+      padding?: ResponsiveProp<Space>
       placement?: Placement
       scheme?: ThemeColorSchemeKey
       shadow?: number | number[]

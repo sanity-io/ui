@@ -70,7 +70,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'>, RadiusStyleProps {
   delay?: Delay
   disabled?: boolean
   fallbackPlacements?: Placement[]
-  padding?: number | number[]
+  // padding?: number | number[]
   placement?: Placement
   /** Whether or not to render the tooltip in a portal element. */
   portal?: boolean | string

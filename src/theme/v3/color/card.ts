@@ -16,6 +16,9 @@ export interface CardColorTokens {
   >
   backdrop: [ColorToken, ColorToken]
   focusRing: [ColorToken, ColorToken]
+  link: {
+    fg: [ColorToken, ColorToken]
+  }
   shadow: {
     outline: [ColorToken, ColorToken]
     umbra: [ColorToken, ColorToken]

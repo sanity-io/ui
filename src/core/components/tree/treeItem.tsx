@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {composeClassNames, ResponsiveProp, treeItem} from '@sanity/ui/css'
-import {Space, ThemeFontWeightKey} from '@sanity/ui/theme'
+import {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import {Box, BoxProps, CardProps, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
@@ -13,13 +13,13 @@ import {useTree} from './useTree'
  */
 export interface TreeItemProps extends CardProps {
   expanded?: boolean
-  fontSize?: number | number[]
+  fontSize?: ResponsiveProp<FontTextSize>
   icon?: React.ElementType
   /**
    * Allows passing a custom element type to the link component
    */
   linkAs?: BoxProps['as']
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   space?: ResponsiveProp<Space>
   text?: React.ReactNode
   weight?: ThemeFontWeightKey

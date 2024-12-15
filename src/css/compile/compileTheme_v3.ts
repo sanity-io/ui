@@ -358,6 +358,8 @@ function buildColorCardThemeProperties(
 
     [`${prefix}-focus-ring`]: renderColor(tokens.focusRing, context),
 
+    [`${prefix}-link-fg`]: renderColor(tokens.link.fg, context),
+
     [`${prefix}-shadow-outline`]: renderColor(tokens.shadow.outline, context),
     [`${prefix}-shadow-umbra`]: renderColor(tokens.shadow.umbra, context),
     [`${prefix}-shadow-penumbra`]: renderColor(tokens.shadow.penumbra, context),

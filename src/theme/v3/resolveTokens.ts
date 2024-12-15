@@ -98,6 +98,9 @@ function resolveCardColorTokens(
     },
     backdrop: tokens?.backdrop ?? ['900', '100'],
     focusRing: tokens?.focusRing ?? ['500', '500'],
+    link: {
+      fg: tokens?.link?.fg ?? ['400', '600'],
+    },
     shadow: {
       outline: tokens?.shadow?.outline ?? ['500', '500'],
       umbra: tokens?.shadow?.umbra ?? ['500', '500'],

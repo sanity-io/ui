@@ -1,5 +1,5 @@
 import {ResponsiveProp} from '@sanity/ui/css'
-import {FontTextSize} from '@sanity/ui/theme'
+import {FontTextSize, Space} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {Button} from '../../primitives'
 import {ButtonTone} from '../../types'
@@ -17,7 +17,7 @@ export interface TabProps {
   'focused'?: boolean
   'fontSize'?: ResponsiveProp<FontTextSize>
   'label'?: React.ReactNode
-  'padding'?: number | number[]
+  'padding'?: ResponsiveProp<Space>
   'selected'?: boolean
   'tone'?: ButtonTone
 }

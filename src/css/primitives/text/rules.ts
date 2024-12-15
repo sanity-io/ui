@@ -19,6 +19,10 @@ export const textRules: Rules = {
         textDecoration: 'none',
       },
 
+      '& a:hover': {
+        color: 'var(--color-fg)',
+      },
+
       // '& svg': {
       //   color: 'var(--color-icon)',
       // },

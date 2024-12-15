@@ -273,6 +273,7 @@ export type CardScopedVarName =
   // | `--color-kbd-border`
   // | `--color-kbd-fg`
   // | `--color-link-fg`
+  | `--color-link-fg`
   | `--color-muted-bg`
   | `--color-muted-fg`
   | `--color-shadow-outline`

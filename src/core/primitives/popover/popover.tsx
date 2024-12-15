@@ -90,7 +90,7 @@ export interface PopoverProps
   matchReferenceWidth?: boolean
   open?: boolean
   overflow?: BoxOverflow
-  padding?: number | number[]
+  // padding?: number | number[]
   placement?: Placement
   /** Whether or not to render the popover in a portal element. */
   portal?: boolean | string

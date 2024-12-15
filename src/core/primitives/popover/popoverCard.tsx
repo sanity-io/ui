@@ -1,5 +1,5 @@
 import {Strategy} from '@floating-ui/react-dom'
-import {RadiusStyleProps} from '@sanity/ui/css'
+import {PaddingStyleProps, RadiusStyleProps} from '@sanity/ui/css'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
@@ -19,7 +19,7 @@ import {
 } from './constants'
 
 /** @internal */
-export interface PopoverCardProps extends RadiusStyleProps {
+export interface PopoverCardProps extends Pick<PaddingStyleProps, 'padding'>, RadiusStyleProps {
   /** @beta*/
   __unstable_margins?: PopoverMargins
   animate?: boolean
@@ -30,7 +30,6 @@ export interface PopoverCardProps extends RadiusStyleProps {
   originX?: number
   originY?: number
   overflow?: BoxOverflow
-  padding?: number | number[]
   placement: Placement
   scheme?: ThemeColorSchemeKey
   shadow?: number | number[]
