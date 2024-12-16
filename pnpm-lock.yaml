@@ -24,8 +24,8 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6
       '@sanity/icons':
-        specifier: ^3.5.2
-        version: 3.5.2(react@19.0.0)
+        specifier: ^3.5.3
+        version: 3.5.3(react@19.0.0)
       csstype:
         specifier: ^3.1.3
         version: 3.1.3
@@ -74,7 +74,7 @@ importers:
         version: 5.0.0(semantic-release@24.2.0(typescript@5.7.2))
       '@sanity/ui-workshop':
         specifier: ^2.0.19
-        version: 2.0.19(@sanity/icons@3.5.2(react@19.0.0))(@sanity/ui@)(@types/node@20.17.9)(jiti@1.21.6)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)
+        version: 2.0.19(@sanity/icons@3.5.3(react@19.0.0))(@sanity/ui@)(@types/node@20.17.9)(jiti@1.21.6)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)
       '@storybook/addon-a11y':
         specifier: ^8.4.7
         version: 8.4.7(storybook@8.4.7(prettier@3.4.2))
@@ -1778,8 +1778,8 @@ packages:
     resolution: {integrity: sha512-2TjYEvOftD0v7ukx3Csdh9QIu44P2z7NDJtlC3qITJRYV36J7R6Vfd3trVhFnN77/7CZrGjqngrtohv8VqO5nw==}
     engines: {node: '>=18.0.0'}
 
-  '@sanity/icons@3.5.2':
-    resolution: {integrity: sha512-ZPSBevYnmBvtjWvvM/Akpey+kreAvGhSUJYoqf4bJUwKvC1q/80s2o2EWL+xtZe1K3BJJI8HyBeL4WHQA3EMrA==}
+  '@sanity/icons@3.5.3':
+    resolution: {integrity: sha512-vI633N44QeSuUoYDZqI7vx6IAfgZshUPSnJHJUBODQdxW8064yEqtcROHP/FThp400RmXUGncWZNBoGbwbhl5w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^19.0.0
@@ -9189,10 +9189,10 @@ snapshots:
 
   '@sanity/color@3.0.6': {}
 
-  '@sanity/icons@3.5.2(react@19.0.0)':
+  '@sanity/icons@3.5.3(react@19.0.0)':
     dependencies:
       react: 19.0.0
-      react-compiler-runtime: 19.0.0-beta-37ed2a7-20241206(react@19.0.0)
+      react-compiler-runtime: 19.0.0-beta-201e55d-20241215(react@19.0.0)
 
   '@sanity/pkg-utils@6.11.15(@types/babel__core@7.20.5)(@types/node@20.17.9)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(typescript@5.7.2)':
     dependencies:
@@ -9262,9 +9262,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.0.19(@sanity/icons@3.5.2(react@19.0.0))(@sanity/ui@)(@types/node@20.17.9)(jiti@1.21.6)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)':
+  '@sanity/ui-workshop@2.0.19(@sanity/icons@3.5.3(react@19.0.0))(@sanity/ui@)(@types/node@20.17.9)(jiti@1.21.6)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)':
     dependencies:
-      '@sanity/icons': 3.5.2(react@19.0.0)
+      '@sanity/icons': 3.5.3(react@19.0.0)
       '@sanity/ui': 'link:'
       '@vitejs/plugin-react': 4.3.4(vite@6.0.3(@types/node@20.17.9)(jiti@1.21.6)(terser@5.37.0))
       axe-core: 4.10.2
