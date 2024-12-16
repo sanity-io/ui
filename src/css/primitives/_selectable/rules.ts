@@ -58,11 +58,11 @@ export const _selectableRules: Rules = {
 
           '&:not([data-disabled]):focus': {
             '--color-bg': 'var(--color-solid-bg-0)',
-            '--color-border': 'var(--color-solid-border-2)',
+            '--color-border': 'var(--color-solid-border-1)',
             '--color-fg': 'var(--color-solid-fg-1)',
             // '--color-icon': 'var(--color-solid-fg-1)',
             '--color-muted-bg': 'var(--color-solid-bg-1)',
-            '--color-muted-fg': 'var(--color-solid-fg-4)',
+            '--color-muted-fg': 'var(--color-solid-fg-3)',
           },
 
           '&[data-disabled]': {

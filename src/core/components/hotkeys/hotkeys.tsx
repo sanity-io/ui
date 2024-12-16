@@ -27,7 +27,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
     >,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {fontSize, gap, gapX, gapY, keys, padding, radius, space = 0.5, ...restProps} = props
+  const {fontSize, gap, gapX, gapY, keys, padding, radius, space = 1, ...restProps} = props
 
   if (!keys || keys.length === 0) {
     return <></>

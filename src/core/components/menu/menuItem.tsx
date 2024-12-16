@@ -142,7 +142,7 @@ export const MenuItem = forwardRef(function MenuItem(
       {(IconComponent || text || IconRightComponent) && (
         <Flex as="span" gap={gap ?? space} gapX={gapX} gapY={gapY} align="center" {...paddingProps}>
           {IconComponent && (
-            <Text size={fontSize}>
+            <Text muted size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
               {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
@@ -156,10 +156,12 @@ export const MenuItem = forwardRef(function MenuItem(
             </Box>
           )}
 
-          {hotkeys && <Hotkeys keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />}
+          {hotkeys && (
+            <Hotkeys gap={0.5} keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />
+          )}
 
           {IconRightComponent && (
-            <Text size={fontSize}>
+            <Text muted size={fontSize}>
               {isValidElement(IconRightComponent) && IconRightComponent}
               {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>

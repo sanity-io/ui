@@ -34,7 +34,7 @@ import {useDialog} from './useDialog'
 /**
  * @public
  */
-export interface DialogProps extends PaddingStyleProps, ContainerStyleProps {
+export interface DialogProps extends ContainerStyleProps, PaddingStyleProps {
   /**
    * @beta
    */

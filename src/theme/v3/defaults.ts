@@ -21,7 +21,8 @@ export const defaultTheme = buildTheme_v3({
   tokens: {
     color: {
       '*': {
-        backdrop: ['black/0.2', '200/0.2'],
+        // backdrop: ['black/0.2', '200/0.2'],
+        backdrop: ['black/0.5', 'gray/100/0.5'],
         focusRing: ['blue/500', 'blue/300'],
         link: {
           fg: ['blue/400', 'blue/600'],
@@ -71,8 +72,8 @@ export const defaultTheme = buildTheme_v3({
                 4: ['200', '600'],
               },
               border: {
-                0: ['400', '400'],
-                4: ['600', '200'],
+                0: ['200', '400'],
+                4: ['100', '500'],
               },
               fg: {
                 0: ['black', 'white'],
@@ -83,6 +84,10 @@ export const defaultTheme = buildTheme_v3({
               bg: {
                 0: ['200', '800'],
                 4: ['white', 'black'],
+              },
+              border: {
+                0: ['300', '700'],
+                4: ['200', '800'],
               },
             },
             'primary': {

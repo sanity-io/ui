@@ -78,7 +78,7 @@ for (const mode of THEME_COLOR_BUTTON_MODES) {
             '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
             '--color-border': `var(--color-tinted-${tone}-border-0)`,
             '--color-fg': `var(--color-tinted-${tone}-border-2)`,
-            '--color-muted-fg': `var(--color-solid-${tone}-border-3)`,
+            '--color-muted-fg': `var(--color-tinted-${tone}-border-1)`,
           },
         },
       }
