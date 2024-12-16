@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.11](https://github.com/sanity-io/ui/compare/v2.10.10...v2.10.11) (2024-12-16)
+
+### Bug Fixes
+
+- **deps:** update dependency @sanity/icons to ^3.5.3 ([#1523](https://github.com/sanity-io/ui/issues/1523)) ([d223f83](https://github.com/sanity-io/ui/commit/d223f839b66c7f27f2e4403375195627245d79d7))
+- **deps:** update dependency framer-motion to ^11.15.0 ([#1516](https://github.com/sanity-io/ui/issues/1516)) ([fd2588b](https://github.com/sanity-io/ui/commit/fd2588bf4a96aec56c1bb1c63758b1a81c0a9624))
+
 ## [2.10.10](https://github.com/sanity-io/ui/compare/v2.10.9...v2.10.10) (2024-12-16)
 
 ### Bug Fixes
