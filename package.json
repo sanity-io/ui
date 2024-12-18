@@ -147,7 +147,7 @@
     "@types/jest": "^29.5.14",
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.12.7",
-    "@types/react": "^19.0.1",
+    "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@types/react-is": "^19.0.0",
     "@types/refractor": "^3.4.1",
