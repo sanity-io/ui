@@ -20,7 +20,7 @@ export interface LabelProps {
    * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
    * @beta
    */
-  textOverflow?: 'ellipsis'
+  textOverflow?: 'ellipsis' | 'none'
   weight?: ThemeFontWeightKey
 }
 
