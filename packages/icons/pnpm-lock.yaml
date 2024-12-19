@@ -31,8 +31,8 @@ importers:
         specifier: ^19.6.0
         version: 19.6.0
       '@sanity/pkg-utils':
-        specifier: ^6.12.1
-        version: 6.12.1(@types/babel__core@7.20.5)(@types/node@20.17.9)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(typescript@5.7.2)
+        specifier: ^6.12.2
+        version: 6.12.2(@types/babel__core@7.20.5)(@types/node@20.17.9)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(typescript@5.7.2)
       '@sanity/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@3.4.2)
@@ -1479,8 +1479,8 @@ packages:
   '@rushstack/ts-command-line@4.23.2':
     resolution: {integrity: sha512-JJ7XZX5K3ThBBva38aomgsPv1L7FV6XmSOcR6HtM7HDFZJkepqT65imw26h9ggGqMjsY0R9jcl30tzKcVj9aOQ==}
 
-  '@sanity/browserslist-config@1.0.4':
-    resolution: {integrity: sha512-hQzfKVItzeJOTpGx9XvFKjmht5lmAcRWuw52Y+EzWWZlouSt6MiSLjF0v13vUf9E9TPK7wbgx+4F8tMyxpOxMQ==}
+  '@sanity/browserslist-config@1.0.5':
+    resolution: {integrity: sha512-so+/UtCge8t1jq509hH0otbbptRz0zM/Aa0dh5MhMD7HGT6n2igWIL2VWH/9QR9e77Jn3dJsjz23mW1WCxT+sg==}
 
   '@sanity/color@3.0.6':
     resolution: {integrity: sha512-2TjYEvOftD0v7ukx3Csdh9QIu44P2z7NDJtlC3qITJRYV36J7R6Vfd3trVhFnN77/7CZrGjqngrtohv8VqO5nw==}
@@ -1492,8 +1492,8 @@ packages:
     peerDependencies:
       react: ^18.3 || ^19.0.0-0
 
-  '@sanity/pkg-utils@6.12.1':
-    resolution: {integrity: sha512-y6IuzUwMdKoz63tjsxnrcAlzA2XtTpMjET3vc6O+/cOOhvs4rcKQzhVjIiStBoCQPdJWH2Ts6McK3QowdTBpyg==}
+  '@sanity/pkg-utils@6.12.2':
+    resolution: {integrity: sha512-jLy9m5aPQUW7g8PuH5FYZJ8i5vE2s9Bv1aTdFoMFrfNaBYG9TpgoDUT2JlrTS1oFSv2CJz6JIcHylsulqCrF3w==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -7812,7 +7812,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@sanity/browserslist-config@1.0.4': {}
+  '@sanity/browserslist-config@1.0.5': {}
 
   '@sanity/color@3.0.6': {}
 
@@ -7821,7 +7821,7 @@ snapshots:
       react: 19.0.0
       react-compiler-runtime: 19.0.0-beta-201e55d-20241215(react@19.0.0)
 
-  '@sanity/pkg-utils@6.12.1(@types/babel__core@7.20.5)(@types/node@20.17.9)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(typescript@5.7.2)':
+  '@sanity/pkg-utils@6.12.2(@types/babel__core@7.20.5)(@types/node@20.17.9)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.0)
@@ -7836,7 +7836,7 @@ snapshots:
       '@rollup/plugin-node-resolve': 16.0.0(rollup@4.28.1)
       '@rollup/plugin-replace': 6.0.2(rollup@4.28.1)
       '@rollup/plugin-terser': 0.4.4(rollup@4.28.1)
-      '@sanity/browserslist-config': 1.0.4
+      '@sanity/browserslist-config': 1.0.5
       browserslist: 4.24.3
       cac: 6.7.14
       chalk: 4.1.2
