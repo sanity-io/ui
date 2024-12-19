@@ -42,7 +42,7 @@ export const Card = forwardRef(function Card(
     className,
     pressed,
     radius = 0,
-    scheme,
+    scheme: schemeProp,
     selectable,
     selected,
     shadow,
@@ -55,34 +55,41 @@ export const Card = forwardRef(function Card(
 
   const rootTheme = useRootTheme()
 
-  const tone = toneProp === 'inherit' ? undefined : toneProp
+  const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
+  const scheme = schemeProp === undefined ? rootTheme.scheme : schemeProp
 
-  // todo: Consider adding the wrapper approach for nested cards in which the tones are not
-  // changing, avoid unnecessary ThemeColorProvider
   const node = (
-    <ThemeColorProvider scheme={scheme} tone={tone ?? rootTheme.tone}>
-      <Box
-        data-as={typeof as === 'string' ? as : undefined}
-        data-ui="Card"
-        {...restProps}
-        as={as}
-        className={composeClassNames(className, card({shadow}))}
-        data-checkered={checkered ? '' : undefined}
-        data-focus-ring={focusRing ? '' : undefined}
-        data-pressed={pressed ? '' : undefined}
-        data-scheme={scheme ?? rootTheme.scheme}
-        data-selectable={selectable ? '' : undefined}
-        data-selected={selected ? '' : undefined}
-        data-tone={tone ?? rootTheme.tone}
-        radius={radius}
-        ref={ref}
-        selected={selected}
-        style={style}
-      />
-    </ThemeColorProvider>
+    <Box
+      data-as={typeof as === 'string' ? as : undefined}
+      data-ui="Card"
+      {...restProps}
+      as={as}
+      className={composeClassNames(className, card({shadow}))}
+      data-checkered={checkered ? '' : undefined}
+      data-focus-ring={focusRing ? '' : undefined}
+      data-pressed={pressed ? '' : undefined}
+      data-scheme={scheme === rootTheme.scheme ? undefined : scheme}
+      data-selectable={selectable ? '' : undefined}
+      data-selected={selected ? '' : undefined}
+      data-tone={tone === rootTheme.tone ? undefined : tone}
+      radius={radius}
+      ref={ref}
+      selected={selected}
+      style={style}
+    />
   )
 
-  return node
+  if (scheme === rootTheme.scheme && tone === rootTheme.tone) {
+    return node
+  }
+
+  return (
+    // Render a theme provider around the card if the scheme or tone differs from the root theme.
+    // This is needed for backwards compatibility with the legacy theme API.
+    <ThemeColorProvider scheme={scheme} tone={tone ?? rootTheme.tone}>
+      {node}
+    </ThemeColorProvider>
+  )
 })
 
 Card.displayName = 'ForwardRef(Card)'

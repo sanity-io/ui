@@ -24,7 +24,6 @@ export const Grid = forwardRef(function Grid(
       {...restProps}
       as={as}
       display="grid"
-      // forwardedAs={as}
       ref={ref}
     >
       {children}

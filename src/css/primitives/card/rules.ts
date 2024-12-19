@@ -2,6 +2,7 @@ import {
   HUES,
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_STATE_TONES,
+  type ThemeColorVariantKey,
   type ThemeColorCardToneKey,
   type ThemeColorSchemeKey,
 } from '@sanity/ui/theme'
@@ -18,57 +19,6 @@ export const cardRules: Rules = {
     // '--color-icon': 'var(--color-tinted-default-fg-4)',
     '--color-muted-bg': 'var(--color-tinted-default-bg-1)',
     '--color-muted-fg': 'var(--color-tinted-default-fg-4)',
-
-    /* deprecated variables (kept for legacy) */
-
-    // '--card-accent-fg-color': 'var(--color-accent-fg)',
-
-    // ...THEME_COLOR_AVATAR_COLORS.reduce((acc, color) => {
-    //   return {
-    //     ...acc,
-    //     [`--card-avatar-${color}-bg-color`]: `var(--color-avatar-${color}-bg)`,
-    //     [`--card-avatar-${color}-fg-color`]: `var(--color-avatar-${color}-fg)`,
-    //   }
-    // }, {} as Properties),
-
-    // '--card-backdrop-color': 'var(--color-backdrop)',
-
-    // ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
-    //   return {
-    //     ...acc,
-    //     [`--card-badge-${tone}-bg-color`]: `var(--color-badge-${tone}-bg)`,
-    //     [`--card-badge-${tone}-dot-color`]: `var(--color-badge-${tone}-dot)`,
-    //     [`--card-badge-${tone}-fg-color`]: `var(--color-badge-${tone}-fg)`,
-    //     [`--card-badge-${tone}-icon-color`]: `var(--color-badge-${tone}-icon)`,
-    //   }
-    // }, {} as Properties),
-
-    '--card-bg-color': 'var(--color-bg)',
-    '--card-border-color': 'var(--color-border)',
-    '--card-code-bg-color': 'var(--color-tinted-default-bg-1)',
-    '--card-code-fg-color': 'var(--color-tinted-default-fg-4)',
-    '--card-fg-color': 'var(--color-fg)',
-    '--card-focus-ring-color': 'var(--color-focus-ring)',
-    '--card-icon-color': 'var(--color-fg)',
-    '--card-kbd-bg-color': 'var(--color-tinted-default-bg-1)',
-    '--card-kbd-border-color': 'var(--color-tinted-default-border-1)',
-    '--card-kbd-fg-color': 'var(--color-tinted-default-fg-4)',
-    '--card-link-fg-color': 'var(--color-link-fg)',
-    '--card-muted-bg-color': 'var(--color-tinted-default-bg-1)',
-    '--card-muted-fg-color': 'var(--color-tinted-default-fg-4)',
-
-    '--card-shadow-outline-color': 'var(--color-shadow-outline)',
-    '--card-shadow-umbra-color': 'var(--color-shadow-umbra)',
-    '--card-shadow-penumbra-color': 'var(--color-shadow-penumbra)',
-    '--card-shadow-ambient-color': 'var(--color-shadow-ambient)',
-
-    // // '--card-skeleton-from-color': 'var(--color-skeleton-from)',
-    // // '--card-skeleton-to-color': 'var(--color-skeleton-to)',
-
-    '--card-bg2-color': `var(--color-tinted-default-bg-1)`,
-    // '--card-link-color': `var(--color-link-fg)`,
-    '--card-hairline-soft-color': `var(--color-tinted-default-border-1)`,
-    '--card-hairline-hard-color': `var(--color-tinted-default-border-2)`,
 
     '@nest': {
       ...buildCardTonesRules(),
@@ -175,6 +125,52 @@ export const cardRules: Rules = {
         font: 'inherit',
       },
     },
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Legacy `--card` variables
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // '--card-accent-fg-color': 'var(--color-accent-fg)',
+    // ...THEME_COLOR_AVATAR_COLORS.reduce((acc, color) => {
+    //   return {
+    //     ...acc,
+    //     [`--card-avatar-${color}-bg-color`]: `var(--color-avatar-${color}-bg)`,
+    //     [`--card-avatar-${color}-fg-color`]: `var(--color-avatar-${color}-fg)`,
+    //   }
+    // }, {} as Properties),
+    // '--card-backdrop-color': 'var(--color-backdrop)',
+    // ...THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
+    //   return {
+    //     ...acc,
+    //     [`--card-badge-${tone}-bg-color`]: `var(--color-badge-${tone}-bg)`,
+    //     [`--card-badge-${tone}-dot-color`]: `var(--color-badge-${tone}-dot)`,
+    //     [`--card-badge-${tone}-fg-color`]: `var(--color-badge-${tone}-fg)`,
+    //     [`--card-badge-${tone}-icon-color`]: `var(--color-badge-${tone}-icon)`,
+    //   }
+    // }, {} as Properties),
+    '--card-bg-color': 'var(--color-bg)',
+    '--card-bg2-color': `var(--color-tinted-default-bg-1)`,
+    '--card-border-color': 'var(--color-border)',
+    '--card-code-bg-color': 'var(--color-tinted-default-bg-1)',
+    '--card-code-fg-color': 'var(--color-tinted-default-fg-4)',
+    '--card-fg-color': 'var(--color-fg)',
+    '--card-focus-ring-color': 'var(--color-focus-ring)',
+    '--card-icon-color': 'var(--color-fg)',
+    '--card-kbd-bg-color': 'var(--color-tinted-default-bg-1)',
+    '--card-kbd-border-color': 'var(--color-tinted-default-border-1)',
+    '--card-kbd-fg-color': 'var(--color-tinted-default-fg-4)',
+    '--card-link-color': `var(--color-link-fg)`,
+    '--card-link-fg-color': 'var(--color-link-fg)',
+    '--card-muted-bg-color': 'var(--color-tinted-default-bg-1)',
+    '--card-muted-fg-color': 'var(--color-tinted-default-fg-4)',
+    '--card-shadow-outline-color': 'var(--color-shadow-outline)',
+    '--card-shadow-umbra-color': 'var(--color-shadow-umbra)',
+    '--card-shadow-penumbra-color': 'var(--color-shadow-penumbra)',
+    '--card-shadow-ambient-color': 'var(--color-shadow-ambient)',
+    // '--card-skeleton-from-color': 'var(--color-skeleton-from)',
+    // '--card-skeleton-to-color': 'var(--color-skeleton-to)',
+    '--card-hairline-soft-color': `var(--color-tinted-default-border-1)`,
+    '--card-hairline-hard-color': `var(--color-tinted-default-border-2)`,
   },
 }
 
@@ -182,14 +178,15 @@ function buildCardTonesRules() {
   const rules: Record<string, Properties> = {}
 
   for (const scheme of ['light', 'dark'] as const) {
-    for (const cardTone of THEME_COLOR_CARD_TONES) {
-      const sourcePrefix = `--color-${scheme}-${cardTone}`
+    const props: Properties = {}
 
-      rules[`&[data-scheme="${scheme}"][data-tone="${cardTone}"]`] = {
-        ...buildCardAvatarColorProperties({
-          scheme: 'dark',
-          cardTone: 'transparent',
-        }),
+    for (const cardTone of THEME_COLOR_CARD_TONES) {
+      const sourcePrefix = `--color-${scheme}-${cardTone}` as const
+      const targetPrefix = `--color-${cardTone}` as const
+
+      Object.assign(props, {
+        //
+        ...buildCardAvatarColorProperties({sourcePrefix, targetPrefix}),
 
         '--color-backdrop': `var(${sourcePrefix}-backdrop)`,
         '--color-focus-ring': `var(${sourcePrefix}-focus-ring)`,
@@ -201,17 +198,45 @@ function buildCardTonesRules() {
         '--color-shadow-ambient': `var(${sourcePrefix}-shadow-ambient)`,
 
         ...buildCardColorVariantProperties({
-          scheme,
-          cardTone,
-          variant: 'solid',
+          sourcePrefix: `${sourcePrefix}-solid`,
+          targetPrefix: `${targetPrefix}-solid`,
         }),
 
         ...buildCardColorVariantProperties({
-          scheme,
-          cardTone,
-          variant: 'tinted',
+          sourcePrefix: `${sourcePrefix}-tinted`,
+          targetPrefix: `${targetPrefix}-tinted`,
         }),
-      }
+      })
+    }
+
+    rules[`&[data-scheme="${scheme}"]`] = props
+  }
+
+  for (const cardTone of THEME_COLOR_CARD_TONES) {
+    const sourcePrefix = `--color-${cardTone}` as const
+    const targetPrefix = `--color` as const
+
+    rules[`&[data-tone="${cardTone}"]`] = {
+      ...buildCardAvatarColorProperties({sourcePrefix, targetPrefix: `--color`}),
+
+      '--color-backdrop': `var(${sourcePrefix}-backdrop)`,
+      '--color-focus-ring': `var(${sourcePrefix}-focus-ring)`,
+      '--color-link-fg': `var(${sourcePrefix}-link-fg)`,
+
+      '--color-shadow-outline': `var(${sourcePrefix}-shadow-outline)`,
+      '--color-shadow-umbra': `var(${sourcePrefix}-shadow-umbra)`,
+      '--color-shadow-penumbra': `var(${sourcePrefix}-shadow-penumbra)`,
+      '--color-shadow-ambient': `var(${sourcePrefix}-shadow-ambient)`,
+
+      ...buildCardColorVariantProperties({
+        sourcePrefix: `${sourcePrefix}-solid`,
+        targetPrefix: `${targetPrefix}-solid`,
+      }),
+
+      ...buildCardColorVariantProperties({
+        sourcePrefix: `${sourcePrefix}-tinted`,
+        targetPrefix: `${targetPrefix}-tinted`,
+      }),
     }
   }
 
@@ -219,13 +244,12 @@ function buildCardTonesRules() {
 }
 
 function buildCardAvatarColorProperties(options: {
-  scheme: ThemeColorSchemeKey
-  cardTone: ThemeColorCardToneKey
+  sourcePrefix:
+    | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}`
+    | `--color-${ThemeColorCardToneKey}`
+  targetPrefix: `--color` | `--color-${ThemeColorCardToneKey}`
 }): Properties {
-  const {scheme, cardTone} = options
-
-  const targetPrefix = `--color`
-  const sourcePrefix = `--color-${scheme}-${cardTone}`
+  const {sourcePrefix, targetPrefix} = options
 
   const props: Properties = {}
 
@@ -240,14 +264,14 @@ function buildCardAvatarColorProperties(options: {
 }
 
 function buildCardColorVariantProperties(options: {
-  scheme: ThemeColorSchemeKey
-  cardTone: ThemeColorCardToneKey
-  variant: 'solid' | 'tinted'
+  sourcePrefix:
+    | `--color-${ThemeColorSchemeKey}-${ThemeColorCardToneKey}-${ThemeColorVariantKey}`
+    | `--color-${ThemeColorCardToneKey}-${ThemeColorVariantKey}`
+  targetPrefix:
+    | `--color-${ThemeColorVariantKey}`
+    | `--color-${ThemeColorCardToneKey}-${ThemeColorVariantKey}`
 }): Properties {
-  const {scheme, cardTone, variant} = options
-
-  const targetPrefix = `--color-${variant}`
-  const sourcePrefix = `--color-${scheme}-${cardTone}-${variant}`
+  const {sourcePrefix, targetPrefix} = options
 
   const props: Properties = {}
 
