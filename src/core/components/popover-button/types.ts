@@ -39,8 +39,8 @@ export interface PopoverButtonProps
    *
    * ```tsx
    * <PopoverButton
-   *  renderButton={({isOpen}) => <Button mode="bleed" text={isOpen ? "Close" : "Open"} />}
-   *  // rest of props ...
+   *   renderButton={({isOpen}) => <button>{isOpen ? "Close" : "Open"}</button>}
+   *   // ... rest of props
    * />
    * ```
    */
@@ -50,13 +50,13 @@ export interface PopoverButtonProps
    *
    * ```tsx
    * <PopoverButton
-   * renderContent={({close}) => (
-   *  <Stack>
-   *    <h1>Popover content</h1>
-   *    <Button mode="bleed" text="Close" onClick={close} />
-   * </Stack>
-   * )}
-   * // rest of props ...
+   *   renderContent={({close}) => (
+   *     <div>
+   *       <h1>Popover content</h1>
+   *       <button onClick={close}>Close</button>
+   *     </div>
+   *   )}
+   *   // ... rest of props
    * />
    * ```
    */

@@ -146,8 +146,6 @@ export const PopoverButton = forwardRef(function PopoverButton(
   )
 
   // Button
-  const renderedButton = renderButton({isOpen: open})
-
   const buttonProps: HTMLProps<HTMLButtonElement> & {'data-ui': string} = {
     'aria-controls': `content-${buttonId}`,
     'aria-expanded': open,
@@ -159,26 +157,24 @@ export const PopoverButton = forwardRef(function PopoverButton(
     'selected': open,
   }
 
+  const renderedButton = renderButton({isOpen: open})
+
   const button = cloneElement(renderedButton, buttonProps)
 
   // Content
-  const renderedContent = renderContent({close: handleClose})
-
   const contentProps: HTMLProps<HTMLDivElement> = {
     'aria-labelledby': buttonProps.id,
     'id': buttonProps['aria-controls'],
     'ref': setContentElement,
   }
 
-  const contentComponent = cloneElement(renderedContent, {
-    ...contentProps,
-  })
+  const renderedContent = renderContent({close: handleClose})
 
   const content = (
     <>
       <div aria-hidden="true" ref={focusGuardPreRef} tabIndex={0} />
 
-      {contentComponent}
+      {cloneElement(renderedContent, contentProps)}
 
       <div aria-hidden="true" ref={focusGuardPostRef} tabIndex={0} />
     </>
