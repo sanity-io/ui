@@ -5,7 +5,7 @@ import {PopoverProps} from '../../primitives'
  * @beta
  */
 export interface PopoverButtonProps
-  extends Omit<PopoverProps, 'content' | 'open' | 'referenceElement'> {
+  extends Omit<PopoverProps, 'children' | 'content' | 'open' | 'referenceElement'> {
   /**
    * ARIA attribute for the button element.
    */
