@@ -7,6 +7,7 @@ export default defineConfig({
     },
   },
   tsconfig: 'tsconfig.dist.json',
-  babel: {reactCompiler: true},
+  // @TODO re-enable after issue is fixed in @sanity/presentation
+  babel: {reactCompiler: false},
   reactCompilerOptions: {target: '18'},
 })
