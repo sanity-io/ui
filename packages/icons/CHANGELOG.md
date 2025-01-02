@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.7](https://github.com/sanity-io/icons/compare/v3.5.6...v3.5.7) (2025-01-02)
+
+### Bug Fixes
+
+- remove unused deps ([74e7037](https://github.com/sanity-io/icons/commit/74e7037a360f4038f14d6aa4a4adbd265aa79966))
+
 ## [3.5.6](https://github.com/sanity-io/icons/compare/v3.5.5...v3.5.6) (2024-12-21)
 
 ### Bug Fixes
