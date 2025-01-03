@@ -119,7 +119,7 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
-    "@commitlint/cli": "^19.6.0",
+    "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/pkg-utils": "^6.12.3",
