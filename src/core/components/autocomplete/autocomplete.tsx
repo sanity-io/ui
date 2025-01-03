@@ -115,6 +115,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'inputMode'
       | 'onChange'
       | 'onSelect'
+      | 'popover'
       | 'prefix'
       | 'ref'
       | 'role'
