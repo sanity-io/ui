@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.15](https://github.com/sanity-io/ui/compare/v2.10.14...v2.10.15) (2025-01-03)
+
+### Bug Fixes
+
+- omit `popover` html attribute ([4f1895e](https://github.com/sanity-io/ui/commit/4f1895e80208a89de0dd85df0ad3761ae3d1e035))
+
 ## [2.10.14](https://github.com/sanity-io/ui/compare/v2.10.13...v2.10.14) (2024-12-31)
 
 ### Bug Fixes
