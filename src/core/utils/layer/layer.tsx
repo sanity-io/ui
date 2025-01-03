@@ -1,12 +1,4 @@
-import {
-  FocusEvent,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  type JSX,
-} from 'react'
+import {FocusEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
@@ -17,14 +9,14 @@ import {useLayer} from './useLayer'
  * @public
  */
 export interface LayerProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   /** A callback that fires when the layer becomes the top layer when it was not the top layer before. */
   onActivate?: (props: {activeElement: HTMLElement | null}) => void
   zOffset?: number | number[]
 }
 
 interface LayerChildrenProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   onActivate?: LayerProps['onActivate']
 }
 

@@ -1,4 +1,4 @@
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import Refractor from 'react-refractor'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -9,7 +9,7 @@ import {codeBaseStyle} from './styles'
  * @public
  */
 export interface CodeProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   /** Define the language to use for syntax highlighting. */
   language?: string
   size?: number | number[]

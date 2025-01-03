@@ -1,5 +1,5 @@
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
@@ -12,7 +12,7 @@ import {labelBaseStyle} from './styles'
 export interface LabelProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   muted?: boolean
   size?: number | number[]
   /**

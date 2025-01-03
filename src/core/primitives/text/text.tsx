@@ -1,5 +1,5 @@
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {
@@ -16,7 +16,7 @@ import {textBaseStyle} from './styles'
 export interface TextProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   /** When `true` the text color will be muted. */
   muted?: boolean
   size?: number | number[]

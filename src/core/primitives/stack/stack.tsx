@@ -1,4 +1,4 @@
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {Box, BoxProps} from '../box'
@@ -8,7 +8,7 @@ import {stackBaseStyle, responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProp
  * @public
  */
 export interface StackProps extends BoxProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   space?: number | number[]
 }
 

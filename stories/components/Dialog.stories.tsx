@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import {useCallback, useState, type JSX} from 'react'
+import {useCallback, useState} from 'react'
 import {Dialog} from '../../src/core/components'
 import {Box, Button, Card, Flex, Inline, Stack, Text} from '../../src/core/primitives'
 import {BoundaryElementProvider, PortalProvider} from '../../src/core/utils'
@@ -58,7 +58,7 @@ const meta: Meta<typeof Dialog> = {
   },
   component: Dialog,
   decorators: [
-    (Story: StoryFn): JSX.Element => {
+    (Story: StoryFn): React.JSX.Element => {
       const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
       const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 

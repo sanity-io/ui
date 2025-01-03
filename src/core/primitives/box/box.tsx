@@ -1,4 +1,4 @@
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {
@@ -31,8 +31,8 @@ export interface BoxProps
     ResponsiveGridItemProps,
     ResponsiveMarginProps,
     ResponsivePaddingProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
-  forwardedAs?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+  forwardedAs?: React.ElementType | keyof React.JSX.IntrinsicElements
 }
 
 const Root = styled.div<

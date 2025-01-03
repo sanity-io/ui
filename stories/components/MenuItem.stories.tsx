@@ -1,5 +1,4 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import type {JSX} from 'react'
 import {Menu, MenuItem} from '../../src/core/components'
 import {Card, Container} from '../../src/core/primitives'
 import {LayerProvider} from '../../src/core/utils'
@@ -22,7 +21,7 @@ const meta: Meta<typeof MenuItem> = {
   },
   component: MenuItem,
   decorators: [
-    (Story: StoryFn): JSX.Element => (
+    (Story: StoryFn): React.JSX.Element => (
       <Container width={0}>
         <Card radius={3} shadow={2}>
           <LayerProvider>

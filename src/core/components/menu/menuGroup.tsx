@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import {isValidElement, useCallback, useEffect, useState, type JSX} from 'react'
+import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
@@ -13,7 +13,7 @@ import {useMenu} from './useMenu'
  * @public
  */
 export interface MenuGroupProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   icon?: React.ElementType | React.ReactNode
   padding?: number | number[]
