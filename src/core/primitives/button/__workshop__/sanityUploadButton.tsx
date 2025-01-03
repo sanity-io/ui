@@ -18,7 +18,7 @@ const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`
     width: stretch;
   }
 
-  & span:nth-child(2) {
+  & > span:nth-child(2) {
     width: 0;
     flex: none;
     padding: 0;
