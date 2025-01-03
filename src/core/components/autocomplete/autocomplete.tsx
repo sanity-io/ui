@@ -716,6 +716,7 @@ export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocomplet
       | 'inputMode'
       | 'onChange'
       | 'onSelect'
+      | 'popover'
       | 'prefix'
       | 'ref'
       | 'role'
