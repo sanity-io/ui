@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.17](https://github.com/sanity-io/ui/compare/v2.10.16...v2.10.17) (2025-01-03)
+
+### Bug Fixes
+
+- **typings:** use `React.JSX` namespace ([#1543](https://github.com/sanity-io/ui/issues/1543)) ([f42b6ab](https://github.com/sanity-io/ui/commit/f42b6ab05bf038a771ca0ec4e8a2c9a666c939a8))
+
 ## [2.10.16](https://github.com/sanity-io/ui/compare/v2.10.15...v2.10.16) (2025-01-03)
 
 ### Bug Fixes
