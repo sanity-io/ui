@@ -1,5 +1,4 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import type {JSX} from 'react'
 import {AvatarCounter, AvatarStack} from '../../src/core/primitives'
 import {getAvatarSizeControls} from '../controls'
 
@@ -12,7 +11,7 @@ const meta: Meta<typeof AvatarCounter> = {
   },
   component: AvatarCounter,
   decorators: [
-    (Story: StoryFn): JSX.Element => (
+    (Story: StoryFn): React.JSX.Element => (
       <AvatarStack>
         {/* @ts-expect-error fix later */}
         <Story />

@@ -1,12 +1,4 @@
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-  type JSX,
-} from 'react'
+import {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 import {_isScrollable} from '../../helpers'
 import {_ResizeObserver} from '../../observers'
@@ -29,7 +21,7 @@ export interface VirtualListChangeOpts {
  * @beta
  */
 export interface VirtualListProps<Item = any> {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   gap?: number
   getItemKey?: (item: Item, itemIndex: number) => string
   items?: Item[]

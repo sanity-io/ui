@@ -1,6 +1,5 @@
 import {SearchIcon} from '@sanity/icons'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import type {JSX} from 'react'
 import {Autocomplete} from '../../src/core/components'
 import {Card} from '../../src/core/primitives'
 import {RADII} from '../constants'
@@ -14,7 +13,7 @@ const meta: Meta<typeof Autocomplete> = {
   },
   component: Autocomplete,
   decorators: [
-    (Story: StoryFn): JSX.Element => (
+    (Story: StoryFn): React.JSX.Element => (
       <Card paddingBottom={8} paddingTop={3}>
         {/* @ts-expect-error fix later */}
         <Story />

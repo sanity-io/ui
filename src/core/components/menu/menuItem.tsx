@@ -7,7 +7,6 @@ import {
   useMemo,
   useRef,
   useState,
-  type JSX,
 } from 'react'
 import {isValidElementType} from 'react-is'
 import {useArrayProp} from '../../hooks'
@@ -23,7 +22,7 @@ import {useMenu} from './useMenu'
  * @public
  */
 export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   hotkeys?: string[]
   icon?: React.ElementType | React.ReactNode

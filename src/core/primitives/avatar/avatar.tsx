@@ -1,5 +1,5 @@
 import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useId, useMemo, useState, type JSX} from 'react'
+import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -16,7 +16,7 @@ export interface AvatarProps {
   __unstable_hideInnerStroke?: boolean
   animateArrowFrom?: AvatarPosition
   arrowPosition?: AvatarPosition
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   color?: ThemeColorAvatarColorKey
   initials?: string
   onImageLoadError?: (event: Error) => void

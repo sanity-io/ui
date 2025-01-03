@@ -1,4 +1,4 @@
-import {forwardRef, isValidElement, useMemo, type JSX} from 'react'
+import {forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
@@ -17,7 +17,7 @@ import {buttonBaseStyles, buttonColorStyles} from './styles'
  * @public
  */
 export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   mode?: ButtonMode
   icon?: React.ElementType | React.ReactNode

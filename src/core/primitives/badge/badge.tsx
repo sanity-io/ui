@@ -1,4 +1,4 @@
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
@@ -13,7 +13,7 @@ import {BadgeStyleProps} from './types'
  * @public
  */
 export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   /** @deprecated No longer used. */
   mode?: BadgeMode

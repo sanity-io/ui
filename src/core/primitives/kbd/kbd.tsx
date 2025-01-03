@@ -1,4 +1,4 @@
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import {styled, css} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
@@ -10,7 +10,7 @@ import {Text} from '../text'
  * @public
  */
 export interface KBDProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   padding?: number | number[]
   radius?: Radius | Radius[]

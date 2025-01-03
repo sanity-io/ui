@@ -1,4 +1,3 @@
-import type {JSX} from 'react'
 import {Card, Flex, Grid, Text} from '../../src/core/primitives'
 import {ThemeColorSchemeKey} from '../../src/theme'
 
@@ -96,7 +95,7 @@ export function matrixBuilder<Rows extends string[], Cols extends string[]>({
   title,
   renderItem,
   subHeader,
-}: MatrixBuilderProps<Rows, Cols>): JSX.Element {
+}: MatrixBuilderProps<Rows, Cols>): React.JSX.Element {
   return (
     <Table scheme={scheme} columns={columns} rows={rows} title={title} subHeader={subHeader}>
       {rows.map((row) => (

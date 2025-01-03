@@ -1,11 +1,11 @@
-import {forwardRef, type JSX} from 'react'
+import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 /**
  * @public
  */
 export interface SrOnlyProps {
-  as?: React.ElementType | keyof JSX.IntrinsicElements
+  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   children?: React.ReactNode
 }
 
