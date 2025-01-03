@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.16](https://github.com/sanity-io/ui/compare/v2.10.15...v2.10.16) (2025-01-03)
+
+### Bug Fixes
+
+- **deps:** update dependency @sanity/icons to ^3.5.7 ([#1539](https://github.com/sanity-io/ui/issues/1539)) ([3c3f8bb](https://github.com/sanity-io/ui/commit/3c3f8bb11887ec06616721e9a56fdf66a48a8fe5))
+- omit `popover` html attribute ([98c43b1](https://github.com/sanity-io/ui/commit/98c43b1ee9d5f8330786b20cd5fcda125747c509))
+
 ## [2.10.15](https://github.com/sanity-io/ui/compare/v2.10.14...v2.10.15) (2025-01-03)
 
 ### Bug Fixes
