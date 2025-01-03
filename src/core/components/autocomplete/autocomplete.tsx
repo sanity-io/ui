@@ -115,6 +115,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       | 'inputMode'
       | 'onChange'
       | 'onSelect'
+      | 'popover'
       | 'prefix'
       | 'ref'
       | 'role'
@@ -663,7 +664,6 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         radius={radius}
         ref={resultsPopoverElementRef}
         referenceElement={inputElementRef.current}
-        // @ts-expect-error fix later
         {...popover}
       />
     )
