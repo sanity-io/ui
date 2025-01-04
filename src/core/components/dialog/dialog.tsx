@@ -99,7 +99,7 @@ function isTargetWithinScope(
   )
 }
 
-const Root = styled(Layer)<
+const StyledDialog = styled(Layer)<
   ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps & AnimationDialogStyleProps
 >(responsivePaddingStyle, dialogStyle, responsiveDialogPositionStyle, animationDialogStyle)
 
@@ -388,7 +388,7 @@ export const Dialog = forwardRef(function Dialog(
 
   return (
     <Portal __unstable_name={portalProp}>
-      <Root
+      <StyledDialog
         {...restProps}
         $animate={animate}
         $padding={padding}
@@ -424,7 +424,7 @@ export const Dialog = forwardRef(function Dialog(
           {children}
         </DialogCard>
         <div ref={postDivRef} tabIndex={0} />
-      </Root>
+      </StyledDialog>
     </Portal>
   )
 })

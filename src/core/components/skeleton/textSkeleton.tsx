@@ -5,7 +5,7 @@ import {useArrayProp} from '../../hooks'
 import {ThemeProps, _responsive} from '../../styles'
 import {Skeleton, SkeletonProps} from './skeleton'
 
-const Root = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
+const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
   props: {
     $size: number[]
     $style: ThemeFontKey
@@ -69,7 +69,7 @@ export const TextSkeleton = forwardRef(function TextSkeleton(
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)
 
-  return <Root {...restProps} $size={$size} ref={ref} $style="text" />
+  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="text" />
 })
 TextSkeleton.displayName = 'ForwardRef(TextSkeleton)'
 
@@ -85,7 +85,7 @@ export const LabelSkeleton = forwardRef(function TextSkeleton(
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)
 
-  return <Root {...restProps} $size={$size} ref={ref} $style="label" />
+  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="label" />
 })
 LabelSkeleton.displayName = 'ForwardRef(LabelSkeleton)'
 
@@ -101,7 +101,7 @@ export const HeadingSkeleton = forwardRef(function TextSkeleton(
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)
 
-  return <Root {...restProps} $size={$size} ref={ref} $style="heading" />
+  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="heading" />
 })
 HeadingSkeleton.displayName = 'ForwardRef(HeadingSkeleton)'
 
@@ -117,6 +117,6 @@ export const CodeSkeleton = forwardRef(function TextSkeleton(
   const {size = 2, ...restProps} = props
   const $size = useArrayProp(size)
 
-  return <Root {...restProps} $size={$size} ref={ref} $style="code" />
+  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="code" />
 })
 CodeSkeleton.displayName = 'ForwardRef(CodeSkeleton)'

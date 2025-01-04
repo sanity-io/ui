@@ -16,7 +16,7 @@ export interface CodeProps {
   weight?: string
 }
 
-const Root = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
+const StyledCode = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
 
 /**
  * @public
@@ -30,10 +30,10 @@ export const Code = forwardRef(function Code(
   const registered = language ? Refractor.hasLanguage(language as any) : false
 
   return (
-    <Root data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
+    <StyledCode data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
       {!(language && registered) && <code>{children}</code>}
       {language && registered && <Refractor inline language={language} value={String(children)} />}
-    </Root>
+    </StyledCode>
   )
 })
 Code.displayName = 'ForwardRef(Code)'

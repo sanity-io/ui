@@ -80,7 +80,7 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-const Root = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
+const StyledTextInput = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
 
 const InputRoot = styled.span`
   flex: 1;
@@ -354,7 +354,7 @@ export const TextInput = forwardRef(function TextInput(
   )
 
   return (
-    <Root data-ui="TextInput" tone={rootTheme.tone}>
+    <StyledTextInput data-ui="TextInput" tone={rootTheme.tone}>
       {prefixNode}
 
       <InputRoot>
@@ -382,7 +382,7 @@ export const TextInput = forwardRef(function TextInput(
       </InputRoot>
 
       {suffixNode}
-    </Root>
+    </StyledTextInput>
   )
 })
 TextInput.displayName = 'ForwardRef(TextInput)'

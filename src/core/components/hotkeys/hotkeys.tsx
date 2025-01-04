@@ -15,7 +15,7 @@ export interface HotkeysProps {
   keys?: string[]
 }
 
-const Root = styled.kbd`
+const StyledHotkeys = styled.kbd`
   font: inherit;
   padding: 1px;
 
@@ -47,7 +47,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
   }
 
   return (
-    <Root data-ui="Hotkeys" {...restProps} ref={ref}>
+    <StyledHotkeys data-ui="Hotkeys" {...restProps} ref={ref}>
       <Inline as="span" space={space}>
         {keys.map((key, i) => (
           <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
@@ -55,7 +55,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
           </Key>
         ))}
       </Inline>
-    </Root>
+    </StyledHotkeys>
   )
 })
 Hotkeys.displayName = 'ForwardRef(Hotkeys)'

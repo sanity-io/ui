@@ -34,7 +34,7 @@ function kbdStyle() {
   `
 }
 
-const Root = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
+const StyledKBD = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
 
 /**
  * Used to define some text as keyboard input.
@@ -48,13 +48,13 @@ export const KBD = forwardRef(function KBD(
   const {children, fontSize = 0, padding = 1, radius = 2, ...restProps} = props
 
   return (
-    <Root data-ui="KBD" {...restProps} $radius={useArrayProp(radius)} ref={ref}>
+    <StyledKBD data-ui="KBD" {...restProps} $radius={useArrayProp(radius)} ref={ref}>
       <Box as="span" padding={padding}>
         <Text as="span" size={fontSize} weight="semibold">
           {children}
         </Text>
       </Box>
-    </Root>
+    </StyledKBD>
   )
 })
 KBD.displayName = 'ForwardRef(KBD)'

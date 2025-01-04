@@ -29,7 +29,7 @@ export interface VirtualListProps<Item = any> {
   renderItem?: (item: Item) => React.ReactNode
 }
 
-const Root = styled.div`
+const StyledVirtualList = styled.div`
   position: relative;
 `
 
@@ -159,11 +159,11 @@ export const VirtualList = forwardRef(function VirtualList(
   const wrapperStyle = useMemo(() => ({height}), [height])
 
   return (
-    <Root as={as} data-ui="VirtualList" {...restProps} ref={ref}>
+    <StyledVirtualList as={as} data-ui="VirtualList" {...restProps} ref={ref}>
       <div ref={wrapperRef} style={wrapperStyle}>
         {children}
       </div>
-    </Root>
+    </StyledVirtualList>
   )
 })
 VirtualList.displayName = 'ForwardRef(VirtualList)'

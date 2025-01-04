@@ -35,7 +35,7 @@ export interface BoxProps
   forwardedAs?: React.ElementType | keyof React.JSX.IntrinsicElements
 }
 
-const Root = styled.div<
+const StyledBox = styled.div<
   FlexItemStyleProps &
     ResponsiveBoxStyleProps &
     ResponsiveGridItemStyleProps &
@@ -91,7 +91,7 @@ export const Box = forwardRef(function Box(
   } = props
 
   return (
-    <Root
+    <StyledBox
       data-as={typeof asProp === 'string' ? asProp : undefined}
       data-ui="Box"
       {...restProps}
@@ -124,7 +124,7 @@ export const Box = forwardRef(function Box(
       ref={ref}
     >
       {props.children}
-    </Root>
+    </StyledBox>
   )
 })
 Box.displayName = 'ForwardRef(Box)'

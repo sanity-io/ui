@@ -6,10 +6,9 @@ import {BoxProps, ResponsiveRadiusProps} from '../../primitives'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {skeletonStyle} from './styles'
 
-const Root = styled(Box)<{$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  skeletonStyle,
-)
+const StyledSkeleton = styled(Box)<
+  {$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps
+>(responsiveRadiusStyle, skeletonStyle)
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -46,7 +45,7 @@ export const Skeleton = forwardRef(function Skeleton(
   }, [delay])
 
   return (
-    <Root
+    <StyledSkeleton
       {...restProps}
       $animated={animated}
       $radius={useArrayProp(radius)}

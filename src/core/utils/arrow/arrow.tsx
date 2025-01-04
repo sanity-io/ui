@@ -3,7 +3,7 @@ import {styled, css} from 'styled-components'
 import {useTheme_v2} from '../../theme'
 import {Point, compileCommands, getRoundedCommands} from './cmds'
 
-const Root = styled.div<{$w: number}>(
+const StyledArrow = styled.div<{$w: number}>(
   ({$w: w}) => css`
     position: absolute;
     width: ${w}px;
@@ -108,7 +108,7 @@ export const Arrow = forwardRef(function Arrow(
   const fillPath = `${path} M ${w} -1 M 0 -1 Z`
 
   return (
-    <Root {...restProps} $w={w} ref={ref}>
+    <StyledArrow {...restProps} $w={w} ref={ref}>
       <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`}>
         <mask id="stroke-mask">
           <rect x={0} y={strokeWidth} width={w} height={w} fill="white" />
@@ -116,7 +116,7 @@ export const Arrow = forwardRef(function Arrow(
         <StrokePath d={strokePath} mask="url(#stroke-mask)" strokeWidth={strokeWidth * 2} />
         <ShapePath d={fillPath} />
       </svg>
-    </Root>
+    </StyledArrow>
   )
 })
 Arrow.displayName = 'ForwardRef(Arrow)'

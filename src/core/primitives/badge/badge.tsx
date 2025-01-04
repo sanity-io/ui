@@ -20,7 +20,7 @@ export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
   tone?: BadgeTone
 }
 
-const Root = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
+const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
   responsiveRadiusStyle,
   badgeStyle,
 )
@@ -46,7 +46,7 @@ export const Badge = forwardRef(function Badge(
   } = props
 
   return (
-    <Root
+    <StyledBadge
       data-ui="Badge"
       {...restProps}
       $tone={tone}
@@ -55,7 +55,7 @@ export const Badge = forwardRef(function Badge(
       ref={ref}
     >
       <Text size={fontSize}>{children}</Text>
-    </Root>
+    </StyledBadge>
   )
 })
 Badge.displayName = 'ForwardRef(Badge)'

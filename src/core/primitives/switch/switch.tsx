@@ -15,7 +15,7 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Root = styled.span(switchBaseStyles)
+const StyledSwitch = styled.span(switchBaseStyles)
 const Input = styled.input(switchInputStyles)
 const Representation = styled.span(switchRepresentationStyles)
 const Track = styled.span(switchTrackStyles)
@@ -48,7 +48,7 @@ export const Switch = forwardRef(function Switch(
   }, [indeterminate])
 
   return (
-    <Root className={className} data-ui="Switch" style={style}>
+    <StyledSwitch className={className} data-ui="Switch" style={style}>
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         {...restProps}
@@ -61,7 +61,7 @@ export const Switch = forwardRef(function Switch(
         <Track />
         <Thumb $checked={checked} $indeterminate={indeterminate} />
       </Representation>
-    </Root>
+    </StyledSwitch>
   )
 })
 Switch.displayName = 'ForwardRef(Switch)'

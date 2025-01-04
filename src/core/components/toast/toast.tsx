@@ -40,7 +40,7 @@ const ROLES = {
   info: 'alert',
 } as const
 
-const Root = styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps>(
+const StyledToast = styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps>(
   rootStyles,
 )
 
@@ -60,7 +60,7 @@ export function Toast(
   const role = status ? ROLES[status] : 'status'
 
   return (
-    <Root
+    <StyledToast
       data-ui="Toast"
       role={role}
       {...restProps}
@@ -100,7 +100,7 @@ export function Toast(
           </Box>
         )}
       </Flex>
-    </Root>
+    </StyledToast>
   )
 }
 

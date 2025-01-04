@@ -37,7 +37,7 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   width?: ButtonWidth
 }
 
-const Root = styled.button<
+const StyledButton = styled.button<
   {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps &
     ThemeProps
 >(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
@@ -119,7 +119,7 @@ export const Button = forwardRef(function Button(
   )
 
   return (
-    <Root
+    <StyledButton
       data-ui="Button"
       {...restProps}
       $mode={mode}
@@ -177,7 +177,7 @@ export const Button = forwardRef(function Button(
           {children}
         </Box>
       )}
-    </Root>
+    </StyledButton>
   )
 })
 Button.displayName = 'ForwardRef(Button)'

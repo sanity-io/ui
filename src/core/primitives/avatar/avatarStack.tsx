@@ -39,7 +39,10 @@ function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProp
   })
 }
 
-const Root = styled.div<{$size: AvatarSize[]}>(responsiveAvatarStackSizeStyle, avatarStackStyle)
+const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>(
+  responsiveAvatarStackSizeStyle,
+  avatarStackStyle,
+)
 
 /**
  * @public
@@ -75,7 +78,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
   const visibleChildren = extraCount > 1 ? children.slice(extraCount, len) : children
 
   return (
-    <Root data-ui="AvatarStack" {...restProps} ref={ref} $size={size}>
+    <StyledAvatarStack data-ui="AvatarStack" {...restProps} ref={ref} $size={size}>
       {len === 0 && (
         <div>
           <AvatarCounter count={len} size={size} />
@@ -91,7 +94,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
       {visibleChildren.map((child, childIndex) => (
         <div key={String(childIndex)}>{cloneElement(child, {size})}</div>
       ))}
-    </Root>
+    </StyledAvatarStack>
   )
 })
 AvatarStack.displayName = 'ForwardRef(AvatarStack)'

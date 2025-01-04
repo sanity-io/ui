@@ -4,6 +4,7 @@ import {styled} from 'styled-components'
 import {useArrayProp} from '../../hooks'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
 import {TextAlign} from '../../types'
+import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {labelBaseStyle} from './styles'
 
 /**
@@ -24,20 +25,12 @@ export interface LabelProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div<{
+const StyledLabel = styled.div<{
   $accent?: boolean
   $align: TextAlign[]
   $muted: boolean
   $size: number[]
 }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
-
-const SpanWithTextOverflow = styled.span`
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  overflow: clip;
-`
 
 /**
  * Typographic labels.
@@ -68,7 +61,7 @@ export const Label = forwardRef(function Label(
   }
 
   return (
-    <Root
+    <StyledLabel
       data-ui="Label"
       {...restProps}
       $accent={accent}
@@ -79,7 +72,7 @@ export const Label = forwardRef(function Label(
       ref={ref}
     >
       {children}
-    </Root>
+    </StyledLabel>
   )
 })
 Label.displayName = 'ForwardRef(Label)'

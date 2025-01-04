@@ -8,6 +8,7 @@ import {
   responsiveTextFont,
 } from '../../styles/internal'
 import {TextAlign} from '../../types'
+import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {textBaseStyle} from './styles'
 
 /**
@@ -29,19 +30,11 @@ export interface TextProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div<ResponsiveFontStyleProps>(
+const StyledText = styled.div<ResponsiveFontStyleProps>(
   responsiveTextFont,
   responsiveTextAlignStyle,
   textBaseStyle,
 )
-
-const SpanWithTextOverflow = styled.span`
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  overflow: clip;
-`
 
 /**
  * The `Text` component is an agile, themed typographic element.
@@ -70,7 +63,7 @@ export const Text = forwardRef(function Text(
   }
 
   return (
-    <Root
+    <StyledText
       data-ui="Text"
       {...restProps}
       $accent={accent}
@@ -81,7 +74,7 @@ export const Text = forwardRef(function Text(
       $weight={weight}
     >
       <span>{children}</span>
-    </Root>
+    </StyledText>
   )
 })
 Text.displayName = 'ForwardRef(Text)'

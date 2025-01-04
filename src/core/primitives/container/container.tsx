@@ -11,7 +11,7 @@ import {ResponsiveWidthStyleProps} from './types'
  */
 export interface ContainerProps extends BoxProps, ResponsiveWidthProps {}
 
-const Root = styled(Box)<ResponsiveWidthStyleProps>(
+const StyledContainer = styled(Box)<ResponsiveWidthStyleProps>(
   containerBaseStyle,
   responsiveContainerWidthStyle,
 )
@@ -28,7 +28,7 @@ export const Container = forwardRef(function Container(
   const {as, width = 2, ...restProps} = props
 
   return (
-    <Root
+    <StyledContainer
       data-ui="Container"
       {...restProps}
       $width={useArrayProp(width)}

@@ -30,7 +30,7 @@ export interface AvatarProps {
   title?: string
 }
 
-const Root = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
+const StyledAvatar = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
   avatarStyle.root,
 )
@@ -47,7 +47,7 @@ const InitialsLabel = styled(Label)({
   color: 'inherit',
 })
 
-const Image = styled.svg(avatarStyle.image)
+const AvatarImage = styled.svg(avatarStyle.image)
 
 /**
  * Avatars are used to represent people and other agents (e.g. bots).
@@ -124,7 +124,7 @@ export const Avatar = forwardRef(function Avatar(
   )
 
   return (
-    <Root
+    <StyledAvatar
       as={as}
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Avatar"
@@ -147,7 +147,7 @@ export const Avatar = forwardRef(function Avatar(
       </Arrow>
 
       {!imageFailed && src && (
-        <Image viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
+        <AvatarImage viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
           <defs>
             <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
               <image
@@ -179,7 +179,7 @@ export const Avatar = forwardRef(function Avatar(
             ry={_radius}
             vectorEffect="non-scaling-stroke"
           />
-        </Image>
+        </AvatarImage>
       )}
 
       {(imageFailed || !src) && initials && (
@@ -191,7 +191,7 @@ export const Avatar = forwardRef(function Avatar(
           </Initials>
         </>
       )}
-    </Root>
+    </StyledAvatar>
   )
 })
 Avatar.displayName = 'ForwardRef(Avatar)'

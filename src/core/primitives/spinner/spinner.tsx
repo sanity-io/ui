@@ -21,7 +21,7 @@ const rotate = keyframes`
   }
 `
 
-const Root = styled(Text)`
+const StyledSpinner = styled(Text)`
   & > span > svg {
     animation: ${rotate} 500ms linear infinite;
   }
@@ -37,9 +37,9 @@ export const Spinner = forwardRef(function Spinner(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
-    <Root data-ui="Spinner" {...props} ref={ref}>
+    <StyledSpinner data-ui="Spinner" {...props} ref={ref}>
       <SpinnerIcon />
-    </Root>
+    </StyledSpinner>
   )
 })
 Spinner.displayName = 'ForwardRef(Spinner)'

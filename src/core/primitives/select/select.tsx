@@ -18,7 +18,7 @@ export interface SelectProps {
   customValidity?: string
 }
 
-const Root = styled.div(selectStyle.root)
+const StyledSelect = styled.div(selectStyle.root)
 
 const Input = styled.select<{
   $fontSize: number[]
@@ -60,7 +60,7 @@ export const Select = forwardRef(function Select(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root data-ui="Select">
+    <StyledSelect data-ui="Select">
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-ui="Select"
@@ -80,7 +80,7 @@ export const Select = forwardRef(function Select(
           <ChevronDownIcon />
         </Text>
       </IconBox>
-    </Root>
+    </StyledSelect>
   )
 })
 Select.displayName = 'ForwardRef(Select)'

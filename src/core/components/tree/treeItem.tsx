@@ -30,7 +30,7 @@ export interface TreeItemProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
+const StyledTreeItem = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
 
 const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
 
@@ -147,7 +147,7 @@ export const TreeItem = memo(function TreeItem(
 
   if (href) {
     return (
-      <Root
+      <StyledTreeItem
         data-selected={selected ? '' : undefined}
         data-tree-id={id}
         data-tree-key={itemKey}
@@ -173,12 +173,12 @@ export const TreeItem = memo(function TreeItem(
         <TreeContext.Provider value={contextValue}>
           {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
         </TreeContext.Provider>
-      </Root>
+      </StyledTreeItem>
     )
   }
 
   return (
-    <Root
+    <StyledTreeItem
       data-selected={selected ? '' : undefined}
       data-ui="TreeItem"
       data-tree-id={id}
@@ -198,7 +198,7 @@ export const TreeItem = memo(function TreeItem(
       <TreeContext.Provider value={contextValue}>
         {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}
       </TreeContext.Provider>
-    </Root>
+    </StyledTreeItem>
   )
 })
 TreeItem.displayName = 'Memo(TreeItem)'

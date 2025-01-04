@@ -13,7 +13,7 @@ export interface InlineProps extends Omit<BoxProps, 'display'> {
   space?: number | number[]
 }
 
-const Root = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
+const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
 
 /**
  * The `Inline` component is a layout utility for aligning and spacing items horizontally.
@@ -32,7 +32,7 @@ export const Inline = forwardRef(function Inline(
   )
 
   return (
-    <Root
+    <StyledInline
       data-ui="Inline"
       {...restProps}
       $space={useArrayProp(space)}
@@ -40,7 +40,7 @@ export const Inline = forwardRef(function Inline(
       ref={ref as any}
     >
       {children}
-    </Root>
+    </StyledInline>
   )
 })
 Inline.displayName = 'ForwardRef(Inline)'

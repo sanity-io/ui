@@ -28,7 +28,7 @@ export interface ToastProviderProps {
   zOffset?: number | number[]
 }
 
-const Root = styled(Layer)`
+const StyledToastProvider = styled(Layer)`
   position: fixed;
   top: 0;
   left: 0;
@@ -153,7 +153,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement<any
     <ToastContext.Provider value={value}>
       {children}
       {mounted && (
-        <Root data-ui="ToastProvider" zOffset={zOffset}>
+        <StyledToastProvider data-ui="ToastProvider" zOffset={zOffset}>
           <ToastContainer>
             <Box padding={padding} paddingX={paddingX} paddingY={paddingY}>
               <AnimatePresence initial={false}>
@@ -184,7 +184,7 @@ export function ToastProvider(props: ToastProviderProps): React.ReactElement<any
               </AnimatePresence>
             </Box>
           </ToastContainer>
-        </Root>
+        </StyledToastProvider>
       )}
     </ToastContext.Provider>
   )

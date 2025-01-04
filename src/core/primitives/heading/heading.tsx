@@ -9,6 +9,7 @@ import {
   ResponsiveTextAlignStyleProps,
 } from '../../styles/internal'
 import {TextAlign} from '../../types'
+import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {headingBaseStyle} from './styles'
 import {HeadingStyleProps} from './types'
 
@@ -30,17 +31,9 @@ export interface HeadingProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.div<
+const StyledHeading = styled.div<
   HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
 >(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
-
-const SpanWithTextOverflow = styled.span`
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  overflow: clip;
-`
 
 /**
  * Typographic headings.
@@ -69,7 +62,7 @@ export const Heading = forwardRef(function Heading(
   }
 
   return (
-    <Root
+    <StyledHeading
       data-ui="Heading"
       {...restProps}
       $accent={accent}
@@ -80,7 +73,7 @@ export const Heading = forwardRef(function Heading(
       ref={ref}
     >
       <span>{children}</span>
-    </Root>
+    </StyledHeading>
   )
 })
 Heading.displayName = 'ForwardRef(Heading)'
