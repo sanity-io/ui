@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.18](https://github.com/sanity-io/ui/compare/v2.10.17...v2.10.18) (2025-01-04)
+
+### Bug Fixes
+
+- minify `styled-components` css ([#1544](https://github.com/sanity-io/ui/issues/1544)) ([67262ec](https://github.com/sanity-io/ui/commit/67262ec1f8608ce4a82c4e4112279586304ccaf8))
+
 ## [2.10.17](https://github.com/sanity-io/ui/compare/v2.10.16...v2.10.17) (2025-01-03)
 
 ### Bug Fixes
