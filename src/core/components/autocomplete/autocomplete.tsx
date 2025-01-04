@@ -33,7 +33,7 @@ import {
   TextInput,
 } from '../../primitives'
 import {Radius} from '../../types'
-import {AnimatedSpinnerIcon, ListBox, Root} from './autocomplete.styles'
+import {AnimatedSpinnerIcon, ListBox, StyledAutocomplete} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {
@@ -679,7 +679,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   ])
 
   return (
-    <Root
+    <StyledAutocomplete
       data-ui="Autocomplete"
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
@@ -688,7 +688,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     >
       {input}
       {results}
-    </Root>
+    </StyledAutocomplete>
   )
 })
 

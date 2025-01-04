@@ -5,7 +5,7 @@ import {Box} from '../../primitives'
 /**
  * @internal
  */
-export const Root = styled.div`
+export const StyledAutocomplete = styled.div`
   line-height: 0;
 `
 

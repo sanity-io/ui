@@ -10,7 +10,7 @@ import {
 } from 'react'
 import {useArrayProp, useClickOutsideEvent} from '../../hooks'
 import {Box, Popover, Stack, Text} from '../../primitives'
-import {ExpandButton, Root} from './breadcrumbs.styles'
+import {ExpandButton, StyledBreadcrumbs} from './breadcrumbs.styles'
 
 /**
  * @beta
@@ -81,7 +81,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   }, [collapse, expand, maxLength, open, rawItems, space])
 
   return (
-    <Root data-ui="Breadcrumbs" {...restProps} ref={ref}>
+    <StyledBreadcrumbs data-ui="Breadcrumbs" {...restProps} ref={ref}>
       {items.map((item, itemIndex) => (
         <Fragment key={itemIndex}>
           {itemIndex > 0 && (
@@ -92,7 +92,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
           <Box as="li">{item}</Box>
         </Fragment>
       ))}
-    </Root>
+    </StyledBreadcrumbs>
   )
 })
 Breadcrumbs.displayName = 'ForwardRef(Breadcrumbs)'

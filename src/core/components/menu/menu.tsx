@@ -31,7 +31,7 @@ export interface MenuProps extends ResponsivePaddingProps {
   'onBlurCapture'?: (event: FocusEvent) => void
 }
 
-const Root = styled(Box)`
+const StyledMenu = styled(Box)`
   outline: none;
   overflow: auto;
 `
@@ -159,7 +159,7 @@ export const Menu = forwardRef(function Menu(
 
   return (
     <MenuContext.Provider value={value}>
-      <Root
+      <StyledMenu
         data-ui="Menu"
         {...restProps}
         onKeyDown={handleKeyDown}
@@ -169,7 +169,7 @@ export const Menu = forwardRef(function Menu(
         tabIndex={-1}
       >
         <Stack space={space}>{children}</Stack>
-      </Root>
+      </StyledMenu>
     </MenuContext.Provider>
   )
 })

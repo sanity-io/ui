@@ -1,7 +1,7 @@
 import {styled} from 'styled-components'
 import {Button} from '../../primitives'
 
-export const Root = styled.ol`
+export const StyledBreadcrumbs = styled.ol`
   margin: 0;
   padding: 0;
   display: flex;

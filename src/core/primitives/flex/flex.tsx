@@ -20,7 +20,7 @@ export interface FlexProps
   gap?: number | number[]
 }
 
-const Root = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
+const StyledFlex = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
   flexItemStyle,
   responsiveFlexStyle,
 )
@@ -37,7 +37,7 @@ export const Flex = forwardRef(function Flex(
   const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
 
   return (
-    <Root
+    <StyledFlex
       data-ui="Flex"
       {...restProps}
       $align={useArrayProp(align)}

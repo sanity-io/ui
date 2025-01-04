@@ -20,7 +20,7 @@ interface LayerChildrenProps {
   onActivate?: LayerProps['onActivate']
 }
 
-const Root = styled.div({position: 'relative'})
+const StyledLayer = styled.div({position: 'relative'})
 
 const LayerChildren = forwardRef(function LayerChildren(
   props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
@@ -65,9 +65,15 @@ const LayerChildren = forwardRef(function LayerChildren(
   )
 
   return (
-    <Root {...restProps} data-ui="Layer" onFocus={handleFocus} ref={ref} style={{...style, zIndex}}>
+    <StyledLayer
+      {...restProps}
+      data-ui="Layer"
+      onFocus={handleFocus}
+      ref={ref}
+      style={{...style, zIndex}}
+    >
       {children}
-    </Root>
+    </StyledLayer>
   )
 })
 

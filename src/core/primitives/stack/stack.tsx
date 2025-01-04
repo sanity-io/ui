@@ -12,7 +12,10 @@ export interface StackProps extends BoxProps {
   space?: number | number[]
 }
 
-const Root = styled(Box)<ResponsiveStackSpaceStyleProps>(stackBaseStyle, responsiveStackSpaceStyle)
+const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>(
+  stackBaseStyle,
+  responsiveStackSpaceStyle,
+)
 
 /**
  * The `Stack` component is used to place elements on top of each other.
@@ -26,7 +29,7 @@ export const Stack = forwardRef(function Stack(
   const {as, space, ...restProps} = props
 
   return (
-    <Root
+    <StyledStack
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}

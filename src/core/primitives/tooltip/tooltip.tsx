@@ -78,7 +78,7 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
   animate?: boolean
 }
 
-const Root = styled(Layer)`
+const StyledTooltip = styled(Layer)`
   pointer-events: none;
 `
 
@@ -362,7 +362,7 @@ export const Tooltip = forwardRef(function Tooltip(
   if (disabled) return child
 
   const tooltip = (
-    <Root
+    <StyledTooltip
       data-ui="Tooltip"
       {...restProps}
       ref={setFloating}
@@ -390,7 +390,7 @@ export const Tooltip = forwardRef(function Tooltip(
       >
         {content}
       </TooltipCard>
-    </Root>
+    </StyledTooltip>
   )
 
   const children =

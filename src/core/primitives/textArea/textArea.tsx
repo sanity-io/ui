@@ -32,7 +32,7 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
   weight?: ThemeFontWeightKey
 }
 
-const Root = styled.span(textInputRootStyle)
+const StyledTextArea = styled.span(textInputRootStyle)
 
 const InputRoot = styled.span`
   flex: 1;
@@ -86,7 +86,7 @@ export const TextArea = forwardRef(function TextArea(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root data-ui="TextArea">
+    <StyledTextArea data-ui="TextArea">
       <InputRoot>
         <Input
           data-as="textarea"
@@ -112,7 +112,7 @@ export const TextArea = forwardRef(function TextArea(
           data-tone={rootTheme.tone}
         />
       </InputRoot>
-    </Root>
+    </StyledTextArea>
   )
 })
 TextArea.displayName = 'ForwardRef(TextArea)'

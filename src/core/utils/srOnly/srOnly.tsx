@@ -9,7 +9,7 @@ export interface SrOnlyProps {
   children?: React.ReactNode
 }
 
-const Root = styled.div`
+const StyledSrOnly = styled.div`
   display: block;
   width: 0;
   height: 0;
@@ -28,9 +28,9 @@ export const SrOnly = forwardRef(function SrOnly(
   const {as, children} = props
 
   return (
-    <Root aria-hidden as={as} data-ui="SrOnly" ref={ref}>
+    <StyledSrOnly aria-hidden as={as} data-ui="SrOnly" ref={ref}>
       {children}
-    </Root>
+    </StyledSrOnly>
   )
 })
 SrOnly.displayName = 'ForwardRef(SrOnly)'

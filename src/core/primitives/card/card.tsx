@@ -42,7 +42,7 @@ export interface CardProps
   tone?: CardTone
 }
 
-const Root = styled(Box)<
+const StyledCard = styled(Box)<
   CardStyleProps &
     ResponsiveRadiusStyleProps &
     ResponsiveBorderStyleProps &
@@ -85,7 +85,7 @@ export const Card = forwardRef(function Card(
   // todo: Consider adding the wrapper approach for nested cards in which the tones are not changing, avoid unnecessary ThemeColorProvider
   return (
     <ThemeColorProvider scheme={scheme} tone={tone}>
-      <Root
+      <StyledCard
         data-as={typeof as === 'string' ? as : undefined}
         data-scheme={rootTheme.scheme}
         data-ui="Card"

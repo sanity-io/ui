@@ -12,7 +12,7 @@ export interface CheckboxProps {
   customValidity?: string
 }
 
-const Root = styled.div(checkboxBaseStyles)
+const StyledCheckbox = styled.div(checkboxBaseStyles)
 const Input = styled.input(inputElementStyles)
 
 /**
@@ -51,7 +51,7 @@ export const Checkbox = forwardRef(function Checkbox(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root className={className} data-ui="Checkbox" style={style}>
+    <StyledCheckbox className={className} data-ui="Checkbox" style={style}>
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
@@ -66,7 +66,7 @@ export const Checkbox = forwardRef(function Checkbox(
         <CheckmarkIcon />
         <RemoveIcon />
       </span>
-    </Root>
+    </StyledCheckbox>
   )
 })
 Checkbox.displayName = 'ForwardRef(Checkbox)'

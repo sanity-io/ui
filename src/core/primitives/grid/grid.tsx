@@ -10,7 +10,7 @@ import {ResponsiveGridProps} from '../types'
  */
 export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
 
-const Root = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
+const StyledGrid = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 
 /**
  * The `Grid` component is for building 2-dimensional layers (based on CSS grid).
@@ -25,7 +25,7 @@ export const Grid = forwardRef(function Grid(
     props
 
   return (
-    <Root
+    <StyledGrid
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Grid"
       {...restProps}
@@ -41,7 +41,7 @@ export const Grid = forwardRef(function Grid(
       ref={ref}
     >
       {children}
-    </Root>
+    </StyledGrid>
   )
 })
 Grid.displayName = 'ForwardRef(Grid)'

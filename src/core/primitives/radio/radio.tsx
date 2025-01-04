@@ -10,7 +10,7 @@ export interface RadioProps {
   customValidity?: string
 }
 
-const Root = styled.div(radioBaseStyle)
+const StyledRadio = styled.div(radioBaseStyle)
 const Input = styled.input(inputElementStyle)
 
 /**
@@ -33,7 +33,7 @@ export const Radio = forwardRef(function Radio(
   useCustomValidity(ref, customValidity)
 
   return (
-    <Root className={className} data-ui="Radio" style={style}>
+    <StyledRadio className={className} data-ui="Radio" style={style}>
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
@@ -44,7 +44,7 @@ export const Radio = forwardRef(function Radio(
         type="radio"
       />
       <span />
-    </Root>
+    </StyledRadio>
   )
 })
 Radio.displayName = 'ForwardRef(Radio)'

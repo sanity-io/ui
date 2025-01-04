@@ -45,7 +45,7 @@ function _avatarCounterBaseStyle(props: ThemeProps) {
   `
 }
 
-const Root = styled.div<{$size: AvatarSize[]}>(
+const StyledAvatarCounter = styled.div<{$size: AvatarSize[]}>(
   _responsiveAvatarCounterSizeStyle,
   _avatarCounterBaseStyle,
 )
@@ -83,11 +83,11 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   )
 
   return (
-    <Root $size={size} data-ui="AvatarCounter" ref={ref}>
+    <StyledAvatarCounter $size={size} data-ui="AvatarCounter" ref={ref}>
       <Label as="span" size={fontSize} weight="medium">
         {count}
       </Label>
-    </Root>
+    </StyledAvatarCounter>
   )
 })
 AvatarCounter.displayName = 'ForwardRef(AvatarCounter)'
