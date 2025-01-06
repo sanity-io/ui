@@ -33,8 +33,8 @@ importers:
         specifier: ^11.15.0
         version: 11.15.0(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-compiler-runtime:
-        specifier: 19.0.0-beta-55955c9-20241229
-        version: 19.0.0-beta-55955c9-20241229(react@19.0.0)
+        specifier: 19.0.0-beta-63e3235-20250105
+        version: 19.0.0-beta-63e3235-20250105(react@19.0.0)
       react-refractor:
         specifier: ^2.2.0
         version: 2.2.0(react@19.0.0)
@@ -65,7 +65,7 @@ importers:
         version: 3.4.0
       '@sanity/pkg-utils':
         specifier: ^6.13.0
-        version: 6.13.0(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-55955c9-20241229)(typescript@5.7.2)
+        version: 6.13.0(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-63e3235-20250105)(typescript@5.7.2)
       '@sanity/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@3.4.2)
@@ -160,8 +160,8 @@ importers:
         specifier: ^4.3.4
         version: 4.3.4(vite@5.4.11(@types/node@20.17.11)(terser@5.37.0))
       babel-plugin-react-compiler:
-        specifier: 19.0.0-beta-55955c9-20241229
-        version: 19.0.0-beta-55955c9-20241229
+        specifier: 19.0.0-beta-63e3235-20250105
+        version: 19.0.0-beta-63e3235-20250105
       babel-plugin-styled-components:
         specifier: ^2.1.4
         version: 2.1.4(@babel/core@7.26.0)(styled-components@6.1.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
@@ -196,8 +196,8 @@ importers:
         specifier: ^7.37.3
         version: 7.37.3(eslint@8.57.1)
       eslint-plugin-react-compiler:
-        specifier: 19.0.0-beta-55955c9-20241229
-        version: 19.0.0-beta-55955c9-20241229(eslint@8.57.1)
+        specifier: 19.0.0-beta-63e3235-20250105
+        version: 19.0.0-beta-63e3235-20250105(eslint@8.57.1)
       eslint-plugin-react-hooks:
         specifier: ^5.1.0
         version: 5.1.0(eslint@8.57.1)
@@ -2705,8 +2705,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
 
-  babel-plugin-react-compiler@19.0.0-beta-55955c9-20241229:
-    resolution: {integrity: sha512-APpa9fRiG5UN5kxnB/vznaSBKbXwAWZs6QshN3MLntzWa4cUhOxzUSd7Ohmr5sLQaM0ZHjjOg07pw1ZoR7+Oog==}
+  babel-plugin-react-compiler@19.0.0-beta-63e3235-20250105:
+    resolution: {integrity: sha512-38qEX4e1nNOZ9K7rVAF4VVijcjTHBbRHd+ftYpfim2Oabitd1NGjvrL0bnwFymDTBB4MqswqIHTYjYfuy1OeTQ==}
 
   babel-plugin-styled-components@2.1.4:
     resolution: {integrity: sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==}
@@ -3640,8 +3640,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-compiler@19.0.0-beta-55955c9-20241229:
-    resolution: {integrity: sha512-KsE6bQrNvtPDbMb9EolZ2C+Z2/uv2Y5cAUgN+pzbriXjKlf1FkbgiyE153m2mIT6gEZq2OrtFvX7uJj5IrNQlg==}
+  eslint-plugin-react-compiler@19.0.0-beta-63e3235-20250105:
+    resolution: {integrity: sha512-Smts5x+u+rRopr0926jCXFPkS8D8hFJexDvTW41V0Xu/xHgd4pnGWiJQRBsvTEARzOdJ6NdlmYs4n+O4Thn2iA==}
     engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
     peerDependencies:
       eslint: '>=7'
@@ -6220,8 +6220,8 @@ packages:
     peerDependencies:
       react: ^19.0.0
 
-  react-compiler-runtime@19.0.0-beta-55955c9-20241229:
-    resolution: {integrity: sha512-I8niUyydqnPVMjqsOEfFwiRlWbndSjgwGhbm5GZuKev3b0HAcUAqAoHNIpp0XSHInlwfn4Zvtbva5TLupEOw+Q==}
+  react-compiler-runtime@19.0.0-beta-63e3235-20250105:
+    resolution: {integrity: sha512-ojqSg+8uNvomQKpZT+iPgUPWc/ZqFLt9wnoVSNiwVtX51pZgbcgRJnekSYGv0XuyCXQuy4zCz1IaEW+UXjf/ZQ==}
     peerDependencies:
       react: ^19.0.0
 
@@ -9248,7 +9248,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@sanity/pkg-utils@6.13.0(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-55955c9-20241229)(typescript@5.7.2)':
+  '@sanity/pkg-utils@6.13.0(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-63e3235-20250105)(typescript@5.7.2)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.0)
@@ -9293,7 +9293,7 @@ snapshots:
       zod: 3.24.1
       zod-validation-error: 3.4.0(zod@3.24.1)
     optionalDependencies:
-      babel-plugin-react-compiler: 19.0.0-beta-55955c9-20241229
+      babel-plugin-react-compiler: 19.0.0-beta-63e3235-20250105
     transitivePeerDependencies:
       - '@types/babel__core'
       - '@types/node'
@@ -10451,7 +10451,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-react-compiler@19.0.0-beta-55955c9-20241229:
+  babel-plugin-react-compiler@19.0.0-beta-63e3235-20250105:
     dependencies:
       '@babel/types': 7.26.3
 
@@ -11588,7 +11588,7 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-react-compiler@19.0.0-beta-55955c9-20241229(eslint@8.57.1):
+  eslint-plugin-react-compiler@19.0.0-beta-63e3235-20250105(eslint@8.57.1):
     dependencies:
       '@babel/core': 7.26.0
       '@babel/parser': 7.26.3
@@ -14671,7 +14671,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  react-compiler-runtime@19.0.0-beta-55955c9-20241229(react@19.0.0):
+  react-compiler-runtime@19.0.0-beta-63e3235-20250105(react@19.0.0):
     dependencies:
       react: 19.0.0
 
