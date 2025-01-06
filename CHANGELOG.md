@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.0](https://github.com/sanity-io/ui/compare/v2.10.18...v2.11.0) (2025-01-06)
+
+### Features
+
+- **menu:** allow passing props to menu group child menu ([#1454](https://github.com/sanity-io/ui/issues/1454)) ([3b884e2](https://github.com/sanity-io/ui/commit/3b884e2fe37a8ca6d0fb0d97716778f766c16cc0))
+
+### Bug Fixes
+
+- **deps:** update React Compiler dependencies 🤖 ✨ ([#1545](https://github.com/sanity-io/ui/issues/1545)) ([e0ef70b](https://github.com/sanity-io/ui/commit/e0ef70b14781f2cec3960b333c94785c2855bbe9))
+
 ## [2.10.18](https://github.com/sanity-io/ui/compare/v2.10.17...v2.10.18) (2025-01-04)
 
 ### Bug Fixes
