@@ -16,7 +16,17 @@ export interface MenuGroupProps {
   as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   icon?: React.ElementType | React.ReactNode
-  menu?: MenuProps
+  menu?: Omit<
+    MenuProps,
+    | 'onClickOutside'
+    | 'onEscape'
+    | 'onItemClick'
+    | 'onKeyDown'
+    | 'onMouseEnter'
+    | 'registerElement'
+    | 'shouldFocus'
+    | 'onBlurCapture'
+  >
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: Radius | Radius[]
@@ -131,6 +141,7 @@ export function MenuGroup(
 
   const childMenu = (
     <Menu
+      {...menuProps}
       onClickOutside={onClickOutside}
       onEscape={onEscape}
       onItemClick={handleChildItemClick}
@@ -138,7 +149,6 @@ export function MenuGroup(
       onMouseEnter={handleMenuMouseEnter}
       registerElement={registerElement}
       shouldFocus={shouldFocus}
-      {...menuProps}
     >
       {children}
     </Menu>
