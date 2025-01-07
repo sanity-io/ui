@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://github.com/sanity-io/ui/compare/v2.11.0...v2.11.1) (2025-01-07)
+
+### Bug Fixes
+
+- **deps:** update dependency framer-motion to ^11.16.0 ([#1553](https://github.com/sanity-io/ui/issues/1553)) ([a388818](https://github.com/sanity-io/ui/commit/a388818d36b56de687c4443a3f16c6e5ed2cb9c1))
+- refactor `ReactElement` to `JSX.Element` types ([#1555](https://github.com/sanity-io/ui/issues/1555)) ([a2317c5](https://github.com/sanity-io/ui/commit/a2317c59173a20b7b1e5aadf08d1e71c3f460200))
+
 ## [2.11.0](https://github.com/sanity-io/ui/compare/v2.10.18...v2.11.0) (2025-01-06)
 
 ### Features
