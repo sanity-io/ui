@@ -41,7 +41,7 @@ export interface MenuGroupProps {
 export function MenuGroup(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
     MenuGroupProps,
-): React.ReactElement<any> {
+): React.JSX.Element {
   const {
     as = 'button',
     children,

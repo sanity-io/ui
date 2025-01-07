@@ -68,7 +68,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
     size: sizeProp = 1,
     ...restProps
   } = props
-  const children: React.ReactElement<any>[] = Children.toArray(childrenProp).filter(isValidElement)
+  const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
   const maxLength = Math.max(maxLengthProp, 0)
   const size = useArrayProp(sizeProp)
 

@@ -6,7 +6,7 @@ import {Inline, InlineProps} from '../../primitives'
  * @public
  */
 export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
-  children: Array<React.ReactElement<any> | null | undefined | false>
+  children: Array<React.JSX.Element | null | undefined | false>
 }
 
 //Limits the width of tabs in tablist
@@ -29,7 +29,7 @@ export const TabList = forwardRef(function TabList(
   const {children: childrenProp, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
 
-  const children: React.ReactElement<any>[] = Children.toArray(childrenProp).filter(isValidElement)
+  const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
 
   const tabs = children.map((child, childIndex) =>
     cloneElement(child, {

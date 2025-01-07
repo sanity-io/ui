@@ -81,7 +81,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   const renderPopover: AutocompleteProps['renderPopover'] = useCallback(
     (
       popoverProps: {
-        content: React.ReactElement<any> | null
+        content: React.JSX.Element | null
         hidden: boolean
         inputElement: HTMLInputElement | null
         onMouseEnter: () => void

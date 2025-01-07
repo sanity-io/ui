@@ -21,7 +21,7 @@ export interface PortalProviderProps {
 /**
  * @public
  */
-export function PortalProvider(props: PortalProviderProps): React.ReactElement<any> {
+export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
   const {boundaryElement, children, element, __unstable_elements: elementsProp} = props
   const elements = useUnique(elementsProp)
   const fallbackElement = useSyncExternalStore(

@@ -46,7 +46,7 @@ const ToggleArrowText = styled(Text)`
  */
 export const TreeItem = memo(function TreeItem(
   props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>,
-): React.ReactElement<any> {
+): React.JSX.Element {
   const {
     children,
     expanded: expandedProp = false,

@@ -25,9 +25,9 @@ export interface MenuButtonProps {
    * @deprecated Use `popover={{boundaryElement: element}}` instead.
    */
   boundaryElement?: HTMLElement
-  button: React.ReactElement<any>
+  button: React.JSX.Element
   id: string
-  menu?: React.ReactElement<any>
+  menu?: React.JSX.Element
   onClose?: () => void
   onOpen?: () => void
   /**

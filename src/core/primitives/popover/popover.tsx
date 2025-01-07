@@ -59,7 +59,7 @@ export interface PopoverProps
   arrow?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
-  children?: React.ReactElement<any>
+  children?: React.JSX.Element
   /**
    * When `true`, prevent overflow within the current boundary:
    * - by flipping on its side axis
@@ -117,7 +117,7 @@ export const Popover = memo(
     props: PopoverProps &
       Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
-  ): React.ReactElement<any> {
+  ): React.JSX.Element {
     const {container, layer} = useTheme_v2()
     const boundaryElementContext = useBoundaryElement()
 
@@ -449,7 +449,7 @@ Popover.displayName = 'Memo(ForwardRef(Popover))'
 // https://github.com/facebook/react/pull/28348
 //
 // Access the ref using the method that doesn't yield a warning.
-function getElementRef(element: React.ReactElement<any>) {
+function getElementRef(element: React.JSX.Element) {
   // React <=18 in DEV
   let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
   let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning

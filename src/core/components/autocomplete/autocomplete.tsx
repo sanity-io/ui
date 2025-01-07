@@ -6,7 +6,6 @@ import {
   HTMLProps,
   KeyboardEvent,
   MouseEvent,
-  ReactElement,
   ReactNode,
   Ref,
   cloneElement,
@@ -73,11 +72,11 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   /** @beta */
   relatedElements?: HTMLElement[]
   /** The callback function for rendering each option. */
-  renderOption?: (option: Option) => ReactElement<any>
+  renderOption?: (option: Option) => React.JSX.Element
   /** @beta */
   renderPopover?: (
     props: {
-      content: ReactElement<any> | null
+      content: React.JSX.Element | null
       hidden: boolean
       inputElement: HTMLInputElement | null
       onMouseEnter: () => void
@@ -726,4 +725,4 @@ export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocomplet
     > & {
       ref?: Ref<HTMLInputElement>
     },
-) => ReactElement<any>
+) => React.JSX.Element

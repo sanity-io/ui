@@ -4,7 +4,7 @@ import {forwardRef} from 'react'
 const CustomLink = forwardRef(function CustomLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
   ref: React.ForwardedRef<HTMLAnchorElement>,
-): React.ReactElement<any> {
+): React.JSX.Element {
   const {children, req, ...restProps} = props
 
   return (
