@@ -13,7 +13,6 @@ import {
   ThemeColorInputModeKey,
 } from '@sanity/ui/theme'
 import {buildTheme} from '@sanity/ui/theme'
-import {ReactElement} from 'react'
 import {rem} from '../../../styles'
 import {useTheme_v2} from '../../useTheme'
 import {getCSSProps} from './helpers'
@@ -21,7 +20,7 @@ import {Root} from './Root'
 
 const theme = buildTheme()
 
-export default function BuildStory(): ReactElement<any> {
+export default function BuildStory(): React.JSX.Element {
   return (
     <Root>
       <div

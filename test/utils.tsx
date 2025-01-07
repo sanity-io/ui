@@ -5,7 +5,7 @@ import {
   RenderOptions as _TestRenderOptions,
   RenderResult,
 } from '@testing-library/react'
-import {StrictMode, Fragment, ReactElement, ReactNode} from 'react'
+import {StrictMode, Fragment, ReactNode} from 'react'
 
 export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ThemeColorSchemeKey
@@ -19,7 +19,7 @@ function DefaultWrapper({children}: {children?: ReactNode}) {
 }
 
 export function render(
-  rootElement: ReactElement<any>,
+  rootElement: React.JSX.Element,
   options: TestRenderOptions = {},
 ): RenderResult {
   const {

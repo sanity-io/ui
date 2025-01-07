@@ -1,4 +1,4 @@
-import {ForwardedRef, HTMLProps, ReactElement, forwardRef} from 'react'
+import {ForwardedRef, HTMLProps, forwardRef} from 'react'
 import {styled, css} from 'styled-components'
 import {useTheme_v2} from '../../theme'
 import {Point, compileCommands, getRoundedCommands} from './cmds'
@@ -68,7 +68,7 @@ export const Arrow = forwardRef(function Arrow(
     'width' | 'height'
   >,
   ref: ForwardedRef<HTMLDivElement>,
-): ReactElement<any> {
+): React.JSX.Element {
   const {width: w, height: h, radius = 0, ...restProps} = props
   const {card} = useTheme_v2()
   const strokeWidth = card.shadow.outline

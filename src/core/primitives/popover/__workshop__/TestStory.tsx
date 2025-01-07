@@ -1,5 +1,5 @@
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import {ReactElement, useRef, useState} from 'react'
+import {useRef, useState} from 'react'
 import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
@@ -12,7 +12,7 @@ import {Text} from '../../text'
 import {Popover} from '../popover'
 import {PopoverUpdateCallback} from '../types'
 
-export default function TestStory(): ReactElement<any> {
+export default function TestStory(): React.JSX.Element {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 

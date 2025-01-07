@@ -9,7 +9,7 @@ export interface TreeGroupProps {
 export const TreeGroup = memo(function TreeGroup(
   props: TreeGroupProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-): React.ReactElement<any> {
+): React.JSX.Element {
   const {children, expanded = false, ...restProps} = props
   const tree = useTree()
 
