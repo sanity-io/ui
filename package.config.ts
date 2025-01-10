@@ -8,7 +8,6 @@ export default defineConfig({
       'ae-missing-release-tag': 'warn',
     },
   },
-  legacyExports: true,
   strictOptions: {
     // disable warning when not using browserslist in package.json
     noImplicitBrowsersList: 'off',
