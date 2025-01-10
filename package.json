@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "2.11.1",
+  "version": "2.11.2-canary.0",
   "keywords": [
     "sanity",
     "ui",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": false,
+  "type": "commonjs",
   "exports": {
     ".": {
       "source": "./exports/index.ts",
@@ -36,7 +37,7 @@
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
-  "module": "./dist/index.esm.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -48,8 +49,7 @@
   "files": [
     "dist",
     "exports",
-    "src",
-    "theme.js"
+    "src"
   ],
   "scripts": {
     "build": "run-s clean pkg:build pkg:check figma:pkg:build",
@@ -122,7 +122,7 @@
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@juggle/resize-observer": "^3.4.0",
-    "@sanity/pkg-utils": "^6.13.1",
+    "@sanity/pkg-utils": "^7.0.1",
     "@sanity/prettier-config": "^1.0.3",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^2.0.21",
@@ -147,7 +147,7 @@
     "@types/jest": "^29.5.14",
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.12.7",
-    "@types/react": "^19.0.3",
+    "@types/react": "^19.0.4",
     "@types/react-dom": "^19.0.2",
     "@types/react-is": "^19.0.0",
     "@types/refractor": "^3.4.1",
@@ -188,7 +188,7 @@
     "storybook": "^8.4.7",
     "styled-components": "^6.1.14",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "5.7.2",
+    "typescript": "5.7.3",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
   },
