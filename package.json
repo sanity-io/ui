@@ -188,7 +188,7 @@
     "storybook": "^8.4.7",
     "styled-components": "^6.1.14",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "5.7.2",
+    "typescript": "5.7.3",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
   },
