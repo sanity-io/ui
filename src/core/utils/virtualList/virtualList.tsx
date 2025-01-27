@@ -69,18 +69,12 @@ export const VirtualList = forwardRef(function VirtualList(
     }
   }, [renderItem])
 
-  useEffect(() => {
+  useEffect((): (() => void) | undefined => {
     if (!ref.current) return
 
-    let _scrollEl = ref.current.parentNode
+    const scrollEl = findScrollable(ref.current.parentNode)
 
-    while (_scrollEl && !_isScrollable(_scrollEl)) {
-      _scrollEl = _scrollEl.parentNode
-    }
-
-    if (_scrollEl) {
-      const scrollEl = _scrollEl
-
+    if (scrollEl) {
       if (!(scrollEl instanceof HTMLElement)) return
 
       const handleScroll = () => {
@@ -167,3 +161,13 @@ export const VirtualList = forwardRef(function VirtualList(
   )
 })
 VirtualList.displayName = 'ForwardRef(VirtualList)'
+
+function findScrollable(parentNode: ParentNode | null) {
+  let _scrollEl = parentNode
+
+  while (_scrollEl && !_isScrollable(_scrollEl)) {
+    _scrollEl = _scrollEl.parentNode
+  }
+
+  return _scrollEl
+}
