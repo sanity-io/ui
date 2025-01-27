@@ -64,8 +64,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0
       '@sanity/pkg-utils':
-        specifier: ^6.13.1
-        version: 6.13.1(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(typescript@5.7.3)
+        specifier: ^6.13.4
+        version: 6.13.4(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(typescript@5.7.3)
       '@sanity/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@3.4.2)
@@ -1793,8 +1793,8 @@ packages:
     peerDependencies:
       react: ^19.0.0
 
-  '@sanity/pkg-utils@6.13.1':
-    resolution: {integrity: sha512-GpNDSuEeywpL/utOMxxE6e5lEv2HMyosaAnyomJ+x9yMgR2NqUu2VG+Ji1bHEl+QPYWSwRxSWa7HUNCitRK9og==}
+  '@sanity/pkg-utils@6.13.4':
+    resolution: {integrity: sha512-m4x0qyu2wiUHKuVxy/B2kcQRh20RvsyvUlUjPbiM5ENt4hwpJPLFfxtPe53GOCf3NJfcSK/te4yQkMOyL8RzAA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -2802,8 +2802,8 @@ packages:
   browser-assert@1.2.1:
     resolution: {integrity: sha512-nfulgvOR6S4gt9UKCeGJOuSGBPGiFT6oQ/2UBnvTY/5aQ1PnksW72fhZkM30DzoRRv2WpwZf1vHHEr3mtuXIWQ==}
 
-  browserslist@4.24.3:
-    resolution: {integrity: sha512-1CPmv8iobE2fyRMV97dAcMVegvvWKxmq94hkLiAkUGwKVTyDLw33K+ZxiFrREKmmps4rIw6grcCFCnTMSZ/YiA==}
+  browserslist@4.24.4:
+    resolution: {integrity: sha512-KDi1Ny1gSePi1vm0q4oxSF8b4DR44GF4BbmS2YdhPLOEqd8pDviZOGH/GsmRwoWJ2+5Lr085X7naowMwKHDG1A==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -7617,7 +7617,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.26.3
       '@babel/helper-validator-option': 7.25.9
-      browserslist: 4.24.3
+      browserslist: 4.24.4
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -9248,7 +9248,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@sanity/pkg-utils@6.13.1(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(typescript@5.7.3)':
+  '@sanity/pkg-utils@6.13.4(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(typescript@5.7.3)':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.0)
@@ -9264,7 +9264,7 @@ snapshots:
       '@rollup/plugin-replace': 6.0.2(rollup@4.30.1)
       '@rollup/plugin-terser': 0.4.4(rollup@4.30.1)
       '@sanity/browserslist-config': 1.0.5
-      browserslist: 4.24.3
+      browserslist: 4.24.4
       cac: 6.7.14
       chalk: 4.1.2
       chokidar: 4.0.3
@@ -10601,12 +10601,12 @@ snapshots:
 
   browser-assert@1.2.1: {}
 
-  browserslist@4.24.3:
+  browserslist@4.24.4:
     dependencies:
       caniuse-lite: 1.0.30001690
       electron-to-chromium: 1.5.76
       node-releases: 2.0.19
-      update-browserslist-db: 1.1.1(browserslist@4.24.3)
+      update-browserslist-db: 1.1.1(browserslist@4.24.4)
 
   bser@2.1.1:
     dependencies:
@@ -10949,7 +10949,7 @@ snapshots:
 
   core-js-compat@3.39.0:
     dependencies:
-      browserslist: 4.24.3
+      browserslist: 4.24.4
 
   core-js@2.6.12: {}
 
@@ -15866,9 +15866,9 @@ snapshots:
 
   untildify@4.0.0: {}
 
-  update-browserslist-db@1.1.1(browserslist@4.24.3):
+  update-browserslist-db@1.1.1(browserslist@4.24.4):
     dependencies:
-      browserslist: 4.24.3
+      browserslist: 4.24.4
       escalade: 3.2.0
       picocolors: 1.1.1
 
