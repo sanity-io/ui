@@ -30,6 +30,7 @@ import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import type {Placement} from '../../types'
 import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
+import {getElementRef} from '../../utils/getElementRef'
 import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -320,11 +321,6 @@ export const Tooltip = forwardRef(function Tooltip(
     [refs],
   )
 
-  const childRef = useRef<HTMLElement | null>(null)
-
-  // Merge refs so that any ref we are overriding is called as well
-  useImperativeHandle((childProp as any)?.ref, () => childRef.current)
-
   const child = useMemo(() => {
     if (!childProp) return null
 
@@ -335,7 +331,7 @@ export const Tooltip = forwardRef(function Tooltip(
       onMouseLeave: handleMouseLeave,
       onClick: handleClick,
       onContextMenu: handleContextMenu,
-      ref: childRef,
+      ref: setReferenceElement,
     })
   }, [
     childProp,
@@ -349,13 +345,9 @@ export const Tooltip = forwardRef(function Tooltip(
 
   // If there's a child then we need to set the reference element to the cloned child ref
   // and if child changes we make sure to update or remove the reference element.
-  useEffect(() => {
-    if (!child) return undefined
-
-    setReferenceElement(childRef.current)
-
-    return () => setReferenceElement(null)
-  }, [child])
+  useImperativeHandle(childProp ? getElementRef(childProp) : null, () => referenceElement, [
+    referenceElement,
+  ])
 
   if (!child) return <></>
 
