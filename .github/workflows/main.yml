@@ -105,10 +105,10 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           # Make sure the value of GITHUB_TOKEN will not be persisted in repo's config
           persist-credentials: false
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - run: corepack enable && pnpm --version
       - run: pnpm install
       # Branches that will release new versions are defined in .releaserc.json
       - run: pnpm exec semantic-release
