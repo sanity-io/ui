@@ -7,4 +7,5 @@ dist
 etc
 node_modules
 storybook-static
+_visual-editing.js
 theme.js
