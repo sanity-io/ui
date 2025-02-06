@@ -20,6 +20,9 @@ importers:
       '@floating-ui/react-dom':
         specifier: ^2.1.2
         version: 2.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@juggle/resize-observer':
+        specifier: ^3.4.0
+        version: 3.4.0
       '@sanity/color':
         specifier: ^3.0.6
         version: 3.0.6
@@ -60,9 +63,6 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.7.1
         version: 19.7.1
-      '@juggle/resize-observer':
-        specifier: ^3.4.0
-        version: 3.4.0
       '@sanity/pkg-utils':
         specifier: ^6.13.4
         version: 6.13.4(@types/babel__core@7.20.5)(@types/node@20.17.11)(babel-plugin-react-compiler@19.0.0-beta-714736e-20250131)(typescript@5.7.3)
