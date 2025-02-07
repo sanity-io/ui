@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.0](https://github.com/sanity-io/ui/compare/v2.11.10...v2.12.0) (2025-02-07)
+
+### Features
+
+- add internal export for visual editing ([b766674](https://github.com/sanity-io/ui/commit/b766674446b06f4315e6a3544f1720a0f394850f))
+
+### Bug Fixes
+
+- lazy load refractor ([783942a](https://github.com/sanity-io/ui/commit/783942ab82e732a4e258e0d35dff44d0e5d16ca1))
+
 ## [2.11.10](https://github.com/sanity-io/ui/compare/v2.11.9...v2.11.10) (2025-02-07)
 
 ### Bug Fixes
