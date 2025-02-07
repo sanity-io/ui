@@ -198,7 +198,7 @@
     "react-is": "^18 || >=19.0.0-0",
     "styled-components": "^5.2 || ^6"
   },
-  "packageManager": "pnpm@9.15.5",
+  "packageManager": "pnpm@10.2.1",
   "engines": {
     "node": ">=14.0.0"
   },
