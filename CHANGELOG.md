@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.2](https://github.com/sanity-io/ui/compare/v2.12.1...v2.12.2) (2025-02-07)
+
+### Bug Fixes
+
+- **theme:** "upgrade" v2 colors to v2.9 format ([#1479](https://github.com/sanity-io/ui/issues/1479)) ([6211de7](https://github.com/sanity-io/ui/commit/6211de701291719b90c65df5a8f5de680d951878))
+
 ## [2.12.1](https://github.com/sanity-io/ui/compare/v2.12.0...v2.12.1) (2025-02-07)
 
 ### Bug Fixes
