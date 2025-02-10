@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.3](https://github.com/sanity-io/ui/compare/v2.12.2...v2.12.3) (2025-02-10)
+
+### Bug Fixes
+
+- **deps:** update React Compiler dependencies 🤖 ✨ ([#1595](https://github.com/sanity-io/ui/issues/1595)) ([e2ea093](https://github.com/sanity-io/ui/commit/e2ea0930a46ee25738c87138692ad49ee708750d))
+
 ## [2.12.2](https://github.com/sanity-io/ui/compare/v2.12.1...v2.12.2) (2025-02-07)
 
 ### Bug Fixes
