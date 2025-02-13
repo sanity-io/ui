@@ -449,5 +449,5 @@ function useCloseOnMouseLeave({
     window.addEventListener('mousemove', handleMouseMove)
 
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [onMouseMove, showTooltip])
+  }, [showTooltip])
 }

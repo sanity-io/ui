@@ -177,7 +177,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-compiler": "19.0.0-beta-30d8a17-20250209",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-hooks": "experimental",
     "eslint-plugin-storybook": "^0.11.2",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",

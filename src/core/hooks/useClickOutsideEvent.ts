@@ -66,7 +66,7 @@ export function useClickOutsideEvent(
     return () => {
       document.removeEventListener('mousedown', handleEvent)
     }
-  }, [hasListener, onEvent])
+  }, [hasListener])
 
   useDebugValue(listener ? 'MouseDown On' : 'MouseDown Off')
 }

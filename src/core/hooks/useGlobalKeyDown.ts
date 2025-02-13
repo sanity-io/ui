@@ -13,5 +13,5 @@ export function useGlobalKeyDown(onKeyDown: (event: KeyboardEvent) => void): voi
     window.addEventListener('keydown', handler)
 
     return () => window.removeEventListener('keydown', handler)
-  }, [handleKeyDown])
+  }, [])
 }
