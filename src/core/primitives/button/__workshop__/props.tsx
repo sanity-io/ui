@@ -9,6 +9,7 @@ import {
   WORKSHOP_ICON_SYMBOL_OPTIONS,
   WORKSHOP_TEXT_SIZE_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
+  WORKSHOP_TEXT_WEIGHT_OPTIONS,
 } from '../../../__workshop__/constants'
 
 export default function ButtonStory() {
@@ -26,6 +27,8 @@ export default function ButtonStory() {
   const textAlign =
     useSelect('Text align', WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS, undefined, 'Props') || undefined
   const textProp = useText('Text', 'Label', 'Props')
+  const textWeight =
+    useSelect('Text weight', WORKSHOP_TEXT_WEIGHT_OPTIONS, '', 'Props') || undefined
 
   return (
     <Flex align="center" height="fill" justify="center">
@@ -43,6 +46,7 @@ export default function ButtonStory() {
         space={space}
         textAlign={textAlign}
         text={textProp}
+        textWeight={textWeight}
         tone={tone}
       />
     </Flex>

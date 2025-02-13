@@ -265,10 +265,11 @@ export const WORKSHOP_TEXT_SIZE_OPTIONS = {
 }
 
 export const WORKSHOP_TEXT_WEIGHT_OPTIONS: {[key: string]: ThemeFontWeightKey | ''} = {
-  Regular: '',
-  Medium: 'medium',
-  Semibold: 'semibold',
-  Bold: 'bold',
+  '(none)': '',
+  'Regular': 'regular',
+  'Medium': 'medium',
+  'Semibold': 'semibold',
+  'Bold': 'bold',
 }
 
 export const WORKSHOP_TOAST_STATUS_OPTIONS: {

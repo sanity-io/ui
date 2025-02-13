@@ -1,3 +1,4 @@
+import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
@@ -29,9 +30,10 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   loading?: boolean
   selected?: boolean
   space?: number | number[]
-  textAlign?: ButtonTextAlign
   muted?: boolean
   text?: React.ReactNode
+  textAlign?: ButtonTextAlign
+  textWeight?: ThemeFontWeightKey
   tone?: ButtonTone
   type?: 'button' | 'reset' | 'submit'
   width?: ButtonWidth
@@ -85,6 +87,7 @@ export const Button = forwardRef(function Button(
     space: spaceProp = 3,
     text,
     textAlign,
+    textWeight,
     tone = 'default',
     type = 'button',
     muted = false,
@@ -155,7 +158,7 @@ export const Button = forwardRef(function Button(
                   align={textAlign}
                   size={fontSize}
                   textOverflow="ellipsis"
-                  weight={button.textWeight}
+                  weight={textWeight ?? button.textWeight}
                 >
                   {text}
                 </Text>
