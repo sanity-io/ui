@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.0](https://github.com/sanity-io/ui/compare/v2.12.4...v2.13.0) (2025-02-13)
+
+### Features
+
+- **button:** add `textWeight` property ([d5a9672](https://github.com/sanity-io/ui/commit/d5a9672e2bf529537e68285e1e1bdc348cadb8a8))
+
 ## [2.12.4](https://github.com/sanity-io/ui/compare/v2.12.3...v2.12.4) (2025-02-13)
 
 ### Bug Fixes
