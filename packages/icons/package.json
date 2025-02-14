@@ -131,7 +131,6 @@
     "react-dom": "^19.0.0",
     "react-is": "^19.0.0",
     "rimraf": "^6.0.1",
-    "semantic-release": "^24.2.2",
     "styled-components": "^6.1.15",
     "typescript": "5.7.3"
   },
@@ -147,5 +146,10 @@
   },
   "esm.sh": {
     "bundle": false
+  },
+  "pnpm": {
+    "overrides": {
+      "conventional-changelog-conventionalcommits": ">= 8.0.0"
+    }
   }
 }
