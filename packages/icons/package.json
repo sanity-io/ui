@@ -138,7 +138,7 @@
   "peerDependencies": {
     "react": "^18.3 || ^19.0.0-0"
   },
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@9.15.5",
   "engines": {
     "node": ">=14.0.0"
   },
