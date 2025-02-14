@@ -38,7 +38,6 @@ jobs:
         with:
           cache: pnpm
           node-version: ${{ matrix.node-version }}
-      - run: corepack enable && pnpm --version
       - run: pnpm install
       - run: pnpm build
       - run: pnpm lint
@@ -70,7 +69,6 @@ jobs:
         with:
           cache: pnpm
           node-version: lts/*
-      - run: corepack enable && pnpm --version
       - run: pnpm install --loglevel=error
       # Branches that will release new versions are defined in .releaserc.json
       - run: pnpm exec semantic-release
