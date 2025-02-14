@@ -96,6 +96,7 @@ import {EnvelopeIcon} from './envelopeIcon'
 import {EqualIcon} from './equalIcon'
 import {ErrorFilledIcon} from './errorFilledIcon'
 import {ErrorOutlineIcon} from './errorOutlineIcon'
+import {ErrorScreenIcon} from './errorScreenIcon'
 import {ExpandIcon} from './expandIcon'
 import {EyeClosedIcon} from './eyeClosedIcon'
 import {EyeOpenIcon} from './eyeOpenIcon'
@@ -195,6 +196,8 @@ import {TerminalIcon} from './terminalIcon'
 import {TextIcon} from './textIcon'
 import {ThLargeIcon} from './thLargeIcon'
 import {ThListIcon} from './thListIcon'
+import {ThumbsDownIcon} from './thumbsDownIcon'
+import {ThumbsUpIcon} from './thumbsUpIcon'
 import {TiersIcon} from './tiersIcon'
 import {TimelineIcon} from './timelineIcon'
 import {ToggleArrowRightIcon} from './toggleArrowRightIcon'
@@ -318,6 +321,7 @@ export type IconSymbol =
   | 'equal'
   | 'error-filled'
   | 'error-outline'
+  | 'error-screen'
   | 'expand'
   | 'eye-closed'
   | 'eye-open'
@@ -417,6 +421,8 @@ export type IconSymbol =
   | 'text'
   | 'th-large'
   | 'th-list'
+  | 'thumbs-down'
+  | 'thumbs-up'
   | 'tiers'
   | 'timeline'
   | 'toggle-arrow-right'
@@ -537,6 +543,7 @@ export {
   EqualIcon,
   ErrorFilledIcon,
   ErrorOutlineIcon,
+  ErrorScreenIcon,
   ExpandIcon,
   EyeClosedIcon,
   EyeOpenIcon,
@@ -636,6 +643,8 @@ export {
   TextIcon,
   ThLargeIcon,
   ThListIcon,
+  ThumbsDownIcon,
+  ThumbsUpIcon,
   TiersIcon,
   TimelineIcon,
   ToggleArrowRightIcon,
@@ -760,6 +769,7 @@ export interface IconMap {
   'equal': IconComponent
   'error-filled': IconComponent
   'error-outline': IconComponent
+  'error-screen': IconComponent
   'expand': IconComponent
   'eye-closed': IconComponent
   'eye-open': IconComponent
@@ -859,6 +869,8 @@ export interface IconMap {
   'text': IconComponent
   'th-large': IconComponent
   'th-list': IconComponent
+  'thumbs-down': IconComponent
+  'thumbs-up': IconComponent
   'tiers': IconComponent
   'timeline': IconComponent
   'toggle-arrow-right': IconComponent
@@ -983,6 +995,7 @@ export const icons: IconMap = {
   'equal': EqualIcon,
   'error-filled': ErrorFilledIcon,
   'error-outline': ErrorOutlineIcon,
+  'error-screen': ErrorScreenIcon,
   'expand': ExpandIcon,
   'eye-closed': EyeClosedIcon,
   'eye-open': EyeOpenIcon,
@@ -1082,6 +1095,8 @@ export const icons: IconMap = {
   'text': TextIcon,
   'th-large': ThLargeIcon,
   'th-list': ThListIcon,
+  'thumbs-down': ThumbsDownIcon,
+  'thumbs-up': ThumbsUpIcon,
   'tiers': TiersIcon,
   'timeline': TimelineIcon,
   'toggle-arrow-right': ToggleArrowRightIcon,
