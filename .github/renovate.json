@@ -8,5 +8,6 @@
       "semanticCommitType": "fix",
       "rangeStrategy": "bump"
     }
-  ]
+  ],
+  "ignoreDeps": ["framer-motion"]
 }
