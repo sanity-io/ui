@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.1](https://github.com/sanity-io/ui/compare/v2.13.0...v2.13.1) (2025-02-15)
+
+### Bug Fixes
+
+- pin framer-motion ([#1604](https://github.com/sanity-io/ui/issues/1604)) ([72f75c3](https://github.com/sanity-io/ui/commit/72f75c302908542d9eeabcb7f02013b65095178b))
+
 ## [2.13.0](https://github.com/sanity-io/ui/compare/v2.12.4...v2.13.0) (2025-02-13)
 
 ### Features
