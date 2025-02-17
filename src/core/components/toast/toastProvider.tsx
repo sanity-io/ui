@@ -57,6 +57,12 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const prefersReducedMotion = usePrefersReducedMotion()
   const variants = useMemo<Variants>(
     () => ({
+      /**
+       * These variants makes use of special timing, by using a negative opacity as a starting position,
+       * as well as double opacity as the end position.
+       * The purpose of this is to make the tooltip/popover container appear before the content, and when exiting
+       * we want the content to disappear faster than the container.
+       */
       initial: {
         opacity: 0,
         [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: -1,

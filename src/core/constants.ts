@@ -25,8 +25,15 @@ export const POPOVER_MOTION_PROPS: {
   exit: Variant
   transition: Transition
 } = {
+  /**
+   * These variants makes use of special timing, by using a negative opacity as a starting position,
+   * as well as double opacity as the end position.
+   * The purpose of this is to make the tooltip/popover container appear before the content, and when exiting
+   * we want the content to disappear faster than the container.
+   */
   initial: {
     opacity: 0.5,
+    // the nagative opacity here, as well as the double opacity further down, are to make the content appear after the backgdrop, and when exiting the content should disappear first.
     [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: -1,
     scale: 0.97,
     willChange: 'transform',
