@@ -27,8 +27,8 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6
       '@sanity/icons':
-        specifier: ^3.5.7
-        version: 3.5.7(react@19.0.0)
+        specifier: ^3.6.0
+        version: 3.6.0(react@19.0.0)
       csstype:
         specifier: ^3.1.3
         version: 3.1.3
@@ -74,7 +74,7 @@ importers:
         version: 5.0.0(semantic-release@24.2.2(typescript@5.7.3))
       '@sanity/ui-workshop':
         specifier: ^2.0.27
-        version: 2.0.27(@sanity/icons@3.5.7(react@19.0.0))(@sanity/ui@)(@types/node@20.17.11)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)
+        version: 2.0.27(@sanity/icons@3.6.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.11)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)
       '@storybook/addon-a11y':
         specifier: ^8.5.5
         version: 8.5.5(storybook@8.5.5(prettier@3.5.0))
@@ -200,7 +200,7 @@ importers:
         version: 19.0.0-beta-30d8a17-20250209(eslint@8.57.1)
       eslint-plugin-react-hooks:
         specifier: experimental
-        version: 0.0.0-experimental-f83903bf-20250212(eslint@8.57.1)
+        version: 0.0.0-experimental-e670e72f-20250214(eslint@8.57.1)
       eslint-plugin-storybook:
         specifier: ^0.11.2
         version: 0.11.2(eslint@8.57.1)(typescript@5.7.3)
@@ -1787,8 +1787,8 @@ packages:
     resolution: {integrity: sha512-2TjYEvOftD0v7ukx3Csdh9QIu44P2z7NDJtlC3qITJRYV36J7R6Vfd3trVhFnN77/7CZrGjqngrtohv8VqO5nw==}
     engines: {node: '>=18.0.0'}
 
-  '@sanity/icons@3.5.7':
-    resolution: {integrity: sha512-Gdqh1Cst/GL2RF23Ztx14hFEOBltK7PYMDHTi83TQ4Vq2/W0rhhMTVlaAopb4MgnUBwzISHRLD85SuvDMi9SuA==}
+  '@sanity/icons@3.6.0':
+    resolution: {integrity: sha512-GFSJiDYW5eEKnkedz7J+RQDcjcG6UBL1DzrXdddRD+CI9IKBDSBTrfnw9qjZbi6R5NeXXRBCTnKW34rOCAocpw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^19.0.0
@@ -3662,8 +3662,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-hooks@0.0.0-experimental-f83903bf-20250212:
-    resolution: {integrity: sha512-Gocp51zTs74zTaeqrqD+DZkM88+JoQNoMZ4+Q/vfnTH9vpuaTpU7gn4lwcIoden5Kw28khGiNRgGptRD7uIeMg==}
+  eslint-plugin-react-hooks@0.0.0-experimental-e670e72f-20250214:
+    resolution: {integrity: sha512-7l2ckiWo7h/oSmADrVT31se3mKMIu3R9mD3V8vk5p+C/tk4vWmxUaH3J2SXJTKyxl4fAXeCOnD1OlvJGxixaQg==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -9253,7 +9253,7 @@ snapshots:
 
   '@sanity/color@3.0.6': {}
 
-  '@sanity/icons@3.5.7(react@19.0.0)':
+  '@sanity/icons@3.6.0(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -9325,9 +9325,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.0.27(@sanity/icons@3.5.7(react@19.0.0))(@sanity/ui@)(@types/node@20.17.11)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)':
+  '@sanity/ui-workshop@2.0.27(@sanity/icons@3.6.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.11)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.37.0)':
     dependencies:
-      '@sanity/icons': 3.5.7(react@19.0.0)
+      '@sanity/icons': 3.6.0(react@19.0.0)
       '@sanity/ui': 'link:'
       '@vitejs/plugin-react': 4.3.4(vite@6.0.11(@types/node@20.17.11)(jiti@2.4.2)(terser@5.37.0))
       axe-core: 4.10.2
@@ -11621,7 +11621,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-f83903bf-20250212(eslint@8.57.1):
+  eslint-plugin-react-hooks@0.0.0-experimental-e670e72f-20250214(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
 
