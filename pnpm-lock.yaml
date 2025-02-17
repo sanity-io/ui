@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@types/react': ^19.0.8
-  '@types/react-dom': ^19.0.3
+  '@types/react': ^19.0.10
+  '@types/react-dom': ^19.0.4
   '@types/react-is': ^19.0.0
   conventional-changelog-conventionalcommits: '>= 8.0.0'
   react: ^19.0.0
@@ -80,10 +80,10 @@ importers:
         version: 8.5.5(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-docs':
         specifier: ^8.5.5
-        version: 8.5.5(@types/react@19.0.8)(storybook@8.5.5(prettier@3.5.1))
+        version: 8.5.5(@types/react@19.0.10)(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-essentials':
         specifier: ^8.5.5
-        version: 8.5.5(@types/react@19.0.8)(storybook@8.5.5(prettier@3.5.1))
+        version: 8.5.5(@types/react@19.0.10)(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-interactions':
         specifier: ^8.5.5
         version: 8.5.5(storybook@8.5.5(prettier@3.5.1))
@@ -125,7 +125,7 @@ importers:
         version: 6.6.3
       '@testing-library/react':
         specifier: ^16.2.0
-        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@testing-library/user-event':
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.0)
@@ -139,11 +139,11 @@ importers:
         specifier: ^20.12.7
         version: 20.17.11
       '@types/react':
-        specifier: ^19.0.8
-        version: 19.0.8
+        specifier: ^19.0.10
+        version: 19.0.10
       '@types/react-dom':
-        specifier: ^19.0.3
-        version: 19.0.3(@types/react@19.0.8)
+        specifier: ^19.0.4
+        version: 19.0.4(@types/react@19.0.10)
       '@types/react-is':
         specifier: ^19.0.0
         version: 19.0.0
@@ -1478,7 +1478,7 @@ packages:
   '@mdx-js/react@3.1.0':
     resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
     peerDependencies:
-      '@types/react': ^19.0.8
+      '@types/react': ^19.0.10
       react: ^19.0.0
 
   '@microsoft/api-extractor-model@7.30.1':
@@ -2126,8 +2126,8 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@testing-library/dom': ^10.0.0
-      '@types/react': ^19.0.8
-      '@types/react-dom': ^19.0.3
+      '@types/react': ^19.0.10
+      '@types/react-dom': ^19.0.4
       react: ^19.0.0
       react-dom: ^19.0.0
     peerDependenciesMeta:
@@ -2236,16 +2236,16 @@ packages:
   '@types/progress-stream@2.0.5':
     resolution: {integrity: sha512-5YNriuEZkHlFHHepLIaxzq3atGeav1qCTGzB74HKWpo66qjfostF+rHc785YYYHeBytve8ZG3ejg42jEIfXNiQ==}
 
-  '@types/react-dom@19.0.3':
-    resolution: {integrity: sha512-0Knk+HJiMP/qOZgMyNFamlIjw9OFCsyC2ZbigmEEyXXixgre6IQpm/4V+r3qH4GC1JPvRJKInw+on2rV6YZLeA==}
+  '@types/react-dom@19.0.4':
+    resolution: {integrity: sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==}
     peerDependencies:
-      '@types/react': ^19.0.8
+      '@types/react': ^19.0.10
 
   '@types/react-is@19.0.0':
     resolution: {integrity: sha512-71dSZeeJ0t3aoPyY9x6i+JNSvg5m9EF2i2OlSZI5QoJuI8Ocgor610i+4A10TQmURR+0vLwcVCEYFpXdzM1Biw==}
 
-  '@types/react@19.0.8':
-    resolution: {integrity: sha512-9P/o1IGdfmQxrujGbIMDyYaaCykhLKc0NGCtYcECNUr9UAaDe4gwvV9bR6tvd5Br1SG0j+PBpbKr2UYY8CwqSw==}
+  '@types/react@19.0.10':
+    resolution: {integrity: sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==}
 
   '@types/refractor@3.4.1':
     resolution: {integrity: sha512-wYuorIiCTSuvRT9srwt+taF6mH/ww+SyN2psM0sjef2qW+sS8GmshgDGTEDgWB1sTVGgYVE6EK7dBA2MxQxibg==}
@@ -8955,10 +8955,10 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@mdx-js/react@3.1.0(@types/react@19.0.8)(react@19.0.0)':
+  '@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.0.0)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 19.0.8
+      '@types/react': 19.0.10
       react: 19.0.0
 
   '@microsoft/api-extractor-model@7.30.1(@types/node@20.17.11)':
@@ -9531,9 +9531,9 @@ snapshots:
       storybook: 8.5.5(prettier@3.5.1)
       ts-dedent: 2.2.0
 
-  '@storybook/addon-docs@8.5.5(@types/react@19.0.8)(storybook@8.5.5(prettier@3.5.1))':
+  '@storybook/addon-docs@8.5.5(@types/react@19.0.10)(storybook@8.5.5(prettier@3.5.1))':
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.0.8)(react@19.0.0)
+      '@mdx-js/react': 3.1.0(@types/react@19.0.10)(react@19.0.0)
       '@storybook/blocks': 8.5.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.5.5(prettier@3.5.1))
       '@storybook/csf-plugin': 8.5.5(storybook@8.5.5(prettier@3.5.1))
       '@storybook/react-dom-shim': 8.5.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.5.5(prettier@3.5.1))
@@ -9544,12 +9544,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@storybook/addon-essentials@8.5.5(@types/react@19.0.8)(storybook@8.5.5(prettier@3.5.1))':
+  '@storybook/addon-essentials@8.5.5(@types/react@19.0.10)(storybook@8.5.5(prettier@3.5.1))':
     dependencies:
       '@storybook/addon-actions': 8.5.5(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-backgrounds': 8.5.5(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-controls': 8.5.5(storybook@8.5.5(prettier@3.5.1))
-      '@storybook/addon-docs': 8.5.5(@types/react@19.0.8)(storybook@8.5.5(prettier@3.5.1))
+      '@storybook/addon-docs': 8.5.5(@types/react@19.0.10)(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-highlight': 8.5.5(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-measure': 8.5.5(storybook@8.5.5(prettier@3.5.1))
       '@storybook/addon-outline': 8.5.5(storybook@8.5.5(prettier@3.5.1))
@@ -9798,15 +9798,15 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@testing-library/dom': 10.4.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
     optionalDependencies:
-      '@types/react': 19.0.8
-      '@types/react-dom': 19.0.3(@types/react@19.0.8)
+      '@types/react': 19.0.10
+      '@types/react-dom': 19.0.4(@types/react@19.0.10)
 
   '@testing-library/user-event@14.5.2(@testing-library/dom@10.4.0)':
     dependencies:
@@ -9917,15 +9917,15 @@ snapshots:
     dependencies:
       '@types/node': 20.17.11
 
-  '@types/react-dom@19.0.3(@types/react@19.0.8)':
+  '@types/react-dom@19.0.4(@types/react@19.0.10)':
     dependencies:
-      '@types/react': 19.0.8
+      '@types/react': 19.0.10
 
   '@types/react-is@19.0.0':
     dependencies:
-      '@types/react': 19.0.8
+      '@types/react': 19.0.10
 
-  '@types/react@19.0.8':
+  '@types/react@19.0.10':
     dependencies:
       csstype: 3.1.3
 
