@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.28](https://github.com/sanity-io/ui-workshop/compare/v2.0.27...v2.0.28) (2025-02-17)
+
+### Bug Fixes
+
+- **deps:** update react compiler dependencies 🤖 ✨ ([#144](https://github.com/sanity-io/ui-workshop/issues/144)) ([1161934](https://github.com/sanity-io/ui-workshop/commit/1161934971e6ab5c9e164242caf1fbfdd01c9033))
+
 ## [2.0.27](https://github.com/sanity-io/ui-workshop/compare/v2.0.26...v2.0.27) (2025-02-10)
 
 ### Bug Fixes
