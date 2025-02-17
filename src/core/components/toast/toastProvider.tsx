@@ -59,24 +59,23 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
     () => ({
       initial: {
         opacity: 0,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: 0,
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: -1,
         y: 32,
         scale: 0.25,
         willChange: 'transform',
       },
       animate: {
-        opacity: [0, 1, 1],
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: [0, 0, 1],
+        opacity: 2,
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: 1,
         y: 0,
         scale: 1,
       },
-      // @ts-expect-error fix later
       exit: {
-        opacity: [1, 1, 0],
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: [1, 0, 0],
+        opacity: 0,
+        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: -1,
         scale: 0.5,
-        transition: {duration: prefersReducedMotion ? 0 : 0.2},
       },
+      transition: {duration: prefersReducedMotion ? 0 : 0.2},
     }),
     [prefersReducedMotion],
   )
