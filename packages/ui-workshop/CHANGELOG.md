@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.29](https://github.com/sanity-io/ui-workshop/compare/v2.0.28...v2.0.29) (2025-02-17)
+
+### Bug Fixes
+
+- **deps:** Update dependency esbuild to ^0.25.0 [SECURITY] ([#143](https://github.com/sanity-io/ui-workshop/issues/143)) ([388a2ab](https://github.com/sanity-io/ui-workshop/commit/388a2ab189408573e15aa8b235af5db93d6dc8f1))
+
 ## [2.0.28](https://github.com/sanity-io/ui-workshop/compare/v2.0.27...v2.0.28) (2025-02-17)
 
 ### Bug Fixes
