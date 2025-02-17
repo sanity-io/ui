@@ -27,22 +27,24 @@ export const POPOVER_MOTION_PROPS: {
 } = {
   initial: {
     opacity: 0.5,
-    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: 0,
+    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: -1,
     scale: 0.97,
     willChange: 'transform',
   },
   animate: {
-    opacity: [null, 1, 1],
-    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [null, null, 1],
+    opacity: 2,
+    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: 1,
     scale: 1,
   },
   exit: {
-    // @ts-expect-error -- passing null a second time is valid: https://github.com/framer/motion/blob/b9ce4c42914c3916ea523609c5b032dfc72718bb/packages/framer-motion/src/animation/utils/keyframes.ts#L34C22-L34C22
-    opacity: [null, null, 0],
-    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: [null, 0, 0],
+    opacity: 0,
+    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: -1,
     scale: 0.97,
   },
-  transition: {duration: 0.4, type: 'spring'},
+  transition: {
+    duration: 0.4,
+    type: 'spring',
+  },
 }
 
 /**
