@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.5](https://github.com/sanity-io/ui/compare/v2.13.4...v2.13.5) (2025-02-18)
+
+### Bug Fixes
+
+- use linear timing for toast duration bars ([#1616](https://github.com/sanity-io/ui/issues/1616)) ([1c6f506](https://github.com/sanity-io/ui/commit/1c6f5064206c830e55a66d98f42698269e6b9974))
+
 ## [2.13.4](https://github.com/sanity-io/ui/compare/v2.13.3...v2.13.4) (2025-02-17)
 
 ### Bug Fixes
