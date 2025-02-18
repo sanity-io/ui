@@ -51,6 +51,9 @@ export function rootStyles(
       animation-name: ${loadingAnimation};
       animation-duration: ${props.$duration}ms;
       animation-fill-mode: both;
+      animation-timing-function: linear;
+      opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
+      will-change: width;
     }
 
     & > * {
