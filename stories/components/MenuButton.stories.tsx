@@ -120,7 +120,7 @@ export const WithSelectedItem: Story = {
   },
 }
 
-export const PopoverBlockPointerEvents: Story = {
+export const PopoverModal: Story = {
   args: {
     menu: (
       <Menu data-testid="menu">
@@ -136,25 +136,16 @@ export const PopoverBlockPointerEvents: Story = {
     return (
       <Stack space={4}>
         <Flex gap={4} wrap="wrap">
+          <MenuButton {...props} button={<Button text="Default " />} />
           <MenuButton
             {...props}
-            button={<Button data-testid="default-menu-button" text="Default " />}
+            button={<Button text="Modal popover" tone="primary" />}
+            popover={{modal: true, portal: false}}
           />
           <MenuButton
             {...props}
-            button={
-              <Button
-                data-testid="block-pointer-events-menu-button"
-                text="Block pointer events"
-                tone="primary"
-              />
-            }
-            popover={{blockPointerEvents: true, portal: false}}
-          />
-          <MenuButton
-            {...props}
-            button={<Button text="Block pointer events (portalled)" tone="primary" />}
-            popover={{blockPointerEvents: true, portal: true}}
+            button={<Button text="Modal popover (portalled)" tone="primary" />}
+            popover={{modal: true, portal: true}}
           />
           <Button
             as="a"
@@ -188,7 +179,7 @@ export const PopoverBlockPointerEvents: Story = {
               <MenuButton
                 {...props}
                 button={<Button icon={EllipsisHorizontalIcon} mode="bleed" />}
-                popover={{blockPointerEvents: true}}
+                popover={{modal: true}}
               />
             </div>
           </Flex>
