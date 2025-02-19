@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.0](https://github.com/sanity-io/ui/compare/v2.13.5...v2.14.0) (2025-02-19)
+
+### Features
+
+- optional support for pointer-blocking popovers ([1fb1cb4](https://github.com/sanity-io/ui/commit/1fb1cb43ae7fdf8d036d4209420edc3a81ac834c))
+
 ## [2.13.5](https://github.com/sanity-io/ui/compare/v2.13.4...v2.13.5) (2025-02-18)
 
 ### Bug Fixes
