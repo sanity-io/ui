@@ -58,13 +58,6 @@ export interface PopoverProps
    */
   animate?: boolean
   arrow?: boolean
-  /**
-   * When true, blocks all pointer interaction with elements beneath the popover until closed.
-   *
-   * @beta
-   * @defaultValue false
-   */
-  blockPointerEvents?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
   children?: React.JSX.Element
@@ -93,6 +86,13 @@ export interface PopoverProps
    * @defaultValue false
    */
   matchReferenceWidth?: boolean
+  /**
+   * When true, blocks all pointer interaction with elements beneath the popover until closed.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  modal?: boolean
   open?: boolean
   overflow?: BoxOverflow
   padding?: number | number[]
@@ -139,7 +139,6 @@ export const Popover = memo(
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
       animate: _animate = false,
       arrow: arrowProp = false,
-      blockPointerEvents,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
       constrainSize = false,
@@ -149,6 +148,7 @@ export const Popover = memo(
         DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
       matchReferenceWidth,
       floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
+      modal,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onActivate,
       open,
@@ -410,7 +410,7 @@ export const Popover = memo(
     const popover = (
       <LayerProvider zOffset={zOffset}>
         {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned before the below popover card. */}
-        {blockPointerEvents && <ViewportOverlay />}
+        {modal && <ViewportOverlay />}
 
         <PopoverCard
           {...restProps}
