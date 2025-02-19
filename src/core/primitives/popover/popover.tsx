@@ -27,7 +27,7 @@ import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} fr
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
 import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
-import {LayerProps, LayerProvider, Portal, useBoundaryElement} from '../../utils'
+import {LayerProps, LayerProvider, Portal, useBoundaryElement, useLayer} from '../../utils'
 import {getElementRef} from '../../utils/getElementRef'
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
@@ -58,6 +58,13 @@ export interface PopoverProps
    */
   animate?: boolean
   arrow?: boolean
+  /**
+   * When true, blocks all pointer interaction with elements beneath the popover until closed.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  blockPointerEvents?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
   boundaryElement?: HTMLElement | null
   children?: React.JSX.Element
@@ -108,6 +115,12 @@ export interface PopoverProps
   width?: PopoverWidth | PopoverWidth[]
 }
 
+const ViewportOverlay = () => {
+  const {zIndex} = useLayer()
+
+  return <div style={{height: '100vh', inset: 0, position: 'fixed', width: '100vw', zIndex}} />
+}
+
 /**
  * The `Popover` component is used to display some content on top of another.
  *
@@ -126,6 +139,7 @@ export const Popover = memo(
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
       animate: _animate = false,
       arrow: arrowProp = false,
+      blockPointerEvents,
       boundaryElement = boundaryElementContext.element,
       children: childProp,
       constrainSize = false,
@@ -395,6 +409,9 @@ export const Popover = memo(
 
     const popover = (
       <LayerProvider zOffset={zOffset}>
+        {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned before the below popover card. */}
+        {blockPointerEvents && <ViewportOverlay />}
+
         <PopoverCard
           {...restProps}
           __unstable_margins={margins}
