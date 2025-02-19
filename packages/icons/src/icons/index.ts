@@ -57,6 +57,7 @@ import {ColorWheelIcon} from './colorWheelIcon'
 import {CommentIcon} from './commentIcon'
 import {ComponentIcon} from './componentIcon'
 import {ComposeIcon} from './composeIcon'
+import {ComposeSparklesIcon} from './composeSparklesIcon'
 import {ConfettiIcon} from './confettiIcon'
 import {ControlsIcon} from './controlsIcon'
 import {CopyIcon} from './copyIcon'
@@ -100,6 +101,9 @@ import {ErrorScreenIcon} from './errorScreenIcon'
 import {ExpandIcon} from './expandIcon'
 import {EyeClosedIcon} from './eyeClosedIcon'
 import {EyeOpenIcon} from './eyeOpenIcon'
+import {FaceHappyIcon} from './faceHappyIcon'
+import {FaceIndifferentIcon} from './faceIndifferentIcon'
+import {FaceSadIcon} from './faceSadIcon'
 import {FilterIcon} from './filterIcon'
 import {FolderIcon} from './folderIcon'
 import {GenerateIcon} from './generateIcon'
@@ -282,6 +286,7 @@ export type IconSymbol =
   | 'comment'
   | 'component'
   | 'compose'
+  | 'compose-sparkles'
   | 'confetti'
   | 'controls'
   | 'copy'
@@ -325,6 +330,9 @@ export type IconSymbol =
   | 'expand'
   | 'eye-closed'
   | 'eye-open'
+  | 'face-happy'
+  | 'face-indifferent'
+  | 'face-sad'
   | 'filter'
   | 'folder'
   | 'generate'
@@ -504,6 +512,7 @@ export {
   CommentIcon,
   ComponentIcon,
   ComposeIcon,
+  ComposeSparklesIcon,
   ConfettiIcon,
   ControlsIcon,
   CopyIcon,
@@ -547,6 +556,9 @@ export {
   ExpandIcon,
   EyeClosedIcon,
   EyeOpenIcon,
+  FaceHappyIcon,
+  FaceIndifferentIcon,
+  FaceSadIcon,
   FilterIcon,
   FolderIcon,
   GenerateIcon,
@@ -730,6 +742,7 @@ export interface IconMap {
   'comment': IconComponent
   'component': IconComponent
   'compose': IconComponent
+  'compose-sparkles': IconComponent
   'confetti': IconComponent
   'controls': IconComponent
   'copy': IconComponent
@@ -773,6 +786,9 @@ export interface IconMap {
   'expand': IconComponent
   'eye-closed': IconComponent
   'eye-open': IconComponent
+  'face-happy': IconComponent
+  'face-indifferent': IconComponent
+  'face-sad': IconComponent
   'filter': IconComponent
   'folder': IconComponent
   'generate': IconComponent
@@ -956,6 +972,7 @@ export const icons: IconMap = {
   'comment': CommentIcon,
   'component': ComponentIcon,
   'compose': ComposeIcon,
+  'compose-sparkles': ComposeSparklesIcon,
   'confetti': ConfettiIcon,
   'controls': ControlsIcon,
   'copy': CopyIcon,
@@ -999,6 +1016,9 @@ export const icons: IconMap = {
   'expand': ExpandIcon,
   'eye-closed': EyeClosedIcon,
   'eye-open': EyeOpenIcon,
+  'face-happy': FaceHappyIcon,
+  'face-indifferent': FaceIndifferentIcon,
+  'face-sad': FaceSadIcon,
   'filter': FilterIcon,
   'folder': FolderIcon,
   'generate': GenerateIcon,
