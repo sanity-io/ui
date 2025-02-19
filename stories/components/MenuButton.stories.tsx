@@ -1,9 +1,16 @@
-import {ClockIcon, CommentIcon, ExpandIcon, SearchIcon} from '@sanity/icons'
+import {
+  ClockIcon,
+  CommentIcon,
+  EllipsisHorizontalIcon,
+  ExpandIcon,
+  LaunchIcon,
+  SearchIcon,
+} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {expect, fn} from '@storybook/test'
 import {userEvent, within} from '@storybook/test'
 import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
-import {Button, Flex} from '../../src/core/primitives'
+import {Box, Button, Card, Flex, Stack, Text} from '../../src/core/primitives'
 
 const meta: Meta<typeof MenuButton> = {
   args: {
@@ -110,5 +117,83 @@ export const WithSelectedItem: Story = {
 
     // Assertion: <Menu> with a selected item should not be visible when clicking the original <MenuButton> to close
     expect(menu).toBeNull()
+  },
+}
+
+export const PopoverBlockPointerEvents: Story = {
+  args: {
+    menu: (
+      <Menu data-testid="menu">
+        <MenuItem id="menu-item-1" selected text="Search" />
+        <MenuItem id="menu-item-2" text="Clock" />
+        <MenuDivider />
+        <MenuItem id="menu-item-3" text="Comment" />
+        <MenuItem id="menu-item-4" text="Expand" />
+      </Menu>
+    ),
+  },
+  render: (props) => {
+    return (
+      <Stack space={4}>
+        <Flex gap={4} wrap="wrap">
+          <MenuButton
+            {...props}
+            button={<Button data-testid="default-menu-button" text="Default " />}
+          />
+          <MenuButton
+            {...props}
+            button={
+              <Button
+                data-testid="block-pointer-events-menu-button"
+                text="Block pointer events"
+                tone="primary"
+              />
+            }
+            popover={{blockPointerEvents: true, portal: false}}
+          />
+          <MenuButton
+            {...props}
+            button={<Button text="Block pointer events (portalled)" tone="primary" />}
+            popover={{blockPointerEvents: true, portal: true}}
+          />
+          <Button
+            as="a"
+            href="https://www.sanity.io"
+            iconRight={LaunchIcon}
+            mode="ghost"
+            target="_blank"
+            text="Open sanity.io in a new window"
+          />
+        </Flex>
+
+        <Card
+          as="a"
+          border
+          href="https://www.sanity.io"
+          padding={2}
+          radius={3}
+          target="_blank"
+          tone="default"
+        >
+          <Flex align="center" gap={2} justify="space-between">
+            <Box padding={2}>
+              <Text size={1}>Open sanity.io in a new window</Text>
+            </Box>
+            <div
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+              }}
+            >
+              <MenuButton
+                {...props}
+                button={<Button icon={EllipsisHorizontalIcon} mode="bleed" />}
+                popover={{blockPointerEvents: true}}
+              />
+            </div>
+          </Flex>
+        </Card>
+      </Stack>
+    )
   },
 }
