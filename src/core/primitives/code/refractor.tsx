@@ -1,8 +1,9 @@
 import Refractor from 'react-refractor'
 
 export default function LazyRefractor(
-  props: Partial<Pick<React.ComponentProps<typeof Refractor>, 'language'>> &
-    Pick<React.ComponentProps<typeof Refractor>, 'value'>,
+  props: Partial<Pick<React.ComponentProps<typeof Refractor>, 'language'>> & {
+    value: React.ReactNode
+  },
 ) {
   const {language: languageProp, value} = props
   const language = typeof languageProp === 'string' ? languageProp : undefined
@@ -11,7 +12,7 @@ export default function LazyRefractor(
   return (
     <>
       {!(language && registered) && <code>{value}</code>}
-      {language && registered && <Refractor inline language={language} value={value} />}
+      {language && registered && <Refractor inline language={language} value={String(value)} />}
     </>
   )
 }

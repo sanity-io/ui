@@ -31,7 +31,7 @@ export const Code = forwardRef(function Code(
   return (
     <StyledCode data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
       <Suspense fallback={<code>{children}</code>}>
-        <LazyRefractor language={language} value={String(children)} />
+        <LazyRefractor language={language} value={children} />
       </Suspense>
     </StyledCode>
   )
