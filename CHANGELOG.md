@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/sanity-io/ui/compare/v2.14.0...v2.14.1) (2025-02-21)
+
+### Bug Fixes
+
+- allow passing ReactNode to Code ([#1620](https://github.com/sanity-io/ui/issues/1620)) ([c12c720](https://github.com/sanity-io/ui/commit/c12c72034c6351fb18510115e1646a65d6f48249))
+
 ## [2.14.0](https://github.com/sanity-io/ui/compare/v2.13.5...v2.14.0) (2025-02-19)
 
 ### Features
