@@ -135,7 +135,7 @@
     "@sanity/pkg-utils": "^6.13.4",
     "@sanity/prettier-config": "^1.0.3",
     "@sanity/semantic-release-preset": "^5.0.0",
-    "@sanity/ui-workshop": "^2.0.29",
+    "@sanity/ui-workshop": "^2.0.30",
     "@storybook/addon-a11y": "^8.5.8",
     "@storybook/addon-docs": "^8.5.8",
     "@storybook/addon-essentials": "^8.5.8",
