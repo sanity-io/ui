@@ -30,6 +30,8 @@ import {BlockquoteIcon} from './blockquoteIcon'
 import {BoldIcon} from './boldIcon'
 import {BoltIcon} from './boltIcon'
 import {BookIcon} from './bookIcon'
+import {BookmarkFilledIcon} from './bookmarkFilledIcon'
+import {BookmarkIcon} from './bookmarkIcon'
 import {BottleIcon} from './bottleIcon'
 import {BugIcon} from './bugIcon'
 import {BulbFilledIcon} from './bulbFilledIcon'
@@ -104,9 +106,11 @@ import {EyeOpenIcon} from './eyeOpenIcon'
 import {FaceHappyIcon} from './faceHappyIcon'
 import {FaceIndifferentIcon} from './faceIndifferentIcon'
 import {FaceSadIcon} from './faceSadIcon'
+import {FeedbackIcon} from './feedbackIcon'
 import {FilterIcon} from './filterIcon'
 import {FolderIcon} from './folderIcon'
 import {GenerateIcon} from './generateIcon'
+import {GithubIcon} from './githubIcon'
 import {GroqIcon} from './groqIcon'
 import {HashIcon} from './hashIcon'
 import {HeartFilledIcon} from './heartFilledIcon'
@@ -118,6 +122,7 @@ import {IceCreamIcon} from './iceCreamIcon'
 import {ImageIcon} from './imageIcon'
 import {ImageRemoveIcon} from './imageRemoveIcon'
 import {ImagesIcon} from './imagesIcon'
+import {InboxIcon} from './inboxIcon'
 import {InfoFilledIcon} from './infoFilledIcon'
 import {InfoOutlineIcon} from './infoOutlineIcon'
 import {InlineElementIcon} from './inlineElementIcon'
@@ -132,6 +137,7 @@ import {LeaveIcon} from './leaveIcon'
 import {LemonIcon} from './lemonIcon'
 import {LinkIcon} from './linkIcon'
 import {LinkRemovedIcon} from './linkRemovedIcon'
+import {LinkedinIcon} from './linkedinIcon'
 import {ListIcon} from './listIcon'
 import {LockIcon} from './lockIcon'
 import {LogoJsIcon} from './logoJsIcon'
@@ -140,6 +146,8 @@ import {MarkerIcon} from './markerIcon'
 import {MarkerRemovedIcon} from './markerRemovedIcon'
 import {MasterDetailIcon} from './masterDetailIcon'
 import {MenuIcon} from './menuIcon'
+import {MicrophoneIcon} from './microphoneIcon'
+import {MicrophoneSlashIcon} from './microphoneSlashIcon'
 import {MobileDeviceIcon} from './mobileDeviceIcon'
 import {MoonIcon} from './moonIcon'
 import {NumberIcon} from './numberIcon'
@@ -195,6 +203,7 @@ import {SyncIcon} from './syncIcon'
 import {TabletDeviceIcon} from './tabletDeviceIcon'
 import {TagIcon} from './tagIcon'
 import {TagsIcon} from './tagsIcon'
+import {TargetIcon} from './targetIcon'
 import {TaskIcon} from './taskIcon'
 import {TerminalIcon} from './terminalIcon'
 import {TextIcon} from './textIcon'
@@ -225,6 +234,8 @@ import {UnpublishIcon} from './unpublishIcon'
 import {UploadIcon} from './uploadIcon'
 import {UserIcon} from './userIcon'
 import {UsersIcon} from './usersIcon'
+import {VersionsIcon} from './versionsIcon'
+import {VideoIcon} from './videoIcon'
 import {WarningFilledIcon} from './warningFilledIcon'
 import {WarningOutlineIcon} from './warningOutlineIcon'
 import {WrenchIcon} from './wrenchIcon'
@@ -259,6 +270,8 @@ export type IconSymbol =
   | 'bold'
   | 'bolt'
   | 'book'
+  | 'bookmark-filled'
+  | 'bookmark'
   | 'bottle'
   | 'bug'
   | 'bulb-filled'
@@ -333,9 +346,11 @@ export type IconSymbol =
   | 'face-happy'
   | 'face-indifferent'
   | 'face-sad'
+  | 'feedback'
   | 'filter'
   | 'folder'
   | 'generate'
+  | 'github'
   | 'groq'
   | 'hash'
   | 'heart-filled'
@@ -347,6 +362,7 @@ export type IconSymbol =
   | 'image'
   | 'image-remove'
   | 'images'
+  | 'inbox'
   | 'info-filled'
   | 'info-outline'
   | 'inline-element'
@@ -361,6 +377,7 @@ export type IconSymbol =
   | 'lemon'
   | 'link'
   | 'link-removed'
+  | 'linkedin'
   | 'list'
   | 'lock'
   | 'logo-js'
@@ -369,6 +386,8 @@ export type IconSymbol =
   | 'marker-removed'
   | 'master-detail'
   | 'menu'
+  | 'microphone'
+  | 'microphone-slash'
   | 'mobile-device'
   | 'moon'
   | 'number'
@@ -424,6 +443,7 @@ export type IconSymbol =
   | 'tablet-device'
   | 'tag'
   | 'tags'
+  | 'target'
   | 'task'
   | 'terminal'
   | 'text'
@@ -454,6 +474,8 @@ export type IconSymbol =
   | 'upload'
   | 'user'
   | 'users'
+  | 'versions'
+  | 'video'
   | 'warning-filled'
   | 'warning-outline'
   | 'wrench'
@@ -485,6 +507,8 @@ export {
   BoldIcon,
   BoltIcon,
   BookIcon,
+  BookmarkFilledIcon,
+  BookmarkIcon,
   BottleIcon,
   BugIcon,
   BulbFilledIcon,
@@ -559,9 +583,11 @@ export {
   FaceHappyIcon,
   FaceIndifferentIcon,
   FaceSadIcon,
+  FeedbackIcon,
   FilterIcon,
   FolderIcon,
   GenerateIcon,
+  GithubIcon,
   GroqIcon,
   HashIcon,
   HeartFilledIcon,
@@ -573,6 +599,7 @@ export {
   ImageIcon,
   ImageRemoveIcon,
   ImagesIcon,
+  InboxIcon,
   InfoFilledIcon,
   InfoOutlineIcon,
   InlineElementIcon,
@@ -587,6 +614,7 @@ export {
   LemonIcon,
   LinkIcon,
   LinkRemovedIcon,
+  LinkedinIcon,
   ListIcon,
   LockIcon,
   LogoJsIcon,
@@ -595,6 +623,8 @@ export {
   MarkerRemovedIcon,
   MasterDetailIcon,
   MenuIcon,
+  MicrophoneIcon,
+  MicrophoneSlashIcon,
   MobileDeviceIcon,
   MoonIcon,
   NumberIcon,
@@ -650,6 +680,7 @@ export {
   TabletDeviceIcon,
   TagIcon,
   TagsIcon,
+  TargetIcon,
   TaskIcon,
   TerminalIcon,
   TextIcon,
@@ -680,6 +711,8 @@ export {
   UploadIcon,
   UserIcon,
   UsersIcon,
+  VersionsIcon,
+  VideoIcon,
   WarningFilledIcon,
   WarningOutlineIcon,
   WrenchIcon,
@@ -715,6 +748,8 @@ export interface IconMap {
   'bold': IconComponent
   'bolt': IconComponent
   'book': IconComponent
+  'bookmark-filled': IconComponent
+  'bookmark': IconComponent
   'bottle': IconComponent
   'bug': IconComponent
   'bulb-filled': IconComponent
@@ -789,9 +824,11 @@ export interface IconMap {
   'face-happy': IconComponent
   'face-indifferent': IconComponent
   'face-sad': IconComponent
+  'feedback': IconComponent
   'filter': IconComponent
   'folder': IconComponent
   'generate': IconComponent
+  'github': IconComponent
   'groq': IconComponent
   'hash': IconComponent
   'heart-filled': IconComponent
@@ -803,6 +840,7 @@ export interface IconMap {
   'image': IconComponent
   'image-remove': IconComponent
   'images': IconComponent
+  'inbox': IconComponent
   'info-filled': IconComponent
   'info-outline': IconComponent
   'inline-element': IconComponent
@@ -817,6 +855,7 @@ export interface IconMap {
   'lemon': IconComponent
   'link': IconComponent
   'link-removed': IconComponent
+  'linkedin': IconComponent
   'list': IconComponent
   'lock': IconComponent
   'logo-js': IconComponent
@@ -825,6 +864,8 @@ export interface IconMap {
   'marker-removed': IconComponent
   'master-detail': IconComponent
   'menu': IconComponent
+  'microphone': IconComponent
+  'microphone-slash': IconComponent
   'mobile-device': IconComponent
   'moon': IconComponent
   'number': IconComponent
@@ -880,6 +921,7 @@ export interface IconMap {
   'tablet-device': IconComponent
   'tag': IconComponent
   'tags': IconComponent
+  'target': IconComponent
   'task': IconComponent
   'terminal': IconComponent
   'text': IconComponent
@@ -910,6 +952,8 @@ export interface IconMap {
   'upload': IconComponent
   'user': IconComponent
   'users': IconComponent
+  'versions': IconComponent
+  'video': IconComponent
   'warning-filled': IconComponent
   'warning-outline': IconComponent
   'wrench': IconComponent
@@ -945,6 +989,8 @@ export const icons: IconMap = {
   'bold': BoldIcon,
   'bolt': BoltIcon,
   'book': BookIcon,
+  'bookmark-filled': BookmarkFilledIcon,
+  'bookmark': BookmarkIcon,
   'bottle': BottleIcon,
   'bug': BugIcon,
   'bulb-filled': BulbFilledIcon,
@@ -1019,9 +1065,11 @@ export const icons: IconMap = {
   'face-happy': FaceHappyIcon,
   'face-indifferent': FaceIndifferentIcon,
   'face-sad': FaceSadIcon,
+  'feedback': FeedbackIcon,
   'filter': FilterIcon,
   'folder': FolderIcon,
   'generate': GenerateIcon,
+  'github': GithubIcon,
   'groq': GroqIcon,
   'hash': HashIcon,
   'heart-filled': HeartFilledIcon,
@@ -1033,6 +1081,7 @@ export const icons: IconMap = {
   'image': ImageIcon,
   'image-remove': ImageRemoveIcon,
   'images': ImagesIcon,
+  'inbox': InboxIcon,
   'info-filled': InfoFilledIcon,
   'info-outline': InfoOutlineIcon,
   'inline-element': InlineElementIcon,
@@ -1047,6 +1096,7 @@ export const icons: IconMap = {
   'lemon': LemonIcon,
   'link': LinkIcon,
   'link-removed': LinkRemovedIcon,
+  'linkedin': LinkedinIcon,
   'list': ListIcon,
   'lock': LockIcon,
   'logo-js': LogoJsIcon,
@@ -1055,6 +1105,8 @@ export const icons: IconMap = {
   'marker-removed': MarkerRemovedIcon,
   'master-detail': MasterDetailIcon,
   'menu': MenuIcon,
+  'microphone': MicrophoneIcon,
+  'microphone-slash': MicrophoneSlashIcon,
   'mobile-device': MobileDeviceIcon,
   'moon': MoonIcon,
   'number': NumberIcon,
@@ -1110,6 +1162,7 @@ export const icons: IconMap = {
   'tablet-device': TabletDeviceIcon,
   'tag': TagIcon,
   'tags': TagsIcon,
+  'target': TargetIcon,
   'task': TaskIcon,
   'terminal': TerminalIcon,
   'text': TextIcon,
@@ -1140,6 +1193,8 @@ export const icons: IconMap = {
   'upload': UploadIcon,
   'user': UserIcon,
   'users': UsersIcon,
+  'versions': VersionsIcon,
+  'video': VideoIcon,
   'warning-filled': WarningFilledIcon,
   'warning-outline': WarningOutlineIcon,
   'wrench': WrenchIcon,
