@@ -21,10 +21,9 @@ export const FilterIcon = forwardRef(function FilterIcon(
       {...props}
     >
       <path
-        d="M11 12L6 7V6L19 6L19 7L14 12V17L11 19V12Z"
+        d="M6 7.5H19M8 12.5H17M10 17.5H15"
         stroke="currentColor"
         strokeWidth={1.2}
-        strokeLinecap="square"
         strokeLinejoin="round"
       />
     </svg>

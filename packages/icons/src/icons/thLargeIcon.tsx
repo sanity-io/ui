@@ -21,7 +21,7 @@ export const ThLargeIcon = forwardRef(function ThLargeIcon(
       {...props}
     >
       <path
-        d="M12.5 6.5V12.5M12.5 12.5V18.5M12.5 12.5H20.5M12.5 12.5H4.5M4.5 6.5H20.5V18.5H4.5V6.5Z"
+        d="M12.5 6.5V12.5M12.5 12.5V18.5M12.5 12.5H19.5M12.5 12.5H5.5M19.5 12.5V6.5H5.5V12.5M19.5 12.5V18.5H5.5V12.5"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"

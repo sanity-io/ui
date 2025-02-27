@@ -21,7 +21,7 @@ export const HomeIcon = forwardRef(function HomeIcon(
       {...props}
     >
       <path
-        d="M6.5 8.75V18.5H18.5V8.75M4.5 10L12.5 5L20.5 10M14.5 18.5V11.5H10.5V18.5"
+        d="M14.5 18.5V12.5H10.5V18.5M5.5 11.5V18.5H19.5V11.5L12.5 5.5L5.5 11.5Z"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"

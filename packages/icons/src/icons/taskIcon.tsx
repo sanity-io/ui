@@ -21,13 +21,7 @@ export const TaskIcon = forwardRef(function TaskIcon(
       {...props}
     >
       <path
-        d="M4.88281 10.75V19.75H20.8828V10.75M4.88281 10.75V5.75H20.8828V10.75M4.88281 10.75H12.8828H20.8828M17.8828 8.25V3.25M7.88281 8.25V3.25"
-        stroke="currentColor"
-        strokeWidth={1.2}
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10.083 14.7358L12.083 16.7358L15.683 13.1758"
+        d="M20.5 10.75V19.75H4.5V10.75M20.5 10.75V5.75H17.5M20.5 10.75H4.5M4.5 10.75V5.75H7.5M7.5 5.75H17.5M7.5 5.75V8.25M7.5 5.75V3.25M17.5 5.75V8.25M17.5 5.75V3.25M9.7002 14.7358L11.7002 16.7358L15.3002 13.1758"
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"
