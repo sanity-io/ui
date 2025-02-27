@@ -200,7 +200,7 @@ importers:
         version: 19.0.0-beta-e1e972c-20250221(eslint@8.57.1)
       eslint-plugin-react-hooks:
         specifier: experimental
-        version: 0.0.0-experimental-662957cc-20250221(eslint@8.57.1)
+        version: 0.0.0-experimental-ebc22ef7-20250225(eslint@8.57.1)
       eslint-plugin-storybook:
         specifier: ^0.11.3
         version: 0.11.3(eslint@8.57.1)(typescript@5.7.3)
@@ -277,8 +277,8 @@ importers:
         specifier: ^7.25.9
         version: 7.25.9(@babel/core@7.26.9)
       '@figma/plugin-typings':
-        specifier: ^1.107.0
-        version: 1.107.0
+        specifier: ^1.108.0
+        version: 1.108.0
       '@sanity/color':
         specifier: ^3.0.6
         version: 3.0.6
@@ -1477,8 +1477,8 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@figma/plugin-typings@1.107.0':
-    resolution: {integrity: sha512-wC+Wwnk5H22W71xoq4ZQBHuXJL8Q7eMMBP+ubHZjAVybrJRysj/A9gJTIguVEcV+x2zpRsVunyVyWxg56qZr8g==}
+  '@figma/plugin-typings@1.108.0':
+    resolution: {integrity: sha512-hZocQwkMUfQZSa/6H9qkSkIKMDC70OOcV8U7hBocAsD/bWEZh13uj+aP6IHHmStscoavo9Ir5pU7NWEUUcXLug==}
 
   '@floating-ui/core@1.6.9':
     resolution: {integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==}
@@ -3816,8 +3816,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-hooks@0.0.0-experimental-662957cc-20250221:
-    resolution: {integrity: sha512-dJayzJnqPks712ho4HVoVkpF/aNN3Os8RgmiMZdONqmD7ToQM3BSWRIKOGLdl8n7vnva4spmTZnAX82ZvYgDgQ==}
+  eslint-plugin-react-hooks@0.0.0-experimental-ebc22ef7-20250225:
+    resolution: {integrity: sha512-13/CQPJyW5uQwfj4nmHTXJJL3O4aIw9XFjk3nA4Y3oMDO6RJSKIbFmMMTHf3j1To1OeRkwdpfo6YVHY/8/Z7AA==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -8957,7 +8957,7 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@figma/plugin-typings@1.107.0': {}
+  '@figma/plugin-typings@1.108.0': {}
 
   '@floating-ui/core@1.6.9':
     dependencies:
@@ -11911,7 +11911,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-662957cc-20250221(eslint@8.57.1):
+  eslint-plugin-react-hooks@0.0.0-experimental-ebc22ef7-20250225(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
 
