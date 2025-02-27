@@ -1,13 +1,13 @@
 import {AnimatePresence, motion, type Variants} from 'framer-motion'
 import {useMemo, useRef, useState, startTransition, useEffect} from 'react'
 import {styled} from 'styled-components'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {useMounted} from '../../hooks/useMounted'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box} from '../../primitives'
-import {Layer} from '../../utils'
+import {Box, Grid} from '../../primitives'
+import {Layer, LayerProvider} from '../../utils'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
+import {ToastLayer, type ToastLayerProps} from './toastLayer'
 import {generateToastId} from './toastState'
 import {ToastContextValue, ToastParams} from './types'
 
@@ -20,76 +20,51 @@ type ToastState = {
 /**
  * @public
  */
-export interface ToastProviderProps {
+export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
   children?: React.ReactNode
-  padding?: number | number[]
-  paddingX?: number | number[]
-  paddingY?: number | number[]
   zOffset?: number | number[]
 }
 
-const StyledToastProvider = styled(Layer)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-`
+const ToastItem = motion.create(Box)
 
-const ToastContainer = styled.div`
-  box-sizing: border-box;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  max-width: 420px;
-  width: 100%;
-`
+const ToastsLayout = styled(Layer)``
+
+ToastsLayout.displayName = 'ToastsLayout'
+
+const variants = {
+  initial: {
+    opacity: 0,
+    y: 32,
+    scale: 0.25,
+    // willChange: 'transform',
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.5,
+    // y: 0
+    transition: {duration: 0.2},
+  },
+} satisfies Variants
 
 /**
  * @public
  */
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
-  const {children, padding = 4, paddingX, paddingY, zOffset} = props
-  const [state, _setState] = useState<ToastState>([])
+  const {children, padding, paddingX, paddingY, gap, zOffset} = props
+  const [stateIS_IT_SAFE, setState] = useState<ToastState>([])
   const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
   const mounted = useMounted()
   const prefersReducedMotion = usePrefersReducedMotion()
-  const variants = useMemo<Variants>(
-    () => ({
-      /**
-       * These variants makes use of special timing, by using a negative opacity as a starting position,
-       * as well as double opacity as the end position.
-       * The purpose of this is to make the tooltip/popover container appear before the content, and when exiting
-       * we want the content to disappear faster than the container.
-       */
-      initial: {
-        opacity: 0,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: -1,
-        y: 32,
-        scale: 0.25,
-        willChange: 'transform',
-      },
-      animate: {
-        opacity: 2,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: 1,
-        y: 0,
-        scale: 1,
-      },
-      exit: {
-        opacity: 0,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: -1,
-        scale: 0.5,
-      },
-      transition: {duration: prefersReducedMotion ? 0 : 0.2},
-    }),
-    [prefersReducedMotion],
-  )
 
   const value: ToastContextValue = useMemo(() => {
     const push = (params: ToastParams) => {
       // Wrap setState in startTransition to allow React to give input state updates higher priority
-      const setState: typeof _setState = (state) => startTransition(() => _setState(state))
+      // const setState: typeof _setState = (state) => startTransition(() => _setState(state))
 
       const id = params.id || generateToastId()
       const duration = params.duration || 5000
@@ -143,6 +118,7 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   }, [])
 
   // clear timeouts on unmount
+  // @TODO move cleanup to child toasts instead of centrally managing them
   useEffect(
     () => () => {
       for (const {timeoutId} of Object.values(toastsRef.current)) {
@@ -153,28 +129,59 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
     },
     [],
   )
+  const transition = prefersReducedMotion
+    ? {duration: 0}
+    : {type: 'spring', damping: 30, stiffness: 400}
+  const transitionDebug = {duration: 1}
 
   return (
     <ToastContext.Provider value={value}>
       {children}
       {mounted && (
-        <StyledToastProvider data-ui="ToastProvider" zOffset={zOffset}>
-          <ToastContainer>
-            <Box padding={padding} paddingX={paddingX} paddingY={paddingY}>
-              <AnimatePresence initial={false}>
-                {state.map(({dismiss, id, params}) => (
-                  <motion.div
+        <LayerProvider zOffset={zOffset}>
+          <ToastLayer padding={padding} paddingX={paddingX} paddingY={paddingY} gap={gap}>
+            <AnimatePresence initial={false} mode="popLayout">
+              {stateIS_IT_SAFE.map(({dismiss, id, params}) => (
+                <ToastItem
+                  key={id}
+                  as="li"
+                  layout
+                  variants={variants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={transition}
+                  // transition={transitionDebug}
+                  // paddingTop={3}
+                >
+                  <Toast
+                    closable={params.closable}
+                    description={params.description}
+                    onClose={dismiss}
+                    status={params.status}
+                    title={params.title}
+                    duration={params.duration}
+                  />
+                </ToastItem>
+              ))}
+            </AnimatePresence>
+          </ToastLayer>
+          {/* <ToastsLayout data-ui="ToastProvider">
+        <ToastsFixedCanvas data-ui="ToastProvider" layoutRoot zOffset={zOffset}>
+          <ToastsAbsoluteLayer as="ul" gapY={3} padding={padding} paddingX={paddingX} paddingY={paddingY}>
+              <AnimatePresence initial={false} mode="popLayout">
+                {stateIS_IT_SAFE.map(({dismiss, id, params}) => (
+                  <ToastItem
                     key={id}
-                    layout="position"
+                    as="li"
+                    layout
+                    variants={variants}
                     initial="initial"
                     animate="animate"
-                    exit="exit"
-                    variants={variants}
-                    transition={
-                      prefersReducedMotion
-                        ? {duration: 0}
-                        : {type: 'spring', damping: 30, stiffness: 400}
-                    }
+                    exit='exit'
+                    // transition={transition}
+                    transition={transitionDebug}
+                    // paddingTop={3}
                   >
                     <Toast
                       closable={params.closable}
@@ -184,12 +191,13 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
                       title={params.title}
                       duration={params.duration}
                     />
-                  </motion.div>
+                  </ToastItem>
                 ))}
               </AnimatePresence>
-            </Box>
-          </ToastContainer>
-        </StyledToastProvider>
+          </ToastsAbsoluteLayer>
+        </ToastsFixedCanvas>
+        </ToastsLayout> */}
+        </LayerProvider>
       )}
     </ToastContext.Provider>
   )

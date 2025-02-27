@@ -2,16 +2,29 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {Toast, ToastProvider, useToast} from '../../src/core/components'
 import {Button, Inline} from '../../src/core/primitives'
+import {styled} from 'styled-components'
+import {LayerProvider} from '@sanity/ui/_visual-editing'
+
+const Foo = styled.div.attrs<{$color: string}>((props) => ({style: {color: props.$color}}))`
+  display: block;
+`
 
 const meta: Meta<typeof Toast> = {
   args: {title: 'Toast title', description: 'Toast description'},
   component: Toast,
   decorators: [
     (Story: StoryFn): React.JSX.Element => (
-      <ToastProvider>
-        {/* @ts-expect-error fix later */}
-        <Story />
-      </ToastProvider>
+      <LayerProvider zOffset={1}>
+        <ToastProvider padding={5} zOffset={10}>
+          {/* @ts-expect-error fix later */}
+          <Foo $color="red" style={{color: 'blue', background: 'blue'}}>
+            Bar
+          </Foo>
+          <LayerProvider>
+            <Story />
+          </LayerProvider>
+        </ToastProvider>
+      </LayerProvider>
     ),
   ],
   tags: ['autodocs'],
@@ -90,6 +103,8 @@ export const WithHook: Story = {
           onClick={() =>
             toast.push({
               closable: true,
+              // duration: Infinity,
+              duration: 30_000,
               title: 'Some message',
             })
           }

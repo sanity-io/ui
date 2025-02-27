@@ -66,8 +66,8 @@ const LayerChildren = forwardRef(function LayerChildren(
 
   return (
     <StyledLayer
-      {...restProps}
       data-ui="Layer"
+      {...restProps}
       onFocus={handleFocus}
       ref={ref}
       style={{...style, zIndex}}

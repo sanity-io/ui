@@ -42,6 +42,8 @@ export function rootStyles(
     overflow: hidden;
     overflow: clip;
     padding-bottom: ${LOADING_BAR_HEIGHT}px;
+    /* move will-change and logic to <li> item */
+    will-change: opacity, transform;
     &::before {
       content: '';
       position: absolute;
@@ -54,11 +56,6 @@ export function rootStyles(
       animation-timing-function: linear;
       opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
       will-change: width;
-    }
-
-    & > * {
-      opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
-      will-change: opacity;
     }
   `
 }

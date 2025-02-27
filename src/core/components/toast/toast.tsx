@@ -64,12 +64,12 @@ export function Toast(
       data-ui="Toast"
       role={role}
       {...restProps}
-      marginTop={3}
       radius={radius}
       shadow={2}
       tone={cardTone}
       $duration={duration}
     >
+      {/* @TODO this Flex could be used to transition enter state with AnimatePresence right? */}
       <Flex align="flex-start">
         <TextBox flex={1} padding={3}>
           <Stack space={3}>

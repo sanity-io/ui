@@ -10,6 +10,7 @@ import {ResponsiveGridProps} from '../types'
  */
 export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
 
+// @TODO this might be how ToastLayer has to be setup
 const StyledGrid = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 
 /**
