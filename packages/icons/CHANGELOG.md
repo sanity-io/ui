@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.0](https://github.com/sanity-io/icons/compare/v3.6.0...v3.7.0) (2025-02-27)
+
+### Features
+
+- add feedback icons ([3f22fde](https://github.com/sanity-io/icons/commit/3f22fde8fdb49b552657f7d714a9332714e2543e))
+- new icons ([c588d24](https://github.com/sanity-io/icons/commit/c588d2463e47b7e091a51fa15ea77978a206f947))
+
 ## [3.6.0](https://github.com/sanity-io/icons/compare/v3.5.7...v3.6.0) (2025-02-14)
 
 ### Features
