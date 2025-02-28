@@ -27,8 +27,8 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6
       '@sanity/icons':
-        specifier: ^3.6.0
-        version: 3.6.0(react@19.0.0)
+        specifier: ^3.7.0
+        version: 3.7.0(react@19.0.0)
       csstype:
         specifier: ^3.1.3
         version: 3.1.3
@@ -74,7 +74,7 @@ importers:
         version: 5.0.0(semantic-release@24.2.3(typescript@5.7.3))
       '@sanity/ui-workshop':
         specifier: ^2.0.30
-        version: 2.0.30(@sanity/icons@3.6.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)
+        version: 2.0.30(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)
       '@storybook/addon-a11y':
         specifier: ^8.6.2
         version: 8.6.2(storybook@8.6.2(prettier@3.5.2))
@@ -1937,8 +1937,8 @@ packages:
     resolution: {integrity: sha512-2TjYEvOftD0v7ukx3Csdh9QIu44P2z7NDJtlC3qITJRYV36J7R6Vfd3trVhFnN77/7CZrGjqngrtohv8VqO5nw==}
     engines: {node: '>=18.0.0'}
 
-  '@sanity/icons@3.6.0':
-    resolution: {integrity: sha512-GFSJiDYW5eEKnkedz7J+RQDcjcG6UBL1DzrXdddRD+CI9IKBDSBTrfnw9qjZbi6R5NeXXRBCTnKW34rOCAocpw==}
+  '@sanity/icons@3.7.0':
+    resolution: {integrity: sha512-MVh5C55X8Vn2oIsraSPVx4MkHvkqUimkmv7yP++IfJBCLgb38/7G2CM+GB95GTpLPRdF2m3QEwwXcaeljjqKOQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^19.0.0
@@ -9508,7 +9508,7 @@ snapshots:
 
   '@sanity/color@3.0.6': {}
 
-  '@sanity/icons@3.6.0(react@19.0.0)':
+  '@sanity/icons@3.7.0(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -9580,9 +9580,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.0.30(@sanity/icons@3.6.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)':
+  '@sanity/ui-workshop@2.0.30(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)':
     dependencies:
-      '@sanity/icons': 3.6.0(react@19.0.0)
+      '@sanity/icons': 3.7.0(react@19.0.0)
       '@sanity/ui': 'link:'
       '@vitejs/plugin-react': 4.3.4(vite@6.1.0(@types/node@20.17.19)(jiti@2.4.2)(terser@5.39.0))
       axe-core: 4.10.2
