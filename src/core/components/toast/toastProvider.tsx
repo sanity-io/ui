@@ -1,140 +1,80 @@
-import {AnimatePresence, motion, type Variants} from 'framer-motion'
-import {useMemo, useRef, useState, startTransition, useEffect} from 'react'
-import {styled} from 'styled-components'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
+import {AnimatePresence} from 'framer-motion'
+import {startTransition, useMemo, useState} from 'react'
 import {useMounted} from '../../hooks/useMounted'
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box} from '../../primitives'
-import {Layer} from '../../utils'
+import {LayerProvider} from '../../utils'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
+import {ToastLayer, type ToastLayerProps} from './toastLayer'
 import {generateToastId} from './toastState'
 import {ToastContextValue, ToastParams} from './types'
 
 type ToastState = {
   dismiss: () => void
   id: string
+  updatedAt: number
   params: ToastParams
 }[]
 
 /**
  * @public
  */
-export interface ToastProviderProps {
+export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
   children?: React.ReactNode
-  padding?: number | number[]
-  paddingX?: number | number[]
-  paddingY?: number | number[]
   zOffset?: number | number[]
 }
-
-const StyledToastProvider = styled(Layer)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-`
-
-const ToastContainer = styled.div`
-  box-sizing: border-box;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  max-width: 420px;
-  width: 100%;
-`
 
 /**
  * @public
  */
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
-  const {children, padding = 4, paddingX, paddingY, zOffset} = props
-  const [state, _setState] = useState<ToastState>([])
-  const toastsRef = useRef<{[key: string]: {timeoutId: NodeJS.Timeout}}>({})
+  const {children, padding, paddingX, paddingY, gap, zOffset = 1} = props
+  const [state, setState] = useState<ToastState>([])
   const mounted = useMounted()
-  const prefersReducedMotion = usePrefersReducedMotion()
-  const variants = useMemo<Variants>(
-    () => ({
-      /**
-       * These variants makes use of special timing, by using a negative opacity as a starting position,
-       * as well as double opacity as the end position.
-       * The purpose of this is to make the tooltip/popover container appear before the content, and when exiting
-       * we want the content to disappear faster than the container.
-       */
-      initial: {
-        opacity: 0,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: -1,
-        y: 32,
-        scale: 0.25,
-        willChange: 'transform',
-      },
-      animate: {
-        opacity: 2,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: 1,
-        y: 0,
-        scale: 1,
-      },
-      exit: {
-        opacity: 0,
-        [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY]: -1,
-        scale: 0.5,
-      },
-      transition: {duration: prefersReducedMotion ? 0 : 0.2},
-    }),
-    [prefersReducedMotion],
-  )
 
   const value: ToastContextValue = useMemo(() => {
     const push = (params: ToastParams) => {
-      // Wrap setState in startTransition to allow React to give input state updates higher priority
-      const setState: typeof _setState = (state) => startTransition(() => _setState(state))
-
       const id = params.id || generateToastId()
       const duration = params.duration || 5000
 
-      const dismiss = () => {
-        const timeoutId = toastsRef.current[id]?.timeoutId
-
+      startTransition(() => {
         setState((prevState): ToastState => {
-          const idx = prevState.findIndex((t) => t.id === id)
-
-          if (idx > -1) {
-            const toasts = prevState.slice(0)
-
-            toasts.splice(idx, 1)
-
-            return toasts
+          /**
+           * Backwards compatibility for `sanity` patterns workaround a lack of programatically dismissible toasts.
+           * It uses a super short duration that closes the toast immediately in previous versions of `@sanity/ui`.
+           * We interpret this as a request to dismiss the toast immediately, and remove it from the state right away.
+           * Even once we support programatic dismissal we'll need to keep this for backwards compatibility with v2 and v1.
+           */
+          if (duration === 0.01) {
+            return prevState.filter((toast) => toast.id !== id)
           }
 
-          return prevState
-        })
+          /**
+           * Creates a function to dismiss this specific toast.
+           * This function will be passed to the Toast component
+           * and called either on close button click or after duration.
+           */
+          const dismiss = () =>
+            startTransition(() =>
+              setState((currentState) => currentState.filter((toast) => toast.id !== id)),
+            )
 
-        if (timeoutId !== undefined) {
-          clearTimeout(timeoutId)
-          delete toastsRef.current[id]
-        }
-      }
-
-      setState((prevState): ToastState => {
-        return prevState
-          .filter((t) => t.id !== id)
-          .concat([
+          /**
+           * Create updated state by:
+           * 1. Removing any existing toast with the same ID (prevents duplicates)
+           * 2. Adding the new toast with its dismiss handler
+           * 3. Updates the `updatedAt` timestamp, which resets progress bar count downs.
+           */
+          return [
+            ...prevState.filter((toast) => toast.id !== id),
             {
               dismiss,
               id,
+              updatedAt: Date.now(),
               params: {...params, duration},
             },
-          ])
+          ]
+        })
       })
-
-      if (toastsRef.current[id]) {
-        clearTimeout(toastsRef.current[id].timeoutId)
-        delete toastsRef.current[id]
-      }
-
-      toastsRef.current[id] = {timeoutId: setTimeout(dismiss, duration)}
 
       return id
     }
@@ -142,54 +82,28 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
     return {version: 0.0, push}
   }, [])
 
-  // clear timeouts on unmount
-  useEffect(
-    () => () => {
-      for (const {timeoutId} of Object.values(toastsRef.current)) {
-        clearTimeout(timeoutId)
-      }
-
-      toastsRef.current = {}
-    },
-    [],
-  )
-
   return (
     <ToastContext.Provider value={value}>
       {children}
       {mounted && (
-        <StyledToastProvider data-ui="ToastProvider" zOffset={zOffset}>
-          <ToastContainer>
-            <Box padding={padding} paddingX={paddingX} paddingY={paddingY}>
-              <AnimatePresence initial={false}>
-                {state.map(({dismiss, id, params}) => (
-                  <motion.div
-                    key={id}
-                    layout="position"
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={variants}
-                    transition={
-                      prefersReducedMotion
-                        ? {duration: 0}
-                        : {type: 'spring', damping: 30, stiffness: 400}
-                    }
-                  >
-                    <Toast
-                      closable={params.closable}
-                      description={params.description}
-                      onClose={dismiss}
-                      status={params.status}
-                      title={params.title}
-                      duration={params.duration}
-                    />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </Box>
-          </ToastContainer>
-        </StyledToastProvider>
+        <LayerProvider zOffset={zOffset}>
+          <ToastLayer padding={padding} paddingX={paddingX} paddingY={paddingY} gap={gap}>
+            <AnimatePresence initial={false} mode="popLayout">
+              {state.map(({dismiss, id, params, updatedAt}) => (
+                <Toast
+                  key={id}
+                  closable={params.closable}
+                  description={params.description}
+                  onClose={dismiss}
+                  status={params.status}
+                  title={params.title}
+                  duration={params.duration}
+                  updatedAt={updatedAt}
+                />
+              ))}
+            </AnimatePresence>
+          </ToastLayer>
+        </LayerProvider>
       )}
     </ToastContext.Provider>
   )

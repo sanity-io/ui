@@ -2,7 +2,7 @@ import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {type MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY, POPOVER_MOTION_PROPS} from '../../constants'
+import {POPOVER_MOTION_PROPS} from '../../constants'
 import {Placement, Radius} from '../../types'
 import {Arrow} from '../../utils'
 import {Card, CardProps} from '../card'
@@ -13,10 +13,7 @@ import {
 } from './constants'
 
 const MotionCard = styled(motion.create(Card))`
-  & > * {
-    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
-    will-change: opacity;
-  }
+  will-change: transform;
 `
 
 /**
@@ -89,7 +86,11 @@ export const TooltipCard = memo(
         scheme={scheme}
         shadow={shadow}
         style={rootStyle}
-        {...(animate ? POPOVER_MOTION_PROPS : {})}
+        variants={POPOVER_MOTION_PROPS.card}
+        transition={POPOVER_MOTION_PROPS.transition}
+        initial={animate ? ['hidden', 'initial'] : undefined}
+        animate={animate ? ['visible', 'scaleIn'] : undefined}
+        exit={animate ? ['hidden', 'scaleOut'] : undefined}
       >
         {children}
 

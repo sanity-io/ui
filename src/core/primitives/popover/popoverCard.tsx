@@ -3,7 +3,7 @@ import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {type MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import {styled} from 'styled-components'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY, POPOVER_MOTION_PROPS} from '../../constants'
+import {POPOVER_MOTION_PROPS} from '../../constants'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {Arrow, useLayer} from '../../utils'
 import {Card, CardProps} from '../card'
@@ -22,10 +22,11 @@ const MotionCard = styled(motion.create(Card))`
   flex-direction: column;
   width: max-content;
   min-width: min-content;
-  & > * {
-    opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
-    will-change: opacity;
-  }
+  will-change: transform;
+`
+
+const MotionFlex = styled(motion.create(Flex))`
+  will-change: opacity;
 `
 
 /**
@@ -131,13 +132,24 @@ export const PopoverCard = memo(
         sizing="border"
         style={rootStyle}
         tone={tone}
-        {...(animate ? POPOVER_MOTION_PROPS : {})}
+        variants={POPOVER_MOTION_PROPS.card}
+        transition={POPOVER_MOTION_PROPS.transition}
+        initial={animate ? ['hidden', 'initial'] : undefined}
+        animate={animate ? ['visible', 'scaleIn'] : undefined}
+        exit={animate ? ['hidden', 'scaleOut'] : undefined}
       >
-        <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
+        <MotionFlex
+          data-ui="Popover__wrapper"
+          direction="column"
+          flex={1}
+          overflow={overflow}
+          variants={POPOVER_MOTION_PROPS.children}
+          transition={POPOVER_MOTION_PROPS.transition}
+        >
           <Flex direction="column" flex={1} padding={padding}>
             {children}
           </Flex>
-        </Flex>
+        </MotionFlex>
 
         {arrow && (
           <Arrow
