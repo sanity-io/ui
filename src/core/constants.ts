@@ -10,47 +10,60 @@ export const EMPTY_ARRAY: never[] = []
  */
 export const EMPTY_RECORD: Record<string, never> = {}
 
-/**
- * @internal
- */
-export const POPOVER_MOTION_CONTENT_OPACITY_PROPERTY = '--motion-content-opacity' as string
+const POPOVER_MOTION_DURATION = 0.2
 
 /**
  * Shared `framer-motion` variants used by `Popover` and `Tooltip` components.
  * @internal
  */
 export const POPOVER_MOTION_PROPS: {
-  animate: Variant
-  initial: Variant
-  exit: Variant
+  outerVariants: {
+    initial: Variant
+    hidden: Variant
+    visible: Variant
+    scaleIn: Variant
+    scaleOut: Variant
+  }
+  innerVariants: {
+    hidden: Variant
+    visible: Variant
+  }
   transition: Transition
 } = {
-  /**
-   * These variants makes use of special timing, by using a negative opacity as a starting position,
-   * as well as double opacity as the end position.
-   * The purpose of this is to make the tooltip/popover container appear before the content, and when exiting
-   * we want the content to disappear faster than the container.
-   */
-  initial: {
-    opacity: 0.5,
-    // the nagative opacity here, as well as the double opacity further down, are to make the content appear after the backgdrop, and when exiting the content should disappear first.
-    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: -1,
-    scale: 0.97,
-    willChange: 'transform',
+  outerVariants: {
+    initial: {
+      scale: 0.97,
+      willChange: 'transform',
+    },
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: 'beforeChildren',
+        duration: POPOVER_MOTION_DURATION / 2,
+      },
+    },
+    scaleIn: {
+      scale: 1,
+    },
+    scaleOut: {
+      scale: 0.97,
+    },
   },
-  animate: {
-    opacity: 2,
-    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: 1,
-    scale: 1,
-  },
-  exit: {
-    opacity: 0,
-    [POPOVER_MOTION_CONTENT_OPACITY_PROPERTY as string]: -1,
-    scale: 0.97,
+  innerVariants: {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+    },
   },
   transition: {
-    duration: 0.4,
     type: 'spring',
+    visualDuration: POPOVER_MOTION_DURATION,
+    bounce: 0.25,
   },
 }
 

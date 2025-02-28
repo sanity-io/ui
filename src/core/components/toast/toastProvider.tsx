@@ -1,5 +1,5 @@
 import {AnimatePresence} from 'framer-motion'
-import {useMemo, useState} from 'react'
+import {startTransition, useMemo, useState} from 'react'
 import {useMounted} from '../../hooks/useMounted'
 import {LayerProvider} from '../../utils'
 import {Toast} from './toast'
@@ -36,33 +36,42 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
       const id = params.id || generateToastId()
       const duration = params.duration || 5000
 
-      const dismiss = () => {
+      startTransition(() => {
         setState((prevState): ToastState => {
-          const idx = prevState.findIndex((t) => t.id === id)
+          const dismiss = () => {
+            startTransition(() => {
+              setState((prevState): ToastState => {
+                const idx = prevState.findIndex((t) => t.id === id)
 
-          if (idx > -1) {
-            const toasts = prevState.slice(0)
+                if (idx > -1) {
+                  const toasts = prevState.slice(0)
 
-            toasts.splice(idx, 1)
+                  toasts.splice(idx, 1)
 
-            return toasts
+                  return toasts
+                }
+
+                return prevState
+              })
+            })
+          }
+
+          // BC legacy support
+          if (duration === 0.01) {
+            return prevState.filter((t) => t.id !== id)
           }
 
           return prevState
+            .filter((t) => t.id !== id)
+            .concat([
+              {
+                dismiss,
+                id,
+                updatedAt: Date.now(),
+                params: {...params, duration},
+              },
+            ])
         })
-      }
-
-      setState((prevState): ToastState => {
-        return prevState
-          .filter((t) => t.id !== id)
-          .concat([
-            {
-              dismiss,
-              id,
-              updatedAt: Date.now(),
-              params: {...params, duration},
-            },
-          ])
       })
 
       return id

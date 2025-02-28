@@ -1,8 +1,6 @@
-import {styled, keyframes, css} from 'styled-components'
+import {styled} from 'styled-components'
 import {ThemeColorStateToneKey, getTheme_v2} from '../../../theme'
-import {POPOVER_MOTION_CONTENT_OPACITY_PROPERTY} from '../../constants'
 import {Card, Flex} from '../../primitives'
-import {_responsive, ThemeProps} from '../../styles'
 import type {ButtonTone} from '../../types'
 
 const LOADING_BAR_HEIGHT = 2
@@ -25,33 +23,17 @@ export const TextBox = styled(Flex)`
   overflow-x: auto;
 `
 
-export function rootStyles(
-  props: {$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps,
-): ReturnType<typeof css> {
-  const {color} = getTheme_v2(props.theme)
-  const loadingBarColor = color.button.default[props.tone].enabled.bg
+export const StyledToast = styled(Card)`
+  pointer-events: all;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
 
-  if (!props.$duration)
-    return css`
-      pointer-events: all;
-      & > * {
-        opacity: var(${POPOVER_MOTION_CONTENT_OPACITY_PROPERTY}, 1);
-        will-change: opacity;
-      }
-    `
-
-  return css`
-    pointer-events: all;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    overflow: clip;
-    will-change: opacity, transform;
-    --toast-loading-bar-bg: ${loadingBarColor};
-
+  &[data-has-duration] {
     padding-bottom: calc(${LOADING_BAR_HEIGHT}px / 2);
-  `
-}
+  }
+`
 
 export const LoadingBar = styled.div`
   display: flex;

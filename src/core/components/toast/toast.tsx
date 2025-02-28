@@ -1,18 +1,15 @@
 import {CloseIcon} from '@sanity/icons'
-import {ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {motion, type Variants} from 'framer-motion'
-import {styled} from 'styled-components'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box, Button, Flex, Stack, Text, Card} from '../../primitives'
-import {ThemeProps} from '../../styles'
 
 import {
   LoadingBar,
   LoadingBarProgress,
   BUTTON_TONE,
-  rootStyles,
   STATUS_CARD_TONE,
   TextBox,
+  StyledToast,
 } from './styles'
 
 /**
@@ -36,9 +33,9 @@ const ROLES = {
   info: 'alert',
 } as const
 
-const StyledToast = motion.create(
-  styled(Card)<{$duration?: number; tone: ThemeColorStateToneKey} & ThemeProps>(rootStyles),
-)
+// Support pattern used by Sanity Studio, that works around the lack of `duration: Infinity` support in older @sanity/ui versions
+// https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#maximum_delay_value
+const LONG_ENOUGH_BUT_NOT_TOO_LONG = 1000 * 60 * 60 * 24 * 24
 
 /**
  * The `Toast` component gives feedback to users when an action has taken place.
@@ -78,22 +75,21 @@ export function Toast(
 
   const prefersReducedMotion = usePrefersReducedMotion()
 
-  let visualDuration = prefersReducedMotion ? 0 : 0.26
-  visualDuration = 5
+  const visualDuration = prefersReducedMotion ? 0 : 0.26
   const transition = visualDuration ? {type: 'spring', visualDuration, bounce: 0.25} : {duration: 0}
 
-  console.log({visualDuration, transition})
+  const hasDuration = duration && isFinite(duration) && duration < LONG_ENOUGH_BUT_NOT_TOO_LONG
 
   return (
-    <StyledToast
+    <MotionToast
       data-ui="Toast"
       role={role}
       {...restProps}
+      data-has-duration={hasDuration ? '' : undefined}
       custom={visualDuration satisfies number}
       radius={radius}
       shadow={2}
       tone={cardTone}
-      $duration={duration && isFinite(duration) ? duration : undefined}
       forwardedAs="li"
       layout="position"
       variants={container}
@@ -128,13 +124,11 @@ export function Toast(
               tone={buttonTone}
               onClick={onClose}
               style={{verticalAlign: 'top'}}
-              // variants={content}
-              // transition={transition}
             />
           </Box>
         )}
       </MotionFlex>
-      {duration && isFinite(duration) && (
+      {hasDuration && (
         <MotionLoadiongBar variants={content} transition={transition}>
           <Card
             tone={cardTone}
@@ -149,7 +143,7 @@ export function Toast(
             }}
           />
           <MotionLoadiongBarProgress
-            key={`${duration}-${updatedAt}`}
+            key={`progress-${updatedAt}`}
             tone={cardTone}
             initial={{scaleX: 0}}
             animate={{scaleX: 1}}
@@ -158,43 +152,42 @@ export function Toast(
           />
         </MotionLoadiongBar>
       )}
-    </StyledToast>
+    </MotionToast>
   )
 }
 
 Toast.displayName = 'Toast'
 
-// hidden, visible, slideIn, slideOut
 const container = {
-  initial: {y: 32, scale: 0.25, zIndex: 1},
+  initial: {y: 32, scale: 0.5, zIndex: 1},
   hidden: {opacity: 0},
-  visible: (visualDuration: number, ...rest) => {
-    console.log({visualDuration}, ...rest)
+  visible: (visualDuration: number) => {
     if (!visualDuration) return {opacity: 1}
 
     return {
       opacity: 1,
-      // transition: {
-      // when: 'beforeChildren',
-      // delayChildren: visualDuration / 3,
-      // staggerChildren: visualDuration / 3,
-      // duration: visualDuration - visualDuration / 3,
-      // },
+      transition: {
+        when: 'beforeChildren',
+        staggerChildren: visualDuration / 3,
+        duration: visualDuration / 3,
+      },
     }
   },
   slideIn: {
     y: 0,
     scale: 1,
   },
-  slideOut: (visualDuration: number) => ({
+  slideOut: {
     zIndex: 0,
-    scale: 0.5,
-    transition: visualDuration ? {duration: visualDuration - visualDuration / 3} : undefined,
-  }),
+    scale: 0.75,
+  },
 } satisfies Variants
 type ContainerVariants = keyof typeof container
 
 const content = {
+  initial: {
+    willChange: 'transform',
+  },
   hidden: {
     opacity: 0,
   },
@@ -203,6 +196,7 @@ const content = {
   },
 } satisfies Variants
 
+const MotionToast = motion.create(StyledToast)
 const MotionFlex = motion.create(Flex)
 
 const MotionText = motion.create(Text)

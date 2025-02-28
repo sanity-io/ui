@@ -219,49 +219,6 @@ export const Tooltip = forwardRef(function Tooltip(
     [isInsideGroup, delayGroupContext, openDelay, tooltipId, closeDelay, setIsOpen],
   )
 
-  const handleBlur = useCallback(
-    (e: FocusEvent) => {
-      handleIsOpenChange(false)
-      childProp?.props?.onBlur?.(e)
-    },
-    [childProp?.props, handleIsOpenChange],
-  )
-  const handleClick = useCallback(
-    (e: MouseEvent) => {
-      handleIsOpenChange(false, true)
-      childProp?.props.onClick?.(e)
-    },
-    [childProp?.props, handleIsOpenChange],
-  )
-  const handleContextMenu = useCallback(
-    (e: MouseEvent) => {
-      handleIsOpenChange(false, true)
-      childProp?.props.onContextMenu?.(e)
-    },
-    [childProp?.props, handleIsOpenChange],
-  )
-  const handleFocus = useCallback(
-    (e: FocusEvent) => {
-      handleIsOpenChange(true)
-      childProp?.props?.onFocus?.(e)
-    },
-    [childProp?.props, handleIsOpenChange],
-  )
-  const handleMouseEnter = useCallback(
-    (e: MouseEvent) => {
-      handleIsOpenChange(true)
-      childProp?.props?.onMouseEnter?.(e)
-    },
-    [childProp?.props, handleIsOpenChange],
-  )
-  const handleMouseLeave = useCallback(
-    (e: MouseEvent) => {
-      handleIsOpenChange(false)
-      childProp?.props?.onMouseLeave?.(e)
-    },
-    [childProp?.props, handleIsOpenChange],
-  )
-
   // Handle closing the tooltip when the mouse leaves the referenceElement
   useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip})
 
@@ -291,6 +248,28 @@ export const Tooltip = forwardRef(function Tooltip(
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
   }, [handleIsOpenChange, showTooltip])
+
+  /* eslint-disable padding-line-between-statements */
+  // Handle delays and grouping
+  const handleChildEvent = useEffectEvent((open: boolean, immediate?: boolean) =>
+    handleIsOpenChange(open, immediate),
+  )
+  useEffect(() => {
+    if (!referenceElement) return
+
+    const controller = new AbortController()
+    const {signal} = controller
+
+    referenceElement.addEventListener('blur', () => handleChildEvent(false), {signal})
+    referenceElement.addEventListener('focus', () => handleChildEvent(true), {signal})
+    referenceElement.addEventListener('mouseenter', () => handleChildEvent(true), {signal})
+    referenceElement.addEventListener('mouseleave', () => handleChildEvent(false), {signal})
+    referenceElement.addEventListener('click', () => handleChildEvent(false, true), {signal})
+    referenceElement.addEventListener('contextmenu', () => handleChildEvent(false, true), {signal})
+
+    return () => controller.abort()
+  }, [referenceElement])
+  /* eslint-enable padding-line-between-statements */
 
   // // Set the max width of the tooltip based on boundaries and portals
   useLayoutEffect(() => {
@@ -324,24 +303,8 @@ export const Tooltip = forwardRef(function Tooltip(
   const child = useMemo(() => {
     if (!childProp) return null
 
-    return cloneElement(childProp, {
-      onBlur: handleBlur,
-      onFocus: handleFocus,
-      onMouseEnter: handleMouseEnter,
-      onMouseLeave: handleMouseLeave,
-      onClick: handleClick,
-      onContextMenu: handleContextMenu,
-      ref: setReferenceElement,
-    })
-  }, [
-    childProp,
-    handleBlur,
-    handleClick,
-    handleContextMenu,
-    handleFocus,
-    handleMouseEnter,
-    handleMouseLeave,
-  ])
+    return cloneElement(childProp, {ref: setReferenceElement})
+  }, [childProp])
 
   // If there's a child then we need to set the reference element to the cloned child ref
   // and if child changes we make sure to update or remove the reference element.

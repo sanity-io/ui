@@ -68,6 +68,7 @@ export const Placements: Story = {
 
 export const WithOpenDelay: Story = {
   args: {
+    animate: true,
     delay: {open: 200},
   },
   parameters: {
