@@ -94,8 +94,8 @@ importers:
         version: 6.1.15(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@swc/plugin-styled-components':
-        specifier: ^2.0.12
-        version: 2.0.12
+        specifier: ^6.8.2
+        version: 6.8.2
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -2334,8 +2334,8 @@ packages:
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
 
-  '@swc/plugin-styled-components@2.0.12':
-    resolution: {integrity: sha512-ZlA2T++rRRH734gt3+/FGfQc/oIWVQ69xl+FbeWQflB8YYG30/ADCqDOJ90XXo21hk3FZ0sMilXfaqqFUvYy0g==}
+  '@swc/plugin-styled-components@6.8.2':
+    resolution: {integrity: sha512-mpYDH7PYqyb+VjQtIOMIZe1J8TuHN8b+WvIp75OOpHSPAKUM1yW7iikTn9/wr2rv5Pg0MEVeGKBxBznevmA61w==}
 
   '@tanstack/react-table@8.21.2':
     resolution: {integrity: sha512-11tNlEDTdIhMJba2RBH+ecJ9l1zgS2kjmexDPAraulc8jeNA4xocSNeyzextT0XJyASil4XsCYlJmf5jEWAtYg==}
@@ -8627,7 +8627,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@swc/plugin-styled-components@2.0.12':
+  '@swc/plugin-styled-components@6.8.2':
     dependencies:
       '@swc/counter': 0.1.3
 
