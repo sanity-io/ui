@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.0](https://github.com/sanity-io/ui/compare/v2.14.5...v2.15.0) (2025-03-03)
+
+### Features
+
+- improve toast, popover, and tooltip motion ([#1633](https://github.com/sanity-io/ui/issues/1633)) ([7d0139c](https://github.com/sanity-io/ui/commit/7d0139c399865cefe849154cee41429da15443cc))
+
 ## [2.14.5](https://github.com/sanity-io/ui/compare/v2.14.4...v2.14.5) (2025-03-03)
 
 ### Bug Fixes
