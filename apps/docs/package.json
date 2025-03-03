@@ -21,7 +21,7 @@
     "@lezer/highlight": "^1.2.1",
     "@portabletext/react": "^3.1.0",
     "@sanity/client": "^6.22.2",
-    "@sanity/code-input": "^4.1.4",
+    "@sanity/code-input": "^5.0.0",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.4.0",
     "@sanity/image-url": "^1.1.0",
