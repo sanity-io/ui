@@ -20,6 +20,7 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": false,
+  "type": "commonjs",
   "exports": {
     ".": {
       "source": "./exports/index.ts",
@@ -42,7 +43,7 @@
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
-  "module": "./dist/index.esm.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -57,9 +58,7 @@
   "files": [
     "dist",
     "exports",
-    "src",
-    "_visual-editing.js",
-    "theme.js"
+    "src"
   ],
   "scripts": {
     "build": "run-s clean pkg:build pkg:check figma:pkg:build",
@@ -132,7 +131,7 @@
     "@babel/preset-typescript": "^7.26.0",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
-    "@sanity/pkg-utils": "^6.13.4",
+    "@sanity/pkg-utils": "^7.0.4",
     "@sanity/prettier-config": "^1.0.3",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^2.0.31",
