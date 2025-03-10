@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.3](https://github.com/sanity-io/ui/compare/v2.15.2...v2.15.3) (2025-03-10)
+
+### Bug Fixes
+
+- remove `legacyExports` ([#1560](https://github.com/sanity-io/ui/issues/1560)) ([8dc5491](https://github.com/sanity-io/ui/commit/8dc549145bfad45cdec5eff12ace1d340b3cf0ef))
+
 ## [2.15.2](https://github.com/sanity-io/ui/compare/v2.15.1...v2.15.2) (2025-03-04)
 
 ### Bug Fixes
