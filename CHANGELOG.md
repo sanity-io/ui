@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.5](https://github.com/sanity-io/ui/compare/v2.15.4...v2.15.5) (2025-03-11)
+
+### Bug Fixes
+
+- **deps:** downgrade `react-compiler-runtime` ([0ec56b5](https://github.com/sanity-io/ui/commit/0ec56b5a091415cdfe45dfcdb64d6e421ecf2bfb))
+
 ## [2.15.4](https://github.com/sanity-io/ui/compare/v2.15.3...v2.15.4) (2025-03-10)
 
 ### Bug Fixes
