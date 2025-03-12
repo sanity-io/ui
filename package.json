@@ -190,7 +190,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-is": "^19.0.0",
-    "refractor": "^4.8.1",
+    "refractor": "^4.9.0",
     "rimraf": "^5.0.5",
     "semantic-release": "^24.2.3",
     "start-server-and-test": "^2.0.10",
