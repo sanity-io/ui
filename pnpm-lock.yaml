@@ -181,8 +181,8 @@ importers:
         specifier: ^8.57.1
         version: 8.57.1
       eslint-config-prettier:
-        specifier: ^10.0.2
-        version: 10.0.2(eslint@8.57.1)
+        specifier: ^10.1.1
+        version: 10.1.1(eslint@8.57.1)
       eslint-plugin-boundaries:
         specifier: ^5.0.1
         version: 5.0.1(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.7.3))(eslint@8.57.1)
@@ -200,7 +200,7 @@ importers:
         version: 19.0.0-beta-bafa41b-20250307(eslint@8.57.1)
       eslint-plugin-react-hooks:
         specifier: experimental
-        version: 0.0.0-experimental-d55cc79b-20250228(eslint@8.57.1)
+        version: 0.0.0-experimental-6aa8254b-20250312(eslint@8.57.1)
       eslint-plugin-storybook:
         specifier: ^0.11.4
         version: 0.11.4(eslint@8.57.1)(typescript@5.7.3)
@@ -3751,8 +3751,8 @@ packages:
     engines: {node: '>=6.0'}
     hasBin: true
 
-  eslint-config-prettier@10.0.2:
-    resolution: {integrity: sha512-1105/17ZIMjmCOJOPNfVdbXafLCLj3hPmkmB7dLgt7XsQ/zkxSuDerE/xgO3RxoHysR1N1whmquY0lSn2O0VLg==}
+  eslint-config-prettier@10.1.1:
+    resolution: {integrity: sha512-4EQQr6wXwS+ZJSzaR5ZCrYgLxqvUjdXctaEtBqHcbkW944B1NQyO4qpdHQbXBONfwxXdkAY81HH4+LUfrg+zPw==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -3809,8 +3809,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-hooks@0.0.0-experimental-d55cc79b-20250228:
-    resolution: {integrity: sha512-BK7ZkuDsfwfYymdyldXMQR7FnxI3CB3e0HCTHmq5b0vs/f5fsOeuvzljRRUi4BAUyF2hBBYav++zY6f/Hzfmjg==}
+  eslint-plugin-react-hooks@0.0.0-experimental-6aa8254b-20250312:
+    resolution: {integrity: sha512-+xxYWTT7swVEIGgQO8e0YeV8BRZSY4Hr6ODMSJBWYrBZzOTDBjPwxsTYMioU703ro2PtbatKMM7FMyEMk2Azyg==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -11794,7 +11794,7 @@ snapshots:
     optionalDependencies:
       source-map: 0.6.1
 
-  eslint-config-prettier@10.0.2(eslint@8.57.1):
+  eslint-config-prettier@10.1.1(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
 
@@ -11889,7 +11889,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-d55cc79b-20250228(eslint@8.57.1):
+  eslint-plugin-react-hooks@0.0.0-experimental-6aa8254b-20250312(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
 
