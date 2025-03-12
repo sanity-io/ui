@@ -60,7 +60,7 @@ export function attemptFocus(element: HTMLElement): boolean {
 
   try {
     element.focus()
-  } catch (_) {
+  } catch {
     // ignore
   }
 
