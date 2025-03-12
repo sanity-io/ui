@@ -200,7 +200,7 @@ importers:
         version: 19.0.0-beta-bafa41b-20250307(eslint@8.57.1)
       eslint-plugin-react-hooks:
         specifier: experimental
-        version: 0.0.0-experimental-d55cc79b-20250228(eslint@8.57.1)
+        version: 0.0.0-experimental-6aa8254b-20250312(eslint@8.57.1)
       eslint-plugin-storybook:
         specifier: ^0.11.4
         version: 0.11.4(eslint@8.57.1)(typescript@5.7.3)
@@ -241,8 +241,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0
       refractor:
-        specifier: ^4.8.1
-        version: 4.8.1
+        specifier: ^4.9.0
+        version: 4.9.0
       rimraf:
         specifier: ^5.0.5
         version: 5.0.10
@@ -3809,8 +3809,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-hooks@0.0.0-experimental-d55cc79b-20250228:
-    resolution: {integrity: sha512-BK7ZkuDsfwfYymdyldXMQR7FnxI3CB3e0HCTHmq5b0vs/f5fsOeuvzljRRUi4BAUyF2hBBYav++zY6f/Hzfmjg==}
+  eslint-plugin-react-hooks@0.0.0-experimental-6aa8254b-20250312:
+    resolution: {integrity: sha512-+xxYWTT7swVEIGgQO8e0YeV8BRZSY4Hr6ODMSJBWYrBZzOTDBjPwxsTYMioU703ro2PtbatKMM7FMyEMk2Azyg==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -6470,8 +6470,8 @@ packages:
   refractor@3.6.0:
     resolution: {integrity: sha512-MY9W41IOWxxk31o+YvFCNyNzdkc9M20NoZK5vq6jkv4I/uh2zkWcfudj0Q1fovjUQJrNewS9NMzeTtqPf+n5EA==}
 
-  refractor@4.8.1:
-    resolution: {integrity: sha512-/fk5sI0iTgFYlmVGYVew90AoYnNMP6pooClx/XKqyeeCQXrL0Kvgn8V0VEht5ccdljbzzF1i3Q213gcntkRExg==}
+  refractor@4.9.0:
+    resolution: {integrity: sha512-nEG1SPXFoGGx+dcjftjv8cAjEusIh6ED1xhf5DG3C0x/k+rmZ2duKnc3QLpt6qeHv5fPb8uwN3VWN2BT7fr3Og==}
 
   regenerate-unicode-properties@10.2.0:
     resolution: {integrity: sha512-DqHn3DwbmmPVzeKj9woBadqmXxLvQoQIwu7nopMc72ztvxVmVk2SBhSnx67zuye5TP+lJsb/TBQsjLKhnDf3MA==}
@@ -11889,7 +11889,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-d55cc79b-20250228(eslint@8.57.1):
+  eslint-plugin-react-hooks@0.0.0-experimental-6aa8254b-20250312(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
 
@@ -15084,7 +15084,7 @@ snapshots:
       parse-entities: 2.0.0
       prismjs: 1.27.0
 
-  refractor@4.8.1:
+  refractor@4.9.0:
     dependencies:
       '@types/hast': 2.3.10
       '@types/prismjs': 1.26.5
