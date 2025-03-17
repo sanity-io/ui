@@ -88,7 +88,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    'react-compiler/react-compiler': ['warn', {__unstable_donotuse_reportAllBailouts: true}], // Set to error once existing warnings are fixed
+    'react-compiler/react-compiler': 'warn', // Set to error once existing warnings are fixed
     'react/no-unescaped-entities': 'off',
     'no-restricted-imports': [
       'error',
