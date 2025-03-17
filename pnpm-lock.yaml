@@ -73,8 +73,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.3(typescript@5.8.2))
       '@sanity/ui-workshop':
-        specifier: ^2.0.31
-        version: 2.0.31(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)
+        specifier: ^2.0.32
+        version: 2.0.32(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)
       '@storybook/addon-a11y':
         specifier: ^8.6.4
         version: 8.6.4(storybook@8.6.4(prettier@3.5.3))
@@ -200,7 +200,7 @@ importers:
         version: 19.0.0-beta-3229e95-20250315(eslint@8.57.1)
       eslint-plugin-react-hooks:
         specifier: experimental
-        version: 0.0.0-experimental-6aa8254b-20250312(eslint@8.57.1)
+        version: 0.0.0-experimental-5398b711-20250314(eslint@8.57.1)
       eslint-plugin-storybook:
         specifier: ^0.11.4
         version: 0.11.4(eslint@8.57.1)(typescript@5.8.2)
@@ -1815,8 +1815,8 @@ packages:
     peerDependencies:
       semantic-release: ^24
 
-  '@sanity/ui-workshop@2.0.31':
-    resolution: {integrity: sha512-Xz3Bw9azfHz7NCvkRH/GmtFJH5I+xOxH4Mnpq/JBonvCBBsvL86O9aj5TIw2TpsQ9l044SR0Sw1XT9ptOzb2dQ==}
+  '@sanity/ui-workshop@2.0.32':
+    resolution: {integrity: sha512-l+8tQb91iv9EGarrZ77joQUYJAE8e/34VHvbzECTU9lsaREz1iENPGrKsBQq+ClblsK7/3dJgKLsXqKNxjTrvA==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2 || ^3
@@ -3618,8 +3618,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-hooks@0.0.0-experimental-6aa8254b-20250312:
-    resolution: {integrity: sha512-+xxYWTT7swVEIGgQO8e0YeV8BRZSY4Hr6ODMSJBWYrBZzOTDBjPwxsTYMioU703ro2PtbatKMM7FMyEMk2Azyg==}
+  eslint-plugin-react-hooks@0.0.0-experimental-5398b711-20250314:
+    resolution: {integrity: sha512-Mt69Xo1l4prG7ug9wzP6od8wOET9HySuNO7f6Ah9CJWhEBcS/qsn0eo4GDiN5FB5rt7k3iaN8KTrT7QrBUOVqw==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -6195,11 +6195,6 @@ packages:
 
   react-compiler-runtime@19.0.0-beta-3229e95-20250315:
     resolution: {integrity: sha512-Xid04KQ0GxRVl0TsUPNalVefjrC6YqG/zclXPS9vbl8jmU6OwCiQBO4BpPTC9yw7sEroOdPdDKZ/1AYOH3BaaQ==}
-    peerDependencies:
-      react: ^19.0.0
-
-  react-compiler-runtime@19.0.0-beta-40c6c23-20250301:
-    resolution: {integrity: sha512-weI8y7C7JUHAKw5djSUpwuMxDa1+Rd+4feaZw6yFeFOaSjw7zLbi0xczPlkzSw46eB89pIrZutLAj2+ra/GWTg==}
     peerDependencies:
       react: ^19.0.0
 
@@ -9290,7 +9285,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.0.31(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)':
+  '@sanity/ui-workshop@2.0.32(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.19)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)':
     dependencies:
       '@sanity/icons': 3.7.0(react@19.0.0)
       '@sanity/ui': 'link:'
@@ -9308,7 +9303,7 @@ snapshots:
       mkdirp: 2.1.6
       pako: 2.1.0
       react: 19.0.0
-      react-compiler-runtime: 19.0.0-beta-40c6c23-20250301(react@19.0.0)
+      react-compiler-runtime: 19.0.0-beta-3229e95-20250315(react@19.0.0)
       react-dom: 19.0.0(react@19.0.0)
       rimraf: 4.4.1
       segmented-property: 4.0.0
@@ -11533,9 +11528,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-6aa8254b-20250312(eslint@8.57.1):
+  eslint-plugin-react-hooks@0.0.0-experimental-5398b711-20250314(eslint@8.57.1):
     dependencies:
+      '@babel/core': 7.26.10
+      '@babel/parser': 7.26.10
+      '@babel/plugin-transform-private-methods': 7.25.9(@babel/core@7.26.10)
       eslint: 8.57.1
+      hermes-parser: 0.25.1
+      zod: 3.24.2
+      zod-validation-error: 3.4.0(zod@3.24.2)
+    transitivePeerDependencies:
+      - supports-color
 
   eslint-plugin-react@7.37.4(eslint@8.57.1):
     dependencies:
@@ -14603,10 +14606,6 @@ snapshots:
       strip-json-comments: 2.0.1
 
   react-compiler-runtime@19.0.0-beta-3229e95-20250315(react@19.0.0):
-    dependencies:
-      react: 19.0.0
-
-  react-compiler-runtime@19.0.0-beta-40c6c23-20250301(react@19.0.0):
     dependencies:
       react: 19.0.0
 
