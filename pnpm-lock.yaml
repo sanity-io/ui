@@ -277,8 +277,8 @@ importers:
         specifier: ^7.25.9
         version: 7.25.9(@babel/core@7.26.10)
       '@figma/plugin-typings':
-        specifier: ^1.108.0
-        version: 1.108.0
+        specifier: ^1.109.0
+        version: 1.109.0
       '@sanity/color':
         specifier: ^3.0.6
         version: 3.0.6
@@ -1327,8 +1327,8 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@figma/plugin-typings@1.108.0':
-    resolution: {integrity: sha512-hZocQwkMUfQZSa/6H9qkSkIKMDC70OOcV8U7hBocAsD/bWEZh13uj+aP6IHHmStscoavo9Ir5pU7NWEUUcXLug==}
+  '@figma/plugin-typings@1.109.0':
+    resolution: {integrity: sha512-6l628rOQGNd5ZD3Bru36/NK+PSKmHpsrWz0NMwUYZ8AIyfIl6sCJRc8+OhAy9+WkDXq/Dx3BYiBStjmCJ8O3Lw==}
 
   '@floating-ui/core@1.6.9':
     resolution: {integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==}
@@ -8659,7 +8659,7 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@figma/plugin-typings@1.108.0': {}
+  '@figma/plugin-typings@1.109.0': {}
 
   '@floating-ui/core@1.6.9':
     dependencies:
