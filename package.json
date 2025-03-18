@@ -195,7 +195,7 @@
     "semantic-release": "^24.2.3",
     "start-server-and-test": "^2.0.10",
     "storybook": "^8.6.7",
-    "styled-components": "^6.1.15",
+    "styled-components": "^6.1.16",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.8.2",
     "vite": "^5.4.14",
