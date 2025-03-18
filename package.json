@@ -131,7 +131,7 @@
     "@babel/preset-typescript": "^7.26.0",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "@sanity/pkg-utils": "^7.1.0",
+    "@sanity/pkg-utils": "^7.1.1",
     "@sanity/prettier-config": "^1.0.3",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^2.0.32",
