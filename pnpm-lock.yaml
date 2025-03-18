@@ -202,8 +202,8 @@ importers:
         specifier: experimental
         version: 0.0.0-experimental-fbcda19a-20250317(eslint@8.57.1)
       eslint-plugin-storybook:
-        specifier: ^0.11.4
-        version: 0.11.4(eslint@8.57.1)(typescript@5.8.2)
+        specifier: ^0.11.6
+        version: 0.11.6(eslint@8.57.1)(typescript@5.8.2)
       http-server:
         specifier: ^14.1.1
         version: 14.1.1
@@ -3630,12 +3630,11 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
 
-  eslint-plugin-storybook@0.11.4:
-    resolution: {integrity: sha512-OvLf1ljpDQ6Y/U2kM7hT5hESn+hg0vq/nh62+YiPFWdRIEjuQM9ivmwoTP9nRBExH8fT2VPqM5t/RB68lqTWJw==}
+  eslint-plugin-storybook@0.11.6:
+    resolution: {integrity: sha512-3WodYD6Bs9ACqnB+TP2TuLh774c/nacAjxSKOP9bHJ2c8rf+nrhocxjjeAWNmO9IPkFIzTKlcl0vNXI2yYpVOw==}
     engines: {node: '>= 18'}
     peerDependencies:
       eslint: '>=8'
-      typescript: '>=4.8.4 <5.8.0'
 
   eslint-scope@7.2.2:
     resolution: {integrity: sha512-dOt21O7lTMhDM+X9mB4GX+DZrZtCUJPL/wlcTqxyrx5IvO0IYtILdtrQGQp+8n5S0gwSVmOf9NQrjMOgfQZlIg==}
@@ -11563,15 +11562,15 @@ snapshots:
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-storybook@0.11.4(eslint@8.57.1)(typescript@5.8.2):
+  eslint-plugin-storybook@0.11.6(eslint@8.57.1)(typescript@5.8.2):
     dependencies:
       '@storybook/csf': 0.1.13
       '@typescript-eslint/utils': 8.26.1(eslint@8.57.1)(typescript@5.8.2)
       eslint: 8.57.1
       ts-dedent: 2.2.0
-      typescript: 5.8.2
     transitivePeerDependencies:
       - supports-color
+      - typescript
 
   eslint-scope@7.2.2:
     dependencies:
