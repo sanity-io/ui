@@ -73,8 +73,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.3(typescript@5.8.2))
       '@sanity/ui-workshop':
-        specifier: ^2.0.32
-        version: 2.0.32(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.24)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)
+        specifier: ^2.0.33
+        version: 2.0.33(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.24)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)
       '@storybook/addon-a11y':
         specifier: ^8.6.8
         version: 8.6.8(storybook@8.6.8(prettier@3.5.3))
@@ -1815,8 +1815,8 @@ packages:
     peerDependencies:
       semantic-release: ^24
 
-  '@sanity/ui-workshop@2.0.32':
-    resolution: {integrity: sha512-l+8tQb91iv9EGarrZ77joQUYJAE8e/34VHvbzECTU9lsaREz1iENPGrKsBQq+ClblsK7/3dJgKLsXqKNxjTrvA==}
+  '@sanity/ui-workshop@2.0.33':
+    resolution: {integrity: sha512-H5I+j7QJbolBAlF7Y8AZPS7M12YnC/fF+jmuhhhGkHGDtUUxLuX0Hc3JESC6+aR/CVi3v6j5n0aFdOwr5slP5w==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2 || ^3
@@ -6181,11 +6181,6 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-compiler-runtime@19.0.0-beta-3229e95-20250315:
-    resolution: {integrity: sha512-Xid04KQ0GxRVl0TsUPNalVefjrC6YqG/zclXPS9vbl8jmU6OwCiQBO4BpPTC9yw7sEroOdPdDKZ/1AYOH3BaaQ==}
-    peerDependencies:
-      react: ^19.0.0
-
   react-compiler-runtime@19.0.0-beta-aeaed83-20250323:
     resolution: {integrity: sha512-77hSVURRTQ86LuCWvCqroEhs8wEAhsFEpipP16RdZrC+P6xWsrZKSqvntNJD++5wJw+ZIxyqU9w6Oz7t7KYINw==}
     peerDependencies:
@@ -9277,7 +9272,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.0.32(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.24)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)':
+  '@sanity/ui-workshop@2.0.33(@sanity/icons@3.7.0(react@19.0.0))(@sanity/ui@)(@types/node@20.17.24)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)':
     dependencies:
       '@sanity/icons': 3.7.0(react@19.0.0)
       '@sanity/ui': 'link:'
@@ -9295,7 +9290,7 @@ snapshots:
       mkdirp: 2.1.6
       pako: 2.1.0
       react: 19.0.0
-      react-compiler-runtime: 19.0.0-beta-3229e95-20250315(react@19.0.0)
+      react-compiler-runtime: 19.0.0-beta-aeaed83-20250323(react@19.0.0)
       react-dom: 19.0.0(react@19.0.0)
       rimraf: 4.4.1
       segmented-property: 4.0.0
@@ -14585,10 +14580,6 @@ snapshots:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
-
-  react-compiler-runtime@19.0.0-beta-3229e95-20250315(react@19.0.0):
-    dependencies:
-      react: 19.0.0
 
   react-compiler-runtime@19.0.0-beta-aeaed83-20250323(react@19.0.0):
     dependencies:
