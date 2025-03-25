@@ -1,12 +1,9 @@
 {
-  "extends": "../tsconfig.settings",
+  "extends": "@sanity/pkg-utils/tsconfig/recommended.json",
   "include": ["../exports", "../src", "../typings", "./src"],
   "compilerOptions": {
-    "composite": true,
     "rootDir": "..",
     "outDir": "./dist/types",
-    "target": "ES6",
-    "lib": ["ES2020"],
     "paths": {
       "@sanity/ui/*": ["../exports/*"],
       "@sanity/ui": ["../exports"]
