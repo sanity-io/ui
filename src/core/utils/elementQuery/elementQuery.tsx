@@ -1,6 +1,6 @@
 import {forwardRef, useImperativeHandle, useMemo, useState} from 'react'
-import {useElementSize} from '../../hooks'
-import {useTheme_v2} from '../../theme'
+import { useElementSize } from '../../hooks/useElementSize'
+import { useTheme_v2 } from '../../theme/useTheme'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
 /**

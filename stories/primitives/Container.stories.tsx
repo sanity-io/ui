@@ -1,5 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Container, Stack, Text} from '../../src/core/primitives'
+import { Card } from '../../src/core/primitives/card/card'
+import { Container } from '../../src/core/primitives/container/container'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { Text } from '../../src/core/primitives/text/text'
 import {getContainerWidthControls, getHeightControls, getOverflowControls} from '../controls'
 
 const meta: Meta<typeof Container> = {

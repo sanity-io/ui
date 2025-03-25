@@ -1,7 +1,11 @@
 import {CloseIcon} from '@sanity/icons'
 import {motion, type Variant, type Variants} from 'framer-motion'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box, Button, Flex, Stack, Text} from '../../primitives'
+import { Box } from '../../primitives/box/box'
+import { Button } from '../../primitives/button/button'
+import { Flex } from '../../primitives/flex/flex'
+import { Stack } from '../../primitives/stack/stack'
+import { Text } from '../../primitives/text/text'
 
 import {
   LoadingBar,

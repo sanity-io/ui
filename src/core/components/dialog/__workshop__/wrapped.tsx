@@ -1,6 +1,8 @@
 import {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
-import {Box, Button} from '../../../primitives'
-import {LayerProvider, useLayer} from '../../../utils'
+import { Box } from '../../../primitives/box/box'
+import { Button } from '../../../primitives/button/button'
+import { LayerProvider } from '../../../utils/layer/layerProvider'
+import { useLayer } from '../../../utils/layer/useLayer'
 import {Dialog, DialogProps} from '../dialog'
 
 export default function WrappedStory() {

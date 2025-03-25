@@ -1,4 +1,5 @@
-import {Placement, PopoverMargins} from '../../types'
+import { Placement } from '../../types/placement'
+import { PopoverMargins } from '../../types/popover'
 
 export const DEFAULT_POPOVER_DISTANCE = 4
 export const DEFAULT_POPOVER_PADDING = 4

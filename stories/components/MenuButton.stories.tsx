@@ -9,8 +9,17 @@ import {
 import type {Meta, StoryObj} from '@storybook/react'
 import {expect, fn} from '@storybook/test'
 import {userEvent, within} from '@storybook/test'
-import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
-import {Box, Button, Card, Flex, Stack, Text} from '../../src/core/primitives'
+import { Menu } from '../../src/core/components/menu/menu'
+import { MenuButton } from '../../src/core/components/menu/menuButton'
+import { MenuDivider } from '../../src/core/components/menu/menuDivider'
+import { MenuGroup } from '../../src/core/components/menu/menuGroup'
+import { MenuItem } from '../../src/core/components/menu/menuItem'
+import { Box } from '../../src/core/primitives/box/box'
+import { Button } from '../../src/core/primitives/button/button'
+import { Card } from '../../src/core/primitives/card/card'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { Text } from '../../src/core/primitives/text/text'
 
 const meta: Meta<typeof MenuButton> = {
   args: {

@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import {render} from '../../../../test'
+import { render } from '../../../../test/utils'
 import {BoundaryElementContext} from './boundaryElementContext'
 import {BoundaryElementContextValue} from './types'
 import {useBoundaryElement} from './useBoundaryElement'

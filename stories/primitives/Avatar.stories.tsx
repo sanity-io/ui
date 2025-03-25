@@ -1,5 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Avatar, Flex, Stack} from '../../src/core/primitives'
+import { Avatar } from '../../src/core/primitives/avatar/avatar'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Stack } from '../../src/core/primitives/stack/stack'
 import {AVATAR_SRC} from '../constants'
 import {getAvatarSizeControls} from '../controls'
 

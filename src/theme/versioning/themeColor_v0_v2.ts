@@ -1,15 +1,11 @@
-import {
-  ThemeColor,
-  ThemeColorGenericState,
-  ThemeColorMuted,
-  ThemeColorSelectable_v2,
-  ThemeColorState_v2,
-  ThemeColorCard_v2,
-  ThemeColorInputStates,
-  ThemeColorInputMode_v2,
-  ThemeColorInputState,
-  ThemeColorInputState_v2,
-} from '../system'
+import { ThemeColor } from '../system/v0/color/color'
+import { ThemeColorGenericState } from '../system/v0/color/_generic'
+import { ThemeColorMuted } from '../system/v0/color/muted'
+import { ThemeColorSelectable_v2 } from '../system/color/selectable'
+import { ThemeColorState_v2 } from '../system/color/state'
+import { ThemeColorCard_v2 } from '../system/color/color'
+import { ThemeColorInputStates, ThemeColorInputState } from '../system/v0/color/input'
+import { ThemeColorInputMode_v2, ThemeColorInputState_v2 } from '../system/color/input'
 
 const cache = new WeakMap<ThemeColor, ThemeColorCard_v2>()
 

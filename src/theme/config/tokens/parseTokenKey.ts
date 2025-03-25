@@ -1,4 +1,4 @@
-import {isColorButtonMode} from '../../system'
+import { isColorButtonMode } from '../../system/color/_helpers'
 import {
   isColorConfigBaseKey,
   isColorConfigBaseTone,

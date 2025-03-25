@@ -1,4 +1,4 @@
-import {TokenColorValueNode} from '../../config'
+import { TokenColorValueNode } from '../../config/tokens/types'
 
 export function compileColorTokenValue(node: TokenColorValueNode): string {
   let key = ''

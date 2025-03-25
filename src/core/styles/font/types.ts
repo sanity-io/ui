@@ -1,5 +1,5 @@
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {TextAlign} from '../../types'
+import { TextAlign } from '../../types/text'
 
 /**
  * @internal

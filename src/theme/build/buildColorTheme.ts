@@ -1,32 +1,17 @@
-import {ThemeColorBadgeTokens, ThemeColorStateTokens, ThemeConfig} from '../config'
-import {
-  THEME_COLOR_BUTTON_MODES,
-  THEME_COLOR_STATES,
-  THEME_COLOR_STATE_TONES,
-  ThemeColorAvatarColorKey,
-  ThemeColorCardToneKey,
-  ThemeColorButtonModeKey,
-  ThemeColorStateKey,
-  ThemeColorStateToneKey,
-  ThemeColorAvatar_v2,
-  ThemeColorBadge_v2,
-  ThemeColorSyntax,
-  ThemeColorSchemes_v2,
-  ThemeColorScheme_v2,
-  ThemeColorCard_v2,
-  ThemeColorSchemeKey,
-  ThemeColorShadow,
-  ThemeColorState_v2,
-  ThemeColorButton_v2,
-  ThemeColorButtonMode_v2,
-  ThemeColorButtonTone_v2,
-  ThemeColorAvatarHue_v2,
-  ThemeColorInput_v2,
-  ThemeColorInputMode_v2,
-  ThemeColorInputState_v2,
-  THEME_COLOR_CARD_TONES,
-} from '../system'
-import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
+import { ThemeColorBadgeTokens, ThemeColorStateTokens } from '../config/tokens/color/types'
+import { ThemeConfig } from '../config/types'
+import { THEME_COLOR_BUTTON_MODES, THEME_COLOR_STATES, THEME_COLOR_STATE_TONES, THEME_COLOR_CARD_TONES } from '../system/color/_constants'
+import { ThemeColorAvatarColorKey, ThemeColorCardToneKey, ThemeColorButtonModeKey, ThemeColorStateKey, ThemeColorStateToneKey, ThemeColorSchemeKey } from '../system/color/_system'
+import { ThemeColorAvatar_v2, ThemeColorAvatarHue_v2 } from '../system/color/avatar'
+import { ThemeColorBadge_v2 } from '../system/color/badge'
+import { ThemeColorSyntax } from '../system/color/syntax'
+import { ThemeColorSchemes_v2, ThemeColorScheme_v2, ThemeColorCard_v2 } from '../system/color/color'
+import { ThemeColorShadow } from '../system/color/shadow'
+import { ThemeColorState_v2 } from '../system/color/state'
+import { ThemeColorButton_v2, ThemeColorButtonMode_v2, ThemeColorButtonTone_v2 } from '../system/color/button'
+import { ThemeColorInput_v2, ThemeColorInputMode_v2, ThemeColorInputState_v2 } from '../system/color/input'
+import { ColorTokenContext } from './colorToken/types'
+import { resolveColorTokenValue as _color } from './colorToken/colorToken'
 import {resolveColorTokens} from './resolveColorTokens'
 
 export function buildColorTheme(config?: ThemeConfig): ThemeColorSchemes_v2 {

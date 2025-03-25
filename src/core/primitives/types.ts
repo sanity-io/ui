@@ -1,24 +1,8 @@
-import {
-  BoxDisplay,
-  BoxHeight,
-  BoxOverflow,
-  BoxSizing,
-  FlexAlign,
-  FlexDirection,
-  FlexJustify,
-  FlexValue,
-  FlexWrap,
-  GridAutoCols,
-  GridAutoFlow,
-  GridAutoRows,
-  GridItemColumn,
-  GridItemColumnEnd,
-  GridItemColumnStart,
-  GridItemRow,
-  GridItemRowEnd,
-  GridItemRowStart,
-  Radius,
-} from '../types'
+import { BoxDisplay, BoxHeight, BoxOverflow, BoxSizing } from '../types/box'
+import { FlexAlign, FlexDirection, FlexJustify, FlexValue, FlexWrap } from '../types/flex'
+import { GridAutoCols, GridAutoFlow, GridAutoRows } from '../types/grid'
+import { GridItemColumn, GridItemColumnEnd, GridItemColumnStart, GridItemRow, GridItemRowEnd, GridItemRowStart } from '../types/gridItem'
+import { Radius } from '../types/radius'
 
 /**
  * @public

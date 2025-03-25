@@ -1,6 +1,6 @@
 import {Box, Card, Code, Container, Stack, Text, useElementRect} from '@sanity/ui'
 import {useState} from 'react'
-import {Grid} from '../../../primitives'
+import { Grid } from '../../../primitives/grid/grid'
 
 export default function ExampleStory() {
   const [element, setElement] = useState<HTMLElement | null>(null)

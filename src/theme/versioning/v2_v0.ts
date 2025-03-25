@@ -1,13 +1,8 @@
-import {
-  RootTheme,
-  RootTheme_v2,
-  ThemeColor,
-  ThemeColorCard_v2,
-  ThemeColorInputMode_v2,
-  ThemeColorInputState,
-  ThemeColorInputState_v2,
-  ThemeColorInputStates,
-} from '../system'
+import { RootTheme, RootTheme_v2 } from '../system/theme'
+import { ThemeColor } from '../system/v0/color/color'
+import { ThemeColorCard_v2 } from '../system/color/color'
+import { ThemeColorInputMode_v2, ThemeColorInputState_v2 } from '../system/color/input'
+import { ThemeColorInputState, ThemeColorInputStates } from '../system/v0/color/input'
 
 const cache = new WeakMap<RootTheme_v2, RootTheme>()
 

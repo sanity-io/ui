@@ -1,5 +1,5 @@
 import {useMemo} from 'react'
-import {DialogPosition} from '../../types'
+import { DialogPosition } from '../../types/dialog'
 import {DialogContext, DialogContextValue} from './dialogContext'
 
 /**

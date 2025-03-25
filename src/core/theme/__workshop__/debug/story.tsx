@@ -11,7 +11,12 @@ import {
 } from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {CSSProperties} from 'react'
-import {Badge, Box, Flex, KBD, Stack, Text} from '../../../primitives'
+import { Badge } from '../../../primitives/badge/badge'
+import { Box } from '../../../primitives/box/box'
+import { Flex } from '../../../primitives/flex/flex'
+import { KBD } from '../../../primitives/kbd/kbd'
+import { Stack } from '../../../primitives/stack/stack'
+import { Text } from '../../../primitives/text/text'
 import {useRootTheme} from '../../useRootTheme'
 
 interface Features {

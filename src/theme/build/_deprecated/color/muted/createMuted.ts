@@ -1,4 +1,6 @@
-import {ThemeColorBase, ThemeColorMuted, ThemeColorName} from '../../../../system'
+import { ThemeColorBase } from '../../../../system/v0/color/base'
+import { ThemeColorMuted } from '../../../../system/v0/color/muted'
+import { ThemeColorName } from '../../../../system/v0/color/_system'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createMutedTones(

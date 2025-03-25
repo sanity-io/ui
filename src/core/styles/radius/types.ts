@@ -1,4 +1,4 @@
-import {Radius} from '../../types'
+import { Radius } from '../../types/radius'
 
 /**
  * @internal

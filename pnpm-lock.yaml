@@ -273,9 +273,6 @@ importers:
 
   figma:
     devDependencies:
-      '@babel/plugin-transform-object-rest-spread':
-        specifier: ^7.25.9
-        version: 7.25.9(@babel/core@7.26.10)
       '@figma/plugin-typings':
         specifier: ^1.109.0
         version: 1.109.0

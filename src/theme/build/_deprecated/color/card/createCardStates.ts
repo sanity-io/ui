@@ -1,10 +1,8 @@
-import {
-  ThemeColorBase,
-  ThemeColorCard,
-  ThemeColorMuted,
-  ThemeColorSolid,
-  ThemeColorName,
-} from '../../../../system'
+import { ThemeColorBase } from '../../../../system/v0/color/base'
+import { ThemeColorCard } from '../../../../system/v0/color/card'
+import { ThemeColorMuted } from '../../../../system/v0/color/muted'
+import { ThemeColorSolid } from '../../../../system/v0/color/solid'
+import { ThemeColorName } from '../../../../system/v0/color/_system'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createCardStates(

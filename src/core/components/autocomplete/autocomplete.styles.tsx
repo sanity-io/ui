@@ -1,6 +1,6 @@
 import {SpinnerIcon} from '@sanity/icons'
 import {styled, keyframes} from 'styled-components'
-import {Box} from '../../primitives'
+import { Box } from '../../primitives/box/box'
 
 /**
  * @internal

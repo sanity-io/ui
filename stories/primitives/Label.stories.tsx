@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Label, Stack} from '../../src/core/primitives'
+import { Label } from '../../src/core/primitives/label/label'
+import { Stack } from '../../src/core/primitives/stack/stack'
 import {getAlignControls, getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Label> = {

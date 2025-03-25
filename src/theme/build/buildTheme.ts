@@ -1,8 +1,8 @@
-import {ThemeConfig} from '../config'
+import { ThemeConfig } from '../config/types'
 import {defaultThemeConfig} from '../defaults/config'
 import {defaultThemeFonts} from '../defaults/fonts'
-import {RootTheme, RootTheme_v2} from '../system'
-import {v2_v0} from '../versioning'
+import { RootTheme, RootTheme_v2 } from '../system/theme'
+import { v2_v0 } from '../versioning/v2_v0'
 import {buildColorTheme} from './buildColorTheme'
 import {renderThemeColorSchemes} from './renderColorTheme'
 

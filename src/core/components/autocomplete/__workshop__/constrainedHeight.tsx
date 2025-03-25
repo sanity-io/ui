@@ -9,7 +9,7 @@ import {
   Text,
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
-import {Popover} from '../../../primitives'
+import { Popover } from '../../../primitives/popover/popover'
 import countries from '../__fixtures__/countries'
 import {AutocompleteProps} from '../autocomplete'
 import {ExampleOption} from './types'

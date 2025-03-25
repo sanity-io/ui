@@ -1,5 +1,5 @@
 import {forwardRef} from 'react'
-import {Box, BoxProps} from '../../primitives'
+import { Box, BoxProps } from '../../primitives/box/box'
 
 /**
  * @public

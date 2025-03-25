@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Box, Text} from '../../src/core/primitives'
+import { Box } from '../../src/core/primitives/box/box'
+import { Text } from '../../src/core/primitives/text/text'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Box> = {

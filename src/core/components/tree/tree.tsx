@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import {Stack} from '../../primitives'
+import { Stack } from '../../primitives/stack/stack'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './treeContext'
 import {TreeContextValue, TreeState} from './types'

@@ -11,16 +11,5 @@
     "./typings",
     "./workshop.config.ts",
     "./workshop.runtime.ts"
-  ],
-  "compilerOptions": {
-    "composite": true,
-    "rootDir": ".",
-    "outDir": "./dist/types",
-    "paths": {
-      "@sanity/ui/*": ["./exports/*"],
-      "@sanity/ui": ["./exports"]
-    },
-    // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
-    "jsx": "react-jsx"
-  }
+  ]
 }

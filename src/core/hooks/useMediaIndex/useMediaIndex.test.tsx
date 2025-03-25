@@ -2,7 +2,7 @@
 
 import {buildTheme} from '@sanity/ui/theme'
 import {renderToString, renderToStaticMarkup} from 'react-dom/server'
-import {ThemeProvider} from '../../theme'
+import { ThemeProvider } from '../../theme/themeProvider'
 import {useMediaIndex} from './useMediaIndex'
 
 const theme = buildTheme()

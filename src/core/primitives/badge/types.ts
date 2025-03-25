@@ -1,4 +1,4 @@
-import {BadgeTone} from '../../types'
+import { BadgeTone } from '../../types/badge'
 
 /**
  * @internal

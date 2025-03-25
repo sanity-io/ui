@@ -1,5 +1,8 @@
-import {Card, Flex, Grid, Text} from '../../src/core/primitives'
-import {ThemeColorSchemeKey} from '../../src/theme'
+import { Card } from '../../src/core/primitives/card/card'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Grid } from '../../src/core/primitives/grid/grid'
+import { Text } from '../../src/core/primitives/text/text'
+import { ThemeColorSchemeKey } from '../../src/theme/system/color/_system'
 
 interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {
   scheme?: ThemeColorSchemeKey

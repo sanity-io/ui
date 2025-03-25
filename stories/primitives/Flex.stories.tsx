@@ -1,5 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {Card, Flex, Text} from '../../src/core/primitives'
+import { Card } from '../../src/core/primitives/card/card'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Text } from '../../src/core/primitives/text/text'
 import {
   getDirectionControls,
   getFlexAlignControls,

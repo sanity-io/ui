@@ -9,13 +9,15 @@ import {
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
-import {useArrayProp} from '../../hooks'
-import {Box, Flex, Text} from '../../primitives'
-import {Selectable} from '../../primitives/_selectable'
+import { useArrayProp } from '../../hooks/useArrayProp'
+import { Box } from '../../primitives/box/box'
+import { Flex } from '../../primitives/flex/flex'
+import { Text } from '../../primitives/text/text'
+import { Selectable } from '../../primitives/_selectable/selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {useRootTheme} from '../../theme'
+import { useRootTheme } from '../../theme/useRootTheme'
 import {SelectableTone} from '../../types/selectable'
-import {Hotkeys} from '../hotkeys'
+import { Hotkeys } from '../hotkeys/hotkeys'
 import {useMenu} from './useMenu'
 
 /**

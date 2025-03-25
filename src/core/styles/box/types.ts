@@ -1,4 +1,4 @@
-import {BoxDisplay, BoxHeight, BoxOverflow, BoxSizing} from '../../types'
+import { BoxDisplay, BoxHeight, BoxOverflow, BoxSizing } from '../../types/box'
 
 /**
  * @internal

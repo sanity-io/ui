@@ -1,12 +1,14 @@
 import {ThemeAvatar_v2} from './avatar'
-import {ThemeColorSchemes_v2, ThemeColorCard_v2} from './color'
+import { ThemeColorSchemes_v2, ThemeColorCard_v2 } from './color/color'
 import {ThemeFocusRing} from './focusRing'
 import {ThemeFontWeightKey, ThemeFonts} from './font'
 import {ThemeInput_v2} from './input'
 import {ThemeLayer} from './layer'
 import {ThemeShadow} from './shadow'
 import {ThemeStyles} from './styles'
-import {ThemeAvatar, ThemeColor, ThemeColorSchemes, ThemeInput} from './v0'
+import { ThemeAvatar } from './v0/avatar'
+import { ThemeColor, ThemeColorSchemes } from './v0/color/color'
+import { ThemeInput } from './v0/input'
 
 /**
  * @public

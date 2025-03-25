@@ -1,4 +1,7 @@
-import {ThemeColorBase, ThemeColorInput, ThemeColorMuted, ThemeColorSolid} from '../../../../system'
+import { ThemeColorBase } from '../../../../system/v0/color/base'
+import { ThemeColorInput } from '../../../../system/v0/color/input'
+import { ThemeColorMuted } from '../../../../system/v0/color/muted'
+import { ThemeColorSolid } from '../../../../system/v0/color/solid'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createInputModes(

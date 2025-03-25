@@ -1,7 +1,9 @@
 import {styled} from 'styled-components'
-import {ThemeColorStateToneKey, getTheme_v2} from '../../../theme'
-import {Card, Flex} from '../../primitives'
-import type {ButtonTone} from '../../types'
+import { ThemeColorStateToneKey } from '../../../theme/system/color/_system'
+import { getTheme_v2 } from '../../../theme/versioning/getTheme_v2'
+import { Card } from '../../primitives/card/card'
+import { Flex } from '../../primitives/flex/flex'
+import type { ButtonTone } from '../../types/button'
 
 const LOADING_BAR_HEIGHT = 2
 
