@@ -13,7 +13,7 @@ import {
   ThemeColorInputModeKey,
 } from '@sanity/ui/theme'
 import {buildTheme} from '@sanity/ui/theme'
-import {rem} from '../../../styles'
+import { rem } from '../../../styles/helpers'
 import {useTheme_v2} from '../../useTheme'
 import {getCSSProps} from './helpers'
 import {Root} from './Root'

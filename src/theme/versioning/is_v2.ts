@@ -1,4 +1,4 @@
-import {RootTheme, RootTheme_v2} from '../system'
+import { RootTheme, RootTheme_v2 } from '../system/theme'
 
 /** @internal */
 export function is_v2(themeProp: RootTheme | RootTheme_v2): themeProp is RootTheme_v2 {

@@ -24,12 +24,16 @@ import {
 } from 'react'
 import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
-import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
+import { useArrayProp } from '../../hooks/useArrayProp'
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
-import {useTheme_v2} from '../../theme'
-import type {Placement} from '../../types'
-import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
+import { useTheme_v2 } from '../../theme/useTheme'
+import type { Placement } from '../../types/placement'
+import { Layer, type LayerProps } from '../../utils/layer/layer'
+import { Portal } from '../../utils/portal/portal'
+import { useBoundaryElement } from '../../utils/boundaryElement/useBoundaryElement'
+import { usePortal } from '../../utils/portal/usePortal'
 import {getElementRef} from '../../utils/getElementRef'
 import type {Delay} from '../types'
 import {
@@ -38,7 +42,7 @@ import {
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
 import {TooltipCard} from './tooltipCard'
-import {useTooltipDelayGroup} from './tooltipDelayGroup'
+import { useTooltipDelayGroup } from './tooltipDelayGroup/useTooltipDelayGroup'
 
 /**
  * @public

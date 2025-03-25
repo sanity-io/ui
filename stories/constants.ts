@@ -1,13 +1,9 @@
-import {
-  BadgeMode,
-  BadgeTone,
-  ButtonMode,
-  ButtonTone,
-  CardTone,
-  Placement,
-  Radius,
-} from '../src/core/types'
-import {buildTheme} from '../src/theme'
+import { BadgeMode, BadgeTone } from '../src/core/types/badge'
+import { ButtonMode, ButtonTone } from '../src/core/types/button'
+import { CardTone } from '../src/core/types/card'
+import { Placement } from '../src/core/types/placement'
+import { Radius } from '../src/core/types/radius'
+import { buildTheme } from '../src/theme/build/buildTheme'
 
 const theme = buildTheme()
 

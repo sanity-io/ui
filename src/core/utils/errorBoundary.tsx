@@ -1,5 +1,5 @@
 import {Component, PropsWithChildren} from 'react'
-import {Code} from '../primitives/code'
+import { Code } from '../primitives/code/code'
 
 /**
  * DO NOT USE IN PRODUCTION

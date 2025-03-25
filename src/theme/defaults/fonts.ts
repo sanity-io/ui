@@ -1,4 +1,4 @@
-import {ThemeFonts} from '../system'
+import { ThemeFonts } from '../system/font'
 
 export const defaultThemeFonts: ThemeFonts = {
   code: {

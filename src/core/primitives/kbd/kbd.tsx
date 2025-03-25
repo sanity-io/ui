@@ -1,10 +1,10 @@
 import {forwardRef} from 'react'
 import {styled, css} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import { useArrayProp } from '../../hooks/useArrayProp'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {Radius} from '../../types'
-import {Box} from '../box'
-import {Text} from '../text'
+import { Radius } from '../../types/radius'
+import { Box } from '../box/box'
+import { Text } from '../text/text'
 
 /**
  * @public

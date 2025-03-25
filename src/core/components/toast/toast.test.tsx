@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import {render} from '../../../../test'
+import { render } from '../../../../test/utils'
 import {ToastContext} from './toastContext'
 import {ToastContextValue} from './types'
 import {useToast} from './useToast'

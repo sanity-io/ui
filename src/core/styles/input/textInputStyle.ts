@@ -1,7 +1,7 @@
 import {ThemeColorSchemeKey, ThemeFontWeightKey, getTheme_v2} from '@sanity/ui/theme'
 import {CSSObject} from '@sanity/ui/theme'
 import {css} from 'styled-components'
-import {CardTone} from '../../types'
+import { CardTone } from '../../types/card'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {rem, _responsive} from '../helpers'
 import {ThemeProps} from '../types'

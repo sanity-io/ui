@@ -1,32 +1,9 @@
 import {COLOR_HUES, ColorHueKey} from '@sanity/color'
-import {
-  ColorConfigCardTone,
-  ColorConfigInputMode,
-  ColorConfigInputState,
-  ColorConfigStateTone,
-  ThemeColorAvatarTokens,
-  ThemeColorBadgeTokens,
-  ThemeColorBaseTokens,
-  ThemeColorButtonTokens,
-  ThemeColorInputStateTokens,
-  ThemeColorInputTokens,
-  ThemeColorStateTokens,
-  ThemeColorStatesTokens,
-  ThemeColorTokens,
-} from '../config'
+import { ColorConfigCardTone, ColorConfigInputMode, ColorConfigInputState, ColorConfigStateTone } from '../config/system'
+import { ThemeColorAvatarTokens, ThemeColorBadgeTokens, ThemeColorBaseTokens, ThemeColorButtonTokens, ThemeColorInputStateTokens, ThemeColorInputTokens, ThemeColorStateTokens, ThemeColorStatesTokens, ThemeColorTokens } from '../config/tokens/color/types'
 import {defaultColorTokens} from '../defaults/colorTokens'
-import {
-  THEME_COLOR_CARD_TONES,
-  THEME_COLOR_BUTTON_MODES,
-  THEME_COLOR_INPUT_MODES,
-  THEME_COLOR_INPUT_STATES,
-  THEME_COLOR_STATES,
-  THEME_COLOR_STATE_TONES,
-  ThemeColorCardToneKey,
-  ThemeColorButtonModeKey,
-  ThemeColorStateKey,
-  ThemeColorStateToneKey,
-} from '../system'
+import { THEME_COLOR_CARD_TONES, THEME_COLOR_BUTTON_MODES, THEME_COLOR_INPUT_MODES, THEME_COLOR_INPUT_STATES, THEME_COLOR_STATES, THEME_COLOR_STATE_TONES } from '../system/color/_constants'
+import { ThemeColorCardToneKey, ThemeColorButtonModeKey, ThemeColorStateKey, ThemeColorStateToneKey } from '../system/color/_system'
 import {merge} from './merge'
 
 /**

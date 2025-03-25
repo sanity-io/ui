@@ -1,11 +1,11 @@
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
-import {BoundaryElementProvider} from '../../../utils'
-import {Box} from '../../box'
-import {Card} from '../../card'
-import {Flex} from '../../flex'
-import {Stack} from '../../stack'
-import {Text} from '../../text'
+import { BoundaryElementProvider } from '../../../utils/boundaryElement/boundaryElementProvider'
+import { Box } from '../../box/box'
+import { Card } from '../../card/card'
+import { Flex } from '../../flex/flex'
+import { Stack } from '../../stack/stack'
+import { Text } from '../../text/text'
 import {Popover, PopoverProps, PopoverUpdateCallback} from '../popover'
 
 const SIDE_PANEL_WIDTH = {

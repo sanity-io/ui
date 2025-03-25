@@ -1,9 +1,16 @@
 import {COLOR_HUES, ColorTint, ColorTints, black, hues, white} from '@sanity/color'
 import {ReactNode} from 'react'
 import {styled} from 'styled-components'
-import {Box, Card, Code, Flex, Grid, Heading, Stack} from '../../src/core/primitives'
-import {ThemeProvider} from '../../src/core/theme'
-import {buildTheme, hexToRgb, rgbToHsl} from '../../src/theme'
+import { Box } from '../../src/core/primitives/box/box'
+import { Card } from '../../src/core/primitives/card/card'
+import { Code } from '../../src/core/primitives/code/code'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Grid } from '../../src/core/primitives/grid/grid'
+import { Heading } from '../../src/core/primitives/heading/heading'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { ThemeProvider } from '../../src/core/theme/themeProvider'
+import { buildTheme } from '../../src/theme/build/buildTheme'
+import { hexToRgb, rgbToHsl } from '../../src/theme/build/lib/color-fns/convert'
 
 const theme = buildTheme()
 

@@ -1,21 +1,14 @@
-import {
-  ThemeColorGenericState,
-  ThemeColorBase,
-  ThemeColorButtonModeKey,
-  ThemeColorButtonStates,
-  ThemeColorInputState,
-  ThemeColorMuted,
-  ThemeColorMutedTone,
-  ThemeColorSolid,
-  ThemeColorSolidTone,
-  ThemeColorSyntax,
-  ThemeColorName,
-  ThemeColorScheme,
-  ThemeColorSchemes,
-  ThemeColor,
-  ThemeColorToneKey,
-  ThemeColorSpotKey,
-} from '../../../system'
+import { ThemeColorGenericState } from '../../../system/v0/color/_generic'
+import { ThemeColorBase } from '../../../system/v0/color/base'
+import { ThemeColorButtonModeKey } from '../../../system/color/_system'
+import { ThemeColorButtonStates } from '../../../system/v0/color/button'
+import { ThemeColorInputState } from '../../../system/v0/color/input'
+import { ThemeColorMuted, ThemeColorMutedTone } from '../../../system/v0/color/muted'
+import { ThemeColorSolid, ThemeColorSolidTone } from '../../../system/v0/color/solid'
+import { ThemeColorSyntax } from '../../../system/color/syntax'
+import { ThemeColorName, ThemeColorToneKey } from '../../../system/v0/color/_system'
+import { ThemeColorScheme, ThemeColorSchemes, ThemeColor } from '../../../system/v0/color/color'
+import { ThemeColorSpotKey } from '../../../system/v0/color/spot'
 import {createSelectableTones} from './_selectable/createSelectableTones'
 import {createSolidTones} from './_solid/createSolidTones'
 import {createButtonModes} from './button/createButtonModes'

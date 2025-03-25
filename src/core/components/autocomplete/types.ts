@@ -1,4 +1,4 @@
-import {ButtonProps} from '../../primitives'
+import { ButtonProps } from '../../primitives/button/button'
 
 /**
  * @public

@@ -1,4 +1,4 @@
-import {ThemeColorTokens} from '../config'
+import { ThemeColorTokens } from '../config/tokens/color/types'
 
 export const defaultColorTokens: ThemeColorTokens = {
   base: {

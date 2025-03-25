@@ -2,10 +2,11 @@ import {getTheme_v2} from '@sanity/ui/theme'
 import {forwardRef, useMemo} from 'react'
 import {styled, css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp} from '../../hooks'
-import {rem, _responsive, ThemeProps} from '../../styles'
-import {AvatarSize} from '../../types'
-import {Label} from '../label'
+import { useArrayProp } from '../../hooks/useArrayProp'
+import { rem, _responsive } from '../../styles/helpers'
+import { ThemeProps } from '../../styles/types'
+import { AvatarSize } from '../../types/avatar'
+import { Label } from '../label/label'
 
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {avatar, media} = getTheme_v2(props.theme)

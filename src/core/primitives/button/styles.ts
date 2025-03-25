@@ -1,9 +1,9 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
-import {ThemeProps} from '../../styles'
-import {_cardColorStyle} from '../../styles/card'
+import { ThemeProps } from '../../styles/types'
+import { _cardColorStyle } from '../../styles/card/_cardColorStyle'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
-import {ButtonMode, ButtonTone, ButtonWidth} from '../../types'
+import { ButtonMode, ButtonTone, ButtonWidth } from '../../types/button'
 
 /**
  * @internal

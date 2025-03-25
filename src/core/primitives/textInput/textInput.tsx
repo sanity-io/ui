@@ -4,7 +4,8 @@ import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, u
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useCustomValidity} from '../../hooks'
+import { useArrayProp } from '../../hooks/useArrayProp'
+import { useCustomValidity } from '../../hooks/useCustomValidity'
 import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
@@ -17,12 +18,12 @@ import {
   TextInputResponsivePaddingStyleProps,
   textInputRootStyle,
 } from '../../styles/internal'
-import {useRootTheme} from '../../theme'
-import {Radius} from '../../types'
-import {Box} from '../box'
-import {Button, ButtonProps} from '../button'
-import {Card} from '../card'
-import {Text} from '../text'
+import { useRootTheme } from '../../theme/useRootTheme'
+import { Radius } from '../../types/radius'
+import { Box } from '../box/box'
+import { Button, ButtonProps } from '../button/button'
+import { Card } from '../card/card'
+import { Text } from '../text/text'
 
 /**
  * @public

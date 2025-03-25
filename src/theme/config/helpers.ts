@@ -12,7 +12,7 @@ import {
   ColorConfigStateTone,
   ColorConfigValue,
 } from './system'
-import {parseTokenValue} from './tokens'
+import { parseTokenValue } from './tokens/parseTokenValue'
 
 /** @internal */
 export function isColorConfigBaseTone(str: string): str is ColorConfigCardTone {

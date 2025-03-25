@@ -1,6 +1,7 @@
 import {BottleIcon, IceCreamIcon, LemonIcon, TrolleyIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
-import {Tree, TreeItem} from '../../src/core/components'
+import { Tree } from '../../src/core/components/tree/tree'
+import { TreeItem } from '../../src/core/components/tree/treeItem'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Tree> = {

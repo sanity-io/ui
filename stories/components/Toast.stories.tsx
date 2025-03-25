@@ -1,8 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {useId} from 'react'
-import {Toast, ToastProvider, useToast} from '../../src/core/components'
-import {Box, Button, Grid, Heading, Inline} from '../../src/core/primitives'
+import { Toast } from '../../src/core/components/toast/toast'
+import { ToastProvider } from '../../src/core/components/toast/toastProvider'
+import { useToast } from '../../src/core/components/toast/useToast'
+import { Box } from '../../src/core/primitives/box/box'
+import { Button } from '../../src/core/primitives/button/button'
+import { Grid } from '../../src/core/primitives/grid/grid'
+import { Heading } from '../../src/core/primitives/heading/heading'
+import { Inline } from '../../src/core/primitives/inline/inline'
 
 const meta: Meta<typeof Toast> = {
   args: {title: 'Toast title', description: 'Toast description'},

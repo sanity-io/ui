@@ -1,4 +1,4 @@
-import type {ThemeColorCard_v2} from '../system'
+import type { ThemeColorCard_v2 } from '../system/color/color'
 
 /**
  * Apply `neutral` and `suggest` if they're not already part of the color object,

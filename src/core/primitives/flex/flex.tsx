@@ -1,13 +1,13 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import { useArrayProp } from '../../hooks/useArrayProp'
 import {
   flexItemStyle,
   FlexItemStyleProps,
   responsiveFlexStyle,
   ResponsiveFlexStyleProps,
 } from '../../styles/internal'
-import {Box, BoxProps} from '../box'
+import { Box, BoxProps } from '../box/box'
 import {ResponsiveFlexProps, ResponsiveFlexItemProps} from '../types'
 
 /**

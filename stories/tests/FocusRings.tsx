@@ -8,32 +8,28 @@ import {
   SunIcon,
 } from '@sanity/icons'
 import {ReactNode} from 'react'
-import {
-  Autocomplete,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  Tab,
-  TabList,
-} from '../../src/core/components'
-import {
-  Avatar,
-  Button,
-  Card,
-  Checkbox,
-  Flex,
-  Heading,
-  Radio,
-  Select,
-  Stack,
-  Switch,
-  Text,
-  TextArea,
-  TextInput,
-} from '../../src/core/primitives'
-import {ThemeProvider} from '../../src/core/theme'
-import {buildTheme} from '../../src/theme'
+import { Autocomplete } from '../../src/core/components/autocomplete/autocomplete'
+import { Menu } from '../../src/core/components/menu/menu'
+import { MenuButton } from '../../src/core/components/menu/menuButton'
+import { MenuDivider } from '../../src/core/components/menu/menuDivider'
+import { MenuItem } from '../../src/core/components/menu/menuItem'
+import { Tab } from '../../src/core/components/tab/tab'
+import { TabList } from '../../src/core/components/tab/tabList'
+import { Avatar } from '../../src/core/primitives/avatar/avatar'
+import { Button } from '../../src/core/primitives/button/button'
+import { Card } from '../../src/core/primitives/card/card'
+import { Checkbox } from '../../src/core/primitives/checkbox/checkbox'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Heading } from '../../src/core/primitives/heading/heading'
+import { Radio } from '../../src/core/primitives/radio/radio'
+import { Select } from '../../src/core/primitives/select/select'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { Switch } from '../../src/core/primitives/switch/switch'
+import { Text } from '../../src/core/primitives/text/text'
+import { TextArea } from '../../src/core/primitives/textArea/textArea'
+import { TextInput } from '../../src/core/primitives/textInput/textInput'
+import { ThemeProvider } from '../../src/core/theme/themeProvider'
+import { buildTheme } from '../../src/theme/build/buildTheme'
 
 const theme = buildTheme()
 

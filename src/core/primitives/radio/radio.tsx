@@ -1,6 +1,6 @@
 import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {useCustomValidity} from '../../hooks'
+import { useCustomValidity } from '../../hooks/useCustomValidity'
 import {radioBaseStyle, inputElementStyle} from './styles'
 
 /**

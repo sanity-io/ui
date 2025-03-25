@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
-import {Checkbox, Flex, Stack} from '../../src/core/primitives'
+import { Checkbox } from '../../src/core/primitives/checkbox/checkbox'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Stack } from '../../src/core/primitives/stack/stack'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Checkbox> = {

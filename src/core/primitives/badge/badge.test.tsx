@@ -1,7 +1,7 @@
 /** @jest-environment jsdom */
 
 import {axe} from 'jest-axe'
-import {render} from '../../../../test'
+import { render } from '../../../../test/utils'
 import {Badge} from './badge'
 
 describe('atoms/badge', () => {

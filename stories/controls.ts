@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {icons} from '@sanity/icons'
-import {buildTheme, ThemeFontKey} from '../src/theme'
+import { buildTheme } from '../src/theme/build/buildTheme'
+import { ThemeFontKey } from '../src/theme/system/font'
 
 const theme = buildTheme()
 

@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
-import {Flex, Stack, Switch} from '../../src/core/primitives'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { Switch } from '../../src/core/primitives/switch/switch'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Switch> = {

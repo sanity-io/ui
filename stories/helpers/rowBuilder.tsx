@@ -1,6 +1,7 @@
 import {ComponentProps, ReactNode} from 'react'
-import {Card, Flex} from '../../src/core/primitives'
-import {ThemeColorSchemeKey} from '../../src/theme'
+import { Card } from '../../src/core/primitives/card/card'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { ThemeColorSchemeKey } from '../../src/theme/system/color/_system'
 
 interface RowBuilderProps<T> {
   gap?: ComponentProps<typeof Flex>['gap']

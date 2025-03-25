@@ -2,9 +2,11 @@
 import {screen, act, fireEvent} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 import '../../../../test/mocks/matchMedia.mock'
-import {render} from '../../../../test'
-import {Text, Button} from '../../primitives'
-import {Tooltip, TooltipDelayGroupProvider} from '../tooltip'
+import { render } from '../../../../test/utils'
+import { Text } from '../../primitives/text/text'
+import { Button } from '../../primitives/button/button'
+import { Tooltip } from '../tooltip/tooltip'
+import { TooltipDelayGroupProvider } from '../tooltip/tooltipDelayGroup/tooltipDelayGroupProvider'
 
 // Fake timers using Jest
 beforeEach(() => {

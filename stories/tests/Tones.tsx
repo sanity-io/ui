@@ -1,47 +1,41 @@
 import {ReactNode, useState} from 'react'
 
-import {LayerProvider} from '../../src/core'
-import {
-  CodeSkeleton,
-  HeadingSkeleton,
-  Hotkeys,
-  LabelSkeleton,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  Skeleton,
-  Tab,
-  TabList,
-  TextSkeleton,
-} from '../../src/core/components'
-import {
-  Avatar,
-  Badge,
-  Box,
-  Button,
-  Card,
-  Checkbox,
-  Code,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Inline,
-  KBD,
-  Label,
-  Popover,
-  Radio,
-  Select,
-  Spinner,
-  Stack,
-  Switch,
-  Text,
-  TextArea,
-  TextInput,
-} from '../../src/core/primitives'
-import {ThemeProvider} from '../../src/core/theme'
-import {buildTheme, ThemeColorSchemeKey} from '../../src/theme'
+import { LayerProvider } from '../../src/core/utils/layer/layerProvider'
+import { CodeSkeleton, HeadingSkeleton, LabelSkeleton, TextSkeleton } from '../../src/core/components/skeleton/textSkeleton'
+import { Hotkeys } from '../../src/core/components/hotkeys/hotkeys'
+import { Menu } from '../../src/core/components/menu/menu'
+import { MenuButton } from '../../src/core/components/menu/menuButton'
+import { MenuDivider } from '../../src/core/components/menu/menuDivider'
+import { MenuItem } from '../../src/core/components/menu/menuItem'
+import { Skeleton } from '../../src/core/components/skeleton/skeleton'
+import { Tab } from '../../src/core/components/tab/tab'
+import { TabList } from '../../src/core/components/tab/tabList'
+import { Avatar } from '../../src/core/primitives/avatar/avatar'
+import { Badge } from '../../src/core/primitives/badge/badge'
+import { Box } from '../../src/core/primitives/box/box'
+import { Button } from '../../src/core/primitives/button/button'
+import { Card } from '../../src/core/primitives/card/card'
+import { Checkbox } from '../../src/core/primitives/checkbox/checkbox'
+import { Code } from '../../src/core/primitives/code/code'
+import { Container } from '../../src/core/primitives/container/container'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Grid } from '../../src/core/primitives/grid/grid'
+import { Heading } from '../../src/core/primitives/heading/heading'
+import { Inline } from '../../src/core/primitives/inline/inline'
+import { KBD } from '../../src/core/primitives/kbd/kbd'
+import { Label } from '../../src/core/primitives/label/label'
+import { Popover } from '../../src/core/primitives/popover/popover'
+import { Radio } from '../../src/core/primitives/radio/radio'
+import { Select } from '../../src/core/primitives/select/select'
+import { Spinner } from '../../src/core/primitives/spinner/spinner'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { Switch } from '../../src/core/primitives/switch/switch'
+import { Text } from '../../src/core/primitives/text/text'
+import { TextArea } from '../../src/core/primitives/textArea/textArea'
+import { TextInput } from '../../src/core/primitives/textInput/textInput'
+import { ThemeProvider } from '../../src/core/theme/themeProvider'
+import { buildTheme } from '../../src/theme/build/buildTheme'
+import { ThemeColorSchemeKey } from '../../src/theme/system/color/_system'
 
 const theme = buildTheme()
 

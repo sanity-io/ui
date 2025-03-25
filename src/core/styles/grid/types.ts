@@ -1,14 +1,5 @@
-import {
-  GridAutoCols,
-  GridAutoFlow,
-  GridAutoRows,
-  GridItemColumn,
-  GridItemColumnEnd,
-  GridItemColumnStart,
-  GridItemRow,
-  GridItemRowEnd,
-  GridItemRowStart,
-} from '../../types'
+import { GridAutoCols, GridAutoFlow, GridAutoRows } from '../../types/grid'
+import { GridItemColumn, GridItemColumnEnd, GridItemColumnStart, GridItemRow, GridItemRowEnd, GridItemRowStart } from '../../types/gridItem'
 
 /**
  * @internal

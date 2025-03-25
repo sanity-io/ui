@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {ChangeEvent, useCallback, useState} from 'react'
-import {Flex, Radio, Stack} from '../../src/core/primitives'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Radio } from '../../src/core/primitives/radio/radio'
+import { Stack } from '../../src/core/primitives/stack/stack'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Radio> = {

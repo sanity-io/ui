@@ -1,12 +1,12 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {
-  Skeleton,
-  HeadingSkeleton,
-  TextSkeleton,
-  CodeSkeleton,
-  LabelSkeleton,
-} from '../../src/core/components'
-import {Flex, Grid, Box, Container, Stack, Card} from '../../src/core/primitives'
+import { Skeleton } from '../../src/core/components/skeleton/skeleton'
+import { HeadingSkeleton, TextSkeleton, CodeSkeleton, LabelSkeleton } from '../../src/core/components/skeleton/textSkeleton'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Grid } from '../../src/core/primitives/grid/grid'
+import { Box } from '../../src/core/primitives/box/box'
+import { Container } from '../../src/core/primitives/container/container'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { Card } from '../../src/core/primitives/card/card'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {

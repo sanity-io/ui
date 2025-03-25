@@ -3,9 +3,10 @@ import {type MotionProps, motion} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import {styled} from 'styled-components'
 import {POPOVER_MOTION_PROPS} from '../../constants'
-import {Placement, Radius} from '../../types'
-import {Arrow} from '../../utils'
-import {Card, CardProps} from '../card'
+import { Placement } from '../../types/placement'
+import { Radius } from '../../types/radius'
+import { Arrow } from '../../utils/arrow/arrow'
+import { Card, CardProps } from '../card/card'
 import {
   DEFAULT_TOOLTIP_ARROW_HEIGHT,
   DEFAULT_TOOLTIP_ARROW_RADIUS,

@@ -1,7 +1,8 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
-import {_responsive, ThemeProps} from '../../styles'
-import {DialogPosition} from '../../types'
+import { _responsive } from '../../styles/helpers'
+import { ThemeProps } from '../../styles/types'
+import { DialogPosition } from '../../types/dialog'
 
 /**
  * @internal

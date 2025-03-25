@@ -2,24 +2,28 @@ import {CloseIcon} from '@sanity/icons'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
-import {
-  containsOrEqualsElement,
-  focusFirstDescendant,
-  focusLastDescendant,
-  isHTMLElement,
-} from '../../helpers'
-import {
-  useArrayProp,
-  useClickOutsideEvent,
-  useGlobalKeyDown,
-  usePrefersReducedMotion,
-} from '../../hooks'
-import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
+import { containsOrEqualsElement, isHTMLElement } from '../../helpers/element'
+import { focusFirstDescendant, focusLastDescendant } from '../../helpers/focus'
+import { useArrayProp } from '../../hooks/useArrayProp'
+import { useClickOutsideEvent } from '../../hooks/useClickOutsideEvent'
+import { useGlobalKeyDown } from '../../hooks/useGlobalKeyDown'
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
+import { Box } from '../../primitives/box/box'
+import { Button } from '../../primitives/button/button'
+import { Card } from '../../primitives/card/card'
+import { Container } from '../../primitives/container/container'
+import { Flex } from '../../primitives/flex/flex'
+import { Text } from '../../primitives/text/text'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
-import {useTheme_v2} from '../../theme'
-import {DialogPosition, Radius} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
+import { useTheme_v2 } from '../../theme/useTheme'
+import { DialogPosition } from '../../types/dialog'
+import { Radius } from '../../types/radius'
+import { Layer, LayerProps } from '../../utils/layer/layer'
+import { Portal } from '../../utils/portal/portal'
+import { useBoundaryElement } from '../../utils/boundaryElement/useBoundaryElement'
+import { useLayer } from '../../utils/layer/useLayer'
+import { usePortal } from '../../utils/portal/usePortal'
 import {
   animationDialogStyle,
   AnimationDialogStyleProps,

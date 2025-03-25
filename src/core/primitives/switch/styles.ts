@@ -1,6 +1,7 @@
 import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
-import {rem, ThemeProps} from '../../styles'
+import { rem } from '../../styles/helpers'
+import { ThemeProps } from '../../styles/types'
 import {focusRingStyle} from '../../styles/internal'
 
 /* Root */

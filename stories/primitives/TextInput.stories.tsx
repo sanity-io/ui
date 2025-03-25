@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
-import {Box, Container, Grid, Text, TextInput} from '../../src/core/primitives'
+import { Box } from '../../src/core/primitives/box/box'
+import { Container } from '../../src/core/primitives/container/container'
+import { Grid } from '../../src/core/primitives/grid/grid'
+import { Text } from '../../src/core/primitives/text/text'
+import { TextInput } from '../../src/core/primitives/textInput/textInput'
 import {RADII} from '../constants'
 import {
   getFontSizeControls,

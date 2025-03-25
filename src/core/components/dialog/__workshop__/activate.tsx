@@ -1,7 +1,13 @@
 import {useState} from 'react'
-import {Stack, Flex, Button, Text} from '../../../primitives'
-import {Layer, LayerProvider} from '../../../utils'
-import {Menu, MenuButton, MenuItem} from '../../menu'
+import { Stack } from '../../../primitives/stack/stack'
+import { Flex } from '../../../primitives/flex/flex'
+import { Button } from '../../../primitives/button/button'
+import { Text } from '../../../primitives/text/text'
+import { Layer } from '../../../utils/layer/layer'
+import { LayerProvider } from '../../../utils/layer/layerProvider'
+import { Menu } from '../../menu/menu'
+import { MenuButton } from '../../menu/menuButton'
+import { MenuItem } from '../../menu/menuItem'
 import {Dialog} from '../dialog'
 
 export default function LayeringFocusStory() {

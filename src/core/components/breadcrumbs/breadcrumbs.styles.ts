@@ -1,5 +1,5 @@
 import {styled} from 'styled-components'
-import {Button} from '../../primitives'
+import { Button } from '../../primitives/button/button'
 
 export const StyledBreadcrumbs = styled.ol`
   margin: 0;

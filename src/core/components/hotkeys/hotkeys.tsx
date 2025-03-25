@@ -1,8 +1,9 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
-import {Inline, KBD} from '../../primitives'
-import {Radius} from '../../types'
+import { useArrayProp } from '../../hooks/useArrayProp'
+import { Inline } from '../../primitives/inline/inline'
+import { KBD } from '../../primitives/kbd/kbd'
+import { Radius } from '../../types/radius'
 
 /**
  * @public

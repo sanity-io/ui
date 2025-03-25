@@ -1,4 +1,4 @@
-import {Placement} from '../../types'
+import { Placement } from '../../types/placement'
 
 /**
  * @internal

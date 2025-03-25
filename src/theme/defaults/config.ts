@@ -1,4 +1,4 @@
-import {RootTheme_v2} from '../system'
+import { RootTheme_v2 } from '../system/theme'
 
 const BORDER_WIDTH = 1
 const OUTLINE_WIDTH = 0.5

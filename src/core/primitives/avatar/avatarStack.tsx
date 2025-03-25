@@ -2,9 +2,10 @@ import {getTheme_v2} from '@sanity/ui/theme'
 import {Children, cloneElement, forwardRef, isValidElement} from 'react'
 import {styled, css} from 'styled-components'
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp} from '../../hooks'
-import {rem, _responsive, ThemeProps} from '../../styles'
-import {AvatarSize} from '../../types'
+import { useArrayProp } from '../../hooks/useArrayProp'
+import { rem, _responsive } from '../../styles/helpers'
+import { ThemeProps } from '../../styles/types'
+import { AvatarSize } from '../../types/avatar'
 import {AvatarCounter} from './avatarCounter'
 
 const BASE_STYLES = css`

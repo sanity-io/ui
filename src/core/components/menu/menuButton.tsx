@@ -9,8 +9,9 @@ import {
   useRef,
   useImperativeHandle,
 } from 'react'
-import {Popover, PopoverProps} from '../../primitives'
-import {Placement, Radius} from '../../types'
+import { Popover, PopoverProps } from '../../primitives/popover/popover'
+import { Placement } from '../../types/placement'
+import { Radius } from '../../types/radius'
 import {MenuProps} from './menu'
 
 /**

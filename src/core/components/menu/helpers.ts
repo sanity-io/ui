@@ -1,4 +1,4 @@
-import {isHTMLAnchorElement, isHTMLButtonElement} from '../../helpers'
+import { isHTMLAnchorElement, isHTMLButtonElement } from '../../helpers/element'
 
 /**
  * @internal

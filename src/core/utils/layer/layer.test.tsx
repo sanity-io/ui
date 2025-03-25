@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import {render} from '../../../../test'
+import { render } from '../../../../test/utils'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'
 import {useLayer} from './useLayer'

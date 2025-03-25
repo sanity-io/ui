@@ -1,4 +1,5 @@
-import {ThemeColorBase, ThemeColorSpot} from '../../../../system'
+import { ThemeColorBase } from '../../../../system/v0/color/base'
+import { ThemeColorSpot } from '../../../../system/v0/color/spot'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createSpot(

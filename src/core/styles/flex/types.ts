@@ -1,4 +1,4 @@
-import {FlexAlign, FlexDirection, FlexJustify, FlexValue, FlexWrap} from '../../types'
+import { FlexAlign, FlexDirection, FlexJustify, FlexValue, FlexWrap } from '../../types/flex'
 
 /**
  * @internal

@@ -2,7 +2,7 @@ import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
-import {useArrayProp} from '../../hooks'
+import { useArrayProp } from '../../hooks/useArrayProp'
 import {
   responsiveBorderStyle,
   ResponsiveBorderStyleProps,
@@ -11,9 +11,10 @@ import {
   responsiveShadowStyle,
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
-import {ThemeColorProvider, useRootTheme} from '../../theme'
-import {CardTone} from '../../types'
-import {Box, BoxProps} from '../box'
+import { ThemeColorProvider } from '../../theme/themeColorProvider'
+import { useRootTheme } from '../../theme/useRootTheme'
+import { CardTone } from '../../types/card'
+import { Box, BoxProps } from '../box/box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {cardStyle} from './styles'
 import {CardStyleProps} from './types'

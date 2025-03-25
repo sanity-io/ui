@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {_getArrayProp} from '../styles'
+import { _getArrayProp } from '../styles/helpers'
 
 /** @beta */
 export type ArrayPropPrimitive = string | number | boolean | undefined | null

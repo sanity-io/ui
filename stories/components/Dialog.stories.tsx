@@ -2,9 +2,16 @@
 import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
-import {Dialog} from '../../src/core/components'
-import {Box, Button, Card, Flex, Inline, Stack, Text} from '../../src/core/primitives'
-import {BoundaryElementProvider, PortalProvider} from '../../src/core/utils'
+import { Dialog } from '../../src/core/components/dialog/dialog'
+import { Box } from '../../src/core/primitives/box/box'
+import { Button } from '../../src/core/primitives/button/button'
+import { Card } from '../../src/core/primitives/card/card'
+import { Flex } from '../../src/core/primitives/flex/flex'
+import { Inline } from '../../src/core/primitives/inline/inline'
+import { Stack } from '../../src/core/primitives/stack/stack'
+import { Text } from '../../src/core/primitives/text/text'
+import { BoundaryElementProvider } from '../../src/core/utils/boundaryElement/boundaryElementProvider'
+import { PortalProvider } from '../../src/core/utils/portal/portalProvider'
 import {
   getContainerWidthControls,
   getPositionControls,

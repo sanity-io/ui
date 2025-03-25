@@ -1,8 +1,14 @@
 import {useCallback, useState} from 'react'
 import {styled} from 'styled-components'
-import {Box, Button, Card, Flex} from '../../../primitives'
-import {BoundaryElementProvider, PortalProvider} from '../../../utils'
-import {Menu, MenuButton, MenuItem} from '../../menu'
+import { Box } from '../../../primitives/box/box'
+import { Button } from '../../../primitives/button/button'
+import { Card } from '../../../primitives/card/card'
+import { Flex } from '../../../primitives/flex/flex'
+import { BoundaryElementProvider } from '../../../utils/boundaryElement/boundaryElementProvider'
+import { PortalProvider } from '../../../utils/portal/portalProvider'
+import { Menu } from '../../menu/menu'
+import { MenuButton } from '../../menu/menuButton'
+import { MenuItem } from '../../menu/menuItem'
 import {Dialog} from '../dialog'
 
 export default function PanesStory() {

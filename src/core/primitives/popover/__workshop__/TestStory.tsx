@@ -5,10 +5,11 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
 } from '../../../__workshop__/constants'
-import {BoundaryElementProvider, PortalProvider} from '../../../utils'
-import {Button} from '../../button'
-import {Card} from '../../card'
-import {Text} from '../../text'
+import { BoundaryElementProvider } from '../../../utils/boundaryElement/boundaryElementProvider'
+import { PortalProvider } from '../../../utils/portal/portalProvider'
+import { Button } from '../../button/button'
+import { Card } from '../../card/card'
+import { Text } from '../../text/text'
 import {Popover} from '../popover'
 import {PopoverUpdateCallback} from '../types'
 

@@ -1,7 +1,7 @@
 import {AnimatePresence} from 'framer-motion'
 import {startTransition, useMemo, useState} from 'react'
 import {useMounted} from '../../hooks/useMounted'
-import {LayerProvider} from '../../utils'
+import { LayerProvider } from '../../utils/layer/layerProvider'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
 import {ToastLayer, type ToastLayerProps} from './toastLayer'

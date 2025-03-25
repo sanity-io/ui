@@ -1,6 +1,6 @@
 import {styled} from 'styled-components'
-import {Grid} from '../../primitives/grid'
-import {useLayer} from '../../utils'
+import { Grid } from '../../primitives/grid/grid'
+import { useLayer } from '../../utils/layer/useLayer'
 
 /**
  * @public
