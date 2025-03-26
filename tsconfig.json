@@ -9,13 +9,14 @@
     "./stories",
     "./test",
     "./typings",
+    "./workshop",
     "./workshop.config.ts",
     "./workshop.runtime.ts"
   ],
   "compilerOptions": {
-    "composite": true,
     "rootDir": ".",
     "outDir": "./dist/types",
+    "baseUrl": ".",
     "paths": {
       "@sanity/ui/*": ["./exports/*"],
       "@sanity/ui": ["./exports"]
