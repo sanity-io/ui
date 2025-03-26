@@ -1,20 +1,5 @@
 import {ReactNode, useState} from 'react'
 
-import {LayerProvider} from '../../src/core'
-import {
-  CodeSkeleton,
-  HeadingSkeleton,
-  Hotkeys,
-  LabelSkeleton,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  Skeleton,
-  Tab,
-  TabList,
-  TextSkeleton,
-} from '../../src/core/components'
 import {
   Avatar,
   Badge,
@@ -23,24 +8,37 @@ import {
   Card,
   Checkbox,
   Code,
+  CodeSkeleton,
   Container,
   Flex,
   Grid,
   Heading,
+  HeadingSkeleton,
+  Hotkeys,
   Inline,
   KBD,
   Label,
+  LabelSkeleton,
+  LayerProvider,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
   Popover,
   Radio,
   Select,
+  Skeleton,
   Spinner,
   Stack,
   Switch,
+  Tab,
+  TabList,
   Text,
   TextArea,
   TextInput,
-} from '../../src/core/primitives'
-import {ThemeProvider} from '../../src/core/theme'
+  TextSkeleton,
+  ThemeProvider,
+} from '../../src/core'
 import {buildTheme, ThemeColorSchemeKey} from '../../src/theme'
 
 const theme = buildTheme()

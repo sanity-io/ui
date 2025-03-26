@@ -1,7 +1,8 @@
 /** @jest-environment node */
 
 import {buildTheme} from '@sanity/ui/theme'
-import {renderToString, renderToStaticMarkup} from 'react-dom/server'
+import {renderToStaticMarkup, renderToString} from 'react-dom/server'
+
 import {ThemeProvider} from '../../theme'
 import {useMediaIndex} from './useMediaIndex'
 

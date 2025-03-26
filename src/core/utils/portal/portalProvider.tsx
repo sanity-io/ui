@@ -1,4 +1,5 @@
 import {useMemo, useRef, useSyncExternalStore} from 'react'
+
 import {PortalContext} from './portalContext'
 import {PortalContextValue} from './types'
 

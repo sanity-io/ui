@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
-
 import {parseColor} from '@sanity/ui/theme'
+
 import {FigmaSanityUIColorVariable} from './types'
 
 export function getOrCreateColorVariableCollection(name: string): VariableCollection {

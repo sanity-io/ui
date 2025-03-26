@@ -8,7 +8,8 @@
  * It's also why it's vital that all changes to globally scoped providers remain fully backwards compatible to v1.
  */
 
-import {createContext, type Context} from 'react'
+import {type Context, createContext} from 'react'
+
 import {globalScope} from './globalScope'
 
 export function createGlobalScopedContext<ContextType, const T extends ContextType = ContextType>(

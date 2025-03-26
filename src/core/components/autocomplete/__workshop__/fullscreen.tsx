@@ -19,6 +19,7 @@ import {
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
 import {countriesStore} from '../__mocks__/apiStore'
 
 export default function Fullscreen() {

@@ -9,6 +9,7 @@ import {
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
+
 import {useArrayProp} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
@@ -119,7 +120,6 @@ export const MenuItem = forwardRef(function MenuItem(
       data-ui="MenuItem"
       role="menuitem"
       {...restProps}
-      aria-pressed={as === 'button' && pressed}
       data-pressed={as !== 'button' && pressed ? '' : undefined}
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}

@@ -1,4 +1,4 @@
-import countries from '../__fixtures__/countries'
+import countries from './countries'
 
 export const countriesStore = {
   search(

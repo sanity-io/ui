@@ -1,5 +1,6 @@
-import {Button, Card, Flex, Text, Tooltip, TooltipDelayGroupProvider, Stack} from '@sanity/ui'
-import {useBoolean, useSelect, useText, useNumber} from '@sanity/ui-workshop'
+import {Button, Card, Flex, Stack, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
+import {useBoolean, useNumber, useSelect, useText} from '@sanity/ui-workshop'
+
 import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,

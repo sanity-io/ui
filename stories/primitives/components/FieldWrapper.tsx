@@ -1,5 +1,6 @@
 import {ReactNode} from 'react'
-import {Stack, Text} from '../../../src/core/primitives'
+
+import {Stack, Text} from '../../../src/core'
 
 export const FieldWrapper = ({
   children,

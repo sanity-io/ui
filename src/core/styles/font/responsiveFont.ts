@@ -1,6 +1,6 @@
-import {ThemeFontSize, ThemeFontKey, getTheme_v2} from '@sanity/ui/theme'
-import {CSSObject} from '@sanity/ui/theme'
-import {rem, _responsive} from '../helpers'
+import {CSSObject, getTheme_v2, ThemeFontKey, ThemeFontSize} from '@sanity/ui/theme'
+
+import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFontStyleProps} from './types'
 

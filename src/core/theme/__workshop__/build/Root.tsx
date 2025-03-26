@@ -1,5 +1,5 @@
+import {getTheme_v2} from '@sanity/ui/theme'
 import {css, styled} from 'styled-components'
-import {getTheme_v2} from '../../../../theme'
 
 export const Root = styled.div((props) => {
   const {button, card, input} = getTheme_v2(props.theme)

@@ -10,18 +10,18 @@ import {
   useRootTheme,
 } from '@sanity/ui'
 import {
-  ThemeColorButtonMode_v2,
-  ThemeColorButtonTone_v2,
-  ThemeColorButton_v2,
-  ThemeColorCard_v2,
-  ThemeColorScheme_v2,
-  ThemeColorSelectableTone_v2,
-  ThemeColorSelectable_v2,
-  ThemeColorState_v2,
   getContrastRatio,
   mix,
   parseColor,
   rgbToHex,
+  ThemeColorButton_v2,
+  ThemeColorButtonMode_v2,
+  ThemeColorButtonTone_v2,
+  ThemeColorCard_v2,
+  ThemeColorScheme_v2,
+  ThemeColorSelectable_v2,
+  ThemeColorSelectableTone_v2,
+  ThemeColorState_v2,
 } from '@sanity/ui/theme'
 import {useBoolean} from '@sanity/ui-workshop'
 import {createContext, useContext} from 'react'
@@ -175,6 +175,7 @@ function ColorBase(props: {color: ThemeColorCard_v2}) {
 
       <Text accent>Accent</Text>
       <Text>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a href="#">Link</a>
       </Text>
       <Text>

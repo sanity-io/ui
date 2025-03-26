@@ -1,6 +1,7 @@
 /** @jest-environment jsdom */
 
 import {buildTheme} from '@sanity/ui/theme'
+
 import {render} from '../../../test'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'

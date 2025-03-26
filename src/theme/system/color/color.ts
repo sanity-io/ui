@@ -1,4 +1,4 @@
-import {ThemeColorCardToneKey, ThemeColorBlendModeKey, ThemeColorSchemeKey} from './_system'
+import {ThemeColorBlendModeKey, ThemeColorCardToneKey, ThemeColorSchemeKey} from './_system'
 import {ThemeColorButton_v2} from './button'
 import {ThemeColorInput_v2} from './input'
 import {ThemeColorSelectable_v2} from './selectable'

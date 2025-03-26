@@ -1,5 +1,6 @@
 import {ColorHueKey} from '@sanity/color'
-import {ThemeColorSyntax, ThemeColorButtonModeKey, ThemeColorStateToneKey} from '../../../system'
+
+import {ThemeColorButtonModeKey, ThemeColorStateToneKey, ThemeColorSyntax} from '../../../system'
 import {
   ColorBlendModeTokenValue,
   ColorConfigCardTone,

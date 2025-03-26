@@ -1,12 +1,13 @@
 import type {Meta, StoryObj} from '@storybook/react'
+
 import {
-  Skeleton,
-  HeadingSkeleton,
-  TextSkeleton,
   CodeSkeleton,
+  HeadingSkeleton,
   LabelSkeleton,
+  Skeleton,
+  TextSkeleton,
 } from '../../src/core/components'
-import {Flex, Grid, Box, Container, Stack, Card} from '../../src/core/primitives'
+import {Box, Card, Container, Flex, Grid, Stack} from '../../src/core/primitives'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {

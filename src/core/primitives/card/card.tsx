@@ -2,6 +2,7 @@ import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
+
 import {useArrayProp} from '../../hooks'
 import {
   responsiveBorderStyle,

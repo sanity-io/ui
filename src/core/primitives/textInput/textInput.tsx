@@ -3,6 +3,7 @@ import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
+
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp, useCustomValidity} from '../../hooks'
 import {

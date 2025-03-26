@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {ChangeEvent, useCallback, useState} from 'react'
+
 import {Flex, Radio, Stack} from '../../src/core/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 

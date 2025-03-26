@@ -1,5 +1,4 @@
-import {useRef} from 'react'
-import {useState, useCallback, SetStateAction} from 'react'
+import {SetStateAction, useCallback, useRef, useState} from 'react'
 
 /**
  * @beta

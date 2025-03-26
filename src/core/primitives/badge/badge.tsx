@@ -1,5 +1,6 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
+
 import {useArrayProp} from '../../hooks'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {BadgeMode, BadgeTone} from '../../types'

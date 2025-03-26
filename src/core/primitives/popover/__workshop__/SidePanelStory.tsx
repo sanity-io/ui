@@ -1,12 +1,14 @@
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
+
 import {BoundaryElementProvider} from '../../../utils'
 import {Box} from '../../box'
 import {Card} from '../../card'
 import {Flex} from '../../flex'
 import {Stack} from '../../stack'
 import {Text} from '../../text'
-import {Popover, PopoverProps, PopoverUpdateCallback} from '../popover'
+import {Popover, PopoverProps} from '../popover'
+import {PopoverUpdateCallback} from '../types'
 
 const SIDE_PANEL_WIDTH = {
   sm: 300,
@@ -80,6 +82,7 @@ function InlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
       width={0}
       updateRef={updateRef}
     >
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <code onClick={handleClick}>reference</code>
     </Popover>
   )

@@ -1,5 +1,6 @@
+import {getTheme_v2, ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {styled} from 'styled-components'
-import {ThemeColorStateToneKey, getTheme_v2} from '../../../theme'
+
 import {Card, Flex} from '../../primitives'
 import type {ButtonTone} from '../../types'
 

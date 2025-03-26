@@ -1,14 +1,15 @@
 import {icons} from '@sanity/icons'
 import {Button, Flex} from '@sanity/ui'
 import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
+
 import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
   WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS,
   WORKSHOP_BUTTON_TONE_OPTIONS,
   WORKSHOP_FLEX_JUSTIFY_OPTIONS,
   WORKSHOP_ICON_SYMBOL_OPTIONS,
-  WORKSHOP_TEXT_SIZE_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
+  WORKSHOP_TEXT_SIZE_OPTIONS,
   WORKSHOP_TEXT_WEIGHT_OPTIONS,
 } from '../../../__workshop__/constants'
 

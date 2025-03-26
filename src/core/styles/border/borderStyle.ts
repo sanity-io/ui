@@ -1,4 +1,5 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
+
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBorderStyleProps} from './types'

@@ -1,16 +1,16 @@
 import {CloseIcon} from '@sanity/icons'
 import {motion, type Variant, type Variants} from 'framer-motion'
+
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box, Button, Flex, Stack, Text} from '../../primitives'
-
 import {
-  LoadingBar,
-  LoadingBarProgress,
   BUTTON_TONE,
-  STATUS_CARD_TONE,
-  TextBox,
-  StyledToast,
+  LoadingBar,
   LoadingBarMask,
+  LoadingBarProgress,
+  STATUS_CARD_TONE,
+  StyledToast,
+  TextBox,
 } from './styles'
 
 /**

@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {useId} from 'react'
+
 import {Toast, ToastProvider, useToast} from '../../src/core/components'
 import {Box, Button, Grid, Heading, Inline} from '../../src/core/primitives'
 

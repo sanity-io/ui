@@ -1,12 +1,13 @@
 import {Autocomplete, Box, Button, Card, Code, Container, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
+
 import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_SIZE_OPTIONS,
 } from '../../../__workshop__/constants'
-import countries from '../__fixtures__/countries'
+import countries from '../__mocks__/countries'
 import {ExampleOption} from './types'
 
 export default function CustomStory() {

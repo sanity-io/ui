@@ -1,9 +1,10 @@
 import {getTheme_v2} from '@sanity/ui/theme'
 import {Children, cloneElement, forwardRef, isValidElement} from 'react'
-import {styled, css} from 'styled-components'
+import {css, styled} from 'styled-components'
+
 import {EMPTY_RECORD} from '../../constants'
 import {useArrayProp} from '../../hooks'
-import {rem, _responsive, ThemeProps} from '../../styles'
+import {_responsive, rem, ThemeProps} from '../../styles'
 import {AvatarSize} from '../../types'
 import {AvatarCounter} from './avatarCounter'
 

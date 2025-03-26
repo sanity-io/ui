@@ -1,4 +1,5 @@
 import {CSSObject} from '@sanity/ui/theme'
+
 import {_getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsivePaddingStyleProps} from './types'

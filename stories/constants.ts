@@ -6,7 +6,7 @@ import {
   CardTone,
   Placement,
   Radius,
-} from '../src/core/types'
+} from '../src/core'
 import {buildTheme} from '../src/theme'
 
 const theme = buildTheme()

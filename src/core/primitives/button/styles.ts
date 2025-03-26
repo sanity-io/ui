@@ -1,5 +1,6 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
+
 import {ThemeProps} from '../../styles'
 import {_cardColorStyle} from '../../styles/card'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'

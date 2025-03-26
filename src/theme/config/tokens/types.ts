@@ -1,9 +1,10 @@
 import {ColorHueKey, ColorTintKey} from '@sanity/color'
+
 import {ThemeColorBlendModeKey, ThemeColorButtonModeKey} from '../../system'
 import {
+  ColorConfigBlendKey,
   ColorConfigCardKey,
   ColorConfigCardTone,
-  ColorConfigBlendKey,
   ColorConfigStateKey,
   ColorConfigStateTone,
 } from '../system'

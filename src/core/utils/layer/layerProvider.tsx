@@ -1,5 +1,6 @@
 import {useCallback, useContext, useEffect, useMemo, useState} from 'react'
-import {useMediaIndex, useArrayProp} from '../../hooks'
+
+import {useArrayProp, useMediaIndex} from '../../hooks'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'

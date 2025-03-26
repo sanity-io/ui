@@ -1,5 +1,6 @@
 import {Card, Flex, Stack, Text} from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
+
 import {
   WORKSHOP_CARD_AS_OPTIONS,
   WORKSHOP_CARD_TONE_OPTIONS,
@@ -39,7 +40,8 @@ export default function PropsStory() {
             <code>shadow={shadow}</code>.
           </Text>
           <Text size={1}>
-            Text with <a>link</a>.
+            Text with {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a href="#">link</a>.
           </Text>
           <Text accent size={1}>
             Text with accent color.

@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import {Card, Flex, Grid, Text} from '../../src/core/primitives'
 import {ThemeColorSchemeKey} from '../../src/theme'
 

@@ -1,5 +1,6 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
-import {rem, _responsive, ThemeProps} from '../../styles'
+
+import {_responsive, rem, ThemeProps} from '../../styles'
 import {ResponsiveWidthStyleProps} from './types'
 
 const BASE_STYLE: CSSObject = {

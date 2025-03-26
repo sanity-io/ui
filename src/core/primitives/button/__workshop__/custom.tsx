@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
+
 import {WORKSHOP_BUTTON_TONE_OPTIONS} from '../../../__workshop__/constants'
 
 export default function CustomStory() {

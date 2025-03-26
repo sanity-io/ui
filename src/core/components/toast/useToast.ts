@@ -1,4 +1,5 @@
 import {useContext} from 'react'
+
 import {isRecord} from '../../lib/isRecord'
 import {ToastContext} from './toastContext'
 import {ToastContextValue} from './types'

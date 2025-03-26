@@ -1,6 +1,7 @@
 import {BoundaryElementProvider, Button, Card, Code, Flex, Text, Tooltip} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useState} from 'react'
+
 import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
 
 export default function ResizableBoundaryStory() {

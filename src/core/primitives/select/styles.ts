@@ -1,7 +1,7 @@
-import {ThemeFontSize, getTheme_v2} from '@sanity/ui/theme'
-import {CSSObject} from '@sanity/ui/theme'
+import {CSSObject, getTheme_v2, ThemeFontSize} from '@sanity/ui/theme'
 import {css} from 'styled-components'
-import {rem, _responsive, ThemeProps} from '../../styles'
+
+import {_responsive, rem, ThemeProps} from '../../styles'
 import {
   focusRingBorderStyle,
   focusRingStyle,

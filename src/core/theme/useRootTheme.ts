@@ -1,4 +1,5 @@
 import {useContext} from 'react'
+
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 

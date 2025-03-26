@@ -1,7 +1,8 @@
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {type MotionProps, motion} from 'framer-motion'
+import {motion, type MotionProps} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import {styled} from 'styled-components'
+
 import {POPOVER_MOTION_PROPS} from '../../constants'
 import {Placement, Radius} from '../../types'
 import {Arrow} from '../../utils'

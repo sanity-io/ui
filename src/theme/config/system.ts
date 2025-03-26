@@ -1,11 +1,12 @@
 import {ColorHueKey, ColorTintKey} from '@sanity/color'
+
 import {
   THEME_COLOR_AVATAR_COLORS,
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_INPUT_STATES,
-  THEME_COLOR_STATES,
   THEME_COLOR_STATE_TONES,
+  THEME_COLOR_STATES,
   ThemeColorBlendModeKey,
 } from '../system'
 

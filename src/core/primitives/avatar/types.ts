@@ -1,4 +1,5 @@
 import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
+
 import {AvatarSize} from '../../types'
 
 /**

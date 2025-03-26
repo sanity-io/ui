@@ -2,6 +2,7 @@ import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
 import ReactIs from 'react-is'
 import {styled} from 'styled-components'
+
 import {useArrayProp} from '../../hooks'
 import {useTheme_v2} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
@@ -150,13 +151,7 @@ export const Avatar = forwardRef(function Avatar(
         <AvatarImage viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
           <defs>
             <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
-              <image
-                href={src}
-                width="1"
-                height="1"
-                // eslint-disable-next-line react/no-unknown-property
-                onError={handleImageError}
-              />
+              <image href={src} width="1" height="1" onError={handleImageError} />
             </pattern>
           </defs>
 

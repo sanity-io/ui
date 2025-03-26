@@ -1,4 +1,4 @@
-import {ThemeColorTokenValue, parseTokenValue} from '../../config'
+import {parseTokenValue, ThemeColorTokenValue} from '../../config'
 import {compileColorTokenValue} from './compileColorToken'
 import {ColorTokenContext} from './types'
 

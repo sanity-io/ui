@@ -1,8 +1,8 @@
 import {forwardRef, useEffect, useState} from 'react'
 import {styled} from 'styled-components'
+
 import {useArrayProp} from '../../hooks'
-import {Box} from '../../primitives'
-import {BoxProps, ResponsiveRadiusProps} from '../../primitives'
+import {Box, BoxProps, ResponsiveRadiusProps} from '../../primitives'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {skeletonStyle} from './styles'
 

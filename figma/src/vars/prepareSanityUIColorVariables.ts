@@ -3,10 +3,11 @@ import {
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_INPUT_STATES,
-  THEME_COLOR_STATES,
   THEME_COLOR_STATE_TONES,
+  THEME_COLOR_STATES,
 } from '@sanity/ui/theme'
 import {get} from 'segmented-property'
+
 import {WriteConfig} from '../config'
 import {theme} from '../theme'
 import {BASE_KEYS, FigmaSanityUIColorVariable, INPUT_KEYS, SCHEMES, STATE_KEYS} from './types'

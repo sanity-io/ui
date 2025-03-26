@@ -1,5 +1,6 @@
 /** @jest-environment node */
-import {renderToString, renderToStaticMarkup} from 'react-dom/server'
+import {renderToStaticMarkup, renderToString} from 'react-dom/server'
+
 import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 
 function Log() {
