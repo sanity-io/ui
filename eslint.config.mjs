@@ -1,140 +1,222 @@
-'use strict'
+import js from '@eslint/js'
+import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import boundaries from 'eslint-plugin-boundaries'
+import _import from 'eslint-plugin-import'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import react from 'eslint-plugin-react'
+import reactCompiler from 'eslint-plugin-react-compiler'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import storybook from 'eslint-plugin-storybook'
+import globals from 'globals'
+import ts from 'typescript-eslint'
 
-module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-  },
-  extends: [
-    'plugin:boundaries/recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:storybook/recommended',
-    'prettier',
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
+export default ts.config(
+  [
+    {
+      ignores: ['.workshop', 'dist', 'figma', 'storybook-static'],
     },
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
-  plugins: [
-    'boundaries',
-    'import',
-    'jsx-a11y',
-    'react',
-    'react-hooks',
-    'react-compiler',
-    '@typescript-eslint',
-  ],
-  rules: {
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-empty-object-type': 'off',
-    'boundaries/element-types': [
-      'error',
-      {
-        default: 'disallow',
-        rules: [
-          {
-            // export
-            from: '@sanity/ui',
-            allow: ['@sanity/ui__contents'],
-          },
-          {
-            from: '@sanity/ui__contents',
-            allow: ['@sanity/ui__contents', '@sanity/ui/theme'],
-          },
-          {
-            // export
-            from: '@sanity/ui/theme',
-            allow: ['@sanity/ui/theme__contents'],
-          },
-          {
-            from: '@sanity/ui/theme__contents',
-            allow: ['@sanity/ui/theme__contents'],
-          },
-        ],
-      },
-    ],
-    'import/order': [
-      'error',
-      {
-        alphabetize: {
-          caseInsensitive: true,
-          order: 'asc',
+
+    {
+      extends: [
+        js.configs.recommended,
+        ...ts.configs.recommended,
+        _import.flatConfigs.recommended,
+        _import.flatConfigs.typescript,
+      ],
+      files: ['**/*.{ts,tsx}'],
+      languageOptions: {
+        ecmaVersion: 2018,
+        globals: {
+          ...globals.browser,
+          ...globals.nodeBuiltin,
+          ...globals.es2018,
         },
+        sourceType: 'module',
       },
-    ],
-    'no-console': 'error',
-    'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
-    'padding-line-between-statements': [
-      'warn',
-      {blankLine: 'always', prev: '*', next: 'block'},
-      {blankLine: 'always', prev: '*', next: 'block-like'},
-      {blankLine: 'always', prev: 'const', next: 'expression'},
-      {blankLine: 'always', prev: 'let', next: 'expression'},
-      {blankLine: 'always', prev: 'var', next: 'expression'},
-      {blankLine: 'always', prev: 'block', next: '*'},
-      {blankLine: 'always', prev: 'block-like', next: '*'},
-      {blankLine: 'always', prev: '*', next: 'return'},
-    ],
-    'react/prop-types': 'off',
-    'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
-    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    'react-compiler/react-compiler': 'warn', // Set to error once existing warnings are fixed
-    'react/no-unescaped-entities': 'off',
-    'no-restricted-imports': [
-      'error',
-      {
-        paths: [
+      rules: {
+        // '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-explicit-any': 'off', // todo: warn
+        'import/no-unresolved': 'off',
+        'no-console': 'error',
+        'no-restricted-imports': [
+          'error',
           {
-            name: 'styled-components',
-            importNames: ['default'],
-            message: 'Please use `import {styled} from "styled-components"` instead.',
+            paths: [
+              {
+                name: 'styled-components',
+                importNames: ['default'],
+                message: 'Please use `import {styled} from "styled-components"` instead.',
+              },
+            ],
           },
         ],
+        'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
       },
-    ],
-  },
-  overrides: [
+    },
+
+    // simple-import-sort
+    {
+      plugins: {
+        'simple-import-sort': simpleImportSort,
+      },
+      rules: {
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+      },
+    },
+
+    // react-refresh
+    reactRefresh.configs.vite,
+
+    // react-hooks
+    reactHooks.configs.recommended,
+
+    // react
+    {
+      ...react.configs.flat.recommended,
+      settings: {
+        react: {version: 'detect'},
+      },
+      rules: {
+        'react/prop-types': 'off',
+        'react/no-unescaped-entities': 'off', // todo: remove
+      },
+    },
+    {
+      ...react.configs.flat['jsx-runtime'],
+    },
+
+    // react-compiler
+    reactCompiler.configs.recommended,
+    {
+      rules: {
+        'react-compiler/react-compiler': 'warn', // Set to error once existing warnings are fixed
+      },
+    },
     // Ignore Storybook stories and test files for the react compiler
     {
-      files: [`**/*.stories.{js,ts,tsx}`, '**/*.test.{js,ts,tsx}'],
+      files: ['**/*.stories.{js,ts,tsx}', '**/*.test.{js,ts,tsx}'],
       rules: {
         'react-compiler/react-compiler': 'off',
       },
     },
-  ],
-  settings: {
-    'boundaries/elements': [
-      {
-        type: '@sanity/ui',
-        pattern: ['exports/index.ts'],
-        mode: 'full',
+
+    // jsx-a11y
+    jsxA11y.flatConfigs.recommended,
+
+    // storybook
+    storybook.configs['flat/recommended'],
+
+    // boundaries
+    {
+      plugins: {boundaries},
+
+      settings: {
+        'boundaries/ignore': ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/__workshop__/**/*'],
+
+        'boundaries/elements': [
+          // entry points
+          {
+            type: '@sanity/ui',
+            pattern: ['exports/index.ts'],
+            mode: 'file',
+          },
+          {
+            type: '@sanity/ui/_visual-editing',
+            pattern: ['exports/_visual-editing.ts'],
+            mode: 'file',
+          },
+          {
+            type: '@sanity/ui/theme',
+            pattern: ['exports/theme.ts'],
+            mode: 'file',
+          },
+
+          // modules
+          {
+            type: 'src/core',
+            pattern: ['src/core/**/*'],
+            mode: 'full',
+          },
+          {
+            type: 'src/theme',
+            pattern: ['src/theme/**/*'],
+            mode: 'full',
+          },
+
+          // tests
+          {
+            type: 'test',
+            pattern: ['test/**/*', 'src/**/*.test.*'],
+            mode: 'full',
+          },
+
+          {
+            type: 'test/storybook',
+            pattern: ['.storybook/**/*.*'],
+            mode: 'full',
+          },
+          {
+            type: 'test/storybook/stories',
+            pattern: ['stories/**/*'],
+            mode: 'full',
+          },
+
+          {
+            type: 'test/cypress',
+            pattern: ['cypress/**/*'],
+            mode: 'full',
+          },
+
+          // configs
+          {
+            type: 'configs',
+            pattern: [
+              'cypress.config.ts',
+              'package.config.ts',
+              'workshop.config.ts',
+              'workshop.runtime.ts',
+            ],
+            mode: 'file',
+          },
+          {
+            type: 'typings',
+            pattern: ['typings/**/*'],
+            mode: 'full',
+          },
+        ],
       },
-      {
-        type: '@sanity/ui__contents',
-        pattern: ['src/core/**/*.*'],
-        mode: 'full',
+
+      rules: {
+        ...boundaries.configs.recommended.rules,
+
+        'boundaries/element-types': [
+          'error',
+          {
+            default: 'disallow',
+            rules: [
+              {from: '@sanity/ui', allow: ['@sanity/ui/theme', 'src/core']},
+              {from: '@sanity/ui/_visual-editing', allow: ['src/core', 'src/theme']},
+              {from: '@sanity/ui/theme', allow: ['src/theme']},
+              {from: 'src/core', allow: ['src/core', '@sanity/ui/theme']},
+              {from: 'src/theme', allow: ['src/theme']},
+              {from: 'test', allow: ['@sanity/ui', '@sanity/ui/theme']},
+              {from: 'test/storybook', allow: ['test/storybook']},
+              {
+                from: 'test/storybook/stories',
+                allow: ['src/core', 'src/theme', 'test/storybook/stories'],
+              },
+            ],
+          },
+        ],
+
+        'boundaries/no-private': 'off',
       },
-      {
-        type: '@sanity/ui/theme',
-        pattern: ['exports/theme.ts'],
-        mode: 'full',
-      },
-      {
-        type: '@sanity/ui/theme__contents',
-        pattern: ['src/theme/**/*.*'],
-        mode: 'full',
-      },
-    ],
-    'react': {version: 'detect'},
-  },
-}
+    },
+
+    // prettier
+    eslintConfigPrettier,
+  ].filter(Boolean),
+)
