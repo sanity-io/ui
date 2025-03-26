@@ -7,8 +7,8 @@ import {
   SearchIcon,
 } from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
-import {expect, fn} from '@storybook/test'
-import {userEvent, within} from '@storybook/test'
+import {expect, fn, userEvent, within} from '@storybook/test'
+
 import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../../src/core/components'
 import {Box, Button, Card, Flex, Stack, Text} from '../../src/core/primitives'
 
@@ -170,6 +170,7 @@ export const PopoverModal: Story = {
             <Box padding={2}>
               <Text size={1}>Open sanity.io in a new window</Text>
             </Box>
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
             <div
               onClick={(e) => {
                 e.stopPropagation()

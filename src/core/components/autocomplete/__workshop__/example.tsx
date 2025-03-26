@@ -3,13 +3,14 @@ import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
 import {useCallback, useMemo, useState} from 'react'
+
 import {
   WORKSHOP_CARD_TONE_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_SIZE_OPTIONS,
 } from '../../../__workshop__/constants'
-import countries from '../__fixtures__/countries'
+import countries from '../__mocks__/countries'
 
 const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   name: 'typing',

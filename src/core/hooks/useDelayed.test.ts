@@ -1,6 +1,7 @@
 /** @jest-environment jsdom */
 
-import {renderHook, act} from '@testing-library/react'
+import {act, renderHook} from '@testing-library/react'
+
 import {useDelayedState} from './useDelayedState'
 
 describe('useDelayedState', () => {

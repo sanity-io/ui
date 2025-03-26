@@ -1,18 +1,17 @@
 import {
-  ThemeColorButtonTone_v2,
-  ThemeColorCard_v2,
-  ThemeColorInputMode_v2,
-  ThemeColorState_v2,
-} from '@sanity/ui/theme'
-import {
+  buildTheme,
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_INPUT_MODES,
   THEME_COLOR_STATE_TONES,
+  ThemeColorButtonTone_v2,
+  ThemeColorCard_v2,
   ThemeColorCardToneKey,
+  ThemeColorInputMode_v2,
   ThemeColorInputModeKey,
+  ThemeColorState_v2,
 } from '@sanity/ui/theme'
-import {buildTheme} from '@sanity/ui/theme'
+
 import {rem} from '../../../styles'
 import {useTheme_v2} from '../../useTheme'
 import {getCSSProps} from './helpers'
@@ -171,6 +170,7 @@ function StatePreview(props: {theme: ThemeColorState_v2}) {
             display: 'flex',
             gap: 'var(--space-1)',
           }}
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
         >
           <div style={{flex: 'none'}}>Card</div>
@@ -280,6 +280,7 @@ function ButtonPreview(props: {theme: ThemeColorButtonTone_v2}) {
       <div
         className="button"
         style={{flex: 1, padding: 'var(--space-2)', display: 'flex', gap: 4}}
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
       >
         <div style={{flex: 'none'}}>Button</div>
@@ -442,10 +443,18 @@ function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInp
         } as any
       }
     >
-      <div className="input" tabIndex={0}>
+      <div
+        className="input"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex={0}
+      >
         <span>Text ({mode})</span> <span className="placeholder">Placeholder</span>
       </div>
-      <div className="input readOnly" tabIndex={0}>
+      <div
+        className="input readOnly"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex={0}
+      >
         <span>Text ({mode})</span>
       </div>
       <div className="input disabled">

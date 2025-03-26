@@ -1,5 +1,6 @@
-import {forwardRef, Suspense, lazy} from 'react'
+import {forwardRef, lazy, Suspense} from 'react'
 import {styled} from 'styled-components'
+
 import {useArrayProp} from '../../hooks'
 import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
 import {codeBaseStyle} from './styles'

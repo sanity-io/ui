@@ -1,5 +1,6 @@
 import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
-import {rem, _responsive} from '../helpers'
+
+import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridStyleProps} from './types'
 

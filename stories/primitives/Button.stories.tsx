@@ -1,5 +1,6 @@
 import {CloseIcon, SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
+
 import {Button, Flex, Grid, Stack, Text} from '../../src/core/primitives'
 import {BUTTON_MODES, BUTTON_TONES, RADII} from '../constants'
 import {
@@ -227,6 +228,7 @@ export const CustomButton: Story = {
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>
@@ -244,6 +246,7 @@ export const CustomButton: Story = {
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>
@@ -262,6 +265,7 @@ export const CustomButton: Story = {
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>

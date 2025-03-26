@@ -1,7 +1,8 @@
 import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
+
 import {useCustomValidity} from '../../hooks'
-import {radioBaseStyle, inputElementStyle} from './styles'
+import {inputElementStyle, radioBaseStyle} from './styles'
 
 /**
  * @public

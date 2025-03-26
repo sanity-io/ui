@@ -1,4 +1,4 @@
-import {RGB, multiply, parseColor, rgbToHex, screen} from './lib/color-fns'
+import {multiply, parseColor, RGB, rgbToHex, screen} from './lib/color-fns'
 import {clamp, range} from './lib/utils'
 
 const RGB_RANGE: [number, number] = [0, 255]

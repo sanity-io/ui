@@ -1,8 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
+
+import {Card, studioTheme, ThemeProvider} from '@sanity/ui'
 import {DecoratorHelpers} from '@storybook/addon-themes'
 import {StoryFn} from '@storybook/react'
-import React from 'react'
 import {createGlobalStyle} from 'styled-components'
-import {Card, ThemeProvider, studioTheme} from '../../src/core'
 
 const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
 

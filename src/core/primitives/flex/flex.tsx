@@ -1,5 +1,6 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
+
 import {useArrayProp} from '../../hooks'
 import {
   flexItemStyle,
@@ -8,7 +9,7 @@ import {
   ResponsiveFlexStyleProps,
 } from '../../styles/internal'
 import {Box, BoxProps} from '../box'
-import {ResponsiveFlexProps, ResponsiveFlexItemProps} from '../types'
+import {ResponsiveFlexItemProps, ResponsiveFlexProps} from '../types'
 
 /**
  * @public

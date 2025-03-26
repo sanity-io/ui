@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import {WriteConfig} from '../config'
 import {
   ensureModeExists,

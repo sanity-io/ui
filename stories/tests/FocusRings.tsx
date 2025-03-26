@@ -8,31 +8,30 @@ import {
   SunIcon,
 } from '@sanity/icons'
 import {ReactNode} from 'react'
+
 import {
   Autocomplete,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  Tab,
-  TabList,
-} from '../../src/core/components'
-import {
   Avatar,
   Button,
   Card,
   Checkbox,
   Flex,
   Heading,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
   Radio,
   Select,
   Stack,
   Switch,
+  Tab,
+  TabList,
   Text,
   TextArea,
   TextInput,
-} from '../../src/core/primitives'
-import {ThemeProvider} from '../../src/core/theme'
+  ThemeProvider,
+} from '../../src/core'
 import {buildTheme} from '../../src/theme'
 
 const theme = buildTheme()

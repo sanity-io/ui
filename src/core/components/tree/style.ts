@@ -1,5 +1,6 @@
 import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
+
 import {rem, ThemeProps} from '../../styles'
 import {_cardColorStyle} from '../../styles/card'
 

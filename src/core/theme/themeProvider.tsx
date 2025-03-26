@@ -1,12 +1,13 @@
 import {
+  getScopedTheme,
   type RootTheme,
+  type Theme,
   type ThemeColorCardToneKey,
   type ThemeColorSchemeKey,
-  type Theme,
-  getScopedTheme,
 } from '@sanity/ui/theme'
 import {useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
+
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 

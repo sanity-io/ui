@@ -1,20 +1,20 @@
 import {
-  ThemeColorGenericState,
+  ThemeColor,
   ThemeColorBase,
   ThemeColorButtonModeKey,
   ThemeColorButtonStates,
+  ThemeColorGenericState,
   ThemeColorInputState,
   ThemeColorMuted,
   ThemeColorMutedTone,
-  ThemeColorSolid,
-  ThemeColorSolidTone,
-  ThemeColorSyntax,
   ThemeColorName,
   ThemeColorScheme,
   ThemeColorSchemes,
-  ThemeColor,
-  ThemeColorToneKey,
+  ThemeColorSolid,
+  ThemeColorSolidTone,
   ThemeColorSpotKey,
+  ThemeColorSyntax,
+  ThemeColorToneKey,
 } from '../../../system'
 import {createSelectableTones} from './_selectable/createSelectableTones'
 import {createSolidTones} from './_solid/createSolidTones'

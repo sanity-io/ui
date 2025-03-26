@@ -2,11 +2,11 @@ import {
   arrow,
   autoUpdate,
   flip,
+  type Middleware,
   offset,
+  type RootBoundary,
   shift,
   useFloating,
-  type Middleware,
-  type RootBoundary,
 } from '@floating-ui/react-dom'
 import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
@@ -15,15 +15,16 @@ import {
   forwardRef,
   useCallback,
   useEffect,
-  useMemo,
-  useRef,
-  useState,
   useId,
   useImperativeHandle,
   useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react'
 import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
+
 import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'

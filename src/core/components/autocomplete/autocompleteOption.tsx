@@ -1,4 +1,5 @@
 import {useCallback} from 'react'
+
 import {_isEnterToClickElement} from '../../helpers'
 
 export interface AutocompleteOptionProps {

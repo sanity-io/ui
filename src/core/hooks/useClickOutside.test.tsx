@@ -1,5 +1,4 @@
 /** @jest-environment jsdom */
-/* eslint-disable padding-line-between-statements, react/display-name */
 
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'

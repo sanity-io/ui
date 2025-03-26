@@ -1,5 +1,6 @@
 import {ChevronDownIcon} from '@sanity/icons'
 import {useSelect} from '@sanity/ui-workshop'
+
 import {Box, Button} from '../../../primitives'
 import {Menu} from '../menu'
 import {MenuButton} from '../menuButton'

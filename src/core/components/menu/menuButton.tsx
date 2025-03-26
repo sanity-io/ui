@@ -3,12 +3,13 @@ import {
   cloneElement,
   forwardRef,
   useCallback,
-  useMemo,
-  useState,
   useEffect,
-  useRef,
   useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
 } from 'react'
+
 import {Popover, PopoverProps} from '../../primitives'
 import {Placement, Radius} from '../../types'
 import {MenuProps} from './menu'

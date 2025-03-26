@@ -1,8 +1,9 @@
 import {Flex, Heading} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
+
 import {
-  WORKSHOP_HEADING_FONT_SIZE_OPTIONS,
   WORKSHOP_FONT_WEIGHT_OPTIONS,
+  WORKSHOP_HEADING_FONT_SIZE_OPTIONS,
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
 } from '../../../__workshop__/constants'
 

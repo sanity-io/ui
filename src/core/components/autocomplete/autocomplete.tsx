@@ -1,15 +1,15 @@
 import {ChevronDownIcon} from '@sanity/icons'
 import {
   ChangeEvent,
+  cloneElement,
   ElementType,
   FocusEvent,
+  forwardRef,
   HTMLProps,
   KeyboardEvent,
   MouseEvent,
   ReactNode,
   Ref,
-  cloneElement,
-  forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -17,6 +17,7 @@ import {
   useReducer,
   useRef,
 } from 'react'
+
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
 import {useArrayProp} from '../../hooks'

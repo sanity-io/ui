@@ -1,4 +1,5 @@
 import {Box, Card, Flex, Skeleton, Text} from '@sanity/ui'
+
 import {Stack} from '../../stack'
 
 export default function ListNavigationStory() {

@@ -4,12 +4,13 @@ import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
 import {useCallback, useState} from 'react'
+
 import {
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
   WORKSHOP_FONT_WEIGHT_OPTIONS,
   WORKSHOP_ICON_SYMBOL_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
+  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
 } from '../../../__workshop__/constants'
 
 const typingPerfTest: PerfTestProps<HTMLInputElement> = {

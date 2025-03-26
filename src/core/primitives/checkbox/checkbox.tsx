@@ -1,6 +1,7 @@
 import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
 import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
+
 import {useCustomValidity} from '../../hooks'
 import {checkboxBaseStyles, inputElementStyles} from './styles'
 

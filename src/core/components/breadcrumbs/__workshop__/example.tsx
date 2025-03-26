@@ -28,24 +28,31 @@ export default function Example() {
         space={2}
       >
         <Text size={1}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#">Root</a>
         </Text>
         <Text size={1}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#">Category A</a>
         </Text>
         <Text size={1}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#">Category B</a>
         </Text>
         <Text size={1}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#">Category C</a>
         </Text>
         <Text size={1}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#">Category D</a>
         </Text>
         <Text size={1}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#">Category E</a>
         </Text>
         <Text size={1}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href="#">Category F</a>
         </Text>
         <Text size={1}>Item</Text>

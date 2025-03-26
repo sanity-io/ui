@@ -1,5 +1,6 @@
 import {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
+
 import {_isScrollable} from '../../helpers'
 import {_ResizeObserver} from '../../observers'
 import {StackProps} from '../../primitives'

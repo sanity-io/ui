@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState} from 'react'
+
 import {EMPTY_ARRAY} from '../constants'
 
 /**

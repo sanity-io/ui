@@ -2,12 +2,13 @@ import {ToggleArrowRightIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
 import {styled} from 'styled-components'
+
 import {Box, BoxProps, Flex, Text} from '../../primitives'
 import {
-  treeItemRootStyle,
-  treeItemRootColorStyle,
   treeItemBoxStyle,
   TreeItemBoxStyleProps,
+  treeItemRootColorStyle,
+  treeItemRootStyle,
 } from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'

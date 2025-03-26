@@ -1,5 +1,6 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
+
 import {useArrayProp} from '../../hooks'
 import {
   boxStyle,
@@ -9,10 +10,10 @@ import {
   ResponsiveBoxStyleProps,
   responsiveGridItemStyle,
   ResponsiveGridItemStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
   responsiveMarginStyle,
   ResponsiveMarginStyleProps,
+  responsivePaddingStyle,
+  ResponsivePaddingStyleProps,
 } from '../../styles/internal'
 import {
   ResponsiveBoxProps,

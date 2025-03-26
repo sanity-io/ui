@@ -1,9 +1,11 @@
 /** @jest-environment jsdom */
-import {screen, act, fireEvent} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 import '../../../../test/mocks/matchMedia.mock'
+
+import {act, fireEvent, screen} from '@testing-library/react'
+
 import {render} from '../../../../test'
-import {Text, Button} from '../../primitives'
+import {Button, Text} from '../../primitives'
 import {Tooltip, TooltipDelayGroupProvider} from '../tooltip'
 
 // Fake timers using Jest

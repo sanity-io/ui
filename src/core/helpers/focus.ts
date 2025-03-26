@@ -1,8 +1,8 @@
 import {
-  isHTMLElement,
   isHTMLAnchorElement,
-  isHTMLInputElement,
   isHTMLButtonElement,
+  isHTMLElement,
+  isHTMLInputElement,
   isHTMLSelectElement,
   isHTMLTextAreaElement,
 } from './element'

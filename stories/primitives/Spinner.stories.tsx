@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
+
 import {Spinner} from '../../src/core/primitives'
 import {getFontSizeControls} from '../controls'
 

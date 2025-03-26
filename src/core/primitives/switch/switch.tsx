@@ -1,11 +1,12 @@
 import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
+
 import {
   switchBaseStyles,
+  switchInputStyles,
   switchRepresentationStyles,
   switchThumbStyles,
   switchTrackStyles,
-  switchInputStyles,
 } from './styles'
 
 /**

@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
+
 import {Checkbox, Flex, Stack} from '../../src/core/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 

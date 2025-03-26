@@ -9,8 +9,9 @@ import {
   Text,
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
+
 import {Popover} from '../../../primitives'
-import countries from '../__fixtures__/countries'
+import countries from '../__mocks__/countries'
 import {AutocompleteProps} from '../autocomplete'
 import {ExampleOption} from './types'
 

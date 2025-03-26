@@ -1,4 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react'
+
 import {Label, Stack} from '../../src/core/primitives'
 import {getAlignControls, getFontSizeControls} from '../controls'
 

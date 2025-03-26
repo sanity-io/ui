@@ -1,8 +1,9 @@
 import {Strategy} from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {type MotionProps, motion} from 'framer-motion'
+import {motion, type MotionProps} from 'framer-motion'
 import React, {CSSProperties, forwardRef, memo, useMemo} from 'react'
 import {styled} from 'styled-components'
+
 import {POPOVER_MOTION_PROPS} from '../../constants'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {Arrow, useLayer} from '../../utils'

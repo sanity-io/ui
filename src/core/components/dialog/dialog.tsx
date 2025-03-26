@@ -2,6 +2,7 @@ import {CloseIcon} from '@sanity/icons'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
+
 import {
   containsOrEqualsElement,
   focusFirstDescendant,
@@ -404,6 +405,7 @@ export const Dialog = forwardRef(function Dialog(
         role="dialog"
         zOffset={zOffset}
       >
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div ref={preDivRef} tabIndex={0} />
         <DialogCard
           __unstable_autoFocus={autoFocus}
@@ -423,6 +425,7 @@ export const Dialog = forwardRef(function Dialog(
         >
           {children}
         </DialogCard>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div ref={postDivRef} tabIndex={0} />
       </StyledDialog>
     </Portal>

@@ -2,8 +2,8 @@ import {
   ThemeColorBase,
   ThemeColorCard,
   ThemeColorMuted,
-  ThemeColorSolid,
   ThemeColorName,
+  ThemeColorSolid,
 } from '../../../../system'
 import {ThemeColorBuilderOpts} from '../factory'
 

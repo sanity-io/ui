@@ -1,30 +1,31 @@
 import {COLOR_HUES} from '@sanity/color'
+
 import {ThemeColorPalette, ThemeConfig} from '../config'
 import {defaultColorPalette} from '../defaults/colorPalette'
 import {
   THEME_COLOR_STATE_TONES,
   ThemeColorAvatar_v2,
-  ThemeColorBadgeTone_v2,
   ThemeColorBadge_v2,
+  ThemeColorBadgeTone_v2,
   ThemeColorBlendModeKey,
+  ThemeColorButton_v2,
   ThemeColorButtonMode_v2,
   ThemeColorButtonTone_v2,
-  ThemeColorButton_v2,
-  ThemeColorCardToneKey,
   ThemeColorCard_v2,
+  ThemeColorCardToneKey,
+  ThemeColorInput_v2,
   ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
-  ThemeColorInput_v2,
   ThemeColorKBD,
   ThemeColorScheme_v2,
   ThemeColorSchemes_v2,
-  ThemeColorSelectableTone_v2,
   ThemeColorSelectable_v2,
+  ThemeColorSelectableTone_v2,
   ThemeColorShadow,
   ThemeColorState_v2,
   ThemeColorSyntax,
 } from '../system'
-import {RenderColorValueOptions, renderColorValue} from './renderColorValue'
+import {renderColorValue, RenderColorValueOptions} from './renderColorValue'
 
 export function renderThemeColorSchemes(
   value: ThemeColorSchemes_v2,

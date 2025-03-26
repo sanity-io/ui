@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
-import {ElementSize, _elementSizeObserver} from '../observers/elementSizeObserver'
+
+import {_elementSizeObserver, ElementSize} from '../observers/elementSizeObserver'
 
 /**
  * Subscribe to the size of a DOM element.

@@ -1,5 +1,6 @@
 import {SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
+
 import {Tab} from '../../src/core/components'
 import {BUTTON_TONES} from '../constants'
 import {getFontSizeControls, getIconControls, getSpaceControls} from '../controls'

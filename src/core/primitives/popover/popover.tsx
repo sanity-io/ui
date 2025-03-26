@@ -1,28 +1,29 @@
 import {
-  Middleware,
-  RootBoundary,
   arrow,
   autoUpdate,
   flip,
   hide,
+  Middleware,
   offset,
+  RootBoundary,
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
-  MutableRefObject,
-  RefCallback,
   cloneElement,
   forwardRef,
   memo,
+  MutableRefObject,
+  RefCallback,
   useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
 } from 'react'
+
 import {useArrayProp, useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
 import {useTheme_v2} from '../../theme'
@@ -31,17 +32,15 @@ import {LayerProps, LayerProvider, Portal, useBoundaryElement, useLayer} from '.
 import {getElementRef} from '../../utils/getElementRef'
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
+  DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_POPOVER_DISTANCE,
   DEFAULT_POPOVER_MARGINS,
-  DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_POPOVER_PADDING,
 } from './constants'
 import {size} from './floating-ui/size'
 import {calcCurrentWidth, calcMaxWidth} from './helpers'
 import {PopoverCard} from './popoverCard'
 import {PopoverUpdateCallback, PopoverWidth} from './types'
-
-export type {PopoverUpdateCallback}
 
 /** @public */
 export interface PopoverProps

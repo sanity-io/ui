@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type {Meta, StoryObj} from '@storybook/react'
 import {useState} from 'react'
+
 import {Box, Button, Card, Popover, Text} from '../../src/core/primitives'
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
