@@ -170,6 +170,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
+    "eslint-formatter-compact": "^8.40.0",
     "eslint-plugin-boundaries": "^5.0.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
