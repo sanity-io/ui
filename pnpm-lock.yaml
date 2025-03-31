@@ -55,7 +55,7 @@ importers:
         specifier: ^7.26.3
         version: 7.26.3(@babel/core@7.26.10)
       '@babel/preset-typescript':
-        specifier: ^7.26.0
+        specifier: ^7.27.0
         version: 7.27.0(@babel/core@7.26.10)
       '@commitlint/cli':
         specifier: ^19.8.0
