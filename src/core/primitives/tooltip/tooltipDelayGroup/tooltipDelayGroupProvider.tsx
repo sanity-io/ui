@@ -39,7 +39,6 @@ export function TooltipDelayGroupProvider(
 
   const value: TooltipDelayGroupContextValue = useMemo(
     () => ({
-      isGroupActive: isGroupActive,
       setIsGroupActive: setIsGroupActive,
       openTooltipId: openTooltipId,
       setOpenTooltipId: setOpenTooltipId,
