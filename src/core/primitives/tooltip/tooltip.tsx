@@ -184,6 +184,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const tooltipId = useId()
   const [isOpen, setIsOpen] = useDelayedState(false)
   const delayGroupContext = useTooltipDelayGroup()
+  const {setIsGroupActive, setOpenTooltipId} = delayGroupContext || {}
   const showTooltip = isOpen || delayGroupContext?.openTooltipId === tooltipId
 
   const isInsideGroup = delayGroupContext !== null
@@ -200,15 +201,15 @@ export const Tooltip = forwardRef(function Tooltip(
         if (open) {
           const groupedOpenDelay = immediate ? 0 : openDelay
 
-          delayGroupContext.setIsGroupActive(open, groupedOpenDelay)
-          delayGroupContext.setOpenTooltipId(tooltipId, groupedOpenDelay)
+          setIsGroupActive?.(open, groupedOpenDelay)
+          setOpenTooltipId?.(tooltipId, groupedOpenDelay)
         } else {
           const minimumGroupDeactivateDelay = 200 // We should provide some delay to allow the user to reach the next tooltip.
           const groupDeactivateDelay =
             closeDelay > minimumGroupDeactivateDelay ? closeDelay : minimumGroupDeactivateDelay
 
-          delayGroupContext.setIsGroupActive(open, groupDeactivateDelay)
-          delayGroupContext.setOpenTooltipId(null, immediate ? 0 : closeDelay)
+          setIsGroupActive?.(open, groupDeactivateDelay)
+          setOpenTooltipId?.(null, immediate ? 0 : closeDelay)
         }
       } else {
         const standaloneDelay = immediate ? 0 : open ? openDelay : closeDelay
@@ -217,7 +218,15 @@ export const Tooltip = forwardRef(function Tooltip(
         setIsOpen(open, standaloneDelay)
       }
     },
-    [isInsideGroup, delayGroupContext, openDelay, tooltipId, closeDelay, setIsOpen],
+    [
+      isInsideGroup,
+      openDelay,
+      setIsGroupActive,
+      setOpenTooltipId,
+      tooltipId,
+      closeDelay,
+      setIsOpen,
+    ],
   )
 
   const handleBlur = useCallback(
@@ -264,7 +273,7 @@ export const Tooltip = forwardRef(function Tooltip(
   )
 
   // Handle closing the tooltip when the mouse leaves the referenceElement
-  useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip})
+  useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip, isInsideGroup})
 
   // Close when `disabled` changes to `true`
   useEffect(() => {
@@ -416,10 +425,12 @@ function useCloseOnMouseLeave({
   handleIsOpenChange,
   referenceElement,
   showTooltip,
+  isInsideGroup,
 }: {
   handleIsOpenChange: (open: boolean, immediate?: boolean) => void
   referenceElement: HTMLElement | null
   showTooltip: boolean
+  isInsideGroup: boolean
 }) {
   // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
   // we use a "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
@@ -441,7 +452,7 @@ function useCloseOnMouseLeave({
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
   // the reference element triggers a CPU-heavy operation.)
   useEffect(() => {
-    if (!showTooltip) return
+    if (!showTooltip || isInsideGroup) return
 
     const handleMouseMove = (event: MouseEvent) => {
       onMouseMove(event.target, () => window.removeEventListener('mousemove', handleMouseMove))
@@ -450,5 +461,5 @@ function useCloseOnMouseLeave({
     window.addEventListener('mousemove', handleMouseMove)
 
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [showTooltip])
+  }, [isInsideGroup, showTooltip])
 }
