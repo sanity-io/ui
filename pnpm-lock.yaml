@@ -76,7 +76,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.3(typescript@5.8.2))
       '@sanity/ui-workshop':
-        specifier: ^2.0.33
+        specifier: ^2.0.34
         version: 2.0.34(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.16(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)
       '@storybook/addon-a11y':
         specifier: ^8.6.11
