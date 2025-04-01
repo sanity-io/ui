@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.11](https://github.com/sanity-io/ui/compare/v2.15.10...v2.15.11) (2025-04-01)
+
+### Bug Fixes
+
+- consistent delayed tooltip group behavior ([#1683](https://github.com/sanity-io/ui/issues/1683)) ([0059251](https://github.com/sanity-io/ui/commit/00592519248f452f83dc49f269123cc7e2819ebc))
+
 ## [2.15.10](https://github.com/sanity-io/ui/compare/v2.15.9...v2.15.10) (2025-03-31)
 
 ### Bug Fixes
