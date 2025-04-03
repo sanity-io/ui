@@ -55,29 +55,43 @@ jobs:
         include:
           - platform: macos-latest
             node-version: lts/*
-    env:
-      CYPRESS_CACHE_FOLDER: "~/.cache/Cypress"
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          # caching breaks cypress
-          # cache: pnpm
+          cache: pnpm
           node-version: ${{ matrix.node-version }}
       - run: pnpm install
       - run: pnpm build
       - run: pnpm test
-      - run: pnpm test:browser
 
-      - name: Upload Cypress Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          name: cypress
-          path: |
-            cypress/screenshots
-            cypress/videos
+          cache: pnpm
+          node-version: lts/*
+      - uses: cypress-io/github-action@v6
+        with:
+          build: pnpm workshop:build
+          start: pnpm workshop:start
+          wait-on: http://localhost:1337
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
 
   sanity-e2e:
     if: ${{ github.event_name == 'pull_request' }}
@@ -92,7 +106,7 @@ jobs:
     permissions:
       id-token: write # to enable use of OIDC for npm provenance
     name: "Semantic release"
-    needs: [lint, test]
+    needs: [lint, test, cypress]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v1
