@@ -62,7 +62,8 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          cache: pnpm
+          # caching breaks cypress
+          # cache: pnpm
           node-version: ${{ matrix.node-version }}
       - run: pnpm install
       - run: pnpm build
