@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@types/react': ^19.0.12
-  '@types/react-dom': ^19.0.4
+  '@types/react': ^19.1.0
+  '@types/react-dom': ^19.1.2
   '@types/react-is': ^19.0.0
   conventional-changelog-conventionalcommits: '>= 8.0.0'
   react: ^19.1.0
@@ -83,10 +83,10 @@ importers:
         version: 8.6.11(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-docs':
         specifier: ^8.6.11
-        version: 8.6.11(@types/react@19.0.12)(storybook@8.6.11(prettier@3.5.3))
+        version: 8.6.11(@types/react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-essentials':
         specifier: ^8.6.11
-        version: 8.6.11(@types/react@19.0.12)(storybook@8.6.11(prettier@3.5.3))
+        version: 8.6.11(@types/react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-interactions':
         specifier: ^8.6.11
         version: 8.6.11(storybook@8.6.11(prettier@3.5.3))
@@ -128,7 +128,7 @@ importers:
         version: 6.6.3
       '@testing-library/react':
         specifier: ^16.2.0
-        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.2(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@testing-library/user-event':
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.0)
@@ -142,11 +142,11 @@ importers:
         specifier: ^20.12.7
         version: 20.17.30
       '@types/react':
-        specifier: ^19.0.12
-        version: 19.0.12
+        specifier: ^19.1.0
+        version: 19.1.0
       '@types/react-dom':
-        specifier: ^19.0.4
-        version: 19.0.4(@types/react@19.0.12)
+        specifier: ^19.1.2
+        version: 19.1.2(@types/react@19.1.0)
       '@types/react-is':
         specifier: ^19.0.0
         version: 19.0.0
@@ -200,7 +200,7 @@ importers:
         version: 19.0.0-beta-e993439-20250328(eslint@9.23.0(jiti@2.4.2))
       eslint-plugin-react-hooks:
         specifier: experimental
-        version: 0.0.0-experimental-e5dd82a7-20250401(eslint@9.23.0(jiti@2.4.2))
+        version: 0.0.0-experimental-33661467-20250407(eslint@9.23.0(jiti@2.4.2))
       eslint-plugin-react-refresh:
         specifier: ^0.4.19
         version: 0.4.19(eslint@9.23.0(jiti@2.4.2))
@@ -1521,7 +1521,7 @@ packages:
   '@mdx-js/react@3.1.0':
     resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
     peerDependencies:
-      '@types/react': ^19.0.12
+      '@types/react': ^19.1.0
       react: ^19.1.0
 
   '@microsoft/api-extractor-model@7.30.5':
@@ -2171,8 +2171,8 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@testing-library/dom': ^10.0.0
-      '@types/react': ^19.0.12
-      '@types/react-dom': ^19.0.4
+      '@types/react': ^19.1.0
+      '@types/react-dom': ^19.1.2
       react: ^19.1.0
       react-dom: ^19.1.0
     peerDependenciesMeta:
@@ -2284,16 +2284,16 @@ packages:
   '@types/progress-stream@2.0.5':
     resolution: {integrity: sha512-5YNriuEZkHlFHHepLIaxzq3atGeav1qCTGzB74HKWpo66qjfostF+rHc785YYYHeBytve8ZG3ejg42jEIfXNiQ==}
 
-  '@types/react-dom@19.0.4':
-    resolution: {integrity: sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==}
+  '@types/react-dom@19.1.2':
+    resolution: {integrity: sha512-XGJkWF41Qq305SKWEILa1O8vzhb3aOo3ogBlSmiqNko/WmRb6QIaweuZCXjKygVDXpzXb5wyxKTSOsmkuqj+Qw==}
     peerDependencies:
-      '@types/react': ^19.0.12
+      '@types/react': ^19.1.0
 
   '@types/react-is@19.0.0':
     resolution: {integrity: sha512-71dSZeeJ0t3aoPyY9x6i+JNSvg5m9EF2i2OlSZI5QoJuI8Ocgor610i+4A10TQmURR+0vLwcVCEYFpXdzM1Biw==}
 
-  '@types/react@19.0.12':
-    resolution: {integrity: sha512-V6Ar115dBDrjbtXSrS+/Oruobc+qVbbUxDFC1RSbRqLt5SYvxxyIDrSC85RWml54g+jfNeEMZhEj7wW07ONQhA==}
+  '@types/react@19.1.0':
+    resolution: {integrity: sha512-UaicktuQI+9UKyA4njtDOGBD/67t8YEBt2xdfqu8+gP9hqPUPsiXlNPcpS2gVdjmis5GKPG3fCxbQLVgxsQZ8w==}
 
   '@types/refractor@3.4.1':
     resolution: {integrity: sha512-wYuorIiCTSuvRT9srwt+taF6mH/ww+SyN2psM0sjef2qW+sS8GmshgDGTEDgWB1sTVGgYVE6EK7dBA2MxQxibg==}
@@ -3671,8 +3671,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-hooks@0.0.0-experimental-e5dd82a7-20250401:
-    resolution: {integrity: sha512-opAG/8TTd13ewWTKQIVp8Kd06SHfKS7TSgksvGGc7NdAUkJFHyCRlI/xe+Tqz9sU9Dy8Tv6/zuq2Z8GASk9ZMg==}
+  eslint-plugin-react-hooks@0.0.0-experimental-33661467-20250407:
+    resolution: {integrity: sha512-zM8uSJyBpkotznNJ/6hTTJPi2EBJ1MJQXgAlNbt74BXDmXkuZ2QVYSRcNF2vlmFlXcH5Xpc/7cjaZmfNRkzZZQ==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -8989,10 +8989,10 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@mdx-js/react@3.1.0(@types/react@19.0.12)(react@19.1.0)':
+  '@mdx-js/react@3.1.0(@types/react@19.1.0)(react@19.1.0)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 19.0.12
+      '@types/react': 19.1.0
       react: 19.1.0
 
   '@microsoft/api-extractor-model@7.30.5(@types/node@20.17.30)':
@@ -9568,9 +9568,9 @@ snapshots:
       storybook: 8.6.11(prettier@3.5.3)
       ts-dedent: 2.2.0
 
-  '@storybook/addon-docs@8.6.11(@types/react@19.0.12)(storybook@8.6.11(prettier@3.5.3))':
+  '@storybook/addon-docs@8.6.11(@types/react@19.1.0)(storybook@8.6.11(prettier@3.5.3))':
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.0.12)(react@19.1.0)
+      '@mdx-js/react': 3.1.0(@types/react@19.1.0)(react@19.1.0)
       '@storybook/blocks': 8.6.11(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
       '@storybook/csf-plugin': 8.6.11(storybook@8.6.11(prettier@3.5.3))
       '@storybook/react-dom-shim': 8.6.11(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
@@ -9581,12 +9581,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@storybook/addon-essentials@8.6.11(@types/react@19.0.12)(storybook@8.6.11(prettier@3.5.3))':
+  '@storybook/addon-essentials@8.6.11(@types/react@19.1.0)(storybook@8.6.11(prettier@3.5.3))':
     dependencies:
       '@storybook/addon-actions': 8.6.11(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-backgrounds': 8.6.11(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-controls': 8.6.11(storybook@8.6.11(prettier@3.5.3))
-      '@storybook/addon-docs': 8.6.11(@types/react@19.0.12)(storybook@8.6.11(prettier@3.5.3))
+      '@storybook/addon-docs': 8.6.11(@types/react@19.1.0)(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-highlight': 8.6.11(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-measure': 8.6.11(storybook@8.6.11(prettier@3.5.3))
       '@storybook/addon-outline': 8.6.11(storybook@8.6.11(prettier@3.5.3))
@@ -9828,15 +9828,15 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.4(@types/react@19.0.12))(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.2(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@babel/runtime': 7.27.0
       '@testing-library/dom': 10.4.0
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
     optionalDependencies:
-      '@types/react': 19.0.12
-      '@types/react-dom': 19.0.4(@types/react@19.0.12)
+      '@types/react': 19.1.0
+      '@types/react-dom': 19.1.2(@types/react@19.1.0)
 
   '@testing-library/user-event@14.5.2(@testing-library/dom@10.4.0)':
     dependencies:
@@ -9949,15 +9949,15 @@ snapshots:
     dependencies:
       '@types/node': 20.17.30
 
-  '@types/react-dom@19.0.4(@types/react@19.0.12)':
+  '@types/react-dom@19.1.2(@types/react@19.1.0)':
     dependencies:
-      '@types/react': 19.0.12
+      '@types/react': 19.1.0
 
   '@types/react-is@19.0.0':
     dependencies:
-      '@types/react': 19.0.12
+      '@types/react': 19.1.0
 
-  '@types/react@19.0.12':
+  '@types/react@19.1.0':
     dependencies:
       csstype: 3.1.3
 
@@ -11611,7 +11611,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-e5dd82a7-20250401(eslint@9.23.0(jiti@2.4.2)):
+  eslint-plugin-react-hooks@0.0.0-experimental-33661467-20250407(eslint@9.23.0(jiti@2.4.2)):
     dependencies:
       '@babel/core': 7.26.10
       '@babel/parser': 7.27.0
