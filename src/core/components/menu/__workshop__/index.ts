@@ -21,6 +21,11 @@ export default defineScope({
       component: lazy(() => import('./customMenuItem')),
     },
     {
+      name: 'label',
+      title: 'Label',
+      component: lazy(() => import('./label')),
+    },
+    {
       name: 'groups',
       title: 'Groups',
       component: lazy(() => import('./groups')),
