@@ -1,7 +1,7 @@
 import {SearchIcon} from '@sanity/icons'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 
-import {Autocomplete, Card} from '../../src/core'
+import {Autocomplete, Card} from '../../src/ui'
 import {RADII} from '../constants'
 import {rowBuilder} from '../helpers/rowBuilder'
 

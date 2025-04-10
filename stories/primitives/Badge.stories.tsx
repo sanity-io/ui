@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Badge, Card, Flex, Stack} from '../../src/core/primitives'
+import {Badge, Card, Flex, Stack} from '../../src/ui/primitives'
 import {BADGE_TONES, CARD_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'

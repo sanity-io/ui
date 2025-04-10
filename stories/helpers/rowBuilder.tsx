@@ -1,6 +1,6 @@
 import {ComponentProps, ReactNode} from 'react'
 
-import {Card, Flex} from '../../src/core/primitives'
+import {Card, Flex} from '../../src/ui/primitives'
 import {ThemeColorSchemeKey} from '../../src/theme'
 
 interface RowBuilderProps<T> {

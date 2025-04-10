@@ -1,7 +1,7 @@
 import {FontTextSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Skeleton, TextSkeleton, TextSkeletonProps} from '../../src/core/components'
+import {Skeleton, TextSkeleton, TextSkeletonProps} from '../../src/ui/components'
 import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'

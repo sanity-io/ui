@@ -1,6 +1,6 @@
 import {ComponentProps, ReactNode} from 'react'
 
-import {Card, Stack} from '../../src/core/primitives'
+import {Card, Stack} from '../../src/ui/primitives'
 import {ThemeColorSchemeKey} from '../../src/theme'
 
 interface ColumnBuilderProps<T> {

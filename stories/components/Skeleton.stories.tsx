@@ -16,7 +16,7 @@ import {
   Stack,
   TextSkeleton,
   TextSkeletonProps,
-} from '../../src/core'
+} from '../../src/ui'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {

@@ -8,5 +8,7 @@ import {v3_v2} from '../versioning/v3_v2'
 export function buildTheme(_config?: ThemeConfig): RootTheme {
   const v3: Theme_v3 = buildTheme_v3({v2: _config})
 
+  console.log('theme', v3)
+
   return v2_v0(v3_v2(v3), v3)
 }

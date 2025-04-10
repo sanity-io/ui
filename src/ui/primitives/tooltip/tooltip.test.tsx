@@ -6,8 +6,8 @@ import '../../../../test/mocks/matchMedia.mock'
 import {act, fireEvent, screen} from '@testing-library/react'
 
 import {render} from '../../../../test'
-import {Button, Text} from '../../primitives'
-import {Tooltip, TooltipDelayGroupProvider} from '../tooltip'
+import {Button, Text} from '..'
+import {Tooltip, TooltipDelayGroupProvider} from '.'
 
 // Fake timers using Jest
 beforeEach(() => {

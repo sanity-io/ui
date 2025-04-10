@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Spinner} from '../../src/core/primitives'
+import {Spinner} from '../../src/ui/primitives'
 import {getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Spinner> = {

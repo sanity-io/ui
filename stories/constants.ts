@@ -1,12 +1,4 @@
-import {
-  BadgeMode,
-  BadgeTone,
-  ButtonMode,
-  ButtonTone,
-  CardTone,
-  Placement,
-  Radius,
-} from '../src/core'
+import {BadgeMode, BadgeTone, ButtonMode, ButtonTone, CardTone, Placement, Radius} from '../src/ui'
 import {buildTheme} from '../src/theme'
 
 const theme = buildTheme()

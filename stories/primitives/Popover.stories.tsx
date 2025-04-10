@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {useState} from 'react'
 
-import {Box, Button, Card, Popover, Text} from '../../src/core/primitives'
+import {Box, Button, Card, Popover, Text} from '../../src/ui/primitives'
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'

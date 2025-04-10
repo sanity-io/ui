@@ -38,7 +38,7 @@ import {
   TextInput,
   TextSkeleton,
   ThemeProvider,
-} from '../../src/core'
+} from '../../src/ui'
 import {buildTheme, ThemeColorSchemeKey} from '../../src/theme'
 
 const theme = buildTheme()

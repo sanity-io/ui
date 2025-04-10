@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {ChangeEvent, useCallback, useState} from 'react'
 
-import {Flex, Radio, Stack} from '../../src/core/primitives'
+import {Flex, Radio, Stack} from '../../src/ui/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Radio> = {

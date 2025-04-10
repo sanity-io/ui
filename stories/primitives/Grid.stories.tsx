@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, Code, Grid} from '../../src/core/primitives'
+import {Card, Code, Grid} from '../../src/ui/primitives'
 import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Grid> = {

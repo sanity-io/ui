@@ -144,8 +144,8 @@ export default ts.config(
             mode: 'full',
           },
           {
-            type: 'src/core',
-            pattern: ['src/core/**/*'],
+            type: 'src/ui',
+            pattern: ['src/ui/**/*'],
             mode: 'full',
           },
           {
@@ -210,18 +210,18 @@ export default ts.config(
           {
             default: 'disallow',
             rules: [
-              {from: '@sanity/ui', allow: ['@sanity/ui/theme', 'src/core']},
-              {from: '@sanity/ui/_visual-editing', allow: ['src/core', 'src/theme']},
+              {from: '@sanity/ui', allow: ['@sanity/ui/theme', 'src/ui']},
+              {from: '@sanity/ui/_visual-editing', allow: ['src/ui', 'src/theme']},
               {from: '@sanity/ui/theme', allow: ['src/theme']},
               {from: 'src/cli', allow: []},
-              {from: 'src/core', allow: ['src/core', '@sanity/ui/css', '@sanity/ui/theme']},
+              {from: 'src/ui', allow: ['src/ui', '@sanity/ui/css', '@sanity/ui/theme']},
               {from: 'src/css', allow: ['src/css', '@sanity/ui/theme']},
               {from: 'src/theme', allow: ['src/theme']},
               {from: 'test', allow: ['@sanity/ui', '@sanity/ui/theme']},
               {from: 'test/storybook', allow: ['test/storybook']},
               {
                 from: 'test/storybook/stories',
-                allow: ['src/core', 'src/theme', 'test/storybook/stories'],
+                allow: ['src/ui', 'src/theme', 'test/storybook/stories'],
               },
             ],
           },

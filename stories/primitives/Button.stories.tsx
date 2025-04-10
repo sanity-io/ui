@@ -1,7 +1,7 @@
 import {CloseIcon, SearchIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Button, Flex, Grid, Stack, Text} from '../../src/core/primitives'
+import {Button, Flex, Grid, Stack, Text} from '../../src/ui/primitives'
 import {BUTTON_MODES, BUTTON_TONES, RADII} from '../constants'
 import {
   getButtonWidthControls,

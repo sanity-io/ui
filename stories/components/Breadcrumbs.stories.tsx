@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Breadcrumbs, Text} from '../../src/core'
+import {Breadcrumbs, Text} from '../../src/ui'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Breadcrumbs> = {

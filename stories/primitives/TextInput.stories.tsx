@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 
-import {Box, Container, Grid, Text, TextInput} from '../../src/core/primitives'
+import {Box, Container, Grid, Text, TextInput} from '../../src/ui/primitives'
 import {RADII} from '../constants'
 import {
   getFontSizeControls,

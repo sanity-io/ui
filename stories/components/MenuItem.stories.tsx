@@ -1,8 +1,8 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 
-import {Menu, MenuItem} from '../../src/core/components'
-import {Card, Container} from '../../src/core/primitives'
-import {LayerProvider} from '../../src/core/utils'
+import {Menu, MenuItem} from '../../src/ui/components'
+import {Card, Container} from '../../src/ui/primitives'
+import {LayerProvider} from '../../src/ui/utils'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof MenuItem> = {

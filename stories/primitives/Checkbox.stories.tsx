@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 
-import {Checkbox, Flex, Stack} from '../../src/core/primitives'
+import {Checkbox, Flex, Stack} from '../../src/ui/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Checkbox> = {

@@ -31,7 +31,7 @@ import {
   TextArea,
   TextInput,
   ThemeProvider,
-} from '../../src/core'
+} from '../../src/ui'
 import {buildTheme} from '../../src/theme'
 
 const theme = buildTheme()

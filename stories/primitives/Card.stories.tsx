@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '../../src/core/primitives'
-import {CardTone} from '../../src/core/types'
+import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '../../src/ui/primitives'
+import {CardTone} from '../../src/ui/types'
 import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'

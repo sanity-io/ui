@@ -1,6 +1,6 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 
-import {AvatarCounter, AvatarStack} from '../../src/core/primitives'
+import {AvatarCounter, AvatarStack} from '../../src/ui/primitives'
 import {getAvatarSizeControls} from '../controls'
 
 const meta: Meta<typeof AvatarCounter> = {
