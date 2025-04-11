@@ -131,10 +131,11 @@ function AsyncOption(props: {
 
   return (
     <Card
-      data-as="button"
+      as="button"
       disabled={disabled}
       padding={3}
       radius={1}
+      selectable
       selected={selected}
       tabIndex={tabIndex}
     >

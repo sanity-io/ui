@@ -2,7 +2,7 @@ import {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
 import {FontTextSize, Space} from '@sanity/ui/theme'
 import {ForwardedRef, forwardRef} from 'react'
 
-import {Box, Inline, KBD} from '../../primitives'
+import {Box, KBD} from '../../primitives'
 import {Props} from '../../types'
 
 /**
@@ -25,10 +25,10 @@ export const Hotkeys = forwardRef(function Hotkeys(
   props: Props<HotkeysProps, 'div'>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {fontSize, gap, gapX, gapY, keys, padding, radius, space = 1, ...restProps} = props
+  const {fontSize, gap, gapX, gapY, keys, padding, radius, space = 0.5, ...restProps} = props
 
   if (!keys || keys.length === 0) {
-    return <></>
+    return undefined
   }
 
   return (
@@ -42,13 +42,11 @@ export const Hotkeys = forwardRef(function Hotkeys(
       gapY={gapY}
       ref={ref}
     >
-      <Inline as="span" gap={gap}>
-        {keys.map((key, i) => (
-          <KBD display="block" fontSize={fontSize} key={i} padding={padding} radius={radius}>
-            {key}
-          </KBD>
-        ))}
-      </Inline>
+      {keys.map((key, i) => (
+        <KBD fontSize={fontSize} key={i} padding={padding} radius={radius}>
+          {key}
+        </KBD>
+      ))}
     </Box>
   )
 })

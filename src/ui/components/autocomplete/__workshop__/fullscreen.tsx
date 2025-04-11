@@ -11,7 +11,6 @@ import {
   Layer,
   Portal,
   PortalProvider,
-  Skeleton,
   Stack,
   Text,
   TextSkeleton,
@@ -253,7 +252,7 @@ function AsyncOption(props: {
   return (
     <Card
       aria-label={data?.title}
-      data-as="a"
+      as="button"
       disabled={disabled}
       padding={2}
       radius={2}
@@ -262,9 +261,9 @@ function AsyncOption(props: {
       tabIndex={tabIndex}
     >
       <Flex align="center">
-        <Skeleton radius={2} style={{width: 35, height: 35}} />
+        <Box muted radius={2} style={{width: 35, height: 35}} />
         <Box flex={1} marginLeft={3}>
-          <Stack space={2}>
+          <Stack gap={2}>
             {loading && (
               <>
                 <TextSkeleton style={{maxWidth: 200}} />
