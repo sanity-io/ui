@@ -43,4 +43,4 @@ jobs:
 
       - run: |
           echo "Publishing to pkg.pr.new"
-          pnpm pnpx pkg-pr-new publish --no-template @sanity/ui
+          pnpm pnpx pkg-pr-new publish
