@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/sanity-io/ui-workshop/compare/v2.1.0...v2.1.1) (2025-04-23)
+
+### Bug Fixes
+
+- **runtime:** fix dev server route pattern ([85ad327](https://github.com/sanity-io/ui-workshop/commit/85ad327777bda45bbd538f8a86c4c3b3f9df13ee))
+
 ## [2.1.0](https://github.com/sanity-io/ui-workshop/compare/v2.0.34...v2.1.0) (2025-04-23)
 
 ### Features
