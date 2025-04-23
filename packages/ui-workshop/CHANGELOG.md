@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/sanity-io/ui-workshop/compare/v2.0.34...v2.1.0) (2025-04-23)
+
+### Features
+
+- support returning a vite config promise ([7e8a0b6](https://github.com/sanity-io/ui-workshop/commit/7e8a0b6027f554ea385a6e727ea54d782bd12d23))
+
 ## [2.0.34](https://github.com/sanity-io/ui-workshop/compare/v2.0.33...v2.0.34) (2025-04-01)
 
 ### Bug Fixes
