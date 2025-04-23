@@ -9,5 +9,5 @@ export interface WorkshopRuntime {
   server?: {
     port?: number
   }
-  vite?: (viteConfig: InlineConfig) => InlineConfig
+  vite?: (viteConfig: InlineConfig) => InlineConfig | Promise<InlineConfig>
 }
