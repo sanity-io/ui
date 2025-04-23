@@ -35,7 +35,7 @@ export async function createDevServer(options: {
 
   app.use(vite.middlewares)
 
-  app.get('*', async (req, res, next) => {
+  app.get(/(.*)/, async (req, res, next) => {
     const url = req.originalUrl
 
     let htmlPath = 'index.html'
