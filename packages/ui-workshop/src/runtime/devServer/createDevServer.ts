@@ -23,7 +23,14 @@ export async function createDevServer(options: {
     logLevel: 'info',
     server: {middlewareMode: true},
   }
-  const viteConfig = runtime?.vite?.(baseViteConfig) || baseViteConfig
+
+  let viteConfig = runtime?.vite?.(baseViteConfig) || baseViteConfig
+
+  // check if viteConfig is a promise
+  if (typeof viteConfig === 'object' && 'then' in viteConfig) {
+    viteConfig = await viteConfig
+  }
+
   const vite = await createViteServer(viteConfig)
 
   app.use(vite.middlewares)

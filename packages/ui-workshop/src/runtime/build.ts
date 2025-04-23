@@ -44,7 +44,13 @@ export async function build(options: {cwd: string}): Promise<void> {
   await writeFile(path.resolve(runtimeDir, 'scopes.ts'), code)
 
   const baseViteConfig = createViteConfig({cwd, outDir, runtimeDir})
-  const viteConfig = runtime?.vite?.(baseViteConfig) || baseViteConfig
+
+  let viteConfig = runtime?.vite?.(baseViteConfig) || baseViteConfig
+
+  // check if viteConfig is a promise
+  if (typeof viteConfig === 'object' && 'then' in viteConfig) {
+    viteConfig = await viteConfig
+  }
 
   await viteBuild(viteConfig)
 
