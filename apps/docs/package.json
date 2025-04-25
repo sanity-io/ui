@@ -13,7 +13,7 @@
     "next:build": "next build",
     "next:dev": "next dev",
     "sanity:dev": "sanity dev",
-    "sanity:manifest:extract": "mkdirp public/static && sanity manifest extract --path public/static",
+    "sanity:manifest:extract": "mkdirp public/studio/static && sanity manifest extract --path public/studio/static",
     "start": "next start",
     "test": "vitest",
     "ts:check": "tsc --build"
