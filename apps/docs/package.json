@@ -6,12 +6,14 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "scripts": {
-    "build": "next build",
+    "build": "run-s next:build sanity:manifest:extract",
     "dev": "run-p next:dev sanity:dev",
     "format": "prettier --write --cache --ignore-unknown . && eslint . --ext .cjs,.js,.ts,.tsx --fix --quiet",
     "lint": "next lint",
+    "next:build": "next build",
     "next:dev": "next dev",
     "sanity:dev": "sanity dev",
+    "sanity:manifest:extract": "mkdirp public/static && sanity manifest extract --path public/static",
     "start": "next start",
     "test": "vitest",
     "ts:check": "tsc --build"
@@ -60,6 +62,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "mkdirp": "^3.0.1",
     "npm-run-all2": "^5.0.2",
     "prettier-plugin-packagejson": "^2.5.10",
     "typescript": "^5.8.3",
