@@ -9,6 +9,10 @@
     {
       "matchDepTypes": ["dependencies"],
       "rangeStrategy": "bump"
+    },
+    {
+      "matchPackageNames": ["react-compiler-runtime", "babel-plugin-react-compiler", "eslint-plugin-react-hooks"],
+      "followTag": "rc"
     }
   ]
 }

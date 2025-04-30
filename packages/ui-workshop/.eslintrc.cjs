@@ -19,15 +19,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: [
-    'import',
-    'jsx-a11y',
-    'react',
-    'react-hooks',
-    'simple-import-sort',
-    'prettier',
-    'react-compiler',
-  ],
+  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', 'simple-import-sort', 'prettier'],
   rules: {
     'no-console': 'error',
     'no-shadow': 'error',
@@ -38,11 +30,10 @@ module.exports = {
         terms: ['todo', 'fixme'],
       },
     ],
-    'quote-props': ['warn', 'consistent'],
     'react/prop-types': 'off',
     'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    'react-compiler/react-compiler': ['error', {__unstable_donotuse_reportAllBailouts: true}],
+    'react-hooks/react-compiler': 'error',
     'react/no-unescaped-entities': 'off',
     'simple-import-sort/exports': 'warn',
     'simple-import-sort/imports': 'warn',
@@ -79,8 +70,6 @@ module.exports = {
       ],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 'error',
-        '@typescript-eslint/interface-name-prefix': 'off',
-        '@typescript-eslint/member-delimiter-style': 'off',
         '@typescript-eslint/no-empty-interface': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
       },
