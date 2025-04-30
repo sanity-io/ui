@@ -200,7 +200,7 @@ importers:
         version: 19.0.0-beta-e993439-20250405(eslint@9.23.0(jiti@2.4.2))
       eslint-plugin-react-hooks:
         specifier: experimental
-        version: 0.0.0-experimental-3fbfb9ba-20250409(eslint@9.23.0(jiti@2.4.2))
+        version: 0.0.0-experimental-0038c501-20250429(eslint@9.23.0(jiti@2.4.2))
       eslint-plugin-react-refresh:
         specifier: ^0.4.19
         version: 0.4.19(eslint@9.23.0(jiti@2.4.2))
@@ -289,8 +289,8 @@ importers:
         specifier: ^7.25.9
         version: 7.25.9(@babel/core@7.26.10)
       '@figma/plugin-typings':
-        specifier: ^1.109.0
-        version: 1.109.0
+        specifier: ^1.110.0
+        version: 1.110.0
       '@sanity/color':
         specifier: ^3.0.6
         version: 3.0.6
@@ -1363,8 +1363,8 @@ packages:
     resolution: {integrity: sha512-ZAoA40rNMPwSm+AeHpCq8STiNAwzWLJuP8Xv4CHIc9wv/PSuExjMrmjfYNj682vW0OOiZ1HKxzvjQr9XZIisQA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@figma/plugin-typings@1.109.0':
-    resolution: {integrity: sha512-6l628rOQGNd5ZD3Bru36/NK+PSKmHpsrWz0NMwUYZ8AIyfIl6sCJRc8+OhAy9+WkDXq/Dx3BYiBStjmCJ8O3Lw==}
+  '@figma/plugin-typings@1.110.0':
+    resolution: {integrity: sha512-n1fZKjt2zApCVqxdJs+JCdpmLX2hDvhgoGbuXeAh7xt+IkSj21gB9vhV5KW+O5sDyPnt3H7doTDO47Oy9CRkQg==}
 
   '@floating-ui/core@1.6.9':
     resolution: {integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==}
@@ -3671,8 +3671,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-react-hooks@0.0.0-experimental-3fbfb9ba-20250409:
-    resolution: {integrity: sha512-QY/pQ2Iddn9No67J04KtqYiyUOtAHhHayK6ORft9VCk/VHEc2H65jtpTRS/OqoSi+4cw+v2/uIE3LftvXt9m7w==}
+  eslint-plugin-react-hooks@0.0.0-experimental-0038c501-20250429:
+    resolution: {integrity: sha512-hRhaXbI9A/FnKeIKWFseiQCgxFUEFp9Cfn2sjbgTvq1Mtls+tYspRhOZ+Z8PO9LXgHRqXwe8hx8kd4N8bSehEw==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -8742,7 +8742,7 @@ snapshots:
       '@eslint/core': 0.13.0
       levn: 0.4.1
 
-  '@figma/plugin-typings@1.109.0': {}
+  '@figma/plugin-typings@1.110.0': {}
 
   '@floating-ui/core@1.6.9':
     dependencies:
@@ -11616,7 +11616,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-3fbfb9ba-20250409(eslint@9.23.0(jiti@2.4.2)):
+  eslint-plugin-react-hooks@0.0.0-experimental-0038c501-20250429(eslint@9.23.0(jiti@2.4.2)):
     dependencies:
       '@babel/core': 7.26.10
       '@babel/parser': 7.27.0
