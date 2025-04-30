@@ -161,7 +161,7 @@
     "@types/react-dom": "^19.1.2",
     "@types/react-is": "^19.0.0",
     "@types/refractor": "^3.4.1",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^4.4.1",
     "babel-plugin-react-compiler": "19.0.0-beta-e993439-20250405",
     "babel-plugin-styled-components": "^2.1.4",
     "commitizen": "^4.3.1",
