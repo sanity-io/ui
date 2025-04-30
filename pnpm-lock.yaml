@@ -76,8 +76,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.3(typescript@5.8.3))
       '@sanity/ui-workshop':
-        specifier: ^2.1.1
-        version: 2.1.1(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)
+        specifier: ^2.1.2
+        version: 2.1.2(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)
       '@storybook/addon-a11y':
         specifier: ^8.6.12
         version: 8.6.12(storybook@8.6.12(prettier@3.5.3))
@@ -1859,8 +1859,8 @@ packages:
     peerDependencies:
       semantic-release: ^24
 
-  '@sanity/ui-workshop@2.1.1':
-    resolution: {integrity: sha512-XL4eOAdIeLQUOAzUQ/7Vh30EYC9BIZs+yMe/MFleFW6uuyCv/myNozjCqDPJTw6+DcsL9Eja70tFzZkU7o76xw==}
+  '@sanity/ui-workshop@2.1.2':
+    resolution: {integrity: sha512-IGZL5YSmEkgxjME9ZpTsu5r8g1iPvCsbSp1hEwqkH8GOIZibFS07Oeug2qGrVZVvTX7M3vOXYbA9Qwb+aWyGIA==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2 || ^3
@@ -6242,13 +6242,13 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
-  react-compiler-runtime@19.0.0-beta-e993439-20250328:
-    resolution: {integrity: sha512-bdLTxDSnjHb8iwkAal+vNb1NK1l7MlsG02/Kc47AkQL0lmszOHRSV5wkeprCVnT2pYAI8721TOeO6e1/Wfgvuw==}
+  react-compiler-runtime@19.0.0-beta-e993439-20250405:
+    resolution: {integrity: sha512-uTvtVgJR21Xy7XAthYbC3R9V00V/U7xP3BWrwpSvcmHgtar8+TweghRIankQJLps/g7HIYxy+dnXCGBy0cKv5w==}
     peerDependencies:
       react: ^19.1.0
 
-  react-compiler-runtime@19.0.0-beta-e993439-20250405:
-    resolution: {integrity: sha512-uTvtVgJR21Xy7XAthYbC3R9V00V/U7xP3BWrwpSvcmHgtar8+TweghRIankQJLps/g7HIYxy+dnXCGBy0cKv5w==}
+  react-compiler-runtime@19.1.0-rc.1:
+    resolution: {integrity: sha512-wCt6g+cRh8g32QT18/9blfQHywGjYu+4FlEc3CW1mx3pPxYzZZl1y+VtqxRgnKKBCFLIGUYxog4j4rs5YS86hw==}
     peerDependencies:
       react: ^19.1.0
 
@@ -9363,7 +9363,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.1.1(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)':
+  '@sanity/ui-workshop@2.1.2(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)':
     dependencies:
       '@sanity/icons': 3.7.0(react@19.1.0)
       '@sanity/ui': 'link:'
@@ -9381,7 +9381,7 @@ snapshots:
       mkdirp: 2.1.6
       pako: 2.1.0
       react: 19.1.0
-      react-compiler-runtime: 19.0.0-beta-e993439-20250328(react@19.1.0)
+      react-compiler-runtime: 19.1.0-rc.1(react@19.1.0)
       react-dom: 19.1.0(react@19.1.0)
       rimraf: 4.4.1
       segmented-property: 4.0.0
@@ -14668,11 +14668,11 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  react-compiler-runtime@19.0.0-beta-e993439-20250328(react@19.1.0):
+  react-compiler-runtime@19.0.0-beta-e993439-20250405(react@19.1.0):
     dependencies:
       react: 19.1.0
 
-  react-compiler-runtime@19.0.0-beta-e993439-20250405(react@19.1.0):
+  react-compiler-runtime@19.1.0-rc.1(react@19.1.0):
     dependencies:
       react: 19.1.0
 
