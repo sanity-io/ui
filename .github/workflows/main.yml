@@ -99,7 +99,7 @@ jobs:
       contents: read
       actions: write
     name: "Run Studio End-to-end tests"
-    uses: sanity-io/sanity/.github/workflows/e2e-ui.yml@main
+    uses: sanity-io/sanity/.github/workflows/e2e-ui.yml@fix-e2e-ui-test
     secrets: inherit
 
   release:
