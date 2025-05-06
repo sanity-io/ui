@@ -4,7 +4,6 @@ import boundaries from 'eslint-plugin-boundaries'
 import _import from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
-import reactCompiler from 'eslint-plugin-react-compiler'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
@@ -70,8 +69,14 @@ export default ts.config(
     // react-refresh
     reactRefresh.configs.vite,
 
-    // react-hooks
-    reactHooks.configs.recommended,
+    // react-hooks and react-compiler
+    {
+      ...reactHooks.configs.recommended,
+      rules: {
+        'react-hooks/exhaustive-deps': 'error', // it's `warn` by default
+        'react-hooks/react-compiler': 'error', // enable the react compiler
+      },
+    },
 
     // react
     {
@@ -88,18 +93,11 @@ export default ts.config(
       ...react.configs.flat['jsx-runtime'],
     },
 
-    // react-compiler
-    reactCompiler.configs.recommended,
-    {
-      rules: {
-        'react-compiler/react-compiler': 'warn', // Set to error once existing warnings are fixed
-      },
-    },
     // Ignore Storybook stories and test files for the react compiler
     {
       files: ['**/*.stories.{js,ts,tsx}', '**/*.test.{js,ts,tsx}'],
       rules: {
-        'react-compiler/react-compiler': 'off',
+        'react-hooks/react-compiler': 'off',
       },
     },
 

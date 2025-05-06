@@ -7,6 +7,10 @@
       "matchDepTypes": ["dependencies"],
       "semanticCommitType": "fix",
       "rangeStrategy": "bump"
+    },
+    {
+      "matchPackageNames": ["eslint-plugin-react-hooks"],
+      "followTag": "experimental"
     }
   ]
 }
