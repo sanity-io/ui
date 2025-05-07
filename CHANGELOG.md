@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.17](https://github.com/sanity-io/ui/compare/v2.15.16...v2.15.17) (2025-05-07)
+
+### Bug Fixes
+
+- lighten tab hover and selected colors in dark mode ([#1717](https://github.com/sanity-io/ui/issues/1717)) ([917c5c3](https://github.com/sanity-io/ui/commit/917c5c3dd6b0f87c3d87faae213653aa1036ed67))
+
 ## [2.15.16](https://github.com/sanity-io/ui/compare/v2.15.15...v2.15.16) (2025-05-06)
 
 ### Bug Fixes
