@@ -368,12 +368,12 @@ export const defaultColorTokens: ThemeColorTokens = {
           },
         },
         'hovered': {
-          bg: ['50', '950'],
+          bg: ['50', '900'],
           fg: ['800', '200'],
           icon: ['800 70%', '300 70%'],
         },
         'pressed': {
-          bg: ['100', '900'],
+          bg: ['100', '800'],
           fg: ['800', '200'],
           icon: ['800 70%', '200 70%'],
         },
