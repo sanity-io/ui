@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/sanity-io/logos/compare/v2.1.13...v2.2.0) (2025-05-08)
+
+### Features
+
+- new squiggle logo ([#129](https://github.com/sanity-io/logos/issues/129)) ([0f25a66](https://github.com/sanity-io/logos/commit/0f25a66496f71d5d72e48311f69e030f497d4300))
+
 ## [2.1.13](https://github.com/sanity-io/logos/compare/v2.1.12...v2.1.13) (2024-07-19)
 
 ### Bug Fixes
