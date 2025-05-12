@@ -1,8 +1,8 @@
-import {composeClassNames} from '../../composeClassNames'
-import {radius} from '../../styles'
+import {_comp} from '../../_comp'
+import {radius} from '../../aspects'
 import {BadgeStyleProps} from './types'
 
 /** @public */
 export function badge(props: BadgeStyleProps): string | undefined {
-  return composeClassNames('badge', props.tone && `badge-${props.tone}`, radius(props))
+  return _comp('badge', props.tone && `badge-${props.tone}`, radius(props))
 }

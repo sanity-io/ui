@@ -37,6 +37,7 @@ export const cardRules: Rules = {
         'outline': 'none',
         'textDecoration': 'none',
 
+        // @ts-expect-error - TODO: fix this
         '@nest': {
           '&:not(:disabled)': {
             '@nest': {
@@ -76,6 +77,7 @@ export const cardRules: Rules = {
         'font': 'inherit',
         'textAlign': 'inherit',
         'border': 0,
+        // @ts-expect-error - TODO: fix this
         'width': ['-moz-available', '-webkit-fill-available', 'stretch'],
         'cursor': 'default',
 

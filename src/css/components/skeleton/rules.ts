@@ -16,6 +16,7 @@ export const skeletonRules: Rules = {
     'opacity': 0,
     'transition': 'opacity 200ms ease-in',
 
+    // @ts-expect-error - TODO: fix this
     '@keyframes': {
       'skeleton-pulse': {
         '0%': {

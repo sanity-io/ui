@@ -1,3 +1,3 @@
 .workshop
-dist
+# dist
 pnpm-lock.yaml

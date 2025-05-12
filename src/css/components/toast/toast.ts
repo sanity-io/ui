@@ -1,21 +1,21 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 
 export function toastLayer() {
-  return composeClassNames('toast-layer')
+  return _comp('toast-layer')
 }
 
 export function toast() {
-  return composeClassNames('toast')
+  return _comp('toast')
 }
 
 export function toastLoadingBar() {
-  return composeClassNames('toast-loading-bar')
+  return _comp('toast-loading-bar')
 }
 
 export function toastLoadingBarProgress() {
-  return composeClassNames('toast-loading-bar-progress')
+  return _comp('toast-loading-bar-progress')
 }
 
 export function toastLoadingBarMask() {
-  return composeClassNames('toast-loading-bar-mask')
+  return _comp('toast-loading-bar-mask')
 }

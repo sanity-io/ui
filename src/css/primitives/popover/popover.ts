@@ -1,5 +1,5 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 
 export function popover(): string | undefined {
-  return composeClassNames('popover')
+  return _comp('popover')
 }

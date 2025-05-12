@@ -14,7 +14,7 @@ import {FontTextSize, Space} from '@sanity/ui/theme'
 import {ElementType, ForwardedRef, forwardRef, isValidElement, ReactNode} from 'react'
 import {isValidElementType} from 'react-is'
 
-import {useTheme_v2} from '../../_compat'
+// import {useTheme_v2} from '../../_compat'
 import {ButtonMode, ButtonTextAlign, ButtonTone, Props} from '../../types'
 import {Box} from '../box'
 import {Spinner} from '../spinner'
@@ -84,13 +84,13 @@ export const Button = forwardRef(function Button(
     paddingBottom,
     paddingLeft,
     paddingRight,
-    radius = 2,
+    radius = 3,
     selected,
     space = props.gap ?? props.space ?? props.padding ?? 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     text,
     textAlign,
     textOverflow = 'ellipsis',
-    textWeight,
+    textWeight = 'medium',
     tone = 'default',
     type = 'button',
     muted = false,
@@ -98,7 +98,7 @@ export const Button = forwardRef(function Button(
     wrap,
     ...restProps
   } = props
-  const {button: buttonTheme} = useTheme_v2()
+  // const {button: buttonTheme} = useTheme_v2()
 
   return (
     <As
@@ -120,6 +120,7 @@ export const Button = forwardRef(function Button(
           display="flex"
           flex={1}
           justify={justify}
+          // @ts-expect-error - TODO: fix this
           width="fill"
         >
           <Spinner size={fontSize} />
@@ -143,6 +144,7 @@ export const Button = forwardRef(function Button(
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
+          // @ts-expect-error - TODO: fix this
           width="fill"
           wrap={wrap}
         >
@@ -161,7 +163,8 @@ export const Button = forwardRef(function Button(
               muted={muted}
               size={fontSize}
               textOverflow={textOverflow}
-              weight={textWeight ?? buttonTheme.textWeight}
+              // weight={textWeight ?? buttonTheme.textWeight}
+              weight={textWeight}
             >
               {text}
             </Text>
@@ -192,6 +195,7 @@ export const Button = forwardRef(function Button(
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
+          // @ts-expect-error - TODO: fix this
           width="fill"
           wrap={wrap}
         >

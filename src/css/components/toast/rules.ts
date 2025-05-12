@@ -12,6 +12,7 @@ export const toastRules: Rules = {
 
   'toast': {
     pointerEvents: 'all',
+    // @ts-expect-error - TODO: fix this
     overflow: ['hidden', 'clip'],
   },
 }

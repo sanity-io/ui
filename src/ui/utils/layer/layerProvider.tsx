@@ -34,7 +34,7 @@ export function LayerProvider(props: LayerProviderProps): ReactElement {
   // Get responsive z-index value
   const maxMediaIndex = zOffset.length - 1
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
-  const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
+  const zIndex = parent ? parent.zIndex + (zOffset[mediaIndex] ?? 0) : (zOffset[mediaIndex] ?? 0)
 
   // A state value that is used to keep track of the number of child layers on each level
   const [, setChildLayers] = useState<Record<number, number>>({})

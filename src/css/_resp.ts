@@ -1,4 +1,9 @@
+// import {scopeClassName as _} from './scopeClassName'
 import {ResponsiveProp} from './types'
+
+function _(className: string) {
+  return className
+}
 
 export function _resp<T>(
   prefix: string | undefined,
@@ -18,14 +23,16 @@ export function _resp<T>(
           .join('-')
           .replace(/\./g, '_')
 
-        return index === 0 ? `${className}` : `_${index}:${className}`
+        return index === 0 ? _(className) : _(`${index}:${className}`)
       })
       .filter(Boolean)
       .join(' ')
   }
 
-  return (typeof prop === 'boolean' ? [prefix] : [prefix, prop])
-    .filter((s) => s === 0 || Boolean(s))
-    .join('-')
-    .replace(/\./g, '_')
+  return _(
+    (typeof prop === 'boolean' ? [prefix] : [prefix, prop])
+      .filter((s) => s === 0 || Boolean(s))
+      .join('-')
+      .replace(/\./g, '_'),
+  )
 }

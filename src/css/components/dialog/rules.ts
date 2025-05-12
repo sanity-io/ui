@@ -13,6 +13,7 @@ export const dialogRules: Rules = {
 
     'background': vars.color.backdrop,
 
+    // @ts-expect-error - TODO: fix this
     '@keyframes': {
       'dialog-zoom-in': {
         from: {
@@ -54,6 +55,7 @@ export const dialogRules: Rules = {
   'dialog-card-root': {
     width: '100%',
     maxHeight: '100%',
+    // @ts-expect-error - TODO: fix this
     overflow: ['hidden', 'clip'],
   },
 

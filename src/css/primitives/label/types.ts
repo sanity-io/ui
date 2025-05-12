@@ -1,4 +1,4 @@
-import {FontStyleProps} from '../../styles'
+import {FontStyleProps} from '../../aspects'
 import {ResponsiveProp} from '../../types'
 
 /** @public */

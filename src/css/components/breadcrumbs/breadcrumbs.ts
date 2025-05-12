@@ -1,5 +1,5 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 
 export function breadcrumbs(): string | undefined {
-  return composeClassNames('breadcrumbs')
+  return _comp('breadcrumbs')
 }

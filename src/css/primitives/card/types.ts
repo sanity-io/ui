@@ -1,6 +1,6 @@
 import {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
 
-import {ShadowStyleProps} from '../../styles'
+import {ShadowStyleProps} from '../../aspects'
 import {BoxStyleProps} from '../box'
 
 export interface CardStyleProps extends BoxStyleProps, ShadowStyleProps {

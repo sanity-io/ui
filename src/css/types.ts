@@ -366,6 +366,8 @@ export type LegacyCardScopedVarName =
 export type ElementColorVariantScopedVarName =
   `--color-${ElementColorVariant}-${ElementColorVariantKey}`
 
+export type ButtonScopedVarName = '--button-box-shadow'
+
 /** @public */
 export type InputScopedVarName =
   | `--color-input-bg`
@@ -389,12 +391,14 @@ export type SwitchScopedVarName =
   | '--switch-thumb-size'
 
 /** @public */
-export type CSSVarName =
+export type VarName =
   | AvatarScopedVarName
   | LegacyCardScopedVarName
   | PaletteVarName
   | ThemeVarName
   | ColorCardVarName
+  // scoped var names
+  | ButtonScopedVarName
   | ColorCardToneScopedVarName
   | CardScopedVarName
   | ElementColorVariantScopedVarName
@@ -402,15 +406,52 @@ export type CSSVarName =
   | SwitchScopedVarName
 
 /** @public */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface CustomCSSProperties extends Record<CSSVarName, string> {}
+export type PropertiesWithVars = CSS.Properties &
+  Partial<Record<VarName, string>> & {
+    _prefix?: boolean
+  }
 
 /** @public */
-export interface Properties extends CSS.PropertiesFallback, Partial<CustomCSSProperties> {
-  '@keyframes'?: Record<string, Record<string, Properties>>
-  '@media'?: Record<string, Properties>
-  '@nest'?: Record<string, Properties>
+export type PropertiesWithVarsAndNested = PropertiesWithVars & {
+  '@nest'?: Record<string, PropertiesWithVars>
 }
+
+/** @public */
+export type Properties = PropertiesWithVarsAndNested & {
+  '@media'?: Record<string, PropertiesWithVarsAndNested>
+}
+
+/** @public */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface CustomCSSProperties extends Record<VarName, string> {}
+
+/** @public */
+export type StyleSelector = `.${string}` | `#${string}` | `:root`
+
+/** @public */
+export type StyleRules = Partial<Record<StyleSelector, Properties>>
+
+/** @public */
+export type StyleKeyframes = Record<string, Record<string, Properties>>
+
+/** @public */
+export type StyleLayers = Record<string, StyleRules>
+
+/** @public */
+export type Style = {
+  // todo
+  // containers?: StyleContainers
+  keyframes?: StyleKeyframes
+  layers?: StyleLayers
+  rules?: StyleRules
+}
+
+// /** @public */
+// export interface Properties extends CSS.PropertiesFallback, Partial<CustomCSSProperties> {
+//   '@keyframes'?: Record<string, Record<string, Properties>>
+//   '@media'?: Record<string, Properties>
+//   '@nest'?: Record<string, Properties>
+// }
 
 /** @public */
 export interface Rules {
@@ -418,36 +459,36 @@ export interface Rules {
 }
 
 /** @public */
-export type CSSVar = `var(${CSSVarName})`
+export type CSSVar = `var(${VarName})`
 
 /** @public */
 export interface ColorAvatarColorVarNames {
-  bg: CSSVarName
-  fg: CSSVarName
+  bg: VarName
+  fg: VarName
 }
 
 /** @public */
 export interface ColorElementVarNames {
   bg: {
-    0: CSSVarName
-    1: CSSVarName
-    2: CSSVarName
-    3: CSSVarName
-    4: CSSVarName
+    0: VarName
+    1: VarName
+    2: VarName
+    3: VarName
+    4: VarName
   }
   border: {
-    0: CSSVarName
-    1: CSSVarName
-    2: CSSVarName
-    3: CSSVarName
-    4: CSSVarName
+    0: VarName
+    1: VarName
+    2: VarName
+    3: VarName
+    4: VarName
   }
   fg: {
-    0: CSSVarName
-    1: CSSVarName
-    2: CSSVarName
-    3: CSSVarName
-    4: CSSVarName
+    0: VarName
+    1: VarName
+    2: VarName
+    3: VarName
+    4: VarName
   }
 }
 
@@ -458,65 +499,65 @@ export interface ColorVariantVarNames
 /** @public */
 export interface ColorCardVarNames {
   accent: {
-    fg: CSSVarName
+    fg: VarName
   }
   avatar: Record<AvatarColor, ColorAvatarColorVarNames>
-  backdrop: CSSVarName
-  focusRing: CSSVarName
+  backdrop: VarName
+  focusRing: VarName
   link: {
-    fg: CSSVarName
+    fg: VarName
   }
   muted: {
-    bg: CSSVarName
-    fg: CSSVarName
+    bg: VarName
+    fg: VarName
   }
   shadow: {
-    outline: CSSVarName
-    umbra: CSSVarName
-    penumbra: CSSVarName
-    ambient: CSSVarName
+    outline: VarName
+    umbra: VarName
+    penumbra: VarName
+    ambient: VarName
   }
   skeleton: {
-    from: CSSVarName
-    to: CSSVarName
+    from: VarName
+    to: VarName
   }
   token: {
-    atrule: CSSVarName
-    attrName: CSSVarName
-    attrValue: CSSVarName
-    attribute: CSSVarName
-    boolean: CSSVarName
-    builtin: CSSVarName
-    cdata: CSSVarName
-    char: CSSVarName
-    class: CSSVarName
-    className: CSSVarName
-    comment: CSSVarName
-    constant: CSSVarName
-    deleted: CSSVarName
-    doctype: CSSVarName
-    entity: CSSVarName
-    function: CSSVarName
-    hexcode: CSSVarName
-    id: CSSVarName
-    important: CSSVarName
-    inserted: CSSVarName
-    keyword: CSSVarName
-    number: CSSVarName
-    operator: CSSVarName
-    prolog: CSSVarName
-    property: CSSVarName
-    pseudoClass: CSSVarName
-    pseudoElement: CSSVarName
-    punctuation: CSSVarName
-    regex: CSSVarName
-    selector: CSSVarName
-    string: CSSVarName
-    symbol: CSSVarName
-    tag: CSSVarName
-    unit: CSSVarName
-    url: CSSVarName
-    variable: CSSVarName
+    atrule: VarName
+    attrName: VarName
+    attrValue: VarName
+    attribute: VarName
+    boolean: VarName
+    builtin: VarName
+    cdata: VarName
+    char: VarName
+    class: VarName
+    className: VarName
+    comment: VarName
+    constant: VarName
+    deleted: VarName
+    doctype: VarName
+    entity: VarName
+    function: VarName
+    hexcode: VarName
+    id: VarName
+    important: VarName
+    inserted: VarName
+    keyword: VarName
+    number: VarName
+    operator: VarName
+    prolog: VarName
+    property: VarName
+    pseudoClass: VarName
+    pseudoElement: VarName
+    punctuation: VarName
+    regex: VarName
+    selector: VarName
+    string: VarName
+    symbol: VarName
+    tag: VarName
+    unit: VarName
+    url: VarName
+    variable: VarName
   }
   // variant: {
   solid: ColorVariantVarNames
@@ -529,32 +570,32 @@ export type ColorSchemeVarNames = Record<CardTone, ColorCardVarNames>
 
 export interface ScopedColorVarNames extends Omit<ColorCardVarNames, 'avatar'> {
   accent: {
-    fg: CSSVarName
+    fg: VarName
   }
   avatar: Record<AvatarColor, ColorAvatarColorVarNames> & ColorAvatarColorVarNames
-  bg: CSSVarName
-  border: CSSVarName
-  fg: CSSVarName
+  bg: VarName
+  border: VarName
+  fg: VarName
   input: {
-    bg: CSSVarName
-    border: CSSVarName
-    fg: CSSVarName
-    placeholder: CSSVarName
+    bg: VarName
+    border: VarName
+    fg: VarName
+    placeholder: VarName
   }
 }
 
 /** @public */
 export interface FontSizeVarNames {
-  ascenderHeight: CSSVarName
-  descenderHeight: CSSVarName
-  fontSize: CSSVarName
-  lineHeight: CSSVarName
-  letterSpacing: CSSVarName
-  iconSize: CSSVarName
+  ascenderHeight: VarName
+  descenderHeight: VarName
+  fontSize: VarName
+  lineHeight: VarName
+  letterSpacing: VarName
+  iconSize: VarName
 }
 
 export interface FontVarNames<Size extends number> {
-  family: CSSVarName
+  family: VarName
   sizes: Record<Size, FontSizeVarNames>
 }
 
@@ -563,14 +604,15 @@ export interface VarNames {
   color: Record<Scheme, ColorSchemeVarNames> &
     ScopedColorVarNames &
     Record<CardTone, ColorCardVarNames>
+  container: Record<ContainerWidth, VarName>
   avatar: {
-    distance: CSSVarName
+    distance: VarName
     focusRing: {
-      offset: CSSVarName
-      width: CSSVarName
+      offset: VarName
+      width: VarName
     }
-    size: CSSVarName
-    sizes: Record<AvatarSize, {distance: CSSVarName; size: CSSVarName}>
+    size: VarName
+    sizes: Record<AvatarSize, {distance: VarName; size: VarName}>
   }
   font: {
     code: FontVarNames<FontCodeSize>
@@ -579,17 +621,17 @@ export interface VarNames {
     text: FontVarNames<FontTextSize>
   }
   input: {
-    fontSize: CSSVarName
-    lineHeight: CSSVarName
-    letterSpacing: CSSVarName
-    ascenderHeight: CSSVarName
-    descenderHeight: CSSVarName
+    fontSize: VarName
+    lineHeight: VarName
+    letterSpacing: VarName
+    ascenderHeight: VarName
+    descenderHeight: VarName
     // capHeight: CSSVarName
-
-    gap: CSSVarName
-    padding: CSSVarName
+    gap: VarName
+    padding: VarName
   }
-  space: Record<Space, CSSVarName>
+  radius: Record<Radius, VarName>
+  space: Record<Space, VarName>
 }
 
 /** @public */
@@ -766,6 +808,7 @@ export interface Vars {
     light: ColorSchemeVars
   } & ScopedColorVars &
     Record<CardTone, ColorCardVars>
+  container: Record<ContainerWidth, CSSVar>
   font: {
     code: FontVars<FontCodeSize>
     heading: FontVars<FontHeadingSize>
@@ -790,5 +833,6 @@ export interface Vars {
       }
     }
   }
+  radius: Record<Radius, CSSVar>
   space: Record<Space, CSSVar>
 }

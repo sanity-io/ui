@@ -261,4 +261,14 @@ export const screen = _screen
  * @public
  * @deprecated Use `buildTheme` from `@sanity/ui/theme` instead.
  */
-export const studioTheme = buildTheme()
+export const studioTheme = (() => {
+  let theme: ReturnType<typeof buildTheme> | undefined
+  return {
+    get value() {
+      if (!theme) {
+        theme = buildTheme()
+      }
+      return theme
+    },
+  }
+})()

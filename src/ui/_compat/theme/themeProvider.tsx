@@ -8,6 +8,8 @@ import {
 import {ReactElement, ReactNode, useContext, useMemo} from 'react'
 import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 
+import {CardProvider} from '../../primitives/card/cardProvider'
+import {ThemeColorProvider} from './themeColorProvider'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 
@@ -53,9 +55,19 @@ export function ThemeProvider(props: ThemeProviderProps): ReactElement {
   }
 
   return (
-    <ThemeContext.Provider value={themeContext}>
-      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
-    </ThemeContext.Provider>
+    <CardProvider
+      compat_provider={
+        // Render a theme provider around the card if the scheme or tone differs from the root theme.
+        // This is needed for backwards compatibility with the legacy theme API.
+        ThemeColorProvider
+      }
+      scheme={scheme}
+      tone={tone}
+    >
+      <ThemeContext.Provider value={themeContext}>
+        <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+      </ThemeContext.Provider>
+    </CardProvider>
   )
 }
 

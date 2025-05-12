@@ -1,5 +1,5 @@
+import {_comp} from '../../_comp'
 import {_resp} from '../../_resp'
-import {composeClassNames} from '../../composeClassNames'
 import {
   border,
   display,
@@ -8,6 +8,7 @@ import {
   gap,
   grid,
   gridItem,
+  height,
   inset,
   margin,
   maxWidth,
@@ -17,18 +18,19 @@ import {
   position,
   radius,
   width,
-} from '../../styles'
+} from '../../aspects'
 import {BoxStyleProps} from './types'
 
 /** @public */
 export function box(props: BoxStyleProps): string | undefined {
-  return composeClassNames(
+  return _comp(
     'box',
-    props.muted && 'muted',
+    props.muted && 'muted', // todo: consider this naming
+
+    _resp(`box`, props.sizing),
     border(props),
     display(props),
-    _resp(`h`, props.height),
-    _resp(`box`, props.sizing),
+    height(props),
     flex(props),
     flexItem(props),
     grid(props),

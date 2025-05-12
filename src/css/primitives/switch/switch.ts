@@ -1,21 +1,21 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 
 export function _switch(): string | undefined {
-  return composeClassNames('switch')
+  return _comp('switch')
 }
 
 export function _switchElement(): string | undefined {
-  return composeClassNames('switch-element')
+  return _comp('switch-element')
 }
 
 export function _switchPresentation(): string | undefined {
-  return composeClassNames('switch-presentation')
+  return _comp('switch-presentation')
 }
 
 export function _switchThumb(): string | undefined {
-  return composeClassNames('switch-thumb')
+  return _comp('switch-thumb')
 }
 
 export function _switchTrack(): string | undefined {
-  return composeClassNames('switch-track')
+  return _comp('switch-track')
 }

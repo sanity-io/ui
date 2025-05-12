@@ -1,6 +1,6 @@
 import {FontTextSize, Space} from '@sanity/ui/theme'
 
-import {RadiusStyleProps, WidthStyleProps} from '../../styles'
+import {RadiusStyleProps, WidthStyleProps} from '../../aspects'
 import {ResponsiveProp} from '../../types'
 
 /** @public */

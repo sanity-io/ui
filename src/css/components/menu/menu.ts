@@ -1,9 +1,9 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 
 export function menu(): string | undefined {
-  return composeClassNames('menu')
+  return _comp('menu')
 }
 
 export function menuDivider(): string | undefined {
-  return composeClassNames('menu-divider')
+  return _comp('menu-divider')
 }

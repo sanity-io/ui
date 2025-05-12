@@ -133,7 +133,7 @@ export const VirtualList = forwardRef(function VirtualList(
 
     if (itemHeight === -1) {
       return [
-        <Box insetTop={0} insetLeft={0} key={0} position="absolute">
+        <Box insetTop={0} insetLeft={0} insetRight={0} key={0} position="absolute">
           {renderItem(items[0])}
         </Box>,
       ]
@@ -147,6 +147,7 @@ export const VirtualList = forwardRef(function VirtualList(
       return (
         <Box
           insetLeft={0}
+          insetRight={0}
           key={key}
           position="absolute"
           style={{top: itemIndex * (itemHeight + space[gap])}}

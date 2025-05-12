@@ -34,6 +34,7 @@ import {
   Text,
   TextInput,
 } from '../../primitives'
+// import {Selectable} from '../../primitives/_selectable'
 import {AnimatedSpinnerIcon} from '../../primitives/spinner/animatedSpinnerIcon'
 import {Props, Radius} from '../../types'
 import {AutocompleteOption} from './autocompleteOption'
@@ -171,7 +172,8 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         // data-as="button"
         padding={paddingProp}
         radius={2}
-        tone="inherit"
+        selectable
+        // tone="inherit"
       >
         <Text size={fontSize} textOverflow="ellipsis">
           {value}
@@ -617,6 +619,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
                 {cloneElement(renderOption(option), {
                   disabled: loading,
                   selected: active,
+                  selectable: true,
                   tabIndex: listFocused && active ? 0 : -1,
                 })}
               </AutocompleteOption>
@@ -670,7 +673,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         overflow="auto"
         placement={AUTOCOMPLETE_POPOVER_PLACEMENT}
         portal
-        radius={radius}
+        radius={3}
         ref={resultsPopoverElementRef}
         referenceElement={inputElementRef.current}
         {...popover}

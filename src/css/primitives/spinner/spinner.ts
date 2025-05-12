@@ -1,9 +1,9 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 
 export function spinner(): string | undefined {
-  return composeClassNames('spinner')
+  return _comp('spinner')
 }
 
 export function animatedSpinnerIcon(): string | undefined {
-  return composeClassNames('animated-spinner-icon')
+  return _comp('animated-spinner-icon')
 }

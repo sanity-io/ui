@@ -1,10 +1,11 @@
-import {card, CardStyleProps, composeClassNames} from '@sanity/ui/css'
-import {ForwardedRef, forwardRef} from 'react'
+import {_selectable, card, CardStyleProps, composeClassNames} from '@sanity/ui/css'
+import {createElement, ForwardedRef, forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 
-import {ThemeColorProvider, useRootTheme} from '../../_compat'
 import {Props} from '../../types'
 import {Box, BoxProps} from '../box'
+import {CardProvider} from './cardProvider'
+import {useCard} from './useCard'
 
 /**
  * @public
@@ -49,54 +50,70 @@ export const Card = forwardRef(function Card(
     selected,
     shadow,
     style,
-    tone: toneProp,
+    tone: toneProp = 'inherit',
     ...restProps
   } = props
 
   const as = isValidElementType(asProp) ? asProp : 'div'
 
-  const rootTheme = useRootTheme()
+  const parent = useCard()
 
-  const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
-  const scheme = schemeProp === undefined ? rootTheme.scheme : schemeProp
+  const context = {
+    tone: parent?.tone ?? 'default',
+    scheme: parent?.scheme ?? 'light',
+  }
 
-  const node = (
+  const tone = toneProp === 'inherit' ? context.tone : toneProp
+  const scheme = schemeProp === undefined ? context.scheme : schemeProp
+
+  let node = (
     <Box
-      // data-as={typeof as === 'string' ? as : undefined}
       data-ui="Card"
       {...restProps}
       as={as}
       className={composeClassNames(
         className,
         card({
-          scheme: scheme === rootTheme.scheme ? undefined : scheme,
+          scheme: scheme === context.scheme ? undefined : scheme,
           shadow,
-          tone: tone === rootTheme.tone ? undefined : tone,
+          tone: tone === context.tone ? undefined : tone,
         }),
+        selectable && _selectable({radius}),
       )}
       data-checkered={checkered ? '' : undefined}
       data-focus-ring={focusRing ? '' : undefined}
       data-pressed={pressed ? '' : undefined}
-      data-selectable={selectable ? '' : undefined}
       data-selected={selected ? '' : undefined}
       radius={radius}
       ref={ref}
-      // selected={selected}
       style={style}
     />
   )
 
-  if (scheme === rootTheme.scheme && tone === rootTheme.tone) {
+  if (scheme === context.scheme && tone === context.tone) {
     return node
   }
 
-  return (
-    // Render a theme provider around the card if the scheme or tone differs from the root theme.
-    // This is needed for backwards compatibility with the legacy theme API.
-    <ThemeColorProvider scheme={scheme} tone={tone ?? rootTheme.tone}>
+  node = (
+    <CardProvider
+      compat_provider={parent?.compat_provider}
+      rendered={true}
+      scheme={scheme}
+      tone={tone ?? context.tone}
+    >
       {node}
-    </ThemeColorProvider>
+    </CardProvider>
   )
+
+  if (parent?.compat_provider) {
+    return createElement(parent.compat_provider, {
+      children: node,
+      scheme,
+      tone: tone ?? context.tone,
+    })
+  }
+
+  return node
 })
 
 Card.displayName = 'ForwardRef(Card)'

@@ -1,3 +1,4 @@
+import {PREFIX} from '../constants'
 import {type Properties} from '../types'
 import {CompileRulesContext} from './types'
 
@@ -12,8 +13,11 @@ export function compileRule(
     css += compileNestedRules(selector, props['@nest'], context)
   }
 
+  // @ts-expect-error - TODO: fix this
   if (props['@keyframes']) {
+    // @ts-expect-error - TODO: fix this
     for (const name in props['@keyframes']) {
+      // @ts-expect-error - TODO: fix this
       context.keyframes[name] = props['@keyframes'][name]
     }
   }
@@ -63,7 +67,9 @@ function compileNestedRules(
   let css = ''
 
   for (const [_selector, _props] of Object.entries(props)) {
-    css += '\n' + compileRule(_selector.replace(/&/g, selector), _props, context)
+    css +=
+      '\n' +
+      compileRule(_selector.replace(/\./g, `.${PREFIX}`).replace(/&/g, selector), _props, context)
   }
 
   return css

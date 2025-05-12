@@ -1,6 +1,6 @@
 import {RootTheme_v2} from '../v2'
 
-const BORDER_WIDTH = 1
+const BORDER_WIDTH = 0.5
 const OUTLINE_WIDTH = 0.5
 
 export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {

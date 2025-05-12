@@ -1,6 +1,6 @@
 import {FontCodeSize, FontHeadingSize, FontLabelSize, FontTextSize} from '@sanity/ui/theme'
 
-import {RadiusStyleProps} from '../../styles/radius'
+import {RadiusStyleProps} from '../../aspects/radius'
 import {ResponsiveProp} from '../../types'
 
 /** @beta */

@@ -9,6 +9,8 @@ import {
   type FontHeadingSize,
   type FontLabelSize,
   type FontTextSize,
+  RADIUS,
+  Radius,
   SPACE,
   type Space,
   THEME_COLOR_AVATAR_COLORS,
@@ -184,6 +186,14 @@ export const vars: Vars = {
     ),
   },
   color: colorVars,
+  container: {
+    0: `var(${varNames.container[0]})`,
+    1: `var(${varNames.container[1]})`,
+    2: `var(${varNames.container[2]})`,
+    3: `var(${varNames.container[3]})`,
+    4: `var(${varNames.container[4]})`,
+    5: `var(${varNames.container[5]})`,
+  },
   font: {
     code: {
       family: `var(${varNames.font.code.family})`,
@@ -280,6 +290,9 @@ export const vars: Vars = {
       },
     },
   },
+  radius: Object.fromEntries(
+    RADIUS.map((radius) => [radius, `var(${varNames.radius[radius]})` as const]),
+  ) as Record<Radius, CSSVar>,
   space: Object.fromEntries(
     SPACE.map((space) => [space, `var(${varNames.space[space]})` as const]),
   ) as Record<Space, CSSVar>,

@@ -1,6 +1,6 @@
 import {ThemeColorButtonModeKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
 
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 import {
   display,
   DisplayStyleProps,
@@ -10,7 +10,7 @@ import {
   RadiusStyleProps,
   width,
   WidthStyleProps,
-} from '../../styles'
+} from '../../aspects'
 import {toneMap, variantMap} from './_constants'
 
 export interface ButtonStyleProps
@@ -25,7 +25,7 @@ export interface ButtonStyleProps
 export function button(props: ButtonStyleProps): string | undefined {
   const {mode, tone} = props
 
-  return composeClassNames(
+  return _comp(
     'button',
     variantMap[mode ?? 'default'],
     toneMap[tone ?? 'default'],

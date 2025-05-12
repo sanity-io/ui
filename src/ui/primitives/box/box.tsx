@@ -144,7 +144,7 @@ export const Box = forwardRef(function Box(
           wrap,
         }),
       )}
-      data-gap={gap}
+      // data-gap={gap}
       ref={ref}
     >
       {props.children}

@@ -9,6 +9,8 @@ import {
   type FontHeadingSize,
   type FontLabelSize,
   type FontTextSize,
+  RADIUS,
+  Radius,
   SPACE,
   type Space,
   THEME_COLOR_STATE_TONES,
@@ -19,8 +21,8 @@ import {
 import {
   type ColorCardVarNames,
   type ColorVariantVarNames,
-  type CSSVarName,
   type FontSizeVarNames,
+  type VarName,
   type VarNames,
 } from './types'
 
@@ -39,10 +41,10 @@ export const varNames: VarNames = {
           [size]: {
             distance: `--avatar-${size}-distance`,
             size: `--avatar-${size}-size`,
-          } satisfies {distance: CSSVarName; size: CSSVarName},
+          } satisfies {distance: VarName; size: VarName},
         }
       },
-      {} as Record<AvatarSize, {distance: CSSVarName; size: CSSVarName}>,
+      {} as Record<AvatarSize, {distance: VarName; size: VarName}>,
     ),
   },
   color: {
@@ -193,6 +195,14 @@ export const varNames: VarNames = {
       critical: buildColorCardVarNames({scheme: 'light', tone: 'critical'}),
     },
   },
+  container: {
+    0: `--container-0`,
+    1: `--container-1`,
+    2: `--container-2`,
+    3: `--container-3`,
+    4: `--container-4`,
+    5: `--container-5`,
+  },
   font: {
     code: {
       family: `--font-code-family`,
@@ -282,9 +292,12 @@ export const varNames: VarNames = {
     gap: `--input-gap`,
     padding: `--input-padding`,
   },
+  radius: Object.fromEntries(
+    RADIUS.map((radius) => [radius, `--radius-${radius}` as VarName]),
+  ) as Record<Radius, VarName>,
   space: Object.fromEntries(
-    SPACE.map((space) => [space, `--space-${String(space).replace('.', '_')}` as CSSVarName]),
-  ) as Record<Space, CSSVarName>,
+    SPACE.map((space) => [space, `--space-${String(space).replace('.', '_')}` as VarName]),
+  ) as Record<Space, VarName>,
 } as const
 
 function buildColorCardVarNames(props: {scheme?: Scheme; tone: CardTone}): ColorCardVarNames {

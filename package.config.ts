@@ -1,4 +1,7 @@
+import replace from '@rollup/plugin-replace'
 import {defineConfig} from '@sanity/pkg-utils'
+
+import {prefix} from './prefix'
 
 export default defineConfig({
   bundles: [
@@ -22,4 +25,11 @@ export default defineConfig({
   tsconfig: 'tsconfig.dist.json',
   babel: {reactCompiler: true},
   reactCompilerOptions: {target: '18'},
+  rollup: {
+    plugins: [
+      replace({
+        [`const PREFIX = 's-'`]: `const PREFIX = '${prefix}-'`,
+      }),
+    ],
+  },
 })

@@ -1,4 +1,4 @@
-import {FlexItemStyleProps, FontStyleProps} from '../../styles'
+import {FlexItemStyleProps, FontStyleProps} from '../../aspects'
 import {ResponsiveProp} from '../../types'
 
 export type TextSize = number

@@ -18,24 +18,6 @@ Refractor.registerLanguage(typescript)
 const theme = buildTheme()
 
 export default defineConfig({
-  collections: [
-    {
-      name: 'components',
-      title: 'Components',
-    },
-    {
-      name: 'hooks',
-      title: 'Hooks',
-    },
-    {
-      name: 'primitives',
-      title: 'Primitives',
-    },
-    {
-      name: 'utils',
-      title: 'Utils',
-    },
-  ],
   plugins: [fontsPlugin(), cssPlugin({theme}), perfPlugin()],
   title: '@sanity/ui',
   theme,

@@ -5,6 +5,7 @@
     "./exports",
     "./package.json",
     "./package.config.ts",
+    "./prefix.ts",
     "./scripts",
     "./src",
     "./stories",

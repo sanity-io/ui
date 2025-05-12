@@ -1,7 +1,7 @@
-import {composeClassNames} from '../../composeClassNames'
-import {radius} from '../../styles'
+import {_comp} from '../../_comp'
+import {radius} from '../../aspects'
 import {KBDStyleProps} from './types'
 
 export function kbd(props: KBDStyleProps): string | undefined {
-  return composeClassNames('kbd', radius(props))
+  return _comp('kbd', radius(props))
 }

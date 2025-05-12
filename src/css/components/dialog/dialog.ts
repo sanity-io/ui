@@ -1,29 +1,30 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
+import {inset} from '../../aspects'
 
 export function dialog(): string | undefined {
-  return composeClassNames('dialog')
+  return _comp('dialog', inset({inset: 0}))
 }
 
 export function dialogContainer(): string | undefined {
-  return composeClassNames('dialog-container')
+  return _comp('dialog-container')
 }
 
 export function dialogCardRoot(): string | undefined {
-  return composeClassNames('dialog-card-root')
+  return _comp('dialog-card-root')
 }
 
 export function dialogLayout(): string | undefined {
-  return composeClassNames('dialog-layout')
+  return _comp('dialog-layout')
 }
 
 export function dialogHeader(): string | undefined {
-  return composeClassNames('dialog-header')
+  return _comp('dialog-header')
 }
 
 export function dialogContent(): string | undefined {
-  return composeClassNames('dialog-content')
+  return _comp('dialog-content')
 }
 
 export function dialogFooter(): string | undefined {
-  return composeClassNames('dialog-footer')
+  return _comp('dialog-footer')
 }

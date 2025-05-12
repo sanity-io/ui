@@ -50,6 +50,7 @@ export const PopoverCard = memo(
       arrowX,
       arrowY,
       children,
+      maxWidth,
       padding,
       placement,
       originX,
@@ -68,7 +69,7 @@ export const PopoverCard = memo(
       ...restProps
     } = props
 
-    const {zIndex} = useLayer()
+    const layer = useLayer()
 
     // Get margins: [top, right, bottom, left]
     const margins: PopoverMargins = useMemo(
@@ -88,11 +89,11 @@ export const PopoverCard = memo(
         position: strategy,
         top: y,
         width: referenceWidth,
-        zIndex,
+        zIndex: layer.zIndex ?? 100,
         willChange: animate ? 'transform' : undefined,
         ...style,
       }),
-      [animate, originX, originY, referenceWidth, strategy, style, x, y, zIndex],
+      [animate, layer.zIndex, originX, originY, referenceWidth, strategy, style, x, y],
     )
 
     const arrowStyle: CSSProperties = useMemo(
@@ -126,7 +127,13 @@ export const PopoverCard = memo(
         animate={animate ? ['visible', 'scaleIn'] : undefined}
         exit={animate ? ['hidden', 'scaleOut'] : undefined}
       >
-        <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
+        <Flex
+          data-ui="Popover__wrapper"
+          direction="column"
+          flex={1}
+          maxWidth={maxWidth}
+          overflow={overflow}
+        >
           <Flex direction="column" flex={1} padding={padding}>
             {children}
           </Flex>

@@ -6,6 +6,7 @@ export const spinnerRules: Rules = {
   'animated-spinner-icon': {
     'animation': 'spinner-rotate 500ms linear infinite',
 
+    // @ts-expect-error - TODO: fix this
     '@keyframes': {
       'spinner-rotate': {
         from: {

@@ -1,3 +1,4 @@
+import {scopeClassName} from '../scopeClassName'
 import {type Rules} from '../types'
 import {compileMediaQueryRule, compileRule} from './compileRule'
 import {CompileRulesContext} from './types'
@@ -12,12 +13,14 @@ export function compileRules(rules: Rules): string {
   }
 
   for (const [className, props] of Object.entries(rules)) {
-    const ruleCss = compileRule(`.${className}`.replace(/:/g, '\\:'), props, context)
+    const ruleCss = compileRule(
+      `.${scopeClassName(className)}`.replace(/:/g, '\\:'),
+      props,
+      context,
+    )
 
     css += ruleCss ? `${ruleCss}\n` : ''
   }
-
-  // console.log('context', context)
 
   for (const [name, value] of Object.entries(context.keyframes)) {
     let keyframesCss = `@keyframes ${name} {\n`

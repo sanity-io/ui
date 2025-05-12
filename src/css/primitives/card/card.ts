@@ -1,16 +1,14 @@
-import {composeClassNames} from '../../composeClassNames'
-import {shadow} from '../../styles'
-import {box} from '../box'
+import {_comp} from '../../_comp'
+import {shadow} from '../../aspects'
 import {toneMap} from './_constants'
 import {CardStyleProps} from './types'
 
 export function card(props: CardStyleProps): string | undefined {
-  return composeClassNames(
+  return _comp(
     props.scheme,
     toneMap[props.tone ?? 'inherit'],
     'card',
     props.checkered && 'card-checkered',
-    box(props),
     shadow(props),
   )
 }

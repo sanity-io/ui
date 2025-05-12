@@ -1,5 +1,5 @@
-import {composeClassNames} from '../../composeClassNames'
+import {_comp} from '../../_comp'
 
 export function radio(): string | undefined {
-  return composeClassNames('radio')
+  return _comp('radio')
 }

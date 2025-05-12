@@ -9,11 +9,12 @@ for (const mode of THEME_COLOR_BUTTON_MODES) {
   for (const tone of THEME_COLOR_STATE_TONES) {
     if (mode === 'default') {
       buttonVariantRules[`&.${variantMap[mode]}.${toneMap[tone]}`] = {
-        'boxShadow': 'none',
+        // 'boxShadow': 'none',
         '--color-bg': `var(--color-solid-${tone}-bg-0)`,
         '--color-border': `var(--color-solid-${tone}-border-1)`,
         '--color-fg': `var(--color-solid-${tone}-fg-0)`,
         '--color-muted-fg': `var(--color-solid-${tone}-fg-4)`,
+        '--button-box-shadow': 'none',
 
         '@nest': {
           '&:not([data-disabled]):hover': {
@@ -54,6 +55,7 @@ for (const mode of THEME_COLOR_BUTTON_MODES) {
         '--color-border': `var(--color-tinted-${tone}-border-1)`,
         '--color-fg': `var(--color-tinted-${tone}-fg-2)`,
         '--color-muted-fg': `var(--color-tinted-${tone}-fg-4)`,
+        '--button-box-shadow': 'none',
 
         '@nest': {
           '&:not([data-disabled]):hover': {
@@ -89,27 +91,34 @@ for (const mode of THEME_COLOR_BUTTON_MODES) {
 
     if (mode === 'ghost') {
       buttonVariantRules[`&.${variantMap[mode]}.${toneMap[tone]}`] = {
-        '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
-        '--color-border': `var(--color-tinted-${tone}-border-0)`,
+        '--color-bg': `var(--color-tinted-${tone}-bg-0)`,
+        '--color-border': `var(--color-tinted-${tone}-border-1)`,
         '--color-fg': `var(--color-tinted-${tone}-fg-2)`,
+        '--button-box-shadow': [
+          `inset 0 0 0 var(--button-border-width) var(--color-border)`,
+          `inset 0 -1.5px 0 0.5px var(--color-shadow-umbra)`,
+        ].join(','),
 
         '@nest': {
           '&:not([data-disabled]):hover': {
-            '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
-            '--color-border': `var(--color-tinted-${tone}-border-1)`,
+            '--color-bg': `var(--color-tinted-${tone}-bg-1)`,
+            '--color-border': `var(--color-tinted-${tone}-border-2)`,
             '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+            // '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
           },
 
           '&:not([data-disabled]):active': {
-            '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
-            '--color-border': `var(--color-tinted-${tone}-border-2)`,
+            '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+            '--color-border': `var(--color-tinted-${tone}-border-3)`,
             '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+            '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
           },
 
           '&:not([data-disabled])[data-selected]': {
-            '--color-bg': `var(--color-tinted-${tone}-bg-3)`,
-            '--color-border': `var(--color-tinted-${tone}-border-2)`,
+            '--color-bg': `var(--color-tinted-${tone}-bg-2)`,
+            '--color-border': `var(--color-tinted-${tone}-border-3)`,
             '--color-fg': `var(--color-tinted-${tone}-fg-1)`,
+            '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
           },
 
           '&[data-disabled]': {
@@ -141,7 +150,7 @@ export const buttonRules: Rules = {
     'verticalAlign': 'top',
     'backgroundColor': 'var(--color-bg)',
     'color': 'var(--color-fg)',
-    'boxShadow': 'inset 0 0 0 var(--button-border-width) var(--color-border)',
+    'boxShadow': 'var(--button-box-shadow)',
 
     '@nest': {
       '&::-moz-focus-inner': {

@@ -1,6 +1,7 @@
 import {useMemo, useSyncExternalStore} from 'react'
 
-import {useTheme_v2} from '../../_compat'
+// TODO: get from theme?
+const media = [360, 600, 900, 1200, 1800, 2400]
 
 /**
  * @internal
@@ -27,7 +28,7 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
   return `screen and (min-width: ${media[index - 1]}px) and (max-width: ${media[index] - 1}px)`
 }
 
-function _createMediaStore(media: number[]): _MediaStore {
+function _createMediaStore(): _MediaStore {
   const mediaLen = media.length
   let sizes: {mq: MediaQueryList; index: number}[]
 
@@ -95,8 +96,9 @@ function getServerSnapshot() {
  * @beta
  */
 export function useMediaIndex(): number {
-  const {media} = useTheme_v2()
-  const store = useMemo(() => _createMediaStore(media), [media])
+  // const {media} = useTheme_v2()
+  // const media = MEDIA
+  const store = useMemo(() => _createMediaStore(), [])
 
   return useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)
 }

@@ -6,6 +6,7 @@ import {
   GapStyleProps,
   GridItemStyleProps,
   GridStyleProps,
+  HeightStyleProps,
   InsetStyleProps,
   MarginStyleProps,
   MaxWidthStyleProps,
@@ -15,18 +16,13 @@ import {
   PositionStyleProps,
   RadiusStyleProps,
   WidthStyleProps,
-} from '../../styles'
+} from '../../aspects'
 import {ResponsiveProp} from '../../types'
 
 /**
  * @public
  */
 export type BoxSizing = 'content' | 'border'
-
-/**
- * @public
- */
-export type BoxHeight = 'stretch' | 'fill'
 
 /** @public */
 export interface BoxStyleProps
@@ -37,6 +33,7 @@ export interface BoxStyleProps
     GapStyleProps,
     GridStyleProps,
     GridItemStyleProps,
+    HeightStyleProps,
     InsetStyleProps,
     MarginStyleProps,
     MaxWidthStyleProps,
@@ -46,7 +43,6 @@ export interface BoxStyleProps
     PositionStyleProps,
     RadiusStyleProps,
     WidthStyleProps {
-  height?: ResponsiveProp<BoxHeight>
   muted?: boolean
   outline?: 'none'
   sizing?: ResponsiveProp<BoxSizing>

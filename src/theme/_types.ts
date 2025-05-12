@@ -14,10 +14,10 @@ import {
 export type AvatarSize = (typeof AVATAR_SIZE)[number]
 
 /** @public */
-export type ContainerWidth = (typeof CONTAINER)[number] | 'auto' | 'fill'
+export type ContainerWidth = (typeof CONTAINER)[number]
 
 /** @public */
-export type Radius = (typeof RADIUS)[number] | 'full'
+export type Radius = (typeof RADIUS)[number] // | 'full'
 
 /** @public */
 export type Space = (typeof SPACE)[number]

@@ -1,4 +1,5 @@
 import {_raf2, StyleTags, useRootTheme} from '@sanity/ui'
+import {card, scopeClassName as _} from '@sanity/ui/css'
 import {RootTheme} from '@sanity/ui/theme'
 import {WorkshopPlugin} from '@sanity/ui-workshop'
 import {useEffect} from 'react'
@@ -8,10 +9,10 @@ export function cssPlugin(options?: {theme: RootTheme}): WorkshopPlugin {
     name: 'css',
     title: 'CSS',
     provider: function CSSProvider({children}) {
-      const {scheme} = useRootTheme()
+      const {scheme, tone} = useRootTheme()
 
       useEffect(() => {
-        const els = document.querySelectorAll('.button, .card, .font')
+        const els = document.querySelectorAll(`.${_('button')} .${_('card')} .${_('font')}`)
 
         // temporarily disable all transitions when the theme changes
         for (const el of els) {
@@ -21,7 +22,7 @@ export function cssPlugin(options?: {theme: RootTheme}): WorkshopPlugin {
         }
 
         _raf2(() => {
-          document.documentElement.classList.add('card', scheme, 'surface')
+          document.documentElement.className = card({scheme, tone}) ?? ''
 
           _raf2(() => {
             for (const el of els) {
@@ -33,9 +34,9 @@ export function cssPlugin(options?: {theme: RootTheme}): WorkshopPlugin {
         })
 
         return () => {
-          document.documentElement.classList.remove('card', scheme, 'surface')
+          document.documentElement.className = ''
         }
-      }, [scheme])
+      }, [scheme, tone])
 
       return (
         <>

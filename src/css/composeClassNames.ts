@@ -1,11 +1,15 @@
+export function getClassNames(...classNames: Array<string | false | undefined>): string[] {
+  return classNames
+    .map((n) => typeof n === 'string' && n.trim())
+    .filter(Boolean)
+    .join(' ')
+    .split(' ')
+}
+
 export function composeClassNames(
   ...classNames: Array<string | false | undefined>
 ): string | undefined {
-  const names =
-    unique(classNames.map((n) => typeof n === 'string' && n.trim()).filter(Boolean)).join(' ') ||
-    undefined
-
-  return names
+  return unique(getClassNames(...classNames)).join(' ') || undefined
 }
 
 function unique<T>(array: T[]): T[] {

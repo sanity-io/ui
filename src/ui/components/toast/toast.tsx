@@ -109,6 +109,7 @@ export function Toast(
       animate={animate}
       exit={exit}
       transition={transition}
+      // @ts-expect-error - TODO: fix this
       width="fill"
       position="relative"
     >
