@@ -604,7 +604,7 @@ export interface VarNames {
   color: Record<Scheme, ColorSchemeVarNames> &
     ScopedColorVarNames &
     Record<CardTone, ColorCardVarNames>
-  container: Record<ContainerWidth, VarName>
+  container: Record<Exclude<ContainerWidth, 'auto'>, VarName>
   avatar: {
     distance: VarName
     focusRing: {
@@ -808,7 +808,7 @@ export interface Vars {
     light: ColorSchemeVars
   } & ScopedColorVars &
     Record<CardTone, ColorCardVars>
-  container: Record<ContainerWidth, CSSVar>
+  container: Record<Exclude<ContainerWidth, 'auto'>, CSSVar>
   font: {
     code: FontVars<FontCodeSize>
     heading: FontVars<FontHeadingSize>

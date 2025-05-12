@@ -120,7 +120,6 @@ export const Button = forwardRef(function Button(
           display="flex"
           flex={1}
           justify={justify}
-          // @ts-expect-error - TODO: fix this
           width="fill"
         >
           <Spinner size={fontSize} />
@@ -144,7 +143,6 @@ export const Button = forwardRef(function Button(
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
-          // @ts-expect-error - TODO: fix this
           width="fill"
           wrap={wrap}
         >
@@ -195,7 +193,6 @@ export const Button = forwardRef(function Button(
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
-          // @ts-expect-error - TODO: fix this
           width="fill"
           wrap={wrap}
         >

@@ -7,6 +7,7 @@ it('should compile deeply nested rules', () => {
     card: {
       '@nest': {
         '&:is(a)': {
+          // @ts-expect-error - TODO: fix this
           '@media': {
             '(hover: hover)': {
               background: 'red',

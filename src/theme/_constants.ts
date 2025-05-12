@@ -2,7 +2,7 @@
 export const AVATAR_SIZE = [0, 1, 2, 3] as const
 
 /** @public */
-export const CONTAINER = [0, 1, 2, 3, 4, 5] as const
+export const CONTAINER = [0, 1, 2, 3, 4, 5, 'auto'] as const
 
 /** @public */
 export const RADIUS = [0, 1, 2, 3, 4, 5, 6, 'full'] as const
