@@ -26,7 +26,7 @@ export const Code = forwardRef(function Code(
     children,
     className,
     language: languageProp,
-    size = 1,
+    size = 2,
     weight,
     ...restProps
   } = props

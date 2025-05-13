@@ -26,7 +26,7 @@ import {
   useRef,
 } from 'react'
 
-import {useTheme_v2} from '../../_compat'
+import {Z_OFFSETS} from '../../constants'
 import {
   containsOrEqualsElement,
   focusFirstDescendant,
@@ -282,7 +282,6 @@ export const Dialog = forwardRef(function Dialog(
   ref: ForwardedRef<HTMLDivElement>,
 ) {
   const context = useDialog()
-  const {layer} = useTheme_v2()
   const {
     __unstable_autoFocus: autoFocus = true,
     __unstable_hideCloseButton: hideCloseButton = false,
@@ -309,8 +308,8 @@ export const Dialog = forwardRef(function Dialog(
     tone,
     ...restProps
   } = props
-  const positionProp = _positionProp ?? (context.position || 'fixed')
-  const zOffsetProp = _zOffsetProp ?? (context.zOffset || layer.dialog.zOffset)
+  const positionProp = _positionProp ?? context.position ?? 'fixed'
+  const zOffsetProp = _zOffsetProp ?? context.zOffset ?? Z_OFFSETS.dialog
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()

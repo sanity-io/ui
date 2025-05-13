@@ -96,8 +96,6 @@ function getServerSnapshot() {
  * @beta
  */
 export function useMediaIndex(): number {
-  // const {media} = useTheme_v2()
-  // const media = MEDIA
   const store = useMemo(() => _createMediaStore(), [])
 
   return useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)

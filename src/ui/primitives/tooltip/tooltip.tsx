@@ -28,7 +28,7 @@ import {
 } from 'react'
 import {useEffectEvent} from 'use-effect-event'
 
-import {useTheme_v2} from '../../_compat'
+import {Z_OFFSETS} from '../../constants'
 import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
@@ -91,7 +91,6 @@ export const Tooltip = forwardRef(function Tooltip(
   forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
-  const {layer} = useTheme_v2()
   const {
     animate: _animate = false,
     arrow: arrowProp = false,
@@ -109,7 +108,7 @@ export const Tooltip = forwardRef(function Tooltip(
     radius = 3,
     scheme,
     shadow = 2,
-    zOffset = layer.tooltip.zOffset,
+    zOffset = Z_OFFSETS.tooltip,
     tone,
     ...restProps
   } = props

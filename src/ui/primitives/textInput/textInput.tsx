@@ -106,7 +106,7 @@ export const TextInput = forwardRef(function TextInput(
     className,
     clearButton,
     disabled = false,
-    fontSize = 1,
+    fontSize = 2,
     gap,
     icon: IconComponent,
     iconRight: IconRightComponent,
