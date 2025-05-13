@@ -14,8 +14,6 @@ export async function createDevServer(options: {
 }): Promise<express.Application> {
   const {cwd, outDir, runtime, runtimeDir} = options
 
-  const app = express()
-
   const baseViteConfig: InlineConfig = {
     ...createViteConfig({cwd, outDir, runtimeDir}),
     appType: 'custom', // don't include HTML middlewares
@@ -33,9 +31,11 @@ export async function createDevServer(options: {
 
   const vite = await createViteServer(viteConfig)
 
+  const app = express()
+
   app.use(vite.middlewares)
 
-  app.get(/(.*)/, async (req, res, next) => {
+  app.use('*all', async (req, res) => {
     const url = req.originalUrl
 
     let htmlPath = 'index.html'
@@ -45,20 +45,20 @@ export async function createDevServer(options: {
     }
 
     try {
-      let template = await readFile(path.resolve(runtimeDir, htmlPath), 'utf-8')
+      const template = await readFile(path.resolve(runtimeDir, htmlPath), 'utf-8')
+      const html = await vite.transformIndexHtml(url, template)
 
-      template = await vite.transformIndexHtml(url, template)
-
-      const html = template
-
-      res.status(200).set({'Content-Type': 'text/html'}).end(html)
+      res.status(200).set({'Content-Type': 'text/html'}).send(html)
     } catch (e) {
       if (e instanceof Error) {
         // Let Vite fix the stack trace
         vite.ssrFixStacktrace(e)
+        // eslint-disable-next-line no-console
+        console.log(e.stack)
+        res.status(500).end(e.stack)
+      } else {
+        res.status(500).end(String(e))
       }
-
-      next(e)
     }
   })
 
