@@ -57,10 +57,10 @@ export const defaultThemeFonts: ThemeFonts = {
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
     featureSettings: `'liga' 1, 'calt' 1, 'ss01' 1, 'ss03' 1, 'zero' 1`,
     weights: {
-      regular: 400,
-      medium: 500,
-      semibold: 600,
-      bold: 700,
+      regular: 600,
+      medium: 700,
+      semibold: 800,
+      bold: 900,
     },
     sizes: [
       {

@@ -1,7 +1,7 @@
 import {ThemeColorStateToneKey} from '@sanity/ui/theme'
 
 export const toneMap: Record<ThemeColorStateToneKey, string | undefined> = {
-  default: 'surface',
+  default: 'default',
   neutral: 'neutral',
   suggest: 'suggest',
   primary: 'accent',

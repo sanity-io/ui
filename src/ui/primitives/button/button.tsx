@@ -14,7 +14,6 @@ import {FontTextSize, Space} from '@sanity/ui/theme'
 import {ElementType, ForwardedRef, forwardRef, isValidElement, ReactNode} from 'react'
 import {isValidElementType} from 'react-is'
 
-// import {useTheme_v2} from '../../_compat'
 import {ButtonMode, ButtonTextAlign, ButtonTone, Props} from '../../types'
 import {Box} from '../box'
 import {Spinner} from '../spinner'
@@ -84,7 +83,7 @@ export const Button = forwardRef(function Button(
     paddingBottom,
     paddingLeft,
     paddingRight,
-    radius = 3,
+    radius = 2,
     selected,
     space = props.gap ?? props.space ?? props.padding ?? 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     text,
@@ -114,7 +113,6 @@ export const Button = forwardRef(function Button(
     >
       {Boolean(loading) && (
         <Box
-          align={align}
           as="span"
           className={buttonLoadingBox()}
           display="flex"
@@ -129,6 +127,7 @@ export const Button = forwardRef(function Button(
       {(IconComponent || text || IconRightComponent) && (
         <Box
           as="span"
+          align={align}
           direction={direction}
           display="flex"
           flex={1}
@@ -161,7 +160,6 @@ export const Button = forwardRef(function Button(
               muted={muted}
               size={fontSize}
               textOverflow={textOverflow}
-              // weight={textWeight ?? buttonTheme.textWeight}
               weight={textWeight}
             >
               {text}
@@ -179,6 +177,7 @@ export const Button = forwardRef(function Button(
 
       {children && (
         <Box
+          align={align}
           as="span"
           direction={direction}
           display="flex"
@@ -186,6 +185,7 @@ export const Button = forwardRef(function Button(
           gap={gap}
           gapX={gapX}
           gapY={gapY}
+          justify={justify}
           padding={padding}
           paddingX={paddingX}
           paddingY={paddingY}

@@ -50,7 +50,7 @@ export const Card = forwardRef(function Card(
     selected,
     shadow,
     style,
-    tone: toneProp = 'inherit',
+    tone: toneProp = 'default',
     ...restProps
   } = props
 
@@ -76,14 +76,17 @@ export const Card = forwardRef(function Card(
         card({
           scheme: scheme === context.scheme ? undefined : scheme,
           shadow,
-          tone: tone === context.tone ? undefined : tone,
+          tone,
         }),
         selectable && _selectable({radius}),
       )}
+      data-context-tone={context.tone}
+      data-context-scheme={context.scheme}
       data-checkered={checkered ? '' : undefined}
       data-focus-ring={focusRing ? '' : undefined}
       data-pressed={pressed ? '' : undefined}
       data-selected={selected ? '' : undefined}
+      data-tone={tone}
       radius={radius}
       ref={ref}
       style={style}

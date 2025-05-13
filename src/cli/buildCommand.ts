@@ -1,10 +1,10 @@
 import {compilePalette, compileSystem, compileTheme} from '@sanity/ui/css'
-import {buildTheme_v3, defaultPalette, RootTheme} from '@sanity/ui/theme'
+import {buildTheme_v3, RootTheme} from '@sanity/ui/theme'
 import fs from 'fs/promises'
 import path from 'path'
 
 async function buildPalette(outDir: string) {
-  const css = compilePalette(defaultPalette)
+  const css = compilePalette()
 
   await fs.mkdir(outDir, {recursive: true})
 

@@ -1,21 +1,4 @@
-import {PaletteConfig} from '../palette'
 import {PartialTokens, Tokens} from './tokens'
-
-export const defaultPalette: PaletteConfig = {
-  chroma: {min: 0.005, max: 0.2325},
-  luminosity: {min: 0.1875, max: 1},
-  hues: {
-    gray: {h: 277, c: 0.04},
-    blue: {h: 273, c: 0.185},
-    purple: {h: 295, c: 0.4},
-    magenta: {h: 12, c: 0.4},
-    red: {h: 30, c: 0.4},
-    orange: {h: 68, c: 0.4},
-    yellow: {h: 90, c: 0.4},
-    green: {h: 171, c: 0.4},
-    cyan: {h: 194, c: 0.4},
-  },
-}
 
 export const defaultTokens: PartialTokens<Tokens> = {
   color: {
@@ -73,12 +56,12 @@ export const defaultTokens: PartialTokens<Tokens> = {
         tinted: {
           '*': {
             bg: {
-              0: ['900', '50'],
-              4: ['800', '150'],
+              0: ['950', '50'],
+              4: ['800', '100'],
             },
             border: {
-              0: ['800', '150'],
-              4: ['600', '350'],
+              0: ['800', '100'],
+              4: ['600', '300'],
             },
             fg: {
               0: ['100', '900'],
@@ -150,15 +133,15 @@ export const defaultTokens: PartialTokens<Tokens> = {
           '*': {
             bg: {
               0: ['black', 'gray/50'],
-              4: ['900', '150'],
+              4: ['800', '300 50%'],
             },
             border: {
-              0: ['900', '150'],
-              4: ['700', '350'],
+              0: ['900', '100'],
+              4: ['700', '300'],
             },
             fg: {
-              0: ['150', 'black'],
-              4: ['550', '600'],
+              0: ['100', 'black'],
+              4: ['500', '600'],
             },
           },
         },
@@ -170,11 +153,11 @@ export const defaultTokens: PartialTokens<Tokens> = {
           '*': {
             bg: {
               0: ['gray/950', 'white'],
-              4: ['850', '100'],
+              4: ['800', '200'],
             },
             border: {
-              0: ['850', '100'],
-              4: ['650', '300'],
+              0: ['800', '100'],
+              4: ['600', '300'],
             },
             fg: {
               0: ['white', 'black'],
@@ -201,5 +184,3 @@ export const defaultTokens: PartialTokens<Tokens> = {
     },
   },
 }
-
-// export const defaultTheme = buildTheme_v3()

@@ -1,8 +1,8 @@
 import {ThemeColorCardToneKey} from '@sanity/ui/theme'
 
 export const toneMap: Record<ThemeColorCardToneKey | 'inherit', string | undefined> = {
-  transparent: 'canvas',
-  default: 'surface',
+  transparent: 'transparent',
+  default: 'default',
   neutral: 'neutral',
   suggest: 'suggest',
   primary: 'accent',

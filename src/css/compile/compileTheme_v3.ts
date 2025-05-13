@@ -22,8 +22,6 @@ export function compileTheme_v3(theme: Theme_v3): string {
 }
 
 function compileThemeProperties(theme: Theme_v3): Properties {
-  // const palette = defaultPalette
-
   return {
     ...buildAvatarThemeProperties(theme),
     ...buildButtonThemeProperties(theme),
@@ -36,25 +34,9 @@ function compileThemeProperties(theme: Theme_v3): Properties {
     ...buildRadiusThemeProperties(theme),
     ...buildShadowThemeProperties(theme),
     ...buildSpaceThemeProperties(theme),
-    // ...buildColorPaletteProperties(palette),
     ...buildColorThemeProperties(theme),
   }
 }
-
-// function buildColorPaletteProperties(palette: Color): Properties {
-//   const props: Properties = {
-//     '--black': palette.black.hex,
-//     '--white': palette.white.hex,
-//   }
-
-//   for (const hue of COLOR_HUES) {
-//     for (const tint of COLOR_TINTS) {
-//       props[`--${hue}-${tint}`] = palette[hue][tint].hex
-//     }
-//   }
-
-//   return props
-// }
 
 function buildAvatarThemeProperties(theme: Theme_v3): Properties {
   return {

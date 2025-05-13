@@ -100,38 +100,35 @@ for (const tone of THEME_COLOR_STATE_TONES) {
 
   // mode: ghost
   primitive[`.button.${variantMap.ghost}.${toneMap[tone]}`] = {
-    [varNames.color.bg]: tinted.bg[0],
+    [varNames.color.bg]: tinted.bg[1],
     [varNames.color.border]: tinted.border[1],
     [varNames.color.fg]: tinted.fg[2],
-    '--button-box-shadow': [
-      `inset 0 0 0 var(--button-border-width) var(--color-border)`,
-      `inset 0 -1.5px 0 0.5px var(--color-shadow-umbra)`,
-    ].join(','),
+    '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
 
     '@nest': {
       '&:not([data-disabled]):hover': {
-        [varNames.color.bg]: tinted.bg[1],
+        [varNames.color.bg]: tinted.bg[2],
         [varNames.color.border]: tinted.border[2],
         [varNames.color.fg]: tinted.fg[1],
         // '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
       },
 
       '&:not([data-disabled]):active': {
-        [varNames.color.bg]: tinted.bg[2],
+        [varNames.color.bg]: tinted.bg[3],
         [varNames.color.border]: tinted.border[3],
         [varNames.color.fg]: tinted.fg[1],
         '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
       },
 
       '&:not([data-disabled])[data-selected]': {
-        [varNames.color.bg]: tinted.bg[2],
+        [varNames.color.bg]: tinted.bg[3],
         [varNames.color.border]: tinted.border[3],
         [varNames.color.fg]: tinted.fg[1],
         '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
       },
 
       '&[data-disabled]': {
-        [varNames.color.bg]: vars.color.default.tinted.bg[0],
+        [varNames.color.bg]: vars.color.default.tinted.bg[1],
         [varNames.color.border]: vars.color.default.tinted.border[0],
         [varNames.color.fg]: vars.color.default.tinted.fg[2],
       },

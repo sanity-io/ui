@@ -1,5 +1,4 @@
 import {ThemeConfig} from '../config'
-import {PaletteConfig} from '../palette'
 import {ThemeFocusRing, ThemeFonts, ThemeFontWeightKey, ThemeLayer, ThemeShadow} from '../v0'
 import {ThemeAvatar_v2, ThemeInput_v2} from '../v2'
 import {ThemeColor_v3} from './color'
@@ -11,7 +10,6 @@ export type ThemeEntry = [`--${string}`, string]
 /** @public */
 export interface ThemeOptions {
   v2?: ThemeConfig
-  palette?: PaletteConfig
   tokens?: PartialTokens<Tokens>
 }
 
@@ -22,7 +20,6 @@ export interface ThemeOptions {
  */
 export interface Theme_v3 {
   _version: 3
-  _palette: PaletteConfig
   _tokens: Tokens
   avatar: ThemeAvatar_v2
   button: {

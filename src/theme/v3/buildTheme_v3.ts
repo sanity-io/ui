@@ -1,7 +1,7 @@
 import {defaultThemeConfig} from '../defaults/config'
 import {defaultThemeFonts} from '../defaults/fonts'
 import {buildColor_v3} from './color/buildColor_v3'
-import {defaultPalette, defaultTokens} from './defaults'
+import {defaultTokens} from './defaults'
 import {resolveTokens} from './resolveTokens'
 import {Theme_v3, ThemeOptions} from './types'
 
@@ -12,7 +12,6 @@ export function buildTheme_v3(options?: ThemeOptions): Theme_v3 {
 
   return {
     _version: 3,
-    _palette: options?.palette ?? defaultPalette,
     _tokens: tokens,
     avatar: v2?.avatar ?? defaultThemeConfig.avatar,
     button: v2?.button ?? defaultThemeConfig.button,

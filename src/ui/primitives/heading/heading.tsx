@@ -31,7 +31,7 @@ export const Heading = forwardRef(function Heading(
     className,
     flex,
     muted = false,
-    size = 1,
+    size = 2,
     textOverflow: textOverflowProp,
     weight,
     ...restProps

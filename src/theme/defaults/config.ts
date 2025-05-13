@@ -1,6 +1,6 @@
 import {RootTheme_v2} from '../v2'
 
-const BORDER_WIDTH = 0.5
+const BORDER_WIDTH = 1
 const OUTLINE_WIDTH = 0.5
 
 export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {
@@ -31,7 +31,7 @@ export const defaultThemeConfig: Omit<RootTheme_v2, 'color' | 'font'> = {
     popover: {zOffset: 400},
     tooltip: {zOffset: 200},
   },
-  radius: [0, 1, 5, 9, 13, 17, 25, 45, 77, 129],
+  radius: [0, 1, 3, 7, 11, 15, 23, 43, 75, 127],
   shadow: [
     null,
     {umbra: [0, 0, 0, 0], penumbra: [0, 0, 0, 0], ambient: [0, 0, 0, 0]},

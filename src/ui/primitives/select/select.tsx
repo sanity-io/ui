@@ -38,10 +38,10 @@ export const Select = forwardRef(function Select(
     children,
     customValidity,
     disabled,
-    fontSize = 1,
+    fontSize = 2,
     gap,
-    padding = 2,
-    radius = 2,
+    padding = 3,
+    radius = 1,
     readOnly,
     space = 2,
     ...restProps

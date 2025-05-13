@@ -11,7 +11,7 @@ export function StyleTags(props: {theme?: Theme_v3}): ReactNode {
   return (
     <>
       <style href="sanity-palette" precedence="palette">
-        {compilePalette(theme._palette)}
+        {compilePalette()}
       </style>
       <style href="sanity-theme" precedence="theme">
         {compileTheme({v3: theme} as RootTheme)}

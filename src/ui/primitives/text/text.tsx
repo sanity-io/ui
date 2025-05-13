@@ -33,7 +33,7 @@ export const Text = forwardRef(function Text(
     className,
     flex,
     muted = false,
-    size = 1,
+    size = 2,
     textOverflow: textOverflowProp,
     weight,
     ...restProps

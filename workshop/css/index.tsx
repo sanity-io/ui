@@ -12,7 +12,9 @@ export function cssPlugin(options?: {theme: RootTheme}): WorkshopPlugin {
       const {scheme, tone} = useRootTheme()
 
       useEffect(() => {
-        const els = document.querySelectorAll(`.${_('button')} .${_('card')} .${_('font')}`)
+        const els = document.querySelectorAll(
+          [_('button'), _('card'), _('font')].map((n) => `.${n}`).join(','),
+        )
 
         // temporarily disable all transitions when the theme changes
         for (const el of els) {

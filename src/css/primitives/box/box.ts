@@ -23,6 +23,9 @@ import {BoxStyleProps} from './types'
 
 /** @public */
 export function box(props: BoxStyleProps): string | undefined {
+  // props.align
+  // props.autoCols
+
   return _comp(
     'box',
     props.muted && 'muted', // todo: consider this naming
