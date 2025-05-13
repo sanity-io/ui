@@ -113,11 +113,12 @@ export const Button = forwardRef(function Button(
     >
       {Boolean(loading) && (
         <Box
+          align="center"
           as="span"
           className={buttonLoadingBox()}
           display="flex"
           flex={1}
-          justify={justify}
+          justify="center"
           width="fill"
         >
           <Spinner size={fontSize} />
@@ -126,8 +127,8 @@ export const Button = forwardRef(function Button(
 
       {(IconComponent || text || IconRightComponent) && (
         <Box
+          // align={align}
           as="span"
-          align={align}
           direction={direction}
           display="flex"
           flex={1}
@@ -142,8 +143,8 @@ export const Button = forwardRef(function Button(
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
-          width="fill"
-          wrap={wrap}
+          // width="fill"
+          // wrap={wrap}
         >
           {IconComponent && (
             <Text as="span" flex="none" muted size={fontSize}>
@@ -177,15 +178,15 @@ export const Button = forwardRef(function Button(
 
       {children && (
         <Box
-          align={align}
+          // align={align}
           as="span"
-          direction={direction}
-          display="flex"
+          // direction={direction}
+          // display="flex"
           flex={1}
           gap={gap}
           gapX={gapX}
           gapY={gapY}
-          justify={justify}
+          // justify={justify}
           padding={padding}
           paddingX={paddingX}
           paddingY={paddingY}
@@ -193,8 +194,8 @@ export const Button = forwardRef(function Button(
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
-          width="fill"
-          wrap={wrap}
+          // width="fill"
+          // wrap={wrap}
         >
           {children}
         </Box>

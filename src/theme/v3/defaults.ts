@@ -136,7 +136,7 @@ export const defaultTokens: PartialTokens<Tokens> = {
               4: ['800', '300 50%'],
             },
             border: {
-              0: ['900', '100'],
+              0: ['900', '300 40%'],
               4: ['700', '300'],
             },
             fg: {

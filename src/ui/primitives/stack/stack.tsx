@@ -1,4 +1,4 @@
-import {ResponsiveProp} from '@sanity/ui/css'
+import {composeClassNames, ResponsiveProp, stack} from '@sanity/ui/css'
 import {Space} from '@sanity/ui/theme'
 import {ForwardedRef, forwardRef} from 'react'
 
@@ -8,7 +8,11 @@ import {Box, BoxProps} from '../box'
 /**
  * @public
  */
-export interface StackProps extends Omit<BoxProps, 'direction' | 'display' | 'gapX' | 'gapY'> {
+export interface StackProps
+  extends Omit<
+    BoxProps,
+    'align' | 'columns' | 'direction' | 'display' | 'gapX' | 'gapY' | 'justify'
+  > {
   /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
 }
@@ -22,15 +26,16 @@ export const Stack = forwardRef(function Stack(
   props: Props<StackProps, 'div'>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, gap, space, ...restProps} = props
+  const {as, className, gap, space, ...restProps} = props
 
   return (
     <Box
       data-ui="Stack"
       {...restProps}
       as={as}
-      direction="column"
-      display="flex"
+      autoRows="min"
+      className={composeClassNames(className, stack())}
+      display="grid"
       gap={gap ?? space}
       ref={ref}
     />

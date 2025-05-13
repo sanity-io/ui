@@ -32,6 +32,9 @@ export const Box = forwardRef(function Box(
   const {
     align,
     as: As = 'div',
+    autoCols,
+    autoFlow,
+    autoRows,
     border,
     borderTop,
     borderRight,
@@ -93,6 +96,9 @@ export const Box = forwardRef(function Box(
         className,
         box({
           align,
+          autoCols,
+          autoFlow,
+          autoRows,
           border,
           borderTop,
           borderRight,

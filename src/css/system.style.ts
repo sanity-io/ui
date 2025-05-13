@@ -56,6 +56,7 @@ import {popoverStyle} from './primitives/popover/popover.style'
 import {radioStyle} from './primitives/radio/radio.style'
 import {selectStyle} from './primitives/select/select.style'
 import {spinnerStyle} from './primitives/spinner/spinner.style'
+import {stackStyle} from './primitives/stack/stack.style'
 import {switchStyle} from './primitives/switch/switch.style'
 import {textStyle} from './primitives/text/text.style'
 import {textAreaStyle} from './primitives/textArea/textArea.style'
@@ -136,6 +137,7 @@ export const systemStyle: Style = _mergeStyles([
   radioStyle,
   selectStyle,
   spinnerStyle,
+  stackStyle,
   switchStyle,
   textAreaStyle,
   textInputStyle,
