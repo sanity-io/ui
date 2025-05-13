@@ -2,7 +2,7 @@ import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
 export default defineScope({
-  name: './css/input',
+  name: 'css/input',
   title: 'Input',
   stories: [
     {
