@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/sanity-io/ui-workshop/compare/v2.1.2...v2.1.3) (2025-05-13)
+
+### Bug Fixes
+
+- **runtime:** fix express configuration ([618d17f](https://github.com/sanity-io/ui-workshop/commit/618d17ffdf6fafac52fe730718842e7b7e59652c))
+
 ## [2.1.2](https://github.com/sanity-io/ui-workshop/compare/v2.1.1...v2.1.2) (2025-04-30)
 
 ### Bug Fixes
