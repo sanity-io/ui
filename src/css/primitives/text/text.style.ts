@@ -2,6 +2,7 @@ import {FONT_TEXT_SIZE} from '@sanity/ui/theme'
 
 import {_responsiveRule} from '../../_responsiveRule'
 import {Style, StyleRules} from '../../types'
+import {vars} from '../../vars'
 
 const primitive: StyleRules = {
   '.text': {
@@ -25,9 +26,16 @@ const primitive: StyleRules = {
         color: 'var(--color-fg)',
       },
 
-      // '& svg': {
-      //   color: 'var(--color-icon)',
-      // },
+      '& code': {
+        fontFamily: vars.font.code.family,
+        color: 'var(--color-code-fg)',
+        backgroundColor: 'var(--color-muted-bg)',
+        borderRadius: vars.radius[2],
+      },
+
+      '& svg': {
+        color: 'var(--color-muted-fg)',
+      },
     },
   },
 

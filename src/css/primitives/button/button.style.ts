@@ -66,6 +66,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
     [varNames.color.bg]: solid.bg[0],
     [varNames.color.border]: solid.border[1],
     [varNames.color.fg]: solid.fg[0],
+    [varNames.color.muted.bg]: solid.bg[1],
     [varNames.color.muted.fg]: solid.fg[4],
     '--button-box-shadow': 'none',
 
@@ -74,6 +75,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: solid.bg[1],
         [varNames.color.border]: solid.border[2],
         [varNames.color.fg]: solid.fg[0],
+        [varNames.color.muted.bg]: solid.bg[2],
         [varNames.color.muted.fg]: solid.fg[4],
       },
 
@@ -81,6 +83,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: solid.bg[2],
         [varNames.color.border]: solid.border[3],
         [varNames.color.fg]: solid.fg[0],
+        [varNames.color.muted.bg]: solid.bg[3],
         [varNames.color.muted.fg]: solid.fg[4],
       },
 
@@ -88,6 +91,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: solid.bg[2],
         [varNames.color.border]: solid.border[3],
         [varNames.color.fg]: solid.fg[0],
+        [varNames.color.muted.bg]: solid.bg[3],
         [varNames.color.muted.fg]: solid.fg[4],
       },
 
@@ -95,6 +99,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: vars.color.default.tinted.bg[1],
         [varNames.color.border]: vars.color.default.tinted.border[0],
         [varNames.color.fg]: vars.color.default.tinted.fg[2],
+        [varNames.color.muted.bg]: vars.color.default.tinted.bg[2],
         [varNames.color.muted.fg]: vars.color.default.tinted.fg[1],
       },
     },
@@ -105,6 +110,8 @@ for (const tone of THEME_COLOR_STATE_TONES) {
     [varNames.color.bg]: tinted.bg[1],
     [varNames.color.border]: tinted.border[0],
     [varNames.color.fg]: tinted.fg[2],
+    [varNames.color.muted.bg]: tinted.bg[2],
+    [varNames.color.muted.fg]: tinted.fg[4],
     '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
 
     '@nest': {
@@ -112,6 +119,8 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: tinted.bg[2],
         [varNames.color.border]: tinted.border[1],
         [varNames.color.fg]: tinted.fg[1],
+        [varNames.color.muted.bg]: tinted.bg[3],
+        [varNames.color.muted.fg]: tinted.fg[3],
         // '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
       },
 
@@ -119,6 +128,8 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: tinted.bg[3],
         [varNames.color.border]: tinted.border[2],
         [varNames.color.fg]: tinted.fg[1],
+        [varNames.color.muted.bg]: tinted.bg[4],
+        [varNames.color.muted.fg]: tinted.fg[3],
         '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
       },
 
@@ -126,6 +137,8 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: tinted.bg[3],
         [varNames.color.border]: tinted.border[2],
         [varNames.color.fg]: tinted.fg[1],
+        [varNames.color.muted.bg]: tinted.bg[4],
+        [varNames.color.muted.fg]: tinted.fg[3],
         '--button-box-shadow': `inset 0 0 0 var(--button-border-width) var(--color-border)`,
       },
 
@@ -133,6 +146,8 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: vars.color.default.tinted.bg[1],
         [varNames.color.border]: vars.color.default.tinted.border[0],
         [varNames.color.fg]: vars.color.default.tinted.fg[2],
+        [varNames.color.muted.bg]: vars.color.default.tinted.bg[2],
+        [varNames.color.muted.fg]: vars.color.default.tinted.fg[1],
       },
     },
   }
@@ -143,6 +158,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
     [varNames.color.bg]: tinted.bg[0],
     [varNames.color.border]: tinted.border[1],
     [varNames.color.fg]: tinted.fg[2],
+    [varNames.color.muted.bg]: tinted.bg[1],
     [varNames.color.muted.fg]: tinted.fg[4],
     '--button-box-shadow': 'none',
 
@@ -151,6 +167,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: tinted.bg[1],
         [varNames.color.border]: tinted.border[2],
         [varNames.color.fg]: tinted.fg[1],
+        [varNames.color.muted.bg]: tinted.bg[2],
         [varNames.color.muted.fg]: tinted.fg[3],
       },
 
@@ -158,6 +175,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: tinted.bg[2],
         [varNames.color.border]: tinted.border[3],
         [varNames.color.fg]: tinted.fg[1],
+        [varNames.color.muted.bg]: tinted.bg[3],
         [varNames.color.muted.fg]: tinted.fg[3],
       },
 
@@ -165,6 +183,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: tinted.bg[2],
         [varNames.color.border]: tinted.border[3],
         [varNames.color.fg]: tinted.fg[1],
+        [varNames.color.muted.bg]: tinted.bg[3],
         [varNames.color.muted.fg]: tinted.fg[3],
       },
 
@@ -172,6 +191,7 @@ for (const tone of THEME_COLOR_STATE_TONES) {
         [varNames.color.bg]: vars.color.default.tinted.bg[0],
         [varNames.color.border]: vars.color.default.tinted.border[0],
         [varNames.color.fg]: vars.color.default.tinted.fg[2],
+        [varNames.color.muted.bg]: vars.color.default.tinted.bg[1],
         [varNames.color.muted.fg]: vars.color.default.tinted.fg[1],
       },
     },

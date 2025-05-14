@@ -84,7 +84,7 @@ export function themeColor_v3_v2(options: {
       return tones
     }, {} as ThemeColorSelectable_v2),
     shadow: color.shadow,
-    syntax: color.token,
+    syntax: color.code.token,
   }
 }
 

@@ -5,6 +5,47 @@ export const defaultTokens: PartialTokens<Tokens> = {
     '*': {
       // backdrop: ['black/0.2', '200/0.2'],
       backdrop: ['black/0.5', 'gray/100/0.5'],
+      code: {
+        bg: ['950', '50'],
+        fg: ['300', '700'],
+        token: {
+          atrule: ['purple/300', 'purple/600'],
+          attrName: ['green/300', 'green/600'],
+          attrValue: ['yellow/300', 'yellow/600'],
+          attribute: ['yellow/300', 'yellow/600'],
+          boolean: ['purple/300', 'purple/600'],
+          builtin: ['purple/300', 'purple/600'],
+          cdata: ['yellow/300', 'yellow/600'],
+          char: ['yellow/300', 'yellow/600'],
+          class: ['orange/300', 'orange/600'],
+          className: ['cyan/300', 'cyan/600'],
+          comment: ['gray/600', 'gray/300'],
+          constant: ['purple/300', 'purple/600'],
+          deleted: ['red/300', 'red/600'],
+          entity: ['red/300', 'red/600'],
+          function: ['green/300', 'green/600'],
+          hexcode: ['blue/300', 'blue/600'],
+          id: ['purple/300', 'purple/600'],
+          important: ['purple/300', 'purple/600'],
+          inserted: ['green/300', 'green/600'],
+          keyword: ['magenta/300', 'magenta/600'],
+          number: ['purple/300', 'purple/600'],
+          operator: ['magenta/300', 'magenta/600'],
+          prolog: ['gray/300', 'gray/600'],
+          property: ['blue/300', 'blue/600'],
+          pseudoClass: ['yellow/300', 'yellow/600'],
+          pseudoElement: ['yellow/300', 'yellow/600'],
+          punctuation: ['gray/300', 'gray/600'],
+          regex: ['blue/300', 'blue/600'],
+          selector: ['red/300', 'red/600'],
+          string: ['yellow/300', 'yellow/600'],
+          symbol: ['purple/300', 'purple/600'],
+          tag: ['red/300', 'red/600'],
+          unit: ['orange/300', 'orange/600'],
+          url: ['red/300', 'red/600'],
+          variable: ['red/300', 'red/600'],
+        },
+      },
       focusRing: ['blue/500', 'blue/500'],
       link: {
         fg: ['blue/400', 'blue/600'],
@@ -15,53 +56,16 @@ export const defaultTokens: PartialTokens<Tokens> = {
         penumbra: ['black/0.14', '500/0.07'],
         ambient: ['black/0.12', '500/0.06'],
       },
-      token: {
-        atrule: ['purple/300', 'purple/600'],
-        attrName: ['green/300', 'green/600'],
-        attrValue: ['yellow/300', 'yellow/600'],
-        attribute: ['yellow/300', 'yellow/600'],
-        boolean: ['purple/300', 'purple/600'],
-        builtin: ['purple/300', 'purple/600'],
-        cdata: ['yellow/300', 'yellow/600'],
-        char: ['yellow/300', 'yellow/600'],
-        class: ['orange/300', 'orange/600'],
-        className: ['cyan/300', 'cyan/600'],
-        comment: ['gray/600', 'gray/300'],
-        constant: ['purple/300', 'purple/600'],
-        deleted: ['red/300', 'red/600'],
-        entity: ['red/300', 'red/600'],
-        function: ['green/300', 'green/600'],
-        hexcode: ['blue/300', 'blue/600'],
-        id: ['purple/300', 'purple/600'],
-        important: ['purple/300', 'purple/600'],
-        inserted: ['green/300', 'green/600'],
-        keyword: ['magenta/300', 'magenta/600'],
-        number: ['purple/300', 'purple/600'],
-        operator: ['magenta/300', 'magenta/600'],
-        prolog: ['gray/300', 'gray/600'],
-        property: ['blue/300', 'blue/600'],
-        pseudoClass: ['yellow/300', 'yellow/600'],
-        pseudoElement: ['yellow/300', 'yellow/600'],
-        punctuation: ['gray/300', 'gray/600'],
-        regex: ['blue/300', 'blue/600'],
-        selector: ['red/300', 'red/600'],
-        string: ['yellow/300', 'yellow/600'],
-        symbol: ['purple/300', 'purple/600'],
-        tag: ['red/300', 'red/600'],
-        unit: ['orange/300', 'orange/600'],
-        url: ['red/300', 'red/600'],
-        variable: ['red/300', 'red/600'],
-      },
       variant: {
         tinted: {
           '*': {
             bg: {
               0: ['950', '50'],
-              4: ['800', '100'],
+              4: ['800', '200'],
             },
             border: {
-              0: ['800', '100'],
-              4: ['600', '300'],
+              0: ['700', '100'],
+              4: ['500', '300'],
             },
             fg: {
               0: ['100', '900'],
@@ -87,8 +91,8 @@ export const defaultTokens: PartialTokens<Tokens> = {
         solid: {
           '*': {
             bg: {
-              0: ['300', '500'],
-              4: ['200', '600'],
+              0: ['400', '500'],
+              4: ['300', '600'],
             },
             border: {
               0: ['200', '400'],
@@ -136,12 +140,12 @@ export const defaultTokens: PartialTokens<Tokens> = {
               4: ['800', '300 50%'],
             },
             border: {
-              0: ['900', '300 40%'],
-              4: ['700', '300'],
+              0: ['800', '300 40%'],
+              4: ['600', '300'],
             },
             fg: {
               0: ['100', 'black'],
-              4: ['500', '600'],
+              4: ['400', '700'],
             },
           },
         },
@@ -152,7 +156,7 @@ export const defaultTokens: PartialTokens<Tokens> = {
         tinted: {
           '*': {
             bg: {
-              0: ['gray/950', 'white'],
+              0: ['950', 'white'],
               4: ['800', '200'],
             },
             border: {
@@ -162,6 +166,18 @@ export const defaultTokens: PartialTokens<Tokens> = {
             fg: {
               0: ['white', 'black'],
               4: ['400', '600'],
+            },
+          },
+        },
+      },
+    },
+    'neutral': {
+      variant: {
+        tinted: {
+          '*': {
+            bg: {
+              0: ['900', '50'],
+              4: ['700', '200'],
             },
           },
         },

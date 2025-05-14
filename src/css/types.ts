@@ -132,6 +132,44 @@ export type ColorCardVarName =
   | `--color-${Scheme}-${CardTone}-avatar-${AvatarColor}-bg`
   | `--color-${Scheme}-${CardTone}-avatar-${AvatarColor}-fg`
   | `--color-${Scheme}-${CardTone}-backdrop`
+  | `--color-${Scheme}-${CardTone}-code-bg`
+  | `--color-${Scheme}-${CardTone}-code-fg`
+  | `--color-${Scheme}-${CardTone}-code-token-atrule`
+  | `--color-${Scheme}-${CardTone}-code-token-attr-name`
+  | `--color-${Scheme}-${CardTone}-code-token-attr-value`
+  | `--color-${Scheme}-${CardTone}-code-token-attribute`
+  | `--color-${Scheme}-${CardTone}-code-token-boolean`
+  | `--color-${Scheme}-${CardTone}-code-token-builtin`
+  | `--color-${Scheme}-${CardTone}-code-token-cdata`
+  | `--color-${Scheme}-${CardTone}-code-token-char`
+  | `--color-${Scheme}-${CardTone}-code-token-class`
+  | `--color-${Scheme}-${CardTone}-code-token-class-name`
+  | `--color-${Scheme}-${CardTone}-code-token-comment`
+  | `--color-${Scheme}-${CardTone}-code-token-constant`
+  | `--color-${Scheme}-${CardTone}-code-token-deleted`
+  | `--color-${Scheme}-${CardTone}-code-token-doctype`
+  | `--color-${Scheme}-${CardTone}-code-token-entity`
+  | `--color-${Scheme}-${CardTone}-code-token-function`
+  | `--color-${Scheme}-${CardTone}-code-token-hexcode`
+  | `--color-${Scheme}-${CardTone}-code-token-id`
+  | `--color-${Scheme}-${CardTone}-code-token-important`
+  | `--color-${Scheme}-${CardTone}-code-token-inserted`
+  | `--color-${Scheme}-${CardTone}-code-token-keyword`
+  | `--color-${Scheme}-${CardTone}-code-token-number`
+  | `--color-${Scheme}-${CardTone}-code-token-operator`
+  | `--color-${Scheme}-${CardTone}-code-token-prolog`
+  | `--color-${Scheme}-${CardTone}-code-token-property`
+  | `--color-${Scheme}-${CardTone}-code-token-pseudo-class`
+  | `--color-${Scheme}-${CardTone}-code-token-pseudo-element`
+  | `--color-${Scheme}-${CardTone}-code-token-punctuation`
+  | `--color-${Scheme}-${CardTone}-code-token-regex`
+  | `--color-${Scheme}-${CardTone}-code-token-selector`
+  | `--color-${Scheme}-${CardTone}-code-token-string`
+  | `--color-${Scheme}-${CardTone}-code-token-symbol`
+  | `--color-${Scheme}-${CardTone}-code-token-tag`
+  | `--color-${Scheme}-${CardTone}-code-token-unit`
+  | `--color-${Scheme}-${CardTone}-code-token-url`
+  | `--color-${Scheme}-${CardTone}-code-token-variable`
   | `--color-${Scheme}-${CardTone}-focus-ring`
   | `--color-${Scheme}-${CardTone}-link-fg`
   | `--color-${Scheme}-${CardTone}-muted-bg`
@@ -143,48 +181,50 @@ export type ColorCardVarName =
   | `--color-${Scheme}-${CardTone}-shadow-ambient`
   | `--color-${Scheme}-${CardTone}-skeleton-from`
   | `--color-${Scheme}-${CardTone}-skeleton-to`
-  | `--color-${Scheme}-${CardTone}-token-atrule`
-  | `--color-${Scheme}-${CardTone}-token-attr-name`
-  | `--color-${Scheme}-${CardTone}-token-attr-value`
-  | `--color-${Scheme}-${CardTone}-token-attribute`
-  | `--color-${Scheme}-${CardTone}-token-boolean`
-  | `--color-${Scheme}-${CardTone}-token-builtin`
-  | `--color-${Scheme}-${CardTone}-token-cdata`
-  | `--color-${Scheme}-${CardTone}-token-char`
-  | `--color-${Scheme}-${CardTone}-token-class`
-  | `--color-${Scheme}-${CardTone}-token-class-name`
-  | `--color-${Scheme}-${CardTone}-token-comment`
-  | `--color-${Scheme}-${CardTone}-token-constant`
-  | `--color-${Scheme}-${CardTone}-token-deleted`
-  | `--color-${Scheme}-${CardTone}-token-doctype`
-  | `--color-${Scheme}-${CardTone}-token-entity`
-  | `--color-${Scheme}-${CardTone}-token-function`
-  | `--color-${Scheme}-${CardTone}-token-hexcode`
-  | `--color-${Scheme}-${CardTone}-token-id`
-  | `--color-${Scheme}-${CardTone}-token-important`
-  | `--color-${Scheme}-${CardTone}-token-inserted`
-  | `--color-${Scheme}-${CardTone}-token-keyword`
-  | `--color-${Scheme}-${CardTone}-token-number`
-  | `--color-${Scheme}-${CardTone}-token-operator`
-  | `--color-${Scheme}-${CardTone}-token-prolog`
-  | `--color-${Scheme}-${CardTone}-token-property`
-  | `--color-${Scheme}-${CardTone}-token-pseudo-class`
-  | `--color-${Scheme}-${CardTone}-token-pseudo-element`
-  | `--color-${Scheme}-${CardTone}-token-punctuation`
-  | `--color-${Scheme}-${CardTone}-token-regex`
-  | `--color-${Scheme}-${CardTone}-token-selector`
-  | `--color-${Scheme}-${CardTone}-token-string`
-  | `--color-${Scheme}-${CardTone}-token-symbol`
-  | `--color-${Scheme}-${CardTone}-token-tag`
-  | `--color-${Scheme}-${CardTone}-token-unit`
-  | `--color-${Scheme}-${CardTone}-token-url`
-  | `--color-${Scheme}-${CardTone}-token-variable`
 
 export type ColorCardToneScopedVarName =
   | `--color-${CardTone}-accent-fg`
   | `--color-${CardTone}-avatar-${AvatarColor}-bg`
   | `--color-${CardTone}-avatar-${AvatarColor}-fg`
   | `--color-${CardTone}-backdrop`
+  | `--color-${CardTone}-code-bg`
+  | `--color-${CardTone}-code-fg`
+  | `--color-${CardTone}-code-token-atrule`
+  | `--color-${CardTone}-code-token-attr-name`
+  | `--color-${CardTone}-code-token-attr-value`
+  | `--color-${CardTone}-code-token-attribute`
+  | `--color-${CardTone}-code-token-boolean`
+  | `--color-${CardTone}-code-token-builtin`
+  | `--color-${CardTone}-code-token-cdata`
+  | `--color-${CardTone}-code-token-char`
+  | `--color-${CardTone}-code-token-class`
+  | `--color-${CardTone}-code-token-class-name`
+  | `--color-${CardTone}-code-token-comment`
+  | `--color-${CardTone}-code-token-constant`
+  | `--color-${CardTone}-code-token-deleted`
+  | `--color-${CardTone}-code-token-doctype`
+  | `--color-${CardTone}-code-token-entity`
+  | `--color-${CardTone}-code-token-function`
+  | `--color-${CardTone}-code-token-hexcode`
+  | `--color-${CardTone}-code-token-id`
+  | `--color-${CardTone}-code-token-important`
+  | `--color-${CardTone}-code-token-inserted`
+  | `--color-${CardTone}-code-token-keyword`
+  | `--color-${CardTone}-code-token-number`
+  | `--color-${CardTone}-code-token-operator`
+  | `--color-${CardTone}-code-token-prolog`
+  | `--color-${CardTone}-code-token-property`
+  | `--color-${CardTone}-code-token-pseudo-class`
+  | `--color-${CardTone}-code-token-pseudo-element`
+  | `--color-${CardTone}-code-token-punctuation`
+  | `--color-${CardTone}-code-token-regex`
+  | `--color-${CardTone}-code-token-selector`
+  | `--color-${CardTone}-code-token-string`
+  | `--color-${CardTone}-code-token-symbol`
+  | `--color-${CardTone}-code-token-tag`
+  | `--color-${CardTone}-code-token-unit`
+  | `--color-${CardTone}-code-token-url`
+  | `--color-${CardTone}-code-token-variable`
   | `--color-${CardTone}-focus-ring`
   | `--color-${CardTone}-link-fg`
   | `--color-${CardTone}-muted-bg`
@@ -196,42 +236,6 @@ export type ColorCardToneScopedVarName =
   | `--color-${CardTone}-shadow-ambient`
   | `--color-${CardTone}-skeleton-from`
   | `--color-${CardTone}-skeleton-to`
-  | `--color-${CardTone}-token-atrule`
-  | `--color-${CardTone}-token-attr-name`
-  | `--color-${CardTone}-token-attr-value`
-  | `--color-${CardTone}-token-attribute`
-  | `--color-${CardTone}-token-boolean`
-  | `--color-${CardTone}-token-builtin`
-  | `--color-${CardTone}-token-cdata`
-  | `--color-${CardTone}-token-char`
-  | `--color-${CardTone}-token-class`
-  | `--color-${CardTone}-token-class-name`
-  | `--color-${CardTone}-token-comment`
-  | `--color-${CardTone}-token-constant`
-  | `--color-${CardTone}-token-deleted`
-  | `--color-${CardTone}-token-doctype`
-  | `--color-${CardTone}-token-entity`
-  | `--color-${CardTone}-token-function`
-  | `--color-${CardTone}-token-hexcode`
-  | `--color-${CardTone}-token-id`
-  | `--color-${CardTone}-token-important`
-  | `--color-${CardTone}-token-inserted`
-  | `--color-${CardTone}-token-keyword`
-  | `--color-${CardTone}-token-number`
-  | `--color-${CardTone}-token-operator`
-  | `--color-${CardTone}-token-prolog`
-  | `--color-${CardTone}-token-property`
-  | `--color-${CardTone}-token-pseudo-class`
-  | `--color-${CardTone}-token-pseudo-element`
-  | `--color-${CardTone}-token-punctuation`
-  | `--color-${CardTone}-token-regex`
-  | `--color-${CardTone}-token-selector`
-  | `--color-${CardTone}-token-string`
-  | `--color-${CardTone}-token-symbol`
-  | `--color-${CardTone}-token-tag`
-  | `--color-${CardTone}-token-unit`
-  | `--color-${CardTone}-token-url`
-  | `--color-${CardTone}-token-variable`
 
 /** @public */
 export type CardScopedVarName =
@@ -246,6 +250,42 @@ export type CardScopedVarName =
   | `--color-border`
   | `--color-code-bg`
   | `--color-code-fg`
+  | `--color-code-token-atrule`
+  | `--color-code-token-attr-name`
+  | `--color-code-token-attr-value`
+  | `--color-code-token-attribute`
+  | `--color-code-token-boolean`
+  | `--color-code-token-builtin`
+  | `--color-code-token-cdata`
+  | `--color-code-token-char`
+  | `--color-code-token-class`
+  | `--color-code-token-class-name`
+  | `--color-code-token-comment`
+  | `--color-code-token-constant`
+  | `--color-code-token-deleted`
+  | `--color-code-token-doctype`
+  | `--color-code-token-entity`
+  | `--color-code-token-function`
+  | `--color-code-token-hexcode`
+  | `--color-code-token-id`
+  | `--color-code-token-important`
+  | `--color-code-token-inserted`
+  | `--color-code-token-keyword`
+  | `--color-code-token-number`
+  | `--color-code-token-operator`
+  | `--color-code-token-prolog`
+  | `--color-code-token-property`
+  | `--color-code-token-pseudo-class`
+  | `--color-code-token-pseudo-element`
+  | `--color-code-token-punctuation`
+  | `--color-code-token-regex`
+  | `--color-code-token-selector`
+  | `--color-code-token-string`
+  | `--color-code-token-symbol`
+  | `--color-code-token-tag`
+  | `--color-code-token-unit`
+  | `--color-code-token-url`
+  | `--color-code-token-variable`
   | `--color-fg`
   | `--color-focus-ring`
   | `--color-link-fg`
@@ -257,42 +297,6 @@ export type CardScopedVarName =
   | `--color-shadow-ambient`
   | `--color-skeleton-from`
   | `--color-skeleton-to`
-  | `--color-token-atrule`
-  | `--color-token-attr-name`
-  | `--color-token-attr-value`
-  | `--color-token-attribute`
-  | `--color-token-boolean`
-  | `--color-token-builtin`
-  | `--color-token-cdata`
-  | `--color-token-char`
-  | `--color-token-class`
-  | `--color-token-class-name`
-  | `--color-token-comment`
-  | `--color-token-constant`
-  | `--color-token-deleted`
-  | `--color-token-doctype`
-  | `--color-token-entity`
-  | `--color-token-function`
-  | `--color-token-hexcode`
-  | `--color-token-id`
-  | `--color-token-important`
-  | `--color-token-inserted`
-  | `--color-token-keyword`
-  | `--color-token-number`
-  | `--color-token-operator`
-  | `--color-token-prolog`
-  | `--color-token-property`
-  | `--color-token-pseudo-class`
-  | `--color-token-pseudo-element`
-  | `--color-token-punctuation`
-  | `--color-token-regex`
-  | `--color-token-selector`
-  | `--color-token-string`
-  | `--color-token-symbol`
-  | `--color-token-tag`
-  | `--color-token-unit`
-  | `--color-token-url`
-  | `--color-token-variable`
   // todo
   | `--color-checkbox-bg`
   | `--color-checkbox-fg`
@@ -503,6 +507,49 @@ export interface ColorCardVarNames {
   }
   avatar: Record<AvatarColor, ColorAvatarColorVarNames>
   backdrop: VarName
+  code: {
+    bg: VarName
+    fg: VarName
+
+    token: {
+      atrule: VarName
+      attrName: VarName
+      attrValue: VarName
+      attribute: VarName
+      boolean: VarName
+      builtin: VarName
+      cdata: VarName
+      char: VarName
+      class: VarName
+      className: VarName
+      comment: VarName
+      constant: VarName
+      deleted: VarName
+      doctype: VarName
+      entity: VarName
+      function: VarName
+      hexcode: VarName
+      id: VarName
+      important: VarName
+      inserted: VarName
+      keyword: VarName
+      number: VarName
+      operator: VarName
+      prolog: VarName
+      property: VarName
+      pseudoClass: VarName
+      pseudoElement: VarName
+      punctuation: VarName
+      regex: VarName
+      selector: VarName
+      string: VarName
+      symbol: VarName
+      tag: VarName
+      unit: VarName
+      url: VarName
+      variable: VarName
+    }
+  }
   focusRing: VarName
   link: {
     fg: VarName
@@ -521,48 +568,9 @@ export interface ColorCardVarNames {
     from: VarName
     to: VarName
   }
-  token: {
-    atrule: VarName
-    attrName: VarName
-    attrValue: VarName
-    attribute: VarName
-    boolean: VarName
-    builtin: VarName
-    cdata: VarName
-    char: VarName
-    class: VarName
-    className: VarName
-    comment: VarName
-    constant: VarName
-    deleted: VarName
-    doctype: VarName
-    entity: VarName
-    function: VarName
-    hexcode: VarName
-    id: VarName
-    important: VarName
-    inserted: VarName
-    keyword: VarName
-    number: VarName
-    operator: VarName
-    prolog: VarName
-    property: VarName
-    pseudoClass: VarName
-    pseudoElement: VarName
-    punctuation: VarName
-    regex: VarName
-    selector: VarName
-    string: VarName
-    symbol: VarName
-    tag: VarName
-    unit: VarName
-    url: VarName
-    variable: VarName
-  }
-  // variant: {
+
   solid: ColorVariantVarNames
   tinted: ColorVariantVarNames
-  // }
 }
 
 /** @public */
@@ -680,6 +688,49 @@ export interface ColorCardVars {
   }
   avatar: ColorAvatarVars
   backdrop: CSSVar
+  code: {
+    bg: CSSVar
+    fg: CSSVar
+
+    token: {
+      atrule: CSSVar
+      attrName: CSSVar
+      attrValue: CSSVar
+      attribute: CSSVar
+      boolean: CSSVar
+      builtin: CSSVar
+      cdata: CSSVar
+      char: CSSVar
+      class: CSSVar
+      className: CSSVar
+      comment: CSSVar
+      constant: CSSVar
+      deleted: CSSVar
+      doctype: CSSVar
+      entity: CSSVar
+      function: CSSVar
+      hexcode: CSSVar
+      id: CSSVar
+      important: CSSVar
+      inserted: CSSVar
+      keyword: CSSVar
+      number: CSSVar
+      operator: CSSVar
+      prolog: CSSVar
+      property: CSSVar
+      pseudoClass: CSSVar
+      pseudoElement: CSSVar
+      punctuation: CSSVar
+      regex: CSSVar
+      selector: CSSVar
+      string: CSSVar
+      symbol: CSSVar
+      tag: CSSVar
+      unit: CSSVar
+      url: CSSVar
+      variable: CSSVar
+    }
+  }
   focusRing: CSSVar
   link: {
     fg: CSSVar
@@ -698,48 +749,9 @@ export interface ColorCardVars {
     from: CSSVar
     to: CSSVar
   }
-  token: {
-    atrule: CSSVar
-    attrName: CSSVar
-    attrValue: CSSVar
-    attribute: CSSVar
-    boolean: CSSVar
-    builtin: CSSVar
-    cdata: CSSVar
-    char: CSSVar
-    class: CSSVar
-    className: CSSVar
-    comment: CSSVar
-    constant: CSSVar
-    deleted: CSSVar
-    doctype: CSSVar
-    entity: CSSVar
-    function: CSSVar
-    hexcode: CSSVar
-    id: CSSVar
-    important: CSSVar
-    inserted: CSSVar
-    keyword: CSSVar
-    number: CSSVar
-    operator: CSSVar
-    prolog: CSSVar
-    property: CSSVar
-    pseudoClass: CSSVar
-    pseudoElement: CSSVar
-    punctuation: CSSVar
-    regex: CSSVar
-    selector: CSSVar
-    string: CSSVar
-    symbol: CSSVar
-    tag: CSSVar
-    unit: CSSVar
-    url: CSSVar
-    variable: CSSVar
-  }
-  // variant: {
+
   solid: ColorVariantVars
   tinted: ColorVariantVars
-  // }
 }
 
 /** @public */

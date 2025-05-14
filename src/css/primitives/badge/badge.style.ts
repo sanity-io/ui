@@ -15,7 +15,7 @@ const primitive: StyleRules = {
 for (const tone of THEME_COLOR_STATE_TONES) {
   primitive[`.badge-${tone}`] = {
     [varNames.color.bg]: vars.color.tinted[tone].bg[4],
-    [varNames.color.fg]: vars.color.tinted[tone].fg[1],
+    [varNames.color.fg]: vars.color.tinted[tone].fg[3],
   }
 }
 

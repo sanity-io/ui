@@ -35,7 +35,7 @@ export const Box = forwardRef(function Box(
     autoCols,
     autoFlow,
     autoRows,
-    border,
+    border = false,
     borderTop,
     borderRight,
     borderBottom,
