@@ -83,7 +83,7 @@ export const Box = forwardRef(function Box(
     rows,
     rowStart,
     rowEnd,
-    sizing = 'content',
+    sizing = 'border',
     width,
     wrap,
     ...restProps
