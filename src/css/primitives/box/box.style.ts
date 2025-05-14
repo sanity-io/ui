@@ -3,7 +3,7 @@ import {vars} from '../../vars'
 
 const primitive: StyleRules = {
   '.box': {
-    'minWidth': 0,
+    // todo: move to aspects
     'minHeight': 0,
 
     '@nest': {

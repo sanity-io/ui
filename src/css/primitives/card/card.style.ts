@@ -22,7 +22,7 @@ const primitive: StyleRules = {
     [varNames.color.muted.fg]: vars.color.tinted.default.fg[4],
 
     '@nest': {
-      '&:is(button)': {
+      'button&': {
         WebkitFontSmoothing: 'inherit',
         appearance: 'none',
         outline: 'none',
@@ -33,15 +33,81 @@ const primitive: StyleRules = {
         width: ['-moz-available', '-webkit-fill-available', 'fill-available'],
       },
 
-      '&:is(a)': {
+      'a&': {
         outline: 'none',
         textDecoration: 'none',
       },
 
-      '&:is(pre)': {
+      'pre&': {
         font: 'inherit',
         whiteSpace: 'inherit',
       },
+
+      'a&:not([data-disabled]):hover, button&:not([data-disabled]):hover': {
+        [varNames.color.bg]: vars.color.tinted.default.bg[1],
+        [varNames.color.border]: vars.color.tinted.default.border[3],
+        [varNames.color.fg]: vars.color.tinted.default.fg[1],
+        [varNames.color.muted.bg]: vars.color.tinted.default.bg[2],
+        [varNames.color.muted.fg]: vars.color.tinted.default.fg[4],
+      },
+
+      'a&:not([data-disabled]):active, button&:not([data-disabled]):active': {
+        [varNames.color.bg]: vars.color.tinted.default.bg[2],
+        [varNames.color.border]: vars.color.tinted.default.border[4],
+        [varNames.color.fg]: vars.color.tinted.default.fg[0],
+        [varNames.color.muted.bg]: vars.color.tinted.default.bg[3],
+        [varNames.color.muted.fg]: vars.color.tinted.default.fg[4],
+      },
+
+      // toggle button
+      'a&:not([data-disabled])[aria-pressed="true"], button&:not([data-disabled])[aria-pressed="true"]':
+        {
+          [varNames.color.bg]: vars.color.tinted.default.bg[2],
+          [varNames.color.border]: vars.color.tinted.default.border[4],
+          [varNames.color.fg]: vars.color.tinted.default.fg[0],
+          [varNames.color.muted.bg]: vars.color.tinted.default.bg[3],
+          [varNames.color.muted.fg]: vars.color.tinted.default.fg[4],
+        },
+
+      'a&:not([data-disabled])[data-pressed], button&:not([data-disabled])[data-pressed]': {
+        [varNames.color.bg]: vars.color.tinted.default.bg[2],
+        [varNames.color.border]: vars.color.tinted.default.border[4],
+        [varNames.color.fg]: vars.color.tinted.default.fg[0],
+        [varNames.color.muted.bg]: vars.color.tinted.default.bg[3],
+        [varNames.color.muted.fg]: vars.color.tinted.default.fg[4],
+      },
+
+      'a&:not([data-disabled])[data-selected], button&:not([data-disabled])[data-selected]': {
+        [varNames.color.bg]: vars.color.solid.primary.bg[0],
+        [varNames.color.border]: vars.color.solid.primary.border[1],
+        [varNames.color.fg]: vars.color.solid.primary.fg[0],
+        [varNames.color.muted.bg]: vars.color.solid.primary.bg[1],
+        [varNames.color.muted.fg]: vars.color.solid.primary.fg[3],
+      },
+
+      // '&:not([data-disabled]):focus': {
+      //   '--color-bg': vars.color.solid.bg[0],
+      //   '--color-border': vars.color.solid.border[1],
+      //   '--color-fg': vars.color.solid.fg[1],
+      //   '--color-muted-bg': vars.color.solid.bg[1],
+      //   '--color-muted-fg': vars.color.solid.fg[3],
+      // },
+
+      'a&[data-disabled]), button&[data-disabled]': {
+        [varNames.color.bg]: vars.color.tinted.default.bg[2],
+        [varNames.color.border]: vars.color.tinted.default.border[4],
+        [varNames.color.fg]: vars.color.tinted.default.fg[0],
+        [varNames.color.muted.bg]: vars.color.tinted.default.bg[3],
+        [varNames.color.muted.fg]: vars.color.tinted.default.fg[4],
+      },
+
+      // '&[data-disabled]': {
+      //   '--color-bg': vars.color.tinted.bg[0],
+      //   '--color-border': vars.color.tinted.border[1],
+      //   '--color-fg': vars.color.tinted.border[4],
+      //   '--color-muted-bg': vars.color.tinted.bg[1],
+      //   '--color-muted-fg': vars.color.tinted.border[4],
+      // },
     },
   },
 }

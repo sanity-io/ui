@@ -66,6 +66,7 @@ export const Box = forwardRef(function Box(
     marginBottom,
     marginLeft,
     maxWidth,
+    minWidth = 0,
     overflow,
     padding = 0,
     paddingX,
@@ -82,7 +83,7 @@ export const Box = forwardRef(function Box(
     rows,
     rowStart,
     rowEnd,
-    sizing = 'border',
+    sizing = 'content',
     width,
     wrap,
     ...restProps
@@ -130,6 +131,7 @@ export const Box = forwardRef(function Box(
           marginBottom,
           marginLeft,
           maxWidth,
+          minWidth,
           muted,
           padding,
           paddingX,
@@ -150,7 +152,6 @@ export const Box = forwardRef(function Box(
           wrap,
         }),
       )}
-      // data-gap={gap}
       ref={ref}
     >
       {props.children}

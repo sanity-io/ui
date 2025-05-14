@@ -1,11 +1,12 @@
 import {Strategy} from '@floating-ui/react-dom'
+import {popoverCard} from '@sanity/ui/css'
 import {motion, MotionProps} from 'framer-motion'
 import {CSSProperties, ForwardedRef, forwardRef, memo, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'
 import {Placement, PopoverMargins, Props} from '../../types'
 import {Arrow, useLayer} from '../../utils'
-import {Card, CardProps} from '../card'
+import {Card, CardProps, CardProvider, useCard} from '../card'
 import {Flex} from '../flex'
 import {
   DEFAULT_POPOVER_ARROW_HEIGHT,
@@ -69,6 +70,8 @@ export const PopoverCard = memo(
       ...restProps
     } = props
 
+    const card = useCard()
+
     const layer = useLayer()
 
     // Get margins: [top, right, bottom, left]
@@ -107,48 +110,51 @@ export const PopoverCard = memo(
     )
 
     return (
-      <MotionCard
-        className="popover-card"
-        data-ui="Popover"
-        {...(restProps as CardProps & MotionProps)}
-        data-placement={placement}
-        direction="column"
-        display="flex"
-        radius={radius}
-        ref={ref}
-        scheme={scheme}
-        shadow={shadow}
-        sizing="border"
-        style={rootStyle}
-        tone={tone}
-        variants={POPOVER_MOTION_PROPS.card}
-        transition={POPOVER_MOTION_PROPS.transition}
-        initial={animate ? ['hidden', 'initial'] : undefined}
-        animate={animate ? ['visible', 'scaleIn'] : undefined}
-        exit={animate ? ['hidden', 'scaleOut'] : undefined}
-      >
-        <Flex
-          data-ui="Popover__wrapper"
+      <CardProvider tone={card?.tone ?? 'transparent'} scheme={card?.scheme ?? 'light'}>
+        <MotionCard
+          className={popoverCard()}
+          data-ui="Popover"
+          {...(restProps as CardProps & MotionProps)}
+          data-context-tone={card?.tone ?? 'transparent'}
+          data-placement={placement}
           direction="column"
-          flex={1}
-          maxWidth={maxWidth}
-          overflow={overflow}
+          display="flex"
+          radius={radius}
+          ref={ref}
+          scheme={scheme}
+          shadow={shadow}
+          sizing="border"
+          style={rootStyle}
+          tone={tone}
+          variants={POPOVER_MOTION_PROPS.card}
+          transition={POPOVER_MOTION_PROPS.transition}
+          initial={animate ? ['hidden', 'initial'] : undefined}
+          animate={animate ? ['visible', 'scaleIn'] : undefined}
+          exit={animate ? ['hidden', 'scaleOut'] : undefined}
         >
-          <Flex direction="column" flex={1} padding={padding}>
-            {children}
+          <Flex
+            data-ui="Popover__wrapper"
+            direction="column"
+            flex={1}
+            maxWidth={maxWidth}
+            overflow={overflow}
+          >
+            <Flex direction="column" flex={1} padding={padding}>
+              {children}
+            </Flex>
           </Flex>
-        </Flex>
 
-        {arrow && (
-          <Arrow
-            ref={arrowRef}
-            style={arrowStyle}
-            width={DEFAULT_POPOVER_ARROW_WIDTH}
-            height={DEFAULT_POPOVER_ARROW_HEIGHT}
-            radius={DEFAULT_POPOVER_ARROW_RADIUS}
-          />
-        )}
-      </MotionCard>
+          {arrow && (
+            <Arrow
+              ref={arrowRef}
+              style={arrowStyle}
+              width={DEFAULT_POPOVER_ARROW_WIDTH}
+              height={DEFAULT_POPOVER_ARROW_HEIGHT}
+              radius={DEFAULT_POPOVER_ARROW_RADIUS}
+            />
+          )}
+        </MotionCard>
+      </CardProvider>
     )
   }),
 )

@@ -5,7 +5,7 @@ export const defaultTokens: PartialTokens<Tokens> = {
     '*': {
       // backdrop: ['black/0.2', '200/0.2'],
       backdrop: ['black/0.5', 'gray/100/0.5'],
-      focusRing: ['blue/500', 'blue/300'],
+      focusRing: ['blue/500', 'blue/500'],
       link: {
         fg: ['blue/400', 'blue/600'],
       },

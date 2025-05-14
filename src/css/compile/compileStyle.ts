@@ -112,7 +112,7 @@ function compileStyleRule(_selector: string, properties: Properties): string {
         ? _nestedSelector.replace(/\./g, `.${PREFIX}`)
         : _nestedSelector
 
-      css += `${nestedSelector.replace('&', selector)} {\n`
+      css += `${nestedSelector.replace(/&/g, selector)} {\n`
       css += compileProperties(nestedProperties)
       css += '}\n\n'
     }

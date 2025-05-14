@@ -128,7 +128,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     customValidity,
     disabled,
     filterOption: filterOptionProp,
-    fontSize = 1,
+    fontSize = 2,
     icon,
     id,
     listBox = EMPTY_RECORD,
@@ -167,14 +167,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const defaultRenderOption = useCallback(
     ({value}: BaseAutocompleteOption) => (
-      <Card
-        as="button"
-        // data-as="button"
-        padding={paddingProp}
-        radius={2}
-        selectable
-        // tone="inherit"
-      >
+      <Card as="button" padding={paddingProp} radius={2} tone="inherit">
         <Text size={fontSize} textOverflow="ellipsis">
           {value}
         </Text>
@@ -619,7 +612,6 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
                 {cloneElement(renderOption(option), {
                   disabled: loading,
                   selected: active,
-                  selectable: true,
                   tabIndex: listFocused && active ? 0 : -1,
                 })}
               </AutocompleteOption>
@@ -686,7 +678,6 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     handlePopoverMouseEnter,
     handlePopoverMouseLeave,
     popover,
-    radius,
     renderPopover,
   ])
 

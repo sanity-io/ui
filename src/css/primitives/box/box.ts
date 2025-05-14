@@ -12,6 +12,7 @@ import {
   inset,
   margin,
   maxWidth,
+  minWidth,
   overflow,
   padding,
   pointerEvents,
@@ -23,9 +24,6 @@ import {BoxStyleProps} from './types'
 
 /** @public */
 export function box(props: BoxStyleProps): string | undefined {
-  // props.align
-  // props.autoCols
-
   return _comp(
     'box',
     props.muted && 'muted', // todo: consider this naming
@@ -42,6 +40,7 @@ export function box(props: BoxStyleProps): string | undefined {
     inset(props),
     margin(props),
     maxWidth(props),
+    minWidth(props),
     props.outline && `outline-${props.outline}`,
     overflow(props),
     padding(props),

@@ -1,4 +1,4 @@
-import {_selectable, card, CardStyleProps, composeClassNames} from '@sanity/ui/css'
+import {card, CardStyleProps, composeClassNames} from '@sanity/ui/css'
 import {createElement, ForwardedRef, forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 
@@ -46,7 +46,7 @@ export const Card = forwardRef(function Card(
     pressed,
     radius = 0,
     scheme: schemeProp,
-    selectable,
+    // selectable,
     selected,
     shadow,
     style,
@@ -78,15 +78,11 @@ export const Card = forwardRef(function Card(
           shadow,
           tone,
         }),
-        selectable && _selectable({radius}),
       )}
-      data-context-tone={context.tone}
-      data-context-scheme={context.scheme}
       data-checkered={checkered ? '' : undefined}
       data-focus-ring={focusRing ? '' : undefined}
       data-pressed={pressed ? '' : undefined}
       data-selected={selected ? '' : undefined}
-      data-tone={tone}
       radius={radius}
       ref={ref}
       style={style}

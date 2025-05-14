@@ -23,6 +23,7 @@ import {heightStyle} from './aspects/height/height.style'
 import {insetStyle} from './aspects/inset/inset.style'
 import {marginStyle} from './aspects/margin/margin.style'
 import {maxWidthStyle} from './aspects/maxWidth/maxWidth.style'
+import {minWidthStyle} from './aspects/minWidth/minWidth.style'
 import {outlineStyle} from './aspects/outline/outline.style'
 import {overflowStyle} from './aspects/overflow/overflow.style'
 import {paddingStyle} from './aspects/padding/padding.style'
@@ -104,6 +105,7 @@ export const systemStyle: Style = _mergeStyles([
   insetStyle,
   marginStyle,
   maxWidthStyle,
+  minWidthStyle,
   outlineStyle,
   overflowStyle,
   paddingStyle,

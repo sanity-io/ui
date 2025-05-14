@@ -2,6 +2,7 @@ import {PREFIX} from '../constants'
 import {type Properties} from '../types'
 import {CompileRulesContext} from './types'
 
+// TODO: remove this
 export function compileRule(
   selector: string,
   props: Properties,
