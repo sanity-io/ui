@@ -135,7 +135,6 @@ function AsyncOption(props: {
       disabled={disabled}
       padding={3}
       radius={1}
-      selectable
       selected={selected}
       tabIndex={tabIndex}
     >
