@@ -605,6 +605,7 @@ export interface FontSizeVarNames {
 export interface FontVarNames<Size extends number> {
   family: VarName
   sizes: Record<Size, FontSizeVarNames>
+  weight: Record<FontWeight, VarName>
 }
 
 /** @public */
@@ -806,6 +807,7 @@ export interface FontSizeVars {
 export interface FontVars<Size extends number> {
   family: CSSVar
   sizes: Record<Size, FontSizeVars>
+  weight: Record<FontWeight, CSSVar>
 }
 
 /** @public */

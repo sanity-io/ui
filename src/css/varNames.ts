@@ -227,6 +227,12 @@ export const varNames: VarNames = {
         },
         {} as Record<FontCodeSize, FontSizeVarNames>,
       ),
+      weight: {
+        regular: `--font-code-weight-regular`,
+        medium: `--font-code-weight-medium`,
+        semibold: `--font-code-weight-semibold`,
+        bold: `--font-code-weight-bold`,
+      },
     },
     heading: {
       family: `--font-heading-family`,
@@ -246,6 +252,12 @@ export const varNames: VarNames = {
         },
         {} as Record<FontHeadingSize, FontSizeVarNames>,
       ),
+      weight: {
+        regular: `--font-heading-weight-regular`,
+        medium: `--font-heading-weight-medium`,
+        semibold: `--font-heading-weight-semibold`,
+        bold: `--font-heading-weight-bold`,
+      },
     },
     label: {
       family: `--font-label-family`,
@@ -265,6 +277,12 @@ export const varNames: VarNames = {
         },
         {} as Record<FontLabelSize, FontSizeVarNames>,
       ),
+      weight: {
+        regular: `--font-label-weight-regular`,
+        medium: `--font-label-weight-medium`,
+        semibold: `--font-label-weight-semibold`,
+        bold: `--font-label-weight-bold`,
+      },
     },
     text: {
       family: `--font-text-family`,
@@ -284,6 +302,12 @@ export const varNames: VarNames = {
         },
         {} as Record<FontTextSize, FontSizeVarNames>,
       ),
+      weight: {
+        regular: `--font-text-weight-regular`,
+        medium: `--font-text-weight-medium`,
+        semibold: `--font-text-weight-semibold`,
+        bold: `--font-text-weight-bold`,
+      },
     },
   },
   input: {
