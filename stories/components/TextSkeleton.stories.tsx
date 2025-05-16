@@ -1,29 +1,28 @@
-import {FontTextSize} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE, FontTextSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Skeleton, TextSkeleton, TextSkeletonProps} from '../../src/ui/components'
-import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
-import {getFontSizeControls, getSpaceControls} from '../controls'
+import {Skeleton, TextSkeleton, TextSkeletonProps} from '../../src/ui'
+import {FONT_TEXT_SIZE_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
 
 const meta: Meta<typeof TextSkeleton> = {
   component: TextSkeleton,
   argTypes: {
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    margin: getSpaceControls(),
-    marginBottom: getSpaceControls(),
-    marginLeft: getSpaceControls(),
-    marginRight: getSpaceControls(),
-    marginTop: getSpaceControls(),
-    marginY: getSpaceControls(),
-    marginX: getSpaceControls(),
-    size: getFontSizeControls('text'),
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    margin: SPACE_CONTROLS,
+    marginBottom: SPACE_CONTROLS,
+    marginLeft: SPACE_CONTROLS,
+    marginRight: SPACE_CONTROLS,
+    marginTop: SPACE_CONTROLS,
+    marginY: SPACE_CONTROLS,
+    marginX: SPACE_CONTROLS,
+    size: FONT_TEXT_SIZE_CONTROLS,
   },
   tags: ['autodocs'],
 }
@@ -45,7 +44,7 @@ export const Sizes: Story = {
           renderItem: ({value, index}) => (
             <TextSkeleton {...props} key={index} size={value as FontTextSize} />
           ),
-          rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
+          rows: [...FONT_TEXT_SIZE],
         })}
       </>
     )

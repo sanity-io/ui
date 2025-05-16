@@ -58,7 +58,7 @@ export const Button = forwardRef(function Button(
   ref: ForwardedRef<HTMLButtonElement>,
 ) {
   const {
-    align = 'center',
+    // align = 'center',
     as: As = 'button',
     children,
     className,
@@ -94,10 +94,9 @@ export const Button = forwardRef(function Button(
     type = 'button',
     muted = false,
     width,
-    wrap,
+    // wrap,
     ...restProps
   } = props
-  // const {button: buttonTheme} = useTheme_v2()
 
   return (
     <As
@@ -183,9 +182,9 @@ export const Button = forwardRef(function Button(
           // direction={direction}
           // display="flex"
           flex={1}
-          gap={gap}
-          gapX={gapX}
-          gapY={gapY}
+          // gap={gap}
+          // gapX={gapX}
+          // gapY={gapY}
           // justify={justify}
           padding={padding}
           paddingX={paddingX}

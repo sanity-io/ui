@@ -17,26 +17,26 @@ import {
   TextSkeleton,
   TextSkeletonProps,
 } from '../../src/ui'
-import {getSpaceControls} from '../controls'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {
   component: Skeleton,
   args: {animated: true},
   argTypes: {
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    margin: getSpaceControls(),
-    marginBottom: getSpaceControls(),
-    marginLeft: getSpaceControls(),
-    marginRight: getSpaceControls(),
-    marginTop: getSpaceControls(),
-    marginY: getSpaceControls(),
-    marginX: getSpaceControls(),
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    margin: SPACE_CONTROLS,
+    marginBottom: SPACE_CONTROLS,
+    marginLeft: SPACE_CONTROLS,
+    marginRight: SPACE_CONTROLS,
+    marginTop: SPACE_CONTROLS,
+    marginY: SPACE_CONTROLS,
+    marginX: SPACE_CONTROLS,
   },
   tags: ['autodocs'],
 }

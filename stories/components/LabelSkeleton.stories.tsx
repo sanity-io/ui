@@ -1,29 +1,28 @@
-import {FontLabelSize} from '@sanity/ui/theme'
+import {FONT_LABEL_SIZE, FontLabelSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {LabelSkeleton, LabelSkeletonProps, Skeleton} from '../../src/ui/components'
-import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
-import {getFontSizeControls, getSpaceControls} from '../controls'
+import {LabelSkeleton, LabelSkeletonProps, Skeleton} from '../../src/ui'
+import {FONT_LABEL_SIZE_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
 
 const meta: Meta<typeof LabelSkeleton> = {
   component: LabelSkeleton,
   argTypes: {
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    margin: getSpaceControls(),
-    marginBottom: getSpaceControls(),
-    marginLeft: getSpaceControls(),
-    marginRight: getSpaceControls(),
-    marginTop: getSpaceControls(),
-    marginY: getSpaceControls(),
-    marginX: getSpaceControls(),
-    size: getFontSizeControls('label'),
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    margin: SPACE_CONTROLS,
+    marginBottom: SPACE_CONTROLS,
+    marginLeft: SPACE_CONTROLS,
+    marginRight: SPACE_CONTROLS,
+    marginTop: SPACE_CONTROLS,
+    marginY: SPACE_CONTROLS,
+    marginX: SPACE_CONTROLS,
+    size: FONT_LABEL_SIZE_CONTROLS,
   },
   tags: ['autodocs'],
 }
@@ -45,7 +44,7 @@ export const Sizes: Story = {
           renderItem: ({value, index}) => (
             <LabelSkeleton {...props} key={index} size={value as FontLabelSize} />
           ),
-          rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
+          rows: [...FONT_LABEL_SIZE],
         })}
       </>
     )

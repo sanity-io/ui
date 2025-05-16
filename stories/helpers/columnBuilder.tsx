@@ -1,7 +1,7 @@
 import {ComponentProps, ReactNode} from 'react'
 
-import {Card, Stack} from '../../src/ui/primitives'
 import {ThemeColorSchemeKey} from '../../src/theme'
+import {Card, Stack} from '../../src/ui'
 
 interface ColumnBuilderProps<T> {
   gap?: ComponentProps<typeof Stack>['space']

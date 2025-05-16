@@ -1,8 +1,8 @@
+import {RADIUS, THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, KBD, Stack} from '../../src/ui/primitives'
-import {CARD_TONES, RADII} from '../constants'
-import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {Card, KBD, Stack} from '../../src/ui'
+import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof KBD> = {
@@ -11,9 +11,9 @@ const meta: Meta<typeof KBD> = {
     style: {verticalAlign: 'top'},
   },
   argTypes: {
-    fontSize: getFontSizeControls('code'),
-    padding: getSpaceControls(),
-    radius: getRadiusControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    padding: SPACE_CONTROLS,
+    radius: RADIUS_CONTROLS,
   },
   component: KBD,
   tags: ['autodocs'],
@@ -42,7 +42,7 @@ export const Radius: Story = {
             {value}
           </KBD>
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),
@@ -58,7 +58,7 @@ export const InheritedTones: Story = {
               <KBD {...props}>{value}</KBD>
             </Card>
           ),
-          rows: CARD_TONES,
+          rows: [...THEME_COLOR_CARD_TONES],
         })}
       </Stack>
     )

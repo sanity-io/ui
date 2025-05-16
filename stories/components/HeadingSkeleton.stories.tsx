@@ -1,29 +1,28 @@
-import {FontHeadingSize} from '@sanity/ui/theme'
+import {FONT_HEADING_SIZE, FontHeadingSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {HeadingSkeleton, HeadingSkeletonProps, Skeleton} from '../../src/ui/components'
-import {defaultThemeFonts} from '../../src/theme/defaults/fonts'
-import {getFontSizeControls, getSpaceControls} from '../controls'
+import {HeadingSkeleton, HeadingSkeletonProps, Skeleton} from '../../src/ui'
+import {FONT_HEADING_SIZE_CONTROLS, SPACE_CONTROLS} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
 
 const meta: Meta<typeof HeadingSkeleton> = {
   component: HeadingSkeleton,
   argTypes: {
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    margin: getSpaceControls(),
-    marginBottom: getSpaceControls(),
-    marginLeft: getSpaceControls(),
-    marginRight: getSpaceControls(),
-    marginTop: getSpaceControls(),
-    marginY: getSpaceControls(),
-    marginX: getSpaceControls(),
-    size: getFontSizeControls('heading'),
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    margin: SPACE_CONTROLS,
+    marginBottom: SPACE_CONTROLS,
+    marginLeft: SPACE_CONTROLS,
+    marginRight: SPACE_CONTROLS,
+    marginTop: SPACE_CONTROLS,
+    marginY: SPACE_CONTROLS,
+    marginX: SPACE_CONTROLS,
+    size: FONT_HEADING_SIZE_CONTROLS,
   },
   tags: ['autodocs'],
 }
@@ -45,7 +44,7 @@ export const Sizes: Story = {
           renderItem: ({value, index}) => (
             <HeadingSkeleton {...props} key={index} size={value as FontHeadingSize} />
           ),
-          rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
+          rows: [...FONT_HEADING_SIZE],
         })}
       </>
     )

@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
 import {Breadcrumbs, Text} from '../../src/ui'
-import {getSpaceControls} from '../controls'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Breadcrumbs> = {
   args: {
@@ -17,7 +17,7 @@ const meta: Meta<typeof Breadcrumbs> = {
       <Text key="item">Item</Text>,
     ],
   },
-  argTypes: {space: getSpaceControls()},
+  argTypes: {space: SPACE_CONTROLS},
   component: Breadcrumbs,
   tags: ['autodocs'],
 }

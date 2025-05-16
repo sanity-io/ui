@@ -14,6 +14,7 @@ import {
   Avatar,
   Button,
   Card,
+  CardProvider,
   Checkbox,
   Flex,
   Heading,
@@ -22,19 +23,17 @@ import {
   MenuDivider,
   MenuItem,
   Radio,
+  RootClassNames,
   Select,
   Stack,
+  StyleTags,
   Switch,
   Tab,
   TabList,
   Text,
   TextArea,
   TextInput,
-  ThemeProvider,
 } from '../../src/ui'
-import {buildTheme} from '../../src/theme'
-
-const theme = buildTheme()
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
   return (
@@ -49,8 +48,10 @@ const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
 
 export function FocusRings(): ReactNode {
   return (
-    <ThemeProvider scheme="light" theme={theme}>
-      <Card padding={5}>
+    <CardProvider scheme="light" tone="default">
+      <RootClassNames element={document.documentElement} />
+      <StyleTags />
+      <Card padding={5} tone="inherit">
         <Stack space={7}>
           <Stack space={6}>
             <Heading>Primitives</Heading>
@@ -216,6 +217,6 @@ export function FocusRings(): ReactNode {
           </Stack>
         </Stack>
       </Card>
-    </ThemeProvider>
+    </CardProvider>
   )
 }

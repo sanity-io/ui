@@ -1,14 +1,14 @@
 import {CloseIcon, SearchIcon} from '@sanity/icons'
+import {RADIUS, THEME_COLOR_BUTTON_MODES, THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Button, Flex, Grid, Stack, Text} from '../../src/ui/primitives'
-import {BUTTON_MODES, BUTTON_TONES, RADII} from '../constants'
+import {Button, Flex, Grid, Stack, Text} from '../../src/ui'
 import {
-  getButtonWidthControls,
-  getFontSizeControls,
-  getIconControls,
-  getRadiusControls,
-  getSpaceControls,
+  BUTTON_WIDTH_CONTROLS,
+  FONT_TEXT_SIZE_CONTROLS,
+  ICON_CONTROLS,
+  RADIUS_CONTROLS,
+  SPACE_CONTROLS,
 } from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 import {rowBuilder} from '../helpers/rowBuilder'
@@ -19,14 +19,14 @@ const meta: Meta<typeof Button> = {
   },
   argTypes: {
     disabled: {control: 'boolean'},
-    fontSize: getFontSizeControls('text'),
-    icon: getIconControls(),
-    iconRight: getIconControls(),
-    padding: getSpaceControls(),
-    radius: getRadiusControls(),
-    space: getSpaceControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    icon: ICON_CONTROLS,
+    iconRight: ICON_CONTROLS,
+    padding: SPACE_CONTROLS,
+    radius: RADIUS_CONTROLS,
+    space: SPACE_CONTROLS,
     text: {control: 'text'},
-    width: getButtonWidthControls(),
+    width: BUTTON_WIDTH_CONTROLS,
   },
   component: Button,
   tags: ['autodocs'],
@@ -67,7 +67,7 @@ export const Radius: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => <Button {...props} key={value} radius={value} text={value} />,
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),
@@ -83,7 +83,7 @@ export const Modes: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => <Button {...props} key={value} mode={value} text={value} />,
-        rows: BUTTON_MODES,
+        rows: [...THEME_COLOR_BUTTON_MODES],
       })}
     </>
   ),
@@ -99,7 +99,7 @@ export const Tones: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => <Button {...props} key={value} text={value} tone={value} />,
-        rows: BUTTON_TONES,
+        rows: [...THEME_COLOR_STATE_TONES],
       })}
     </>
   ),
@@ -161,8 +161,8 @@ export const MultipleStyles: Story = {
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',
-            columns: BUTTON_MODES,
-            rows: BUTTON_TONES,
+            columns: [...THEME_COLOR_BUTTON_MODES],
+            rows: [...THEME_COLOR_STATE_TONES],
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
             renderItem: ({row, column}) => (
@@ -186,8 +186,8 @@ export const MultipleStyles: Story = {
           })}
           {matrixBuilder({
             scheme: 'dark',
-            columns: BUTTON_MODES,
-            rows: BUTTON_TONES,
+            columns: [...THEME_COLOR_BUTTON_MODES],
+            rows: [...THEME_COLOR_STATE_TONES],
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
 
@@ -221,16 +221,12 @@ export const CustomButton: Story = {
     return (
       <Flex align="center" height="fill" justify="center">
         <Stack space={2}>
-          <Grid columns={5} gap={1}>
-            {BUTTON_TONES.map((tone) => (
+          <Grid columns={THEME_COLOR_STATE_TONES.length} gap={1}>
+            {THEME_COLOR_STATE_TONES.map((tone) => (
               <Button {...props} key={tone} mode="bleed" padding={3} tone={tone} text={undefined}>
                 <Stack space={2}>
-                  <Text>{tone}</Text>
+                  <Text>Text ({tone})</Text>
                   <Text muted>Muted</Text>
-                  <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="">Link</a>
-                  </Text>
                   <Text>
                     <code>Code</code>
                   </Text>
@@ -239,16 +235,12 @@ export const CustomButton: Story = {
               </Button>
             ))}
           </Grid>
-          <Grid columns={5} gap={1}>
-            {BUTTON_TONES.map((tone) => (
+          <Grid columns={THEME_COLOR_STATE_TONES.length} gap={1}>
+            {THEME_COLOR_STATE_TONES.map((tone) => (
               <Button {...props} key={tone} mode="ghost" padding={3} tone={tone} text={undefined}>
                 <Stack space={2}>
-                  <Text>{tone}</Text>
+                  <Text>Text: ({tone})</Text>
                   <Text muted>Muted</Text>
-                  <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="">Link</a>
-                  </Text>
                   <Text>
                     <code>Code</code>
                   </Text>
@@ -258,16 +250,12 @@ export const CustomButton: Story = {
             ))}
           </Grid>
 
-          <Grid columns={5} gap={1}>
-            {BUTTON_TONES.map((tone) => (
+          <Grid columns={THEME_COLOR_STATE_TONES.length} gap={1}>
+            {THEME_COLOR_STATE_TONES.map((tone) => (
               <Button {...props} key={tone} mode="default" padding={3} tone={tone} text={undefined}>
                 <Stack space={2}>
-                  <Text>{tone}</Text>
+                  <Text>Text: ({tone})</Text>
                   <Text muted>Muted</Text>
-                  <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="">Link</a>
-                  </Text>
                   <Text>
                     <code>Code</code>
                   </Text>

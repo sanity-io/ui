@@ -1,8 +1,8 @@
 import {SearchIcon} from '@sanity/icons'
+import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 
 import {Autocomplete, Card} from '../../src/ui'
-import {RADII} from '../constants'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Autocomplete> = {
@@ -47,7 +47,7 @@ export const Radius: Story = {
         renderItem: ({value, index}) => (
           <Autocomplete {...props} key={index} placeholder={String(value)} radius={value} />
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),

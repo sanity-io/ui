@@ -2,10 +2,20 @@ import {BinaryDocumentIcon, CircleIcon, RestoreIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 import {fn} from '@storybook/test'
 
-import {Menu, MenuDivider, MenuGroup, MenuItem} from '../../src/ui/components'
-import {Badge, Card, Container, Flex, Stack, Text} from '../../src/ui/primitives'
-import {LayerProvider} from '../../src/ui/utils'
-import {getSpaceControls} from '../controls'
+import {
+  Badge,
+  Card,
+  Container,
+  Flex,
+  LayerProvider,
+  Menu,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  Stack,
+  Text,
+} from '../../src/ui'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Menu> = {
   args: {
@@ -15,16 +25,16 @@ const meta: Meta<typeof Menu> = {
     onItemSelect: fn(),
   },
   argTypes: {
-    padding: getSpaceControls(),
-    space: getSpaceControls(),
+    padding: SPACE_CONTROLS,
+    space: SPACE_CONTROLS,
     // todo
     // disabled: {control: 'boolean'},
-    paddingX: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
+    paddingX: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
   },
   component: Menu,
   tags: ['autodocs'],

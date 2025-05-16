@@ -1,4 +1,3 @@
-// import {scopeClassName as _} from './scopeClassName'
 import {ResponsiveProp} from './types'
 
 function _(className: string) {

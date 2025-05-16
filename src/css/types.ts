@@ -1,3 +1,4 @@
+import {ColorTintKey} from '@sanity/color'
 import {
   type AvatarSize,
   type ContainerWidth,
@@ -58,7 +59,7 @@ export type ThemeVarName =
   | `--card-border-width`
   | `--card-focus-ring-offset`
   | `--card-focus-ring-width`
-  | `--shadow-outline`
+  | `--card-shadow-outline`
   | `--container-${ContainerWidth}`
   | `--font-code-family`
   | `--font-code-feature-settings`
@@ -604,12 +605,27 @@ export interface FontSizeVarNames {
 
 export interface FontVarNames<Size extends number> {
   family: VarName
+  featureSettings: VarName
   sizes: Record<Size, FontSizeVarNames>
-  weight: Record<FontWeight, VarName>
+  weights: Record<FontWeight, VarName>
 }
 
 /** @public */
 export interface VarNames {
+  button: {
+    border: {
+      width: VarName
+    }
+    focusRing: {
+      offset: VarName
+      width: VarName
+    }
+  }
+  card: {
+    shadow: {
+      outline: VarName
+    }
+  }
   color: Record<Scheme, ColorSchemeVarNames> &
     ScopedColorVarNames &
     Record<CardTone, ColorCardVarNames>
@@ -630,17 +646,85 @@ export interface VarNames {
     text: FontVarNames<FontTextSize>
   }
   input: {
+    border: {
+      width: VarName
+    }
+
+    checkbox: {
+      focusRing: {
+        offset: VarName
+        width: VarName
+      }
+      size: VarName
+    }
+
+    radio: {
+      focusRing: {
+        offset: VarName
+        width: VarName
+      }
+      markSize: VarName
+      size: VarName
+    }
+
+    select: {
+      focusRing: {
+        offset: VarName
+        width: VarName
+      }
+    }
+
+    switch: {
+      focusRing: {
+        offset: VarName
+        width: VarName
+      }
+      height: VarName
+      padding: VarName
+
+      transitionDurationMs: VarName
+      transitionTimingFunction: VarName
+      width: VarName
+    }
+
+    text: {
+      focusRing: {
+        offset: VarName
+        width: VarName
+      }
+    }
+
     fontSize: VarName
     lineHeight: VarName
     letterSpacing: VarName
     ascenderHeight: VarName
     descenderHeight: VarName
-    // capHeight: CSSVarName
     gap: VarName
     padding: VarName
   }
   radius: Record<Radius, VarName>
+  shadow: Record<
+    Shadow,
+    {
+      umbra: VarName
+      penumbra: VarName
+      ambient: VarName
+    }
+  >
   space: Record<Space, VarName>
+
+  // color
+  black: VarName
+  white: VarName
+  gray: Record<ColorTintKey, VarName>
+  blue: Record<ColorTintKey, VarName>
+  purple: Record<ColorTintKey, VarName>
+  magenta: Record<ColorTintKey, VarName>
+  red: Record<ColorTintKey, VarName>
+  orange: Record<ColorTintKey, VarName>
+  yellow: Record<ColorTintKey, VarName>
+  green: Record<ColorTintKey, VarName>
+  cyan: Record<ColorTintKey, VarName>
 }
 
 /** @public */
@@ -817,6 +901,11 @@ export interface Vars {
     size: CSSVar
     sizes: Record<AvatarSize, {distance: CSSVar; size: CSSVar}>
   }
+  card: {
+    shadow: {
+      outline: CSSVar
+    }
+  }
   color: {
     dark: ColorSchemeVars
     light: ColorSchemeVars
@@ -848,5 +937,19 @@ export interface Vars {
     }
   }
   radius: Record<Radius, CSSVar>
+  shadow: Record<Shadow, {umbra: CSSVar; penumbra: CSSVar; ambient: CSSVar}>
   space: Record<Space, CSSVar>
+
+  // color
+  black: CSSVar
+  white: CSSVar
+  gray: Record<ColorTintKey, CSSVar>
+  blue: Record<ColorTintKey, CSSVar>
+  purple: Record<ColorTintKey, CSSVar>
+  magenta: Record<ColorTintKey, CSSVar>
+  red: Record<ColorTintKey, CSSVar>
+  orange: Record<ColorTintKey, CSSVar>
+  yellow: Record<ColorTintKey, CSSVar>
+  green: Record<ColorTintKey, CSSVar>
+  cyan: Record<ColorTintKey, CSSVar>
 }

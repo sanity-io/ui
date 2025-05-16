@@ -1,8 +1,7 @@
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {useId} from 'react'
 
-import {Toast, ToastProvider, useToast} from '../../src/ui/components'
-import {Box, Button, Grid, Heading, Inline} from '../../src/ui/primitives'
+import {Box, Button, Grid, Heading, Inline, Toast, ToastProvider, useToast} from '../../src/ui'
 
 const meta: Meta<typeof Toast> = {
   args: {title: 'Toast title', description: 'Toast description'},

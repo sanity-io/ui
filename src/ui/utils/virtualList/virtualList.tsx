@@ -1,4 +1,7 @@
+import {vars} from '@sanity/ui/css'
+import {Space} from '@sanity/ui/theme'
 import {
+  CSSProperties,
   ForwardedRef,
   forwardRef,
   ReactElement,
@@ -10,7 +13,6 @@ import {
   useState,
 } from 'react'
 
-import {useTheme_v2} from '../../_compat'
 import {_isScrollable} from '../../helpers'
 import {_ResizeObserver} from '../../observers'
 import {Box, StackProps} from '../../primitives'
@@ -32,7 +34,7 @@ export interface VirtualListChangeOpts {
  * @beta
  */
 export interface VirtualListProps<Item = any> extends Omit<StackProps, 'gap'> {
-  gap?: number
+  gap?: Space
   getItemKey?: (item: Item, itemIndex: number) => string
   items?: Item[]
   onChange?: (opts: VirtualListChangeOpts) => void
@@ -46,26 +48,17 @@ export const VirtualList = forwardRef(function VirtualList(
   props: Props<VirtualListProps, 'div'>,
   forwardedRef: ForwardedRef<HTMLDivElement>,
 ): ReactElement {
-  const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
-  const {space} = useTheme_v2()
+  const {gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
   const ref = useRef<HTMLDivElement | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const [scrollTop, setScrollTop] = useState(0)
   const [scrollHeight, setScrollHeight] = useState(0)
   const [itemHeight, setItemHeight] = useState(-1)
 
+  const [gapValue, setGapValue] = useState(0)
+
   // Sync ref to parent
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
-
-  useEffect(() => {
-    if (!wrapperRef.current) return
-
-    const firstElement = wrapperRef.current.firstChild
-
-    if (firstElement instanceof HTMLElement) {
-      setItemHeight(firstElement.offsetHeight)
-    }
-  }, [renderItem])
 
   useEffect((): (() => void) | undefined => {
     if (!ref.current) return
@@ -119,23 +112,42 @@ export const VirtualList = forwardRef(function VirtualList(
   }, [])
 
   const len = items.length
-  const height = itemHeight ? len * (itemHeight + space[gap]) - space[gap] : 0
+  const height = itemHeight ? len * (itemHeight + gapValue) - gapValue : 0
   const fromIndex = height ? Math.max(Math.floor((scrollTop / height) * len) - 2, 0) : 0
   const toIndex = height ? Math.ceil(((scrollTop + scrollHeight) / height) * len) + 1 : 0
 
   useEffect(() => {
-    if (!onChange) return
-    onChange({fromIndex, gap: space[gap], itemHeight, scrollHeight, scrollTop, toIndex})
-  }, [fromIndex, gap, itemHeight, onChange, scrollHeight, scrollTop, space, toIndex])
+    onChange?.({
+      fromIndex,
+      gap: gapValue,
+      itemHeight,
+      scrollHeight,
+      scrollTop,
+      toIndex,
+    })
+  }, [fromIndex, gapValue, itemHeight, onChange, scrollHeight, scrollTop, toIndex])
 
   const children = useMemo(() => {
     if (!renderItem || items.length === 0) return null
 
     if (itemHeight === -1) {
       return [
-        <Box insetTop={0} insetLeft={0} insetRight={0} key={0} position="absolute">
-          {renderItem(items[0])}
-        </Box>,
+        <>
+          <Box
+            ref={(el) => (el ? setItemHeight(el.offsetHeight) : undefined)}
+            insetTop={0}
+            insetLeft={0}
+            insetRight={0}
+            key={0}
+            position="absolute"
+          >
+            {renderItem(items[0])}
+          </Box>
+          <div
+            ref={(el) => (el ? setGapValue(el.offsetHeight) : undefined)}
+            style={{height: vars.space[gap]}}
+          />
+        </>,
       ]
     }
 
@@ -150,25 +162,18 @@ export const VirtualList = forwardRef(function VirtualList(
           insetRight={0}
           key={key}
           position="absolute"
-          style={{top: itemIndex * (itemHeight + space[gap])}}
+          style={{top: itemIndex * (itemHeight + gapValue) - gapValue}}
         >
           {node}
         </Box>
       )
     })
-  }, [fromIndex, gap, getItemKey, itemHeight, items, renderItem, space, toIndex])
+  }, [fromIndex, gap, gapValue, getItemKey, itemHeight, items, renderItem, toIndex])
 
-  const wrapperStyle = useMemo(() => ({height}), [height])
+  const wrapperStyle: CSSProperties = useMemo(() => ({height}), [height])
 
   return (
-    <Box
-      // Root
-      as={as}
-      data-ui="VirtualList"
-      {...restProps}
-      position="relative"
-      ref={ref}
-    >
+    <Box data-ui="VirtualList" {...restProps} position="relative" ref={ref}>
       <div ref={wrapperRef} style={wrapperStyle}>
         {children}
       </div>

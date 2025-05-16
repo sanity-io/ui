@@ -52,7 +52,7 @@ export const TooltipCard = memo(
       scheme,
       shadow,
       style,
-      tone,
+      tone = 'inherit',
       ...restProps
     } = props
 

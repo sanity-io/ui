@@ -35,6 +35,7 @@ import {origin} from '../../middleware/origin'
 import type {Placement, Props} from '../../types'
 import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
 import {getElementRef} from '../../utils/getElementRef'
+import {CardProvider, useCard} from '../card'
 import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -109,9 +110,10 @@ export const Tooltip = forwardRef(function Tooltip(
     scheme,
     shadow = 2,
     zOffset = Z_OFFSETS.tooltip,
-    tone,
+    tone = 'inherit',
     ...restProps
   } = props
+  const card = useCard()
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
@@ -399,7 +401,12 @@ export const Tooltip = forwardRef(function Tooltip(
     showTooltip &&
     (portalProp ? (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        {node}
+        <CardProvider
+          tone={tone === 'inherit' ? (card?.tone ?? 'default') : tone}
+          scheme={scheme ?? 'light'}
+        >
+          {node}
+        </CardProvider>
       </Portal>
     ) : (
       node

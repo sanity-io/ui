@@ -1,8 +1,13 @@
+import {RADIUS, THEME_COLOR_CARD_TONES, THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Badge, Card, Flex, Stack} from '../../src/ui/primitives'
-import {BADGE_TONES, CARD_TONES, RADII} from '../constants'
-import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
+import {Badge, Card, Flex, Stack} from '../../src/ui'
+import {
+  ELEMENT_TONES_CONTROLS,
+  FONT_TEXT_SIZE_CONTROLS,
+  RADIUS_CONTROLS,
+  SPACE_CONTROLS,
+} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Badge> = {
@@ -11,9 +16,10 @@ const meta: Meta<typeof Badge> = {
     children: 'Jackdaws love my big sphinx of quartz',
   },
   argTypes: {
-    fontSize: getFontSizeControls('label'),
-    padding: getSpaceControls(),
-    radius: getRadiusControls(),
+    fontSize: FONT_TEXT_SIZE_CONTROLS,
+    padding: SPACE_CONTROLS,
+    radius: RADIUS_CONTROLS,
+    tone: ELEMENT_TONES_CONTROLS,
   },
   tags: ['autodocs'],
 }
@@ -39,7 +45,7 @@ export const Radius: Story = {
             {value}
           </Badge>
         ),
-        rows: RADII,
+        rows: [...RADIUS],
       })}
     </>
   ),
@@ -60,7 +66,7 @@ export const Tones: Story = {
             {value}
           </Badge>
         ),
-        rows: BADGE_TONES,
+        rows: [...THEME_COLOR_STATE_TONES],
       })}
     </>
   ),
@@ -78,7 +84,7 @@ export const InheritedTones: Story = {
               </Flex>
             </Card>
           ),
-          rows: CARD_TONES,
+          rows: [...THEME_COLOR_CARD_TONES],
         })}
       </Stack>
     )

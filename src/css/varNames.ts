@@ -1,3 +1,4 @@
+import {COLOR_HUES, COLOR_TINTS, ColorHueKey, ColorTintKey} from '@sanity/color'
 import {
   AVATAR_SIZE,
   AvatarSize,
@@ -11,6 +12,8 @@ import {
   type FontTextSize,
   RADIUS,
   Radius,
+  SHADOW,
+  Shadow,
   SPACE,
   type Space,
   THEME_COLOR_STATE_TONES,
@@ -46,6 +49,20 @@ export const varNames: VarNames = {
       },
       {} as Record<AvatarSize, {distance: VarName; size: VarName}>,
     ),
+  },
+  button: {
+    border: {
+      width: `--button-border-width`,
+    },
+    focusRing: {
+      offset: `--button-focus-ring-offset`,
+      width: `--button-focus-ring-width`,
+    },
+  },
+  card: {
+    shadow: {
+      outline: `--card-shadow-outline`,
+    },
   },
   color: {
     // card scope
@@ -211,6 +228,7 @@ export const varNames: VarNames = {
   font: {
     code: {
       family: `--font-code-family`,
+      featureSettings: `--font-code-feature-settings`,
       sizes: FONT_CODE_SIZE.reduce(
         (acc, size) => {
           return {
@@ -227,7 +245,7 @@ export const varNames: VarNames = {
         },
         {} as Record<FontCodeSize, FontSizeVarNames>,
       ),
-      weight: {
+      weights: {
         regular: `--font-code-weight-regular`,
         medium: `--font-code-weight-medium`,
         semibold: `--font-code-weight-semibold`,
@@ -236,6 +254,7 @@ export const varNames: VarNames = {
     },
     heading: {
       family: `--font-heading-family`,
+      featureSettings: `--font-heading-feature-settings`,
       sizes: FONT_HEADING_SIZE.reduce(
         (acc, size) => {
           return {
@@ -252,7 +271,7 @@ export const varNames: VarNames = {
         },
         {} as Record<FontHeadingSize, FontSizeVarNames>,
       ),
-      weight: {
+      weights: {
         regular: `--font-heading-weight-regular`,
         medium: `--font-heading-weight-medium`,
         semibold: `--font-heading-weight-semibold`,
@@ -261,6 +280,7 @@ export const varNames: VarNames = {
     },
     label: {
       family: `--font-label-family`,
+      featureSettings: `--font-label-feature-settings`,
       sizes: FONT_LABEL_SIZE.reduce(
         (acc, size) => {
           return {
@@ -277,7 +297,7 @@ export const varNames: VarNames = {
         },
         {} as Record<FontLabelSize, FontSizeVarNames>,
       ),
-      weight: {
+      weights: {
         regular: `--font-label-weight-regular`,
         medium: `--font-label-weight-medium`,
         semibold: `--font-label-weight-semibold`,
@@ -286,6 +306,7 @@ export const varNames: VarNames = {
     },
     text: {
       family: `--font-text-family`,
+      featureSettings: `--font-text-feature-settings`,
       sizes: FONT_TEXT_SIZE.reduce(
         (acc, size) => {
           return {
@@ -302,7 +323,7 @@ export const varNames: VarNames = {
         },
         {} as Record<FontTextSize, FontSizeVarNames>,
       ),
-      weight: {
+      weights: {
         regular: `--font-text-weight-regular`,
         medium: `--font-text-weight-medium`,
         semibold: `--font-text-weight-semibold`,
@@ -311,7 +332,55 @@ export const varNames: VarNames = {
     },
   },
   input: {
+    border: {
+      width: `--input-border-width`,
+    },
+
+    checkbox: {
+      focusRing: {
+        offset: `--input-checkbox-focus-ring-offset`,
+        width: `--input-checkbox-focus-ring-width`,
+      },
+      size: `--input-checkbox-size`,
+    },
+
+    radio: {
+      focusRing: {
+        offset: `--input-radio-focus-ring-offset`,
+        width: `--input-radio-focus-ring-width`,
+      },
+      markSize: `--input-radio-mark-size`,
+      size: `--input-radio-size`,
+    },
+
+    select: {
+      focusRing: {
+        offset: `--input-select-focus-ring-offset`,
+        width: `--input-select-focus-ring-width`,
+      },
+    },
+
+    switch: {
+      focusRing: {
+        offset: `--input-switch-focus-ring-offset`,
+        width: `--input-switch-focus-ring-width`,
+      },
+      height: `--input-switch-height`,
+      padding: `--input-switch-padding`,
+      transitionDurationMs: `--input-switch-transition-duration-ms`,
+      transitionTimingFunction: `--input-switch-transition-timing-function`,
+      width: `--input-switch-width`,
+    },
+
+    text: {
+      focusRing: {
+        offset: `--input-text-focus-ring-offset`,
+        width: `--input-text-focus-ring-width`,
+      },
+    },
+
     fontSize: `--input-font-size`,
+
     lineHeight: `--input-line-height`,
     letterSpacing: `--input-letter-spacing`,
     ascenderHeight: `--input-ascender-height`,
@@ -324,9 +393,37 @@ export const varNames: VarNames = {
   radius: Object.fromEntries(
     RADIUS.map((radius) => [radius, `--radius-${radius}` as VarName]),
   ) as Record<Radius, VarName>,
+  shadow: Object.fromEntries(
+    SHADOW.map((shadow) => [
+      shadow,
+      {
+        umbra: `--shadow-${shadow}-umbra`,
+        penumbra: `--shadow-${shadow}-penumbra`,
+        ambient: `--shadow-${shadow}-ambient`,
+      },
+    ]),
+  ) as Record<Shadow, {umbra: VarName; penumbra: VarName; ambient: VarName}>,
   space: Object.fromEntries(
     SPACE.map((space) => [space, `--space-${String(space).replace('.', '_')}` as VarName]),
   ) as Record<Space, VarName>,
+
+  // color
+  black: `--black`,
+  white: `--white`,
+  ...COLOR_HUES.reduce(
+    (acc, hue) => {
+      const tints = {} as Record<ColorTintKey, VarName>
+
+      for (const tint of COLOR_TINTS) {
+        tints[tint] = `--${hue}-${tint}`
+      }
+
+      acc[hue] = tints
+
+      return acc
+    },
+    {} as Record<ColorHueKey, Record<ColorTintKey, VarName>>,
+  ),
 } as const
 
 function buildColorCardVarNames(props: {scheme?: Scheme; tone: CardTone}): ColorCardVarNames {

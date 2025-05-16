@@ -52,47 +52,47 @@ function resolveCardColorTokens(
     avatar: {
       gray: {
         _hue: tokens?.avatar?.gray?._hue ?? 'gray',
-        bg: tokens?.avatar?.gray?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.gray?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.gray?.fg ?? ['900', '900'],
       },
       blue: {
         _hue: tokens?.avatar?.blue?._hue ?? 'blue',
-        bg: tokens?.avatar?.blue?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.blue?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.blue?.fg ?? ['900', '900'],
       },
       purple: {
         _hue: tokens?.avatar?.purple?._hue ?? 'purple',
-        bg: tokens?.avatar?.purple?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.purple?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.purple?.fg ?? ['900', '900'],
       },
       magenta: {
         _hue: tokens?.avatar?.magenta?._hue ?? 'magenta',
-        bg: tokens?.avatar?.magenta?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.magenta?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.magenta?.fg ?? ['900', '900'],
       },
       red: {
         _hue: tokens?.avatar?.red?._hue ?? 'red',
-        bg: tokens?.avatar?.red?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.red?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.red?.fg ?? ['900', '900'],
       },
       orange: {
         _hue: tokens?.avatar?.orange?._hue ?? 'orange',
-        bg: tokens?.avatar?.orange?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.orange?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.orange?.fg ?? ['900', '900'],
       },
       yellow: {
         _hue: tokens?.avatar?.yellow?._hue ?? 'yellow',
-        bg: tokens?.avatar?.yellow?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.yellow?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.yellow?.fg ?? ['900', '900'],
       },
       green: {
         _hue: tokens?.avatar?.green?._hue ?? 'green',
-        bg: tokens?.avatar?.green?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.green?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.green?.fg ?? ['900', '900'],
       },
       cyan: {
         _hue: tokens?.avatar?.cyan?._hue ?? 'cyan',
-        bg: tokens?.avatar?.cyan?.bg ?? ['400', '400'],
+        bg: tokens?.avatar?.cyan?.bg ?? ['400', '500'],
         fg: tokens?.avatar?.cyan?.fg ?? ['900', '900'],
       },
     },

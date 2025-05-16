@@ -1,17 +1,17 @@
 import {AddCircleIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Card, Flex, Stack, Text} from '../../src/ui/primitives'
-import {getAlignControls, getFontSizeControls, getTextOverflowControls} from '../controls'
+import {Card, Flex, Stack, Text} from '../../src/ui'
+import {FONT_TEXT_SIZE_CONTROLS, TEXT_ALIGN_CONTROLS, TEXT_OVERFLOW_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Text> = {
   args: {
     children: 'Jackdaws love my big sphinx of quartz',
   },
   argTypes: {
-    align: getAlignControls(),
-    size: getFontSizeControls('text'),
-    textOverflow: getTextOverflowControls(),
+    align: TEXT_ALIGN_CONTROLS,
+    size: FONT_TEXT_SIZE_CONTROLS,
+    textOverflow: TEXT_OVERFLOW_CONTROLS,
   },
   component: Text,
   tags: ['autodocs'],

@@ -1,3 +1,4 @@
+import {COLOR_HUES, COLOR_TINTS, ColorHueKey, ColorTintKey} from '@sanity/color'
 import {
   AVATAR_SIZE,
   AvatarSize,
@@ -11,6 +12,8 @@ import {
   type FontTextSize,
   RADIUS,
   Radius,
+  SHADOW,
+  Shadow,
   SPACE,
   type Space,
   THEME_COLOR_AVATAR_COLORS,
@@ -190,6 +193,11 @@ export const vars: Vars = {
       {} as Record<AvatarSize, {distance: CSSVar; size: CSSVar}>,
     ),
   },
+  card: {
+    shadow: {
+      outline: `var(${varNames.card.shadow.outline})`,
+    },
+  },
   color: colorVars,
   container: {
     0: `var(${varNames.container[0]})`,
@@ -219,10 +227,10 @@ export const vars: Vars = {
         {} as Record<FontCodeSize, FontSizeVars>,
       ),
       weight: {
-        regular: `var(${varNames.font.code.weight.regular})`,
-        medium: `var(${varNames.font.code.weight.medium})`,
-        semibold: `var(${varNames.font.code.weight.semibold})`,
-        bold: `var(${varNames.font.code.weight.bold})`,
+        regular: `var(${varNames.font.code.weights.regular})`,
+        medium: `var(${varNames.font.code.weights.medium})`,
+        semibold: `var(${varNames.font.code.weights.semibold})`,
+        bold: `var(${varNames.font.code.weights.bold})`,
       },
     },
     heading: {
@@ -244,10 +252,10 @@ export const vars: Vars = {
         {} as Record<FontHeadingSize, FontSizeVars>,
       ),
       weight: {
-        regular: `var(${varNames.font.heading.weight.regular})`,
-        medium: `var(${varNames.font.heading.weight.medium})`,
-        semibold: `var(${varNames.font.heading.weight.semibold})`,
-        bold: `var(${varNames.font.heading.weight.bold})`,
+        regular: `var(${varNames.font.heading.weights.regular})`,
+        medium: `var(${varNames.font.heading.weights.medium})`,
+        semibold: `var(${varNames.font.heading.weights.semibold})`,
+        bold: `var(${varNames.font.heading.weights.bold})`,
       },
     },
     label: {
@@ -269,10 +277,10 @@ export const vars: Vars = {
         {} as Record<FontLabelSize, FontSizeVars>,
       ),
       weight: {
-        regular: `var(${varNames.font.label.weight.regular})`,
-        medium: `var(${varNames.font.label.weight.medium})`,
-        semibold: `var(${varNames.font.label.weight.semibold})`,
-        bold: `var(${varNames.font.label.weight.bold})`,
+        regular: `var(${varNames.font.label.weights.regular})`,
+        medium: `var(${varNames.font.label.weights.medium})`,
+        semibold: `var(${varNames.font.label.weights.semibold})`,
+        bold: `var(${varNames.font.label.weights.bold})`,
       },
     },
     text: {
@@ -294,10 +302,10 @@ export const vars: Vars = {
         {} as Record<FontTextSize, FontSizeVars>,
       ),
       weight: {
-        regular: `var(${varNames.font.text.weight.regular})`,
-        medium: `var(${varNames.font.text.weight.medium})`,
-        semibold: `var(${varNames.font.text.weight.semibold})`,
-        bold: `var(${varNames.font.text.weight.bold})`,
+        regular: `var(${varNames.font.text.weights.regular})`,
+        medium: `var(${varNames.font.text.weights.medium})`,
+        semibold: `var(${varNames.font.text.weights.semibold})`,
+        bold: `var(${varNames.font.text.weights.bold})`,
       },
     },
   },
@@ -322,9 +330,37 @@ export const vars: Vars = {
   radius: Object.fromEntries(
     RADIUS.map((radius) => [radius, `var(${varNames.radius[radius]})` as const]),
   ) as Record<Radius, CSSVar>,
+  shadow: Object.fromEntries(
+    SHADOW.map((shadow) => [
+      shadow,
+      {
+        umbra: `var(${varNames.shadow[shadow].umbra})`,
+        penumbra: `var(${varNames.shadow[shadow].penumbra})`,
+        ambient: `var(${varNames.shadow[shadow].ambient})`,
+      },
+    ]),
+  ) as Record<Shadow, {umbra: CSSVar; penumbra: CSSVar; ambient: CSSVar}>,
   space: Object.fromEntries(
     SPACE.map((space) => [space, `var(${varNames.space[space]})` as const]),
   ) as Record<Space, CSSVar>,
+
+  // color
+  black: `var(${varNames.black})`,
+  white: `var(${varNames.white})`,
+  ...COLOR_HUES.reduce(
+    (acc, hue) => {
+      const tints = {} as Record<ColorTintKey, CSSVar>
+
+      for (const tint of COLOR_TINTS) {
+        tints[tint] = `var(--${hue}-${tint})`
+      }
+
+      acc[hue] = tints
+
+      return acc
+    },
+    {} as Record<ColorHueKey, Record<ColorTintKey, CSSVar>>,
+  ),
 } as const
 
 function buildColorCardVars(props: {scheme?: Scheme; tone: CardTone}): ColorCardVars {

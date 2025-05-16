@@ -2,10 +2,14 @@ import {FONT_CODE_SIZE, FONT_HEADING_SIZE, FONT_LABEL_SIZE, FONT_TEXT_SIZE} from
 
 import {_responsiveRule} from '../../_responsiveRule'
 import {Style, StyleKeyframes, StyleRules} from '../../types'
+import {varNames} from '../../varNames'
 import {vars} from '../../vars'
 
+// TODO: should keyframes be prefixed?
+const KEYFRAMES_PULSE = 'skeleton-pulse'
+
 const keyframes: StyleKeyframes = {
-  'skeleton-pulse': {
+  [KEYFRAMES_PULSE]: {
     '0%': {
       backgroundPosition: '100%',
     },
@@ -17,8 +21,8 @@ const keyframes: StyleKeyframes = {
 
 const component: StyleRules = {
   '.skeleton': {
-    '--color-skeleton-from': `color-mix(in srgb, transparent, ${vars.color.muted.fg} 5%)`,
-    '--color-skeleton-to': `color-mix(in srgb, transparent, ${vars.color.muted.fg} 10%)`,
+    [varNames.color.skeleton.from]: `color-mix(in srgb, transparent, ${vars.color.muted.fg} 5%)`,
+    [varNames.color.skeleton.to]: `color-mix(in srgb, transparent, ${vars.color.muted.fg} 10%)`,
 
     'backgroundColor': vars.color.skeleton.from,
     'backgroundPosition': '100%',
@@ -38,7 +42,7 @@ const component: StyleRules = {
           vars.color.skeleton.from,
           `)`,
         ].join(', '),
-        animationName: 'skeleton-pulse',
+        animationName: KEYFRAMES_PULSE,
         animationTimingFunction: 'ease-in-out',
         animationIterationCount: 'infinite',
         animationDuration: '2000ms',

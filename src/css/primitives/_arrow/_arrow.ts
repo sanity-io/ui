@@ -9,6 +9,10 @@ export function _arrowStroke(): string | undefined {
   return _comp('arrow-stroke')
 }
 
+export function _arrowStrokeMask(): string | undefined {
+  return _comp('arrow-stroke-mask')
+}
+
 export function _arrowShape(): string | undefined {
   return _comp('arrow-shape')
 }

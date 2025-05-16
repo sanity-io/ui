@@ -3,7 +3,6 @@ import {PartialTokens, Tokens} from './tokens'
 export const defaultTokens: PartialTokens<Tokens> = {
   color: {
     '*': {
-      // backdrop: ['black/0.2', '200/0.2'],
       backdrop: ['black/0.5', 'gray/100/0.5'],
       code: {
         bg: ['950', '50'],

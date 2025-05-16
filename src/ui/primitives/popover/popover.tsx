@@ -31,7 +31,7 @@ import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
 import {origin} from '../../middleware/origin'
 import {Placement, PopoverMargins, Props} from '../../types'
 import {LayerProps, LayerProvider, Portal, useBoundaryElement, useLayer} from '../../utils'
-import {CardProps} from '../card'
+import {CardProps, CardProvider, useCard} from '../card'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_POPOVER_DISTANCE,
@@ -109,7 +109,17 @@ export interface PopoverProps extends CardProps, LayerProps {
 const ViewportOverlay = () => {
   const {zIndex} = useLayer()
 
-  return <div style={{height: '100vh', inset: 0, position: 'fixed', width: '100vw', zIndex}} />
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex,
+      }}
+    />
+  )
 }
 
 /**
@@ -154,11 +164,13 @@ export const Popover = memo(
       shadow = 3,
       tone = 'inherit',
       width: widthProp = 'auto',
-      // zOffset: zOffsetProp = layer.popover.zOffset,
       zOffset: zOffsetProp = Z_OFFSETS.popover,
       updateRef,
       ...restProps
     } = props
+
+    const card = useCard()
+
     const prefersReducedMotion = usePrefersReducedMotion()
     const animate = prefersReducedMotion ? false : _animate
     const zOffset = useArrayProp(zOffsetProp)
@@ -338,7 +350,8 @@ export const Popover = memo(
 
     const popover = (
       <LayerProvider zOffset={zOffset}>
-        {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned before the below popover card. */}
+        {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned 
+        before the below popover card. */}
         {modal && <ViewportOverlay />}
 
         <PopoverCard
@@ -356,13 +369,11 @@ export const Popover = memo(
           placement={placement}
           radius={radius}
           ref={setFloating}
-          // referenceWidth={matchReferenceWidth ? referenceWidthRef.current : width}
           scheme={scheme}
           shadow={shadow}
           originX={originX}
           originY={originY}
           strategy={strategy}
-          tone={tone}
           x={x}
           y={y}
         >
@@ -374,7 +385,14 @@ export const Popover = memo(
     const children =
       open &&
       (portal ? (
-        <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{popover}</Portal>
+        <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
+          <CardProvider
+            tone={tone === 'inherit' ? (card?.tone ?? 'default') : tone}
+            scheme={scheme ?? 'light'}
+          >
+            {popover}
+          </CardProvider>
+        </Portal>
       ) : (
         popover
       ))

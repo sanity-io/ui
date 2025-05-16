@@ -1,8 +1,8 @@
 import {BottleIcon, IceCreamIcon, LemonIcon, TrolleyIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Tree, TreeItem} from '../../src/ui/components'
-import {getSpaceControls} from '../controls'
+import {Tree, TreeItem} from '../../src/ui'
+import {SPACE_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Tree> = {
   args: {
@@ -13,7 +13,7 @@ const meta: Meta<typeof Tree> = {
     ],
   },
   argTypes: {
-    space: getSpaceControls(),
+    space: SPACE_CONTROLS,
   },
   component: Tree,
   tags: ['autodocs'],

@@ -1,18 +1,8 @@
-/* eslint-disable react-refresh/only-export-components */
-
-import {Card, studioTheme, StyleTags, ThemeProvider} from '@sanity/ui'
+import {Box, Card, CardProvider, RootClassNames, StyleTags} from '@sanity/ui'
 import {DecoratorHelpers} from '@storybook/addon-themes'
 import {StoryFn} from '@storybook/react'
-import {createGlobalStyle} from 'styled-components'
 
 const {initializeThemeState, pluckThemeFromContext, useThemeParameters} = DecoratorHelpers
-
-export const GlobalStyle = createGlobalStyle`
-  body,
-  .docs-story {
-    background-color: ${({theme}) => theme.sanity.color.base.bg};
-  }
-`
 
 /**
  * Story decorator which wraps all stories in a Sanity <ThemeProvider> and passes the current theme
@@ -31,13 +21,13 @@ export const withSanityTheme = ({themes, defaultTheme}) => {
     const selected = themeOverride || selectedTheme || defaultTheme
 
     return (
-      <ThemeProvider scheme={selected} theme={studioTheme}>
+      <CardProvider scheme={selected} tone="default">
+        <RootClassNames element={document.documentElement} />
         <StyleTags />
-        <GlobalStyle />
-        <Card padding={4}>
+        <Card padding={4} tone="inherit">
           <Story />
         </Card>
-      </ThemeProvider>
+      </CardProvider>
     )
   }
 }

@@ -10,9 +10,9 @@ const primitive: StyleRules = {
     'backgroundColor': vars.color.bg,
     'color': vars.color.fg,
 
-    '--color-bg': vars.color.tinted.bg[0],
-    '--color-border': vars.color.tinted.border[2],
-    '--color-fg': vars.color.tinted.fg[2],
+    [varNames.color.bg]: vars.color.tinted.bg[0],
+    [varNames.color.border]: vars.color.tinted.border[2],
+    [varNames.color.fg]: vars.color.tinted.fg[2],
 
     '@nest': {
       '&:is(button)': {
@@ -43,36 +43,36 @@ const primitive: StyleRules = {
           },
 
           '&:not([data-disabled]):hover': {
-            '--color-bg': vars.color.tinted.bg[1],
-            '--color-border': vars.color.tinted.border[3],
-            '--color-fg': vars.color.tinted.fg[1],
-            '--color-muted-bg': vars.color.tinted.bg[2],
-            '--color-muted-fg': vars.color.tinted.fg[4],
+            [varNames.color.bg]: vars.color.tinted.bg[1],
+            [varNames.color.border]: vars.color.tinted.border[3],
+            [varNames.color.fg]: vars.color.tinted.fg[1],
+            [varNames.color.muted.bg]: vars.color.tinted.bg[2],
+            [varNames.color.muted.fg]: vars.color.tinted.fg[4],
           },
 
           '&:not([data-disabled]):active, &:not([data-disabled])[aria-pressed="true"], &:not([data-disabled])[data-pressed]':
             {
-              '--color-bg': vars.color.tinted.bg[2],
-              '--color-border': vars.color.tinted.border[4],
-              '--color-fg': vars.color.tinted.fg[0],
-              '--color-muted-bg': vars.color.tinted.bg[3],
-              '--color-muted-fg': vars.color.tinted.fg[4],
+              [varNames.color.bg]: vars.color.tinted.bg[2],
+              [varNames.color.border]: vars.color.tinted.border[4],
+              [varNames.color.fg]: vars.color.tinted.fg[0],
+              [varNames.color.muted.bg]: vars.color.tinted.bg[3],
+              [varNames.color.muted.fg]: vars.color.tinted.fg[4],
             },
 
           '&:not([data-disabled]):focus': {
-            '--color-bg': vars.color.solid.bg[0],
-            '--color-border': vars.color.solid.border[1],
-            '--color-fg': vars.color.solid.fg[1],
-            '--color-muted-bg': vars.color.solid.bg[1],
-            '--color-muted-fg': vars.color.solid.fg[3],
+            [varNames.color.bg]: vars.color.solid.primary.bg[0],
+            [varNames.color.border]: vars.color.solid.primary.border[1],
+            [varNames.color.fg]: vars.color.solid.primary.fg[0],
+            [varNames.color.muted.bg]: vars.color.solid.primary.bg[1],
+            [varNames.color.muted.fg]: vars.color.solid.primary.fg[3],
           },
 
           '&[data-disabled]': {
-            '--color-bg': vars.color.tinted.bg[0],
-            '--color-border': vars.color.tinted.border[1],
-            '--color-fg': vars.color.tinted.border[4],
-            '--color-muted-bg': vars.color.tinted.bg[1],
-            '--color-muted-fg': vars.color.tinted.border[4],
+            [varNames.color.bg]: vars.color.tinted.bg[0],
+            [varNames.color.border]: vars.color.tinted.border[1],
+            [varNames.color.fg]: vars.color.tinted.border[4],
+            [varNames.color.muted.bg]: vars.color.tinted.bg[1],
+            [varNames.color.muted.fg]: vars.color.tinted.border[4],
           },
         },
       },

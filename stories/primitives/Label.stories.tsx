@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 
-import {Label, Stack} from '../../src/ui/primitives'
-import {getAlignControls, getFontSizeControls} from '../controls'
+import {Label, Stack} from '../../src/ui'
+import {FONT_LABEL_SIZE_CONTROLS, TEXT_ALIGN_CONTROLS} from '../controls'
 
 const meta: Meta<typeof Label> = {
   component: Label,
@@ -9,8 +9,8 @@ const meta: Meta<typeof Label> = {
     children: 'Jackdaws love my big sphinx of quartz',
   },
   argTypes: {
-    align: getAlignControls(),
-    size: getFontSizeControls('label'),
+    align: TEXT_ALIGN_CONTROLS,
+    size: FONT_LABEL_SIZE_CONTROLS,
   },
   tags: ['autodocs'],
 }

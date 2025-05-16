@@ -1,11 +1,13 @@
 import {ReactNode, useState} from 'react'
 
+import {ThemeColorSchemeKey} from '../../src/theme'
 import {
   Avatar,
   Badge,
   Box,
   Button,
   Card,
+  CardProvider,
   Checkbox,
   Code,
   CodeSkeleton,
@@ -26,10 +28,12 @@ import {
   MenuItem,
   Popover,
   Radio,
+  RootClassNames,
   Select,
   Skeleton,
   Spinner,
   Stack,
+  StyleTags,
   Switch,
   Tab,
   TabList,
@@ -37,11 +41,7 @@ import {
   TextArea,
   TextInput,
   TextSkeleton,
-  ThemeProvider,
 } from '../../src/ui'
-import {buildTheme, ThemeColorSchemeKey} from '../../src/theme'
-
-const theme = buildTheme()
 
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
@@ -112,7 +112,9 @@ export function Tones(): ReactNode {
   const [scheme, setScheme] = useState<ThemeColorSchemeKey>('light')
 
   return (
-    <ThemeProvider scheme={scheme} theme={theme}>
+    <CardProvider scheme="light" tone="default">
+      <RootClassNames element={document.documentElement} />
+      <StyleTags />
       <Card padding={2} radius={2}>
         <Box padding={3}>
           <Button
@@ -314,6 +316,6 @@ export function Tones(): ReactNode {
           ))}
         </Flex>
       </Card>
-    </ThemeProvider>
+    </CardProvider>
   )
 }

@@ -15,7 +15,11 @@ import {
 
 import {Properties} from '../types'
 import {px, rem, toBoxShadow} from '../util'
+import {varNames} from '../varNames'
 import {compileRule} from './compileRule'
+
+const THEME_COLOR_SCHEMES = ['dark', 'light'] as const
+const THEME_COLOR_VARIANTS = ['tinted', 'solid'] as const
 
 export function compileTheme_v3(theme: Theme_v3): string {
   return compileRule(':root', compileThemeProperties(theme), {keyframes: {}, media: {}})
@@ -25,6 +29,7 @@ function compileThemeProperties(theme: Theme_v3): Properties {
   return {
     ...buildAvatarThemeProperties(theme),
     ...buildButtonThemeProperties(theme),
+    [varNames.card.shadow.outline]: px(theme.card.shadow.outline),
     ...buildContainerThemeProperties(theme),
     ...buildFontCodeThemeProperties(theme),
     ...buildFontHeadingThemeProperties(theme),
@@ -40,58 +45,62 @@ function compileThemeProperties(theme: Theme_v3): Properties {
 
 function buildAvatarThemeProperties(theme: Theme_v3): Properties {
   return {
-    [`--avatar-focus-ring-offset`]: px(theme.avatar.focusRing.offset),
-    [`--avatar-focus-ring-width`]: px(theme.avatar.focusRing.width),
-    [`--avatar-0-distance`]: px(theme.avatar.sizes[0].distance),
-    [`--avatar-0-size`]: px(theme.avatar.sizes[0].size),
-    [`--avatar-1-distance`]: px(theme.avatar.sizes[1].distance),
-    [`--avatar-1-size`]: px(theme.avatar.sizes[1].size),
-    [`--avatar-2-distance`]: px(theme.avatar.sizes[2].distance),
-    [`--avatar-2-size`]: px(theme.avatar.sizes[2].size),
-    [`--avatar-3-distance`]: px(theme.avatar.sizes[3].distance),
-    [`--avatar-3-size`]: px(theme.avatar.sizes[3].size),
+    [varNames.avatar.focusRing.offset]: px(theme.avatar.focusRing.offset),
+    [varNames.avatar.focusRing.width]: px(theme.avatar.focusRing.width),
+
+    [varNames.avatar.sizes[0].distance]: px(theme.avatar.sizes[0].distance),
+    [varNames.avatar.sizes[0].size]: px(theme.avatar.sizes[0].size),
+
+    [varNames.avatar.sizes[1].distance]: px(theme.avatar.sizes[1].distance),
+    [varNames.avatar.sizes[1].size]: px(theme.avatar.sizes[1].size),
+
+    [varNames.avatar.sizes[2].distance]: px(theme.avatar.sizes[2].distance),
+    [varNames.avatar.sizes[2].size]: px(theme.avatar.sizes[2].size),
+
+    [varNames.avatar.sizes[3].distance]: px(theme.avatar.sizes[3].distance),
+    [varNames.avatar.sizes[3].size]: px(theme.avatar.sizes[3].size),
   }
 }
 
 function buildButtonThemeProperties(theme: Theme_v3): Properties {
   return {
-    [`--button-border-width`]: px(theme.button.border.width),
-    [`--button-focus-ring-offset`]: px(theme.button.focusRing.offset),
-    [`--button-focus-ring-width`]: px(theme.button.focusRing.width),
-    // [`--button-text-weight`]: theme.button.textWeight,
+    [varNames.button.border.width]: px(theme.button.border.width),
+    [varNames.button.focusRing.offset]: px(theme.button.focusRing.offset),
+    [varNames.button.focusRing.width]: px(theme.button.focusRing.width),
   }
 }
 
 function buildContainerThemeProperties(theme: Theme_v3): Properties {
   return {
-    [`--container-0`]: px(theme.container[0]),
-    [`--container-1`]: px(theme.container[1]),
-    [`--container-2`]: px(theme.container[2]),
-    [`--container-3`]: px(theme.container[3]),
-    [`--container-4`]: px(theme.container[4]),
-    [`--container-5`]: px(theme.container[5]),
+    [varNames.container[0]]: px(theme.container[0]),
+    [varNames.container[1]]: px(theme.container[1]),
+    [varNames.container[2]]: px(theme.container[2]),
+    [varNames.container[3]]: px(theme.container[3]),
+    [varNames.container[4]]: px(theme.container[4]),
+    [varNames.container[5]]: px(theme.container[5]),
   }
 }
 
 function buildFontCodeThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
-    '--font-code-family': theme.font.code.family,
-    '--font-code-feature-settings': theme.font.code.featureSettings,
-    '--font-code-weight-regular': `${theme.font.code.weights.regular}`,
-    '--font-code-weight-medium': `${theme.font.code.weights.medium}`,
-    '--font-code-weight-semibold': `${theme.font.code.weights.semibold}`,
-    '--font-code-weight-bold': `${theme.font.code.weights.bold}`,
+    [varNames.font.code.family]: theme.font.code.family,
+    [varNames.font.code.featureSettings]: theme.font.code.featureSettings,
+    [varNames.font.code.weights.regular]: `${theme.font.code.weights.regular}`,
+    [varNames.font.code.weights.medium]: `${theme.font.code.weights.medium}`,
+    [varNames.font.code.weights.semibold]: `${theme.font.code.weights.semibold}`,
+    [varNames.font.code.weights.bold]: `${theme.font.code.weights.bold}`,
   }
 
   for (const size of FONT_CODE_SIZE) {
-    props[`--font-code-${size}-size`] = rem(theme.font.code.sizes[size].fontSize)
-    props[`--font-code-${size}-line-height`] = rem(theme.font.code.sizes[size].lineHeight)
-    props[`--font-code-${size}-ascender-height`] = px(theme.font.code.sizes[size].ascenderHeight)
-    props[`--font-code-${size}-descender-height`] = px(theme.font.code.sizes[size].descenderHeight)
-    // props[`--font-code-${size}-cap-height`] =
-    //   `calc(var(--font-code-${size}-line-height) - var(--font-code-${size}-ascender-height) - var(--font-code-${size}-descender-height))`
-    props[`--font-code-${size}-letter-spacing`] = px(theme.font.code.sizes[size].letterSpacing)
-    props[`--font-code-${size}-icon-size`] = px(theme.font.code.sizes[size].iconSize)
+    const v = varNames.font.code.sizes[size]
+    const t = theme.font.code.sizes[size]
+
+    props[v.fontSize] = rem(t.fontSize)
+    props[v.lineHeight] = rem(t.lineHeight)
+    props[v.ascenderHeight] = px(t.ascenderHeight)
+    props[v.descenderHeight] = px(t.descenderHeight)
+    props[v.letterSpacing] = px(t.letterSpacing)
+    props[v.iconSize] = px(t.iconSize)
   }
 
   return props
@@ -99,29 +108,24 @@ function buildFontCodeThemeProperties(theme: Theme_v3): Properties {
 
 function buildFontHeadingThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
-    '--font-heading-family': theme.font.heading.family,
-    '--font-heading-feature-settings': theme.font.heading.featureSettings,
-    '--font-heading-weight-regular': `${theme.font.heading.weights.regular}`,
-    '--font-heading-weight-medium': `${theme.font.heading.weights.medium}`,
-    '--font-heading-weight-semibold': `${theme.font.heading.weights.semibold}`,
-    '--font-heading-weight-bold': `${theme.font.heading.weights.bold}`,
+    [varNames.font.heading.family]: theme.font.heading.family,
+    [varNames.font.heading.featureSettings]: theme.font.heading.featureSettings,
+    [varNames.font.heading.weights.regular]: `${theme.font.heading.weights.regular}`,
+    [varNames.font.heading.weights.medium]: `${theme.font.heading.weights.medium}`,
+    [varNames.font.heading.weights.semibold]: `${theme.font.heading.weights.semibold}`,
+    [varNames.font.heading.weights.bold]: `${theme.font.heading.weights.bold}`,
   }
 
   for (const size of FONT_HEADING_SIZE) {
-    props[`--font-heading-${size}-size`] = rem(theme.font.heading.sizes[size].fontSize)
-    props[`--font-heading-${size}-line-height`] = rem(theme.font.heading.sizes[size].lineHeight)
-    props[`--font-heading-${size}-ascender-height`] = px(
-      theme.font.heading.sizes[size].ascenderHeight,
-    )
-    props[`--font-heading-${size}-descender-height`] = px(
-      theme.font.heading.sizes[size].descenderHeight,
-    )
-    props[`--font-heading-${size}-letter-spacing`] = px(
-      theme.font.heading.sizes[size].letterSpacing,
-    )
-    // props[`--font-heading-${size}-cap-height`] =
-    //   `calc(var(--font-heading-${size}-line-height) - var(--font-heading-${size}-ascender-height) - var(--font-heading-${size}-descender-height))`
-    props[`--font-heading-${size}-icon-size`] = px(theme.font.heading.sizes[size].iconSize)
+    const v = varNames.font.heading.sizes[size]
+    const t = theme.font.heading.sizes[size]
+
+    props[v.fontSize] = rem(t.fontSize)
+    props[v.lineHeight] = rem(t.lineHeight)
+    props[v.ascenderHeight] = px(t.ascenderHeight)
+    props[v.descenderHeight] = px(t.descenderHeight)
+    props[v.letterSpacing] = px(t.letterSpacing)
+    props[v.iconSize] = px(t.iconSize)
   }
 
   return props
@@ -129,25 +133,24 @@ function buildFontHeadingThemeProperties(theme: Theme_v3): Properties {
 
 function buildFontLabelThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
-    '--font-label-family': theme.font.label.family,
-    '--font-label-feature-settings': theme.font.label.featureSettings,
-    '--font-label-weight-regular': `${theme.font.label.weights.regular}`,
-    '--font-label-weight-medium': `${theme.font.label.weights.medium}`,
-    '--font-label-weight-semibold': `${theme.font.label.weights.semibold}`,
-    '--font-label-weight-bold': `${theme.font.label.weights.bold}`,
+    [varNames.font.label.family]: theme.font.label.family,
+    [varNames.font.label.featureSettings]: theme.font.label.featureSettings,
+    [varNames.font.label.weights.regular]: `${theme.font.label.weights.regular}`,
+    [varNames.font.label.weights.medium]: `${theme.font.label.weights.medium}`,
+    [varNames.font.label.weights.semibold]: `${theme.font.label.weights.semibold}`,
+    [varNames.font.label.weights.bold]: `${theme.font.label.weights.bold}`,
   }
 
   for (const size of FONT_LABEL_SIZE) {
-    props[`--font-label-${size}-size`] = rem(theme.font.label.sizes[size].fontSize)
-    props[`--font-label-${size}-line-height`] = rem(theme.font.label.sizes[size].lineHeight)
-    props[`--font-label-${size}-ascender-height`] = px(theme.font.label.sizes[size].ascenderHeight)
-    props[`--font-label-${size}-descender-height`] = px(
-      theme.font.label.sizes[size].descenderHeight,
-    )
-    // props[`--font-label-${size}-cap-height`] =
-    //   `calc(var(--font-label-${size}-line-height) - var(--font-label-${size}-ascender-height) - var(--font-label-${size}-descender-height))`
-    props[`--font-label-${size}-letter-spacing`] = px(theme.font.label.sizes[size].letterSpacing)
-    props[`--font-label-${size}-icon-size`] = px(theme.font.label.sizes[size].iconSize)
+    const v = varNames.font.label.sizes[size]
+    const t = theme.font.label.sizes[size]
+
+    props[v.fontSize] = rem(t.fontSize)
+    props[v.lineHeight] = rem(t.lineHeight)
+    props[v.ascenderHeight] = px(t.ascenderHeight)
+    props[v.descenderHeight] = px(t.descenderHeight)
+    props[v.letterSpacing] = px(t.letterSpacing)
+    props[v.iconSize] = px(t.iconSize)
   }
 
   return props
@@ -155,23 +158,24 @@ function buildFontLabelThemeProperties(theme: Theme_v3): Properties {
 
 function buildFontTextThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {
-    '--font-text-family': theme.font.text.family,
-    '--font-text-feature-settings': theme.font.text.featureSettings,
-    '--font-text-weight-regular': `${theme.font.text.weights.regular}`,
-    '--font-text-weight-medium': `${theme.font.text.weights.medium}`,
-    '--font-text-weight-semibold': `${theme.font.text.weights.semibold}`,
-    '--font-text-weight-bold': `${theme.font.text.weights.bold}`,
+    [varNames.font.text.family]: theme.font.text.family,
+    [varNames.font.text.featureSettings]: theme.font.text.featureSettings,
+    [varNames.font.text.weights.regular]: `${theme.font.text.weights.regular}`,
+    [varNames.font.text.weights.medium]: `${theme.font.text.weights.medium}`,
+    [varNames.font.text.weights.semibold]: `${theme.font.text.weights.semibold}`,
+    [varNames.font.text.weights.bold]: `${theme.font.text.weights.bold}`,
   }
 
   for (const size of FONT_TEXT_SIZE) {
-    props[`--font-text-${size}-size`] = rem(theme.font.text.sizes[size].fontSize)
-    props[`--font-text-${size}-line-height`] = rem(theme.font.text.sizes[size].lineHeight)
-    props[`--font-text-${size}-ascender-height`] = px(theme.font.text.sizes[size].ascenderHeight)
-    props[`--font-text-${size}-descender-height`] = px(theme.font.text.sizes[size].descenderHeight)
-    // props[`--font-text-${size}-cap-height`] =
-    //   `calc(var(--font-text-${size}-line-height) - var(--font-text-${size}-ascender-height) - var(--font-text-${size}-descender-height))`
-    props[`--font-text-${size}-letter-spacing`] = px(theme.font.text.sizes[size].letterSpacing)
-    props[`--font-text-${size}-icon-size`] = px(theme.font.text.sizes[size].iconSize)
+    const v = varNames.font.text.sizes[size]
+    const t = theme.font.text.sizes[size]
+
+    props[v.fontSize] = rem(t.fontSize)
+    props[v.lineHeight] = rem(t.lineHeight)
+    props[v.ascenderHeight] = px(t.ascenderHeight)
+    props[v.descenderHeight] = px(t.descenderHeight)
+    props[v.letterSpacing] = px(t.letterSpacing)
+    props[v.iconSize] = px(t.iconSize)
   }
 
   return props
@@ -179,82 +183,83 @@ function buildFontTextThemeProperties(theme: Theme_v3): Properties {
 
 function buildInputThemeProperties(theme: Theme_v3): Properties {
   return {
-    [`--input-border-width`]: px(theme.input.border.width),
-    [`--input-checkbox-focus-ring-offset`]: px(theme.input.checkbox.focusRing.offset),
-    [`--input-checkbox-focus-ring-width`]: px(theme.input.checkbox.focusRing.width),
-    [`--input-checkbox-size`]: px(theme.input.checkbox.size),
-    [`--input-radio-focus-ring-offset`]: px(theme.input.radio.focusRing.offset),
-    [`--input-radio-focus-ring-width`]: px(theme.input.radio.focusRing.width),
-    [`--input-radio-mark-size`]: px(theme.input.radio.markSize),
-    [`--input-radio-size`]: px(theme.input.radio.size),
-    [`--input-select-focus-ring-offset`]: px(theme.input.select.focusRing.offset),
-    [`--input-select-focus-ring-width`]: px(theme.input.select.focusRing.width),
-    [`--input-switch-focus-ring-offset`]: px(theme.input.switch.focusRing.offset),
-    [`--input-switch-focus-ring-width`]: px(theme.input.switch.focusRing.width),
-    [`--input-switch-height`]: px(theme.input.switch.height),
-    [`--input-switch-padding`]: px(theme.input.switch.padding),
-    [`--input-switch-transition-duration-ms`]: `${theme.input.switch.transitionDurationMs}ms`,
-    [`--input-switch-transition-timing-function`]: theme.input.switch.transitionTimingFunction,
-    [`--input-switch-width`]: px(theme.input.switch.width),
-    [`--input-text-focus-ring-offset`]: px(theme.input.text.focusRing.offset),
-    [`--input-text-focus-ring-width`]: px(theme.input.text.focusRing.width),
+    [varNames.input.border.width]: px(theme.input.border.width),
+    [varNames.input.checkbox.focusRing.offset]: px(theme.input.checkbox.focusRing.offset),
+    [varNames.input.checkbox.focusRing.width]: px(theme.input.checkbox.focusRing.width),
+    [varNames.input.checkbox.size]: px(theme.input.checkbox.size),
+    [varNames.input.radio.focusRing.offset]: px(theme.input.radio.focusRing.offset),
+    [varNames.input.radio.focusRing.width]: px(theme.input.radio.focusRing.width),
+    [varNames.input.radio.markSize]: px(theme.input.radio.markSize),
+    [varNames.input.radio.size]: px(theme.input.radio.size),
+    [varNames.input.select.focusRing.offset]: px(theme.input.select.focusRing.offset),
+    [varNames.input.select.focusRing.width]: px(theme.input.select.focusRing.width),
+    [varNames.input.switch.focusRing.offset]: px(theme.input.switch.focusRing.offset),
+    [varNames.input.switch.focusRing.width]: px(theme.input.switch.focusRing.width),
+    [varNames.input.switch.height]: px(theme.input.switch.height),
+    [varNames.input.switch.padding]: px(theme.input.switch.padding),
+    [varNames.input.switch.transitionDurationMs]: `${theme.input.switch.transitionDurationMs}ms`,
+    [varNames.input.switch.transitionTimingFunction]: theme.input.switch.transitionTimingFunction,
+    [varNames.input.switch.width]: px(theme.input.switch.width),
+    [varNames.input.text.focusRing.offset]: px(theme.input.text.focusRing.offset),
+    [varNames.input.text.focusRing.width]: px(theme.input.text.focusRing.width),
   }
 }
 
 function buildRadiusThemeProperties(theme: Theme_v3): Properties {
   return {
-    [`--radius-0`]: rem(theme.radius[0]),
-    [`--radius-1`]: rem(theme.radius[1]),
-    [`--radius-2`]: rem(theme.radius[2]),
-    [`--radius-3`]: rem(theme.radius[3]),
-    [`--radius-4`]: rem(theme.radius[4]),
-    [`--radius-5`]: rem(theme.radius[5]),
-    [`--radius-6`]: rem(theme.radius[6]),
+    [varNames.radius[0]]: rem(theme.radius[0]),
+    [varNames.radius[1]]: rem(theme.radius[1]),
+    [varNames.radius[2]]: rem(theme.radius[2]),
+    [varNames.radius[3]]: rem(theme.radius[3]),
+    [varNames.radius[4]]: rem(theme.radius[4]),
+    [varNames.radius[5]]: rem(theme.radius[5]),
+    [varNames.radius[6]]: rem(theme.radius[6]),
   }
 }
 
 function buildShadowThemeProperties(theme: Theme_v3): Properties {
   return {
-    [`--shadow-outline`]: `0 0 0 ${theme.card.shadow.outline}px`,
-    [`--shadow-0-umbra`]: toBoxShadow(theme.shadow[0]?.umbra),
-    [`--shadow-0-penumbra`]: toBoxShadow(theme.shadow[0]?.penumbra),
-    [`--shadow-0-ambient`]: toBoxShadow(theme.shadow[0]?.ambient),
-    [`--shadow-1-umbra`]: toBoxShadow(theme.shadow[1]?.umbra),
-    [`--shadow-1-penumbra`]: toBoxShadow(theme.shadow[1]?.penumbra),
-    [`--shadow-1-ambient`]: toBoxShadow(theme.shadow[1]?.ambient),
-    [`--shadow-2-umbra`]: toBoxShadow(theme.shadow[2]?.umbra),
-    [`--shadow-2-penumbra`]: toBoxShadow(theme.shadow[2]?.penumbra),
-    [`--shadow-2-ambient`]: toBoxShadow(theme.shadow[2]?.ambient),
-    [`--shadow-3-umbra`]: toBoxShadow(theme.shadow[3]?.umbra),
-    [`--shadow-3-penumbra`]: toBoxShadow(theme.shadow[3]?.penumbra),
-    [`--shadow-3-ambient`]: toBoxShadow(theme.shadow[3]?.ambient),
-    [`--shadow-4-umbra`]: toBoxShadow(theme.shadow[4]?.umbra),
-    [`--shadow-4-penumbra`]: toBoxShadow(theme.shadow[4]?.penumbra),
-    [`--shadow-4-ambient`]: toBoxShadow(theme.shadow[4]?.ambient),
-    [`--shadow-5-umbra`]: toBoxShadow(theme.shadow[5]?.umbra),
-    [`--shadow-5-penumbra`]: toBoxShadow(theme.shadow[5]?.penumbra),
-    [`--shadow-5-ambient`]: toBoxShadow(theme.shadow[5]?.ambient),
+    [varNames.shadow[0].umbra]: toBoxShadow(theme.shadow[0]?.umbra),
+    [varNames.shadow[0].penumbra]: toBoxShadow(theme.shadow[0]?.penumbra),
+    [varNames.shadow[0].ambient]: toBoxShadow(theme.shadow[0]?.ambient),
+
+    [varNames.shadow[1].umbra]: toBoxShadow(theme.shadow[1]?.umbra),
+    [varNames.shadow[1].penumbra]: toBoxShadow(theme.shadow[1]?.penumbra),
+    [varNames.shadow[1].ambient]: toBoxShadow(theme.shadow[1]?.ambient),
+
+    [varNames.shadow[2].umbra]: toBoxShadow(theme.shadow[2]?.umbra),
+    [varNames.shadow[2].penumbra]: toBoxShadow(theme.shadow[2]?.penumbra),
+    [varNames.shadow[2].ambient]: toBoxShadow(theme.shadow[2]?.ambient),
+
+    [varNames.shadow[3].umbra]: toBoxShadow(theme.shadow[3]?.umbra),
+    [varNames.shadow[3].penumbra]: toBoxShadow(theme.shadow[3]?.penumbra),
+    [varNames.shadow[3].ambient]: toBoxShadow(theme.shadow[3]?.ambient),
+
+    [varNames.shadow[4].umbra]: toBoxShadow(theme.shadow[4]?.umbra),
+    [varNames.shadow[4].penumbra]: toBoxShadow(theme.shadow[4]?.penumbra),
+    [varNames.shadow[4].ambient]: toBoxShadow(theme.shadow[4]?.ambient),
+
+    [varNames.shadow[5].umbra]: toBoxShadow(theme.shadow[5]?.umbra),
+    [varNames.shadow[5].penumbra]: toBoxShadow(theme.shadow[5]?.penumbra),
+    [varNames.shadow[5].ambient]: toBoxShadow(theme.shadow[5]?.ambient),
   }
 }
 
 function buildSpaceThemeProperties(theme: Theme_v3): Properties {
   return {
-    [`--space-0`]: rem(theme.space[0]),
-    [`--space-0_5`]: rem(theme.space[1] / 2),
-    [`--space-1`]: rem(theme.space[1]),
-    [`--space-2`]: rem(theme.space[2]),
-    [`--space-3`]: rem(theme.space[3]),
-    [`--space-4`]: rem(theme.space[4]),
-    [`--space-5`]: rem(theme.space[5]),
-    [`--space-6`]: rem(theme.space[6]),
-    [`--space-7`]: rem(theme.space[7]),
-    [`--space-8`]: rem(theme.space[8]),
-    [`--space-9`]: rem(theme.space[9]),
+    [varNames.space[0]]: rem(theme.space[0]),
+    [varNames.space[0.5]]: rem(theme.space[1] / 2),
+    [varNames.space[1]]: rem(theme.space[1]),
+    [varNames.space[2]]: rem(theme.space[2]),
+    [varNames.space[3]]: rem(theme.space[3]),
+    [varNames.space[4]]: rem(theme.space[4]),
+    [varNames.space[5]]: rem(theme.space[5]),
+    [varNames.space[6]]: rem(theme.space[6]),
+    [varNames.space[7]]: rem(theme.space[7]),
+    [varNames.space[8]]: rem(theme.space[8]),
+    [varNames.space[9]]: rem(theme.space[9]),
   }
 }
-
-const THEME_COLOR_SCHEMES = ['dark', 'light'] as const
-const THEME_COLOR_VARIANTS = ['tinted', 'solid'] as const
 
 function buildColorThemeProperties(theme: Theme_v3): Properties {
   const props: Properties = {}
@@ -264,36 +269,38 @@ function buildColorThemeProperties(theme: Theme_v3): Properties {
       Object.assign(props, buildColorAvatarThemeProperties(theme, {scheme, cardTone}))
       Object.assign(props, buildColorCardThemeProperties(theme, {scheme, cardTone}))
 
-      // card variants: tinted, solid
       for (const colorVariant of THEME_COLOR_VARIANTS) {
         for (const elementTone of THEME_COLOR_STATE_TONES) {
-          const tokens = theme._tokens.color[cardTone].variant[colorVariant][elementTone]
-          const prefix = `--color-${scheme}-${cardTone}-${colorVariant}-${elementTone}` as const
+          // shorthand to variable names
+          const v = varNames.color[scheme][cardTone][colorVariant][elementTone]
+
+          // shorthand to values
+          const t = theme._tokens.color[cardTone].variant[colorVariant][elementTone]
 
           const context: RenderColorContext = {
-            bgVar: `${prefix}-bg-0`,
-            hue: tokens._hue,
+            bgVar: v.bg[0],
+            hue: t._hue,
             scheme,
           }
 
           Object.assign(props, {
-            [`${prefix}-bg-0`]: renderColor(tokens.bg[0], context),
-            [`${prefix}-bg-1`]: `color-mix(in srgb, var(${prefix}-bg-0), var(${prefix}-bg-4) 25%)`,
-            [`${prefix}-bg-2`]: `color-mix(in srgb, var(${prefix}-bg-0), var(${prefix}-bg-4) 50%)`,
-            [`${prefix}-bg-3`]: `color-mix(in srgb, var(${prefix}-bg-0), var(${prefix}-bg-4) 75%)`,
-            [`${prefix}-bg-4`]: renderColor(tokens.bg[4], context),
+            [v.bg[0]]: renderColor(t.bg[0], context),
+            [v.bg[1]]: `color-mix(in srgb, var(${v.bg[0]}), var(${v.bg[4]}) 25%)`,
+            [v.bg[2]]: `color-mix(in srgb, var(${v.bg[0]}), var(${v.bg[4]}) 50%)`,
+            [v.bg[3]]: `color-mix(in srgb, var(${v.bg[0]}), var(${v.bg[4]}) 75%)`,
+            [v.bg[4]]: renderColor(t.bg[4], context),
 
-            [`${prefix}-border-0`]: renderColor(tokens.border[0], context),
-            [`${prefix}-border-1`]: `color-mix(in srgb, var(${prefix}-border-0), var(${prefix}-border-4) 25%)`,
-            [`${prefix}-border-2`]: `color-mix(in srgb, var(${prefix}-border-0), var(${prefix}-border-4) 50%)`,
-            [`${prefix}-border-3`]: `color-mix(in srgb, var(${prefix}-border-0), var(${prefix}-border-4) 75%)`,
-            [`${prefix}-border-4`]: renderColor(tokens.border[4], context),
+            [v.border[0]]: renderColor(t.border[0], context),
+            [v.border[1]]: `color-mix(in srgb, var(${v.border[0]}), var(${v.border[4]}) 25%)`,
+            [v.border[2]]: `color-mix(in srgb, var(${v.border[0]}), var(${v.border[4]}) 50%)`,
+            [v.border[3]]: `color-mix(in srgb, var(${v.border[0]}), var(${v.border[4]}) 75%)`,
+            [v.border[4]]: renderColor(t.border[4], context),
 
-            [`${prefix}-fg-0`]: renderColor(tokens.fg[0], context),
-            [`${prefix}-fg-1`]: `color-mix(in srgb, var(${prefix}-fg-0), var(${prefix}-fg-4) 25%)`,
-            [`${prefix}-fg-2`]: `color-mix(in srgb, var(${prefix}-fg-0), var(${prefix}-fg-4) 50%)`,
-            [`${prefix}-fg-3`]: `color-mix(in srgb, var(${prefix}-fg-0), var(${prefix}-fg-4) 75%)`,
-            [`${prefix}-fg-4`]: renderColor(tokens.fg[4], context),
+            [v.fg[0]]: renderColor(t.fg[0], context),
+            [v.fg[1]]: `color-mix(in srgb, var(${v.fg[0]}), var(${v.fg[4]}) 25%)`,
+            [v.fg[2]]: `color-mix(in srgb, var(${v.fg[0]}), var(${v.fg[4]}) 50%)`,
+            [v.fg[3]]: `color-mix(in srgb, var(${v.fg[0]}), var(${v.fg[4]}) 75%)`,
+            [v.fg[4]]: renderColor(t.fg[4], context),
           } satisfies Properties)
         }
       }
@@ -308,21 +315,22 @@ function buildColorAvatarThemeProperties(
   options: {scheme: ThemeColorSchemeKey; cardTone: ThemeColorCardToneKey},
 ): Properties {
   const {scheme, cardTone} = options
-  const tokens = theme._tokens.color[cardTone]
-  const prefix = `--color-${scheme}-${cardTone}` as const
+
+  const v = varNames.color[scheme][cardTone]
+  const t = theme._tokens.color[cardTone]
 
   const props: Properties = {}
 
   for (const hue of HUES) {
     const context: RenderColorContext = {
-      bgVar: `${prefix}-bg-0`,
-      hue: tokens.avatar[hue]._hue ?? hue,
+      bgVar: varNames.color.bg,
+      hue: t.avatar[hue]._hue ?? hue,
       scheme,
     }
 
     Object.assign(props, {
-      [`${prefix}-avatar-${hue}-bg`]: renderColor(tokens.avatar[hue].bg, context),
-      [`${prefix}-avatar-${hue}-fg`]: renderColor(tokens.avatar[hue].fg, context),
+      [v.avatar[hue].bg]: renderColor(t.avatar[hue].bg, context),
+      [v.avatar[hue].fg]: renderColor(t.avatar[hue].fg, context),
     } satisfies Properties)
   }
 
@@ -334,67 +342,73 @@ function buildColorCardThemeProperties(
   options: {scheme: ThemeColorSchemeKey; cardTone: ThemeColorCardToneKey},
 ): Properties {
   const {scheme, cardTone} = options
-  const tokens = theme._tokens.color[cardTone]
-  const prefix = `--color-${scheme}-${cardTone}` as const
-  const context: RenderColorContext = {bgVar: `${prefix}-bg-0`, hue: tokens._hue, scheme}
+
+  const v = varNames.color[scheme][cardTone]
+  const t = theme._tokens.color[cardTone]
+
+  const context: RenderColorContext = {
+    bgVar: varNames.color.bg,
+    hue: t._hue,
+    scheme,
+  }
 
   const props: Properties = {
     // backdrop
-    [`${prefix}-backdrop`]: renderColor(tokens.backdrop, context),
+    [v.backdrop]: renderColor(t.backdrop, context),
 
     // code
-    [`${prefix}-code-bg`]: renderColor(tokens.code.bg, context),
-    [`${prefix}-code-fg`]: renderColor(tokens.code.fg, context),
+    [v.code.bg]: renderColor(t.code.bg, context),
+    [v.code.fg]: renderColor(t.code.fg, context),
 
     // code / token
-    [`${prefix}-code-token-atrule`]: renderColor(tokens.code.token.atrule, context),
-    [`${prefix}-code-token-attr-name`]: renderColor(tokens.code.token.attrName, context),
-    [`${prefix}-code-token-attr-value`]: renderColor(tokens.code.token.attrValue, context),
-    [`${prefix}-code-token-attribute`]: renderColor(tokens.code.token.attribute, context),
-    [`${prefix}-code-token-boolean`]: renderColor(tokens.code.token.boolean, context),
-    [`${prefix}-code-token-builtin`]: renderColor(tokens.code.token.builtin, context),
-    [`${prefix}-code-token-cdata`]: renderColor(tokens.code.token.cdata, context),
-    [`${prefix}-code-token-char`]: renderColor(tokens.code.token.char, context),
-    [`${prefix}-code-token-class-name`]: renderColor(tokens.code.token.className, context),
-    [`${prefix}-code-token-class`]: renderColor(tokens.code.token.class, context),
-    [`${prefix}-code-token-comment`]: renderColor(tokens.code.token.comment, context),
-    [`${prefix}-code-token-constant`]: renderColor(tokens.code.token.constant, context),
-    [`${prefix}-code-token-deleted`]: renderColor(tokens.code.token.deleted, context),
-    [`${prefix}-code-token-doctype`]: renderColor(tokens.code.token.doctype, context),
-    [`${prefix}-code-token-entity`]: renderColor(tokens.code.token.entity, context),
-    [`${prefix}-code-token-function`]: renderColor(tokens.code.token.function, context),
-    [`${prefix}-code-token-hexcode`]: renderColor(tokens.code.token.hexcode, context),
-    [`${prefix}-code-token-id`]: renderColor(tokens.code.token.id, context),
-    [`${prefix}-code-token-important`]: renderColor(tokens.code.token.important, context),
-    [`${prefix}-code-token-inserted`]: renderColor(tokens.code.token.inserted, context),
-    [`${prefix}-code-token-keyword`]: renderColor(tokens.code.token.keyword, context),
-    [`${prefix}-code-token-number`]: renderColor(tokens.code.token.number, context),
-    [`${prefix}-code-token-operator`]: renderColor(tokens.code.token.operator, context),
-    [`${prefix}-code-token-prolog`]: renderColor(tokens.code.token.prolog, context),
-    [`${prefix}-code-token-property`]: renderColor(tokens.code.token.property, context),
-    [`${prefix}-code-token-pseudo-class`]: renderColor(tokens.code.token.pseudoClass, context),
-    [`${prefix}-code-token-pseudo-eelement`]: renderColor(tokens.code.token.pseudoElement, context),
-    [`${prefix}-code-token-punctuation`]: renderColor(tokens.code.token.punctuation, context),
-    [`${prefix}-code-token-regex`]: renderColor(tokens.code.token.regex, context),
-    [`${prefix}-code-token-selector`]: renderColor(tokens.code.token.selector, context),
-    [`${prefix}-code-token-string`]: renderColor(tokens.code.token.string, context),
-    [`${prefix}-code-token-symbol`]: renderColor(tokens.code.token.symbol, context),
-    [`${prefix}-code-token-tag`]: renderColor(tokens.code.token.tag, context),
-    [`${prefix}-code-token-unit`]: renderColor(tokens.code.token.unit, context),
-    [`${prefix}-code-token-url`]: renderColor(tokens.code.token.url, context),
-    [`${prefix}-code-token-variable`]: renderColor(tokens.code.token.variable, context),
+    [v.code.token.atrule]: renderColor(t.code.token.atrule, context),
+    [v.code.token.attrName]: renderColor(t.code.token.attrName, context),
+    [v.code.token.attrValue]: renderColor(t.code.token.attrValue, context),
+    [v.code.token.attribute]: renderColor(t.code.token.attribute, context),
+    [v.code.token.boolean]: renderColor(t.code.token.boolean, context),
+    [v.code.token.builtin]: renderColor(t.code.token.builtin, context),
+    [v.code.token.cdata]: renderColor(t.code.token.cdata, context),
+    [v.code.token.char]: renderColor(t.code.token.char, context),
+    [v.code.token.className]: renderColor(t.code.token.className, context),
+    [v.code.token.class]: renderColor(t.code.token.class, context),
+    [v.code.token.comment]: renderColor(t.code.token.comment, context),
+    [v.code.token.constant]: renderColor(t.code.token.constant, context),
+    [v.code.token.deleted]: renderColor(t.code.token.deleted, context),
+    [v.code.token.doctype]: renderColor(t.code.token.doctype, context),
+    [v.code.token.entity]: renderColor(t.code.token.entity, context),
+    [v.code.token.function]: renderColor(t.code.token.function, context),
+    [v.code.token.hexcode]: renderColor(t.code.token.hexcode, context),
+    [v.code.token.id]: renderColor(t.code.token.id, context),
+    [v.code.token.important]: renderColor(t.code.token.important, context),
+    [v.code.token.inserted]: renderColor(t.code.token.inserted, context),
+    [v.code.token.keyword]: renderColor(t.code.token.keyword, context),
+    [v.code.token.number]: renderColor(t.code.token.number, context),
+    [v.code.token.operator]: renderColor(t.code.token.operator, context),
+    [v.code.token.prolog]: renderColor(t.code.token.prolog, context),
+    [v.code.token.property]: renderColor(t.code.token.property, context),
+    [v.code.token.pseudoClass]: renderColor(t.code.token.pseudoClass, context),
+    [v.code.token.pseudoElement]: renderColor(t.code.token.pseudoElement, context),
+    [v.code.token.punctuation]: renderColor(t.code.token.punctuation, context),
+    [v.code.token.regex]: renderColor(t.code.token.regex, context),
+    [v.code.token.selector]: renderColor(t.code.token.selector, context),
+    [v.code.token.string]: renderColor(t.code.token.string, context),
+    [v.code.token.symbol]: renderColor(t.code.token.symbol, context),
+    [v.code.token.tag]: renderColor(t.code.token.tag, context),
+    [v.code.token.unit]: renderColor(t.code.token.unit, context),
+    [v.code.token.url]: renderColor(t.code.token.url, context),
+    [v.code.token.variable]: renderColor(t.code.token.variable, context),
 
     // focus ring
-    [`${prefix}-focus-ring`]: renderColor(tokens.focusRing, context),
+    [v.focusRing]: renderColor(t.focusRing, context),
 
     // link
-    [`${prefix}-link-fg`]: renderColor(tokens.link.fg, context),
+    [v.link.fg]: renderColor(t.link.fg, context),
 
     // shadow
-    [`${prefix}-shadow-outline`]: renderColor(tokens.shadow.outline, context),
-    [`${prefix}-shadow-umbra`]: renderColor(tokens.shadow.umbra, context),
-    [`${prefix}-shadow-penumbra`]: renderColor(tokens.shadow.penumbra, context),
-    [`${prefix}-shadow-ambient`]: renderColor(tokens.shadow.ambient, context),
+    [v.shadow.outline]: renderColor(t.shadow.outline, context),
+    [v.shadow.umbra]: renderColor(t.shadow.umbra, context),
+    [v.shadow.penumbra]: renderColor(t.shadow.penumbra, context),
+    [v.shadow.ambient]: renderColor(t.shadow.ambient, context),
   }
 
   return props

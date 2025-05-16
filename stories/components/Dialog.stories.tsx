@@ -2,15 +2,24 @@ import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react'
 import {useCallback, useState} from 'react'
 
-import {Dialog} from '../../src/ui/components'
-import {Box, Button, Card, Flex, Inline, Stack, Text} from '../../src/ui/primitives'
-import {BoundaryElementProvider, PortalProvider} from '../../src/ui/utils'
 import {
-  getContainerWidthControls,
-  getPositionControls,
-  getRadiusControls,
-  getShadowControls,
-  getSpaceControls,
+  BoundaryElementProvider,
+  Box,
+  Button,
+  Card,
+  Dialog,
+  Flex,
+  Inline,
+  PortalProvider,
+  Stack,
+  Text,
+} from '../../src/ui'
+import {
+  CONTAINER_WIDTH_CONTROLS,
+  POSITION_CONTROLS,
+  RADIUS_CONTROLS,
+  SHADOW_CONTROLS,
+  SPACE_CONTROLS,
 } from '../controls'
 
 const meta: Meta<typeof Dialog> = {
@@ -44,17 +53,17 @@ const meta: Meta<typeof Dialog> = {
     header: 'Dialog header',
   },
   argTypes: {
-    cardRadius: getRadiusControls(),
-    padding: getSpaceControls(),
-    paddingBottom: getSpaceControls(),
-    paddingLeft: getSpaceControls(),
-    paddingRight: getSpaceControls(),
-    paddingTop: getSpaceControls(),
-    paddingX: getSpaceControls(),
-    paddingY: getSpaceControls(),
-    position: getPositionControls(),
-    shadow: getShadowControls(),
-    width: getContainerWidthControls(),
+    cardRadius: RADIUS_CONTROLS,
+    padding: SPACE_CONTROLS,
+    paddingBottom: SPACE_CONTROLS,
+    paddingLeft: SPACE_CONTROLS,
+    paddingRight: SPACE_CONTROLS,
+    paddingTop: SPACE_CONTROLS,
+    paddingX: SPACE_CONTROLS,
+    paddingY: SPACE_CONTROLS,
+    position: POSITION_CONTROLS,
+    shadow: SHADOW_CONTROLS,
+    width: CONTAINER_WIDTH_CONTROLS,
   },
   component: Dialog,
   decorators: [

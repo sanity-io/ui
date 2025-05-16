@@ -96,7 +96,7 @@ const primitive: StyleRules = {
       //   '--color-muted-fg': vars.color.solid.fg[3],
       // },
 
-      'a&[data-disabled]), button&[data-disabled]': {
+      'a&[data-disabled], button&[data-disabled]': {
         [varNames.color.bg]: vars.color.tinted.default.bg[2],
         [varNames.color.border]: vars.color.tinted.default.border[4],
         [varNames.color.fg]: vars.color.tinted.default.fg[0],

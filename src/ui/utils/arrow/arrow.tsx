@@ -1,7 +1,6 @@
-import {_arrow, _arrowShape, _arrowStroke} from '@sanity/ui/css'
+import {_arrow, _arrowShape, _arrowStroke, _arrowStrokeMask} from '@sanity/ui/css'
 import {CSSProperties, ForwardedRef, forwardRef, ReactElement, useMemo} from 'react'
 
-import {useTheme_v2} from '../../_compat'
 import {Props} from '../../types'
 import {compileCommands, getRoundedCommands, Point} from './cmds'
 
@@ -11,8 +10,6 @@ export const Arrow = forwardRef(function Arrow(
   ref: ForwardedRef<HTMLDivElement>,
 ): ReactElement {
   const {width: w, height: h, radius = 0, style, ...restProps} = props
-  const {card} = useTheme_v2()
-  const strokeWidth = card.shadow.outline
 
   const center = w / 2
 
@@ -42,14 +39,9 @@ export const Arrow = forwardRef(function Arrow(
     >
       <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`}>
         <mask id="stroke-mask">
-          <rect x={0} y={strokeWidth} width={w} height={w} fill="white" />
+          <rect className={_arrowStrokeMask()} x={0} width={w} height={w} fill="white" />
         </mask>
-        <path
-          className={_arrowStroke()}
-          d={strokePath}
-          mask="url(#stroke-mask)"
-          strokeWidth={strokeWidth * 2}
-        />
+        <path className={_arrowStroke()} d={strokePath} mask="url(#stroke-mask)" />
         <path className={_arrowShape()} d={fillPath} />
       </svg>
     </div>
