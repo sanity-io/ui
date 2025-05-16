@@ -61,7 +61,7 @@ export const defaultTokens: PartialTokens<Tokens> = {
           '*': {
             bg: {
               0: ['950', '50'],
-              4: ['800', '200'],
+              4: ['700', '300'],
             },
             border: {
               0: ['700', '100'],

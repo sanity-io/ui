@@ -1,7 +1,7 @@
 import {defaultThemeConfig} from '../defaults/config'
 import {defaultThemeFonts} from '../defaults/fonts'
 import {buildColor_v3} from './color/buildColor_v3'
-import {defaultTokens} from './defaults'
+import {defaultTokens} from './defaultTokens'
 import {resolveTokens} from './resolveTokens'
 import {Theme_v3, ThemeOptions} from './types'
 
