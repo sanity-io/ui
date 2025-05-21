@@ -244,6 +244,7 @@
   },
   "pnpm": {
     "overrides": {
+      "@sanity/ui-workshop": "file:registry/sanity-ui-workshop-3.0.0-local.2.tgz",
       "@types/react": "$@types/react",
       "@types/react-dom": "$@types/react-dom",
       "@types/react-is": "$@types/react-is",

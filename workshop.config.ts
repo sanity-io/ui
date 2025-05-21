@@ -1,4 +1,4 @@
-import {buildTheme} from '@sanity/ui/theme'
+import {defaultTokens} from '@sanity/ui/theme'
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
 import Refractor from 'react-refractor'
@@ -7,18 +7,15 @@ import json from 'refractor/lang/json'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
 
-import {cssPlugin} from './workshop/css'
-import {fontsPlugin} from './workshop/fonts'
-
 Refractor.registerLanguage(javascript)
 Refractor.registerLanguage(json)
 Refractor.registerLanguage(jsx)
 Refractor.registerLanguage(typescript)
 
-const theme = buildTheme()
+import './workshop/fonts.css'
 
 export default defineConfig({
-  plugins: [fontsPlugin(), cssPlugin({theme}), perfPlugin()],
+  plugins: [perfPlugin()],
   title: '@sanity/ui',
-  theme,
+  theme: defaultTokens,
 })
