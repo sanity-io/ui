@@ -1,4 +1,4 @@
-import {Middleware} from '@floating-ui/react-dom'
+import type {Middleware} from '@floating-ui/react-dom'
 
 /**
  * Custom floating-ui middleware which calculates transform-origin X + Y offsets

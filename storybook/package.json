@@ -1,0 +1,35 @@
+{
+  "name": "sanity-ui-storybook",
+  "version": "0.0.0-development",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "storybook build",
+    "chromatic:publish": "chromatic --build-script-name build",
+    "dev": "storybook dev --no-open -p 6006",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@sanity/ui": "workspace:*",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.0",
+    "@storybook/addon-a11y": "^9.0.11",
+    "@storybook/addon-docs": "^9.0.11",
+    "@storybook/addon-themes": "^9.0.11",
+    "@storybook/addon-vitest": "^9.0.11",
+    "@storybook/builder-vite": "^9.0.11",
+    "@storybook/react": "^9.0.5",
+    "@storybook/react-vite": "^9.0.11",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vanilla-extract/vite-plugin": "^5.0.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "chromatic": "^13.0.0",
+    "storybook": "^9.0.11",
+    "vite": "^6.3.5"
+  }
+}

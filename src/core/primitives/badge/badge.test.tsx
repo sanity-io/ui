@@ -1,6 +1,5 @@
-/** @jest-environment jsdom */
-
-import {axe} from 'jest-axe'
+import {describe, expect, it} from 'vitest'
+import {axe} from 'vitest-axe'
 
 import {render} from '../../../../test'
 import {Badge} from './badge'

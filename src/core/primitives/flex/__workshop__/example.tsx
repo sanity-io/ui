@@ -2,7 +2,7 @@ import {Card, Code, Flex} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 import {styled} from 'styled-components'
 
-import {WORKSHOP_FLEX_DIRECTION_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_FLEX_DIRECTION_OPTIONS} from '$workshop'
 
 const DebugCard = styled(Card)`
   outline: 1px solid red;
@@ -14,7 +14,7 @@ const DebugCard = styled(Card)`
 `
 
 export default function ExampleStory() {
-  const direction = useSelect('Direction', WORKSHOP_FLEX_DIRECTION_OPTIONS, 'row', 'Props')
+  const direction = useSelect('Direction', WORKSHOP_FLEX_DIRECTION_OPTIONS, 'row')
 
   return (
     <Flex direction={direction} height="fill" style={{width: '100%'}}>

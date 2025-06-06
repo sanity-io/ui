@@ -55,5 +55,10 @@ export default defineScope({
       title: 'Disabled',
       component: lazy(() => import('./disabled')),
     },
+    {
+      name: 'text-overflow',
+      title: 'Text overflow',
+      component: lazy(() => import('./textOverflow')),
+    },
   ],
 })

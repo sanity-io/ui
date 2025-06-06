@@ -16,7 +16,7 @@ export default function TonesStory() {
         <Container width={1}>
           <Flex>
             <Card flex={1} scheme="light">
-              <Stack padding={[3, 4, 5]} space={4}>
+              <Stack gap={4} padding={[3, 4, 5]}>
                 <Card padding={3}>
                   <TextInput
                     placeholder="default"
@@ -161,7 +161,7 @@ export default function TonesStory() {
               </Stack>
             </Card>
             <Card flex={1} scheme="dark">
-              <Stack padding={[3, 4, 5]} space={4}>
+              <Stack gap={4} padding={[3, 4, 5]}>
                 <Card padding={3}>
                   <TextInput
                     placeholder="default"

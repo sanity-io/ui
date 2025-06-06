@@ -21,7 +21,7 @@ export default function BasicStory() {
   return (
     <Box padding={[4, 5, 6]}>
       <Wrapper>
-        <Tree ref={ref} space={1}>
+        <Tree gap={1} ref={ref}>
           <TreeItem onClick={handleClick} expanded text="Fruit">
             <TreeItem
               data-testid="oranges"

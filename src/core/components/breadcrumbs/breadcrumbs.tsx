@@ -1,36 +1,66 @@
+import {breadcrumbs, type GapStyleProps} from '@sanity/ui/css'
+import type {Space} from '@sanity/ui/theme'
 import {
   Children,
-  forwardRef,
   Fragment,
   isValidElement,
+  type ReactNode,
   useCallback,
   useMemo,
   useRef,
   useState,
 } from 'react'
 
-import {useArrayProp, useClickOutsideEvent} from '../../hooks'
-import {Box, Popover, Stack, Text} from '../../primitives'
-import {ExpandButton, StyledBreadcrumbs} from './breadcrumbs.styles'
+import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {Box} from '../../primitives/box/box'
+import {Button, type ButtonProps} from '../../primitives/button/button'
+import {Flex} from '../../primitives/flex/flex'
+import {Popover} from '../../primitives/popover/popover'
+import {Stack} from '../../primitives/stack/stack'
+import {Text} from '../../primitives/text/text'
+import type {ComponentType, Props} from '../../types/props'
 
-/**
- * @beta
- */
-export interface BreadcrumbsProps {
+/** @beta */
+export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'
+
+/** @beta */
+export type BreadcrumbsOwnProps = GapStyleProps & {
+  expandButton?: Omit<ButtonProps<'button'>, 'as' | 'onClick' | 'selected'>
   maxLength?: number
-  separator?: React.ReactNode
+  separator?: ReactNode
+  /** @deprecated - Use `gap`, `gapX`, `gapY` instead */
   space?: number | number[]
 }
 
-/**
- * @beta
- */
-export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
-  ref: React.ForwardedRef<HTMLOListElement>,
+/** @beta */
+export type BreadcrumbsElementType = 'div' | 'nav' | ComponentType
+
+/** @beta */
+export type BreadcrumbsProps<E extends BreadcrumbsElementType = BreadcrumbsElementType> = Props<
+  BreadcrumbsOwnProps,
+  E
+>
+
+/** @beta */
+export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BREADCRUMBS_ELEMENT>(
+  props: BreadcrumbsProps<E>,
 ) {
-  const {children, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
-  const space = useArrayProp(spaceRaw)
+  const {
+    as = DEFAULT_BREADCRUMBS_ELEMENT,
+    children,
+    className,
+    expandButton: expandButtonProps,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    gap: _gapProp,
+    gapX = props.gap ?? (props.space as Space | undefined) ?? 2,
+    gapY = props.gap ?? (props.space as Space | undefined) ?? 2,
+    maxLength,
+    separator,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    space: _spaceProp,
+    ...rest
+  } = props as BreadcrumbsProps<typeof DEFAULT_BREADCRUMBS_ELEMENT>
+
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
   const popoverElementRef = useRef<HTMLDivElement | null>(null)
@@ -54,24 +84,25 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
         <Popover
           constrainSize
           content={
-            <Stack as="ol" overflow="auto" padding={space} space={space}>
+            <Stack as="ol" gap={gapY} overflow="auto">
               {rawItems.slice(beforeLength - 1, len - afterLength)}
             </Stack>
           }
           key="button"
           open={open}
+          padding={2}
           placement="top"
           portal
           ref={popoverElementRef}
         >
-          <ExpandButton
-            fontSize={1}
+          <Button
             mode="bleed"
+            padding={0}
+            text="…"
+            {...expandButtonProps}
             onClick={open ? collapse : expand}
-            padding={1}
             ref={expandElementRef}
             selected={open}
-            text="…"
           />
         </Popover>,
         ...rawItems.slice(len - afterLength),
@@ -79,21 +110,27 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     }
 
     return rawItems
-  }, [collapse, expand, maxLength, open, rawItems, space])
+  }, [collapse, expand, expandButtonProps, gapY, maxLength, open, rawItems])
 
   return (
-    <StyledBreadcrumbs data-ui="Breadcrumbs" {...restProps} ref={ref}>
+    <Flex
+      as={as}
+      data-ui="Breadcrumbs"
+      {...rest}
+      className={breadcrumbs({className})}
+      gapX={gapX}
+      gapY={gapY}
+    >
       {items.map((item, itemIndex) => (
         <Fragment key={itemIndex}>
           {itemIndex > 0 && (
-            <Box aria-hidden as="li" paddingX={space}>
+            <Box aria-hidden as="li">
               {separator || <Text muted>/</Text>}
             </Box>
           )}
           <Box as="li">{item}</Box>
         </Fragment>
       ))}
-    </StyledBreadcrumbs>
+    </Flex>
   )
-})
-Breadcrumbs.displayName = 'ForwardRef(Breadcrumbs)'
+}

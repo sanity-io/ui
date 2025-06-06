@@ -1,0 +1,20 @@
+import type {FlexStyleProps} from '../../props/flex/types'
+import type {FontStyleProps} from '../../props/font/types'
+import type {MaxWidthStyleProps} from '../../props/maxWidth/types'
+import type {TextAlignStyleProps} from '../../props/textAlign/types'
+import type {ResponsiveProp} from '../../types'
+
+/** @public */
+export type TextSize = number
+
+/** @public */
+export interface TextStyleProps extends FlexStyleProps, FontStyleProps, MaxWidthStyleProps {
+  /**
+   * @deprecated Will be removed in next major version
+   */
+  accent?: boolean
+  align?: TextAlignStyleProps['textAlign']
+  className?: string
+  muted?: boolean
+  size?: ResponsiveProp<TextSize>
+}

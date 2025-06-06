@@ -1,4 +1,4 @@
-import {AutocompleteMsg, AutocompleteState} from './types'
+import type {AutocompleteMsg, AutocompleteState} from './types'
 
 /**
  * @internal

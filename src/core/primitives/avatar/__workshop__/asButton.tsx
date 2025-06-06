@@ -1,10 +1,10 @@
 import {Avatar, Flex} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_AVATAR_SIZE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_AVATAR_SIZE_OPTIONS} from '$workshop'
 
 export default function AsButtonStory() {
-  const size = useSelect('Size', WORKSHOP_AVATAR_SIZE_OPTIONS, 1, 'Props')
+  const size = useSelect('Size', WORKSHOP_AVATAR_SIZE_OPTIONS, 1)
 
   return (
     <Flex align="center" height="fill" justify="center">

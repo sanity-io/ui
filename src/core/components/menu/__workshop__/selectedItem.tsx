@@ -5,7 +5,7 @@ import {
   Code,
   Menu,
   MenuButton,
-  MenuButtonProps,
+  type MenuButtonProps,
   MenuDivider,
   MenuItem,
   Stack,
@@ -23,7 +23,7 @@ export default function SelectedItemStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Stack space={4}>
+      <Stack gap={4}>
         <Code>selectedIndex={selectedIndex}</Code>
 
         <MenuButton

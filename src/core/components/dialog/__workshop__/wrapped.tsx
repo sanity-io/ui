@@ -1,5 +1,5 @@
-import {Box, Button, Dialog, DialogProps, LayerProvider, useLayer} from '@sanity/ui'
-import {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
+import {Box, Button, Dialog, type DialogProps, LayerProvider, useLayer} from '@sanity/ui'
+import {type ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 
 export default function WrappedStory() {
   return (

@@ -1,43 +1,47 @@
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
+import type {ResponsiveProp} from '@sanity/ui/css'
+import type {FontTextSize, Space, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import {
+  type ElementType,
+  type FocusEvent,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 
-import {Button} from '../../primitives'
-import {ButtonTone} from '../../types'
+import {Button} from '../../primitives/button/button'
+import type {ComponentType, Props} from '../../types/props'
 
-/**
- * @public
- */
-export interface TabProps {
+/** @public */
+export const DEFAULT_TAB_ELEMENT = 'button'
+
+/** @public */
+export type TabOwnProps = {
   /**
-   * The `id` of the correlating `TabPanel` component.
+   * The `id` of the corresponding `TabPanel` component.
    */
   'aria-controls': string
   'id': string
-  'icon'?: React.ElementType | React.ReactNode
+  'icon'?: ElementType | ReactNode
   'focused'?: boolean
-  'fontSize'?: number | number[]
-  'label'?: React.ReactNode
-  'padding'?: number | number[]
+  'fontSize'?: ResponsiveProp<FontTextSize>
+  'label'?: ReactNode
+  'padding'?: ResponsiveProp<Space>
   'selected'?: boolean
-  'tone'?: ButtonTone
+  'tone'?: ThemeColorStateToneKey
 }
 
-const CustomButton = styled(Button)`
-  max-width: 100%;
-`
+/** @public */
+export type TabElementType = 'button' | ComponentType
 
-/**
- * @public
- */
-export const Tab = forwardRef(function Tab(
-  props: TabProps &
-    Omit<
-      React.HTMLProps<HTMLButtonElement>,
-      'aria-controls' | 'as' | 'id' | 'label' | 'type' | 'width'
-    >,
-  forwardedRef: React.ForwardedRef<HTMLButtonElement>,
-) {
+/** @public */
+export type TabProps<E extends TabElementType = TabElementType> = Props<TabOwnProps, E>
+
+/** @public */
+export function Tab<E extends TabElementType = typeof DEFAULT_TAB_ELEMENT>(props: TabProps<E>) {
   const {
+    as = DEFAULT_TAB_ELEMENT,
     icon,
     id,
     focused,
@@ -46,9 +50,11 @@ export const Tab = forwardRef(function Tab(
     onClick,
     onFocus,
     padding = 2,
+    ref: forwardedRef,
     selected,
-    ...restProps
-  } = props
+    ...rest
+  } = props as TabProps<typeof DEFAULT_TAB_ELEMENT>
+
   const ref = useRef<HTMLButtonElement | null>(null)
   const focusedRef = useRef(false)
 
@@ -62,7 +68,7 @@ export const Tab = forwardRef(function Tab(
   }, [])
 
   const handleFocus = useCallback(
-    (event: React.FocusEvent<HTMLButtonElement>) => {
+    (event: FocusEvent<HTMLButtonElement>) => {
       focusedRef.current = true
       if (onFocus) onFocus(event)
     },
@@ -77,10 +83,11 @@ export const Tab = forwardRef(function Tab(
   }, [focused])
 
   return (
-    <CustomButton
+    <Button
       data-ui="Tab"
-      {...restProps}
+      {...rest}
       aria-selected={selected ? 'true' : 'false'}
+      as={as}
       fontSize={fontSize}
       icon={icon}
       id={id}
@@ -97,5 +104,4 @@ export const Tab = forwardRef(function Tab(
       type="button"
     />
   )
-})
-Tab.displayName = 'ForwardRef(Tab)'
+}

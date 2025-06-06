@@ -1,13 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
 
 import {Card, ThemeProvider} from '@sanity/ui'
-import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {buildTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {
   render as _testRender,
-  RenderOptions as _TestRenderOptions,
-  RenderResult,
+  type RenderOptions as _TestRenderOptions,
+  type RenderResult,
 } from '@testing-library/react'
-import {Fragment, ReactNode, StrictMode} from 'react'
+import {Fragment, type ReactNode, StrictMode} from 'react'
 
 export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ThemeColorSchemeKey

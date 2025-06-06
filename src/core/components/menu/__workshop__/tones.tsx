@@ -3,11 +3,11 @@ import {Box, Card, LayerProvider, Menu, MenuItem} from '@sanity/ui'
 import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 export default function TonesStory() {
-  const disabled = useBoolean('Disabled', false, 'Props')
-  const parentTone = useSelect('Parent tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Props')
+  const disabled = useBoolean('Disabled', false)
+  const parentTone = useSelect('Parent tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
 
   return (
     <LayerProvider>

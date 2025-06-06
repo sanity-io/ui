@@ -6,7 +6,7 @@ The Sanity UI components.
 npm install @sanity/ui
 
 # Install peer dependencies
-npm install react react-dom styled-components
+npm install react react-dom react-is styled-components
 ```
 
 [![npm version](https://img.shields.io/npm/v/@sanity/ui.svg?style=flat-square)](https://www.npmjs.com/package/@sanity/ui)
@@ -14,17 +14,15 @@ npm install react react-dom styled-components
 ## Usage
 
 ```jsx
-import {Button, ThemeProvider} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
+import '@sanity/ui/css/index.css'
+
+import {Button, Root} from '@sanity/ui'
 import {createRoot} from 'react-dom/client'
 
-const root = createRoot(document.getElementById('root'))
-const theme = buildTheme()
-
-root.render(
-  <ThemeProvider theme={theme}>
+createRoot(document).render(
+  <Root lang="en">
     <Button text="Hello, world" />
-  </ThemeProvider>,
+  </Root>,
 )
 ```
 

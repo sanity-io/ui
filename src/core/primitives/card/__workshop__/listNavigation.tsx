@@ -1,6 +1,4 @@
-import {Box, Card, Flex, Skeleton, Text} from '@sanity/ui'
-
-import {Stack} from '../../stack'
+import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
 
 export default function ListNavigationStory() {
   return (
@@ -21,7 +19,7 @@ export default function ListNavigationStory() {
 
 function List1() {
   return (
-    <Stack space={1}>
+    <Stack gap={1}>
       <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
         <Preview />
       </Card>
@@ -43,7 +41,7 @@ function List1() {
 
 function List2() {
   return (
-    <Stack space={1}>
+    <Stack gap={1}>
       <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
         <Preview />
       </Card>
@@ -66,8 +64,8 @@ function List2() {
 function Preview() {
   return (
     <Flex align="center" gap={2}>
-      <Skeleton radius="full" style={{width: 33, height: 33}} />
-      <Stack flex={1} space={2}>
+      <Box muted radius="full" style={{width: 33, height: 33}} />
+      <Stack flex={1} gap={2}>
         <Text size={1} weight="medium">
           Preview
         </Text>

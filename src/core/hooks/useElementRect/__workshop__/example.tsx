@@ -1,7 +1,5 @@
-import {Box, Card, Code, Container, Stack, Text, useElementRect} from '@sanity/ui'
+import {Box, Card, Code, Container, Grid, Stack, Text, useElementRect} from '@sanity/ui'
 import {useState} from 'react'
-
-import {Grid} from '../../../primitives'
 
 export default function ExampleStory() {
   const [element, setElement] = useState<HTMLElement | null>(null)
@@ -11,7 +9,7 @@ export default function ExampleStory() {
   return (
     <Box padding={[3, 4, 5]}>
       <Container width={1}>
-        <Stack space={4}>
+        <Stack gap={4}>
           <Grid columns={[1, 2, 3]}>
             <Card ref={setElement} tone="transparent">
               <Text>rect</Text>

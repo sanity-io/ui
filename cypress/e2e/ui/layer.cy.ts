@@ -1,6 +1,6 @@
-context('Utils/Layer', () => {
+context('Primitives/Layer', () => {
   it('should support responsive z-offset', () => {
-    cy.visit('/frame/?path=/utils/layer/responsive-z-offset')
+    cy.visit('/frame/?path=/primitives/layer/responsive-z-offset')
 
     const sizes = [
       {viewport: [320, 600], css: {zIndex: '1'}},
@@ -23,7 +23,7 @@ context('Utils/Layer', () => {
   })
 
   it('should calculate size of nested layers', () => {
-    cy.visit('/frame/?path=/utils/layer/nested')
+    cy.visit('/frame/?path=/primitives/layer/nested')
 
     cy.get('#open-layer-1').click()
 

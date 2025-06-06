@@ -1,13 +1,14 @@
+import {type Breakpoint, BREAKPOINTS} from '@sanity/ui/css'
 import {useMemo, useSyncExternalStore} from 'react'
 
-import {useTheme_v2} from '../../theme'
+const media = Object.values(BREAKPOINTS)
 
 /**
  * @internal
  */
 export interface _MediaStore {
   subscribe: (onStoreChange: () => void) => () => void
-  getSnapshot: () => number
+  getSnapshot: () => Breakpoint
 }
 
 type MediaQueryMinWidth = `(min-width: ${number}px)`
@@ -17,17 +18,17 @@ type MediaQuery = `screen and ${MediaQueryMinWidth | MediaQueryMaxWidth | MediaQ
 
 function _getMediaQuery(media: number[], index: number): MediaQuery {
   if (index === 0) {
-    return `screen and (max-width: ${media[index] - 1}px)`
+    return `screen and (max-width: ${media[index + 1] - 1}px)`
   }
 
-  if (index === media.length) {
-    return `screen and (min-width: ${media[index - 1]}px)`
+  if (index === media.length - 1) {
+    return `screen and (min-width: ${media[index]}px)`
   }
 
-  return `screen and (min-width: ${media[index - 1]}px) and (max-width: ${media[index] - 1}px)`
+  return `screen and (min-width: ${media[index]}px) and (max-width: ${media[index + 1] - 1}px)`
 }
 
-function _createMediaStore(media: number[]): _MediaStore {
+function _createMediaStore(): _MediaStore {
   const mediaLen = media.length
   let sizes: {mq: MediaQueryList; index: number}[]
 
@@ -50,7 +51,7 @@ function _createMediaStore(media: number[]): _MediaStore {
 
   const getSnapshot = () => {
     for (const {index, mq} of getSizes()) {
-      if (mq.matches) return index
+      if (mq.matches) return index as Breakpoint
     }
 
     return 0
@@ -86,7 +87,7 @@ function _createMediaStore(media: number[]): _MediaStore {
  *
  * @link https://beta.reactjs.org/apis/react/useSyncExternalStore#adding-support-for-server-rendering
  */
-function getServerSnapshot() {
+function getServerSnapshot(): Breakpoint {
   return 0
 }
 
@@ -94,9 +95,8 @@ function getServerSnapshot() {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export function useMediaIndex(): number {
-  const {media} = useTheme_v2()
-  const store = useMemo(() => _createMediaStore(media), [media])
+export function useMediaIndex(): Breakpoint {
+  const store = useMemo(() => _createMediaStore(), [])
 
   return useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)
 }

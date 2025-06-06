@@ -2,14 +2,14 @@ import {Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
 
 export default function StatesStory() {
-  const invalid = useBoolean('Invalid', false, 'Props')
+  const invalid = useBoolean('Invalid', false)
   const onChange = useAction('onChange')
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={1}>
-        <Stack space={5}>
-          <Stack space={3}>
+        <Stack gap={5}>
+          <Stack gap={3}>
             <Text size={1} weight="medium">
               <label htmlFor="enabled-example">Enabled (default)</label>
             </Text>
@@ -21,7 +21,7 @@ export default function StatesStory() {
             />
           </Stack>
 
-          <Stack space={3}>
+          <Stack gap={3}>
             <Text size={1} weight="medium">
               <label htmlFor="disabled-example">Disabled</label>
             </Text>
@@ -34,7 +34,7 @@ export default function StatesStory() {
             />
           </Stack>
 
-          <Stack space={3}>
+          <Stack gap={3}>
             <Text size={1} weight="medium">
               <label htmlFor="read-only-example">Read-only</label>
             </Text>

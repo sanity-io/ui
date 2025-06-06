@@ -13,19 +13,18 @@ const BREADCRUMBS_MAX_LENGTH_OPTIONS = {
 }
 
 export default function Example() {
-  const maxLength =
-    useSelect('Max. length', BREADCRUMBS_MAX_LENGTH_OPTIONS, 0, 'Props') || undefined
+  const maxLength = useSelect('Max. length', BREADCRUMBS_MAX_LENGTH_OPTIONS)
 
   return (
     <Flex align="center" height="fill" justify="center">
       <Breadcrumbs
+        gap={2}
         maxLength={maxLength}
         separator={
           <Text muted size={1}>
             /
           </Text>
         }
-        space={2}
       >
         <Text size={1}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

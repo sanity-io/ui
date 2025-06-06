@@ -1,47 +1,69 @@
-import {Children, forwardRef, useMemo} from 'react'
-import {styled} from 'styled-components'
+import type {ResponsiveProp} from '@sanity/ui/css'
+import type {Space} from '@sanity/ui/theme'
 
-import {useArrayProp} from '../../hooks'
-import {Box, BoxProps} from '../box'
-import {inlineBaseStyle, inlineSpaceStyle} from './styles'
-import {ResponsiveInlineSpaceStyleProps} from './types'
+import type {Props} from '../../types/props'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
-/**
- * @public
- */
-export interface InlineProps extends Omit<BoxProps, 'display'> {
-  /** The spacing between children. */
-  space?: number | number[]
+/** @public */
+export const DEFAULT_INLINE_ELEMENT = 'div'
+
+/** @public */
+export type InlineOwnProps = Omit<
+  BoxOwnProps,
+  | 'alignItems'
+  | 'flexDirection'
+  | 'flexWrap'
+  | 'justifyContent'
+  | 'gridAutoColumns'
+  | 'gridAutoFlow'
+  | 'gridAutoRows'
+  | 'gridColumnEnd'
+  | 'gridColumnStart'
+  | 'gridColumn'
+  | 'gridRowEnd'
+  | 'gridRowStart'
+  | 'gridRow'
+  | 'gridTemplateColumns'
+  | 'gridTemplateRows'
+  // todo: omit deprecated flex and grid props
+> & {
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
 }
 
-const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
+/** @public */
+export type InlineElementType = BoxElementType
+
+/** @public */
+export type InlineProps<E extends InlineElementType = InlineElementType> = Props<InlineOwnProps, E>
 
 /**
  * The `Inline` component is a layout utility for aligning and spacing items horizontally.
  *
  * @public
  */
-export const Inline = forwardRef(function Inline(
-  props: InlineProps & React.HTMLProps<HTMLDivElement>,
-  ref,
+export function Inline<E extends InlineElementType = typeof DEFAULT_INLINE_ELEMENT>(
+  props: InlineProps<E>,
 ) {
-  const {as, children: childrenProp, space, ...restProps} = props
-
-  const children = useMemo(
-    () => Children.map(childrenProp, (child) => child && <div>{child}</div>),
-    [childrenProp],
-  )
+  const {
+    as = DEFAULT_INLINE_ELEMENT,
+    children,
+    gap,
+    space,
+    ...rest
+  } = props as InlineProps<typeof DEFAULT_INLINE_ELEMENT>
 
   return (
-    <StyledInline
+    <Box
       data-ui="Inline"
-      {...restProps}
-      $space={useArrayProp(space)}
-      forwardedAs={as}
-      ref={ref as any}
+      {...rest}
+      alignItems="center"
+      as={as}
+      display="flex"
+      gap={gap ?? space}
+      flexWrap="wrap"
     >
       {children}
-    </StyledInline>
+    </Box>
   )
-})
-Inline.displayName = 'ForwardRef(Inline)'
+}

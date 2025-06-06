@@ -7,7 +7,7 @@ export default function LazyRefractor(
 ) {
   const {language: languageProp, value} = props
   const language = typeof languageProp === 'string' ? languageProp : undefined
-  const registered = language ? Refractor.hasLanguage(language as any) : false
+  const registered = language ? Refractor.hasLanguage(language) : false
 
   return (
     <>
@@ -16,5 +16,3 @@ export default function LazyRefractor(
     </>
   )
 }
-
-LazyRefractor.displayName = 'LazyRefractor'

@@ -23,7 +23,7 @@ jobs:
           cache: pnpm
           node-version: lts/*
       - run: pnpm install
-      - run: pnpm ts:check
+      - run: pnpm typecheck
       - run: pnpm build
 
   lint:
@@ -78,7 +78,7 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           build: pnpm workshop:build
-          start: pnpm workshop:start
+          start: pnpm workshop:preview
           wait-on: http://localhost:1337
       - uses: actions/upload-artifact@v4
         if: failure()

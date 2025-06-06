@@ -1,77 +1,58 @@
-import {getTheme_v2} from '@sanity/ui/theme'
-import {Children, cloneElement, forwardRef, isValidElement} from 'react'
-import {css, styled} from 'styled-components'
+import {avatarStack, type ResponsiveProp} from '@sanity/ui/css'
+import type {AvatarSize} from '@sanity/ui/theme'
+import {Children, cloneElement, Fragment, isValidElement, type ReactElement} from 'react'
 
-import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp} from '../../hooks'
-import {_responsive, rem, ThemeProps} from '../../styles'
-import {AvatarSize} from '../../types'
+import {useResponsiveProp} from '../../hooks/useResponsiveProp'
+import type {ComponentType, Props} from '../../types/props'
+import {Box, type BoxOwnProps} from '../box/box'
+import type {AvatarProps} from './avatar'
 import {AvatarCounter} from './avatarCounter'
 
-const BASE_STYLES = css`
-  white-space: nowrap;
+/** @public */
+export const DEFAULT_AVATAR_STACK_ELEMENT = 'span'
 
-  & > div {
-    vertical-align: top;
+/** @public */
+export type AvatarStackChild = ReactElement<AvatarProps<'div'>> | null | undefined | false
 
-    &:not([hidden]) {
-      display: inline-block;
-    }
-  }
-`
-
-function avatarStackStyle() {
-  return BASE_STYLES
-}
-
-function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
-  const {avatar, media} = getTheme_v2(props.theme)
-
-  return _responsive(media, props.$size, (size) => {
-    const avatarSize = avatar.sizes[size]
-
-    if (!avatarSize) return EMPTY_RECORD
-
-    return {
-      '& > div + div': {
-        marginLeft: rem(avatarSize.distance),
-      },
-    }
-  })
-}
-
-const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>(
-  responsiveAvatarStackSizeStyle,
-  avatarStackStyle,
-)
-
-/**
- * @public
- */
-export interface AvatarStackProps {
-  children: React.ReactNode
+/** @public */
+export type AvatarStackOwnProps = Omit<
+  BoxOwnProps,
+  'align' | 'alignItems' | 'display' | 'justify' | 'justifyContent'
+> & {
+  children: AvatarStackChild | AvatarStackChild[]
   maxLength?: number
-  size?: AvatarSize | AvatarSize[]
+  size?: ResponsiveProp<AvatarSize>
   /** @deprecated No longer supported. */
   tone?: 'navbar'
 }
 
-/**
- * @public
- */
-export const AvatarStack = forwardRef(function AvatarStack(
-  props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+/** @public */
+export type AvatarStackElementType = 'div' | 'span' | ComponentType
+
+/** @public */
+export type AvatarStackProps<E extends AvatarStackElementType = AvatarStackElementType> = Props<
+  AvatarStackOwnProps,
+  E
+>
+
+/** @public */
+export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AVATAR_STACK_ELEMENT>(
+  props: AvatarStackProps<E>,
 ) {
   const {
+    as = DEFAULT_AVATAR_STACK_ELEMENT,
     children: childrenProp,
+    className,
     maxLength: maxLengthProp = 4,
     size: sizeProp = 1,
-    ...restProps
-  } = props
-  const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
+    ...rest
+  } = props as AvatarStackProps<typeof DEFAULT_AVATAR_STACK_ELEMENT>
+
+  const children = Children.toArray(childrenProp).filter(isValidElement) as ReactElement<
+    AvatarProps<'span'>
+  >[]
   const maxLength = Math.max(maxLengthProp, 0)
-  const size = useArrayProp(sizeProp)
+  const size = useResponsiveProp(sizeProp)
 
   const len = children.length
   const visibleCount = maxLength - 1
@@ -79,23 +60,22 @@ export const AvatarStack = forwardRef(function AvatarStack(
   const visibleChildren = extraCount > 1 ? children.slice(extraCount, len) : children
 
   return (
-    <StyledAvatarStack data-ui="AvatarStack" {...restProps} ref={ref} $size={size}>
-      {len === 0 && (
-        <div>
-          <AvatarCounter count={len} size={size} />
-        </div>
-      )}
+    <Box
+      data-ui="AvatarStack"
+      {...rest}
+      alignItems="center"
+      as={as}
+      className={avatarStack({className, size})}
+      display="flex"
+      justifyContent="flex-start"
+    >
+      {len === 0 && <AvatarCounter count={len} size={size} />}
 
-      {len !== 0 && extraCount > 1 && (
-        <div>
-          <AvatarCounter count={extraCount} size={size} />
-        </div>
-      )}
+      {len !== 0 && extraCount > 1 && <AvatarCounter count={extraCount} size={size} />}
 
       {visibleChildren.map((child, childIndex) => (
-        <div key={String(childIndex)}>{cloneElement(child, {size})}</div>
+        <Fragment key={String(childIndex)}>{cloneElement(child, {size})}</Fragment>
       ))}
-    </StyledAvatarStack>
+    </Box>
   )
-})
-AvatarStack.displayName = 'ForwardRef(AvatarStack)'
+}

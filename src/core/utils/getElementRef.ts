@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/** @internal */
 // Based on https://github.com/radix-ui/primitives/blob/0bade6a704e5821b90a6da0f3d8cfa8a7711127d/packages/react/slot/src/Slot.tsx#L128-L150
 // Before React 19 accessing `element.props.ref` will throw a warning and suggest using `element.ref`
 // After React 19 accessing `element.ref` does the opposite.

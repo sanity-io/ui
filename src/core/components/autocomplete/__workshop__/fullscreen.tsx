@@ -1,7 +1,7 @@
 import {CloseIcon, SearchIcon} from '@sanity/icons'
 import {
   Autocomplete,
-  BaseAutocompleteOption,
+  type BaseAutocompleteOption,
   Box,
   Button,
   Card,
@@ -11,7 +11,6 @@ import {
   Layer,
   Portal,
   PortalProvider,
-  Skeleton,
   Stack,
   Text,
   TextSkeleton,
@@ -20,10 +19,10 @@ import {
 import {useBoolean} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
-import {countriesStore} from '../__mocks__/apiStore'
+import {countriesStore} from './mock/apiStore'
 
 export default function Fullscreen() {
-  const error = useBoolean('Error', false, 'Props')
+  const error = useBoolean('Error', false)
 
   const {push: pushToast} = useToast()
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
@@ -175,60 +174,59 @@ export default function Fullscreen() {
   }, [value])
 
   return (
-    <Card style={{display: 'flex', flexDirection: 'column', minHeight: '100%'}} tone="transparent">
+    <Card display="flex" flexDirection="column" minHeight="full" tone="transparent">
       <PortalProvider element={portalElement}>
-        <Flex direction="column" flex={1} height="fill">
-          <Card hidden={open} padding={2}>
-            <Flex align="center">
-              <Box flex={1} />
-              <Button
-                aria-label="Open search"
-                icon={SearchIcon}
-                mode="ghost"
-                onClick={handleOpen}
-                ref={openSearchButtonElementRef}
-              />
-            </Flex>
+        <Card hidden={open} padding={2}>
+          <Flex align="center">
+            <Box flex={1} />
+            <Button
+              aria-label="Open search"
+              icon={SearchIcon}
+              mode="bleed"
+              onClick={handleOpen}
+              ref={openSearchButtonElementRef}
+            />
+          </Flex>
+        </Card>
+        <Layer hidden={!open} style={{position: 'sticky', top: 0}}>
+          <Card padding={2} shadow={1}>
+            <Autocomplete
+              filterOption={filterOption}
+              fontSize={1}
+              icon={SearchIcon}
+              id="fullsceen-example"
+              listBox={{padding: 2}}
+              loading={loading}
+              onQueryChange={handleQueryChange}
+              onSelect={handleSelect}
+              options={options}
+              placeholder="Search"
+              radius={2}
+              ref={inputRef}
+              relatedElements={relatedElements}
+              renderOption={renderOption}
+              renderPopover={renderPopover}
+              renderValue={renderValue}
+              suffix={
+                <Box padding={1}>
+                  <Button
+                    aria-label="Close search"
+                    icon={CloseIcon}
+                    onClick={handleClose}
+                    padding={2}
+                    mode="bleed"
+                    ref={setCloseSearchButtonElement}
+                  />
+                </Box>
+              }
+              value={value}
+            />
           </Card>
-          <Layer hidden={!open} style={{position: 'sticky', top: 0}}>
-            <Card padding={2} shadow={1}>
-              <Autocomplete
-                filterOption={filterOption}
-                icon={SearchIcon}
-                id="fullsceen-example"
-                listBox={{padding: 2}}
-                loading={loading}
-                onQueryChange={handleQueryChange}
-                onSelect={handleSelect}
-                options={options}
-                placeholder="Search"
-                radius={2}
-                ref={inputRef}
-                relatedElements={relatedElements}
-                renderOption={renderOption}
-                renderPopover={renderPopover}
-                renderValue={renderValue}
-                suffix={
-                  <Box padding={1}>
-                    <Button
-                      aria-label="Close search"
-                      icon={CloseIcon}
-                      onClick={handleClose}
-                      padding={2}
-                      mode="bleed"
-                      ref={setCloseSearchButtonElement}
-                    />
-                  </Box>
-                }
-                value={value}
-              />
-            </Card>
-          </Layer>
-          <Card flex={1} hidden={!open} ref={setPortalElement} style={{position: 'relative'}} />
-          <Box flex={1} hidden={open} padding={4}>
-            <Heading>Welcome to this app</Heading>
-          </Box>
-        </Flex>
+        </Layer>
+        <Card flex={1} hidden={!open} position="relative" ref={setPortalElement} />
+        <Box flex={1} hidden={open} padding={4}>
+          <Heading>Welcome to this app</Heading>
+        </Box>
       </PortalProvider>
     </Card>
   )
@@ -253,7 +251,7 @@ function AsyncOption(props: {
   return (
     <Card
       aria-label={data?.title}
-      data-as="a"
+      as="button"
       disabled={disabled}
       padding={2}
       radius={2}
@@ -262,9 +260,9 @@ function AsyncOption(props: {
       tabIndex={tabIndex}
     >
       <Flex align="center">
-        <Skeleton radius={2} style={{width: 35, height: 35}} />
+        <Box muted radius={2} style={{width: 35, height: 35}} />
         <Box flex={1} marginLeft={3}>
-          <Stack space={2}>
+          <Stack gap={2}>
             {loading && (
               <>
                 <TextSkeleton style={{maxWidth: 200}} />
