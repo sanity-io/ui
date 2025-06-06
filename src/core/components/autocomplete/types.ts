@@ -1,14 +1,9 @@
-import {ButtonProps} from '../../primitives'
+import type {ButtonProps} from '../../primitives/button/button'
 
-/**
- * @public
- */
-export type AutocompleteOpenButtonProps = Omit<ButtonProps, 'as'> &
-  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'ref'>
+/** @public */
+export type AutocompleteOpenButtonProps = Omit<ButtonProps<'button'>, 'as'>
 
-/**
- * @public
- */
+/** @public */
 export interface BaseAutocompleteOption {
   value: string
 }

@@ -1,4 +1,4 @@
-import {Box, Dialog, LayerProvider, Text} from '@sanity/ui'
+import {Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
 import {useAction} from '@sanity/ui-workshop'
 import {useEffect, useRef} from 'react'
 
@@ -19,8 +19,8 @@ export default function OnScrollStory() {
   return (
     <LayerProvider>
       <Dialog contentRef={ref} header="On scroll example" id="on-scroll-example">
-        <Box padding={4}>
-          <Text>
+        <Stack gap={4} padding={4} paddingTop={1}>
+          <Text muted size={1}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
             hendrerit scelerisque ut libero. Maecenas iaculis efficitur lorem, ac faucibus mi
             imperdiet quis. Cras a consectetur erat. Fusce imperdiet, dolor et pellentesque iaculis,
@@ -32,7 +32,19 @@ export default function OnScrollStory() {
             mattis tristique nunc ac lacinia. Vestibulum non pulvinar turpis, posuere consequat
             arcu. Fusce ut urna blandit, finibus nisi a, molestie elit. Nulla sed eleifend mi.
           </Text>
-        </Box>
+
+          <Text muted size={1}>
+            Aliquam quis finibus ex. Fusce semper lorem sed orci tempor gravida. Cras dui urna,
+            congue quis ipsum in, viverra facilisis libero. Vivamus vehicula libero quam, at posuere
+            leo ornare imperdiet. Cras eu neque eu tellus scelerisque iaculis ac id ex. Vestibulum
+            quam enim, lacinia ac ultricies at, molestie ut nisi. Vivamus vitae elit vel ante
+            feugiat iaculis. Pellentesque vel diam volutpat, luctus magna at, laoreet tellus.
+            Aliquam congue id nisi at sollicitudin. In sed nisi libero. Nulla ornare, mauris et
+            pulvinar hendrerit, ligula leo auctor enim, vestibulum laoreet metus nisl a nulla. Sed
+            et interdum sapien. Mauris lacinia interdum nisi quis ultrices. Etiam lobortis, dui
+            semper ornare fringilla, felis lacus feugiat dui, vitae rhoncus tellus tortor ut ipsum.
+          </Text>
+        </Stack>
       </Dialog>
     </LayerProvider>
   )

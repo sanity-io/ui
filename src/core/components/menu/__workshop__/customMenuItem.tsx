@@ -7,7 +7,7 @@ export default function CustomMenuItemStory() {
         <LayerProvider>
           <Menu>
             <MenuItem padding={3}>
-              <Stack space={3}>
+              <Stack gap={3}>
                 <Text weight="medium" size={1}>
                   First option
                 </Text>
@@ -17,7 +17,7 @@ export default function CustomMenuItemStory() {
               </Stack>
             </MenuItem>
             <MenuItem padding={3}>
-              <Stack space={3}>
+              <Stack gap={3}>
                 <Text weight="medium" size={1}>
                   Second option
                 </Text>
@@ -28,7 +28,7 @@ export default function CustomMenuItemStory() {
             </MenuItem>
             <MenuDivider />
             <MenuItem padding={3} tone="critical">
-              <Stack space={3}>
+              <Stack gap={3}>
                 <Text weight="medium" size={1}>
                   Dangerous option
                 </Text>

@@ -1,43 +1,65 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {type ResponsiveProp, stack} from '@sanity/ui/css'
+import type {Space} from '@sanity/ui/theme'
 
-import {useArrayProp} from '../../hooks'
-import {Box, BoxProps} from '../box'
-import {responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps, stackBaseStyle} from './styles'
+import type {Props} from '../../types/props'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
-/**
- * @public
- */
-export interface StackProps extends BoxProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  space?: number | number[]
+/** @public */
+export const DEFAULT_STACK_ELEMENT = 'div'
+
+/** @public */
+export type StackOwnProps = Omit<
+  BoxOwnProps,
+  | 'align'
+  | 'alignItems'
+  | 'columns'
+  | 'gridTemplateColumns'
+  | 'direction'
+  | 'display'
+  | 'flexDirection'
+  | 'flexWrap'
+  | 'gapX'
+  | 'gapY'
+  | 'justify'
+  | 'justifyContent'
+  | 'rows'
+  | 'gridTemplateRows'
+> & {
+  /** @deprecated Use `gap` instead. */
+  space?: ResponsiveProp<Space>
 }
 
-const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>(
-  stackBaseStyle,
-  responsiveStackSpaceStyle,
-)
+/** @public */
+export type StackElementType = BoxElementType
+
+/** @public */
+export type StackProps<E extends StackElementType = StackElementType> = Props<StackOwnProps, E>
 
 /**
  * The `Stack` component is used to place elements on top of each other.
  *
  * @public
  */
-export const Stack = forwardRef(function Stack(
-  props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+export function Stack<E extends StackElementType = typeof DEFAULT_STACK_ELEMENT>(
+  props: StackProps<E>,
 ) {
-  const {as, space, ...restProps} = props
+  const {
+    as = DEFAULT_STACK_ELEMENT,
+    className,
+    gap,
+    space,
+    ...rest
+  } = props as StackProps<typeof DEFAULT_STACK_ELEMENT>
 
   return (
-    <StyledStack
-      data-as={typeof as === 'string' ? as : undefined}
+    <Box
       data-ui="Stack"
-      {...restProps}
-      $space={useArrayProp(space)}
-      forwardedAs={as}
-      ref={ref}
+      {...rest}
+      as={as}
+      gridAutoRows="min"
+      className={stack({className})}
+      display="grid"
+      gap={gap ?? space}
     />
   )
-})
-Stack.displayName = 'ForwardRef(Stack)'
+}

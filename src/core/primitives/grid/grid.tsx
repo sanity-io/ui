@@ -1,48 +1,33 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import type {Props} from '../../types/props'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
-import {Box, BoxProps} from '../box'
-import {ResponsiveGridProps} from '../types'
+/** @public */
+export const DEFAULT_GRID_ELEMENT = 'div'
 
-/**
- * @public
- */
-export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
+/** @public */
+export type GridOwnProps = Omit<BoxOwnProps, 'display'>
 
-const StyledGrid = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
+/** @public */
+export type GridElementType = BoxElementType
+
+/** @public */
+export type GridProps<E extends GridElementType = GridElementType> = Props<GridOwnProps, E>
 
 /**
  * The `Grid` component is for building 2-dimensional layers (based on CSS grid).
  *
  * @public
  */
-export const Grid = forwardRef(function Grid(
-  props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
-  const {as, autoRows, autoCols, autoFlow, columns, gap, gapX, gapY, rows, children, ...restProps} =
-    props
+export function Grid<E extends GridElementType = typeof DEFAULT_GRID_ELEMENT>(props: GridProps<E>) {
+  const {
+    as = DEFAULT_GRID_ELEMENT,
+    children,
+    ...rest
+  } = props as GridProps<typeof DEFAULT_GRID_ELEMENT>
 
   return (
-    <StyledGrid
-      data-as={typeof as === 'string' ? as : undefined}
-      data-ui="Grid"
-      {...restProps}
-      $autoRows={useArrayProp(autoRows)}
-      $autoCols={useArrayProp(autoCols)}
-      $autoFlow={useArrayProp(autoFlow)}
-      $columns={useArrayProp(columns)}
-      $gap={useArrayProp(gap)}
-      $gapX={useArrayProp(gapX)}
-      $gapY={useArrayProp(gapY)}
-      $rows={useArrayProp(rows)}
-      forwardedAs={as}
-      ref={ref}
-    >
+    <Box data-ui="Grid" {...rest} as={as} display="grid">
       {children}
-    </StyledGrid>
+    </Box>
   )
-})
-Grid.displayName = 'ForwardRef(Grid)'
+}

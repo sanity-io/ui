@@ -1,36 +1,56 @@
-import {Children, cloneElement, forwardRef, isValidElement, useCallback, useState} from 'react'
-import {styled} from 'styled-components'
+import {type ResponsiveProp} from '@sanity/ui/css'
+import type {Space} from '@sanity/ui/theme'
+import {
+  Children,
+  cloneElement,
+  type KeyboardEvent,
+  type ReactElement,
+  useCallback,
+  useState,
+} from 'react'
 
-import {Inline, InlineProps} from '../../primitives'
+import {Flex, type FlexOwnProps} from '../../primitives/flex/flex'
+import type {ComponentType, Props} from '../../types/props'
+import type {TabProps} from './tab'
 
-/**
- * @public
- */
-export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
-  children: Array<React.JSX.Element | null | undefined | false>
+/** @public */
+export const DEFAULT_TAB_LIST_ELEMENT = 'div'
+
+/** @public */
+export type TabListChild = ReactElement<Props<TabProps, 'button'>> | null | undefined | false
+
+/** @public */
+export type TabListOwnProps = Omit<FlexOwnProps, 'as' | 'height'> & {
+  children: TabListChild[]
+  /** @deprecated Use `gap` instead */
+  space?: ResponsiveProp<Space>
 }
 
-//Limits the width of tabs in tablist
-const CustomInline = styled(Inline)`
-  & > div {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-`
+/** @public */
+export type TabListElementType = 'div' | 'span' | ComponentType
 
-/**
- * @public
- */
-export const TabList = forwardRef(function TabList(
-  props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref,
+/** @public */
+export type TabListProps<E extends TabListElementType = TabListElementType> = Props<
+  TabListOwnProps,
+  E
+>
+
+/** @public */
+export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_ELEMENT>(
+  props: TabListProps<E>,
 ) {
-  const {children: childrenProp, ...restProps} = props
+  const {
+    as = DEFAULT_TAB_LIST_ELEMENT,
+    children: childrenProp,
+    gap = 1,
+    space = 1,
+    wrap = 'nowrap',
+    ...rest
+  } = props as TabListProps<typeof DEFAULT_TAB_LIST_ELEMENT>
+
   const [focusedIndex, setFocusedIndex] = useState(-1)
 
-  const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
+  const children = Children.toArray(childrenProp).filter(_isReactElement)
 
   const tabs = children.map((child, childIndex) =>
     cloneElement(child, {
@@ -43,7 +63,7 @@ export const TabList = forwardRef(function TabList(
   const numTabs = tabs.length
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'ArrowLeft') {
         setFocusedIndex((prevIndex) => (prevIndex + numTabs - 1) % numTabs)
       }
@@ -56,15 +76,20 @@ export const TabList = forwardRef(function TabList(
   )
 
   return (
-    <CustomInline
+    <Flex
       data-ui="TabList"
-      {...restProps}
+      {...rest}
+      as={as}
+      gap={gap ?? space}
       onKeyDown={handleKeyDown}
-      ref={ref}
       role="tablist"
+      wrap={wrap}
     >
       {tabs}
-    </CustomInline>
+    </Flex>
   )
-})
-TabList.displayName = 'ForwardRef(TabList)'
+}
+
+function _isReactElement(node: unknown): node is ReactElement<Props<TabProps, 'button'>> {
+  return Boolean(node)
+}

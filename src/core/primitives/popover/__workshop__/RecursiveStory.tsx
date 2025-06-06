@@ -1,5 +1,5 @@
-import {Button, Flex, LayerProvider, Placement, Popover, useLayer} from '@sanity/ui'
-import {ThemeColorToneKey} from '@sanity/ui/theme'
+import {Button, Flex, LayerProvider, type Placement, Popover, useLayer} from '@sanity/ui'
+import {THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 export default function RecursiveStory() {
@@ -13,7 +13,6 @@ export default function RecursiveStory() {
 }
 
 const placements: Placement[] = ['top', 'right', 'bottom', 'left']
-const tones: ThemeColorToneKey[] = ['primary', 'positive', 'caution', 'critical']
 
 function RecursiveExample({onClose}: {onClose?: () => void}) {
   const [open, setOpen] = useState(false)
@@ -56,13 +55,12 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       padding={1}
       placement={fallbackPlacements[3]}
       portal
-      tone={tones[seed]}
+      tone={THEME_COLOR_CARD_TONES[seed]}
     >
       <Button
         mode="bleed"
         onKeyDown={handleKeyDown}
         onClick={handleOpen}
-        radius={3}
         ref={buttonRef}
         text="Open"
       />

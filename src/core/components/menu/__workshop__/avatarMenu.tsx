@@ -1,10 +1,16 @@
 import {UsersIcon} from '@sanity/icons'
-
-import {Avatar, Badge, Box, Button, Flex, Text} from '../../../primitives'
-import {Hotkeys} from '../../hotkeys'
-import {Menu} from '../menu'
-import {MenuButton} from '../menuButton'
-import {MenuItem} from '../menuItem'
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Hotkeys,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Text,
+} from '@sanity/ui'
 
 export default function AvatarMenuStory() {
   return (

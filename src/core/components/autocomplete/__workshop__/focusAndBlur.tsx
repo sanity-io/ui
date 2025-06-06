@@ -1,4 +1,4 @@
-import {Autocomplete, Box, Button, Card, Code, Stack} from '@sanity/ui'
+import {Autocomplete, Box, Button, Code, Stack} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
 export default function FocusAndBlurStory() {
@@ -10,7 +10,7 @@ export default function FocusAndBlurStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Stack space={3}>
+      <Stack gap={3}>
         <Autocomplete
           id="focus-and-blur"
           onBlur={handleBlur}
@@ -21,12 +21,12 @@ export default function FocusAndBlurStory() {
           placeholder="Search"
           value={value}
         />
-        <Stack space={3}>
-          <Card overflow="auto" padding={3} radius={2} tone="transparent">
+        <Stack gap={3}>
+          <Box muted overflow="auto" padding={3} radius={2}>
             <Code id="focus-and-blur-log" language="json" size={1}>
               {JSON.stringify(log)}
             </Code>
-          </Card>
+          </Box>
 
           <Button id="focus-and-blur-clear-btn" mode="ghost" onClick={handleClear} text="Clear" />
         </Stack>

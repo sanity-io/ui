@@ -1,29 +1,45 @@
-import {styled} from 'styled-components'
+import {type GapStyleProps, type PaddingStyleProps, toastLayer} from '@sanity/ui/css'
 
-import {Grid} from '../../primitives/grid'
-import {useLayer} from '../../utils'
+import {Grid} from '../../primitives/grid/grid'
+import {useLayer} from '../../primitives/layer/useLayer'
+import type {ComponentType, Props} from '../../types/props'
 
-/**
- * @public
- */
-export interface ToastLayerProps {
-  children: React.ReactNode
-  padding?: number | number[]
-  paddingX?: number | number[]
-  paddingY?: number | number[]
-  gap?: number | number[]
-}
+/** @internal */
+export const DEFAULT_TOAST_LAYER_ELEMENT = 'ul'
+
+/** @internal */
+export type ToastLayerOwnProps = GapStyleProps & PaddingStyleProps
+
+/** @internal */
+export type ToastLayerElementType = 'ul' | ComponentType
+
+/** @internal */
+export type ToastLayerProps<E extends ToastLayerElementType = ToastLayerElementType> = Props<
+  ToastLayerOwnProps,
+  E
+>
 
 /**
  * @internal
  */
-export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
-  const {children, padding = 4, paddingX, paddingY, gap = 3} = props
+export function ToastLayer<E extends ToastLayerElementType = typeof DEFAULT_TOAST_LAYER_ELEMENT>(
+  props: ToastLayerProps<E>,
+) {
+  const {
+    as = DEFAULT_TOAST_LAYER_ELEMENT,
+    children,
+    padding = 4,
+    paddingX,
+    paddingY,
+    gap = 3,
+  } = props as ToastLayerProps<typeof DEFAULT_TOAST_LAYER_ELEMENT>
+
   const {zIndex} = useLayer()
 
   return (
-    <StyledLayer
-      forwardedAs="ul"
+    <Grid
+      as={as}
+      className={toastLayer()}
       data-ui="ToastProvider"
       padding={padding}
       paddingX={paddingX}
@@ -33,19 +49,6 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
       style={{zIndex}}
     >
       {children}
-    </StyledLayer>
+    </Grid>
   )
 }
-
-ToastLayer.displayName = 'ToastLayer'
-
-const StyledLayer = styled(Grid)`
-  box-sizing: border-box;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  list-style: none;
-  pointer-events: none;
-  max-width: 420px;
-  width: 100%;
-`

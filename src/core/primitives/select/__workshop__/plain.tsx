@@ -1,19 +1,31 @@
 import {Card, Container, Label, Select, Stack} from '@sanity/ui'
-import {useBoolean} from '@sanity/ui-workshop'
+import {useBoolean, useSelect} from '@sanity/ui-workshop'
+
+import {WORKSHOP_RADIUS_OPTIONS, WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '$workshop'
 
 export default function PlainStory() {
-  const disabled = useBoolean('Disabled', false, 'Props')
-  const readOnly = useBoolean('Read only', false, 'Props')
+  const border = useBoolean('Border', true)
+  const disabled = useBoolean('Disabled', false)
+  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS)
+  const readOnly = useBoolean('Read only', false)
 
   return (
     <Container width={0}>
       <Card padding={4}>
-        <Stack space={3}>
+        <Stack gap={3}>
           <Label as="label" htmlFor="select">
             Select
           </Label>
 
-          <Select disabled={disabled} id="select-example" readOnly={readOnly}>
+          <Select
+            border={border}
+            disabled={disabled}
+            fontSize={fontSize}
+            id="select-example"
+            radius={radius}
+            readOnly={readOnly}
+          >
             <option value="a">Option A</option>
             <option value="b">Option B</option>
             <option value="c">Option C</option>

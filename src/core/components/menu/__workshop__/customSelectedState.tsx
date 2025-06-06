@@ -1,10 +1,6 @@
 import {ChevronDownIcon} from '@sanity/icons'
+import {Box, Button, Menu, MenuButton, MenuItem} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
-
-import {Box, Button} from '../../../primitives'
-import {Menu} from '../menu'
-import {MenuButton} from '../menuButton'
-import {MenuItem} from '../menuItem'
 
 const selectedOptions = {
   undefined: 'undefined',

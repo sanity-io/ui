@@ -1,5 +1,6 @@
 /** @jest-environment node */
 import {renderToStaticMarkup, renderToString} from 'react-dom/server'
+import {describe, expect, it} from 'vitest'
 
 import {usePrefersDark} from './usePrefersDark'
 

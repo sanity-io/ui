@@ -3,7 +3,7 @@ import {useCallback, useDebugValue, useSyncExternalStore} from 'react'
 /**
  * Efficiently subscribes to `window.matchMedia` queries
  *
- * @param getServerSnapshot - Only called during server-side rendering, and hydration if using hydrateRoot. Required if the hook is called during SSR (https://react.dev/reference/react/useSyncExternalStore#adding-support-for-server-rendering)
+ * @param getServerSnapshot - Only called during server-side rendering, and hydration if using hydrateRoot. Required if the hook is called during SSR (https://dev/reference/react/useSyncExternalStore#adding-support-for-server-rendering)
  *
  * @public
  */

@@ -1,80 +1,80 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
-
-import {useArrayProp} from '../../hooks'
 import {
-  ResponsiveFontStyleProps,
-  responsiveHeadingFont,
-  responsiveTextAlignStyle,
-  ResponsiveTextAlignStyleProps,
-} from '../../styles/internal'
-import {TextAlign} from '../../types'
-import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
-import {headingBaseStyle} from './styles'
-import {HeadingStyleProps} from './types'
+  heading,
+  type HeadingStyleProps,
+  textOverflow,
+  type TextOverflowStyleProps,
+} from '@sanity/ui/css'
 
-/**
- * @public
- */
-export interface HeadingProps {
-  accent?: boolean
-  align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  muted?: boolean
-  size?: number | number[]
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis'
-  weight?: ThemeFontWeightKey
-}
+import type {ComponentType, Props} from '../../types/props'
 
-const StyledHeading = styled.div<
-  HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
->(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
+/** @public */
+export const DEFAULT_HEADING_ELEMENT = 'div'
+
+/** @public */
+export type HeadingOwnProps = HeadingStyleProps & TextOverflowStyleProps
+
+/** @public */
+export type HeadingElementType =
+  | 'div'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'label'
+  | 'span'
+  | ComponentType
+
+/** @public */
+export type HeadingProps<E extends HeadingElementType = HeadingElementType> = Props<
+  HeadingOwnProps,
+  E
+>
 
 /**
  * Typographic headings.
  *
  * @public
  */
-export const Heading = forwardRef(function Heading(
-  props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLElement>,
+export function Heading<E extends HeadingElementType = typeof DEFAULT_HEADING_ELEMENT>(
+  props: HeadingProps<E>,
 ) {
   const {
     accent = false,
     align,
-    children: childrenProp,
+    as: Element = DEFAULT_HEADING_ELEMENT,
+    children,
+    className,
+    flex,
     muted = false,
     size = 2,
-    textOverflow,
-    weight,
-    ...restProps
-  } = props
-
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  }
+    textOverflow: textOverflowProp,
+    weight = 'regular',
+    ...rest
+  } = props as HeadingProps<typeof DEFAULT_HEADING_ELEMENT>
 
   return (
-    <StyledHeading
+    <Element
       data-ui="Heading"
-      {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
-      $size={useArrayProp(size)}
-      $weight={weight}
-      ref={ref}
+      {...rest}
+      className={heading({
+        className,
+        accent,
+        align,
+        flex,
+        muted,
+        size,
+        weight,
+      })}
     >
-      <span>{children}</span>
-    </StyledHeading>
+      <span
+        className={textOverflow({
+          textOverflow: textOverflowProp,
+        })}
+      >
+        {children}
+      </span>
+    </Element>
   )
-})
-Heading.displayName = 'ForwardRef(Heading)'
+}

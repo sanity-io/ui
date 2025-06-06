@@ -1,95 +1,80 @@
-import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
-import ReactIs from 'react-is'
-import {styled} from 'styled-components'
+import {
+  avatar,
+  avatarArrow,
+  avatarImage,
+  avatarImageOutline,
+  avatarInitials,
+  type ResponsiveProp,
+} from '@sanity/ui/css'
+import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/theme'
+import {useCallback, useEffect, useMemo, useState} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {useTheme_v2} from '../../theme'
-import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
-import {Label} from '../label'
-import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
+import {useResponsiveProp} from '../../hooks/useResponsiveProp'
+import type {ComponentType, Props} from '../../types/props'
+import {Box} from '../box/box'
+import {Label} from '../label/label'
+import type {AvatarPosition, AvatarStatus} from './types'
 
-/**
- * @public
- */
-export interface AvatarProps {
+/** @public */
+export const DEFAULT_AVATAR_ELEMENT = 'span'
+
+/** @public */
+export interface AvatarOwnProps {
   /** @beta */
   __unstable_hideInnerStroke?: boolean
   animateArrowFrom?: AvatarPosition
   arrowPosition?: AvatarPosition
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  color?: ThemeColorAvatarColorKey
+  color?: AvatarColor
   initials?: string
   onImageLoadError?: (event: Error) => void
-  size?: AvatarSize | AvatarSize[]
+  size?: ResponsiveProp<AvatarSize>
   src?: string
   /**
    * The status of the entity this Avatar represents.
-   * @alpha
+   * @deprecated Will be removed in next major version.
    */
   status?: AvatarStatus
   title?: string
 }
 
-const StyledAvatar = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
-  responsiveAvatarSizeStyle,
-  avatarStyle.root,
-)
+/** @public */
+export type AvatarElementType = 'a' | 'button' | 'div' | 'span' | ComponentType
 
-const Arrow = styled.div(avatarStyle.arrow)
-
-const BgStroke = styled.ellipse(avatarStyle.bgStroke)
-
-const Stroke = styled.ellipse(avatarStyle.stroke)
-
-const Initials = styled.div(avatarStyle.initials)
-
-const InitialsLabel = styled(Label)({
-  color: 'inherit',
-})
-
-const AvatarImage = styled.svg(avatarStyle.image)
+/** @public */
+export type AvatarProps<E extends AvatarElementType = AvatarElementType> = Props<AvatarOwnProps, E>
 
 /**
  * Avatars are used to represent people and other agents (e.g. bots).
  *
  * @public
  */
-export const Avatar = forwardRef(function Avatar(
-  props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEMENT>(
+  props: AvatarProps<E>,
 ) {
   const {
     __unstable_hideInnerStroke,
-    as: asProp,
-    color = 'gray',
+    as: Element = DEFAULT_AVATAR_ELEMENT,
+    className,
+    color = 'magenta',
     src,
     title,
     initials,
     onImageLoadError,
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     status = 'online',
     size: sizeProp = 1,
-    ...restProps
-  } = props
-  const {avatar} = useTheme_v2()
-  const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
-  const size = useArrayProp(sizeProp)
+    ...rest
+  } = props as AvatarProps<typeof DEFAULT_AVATAR_ELEMENT>
 
-  // @todo: remove this
-  const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
-  const _sizeRem = avatarSize.size
-  const _radius = _sizeRem / 2
+  const size = useResponsiveProp(sizeProp)
 
-  const elementId = useId()
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside',
   )
 
-  const [imageFailed, setImageFailed] = useState<boolean>(false)
-
-  const imageId = `avatar-image-${elementId}`
+  const [imageError, setImageError] = useState<boolean>(false)
 
   useEffect(() => {
     if (arrowPosition === arrowPositionProp) return undefined
@@ -101,11 +86,11 @@ export const Avatar = forwardRef(function Avatar(
   }, [arrowPosition, arrowPositionProp])
 
   useEffect(() => {
-    if (src) setImageFailed(false)
+    if (src) setImageError(false)
   }, [src])
 
   const handleImageError = useCallback(() => {
-    setImageFailed(true)
+    setImageError(true)
 
     if (onImageLoadError) {
       onImageLoadError(new Error('Avatar: the image failed to load'))
@@ -114,79 +99,56 @@ export const Avatar = forwardRef(function Avatar(
 
   const initialsSize = useMemo(
     () =>
-      size.map((s) => {
-        if (s === 1) return 1
-        if (s === 2) return 3
-        if (s === 3) return 5
+      Object.values(size).map((s) => {
+        if (s === 1) return 1 satisfies FontLabelSize
+        if (s === 2) return 3 satisfies FontLabelSize
+        if (s === 3) return 5 satisfies FontLabelSize
 
-        return 0
-      }),
+        return 0 satisfies FontLabelSize
+      }) as ResponsiveProp<FontLabelSize>,
     [size],
   )
 
   return (
-    <StyledAvatar
-      as={as}
-      data-as={typeof as === 'string' ? as : undefined}
+    <Element
+      data-hide-inner-stroke={__unstable_hideInnerStroke ? '' : undefined}
       data-ui="Avatar"
-      {...restProps}
-      $color={color}
-      $size={size}
+      {...rest}
       aria-label={title}
+      className={avatar({className, color, size: sizeProp})}
       data-arrow-position={arrowPosition}
-      data-status={status}
-      ref={ref}
+      data-image-error={imageError ? '' : undefined}
       title={title}
     >
-      <Arrow>
+      <span className={avatarArrow()}>
         <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
           <path
             d="M6.67948 1.50115L11 7L0 7L4.32052 1.50115C4.92109 0.736796 6.07891 0.736795 6.67948 1.50115Z"
             fill={color}
           />
         </svg>
-      </Arrow>
+      </span>
 
-      {!imageFailed && src && (
-        <AvatarImage viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
-          <defs>
-            <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
-              <image href={src} width="1" height="1" onError={handleImageError} />
-            </pattern>
-          </defs>
+      <Box
+        alignItems="center"
+        as="span"
+        className={avatarInitials()}
+        display="flex"
+        justifyContent="center"
+        position="absolute"
+        inset={0}
+      >
+        <Label align="center" as="span" size={initialsSize} weight="medium">
+          {initials}
+        </Label>
+      </Box>
 
-          <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
-
-          {!__unstable_hideInnerStroke && (
-            <BgStroke
-              cx={_radius}
-              cy={_radius}
-              rx={_radius}
-              ry={_radius}
-              vectorEffect="non-scaling-stroke"
-            />
-          )}
-
-          <Stroke
-            cx={_radius}
-            cy={_radius}
-            rx={_radius}
-            ry={_radius}
-            vectorEffect="non-scaling-stroke"
-          />
-        </AvatarImage>
+      {src && (
+        <Box className={avatarImage()} inset={0} position="absolute">
+          <img alt={initials} onError={handleImageError} src={src} />
+          <span className={avatarImageOutline()} />
+        </Box>
       )}
-
-      {(imageFailed || !src) && initials && (
-        <>
-          <Initials>
-            <InitialsLabel forwardedAs="span" size={initialsSize} weight="medium">
-              {initials}
-            </InitialsLabel>
-          </Initials>
-        </>
-      )}
-    </StyledAvatar>
+    </Element>
   )
-})
-Avatar.displayName = 'ForwardRef(Avatar)'
+}

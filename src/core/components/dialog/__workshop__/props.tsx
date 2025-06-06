@@ -2,13 +2,14 @@ import {Box, Button, Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useCallback, useRef, useState} from 'react'
 
-import {WORKSHOP_WIDTH_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '$workshop'
 
 export default function PropsStory() {
-  const header = useText('Header', 'Props example', 'Props')
-  const onClickOutside = useBoolean('Close when click outside', false, 'Props') || false
-  const hideCloseButton = useBoolean('Hide close button', false, 'Props') || false
-  const width = useSelect('Width', WORKSHOP_WIDTH_OPTIONS, 0, 'Props')
+  const animate = useBoolean('Animate', false)
+  const header = useText('Header', 'Props example')
+  const onClickOutside = useBoolean('Close when click outside', false)
+  const hideCloseButton = useBoolean('Hide close button', false)
+  const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS)
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -30,6 +31,7 @@ export default function PropsStory() {
         {open && (
           <Dialog
             __unstable_hideCloseButton={hideCloseButton}
+            animate={animate}
             header={header}
             id="dialog"
             onClickOutside={onClickOutside ? handleClose : undefined}
@@ -38,7 +40,7 @@ export default function PropsStory() {
             width={width}
           >
             <Box padding={4}>
-              <Stack space={4}>
+              <Stack gap={4}>
                 <Text>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et orci vitae diam
                   aliquet imperdiet.

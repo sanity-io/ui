@@ -1,5 +1,5 @@
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
-import {TreeContextValue} from './types'
+import type {TreeContextValue} from './types'
 
 /**
  * @internal

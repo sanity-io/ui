@@ -1,11 +1,14 @@
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {globalScope} from '../../lib/globalScope'
-import {PortalContextValue} from './types'
+import type {PortalContextValue} from './types'
 
 const key = '@sanity/ui/context/portal'
 const elementKey = Symbol.for(`${key}/element`)
 
-globalScope[elementKey] = null
+// Use the global scope as a map of symbols to elements
+const elementMap = globalScope as Record<symbol, HTMLDivElement | null>
+
+elementMap[elementKey] = null
 
 export const defaultContextValue: PortalContextValue = {
   version: 0.0,
@@ -15,16 +18,16 @@ export const defaultContextValue: PortalContextValue = {
       return null
     }
 
-    if (globalScope[elementKey]) {
-      return globalScope[elementKey]
+    if (elementMap[elementKey]) {
+      return elementMap[elementKey]
     }
 
-    globalScope[elementKey] = document.createElement('div')
-    globalScope[elementKey].setAttribute('data-portal', '')
+    elementMap[elementKey] = document.createElement('div')
+    elementMap[elementKey].setAttribute('data-portal', '')
 
-    document.body.appendChild(globalScope[elementKey])
+    document.body.appendChild(elementMap[elementKey])
 
-    return globalScope[elementKey]
+    return elementMap[elementKey]
   },
 }
 

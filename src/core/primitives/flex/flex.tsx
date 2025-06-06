@@ -1,54 +1,56 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import type {
+  AlignItems,
+  FlexDirection,
+  FlexWrap,
+  JustifyContent,
+  ResponsiveProp,
+} from '@sanity/ui/css'
 
-import {useArrayProp} from '../../hooks'
-import {
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveFlexStyle,
-  ResponsiveFlexStyleProps,
-} from '../../styles/internal'
-import {Box, BoxProps} from '../box'
-import {ResponsiveFlexItemProps, ResponsiveFlexProps} from '../types'
+import type {Props} from '../../types/props'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
-/**
- * @public
- */
-export interface FlexProps
-  extends Omit<BoxProps, 'display'>,
-    ResponsiveFlexProps,
-    ResponsiveFlexItemProps {
-  gap?: number | number[]
+/** @public */
+export const DEFAULT_FLEX_ELEMENT = 'div'
+
+/** @public */
+export type FlexOwnProps = Omit<BoxOwnProps, 'align' | 'display' | 'flexDirection' | 'flexWrap'> & {
+  align?: ResponsiveProp<AlignItems>
+  direction?: ResponsiveProp<FlexDirection>
+  justify?: ResponsiveProp<JustifyContent>
+  wrap?: ResponsiveProp<FlexWrap>
 }
 
-const StyledFlex = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
-  flexItemStyle,
-  responsiveFlexStyle,
-)
+/** @public */
+export type FlexElementType = BoxElementType
+
+/** @public */
+export type FlexProps<E extends FlexElementType = FlexElementType> = Props<FlexOwnProps, E>
 
 /**
  * The `Flex` component is a wrapper component for flexible elements (`Box`, `Card` and `Flex`).
  *
  * @public
  */
-export const Flex = forwardRef(function Flex(
-  props: FlexProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
-  const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
+export function Flex<E extends FlexElementType = typeof DEFAULT_FLEX_ELEMENT>(props: FlexProps<E>) {
+  const {
+    align,
+    as = DEFAULT_FLEX_ELEMENT,
+    direction = 'row',
+    justify,
+    wrap,
+    ...rest
+  } = props as FlexProps<typeof DEFAULT_FLEX_ELEMENT>
 
   return (
-    <StyledFlex
+    <Box
       data-ui="Flex"
-      {...restProps}
-      $align={useArrayProp(align)}
-      $direction={useArrayProp(direction)}
-      $gap={useArrayProp(gap)}
-      $justify={useArrayProp(justify)}
-      $wrap={useArrayProp(wrap)}
-      forwardedAs={as}
-      ref={ref}
+      {...rest}
+      alignItems={align}
+      as={as}
+      display="flex"
+      flexDirection={direction}
+      flexWrap={wrap}
+      justifyContent={justify}
     />
   )
-})
-Flex.displayName = 'ForwardRef(Flex)'
+}

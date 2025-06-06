@@ -18,7 +18,7 @@ export default function NamedStory() {
     <PortalProvider __unstable_elements={__unstable_elements}>
       <Container width={1}>
         <Card height="fill" padding={4}>
-          <Stack space={2}>
+          <Stack gap={2}>
             <Text size={1} weight="medium">
               Portal 1
             </Text>
@@ -26,7 +26,7 @@ export default function NamedStory() {
           </Stack>
         </Card>
         <Card height="fill" padding={4}>
-          <Stack space={2}>
+          <Stack gap={2}>
             <Text size={1} weight="medium">
               Portal 2
             </Text>
@@ -34,7 +34,7 @@ export default function NamedStory() {
           </Stack>
         </Card>
         <Card height="fill" padding={4}>
-          <Stack space={2}>
+          <Stack gap={2}>
             <Text size={1} weight="medium">
               Portal 3
             </Text>

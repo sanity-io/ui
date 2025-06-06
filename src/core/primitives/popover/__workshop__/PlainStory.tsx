@@ -7,7 +7,7 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '$workshop'
 
 export default function PlainStory() {
   const arrow = useBoolean('Arrow', true)

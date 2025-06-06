@@ -1,5 +1,5 @@
-import {ButtonMode} from '@sanity/ui'
-import {ThemeColorCardToneKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import type {ButtonMode} from '@sanity/ui'
+import type {ThemeColorCardToneKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
 
 interface StateWriteConfig {
   accent?: boolean

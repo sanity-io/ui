@@ -1,41 +1,37 @@
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {container, type ContainerStyleProps} from '@sanity/ui/css'
 
-import {useArrayProp} from '../../hooks'
-import {Box, BoxProps} from '../box'
-import {ResponsiveWidthProps} from '../types'
-import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
-import {ResponsiveWidthStyleProps} from './types'
+import type {Props} from '../../types/props'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
-/**
- * @public
- */
-export interface ContainerProps extends BoxProps, ResponsiveWidthProps {}
+/** @public */
+export const DEFAULT_CONTAINER_ELEMENT = 'div'
 
-const StyledContainer = styled(Box)<ResponsiveWidthStyleProps>(
-  containerBaseStyle,
-  responsiveContainerWidthStyle,
-)
+/** @public */
+export type ContainerOwnProps = Omit<BoxOwnProps, 'width'> & ContainerStyleProps
+
+/** @public */
+export type ContainerElementType = BoxElementType
+
+/** @public */
+export type ContainerProps<E extends ContainerElementType = ContainerElementType> = Props<
+  ContainerOwnProps,
+  E
+>
 
 /**
  * The `Container` component wraps content layout in a defined set of widths.
  *
  * @public
  */
-export const Container = forwardRef(function Container(
-  props: ContainerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+export function Container<E extends ContainerElementType = typeof DEFAULT_CONTAINER_ELEMENT>(
+  props: ContainerProps<E>,
 ) {
-  const {as, width = 2, ...restProps} = props
+  const {
+    as = DEFAULT_CONTAINER_ELEMENT,
+    className,
+    width = 2,
+    ...rest
+  } = props as ContainerProps<typeof DEFAULT_CONTAINER_ELEMENT>
 
-  return (
-    <StyledContainer
-      data-ui="Container"
-      {...restProps}
-      $width={useArrayProp(width)}
-      forwardedAs={as}
-      ref={ref}
-    />
-  )
-})
-Container.displayName = 'ForwardRef(Container)'
+  return <Box data-ui="Container" {...rest} as={as} className={container({className, width})} />
+}

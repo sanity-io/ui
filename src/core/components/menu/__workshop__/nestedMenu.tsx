@@ -8,7 +8,7 @@ export default function NestedMenuItems() {
         id="nested-example"
         menu={
           <Menu>
-            <Stack space={1}>
+            <Stack gap={1}>
               <MenuItem text="Item 1" />
               <MenuItem text="Item 2" />
             </Stack>

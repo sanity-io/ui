@@ -1,4 +1,4 @@
-import {Box, Button, Menu, MenuButton, MenuButtonProps, MenuItem, Stack} from '@sanity/ui'
+import {Box, Button, Menu, MenuButton, type MenuButtonProps, MenuItem, Stack} from '@sanity/ui'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   __unstable_margins: [1, 1, 1, 1],

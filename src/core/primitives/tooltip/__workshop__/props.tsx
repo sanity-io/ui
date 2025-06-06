@@ -1,19 +1,21 @@
 import {Button, Card, Flex, Stack, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
+import {vars} from '@sanity/ui/css'
 import {useBoolean, useNumber, useSelect, useText} from '@sanity/ui-workshop'
 
 import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '$workshop'
 
 export default function PropsStory() {
+  const arrow = useBoolean('Arrow', false)
   const content = useText('Content', 'Tooltip content')
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2, 'Props')
+  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useBoolean('Portal', true)
-  const openDelay = useNumber('Open Delay', 200) || 0
-  const closeDelay = useNumber('Close Delay', 200) || 0
+  const openDelay = useNumber('Open Delay', 200)
+  const closeDelay = useNumber('Close Delay', 200)
   const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 2)
 
   return (
@@ -28,15 +30,16 @@ export default function PropsStory() {
         gap={4}
       >
         <Stack
+          gap={4}
           padding={4}
-          style={{outline: '1px solid var(--card-border-color)', width: '100%', maxWidth: '640px'}}
-          space={4}
+          style={{outline: `1px solid ${vars.color.border}`, width: '100%', maxWidth: '640px'}}
         >
           <Text align="center" size={3}>
             Standalone tooltip
           </Text>
           <Flex align="center" justify="center" padding={4} sizing="border">
             <Tooltip
+              arrow={arrow}
               content={<Text size={1}>{content}</Text>}
               padding={padding}
               placement={placement}
@@ -52,9 +55,9 @@ export default function PropsStory() {
           </Flex>
         </Stack>
         <Stack
+          gap={4}
           padding={4}
-          style={{outline: '1px solid var(--card-border-color)', width: '100%', maxWidth: '640px'}}
-          space={4}
+          style={{outline: `1px solid ${vars.color.border}`, width: '100%', maxWidth: '640px'}}
         >
           <Text align="center" size={3}>
             Grouped tooltips
@@ -71,6 +74,7 @@ export default function PropsStory() {
               }}
             >
               <Tooltip
+                arrow={arrow}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
                 delay={{
                   open: 100,
@@ -85,6 +89,7 @@ export default function PropsStory() {
                 <Button mode="bleed" text="Hover me" />
               </Tooltip>
               <Tooltip
+                arrow={arrow}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
                 delay={{
                   open: 100,

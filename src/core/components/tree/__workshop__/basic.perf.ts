@@ -1,4 +1,4 @@
-import {PerfTestProps, PerfTestRunFn} from '@sanity/ui-workshop/plugin-perf'
+import type {PerfTestProps, PerfTestRunFn} from '@sanity/ui-workshop/plugin-perf'
 import {findByTestId, fireEvent} from '@testing-library/dom'
 
 function test<ElementType = unknown>(

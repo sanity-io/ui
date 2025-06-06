@@ -28,7 +28,10 @@ export function createGlobalScopedContext<ContextType, const T extends ContextTy
     return createContext<ContextType>(defaultValue)
   }
 
-  globalScope[symbol] = globalScope[symbol] || createContext<T>(defaultValue)
+  // Use the global scope as a map of symbols to contexts
+  const symbolMap = globalScope as Record<symbol, Context<ContextType>>
 
-  return globalScope[symbol]
+  symbolMap[symbol] = symbolMap[symbol] || createContext<T>(defaultValue)
+
+  return symbolMap[symbol]
 }

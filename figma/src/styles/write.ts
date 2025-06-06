@@ -1,9 +1,9 @@
 import {
   parseColor,
   THEME_COLOR_CARD_TONES,
-  ThemeColorCard_v2,
-  ThemeColorShadow,
-  ThemeShadow,
+  type ThemeColorCard_v2,
+  type ThemeColorShadow,
+  type ThemeShadow,
 } from '@sanity/ui/theme'
 
 import {theme} from '../theme'

@@ -5,10 +5,10 @@ const CustomLink = forwardRef(function CustomLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
   ref: React.ForwardedRef<HTMLAnchorElement>,
 ): React.JSX.Element {
-  const {children, req, ...restProps} = props
+  const {children, req, ...rest} = props
 
   return (
-    <a data-required={req} {...restProps} ref={ref}>
+    <a data-required={req} {...rest} ref={ref}>
       {children}
     </a>
   )
@@ -19,7 +19,7 @@ export default function AsComponentStory() {
 
   return (
     <Flex align="center" height="fill" justify="center">
-      <Card as={CustomLink} data-as="a" {...props} padding={3}>
+      <Card as={CustomLink} data-as="a" {...props} padding={3} req="1">
         <Text size={1}>As component</Text>
       </Card>
     </Flex>

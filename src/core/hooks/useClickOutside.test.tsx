@@ -1,8 +1,7 @@
-/** @jest-environment jsdom */
-
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {useEffect, useRef, useState} from 'react'
+import {type MutableRefObject, useEffect, useRef, useState} from 'react'
+import {describe, expect, it, vi} from 'vitest'
 
 import {useClickOutside} from './useClickOutside'
 
@@ -16,7 +15,7 @@ describe('useClickOutside', () => {
    */
   it('calls the handler when clicking outside of the array of elements', async () => {
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = () => {
       const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
@@ -45,7 +44,7 @@ describe('useClickOutside', () => {
 
   it('the elements array flattens nested arrays one level deep', async () => {
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = () => {
       const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
@@ -74,7 +73,7 @@ describe('useClickOutside', () => {
 
   it('it can set a boundary to scope outside click events', async () => {
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = () => {
       const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
@@ -114,7 +113,7 @@ describe('useClickOutside', () => {
      * Thus it makes sense to unit test it to ensure it works as expected and we don't accidentally break backwards compatibility.
      */
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = (props: {open?: true}) => {
       const {open = false} = props
@@ -155,7 +154,7 @@ describe('useClickOutside', () => {
      * Since we don't want people to use the `setElement` pattern, test that userland can handle dynamically changing elements arrays
      */
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = (props: {open?: true}) => {
       const {open = false} = props
@@ -199,7 +198,7 @@ describe('useClickOutside', () => {
      */
 
     const user = userEvent.setup()
-    let handler = jest.fn()
+    let handler = vi.fn()
 
     /**
      * Using refs in the `useClickOutside` elements array is dangerous,
@@ -229,7 +228,7 @@ describe('useClickOutside', () => {
      * If a mixture of refs and state is used it can appear like it's working correctly,
      * but this is a side-effect, not an indication it's safe.
      */
-    handler = jest.fn()
+    handler = vi.fn()
     TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
@@ -254,7 +253,7 @@ describe('useClickOutside', () => {
     /**
      * Unrelated state updates can create the same false impression of safety.
      */
-    handler = jest.fn()
+    handler = vi.fn()
     TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const popoverRef = useRef<HTMLDivElement | null>(null)
@@ -289,7 +288,7 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
-    const useElementsFromRefs = (refs: React.MutableRefObject<HTMLElement | null>[]) => {
+    const useElementsFromRefs = (refs: MutableRefObject<HTMLElement | null>[]) => {
       const [elements, setElements] = useState(() => refs.map((ref) => ref.current))
 
       useEffect(() => {
@@ -306,7 +305,7 @@ describe('useClickOutside', () => {
 
       return elements
     }
-    handler = jest.fn()
+    handler = vi.fn()
     TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const popoverRef = useRef<HTMLDivElement | null>(null)
@@ -337,7 +336,7 @@ describe('useClickOutside', () => {
      */
 
     const user = userEvent.setup()
-    let handler = jest.fn()
+    let handler = vi.fn()
 
     /**
      * Using refs in the `useClickOutside` elements array is dangerous,
@@ -368,7 +367,7 @@ describe('useClickOutside', () => {
      * If a mixture of refs and state is used it can appear like it's working correctly,
      * but this is a side-effect, not an indication it's safe.
      */
-    handler = jest.fn()
+    handler = vi.fn()
     TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
@@ -398,7 +397,7 @@ describe('useClickOutside', () => {
     /**
      * Unrelated state updates can create the same false impression of safety.
      */
-    handler = jest.fn()
+    handler = vi.fn()
     TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const popoverRef = useRef<HTMLDivElement | null>(null)
@@ -438,7 +437,7 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
-    const useBoundaryElementFromRef = (ref: React.MutableRefObject<HTMLElement | null>) => {
+    const useBoundaryElementFromRef = (ref: MutableRefObject<HTMLElement | null>) => {
       const [element, setElement] = useState(() => ref.current)
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -451,7 +450,7 @@ describe('useClickOutside', () => {
 
       return element
     }
-    handler = jest.fn()
+    handler = vi.fn()
     TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const popoverRef = useRef<HTMLDivElement | null>(null)

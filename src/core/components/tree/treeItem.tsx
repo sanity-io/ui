@@ -1,71 +1,87 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
-
-import {Box, BoxProps, Flex, Text} from '../../primitives'
+import {type ResponsiveProp, treeItem, vars} from '@sanity/ui/css'
+import type {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {
-  treeItemBoxStyle,
-  TreeItemBoxStyleProps,
-  treeItemRootColorStyle,
-  treeItemRootStyle,
-} from './style'
+  type ElementType,
+  type KeyboardEvent,
+  type MouseEvent,
+  type MouseEventHandler,
+  type ReactNode,
+  type Ref,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+} from 'react'
+
+import {Box, type BoxProps} from '../../primitives/box/box'
+import type {CardOwnProps} from '../../primitives/card/card'
+import {Flex} from '../../primitives/flex/flex'
+import {Selectable, type SelectableElementType} from '../../primitives/selectable/selectable'
+import {Text} from '../../primitives/text/text'
+import type {ComponentType, Props} from '../../types/props'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
 
-/**
- * @beta
- */
-export interface TreeItemProps {
+/** @beta */
+export const DEFAULT_TREE_ITEM_ELEMENT = 'a'
+
+/** @beta */
+export type TreeItemOwnProps = CardOwnProps & {
   expanded?: boolean
-  fontSize?: number | number[]
-  icon?: React.ElementType
+  fontSize?: ResponsiveProp<FontTextSize>
+  icon?: ElementType
   /**
    * Allows passing a custom element type to the link component
+   * @internal
    */
-  linkAs?: BoxProps['as']
-  padding?: number | number[]
-  space?: number | number[]
-  text?: React.ReactNode
+  linkAs?: SelectableElementType
+  onClick?: MouseEventHandler<HTMLAnchorElement | HTMLLIElement>
+  padding?: ResponsiveProp<Space>
+  space?: ResponsiveProp<Space>
+  text?: ReactNode
   weight?: ThemeFontWeightKey
 }
 
-const StyledTreeItem = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
+/** @beta */
+export type TreeItemElementType = 'a' | 'li' | ComponentType
 
-const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
-
-const ToggleArrowText = styled(Text)`
-  & > svg {
-    transition: transform 100ms;
-  }
-`
+/** @beta */
+export type TreeItemProps<E extends TreeItemElementType = TreeItemElementType> = Props<
+  TreeItemOwnProps,
+  E
+>
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const TreeItem = memo(function TreeItem(
-  props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>,
-): React.JSX.Element {
+export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITEM_ELEMENT>(
+  props: TreeItemProps<E>,
+) {
   const {
     children,
+    className,
     expanded: expandedProp = false,
     fontSize = 1,
     href,
     icon: IconComponent,
     id: idProp,
-    linkAs,
+    linkAs = 'a',
     muted,
     onClick,
     padding = 2,
+    radius = 2,
     selected = false,
     space = 2,
     text,
     weight,
-    ...restProps
-  } = props
-  const rootRef = useRef<HTMLLIElement | null>(null)
+    ...rest
+  } = props as TreeItemProps<typeof DEFAULT_TREE_ITEM_ELEMENT>
+
+  const rootRef = useRef<HTMLElement | null>(null)
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
@@ -74,16 +90,16 @@ export const TreeItem = memo(function TreeItem(
   const itemPath = useMemo(() => path.concat([id || '']), [id, path])
   const itemKey = itemPath.join('/')
   const itemState = tree.state[itemKey]
-  const focused = tree.focusedElement === rootRef.current
   const expanded = itemState?.expanded === undefined ? expandedProp : itemState?.expanded || false
-  const tabIndex = tree.focusedElement && tree.focusedElement === rootRef.current ? 0 : -1
+  const focused = tree.focusedElement && tree.focusedElement === rootRef.current
+  const tabIndex = focused ? 0 : -1
   const contextValue = useMemo(
     () => ({...tree, level: tree.level + 1, path: itemPath}),
     [itemPath, tree],
   )
 
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLLIElement>) => {
+    (event: MouseEvent<HTMLAnchorElement> | MouseEvent<HTMLLIElement>) => {
       if (onClick) onClick(event)
 
       const target = event.target
@@ -102,7 +118,7 @@ export const TreeItem = memo(function TreeItem(
   )
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLElement>) => {
+    (event: KeyboardEvent<HTMLElement>) => {
       if (focused && event.key === 'Enter') {
         const el = treeitemRef.current || rootRef.current
 
@@ -119,9 +135,8 @@ export const TreeItem = memo(function TreeItem(
   }, [expanded, itemPath, registerItem, selected])
 
   const content = (
-    <Flex padding={padding}>
+    <Flex gap={space} padding={padding}>
       <Box
-        marginRight={space}
         style={{
           visibility: IconComponent || children ? 'visible' : 'hidden',
           pointerEvents: 'none',
@@ -133,9 +148,9 @@ export const TreeItem = memo(function TreeItem(
           </Text>
         )}
         {!IconComponent && (
-          <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
+          <Text muted={muted} size={fontSize} weight={weight}>
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </ToggleArrowText>
+          </Text>
         )}
       </Box>
       <Box flex={1}>
@@ -148,58 +163,75 @@ export const TreeItem = memo(function TreeItem(
 
   if (href) {
     return (
-      <StyledTreeItem
+      <Box
         data-selected={selected ? '' : undefined}
         data-tree-id={id}
         data-tree-key={itemKey}
         data-ui="TreeItem"
-        {...restProps}
+        {...(rest as BoxProps<'li'>)}
+        as="li"
+        className={treeItem({className})}
         onClick={handleClick}
-        ref={rootRef}
+        ref={rootRef as Ref<HTMLLIElement>}
         role="none"
       >
-        <TreeItemBox
-          $level={tree.level}
+        <Selectable
           aria-expanded={expanded}
           as={linkAs}
+          // data-pressed={selected ? '' : undefined}
           data-ui="TreeItem__box"
           href={href}
+          radius={radius}
           ref={treeitemRef}
           role="treeitem"
+          selected={selected}
           tabIndex={tabIndex}
+          style={{
+            paddingLeft: `calc(${vars.space[2]} * ${tree.level})`,
+          }}
         >
           {content}
-        </TreeItemBox>
+        </Selectable>
 
         <TreeContext.Provider value={contextValue}>
           {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
         </TreeContext.Provider>
-      </StyledTreeItem>
+      </Box>
     )
   }
 
   return (
-    <StyledTreeItem
+    <Box
       data-selected={selected ? '' : undefined}
       data-ui="TreeItem"
       data-tree-id={id}
       data-tree-key={itemKey}
-      {...restProps}
+      {...(rest as BoxProps<'a'>)}
       aria-expanded={expanded}
+      className={treeItem({className})}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      ref={rootRef}
+      ref={rootRef as Ref<HTMLAnchorElement>}
       role="treeitem"
       tabIndex={tabIndex}
     >
-      <TreeItemBox $level={tree.level} as="div" data-ui="TreeItem__box">
+      <Selectable
+        as="button"
+        // data-pressed={selected ? '' : undefined}
+        data-focused={focused ? '' : undefined}
+        data-ui="TreeItem__box"
+        radius={radius}
+        selected={selected}
+        style={{
+          paddingLeft: `calc(${vars.space[2]} * ${tree.level})`,
+        }}
+      >
         {content}
-      </TreeItemBox>
+      </Selectable>
 
       <TreeContext.Provider value={contextValue}>
         {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}
       </TreeContext.Provider>
-    </StyledTreeItem>
+    </Box>
   )
-})
-TreeItem.displayName = 'Memo(TreeItem)'
+}

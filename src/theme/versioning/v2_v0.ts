@@ -1,18 +1,17 @@
-import {
-  RootTheme,
+import type {RootTheme} from '../types'
+import type {ThemeColor, ThemeColorInputState, ThemeColorInputStates} from '../v0'
+import type {
   RootTheme_v2,
-  ThemeColor,
   ThemeColorCard_v2,
   ThemeColorInputMode_v2,
-  ThemeColorInputState,
   ThemeColorInputState_v2,
-  ThemeColorInputStates,
-} from '../system'
+} from '../v2'
+import type {Theme_v3} from '../v3'
 
 const cache = new WeakMap<RootTheme_v2, RootTheme>()
 
 /** @internal */
-export function v2_v0(v2: RootTheme_v2): RootTheme {
+export function v2_v0(v2: RootTheme_v2, v3?: Theme_v3): RootTheme {
   const cachedTheme = cache.get(v2)
 
   if (cachedTheme) return cachedTheme
@@ -64,6 +63,7 @@ export function v2_v0(v2: RootTheme_v2): RootTheme {
     styles,
 
     v2,
+    v3,
   }
 }
 

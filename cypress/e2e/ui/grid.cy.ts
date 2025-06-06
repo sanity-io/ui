@@ -6,7 +6,7 @@ context('Primitives/Grid', () => {
       {
         viewport: [320, 600],
         css: {
-          gridGap: 'normal normal',
+          gridGap: '0px 0px',
           gridTemplateColumns: '280px',
           gridTemplateRows: '19px 19px 19px 19px 19px 19px 19px 19px 19px 19px 19px 19px',
         },

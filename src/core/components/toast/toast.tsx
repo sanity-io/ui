@@ -1,31 +1,39 @@
 import {CloseIcon} from '@sanity/icons'
+import {type RadiusStyleProps, toast} from '@sanity/ui/css'
 import {motion, type Variant, type Variants} from 'framer-motion'
+import {type ReactNode} from 'react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box, Button, Flex, Stack, Text} from '../../primitives'
-import {
-  BUTTON_TONE,
-  LoadingBar,
-  LoadingBarMask,
-  LoadingBarProgress,
-  STATUS_CARD_TONE,
-  StyledToast,
-  TextBox,
-} from './styles'
+import {Box} from '../../primitives/box/box'
+import {Button} from '../../primitives/button/button'
+import {Card} from '../../primitives/card/card'
+import {Flex} from '../../primitives/flex/flex'
+import {Stack} from '../../primitives/stack/stack'
+import {Text} from '../../primitives/text/text'
+import type {ComponentType, Props} from '../../types/props'
 
-/**
- * @public
- */
-export interface ToastProps {
+/** @internal */
+export const DEFAULT_TOAST_ELEMENT = 'li'
+
+/** @internal */
+export type ToastOwnProps = RadiusStyleProps & {
   closable?: boolean
-  description?: React.ReactNode
-  onClose: () => void
-  radius?: number | number[]
-  title?: React.ReactNode
+  description?: ReactNode
+  onClose?: () => void
+  title?: ReactNode
   status?: 'error' | 'warning' | 'success' | 'info'
   duration?: number
-  updatedAt?: number
 }
+
+/** @internal */
+export type ToastElementType = 'li' | ComponentType
+
+/** @internal */
+export type ToastProps<E extends ToastElementType = ToastElementType> = Props<ToastOwnProps, E>
+
+// Support pattern used by Sanity Studio, that works around the lack of `duration: Infinity` support in older @sanity/ui versions
+// https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#maximum_delay_value
+const LONG_ENOUGH_BUT_NOT_TOO_LONG = 1000 * 60 * 60 * 24 * 24
 
 const ROLES = {
   error: 'alert',
@@ -34,32 +42,32 @@ const ROLES = {
   info: 'alert',
 } as const
 
-// Support pattern used by Sanity Studio, that works around the lack of `duration: Infinity` support in older @sanity/ui versions
-// https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#maximum_delay_value
-const LONG_ENOUGH_BUT_NOT_TOO_LONG = 1000 * 60 * 60 * 24 * 24
+const STATUS_CARD_TONE = {
+  error: 'critical',
+  warning: 'caution',
+  success: 'positive',
+  info: 'neutral',
+} as const
+
+const BUTTON_TONE = {
+  error: 'critical',
+  warning: 'caution',
+  success: 'positive',
+  info: 'neutral',
+} as const
 
 /**
  * The `Toast` component gives feedback to users when an action has taken place.
  *
- * Toasts can be closed with a close button, or auto-dismiss after a certain timeout.
+ * Toasts can be closed with a close button, or auto-dismiss when the duration expires.
  *
- * @public
+ * @internal
  */
-export function Toast(
-  props: ToastProps &
-    Omit<
-      React.HTMLProps<HTMLDivElement>,
-      | 'as'
-      | 'height'
-      | 'ref'
-      | 'title'
-      | 'onAnimationStart'
-      | 'onDragStart'
-      | 'onDragEnd'
-      | 'onDrag'
-    >,
-): React.JSX.Element {
+export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>(
+  props: ToastProps<E>,
+) {
   const {
+    as = DEFAULT_TOAST_ELEMENT,
     closable,
     description,
     duration,
@@ -67,9 +75,9 @@ export function Toast(
     radius = 3,
     title,
     status,
-    updatedAt,
-    ...restProps
-  } = props
+    ...rest
+  } = props as ToastProps<typeof DEFAULT_TOAST_ELEMENT>
+
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const buttonTone = status ? BUTTON_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
@@ -87,26 +95,28 @@ export function Toast(
   const exit: ContainerVariants[] = ['hidden', 'slideOut']
 
   return (
-    <MotionToast
+    <MotionCard
+      as={as}
+      className={toast()}
       data-ui="Toast"
       role={role}
-      {...restProps}
-      data-has-duration={hasDuration ? '' : undefined}
+      {...rest}
       custom={visualDuration}
+      data-has-duration={hasDuration ? '' : undefined}
       radius={radius}
       shadow={2}
       tone={cardTone}
-      forwardedAs="li"
       layout="position"
       variants={container}
       initial={initial}
       animate={animate}
       exit={exit}
       transition={transition}
+      position="relative"
     >
       <MotionFlex align="flex-start" variants={content} transition={transition}>
-        <TextBox flex={1} padding={3}>
-          <Stack space={3}>
+        <Flex flex={1} overflowX="auto" padding={3}>
+          <Stack gap={3}>
             {title && (
               <Text size={1} weight="medium">
                 {title}
@@ -118,7 +128,7 @@ export function Toast(
               </MotionText>
             )}
           </Stack>
-        </TextBox>
+        </Flex>
 
         {closable && (
           <Box padding={1}>
@@ -134,24 +144,9 @@ export function Toast(
           </Box>
         )}
       </MotionFlex>
-      {hasDuration && (
-        <MotionLoadingBar variants={content} transition={transition}>
-          <LoadingBarMask tone={cardTone} radius={radius} />
-          <MotionLoadingBarProgress
-            key={`progress-${updatedAt}`}
-            tone={cardTone}
-            initial={{scaleX: 0}}
-            animate={{scaleX: 1}}
-            transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
-            onAnimationComplete={onClose}
-          />
-        </MotionLoadingBar>
-      )}
-    </MotionToast>
+    </MotionCard>
   )
 }
-
-Toast.displayName = 'Toast'
 
 const container = {
   initial: {y: 32, scale: 0.5, zIndex: 1},
@@ -191,8 +186,6 @@ const content = {
   },
 } satisfies Partial<Record<ContainerVariants, Variant>>
 
-const MotionToast = motion.create(StyledToast)
+const MotionCard = motion.create(Card)
 const MotionFlex = motion.create(Flex)
 const MotionText = motion.create(Text)
-const MotionLoadingBar = motion.create(LoadingBar)
-const MotionLoadingBarProgress = motion.create(LoadingBarProgress)

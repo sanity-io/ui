@@ -4,9 +4,9 @@ import {Button, Flex, Inline} from '@sanity/ui'
 export default function CustomIconsStory() {
   return (
     <Flex align="center" height="fill" justify="center">
-      <Inline space={1}>
-        <Button fontSize={1} icon={RocketIcon} padding={2} space={2} text="Rocket" />
-        <Button fontSize={1} icon={CustomIcon} padding={2} space={2} text="Heart" />
+      <Inline gap={1}>
+        <Button fontSize={1} gap={2} icon={RocketIcon} padding={2} text="Rocket" />
+        <Button fontSize={1} gap={2} icon={CustomIcon} padding={2} text="Heart" />
       </Inline>
     </Flex>
   )

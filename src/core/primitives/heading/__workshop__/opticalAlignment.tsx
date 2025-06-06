@@ -4,7 +4,7 @@ import {Box, Card, Flex, Heading, Stack} from '@sanity/ui'
 export default function OpticalAlignment() {
   return (
     <Box padding={[4, 5, 6]}>
-      <Stack space={1}>
+      <Stack gap={1}>
         <Flex>
           <Card padding={0} tone="neutral">
             <Heading size={5}>Hamburgefonstiv M</Heading>
@@ -43,7 +43,7 @@ export default function OpticalAlignment() {
 
         <Flex>
           <Card padding={2} tone="neutral">
-            <Heading accent>
+            <Heading>
               <AddCircleIcon />
             </Heading>
           </Card>

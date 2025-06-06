@@ -8,9 +8,9 @@ import {
 } from '@sanity/ui/theme'
 import {get} from 'segmented-property'
 
-import {WriteConfig} from '../config'
+import type {WriteConfig} from '../config'
 import {theme} from '../theme'
-import {BASE_KEYS, FigmaSanityUIColorVariable, INPUT_KEYS, SCHEMES, STATE_KEYS} from './types'
+import {BASE_KEYS, type FigmaSanityUIColorVariable, INPUT_KEYS, SCHEMES, STATE_KEYS} from './types'
 
 export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityUIColorVariable[] {
   const variables: FigmaSanityUIColorVariable[] = []

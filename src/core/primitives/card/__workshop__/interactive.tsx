@@ -2,8 +2,8 @@ import {Card, Flex, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
 export default function InteractiveCardStory() {
-  const pressed = useBoolean('Pressed', false, 'Props')
-  const selected = useBoolean('Selected', false, 'Props')
+  const pressed = useBoolean('Pressed', false)
+  const selected = useBoolean('Selected', false)
 
   return (
     <Flex align="center" height="fill" justify="center">
@@ -16,12 +16,11 @@ export default function InteractiveCardStory() {
           selected={selected}
           tabIndex={0}
         >
-          <Stack space={3}>
+          <Stack gap={3}>
             <Text>
               Text <code>Code</code>
             </Text>
             <Text muted>Muted</Text>
-            <Text accent>Accent</Text>
           </Stack>
         </Card>
       </div>

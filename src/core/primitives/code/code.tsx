@@ -1,40 +1,46 @@
-import {forwardRef, lazy, Suspense} from 'react'
-import {styled} from 'styled-components'
+import {code, type CodeStyleProps, type ResponsiveProp} from '@sanity/ui/css'
+import type {FontCodeSize} from '@sanity/ui/theme'
+import {lazy, Suspense} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
-import {codeBaseStyle} from './styles'
+import type {ComponentType, Props} from '../../types/props'
 
 const LazyRefractor = lazy(() => import('./refractor'))
 
-/**
- * @public
- */
-export interface CodeProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+/** @public */
+export const DEFAULT_CODE_ELEMENT = 'pre'
+
+/** @public */
+export type CodeOwnProps = CodeStyleProps & {
   /** Define the language to use for syntax highlighting. */
   language?: string
-  size?: number | number[]
-  weight?: string
+  size?: ResponsiveProp<FontCodeSize>
 }
 
-const StyledCode = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
+/** @public */
+export type CodeElementType = 'div' | 'pre' | ComponentType
 
-/**
- * @public
- */
-export const Code = forwardRef(function Code(
-  props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLElement>,
-) {
-  const {children, language, size = 2, weight, ...restProps} = props
+/** @public */
+export type CodeProps<E extends CodeElementType = CodeElementType> = Props<CodeOwnProps, E>
+
+/** @public */
+export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(props: CodeProps<E>) {
+  const {
+    as: Element = DEFAULT_CODE_ELEMENT,
+    children,
+    className,
+    language: languageProp,
+    size = 2,
+    weight = 'regular',
+    ...rest
+  } = props as CodeProps<typeof DEFAULT_CODE_ELEMENT>
+
+  const language = typeof languageProp === 'string' ? languageProp : undefined
 
   return (
-    <StyledCode data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
+    <Element data-ui="Code" {...rest} className={code({className, size, weight})}>
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>
-    </StyledCode>
+    </Element>
   )
-})
-Code.displayName = 'ForwardRef(Code)'
+}
