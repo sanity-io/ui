@@ -187,7 +187,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^14.0.1",
     "module-alias": "^2.2.3",
-    "npm-run-all2": "^5.0.2",
+    "npm-run-all2": "^8.0.4",
     "prettier": "^3.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
