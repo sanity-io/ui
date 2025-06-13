@@ -1,5 +1,6 @@
 import {
   arrow,
+  autoPlacement,
   autoUpdate,
   flip,
   hide,
@@ -7,7 +8,6 @@ import {
   offset,
   RootBoundary,
   shift,
-  autoPlacement,
   useFloating,
 } from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
