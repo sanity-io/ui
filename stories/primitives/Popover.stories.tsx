@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 
-import {Box, Button, Card, Popover, Text} from '../../src/core/primitives'
+import {Box, Button, Card, Flex, Popover, Text} from '../../src/core/primitives'
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
@@ -146,29 +146,56 @@ export const WithReferenceElement: Story = {
   },
 }
 
-export const AutoPlacement: Story = {
-  render: () => {
+export const PlacementStrategy: Story = {
+  args: {
+    children: (
+      <Button text="The popover will position itself on the side with the most viewport space" />
+    ),
+    constrainSize: true,
+    content: <Text size={1}>popover content</Text>,
+    fallbackPlacements: ['bottom-start'],
+    open: true,
+    placement: 'top-start',
+    placementStrategy: 'autoPlacement',
+  },
+  parameters: {
+    controls: {
+      include: ['fallbackPlacements', 'placement', 'placementStrategy'],
+    },
+  },
+  render: (props) => {
+    const [height, setHeight] = useState(100)
+
+    const handleUpdate = useCallback(() => {
+      setHeight(height === 100 ? 800 : 100)
+    }, [height])
+
+    useEffect(() => {
+      const interval = setInterval(handleUpdate, 2000)
+      return () => {
+        clearInterval(interval)
+      }
+    }, [handleUpdate])
+
     return (
       <Box
-        style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '120vh'}}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '120vh',
+        }}
       >
-        <Box padding={4}>
-          <Popover
-            content={<Text size={[2, 2, 3, 4]}>Hello, world</Text>}
-            fallbackPlacements={['bottom-start']}
-            padding={4}
-            placement="top-start"
-            placementStrategy="autoPlacement"
-            portal
-            open
-          >
-            <Button
-              mode="ghost"
-              padding={[3, 3, 4]}
-              text="The popover will position itself on the side with the most viewport space"
-            />
-          </Popover>
-        </Box>
+        <Popover
+          {...props}
+          content={
+            <Card style={{height: `${height}px`, resize: 'vertical'}}>
+              <Flex align="center" justify="center" height="fill">
+                <Text>Popover content</Text>
+              </Flex>
+            </Card>
+          }
+        />
       </Box>
     )
   },
