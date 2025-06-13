@@ -145,3 +145,31 @@ export const WithReferenceElement: Story = {
     )
   },
 }
+
+export const AutoPlacement: Story = {
+  render: () => {
+    return (
+      <Box
+        style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '120vh'}}
+      >
+        <Box padding={4} style={{textAlign: 'center', verticalAlign: 'middle'}}>
+          <Popover
+            content={<Text size={[2, 2, 3, 4]}>Hello, world</Text>}
+            fallbackPlacements={['bottom-start']}
+            padding={4}
+            placement="top-start"
+            placementStrategy="autoPlacement"
+            portal
+            open
+          >
+            <Button
+              mode="ghost"
+              padding={[3, 3, 4]}
+              text="The popover will position itself on the side with the most viewport space"
+            />
+          </Popover>
+        </Box>
+      </Box>
+    )
+  },
+}
