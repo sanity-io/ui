@@ -152,7 +152,7 @@ export const AutoPlacement: Story = {
       <Box
         style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '120vh'}}
       >
-        <Box padding={4} style={{textAlign: 'center', verticalAlign: 'middle'}}>
+        <Box padding={4}>
           <Popover
             content={<Text size={[2, 2, 3, 4]}>Hello, world</Text>}
             fallbackPlacements={['bottom-start']}
