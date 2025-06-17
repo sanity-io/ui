@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.0](https://github.com/sanity-io/ui/compare/v2.15.18...v2.16.0) (2025-06-17)
+
+### Features
+
+- allow popover to use auto placement strategy ([#1741](https://github.com/sanity-io/ui/issues/1741)) ([b26b453](https://github.com/sanity-io/ui/commit/b26b453d0431b5dd088592586422eadaeee54776))
+
 ## [2.15.18](https://github.com/sanity-io/ui/compare/v2.15.17...v2.15.18) (2025-05-20)
 
 ### Bug Fixes
