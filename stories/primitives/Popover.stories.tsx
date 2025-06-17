@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 
-import {Box, Button, Card, Popover, Text} from '../../src/core/primitives'
+import {Box, Button, Card, Flex, Popover, Text} from '../../src/core/primitives'
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
@@ -141,6 +141,61 @@ export const WithReferenceElement: Story = {
             text="This button won't be rendered, the popover has a reference element"
           />
         </Popover>
+      </Box>
+    )
+  },
+}
+
+export const PlacementStrategy: Story = {
+  args: {
+    children: (
+      <Button text="The popover will position itself on the side with the most viewport space" />
+    ),
+    constrainSize: true,
+    content: <Text size={1}>popover content</Text>,
+    fallbackPlacements: ['bottom-start'],
+    open: true,
+    placement: 'top-start',
+    placementStrategy: 'autoPlacement',
+  },
+  parameters: {
+    controls: {
+      include: ['fallbackPlacements', 'placement', 'placementStrategy'],
+    },
+  },
+  render: (props) => {
+    const [height, setHeight] = useState(100)
+
+    const handleUpdate = useCallback(() => {
+      setHeight(height === 100 ? 800 : 100)
+    }, [height])
+
+    useEffect(() => {
+      const interval = setInterval(handleUpdate, 2000)
+      return () => {
+        clearInterval(interval)
+      }
+    }, [handleUpdate])
+
+    return (
+      <Box
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '120vh',
+        }}
+      >
+        <Popover
+          {...props}
+          content={
+            <Card style={{height: `${height}px`, resize: 'vertical'}}>
+              <Flex align="center" justify="center" height="fill">
+                <Text>Popover content</Text>
+              </Flex>
+            </Card>
+          }
+        />
       </Box>
     )
   },

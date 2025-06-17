@@ -1,5 +1,6 @@
 import {
   arrow,
+  autoPlacement,
   autoUpdate,
   flip,
   hide,
@@ -96,6 +97,16 @@ export interface PopoverProps
   overflow?: BoxOverflow
   padding?: number | number[]
   placement?: Placement
+  /**
+   * When 'flip' (default), the placement is determined from the initial placement and the
+   * fallback placements in order. Whichever fits in the viewport first.
+   *
+   * When 'autoPlacement', the initial placement and all fallback placements are evaluated
+   * and the placement with the most viewport space available.
+   *
+   * Option is only relevant if either `constrainSize` or `preventOverflow` is `true`
+   */
+  placementStrategy?: 'flip' | 'autoPlacement'
   /** Whether or not to render the popover in a portal element. */
   portal?: boolean | string
   preventOverflow?: boolean
@@ -154,6 +165,7 @@ export const Popover = memo(
       overflow = 'hidden',
       padding: paddingProp,
       placement: placementProp = 'bottom',
+      placementStrategy = 'flip',
       portal,
       preventOverflow = true,
       radius: radiusProp = 3,
@@ -240,14 +252,22 @@ export const Popover = memo(
 
       // Flip the floating element when leaving the boundary box
       if (constrainSize || preventOverflow) {
-        ret.push(
-          flip({
-            boundary: floatingBoundary || undefined,
-            fallbackPlacements,
-            padding: DEFAULT_POPOVER_PADDING,
-            rootBoundary,
-          }),
-        )
+        if (placementStrategy === 'autoPlacement') {
+          ret.push(
+            autoPlacement({
+              allowedPlacements: [placementProp].concat(fallbackPlacements),
+            }),
+          )
+        } else {
+          ret.push(
+            flip({
+              boundary: floatingBoundary || undefined,
+              fallbackPlacements,
+              padding: DEFAULT_POPOVER_PADDING,
+              rootBoundary,
+            }),
+          )
+        }
       }
 
       // Define distance between reference and floating element
@@ -330,6 +350,8 @@ export const Popover = memo(
       arrowProp,
       constrainSize,
       fallbackPlacements,
+      placementProp,
+      placementStrategy,
       floatingBoundary,
       margins,
       matchReferenceWidth,
