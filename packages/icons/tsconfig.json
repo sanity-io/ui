@@ -9,7 +9,6 @@
     "./workshop.config.ts"
   ],
   "compilerOptions": {
-    "rootDir": ".",
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {

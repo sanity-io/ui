@@ -9,9 +9,6 @@
     "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist",
-    "sourceMap": true,
     "jsx": "preserve"
   }
 }
