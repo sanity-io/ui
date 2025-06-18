@@ -286,8 +286,8 @@ importers:
         specifier: ^7.27.1
         version: 7.27.1(@babel/core@7.27.4)
       '@figma/plugin-typings':
-        specifier: ^1.110.0
-        version: 1.110.0
+        specifier: ^1.114.0
+        version: 1.114.0
       '@sanity/color':
         specifier: ^3.0.6
         version: 3.0.6
@@ -1389,8 +1389,8 @@ packages:
     resolution: {integrity: sha512-ZAoA40rNMPwSm+AeHpCq8STiNAwzWLJuP8Xv4CHIc9wv/PSuExjMrmjfYNj682vW0OOiZ1HKxzvjQr9XZIisQA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@figma/plugin-typings@1.110.0':
-    resolution: {integrity: sha512-n1fZKjt2zApCVqxdJs+JCdpmLX2hDvhgoGbuXeAh7xt+IkSj21gB9vhV5KW+O5sDyPnt3H7doTDO47Oy9CRkQg==}
+  '@figma/plugin-typings@1.114.0':
+    resolution: {integrity: sha512-rVUEOgDzyk8Td/XsPwgRPTxSNuinIzvs6zJhuk/LJ8FHsA6JEuCrfYjWMEht1LjOyrn/25aAFubWKKDB/fTDRQ==}
 
   '@floating-ui/core@1.6.9':
     resolution: {integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==}
@@ -7722,9 +7722,6 @@ packages:
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
-  zod@3.24.4:
-    resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
-
   zod@3.25.67:
     resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
 
@@ -8914,7 +8911,7 @@ snapshots:
       '@eslint/core': 0.13.0
       levn: 0.4.1
 
-  '@figma/plugin-typings@1.110.0': {}
+  '@figma/plugin-typings@1.114.0': {}
 
   '@floating-ui/core@1.6.9':
     dependencies:
@@ -9249,8 +9246,8 @@ snapshots:
       express-rate-limit: 7.5.0(express@5.1.0)
       pkce-challenge: 5.0.0
       raw-body: 3.0.0
-      zod: 3.24.4
-      zod-to-json-schema: 3.24.5(zod@3.24.4)
+      zod: 3.25.67
+      zod-to-json-schema: 3.24.5(zod@3.25.67)
     transitivePeerDependencies:
       - supports-color
 
@@ -11940,7 +11937,7 @@ snapshots:
       minimatch: 3.1.2
       natural-compare: 1.4.0
       optionator: 0.9.4
-      zod: 3.24.4
+      zod: 3.25.67
     optionalDependencies:
       jiti: 2.4.2
     transitivePeerDependencies:
@@ -16401,9 +16398,9 @@ snapshots:
 
   yoctocolors@2.1.1: {}
 
-  zod-to-json-schema@3.24.5(zod@3.24.4):
+  zod-to-json-schema@3.24.5(zod@3.25.67):
     dependencies:
-      zod: 3.24.4
+      zod: 3.25.67
 
   zod-validation-error@3.4.0(zod@3.24.2):
     dependencies:
@@ -16414,8 +16411,6 @@ snapshots:
       zod: 3.25.67
 
   zod@3.24.2: {}
-
-  zod@3.24.4: {}
 
   zod@3.25.67: {}
 
