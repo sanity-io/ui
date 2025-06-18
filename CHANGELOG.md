@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.2](https://github.com/sanity-io/ui/compare/v2.16.1...v2.16.2) (2025-06-18)
+
+### Bug Fixes
+
+- **deps:** update dependency @floating-ui/react-dom to ^2.1.3 ([#1734](https://github.com/sanity-io/ui/issues/1734)) ([efcd398](https://github.com/sanity-io/ui/commit/efcd398f0dd56b769f63375c769b33916b6cecba))
+- **deps:** update dependency use-effect-event to v2 ([#1739](https://github.com/sanity-io/ui/issues/1739)) ([0d1d855](https://github.com/sanity-io/ui/commit/0d1d855c49d559f5d06d1a0fb7987cfda9fa7745))
+
 ## [2.16.1](https://github.com/sanity-io/ui/compare/v2.16.0...v2.16.1) (2025-06-18)
 
 ### Bug Fixes
