@@ -79,46 +79,46 @@ importers:
         specifier: ^2.1.4
         version: 2.1.4(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)
       '@storybook/addon-a11y':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/addon-docs':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(@types/react@19.1.8)(storybook@8.6.14(prettier@3.5.3))
       '@storybook/addon-essentials':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(@types/react@19.1.8)(storybook@8.6.14(prettier@3.5.3))
       '@storybook/addon-interactions':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/addon-links':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(react@19.1.0)(storybook@8.6.14(prettier@3.5.3))
       '@storybook/addon-mdx-gfm':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/addon-storysource':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/addon-themes':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/blocks':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.14(prettier@3.5.3))
       '@storybook/manager-api':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/react':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.5.3)))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.14(prettier@3.5.3))(typescript@5.8.3)
       '@storybook/react-vite':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.5.3)))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.43.0)(storybook@8.6.14(prettier@3.5.3))(typescript@5.8.3)(vite@5.4.19(@types/node@20.17.30)(terser@5.39.0))
       '@storybook/test':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/theming':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@testing-library/dom':
         specifier: ^10.4.0
@@ -259,7 +259,7 @@ importers:
         specifier: ^2.0.12
         version: 2.0.12
       storybook:
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(prettier@3.5.3)
       styled-components:
         specifier: ^6.1.19
