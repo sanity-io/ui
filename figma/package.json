@@ -21,7 +21,7 @@
     "watch": "pkg watch --strict"
   },
   "devDependencies": {
-    "@babel/plugin-transform-object-rest-spread": "^7.27.1",
+    "@babel/plugin-transform-object-rest-spread": "^7.27.3",
     "@figma/plugin-typings": "^1.114.0",
     "@sanity/color": "^3.0.6",
     "@sanity/ui": "workspace:*",
