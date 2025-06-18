@@ -20,6 +20,20 @@ permissions:
   contents: read # for checkout
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          node-version: lts/*
+      - run: pnpm install
+      - run: tsc --noEmit
+      - run: pnpm build
+      - run: pnpm lint
+
   test:
     runs-on: ${{ matrix.platform }}
     name: Node.js ${{ matrix.node-version }} / ${{ matrix.platform }}
@@ -39,15 +53,13 @@ jobs:
           cache: pnpm
           node-version: ${{ matrix.node-version }}
       - run: pnpm install
-      - run: pnpm build
-      - run: pnpm lint
       - run: pnpm test
 
   release:
     permissions:
       id-token: write # to enable use of OIDC for npm provenance
     name: "Semantic release"
-    needs: test
+    needs: [build, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v2
