@@ -194,7 +194,7 @@
     "react-is": "^19.1.0",
     "refractor": "^4.9.0",
     "rimraf": "^5.0.5",
-    "semantic-release": "^24.2.3",
+    "semantic-release": "^24.2.5",
     "start-server-and-test": "^2.0.11",
     "storybook": "^8.6.12",
     "styled-components": "^6.1.17",
