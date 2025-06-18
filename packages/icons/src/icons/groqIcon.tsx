@@ -1,14 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export const GroqIcon = forwardRef(function GroqIcon(
-  props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const GroqIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = forwardRef(function GroqIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="groq"

@@ -1,14 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export const StackIcon = forwardRef(function StackIcon(
-  props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const StackIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = forwardRef(function StackIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="stack"

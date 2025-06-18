@@ -1,14 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export const BellIcon = forwardRef(function BellIcon(
-  props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const BellIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = forwardRef(function BellIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="bell"

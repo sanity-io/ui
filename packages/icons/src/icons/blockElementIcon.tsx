@@ -1,14 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export const BlockElementIcon = forwardRef(function BlockElementIcon(
-  props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const BlockElementIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = forwardRef(function BlockElementIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="block-element"

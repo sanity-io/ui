@@ -1,14 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export const DocumentPdfIcon = forwardRef(function DocumentPdfIcon(
-  props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const DocumentPdfIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = forwardRef(function DocumentPdfIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="document-pdf"

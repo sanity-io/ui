@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 import {icons} from './icons'
 import type {IconSymbol} from './icons'
 
@@ -12,10 +12,9 @@ export interface IconProps {
 /**
  * @public
  */
-export const Icon = forwardRef(function Icon(
-  props: IconProps & Omit<React.SVGProps<SVGSVGElement>, 'ref'>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const Icon: ForwardRefExoticComponent<
+  IconProps & Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = forwardRef(function Icon(props, ref) {
   const {symbol, ...restProps} = props
   const IconComponent = icons[symbol]
 

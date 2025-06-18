@@ -17,15 +17,14 @@ const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
 const __TEMPLATE__ = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export const __NAME__ = forwardRef(function __NAME__(
-  props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const __NAME__: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, "ref"> & RefAttributes<SVGSVGElement>
+> = forwardRef(function __NAME__(props, ref) {
   return (
     __JSX__
   )

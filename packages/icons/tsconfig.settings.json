@@ -2,6 +2,6 @@
   "extends": "@sanity/pkg-utils/tsconfig/strictest.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "./dist",
+    "outDir": "./dist"
   }
 }
