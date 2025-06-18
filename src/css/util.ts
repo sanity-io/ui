@@ -1,4 +1,4 @@
-import {type ThemeBoxShadow} from '@sanity/ui/theme'
+import type {ThemeBoxShadow} from '@sanity/ui/theme'
 
 /** @internal */
 export function rem(value: number): string {
