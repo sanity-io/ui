@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.settings",
+  "extends": ["./tsconfig.settings", "@sanity/pkg-utils/tsconfig/isolated-declarations.json"],
   "include": ["./src"],
   "exclude": [
     "./src/**/__fixtures__",
@@ -7,8 +7,5 @@
     "./src/**/__workshop__",
     "./src/**/*.test.ts",
     "./src/**/*.test.tsx"
-  ],
-  "compilerOptions": {
-    "jsx": "preserve"
-  }
+  ]
 }
