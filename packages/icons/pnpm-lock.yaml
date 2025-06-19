@@ -31,7 +31,7 @@ importers:
         version: 19.7.1
       '@sanity/pkg-utils':
         specifier: ^7.0.4
-        version: 7.0.4(@types/babel__core@7.20.5)(@types/node@22.13.8)(babel-plugin-react-compiler@19.0.0-beta-af1b7da-20250417)(typescript@5.7.3)
+        version: 7.0.4(@types/babel__core@7.20.5)(@types/node@22.13.8)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.7.3)
       '@sanity/prettier-config':
         specifier: ^1.0.4
         version: 1.0.4(prettier@3.5.3)
@@ -72,8 +72,8 @@ importers:
         specifier: ^8.25.0
         version: 8.25.0(eslint@8.57.1)(typescript@5.7.3)
       babel-plugin-react-compiler:
-        specifier: beta
-        version: 19.0.0-beta-af1b7da-20250417
+        specifier: 19.1.0-rc.2
+        version: 19.1.0-rc.2
       camelcase:
         specifier: ^8.0.0
         version: 8.0.0
@@ -147,8 +147,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0
       react-compiler-runtime:
-        specifier: beta
-        version: 19.0.0-beta-af1b7da-20250417(react@19.0.0)
+        specifier: 19.1.0-rc.2
+        version: 19.1.0-rc.2(react@19.0.0)
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
@@ -2269,8 +2269,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
 
-  babel-plugin-react-compiler@19.0.0-beta-af1b7da-20250417:
-    resolution: {integrity: sha512-UyTCRmzpxa4H1EqJk8fWeUOzHdEA12NQZ5DrF5hyhCs+Y6f7B4pg1fkul49sRn9GPPGFgkrH4IxOtnQJ7tNXIA==}
+  babel-plugin-react-compiler@19.1.0-rc.2:
+    resolution: {integrity: sha512-kSNA//p5fMO6ypG8EkEVPIqAjwIXm5tMjfD1XRPL/sRjYSbJ6UsvORfaeolNWnZ9n310aM0xJP7peW26BuCVzA==}
 
   babel-preset-current-node-syntax@1.1.0:
     resolution: {integrity: sha512-ldYss8SbBlWva1bs28q78Ju5Zq1F+8BrqBZZ0VFhLBvhh6lCpC2o3gDJi/5DRLs9FgYZCnmPYIVFU4lRXCkyUw==}
@@ -5311,13 +5311,13 @@ packages:
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
-  react-compiler-runtime@19.0.0-beta-af1b7da-20250417:
-    resolution: {integrity: sha512-1x7EFeLOerr3UbtPyQaF0h16CM1CSqmuf2HRJjRblud+d8xuyBUuEmBzcKyMwNGBmEFsr43Y8/krM/hodT0ywg==}
+  react-compiler-runtime@19.0.0-beta-e1e972c-20250221:
+    resolution: {integrity: sha512-6nONLW+4zbfAt6mLG6SV73tKlZLJqmezqX0EF9ZKzab84Pje/4CMVs8QVw4OeRS+FFtPcfWU4fOK28nq7lM4Hg==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
-  react-compiler-runtime@19.0.0-beta-e1e972c-20250221:
-    resolution: {integrity: sha512-6nONLW+4zbfAt6mLG6SV73tKlZLJqmezqX0EF9ZKzab84Pje/4CMVs8QVw4OeRS+FFtPcfWU4fOK28nq7lM4Hg==}
+  react-compiler-runtime@19.1.0-rc.2:
+    resolution: {integrity: sha512-852AwyIsbWJ5o1LkQVAZsVK3iLjMxOfKZuxqeGd/RfD+j1GqHb6j3DSHLtpu4HhFbQHsP2DzxjJyKR6luv4D8w==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
@@ -8100,7 +8100,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@sanity/pkg-utils@7.0.4(@types/babel__core@7.20.5)(@types/node@22.13.8)(babel-plugin-react-compiler@19.0.0-beta-af1b7da-20250417)(typescript@5.7.3)':
+  '@sanity/pkg-utils@7.0.4(@types/babel__core@7.20.5)(@types/node@22.13.8)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.7.3)':
     dependencies:
       '@babel/core': 7.26.9
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.9)
@@ -8145,7 +8145,7 @@ snapshots:
       zod: 3.24.1
       zod-validation-error: 3.4.0(zod@3.24.1)
     optionalDependencies:
-      babel-plugin-react-compiler: 19.0.0-beta-af1b7da-20250417
+      babel-plugin-react-compiler: 19.1.0-rc.2
     transitivePeerDependencies:
       - '@types/babel__core'
       - '@types/node'
@@ -8924,7 +8924,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-react-compiler@19.0.0-beta-af1b7da-20250417:
+  babel-plugin-react-compiler@19.1.0-rc.2:
     dependencies:
       '@babel/types': 7.26.9
 
@@ -12406,11 +12406,11 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  react-compiler-runtime@19.0.0-beta-af1b7da-20250417(react@19.0.0):
+  react-compiler-runtime@19.0.0-beta-e1e972c-20250221(react@19.0.0):
     dependencies:
       react: 19.0.0
 
-  react-compiler-runtime@19.0.0-beta-e1e972c-20250221(react@19.0.0):
+  react-compiler-runtime@19.1.0-rc.2(react@19.0.0):
     dependencies:
       react: 19.0.0
 
