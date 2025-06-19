@@ -1,6 +1,8 @@
+import type {ForwardRefExoticComponent, RefAttributes, SVGProps} from 'react'
+
 /**
  * @public
  */
-export type IconComponent = React.ForwardRefExoticComponent<
-  Omit<React.SVGProps<SVGSVGElement>, 'ref'> & React.RefAttributes<SVGSVGElement>
+export type IconComponent = ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
 >

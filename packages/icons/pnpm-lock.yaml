@@ -36,11 +36,11 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5
       '@sanity/pkg-utils':
-        specifier: ^7.7.0
-        version: 7.7.0(@types/babel__core@7.20.5)(@types/node@22.15.32)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.8.3)
+        specifier: ^7.8.0
+        version: 7.8.0(@types/babel__core@7.20.5)(@types/node@22.15.32)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.8.3)
       '@sanity/prettier-config':
-        specifier: ^1.0.4
-        version: 1.0.4(prettier@3.5.3)
+        specifier: ^1.0.5
+        version: 1.0.5(prettier@3.5.3)
       '@sanity/semantic-release-preset':
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.5(typescript@5.8.3))
@@ -1643,8 +1643,8 @@ packages:
     peerDependencies:
       react: ^18.3 || ^19.0.0-0
 
-  '@sanity/pkg-utils@7.7.0':
-    resolution: {integrity: sha512-Pt/vLGy2rMl2vtNsaQNxs4EIwYOIsL/XyWYDWBpFiu5N9XzFU+/j6uI5kz0S2PMBGEQsqAXCYgQTv0/ADx5bUg==}
+  '@sanity/pkg-utils@7.8.0':
+    resolution: {integrity: sha512-FekXfhm4W66nbkXzhBXmvfL9W92GIALhoQOfnThYq30GYU/o/ABSiAGo8VdScXs3oysgBKiy/WC5tQ5p2GsnNA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -1654,10 +1654,10 @@ packages:
       babel-plugin-react-compiler:
         optional: true
 
-  '@sanity/prettier-config@1.0.4':
-    resolution: {integrity: sha512-ZGqgxb3GZqTtyaXnhl+ms4h10MDeq8HyEdbGWT2grmDwEZIRi8ApNX7bhhIvhN49AOhj43CsGqjvXOtoa5BrDw==}
+  '@sanity/prettier-config@1.0.5':
+    resolution: {integrity: sha512-8pDONAlOwwV/qRYn3oRLXvHUE7h56zBR+6pXyCfxeU198tTPT06X2Jj32QygliycElnyeGY7X8h8NJG3jP5CuA==}
     peerDependencies:
-      prettier: ^3.2.5
+      prettier: ^3.5.3
 
   '@sanity/semantic-release-preset@5.0.0':
     resolution: {integrity: sha512-2lCuU57OZW6WY7O8d4vjbpghQIc9lnxS9+dLnzrBYh8e6pA467DxlCNum4NgDeDyHxNh9HGXNalXEWJz8tec+A==}
@@ -7520,7 +7520,7 @@ snapshots:
     dependencies:
       react: 19.1.0
 
-  '@sanity/pkg-utils@7.7.0(@types/babel__core@7.20.5)(@types/node@22.15.32)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.8.3)':
+  '@sanity/pkg-utils@7.8.0(@types/babel__core@7.20.5)(@types/node@22.15.32)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.8.3)':
     dependencies:
       '@babel/core': 7.27.4
       '@babel/preset-typescript': 7.27.1(@babel/core@7.27.4)
@@ -7576,7 +7576,7 @@ snapshots:
       - supports-color
       - vue-tsc
 
-  '@sanity/prettier-config@1.0.4(prettier@3.5.3)':
+  '@sanity/prettier-config@1.0.5(prettier@3.5.3)':
     dependencies:
       prettier: 3.5.3
       prettier-plugin-packagejson: 2.5.15(prettier@3.5.3)
