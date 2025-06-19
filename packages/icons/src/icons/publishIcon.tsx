@@ -16,8 +16,8 @@ export const PublishIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M4.99997 5.50006H20M12.5 9.00005V20"

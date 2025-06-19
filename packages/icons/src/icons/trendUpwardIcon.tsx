@@ -16,8 +16,8 @@ export const TrendUpwardIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M4.5 18.5L11.5 10.5L13.5 14.5L20.5 6.5"

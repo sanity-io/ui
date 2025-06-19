@@ -16,8 +16,8 @@ export const CheckmarkIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M5.5 11.5L10.5 16.5L19.5 7.60001"

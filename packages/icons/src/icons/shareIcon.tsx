@@ -16,8 +16,8 @@ export const ShareIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M15 10.5H18.5V19.5H6.5L6.5 10.5H10M12.5 16V3.5"

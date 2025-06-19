@@ -16,8 +16,8 @@ export const CropIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M9.5 5V15.5H20M5 9.5H15.5V20"

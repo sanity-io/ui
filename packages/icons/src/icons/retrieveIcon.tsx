@@ -16,8 +16,8 @@ export const RetrieveIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M16 14L12.5 10.5L9 14M5.5 7.5H19.5"

@@ -16,8 +16,8 @@ export const LaunchIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M12 7.5H6.5V18.5H17.5V13M19.5 5.5L10.5 14.5"

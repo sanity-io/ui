@@ -16,8 +16,8 @@ export const ArrowUpIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M7 11L12.5 5.5L18 11"

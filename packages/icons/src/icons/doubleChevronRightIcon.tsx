@@ -16,8 +16,8 @@ export const DoubleChevronRightIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M12.5 8L17 12.5L12.5 17M7.5 8L12 12.5L7.5 17"

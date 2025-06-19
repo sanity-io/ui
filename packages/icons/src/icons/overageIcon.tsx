@@ -16,8 +16,8 @@ export const OverageIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M18.5 11V6.5H14" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path

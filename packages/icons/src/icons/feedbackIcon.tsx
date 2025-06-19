@@ -16,8 +16,8 @@ export const FeedbackIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M10 11.5V12H9.5L9.5 11.5H10Z" fill="currentColor" />
       <path d="M13 11.5V12H12.5V11.5H13Z" fill="currentColor" />

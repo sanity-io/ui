@@ -16,8 +16,8 @@ export const ErrorScreenIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M10 8.5L15 13.5M15 8.5L10 13.5"

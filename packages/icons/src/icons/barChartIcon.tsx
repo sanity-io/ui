@@ -16,8 +16,8 @@ export const BarChartIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M5.5 5V19.5H20M8.5 18V13M11.5 18V9M14.5 18V11M17.5 18V7"

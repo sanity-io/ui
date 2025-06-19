@@ -16,8 +16,8 @@ export const EnterIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M6 14.5H19.5V7" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path

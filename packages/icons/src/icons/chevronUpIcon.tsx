@@ -16,8 +16,8 @@ export const ChevronUpIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M8 15L12.5 10.5L17 15"

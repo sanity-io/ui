@@ -16,8 +16,8 @@ export const CollapseIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M6 14.5L10.5 14.5V19M19 10.5H14.5L14.5 6"

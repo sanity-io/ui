@@ -16,8 +16,8 @@ export const ArrowTopRightIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M16.5 8.5L7 18" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path d="M9 8.5H16.5V16" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />

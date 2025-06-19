@@ -16,8 +16,8 @@ export const RemoveIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M5 12.5H20" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>

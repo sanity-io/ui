@@ -62,7 +62,7 @@ async function readIcon(filePath: string) {
 
   code = code.replace(
     /xmlns="http:\/\/www.w3.org\/2000\/svg"/g,
-    ' xmlns="http://www.w3.org/2000/svg" ref={ref} {...props}',
+    ' xmlns="http://www.w3.org/2000/svg" {...props} ref={ref}',
   )
 
   code = code.replace(/width="25"/g, `width="1em"`)

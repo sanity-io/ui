@@ -16,8 +16,8 @@ export const GroqIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M13 13H21L13 21L13 13Z" fill="currentColor" />
       <path d="M12 12V4L4 12H12Z" fill="currentColor" />

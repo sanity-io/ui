@@ -16,8 +16,8 @@ export const ListIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M6 6.5H19M6 14.5H19M6 10.5H19M6 18.5H19"

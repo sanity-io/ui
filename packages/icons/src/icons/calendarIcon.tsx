@@ -16,8 +16,8 @@ export const CalendarIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M5.5 18.5H19.5V6.5H5.5V18.5Z"

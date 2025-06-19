@@ -16,8 +16,8 @@ export const DocumentVideoIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M11.5 16.5V13.5L14 15L11.5 16.5Z"

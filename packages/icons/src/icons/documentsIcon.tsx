@@ -16,8 +16,8 @@ export const DocumentsIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M10.5 4.5V9.5H5.5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path

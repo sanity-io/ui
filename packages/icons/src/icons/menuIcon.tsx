@@ -16,8 +16,8 @@ export const MenuIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M6 7.5H19M6 17.5H19M6 12.5H19"

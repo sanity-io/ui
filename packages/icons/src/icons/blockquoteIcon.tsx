@@ -16,8 +16,8 @@ export const BlockquoteIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M10 17.5H19M6 7.5H19M10 12.5H17M6.5 12V18"

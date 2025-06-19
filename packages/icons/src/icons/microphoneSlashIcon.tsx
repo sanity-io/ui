@@ -16,8 +16,8 @@ export const MicrophoneSlashIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M17.8162 14.412C18.6231 13.3173 19.1 11.9644 19.1 10.5V10H17.9V10.5C17.9 11.6324 17.5514 12.6834 16.9557 13.5516L17.8162 14.412Z"

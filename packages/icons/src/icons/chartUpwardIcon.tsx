@@ -16,8 +16,8 @@ export const ChartUpwardIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M5.5 5V19.5H20M7.5 16L11.5 11.5L15.5 14L19.5 8.5"

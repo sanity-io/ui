@@ -16,8 +16,8 @@ export const PlayIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M7.5 18.5V6.5L17.5 12.5L7.5 18.5Z"

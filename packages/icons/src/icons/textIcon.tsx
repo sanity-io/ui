@@ -16,8 +16,8 @@ export const TextIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path
         d="M7.5 9V6.5H17.5V9M12.5 18.5V6.5M10 18.5H15"

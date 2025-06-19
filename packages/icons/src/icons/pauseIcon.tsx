@@ -16,8 +16,8 @@ export const PauseIcon: ForwardRefExoticComponent<
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
       {...props}
+      ref={ref}
     >
       <path d="M10.5 7.5H8.5V17.5H10.5V7.5Z" fill="currentColor" />
       <path d="M16.5 7.5H14.5V17.5H16.5V7.5Z" fill="currentColor" />
