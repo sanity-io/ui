@@ -68,7 +68,7 @@ export type DialogCardProps<E extends DialogCardElementType = DialogCardElementT
 
 export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIALOG_CARD_ELEMENT>(
   props: DialogCardProps<E>,
-) {
+): React.JSX.Element {
   const {
     __unstable_autoFocus: autoFocus,
     __unstable_hideCloseButton: hideCloseButton,

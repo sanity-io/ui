@@ -36,7 +36,7 @@ const DEFAULT_BREAKPOINTS = Object.values(BREAKPOINTS)
  */
 export function ElementQuery<
   E extends ElementQueryElementType = typeof DEFAULT_ELEMENT_QUERY_ELEMENT,
->(props: ElementQueryProps<E>) {
+>(props: ElementQueryProps<E>): React.JSX.Element {
   const {
     as: Element = DEFAULT_ELEMENT_QUERY_ELEMENT,
     children,

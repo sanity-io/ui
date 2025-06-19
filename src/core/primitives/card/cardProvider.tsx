@@ -11,7 +11,7 @@ export function CardProvider(props: {
   scheme: ThemeColorSchemeKey
   /** @internal */
   unstable_CompatProvider?: _CardCompatProviderComponent
-}) {
+}): React.JSX.Element {
   const {children, tone, scheme, unstable_CompatProvider} = props
 
   return (

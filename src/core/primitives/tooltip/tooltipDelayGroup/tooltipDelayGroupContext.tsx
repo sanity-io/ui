@@ -1,11 +1,13 @@
+import type {Context} from 'react'
+
 import {createGlobalScopedContext} from '../../../lib/createGlobalScopedContext'
 import type {TooltipDelayGroupContextValue} from './types'
 
 /**
  * @beta
  */
-export const TooltipDelayGroupContext =
+export const TooltipDelayGroupContext: Context<TooltipDelayGroupContextValue | null> =
   createGlobalScopedContext<TooltipDelayGroupContextValue | null>(
-    '@sanity/ui/context/tooltipDelayGroup',
+    '@sanity/ui/v3/tooltipDelayGroup',
     null,
   )

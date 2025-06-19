@@ -18,19 +18,15 @@ import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars.css'
 
 const pulse = keyframes({
-  // '@layer': {
-  //   [layers.components]: {
   '0%': {
     backgroundPosition: '100%',
   },
   '100%': {
     backgroundPosition: '-100%',
   },
-  //   },
-  // },
 })
 
-export const root = _style(layers.components, {
+export const root: string = _style(layers.components, {
   'backgroundColor': vars.color.skeleton.from,
   'backgroundPosition': '100%',
   'backgroundSize': '200% 100%',
@@ -67,7 +63,7 @@ export const root = _style(layers.components, {
   },
 })
 
-export const font = _style(layers.components, {
+export const font: string = _style(layers.components, {
   height: `calc(${vars.font.skeleton.lineHeight} - ${vars.font.skeleton.ascenderHeight} - ${vars.font.skeleton.descenderHeight})`,
 })
 

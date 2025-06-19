@@ -1,8 +1,7 @@
 import {PortalProvider, Root} from '@sanity/ui'
+import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {Decorator} from '@storybook/react-vite'
 import {useState} from 'react'
-
-import {ThemeColorSchemeKey} from '../../../dist/theme'
 
 export const UIDecorator: Decorator = (storyFn, context) => {
   const scheme = (context.userGlobals.theme || 'light') as ThemeColorSchemeKey

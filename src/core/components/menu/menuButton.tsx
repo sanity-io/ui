@@ -65,7 +65,7 @@ export type MenuButtonProps = {
  *
  * @public
  */
-export function MenuButton(props: MenuButtonProps) {
+export function MenuButton(props: MenuButtonProps): React.JSX.Element {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
     boundaryElement: deprecated_boundaryElement,

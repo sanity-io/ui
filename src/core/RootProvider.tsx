@@ -17,7 +17,7 @@ export interface RootProviderProps {
 }
 
 /** @public */
-export function RootProvider(props: RootProviderProps) {
+export function RootProvider(props: RootProviderProps): React.JSX.Element {
   const {
     boundaryElement = null,
     children,

@@ -1,5 +1,6 @@
 import type {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
 import type {FontTextSize, Space} from '@sanity/ui/theme'
+import type {ReactElement} from 'react'
 
 import {Box} from '../../primitives/box/box'
 import {KBD} from '../../primitives/kbd/kbd'
@@ -33,7 +34,7 @@ export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Pr
  */
 export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_ELEMENT>(
   props: HotkeysProps<E>,
-) {
+): ReactElement | undefined {
   const {
     as = DEFAULT_HOTKEYS_ELEMENT,
     fontSize,

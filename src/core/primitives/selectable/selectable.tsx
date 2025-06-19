@@ -29,7 +29,7 @@ export type SelectableProps<E extends SelectableElementType = SelectableElementT
 /** @internal */
 export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELECTABLE_ELEMENT>(
   props: SelectableProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_SELECTABLE_ELEMENT,
     className,

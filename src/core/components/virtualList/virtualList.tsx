@@ -49,7 +49,7 @@ export type VirtualListProps<E extends VirtualListElementType = VirtualListEleme
 /** @beta */
 export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VIRTUAL_LIST_ELEMENT>(
   props: VirtualListProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_VIRTUAL_LIST_ELEMENT,
     gap = 0,

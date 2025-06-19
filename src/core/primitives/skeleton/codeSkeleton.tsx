@@ -30,7 +30,7 @@ export type CodeSkeletonProps<E extends CodeSkeletonElementType = CodeSkeletonEl
  */
 export function CodeSkeleton<
   E extends CodeSkeletonElementType = typeof DEFAULT_CODE_SKELETON_ELEMENT,
->(props: CodeSkeletonProps<E>) {
+>(props: CodeSkeletonProps<E>): React.JSX.Element {
   const {
     className,
     size = 2,

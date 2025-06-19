@@ -7,13 +7,13 @@ import {layers} from '../../layers.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   position: 'relative',
 })
 
-export const border = _style(layers.primitives, {})
+export const border: string = _style(layers.primitives, {})
 
-export const element = _style(layers.primitives, {
+export const element: string = _style(layers.primitives, {
   WebkitFontSmoothing: 'inherit',
   appearance: 'none',
   border: 0,
@@ -108,7 +108,7 @@ export const element = _style(layers.primitives, {
   },
 })
 
-export const presentation = _style(layers.primitives, {
+export const presentation: string = _style(layers.primitives, {
   backgroundColor: vars.color.input.text.bg,
   borderRadius: 'inherit',
   boxShadow: `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.text.border}`,

@@ -44,7 +44,7 @@ export type BreadcrumbsProps<E extends BreadcrumbsElementType = BreadcrumbsEleme
 /** @beta */
 export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BREADCRUMBS_ELEMENT>(
   props: BreadcrumbsProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_BREADCRUMBS_ELEMENT,
     children,

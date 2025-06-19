@@ -38,7 +38,7 @@ export type TabListProps<E extends TabListElementType = TabListElementType> = Pr
 /** @public */
 export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_ELEMENT>(
   props: TabListProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_TAB_LIST_ELEMENT,
     children: childrenProp,

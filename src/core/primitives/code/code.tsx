@@ -23,7 +23,9 @@ export type CodeElementType = 'div' | 'pre' | ComponentType
 export type CodeProps<E extends CodeElementType = CodeElementType> = Props<CodeOwnProps, E>
 
 /** @public */
-export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(props: CodeProps<E>) {
+export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(
+  props: CodeProps<E>,
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_CODE_ELEMENT,
     children,

@@ -1,4 +1,4 @@
-import {AVATAR_COLORS, AVATAR_SIZE, type AvatarSize} from '@sanity/ui/theme'
+import {AVATAR_COLORS, AVATAR_SIZE, type AvatarColor, type AvatarSize} from '@sanity/ui/theme'
 import {globalStyle} from '@vanilla-extract/css'
 
 import {_fromEntries} from '../../_fromEntries'
@@ -8,7 +8,7 @@ import {layers} from '../../layers.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars.css'
 
-export const stack = _style(layers.primitives, {})
+export const stack: string = _style(layers.primitives, {})
 
 globalStyle(`${stack} > * + *`, {
   '@layer': {
@@ -18,7 +18,7 @@ globalStyle(`${stack} > * + *`, {
   },
 })
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   // display: 'block',
   backgroundColor: vars.color.avatar.bg,
   position: 'relative',
@@ -68,7 +68,7 @@ export const root = _style(layers.primitives, {
   },
 })
 
-export const colors = {
+export const colors: Record<AvatarColor, string> = {
   ..._fromEntries(
     AVATAR_COLORS.map((c) => [
       c,
@@ -82,7 +82,7 @@ export const colors = {
   ),
 }
 
-export const arrow = _style(layers.primitives, {
+export const arrow: string = _style(layers.primitives, {
   position: 'absolute',
   boxSizing: 'border-box',
   zIndex: 0,
@@ -112,7 +112,7 @@ export const arrow = _style(layers.primitives, {
   },
 })
 
-export const arrowSvg = _style(layers.primitives, {
+export const arrowSvg: string = _style(layers.primitives, {
   display: 'block',
   width: '11px',
   height: '7px',
@@ -122,7 +122,7 @@ export const arrowSvg = _style(layers.primitives, {
   transform: 'translateX(-6px)',
 })
 
-export const image = _style(layers.primitives, {
+export const image: string = _style(layers.primitives, {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -145,7 +145,7 @@ globalStyle(`${image} img`, {
   borderRadius: 'inherit',
 })
 
-export const imageOutline = _style(layers.primitives, {
+export const imageOutline: string = _style(layers.primitives, {
   display: 'block',
   position: 'absolute',
   top: 0,
@@ -159,12 +159,12 @@ export const imageOutline = _style(layers.primitives, {
   ].join(', '),
 })
 
-export const initials = _style(layers.primitives, {
+export const initials: string = _style(layers.primitives, {
   color: vars.color.avatar.fg,
   borderRadius: 'inherit',
 })
 
-export const counter = _style(layers.primitives, {
+export const counter: string = _style(layers.primitives, {
   color: vars.color.fg,
   backgroundColor: vars.color.bg,
   boxShadow: [`0 0 0 1px ${vars.color.bg}`, `inset 0 0 0 1px ${vars.color.border}`].join(', '),

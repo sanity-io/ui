@@ -38,7 +38,7 @@ export type SelectProps<E extends SelectElementType = SelectElementType> = Props
  */
 export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEMENT>(
   props: SelectProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_SELECT_ELEMENT,
     border = true,

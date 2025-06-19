@@ -25,7 +25,7 @@ export type RadioProps<E extends RadioElementType = RadioElementType> = Props<Ra
  */
 export function Radio<E extends RadioElementType = typeof DEFAULT_RADIO_ELEMENT>(
   props: RadioProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_RADIO_ELEMENT,
     className,

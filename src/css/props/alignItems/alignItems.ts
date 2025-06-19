@@ -3,6 +3,6 @@ import {options} from './alignItems.css'
 import type {AlignItemsStyleProps} from './types'
 
 /** @public */
-export function alignItems(props: AlignItemsStyleProps) {
+export function alignItems(props: AlignItemsStyleProps): string | undefined {
   return _responsiveClassName(options, props.alignItems)
 }

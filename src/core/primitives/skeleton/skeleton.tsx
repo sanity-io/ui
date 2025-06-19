@@ -30,7 +30,7 @@ export type SkeletonProps<E extends SkeletonElementType = SkeletonElementType> =
  */
 export function Skeleton<E extends SkeletonElementType = typeof DEFAULT_SKELETON_ELEMENT>(
   props: SkeletonProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: As = DEFAULT_SKELETON_ELEMENT,
     animated = false,

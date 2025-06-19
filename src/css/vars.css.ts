@@ -18,14 +18,18 @@ import {
 import {createThemeContract, createVar} from '@vanilla-extract/css'
 
 import {_fromEntries} from './_fromEntries'
-import type {_CSSThemeWithoutPalette, CSSThemeColorPalette} from './types'
+import type {
+  ColorPaletteTokens,
+  ColorPaletteVars,
+  RootThemeTokens,
+  ThemeContract,
+  ThemeTokens,
+  ThemeVars,
+} from './types'
 
-/** @public */
-export const paletteVars = createThemeContract({
+const paletteTokens: ColorPaletteTokens = {
   black: '',
   white: '',
-
-  // hues
   ..._fromEntries(
     COLOR_HUES.map((h) => [
       h,
@@ -34,9 +38,12 @@ export const paletteVars = createThemeContract({
       },
     ]),
   ),
-}) satisfies CSSThemeColorPalette
+}
 
-const _themeVars = createThemeContract({
+/** @public */
+export const paletteVars: ColorPaletteVars = createThemeContract(paletteTokens)
+
+const themeTokens: ThemeTokens = {
   avatar: {
     focusRing: {
       offset: '',
@@ -82,18 +89,9 @@ const _themeVars = createThemeContract({
                   ..._fromEntries(AVATAR_COLORS.map((c) => [c, {bg: '', fg: ''}])),
                 },
                 backdrop: '',
-                // bg: {
-                //   '0': '',
-                //   '4': '',
-                // },
-                // border: {
-                //   '0': '',
-                //   '4': '',
-                // },
                 code: {
                   bg: '',
                   fg: '',
-
                   token: {
                     atrule: '',
                     attrName: '',
@@ -133,28 +131,20 @@ const _themeVars = createThemeContract({
                     variable: '',
                   },
                 },
-                // fg: {
-                //   '0': '',
-                //   '4': '',
-                // },
-
                 focusRing: '',
                 link: {
                   fg: '',
                 },
-
                 shadow: {
                   outline: '',
                   umbra: '',
                   penumbra: '',
                   ambient: '',
                 },
-
                 skeleton: {
                   from: '',
                   to: '',
                 },
-
                 ..._fromEntries(
                   COLOR_VARIANTS.map((v) => [
                     v,
@@ -358,13 +348,15 @@ const _themeVars = createThemeContract({
   space: {
     ..._fromEntries(SPACE.map((s) => [s, ''])),
   },
-}) satisfies _CSSThemeWithoutPalette
+}
+
+const _themeVars: ThemeContract<ThemeTokens> = createThemeContract(themeTokens)
 
 /**
  * Variables to be defined in a theme.
  *
  * @public */
-export const themeVars = {
+export const themeVars: ThemeContract<RootThemeTokens> = {
   ..._themeVars,
   color: {
     ..._themeVars.color,
@@ -377,7 +369,7 @@ export const themeVars = {
  *
  * @public
  */
-export const vars = {
+export const vars: ThemeVars = {
   ...themeVars,
   avatar: {
     ...themeVars.avatar,
@@ -390,6 +382,10 @@ export const vars = {
   button: {
     ...themeVars.button,
     boxShadow: createVar(),
+  },
+  card: {
+    ...themeVars.card,
+    test: createVar(),
   },
   color: {
     ...themeVars.color,
@@ -486,6 +482,7 @@ export const vars = {
       from: createVar(),
       to: createVar(),
     },
+
     // variants
     ..._fromEntries(
       COLOR_VARIANTS.map((v) => [

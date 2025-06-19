@@ -1,13 +1,14 @@
-import {FONT_HEADING_SIZE} from '@sanity/ui/theme'
+import {FONT_HEADING_SIZE, type FontHeadingSize} from '@sanity/ui/theme'
 import {globalStyle} from '@vanilla-extract/css'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_responsiveStyle} from '../../_responsiveStyle.css'
 import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
+import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   vars: {
     [vars.font.family]: vars.font.heading.family,
     [vars.font.featureSettings]: vars.font.heading.featureSettings,
@@ -57,11 +58,11 @@ globalStyle(`${root} svg`, {
   },
 })
 
-export const muted = _style(layers.primitives, {
+export const muted: string = _style(layers.primitives, {
   color: vars.color.muted.fg,
 })
 
-export const sizes = {
+export const sizes: ResponsiveRuleOptions<FontHeadingSize> = {
   ..._fromEntries(
     FONT_HEADING_SIZE.map((s) => {
       const v = vars.font.heading.scale[s]

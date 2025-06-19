@@ -80,7 +80,7 @@ export type TextInputProps<E extends TextInputElementType = TextInputElementType
  */
 export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_INPUT_ELEMENT>(
   props: TextInputProps<E>,
-) {
+): React.JSX.Element {
   const {
     __unstable_disableFocusRing,
     as: Element = DEFAULT_TEXT_INPUT_ELEMENT,

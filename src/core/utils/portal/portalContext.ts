@@ -1,8 +1,10 @@
+import type {Context} from 'react'
+
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {globalScope} from '../../lib/globalScope'
 import type {PortalContextValue} from './types'
 
-const key = '@sanity/ui/context/portal'
+const key = '@sanity/ui/v3/portal'
 const elementKey = Symbol.for(`${key}/element`)
 
 // Use the global scope as a map of symbols to elements
@@ -31,4 +33,5 @@ export const defaultContextValue: PortalContextValue = {
   },
 }
 
-export const PortalContext = createGlobalScopedContext<PortalContextValue>(key, defaultContextValue)
+export const PortalContext: Context<PortalContextValue> =
+  createGlobalScopedContext<PortalContextValue>(key, defaultContextValue)

@@ -108,7 +108,7 @@ export type TooltipProps<E extends TooltipElementType = TooltipElementType> = Pr
  */
 export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_ELEMENT>(
   props: TooltipProps<E>,
-) {
+): React.JSX.Element {
   const boundaryElementContext = useBoundaryElement()
 
   const {

@@ -24,7 +24,7 @@ export type ArrowProps<E extends ArrowElementType = ArrowElementType> = Props<Ar
 /** @internal */
 export function Arrow<E extends ArrowElementType = typeof DEFAULT_ARROW_ELEMENT>(
   props: ArrowProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_ARROW_ELEMENT,
     width: w,

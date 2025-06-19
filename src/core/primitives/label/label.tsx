@@ -38,7 +38,7 @@ export type LabelProps<E extends LabelElementType = LabelElementType> = Props<La
  */
 export function Label<E extends LabelElementType = typeof DEFAULT_LABEL_ELEMENT>(
   props: LabelProps<E>,
-) {
+): React.JSX.Element {
   const {
     accent,
     align,

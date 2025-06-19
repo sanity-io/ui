@@ -41,7 +41,7 @@ export type PopoverLayerOwnProps = LayerOwnProps & {
 export type PopoverLayerProps = PopoverLayerOwnProps & LayerProps<'div'>
 
 /** @internal */
-export function PopoverLayer(props: PopoverLayerProps) {
+export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
   const {
     __unstable_margins: marginsProp,
     animate,

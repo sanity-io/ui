@@ -24,7 +24,7 @@ export type ToastLayerProps<E extends ToastLayerElementType = ToastLayerElementT
  */
 export function ToastLayer<E extends ToastLayerElementType = typeof DEFAULT_TOAST_LAYER_ELEMENT>(
   props: ToastLayerProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_TOAST_LAYER_ELEMENT,
     children,

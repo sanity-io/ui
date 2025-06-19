@@ -9,6 +9,7 @@ const isProd = env['NODE_ENV'] === 'production'
 
 export default defineConfig({
   babel: {reactCompiler: true},
+  dts: 'rolldown',
   extract: {
     rules: {
       'ae-internal-missing-underscore': 'off',

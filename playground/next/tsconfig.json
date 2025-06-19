@@ -21,6 +21,5 @@
       "@sanity/ui/*": ["../../exports/*"],
       "@sanity/ui": ["../../exports/index.ts"]
     }
-  },
-  "references": [{"path": "../../tsconfig.dist.json"}]
+  }
 }

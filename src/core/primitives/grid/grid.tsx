@@ -18,7 +18,9 @@ export type GridProps<E extends GridElementType = GridElementType> = Props<GridO
  *
  * @public
  */
-export function Grid<E extends GridElementType = typeof DEFAULT_GRID_ELEMENT>(props: GridProps<E>) {
+export function Grid<E extends GridElementType = typeof DEFAULT_GRID_ELEMENT>(
+  props: GridProps<E>,
+): React.JSX.Element {
   const {
     as = DEFAULT_GRID_ELEMENT,
     children,

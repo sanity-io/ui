@@ -1,4 +1,4 @@
-import {type MouseEvent as ReactMouseEvent} from 'react'
+import {type Context, type MouseEvent as ReactMouseEvent} from 'react'
 
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 
@@ -25,7 +25,5 @@ export interface MenuContextValue {
   onMouseLeave: (event: ReactMouseEvent<HTMLElement>) => void
 }
 
-export const MenuContext = createGlobalScopedContext<MenuContextValue | null>(
-  '@sanity/ui/context/menu',
-  null,
-)
+export const MenuContext: Context<MenuContextValue | null> =
+  createGlobalScopedContext<MenuContextValue | null>('@sanity/ui/v3/menu', null)

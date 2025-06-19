@@ -12,7 +12,7 @@ import {
 import type {MarginStyleProps} from './types'
 
 /** @public */
-export function margin(props: MarginStyleProps) {
+export function margin(props: MarginStyleProps): string | undefined {
   return _composeClassNames(
     _responsiveClassName(marginOptions, props.margin),
     _responsiveClassName(marginXOptions, props.marginX),

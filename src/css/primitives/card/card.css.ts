@@ -15,7 +15,7 @@ import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   backgroundColor: vars.color.bg,
   color: vars.color.fg,
 
@@ -137,7 +137,7 @@ export const root = _style(layers.primitives, {
   },
 })
 
-export const schemes = _fromEntries(
+export const schemes: Record<ColorScheme, string> = _fromEntries(
   COLOR_SCHEMES.map((s) => [
     s,
     _style(layers.primitives, {
@@ -161,8 +161,8 @@ function buildSchemeVars(scheme: ColorScheme) {
 
     _assign(schemeVars, {
       [target.backdrop]: source.backdrop,
-      [target.bg]: source.tinted.default.bg[0],
-      [target.border]: source.tinted.default.border[0],
+      // [target.bg]: source.tinted.default.bg[0],
+      // [target.border]: source.tinted.default.border[0],
 
       [target.code.fg]: source.code.fg,
       [target.code.bg]: source.code.bg,
@@ -204,14 +204,14 @@ function buildSchemeVars(scheme: ColorScheme) {
       [target.code.token.url]: source.code.token.url,
       [target.code.token.variable]: source.code.token.variable,
 
-      [target.fg]: source.tinted.default.fg[0],
+      // [target.fg]: source.tinted.default.fg[0],
 
       [target.focusRing]: source.focusRing,
       [target.link.fg]: source.link.fg,
 
-      [target.muted.bg]: source.tinted.default.bg[4],
-      [target.muted.border]: source.tinted.default.border[4],
-      [target.muted.fg]: source.tinted.default.fg[4],
+      // [target.muted.bg]: source.tinted.default.bg[4],
+      // [target.muted.border]: source.tinted.default.border[4],
+      // [target.muted.fg]: source.tinted.default.fg[4],
 
       [target.shadow.outline]: source.shadow.outline,
       [target.shadow.umbra]: source.shadow.umbra,
@@ -242,7 +242,7 @@ function buildSchemeVars(scheme: ColorScheme) {
   return schemeVars
 }
 
-export const tones = _fromEntries(
+export const tones: Record<CardTone, string> = _fromEntries(
   CARD_TONES.map((t) => [t, _style(layers.primitives, buildToneRule(t))]),
 )
 

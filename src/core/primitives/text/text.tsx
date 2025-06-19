@@ -31,7 +31,9 @@ export type TextProps<E extends TextElementType = TextElementType> = Props<TextO
  *
  * @public
  */
-export function Text<E extends TextElementType = typeof DEFAULT_TEXT_ELEMENT>(props: TextProps<E>) {
+export function Text<E extends TextElementType = typeof DEFAULT_TEXT_ELEMENT>(
+  props: TextProps<E>,
+): React.JSX.Element {
   const {
     accent,
     align,

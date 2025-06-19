@@ -42,7 +42,7 @@ export type StackProps<E extends StackElementType = StackElementType> = Props<St
  */
 export function Stack<E extends StackElementType = typeof DEFAULT_STACK_ELEMENT>(
   props: StackProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_STACK_ELEMENT,
     className,

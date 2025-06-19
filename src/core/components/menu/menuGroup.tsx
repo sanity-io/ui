@@ -62,7 +62,7 @@ export type MenuGroupProps<E extends MenuGroupElementType = MenuGroupElementType
 /** @public */
 export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_GROUP_ELEMENT>(
   props: MenuGroupProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_MENU_GROUP_ELEMENT,
     children,

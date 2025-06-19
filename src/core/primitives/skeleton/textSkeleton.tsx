@@ -30,7 +30,7 @@ export type TextSkeletonProps<E extends TextSkeletonElementType = TextSkeletonEl
  */
 export function TextSkeleton<
   E extends TextSkeletonElementType = typeof DEFAULT_TEXT_SKELETON_ELEMENT,
->(props: TextSkeletonProps<E>) {
+>(props: TextSkeletonProps<E>): React.JSX.Element {
   const {
     className,
     size = 2,

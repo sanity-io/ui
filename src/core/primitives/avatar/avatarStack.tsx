@@ -38,7 +38,7 @@ export type AvatarStackProps<E extends AvatarStackElementType = AvatarStackEleme
 /** @public */
 export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AVATAR_STACK_ELEMENT>(
   props: AvatarStackProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_AVATAR_STACK_ELEMENT,
     children: childrenProp,

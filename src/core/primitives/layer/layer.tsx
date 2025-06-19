@@ -24,7 +24,7 @@ export type LayerProps<E extends LayerElementType = LayerElementType> = Props<La
 /** @public */
 export function Layer<E extends LayerElementType = typeof DEFAULT_LAYER_ELEMENT>(
   props: LayerProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_LAYER_ELEMENT,
     children,

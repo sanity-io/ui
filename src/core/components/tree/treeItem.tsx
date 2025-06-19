@@ -60,7 +60,7 @@ export type TreeItemProps<E extends TreeItemElementType = TreeItemElementType> =
  */
 export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITEM_ELEMENT>(
   props: TreeItemProps<E>,
-) {
+): React.JSX.Element {
   const {
     children,
     className,

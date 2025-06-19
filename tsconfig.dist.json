@@ -9,7 +9,6 @@
     "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
-    "composite": true,
     "jsx": "preserve",
     "resolveJsonModule": true,
     "sourceMap": true,
@@ -19,6 +18,13 @@
     "paths": {
       "@sanity/ui/*": ["./exports/*.ts"],
       "@sanity/ui": ["./exports/index.ts"]
-    }
+    },
+
+    "declaration": true,
+    "allowJs": false,
+    "checkJs": false,
+    "isolatedDeclarations": true,
+
+    "allowImportingTsExtensions": false
   }
 }

@@ -7,4 +7,4 @@ import type {CardContextValue} from './types'
  * @internal
  */
 export const CardContext: Context<CardContextValue | null> =
-  createGlobalScopedContext<CardContextValue | null>('@sanity/ui/context/card', null)
+  createGlobalScopedContext<CardContextValue | null>('@sanity/ui/v3/card', null)

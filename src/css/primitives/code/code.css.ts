@@ -1,13 +1,14 @@
-import {FONT_CODE_SIZE} from '@sanity/ui/theme'
+import {FONT_CODE_SIZE, type FontCodeSize} from '@sanity/ui/theme'
 import {globalStyle} from '@vanilla-extract/css'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_responsiveStyle} from '../../_responsiveStyle.css'
 import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
+import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   vars: {
     [vars.font.family]: vars.font.code.family,
     [vars.font.featureSettings]: vars.font.code.featureSettings,
@@ -247,7 +248,7 @@ globalStyle(`${root} .token.variable`, {
   },
 })
 
-export const scale = {
+export const scale: ResponsiveRuleOptions<FontCodeSize> = {
   ..._fromEntries(
     FONT_CODE_SIZE.map((s) => {
       const v = vars.font.code.scale[s]

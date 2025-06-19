@@ -4,7 +4,7 @@ import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   position: 'relative',
 
   selectors: {
@@ -14,7 +14,7 @@ export const root = _style(layers.primitives, {
   },
 })
 
-export const input = _style(layers.primitives, {
+export const input: string = _style(layers.primitives, {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -27,7 +27,7 @@ export const input = _style(layers.primitives, {
   margin: 0,
 })
 
-export const presentation = _style(layers.primitives, {
+export const presentation: string = _style(layers.primitives, {
   position: 'relative',
   display: 'block',
   width: vars.input.checkbox.size,

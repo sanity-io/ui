@@ -2,7 +2,7 @@ import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   position: 'absolute',
   width: vars.arrow.size,
   height: vars.arrow.size,
@@ -30,7 +30,7 @@ export const root = _style(layers.primitives, {
   },
 })
 
-export const svg = _style(layers.primitives, {
+export const svg: string = _style(layers.primitives, {
   display: 'block',
   transformOrigin: `calc(${vars.arrow.size} / 2) calc(${vars.arrow.size} / 2)`,
 
@@ -53,16 +53,16 @@ export const svg = _style(layers.primitives, {
   },
 })
 
-export const strokeMask = _style(layers.primitives, {
+export const strokeMask: string = _style(layers.primitives, {
   // @ts-expect-error `y` is not a valid property in 'csstype'
   y: vars.shadow.outline,
 })
 
-export const stroke = _style(layers.primitives, {
+export const stroke: string = _style(layers.primitives, {
   stroke: vars.color.shadow.outline,
   strokeWidth: `calc(${vars.card.shadow.outline} * 2)`,
 })
 
-export const fill = _style(layers.primitives, {
+export const fill: string = _style(layers.primitives, {
   fill: vars.color.bg,
 })
