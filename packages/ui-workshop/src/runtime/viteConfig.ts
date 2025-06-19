@@ -27,7 +27,7 @@ export function createViteConfig(options: {
     },
     plugins: [
       react({
-        babel: {plugins: [['babel-plugin-react-compiler', {target: '18'}]]},
+        babel: {plugins: [['babel-plugin-react-compiler', {target: '19'}]]},
       }),
     ],
     root: cwd,
