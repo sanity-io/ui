@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.1](https://github.com/sanity-io/icons/compare/v3.7.0...v3.7.1) (2025-06-19)
+
+### Bug Fixes
+
+- place `ref` prop after `...props` spread ([#126](https://github.com/sanity-io/icons/issues/126)) ([b9f42ef](https://github.com/sanity-io/icons/commit/b9f42ef31e5dbfc3a1760db5a0f6025e1437288e))
+
 ## [3.7.0](https://github.com/sanity-io/icons/compare/v3.6.0...v3.7.0) (2025-02-27)
 
 ### Features
