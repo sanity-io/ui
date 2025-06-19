@@ -29,7 +29,13 @@ import {createTheme, globalFontFace} from '@vanilla-extract/css'
 
 import {_fromEntries} from './_fromEntries'
 import {layers} from './layers.css'
-import type {CSSTheme, CSSThemeColorCard} from './types'
+import type {
+  CardColorTokens,
+  ElementColorTokens,
+  RootThemeTokens,
+  SchemeColorTokens,
+  VariantColorTokens,
+} from './types'
 import {px, toBoxShadow} from './util'
 import {paletteVars, themeVars} from './vars.css'
 
@@ -88,9 +94,8 @@ globalFontFace('Inter', [
 
 const theme = buildTheme_v3()
 
-const themeValue: CSSTheme = {
-  '@layer': layers.theme,
-  'avatar': {
+const themeValue: RootThemeTokens = {
+  avatar: {
     focusRing: {
       offset: px(theme.avatar.focusRing.offset),
       width: px(theme.avatar.focusRing.width),
@@ -107,7 +112,7 @@ const themeValue: CSSTheme = {
       ),
     },
   },
-  'button': {
+  button: {
     border: {
       width: px(theme.button.border.width),
     },
@@ -116,15 +121,15 @@ const themeValue: CSSTheme = {
       width: px(theme.button.focusRing.width),
     },
   },
-  'card': {
+  card: {
     shadow: {
       outline: px(theme.card.shadow.outline),
     },
   },
-  'container': {
+  container: {
     ..._fromEntries(CONTAINER_SCALE.map((s) => [s, rem(theme.container[s])])),
   },
-  'color': {
+  color: {
     palette: {
       black: black.hex,
       white: white.hex,
@@ -136,7 +141,7 @@ const themeValue: CSSTheme = {
     light: renderColorScheme({scheme: 'light'}),
     dark: renderColorScheme({scheme: 'dark'}),
   },
-  'font': {
+  font: {
     code: {
       family: theme.font.code.family,
       featureSettings: theme.font.code.featureSettings || 'normal',
@@ -245,7 +250,7 @@ const themeValue: CSSTheme = {
       },
     },
   },
-  'input': {
+  input: {
     border: {
       width: px(theme.input.border.width),
     },
@@ -288,10 +293,8 @@ const themeValue: CSSTheme = {
       },
     },
   },
-
-  'radius': _fromEntries(RADIUS.map((key) => [key, `${theme.radius[key]}px`])),
-
-  'shadow': _fromEntries(
+  radius: _fromEntries(RADIUS.map((key) => [key, `${theme.radius[key]}px`])),
+  shadow: _fromEntries(
     SHADOW.map((s) => [
       s,
       {
@@ -301,14 +304,16 @@ const themeValue: CSSTheme = {
       },
     ]),
   ),
-
-  'space': _fromEntries(SPACE.map((key) => [key, `${theme.space[key]}px`])),
+  space: _fromEntries(SPACE.map((key) => [key, `${theme.space[key]}px`])),
 } as const
 
 /** @public */
-export const themeClassName = createTheme(themeVars, themeValue)
+export const themeClassName: string = createTheme(themeVars, {
+  '@layer': layers.theme,
+  ...themeValue,
+})
 
-function renderColorScheme(options: {scheme: ThemeColorSchemeKey}) {
+function renderColorScheme(options: {scheme: ThemeColorSchemeKey}): SchemeColorTokens {
   const {scheme} = options
 
   const defaultCardColor = renderCardColor({
@@ -340,12 +345,12 @@ function renderCardColor(options: {
   bgValue?: string
   tone: ThemeColorCardToneKey
   scheme: 'light' | 'dark'
-}): CSSThemeColorCard {
+}): CardColorTokens {
   const {bgValue, tone: t, scheme} = options
 
   const tokens = theme.color[t]
 
-  const tintedDefaultVariant = renderColorVariant(tokens, {
+  const tintedDefaultVariant = renderColorElement(tokens, {
     bgValue,
     variant: 'tinted',
     scheme,
@@ -357,25 +362,6 @@ function renderCardColor(options: {
     defaultHue: tokens._hue ?? 'gray',
     scheme,
   } as const
-
-  const variants = {
-    ..._fromEntries(
-      COLOR_VARIANTS.map((v) => [
-        v,
-        {
-          ..._fromEntries(
-            THEME_COLOR_STATE_TONES.map((t) => {
-              if (v === 'tinted' && t === 'default') {
-                return [t, tintedDefaultVariant]
-              }
-
-              return [t, renderColorVariant(tokens, {scheme, variant: v, tone: t})]
-            }),
-          ),
-        },
-      ]),
-    ),
-  }
 
   return {
     avatar: {
@@ -433,7 +419,6 @@ function renderCardColor(options: {
         variable: renderColor(tokens.code.token.variable, colorOptions),
       },
     },
-
     focusRing: renderColor(tokens.focusRing, colorOptions),
     link: {
       fg: renderColor(tokens.link.fg, colorOptions),
@@ -444,17 +429,31 @@ function renderCardColor(options: {
       penumbra: renderColor(tokens.shadow.penumbra, colorOptions),
       ambient: renderColor(tokens.shadow.ambient, colorOptions),
     },
-
     skeleton: {
       from: renderColor(tokens.skeleton.from, colorOptions),
       to: renderColor(tokens.skeleton.to, colorOptions),
     },
+    // variants
+    ..._fromEntries(
+      COLOR_VARIANTS.map((v) => [
+        v,
+        {
+          ..._fromEntries(
+            THEME_COLOR_STATE_TONES.map((t) => {
+              if (v === 'tinted' && t === 'default') {
+                return [t, tintedDefaultVariant]
+              }
 
-    ...variants,
+              return [t, renderColorElement(tokens, {scheme, variant: v, tone: t})]
+            }),
+          ),
+        } satisfies VariantColorTokens,
+      ]),
+    ),
   }
 }
 
-function renderColorVariant(
+function renderColorElement(
   tokens: ThemeColorCard_v3,
   options: {
     bgValue?: string
@@ -462,7 +461,7 @@ function renderColorVariant(
     variant: ThemeColorVariantKey
     tone: ThemeColorStateToneKey
   },
-) {
+): ElementColorTokens {
   const {bgValue, scheme, variant: v, tone: t} = options
 
   const elementColorOptions = {bgValue, defaultHue: tokens.variant[v][t]._hue, scheme}
@@ -486,7 +485,7 @@ function renderColorVariant(
 function renderColor(
   value: ColorValue,
   context: {bgValue?: string; defaultHue: Hue; scheme: 'light' | 'dark'},
-) {
+): string {
   const {bgValue = 'transparent', defaultHue, scheme} = context
 
   const expr = _parseColorToken(value[scheme === 'light' ? 0 : 1], {defaultHue})

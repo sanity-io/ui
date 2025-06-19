@@ -25,7 +25,7 @@ export type ContainerProps<E extends ContainerElementType = ContainerElementType
  */
 export function Container<E extends ContainerElementType = typeof DEFAULT_CONTAINER_ELEMENT>(
   props: ContainerProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_CONTAINER_ELEMENT,
     className,

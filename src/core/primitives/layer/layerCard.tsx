@@ -25,7 +25,7 @@ export type LayerCardProps<E extends LayerCardElementType = LayerCardElementType
 /** @internal */
 export function LayerCard<E extends LayerCardElementType = typeof DEFAULT_LAYER_CARD_ELEMENT>(
   props: LayerCardProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_LAYER_CARD_ELEMENT,
     children,

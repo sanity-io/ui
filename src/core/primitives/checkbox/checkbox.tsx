@@ -30,7 +30,7 @@ export type CheckboxProps<E extends CheckboxElementType = CheckboxElementType> =
  */
 export function Checkbox<E extends CheckboxElementType = typeof DEFAULT_CHECKBOX_ELEMENT>(
   props: CheckboxProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_CHECKBOX_ELEMENT,
     className,

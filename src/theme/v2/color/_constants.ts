@@ -1,4 +1,4 @@
-import {COLOR_HUES} from '@sanity/color'
+import {COLOR_HUES, type ColorHueKey} from '@sanity/color'
 
 /** @public */
 export const THEME_COLOR_SCHEMES = ['light', 'dark'] as const
@@ -42,4 +42,4 @@ export const THEME_COLOR_INPUT_MODES = ['default', 'invalid'] as const
 export const THEME_COLOR_INPUT_STATES = ['enabled', 'hovered', 'readOnly', 'disabled'] as const
 
 /** @public */
-export const THEME_COLOR_AVATAR_COLORS = COLOR_HUES
+export const THEME_COLOR_AVATAR_COLORS: ColorHueKey[] = COLOR_HUES

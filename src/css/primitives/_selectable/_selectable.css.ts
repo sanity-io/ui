@@ -1,11 +1,11 @@
-import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
+import {THEME_COLOR_STATE_TONES, type ThemeColorStateToneKey} from '@sanity/ui/theme'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   backgroundColor: vars.color.bg,
   color: vars.color.fg,
 
@@ -28,7 +28,7 @@ export const root = _style(layers.primitives, {
   },
 })
 
-export const tones = {
+export const tones: Record<ThemeColorStateToneKey, string> = {
   ..._fromEntries(
     THEME_COLOR_STATE_TONES.map((t) => {
       const tinted = vars.color.tinted[t]

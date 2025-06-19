@@ -1,3 +1,5 @@
+import type {FontTextSize} from '@sanity/ui/theme'
+
 import type {FlexStyleProps} from '../../props/flex/types'
 import type {FontStyleProps} from '../../props/font/types'
 import type {MaxWidthStyleProps} from '../../props/maxWidth/types'
@@ -16,5 +18,5 @@ export interface TextStyleProps extends FlexStyleProps, FontStyleProps, MaxWidth
   align?: TextAlignStyleProps['textAlign']
   className?: string
   muted?: boolean
-  size?: ResponsiveProp<TextSize>
+  size?: ResponsiveProp<FontTextSize>
 }

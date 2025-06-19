@@ -16,6 +16,5 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{"name": "next"}]
-  },
-  "references": [{"path": "../../tsconfig.dist.json"}]
+  }
 }

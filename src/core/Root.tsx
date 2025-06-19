@@ -22,7 +22,9 @@ export type RootProps<E extends RootElementType = RootElementType> = Props<RootO
  *
  * @public
  */
-export function Root<E extends RootElementType = typeof DEFAULT_ROOT_ELEMENT>(props: RootProps<E>) {
+export function Root<E extends RootElementType = typeof DEFAULT_ROOT_ELEMENT>(
+  props: RootProps<E>,
+): React.ReactElement {
   const {
     as: as = DEFAULT_ROOT_ELEMENT,
     children,

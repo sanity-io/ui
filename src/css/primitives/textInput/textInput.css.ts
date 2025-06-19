@@ -4,9 +4,9 @@ import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {})
+export const root: string = _style(layers.primitives, {})
 
-export const prefix = _style(layers.primitives, {
+export const prefix: string = _style(layers.primitives, {
   borderTop: `1px solid ${vars.color.border}`,
   borderLeft: `1px solid ${vars.color.border}`,
   borderBottom: `1px solid ${vars.color.border}`,
@@ -21,11 +21,11 @@ globalStyle(`${prefix} > span`, {
   },
 })
 
-export const element = _style(layers.primitives, {
+export const element: string = _style(layers.primitives, {
   borderRadius: 'inherit',
 })
 
-export const suffix = _style(layers.primitives, {
+export const suffix: string = _style(layers.primitives, {
   borderTop: `1px solid ${vars.color.border}`,
   borderRight: `1px solid ${vars.color.border}`,
   borderBottom: `1px solid ${vars.color.border}`,

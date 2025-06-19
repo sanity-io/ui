@@ -31,7 +31,9 @@ export type FlexProps<E extends FlexElementType = FlexElementType> = Props<FlexO
  *
  * @public
  */
-export function Flex<E extends FlexElementType = typeof DEFAULT_FLEX_ELEMENT>(props: FlexProps<E>) {
+export function Flex<E extends FlexElementType = typeof DEFAULT_FLEX_ELEMENT>(
+  props: FlexProps<E>,
+): React.JSX.Element {
   const {
     align,
     as = DEFAULT_FLEX_ELEMENT,

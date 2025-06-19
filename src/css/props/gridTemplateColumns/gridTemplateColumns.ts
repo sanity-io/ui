@@ -3,6 +3,6 @@ import {options} from './gridTemplateColumns.css'
 import type {GridTemplateColumnsStyleProps} from './types'
 
 /** @public */
-export function gridTemplateColumns(props: GridTemplateColumnsStyleProps) {
+export function gridTemplateColumns(props: GridTemplateColumnsStyleProps): string | undefined {
   return _responsiveClassName(options, props.gridTemplateColumns ?? props.columns)
 }

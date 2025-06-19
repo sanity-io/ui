@@ -43,7 +43,7 @@ export interface _ElementSizeListener {
 /**
  * @internal
  */
-export const _elementSizeObserver = _createElementSizeObserver()
+export const _elementSizeObserver: _ElementSizeObserver = _createElementSizeObserver()
 
 function _createElementRectValueListener(): _ElementSizeListener {
   return {

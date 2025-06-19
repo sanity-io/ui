@@ -39,7 +39,7 @@ export type HeadingProps<E extends HeadingElementType = HeadingElementType> = Pr
  */
 export function Heading<E extends HeadingElementType = typeof DEFAULT_HEADING_ELEMENT>(
   props: HeadingProps<E>,
-) {
+): React.JSX.Element {
   const {
     accent = false,
     align,

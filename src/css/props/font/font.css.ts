@@ -1,10 +1,11 @@
+import type {FontWeight} from '@sanity/ui/theme'
 import {globalStyle} from '@vanilla-extract/css'
 
 import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.props, {
+export const root: string = _style(layers.props, {
   'fontFamily': vars.font.family,
   'fontFeatureSettings': vars.font.featureSettings,
   'fontSize': vars.font.fontSize,
@@ -66,7 +67,7 @@ globalStyle(`${root} [data-sanity-icon]`, {
   },
 })
 
-export const weights = {
+export const weights: Record<FontWeight, string> = {
   regular: _style(layers.props, {
     vars: {
       [vars.font.fontWeight]: vars.font.weight.regular,

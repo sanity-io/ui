@@ -156,7 +156,7 @@ function ViewportOverlay() {
  */
 export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_ELEMENT>(
   props: PopoverProps<E>,
-) {
+): React.JSX.Element {
   const boundaryElementContext = useBoundaryElement()
 
   const {

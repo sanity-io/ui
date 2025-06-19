@@ -29,7 +29,7 @@ export type HeadingSkeletonProps<
  */
 export function HeadingSkeleton<
   E extends HeadingSkeletonElementType = typeof DEFAULT_HEADING_SKELETON_ELEMENT,
->(props: HeadingSkeletonProps<E>) {
+>(props: HeadingSkeletonProps<E>): React.JSX.Element {
   const {
     className,
     size = 2,

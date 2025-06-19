@@ -39,7 +39,9 @@ export type CardProps<E extends CardElementType = CardElementType> = Props<CardO
  *
  * @public
  */
-export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(props: CardProps<E>) {
+export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
+  props: CardProps<E>,
+): React.JSX.Element {
   const {
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,

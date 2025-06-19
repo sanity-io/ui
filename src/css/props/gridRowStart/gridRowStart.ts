@@ -3,6 +3,6 @@ import {options} from './gridRowStart.css'
 import type {GridRowStart, GridRowStartStyleProps} from './types'
 
 /** @public */
-export function gridRowStart(props: GridRowStartStyleProps) {
+export function gridRowStart(props: GridRowStartStyleProps): string | undefined {
   return _responsiveClassName(options, props.gridRowStart ?? (props.rowStart as GridRowStart))
 }

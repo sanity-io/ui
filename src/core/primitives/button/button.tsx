@@ -56,7 +56,7 @@ export type ButtonProps<E extends ButtonElementType = ButtonElementType> = Props
 /** @public */
 export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEMENT>(
   props: ButtonProps<E>,
-) {
+): React.JSX.Element {
   const {
     align = 'center',
     as: Element = DEFAULT_BUTTON_ELEMENT,

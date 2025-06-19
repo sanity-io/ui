@@ -41,7 +41,7 @@ export type TextAreaProps<E extends TextAreaElementType = TextAreaElementType> =
  */
 export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_AREA_ELEMENT>(
   props: TextAreaProps<E>,
-) {
+): React.JSX.Element {
   const {
     __unstable_disableFocusRing,
     as: Element = DEFAULT_TEXT_AREA_ELEMENT,

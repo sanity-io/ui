@@ -30,7 +30,7 @@ export type SpinnerProps<E extends SpinnerElementType = SpinnerElementType> = Pr
  */
 export function Spinner<E extends SpinnerElementType = typeof DEFAULT_SPINNER_ELEMENT>(
   props: SpinnerProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_SPINNER_ELEMENT,
     className,

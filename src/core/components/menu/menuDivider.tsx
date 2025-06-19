@@ -21,7 +21,7 @@ export type MenuDividerProps<E extends MenuDividerElementType = MenuDividerEleme
 /** @public */
 export function MenuDivider<E extends MenuDividerElementType = typeof DEFAULT_MENU_DIVIDER_ELEMENT>(
   props: MenuDividerProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_MENU_DIVIDER_ELEMENT,
     className,

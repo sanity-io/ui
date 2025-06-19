@@ -3,6 +3,6 @@ import {options} from './radius.css'
 import type {RadiusStyleProps} from './types'
 
 /** @public */
-export function radius(props: RadiusStyleProps) {
+export function radius(props: RadiusStyleProps): string | undefined {
   return _responsiveClassName(options, props.radius)
 }

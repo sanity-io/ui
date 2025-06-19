@@ -50,7 +50,7 @@ export type AvatarProps<E extends AvatarElementType = AvatarElementType> = Props
  */
 export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEMENT>(
   props: AvatarProps<E>,
-) {
+): React.JSX.Element {
   const {
     __unstable_hideInnerStroke,
     as: Element = DEFAULT_AVATAR_ELEMENT,

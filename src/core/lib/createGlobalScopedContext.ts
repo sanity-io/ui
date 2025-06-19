@@ -16,7 +16,7 @@ export function createGlobalScopedContext<ContextType, const T extends ContextTy
   /**
    * Enforce that all Symbol.for keys used for globally scoped contexts have a predictable prefix
    */
-  key: `@sanity/ui/context/${string}`,
+  key: `@sanity/ui/v3/${string}`,
   defaultValue: T,
 ): Context<ContextType> {
   const symbol = Symbol.for(key)

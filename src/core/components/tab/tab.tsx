@@ -39,7 +39,9 @@ export type TabElementType = 'button' | ComponentType
 export type TabProps<E extends TabElementType = TabElementType> = Props<TabOwnProps, E>
 
 /** @public */
-export function Tab<E extends TabElementType = typeof DEFAULT_TAB_ELEMENT>(props: TabProps<E>) {
+export function Tab<E extends TabElementType = typeof DEFAULT_TAB_ELEMENT>(
+  props: TabProps<E>,
+): React.JSX.Element {
   const {
     as = DEFAULT_TAB_ELEMENT,
     icon,

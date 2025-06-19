@@ -7,7 +7,7 @@
 // https://github.com/facebook/react/pull/28348
 //
 // Access the ref using the method that doesn't yield a warning.
-export function getElementRef(element: React.ReactElement) {
+export function getElementRef(element: React.ReactElement): React.Ref<unknown> | undefined {
   // React <=18 in DEV
   let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
   let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning

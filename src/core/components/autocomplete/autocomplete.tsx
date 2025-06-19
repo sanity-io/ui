@@ -110,7 +110,7 @@ const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
 export function Autocomplete<
   E extends AutocompleteElementType = typeof DEFAULT_AUTOCOMPLETE_ELEMENT,
   O extends BaseAutocompleteOption = BaseAutocompleteOption,
->(props: AutocompleteProps<E, O>) {
+>(props: AutocompleteProps<E, O>): React.JSX.Element {
   const {
     as = DEFAULT_AUTOCOMPLETE_ELEMENT,
     border = true,

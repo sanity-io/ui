@@ -5,8 +5,6 @@ import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
 const zoomIn = keyframes({
-  // '@layer': {
-  //   [layers.components]: {
   from: {
     opacity: 0,
     transform: 'scale(0.95)',
@@ -15,24 +13,18 @@ const zoomIn = keyframes({
     opacity: 1,
     transform: 'scale(1)',
   },
-  //   },
-  // },
 })
 
 const fadeIn = keyframes({
-  // '@layer': {
-  //   [layers.components]: {
   from: {
     opacity: 0,
   },
   to: {
     opacity: 1,
   },
-  //   },
-  // },
 })
 
-export const root = _style(layers.components, {
+export const root: string = _style(layers.components, {
   alignItems: 'center',
   justifyContent: 'center',
   outline: 'none',
@@ -46,7 +38,7 @@ export const root = _style(layers.components, {
   },
 })
 
-export const card = _style(layers.components, {
+export const card: string = _style(layers.components, {
   width: '100%',
   maxHeight: '100%',
   overflow: ['hidden', 'clip'],
@@ -58,19 +50,19 @@ export const card = _style(layers.components, {
   },
 })
 
-export const container = _style(layers.components, {
+export const container: string = _style(layers.components, {
   width: '100%',
   height: '100%',
 })
 
-export const scroller = _style(layers.components, {
+export const scroller: string = _style(layers.components, {
   width: '100%',
   height: '100%',
   // overflow: 'auto',
   outline: 'none',
 })
 
-export const scrollerShadowTop = _style(layers.components, {
+export const scrollerShadowTop: string = _style(layers.components, {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -81,7 +73,7 @@ export const scrollerShadowTop = _style(layers.components, {
   pointerEvents: 'none',
 })
 
-export const scrollerShadowBottom = _style(layers.components, {
+export const scrollerShadowBottom: string = _style(layers.components, {
   position: 'absolute',
   bottom: 0,
   left: 0,
@@ -92,15 +84,15 @@ export const scrollerShadowBottom = _style(layers.components, {
   pointerEvents: 'none',
 })
 
-export const header = _style(layers.components, {
+export const header: string = _style(layers.components, {
   zIndex: 2,
 })
 
-export const content = _style(layers.components, {
+export const content: string = _style(layers.components, {
   zIndex: 1,
   outline: 'none',
 })
 
-export const footer = _style(layers.components, {
+export const footer: string = _style(layers.components, {
   zIndex: 3,
 })

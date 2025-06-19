@@ -26,7 +26,7 @@ export type AvatarCounterProps<E extends AvatarCounterElementType = AvatarCounte
 /** @public */
 export function AvatarCounter<
   E extends AvatarCounterElementType = typeof DEFAULT_AVATAR_COUNTER_ELEMENT,
->(props: AvatarCounterProps<E>) {
+>(props: AvatarCounterProps<E>): React.JSX.Element {
   const {
     as = DEFAULT_AVATAR_COUNTER_ELEMENT,
     className,

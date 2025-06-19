@@ -4,7 +4,7 @@ import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const item = _style(layers.components, {
+export const item: string = _style(layers.components, {
   selectors: {
     '&[role="treeitem"]': {
       outline: 'none',

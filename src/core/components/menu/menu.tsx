@@ -49,7 +49,9 @@ export type MenuProps<E extends MenuElementType = MenuElementType> = Props<MenuO
  *
  * @public
  */
-export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(props: MenuProps<E>) {
+export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
+  props: MenuProps<E>,
+): React.JSX.Element {
   const {
     as = DEFAULT_MENU_ELEMENT,
     children,

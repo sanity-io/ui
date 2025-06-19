@@ -7,7 +7,7 @@ import {loadingBox, modes, root, tones} from './button.css'
 import type {ButtonStyleProps} from './types'
 
 /** @public */
-export function button(props: ButtonStyleProps) {
+export function button(props: ButtonStyleProps): string | undefined {
   return _composeClassNames(
     props.className,
     root,
@@ -21,6 +21,6 @@ export function button(props: ButtonStyleProps) {
 }
 
 /** @public */
-export function buttonLoadingBox() {
+export function buttonLoadingBox(): string {
   return loadingBox
 }

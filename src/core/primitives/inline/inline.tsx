@@ -44,7 +44,7 @@ export type InlineProps<E extends InlineElementType = InlineElementType> = Props
  */
 export function Inline<E extends InlineElementType = typeof DEFAULT_INLINE_ELEMENT>(
   props: InlineProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_INLINE_ELEMENT,
     children,

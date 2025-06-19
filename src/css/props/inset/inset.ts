@@ -10,7 +10,7 @@ import {
 import type {InsetStyleProps} from './types'
 
 /** @public */
-export function inset(props: InsetStyleProps) {
+export function inset(props: InsetStyleProps): string | undefined {
   return _composeClassNames(
     _responsiveClassName(insetOptions, props.inset),
     _responsiveClassName(insetTopOptions, props.insetTop),

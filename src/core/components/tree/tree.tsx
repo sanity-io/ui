@@ -40,7 +40,9 @@ export type TreeProps<E extends TreeElementType = TreeElementType> = Props<TreeO
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(props: TreeProps<E>) {
+export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
+  props: TreeProps<E>,
+): React.JSX.Element {
   const {
     children,
     gap,

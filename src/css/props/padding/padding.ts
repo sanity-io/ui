@@ -12,7 +12,7 @@ import {
 import type {PaddingStyleProps} from './types'
 
 /** @public */
-export function padding(props: PaddingStyleProps) {
+export function padding(props: PaddingStyleProps): string | undefined {
   return _composeClassNames(
     _responsiveClassName(paddingOptions, props.padding),
     _responsiveClassName(paddingXOptions, props.paddingX),

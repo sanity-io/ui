@@ -1,29 +1,30 @@
 {
-  "extends": "./tsconfig.settings",
-  "include": [
-    "./exports",
-    "./package.json",
-    "./package.config.ts",
-    "./prettier.config.cjs",
-    "./rollup",
-    "./src",
-    "./test",
-    "./typings",
-    "./vitest.config.ts",
-    "./workshop",
-    "./workshop.config.ts",
-    "./workshop.runtime.ts"
-  ],
-  "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist/types",
-    "paths": {
-      "$workshop": ["./workshop"],
-      "@sanity/ui/*": ["./exports/*"],
-      "@sanity/ui": ["./exports/index.ts"]
-    },
-    // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
-    "jsx": "react-jsx",
-    "resolveJsonModule": true
-  }
+  "extends": "./tsconfig.dist"
+  // "extends": "./tsconfig.settings",
+  // "include": [
+  //   "./exports",
+  //   "./package.json",
+  //   "./package.config.ts",
+  //   "./prettier.config.cjs",
+  //   "./rollup",
+  //   "./src",
+  //   "./test",
+  //   "./typings",
+  //   "./vitest.config.ts",
+  //   "./workshop",
+  //   "./workshop.config.ts",
+  //   "./workshop.runtime.ts"
+  // ],
+  // "compilerOptions": {
+  //   "rootDir": ".",
+  //   "outDir": "./dist/types",
+  //   "paths": {
+  //     "$workshop": ["./workshop"],
+  //     "@sanity/ui/*": ["./exports/*"],
+  //     "@sanity/ui": ["./exports/index.ts"]
+  //   },
+  //   // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
+  //   "jsx": "react-jsx",
+  //   "resolveJsonModule": true
+  // }
 }

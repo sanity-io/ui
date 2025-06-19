@@ -75,7 +75,7 @@ export type DialogProps<E extends DialogElementType = DialogElementType> = Props
  */
 export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEMENT>(
   props: DialogProps<E>,
-) {
+): React.JSX.Element {
   const context = useDialog()
   const {
     __unstable_autoFocus: autoFocus = true,

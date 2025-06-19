@@ -21,52 +21,52 @@ export {
  * @public
  * @deprecated Use `createColorTheme` from `@sanity/ui/theme` instead.
  */
-export const createColorTheme = _createColorTheme
+export const createColorTheme: typeof _createColorTheme = _createColorTheme
 
 /**
  * @public
  * @deprecated Use `hexToRgb` from `@sanity/ui/theme` instead.
  */
-export const hexToRgb = _hexToRgb
+export const hexToRgb: typeof _hexToRgb = _hexToRgb
 
 /**
  * @public
  * @deprecated Use `hslToRgb` from `@sanity/ui/theme` instead.
  */
-export const hslToRgb = _hslToRgb
+export const hslToRgb: typeof _hslToRgb = _hslToRgb
 
 /**
  * @public
  * @deprecated Use `multiply` from `@sanity/ui/theme` instead.
  */
-export const multiply = _multiply
+export const multiply: typeof _multiply = _multiply
 
 /**
  * @public
  * @deprecated Use `parseColor` from `@sanity/ui/theme` instead.
  */
-export const parseColor = _parseColor
+export const parseColor: typeof _parseColor = _parseColor
 
 /**
  * @public
  * @deprecated Use `rgbToHex` from `@sanity/ui/theme` instead.
  */
-export const rgbToHex = _rgbToHex
+export const rgbToHex: typeof _rgbToHex = _rgbToHex
 
 /**
  * @public
  * @deprecated Use `rgbToHsl` from `@sanity/ui/theme` instead.
  */
-export const rgbToHsl = _rgbToHsl
+export const rgbToHsl: typeof _rgbToHsl = _rgbToHsl
 
 /**
  * @public
  * @deprecated Use `rgba` from `@sanity/ui/theme` instead.
  */
-export const rgba = _rgba
+export const rgba: typeof _rgba = _rgba
 
 /**
  * @public
  * @deprecated Use `screen` from `@sanity/ui/theme` instead.
  */
-export const screen = _screen
+export const screen: typeof _screen = _screen

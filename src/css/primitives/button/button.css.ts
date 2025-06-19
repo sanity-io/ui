@@ -1,11 +1,16 @@
-import {AVATAR_COLORS, THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
+import {
+  AVATAR_COLORS,
+  THEME_COLOR_STATE_TONES,
+  type ThemeColorButtonModeKey,
+  type ThemeColorStateToneKey,
+} from '@sanity/ui/theme'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {
+export const root: string = _style(layers.primitives, {
   WebkitFontSmoothing: 'inherit',
   alignItems: 'center',
   appearance: 'none',
@@ -45,13 +50,13 @@ export const root = _style(layers.primitives, {
   },
 })
 
-export const modes = {
+export const modes: Record<ThemeColorButtonModeKey, string> = {
   default: _style(layers.primitives, {}),
   ghost: _style(layers.primitives, {boxShadow: vars.button.boxShadow}),
   bleed: _style(layers.primitives, {}),
 }
 
-export const loadingBox = _style(layers.primitives, {
+export const loadingBox: string = _style(layers.primitives, {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -63,7 +68,7 @@ export const loadingBox = _style(layers.primitives, {
   opacity: 0.8,
 })
 
-export const tones = {
+export const tones: Record<ThemeColorStateToneKey, string> = {
   ..._fromEntries(
     THEME_COLOR_STATE_TONES.map((t) => {
       const solid = vars.color.solid[t]

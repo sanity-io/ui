@@ -29,7 +29,7 @@ export type BadgeProps<E extends BadgeElementType = BadgeElementType> = Props<Ba
  */
 export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>(
   props: BadgeProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_BADGE_ELEMENT,
     children,

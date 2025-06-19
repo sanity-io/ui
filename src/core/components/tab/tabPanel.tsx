@@ -25,7 +25,7 @@ export type TabPanelProps<E extends TabPanelElementType = TabPanelElementType> =
 /** @public */
 export function TabPanel<E extends TabPanelElementType = typeof DEFAULT_TAB_PANEL_ELEMENT>(
   props: TabPanelProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_TAB_PANEL_ELEMENT,
     children,

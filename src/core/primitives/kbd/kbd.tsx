@@ -25,7 +25,9 @@ export type KBDProps<E extends KBDElementType = KBDElementType> = Props<KBDOwnPr
  *
  * @public
  */
-export function KBD<E extends KBDElementType = typeof DEFAULT_KBD_ELEMENT>(props: KBDProps<E>) {
+export function KBD<E extends KBDElementType = typeof DEFAULT_KBD_ELEMENT>(
+  props: KBDProps<E>,
+): React.JSX.Element {
   const {
     as = DEFAULT_KBD_ELEMENT,
     children,

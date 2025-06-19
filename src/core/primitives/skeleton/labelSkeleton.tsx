@@ -28,7 +28,7 @@ export type LabelSkeletonProps<E extends LabelSkeletonElementType = LabelSkeleto
  */
 export function LabelSkeleton<
   E extends LabelSkeletonElementType = typeof DEFAULT_LABEL_SKELETON_ELEMENT,
->(props: LabelSkeletonProps<E>) {
+>(props: LabelSkeletonProps<E>): React.JSX.Element {
   const {
     className,
     size = 2,

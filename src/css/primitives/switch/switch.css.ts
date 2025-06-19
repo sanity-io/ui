@@ -2,9 +2,9 @@ import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root = _style(layers.primitives, {})
+export const root: string = _style(layers.primitives, {})
 
-export const input = _style(layers.primitives, {
+export const input: string = _style(layers.primitives, {
   position: 'absolute',
   top: 0,
   right: 0,
@@ -21,7 +21,7 @@ export const input = _style(layers.primitives, {
   zIndex: 1,
 })
 
-export const presentation = _style(layers.primitives, {
+export const presentation: string = _style(layers.primitives, {
   vars: {
     [vars.color.input.switch.bg]: vars.color.tinted.default.border[2],
     [vars.color.input.switch.fg]: vars.color.tinted.default.bg[0],
@@ -72,7 +72,7 @@ export const presentation = _style(layers.primitives, {
   },
 })
 
-export const track = _style(layers.primitives, {
+export const track: string = _style(layers.primitives, {
   display: 'block',
   backgroundColor: vars.color.input.switch.bg,
   position: 'absolute',
@@ -84,7 +84,7 @@ export const track = _style(layers.primitives, {
   transition: `box-shadow, background-color ${vars.input.switch.transitionDurationMs} ${vars.input.switch.transitionTimingFunction}`,
 })
 
-export const thumb = _style(layers.primitives, {
+export const thumb: string = _style(layers.primitives, {
   display: 'block',
   position: 'absolute',
   left: vars.input.switch.padding,

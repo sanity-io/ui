@@ -1,7 +1,7 @@
 import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 
-export const layer = _style(layers.components, {
+export const layer: string = _style(layers.components, {
   position: 'absolute',
   right: 0,
   bottom: 0,
@@ -11,7 +11,7 @@ export const layer = _style(layers.components, {
   width: '100%',
 })
 
-export const root = _style(layers.components, {
+export const root: string = _style(layers.components, {
   pointerEvents: 'all',
   overflow: ['hidden', 'clip'],
 })

@@ -30,7 +30,7 @@ export interface TooltipLayerOwnProps extends LayerOwnProps {
 export type TooltipLayerProps = TooltipLayerOwnProps & LayerProps<'div'>
 
 /** @internal */
-export function TooltipLayer(props: TooltipLayerProps) {
+export function TooltipLayer(props: TooltipLayerProps): React.JSX.Element {
   const {
     animate,
     arrow,

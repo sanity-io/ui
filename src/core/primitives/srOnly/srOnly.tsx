@@ -17,7 +17,7 @@ export type SrOnlyProps<E extends SrOnlyElementType = SrOnlyElementType> = Props
 /** @public */
 export function SrOnly<E extends SrOnlyElementType = typeof DEFAULT_SR_ONLY_ELEMENT>(
   props: SrOnlyProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_SR_ONLY_ELEMENT,
     children,

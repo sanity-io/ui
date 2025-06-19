@@ -3,6 +3,6 @@ import {options} from './maxWidth.css'
 import type {MaxWidthStyleProps} from './types'
 
 /** @public */
-export function maxWidth(props: MaxWidthStyleProps) {
+export function maxWidth(props: MaxWidthStyleProps): string | undefined {
   return _responsiveClassName(options, props.maxWidth)
 }

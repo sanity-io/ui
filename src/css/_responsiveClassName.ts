@@ -4,11 +4,11 @@ import type {ResponsiveProp, ResponsiveRuleOptions} from './types'
 
 export function _responsiveClassName<T extends string | number>(
   rules: ResponsiveRuleOptions<T>,
-  _value: ResponsiveProp<T | boolean> | undefined,
+  _value: ResponsiveProp<T | boolean> | T | undefined,
   options?: {
     valueWhenTrue: T
   },
-) {
+): string | undefined {
   let value = _value
 
   if (value === undefined) {

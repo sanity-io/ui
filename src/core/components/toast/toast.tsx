@@ -65,7 +65,7 @@ const BUTTON_TONE = {
  */
 export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>(
   props: ToastProps<E>,
-) {
+): React.JSX.Element {
   const {
     as = DEFAULT_TOAST_ELEMENT,
     closable,

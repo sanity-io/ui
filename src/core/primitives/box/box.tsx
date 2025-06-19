@@ -49,7 +49,9 @@ export type BoxProps<E extends BoxElementType = BoxElementType> = Props<BoxOwnPr
  *
  * @public
  */
-export function Box<E extends BoxElementType = typeof DEFAULT_BOX_ELEMENT>(props: BoxProps<E>) {
+export function Box<E extends BoxElementType = typeof DEFAULT_BOX_ELEMENT>(
+  props: BoxProps<E>,
+): React.JSX.Element {
   const {
     alignItems,
     as: Element = DEFAULT_BOX_ELEMENT,

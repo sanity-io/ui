@@ -1,5 +1,3 @@
-import {memo, type ReactElement} from 'react'
-
 import {Stack} from '../../primitives/stack/stack'
 import type {ComponentType, Props} from '../../types/props'
 import {useTree} from './useTree'
@@ -21,9 +19,9 @@ export type TreeGroupProps<E extends TreeGroupElementType = TreeGroupElementType
   E
 >
 
-export const TreeGroup = memo(function TreeGroup(
+export const TreeGroup = function TreeGroup(
   props: Props<TreeGroupProps, 'div'>,
-): ReactElement {
+): React.JSX.Element {
   const {
     children,
     expanded = false,
@@ -45,4 +43,4 @@ export const TreeGroup = memo(function TreeGroup(
       {children}
     </Stack>
   )
-})
+}

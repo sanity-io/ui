@@ -33,7 +33,7 @@ export type SwitchProps<E extends SwitchElementType = SwitchElementType> = Props
  */
 export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEMENT>(
   props: SwitchProps<E>,
-) {
+): React.JSX.Element {
   const {
     as: Element = DEFAULT_SWITCH_ELEMENT,
     className,
