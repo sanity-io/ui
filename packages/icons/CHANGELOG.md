@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.3](https://github.com/sanity-io/icons/compare/v3.7.2...v3.7.3) (2025-06-19)
+
+### Bug Fixes
+
+- improve dts output ([3201a0c](https://github.com/sanity-io/icons/commit/3201a0c58fe5a4c3c55f2c2df73bf12e37bce9fc))
+
 ## [3.7.2](https://github.com/sanity-io/icons/compare/v3.7.1...v3.7.2) (2025-06-19)
 
 ### Bug Fixes
