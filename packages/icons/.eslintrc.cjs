@@ -22,15 +22,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'import',
-    'jsx-a11y',
-    'react',
-    'react-hooks',
-    '@typescript-eslint',
-    'prettier',
-    'react-compiler',
-  ],
+  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks', '@typescript-eslint', 'prettier'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -61,7 +53,6 @@ module.exports = {
     'react/prop-types': 'off',
     'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    'react-compiler/react-compiler': 'error',
     'react/no-unescaped-entities': 'off',
   },
   settings: {react: {version: 'detect'}},
