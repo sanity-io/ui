@@ -3,10 +3,17 @@ import {
   _parseColorToken,
   AVATAR_COLORS,
   AVATAR_SIZE,
-  buildTheme_v3,
+  buildTheme,
+  CARD_TONES,
+  type CardColorTokens,
+  type CardTone,
   COLOR_VARIANTS,
+  type ColorScheme,
   type ColorValue,
+  type ColorVariant,
   CONTAINER_SCALE,
+  ELEMENT_TONES,
+  type ElementTone,
   FONT_CODE_SIZE,
   FONT_HEADING_SIZE,
   FONT_LABEL_SIZE,
@@ -16,13 +23,6 @@ import {
   RADIUS,
   SHADOW,
   SPACE,
-  THEME_COLOR_CARD_TONES,
-  THEME_COLOR_STATE_TONES,
-  type ThemeColorCard_v3,
-  type ThemeColorCardToneKey,
-  type ThemeColorSchemeKey,
-  type ThemeColorStateToneKey,
-  type ThemeColorVariantKey,
   TINTS,
 } from '@sanity/ui/theme'
 import {createTheme, globalFontFace} from '@vanilla-extract/css'
@@ -30,7 +30,7 @@ import {createTheme, globalFontFace} from '@vanilla-extract/css'
 import {_fromEntries} from './_fromEntries'
 import {layers} from './layers.css'
 import type {
-  CardColorTokens,
+  CSSCardColorTokens,
   ElementColorTokens,
   RootThemeTokens,
   SchemeColorTokens,
@@ -92,7 +92,7 @@ globalFontFace('Inter', [
   },
 ])
 
-const theme = buildTheme_v3()
+const theme = buildTheme()
 
 const themeValue: RootThemeTokens = {
   avatar: {
@@ -313,7 +313,7 @@ export const themeClassName: string = createTheme(themeVars, {
   ...themeValue,
 })
 
-function renderColorScheme(options: {scheme: ThemeColorSchemeKey}): SchemeColorTokens {
+function renderColorScheme(options: {scheme: ColorScheme}): SchemeColorTokens {
   const {scheme} = options
 
   const defaultCardColor = renderCardColor({
@@ -323,7 +323,7 @@ function renderColorScheme(options: {scheme: ThemeColorSchemeKey}): SchemeColorT
 
   return {
     ..._fromEntries(
-      THEME_COLOR_CARD_TONES.map((key) => {
+      CARD_TONES.map((key) => {
         if (key === 'default') {
           return [key, defaultCardColor]
         }
@@ -343,9 +343,9 @@ function renderColorScheme(options: {scheme: ThemeColorSchemeKey}): SchemeColorT
 
 function renderCardColor(options: {
   bgValue?: string
-  tone: ThemeColorCardToneKey
+  tone: CardTone
   scheme: 'light' | 'dark'
-}): CardColorTokens {
+}): CSSCardColorTokens {
   const {bgValue, tone: t, scheme} = options
 
   const tokens = theme.color[t]
@@ -439,7 +439,7 @@ function renderCardColor(options: {
         v,
         {
           ..._fromEntries(
-            THEME_COLOR_STATE_TONES.map((t) => {
+            ELEMENT_TONES.map((t) => {
               if (v === 'tinted' && t === 'default') {
                 return [t, tintedDefaultVariant]
               }
@@ -454,12 +454,12 @@ function renderCardColor(options: {
 }
 
 function renderColorElement(
-  tokens: ThemeColorCard_v3,
+  tokens: CardColorTokens,
   options: {
     bgValue?: string
-    scheme: ThemeColorSchemeKey
-    variant: ThemeColorVariantKey
-    tone: ThemeColorStateToneKey
+    scheme: ColorScheme
+    variant: ColorVariant
+    tone: ElementTone
   },
 ): ElementColorTokens {
   const {bgValue, scheme, variant: v, tone: t} = options

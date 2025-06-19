@@ -10,7 +10,7 @@ const DEFAULT_PROPS = {
   iconRight: SquareIcon,
 } as const
 
-export default function DisabledButtonStory() {
+export default function DisabledButtonStory(): React.JSX.Element {
   const muted = useBoolean('Muted', false)
 
   return (

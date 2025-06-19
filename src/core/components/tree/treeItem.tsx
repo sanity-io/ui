@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {type ResponsiveProp, treeItem, vars} from '@sanity/ui/css'
-import type {FontTextSize, Space, ThemeFontWeightKey} from '@sanity/ui/theme'
+import type {FontTextSize, FontWeight, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
   type KeyboardEvent,
@@ -42,7 +42,7 @@ export type TreeItemOwnProps = CardOwnProps & {
   padding?: ResponsiveProp<Space>
   space?: ResponsiveProp<Space>
   text?: ReactNode
-  weight?: ThemeFontWeightKey
+  weight?: FontWeight
 }
 
 /** @beta */

@@ -1,7 +1,7 @@
 import {RocketIcon} from '@sanity/icons'
 import {Button, Flex, Inline} from '@sanity/ui'
 
-export default function CustomIconsStory() {
+export default function CustomIconsStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center">
       <Inline gap={1}>

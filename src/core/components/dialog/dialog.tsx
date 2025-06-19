@@ -4,7 +4,7 @@ import {
   dialogContainer,
   type ResponsiveProp,
 } from '@sanity/ui/css'
-import type {Radius, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {CardTone, ColorScheme, Radius} from '@sanity/ui/theme'
 import {type FocusEvent, type ForwardedRef, type ReactNode, useCallback, useRef} from 'react'
 
 import {Z_OFFSETS} from '../../constants'
@@ -12,7 +12,6 @@ import {isHTMLElement} from '../../helpers/element'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers/focus'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
-import type {CardTone} from '../../primitives/card/types'
 import {Container} from '../../primitives/container/container'
 import {Layer, type LayerOwnProps, type LayerProps} from '../../primitives/layer/layer'
 import type {ComponentType, Props} from '../../types/props'
@@ -57,8 +56,8 @@ export type DialogOwnProps = ContainerStyleProps &
     open?: boolean
     portal?: string
     position?: ResponsiveProp<DialogPosition>
-    scheme?: ThemeColorSchemeKey
-    tone?: CardTone
+    scheme?: ColorScheme
+    tone?: CardTone | 'inherit'
     zOffset?: number | number[]
   }
 

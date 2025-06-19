@@ -10,7 +10,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   placement: 'bottom-start',
 }
 
-export default function WithoutArrowStory() {
+export default function WithoutArrowStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Stack>

@@ -18,7 +18,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
 
 const INITIAL_INDEX = 1
 
-export default function SelectedItemStory() {
+export default function SelectedItemStory(): React.JSX.Element {
   const [selectedIndex, setSelectedIndex] = useState(INITIAL_INDEX)
 
   return (

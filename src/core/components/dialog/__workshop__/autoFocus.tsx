@@ -1,7 +1,7 @@
 import {Box, Button, Dialog, Text} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
 
-export default function AutoFocusStory() {
+export default function AutoFocusStory(): React.JSX.Element {
   const autoFocus = useBoolean('Auto-focus', true)
   const open = useBoolean('Open', false)
   const handleClose = useAction('onClose')

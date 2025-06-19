@@ -1,5 +1,7 @@
-import type {ButtonMode} from '@sanity/ui'
-import type {ThemeColorCardToneKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
+// import type {ButtonMode} from '@sanity/ui'
+// import type {CardTone, ElementTone} from '@sanity/ui/theme'
+
+import type {ButtonMode, CardTone, ElementTone} from '@sanity/ui/theme'
 
 interface StateWriteConfig {
   accent?: boolean
@@ -15,15 +17,13 @@ export interface WriteConfig {
   dryRun?: boolean
   tones: Partial<
     Record<
-      ThemeColorCardToneKey,
+      CardTone,
       StateWriteConfig & {
         button?: StateWriteConfig & {
-          modes?: Partial<
-            Record<ButtonMode, Partial<Record<ThemeColorStateToneKey, StateWriteConfig>>>
-          >
+          modes?: Partial<Record<ButtonMode, Partial<Record<ElementTone, StateWriteConfig>>>>
         }
         input?: boolean
-        selectable?: Partial<Record<ThemeColorStateToneKey, StateWriteConfig>>
+        selectable?: Partial<Record<ElementTone, StateWriteConfig>>
       }
     >
   >

@@ -1,4 +1,4 @@
-import type {ThemeBoxShadow} from '@sanity/ui/theme'
+import type {BoxShadow} from '@sanity/ui/theme'
 
 /** @internal */
 export function rem(value: number): string {
@@ -15,7 +15,7 @@ export function px(value: number): string {
 }
 
 /** @internal */
-export function toBoxShadow(value: ThemeBoxShadow | undefined): string {
+export function toBoxShadow(value: BoxShadow | undefined): string {
   if (!value) return 'none'
 
   return value.map((n) => px(n)).join(' ')

@@ -1,6 +1,7 @@
 import {describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {ToastContext} from './toastContext'
 import type {ToastContextValue} from './types'
 import {useToast} from './useToast'

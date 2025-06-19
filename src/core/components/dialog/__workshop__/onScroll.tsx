@@ -2,7 +2,7 @@ import {Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
 import {useAction} from '@sanity/ui-workshop'
 import {useEffect, useRef} from 'react'
 
-export default function OnScrollStory() {
+export default function OnScrollStory(): React.JSX.Element {
   const ref = useRef<HTMLDivElement | null>(null)
   const handleScroll = useAction('scroll')
 

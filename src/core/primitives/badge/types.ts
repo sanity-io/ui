@@ -1,4 +1,4 @@
-import type {ThemeColorStateToneKey} from '@sanity/ui/theme'
+import type {ElementTone} from '@sanity/ui/theme'
 
 /**
  * @public
@@ -10,7 +10,7 @@ export type BadgeMode = 'default' | 'outline'
  * @public
  * @deprecated Use `BadgeTone` from `@sanity/ui/css` instead.
  */
-export type BadgeTone = ThemeColorStateToneKey
+export type BadgeTone = ElementTone
 
 /**
  * @internal

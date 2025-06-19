@@ -12,7 +12,7 @@ const BREADCRUMBS_MAX_LENGTH_OPTIONS = {
   '7': 7,
 }
 
-export default function Example() {
+export default function ExampleStory(): React.JSX.Element {
   const maxLength = useSelect('Max. length', BREADCRUMBS_MAX_LENGTH_OPTIONS)
 
   return (

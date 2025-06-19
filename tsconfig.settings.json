@@ -3,6 +3,12 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "Preserve",
-    "jsx": "preserve"
+    "jsx": "preserve",
+
+    "allowImportingTsExtensions": false,
+    "allowJs": false,
+    "checkJs": false,
+    "declaration": true,
+    "isolatedDeclarations": true
   }
 }

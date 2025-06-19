@@ -1,4 +1,4 @@
-import {THEME_COLOR_STATE_TONES, type ThemeColorStateToneKey} from '@sanity/ui/theme'
+import {ELEMENT_TONES, type ElementTone} from '@sanity/ui/theme'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_style} from '../../_style.css'
@@ -28,9 +28,9 @@ export const root: string = _style(layers.primitives, {
   },
 })
 
-export const tones: Record<ThemeColorStateToneKey, string> = {
+export const tones: Record<ElementTone, string> = {
   ..._fromEntries(
-    THEME_COLOR_STATE_TONES.map((t) => {
+    ELEMENT_TONES.map((t) => {
       const tinted = vars.color.tinted[t]
       const focused = vars.color.solid.primary
       const disabled = vars.color.tinted.default

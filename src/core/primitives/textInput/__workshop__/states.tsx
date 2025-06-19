@@ -1,7 +1,7 @@
 import {Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
 
-export default function StatesStory() {
+export default function StatesStory(): React.JSX.Element {
   const invalid = useBoolean('Invalid', false)
   const onChange = useAction('onChange')
 

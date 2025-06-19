@@ -1,9 +1,9 @@
-import type {FontTextSize, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import type {FontTextSize, ElementTone} from '@sanity/ui/theme'
 
 import type {ResponsiveProp} from '../../types'
 
 /** @public */
-export type BadgeTone = ThemeColorStateToneKey
+export type BadgeTone = ElementTone
 
 /** @public */
 export interface BadgeStyleProps {

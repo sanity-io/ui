@@ -1,6 +1,7 @@
 import {describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {LayerContext} from './layerContext'
 import type {LayerContextValue} from './types'
 import {useLayer} from './useLayer'

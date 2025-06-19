@@ -8,7 +8,7 @@ import {
   WORKSHOP_TEXT_WEIGHT_OPTIONS,
 } from '$workshop'
 
-export default function TextStory() {
+export default function TextStory(): React.JSX.Element {
   const align = useSelect('Align', WORKSHOP_TEXT_ALIGN_OPTIONS)
   const muted = useBoolean('Muted', false)
   const size = useSelect('Size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 1)

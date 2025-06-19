@@ -4,7 +4,7 @@ import {useCallback, useState} from 'react'
 
 import {LayerDebugInfo} from './_debug'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   return (
     <Box padding={3}>
       <Root />

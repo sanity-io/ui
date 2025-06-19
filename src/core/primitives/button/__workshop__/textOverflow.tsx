@@ -1,7 +1,7 @@
 import {Button, Flex} from '@sanity/ui'
 import {useText} from '@sanity/ui-workshop'
 
-export default function TextOverflowStory() {
+export default function TextOverflowStory(): React.JSX.Element {
   const text = useText('Text', 'Long text that should overflow')
 
   return (

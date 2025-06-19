@@ -1,7 +1,8 @@
 import {describe, expect, it} from 'vitest'
 import {axe} from 'vitest-axe'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {Badge} from './badge'
 
 describe('atoms/badge', () => {

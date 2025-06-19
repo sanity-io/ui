@@ -3,7 +3,7 @@ import {useAction, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_SPACE_OPTIONS} from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Inline gap={useSelect('Gap', WORKSHOP_SPACE_OPTIONS, 0)} onClick={useAction('onClick')}>

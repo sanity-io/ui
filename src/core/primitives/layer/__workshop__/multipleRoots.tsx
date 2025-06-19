@@ -2,7 +2,7 @@ import {Card, Layer, LayerProvider, Stack} from '@sanity/ui'
 
 import {LayerDebugInfo} from './_debug'
 
-export default function MultipleRootsStory() {
+export default function MultipleRootsStory(): React.JSX.Element {
   return (
     <Stack gap={4}>
       <LayerProvider zOffset={100}>

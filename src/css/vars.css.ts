@@ -2,8 +2,11 @@ import {COLOR_HUES, COLOR_TINTS} from '@sanity/color'
 import {
   AVATAR_COLORS,
   AVATAR_SIZE,
+  CARD_TONES,
+  COLOR_SCHEMES,
   COLOR_VARIANTS,
   CONTAINER_SCALE,
+  ELEMENT_TONES,
   FONT_CODE_SIZE,
   FONT_HEADING_SIZE,
   FONT_LABEL_SIZE,
@@ -11,9 +14,6 @@ import {
   RADIUS,
   SHADOW,
   SPACE,
-  THEME_COLOR_CARD_TONES,
-  THEME_COLOR_SCHEMES,
-  THEME_COLOR_STATE_TONES,
 } from '@sanity/ui/theme'
 import {createThemeContract, createVar} from '@vanilla-extract/css'
 
@@ -78,11 +78,11 @@ const themeTokens: ThemeTokens = {
   color: {
     // schemes
     ..._fromEntries(
-      THEME_COLOR_SCHEMES.map((s) => [
+      COLOR_SCHEMES.map((s) => [
         s,
         {
           ..._fromEntries(
-            THEME_COLOR_CARD_TONES.map((t) => [
+            CARD_TONES.map((t) => [
               t,
               {
                 avatar: {
@@ -150,7 +150,7 @@ const themeTokens: ThemeTokens = {
                     v,
                     {
                       ..._fromEntries(
-                        THEME_COLOR_STATE_TONES.map((t) => [
+                        ELEMENT_TONES.map((t) => [
                           t,
                           {
                             bg: {
@@ -489,7 +489,7 @@ export const vars: ThemeVars = {
         v,
         {
           ..._fromEntries(
-            THEME_COLOR_STATE_TONES.map((t) => [
+            ELEMENT_TONES.map((t) => [
               t,
               {
                 bg: {
@@ -522,7 +522,7 @@ export const vars: ThemeVars = {
 
     // tones
     ..._fromEntries(
-      THEME_COLOR_CARD_TONES.map((t) => [
+      CARD_TONES.map((t) => [
         t,
         {
           avatar: {
@@ -598,7 +598,7 @@ export const vars: ThemeVars = {
               v,
               {
                 ..._fromEntries(
-                  THEME_COLOR_STATE_TONES.map((t) => [
+                  ELEMENT_TONES.map((t) => [
                     t,
                     {
                       bg: {

@@ -1,11 +1,11 @@
 import {
   AVATAR_COLORS,
+  CARD_TONES,
+  type CardTone,
+  COLOR_SCHEMES,
   COLOR_VARIANTS,
-  THEME_COLOR_CARD_TONES as CARD_TONES,
-  THEME_COLOR_SCHEMES as COLOR_SCHEMES,
-  THEME_COLOR_STATE_TONES as STATE_TONES,
-  type ThemeColorCardToneKey as CardTone,
-  type ThemeColorSchemeKey as ColorScheme,
+  type ColorScheme,
+  ELEMENT_TONES,
 } from '@sanity/ui/theme'
 import {type StyleRule} from '@vanilla-extract/css'
 
@@ -223,7 +223,7 @@ function buildSchemeVars(scheme: ColorScheme) {
     })
 
     for (const variant of COLOR_VARIANTS) {
-      for (const elementTone of STATE_TONES) {
+      for (const elementTone of ELEMENT_TONES) {
         const _target = vars.color[tone][variant][elementTone]
         const _source = vars.color[scheme][tone][variant][elementTone]
 
@@ -338,7 +338,7 @@ function buildToneRule(tone: CardTone): StyleRule {
   })
 
   for (const variant of COLOR_VARIANTS) {
-    for (const elementTone of STATE_TONES) {
+    for (const elementTone of ELEMENT_TONES) {
       const _target = vars.color[variant][elementTone]
       const _source = vars.color[tone][variant][elementTone]
 

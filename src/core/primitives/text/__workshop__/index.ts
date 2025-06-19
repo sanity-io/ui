@@ -1,7 +1,7 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'primitives/text',
   title: 'Text',
   stories: [
@@ -21,4 +21,6 @@ export default defineScope({
       component: lazy(() => import('./opticalAlignment')),
     },
   ],
-})
+}
+
+export default scope

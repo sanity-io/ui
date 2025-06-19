@@ -1,31 +1,17 @@
-import type {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {CardTone, ColorScheme} from '@sanity/ui/theme'
 import type {ComponentType, ReactNode} from 'react'
-
-/** @public */
-export type CardTone = ThemeColorCardToneKey | 'inherit'
-
-/**
- * @internal
- * @deprecated Use `CardStyleProps` from `@sanity/ui/css` instead.
- */
-export interface CardStyleProps {
-  $checkered: boolean
-  $focusRing: boolean
-  $muted: boolean
-  $tone: ThemeColorCardToneKey
-}
 
 /** @internal */
 export type _CardCompatProviderComponent = ComponentType<{
   children?: ReactNode
-  tone: ThemeColorCardToneKey
-  scheme: ThemeColorSchemeKey
+  tone: CardTone | 'inherit'
+  scheme: ColorScheme
 }>
 
 /** @public */
 export interface CardContextValue {
-  tone: ThemeColorCardToneKey
-  scheme: ThemeColorSchemeKey
+  tone: CardTone
+  scheme: ColorScheme
   /** @internal */
   unstable_CompatProvider?: _CardCompatProviderComponent
 }

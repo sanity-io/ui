@@ -2,7 +2,7 @@ import {Box, Container, Flex, Radio, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const [value, setValue] = useState('first-option')
   const disabled = useBoolean('Disabled', false)
   const readOnly = useBoolean('Read only', false)

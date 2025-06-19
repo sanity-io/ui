@@ -13,7 +13,7 @@ import {
   WORKSHOP_TEXT_WEIGHT_OPTIONS,
 } from '$workshop'
 
-export default function ButtonStory() {
+export default function ButtonStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled')
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
   const gap = useSelect('Gap', WORKSHOP_SPACE_OPTIONS)

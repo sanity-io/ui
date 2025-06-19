@@ -3,7 +3,7 @@ import {useCallback, useState} from 'react'
 
 const data = Array.from(new Array(1000)).map((_, key) => ({key}))
 
-export default function ChangingProps() {
+export default function ChangingPropsStory(): React.JSX.Element {
   const [expanded, setExpanded] = useState(false)
 
   const toggleExpand = useCallback(() => setExpanded((v) => !v), [])

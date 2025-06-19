@@ -1,6 +1,6 @@
 import {Code, useLayer} from '@sanity/ui'
 
-export function LayerDebugInfo(props: {id?: string}) {
+export function LayerDebugInfo(props: {id?: string}): React.JSX.Element {
   const {id} = props
   const layer = useLayer()
 

@@ -5,7 +5,7 @@ import {useCallback, useState} from 'react'
 
 import {perfTests} from './basic.perf'
 
-export default function BasicStory() {
+export default function BasicStory(): React.JSX.Element {
   const {ref, Wrapper} = usePerfTest(perfTests[0])
 
   const [id, setId] = useState('')

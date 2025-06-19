@@ -13,7 +13,7 @@ const DebugCard = styled(Card)`
   justify-content: center;
 `
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const direction = useSelect('Direction', WORKSHOP_FLEX_DIRECTION_OPTIONS, 'row')
 
   return (

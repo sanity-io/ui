@@ -9,7 +9,7 @@ import {
   WORKSHOP_SPACE_OPTIONS,
 } from '$workshop'
 
-export default function PropsStory() {
+export default function PropsStory(): React.JSX.Element {
   const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div')
   const border = useBoolean('Border', false)
   const checkered = useBoolean('Checkered', false)

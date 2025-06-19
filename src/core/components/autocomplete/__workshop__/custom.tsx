@@ -9,10 +9,10 @@ import {
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
 } from '$workshop'
 
-import countries from './mock/countries'
+import {countries} from './mock/countries'
 import type {ExampleOption} from './types'
 
-export default function CustomStory() {
+export default function CustomStory(): React.JSX.Element {
   const data: ExampleOption[] = countries.map((d) => ({value: d.code, title: d.name}))
   const border = useBoolean('Border', true)
   const disabled = useBoolean('Disabled', false)

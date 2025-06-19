@@ -3,7 +3,7 @@ import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
-export default function MatchReferenceWidthStory() {
+export default function MatchReferenceWidthStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', true)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
 

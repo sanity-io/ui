@@ -1,7 +1,7 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'primitives/button',
   title: 'Button',
   stories: [
@@ -10,16 +10,16 @@ export default defineScope({
       title: 'Props',
       component: lazy(() => import('./props')),
     },
-    {
-      name: 'styled-1',
-      title: 'Styled #1',
-      component: lazy(() => import('./styled1')),
-    },
-    {
-      name: 'styled-2',
-      title: 'Styled #2',
-      component: lazy(() => import('./styled2')),
-    },
+    // {
+    //   name: 'styled-1',
+    //   title: 'Styled #1',
+    //   component: lazy(() => import('./styled1')),
+    // },
+    // {
+    //   name: 'styled-2',
+    //   title: 'Styled #2',
+    //   component: lazy(() => import('./styled2')),
+    // },
     {
       name: 'stacked',
       title: 'Stacked',
@@ -61,4 +61,6 @@ export default defineScope({
       component: lazy(() => import('./textOverflow')),
     },
   ],
-})
+}
+
+export default scope

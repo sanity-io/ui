@@ -1,7 +1,7 @@
 import {Box, Card, Code, Container, Grid, Stack, Text, useElementRect} from '@sanity/ui'
 import {useState} from 'react'
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const [element, setElement] = useState<HTMLElement | null>(null)
   const rect = useElementRect(element)
   const size = {width: rect?.width || 0, height: rect?.height || 0}

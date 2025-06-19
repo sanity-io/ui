@@ -1,7 +1,7 @@
 import {Box, Text} from '@sanity/ui'
 import {vars} from '@sanity/ui/css'
 
-export default function ResponsiveStory() {
+export default function ResponsiveStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Box

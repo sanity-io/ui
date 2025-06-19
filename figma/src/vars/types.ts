@@ -1,16 +1,16 @@
 import type {
-  ThemeColorAvatarColorKey,
-  ThemeColorButtonModeKey,
-  ThemeColorCardToneKey,
-  ThemeColorInputModeKey,
-  ThemeColorInputStateKey,
-  ThemeColorSchemeKey,
-  ThemeColorStateKey,
-  ThemeColorStateToneKey,
+  AvatarColor,
+  // ButtonMode,
+  CardTone,
+  // InputMode,
+  // InputState,
+  ColorScheme,
+  // StateKey,
+  // ElementTone,
 } from '@sanity/ui/theme'
 
-export const INPUT_KEYS = ['bg', 'border', 'fg', 'muted-bg', 'placeholder'] as const
-export type InputColorKey = (typeof INPUT_KEYS)[number]
+// export const INPUT_KEYS = ['bg', 'border', 'fg', 'muted-bg', 'placeholder'] as const
+// export type InputColorKey = (typeof INPUT_KEYS)[number]
 
 export const STATE_KEYS = [
   'bg',
@@ -82,14 +82,12 @@ export type BaseColorKey = (typeof BASE_KEYS)[number]
 
 export interface FigmaSanityUIColorVariable {
   scheme: 'light' | 'dark'
-  tone: ThemeColorCardToneKey
-  key:
-    | BaseColorKey
-    | `avatar/${ThemeColorAvatarColorKey}/${'bg' | 'fg'}`
-    | `button/${ThemeColorButtonModeKey}/${ThemeColorStateToneKey}/${ThemeColorStateKey}/${StateColorKey}`
-    | `input/${ThemeColorInputModeKey}/${ThemeColorInputStateKey}/${InputColorKey}`
-    | `selectable/${ThemeColorStateToneKey}/${ThemeColorStateKey}/${StateColorKey}`
+  tone: CardTone
+  key: BaseColorKey | `avatar/${AvatarColor}/${'bg' | 'fg'}`
+  // | `button/${ButtonMode}/${ElementTone}/${StateKey}/${StateColorKey}`
+  // | `input/${InputMode}/${InputState}/${InputColorKey}`
+  // | `selectable/${ElementTone}/${StateKey}/${StateColorKey}`
   value?: string
 }
 
-export const SCHEMES: ThemeColorSchemeKey[] = ['light', 'dark']
+export const SCHEMES: ColorScheme[] = ['light', 'dark']

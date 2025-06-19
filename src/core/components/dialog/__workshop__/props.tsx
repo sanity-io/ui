@@ -4,7 +4,7 @@ import {useCallback, useRef, useState} from 'react'
 
 import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '$workshop'
 
-export default function PropsStory() {
+export default function PropsStory(): React.JSX.Element {
   const animate = useBoolean('Animate', false)
   const header = useText('Header', 'Props example')
   const onClickOutside = useBoolean('Close when click outside', false)

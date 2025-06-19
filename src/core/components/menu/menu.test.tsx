@@ -3,7 +3,8 @@
 import {type MouseEvent, useCallback, useMemo} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {MenuContext, type MenuContextValue} from './menuContext'
 import {useMenu} from './useMenu'
 

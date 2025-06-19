@@ -3,7 +3,7 @@ import {useAction, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_SPACE_OPTIONS} from '$workshop'
 
-export default function PropsStory() {
+export default function PropsStory(): React.JSX.Element {
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 0)
 
   return (

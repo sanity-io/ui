@@ -1,4 +1,4 @@
-import type {AvatarSize, ThemeColorAvatarColorKey} from '@sanity/ui/theme'
+import type {AvatarColor, AvatarSize} from '@sanity/ui/theme'
 
 export {
   /** @deprecated Use `AvatarSize` from `@sanity/ui/theme' instead. */
@@ -22,7 +22,7 @@ export type AvatarStatus = 'online' | 'editing' | 'inactive'
  * @deprecated This will be removed in next major version.
  */
 export interface AvatarRootStyleProps {
-  $color: ThemeColorAvatarColorKey
+  $color: AvatarColor
 }
 
 /**

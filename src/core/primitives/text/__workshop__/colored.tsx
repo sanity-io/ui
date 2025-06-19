@@ -10,7 +10,7 @@ const ColoredText = styled(Text)<{$color: AvatarColor}>`
   ${vars.color.fg.slice(4, -1)}: ${({$color}) => vars.color.avatar[$color].bg};
 `
 
-export default function ColoredTextStory() {
+export default function ColoredTextStory(): React.JSX.Element {
   const color = useSelect('Color', WORKSHOP_AVATAR_COLOR_OPTIONS, 'gray') ?? 'gray'
 
   return (

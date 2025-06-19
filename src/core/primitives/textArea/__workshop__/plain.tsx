@@ -9,7 +9,7 @@ import {
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
 } from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS)
 
   const border = useBoolean('Border', true)

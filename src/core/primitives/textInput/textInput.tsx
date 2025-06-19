@@ -9,7 +9,7 @@ import {
   textInputPrefix,
   textInputSuffix,
 } from '@sanity/ui/css'
-import type {Space, ThemeFontWeightKey} from '@sanity/ui/theme'
+import type {FontWeight, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
   isValidElement,
@@ -61,7 +61,7 @@ export type TextInputOwnProps = InputStyleProps & {
   /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
   suffix?: ReactNode
-  weight?: ThemeFontWeightKey
+  weight?: FontWeight
 }
 
 /** @public */

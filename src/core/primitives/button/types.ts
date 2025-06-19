@@ -1,10 +1,4 @@
-import type {ThemeColorButtonModeKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
-
-/**
- * @public
- * @deprecated Use `ThemeColorButtonModeKey` instead
- */
-export type ButtonMode = ThemeColorButtonModeKey
+import type {ElementTone} from '@sanity/ui/theme'
 
 /** @public */
 export type ButtonTextAlign = 'left' | 'right' | 'center'
@@ -13,7 +7,7 @@ export type ButtonTextAlign = 'left' | 'right' | 'center'
  * @public
  * @deprecated Use `ThemeColorStateToneKey` instead
  */
-export type ButtonTone = ThemeColorStateToneKey
+export type ButtonTone = ElementTone
 
 /**
  * @public

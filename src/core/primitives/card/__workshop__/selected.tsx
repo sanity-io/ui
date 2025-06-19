@@ -2,7 +2,7 @@ import {EditIcon, PublishIcon} from '@sanity/icons'
 import {Box, Card, Container, Flex, Inline, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
-export default function SelectedStory() {
+export default function SelectedStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled', false)
   const selected = useBoolean('Selected', false)
 

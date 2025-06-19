@@ -20,7 +20,7 @@ const PORTAL_OPTIONS = {
   'portal1': 'portal1',
 }
 
-export default function CustomPortalStory() {
+export default function CustomPortalStory(): React.JSX.Element {
   const content = useText(
     'Content',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mollis consectetur malesuada. Sed lobortis est dolor, eget imperdiet velit placerat et. Aenean posuere mi non aliquet iaculis. Donec fermentum pulvinar purus at sagittis. Ut tincidunt massa odio, sed finibus justo ullamcorper id. Nam venenatis justo non ligula elementum cursus. Pellentesque laoreet justo in mollis sagittis. In lacinia ornare ultrices. Suspendisse potenti.',

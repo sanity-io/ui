@@ -3,7 +3,7 @@ import {Box, Card, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import {useState} from 'react'
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const [tab, setTab] = useState('foo')
   const useLongTitle = useBoolean('Use long title', false)
 

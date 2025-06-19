@@ -12,7 +12,7 @@ import {
   Text,
 } from '@sanity/ui'
 
-export default function AvatarMenuStory() {
+export default function AvatarMenuStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center">
       <MenuButton

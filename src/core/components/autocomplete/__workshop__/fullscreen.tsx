@@ -21,7 +21,7 @@ import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {countriesStore} from './mock/apiStore'
 
-export default function Fullscreen() {
+export default function FullscreenStory(): React.JSX.Element {
   const error = useBoolean('Error', false)
 
   const {push: pushToast} = useToast()

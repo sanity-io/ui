@@ -1,8 +1,9 @@
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
+import path from 'path'
+import type {UserConfig} from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import {defineConfig} from 'vitest/config'
 
-export default defineConfig({
+const config: UserConfig = {
   plugins: [tsconfigPaths(), vanillaExtractPlugin()],
   test: {
     globals: true,
@@ -14,4 +15,11 @@ export default defineConfig({
     reporters: process.env['GITHUB_ACTIONS'] ? ['default', 'github-actions'] : 'default',
     setupFiles: ['test/setup.ts'],
   },
-})
+  resolve: {
+    alias: {
+      $test: path.resolve(__dirname, 'test'),
+    },
+  },
+}
+
+export default config

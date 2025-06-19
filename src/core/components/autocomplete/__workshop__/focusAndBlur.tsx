@@ -1,7 +1,7 @@
 import {Autocomplete, Box, Button, Code, Stack} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
-export default function FocusAndBlurStory() {
+export default function FocusAndBlurStory(): React.JSX.Element {
   const [value, setValue] = useState('')
   const [log, setLog] = useState<string[]>([])
   const handleBlur = useCallback(() => setLog((v) => v.concat(['blur'])), [])

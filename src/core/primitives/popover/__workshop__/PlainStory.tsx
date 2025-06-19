@@ -9,7 +9,7 @@ import {
   WORKSHOP_SPACE_OPTIONS,
 } from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', true)
   const boundaryElementFlag = useBoolean('Boundary element', true)
   const constrainSize = useBoolean('Constrain size', true)

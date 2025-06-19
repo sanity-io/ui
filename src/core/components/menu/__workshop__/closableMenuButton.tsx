@@ -7,7 +7,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,
 }
 
-export default function ClosableMenuButtonStory() {
+export default function ClosableMenuButtonStory(): React.JSX.Element {
   const ref = useRef<HTMLButtonElement | null>(null)
 
   return (

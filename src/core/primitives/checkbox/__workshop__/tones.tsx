@@ -1,11 +1,11 @@
 import {Card, Checkbox, Flex, Stack, Text} from '@sanity/ui'
-import {THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/theme'
 
-export default function MultipleTonesStory() {
+export default function MultipleTonesStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Stack gap={1}>
-        {THEME_COLOR_CARD_TONES.map((tone) => (
+        {CARD_TONES.map((tone) => (
           <Card
             alignItems="center"
             as="label"

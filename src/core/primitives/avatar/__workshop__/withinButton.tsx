@@ -1,7 +1,7 @@
 import {Avatar, AvatarStack, Box, Button, Container, Flex, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
-export default function WithinButtonStory() {
+export default function WithinButtonStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled', false)
 
   return (

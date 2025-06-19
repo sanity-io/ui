@@ -1,6 +1,6 @@
 import {CloseIcon, SearchIcon, UploadIcon} from '@sanity/icons'
 import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
-import {RADIUS, THEME_COLOR_BUTTON_MODES, THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
+import {BUTTON_MODES, ELEMENT_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {styled} from 'styled-components'
 
@@ -124,7 +124,7 @@ export const Modes: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => <Button {...props} key={value} mode={value} text={value} />,
-        rows: [...THEME_COLOR_BUTTON_MODES],
+        rows: [...BUTTON_MODES],
       })}
     </>
   ),
@@ -140,7 +140,7 @@ export const Tones: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => <Button {...props} key={value} text={value} tone={value} />,
-        rows: [...THEME_COLOR_STATE_TONES],
+        rows: [...ELEMENT_TONES],
       })}
     </>
   ),
@@ -202,8 +202,8 @@ export const MultipleStyles: Story = {
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',
-            columns: [...THEME_COLOR_BUTTON_MODES],
-            rows: [...THEME_COLOR_STATE_TONES],
+            columns: [...BUTTON_MODES],
+            rows: [...ELEMENT_TONES],
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
             renderItem: ({row, column}) => (
@@ -220,8 +220,8 @@ export const MultipleStyles: Story = {
           })}
           {matrixBuilder({
             scheme: 'dark',
-            columns: [...THEME_COLOR_BUTTON_MODES],
-            rows: [...THEME_COLOR_STATE_TONES],
+            columns: [...BUTTON_MODES],
+            rows: [...ELEMENT_TONES],
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
 
@@ -248,8 +248,8 @@ export const CustomButton: Story = {
     return (
       <Flex align="center" height="fill" justify="center">
         <Stack gap={2}>
-          <Grid columns={THEME_COLOR_STATE_TONES.length} gap={1}>
-            {THEME_COLOR_STATE_TONES.map((tone) => (
+          <Grid columns={ELEMENT_TONES.length} gap={1}>
+            {ELEMENT_TONES.map((tone) => (
               <Button {...props} key={tone} mode="bleed" padding={3} tone={tone} text={undefined}>
                 <Stack gap={2}>
                   <Text>Text ({tone})</Text>
@@ -262,8 +262,8 @@ export const CustomButton: Story = {
               </Button>
             ))}
           </Grid>
-          <Grid columns={THEME_COLOR_STATE_TONES.length} gap={1}>
-            {THEME_COLOR_STATE_TONES.map((tone) => (
+          <Grid columns={ELEMENT_TONES.length} gap={1}>
+            {ELEMENT_TONES.map((tone) => (
               <Button {...props} key={tone} mode="ghost" padding={3} tone={tone} text={undefined}>
                 <Stack gap={2}>
                   <Text>Text: ({tone})</Text>
@@ -277,8 +277,8 @@ export const CustomButton: Story = {
             ))}
           </Grid>
 
-          <Grid columns={THEME_COLOR_STATE_TONES.length} gap={1}>
-            {THEME_COLOR_STATE_TONES.map((tone) => (
+          <Grid columns={ELEMENT_TONES.length} gap={1}>
+            {ELEMENT_TONES.map((tone) => (
               <Button {...props} key={tone} mode="default" padding={3} tone={tone} text={undefined}>
                 <Stack gap={2}>
                   <Text>Text: ({tone})</Text>

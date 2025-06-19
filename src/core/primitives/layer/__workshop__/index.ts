@@ -1,7 +1,7 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'primitives/layer',
   title: 'Layer',
   stories: [
@@ -21,4 +21,6 @@ export default defineScope({
       component: lazy(() => import('./responsiveZOffset')),
     },
   ],
-})
+}
+
+export default scope

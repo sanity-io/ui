@@ -1,7 +1,11 @@
 import type {
   AvatarColor,
   AvatarSize,
+  CardTone,
+  ColorScheme,
+  ColorVariant,
   ContainerScale,
+  ElementTone,
   FontCodeSize,
   FontHeadingSize,
   FontLabelSize,
@@ -10,10 +14,6 @@ import type {
   Radius,
   Shadow,
   Space,
-  ThemeColorCardToneKey,
-  ThemeColorSchemeKey,
-  ThemeColorStateToneKey,
-  ThemeColorVariantKey,
   Tint,
 } from '@sanity/ui/theme'
 import type {createThemeContract} from '@vanilla-extract/css'
@@ -52,10 +52,10 @@ export type ElementColorTokens = {
 }
 
 /** @public */
-export type VariantColorTokens = Record<ThemeColorStateToneKey, ElementColorTokens>
+export type VariantColorTokens = Record<ElementTone, ElementColorTokens>
 
 /** @public */
-export type CardColorTokens = {
+export type CSSCardColorTokens = {
   avatar: Record<AvatarColor, {bg: string; fg: string}>
   backdrop: string
   code: {
@@ -114,10 +114,10 @@ export type CardColorTokens = {
     from: string
     to: string
   }
-} & Record<ThemeColorVariantKey, VariantColorTokens>
+} & Record<ColorVariant, VariantColorTokens>
 
 /** @public */
-export type SchemeColorTokens = Record<ThemeColorCardToneKey, CardColorTokens>
+export type SchemeColorTokens = Record<CardTone, CSSCardColorTokens>
 
 /** @public */
 export type ColorPaletteTokens = {
@@ -126,7 +126,7 @@ export type ColorPaletteTokens = {
 } & Record<Hue, Record<Tint, string>>
 
 /** @public */
-export type ColorTokens = Record<ThemeColorSchemeKey, SchemeColorTokens>
+export type ColorTokens = Record<ColorScheme, SchemeColorTokens>
 
 /** @public */
 export type FontTokens<FontScaleIndex extends number> = {
@@ -299,11 +299,11 @@ export type ScopedTokens = {
         fg: string
       }
     }
-  } & CardColorTokens &
+  } & CSSCardColorTokens &
     Record<
-      ThemeColorVariantKey,
+      ColorVariant,
       Record<
-        ThemeColorStateToneKey,
+        ElementTone,
         {
           bg: {
             0: string
@@ -330,12 +330,12 @@ export type ScopedTokens = {
       >
     > &
     Record<
-      ThemeColorCardToneKey,
-      CardColorTokens &
+      CardTone,
+      CSSCardColorTokens &
         Record<
-          ThemeColorVariantKey,
+          ColorVariant,
           Record<
-            ThemeColorStateToneKey,
+            ElementTone,
             {
               bg: {
                 0: string

@@ -3,7 +3,7 @@ import {useAction, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 0)
 
   return (

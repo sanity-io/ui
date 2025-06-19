@@ -1,6 +1,6 @@
 import {Box, Button, Menu, MenuButton, MenuDivider, MenuItem, Stack} from '@sanity/ui'
 
-export default function NestedMenuItems() {
+export default function NestedMenuItems(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <MenuButton

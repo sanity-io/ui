@@ -1,6 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import type {FontTextSize, Space, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import type {FontTextSize, Space, ElementTone} from '@sanity/ui/theme'
 import {
   type ElementType,
   isValidElement,
@@ -47,7 +47,7 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
   /** @deprecated Use `gap` instead. */
   space?: ResponsiveProp<Space>
   text?: ReactNode
-  tone?: ThemeColorStateToneKey
+  tone?: ElementTone
 }
 
 /** @public */

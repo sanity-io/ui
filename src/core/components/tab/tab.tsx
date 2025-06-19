@@ -1,5 +1,5 @@
 import type {ResponsiveProp} from '@sanity/ui/css'
-import type {FontTextSize, Space, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import type {FontTextSize, Space, ElementTone} from '@sanity/ui/theme'
 import {
   type ElementType,
   type FocusEvent,
@@ -29,7 +29,7 @@ export type TabOwnProps = {
   'label'?: ReactNode
   'padding'?: ResponsiveProp<Space>
   'selected'?: boolean
-  'tone'?: ThemeColorStateToneKey
+  'tone'?: ElementTone
 }
 
 /** @public */

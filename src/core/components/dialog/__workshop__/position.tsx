@@ -4,7 +4,7 @@ import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_DIALOG_POSITION_OPTIONS} from '$workshop'
 
-export default function PositionStory() {
+export default function PositionStory(): React.JSX.Element {
   const open = useBoolean('Open', true)
   const position = useSelect('Position', WORKSHOP_DIALOG_POSITION_OPTIONS)
 

@@ -12,7 +12,7 @@ import {
 } from '@sanity/ui'
 import {useState} from 'react'
 
-export default function LayeringFocusStory() {
+export default function LayeringFocusStory(): React.JSX.Element {
   const [firstDialogOpen, setFirstDialogOpen] = useState<boolean>(false)
   const [secondDialogOpen, setSecondDialogOpen] = useState<boolean>(false)
   const [thirdDialogOpen, setThirdDialogOpen] = useState<boolean>(false)
