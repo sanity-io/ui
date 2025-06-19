@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.2](https://github.com/sanity-io/icons/compare/v3.7.1...v3.7.2) (2025-06-19)
+
+### Bug Fixes
+
+- generate dts with rolldown ([2426033](https://github.com/sanity-io/icons/commit/24260337336a618f640c3449c7cd124f2ad41e51))
+
 ## [3.7.1](https://github.com/sanity-io/icons/compare/v3.7.0...v3.7.1) (2025-06-19)
 
 ### Bug Fixes
