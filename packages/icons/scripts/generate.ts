@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+// oxlint-disable no-console
 
 import {readFile, writeFile} from 'fs/promises'
 import path from 'path'
@@ -144,7 +144,6 @@ async function generate() {
   const indexTsCode = await format(
     [
       GENERATED_BANNER,
-      '/* eslint-disable import/order */',
       importTypes,
       iconImports,
       typesExports,
@@ -164,7 +163,6 @@ async function generate() {
 }
 
 generate().catch((err) => {
-  // eslint-disable-next-line no-console
   console.error(err)
   process.exit(1)
 })

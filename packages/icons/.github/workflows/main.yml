@@ -30,9 +30,9 @@ jobs:
           cache: pnpm
           node-version: lts/*
       - run: pnpm install
+      - run: pnpm lint --deny-warnings --format github
       - run: tsc --noEmit
       - run: pnpm build
-      - run: pnpm lint
 
   test:
     runs-on: ${{ matrix.platform }}

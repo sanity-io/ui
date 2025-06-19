@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "react", "oxc", "import"],
+  "ignorePatterns": ["**/dist/*", "**/.workshop/*"],
+  "categories": {
+    "correctness": "error",
+    "perf": "error"
+  },
+  "rules": {
+    "import/no-cycle": "error",
+    "eslint/no-console": "error",
+    "react/rules-of-hooks": "error",
+    "react-in-jsx-scope": "off"
+  }
+}

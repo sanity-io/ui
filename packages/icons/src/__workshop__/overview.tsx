@@ -1,4 +1,4 @@
-import {Icon, icons, type IconSymbol, SearchIcon, SpinnerIcon} from '@sanity/icons'
+import {Icon, icons, SearchIcon, SpinnerIcon, type IconSymbol} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
 import {useState, useTransition} from 'react'
 
