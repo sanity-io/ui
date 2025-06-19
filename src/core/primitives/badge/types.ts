@@ -6,12 +6,15 @@ import type {ThemeColorStateToneKey} from '@sanity/ui/theme'
  */
 export type BadgeMode = 'default' | 'outline'
 
-/** @public */
+/**
+ * @public
+ * @deprecated Use `BadgeTone` from `@sanity/ui/css` instead.
+ */
 export type BadgeTone = ThemeColorStateToneKey
 
 /**
  * @internal
- * @deprecated Will be removed in next major version.
+ * @deprecated Use `BadgeStyleProps` from `@sanity/ui/css` instead.
  */
 export interface BadgeStyleProps {
   $tone: BadgeTone
