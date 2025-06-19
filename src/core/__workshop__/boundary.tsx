@@ -1,6 +1,6 @@
 import {Box, Button, Root, Stack, Text, useCard, useToast} from '@sanity/ui'
 
-export default function BoundaryStory() {
+export default function BoundaryStory(): React.JSX.Element {
   const {scheme} = useCard()
 
   return (

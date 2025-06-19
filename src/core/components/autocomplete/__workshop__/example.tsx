@@ -11,7 +11,7 @@ import {
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
 } from '$workshop'
 
-import countries from './mock/countries'
+import {countries} from './mock/countries'
 
 const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   name: 'typing',
@@ -29,7 +29,7 @@ const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   },
 }
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const {ref, Wrapper} = usePerfTest(typingPerfTest)
 
   const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS)

@@ -1,7 +1,7 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'components/tree',
   title: 'Tree',
   stories: [
@@ -18,4 +18,6 @@ export default defineScope({
       // options: {perfTests: () => import('./basic.perf')},
     },
   ],
-})
+}
+
+export default scope

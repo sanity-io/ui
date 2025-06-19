@@ -11,7 +11,7 @@ function getData(len: number, offsetIndex = 0): Item[] {
 
 const ITEMS_PER_PAGE = 1000
 
-export default function InfiniteList() {
+export default function InfiniteListStory(): React.JSX.Element {
   const [data, setData] = useState<Item[]>(() => getData(ITEMS_PER_PAGE))
   const offsetRef = useRef(0)
 

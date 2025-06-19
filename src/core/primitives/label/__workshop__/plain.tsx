@@ -8,7 +8,7 @@ import {
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
 } from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const align = useSelect('Align', WORKSHOP_TEXT_ALIGN_OPTIONS)
   const muted = useBoolean('Muted', false)
   const size = useSelect('Size', WORKSHOP_LABEL_FONT_SIZE_OPTIONS)

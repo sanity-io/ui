@@ -1,7 +1,7 @@
 import {Box, Card, Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
-export default function TonesStory() {
+export default function TonesStory(): React.JSX.Element {
   const transparentTone = useBoolean('Transparent', true)
   const neutralTone = useBoolean('Neutral', true)
   const primaryTone = useBoolean('Primary', true)

@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {Card, ThemeProvider} from '@sanity/ui'
-import {buildTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {Root} from '@sanity/ui'
+import {type ColorScheme} from '@sanity/ui/theme'
 import {
   render as _testRender,
   type RenderOptions as _TestRenderOptions,
@@ -10,11 +10,9 @@ import {
 import {Fragment, type ReactNode, StrictMode} from 'react'
 
 export interface TestRenderOptions extends _TestRenderOptions {
-  scheme?: ThemeColorSchemeKey
+  scheme?: ColorScheme
   strict?: boolean
 }
-
-const theme = buildTheme()
 
 function DefaultWrapper({children}: {children?: ReactNode}) {
   return <main>{children}</main>
@@ -37,11 +35,9 @@ export function render(
     return (
       <Strictness>
         <InnerWrapper>
-          <ThemeProvider theme={theme}>
-            <Card padding={4} scheme={scheme}>
-              {children}
-            </Card>
-          </ThemeProvider>
+          <Root as="div" padding={4} scheme={scheme}>
+            {children}
+          </Root>
         </InnerWrapper>
       </Strictness>
     )

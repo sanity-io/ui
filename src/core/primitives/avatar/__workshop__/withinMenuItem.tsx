@@ -12,7 +12,7 @@ import {
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
-export default function WithinMenuItemStory() {
+export default function WithinMenuItemStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled', false)
 
   return (

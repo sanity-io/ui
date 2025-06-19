@@ -1,6 +1,6 @@
 import {Card, Flex, Text} from '@sanity/ui'
 
-export default function GapStory() {
+export default function GapStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Flex align="center" gap={[1, 2, 3, 4]} justify="center" wrap="wrap">

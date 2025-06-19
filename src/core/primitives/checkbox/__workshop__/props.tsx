@@ -1,7 +1,7 @@
 import {Box, Checkbox, Flex, Text} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
 
-export default function PropsStory() {
+export default function PropsStory(): React.JSX.Element {
   const checked = useBoolean('Checked', false)
   const disabled = useBoolean('Disabled', false)
   const indeterminate = useBoolean('Indeterminate', false)

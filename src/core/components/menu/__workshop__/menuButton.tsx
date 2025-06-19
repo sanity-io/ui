@@ -16,7 +16,7 @@ import {useMemo} from 'react'
 
 import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
-export default function MenuButtonStory() {
+export default function MenuButtonStory(): React.JSX.Element {
   const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
   const portal = useBoolean('Portal', false)
 

@@ -91,7 +91,7 @@ const items: {tone: SelectableTone; message: string}[] = [
   },
 ]
 
-export default function ConstrainedInBoundaryStory() {
+export default function ConstrainedInBoundaryStory(): React.JSX.Element {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (

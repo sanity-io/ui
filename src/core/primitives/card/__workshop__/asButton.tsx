@@ -2,7 +2,7 @@ import {Box, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
 
 import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
-export default function AsButtonStory() {
+export default function AsButtonStory(): React.JSX.Element {
   const tones = Object.entries(WORKSHOP_CARD_TONE_OPTIONS)
 
   return (

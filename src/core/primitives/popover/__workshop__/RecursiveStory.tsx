@@ -1,8 +1,8 @@
 import {Button, Flex, LayerProvider, type Placement, Popover, useLayer} from '@sanity/ui'
-import {THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/theme'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
-export default function RecursiveStory() {
+export default function RecursiveStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <LayerProvider>
@@ -55,7 +55,7 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       padding={1}
       placement={fallbackPlacements[3]}
       portal
-      tone={THEME_COLOR_CARD_TONES[seed]}
+      tone={CARD_TONES[seed]}
     >
       <Button
         mode="bleed"

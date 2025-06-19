@@ -1,10 +1,8 @@
-import '../../../../test/mocks/resizeObserver.mock'
-import '../../../../test/mocks/matchMedia.mock'
-
 import {act, fireEvent, screen} from '@testing-library/react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {Button} from '../button/button'
 import {Text} from '../text/text'
 import {Tooltip} from './tooltip'

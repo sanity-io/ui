@@ -3,7 +3,7 @@ import {useCallback} from 'react'
 
 const data = Array.from(new Array(1000)).map((_, key) => ({key}))
 
-export default function Example() {
+export default function WindowScrollStory(): React.JSX.Element {
   const renderItem = useCallback((item: {key: number}) => {
     return (
       <Card padding={3} radius={2} shadow={1}>

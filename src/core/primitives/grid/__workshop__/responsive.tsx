@@ -1,6 +1,6 @@
 import {Card, Code, Container, Flex, Grid} from '@sanity/ui'
 
-export default function ResponsiveStory() {
+export default function ResponsiveStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width="auto">

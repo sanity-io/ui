@@ -14,7 +14,7 @@ import {useCallback, useEffect, useRef, useState} from 'react'
 
 import {countriesStore} from './mock/apiStore'
 
-export default function AsyncStory() {
+export default function AsyncStory(): React.JSX.Element {
   const [options, setOptions] = useState<BaseAutocompleteOption[]>([])
   const [loading, setLoading] = useState(false)
   const searchRef = useRef<{cancel: () => void} | null>(null)

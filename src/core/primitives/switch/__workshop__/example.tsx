@@ -1,7 +1,7 @@
 import {Box, Flex, Switch, Text} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const [checked, setChecked] = useState<boolean | undefined>(undefined)
   const indeterminate = checked === undefined
   const handleChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {

@@ -3,7 +3,8 @@ import {screen} from '@testing-library/react'
 import {describe, expect, it} from 'vitest'
 import {axe} from 'vitest-axe'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {Button} from './button'
 
 describe('atoms/button', () => {

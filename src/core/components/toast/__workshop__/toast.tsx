@@ -3,7 +3,7 @@ import {useAction, useBoolean, useSelect, useString, useText} from '@sanity/ui-w
 
 import {WORKSHOP_TOAST_STATUS_OPTIONS} from '$workshop'
 
-export default function ToastStory() {
+export default function ToastStory(): React.JSX.Element {
   const closable = useBoolean('Closable', false)
   const title = useString('Title', 'Toast title')
   const status = useSelect('Status', WORKSHOP_TOAST_STATUS_OPTIONS)

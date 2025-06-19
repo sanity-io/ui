@@ -2,3 +2,5 @@
 
 import '@testing-library/jest-dom/vitest'
 import 'vitest-axe/extend-expect'
+import './mocks/resizeObserver.mock'
+import './mocks/matchMedia.mock'

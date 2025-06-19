@@ -8,7 +8,7 @@ import {
   WORKSHOP_SPACE_OPTIONS,
 } from '$workshop'
 
-export default function PropsStory() {
+export default function PropsStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', false)
   const content = useText('Content', 'Tooltip content')
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2)

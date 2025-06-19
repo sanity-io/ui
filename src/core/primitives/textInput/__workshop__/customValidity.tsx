@@ -1,7 +1,7 @@
 import {Button, Card, Container, Stack, TextInput} from '@sanity/ui'
 import {useText} from '@sanity/ui-workshop'
 
-export default function CustomValidityStory() {
+export default function CustomValidityStory(): React.JSX.Element {
   const customValidity = useText('Custom validity', 'Invalid value') || undefined
 
   return (

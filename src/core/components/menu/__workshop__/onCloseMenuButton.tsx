@@ -14,7 +14,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,
 }
 
-export default function OnCloseMenuButton() {
+export default function OnCloseMenuButton(): React.JSX.Element {
   const {push} = useToast()
 
   const handleClose = useCallback(() => {

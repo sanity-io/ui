@@ -2,8 +2,6 @@
  * These are internal exports for usage in `@sanity/visual-editing` and `@sanity/insert-menu`,
  * which are used in environments where the regular `@sanity/ui` export is far too heavy due to imports from refractor and more.
  */
-export {ThemeProvider, type ThemeProviderProps} from '../src/core/_compat/theme/themeProvider'
-export {useTheme_v2} from '../src/core/_compat/theme/useTheme'
 export {Hotkeys, type HotkeysProps} from '../src/core/components/hotkeys/hotkeys'
 export {Menu, type MenuProps} from '../src/core/components/menu/menu'
 export {MenuDivider} from '../src/core/components/menu/menuDivider'

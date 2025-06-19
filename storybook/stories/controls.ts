@@ -1,7 +1,9 @@
 import {icons} from '@sanity/icons'
 import {
   AVATAR_SIZE,
+  BUTTON_MODES,
   CONTAINER,
+  ELEMENT_TONES,
   FONT_CODE_SIZE,
   FONT_HEADING_SIZE,
   FONT_LABEL_SIZE,
@@ -9,8 +11,6 @@ import {
   RADIUS,
   SHADOW,
   SPACE,
-  THEME_COLOR_BUTTON_MODES,
-  THEME_COLOR_STATE_TONES,
 } from '@sanity/ui/theme'
 
 export const TEXT_ALIGN_CONTROLS = {
@@ -25,7 +25,7 @@ export const AVATAR_SIZE_CONTROLS = {
 
 export const BUTTON_MODE_CONTROLS = {
   control: {type: 'select'},
-  options: [...THEME_COLOR_BUTTON_MODES],
+  options: [...BUTTON_MODES],
 } as const
 
 export const BUTTON_WIDTH_CONTROLS = {
@@ -113,7 +113,7 @@ export const SPACE_CONTROLS = {
 
 export const ELEMENT_TONES_CONTROLS = {
   control: {type: 'select'},
-  options: [...THEME_COLOR_STATE_TONES],
+  options: [...ELEMENT_TONES],
 } as const
 
 export const TEXT_OVERFLOW_CONTROLS = {

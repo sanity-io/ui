@@ -1,4 +1,4 @@
-import type {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {CardTone, ColorScheme} from '@sanity/ui/theme'
 import type {ReactNode} from 'react'
 
 import {ToastProvider} from './components/toast/toastProvider'
@@ -12,8 +12,8 @@ export interface RootProviderProps {
   boundaryElement?: HTMLElement | null
   children?: ReactNode
   portalElement?: HTMLElement | null
-  scheme?: ThemeColorSchemeKey
-  tone?: ThemeColorCardToneKey
+  scheme?: ColorScheme
+  tone?: CardTone
 }
 
 /** @public */

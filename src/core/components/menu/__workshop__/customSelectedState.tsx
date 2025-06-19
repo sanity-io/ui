@@ -8,7 +8,7 @@ const selectedOptions = {
   false: false,
 } as const
 
-export default function CustomSelectedStateStory() {
+export default function CustomSelectedStateStory(): React.JSX.Element {
   const selected = useSelect('Selected', selectedOptions, false)
 
   return (

@@ -1,4 +1,4 @@
-import {defineConfig} from '@sanity/pkg-utils'
+import {type PkgConfigOptions} from '@sanity/pkg-utils'
 import {vanillaExtractPlugin} from '@vanilla-extract/rollup-plugin'
 import path from 'path'
 import {env} from 'process'
@@ -7,7 +7,7 @@ import {cssBundle} from './rollup/cssBundle'
 
 const isProd = env['NODE_ENV'] === 'production'
 
-export default defineConfig({
+const config: PkgConfigOptions = {
   babel: {reactCompiler: true},
   dts: 'rolldown',
   extract: {
@@ -50,7 +50,9 @@ export default defineConfig({
     noImplicitBrowsersList: 'off',
   },
   tsconfig: 'tsconfig.dist.json',
-})
+}
+
+export default config
 
 function dashCase(str: string): string {
   return str

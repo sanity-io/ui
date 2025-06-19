@@ -8,7 +8,7 @@ function test<ElementType = unknown>(
   return {name: title, run}
 }
 
-export const perfTests = [
+export const perfTests: PerfTestProps<HTMLDivElement>[] = [
   test('Toggle tree groups', async ({target}: {target: HTMLDivElement}) => {
     const apples = await findByTestId(target, 'apples')
     const oranges = await findByTestId(target, 'oranges')

@@ -3,7 +3,7 @@ import {useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_AVATAR_SIZE_OPTIONS} from '$workshop'
 
-export default function AsButtonStory() {
+export default function AsButtonStory(): React.JSX.Element {
   const size = useSelect('Size', WORKSHOP_AVATAR_SIZE_OPTIONS, 1)
 
   return (

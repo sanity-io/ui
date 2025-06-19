@@ -9,7 +9,7 @@ const ITEMS = [...Array(8).keys()].map((num) => ({
 
 const OPTIONS = {first: 'first', last: 'last'}
 
-export default function ShouldFocusStory() {
+export default function ShouldFocusStory(): React.JSX.Element {
   const shouldFocus = useSelect<keyof typeof OPTIONS>('Should focus', OPTIONS, 'first')
 
   const [popoverOpen, setPopoverOpen] = useState<boolean>(false)

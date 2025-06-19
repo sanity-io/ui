@@ -208,7 +208,7 @@ export default ts.config(
               {from: 'src/css', allow: ['@sanity/ui/theme', 'src/css']},
               {from: 'src/theme', allow: ['src/theme']},
 
-              {from: 'test', allow: ['@sanity/ui', '@sanity/ui/css', '@sanity/ui/theme']},
+              {from: 'test', allow: ['@sanity/ui', '@sanity/ui/css', '@sanity/ui/theme', 'test']},
               {from: 'test/storybook', allow: ['src/core', 'src/theme', 'test/storybook']},
             ],
           },

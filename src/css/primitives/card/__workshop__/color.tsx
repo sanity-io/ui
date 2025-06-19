@@ -3,12 +3,12 @@
 import {Box, Card, Code} from '@sanity/ui'
 import {vars} from '@sanity/ui/css'
 import {
+  CARD_TONES,
+  type CardTone,
+  COLOR_SCHEMES,
   COLOR_VARIANTS,
-  THEME_COLOR_CARD_TONES,
-  THEME_COLOR_SCHEMES,
-  type ThemeColorCardToneKey,
-  type ThemeColorSchemeKey,
-  type ThemeColorVariantKey,
+  type ColorScheme,
+  type ColorVariant,
 } from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 import {useState} from 'react'
@@ -19,7 +19,7 @@ interface ColorRecordNode extends Record<string, ColorNode> {}
 
 type ColorNode = string | ColorRecordNode
 
-export default function ColorStory() {
+export default function ColorStory(): React.JSX.Element {
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
 
   return (
@@ -29,15 +29,15 @@ export default function ColorStory() {
           return null
         }
 
-        if (THEME_COLOR_SCHEMES.includes(key as ThemeColorSchemeKey)) {
+        if (COLOR_SCHEMES.includes(key as ColorScheme)) {
           return null
         }
 
-        if (THEME_COLOR_CARD_TONES.includes(key as ThemeColorCardToneKey)) {
+        if (CARD_TONES.includes(key as CardTone)) {
           return null
         }
 
-        if (COLOR_VARIANTS.includes(key as ThemeColorVariantKey)) {
+        if (COLOR_VARIANTS.includes(key as ColorVariant)) {
           // return null
         }
 

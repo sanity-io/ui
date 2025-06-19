@@ -4,7 +4,7 @@ import {useCallback, useState} from 'react'
 
 import {WORKSHOP_TEXT_INPUT_TYPE_OPTIONS} from '$workshop'
 
-export default function TypedStory() {
+export default function TypedStory(): React.JSX.Element {
   const type = useSelect('Type', WORKSHOP_TEXT_INPUT_TYPE_OPTIONS, 'text')
 
   const [value, setValue] = useState('')

@@ -13,7 +13,7 @@ import {
 import {useCallback, useState} from 'react'
 import {styled} from 'styled-components'
 
-export default function PanesStory() {
+export default function PanesStory(): React.JSX.Element {
   return (
     <Flex height="fill">
       <Pane id="A" />

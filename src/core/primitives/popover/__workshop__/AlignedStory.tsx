@@ -10,7 +10,7 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
 } from '$workshop'
 
-export default function AlignedStory() {
+export default function AlignedStory(): React.JSX.Element {
   const constrainSize = useBoolean('Constrain size', false)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS)
   const portal = useBoolean('Portal', true)

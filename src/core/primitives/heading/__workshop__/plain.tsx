@@ -7,7 +7,7 @@ import {
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
 } from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const muted = useBoolean('Muted', false)
   const size = useSelect('Size', WORKSHOP_HEADING_FONT_SIZE_OPTIONS, 2)
   const textChild = useText('Text', 'Hello, world')

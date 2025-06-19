@@ -3,7 +3,7 @@ import {Box, Stack, Text} from '@sanity/ui'
 import {vars} from '@sanity/ui/css'
 import {FONT_TEXT_SIZE} from '@sanity/ui/theme'
 
-export default function OpticalAlignment() {
+export default function OpticalAlignment(): React.JSX.Element {
   return (
     <Stack gap={4} padding={[4, 5, 6]}>
       {FONT_TEXT_SIZE.map((size) => (

@@ -29,7 +29,7 @@ const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   },
 }
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const {ref, Wrapper} = usePerfTest(typingPerfTest)
 
   return (

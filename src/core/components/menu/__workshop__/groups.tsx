@@ -25,7 +25,7 @@ const NESTED_POPOVER_PROPS: MenuButtonProps['popover'] = {
   preventOverflow: true,
 }
 
-export default function GroupsStory() {
+export default function GroupsStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Card padding={1} radius={3} shadow={1}>

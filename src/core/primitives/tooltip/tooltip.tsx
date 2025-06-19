@@ -9,7 +9,7 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {type RadiusStyleProps, type ShadowStyleProps, tooltip} from '@sanity/ui/css'
-import type {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {CardTone, ColorScheme} from '@sanity/ui/theme'
 import {AnimatePresence} from 'framer-motion'
 import {
   cloneElement,
@@ -88,8 +88,8 @@ export type TooltipOwnProps = LayerOwnProps &
     placement?: Placement
     /** Whether or not to render the tooltip in a portal element. */
     portal?: boolean | string
-    scheme?: ThemeColorSchemeKey
-    tone?: ThemeColorCardToneKey
+    scheme?: ColorScheme
+    tone?: CardTone
   }
 
 /** @public */

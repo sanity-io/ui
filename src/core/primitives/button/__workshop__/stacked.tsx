@@ -11,7 +11,7 @@ import {
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
 } from '$workshop'
 
-export default function StackedStory() {
+export default function StackedStory(): React.JSX.Element {
   const tones = Object.entries(WORKSHOP_BUTTON_TONE_OPTIONS)
   const disabled = useBoolean('Disabled', false)
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2)

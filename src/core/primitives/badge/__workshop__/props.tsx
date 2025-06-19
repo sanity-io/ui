@@ -3,7 +3,7 @@ import {useAction, useSelect, useText} from '@sanity/ui-workshop'
 
 import {WORKSHOP_BADGE_TONE_OPTIONS, WORKSHOP_SPACE_OPTIONS} from '$workshop'
 
-export default function PropsStory() {
+export default function PropsStory(): React.JSX.Element {
   const paddingX = useSelect('Padding X', WORKSHOP_SPACE_OPTIONS, 1)
   const paddingY = useSelect('Padding Y', WORKSHOP_SPACE_OPTIONS, 1)
   const tone = useSelect('Tone', WORKSHOP_BADGE_TONE_OPTIONS, 'default')

@@ -1,7 +1,7 @@
 import {Box, Button, Dialog, LayerProvider, Menu, MenuButton, MenuItem} from '@sanity/ui'
 import {useEffect, useRef, useState} from 'react'
 
-export default function NestedStory() {
+export default function NestedStory(): React.JSX.Element {
   const [open1] = useState(true)
   const [open2, setOpen2] = useState(false)
   const [open3, setOpen3] = useState(false)

@@ -3,7 +3,7 @@ import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_RADIUS_OPTIONS, WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const border = useBoolean('Border', true)
   const disabled = useBoolean('Disabled', false)
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)

@@ -12,10 +12,10 @@ import {
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
-import countries from './mock/countries'
+import {countries} from './mock/countries'
 import type {ExampleOption} from './types'
 
-export default function ConstrainedHeightStory() {
+export default function ConstrainedHeightStory(): React.JSX.Element {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (

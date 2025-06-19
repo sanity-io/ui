@@ -1,13 +1,3 @@
-// compat
-export * from './_compat/helpers'
-export * from './_compat/styles/_responsive'
-export * from './_compat/theme/themeColorProvider'
-export * from './_compat/theme/themeProvider'
-export * from './_compat/theme/types'
-export * from './_compat/theme/useRootTheme'
-export * from './_compat/theme/useTheme'
-export * from './_compat/types'
-
 // components
 export * from './components/autocomplete/autocomplete'
 export * from './components/autocomplete/types'

@@ -1,6 +1,6 @@
 import {Box, Card, LayerProvider, Menu, MenuDivider, MenuItem, Stack, Text} from '@sanity/ui'
 
-export default function CustomMenuItemStory() {
+export default function CustomMenuItemStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Card radius={3} shadow={2}>

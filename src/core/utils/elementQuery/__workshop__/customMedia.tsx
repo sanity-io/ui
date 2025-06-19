@@ -24,7 +24,7 @@ const TestCard = styled(Card)`
   }
 `
 
-export default function CustomMediaQuery() {
+export default function CustomMediaQuery(): React.JSX.Element {
   return (
     <Box padding={4}>
       <Box marginBottom={4}>

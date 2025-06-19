@@ -1,7 +1,7 @@
 import {Button, Flex} from '@sanity/ui'
 import {useCallback, useRef} from 'react'
 
-export default function UploadButtonStory() {
+export default function UploadButtonStory(): React.JSX.Element {
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const handleKeyDown = useCallback((event: React.KeyboardEvent) => {

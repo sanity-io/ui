@@ -1,7 +1,7 @@
 import {AddCircleIcon} from '@sanity/icons'
 import {Box, Card, Flex, Heading, Stack} from '@sanity/ui'
 
-export default function OpticalAlignment() {
+export default function OpticalAlignment(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Stack gap={1}>

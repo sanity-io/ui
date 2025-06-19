@@ -1,9 +1,9 @@
-import {defineRuntime} from '@sanity/ui-workshop/runtime'
+import {type WorkshopRuntimeOptions} from '@sanity/ui-workshop/runtime'
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import path from 'path'
 import {mergeConfig} from 'vite'
 
-export default defineRuntime({
+const runtime: WorkshopRuntimeOptions = {
   vite: (viteConfig) => {
     return mergeConfig(viteConfig, {
       optimizeDeps: {
@@ -22,4 +22,6 @@ export default defineRuntime({
       },
     })
   },
-})
+}
+
+export default runtime

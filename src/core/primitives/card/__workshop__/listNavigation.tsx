@@ -1,6 +1,6 @@
 import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
 
-export default function ListNavigationStory() {
+export default function ListNavigationStory(): React.JSX.Element {
   return (
     <Box height="fill" padding={[3, 4, 5]} sizing="border">
       <Card height="fill" shadow={1}>

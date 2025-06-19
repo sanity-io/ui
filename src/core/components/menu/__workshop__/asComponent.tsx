@@ -15,7 +15,7 @@ const CustomLink = forwardRef(function CustomLink(
   )
 })
 
-export default function AsComponentStory() {
+export default function AsComponentStory(): React.JSX.Element {
   const props = {href: '#'}
 
   return (

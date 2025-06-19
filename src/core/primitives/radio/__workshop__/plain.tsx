@@ -1,7 +1,7 @@
 import {Flex, Radio} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const checked = useBoolean('Checked', false)
   const disabled = useBoolean('Disabled', false)
   const id = 'radioStory'

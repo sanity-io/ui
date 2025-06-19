@@ -1,4 +1,4 @@
-import {defineConfig} from '@sanity/ui-workshop'
+import {type WorkshopConfigOptions} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
 import {registerLanguage} from 'react-refractor'
 import javascript from 'refractor/javascript'
@@ -13,7 +13,7 @@ registerLanguage(json)
 registerLanguage(jsx)
 registerLanguage(typescript)
 
-export default defineConfig({
+const config: WorkshopConfigOptions = {
   collections: [
     {
       name: 'css',
@@ -38,4 +38,6 @@ export default defineConfig({
   ],
   plugins: [perfPlugin()],
   title: pkg.name,
-})
+}
+
+export default config

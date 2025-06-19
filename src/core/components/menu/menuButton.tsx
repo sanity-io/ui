@@ -1,4 +1,4 @@
-import type {Radius, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ColorScheme, Radius} from '@sanity/ui/theme'
 import {
   cloneElement,
   type FocusEvent,
@@ -43,7 +43,7 @@ export type MenuButtonProps = {
   /**
    * @deprecated Use `popover={{scheme: 'dark'}}` instead.
    */
-  popoverScheme?: ThemeColorSchemeKey
+  popoverScheme?: ColorScheme
   /**
    * @deprecated Use `popover={{radius: 2}}` instead.
    */

@@ -1,5 +1,5 @@
 import {_selectable, type SelectableStyleProps} from '@sanity/ui/css'
-import type {ThemeColorStateToneKey} from '@sanity/ui/theme'
+import type {ElementTone} from '@sanity/ui/theme'
 
 import type {ComponentType, Props} from '../../types/props'
 import {Box, type BoxOwnProps} from '../box/box'
@@ -13,7 +13,7 @@ export type SelectableOwnProps = BoxOwnProps &
     disabled?: boolean
     href?: string
     selected?: boolean
-    tone?: ThemeColorStateToneKey
+    tone?: ElementTone
     type?: 'button'
   }
 

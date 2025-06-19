@@ -1,7 +1,7 @@
 import {Box, Button, Dialog, type DialogProps, LayerProvider, useLayer} from '@sanity/ui'
 import {type ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 
-export default function WrappedStory() {
+export default function WrappedStory(): React.JSX.Element {
   return (
     <LayerProvider zOffset={100}>
       <Box padding={4}>

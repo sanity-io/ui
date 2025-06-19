@@ -2,7 +2,6 @@ import {
   BoundaryElementProvider,
   Box,
   Card,
-  type CardTone,
   Flex,
   Popover,
   type PopoverProps,
@@ -10,6 +9,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
+import type {CardTone} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
@@ -22,7 +22,7 @@ const SIDE_PANEL_WIDTH = {
   xl: 600,
 }
 
-export default function SidePanelStory() {
+export default function SidePanelStory(): React.JSX.Element {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
@@ -58,7 +58,7 @@ export default function SidePanelStory() {
   )
 }
 
-function InlineObject(props: {tone: CardTone; updateRef?: PopoverProps['updateRef']}) {
+function InlineObject(props: {tone: CardTone | 'inherit'; updateRef?: PopoverProps['updateRef']}) {
   const {tone, updateRef} = props
   const [open, setOpen] = useState(false)
 

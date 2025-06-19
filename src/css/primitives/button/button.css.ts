@@ -1,9 +1,4 @@
-import {
-  AVATAR_COLORS,
-  THEME_COLOR_STATE_TONES,
-  type ThemeColorButtonModeKey,
-  type ThemeColorStateToneKey,
-} from '@sanity/ui/theme'
+import {AVATAR_COLORS, type ButtonMode, ELEMENT_TONES, type ElementTone} from '@sanity/ui/theme'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_style} from '../../_style.css'
@@ -50,7 +45,7 @@ export const root: string = _style(layers.primitives, {
   },
 })
 
-export const modes: Record<ThemeColorButtonModeKey, string> = {
+export const modes: Record<ButtonMode, string> = {
   default: _style(layers.primitives, {}),
   ghost: _style(layers.primitives, {boxShadow: vars.button.boxShadow}),
   bleed: _style(layers.primitives, {}),
@@ -68,9 +63,9 @@ export const loadingBox: string = _style(layers.primitives, {
   opacity: 0.8,
 })
 
-export const tones: Record<ThemeColorStateToneKey, string> = {
+export const tones: Record<ElementTone, string> = {
   ..._fromEntries(
-    THEME_COLOR_STATE_TONES.map((t) => {
+    ELEMENT_TONES.map((t) => {
       const solid = vars.color.solid[t]
       const tinted = vars.color.tinted[t]
 

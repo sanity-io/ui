@@ -36,6 +36,10 @@ function _createMediaStore(): _MediaStore {
   // However since subscribe and getSnapshot are only called on the client we lazy init what we need for them
   // so that we don't need to run checks for wether it's safe to call `window.matchMedia`
   const getSizes = () => {
+    if (typeof window === 'undefined') {
+      return []
+    }
+
     if (!sizes) {
       sizes = []
 

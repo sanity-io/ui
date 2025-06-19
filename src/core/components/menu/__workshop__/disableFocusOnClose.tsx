@@ -7,7 +7,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   matchReferenceWidth: true,
 }
 
-export default function DisableFocusOnCloseStory() {
+export default function DisableFocusOnCloseStory(): React.JSX.Element {
   const disableRestoreFocusOnClose = useBoolean('Disable restore focus on close', false)
 
   return (

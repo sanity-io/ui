@@ -1,4 +1,4 @@
-import {parseColor} from '@sanity/ui/theme'
+// import {parseColor} from '@sanity/ui/theme'
 
 import type {FigmaSanityUIColorVariable} from './types'
 
