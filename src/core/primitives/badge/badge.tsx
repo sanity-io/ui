@@ -1,21 +1,20 @@
-import type {PaddingStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import {badge} from '@sanity/ui/css'
-import type {FontTextSize} from '@sanity/ui/theme'
+import {
+  badge,
+  type BadgeStyleProps,
+  type FlexStyleProps,
+  type PaddingStyleProps,
+  type RadiusStyleProps,
+} from '@sanity/ui/css'
 
 import type {ComponentType, Props} from '../../types/props'
 import {Box} from '../box/box'
 import {Text} from '../text/text'
-import type {BadgeTone} from './types'
 
 /** @public */
 export const DEFAULT_BADGE_ELEMENT = 'span'
 
 /** @public */
-export type BadgeOwnProps = PaddingStyleProps &
-  RadiusStyleProps & {
-    fontSize?: ResponsiveProp<FontTextSize>
-    tone?: BadgeTone
-  }
+export type BadgeOwnProps = BadgeStyleProps & FlexStyleProps & PaddingStyleProps & RadiusStyleProps
 
 /** @public */
 export type BadgeElementType = 'div' | 'span' | ComponentType
@@ -35,6 +34,7 @@ export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>
     as = DEFAULT_BADGE_ELEMENT,
     children,
     className,
+    flex = 'none',
     fontSize = 1,
     padding = 1,
     radius = 2,
@@ -48,6 +48,7 @@ export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>
       {...rest}
       as={as}
       className={badge({className, tone})}
+      flex={flex}
       display="flex"
       maxWidth="fill"
       padding={padding}

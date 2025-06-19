@@ -1,10 +1,4 @@
-import type {
-  BoxStyleProps,
-  GapStyleProps,
-  InsetStyleProps,
-  PositionStyleProps,
-} from '@sanity/ui/css'
-import {box} from '@sanity/ui/css'
+import {box, type BoxStyleProps} from '@sanity/ui/css'
 
 import type {ComponentType, Props} from '../../types/props'
 
@@ -12,7 +6,7 @@ import type {ComponentType, Props} from '../../types/props'
 export const DEFAULT_BOX_ELEMENT = 'div'
 
 /** @public */
-export type BoxOwnProps = BoxStyleProps & GapStyleProps & InsetStyleProps & PositionStyleProps
+export type BoxOwnProps = BoxStyleProps
 
 /** @public */
 export type BoxElementType =
