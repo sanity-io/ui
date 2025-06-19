@@ -1,6 +1,6 @@
 import {menuDivider} from '@sanity/ui/css'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_MENU_DIVIDER_ELEMENT = 'hr'

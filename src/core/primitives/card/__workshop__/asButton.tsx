@@ -8,7 +8,7 @@ export default function AsButtonStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Container>
-        <Grid columns={3} gap={1}>
+        <Grid gridTemplateColumns={3} gap={1}>
           <Box>
             <Text align="center" size={1} weight="medium">
               Enabled

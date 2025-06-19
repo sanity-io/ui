@@ -27,7 +27,7 @@ import {Card, type CardElementType, type CardOwnProps} from '../../primitives/ca
 import {Flex} from '../../primitives/flex/flex'
 import {useLayer} from '../../primitives/layer/useLayer'
 import {Text} from '../../primitives/text/text'
-import type {Props} from '../../types/props'
+import type {Props} from '../../types'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {usePortal} from '../../utils/portal/usePortal'
 import {isTargetWithinScope} from './isTargetWithinScope'

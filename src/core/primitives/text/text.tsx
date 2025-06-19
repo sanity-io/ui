@@ -1,6 +1,6 @@
 import {text, textOverflow, type TextOverflowStyleProps, type TextStyleProps} from '@sanity/ui/css'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_TEXT_ELEMENT = 'div'
@@ -35,7 +35,6 @@ export function Text<E extends TextElementType = typeof DEFAULT_TEXT_ELEMENT>(
   props: TextProps<E>,
 ): React.JSX.Element {
   const {
-    accent,
     align,
     as: Element = DEFAULT_TEXT_ELEMENT,
     children,
@@ -55,7 +54,6 @@ export function Text<E extends TextElementType = typeof DEFAULT_TEXT_ELEMENT>(
       {...rest}
       className={text({
         className,
-        accent,
         align,
         flex,
         maxWidth,

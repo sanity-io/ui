@@ -5,7 +5,7 @@ import {
   type TextOverflowStyleProps,
 } from '@sanity/ui/css'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_HEADING_ELEMENT = 'div'
@@ -41,7 +41,6 @@ export function Heading<E extends HeadingElementType = typeof DEFAULT_HEADING_EL
   props: HeadingProps<E>,
 ): React.JSX.Element {
   const {
-    accent = false,
     align,
     as: Element = DEFAULT_HEADING_ELEMENT,
     children,
@@ -60,7 +59,6 @@ export function Heading<E extends HeadingElementType = typeof DEFAULT_HEADING_EL
       {...rest}
       className={heading({
         className,
-        accent,
         align,
         flex,
         muted,

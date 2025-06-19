@@ -11,10 +11,6 @@ export type TextSize = number
 
 /** @public */
 export interface TextStyleProps extends FlexStyleProps, FontStyleProps, MaxWidthStyleProps {
-  /**
-   * @deprecated Will be removed in next major version
-   */
-  accent?: boolean
   align?: TextAlignStyleProps['textAlign']
   className?: string
   muted?: boolean

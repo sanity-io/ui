@@ -11,7 +11,7 @@ import {
 } from 'react'
 
 import {Button} from '../../primitives/button/button'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_TAB_ELEMENT = 'button'

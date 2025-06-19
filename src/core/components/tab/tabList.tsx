@@ -1,5 +1,3 @@
-import {type ResponsiveProp} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
 import {
   Children,
   cloneElement,
@@ -10,7 +8,7 @@ import {
 } from 'react'
 
 import {Flex, type FlexOwnProps} from '../../primitives/flex/flex'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import type {TabProps} from './tab'
 
 /** @public */
@@ -22,8 +20,6 @@ export type TabListChild = ReactElement<Props<TabProps, 'button'>> | null | unde
 /** @public */
 export type TabListOwnProps = Omit<FlexOwnProps, 'as' | 'height'> & {
   children: TabListChild[]
-  /** @deprecated Use `gap` instead */
-  space?: ResponsiveProp<Space>
 }
 
 /** @public */
@@ -43,7 +39,6 @@ export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_E
     as = DEFAULT_TAB_LIST_ELEMENT,
     children: childrenProp,
     gap = 1,
-    space = 1,
     wrap = 'nowrap',
     ...rest
   } = props as TabListProps<typeof DEFAULT_TAB_LIST_ELEMENT>
@@ -80,7 +75,7 @@ export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_E
       data-ui="TabList"
       {...rest}
       as={as}
-      gap={gap ?? space}
+      gap={gap}
       onKeyDown={handleKeyDown}
       role="tablist"
       wrap={wrap}

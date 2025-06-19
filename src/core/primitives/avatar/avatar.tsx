@@ -10,10 +10,10 @@ import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/theme'
 import {useCallback, useEffect, useMemo, useState} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/box'
 import {Label} from '../label/label'
-import type {AvatarPosition, AvatarStatus} from './types'
+import type {AvatarPosition} from './types'
 
 /** @public */
 export const DEFAULT_AVATAR_ELEMENT = 'span'
@@ -29,11 +29,6 @@ export interface AvatarOwnProps {
   onImageLoadError?: (event: Error) => void
   size?: ResponsiveProp<AvatarSize>
   src?: string
-  /**
-   * The status of the entity this Avatar represents.
-   * @deprecated Will be removed in next major version.
-   */
-  status?: AvatarStatus
   title?: string
 }
 
@@ -62,8 +57,6 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
     onImageLoadError,
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    status = 'online',
     size: sizeProp = 1,
     ...rest
   } = props as AvatarProps<typeof DEFAULT_AVATAR_ELEMENT>

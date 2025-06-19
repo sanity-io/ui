@@ -2,7 +2,7 @@ import {type GapStyleProps, type PaddingStyleProps, toastLayer} from '@sanity/ui
 
 import {Grid} from '../../primitives/grid/grid'
 import {useLayer} from '../../primitives/layer/useLayer'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @internal */
 export const DEFAULT_TOAST_LAYER_ELEMENT = 'ul'
@@ -45,7 +45,7 @@ export function ToastLayer<E extends ToastLayerElementType = typeof DEFAULT_TOAS
       paddingX={paddingX}
       paddingY={paddingY}
       gap={gap}
-      columns={1}
+      gridTemplateColumns={1}
       style={{zIndex}}
     >
       {children}

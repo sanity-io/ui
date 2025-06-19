@@ -6,9 +6,9 @@ export default function ResponsiveStory(): React.JSX.Element {
       <Container width="auto">
         <Grid
           id="responsive-grid"
-          columns={[1, 2, 3, 4, 5, 6, 7]}
           gap={[0, 1, 2, 3, 4, 5, 6]}
-          rows={[1, 2, 3, 4, 5, 6, 7]}
+          gridTemplateColumns={[1, 2, 3, 4, 5, 6, 7]}
+          gridTemplateRows={[1, 2, 3, 4, 5, 6, 7]}
           style={{textAlign: 'center'}}
         >
           <Card padding={[1, 2, 3]} tone="neutral">

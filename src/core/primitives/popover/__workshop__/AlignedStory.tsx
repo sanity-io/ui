@@ -51,9 +51,9 @@ export default function AlignedStory(): React.JSX.Element {
       <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
         <Flex align={flexAlign} height="fill" justify={flexJustify}>
           <Popover
-            boundaryElement={boundaryElement}
             constrainSize={constrainSize}
             content={content}
+            floatingBoundary={boundaryElement}
             open={open}
             overflow="auto"
             padding={3}

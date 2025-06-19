@@ -1,16 +1,9 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import {
-  _inputElement,
-  type ResponsiveProp,
-  select,
-  selectPresentation,
-  type SelectStyleProps,
-} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
+import {_inputElement, select, selectPresentation, type SelectStyleProps} from '@sanity/ui/css'
 import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/box'
 import {Text} from '../text/text'
 
@@ -21,8 +14,6 @@ export const DEFAULT_SELECT_ELEMENT = 'select'
 export type SelectOwnProps = SelectStyleProps & {
   customValidity?: string
   readOnly?: boolean
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
 }
 
 /** @public */
@@ -46,12 +37,11 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
     customValidity,
     disabled,
     fontSize = 2,
-    gap,
+    gap = 2,
     padding = 3,
     radius = 1,
     readOnly,
     ref: forwardedRef,
-    space = 2,
     ...rest
   } = props as SelectProps<typeof DEFAULT_SELECT_ELEMENT>
 
@@ -67,7 +57,7 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
   return (
     <div
       data-ui="Select"
-      className={select({border, fontSize, padding, radius, gap: gap ?? space})}
+      className={select({border, fontSize, gap, padding, radius})}
       data-icon-right=""
     >
       <Element {...rest} className={_inputElement()} disabled={disabled || readOnly} ref={ref}>

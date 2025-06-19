@@ -4,5 +4,5 @@ import type {GridTemplateRowsStyleProps} from './types'
 
 /** @public */
 export function gridTemplateRows(props: GridTemplateRowsStyleProps): string | undefined {
-  return _responsiveClassName(options, props.gridTemplateRows ?? props.rows)
+  return _responsiveClassName(options, props.gridTemplateRows)
 }

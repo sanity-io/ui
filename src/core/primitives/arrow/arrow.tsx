@@ -2,7 +2,7 @@ import {_arrow, _arrowShape, _arrowStroke, _arrowStrokeMask, _arrowSvg, vars} fr
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {useMemo} from 'react'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {compileCommands, getRoundedCommands, type Point} from './cmds'
 
 /** @internal */

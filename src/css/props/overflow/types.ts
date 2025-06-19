@@ -3,12 +3,6 @@ import type {ResponsiveProp} from '../../types'
 /** @public */
 export type Overflow = 'visible' | 'hidden' | 'auto'
 
-/**
- * @public
- * @deprecated Use `Overflow` instead.
- */
-export type BoxOverflow = 'visible' | 'hidden' | 'auto'
-
 /** @public */
 export interface OverflowStyleProps {
   overflow?: ResponsiveProp<Overflow>

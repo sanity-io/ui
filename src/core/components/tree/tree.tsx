@@ -12,7 +12,7 @@ import {
 } from 'react'
 
 import {Stack} from '../../primitives/stack/stack'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './treeContext'
 import type {TreeContextValue, TreeState} from './types'
@@ -26,8 +26,6 @@ export const DEFAULT_TREE_ELEMENT = 'div'
  */
 export type TreeOwnProps = {
   gap?: ResponsiveProp<Space>
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
 }
 
 /** @beta */
@@ -45,8 +43,7 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
 ): React.JSX.Element {
   const {
     children,
-    gap,
-    space = 1,
+    gap = 1,
     onFocus,
     ref: forwardedRef,
     ...rest
@@ -105,15 +102,15 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
     () => ({
       version: 0.0,
       focusedElement: focusedElement || itemElements[0] || null,
+      gap,
       level: 0,
       path,
       registerItem,
       setExpanded,
       setFocusedElement,
-      space,
       state,
     }),
-    [focusedElement, itemElements, path, registerItem, setExpanded, space, state],
+    [focusedElement, gap, itemElements, path, registerItem, setExpanded, state],
   )
 
   const handleKeyDown = useCallback(
@@ -238,7 +235,7 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
         as="ul"
         data-ui="Tree"
         {...rest}
-        gap={gap ?? space}
+        gap={gap}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         ref={ref}

@@ -34,8 +34,7 @@ import {Z_OFFSETS} from '../../constants'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
-import type {Placement} from '../../types/placement'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Delay, Placement, Props} from '../../types'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/portal'
@@ -43,7 +42,6 @@ import {usePortal} from '../../utils/portal/usePortal'
 import {CardProvider} from '../card/cardProvider'
 import {useCard} from '../card/useCard'
 import type {LayerOwnProps} from '../layer/layer'
-import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DISTANCE,
@@ -59,8 +57,6 @@ export const DEFAULT_TOOLTIP_ELEMENT = 'div'
 export type TooltipOwnProps = LayerOwnProps &
   RadiusStyleProps &
   ShadowStyleProps & {
-    /** @deprecated Use `fallbackPlacements` instead. */
-    allowedAutoPlacements?: Placement[]
     /**
      * Whether the tooltip should animate in and out.
      *

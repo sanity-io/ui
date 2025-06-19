@@ -13,16 +13,6 @@ export interface MenuContextValue {
   onItemMouseEnter?: (event: ReactMouseEvent<HTMLElement>) => void
   onItemMouseLeave?: (event: ReactMouseEvent<HTMLElement>) => void
   registerElement?: (el: HTMLElement) => () => void
-
-  /**
-   * @deprecated Use `onItemMouseEnter` instead
-   */
-  onMouseEnter: (event: ReactMouseEvent<HTMLElement>) => void
-
-  /**
-   * @deprecated Use `onItemMouseLeave` instead
-   */
-  onMouseLeave: (event: ReactMouseEvent<HTMLElement>) => void
 }
 
 export const MenuContext: Context<MenuContextValue | null> =

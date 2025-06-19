@@ -1,4 +1,3 @@
-import type {ColorScheme, Radius} from '@sanity/ui/theme'
 import {
   cloneElement,
   type FocusEvent,
@@ -16,8 +15,7 @@ import {
 
 import type {ButtonProps} from '../../primitives/button/button'
 import {Popover, type PopoverProps} from '../../primitives/popover/popover'
-import type {Placement} from '../../types/placement'
-import type {Props} from '../../types/props'
+import type {Props} from '../../types'
 import type {MenuProps} from './menu'
 
 /** @public */
@@ -26,37 +24,13 @@ export type MenuButtonProps = {
    * @beta Do not use in production.
    */
   __unstable_disableRestoreFocusOnClose?: boolean
-  /**
-   * @deprecated Use `popover={{boundaryElement: element}}` instead.
-   */
-  boundaryElement?: HTMLElement
   button: ReactElement<ButtonProps>
   id: string
   menu?: ReactElement
   onClose?: () => void
   onOpen?: () => void
-  /**
-   * @deprecated Use `popover={{placement: 'top'}}` instead.
-   */
-  placement?: Placement
   popover?: Omit<PopoverProps, 'content' | 'open'>
-  /**
-   * @deprecated Use `popover={{scheme: 'dark'}}` instead.
-   */
-  popoverScheme?: ColorScheme
-  /**
-   * @deprecated Use `popover={{radius: 2}}` instead.
-   */
-  popoverRadius?: Radius | Radius[]
-  /**
-   * @beta Do not use in production.
-   * @deprecated Use `popover={{portal: true}}` instead.
-   */
-  portal?: boolean
-  /**
-   * @deprecated Use `popover={{preventOverflow: true}}` instead.
-   */
-  preventOverflow?: boolean
+
   ref?: ForwardedRef<HTMLButtonElement | null>
 }
 
@@ -68,18 +42,12 @@ export type MenuButtonProps = {
 export function MenuButton(props: MenuButtonProps): React.JSX.Element {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
-    boundaryElement: deprecated_boundaryElement,
     button: buttonProp,
     id,
     menu: menuProp,
     onClose,
     onOpen,
-    placement: deprecated_placement,
-    popoverScheme: deprecated_popoverScheme,
-    portal: deprecated_portal = true,
     popover,
-    popoverRadius: deprecated_popoverRadius,
-    preventOverflow: deprecated_preventOverflow,
     ref: forwardedRef,
   } = props
   const [open, setOpen] = useState(false)
@@ -243,24 +211,10 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
     () => ({
-      boundaryElement: deprecated_boundaryElement,
       overflow: 'auto',
-      placement: deprecated_placement,
-      portal: deprecated_portal,
-      preventOverflow: deprecated_preventOverflow,
-      radius: deprecated_popoverRadius,
-      scheme: deprecated_popoverScheme,
       ...(popover || {}),
     }),
-    [
-      deprecated_boundaryElement,
-      deprecated_placement,
-      deprecated_popoverRadius,
-      deprecated_popoverScheme,
-      deprecated_portal,
-      deprecated_preventOverflow,
-      popover,
-    ],
+    [popover],
   )
 
   return (

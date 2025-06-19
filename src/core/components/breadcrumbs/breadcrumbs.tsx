@@ -1,5 +1,4 @@
 import {breadcrumbs, type GapStyleProps} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
 import {
   Children,
   Fragment,
@@ -18,7 +17,7 @@ import {Flex} from '../../primitives/flex/flex'
 import {Popover} from '../../primitives/popover/popover'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @beta */
 export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'
@@ -28,8 +27,6 @@ export type BreadcrumbsOwnProps = GapStyleProps & {
   expandButton?: Omit<ButtonProps<'button'>, 'as' | 'onClick' | 'selected'>
   maxLength?: number
   separator?: ReactNode
-  /** @deprecated - Use `gap`, `gapX`, `gapY` instead */
-  space?: number | number[]
 }
 
 /** @beta */
@@ -50,14 +47,11 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
     children,
     className,
     expandButton: expandButtonProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    gap: _gapProp,
-    gapX = props.gap ?? (props.space as Space | undefined) ?? 2,
-    gapY = props.gap ?? (props.space as Space | undefined) ?? 2,
+    gap = 2,
+    gapX,
+    gapY,
     maxLength,
     separator,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    space: _spaceProp,
     ...rest
   } = props as BreadcrumbsProps<typeof DEFAULT_BREADCRUMBS_ELEMENT>
 
@@ -118,6 +112,7 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
       data-ui="Breadcrumbs"
       {...rest}
       className={breadcrumbs({className})}
+      gap={gap}
       gapX={gapX}
       gapY={gapY}
     >

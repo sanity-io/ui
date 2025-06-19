@@ -6,7 +6,7 @@ import type {
   ResponsiveProp,
 } from '@sanity/ui/css'
 
-import type {Props} from '../../types/props'
+import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
 /** @public */

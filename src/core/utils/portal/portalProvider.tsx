@@ -5,10 +5,6 @@ import type {PortalContextValue} from './types'
 
 /** @public */
 export interface PortalProviderProps {
-  /**
-   * @deprecated Use `<BoundaryElementProvider element={...} />` instead
-   */
-  boundaryElement?: HTMLElement | null
   children: ReactNode
   element?: HTMLElement | null
   /**
@@ -19,7 +15,7 @@ export interface PortalProviderProps {
 
 /** @public */
 export function PortalProvider(props: PortalProviderProps): ReactElement {
-  const {boundaryElement, children, element, __unstable_elements: elementsProp} = props
+  const {children, element, __unstable_elements: elementsProp} = props
   const elements = useUnique(elementsProp)
   const fallbackElement = useSyncExternalStore(
     emptySubscribe,
@@ -30,11 +26,11 @@ export function PortalProvider(props: PortalProviderProps): ReactElement {
   const value: PortalContextValue = useMemo(() => {
     return {
       version: 0.0,
-      boundaryElement: boundaryElement || null,
+      boundaryElement: null,
       element: element || fallbackElement,
       elements,
     }
-  }, [boundaryElement, element, elements, fallbackElement])
+  }, [element, elements, fallbackElement])
 
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>
 }

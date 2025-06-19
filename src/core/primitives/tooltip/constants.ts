@@ -1,4 +1,4 @@
-import type {Placement} from '../../types/placement'
+import type {Placement} from '../../types'
 
 export const DEFAULT_TOOLTIP_ARROW_WIDTH = 15
 export const DEFAULT_TOOLTIP_ARROW_HEIGHT = 6

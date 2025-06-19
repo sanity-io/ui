@@ -1,7 +1,7 @@
 import {labelSkeleton, type ResponsiveProp} from '@sanity/ui/css'
 import type {FontLabelSize} from '@sanity/ui/theme'
 
-import type {Props} from '../../types/props'
+import type {Props} from '../../types'
 import {Skeleton, type SkeletonElementType, type SkeletonOwnProps} from './skeleton'
 
 /** @beta */

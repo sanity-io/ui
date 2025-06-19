@@ -5,7 +5,7 @@ import {
   type TextOverflowStyleProps,
 } from '@sanity/ui/css'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_LABEL_ELEMENT = 'div'
@@ -40,7 +40,6 @@ export function Label<E extends LabelElementType = typeof DEFAULT_LABEL_ELEMENT>
   props: LabelProps<E>,
 ): React.JSX.Element {
   const {
-    accent,
     align,
     as: Element = DEFAULT_LABEL_ELEMENT,
     children,
@@ -58,7 +57,6 @@ export function Label<E extends LabelElementType = typeof DEFAULT_LABEL_ELEMENT>
       {...rest}
       className={label({
         className,
-        accent,
         align,
         muted,
         size,

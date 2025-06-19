@@ -1,15 +1,8 @@
-import {
-  _inputElement,
-  _inputPresentation,
-  type ResponsiveProp,
-  textArea,
-  type TextAreaStyleProps,
-} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
+import {_inputElement, _inputPresentation, textArea, type TextAreaStyleProps} from '@sanity/ui/css'
 import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_TEXT_AREA_ELEMENT = 'textarea'
@@ -21,8 +14,6 @@ export type TextAreaOwnProps = TextAreaStyleProps & {
    */
   __unstable_disableFocusRing?: boolean
   customValidity?: string
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
 }
 
 /** @public */
@@ -49,12 +40,11 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
     customValidity,
     disabled = false,
     fontSize = 2,
-    gap,
+    gap = 3,
     padding = 3,
     radius = 2,
     readOnly,
     ref: forwardedRef,
-    space = 3,
     ...rest
   } = props as TextAreaProps<typeof DEFAULT_TEXT_AREA_ELEMENT>
 
@@ -74,7 +64,7 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
         fontSize,
         padding,
         radius,
-        gap: gap ?? space,
+        gap,
       })}
       data-invalid={customValidity ? '' : undefined}
       data-read-only={!disabled && readOnly ? '' : undefined}

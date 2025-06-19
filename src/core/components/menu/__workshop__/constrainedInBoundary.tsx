@@ -9,9 +9,9 @@ import {
   MenuButton,
   type MenuButtonProps,
   MenuItem,
-  type SelectableTone,
   Text,
 } from '@sanity/ui'
+import type {ElementTone} from '@sanity/ui/theme'
 import {useState} from 'react'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
@@ -20,7 +20,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   portal: true,
 }
 
-const items: {tone: SelectableTone; message: string}[] = [
+const items: {tone: ElementTone; message: string}[] = [
   {
     tone: 'critical',
     message: 'Critical message',

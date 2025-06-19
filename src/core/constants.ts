@@ -1,20 +1,13 @@
 import type {Transition, Variant} from 'framer-motion'
 
-/**
- * @internal
- */
 export const EMPTY_ARRAY: never[] = []
 
-/**
- * @internal
- */
 export const EMPTY_RECORD: Record<string, never> = {}
 
 const POPOVER_MOTION_DURATION = 0.2
 
 /**
  * Shared `framer-motion` variants used by `Popover` and `Tooltip` components.
- * @internal
  */
 export const POPOVER_MOTION_PROPS: {
   card: {
@@ -65,17 +58,6 @@ export const POPOVER_MOTION_PROPS: {
     visualDuration: POPOVER_MOTION_DURATION,
     bounce: 0.25,
   },
-}
-
-/**
- * @internal
- * @deprecated No longer used.
- */
-export const FLOATING_STATIC_SIDES: Record<string, 'bottom' | 'left' | 'top' | 'right'> = {
-  top: 'bottom',
-  right: 'left',
-  bottom: 'top',
-  left: 'right',
 }
 
 export const Z_OFFSETS = {

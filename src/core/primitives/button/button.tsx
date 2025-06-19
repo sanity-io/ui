@@ -8,11 +8,11 @@ import type {
   Width,
 } from '@sanity/ui/css'
 import {button, buttonLoadingBox} from '@sanity/ui/css'
-import type {FontTextSize, Space} from '@sanity/ui/theme'
+import type {FontTextSize} from '@sanity/ui/theme'
 import {type ElementType as ReactElementType, isValidElement, type ReactNode} from 'react'
 import {isValidElementType} from 'react-is'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/box'
 import {Spinner} from '../spinner/spinner'
 import {Text, type TextOwnProps} from '../text/text'
@@ -36,8 +36,6 @@ export type ButtonOwnProps = ButtonStyleProps &
     /** @beta Do not use in production, as this might change.*/
     'loading'?: boolean
     'selected'?: boolean
-    /** @deprecated Use `gap` instead. */
-    'space'?: ResponsiveProp<Space>
     'textAlign'?: ButtonTextAlign
     'muted'?: boolean
     'target'?: string
@@ -65,7 +63,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
     disabled,
     flex,
     fontSize = 1,
-    gap = props.space ?? props.padding ?? 3,
+    gap = props.padding ?? 3,
     gapX,
     gapY,
     icon: IconComponent,
@@ -82,7 +80,6 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
     paddingRight,
     radius = 2,
     selected,
-    space = props.gap ?? props.space ?? props.padding ?? 3, // eslint-disable-line @typescript-eslint/no-unused-vars
     text,
     textAlign,
     textOverflow = 'ellipsis',

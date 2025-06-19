@@ -2,7 +2,7 @@ import {code, type CodeStyleProps, type ResponsiveProp} from '@sanity/ui/css'
 import type {FontCodeSize} from '@sanity/ui/theme'
 import {lazy, Suspense} from 'react'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 const LazyRefractor = lazy(() => import('./refractor'))
 
