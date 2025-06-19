@@ -7,7 +7,7 @@ import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Box} from '../../primitives/box/box'
 import {useLayer} from '../../primitives/layer/useLayer'
 import {Stack} from '../../primitives/stack/stack'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {MenuContext, type MenuContextValue} from './menuContext'
 import {useMenuController} from './useMenuController'
 
@@ -16,14 +16,6 @@ export const DEFAULT_MENU_ELEMENT = 'div'
 
 /** @public */
 export type MenuOwnProps = PaddingStyleProps & {
-  /**
-   * @deprecated Use `shouldFocus="first"` instead.
-   */
-  'focusFirst'?: boolean
-  /**
-   * @deprecated Use `shouldFocus="last"` instead.
-   */
-  'focusLast'?: boolean
   'gap'?: ResponsiveProp<Space>
   'onClickOutside'?: (event: MouseEvent) => void
   'onEscape'?: () => void
@@ -32,10 +24,7 @@ export type MenuOwnProps = PaddingStyleProps & {
   'originElement'?: HTMLElement | null
   'registerElement'?: (el: HTMLElement) => () => void
   'shouldFocus'?: 'first' | 'last' | null
-  /** @deprecated Use `gap` property instead. */
-  'space'?: ResponsiveProp<Space>
   'aria-labelledby'?: string
-  // 'onBlurCapture'?: (event: FocusEvent) => void
 }
 
 /** @public */
@@ -56,11 +45,7 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
     as = DEFAULT_MENU_ELEMENT,
     children,
     className,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    focusFirst,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    focusLast,
-    gap,
+    gap = 1,
     onClickOutside,
     onEscape,
     onItemClick,
@@ -71,12 +56,10 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
     ref: forwardedRef,
     registerElement,
     shouldFocus: _shouldFocus,
-    space = 1,
     ...rest
   } = props as MenuProps<typeof DEFAULT_MENU_ELEMENT>
 
-  const shouldFocus =
-    _shouldFocus ?? ((props.focusFirst && 'first') || (props.focusLast && 'last') || null)
+  const shouldFocus = _shouldFocus ?? null
 
   const ref = useRef<HTMLDivElement | null>(null)
 
@@ -189,7 +172,7 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
         role="menu"
         tabIndex={-1}
       >
-        <Stack gap={gap ?? space}>{children}</Stack>
+        <Stack gap={gap}>{children}</Stack>
       </Box>
     </MenuContext.Provider>
   )

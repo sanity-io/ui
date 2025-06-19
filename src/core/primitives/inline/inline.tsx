@@ -1,7 +1,4 @@
-import type {ResponsiveProp} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
-
-import type {Props} from '../../types/props'
+import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
 /** @public */
@@ -26,10 +23,7 @@ export type InlineOwnProps = Omit<
   | 'gridTemplateColumns'
   | 'gridTemplateRows'
   // todo: omit deprecated flex and grid props
-> & {
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
-}
+>
 
 /** @public */
 export type InlineElementType = BoxElementType
@@ -49,7 +43,6 @@ export function Inline<E extends InlineElementType = typeof DEFAULT_INLINE_ELEME
     as = DEFAULT_INLINE_ELEMENT,
     children,
     gap,
-    space,
     ...rest
   } = props as InlineProps<typeof DEFAULT_INLINE_ELEMENT>
 
@@ -60,7 +53,7 @@ export function Inline<E extends InlineElementType = typeof DEFAULT_INLINE_ELEME
       alignItems="center"
       as={as}
       display="flex"
-      gap={gap ?? space}
+      gap={gap}
       flexWrap="wrap"
     >
       {children}

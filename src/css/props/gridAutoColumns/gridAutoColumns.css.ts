@@ -1,9 +1,9 @@
 import {_responsiveStyle} from '../../_responsiveStyle.css'
 import {layers} from '../../layers.css'
 import type {ResponsiveRuleOptions} from '../../types'
-import type {GridAutoCols} from './types'
+import type {GridAutoColumns} from './types'
 
-export const options: ResponsiveRuleOptions<GridAutoCols> = {
+export const options: ResponsiveRuleOptions<GridAutoColumns> = {
   auto: _responsiveStyle(layers.props, {
     gridAutoColumns: 'auto',
   }),

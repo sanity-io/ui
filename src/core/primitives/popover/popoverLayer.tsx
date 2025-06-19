@@ -4,7 +4,7 @@ import {motion} from 'framer-motion'
 import {type CSSProperties, type ForwardedRef, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'
-import type {Placement} from '../../types/placement'
+import type {Placement} from '../../types'
 import {Arrow} from '../arrow/arrow'
 import {Flex} from '../flex/flex'
 import {Layer, type LayerOwnProps, type LayerProps} from '../layer/layer'

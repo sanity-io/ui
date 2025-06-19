@@ -29,8 +29,7 @@ import {Z_OFFSETS} from '../../constants'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {origin} from '../../middleware/origin'
-import type {Placement} from '../../types/placement'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Placement, Props} from '../../types'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/portal'
@@ -63,8 +62,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    */
   animate?: boolean
   arrow?: boolean
-  /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
-  boundaryElement?: HTMLElement | null
   children?: ReactElement<{ref: ForwardedRef<HTMLElement>}>
   /**
    * When `true`, prevent overflow within the current boundary:
@@ -164,8 +161,6 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     animate: _animate = false,
     arrow: arrowProp = false,
     as: as = DEFAULT_POPOVER_ELEMENT,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    boundaryElement = boundaryElementContext.element,
     children: childProp,
     className,
     constrainSize = false,
@@ -174,7 +169,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     fallbackPlacements = props.fallbackPlacements ??
       DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
     matchReferenceWidth,
-    floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
+    floatingBoundary = boundaryElementContext.element,
     modal,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onActivate,
@@ -187,7 +182,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     preventOverflow = true,
     radius = 3,
     ref: forwardedRef,
-    referenceBoundary = props.boundaryElement ?? boundaryElementContext.element,
+    referenceBoundary = boundaryElementContext.element,
     referenceElement,
     scheme,
     shadow = 3,

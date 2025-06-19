@@ -1,7 +1,6 @@
-import {type ResponsiveProp, stack} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
+import {stack} from '@sanity/ui/css'
 
-import type {Props} from '../../types/props'
+import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 
 /** @public */
@@ -24,10 +23,7 @@ export type StackOwnProps = Omit<
   | 'justifyContent'
   | 'rows'
   | 'gridTemplateRows'
-> & {
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
-}
+>
 
 /** @public */
 export type StackElementType = BoxElementType
@@ -47,7 +43,6 @@ export function Stack<E extends StackElementType = typeof DEFAULT_STACK_ELEMENT>
     as = DEFAULT_STACK_ELEMENT,
     className,
     gap,
-    space,
     ...rest
   } = props as StackProps<typeof DEFAULT_STACK_ELEMENT>
 
@@ -59,7 +54,7 @@ export function Stack<E extends StackElementType = typeof DEFAULT_STACK_ELEMENT>
       gridAutoRows="min"
       className={stack({className})}
       display="grid"
-      gap={gap ?? space}
+      gap={gap}
     />
   )
 }

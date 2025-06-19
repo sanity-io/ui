@@ -4,7 +4,7 @@ import type {ReactElement} from 'react'
 
 import {Box} from '../../primitives/box/box'
 import {KBD} from '../../primitives/kbd/kbd'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
@@ -13,8 +13,6 @@ export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
 export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
   fontSize?: ResponsiveProp<FontTextSize>
   padding?: ResponsiveProp<Space>
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
   keys?: string[]
 }
 
@@ -38,13 +36,12 @@ export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_EL
   const {
     as = DEFAULT_HOTKEYS_ELEMENT,
     fontSize,
-    gap,
+    gap = 1,
     gapX,
     gapY,
     keys,
     padding,
     radius,
-    space = 1,
     ...rest
   } = props as HotkeysProps<typeof DEFAULT_HOTKEYS_ELEMENT>
 
@@ -53,15 +50,7 @@ export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_EL
   }
 
   return (
-    <Box
-      as={as}
-      data-ui="Hotkeys"
-      {...rest}
-      display="flex"
-      gap={gap ?? space}
-      gapX={gapX}
-      gapY={gapY}
-    >
+    <Box as={as} data-ui="Hotkeys" {...rest} display="flex" gap={gap} gapX={gapX} gapY={gapY}>
       {keys.map((key, i) => (
         <KBD fontSize={fontSize} key={i} padding={padding} radius={radius}>
           {key}

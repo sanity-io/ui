@@ -26,7 +26,7 @@ import {EMPTY_RECORD} from '../../constants'
 import {useCustomValidity} from '../../hooks/useCustomValidity'
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {isRecord} from '../../lib/isRecord'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/box'
 import {Button, type ButtonProps} from '../button/button'
 import {Text} from '../text/text'
@@ -58,8 +58,6 @@ export type TextInputOwnProps = InputStyleProps & {
    */
   onClear?: () => void
   prefix?: ReactNode
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
   suffix?: ReactNode
   weight?: FontWeight
 }
@@ -89,7 +87,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
     clearButton,
     disabled = false,
     fontSize = 2,
-    gap,
+    gap = 3,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClear,
@@ -98,7 +96,6 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
     radius = 2,
     readOnly,
     ref: forwardedRef,
-    space = 3,
     suffix,
     customValidity,
     type = 'text',
@@ -177,7 +174,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
         fontSize,
         padding,
         radius,
-        gap: gap ?? space,
+        gap: gap,
         width,
       })}
       data-icon-left={IconComponent ? '' : undefined}

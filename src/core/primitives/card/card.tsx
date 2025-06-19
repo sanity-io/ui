@@ -1,7 +1,7 @@
 import {card, type CardStyleProps} from '@sanity/ui/css'
 import {useContext} from 'react'
 
-import type {Props} from '../../types/props'
+import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
 import {CardContext} from './cardContext'
 import {CardProvider} from './cardProvider'

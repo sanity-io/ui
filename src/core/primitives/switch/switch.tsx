@@ -7,7 +7,7 @@ import {
 } from '@sanity/ui/css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/box'
 
 /** @public */

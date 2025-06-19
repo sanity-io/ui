@@ -30,14 +30,15 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
 
 function _createMediaStore(): _MediaStore {
   const mediaLen = media.length
-  let sizes: {mq: MediaQueryList; index: number}[]
+
+  let sizes: {mq: MediaQueryList; index: number}[] = []
 
   // The _createMediaStore function is called in both server and client environments.
   // However since subscribe and getSnapshot are only called on the client we lazy init what we need for them
   // so that we don't need to run checks for wether it's safe to call `window.matchMedia`
   const getSizes = () => {
     if (typeof window === 'undefined') {
-      return []
+      return sizes
     }
 
     if (!sizes) {

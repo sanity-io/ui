@@ -3,7 +3,7 @@ import type {AvatarSize} from '@sanity/ui/theme'
 import {Children, cloneElement, Fragment, isValidElement, type ReactElement} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {Box, type BoxOwnProps} from '../box/box'
 import type {AvatarProps} from './avatar'
 import {AvatarCounter} from './avatarCounter'
@@ -22,8 +22,6 @@ export type AvatarStackOwnProps = Omit<
   children: AvatarStackChild | AvatarStackChild[]
   maxLength?: number
   size?: ResponsiveProp<AvatarSize>
-  /** @deprecated No longer supported. */
-  tone?: 'navbar'
 }
 
 /** @public */

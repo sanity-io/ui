@@ -4,5 +4,5 @@ import type {GridAutoRowsStyleProps} from './types'
 
 /** @public */
 export function gridAutoRows(props: GridAutoRowsStyleProps): string | undefined {
-  return _responsiveClassName(options, props.gridAutoRows ?? props.autoRows)
+  return _responsiveClassName(options, props.gridAutoRows)
 }

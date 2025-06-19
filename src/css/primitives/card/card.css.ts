@@ -204,14 +204,8 @@ function buildSchemeVars(scheme: ColorScheme) {
       [target.code.token.url]: source.code.token.url,
       [target.code.token.variable]: source.code.token.variable,
 
-      // [target.fg]: source.tinted.default.fg[0],
-
       [target.focusRing]: source.focusRing,
       [target.link.fg]: source.link.fg,
-
-      // [target.muted.bg]: source.tinted.default.bg[4],
-      // [target.muted.border]: source.tinted.default.border[4],
-      // [target.muted.fg]: source.tinted.default.fg[4],
 
       [target.shadow.outline]: source.shadow.outline,
       [target.shadow.umbra]: source.shadow.umbra,

@@ -27,3 +27,30 @@ export type Props<P extends EmptyProps, E extends ElementType<P>> = Assign<
   E extends TagType ? JSX.IntrinsicElements[E] : ComponentProps<E>,
   P & {as?: E}
 >
+
+/**
+ * Placement of floating UI elements.
+ *
+ * @public
+ */
+export type Placement =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'right'
+  | 'right-start'
+  | 'right-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left'
+  | 'left-start'
+  | 'left-end'
+
+/** @public */
+export type Delay =
+  | number
+  | Partial<{
+      open: number
+      close: number
+    }>

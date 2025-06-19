@@ -13,7 +13,7 @@ import {
 import {_isScrollable} from '../../helpers/scroll'
 import {_ResizeObserver} from '../../observers/resize'
 import {Box} from '../../primitives/box/box'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 
 /** @beta */
 export const DEFAULT_VIRTUAL_LIST_ELEMENT = 'div'

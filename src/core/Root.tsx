@@ -3,7 +3,7 @@ import {useCallback, useImperativeHandle, useRef, useState} from 'react'
 
 import {Box, type BoxOwnProps} from './primitives/box/box'
 import {RootProvider} from './RootProvider'
-import type {Props} from './types/props'
+import type {Props} from './types'
 
 /** @public */
 export const DEFAULT_ROOT_ELEMENT = 'html'

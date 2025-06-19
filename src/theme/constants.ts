@@ -68,7 +68,7 @@ export const CARD_TONES = [
   'transparent',
   'default',
   'neutral',
-  'primary', // todo: deprecate
+  'primary', // selections
   'suggest',
   'positive',
   'caution',
@@ -79,7 +79,7 @@ export const CARD_TONES = [
 export const ELEMENT_TONES = [
   'default',
   'neutral',
-  'primary', // todo: deprecate
+  'primary', // selections
   'suggest',
   'positive',
   'caution',

@@ -4,5 +4,5 @@ import type {GridAutoColumnsStyleProps} from './types'
 
 /** @public */
 export function gridAutoColumns(props: GridAutoColumnsStyleProps): string | undefined {
-  return _responsiveClassName(options, props.gridAutoColumns ?? props.autoCols)
+  return _responsiveClassName(options, props.gridAutoColumns)
 }

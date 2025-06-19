@@ -47,10 +47,10 @@ export default function PlainStory(): React.JSX.Element {
             <Popover
               __unstable_margins={[1, 1, 1, 1]}
               arrow={arrow}
-              boundaryElement={boundaryElementFlag ? boundaryElement : undefined}
               constrainSize={constrainSize}
               content={<Text size={1}>popover content</Text>}
               fallbackPlacements={['top', 'bottom']}
+              floatingBoundary={boundaryElementFlag ? boundaryElement : undefined}
               matchReferenceWidth={matchReferenceWidth}
               open={open}
               padding={padding}

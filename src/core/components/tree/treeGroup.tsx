@@ -1,5 +1,5 @@
 import {Stack} from '../../primitives/stack/stack'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {useTree} from './useTree'
 
 /** @public */
@@ -36,9 +36,9 @@ export const TreeGroup = function TreeGroup(
       data-ui="TreeGroup"
       {...rest}
       hidden={!expanded}
-      marginTop={tree.space}
+      marginTop={tree.gap}
       role="group"
-      gap={tree.space}
+      gap={tree.gap}
     >
       {children}
     </Stack>

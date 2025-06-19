@@ -7,8 +7,6 @@ import type {ResponsiveProp} from '../../types'
 
 /** @public */
 export interface HeadingStyleProps extends FontStyleProps, FlexStyleProps {
-  /** @deprecated No longer in use */
-  accent?: boolean
   align?: TextAlignStyleProps['textAlign']
   className?: string
   muted?: boolean

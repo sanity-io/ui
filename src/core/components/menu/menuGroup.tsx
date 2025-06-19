@@ -1,6 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import type {FontTextSize, Space, ElementTone} from '@sanity/ui/theme'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
   isValidElement,
@@ -18,7 +18,7 @@ import {Flex} from '../../primitives/flex/flex'
 import {Popover, type PopoverProps} from '../../primitives/popover/popover'
 import {Selectable} from '../../primitives/selectable/selectable'
 import {Text} from '../../primitives/text/text'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {DEFAULT_MENU_ELEMENT, Menu, type MenuProps} from './menu'
 import {useMenu} from './useMenu'
 
@@ -44,8 +44,6 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
   >
   padding?: ResponsiveProp<Space>
   popover?: Omit<PopoverProps, 'content' | 'open'>
-  /** @deprecated Use `gap` instead. */
-  space?: ResponsiveProp<Space>
   text?: ReactNode
   tone?: ElementTone
 }
@@ -67,20 +65,17 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
     as = DEFAULT_MENU_GROUP_ELEMENT,
     children,
     fontSize = 1,
-    gap,
+    gap = 3,
     icon: IconComponent,
     menu: menuProps,
     onClick,
     padding = 3,
     popover,
     radius = 2,
-    space = 3,
     text,
     tone = 'default',
     ...rest
   } = props as MenuGroupProps<typeof DEFAULT_MENU_GROUP_ELEMENT>
-
-  const menu = useMenu()
 
   const {
     activeElement,
@@ -88,10 +83,10 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
     onClickOutside,
     onEscape,
     onItemClick,
-    onItemMouseEnter: _onItemMouseEnter,
+    onItemMouseEnter,
     registerElement,
-  } = menu
-  const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
+  } = useMenu()
+
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
@@ -101,7 +96,7 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
   const handleMouseEnter = useCallback(
     (event: MouseEvent<HTMLElement>) => {
       setWithinMenu(false)
-      onItemMouseEnter(event)
+      onItemMouseEnter?.(event)
       setOpen(true)
     },
     [onItemMouseEnter],
@@ -214,7 +209,7 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
         tone={tone}
         type={as === 'button' ? 'button' : undefined}
       >
-        <Flex gap={gap ?? space} padding={padding}>
+        <Flex gap={gap} padding={padding}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}

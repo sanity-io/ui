@@ -31,7 +31,7 @@ export default function MenuButtonStory(): React.JSX.Element {
   return (
     <Card height="fill" tone={layoutTone}>
       <Box padding={[4, 5, 6]}>
-        <Grid columns={3} gap={2}>
+        <Grid gridTemplateColumns={3} gap={2}>
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>
             <MenuButton

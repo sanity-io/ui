@@ -30,7 +30,7 @@ import {AnimatedSpinnerIcon} from '../../primitives/spinner/animatedSpinnerIcon'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
 import {TextInput, type TextInputOwnProps} from '../../primitives/textInput/textInput'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {

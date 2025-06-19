@@ -4,7 +4,7 @@ import type {
   RadiusStyleProps,
   ResponsiveProp,
 } from '@sanity/ui/css'
-import type {FontTextSize, Space, ElementTone} from '@sanity/ui/theme'
+import type {ElementTone, FontTextSize} from '@sanity/ui/theme'
 import {
   type ElementType,
   isValidElement,
@@ -23,7 +23,7 @@ import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
 import {Selectable} from '../../primitives/selectable/selectable'
 import {Text} from '../../primitives/text/text'
-import type {ComponentType, Props} from '../../types/props'
+import type {ComponentType, Props} from '../../types'
 import {Hotkeys} from '../hotkeys/hotkeys'
 import {useMenu} from './useMenu'
 
@@ -41,8 +41,6 @@ export type MenuItemOwnProps = GapStyleProps &
     iconRight?: ElementType | ReactNode
     pressed?: boolean
     selected?: boolean
-    /** @deprecated Use `gap` instead. */
-    space?: ResponsiveProp<Space>
     text?: ReactNode
     tone?: ElementTone
   }
@@ -65,7 +63,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     children,
     disabled,
     fontSize = 1,
-    gap,
+    gap = 3,
     gapX,
     gapY,
     hotkeys,
@@ -83,22 +81,13 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     radius = 2,
     ref: forwardedRef,
     selected: selectedProp,
-    space = 3,
     text,
     tone = 'default',
     ...rest
   } = props as MenuItemProps<typeof DEFAULT_MENU_ITEM_ELEMENT>
 
   const menu = useMenu()
-  const {
-    activeElement,
-    mount,
-    onItemClick,
-    onItemMouseEnter: _onItemMouseEnter,
-    onItemMouseLeave: _onItemMouseLeave,
-  } = menu
-  const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
-  const onItemMouseLeave = _onItemMouseLeave ?? menu.onMouseLeave
+  const {activeElement, mount, onItemClick, onItemMouseEnter, onItemMouseLeave} = menu
   const [rootElement, setRootElement] = useState<HTMLButtonElement | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
   const ref = useRef<HTMLButtonElement | null>(null)
@@ -157,7 +146,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       type={as === 'button' ? 'button' : undefined}
     >
       {(IconComponent || text || IconRightComponent) && (
-        <Flex as="span" gap={gap ?? space} gapX={gapX} gapY={gapY} align="center" {...paddingProps}>
+        <Flex as="span" gap={gap} gapX={gapX} gapY={gapY} align="center" {...paddingProps}>
           {IconComponent && (
             <Text muted size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
