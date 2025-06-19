@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/sanity-io/ui-workshop/compare/v2.1.4...v2.1.5) (2025-06-19)
+
+### Bug Fixes
+
+- bump react compiler target to 19 ([0aa8668](https://github.com/sanity-io/ui-workshop/commit/0aa86686a7d56c9a896e12c30243d786d54a5f04))
+
 ## [2.1.4](https://github.com/sanity-io/ui-workshop/compare/v2.1.3...v2.1.4) (2025-06-17)
 
 ### Bug Fixes
