@@ -173,7 +173,7 @@
     "styled-components": "^6.1.19",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.8.3",
-    "vitest": "^2.1.9"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "@sanity/icons": "^2 || ^3",
