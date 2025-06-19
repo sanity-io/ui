@@ -88,7 +88,7 @@
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
     "@sanity/pkg-utils": "^7.0.4",
-    "@sanity/prettier-config": "^1.0.3",
+    "@sanity/prettier-config": "^1.0.4",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui": "^2.14.4",
     "@sanity/ui-workshop": "^2.0.31",
@@ -137,19 +137,19 @@
   "peerDependencies": {
     "react": "^18.3 || ^19.0.0-0"
   },
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.12.1",
   "engines": {
     "node": ">=14.0.0"
   },
   "publishConfig": {
     "access": "public"
   },
-  "esm.sh": {
-    "bundle": false
-  },
   "pnpm": {
     "overrides": {
       "conventional-changelog-conventionalcommits": ">= 8.0.0"
     }
+  },
+  "esm.sh": {
+    "bundle": false
   }
 }
