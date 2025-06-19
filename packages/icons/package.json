@@ -81,16 +81,16 @@
     "extends": "@sanity/semantic-release-preset"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.9",
-    "@babel/preset-env": "^7.26.9",
-    "@babel/preset-react": "^7.26.3",
-    "@babel/preset-typescript": "^7.26.0",
-    "@commitlint/cli": "^19.7.1",
-    "@commitlint/config-conventional": "^19.7.1",
-    "@sanity/pkg-utils": "^7.0.4",
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@sanity/pkg-utils": "^7.6.2",
     "@sanity/prettier-config": "^1.0.4",
     "@sanity/semantic-release-preset": "^5.0.0",
-    "@sanity/ui": "^2.14.4",
+    "@sanity/ui": "^2.16.2",
     "@sanity/ui-workshop": "^2.0.31",
     "@svgr/core": "^8.1.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -105,7 +105,7 @@
     "camelcase": "^8.0.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.25.5",
     "esbuild-register": "^3.6.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.0.2",
@@ -130,9 +130,9 @@
     "react-dom": "^19.1.0",
     "react-is": "^19.1.0",
     "rimraf": "^6.0.1",
-    "semantic-release": "^24.2.3",
+    "semantic-release": "^24.2.5",
     "styled-components": "^6.1.15",
-    "typescript": "5.7.3"
+    "typescript": "5.8.3"
   },
   "peerDependencies": {
     "react": "^18.3 || ^19.0.0-0"
