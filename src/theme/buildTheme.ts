@@ -4,10 +4,10 @@ import {defaultColor} from './defaults/color'
 import {defaultTheme} from './defaults/common'
 import {defaultFonts} from './defaults/fonts'
 import {resolveTokens} from './resolveTokens'
-import type {Options, Theme} from './types'
+import type {Theme, ThemeOptions} from './types'
 
 /** @public */
-export function buildTheme(options?: Options): Theme {
+export function buildTheme(options?: ThemeOptions): Theme {
   const tokens = resolveTokens({
     ...options?.tokens,
     color: options?.tokens?.color ?? defaultColor,

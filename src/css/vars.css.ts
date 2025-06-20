@@ -21,7 +21,7 @@ import {_fromEntries} from './_fromEntries'
 import type {
   ColorPaletteTokens,
   ColorPaletteVars,
-  RootThemeTokens,
+  CoreThemeTokens,
   ThemeContract,
   ThemeTokens,
   ThemeVars,
@@ -40,10 +40,10 @@ const paletteTokens: ColorPaletteTokens = {
   ),
 }
 
-/** @public */
+/** @internal */
 export const paletteVars: ColorPaletteVars = createThemeContract(paletteTokens)
 
-const themeTokens: ThemeTokens = {
+const themeTokens: CoreThemeTokens = {
   avatar: {
     focusRing: {
       offset: '',
@@ -350,13 +350,13 @@ const themeTokens: ThemeTokens = {
   },
 }
 
-const _themeVars: ThemeContract<ThemeTokens> = createThemeContract(themeTokens)
+const _themeVars: ThemeContract<CoreThemeTokens> = createThemeContract(themeTokens)
 
 /**
  * Variables to be defined in a theme.
  *
- * @public */
-export const themeVars: ThemeContract<RootThemeTokens> = {
+ * @internal */
+export const themeVars: ThemeContract<ThemeTokens> = {
   ..._themeVars,
   color: {
     ..._themeVars.color,

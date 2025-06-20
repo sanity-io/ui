@@ -1,6 +1,6 @@
 import {_composeClassNames} from '../../_composeClassNames'
 import {radius} from '../../props/radius/radius'
-import {root, tones} from './_selectable.css'
+import {root, tones} from './selectable.css'
 import type {SelectableStyleProps} from './types'
 
 /** @internal */
