@@ -10,6 +10,7 @@ import {
   type CardTone,
   COLOR_VARIANTS,
   type ColorScheme,
+  type ColorTokens,
   type ColorValue,
   type ColorVariant,
   CONTAINER_SCALE,
@@ -25,12 +26,12 @@ import {
   SHADOW,
   SPACE,
   type Theme,
-  type ThemeOptions,
   TINTS,
 } from '@sanity/ui/theme'
 
 import {_fromEntries} from '../_fromEntries'
 import type {
+  ColorPaletteTokens,
   CSSCardColorTokens,
   ElementColorTokens,
   SchemeColorTokens,
@@ -40,7 +41,10 @@ import type {
 import {paletteVars} from '../vars.css'
 
 /** @public */
-export function buildCSSThemeTokens(options?: ThemeOptions): ThemeTokens {
+export type CSSThemeOptions = {color?: ColorTokens; palette?: ColorPaletteTokens}
+
+/** @public */
+export function buildCSSTheme(options?: CSSThemeOptions): ThemeTokens {
   const theme = buildTheme(options)
 
   return {
@@ -79,14 +83,13 @@ export function buildCSSThemeTokens(options?: ThemeOptions): ThemeTokens {
       ..._fromEntries(CONTAINER_SCALE.map((s) => [s, rem(theme.container[s])])),
     },
     color: {
-      palette: {
+      palette: options?.palette ?? {
         black: black.hex,
         white: white.hex,
         ..._fromEntries(
           HUES.map((h) => [h, {..._fromEntries(TINTS.map((t) => [t, hues[h][t].hex]))}]),
         ),
       },
-
       light: renderColorScheme({theme, scheme: 'light'}),
       dark: renderColorScheme({theme, scheme: 'dark'}),
     },

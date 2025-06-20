@@ -9,8 +9,7 @@ import type {Theme, ThemeOptions} from './types'
 /** @public */
 export function buildTheme(options?: ThemeOptions): Theme {
   const tokens = resolveTokens({
-    ...options?.tokens,
-    color: options?.tokens?.color ?? defaultColor,
+    color: options?.color ?? defaultColor,
   })
 
   return {

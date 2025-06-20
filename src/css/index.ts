@@ -4,7 +4,7 @@ export * from './layers.css'
 export * from './vars.css'
 
 // theme
-export * from './theme/buildCSSThemeTokens'
+export * from './theme/buildCSSTheme'
 export * from './theme/defaultTheme.css'
 
 // props
