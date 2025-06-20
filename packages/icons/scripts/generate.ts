@@ -24,12 +24,11 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const __NAME__: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, "ref"> & RefAttributes<SVGSVGElement>
-> = forwardRef(function __NAME__(props, ref) {
+> = /* @__PURE__ */ forwardRef(function __NAME__(props, ref) {
   return (
     __JSX__
   )
 });
-__NAME__.displayName = 'ForwardRef(__NAME__)'
 `
 
 async function readIcon(filePath: string) {
@@ -139,6 +138,12 @@ async function generate() {
     .map((f) => `'${f.name}': ${f.componentName}`)
     .join(',')}}`
 
+  // const getIconsMap = `const getIcons: () => IconMap = () => ({${files
+  //   .map((f) => `'${f.name}': ${f.componentName}`)
+  //   .join(',')}})`
+
+  // const iconsExport = `/**\n * @public\n */\nexport const icons: IconMap = /* @__PURE__ */ getIcons();`
+
   const indexPath = path.resolve(SRC_ICONS_PATH, `index.ts`)
 
   const indexTsCode = await format(
@@ -149,6 +154,7 @@ async function generate() {
       typesExports,
       iconExports,
       iconMapInterface,
+      // getIconsMap,
       iconsExport,
     ].join('\n\n'),
     {

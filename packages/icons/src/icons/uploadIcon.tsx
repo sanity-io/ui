@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const UploadIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function UploadIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function UploadIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="upload"
@@ -34,4 +34,3 @@ export const UploadIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-UploadIcon.displayName = 'ForwardRef(UploadIcon)'

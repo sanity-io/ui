@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CollapseIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CollapseIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CollapseIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="collapse"
@@ -34,4 +34,3 @@ export const CollapseIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CollapseIcon.displayName = 'ForwardRef(CollapseIcon)'

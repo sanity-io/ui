@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const MicrophoneIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function MicrophoneIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function MicrophoneIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="microphone"
@@ -27,4 +27,3 @@ export const MicrophoneIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-MicrophoneIcon.displayName = 'ForwardRef(MicrophoneIcon)'

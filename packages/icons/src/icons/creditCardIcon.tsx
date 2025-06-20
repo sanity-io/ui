@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CreditCardIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CreditCardIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CreditCardIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="credit-card"
@@ -35,4 +35,3 @@ export const CreditCardIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CreditCardIcon.displayName = 'ForwardRef(CreditCardIcon)'

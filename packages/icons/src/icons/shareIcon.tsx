@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ShareIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ShareIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ShareIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="share"
@@ -29,4 +29,3 @@ export const ShareIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ShareIcon.displayName = 'ForwardRef(ShareIcon)'

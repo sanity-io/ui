@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const OverageIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function OverageIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function OverageIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="overage"
@@ -29,4 +29,3 @@ export const OverageIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-OverageIcon.displayName = 'ForwardRef(OverageIcon)'

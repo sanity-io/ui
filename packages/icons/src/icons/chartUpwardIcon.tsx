@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ChartUpwardIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ChartUpwardIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ChartUpwardIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="chart-upward"
@@ -28,4 +28,3 @@ export const ChartUpwardIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ChartUpwardIcon.displayName = 'ForwardRef(ChartUpwardIcon)'

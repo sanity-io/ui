@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const BinaryDocumentIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function BinaryDocumentIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function BinaryDocumentIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="binary-document"
@@ -30,4 +30,3 @@ export const BinaryDocumentIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-BinaryDocumentIcon.displayName = 'ForwardRef(BinaryDocumentIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const SpinnerIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function SpinnerIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function SpinnerIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="spinner"
@@ -28,4 +28,3 @@ export const SpinnerIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-SpinnerIcon.displayName = 'ForwardRef(SpinnerIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const DownloadIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function DownloadIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function DownloadIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="download"
@@ -34,4 +34,3 @@ export const DownloadIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-DownloadIcon.displayName = 'ForwardRef(DownloadIcon)'

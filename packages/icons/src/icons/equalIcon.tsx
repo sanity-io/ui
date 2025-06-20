@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const EqualIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function EqualIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function EqualIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="equal"
@@ -26,4 +26,3 @@ export const EqualIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-EqualIcon.displayName = 'ForwardRef(EqualIcon)'

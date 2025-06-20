@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ReadOnlyIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ReadOnlyIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ReadOnlyIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="read-only"
@@ -28,4 +28,3 @@ export const ReadOnlyIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ReadOnlyIcon.displayName = 'ForwardRef(ReadOnlyIcon)'

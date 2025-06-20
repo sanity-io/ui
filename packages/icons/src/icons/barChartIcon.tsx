@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const BarChartIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function BarChartIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function BarChartIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="bar-chart"
@@ -28,4 +28,3 @@ export const BarChartIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-BarChartIcon.displayName = 'ForwardRef(BarChartIcon)'

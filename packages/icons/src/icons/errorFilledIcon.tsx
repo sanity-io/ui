@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ErrorFilledIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ErrorFilledIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ErrorFilledIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="error-filled"
@@ -28,4 +28,3 @@ export const ErrorFilledIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ErrorFilledIcon.displayName = 'ForwardRef(ErrorFilledIcon)'

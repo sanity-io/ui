@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const PinRemovedIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function PinRemovedIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function PinRemovedIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="pin-removed"
@@ -28,4 +28,3 @@ export const PinRemovedIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-PinRemovedIcon.displayName = 'ForwardRef(PinRemovedIcon)'

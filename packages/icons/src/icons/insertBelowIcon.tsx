@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const InsertBelowIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function InsertBelowIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function InsertBelowIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="insert-below"
@@ -29,4 +29,3 @@ export const InsertBelowIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-InsertBelowIcon.displayName = 'ForwardRef(InsertBelowIcon)'

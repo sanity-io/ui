@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ComposeSparklesIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ComposeSparklesIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ComposeSparklesIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="compose-sparkles"
@@ -29,4 +29,3 @@ export const ComposeSparklesIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ComposeSparklesIcon.displayName = 'ForwardRef(ComposeSparklesIcon)'

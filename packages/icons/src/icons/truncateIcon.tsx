@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const TruncateIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function TruncateIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function TruncateIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="truncate"
@@ -28,4 +28,3 @@ export const TruncateIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-TruncateIcon.displayName = 'ForwardRef(TruncateIcon)'

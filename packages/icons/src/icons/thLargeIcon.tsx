@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ThLargeIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ThLargeIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ThLargeIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="th-large"
@@ -28,4 +28,3 @@ export const ThLargeIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ThLargeIcon.displayName = 'ForwardRef(ThLargeIcon)'

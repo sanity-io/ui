@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const GithubIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function GithubIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function GithubIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="github"
@@ -28,4 +28,3 @@ export const GithubIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-GithubIcon.displayName = 'ForwardRef(GithubIcon)'

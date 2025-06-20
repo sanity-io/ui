@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const DocumentPdfIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function DocumentPdfIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function DocumentPdfIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="document-pdf"
@@ -33,4 +33,3 @@ export const DocumentPdfIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-DocumentPdfIcon.displayName = 'ForwardRef(DocumentPdfIcon)'

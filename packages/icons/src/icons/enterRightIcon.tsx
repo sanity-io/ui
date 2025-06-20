@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const EnterRightIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function EnterRightIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function EnterRightIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="enter-right"
@@ -29,4 +29,3 @@ export const EnterRightIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-EnterRightIcon.displayName = 'ForwardRef(EnterRightIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ControlsIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ControlsIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ControlsIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="controls"
@@ -28,4 +28,3 @@ export const ControlsIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ControlsIcon.displayName = 'ForwardRef(ControlsIcon)'

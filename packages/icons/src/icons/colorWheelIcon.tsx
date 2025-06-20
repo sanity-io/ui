@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ColorWheelIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ColorWheelIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ColorWheelIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="color-wheel"
@@ -28,4 +28,3 @@ export const ColorWheelIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ColorWheelIcon.displayName = 'ForwardRef(ColorWheelIcon)'

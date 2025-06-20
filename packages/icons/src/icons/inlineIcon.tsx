@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const InlineIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function InlineIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function InlineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="inline"
@@ -28,4 +28,3 @@ export const InlineIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-InlineIcon.displayName = 'ForwardRef(InlineIcon)'

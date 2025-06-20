@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ClipboardImageIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ClipboardImageIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ClipboardImageIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="clipboard-image"
@@ -28,4 +28,3 @@ export const ClipboardImageIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ClipboardImageIcon.displayName = 'ForwardRef(ClipboardImageIcon)'

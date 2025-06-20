@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const StackCompactIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function StackCompactIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function StackCompactIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="stack-compact"
@@ -28,4 +28,3 @@ export const StackCompactIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-StackCompactIcon.displayName = 'ForwardRef(StackCompactIcon)'

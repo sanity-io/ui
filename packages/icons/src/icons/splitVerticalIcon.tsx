@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const SplitVerticalIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function SplitVerticalIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function SplitVerticalIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="split-vertical"
@@ -28,4 +28,3 @@ export const SplitVerticalIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-SplitVerticalIcon.displayName = 'ForwardRef(SplitVerticalIcon)'

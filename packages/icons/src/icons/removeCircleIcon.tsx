@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const RemoveCircleIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function RemoveCircleIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function RemoveCircleIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="remove-circle"
@@ -28,4 +28,3 @@ export const RemoveCircleIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-RemoveCircleIcon.displayName = 'ForwardRef(RemoveCircleIcon)'

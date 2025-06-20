@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CloseIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CloseIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CloseIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="close"
@@ -28,4 +28,3 @@ export const CloseIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CloseIcon.displayName = 'ForwardRef(CloseIcon)'

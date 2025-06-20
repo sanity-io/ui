@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const EyeClosedIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function EyeClosedIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function EyeClosedIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="eye-closed"
@@ -28,4 +28,3 @@ export const EyeClosedIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-EyeClosedIcon.displayName = 'ForwardRef(EyeClosedIcon)'

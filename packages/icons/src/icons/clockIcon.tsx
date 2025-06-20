@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ClockIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ClockIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ClockIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="clock"
@@ -28,4 +28,3 @@ export const ClockIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ClockIcon.displayName = 'ForwardRef(ClockIcon)'

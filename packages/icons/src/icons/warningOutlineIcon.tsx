@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const WarningOutlineIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function WarningOutlineIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function WarningOutlineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="warning-outline"
@@ -28,4 +28,3 @@ export const WarningOutlineIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-WarningOutlineIcon.displayName = 'ForwardRef(WarningOutlineIcon)'

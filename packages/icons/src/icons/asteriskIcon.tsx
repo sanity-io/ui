@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const AsteriskIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function AsteriskIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function AsteriskIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="asterisk"
@@ -28,4 +28,3 @@ export const AsteriskIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-AsteriskIcon.displayName = 'ForwardRef(AsteriskIcon)'

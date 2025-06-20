@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ArrowUpIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ArrowUpIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ArrowUpIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="arrow-up"
@@ -29,4 +29,3 @@ export const ArrowUpIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ArrowUpIcon.displayName = 'ForwardRef(ArrowUpIcon)'

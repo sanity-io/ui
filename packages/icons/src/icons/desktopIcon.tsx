@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const DesktopIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function DesktopIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function DesktopIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="desktop"
@@ -28,4 +28,3 @@ export const DesktopIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-DesktopIcon.displayName = 'ForwardRef(DesktopIcon)'

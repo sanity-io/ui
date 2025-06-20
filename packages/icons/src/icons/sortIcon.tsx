@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const SortIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function SortIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function SortIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="sort"
@@ -28,4 +28,3 @@ export const SortIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-SortIcon.displayName = 'ForwardRef(SortIcon)'

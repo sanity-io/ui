@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const HashIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function HashIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function HashIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="hash"
@@ -28,4 +28,3 @@ export const HashIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-HashIcon.displayName = 'ForwardRef(HashIcon)'

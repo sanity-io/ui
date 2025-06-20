@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const DocumentZipIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function DocumentZipIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function DocumentZipIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="document-zip"
@@ -29,4 +29,3 @@ export const DocumentZipIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-DocumentZipIcon.displayName = 'ForwardRef(DocumentZipIcon)'

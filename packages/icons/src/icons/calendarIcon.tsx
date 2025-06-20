@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CalendarIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CalendarIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CalendarIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="calendar"
@@ -34,4 +34,3 @@ export const CalendarIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CalendarIcon.displayName = 'ForwardRef(CalendarIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const SearchIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function SearchIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function SearchIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="search"
@@ -28,4 +28,3 @@ export const SearchIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-SearchIcon.displayName = 'ForwardRef(SearchIcon)'

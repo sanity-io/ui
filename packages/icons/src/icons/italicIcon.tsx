@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ItalicIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ItalicIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ItalicIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="italic"
@@ -26,4 +26,3 @@ export const ItalicIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ItalicIcon.displayName = 'ForwardRef(ItalicIcon)'

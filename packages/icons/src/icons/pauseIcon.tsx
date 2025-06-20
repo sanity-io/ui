@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const PauseIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function PauseIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function PauseIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="pause"
@@ -26,4 +26,3 @@ export const PauseIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-PauseIcon.displayName = 'ForwardRef(PauseIcon)'

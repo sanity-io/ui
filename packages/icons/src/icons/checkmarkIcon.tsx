@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CheckmarkIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CheckmarkIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CheckmarkIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="checkmark"
@@ -28,4 +28,3 @@ export const CheckmarkIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CheckmarkIcon.displayName = 'ForwardRef(CheckmarkIcon)'

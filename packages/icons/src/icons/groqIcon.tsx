@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const GroqIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function GroqIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function GroqIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="groq"
@@ -25,4 +25,3 @@ export const GroqIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-GroqIcon.displayName = 'ForwardRef(GroqIcon)'

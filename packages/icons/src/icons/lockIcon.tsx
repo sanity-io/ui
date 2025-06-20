@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const LockIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function LockIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function LockIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="lock"
@@ -28,4 +28,3 @@ export const LockIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-LockIcon.displayName = 'ForwardRef(LockIcon)'

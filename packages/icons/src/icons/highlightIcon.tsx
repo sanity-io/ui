@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const HighlightIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function HighlightIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function HighlightIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="highlight"
@@ -28,4 +28,3 @@ export const HighlightIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-HighlightIcon.displayName = 'ForwardRef(HighlightIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const BookmarkIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function BookmarkIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function BookmarkIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="bookmark"
@@ -28,4 +28,3 @@ export const BookmarkIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-BookmarkIcon.displayName = 'ForwardRef(BookmarkIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CropIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CropIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CropIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="crop"
@@ -28,4 +28,3 @@ export const CropIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CropIcon.displayName = 'ForwardRef(CropIcon)'

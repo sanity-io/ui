@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const StarFilledIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function StarFilledIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function StarFilledIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="star-filled"
@@ -28,4 +28,3 @@ export const StarFilledIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-StarFilledIcon.displayName = 'ForwardRef(StarFilledIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const RedoIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function RedoIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function RedoIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="redo"
@@ -34,4 +34,3 @@ export const RedoIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-RedoIcon.displayName = 'ForwardRef(RedoIcon)'

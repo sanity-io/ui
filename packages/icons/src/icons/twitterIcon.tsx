@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const TwitterIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function TwitterIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function TwitterIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="twitter"
@@ -26,4 +26,3 @@ export const TwitterIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-TwitterIcon.displayName = 'ForwardRef(TwitterIcon)'

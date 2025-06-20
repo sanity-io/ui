@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const DoubleChevronRightIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function DoubleChevronRightIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function DoubleChevronRightIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="double-chevron-right"
@@ -28,4 +28,3 @@ export const DoubleChevronRightIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-DoubleChevronRightIcon.displayName = 'ForwardRef(DoubleChevronRightIcon)'

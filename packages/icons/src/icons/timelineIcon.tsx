@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const TimelineIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function TimelineIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function TimelineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="timeline"
@@ -28,4 +28,3 @@ export const TimelineIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-TimelineIcon.displayName = 'ForwardRef(TimelineIcon)'

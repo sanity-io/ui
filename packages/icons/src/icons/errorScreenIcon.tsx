@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ErrorScreenIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ErrorScreenIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ErrorScreenIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="error-screen"
@@ -34,4 +34,3 @@ export const ErrorScreenIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ErrorScreenIcon.displayName = 'ForwardRef(ErrorScreenIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ThumbsUpIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ThumbsUpIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ThumbsUpIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="thumbs-up"
@@ -28,4 +28,3 @@ export const ThumbsUpIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ThumbsUpIcon.displayName = 'ForwardRef(ThumbsUpIcon)'

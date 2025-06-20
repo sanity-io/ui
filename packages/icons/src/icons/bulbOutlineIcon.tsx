@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const BulbOutlineIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function BulbOutlineIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function BulbOutlineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="bulb-outline"
@@ -27,4 +27,3 @@ export const BulbOutlineIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-BulbOutlineIcon.displayName = 'ForwardRef(BulbOutlineIcon)'

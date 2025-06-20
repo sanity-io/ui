@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const MobileDeviceIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function MobileDeviceIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function MobileDeviceIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="mobile-device"
@@ -34,4 +34,3 @@ export const MobileDeviceIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-MobileDeviceIcon.displayName = 'ForwardRef(MobileDeviceIcon)'

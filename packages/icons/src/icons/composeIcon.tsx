@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const ComposeIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function ComposeIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function ComposeIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="compose"
@@ -28,4 +28,3 @@ export const ComposeIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-ComposeIcon.displayName = 'ForwardRef(ComposeIcon)'

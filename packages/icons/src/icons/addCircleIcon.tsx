@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const AddCircleIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function AddCircleIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function AddCircleIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="add-circle"
@@ -28,4 +28,3 @@ export const AddCircleIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-AddCircleIcon.displayName = 'ForwardRef(AddCircleIcon)'

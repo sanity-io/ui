@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const MasterDetailIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function MasterDetailIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function MasterDetailIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="master-detail"
@@ -28,4 +28,3 @@ export const MasterDetailIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-MasterDetailIcon.displayName = 'ForwardRef(MasterDetailIcon)'

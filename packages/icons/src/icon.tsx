@@ -14,7 +14,7 @@ export interface IconProps {
  */
 export const Icon: ForwardRefExoticComponent<
   IconProps & Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function Icon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function Icon(props, ref) {
   const {symbol, ...restProps} = props
   const IconComponent = icons[symbol]
 
@@ -24,4 +24,3 @@ export const Icon: ForwardRefExoticComponent<
 
   return <IconComponent {...restProps} ref={ref} />
 })
-Icon.displayName = 'ForwardRef(Icon)'

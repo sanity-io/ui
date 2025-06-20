@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const LinkedinIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function LinkedinIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function LinkedinIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="linkedin"
@@ -26,4 +26,3 @@ export const LinkedinIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-LinkedinIcon.displayName = 'ForwardRef(LinkedinIcon)'

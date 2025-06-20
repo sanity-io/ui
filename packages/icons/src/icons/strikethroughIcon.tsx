@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const StrikethroughIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function StrikethroughIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function StrikethroughIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="strikethrough"
@@ -31,4 +31,3 @@ export const StrikethroughIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-StrikethroughIcon.displayName = 'ForwardRef(StrikethroughIcon)'

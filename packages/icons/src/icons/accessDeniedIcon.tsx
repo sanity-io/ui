@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const AccessDeniedIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function AccessDeniedIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function AccessDeniedIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="access-denied"
@@ -28,4 +28,3 @@ export const AccessDeniedIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-AccessDeniedIcon.displayName = 'ForwardRef(AccessDeniedIcon)'

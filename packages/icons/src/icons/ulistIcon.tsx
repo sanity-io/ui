@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const UlistIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function UlistIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function UlistIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="ulist"
@@ -46,4 +46,3 @@ export const UlistIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-UlistIcon.displayName = 'ForwardRef(UlistIcon)'

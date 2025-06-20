@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const DiamondIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function DiamondIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function DiamondIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="diamond"
@@ -28,4 +28,3 @@ export const DiamondIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-DiamondIcon.displayName = 'ForwardRef(DiamondIcon)'

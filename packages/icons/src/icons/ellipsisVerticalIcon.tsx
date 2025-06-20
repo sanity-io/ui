@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const EllipsisVerticalIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function EllipsisVerticalIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function EllipsisVerticalIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="ellipsis-vertical"
@@ -34,4 +34,3 @@ export const EllipsisVerticalIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-EllipsisVerticalIcon.displayName = 'ForwardRef(EllipsisVerticalIcon)'

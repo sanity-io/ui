@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const WarningFilledIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function WarningFilledIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function WarningFilledIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="warning-filled"
@@ -28,4 +28,3 @@ export const WarningFilledIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-WarningFilledIcon.displayName = 'ForwardRef(WarningFilledIcon)'

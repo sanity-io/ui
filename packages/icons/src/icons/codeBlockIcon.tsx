@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CodeBlockIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CodeBlockIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CodeBlockIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="code-block"
@@ -28,4 +28,3 @@ export const CodeBlockIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CodeBlockIcon.displayName = 'ForwardRef(CodeBlockIcon)'

@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const UnderlineIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function UnderlineIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function UnderlineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="underline"
@@ -27,4 +27,3 @@ export const UnderlineIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-UnderlineIcon.displayName = 'ForwardRef(UnderlineIcon)'

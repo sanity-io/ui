@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const TriangleOutlineIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function TriangleOutlineIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function TriangleOutlineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="triangle-outline"
@@ -28,4 +28,3 @@ export const TriangleOutlineIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-TriangleOutlineIcon.displayName = 'ForwardRef(TriangleOutlineIcon)'

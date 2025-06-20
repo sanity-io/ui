@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const UndoIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function UndoIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function UndoIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="undo"
@@ -34,4 +34,3 @@ export const UndoIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-UndoIcon.displayName = 'ForwardRef(UndoIcon)'

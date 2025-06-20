@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const EditIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function EditIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function EditIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="edit"
@@ -28,4 +28,3 @@ export const EditIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-EditIcon.displayName = 'ForwardRef(EditIcon)'

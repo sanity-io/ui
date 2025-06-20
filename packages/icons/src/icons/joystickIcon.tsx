@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const JoystickIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function JoystickIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function JoystickIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="joystick"
@@ -28,4 +28,3 @@ export const JoystickIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-JoystickIcon.displayName = 'ForwardRef(JoystickIcon)'

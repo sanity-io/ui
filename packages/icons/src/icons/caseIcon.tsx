@@ -7,7 +7,7 @@ import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVG
  */
 export const CaseIcon: ForwardRefExoticComponent<
   Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = forwardRef(function CaseIcon(props, ref) {
+> = /* @__PURE__ */ forwardRef(function CaseIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="case"
@@ -28,4 +28,3 @@ export const CaseIcon: ForwardRefExoticComponent<
     </svg>
   )
 })
-CaseIcon.displayName = 'ForwardRef(CaseIcon)'
