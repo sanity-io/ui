@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/sanity-io/logos/compare/v2.2.0...v2.2.1) (2025-06-20)
+
+### Bug Fixes
+
+- fully support treeshaking ([#131](https://github.com/sanity-io/logos/issues/131)) ([4847938](https://github.com/sanity-io/logos/commit/4847938af5ab9bdab5ab0d97ec4c7ab2dec6db00))
+
 ## [2.2.0](https://github.com/sanity-io/logos/compare/v2.1.13...v2.2.0) (2025-05-08)
 
 ### Features
