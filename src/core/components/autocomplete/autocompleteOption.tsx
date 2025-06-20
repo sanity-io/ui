@@ -1,4 +1,4 @@
-import {type KeyboardEvent, type ReactElement, type ReactNode, useCallback} from 'react'
+import {type KeyboardEvent, type ReactNode, useCallback} from 'react'
 
 import {_isEnterToClickElement} from '../../helpers/element'
 
@@ -10,7 +10,7 @@ export interface AutocompleteOptionProps {
   value: string
 }
 
-export function AutocompleteOption(props: AutocompleteOptionProps): ReactElement {
+export function AutocompleteOption(props: AutocompleteOptionProps): React.JSX.Element {
   const {children, id, onSelect, selected, value} = props
 
   const handleClick = useCallback(() => {

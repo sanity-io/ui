@@ -1,4 +1,4 @@
-import {type ReactElement, type ReactNode, useMemo} from 'react'
+import {type ReactNode, useMemo} from 'react'
 
 import {useDelayedState} from '../../../hooks/useDelayedState'
 import type {Delay} from '../../../types'
@@ -27,7 +27,9 @@ export interface TooltipDelayGroupProviderProps {
  * Provides context for a group of tooltip elements that should share a delay
  * which temporarily becomes 1 ms after the first floating element of the group opens.
  */
-export function TooltipDelayGroupProvider(props: TooltipDelayGroupProviderProps): ReactElement {
+export function TooltipDelayGroupProvider(
+  props: TooltipDelayGroupProviderProps,
+): React.JSX.Element {
   const {children, delay} = props
   const [isGroupActive, setIsGroupActive] = useDelayedState(false)
   const [openTooltipId, setOpenTooltipId] = useDelayedState<string | null>(null)

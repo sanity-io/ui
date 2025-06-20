@@ -1,13 +1,5 @@
 import type {Breakpoint, ResponsiveProp} from '@sanity/ui/css'
-import {
-  type ReactElement,
-  type ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import {type ReactNode, useCallback, useContext, useEffect, useMemo, useState} from 'react'
 
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
@@ -22,7 +14,7 @@ export interface LayerProviderProps {
 }
 
 /** @public */
-export function LayerProvider(props: LayerProviderProps): ReactElement {
+export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const {children, zOffset: zOffsetProp = 0} = props
 
   // Get parent context values
