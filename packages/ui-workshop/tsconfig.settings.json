@@ -6,6 +6,8 @@
 
     "verbatimModuleSyntax": false,
     "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
 
     "paths": {
       "@sanity/ui-workshop/plugin-a11y": ["./exports/plugin-a11y"],

@@ -41,7 +41,7 @@ export interface PerfTestRenderResult {
   baseDuration: number
   startTime: number
   commitTime: number
-  /** @deprecated */
+  /** @deprecated - this will be removed in the next major version */
   interactions: Set<{
     __count: number
     id: number
