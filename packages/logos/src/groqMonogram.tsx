@@ -1,13 +1,12 @@
 import {hues} from '@sanity/color'
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export const GroqMonogram = forwardRef(function GroqMonogram(
-  props: React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const GroqMonogram: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function GroqMonogram(props, ref) {
   return (
     <svg
       data-sanity-icon="groq-monogram"
@@ -27,4 +26,3 @@ export const GroqMonogram = forwardRef(function GroqMonogram(
     </svg>
   )
 })
-GroqMonogram.displayName = 'ForwardRef(GroqMonogram)'

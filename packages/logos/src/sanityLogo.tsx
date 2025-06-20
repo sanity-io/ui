@@ -1,5 +1,5 @@
 import {white} from '@sanity/color'
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 import {NEW_SANITY_BLACK} from './colors'
 
 /**
@@ -12,10 +12,9 @@ export interface SanityLogoProps {
 /**
  * @public
  */
-export const SanityLogo = forwardRef(function SanityLogo(
-  props: SanityLogoProps & React.SVGProps<SVGSVGElement>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const SanityLogo: ForwardRefExoticComponent<
+  Omit<SanityLogoProps & SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function SanityLogo(props, ref) {
   const {dark, ...svgProps} = props
   const fill = dark ? white.hex : NEW_SANITY_BLACK
 
@@ -56,4 +55,3 @@ export const SanityLogo = forwardRef(function SanityLogo(
     </svg>
   )
 })
-SanityLogo.displayName = 'ForwardRef(SanityLogo)'

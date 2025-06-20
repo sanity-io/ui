@@ -1,8 +1,23 @@
 {
-  "type": "module",
   "name": "@sanity/logos",
-  "version": "2.2.0",
+  "version": "2.2.1-canary.0",
+  "keywords": [
+    "sanity",
+    "ui",
+    "logos"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/logos/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/logos.git"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": false,
+  "type": "module",
   "exports": {
     ".": {
       "source": "./src/index.ts",
@@ -16,112 +31,37 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
-  "license": "MIT",
   "scripts": {
-    "build": "run-s clean build:pkg check:pkg",
-    "build:pkg": "pkg build --strict",
-    "check:pkg": "pkg --strict",
-    "check:types": "tsc --build",
+    "build": "pkg build --strict --check --clean",
     "clean": "rimraf .workshop dist",
     "commit": "cz",
     "dev": "workshop dev",
     "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx --quiet",
+    "lint": "oxlint",
     "prepare": "husky install",
     "prepublishOnly": "pnpm build",
     "release": "semantic-release",
-    "test": "echo 'TODO'",
+    "typecheck": "tsc --noEmit",
     "watch": "pkg watch --strict"
   },
-  "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.3",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@sanity/color": "^3.0.6",
-    "@sanity/icons": "^3.3.1",
-    "@sanity/pkg-utils": "^6.13.4",
-    "@sanity/semantic-release-preset": "^4.1.8",
-    "@sanity/ui": "^2.8.8",
-    "@sanity/ui-workshop": "^2.0.16",
-    "@testing-library/jest-dom": "^6.4.8",
-    "@testing-library/react": "^16.0.0",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^18.13.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@types/styled-components": "^5.1.34",
-    "@types/testing-library__jest-dom": "^5.14.9",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "esbuild": "^0.23.0",
-    "esbuild-register": "^3.6.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "husky": "^8.0.3",
-    "jest": "^29.7.0",
-    "jest-axe": "^9.0.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^15.2.0",
-    "npm-run-all2": "^6.2.2",
-    "prettier": "^3.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-is": "^18.3.1",
-    "rimraf": "^5.0.5",
-    "semantic-release": "^23.1.1",
-    "styled-components": "^6.1.12",
-    "typescript": "^5.5.3"
-  },
-  "peerDependencies": {
-    "@sanity/color": "^2.0 || ^3.0 || ^3.0.0-beta",
-    "react": "^18.3 || >=19.0.0-rc"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/logos.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/logos/issues"
-  },
-  "keywords": [
-    "sanity",
-    "ui",
-    "logos"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "homepage": "https://www.sanity.io/",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
   },
   "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "prettier --cache --write",
+      "oxlint --fix --quiet"
+    ],
     "*": [
       "prettier --write --cache --ignore-unknown"
     ]
   },
-  "packageManager": "pnpm@9.6.0",
-  "publishConfig": {
-    "access": "public"
-  },
+  "browserslist": "extends @sanity/browserslist-config",
   "release": {
-    "extends": "@sanity/semantic-release-preset",
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
       "main",
@@ -133,9 +73,44 @@
         "name": "alpha",
         "prerelease": true
       }
-    ]
+    ],
+    "extends": "@sanity/semantic-release-preset"
   },
-  "esm.sh": {
-    "bundle": false
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.2",
+    "@sanity/color": "^3.0.6",
+    "@sanity/pkg-utils": "^7.8.4",
+    "@sanity/prettier-config": "^1.0.5",
+    "@sanity/semantic-release-preset": "^4.1.8",
+    "@sanity/ui": "^2.16.2",
+    "@sanity/ui-workshop": "^2.1.5",
+    "@types/node": "^24.0.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "babel-plugin-react-compiler": "19.1.0-rc.2",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.4.3",
+    "oxlint": "^1.2.0",
+    "prettier": "^3.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "rimraf": "^5.0.5",
+    "semantic-release": "^23.1.1",
+    "typescript": "5.8.3"
+  },
+  "peerDependencies": {
+    "@sanity/color": "^2.0 || ^3.0 || ^3.0.0-beta",
+    "react": "^18.3 || ^19.0.0-0"
+  },
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

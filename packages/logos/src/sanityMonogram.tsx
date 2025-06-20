@@ -1,5 +1,5 @@
 import {white} from '@sanity/color'
-import {forwardRef} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 import {NEW_SANITY_BLACK, NEW_SANITY_ORANGE} from './colors'
 
 /**
@@ -37,10 +37,11 @@ const SANITY_MONOGRAM_COLOR: {[key in SanityMonogramScheme]: {bg: string; fg: st
 /**
  * @public
  */
-export const SanityMonogram = forwardRef(function SanityMonogram(
-  props: SanityMonogramProps & Omit<React.SVGProps<SVGSVGElement>, 'color'>,
-  ref: React.Ref<SVGSVGElement>,
-) {
+export const SanityMonogram: ForwardRefExoticComponent<
+  SanityMonogramProps &
+    Omit<SVGProps<SVGSVGElement>, 'color' | 'ref'> &
+    RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function SanityMonogram(props, ref) {
   const {scheme = 'default', color, ...restProps} = props
   const bg = color?.bg1 || SANITY_MONOGRAM_COLOR[scheme].bg
   const fg = color?.fg || SANITY_MONOGRAM_COLOR[scheme].fg
@@ -63,4 +64,3 @@ export const SanityMonogram = forwardRef(function SanityMonogram(
     </svg>
   )
 })
-SanityMonogram.displayName = 'ForwardRef(SanityMonogram)'

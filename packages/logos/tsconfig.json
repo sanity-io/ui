@@ -1,9 +1,7 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./src"],
+  "include": ["./package.config.ts", "./src", "./workshop.config.ts"],
   "compilerOptions": {
-    "rootDir": ".",
-    "noEmit": true,
-    "jsx": "react-jsx",
-  },
+    "jsx": "react-jsx"
+  }
 }
