@@ -9,7 +9,7 @@ const isProd = env['NODE_ENV'] === 'production'
 
 const config: PkgConfigOptions = {
   babel: {reactCompiler: true},
-  dts: 'rolldown',
+  // dts: 'rolldown',
   extract: {
     rules: {
       'ae-internal-missing-underscore': 'off',
