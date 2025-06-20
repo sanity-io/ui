@@ -40,7 +40,7 @@ export const tones: Record<ElementTone, string> = {
         _style(layers.primitives, {
           'vars': {
             [vars.color.bg]: tinted.bg[0],
-            [vars.color.border]: tinted.border[2],
+            [vars.color.border]: tinted.border[1],
             [vars.color.fg]: tinted.fg[2],
           },
 
@@ -51,7 +51,7 @@ export const tones: Record<ElementTone, string> = {
                   {
                     vars: {
                       [vars.color.bg]: tinted.bg[1],
-                      [vars.color.border]: tinted.border[1],
+                      [vars.color.border]: tinted.border[2],
                       [vars.color.fg]: tinted.fg[1],
                     },
                   },

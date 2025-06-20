@@ -1,5 +1,5 @@
 import {_composeClassNames} from '../../_composeClassNames'
-import {themeClassName} from '../../defaultTheme.css'
+import {themeClassName} from '../../theme/defaultTheme.css'
 import {height} from '../../props/height/height'
 import {card} from '../card/card'
 import {_root} from './root.css'

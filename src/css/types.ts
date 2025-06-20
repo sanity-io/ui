@@ -153,7 +153,7 @@ export type FontTokens<FontScaleIndex extends number> = {
 }
 
 /** @public */
-export type ThemeTokens = {
+export type CoreThemeTokens = {
   avatar: {
     focusRing: {
       offset: string
@@ -245,7 +245,7 @@ export type ThemeTokens = {
 }
 
 /** @public */
-export type RootThemeTokens = ThemeTokens & {
+export type ThemeTokens = CoreThemeTokens & {
   color: {palette: ColorPaletteTokens}
 }
 
@@ -418,4 +418,4 @@ export type ColorPaletteVars = ThemeContract<ColorPaletteTokens>
 export type ScopedVars = ThemeContract<ScopedTokens>
 
 /** @public */
-export type ThemeVars = ThemeContract<RootThemeTokens & ScopedTokens> // _CSSThemeWithoutPaletteTokens & ScopedVars
+export type ThemeVars = ThemeContract<ThemeTokens & ScopedTokens> // _CSSThemeWithoutPaletteTokens & ScopedVars
