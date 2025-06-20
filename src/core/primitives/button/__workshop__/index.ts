@@ -10,16 +10,16 @@ const scope: WorkshopScope = {
       title: 'Props',
       component: lazy(() => import('./props')),
     },
-    // {
-    //   name: 'styled-1',
-    //   title: 'Styled #1',
-    //   component: lazy(() => import('./styled1')),
-    // },
-    // {
-    //   name: 'styled-2',
-    //   title: 'Styled #2',
-    //   component: lazy(() => import('./styled2')),
-    // },
+    {
+      name: 'styled-1',
+      title: 'Styled #1',
+      component: lazy(() => import('./styled1')),
+    },
+    {
+      name: 'styled-2',
+      title: 'Styled #2',
+      component: lazy(() => import('./styled2')),
+    },
     {
       name: 'stacked',
       title: 'Stacked',
