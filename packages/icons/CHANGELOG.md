@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.4](https://github.com/sanity-io/icons/compare/v3.7.3...v3.7.4) (2025-06-20)
+
+### Bug Fixes
+
+- fully support rollup treeshaking ([#130](https://github.com/sanity-io/icons/issues/130)) ([8372571](https://github.com/sanity-io/icons/commit/8372571f48a36b35cb991f2e10b817ffc9bcf695))
+
 ## [3.7.3](https://github.com/sanity-io/icons/compare/v3.7.2...v3.7.3) (2025-06-19)
 
 ### Bug Fixes
