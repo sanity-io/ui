@@ -38,18 +38,6 @@ export default ts.config(
         '@typescript-eslint/no-explicit-any': 'warn',
         'import/no-unresolved': 'off',
         'no-console': 'error',
-        'no-restricted-imports': [
-          'error',
-          {
-            paths: [
-              {
-                name: 'styled-components',
-                importNames: ['default'],
-                message: 'Please use `import {styled} from "styled-components"` instead.',
-              },
-            ],
-          },
-        ],
         'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
       },
     },
