@@ -2,7 +2,7 @@ import {createTheme, globalFontFace} from '@vanilla-extract/css'
 
 import {layers} from '../layers.css'
 import {themeVars} from '../vars.css'
-import {buildCSSThemeTokens} from './buildCSSThemeTokens'
+import {buildCSSTheme} from './buildCSSTheme'
 
 const fontDisplay: FontDisplay = 'swap'
 
@@ -60,5 +60,5 @@ globalFontFace('Inter', [
 /** @public */
 export const themeClassName: string = createTheme(themeVars, {
   '@layer': layers.theme,
-  ...buildCSSThemeTokens(),
+  ...buildCSSTheme(),
 })

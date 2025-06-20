@@ -302,9 +302,7 @@ export type FontTextSize = (typeof FONT_TEXT_SIZE)[number]
 export type Shadow = (typeof SHADOW)[number]
 
 /** @public */
-export interface ThemeOptions {
-  tokens?: PartialTokens<Tokens>
-}
+export type ThemeOptions = PartialTokens<Tokens>
 
 /** @public */
 export interface Palette {
