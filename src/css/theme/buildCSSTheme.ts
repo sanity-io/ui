@@ -22,6 +22,7 @@ import {
   FONT_TEXT_SIZE,
   type Hue,
   HUES,
+  type PartialTokens,
   RADIUS,
   SHADOW,
   SPACE,
@@ -41,7 +42,7 @@ import type {
 import {paletteVars} from '../vars.css'
 
 /** @public */
-export type CSSThemeOptions = {color?: ColorTokens; palette?: ColorPaletteTokens}
+export type CSSThemeOptions = {color?: PartialTokens<ColorTokens>; palette?: ColorPaletteTokens}
 
 /** @public */
 export function buildCSSTheme(options?: CSSThemeOptions): ThemeTokens {
