@@ -306,6 +306,13 @@ function buildToneRule(tone: CardTone): StyleRule {
     [target.skeleton.to]: source.skeleton.to,
 
     // legacy vars
+
+    // todo: avatar colors
+    // --card-avatar-*-color
+
+    // todo: badge colors
+    // --card-badge-*-color
+
     '--card-bg-color': vars.color.bg,
     '--card-bg2-color': vars.color.muted.bg,
     '--card-border-color': vars.color.border,
