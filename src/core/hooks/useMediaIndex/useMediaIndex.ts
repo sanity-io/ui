@@ -31,7 +31,7 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
 function _createMediaStore(): _MediaStore {
   const mediaLen = media.length
 
-  let sizes: {mq: MediaQueryList; index: number}[] = []
+  let sizes: {mq: MediaQueryList; index: number}[] | undefined = undefined
 
   // The _createMediaStore function is called in both server and client environments.
   // However since subscribe and getSnapshot are only called on the client we lazy init what we need for them
@@ -55,7 +55,7 @@ function _createMediaStore(): _MediaStore {
   }
 
   const getSnapshot = () => {
-    for (const {index, mq} of getSizes()) {
+    for (const {index, mq} of getSizes() ?? []) {
       if (mq.matches) return index as Breakpoint
     }
 
@@ -65,7 +65,7 @@ function _createMediaStore(): _MediaStore {
   const subscribe = (onStoreChange: () => void) => {
     const disposeFns: (() => void)[] = []
 
-    for (const {mq} of getSizes()) {
+    for (const {mq} of getSizes() ?? []) {
       const handleChange = () => {
         if (mq.matches) onStoreChange()
       }
