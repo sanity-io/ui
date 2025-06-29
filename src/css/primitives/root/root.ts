@@ -1,6 +1,6 @@
 import {_composeClassNames} from '../../_composeClassNames'
-import {themeClassName} from '../../theme/defaultTheme.css'
 import {height} from '../../props/height/height'
+import {themeClassName} from '../../theme/defaultTheme.css'
 import {card} from '../card/card'
 import {_root} from './root.css'
 import type {RootStyleProps} from './types'

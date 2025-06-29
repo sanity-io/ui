@@ -1,4 +1,4 @@
-import type {FontTextSize, ElementTone} from '@sanity/ui/theme'
+import type {ElementTone, FontTextSize} from '@sanity/ui/theme'
 
 import type {ResponsiveProp} from '../../types'
 
