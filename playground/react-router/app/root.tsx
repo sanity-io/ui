@@ -12,7 +12,7 @@ import {
 } from 'react-router'
 
 import type {Route} from './+types/root'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ColorScheme} from '@sanity/ui/theme'
 import {useEffect, useRef, useState} from 'react'
 
 export const headers: Route.HeadersFunction = () => {
@@ -43,7 +43,7 @@ export function Layout({children}: {children: React.ReactNode}) {
   const {initialPrefersDark} = useLoaderData<typeof loader>() ?? {}
   const prefersDark = usePrefersDark(() => initialPrefersDark)
   const prefersDarkRef = useRef(prefersDark)
-  const [scheme, setScheme] = useState<ThemeColorSchemeKey>(() => (prefersDark ? 'dark' : 'light'))
+  const [scheme, setScheme] = useState<ColorScheme>(() => (prefersDark ? 'dark' : 'light'))
 
   useEffect(() => {
     if (prefersDarkRef.current === prefersDark) return
