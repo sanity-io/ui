@@ -1,4 +1,4 @@
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {ColorScheme} from '@sanity/ui/theme'
 import {headers} from 'next/headers'
 import {AppRoot} from '../components/AppRoot'
 import {Metadata, Viewport} from 'next'
@@ -21,7 +21,7 @@ export default async function Layout({
 }>) {
   const prefersColorScheme = (await headers()).get(
     'Sec-CH-Prefers-Color-Scheme',
-  ) as ThemeColorSchemeKey | null
+  ) as ColorScheme | null
 
   return <AppRoot initialPrefersDark={prefersColorScheme === 'dark'}>{children}</AppRoot>
 }

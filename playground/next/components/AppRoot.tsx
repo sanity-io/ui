@@ -3,7 +3,7 @@
 import '@sanity/ui/css/index.css'
 
 import {Root, usePrefersDark} from '@sanity/ui'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {ColorScheme} from '@sanity/ui/theme'
 import {ReactNode, useEffect, useRef, useState} from 'react'
 
 export function AppRoot(props: {children: ReactNode; initialPrefersDark: boolean}) {
@@ -11,7 +11,7 @@ export function AppRoot(props: {children: ReactNode; initialPrefersDark: boolean
 
   const prefersDark = usePrefersDark(() => initialPrefersDark)
   const prefersDarkRef = useRef(prefersDark)
-  const [scheme, setScheme] = useState<ThemeColorSchemeKey>(() => (prefersDark ? 'dark' : 'light'))
+  const [scheme, setScheme] = useState<ColorScheme>(() => (prefersDark ? 'dark' : 'light'))
 
   useEffect(() => {
     if (prefersDarkRef.current === prefersDark) return
