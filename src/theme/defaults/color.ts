@@ -168,8 +168,8 @@ export const defaultColor: PartialTokens<ColorTokens> = {
             4: ['300 75%', '700'],
           },
           border: {
-            0: ['200', '800 75%'],
-            4: ['400', '700'],
+            0: ['100', '800 75%'],
+            4: ['300', '700'],
           },
           fg: {
             0: ['black', 'white'],
