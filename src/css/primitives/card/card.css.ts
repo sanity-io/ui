@@ -304,38 +304,6 @@ function buildToneRule(tone: CardTone): StyleRule {
 
     [target.skeleton.from]: source.skeleton.from,
     [target.skeleton.to]: source.skeleton.to,
-
-    // legacy vars
-
-    // todo: avatar colors
-    // --card-avatar-*-color
-
-    // todo: badge colors
-    // --card-badge-*-color
-
-    '--card-bg-color': vars.color.bg,
-    '--card-bg2-color': vars.color.muted.bg,
-    '--card-border-color': vars.color.border,
-    '--card-code-bg-color': vars.color.code.bg,
-    '--card-code-fg-color': vars.color.code.fg,
-    '--card-fg-color': vars.color.fg,
-    '--card-focus-ring-color': vars.color.focusRing,
-    '--card-hairline-soft-color': vars.color.tinted.default.border[1],
-    '--card-hairline-hard-color': vars.color.tinted.default.border[2],
-    '--card-icon-color': vars.color.fg,
-    '--card-kbd-bg-color': vars.color.muted.bg,
-    '--card-kbd-border-color': vars.color.tinted.default.border[1],
-    '--card-kbd-fg-color': vars.color.muted.fg,
-    '--card-link-color': vars.color.link.fg,
-    '--card-link-fg-color': vars.color.link.fg,
-    '--card-muted-bg-color': vars.color.muted.bg,
-    '--card-muted-fg-color': vars.color.muted.fg,
-    '--card-shadow-outline-color': vars.color.shadow.outline,
-    '--card-shadow-umbra-color': vars.color.shadow.umbra,
-    '--card-shadow-penumbra-color': vars.color.shadow.penumbra,
-    '--card-shadow-ambient-color': vars.color.shadow.ambient,
-    '--card-skeleton-from-color': vars.color.skeleton.from,
-    '--card-skeleton-to-color': vars.color.skeleton.to,
   })
 
   for (const variant of COLOR_VARIANTS) {
@@ -364,6 +332,54 @@ function buildToneRule(tone: CardTone): StyleRule {
       })
     }
   }
+
+  // assign legacy vars
+  // todo: remove before release?
+  _assign(toneVars, {
+    '--card-accent-fg-color': vars.color.tinted.suggest.fg[4],
+  })
+  for (const color of AVATAR_COLORS) {
+    _assign(toneVars, {
+      [`--card-avatar-${color}-bg-color`]: vars.color.avatar[color].bg,
+      [`--card-avatar-${color}-fg-color`]: vars.color.avatar[color].fg,
+    })
+  }
+  _assign(toneVars, {
+    '--card-backdrop-color': vars.color.backdrop,
+  })
+  for (const tone of ELEMENT_TONES) {
+    _assign(toneVars, {
+      [`--card-badge-${tone}-bg-color`]: vars.color.tinted[tone].bg[1],
+      [`--card-badge-${tone}-dot-color`]: vars.color.tinted[tone].fg[4],
+      [`--card-badge-${tone}-fg-color`]: vars.color.tinted[tone].fg[2],
+      [`--card-badge-${tone}-icon-color`]: vars.color.tinted[tone].fg[4],
+    })
+  }
+  _assign(toneVars, {
+    '--card-bg-color': vars.color.bg,
+    '--card-bg2-color': vars.color.muted.bg,
+    '--card-border-color': vars.color.border,
+    '--card-code-bg-color': vars.color.code.bg,
+    '--card-code-fg-color': vars.color.code.fg,
+    '--card-fg-color': vars.color.fg,
+    '--card-focus-ring-color': vars.color.focusRing,
+    '--card-hairline-soft-color': vars.color.tinted.default.border[1],
+    '--card-hairline-hard-color': vars.color.tinted.default.border[2],
+    '--card-icon-color': vars.color.fg,
+    '--card-kbd-bg-color': vars.color.muted.bg,
+    '--card-kbd-border-color': vars.color.tinted.default.border[1],
+    '--card-kbd-fg-color': vars.color.muted.fg,
+    '--card-link-color': vars.color.link.fg,
+    '--card-link-fg-color': vars.color.link.fg,
+    '--card-muted-bg-color': vars.color.muted.bg,
+    '--card-muted-fg-color': vars.color.muted.fg,
+    '--card-shadow-outline-color': vars.color.shadow.outline,
+    '--card-shadow-umbra-color': vars.color.shadow.umbra,
+    '--card-shadow-penumbra-color': vars.color.shadow.penumbra,
+    '--card-shadow-ambient-color': vars.color.shadow.ambient,
+    '--card-skeleton-from-color': vars.color.skeleton.from,
+    '--card-skeleton-to-color': vars.color.skeleton.to,
+  })
 
   return {
     vars: toneVars,
