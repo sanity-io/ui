@@ -33,7 +33,10 @@ export type ResponsiveRules = Record<Breakpoint, string>
 export type ResponsiveRuleOptions<K extends string | number> = Record<K, ResponsiveRules>
 
 /** @public */
-export type CSSVarFunction = `var(--${string})`
+export type CSSVarName = `--${string}`
+
+/** @public */
+export type CSSVarFunction = `var(${CSSVarName})`
 
 /** @public */
 export type ElementColorTokens = {
