@@ -1,3 +1,4 @@
 .next
+.sanity
+.vercel
 pnpm-lock.yaml
-tmp

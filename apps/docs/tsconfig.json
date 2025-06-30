@@ -18,5 +18,5 @@
     }
   },
   "include": [".next/types/**/*.ts", "next-env.d.ts", "sanity.config.ts", "sanity-env.d.ts", "src"],
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [".next", "node_modules", "tmp"]
 }

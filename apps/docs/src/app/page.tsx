@@ -14,7 +14,7 @@ export default async function RootRoute() {
       path: [null],
     })
 
-    if (draftMode().isEnabled) {
+    if ((await draftMode()).isEnabled) {
       return <PreviewPage initial={{data: rawData, sourceMap}} path={[]} />
     }
 
