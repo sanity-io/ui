@@ -1,13 +1,19 @@
-/* eslint-disable simple-import-sort/exports */
+// NOTE: Order is important, as it affects the order of compiled CSS.
 
+// API
+export * from './constants'
+export * from './getVarName'
+export * from './theme/buildCSSTheme'
+export * from './types'
+
+// CSS: variables
 export * from './layers.css'
 export * from './vars.css'
 
-// theme
-export * from './theme/buildCSSTheme'
+// CSS: theme
 export * from './theme/defaultTheme.css'
 
-// props
+// CSS: props
 export * from './props/alignItems/alignItems'
 export * from './props/alignItems/types'
 export * from './props/border/border'
@@ -80,15 +86,13 @@ export * from './props/textAlign/textAlign'
 export * from './props/textAlign/types'
 export * from './props/textOverflow/textOverflow'
 export * from './props/textOverflow/types'
-export * from './props/width/width'
 export * from './props/width/types'
+export * from './props/width/width'
 
-// primitives
+// CSS:primitives
 export * from './primitives/_arrow/_arrow'
 export * from './primitives/_input/input'
 export * from './primitives/_input/types'
-export * from './primitives/selectable/selectable'
-export * from './primitives/selectable/types'
 export * from './primitives/avatar/avatar'
 export * from './primitives/avatar/types'
 export * from './primitives/badge/badge'
@@ -116,6 +120,8 @@ export * from './primitives/root/root'
 export * from './primitives/root/types'
 export * from './primitives/select/select'
 export * from './primitives/select/types'
+export * from './primitives/selectable/selectable'
+export * from './primitives/selectable/types'
 export * from './primitives/spinner/spinner'
 export * from './primitives/spinner/types'
 export * from './primitives/srOnly/srOnly'
@@ -130,7 +136,7 @@ export * from './primitives/textInput/types'
 export * from './primitives/tooltip/tooltip'
 export * from './primitives/tooltip/types'
 
-// components
+// CSS: components
 export * from './components/breadcrumbs/breadcrumbs'
 export * from './components/dialog/dialog'
 export * from './components/menu/menu'
@@ -138,6 +144,3 @@ export * from './components/skeleton/skeleton'
 export * from './components/skeleton/types'
 export * from './components/toast/toast'
 export * from './components/tree/tree'
-
-export * from './constants'
-export * from './types'
