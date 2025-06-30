@@ -18,8 +18,8 @@ setServerClient(serverClient)
 
 const usingCdn = serverClient.config().useCdn
 // Automatically handle draft mode
-export const loadQuery = ((query, params = {}, options = {}) => {
-  const {perspective = draftMode().isEnabled ? 'previewDrafts' : 'published'} = options
+export const loadQuery = (async (query, params = {}, options = {}) => {
+  const {perspective = (await draftMode()).isEnabled ? 'previewDrafts' : 'published'} = options
   // Don't cache by default
   let revalidate: NextFetchRequestConfig['revalidate'] = 0
   // If `next.tags` is set, and we're not using the CDN, then it's safe to cache

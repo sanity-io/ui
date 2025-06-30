@@ -20,7 +20,7 @@ const prodStudio = defineConfig<WorkspaceOptions>({
   projectId: 'mos42crl',
   dataset: 'production',
   plugins: [
-    codeInput() as any,
+    codeInput(),
     structureTool({structure}),
     presentationTool({
       previewUrl: {
@@ -43,7 +43,7 @@ const devStudio = defineConfig<WorkspaceOptions>({
   projectId: 'mos42crl',
   dataset: 'development',
   plugins: [
-    codeInput() as any,
+    codeInput(),
     structureTool({structure}),
     presentationTool({
       previewUrl: {

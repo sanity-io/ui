@@ -42,6 +42,7 @@ export interface SanityBlockValue {
   style: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type SanityArrayItemValue<T extends {}> = T & {
   _key: string
 }

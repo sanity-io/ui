@@ -54,7 +54,7 @@ export default async function SlugRoute(props: {params: {slug: string[]}}) {
       path: params.slug,
     })
 
-    if (draftMode().isEnabled) {
+    if ((await draftMode()).isEnabled) {
       return <PreviewPage initial={{data: rawData, sourceMap}} path={params.slug} />
     }
 
