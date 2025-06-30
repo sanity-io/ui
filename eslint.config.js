@@ -114,11 +114,6 @@ export default ts.config(
             mode: 'file',
           },
           {
-            type: '@sanity/ui/_visual-editing',
-            pattern: ['exports/_visual-editing.ts'],
-            mode: 'file',
-          },
-          {
             type: '@sanity/ui/theme',
             pattern: ['exports/theme.ts'],
             mode: 'file',
@@ -188,7 +183,6 @@ export default ts.config(
             default: 'disallow',
             rules: [
               {from: '@sanity/ui', allow: ['src/core']},
-              {from: '@sanity/ui/_visual-editing', allow: ['src/core']},
               {from: '@sanity/ui/css', allow: ['src/css']},
               {from: '@sanity/ui/theme', allow: ['src/theme']},
 

@@ -29,12 +29,6 @@
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
-    "./_visual-editing": {
-      "source": "./exports/_visual-editing.ts",
-      "import": "./dist/_visual-editing.js",
-      "require": "./dist/_visual-editing.cjs",
-      "default": "./dist/_visual-editing.js"
-    },
     "./css": {
       "source": "./exports/css.ts",
       "import": "./dist/css/index.js",
@@ -55,9 +49,6 @@
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
-      "_visual-editing": [
-        "./dist/_visual-editing.d.ts"
-      ],
       "css": [
         "./dist/css.d.ts"
       ],
