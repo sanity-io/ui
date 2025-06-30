@@ -35,7 +35,7 @@ export const presentation: string = _style(layers.primitives, {
   'height': vars.input.radio.size,
   'borderRadius': '9999px',
   'backgroundColor': vars.color.input.radio.bg,
-  'boxShadow': `inset 0 0 0 1px ${vars.color.input.radio.border}`,
+  'boxShadow': `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.radio.border}`,
 
   'vars': {
     [vars.color.input.radio.fg]: vars.color.tinted.default.fg[0],

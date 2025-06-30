@@ -19,7 +19,6 @@ globalStyle(`${stack} > * + *`, {
 })
 
 export const root: string = _style(layers.primitives, {
-  // display: 'block',
   backgroundColor: vars.color.avatar.bg,
   position: 'relative',
   boxSizing: 'border-box',

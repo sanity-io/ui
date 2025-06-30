@@ -76,6 +76,9 @@ export function buildCSSTheme(options?: CSSThemeOptions): ThemeTokens {
       },
     },
     card: {
+      border: {
+        width: px(theme.card.border.width),
+      },
       shadow: {
         outline: px(theme.card.shadow.outline),
       },

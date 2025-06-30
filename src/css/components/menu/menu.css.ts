@@ -7,7 +7,7 @@ export const root: string = _style(layers.components, {
 })
 
 export const divider: string = _style(layers.components, {
-  height: `1px`,
+  height: vars.card.border.width,
   border: 0,
   backgroundColor: vars.color.border,
   margin: 0,

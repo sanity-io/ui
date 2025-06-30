@@ -71,6 +71,9 @@ const themeTokens: CoreThemeTokens = {
     },
   },
   card: {
+    border: {
+      width: '',
+    },
     shadow: {
       outline: '',
     },
