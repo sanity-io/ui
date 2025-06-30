@@ -180,6 +180,9 @@ export type CoreThemeTokens = {
     }
   }
   card: {
+    border: {
+      width: string
+    }
     shadow: {
       outline: string
     }

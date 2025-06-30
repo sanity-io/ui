@@ -6,10 +6,10 @@ import type {BorderStyle} from './types'
 
 export const borderOptions: ResponsiveRuleOptions<BorderStyle> = {
   solid: _responsiveStyle(layers.props, {
-    border: `1px solid ${vars.color.border}`,
+    border: `${vars.card.border.width} solid ${vars.color.border}`,
   }),
   muted: _responsiveStyle(layers.props, {
-    border: `1px solid ${vars.color.muted.border}`,
+    border: `${vars.card.border.width} solid ${vars.color.muted.border}`,
   }),
   none: _responsiveStyle(layers.props, {
     border: 'none',
@@ -18,10 +18,10 @@ export const borderOptions: ResponsiveRuleOptions<BorderStyle> = {
 
 export const borderTopOptions: ResponsiveRuleOptions<BorderStyle> = {
   solid: _responsiveStyle(layers.props, {
-    borderTop: `1px solid ${vars.color.border}`,
+    borderTop: `${vars.card.border.width} solid ${vars.color.border}`,
   }),
   muted: _responsiveStyle(layers.props, {
-    borderTop: `1px solid ${vars.color.muted.border}`,
+    borderTop: `${vars.card.border.width} solid ${vars.color.muted.border}`,
   }),
   none: _responsiveStyle(layers.props, {
     borderTop: 'none',
@@ -30,10 +30,10 @@ export const borderTopOptions: ResponsiveRuleOptions<BorderStyle> = {
 
 export const borderRightOptions: ResponsiveRuleOptions<BorderStyle> = {
   solid: _responsiveStyle(layers.props, {
-    borderRight: `1px solid ${vars.color.border}`,
+    borderRight: `${vars.card.border.width} solid ${vars.color.border}`,
   }),
   muted: _responsiveStyle(layers.props, {
-    borderRight: `1px solid ${vars.color.muted.border}`,
+    borderRight: `${vars.card.border.width} solid ${vars.color.muted.border}`,
   }),
   none: _responsiveStyle(layers.props, {
     borderRight: 'none',
@@ -42,10 +42,10 @@ export const borderRightOptions: ResponsiveRuleOptions<BorderStyle> = {
 
 export const borderBottomOptions: ResponsiveRuleOptions<BorderStyle> = {
   solid: _responsiveStyle(layers.props, {
-    borderBottom: `1px solid ${vars.color.border}`,
+    borderBottom: `${vars.card.border.width} solid ${vars.color.border}`,
   }),
   muted: _responsiveStyle(layers.props, {
-    borderBottom: `1px solid ${vars.color.muted.border}`,
+    borderBottom: `${vars.card.border.width} solid ${vars.color.muted.border}`,
   }),
   none: _responsiveStyle(layers.props, {
     borderBottom: 'none',
@@ -54,10 +54,10 @@ export const borderBottomOptions: ResponsiveRuleOptions<BorderStyle> = {
 
 export const borderLeftOptions: ResponsiveRuleOptions<BorderStyle> = {
   solid: _responsiveStyle(layers.props, {
-    borderLeft: `1px solid ${vars.color.border}`,
+    borderLeft: `${vars.card.border.width} solid ${vars.color.border}`,
   }),
   muted: _responsiveStyle(layers.props, {
-    borderLeft: `1px solid ${vars.color.muted.border}`,
+    borderLeft: `${vars.card.border.width} solid ${vars.color.muted.border}`,
   }),
   none: _responsiveStyle(layers.props, {
     borderLeft: 'none',
