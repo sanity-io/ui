@@ -28,7 +28,11 @@ export function Navbar(props: {path: string[]}): ReactElement {
             <Flex align="center" gap={[3, 3, 4]}>
               <Box flex="none">
                 <Text size={[1, 1, 2]}>
-                  <SanityMonogram color={monogramColor} style={{borderRadius: 3}} />
+                  {monogramColor ? (
+                    <SanityMonogram color={monogramColor} style={{borderRadius: 3}} />
+                  ) : (
+                    <SanityMonogram style={{borderRadius: 3}} />
+                  )}
                 </Text>
               </Box>
 

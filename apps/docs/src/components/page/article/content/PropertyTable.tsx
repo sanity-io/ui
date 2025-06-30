@@ -14,7 +14,9 @@ export function PropertyTable(props: {data: WrappedValue<PropertyTableData>}): R
   return (
     <Box marginY={[2, 2, 3, 4]}>
       <Card radius={2} shadow={1}>
-        {properties?.map((property) => <Property key={property.name?.value} property={property} />)}
+        {properties?.map((property) => (
+          <Property key={property.name?.value} property={property} />
+        ))}
       </Card>
 
       {caption?.value && (
