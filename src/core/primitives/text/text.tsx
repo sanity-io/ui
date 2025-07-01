@@ -21,6 +21,8 @@ export type TextElementType =
   | 'li'
   | 'p'
   | 'span'
+  | 'summary'
+  | 'time'
   | ComponentType
 
 /** @public */
