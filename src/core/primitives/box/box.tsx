@@ -37,6 +37,13 @@ export type BoxElementType =
   | 'section'
   | 'span'
   | 'summary'
+  | 'table'
+  | 'tbody'
+  | 'td'
+  | 'tfoot'
+  | 'th'
+  | 'thead'
+  | 'tr'
   | 'ul'
   | ComponentType
 
