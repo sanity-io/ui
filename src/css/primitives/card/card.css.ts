@@ -28,7 +28,7 @@ export const root: string = _style(layers.primitives, {
     [vars.color.border]: vars.color.tinted.default.border[1],
     [vars.color.fg]: vars.color.tinted.default.fg[0],
     [vars.color.muted.bg]: vars.color.tinted.default.bg[1],
-    [vars.color.muted.border]: vars.color.tinted.default.bg[0],
+    [vars.color.muted.border]: vars.color.tinted.default.border[0],
     [vars.color.muted.fg]: vars.color.tinted.default.fg[4],
   },
 
