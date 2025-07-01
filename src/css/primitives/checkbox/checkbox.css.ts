@@ -36,7 +36,7 @@ export const presentation: string = _style(layers.primitives, {
   borderRadius: vars.radius[2],
   lineHeight: 1,
   backgroundColor: vars.color.input.checkbox.bg,
-  boxShadow: `inset 0 0 0 1px ${vars.color.input.checkbox.border}`,
+  boxShadow: `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.checkbox.border}`,
   color: vars.color.input.checkbox.fg,
 
   vars: {
