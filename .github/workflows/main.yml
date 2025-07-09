@@ -80,6 +80,8 @@ jobs:
           build: pnpm workshop:build
           start: pnpm workshop:start
           wait-on: http://localhost:1337
+        env:
+          NODE_OPTIONS: "--no-experimental-require-module --no-experimental-detect-module"
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
