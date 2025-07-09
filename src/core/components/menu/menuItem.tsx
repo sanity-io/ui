@@ -49,9 +49,9 @@ export type MenuItemOwnProps = GapStyleProps &
 export type MenuItemElementType = 'button' | 'a' | ComponentType
 
 /** @public */
-export type MenuItemProps<E extends MenuItemElementType = MenuItemElementType> = Omit<
-  Props<MenuItemOwnProps, E>,
-  'role'
+export type MenuItemProps<E extends MenuItemElementType = MenuItemElementType> = Props<
+  MenuItemOwnProps,
+  E
 >
 
 /** @public */
@@ -80,6 +80,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     pressed,
     radius = 2,
     ref: forwardedRef,
+    role = 'menuitem',
     selected: selectedProp,
     text,
     tone = 'default',
@@ -140,7 +141,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       onMouseEnter={onItemMouseEnter}
       onMouseLeave={onItemMouseLeave}
       ref={setRef}
-      role="menuitem"
+      role={role}
       tabIndex={-1}
       tone={tone}
       type={as === 'button' ? 'button' : undefined}
