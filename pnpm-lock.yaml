@@ -76,8 +76,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.5(typescript@5.8.3))
       '@sanity/ui-workshop':
-        specifier: ^2.1.4
-        version: 2.1.4(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)
+        specifier: ^2.1.5
+        version: 2.1.5(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)
       '@storybook/addon-a11y':
         specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
@@ -2025,8 +2025,8 @@ packages:
     peerDependencies:
       semantic-release: ^24
 
-  '@sanity/ui-workshop@2.1.4':
-    resolution: {integrity: sha512-rRp8fbIf1gvQEAkwOoo99LtBBZrB7bhfaSryK7hpUefTDs6pPdi615wiTsjKmxGWeB+gVOSuoXX+OlyLqOSDrg==}
+  '@sanity/ui-workshop@2.1.5':
+    resolution: {integrity: sha512-PxW4vx5atHO408Curo5QZXQE+nUDHo2FzNfjPMz2jquSaTwWH2TslapRFNywQSP1GnDH53yCRuHYsonHu7sZFg==}
     hasBin: true
     peerDependencies:
       '@sanity/icons': ^2 || ^3
@@ -9719,7 +9719,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@2.1.4(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)':
+  '@sanity/ui-workshop@2.1.5(@sanity/icons@3.7.0(react@19.1.0))(@sanity/ui@)(@types/node@20.17.30)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.39.0)':
     dependencies:
       '@sanity/icons': 3.7.0(react@19.1.0)
       '@sanity/ui': 'link:'
