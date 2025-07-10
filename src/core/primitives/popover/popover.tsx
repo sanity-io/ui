@@ -408,6 +408,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
         shadow={shadow}
         originX={originX}
         originY={originY}
+        tone={tone}
         strategy={strategy}
         x={x}
         y={y}
