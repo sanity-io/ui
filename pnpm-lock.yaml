@@ -196,8 +196,8 @@ importers:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.30.1(jiti@2.4.2))
       eslint-plugin-react-hooks:
-        specifier: 0.0.0-experimental-96c61b7f-20250709
-        version: 0.0.0-experimental-96c61b7f-20250709(eslint@9.30.1(jiti@2.4.2))
+        specifier: 0.0.0-experimental-97cdd5d3-20250710
+        version: 0.0.0-experimental-97cdd5d3-20250710(eslint@9.30.1(jiti@2.4.2))
       eslint-plugin-react-refresh:
         specifier: ^0.4.20
         version: 0.4.20(eslint@9.30.1(jiti@2.4.2))
@@ -942,6 +942,10 @@ packages:
 
   '@babel/types@7.28.0':
     resolution: {integrity: sha512-jYnje+JyZG5YThjHiF28oT4SIZLnYOcSBb6+SDaFIyzDVSkXQmQQYclJ2R+YxcdmK0AX6x1E5OQNtuh3jHDrUg==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.28.1':
+    resolution: {integrity: sha512-x0LvFTekgSX+83TI28Y9wYPUfzrnl2aT5+5QLnO6v7mSJYtEEevuDRN0F0uSHRk1G1IWZC43o00Y0xDDrpBGPQ==}
     engines: {node: '>=6.9.0'}
 
   '@bcoe/v8-coverage@0.2.3':
@@ -4006,8 +4010,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-hooks@0.0.0-experimental-96c61b7f-20250709:
-    resolution: {integrity: sha512-R2xsSpGGTDK8ncUCaSqng3orbi0+UwaoSZ7LwedT07JprHVhvTJr3iWogkUqs01/qDu52DHF8hCmTl1TRVW0ZA==}
+  eslint-plugin-react-hooks@0.0.0-experimental-97cdd5d3-20250710:
+    resolution: {integrity: sha512-VDciMZRMbBHoLTOqprFLkYgMZcroqfQN3m2Pq1qN+tJIQZdA/LsrimXfOVlMdGPJ8UwqXkz4z51Fe2gRhCssow==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -7941,6 +7945,12 @@ packages:
     peerDependencies:
       zod: ^3.25.0
 
+  zod-validation-error@3.5.3:
+    resolution: {integrity: sha512-OT5Y8lbUadqVZCsnyFaTQ4/O2mys4tj7PqhdbBCp7McPwvIEKfPtdA6QfPeFQK2/Rz5LgwmAXRJTugBNBi0btw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
+
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
@@ -8002,7 +8012,7 @@ snapshots:
 
   '@babel/helper-annotate-as-pure@7.27.3':
     dependencies:
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
 
   '@babel/helper-compilation-targets@7.27.2':
     dependencies:
@@ -8048,14 +8058,14 @@ snapshots:
   '@babel/helper-member-expression-to-functions@7.27.1':
     dependencies:
       '@babel/traverse': 7.28.0
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
     transitivePeerDependencies:
       - supports-color
 
   '@babel/helper-module-imports@7.27.1':
     dependencies:
       '@babel/traverse': 7.28.0
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
     transitivePeerDependencies:
       - supports-color
 
@@ -8070,7 +8080,7 @@ snapshots:
 
   '@babel/helper-optimise-call-expression@7.27.1':
     dependencies:
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
 
   '@babel/helper-plugin-utils@7.27.1': {}
 
@@ -8095,7 +8105,7 @@ snapshots:
   '@babel/helper-skip-transparent-expression-wrappers@7.27.1':
     dependencies:
       '@babel/traverse': 7.28.0
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
     transitivePeerDependencies:
       - supports-color
 
@@ -8109,7 +8119,7 @@ snapshots:
     dependencies:
       '@babel/template': 7.27.2
       '@babel/traverse': 7.28.0
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
     transitivePeerDependencies:
       - supports-color
 
@@ -8767,6 +8777,11 @@ snapshots:
       - supports-color
 
   '@babel/types@7.28.0':
+    dependencies:
+      '@babel/helper-string-parser': 7.27.1
+      '@babel/helper-validator-identifier': 7.27.1
+
+  '@babel/types@7.28.1':
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
@@ -10417,23 +10432,23 @@ snapshots:
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.28.0
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
       '@types/babel__generator': 7.27.0
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.7
 
   '@types/babel__generator@7.27.0':
     dependencies:
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
 
   '@types/babel__template@7.4.4':
     dependencies:
       '@babel/parser': 7.28.0
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
 
   '@types/babel__traverse@7.20.7':
     dependencies:
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
@@ -11057,7 +11072,7 @@ snapshots:
   babel-plugin-jest-hoist@30.0.1:
     dependencies:
       '@babel/template': 7.27.2
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
       '@types/babel__core': 7.20.5
 
   babel-plugin-polyfill-corejs2@0.4.14(@babel/core@7.28.0):
@@ -11086,7 +11101,7 @@ snapshots:
 
   babel-plugin-react-compiler@19.1.0-rc.2:
     dependencies:
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
 
   babel-plugin-styled-components@2.1.4(@babel/core@7.28.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0)):
     dependencies:
@@ -12200,7 +12215,7 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-react-hooks@0.0.0-experimental-96c61b7f-20250709(eslint@9.30.1(jiti@2.4.2)):
+  eslint-plugin-react-hooks@0.0.0-experimental-97cdd5d3-20250710(eslint@9.30.1(jiti@2.4.2)):
     dependencies:
       '@babel/core': 7.28.0
       '@babel/parser': 7.28.0
@@ -12208,7 +12223,7 @@ snapshots:
       eslint: 9.30.1(jiti@2.4.2)
       hermes-parser: 0.25.1
       zod: 3.25.76
-      zod-validation-error: 3.5.2(zod@3.25.76)
+      zod-validation-error: 3.5.3(zod@3.25.76)
     transitivePeerDependencies:
       - supports-color
 
@@ -13845,7 +13860,7 @@ snapshots:
       '@babel/generator': 7.28.0
       '@babel/plugin-syntax-jsx': 7.27.1(@babel/core@7.28.0)
       '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.28.0)
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
       '@jest/expect-utils': 30.0.4
       '@jest/get-type': 30.0.1
       '@jest/snapshot-utils': 30.0.4
@@ -15280,7 +15295,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.0
       '@babel/traverse': 7.28.0
-      '@babel/types': 7.28.0
+      '@babel/types': 7.28.1
       '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.7
       '@types/doctrine': 0.0.9
@@ -16806,6 +16821,10 @@ snapshots:
   yoctocolors@2.1.1: {}
 
   zod-validation-error@3.5.2(zod@3.25.76):
+    dependencies:
+      zod: 3.25.76
+
+  zod-validation-error@3.5.3(zod@3.25.76):
     dependencies:
       zod: 3.25.76
 
