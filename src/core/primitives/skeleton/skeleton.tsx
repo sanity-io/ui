@@ -36,7 +36,6 @@ export function Skeleton<E extends SkeletonElementType = typeof DEFAULT_SKELETON
     animated = false,
     className,
     delay,
-    radius,
     ...rest
   } = props as SkeletonProps<typeof DEFAULT_SKELETON_ELEMENT>
 
@@ -62,7 +61,7 @@ export function Skeleton<E extends SkeletonElementType = typeof DEFAULT_SKELETON
       {...rest}
       className={skeleton({
         className,
-        radius,
+        ...rest,
       })}
       data-animated={animated ? '' : undefined}
       data-visible={visible ? '' : undefined}
