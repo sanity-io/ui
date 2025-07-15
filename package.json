@@ -128,8 +128,8 @@
     "framer-motion": "^12.18.1",
     "gzip-size": "^7.0.0",
     "react-compiler-runtime": "19.1.0-rc.2",
-    "react-refractor": "^4.0.0",
-    "use-effect-event": "^2.0.3"
+    "react-refractor": "^2.2.0",
+    "use-effect-event": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",
@@ -170,10 +170,10 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-formatter-compact": "^8.40.0",
     "eslint-plugin-boundaries": "^5.0.1",
-    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-react-hooks": "0.0.0-experimental-12bc60f5-20250613",
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-storybook": "^9.0.11",
