@@ -5,6 +5,43 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.7](https://github.com/sanity-io/ui/compare/v2.16.6...v2.16.7) (2025-07-11)
+
+### Bug Fixes
+
+- **deps:** update dependency @floating-ui/react-dom to ^2.1.4 ([#1755](https://github.com/sanity-io/ui/issues/1755)) ([5e08539](https://github.com/sanity-io/ui/commit/5e08539f1d3f959d048c57a5a6a905b5cea23341))
+
+## [2.16.6](https://github.com/sanity-io/ui/compare/v2.16.5...v2.16.6) (2025-07-11)
+
+### Bug Fixes
+
+- **deps:** update dependency framer-motion to ^12.23.3 ([#1718](https://github.com/sanity-io/ui/issues/1718)) ([7004095](https://github.com/sanity-io/ui/commit/70040952373bba49cc4682c4209e40b0ff79f777))
+
+## [2.16.5](https://github.com/sanity-io/ui/compare/v2.16.4...v2.16.5) (2025-07-11)
+
+### Bug Fixes
+
+- **deps:** update dependency @sanity/icons to ^3.7.4 ([#1756](https://github.com/sanity-io/ui/issues/1756)) ([3049843](https://github.com/sanity-io/ui/commit/3049843368dd35845ab5e02895576b6617e51782))
+
+## [2.16.4](https://github.com/sanity-io/ui/compare/v2.16.3...v2.16.4) (2025-07-09)
+
+### Bug Fixes
+
+- **deps:** update dependency use-effect-event to ^2.0.2 ([#1757](https://github.com/sanity-io/ui/issues/1757)) ([91f9969](https://github.com/sanity-io/ui/commit/91f9969c5408ed82bd4bf37c70320bd6166f00e4))
+
+## [2.16.3](https://github.com/sanity-io/ui/compare/v2.16.2...v2.16.3) (2025-07-09)
+
+### Bug Fixes
+
+- **deps:** update React Compiler dependencies 🤖 ✨ ([#1748](https://github.com/sanity-io/ui/issues/1748)) ([e7b5a60](https://github.com/sanity-io/ui/commit/e7b5a603f43dce0fd7a6781b23b639998981293c))
+
+## [2.16.2](https://github.com/sanity-io/ui/compare/v2.16.1...v2.16.2) (2025-06-18)
+
+### Bug Fixes
+
+- **deps:** update dependency @floating-ui/react-dom to ^2.1.3 ([#1734](https://github.com/sanity-io/ui/issues/1734)) ([efcd398](https://github.com/sanity-io/ui/commit/efcd398f0dd56b769f63375c769b33916b6cecba))
+- **deps:** update dependency use-effect-event to v2 ([#1739](https://github.com/sanity-io/ui/issues/1739)) ([0d1d855](https://github.com/sanity-io/ui/commit/0d1d855c49d559f5d06d1a0fb7987cfda9fa7745))
+
 ## [2.16.1](https://github.com/sanity-io/ui/compare/v2.16.0...v2.16.1) (2025-06-18)
 
 ### Bug Fixes

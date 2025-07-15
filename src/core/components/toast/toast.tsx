@@ -85,7 +85,9 @@ export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>
   const prefersReducedMotion = usePrefersReducedMotion()
 
   const visualDuration: number = prefersReducedMotion ? 0 : 0.26
-  const transition = visualDuration ? {type: 'spring', visualDuration, bounce: 0.25} : {duration: 0}
+  const transition = visualDuration
+    ? {type: 'spring' as const, visualDuration, bounce: 0.25}
+    : {duration: 0}
 
   const hasDuration = duration && isFinite(duration) && duration < LONG_ENOUGH_BUT_NOT_TOO_LONG
   const initial: ContainerVariants[] = ['hidden', 'initial']
