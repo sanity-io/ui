@@ -160,7 +160,7 @@
     "babel-plugin-react-compiler": "19.1.0-rc.2",
     "cac": "^6.7.14",
     "commitizen": "^4.3.1",
-    "cssnano": "^7.0.7",
+    "cssnano": "^7.1.0",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
     "cz-conventional-changelog": "^3.3.0",
