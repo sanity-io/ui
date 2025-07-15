@@ -1,6 +1,6 @@
 import {Autocomplete, Box, Card, Container, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
-import {PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
+import {type PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
 import {useCallback, useMemo, useState} from 'react'
 
@@ -8,9 +8,10 @@ import {
   WORKSHOP_CARD_TONE_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
-import countries from '../__mocks__/countries'
+  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
+} from '$workshop'
+
+import {countries} from './mock/countries'
 
 const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   name: 'typing',
@@ -28,19 +29,19 @@ const typingPerfTest: PerfTestProps<HTMLInputElement> = {
   },
 }
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const {ref, Wrapper} = usePerfTest(typingPerfTest)
 
-  const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Layout')
+  const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS)
   const options = useMemo(() => countries.map((country) => ({value: country.code})), [])
-  const border = useBoolean('Border', true, 'Props')
-  const customValidity = useText('Custom validity', '', 'Props') || undefined
-  const disabled = useBoolean('Disabled', false, 'Props')
-  const fontSize = Number(useSelect('Font size', WORKSHOP_TEXT_SIZE_OPTIONS, 2, 'Props'))
-  const openButton = useBoolean('Open button', false, 'Props')
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
-  const radius = Number(useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props'))
-  const readOnly = useBoolean('Read only', false, 'Props')
+  const border = useBoolean('Border', true)
+  const customValidity = useText('Custom validity')
+  const disabled = useBoolean('Disabled', false)
+  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
+  const openButton = useBoolean('Open button', false)
+  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
+  const readOnly = useBoolean('Read only', false)
   const [value, setValue] = useState('')
 
   const handleChange = useCallback((value: string) => setValue(value), [])
@@ -49,7 +50,7 @@ export default function ExampleStory() {
     <Card height="fill" tone={layoutTone}>
       <Container width={1}>
         <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
-          <Stack space={3}>
+          <Stack gap={3}>
             <Text as="label" htmlFor="default" size={1} weight="medium">
               Country code
             </Text>

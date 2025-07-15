@@ -1,11 +1,11 @@
 import {Box, Button, Container, Flex, Popover, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
-export default function MatchReferenceWidthStory() {
-  const arrow = useBoolean('Arrow', true, 'Props')
-  const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom', 'Props')
+export default function MatchReferenceWidthStory(): React.JSX.Element {
+  const arrow = useBoolean('Arrow', true)
+  const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">

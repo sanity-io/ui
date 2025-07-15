@@ -1,0 +1,31 @@
+import type {WorkshopScope} from '@sanity/ui-workshop'
+import {lazy} from 'react'
+
+const scope: WorkshopScope = {
+  name: 'components/virtual-list',
+  title: 'VirtualList',
+  stories: [
+    {
+      name: 'window-scroll',
+      title: 'Window scroll',
+      component: lazy(() => import('./windowScrolll')),
+    },
+    {
+      name: 'element-scroll',
+      title: 'Element scroll',
+      component: lazy(() => import('./elementScroll')),
+    },
+    {
+      name: 'infinite-list',
+      title: 'Infinite list',
+      component: lazy(() => import('./infiniteList')),
+    },
+    {
+      name: 'changing-props',
+      title: 'Changing props',
+      component: lazy(() => import('./changingProps')),
+    },
+  ],
+}
+
+export default scope

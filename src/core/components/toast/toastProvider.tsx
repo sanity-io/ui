@@ -1,32 +1,28 @@
+import type {ResponsiveProp} from '@sanity/ui/css'
 import {AnimatePresence} from 'framer-motion'
 import {startTransition, useMemo, useState} from 'react'
 
 import {useMounted} from '../../hooks/useMounted'
-import {LayerProvider} from '../../utils'
+import {LayerProvider} from '../../primitives/layer/layerProvider'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
 import {ToastLayer, type ToastLayerProps} from './toastLayer'
 import {generateToastId} from './toastState'
-import {ToastContextValue, ToastParams} from './types'
+import type {ToastContextValue, ToastParams} from './types'
 
 type ToastState = {
   dismiss: () => void
   id: string
-  updatedAt: number
   params: ToastParams
 }[]
 
-/**
- * @public
- */
+/** @public */
 export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
   children?: React.ReactNode
-  zOffset?: number | number[]
+  zOffset?: ResponsiveProp<number>
 }
 
-/**
- * @public
- */
+/** @public */
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const {children, padding, paddingX, paddingY, gap, zOffset = 1} = props
   const [state, setState] = useState<ToastState>([])
@@ -34,8 +30,8 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
 
   const value: ToastContextValue = useMemo(() => {
     const push = (params: ToastParams) => {
-      const id = params.id || generateToastId()
-      const duration = params.duration || 5000
+      const id = params.id ?? generateToastId()
+      const duration = params.duration ?? 5000
 
       startTransition(() => {
         setState((prevState): ToastState => {
@@ -54,10 +50,17 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
            * This function will be passed to the Toast component
            * and called either on close button click or after duration.
            */
-          const dismiss = () =>
-            startTransition(() =>
-              setState((currentState) => currentState.filter((toast) => toast.id !== id)),
-            )
+          const dismiss = () => {
+            startTransition(() => {
+              if (timeoutId) {
+                clearTimeout(timeoutId)
+              }
+
+              setState((currentState) => currentState.filter((toast) => toast.id !== id))
+            })
+          }
+
+          const timeoutId = setTimeout(dismiss, duration)
 
           /**
            * Create updated state by:
@@ -70,7 +73,6 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
             {
               dismiss,
               id,
-              updatedAt: Date.now(),
               params: {...params, duration},
             },
           ]
@@ -90,7 +92,7 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
         <LayerProvider zOffset={zOffset}>
           <ToastLayer padding={padding} paddingX={paddingX} paddingY={paddingY} gap={gap}>
             <AnimatePresence initial={false} mode="popLayout">
-              {state.map(({dismiss, id, params, updatedAt}) => (
+              {state.map(({dismiss, id, params}) => (
                 <Toast
                   key={id}
                   closable={params.closable}
@@ -99,7 +101,6 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
                   status={params.status}
                   title={params.title}
                   duration={params.duration}
-                  updatedAt={updatedAt}
                 />
               ))}
             </AnimatePresence>
@@ -109,5 +110,3 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
     </ToastContext.Provider>
   )
 }
-
-ToastProvider.displayName = 'ToastProvider'

@@ -1,0 +1,28 @@
+{
+  "name": "next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "FEATURE_DIST=on next build",
+    "dev": "next dev",
+    "dev:dist": "FEATURE_DIST=on next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@sanity/ui": "workspace:*",
+    "next": "15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/node": "^24.0.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vanilla-extract/next-plugin": "^2.4.14",
+    "eslint": "^9.29.0",
+    "eslint-config-next": "15.3.3",
+    "typescript": "^5.8.3"
+  }
+}

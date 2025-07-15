@@ -1,11 +1,11 @@
-import {forwardRef} from 'react'
+import {Box, type BoxOwnProps} from '../../primitives/box/box'
+import type {ComponentType, Props} from '../../types'
 
-import {Box, BoxProps} from '../../primitives'
+/** @public */
+export const DEFAULT_TAB_PANEL_ELEMENT = 'div'
 
-/**
- * @public
- */
-export interface TabPanelProps extends BoxProps {
+/** @public */
+export type TabPanelOwnProps = BoxOwnProps & {
   /**
    * The `id` of the correlating `Tab` component.
    */
@@ -13,27 +13,35 @@ export interface TabPanelProps extends BoxProps {
   'id': string
 }
 
-/**
- * @public
- */
-export const TabPanel = forwardRef(function TabPanel(
-  props: TabPanelProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'aria-labelledby' | 'id' | 'role'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
-  const {flex, ...restProps} = props
+/** @public */
+export type TabPanelElementType = 'div' | 'span' | ComponentType
+
+/** @public */
+export type TabPanelProps<E extends TabPanelElementType = TabPanelElementType> = Props<
+  TabPanelOwnProps,
+  E
+>
+
+/** @public */
+export function TabPanel<E extends TabPanelElementType = typeof DEFAULT_TAB_PANEL_ELEMENT>(
+  props: TabPanelProps<E>,
+): React.JSX.Element {
+  const {
+    as = DEFAULT_TAB_PANEL_ELEMENT,
+    children,
+    tabIndex,
+    ...rest
+  } = props as TabPanelProps<typeof DEFAULT_TAB_PANEL_ELEMENT>
 
   return (
     <Box
       data-ui="TabPanel"
-      {...restProps}
-      flex={flex}
-      ref={ref}
+      {...rest}
+      as={as}
       role="tabpanel"
-      tabIndex={props.tabIndex === undefined ? 0 : props.tabIndex}
+      tabIndex={tabIndex === undefined ? 0 : tabIndex}
     >
-      {props.children}
+      {children}
     </Box>
   )
-})
-TabPanel.displayName = 'ForwardRef(TabPanel)'
+}

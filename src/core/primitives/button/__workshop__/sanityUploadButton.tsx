@@ -18,17 +18,17 @@ const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`
     width: stretch;
   }
 
-  & span:nth-child(2) {
+  & > span:nth-child(2) {
     width: 0;
     flex: none;
     padding: 0;
   }
 `
 
-export default function SanityUploadButtonWorkaroundStory() {
+export default function SanityUploadButtonWorkaroundStory(): React.JSX.Element {
   return (
-    <Flex align="center" height="fill" htmlFor="file" justify="center">
-      <SanityUploadButton icon={UploadIcon} tabIndex={0} text="Upload">
+    <Flex align="center" height="fill" justify="center">
+      <SanityUploadButton htmlFor="file" icon={UploadIcon} tabIndex={0} text="Upload">
         <input type="file" />
       </SanityUploadButton>
     </Flex>

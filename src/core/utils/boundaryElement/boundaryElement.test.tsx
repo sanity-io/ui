@@ -1,14 +1,15 @@
-/** @jest-environment jsdom */
+import {describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {BoundaryElementContext} from './boundaryElementContext'
-import {BoundaryElementContextValue} from './types'
+import type {BoundaryElementContextValue} from './types'
 import {useBoundaryElement} from './useBoundaryElement'
 
 describe('utils/boundaryElement', () => {
   describe('useBoundaryElement', () => {
     it('should get context value', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootBoundaryElement = useBoundaryElement()
@@ -38,7 +39,7 @@ describe('utils/boundaryElement', () => {
     })
 
     it('should provide default value when no context value is provided', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootBoundaryElement = useBoundaryElement()
@@ -49,10 +50,11 @@ describe('utils/boundaryElement', () => {
       }
 
       function Root() {
-        const value = undefined
-
         return (
-          <BoundaryElementContext.Provider value={value as any}>
+          <BoundaryElementContext.Provider
+            // @ts-expect-error - we want to test the error case
+            value={undefined}
+          >
             <Debug />
           </BoundaryElementContext.Provider>
         )
@@ -65,7 +67,7 @@ describe('utils/boundaryElement', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
@@ -79,12 +81,12 @@ describe('utils/boundaryElement', () => {
 
       function Root() {
         // NOTE: we’re testing this because the context value may be a function in the future
-        const value = () => {
-          return {version: 1}
-        }
 
         return (
-          <BoundaryElementContext.Provider value={value as any}>
+          <BoundaryElementContext.Provider
+            // @ts-expect-error - we want to test the error case
+            value={() => ({version: 1})}
+          >
             <Debug />
           </BoundaryElementContext.Provider>
         )

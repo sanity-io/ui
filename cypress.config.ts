@@ -1,7 +1,9 @@
-import {defineConfig} from 'cypress'
+/// <reference types="cypress" />
 
-export default defineConfig({
+const config: Cypress.ConfigOptions = {
   e2e: {
     baseUrl: 'http://localhost:1337',
   },
-})
+}
+
+export default config

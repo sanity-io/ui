@@ -1,28 +1,28 @@
 import {
-  parseColor,
-  THEME_COLOR_CARD_TONES,
-  ThemeColorCard_v2,
-  ThemeColorShadow,
-  ThemeShadow,
+  CARD_TONES,
+  COLOR_SCHEMES,
+  SHADOW,
+  type CardColorTokens,
+  type ShadowProperties,
 } from '@sanity/ui/theme'
 
 import {theme} from '../theme'
-import {SCHEMES} from '../vars/types'
 
 export function writeStyles(): void {
   const figmaEffectStyles = figma.getLocalEffectStyles()
 
-  const len = theme.shadow.length
+  // const len = theme.shadow.length
 
-  for (const tone of THEME_COLOR_CARD_TONES) {
-    for (const scheme of SCHEMES) {
-      const color = theme.color[scheme][tone]
+  for (const tone of CARD_TONES) {
+    for (const scheme of COLOR_SCHEMES) {
+      const color = theme.color[tone]
 
       // focus ring
       createOrReplaceFocusRingStyle(figmaEffectStyles, `${scheme}/${tone}/focus-ring`, color)
 
       // shadow
-      for (let i = 0; i < len; i += 1) {
+      // for (let i = 0; i < len; i += 1) {
+      for (const i of SHADOW) {
         const shadow = theme.shadow[i]
 
         if (!shadow) {
@@ -44,7 +44,7 @@ export function writeStyles(): void {
 function createOrReplaceFocusRingStyle(
   figmaEffectStyles: EffectStyle[],
   name: string,
-  cardColor: ThemeColorCard_v2,
+  cardColor: CardColorTokens,
 ) {
   let style = figmaEffectStyles.find((style) => style.name === name)
 
@@ -94,7 +94,7 @@ function createOrReplaceFocusRingStyle(
 function createOrReplaceShadowStyle(
   figmaEffectStyles: EffectStyle[],
   name: string,
-  shadow: ThemeShadow,
+  shadow: ShadowProperties,
   shadowColor: ThemeColorShadow,
 ) {
   let style = figmaEffectStyles.find((style) => style.name === name)

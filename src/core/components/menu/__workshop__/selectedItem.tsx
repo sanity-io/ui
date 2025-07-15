@@ -5,7 +5,7 @@ import {
   Code,
   Menu,
   MenuButton,
-  MenuButtonProps,
+  type MenuButtonProps,
   MenuDivider,
   MenuItem,
   Stack,
@@ -18,12 +18,12 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
 
 const INITIAL_INDEX = 1
 
-export default function SelectedItemStory() {
+export default function SelectedItemStory(): React.JSX.Element {
   const [selectedIndex, setSelectedIndex] = useState(INITIAL_INDEX)
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Stack space={4}>
+      <Stack gap={4}>
         <Code>selectedIndex={selectedIndex}</Code>
 
         <MenuButton

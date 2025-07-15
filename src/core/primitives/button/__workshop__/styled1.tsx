@@ -8,7 +8,7 @@ const StyledButton1 = styled.a`
   }
 `
 
-export default function StyledButton1Story() {
+export default function StyledButton1Story(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center">
       <Button as={StyledButton1} href="#" text="Test" />

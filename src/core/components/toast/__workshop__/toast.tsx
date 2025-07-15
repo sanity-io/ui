@@ -1,13 +1,13 @@
 import {Box, Container, Toast} from '@sanity/ui'
 import {useAction, useBoolean, useSelect, useString, useText} from '@sanity/ui-workshop'
 
-import {WORKSHOP_TOAST_STATUS_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_TOAST_STATUS_OPTIONS} from '$workshop'
 
-export default function ToastStory() {
-  const closable = useBoolean('Closable', false, 'Props')
-  const title = useString('Title', 'Toast title', 'Props')
-  const status = useSelect('Status', WORKSHOP_TOAST_STATUS_OPTIONS, '', 'Props') || undefined
-  const description = useText('Description', '', 'Props')
+export default function ToastStory(): React.JSX.Element {
+  const closable = useBoolean('Closable', false)
+  const title = useString('Title', 'Toast title')
+  const status = useSelect('Status', WORKSHOP_TOAST_STATUS_OPTIONS)
+  const description = useText('Description')
   const handleClose = useAction('onClose')
 
   return (

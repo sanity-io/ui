@@ -1,24 +1,38 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import {isValidElement, useCallback, useEffect, useState} from 'react'
+import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
+import {
+  type ElementType,
+  isValidElement,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import {isValidElementType} from 'react-is'
 
-import {useArrayProp} from '../../hooks'
-import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
-import {Selectable} from '../../primitives/_selectable'
-import {useRootTheme} from '../../theme'
-import {Radius, SelectableTone} from '../../types'
-import {Menu, MenuProps} from './menu'
+import {Box} from '../../primitives/box/box'
+import {Flex} from '../../primitives/flex/flex'
+import {Popover, type PopoverProps} from '../../primitives/popover/popover'
+import {Selectable} from '../../primitives/selectable/selectable'
+import {Text} from '../../primitives/text/text'
+import type {ComponentType, Props} from '../../types'
+import {DEFAULT_MENU_ELEMENT, Menu, type MenuProps} from './menu'
 import {useMenu} from './useMenu'
 
-/**
- * @public
- */
-export interface MenuGroupProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  fontSize?: number | number[]
-  icon?: React.ElementType | React.ReactNode
+/** @public */
+export const DEFAULT_MENU_GROUP_ELEMENT = 'button'
+
+/** @public */
+export type MenuGroupOwnProps = RadiusStyleProps & {
+  disabled?: boolean
+  fontSize?: ResponsiveProp<FontTextSize>
+  gap?: ResponsiveProp<Space>
+  icon?: ElementType | ReactNode
   menu?: Omit<
-    MenuProps,
+    MenuProps<typeof DEFAULT_MENU_ELEMENT>,
     | 'onClickOutside'
     | 'onEscape'
     | 'onItemClick'
@@ -28,48 +42,51 @@ export interface MenuGroupProps {
     | 'shouldFocus'
     | 'onBlurCapture'
   >
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   popover?: Omit<PopoverProps, 'content' | 'open'>
-  radius?: Radius | Radius[]
-  space?: number | number[]
-  text: React.ReactNode
-  tone?: SelectableTone
+  text?: ReactNode
+  tone?: ElementTone
 }
 
-/**
- * @public
- */
-export function MenuGroup(
-  props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
-    MenuGroupProps,
+/** @public */
+export type MenuGroupElementType = 'button' | ComponentType
+
+/** @public */
+export type MenuGroupProps<E extends MenuGroupElementType = MenuGroupElementType> = Props<
+  MenuGroupOwnProps,
+  E
+>
+
+/** @public */
+export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_GROUP_ELEMENT>(
+  props: MenuGroupProps<E>,
 ): React.JSX.Element {
   const {
-    as = 'button',
+    as = DEFAULT_MENU_GROUP_ELEMENT,
     children,
     fontSize = 1,
+    gap = 3,
     icon: IconComponent,
     menu: menuProps,
     onClick,
     padding = 3,
     popover,
     radius = 2,
-    space = 3,
     text,
     tone = 'default',
-    ...restProps
-  } = props
-  const menu = useMenu()
-  const {scheme} = useRootTheme()
+    ...rest
+  } = props as MenuGroupProps<typeof DEFAULT_MENU_GROUP_ELEMENT>
+
   const {
     activeElement,
     mount,
     onClickOutside,
     onEscape,
     onItemClick,
-    onItemMouseEnter: _onItemMouseEnter,
+    onItemMouseEnter,
     registerElement,
-  } = menu
-  const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
+  } = useMenu()
+
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
@@ -77,16 +94,16 @@ export function MenuGroup(
   const [withinMenu, setWithinMenu] = useState(false)
 
   const handleMouseEnter = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+    (event: MouseEvent<HTMLElement>) => {
       setWithinMenu(false)
-      onItemMouseEnter(event)
+      onItemMouseEnter?.(event)
       setOpen(true)
     },
     [onItemMouseEnter],
   )
 
   const handleMenuKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'ArrowLeft') {
         event.stopPropagation()
 
@@ -101,7 +118,7 @@ export function MenuGroup(
   )
 
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       onClick?.(event)
 
       setShouldFocus('first')
@@ -155,7 +172,7 @@ export function MenuGroup(
     </Menu>
   )
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLButtonElement>) => {
     const target = event.currentTarget
 
     if (document.activeElement !== target) {
@@ -174,24 +191,25 @@ export function MenuGroup(
   return (
     <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
       <Selectable
-        data-as={as}
+        // data-as={as}
         data-ui="MenuGroup"
-        forwardedAs={as}
-        {...restProps}
+        // forwardedAs={as}
+        {...rest}
         aria-pressed={as === 'button' ? withinMenu : undefined}
-        data-pressed={as !== 'button' ? withinMenu : undefined}
-        data-selected={!withinMenu && active ? '' : undefined}
-        $radius={useArrayProp(radius)}
-        $tone={tone}
-        $scheme={scheme}
+        as={as}
+        // data-pressed={as !== 'button' ? withinMenu : undefined}
+        // data-selected={!withinMenu && active ? '' : undefined}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
+        radius={radius}
         ref={setRootElement}
+        selected={withinMenu}
         tabIndex={-1}
+        tone={tone}
         type={as === 'button' ? 'button' : undefined}
       >
-        <Flex gap={space} padding={padding}>
+        <Flex gap={gap} padding={padding}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
@@ -213,5 +231,3 @@ export function MenuGroup(
     </Popover>
   )
 }
-
-MenuGroup.displayName = 'MenuGroup'

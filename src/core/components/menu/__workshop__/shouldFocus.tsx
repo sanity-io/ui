@@ -1,11 +1,6 @@
+import {Button, Flex, LayerProvider, Menu, MenuDivider, MenuItem, Popover} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 import {Fragment, useCallback, useState} from 'react'
-
-import {Button, Flex, Popover} from '../../../primitives'
-import {LayerProvider} from '../../../utils'
-import {Menu} from '../menu'
-import {MenuDivider} from '../menuDivider'
-import {MenuItem} from '../menuItem'
 
 const ITEMS = [...Array(8).keys()].map((num) => ({
   title: `Item ${num + 1}`,
@@ -14,7 +9,7 @@ const ITEMS = [...Array(8).keys()].map((num) => ({
 
 const OPTIONS = {first: 'first', last: 'last'}
 
-export default function ShouldFocusStory() {
+export default function ShouldFocusStory(): React.JSX.Element {
   const shouldFocus = useSelect<keyof typeof OPTIONS>('Should focus', OPTIONS, 'first')
 
   const [popoverOpen, setPopoverOpen] = useState<boolean>(false)

@@ -1,14 +1,16 @@
 {
   "extends": "./tsconfig.settings",
   "include": [
-    "./.storybook",
+    "./cypress.config.ts",
     "./exports",
+    "./package.json",
     "./package.config.ts",
-    "./scripts",
+    "./prettier.config.cjs",
+    "./rollup",
     "./src",
-    "./stories",
     "./test",
     "./typings",
+    "./vitest.config.ts",
     "./workshop",
     "./workshop.config.ts",
     "./workshop.runtime.ts"
@@ -16,12 +18,14 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist/types",
-    "baseUrl": ".",
     "paths": {
+      "$test/*": ["./test/*"],
+      "$workshop": ["./workshop"],
       "@sanity/ui/*": ["./exports/*"],
-      "@sanity/ui": ["./exports"]
+      "@sanity/ui": ["./exports/index.ts"]
     },
     // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "resolveJsonModule": true
   }
 }

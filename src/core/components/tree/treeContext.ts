@@ -1,10 +1,10 @@
+import type {Context} from 'react'
+
 import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
-import {TreeContextValue} from './types'
+import type {TreeContextValue} from './types'
 
 /**
  * @internal
  */
-export const TreeContext = createGlobalScopedContext<TreeContextValue | null>(
-  '@sanity/ui/context/tree',
-  null,
-)
+export const TreeContext: Context<TreeContextValue | null> =
+  createGlobalScopedContext<TreeContextValue | null>('@sanity/ui/v3/tree', null)

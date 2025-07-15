@@ -1,12 +1,19 @@
+import {
+  BoundaryElementProvider,
+  Box,
+  Button,
+  Card,
+  Dialog,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  PortalProvider,
+} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {Box, Button, Card, Flex} from '../../../primitives'
-import {BoundaryElementProvider, PortalProvider} from '../../../utils'
-import {Menu, MenuButton, MenuItem} from '../../menu'
-import {Dialog} from '../dialog'
-
-export default function PanesStory() {
+export default function PanesStory(): React.JSX.Element {
   return (
     <Flex height="fill">
       <Pane id="A" />

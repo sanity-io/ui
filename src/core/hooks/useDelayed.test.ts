@@ -1,6 +1,5 @@
-/** @jest-environment jsdom */
-
 import {act, renderHook} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
 
 import {useDelayedState} from './useDelayedState'
 
@@ -16,7 +15,7 @@ describe('useDelayedState', () => {
   })
 
   it('should update state after delay if delay is provided', async () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
     const {result} = renderHook(() => useDelayedState(false))
     const [, setState] = result.current
 
@@ -25,12 +24,12 @@ describe('useDelayedState', () => {
     })
     expect(result.current[0]).toBe(false)
     act(() => {
-      jest.advanceTimersByTime(500)
+      vi.advanceTimersByTime(500)
     })
     expect(result.current[0]).toBe(false)
 
     act(() => {
-      jest.advanceTimersByTime(500)
+      vi.advanceTimersByTime(500)
     })
 
     expect(result.current[0]).toBe(true)
@@ -56,12 +55,12 @@ describe('useDelayedState', () => {
     })
     expect(result.current[0]).toBe(false)
 
-    jest.advanceTimersByTime(500)
+    vi.advanceTimersByTime(500)
 
     act(() => {
       setState(false)
     })
-    jest.advanceTimersByTime(600)
+    vi.advanceTimersByTime(600)
     // Even after 1.1 seconds, the state should continue being false, because it was cancelled by a next setState call
     expect(result.current[0]).toBe(false)
   })

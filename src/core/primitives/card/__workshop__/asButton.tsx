@@ -1,19 +1,19 @@
 import {Box, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
-export default function AsButtonStory() {
+export default function AsButtonStory(): React.JSX.Element {
   const tones = Object.entries(WORKSHOP_CARD_TONE_OPTIONS)
 
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Container>
-        <Grid columns={3} gap={2}>
+        <Grid gridTemplateColumns={3} gap={1}>
           <Box>
             <Text align="center" size={1} weight="medium">
               Enabled
             </Text>
-            <Stack marginTop={3} space={2}>
+            <Stack marginTop={3} gap={1}>
               {tones.map(([title, tone]) => (
                 <Card
                   __unstable_focusRing
@@ -23,15 +23,15 @@ export default function AsButtonStory() {
                   style={{textAlign: 'center'}}
                   tone={tone}
                 >
-                  <Stack space={2}>
+                  <Stack gap={3}>
                     <Text size={1} weight="medium">
                       {title}
                     </Text>
                     <Text muted size={1}>
                       Muted
                     </Text>
-                    <Text accent size={1}>
-                      Accent
+                    <Text size={1}>
+                      <code>Code</code>
                     </Text>
                   </Stack>
                 </Card>
@@ -43,7 +43,7 @@ export default function AsButtonStory() {
             <Text align="center" size={1} weight="medium">
               Disabled
             </Text>
-            <Stack marginTop={3} space={2}>
+            <Stack marginTop={3} gap={1}>
               {tones.map(([title, tone]) => (
                 <Card
                   __unstable_focusRing
@@ -54,15 +54,15 @@ export default function AsButtonStory() {
                   style={{textAlign: 'center'}}
                   tone={tone}
                 >
-                  <Stack space={2}>
+                  <Stack gap={3}>
                     <Text size={1} weight="medium">
                       {title}
                     </Text>
                     <Text size={1} muted>
                       Muted
                     </Text>
-                    <Text accent size={1}>
-                      Accent
+                    <Text size={1}>
+                      <code>Code</code>
                     </Text>
                   </Stack>
                 </Card>
@@ -74,7 +74,7 @@ export default function AsButtonStory() {
             <Text align="center" size={1} weight="medium">
               Selected
             </Text>
-            <Stack marginTop={3} space={2}>
+            <Stack marginTop={3} gap={1}>
               {tones.map(([title, tone]) => (
                 <Card
                   __unstable_focusRing
@@ -85,15 +85,15 @@ export default function AsButtonStory() {
                   style={{textAlign: 'center'}}
                   tone={tone}
                 >
-                  <Stack space={2}>
+                  <Stack gap={3}>
                     <Text size={1} weight="medium">
                       {title}
                     </Text>
                     <Text size={1} muted>
                       Muted
                     </Text>
-                    <Text accent size={1}>
-                      Accent
+                    <Text size={1}>
+                      <code>Code</code>
                     </Text>
                   </Stack>
                 </Card>

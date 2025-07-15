@@ -4,10 +4,10 @@ context('Primitives/TextInput', () => {
 
     cy.get('#text-input-example').click()
 
-    cy.get('#text-input-example + span').should(
+    cy.get('#text-input-example + div').should(
       'have.css',
       'boxShadow',
-      'rgb(85, 107, 252) 0px 0px 0px 1px inset, rgb(227, 228, 232) 0px 0px 0px 1px inset',
+      'oklab(0.847928 0.00172108 -0.0122313 / 0.625) 0px 0px 0px 1px inset',
     )
   })
 })

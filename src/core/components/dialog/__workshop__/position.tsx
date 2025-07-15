@@ -2,16 +2,16 @@ import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
 import {Box, Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_DIALOG_POSITION_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_DIALOG_POSITION_OPTIONS} from '$workshop'
 
-export default function PositionStory() {
-  const open = useBoolean('Open', true, 'Props')
-  const position = useSelect('Position', WORKSHOP_DIALOG_POSITION_OPTIONS, 'fixed', 'Props')
+export default function PositionStory(): React.JSX.Element {
+  const open = useBoolean('Open', true)
+  const position = useSelect('Position', WORKSHOP_DIALOG_POSITION_OPTIONS)
 
   return (
     <Box padding={4}>
       <Box style={{padding: 'calc(100vh - 100px) 0'}}>
-        <Stack space={3}>
+        <Stack gap={3}>
           <Text align="center">
             <ArrowUpIcon />
           </Text>

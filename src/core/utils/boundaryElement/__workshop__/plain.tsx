@@ -1,7 +1,7 @@
 import {BoundaryElementProvider, Button, Card, Text, Tooltip} from '@sanity/ui'
 import {useState} from 'react'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (

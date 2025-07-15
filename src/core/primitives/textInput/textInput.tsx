@@ -1,195 +1,114 @@
 import {CloseIcon} from '@sanity/icons'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
+import {
+  _inputElement,
+  _inputPresentation,
+  type InputStyleProps,
+  type ResponsiveProp,
+  textInput,
+  textInputElement,
+  textInputPrefix,
+  textInputSuffix,
+} from '@sanity/ui/css'
+import type {FontWeight, Space} from '@sanity/ui/theme'
+import {
+  type ElementType,
+  isValidElement,
+  type MouseEvent,
+  type ReactNode,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react'
 import {isValidElementType} from 'react-is'
-import {styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useCustomValidity} from '../../hooks'
-import {
-  responsiveInputPaddingStyle,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-  TextInputInputStyleProps,
-  textInputRepresentationStyle,
-  TextInputRepresentationStyleProps,
-  TextInputResponsivePaddingStyleProps,
-  textInputRootStyle,
-} from '../../styles/internal'
-import {useRootTheme} from '../../theme'
-import {Radius} from '../../types'
-import {Box} from '../box'
-import {Button, ButtonProps} from '../button'
-import {Card} from '../card'
-import {Text} from '../text'
+import {useCustomValidity} from '../../hooks/useCustomValidity'
+import {useResponsiveProp} from '../../hooks/useResponsiveProp'
+import {isRecord} from '../../lib/isRecord'
+import type {ComponentType, Props} from '../../types'
+import {Box} from '../box/box'
+import {Button, type ButtonProps} from '../button/button'
+import {Text} from '../text/text'
 
-/**
- * @public
- */
-export type TextInputClearButtonProps = Omit<ButtonProps, 'as'> &
-  Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'onClick' | 'onMouseDown' | 'ref'>
+/** @public */
+export const DEFAULT_TEXT_INPUT_ELEMENT = 'input'
 
-/**
- * @public
- */
-export type TextInputType =
-  | 'search'
-  | 'date'
-  | 'datetime-local'
-  | 'email'
-  | 'url'
-  | 'month'
-  | 'number'
-  | 'password'
-  | 'tel'
-  | 'time'
-  | 'text'
-  | 'week'
-  | 'color'
+/** @public */
+export type TextInputClearButtonProps = Omit<
+  ButtonProps<'button'>,
+  'as' | 'onClick' | 'onMouseDown'
+>
 
-/**
- * @public
- */
-export interface TextInputProps {
+/** @public */
+export type TextInputOwnProps = InputStyleProps & {
   /**
    * @beta
    */
   __unstable_disableFocusRing?: boolean
-  border?: boolean
   /**
    * @beta
    */
   clearButton?: boolean | TextInputClearButtonProps
   customValidity?: string
-  fontSize?: number | number[]
-  icon?: React.ElementType | React.ReactNode
-  iconRight?: React.ElementType | React.ReactNode
+  icon?: ElementType | ReactNode
+  iconRight?: ElementType | ReactNode
   /**
    * @beta
    */
   onClear?: () => void
-  padding?: number | number[]
-  prefix?: React.ReactNode
-  radius?: Radius | Radius[]
-  space?: number | number[]
-  suffix?: React.ReactNode
-  type?: TextInputType
-  weight?: ThemeFontWeightKey
+  prefix?: ReactNode
+  suffix?: ReactNode
+  weight?: FontWeight
 }
 
-const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
+/** @public */
+export type TextInputElementType = 'input' | ComponentType
 
-const StyledTextInput = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
-
-const InputRoot = styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`
-
-const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
-const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
-const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-)
-
-const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle,
-)
-
-const LeftBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`
-
-const RightBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
-const RightCard = styled(Card)`
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
-const TextInputClearButton = styled(Button)({
-  '&:not([hidden])': {
-    display: 'block',
-  },
-})
+/** @public */
+export type TextInputProps<E extends TextInputElementType = TextInputElementType> = Props<
+  TextInputOwnProps,
+  E
+>
 
 /**
  * Single line text input.
  *
  * @public
  */
-export const TextInput = forwardRef(function TextInput(
-  props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
-  forwardedRef: React.Ref<HTMLInputElement>,
-) {
+export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_INPUT_ELEMENT>(
+  props: TextInputProps<E>,
+): React.JSX.Element {
   const {
     __unstable_disableFocusRing,
+    as: Element = DEFAULT_TEXT_INPUT_ELEMENT,
     border = true,
+    className,
     clearButton,
     disabled = false,
-    fontSize: fontSizeProp = 2,
+    fontSize = 2,
+    gap = 3,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClear,
-    padding: paddingProp = 3,
+    padding = 3,
     prefix,
-    radius: radiusProp = 2,
+    radius = 2,
     readOnly,
-    space: spaceProp = 3,
+    ref: forwardedRef,
     suffix,
     customValidity,
     type = 'text',
-    weight,
-    ...restProps
-  } = props
+    weight: _width, // eslint-disable-line @typescript-eslint/no-unused-vars
+    width,
+    ...rest
+  } = props as TextInputProps<typeof DEFAULT_TEXT_INPUT_ELEMENT>
+
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const rootTheme = useRootTheme()
+  const responsivePadding = useResponsiveProp(padding)
 
-  const fontSize = useArrayProp(fontSizeProp)
-  const padding = useArrayProp(paddingProp)
-  const radius = useArrayProp(radiusProp)
-  const space = useArrayProp(spaceProp)
-
-  // Transient properties
-  const $hasClearButton = Boolean(clearButton)
-  const $hasIcon = Boolean(IconComponent)
-  const $hasIconRight = Boolean(IconRightComponent)
-  const $hasSuffix = Boolean(suffix)
-  const $hasPrefix = Boolean(prefix)
+  const withClearButton = Boolean(clearButton)
 
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
     forwardedRef,
@@ -199,13 +118,13 @@ export const TextInput = forwardRef(function TextInput(
   useCustomValidity(ref, customValidity)
 
   // Prevent the clear button from taking the focus away from the input
-  const handleClearMouseDown = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClearMouseDown = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     event.stopPropagation()
   }, [])
 
   const handleClearClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
       event.stopPropagation()
 
@@ -217,173 +136,123 @@ export const TextInput = forwardRef(function TextInput(
     [onClear, ref],
   )
 
-  // Render prefix (memoized)
-  const prefixNode = useMemo(
-    () =>
-      prefix && (
-        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border" tone="inherit">
-          <span>{prefix}</span>
-        </Prefix>
-      ),
-    [prefix, radius],
-  )
+  const clearButtonBoxPadding = useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(responsivePadding).map(([key, value]) => {
+        if (value === 0) return [key, 0]
+        if (value === 1) return [key, 1]
+        if (value === 2) return [key, 1]
 
-  // Render presentation (memoized)
-  const presentationNode = useMemo(
-    () => (
-      <Presentation
-        $hasPrefix={$hasPrefix}
-        $unstableDisableFocusRing={__unstable_disableFocusRing}
-        $hasSuffix={$hasSuffix}
-        $radius={radius}
-        $scheme={rootTheme.scheme}
-        $tone={rootTheme.tone}
-        data-border={border ? '' : undefined}
-        data-scheme={rootTheme.scheme}
-        data-tone={rootTheme.tone}
-      >
-        {IconComponent && (
-          <LeftBox padding={padding}>
-            <Text size={fontSize}>
-              {isValidElement(IconComponent) && IconComponent}
-              {isValidElementType(IconComponent) && <IconComponent />}
-            </Text>
-          </LeftBox>
-        )}
-
-        {!$hasClearButton && IconRightComponent && (
-          <RightBox padding={padding}>
-            <Text size={fontSize}>
-              {isValidElement(IconRightComponent) && IconRightComponent}
-              {isValidElementType(IconRightComponent) && <IconRightComponent />}
-            </Text>
-          </RightBox>
-        )}
-      </Presentation>
-    ),
-    [
-      __unstable_disableFocusRing,
-      border,
-      fontSize,
-      IconComponent,
-      IconRightComponent,
-      padding,
-      radius,
-      rootTheme,
-      $hasClearButton,
-      $hasPrefix,
-      $hasSuffix,
-    ],
-  )
-
-  // Render clear button (memoized)
-  const clearButtonBoxPadding = useMemo(
-    () =>
-      padding.map((v) => {
-        if (v === 0) return 0
-        if (v === 1) return 1
-        if (v === 2) return 1
-
-        return v - 2
+        return [key, typeof value === 'number' ? value - 2 : 0]
       }),
-    [padding],
-  )
-  const clearButtonPadding = useMemo(
-    () =>
-      padding.map((v) => {
-        if (v === 0) return 0
-        if (v === 1) return 0
-        if (v === 2) return 1
+    ) as ResponsiveProp<Space>
+  }, [responsivePadding])
 
-        return v - 1
+  const clearButtonPadding = useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(responsivePadding).map(([key, value]) => {
+        if (value === 0) return [key, 0]
+        if (value === 1) return [key, 0]
+        if (value === 2) return [key, 1]
+
+        return [key, typeof value === 'number' ? value - 1 : 0]
       }),
-    [padding],
-  )
+    ) as ResponsiveProp<Space>
+  }, [responsivePadding])
+
   const clearButtonProps: TextInputClearButtonProps = useMemo(
-    () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
+    () => (isRecord(clearButton) ? clearButton : EMPTY_RECORD),
     [clearButton],
-  )
-  const clearButtonNode = useMemo(
-    () =>
-      !disabled &&
-      !readOnly &&
-      clearButton && (
-        <RightCard
-          forwardedAs="span"
-          padding={clearButtonBoxPadding}
-          style={CLEAR_BUTTON_BOX_STYLE}
-          tone={customValidity ? 'critical' : 'inherit'}
-        >
-          <TextInputClearButton
-            aria-label="Clear"
-            data-qa="clear-button"
-            fontSize={fontSize}
-            icon={CloseIcon}
-            mode="bleed"
-            padding={clearButtonPadding}
-            radius={radius}
-            {...clearButtonProps}
-            onClick={handleClearClick}
-            onMouseDown={handleClearMouseDown}
-          />
-        </RightCard>
-      ),
-    [
-      clearButton,
-      clearButtonBoxPadding,
-      clearButtonPadding,
-      clearButtonProps,
-      customValidity,
-      disabled,
-      fontSize,
-      handleClearClick,
-      handleClearMouseDown,
-      radius,
-      readOnly,
-    ],
-  )
-
-  // Render suffix (memoized)
-  const suffixNode = useMemo(
-    () =>
-      suffix && (
-        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border" tone="inherit">
-          <span>{suffix}</span>
-        </Suffix>
-      ),
-    [radius, suffix],
   )
 
   return (
-    <StyledTextInput data-ui="TextInput" tone={rootTheme.tone}>
-      {prefixNode}
+    <Box
+      alignItems="center"
+      className={textInput({
+        className,
+        border,
+        fontSize,
+        padding,
+        radius,
+        gap: gap,
+        width,
+      })}
+      data-icon-left={IconComponent ? '' : undefined}
+      data-icon-right={IconRightComponent ? '' : undefined}
+      data-invalid={customValidity ? '' : undefined}
+      data-prefix={prefix ? '' : undefined}
+      data-read-only={!disabled && readOnly ? '' : undefined}
+      data-suffix={suffix ? '' : undefined}
+      data-ui="TextInput"
+      display="flex"
+    >
+      {prefix && (
+        <Box className={textInputPrefix()} sizing="border">
+          <span>{prefix}</span>
+        </Box>
+      )}
 
-      <InputRoot>
-        <Input
-          data-as="input"
-          data-scheme={rootTheme.scheme}
-          data-tone={rootTheme.tone}
-          {...restProps}
-          $fontSize={fontSize}
-          $iconLeft={$hasIcon}
-          $iconRight={$hasIconRight || $hasClearButton}
-          $padding={padding}
-          $scheme={rootTheme.scheme}
-          $space={space}
-          $tone={rootTheme.tone}
-          $weight={weight}
+      <Box className={textInputElement()} flex={1} position="relative">
+        <Element
+          {...rest}
+          className={_inputElement()}
+          data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
           disabled={disabled}
           readOnly={readOnly}
           ref={ref}
           type={type}
         />
 
-        {presentationNode}
-        {clearButtonNode}
-      </InputRoot>
+        <Box className={_inputPresentation()} position="absolute">
+          {IconComponent && (
+            <Box padding={padding} position="absolute" insetTop={0} insetLeft={0}>
+              <Text size={fontSize}>
+                {isValidElement(IconComponent) && IconComponent}
+                {isValidElementType(IconComponent) && <IconComponent />}
+              </Text>
+            </Box>
+          )}
 
-      {suffixNode}
-    </StyledTextInput>
+          {!withClearButton && IconRightComponent && (
+            <Box padding={padding} position="absolute" insetTop={0} insetRight={0}>
+              <Text size={fontSize}>
+                {isValidElement(IconRightComponent) && IconRightComponent}
+                {isValidElementType(IconRightComponent) && <IconRightComponent />}
+              </Text>
+            </Box>
+          )}
+        </Box>
+
+        {!disabled && !readOnly && clearButton && (
+          <Box
+            insetTop={0}
+            insetRight={0}
+            padding={clearButtonBoxPadding}
+            position="absolute"
+            style={{zIndex: 2}}
+          >
+            <Button
+              aria-label="Clear"
+              data-qa="clear-button"
+              display="block"
+              fontSize={fontSize}
+              icon={CloseIcon}
+              mode="bleed"
+              padding={clearButtonPadding}
+              radius={radius}
+              {...clearButtonProps}
+              onClick={handleClearClick}
+              onMouseDown={handleClearMouseDown}
+            />
+          </Box>
+        )}
+      </Box>
+
+      {suffix && (
+        <Box className={textInputSuffix()} sizing="border">
+          <span>{suffix}</span>
+        </Box>
+      )}
+    </Box>
   )
-})
-TextInput.displayName = 'ForwardRef(TextInput)'
+}

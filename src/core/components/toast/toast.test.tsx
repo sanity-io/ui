@@ -1,14 +1,15 @@
-/** @jest-environment jsdom */
+import {describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {ToastContext} from './toastContext'
-import {ToastContextValue} from './types'
+import type {ToastContextValue} from './types'
 import {useToast} from './useToast'
 
 describe('components/toast', () => {
   describe('useToast', () => {
     it('should get context value', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootToast = useToast()
@@ -38,7 +39,7 @@ describe('components/toast', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
@@ -51,10 +52,11 @@ describe('components/toast', () => {
       }
 
       function Root() {
-        const value = undefined
-
         return (
-          <ToastContext.Provider value={value as any}>
+          <ToastContext.Provider
+            // @ts-expect-error - we want to test the error case
+            value={undefined}
+          >
             <Debug />
           </ToastContext.Provider>
         )
@@ -66,7 +68,7 @@ describe('components/toast', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
@@ -80,12 +82,12 @@ describe('components/toast', () => {
 
       function Root() {
         // NOTE: we’re testing this because the context value may be a function in the future
-        const value = () => {
-          return {version: 1}
-        }
 
         return (
-          <ToastContext.Provider value={value as any}>
+          <ToastContext.Provider
+            // @ts-expect-error - we want to test the error case
+            value={() => ({version: 1})}
+          >
             <Debug />
           </ToastContext.Provider>
         )

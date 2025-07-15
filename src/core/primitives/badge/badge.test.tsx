@@ -1,8 +1,8 @@
-/** @jest-environment jsdom */
+import {describe, expect, it} from 'vitest'
+import {axe} from 'vitest-axe'
 
-import {axe} from 'jest-axe'
+import {render} from '$test/utils'
 
-import {render} from '../../../../test'
 import {Badge} from './badge'
 
 describe('atoms/badge', () => {

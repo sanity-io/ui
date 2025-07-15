@@ -1,6 +1,6 @@
 import {Dialog, DialogProvider} from '@sanity/ui'
 
-export default function ProviderStory() {
+export default function ProviderStory(): React.JSX.Element {
   return (
     <DialogProvider position="absolute" zOffset={1000}>
       <Dialog header="Outer" id="provider-example">
