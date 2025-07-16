@@ -1,7 +1,9 @@
 import {SPACE} from '@sanity/ui/theme'
+import {defineProperties} from '@vanilla-extract/sprinkles'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_responsiveStyle} from '../../_responsiveStyle.css'
+import {breakpointsConditions, breakpointsResponsiveArray} from '../../constants'
 import {layers} from '../../layers.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars.css'
@@ -115,3 +117,23 @@ export const marginLeftOptions: ResponsiveRuleOptions<Margin> = {
     ]),
   ),
 }
+
+const space = {auto: 'auto', ..._fromEntries(SPACE.map((index) => [index, vars.space[index]]))}
+
+export const marginProperties = defineProperties({
+  '@layer': layers.props,
+  'conditions': breakpointsConditions,
+  'defaultCondition': '0',
+  'responsiveArray': breakpointsResponsiveArray,
+  'properties': {
+    marginTop: space,
+    marginBottom: space,
+    marginLeft: space,
+    marginRight: space,
+  },
+  'shorthands': {
+    margin: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight'],
+    marginX: ['marginLeft', 'marginRight'],
+    marginY: ['marginTop', 'marginBottom'],
+  },
+})

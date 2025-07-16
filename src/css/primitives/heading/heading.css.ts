@@ -1,11 +1,11 @@
-import {FONT_HEADING_SIZE, type FontHeadingSize} from '@sanity/ui/theme'
+import {FONT_HEADING_SIZE} from '@sanity/ui/theme'
 import {globalStyle} from '@vanilla-extract/css'
+import {createSprinkles, defineProperties} from '@vanilla-extract/sprinkles'
 
 import {_fromEntries} from '../../_fromEntries'
-import {_responsiveStyle} from '../../_responsiveStyle.css'
 import {_style} from '../../_style.css'
+import {breakpointsConditions, breakpointsResponsiveArray} from '../../constants'
 import {layers} from '../../layers.css'
-import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars.css'
 
 export const root: string = _style(layers.primitives, {
@@ -62,25 +62,33 @@ export const muted: string = _style(layers.primitives, {
   color: vars.color.muted.fg,
 })
 
-export const sizes: ResponsiveRuleOptions<FontHeadingSize> = {
-  ..._fromEntries(
-    FONT_HEADING_SIZE.map((s) => {
-      const v = vars.font.heading.scale[s]
+const sizeProperties = defineProperties({
+  'conditions': breakpointsConditions,
+  'defaultCondition': '0',
+  'responsiveArray': breakpointsResponsiveArray,
+  'properties': {
+    size: _fromEntries(
+      FONT_HEADING_SIZE.map((s) => {
+        const v = vars.font.heading.scale[s]
 
-      return [
-        s,
-        _responsiveStyle(layers.primitives, {
-          vars: {
-            [vars.font.fontSize]: v.fontSize,
-            [vars.font.lineHeight]: v.lineHeight,
-            [vars.font.letterSpacing]: v.letterSpacing,
-            [vars.font.iconSize]: v.iconSize,
-            [vars.font.ascenderHeight]: v.ascenderHeight,
-            [vars.font.descenderHeight]: v.descenderHeight,
-            [vars.font.customIconSize]: v.customIconSize,
+        return [
+          s,
+          {
+            vars: {
+              [vars.font.fontSize]: v.fontSize,
+              [vars.font.lineHeight]: v.lineHeight,
+              [vars.font.letterSpacing]: v.letterSpacing,
+              [vars.font.iconSize]: v.iconSize,
+              [vars.font.ascenderHeight]: v.ascenderHeight,
+              [vars.font.descenderHeight]: v.descenderHeight,
+              [vars.font.customIconSize]: v.customIconSize,
+            },
           },
-        }),
-      ]
-    }),
-  ),
-}
+        ]
+      }),
+    ),
+  },
+  '@layer': layers.primitives,
+})
+
+export const sprinkles = createSprinkles(sizeProperties)
