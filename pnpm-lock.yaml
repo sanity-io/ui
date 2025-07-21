@@ -196,8 +196,8 @@ importers:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.30.1(jiti@2.4.2))
       eslint-plugin-react-hooks:
-        specifier: 0.0.0-experimental-97cdd5d3-20250710
-        version: 0.0.0-experimental-97cdd5d3-20250710(eslint@9.30.1(jiti@2.4.2))
+        specifier: 0.0.0-experimental-dffacc7b-20250717
+        version: 0.0.0-experimental-dffacc7b-20250717(eslint@9.30.1(jiti@2.4.2))
       eslint-plugin-react-refresh:
         specifier: ^0.4.20
         version: 0.4.20(eslint@9.30.1(jiti@2.4.2))
@@ -4010,8 +4010,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-hooks@0.0.0-experimental-97cdd5d3-20250710:
-    resolution: {integrity: sha512-VDciMZRMbBHoLTOqprFLkYgMZcroqfQN3m2Pq1qN+tJIQZdA/LsrimXfOVlMdGPJ8UwqXkz4z51Fe2gRhCssow==}
+  eslint-plugin-react-hooks@0.0.0-experimental-dffacc7b-20250717:
+    resolution: {integrity: sha512-wz5gjKUAy7aiD+ZGpxIkYKZ1XoZZLIy+wEkyLQxMHlNCdWmBYUUk1sxSdNndT1Gt/CZVZ0l+xrGPU3FgCbl1YA==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -12215,7 +12215,7 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-react-hooks@0.0.0-experimental-97cdd5d3-20250710(eslint@9.30.1(jiti@2.4.2)):
+  eslint-plugin-react-hooks@0.0.0-experimental-dffacc7b-20250717(eslint@9.30.1(jiti@2.4.2)):
     dependencies:
       '@babel/core': 7.28.0
       '@babel/parser': 7.28.0
