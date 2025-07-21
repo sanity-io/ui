@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "baseBranches": ["$default", "v3"],
+  "baseBranchPatterns": ["$default", "v3"],
   "extends": ["github>sanity-io/renovate-config"],
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
   "packageRules": [
