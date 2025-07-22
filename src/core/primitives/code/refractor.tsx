@@ -1,4 +1,4 @@
-import Refractor from 'react-refractor'
+import { hasLanguage,Refractor } from 'react-refractor';
 
 export default function LazyRefractor(
   props: Partial<Pick<React.ComponentProps<typeof Refractor>, 'language'>> & {
@@ -7,7 +7,7 @@ export default function LazyRefractor(
 ) {
   const {language: languageProp, value} = props
   const language = typeof languageProp === 'string' ? languageProp : undefined
-  const registered = language ? Refractor.hasLanguage(language as any) : false
+  const registered = language ? hasLanguage(language as any) : false
 
   return (
     <>

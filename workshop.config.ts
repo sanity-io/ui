@@ -1,18 +1,18 @@
 import {buildTheme} from '@sanity/ui/theme'
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
-import Refractor from 'react-refractor'
-import javascript from 'refractor/lang/javascript'
-import json from 'refractor/lang/json'
-import jsx from 'refractor/lang/jsx'
-import typescript from 'refractor/lang/typescript'
+import {registerLanguage} from 'react-refractor'
+import javascript from 'refractor/javascript'
+import json from 'refractor/json'
+import jsx from 'refractor/jsx'
+import typescript from 'refractor/typescript'
 
 import {fontsPlugin} from './workshop/fontsPlugin'
 
-Refractor.registerLanguage(javascript)
-Refractor.registerLanguage(json)
-Refractor.registerLanguage(jsx)
-Refractor.registerLanguage(typescript)
+registerLanguage(javascript)
+registerLanguage(json)
+registerLanguage(jsx)
+registerLanguage(typescript)
 
 export default defineConfig({
   collections: [
