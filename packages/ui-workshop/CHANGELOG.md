@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.6](https://github.com/sanity-io/ui-workshop/compare/v2.1.5...v2.1.6) (2025-07-22)
+
+### Bug Fixes
+
+- load Inter font from sanity cdn ([c4ebf04](https://github.com/sanity-io/ui-workshop/commit/c4ebf04fea041deae3866b7d6a770c49dc6237b6))
+
 ## [2.1.5](https://github.com/sanity-io/ui-workshop/compare/v2.1.4...v2.1.5) (2025-06-19)
 
 ### Bug Fixes
