@@ -24,6 +24,39 @@
       "matchPackageNames": ["react-refractor"],
       "matchBaseBranches": ["v2"],
       "allowedVersions": "<=2"
+    },
+    {
+      "description": "v2 is in maintenance mode",
+      "matchPackageNames": ["@sanity/ui-workshop"],
+      "matchBaseBranches": ["v2"],
+      "allowedVersions": "<=2"
+    },
+    {
+      "description": "v2 is in maintenance mode",
+      "matchPackageNames": ["cypress"],
+      "matchBaseBranches": ["v2"],
+      "allowedVersions": "<=13"
+    },
+    {
+      "description": "v2 is in maintenance mode",
+      "matchPackageNames": ["npm-run-all2", "vite"],
+      "matchBaseBranches": ["v2"],
+      "allowedVersions": "<=5"
+    },
+    {
+      "description": "v4 is upgrading storybook, do not update it elsewhere",
+      "matchPackageNames": [
+        "eslint-plugin-storybook",
+        "@storybook/addon-a11y",
+        "@storybook/addon-docs",
+        "@storybook/addon-links",
+        "@storybook/addon-themes",
+        "@storybook/react",
+        "@storybook/react-vite",
+        "storybook"
+      ],
+      "matchBaseBranches": ["v2", "$default"],
+      "allowedVersions": "<=8"
     }
   ]
 }
