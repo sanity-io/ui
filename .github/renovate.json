@@ -12,6 +12,14 @@
     {
       "matchPackageNames": ["eslint-plugin-react-hooks"],
       "followTag": "experimental"
+    },
+    {
+      "matchPackageNames": ["vite"],
+      "allowedVersions": "<6"
+    },
+    {
+      "matchPackageNames": ["pnpm"],
+      "allowedVersions": "<9"
     }
   ]
 }
