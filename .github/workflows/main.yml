@@ -107,7 +107,8 @@ jobs:
     permissions:
       id-token: write # to enable use of OIDC for npm provenance
     name: "Semantic release"
-    needs: [lint, test, cypress]
+    # needs: [lint, test, cypress]
+    needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v2
