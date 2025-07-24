@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.8](https://github.com/sanity-io/ui/compare/v2.16.7...v2.16.8) (2025-07-24)
+
+### Bug Fixes
+
+- **deps:** update dependency use-effect-event to ^2.0.3 (v2) ([#1784](https://github.com/sanity-io/ui/issues/1784)) ([7ee8496](https://github.com/sanity-io/ui/commit/7ee8496ea69bb24f461f467735f98579cc3b7539))
+
 ## [2.16.7](https://github.com/sanity-io/ui/compare/v2.16.6...v2.16.7) (2025-07-11)
 
 ### Bug Fixes
