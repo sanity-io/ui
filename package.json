@@ -177,7 +177,7 @@
     "eslint-plugin-react-hooks": "0.0.0-experimental-edac0dde-20250723",
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-storybook": "^0.12.0",
+    "eslint-plugin-storybook": "^9.0.18",
     "globals": "^16.3.0",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
