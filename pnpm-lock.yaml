@@ -150,9 +150,6 @@ importers:
       '@types/react-is':
         specifier: ^19.0.0
         version: 19.0.0
-      '@types/refractor':
-        specifier: ^3.4.1
-        version: 3.4.1
       '@vitejs/plugin-react':
         specifier: ^4.6.0
         version: 4.6.0(vite@5.4.19(@types/node@20.19.7)(terser@5.43.1))
@@ -2534,9 +2531,6 @@ packages:
 
   '@types/react@19.1.8':
     resolution: {integrity: sha512-AwAfQ2Wa5bCx9WP8nZL2uMZWod7J7/JSplxbTmBQ5ms6QpqNYm672H0Vu9ZVKVngQ+ii4R/byguVEUZQyeg44g==}
-
-  '@types/refractor@3.4.1':
-    resolution: {integrity: sha512-wYuorIiCTSuvRT9srwt+taF6mH/ww+SyN2psM0sjef2qW+sS8GmshgDGTEDgWB1sTVGgYVE6EK7dBA2MxQxibg==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -10522,10 +10516,6 @@ snapshots:
   '@types/react@19.1.8':
     dependencies:
       csstype: 3.1.3
-
-  '@types/refractor@3.4.1':
-    dependencies:
-      '@types/prismjs': 1.26.5
 
   '@types/resolve@1.20.2': {}
 
