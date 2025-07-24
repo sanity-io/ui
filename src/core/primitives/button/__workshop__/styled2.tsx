@@ -8,7 +8,7 @@ const StyledButton2 = styled(Button)<{$color?: boolean}>`
   }
 `
 
-export default function StyledButton2Story() {
+export default function StyledButton2Story(): React.JSX.Element {
   const props = {href: '#', text: 'Test'}
 
   return (

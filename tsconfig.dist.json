@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./exports", "./src", "./typings"],
+  "include": ["./exports", "./package.json", "./src", "./typings"],
   "exclude": [
     "./src/**/__fixtures__",
     "./src/**/__mocks__",
@@ -9,12 +9,16 @@
     "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
+    "jsx": "preserve",
+    "resolveJsonModule": true,
     "sourceMap": true,
+    "noEmit": false,
     "rootDir": ".",
     "outDir": "./dist",
+    "noCheck": true,
     "paths": {
-      "@sanity/ui/theme": ["./exports/theme.ts"],
-      "@sanity/ui": ["./exports"]
+      "@sanity/ui/*": ["./exports/*.ts"],
+      "@sanity/ui": ["./exports/index.ts"]
     }
   }
 }

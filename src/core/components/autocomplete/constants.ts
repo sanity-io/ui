@@ -1,9 +1,9 @@
-import {Placement} from '../../types'
+import type {Placement} from '../../types'
 
 /**
  * @internal
  */
-export const AUTOCOMPLETE_LISTBOX_IGNORE_KEYS = [
+export const AUTOCOMPLETE_LISTBOX_IGNORE_KEYS: string[] = [
   'Control',
   'Shift',
   'Alt',

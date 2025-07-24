@@ -1,10 +1,10 @@
 import {Card, Container, Label, Select, Stack} from '@sanity/ui'
 
-export default function ReadOnlyStory() {
+export default function ReadOnlyStory(): React.JSX.Element {
   return (
     <Container width={0}>
       <Card padding={4}>
-        <Stack space={3}>
+        <Stack gap={3}>
           <Label as="label" htmlFor="select">
             Select
           </Label>

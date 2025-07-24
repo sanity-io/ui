@@ -1,55 +1,49 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import {forwardRef, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
+import {_inputElement, select, selectPresentation, type SelectStyleProps} from '@sanity/ui/css'
+import {useImperativeHandle, useRef} from 'react'
 
-import {useArrayProp, useCustomValidity} from '../../hooks'
-import {Radius} from '../../types'
-import {Box} from '../box'
-import {Text} from '../text'
-import {selectStyle} from './styles'
+import {useCustomValidity} from '../../hooks/useCustomValidity'
+import type {ComponentType, Props} from '../../types'
+import {Box} from '../box/box'
+import {Text} from '../text/text'
 
-/**
- * @public
- */
-export interface SelectProps {
-  fontSize?: number | number[]
-  padding?: number | number[]
-  radius?: Radius | Radius[]
-  space?: number | number[]
+/** @public */
+export const DEFAULT_SELECT_ELEMENT = 'select'
+
+/** @public */
+export type SelectOwnProps = SelectStyleProps & {
   customValidity?: string
+  readOnly?: boolean
 }
 
-const StyledSelect = styled.div(selectStyle.root)
+/** @public */
+export type SelectElementType = 'select' | ComponentType
 
-const Input = styled.select<{
-  $fontSize: number[]
-  $padding: number[]
-  $radius: Radius[]
-  $space: number[]
-}>(selectStyle.input)
-
-const IconBox = styled(Box)(selectStyle.iconBox)
+/** @public */
+export type SelectProps<E extends SelectElementType = SelectElementType> = Props<SelectOwnProps, E>
 
 /**
  * The `Select` component provides control of options.
  *
  * @public
  */
-export const Select = forwardRef(function Select(
-  props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
-  forwardedRef: React.ForwardedRef<HTMLSelectElement>,
-) {
+export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEMENT>(
+  props: SelectProps<E>,
+): React.JSX.Element {
   const {
+    as: Element = DEFAULT_SELECT_ELEMENT,
+    border = true,
     children,
     customValidity,
     disabled,
     fontSize = 2,
+    gap = 2,
     padding = 3,
-    radius = 2,
+    radius = 1,
     readOnly,
-    space = 3,
-    ...restProps
-  } = props
+    ref: forwardedRef,
+    ...rest
+  } = props as SelectProps<typeof DEFAULT_SELECT_ELEMENT>
 
   const ref = useRef<HTMLSelectElement | null>(null)
 
@@ -61,27 +55,21 @@ export const Select = forwardRef(function Select(
   useCustomValidity(ref, customValidity)
 
   return (
-    <StyledSelect data-ui="Select">
-      <Input
-        data-read-only={!disabled && readOnly ? '' : undefined}
-        data-ui="Select"
-        {...restProps}
-        $fontSize={useArrayProp(fontSize)}
-        $padding={useArrayProp(padding)}
-        $radius={useArrayProp(radius)}
-        $space={useArrayProp(space)}
-        disabled={disabled || readOnly}
-        ref={ref}
-      >
+    <div
+      data-ui="Select"
+      className={select({border, fontSize, gap, padding, radius})}
+      data-icon-right=""
+    >
+      <Element {...rest} className={_inputElement()} disabled={disabled || readOnly} ref={ref}>
         {children}
-      </Input>
-
-      <IconBox padding={padding}>
-        <Text size={fontSize}>
-          <ChevronDownIcon />
-        </Text>
-      </IconBox>
-    </StyledSelect>
+      </Element>
+      <span className={selectPresentation()}>
+        <Box as="span" display="inline-block" padding={padding}>
+          <Text size={fontSize}>
+            <ChevronDownIcon />
+          </Text>
+        </Box>
+      </span>
+    </div>
   )
-})
-Select.displayName = 'ForwardRef(Select)'
+}

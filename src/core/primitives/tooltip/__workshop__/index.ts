@@ -1,7 +1,7 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'primitives/tooltip',
   title: 'Tooltip',
   stories: [
@@ -26,4 +26,6 @@ export default defineScope({
       component: lazy(() => import('./customPortal')),
     },
   ],
-})
+}
+
+export default scope

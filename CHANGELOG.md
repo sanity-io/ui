@@ -5,6 +5,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.1](https://github.com/sanity-io/ui/compare/v3.0.0...v4.0.0-static.1) (2025-07-24)
+
+### ⚠ BREAKING CHANGES
+
+- use @vanilla-extract/css for styling
+
+### Bug Fixes
+
+- **deps:** update dependency use-effect-event to ^2.0.3 (main) ([#1798](https://github.com/sanity-io/ui/issues/1798)) ([6d66bf3](https://github.com/sanity-io/ui/commit/6d66bf3762c96134ab8101b9944084671744edab))
+
+### Code Refactoring
+
+- use @vanilla-extract/css for styling ([2089014](https://github.com/sanity-io/ui/commit/208901473f07ab99d690fa32a2ed4d6f39cfd10e))
+
 ## [3.0.0](https://github.com/sanity-io/ui/compare/v2.16.7...v3.0.0) (2025-07-24)
 
 ### ⚠ BREAKING CHANGES

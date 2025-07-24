@@ -1,12 +1,12 @@
 import {Box, Button, Inline, ToastProvider, useToast} from '@sanity/ui'
 
-export default function HookStory() {
+export default function HookStory(): React.JSX.Element {
   const toast = useToast()
 
   return (
     <ToastProvider>
       <Box padding={[4, 5, 6]}>
-        <Inline space={2}>
+        <Inline gap={2}>
           <Button
             onClick={() =>
               toast.push({

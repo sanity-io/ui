@@ -1,7 +1,7 @@
 import {Button, Flex} from '@sanity/ui'
 import {useCallback, useRef} from 'react'
 
-export default function UploadButtonStory() {
+export default function UploadButtonStory(): React.JSX.Element {
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
@@ -11,9 +11,10 @@ export default function UploadButtonStory() {
   }, [])
 
   return (
-    <Flex align="center" height="fill" htmlFor="file" justify="center">
+    <Flex align="center" height="fill" justify="center">
       <Button
         as="label"
+        htmlFor="file"
         onKeyDown={handleKeyDown}
         tabIndex={0}
         text={

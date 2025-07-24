@@ -1,17 +1,11 @@
-import {useMemo, useRef, useSyncExternalStore} from 'react'
+import {type ReactNode, useContext, useMemo, useRef, useSyncExternalStore} from 'react'
 
 import {PortalContext} from './portalContext'
-import {PortalContextValue} from './types'
+import type {PortalContextValue} from './types'
 
-/**
- * @public
- */
+/** @public */
 export interface PortalProviderProps {
-  /**
-   * @deprecated Use `<BoundaryElementProvider element={...} />` instead
-   */
-  boundaryElement?: HTMLElement | null
-  children: React.ReactNode
+  children: ReactNode
   element?: HTMLElement | null
   /**
    * @beta
@@ -19,31 +13,28 @@ export interface PortalProviderProps {
   __unstable_elements?: Record<string, HTMLElement | null | undefined>
 }
 
-/**
- * @public
- */
+/** @public */
 export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
-  const {boundaryElement, children, element, __unstable_elements: elementsProp} = props
+  const {children, element, __unstable_elements: elementsProp} = props
   const elements = useUnique(elementsProp)
+  const parentPortal = useContext(PortalContext)
   const fallbackElement = useSyncExternalStore(
     emptySubscribe,
-    () => document.body,
+    () => elements?.['default'] ?? (parentPortal.element || document.body),
     () => null,
   )
 
   const value: PortalContextValue = useMemo(() => {
     return {
       version: 0.0,
-      boundaryElement: boundaryElement || null,
+      boundaryElement: null,
       element: element || fallbackElement,
       elements,
     }
-  }, [boundaryElement, element, elements, fallbackElement])
+  }, [element, elements, fallbackElement])
 
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>
 }
-
-PortalProvider.displayName = 'PortalProvider'
 
 const emptySubscribe = () => () => {}
 

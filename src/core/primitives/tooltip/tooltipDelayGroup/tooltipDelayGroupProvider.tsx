@@ -1,15 +1,15 @@
-import {useMemo} from 'react'
+import {type ReactNode, useMemo} from 'react'
 
 import {useDelayedState} from '../../../hooks/useDelayedState'
-import {Delay} from '../../types'
+import type {Delay} from '../../../types'
 import {TooltipDelayGroupContext} from './tooltipDelayGroupContext'
-import {TooltipDelayGroupContextValue} from './types'
+import type {TooltipDelayGroupContextValue} from './types'
 
 /**
  * @public
  * */
 export interface TooltipDelayGroupProviderProps {
-  children?: React.ReactNode
+  children?: ReactNode
   /**
    * Handles the delays to open or close a tooltip inside a group
    *
@@ -53,5 +53,3 @@ export function TooltipDelayGroupProvider(
     <TooltipDelayGroupContext.Provider value={value}>{children}</TooltipDelayGroupContext.Provider>
   )
 }
-
-TooltipDelayGroupProvider.displayName = 'TooltipDelayGroupProvider'

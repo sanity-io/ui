@@ -1,7 +1,7 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'primitives/button',
   title: 'Button',
   stories: [
@@ -55,5 +55,12 @@ export default defineScope({
       title: 'Disabled',
       component: lazy(() => import('./disabled')),
     },
+    {
+      name: 'text-overflow',
+      title: 'Text overflow',
+      component: lazy(() => import('./textOverflow')),
+    },
   ],
-})
+}
+
+export default scope

@@ -1,19 +1,17 @@
-/**
- * @public
- */
+import type {ReactNode} from 'react'
+
+/** @public */
 export interface ToastParams {
   closable?: boolean
-  description?: React.ReactNode
+  description?: ReactNode
   duration?: number
   id?: string
   onClose?: () => void
-  title?: React.ReactNode
+  title?: ReactNode
   status?: 'error' | 'warning' | 'success' | 'info'
 }
 
-/**
- * @public
- */
+/** @public */
 export interface ToastContextValue {
   version: 0.0
   /**

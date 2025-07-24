@@ -1,14 +1,19 @@
+import {
+  BoundaryElementProvider,
+  Box,
+  Card,
+  Flex,
+  Popover,
+  type PopoverProps,
+  type PopoverUpdateCallback,
+  Stack,
+  Text,
+} from '@sanity/ui'
+import type {CardTone} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
-import {BoundaryElementProvider} from '../../../utils'
-import {Box} from '../../box'
-import {Card} from '../../card'
-import {Flex} from '../../flex'
-import {Stack} from '../../stack'
-import {Text} from '../../text'
-import {Popover, PopoverProps} from '../popover'
-import {PopoverUpdateCallback} from '../types'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 const SIDE_PANEL_WIDTH = {
   sm: 300,
@@ -17,10 +22,11 @@ const SIDE_PANEL_WIDTH = {
   xl: 600,
 }
 
-export default function SidePanelStory() {
+export default function SidePanelStory(): React.JSX.Element {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
+  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS) ?? 'inherit'
 
   useEffect(() => updateRef.current?.(), [sidePanelWidth])
 
@@ -35,14 +41,14 @@ export default function SidePanelStory() {
       </Card>
       <BoundaryElementProvider element={sidePanel}>
         <Card borderLeft flex="none" ref={setSidePanel} style={{width: sidePanelWidth}} width={0}>
-          <Stack padding={4} space={5}>
+          <Stack gap={5} padding={4}>
             <Text muted size={1}>
               Click the <code>reference</code> text below to toggle the popover.
             </Text>
 
             <Card border padding={3}>
               <Text size={1}>
-                Some editor <InlineObject updateRef={updateRef} />
+                Some editor <InlineObject tone={tone} updateRef={updateRef} />
               </Text>
             </Card>
           </Stack>
@@ -52,8 +58,8 @@ export default function SidePanelStory() {
   )
 }
 
-function InlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
-  const {updateRef} = props
+function InlineObject(props: {tone: CardTone | 'inherit'; updateRef?: PopoverProps['updateRef']}) {
+  const {tone, updateRef} = props
   const [open, setOpen] = useState(false)
 
   const handleClick = useCallback(() => {
@@ -79,6 +85,7 @@ function InlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
       open={open}
       overflow="auto"
       portal
+      tone={tone}
       width={0}
       updateRef={updateRef}
     >

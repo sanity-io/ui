@@ -2,11 +2,9 @@ import {useContext} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
 import {ToastContext} from './toastContext'
-import {ToastContextValue} from './types'
+import type {ToastContextValue} from './types'
 
-/**
- * @public
- */
+/** @public */
 export function useToast(): ToastContextValue {
   const value = useContext(ToastContext)
 

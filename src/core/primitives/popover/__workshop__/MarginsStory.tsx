@@ -1,6 +1,6 @@
 import {Box, Card, Container, Flex, Popover, Text} from '@sanity/ui'
 
-export default function MarginsStory() {
+export default function MarginsStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Popover

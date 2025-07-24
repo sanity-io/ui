@@ -1,4 +1,4 @@
-import {TreeState} from './types'
+import type {TreeState} from './types'
 
 export function _findPrevItemElement(
   state: TreeState,

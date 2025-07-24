@@ -1,7 +1,7 @@
 import {EarthAmericasIcon, SearchIcon} from '@sanity/icons'
 import {
   Autocomplete,
-  BaseAutocompleteOption,
+  type BaseAutocompleteOption,
   Box,
   Card,
   Code,
@@ -12,9 +12,9 @@ import {
 } from '@sanity/ui'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
-import {countriesStore} from '../__mocks__/apiStore'
+import {countriesStore} from './mock/apiStore'
 
-export default function AsyncStory() {
+export default function AsyncStory(): React.JSX.Element {
   const [options, setOptions] = useState<BaseAutocompleteOption[]>([])
   const [loading, setLoading] = useState(false)
   const searchRef = useRef<{cancel: () => void} | null>(null)
@@ -81,7 +81,7 @@ export default function AsyncStory() {
 
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
-      <Stack space={[3, 3, 4]}>
+      <Stack gap={[3, 3, 4]}>
         <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
           Country
         </Text>
@@ -103,11 +103,11 @@ export default function AsyncStory() {
           />
         </LayerProvider>
 
-        <Card overflow="auto" padding={3} radius={2} tone="transparent">
+        <Box muted overflow="auto" padding={3} radius={2}>
           <Code language="json" size={1}>
             {JSON.stringify({loading, options, query, value}, null, 2)}
           </Code>
-        </Card>
+        </Box>
       </Stack>
     </Box>
   )
@@ -131,7 +131,7 @@ function AsyncOption(props: {
 
   return (
     <Card
-      data-as="button"
+      as="button"
       disabled={disabled}
       padding={3}
       radius={1}

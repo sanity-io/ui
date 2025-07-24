@@ -1,7 +1,7 @@
 import {Box, Card, Code, Dialog, Layer, LayerProvider, useLayer} from '@sanity/ui'
 import {useAction} from '@sanity/ui-workshop'
 
-export default function LayeringStory() {
+export default function LayeringStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <LayerProvider>

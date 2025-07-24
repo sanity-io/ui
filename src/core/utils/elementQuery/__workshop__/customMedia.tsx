@@ -1,27 +1,38 @@
 import {Box, Card, ElementQuery, Text} from '@sanity/ui'
+import {vars} from '@sanity/ui/css'
 import {styled} from 'styled-components'
 
 const TestCard = styled(Card)`
-  --card-fg-color: orange;
-
   [data-eq-min~='0'] > & {
-    --card-fg-color: green;
+    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.orange[600]}, ${vars.color
+      .palette.orange[400]});
   }
 
   [data-eq-min~='1'] > & {
-    --card-fg-color: blue;
+    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.red[600]}, ${vars.color.palette
+      .red[400]});
+  }
+
+  [data-eq-min~='2'] > & {
+    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.magenta[600]}, ${vars.color
+      .palette.magenta[400]});
+  }
+
+  [data-eq-min~='3'] > & {
+    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.purple[600]}, ${vars.color
+      .palette.purple[400]});
   }
 `
 
-export default function CustomMediaQuery() {
+export default function CustomMediaQuery(): React.JSX.Element {
   return (
-    <Box padding={[3, 4, 5]}>
-      <Box marginBottom={[3, 4, 5]}>
+    <Box padding={4}>
+      <Box marginBottom={4}>
         <Text>Resize this frame to see the text color change:</Text>
       </Box>
 
-      <ElementQuery media={[100, 200, 300]}>
-        <TestCard padding={2} shadow={1}>
+      <ElementQuery media={[0, 100, 200, 300]}>
+        <TestCard padding={3} shadow={1}>
           <Text>This card sits inside an element query.</Text>
         </TestCard>
       </ElementQuery>

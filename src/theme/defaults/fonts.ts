@@ -1,15 +1,15 @@
-import {ThemeFonts} from '../system'
+import type {Fonts} from '../types'
 
-export const defaultThemeFonts: ThemeFonts = {
+export const defaultFonts: Fonts = {
   code: {
     family: 'ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace',
-    weights: {
+    weight: {
       regular: 400,
       medium: 500,
       semibold: 600,
       bold: 700,
     },
-    sizes: [
+    scale: [
       {
         ascenderHeight: 4,
         descenderHeight: 4,
@@ -17,6 +17,7 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 17,
         lineHeight: 15,
         letterSpacing: 0,
+        customIconSize: 12,
       },
       {
         ascenderHeight: 5,
@@ -25,6 +26,7 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 21,
         lineHeight: 19,
         letterSpacing: 0,
+        customIconSize: 16,
       },
       {
         ascenderHeight: 6,
@@ -33,35 +35,39 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 25,
         lineHeight: 23,
         letterSpacing: 0,
+        customIconSize: 20,
       },
       {
         ascenderHeight: 7,
         descenderHeight: 7,
-        fontSize: 19,
+        fontSize: 18.75,
         iconSize: 29,
         lineHeight: 27,
         letterSpacing: 0,
+        customIconSize: 24,
       },
       {
         ascenderHeight: 8,
         descenderHeight: 8,
-        fontSize: 22,
+        fontSize: 21.5,
         iconSize: 33,
         lineHeight: 31,
         letterSpacing: 0,
+        customIconSize: 28,
       },
     ],
   },
   heading: {
     family:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
-    weights: {
-      regular: 700,
-      medium: 800,
-      semibold: 900,
+    featureSettings: `'liga' 1, 'calt' 1, 'ss01' 1, 'ss03' 1, 'zero' 1`,
+    weight: {
+      regular: 600,
+      medium: 700,
+      semibold: 800,
       bold: 900,
     },
-    sizes: [
+    scale: [
       {
         ascenderHeight: 5,
         descenderHeight: 5,
@@ -69,6 +75,7 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 17,
         lineHeight: 19,
         letterSpacing: 0,
+        customIconSize: 12,
       },
       {
         ascenderHeight: 6,
@@ -77,6 +84,7 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 25,
         lineHeight: 23,
         letterSpacing: 0,
+        customIconSize: 20,
       },
       {
         ascenderHeight: 7,
@@ -84,7 +92,8 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 21,
         iconSize: 33,
         lineHeight: 29,
-        letterSpacing: 0,
+        letterSpacing: -0.25,
+        customIconSize: 28,
       },
       {
         ascenderHeight: 8,
@@ -92,7 +101,8 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 27,
         iconSize: 41,
         lineHeight: 35,
-        letterSpacing: 0,
+        letterSpacing: -0.5,
+        customIconSize: 36,
       },
       {
         ascenderHeight: 9.5,
@@ -100,7 +110,8 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 33,
         iconSize: 49,
         lineHeight: 41,
-        letterSpacing: 0,
+        letterSpacing: -1,
+        customIconSize: 44,
       },
       {
         ascenderHeight: 10.5,
@@ -108,20 +119,21 @@ export const defaultThemeFonts: ThemeFonts = {
         fontSize: 38,
         iconSize: 53,
         lineHeight: 47,
-        letterSpacing: 0,
+        letterSpacing: -1,
+        customIconSize: 48,
       },
     ],
   },
   label: {
     family:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", system-ui, sans-serif',
-    weights: {
-      regular: 600,
-      medium: 700,
-      semibold: 800,
-      bold: 900,
+    weight: {
+      regular: 500,
+      medium: 600,
+      semibold: 700,
+      bold: 800,
     },
-    sizes: [
+    scale: [
       {
         ascenderHeight: 2,
         descenderHeight: 2,
@@ -129,14 +141,16 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 13,
         lineHeight: 10,
         letterSpacing: 0.5,
+        customIconSize: 8,
       },
       {
-        ascenderHeight: 2,
-        descenderHeight: 2,
+        ascenderHeight: 1.5,
+        descenderHeight: 2.5,
         fontSize: 9.5,
         iconSize: 15,
         lineHeight: 11,
         letterSpacing: 0.5,
+        customIconSize: 10,
       },
       {
         ascenderHeight: 2,
@@ -145,6 +159,7 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 17,
         lineHeight: 12,
         letterSpacing: 0.5,
+        customIconSize: 12,
       },
       {
         ascenderHeight: 2,
@@ -153,14 +168,16 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 19,
         lineHeight: 13,
         letterSpacing: 0.5,
+        customIconSize: 14,
       },
       {
-        ascenderHeight: 2,
-        descenderHeight: 2,
+        ascenderHeight: 1.5,
+        descenderHeight: 2.5,
         fontSize: 13.6,
         iconSize: 21,
         lineHeight: 14,
         letterSpacing: 0.5,
+        customIconSize: 16,
       },
       {
         ascenderHeight: 2,
@@ -169,42 +186,46 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 23,
         lineHeight: 15,
         letterSpacing: 0.5,
+        customIconSize: 18,
       },
     ],
   },
   text: {
     family:
       'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Liberation Sans", Helvetica, Arial, system-ui, sans-serif',
-    weights: {
+    weight: {
       regular: 400,
       medium: 500,
       semibold: 600,
       bold: 700,
     },
-    sizes: [
+    scale: [
       {
         ascenderHeight: 4,
         descenderHeight: 4,
-        fontSize: 10,
+        fontSize: 9.75,
         iconSize: 17,
         lineHeight: 15,
         letterSpacing: 0,
+        customIconSize: 12,
       },
       {
         ascenderHeight: 5,
         descenderHeight: 5,
-        fontSize: 13,
+        fontSize: 12.5,
         iconSize: 21,
         lineHeight: 19,
         letterSpacing: 0,
+        customIconSize: 16,
       },
       {
         ascenderHeight: 6,
         descenderHeight: 6,
-        fontSize: 15,
+        fontSize: 15.25,
         iconSize: 25,
         lineHeight: 23,
         letterSpacing: 0,
+        customIconSize: 20,
       },
       {
         ascenderHeight: 7,
@@ -213,14 +234,16 @@ export const defaultThemeFonts: ThemeFonts = {
         iconSize: 29,
         lineHeight: 27,
         letterSpacing: 0,
+        customIconSize: 24,
       },
       {
         ascenderHeight: 8,
         descenderHeight: 8,
-        fontSize: 21,
+        fontSize: 20.75,
         iconSize: 33,
         lineHeight: 31,
         letterSpacing: 0,
+        customIconSize: 28,
       },
     ],
   },

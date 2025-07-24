@@ -175,8 +175,8 @@ context('Components/Autocomplete', () => {
     // Search for "nor"
     cy.get('#focus-and-blur').type('foo')
     cy.get('#focus-and-blur-listbox').realPress('ArrowDown')
-    cy.get('#focus-and-blur-option-foo > div').should('have.focus')
-    cy.get('#focus-and-blur-option-foo > div').click()
+    cy.get('#focus-and-blur-option-foo > button').should('have.focus')
+    cy.get('#focus-and-blur-option-foo > button').click()
 
     // Expect "foo" to be selected
     cy.get('#focus-and-blur[value="foo"]:focus').should('exist')

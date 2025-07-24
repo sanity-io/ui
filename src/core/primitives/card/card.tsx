@@ -1,32 +1,16 @@
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {isValidElementType} from 'react-is'
-import {styled} from 'styled-components'
+import {card, type CardStyleProps} from '@sanity/ui/css'
+import {useContext} from 'react'
 
-import {useArrayProp} from '../../hooks'
-import {
-  responsiveBorderStyle,
-  ResponsiveBorderStyleProps,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-  responsiveShadowStyle,
-  ResponsiveShadowStyleProps,
-} from '../../styles/internal'
-import {ThemeColorProvider, useRootTheme} from '../../theme'
-import {CardTone} from '../../types'
-import {Box, BoxProps} from '../box'
-import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
-import {cardStyle} from './styles'
-import {CardStyleProps} from './types'
+import type {Props} from '../../types'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
+import {CardContext} from './cardContext'
+import {CardProvider} from './cardProvider'
 
-/**
- * @public
- */
-export interface CardProps
-  extends BoxProps,
-    ResponsiveBorderProps,
-    ResponsiveRadiusProps,
-    ResponsiveShadowProps {
+/** @public */
+export const DEFAULT_CARD_ELEMENT = 'div'
+
+/** @public */
+export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
   /**
    * Do not use in production.
    * @beta
@@ -37,18 +21,17 @@ export interface CardProps
    * @beta
    */
   __unstable_focusRing?: boolean
-  muted?: boolean
+  disabled?: boolean
   pressed?: boolean
-  scheme?: ThemeColorSchemeKey
-  tone?: CardTone
+  selected?: boolean
+  target?: string
 }
 
-const StyledCard = styled(Box)<
-  CardStyleProps &
-    ResponsiveRadiusStyleProps &
-    ResponsiveBorderStyleProps &
-    ResponsiveShadowStyleProps
->(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
+/** @public */
+export type CardElementType = BoxElementType
+
+/** @public */
+export type CardProps<E extends CardElementType = CardElementType> = Props<CardOwnProps, E>
 
 /**
  * The `Card` component acts much like a `Box`, but with a background and foreground color.
@@ -56,61 +39,71 @@ const StyledCard = styled(Box)<
  *
  * @public
  */
-export const Card = forwardRef(function Card(
-  props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
+export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
+  props: CardProps<E>,
+): React.JSX.Element {
   const {
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
-    as: asProp,
-    border,
-    borderTop,
-    borderRight,
-    borderBottom,
-    borderLeft,
-    muted,
+    as = DEFAULT_CARD_ELEMENT,
+    className,
+    disabled,
     pressed,
     radius = 0,
-    scheme,
+    scheme: schemeProp,
     selected,
-    shadow,
+    style,
     tone: toneProp = 'default',
-    ...restProps
-  } = props
+    ...rest
+  } = props as CardProps<typeof DEFAULT_CARD_ELEMENT>
 
-  const as = isValidElementType(asProp) ? asProp : 'div'
-  const rootTheme = useRootTheme()
-  const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
+  const parent = useContext(CardContext)
+  const tone = toneProp === 'inherit' ? parent?.tone : toneProp
+  const scheme = schemeProp === undefined ? parent?.scheme : schemeProp
 
-  // todo: Consider adding the wrapper approach for nested cards in which the tones are not changing, avoid unnecessary ThemeColorProvider
-  return (
-    <ThemeColorProvider scheme={scheme} tone={tone}>
-      <StyledCard
-        data-as={typeof as === 'string' ? as : undefined}
-        data-scheme={rootTheme.scheme}
-        data-ui="Card"
-        data-tone={tone}
-        {...restProps}
-        $border={useArrayProp(border)}
-        $borderTop={useArrayProp(borderTop)}
-        $borderRight={useArrayProp(borderRight)}
-        $borderBottom={useArrayProp(borderBottom)}
-        $borderLeft={useArrayProp(borderLeft)}
-        $checkered={checkered}
-        $focusRing={focusRing}
-        $muted={muted}
-        $radius={useArrayProp(radius)}
-        $shadow={useArrayProp(shadow)}
-        $tone={tone}
-        data-checkered={checkered ? '' : undefined}
-        data-pressed={pressed ? '' : undefined}
-        data-selected={selected ? '' : undefined}
-        forwardedAs={as}
-        ref={ref}
-        selected={selected}
-      />
-    </ThemeColorProvider>
+  let node = (
+    <Box
+      data-ui="Card"
+      {...rest}
+      as={as}
+      className={card({
+        className,
+        scheme: scheme === parent?.scheme ? undefined : scheme,
+        tone,
+      })}
+      data-checkered={checkered ? '' : undefined}
+      data-disabled={disabled ? '' : undefined}
+      data-focus-ring={focusRing ? '' : undefined}
+      data-pressed={pressed ? '' : undefined}
+      data-selected={selected ? '' : undefined}
+      radius={radius}
+      style={style}
+    />
   )
-})
-Card.displayName = 'ForwardRef(Card)'
+
+  if (scheme === parent?.scheme && tone === parent?.tone) {
+    return node
+  }
+
+  node = (
+    <CardProvider
+      scheme={scheme ?? 'light'}
+      tone={tone ?? 'default'}
+      unstable_CompatProvider={parent?.unstable_CompatProvider}
+    >
+      {node}
+    </CardProvider>
+  )
+
+  if (parent?.unstable_CompatProvider) {
+    const CompatProvider = parent.unstable_CompatProvider
+
+    return (
+      <CompatProvider scheme={scheme ?? 'light'} tone={tone ?? parent.tone}>
+        {node}
+      </CompatProvider>
+    )
+  }
+
+  return node
+}

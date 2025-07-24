@@ -1,22 +1,14 @@
+import {Avatar, AvatarStack, Box, Button, Container, Flex, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
-import {Box} from '../../box'
-import {Button} from '../../button'
-import {Container} from '../../container'
-import {Flex} from '../../flex'
-import {Stack} from '../../stack'
-import {Text} from '../../text'
-import {Avatar} from '../avatar'
-import {AvatarStack} from '../avatarStack'
-
-export default function WithinButtonStory() {
-  const disabled = useBoolean('Disabled', false, 'Props')
+export default function WithinButtonStory(): React.JSX.Element {
+  const disabled = useBoolean('Disabled', false)
 
   return (
     <Container width={1}>
-      <Stack paddingX={4} paddingY={[5, 6, 7]} space={1}>
+      <Stack gap={1} paddingX={4} paddingY={[5, 6, 7]}>
         <Button disabled={disabled} padding={1}>
-          <Flex align="center" gap={3} padding={2}>
+          <Flex align="center" flex={1} gap={3} padding={2}>
             <Box flex={1}>
               <Text size={1}>Default button</Text>
             </Box>
@@ -30,7 +22,7 @@ export default function WithinButtonStory() {
           </Flex>
         </Button>
         <Button disabled={disabled} mode="ghost" padding={1}>
-          <Flex align="center" gap={3} padding={2}>
+          <Flex align="center" flex={1} gap={3} padding={2}>
             <Box flex={1}>
               <Text size={1}>Ghost button</Text>
             </Box>
@@ -44,7 +36,7 @@ export default function WithinButtonStory() {
           </Flex>
         </Button>
         <Button disabled={disabled} mode="bleed" padding={1}>
-          <Flex align="center" gap={3} padding={2}>
+          <Flex align="center" flex={1} gap={3} padding={2}>
             <Box flex={1}>
               <Text size={1}>Bleed button</Text>
             </Box>

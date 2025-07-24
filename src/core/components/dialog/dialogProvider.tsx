@@ -1,16 +1,17 @@
-import {useMemo} from 'react'
+import type {ResponsiveProp} from '@sanity/ui/css'
+import {type ReactNode, useMemo} from 'react'
 
-import {DialogPosition} from '../../types'
-import {DialogContext, DialogContextValue} from './dialogContext'
+import {DialogContext, type DialogContextValue} from './dialogContext'
+import type {DialogPosition} from './types'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
 export interface DialogProviderProps {
-  children?: React.ReactNode
-  position?: DialogPosition | DialogPosition[]
-  zOffset?: number | number[]
+  children?: ReactNode
+  position?: ResponsiveProp<DialogPosition>
+  zOffset?: ResponsiveProp<number>
 }
 
 /**
@@ -31,5 +32,3 @@ export function DialogProvider(props: DialogProviderProps): React.JSX.Element {
 
   return <DialogContext.Provider value={contextValue}>{children}</DialogContext.Provider>
 }
-
-DialogProvider.displayName = 'DialogProvider'

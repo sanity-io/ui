@@ -1,8 +1,10 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'primitives/inline',
   title: 'Inline',
   stories: [{name: 'plain', title: 'Plain', component: lazy(() => import('./plain'))}],
-})
+}
+
+export default scope

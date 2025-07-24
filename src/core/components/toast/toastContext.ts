@@ -1,7 +1,7 @@
-import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
-import {ToastContextValue} from './types'
+import type {Context} from 'react'
 
-export const ToastContext = createGlobalScopedContext<ToastContextValue | null>(
-  '@sanity/ui/context/toast',
-  null,
-)
+import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
+import type {ToastContextValue} from './types'
+
+export const ToastContext: Context<ToastContextValue | null> =
+  createGlobalScopedContext<ToastContextValue | null>('@sanity/ui/v3/toast', null)

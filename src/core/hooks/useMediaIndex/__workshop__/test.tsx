@@ -1,11 +1,11 @@
 import {Card, Stack, Text, useMediaIndex} from '@sanity/ui'
 
-export default function TestStory() {
+export default function TestStory(): React.JSX.Element {
   const mediaIndex = useMediaIndex()
 
   return (
     <Card padding={[3, 4, 5]}>
-      <Stack space={2}>
+      <Stack gap={2}>
         <Text weight="medium">The current media index is {mediaIndex}.</Text>
         <Text muted>Try resizing the browser.</Text>
       </Stack>
