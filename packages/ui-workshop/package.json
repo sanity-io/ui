@@ -139,7 +139,7 @@
     "@sanity/pkg-utils": "^7.9.11",
     "@sanity/prettier-config": "^1.0.6",
     "@sanity/semantic-release-preset": "^4.1.8",
-    "@sanity/ui": "^2.16.9",
+    "@sanity/ui": "^3.0.1",
     "@types/cpx": "^1.5.5",
     "@types/express": "^5.0.3",
     "@types/lodash": "^4.17.20",
@@ -175,7 +175,7 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "@sanity/ui": "^1 || ^2",
+    "@sanity/ui": "^3",
     "react": "^19",
     "react-dom": "^19",
     "styled-components": "^6.1"
