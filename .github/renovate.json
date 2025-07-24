@@ -12,6 +12,18 @@
     {
       "matchPackageNames": ["eslint-plugin-react-hooks"],
       "followTag": "experimental"
+    },
+    {
+      "description": "v2 cannot bump refractor due to ESM requirenment",
+      "matchPackageNames": ["refractor"],
+      "matchBaseBranches": ["v2"],
+      "allowedVersions": "<=4"
+    },
+    {
+      "description": "v2 cannot bump refractor due to ESM requirenment",
+      "matchPackageNames": ["react-refractor"],
+      "matchBaseBranches": ["v2"],
+      "allowedVersions": "<=2"
     }
   ]
 }
