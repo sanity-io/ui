@@ -7,18 +7,18 @@ import {
   LayerProvider,
   Menu,
   MenuButton,
-  MenuButtonProps,
+  type MenuButtonProps,
   MenuDivider,
   MenuItem,
 } from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useMemo} from 'react'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
-export default function MenuButtonStory() {
-  const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Props')
-  const portal = useBoolean('Portal', false, 'Props')
+export default function MenuButtonStory(): React.JSX.Element {
+  const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
+  const portal = useBoolean('Portal', false)
 
   const popover: MenuButtonProps['popover'] = useMemo(
     () => ({
@@ -31,7 +31,7 @@ export default function MenuButtonStory() {
   return (
     <Card height="fill" tone={layoutTone}>
       <Box padding={[4, 5, 6]}>
-        <Grid columns={3} gap={2}>
+        <Grid gridTemplateColumns={3} gap={2}>
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>
             <MenuButton

@@ -7,9 +7,9 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '$workshop'
 
-export default function PlainStory() {
+export default function PlainStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', true)
   const boundaryElementFlag = useBoolean('Boundary element', true)
   const constrainSize = useBoolean('Constrain size', true)
@@ -47,10 +47,10 @@ export default function PlainStory() {
             <Popover
               __unstable_margins={[1, 1, 1, 1]}
               arrow={arrow}
-              boundaryElement={boundaryElementFlag ? boundaryElement : undefined}
               constrainSize={constrainSize}
               content={<Text size={1}>popover content</Text>}
               fallbackPlacements={['top', 'bottom']}
+              floatingBoundary={boundaryElementFlag ? boundaryElement : undefined}
               matchReferenceWidth={matchReferenceWidth}
               open={open}
               padding={padding}

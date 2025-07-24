@@ -14,7 +14,7 @@ import {
   Flex,
   Menu,
   MenuButton,
-  MenuButtonProps,
+  type MenuButtonProps,
   MenuDivider,
   MenuGroup,
   MenuItem,
@@ -26,7 +26,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   preventOverflow: true,
 }
 
-export default function MenuGroupRightStory() {
+export default function MenuGroupRightStory(): React.JSX.Element {
   return (
     <Card height="fill" tone="transparent">
       <Flex align="center" height="fill" padding={4} sizing="border">

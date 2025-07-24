@@ -1,12 +1,18 @@
 import {UsersIcon} from '@sanity/icons'
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Hotkeys,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Text,
+} from '@sanity/ui'
 
-import {Avatar, Badge, Box, Button, Flex, Text} from '../../../primitives'
-import {Hotkeys} from '../../hotkeys'
-import {Menu} from '../menu'
-import {MenuButton} from '../menuButton'
-import {MenuItem} from '../menuItem'
-
-export default function AvatarMenuStory() {
+export default function AvatarMenuStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center">
       <MenuButton

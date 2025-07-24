@@ -1,11 +1,20 @@
-import {Box, Button, Menu, MenuButton, MenuButtonProps, MenuItem, Stack, useToast} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Menu,
+  MenuButton,
+  type MenuButtonProps,
+  MenuItem,
+  Stack,
+  useToast,
+} from '@sanity/ui'
 import {useCallback} from 'react'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,
 }
 
-export default function OnCloseMenuButton() {
+export default function OnCloseMenuButton(): React.JSX.Element {
   const {push} = useToast()
 
   const handleClose = useCallback(() => {
@@ -17,14 +26,14 @@ export default function OnCloseMenuButton() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Stack space={2}>
+      <Stack gap={2}>
         <MenuButton
           button={<Button text="With onClose callback" />}
           id="closable-example"
           onClose={handleClose}
           menu={
-            <Menu padding={0} space={0}>
-              <Stack padding={1} space={1}>
+            <Menu gap={0} padding={0}>
+              <Stack gap={1} padding={1}>
                 <MenuItem text="Item 1" />
                 <MenuItem text="Item 2" />
                 <MenuItem text="Item 3" />

@@ -1,81 +1,76 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+import {text, textOverflow, type TextOverflowStyleProps, type TextStyleProps} from '@sanity/ui/css'
 
-import {useArrayProp} from '../../hooks'
-import {
-  ResponsiveFontStyleProps,
-  responsiveTextAlignStyle,
-  responsiveTextFont,
-} from '../../styles/internal'
-import {TextAlign} from '../../types'
-import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
-import {textBaseStyle} from './styles'
+import type {ComponentType, Props} from '../../types'
 
-/**
- * @public
- */
-export interface TextProps {
-  accent?: boolean
-  align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  /** When `true` the text color will be muted. */
-  muted?: boolean
-  size?: number | number[]
-  /**
-   * Controls how overflowing text is treated.
-   * Use `textOverflow="ellipsis"` to render text as a single line which is concatenated with a `…` symbol.
-   * @beta
-   */
-  textOverflow?: 'ellipsis'
-  weight?: ThemeFontWeightKey
-}
+/** @public */
+export const DEFAULT_TEXT_ELEMENT = 'div'
 
-const StyledText = styled.div<ResponsiveFontStyleProps>(
-  responsiveTextFont,
-  responsiveTextAlignStyle,
-  textBaseStyle,
-)
+/** @public */
+export type TextOwnProps = TextStyleProps & TextOverflowStyleProps
+
+/** @public */
+export type TextElementType =
+  | 'div'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'label'
+  | 'li'
+  | 'p'
+  | 'span'
+  | 'summary'
+  | 'time'
+  | ComponentType
+
+/** @public */
+export type TextProps<E extends TextElementType = TextElementType> = Props<TextOwnProps, E>
 
 /**
  * The `Text` component is an agile, themed typographic element.
  *
  * @public
  */
-export const Text = forwardRef(function Text(
-  props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
+export function Text<E extends TextElementType = typeof DEFAULT_TEXT_ELEMENT>(
+  props: TextProps<E>,
+): React.JSX.Element {
   const {
-    accent = false,
     align,
-    children: childrenProp,
-    muted = false,
+    as: Element = DEFAULT_TEXT_ELEMENT,
+    children,
+    className,
+    flex,
+    maxWidth = 'fill',
+    muted,
     size = 2,
-    textOverflow,
-    weight,
-    ...restProps
-  } = props
-
-  let children = childrenProp
-
-  if (textOverflow === 'ellipsis') {
-    children = <SpanWithTextOverflow>{children}</SpanWithTextOverflow>
-  }
+    textOverflow: textOverflowProp,
+    weight = 'regular',
+    ...rest
+  } = props as TextProps<typeof DEFAULT_TEXT_ELEMENT>
 
   return (
-    <StyledText
+    <Element
       data-ui="Text"
-      {...restProps}
-      $accent={accent}
-      $align={useArrayProp(align)}
-      $muted={muted}
-      ref={ref}
-      $size={useArrayProp(size)}
-      $weight={weight}
+      {...rest}
+      className={text({
+        className,
+        align,
+        flex,
+        maxWidth,
+        muted,
+        size,
+        weight,
+      })}
     >
-      <span>{children}</span>
-    </StyledText>
+      <span
+        className={textOverflow({
+          textOverflow: textOverflowProp,
+        })}
+      >
+        {children}
+      </span>
+    </Element>
   )
-})
-Text.displayName = 'ForwardRef(Text)'
+}

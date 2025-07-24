@@ -1,6 +1,6 @@
-import {parseColor} from '@sanity/ui/theme'
+// import {parseColor} from '@sanity/ui/theme'
 
-import {FigmaSanityUIColorVariable} from './types'
+import type {FigmaSanityUIColorVariable} from './types'
 
 export function getOrCreateColorVariableCollection(name: string): VariableCollection {
   const localVariableCollections = figma.variables.getLocalVariableCollections()

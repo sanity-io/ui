@@ -1,7 +1,7 @@
-import {defineScope} from '@sanity/ui-workshop'
+import type {WorkshopScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
-export default defineScope({
+const scope: WorkshopScope = {
   name: 'primitives/checkbox',
   title: 'Checkbox',
   stories: [
@@ -10,4 +10,6 @@ export default defineScope({
     {name: 'read-only', title: 'Read-only', component: lazy(() => import('./readOnly'))},
     {name: 'multiple-tones', title: 'Multiple tones', component: lazy(() => import('./tones'))},
   ],
-})
+}
+
+export default scope

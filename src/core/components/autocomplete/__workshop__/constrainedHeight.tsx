@@ -1,36 +1,29 @@
 import {
   Autocomplete,
+  type AutocompleteProps,
   BoundaryElementProvider,
   Box,
   Card,
   Container,
   LayerProvider,
+  Popover,
   Stack,
   Text,
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
-import {Popover} from '../../../primitives'
-import countries from '../__mocks__/countries'
-import {AutocompleteProps} from '../autocomplete'
-import {ExampleOption} from './types'
+import {countries} from './mock/countries'
+import type {ExampleOption} from './types'
 
-export default function ConstrainedHeightStory() {
+export default function ConstrainedHeightStory(): React.JSX.Element {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (
     <Card height="fill" tone="transparent">
       <Container height="fill" padding={3} sizing="border" width={1}>
-        <Card
-          height="fill"
-          ref={setBoundaryElement}
-          radius={3}
-          shadow={3}
-          style={{position: 'relative'}}
-          // style={{position: 'absolute', top: 12, right: 12, bottom: 12, left: 12}}
-        >
+        <Card height="fill" ref={setBoundaryElement} radius={4} shadow={3} tone="default">
           <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
-            <Stack space={5}>
+            <Stack gap={5}>
               <BoundaryElementProvider element={boundaryElement}>
                 <ConstrainedHeightExampleField id="example-1" label="Example 1" />
                 <ConstrainedHeightExampleField id="example-2" label="Example 2" />
@@ -90,20 +83,21 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
       },
       popoverRef: React.Ref<HTMLDivElement>,
     ) => {
-      const {hidden, inputElement, ...restProps} = popoverProps
+      const {hidden, inputElement, ...rest} = popoverProps
 
       if (hidden) return null
 
       return (
         <Popover
-          {...restProps}
+          {...rest}
           arrow={false}
           constrainSize
           matchReferenceWidth
           open
           overflow="auto"
           placement="bottom-start"
-          radius={1}
+          portal
+          radius={3}
           ref={popoverRef}
           referenceElement={inputElement}
         />
@@ -113,7 +107,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   )
 
   return (
-    <Stack space={3}>
+    <Stack gap={3}>
       <Text size={1} weight="medium">
         {label}
       </Text>
@@ -125,7 +119,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           openButton
           options={options}
           placeholder="Search"
-          radius={1}
+          radius={2}
           renderOption={renderOption}
           renderPopover={renderPopover}
           renderValue={renderValue}

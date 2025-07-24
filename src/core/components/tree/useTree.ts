@@ -1,7 +1,7 @@
 import {useContext} from 'react'
 
 import {TreeContext} from './treeContext'
-import {TreeContextValue} from './types'
+import type {TreeContextValue} from './types'
 
 /**
  * @beta

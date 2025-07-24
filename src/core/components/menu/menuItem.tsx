@@ -1,6 +1,15 @@
+import type {
+  GapStyleProps,
+  PaddingStyleProps,
+  RadiusStyleProps,
+  ResponsiveProp,
+} from '@sanity/ui/css'
+import type {ElementTone, FontTextSize} from '@sanity/ui/theme'
 import {
-  forwardRef,
+  type ElementType,
   isValidElement,
+  type MouseEvent,
+  type ReactNode,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -10,44 +19,53 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import {useArrayProp} from '../../hooks'
-import {Box, Flex, Text} from '../../primitives'
-import {Selectable} from '../../primitives/_selectable'
-import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {useRootTheme} from '../../theme'
-import {SelectableTone} from '../../types/selectable'
-import {Hotkeys} from '../hotkeys'
+import {Box} from '../../primitives/box/box'
+import {Flex} from '../../primitives/flex/flex'
+import {Selectable} from '../../primitives/selectable/selectable'
+import {Text} from '../../primitives/text/text'
+import type {ComponentType, Props} from '../../types'
+import {Hotkeys} from '../hotkeys/hotkeys'
 import {useMenu} from './useMenu'
 
-/**
- * @public
- */
-export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  fontSize?: number | number[]
-  hotkeys?: string[]
-  icon?: React.ElementType | React.ReactNode
-  iconRight?: React.ElementType | React.ReactNode
-  pressed?: boolean
-  selected?: boolean
-  space?: number | number[]
-  text?: React.ReactNode
-  tone?: SelectableTone
-}
+/** @public */
+export const DEFAULT_MENU_ITEM_ELEMENT = 'button'
 
-/**
- * @public
- */
-export const MenuItem = forwardRef(function MenuItem(
-  props: MenuItemProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'selected' | 'tabIndex'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
-) {
+/** @public */
+export type MenuItemOwnProps = GapStyleProps &
+  PaddingStyleProps &
+  RadiusStyleProps & {
+    disabled?: boolean
+    fontSize?: ResponsiveProp<FontTextSize>
+    hotkeys?: string[]
+    icon?: ElementType | ReactNode
+    iconRight?: ElementType | ReactNode
+    pressed?: boolean
+    selected?: boolean
+    text?: ReactNode
+    tone?: ElementTone
+  }
+
+/** @public */
+export type MenuItemElementType = 'button' | 'a' | ComponentType
+
+/** @public */
+export type MenuItemProps<E extends MenuItemElementType = MenuItemElementType> = Props<
+  MenuItemOwnProps,
+  E
+>
+
+/** @public */
+export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITEM_ELEMENT>(
+  props: MenuItemProps<E>,
+): React.JSX.Element {
   const {
-    as = 'button',
+    as = DEFAULT_MENU_ITEM_ELEMENT,
     children,
     disabled,
     fontSize = 1,
+    gap = 3,
+    gapX,
+    gapY,
     hotkeys,
     icon: IconComponent,
     iconRight: IconRightComponent,
@@ -61,33 +79,29 @@ export const MenuItem = forwardRef(function MenuItem(
     paddingLeft,
     pressed,
     radius = 2,
+    ref: forwardedRef,
+    role = 'menuitem',
     selected: selectedProp,
-    space = 3,
     text,
     tone = 'default',
-    ...restProps
-  } = props
-  const {scheme} = useRootTheme()
-  const menu = useMenu()
-  const {
-    activeElement,
-    mount,
-    onItemClick,
-    onItemMouseEnter: _onItemMouseEnter,
-    onItemMouseLeave: _onItemMouseLeave,
-  } = menu
-  const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
-  const onItemMouseLeave = _onItemMouseLeave ?? menu.onMouseLeave
-  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const active = Boolean(activeElement) && activeElement === rootElement
-  const ref = useRef<HTMLDivElement | null>(null)
+    ...rest
+  } = props as MenuItemProps<typeof DEFAULT_MENU_ITEM_ELEMENT>
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+  const menu = useMenu()
+  const {activeElement, mount, onItemClick, onItemMouseEnter, onItemMouseLeave} = menu
+  const [rootElement, setRootElement] = useState<HTMLButtonElement | null>(null)
+  const active = Boolean(activeElement) && activeElement === rootElement
+  const ref = useRef<HTMLButtonElement | null>(null)
+
+  useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   useEffect(() => mount(rootElement, selectedProp), [mount, rootElement, selectedProp])
 
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       if (disabled) return
       if (onClick) onClick(event)
       if (onItemClick) onItemClick()
@@ -108,9 +122,7 @@ export const MenuItem = forwardRef(function MenuItem(
     [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
   )
 
-  const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
-
-  const setRef = useCallback((el: HTMLDivElement | null) => {
+  const setRef = useCallback((el: HTMLButtonElement | null) => {
     ref.current = el
     setRootElement(el)
   }, [])
@@ -118,28 +130,26 @@ export const MenuItem = forwardRef(function MenuItem(
   return (
     <Selectable
       data-ui="MenuItem"
-      role="menuitem"
-      {...restProps}
-      data-pressed={as !== 'button' && pressed ? '' : undefined}
+      {...rest}
+      as={as}
+      data-pressed={pressed ? '' : undefined}
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
-      forwardedAs={as}
-      $radius={useArrayProp(radius)}
-      $padding={useArrayProp(0)}
-      $tone={disabled ? 'default' : tone}
-      $scheme={scheme}
+      radius={radius}
       disabled={disabled}
       onClick={handleClick}
       onMouseEnter={onItemMouseEnter}
       onMouseLeave={onItemMouseLeave}
       ref={setRef}
+      role={role}
       tabIndex={-1}
+      tone={tone}
       type={as === 'button' ? 'button' : undefined}
     >
       {(IconComponent || text || IconRightComponent) && (
-        <Flex as="span" gap={space} align="center" {...paddingProps}>
+        <Flex as="span" gap={gap} gapX={gapX} gapY={gapY} align="center" {...paddingProps}>
           {IconComponent && (
-            <Text size={fontSize}>
+            <Text muted size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
               {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
@@ -153,22 +163,17 @@ export const MenuItem = forwardRef(function MenuItem(
             </Box>
           )}
 
-          {hotkeys && (
-            <Hotkeys
-              fontSize={hotkeysFontSize}
-              keys={hotkeys}
-              style={{marginTop: -4, marginBottom: -4}}
-            />
-          )}
+          {hotkeys && <Hotkeys keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />}
 
           {IconRightComponent && (
-            <Text size={fontSize}>
+            <Text muted size={fontSize}>
               {isValidElement(IconRightComponent) && IconRightComponent}
               {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
           )}
         </Flex>
       )}
+
       {children && (
         <Box as="span" {...paddingProps}>
           {children}
@@ -176,5 +181,4 @@ export const MenuItem = forwardRef(function MenuItem(
       )}
     </Selectable>
   )
-})
-MenuItem.displayName = 'ForwardRef(MenuItem)'
+}

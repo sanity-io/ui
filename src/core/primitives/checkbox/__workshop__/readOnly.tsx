@@ -1,6 +1,6 @@
 import {Box, Checkbox, Flex, Text} from '@sanity/ui'
 
-export default function ReadOnlyStory() {
+export default function ReadOnlyStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Flex align="center" as="label">

@@ -1,11 +1,11 @@
 import {Card, Flex, Stack, Text} from '@sanity/ui'
-import {THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/theme'
 
-export default function CheckeredStory() {
+export default function CheckeredStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <Stack space={1}>
-        {THEME_COLOR_CARD_TONES.map((tone) => (
+      <Stack gap={1}>
+        {CARD_TONES.map((tone) => (
           <Card
             __unstable_checkered
             border

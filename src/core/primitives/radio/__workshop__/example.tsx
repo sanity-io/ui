@@ -2,10 +2,10 @@ import {Box, Container, Flex, Radio, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
-export default function ExampleStory() {
+export default function ExampleStory(): React.JSX.Element {
   const [value, setValue] = useState('first-option')
-  const disabled = useBoolean('Disabled', false, 'Props')
-  const readOnly = useBoolean('Read only', false, 'Props')
+  const disabled = useBoolean('Disabled', false)
+  const readOnly = useBoolean('Read only', false)
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
@@ -14,7 +14,7 @@ export default function ExampleStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[3, 4, 5]} sizing="border">
       <Container width={0}>
-        <Stack space={3}>
+        <Stack gap={3}>
           <Flex align="center" as="label">
             <Radio
               checked={value === 'first-option'}

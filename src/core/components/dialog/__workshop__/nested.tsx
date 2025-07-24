@@ -1,7 +1,7 @@
 import {Box, Button, Dialog, LayerProvider, Menu, MenuButton, MenuItem} from '@sanity/ui'
 import {useEffect, useRef, useState} from 'react'
 
-export default function NestedStory() {
+export default function NestedStory(): React.JSX.Element {
   const [open1] = useState(true)
   const [open2, setOpen2] = useState(false)
   const [open3, setOpen3] = useState(false)
@@ -20,7 +20,7 @@ export default function NestedStory() {
   return (
     <LayerProvider>
       {open1 && (
-        <Dialog animate cardShadow={1} header="Dialog 1" id="dialog1">
+        <Dialog animate shadow={1} header="Dialog 1" id="dialog1">
           <Box padding={4}>
             <Button onClick={() => setOpen2(true)} ref={dialog2Button} text="Open Dialog 2" />
           </Box>
@@ -28,7 +28,7 @@ export default function NestedStory() {
           {open2 && (
             <Dialog
               animate
-              cardShadow={2}
+              shadow={2}
               header="Dialog 2"
               id="dialog2"
               onClose={() => setOpen2(false)}
@@ -41,7 +41,7 @@ export default function NestedStory() {
               {open3 && (
                 <Dialog
                   animate
-                  cardShadow={4}
+                  shadow={4}
                   header="Dialog 3"
                   id="dialog3"
                   onClose={() => setOpen3(false)}
@@ -51,14 +51,13 @@ export default function NestedStory() {
                     <MenuButton
                       button={<Button text="Test" />}
                       id="menu3"
-                      popover={{animate: true}}
+                      popover={{animate: true, portal: true}}
                       menu={
                         <Menu>
                           <MenuItem text="Test" />
                           <MenuItem text="Test" />
                         </Menu>
                       }
-                      portal
                     />
                   </Box>
                 </Dialog>

@@ -1,24 +1,26 @@
 import {Autocomplete, Box, Button, Card, Code, Container, Stack, Text} from '@sanity/ui'
+import type {Radius} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
 import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_SIZE_OPTIONS,
-} from '../../../__workshop__/constants'
-import countries from '../__mocks__/countries'
-import {ExampleOption} from './types'
+  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
+} from '$workshop'
 
-export default function CustomStory() {
+import {countries} from './mock/countries'
+import type {ExampleOption} from './types'
+
+export default function CustomStory(): React.JSX.Element {
   const data: ExampleOption[] = countries.map((d) => ({value: d.code, title: d.name}))
-  const border = useBoolean('Border', true, 'Props')
-  const disabled = useBoolean('Disabled', false, 'Props')
-  const fontSize = Number(useSelect('Font size', WORKSHOP_TEXT_SIZE_OPTIONS, 2, 'Props'))
-  const openButton = useBoolean('Open button', true, 'Props')
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
-  const radius = Number(useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2, 'Props'))
-  const readOnly = useBoolean('Read only', false, 'Props')
+  const border = useBoolean('Border', true)
+  const disabled = useBoolean('Disabled', false)
+  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2)
+  const openButton = useBoolean('Open button', true)
+  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
+  const readOnly = useBoolean('Read only', false)
   const [value, setValue] = useState('')
 
   const renderOption = useCallback(
@@ -30,7 +32,7 @@ export default function CustomStory() {
         key={option.value}
         onClick={(event) => event.preventDefault()}
         padding={padding}
-        radius={radius - 1}
+        radius={Math.max((radius ?? 0) - 1, 0) as Radius}
       >
         <Text size={fontSize}>{option.title}</Text>
       </Card>
@@ -51,8 +53,8 @@ export default function CustomStory() {
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
       <Container width={0}>
-        <Stack space={5}>
-          <Stack space={3}>
+        <Stack gap={5}>
+          <Stack gap={3}>
             <Text as="label" htmlFor="custom" id="custom-label" size={1} weight="medium">
               Country
             </Text>
@@ -76,9 +78,9 @@ export default function CustomStory() {
             />
           </Stack>
 
-          <Card padding={3} radius={2} tone="transparent">
+          <Box muted padding={3} radius={2}>
             <Code size={1}>{JSON.stringify(value)}</Code>
-          </Card>
+          </Box>
           <Box>
             <Button id="set-value-btn" onClick={() => setValue('NO')} text="Set to NO" />
           </Box>

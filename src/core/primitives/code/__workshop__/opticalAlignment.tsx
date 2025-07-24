@@ -1,48 +1,23 @@
-import {AddCircleIcon} from '@sanity/icons'
-import {Box, Card, Code, Flex, Stack} from '@sanity/ui'
+import {CropIcon} from '@sanity/icons'
+import {Box, Code, Stack} from '@sanity/ui'
+import {vars} from '@sanity/ui/css'
+import {FONT_CODE_SIZE} from '@sanity/ui/theme'
 
-export default function OpticalAlignment() {
+export default function OpticalAlignment(): React.JSX.Element {
   return (
-    <Box padding={[4, 5, 6]}>
-      <Stack space={1}>
-        <Flex>
-          <Card padding={0} scheme="dark">
-            <Code size={4}>Hamburgefonstiv M</Code>
-          </Card>
-        </Flex>
-
-        <Flex>
-          <Card padding={0} scheme="dark">
-            <Code size={3}>Hamburgefonstiv M</Code>
-          </Card>
-        </Flex>
-
-        <Flex>
-          <Card padding={0} scheme="dark">
-            <Code size={2}>Hamburgefonstiv M</Code>
-          </Card>
-        </Flex>
-
-        <Flex>
-          <Card padding={0} scheme="dark">
-            <Code size={1}>Hamburgefonstiv M</Code>
-          </Card>
-        </Flex>
-
-        <Flex>
-          <Card padding={0} scheme="dark">
-            <Code size={0}>Hamburgefonstiv M</Code>
-          </Card>
-        </Flex>
-
-        <Flex>
-          <Card padding={2} scheme="dark">
-            <Code>
-              <AddCircleIcon />
+    <Stack gap={3} padding={[4, 5, 6]}>
+      {FONT_CODE_SIZE.map((size) => (
+        <Box display="flex" gap={2} key={size}>
+          <div style={{outline: `0.5px solid ${vars.color.tinted.suggest.border[4]}`}}>
+            <Code size={size}>
+              <CropIcon />
             </Code>
-          </Card>
-        </Flex>
-      </Stack>
-    </Box>
+          </div>
+          <div style={{outline: `0.5px solid ${vars.color.tinted.suggest.border[4]}`}}>
+            <Code size={size}>Hamburgefonstiv M</Code>
+          </div>
+        </Box>
+      ))}
+    </Stack>
   )
 }

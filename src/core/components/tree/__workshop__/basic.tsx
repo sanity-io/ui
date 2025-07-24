@@ -5,7 +5,7 @@ import {useCallback, useState} from 'react'
 
 import {perfTests} from './basic.perf'
 
-export default function BasicStory() {
+export default function BasicStory(): React.JSX.Element {
   const {ref, Wrapper} = usePerfTest(perfTests[0])
 
   const [id, setId] = useState('')
@@ -21,7 +21,7 @@ export default function BasicStory() {
   return (
     <Box padding={[4, 5, 6]}>
       <Wrapper>
-        <Tree ref={ref} space={1}>
+        <Tree gap={1} ref={ref}>
           <TreeItem onClick={handleClick} expanded text="Fruit">
             <TreeItem
               data-testid="oranges"

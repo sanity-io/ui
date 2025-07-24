@@ -7,18 +7,19 @@ import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../__workshop__/constants'
+} from '$workshop'
 
-export default function PropsStory() {
-  const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div', 'Props')
-  const border = useBoolean('Border', false, 'Props')
-  const checkered = useBoolean('Checkered', false, 'Props')
-  const muted = useBoolean('Muted', false, 'Props')
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3, 'Props')
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0, 'Props')
-  const selected = useBoolean('Selected', false, 'Props')
-  const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 0, 'Props')
-  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, 'default', 'Props')
+export default function PropsStory(): React.JSX.Element {
+  const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div')
+  const border = useBoolean('Border', false)
+  const checkered = useBoolean('Checkered', false)
+  const muted = useBoolean('Muted', false)
+  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  const pressed = useBoolean('Pressed', false)
+  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0)
+  const selected = useBoolean('Selected', false)
+  const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 0)
+  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
 
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
@@ -29,12 +30,13 @@ export default function PropsStory() {
         muted={muted}
         onClick={useAction('onClick')}
         padding={padding}
+        pressed={pressed}
         radius={radius}
         selected={selected}
         shadow={shadow}
         tone={tone}
       >
-        <Stack space={3}>
+        <Stack gap={3}>
           <Text size={1}>
             Card with <code>padding={padding}</code>, <code>tone={tone}</code>, and{' '}
             <code>shadow={shadow}</code>.
@@ -42,9 +44,6 @@ export default function PropsStory() {
           <Text size={1}>
             Text with {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a href="#">link</a>.
-          </Text>
-          <Text accent size={1}>
-            Text with accent color.
           </Text>
         </Stack>
       </Card>

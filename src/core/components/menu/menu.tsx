@@ -1,25 +1,22 @@
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
+import {menu, type PaddingStyleProps, type ResponsiveProp} from '@sanity/ui/css'
+import type {Space} from '@sanity/ui/theme'
+import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 
-import {useClickOutsideEvent, useGlobalKeyDown} from '../../hooks'
-import {Box, Stack} from '../../primitives'
-import {ResponsivePaddingProps} from '../../primitives/types'
-import {useLayer} from '../../utils'
-import {MenuContext, MenuContextValue} from './menuContext'
+import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
+import {Box} from '../../primitives/box/box'
+import {useLayer} from '../../primitives/layer/useLayer'
+import {Stack} from '../../primitives/stack/stack'
+import type {ComponentType, Props} from '../../types'
+import {MenuContext, type MenuContextValue} from './menuContext'
 import {useMenuController} from './useMenuController'
 
-/**
- * @public
- */
-export interface MenuProps extends ResponsivePaddingProps {
-  /**
-   * @deprecated Use `shouldFocus="first"` instead.
-   */
-  'focusFirst'?: boolean
-  /**
-   * @deprecated Use `shouldFocus="last"` instead.
-   */
-  'focusLast'?: boolean
+/** @public */
+export const DEFAULT_MENU_ELEMENT = 'div'
+
+/** @public */
+export type MenuOwnProps = PaddingStyleProps & {
+  'gap'?: ResponsiveProp<Space>
   'onClickOutside'?: (event: MouseEvent) => void
   'onEscape'?: () => void
   'onItemClick'?: () => void
@@ -27,31 +24,28 @@ export interface MenuProps extends ResponsivePaddingProps {
   'originElement'?: HTMLElement | null
   'registerElement'?: (el: HTMLElement) => () => void
   'shouldFocus'?: 'first' | 'last' | null
-  'space'?: number | number[]
   'aria-labelledby'?: string
-  'onBlurCapture'?: (event: FocusEvent) => void
 }
 
-const StyledMenu = styled(Box)`
-  outline: none;
-  overflow: auto;
-`
+/** @public */
+export type MenuElementType = 'div' | 'span' | ComponentType
+
+/** @public */
+export type MenuProps<E extends MenuElementType = MenuElementType> = Props<MenuOwnProps, E>
 
 /**
  * The `Menu` component is a building block for application menus.
  *
  * @public
  */
-export const Menu = forwardRef(function Menu(
-  props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
-) {
+export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
+  props: MenuProps<E>,
+): React.JSX.Element {
   const {
+    as = DEFAULT_MENU_ELEMENT,
     children,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    focusFirst,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    focusLast,
+    className,
+    gap = 1,
     onClickOutside,
     onEscape,
     onItemClick,
@@ -59,13 +53,13 @@ export const Menu = forwardRef(function Menu(
     onKeyDown,
     originElement,
     padding = 1,
+    ref: forwardedRef,
     registerElement,
     shouldFocus: _shouldFocus,
-    space = 1,
-    ...restProps
-  } = props
-  const shouldFocus =
-    _shouldFocus ?? ((props.focusFirst && 'first') || (props.focusLast && 'last') || null)
+    ...rest
+  } = props as MenuProps<typeof DEFAULT_MENU_ELEMENT>
+
+  const shouldFocus = _shouldFocus ?? null
 
   const ref = useRef<HTMLDivElement | null>(null)
 
@@ -80,7 +74,12 @@ export const Menu = forwardRef(function Menu(
     handleItemMouseLeave,
     handleKeyDown,
     mount,
-  } = useMenuController({onKeyDown, originElement, shouldFocus, rootElementRef: ref})
+  } = useMenuController({
+    onKeyDown,
+    originElement,
+    shouldFocus,
+    rootElementRef: ref,
+  })
 
   const unregisterElementRef = useRef<(() => void) | null>(null)
   const handleRefChange = useCallback(
@@ -160,18 +159,21 @@ export const Menu = forwardRef(function Menu(
 
   return (
     <MenuContext.Provider value={value}>
-      <StyledMenu
+      <Box
         data-ui="Menu"
-        {...restProps}
+        {...rest}
+        as={as}
+        className={menu({className})}
         onKeyDown={handleKeyDown}
+        overflow="auto"
+        outline="none"
         padding={padding}
         ref={handleRefChange}
         role="menu"
         tabIndex={-1}
       >
-        <Stack space={space}>{children}</Stack>
-      </StyledMenu>
+        <Stack gap={gap}>{children}</Stack>
+      </Box>
     </MenuContext.Provider>
   )
-})
-Menu.displayName = 'ForwardRef(Menu)'
+}

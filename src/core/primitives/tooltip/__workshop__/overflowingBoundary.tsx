@@ -2,9 +2,9 @@ import {BoundaryElementProvider, Button, Card, Code, Flex, Stack, Text, Tooltip}
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
-import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../__workshop__/constants'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
-export default function OverflowingBoundaryStory() {
+export default function OverflowingBoundaryStory(): React.JSX.Element {
   const content = useText(
     'Content',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mollis consectetur malesuada. Sed lobortis est dolor, eget imperdiet velit placerat et. Aenean posuere mi non aliquet iaculis. Donec fermentum pulvinar purus at sagittis. Ut tincidunt massa odio, sed finibus justo ullamcorper id. Nam venenatis justo non ligula elementum cursus. Pellentesque laoreet justo in mollis sagittis. In lacinia ornare ultrices. Suspendisse potenti.',
@@ -40,7 +40,7 @@ export default function OverflowingBoundaryStory() {
         >
           <Flex align="center" height="fill" justify="center">
             <Flex justify="center">
-              <Stack space={2}>
+              <Stack gap={2}>
                 <Code size={1}>Placement: {placement}</Code>
                 <Button
                   disabled={buttonsVisible}

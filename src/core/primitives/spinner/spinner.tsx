@@ -1,46 +1,45 @@
-import {SpinnerIcon} from '@sanity/icons'
-import {forwardRef} from 'react'
-import {keyframes, styled} from 'styled-components'
+import {type ResponsiveProp, spinner} from '@sanity/ui/css'
+import type {FontTextSize} from '@sanity/ui/theme'
 
-import {Text} from '../text'
+import type {ComponentType, Props} from '../../types'
+import {Text} from '../text/text'
+import {AnimatedSpinnerIcon} from './animatedSpinnerIcon'
 
-/**
- * @public
- */
-export interface SpinnerProps {
+/** @public */
+export const DEFAULT_SPINNER_ELEMENT = 'div'
+
+/** @public */
+export type SpinnerOwnProps = {
   muted?: boolean
-  size?: number | number[]
+  size?: ResponsiveProp<FontTextSize>
 }
 
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
+/** @public */
+export type SpinnerElementType = 'div' | 'span' | ComponentType
 
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-const StyledSpinner = styled(Text)`
-  & > span > svg {
-    animation: ${rotate} 500ms linear infinite;
-  }
-`
+/** @public */
+export type SpinnerProps<E extends SpinnerElementType = SpinnerElementType> = Props<
+  SpinnerOwnProps,
+  E
+>
 
 /**
  * Indicate that something is loading for an indeterminate amount of time.
  *
  * @public
  */
-export const Spinner = forwardRef(function Spinner(
-  props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
+export function Spinner<E extends SpinnerElementType = typeof DEFAULT_SPINNER_ELEMENT>(
+  props: SpinnerProps<E>,
+): React.JSX.Element {
+  const {
+    as = DEFAULT_SPINNER_ELEMENT,
+    className,
+    ...rest
+  } = props as SpinnerProps<typeof DEFAULT_SPINNER_ELEMENT>
+
   return (
-    <StyledSpinner data-ui="Spinner" {...props} ref={ref}>
-      <SpinnerIcon />
-    </StyledSpinner>
+    <Text as={as} data-ui="Spinner" {...rest} className={spinner({className})}>
+      <AnimatedSpinnerIcon />
+    </Text>
   )
-})
-Spinner.displayName = 'ForwardRef(Spinner)'
+}

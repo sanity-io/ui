@@ -7,10 +7,6 @@ import {
   isHTMLTextAreaElement,
 } from './element'
 
-// export const globalFocusState = {
-//   IgnoreUtilFocusChanges: false,
-// }
-
 /**
  * @internal
  */
@@ -56,15 +52,11 @@ export function attemptFocus(element: HTMLElement): boolean {
     return false
   }
 
-  // globalFocusState.IgnoreUtilFocusChanges = true
-
   try {
     element.focus()
   } catch {
     // ignore
   }
-
-  // globalFocusState.IgnoreUtilFocusChanges = false
 
   return document.activeElement === element
 }

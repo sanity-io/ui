@@ -1,7 +1,10 @@
-import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
-import {BoundaryElementContextValue} from './types'
+import type {Context} from 'react'
 
-export const BoundaryElementContext = createGlobalScopedContext<BoundaryElementContextValue | null>(
-  '@sanity/ui/context/boundaryElement',
-  null,
-)
+import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
+import type {BoundaryElementContextValue} from './types'
+
+export const BoundaryElementContext: Context<BoundaryElementContextValue | null> =
+  createGlobalScopedContext<BoundaryElementContextValue | null>(
+    '@sanity/ui/v3/boundaryElement',
+    null,
+  )

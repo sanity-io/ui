@@ -1,14 +1,14 @@
 import {Card, Code, Container, Flex, Grid} from '@sanity/ui'
 
-export default function ResponsiveStory() {
+export default function ResponsiveStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width="auto">
         <Grid
           id="responsive-grid"
-          columns={[1, 2, 3, 4, 5, 6, 7]}
           gap={[0, 1, 2, 3, 4, 5, 6]}
-          rows={[1, 2, 3, 4, 5, 6, 7]}
+          gridTemplateColumns={[1, 2, 3, 4, 5, 6, 7]}
+          gridTemplateRows={[1, 2, 3, 4, 5, 6, 7]}
           style={{textAlign: 'center'}}
         >
           <Card padding={[1, 2, 3]} tone="neutral">

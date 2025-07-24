@@ -12,20 +12,19 @@ const BREADCRUMBS_MAX_LENGTH_OPTIONS = {
   '7': 7,
 }
 
-export default function Example() {
-  const maxLength =
-    useSelect('Max. length', BREADCRUMBS_MAX_LENGTH_OPTIONS, 0, 'Props') || undefined
+export default function ExampleStory(): React.JSX.Element {
+  const maxLength = useSelect('Max. length', BREADCRUMBS_MAX_LENGTH_OPTIONS)
 
   return (
     <Flex align="center" height="fill" justify="center">
       <Breadcrumbs
+        gap={2}
         maxLength={maxLength}
         separator={
           <Text muted size={1}>
             /
           </Text>
         }
-        space={2}
       >
         <Text size={1}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

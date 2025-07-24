@@ -7,13 +7,12 @@ import {
   Flex,
   Menu,
   MenuButton,
+  type MenuButtonProps,
   MenuItem,
-  SelectableTone,
   Text,
 } from '@sanity/ui'
+import type {ElementTone} from '@sanity/ui/theme'
 import {useState} from 'react'
-
-import {MenuButtonProps} from '../menuButton'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,
@@ -21,7 +20,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   portal: true,
 }
 
-const items: {tone: SelectableTone; message: string}[] = [
+const items: {tone: ElementTone; message: string}[] = [
   {
     tone: 'critical',
     message: 'Critical message',
@@ -92,7 +91,7 @@ const items: {tone: SelectableTone; message: string}[] = [
   },
 ]
 
-export default function ConstrainedInBoundaryStory() {
+export default function ConstrainedInBoundaryStory(): React.JSX.Element {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (

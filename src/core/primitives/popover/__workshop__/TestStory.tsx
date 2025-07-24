@@ -1,3 +1,12 @@
+import {
+  BoundaryElementProvider,
+  Button,
+  Card,
+  Popover,
+  type PopoverUpdateCallback,
+  PortalProvider,
+  Text,
+} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useRef, useState} from 'react'
 
@@ -5,13 +14,7 @@ import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
-} from '../../../__workshop__/constants'
-import {BoundaryElementProvider, PortalProvider} from '../../../utils'
-import {Button} from '../../button'
-import {Card} from '../../card'
-import {Text} from '../../text'
-import {Popover} from '../popover'
-import {PopoverUpdateCallback} from '../types'
+} from '$workshop'
 
 export default function TestStory(): React.JSX.Element {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)

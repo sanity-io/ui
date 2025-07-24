@@ -1,7 +1,7 @@
 import {Box, Card, Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
-export default function TonesStory() {
+export default function TonesStory(): React.JSX.Element {
   const transparentTone = useBoolean('Transparent', true)
   const neutralTone = useBoolean('Neutral', true)
   const primaryTone = useBoolean('Primary', true)
@@ -16,7 +16,7 @@ export default function TonesStory() {
         <Container width={1}>
           <Flex>
             <Card flex={1} scheme="light">
-              <Stack padding={[3, 4, 5]} space={4}>
+              <Stack gap={4} padding={[3, 4, 5]}>
                 <Card padding={3}>
                   <TextInput
                     placeholder="default"
@@ -161,7 +161,7 @@ export default function TonesStory() {
               </Stack>
             </Card>
             <Card flex={1} scheme="dark">
-              <Stack padding={[3, 4, 5]} space={4}>
+              <Stack gap={4} padding={[3, 4, 5]}>
                 <Card padding={3}>
                   <TextInput
                     placeholder="default"

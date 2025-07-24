@@ -1,14 +1,15 @@
-/** @jest-environment jsdom */
+import {describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '$test/utils'
+
 import {PortalContext} from './portalContext'
-import {PortalContextValue} from './types'
+import type {PortalContextValue} from './types'
 import {usePortal} from './usePortal'
 
 describe('utils/portal', () => {
   describe('usePortal', () => {
     it('should get context value', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootPortal = usePortal()
@@ -40,7 +41,7 @@ describe('utils/portal', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
@@ -53,10 +54,11 @@ describe('utils/portal', () => {
       }
 
       function Root() {
-        const value = undefined
-
         return (
-          <PortalContext.Provider value={value as any}>
+          <PortalContext.Provider
+            // @ts-expect-error - we want to test the error case
+            value={undefined}
+          >
             <Debug />
           </PortalContext.Provider>
         )
@@ -68,7 +70,7 @@ describe('utils/portal', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
@@ -82,12 +84,12 @@ describe('utils/portal', () => {
 
       function Root() {
         // NOTE: we’re testing this because the context value may be a function in the future
-        const value = () => {
-          return {version: 1}
-        }
 
         return (
-          <PortalContext.Provider value={value as any}>
+          <PortalContext.Provider
+            // @ts-expect-error - we want to test the error case
+            value={() => ({version: 1})}
+          >
             <Debug />
           </PortalContext.Provider>
         )

@@ -1,4 +1,4 @@
-import {Box, Button, Menu, MenuButton, MenuButtonProps, MenuItem, Stack} from '@sanity/ui'
+import {Box, Button, Menu, MenuButton, type MenuButtonProps, MenuItem, Stack} from '@sanity/ui'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   __unstable_margins: [1, 1, 1, 1],
@@ -10,7 +10,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   placement: 'bottom-start',
 }
 
-export default function WithoutArrowStory() {
+export default function WithoutArrowStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Stack>
