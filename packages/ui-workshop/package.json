@@ -115,6 +115,7 @@
     "extends": "@sanity/semantic-release-preset"
   },
   "dependencies": {
+    "@sanity/icons": "^3.7.4",
     "@vitejs/plugin-react": "^4.7.0",
     "axe-core": "^4.10.3",
     "cac": "^6.7.14",
@@ -136,7 +137,6 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/icons": "^3.7.4",
     "@sanity/pkg-utils": "^7.9.10",
     "@sanity/prettier-config": "^1.0.6",
     "@sanity/semantic-release-preset": "^4.1.8",
@@ -176,7 +176,6 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "@sanity/icons": "^2 || ^3",
     "@sanity/ui": "^1 || ^2",
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
