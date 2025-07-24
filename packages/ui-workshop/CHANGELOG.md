@@ -5,6 +5,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/sanity-io/ui-workshop/compare/v2.1.6...v3.0.0) (2025-07-24)
+
+### ⚠ BREAKING CHANGES
+
+- require `@sanity/ui` v3
+- require styled-components v6
+- require react 19
+
+### Features
+
+- require `@sanity/ui` v3 ([ba9c066](https://github.com/sanity-io/ui-workshop/commit/ba9c06617045a03d024c99008eab21317ab1c3b2))
+- require react 19 ([00ec0ce](https://github.com/sanity-io/ui-workshop/commit/00ec0ceb537f513b131212906bf30968b27c8adb))
+
+### Bug Fixes
+
+- **deps:** make `@sanity/icons` a regular dep ([251318c](https://github.com/sanity-io/ui-workshop/commit/251318c606ce6c9f05937f0e8528c7931545307f))
+- **deps:** Update dependency vite to v7 ([#176](https://github.com/sanity-io/ui-workshop/issues/176)) ([e5ddfeb](https://github.com/sanity-io/ui-workshop/commit/e5ddfeb5fae5903815aa394bb95001d8978873b9))
+- require styled-components v6 ([355c336](https://github.com/sanity-io/ui-workshop/commit/355c336f5cf55a0ea0ecaa3ed7a3de9fa93ebda1))
+
 ## [2.1.6](https://github.com/sanity-io/ui-workshop/compare/v2.1.5...v2.1.6) (2025-07-22)
 
 ### Bug Fixes
