@@ -176,9 +176,9 @@
   },
   "peerDependencies": {
     "@sanity/ui": "^1 || ^2",
-    "styled-components": "^5.2 || ^6"
     "react": "^19",
     "react-dom": "^19",
+    "styled-components": "^6.1"
   },
   "packageManager": "pnpm@9.15.9",
   "publishConfig": {
