@@ -128,7 +128,7 @@
     "framer-motion": "^12.23.9",
     "react-compiler-runtime": "19.1.0-rc.2",
     "react-refractor": "^4.0.0",
-    "use-effect-event": "^2.0.2"
+    "use-effect-event": "^2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
