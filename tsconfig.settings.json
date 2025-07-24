@@ -9,6 +9,8 @@
     "allowJs": false,
     "checkJs": false,
     "declaration": true,
-    "isolatedDeclarations": true
+    "isolatedDeclarations": true,
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": false,
   }
 }
