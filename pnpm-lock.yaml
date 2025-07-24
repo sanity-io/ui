@@ -70,8 +70,8 @@ importers:
         specifier: ^7.9.10
         version: 7.9.10(@types/babel__core@7.20.5)(@types/node@20.19.7)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.8.3)
       '@sanity/prettier-config':
-        specifier: ^2.0.0
-        version: 2.0.0(prettier@3.6.2)
+        specifier: ^2.0.1
+        version: 2.0.1(prettier@3.6.2)
       '@sanity/semantic-release-preset':
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.6(typescript@5.8.3))
@@ -2105,10 +2105,10 @@ packages:
       babel-plugin-react-compiler:
         optional: true
 
-  '@sanity/prettier-config@2.0.0':
-    resolution: {integrity: sha512-iTGLenR4T1DU0QJhMIMVw61C4DeZyKhpYNmkTOToO1dX8fBuew8JqKWe9S4Ojk8rB9Y5MCNgl5haVjOzFcWPtw==}
+  '@sanity/prettier-config@2.0.1':
+    resolution: {integrity: sha512-FwbBgFKOw72YujXRGCZraenYDbu5/HCyiWES5YkOVoKgUCwkCV1Nzkd4foWCmKI9eA+46L4xNbwKnojoZ124fQ==}
     peerDependencies:
-      prettier: ^3.6.0
+      prettier: ^3.6.2
 
   '@sanity/semantic-release-preset@5.0.0':
     resolution: {integrity: sha512-2lCuU57OZW6WY7O8d4vjbpghQIc9lnxS9+dLnzrBYh8e6pA467DxlCNum4NgDeDyHxNh9HGXNalXEWJz8tec+A==}
@@ -9926,7 +9926,7 @@ snapshots:
       - supports-color
       - vue-tsc
 
-  '@sanity/prettier-config@2.0.0(prettier@3.6.2)':
+  '@sanity/prettier-config@2.0.1(prettier@3.6.2)':
     dependencies:
       '@prettier/plugin-oxc': 0.0.4
       prettier: 3.6.2
