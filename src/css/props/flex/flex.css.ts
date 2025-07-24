@@ -1,4 +1,7 @@
+import {defineProperties} from '@vanilla-extract/sprinkles'
+
 import {_responsiveStyle} from '../../_responsiveStyle.css'
+import {breakpointsConditions, breakpointsResponsiveArray} from '../../constants'
 import {layers} from '../../layers.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import type {Flex} from './types'
@@ -50,3 +53,13 @@ export const options: ResponsiveRuleOptions<Flex> = {
     flex: 'initial',
   }),
 }
+
+export const flexProperties = defineProperties({
+  '@layer': layers.props,
+  'conditions': breakpointsConditions,
+  'defaultCondition': '0',
+  'responsiveArray': breakpointsResponsiveArray,
+  'properties': {
+    flex: ['none', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'auto', 'initial'],
+  },
+})

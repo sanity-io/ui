@@ -1,4 +1,5 @@
-import {ELEMENT_TONES, type ElementTone} from '@sanity/ui/theme'
+import {ELEMENT_TONES} from '@sanity/ui/theme'
+import {createSprinkles, defineProperties} from '@vanilla-extract/sprinkles'
 
 import {_fromEntries} from '../../_fromEntries'
 import {_style} from '../../_style.css'
@@ -11,17 +12,22 @@ export const root: string = _style(layers.primitives, {
   whiteSpace: 'nowrap',
 })
 
-export const tones: Record<ElementTone, string> = {
-  ..._fromEntries(
-    ELEMENT_TONES.map((t) => [
-      t,
-      _style(layers.primitives, {
-        vars: {
-          [vars.color.bg]: vars.color.tinted[t].bg[2],
-          [vars.color.border]: vars.color.tinted[t].border[2],
-          [vars.color.fg]: vars.color.tinted[t].fg[3],
+const colorProperties = defineProperties({
+  'properties': {
+    tone: _fromEntries(
+      ELEMENT_TONES.map((t) => [
+        t,
+        {
+          vars: {
+            [vars.color.bg]: vars.color.tinted[t].bg[2],
+            [vars.color.border]: vars.color.tinted[t].border[2],
+            [vars.color.fg]: vars.color.tinted[t].fg[3],
+          },
         },
-      }),
-    ]),
-  ),
-}
+      ]),
+    ),
+  },
+  '@layer': layers.primitives,
+})
+
+export const sprinkles = createSprinkles(colorProperties)
