@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/sanity-io/ui/compare/v2.16.7...v3.0.0) (2025-07-24)
+
+### ⚠ BREAKING CHANGES
+
+- refractor is now 5.0.0 and react-refractor is now 4.0.0
+
+### Bug Fixes
+
+- upgrade refractor to 5.0.0 and react-refractor to 4.0.0 ([#1780](https://github.com/sanity-io/ui/issues/1780)) ([3f33e89](https://github.com/sanity-io/ui/commit/3f33e89cf6e9e601ae65b534faf8a586b5475556))
+
 ## [2.16.7](https://github.com/sanity-io/ui/compare/v2.16.6...v2.16.7) (2025-07-11)
 
 ### Bug Fixes
