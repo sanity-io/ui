@@ -131,7 +131,7 @@
     "pako": "^2.1.0",
     "rimraf": "^4.4.1",
     "segmented-property": "^4.0.0",
-    "vite": "^6.3.5"
+    "vite": "^7.0.6"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",
