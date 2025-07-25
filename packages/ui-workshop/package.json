@@ -61,8 +61,7 @@
   },
   "files": [
     "bin",
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "build": "run-s clean pkg:build",
