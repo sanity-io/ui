@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/sanity-io/ui-workshop/compare/v3.1.0...v3.1.1) (2025-07-25)
+
+### Bug Fixes
+
+- revert support vanilla extract ([a18a4ab](https://github.com/sanity-io/ui-workshop/commit/a18a4ab5e1557779d33fca95b0ab8920c9fce308))
+
 ## [3.1.0](https://github.com/sanity-io/ui-workshop/compare/v3.0.2...v3.1.0) (2025-07-25)
 
 ### Features
