@@ -1,9 +1,9 @@
-import {defineRuntime} from '@sanity/ui-workshop'
+import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 import path from 'path'
 
 const EXPORTS_PATH = path.resolve(__dirname, 'exports')
 
-export default defineRuntime({
+const config: WorkshopRuntimeOptions = {
   vite: (viteConfig) => ({
     ...viteConfig,
     resolve: {
@@ -17,4 +17,6 @@ export default defineRuntime({
       },
     },
   }),
-})
+}
+
+export default config
