@@ -3,6 +3,7 @@ import {Button, Menu, MenuButton, MenuButtonProps, MenuItem} from '@sanity/ui'
 import {memo, useCallback} from 'react'
 
 import {VIEWPORT_OPTIONS} from '../constants'
+import {startViewTransition} from '../lib/startViewTransition'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
@@ -11,7 +12,7 @@ export const ViewportMenu = memo(function ViewportMenu() {
 
   const setViewport = useCallback(
     (value: string) => {
-      broadcast({type: 'workshop/setViewport', value})
+      startViewTransition(() => broadcast({type: 'workshop/setViewport', value}))
     },
     [broadcast],
   )
