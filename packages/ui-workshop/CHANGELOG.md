@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/sanity-io/ui-workshop/compare/v3.0.1...v3.0.2) (2025-07-25)
+
+### Bug Fixes
+
+- dev test command unable to load iframe ([a174d3f](https://github.com/sanity-io/ui-workshop/commit/a174d3fc379e4f117e8f94cc7b36bae199fc3b91))
+
 ## [3.0.1](https://github.com/sanity-io/ui-workshop/compare/v3.0.0...v3.0.1) (2025-07-25)
 
 ### Bug Fixes
