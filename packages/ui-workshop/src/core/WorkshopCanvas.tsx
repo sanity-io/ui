@@ -11,6 +11,7 @@ const Frame = styled.iframe`
   border: 0;
   height: 100%;
   width: 100%;
+  view-transition-name: canvas;
 `
 
 /** @internal */
