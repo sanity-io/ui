@@ -4,7 +4,7 @@ export default defineConfig({
   bundles: [
     {
       source: './src/cli/index.ts',
-      require: './dist/cli.cjs',
+      import: './dist/cli.js',
       runtime: 'node',
     },
   ],
@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   tsconfig: 'tsconfig.dist.json',
-  babel: {reactCompiler: true},
+  babel: {reactCompiler: true, styledComponents: true},
   reactCompilerOptions: {target: '19'},
   dts: 'rolldown',
 })

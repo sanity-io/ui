@@ -1,6 +1,6 @@
 import {Card, Layer, Tab, TabList} from '@sanity/ui'
 import {CSSProperties, memo, useCallback, useMemo} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {InspectorTab} from './types'
 

@@ -1,7 +1,7 @@
+import {isEqual} from 'lodash'
 import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
-import {isEqual} from '../../lib/isEqual'
 import {useWorkshop} from '../../useWorkshop'
 import {decodeValue, encodeValue} from './helpers'
 import {PropsMsg} from './msg'
