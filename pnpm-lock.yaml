@@ -67,7 +67,7 @@ importers:
         specifier: ^9.31.0
         version: 9.31.0
       '@sanity/pkg-utils':
-        specifier: ^7.9.10
+        specifier: ^7.9.11
         version: 7.9.11(@types/babel__core@7.20.5)(@types/node@20.19.9)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.8.3)
       '@sanity/prettier-config':
         specifier: ^2.0.1
