@@ -37,10 +37,9 @@ export async function createDevServer(options: {
 
   app.use('*all', async (req, res) => {
     const url = req.originalUrl
-
     let htmlPath = 'index.html'
 
-    if (req.path === '/frame/') {
+    if (url.includes('/frame/')) {
       htmlPath = 'frame/index.html'
     }
 
