@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, BoxDisplay, Card, Flex, TabPanel} from '@sanity/ui'
 import {ElementType, memo, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'

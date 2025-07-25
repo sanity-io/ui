@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "3.0.0",
+  "version": "3.0.1-canary.2",
   "keywords": [
     "sanity",
     "ui",
@@ -25,28 +25,23 @@
   "exports": {
     ".": {
       "source": "./exports/index.ts",
-      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./plugin-a11y": {
       "source": "./exports/plugin-a11y.ts",
-      "require": "./dist/plugin-a11y.cjs",
       "default": "./dist/plugin-a11y.js"
     },
     "./plugin-perf": {
       "source": "./exports/plugin-perf.ts",
-      "require": "./dist/plugin-perf.cjs",
       "default": "./dist/plugin-perf.js"
     },
     "./runtime": {
       "source": "./exports/runtime.ts",
-      "require": "./dist/runtime.cjs",
       "default": "./dist/runtime.js"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -62,7 +57,7 @@
     }
   },
   "bin": {
-    "workshop": "./bin/workshop.cjs"
+    "workshop": "./bin/workshop.js"
   },
   "files": [
     "bin",
@@ -150,6 +145,7 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "babel-plugin-react-compiler": "19.1.0-rc.2",
+    "babel-plugin-styled-components": "^2.1.4",
     "commitizen": "^4.3.1",
     "commitlint": "^19.8.1",
     "eslint": "^8.57.1",

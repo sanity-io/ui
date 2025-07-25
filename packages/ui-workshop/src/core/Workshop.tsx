@@ -6,13 +6,13 @@ import {
   ToastProvider,
   useMediaIndex,
 } from '@sanity/ui'
+import {debounce} from 'lodash'
+import {isEqual} from 'lodash'
 import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {WorkshopConfig} from './config'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector'
-import {debounce} from './lib/debounce'
-import {isEqual} from './lib/isEqual'
 import {createPubsub} from './lib/pubsub'
 import {WorkshopLocationStore} from './location'
 import {WorkshopNavbar} from './navbar'
