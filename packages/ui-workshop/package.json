@@ -96,14 +96,10 @@
   "prettier": "@sanity/prettier-config",
   "release": {
     "branches": [
-      "+([0-9])?(.{+([0-9]),x}).x",
       "main",
       {
-        "name": "beta",
-        "prerelease": true
-      },
-      {
-        "name": "alpha",
+        "name": "static",
+        "channel": "static",
         "prerelease": true
       }
     ],
