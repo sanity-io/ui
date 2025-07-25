@@ -1,7 +1,11 @@
+import {createRequire} from 'node:module'
+
 import {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 import {TransformOptions} from 'esbuild'
 
 import {_findRuntimeFile} from './_findRuntimeFile'
+
+const require = createRequire(import.meta.url)
 
 /** @internal */
 export async function _loadRuntime(options: {
@@ -15,8 +19,7 @@ export async function _loadRuntime(options: {
     return undefined
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const {register} = require('esbuild-register/dist/node')
+  const {register} = await import('esbuild-register/dist/node')
 
   const eslintOptions: TransformOptions = {
     // eslint options
@@ -29,7 +32,6 @@ export async function _loadRuntime(options: {
 
   const {unregister} = globalThis.__DEV__ ? {unregister: () => undefined} : register(eslintOptions)
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const config = require(configPath)
 
   // Unregister the require hook if you don't need it anymore

@@ -1,7 +1,7 @@
 import {SearchIcon} from '@sanity/icons'
 import {Box, BoxDisplay, Card, Flex, Layer, TextInput} from '@sanity/ui'
 import {memo, useCallback, useMemo, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {WorkshopScope, WorkshopStory} from '../config'
 import {EMPTY_ARRAY} from '../constants'
