@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/sanity-io/ui-workshop/compare/v3.0.0...v3.0.1) (2025-07-25)
+
+### Bug Fixes
+
+- vite v7 requires ESM ([572594e](https://github.com/sanity-io/ui-workshop/commit/572594e9c74d84a13309ba33b34f090f2d4b82a3))
+
 ## [3.0.0](https://github.com/sanity-io/ui-workshop/compare/v2.1.6...v3.0.0) (2025-07-24)
 
 ### ⚠ BREAKING CHANGES
