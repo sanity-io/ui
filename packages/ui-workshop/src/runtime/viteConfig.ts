@@ -1,6 +1,4 @@
 import react from '@vitejs/plugin-react'
-import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
-
 import path from 'path'
 import {UserConfig} from 'vite'
 
@@ -31,7 +29,6 @@ export function createViteConfig(options: {
       react({
         babel: {plugins: [['babel-plugin-react-compiler', {target: '19'}]]},
       }),
-      vanillaExtractPlugin(),
     ],
     root: cwd,
   }
