@@ -16,12 +16,12 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.31.0",
+    "@eslint/js": "^9.32.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vanilla-extract/vite-plugin": "^5.1.0",
     "@vitejs/plugin-react": "^4.7.0",
-    "eslint": "^9.31.0",
+    "eslint": "^9.32.0",
     "eslint-plugin-react-hooks": "0.0.0-experimental-edac0dde-20250723",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
