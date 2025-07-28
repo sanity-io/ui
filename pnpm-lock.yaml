@@ -113,11 +113,11 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0
       '@vanilla-extract/rollup-plugin':
-        specifier: ^1.3.17
-        version: 1.3.17(rollup@4.45.1)
+        specifier: ^1.4.0
+        version: 1.4.0(rollup@4.45.1)
       '@vanilla-extract/vite-plugin':
-        specifier: ^5.1.0
-        version: 5.1.0(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
+        specifier: ^5.1.1
+        version: 5.1.1(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
       '@vitejs/plugin-react':
         specifier: ^4.7.0
         version: 4.7.0(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
@@ -355,8 +355,8 @@ importers:
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
       '@vanilla-extract/vite-plugin':
-        specifier: ^5.1.0
-        version: 5.1.0(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
+        specifier: ^5.1.1
+        version: 5.1.1(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -386,8 +386,8 @@ importers:
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
       '@vanilla-extract/vite-plugin':
-        specifier: ^5.1.0
-        version: 5.1.0(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
+        specifier: ^5.1.1
+        version: 5.1.1(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
       '@vitejs/plugin-react':
         specifier: ^4.7.0
         version: 4.7.0(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
@@ -459,8 +459,8 @@ importers:
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
       '@vanilla-extract/vite-plugin':
-        specifier: ^5.1.0
-        version: 5.1.0(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
+        specifier: ^5.1.1
+        version: 5.1.1(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
       '@vitejs/plugin-react':
         specifier: ^4.7.0
         version: 4.7.0(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))
@@ -2972,8 +2972,8 @@ packages:
   '@vanilla-extract/babel-plugin-debug-ids@1.2.2':
     resolution: {integrity: sha512-MeDWGICAF9zA/OZLOKwhoRlsUW+fiMwnfuOAqFVohL31Agj7Q/RBWAYweqjHLgFBCsdnr6XIfwjJnmb2znEWxw==}
 
-  '@vanilla-extract/compiler@0.3.0':
-    resolution: {integrity: sha512-8EbPmDMXhY9NrN38Kh8xYDENgBk4i6s6ce4p7E9F3kHtCqxtEgfaKSNS08z/SVCTmaX3IB3N/kGSO0gr+APffg==}
+  '@vanilla-extract/compiler@0.3.1':
+    resolution: {integrity: sha512-KZ67DZQu58dMo7Jv4PNMPG5TbMOXB68xxVYV2cRJvUdPeiOmX0FOaPgEsYBAZUgd/oLEx4IyV0AvlvsxJ1akfQ==}
 
   '@vanilla-extract/css@1.17.4':
     resolution: {integrity: sha512-m3g9nQDWPtL+sTFdtCGRMI1Vrp86Ay4PBYq1Bo7Bnchj5ElNtAJpOqD+zg+apthVA4fB7oVpMWNjwpa6ElDWFQ==}
@@ -2992,15 +2992,15 @@ packages:
   '@vanilla-extract/private@1.0.9':
     resolution: {integrity: sha512-gT2jbfZuaaCLrAxwXbRgIhGhcXbRZCG3v4TTUnjw0EJ7ArdBRxkq4msNJkbuRkCgfIK5ATmprB5t9ljvLeFDEA==}
 
-  '@vanilla-extract/rollup-plugin@1.3.17':
-    resolution: {integrity: sha512-6Q9QaHHFULreszih50cUNjt1jlaFHy42a9lfTvtYS/WdxES2HdoXmiFK+RTLYwaYcE6H+EsSGa0EqXdkgCBFaA==}
+  '@vanilla-extract/rollup-plugin@1.4.0':
+    resolution: {integrity: sha512-VpA925CuJYtqhanQr0LRT/wRiHrWV4ActxSA442z3x6gHO4xnk/wwSu3wQUpXQrDryjJ0dgLUoVxeW2D8JNOlw==}
     peerDependencies:
       rollup: ^2.0.0 || ^3.0.0 || ^4.0.0
 
-  '@vanilla-extract/vite-plugin@5.1.0':
-    resolution: {integrity: sha512-BzVdmBD+FUyJnY6I29ZezwtDBc1B78l+VvHvIgoJYbgfPj0hvY0RmrGL8B4oNNGY/lOt7KgQflXY5kBMd3MGZg==}
+  '@vanilla-extract/vite-plugin@5.1.1':
+    resolution: {integrity: sha512-Nd1worqkHrd8XED4ZAA7Wmkd3pCqCwpmzCBVF8v6T1BSLHGXQE5HYflVgygw0CsIAbFRMS6zQBIk4F4/r/YKIw==}
     peerDependencies:
-      vite: ^5.0.0 || ^6.0.0
+      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
 
   '@vanilla-extract/webpack-plugin@2.3.22':
     resolution: {integrity: sha512-3Cx8DkbX3EeLHGbD049jjj6/bWB0VK4YFfWWsf8VXBI8dgf5SvEef1VfET22IOcT9GzLl8MqfsLr/XSo9iv67Q==}
@@ -11423,7 +11423,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vanilla-extract/compiler@0.3.0(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)':
+  '@vanilla-extract/compiler@0.3.1(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)':
     dependencies:
       '@vanilla-extract/css': 1.17.4
       '@vanilla-extract/integration': 8.0.4
@@ -11492,17 +11492,18 @@ snapshots:
 
   '@vanilla-extract/private@1.0.9': {}
 
-  '@vanilla-extract/rollup-plugin@1.3.17(rollup@4.45.1)':
+  '@vanilla-extract/rollup-plugin@1.4.0(rollup@4.45.1)':
     dependencies:
       '@vanilla-extract/integration': 8.0.4
+      magic-string: 0.30.17
       rollup: 4.45.1
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
 
-  '@vanilla-extract/vite-plugin@5.1.0(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))':
+  '@vanilla-extract/vite-plugin@5.1.1(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)(vite@6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1))':
     dependencies:
-      '@vanilla-extract/compiler': 0.3.0(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)
+      '@vanilla-extract/compiler': 0.3.1(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)
       '@vanilla-extract/integration': 8.0.4
       vite: 6.3.5(@types/node@24.1.0)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.1)
     transitivePeerDependencies:
