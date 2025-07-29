@@ -43,14 +43,14 @@ function responsiveGridItemRowStartStyle(props: ResponsiveGridItemStyleProps & T
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$rowStart, (rowStart) => ({
-    gridRowStart: rowStart,
+    gridRowStart: `${rowStart}`,
   }))
 }
 
 function responsiveGridItemRowEndStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$rowEnd, (rowEnd) => ({gridRowEnd: rowEnd}))
+  return _responsive(media, props.$rowEnd, (rowEnd) => ({gridRowEnd: `${rowEnd}`}))
 }
 
 function responsiveGridItemColumnStyle(props: ResponsiveGridItemStyleProps & ThemeProps) {
@@ -69,7 +69,7 @@ function responsiveGridItemColumnStartStyle(props: ResponsiveGridItemStyleProps 
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$columnStart, (columnStart) => ({
-    gridColumnStart: columnStart,
+    gridColumnStart: `${columnStart}`,
   }))
 }
 
@@ -77,6 +77,6 @@ function responsiveGridItemColumnEndStyle(props: ResponsiveGridItemStyleProps & 
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$columnEnd, (columnEnd) => ({
-    gridColumnEnd: columnEnd,
+    gridColumnEnd: `${columnEnd}`,
   }))
 }

@@ -5,7 +5,7 @@ import {ResponsiveInlineSpaceStyleProps} from './types'
 
 export function inlineBaseStyle(): CSSObject {
   return {
-    'lineHeight': 0,
+    'lineHeight': '0',
 
     '&&:not([hidden])': {
       display: 'block',

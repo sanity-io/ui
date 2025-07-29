@@ -120,7 +120,7 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 
     return {
       fontSize: rem(size.fontSize),
-      lineHeight: size.lineHeight / size.fontSize,
+      lineHeight: `${size.lineHeight / size.fontSize}`,
     }
   })
 }
