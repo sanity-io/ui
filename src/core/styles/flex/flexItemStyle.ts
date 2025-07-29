@@ -23,5 +23,5 @@ export function responsiveFlexItemStyle(
 
   if (!props.$flex) return EMPTY_ARRAY
 
-  return _responsive(media, props.$flex, (flex) => ({flex}))
+  return _responsive(media, props.$flex, (flex) => ({flex: `${flex}`}))
 }
