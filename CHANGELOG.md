@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/sanity-io/ui/compare/v3.0.2...v3.0.3) (2025-07-29)
+
+### Bug Fixes
+
+- workaround rollup@4.46.0 regression ([#1852](https://github.com/sanity-io/ui/issues/1852)) ([07f9616](https://github.com/sanity-io/ui/commit/07f96167245d40d9f228227d4da91b64c917b2f7))
+
 ## [3.0.2](https://github.com/sanity-io/ui/compare/v3.0.1...v3.0.2) (2025-07-28)
 
 ### Bug Fixes
