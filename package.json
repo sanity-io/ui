@@ -224,7 +224,8 @@
       "conventional-changelog-conventionalcommits": ">= 8.0.0",
       "react": "$react",
       "react-dom": "$react-dom",
-      "react-is": "$react-is"
+      "react-is": "$react-is",
+      "rollup": "4.46.1"
     }
   },
   "esm.sh": {
