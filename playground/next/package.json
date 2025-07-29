@@ -21,7 +21,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vanilla-extract/next-plugin": "^2.4.14",
-    "eslint": "^9.31.0",
+    "eslint": "^9.32.0",
     "eslint-config-next": "15.4.4",
     "typescript": "^5.8.3"
   }
