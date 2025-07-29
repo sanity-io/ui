@@ -17,8 +17,8 @@ function avatarArrowStyle(): CSSObject {
   return {
     'position': 'absolute',
     'boxSizing': 'border-box',
-    'zIndex': 0,
-    'opacity': 0,
+    'zIndex': '0',
+    'opacity': '0',
     'transition': 'all 0.2s linear',
     'transform': 'rotate(-90deg) translate3d(0, 6px, 0)',
     'left': 0,
@@ -41,16 +41,16 @@ function avatarArrowStyle(): CSSObject {
 
     "[data-arrow-position='inside'] > &": {
       transform: 'rotate(-90deg) translate3d(0, 6px, 0)',
-      opacity: 0,
+      opacity: '0',
     },
 
     "[data-arrow-position='top'] > &": {
-      opacity: 1,
+      opacity: '1',
       transform: 'rotate(0deg)',
     },
 
     "[data-arrow-position='bottom'] > &": {
-      opacity: 1,
+      opacity: '1',
       transform: 'rotate(-180deg)',
     },
   }
@@ -71,7 +71,7 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
     'boxShadow': '0 0 0 1px var(--card-bg-color)',
 
     '&[data-status="inactive"]': {
-      opacity: 0.5,
+      opacity: '0.5',
     },
 
     '&>svg': {

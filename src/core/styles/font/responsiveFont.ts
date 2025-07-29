@@ -23,7 +23,7 @@ export function responsiveFont(
   const base: CSSObject = {
     'position': 'relative',
     'fontFamily': family,
-    fontWeight,
+    'fontWeight': `${fontWeight}`,
     'padding': '1px 0',
     'margin': 0,
 

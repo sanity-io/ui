@@ -97,7 +97,7 @@ function inputColorStyle(props: ThemeProps) {
 }
 
 function textSize(size: ThemeFontSize) {
-  return {fontSize: rem(size.fontSize), lineHeight: rem(size.lineHeight)}
+  return {fontSize: rem(size.fontSize), lineHeight: `${rem(size.lineHeight)}`}
 }
 
 function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
