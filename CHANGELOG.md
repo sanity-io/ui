@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.5](https://github.com/sanity-io/ui/compare/v4.0.0-static.4...v4.0.0-static.5) (2025-07-30)
+
+### Bug Fixes
+
+- **deps:** update dependency isbot to ^5.1.29 (static) ([#1855](https://github.com/sanity-io/ui/issues/1855)) ([a60c071](https://github.com/sanity-io/ui/commit/a60c0711abeea6e99b538676de8564a26d104cb4))
+
 ## [4.0.0-static.4](https://github.com/sanity-io/ui/compare/v4.0.0-static.3...v4.0.0-static.4) (2025-07-30)
 
 ### Bug Fixes
