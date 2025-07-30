@@ -1,11 +1,13 @@
 import type {RollupPlugin} from '@sanity/pkg-utils'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
-import {transform} from 'lightningcss'
+import {transform, browserslistToTargets} from 'lightningcss'
 import path from 'path'
 import postcss from 'postcss'
 import postcssPresetEnv from 'postcss-preset-env'
 import {cwd} from 'process'
+import browserslistConfig from '@sanity/browserslist-config'
+import browserslist from 'browserslist'
 
 const DEFAULT_ASSET_FILE_NAME = ({name}: {name: string}) => `${name}.css`
 
@@ -126,19 +128,25 @@ async function transformCss(options: {code: string; file: string}) {
 
   let css = input
 
-  css = removeDuplicateLayers(css)
+  // css = removeDuplicateLayers(css)
 
   // process using postcss
-  const transformedResult = await postcss([postcssPresetEnv, autoprefixer]).process(css, {
+  const transformedResult = await postcss([
+    // postcssPresetEnv,
+    // autoprefixer,
+    // cssnano({preset: 'default'}),
+  ]).process(css, {
     from: undefined,
     to: file,
   })
 
   css = transformedResult.css
 
-  const minifiedResult = await cssnano({preset: 'default'}).process(css)
+  // const minifiedResult = await cssnano({preset: 'default'}).process(css)
 
-  css = minifiedResult.css
+  // css = minifiedResult.css
+
+  const targets = browserslistToTargets(browserslist(browserslistConfig))
 
   // process and minify css using lightningcss
   const lightningCssResult = transform({
@@ -147,6 +155,7 @@ async function transformCss(options: {code: string; file: string}) {
     minify: true,
     cssModules: false,
     sourceMap: false,
+    targets,
   })
 
   if (lightningCssResult.warnings.length) {
@@ -155,7 +164,7 @@ async function transformCss(options: {code: string; file: string}) {
   }
 
   // if (transformer === 'lightningcss') {
-  //   return new TextDecoder().decode(lightningCssResult.code)
+  return new TextDecoder().decode(lightningCssResult.code)
   // }
 
   return css

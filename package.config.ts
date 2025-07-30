@@ -4,6 +4,7 @@ import path from 'path'
 import {env} from 'process'
 
 import {cssBundle} from './rollup/cssBundle'
+import {optimizeCss} from './rollup/optimizeCss'
 
 const isProd = env['NODE_ENV'] === 'production'
 
@@ -38,11 +39,19 @@ const config: PkgConfigOptions = {
 
           return `${name}-${hash}`
         },
+        extract: {
+          name: 'css/index.css',
+          // sourcemap: true,
+        },
       }),
-      cssBundle({
-        cleanAssets: isProd,
-        assetFileName: ({name}) => `${name}/index.css`,
-      }),
+      optimizeCss({}),
+      // postcss({
+      //   plugins: [postcssPresetEnv, autoprefixer, cssnano({preset: 'default'})],
+      // }),
+      // cssBundle({
+      //   cleanAssets: isProd,
+      //   assetFileName: ({name}) => `${name}/index.css`,
+      // }),
     ],
   },
   strictOptions: {
