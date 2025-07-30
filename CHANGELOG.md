@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.6](https://github.com/sanity-io/ui/compare/v4.0.0-static.5...v4.0.0-static.6) (2025-07-30)
+
+### Bug Fixes
+
+- use lightningcss to reduce css output ([0a1dc3d](https://github.com/sanity-io/ui/commit/0a1dc3de6fe05af26a155e90fb44673bc1fb3e2d))
+
 ## [4.0.0-static.5](https://github.com/sanity-io/ui/compare/v4.0.0-static.4...v4.0.0-static.5) (2025-07-30)
 
 ### Bug Fixes
