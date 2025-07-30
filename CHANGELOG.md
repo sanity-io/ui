@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.12](https://github.com/sanity-io/ui/compare/v2.16.11...v2.16.12) (2025-07-30)
+
+### Bug Fixes
+
+- **deps:** update dependency @floating-ui/react-dom to ^2.1.5 (v2) ([#1856](https://github.com/sanity-io/ui/issues/1856)) ([421dead](https://github.com/sanity-io/ui/commit/421dead4e468e736ee3550d4f6aa6298020a27e7))
+- **deps:** update dependency framer-motion to ^12.23.12 (v2) ([#1857](https://github.com/sanity-io/ui/issues/1857)) ([b07c57f](https://github.com/sanity-io/ui/commit/b07c57f781f023a93e051eb51577e3c935f89ca7))
+
 ## [2.16.11](https://github.com/sanity-io/ui/compare/v2.16.10...v2.16.11) (2025-07-29)
 
 ### Bug Fixes
