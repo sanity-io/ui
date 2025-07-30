@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.7](https://github.com/sanity-io/ui/compare/v4.0.0-static.6...v4.0.0-static.7) (2025-07-30)
+
+### Bug Fixes
+
+- move avatar img css to primitives layer ([299b96d](https://github.com/sanity-io/ui/commit/299b96db2132479f27f2e5d52254534f3bc74c93))
+
 ## [4.0.0-static.6](https://github.com/sanity-io/ui/compare/v4.0.0-static.5...v4.0.0-static.6) (2025-07-30)
 
 ### Bug Fixes
