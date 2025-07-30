@@ -137,11 +137,15 @@ export const image: string = _style(layers.primitives, {
 })
 
 globalStyle(`${image} img`, {
-  display: 'block',
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  borderRadius: 'inherit',
+  '@layer': {
+    [layers.primitives]: {
+      display: 'block',
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      borderRadius: 'inherit',
+    },
+  },
 })
 
 export const imageOutline: string = _style(layers.primitives, {
