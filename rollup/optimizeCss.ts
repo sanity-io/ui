@@ -3,11 +3,11 @@ import type {RollupPlugin} from '@sanity/pkg-utils'
 import browserslist from 'browserslist'
 import {browserslistToTargets, transform} from 'lightningcss'
 
-export function optimizeCss(options: {todo?: string}): RollupPlugin {
+export function optimizeCss(_options: {todo?: string}): RollupPlugin {
   return {
     name: 'optimize-css',
 
-    async generateBundle(outputOptions, bundle) {
+    async generateBundle(_outputOptions, bundle) {
       for (const [, assetOrChunk] of Object.entries(bundle)) {
         // find CSS assets
         if (assetOrChunk.type === 'asset') {

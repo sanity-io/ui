@@ -3,7 +3,7 @@ import {vanillaExtractPlugin} from '@vanilla-extract/rollup-plugin'
 import path from 'path'
 import {env} from 'process'
 
-import {cssBundle} from './rollup/cssBundle'
+// import {cssBundle} from './rollup/cssBundle'
 import {optimizeCss} from './rollup/optimizeCss'
 
 const isProd = env['NODE_ENV'] === 'production'

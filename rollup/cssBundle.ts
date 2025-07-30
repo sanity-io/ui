@@ -128,13 +128,13 @@ async function transformCss(options: {code: string; file: string}) {
 
   let css = input
 
-  // css = removeDuplicateLayers(css)
+  css = removeDuplicateLayers(css)
 
   // process using postcss
   const transformedResult = await postcss([
-    // postcssPresetEnv,
-    // autoprefixer,
-    // cssnano({preset: 'default'}),
+    postcssPresetEnv,
+    autoprefixer,
+    cssnano({preset: 'default'}),
   ]).process(css, {
     from: undefined,
     to: file,
