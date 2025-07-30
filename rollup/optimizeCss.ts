@@ -3,7 +3,7 @@ import type {RollupPlugin} from '@sanity/pkg-utils'
 import browserslist from 'browserslist'
 import {browserslistToTargets, transform} from 'lightningcss'
 
-export function optimizeCss(_options: {todo?: string}): RollupPlugin {
+export function optimizeCss(): RollupPlugin {
   return {
     name: 'optimize-css',
 
@@ -32,7 +32,7 @@ export function optimizeCss(_options: {todo?: string}): RollupPlugin {
 async function transformCss(options: {code: string; file: string}) {
   const {code: input, file} = options
 
-  let css = input
+  const css = input
 
   const targets = browserslistToTargets(browserslist(browserslistConfig))
 

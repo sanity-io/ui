@@ -44,7 +44,7 @@ const config: PkgConfigOptions = {
           // sourcemap: true,
         },
       }),
-      optimizeCss({}),
+      optimizeCss(),
       // postcss({
       //   plugins: [postcssPresetEnv, autoprefixer, cssnano({preset: 'default'})],
       // }),

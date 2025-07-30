@@ -1,13 +1,13 @@
+import browserslistConfig from '@sanity/browserslist-config'
 import type {RollupPlugin} from '@sanity/pkg-utils'
 import autoprefixer from 'autoprefixer'
+import browserslist from 'browserslist'
 import cssnano from 'cssnano'
-import {transform, browserslistToTargets} from 'lightningcss'
+import {browserslistToTargets,transform} from 'lightningcss'
 import path from 'path'
 import postcss from 'postcss'
 import postcssPresetEnv from 'postcss-preset-env'
 import {cwd} from 'process'
-import browserslistConfig from '@sanity/browserslist-config'
-import browserslist from 'browserslist'
 
 const DEFAULT_ASSET_FILE_NAME = ({name}: {name: string}) => `${name}.css`
 
