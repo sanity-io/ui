@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.13](https://github.com/sanity-io/ui/compare/v4.0.0-static.12...v4.0.0-static.13) (2025-07-31)
+
+### Bug Fixes
+
+- tweak source map url ([4f49041](https://github.com/sanity-io/ui/commit/4f490410f51d891471a9c2a5a264a7fc47f879d7))
+
 ## [4.0.0-static.12](https://github.com/sanity-io/ui/compare/v4.0.0-static.11...v4.0.0-static.12) (2025-07-31)
 
 ### Bug Fixes
