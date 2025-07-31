@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.9](https://github.com/sanity-io/ui/compare/v4.0.0-static.8...v4.0.0-static.9) (2025-07-31)
+
+### Bug Fixes
+
+- test sourcemap generation ([87dc9c2](https://github.com/sanity-io/ui/commit/87dc9c2134547d744eeffc180c1f534b7e2bc98f))
+
 ## [4.0.0-static.8](https://github.com/sanity-io/ui/compare/v4.0.0-static.7...v4.0.0-static.8) (2025-07-31)
 
 ### Bug Fixes
