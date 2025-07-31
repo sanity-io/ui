@@ -1,26 +1,27 @@
 import type {RollupPlugin} from '@sanity/pkg-utils'
 import browserslist from 'browserslist'
 import {browserslistToTargets, transform} from 'lightningcss'
+import type {OutputAsset} from 'rollup'
 
 export function optimizeCss(): RollupPlugin {
   return {
     name: 'optimize-css',
 
-    async generateBundle(_outputOptions, bundle) {
-      for (const [, assetOrChunk] of Object.entries(bundle)) {
+    async generateBundle(_outputOptions, bundle, _isWrite) {
+      for (const [fileName, assetOrChunk] of Object.entries(bundle)) {
         // find CSS assets
         if (assetOrChunk.type === 'asset') {
           const asset = assetOrChunk
-
           if (
-            asset.fileName.endsWith('.css') &&
+            fileName.endsWith('.css') &&
             // @TODO make this configurable
-            asset.fileName.endsWith('css/index.css')
+            fileName.endsWith('css/index.css')
           ) {
-            asset.source = await transformCss({
-              code: asset.source.toString(),
-              file: asset.fileName,
-            })
+            const sourceMapFileName = `${fileName}.map`
+            await transformCss(
+              asset,
+              bundle[sourceMapFileName]?.type === 'asset' ? bundle[sourceMapFileName] : undefined,
+            )
           }
         }
       }
@@ -28,10 +29,9 @@ export function optimizeCss(): RollupPlugin {
   }
 }
 
-async function transformCss(options: {code: string; file: string}) {
-  const {code: input, file} = options
-
-  const css = input
+async function transformCss(asset: OutputAsset, _sourceMapAsset: OutputAsset | undefined) {
+  const css = asset.source.toString()
+  const file = asset.fileName
 
   // const targets = browserslistToTargets(
   //   browserslist('> 0.2% and not dead and supports css-cascade-layers and supports flexbox-gap'),
@@ -47,6 +47,7 @@ async function transformCss(options: {code: string; file: string}) {
     cssModules: false,
     sourceMap: false,
     targets,
+    // projectRoot,
   })
 
   if (lightningCssResult.warnings.length) {
@@ -54,5 +55,5 @@ async function transformCss(options: {code: string; file: string}) {
     console.warn(lightningCssResult.warnings)
   }
 
-  return new TextDecoder().decode(lightningCssResult.code)
+  asset.source = new TextDecoder().decode(lightningCssResult.code)
 }
