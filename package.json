@@ -227,6 +227,9 @@
       "react": "$react",
       "react-dom": "$react-dom",
       "react-is": "$react-is"
+    },
+    "patchedDependencies": {
+      "@vanilla-extract/rollup-plugin": "patches/@vanilla-extract__rollup-plugin.patch"
     }
   },
   "esm.sh": {
