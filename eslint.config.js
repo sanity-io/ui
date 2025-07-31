@@ -39,6 +39,7 @@ export default ts.config(
         'import/no-unresolved': 'off',
         'no-console': 'error',
         'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
+        '@typescript-eslint/no-unused-vars': 'off',
       },
     },
 
