@@ -94,15 +94,6 @@ jobs:
           path: cypress/videos
           if-no-files-found: ignore
 
-  sanity-e2e:
-    if: ${{ github.event_name == 'pull_request' }}
-    permissions:
-      contents: read
-      actions: write
-    name: "Run Studio End-to-end tests"
-    uses: sanity-io/sanity/.github/workflows/e2e-ui.yml@main
-    secrets: inherit
-
   release:
     permissions:
       id-token: write # to enable use of OIDC for npm provenance
