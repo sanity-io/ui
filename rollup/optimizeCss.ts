@@ -60,6 +60,6 @@ async function transformCss(asset: OutputAsset, sourceMapAsset: OutputAsset | un
   asset.source = new TextDecoder().decode(lightningCssResult.code)
   if (sourceMapAsset && lightningCssResult.map) {
     sourceMapAsset.source = new TextDecoder().decode(lightningCssResult.map)
-    asset.source += `\n//# sourceMappingURL=${basename(sourceMapAsset.fileName)}`
+    asset.source += `\n/*# sourceMappingURL=${basename(sourceMapAsset.fileName)} */`
   }
 }
