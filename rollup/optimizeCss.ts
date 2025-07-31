@@ -1,4 +1,3 @@
-import browserslistConfig from '@sanity/browserslist-config'
 import type {RollupPlugin} from '@sanity/pkg-utils'
 import browserslist from 'browserslist'
 import {browserslistToTargets, transform} from 'lightningcss'
@@ -34,7 +33,11 @@ async function transformCss(options: {code: string; file: string}) {
 
   const css = input
 
-  const targets = browserslistToTargets(browserslist(browserslistConfig))
+  // const targets = browserslistToTargets(
+  //   browserslist('> 0.2% and not dead and supports css-cascade-layers and supports flexbox-gap'),
+  // )
+  // We're using color-mix (https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix) which is in the 2023 baseline
+  const targets = browserslistToTargets(browserslist('extends browserslist-config-baseline/2023'))
 
   // process and minify css using lightningcss
   const lightningCssResult = transform({
