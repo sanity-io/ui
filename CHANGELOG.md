@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.8](https://github.com/sanity-io/ui/compare/v4.0.0-static.7...v4.0.0-static.8) (2025-07-31)
+
+### Bug Fixes
+
+- optimize css with 2023 baseline ([5e15819](https://github.com/sanity-io/ui/commit/5e15819a2540318f98ddbcacd3fadc9bff6c25d5))
+
 ## [4.0.0-static.7](https://github.com/sanity-io/ui/compare/v4.0.0-static.6...v4.0.0-static.7) (2025-07-30)
 
 ### Bug Fixes
