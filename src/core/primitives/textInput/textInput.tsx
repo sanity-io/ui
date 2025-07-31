@@ -99,7 +99,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
     suffix,
     customValidity,
     type = 'text',
-    weight: _width, // eslint-disable-line @typescript-eslint/no-unused-vars
+    weight: _width,
     width,
     ...rest
   } = props as TextInputProps<typeof DEFAULT_TEXT_INPUT_ELEMENT>

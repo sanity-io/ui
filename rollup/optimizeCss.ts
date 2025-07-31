@@ -1,3 +1,5 @@
+import {basename} from 'node:path'
+
 import type {RollupPlugin} from '@sanity/pkg-utils'
 import browserslist from 'browserslist'
 import {browserslistToTargets, transform} from 'lightningcss'
@@ -29,15 +31,15 @@ export function optimizeCss(): RollupPlugin {
   }
 }
 
-async function transformCss(asset: OutputAsset, _sourceMapAsset: OutputAsset | undefined) {
+async function transformCss(asset: OutputAsset, sourceMapAsset: OutputAsset | undefined) {
   const css = asset.source.toString()
   const file = asset.fileName
 
-  // const targets = browserslistToTargets(
-  //   browserslist('> 0.2% and not dead and supports css-cascade-layers and supports flexbox-gap'),
-  // )
+  const targets = browserslistToTargets(
+    browserslist('> 0.2% and not dead and supports css-cascade-layers and supports flexbox-gap'),
+  )
   // We're using color-mix (https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix) which is in the 2023 baseline
-  const targets = browserslistToTargets(browserslist('extends browserslist-config-baseline/2023'))
+  // const targets = browserslistToTargets(browserslist('extends browserslist-config-baseline/2023'))
 
   // process and minify css using lightningcss
   const lightningCssResult = transform({
@@ -45,9 +47,9 @@ async function transformCss(asset: OutputAsset, _sourceMapAsset: OutputAsset | u
     code: Buffer.from(css),
     minify: true,
     cssModules: false,
-    sourceMap: false,
     targets,
-    // projectRoot,
+    sourceMap: sourceMapAsset ? true : false,
+    inputSourceMap: sourceMapAsset ? sourceMapAsset.source.toString() : undefined,
   })
 
   if (lightningCssResult.warnings.length) {
@@ -56,4 +58,8 @@ async function transformCss(asset: OutputAsset, _sourceMapAsset: OutputAsset | u
   }
 
   asset.source = new TextDecoder().decode(lightningCssResult.code)
+  if (sourceMapAsset && lightningCssResult.map) {
+    sourceMapAsset.source = new TextDecoder().decode(lightningCssResult.map)
+    asset.source += `\n//# sourceMappingURL=${basename(sourceMapAsset.fileName)}`
+  }
 }

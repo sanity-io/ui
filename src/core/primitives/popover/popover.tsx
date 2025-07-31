@@ -171,7 +171,6 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     matchReferenceWidth,
     floatingBoundary = boundaryElementContext.element,
     modal,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onActivate,
     open,
     overflow = 'hidden',

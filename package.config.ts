@@ -4,7 +4,7 @@ import path from 'path'
 import {env} from 'process'
 
 // import {cssBundle} from './rollup/cssBundle'
-// import {optimizeCss} from './rollup/optimizeCss'
+import {optimizeCss} from './rollup/optimizeCss'
 
 const isProd = env['NODE_ENV'] === 'production'
 
@@ -44,10 +44,7 @@ const config: PkgConfigOptions = {
           sourcemap: true,
         },
       }),
-      // optimizeCss(),
-      // postcss({
-      //   plugins: [postcssPresetEnv, autoprefixer, cssnano({preset: 'default'})],
-      // }),
+      optimizeCss(),
       // cssBundle({
       //   cleanAssets: isProd,
       //   assetFileName: ({name}) => `${name}/index.css`,
