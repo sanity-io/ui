@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.11](https://github.com/sanity-io/ui/compare/v4.0.0-static.10...v4.0.0-static.11) (2025-07-31)
+
+### Bug Fixes
+
+- enable minify again with sourcemaps ([6097970](https://github.com/sanity-io/ui/commit/6097970dc4269afe2e28199e2bb1393c49da665d))
+
 ## [4.0.0-static.10](https://github.com/sanity-io/ui/compare/v4.0.0-static.9...v4.0.0-static.10) (2025-07-31)
 
 ### Bug Fixes
