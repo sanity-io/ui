@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "4.0.0-static.13",
+  "version": "4.0.0-static.14",
   "keywords": [
     "react",
     "ui",
@@ -20,7 +20,9 @@
   },
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
-  "sideEffects": ["**/*.css"],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "type": "module",
   "exports": {
     ".": {

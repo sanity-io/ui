@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.14](https://github.com/sanity-io/ui/compare/v4.0.0-static.13...v4.0.0-static.14) (2025-08-01)
+
+### Bug Fixes
+
+- mark css imports as side effects ([d6d851b](https://github.com/sanity-io/ui/commit/d6d851b39535bf1dbdd109880e81a68925e801bb))
+
 ## [4.0.0-static.13](https://github.com/sanity-io/ui/compare/v4.0.0-static.12...v4.0.0-static.13) (2025-07-31)
 
 ### Bug Fixes
