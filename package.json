@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
-  "sideEffects": false,
+  "sideEffects": ["**/*.css"],
   "type": "module",
   "exports": {
     ".": {
