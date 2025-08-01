@@ -68,7 +68,7 @@ importers:
         version: 9.32.0
       '@sanity/pkg-utils':
         specifier: ^7.9.17
-        version: 7.9.17(@types/babel__core@7.20.5)(@types/node@20.19.9)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.9.2)
+        version: 7.9.19(@types/babel__core@7.20.5)(@types/node@20.19.9)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.9.2)
       '@sanity/prettier-config':
         specifier: ^2.0.1
         version: 2.0.1(prettier@3.6.2)
@@ -1952,13 +1952,13 @@ packages:
     peerDependencies:
       react: ^19.1.1
 
-  '@sanity/pkg-utils@7.9.17':
-    resolution: {integrity: sha512-LsACjm4kSZPnYpmCZTe6Eu23MxCUXX+av4zdmriVsuQhBHPrVw+sbFFep2e/3DyT3rs2Tfzvu6jrnsueAN8Mzg==}
+  '@sanity/pkg-utils@7.9.19':
+    resolution: {integrity: sha512-HsV1PV5zw5qWMLY49zsSD9lqaGtifotHKeUtSpeSZxl9BSgyNNNeE+meouwSnC5dKKNfbpMsHekQ9knjdW91Sg==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
       babel-plugin-react-compiler: '*'
-      typescript: 5.8.x
+      typescript: 5.8.x || 5.9.x
     peerDependenciesMeta:
       babel-plugin-react-compiler:
         optional: true
@@ -6631,8 +6631,8 @@ packages:
     resolution: {integrity: sha512-l0OE8wL34P4nJH/H2ffoaniAokM2qSmrtXHmlpvYr5AVVX8msAyW0l8NVJFDxlSK4u3Uh/f41cQheDVdnYijwQ==}
     hasBin: true
 
-  rolldown-plugin-dts@0.14.2:
-    resolution: {integrity: sha512-tNCMOLT46jUWuAl4OqgU/k/30CTigP/xo/RlYg8H+BjZ+kBWemKJcei4m+gW3FBOtBqP9XqNLtXk8NBfJf3goA==}
+  rolldown-plugin-dts@0.14.3:
+    resolution: {integrity: sha512-LsUPsPV2XpACe5wikxQzYBD0qg4nyxwUkLos5oF8v8qVO9jPpH6GRg2S5ZUELFry04Ab58C9Tibbi7dEbVLp2w==}
     engines: {node: '>=20.18.0'}
     peerDependencies:
       '@typescript/native-preview': '>=7.0.0-dev.20250601.1'
@@ -9569,7 +9569,7 @@ snapshots:
     dependencies:
       react: 19.1.1
 
-  '@sanity/pkg-utils@7.9.17(@types/babel__core@7.20.5)(@types/node@20.19.9)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.9.2)':
+  '@sanity/pkg-utils@7.9.19(@types/babel__core@7.20.5)(@types/node@20.19.9)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.9.2)':
     dependencies:
       '@babel/core': 7.28.0
       '@babel/preset-typescript': 7.27.1(@babel/core@7.28.0)
@@ -9605,7 +9605,7 @@ snapshots:
       recast: 0.23.11
       rimraf: 4.4.1
       rolldown: 1.0.0-beta.30
-      rolldown-plugin-dts: 0.14.2(rolldown@1.0.0-beta.30)(typescript@5.9.2)
+      rolldown-plugin-dts: 0.14.3(rolldown@1.0.0-beta.30)(typescript@5.9.2)
       rollup: 4.46.2
       rollup-plugin-esbuild: 6.2.1(esbuild@0.25.8)(rollup@4.46.2)
       rxjs: 7.8.2
@@ -15173,7 +15173,7 @@ snapshots:
     dependencies:
       glob: 10.4.5
 
-  rolldown-plugin-dts@0.14.2(rolldown@1.0.0-beta.30)(typescript@5.9.2):
+  rolldown-plugin-dts@0.14.3(rolldown@1.0.0-beta.30)(typescript@5.9.2):
     dependencies:
       '@babel/generator': 7.28.0
       '@babel/parser': 7.28.0
