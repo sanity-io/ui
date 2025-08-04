@@ -174,7 +174,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "0.0.0-experimental-edac0dde-20250723",
+    "eslint-plugin-react-hooks": "0.0.0-experimental-bdb4a96f-20250801",
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-storybook": "^0.12.0",
