@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.15](https://github.com/sanity-io/ui/compare/v4.0.0-static.14...v4.0.0-static.15) (2025-08-04)
+
+### Bug Fixes
+
+- remove cjs exports ([c44ebc1](https://github.com/sanity-io/ui/commit/c44ebc195fd9181fdb1f48b59a268d96c1f91690))
+- use vanilla-extract included in pkg-utils ([c338d80](https://github.com/sanity-io/ui/commit/c338d800b17cc727e5779c239fe8319fcc4294c7))
+
 ## [4.0.0-static.14](https://github.com/sanity-io/ui/compare/v4.0.0-static.13...v4.0.0-static.14) (2025-08-01)
 
 ### Bug Fixes
