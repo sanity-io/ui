@@ -1,5 +1,4 @@
 import {type PkgConfigOptions} from '@sanity/pkg-utils'
-import {vanillaExtractPlugin} from '@vanilla-extract/rollup-plugin'
 import path from 'path'
 import {env} from 'process'
 
@@ -18,32 +17,29 @@ const config: PkgConfigOptions = {
   },
   reactCompilerOptions: {target: '19'},
   rollup: {
-    output: {
-      assetFileNames: '[name][extname]',
+    vanillaExtract: {
+      identifiers: (options) => {
+        const {debugId, hash, filePath} = options
+
+        if (filePath === 'src/css/layers.css.ts' && debugId) {
+          return `ui-${debugId}`
+        }
+
+        if (isProd) {
+          return `ui-${hash}`
+        }
+
+        const basename = path.basename(filePath, '.css.ts')
+        const name = dashCase([basename, debugId && sanitize(debugId)].filter(Boolean).join('-'))
+
+        return `${name}-${hash}`
+      },
+      extract: {
+        name: 'css/index.css',
+        sourcemap: true,
+      },
     },
     plugins: [
-      vanillaExtractPlugin({
-        identifiers: (options) => {
-          const {debugId, hash, filePath} = options
-
-          if (filePath === 'src/css/layers.css.ts' && debugId) {
-            return `ui-${debugId}`
-          }
-
-          if (isProd) {
-            return `ui-${hash}`
-          }
-
-          const basename = path.basename(filePath, '.css.ts')
-          const name = dashCase([basename, debugId && sanitize(debugId)].filter(Boolean).join('-'))
-
-          return `${name}-${hash}`
-        },
-        extract: {
-          name: 'css/index.css',
-          sourcemap: true,
-        },
-      }),
       optimizeCss(),
       // cssBundle({
       //   cleanAssets: isProd,
