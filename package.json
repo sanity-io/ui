@@ -27,27 +27,20 @@
   "exports": {
     ".": {
       "source": "./exports/index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./css": {
       "source": "./exports/css.ts",
-      "import": "./dist/css/index.js",
-      "require": "./dist/css/index.cjs",
       "default": "./dist/css/index.js"
     },
     "./css/index.css": "./dist/css/index.css",
     "./package.json": "./package.json",
     "./theme": {
       "source": "./exports/theme.ts",
-      "import": "./dist/theme.js",
-      "require": "./dist/theme.cjs",
       "default": "./dist/theme.js"
     }
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
