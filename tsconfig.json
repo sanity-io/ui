@@ -6,7 +6,6 @@
     "./package.json",
     "./package.config.ts",
     "./prettier.config.cjs",
-    "./rollup",
     "./src",
     "./test",
     "./typings",
