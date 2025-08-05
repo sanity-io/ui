@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.16](https://github.com/sanity-io/ui/compare/v4.0.0-static.15...v4.0.0-static.16) (2025-08-05)
+
+### Bug Fixes
+
+- use pkg-utils css minifier ([2fbedca](https://github.com/sanity-io/ui/commit/2fbedcad1dea700f95751ed7e4d7f9d82427c783))
+
 ## [4.0.0-static.15](https://github.com/sanity-io/ui/compare/v4.0.0-static.14...v4.0.0-static.15) (2025-08-04)
 
 ### Bug Fixes
