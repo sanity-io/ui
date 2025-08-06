@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./exports", "./package.json", "./src", "./typings"],
+  "include": ["./exports", "./package.json", "./src"],
   "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
   "compilerOptions": {
     "jsx": "preserve",

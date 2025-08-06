@@ -6,7 +6,6 @@
     "./package.config.ts",
     "./scripts",
     "./src",
-    "./typings",
     "./workshop.config.ts",
     "./workshop.runtime.ts"
   ],
