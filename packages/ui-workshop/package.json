@@ -126,7 +126,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^7.11.0",
+    "@sanity/pkg-utils": "^7.11.1",
     "@sanity/prettier-config": "^1.0.6",
     "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^3.0.5",
@@ -147,7 +147,7 @@
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "6.0.0-rc.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -162,7 +162,7 @@
     "semantic-release": "^23.1.1",
     "styled-components": "^6.1.19",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "5.8.3",
+    "typescript": "5.9.2",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
