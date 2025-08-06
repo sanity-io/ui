@@ -33,8 +33,8 @@ importers:
         specifier: 4.0.0-static.16
         version: 4.0.0-static.16(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1)
       '@sanity/ui-workshop':
-        specifier: 3.2.0-static.1
-        version: 3.2.0-static.1(@sanity/ui@4.0.0-static.16(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1))(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.27.0)(yaml@2.8.0)
+        specifier: 3.2.0-static.2
+        version: 3.2.0-static.2(@sanity/ui@4.0.0-static.16(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1))(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.27.0)(yaml@2.8.0)
       '@types/node':
         specifier: ^24.0.3
         version: 24.0.3
@@ -1106,8 +1106,8 @@ packages:
     peerDependencies:
       semantic-release: ^22.0.12 || ^23.0.2 || ^24.0.0
 
-  '@sanity/ui-workshop@3.2.0-static.1':
-    resolution: {integrity: sha512-u4zHFH9x0BJ5+L+vyX8OOGzxudCnMqD63OJ5w1l8+LWKzpDa8ifYfu5yOr8pwiraGJuudzsny/fL3Geg6434MQ==}
+  '@sanity/ui-workshop@3.2.0-static.2':
+    resolution: {integrity: sha512-GG/vBoNHsUsJCgE5GGHZbvNjMZj58G6pHQ1/Uaav1k/DAivvpeHa7jUfz/4lwWz/W/LbQ6PmR7NiwyEwuiXW4A==}
     hasBin: true
     peerDependencies:
       '@sanity/ui': ^4.0.0-0
@@ -1251,6 +1251,9 @@ packages:
 
   '@vanilla-extract/compiler@0.3.1':
     resolution: {integrity: sha512-KZ67DZQu58dMo7Jv4PNMPG5TbMOXB68xxVYV2cRJvUdPeiOmX0FOaPgEsYBAZUgd/oLEx4IyV0AvlvsxJ1akfQ==}
+
+  '@vanilla-extract/css-utils@0.1.6':
+    resolution: {integrity: sha512-iICpaHma0s2EEnQDw/JRqudQJwYw1JERyWfIllNQplps226KVphjGb3jyGMiBK5Waw69RD3q4gulgRVQAQmKmA==}
 
   '@vanilla-extract/css@1.17.4':
     resolution: {integrity: sha512-m3g9nQDWPtL+sTFdtCGRMI1Vrp86Ay4PBYq1Bo7Bnchj5ElNtAJpOqD+zg+apthVA4fB7oVpMWNjwpa6ElDWFQ==}
@@ -5494,11 +5497,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@3.2.0-static.1(@sanity/ui@4.0.0-static.16(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1))(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.27.0)(yaml@2.8.0)':
+  '@sanity/ui-workshop@3.2.0-static.2(@sanity/ui@4.0.0-static.16(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1))(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.27.0)(yaml@2.8.0)':
     dependencies:
       '@sanity/icons': 3.7.4(react@19.1.1)
       '@sanity/ui': 4.0.0-static.16(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1)
       '@vanilla-extract/css': 1.17.4
+      '@vanilla-extract/css-utils': 0.1.6
+      '@vanilla-extract/dynamic': 2.1.5
       '@vanilla-extract/vite-plugin': 5.1.1(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.27.0)(vite@7.0.6(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.27.0)(yaml@2.8.0))(yaml@2.8.0)
       '@vitejs/plugin-react': 4.7.0(vite@7.0.6(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.27.0)(yaml@2.8.0))
       axe-core: 4.10.3
@@ -5757,6 +5762,8 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  '@vanilla-extract/css-utils@0.1.6': {}
 
   '@vanilla-extract/css@1.17.4':
     dependencies:
