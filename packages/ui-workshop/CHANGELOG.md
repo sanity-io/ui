@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.1](https://github.com/sanity-io/ui-workshop/compare/v3.3.0...v3.3.1) (2025-08-06)
+
+### Bug Fixes
+
+- workaround workshop.runtime.ts css import regression ([a57bf25](https://github.com/sanity-io/ui-workshop/commit/a57bf2568256d28f358733f8cb5b39e4d55a0b70))
+
 ## [3.3.0](https://github.com/sanity-io/ui-workshop/compare/v3.2.0...v3.3.0) (2025-08-06)
 
 ### Features
