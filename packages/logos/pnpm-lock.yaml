@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@sanity/color':
+        specifier: ^3.0.6
+        version: 3.0.6
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.8.1
@@ -17,9 +21,6 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.5.1
         version: 4.5.1(@prettier/plugin-oxc@0.0.4)(prettier@3.6.2)
-      '@sanity/color':
-        specifier: ^3.0.6
-        version: 3.0.6
       '@sanity/pkg-utils':
         specifier: ^7.11.1
         version: 7.11.1(@types/babel__core@7.20.5)(@types/node@24.2.0)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.9.2)

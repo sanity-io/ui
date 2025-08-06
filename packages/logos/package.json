@@ -76,11 +76,13 @@
     ],
     "extends": "@sanity/semantic-release-preset"
   },
+  "dependencies": {
+    "@sanity/color": "^3.0.6"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
-    "@sanity/color": "^3.0.6",
     "@sanity/pkg-utils": "^7.11.1",
     "@sanity/prettier-config": "^2.0.1",
     "@sanity/semantic-release-preset": "^4.1.8",
@@ -103,7 +105,6 @@
     "typescript": "5.9.2"
   },
   "peerDependencies": {
-    "@sanity/color": "^2.0 || ^3.0 || ^3.0.0-beta",
     "react": "^18.3 || ^19.0.0-0"
   },
   "packageManager": "pnpm@10.14.0",
