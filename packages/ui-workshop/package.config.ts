@@ -7,6 +7,12 @@ export default defineConfig({
       import: './dist/cli.js',
       runtime: 'node',
     },
+    {
+      // Working around workshop.runtime.ts files importing `defineRuntime` that points to a file that has CSS imports, which nodejs doesn't support
+      source: './exports/index.ts',
+      import: './dist/index.node.js',
+      runtime: 'node',
+    },
   ],
   extract: {
     rules: {

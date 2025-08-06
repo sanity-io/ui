@@ -27,6 +27,7 @@
   "exports": {
     ".": {
       "source": "./exports/index.ts",
+      "node": {"default": "./dist/index.node.js"},
       "default": "./dist/index.js"
     },
     "./plugin-a11y": {
