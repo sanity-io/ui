@@ -1,5 +1,4 @@
 import {type WorkshopRuntimeOptions} from '@sanity/ui-workshop/runtime'
-import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import path from 'path'
 import {mergeConfig} from 'vite'
 
@@ -9,7 +8,6 @@ const runtime: WorkshopRuntimeOptions = {
       optimizeDeps: {
         exclude: ['@sanity/ui'],
       },
-      plugins: [vanillaExtractPlugin()],
       resolve: {
         alias: {
           '@sanity/ui/css/index.css': path.resolve(__dirname, 'workshop/empty.css'),

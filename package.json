@@ -135,7 +135,7 @@
     "@sanity/pkg-utils": "^7.11.1",
     "@sanity/prettier-config": "^2.0.1",
     "@sanity/semantic-release-preset": "^5.0.0",
-    "@sanity/ui-workshop": "^3.1.2",
+    "@sanity/ui-workshop": "4.0.0-static.6",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
@@ -208,7 +208,6 @@
       "cypress"
     ],
     "overrides": {
-      "@sanity/ui-workshop": "file:registry/sanity-ui-workshop-3.0.0-local.12.tgz",
       "@types/react": "$@types/react",
       "@types/react-dom": "$@types/react-dom",
       "@types/react-is": "$@types/react-is",
