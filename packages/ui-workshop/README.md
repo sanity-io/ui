@@ -7,7 +7,7 @@ An environment for designing, reviewing, and quality-testing React components.
 npm install @sanity/ui-workshop -D
 
 # Install peer dependencies
-npm install @sanity/icons @sanity/ui react react-dom styled-components
+npm install @sanity/ui react react-dom styled-components
 ```
 
 [![npm version](https://img.shields.io/npm/v/@sanity/ui-workshop.svg?style=flat-square)](https://www.npmjs.com/package/@sanity/ui-workshop)
@@ -77,6 +77,85 @@ function TestStory() {
 
   return (
     <div>
+      <h1>This is my first story.</h1>
+      <p>Some text: {text}</p>
+      <p>A boolean: {boolean ? 'true' : 'false'}</p>
+      <p>A number: {number}</p>
+      <p>A string: {string}</p>
+      <p>An option: {option}</p>
+    </div>
+  )
+}
+```
+
+## Styling
+
+In addition to the [CSS features that `vite` supports](https://vite.dev/guide/features.html#css), you can also use [Vanilla Extract](https://vanilla-extract.style/) for styling.
+
+First install the `@vanilla-extract/css` package:
+
+```sh
+npm install @vanilla-extract/css
+```
+
+Then, add a `style.css.ts` file for your workshop:
+
+```ts
+// src/__workshop__/style.css.ts
+
+import {style} from '@vanilla-extract/css'
+
+export const container = style({
+  display: 'grid',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100%',
+  width: '100%',
+})
+```
+
+And finally, import the `container` className and use it in your workshop:
+
+```diff
+import {
+  defineScope,
+  useBoolean,
+  useNumber,
+  useSelect,
+  useString,
+  useText,
+} from '@sanity/ui-workshop'
++import {container} from './style.css'
+
+export default defineScope({
+  name: 'test',
+  title: 'Test',
+  stories: [
+    {
+      name: 'test',
+      title: 'Test',
+      component: TestStory,
+    },
+  ],
+})
+
+const options = {
+  None: '',
+  Small: 'sm',
+  Medium: 'md',
+  Large: 'lg',
+}
+
+function TestStory() {
+  const text = useText('Text', 'Hello, world')
+  const boolean = useBoolean('Boolean', true)
+  const number = useNumber('Number', 1234)
+  const string = useString('String', '...')
+  const option = useSelect('Select option', options)
+
+  return (
+-    <div>
++    <div className={container}>
       <h1>This is my first story.</h1>
       <p>Some text: {text}</p>
       <p>A boolean: {boolean ? 'true' : 'false'}</p>

@@ -6,7 +6,7 @@ export function _fileExists(file: string): boolean {
     accessSync(file)
 
     return true
-  } catch (_) {
+  } catch {
     return false
   }
 }

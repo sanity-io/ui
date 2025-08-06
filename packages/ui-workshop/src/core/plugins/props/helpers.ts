@@ -10,7 +10,7 @@ export function encodeValue(val: Record<string, unknown>): string {
 export function decodeValue(val: string): Record<string, unknown> {
   try {
     return JSON.parse(decode(val))
-  } catch (_) {
+  } catch {
     return EMPTY_RECORD
   }
 }
