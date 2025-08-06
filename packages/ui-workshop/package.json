@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-workshop",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "keywords": [
     "sanity",
     "ui",
@@ -27,7 +27,9 @@
   "exports": {
     ".": {
       "source": "./exports/index.ts",
-      "node": {"default": "./dist/index.node.js"},
+      "node": {
+        "default": "./dist/index.node.js"
+      },
       "default": "./dist/index.js"
     },
     "./plugin-a11y": {
