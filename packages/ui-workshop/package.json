@@ -21,6 +21,9 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "type": "module",
+  "imports": {
+    "#styles": "./src/core/styles.css.ts"
+  },
   "exports": {
     ".": {
       "source": "./exports/index.ts",
@@ -105,6 +108,9 @@
   },
   "dependencies": {
     "@sanity/icons": "^3.7.4",
+    "@vanilla-extract/css": "^1.17.4",
+    "@vanilla-extract/css-utils": "^0.1.6",
+    "@vanilla-extract/dynamic": "^2.1.5",
     "@vanilla-extract/vite-plugin": "^5.1.1",
     "@vitejs/plugin-react": "^4.7.0",
     "axe-core": "^4.10.3",
@@ -140,7 +146,6 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "babel-plugin-react-compiler": "19.1.0-rc.2",
-    "babel-plugin-styled-components": "^2.1.4",
     "commitizen": "^4.3.1",
     "commitlint": "^19.8.1",
     "eslint": "^8.57.1",
@@ -160,7 +165,6 @@
     "react-dom": "^19.1.1",
     "react-is": "^19.1.1",
     "semantic-release": "^23.1.1",
-    "styled-components": "^6.1.19",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.9.2",
     "vitest": "^3.2.4"
@@ -168,8 +172,7 @@
   "peerDependencies": {
     "@sanity/ui": "^3",
     "react": "^19",
-    "react-dom": "^19",
-    "styled-components": "^6.1"
+    "react-dom": "^19"
   },
   "packageManager": "pnpm@9.15.9",
   "publishConfig": {
