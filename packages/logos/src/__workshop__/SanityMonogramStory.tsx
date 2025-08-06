@@ -1,12 +1,12 @@
-import {Flex, Heading, useTheme} from '@sanity/ui'
-import {useBoolean} from '@sanity/ui-workshop'
+import {Flex, Heading} from '@sanity/ui'
+import {useBoolean, useWorkshop} from '@sanity/ui-workshop'
 import {SanityMonogram} from '../sanityMonogram'
 
 export default function SanityMonogramStory() {
   const isDefaultScheme = useBoolean('Use default', false)
-  const {dark} = useTheme().sanity.color
+  const {scheme: workshopScheme} = useWorkshop()
 
-  const scheme = isDefaultScheme ? 'default' : dark ? 'dark' : 'light'
+  const scheme = isDefaultScheme ? 'default' : workshopScheme
 
   return (
     <Flex align="center" height="fill" justify="center" padding={5} sizing="border">
