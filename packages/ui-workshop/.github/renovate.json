@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranchPatterns": ["$default", "static"],
   "extends": [
     "github>sanity-io/renovate-config",
     ":reviewer(team:ecosystem)"
