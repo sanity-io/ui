@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module'
 
-import {WorkshopConfigOptions} from '@sanity/ui-workshop'
-import {TransformOptions} from 'esbuild'
+import type {WorkshopConfigOptions} from '@sanity/ui-workshop'
+import type {TransformOptions} from 'esbuild'
 
 import {_findConfigFile} from './_findConfigFile'
 

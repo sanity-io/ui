@@ -17,4 +17,5 @@ export default defineConfig({
   babel: {reactCompiler: true, styledComponents: true},
   reactCompilerOptions: {target: '19'},
   dts: 'rolldown',
+  strictOptions: {noImplicitSideEffects: 'off'},
 })
