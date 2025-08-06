@@ -120,7 +120,7 @@
     "mkdirp": "^3.0.1",
     "module-alias": "^2.2.3",
     "npm-run-all2": "^8.0.4",
-    "oxlint": "^1.9.0",
+    "oxlint": "^1.10.0",
     "prettier": "^3.6.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
