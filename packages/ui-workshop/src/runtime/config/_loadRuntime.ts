@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module'
 
-import {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
-import {TransformOptions} from 'esbuild'
+import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
+import type {TransformOptions} from 'esbuild'
 
 import {_findRuntimeFile} from './_findRuntimeFile'
 

@@ -2,7 +2,7 @@ const ROOT_PATH = (() => {
   // Wrap in try/catch to avoid throwing exception in environments that don’t have `process.env`.
   try {
     return process.env.ROOT_PATH
-  } catch (_) {
+  } catch {
     return undefined
   }
 })()
