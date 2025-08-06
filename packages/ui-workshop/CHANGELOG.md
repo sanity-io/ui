@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.0](https://github.com/sanity-io/ui-workshop/compare/v3.2.0...v3.3.0) (2025-08-06)
+
+### Features
+
+- remove `styled-components` dependency ([#181](https://github.com/sanity-io/ui-workshop/issues/181)) ([5b426f9](https://github.com/sanity-io/ui-workshop/commit/5b426f9c3d617f9814ade4bcc160fb9167ed2edf))
+
 ## [3.2.0](https://github.com/sanity-io/ui-workshop/compare/v3.1.2...v3.2.0) (2025-08-06)
 
 ### Features
