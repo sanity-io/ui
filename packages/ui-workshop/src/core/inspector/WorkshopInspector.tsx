@@ -1,23 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Box, BoxDisplay, Card, Flex, TabPanel} from '@sanity/ui'
+import {Box, Card, Flex, TabPanel} from '@sanity/ui'
 import {ElementType, memo, useState} from 'react'
-import {styled} from 'styled-components'
+
+import {workshopInspector} from '#styles'
 
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'
 import {InspectorTab} from './types'
-
-const Root = styled(Card)`
-  overflow: hidden;
-
-  @media screen and (min-width: ${({theme}) => theme.sanity.media[1]}px) {
-    border-left: 1px solid var(--card-border-color);
-    min-width: 180px;
-    max-width: 300px;
-    overflow: auto;
-  }
-`
 
 const MemoRender = memo(function MemoRender(props: {component: ElementType; options: any}) {
   const {component: Component, options} = props
@@ -46,10 +36,12 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
   const currentTab = tabs.find((tab) => tab.id === tabId)
   const showTabs = tabs.length > 1
 
-  const display: BoxDisplay[] = expanded ? ['block'] : ['none', 'none', 'block']
-
   return (
-    <Root display={display} flex={1}>
+    <Card
+      className={workshopInspector}
+      display={expanded ? ['block'] : ['none', 'none', 'block']}
+      flex={1}
+    >
       <Flex direction="column" height="fill">
         {showTabs && <InspectorHeader currentTabId={tabId} onTabChange={setTabId} tabs={tabs} />}
 
@@ -81,6 +73,6 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
           </Box>
         )}
       </Flex>
-    </Root>
+    </Card>
   )
 })

@@ -1,18 +1,9 @@
 import {Card, Layer, Tab, TabList} from '@sanity/ui'
-import {CSSProperties, memo, useCallback, useMemo} from 'react'
-import {styled} from 'styled-components'
+import {memo, useCallback} from 'react'
+
+import {inspectorHeader, inspectorHeaderCard} from '#styles'
 
 import {InspectorTab} from './types'
-
-const MemoTab = memo(Tab)
-
-const Root = styled(Card)`
-  line-height: 0;
-
-  @media screen and (max-width: ${({theme}) => theme.sanity.media[1] - 1}px) {
-    text-align: center;
-  }
-`
 
 export const InspectorHeader = memo(function InspectorHeader(props: {
   currentTabId: string | null
@@ -21,26 +12,20 @@ export const InspectorHeader = memo(function InspectorHeader(props: {
 }) {
   const {currentTabId, onTabChange, tabs} = props
 
-  const layerStyle: CSSProperties = useMemo(() => ({flex: 'none', position: 'sticky', top: 0}), [])
-
-  const children = useMemo(
-    () =>
-      tabs.map((tab) => (
-        <InspectorTabView
-          key={tab.id}
-          onTabChange={onTabChange}
-          selected={tab.id === currentTabId}
-          tab={tab}
-        />
-      )),
-    [currentTabId, onTabChange, tabs],
-  )
-
   return (
-    <Layer style={layerStyle}>
-      <Root padding={2} shadow={1}>
-        <TabList space={1}>{children}</TabList>
-      </Root>
+    <Layer className={inspectorHeader}>
+      <Card className={inspectorHeaderCard} padding={2} shadow={1}>
+        <TabList space={1}>
+          {tabs.map((tab) => (
+            <InspectorTabView
+              key={tab.id}
+              onTabChange={onTabChange}
+              selected={tab.id === currentTabId}
+              tab={tab}
+            />
+          ))}
+        </TabList>
+      </Card>
     </Layer>
   )
 })
@@ -57,7 +42,7 @@ function InspectorTabView(props: {
   }, [onTabChange, tab])
 
   return (
-    <MemoTab
+    <Tab
       aria-controls={`${tab.id}-panel`}
       fontSize={[2, 2, 1]}
       id={tab.id}

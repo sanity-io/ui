@@ -1,7 +1,8 @@
 import {SearchIcon} from '@sanity/icons'
-import {Box, BoxDisplay, Card, Flex, Layer, TextInput} from '@sanity/ui'
+import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
 import {memo, useCallback, useMemo, useState} from 'react'
-import {styled} from 'styled-components'
+
+import {workshopNavigator} from '#styles'
 
 import {WorkshopScope, WorkshopStory} from '../config'
 import {EMPTY_ARRAY} from '../constants'
@@ -10,17 +11,6 @@ import {buildMenu} from './helpers'
 import {SearchResults} from './SearchResults'
 import {StoryTree} from './StoryTree'
 import {MenuCollection, MenuList, MenuScope} from './types'
-
-const Root = styled(Card)`
-  overflow: hidden;
-
-  @media screen and (min-width: ${({theme}) => theme.sanity.media[1]}px) {
-    border-right: 1px solid var(--card-border-color);
-    min-width: 180px;
-    max-width: 300px;
-    overflow: auto;
-  }
-`
 
 const flexNoneStyle: React.CSSProperties = {flex: 'none'}
 const lineHeightNoneStyle: React.CSSProperties = {lineHeight: 0}
@@ -102,13 +92,12 @@ const NavigatorView = memo(function NavigatorView(props: {
   const {expanded, matches, menu, onSearchQueryChange, onSearchQueryClear, onStoryClick, query} =
     props
 
-  const display: BoxDisplay[] = useMemo(
-    () => (expanded ? ['block'] : ['none', 'none', 'block']),
-    [expanded],
-  )
-
   return (
-    <Root display={display} flex={1}>
+    <Card
+      className={workshopNavigator}
+      display={expanded ? ['block'] : ['none', 'none', 'block']}
+      flex={1}
+    >
       <Flex direction="column" height="fill">
         <Layer style={flexNoneStyle}>
           <Card padding={2} shadow={1} style={lineHeightNoneStyle}>
@@ -142,6 +131,6 @@ const NavigatorView = memo(function NavigatorView(props: {
           )}
         </Card>
       </Flex>
-    </Root>
+    </Card>
   )
 })
