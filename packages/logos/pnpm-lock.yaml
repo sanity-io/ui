@@ -19,7 +19,7 @@ importers:
         specifier: ^19.8.1
         version: 19.8.1
       '@ianvs/prettier-plugin-sort-imports':
-        specifier: ^4.5.1
+        specifier: ^4.6.0
         version: 4.6.0(@prettier/plugin-oxc@0.0.4)(prettier@3.6.2)
       '@sanity/pkg-utils':
         specifier: ^7.11.1
