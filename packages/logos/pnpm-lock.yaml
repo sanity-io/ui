@@ -48,8 +48,8 @@ importers:
         specifier: 19.1.0-rc.2
         version: 19.1.0-rc.2
       commitizen:
-        specifier: ^4.3.0
-        version: 4.3.0(@types/node@24.0.3)(typescript@5.8.3)
+        specifier: ^4.3.1
+        version: 4.3.1(@types/node@24.0.3)(typescript@5.8.3)
       cz-conventional-changelog:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@24.0.3)(typescript@5.8.3)
@@ -1779,8 +1779,8 @@ packages:
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
 
-  commitizen@4.3.0:
-    resolution: {integrity: sha512-H0iNtClNEhT0fotHvGV3E9tDejDeS04sN1veIebsKYGMuGscFaswRoYJKmT3eW85eIJAs0F28bG2+a/9wCOfPw==}
+  commitizen@4.3.1:
+    resolution: {integrity: sha512-gwAPAVTy/j5YcOOebcCRIijn+mSjWJC+IYKivTu6aG8Ei/scoXgfsMRnuAk6b0GRste2J4NGxVdMN3ZpfNaVaw==}
     engines: {node: '>= 12'}
     hasBin: true
 
@@ -6434,7 +6434,7 @@ snapshots:
 
   commander@2.20.3: {}
 
-  commitizen@4.3.0(@types/node@24.0.3)(typescript@5.8.3):
+  commitizen@4.3.1(@types/node@24.0.3)(typescript@5.8.3):
     dependencies:
       cachedir: 2.3.0
       cz-conventional-changelog: 3.3.0(@types/node@24.0.3)(typescript@5.8.3)
@@ -6583,7 +6583,7 @@ snapshots:
   cz-conventional-changelog@3.3.0(@types/node@24.0.3)(typescript@5.8.3):
     dependencies:
       chalk: 2.4.2
-      commitizen: 4.3.0(@types/node@24.0.3)(typescript@5.8.3)
+      commitizen: 4.3.1(@types/node@24.0.3)(typescript@5.8.3)
       conventional-commit-types: 3.0.0
       lodash.map: 4.6.0
       longest: 2.0.1
