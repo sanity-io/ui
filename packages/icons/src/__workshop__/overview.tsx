@@ -1,6 +1,7 @@
 import {Icon, icons, SearchIcon, SpinnerIcon, type IconSymbol} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
 import {useState, useTransition} from 'react'
+import {spin} from './animation.css'
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -30,26 +31,7 @@ export default function OverviewStory() {
       <Container width={1}>
         <Box marginBottom={4}>
           <TextInput
-            icon={
-              pending ? (
-                <SpinnerIcon
-                  ref={(node) => {
-                    const animation = node!.animate(
-                      [{transform: 'rotate(0deg)'}, {transform: 'rotate(360deg)'}],
-                      {
-                        duration: 500,
-                        iterations: Infinity,
-                        easing: 'linear',
-                      },
-                    )
-
-                    return () => animation.cancel()
-                  }}
-                />
-              ) : (
-                SearchIcon
-              )
-            }
+            icon={pending ? <SpinnerIcon className={spin} /> : SearchIcon}
             onChange={(event) => {
               startTransition(() => setQuery(event.currentTarget.value))
             }}
