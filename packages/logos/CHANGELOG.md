@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/sanity-io/logos/compare/v2.2.1...v2.2.2) (2025-08-06)
+
+### Bug Fixes
+
+- make `@sanity/color` a regular dependency instead of peer ([8d8a88b](https://github.com/sanity-io/logos/commit/8d8a88b0be37ff334ff72749d46ff2af9eaaf4df))
+
 ## [2.2.1](https://github.com/sanity-io/logos/compare/v2.2.0...v2.2.1) (2025-06-20)
 
 ### Bug Fixes
