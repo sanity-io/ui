@@ -134,6 +134,16 @@ export const root: string = _style(layers.primitives, {
         [vars.color.muted.fg]: vars.color.tinted.default.border[2],
       },
     },
+
+    'a&[data-focus-ring]:focus, button&[data-focus-ring]:focus': {
+      outline: `${vars.card.focusRing.width} solid ${vars.color.focusRing}`,
+      outlineOffset: vars.card.focusRing.offset,
+    },
+
+    'a&[data-focus-ring]:focus:not(:focus-visible), button&[data-focus-ring]:focus:not(:focus-visible)':
+      {
+        outline: 'none',
+      },
   },
 })
 

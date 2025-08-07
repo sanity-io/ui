@@ -79,6 +79,10 @@ export function buildCSSTheme(options?: CSSThemeOptions): ThemeTokens {
       border: {
         width: px(theme.card.border.width),
       },
+      focusRing: {
+        offset: px(theme.card.focusRing.offset),
+        width: px(theme.card.focusRing.width),
+      },
       shadow: {
         outline: px(theme.card.shadow.outline),
       },

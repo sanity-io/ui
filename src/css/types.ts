@@ -183,6 +183,10 @@ export type CoreThemeTokens = {
     border: {
       width: string
     }
+    focusRing: {
+      offset: string
+      width: string
+    }
     shadow: {
       outline: string
     }

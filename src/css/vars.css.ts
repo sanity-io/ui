@@ -74,6 +74,10 @@ const themeTokens: CoreThemeTokens = {
     border: {
       width: '',
     },
+    focusRing: {
+      offset: '',
+      width: '',
+    },
     shadow: {
       outline: '',
     },
