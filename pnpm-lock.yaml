@@ -79,8 +79,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.7(typescript@5.9.2))
       '@sanity/ui-workshop':
-        specifier: 4.0.0-static.8
-        version: 4.0.0-static.8(@sanity/ui@)(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)
+        specifier: 4.0.0-static.9
+        version: 4.0.0-static.9(@sanity/ui@)(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
@@ -2237,8 +2237,8 @@ packages:
     peerDependencies:
       semantic-release: ^24
 
-  '@sanity/ui-workshop@4.0.0-static.8':
-    resolution: {integrity: sha512-LWl/uLByUF+ucpGg362+UZ9o+oX7P2rSD9EL/A+ThfK+1kV957e6DfNeZExrQ07cUQoAWuC3AUoWKIzTW4F9mw==}
+  '@sanity/ui-workshop@4.0.0-static.9':
+    resolution: {integrity: sha512-PMakIV9EE8JPAGprwZdeW4u35tdq2P5JpCwGR3WHZ+eAwBTJvevB1Rjm3umP+OzEHzm+eQqL/9kXWTsTIXQKww==}
     hasBin: true
     peerDependencies:
       '@sanity/ui': ^4.0.0-0
@@ -9872,7 +9872,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@4.0.0-static.8(@sanity/ui@)(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)':
+  '@sanity/ui-workshop@4.0.0-static.9(@sanity/ui@)(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)':
     dependencies:
       '@sanity/icons': 3.7.4(react@19.1.1)
       '@sanity/ui': 'link:'
