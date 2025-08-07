@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.18](https://github.com/sanity-io/ui/compare/v4.0.0-static.17...v4.0.0-static.18) (2025-08-07)
+
+### Bug Fixes
+
+- **deps:** update dependency next to v15.4.6 (static) ([#1902](https://github.com/sanity-io/ui/issues/1902)) ([3c7deac](https://github.com/sanity-io/ui/commit/3c7deac53894ec310bce01a174b19d0741fd5b56))
+
 ## [4.0.0-static.17](https://github.com/sanity-io/ui/compare/v4.0.0-static.16...v4.0.0-static.17) (2025-08-07)
 
 ### Bug Fixes
