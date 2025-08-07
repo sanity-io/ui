@@ -115,7 +115,7 @@
     "@vanilla-extract/css-utils": "^0.1.6",
     "@vanilla-extract/dynamic": "^2.1.5",
     "@vanilla-extract/vite-plugin": "^5.1.1",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.0.0",
     "axe-core": "^4.10.3",
     "cac": "^6.7.14",
     "chokidar": "^3.6.0",
