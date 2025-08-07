@@ -8,6 +8,10 @@ import {vanillaExtractIdentifiers} from './package.config'
 const runtime: WorkshopRuntimeOptions = {
   vite: (viteConfig) => {
     return mergeConfig(viteConfig, {
+      build: {
+        // Helps simulate how UI is consumed in a real app, where the `@sanity/ui/css/index.css` single asset is used
+        cssCodeSplit: false,
+      },
       optimizeDeps: {
         exclude: ['@sanity/ui'],
       },
