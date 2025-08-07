@@ -4,6 +4,7 @@ import boundaries from 'eslint-plugin-boundaries'
 import _import from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
+import reactCompiler from 'eslint-plugin-react-compiler'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
@@ -57,12 +58,20 @@ export default ts.config(
     // react-refresh
     reactRefresh.configs.vite,
 
-    // react-hooks and react-compiler
+    // react-hooks
     {
       ...reactHooks.configs.recommended,
       rules: {
         'react-hooks/exhaustive-deps': 'error', // it's `warn` by default
-        'react-hooks/react-compiler': 'error', // enable the react compiler
+      },
+    },
+    // react-compiler
+    {
+      plugins: {
+        'react-compiler': reactCompiler,
+      },
+      rules: {
+        'react-compiler/react-compiler': 'error', // enable the react compiler
       },
     },
 
@@ -85,7 +94,7 @@ export default ts.config(
     {
       files: ['**/*.stories.{js,ts,tsx}', '**/*.test.{js,ts,tsx}'],
       rules: {
-        'react-hooks/react-compiler': 'off',
+        'react-compiler/react-compiler': 'off',
       },
     },
 
