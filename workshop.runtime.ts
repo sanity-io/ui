@@ -2,6 +2,9 @@ import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 import path from 'path'
 import {mergeConfig} from 'vite'
 
+// eslint-disable-next-line boundaries/element-types
+import {vanillaExtractIdentifiers} from './package.config'
+
 const runtime: WorkshopRuntimeOptions = {
   vite: (viteConfig) => {
     return mergeConfig(viteConfig, {
@@ -19,6 +22,10 @@ const runtime: WorkshopRuntimeOptions = {
         },
       },
     })
+  },
+  vanillaExtract: {
+    identifiers: ({debugId, hash, filePath}) =>
+      vanillaExtractIdentifiers({debugId, hash, filePath}),
   },
 }
 
