@@ -47,7 +47,6 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
     __unstable_focusRing: focusRing = false,
     as = DEFAULT_CARD_ELEMENT,
     className,
-    disabled,
     pressed,
     radius = 0,
     scheme: schemeProp,
@@ -72,7 +71,8 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
         tone,
       })}
       data-checkered={checkered ? '' : undefined}
-      data-disabled={disabled ? '' : undefined}
+      // Extract the disabled prop without removing it from `...rest` so that the underlying <button> or <a> has `[disabled]` when needed
+      data-disabled={props.disabled ? '' : undefined}
       data-focus-ring={focusRing ? '' : undefined}
       data-pressed={pressed ? '' : undefined}
       data-selected={selected ? '' : undefined}
