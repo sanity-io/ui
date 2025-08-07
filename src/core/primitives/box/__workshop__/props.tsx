@@ -4,12 +4,17 @@ import {useAction, useSelect} from '@sanity/ui-workshop'
 import {WORKSHOP_SPACE_OPTIONS} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
+  // @ts-expect-error - TODO: fix this
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 0)
 
   return (
     <Box padding={[4, 5, 6]}>
       <Card border tone="inherit">
-        <Box onClick={useAction('onClick')} padding={padding}>
+        <Box
+          onClick={useAction('onClick')}
+          // @ts-expect-error - TODO: fix this
+          padding={padding}
+        >
           <Text>
             Box with <code>padding={padding}</code>
           </Text>

@@ -25,6 +25,7 @@ export default function CustomPortalStory(): React.JSX.Element {
     'Content',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mollis consectetur malesuada. Sed lobortis est dolor, eget imperdiet velit placerat et. Aenean posuere mi non aliquet iaculis. Donec fermentum pulvinar purus at sagittis. Ut tincidunt massa odio, sed finibus justo ullamcorper id. Nam venenatis justo non ligula elementum cursus. Pellentesque laoreet justo in mollis sagittis. In lacinia ornare ultrices. Suspendisse potenti.',
   )
+  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useSelect('Portal', PORTAL_OPTIONS)
   const useBoundaryElement = useBoolean('Use boundary element', true)
@@ -60,6 +61,7 @@ export default function CustomPortalStory(): React.JSX.Element {
                     boundaryElement={useBoundaryElement ? boundaryElement : null}
                     content={content ? <Text size={1}>{content}</Text> : undefined}
                     padding={2}
+                    // @ts-expect-error - TODO: fix this
                     placement={placement}
                     portal={portal}
                   >

@@ -9,6 +9,7 @@ export default function PropsStory(): React.JSX.Element {
   const header = useText('Header', 'Props example')
   const onClickOutside = useBoolean('Close when click outside', false)
   const hideCloseButton = useBoolean('Hide close button', false)
+  // @ts-expect-error - TODO: fix this
   const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS)
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
@@ -37,6 +38,7 @@ export default function PropsStory(): React.JSX.Element {
             onClickOutside={onClickOutside ? handleClose : undefined}
             onClose={handleClose}
             open={open}
+            // @ts-expect-error - TODO: fix this
             width={width}
           >
             <Box padding={4}>

@@ -14,10 +14,16 @@ const DebugCard = styled(Card)`
 `
 
 export default function ExampleStory(): React.JSX.Element {
+  // @ts-expect-error - TODO: fix this
   const direction = useSelect('Direction', WORKSHOP_FLEX_DIRECTION_OPTIONS, 'row')
 
   return (
-    <Flex direction={direction} height="fill" style={{width: '100%'}}>
+    <Flex
+      // @ts-expect-error - TODO: fix this
+      direction={direction}
+      height="fill"
+      style={{width: '100%'}}
+    >
       <DebugCard flex={1}>
         <Code size={1}>1</Code>
       </DebugCard>

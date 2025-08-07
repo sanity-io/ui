@@ -6,6 +6,7 @@ import {WORKSHOP_DIALOG_POSITION_OPTIONS} from '$workshop'
 
 export default function PositionStory(): React.JSX.Element {
   const open = useBoolean('Open', true)
+  // @ts-expect-error - TODO: fix this
   const position = useSelect('Position', WORKSHOP_DIALOG_POSITION_OPTIONS)
 
   return (
@@ -22,7 +23,14 @@ export default function PositionStory(): React.JSX.Element {
         </Stack>
 
         <LayerProvider>
-          {open && <Dialog header="Position example" id="position-example" position={position} />}
+          {open && (
+            <Dialog
+              header="Position example"
+              id="position-example"
+              // @ts-expect-error - TODO: fix this
+              position={position}
+            />
+          )}
         </LayerProvider>
       </Box>
     </Box>

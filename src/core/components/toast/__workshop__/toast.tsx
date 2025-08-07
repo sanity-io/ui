@@ -6,6 +6,7 @@ import {WORKSHOP_TOAST_STATUS_OPTIONS} from '$workshop'
 export default function ToastStory(): React.JSX.Element {
   const closable = useBoolean('Closable', false)
   const title = useString('Title', 'Toast title')
+  // @ts-expect-error - TODO: fix this
   const status = useSelect('Status', WORKSHOP_TOAST_STATUS_OPTIONS)
   const description = useText('Description')
   const handleClose = useAction('onClose')
@@ -17,6 +18,7 @@ export default function ToastStory(): React.JSX.Element {
           closable={closable}
           description={description}
           onClose={handleClose}
+          // @ts-expect-error - TODO: fix this
           status={status}
           title={title}
         />

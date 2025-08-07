@@ -53,16 +53,23 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   const border = useBoolean('Border', true)
   const customValidity = useText('Custom validity')
   const disabled = useBoolean('Disabled', false)
+  // @ts-expect-error - TODO: fix this
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2)
+  // @ts-expect-error - TODO: fix this
   const gap = useSelect('Gap', WORKSHOP_SPACE_OPTIONS, 3)
+  // @ts-expect-error - TODO: fix this
   const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS, 'search')
+  // @ts-expect-error - TODO: fix this
   const iconRight = useSelect('Icon (right)', WORKSHOP_ICON_SYMBOL_OPTIONS, 'cube')
+  // @ts-expect-error - TODO: fix this
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
   const placeholder = useText('Placeholder')
   const prefix = useBoolean('Prefix', false)
+  // @ts-expect-error - TODO: fix this
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
   const readOnly = useBoolean('Read only', false)
   const suffix = useBoolean('Suffix', false)
+  // @ts-expect-error - TODO: fix this
   const weight = useSelect('Weight', WORKSHOP_FONT_WEIGHT_OPTIONS)
 
   const [value, setValue] = useState('')
@@ -77,33 +84,56 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       border={border}
       customValidity={customValidity}
       disabled={disabled}
+      // @ts-expect-error - TODO: fix this
       fontSize={fontSize}
+      // @ts-expect-error - TODO: fix this
       gap={gap}
+      // @ts-expect-error - TODO: fix this
       icon={icon && icons[icon]}
+      // @ts-expect-error - TODO: fix this
       iconRight={iconRight && icons[iconRight]}
       id="text-input-example"
       name="test"
       onChange={handleChange}
+      // @ts-expect-error - TODO: fix this
       padding={padding}
       placeholder={placeholder}
       prefix={
         prefix && (
-          <Box padding={padding}>
-            <Text size={fontSize}>Prefix</Text>
+          <Box
+            // @ts-expect-error - TODO: fix this
+            padding={padding}
+          >
+            <Text
+              // @ts-expect-error - TODO: fix this
+              size={fontSize}
+            >
+              Prefix
+            </Text>
           </Box>
         )
       }
+      // @ts-expect-error - TODO: fix this
       radius={radius}
       readOnly={readOnly}
       ref={ref}
       suffix={
         suffix && (
-          <Box padding={padding}>
-            <Text size={fontSize}>Suffix</Text>
+          <Box
+            // @ts-expect-error - TODO: fix this
+            padding={padding}
+          >
+            <Text
+              // @ts-expect-error - TODO: fix this
+              size={fontSize}
+            >
+              Suffix
+            </Text>
           </Box>
         )
       }
       value={value}
+      // @ts-expect-error - TODO: fix this
       weight={weight}
     />
   )

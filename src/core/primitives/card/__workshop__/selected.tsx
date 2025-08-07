@@ -38,7 +38,7 @@ export default function SelectedStory(): React.JSX.Element {
   )
 }
 
-function Preview({selected}: {selected: boolean}) {
+function Preview({selected}: {selected: boolean | undefined}) {
   return (
     <Flex>
       <Box flex={1}>

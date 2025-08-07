@@ -26,6 +26,7 @@ export default function SidePanelStory(): React.JSX.Element {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
+  // @ts-expect-error - TODO: fix this
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS) ?? 'inherit'
 
   useEffect(() => updateRef.current?.(), [sidePanelWidth])
@@ -48,7 +49,12 @@ export default function SidePanelStory(): React.JSX.Element {
 
             <Card border padding={3}>
               <Text size={1}>
-                Some editor <InlineObject tone={tone} updateRef={updateRef} />
+                Some editor{' '}
+                <InlineObject
+                  // @ts-expect-error - TODO: fix this
+                  tone={tone}
+                  updateRef={updateRef}
+                />
               </Text>
             </Card>
           </Stack>

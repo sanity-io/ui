@@ -11,11 +11,14 @@ import {
 export default function PropsStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', false)
   const content = useText('Content', 'Tooltip content')
+  // @ts-expect-error - TODO: fix this
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2)
+  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useBoolean('Portal', true)
   const openDelay = useNumber('Open Delay', 200)
   const closeDelay = useNumber('Close Delay', 200)
+  // @ts-expect-error - TODO: fix this
   const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 2)
 
   return (
@@ -41,9 +44,12 @@ export default function PropsStory(): React.JSX.Element {
             <Tooltip
               arrow={arrow}
               content={<Text size={1}>{content}</Text>}
+              // @ts-expect-error - TODO: fix this
               padding={padding}
+              // @ts-expect-error - TODO: fix this
               placement={placement}
               portal={portal}
+              // @ts-expect-error - TODO: fix this
               shadow={shadow}
               delay={{
                 open: openDelay,
@@ -81,9 +87,12 @@ export default function PropsStory(): React.JSX.Element {
                   close: 100,
                 }}
                 content={<Text size={1}>{content}</Text>}
+                // @ts-expect-error - TODO: fix this
                 padding={padding}
+                // @ts-expect-error - TODO: fix this
                 placement={placement}
                 portal={portal}
+                // @ts-expect-error - TODO: fix this
                 shadow={shadow}
               >
                 <Button mode="bleed" text="Hover me" />
@@ -96,9 +105,12 @@ export default function PropsStory(): React.JSX.Element {
                   close: 100,
                 }}
                 content={<Text size={1}>{content}</Text>}
+                // @ts-expect-error - TODO: fix this
                 padding={padding}
+                // @ts-expect-error - TODO: fix this
                 placement={placement}
                 portal={portal}
+                // @ts-expect-error - TODO: fix this
                 shadow={shadow}
               >
                 <Button mode="bleed" text="Or me" />

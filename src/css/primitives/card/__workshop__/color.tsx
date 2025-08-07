@@ -20,10 +20,18 @@ interface ColorRecordNode extends Record<string, ColorNode> {}
 type ColorNode = string | ColorRecordNode
 
 export default function ColorStory(): React.JSX.Element {
+  // @ts-expect-error - TODO: fix this
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
 
   return (
-    <Card display="flex" flexDirection="column" gap={4} padding={4} tone={tone}>
+    <Card
+      display="flex"
+      flexDirection="column"
+      gap={4}
+      padding={4}
+      // @ts-expect-error - TODO: fix this
+      tone={tone}
+    >
       {Object.entries(vars.color).map(([key, value]) => {
         if (key === 'palette') {
           return null

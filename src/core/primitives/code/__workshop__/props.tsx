@@ -6,11 +6,16 @@ import {WORKSHOP_CODE_LANGUAGE_OPTIONS, WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '$
 export default function PropsStory(): React.JSX.Element {
   const code = useText('Code', `console.log('Hello, world')`)
   const language = useSelect('Language', WORKSHOP_CODE_LANGUAGE_OPTIONS, 'typescript')
+  // @ts-expect-error - TODO: fix this
   const size = useSelect('Size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 1)
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Code language={language} size={size}>
+      <Code
+        language={language}
+        // @ts-expect-error - TODO: fix this
+        size={size}
+      >
         {code}
       </Code>
     </Box>

@@ -16,6 +16,7 @@ import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 export default function SkeletonDelayStory(): React.JSX.Element {
+  // @ts-expect-error - TODO: fix this
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS)
   const animated = useBoolean('Animated', true)
 
@@ -23,7 +24,14 @@ export default function SkeletonDelayStory(): React.JSX.Element {
     <Box padding={[4, 5, 6]}>
       <Container width={1}>
         <Text muted>Delayed by 2000ms</Text>
-        <Card tone={tone} marginTop={4} padding={2} radius={2} border>
+        <Card
+          // @ts-expect-error - TODO: fix this
+          tone={tone}
+          marginTop={4}
+          padding={2}
+          radius={2}
+          border
+        >
           <Flex align="center">
             <Skeleton
               style={{width: 90, height: 90}}

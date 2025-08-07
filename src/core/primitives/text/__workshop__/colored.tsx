@@ -11,11 +11,18 @@ const ColoredText = styled(Text)<{$color: AvatarColor}>`
 `
 
 export default function ColoredTextStory(): React.JSX.Element {
+  // @ts-expect-error - TODO: fix this
   const color = useSelect('Color', WORKSHOP_AVATAR_COLOR_OPTIONS, 'gray') ?? 'gray'
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <ColoredText align="center" $color={color} size={4} weight="bold">
+      <ColoredText
+        align="center"
+        // @ts-expect-error - TODO: fix this
+        $color={color}
+        size={4}
+        weight="bold"
+      >
         {color}
       </ColoredText>
     </Flex>

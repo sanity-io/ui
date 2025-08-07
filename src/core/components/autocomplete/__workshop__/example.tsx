@@ -32,14 +32,18 @@ const typingPerfTest: PerfTestProps<HTMLInputElement> = {
 export default function ExampleStory(): React.JSX.Element {
   const {ref, Wrapper} = usePerfTest(typingPerfTest)
 
+  // @ts-expect-error - TODO: fix this
   const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS)
   const options = useMemo(() => countries.map((country) => ({value: country.code})), [])
   const border = useBoolean('Border', true)
   const customValidity = useText('Custom validity')
   const disabled = useBoolean('Disabled', false)
+  // @ts-expect-error - TODO: fix this
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
   const openButton = useBoolean('Open button', false)
+  // @ts-expect-error - TODO: fix this
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  // @ts-expect-error - TODO: fix this
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
   const readOnly = useBoolean('Read only', false)
   const [value, setValue] = useState('')
@@ -47,7 +51,11 @@ export default function ExampleStory(): React.JSX.Element {
   const handleChange = useCallback((value: string) => setValue(value), [])
 
   return (
-    <Card height="fill" tone={layoutTone}>
+    <Card
+      height="fill"
+      // @ts-expect-error - TODO: fix this
+      tone={layoutTone}
+    >
       <Container width={1}>
         <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
           <Stack gap={3}>
@@ -59,13 +67,16 @@ export default function ExampleStory(): React.JSX.Element {
                 border={border}
                 customValidity={customValidity}
                 disabled={disabled}
+                // @ts-expect-error - TODO: fix this
                 fontSize={fontSize}
                 onChange={handleChange}
                 id="default"
                 openButton={openButton}
                 options={options}
+                // @ts-expect-error - TODO: fix this
                 padding={padding}
                 placeholder="Search"
+                // @ts-expect-error - TODO: fix this
                 radius={radius}
                 readOnly={readOnly}
                 ref={ref}

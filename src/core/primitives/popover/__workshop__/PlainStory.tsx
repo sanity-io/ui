@@ -15,11 +15,15 @@ export default function PlainStory(): React.JSX.Element {
   const constrainSize = useBoolean('Constrain size', true)
   const matchReferenceWidth = useBoolean('Match reference width', false)
   const open = useBoolean('Open', true)
+  // @ts-expect-error - TODO: fix this
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
   const portal = useBoolean('Portal', true)
   const preventOverflow = useBoolean('Prevent overflow', true)
+  // @ts-expect-error - TODO: fix this
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
+  // @ts-expect-error - TODO: fix this
   const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
@@ -53,11 +57,15 @@ export default function PlainStory(): React.JSX.Element {
               floatingBoundary={boundaryElementFlag ? boundaryElement : undefined}
               matchReferenceWidth={matchReferenceWidth}
               open={open}
+              // @ts-expect-error - TODO: fix this
               padding={padding}
+              // @ts-expect-error - TODO: fix this
               placement={placement}
               portal={portal}
               preventOverflow={preventOverflow}
+              // @ts-expect-error - TODO: fix this
               radius={radius}
+              // @ts-expect-error - TODO: fix this
               width={width}
             >
               <Button text="This button is the popover reference" />

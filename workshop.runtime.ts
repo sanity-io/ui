@@ -1,4 +1,4 @@
-import {type WorkshopRuntimeOptions} from '@sanity/ui-workshop/runtime'
+import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 import path from 'path'
 import {mergeConfig} from 'vite'
 
