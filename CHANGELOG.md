@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.19](https://github.com/sanity-io/ui/compare/v4.0.0-static.18...v4.0.0-static.19) (2025-08-08)
+
+### Bug Fixes
+
+- specify required node v22 minor as well ([00fdbf9](https://github.com/sanity-io/ui/commit/00fdbf9243db280be404f1c95bbda48ad6151a93))
+
 ## [4.0.0-static.18](https://github.com/sanity-io/ui/compare/v4.0.0-static.17...v4.0.0-static.18) (2025-08-07)
 
 ### Bug Fixes
