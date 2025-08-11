@@ -130,15 +130,15 @@
     "pako": "^2.1.0",
     "rimraf": "^4.4.1",
     "segmented-property": "^4.0.0",
-    "vite": "^7.1.0"
+    "vite": "^7.1.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^7.11.4",
+    "@sanity/pkg-utils": "^7.11.5",
     "@sanity/prettier-config": "^1.0.6",
     "@sanity/semantic-release-preset": "^4.1.8",
-    "@sanity/ui": "^3.0.5",
+    "@sanity/ui": "^3.0.6",
     "@types/cpx": "^1.5.5",
     "@types/express": "^5.0.3",
     "@types/lodash": "^4.17.20",
