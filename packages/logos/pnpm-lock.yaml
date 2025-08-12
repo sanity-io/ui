@@ -31,11 +31,11 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(semantic-release@23.1.1(typescript@5.9.2))
       '@sanity/ui':
-        specifier: 4.0.0-static.18
-        version: 4.0.0-static.18(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)
+        specifier: 4.0.0-static.19
+        version: 4.0.0-static.19(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)
       '@sanity/ui-workshop':
         specifier: 4.0.0-static.11
-        version: 4.0.0-static.11(@sanity/ui@4.0.0-static.18(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1))(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)(yaml@2.8.1)
+        version: 4.0.0-static.11(@sanity/ui@4.0.0-static.19(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1))(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)(yaml@2.8.1)
       '@types/node':
         specifier: ^24.0.3
         version: 24.2.0
@@ -1137,9 +1137,9 @@ packages:
       react: ^19
       react-dom: ^19
 
-  '@sanity/ui@4.0.0-static.18':
-    resolution: {integrity: sha512-y7pH6T1UvrBWTokNqTZ6wq6faRbhglWQ4Wb77kLqucETc4moYC4d6d3dW9vJOu3q0aIxIF63/c1alxV0g+zbGg==}
-    engines: {node: '>=20.19'}
+  '@sanity/ui@4.0.0-static.19':
+    resolution: {integrity: sha512-JmbEvJC1rZXf5uGyvYxrMQ8uh8LifPq0JNZ4yhi/0zRU/2NJtFqyA4wQR7l8fcZhnWvOOFJ1C1LDO2/EWQnsMg==}
+    engines: {node: '>=20.19 >=22.12.0'}
     peerDependencies:
       react: ^19
       react-dom: ^19
@@ -5543,10 +5543,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sanity/ui-workshop@4.0.0-static.11(@sanity/ui@4.0.0-static.18(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1))(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)(yaml@2.8.1)':
+  '@sanity/ui-workshop@4.0.0-static.11(@sanity/ui@4.0.0-static.19(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1))(@types/node@24.2.0)(jiti@2.5.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(terser@5.43.1)(yaml@2.8.1)':
     dependencies:
       '@sanity/icons': 3.7.4(react@19.1.1)
-      '@sanity/ui': 4.0.0-static.18(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)
+      '@sanity/ui': 4.0.0-static.19(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)
       '@vanilla-extract/css': 1.17.4
       '@vanilla-extract/css-utils': 0.1.6
       '@vanilla-extract/dynamic': 2.1.5
@@ -5584,7 +5584,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@sanity/ui@4.0.0-static.18(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)':
+  '@sanity/ui@4.0.0-static.19(react-dom@19.1.1(react@19.1.1))(react-is@19.1.1)(react@19.1.1)':
     dependencies:
       '@floating-ui/react-dom': 2.1.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@juggle/resize-observer': 3.4.0
