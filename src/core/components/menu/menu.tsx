@@ -19,7 +19,7 @@ export type MenuOwnProps = PaddingStyleProps & {
   'gap'?: ResponsiveProp<Space>
   'onClickOutside'?: (event: MouseEvent) => void
   'onEscape'?: () => void
-  'onItemClick'?: () => void
+  'onItemClick'?: (event: React.MouseEvent<HTMLButtonElement>) => void
   'onItemSelect'?: (index: number) => void
   'originElement'?: HTMLElement | null
   'registerElement'?: (el: HTMLElement) => () => void

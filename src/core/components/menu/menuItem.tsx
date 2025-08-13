@@ -104,7 +104,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     (event: MouseEvent<HTMLButtonElement>) => {
       if (disabled) return
       if (onClick) onClick(event)
-      if (onItemClick) onItemClick()
+      if (onItemClick) onItemClick(event)
     },
     [disabled, onClick, onItemClick],
   )

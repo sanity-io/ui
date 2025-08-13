@@ -159,11 +159,16 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
     [menuElements],
   )
 
-  const handleItemClick = useCallback(() => {
-    setOpen(false)
-    if (disableRestoreFocusOnClose) return
-    if (buttonElement) buttonElement.focus()
-  }, [buttonElement, disableRestoreFocusOnClose])
+  const handleItemClick = useCallback(
+    (e: ReactMouseEvent<HTMLButtonElement>) => {
+      if (e.defaultPrevented) return
+
+      setOpen(false)
+      if (disableRestoreFocusOnClose) return
+      if (buttonElement) buttonElement.focus()
+    },
+    [buttonElement, disableRestoreFocusOnClose],
+  )
 
   const registerElement = useCallback((el: HTMLElement) => {
     setChildMenuElements((els) => els.concat([el]))
