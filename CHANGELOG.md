@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.20](https://github.com/sanity-io/ui/compare/v4.0.0-static.19...v4.0.0-static.20) (2025-08-13)
+
+### Features
+
+- **menuItem:** allow the ability to prevent default behaviour ([#1941](https://github.com/sanity-io/ui/issues/1941)) ([3696ac3](https://github.com/sanity-io/ui/commit/3696ac3c93165b75ea8fc5fd607abc03ba6a486d))
+
+### Bug Fixes
+
+- **menuItem:** fix typecheck ([c73c23f](https://github.com/sanity-io/ui/commit/c73c23f54c5704be9218afcca385b2332d835eb8))
+
 ## [4.0.0-static.19](https://github.com/sanity-io/ui/compare/v4.0.0-static.18...v4.0.0-static.19) (2025-08-08)
 
 ### Bug Fixes
