@@ -200,7 +200,7 @@
     "styled-components": "^6.1.19",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.9.2",
-    "typescript-eslint": "^8.39.0",
+    "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
     "vite-tsconfig-paths": "^5.1.4"
   },
