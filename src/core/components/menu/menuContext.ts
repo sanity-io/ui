@@ -9,7 +9,7 @@ export interface MenuContextValue {
   mount: (element: HTMLElement | null, selected?: boolean) => () => void
   onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
-  onItemClick?: () => void
+  onItemClick?: (event: ReactMouseEvent<HTMLButtonElement>) => void
   onItemMouseEnter?: (event: ReactMouseEvent<HTMLElement>) => void
   onItemMouseLeave?: (event: ReactMouseEvent<HTMLElement>) => void
   registerElement?: (el: HTMLElement) => () => void
