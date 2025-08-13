@@ -127,10 +127,13 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
     [onClick],
   )
 
-  const handleChildItemClick = useCallback(() => {
-    setOpen(false)
-    onItemClick?.()
-  }, [onItemClick])
+  const handleChildItemClick = useCallback(
+    (e: MouseEvent<HTMLButtonElement>) => {
+      setOpen(false)
+      onItemClick?.(e)
+    },
+    [onItemClick],
+  )
 
   const handleMenuMouseEnter = useCallback(() => setWithinMenu(true), [])
 
