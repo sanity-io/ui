@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.21](https://github.com/sanity-io/ui/compare/v4.0.0-static.20...v4.0.0-static.21) (2025-08-14)
+
+### Bug Fixes
+
+- allow v20 in node engines ([5e98b55](https://github.com/sanity-io/ui/commit/5e98b559c77b97e122395896fb04cded2bdb4107))
+
 ## [4.0.0-static.20](https://github.com/sanity-io/ui/compare/v4.0.0-static.19...v4.0.0-static.20) (2025-08-13)
 
 ### Features
