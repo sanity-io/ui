@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.7](https://github.com/sanity-io/ui/compare/v3.0.6...v3.0.7) (2025-08-14)
+
+### Bug Fixes
+
+- allow v20 in node engines ([7a0d198](https://github.com/sanity-io/ui/commit/7a0d198b9f33c556f75df0b2bf3c28c330efd346))
+
 ## [3.0.6](https://github.com/sanity-io/ui/compare/v3.0.5...v3.0.6) (2025-08-08)
 
 ### Bug Fixes
