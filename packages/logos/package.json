@@ -86,7 +86,7 @@
     "@sanity/pkg-utils": "^7.11.7",
     "@sanity/prettier-config": "^2.0.1",
     "@sanity/semantic-release-preset": "^4.1.8",
-    "@sanity/ui": "4.0.0-static.19",
+    "@sanity/ui": "4.0.0-static.21",
     "@sanity/ui-workshop": "4.0.0-static.11",
     "@types/node": "^24.0.3",
     "@types/react": "^19.1.10",
