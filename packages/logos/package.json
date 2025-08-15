@@ -83,7 +83,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.6.1",
-    "@sanity/pkg-utils": "^7.11.7",
+    "@sanity/pkg-utils": "^7.11.9",
     "@sanity/prettier-config": "^2.0.1",
     "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "4.0.0-static.21",
