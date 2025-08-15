@@ -5274,8 +5274,8 @@ packages:
   jsbn@0.1.1:
     resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
 
-  jsdoc-type-pratt-parser@4.1.0:
-    resolution: {integrity: sha512-Hicd6JK5Njt2QB6XYFS7ok9e37O8AYk3jTcppG4YVQnYjOemymvTcmc7OWsmq/Qqj5TdRFO5/x/tIPmBeRtGHg==}
+  jsdoc-type-pratt-parser@4.8.0:
+    resolution: {integrity: sha512-iZ8Bdb84lWRuGHamRXFyML07r21pcwBrLkHEuHgEY5UbCouBwv7ECknDRKzsQIXMiqpPymqtIf8TC/shYKB5rw==}
     engines: {node: '>=12.0.0'}
 
   jsdom@26.1.0:
@@ -10159,7 +10159,7 @@ snapshots:
       browser-assert: 1.2.1
       esbuild: 0.25.9
       esbuild-register: 3.6.0(esbuild@0.25.9)
-      jsdoc-type-pratt-parser: 4.1.0
+      jsdoc-type-pratt-parser: 4.8.0
       process: 0.11.10
       recast: 0.23.11
       semver: 7.7.2
@@ -13919,7 +13919,7 @@ snapshots:
 
   jsbn@0.1.1: {}
 
-  jsdoc-type-pratt-parser@4.1.0: {}
+  jsdoc-type-pratt-parser@4.8.0: {}
 
   jsdom@26.1.0:
     dependencies:
