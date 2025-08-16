@@ -164,7 +164,7 @@
     "babel-plugin-react-compiler": "19.1.0-rc.2",
     "babel-plugin-styled-components": "^2.1.4",
     "commitizen": "^4.3.1",
-    "cypress": "^13.17.0",
+    "cypress": "^14.5.4",
     "cypress-real-events": "^1.14.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.33.0",
