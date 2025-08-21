@@ -43,7 +43,7 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
     | 'onBlurCapture'
   >
   padding?: ResponsiveProp<Space>
-  popover?: Omit<PopoverProps, 'content' | 'open'>
+  popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
   text?: ReactNode
   tone?: ElementTone
 }

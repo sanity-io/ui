@@ -29,7 +29,7 @@ export type MenuButtonProps = {
   menu?: ReactElement
   onClose?: () => void
   onOpen?: () => void
-  popover?: Omit<PopoverProps, 'content' | 'open'>
+  popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
 
   ref?: ForwardedRef<HTMLButtonElement | null>
 }
