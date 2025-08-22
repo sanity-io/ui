@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.22](https://github.com/sanity-io/ui/compare/v4.0.0-static.21...v4.0.0-static.22) (2025-08-22)
+
+### Bug Fixes
+
+- narrow down `popover` property type ([522fc50](https://github.com/sanity-io/ui/commit/522fc50c8f3a2980db2f3883f641db67739cff1c))
+
 ## [4.0.0-static.21](https://github.com/sanity-io/ui/compare/v4.0.0-static.20...v4.0.0-static.21) (2025-08-14)
 
 ### Bug Fixes
