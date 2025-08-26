@@ -132,7 +132,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.33.0",
-    "@sanity/pkg-utils": "^7.11.8",
+    "@sanity/pkg-utils": "^8.1.0",
     "@sanity/prettier-config": "^2.0.1",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "^3.3.2",
