@@ -225,7 +225,8 @@
       "conventional-changelog-conventionalcommits": ">= 8.0.0",
       "react": "$react",
       "react-dom": "$react-dom",
-      "react-is": "$react-is"
+      "react-is": "$react-is",
+      "styled-components": "npm:@sanity/styled-components@6.1.18-22"
     }
   },
   "esm.sh": {
