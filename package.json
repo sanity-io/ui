@@ -160,7 +160,7 @@
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@types/react-is": "^19.0.0",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^5.0.1",
     "babel-plugin-react-compiler": "19.1.0-rc.2",
     "babel-plugin-styled-components": "^2.1.4",
     "commitizen": "^4.3.1",
