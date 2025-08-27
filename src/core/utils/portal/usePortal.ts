@@ -1,7 +1,7 @@
 import {useContext} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
-import {PortalContext} from './portalContext'
+import {PortalContext} from './PortalContext'
 import type {PortalContextValue} from './types'
 
 /** @public */

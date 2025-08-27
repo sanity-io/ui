@@ -1,6 +1,6 @@
 import {type ReactNode, useMemo} from 'react'
 
-import {BoundaryElementContext} from './boundaryElementContext'
+import {BoundaryElementContext} from './BoundaryElementContext'
 import type {BoundaryElementContextValue} from './types'
 
 /** @public */

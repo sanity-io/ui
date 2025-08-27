@@ -1,6 +1,6 @@
 import {Component, type ErrorInfo, type PropsWithChildren, type ReactNode} from 'react'
 
-import {Code} from '../primitives/code/code'
+import {Code} from '../primitives/code/Code'
 
 /**
  * DO NOT USE IN PRODUCTION

@@ -1,7 +1,7 @@
 import type {ResponsiveProp} from '@sanity/ui/css'
 import {type ReactNode, useMemo} from 'react'
 
-import {DialogContext, type DialogContextValue} from './dialogContext'
+import {DialogContext, type DialogContextValue} from './DialogContext'
 import type {DialogPosition} from './types'
 
 /**

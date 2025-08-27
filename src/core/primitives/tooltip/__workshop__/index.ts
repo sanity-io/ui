@@ -8,22 +8,22 @@ const scope: WorkshopScope = {
     {
       name: 'props',
       title: 'Props',
-      component: lazy(() => import('./props')),
+      component: lazy(() => import('./Props')),
     },
     {
       name: 'resizableBoundary',
       title: 'Resizable Boundary',
-      component: lazy(() => import('./resizableBoundary')),
+      component: lazy(() => import('./ResizableBoundary')),
     },
     {
       name: 'overflowBoundary',
       title: 'Overflowing Boundary',
-      component: lazy(() => import('./overflowingBoundary')),
+      component: lazy(() => import('./OverflowingBoundary')),
     },
     {
       name: 'customPortalStory',
       title: 'Custom Portal',
-      component: lazy(() => import('./customPortal')),
+      component: lazy(() => import('./CustomPortal')),
     },
   ],
 }

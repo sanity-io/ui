@@ -1,4 +1,4 @@
-import {Box, type BoxOwnProps} from '../../primitives/box/box'
+import {Box, type BoxOwnProps} from '../../primitives/box/Box'
 import type {ComponentType, Props} from '../../types'
 
 /** @public */

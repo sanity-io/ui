@@ -8,22 +8,22 @@ const scope: WorkshopScope = {
     {
       name: 'window-scroll',
       title: 'Window scroll',
-      component: lazy(() => import('./windowScrolll')),
+      component: lazy(() => import('./WindowScrolll')),
     },
     {
       name: 'element-scroll',
       title: 'Element scroll',
-      component: lazy(() => import('./elementScroll')),
+      component: lazy(() => import('./ElementScroll')),
     },
     {
       name: 'infinite-list',
       title: 'Infinite list',
-      component: lazy(() => import('./infiniteList')),
+      component: lazy(() => import('./InfiniteList')),
     },
     {
       name: 'changing-props',
       title: 'Changing props',
-      component: lazy(() => import('./changingProps')),
+      component: lazy(() => import('./ChangingProps')),
     },
   ],
 }

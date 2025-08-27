@@ -1,4 +1,4 @@
-import type {ButtonProps} from '../../primitives/button/button'
+import type {ButtonProps} from '../../primitives/button/Button'
 
 /** @public */
 export type AutocompleteOpenButtonProps = Omit<ButtonProps<'button'>, 'as'>

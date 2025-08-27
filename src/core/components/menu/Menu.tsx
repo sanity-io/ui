@@ -4,11 +4,11 @@ import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'reac
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
-import {Box} from '../../primitives/box/box'
+import {Box} from '../../primitives/box/Box'
 import {useLayer} from '../../primitives/layer/useLayer'
-import {Stack} from '../../primitives/stack/stack'
+import {Stack} from '../../primitives/stack/Stack'
 import type {ComponentType, Props} from '../../types'
-import {MenuContext, type MenuContextValue} from './menuContext'
+import {MenuContext, type MenuContextValue} from './MenuContext'
 import {useMenuController} from './useMenuController'
 
 /** @public */

@@ -2,7 +2,7 @@ import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '$test/utils'
 
-import {PortalContext} from './portalContext'
+import {PortalContext} from './PortalContext'
 import type {PortalContextValue} from './types'
 import {usePortal} from './usePortal'
 

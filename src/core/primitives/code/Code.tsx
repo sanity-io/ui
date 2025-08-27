@@ -4,7 +4,7 @@ import {lazy, Suspense} from 'react'
 
 import type {ComponentType, Props} from '../../types'
 
-const LazyRefractor = lazy(() => import('./refractor'))
+const LazyRefractor = lazy(() => import('./Refractor'))
 
 /** @public */
 export const DEFAULT_CODE_ELEMENT = 'pre'

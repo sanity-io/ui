@@ -4,7 +4,7 @@ import {lazy} from 'react'
 const scope: WorkshopScope = {
   name: 'primitives/kbd',
   title: 'KBD',
-  stories: [{name: 'plain', title: 'Plain', component: lazy(() => import('./plain'))}],
+  stories: [{name: 'plain', title: 'Plain', component: lazy(() => import('./Plain'))}],
 }
 
 export default scope

@@ -12,7 +12,7 @@ import {
 
 import {_isScrollable} from '../../helpers/scroll'
 import {_ResizeObserver} from '../../observers/resize'
-import {Box} from '../../primitives/box/box'
+import {Box} from '../../primitives/box/Box'
 import type {ComponentType, Props} from '../../types'
 
 /** @beta */

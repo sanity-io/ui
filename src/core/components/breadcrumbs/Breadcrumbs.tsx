@@ -11,12 +11,12 @@ import {
 } from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
-import {Box} from '../../primitives/box/box'
-import {Button, type ButtonProps} from '../../primitives/button/button'
-import {Flex} from '../../primitives/flex/flex'
-import {Popover} from '../../primitives/popover/popover'
-import {Stack} from '../../primitives/stack/stack'
-import {Text} from '../../primitives/text/text'
+import {Box} from '../../primitives/box/Box'
+import {Button, type ButtonProps} from '../../primitives/button/Button'
+import {Flex} from '../../primitives/flex/Flex'
+import {Popover} from '../../primitives/popover/Popover'
+import {Stack} from '../../primitives/stack/Stack'
+import {Text} from '../../primitives/text/Text'
 import type {ComponentType, Props} from '../../types'
 
 /** @beta */

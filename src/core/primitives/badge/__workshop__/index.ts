@@ -8,12 +8,12 @@ const scope: WorkshopScope = {
     {
       name: 'props',
       title: 'Props',
-      component: lazy(() => import('./props')),
+      component: lazy(() => import('./Props')),
     },
     {
       name: 'tones',
       title: 'Tones',
-      component: lazy(() => import('./tones')),
+      component: lazy(() => import('./Tones')),
     },
   ],
 }

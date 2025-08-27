@@ -8,14 +8,14 @@ const scope: WorkshopScope = {
     {
       name: 'basic',
       title: 'Basic',
-      component: lazy(() => import('./basic')),
-      // options: {perfTests: () => import('./basic.perf')},
+      component: lazy(() => import('./Basic')),
+      // options: {perfTests: () => import('./Basic.perf')},
     },
     {
       name: 'tab',
       title: 'Tab',
-      component: lazy(() => import('./tabFromElement')),
-      // options: {perfTests: () => import('./basic.perf')},
+      component: lazy(() => import('./TabFromElement')),
+      // options: {perfTests: () => import('./Basic.perf')},
     },
   ],
 }

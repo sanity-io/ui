@@ -1,7 +1,7 @@
 import {useContext} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
-import {ToastContext} from './toastContext'
+import {ToastContext} from './ToastContext'
 import type {ToastContextValue} from './types'
 
 /** @public */

@@ -8,7 +8,7 @@ const scope: WorkshopScope = {
     {
       name: 'custom-media',
       title: 'Custom media',
-      component: lazy(() => import('./customMedia')),
+      component: lazy(() => import('./CustomMedia')),
     },
   ],
 }

@@ -8,57 +8,57 @@ const scope: WorkshopScope = {
     {
       name: 'props',
       title: 'Props',
-      component: lazy(() => import('./props')),
+      component: lazy(() => import('./Props')),
     },
     {
       name: 'styled-1',
       title: 'Styled #1',
-      component: lazy(() => import('./styled1')),
+      component: lazy(() => import('./Styled1')),
     },
     {
       name: 'styled-2',
       title: 'Styled #2',
-      component: lazy(() => import('./styled2')),
+      component: lazy(() => import('./Styled2')),
     },
     {
       name: 'stacked',
       title: 'Stacked',
-      component: lazy(() => import('./stacked')),
+      component: lazy(() => import('./Stacked')),
     },
     {
       name: 'custom',
       title: 'Custom',
-      component: lazy(() => import('./custom')),
+      component: lazy(() => import('./Custom')),
     },
     {
       name: 'mixed-children',
       title: 'Mixed children',
-      component: lazy(() => import('./mixedChildren')),
+      component: lazy(() => import('./MixedChildren')),
     },
     {
       name: 'upload-button',
       title: 'Upload button',
-      component: lazy(() => import('./uploadButton')),
+      component: lazy(() => import('./UploadButton')),
     },
     {
       name: 'sanity-upload-button-workaround',
       title: 'SanityUploadButtonWorkaroundStory',
-      component: lazy(() => import('./sanityUploadButton')),
+      component: lazy(() => import('./SanityUploadButton')),
     },
     {
       name: 'custom-icons',
       title: 'Custom icons',
-      component: lazy(() => import('./customIcons')),
+      component: lazy(() => import('./CustomIcons')),
     },
     {
       name: 'disabled',
       title: 'Disabled',
-      component: lazy(() => import('./disabled')),
+      component: lazy(() => import('./Disabled')),
     },
     {
       name: 'text-overflow',
       title: 'Text overflow',
-      component: lazy(() => import('./textOverflow')),
+      component: lazy(() => import('./TextOverflow')),
     },
   ],
 }

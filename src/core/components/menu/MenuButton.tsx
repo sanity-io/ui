@@ -13,10 +13,10 @@ import {
   useState,
 } from 'react'
 
-import type {ButtonProps} from '../../primitives/button/button'
-import {Popover, type PopoverProps} from '../../primitives/popover/popover'
+import type {ButtonProps} from '../../primitives/button/Button'
+import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
 import type {Props} from '../../types'
-import type {MenuProps} from './menu'
+import type {MenuProps} from './Menu'
 
 /** @public */
 export type MenuButtonProps = {

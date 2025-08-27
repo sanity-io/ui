@@ -2,7 +2,7 @@ import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '$test/utils'
 
-import {BoundaryElementContext} from './boundaryElementContext'
+import {BoundaryElementContext} from './BoundaryElementContext'
 import type {BoundaryElementContextValue} from './types'
 import {useBoundaryElement} from './useBoundaryElement'
 

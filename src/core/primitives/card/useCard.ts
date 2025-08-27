@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 
-import {CardContext} from './cardContext'
+import {CardContext} from './CardContext'
 import type {CardContextValue} from './types'
 
 /** @public */

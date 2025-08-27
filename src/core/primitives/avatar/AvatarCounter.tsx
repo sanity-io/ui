@@ -4,8 +4,8 @@ import {useMemo} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/box'
-import {Label} from '../label/label'
+import {Box} from '../box/Box'
+import {Label} from '../label/Label'
 
 /** @public */
 export const DEFAULT_AVATAR_COUNTER_ELEMENT = 'span'

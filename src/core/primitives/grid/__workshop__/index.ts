@@ -5,7 +5,7 @@ const scope: WorkshopScope = {
   name: 'primitives/grid',
   title: 'Grid',
   stories: [
-    {name: 'responsive', title: 'Responsive', component: lazy(() => import('./responsive'))},
+    {name: 'responsive', title: 'Responsive', component: lazy(() => import('./Responsive'))},
   ],
 }
 

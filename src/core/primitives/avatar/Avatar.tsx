@@ -11,8 +11,8 @@ import {useCallback, useEffect, useMemo, useState} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/box'
-import {Label} from '../label/label'
+import {Box} from '../box/Box'
+import {Label} from '../label/Label'
 import type {AvatarPosition} from './types'
 
 /** @public */

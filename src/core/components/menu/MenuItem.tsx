@@ -19,12 +19,12 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import {Box} from '../../primitives/box/box'
-import {Flex} from '../../primitives/flex/flex'
-import {Selectable} from '../../primitives/selectable/selectable'
-import {Text} from '../../primitives/text/text'
+import {Box} from '../../primitives/box/Box'
+import {Flex} from '../../primitives/flex/Flex'
+import {Selectable} from '../../primitives/selectable/Selectable'
+import {Text} from '../../primitives/text/Text'
 import type {ComponentType, Props} from '../../types'
-import {Hotkeys} from '../hotkeys/hotkeys'
+import {Hotkeys} from '../hotkeys/Hotkeys'
 import {useMenu} from './useMenu'
 
 /** @public */
