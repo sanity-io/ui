@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.8](https://github.com/sanity-io/ui/compare/v3.0.7...v3.0.8) (2025-08-27)
+
+### Bug Fixes
+
+- **deps:** update dependency @floating-ui/react-dom to ^2.1.6 (main) ([#1985](https://github.com/sanity-io/ui/issues/1985)) ([ec2bb11](https://github.com/sanity-io/ui/commit/ec2bb11b3f62d0bdbeffbfda6533422f24c1c014))
+
 ## [3.0.7](https://github.com/sanity-io/ui/compare/v3.0.6...v3.0.7) (2025-08-14)
 
 ### Bug Fixes
