@@ -3,7 +3,7 @@ import {axe} from 'vitest-axe'
 
 import {render} from '$test/utils'
 
-import {Badge} from './badge'
+import {Badge} from './Badge'
 
 describe('atoms/badge', () => {
   it('should have no violations (axe)', async () => {

@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 
-import {TooltipDelayGroupContext} from './tooltipDelayGroupContext'
+import {TooltipDelayGroupContext} from './TooltipDelayGroupContext'
 import type {TooltipDelayGroupContextValue} from './types'
 
 /**

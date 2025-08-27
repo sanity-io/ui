@@ -8,17 +8,17 @@ const scope: WorkshopScope = {
     {
       name: 'nested',
       title: 'Nested',
-      component: lazy(() => import('./nested')),
+      component: lazy(() => import('./Nested')),
     },
     {
       name: 'multiple-roots',
       title: 'Multiple roots',
-      component: lazy(() => import('./multipleRoots')),
+      component: lazy(() => import('./MultipleRoots')),
     },
     {
       name: 'responsive-z-offset',
       title: 'Responsive z-offset',
-      component: lazy(() => import('./responsiveZOffset')),
+      component: lazy(() => import('./ResponsiveZOffset')),
     },
   ],
 }

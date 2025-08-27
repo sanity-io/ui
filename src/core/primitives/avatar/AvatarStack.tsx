@@ -4,9 +4,9 @@ import {Children, cloneElement, Fragment, isValidElement, type ReactElement} fro
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import type {ComponentType, Props} from '../../types'
-import {Box, type BoxOwnProps} from '../box/box'
-import type {AvatarProps} from './avatar'
-import {AvatarCounter} from './avatarCounter'
+import {Box, type BoxOwnProps} from '../box/Box'
+import type {AvatarProps} from './Avatar'
+import {AvatarCounter} from './AvatarCounter'
 
 /** @public */
 export const DEFAULT_AVATAR_STACK_ELEMENT = 'span'

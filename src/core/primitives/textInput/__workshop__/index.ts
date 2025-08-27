@@ -8,37 +8,37 @@ const scope: WorkshopScope = {
     {
       name: 'plain',
       title: 'Plain',
-      component: lazy(() => import('./plain')),
+      component: lazy(() => import('./Plain')),
     },
     {
       name: 'custom-validity',
       title: 'Custom validity',
-      component: lazy(() => import('./customValidity')),
+      component: lazy(() => import('./CustomValidity')),
     },
     {
       name: 'typed',
       title: 'Typed',
-      component: lazy(() => import('./typed')),
+      component: lazy(() => import('./Typed')),
     },
     {
       name: 'tones',
       title: 'Tones',
-      component: lazy(() => import('./tones')),
+      component: lazy(() => import('./Tones')),
     },
     {
       name: 'clear-button',
       title: 'Clear button',
-      component: lazy(() => import('./clearButton')),
+      component: lazy(() => import('./ClearButton')),
     },
     {
       name: 'read-only',
       title: 'Read only',
-      component: lazy(() => import('./readOnly')),
+      component: lazy(() => import('./ReadOnly')),
     },
     {
       name: 'states',
       title: 'States',
-      component: lazy(() => import('./states')),
+      component: lazy(() => import('./States')),
     },
   ],
 }

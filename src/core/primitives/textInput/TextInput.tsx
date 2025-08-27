@@ -27,9 +27,9 @@ import {useCustomValidity} from '../../hooks/useCustomValidity'
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {isRecord} from '../../lib/isRecord'
 import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/box'
-import {Button, type ButtonProps} from '../button/button'
-import {Text} from '../text/text'
+import {Box} from '../box/Box'
+import {Button, type ButtonProps} from '../button/Button'
+import {Text} from '../text/Text'
 
 /** @public */
 export const DEFAULT_TEXT_INPUT_ELEMENT = 'input'

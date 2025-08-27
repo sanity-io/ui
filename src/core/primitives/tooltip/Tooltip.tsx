@@ -37,18 +37,19 @@ import {origin} from '../../middleware/origin'
 import type {ComponentType, Delay, Placement, Props} from '../../types'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
-import {Portal} from '../../utils/portal/portal'
+import {Portal} from '../../utils/portal/Portal'
 import {usePortal} from '../../utils/portal/usePortal'
-import {CardProvider} from '../card/cardProvider'
+import {CardProvider} from '../card/CardProvider'
 import {useCard} from '../card/useCard'
-import type {LayerOwnProps} from '../layer/layer'
+import type {LayerOwnProps} from '../layer/Layer'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
-import {useTooltipDelayGroup} from './tooltipDelayGroup'
-import {TooltipLayer} from './tooltipLayer'
+import {useTooltipDelayGroup} from './tooltipDelayGroup/useTooltipDelayGroup'
+// import {useTooltipDelayGroup} from './TooltipDelayGroup'
+import {TooltipLayer} from './TooltipLayer'
 
 /** @public */
 export const DEFAULT_TOOLTIP_ELEMENT = 'div'

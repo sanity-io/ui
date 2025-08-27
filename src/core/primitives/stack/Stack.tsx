@@ -1,7 +1,7 @@
 import {stack} from '@sanity/ui/css'
 
 import type {Props} from '../../types'
-import {Box, type BoxElementType, type BoxOwnProps} from '../box/box'
+import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
 
 /** @public */
 export const DEFAULT_STACK_ELEMENT = 'div'

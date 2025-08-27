@@ -1,7 +1,7 @@
 import {useContext} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
-import {BoundaryElementContext} from './boundaryElementContext'
+import {BoundaryElementContext} from './BoundaryElementContext'
 import type {BoundaryElementContextValue} from './types'
 
 const DEFAULT_VALUE: BoundaryElementContextValue = {

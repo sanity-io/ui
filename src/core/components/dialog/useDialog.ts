@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 
-import {DialogContext, type DialogContextValue} from './dialogContext'
+import {DialogContext, type DialogContextValue} from './DialogContext'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

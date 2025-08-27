@@ -15,14 +15,14 @@ import {
   useRef,
 } from 'react'
 
-import {Box, type BoxProps} from '../../primitives/box/box'
-import type {CardOwnProps} from '../../primitives/card/card'
-import {Flex} from '../../primitives/flex/flex'
-import {Selectable, type SelectableElementType} from '../../primitives/selectable/selectable'
-import {Text} from '../../primitives/text/text'
+import {Box, type BoxProps} from '../../primitives/box/Box'
+import type {CardOwnProps} from '../../primitives/card/Card'
+import {Flex} from '../../primitives/flex/Flex'
+import {Selectable, type SelectableElementType} from '../../primitives/selectable/Selectable'
+import {Text} from '../../primitives/text/Text'
 import type {ComponentType, Props} from '../../types'
-import {TreeContext} from './treeContext'
-import {TreeGroup} from './treeGroup'
+import {TreeContext} from './TreeContext'
+import {TreeGroup} from './TreeGroup'
 import {useTree} from './useTree'
 
 /** @beta */

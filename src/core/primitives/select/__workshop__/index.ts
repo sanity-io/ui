@@ -5,8 +5,8 @@ const scope: WorkshopScope = {
   name: 'primitives/select',
   title: 'Select',
   stories: [
-    {name: 'plain', title: 'Plain', component: lazy(() => import('./plain'))},
-    {name: 'read-only', title: 'Read-only', component: lazy(() => import('./readOnly'))},
+    {name: 'plain', title: 'Plain', component: lazy(() => import('./Plain'))},
+    {name: 'read-only', title: 'Read-only', component: lazy(() => import('./ReadOnly'))},
   ],
 }
 

@@ -2,8 +2,8 @@ import {type ResponsiveProp, spinner} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 
 import type {ComponentType, Props} from '../../types'
-import {Text} from '../text/text'
-import {AnimatedSpinnerIcon} from './animatedSpinnerIcon'
+import {Text} from '../text/Text'
+import {AnimatedSpinnerIcon} from './AnimatedSpinnerIcon'
 
 /** @public */
 export const DEFAULT_SPINNER_ELEMENT = 'div'

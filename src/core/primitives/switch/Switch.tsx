@@ -8,7 +8,7 @@ import {
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
 import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/box'
+import {Box} from '../box/Box'
 
 /** @public */
 export const DEFAULT_SWITCH_ELEMENT = 'input'

@@ -3,10 +3,10 @@ import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '$test/utils'
 
-import {Button} from '../button/button'
-import {Text} from '../text/text'
-import {Tooltip} from './tooltip'
-import {TooltipDelayGroupProvider} from './tooltipDelayGroup'
+import {Button} from '../button/Button'
+import {Text} from '../text/Text'
+import {Tooltip} from './Tooltip'
+import {TooltipDelayGroupProvider} from './tooltipDelayGroup/TooltipDelayGroupProvider'
 
 // Fake timers
 beforeEach(() => {

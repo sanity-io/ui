@@ -3,8 +3,8 @@ import {type CSSProperties, type ForwardedRef, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'
 import type {Placement} from '../../types'
-import {Arrow} from '../arrow/arrow'
-import {Layer, type LayerOwnProps, type LayerProps} from '../layer/layer'
+import {Arrow} from '../arrow/Arrow'
+import {Layer, type LayerOwnProps, type LayerProps} from '../layer/Layer'
 import {
   DEFAULT_TOOLTIP_ARROW_HEIGHT,
   DEFAULT_TOOLTIP_ARROW_RADIUS,

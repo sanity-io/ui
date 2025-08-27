@@ -1,6 +1,6 @@
 import {type ReactNode, useContext, useMemo, useRef, useSyncExternalStore} from 'react'
 
-import {PortalContext} from './portalContext'
+import {PortalContext} from './PortalContext'
 import type {PortalContextValue} from './types'
 
 /** @public */

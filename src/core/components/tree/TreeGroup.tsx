@@ -1,4 +1,4 @@
-import {Stack} from '../../primitives/stack/stack'
+import {Stack} from '../../primitives/stack/Stack'
 import type {ComponentType, Props} from '../../types'
 import {useTree} from './useTree'
 

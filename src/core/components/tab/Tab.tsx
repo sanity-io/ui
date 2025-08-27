@@ -10,7 +10,7 @@ import {
   useRef,
 } from 'react'
 
-import {Button} from '../../primitives/button/button'
+import {Button} from '../../primitives/button/Button'
 import type {ComponentType, Props} from '../../types'
 
 /** @public */

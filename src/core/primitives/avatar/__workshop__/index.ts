@@ -8,22 +8,22 @@ const scope: WorkshopScope = {
     {
       name: 'as-button',
       title: 'As button',
-      component: lazy(() => import('./asButton')),
+      component: lazy(() => import('./AsButton')),
     },
     {
       name: 'avatar-stack',
       title: 'Avatar stack',
-      component: lazy(() => import('./stack')),
+      component: lazy(() => import('./Stack')),
     },
     {
       name: 'within-button',
       title: 'Within button',
-      component: lazy(() => import('./withinButton')),
+      component: lazy(() => import('./WithinButton')),
     },
     {
       name: 'within-menu-item',
       title: 'Within menu item',
-      component: lazy(() => import('./withinMenuItem')),
+      component: lazy(() => import('./WithinMenuItem')),
     },
   ],
 }

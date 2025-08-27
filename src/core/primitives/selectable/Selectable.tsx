@@ -2,7 +2,7 @@ import {_selectable, type SelectableStyleProps} from '@sanity/ui/css'
 import type {ElementTone} from '@sanity/ui/theme'
 
 import type {ComponentType, Props} from '../../types'
-import {Box, type BoxOwnProps} from '../box/box'
+import {Box, type BoxOwnProps} from '../box/Box'
 
 /** @internal */
 export const DEFAULT_SELECTABLE_ELEMENT = 'button'

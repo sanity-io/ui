@@ -4,12 +4,12 @@ import {motion, type Variant, type Variants} from 'framer-motion'
 import {type ReactNode} from 'react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box} from '../../primitives/box/box'
-import {Button} from '../../primitives/button/button'
-import {Card} from '../../primitives/card/card'
-import {Flex} from '../../primitives/flex/flex'
-import {Stack} from '../../primitives/stack/stack'
-import {Text} from '../../primitives/text/text'
+import {Box} from '../../primitives/box/Box'
+import {Button} from '../../primitives/button/Button'
+import {Card} from '../../primitives/card/Card'
+import {Flex} from '../../primitives/flex/Flex'
+import {Stack} from '../../primitives/stack/Stack'
+import {Text} from '../../primitives/text/Text'
 import type {ComponentType, Props} from '../../types'
 
 /** @internal */

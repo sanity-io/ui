@@ -5,7 +5,7 @@ import {axe} from 'vitest-axe'
 
 import {render} from '$test/utils'
 
-import {Button} from './button'
+import {Button} from './Button'
 
 describe('atoms/button', () => {
   it('Axe: should have no violations', async () => {

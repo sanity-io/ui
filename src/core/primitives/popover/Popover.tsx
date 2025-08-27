@@ -32,10 +32,10 @@ import {origin} from '../../middleware/origin'
 import type {ComponentType, Placement, Props} from '../../types'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
-import {Portal} from '../../utils/portal/portal'
-import {CardProvider} from '../card/cardProvider'
+import {Portal} from '../../utils/portal/Portal'
+import {CardProvider} from '../card/CardProvider'
 import {useCard} from '../card/useCard'
-import {type LayerOwnProps} from '../layer/layer'
+import {type LayerOwnProps} from '../layer/Layer'
 import {useLayer} from '../layer/useLayer'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -44,7 +44,7 @@ import {
   DEFAULT_POPOVER_PADDING,
 } from './constants'
 import {size} from './floating-ui/size'
-import {PopoverLayer} from './popoverLayer'
+import {PopoverLayer} from './PopoverLayer'
 import type {PopoverMargins, PopoverUpdateCallback} from './types'
 
 /** @public */

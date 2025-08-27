@@ -1,9 +1,9 @@
 import type {ResponsiveProp} from '@sanity/ui/css'
 
-import type {CardElementType, CardOwnProps} from '../../primitives/card/card'
+import type {CardElementType, CardOwnProps} from '../../primitives/card/Card'
 import type {Props} from '../../types'
-import {LayerCard} from './layerCard'
-import {LayerProvider} from './layerProvider'
+import {LayerCard} from './LayerCard'
+import {LayerProvider} from './LayerProvider'
 
 /** @public */
 export const DEFAULT_LAYER_ELEMENT = 'div'

@@ -2,7 +2,7 @@ import {type ReactNode, useMemo} from 'react'
 
 import {useDelayedState} from '../../../hooks/useDelayedState'
 import type {Delay} from '../../../types'
-import {TooltipDelayGroupContext} from './tooltipDelayGroupContext'
+import {TooltipDelayGroupContext} from './TooltipDelayGroupContext'
 import type {TooltipDelayGroupContextValue} from './types'
 
 /**

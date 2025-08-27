@@ -5,7 +5,7 @@ import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '$test/utils'
 
-import {MenuContext, type MenuContextValue} from './menuContext'
+import {MenuContext, type MenuContextValue} from './MenuContext'
 import {useMenu} from './useMenu'
 
 describe('components/menu', () => {

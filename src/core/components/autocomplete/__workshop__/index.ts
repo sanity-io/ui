@@ -8,32 +8,32 @@ const scope: WorkshopScope = {
     {
       name: 'example',
       title: 'Example',
-      component: lazy(() => import('./example')),
+      component: lazy(() => import('./Example')),
     },
     {
       name: 'custom',
       title: 'Custom',
-      component: lazy(() => import('./custom')),
+      component: lazy(() => import('./Custom')),
     },
     {
       name: 'async',
       title: 'Async',
-      component: lazy(() => import('./async')),
+      component: lazy(() => import('./Async')),
     },
     {
       name: 'constrained-height',
       title: 'Constrained height',
-      component: lazy(() => import('./constrainedHeight')),
+      component: lazy(() => import('./ConstrainedHeight')),
     },
     {
       name: 'focus-and-blur',
       title: 'Focus and blur',
-      component: lazy(() => import('./focusAndBlur')),
+      component: lazy(() => import('./FocusAndBlur')),
     },
     {
       name: 'fullscreen',
       title: 'Fullscreen',
-      component: lazy(() => import('./fullscreen')),
+      component: lazy(() => import('./Fullscreen')),
     },
   ],
 }

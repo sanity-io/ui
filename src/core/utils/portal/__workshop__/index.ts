@@ -8,7 +8,7 @@ const scope: WorkshopScope = {
     {
       name: 'named',
       title: 'Named portals',
-      component: lazy(() => import('./named')),
+      component: lazy(() => import('./Named')),
     },
   ],
 }

@@ -2,7 +2,7 @@ import {codeSkeleton, type ResponsiveProp} from '@sanity/ui/css'
 import type {FontCodeSize} from '@sanity/ui/theme'
 
 import type {Props} from '../../types'
-import {Skeleton, type SkeletonElementType, type SkeletonOwnProps} from './skeleton'
+import {Skeleton, type SkeletonElementType, type SkeletonOwnProps} from './Skeleton'
 
 /** @beta */
 export const DEFAULT_CODE_SKELETON_ELEMENT = 'div'

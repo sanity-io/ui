@@ -7,9 +7,9 @@ import {
   useState,
 } from 'react'
 
-import {Flex, type FlexOwnProps} from '../../primitives/flex/flex'
+import {Flex, type FlexOwnProps} from '../../primitives/flex/Flex'
 import type {ComponentType, Props} from '../../types'
-import type {TabProps} from './tab'
+import type {TabProps} from './Tab'
 
 /** @public */
 export const DEFAULT_TAB_LIST_ELEMENT = 'div'

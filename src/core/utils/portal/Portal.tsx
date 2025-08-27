@@ -1,7 +1,7 @@
 import type {ReactNode, ReactPortal} from 'react'
 import {createPortal} from 'react-dom'
 
-import {CardProvider} from '../../primitives/card/cardProvider'
+import {CardProvider} from '../../primitives/card/CardProvider'
 import {useCard} from '../../primitives/card/useCard'
 import {usePortal} from './usePortal'
 

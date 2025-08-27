@@ -4,7 +4,7 @@ import {type ReactNode, useCallback, useContext, useEffect, useMemo, useState} f
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {getLayerContext} from './getLayerContext'
-import {LayerContext} from './layerContext'
+import {LayerContext} from './LayerContext'
 import type {LayerContextValue} from './types'
 
 /** @public */
