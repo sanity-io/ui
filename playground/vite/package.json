@@ -20,7 +20,7 @@
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.8",
     "@vanilla-extract/vite-plugin": "^5.1.1",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^5.0.1",
     "eslint": "^9.34.0",
     "eslint-plugin-react-hooks": "0.0.0-experimental-66f09bd0-20250806",
     "eslint-plugin-react-refresh": "^0.4.20",
