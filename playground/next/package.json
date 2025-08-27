@@ -18,8 +18,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@types/node": "^24.3.0",
-    "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.8",
     "@vanilla-extract/next-plugin": "^2.4.14",
     "eslint": "^9.33.0",
     "eslint-config-next": "15.4.6",
