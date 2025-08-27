@@ -136,7 +136,7 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^7.11.9",
-    "@sanity/prettier-config": "^1.0.6",
+    "@sanity/prettier-config": "^2.0.1",
     "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^3.0.7",
     "@types/cpx": "^1.5.5",
