@@ -82,7 +82,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@ianvs/prettier-plugin-sort-imports": "^4.6.2",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@sanity/pkg-utils": "^8.1.4",
     "@sanity/prettier-config": "^2.0.1",
     "@sanity/semantic-release-preset": "^4.1.8",
