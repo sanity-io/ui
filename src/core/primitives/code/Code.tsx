@@ -31,6 +31,14 @@ export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(
     children,
     className,
     language: languageProp,
+    margin,
+    marginX,
+    marginY,
+    marginTop,
+    marginRight,
+    marginBottom,
+    marginLeft,
+    maxWidth,
     size = 2,
     weight = 'regular',
     ...rest
@@ -39,7 +47,23 @@ export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(
   const language = typeof languageProp === 'string' ? languageProp : undefined
 
   return (
-    <Element data-ui="Code" {...rest} className={code({className, size, weight})}>
+    <Element
+      data-ui="Code"
+      {...rest}
+      className={code({
+        className,
+        margin,
+        marginX,
+        marginY,
+        marginTop,
+        marginRight,
+        marginBottom,
+        marginLeft,
+        maxWidth,
+        size,
+        weight,
+      })}
+    >
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>

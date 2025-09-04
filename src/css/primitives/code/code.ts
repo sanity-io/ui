@@ -3,6 +3,8 @@ import {_responsiveClassName} from '../../_responsiveClassName'
 import {display} from '../../props/display/display'
 import {flex} from '../../props/flex/flex'
 import {font} from '../../props/font/font'
+import {margin} from '../../props/margin/margin'
+import {maxWidth} from '../../props/maxWidth/maxWidth'
 import {root, scale} from './code.css'
 import type {CodeStyleProps} from './types'
 
@@ -15,5 +17,7 @@ export function code(props: CodeStyleProps): string | undefined {
     display({display: 'block'}),
     flex(props),
     font(props),
+    margin(props),
+    maxWidth(props),
   )
 }

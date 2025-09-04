@@ -2,7 +2,16 @@ import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root: string = _style(layers.primitives, {})
+export const root: string = _style(layers.primitives, {
+  flex: 'none',
+  position: 'relative',
+
+  selectors: {
+    '&:not([hidden])': {
+      display: 'block',
+    },
+  },
+})
 
 export const input: string = _style(layers.primitives, {
   position: 'absolute',
