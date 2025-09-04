@@ -139,10 +139,6 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
       onItemMouseEnter: handleItemMouseEnter,
       onItemMouseLeave: handleItemMouseLeave,
       registerElement,
-
-      // deprecated
-      onMouseEnter: handleItemMouseEnter,
-      onMouseLeave: handleItemMouseLeave,
     }),
     [
       activeElement,
