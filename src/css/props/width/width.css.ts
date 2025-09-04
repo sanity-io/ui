@@ -14,11 +14,14 @@ export const options: ResponsiveRuleOptions<Width> = {
   fill: _responsiveStyle(layers.props, {
     width: '100%',
   }),
+  stretch: _responsiveStyle(layers.props, {
+    width: 'stretch',
+  }),
   min: _responsiveStyle(layers.props, {
     width: 'min-content',
   }),
-  stretch: _responsiveStyle(layers.props, {
-    width: 'stretch',
+  max: _responsiveStyle(layers.props, {
+    width: 'max-content',
   }),
   ..._fromEntries(
     CONTAINER_SCALE.map((index) => [
