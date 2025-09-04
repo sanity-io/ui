@@ -32,10 +32,10 @@ export const links: Route.LinksFunction = () => [
 ]
 
 export const loader = async ({request}: Route.LoaderArgs) => {
-  const preferesDarkScheme = request.headers.get('Sec-CH-Prefers-Color-Scheme')
+  const prefersDarkScheme = request.headers.get('Sec-CH-Prefers-Color-Scheme')
 
   return {
-    initialPrefersDark: preferesDarkScheme === 'dark',
+    initialPrefersDark: prefersDarkScheme === 'dark',
   }
 }
 
