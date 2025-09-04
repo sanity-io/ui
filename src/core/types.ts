@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type {ComponentClass, ComponentProps, ExoticComponent, FunctionComponent, JSX} from 'react'
-
 /**
  * Assign properties from `U` to `T`, excluding properties that already exist in `T`.
  *
@@ -14,17 +12,20 @@ export type Assign<T extends {}, U extends {}> = Omit<T, keyof U> & U
 export type EmptyProps = {}
 
 /** @public */
-export type TagType = keyof JSX.IntrinsicElements
+export type TagType = keyof React.JSX.IntrinsicElements
 
 /** @public */
-export type ComponentType<P = any> = FunctionComponent<P> | ComponentClass<P> | ExoticComponent<P>
+export type ComponentType<P = any> =
+  | React.FunctionComponent<P>
+  | React.ComponentClass<P>
+  | React.ExoticComponent<P>
 
 /** @public */
 export type ElementType<P> = TagType | ComponentType<P>
 
 /** @public */
 export type Props<P extends EmptyProps, E extends ElementType<P>> = Assign<
-  E extends TagType ? JSX.IntrinsicElements[E] : ComponentProps<E>,
+  E extends TagType ? React.JSX.IntrinsicElements[E] : React.ComponentProps<E>,
   P & {as?: E}
 >
 

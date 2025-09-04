@@ -9,7 +9,7 @@ import type {
 } from '@sanity/ui/css'
 import {button, buttonLoadingBox} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
-import {type ElementType as ReactElementType, isValidElement, type ReactNode} from 'react'
+import {isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 
 import type {ComponentType, Props} from '../../types'
@@ -30,8 +30,8 @@ export type ButtonOwnProps = ButtonStyleProps &
     'data-ui'?: string
     'disabled'?: boolean
     'fontSize'?: ResponsiveProp<FontTextSize>
-    'icon'?: ReactElementType | ReactNode
-    'iconRight'?: ReactElementType | ReactNode
+    'icon'?: React.ElementType | React.ReactNode
+    'iconRight'?: React.ElementType | React.ReactNode
     'justify'?: BoxStyleProps['justifyContent']
     /** @beta Do not use in production, as this might change.*/
     'loading'?: boolean
@@ -39,7 +39,7 @@ export type ButtonOwnProps = ButtonStyleProps &
     'textAlign'?: ButtonTextAlign
     'muted'?: boolean
     'target'?: string
-    'text'?: ReactNode
+    'text'?: React.ReactNode
     'textOverflow'?: TextOwnProps['textOverflow']
     'textWeight'?: TextOwnProps['weight']
     'width'?: ResponsiveProp<Width>
@@ -71,6 +71,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
     justify = 'center',
     loading,
     mode = 'default',
+    muted = false,
     padding = 3,
     paddingX,
     paddingY,
@@ -86,7 +87,6 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
     textWeight = 'medium',
     tone = 'default',
     type = 'button',
-    muted = false,
     width,
     ...rest
   } = props as ButtonProps<typeof DEFAULT_BUTTON_ELEMENT>
