@@ -152,7 +152,7 @@
     "browserslist-config-baseline": "^0.5.0",
     "cac": "^6.7.14",
     "commitizen": "^4.3.1",
-    "cypress": "^13.17.0",
+    "cypress": "^15.1.0",
     "cypress-real-events": "^1.14.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv-flow": "^4.1.0",
