@@ -17,6 +17,7 @@ export function responsiveFont(
   const {family, sizes, weights} = font[fontKey]
   const fontWeight = ($weight && weights[$weight]) || weights.regular
 
+  // eslint-disable-next-line no-warning-comments
   // @todo: make this configurable
   const defaultSize = sizes[2]
 
@@ -48,6 +49,7 @@ export function responsiveFont(
     },
   }
 
+  // eslint-disable-next-line no-warning-comments
   // @TODO fix the real condition that is causing $size to be undefined sometimes
   if (!$size) {
     // @ts-expect-error: `warned` isn't typed, the underlying issue should be solved rather than typing it
