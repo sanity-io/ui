@@ -633,13 +633,16 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const results = useMemo(() => {
     if (renderPopover) {
       return renderPopover(
+        // eslint-disable-next-line react-hooks/refs
         {
           content,
           hidden: !expanded,
+          // eslint-disable-next-line react-hooks/refs
           inputElement: inputElementRef.current,
           onMouseEnter: handlePopoverMouseEnter,
           onMouseLeave: handlePopoverMouseLeave,
         },
+        // eslint-disable-next-line react-hooks/refs
         resultsPopoverElementRef,
       )
     }
@@ -663,6 +666,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         portal
         radius={radius}
         ref={resultsPopoverElementRef}
+        // eslint-disable-next-line react-hooks/refs
         referenceElement={inputElementRef.current}
         {...popover}
       />

@@ -19,7 +19,6 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version: lts/*
       - run: pnpm install
       - run: pnpm ts:check
@@ -34,12 +33,9 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version: lts/*
       - run: pnpm install
-      - name: Register Problem Matcher for ESLint that handles -f compact and shows warnings and errors inline on PRs
-        run: echo "::add-matcher::.github/eslint-compact.json"
-      - run: "pnpm lint -f compact --rule 'no-warning-comments: [off]' --max-warnings 7"
+      - run: pnpm lint -f gha --max-warnings 0
 
   test:
     needs: [build]
@@ -59,7 +55,6 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version: ${{ matrix.node-version }}
       - run: pnpm install
       - run: pnpm build
@@ -72,7 +67,6 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version: lts/*
       - uses: cypress-io/github-action@v6
         with:
@@ -118,7 +112,6 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version: lts/*
       - run: pnpm install
       # Branches that will release new versions are defined in .releaserc.json

@@ -213,6 +213,7 @@ export const Tree = memo(
         ref.current.querySelectorAll('[data-ui="TreeItem"]'),
       ) as HTMLElement[]
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setItemElements(_itemElements)
     }, [children])
 

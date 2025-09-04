@@ -29,7 +29,9 @@ export function useMenuController(props: {
   const elementsRef = useRef<HTMLElement[]>([])
   const [activeIndex, _setActiveIndex] = useState(-1)
   const activeIndexRef = useRef(activeIndex)
+  // eslint-disable-next-line react-hooks/refs
   const activeElement = useMemo(() => elementsRef.current[activeIndex] || null, [activeIndex])
+  // eslint-disable-next-line react-hooks/refs
   const mounted = Boolean(rootElementRef.current)
 
   const setActiveIndex = useCallback((nextActiveIndex: number) => {
@@ -220,7 +222,9 @@ export function useMenuController(props: {
     return () => cancelAnimationFrame(rafId)
   }, [activeIndex, mounted, setActiveIndex, shouldFocus])
 
+  // eslint-disable-next-line react-hooks/refs
   return {
+    // eslint-disable-next-line react-hooks/refs
     activeElement,
     activeIndex,
     handleItemMouseEnter,

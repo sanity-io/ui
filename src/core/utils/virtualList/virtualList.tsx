@@ -66,6 +66,7 @@ export const VirtualList = forwardRef(function VirtualList(
     const firstElement = wrapperRef.current.firstChild
 
     if (firstElement instanceof HTMLElement) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setItemHeight(firstElement.offsetHeight)
     }
   }, [renderItem])
@@ -111,6 +112,7 @@ export const VirtualList = forwardRef(function VirtualList(
     window.addEventListener('scroll', handleScroll, {passive: true})
     window.addEventListener('resize', handleResize)
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setScrollHeight(window.innerHeight)
 
     handleScroll()

@@ -32,6 +32,7 @@ export const Skeleton = forwardRef(function Skeleton(
 
   useEffect(() => {
     if (!delay) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       return setVisible(true)
     }
 

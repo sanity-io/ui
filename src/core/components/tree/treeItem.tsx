@@ -74,8 +74,10 @@ export const TreeItem = memo(function TreeItem(
   const itemPath = useMemo(() => path.concat([id || '']), [id, path])
   const itemKey = itemPath.join('/')
   const itemState = tree.state[itemKey]
+  // eslint-disable-next-line react-hooks/refs
   const focused = tree.focusedElement === rootRef.current
   const expanded = itemState?.expanded === undefined ? expandedProp : itemState?.expanded || false
+  // eslint-disable-next-line react-hooks/refs
   const tabIndex = tree.focusedElement && tree.focusedElement === rootRef.current ? 0 : -1
   const contextValue = useMemo(
     () => ({...tree, level: tree.level + 1, path: itemPath}),

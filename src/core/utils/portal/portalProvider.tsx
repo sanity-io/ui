@@ -54,10 +54,13 @@ const emptySubscribe = () => () => {}
 function useUnique<ValueType extends Comparable = Comparable>(value: ValueType): ValueType {
   const valueRef = useRef<ValueType>(value)
 
+  // eslint-disable-next-line react-hooks/refs
   if (!_isEqual(valueRef.current, value)) {
+    // eslint-disable-next-line react-hooks/refs
     valueRef.current = value
   }
 
+  // eslint-disable-next-line react-hooks/refs
   return valueRef.current
 }
 
