@@ -3,7 +3,13 @@ import {globalStyle} from '@vanilla-extract/css'
 import {_style} from '../../_style.css'
 import {layers} from '../../layers.css'
 
-export const root: string = _style(layers.primitives, {})
+export const root: string = _style(layers.primitives, {
+  selectors: {
+    '&:not([hidden])': {
+      display: 'block',
+    },
+  },
+})
 
 export const input: string = _style(layers.primitives, {
   ':disabled': {

@@ -86,6 +86,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
     className,
     clearButton,
     disabled = false,
+    flex,
     fontSize = 2,
     gap = 3,
     icon: IconComponent,
@@ -166,15 +167,15 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
   )
 
   return (
-    <Box
-      alignItems="center"
+    <span
       className={textInput({
         className,
         border,
+        flex,
         fontSize,
         padding,
         radius,
-        gap: gap,
+        gap,
         width,
       })}
       data-icon-left={IconComponent ? '' : undefined}
@@ -184,15 +185,14 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       data-read-only={!disabled && readOnly ? '' : undefined}
       data-suffix={suffix ? '' : undefined}
       data-ui="TextInput"
-      display="flex"
     >
       {prefix && (
-        <Box className={textInputPrefix()} sizing="border">
+        <span className={textInputPrefix()}>
           <span>{prefix}</span>
-        </Box>
+        </span>
       )}
 
-      <Box className={textInputElement()} flex={1} position="relative">
+      <span className={textInputElement()}>
         <Element
           {...rest}
           className={_inputElement()}
@@ -203,10 +203,10 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
           type={type}
         />
 
-        <Box className={_inputPresentation()} position="absolute">
+        <span className={_inputPresentation()}>
           {IconComponent && (
-            <Box padding={padding} position="absolute" insetTop={0} insetLeft={0}>
-              <Text size={fontSize}>
+            <Box as="span" padding={padding} position="absolute" insetTop={0} insetLeft={0}>
+              <Text as="span" size={fontSize}>
                 {isValidElement(IconComponent) && IconComponent}
                 {isValidElementType(IconComponent) && <IconComponent />}
               </Text>
@@ -214,17 +214,18 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
           )}
 
           {!withClearButton && IconRightComponent && (
-            <Box padding={padding} position="absolute" insetTop={0} insetRight={0}>
-              <Text size={fontSize}>
+            <Box as="span" padding={padding} position="absolute" insetTop={0} insetRight={0}>
+              <Text as="span" size={fontSize}>
                 {isValidElement(IconRightComponent) && IconRightComponent}
                 {isValidElementType(IconRightComponent) && <IconRightComponent />}
               </Text>
             </Box>
           )}
-        </Box>
+        </span>
 
         {!disabled && !readOnly && clearButton && (
           <Box
+            as="span"
             insetTop={0}
             insetRight={0}
             padding={clearButtonBoxPadding}
@@ -246,13 +247,13 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
             />
           </Box>
         )}
-      </Box>
+      </span>
 
       {suffix && (
-        <Box className={textInputSuffix()} sizing="border">
+        <span className={textInputSuffix()}>
           <span>{suffix}</span>
-        </Box>
+        </span>
       )}
-    </Box>
+    </span>
   )
 }

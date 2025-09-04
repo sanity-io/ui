@@ -36,12 +36,14 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
     children,
     customValidity,
     disabled,
+    flex,
     fontSize = 2,
     gap = 2,
     padding = 3,
     radius = 1,
     readOnly,
     ref: forwardedRef,
+    width = 'fill',
     ...rest
   } = props as SelectProps<typeof DEFAULT_SELECT_ELEMENT>
 
@@ -55,9 +57,9 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
   useCustomValidity(ref, customValidity)
 
   return (
-    <div
+    <span
       data-ui="Select"
-      className={select({border, fontSize, gap, padding, radius})}
+      className={select({border, fontSize, flex, gap, padding, radius, width})}
       data-icon-right=""
     >
       <Element {...rest} className={_inputElement()} disabled={disabled || readOnly} ref={ref}>
@@ -70,6 +72,6 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
           </Text>
         </Box>
       </span>
-    </div>
+    </span>
   )
 }

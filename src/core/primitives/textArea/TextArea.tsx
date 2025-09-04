@@ -37,14 +37,17 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
     __unstable_disableFocusRing,
     as: Element = DEFAULT_TEXT_AREA_ELEMENT,
     border = true,
+    className,
     customValidity,
     disabled = false,
+    flex,
     fontSize = 2,
     gap = 3,
     padding = 3,
     radius = 2,
     readOnly,
     ref: forwardedRef,
+    width,
     ...rest
   } = props as TextAreaProps<typeof DEFAULT_TEXT_AREA_ELEMENT>
 
@@ -60,11 +63,14 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
   return (
     <span
       className={textArea({
+        className,
         border,
+        flex,
         fontSize,
+        gap,
         padding,
         radius,
-        gap,
+        width,
       })}
       data-invalid={customValidity ? '' : undefined}
       data-read-only={!disabled && readOnly ? '' : undefined}

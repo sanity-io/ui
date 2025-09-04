@@ -1,5 +1,6 @@
 import {_composeClassNames} from '../../_composeClassNames'
 import {_responsiveClassName} from '../../_responsiveClassName'
+import {flex} from '../../props/flex/flex'
 import {radius} from '../../props/radius/radius'
 import {width} from '../../props/width/width'
 import {border, element, fontSize, gap, padding, presentation, root} from './_input.css'
@@ -13,6 +14,7 @@ export function _input(props: InputStyleProps): string | undefined {
     _responsiveClassName(fontSize, props.fontSize ?? 2),
     _responsiveClassName(padding, props.padding ?? 3),
     _responsiveClassName(gap, props.gap ?? 3),
+    flex(props),
     radius(props),
     width(props),
   )

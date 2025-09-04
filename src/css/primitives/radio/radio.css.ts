@@ -7,7 +7,7 @@ export const root: string = _style(layers.primitives, {
 
   selectors: {
     '&:not([hidden])': {
-      display: 'inline-block',
+      display: 'block',
     },
   },
 })

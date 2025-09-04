@@ -8,7 +8,6 @@ import {
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
 import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/Box'
 
 /** @public */
 export const DEFAULT_SWITCH_ELEMENT = 'input'
@@ -41,7 +40,6 @@ export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEME
     indeterminate,
     readOnly,
     ref: forwardedRef,
-    style,
     ...rest
   } = props as SwitchProps<typeof DEFAULT_SWITCH_ELEMENT>
 
@@ -60,13 +58,7 @@ export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEME
   }, [indeterminate])
 
   return (
-    <Box
-      className={_switch({className})}
-      data-ui="Switch"
-      display="block"
-      position="relative"
-      style={style}
-    >
+    <span className={_switch({className})} data-ui="Switch">
       <Element
         {...rest}
         className={_switchElement()}
@@ -79,6 +71,6 @@ export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEME
         <span className={_switchTrack()} />
         <span className={_switchThumb()} />
       </span>
-    </Box>
+    </span>
   )
 }

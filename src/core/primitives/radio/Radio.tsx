@@ -47,7 +47,7 @@ export function Radio<E extends RadioElementType = typeof DEFAULT_RADIO_ELEMENT>
   useCustomValidity(ref, customValidity)
 
   return (
-    <div className={radio({className})} data-ui="Radio" style={style}>
+    <span className={radio({className})} data-ui="Radio" style={style}>
       <Element
         {...rest}
         className={radioInput()}
@@ -59,6 +59,6 @@ export function Radio<E extends RadioElementType = typeof DEFAULT_RADIO_ELEMENT>
         type="radio"
       />
       <span className={radioPresentation()} />
-    </div>
+    </span>
   )
 }

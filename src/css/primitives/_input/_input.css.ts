@@ -37,8 +37,7 @@ export const element: string = _style(layers.primitives, {
   display: 'block',
   boxSizing: 'border-box',
   resize: 'none',
-  // See https://caniuse.com/?search=width%3A%20stretch
-  width: ['-moz-available', '-webkit-fill-available', 'stretch'],
+  inlineSize: 'stretch',
 
   selectors: {
     '&::placeholder': {
@@ -112,12 +111,12 @@ export const presentation: string = _style(layers.primitives, {
   backgroundColor: vars.color.input.text.bg,
   borderRadius: 'inherit',
   boxShadow: `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.text.border}`,
+  display: 'block',
   position: 'absolute',
   top: 0,
   left: 0,
   right: 0,
   bottom: 0,
-  display: 'block',
   pointerEvents: 'none',
   zIndex: 0,
 
