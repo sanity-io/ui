@@ -107,7 +107,7 @@
       {
         "name": "v4",
         "channel": "static",
-        "prerelease": true
+        "prerelease": "static"
       }
     ],
     "extends": "@sanity/semantic-release-preset"
