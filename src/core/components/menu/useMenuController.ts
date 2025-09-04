@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
 
 import {_getFocusableElements, _sortElements} from './helpers'
 
@@ -29,12 +29,12 @@ export function useMenuController(props: {
   const elementsRef = useRef<HTMLElement[]>([])
   const [activeIndex, _setActiveIndex] = useState(-1)
   const activeIndexRef = useRef(activeIndex)
-  const activeElement = useMemo(() => elementsRef.current[activeIndex] || null, [activeIndex])
-  const mounted = Boolean(rootElementRef.current)
+  const [activeElement, setActiveElement] = useState<HTMLElement | null>(null)
 
   const setActiveIndex = useCallback((nextActiveIndex: number) => {
     _setActiveIndex(nextActiveIndex)
     activeIndexRef.current = nextActiveIndex
+    setActiveElement(elementsRef.current[nextActiveIndex] || null)
   }, [])
 
   const mount = useCallback(
@@ -183,7 +183,7 @@ export function useMenuController(props: {
 
   // Set focus on the currently active element
   useEffect(() => {
-    if (!mounted) return
+    if (!rootElementRef.current) return
 
     const rafId = requestAnimationFrame(() => {
       if (activeIndex === -1) {
@@ -218,7 +218,7 @@ export function useMenuController(props: {
     })
 
     return () => cancelAnimationFrame(rafId)
-  }, [activeIndex, mounted, setActiveIndex, shouldFocus])
+  }, [activeIndex, rootElementRef, setActiveIndex, shouldFocus])
 
   return {
     activeElement,

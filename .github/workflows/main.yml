@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: lts/*
       - run: pnpm install
-      - run: "pnpm lint -f gha --rule 'react-hooks/set-state-in-effect: [off]' --rule 'react-hooks/preserve-manual-memoization: [off]' --rule 'react-hooks/refs: [off]' --max-warnings 0"
+      - run: "pnpm lint -f gha --rule 'react-hooks/set-state-in-effect: [off]' --rule 'react-hooks/preserve-manual-memoization: [off]' --max-warnings 0"
 
   test:
     needs: [build]

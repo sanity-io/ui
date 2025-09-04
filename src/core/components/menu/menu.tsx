@@ -128,26 +128,21 @@ export const Menu = forwardRef(function Menu(
     ),
   )
 
-  const value: MenuContextValue = useMemo(
-    () => ({
-      version: 0.0,
-      activeElement,
-      activeIndex,
-      mount,
-      onClickOutside,
-      onEscape,
-      onItemClick,
-      onItemMouseEnter: handleItemMouseEnter,
-      onItemMouseLeave: handleItemMouseLeave,
-      registerElement,
-
-      // deprecated
-      onMouseEnter: handleItemMouseEnter,
-      onMouseLeave: handleItemMouseLeave,
-    }),
+  const value = useMemo(
+    () =>
+      ({
+        version: 2,
+        activeElement,
+        mount,
+        onClickOutside,
+        onEscape,
+        onItemClick,
+        onItemMouseEnter: handleItemMouseEnter,
+        onItemMouseLeave: handleItemMouseLeave,
+        registerElement,
+      }) satisfies MenuContextValue,
     [
       activeElement,
-      activeIndex,
       mount,
       handleItemMouseEnter,
       handleItemMouseLeave,
