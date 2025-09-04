@@ -1,4 +1,4 @@
-import {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
+import {forwardRef, useEffect, useImperativeHandle, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {_isScrollable} from '../../helpers'
@@ -131,37 +131,62 @@ export const VirtualList = forwardRef(function VirtualList(
     onChange({fromIndex, gap: space[gap], itemHeight, scrollHeight, scrollTop, toIndex})
   }, [fromIndex, gap, itemHeight, onChange, scrollHeight, scrollTop, space, toIndex])
 
-  const children = useMemo(() => {
-    if (!renderItem || items.length === 0) return null
-
-    if (itemHeight === -1) {
-      return [<ItemWrapper key={0}>{renderItem(items[0])}</ItemWrapper>]
-    }
-
-    return items.slice(fromIndex, toIndex).map((item, _itemIndex) => {
-      const itemIndex = fromIndex + _itemIndex
-      const node = renderItem(item)
-      const key = getItemKey ? getItemKey(item, itemIndex) : itemIndex
-
-      return (
-        <ItemWrapper key={key} style={{top: itemIndex * (itemHeight + space[gap])}}>
-          {node}
-        </ItemWrapper>
-      )
-    })
-  }, [fromIndex, gap, getItemKey, itemHeight, items, renderItem, space, toIndex])
-
-  const wrapperStyle = useMemo(() => ({height}), [height])
+  const children = useChildren({
+    fromIndex,
+    gap,
+    itemHeight,
+    space,
+    toIndex,
+    getItemKey,
+    items,
+    renderItem,
+  })
 
   return (
     <StyledVirtualList as={as} data-ui="VirtualList" {...restProps} ref={ref}>
-      <div ref={wrapperRef} style={wrapperStyle}>
+      <div ref={wrapperRef} style={{height}}>
         {children}
       </div>
     </StyledVirtualList>
   )
 })
 VirtualList.displayName = 'ForwardRef(VirtualList)'
+
+function useChildren({
+  fromIndex,
+  gap,
+  getItemKey,
+  itemHeight,
+  items,
+  renderItem,
+  space,
+  toIndex,
+}: Pick<VirtualListProps, 'getItemKey' | 'renderItem'> &
+  Required<Pick<VirtualListProps, 'items'>> & {
+    fromIndex: number
+    gap: number
+    itemHeight: number
+    space: number[]
+    toIndex: number
+  }) {
+  if (!renderItem || items.length === 0) return null
+
+  if (itemHeight === -1) {
+    return [<ItemWrapper key={0}>{renderItem(items[0])}</ItemWrapper>]
+  }
+
+  return items.slice(fromIndex, toIndex).map((item, _itemIndex) => {
+    const itemIndex = fromIndex + _itemIndex
+    const node = renderItem(item)
+    const key = getItemKey ? getItemKey(item, itemIndex) : itemIndex
+
+    return (
+      <ItemWrapper key={key} style={{top: itemIndex * (itemHeight + space[gap])}}>
+        {node}
+      </ItemWrapper>
+    )
+  })
+}
 
 function findScrollable(parentNode: ParentNode | null) {
   let _scrollEl = parentNode

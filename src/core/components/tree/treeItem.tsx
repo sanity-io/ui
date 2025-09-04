@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {memo, useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
+import {useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {Box, BoxProps, Flex, Text} from '../../primitives'
@@ -31,7 +31,7 @@ export interface TreeItemProps {
   weight?: ThemeFontWeightKey
 }
 
-const StyledTreeItem = memo(styled.li(treeItemRootStyle, treeItemRootColorStyle))
+const StyledTreeItem = styled.li(treeItemRootStyle, treeItemRootColorStyle)
 
 const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
 
@@ -45,7 +45,7 @@ const ToggleArrowText = styled(Text)`
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const TreeItem = memo(function TreeItem(
+export function TreeItem(
   props: TreeItemProps & Omit<React.HTMLProps<HTMLLIElement>, 'as' | 'ref' | 'role'>,
 ): React.JSX.Element {
   const {
@@ -203,5 +203,5 @@ export const TreeItem = memo(function TreeItem(
       </TreeContext.Provider>
     </StyledTreeItem>
   )
-})
-TreeItem.displayName = 'Memo(TreeItem)'
+}
+TreeItem.displayName = 'TreeItem'

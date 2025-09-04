@@ -89,7 +89,14 @@ export default ts.config(
         'react-hooks-with-use-effect-event/exhaustive-deps': 'error',
         // For now these aren't always actionable, and shouldn't have the same urgency as errors
         'react-hooks/set-state-in-effect': 'warn',
-        'react-hooks/preserve-manual-memoization': 'warn',
+        // Disabled by default, enabled here
+        'react-hooks/hooks': 'error',
+        'react-hooks/capitalized-calls': 'error',
+        'react-hooks/memoized-effect-dependencies': 'error',
+        'react-hooks/no-deriving-state-in-effects': 'error',
+        'react-hooks/invariant': 'error',
+        'react-hooks/todo': 'error',
+        'react-hooks/syntax': 'error',
       },
     },
 
@@ -114,6 +121,7 @@ export default ts.config(
       rules: {
         'react-hooks/set-state-in-effect': 'off',
         'react-hooks/refs': 'off',
+        'react-hooks/hooks': 'off',
       },
     },
 
