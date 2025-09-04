@@ -102,6 +102,7 @@ export const Avatar = forwardRef(function Avatar(
   }, [arrowPosition, arrowPositionProp])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (src) setImageFailed(false)
   }, [src])
 

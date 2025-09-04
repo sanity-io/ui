@@ -32,7 +32,7 @@ export const Skeleton = forwardRef(function Skeleton(
 
   useEffect(() => {
     if (!delay) {
-      return setVisible(true)
+      return undefined
     }
 
     const timeout = setTimeout(() => {
@@ -49,7 +49,7 @@ export const Skeleton = forwardRef(function Skeleton(
       {...restProps}
       $animated={animated}
       $radius={useArrayProp(radius)}
-      $visible={visible}
+      $visible={delay ? visible : true}
       ref={ref}
     />
   )

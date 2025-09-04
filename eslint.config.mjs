@@ -87,8 +87,6 @@ export default ts.config(
       rules: {
         'react-hooks/exhaustive-deps': 'off',
         'react-hooks-with-use-effect-event/exhaustive-deps': 'error',
-        // For now these aren't always actionable, and shouldn't have the same urgency as errors
-        'react-hooks/set-state-in-effect': 'warn',
         // Disabled by default, enabled here
         'react-hooks/hooks': 'error',
         'react-hooks/capitalized-calls': 'error',
