@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {memo, useCallback, useEffect, useId, useMemo, useRef} from 'react'
+import {memo, useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {Box, BoxProps, Flex, Text} from '../../primitives'
@@ -65,18 +65,20 @@ export const TreeItem = memo(function TreeItem(
     weight,
     ...restProps
   } = props
-  const rootRef = useRef<HTMLLIElement | null>(null)
+  const [rootElement, setRootElement] = useState<HTMLLIElement | null>(null)
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const _id = useId()
   const id = idProp || _id
-  const itemPath = useMemo(() => path.concat([id || '']), [id, path])
-  const itemKey = itemPath.join('/')
+  const [itemPath, itemKey] = useMemo(() => {
+    const itemPath = path.concat([id || ''])
+    return [itemPath, itemPath.join('/')]
+  }, [id, path])
   const itemState = tree.state[itemKey]
-  const focused = tree.focusedElement === rootRef.current
+  const focused = tree.focusedElement === rootElement
   const expanded = itemState?.expanded === undefined ? expandedProp : itemState?.expanded || false
-  const tabIndex = tree.focusedElement && tree.focusedElement === rootRef.current ? 0 : -1
+  const tabIndex = tree.focusedElement && tree.focusedElement === rootElement ? 0 : -1
   const contextValue = useMemo(
     () => ({...tree, level: tree.level + 1, path: itemPath}),
     [itemPath, tree],
@@ -95,28 +97,28 @@ export const TreeItem = memo(function TreeItem(
       ) {
         event.stopPropagation()
         setExpanded(itemKey, !expanded)
-        setFocusedElement(rootRef.current)
+        setFocusedElement(rootElement)
       }
     },
-    [expanded, itemKey, onClick, setExpanded, setFocusedElement],
+    [expanded, itemKey, onClick, rootElement, setExpanded, setFocusedElement],
   )
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
       if (focused && event.key === 'Enter') {
-        const el = treeitemRef.current || rootRef.current
+        const el = treeitemRef.current || rootElement
 
         el?.click()
       }
     },
-    [focused],
+    [focused, rootElement],
   )
 
   useEffect(() => {
-    if (!rootRef.current) return
+    if (!rootElement) return
 
-    return registerItem(rootRef.current, itemPath.join('/'), expanded, selected)
-  }, [expanded, itemPath, registerItem, selected])
+    return registerItem(rootElement, itemKey, expanded, selected)
+  }, [expanded, itemKey, registerItem, rootElement, selected])
 
   const content = (
     <Flex padding={padding}>
@@ -155,7 +157,7 @@ export const TreeItem = memo(function TreeItem(
         data-ui="TreeItem"
         {...restProps}
         onClick={handleClick}
-        ref={rootRef}
+        ref={setRootElement}
         role="none"
       >
         <TreeItemBox
@@ -188,7 +190,7 @@ export const TreeItem = memo(function TreeItem(
       aria-expanded={expanded}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      ref={rootRef}
+      ref={setRootElement}
       role="treeitem"
       tabIndex={tabIndex}
     >

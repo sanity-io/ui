@@ -90,7 +90,6 @@ export default ts.config(
         // For now these aren't always actionable, and shouldn't have the same urgency as errors
         'react-hooks/set-state-in-effect': 'warn',
         'react-hooks/preserve-manual-memoization': 'warn',
-        'react-hooks/refs': 'warn',
       },
     },
 

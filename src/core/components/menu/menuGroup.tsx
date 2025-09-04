@@ -69,7 +69,7 @@ export function MenuGroup(
     onItemMouseEnter: _onItemMouseEnter,
     registerElement,
   } = menu
-  const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
+  const onItemMouseEnter = _onItemMouseEnter ?? menu.onItemMouseEnter
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
