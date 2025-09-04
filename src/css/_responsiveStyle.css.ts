@@ -21,8 +21,8 @@ export function _responsiveStyle(layer: string, rule: StyleRule): ResponsiveRule
       rules[index] = style({
         '@layer': {
           [layer]: {
-            '@media': {
-              [`screen and (min-width: ${bp}px)`]: rule,
+            '@container': {
+              [`(min-width: ${bp}px)`]: rule,
             },
           },
         },
