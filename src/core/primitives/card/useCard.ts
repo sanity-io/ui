@@ -1,11 +1,11 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {CardContext} from './CardContext'
 import type {CardContextValue} from './types'
 
 /** @public */
 export function useCard(): CardContextValue {
-  const card = useContext(CardContext)
+  const card = use(CardContext)
 
   if (!card) {
     throw new Error('useCard(): missing context value')

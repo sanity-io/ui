@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
 import {BoundaryElementContext} from './BoundaryElementContext'
@@ -11,7 +11,7 @@ const DEFAULT_VALUE: BoundaryElementContextValue = {
 
 /** @public */
 export function useBoundaryElement(): BoundaryElementContextValue {
-  const value = useContext(BoundaryElementContext)
+  const value = use(BoundaryElementContext)
 
   // NOTE: This check is for future-compatiblity
   // - If the value is not an object, it’s not compatible with the current version

@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {DialogContext, type DialogContextValue} from './DialogContext'
 
@@ -7,5 +7,5 @@ import {DialogContext, type DialogContextValue} from './DialogContext'
  * @beta
  */
 export function useDialog(): DialogContextValue {
-  return useContext(DialogContext)
+  return use(DialogContext)
 }

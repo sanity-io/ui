@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './LayerContext'
@@ -6,7 +6,7 @@ import type {LayerContextValue} from './types'
 
 /** @public */
 export function useLayer(): LayerContextValue {
-  const value = useContext(LayerContext)
+  const value = use(LayerContext)
 
   if (!value) {
     throw new Error('useLayer(): missing context value')

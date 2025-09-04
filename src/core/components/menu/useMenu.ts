@@ -1,10 +1,10 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
 import {MenuContext, type MenuContextValue} from './MenuContext'
 
 export function useMenu(): MenuContextValue {
-  const value = useContext(MenuContext)
+  const value = use(MenuContext)
 
   if (!value) {
     throw new Error('useMenu(): missing context value')

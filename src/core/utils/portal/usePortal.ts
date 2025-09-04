@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
 import {PortalContext} from './PortalContext'
@@ -6,7 +6,7 @@ import type {PortalContextValue} from './types'
 
 /** @public */
 export function usePortal(): PortalContextValue {
-  const value = useContext(PortalContext)
+  const value = use(PortalContext)
 
   if (!value) {
     throw new Error('usePortal(): missing context value')

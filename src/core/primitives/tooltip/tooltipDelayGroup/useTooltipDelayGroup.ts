@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {TooltipDelayGroupContext} from './TooltipDelayGroupContext'
 import type {TooltipDelayGroupContextValue} from './types'
@@ -7,7 +7,7 @@ import type {TooltipDelayGroupContextValue} from './types'
  * @beta
  */
 export function useTooltipDelayGroup(): TooltipDelayGroupContextValue | null {
-  const value = useContext(TooltipDelayGroupContext)
+  const value = use(TooltipDelayGroupContext)
 
   return value
 }

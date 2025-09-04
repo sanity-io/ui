@@ -1,5 +1,5 @@
 import {card, type CardStyleProps} from '@sanity/ui/css'
-import {useContext} from 'react'
+import {use} from 'react'
 
 import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
@@ -56,7 +56,7 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
     ...rest
   } = props as CardProps<typeof DEFAULT_CARD_ELEMENT>
 
-  const parent = useContext(CardContext)
+  const parent = use(CardContext)
   const tone = toneProp === 'inherit' ? parent?.tone : toneProp
   const scheme = schemeProp === undefined ? parent?.scheme : schemeProp
 
