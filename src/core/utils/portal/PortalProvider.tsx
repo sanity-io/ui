@@ -1,4 +1,4 @@
-import {type ReactNode, useContext, useMemo, useRef, useSyncExternalStore} from 'react'
+import {type ReactNode, use, useMemo, useRef, useSyncExternalStore} from 'react'
 
 import {PortalContext} from './PortalContext'
 import type {PortalContextValue} from './types'
@@ -17,7 +17,7 @@ export interface PortalProviderProps {
 export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
   const {children, element, __unstable_elements: elementsProp} = props
   const elements = useUnique(elementsProp)
-  const parentPortal = useContext(PortalContext)
+  const parentPortal = use(PortalContext)
   const fallbackElement = useSyncExternalStore(
     emptySubscribe,
     () => elements?.['default'] ?? (parentPortal.element || document.body),

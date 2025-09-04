@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import {use} from 'react'
 
 import {isRecord} from '../../lib/isRecord'
 import {ToastContext} from './ToastContext'
@@ -6,7 +6,7 @@ import type {ToastContextValue} from './types'
 
 /** @public */
 export function useToast(): ToastContextValue {
-  const value = useContext(ToastContext)
+  const value = use(ToastContext)
 
   if (!value) {
     throw new Error('useToast(): missing context value')
