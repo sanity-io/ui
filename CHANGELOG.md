@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.11](https://github.com/sanity-io/ui/compare/v3.0.10...v3.0.11) (2025-09-04)
+
+### Bug Fixes
+
+- handle `react-hooks/refs` ([#2052](https://github.com/sanity-io/ui/issues/2052)) ([630922b](https://github.com/sanity-io/ui/commit/630922b64fa77f09786a73351f6990b8213026ae))
+
 ## [3.0.10](https://github.com/sanity-io/ui/compare/v3.0.9...v3.0.10) (2025-09-04)
 
 ### Bug Fixes
