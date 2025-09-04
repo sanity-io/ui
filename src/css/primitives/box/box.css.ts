@@ -15,5 +15,13 @@ export const root: string = _style(layers.primitives, {
 })
 
 export const muted: string = _style(layers.primitives, {
-  backgroundColor: vars.color.muted.bg,
+  backgroundColor: vars.color.bg,
+
+  selectors: {
+    '&&': {
+      vars: {
+        [vars.color.bg]: vars.color.muted.bg,
+      },
+    },
+  },
 })
