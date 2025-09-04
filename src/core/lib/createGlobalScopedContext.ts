@@ -25,7 +25,9 @@ export function createGlobalScopedContext<ContextType, const T extends ContextTy
    * Prevent errors about re-renders on React SSR on Next.js App Router
    */
   if (typeof document === 'undefined') {
-    return createContext<ContextType>(defaultValue)
+    const context = createContext<ContextType>(defaultValue)
+    context.displayName = key
+    return context
   }
 
   globalScope[symbol] = globalScope[symbol] || createContext<T>(defaultValue)
