@@ -124,6 +124,7 @@ function Color(props: {color: ThemeColorCard_v2; tone: CardTone}) {
 
         {/* {features.muted && <ColorMuted color={color.muted} />} */}
 
+        {/* eslint-disable-next-line no-warning-comments */}
         {/* @todo: remove use of `muted` here */}
         {features.selectable && <ColorSelectable color={color.selectable || color.muted} />}
 

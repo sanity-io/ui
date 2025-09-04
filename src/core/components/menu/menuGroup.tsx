@@ -122,11 +122,13 @@ export function MenuGroup(
 
   // Close child menu when a sibling item becomes active
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!active) setOpen(false)
   }, [active])
 
   // Update state when child menu is no longer open
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!open) setWithinMenu(false)
   }, [open])
 
