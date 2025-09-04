@@ -83,6 +83,7 @@ export const Card = forwardRef(function Card(
   const rootTheme = useRootTheme()
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
 
+  // eslint-disable-next-line no-warning-comments
   // todo: Consider adding the wrapper approach for nested cards in which the tones are not changing, avoid unnecessary ThemeColorProvider
   return (
     <ThemeColorProvider scheme={scheme} tone={tone}>

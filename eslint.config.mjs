@@ -4,8 +4,8 @@ import boundaries from 'eslint-plugin-boundaries'
 import _import from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
-import reactCompiler from 'eslint-plugin-react-compiler'
 import reactHooks from 'eslint-plugin-react-hooks'
+import reactHooksWithUseEffectEvent from 'eslint-plugin-react-hooks-with-use-effect-event'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import storybook from 'eslint-plugin-storybook'
@@ -35,6 +35,7 @@ export default ts.config(
         },
         sourceType: 'module',
       },
+      linterOptions: {reportUnusedDisableDirectives: 'error'},
       rules: {
         // '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-explicit-any': 'off', // todo: warn
@@ -70,20 +71,26 @@ export default ts.config(
     // react-refresh
     reactRefresh.configs.vite,
 
-    // react-hooks
-    {
-      ...reactHooks.configs.recommended,
-      rules: {
-        'react-hooks/exhaustive-deps': 'error', // it's `warn` by default
-      },
-    },
     // react-compiler
+    // @ts-expect-error - configs is not typed but exists, and it enables React Compiler linter checks
+    ...reactHooks.configs['flat/recommended'],
+
+    // react-hooks, that are useEffectEvent aware
     {
+      // Since we use useEffectEvent, we can't use the oxlint checker for this rule, we must use the ESLint variant.
+      // We're using eslint-plugin-react-hooks@rc, which runs React Compiler checks which matches our babel-plugin-react-compiler@rc setup.
+      // However, we're also using the experimental useEffectEvent API using the use-effect-event package, which requires eslint-plugin-react-hooks@experimental (https://react.dev/reference/react/experimental_useEffectEvent).
+      // To make all this work we disable the exhaustive-deps rule from the rc react-hooks plugin and enable it with the experimental react-hooks plugin.
       plugins: {
-        'react-compiler': reactCompiler,
+        'react-hooks-with-use-effect-event': reactHooksWithUseEffectEvent,
       },
       rules: {
-        'react-compiler/react-compiler': 'error', // enable the react compiler
+        'react-hooks/exhaustive-deps': 'off',
+        'react-hooks-with-use-effect-event/exhaustive-deps': 'error',
+        // For now these aren't always actionable, and shouldn't have the same urgency as errors
+        'react-hooks/set-state-in-effect': 'warn',
+        'react-hooks/preserve-manual-memoization': 'warn',
+        'react-hooks/refs': 'warn',
       },
     },
 
@@ -104,9 +111,10 @@ export default ts.config(
 
     // Ignore Storybook stories and test files for the react compiler
     {
-      files: ['**/*.stories.{js,ts,tsx}', '**/*.test.{js,ts,tsx}'],
+      files: ['**/__workshop__/*.{js,ts,tsx}', '**/*.stories.{js,ts,tsx}', '**/*.test.{js,ts,tsx}'],
       rules: {
-        'react-compiler/react-compiler': 'off',
+        'react-hooks/set-state-in-effect': 'off',
+        'react-hooks/refs': 'off',
       },
     },
 

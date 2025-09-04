@@ -19,9 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version: lts/*
       - run: pnpm install
       - run: pnpm format
@@ -34,7 +33,7 @@ jobs:
       - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
         with:
           body: I ran `pnpm format` 🧑‍💻
-          branch: actions/prettier/${{ github.ref_name }}
+          branch: actions/prettier-${{ github.ref_name }}
           commit-message: "chore(prettier): 🤖 ✨"
           labels: 🤖 bot
           sign-commits: true
