@@ -36,7 +36,6 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@sanity/ui/css/index.css': path.resolve(__dirname, '../workshop/empty.css'),
       '@sanity/ui': path.resolve(__dirname, '../exports'),
     },
   },
