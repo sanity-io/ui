@@ -5,6 +5,52 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-v4.1](https://github.com/sanity-io/ui/compare/v3.0.0...v4.0.0-v4.1) (2025-09-04)
+
+### ⚠ BREAKING CHANGES
+
+- use @vanilla-extract/css for styling
+
+### Features
+
+- container queries (!) ([dba86a5](https://github.com/sanity-io/ui/commit/dba86a50667f347c5d60d0553a90f237c2160e99))
+- **menuItem:** allow the ability to prevent default behaviour ([#1941](https://github.com/sanity-io/ui/issues/1941)) ([3696ac3](https://github.com/sanity-io/ui/commit/3696ac3c93165b75ea8fc5fd607abc03ba6a486d))
+
+### Bug Fixes
+
+- add [data-focus-ring] styles ([160aae4](https://github.com/sanity-io/ui/commit/160aae475574885418a257028f0f54c08a40f77f))
+- allow v20 in node engines ([5e98b55](https://github.com/sanity-io/ui/commit/5e98b559c77b97e122395896fb04cded2bdb4107))
+- **card:** forward [disabled] html attribute ([3c12cd6](https://github.com/sanity-io/ui/commit/3c12cd67073e2a8fa9217e2eee08d1c187a5db7d))
+- **deps:** update dependency @floating-ui/react-dom to ^2.1.5 (static) ([#1862](https://github.com/sanity-io/ui/issues/1862)) ([ae10e35](https://github.com/sanity-io/ui/commit/ae10e3541539d431a09deb41d92735ef38f6fd2a))
+- **deps:** update dependency @floating-ui/react-dom to ^2.1.6 (static) ([#1993](https://github.com/sanity-io/ui/issues/1993)) ([e555712](https://github.com/sanity-io/ui/commit/e555712d280651d84d49c070f36522449d3e2741))
+- **deps:** update dependency framer-motion to ^12.23.11 (static) ([#1846](https://github.com/sanity-io/ui/issues/1846)) ([6be9f29](https://github.com/sanity-io/ui/commit/6be9f294ce510eeeb7f08a66527a2e529b071206))
+- **deps:** update dependency framer-motion to ^12.23.12 (static) ([#1863](https://github.com/sanity-io/ui/issues/1863)) ([60e642d](https://github.com/sanity-io/ui/commit/60e642d9b4ac23e23a0c94745729bed740783b9a))
+- **deps:** update dependency framer-motion to ^12.23.9 (static) ([#1805](https://github.com/sanity-io/ui/issues/1805)) ([5aae7cd](https://github.com/sanity-io/ui/commit/5aae7cd8406c2a78f5df176407dc58edc03b1c54))
+- **deps:** update dependency isbot to ^5.1.29 (static) ([#1855](https://github.com/sanity-io/ui/issues/1855)) ([a60c071](https://github.com/sanity-io/ui/commit/a60c0711abeea6e99b538676de8564a26d104cb4))
+- **deps:** update dependency next to v15.4.5 (static) ([#1864](https://github.com/sanity-io/ui/issues/1864)) ([0a2857a](https://github.com/sanity-io/ui/commit/0a2857ad400c352b8a4c5eb2a7bc23a516d51486))
+- **deps:** update dependency next to v15.4.6 (static) ([#1902](https://github.com/sanity-io/ui/issues/1902)) ([3c7deac](https://github.com/sanity-io/ui/commit/3c7deac53894ec310bce01a174b19d0741fd5b56))
+- **deps:** update dependency use-effect-event to ^2.0.3 (main) ([#1798](https://github.com/sanity-io/ui/issues/1798)) ([6d66bf3](https://github.com/sanity-io/ui/commit/6d66bf3762c96134ab8101b9944084671744edab))
+- **deps:** update dependency use-effect-event to ^2.0.3 (static) ([#1806](https://github.com/sanity-io/ui/issues/1806)) ([29e1c03](https://github.com/sanity-io/ui/commit/29e1c03ca0ed23da26b3d3434439761c5a57eaf1))
+- enable minify again with sourcemaps ([6097970](https://github.com/sanity-io/ui/commit/6097970dc4269afe2e28199e2bb1393c49da665d))
+- generate source map correctly ([260bd8e](https://github.com/sanity-io/ui/commit/260bd8e1bfcc5f96149a97f3d8dbdf69d42b9cac))
+- mark css imports as side effects ([d6d851b](https://github.com/sanity-io/ui/commit/d6d851b39535bf1dbdd109880e81a68925e801bb))
+- **menuItem:** fix typecheck ([c73c23f](https://github.com/sanity-io/ui/commit/c73c23f54c5704be9218afcca385b2332d835eb8))
+- move avatar img css to primitives layer ([299b96d](https://github.com/sanity-io/ui/commit/299b96db2132479f27f2e5d52254534f3bc74c93))
+- narrow down `popover` property type ([522fc50](https://github.com/sanity-io/ui/commit/522fc50c8f3a2980db2f3883f641db67739cff1c))
+- optimize css with 2023 baseline ([5e15819](https://github.com/sanity-io/ui/commit/5e15819a2540318f98ddbcacd3fadc9bff6c25d5))
+- remove cjs exports ([c44ebc1](https://github.com/sanity-io/ui/commit/c44ebc195fd9181fdb1f48b59a268d96c1f91690))
+- sourceMappingURL comment invalid ([86c965b](https://github.com/sanity-io/ui/commit/86c965b55a3927a36574f05f085a7bf08cb5f045))
+- specify required node v22 minor as well ([00fdbf9](https://github.com/sanity-io/ui/commit/00fdbf9243db280be404f1c95bbda48ad6151a93))
+- test sourcemap generation ([87dc9c2](https://github.com/sanity-io/ui/commit/87dc9c2134547d744eeffc180c1f534b7e2bc98f))
+- tweak source map url ([4f49041](https://github.com/sanity-io/ui/commit/4f490410f51d891471a9c2a5a264a7fc47f879d7))
+- use lightningcss to reduce css output ([0a1dc3d](https://github.com/sanity-io/ui/commit/0a1dc3de6fe05af26a155e90fb44673bc1fb3e2d))
+- use pkg-utils css minifier ([2fbedca](https://github.com/sanity-io/ui/commit/2fbedcad1dea700f95751ed7e4d7f9d82427c783))
+- use vanilla-extract included in pkg-utils ([c338d80](https://github.com/sanity-io/ui/commit/c338d800b17cc727e5779c239fe8319fcc4294c7))
+
+### Code Refactoring
+
+- use @vanilla-extract/css for styling ([2089014](https://github.com/sanity-io/ui/commit/208901473f07ab99d690fa32a2ed4d6f39cfd10e))
+
 ## [4.0.0-static.23](https://github.com/sanity-io/ui/compare/v4.0.0-static.22...v4.0.0-static.23) (2025-08-27)
 
 ### Bug Fixes
