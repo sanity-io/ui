@@ -6,7 +6,7 @@ on:
     branches:
       - v2
       - main
-      - static
+      - v4
 
 permissions:
   contents: read # for checkout

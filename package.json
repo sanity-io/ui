@@ -106,7 +106,7 @@
       },
       "main",
       {
-        "name": "static",
+        "name": "v4",
         "channel": "static",
         "prerelease": true
       }
