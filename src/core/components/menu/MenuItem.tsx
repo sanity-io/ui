@@ -133,7 +133,6 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       {...rest}
       as={as}
       data-pressed={pressed ? '' : undefined}
-      data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
       radius={radius}
       disabled={disabled}
@@ -142,6 +141,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       onMouseLeave={onItemMouseLeave}
       ref={setRef}
       role={role}
+      selected={active}
       tabIndex={-1}
       tone={tone}
       type={as === 'button' ? 'button' : undefined}
