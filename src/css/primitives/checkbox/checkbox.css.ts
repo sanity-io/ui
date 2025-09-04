@@ -6,6 +6,7 @@ import {vars} from '../../vars.css'
 
 export const root: string = _style(layers.primitives, {
   position: 'relative',
+  flex: 'none',
 
   selectors: {
     '&:not([hidden])': {
