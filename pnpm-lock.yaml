@@ -37,8 +37,8 @@ importers:
         specifier: ^12.23.12
         version: 12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-compiler-runtime:
-        specifier: 19.1.0-rc.2
-        version: 19.1.0-rc.2(react@19.1.1)
+        specifier: 19.1.0-rc.3
+        version: 19.1.0-rc.3(react@19.1.1)
       react-refractor:
         specifier: ^2.2.0
         version: 2.2.0(react@19.1.1)
@@ -69,7 +69,7 @@ importers:
         version: 9.34.0
       '@sanity/pkg-utils':
         specifier: ^8.1.1
-        version: 8.1.1(@types/babel__core@7.20.5)(@types/node@22.18.0)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.9.2)
+        version: 8.1.1(@types/babel__core@7.20.5)(@types/node@22.18.0)(babel-plugin-react-compiler@19.1.0-rc.3)(typescript@5.9.2)
       '@sanity/prettier-config':
         specifier: ^2.0.1
         version: 2.0.1(prettier@3.6.2)
@@ -155,8 +155,8 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1(vite@5.4.19(@types/node@22.18.0)(lightningcss@1.30.1)(terser@5.43.1))
       babel-plugin-react-compiler:
-        specifier: 19.1.0-rc.2
-        version: 19.1.0-rc.2
+        specifier: 19.1.0-rc.3
+        version: 19.1.0-rc.3
       babel-plugin-styled-components:
         specifier: ^2.1.4
         version: 2.1.4(@babel/core@7.28.3)(@sanity/styled-components@6.1.18-24(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
@@ -3127,8 +3127,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
 
-  babel-plugin-react-compiler@19.1.0-rc.2:
-    resolution: {integrity: sha512-kSNA//p5fMO6ypG8EkEVPIqAjwIXm5tMjfD1XRPL/sRjYSbJ6UsvORfaeolNWnZ9n310aM0xJP7peW26BuCVzA==}
+  babel-plugin-react-compiler@19.1.0-rc.3:
+    resolution: {integrity: sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==}
 
   babel-plugin-styled-components@2.1.4:
     resolution: {integrity: sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==}
@@ -6759,6 +6759,11 @@ packages:
     peerDependencies:
       react: ^19.1.1
 
+  react-compiler-runtime@19.1.0-rc.3:
+    resolution: {integrity: sha512-Cssogys2XZu6SqxRdX2xd8cQAf57BBvFbLEBlIa77161lninbKUn/EqbecCe7W3eqDQfg3rIoOwzExzgCh7h/g==}
+    peerDependencies:
+      react: ^19.1.1
+
   react-docgen-typescript@2.4.0:
     resolution: {integrity: sha512-ZtAp5XTO5HRzQctjPU0ybY0RRCQO19X/8fxn3w7y2VVTUbGHDKULPTL4ky3vB05euSgG5NpALhEhDPvQ56wvXg==}
     peerDependencies:
@@ -10056,7 +10061,7 @@ snapshots:
     dependencies:
       react: 19.1.1
 
-  '@sanity/pkg-utils@8.1.1(@types/babel__core@7.20.5)(@types/node@22.18.0)(babel-plugin-react-compiler@19.1.0-rc.2)(typescript@5.9.2)':
+  '@sanity/pkg-utils@8.1.1(@types/babel__core@7.20.5)(@types/node@22.18.0)(babel-plugin-react-compiler@19.1.0-rc.3)(typescript@5.9.2)':
     dependencies:
       '@babel/core': 7.28.3
       '@babel/parser': 7.28.3
@@ -10105,7 +10110,7 @@ snapshots:
       zod: 4.1.3
       zod-validation-error: 4.0.1(zod@4.1.3)
     optionalDependencies:
-      babel-plugin-react-compiler: 19.1.0-rc.2
+      babel-plugin-react-compiler: 19.1.0-rc.3
     transitivePeerDependencies:
       - '@types/babel__core'
       - '@types/node'
@@ -11362,7 +11367,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-react-compiler@19.1.0-rc.2:
+  babel-plugin-react-compiler@19.1.0-rc.3:
     dependencies:
       '@babel/types': 7.28.2
 
@@ -15631,6 +15636,10 @@ snapshots:
       strip-json-comments: 2.0.1
 
   react-compiler-runtime@19.1.0-rc.2(react@19.1.1):
+    dependencies:
+      react: 19.1.1
+
+  react-compiler-runtime@19.1.0-rc.3(react@19.1.1):
     dependencies:
       react: 19.1.1
 
