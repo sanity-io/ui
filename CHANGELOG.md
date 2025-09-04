@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.24](https://github.com/sanity-io/ui/compare/v4.0.0-static.23...v4.0.0-static.24) (2025-09-04)
+
+### Features
+
+- container queries (!) ([dba86a5](https://github.com/sanity-io/ui/commit/dba86a50667f347c5d60d0553a90f237c2160e99))
+
+### Bug Fixes
+
+- `use` -> `useContext` ([df21c33](https://github.com/sanity-io/ui/commit/df21c33e941612fe19d929b665ada1e823aaeda7))
+
 ## [4.0.0-static.23](https://github.com/sanity-io/ui/compare/v4.0.0-static.22...v4.0.0-static.23) (2025-08-27)
 
 ### Bug Fixes
