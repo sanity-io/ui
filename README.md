@@ -9,8 +9,7 @@ npm install @sanity/ui
 npm install react react-dom styled-components
 ```
 
-[![npm version](https://img.shields.io/npm/v/%40sanity%2Fui/release-v2?style=flat-square
-)](https://www.npmjs.com/package/@sanity/ui/v/release-v2)
+[![npm version](https://img.shields.io/npm/v/%40sanity%2Fui/release-v2?style=flat-square)](https://www.npmjs.com/package/@sanity/ui/v/release-v2)
 
 ## Usage
 
@@ -32,5 +31,3 @@ root.render(
 ## License
 
 MIT-licensed. See LICENSE.
-
-
