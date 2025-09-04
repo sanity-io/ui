@@ -2,7 +2,10 @@ name: Prettier
 
 on:
   push:
-    branches: [main]
+    branches:
+      - v2
+      - main
+      - v4
   workflow_dispatch:
 
 concurrency:
@@ -30,8 +33,9 @@ jobs:
           private-key: ${{ secrets.ECOSPARK_APP_PRIVATE_KEY }}
       - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
         with:
+          base: ${{ github.ref_name }}
           body: I ran `pnpm format` 🧑‍💻
-          branch: actions/prettier
+          branch: actions/prettier/${{ github.ref_name }}
           commit-message: "chore(prettier): 🤖 ✨"
           labels: 🤖 bot
           sign-commits: true
