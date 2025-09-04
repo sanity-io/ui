@@ -3,8 +3,7 @@ import {Children, cloneElement, forwardRef, isValidElement} from 'react'
 import {css, styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp} from '../../hooks'
-import {_responsive, rem, ThemeProps} from '../../styles'
+import {_getArrayProp, _responsive, rem, ThemeProps} from '../../styles'
 import {AvatarSize} from '../../types'
 import {AvatarCounter} from './avatarCounter'
 
@@ -71,7 +70,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
   } = props
   const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
   const maxLength = Math.max(maxLengthProp, 0)
-  const size = useArrayProp(sizeProp)
+  const size = _getArrayProp(sizeProp)
 
   const len = children.length
   const visibleCount = maxLength - 1

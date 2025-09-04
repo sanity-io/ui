@@ -9,14 +9,10 @@ import {
   focusLastDescendant,
   isHTMLElement,
 } from '../../helpers'
-import {
-  useArrayProp,
-  useClickOutsideEvent,
-  useGlobalKeyDown,
-  usePrefersReducedMotion,
-} from '../../hooks'
+import {useClickOutsideEvent, useGlobalKeyDown, usePrefersReducedMotion} from '../../hooks'
 import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
+import {_getArrayProp} from '../../styles'
 import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
 import {useTheme_v2} from '../../theme'
 import {DialogPosition, Radius} from '../../types'
@@ -172,9 +168,9 @@ const DialogCard = forwardRef(function DialogCard(
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
-  const radius = useArrayProp(radiusProp)
-  const shadow = useArrayProp(shadowProp)
-  const width = useArrayProp(widthProp)
+  const radius = _getArrayProp(radiusProp)
+  const shadow = _getArrayProp(shadowProp)
+  const width = _getArrayProp(widthProp)
   const ref = useRef<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLDivElement | null>(null)
   const layer = useLayer()
@@ -320,11 +316,11 @@ export const Dialog = forwardRef(function Dialog(
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
-  const cardRadius = useArrayProp(cardRadiusProp)
-  const padding = useArrayProp(paddingProp)
-  const position = useArrayProp(positionProp)
-  const width = useArrayProp(widthProp)
-  const zOffset = useArrayProp(zOffsetProp)
+  const cardRadius = _getArrayProp(cardRadiusProp)
+  const padding = _getArrayProp(paddingProp)
+  const position = _getArrayProp(positionProp)
+  const width = _getArrayProp(widthProp)
+  const zOffset = _getArrayProp(zOffsetProp)
   const preDivRef = useRef<HTMLDivElement | null>(null)
   const postDivRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)

@@ -1,7 +1,7 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {Box, BoxProps} from '../box'
 import {ResponsiveWidthProps} from '../types'
 import {containerBaseStyle, responsiveContainerWidthStyle} from './styles'
@@ -32,7 +32,7 @@ export const Container = forwardRef(function Container(
     <StyledContainer
       data-ui="Container"
       {...restProps}
-      $width={useArrayProp(width)}
+      $width={_getArrayProp(width)}
       forwardedAs={as}
       ref={ref}
     />

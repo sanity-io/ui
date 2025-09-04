@@ -10,10 +10,10 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import {useArrayProp} from '../../hooks'
 import {Box, Flex, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
+import {_getArrayProp} from '../../styles'
 import {useRootTheme} from '../../theme'
 import {SelectableTone} from '../../types/selectable'
 import {Hotkeys} from '../hotkeys'
@@ -108,7 +108,7 @@ export const MenuItem = forwardRef(function MenuItem(
     [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
   )
 
-  const hotkeysFontSize = useArrayProp(fontSize).map((s) => s - 1)
+  const hotkeysFontSize = _getArrayProp(fontSize).map((s) => s - 1)
 
   const setRef = useCallback((el: HTMLDivElement | null) => {
     ref.current = el
@@ -124,8 +124,8 @@ export const MenuItem = forwardRef(function MenuItem(
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
       forwardedAs={as}
-      $radius={useArrayProp(radius)}
-      $padding={useArrayProp(0)}
+      $radius={_getArrayProp(radius)}
+      $padding={_getArrayProp(0)}
       $tone={disabled ? 'default' : tone}
       $scheme={scheme}
       disabled={disabled}

@@ -1,7 +1,7 @@
 import {Children, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {Box, BoxProps} from '../box'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
 import {ResponsiveInlineSpaceStyleProps} from './types'
@@ -36,7 +36,7 @@ export const Inline = forwardRef(function Inline(
     <StyledInline
       data-ui="Inline"
       {...restProps}
-      $space={useArrayProp(space)}
+      $space={_getArrayProp(space)}
       forwardedAs={as}
       ref={ref as any}
     >

@@ -1,7 +1,7 @@
 import {forwardRef, lazy, Suspense} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
 import {codeBaseStyle} from './styles'
 
@@ -30,7 +30,13 @@ export const Code = forwardRef(function Code(
   const {children, language, size = 2, weight, ...restProps} = props
 
   return (
-    <StyledCode data-ui="Code" {...restProps} $size={useArrayProp(size)} $weight={weight} ref={ref}>
+    <StyledCode
+      data-ui="Code"
+      {...restProps}
+      $size={_getArrayProp(size)}
+      $weight={weight}
+      ref={ref}
+    >
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>

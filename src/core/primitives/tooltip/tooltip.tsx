@@ -25,9 +25,10 @@ import {
 import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
 
-import {useArrayProp, usePrefersReducedMotion} from '../../hooks'
+import {usePrefersReducedMotion} from '../../hooks'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {origin} from '../../middleware/origin'
+import {_getArrayProp} from '../../styles'
 import {useTheme_v2} from '../../theme'
 import type {Placement} from '../../types'
 import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
@@ -119,7 +120,7 @@ export const Tooltip = forwardRef(function Tooltip(
   const zOffset = _zOffset ?? layer.tooltip.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
-  const fallbackPlacements = useArrayProp(fallbackPlacementsProp)
+  const fallbackPlacements = _getArrayProp(fallbackPlacementsProp)
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
