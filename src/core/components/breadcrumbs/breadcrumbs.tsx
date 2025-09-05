@@ -42,44 +42,16 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
 
   const rawItems = useMemo(() => Children.toArray(children).filter(isValidElement), [children])
 
-  const items = useMemo(() => {
-    const len = rawItems.length
-
-    if (maxLength && len > maxLength) {
-      const beforeLength = Math.ceil(maxLength / 2)
-      const afterLength = Math.floor(maxLength / 2)
-
-      return [
-        ...rawItems.slice(0, beforeLength - 1),
-        <Popover
-          constrainSize
-          content={
-            <Stack as="ol" overflow="auto" padding={space} space={space}>
-              {rawItems.slice(beforeLength - 1, len - afterLength)}
-            </Stack>
-          }
-          key="button"
-          open={open}
-          placement="top"
-          portal
-          ref={popoverElementRef}
-        >
-          <ExpandButton
-            fontSize={1}
-            mode="bleed"
-            onClick={open ? collapse : expand}
-            padding={1}
-            ref={expandElementRef}
-            selected={open}
-            text="…"
-          />
-        </Popover>,
-        ...rawItems.slice(len - afterLength),
-      ]
-    }
-
-    return rawItems
-  }, [collapse, expand, maxLength, open, rawItems, space])
+  const items = useItems({
+    collapse,
+    expand,
+    expandElementRef,
+    maxLength,
+    open,
+    popoverElementRef,
+    rawItems,
+    space,
+  })
 
   return (
     <StyledBreadcrumbs data-ui="Breadcrumbs" {...restProps} ref={ref}>
@@ -97,3 +69,60 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   )
 })
 Breadcrumbs.displayName = 'ForwardRef(Breadcrumbs)'
+
+function useItems({
+  collapse,
+  expand,
+  expandElementRef,
+  maxLength,
+  open,
+  popoverElementRef,
+  rawItems,
+  space,
+}: {
+  collapse: () => void
+  expand: () => void
+  expandElementRef: React.RefObject<HTMLButtonElement | null>
+  maxLength: number | undefined
+  open: boolean
+  popoverElementRef: React.RefObject<HTMLDivElement | null>
+  rawItems: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>[]
+  space: number[]
+}) {
+  const len = rawItems.length
+
+  if (maxLength && len > maxLength) {
+    const beforeLength = Math.ceil(maxLength / 2)
+    const afterLength = Math.floor(maxLength / 2)
+
+    return [
+      ...rawItems.slice(0, beforeLength - 1),
+      <Popover
+        constrainSize
+        content={
+          <Stack as="ol" overflow="auto" padding={space} space={space}>
+            {rawItems.slice(beforeLength - 1, len - afterLength)}
+          </Stack>
+        }
+        key="button"
+        open={open}
+        placement="top"
+        portal
+        ref={popoverElementRef}
+      >
+        <ExpandButton
+          fontSize={1}
+          mode="bleed"
+          onClick={open ? collapse : expand}
+          padding={1}
+          ref={expandElementRef}
+          selected={open}
+          text="…"
+        />
+      </Popover>,
+      ...rawItems.slice(len - afterLength),
+    ]
+  }
+
+  return rawItems
+}

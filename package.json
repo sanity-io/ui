@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "3.0.11",
+  "version": "3.0.12-canary.0",
   "keywords": [
     "sanity",
     "ui",
@@ -70,7 +70,7 @@
     "dev": "run-p storybook:dev workshop:dev",
     "figma:pkg:build": "cd figma && pnpm build",
     "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint --cache .",
+    "lint": "eslint .",
     "prepack": "pnpm build",
     "pkg:build": "pkg build --strict",
     "pkg:check": "pkg --strict",
