@@ -1,8 +1,8 @@
 import {forwardRef, useEffect, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
 import {Box, BoxProps, ResponsiveRadiusProps} from '../../primitives'
+import {_getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {skeletonStyle} from './styles'
 
@@ -48,7 +48,7 @@ export const Skeleton = forwardRef(function Skeleton(
     <StyledSkeleton
       {...restProps}
       $animated={animated}
-      $radius={useArrayProp(radius)}
+      $radius={_getArrayProp(radius)}
       $visible={delay ? visible : true}
       ref={ref}
     />

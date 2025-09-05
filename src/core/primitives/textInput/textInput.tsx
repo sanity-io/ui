@@ -5,7 +5,8 @@ import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp, useCustomValidity} from '../../hooks'
+import {useCustomValidity} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   responsiveInputPaddingStyle,
   responsiveRadiusStyle,
@@ -179,10 +180,10 @@ export const TextInput = forwardRef(function TextInput(
 
   const rootTheme = useRootTheme()
 
-  const fontSize = useArrayProp(fontSizeProp)
-  const padding = useArrayProp(paddingProp)
-  const radius = useArrayProp(radiusProp)
-  const space = useArrayProp(spaceProp)
+  const fontSize = _getArrayProp(fontSizeProp)
+  const padding = _getArrayProp(paddingProp)
+  const radius = _getArrayProp(radiusProp)
+  const space = _getArrayProp(spaceProp)
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)

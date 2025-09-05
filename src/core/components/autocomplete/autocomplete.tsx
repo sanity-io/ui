@@ -21,7 +21,6 @@ import {
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {useArrayProp} from '../../hooks'
 import {
   Box,
   BoxProps,
@@ -33,6 +32,7 @@ import {
   Text,
   TextInput,
 } from '../../primitives'
+import {_getArrayProp} from '../../styles'
 import {Radius} from '../../types'
 import {AnimatedSpinnerIcon, ListBox, StyledAutocomplete} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
@@ -214,7 +214,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const padding = useArrayProp(paddingProp)
+  const padding = _getArrayProp(paddingProp)
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],
@@ -470,18 +470,14 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
     return undefined
   }, [disabled, handleClearButtonFocus, loading, value])
 
-  const openButtonBoxPadding = useMemo(
-    () =>
-      padding.map((v) => {
-        if (v === 0) return 0
-        if (v === 1) return 1
-        if (v === 2) return 1
+  const openButtonBoxPadding = padding.map((v) => {
+    if (v === 0) return 0
+    if (v === 1) return 1
+    if (v === 2) return 1
 
-        return v - 2
-      }),
-    [padding],
-  )
-  const openButtonPadding = useMemo(() => padding.map((v) => Math.max(v - 1, 0)), [padding])
+    return v - 2
+  })
+  const openButtonPadding = padding.map((v) => Math.max(v - 1, 0))
   const openButtonProps: AutocompleteOpenButtonProps = useMemo(
     () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
     [openButton],

@@ -2,7 +2,7 @@ import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   ResponsiveFontStyleProps,
   responsiveHeadingFont,
@@ -67,9 +67,9 @@ export const Heading = forwardRef(function Heading(
       data-ui="Heading"
       {...restProps}
       $accent={accent}
-      $align={useArrayProp(align)}
+      $align={_getArrayProp(align)}
       $muted={muted}
-      $size={useArrayProp(size)}
+      $size={_getArrayProp(size)}
       $weight={weight}
       ref={ref}
     >

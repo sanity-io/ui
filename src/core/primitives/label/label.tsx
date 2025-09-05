@@ -2,7 +2,7 @@ import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
 import {TextAlign} from '../../types'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
@@ -66,9 +66,9 @@ export const Label = forwardRef(function Label(
       data-ui="Label"
       {...restProps}
       $accent={accent}
-      $align={useArrayProp(align)}
+      $align={_getArrayProp(align)}
       $muted={muted}
-      $size={useArrayProp(size)}
+      $size={_getArrayProp(size)}
       $weight={weight}
       ref={ref}
     >

@@ -1,10 +1,9 @@
 import {getTheme_v2} from '@sanity/ui/theme'
-import {forwardRef, useMemo} from 'react'
+import {forwardRef} from 'react'
 import {css, styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../../constants'
-import {useArrayProp} from '../../hooks'
-import {_responsive, rem, ThemeProps} from '../../styles'
+import {_getArrayProp, _responsive, rem, ThemeProps} from '../../styles'
 import {AvatarSize} from '../../types'
 import {Label} from '../label'
 
@@ -69,23 +68,21 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {count, size: sizeProp = 1} = props
-  const size = useArrayProp(sizeProp)
-
-  const fontSize = useMemo(
-    () =>
-      size.map((s) => {
-        if (s === 1) return 1
-        if (s === 2) return 3
-        if (s === 3) return 5
-
-        return 0
-      }),
-    [size],
-  )
+  const size = _getArrayProp(sizeProp)
 
   return (
     <StyledAvatarCounter $size={size} data-ui="AvatarCounter" ref={ref}>
-      <Label as="span" size={fontSize} weight="medium">
+      <Label
+        as="span"
+        size={size.map((s) => {
+          if (s === 1) return 1
+          if (s === 2) return 3
+          if (s === 3) return 5
+
+          return 0
+        })}
+        weight="medium"
+      >
         {count}
       </Label>
     </StyledAvatarCounter>

@@ -1,7 +1,7 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {BadgeMode, BadgeTone} from '../../types'
 import {Box, BoxProps} from '../box'
@@ -51,8 +51,8 @@ export const Badge = forwardRef(function Badge(
       data-ui="Badge"
       {...restProps}
       $tone={tone}
-      $radius={useArrayProp(radius)}
-      padding={useArrayProp(padding)}
+      $radius={_getArrayProp(radius)}
+      padding={_getArrayProp(padding)}
       ref={ref}
     >
       <Text size={fontSize}>{children}</Text>

@@ -1,9 +1,9 @@
 import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useId, useMemo, useState} from 'react'
+import {forwardRef, useCallback, useEffect, useId, useState} from 'react'
 import ReactIs from 'react-is'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {useTheme_v2} from '../../theme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
 import {Label} from '../label'
@@ -75,7 +75,7 @@ export const Avatar = forwardRef(function Avatar(
   } = props
   const {avatar} = useTheme_v2()
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
-  const size = useArrayProp(sizeProp)
+  const size = _getArrayProp(sizeProp)
 
   // eslint-disable-next-line no-warning-comments
   // @todo: remove this
@@ -113,18 +113,6 @@ export const Avatar = forwardRef(function Avatar(
       onImageLoadError(new Error('Avatar: the image failed to load'))
     }
   }, [onImageLoadError])
-
-  const initialsSize = useMemo(
-    () =>
-      size.map((s) => {
-        if (s === 1) return 1
-        if (s === 2) return 3
-        if (s === 3) return 5
-
-        return 0
-      }),
-    [size],
-  )
 
   return (
     <StyledAvatar
@@ -182,7 +170,17 @@ export const Avatar = forwardRef(function Avatar(
       {(imageFailed || !src) && initials && (
         <>
           <Initials>
-            <InitialsLabel forwardedAs="span" size={initialsSize} weight="medium">
+            <InitialsLabel
+              forwardedAs="span"
+              size={size.map((s) => {
+                if (s === 1) return 1
+                if (s === 2) return 3
+                if (s === 3) return 5
+
+                return 0
+              })}
+              weight="medium"
+            >
               {initials}
             </InitialsLabel>
           </Initials>

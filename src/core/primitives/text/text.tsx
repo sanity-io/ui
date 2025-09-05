@@ -2,7 +2,7 @@ import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {useArrayProp} from '../../hooks'
+import {_getArrayProp} from '../../styles'
 import {
   ResponsiveFontStyleProps,
   responsiveTextAlignStyle,
@@ -68,10 +68,10 @@ export const Text = forwardRef(function Text(
       data-ui="Text"
       {...restProps}
       $accent={accent}
-      $align={useArrayProp(align)}
+      $align={_getArrayProp(align)}
       $muted={muted}
       ref={ref}
-      $size={useArrayProp(size)}
+      $size={_getArrayProp(size)}
       $weight={weight}
     >
       <span>{children}</span>
