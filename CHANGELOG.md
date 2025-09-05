@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.14](https://github.com/sanity-io/ui/compare/v3.0.13...v3.0.14) (2025-09-05)
+
+### Bug Fixes
+
+- remove `useArrayProp` usage ([#2055](https://github.com/sanity-io/ui/issues/2055)) ([d693ec7](https://github.com/sanity-io/ui/commit/d693ec781733bb0ebe5800f2725f872148a03f2a))
+
 ## [3.0.13](https://github.com/sanity-io/ui/compare/v3.0.12...v3.0.13) (2025-09-05)
 
 ### Bug Fixes
