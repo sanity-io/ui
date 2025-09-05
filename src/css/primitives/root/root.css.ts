@@ -4,7 +4,6 @@ import {layers} from '../../layers.css'
 export const _root: string = _style(layers.primitives, {
   containerType: 'inline-size',
   WebkitFontSmoothing: 'antialiased',
-  // minWidth: `${320 / 16}rem`, // 320px
 
   selectors: {
     'html.&': {
