@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.12](https://github.com/sanity-io/ui/compare/v3.0.11...v3.0.12) (2025-09-05)
+
+### Bug Fixes
+
+- handle `react-hooks/preserve-manual-memoization` ([#2053](https://github.com/sanity-io/ui/issues/2053)) ([c797d2b](https://github.com/sanity-io/ui/commit/c797d2bb3753f1d0b5bd3f0a38f7ef595a28b6f8))
+
 ## [3.0.11](https://github.com/sanity-io/ui/compare/v3.0.10...v3.0.11) (2025-09-04)
 
 ### Bug Fixes
