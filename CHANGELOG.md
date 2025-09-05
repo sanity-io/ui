@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.13](https://github.com/sanity-io/ui/compare/v3.0.12...v3.0.13) (2025-09-05)
+
+### Bug Fixes
+
+- handle `react-hooks/set-state-in-effect` ([#2054](https://github.com/sanity-io/ui/issues/2054)) ([dd7c347](https://github.com/sanity-io/ui/commit/dd7c34778b1f24ee348a841d056c1306e86b70ac))
+
 ## [3.0.12](https://github.com/sanity-io/ui/compare/v3.0.11...v3.0.12) (2025-09-05)
 
 ### Bug Fixes
