@@ -27,6 +27,8 @@ export const root: string = _style(layers.primitives, {
 export const muted: string = _style(layers.primitives, {
   backgroundColor: vars.color.bg,
 
+  transition: 'background-color 100ms ease-in-out',
+
   selectors: {
     '&&': {
       vars: {
