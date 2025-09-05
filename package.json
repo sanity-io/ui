@@ -195,7 +195,7 @@
     "refractor": "^5.0.0",
     "rimraf": "^5.0.5",
     "semantic-release": "^24.2.7",
-    "start-server-and-test": "^2.0.13",
+    "start-server-and-test": "^2.1.0",
     "storybook": "^8.6.14",
     "styled-components": "npm:@sanity/styled-components@^6.1.22",
     "tsconfig-paths": "^4.2.0",
