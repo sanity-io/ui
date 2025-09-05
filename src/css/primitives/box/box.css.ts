@@ -4,6 +4,16 @@ import {vars} from '../../vars.css'
 
 export const root: string = _style(layers.primitives, {
   selectors: {
+    'button.&': {
+      WebkitFontSmoothing: 'inherit',
+      appearance: 'none',
+      outline: 'none',
+      font: 'inherit',
+      textAlign: 'inherit',
+      border: 'none',
+      inlineSize: 'stretch',
+    },
+
     'iframe.&': {
       border: 'none',
     },

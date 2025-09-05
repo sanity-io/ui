@@ -19,7 +19,6 @@ export const root: string = _style(layers.primitives, {
   backgroundColor: vars.color.bg,
   color: vars.color.fg,
 
-  //
   transition:
     'background-color 100ms ease-in-out, border-color 100ms, box-shadow 100ms ease-in-out, color 100ms ease-in-out',
 
@@ -33,17 +32,6 @@ export const root: string = _style(layers.primitives, {
   },
 
   selectors: {
-    'button.&': {
-      WebkitFontSmoothing: 'inherit',
-      appearance: 'none',
-      outline: 'none',
-      font: 'inherit',
-      textAlign: 'inherit',
-      border: 'none',
-      // See https://caniuse.com/?search=width%3A%20stretch
-      width: ['-moz-available', '-webkit-fill-available', 'stretch'],
-    },
-
     'a.&': {
       outline: 'none',
       textDecoration: 'none',
