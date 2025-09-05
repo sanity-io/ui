@@ -162,6 +162,14 @@ export const imageOutline: string = _style(layers.primitives, {
   ].join(', '),
 })
 
+globalStyle(`${root}[data-hide-inner-stroke] ${imageOutline}`, {
+  '@layer': {
+    [layers.primitives]: {
+      boxShadow: `inset 0 0 0 1px ${vars.color.avatar.bg}`,
+    },
+  },
+})
+
 export const initials: string = _style(layers.primitives, {
   color: vars.color.avatar.fg,
   borderRadius: 'inherit',

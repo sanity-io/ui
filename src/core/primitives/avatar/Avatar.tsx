@@ -47,7 +47,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
   props: AvatarProps<E>,
 ): React.JSX.Element {
   const {
-    __unstable_hideInnerStroke,
+    __unstable_hideInnerStroke: hideInnerStroke,
     as: Element = DEFAULT_AVATAR_ELEMENT,
     className,
     color = 'magenta',
@@ -104,7 +104,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
 
   return (
     <Element
-      data-hide-inner-stroke={__unstable_hideInnerStroke ? '' : undefined}
+      data-hide-inner-stroke={hideInnerStroke ? '' : undefined}
       data-ui="Avatar"
       {...rest}
       aria-label={title}
