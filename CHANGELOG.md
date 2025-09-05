@@ -5,6 +5,26 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.25](https://github.com/sanity-io/ui/compare/v4.0.0-static.24...v4.0.0-static.25) (2025-09-05)
+
+### Features
+
+- add margin and max-width props to typographic primitives ([7588f33](https://github.com/sanity-io/ui/commit/7588f33f62d5b95e51a34ea12a25fbf56ad4a491))
+- **width:** add `max` option ([404f2b7](https://github.com/sanity-io/ui/commit/404f2b7c943cd9703a2981bea20307a6f3da9f66))
+
+### Bug Fixes
+
+- **avatar:** optionally hide inner avatar stroke ([84e55a7](https://github.com/sanity-io/ui/commit/84e55a77d196431da8b0105f8f07b35f3423c95e))
+- **box:** transition muted background color ([d336fba](https://github.com/sanity-io/ui/commit/d336fba485119aa9191be2a9d6f192a61e91453a))
+- **button:** explicit button inline size ([e3ba3cb](https://github.com/sanity-io/ui/commit/e3ba3cb4d1958a84aa6edbdffeb7dfef9e9287a0))
+- **card:** support muted cards ([d3bb0b7](https://github.com/sanity-io/ui/commit/d3bb0b737a05dcd49cd11a06a112003ac4e28d2f))
+- **checkbox:** set `flex: none` ([5e73265](https://github.com/sanity-io/ui/commit/5e73265e38dadb01422e395a3cd91d7ebad45d0b))
+- **deps:** update dependency babel-plugin-react-compiler to v19.1.0-rc.3 (v4) ([#2056](https://github.com/sanity-io/ui/issues/2056)) ([aec4bff](https://github.com/sanity-io/ui/commit/aec4bffa6bf17e51139c48f121966e4a3bf3425b))
+- input primitives ([ed7a9e5](https://github.com/sanity-io/ui/commit/ed7a9e5669c0cde0314ca01206ab003e985e8fd1))
+- **menu:** pass `selected` property ([17d7f29](https://github.com/sanity-io/ui/commit/17d7f291b38d2d1ca4a1853a909375ed922fd0d6))
+- **selectable:** fix muted colors ([9166cf3](https://github.com/sanity-io/ui/commit/9166cf3e94ba64813855de6060515c3fad60e74e))
+- use react namespace ([7de06d8](https://github.com/sanity-io/ui/commit/7de06d80a37cad41a7c4b5e275f51e4b4b95e61d))
+
 ## [4.0.0-static.24](https://github.com/sanity-io/ui/compare/v4.0.0-static.23...v4.0.0-static.24) (2025-09-04)
 
 ### Features
