@@ -79,6 +79,10 @@ function Pane(props: {borderLeft?: boolean; id: string}) {
                     <MenuItem text="Item 3" />
                   </Menu>
                 }
+                popover={{
+                  modal: true,
+                  portal: true,
+                }}
               />
             </Box>
           </Dialog>
