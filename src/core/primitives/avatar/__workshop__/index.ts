@@ -6,6 +6,11 @@ const scope: WorkshopScope = {
   title: 'Avatar',
   stories: [
     {
+      name: 'props',
+      title: 'Props',
+      component: lazy(() => import('./PropsStory')),
+    },
+    {
       name: 'as-button',
       title: 'As button',
       component: lazy(() => import('./AsButton')),
