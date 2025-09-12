@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/sanity-io/ui/compare/v3.0.14...v3.1.0) (2025-09-12)
+
+### Features
+
+- add options prop to useGlobalKeyDown ([#2061](https://github.com/sanity-io/ui/issues/2061)) ([7fd41e0](https://github.com/sanity-io/ui/commit/7fd41e0cb477aea6e198082c1cb4513b714757c9))
+
 ## [3.0.14](https://github.com/sanity-io/ui/compare/v3.0.13...v3.0.14) (2025-09-05)
 
 ### Bug Fixes
