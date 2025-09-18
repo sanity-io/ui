@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.15](https://github.com/sanity-io/ui/compare/v2.16.14...v2.16.15) (2025-09-18)
+
+### Bug Fixes
+
+- **deps:** update dependency framer-motion to ^12.23.15 (v2) ([#2063](https://github.com/sanity-io/ui/issues/2063)) ([bb7f012](https://github.com/sanity-io/ui/commit/bb7f012591083e4acbdf1528d071780b5a9de7c1))
+
 ## [2.16.14](https://github.com/sanity-io/ui/compare/v2.16.13...v2.16.14) (2025-09-04)
 
 ### Bug Fixes
