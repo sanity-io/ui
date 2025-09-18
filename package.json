@@ -197,7 +197,7 @@
     "react-dom": "^19",
     "react-is": "^19"
   },
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.17.0",
   "engines": {
     "node": ">=20.19 <22 || >=22.12"
   },
