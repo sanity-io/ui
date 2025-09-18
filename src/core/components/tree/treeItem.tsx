@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
+import {startTransition, useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {Box, BoxProps, Flex, Text} from '../../primitives'
@@ -65,7 +65,17 @@ export function TreeItem(
     weight,
     ...restProps
   } = props
-  const [rootElement, setRootElement] = useState<HTMLLIElement | null>(null)
+  const [rootElement, _setRootElement] = useState<HTMLLIElement | null>(null)
+  /**
+   * The startTransition wrapper here is to avoid an issue when on React 18 where this error can happen:
+   * >Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
+   * This doesn't happen on React 19 due to automatic batching of all state updates, the startTransition wrapper here gives a type of batching for 18 users in a way that still works with 19.
+   * NOTE: The startTransition wrapper is not needed in UI v4, since the baseline there is React 19.
+   */
+  const setRootElement = useCallback((node: HTMLLIElement | null) => {
+    startTransition(() => _setRootElement(node))
+  }, [])
+
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
