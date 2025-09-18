@@ -226,7 +226,7 @@
       "react": "$react",
       "react-dom": "$react-dom",
       "react-is": "$react-is",
-      "styled-components": "npm:@sanity/styled-components@6.1.22"
+      "styled-components": "npm:@sanity/styled-components@6.1.23"
     }
   },
   "esm.sh": {
