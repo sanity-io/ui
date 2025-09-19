@@ -132,8 +132,6 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       data-ui="MenuItem"
       {...rest}
       as={as}
-      data-pressed={pressed ? '' : undefined}
-      data-disabled={disabled ? '' : undefined}
       radius={radius}
       disabled={disabled}
       onClick={handleClick}

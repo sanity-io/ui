@@ -44,7 +44,7 @@ export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELE
       {...rest}
       as={as}
       className={_selectable({className, radius, tone})}
-      data-selected={selected ? '' : undefined}
+      data-selected={selected ? '' : props['data-selected']}
     />
   )
 }

@@ -103,8 +103,8 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
       data-ui="Button"
       {...rest}
       className={button({className, flex, mode, radius, tone, width})}
-      data-disabled={loading || disabled ? '' : undefined}
-      data-selected={selected ? '' : undefined}
+      data-disabled={loading || disabled ? '' : props['data-disabled']}
+      data-selected={selected ? '' : props['data-selected']}
       disabled={Boolean(loading || disabled)}
       // @ts-expect-error - TODO: fix this
       href={disabled ? undefined : href}

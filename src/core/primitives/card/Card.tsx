@@ -72,10 +72,10 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
       })}
       data-checkered={checkered ? '' : undefined}
       // Extract the disabled prop without removing it from `...rest` so that the underlying <button> or <a> has `[disabled]` when needed
-      data-disabled={props.disabled ? '' : undefined}
-      data-focus-ring={focusRing ? '' : undefined}
-      data-pressed={pressed ? '' : undefined}
-      data-selected={selected ? '' : undefined}
+      data-disabled={props.disabled ? '' : props['data-disabled']}
+      data-focus-ring={focusRing ? '' : props['data-focus-ring']}
+      data-pressed={pressed ? '' : props['data-pressed']}
+      data-selected={selected ? '' : props['data-selected']}
       radius={radius}
       style={style}
     />
