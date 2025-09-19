@@ -70,9 +70,6 @@ export const root: string = _style(layers.primitives, {
   'backgroundColor': vars.color.bg,
   'color': vars.color.fg,
 
-  'transition':
-    'background-color 100ms ease-in-out, border-color 100ms, box-shadow 100ms ease-in-out, color 100ms ease-in-out',
-
   'vars': stateVars.enabled,
 
   '@media': {
