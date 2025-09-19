@@ -70,215 +70,287 @@ export const tones: Record<ElementTone, string> = {
       const solid = vars.color.solid[t]
       const tinted = vars.color.tinted[t]
 
+      const stateVars = {
+        default: {
+          enabled: {
+            [vars.color.bg]: solid.bg[0],
+            [vars.color.border]: solid.border[1],
+            [vars.color.code.bg]: solid.bg[1],
+            [vars.color.code.fg]: solid.fg[4],
+            [vars.color.fg]: solid.fg[0],
+            [vars.color.muted.bg]: solid.bg[1],
+            [vars.color.muted.fg]: solid.fg[4],
+            [vars.button.boxShadow]: 'none',
+          },
+
+          hovered: {
+            [vars.color.bg]: solid.bg[1],
+            [vars.color.border]: solid.border[2],
+            [vars.color.code.bg]: solid.bg[2],
+            [vars.color.code.fg]: solid.fg[4],
+            [vars.color.fg]: solid.fg[0],
+            [vars.color.muted.bg]: solid.bg[2],
+            [vars.color.muted.fg]: solid.fg[4],
+          },
+
+          // NOTE: also used for `selected` state
+          pressed: {
+            [vars.color.bg]: solid.bg[2],
+            [vars.color.border]: solid.border[3],
+            [vars.color.code.bg]: solid.bg[3],
+            [vars.color.code.fg]: solid.fg[4],
+            [vars.color.fg]: solid.fg[0],
+            [vars.color.muted.bg]: solid.bg[3],
+            [vars.color.muted.fg]: solid.fg[4],
+          },
+
+          disabled: {
+            ..._fromEntries(
+              AVATAR_COLORS.map((c) => [vars.color.avatar[c].bg, vars.color.tinted.default.bg[3]]),
+            ),
+
+            [vars.color.bg]: vars.color.tinted.default.bg[1],
+            [vars.color.border]: vars.color.tinted.default.border[1],
+            [vars.color.code.bg]: vars.color.tinted.default.bg[2],
+            [vars.color.code.fg]: vars.color.tinted.default.border[4],
+            [vars.color.fg]: vars.color.tinted.default.border[4],
+            [vars.color.muted.bg]: vars.color.tinted.default.bg[2],
+            [vars.color.muted.fg]: vars.color.tinted.default.border[4],
+          },
+        },
+
+        ghost: {
+          enabled: {
+            [vars.color.bg]: `color-mix(in srgb, transparent, ${tinted.bg[1]} 50%)`,
+            [vars.color.border]: tinted.border[0],
+            [vars.color.fg]: tinted.fg[2],
+            [vars.color.code.bg]: tinted.bg[2],
+            [vars.color.code.fg]: tinted.fg[4],
+            [vars.color.muted.bg]: tinted.bg[2],
+            [vars.color.muted.fg]: tinted.fg[4],
+            [vars.button.boxShadow]: `inset 0 0 0 ${vars.button.border.width} ${vars.color.border}`,
+          },
+
+          hovered: {
+            [vars.color.bg]: tinted.bg[1],
+            [vars.color.border]: tinted.border[1],
+            [vars.color.code.bg]: tinted.bg[3],
+            [vars.color.code.fg]: tinted.fg[3],
+            [vars.color.fg]: tinted.fg[1],
+            [vars.color.muted.bg]: tinted.bg[3],
+            [vars.color.muted.fg]: tinted.fg[3],
+          },
+
+          // NOTE: also used for `selected` state
+          pressed: {
+            [vars.color.bg]: tinted.bg[2],
+            [vars.color.border]: tinted.border[2],
+            [vars.color.code.bg]: tinted.bg[4],
+            [vars.color.code.fg]: tinted.fg[3],
+            [vars.color.fg]: tinted.fg[1],
+            [vars.color.muted.bg]: tinted.bg[4],
+            [vars.color.muted.fg]: tinted.fg[3],
+            [vars.button.boxShadow]: `inset 0 0 0 ${vars.button.border.width} ${vars.color.border}`,
+          },
+
+          disabled: {
+            ..._fromEntries(
+              AVATAR_COLORS.map((c) => [vars.color.avatar[c].bg, vars.color.tinted.default.bg[2]]),
+            ),
+
+            [vars.color.bg]: vars.color.tinted.default.bg[0],
+            [vars.color.border]: vars.color.tinted.default.border[0],
+            [vars.color.code.bg]: vars.color.tinted.default.bg[1],
+            [vars.color.code.fg]: vars.color.tinted.default.border[3],
+            [vars.color.fg]: vars.color.tinted.default.border[4],
+            [vars.color.muted.bg]: vars.color.tinted.default.bg[1],
+            [vars.color.muted.fg]: vars.color.tinted.default.border[3],
+          },
+        },
+
+        bleed: {
+          enabled: {
+            [vars.color.bg]: tinted.bg[0],
+            [vars.color.border]: tinted.border[1],
+            [vars.color.fg]: tinted.fg[2],
+            [vars.color.muted.bg]: tinted.bg[1],
+            [vars.color.muted.fg]: tinted.fg[4],
+            [vars.button.boxShadow]: 'none',
+          },
+
+          hovered: {
+            [vars.color.bg]: tinted.bg[1],
+            [vars.color.border]: tinted.border[2],
+            [vars.color.fg]: tinted.fg[1],
+            [vars.color.muted.bg]: tinted.bg[2],
+            [vars.color.muted.fg]: tinted.fg[3],
+          },
+
+          // NOTE: also used for `selected` state
+          pressed: {
+            [vars.color.bg]: tinted.bg[2],
+            [vars.color.border]: tinted.border[3],
+            [vars.color.fg]: tinted.fg[1],
+            [vars.color.muted.bg]: tinted.bg[3],
+            [vars.color.muted.fg]: tinted.fg[3],
+          },
+
+          disabled: {
+            ..._fromEntries(
+              AVATAR_COLORS.map((c) => [vars.color.avatar[c].bg, vars.color.tinted.default.bg[2]]),
+            ),
+
+            [vars.color.bg]: vars.color.tinted.default.bg[0],
+            [vars.color.border]: vars.color.tinted.default.border[0],
+            [vars.color.code.bg]: vars.color.tinted.default.bg[1],
+            [vars.color.code.fg]: vars.color.tinted.default.border[3],
+            [vars.color.fg]: vars.color.tinted.default.border[4],
+            [vars.color.muted.bg]: vars.color.tinted.default.bg[1],
+            [vars.color.muted.fg]: vars.color.tinted.default.border[3],
+          },
+        },
+      }
+
       return [
         t,
         _style(layers.primitives, {
-          selectors: {
-            // default
+          '@media': {
+            '(hover: hover)': {
+              selectors: {
+                [[
+                  `&.${modes.default}`,
+                  ':not(:active)',
+                  ':not(:focus)',
+                  ':not(:disabled)',
+                  ':not([aria-pressed="true"])',
+                  ':not([data-pressed])',
+                  ':not([data-focused])',
+                  ':not([data-selected])',
+                  ':not([data-disabled])',
+                  ':hover',
+                ].join('')]: {
+                  vars: stateVars.default.hovered,
+                },
 
-            [`&.${modes.default}`]: {
-              vars: {
-                [vars.color.bg]: solid.bg[0],
-                [vars.color.border]: solid.border[1],
-                [vars.color.code.bg]: solid.bg[1],
-                [vars.color.code.fg]: solid.fg[4],
-                [vars.color.fg]: solid.fg[0],
-                [vars.color.muted.bg]: solid.bg[1],
-                [vars.color.muted.fg]: solid.fg[4],
-                [vars.button.boxShadow]: 'none',
+                [[
+                  `&.${modes.ghost}`,
+                  ':not(:active)',
+                  ':not(:focus)',
+                  ':not(:disabled)',
+                  ':not([aria-pressed="true"])',
+                  ':not([data-pressed])',
+                  ':not([data-focused])',
+                  ':not([data-selected])',
+                  ':not([data-disabled])',
+                  ':hover',
+                ].join('')]: {
+                  vars: stateVars.ghost.hovered,
+                },
+
+                [[
+                  `&.${modes.bleed}`,
+                  ':not(:active)',
+                  ':not(:focus)',
+                  ':not(:disabled)',
+                  ':not([aria-pressed="true"])',
+                  ':not([data-pressed])',
+                  ':not([data-focused])',
+                  ':not([data-selected])',
+                  ':not([data-disabled])',
+                  ':hover',
+                ].join('')]: {
+                  vars: stateVars.bleed.hovered,
+                },
               },
             },
+          },
 
-            [`&.${modes.default}:not([data-disabled]):hover`]: {
-              vars: {
-                [vars.color.bg]: solid.bg[1],
-                [vars.color.border]: solid.border[2],
-                [vars.color.code.bg]: solid.bg[2],
-                [vars.color.code.fg]: solid.fg[4],
-                [vars.color.fg]: solid.fg[0],
-                [vars.color.muted.bg]: solid.bg[2],
-                [vars.color.muted.fg]: solid.fg[4],
-              },
+          'selectors': {
+            // default - enabled
+            [`&.${modes.default}:not([data-disabled])`]: {
+              vars: stateVars.default.enabled,
             },
 
-            [`&.${modes.default}:not([data-disabled]):active`]: {
-              vars: {
-                [vars.color.bg]: solid.bg[2],
-                [vars.color.border]: solid.border[3],
-                [vars.color.code.bg]: solid.bg[3],
-                [vars.color.code.fg]: solid.fg[4],
-                [vars.color.fg]: solid.fg[0],
-                [vars.color.muted.bg]: solid.bg[3],
-                [vars.color.muted.fg]: solid.fg[4],
-              },
+            // default - hovered
+            [[
+              // `&.${modes.default}:not([data-disabled]):hover`,
+              `&.${modes.default}:not([data-disabled])[data-hovered]`,
+            ].join(',')]: {
+              vars: stateVars.default.hovered,
             },
 
-            [`&.${modes.default}:not([data-disabled])[data-selected]`]: {
-              vars: {
-                [vars.color.bg]: solid.bg[2],
-                [vars.color.border]: solid.border[3],
-                [vars.color.code.bg]: solid.bg[3],
-                [vars.color.code.fg]: solid.fg[4],
-                [vars.color.fg]: solid.fg[0],
-                [vars.color.muted.bg]: solid.bg[3],
-                [vars.color.muted.fg]: solid.fg[4],
-              },
+            // default - pressed
+            // default - selected
+            [[
+              `&.${modes.default}:not([data-disabled]):active`,
+              `&.${modes.default}:not([data-disabled])[aria-pressed="true"]`,
+              `&.${modes.default}:not([data-disabled])[data-pressed]`,
+              `&.${modes.default}:not([data-disabled])[data-selected]`,
+            ].join(',')]: {
+              vars: stateVars.default.pressed,
             },
 
-            [`&.${modes.default}[data-disabled]`]: {
-              vars: {
-                ..._fromEntries(
-                  AVATAR_COLORS.map((c) => [
-                    vars.color.avatar[c].bg,
-                    vars.color.tinted.default.bg[3],
-                  ]),
-                ),
-
-                [vars.color.bg]: vars.color.tinted.default.bg[1],
-                [vars.color.border]: vars.color.tinted.default.border[1],
-                [vars.color.code.bg]: vars.color.tinted.default.bg[2],
-                [vars.color.code.fg]: vars.color.tinted.default.border[4],
-                [vars.color.fg]: vars.color.tinted.default.border[4],
-                [vars.color.muted.bg]: vars.color.tinted.default.bg[2],
-                [vars.color.muted.fg]: vars.color.tinted.default.border[4],
-              },
+            // default - disabled
+            [[`&.${modes.default}:disabled`, `&.${modes.default}[data-disabled]`].join(',')]: {
+              vars: stateVars.default.disabled,
             },
 
-            // ghost
-
-            [`&.${modes.ghost}`]: {
-              vars: {
-                [vars.color.bg]: `color-mix(in srgb, transparent, ${tinted.bg[1]} 50%)`,
-                [vars.color.border]: tinted.border[0],
-                [vars.color.fg]: tinted.fg[2],
-                [vars.color.code.bg]: tinted.bg[2],
-                [vars.color.code.fg]: tinted.fg[4],
-                [vars.color.muted.bg]: tinted.bg[2],
-                [vars.color.muted.fg]: tinted.fg[4],
-                [vars.button.boxShadow]:
-                  `inset 0 0 0 ${vars.button.border.width} ${vars.color.border}`,
-              },
+            // ghost - enabled
+            [`&.${modes.ghost}:not([data-disabled])`]: {
+              vars: stateVars.ghost.enabled,
             },
 
-            [`&.${modes.ghost}:not([data-disabled]):hover`]: {
-              vars: {
-                [vars.color.bg]: tinted.bg[1],
-                [vars.color.border]: tinted.border[1],
-                [vars.color.code.bg]: tinted.bg[3],
-                [vars.color.code.fg]: tinted.fg[3],
-                [vars.color.fg]: tinted.fg[1],
-                [vars.color.muted.bg]: tinted.bg[3],
-                [vars.color.muted.fg]: tinted.fg[3],
-              },
+            // ghost - hovered
+            [[
+              // `&.${modes.ghost}:not([data-disabled]):hover`,
+              `&.${modes.ghost}:not([data-disabled])[data-hovered]`,
+            ].join(',')]: {
+              vars: stateVars.ghost.hovered,
             },
 
-            [`&.${modes.ghost}:not([data-disabled]):active`]: {
-              vars: {
-                [vars.color.bg]: tinted.bg[2],
-                [vars.color.border]: tinted.border[2],
-                [vars.color.code.bg]: tinted.bg[4],
-                [vars.color.code.fg]: tinted.fg[3],
-                [vars.color.fg]: tinted.fg[1],
-                [vars.color.muted.bg]: tinted.bg[4],
-                [vars.color.muted.fg]: tinted.fg[3],
-                [vars.button.boxShadow]:
-                  `inset 0 0 0 ${vars.button.border.width} ${vars.color.border}`,
-              },
+            // ghost - pressed
+            // ghost - selected
+            [[
+              `&.${modes.ghost}:not([data-disabled]):active`,
+              `&.${modes.ghost}:not([data-disabled])[aria-pressed="true"]`,
+              `&.${modes.ghost}:not([data-disabled])[data-pressed]`,
+              `&.${modes.ghost}:not([data-disabled])[data-selected]`,
+            ].join(',')]: {
+              vars: stateVars.ghost.pressed,
             },
 
-            [`&.${modes.ghost}:not([data-disabled])[data-selected]`]: {
-              vars: {
-                [vars.color.bg]: tinted.bg[2],
-                [vars.color.border]: tinted.border[2],
-                [vars.color.code.bg]: tinted.bg[4],
-                [vars.color.code.fg]: tinted.fg[3],
-                [vars.color.fg]: tinted.fg[1],
-                [vars.color.muted.bg]: tinted.bg[4],
-                [vars.color.muted.fg]: tinted.fg[3],
-                [vars.button.boxShadow]:
-                  `inset 0 0 0 ${vars.button.border.width} ${vars.color.border}`,
-              },
+            // ghost - disabled
+            [[`&.${modes.ghost}:disabled`, `&.${modes.ghost}[data-disabled]`].join(',')]: {
+              vars: stateVars.ghost.disabled,
             },
 
-            [`&.${modes.ghost}[data-disabled]`]: {
-              vars: {
-                ..._fromEntries(
-                  AVATAR_COLORS.map((c) => [
-                    vars.color.avatar[c].bg,
-                    vars.color.tinted.default.bg[2],
-                  ]),
-                ),
-
-                [vars.color.bg]: vars.color.tinted.default.bg[0],
-                [vars.color.border]: vars.color.tinted.default.border[0],
-                [vars.color.code.bg]: vars.color.tinted.default.bg[1],
-                [vars.color.code.fg]: vars.color.tinted.default.border[3],
-                [vars.color.fg]: vars.color.tinted.default.border[4],
-                [vars.color.muted.bg]: vars.color.tinted.default.bg[1],
-                [vars.color.muted.fg]: vars.color.tinted.default.border[3],
-              },
+            // bleed - enabled
+            [`&.${modes.bleed}:not([data-disabled])`]: {
+              vars: stateVars.bleed.enabled,
             },
 
-            // bleed
-
-            [`&.${modes.bleed}`]: {
-              vars: {
-                [vars.color.bg]: tinted.bg[0],
-                [vars.color.border]: tinted.border[1],
-                [vars.color.fg]: tinted.fg[2],
-                [vars.color.muted.bg]: tinted.bg[1],
-                [vars.color.muted.fg]: tinted.fg[4],
-                [vars.button.boxShadow]: 'none',
-              },
+            // bleed - hovered
+            [[
+              // `&.${modes.bleed}:not([data-disabled]):hover`,
+              `&.${modes.bleed}:not([data-disabled])[data-hovered]`,
+            ].join(',')]: {
+              vars: stateVars.bleed.hovered,
             },
 
-            [`&.${modes.bleed}:not([data-disabled]):hover`]: {
-              vars: {
-                [vars.color.bg]: tinted.bg[1],
-                [vars.color.border]: tinted.border[2],
-                [vars.color.fg]: tinted.fg[1],
-                [vars.color.muted.bg]: tinted.bg[2],
-                [vars.color.muted.fg]: tinted.fg[3],
-              },
+            // bleed - pressed
+            // bleed - selected
+            [[
+              `&.${modes.bleed}:not([data-disabled]):active`,
+              `&.${modes.bleed}:not([data-disabled])[aria-pressed="true"]`,
+              `&.${modes.bleed}:not([data-disabled])[data-pressed]`,
+              `&.${modes.bleed}:not([data-disabled])[data-selected]`,
+            ].join(',')]: {
+              vars: stateVars.bleed.pressed,
             },
 
-            [`&.${modes.bleed}:not([data-disabled]):active`]: {
-              vars: {
-                [vars.color.bg]: tinted.bg[2],
-                [vars.color.border]: tinted.border[3],
-                [vars.color.fg]: tinted.fg[1],
-                [vars.color.muted.bg]: tinted.bg[3],
-                [vars.color.muted.fg]: tinted.fg[3],
-              },
-            },
-
-            [`&.${modes.bleed}:not([data-disabled])[data-selected]`]: {
-              vars: {
-                [vars.color.bg]: tinted.bg[2],
-                [vars.color.border]: tinted.border[3],
-                [vars.color.fg]: tinted.fg[1],
-                [vars.color.muted.bg]: tinted.bg[3],
-                [vars.color.muted.fg]: tinted.fg[3],
-              },
-            },
-
-            [`&.${modes.bleed}[data-disabled]`]: {
-              vars: {
-                ..._fromEntries(
-                  AVATAR_COLORS.map((c) => [
-                    vars.color.avatar[c].bg,
-                    vars.color.tinted.default.bg[2],
-                  ]),
-                ),
-
-                [vars.color.bg]: vars.color.tinted.default.bg[0],
-                [vars.color.border]: vars.color.tinted.default.border[0],
-                [vars.color.code.bg]: vars.color.tinted.default.bg[1],
-                [vars.color.code.fg]: vars.color.tinted.default.border[3],
-                [vars.color.fg]: vars.color.tinted.default.border[4],
-                [vars.color.muted.bg]: vars.color.tinted.default.bg[1],
-                [vars.color.muted.fg]: vars.color.tinted.default.border[3],
-              },
+            // bleed - disabled
+            [[`&.${modes.bleed}:disabled`, `&.${modes.bleed}[data-disabled]`].join(',')]: {
+              vars: stateVars.bleed.disabled,
             },
           },
         }),
