@@ -154,11 +154,12 @@ export const presentation: string = _style(layers.primitives, {
       },
     },
 
-    [`${root}:not([data-invalid]):not([data-read-only]) ${element}:not(:disabled):hover + &`]: {
-      vars: {
-        [vars.color.input.text.border]: vars.color.tinted.default.border[2],
+    [`${root}.${border}:not([data-invalid]):not([data-read-only]) ${element}:not(:disabled):hover + &`]:
+      {
+        vars: {
+          [vars.color.input.text.border]: vars.color.tinted.default.border[2],
+        },
       },
-    },
 
     [`${root}:not([data-invalid]) ${element}:focus + &`]: {
       vars: {
@@ -185,7 +186,7 @@ export const presentation: string = _style(layers.primitives, {
       },
     },
 
-    [`${root}[data-invalid] ${element}:not(:disabled):hover + &`]: {
+    [`${root}.${border}[data-invalid] ${element}:not(:disabled):hover + &`]: {
       vars: {
         [vars.color.input.text.border]: vars.color.tinted.critical.border[2],
       },
