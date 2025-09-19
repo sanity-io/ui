@@ -5,6 +5,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.27](https://github.com/sanity-io/ui/compare/v4.0.0-static.26...v4.0.0-static.27) (2025-09-19)
+
+### Bug Fixes
+
+- data props ([c79d288](https://github.com/sanity-io/ui/commit/c79d288e411f5dd8bf846328dfeb3d071fb5d8ed))
+- **input:** revert hovered border when using `border={false}` ([0435e7d](https://github.com/sanity-io/ui/commit/0435e7d6a159ed91745c3b55389fc50228459ec4))
+- revert transitions ([5a9cced](https://github.com/sanity-io/ui/commit/5a9cced6232dfdae4513e429e34403ce3b1e6e40))
+
 ## [4.0.0-static.26](https://github.com/sanity-io/ui/compare/v4.0.0-static.25...v4.0.0-static.26) (2025-09-18)
 
 ### Bug Fixes
