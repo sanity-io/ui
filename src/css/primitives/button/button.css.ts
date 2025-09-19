@@ -25,10 +25,6 @@ export const root: string = _style(layers.primitives, {
   color: vars.color.fg,
   inlineSize: 'max-content',
 
-  //
-  transition:
-    'background-color 100ms ease-in-out, box-shadow 100ms ease-in-out, color 100ms ease-in-out',
-
   selectors: {
     '&::-moz-focus-inner': {
       border: 0,
