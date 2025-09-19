@@ -119,7 +119,7 @@
     "@sanity/icons": "^3.7.4",
     "@vanilla-extract/dynamic": "^2.1.5",
     "csstype": "^3.1.3",
-    "framer-motion": "^12.23.15",
+    "framer-motion": "^12.23.16",
     "react-refractor": "^4.0.0",
     "use-effect-event": "^2.0.3"
   },
