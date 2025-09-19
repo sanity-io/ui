@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.28](https://github.com/sanity-io/ui/compare/v4.0.0-static.27...v4.0.0-static.28) (2025-09-19)
+
+### Bug Fixes
+
+- **card:** revert transitions ([023d7ee](https://github.com/sanity-io/ui/commit/023d7ee47d8988978dad014527ec9ed376ee1861))
+
 ## [4.0.0-static.27](https://github.com/sanity-io/ui/compare/v4.0.0-static.26...v4.0.0-static.27) (2025-09-19)
 
 ### Bug Fixes
