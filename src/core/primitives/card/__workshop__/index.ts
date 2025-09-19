@@ -14,6 +14,7 @@ const scope: WorkshopScope = {
     {name: 'checkered', title: 'Checkered', component: lazy(() => import('./Checkered'))},
     {name: 'as-component', title: 'As component', component: lazy(() => import('./AsComponent'))},
     {name: 'selected', title: 'Selected', component: lazy(() => import('./Selected'))},
+    {name: 'data-props', title: 'Data props', component: lazy(() => import('./DataProps'))},
   ],
 }
 

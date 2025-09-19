@@ -60,6 +60,11 @@ const scope: WorkshopScope = {
       title: 'Text overflow',
       component: lazy(() => import('./TextOverflow')),
     },
+    {
+      name: 'data-props',
+      title: 'Data props',
+      component: lazy(() => import('./DataProps')),
+    },
   ],
 }
 
