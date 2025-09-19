@@ -71,7 +71,7 @@ const scope: WorkshopScope = {
       component: lazy(() => import('./OnCloseMenuButton')),
     },
     {
-      name: 'shouldFocus',
+      name: 'should-focus',
       title: 'Menu with shouldFocus',
       component: lazy(() => import('./ShouldFocus')),
     },
@@ -84,6 +84,11 @@ const scope: WorkshopScope = {
       name: 'custom-selected-state',
       title: 'Custom selected state',
       component: lazy(() => import('./CustomSelectedState')),
+    },
+    {
+      name: 'data-props',
+      title: 'Data props',
+      component: lazy(() => import('./DataProps')),
     },
   ],
 }
