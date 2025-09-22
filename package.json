@@ -119,7 +119,7 @@
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.4",
     "csstype": "^3.1.3",
-    "framer-motion": "^12.23.16",
+    "framer-motion": "^12.23.18",
     "react-compiler-runtime": "19.1.0-rc.3",
     "react-refractor": "^2.2.0",
     "use-effect-event": "^2.0.3"
