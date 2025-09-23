@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.33](https://github.com/sanity-io/ui/compare/v4.0.0-static.32...v4.0.0-static.33) (2025-09-23)
+
+### Bug Fixes
+
+- add `displayName` to `React.createContext` ([1787b4d](https://github.com/sanity-io/ui/commit/1787b4dd225d1b821bf9f08085281087b49e044e))
+
 ## [4.0.0-static.32](https://github.com/sanity-io/ui/compare/v4.0.0-static.31...v4.0.0-static.32) (2025-09-23)
 
 ### Features
