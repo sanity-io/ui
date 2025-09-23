@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.35](https://github.com/sanity-io/ui/compare/v4.0.0-static.34...v4.0.0-static.35) (2025-09-23)
+
+### Features
+
+- take full advantage of conditional context sub ([484a92d](https://github.com/sanity-io/ui/commit/484a92d38fcdcf1ef9e828cc7e21115cb47123f8))
+
 ## [4.0.0-static.34](https://github.com/sanity-io/ui/compare/v4.0.0-static.33...v4.0.0-static.34) (2025-09-23)
 
 ### Bug Fixes
