@@ -22,6 +22,7 @@ export type InlineOwnProps = Omit<
   | 'gridRow'
   | 'gridTemplateColumns'
   | 'gridTemplateRows'
+  // eslint-disable-next-line no-warning-comments
   // todo: omit deprecated flex and grid props
 >
 

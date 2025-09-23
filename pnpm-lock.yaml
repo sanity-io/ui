@@ -147,27 +147,27 @@ importers:
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.36.0(jiti@2.5.1))
-      eslint-formatter-compact:
-        specifier: ^8.40.0
-        version: 8.40.0
+      eslint-formatter-gha:
+        specifier: ^1.6.0
+        version: 1.6.0
       eslint-plugin-boundaries:
         specifier: ^5.0.1
-        version: 5.0.1(eslint@9.36.0(jiti@2.5.1))
+        version: 5.0.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(eslint@9.36.0(jiti@2.5.1))
       eslint-plugin-import:
         specifier: ^2.32.0
-        version: 2.32.0(eslint@9.36.0(jiti@2.5.1))
+        version: 2.32.0(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-typescript@3.10.1)(eslint@9.36.0(jiti@2.5.1))
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.36.0(jiti@2.5.1))
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.36.0(jiti@2.5.1))
-      eslint-plugin-react-compiler:
-        specifier: 19.1.0-rc.2
-        version: 19.1.0-rc.2(eslint@9.36.0(jiti@2.5.1))
       eslint-plugin-react-hooks:
-        specifier: 0.0.0-experimental-66f09bd0-20250806
-        version: 0.0.0-experimental-66f09bd0-20250806(eslint@9.36.0(jiti@2.5.1))
+        specifier: 6.0.0-rc.2
+        version: 6.0.0-rc.2(eslint@9.36.0(jiti@2.5.1))
+      eslint-plugin-react-hooks-with-use-effect-event:
+        specifier: npm:eslint-plugin-react-hooks@0.0.0-experimental-83c88ad4-20250923
+        version: eslint-plugin-react-hooks@0.0.0-experimental-83c88ad4-20250923(eslint@9.36.0(jiti@2.5.1))
       eslint-plugin-react-refresh:
         specifier: ^0.4.21
         version: 0.4.21(eslint@9.36.0(jiti@2.5.1))
@@ -382,8 +382,8 @@ importers:
         specifier: ^9.36.0
         version: 9.36.0(jiti@2.5.1)
       eslint-plugin-react-hooks:
-        specifier: 0.0.0-experimental-66f09bd0-20250806
-        version: 0.0.0-experimental-66f09bd0-20250806(eslint@9.36.0(jiti@2.5.1))
+        specifier: 6.0.0-rc.2
+        version: 6.0.0-rc.2(eslint@9.36.0(jiti@2.5.1))
       eslint-plugin-react-refresh:
         specifier: ^0.4.21
         version: 0.4.21(eslint@9.36.0(jiti@2.5.1))
@@ -4081,8 +4081,15 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-formatter-compact@8.40.0:
-    resolution: {integrity: sha512-cwGUs113TgmTQXecx5kfRjB7m0y2wkDLSadPTE2pK6M/wO4N8PjmUaoWOFNCP9MHgsiZwgqd5bZFnDCnszC56Q==}
+  eslint-formatter-gha@1.6.0:
+    resolution: {integrity: sha512-f+jY9I1qAlN4/bM6Cyiob/0W97yGbalp4uoMyHA4gelR0vp0sbusTlPXqRKtedBkq4MbEziAuL+0+STsaphM5Q==}
+
+  eslint-formatter-json@8.40.0:
+    resolution: {integrity: sha512-0bXo4At1EoEU23gFfN7wcDeqRXDHLJnvDOuQKD3Q6FkBlk7L2oVNPYg/sciIWdYrUnCBcKuMit3IWXkdSfzChg==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  eslint-formatter-stylish@8.40.0:
+    resolution: {integrity: sha512-blbD5ZSQnjNEUaG38VCO4WG9nfDQWE8/IOmt8DFRHXUIfZikaIXmsQTdWNFk0/e0j7RgIVRza86MpsJ+aHgFLg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
   eslint-import-resolver-node@0.3.9:
@@ -4165,14 +4172,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-compiler@19.1.0-rc.2:
-    resolution: {integrity: sha512-oKalwDGcD+RX9mf3NEO4zOoUMeLvjSvcbbEOpquzmzqEEM2MQdp7/FY/Hx9NzmUwFzH1W9SKTz5fihfMldpEYw==}
-    engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
-    peerDependencies:
-      eslint: '>=7'
-
-  eslint-plugin-react-hooks@0.0.0-experimental-66f09bd0-20250806:
-    resolution: {integrity: sha512-O8fe2p/h8L2hxUWx4U51ul+4jWuIZA4kduauFLelaYcYOHu1Yx9DQGm8NBOtkFOmVD9vRRZXmunwLtGlblIGmQ==}
+  eslint-plugin-react-hooks@0.0.0-experimental-83c88ad4-20250923:
+    resolution: {integrity: sha512-bcdbk7L7n5z55xXDV/uAq95FACinFMZ3zWDmR1IKL205ZUTzFLPHltzg1AR4L/mtVy1uU3wMXM2B0uW5zolNHw==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -4180,6 +4181,12 @@ packages:
   eslint-plugin-react-hooks@5.2.0:
     resolution: {integrity: sha512-+f15FfK64YQwZdJNELETdn5ibXEUQmW1DZL6KXhNnc2heoy/sg9VJJeT7n8TlMWouzWqSWavFkIhHyIbIAEapg==}
     engines: {node: '>=10'}
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
+
+  eslint-plugin-react-hooks@6.0.0-rc.2:
+    resolution: {integrity: sha512-2cnFkQl2xld2BgKDtxLSd/JqkpZHBXZKcz+ZurfiQ7GECzMckIddJN5PZyWach3MN4h/CjwfqPigAtYxInXtuw==}
+    engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
 
@@ -7368,6 +7375,9 @@ packages:
   text-extensions@2.4.0:
     resolution: {integrity: sha512-te/NtwBwfiNRLf9Ijqx3T0nlqZiQ2XrrtBvu+cLL8ZRrGkO0NHTug8MYFKyoSrv/sHTaSKfilUkizV6XhxMJ3g==}
     engines: {node: '>=8'}
+
+  text-table@0.2.0:
+    resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
   thenify-all@1.6.0:
     resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
@@ -12125,7 +12135,18 @@ snapshots:
     dependencies:
       eslint: 9.36.0(jiti@2.5.1)
 
-  eslint-formatter-compact@8.40.0: {}
+  eslint-formatter-gha@1.6.0:
+    dependencies:
+      eslint-formatter-json: 8.40.0
+      eslint-formatter-stylish: 8.40.0
+
+  eslint-formatter-json@8.40.0: {}
+
+  eslint-formatter-stylish@8.40.0:
+    dependencies:
+      chalk: 4.1.2
+      strip-ansi: 6.0.1
+      text-table: 0.2.0
 
   eslint-import-resolver-node@0.3.9:
     dependencies:
@@ -12150,10 +12171,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.5.1)):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.5.1)):
     dependencies:
       debug: 3.2.7(supports-color@8.1.1)
     optionalDependencies:
+      '@typescript-eslint/parser': 8.44.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)
       eslint: 9.36.0(jiti@2.5.1)
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
@@ -12170,12 +12192,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-boundaries@5.0.1(eslint@9.36.0(jiti@2.5.1)):
+  eslint-plugin-boundaries@5.0.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(eslint@9.36.0(jiti@2.5.1)):
     dependencies:
       chalk: 4.1.2
       eslint: 9.36.0(jiti@2.5.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.5.1))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.36.0(jiti@2.5.1))
       micromatch: 4.0.8
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
@@ -12212,33 +12234,6 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-import@2.32.0(eslint@9.36.0(jiti@2.5.1)):
-    dependencies:
-      '@rtsao/scc': 1.1.0
-      array-includes: 3.1.9
-      array.prototype.findlastindex: 1.2.6
-      array.prototype.flat: 1.3.3
-      array.prototype.flatmap: 1.3.3
-      debug: 3.2.7(supports-color@8.1.1)
-      doctrine: 2.1.0
-      eslint: 9.36.0(jiti@2.5.1)
-      eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.36.0(jiti@2.5.1))
-      hasown: 2.0.2
-      is-core-module: 2.16.1
-      is-glob: 4.0.3
-      minimatch: 3.1.2
-      object.fromentries: 2.0.8
-      object.groupby: 1.0.3
-      object.values: 1.2.1
-      semver: 6.3.1
-      string.prototype.trimend: 1.0.9
-      tsconfig-paths: 3.15.0
-    transitivePeerDependencies:
-      - eslint-import-resolver-typescript
-      - eslint-import-resolver-webpack
-      - supports-color
-
   eslint-plugin-jsx-a11y@6.10.2(eslint@9.36.0(jiti@2.5.1)):
     dependencies:
       aria-query: 5.3.2
@@ -12258,7 +12253,7 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-react-compiler@19.1.0-rc.2(eslint@9.36.0(jiti@2.5.1)):
+  eslint-plugin-react-hooks@0.0.0-experimental-83c88ad4-20250923(eslint@9.36.0(jiti@2.5.1)):
     dependencies:
       '@babel/core': 7.28.4
       '@babel/parser': 7.28.4
@@ -12270,21 +12265,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-hooks@0.0.0-experimental-66f09bd0-20250806(eslint@9.36.0(jiti@2.5.1)):
+  eslint-plugin-react-hooks@5.2.0(eslint@9.36.0(jiti@2.5.1)):
+    dependencies:
+      eslint: 9.36.0(jiti@2.5.1)
+
+  eslint-plugin-react-hooks@6.0.0-rc.2(eslint@9.36.0(jiti@2.5.1)):
     dependencies:
       '@babel/core': 7.28.4
       '@babel/parser': 7.28.4
-      '@babel/plugin-transform-private-methods': 7.27.1(@babel/core@7.28.4)
+      '@babel/plugin-proposal-private-methods': 7.18.6(@babel/core@7.28.4)
       eslint: 9.36.0(jiti@2.5.1)
       hermes-parser: 0.25.1
       zod: 3.25.76
       zod-validation-error: 3.5.3(zod@3.25.76)
     transitivePeerDependencies:
       - supports-color
-
-  eslint-plugin-react-hooks@5.2.0(eslint@9.36.0(jiti@2.5.1)):
-    dependencies:
-      eslint: 9.36.0(jiti@2.5.1)
 
   eslint-plugin-react-refresh@0.4.21(eslint@9.36.0(jiti@2.5.1)):
     dependencies:
@@ -15785,6 +15780,8 @@ snapshots:
       source-map-support: 0.5.21
 
   text-extensions@2.4.0: {}
+
+  text-table@0.2.0: {}
 
   thenify-all@1.6.0:
     dependencies:

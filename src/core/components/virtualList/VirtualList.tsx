@@ -29,7 +29,10 @@ export interface VirtualListChangeOpts {
 }
 
 /** @beta */
-export type VirtualListOwnProps<Item = any> = {
+export type VirtualListOwnProps<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Item = any,
+> = {
   gap?: Space
   getItemKey?: (item: Item, itemIndex: number) => string
   items?: Item[]
