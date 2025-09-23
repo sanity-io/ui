@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.34](https://github.com/sanity-io/ui/compare/v4.0.0-static.33...v4.0.0-static.34) (2025-09-23)
+
+### Bug Fixes
+
+- reduce usage of `useResponsiveProp` ([2ea4568](https://github.com/sanity-io/ui/commit/2ea4568c017d327145786d6bd2158028642cb1bc))
+
 ## [4.0.0-static.33](https://github.com/sanity-io/ui/compare/v4.0.0-static.32...v4.0.0-static.33) (2025-09-23)
 
 ### Bug Fixes
