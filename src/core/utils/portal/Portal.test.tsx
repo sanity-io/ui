@@ -27,9 +27,9 @@ describe('utils/portal', () => {
         }
 
         return (
-          <PortalContext.Provider value={value}>
+          <PortalContext value={value}>
             <Debug />
-          </PortalContext.Provider>
+          </PortalContext>
         )
       }
 
@@ -55,12 +55,12 @@ describe('utils/portal', () => {
 
       function Root() {
         return (
-          <PortalContext.Provider
+          <PortalContext
             // @ts-expect-error - we want to test the error case
             value={undefined}
           >
             <Debug />
-          </PortalContext.Provider>
+          </PortalContext>
         )
       }
 
@@ -86,12 +86,12 @@ describe('utils/portal', () => {
         // NOTE: we’re testing this because the context value may be a function in the future
 
         return (
-          <PortalContext.Provider
+          <PortalContext
             // @ts-expect-error - we want to test the error case
             value={() => ({version: 1})}
           >
             <Debug />
-          </PortalContext.Provider>
+          </PortalContext>
         )
       }
 

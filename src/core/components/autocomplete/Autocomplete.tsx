@@ -16,6 +16,7 @@ import {
   useMemo,
   useReducer,
   useRef,
+  useState,
 } from 'react'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
@@ -177,6 +178,8 @@ export function Autocomplete<
   const resultsPopoverElementRef = useRef<HTMLDivElement | null>(null)
   const inputElementRef = useRef<HTMLInputElement | null>(null)
   const listBoxElementRef = useRef<HTMLUListElement | null>(null)
+  // Element refs that need to be accessed during render
+  const [inputElement, setInputElement] = useState<HTMLInputElement | null>(null)
 
   // Value refs
   const listFocusedRef = useRef(false)
@@ -184,10 +187,17 @@ export function Autocomplete<
   const valuePropRef = useRef(valueProp)
   const popoverMouseWithinRef = useRef(false)
 
-  // Forward ref to parent
+  // Forward inputElement state to inputElementRef
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
+    inputElementRef,
+    () => inputElement,
+    [inputElement],
+  )
+  // Forward inputElement to parent
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
     forwardedRef,
-    () => inputElementRef.current,
+    () => inputElement,
+    [inputElement],
   )
 
   const listBoxId = `${id}-listbox`
@@ -525,41 +535,6 @@ export function Autocomplete<
     return query
   }, [currentOption, query, renderValue, value])
 
-  const input = (
-    <TextInput
-      {...rest}
-      aria-activedescendant={activeItemId}
-      aria-autocomplete="list"
-      aria-expanded={expanded}
-      aria-owns={listBoxId}
-      autoCapitalize="off"
-      autoComplete="off"
-      autoCorrect="off"
-      as={as}
-      border={border}
-      clearButton={clearButton}
-      customValidity={customValidity}
-      disabled={disabled}
-      fontSize={fontSize}
-      icon={icon}
-      iconRight={loading && AnimatedSpinnerIcon}
-      id={id}
-      inputMode="search"
-      onChange={handleInputChange}
-      onClear={handleClearButtonClick}
-      onFocus={handleInputFocus}
-      padding={padding}
-      prefix={prefix}
-      radius={radius}
-      readOnly={readOnly}
-      ref={inputElementRef}
-      role="combobox"
-      spellCheck={false}
-      suffix={suffix || openButtonNode}
-      value={inputValue}
-    />
-  )
-
   const handleListBoxKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       // If the focus is currently in the list, move focus to the input element
@@ -629,15 +604,16 @@ export function Autocomplete<
 
   const results = useMemo(() => {
     if (renderPopover) {
-      return renderPopover(
-        {
-          content,
-          hidden: !expanded,
-          inputElement: inputElementRef.current,
-          onMouseEnter: handlePopoverMouseEnter,
-          onMouseLeave: handlePopoverMouseLeave,
-        },
-        resultsPopoverElementRef,
+      return (
+        <RenderPopover
+          content={content}
+          hidden={!expanded}
+          inputElement={inputElement}
+          onMouseEnter={handlePopoverMouseEnter}
+          onMouseLeave={handlePopoverMouseLeave}
+          resultsPopoverElementRef={resultsPopoverElementRef}
+          renderPopover={renderPopover}
+        />
       )
     }
 
@@ -660,7 +636,7 @@ export function Autocomplete<
         portal
         radius={3}
         ref={resultsPopoverElementRef}
-        referenceElement={inputElementRef.current}
+        referenceElement={inputElement}
         {...popover}
       />
     )
@@ -670,6 +646,7 @@ export function Autocomplete<
     filteredOptionsLen,
     handlePopoverMouseEnter,
     handlePopoverMouseLeave,
+    inputElement,
     popover,
     renderPopover,
   ])
@@ -683,8 +660,63 @@ export function Autocomplete<
       onKeyDown={handleRootKeyDown}
       ref={rootElementRef}
     >
-      {input}
+      <TextInput
+        {...rest}
+        aria-activedescendant={activeItemId}
+        aria-autocomplete="list"
+        aria-expanded={expanded}
+        aria-owns={listBoxId}
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        as={as}
+        border={border}
+        clearButton={clearButton}
+        customValidity={customValidity}
+        disabled={disabled}
+        fontSize={fontSize}
+        icon={icon}
+        iconRight={loading && AnimatedSpinnerIcon}
+        id={id}
+        inputMode="search"
+        onChange={handleInputChange}
+        onClear={handleClearButtonClick}
+        onFocus={handleInputFocus}
+        padding={padding}
+        prefix={prefix}
+        radius={radius}
+        readOnly={readOnly}
+        ref={setInputElement}
+        role="combobox"
+        spellCheck={false}
+        suffix={suffix || openButtonNode}
+        value={inputValue}
+      />
       {results}
     </div>
+  )
+}
+
+function RenderPopover({
+  renderPopover,
+  content,
+  hidden,
+  inputElement,
+  onMouseEnter,
+  onMouseLeave,
+  resultsPopoverElementRef,
+}: {
+  renderPopover: Exclude<AutocompleteProps['renderPopover'], undefined>
+  resultsPopoverElementRef: Parameters<Exclude<AutocompleteProps['renderPopover'], undefined>>[1]
+} & Parameters<Exclude<AutocompleteProps['renderPopover'], undefined>>[0]) {
+  return renderPopover(
+    {
+      content,
+      hidden,
+      inputElement,
+      onMouseEnter,
+      onMouseLeave,
+    },
+    resultsPopoverElementRef,
   )
 }

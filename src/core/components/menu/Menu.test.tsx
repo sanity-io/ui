@@ -34,15 +34,12 @@ describe('components/menu', () => {
 
         const value: MenuContextValue = useMemo(
           () => ({
-            version: 0.0,
+            version: 2,
             activeElement: null,
-            activeIndex: 0,
             mount: (element: HTMLElement | null) => () => console.log(element),
             onItemClick: () => undefined,
             onItemMouseEnter: handleItemMouseEnter,
             onItemMouseLeave: handleItemMouseLeave,
-            onMouseEnter: handleItemMouseEnter,
-            onMouseLeave: handleItemMouseLeave,
           }),
           [handleItemMouseEnter, handleItemMouseLeave],
         )
@@ -58,8 +55,7 @@ describe('components/menu', () => {
 
       const contextValue = log.mock.calls[0][0]
 
-      expect(contextValue.version).toBe(0.0)
-      expect(contextValue.activeIndex).toBe(0)
+      expect(contextValue.version).toBe(2)
       expect(typeof contextValue.mount).toBe('function')
       expect(typeof contextValue.onItemClick).toBe('function')
       expect(typeof contextValue.onItemMouseEnter).toBe('function')

@@ -7,12 +7,12 @@ import {
   type MouseEvent,
   type MouseEventHandler,
   type ReactNode,
-  type Ref,
   useCallback,
   useEffect,
   useId,
   useMemo,
   useRef,
+  useState,
 } from 'react'
 
 import {Box, type BoxProps} from '../../primitives/box/Box'
@@ -81,17 +81,19 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
     ...rest
   } = props as TreeItemProps<typeof DEFAULT_TREE_ITEM_ELEMENT>
 
-  const rootRef = useRef<HTMLElement | null>(null)
+  const [rootElement, setRootElement] = useState<HTMLLIElement | null>(null)
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const _id = useId()
   const id = idProp || _id
-  const itemPath = useMemo(() => path.concat([id || '']), [id, path])
-  const itemKey = itemPath.join('/')
+  const [itemPath, itemKey] = useMemo(() => {
+    const itemPath = path.concat([id || ''])
+    return [itemPath, itemPath.join('/')]
+  }, [id, path])
   const itemState = tree.state[itemKey]
   const expanded = itemState?.expanded === undefined ? expandedProp : itemState?.expanded || false
-  const focused = tree.focusedElement && tree.focusedElement === rootRef.current
+  const focused = tree.focusedElement && tree.focusedElement === rootElement
   const tabIndex = focused ? 0 : -1
   const contextValue = useMemo(
     () => ({...tree, level: tree.level + 1, path: itemPath}),
@@ -111,28 +113,28 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
       ) {
         event.stopPropagation()
         setExpanded(itemKey, !expanded)
-        setFocusedElement(rootRef.current)
+        setFocusedElement(rootElement)
       }
     },
-    [expanded, itemKey, onClick, setExpanded, setFocusedElement],
+    [expanded, itemKey, onClick, rootElement, setExpanded, setFocusedElement],
   )
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLElement>) => {
       if (focused && event.key === 'Enter') {
-        const el = treeitemRef.current || rootRef.current
+        const el = treeitemRef.current || rootElement
 
         el?.click()
       }
     },
-    [focused],
+    [focused, rootElement],
   )
 
   useEffect(() => {
-    if (!rootRef.current) return
+    if (!rootElement) return
 
-    return registerItem(rootRef.current, itemPath.join('/'), expanded, selected)
-  }, [expanded, itemPath, registerItem, selected])
+    return registerItem(rootElement, itemKey, expanded, selected)
+  }, [expanded, itemKey, registerItem, rootElement, selected])
 
   const content = (
     <Flex gap={space} padding={padding}>
@@ -172,7 +174,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
         as="li"
         className={treeItem({className})}
         onClick={handleClick}
-        ref={rootRef as Ref<HTMLLIElement>}
+        ref={setRootElement}
         role="none"
       >
         <Selectable
@@ -211,7 +213,8 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
       className={treeItem({className})}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      ref={rootRef as Ref<HTMLAnchorElement>}
+      // @ts-expect-error - TODO: fix this
+      ref={setRootElement}
       role="treeitem"
       tabIndex={tabIndex}
     >

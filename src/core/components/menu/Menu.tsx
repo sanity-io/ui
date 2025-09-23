@@ -127,22 +127,21 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
     ),
   )
 
-  const value: MenuContextValue = useMemo(
-    () => ({
-      version: 0.0,
-      activeElement,
-      activeIndex,
-      mount,
-      onClickOutside,
-      onEscape,
-      onItemClick,
-      onItemMouseEnter: handleItemMouseEnter,
-      onItemMouseLeave: handleItemMouseLeave,
-      registerElement,
-    }),
+  const value = useMemo(
+    () =>
+      ({
+        version: 2,
+        activeElement,
+        mount,
+        onClickOutside,
+        onEscape,
+        onItemClick,
+        onItemMouseEnter: handleItemMouseEnter,
+        onItemMouseLeave: handleItemMouseLeave,
+        registerElement,
+      }) satisfies MenuContextValue,
     [
       activeElement,
-      activeIndex,
       mount,
       handleItemMouseEnter,
       handleItemMouseLeave,
