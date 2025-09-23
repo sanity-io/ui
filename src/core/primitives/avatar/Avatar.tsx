@@ -79,6 +79,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
   }, [arrowPosition, arrowPositionProp])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (src) setImageError(false)
   }, [src])
 

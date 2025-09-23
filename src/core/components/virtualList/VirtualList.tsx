@@ -3,6 +3,7 @@ import type {Space} from '@sanity/ui/theme'
 import {
   type CSSProperties,
   type ReactNode,
+  startTransition,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -116,6 +117,7 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
     window.addEventListener('scroll', handleScroll, {passive: true})
     window.addEventListener('resize', handleResize)
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setScrollHeight(window.innerHeight)
 
     handleScroll()
@@ -144,7 +146,7 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
 
   useEffect(() => {
     // console.log('renderItem', renderItem)
-    setItemHeight(-1)
+    startTransition(() => setItemHeight(-1))
   }, [renderItem])
 
   const children = useChildren({

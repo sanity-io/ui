@@ -43,7 +43,7 @@ export function Skeleton<E extends SkeletonElementType = typeof DEFAULT_SKELETON
 
   useEffect(() => {
     if (!delay) {
-      return setVisible(true)
+      return undefined
     }
 
     const timeout = setTimeout(() => {
@@ -64,7 +64,7 @@ export function Skeleton<E extends SkeletonElementType = typeof DEFAULT_SKELETON
         ...rest,
       })}
       data-animated={animated ? '' : undefined}
-      data-visible={visible ? '' : undefined}
+      data-visible={(delay ? visible : true) ? '' : undefined}
     />
   )
 }

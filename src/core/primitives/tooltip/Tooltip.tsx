@@ -303,6 +303,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       portalElement?.offsetWidth || document.body.offsetWidth,
     ]
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
   }, [boundaryElement, portalElement])
 
