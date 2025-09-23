@@ -1,7 +1,7 @@
 /**
  * As `@sanity/ui` is declared as a dependency, and may be duplicated, sometimes across major versions
  * it's critical that vital react contexts are shared even when there is a duplicate.
- * If we used a model similar to `sanity` itself, or `styled-components`, this would be unnecessary as
+ * If we used a model similar to `sanity` itself this would be unnecessary as
  * those libraries enforce single instances.
  * Since we don't enforce it we have to support a sanity plugin being able to call hooks like `useToast`, and then
  * read the context setup by `sanity`, which calls `ToastProvider`, even if the provider and hook are different instances in memory.

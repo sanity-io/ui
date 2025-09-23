@@ -1,28 +1,6 @@
 import {Box, Card, ElementQuery, Text} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
-import {styled} from 'styled-components'
 
-const TestCard = styled(Card)`
-  [data-eq-min~='0'] > & {
-    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.orange[600]}, ${vars.color
-      .palette.orange[400]});
-  }
-
-  [data-eq-min~='1'] > & {
-    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.red[600]}, ${vars.color.palette
-      .red[400]});
-  }
-
-  [data-eq-min~='2'] > & {
-    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.magenta[600]}, ${vars.color
-      .palette.magenta[400]});
-  }
-
-  [data-eq-min~='3'] > & {
-    ${vars.color.fg.slice(4, -1)}: light-dark(${vars.color.palette.purple[600]}, ${vars.color
-      .palette.purple[400]});
-  }
-`
+import {testCard} from './styles.css'
 
 export default function CustomMediaQuery(): React.JSX.Element {
   return (
@@ -32,9 +10,9 @@ export default function CustomMediaQuery(): React.JSX.Element {
       </Box>
 
       <ElementQuery media={[0, 100, 200, 300]}>
-        <TestCard padding={3} shadow={1}>
+        <Card className={testCard} padding={3} shadow={1}>
           <Text>This card sits inside an element query.</Text>
-        </TestCard>
+        </Card>
       </ElementQuery>
     </Box>
   )

@@ -1,14 +1,11 @@
 import {Card, Flex, Text} from '@sanity/ui'
-import {styled} from 'styled-components'
-
-const StyledCard = styled(Card).attrs({forwardedAs: 'ol'})``
 
 export default function StyledCardStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center">
-      <StyledCard>
+      <Card as="ol">
         <Text as="li">Styled</Text>
-      </StyledCard>
+      </Card>
     </Flex>
   )
 }

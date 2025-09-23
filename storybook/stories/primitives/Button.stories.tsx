@@ -2,7 +2,6 @@ import {CloseIcon, SearchIcon, UploadIcon} from '@sanity/icons'
 import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
 import {BUTTON_MODES, ELEMENT_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {styled} from 'styled-components'
 
 import {
   BUTTON_MODE_CONTROLS,
@@ -15,6 +14,7 @@ import {
 } from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 import {rowBuilder} from '../helpers/rowBuilder'
+import {sanityUploadButton} from './styles.css'
 
 const meta: Meta<typeof Button> = {
   args: {
@@ -48,35 +48,11 @@ export const AsLink: Story = {
   render: (props) => <Button {...props} as="a" href="#" text="As link" />,
 }
 
-const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`
-  & input {
-    appearance: none;
-    overflow: hidden;
-    overflow: clip;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    position: absolute;
-    max-width: 0;
-    width: -moz-available;
-    width: -webkit-fill-available;
-    width: stretch;
-  }
-
-  & > span:nth-child(2) {
-    width: 0;
-    flex: none;
-    padding: 0;
-  }
-`
-
 export const UploadButton: Story = {
   render: () => (
-    <SanityUploadButton icon={UploadIcon} tabIndex={0} text="Upload">
+    <Button className={sanityUploadButton} as="label" icon={UploadIcon} tabIndex={0} text="Upload">
       <input type="file" />
-    </SanityUploadButton>
+    </Button>
   ),
 }
 
@@ -161,7 +137,7 @@ export const MultipleStyles: Story = {
     const SubHeader = () => (
       <>
         <div />
-        <Grid columns={2} marginY={2}>
+        <Grid gap={2} marginY={2}>
           <Text size={0} align={'center'}>
             Default
           </Text>
@@ -169,7 +145,7 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
-        <Grid columns={3} marginY={2}>
+        <Grid gap={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
           </Text>
@@ -181,7 +157,7 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
-        <Grid columns={3} marginY={2}>
+        <Grid gap={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
           </Text>

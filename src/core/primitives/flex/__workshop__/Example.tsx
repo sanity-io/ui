@@ -1,17 +1,9 @@
 import {Card, Code, Flex} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
-import {styled} from 'styled-components'
 
 import {WORKSHOP_FLEX_DIRECTION_OPTIONS} from '$workshop'
 
-const DebugCard = styled(Card)`
-  outline: 1px solid red;
-  &:not([hidden]) {
-    display: flex;
-  }
-  align-items: center;
-  justify-content: center;
-`
+import {debugCard} from './styles.css'
 
 export default function ExampleStory(): React.JSX.Element {
   // @ts-expect-error - TODO: fix this
@@ -24,17 +16,17 @@ export default function ExampleStory(): React.JSX.Element {
       height="fill"
       style={{width: '100%'}}
     >
-      <DebugCard flex={1}>
+      <Card className={debugCard} flex={1}>
         <Code size={1}>1</Code>
-      </DebugCard>
+      </Card>
 
-      <DebugCard flex={[1, 2, 3]}>
+      <Card className={debugCard} flex={[1, 2, 3]}>
         <Code size={1}>[1,2,3]</Code>
-      </DebugCard>
+      </Card>
 
-      <DebugCard flex={['none', 'none', 1]}>
+      <Card className={debugCard} flex={['none', 'none', 1]}>
         <Code size={1}>['none', 'none', 1]</Code>
-      </DebugCard>
+      </Card>
     </Flex>
   )
 }

@@ -11,7 +11,8 @@ import {
   PortalProvider,
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
-import {styled} from 'styled-components'
+
+import {panePortal, paneRoot} from './styles.css'
 
 export default function PanesStory(): React.JSX.Element {
   return (
@@ -21,23 +22,6 @@ export default function PanesStory(): React.JSX.Element {
     </Flex>
   )
 }
-
-const PaneRoot = styled(Card)`
-  position: relative;
-`
-
-const PanePortal = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  pointer-events: none;
-
-  & > * {
-    pointer-events: auto;
-  }
-`
 
 function Pane(props: {borderLeft?: boolean; id: string}) {
   const {borderLeft, id} = props
@@ -52,13 +36,13 @@ function Pane(props: {borderLeft?: boolean; id: string}) {
   return (
     <BoundaryElementProvider element={element}>
       <PortalProvider element={portalElement}>
-        <PaneRoot borderLeft={borderLeft} flex={1} ref={setElement}>
+        <Card className={paneRoot} borderLeft={borderLeft} flex={1} ref={setElement}>
           <Box padding={4}>
             <Button onClick={() => setDialogOpen(true)} selected={dialogOpen} text="Open dialog" />
           </Box>
 
-          <PanePortal ref={setPortalElement} />
-        </PaneRoot>
+          <div className={panePortal} ref={setPortalElement} />
+        </Card>
 
         {dialogOpen && (
           <Dialog
