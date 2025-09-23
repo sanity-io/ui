@@ -67,7 +67,7 @@
     "dev": "run-p workshop:dev storybook:dev",
     "figma:build": "pnpm run --filter 'figma-plugin-sanity-ui' build",
     "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint --cache .",
+    "lint": "eslint .",
     "prepack": "pnpm build",
     "pkg:build": "mkdirp dist/css && touch dist/css/index.css && NODE_ENV=production pkg build --strict",
     "pkg:check": "pkg --strict",

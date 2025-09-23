@@ -1,23 +1,16 @@
-import {detectOverflow, type Elements, type Middleware} from '@floating-ui/react-dom'
+import {detectOverflow, type Middleware} from '@floating-ui/react-dom'
 
 import type {PopoverMargins} from '../types'
 
-export interface SizeMiddlewareApplyOptions {
-  availableWidth: number
-  availableHeight: number
-  elements: Elements
-  referenceWidth: number
-}
-
 export function size(options: {
-  apply: (args: SizeMiddlewareApplyOptions) => void
   boundaryElement?: HTMLElement | null
   constrainSize: boolean
   margins: PopoverMargins
   matchReferenceWidth?: boolean
   padding?: number
+  referenceWidthRef: React.RefObject<number | undefined>
 }): Middleware {
-  const {apply, margins, padding = 0} = options
+  const {margins, padding = 0, constrainSize, matchReferenceWidth, referenceWidthRef} = options
 
   return {
     name: '@sanity/ui/size',
@@ -61,12 +54,20 @@ export function size(options: {
 
       // IMPORTANT – APPLY ELEMENT STYLES HERE
       // Elements need to be resized BEFORE the `platform.getDimensions` call below
-      apply({
-        availableWidth: maxWidth - margins[1] - margins[3],
-        availableHeight: maxHeight - margins[0] - margins[2],
-        elements,
-        referenceWidth: reference.width - margins[1] - margins[3],
-      })
+      const availableWidth = maxWidth - margins[1] - margins[3]
+      const availableHeight = maxHeight - margins[0] - margins[2]
+      const referenceWidth = reference.width - margins[1] - margins[3]
+
+      referenceWidthRef.current = referenceWidth
+
+      if (matchReferenceWidth) {
+        elements.floating.style.width = `${referenceWidth}px`
+      }
+
+      if (constrainSize) {
+        elements.floating.style.maxWidth = `${availableWidth}px`
+        elements.floating.style.maxHeight = `${availableHeight}px`
+      }
 
       const nextDimensions = await platform.getDimensions(elements.floating)
 

@@ -19,7 +19,6 @@ import {
   type ReactNode,
   type Ref,
   useCallback,
-  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -166,10 +165,9 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     constrainSize = false,
     content,
     disabled,
-    fallbackPlacements = props.fallbackPlacements ??
-      DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
+    fallbackPlacements: _fallbackPlacements,
     matchReferenceWidth,
-    floatingBoundary = boundaryElementContext.element,
+    floatingBoundary: _floatingBoundary,
     modal,
     onActivate,
     open,
@@ -181,7 +179,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     preventOverflow = true,
     radius = 3,
     ref: forwardedRef,
-    referenceBoundary = boundaryElementContext.element,
+    referenceBoundary: _referenceBoundary,
     referenceElement,
     scheme,
     shadow = 3,
@@ -191,6 +189,10 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     updateRef,
     ...rest
   } = props as PopoverProps<typeof DEFAULT_POPOVER_ELEMENT>
+  const fallbackPlacements =
+    _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
+  const floatingBoundary = _floatingBoundary ?? boundaryElementContext.element
+  const referenceBoundary = _referenceBoundary ?? boundaryElementContext.element
 
   const card = useCard()
 
@@ -206,108 +208,22 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
   // Keep track of reference element width (see `size` middleware below)
   const referenceWidthRef = useRef<number>(undefined)
 
-  const middleware = useMemo(() => {
-    const ret: Middleware[] = []
-
-    // Flip the floating element when leaving the boundary box
-    if (constrainSize || preventOverflow) {
-      if (placementStrategy === 'autoPlacement') {
-        ret.push(
-          autoPlacement({
-            allowedPlacements: [placementProp].concat(fallbackPlacements),
-          }),
-        )
-      } else {
-        ret.push(
-          flip({
-            boundary: floatingBoundary || undefined,
-            fallbackPlacements,
-            padding: DEFAULT_POPOVER_PADDING,
-            rootBoundary,
-          }),
-        )
-      }
-    }
-
-    // Define distance between reference and floating element
-    ret.push(offset({mainAxis: DEFAULT_POPOVER_DISTANCE}))
-
-    // Track sizes
-    if (constrainSize || matchReferenceWidth) {
-      ret.push(
-        size({
-          apply({availableWidth, availableHeight, elements, referenceWidth}) {
-            // not fresh, so use refs
-
-            referenceWidthRef.current = referenceWidth
-
-            if (matchReferenceWidth) {
-              elements.floating.style.width = `${referenceWidth}px`
-            }
-
-            if (constrainSize) {
-              elements.floating.style.maxWidth = `${availableWidth}px`
-              elements.floating.style.maxHeight = `${availableHeight}px`
-            }
-          },
-          boundaryElement: floatingBoundary || undefined,
-          constrainSize,
-          margins,
-          matchReferenceWidth,
-          padding: DEFAULT_POPOVER_PADDING,
-        }),
-      )
-    }
-
-    // Shift the popover so its sits within the boundary element
-    if (preventOverflow) {
-      ret.push(
-        shift({
-          boundary: floatingBoundary || undefined,
-          rootBoundary,
-          padding: DEFAULT_POPOVER_PADDING,
-        }),
-      )
-    }
-
-    // Place arrow
-    if (arrowProp) {
-      ret.push(
-        arrow({
-          element: arrowRef,
-          padding: DEFAULT_POPOVER_PADDING,
-        }),
-      )
-    }
-
-    // Determine the origin to scale from.
-    // Must be placed after `@sanity/ui/size` and `shift` middleware.
-    if (animate) {
-      ret.push(origin)
-    }
-
-    ret.push(
-      hide({
-        boundary: referenceBoundary || undefined,
-        padding: DEFAULT_POPOVER_PADDING,
-        strategy: 'referenceHidden',
-      }),
-    )
-
-    return ret
-  }, [
+  const middleware = useMiddleware({
     animate,
     arrowProp,
+    arrowRef,
     constrainSize,
     fallbackPlacements,
     floatingBoundary,
-    placementProp,
-    placementStrategy,
     margins,
     matchReferenceWidth,
+    placementProp,
+    placementStrategy,
     preventOverflow,
     referenceBoundary,
-  ])
+    referenceWidthRef,
+    rootBoundary,
+  })
 
   const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
     middleware,
@@ -328,10 +244,6 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
   const originX = middlewareData['@sanity/ui/origin']?.originX
   const originY = middlewareData['@sanity/ui/origin']?.originY
 
-  const setArrow = useCallback((arrowEl: HTMLDivElement | null) => {
-    arrowRef.current = arrowEl
-  }, [])
-
   const setFloating = useCallback(
     (node: HTMLDivElement | null) => {
       ref.current = node
@@ -340,22 +252,9 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     [refs],
   )
 
-  const setReference = useCallback(
-    (node: HTMLElement | null) => {
-      refs.setReference(node)
-
-      if (!childProp) return
-
-      const childRef = getElementRef(childProp)
-
-      if (typeof childRef === 'function') {
-        childRef(node)
-      } else if (childRef) {
-        childRef.current = node
-      }
-    },
-    [childProp, refs],
-  )
+  // If there's a child then we need to set the reference element to the cloned child ref
+  // and if child changes we make sure to update or remove the reference element.
+  useImperativeHandle(childProp ? getElementRef(childProp) : null, () => refs.reference.current)
 
   const child = useMemo(() => {
     // If a reference element is defined, we don't need to clone the child
@@ -363,18 +262,10 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
     if (!childProp) return null
 
-    return cloneElement(childProp, {ref: setReference})
-  }, [childProp, referenceElement, setReference])
+    return cloneElement(childProp, {ref: refs.setReference})
+  }, [childProp, referenceElement, refs.setReference])
 
-  useEffect(() => {
-    if (updateRef) {
-      if (typeof updateRef === 'function') {
-        updateRef(update)
-      } else if (updateRef) {
-        updateRef.current = update
-      }
-    }
-  }, [update, updateRef])
+  useImperativeHandle(updateRef, () => update, [update])
 
   if (disabled) {
     return childProp || <></>
@@ -391,7 +282,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
         __unstable_margins={margins}
         animate={animate}
         arrow={arrowProp}
-        arrowRef={setArrow}
+        arrowRef={arrowRef}
         arrowX={arrowX}
         arrowY={arrowY}
         as={as}
@@ -439,4 +330,129 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
       {child}
     </>
   )
+}
+
+function useMiddleware({
+  animate,
+  arrowProp,
+  arrowRef,
+  constrainSize,
+  fallbackPlacements,
+  floatingBoundary,
+  margins,
+  matchReferenceWidth,
+  placementProp,
+  placementStrategy,
+  preventOverflow,
+  referenceBoundary,
+  referenceWidthRef,
+  rootBoundary,
+}: {
+  animate: boolean
+  arrowProp: boolean
+  arrowRef: React.RefObject<HTMLDivElement | null>
+  constrainSize: boolean
+  fallbackPlacements: Placement[]
+  floatingBoundary: HTMLElement | null
+  margins: PopoverMargins
+  matchReferenceWidth: boolean | undefined
+  placementProp: Placement
+  placementStrategy: 'flip' | 'autoPlacement'
+  preventOverflow: boolean
+  referenceBoundary: HTMLElement | null
+  referenceWidthRef: React.RefObject<number | undefined>
+  rootBoundary: RootBoundary
+}) {
+  return useMemo(() => {
+    const ret: Middleware[] = []
+
+    // Flip the floating element when leaving the boundary box
+    if (constrainSize || preventOverflow) {
+      if (placementStrategy === 'autoPlacement') {
+        ret.push(
+          autoPlacement({
+            allowedPlacements: [placementProp].concat(fallbackPlacements),
+          }),
+        )
+      } else {
+        ret.push(
+          flip({
+            boundary: floatingBoundary || undefined,
+            fallbackPlacements,
+            padding: DEFAULT_POPOVER_PADDING,
+            rootBoundary,
+          }),
+        )
+      }
+    }
+
+    // Define distance between reference and floating element
+    ret.push(offset({mainAxis: DEFAULT_POPOVER_DISTANCE}))
+
+    // Track sizes
+    if (constrainSize || matchReferenceWidth) {
+      ret.push(
+        size({
+          boundaryElement: floatingBoundary || undefined,
+          constrainSize,
+          margins,
+          matchReferenceWidth,
+          padding: DEFAULT_POPOVER_PADDING,
+          referenceWidthRef,
+        }),
+      )
+    }
+
+    // Shift the popover so its sits within the boundary element
+    if (preventOverflow) {
+      ret.push(
+        shift({
+          boundary: floatingBoundary || undefined,
+          rootBoundary,
+          padding: DEFAULT_POPOVER_PADDING,
+        }),
+      )
+    }
+
+    // Place arrow
+    if (arrowProp) {
+      ret.push(
+        arrow({
+          element: arrowRef,
+          padding: DEFAULT_POPOVER_PADDING,
+        }),
+      )
+    }
+
+    // Determine the origin to scale from.
+    // Must be placed after `@sanity/ui/size` and `shift` middleware.
+    if (animate) {
+      ret.push(origin)
+    }
+
+    ret.push(
+      hide({
+        boundary: referenceBoundary || undefined,
+        padding: DEFAULT_POPOVER_PADDING,
+        strategy: 'referenceHidden',
+      }),
+    )
+
+    return ret
+  }, [
+    animate,
+    arrowProp,
+    arrowRef,
+    constrainSize,
+    fallbackPlacements,
+    floatingBoundary,
+    margins,
+    matchReferenceWidth,
+    placementProp,
+    placementStrategy,
+    preventOverflow,
+    referenceBoundary,
+    referenceWidthRef,
+    rootBoundary,
+  ])
 }

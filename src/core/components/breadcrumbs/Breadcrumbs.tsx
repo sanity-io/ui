@@ -48,8 +48,8 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
     className,
     expandButton: expandButtonProps,
     gap = 2,
-    gapX,
-    gapY,
+    gapX = gap,
+    gapY = gap,
     maxLength,
     separator,
     ...rest
@@ -66,45 +66,17 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
 
   const rawItems = useMemo(() => Children.toArray(children).filter(isValidElement), [children])
 
-  const items = useMemo(() => {
-    const len = rawItems.length
-
-    if (maxLength && len > maxLength) {
-      const beforeLength = Math.ceil(maxLength / 2)
-      const afterLength = Math.floor(maxLength / 2)
-
-      return [
-        ...rawItems.slice(0, beforeLength - 1),
-        <Popover
-          constrainSize
-          content={
-            <Stack as="ol" gap={gapY} overflow="auto">
-              {rawItems.slice(beforeLength - 1, len - afterLength)}
-            </Stack>
-          }
-          key="button"
-          open={open}
-          padding={2}
-          placement="top"
-          portal
-          ref={popoverElementRef}
-        >
-          <Button
-            mode="bleed"
-            padding={0}
-            text="…"
-            {...expandButtonProps}
-            onClick={open ? collapse : expand}
-            ref={expandElementRef}
-            selected={open}
-          />
-        </Popover>,
-        ...rawItems.slice(len - afterLength),
-      ]
-    }
-
-    return rawItems
-  }, [collapse, expand, expandButtonProps, gapY, maxLength, open, rawItems])
+  const items = useItems({
+    collapse,
+    expand,
+    expandElementRef,
+    maxLength,
+    open,
+    popoverElementRef,
+    rawItems,
+    gapY,
+    expandButtonProps,
+  })
 
   return (
     <Flex
@@ -128,4 +100,65 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
       ))}
     </Flex>
   )
+}
+
+function useItems({
+  collapse,
+  expand,
+  expandElementRef,
+  maxLength,
+  open,
+  popoverElementRef,
+  rawItems,
+  gapY,
+  expandButtonProps,
+}: {
+  collapse: () => void
+  expand: () => void
+  expandElementRef: React.RefObject<HTMLButtonElement | null>
+  maxLength: number | undefined
+  open: boolean
+  popoverElementRef: React.RefObject<HTMLDivElement | null>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rawItems: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>[]
+  gapY: NonNullable<GapStyleProps['gapY']>
+  expandButtonProps: BreadcrumbsOwnProps['expandButton']
+}): React.JSX.Element[] {
+  const len = rawItems.length
+
+  if (maxLength && len > maxLength) {
+    const beforeLength = Math.ceil(maxLength / 2)
+    const afterLength = Math.floor(maxLength / 2)
+
+    return [
+      ...rawItems.slice(0, beforeLength - 1),
+      <Popover
+        constrainSize
+        content={
+          <Stack as="ol" gap={gapY} overflow="auto">
+            {rawItems.slice(beforeLength - 1, len - afterLength)}
+          </Stack>
+        }
+        key="button"
+        open={open}
+        padding={2}
+        placement="top"
+        portal
+        ref={popoverElementRef}
+      >
+        <Button
+          mode="bleed"
+          padding={0}
+          text="…"
+          {...expandButtonProps}
+          onClick={open ? collapse : expand}
+          ref={expandElementRef}
+          selected={open}
+        />
+      </Popover>,
+      ...rawItems.slice(len - afterLength),
+    ]
+  }
+
+  return rawItems
 }

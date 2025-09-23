@@ -112,14 +112,13 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     animate: _animate = false,
     arrow: arrowProp = false,
     as = DEFAULT_TOOLTIP_ELEMENT,
-    boundaryElement = boundaryElementContext?.element,
+    boundaryElement: _boundaryElement,
     children: childProp,
     className,
     content,
     delay,
     disabled,
-    fallbackPlacements = props.fallbackPlacements ??
-      DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
+    fallbackPlacements: _fallbackPlacements,
     padding = 2,
     placement: placementProp = 'bottom',
     portal: portalProp,
@@ -131,6 +130,9 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     tone = 'inherit',
     ...rest
   } = props as TooltipProps<typeof DEFAULT_TOOLTIP_ELEMENT>
+  const boundaryElement = _boundaryElement ?? boundaryElementContext?.element
+  const fallbackPlacements =
+    _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
 
   const card = useCard()
   const prefersReducedMotion = usePrefersReducedMotion()
@@ -147,44 +149,14 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   const portalElement =
     typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
 
-  const middleware = useMemo(() => {
-    const ret: Middleware[] = []
-
-    // Flip the floating element when leaving the boundary box
-    ret.push(
-      flip({
-        boundary: boundaryElement || undefined,
-        fallbackPlacements,
-        padding: DEFAULT_TOOLTIP_PADDING,
-        rootBoundary,
-      }),
-    )
-
-    // Define distance between reference and floating element
-    ret.push(offset({mainAxis: DEFAULT_TOOLTIP_DISTANCE}))
-
-    // Shift the tooltip so its sits with the boundary element
-    ret.push(
-      shift({
-        boundary: boundaryElement || undefined,
-        rootBoundary,
-        padding: DEFAULT_TOOLTIP_PADDING,
-      }),
-    )
-
-    // Place arrow
-    if (arrowProp) {
-      ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
-    }
-
-    // Determine the origin to scale from.
-    // Must be placed after `@sanity/ui/size` and `shift` middleware.
-    if (animate) {
-      ret.push(origin)
-    }
-
-    return ret
-  }, [animate, arrowProp, boundaryElement, fallbackPlacements])
+  const middleware = useMiddleware({
+    animate,
+    arrowProp,
+    arrowRef,
+    boundaryElement,
+    fallbackPlacements,
+    rootBoundary,
+  })
 
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
@@ -433,6 +405,61 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       {child}
     </>
   )
+}
+
+function useMiddleware({
+  animate,
+  arrowProp,
+  arrowRef,
+  boundaryElement,
+  fallbackPlacements,
+  rootBoundary,
+}: {
+  animate: boolean
+  arrowProp: boolean
+  arrowRef: React.RefObject<HTMLDivElement | null>
+  boundaryElement: HTMLElement | null
+  fallbackPlacements: Placement[]
+  rootBoundary: RootBoundary
+}) {
+  return useMemo(() => {
+    const ret: Middleware[] = []
+
+    // Flip the floating element when leaving the boundary box
+    ret.push(
+      flip({
+        boundary: boundaryElement || undefined,
+        fallbackPlacements,
+        padding: DEFAULT_TOOLTIP_PADDING,
+        rootBoundary,
+      }),
+    )
+
+    // Define distance between reference and floating element
+    ret.push(offset({mainAxis: DEFAULT_TOOLTIP_DISTANCE}))
+
+    // Shift the tooltip so its sits with the boundary element
+    ret.push(
+      shift({
+        boundary: boundaryElement || undefined,
+        rootBoundary,
+        padding: DEFAULT_TOOLTIP_PADDING,
+      }),
+    )
+
+    // Place arrow
+    if (arrowProp) {
+      ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
+    }
+
+    // Determine the origin to scale from.
+    // Must be placed after `@sanity/ui/size` and `shift` middleware.
+    if (animate) {
+      ret.push(origin)
+    }
+
+    return ret
+  }, [animate, arrowProp, arrowRef, boundaryElement, fallbackPlacements, rootBoundary])
 }
 
 /**

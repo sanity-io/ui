@@ -63,7 +63,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
     disabled,
     flex,
     fontSize = 1,
-    gap = props.padding ?? 3,
+    gap: _gap,
     gapX,
     gapY,
     icon: IconComponent,
@@ -90,6 +90,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
     width,
     ...rest
   } = props as ButtonProps<typeof DEFAULT_BUTTON_ELEMENT>
+  const gap = _gap ?? props.padding ?? 3
 
   let href: string | undefined = undefined
 

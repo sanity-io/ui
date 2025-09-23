@@ -147,48 +147,18 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
     setItemHeight(-1)
   }, [renderItem])
 
-  const children = useMemo(() => {
-    if (!renderItem || items.length === 0) return null
-
-    if (itemHeight === -1) {
-      return [
-        <>
-          <Box
-            ref={(el) => (el ? setItemHeight(el.offsetHeight) : undefined)}
-            insetTop={0}
-            insetLeft={0}
-            insetRight={0}
-            key={0}
-            position="absolute"
-          >
-            {renderItem(items[0])}
-          </Box>
-          <div
-            ref={(el) => (el ? setGapValue(el.offsetHeight) : undefined)}
-            style={{height: vars.space[gap]}}
-          />
-        </>,
-      ]
-    }
-
-    return items.slice(fromIndex, toIndex).map((item, _itemIndex) => {
-      const itemIndex = fromIndex + _itemIndex
-      const node = renderItem(item)
-      const key = getItemKey ? getItemKey(item, itemIndex) : itemIndex
-
-      return (
-        <Box
-          insetLeft={0}
-          insetRight={0}
-          key={key}
-          position="absolute"
-          style={{top: itemIndex * (itemHeight + gapValue)}}
-        >
-          {node}
-        </Box>
-      )
-    })
-  }, [fromIndex, gap, gapValue, getItemKey, itemHeight, items, renderItem, toIndex])
+  const children = useChildren({
+    fromIndex,
+    gap,
+    getItemKey,
+    itemHeight,
+    items,
+    renderItem,
+    toIndex,
+    gapValue,
+    setGapValue,
+    setItemHeight,
+  })
 
   const wrapperStyle: CSSProperties = useMemo(() => ({height}), [height])
 
@@ -199,6 +169,73 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
       </div>
     </Box>
   )
+}
+
+function useChildren({
+  fromIndex,
+  gap,
+  getItemKey,
+  itemHeight,
+  items,
+  renderItem,
+  toIndex,
+  gapValue,
+  setGapValue,
+  setItemHeight,
+}: Pick<VirtualListProps, 'getItemKey' | 'renderItem'> &
+  Required<Pick<VirtualListProps, 'items'>> & {
+    fromIndex: number
+    gap: Space
+    itemHeight: number
+    toIndex: number
+    gapValue: number
+    setGapValue: React.Dispatch<React.SetStateAction<number>>
+    setItemHeight: React.Dispatch<React.SetStateAction<number>>
+  }) {
+  if (!renderItem || items.length === 0) return null
+
+  if (itemHeight === -1) {
+    return [
+      <>
+        <Box
+          ref={(el) => {
+            if (el) setItemHeight(el.offsetHeight)
+          }}
+          insetTop={0}
+          insetLeft={0}
+          insetRight={0}
+          key={0}
+          position="absolute"
+        >
+          {renderItem(items[0])}
+        </Box>
+        <div
+          ref={(el) => {
+            if (el) setGapValue(el.offsetHeight)
+          }}
+          style={{height: vars.space[gap]}}
+        />
+      </>,
+    ]
+  }
+
+  return items.slice(fromIndex, toIndex).map((item, _itemIndex) => {
+    const itemIndex = fromIndex + _itemIndex
+    const node = renderItem(item)
+    const key = getItemKey ? getItemKey(item, itemIndex) : itemIndex
+
+    return (
+      <Box
+        insetLeft={0}
+        insetRight={0}
+        key={key}
+        position="absolute"
+        style={{top: itemIndex * (itemHeight + gapValue)}}
+      >
+        {node}
+      </Box>
+    )
+  })
 }
 
 function findScrollable(parentNode: ParentNode | null) {
