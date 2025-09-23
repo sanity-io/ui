@@ -16,4 +16,4 @@ export interface MenuContextValue {
 }
 
 export const MenuContext: Context<MenuContextValue | null> =
-  createGlobalScopedContext<MenuContextValue | null>('@sanity/ui/v3/menu', null)
+  createGlobalScopedContext<MenuContextValue | null>('@sanity/ui/v4/menu', null)

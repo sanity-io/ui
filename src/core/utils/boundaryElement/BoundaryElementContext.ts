@@ -5,6 +5,6 @@ import type {BoundaryElementContextValue} from './types'
 
 export const BoundaryElementContext: Context<BoundaryElementContextValue | null> =
   createGlobalScopedContext<BoundaryElementContextValue | null>(
-    '@sanity/ui/v3/boundaryElement',
+    '@sanity/ui/v4/boundaryElement',
     null,
   )

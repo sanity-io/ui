@@ -18,4 +18,4 @@ export interface DialogContextValue {
  * @internal
  */
 export const DialogContext: Context<DialogContextValue> =
-  createGlobalScopedContext<DialogContextValue>('@sanity/ui/v3/dialog', {version: 0.0})
+  createGlobalScopedContext<DialogContextValue>('@sanity/ui/v4/dialog', {version: 0.0})

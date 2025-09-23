@@ -4,7 +4,7 @@ import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
 import {globalScope} from '../../lib/globalScope'
 import type {PortalContextValue} from './types'
 
-const key = '@sanity/ui/v3/portal'
+const key = '@sanity/ui/v4/portal'
 const elementKey = Symbol.for(`${key}/element`)
 
 // Use the global scope as a map of symbols to elements
