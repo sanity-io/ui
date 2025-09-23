@@ -26,9 +26,9 @@ describe('utils/boundaryElement', () => {
         }
 
         return (
-          <BoundaryElementContext.Provider value={value}>
+          <BoundaryElementContext value={value}>
             <Debug />
-          </BoundaryElementContext.Provider>
+          </BoundaryElementContext>
         )
       }
 
@@ -51,12 +51,12 @@ describe('utils/boundaryElement', () => {
 
       function Root() {
         return (
-          <BoundaryElementContext.Provider
+          <BoundaryElementContext
             // @ts-expect-error - we want to test the error case
             value={undefined}
           >
             <Debug />
-          </BoundaryElementContext.Provider>
+          </BoundaryElementContext>
         )
       }
 
@@ -83,12 +83,12 @@ describe('utils/boundaryElement', () => {
         // NOTE: we’re testing this because the context value may be a function in the future
 
         return (
-          <BoundaryElementContext.Provider
+          <BoundaryElementContext
             // @ts-expect-error - we want to test the error case
             value={() => ({version: 1})}
           >
             <Debug />
-          </BoundaryElementContext.Provider>
+          </BoundaryElementContext>
         )
       }
 

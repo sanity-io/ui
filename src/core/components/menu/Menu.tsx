@@ -153,7 +153,7 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
   )
 
   return (
-    <MenuContext.Provider value={value}>
+    <MenuContext value={value}>
       <Box
         data-ui="Menu"
         {...rest}
@@ -169,6 +169,6 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
       >
         <Stack gap={gap}>{children}</Stack>
       </Box>
-    </MenuContext.Provider>
+    </MenuContext>
   )
 }

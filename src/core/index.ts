@@ -42,7 +42,6 @@ export * from './hooks/useMatchMedia'
 export * from './hooks/useMediaIndex/useMediaIndex'
 export * from './hooks/usePrefersDark'
 export * from './hooks/usePrefersReducedMotion'
-export * from './hooks/useResponsiveProp'
 
 // observers
 export * from './observers/elementSize'

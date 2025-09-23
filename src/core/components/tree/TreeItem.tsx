@@ -195,9 +195,9 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
           {content}
         </Selectable>
 
-        <TreeContext.Provider value={contextValue}>
+        <TreeContext value={contextValue}>
           {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
-        </TreeContext.Provider>
+        </TreeContext>
       </Box>
     )
   }
@@ -232,9 +232,9 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
         {content}
       </Selectable>
 
-      <TreeContext.Provider value={contextValue}>
+      <TreeContext value={contextValue}>
         {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}
-      </TreeContext.Provider>
+      </TreeContext>
     </Box>
   )
 }

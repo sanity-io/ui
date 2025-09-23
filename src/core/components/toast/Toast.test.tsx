@@ -26,9 +26,9 @@ describe('components/toast', () => {
         }
 
         return (
-          <ToastContext.Provider value={value}>
+          <ToastContext value={value}>
             <Debug />
-          </ToastContext.Provider>
+          </ToastContext>
         )
       }
 
@@ -53,12 +53,12 @@ describe('components/toast', () => {
 
       function Root() {
         return (
-          <ToastContext.Provider
+          <ToastContext
             // @ts-expect-error - we want to test the error case
             value={undefined}
           >
             <Debug />
-          </ToastContext.Provider>
+          </ToastContext>
         )
       }
 
@@ -84,12 +84,12 @@ describe('components/toast', () => {
         // NOTE: we’re testing this because the context value may be a function in the future
 
         return (
-          <ToastContext.Provider
+          <ToastContext
             // @ts-expect-error - we want to test the error case
             value={() => ({version: 1})}
           >
             <Debug />
-          </ToastContext.Provider>
+          </ToastContext>
         )
       }
 

@@ -86,7 +86,7 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   }, [])
 
   return (
-    <ToastContext.Provider value={value}>
+    <ToastContext value={value}>
       {children}
       {mounted && (
         <LayerProvider zOffset={zOffset}>
@@ -107,6 +107,6 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
           </ToastLayer>
         </LayerProvider>
       )}
-    </ToastContext.Provider>
+    </ToastContext>
   )
 }

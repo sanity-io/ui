@@ -45,9 +45,9 @@ describe('components/menu', () => {
         )
 
         return (
-          <MenuContext.Provider value={value}>
+          <MenuContext value={value}>
             <Debug />
-          </MenuContext.Provider>
+          </MenuContext>
         )
       }
 
@@ -77,12 +77,12 @@ describe('components/menu', () => {
 
       function Root() {
         return (
-          <MenuContext.Provider
+          <MenuContext
             // @ts-expect-error - we want to test the error case
             value={undefined}
           >
             <Debug />
-          </MenuContext.Provider>
+          </MenuContext>
         )
       }
 
@@ -108,12 +108,12 @@ describe('components/menu', () => {
         // NOTE: we’re testing this because the context value may be a function in the future
 
         return (
-          <MenuContext.Provider
+          <MenuContext
             // @ts-expect-error - we want to test the error case
             value={() => ({version: 1})}
           >
             <Debug />
-          </MenuContext.Provider>
+          </MenuContext>
         )
       }
 

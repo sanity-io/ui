@@ -14,5 +14,5 @@ export function BoundaryElementProvider(props: BoundaryElementProviderProps): Re
   const {children, element} = props
   const value: BoundaryElementContextValue = useMemo(() => ({version: 0.0, element}), [element])
 
-  return <BoundaryElementContext.Provider value={value}>{children}</BoundaryElementContext.Provider>
+  return <BoundaryElementContext value={value}>{children}</BoundaryElementContext>
 }

@@ -231,7 +231,7 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
   }, [children])
 
   return (
-    <TreeContext.Provider value={contextValue}>
+    <TreeContext value={contextValue}>
       <Stack
         as="ul"
         data-ui="Tree"
@@ -244,6 +244,6 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
       >
         {children}
       </Stack>
-    </TreeContext.Provider>
+    </TreeContext>
   )
 }

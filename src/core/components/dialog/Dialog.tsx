@@ -5,13 +5,20 @@ import {
   type ResponsiveProp,
 } from '@sanity/ui/css'
 import type {CardTone, ColorScheme, Radius} from '@sanity/ui/theme'
-import {type FocusEvent, type ForwardedRef, type ReactNode, useCallback, useRef} from 'react'
+import {
+  type FocusEvent,
+  type ForwardedRef,
+  type ReactNode,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react'
 
 import {Z_OFFSETS} from '../../constants'
 import {isHTMLElement} from '../../helpers/element'
 import {focusFirstDescendant, focusLastDescendant} from '../../helpers/focus'
+import {_getResponsiveProp} from '../../helpers/props'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {Container} from '../../primitives/container/Container'
 import {Layer, type LayerOwnProps, type LayerProps} from '../../primitives/layer/Layer'
 import type {ComponentType, Props} from '../../types'
@@ -109,9 +116,10 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = useBoundaryElement().element
-  const cardRadius = useResponsiveProp(cardRadiusProp)
-  const position = useResponsiveProp(positionProp)
-  const zOffset = useResponsiveProp(zOffsetProp)
+  const cardRadius = useMemo(() => _getResponsiveProp(cardRadiusProp), [cardRadiusProp])
+  const position = useMemo(() => _getResponsiveProp(positionProp), [positionProp])
+  const zOffset = useMemo(() => _getResponsiveProp(zOffsetProp), [zOffsetProp])
+
   const preDivRef = useRef<HTMLDivElement | null>(null)
   const postDivRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)

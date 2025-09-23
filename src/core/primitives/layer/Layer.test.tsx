@@ -30,9 +30,9 @@ describe('primitives/layer', () => {
         }
 
         return (
-          <LayerContext.Provider value={value}>
+          <LayerContext value={value}>
             <Debug />
-          </LayerContext.Provider>
+          </LayerContext>
         )
       }
 
@@ -60,12 +60,12 @@ describe('primitives/layer', () => {
 
       function Root() {
         return (
-          <LayerContext.Provider
+          <LayerContext
             // @ts-expect-error - we want to test the error case
             value={undefined}
           >
             <Debug />
-          </LayerContext.Provider>
+          </LayerContext>
         )
       }
 
@@ -91,12 +91,12 @@ describe('primitives/layer', () => {
         // NOTE: we’re testing this because the context value may be a function in the future
 
         return (
-          <LayerContext.Provider
+          <LayerContext
             // @ts-expect-error - we want to test the error case
             value={() => ({version: 1})}
           >
             <Debug />
-          </LayerContext.Provider>
+          </LayerContext>
         )
       }
 

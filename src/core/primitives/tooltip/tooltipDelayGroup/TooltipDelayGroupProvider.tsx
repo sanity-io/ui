@@ -49,7 +49,5 @@ export function TooltipDelayGroupProvider(
     [closeDelay, isGroupActive, openDelay, openTooltipId, setIsGroupActive, setOpenTooltipId],
   )
 
-  return (
-    <TooltipDelayGroupContext.Provider value={value}>{children}</TooltipDelayGroupContext.Provider>
-  )
+  return <TooltipDelayGroupContext value={value}>{children}</TooltipDelayGroupContext>
 }

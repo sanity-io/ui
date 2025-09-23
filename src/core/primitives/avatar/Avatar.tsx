@@ -9,7 +9,7 @@ import {
 import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/theme'
 import {useCallback, useEffect, useMemo, useState} from 'react'
 
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
+import {_getResponsiveProp} from '../../helpers/props'
 import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
@@ -61,7 +61,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
     ...rest
   } = props as AvatarProps<typeof DEFAULT_AVATAR_ELEMENT>
 
-  const size = useResponsiveProp(sizeProp)
+  const size = useMemo(() => _getResponsiveProp(sizeProp), [sizeProp])
 
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside',

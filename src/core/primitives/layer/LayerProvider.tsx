@@ -1,8 +1,8 @@
 import type {Breakpoint, ResponsiveProp} from '@sanity/ui/css'
 import {type ReactNode, use, useCallback, useEffect, useMemo, useState} from 'react'
 
+import {_getResponsiveProp} from '../../helpers/props'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './LayerContext'
 import type {LayerContextValue} from './types'
@@ -27,7 +27,7 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const level = parentLevel + 1
 
   // Get z-index offset
-  const zOffset = useResponsiveProp(zOffsetProp)
+  const zOffset = useMemo(() => _getResponsiveProp(zOffsetProp), [zOffsetProp])
 
   // Get responsive z-index value
   const maxMediaIndex = Object.values(zOffset).length - 1
@@ -102,5 +102,5 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
     [isTopLayer, level, registerChild, size, zIndex],
   )
 
-  return <LayerContext.Provider value={value}>{children}</LayerContext.Provider>
+  return <LayerContext value={value}>{children}</LayerContext>
 }

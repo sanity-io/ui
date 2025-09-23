@@ -23,8 +23,8 @@ import {
 import {isValidElementType} from 'react-is'
 
 import {EMPTY_RECORD} from '../../constants'
+import {_getResponsiveProp} from '../../helpers/props'
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {isRecord} from '../../lib/isRecord'
 import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/Box'
@@ -107,7 +107,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
 
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const responsivePadding = useResponsiveProp(padding)
+  const responsivePadding = useMemo(() => _getResponsiveProp(padding), [padding])
 
   const withClearButton = Boolean(clearButton)
 
@@ -135,35 +135,6 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       ref.current?.focus()
     },
     [onClear, ref],
-  )
-
-  const clearButtonBoxPadding = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(responsivePadding).map(([key, value]) => {
-        if (value === 0) return [key, 0]
-        if (value === 1) return [key, 1]
-        if (value === 2) return [key, 1]
-
-        return [key, typeof value === 'number' ? value - 2 : 0]
-      }),
-    ) as ResponsiveProp<Space>
-  }, [responsivePadding])
-
-  const clearButtonPadding = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(responsivePadding).map(([key, value]) => {
-        if (value === 0) return [key, 0]
-        if (value === 1) return [key, 0]
-        if (value === 2) return [key, 1]
-
-        return [key, typeof value === 'number' ? value - 1 : 0]
-      }),
-    ) as ResponsiveProp<Space>
-  }, [responsivePadding])
-
-  const clearButtonProps: TextInputClearButtonProps = useMemo(
-    () => (isRecord(clearButton) ? clearButton : EMPTY_RECORD),
-    [clearButton],
   )
 
   return (
@@ -224,28 +195,14 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
         </span>
 
         {!disabled && !readOnly && clearButton && (
-          <Box
-            as="span"
-            insetTop={0}
-            insetRight={0}
-            padding={clearButtonBoxPadding}
-            position="absolute"
-            style={{zIndex: 2}}
-          >
-            <Button
-              aria-label="Clear"
-              data-qa="clear-button"
-              display="block"
-              fontSize={fontSize}
-              icon={CloseIcon}
-              mode="bleed"
-              padding={clearButtonPadding}
-              radius={radius}
-              {...clearButtonProps}
-              onClick={handleClearClick}
-              onMouseDown={handleClearMouseDown}
-            />
-          </Box>
+          <ClearButton
+            fontSize={fontSize}
+            radius={radius}
+            clearButtonProps={isRecord(clearButton) ? clearButton : EMPTY_RECORD}
+            handleClearClick={handleClearClick}
+            handleClearMouseDown={handleClearMouseDown}
+            padding={responsivePadding}
+          />
         )}
       </span>
 
@@ -255,5 +212,68 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
         </span>
       )}
     </span>
+  )
+}
+
+function ClearButton({
+  fontSize,
+  radius,
+  clearButtonProps,
+  handleClearClick,
+  handleClearMouseDown,
+  padding,
+}: {
+  clearButtonProps: TextInputClearButtonProps
+  handleClearClick: (event: MouseEvent<HTMLButtonElement>) => void
+  handleClearMouseDown: (event: MouseEvent<HTMLButtonElement>) => void
+  padding: ResponsiveProp<Space>
+} & Pick<TextInputOwnProps, 'fontSize' | 'radius'>) {
+  const clearButtonBoxPadding = useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(padding).map(([key, value]) => {
+        if (value === 0) return [key, 0]
+        if (value === 1) return [key, 1]
+        if (value === 2) return [key, 1]
+
+        return [key, typeof value === 'number' ? value - 2 : 0]
+      }),
+    ) as ResponsiveProp<Space>
+  }, [padding])
+
+  const clearButtonPadding = useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(padding).map(([key, value]) => {
+        if (value === 0) return [key, 0]
+        if (value === 1) return [key, 0]
+        if (value === 2) return [key, 1]
+
+        return [key, typeof value === 'number' ? value - 1 : 0]
+      }),
+    ) as ResponsiveProp<Space>
+  }, [padding])
+
+  return (
+    <Box
+      as="span"
+      insetTop={0}
+      insetRight={0}
+      padding={clearButtonBoxPadding}
+      position="absolute"
+      style={{zIndex: 2}}
+    >
+      <Button
+        aria-label="Clear"
+        data-qa="clear-button"
+        display="block"
+        fontSize={fontSize}
+        icon={CloseIcon}
+        mode="bleed"
+        padding={clearButtonPadding}
+        radius={radius}
+        {...clearButtonProps}
+        onClick={handleClearClick}
+        onMouseDown={handleClearMouseDown}
+      />
+    </Box>
   )
 }

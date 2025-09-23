@@ -30,5 +30,5 @@ export function DialogProvider(props: DialogProviderProps): React.JSX.Element {
     [position, zOffset],
   )
 
-  return <DialogContext.Provider value={contextValue}>{children}</DialogContext.Provider>
+  return <DialogContext value={contextValue}>{children}</DialogContext>
 }
