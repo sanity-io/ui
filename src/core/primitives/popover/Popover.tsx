@@ -18,6 +18,7 @@ import {
   type ReactElement,
   type ReactNode,
   type Ref,
+  use,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -29,11 +30,12 @@ import {_getResponsiveProp} from '../../helpers/props'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import type {ComponentType, Placement, Props} from '../../types'
-import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
+import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
+import {CardContext} from '../card/CardContext'
 import {CardProvider} from '../card/CardProvider'
-import {useCard} from '../card/useCard'
+import {assertCardContext} from '../card/useCard'
 import {type LayerOwnProps} from '../layer/Layer'
 import {useLayer} from '../layer/useLayer'
 import {
@@ -153,8 +155,6 @@ function ViewportOverlay() {
 export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_ELEMENT>(
   props: PopoverProps<E>,
 ): React.JSX.Element {
-  const boundaryElementContext = useBoundaryElement()
-
   const {
     __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
     animate: _animate = false,
@@ -191,10 +191,8 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
   } = props as PopoverProps<typeof DEFAULT_POPOVER_ELEMENT>
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
-  const floatingBoundary = _floatingBoundary ?? boundaryElementContext.element
-  const referenceBoundary = _referenceBoundary ?? boundaryElementContext.element
-
-  const card = useCard()
+  const floatingBoundary = _floatingBoundary ?? use(BoundaryElementContext)
+  const referenceBoundary = _referenceBoundary ?? use(BoundaryElementContext)
 
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
@@ -309,17 +307,24 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     </>
   )
 
-  const children =
-    open &&
-    (portal ? (
+  let children = open ? node : null
+
+  if (open && portal) {
+    let resolvedTone = tone as Exclude<typeof tone, 'inherit'>
+    if (tone === 'inherit') {
+      const card = use(CardContext)
+      assertCardContext(card)
+      resolvedTone = card.tone
+    }
+
+    children = (
       <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
-        <CardProvider tone={tone === 'inherit' ? card.tone : tone} scheme={scheme ?? 'light'}>
+        <CardProvider tone={resolvedTone} scheme={scheme ?? 'light'}>
           {node}
         </CardProvider>
       </Portal>
-    ) : (
-      node
-    ))
+    )
+  }
 
   return (
     <>

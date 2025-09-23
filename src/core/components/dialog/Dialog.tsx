@@ -9,6 +9,7 @@ import {
   type FocusEvent,
   type ForwardedRef,
   type ReactNode,
+  use,
   useCallback,
   useMemo,
   useRef,
@@ -22,7 +23,7 @@ import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Container} from '../../primitives/container/Container'
 import {Layer, type LayerOwnProps, type LayerProps} from '../../primitives/layer/Layer'
 import type {ComponentType, Props} from '../../types'
-import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
+import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {Portal} from '../../utils/portal/Portal'
 import {usePortal} from '../../utils/portal/usePortal'
 import {DialogCard} from './DialogCard'
@@ -115,7 +116,7 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
   const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
-  const boundaryElement = useBoundaryElement().element
+  const boundaryElement = use(BoundaryElementContext)
   const cardRadius = useMemo(() => _getResponsiveProp(cardRadiusProp), [cardRadiusProp])
   const position = useMemo(() => _getResponsiveProp(positionProp), [positionProp])
   const zOffset = useMemo(() => _getResponsiveProp(zOffsetProp), [zOffsetProp])

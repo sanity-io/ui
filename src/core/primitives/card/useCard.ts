@@ -7,9 +7,14 @@ import type {CardContextValue} from './types'
 export function useCard(): CardContextValue {
   const card = use(CardContext)
 
-  if (!card) {
-    throw new Error('useCard(): missing context value')
-  }
+  assertCardContext(card)
 
   return card
+}
+
+/** @internal */
+export function assertCardContext(card: CardContextValue | null): asserts card is CardContextValue {
+  if (!card) {
+    throw new Error('useCard(): missing context value', {cause: card})
+  }
 }

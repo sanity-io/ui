@@ -11,6 +11,7 @@ import {
 import {
   type ForwardedRef,
   type ReactNode,
+  use,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -28,7 +29,7 @@ import {Flex} from '../../primitives/flex/Flex'
 import {useLayer} from '../../primitives/layer/useLayer'
 import {Text} from '../../primitives/text/Text'
 import type {Props} from '../../types'
-import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
+import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {usePortal} from '../../utils/portal/usePortal'
 import {isTargetWithinScope} from './isTargetWithinScope'
 
@@ -87,11 +88,10 @@ export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIAL
 
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
-  const boundaryElement = useBoundaryElement().element
+  const boundaryElement = use(BoundaryElementContext)
   const ref = useRef<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLDivElement | null>(null)
-  const layer = useLayer()
-  const {isTopLayer} = layer
+  const {isTopLayer} = useLayer()
   const labelId = `${id}_label`
   const showCloseButton = Boolean(onClose) && hideCloseButton === false
   const showHeader = Boolean(header) || showCloseButton

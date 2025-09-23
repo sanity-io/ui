@@ -8,6 +8,15 @@ import type {PortalContextValue} from './types'
 export function usePortal(): PortalContextValue {
   const value = use(PortalContext)
 
+  assertPortalContext(value)
+
+  return value
+}
+
+/** @internal */
+export function assertPortalContext(
+  value: PortalContextValue | null,
+): asserts value is PortalContextValue {
   if (!value) {
     throw new Error('usePortal(): missing context value')
   }
@@ -18,6 +27,4 @@ export function usePortal(): PortalContextValue {
   if (!isRecord(value) || value.version !== 0.0) {
     throw new Error('usePortal(): the context value is not compatible')
   }
-
-  return value
 }

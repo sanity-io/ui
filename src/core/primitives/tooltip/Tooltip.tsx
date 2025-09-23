@@ -19,6 +19,7 @@ import {
   type ReactElement,
   type ReactNode,
   type RefAttributes,
+  use,
   useCallback,
   useEffect,
   useId,
@@ -35,20 +36,21 @@ import {useDelayedState} from '../../hooks/useDelayedState'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import type {ComponentType, Delay, Placement, Props} from '../../types'
-import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
+import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
-import {usePortal} from '../../utils/portal/usePortal'
+import {PortalContext} from '../../utils/portal/PortalContext'
+import {assertPortalContext} from '../../utils/portal/usePortal'
+import {CardContext} from '../card/CardContext'
 import {CardProvider} from '../card/CardProvider'
-import {useCard} from '../card/useCard'
+import {assertCardContext} from '../card/useCard'
 import type {LayerOwnProps} from '../layer/Layer'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
-import {useTooltipDelayGroup} from './tooltipDelayGroup/useTooltipDelayGroup'
-// import {useTooltipDelayGroup} from './TooltipDelayGroup'
+import {TooltipDelayGroupContext} from './tooltipDelayGroup/TooltipDelayGroupContext'
 import {TooltipLayer} from './TooltipLayer'
 
 /** @public */
@@ -106,8 +108,6 @@ export type TooltipProps<E extends TooltipElementType = TooltipElementType> = Pr
 export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_ELEMENT>(
   props: TooltipProps<E>,
 ): React.JSX.Element {
-  const boundaryElementContext = useBoundaryElement()
-
   const {
     animate: _animate = false,
     arrow: arrowProp = false,
@@ -130,11 +130,10 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     tone = 'inherit',
     ...rest
   } = props as TooltipProps<typeof DEFAULT_TOOLTIP_ELEMENT>
-  const boundaryElement = _boundaryElement ?? boundaryElementContext?.element
+  const boundaryElement = _boundaryElement ?? use(BoundaryElementContext)
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
 
-  const card = useCard()
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const ref = useRef<HTMLDivElement | null>(null)
@@ -145,9 +144,13 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
-  const portal = usePortal()
-  const portalElement =
-    typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
+  let portalElement: HTMLElement | null = null
+  if (portalProp) {
+    const portal = use(PortalContext)
+    assertPortalContext(portal)
+    portalElement =
+      typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
+  }
 
   const middleware = useMiddleware({
     animate,
@@ -174,7 +177,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
 
   const tooltipId = useId()
   const [isOpen, setIsOpen] = useDelayedState(false)
-  const delayGroupContext = useTooltipDelayGroup()
+  const delayGroupContext = use(TooltipDelayGroupContext)
   const {setIsGroupActive, setOpenTooltipId} = delayGroupContext || {}
   const showTooltip = isOpen || delayGroupContext?.openTooltipId === tooltipId
 
@@ -385,17 +388,24 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     </TooltipLayer>
   )
 
-  const children =
-    showTooltip &&
-    (portalProp ? (
+  let children = showTooltip ? node : null
+
+  if (showTooltip && portalProp) {
+    let resolvedTone = tone as Exclude<typeof tone, 'inherit'>
+    if (tone === 'inherit') {
+      const card = use(CardContext)
+      assertCardContext(card)
+      resolvedTone = card.tone
+    }
+
+    children = (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        <CardProvider tone={tone === 'inherit' ? card.tone : tone} scheme={scheme ?? 'light'}>
+        <CardProvider tone={resolvedTone} scheme={scheme ?? 'light'}>
           {node}
         </CardProvider>
       </Portal>
-    ) : (
-      node
-    ))
+    )
+  }
 
   return (
     <>
