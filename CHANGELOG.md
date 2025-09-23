@@ -5,6 +5,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.32](https://github.com/sanity-io/ui/compare/v4.0.0-static.31...v4.0.0-static.32) (2025-09-23)
+
+### Features
+
+- add options prop to useGlobalKeyDown ([#2061](https://github.com/sanity-io/ui/issues/2061)) ([ef72649](https://github.com/sanity-io/ui/commit/ef72649edb1b40033dda519d9139b8f73b814e3d))
+
+### Bug Fixes
+
+- handle `react-hooks/preserve-manual-memoization` ([62d84e2](https://github.com/sanity-io/ui/commit/62d84e2dcb8e4234fe15e7328501d4cfac9a33bb))
+- handle `react-hooks/refs` ([4cf16e3](https://github.com/sanity-io/ui/commit/4cf16e33dbba65294597bb736558c38d7791b756))
+- handle `react-hooks/set-state-in-effect` ([f9f0b46](https://github.com/sanity-io/ui/commit/f9f0b46ae31a7d952e463be8dfdf10dba164a069))
+- use v4 as the global scope context key ([f6f21ba](https://github.com/sanity-io/ui/commit/f6f21baf0b9c547e33f2c5b82acbae31a285e6a5))
+
 ## [4.0.0-static.31](https://github.com/sanity-io/ui/compare/v4.0.0-static.30...v4.0.0-static.31) (2025-09-23)
 
 ### Bug Fixes
