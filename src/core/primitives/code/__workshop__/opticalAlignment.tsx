@@ -1,4 +1,3 @@
-import {AddCircleIcon} from '@sanity/icons'
 import {Box, Card, Code, Flex, Stack} from '@sanity/ui'
 
 export default function OpticalAlignment() {
@@ -37,9 +36,7 @@ export default function OpticalAlignment() {
 
         <Flex>
           <Card padding={2} scheme="dark">
-            <Code>
-              <AddCircleIcon />
-            </Code>
+            <Code>{`<AddCircleIcon />`}</Code>
           </Card>
         </Flex>
       </Stack>
