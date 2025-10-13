@@ -199,7 +199,7 @@
     "storybook": "^8.6.14",
     "styled-components": "npm:@sanity/styled-components@^6.1.23",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "typescript-eslint": "^8.46.0",
     "vite": "^7.1.6",
     "vite-tsconfig-paths": "^5.1.4"
