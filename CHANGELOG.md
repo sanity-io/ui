@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.38](https://github.com/sanity-io/ui/compare/v4.0.0-static.37...v4.0.0-static.38) (2025-10-13)
+
+### Bug Fixes
+
+- **deps:** upgrade to React Compiler v1 ([d7434b9](https://github.com/sanity-io/ui/commit/d7434b90b1f676d48778f443ed849745b05f8673))
+
 ## [4.0.0-static.37](https://github.com/sanity-io/ui/compare/v4.0.0-static.36...v4.0.0-static.37) (2025-10-13)
 
 ### Bug Fixes
