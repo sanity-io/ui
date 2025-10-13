@@ -5,7 +5,6 @@ import _import from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
-import reactHooksWithUseEffectEvent from 'eslint-plugin-react-hooks-with-use-effect-event'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import storybook from 'eslint-plugin-storybook'
@@ -59,22 +58,13 @@ export default ts.config(
     // react-refresh
     reactRefresh.configs.vite,
 
-    // react-compiler
-    // @ts-expect-error - configs is not typed but exists, and it enables React Compiler linter checks
-    ...reactHooks.configs['flat/recommended'],
+    // react-hooks
+    reactHooks.configs.flat.recommended,
 
-    // react-hooks, that are useEffectEvent aware
+    // react-hooks custom rules
     {
-      // Since we use useEffectEvent, we can't use the oxlint checker for this rule, we must use the ESLint variant.
-      // We're using eslint-plugin-react-hooks@rc, which runs React Compiler checks which matches our babel-plugin-react-compiler@rc setup.
-      // However, we're also using the experimental useEffectEvent API using the use-effect-event package, which requires eslint-plugin-react-hooks@experimental (https://react.dev/reference/react/experimental_useEffectEvent).
-      // To make all this work we disable the exhaustive-deps rule from the rc react-hooks plugin and enable it with the experimental react-hooks plugin.
-      plugins: {
-        'react-hooks-with-use-effect-event': reactHooksWithUseEffectEvent,
-      },
       rules: {
-        'react-hooks/exhaustive-deps': 'off',
-        'react-hooks-with-use-effect-event/exhaustive-deps': 'error',
+        'react-hooks/exhaustive-deps': 'error',
         // Disabled by default, enabled here
         'react-hooks/hooks': 'error',
         'react-hooks/capitalized-calls': 'error',

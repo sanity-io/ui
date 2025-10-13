@@ -226,7 +226,6 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
       ref.current.querySelectorAll('[data-ui="TreeItem"]'),
     ) as HTMLElement[]
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItemElements(_itemElements)
   }, [children])
 
