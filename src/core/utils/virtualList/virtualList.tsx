@@ -66,7 +66,6 @@ export const VirtualList = forwardRef(function VirtualList(
     const firstElement = wrapperRef.current.firstChild
 
     if (firstElement instanceof HTMLElement) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setItemHeight(firstElement.offsetHeight)
     }
   }, [renderItem])
