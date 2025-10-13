@@ -441,7 +441,7 @@ describe('useClickOutside', () => {
     const useBoundaryElementFromRef = (ref: React.MutableRefObject<HTMLElement | null>) => {
       const [element, setElement] = useState(() => ref.current)
 
-      // eslint-disable-next-line react-hooks-with-use-effect-event/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
         // If the ref has mutated since the last render, update the state and schedule a re-render
         if (ref.current !== element) {
