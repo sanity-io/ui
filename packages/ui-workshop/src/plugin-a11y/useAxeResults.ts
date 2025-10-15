@@ -1,6 +1,6 @@
 import {useToast} from '@sanity/ui'
 import axe from 'axe-core'
-import {useEffect, useState} from 'react'
+import {startTransition, useEffect, useState} from 'react'
 
 const IGNORE_VIOLATION_IDS = ['landmark-one-main', 'page-has-heading-one']
 
@@ -17,7 +17,7 @@ export function useAxeResults(props: {
     if (!enabled) return
 
     try {
-      setResults(null)
+      startTransition(() => setResults(null))
 
       axe
         .run()

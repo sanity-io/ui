@@ -1,5 +1,5 @@
 import {isEqual} from 'lodash'
-import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {useWorkshop} from '../../useWorkshop'
@@ -90,17 +90,19 @@ export const PropsProvider = memo(function PropsProvider(props: {
 
     encodedValueRef.current = encodedValue
 
-    setState((prevState) => {
-      const nextValue = decodeValue(String(encodedValue)) || {}
-      if (isEqual(prevState.value, nextValue)) {
-        return prevState
-      }
+    startTransition(() =>
+      setState((prevState) => {
+        const nextValue = decodeValue(String(encodedValue)) || {}
+        if (isEqual(prevState.value, nextValue)) {
+          return prevState
+        }
 
-      return {
-        ...prevState,
-        value: nextValue,
-      }
-    })
+        return {
+          ...prevState,
+          value: nextValue,
+        }
+      }),
+    )
   }, [encodedValue])
 
   return <PropsContext.Provider value={ctx}>{children}</PropsContext.Provider>
