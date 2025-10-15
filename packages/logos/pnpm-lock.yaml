@@ -23,7 +23,7 @@ importers:
         version: 4.7.0(@prettier/plugin-oxc@0.0.4)(prettier@3.6.2)
       '@sanity/pkg-utils':
         specifier: ^8.1.21
-        version: 8.1.21(@types/babel__core@7.20.5)(@types/node@24.7.2)(babel-plugin-react-compiler@19.1.0-rc.3)(typescript@5.9.3)
+        version: 8.1.21(@types/babel__core@7.20.5)(@types/node@24.7.2)(babel-plugin-react-compiler@1.0.0)(typescript@5.9.3)
       '@sanity/prettier-config':
         specifier: ^2.0.1
         version: 2.0.1(prettier@3.6.2)
@@ -46,8 +46,8 @@ importers:
         specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       babel-plugin-react-compiler:
-        specifier: 19.1.0-rc.3
-        version: 19.1.0-rc.3
+        specifier: 1.0.0
+        version: 1.0.0
       commitizen:
         specifier: ^4.3.1
         version: 4.3.1(@types/node@24.7.2)(typescript@5.9.3)
@@ -1469,8 +1469,8 @@ packages:
     resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
     engines: {node: '>=4'}
 
-  babel-plugin-react-compiler@19.1.0-rc.3:
-    resolution: {integrity: sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==}
+  babel-plugin-react-compiler@1.0.0:
+    resolution: {integrity: sha512-Ixm8tFfoKKIPYdCCKYTsqv+Fd4IJ0DQqMyEimo+pxUOMUR9cVPlwTrFt9Avu+3cb6Zp3mAzl+t1MrG2fxxKsxw==}
 
   babel-runtime@6.26.0:
     resolution: {integrity: sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==}
@@ -5487,7 +5487,7 @@ snapshots:
     dependencies:
       react: 19.2.0
 
-  '@sanity/pkg-utils@8.1.21(@types/babel__core@7.20.5)(@types/node@24.7.2)(babel-plugin-react-compiler@19.1.0-rc.3)(typescript@5.9.3)':
+  '@sanity/pkg-utils@8.1.21(@types/babel__core@7.20.5)(@types/node@24.7.2)(babel-plugin-react-compiler@1.0.0)(typescript@5.9.3)':
     dependencies:
       '@babel/core': 7.28.4
       '@babel/parser': 7.28.4
@@ -5536,7 +5536,7 @@ snapshots:
       zod: 4.1.12
       zod-validation-error: 4.0.2(zod@4.1.12)
     optionalDependencies:
-      babel-plugin-react-compiler: 19.1.0-rc.3
+      babel-plugin-react-compiler: 1.0.0
     transitivePeerDependencies:
       - '@ts-macro/tsc'
       - '@types/babel__core'
@@ -6048,7 +6048,7 @@ snapshots:
 
   axe-core@4.10.3: {}
 
-  babel-plugin-react-compiler@19.1.0-rc.3:
+  babel-plugin-react-compiler@1.0.0:
     dependencies:
       '@babel/types': 7.28.4
 
