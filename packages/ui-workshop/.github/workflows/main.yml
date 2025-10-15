@@ -1,12 +1,10 @@
-name: CI & Release
+name: CI
 
 on:
   push:
   pull_request:
     branches:
       - main
-      - beta
-      - alpha
 
 permissions:
   contents: read # for checkout
@@ -33,30 +31,3 @@ jobs:
       - run: pnpm lint
       - run: pnpm build
       - run: pnpm test
-
-  release:
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
-    name: "Semantic release"
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          # Need to fetch entire commit history to
-          # analyze every commit since last release
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-      - run: pnpm install
-      # Branches that will release new versions are defined in .releaserc.json
-      - run: npx semantic-release
-        env:
-          NPM_CONFIG_PROVENANCE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
