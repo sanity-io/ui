@@ -1,15 +1,8 @@
-<!-- markdownlint-disable --><!-- textlint-disable -->
-
 ## 3.4.0
 
 ### Minor Changes
 
 - [`b1f9eea`](https://github.com/sanity-io/ui-workshop/commit/b1f9eeaab4bb016cbd867e9c0dff91cd9af293af) Thanks [@stipsan](https://github.com/stipsan)! - Upgrade React Compiler to v1
-
-# 📓 Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [3.3.2](https://github.com/sanity-io/ui-workshop/compare/v3.3.1...v3.3.2) (2025-08-07)
 
