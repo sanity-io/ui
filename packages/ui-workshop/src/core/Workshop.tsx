@@ -8,7 +8,7 @@ import {
 } from '@sanity/ui'
 import {debounce} from 'lodash'
 import {isEqual} from 'lodash'
-import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {WorkshopConfig} from './config'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
@@ -137,15 +137,17 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
     const prevMediaIndex = mediaIndexRef.current
 
     if (prevMediaIndex < 2 && mediaIndex >= 2) {
-      setNavigatorExpanded(false)
-      setInspectorExpanded(false)
+      startTransition(() => {
+        setNavigatorExpanded(false)
+        setInspectorExpanded(false)
+      })
     }
 
     mediaIndexRef.current = mediaIndex
   }, [mediaIndex])
 
   useEffect(() => {
-    setNavigatorExpanded(false)
+    startTransition(() => setNavigatorExpanded(false))
   }, [path])
 
   // Cancel debounced functions
