@@ -73,23 +73,17 @@
     "pkg:build": "pkg build --check --strict",
     "ts:check": "tsc --build",
     "clean": "rimraf .workshop dist",
-    "commit": "cz",
     "dev": "run-p workshop:dev",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
     "prepare": "husky install",
     "prepack": "pnpm run build",
-    "release": "semantic-release",
+    "release": "changeset publish",
     "test": "vitest",
     "watch": "pkg watch --strict",
     "workshop:build": "run-s clean && node -r dotenv-flow/config -r esbuild-register -r tsconfig-paths/register scripts/build",
     "workshop:dev": "node -r dotenv-flow/config -r esbuild-register -r tsconfig-paths/register scripts/dev",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
   },
   "lint-staged": {
     "*": [
@@ -98,17 +92,6 @@
   },
   "browserslist": "extends @sanity/browserslist-config",
   "prettier": "@sanity/prettier-config",
-  "release": {
-    "branches": [
-      "main",
-      {
-        "name": "static",
-        "channel": "static",
-        "prerelease": true
-      }
-    ],
-    "extends": "@sanity/semantic-release-preset"
-  },
   "dependencies": {
     "@sanity/icons": "^3.7.4",
     "@vanilla-extract/css": "^1.17.4",
@@ -133,11 +116,11 @@
     "vite": "^7.1.10"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^19.8.1",
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.7",
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^8.1.21",
     "@sanity/prettier-config": "^2.0.1",
-    "@sanity/semantic-release-preset": "^4.1.8",
     "@sanity/ui": "^3.1.10",
     "@types/cpx": "^1.5.5",
     "@types/express": "^5.0.3",
@@ -149,8 +132,6 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "babel-plugin-react-compiler": "1.0.0",
-    "commitizen": "^4.3.1",
-    "commitlint": "^19.8.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-import": "^2.32.0",
@@ -167,7 +148,6 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
-    "semantic-release": "^23.1.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.9.3",
     "vitest": "^3.2.4"
