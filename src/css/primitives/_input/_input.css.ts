@@ -56,7 +56,6 @@ export const element: string = _style(layers.primitives, {
     [`${root}:not([data-invalid]) &`]: {
       vars: {
         [vars.color.input.text.fg]: vars.color.tinted.default.fg[2],
-        [vars.color.input.text.placeholder]: vars.color.tinted.default.border[4],
       },
     },
 
@@ -75,14 +74,12 @@ export const element: string = _style(layers.primitives, {
     [`${root}:not([data-invalid]) &:disabled`]: {
       vars: {
         [vars.color.input.text.fg]: vars.color.tinted.default.border[4],
-        [vars.color.input.text.placeholder]: vars.color.tinted.default.border[1],
       },
     },
 
     [`${root}[data-invalid] &`]: {
       vars: {
         [vars.color.input.text.fg]: vars.color.tinted.critical.fg[2],
-        [vars.color.input.text.placeholder]: vars.color.tinted.critical.border[2],
       },
     },
 
@@ -101,9 +98,13 @@ export const element: string = _style(layers.primitives, {
     [`${root}[data-invalid] &:disabled`]: {
       vars: {
         [vars.color.input.text.fg]: vars.color.tinted.critical.border[4],
-        [vars.color.input.text.placeholder]: vars.color.tinted.critical.border[2],
       },
     },
+  },
+
+  vars: {
+    [vars.color.input.text.placeholder]:
+      `color-mix(in srgb, transparent, ${vars.color.input.text.fg} 50%)`,
   },
 })
 
