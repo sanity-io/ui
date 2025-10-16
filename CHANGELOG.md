@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.39](https://github.com/sanity-io/ui/compare/v4.0.0-static.38...v4.0.0-static.39) (2025-10-16)
+
+### Bug Fixes
+
+- **css:** increase contrast of placeholder text ([2673e0a](https://github.com/sanity-io/ui/commit/2673e0acc6fa329de85adb422a5546f54ce7b0c1))
+
 ## [4.0.0-static.38](https://github.com/sanity-io/ui/compare/v4.0.0-static.37...v4.0.0-static.38) (2025-10-13)
 
 ### Bug Fixes
