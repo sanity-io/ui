@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.40](https://github.com/sanity-io/ui/compare/v4.0.0-static.39...v4.0.0-static.40) (2025-10-17)
+
+### Bug Fixes
+
+- **toast:** support `duration: Infinity` ([d6f7c61](https://github.com/sanity-io/ui/commit/d6f7c6184d78d455dbe45bb51e7ab54c0b3f95e8))
+
 ## [4.0.0-static.39](https://github.com/sanity-io/ui/compare/v4.0.0-static.38...v4.0.0-static.39) (2025-10-16)
 
 ### Bug Fixes
