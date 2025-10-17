@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.41](https://github.com/sanity-io/ui/compare/v4.0.0-static.40...v4.0.0-static.41) (2025-10-17)
+
+### Bug Fixes
+
+- **toast:** clear existing timeout id when pushing toast ([97b3a5f](https://github.com/sanity-io/ui/commit/97b3a5f7e83d7b3c48cca519b199ec14b30235ad))
+
 ## [4.0.0-static.40](https://github.com/sanity-io/ui/compare/v4.0.0-static.39...v4.0.0-static.40) (2025-10-17)
 
 ### Bug Fixes
