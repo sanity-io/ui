@@ -1,6 +1,6 @@
 import type {ResponsiveProp} from '@sanity/ui/css'
 import {AnimatePresence} from 'framer-motion'
-import {startTransition, useMemo, useState} from 'react'
+import {startTransition, useMemo, useRef, useState} from 'react'
 
 import {useMounted} from '../../hooks/useMounted'
 import {LayerProvider} from '../../primitives/layer/LayerProvider'
@@ -28,10 +28,19 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const [state, setState] = useState<ToastState>([])
   const mounted = useMounted()
 
+  const timeoutIdsRef = useRef<Record<string, NodeJS.Timeout | undefined>>({})
+
   const value: ToastContextValue = useMemo(() => {
     const push = (params: ToastParams) => {
       const id = params.id ?? generateToastId()
       const duration = params.duration ?? 5000
+
+      // If the `id` is reused, clear the previous timeout
+      const existingTimeoutId = timeoutIdsRef.current[id]
+      if (existingTimeoutId) {
+        clearTimeout(existingTimeoutId)
+        timeoutIdsRef.current[id] = undefined
+      }
 
       startTransition(() => {
         setState((prevState): ToastState => {
@@ -50,17 +59,23 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
            * This function will be passed to the Toast component
            * and called either on close button click or after duration.
            */
-          const dismiss = () => {
+          function dismiss() {
             startTransition(() => {
               if (timeoutId) {
                 clearTimeout(timeoutId)
               }
 
               setState((currentState) => currentState.filter((toast) => toast.id !== id))
+
+              // Clear the timeout id from the ref to prevent memory leaks
+              timeoutIdsRef.current[id] = undefined
             })
           }
 
           const timeoutId = duration === Infinity ? undefined : setTimeout(dismiss, duration)
+
+          // Set the timeout id in the ref
+          timeoutIdsRef.current[id] = timeoutId
 
           /**
            * Create updated state by:
