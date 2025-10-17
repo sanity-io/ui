@@ -60,7 +60,7 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
             })
           }
 
-          const timeoutId = setTimeout(dismiss, duration)
+          const timeoutId = duration === Infinity ? undefined : setTimeout(dismiss, duration)
 
           /**
            * Create updated state by:
