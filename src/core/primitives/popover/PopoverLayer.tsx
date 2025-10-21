@@ -1,6 +1,6 @@
 import type {Strategy} from '@floating-ui/react-dom'
 import {popoverCard} from '@sanity/ui/css'
-import {motion} from 'framer-motion'
+import {motion} from 'motion/react'
 import {type CSSProperties, type ForwardedRef, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'

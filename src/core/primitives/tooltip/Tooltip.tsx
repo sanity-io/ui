@@ -10,7 +10,7 @@ import {
 } from '@floating-ui/react-dom'
 import {type RadiusStyleProps, type ShadowStyleProps, tooltip} from '@sanity/ui/css'
 import type {CardTone, ColorScheme} from '@sanity/ui/theme'
-import {AnimatePresence} from 'framer-motion'
+import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
   type FocusEvent,

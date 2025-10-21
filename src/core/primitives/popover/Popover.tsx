@@ -11,7 +11,7 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui/css'
-import {AnimatePresence} from 'framer-motion'
+import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
   type ForwardedRef,

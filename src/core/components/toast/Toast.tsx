@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import {type RadiusStyleProps, toast} from '@sanity/ui/css'
-import {motion, type Variant, type Variants} from 'framer-motion'
+import {motion, type Variant, type Variants} from 'motion/react'
 import {type ReactNode} from 'react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'

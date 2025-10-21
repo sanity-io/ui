@@ -1,4 +1,4 @@
-import {motion, type MotionStyle} from 'framer-motion'
+import {motion, type MotionStyle} from 'motion/react'
 import {type CSSProperties, type ForwardedRef, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'
