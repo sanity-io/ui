@@ -11,7 +11,7 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {AnimatePresence} from 'framer-motion'
+import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
   forwardRef,

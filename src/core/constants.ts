@@ -1,4 +1,4 @@
-import type {Transition, Variant} from 'framer-motion'
+import type {Transition, Variant} from 'motion/react'
 
 /**
  * @internal
@@ -13,7 +13,7 @@ export const EMPTY_RECORD: Record<string, never> = {}
 const POPOVER_MOTION_DURATION = 0.2
 
 /**
- * Shared `framer-motion` variants used by `Popover` and `Tooltip` components.
+ * Shared `motion` variants used by `Popover` and `Tooltip` components.
  * @internal
  */
 export const POPOVER_MOTION_PROPS: {
