@@ -1,5 +1,5 @@
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {motion, type MotionProps} from 'framer-motion'
+import {motion, type MotionProps} from 'motion/react'
 import React, {CSSProperties, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
