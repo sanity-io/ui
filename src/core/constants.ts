@@ -1,4 +1,4 @@
-import type {Transition, Variant} from 'framer-motion'
+import type {Transition, Variant} from 'motion/react'
 
 /**
  * @internal

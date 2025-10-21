@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
-import {motion, type Variant, type Variants} from 'framer-motion'
+import {motion, type Variant, type Variants} from 'motion/react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box, Button, Flex, Stack, Text} from '../../primitives'
