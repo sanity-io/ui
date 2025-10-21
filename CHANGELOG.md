@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.11](https://github.com/sanity-io/ui/compare/v3.1.10...v3.1.11) (2025-10-21)
+
+### Bug Fixes
+
+- **deps:** replace `framer-motion` with `motion/react` ([cc49ab6](https://github.com/sanity-io/ui/commit/cc49ab6079f335ca46c86bda69a09d373e264834))
+
 ## [3.1.10](https://github.com/sanity-io/ui/compare/v3.1.9...v3.1.10) (2025-10-13)
 
 ### Bug Fixes
