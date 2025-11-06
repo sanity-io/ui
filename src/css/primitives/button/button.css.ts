@@ -23,7 +23,6 @@ export const root: string = _style(layers.primitives, {
   verticalAlign: 'top',
   backgroundColor: vars.color.bg,
   color: vars.color.fg,
-  inlineSize: 'max-content',
 
   selectors: {
     '&::-moz-focus-inner': {
