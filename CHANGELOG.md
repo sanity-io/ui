@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.43](https://github.com/sanity-io/ui/compare/v4.0.0-static.42...v4.0.0-static.43) (2025-11-11)
+
+### Bug Fixes
+
+- **button:** revert adding explicity inline-size ([b2aba01](https://github.com/sanity-io/ui/commit/b2aba0186923f21d5a7e5d5b03bf8764f661f2a3))
+
 ## [4.0.0-static.42](https://github.com/sanity-io/ui/compare/v4.0.0-static.41...v4.0.0-static.42) (2025-10-21)
 
 ### Bug Fixes
