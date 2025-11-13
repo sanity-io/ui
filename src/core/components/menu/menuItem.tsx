@@ -120,7 +120,7 @@ export const MenuItem = forwardRef(function MenuItem(
       data-ui="MenuItem"
       role="menuitem"
       {...restProps}
-      data-pressed={as !== 'button' && pressed ? '' : undefined}
+      data-pressed={pressed ? '' : undefined}
       data-selected={active ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
       forwardedAs={as}
