@@ -44,6 +44,8 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
   >
   padding?: ResponsiveProp<Space>
   popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
+  searchable?: boolean
+  searchPlaceholder?: string
   text?: ReactNode
   tone?: ElementTone
 }
@@ -72,6 +74,8 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
     padding = 3,
     popover,
     radius = 2,
+    searchable = false,
+    searchPlaceholder,
     text,
     tone = 'default',
     ...rest
@@ -171,6 +175,8 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
       onKeyDown={handleMenuKeyDown}
       onMouseEnter={handleMenuMouseEnter}
       registerElement={registerElement}
+      searchable={searchable}
+      searchPlaceholder={searchPlaceholder}
       shouldFocus={shouldFocus}
     >
       {children}

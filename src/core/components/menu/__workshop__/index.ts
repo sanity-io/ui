@@ -90,6 +90,16 @@ const scope: WorkshopScope = {
       title: 'Data props',
       component: lazy(() => import('./DataProps')),
     },
+    {
+      name: 'searchable-menu',
+      title: 'Searchable Menu',
+      component: lazy(() => import('./SearchableMenu')),
+    },
+    {
+      name: 'searchable-menu-group',
+      title: 'Searchable MenuGroup',
+      component: lazy(() => import('./SearchableMenuGroup')),
+    },
   ],
 }
 
