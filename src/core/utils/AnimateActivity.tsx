@@ -68,7 +68,10 @@ export function AnimateActivity({mode: modeFromProps, layoutMode, children}: Ani
         presenceAffectsLayout={false}
         mode={layoutMode === 'pop' ? 'popLayout' : 'sync'}
       >
-        {children as any}
+        {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          children as any
+        }
       </PresenceChild>
     </Activity>
   )
