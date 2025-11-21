@@ -22,6 +22,7 @@ import {
   use,
   useCallback,
   useEffect,
+  useEffectEvent,
   useId,
   useImperativeHandle,
   useLayoutEffect,
@@ -29,7 +30,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import {useEffectEvent} from 'use-effect-event'
 
 import {Z_OFFSETS} from '../../constants'
 import {useDelayedState} from '../../hooks/useDelayedState'

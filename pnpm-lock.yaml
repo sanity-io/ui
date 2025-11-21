@@ -41,9 +41,6 @@ importers:
       react-refractor:
         specifier: ^4.0.0
         version: 4.0.0(react@19.2.0)
-      use-effect-event:
-        specifier: ^2.0.3
-        version: 2.0.3(react@19.2.0)
     devDependencies:
       '@babel/core':
         specifier: ^7.28.4
@@ -7633,11 +7630,6 @@ packages:
   url-join@5.0.0:
     resolution: {integrity: sha512-n2huDr9h9yzd6exQVnH/jU5mr+Pfx08LRXXZhkLLetAMESRj+anQsTAh940iMrIetKAmry9coFuZQ2jY8/p3WA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  use-effect-event@2.0.3:
-    resolution: {integrity: sha512-fz1en+z3fYXCXx3nMB8hXDMuygBltifNKZq29zDx+xNJ+1vEs6oJlYd9sK31vxJ0YI534VUsHEBY0k2BATsmBQ==}
-    peerDependencies:
-      react: ^19.2.0
 
   use@3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
@@ -15988,10 +15980,6 @@ snapshots:
   urix@0.1.0: {}
 
   url-join@5.0.0: {}
-
-  use-effect-event@2.0.3(react@19.2.0):
-    dependencies:
-      react: 19.2.0
 
   use@3.1.1: {}
 

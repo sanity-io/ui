@@ -1,7 +1,6 @@
-import {useDebugValue, useEffect} from 'react'
-import {useEffectEvent} from 'use-effect-event'
+import { useDebugValue, useEffect, useEffectEvent } from 'react'
 
-import {EMPTY_ARRAY} from '../constants'
+import { EMPTY_ARRAY } from '../constants'
 
 /** @public */
 export type ClickOutsideEventListener = (event: MouseEvent) => void
