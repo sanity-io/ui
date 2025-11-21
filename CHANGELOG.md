@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.44](https://github.com/sanity-io/ui/compare/v4.0.0-static.43...v4.0.0-static.44) (2025-11-21)
+
+### Bug Fixes
+
+- use native `useEffectEvent` ([e75f30b](https://github.com/sanity-io/ui/commit/e75f30bf8c18befdb4271d07e3f8cc6976973c0b))
+
 ## [4.0.0-static.43](https://github.com/sanity-io/ui/compare/v4.0.0-static.42...v4.0.0-static.43) (2025-11-11)
 
 ### Bug Fixes
