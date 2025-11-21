@@ -10,8 +10,8 @@ import {
 } from '@floating-ui/react-dom'
 import {type RadiusStyleProps, type ShadowStyleProps, tooltip} from '@sanity/ui/css'
 import type {CardTone, ColorScheme} from '@sanity/ui/theme'
-import {AnimatePresence} from 'motion/react'
 import {
+  Activity,
   cloneElement,
   type FocusEvent,
   type HTMLAttributes,
@@ -36,6 +36,7 @@ import {useDelayedState} from '../../hooks/useDelayedState'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import type {ComponentType, Delay, Placement, Props} from '../../types'
+import {AnimateActivity} from '../../utils/AnimateActivity'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
@@ -388,7 +389,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     </TooltipLayer>
   )
 
-  let children = showTooltip ? node : null
+  let children = node
 
   if (showTooltip && portalProp) {
     let resolvedTone = tone as Exclude<typeof tone, 'inherit'>
@@ -410,7 +411,13 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   return (
     <>
       {/* the tooltip */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate ? (
+        <AnimateActivity mode={showTooltip ? 'visible' : 'hidden'} layoutMode="default">
+          {children}
+        </AnimateActivity>
+      ) : (
+        <Activity mode={showTooltip ? 'visible' : 'hidden'}>{children}</Activity>
+      )}
 
       {/* the referred element */}
       {child}

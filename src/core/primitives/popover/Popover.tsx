@@ -11,8 +11,8 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui/css'
-import {AnimatePresence} from 'motion/react'
 import {
+  Activity,
   cloneElement,
   type ForwardedRef,
   type ReactElement,
@@ -30,6 +30,7 @@ import {_getResponsiveProp} from '../../helpers/props'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import type {ComponentType, Placement, Props} from '../../types'
+import {AnimateActivity} from '../../utils/AnimateActivity'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
@@ -307,7 +308,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     </>
   )
 
-  let children = open ? node : null
+  let children = node
 
   if (open && portal) {
     let resolvedTone = tone as Exclude<typeof tone, 'inherit'>
@@ -329,7 +330,13 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
   return (
     <>
       {/* the popover */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate ? (
+        <AnimateActivity mode={open ? 'visible' : 'hidden'} layoutMode="default">
+          {children}
+        </AnimateActivity>
+      ) : (
+        <Activity mode={open ? 'visible' : 'hidden'}>{children}</Activity>
+      )}
 
       {/* the referred element */}
       {child}
