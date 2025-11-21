@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.45](https://github.com/sanity-io/ui/compare/v4.0.0-static.44...v4.0.0-static.45) (2025-11-21)
+
+### Features
+
+- use `<Activity>` on `<Tooltip>` & `<Popover>` ([a20335f](https://github.com/sanity-io/ui/commit/a20335f44dc39eb006e4a0f0070091cfa2c5caf8))
+
 ## [4.0.0-static.44](https://github.com/sanity-io/ui/compare/v4.0.0-static.43...v4.0.0-static.44) (2025-11-21)
 
 ### Bug Fixes
