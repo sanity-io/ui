@@ -31,7 +31,7 @@ describe('Tooltip', () => {
       const button = screen.getByText('Hover me')
 
       // Validate tooltip content is not rendered
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
 
       fireEvent.mouseEnter(button)
 
@@ -40,7 +40,7 @@ describe('Tooltip', () => {
 
       fireEvent.mouseOut(button)
       // Validate tooltip content is not rendered anymore
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
     it('should support delays to show and hide the tooltip.', () => {
       vi.useFakeTimers()
@@ -59,13 +59,13 @@ describe('Tooltip', () => {
       const button = screen.getByText('Hover me')
 
       // Validate tooltip content is not rendered
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
 
       fireEvent.mouseEnter(button)
 
       act(() => vi.advanceTimersByTime(delay / 2))
       // Content should not be rendered yet
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       act(() => vi.advanceTimersByTime(delay / 2))
 
       // Validate tooltip content is rendered
@@ -76,7 +76,7 @@ describe('Tooltip', () => {
       screen.getByText('Tooltip content')
       act(() => vi.advanceTimersByTime(delay))
       // Validate tooltip content is not rendered anymore
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
     it('should support different open and close delays to show and hide the tooltip.', () => {
       vi.useFakeTimers()
@@ -99,13 +99,13 @@ describe('Tooltip', () => {
       const button = screen.getByText('Hover me')
 
       // Validate tooltip content is not rendered
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
 
       fireEvent.mouseEnter(button)
 
       act(() => vi.advanceTimersByTime(openDelay / 2))
       // Content should not be rendered yet
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       act(() => vi.advanceTimersByTime(openDelay / 2))
 
       // Validate tooltip content is rendered
@@ -116,7 +116,7 @@ describe('Tooltip', () => {
       screen.getByText('Tooltip content')
       act(() => vi.advanceTimersByTime(closeDelay))
       // Validate tooltip content is not rendered anymore
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
   })
 
@@ -144,20 +144,20 @@ describe('Tooltip', () => {
       const button2 = screen.getByText('Button 2')
 
       // Validate tooltip content is not rendered
-      expect(screen.queryByText('Tooltip 1')).not.toBeVisible()
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovers on first button, it should show first tooltip only
       fireEvent.mouseEnter(button1)
       act(() => vi.advanceTimersByTime(delay / 2))
       // Content should not be rendered yet, we have a delay of 150ms
-      expect(screen.queryByText('Tooltip 1')).not.toBeVisible()
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
       act(() => vi.advanceTimersByTime(delay / 2))
 
       // Validate Tooltip 1 is rendered
       screen.getByText('Tooltip 1')
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovers on second button.
       fireEvent.mouseOut(button1)
@@ -165,13 +165,13 @@ describe('Tooltip', () => {
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
       act(() => vi.advanceTimersByTime(1))
-      expect(screen.queryByText('Tooltip 1')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
       act(() => vi.advanceTimersByTime(delay + 1))
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
@@ -181,13 +181,13 @@ describe('Tooltip', () => {
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
       act(() => vi.advanceTimersByTime(delay + 1))
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Wait 200ms, the group is deactivated, hovering again should trigger the delay
       act(() => vi.advanceTimersByTime(200))
       fireEvent.mouseEnter(button2)
       act(() => vi.advanceTimersByTime(delay / 2))
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
       act(() => vi.advanceTimersByTime(delay / 2))
       screen.getByText('Tooltip 2')
     })
@@ -220,20 +220,20 @@ describe('Tooltip', () => {
       const button2 = screen.getByText('Button 2')
 
       // Validate tooltip content is not rendered
-      expect(screen.queryByText('Tooltip 1')).not.toBeVisible()
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovers on first button, it should show first tooltip only
       fireEvent.mouseEnter(button1)
       act(() => vi.advanceTimersByTime(openDelay / 2))
       // Content should not be rendered yet, we have a delay of2150ms
-      expect(screen.queryByText('Tooltip 1')).not.toBeVisible()
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
       act(() => vi.advanceTimersByTime(openDelay / 2))
 
       // Validate Tooltip 1 is rendered
       screen.getByText('Tooltip 1')
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovers on second button.
       fireEvent.mouseOut(button1)
@@ -241,13 +241,13 @@ describe('Tooltip', () => {
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
       act(() => vi.advanceTimersByTime(1))
-      expect(screen.queryByText('Tooltip 1')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
       act(() => vi.advanceTimersByTime(closeDelay + 1))
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
@@ -257,13 +257,13 @@ describe('Tooltip', () => {
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
       act(() => vi.advanceTimersByTime(closeDelay + 1))
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Wait 200ms, the group is deactivated, hovering again should trigger the delay
       act(() => vi.advanceTimersByTime(200))
       fireEvent.mouseEnter(button2)
       act(() => vi.advanceTimersByTime(openDelay / 2))
-      expect(screen.queryByText('Tooltip 2')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
       act(() => vi.advanceTimersByTime(openDelay / 2))
       screen.getByText('Tooltip 2')
     })
@@ -288,7 +288,7 @@ describe('Tooltip', () => {
       const button = screen.getByText('Hover me')
 
       // Validate tooltip content is not rendered
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       act(() => fireEvent.focus(button))
       act(() => vi.advanceTimersByTime(delay))
 
@@ -299,7 +299,7 @@ describe('Tooltip', () => {
         fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
       })
       // Validate tooltip content is not rendered anymore
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
     it('With <TooltipDelayGroupProvider />  closes immediately with Escape key', () => {
       const delay = 150
@@ -320,8 +320,8 @@ describe('Tooltip', () => {
 
       const button = screen.getByText('Hover me')
 
-      // Validate tooltip content is not visible
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      // Validate tooltip content is not rendered
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       act(() => fireEvent.focus(button))
 
       act(() => vi.advanceTimersByTime(delay))
@@ -332,8 +332,8 @@ describe('Tooltip', () => {
       act(() => {
         fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
       })
-      // Validate tooltip content is not visible anymore
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      // Validate tooltip content is not rendered anymore
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
   })
 
@@ -349,19 +349,19 @@ describe('Tooltip', () => {
 
       const button = screen.getByText('Hover me')
 
-      // Assertion: the tooltip is not visible
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       act(() => fireEvent.focus(button))
 
       act(() => vi.advanceTimersByTime(delay))
 
-      // Assertion: the tooltip is visible
+      // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
       act(() => fireEvent.click(button))
 
-      // Assertion: the tooltip is not visible
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
 
     it('Should close the tooltip when the context menu is opened (right click)', () => {
@@ -375,19 +375,19 @@ describe('Tooltip', () => {
 
       const button = screen.getByText('Hover me')
 
-      // Assertion: the tooltip is not visible
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       act(() => fireEvent.focus(button))
 
       act(() => vi.advanceTimersByTime(delay))
 
-      // Assertion: the tooltip is visible
+      // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
       act(() => fireEvent.contextMenu(button))
 
-      // Assertion: the tooltip is not visible
-      expect(screen.queryByText('Tooltip content')).not.toBeVisible()
+      // Assertion: tooltip does not exist in the document
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
   })
 
