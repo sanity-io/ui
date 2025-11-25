@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0-static.46](https://github.com/sanity-io/ui/compare/v4.0.0-static.45...v4.0.0-static.46) (2025-11-25)
+
+### Bug Fixes
+
+- revert "`<Activity>` on `<Tooltip>` & `<Popover>`" ([2d7050f](https://github.com/sanity-io/ui/commit/2d7050f4abe703b4bc30f83c2b1df031ce8327fd))
+
+### Reverts
+
+- Revert "chore: fix test suite" ([c2a03d6](https://github.com/sanity-io/ui/commit/c2a03d647a21fe04b3ea4dbbfd72ea8a9b4524aa))
+
 ## [4.0.0-static.45](https://github.com/sanity-io/ui/compare/v4.0.0-static.44...v4.0.0-static.45) (2025-11-21)
 
 ### Features
