@@ -1,5 +1,5 @@
 {
-  "extends": ["./tsconfig.settings", "@sanity/pkg-utils/tsconfig/isolated-declarations.json"],
+  "extends": ["./tsconfig.settings", "@sanity/tsconfig/isolated-declarations"],
   "include": ["./src"],
   "exclude": [
     "./src/**/__fixtures__",

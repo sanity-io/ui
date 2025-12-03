@@ -44,6 +44,9 @@ importers:
       '@sanity/semantic-release-preset':
         specifier: ^5.0.0
         version: 5.0.0(semantic-release@24.2.9(typescript@5.9.3))
+      '@sanity/tsconfig':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@sanity/ui':
         specifier: ^3.1.10
         version: 3.1.10(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@19.2.0)(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
@@ -1825,6 +1828,9 @@ packages:
     engines: {node: '>= 20.8'}
     peerDependencies:
       semantic-release: ^24
+
+  '@sanity/tsconfig@2.0.0':
+    resolution: {integrity: sha512-t3VkUo8Sz4g6TjffUTDXzDCghs+MelX+lTJHNPK+Htjrcv/+VJSfHZhp4Zi4GuKjmdd3VzCtFb37S7R42qpppw==}
 
   '@sanity/ui-workshop@3.4.0':
     resolution: {integrity: sha512-vEa+dd7jJgeHkYceyBM760C4jhcbSOVEMG/EW0tGZ/Mkz6HxqB0SNeZzoc7kI8aCPBaqQA961bz83aku6UqqAg==}
@@ -8026,6 +8032,8 @@ snapshots:
       semantic-release-license: 1.0.3
     transitivePeerDependencies:
       - supports-color
+
+  '@sanity/tsconfig@2.0.0': {}
 
   '@sanity/ui-workshop@3.4.0(@sanity/ui@3.1.10(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@19.2.0)(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0)))(@types/node@22.18.10)(jiti@2.5.1)(lightningcss@1.30.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(terser@5.43.1)(tsx@4.20.6)(yaml@2.8.1)':
     dependencies:
