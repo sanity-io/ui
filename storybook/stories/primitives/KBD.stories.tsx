@@ -1,5 +1,5 @@
 import {Card, KBD, Stack} from '@sanity/ui'
-import {RADIUS, THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
@@ -58,7 +58,7 @@ export const InheritedTones: Story = {
               <KBD {...props}>{value}</KBD>
             </Card>
           ),
-          rows: [...THEME_COLOR_CARD_TONES],
+          rows: [...CARD_TONES],
         })}
       </Stack>
     )

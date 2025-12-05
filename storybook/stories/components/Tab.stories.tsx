@@ -1,6 +1,6 @@
 import {SearchIcon} from '@sanity/icons'
 import {Tab} from '@sanity/ui'
-import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
+import {ELEMENT_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, ICON_CONTROLS, SPACE_CONTROLS} from '../controls'
@@ -52,7 +52,7 @@ export const Tones: Story = {
     <>
       {rowBuilder({
         renderItem: ({value}) => <Tab {...props} key={value} label={value} tone={value} />,
-        rows: [...THEME_COLOR_STATE_TONES],
+        rows: [...ELEMENT_TONES],
       })}
     </>
   ),

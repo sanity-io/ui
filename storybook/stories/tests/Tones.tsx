@@ -37,7 +37,7 @@ import {
   TextInput,
   TextSkeleton,
 } from '@sanity/ui'
-import {THEME_COLOR_CARD_TONES, type ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {CARD_TONES, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (
@@ -119,7 +119,7 @@ export function Tones(): ReactNode {
           />
         </Box>
         <Flex gap={2} paddingTop={2} wrap={'wrap'}>
-          {THEME_COLOR_CARD_TONES.map((tone) => (
+          {CARD_TONES.map((tone) => (
             <Card tone={tone} {...props} key={tone}>
               <Stack gap={6}>
                 <Card border padding={2} radius={2} tone={tone}>

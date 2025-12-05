@@ -1,5 +1,5 @@
 import {Box, Button, Card, type CardTone, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
-import {RADIUS, THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {RADIUS_CONTROLS, SHADOW_CONTROLS, SPACE_CONTROLS} from '../controls'
@@ -146,9 +146,9 @@ export const Schemes: Story = {
     },
   },
   render: (props) => (
-    <Grid columns={THEME_COLOR_CARD_TONES.length} gapX={1} gapY={4}>
+    <Grid columns={CARD_TONES.length} gapX={1} gapY={4}>
       <>
-        {THEME_COLOR_CARD_TONES.map((t) => (
+        {CARD_TONES.map((t) => (
           <Card
             {...props}
             display="flex"
@@ -167,7 +167,7 @@ export const Schemes: Story = {
       </>
 
       <>
-        {THEME_COLOR_CARD_TONES.map((t) => (
+        {CARD_TONES.map((t) => (
           <Card
             {...props}
             display="flex"
@@ -206,7 +206,7 @@ export const Tones: Story = {
             <Text>{value}</Text>
           </Card>
         ),
-        rows: [...THEME_COLOR_CARD_TONES],
+        rows: [...CARD_TONES],
       })}
     </>
   ),
@@ -234,7 +234,7 @@ export const WithButtonsAndTones: Story = {
             </Stack>
           </Card>
         ),
-        rows: [...THEME_COLOR_CARD_TONES],
+        rows: [...CARD_TONES],
       })}
     </>
   ),
@@ -255,7 +255,7 @@ export const MultipleStyles: Story = {
     <Stack gap={4}>
       {matrixBuilder({
         columns: ['card', 'enabled button', 'disabled button', 'selected button'],
-        rows: [...THEME_COLOR_CARD_TONES],
+        rows: [...CARD_TONES],
         title: 'State / Tone',
         renderItem: ({row, column}) => (
           <Card
@@ -272,7 +272,7 @@ export const MultipleStyles: Story = {
       })}
       {matrixBuilder({
         columns: ['card', 'enabled link', 'disabled link', 'selected link'],
-        rows: [...THEME_COLOR_CARD_TONES],
+        rows: [...CARD_TONES],
         title: 'State / Tone',
         renderItem: ({row, column}) => (
           <Card
@@ -302,7 +302,7 @@ export const MatrixAsButton: Story = {
                 Enabled
               </Text>
               <Stack marginTop={3} gap={2}>
-                {THEME_COLOR_CARD_TONES.map((tone) => (
+                {CARD_TONES.map((tone) => (
                   <Card
                     __unstable_focusRing
                     as="button"
@@ -326,7 +326,7 @@ export const MatrixAsButton: Story = {
                 Disabled
               </Text>
               <Stack marginTop={3} gap={2}>
-                {THEME_COLOR_CARD_TONES.map((tone) => (
+                {CARD_TONES.map((tone) => (
                   <Card
                     __unstable_focusRing
                     as="button"
@@ -351,7 +351,7 @@ export const MatrixAsButton: Story = {
                 Selected
               </Text>
               <Stack marginTop={3} gap={2}>
-                {THEME_COLOR_CARD_TONES.map((tone) => (
+                {CARD_TONES.map((tone) => (
                   <div aria-selected key={tone}>
                     <Card
                       __unstable_focusRing
