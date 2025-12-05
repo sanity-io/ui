@@ -1,5 +1,5 @@
 import {Badge, Card, Flex, Stack} from '@sanity/ui'
-import {RADIUS, THEME_COLOR_CARD_TONES, THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
+import {CARD_TONES, ELEMENT_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {
@@ -66,7 +66,7 @@ export const Tones: Story = {
             {value}
           </Badge>
         ),
-        rows: [...THEME_COLOR_STATE_TONES],
+        rows: [...ELEMENT_TONES],
       })}
     </>
   ),
@@ -84,7 +84,7 @@ export const InheritedTones: Story = {
               </Flex>
             </Card>
           ),
-          rows: [...THEME_COLOR_CARD_TONES],
+          rows: [...CARD_TONES],
         })}
       </Stack>
     )

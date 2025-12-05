@@ -30,7 +30,7 @@ import {
   TextArea,
   TextInput,
 } from '@sanity/ui'
-import {THEME_COLOR_CARD_TONES, THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
+import {CARD_TONES, ELEMENT_TONES} from '@sanity/ui/theme'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
@@ -61,7 +61,7 @@ export function FocusRings(): ReactNode {
               </Flex>
             </Wrapper>
             <Wrapper title="Buttons">
-              {THEME_COLOR_STATE_TONES.map((tone) => (
+              {ELEMENT_TONES.map((tone) => (
                 <Flex gap={3} key={tone} wrap="wrap">
                   <Button text="Button" tone={tone} />
                   <Button mode="bleed" text="Button" tone={tone} />
@@ -71,7 +71,7 @@ export function FocusRings(): ReactNode {
             </Wrapper>
             <Wrapper title="Card (as button)">
               <Flex gap={3} wrap="wrap">
-                {THEME_COLOR_CARD_TONES.map((tone) => (
+                {CARD_TONES.map((tone) => (
                   <Card __unstable_focusRing as="button" key={tone} padding={3} tone={tone}>
                     <Text>{tone}</Text>
                   </Card>
