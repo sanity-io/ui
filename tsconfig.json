@@ -5,7 +5,7 @@
     "./exports",
     "./package.json",
     "./package.config.ts",
-    "./prettier.config.cjs",
+    "prettier.config.mjs",
     "./src",
     "./test",
     "./typings",

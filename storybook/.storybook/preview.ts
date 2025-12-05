@@ -12,7 +12,7 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo',
     },
-    backgrounds: {disable: true},
+    backgrounds: {disabled: true},
     controls: {
       matchers: {
         color: /(background|color)$/i,
