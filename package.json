@@ -188,7 +188,7 @@
     "module-alias": "^2.2.3",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
-    "react": "^19.2.0",
+    "react": "19.2.1",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
     "refractor": "^5.0.0",
@@ -204,7 +204,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "peerDependencies": {
-    "react": "^18 || >=19.0.0-0",
+    "react": "19.2.1",
     "react-dom": "^18 || >=19.0.0-0",
     "react-is": "^18 || >=19.0.0-0",
     "styled-components": "^5.2 || ^6"
