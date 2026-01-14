@@ -93,6 +93,9 @@ importers:
       '@sanity/prettier-config':
         specifier: ^3.0.0
         version: 3.0.0(prettier@3.7.4)
+      '@sanity/tsconfig':
+        specifier: ^2.1.0
+        version: 2.1.0
       '@sanity/ui':
         specifier: ^3.1.11
         version: 3.1.11(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@19.2.0)(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
@@ -1260,6 +1263,9 @@ packages:
     resolution: {integrity: sha512-xEfjbEzn1nIVcwlSKeXST+4wkqLevX9pq1jx3w5bUF51ku/EJFxAqlRGpBQghjwZPZbq0mQ9FAglgaB+k3/J5Q==}
     peerDependencies:
       prettier: ^3.7.3
+
+  '@sanity/tsconfig@2.1.0':
+    resolution: {integrity: sha512-Cnz0EycMsfeILkxL/gYzzfPs511OzP3sjQxU4XkDtujdiFAc+bteMYXi4/SJ83m98cXLum63HbHDk+he6AbbIA==}
 
   '@sanity/ui@3.1.11':
     resolution: {integrity: sha512-UooG4hq0ytUivCe0d5O+QWnG+B6fpuu5npNZNpV9SJNwZNH4hDNbLjnDS8sqEkaYVNhgIS+C26nnkVK134Di4w==}
@@ -5790,6 +5796,8 @@ snapshots:
     dependencies:
       prettier: 3.7.4
       prettier-plugin-packagejson: 2.5.21(prettier@3.7.4)
+
+  '@sanity/tsconfig@2.1.0': {}
 
   '@sanity/ui@3.1.11(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@19.2.0)(react@19.2.0)(styled-components@6.1.19(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
     dependencies:
