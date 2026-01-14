@@ -146,6 +146,7 @@
     "jsdom": "^22.1.0",
     "npm-run-all2": "^6.2.6",
     "prettier": "^3.7.4",
+    "prettier-plugin-packagejson": "^2.5.21",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
