@@ -1,15 +1,15 @@
 import path from 'path'
-import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import react from '@vitejs/plugin-react'
 import type {UserConfig} from 'vite'
 
 /** @internal */
 export function createViteConfig(options: {
   cwd: string
+  mode: 'development' | 'production'
   outDir: string
   runtimeDir: string
 }): UserConfig {
-  const {cwd, outDir, runtimeDir} = options
+  const {cwd, mode, outDir, runtimeDir} = options
 
   return {
     build: {
@@ -21,13 +21,14 @@ export function createViteConfig(options: {
         },
       },
     },
+    cacheDir: path.resolve(cwd, 'node_modules/.workshop/vite'),
+    mode,
     optimizeDeps: {
       esbuildOptions: {
         jsx: 'automatic',
       },
     },
     plugins: [
-      vanillaExtractPlugin(),
       react({
         babel: {plugins: [['babel-plugin-react-compiler', {target: '19'}]]},
       }),

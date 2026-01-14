@@ -9,10 +9,10 @@ import config from '../workshop.config'
 
 mount({
   config: {...config, scopes},
-  element: document.getElementById('root'),
+  element: document,
 })
 `
 
 export async function _writeScript(options: {outDir: string}): Promise<void> {
-  await writeFile(path.resolve(options.outDir, 'main.tsx'), SCRIPT)
+  await writeFile(path.resolve(options.outDir, 'main.ts'), SCRIPT)
 }

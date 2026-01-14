@@ -1,5 +1,5 @@
 import path from 'path'
-import globby from 'globby'
+import fg from 'fast-glob'
 import type {_Observable} from './_observable'
 
 export function _getFiles(options: {
@@ -10,7 +10,7 @@ export function _getFiles(options: {
 
   return {
     subscribe(observer) {
-      globby(pattern, {cwd}).then((files) => {
+      fg(pattern, {cwd}).then((files) => {
         observer.next(files.map((f) => path.resolve(cwd, f)))
       })
 

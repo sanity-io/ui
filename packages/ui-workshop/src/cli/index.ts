@@ -11,7 +11,7 @@ cli
 
     await devCommand({
       ...options,
-      cwd: options.cwd || process.cwd(),
+      cwd: options.cwd ?? process.cwd(),
     })
   })
 
@@ -25,7 +25,19 @@ cli
 
     await buildCommand({
       ...options,
-      cwd: options.cwd || process.cwd(),
+      cwd: options.cwd ?? process.cwd(),
+    })
+  })
+
+cli
+  .command('preview')
+  .option('--cwd [cwd]', 'Output directory')
+  .action(async (options) => {
+    const {previewCommand} = await import('./previewCommand')
+
+    await previewCommand({
+      ...options,
+      cwd: options.cwd ?? process.cwd(),
     })
   })
 

@@ -11,3 +11,7 @@ export interface WorkshopRuntime {
   }
   vite?: (viteConfig: InlineConfig) => InlineConfig | Promise<InlineConfig>
 }
+
+/** @public */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface WorkshopRuntimeOptions extends WorkshopRuntime {}
