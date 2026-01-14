@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Card, Flex, TabPanel} from '@sanity/ui'
-import {ElementType, memo, useState} from 'react'
-
 import {workshopInspector} from '#styles'
-
+import {ElementType, memo, useState} from 'react'
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'

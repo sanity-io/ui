@@ -1,6 +1,5 @@
-import chokidar from 'chokidar'
 import path from 'path'
-
+import chokidar from 'chokidar'
 import {_Observable} from './_observable'
 
 export interface _FileEvent {

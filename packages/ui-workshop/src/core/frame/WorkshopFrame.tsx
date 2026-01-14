@@ -6,7 +6,6 @@ import {
   ToastProvider,
 } from '@sanity/ui'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
-
 import {WorkshopConfig} from '../config'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'

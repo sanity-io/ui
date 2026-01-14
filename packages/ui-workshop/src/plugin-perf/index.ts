@@ -1,8 +1,8 @@
-export type {PerfContextValue} from './PerfContext'
 import {WorkshopPlugin} from '@sanity/ui-workshop'
-
 import {PerfInspector} from './PerfInspector'
 import {PerfProvider} from './PerfProvider'
+
+export type {PerfContextValue} from './PerfContext'
 
 export * from './hooks'
 export * from './types'

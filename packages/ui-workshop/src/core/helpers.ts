@@ -1,5 +1,4 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
-
 import {WorkshopScope, WorkshopStory} from './config'
 
 /** @internal */

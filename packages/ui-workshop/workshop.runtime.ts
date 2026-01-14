@@ -1,5 +1,5 @@
-import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 import path from 'path'
+import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 
 const EXPORTS_PATH = path.resolve(__dirname, 'exports')
 

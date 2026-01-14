@@ -1,8 +1,6 @@
 import {Card, Layer, Tab, TabList} from '@sanity/ui'
-import {memo, useCallback} from 'react'
-
 import {inspectorHeader, inspectorHeaderCard} from '#styles'
-
+import {memo, useCallback} from 'react'
 import {InspectorTab} from './types'
 
 export const InspectorHeader = memo(function InspectorHeader(props: {

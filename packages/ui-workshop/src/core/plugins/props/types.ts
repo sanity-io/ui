@@ -27,8 +27,9 @@ export type SelectPropOptionsProp<T extends SelectPropValue = SelectPropValue> =
   | readonly T[]
 
 /** @internal */
-export interface SelectPropSchema<T extends SelectPropValue = SelectPropValue>
-  extends GenericPropSchema<T> {
+export interface SelectPropSchema<
+  T extends SelectPropValue = SelectPropValue,
+> extends GenericPropSchema<T> {
   type: 'select'
   options: SelectPropOptionsProp<T>
 }

@@ -1,6 +1,5 @@
 import {isEqual} from 'lodash'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
-
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {useWorkshop} from '../../useWorkshop'
 import {decodeValue, encodeValue} from './helpers'
