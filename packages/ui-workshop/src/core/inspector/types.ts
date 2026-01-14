@@ -1,10 +1,9 @@
-import {ButtonTone} from '@sanity/ui'
-import {ReactNode} from 'react'
-import {WorkshopPlugin} from '../config'
+import type {ButtonTone} from '@sanity/ui'
+import type {WorkshopPlugin} from '../config'
 
 export interface InspectorTab {
   id: string
-  label: ReactNode
+  label: React.ReactNode
   plugin: WorkshopPlugin
   tone?: ButtonTone
 }

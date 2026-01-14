@@ -2,13 +2,13 @@ import {SearchIcon} from '@sanity/icons'
 import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
 import {workshopNavigator} from '#styles'
 import {memo, useCallback, useMemo, useState} from 'react'
-import {WorkshopScope, WorkshopStory} from '../config'
+import type {WorkshopScope, WorkshopStory} from '../config'
 import {EMPTY_ARRAY} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {buildMenu} from './helpers'
 import {SearchResults} from './SearchResults'
 import {StoryTree} from './StoryTree'
-import {MenuCollection, MenuList, MenuScope} from './types'
+import type {MenuCollection, MenuList, MenuScope} from './types'
 
 const flexNoneStyle: React.CSSProperties = {flex: 'none'}
 const lineHeightNoneStyle: React.CSSProperties = {lineHeight: 0}

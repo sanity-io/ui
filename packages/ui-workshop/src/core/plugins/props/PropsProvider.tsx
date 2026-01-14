@@ -3,10 +3,10 @@ import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {useWorkshop} from '../../useWorkshop'
 import {decodeValue, encodeValue} from './helpers'
-import {PropsMsg} from './msg'
-import {PropsContext, PropsContextValue} from './PropsContext'
+import type {PropsMsg} from './msg'
+import {PropsContext, type PropsContextValue} from './PropsContext'
 import {propsReducer} from './propsReducer'
-import {PropSchema, PropsState} from './types'
+import type {PropSchema, PropsState} from './types'
 
 /** @internal */
 export const PropsProvider = memo(function PropsProvider(props: {
@@ -14,7 +14,7 @@ export const PropsProvider = memo(function PropsProvider(props: {
 }): React.ReactNode {
   const {children} = props
   const {channel, broadcast, payload} = useWorkshop<PropsMsg>()
-  const encodedValue = payload.value
+  const encodedValue = payload['value']
   const encodedValueRef = useRef(encodedValue)
 
   const [{schemas, value}, setState] = useState<PropsState>(() => ({

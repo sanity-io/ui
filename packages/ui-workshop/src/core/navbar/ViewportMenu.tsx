@@ -1,5 +1,5 @@
 import {SelectIcon} from '@sanity/icons'
-import {Button, Menu, MenuButton, MenuButtonProps, MenuItem} from '@sanity/ui'
+import {Button, Menu, MenuButton, MenuItem, type MenuButtonProps} from '@sanity/ui'
 import {memo, useCallback} from 'react'
 import {VIEWPORT_OPTIONS} from '../constants'
 import {startViewTransition} from '../lib/startViewTransition'

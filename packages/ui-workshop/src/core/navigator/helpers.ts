@@ -1,6 +1,6 @@
 import {set} from 'segmented-property'
-import {WorkshopScope} from '../config'
-import {MenuCollection, MenuList, MenuScope, MenuStory} from './types'
+import type {WorkshopScope} from '../config'
+import type {MenuCollection, MenuList, MenuScope, MenuStory} from './types'
 
 /** @internal */
 export function parseMenuNode(
@@ -8,8 +8,8 @@ export function parseMenuNode(
   node: Record<string, unknown>,
   name?: string,
 ): Array<MenuList | MenuScope | MenuStory> {
-  if (node.__scope__) {
-    const scope = node.__scope__ as WorkshopScope
+  if (node['__scope__']) {
+    const scope = node['__scope__'] as WorkshopScope
 
     if (scope.name === '@@root@@') {
       return scope.stories.map((s) => ({type: 'story', ...s}))

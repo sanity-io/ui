@@ -1,7 +1,7 @@
 import {isArray} from './lib/isArray'
 import {isRecord} from './lib/isRecord'
-import {Pubsub} from './lib/pubsub'
-import {WorkshopMsg} from './types'
+import type {Pubsub} from './lib/pubsub'
+import type {WorkshopMsg} from './types'
 
 /** @internal */
 export interface WorkshopFrameController {
@@ -34,7 +34,11 @@ export function createWorkshopFrameController(): WorkshopFrameController {
 
     if (isArray(msgs)) {
       for (const msg of msgs) {
-        if (isRecord(msg) && typeof msg.type === 'string' && msg.type.startsWith('workshop/')) {
+        if (
+          isRecord(msg) &&
+          typeof msg['type'] === 'string' &&
+          msg['type'].startsWith('workshop/')
+        ) {
           for (const subscriber of _subscribers) {
             subscriber(msg as unknown as WorkshopMsg)
           }

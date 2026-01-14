@@ -1,6 +1,6 @@
-import {WorkshopMsg} from '@sanity/ui-workshop'
-import {PerfMsg} from './msg'
-import {PerfState} from './types'
+import type {WorkshopMsg} from '@sanity/ui-workshop'
+import type {PerfMsg} from './msg'
+import type {PerfState} from './types'
 
 /** @internal */
 export function perfReducer(state: PerfState, msg: PerfMsg | WorkshopMsg): PerfState {

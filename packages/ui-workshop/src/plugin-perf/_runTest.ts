@@ -1,4 +1,4 @@
-import {PerfTest} from './types'
+import type {PerfTest} from './types'
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))

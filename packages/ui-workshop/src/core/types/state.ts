@@ -1,4 +1,4 @@
-import {ThemeColorSchemeKey} from '@sanity/ui'
+import type {ThemeColorSchemeKey} from '@sanity/ui'
 
 /** @public */
 export interface WorkshopState {

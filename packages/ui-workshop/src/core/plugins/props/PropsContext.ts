@@ -1,5 +1,5 @@
 import {createContext} from 'react'
-import {PropSchema} from './types'
+import type {PropSchema} from './types'
 
 /** @internal */
 export interface PropsContextValue {

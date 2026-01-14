@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import {PerfContext, PerfContextValue} from '../PerfContext'
+import {PerfContext, type PerfContextValue} from '../PerfContext'
 
 /** @internal */
 export function usePerf(): PerfContextValue {

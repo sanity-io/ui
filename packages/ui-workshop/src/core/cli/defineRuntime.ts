@@ -1,4 +1,4 @@
-import {WorkshopRuntime} from '../runtime'
+import type {WorkshopRuntime} from '../runtime'
 
 /** @public */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

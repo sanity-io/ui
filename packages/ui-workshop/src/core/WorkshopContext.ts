@@ -1,8 +1,8 @@
-import {ThemeColorSchemeKey} from '@sanity/ui'
+import type {ThemeColorSchemeKey} from '@sanity/ui'
 import {createContext} from 'react'
-import {WorkshopCollection, WorkshopPlugin, WorkshopScope, WorkshopStory} from './config'
-import {Pubsub} from './lib/pubsub'
-import {WorkshopMsg} from './types'
+import type {WorkshopCollection, WorkshopPlugin, WorkshopScope, WorkshopStory} from './config'
+import type {Pubsub} from './lib/pubsub'
+import type {WorkshopMsg} from './types'
 
 /** @public */
 export interface WorkshopContextValue<CustomMsg = never> {

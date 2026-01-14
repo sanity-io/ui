@@ -1,5 +1,5 @@
 import {createContext} from 'react'
-import {PerfTest, PerfTestDetail, PerfTestRenderResult, PerfTestResult} from './types'
+import type {PerfTest, PerfTestDetail, PerfTestRenderResult, PerfTestResult} from './types'
 
 /** @internal */
 export interface PerfContextValue {
