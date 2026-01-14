@@ -4,6 +4,7 @@
     "./exports",
     "./package.json",
     "./package.config.ts",
+    "./rollup",
     "./scripts",
     "./src",
     "./workshop.config.ts",

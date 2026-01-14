@@ -66,16 +66,18 @@
   },
   "files": [
     "bin",
-    "dist"
+    "dist",
+    "exports",
+    "src"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build",
-    "clean": "rimraf .workshop dist",
-    "dev": "run-p workshop:dev",
+    "prebuild": "pnpm clean",
+    "build": "NODE_ENV=production pkg build --check --strict",
+    "clean": "rimraf dist",
+    "dev": "pnpm workshop:dev",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
-    "prepack": "pnpm run build",
-    "pkg:build": "pkg build --check --strict",
+    "prepack": "pnpm build",
     "prepare": "husky install",
     "release": "changeset publish",
     "test": "vitest",
@@ -120,7 +122,7 @@
     "@eslint/js": "^9.37.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^8.1.29",
+    "@sanity/pkg-utils": "^10.3.0",
     "@sanity/prettier-config": "^3.0.0",
     "@sanity/tsconfig": "^2.1.0",
     "@sanity/ui": "^3.1.11",
@@ -131,7 +133,9 @@
     "@types/pako": "^2.0.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@vanilla-extract/integration": "^8.0.7",
     "babel-plugin-react-compiler": "1.0.0",
+    "browserslist": "^4.28.1",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-formatter-gha": "^2.0.1",
@@ -145,12 +149,15 @@
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
+    "lightningcss": "^1.30.2",
+    "magic-string": "^0.30.21",
     "npm-run-all2": "^6.2.6",
     "prettier": "^3.7.4",
     "prettier-plugin-packagejson": "^2.5.21",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
+    "rollup": "^4.55.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.9.3",
     "typescript-eslint": "^8.52.0",
@@ -163,7 +170,19 @@
   },
   "packageManager": "pnpm@10.28.0",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "exports": {
+      ".": {
+        "node": {
+          "default": "./dist/index.node.js"
+        },
+        "default": "./dist/index.js"
+      },
+      "./plugin-a11y": "./dist/plugin-a11y.js",
+      "./plugin-perf": "./dist/plugin-perf.js",
+      "./runtime": "./dist/runtime.js",
+      "./package.json": "./package.json"
+    }
   },
   "esm.sh": {
     "bundle": false
