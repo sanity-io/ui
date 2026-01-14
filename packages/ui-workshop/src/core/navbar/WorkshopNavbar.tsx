@@ -1,7 +1,6 @@
 import {ControlsIcon, MenuIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Inline, Text, useMediaIndex} from '@sanity/ui'
 import {memo} from 'react'
-
 import {useWorkshop} from '../useWorkshop'
 import {NavbarBreadcrumbs} from './NavbarBreadcrumbs'
 import {OpenCanvasButton} from './OpenCanvasButton'

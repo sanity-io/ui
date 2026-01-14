@@ -1,5 +1,4 @@
 import {useEffect} from 'react'
-
 import {useProps} from '../useProps'
 
 /** @internal */

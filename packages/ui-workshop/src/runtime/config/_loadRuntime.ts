@@ -1,8 +1,6 @@
 import {createRequire} from 'node:module'
-
 import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
 import type {TransformOptions} from 'esbuild'
-
 import {_findRuntimeFile} from './_findRuntimeFile'
 
 const require = createRequire(import.meta.url)

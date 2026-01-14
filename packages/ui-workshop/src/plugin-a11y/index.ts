@@ -1,5 +1,4 @@
 import {WorkshopPlugin} from '@sanity/ui-workshop'
-
 import {A11yInspector} from './A11yInspector'
 import {A11yProvider} from './A11yProvider'
 

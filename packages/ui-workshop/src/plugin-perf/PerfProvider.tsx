@@ -1,6 +1,5 @@
 import {useWorkshop} from '@sanity/ui-workshop'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
-
 import {_runTest} from './_runTest'
 import {PerfMsg} from './msg'
 import {PerfContext, PerfContextValue} from './PerfContext'

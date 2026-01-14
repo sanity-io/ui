@@ -1,5 +1,4 @@
 import {memo, Profiler, useCallback, useEffect, useMemo, useRef} from 'react'
-
 import {PerfTest, PerfTestRenderResult, PerfTestRunFn} from '../types'
 import {usePerf} from './usePerf'
 
