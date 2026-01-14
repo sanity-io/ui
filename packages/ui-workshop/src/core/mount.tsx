@@ -1,6 +1,6 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {WorkshopConfig} from './config'
+import type {WorkshopConfig} from './config'
 import {WorkshopApp} from './WorkshopApp'
 
 /** @beta */

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {RootTheme} from '@sanity/ui'
-import {ElementType, ReactNode} from 'react'
+import type {RootTheme} from '@sanity/ui'
 
 /** @public */
 export interface WorkshopCollection {
@@ -12,7 +11,7 @@ export interface WorkshopCollection {
 export interface WorkshopStory<Options = Record<string, unknown>> {
   name: string
   title: string
-  component: ElementType
+  component: React.ElementType
   options?: Options
 }
 
@@ -40,7 +39,7 @@ export interface WorkshopConfig {
 export interface WorkshopPlugin<Options = any> {
   name: string
   title: string
-  inspector?: ElementType<{options: Options}>
-  provider?: ElementType<{children?: ReactNode; options: Options}>
+  inspector?: React.ElementType<{options: Options}>
+  provider?: React.ElementType<{children?: React.ReactNode; options: Options}>
   options?: Options
 }

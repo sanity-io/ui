@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import {A11yContext, A11yContextValue} from './A11yContext'
+import {A11yContext, type A11yContextValue} from './A11yContext'
 
 /** @internal */
 export function useA11y(): A11yContextValue {

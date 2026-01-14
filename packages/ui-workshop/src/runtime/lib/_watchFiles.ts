@@ -1,6 +1,6 @@
 import path from 'path'
 import chokidar from 'chokidar'
-import {_Observable} from './_observable'
+import type {_Observable} from './_observable'
 
 export interface _FileEvent {
   type: 'add' | 'addDir' | 'change' | 'unlink' | 'unlinkDir'

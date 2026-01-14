@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Card, Flex, TabPanel} from '@sanity/ui'
 import {workshopInspector} from '#styles'
-import {ElementType, memo, useState} from 'react'
+import {memo, useState} from 'react'
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'
-import {InspectorTab} from './types'
+import type {InspectorTab} from './types'
 
-const MemoRender = memo(function MemoRender(props: {component: ElementType; options: any}) {
+const MemoRender = memo(function MemoRender(props: {component: React.ElementType; options: any}) {
   const {component: Component, options} = props
   return <Component options={options} />
 })

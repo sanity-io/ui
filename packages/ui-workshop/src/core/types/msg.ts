@@ -1,5 +1,5 @@
-import {ThemeColorSchemeKey} from '@sanity/ui'
-import {WorkshopState} from './state'
+import type {ThemeColorSchemeKey} from '@sanity/ui'
+import type {WorkshopState} from './state'
 
 /** @public */
 export interface WorkshopFrameReadyMsg {

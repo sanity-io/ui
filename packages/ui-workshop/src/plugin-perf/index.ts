@@ -1,4 +1,4 @@
-import {WorkshopPlugin} from '@sanity/ui-workshop'
+import type {WorkshopPlugin} from '@sanity/ui-workshop'
 import {PerfInspector} from './PerfInspector'
 import {PerfProvider} from './PerfProvider'
 

@@ -1,5 +1,5 @@
-import {ThemeColorSchemeKey} from '@sanity/ui'
-import {WorkshopScope, WorkshopStory} from './config'
+import type {ThemeColorSchemeKey} from '@sanity/ui'
+import type {WorkshopScope, WorkshopStory} from './config'
 
 /** @internal */
 export function resolveLocation(

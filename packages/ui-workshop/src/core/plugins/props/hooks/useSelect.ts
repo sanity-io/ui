@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import {SelectPropOptionsProp, SelectPropValue} from '../types'
+import type {SelectPropOptionsProp, SelectPropValue} from '../types'
 import {useProps} from '../useProps'
 
 /** @internal */

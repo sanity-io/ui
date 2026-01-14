@@ -1,4 +1,4 @@
-import {PropSchema} from './types'
+import type {PropSchema} from './types'
 
 /** @internal */
 export interface PropsSetValueMsg {

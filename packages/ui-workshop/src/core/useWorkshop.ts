@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import {WorkshopContext, WorkshopContextValue} from './WorkshopContext'
+import {WorkshopContext, type WorkshopContextValue} from './WorkshopContext'
 
 /** @public */
 export function useWorkshop<CustomMsg = never>(): WorkshopContextValue<CustomMsg> {
