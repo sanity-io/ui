@@ -1,6 +1,6 @@
-import {build} from '@sanity/ui-workshop/runtime'
+import {preview} from '@sanity/ui-workshop/runtime'
 
-build().catch((err) => {
+preview().catch((err) => {
   // eslint-disable-next-line no-console
   console.error(err)
   process.exit(1)

@@ -1,9 +1,9 @@
 import path from 'path'
-import chokidar from 'chokidar'
+import {watch} from 'chokidar'
 import type {_Observable} from './_observable'
 
 export interface _FileEvent {
-  type: 'add' | 'addDir' | 'change' | 'unlink' | 'unlinkDir'
+  type: 'all' | 'add' | 'addDir' | 'change' | 'unlink' | 'unlinkDir' | 'ready' | 'raw' | 'error'
   file: string
 }
 
@@ -15,7 +15,7 @@ export function _watchFiles(options: {
 
   return {
     subscribe(observer) {
-      const watcher = chokidar.watch(pattern, {
+      const watcher = watch(pattern, {
         cwd,
         ignoreInitial: true,
       })
