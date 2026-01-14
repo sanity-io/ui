@@ -1,19 +1,16 @@
 {
-  "extends": "@sanity/pkg-utils/tsconfig/strictest.json",
+  "extends": "@sanity/tsconfig/strictest",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist",
 
-    "verbatimModuleSyntax": false,
-    "noPropertyAccessFromIndexSignature": false,
-    "noUncheckedIndexedAccess": false,
+    "allowImportingTsExtensions": false,
     "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": false,
 
     "paths": {
-      "@sanity/ui-workshop/plugin-a11y": ["./exports/plugin-a11y"],
-      "@sanity/ui-workshop/plugin-perf": ["./exports/plugin-perf"],
-      "@sanity/ui-workshop/runtime": ["./exports/runtime"],
-      "@sanity/ui-workshop": ["./exports"]
+      "@sanity/ui-workshop": ["./exports/index.ts"],
+      "@sanity/ui-workshop/*": ["./exports/*"]
     }
   }
 }

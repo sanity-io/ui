@@ -1,11 +1,21 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./exports", "./package.json", "./src"],
-  "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
+  "include": ["./exports", "./package.json", "./src", "./typings"],
+  "exclude": [
+    "./src/**/__fixtures__",
+    "./src/**/__mocks__",
+    "./src/**/__workshop__",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx"
+  ],
   "compilerOptions": {
     "jsx": "preserve",
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "emitDeclarationOnly": true
+    "rootDir": ".",
+    "outDir": "./dist",
+    "noCheck": true,
+    "paths": {
+      "@sanity/ui-workshop/*": ["./exports/*.ts"],
+      "@sanity/ui-workshop": ["./exports"]
+    }
   }
 }
