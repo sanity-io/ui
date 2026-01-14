@@ -2,14 +2,14 @@ import {
   BoundaryElementProvider,
   Card,
   PortalProvider,
-  ThemeColorSchemeKey,
   ToastProvider,
+  type ThemeColorSchemeKey,
 } from '@sanity/ui'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
-import {WorkshopConfig} from '../config'
+import type {WorkshopConfig} from '../config'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'
-import {WorkshopMsg, WorkshopState} from '../types'
+import type {WorkshopMsg, WorkshopState} from '../types'
 import {WorkshopProvider} from '../WorkshopProvider'
 import {workshopReducer} from '../workshopReducer'
 import {WorkshopCanvas} from './WorkshopCanvas'

@@ -2,20 +2,20 @@ import {
   BoundaryElementProvider,
   Flex,
   PortalProvider,
-  ThemeColorSchemeKey,
   ToastProvider,
   useMediaIndex,
+  type ThemeColorSchemeKey,
 } from '@sanity/ui'
 import {debounce, isEqual} from 'lodash'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
-import {WorkshopConfig} from './config'
+import type {WorkshopConfig} from './config'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector'
 import {createPubsub} from './lib/pubsub'
-import {WorkshopLocationStore} from './location'
+import type {WorkshopLocationStore} from './location'
 import {WorkshopNavbar} from './navbar'
 import {WorkshopNavigator} from './navigator'
-import {WorkshopLocation, WorkshopMsg, WorkshopQuery, WorkshopState} from './types'
+import type {WorkshopLocation, WorkshopMsg, WorkshopQuery, WorkshopState} from './types'
 import {WorkshopCanvas} from './WorkshopCanvas'
 import {createWorkshopFrameController} from './WorkshopFrameController'
 import {WorkshopProvider} from './WorkshopProvider'
@@ -54,11 +54,11 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
   const query: WorkshopQuery = {scheme}
 
   if (viewport && viewport !== DEFAULT_VIEWPORT_VALUE) {
-    query.viewport = viewport
+    query['viewport'] = viewport
   }
 
   if (zoom && zoom !== DEFAULT_ZOOM_VALUE) {
-    query.zoom = zoom
+    query['zoom'] = zoom
   }
 
   if (withPayload) {

@@ -1,5 +1,5 @@
 import {_getFiles} from './lib/_getFiles'
-import {_Observable} from './lib/_observable'
+import type {_Observable} from './lib/_observable'
 import {_watchFiles} from './lib/_watchFiles'
 
 export function _watchScopes(options: {

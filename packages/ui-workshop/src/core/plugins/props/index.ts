@@ -1,4 +1,4 @@
-import {WorkshopPlugin} from '../../config'
+import type {WorkshopPlugin} from '../../config'
 import {PropsInspector} from './PropsInspector'
 import {PropsProvider} from './PropsProvider'
 

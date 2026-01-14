@@ -1,8 +1,8 @@
 import {Tree, TreeItem} from '@sanity/ui'
-import {memo, MouseEvent, useCallback, useMemo} from 'react'
-import {WorkshopStory} from '../config'
+import {memo, useCallback, useMemo, type MouseEvent} from 'react'
+import type {WorkshopStory} from '../config'
 import {useWorkshop} from '../useWorkshop'
-import {MenuList, MenuScope, MenuStory} from './types'
+import type {MenuList, MenuScope, MenuStory} from './types'
 
 /** @internal */
 export const StoryTree = memo(function StoryTree(props: {

@@ -1,6 +1,6 @@
-import {WorkshopMsg} from '../../types'
-import {PropsMsg} from './msg'
-import {PropsState} from './types'
+import type {WorkshopMsg} from '../../types'
+import type {PropsMsg} from './msg'
+import type {PropsState} from './types'
 
 /** @internal */
 export function propsReducer(state: PropsState, msg: WorkshopMsg | PropsMsg): PropsState {

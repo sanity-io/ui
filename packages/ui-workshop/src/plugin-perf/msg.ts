@@ -1,4 +1,4 @@
-import {PerfTestRenderResult} from './types'
+import type {PerfTestRenderResult} from './types'
 
 /** @internal */
 export interface PerfClearResultsMsg {

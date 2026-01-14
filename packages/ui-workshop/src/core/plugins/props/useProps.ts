@@ -1,5 +1,5 @@
 import {useContext} from 'react'
-import {PropsContext, PropsContextValue} from './PropsContext'
+import {PropsContext, type PropsContextValue} from './PropsContext'
 
 /** @internal */
 export function useProps(): PropsContextValue {

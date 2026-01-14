@@ -1,4 +1,4 @@
-import {InlineConfig} from 'vite'
+import type {InlineConfig} from 'vite'
 
 /** @public */
 export interface WorkshopRuntime {
