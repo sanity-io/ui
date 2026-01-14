@@ -1,4 +1,4 @@
-import mkdirp from 'mkdirp'
+import {mkdirp} from 'mkdirp'
 import path from 'path'
 
 import {_writeFrameHTML} from './_writeFrameHTML'

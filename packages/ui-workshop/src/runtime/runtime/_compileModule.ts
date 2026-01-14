@@ -1,7 +1,6 @@
 import chokidar from 'chokidar'
 
 declare global {
-  // eslint-disable-next-line no-var
   var $workshopWatcher: chokidar.FSWatcher | undefined
 }
 
