@@ -1,4 +1,4 @@
-import type {ThemeColorSchemeKey} from '@sanity/ui'
+import type {ColorScheme} from '@sanity/ui/theme'
 import type {WorkshopScope, WorkshopStory} from './config/types'
 
 /** @internal */
@@ -35,7 +35,7 @@ export function buildFrameUrl(params: {
   baseUrl?: string
   path: string
   payload: Record<string, unknown>
-  scheme: ThemeColorSchemeKey
+  scheme: ColorScheme
   viewport: string
   zoom: number
 }): string {

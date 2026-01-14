@@ -13,7 +13,7 @@ export const InspectorHeader = memo(function InspectorHeader(props: {
   return (
     <Layer className={inspectorHeader}>
       <Card className={inspectorHeaderCard} padding={2} shadow={1}>
-        <TabList space={1}>
+        <TabList gap={1}>
           {tabs.map((tab) => (
             <InspectorTabView
               key={tab.id}

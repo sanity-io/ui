@@ -17,13 +17,13 @@ export default function TestStory() {
 
   return (
     <Flex align="center" height="fill" justify="center">
-      <Stack space={[3, 4, 5, 6]}>
-        <Heading size={[2, 3, 4, 5]}>This is my first story.</Heading>
-        <Text size={[2, 3, 4, 5]}>Some text: {text}</Text>
-        <Text size={[2, 3, 4, 5]}>A boolean: {boolean ? 'true' : 'false'}</Text>
-        <Text size={[2, 3, 4, 5]}>A number: {number}</Text>
-        <Text size={[2, 3, 4, 5]}>A string: {string}</Text>
-        <Text size={[2, 3, 4, 5]}>An option: {option}</Text>
+      <Stack gap={[3, 4, 5]}>
+        <Heading size={[2, 3, 4]}>This is my first story.</Heading>
+        <Text size={[2, 3, 4]}>Some text: {text}</Text>
+        <Text size={[2, 3, 4]}>A boolean: {boolean ? 'true' : 'false'}</Text>
+        <Text size={[2, 3, 4]}>A number: {number}</Text>
+        <Text size={[2, 3, 4]}>A string: {string}</Text>
+        <Text size={[2, 3, 4]}>An option: {option}</Text>
       </Stack>
     </Flex>
   )

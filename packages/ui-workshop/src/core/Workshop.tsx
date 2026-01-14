@@ -1,12 +1,6 @@
-import {
-  BoundaryElementProvider,
-  Flex,
-  PortalProvider,
-  ToastProvider,
-  useMediaIndex,
-  type ThemeColorSchemeKey,
-} from '@sanity/ui'
-import {debounce, isEqual} from 'lodash'
+import {Box, Flex, Root, useMediaIndex} from '@sanity/ui'
+import type {ColorScheme} from '@sanity/ui/theme'
+import debounce from 'lodash/debounce'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import type {WorkshopConfig} from './config/types'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
@@ -27,30 +21,30 @@ import {workshopReducer} from './workshopReducer'
 export interface WorkshopProps {
   config: WorkshopConfig
   locationStore: WorkshopLocationStore
-  onSchemeChange: (nextScheme: ThemeColorSchemeKey) => void
-  scheme?: ThemeColorSchemeKey
+  initialScheme: ColorScheme
 }
 
 function getStateFromLocation(
   loc: Omit<WorkshopLocation, 'type'>,
-  schemeProp?: ThemeColorSchemeKey,
+  schemeProp: ColorScheme,
   frameReady?: boolean,
 ): WorkshopState {
   const path = loc.path
-  const query = loc.query || {}
+  const query = loc.query ?? {}
   const {scheme, viewport, zoom, ...payload} = query
 
   return {
-    frameReady: frameReady || false,
+    context: 'main',
+    frameReady: frameReady ?? false,
     path,
     payload,
-    scheme: schemeProp || (typeof scheme === 'string' ? (scheme as ThemeColorSchemeKey) : 'light'),
+    scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : schemeProp,
     viewport: typeof viewport === 'string' ? viewport : 'auto',
-    zoom: typeof zoom === 'number' ? zoom : 1,
+    zoom: typeof zoom === 'string' ? Number(zoom) : 1,
   }
 }
 
-function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQuery {
+function getQueryFromState(state: WorkshopState): WorkshopQuery {
   const {payload, scheme, viewport, zoom} = state
 
   const query: WorkshopQuery = {scheme}
@@ -63,17 +57,14 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
     query['zoom'] = zoom
   }
 
-  if (withPayload) {
-    for (const [key, val] of Object.entries(payload)) {
-      if (['schema', 'viewport', 'zoom'].includes(key)) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          `Workshop: the payload cannot contain a property named "${key}" (protected name)`,
-        )
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        query[key] = val as any
-      }
+  for (const [key, val] of Object.entries(payload)) {
+    if (['schema', 'viewport', 'zoom'].includes(key)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Workshop: the payload cannot contain a property named "${key}" (protected name)`,
+      )
+    } else {
+      query[key] = val
     }
   }
 
@@ -82,14 +73,13 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
 
 /** @public */
 export const Workshop = memo(function Workshop(props: WorkshopProps): React.ReactNode {
-  const {config, locationStore, onSchemeChange, scheme: schemeProp} = props
+  const {config, locationStore, initialScheme} = props
   const withNavbar = config.features?.navbar ?? true
   const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
   const frame = useMemo(() => createWorkshopFrameController(), [])
-  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
-  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
-    () => getStateFromLocation(locationStore.get(), schemeProp),
+    () => getStateFromLocation(locationStore.get(), initialScheme),
   )
   const mediaIndex = useMediaIndex()
   const [navigatorExpanded, setNavigatorExpanded] = useState(false)
@@ -98,7 +88,9 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
 
   const schemeRef = useRef(scheme)
   const pathRef = useRef(path)
-  const queryRef = useRef<WorkshopQuery>({scheme, viewport, zoom, ...payload})
+  const viewportRef = useRef(viewport)
+  const zoomRef = useRef(zoom)
+  const payloadRef = useRef(JSON.stringify(payload))
 
   const broadcast = useCallback(
     (msg: WorkshopMsg) => {
@@ -154,42 +146,50 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   useEffect(() => () => _pushLocation.cancel(), [_pushLocation])
   useEffect(() => () => _replaceLocation.cancel(), [_replaceLocation])
 
+  // Update refs when state changes
+  useEffect(() => {
+    if (
+      pathRef.current !== path ||
+      schemeRef.current !== scheme ||
+      viewportRef.current !== viewport ||
+      zoomRef.current !== zoom ||
+      payloadRef.current !== JSON.stringify(payload)
+    ) {
+      const nextLocation = {
+        path,
+        query: getQueryFromState({
+          context: 'main',
+          frameReady,
+          path,
+          payload,
+          scheme,
+          viewport,
+          zoom,
+        }),
+      }
+
+      // Determine if we should push or replace based on path change
+      if (pathRef.current !== path) {
+        _pushLocation(nextLocation)
+      } else {
+        _replaceLocation(nextLocation)
+      }
+
+      pathRef.current = path
+      schemeRef.current = scheme
+      viewportRef.current = viewport
+      zoomRef.current = zoom
+      payloadRef.current = JSON.stringify(payload)
+    }
+  }, [_pushLocation, _replaceLocation, frameReady, path, payload, scheme, viewport, zoom])
+
   // Subscribe to global message channel
   useEffect(
     () =>
       channel.subscribe((msg) => {
-        // Update state
-        setState((prevState) => {
-          const nextState = workshopReducer(prevState, msg)
-          const changed = !isEqual(prevState, nextState)
-
-          if (changed) {
-            // Update URL location
-            if (msg.type === 'workshop/setPath') {
-              if (pathRef.current !== nextState.path) {
-                pathRef.current = nextState.path
-
-                // query without payload
-                const nextQuery = getQueryFromState(nextState, false)
-
-                _pushLocation({path: nextState.path, query: nextQuery})
-              }
-            } else if (msg.type !== 'workshop/setState') {
-              // query with payload
-              const nextQuery = getQueryFromState(nextState)
-
-              if (!isEqual(queryRef.current, nextQuery)) {
-                queryRef.current = nextQuery
-
-                _replaceLocation({path: nextState.path, query: nextQuery})
-              }
-            }
-          }
-
-          return changed ? nextState : prevState
-        })
+        setState((prevState) => workshopReducer(prevState, msg))
       }),
-    [_pushLocation, _replaceLocation, channel, locationStore],
+    [channel],
   )
 
   // Pipe messages from frame to channel
@@ -198,35 +198,6 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   useEffect(() => {
     frameReadyRef.current = frameReady
   }, [frameReady])
-
-  // Handle location updates
-  useEffect(
-    () =>
-      locationStore.subscribe((loc) => {
-        const nextState = getStateFromLocation(loc, undefined, frameReady)
-
-        broadcast({type: 'workshop/setState', value: nextState})
-      }),
-    [broadcast, frameReady, locationStore],
-  )
-
-  // Observe `scheme` state
-  useEffect(() => {
-    schemeRef.current = scheme
-
-    // Call the `onSchemeChange` callback when `scheme` changes
-    onSchemeChange(scheme)
-  }, [onSchemeChange, scheme])
-
-  // Broadcast changes to `scheme` property
-  useEffect(() => {
-    if (schemeProp) {
-      if (schemeRef.current !== schemeProp) {
-        schemeRef.current = schemeProp
-        broadcast({type: 'workshop/setScheme', value: schemeProp})
-      }
-    }
-  }, [broadcast, schemeProp])
 
   if (!config.scopes) {
     return <>No scopes</>
@@ -245,39 +216,27 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
       viewport={viewport}
       zoom={zoom}
     >
-      <ToastProvider>
-        <BoundaryElementProvider element={boundaryElement}>
-          <PortalProvider element={portalElement}>
-            <Flex
-              data-boundary=""
-              direction="column"
-              height="fill"
-              ref={setBoundaryElement}
-              style={{minWidth: 320}}
-            >
-              {withNavbar && (
-                <WorkshopNavbar
-                  inspectorExpanded={inspectorExpanded}
-                  navigatorExpanded={navigatorExpanded}
-                  onInspectorToggle={handleInspectorToggle}
-                  onNavigatorToggle={handleNavigatorToggle}
-                />
-              )}
+      <Root height="fill" scheme={scheme} tone="default">
+        <Box display="flex" flexDirection="column" height="fill">
+          {withNavbar && (
+            <WorkshopNavbar
+              inspectorExpanded={inspectorExpanded}
+              navigatorExpanded={navigatorExpanded}
+              onInspectorToggle={handleInspectorToggle}
+              onNavigatorToggle={handleNavigatorToggle}
+            />
+          )}
 
-              <Flex flex={1}>
-                <WorkshopNavigator collections={config.collections} expanded={navigatorExpanded} />
-                <WorkshopCanvas
-                  frameRef={frame.setElement}
-                  hidden={navigatorExpanded || inspectorExpanded}
-                />
-                <WorkshopInspector expanded={inspectorExpanded} />
-              </Flex>
-
-              <div data-portal="" ref={setPortalElement} />
-            </Flex>
-          </PortalProvider>
-        </BoundaryElementProvider>
-      </ToastProvider>
+          <Flex flex={1}>
+            <WorkshopNavigator collections={config.collections} expanded={navigatorExpanded} />
+            <WorkshopCanvas
+              frameRef={frame.setElement}
+              hidden={navigatorExpanded || inspectorExpanded}
+            />
+            <WorkshopInspector expanded={inspectorExpanded} />
+          </Flex>
+        </Box>
+      </Root>
     </WorkshopProvider>
   )
 })

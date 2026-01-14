@@ -11,7 +11,7 @@ export const StoryTree = memo(function StoryTree(props: {
   const {items} = props
 
   return (
-    <Tree space={1}>
+    <Tree gap={1}>
       <MenuItems items={items} />
     </Tree>
   )
