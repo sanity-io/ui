@@ -91,7 +91,6 @@
     ]
   },
   "browserslist": "extends @sanity/browserslist-config",
-  "prettier": "@sanity/prettier-config",
   "dependencies": {
     "@sanity/icons": "^3.7.4",
     "@vanilla-extract/css": "^1.17.5",
@@ -119,9 +118,10 @@
     "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.7",
     "@eslint/js": "^9.37.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^8.1.29",
-    "@sanity/prettier-config": "^2.0.2",
+    "@sanity/prettier-config": "^3.0.0",
     "@sanity/ui": "^3.1.11",
     "@types/cpx": "^1.5.6",
     "@types/express": "^5.0.5",
@@ -145,7 +145,7 @@
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "npm-run-all2": "^6.2.6",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
