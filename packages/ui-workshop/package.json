@@ -70,16 +70,16 @@
   ],
   "scripts": {
     "build": "run-s clean pkg:build",
-    "pkg:build": "pkg build --check --strict",
-    "ts:check": "tsc --build",
     "clean": "rimraf .workshop dist",
     "dev": "run-p workshop:dev",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
-    "prepare": "husky install",
     "prepack": "pnpm run build",
+    "pkg:build": "pkg build --check --strict",
+    "prepare": "husky install",
     "release": "changeset publish",
     "test": "vitest",
+    "ts:check": "tsc --build",
     "watch": "pkg watch --strict",
     "workshop:build": "run-s clean && node -r dotenv-flow/config -r esbuild-register -r tsconfig-paths/register scripts/build",
     "workshop:dev": "node -r dotenv-flow/config -r esbuild-register -r tsconfig-paths/register scripts/dev",
@@ -157,7 +157,7 @@
     "react": "^19",
     "react-dom": "^19"
   },
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.28.0",
   "publishConfig": {
     "access": "public"
   },
