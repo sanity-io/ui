@@ -1,7 +1,7 @@
 import {isArray} from '../lib/isArray'
 import {isRecord} from '../lib/isRecord'
 import type {Pubsub} from '../lib/pubsub'
-import type {WorkshopMsg} from '../types'
+import type {WorkshopMsg} from '../types/msg'
 
 export interface WorkshopMainController {
   message: Pubsub<WorkshopMsg>

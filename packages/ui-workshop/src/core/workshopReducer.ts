@@ -1,5 +1,6 @@
 import {isEqual} from 'lodash'
-import type {WorkshopMsg, WorkshopState} from './types'
+import type {WorkshopMsg} from './types/msg'
+import type {WorkshopState} from './types/state'
 
 /** @internal */
 export function workshopReducer(state: WorkshopState, msg: WorkshopMsg): WorkshopState {

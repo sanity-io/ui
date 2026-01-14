@@ -6,10 +6,11 @@ import {
   type ThemeColorSchemeKey,
 } from '@sanity/ui'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
-import type {WorkshopConfig} from '../config'
+import type {WorkshopConfig} from '../config/types'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'
-import type {WorkshopMsg, WorkshopState} from '../types'
+import type {WorkshopMsg} from '../types/msg'
+import type {WorkshopState} from '../types/state'
 import {WorkshopProvider} from '../WorkshopProvider'
 import {workshopReducer} from '../workshopReducer'
 import {WorkshopCanvas} from './WorkshopCanvas'
