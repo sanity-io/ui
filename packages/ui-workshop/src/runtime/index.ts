@@ -1,2 +1,5 @@
 export * from './build'
+export * from './defineRuntime'
 export * from './dev'
+export * from './preview'
+export * from './types'

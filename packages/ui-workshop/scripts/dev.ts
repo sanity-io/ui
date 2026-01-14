@@ -1,8 +1,7 @@
-import {dev} from '../src/runtime'
+import {dev} from '@sanity/ui-workshop/runtime'
 
-global.__DEV__ = true
-
-dev({cwd: process.cwd()}).catch((err) => {
+dev().catch((err) => {
   // eslint-disable-next-line no-console
   console.error(err)
+  process.exit(1)
 })
