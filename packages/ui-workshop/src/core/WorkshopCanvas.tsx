@@ -32,7 +32,7 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
       <Flex align="center" height="fill" justify="center" sizing="border">
         {path === '/' && (
           <Container width={0}>
-            <Stack padding={4} space={4}>
+            <Stack gap={4} padding={4}>
               <Heading align="center">{title}</Heading>
               <Text align="center" muted>
                 Browse workshop stories in the navigator to the left.

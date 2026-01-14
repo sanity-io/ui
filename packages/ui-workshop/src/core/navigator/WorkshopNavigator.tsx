@@ -1,5 +1,7 @@
 import {SearchIcon} from '@sanity/icons'
 import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
+import type {ResponsiveProp} from '@sanity/ui/css'
+import type {FontTextSize} from '@sanity/ui/theme'
 import {workshopNavigator} from '#styles'
 import {memo, useCallback, useMemo, useState} from 'react'
 import type {WorkshopScope, WorkshopStory} from '../config/types'
@@ -12,7 +14,7 @@ import type {MenuCollection, MenuList, MenuScope} from './types'
 
 const flexNoneStyle: React.CSSProperties = {flex: 'none'}
 const lineHeightNoneStyle: React.CSSProperties = {lineHeight: 0}
-const textInputFontSize = [2, 2, 1]
+const textInputFontSize: ResponsiveProp<FontTextSize> = [2, 2, 1]
 
 /** @internal */
 export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
@@ -50,7 +52,7 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
   const handleSearchQueryClear = useCallback(() => setQuery(''), [])
 
   const handleStoryClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault()
 
       const target = event.currentTarget
@@ -84,7 +86,7 @@ const NavigatorView = memo(function NavigatorView(props: {
   menu: MenuScope | MenuList
   onSearchQueryChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   onSearchQueryClear: () => void
-  onStoryClick: (event: React.MouseEvent<HTMLDivElement>) => void
+  onStoryClick: (event: React.MouseEvent<HTMLAnchorElement>) => void
   query: string
 }) {
   const {expanded, matches, menu, onSearchQueryChange, onSearchQueryClear, onStoryClick, query} =
@@ -103,13 +105,13 @@ const NavigatorView = memo(function NavigatorView(props: {
               border={false}
               clearButton={Boolean(query)}
               fontSize={textInputFontSize}
+              gap={2}
               icon={SearchIcon}
               onChange={onSearchQueryChange}
               onClear={onSearchQueryClear}
               padding={2}
               placeholder="Stories"
               radius={2}
-              space={2}
               value={query}
             />
           </Card>

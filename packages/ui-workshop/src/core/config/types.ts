@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type {RootTheme} from '@sanity/ui'
+import type {PartialTokens, Tokens} from '@sanity/ui/theme'
 
 /** @public */
 export interface WorkshopCollection {
@@ -29,13 +28,15 @@ export interface WorkshopConfig {
     navbar?: boolean
   }
   frameUrl?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   plugins?: WorkshopPlugin<any>[]
   scopes: WorkshopScope[]
-  theme?: RootTheme
+  theme?: PartialTokens<Tokens>
   title?: string
 }
 
 /** @public */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface WorkshopPlugin<Options = any> {
   name: string
   title: string
