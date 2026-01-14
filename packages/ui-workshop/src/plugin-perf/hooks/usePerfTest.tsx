@@ -57,20 +57,17 @@ export function usePerfTest<TargetType = unknown>(
   )
 
   const Wrapper = useMemo(() => {
-    return memo(
-      // eslint-disable-next-line no-shadow
-      function Wrapper({children}: {children?: React.ReactNode}): React.ReactNode {
-        if (!active) {
-          return <>{children}</>
-        }
+    return memo(function Wrapper({children}: {children?: React.ReactNode}): React.ReactNode {
+      if (!active) {
+        return <>{children}</>
+      }
 
-        return (
-          <Profiler id={name} onRender={handleRender}>
-            {children}
-          </Profiler>
-        )
-      },
-    )
+      return (
+        <Profiler id={name} onRender={handleRender}>
+          {children}
+        </Profiler>
+      )
+    })
   }, [active, handleRender, name])
 
   useEffect(() => registerTest(test as PerfTest<unknown>), [registerTest, test])

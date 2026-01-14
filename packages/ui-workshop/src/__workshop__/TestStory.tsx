@@ -1,24 +1,5 @@
 import {Flex, Heading, Stack, Text} from '@sanity/ui'
-import {
-  defineScope,
-  useBoolean,
-  useNumber,
-  useSelect,
-  useString,
-  useText,
-} from '@sanity/ui-workshop'
-
-export default defineScope({
-  name: 'test',
-  title: 'Test',
-  stories: [
-    {
-      name: 'test',
-      title: 'Test',
-      component: TestStory,
-    },
-  ],
-})
+import {useBoolean, useNumber, useSelect, useString, useText} from '@sanity/ui-workshop'
 
 const options = {
   None: '',
@@ -27,7 +8,7 @@ const options = {
   Large: 'lg',
 }
 
-function TestStory() {
+export default function TestStory() {
   const text = useText('Text', 'Hello, world')
   const boolean = useBoolean('Boolean', true)
   const number = useNumber('Number', 1234)

@@ -1,4 +1,4 @@
-import pako from 'pako'
+import {deflate, inflate} from 'pako'
 
 const btoa =
   typeof window === 'undefined'
@@ -38,14 +38,14 @@ export function decode(input: string): string {
 
   const arr = base64ToUint8Array(input)
 
-  return pako.inflate(arr, {to: 'string'})
+  return inflate(arr, {to: 'string'})
 }
 
 /** @internal */
 export function encode(input: string): string {
   if (input.length === 0) return ''
 
-  const arr = pako.deflate(input)
+  const arr = deflate(input)
 
   return uint8ArrayToBase64(arr)
 }

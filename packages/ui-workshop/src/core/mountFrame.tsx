@@ -1,10 +1,8 @@
-import {studioTheme, ThemeColorSchemeKey, ThemeProvider, usePrefersDark} from '@sanity/ui'
-import {StrictMode, useState} from 'react'
+import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 
 import {WorkshopConfig} from './config'
-import {WorkshopFrame} from './frame'
-import {GlobalStyle} from './GlobalStyle'
+import {WorkshopFrameApp} from './WorkshopFrameApp'
 
 /** @beta */
 export function mountFrame(options: {config: WorkshopConfig; element: HTMLElement | null}): void {
@@ -16,20 +14,7 @@ export function mountFrame(options: {config: WorkshopConfig; element: HTMLElemen
 
   root.render(
     <StrictMode>
-      <Root config={config} />
+      <WorkshopFrameApp config={config} />
     </StrictMode>,
-  )
-}
-
-function Root(props: {config: WorkshopConfig}) {
-  const {config} = props
-  const prefersDark = usePrefersDark()
-  const [scheme, setScheme] = useState<ThemeColorSchemeKey>(prefersDark ? 'dark' : 'light')
-
-  return (
-    <ThemeProvider scheme={scheme} theme={config.theme || studioTheme}>
-      <GlobalStyle />
-      <WorkshopFrame config={config} setScheme={setScheme} />
-    </ThemeProvider>
   )
 }

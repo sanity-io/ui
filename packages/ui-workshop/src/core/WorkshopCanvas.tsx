@@ -57,7 +57,12 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
           width="auto"
         >
           <Card height="fill" shadow={1}>
-            <iframe className={iframe} ref={frameRef} src={initialFrameUrl} />
+            <iframe
+              className={iframe}
+              ref={frameRef}
+              src={initialFrameUrl}
+              title="Workshop frame"
+            />
           </Card>
         </Container>
       </Flex>

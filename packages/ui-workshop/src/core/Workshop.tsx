@@ -6,8 +6,7 @@ import {
   ToastProvider,
   useMediaIndex,
 } from '@sanity/ui'
-import {debounce} from 'lodash'
-import {isEqual} from 'lodash'
+import {debounce, isEqual} from 'lodash'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {WorkshopConfig} from './config'
