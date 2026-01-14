@@ -1,6 +1,5 @@
 import {ThemeColorSchemeKey} from '@sanity/ui'
 import {createContext} from 'react'
-
 import {WorkshopCollection, WorkshopPlugin, WorkshopScope, WorkshopStory} from './config'
 import {Pubsub} from './lib/pubsub'
 import {WorkshopMsg} from './types'

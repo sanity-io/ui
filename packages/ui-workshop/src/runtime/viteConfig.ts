@@ -1,6 +1,6 @@
+import path from 'path'
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import react from '@vitejs/plugin-react'
-import path from 'path'
 import {UserConfig} from 'vite'
 
 /** @internal */

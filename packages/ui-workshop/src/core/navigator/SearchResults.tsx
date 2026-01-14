@@ -1,6 +1,5 @@
 import {Card, Stack, Text} from '@sanity/ui'
 import {memo} from 'react'
-
 import {WorkshopScope, WorkshopStory} from '../config'
 
 /** @internal */

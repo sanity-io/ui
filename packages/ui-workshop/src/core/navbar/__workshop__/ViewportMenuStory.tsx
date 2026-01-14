@@ -1,5 +1,4 @@
 import {Flex} from '@sanity/ui'
-
 import {ViewportMenu} from '../ViewportMenu'
 
 export default function ViewportMenuStory(): React.ReactNode {

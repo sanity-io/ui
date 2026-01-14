@@ -1,5 +1,4 @@
 import path from 'path'
-
 import {_fileExists} from '../lib/_fileExists'
 
 const CONFIG_FILE_NAMES = [

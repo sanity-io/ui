@@ -1,8 +1,6 @@
 import {createRequire} from 'node:module'
-
 import type {WorkshopConfigOptions} from '@sanity/ui-workshop'
 import type {TransformOptions} from 'esbuild'
-
 import {_findConfigFile} from './_findConfigFile'
 
 const require = createRequire(import.meta.url)

@@ -1,5 +1,4 @@
 import {useContext} from 'react'
-
 import {PropsContext, PropsContextValue} from './PropsContext'
 
 /** @internal */

@@ -1,5 +1,4 @@
 import {isEqual} from 'lodash'
-
 import {WorkshopMsg, WorkshopState} from './types'
 
 /** @internal */

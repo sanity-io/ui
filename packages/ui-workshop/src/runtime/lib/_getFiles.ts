@@ -1,6 +1,5 @@
-import globby from 'globby'
 import path from 'path'
-
+import globby from 'globby'
 import {_Observable} from './_observable'
 
 export function _getFiles(options: {
