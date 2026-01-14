@@ -1,0 +1,225 @@
+import {posix} from 'path'
+import {
+  compile,
+  cssFileFilter,
+  getSourceFromVirtualCssFile,
+  processVanillaFile,
+  transform,
+  virtualCssFileFilter,
+  type CompileOptions,
+  type IdentifierOption,
+} from '@vanilla-extract/integration'
+import type {Plugin} from 'rollup'
+import {generateCssBundle, stripSideEffectImportsMatching, tryGetPackageName} from './lib'
+
+const {relative, normalize, dirname} = posix
+
+export interface Options {
+  /**
+   * Different formatting of identifiers (e.g. class names, keyframes, CSS Vars, etc) can be configured by selecting from the following options:
+   * - "short": 7+ character hash. e.g. hnw5tz3
+   * - "debug": human readable prefixes representing the owning filename and a potential rule level debug name. e.g. myfile_mystyle_hnw5tz3
+   * - custom function: takes an object parameter with `hash`, `filePath`, `debugId`, and `packageName`, and returns a customized identifier.
+   * @default "short"
+   * @example ({ hash }) => `prefix_${hash}`
+   */
+  identifiers?: IdentifierOption
+  /**
+   * Current working directory
+   * @default process.cwd()
+   */
+  cwd?: string
+  /**
+   * Options forwarded to esbuild
+   * @see https://esbuild.github.io/
+   */
+  esbuildOptions?: CompileOptions['esbuildOptions']
+  /**
+   * Extract .css bundle to a specified filename
+   * @default false
+   */
+  extract?:
+    | {
+        /**
+         * Name of emitted .css file.
+         * @default "bundle.css"
+         */
+        name?: string
+        /**
+         * Generate a .css.map file?
+         * @default false
+         */
+        sourcemap?: boolean
+      }
+    | false
+
+  /**
+   * Inject filescopes into Vanilla Extract modules instead of generating CSS.
+   * Useful for utility or component libraries that prefer their consumers to
+   * process Vanilla Extract files instead of bundling CSS.
+   *
+   * Only works with `preserveModules: true`.
+   *
+   * @default false
+   */
+  unstable_injectFilescopes?: boolean
+}
+
+export function vanillaExtractPlugin({
+  identifiers,
+  cwd = process.cwd(),
+  esbuildOptions,
+  extract = false,
+  unstable_injectFilescopes = false,
+}: Options = {}): Plugin {
+  const isProduction = process.env['NODE_ENV'] === 'production'
+
+  let extractedCssIds = new Set<string>() // only for `extract`
+
+  return {
+    name: 'vanilla-extract',
+
+    buildStart() {
+      extractedCssIds = new Set() // refresh every build
+    },
+
+    // Transform .css.js to .js
+    async transform(code, id) {
+      if (!cssFileFilter.test(id)) {
+        return null
+      }
+
+      const identOption = identifiers ?? (isProduction ? 'short' : 'debug')
+      const [filePath] = id.split('?') as [string]
+
+      if (unstable_injectFilescopes) {
+        const packageName = await tryGetPackageName(cwd)
+        const transformedCode = await transform({
+          source: code,
+          filePath: id,
+          rootPath: cwd,
+          packageName: packageName ?? '',
+          identOption,
+        })
+
+        return {
+          code: transformedCode,
+          map: {mappings: ''},
+        }
+      }
+
+      const {source, watchFiles} = await compile({
+        filePath,
+        cwd,
+        esbuildOptions,
+        identOption,
+      })
+
+      for (const file of watchFiles) {
+        this.addWatchFile(file)
+      }
+
+      const output = await processVanillaFile({
+        source,
+        filePath,
+        identOption,
+      })
+      return {
+        code: output,
+        map: {mappings: ''},
+      }
+    },
+
+    // Resolve .css to external module
+    async resolveId(id) {
+      if (!virtualCssFileFilter.test(id)) {
+        return null
+      }
+      const {fileName, source} = await getSourceFromVirtualCssFile(id)
+      return {
+        id: fileName,
+        external: true,
+        meta: {
+          css: source,
+        },
+      }
+    },
+    // Emit .css assets and replace .css import paths with relative paths to emitted css files
+    renderChunk(code, chunkInfo) {
+      const chunkPath = dirname(chunkInfo.fileName)
+      const output = chunkInfo.imports.reduce((codeResult, importPath) => {
+        const moduleInfo = this.getModuleInfo(importPath)
+        if (!moduleInfo?.meta['css'] || extract) {
+          return codeResult
+        }
+
+        const assetId = this.emitFile({
+          type: 'asset',
+          name: moduleInfo.id,
+          source: moduleInfo.meta['css'],
+        })
+        const assetPath = this.getFileName(assetId)
+        const relativeAssetPath = `./${normalize(relative(chunkPath, assetPath))}`
+        return codeResult.replace(importPath, relativeAssetPath)
+      }, code)
+
+      return {
+        code: output,
+        map: null,
+      }
+    },
+
+    // Generate bundle (if extracting)
+    async buildEnd() {
+      if (!extract) {
+        return
+      }
+      // Note: generateBundle() can’t happen earlier than buildEnd
+      // because the graph hasn’t fully settled until this point.
+      const {bundle, extractedCssIds: extractedIds} = generateCssBundle(this)
+
+      // If the bundle is empty, don't emit anything
+      const source = bundle.toString()
+      if (!source) {
+        return
+      }
+
+      extractedCssIds = extractedIds
+      const name = extract.name || 'bundle.css'
+
+      this.emitFile({
+        type: 'asset',
+        name,
+        originalFileName: name,
+        source,
+      })
+      if (extract.sourcemap) {
+        const sourcemapName = `${name}.map`
+        this.emitFile({
+          type: 'asset',
+          name: sourcemapName,
+          originalFileName: sourcemapName,
+          source: bundle.generateMap({file: name, includeContent: true}).toString(),
+        })
+      }
+    },
+
+    // Remove side effect imports (if extracting)
+    async generateBundle(_options, bundle) {
+      if (!extract) {
+        return
+      }
+      await Promise.all(
+        Object.entries(bundle).map(async ([id, chunk]) => {
+          if (
+            chunk.type === 'chunk' &&
+            id.endsWith('.js') &&
+            chunk.imports.some((specifier) => extractedCssIds.has(specifier))
+          ) {
+            chunk.code = await stripSideEffectImportsMatching(chunk.code, [...extractedCssIds])
+          }
+        }),
+      )
+    },
+  }
+}
