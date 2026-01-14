@@ -1,11 +1,11 @@
 import type {ThemeColorSchemeKey} from '@sanity/ui'
 import {memo, useMemo} from 'react'
-import type {WorkshopConfig, WorkshopPlugin} from './config'
+import type {WorkshopConfig, WorkshopPlugin} from './config/types'
 import {EMPTY_ARRAY, EMPTY_RECORD} from './constants'
 import {resolveLocation} from './helpers'
 import type {Pubsub} from './lib/pubsub'
-import {propsPlugin} from './plugins/props'
-import type {WorkshopMsg} from './types'
+import {propsPlugin} from './plugins/props/plugin'
+import type {WorkshopMsg} from './types/msg'
 import {WorkshopContext} from './WorkshopContext'
 
 /** @internal */

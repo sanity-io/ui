@@ -1,18 +1,5 @@
-import type {WorkshopPlugin} from '@sanity/ui-workshop'
-import {PerfInspector} from './PerfInspector'
-import {PerfProvider} from './PerfProvider'
-
+export * from './hooks/usePerf'
+export * from './hooks/usePerfTest'
 export type {PerfContextValue} from './PerfContext'
-
-export * from './hooks'
+export * from './plugin'
 export * from './types'
-
-/** @internal */
-export function perfPlugin(): WorkshopPlugin {
-  return {
-    name: 'perf',
-    title: 'Performance',
-    inspector: PerfInspector,
-    provider: PerfProvider,
-  }
-}

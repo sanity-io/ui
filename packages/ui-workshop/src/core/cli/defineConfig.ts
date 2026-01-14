@@ -1,4 +1,4 @@
-import type {WorkshopConfig} from '../config'
+import type {WorkshopConfig} from '../config/types'
 
 /** @public */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

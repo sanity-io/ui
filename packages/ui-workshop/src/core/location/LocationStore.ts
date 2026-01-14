@@ -1,5 +1,5 @@
 import {qs} from '../lib/qs'
-import type {WorkshopLocation} from '../types'
+import type {WorkshopLocation} from '../types/location'
 
 /** @public */
 export interface WorkshopLocationStore {

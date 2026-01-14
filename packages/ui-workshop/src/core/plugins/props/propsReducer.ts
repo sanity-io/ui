@@ -1,4 +1,4 @@
-import type {WorkshopMsg} from '../../types'
+import type {WorkshopMsg} from '../../types/msg'
 import type {PropsMsg} from './msg'
 import type {PropsState} from './types'
 

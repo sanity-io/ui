@@ -5,7 +5,7 @@ import path from 'path'
 import {_watchScopes} from './_watchScopes'
 import {_loadRuntime} from './config/_loadRuntime'
 import {DEFAULT_PATTERN} from './constants'
-import {createDevServer} from './devServer'
+import {createDevServer} from './devServer/createDevServer'
 import {_compileModule} from './runtime/_compileModule'
 import {buildStaticFiles} from './runtime/buildStaticFiles'
 

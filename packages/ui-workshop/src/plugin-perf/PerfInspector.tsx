@@ -1,7 +1,7 @@
 import {PlayIcon, TrashIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import {memo} from 'react'
-import {usePerf} from './hooks'
+import {usePerf} from './hooks/usePerf'
 
 /** @internal */
 export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
