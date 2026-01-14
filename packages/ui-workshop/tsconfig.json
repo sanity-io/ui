@@ -11,7 +11,6 @@
   ],
   "compilerOptions": {
     "jsx": "preserve",
-    "noEmit": true,
-    "resolveJsonModule": true
+    "noEmit": true
   }
 }
