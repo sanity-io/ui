@@ -1,7 +1,7 @@
 import {studioTheme, ThemeProvider, usePrefersDark, type ThemeColorSchemeKey} from '@sanity/ui'
 import {useState} from 'react'
-import type {WorkshopConfig} from './config'
-import {WorkshopFrame} from './frame'
+import type {WorkshopConfig} from './config/types'
+import {WorkshopFrame} from './frame/WorkshopFrame'
 import {GlobalStyle} from './GlobalStyle'
 
 export function WorkshopFrameApp(props: {config: WorkshopConfig}) {

@@ -1,5 +1,5 @@
 import {set} from 'segmented-property'
-import type {WorkshopScope} from '../config'
+import type {WorkshopScope} from '../config/types'
 import type {MenuCollection, MenuList, MenuScope, MenuStory} from './types'
 
 /** @internal */

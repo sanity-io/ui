@@ -1,4 +1,4 @@
-import type {WorkshopScope} from '../config'
+import type {WorkshopScope} from '../config/types'
 
 export interface MenuStory<Options = Record<string, unknown>> {
   type: 'story'

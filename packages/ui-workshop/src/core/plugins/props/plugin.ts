@@ -1,14 +1,6 @@
-import type {WorkshopPlugin} from '../../config'
+import type {WorkshopPlugin} from '../../config/types'
 import {PropsInspector} from './PropsInspector'
 import {PropsProvider} from './PropsProvider'
-
-export type {PropsContextValue} from './PropsContext'
-
-export * from './types'
-
-// export hooks
-export * from './hooks'
-export * from './useProps'
 
 /** @internal */
 export function propsPlugin(): WorkshopPlugin {

@@ -1,5 +1,5 @@
 import type {ButtonTone} from '@sanity/ui'
-import type {WorkshopPlugin} from '../config'
+import type {WorkshopPlugin} from '../config/types'
 
 export interface InspectorTab {
   id: string
