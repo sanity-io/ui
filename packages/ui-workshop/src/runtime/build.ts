@@ -2,8 +2,8 @@ import {writeFile} from 'fs/promises'
 import path from 'path'
 import cpx from 'cpx'
 import {rimraf} from 'rimraf'
-import {build as viteBuild} from 'vite'
-import {_loadRuntime} from './config/_loadRuntime'
+import {createServer, build as viteBuild} from 'vite'
+import {_loadRuntimeConfig} from './config/_loadRuntime'
 import {DEFAULT_PATTERN} from './constants'
 import {_getFiles} from './lib/_getFiles'
 import {_compileModule} from './runtime/_compileModule'
@@ -21,30 +21,50 @@ function getScopes(options: {cwd: string; pattern: string | string[]}): Promise<
 }
 
 /** @alpha */
-export async function build(options: {cwd: string}): Promise<void> {
-  const {cwd} = options
-  const runtime = await _loadRuntime({packagePath: cwd})
+export async function build(options?: {cwd?: string}): Promise<void> {
+  const {cwd = process.cwd()} = options ?? {}
+
+  // Create runtime loader Vite server for SSR module loading
+  const runtimeLoaderServer = await createServer({
+    root: cwd,
+    logLevel: 'error',
+    server: {
+      middlewareMode: true,
+      ws: false, // Disable WebSocket server entirely
+      hmr: false, // Disable HMR
+    },
+    appType: 'custom',
+    clearScreen: false,
+  })
+
+  const runtimeConfig = await _loadRuntimeConfig({
+    packagePath: cwd,
+    viteServer: runtimeLoaderServer,
+  })
   const runtimeDir = path.resolve(cwd, '.workshop')
-  const outDir = runtime?.build?.outDir || path.resolve(cwd, 'dist')
+
+  const outDir = runtimeConfig?.build?.outDir ?? path.resolve(cwd, '.workshop/dist')
 
   await buildStaticFiles({runtimeDir})
 
   const scopes = await getScopes({
     cwd,
-    pattern: runtime?.pattern || DEFAULT_PATTERN,
+    pattern: runtimeConfig?.pattern ?? DEFAULT_PATTERN,
   })
 
-  const relativeScopes = scopes.map((f) => {
-    return path.relative(outDir, f)
+  const relativeScopes = scopes.map((f) => path.relative(runtimeDir, f))
+  const scopesCode = _compileModule(relativeScopes)
+
+  await writeFile(path.resolve(runtimeDir, 'scopes.ts'), scopesCode)
+
+  const baseViteConfig = createViteConfig({
+    cwd,
+    mode: 'production',
+    outDir,
+    runtimeDir,
   })
 
-  const code = _compileModule(relativeScopes)
-
-  await writeFile(path.resolve(runtimeDir, 'scopes.ts'), code)
-
-  const baseViteConfig = createViteConfig({cwd, outDir, runtimeDir})
-
-  let viteConfig = runtime?.vite?.(baseViteConfig) || baseViteConfig
+  let viteConfig = runtimeConfig?.vite?.(baseViteConfig) ?? baseViteConfig
 
   // check if viteConfig is a promise
   if (typeof viteConfig === 'object' && 'then' in viteConfig) {
@@ -52,6 +72,9 @@ export async function build(options: {cwd: string}): Promise<void> {
   }
 
   await viteBuild(viteConfig)
+
+  // Clean up the runtime loader server
+  await runtimeLoaderServer.close()
 
   // copy
   cpx.copySync(path.resolve(outDir, '.workshop', '**/*'), outDir)

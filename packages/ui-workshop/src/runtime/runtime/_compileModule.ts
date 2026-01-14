@@ -1,19 +1,10 @@
-import chokidar from 'chokidar'
-
-declare global {
-  var $workshopWatcher: chokidar.FSWatcher | undefined
-}
-
-function _sanitizeModulePath(modulePath: string) {
-  return modulePath.replace(/\.[^/.]+$/, '').replace(/\/index$/, '')
-}
-
 export function _compileModule(paths: string[]): string {
   if (paths.length === 0) {
     return `// THIS FILE IS AUTO-GENERATED\n\nexport const scopes = []\n`
   }
 
-  const sortedPaths = paths.sort()
+  const sortedPaths = paths.slice(0)
+  sortedPaths.sort()
   const imports = sortedPaths
     .map((p, idx) => `import _${idx} from '${_sanitizeModulePath(p)}'`)
     .join('\n')
@@ -24,4 +15,8 @@ export function _compileModule(paths: string[]): string {
     ) + `\n`
 
   return code
+}
+
+function _sanitizeModulePath(modulePath: string) {
+  return modulePath.replace(/\.[^/.]+$/, '').replace(/\/index$/, '')
 }

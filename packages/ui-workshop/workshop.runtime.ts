@@ -1,10 +1,9 @@
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
+import {defineRuntime} from '@sanity/ui-workshop/runtime'
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import {mergeConfig} from 'vite'
-
-import {defineRuntime} from './src/core'
 
 import {vanillaExtractIdentifiers} from './vanilla-extract/identifiers'
 
