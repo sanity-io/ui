@@ -6,7 +6,7 @@
     "build": "FEATURE_DIST=on next build",
     "dev": "next dev",
     "dev:dist": "FEATURE_DIST=on next dev",
-    "lint": "next lint",
+    "lint": "eslint",
     "start": "next start"
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "@types/react-dom": "^19.2.1",
     "@vanilla-extract/next-plugin": "^2.4.14",
     "eslint": "^9.37.0",
-    "eslint-config-next": "15.5.4",
+    "eslint-config-next": "16.1.6",
     "typescript": "^5.9.3"
   }
 }

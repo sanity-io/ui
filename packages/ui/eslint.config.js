@@ -33,7 +33,9 @@ export default ts.config(
           ...globals.es2018,
         },
         sourceType: 'module',
-        tsconfigRootDir: import.meta.dirname,
+        parserOptions: {
+          tsconfigRootDir: import.meta.dirname,
+        },
       },
       linterOptions: {reportUnusedDisableDirectives: 'error'},
       rules: {
