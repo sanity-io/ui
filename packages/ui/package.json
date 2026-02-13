@@ -63,7 +63,7 @@
     "cypress:dev": "run-p dev cypress:open",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "dev": "run-p workshop:dev storybook:dev",
+    "dev": "run-s workshop:clean workshop:dev",
     "figma:build": "pnpm run --filter 'figma-plugin-sanity-ui' build",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
@@ -77,7 +77,7 @@
     "watch": "pkg watch --strict",
     "workshop:build": "workshop build",
     "workshop:clean": "rimraf .workshop",
-    "workshop:dev": "run-s workshop:clean && workshop dev",
+    "workshop:dev": "workshop dev",
     "workshop:preview": "workshop preview"
   },
   "browserslist": "extends @sanity/browserslist-config",
