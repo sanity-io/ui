@@ -25,8 +25,8 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
-      "@sanity/ui/*": ["../exports/*"],
-      "@sanity/ui": ["../exports/index.ts"]
+      "@sanity/ui": ["../../packages/ui/exports/index.ts"],
+      "@sanity/ui/*": ["../../packages/ui/exports/*"]
     }
   }
 }
