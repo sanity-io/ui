@@ -8,6 +8,8 @@ import {
 
 import {theme} from '../theme'
 
+const parseColor = (_color: any) => ({r: 0, g: 0, b: 0, a: 1})
+
 export function writeStyles(): void {
   const figmaEffectStyles = figma.getLocalEffectStyles()
 
@@ -53,7 +55,10 @@ function createOrReplaceFocusRingStyle(
     style.name = name
   }
 
-  const bgColor = parseColor(cardColor.bg)
+  const bgColor = parseColor(
+    // cardColor.bg
+    '',
+  )
   const outlineColor = parseColor(cardColor.focusRing)
 
   style.effects = [
@@ -95,7 +100,7 @@ function createOrReplaceShadowStyle(
   figmaEffectStyles: EffectStyle[],
   name: string,
   shadow: ShadowProperties,
-  shadowColor: ThemeColorShadow,
+  shadowColor: CardColorTokens['shadow'],
 ) {
   let style = figmaEffectStyles.find((style) => style.name === name)
 

@@ -1,11 +1,10 @@
 {
-  "extends": "./tsconfig.settings",
+  "extends": "../../tsconfig.settings",
   "include": [
     "./cypress.config.ts",
     "./exports",
     "./package.json",
     "./package.config.ts",
-    "prettier.config.mjs",
     "./src",
     "./test",
     "./typings",

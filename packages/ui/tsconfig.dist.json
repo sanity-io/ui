@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.settings",
+  "extends": "../../tsconfig.settings",
   "include": ["./exports", "./package.json", "./src", "./typings"],
   "exclude": [
     "./src/**/__fixtures__",

@@ -36,7 +36,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@sanity/ui': path.resolve(__dirname, '../exports'),
+      '@sanity/ui': path.resolve(__dirname, '../../packages/ui/exports'),
     },
   },
 })
