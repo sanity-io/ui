@@ -2,6 +2,8 @@
 
 import type {FigmaSanityUIColorVariable} from './types'
 
+const parseColor = (_color: any) => ({r: 0, g: 0, b: 0, a: 1})
+
 export function getOrCreateColorVariableCollection(name: string): VariableCollection {
   const localVariableCollections = figma.variables.getLocalVariableCollections()
 

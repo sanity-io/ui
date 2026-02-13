@@ -27,6 +27,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
 
       if (!toneConfig) continue
 
+      // @ts-expect-error - TODO
       const toneColor = theme.color[scheme][tone]
 
       // base
