@@ -1,12 +1,12 @@
 import {Root, usePrefersDark} from '@sanity/ui'
 import {useEffect, useRef, useState, startTransition} from 'react'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ColorScheme} from '@sanity/ui/theme'
 import {AppRouter} from './AppRouter'
 
 export function App() {
   const prefersDark = usePrefersDark()
   const prefersDarkRef = useRef(prefersDark)
-  const [scheme, setScheme] = useState<ThemeColorSchemeKey>(() => (prefersDark ? 'dark' : 'light'))
+  const [scheme, setScheme] = useState<ColorScheme>(() => (prefersDark ? 'dark' : 'light'))
 
   useEffect(() => {
     if (prefersDarkRef.current === prefersDark) return

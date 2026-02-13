@@ -18,8 +18,8 @@
     "plugins": [{"name": "next"}],
     "paths": {
       "@sanity/ui/css/index.css": ["./empty.css"],
-      "@sanity/ui/*": ["../../exports/*"],
-      "@sanity/ui": ["../../exports/index.ts"]
+      "@sanity/ui/*": ["../../packages/ui/exports/*"],
+      "@sanity/ui": ["../../packages/ui/exports/index.ts"]
     }
   }
 }

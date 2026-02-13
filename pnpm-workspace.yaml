@@ -1,4 +1,4 @@
 packages:
-  - figma
+  - apps/*
+  - packages/*
   - playground/*
-  - storybook
