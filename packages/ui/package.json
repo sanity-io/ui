@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "4.0.0-static.46",
+  "version": "4.0.0-beta.0",
   "keywords": [
     "react",
     "ui",
@@ -71,7 +71,6 @@
     "pkg:build": "mkdirp dist/css && touch dist/css/index.css && NODE_ENV=production pkg build --strict",
     "pkg:check": "pkg --strict",
     "pkg:watch": "mkdirp dist/css && touch dist/css/index.css && NODE_ENV=production pkg watch --strict",
-    "release": "semantic-release",
     "storybook:build": "pnpm run --filter 'sanity-ui-storybook' build",
     "storybook:dev": "pnpm run --filter 'sanity-ui-storybook' dev",
     "test": "vitest run",
@@ -84,22 +83,6 @@
     "workshop:preview": "workshop preview"
   },
   "browserslist": "extends @sanity/browserslist-config",
-  "release": {
-    "branches": [
-      {
-        "name": "v2",
-        "range": "2.x",
-        "channel": "v2"
-      },
-      "main",
-      {
-        "name": "v4",
-        "channel": "static",
-        "prerelease": "static"
-      }
-    ],
-    "extends": "@sanity/semantic-release-preset"
-  },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.6",
     "@juggle/resize-observer": "^3.4.0",
@@ -119,7 +102,6 @@
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^8.1.24",
     "@sanity/prettier-config": "^2.0.1",
-    "@sanity/semantic-release-preset": "^5.0.0",
     "@sanity/ui-workshop": "4.0.0-static.12",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
@@ -163,7 +145,6 @@
     "react-is": "^19.2.0",
     "refractor": "^5.0.0",
     "rimraf": "^5.0.10",
-    "semantic-release": "24.2.7",
     "start-server-and-test": "^2.1.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.9.3",

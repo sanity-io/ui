@@ -6,6 +6,10 @@
   "type": "module",
   "scripts": {
     "build": "turbo build --filter=./packages/*",
+    "changeset": "changeset",
+    "changeset:publish": "changeset publish",
+    "changeset:status": "changeset status",
+    "changeset:version": "changeset version",
     "commit": "cz",
     "dev": "turbo dev",
     "format": "prettier --write .",
@@ -13,7 +17,9 @@
     "lint": "turbo lint",
     "prepare": "husky install",
     "test": "turbo test -- --run",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "workshop:build": "turbo workshop:build --filter=./packages/ui",
+    "workshop:preview": "turbo workshop:preview --filter=./packages/ui"
   },
   "commitlint": {
     "extends": [
@@ -26,6 +32,8 @@
     ]
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.2",
+    "@changesets/cli": "^2.29.8",
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "@sanity/pkg-utils": "^10.4.4",
@@ -56,10 +64,7 @@
       "unrs-resolver@1.11.1"
     ],
     "overrides": {
-      "@types/react": "19.2.9",
-      "@types/react-dom": "19.2.3",
-      "commander": "^13.1.0",
-      "zod": "^4.3.6"
+      "conventional-changelog-conventionalcommits": ">= 8.0.0"
     }
   }
 }

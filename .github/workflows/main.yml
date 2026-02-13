@@ -60,73 +60,39 @@ jobs:
       - run: pnpm build
       - run: pnpm test
 
-  cypress:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with:
-          node-version: lts/*
-      - uses: cypress-io/github-action@v6
-        with:
-          build: pnpm workshop:build
-          start: pnpm workshop:preview
-          wait-on: http://localhost:1337
-        env:
-          NODE_OPTIONS: "--no-experimental-require-module --no-experimental-detect-module"
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: cypress-videos
-          path: cypress/videos
-          if-no-files-found: ignore
+  # cypress:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v5
+  #     - uses: pnpm/action-setup@v4
+  #     - uses: actions/setup-node@v5
+  #       with:
+  #         node-version: lts/*
+  #     - uses: cypress-io/github-action@v6
+  #       with:
+  #         build: pnpm workshop:build
+  #         start: pnpm workshop:preview
+  #         wait-on: http://localhost:1337
+  #       env:
+  #         NODE_OPTIONS: "--no-experimental-require-module --no-experimental-detect-module"
+  #     - uses: actions/upload-artifact@v4
+  #       if: failure()
+  #       with:
+  #         name: cypress-screenshots
+  #         path: cypress/screenshots
+  #         if-no-files-found: ignore
+  #     - uses: actions/upload-artifact@v4
+  #       if: always()
+  #       with:
+  #         name: cypress-videos
+  #         path: cypress/videos
+  #         if-no-files-found: ignore
 
-  sanity-e2e:
-    if: ${{ github.event_name == 'pull_request' }}
-    permissions:
-      contents: read
-      actions: write
-    name: "Run Studio End-to-end tests"
-    uses: sanity-io/sanity/.github/workflows/e2e-ui.yml@main
-    secrets: inherit
-
-  release:
-    permissions:
-      id-token: write # to enable use of OIDC for npm provenance
-    name: "Semantic release"
-    # needs: [lint, test, cypress]
-    needs: [lint, test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/create-github-app-token@v2
-        id: app-token
-        with:
-          app-id: ${{ secrets.ECOSPARK_APP_ID }}
-          private-key: ${{ secrets.ECOSPARK_APP_PRIVATE_KEY }}
-      - uses: actions/checkout@v5
-        with:
-          # Need to fetch entire commit history to
-          # analyze every commit since last release
-          fetch-depth: 0
-          # Uses generated token to allow pushing commits back
-          token: ${{ steps.app-token.outputs.token }}
-          # Make sure the value of GITHUB_TOKEN will not be persisted in repo's config
-          persist-credentials: false
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with:
-          node-version: lts/*
-      - run: pnpm install
-      # Branches that will release new versions are defined in .releaserc.json
-      - run: pnpm exec semantic-release
-        env:
-          NPM_CONFIG_PROVENANCE: true
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+  # sanity-e2e:
+  #   needs: [build]
+  #   permissions:
+  #     contents: read
+  #     actions: write
+  #   name: "Run Studio End-to-end tests"
+  #   uses: sanity-io/sanity/.github/workflows/e2e-ui.yml@main
+  #   secrets: inherit

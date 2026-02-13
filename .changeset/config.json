@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config/schema.json",
+  "changelog": ["@changesets/changelog-github", {"repo": "sanity-io/ui-system"}],
+  "commit": false,
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["figma-plugin-sanity-ui", "sanity-ui-storybook", "sanity-ui-playground-*"],
+  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
+    "updateInternalDependents": "always",
+    "onlyUpdatePeerDependentsWhenOutOfRange": true
+  }
+}
