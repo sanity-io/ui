@@ -26,21 +26,22 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@sanity/pkg-utils": "^8.1.24",
+    "@commitlint/cli": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.1",
+    "@sanity/pkg-utils": "^10.4.4",
     "@sanity/prettier-config": "^3.0.0",
+    "@sanity/tsconfig": "^2.1.0",
     "commitizen": "^4.3.1",
-    "husky": "^8.0.3",
+    "husky": "^9.1.7",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
     "prettier-plugin-packagejson": "^3.0.0",
     "rimraf": "^6.1.2",
     "tsx": "^4.21.0",
-    "turbo": "^2.7.6",
+    "turbo": "^2.8.7",
     "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@10.29.3",
   "engines": {
     "node": ">=24"
   },
