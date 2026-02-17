@@ -29,6 +29,7 @@ export default defineConfig({
   },
 
   reactCompilerOptions: {target: '19'},
+
   rollup: {
     output: {
       intro: (chunkInfo) => {
