@@ -6,6 +6,7 @@
     "build": "FEATURE_DIST=on react-router build",
     "dev": "react-router dev",
     "dist:dev": "FEATURE_DIST=on vite",
+    "lint": "eslint .",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
@@ -20,10 +21,12 @@
   },
   "devDependencies": {
     "@react-router/dev": "^7.9.4",
+    "@repo/eslint-config": "workspace:*",
     "@types/node": "^24.5.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
     "@vanilla-extract/vite-plugin": "^5.1.1",
+    "eslint": "^9.39.2",
     "typescript": "^5.9.3",
     "vite": "^7.1.9"
   }

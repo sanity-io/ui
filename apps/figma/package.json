@@ -1,6 +1,7 @@
 {
   "name": "figma-plugin-sanity-ui",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
@@ -18,13 +19,16 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "pkg build --strict && pkg --strict",
+    "lint": "eslint .",
     "watch": "pkg watch --strict"
   },
   "devDependencies": {
     "@babel/plugin-transform-object-rest-spread": "^7.28.4",
     "@figma/plugin-typings": "^1.117.0",
+    "@repo/eslint-config": "workspace:*",
     "@sanity/color": "^3.0.6",
     "@sanity/ui": "workspace:*",
+    "eslint": "^9.39.2",
     "segmented-property": "^4.0.0"
   }
 }
