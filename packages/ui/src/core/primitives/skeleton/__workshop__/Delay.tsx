@@ -25,11 +25,11 @@ export default function SkeletonDelayStory(): React.JSX.Element {
       <Container width={1}>
         <Text muted>Delayed by 2000ms</Text>
         <Card
-          // @ts-expect-error - TODO: fix this
           border
           marginTop={4}
           padding={2}
           radius={2}
+          // @ts-expect-error - TODO: fix this
           tone={tone}
         >
           <Flex align="center">

@@ -1,4 +1,5 @@
 import {Card, Flex, Text} from '@sanity/ui'
+import {FONT_TEXT_SIZE} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {
@@ -13,9 +14,9 @@ const meta: Meta<typeof Flex> = {
   component: Flex,
   args: {
     children: [
-      Array.from({length: 5}, (_, index) => (
-        <Card key={`card${index}`} padding={3}>
-          <Text size={index}>{`Card ${index}`} </Text>
+      FONT_TEXT_SIZE.map((size) => (
+        <Card key={`card${size}`} padding={3}>
+          <Text size={size}>{`Card ${size}`} </Text>
         </Card>
       )),
     ],

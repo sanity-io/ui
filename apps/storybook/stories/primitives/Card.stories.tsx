@@ -1,5 +1,5 @@
-import {Box, Button, Card, type CardTone, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
-import {CARD_TONES, RADIUS} from '@sanity/ui/theme'
+import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
+import {CARD_TONES, type CardTone, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {RADIUS_CONTROLS, SHADOW_CONTROLS, SPACE_CONTROLS} from '../controls'
@@ -146,7 +146,7 @@ export const Schemes: Story = {
     },
   },
   render: (props) => (
-    <Grid columns={CARD_TONES.length} gapX={1} gapY={4}>
+    <Grid gapX={1} gapY={4} gridTemplateColumns={CARD_TONES.length}>
       <>
         {CARD_TONES.map((t) => (
           <Card
@@ -296,7 +296,7 @@ export const MatrixAsButton: Story = {
     return (
       <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
         <Container>
-          <Grid columns={3} gap={2}>
+          <Grid gap={2} gridTemplateColumns={3}>
             <Box>
               <Text align="center" size={1} weight="semibold">
                 Enabled
@@ -314,7 +314,6 @@ export const MatrixAsButton: Story = {
                     <Stack gap={2}>
                       <Text weight="semibold">{tone}</Text>
                       <Text muted>Muted</Text>
-                      <Text accent>Accent</Text>
                     </Stack>
                   </Card>
                 ))}
@@ -339,7 +338,6 @@ export const MatrixAsButton: Story = {
                     <Stack gap={2}>
                       <Text weight="semibold">{tone}</Text>
                       <Text muted>Muted</Text>
-                      <Text accent>Accent</Text>
                     </Stack>
                   </Card>
                 ))}
@@ -363,7 +361,6 @@ export const MatrixAsButton: Story = {
                       <Stack gap={2}>
                         <Text weight="semibold">{tone}</Text>
                         <Text muted>Muted</Text>
-                        <Text accent>Accent</Text>
                       </Stack>
                     </Card>
                   </div>
@@ -415,7 +412,7 @@ export const NestedSchemeChanges: Story = {
 
 export const NestedToneChanges: Story = {
   render: () => {
-    const TONES: (CardTone | undefined)[] = [
+    const TONES: (CardTone | 'inherit' | undefined)[] = [
       'critical',
       'inherit',
       undefined,
@@ -433,7 +430,7 @@ export const NestedToneChanges: Story = {
       undefined,
     ]
 
-    const renderCard = (tones: (CardTone | undefined)[]) => {
+    const renderCard = (tones: (CardTone | 'inherit' | undefined)[]) => {
       const currentTone = tones[0]
 
       return (

@@ -224,7 +224,7 @@ export const CustomButton: Story = {
     return (
       <Flex align="center" height="fill" justify="center">
         <Stack gap={2}>
-          <Grid columns={ELEMENT_TONES.length} gap={1}>
+          <Grid gap={1} gridTemplateColumns={ELEMENT_TONES.length}>
             {ELEMENT_TONES.map((tone) => (
               <Button {...props} key={tone} mode="bleed" padding={3} text={undefined} tone={tone}>
                 <Stack gap={2}>
@@ -233,12 +233,11 @@ export const CustomButton: Story = {
                   <Text>
                     <code>Code</code>
                   </Text>
-                  <Text accent>Accent</Text>
                 </Stack>
               </Button>
             ))}
           </Grid>
-          <Grid columns={ELEMENT_TONES.length} gap={1}>
+          <Grid gap={1} gridTemplateColumns={ELEMENT_TONES.length}>
             {ELEMENT_TONES.map((tone) => (
               <Button {...props} key={tone} mode="ghost" padding={3} text={undefined} tone={tone}>
                 <Stack gap={2}>
@@ -247,13 +246,12 @@ export const CustomButton: Story = {
                   <Text>
                     <code>Code</code>
                   </Text>
-                  <Text accent>Accent</Text>
                 </Stack>
               </Button>
             ))}
           </Grid>
 
-          <Grid columns={ELEMENT_TONES.length} gap={1}>
+          <Grid gap={1} gridTemplateColumns={ELEMENT_TONES.length}>
             {ELEMENT_TONES.map((tone) => (
               <Button {...props} key={tone} mode="default" padding={3} text={undefined} tone={tone}>
                 <Stack gap={2}>
@@ -262,7 +260,6 @@ export const CustomButton: Story = {
                   <Text>
                     <code>Code</code>
                   </Text>
-                  <Text accent>Accent</Text>
                 </Stack>
               </Button>
             ))}
