@@ -43,7 +43,6 @@ export default function PropsStory(): React.JSX.Element {
           <Flex align="center" justify="center" padding={4} sizing="border">
             <Tooltip
               arrow={arrow}
-              // @ts-expect-error - TODO: fix this
               content={<Text size={1}>{content}</Text>}
               delay={{
                 open: openDelay,
@@ -51,6 +50,7 @@ export default function PropsStory(): React.JSX.Element {
               }}
               // @ts-expect-error - TODO: fix this
               padding={padding}
+              // @ts-expect-error - TODO: fix this
               placement={placement}
               portal={portal}
               // @ts-expect-error - TODO: fix this
@@ -82,7 +82,6 @@ export default function PropsStory(): React.JSX.Element {
               <Tooltip
                 arrow={arrow}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
-                // @ts-expect-error - TODO: fix this
                 content={<Text size={1}>{content}</Text>}
                 delay={{
                   open: 100,
@@ -90,6 +89,7 @@ export default function PropsStory(): React.JSX.Element {
                 }}
                 // @ts-expect-error - TODO: fix this
                 padding={padding}
+                // @ts-expect-error - TODO: fix this
                 placement={placement}
                 portal={portal}
                 // @ts-expect-error - TODO: fix this
@@ -99,13 +99,13 @@ export default function PropsStory(): React.JSX.Element {
               </Tooltip>
               <Tooltip
                 arrow={arrow}
-                // @ts-expect-error - TODO: fix this
                 content={<Text size={1}>{content}</Text>}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
                 delay={{
                   open: 100,
                   close: 100,
                 }}
+                // @ts-expect-error - TODO: fix this
                 padding={padding}
                 // @ts-expect-error - TODO: fix this
                 placement={placement}

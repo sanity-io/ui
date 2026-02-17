@@ -1,4 +1,4 @@
-import {icons} from '@sanity/icons'
+import {icons, type IconSymbol} from '@sanity/icons'
 import {Button, Flex} from '@sanity/ui'
 import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 
@@ -51,7 +51,7 @@ export default function ButtonStory(): React.JSX.Element {
         gap={gap}
         // @ts-expect-error - TODO: fix this
         icon={icon && icons[icon]}
-        iconRight={iconRight && icons[iconRight]}
+        iconRight={iconRight && icons[iconRight as IconSymbol]}
         // @ts-expect-error - TODO: fix this
         justify={justify}
         loading={loading}
@@ -69,7 +69,6 @@ export default function ButtonStory(): React.JSX.Element {
         textWeight={textWeight}
         // @ts-expect-error - TODO: fix this
         tone={tone}
-        // @ts-expect-error - TODO: fix this
         onClick={useAction('onClick')}
       />
     </Flex>

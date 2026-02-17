@@ -18,9 +18,6 @@
     "rootDir": "../..",
     "outDir": "./dist",
 
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "target": "ES2020",
     "types": ["vite/client"],
 
     "jsx": "react-jsx",

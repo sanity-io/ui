@@ -1,12 +1,12 @@
 import {Card, Stack} from '@sanity/ui'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ColorScheme} from '@sanity/ui/theme'
 import type {ComponentProps, ReactNode} from 'react'
 
 interface ColumnBuilderProps<T> {
   gap?: ComponentProps<typeof Stack>['gap']
   renderItem: ({value, index}: {value: T; index: number}) => ReactNode
   rows: T[]
-  scheme?: ThemeColorSchemeKey
+  scheme?: ColorScheme
 }
 
 export const columnBuilder = function <T>({
