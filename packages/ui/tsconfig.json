@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.settings",
+  "extends": "@repo/typescript-config/base.json",
   "include": [
     "./cypress.config.ts",
     "./exports",
@@ -16,14 +16,16 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist/types",
+
+    "esModuleInterop": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+
     "paths": {
       "$test/*": ["./test/*"],
       "$workshop": ["./workshop"],
       "@sanity/ui/*": ["./exports/*"],
       "@sanity/ui": ["./exports/index.ts"]
-    },
-    // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
-    "jsx": "react-jsx",
-    "resolveJsonModule": true
+    }
   }
 }
