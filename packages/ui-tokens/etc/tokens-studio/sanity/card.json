@@ -1,0 +1,21 @@
+{
+  "card": {
+    "focusRing": {
+      "$type": "boxShadow",
+      "$value": [
+        {
+          "type": "innerShadow",
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": "{border.2}",
+          "color": "{color.focusRing}"
+        }
+      ]
+    },
+    "outline": {
+      "$type": "dimension",
+      "$value": "{border.1}"
+    }
+  }
+}

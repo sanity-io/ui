@@ -1,0 +1,148 @@
+{
+  "_buttonMode": {
+    "color": {
+      "state": {
+        "enabled": {
+          "bg": {
+            "$type": "color",
+            "$value": "{color.tinted.bg.0}"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.tinted.border.2}"
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{color.tinted.fg.0}"
+          },
+          "muted": {
+            "bg": {
+              "$type": "color",
+              "$value": "{color.tinted.bg.1}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.tinted.border.1}"
+            },
+            "fg": {
+              "$type": "color",
+              "$value": "{color.tinted.fg.4}"
+            }
+          }
+        },
+        "hovered": {
+          "bg": {
+            "$type": "color",
+            "$value": "{color.tinted.bg.1}"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.tinted.border.3}"
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{color.tinted.fg.0}"
+          },
+          "muted": {
+            "bg": {
+              "$type": "color",
+              "$value": "{color.tinted.bg.2}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.tinted.border.2}"
+            },
+            "fg": {
+              "$type": "color",
+              "$value": "{color.tinted.fg.4}"
+            }
+          }
+        },
+        "pressed": {
+          "bg": {
+            "$type": "color",
+            "$value": "{color.tinted.bg.2}"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.tinted.border.4}"
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{color.tinted.fg.0}"
+          },
+          "muted": {
+            "bg": {
+              "$type": "color",
+              "$value": "{color.tinted.bg.3}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.tinted.border.3}"
+            },
+            "fg": {
+              "$type": "color",
+              "$value": "{color.tinted.fg.4}"
+            }
+          }
+        },
+        "selected": {
+          "bg": {
+            "$type": "color",
+            "$value": "{color.tinted.bg.2}"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.tinted.border.4}"
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{color.tinted.fg.0}"
+          },
+          "muted": {
+            "bg": {
+              "$type": "color",
+              "$value": "{color.tinted.bg.3}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.tinted.border.4}"
+            },
+            "fg": {
+              "$type": "color",
+              "$value": "{color.tinted.fg.4}"
+            }
+          }
+        },
+        "disabled": {
+          "bg": {
+            "$type": "color",
+            "$value": "{color.tinted.default.bg.0}"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.tinted.default.border.0}"
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{color.tinted.default.border.4}"
+          },
+          "muted": {
+            "bg": {
+              "$type": "color",
+              "$value": "{color.tinted.default.bg.1}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.tinted.default.border.0}"
+            },
+            "fg": {
+              "$type": "color",
+              "$value": "{color.tinted.default.border.2}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

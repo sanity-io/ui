@@ -1,0 +1,38 @@
+{
+  "focusRing": {
+    "default": {
+      "$type": "boxShadow",
+      "$value": [
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": 1,
+          "color": "{color.bg}"
+        },
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": 2,
+          "color": "{color.focusRing}"
+        }
+      ]
+    },
+    "inset": {
+      "$type": "boxShadow",
+      "$value": [
+        {
+          "type": "innerShadow",
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": 1,
+          "color": "{color.focusRing}"
+        }
+      ]
+    }
+  }
+}

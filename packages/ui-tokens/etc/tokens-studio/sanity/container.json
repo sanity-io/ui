@@ -1,0 +1,28 @@
+{
+  "container": {
+    "0": {
+      "$type": "dimension",
+      "$value": "20rem"
+    },
+    "1": {
+      "$type": "dimension",
+      "$value": "40rem"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "60rem"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "80rem"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "100rem"
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "120rem"
+    }
+  }
+}

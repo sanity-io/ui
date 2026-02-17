@@ -1,0 +1,115 @@
+[
+  {
+    "group": "System",
+    "name": "default",
+    "selectedTokenSets": {
+      "sanity/_palette": "enabled",
+      "sanity/_core": "enabled",
+      "sanity/avatar": "enabled",
+      "sanity/border": "enabled",
+      "sanity/button": "enabled",
+      "sanity/card": "enabled",
+      "sanity/color": "enabled",
+      "sanity/container": "enabled",
+      "sanity/corner": "enabled",
+      "sanity/focusRing": "enabled",
+      "sanity/font": "enabled",
+      "sanity/input": "enabled",
+      "sanity/radius": "enabled",
+      "sanity/selectable": "enabled",
+      "sanity/shadow": "enabled",
+      "sanity/space": "enabled"
+    }
+  },
+  {
+    "group": "Color scheme",
+    "name": "light",
+    "selectedTokenSets": {
+      "sanity/_colorScheme.light": "enabled"
+    }
+  },
+  {
+    "group": "Color scheme",
+    "name": "dark",
+    "selectedTokenSets": {
+      "sanity/_colorScheme.dark": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "default",
+    "selectedTokenSets": {
+      "sanity/_cardTone.default": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "neutral",
+    "selectedTokenSets": {
+      "sanity/_cardTone.neutral": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "primary",
+    "selectedTokenSets": {
+      "sanity/_cardTone.primary": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "suggest",
+    "selectedTokenSets": {
+      "sanity/_cardTone.suggest": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "positive",
+    "selectedTokenSets": {
+      "sanity/_cardTone.positive": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "caution",
+    "selectedTokenSets": {
+      "sanity/_cardTone.caution": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "critical",
+    "selectedTokenSets": {
+      "sanity/_cardTone.critical": "enabled"
+    }
+  },
+  {
+    "group": "Card tone",
+    "name": "transparent",
+    "selectedTokenSets": {
+      "sanity/_cardTone.transparent": "enabled"
+    }
+  },
+  {
+    "group": "Button mode",
+    "name": "default",
+    "selectedTokenSets": {
+      "sanity/_buttonMode.default": "enabled"
+    }
+  },
+  {
+    "group": "Button mode",
+    "name": "ghost",
+    "selectedTokenSets": {
+      "sanity/_buttonMode.ghost": "enabled"
+    }
+  },
+  {
+    "group": "Button mode",
+    "name": "bleed",
+    "selectedTokenSets": {
+      "sanity/_buttonMode.bleed": "enabled"
+    }
+  }
+]

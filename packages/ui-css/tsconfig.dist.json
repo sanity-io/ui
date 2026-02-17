@@ -1,0 +1,15 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "include": ["./exports", "./src", "./vanilla-extract"],
+  "exclude": ["./src/**/*.test.ts", "./src/**/__tests__/**"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+    "composite": true,
+    "noCheck": true,
+    "paths": {
+      "@sanity/ui-css": ["./exports/index.ts"],
+      "@sanity/ui-css/*": ["./exports/*"]
+    }
+  }
+}

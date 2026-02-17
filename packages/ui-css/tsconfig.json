@@ -1,0 +1,23 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "include": [
+    "./exports",
+    "./package.config.ts",
+    "./src",
+    "./vanilla-extract",
+    "../ui-tokens/exports",
+    "../ui-tokens/src"
+  ],
+  "compilerOptions": {
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
+    "rootDir": "..",
+    "outDir": "./dist",
+    "noEmit": true,
+    "paths": {
+      "@sanity/ui-css": ["./exports/index.ts"],
+      "@sanity/ui-css/*": ["./exports/*"],
+      "@sanity/ui-tokens": ["../ui-tokens/exports/index.ts"],
+      "@sanity/ui-tokens/*": ["../ui-tokens/exports/*"]
+    }
+  }
+}

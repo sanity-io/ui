@@ -1,0 +1,33 @@
+{
+  "tokenSetOrder": [
+    "sanity/_palette",
+    "sanity/_core",
+    "sanity/_colorScheme.light",
+    "sanity/_colorScheme.dark",
+    "sanity/_cardTone.default",
+    "sanity/_cardTone.neutral",
+    "sanity/_cardTone.primary",
+    "sanity/_cardTone.suggest",
+    "sanity/_cardTone.positive",
+    "sanity/_cardTone.caution",
+    "sanity/_cardTone.critical",
+    "sanity/_cardTone.transparent",
+    "sanity/_buttonMode.default",
+    "sanity/_buttonMode.ghost",
+    "sanity/_buttonMode.bleed",
+    "sanity/avatar",
+    "sanity/border",
+    "sanity/button",
+    "sanity/card",
+    "sanity/color",
+    "sanity/container",
+    "sanity/corner",
+    "sanity/focusRing",
+    "sanity/font",
+    "sanity/input",
+    "sanity/radius",
+    "sanity/selectable",
+    "sanity/shadow",
+    "sanity/space"
+  ]
+}
