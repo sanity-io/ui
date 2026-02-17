@@ -21,7 +21,6 @@ export default function PropsStory(): React.JSX.Element {
         paddingY={paddingY}
         // @ts-expect-error - TODO: fix this
         tone={tone}
-        // @ts-expect-error - TODO: fix this
         onClick={useAction('onClick')}
       >
         {textProp}

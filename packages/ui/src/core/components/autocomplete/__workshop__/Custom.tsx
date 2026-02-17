@@ -33,10 +33,10 @@ export default function CustomStory(): React.JSX.Element {
         as="a"
         data-qa={`option-${option.value}`}
         href="#"
+        // @ts-expect-error - TODO: fix this
         padding={padding}
         // @ts-expect-error - TODO: fix this
         radius={Math.max((radius ?? 0) - 1, 0) as Radius}
-        // @ts-expect-error - TODO: fix this
         onClick={(event) => event.preventDefault()}
       >
         <Text

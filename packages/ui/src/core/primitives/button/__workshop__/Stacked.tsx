@@ -45,6 +45,7 @@ export default function StackedStory(): React.JSX.Element {
                   disabled={disabled}
                   // @ts-expect-error - TODO: fix this
                   fontSize={fontSize}
+                  // @ts-expect-error - TODO: fix this
                   gap={gap}
                   // @ts-expect-error - TODO: fix this
                   icon={icon && icons[icon]}
@@ -56,11 +57,10 @@ export default function StackedStory(): React.JSX.Element {
                   mode={mode}
                   // @ts-expect-error - TODO: fix this
                   paddingX={paddingX}
-                  paddingY={paddingY}
                   // @ts-expect-error - TODO: fix this
+                  paddingY={paddingY}
                   selected={selected}
                   text={title}
-                  // @ts-expect-error - TODO: fix this
                   tone={tone}
                   onClick={onClick}
                 />

@@ -1,4 +1,4 @@
-import {icons} from '@sanity/icons'
+import {icons, type IconSymbol} from '@sanity/icons'
 import {Box, Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {type PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
@@ -85,20 +85,17 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       border={border}
       customValidity={customValidity}
       disabled={disabled}
+      // @ts-expect-error - TODO: fix this
       fontSize={fontSize}
       // @ts-expect-error - TODO: fix this
       gap={gap}
-      icon={icon && icons[icon]}
-      iconRight={iconRight && icons[iconRight]}
+      icon={icon && icons[icon as IconSymbol]}
+      iconRight={iconRight && icons[iconRight as IconSymbol]}
       id="text-input-example"
-
-      // @ts-expect-error - TODO: fix this
       name="test"
       // @ts-expect-error - TODO: fix this
       padding={padding}
-      // @ts-expect-error - TODO: fix this
       placeholder={placeholder}
-      // @ts-expect-error - TODO: fix this
       prefix={
         prefix && (
           <Box
@@ -114,8 +111,8 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
           </Box>
         )
       }
-      radius={radius}
       // @ts-expect-error - TODO: fix this
+      radius={radius}
       readOnly={readOnly}
       suffix={
         suffix && (
