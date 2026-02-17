@@ -1,0 +1,16 @@
+{
+  "name": "@repo/typescript-config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base.json": "./base.tsconfig.json",
+    "./node.json": "./node.tsconfig.json"
+  },
+  "files": [
+    "base.tsconfig.json",
+    "node.tsconfig.json"
+  ],
+  "dependencies": {
+    "@sanity/tsconfig": "^2.1.0"
+  }
+}

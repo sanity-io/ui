@@ -65,6 +65,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/@repo/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/@repo/typescript-config
       '@sanity/color':
         specifier: ^3.0.6
         version: 3.0.6
@@ -102,6 +105,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/@repo/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/@repo/typescript-config
       '@storybook/addon-a11y':
         specifier: ^10.1.4
         version: 10.2.11(storybook@10.2.11(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
@@ -181,6 +187,12 @@ importers:
         specifier: ^8.56.0
         version: 8.56.1(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
 
+  packages/@repo/typescript-config:
+    dependencies:
+      '@sanity/tsconfig':
+        specifier: ^2.1.0
+        version: 2.1.0
+
   packages/ui:
     dependencies:
       '@floating-ui/react-dom':
@@ -223,6 +235,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../@repo/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../@repo/typescript-config
       '@sanity/browserslist-config':
         specifier: ^1.0.5
         version: 1.0.5
@@ -13534,9 +13549,9 @@ snapshots:
     optionalDependencies:
       ajv: 8.18.0
 
-  ajv-formats@2.1.1(ajv@8.17.1):
+  ajv-formats@2.1.1(ajv@8.18.0):
     optionalDependencies:
-      ajv: 8.17.1
+      ajv: 8.18.0
 
   ajv-formats@3.0.1(ajv@8.13.0):
     optionalDependencies:
@@ -13546,9 +13561,9 @@ snapshots:
     optionalDependencies:
       ajv: 8.18.0
 
-  ajv-keywords@5.1.0(ajv@8.17.1):
+  ajv-keywords@5.1.0(ajv@8.18.0):
     dependencies:
-      ajv: 8.17.1
+      ajv: 8.18.0
       fast-deep-equal: 3.1.3
 
   ajv@6.12.6:
@@ -18107,9 +18122,9 @@ snapshots:
   schema-utils@4.3.3:
     dependencies:
       '@types/json-schema': 7.0.15
-      ajv: 8.17.1
-      ajv-formats: 2.1.1(ajv@8.17.1)
-      ajv-keywords: 5.1.0(ajv@8.17.1)
+      ajv: 8.18.0
+      ajv-formats: 2.1.1(ajv@8.18.0)
+      ajv-keywords: 5.1.0(ajv@8.18.0)
 
   secure-compare@3.0.1: {}
 

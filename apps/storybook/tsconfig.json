@@ -1,28 +1,29 @@
 {
-  "include": ["./.storybook/**/*", "./stories"],
+  "extends": "@repo/typescript-config/base.json",
+  "include": [
+    "../../packages/ui/exports",
+    "../../packages/ui/src",
+    "./.storybook/**/*",
+    "./stories"
+  ],
+  "exclude": [
+    "../../packages/ui/src/**/__fixtures__",
+    "../../packages/ui/src/**/__mocks__",
+    "../../packages/ui/src/**/__workshop__",
+    "../../packages/ui/src/**/*.test.ts",
+    "../../packages/ui/src/**/*.test.tsx"
+  ],
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "types": ["vite/client"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "react-jsx",
+    "rootDir": "../..",
+    "outDir": "./dist",
 
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "target": "ES2020",
+    "types": ["vite/client"],
+
+    "jsx": "react-jsx",
 
     "paths": {
       "@sanity/ui": ["../../packages/ui/exports/index.ts"],

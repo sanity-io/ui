@@ -1,15 +1,14 @@
 {
-  "extends": "@sanity/pkg-utils/tsconfig/strictest.json",
+  "extends": "@sanity/tsconfig/strictest",
+  "display": "Base",
   "compilerOptions": {
     "target": "ESNext",
     "module": "Preserve",
     "jsx": "preserve",
 
     "allowImportingTsExtensions": false,
-    "allowJs": false,
-    "checkJs": false,
-    "declaration": true,
     "exactOptionalPropertyTypes": false,
+    "noEmit": false,
     "noUncheckedIndexedAccess": false
   }
 }
