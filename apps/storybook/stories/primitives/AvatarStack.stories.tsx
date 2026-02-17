@@ -7,11 +7,11 @@ import {AVATAR_SIZE_CONTROLS} from '../controls'
 const meta: Meta<typeof AvatarStack> = {
   args: {
     children: [
-      <AvatarCounter count={2} key="avatar-1" />,
-      <Avatar color="magenta" initials="uq" key="avatar-2" />,
-      <Avatar color="magenta" initials="uq" key="avatar-3" />,
-      <Avatar color="purple" key="avatar-4" src={AVATAR_SRC} />,
-      <Avatar color="blue" key="avatar-5" src={AVATAR_SRC} />,
+      <AvatarCounter key="avatar-1" count={2} />,
+      <Avatar key="avatar-2" color="magenta" initials="uq" />,
+      <Avatar key="avatar-3" color="magenta" initials="uq" />,
+      <Avatar key="avatar-4" color="purple" src={AVATAR_SRC} />,
+      <Avatar key="avatar-5" color="blue" src={AVATAR_SRC} />,
     ],
   },
   argTypes: {

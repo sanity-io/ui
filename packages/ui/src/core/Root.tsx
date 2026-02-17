@@ -60,7 +60,7 @@ export function Root<E extends RootElementType = typeof DEFAULT_ROOT_ELEMENT>(
       tone={tone}
     >
       {children}
-      <div data-portal="" ref={setPortalElement} />
+      <div ref={setPortalElement} data-portal="" />
     </RootProvider>
   )
 
@@ -73,6 +73,7 @@ export function Root<E extends RootElementType = typeof DEFAULT_ROOT_ELEMENT>(
       as={as}
       data-ui="Root"
       {...rest}
+      ref={handleRef}
       className={root({
         className,
         height,
@@ -80,7 +81,6 @@ export function Root<E extends RootElementType = typeof DEFAULT_ROOT_ELEMENT>(
         tone,
       })}
       overflow={overflow}
-      ref={handleRef}
     >
       {node}
     </Box>

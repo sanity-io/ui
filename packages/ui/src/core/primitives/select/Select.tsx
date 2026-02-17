@@ -58,11 +58,11 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
 
   return (
     <span
-      data-ui="Select"
       className={select({border, fontSize, flex, gap, padding, radius, width})}
       data-icon-right=""
+      data-ui="Select"
     >
-      <Element {...rest} className={_inputElement()} disabled={disabled || readOnly} ref={ref}>
+      <Element {...rest} ref={ref} className={_inputElement()} disabled={disabled || readOnly}>
         {children}
       </Element>
       <span className={selectPresentation()}>

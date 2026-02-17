@@ -17,7 +17,7 @@ export default function DisabledButtonStory(): React.JSX.Element {
     <Card padding={5}>
       <Container width={2}>
         <Stack gap={4}>
-          <Grid gridTemplateColumns={COLUMNS} gap={GAP}>
+          <Grid gap={GAP} gridTemplateColumns={COLUMNS}>
             <Text size={1} weight="semibold">
               Default
             </Text>
@@ -30,7 +30,7 @@ export default function DisabledButtonStory(): React.JSX.Element {
           </Grid>
 
           <Stack gap={2}>
-            <Grid gridTemplateColumns={COLUMNS} gap={GAP}>
+            <Grid gap={GAP} gridTemplateColumns={COLUMNS}>
               <Stack gap={2}>
                 <Button {...DEFAULT_PROPS} mode="default" muted={muted} text="Enabled" />
                 <Button {...DEFAULT_PROPS} disabled mode="default" muted={muted} text="Disabled" />
@@ -43,7 +43,7 @@ export default function DisabledButtonStory(): React.JSX.Element {
 
               <Stack gap={2}>
                 <Button {...DEFAULT_PROPS} mode="bleed" muted={muted} text="Enabled" />
-                <Button {...DEFAULT_PROPS} mode="bleed" disabled muted={muted} text="Disabled" />
+                <Button {...DEFAULT_PROPS} disabled mode="bleed" muted={muted} text="Disabled" />
               </Stack>
             </Grid>
           </Stack>

@@ -61,7 +61,7 @@ function ColorBox({node}: {node: {key: string; value: ColorNode}}) {
 
   if (typeof value === 'string') {
     return (
-      <Box radius={2} padding={3} style={{backgroundColor: value}}>
+      <Box padding={3} radius={2} style={{backgroundColor: value}}>
         <Code size={1}>{key}</Code>
       </Box>
     )
@@ -69,7 +69,7 @@ function ColorBox({node}: {node: {key: string; value: ColorNode}}) {
 
   return (
     <Box overflow="hidden" radius={3} shadow={1}>
-      <Card as="button" onClick={() => setOpen(!open)} padding={3} tone="inherit">
+      <Card as="button" padding={3} tone="inherit" onClick={() => setOpen(!open)}>
         <Code size={1}>{`${key} +`}</Code>
       </Card>
 

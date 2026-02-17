@@ -151,10 +151,10 @@ export const Schemes: Story = {
         {CARD_TONES.map((t) => (
           <Card
             {...props}
+            key={t}
             display="flex"
             flexDirection="column"
             gap={2}
-            key={t}
             scheme="light"
             tone={t}
           >
@@ -170,10 +170,10 @@ export const Schemes: Story = {
         {CARD_TONES.map((t) => (
           <Card
             {...props}
+            key={t}
             display="flex"
             flexDirection="column"
             gap={2}
-            key={t}
             scheme="dark"
             tone={t}
           >
@@ -262,9 +262,9 @@ export const MultipleStyles: Story = {
             {...props}
             key={row + column}
             as={column !== 'card' ? 'button' : undefined}
-            tone={row}
             disabled={column === 'disabled button'}
             selected={column === 'selected button'}
+            tone={row}
           >
             <Text>{column !== 'card' ? 'As <button>' : 'Card'}</Text>
           </Card>
@@ -279,9 +279,9 @@ export const MultipleStyles: Story = {
             {...props}
             key={row + column}
             as={column !== 'card' ? 'a' : undefined}
-            tone={row}
             disabled={column === 'disabled link'}
             selected={column === 'selected link'}
+            tone={row}
           >
             <Text>{column !== 'card' ? 'As <a>' : 'Card'}</Text>
           </Card>
@@ -301,12 +301,12 @@ export const MatrixAsButton: Story = {
               <Text align="center" size={1} weight="semibold">
                 Enabled
               </Text>
-              <Stack marginTop={3} gap={2}>
+              <Stack gap={2} marginTop={3}>
                 {CARD_TONES.map((tone) => (
                   <Card
+                    key={tone}
                     __unstable_focusRing
                     as="button"
-                    key={tone}
                     padding={4}
                     style={{textAlign: 'center'}}
                     tone={tone}
@@ -325,13 +325,13 @@ export const MatrixAsButton: Story = {
               <Text align="center" size={1} weight="semibold">
                 Disabled
               </Text>
-              <Stack marginTop={3} gap={2}>
+              <Stack gap={2} marginTop={3}>
                 {CARD_TONES.map((tone) => (
                   <Card
+                    key={tone}
                     __unstable_focusRing
                     as="button"
                     disabled
-                    key={tone}
                     padding={4}
                     style={{textAlign: 'center'}}
                     tone={tone}
@@ -350,9 +350,9 @@ export const MatrixAsButton: Story = {
               <Text align="center" size={1} weight="semibold">
                 Selected
               </Text>
-              <Stack marginTop={3} gap={2}>
+              <Stack gap={2} marginTop={3}>
                 {CARD_TONES.map((tone) => (
-                  <div aria-selected key={tone}>
+                  <div key={tone} aria-selected>
                     <Card
                       __unstable_focusRing
                       as="button"
@@ -381,29 +381,29 @@ export const NestedSchemeChanges: Story = {
   render: () => {
     return (
       <Flex gap={4} wrap={'wrap'}>
-        <Card scheme="light" padding={4} margin={4} shadow={1}>
+        <Card margin={4} padding={4} scheme="light" shadow={1}>
           <Text>Light default</Text>
-          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+          <Card margin={4} padding={4} scheme="dark" shadow={1} tone="inherit">
             <Text>Dark inherit</Text>
-            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+            <Card margin={4} padding={4} scheme="light" shadow={1} tone="inherit">
               <Text>Light inherit</Text>
             </Card>
           </Card>
         </Card>
-        <Card scheme="light" tone="caution" padding={4} margin={4} shadow={1}>
+        <Card margin={4} padding={4} scheme="light" shadow={1} tone="caution">
           <Text>Light caution</Text>
-          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+          <Card margin={4} padding={4} scheme="dark" shadow={1} tone="inherit">
             <Text>Dark inherit</Text>
-            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+            <Card margin={4} padding={4} scheme="light" shadow={1} tone="inherit">
               <Text>Light inherit</Text>
             </Card>
           </Card>
         </Card>
-        <Card scheme="light" tone="primary" padding={4} margin={4} shadow={1}>
+        <Card margin={4} padding={4} scheme="light" shadow={1} tone="primary">
           <Text>Primary caution</Text>
-          <Card tone="inherit" scheme="dark" padding={4} margin={4} shadow={1}>
+          <Card margin={4} padding={4} scheme="dark" shadow={1} tone="inherit">
             <Text>Dark inherit</Text>
-            <Card tone="inherit" scheme="light" padding={4} margin={4} shadow={1}>
+            <Card margin={4} padding={4} scheme="light" shadow={1} tone="inherit">
               <Text>Light inherit</Text>
             </Card>
           </Card>

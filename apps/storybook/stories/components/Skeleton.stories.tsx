@@ -58,40 +58,40 @@ export const CardSkeleton: Story = {
         <Container width={1}>
           <Stack gap={4}>
             {[1, 2, 3].map((item) => (
-              <Card key={item} padding={2} radius={2} border>
+              <Card key={item} border padding={2} radius={2}>
                 <Flex align="center">
-                  <Grid gap={2} columns={2} marginRight={3}>
-                    <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
-                    <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
-                    <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
-                    <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
+                  <Grid columns={2} gap={2} marginRight={3}>
+                    <Skeleton radius={2} style={{width: 40, height: 40}} {...props} />
+                    <Skeleton radius={2} style={{width: 40, height: 40}} {...props} />
+                    <Skeleton radius={2} style={{width: 40, height: 40}} {...props} />
+                    <Skeleton radius={2} style={{width: 40, height: 40}} {...props} />
                   </Grid>
-                  <Stack gap={2} flex={1}>
+                  <Stack flex={1} gap={2}>
                     <HeadingSkeleton
-                      style={{width: '100%'}}
                       radius={1}
+                      style={{width: '100%'}}
                       {...(props as HeadingSkeletonProps)}
                     />
                     <TextSkeleton
-                      style={{width: '100%'}}
                       radius={1}
+                      style={{width: '100%'}}
                       {...(props as TextSkeletonProps)}
                     />
                     <LabelSkeleton
-                      style={{width: '100%'}}
                       radius={1}
+                      style={{width: '100%'}}
                       {...(props as LabelSkeletonProps)}
                     />
                     <CodeSkeleton
-                      style={{width: '100%'}}
                       radius={1}
+                      style={{width: '100%'}}
                       {...(props as CodeSkeletonProps)}
                     />
                   </Stack>
                 </Flex>
                 <Flex marginTop={2}>
-                  <Skeleton style={{height: 50}} flex={1} marginRight={1} radius={2} {...props} />
-                  <Skeleton style={{height: 50}} flex={1} marginLeft={1} radius={2} {...props} />
+                  <Skeleton flex={1} marginRight={1} radius={2} style={{height: 50}} {...props} />
+                  <Skeleton flex={1} marginLeft={1} radius={2} style={{height: 50}} {...props} />
                 </Flex>
               </Card>
             ))}

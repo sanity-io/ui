@@ -131,21 +131,21 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     <Selectable
       data-ui="MenuItem"
       {...rest}
-      as={as}
-      radius={radius}
-      disabled={disabled}
-      onClick={handleClick}
-      onMouseEnter={onItemMouseEnter}
-      onMouseLeave={onItemMouseLeave}
       ref={setRef}
+      as={as}
+      disabled={disabled}
+      radius={radius}
       role={role}
       selected={active}
       tabIndex={-1}
       tone={tone}
       type={as === 'button' ? 'button' : undefined}
+      onClick={handleClick}
+      onMouseEnter={onItemMouseEnter}
+      onMouseLeave={onItemMouseLeave}
     >
       {(IconComponent || text || IconRightComponent) && (
-        <Flex as="span" gap={gap} gapX={gapX} gapY={gapY} align="center" {...paddingProps}>
+        <Flex align="center" as="span" gap={gap} gapX={gapX} gapY={gapY} {...paddingProps}>
           {IconComponent && (
             <Text muted size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}

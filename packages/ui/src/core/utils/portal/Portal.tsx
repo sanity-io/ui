@@ -31,7 +31,7 @@ export function Portal(props: PortalProps): ReactPortal | null {
   assertCardContext(card)
 
   return createPortal(
-    <CardProvider tone="transparent" scheme={card.scheme}>
+    <CardProvider scheme={card.scheme} tone="transparent">
       {children}
     </CardProvider>,
     portalElement,

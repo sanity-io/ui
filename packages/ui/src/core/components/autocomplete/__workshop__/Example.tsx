@@ -64,12 +64,12 @@ export default function ExampleStory(): React.JSX.Element {
             </Text>
             <Wrapper>
               <Autocomplete
+                ref={ref}
                 border={border}
                 customValidity={customValidity}
                 disabled={disabled}
                 // @ts-expect-error - TODO: fix this
                 fontSize={fontSize}
-                onChange={handleChange}
                 id="default"
                 openButton={openButton}
                 options={options}
@@ -79,8 +79,8 @@ export default function ExampleStory(): React.JSX.Element {
                 // @ts-expect-error - TODO: fix this
                 radius={radius}
                 readOnly={readOnly}
-                ref={ref}
                 value={value}
+                onChange={handleChange}
               />
             </Wrapper>
           </Stack>

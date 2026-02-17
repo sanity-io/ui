@@ -6,7 +6,7 @@ export default function CustomStory(): React.JSX.Element {
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Stack gap={2}>
         {BUTTON_MODES.map((mode) => (
-          <Grid gridTemplateColumns={7} gap={1} key={mode}>
+          <Grid key={mode} gap={1} gridTemplateColumns={7}>
             {ELEMENT_TONES.map((tone) => (
               <Button key={tone} mode={mode} padding={3} tone={tone}>
                 <Stack gap={2}>

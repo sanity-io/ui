@@ -78,7 +78,7 @@ export const InheritedTones: Story = {
       <Stack gap={3}>
         {rowBuilder({
           renderItem: ({value}) => (
-            <Card border key={value} padding={4} tone={value}>
+            <Card key={value} border padding={4} tone={value}>
               <Flex align="center">
                 <Badge {...props}>{value}</Badge>
               </Flex>

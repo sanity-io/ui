@@ -165,13 +165,13 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
   const childMenu = (
     <Menu
       {...menuProps}
+      registerElement={registerElement}
+      shouldFocus={shouldFocus}
       onClickOutside={onClickOutside}
       onEscape={onEscape}
       onItemClick={handleChildItemClick}
       onKeyDown={handleMenuKeyDown}
       onMouseEnter={handleMenuMouseEnter}
-      registerElement={registerElement}
-      shouldFocus={shouldFocus}
     >
       {children}
     </Menu>
@@ -200,19 +200,19 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
         data-ui="MenuGroup"
         // forwardedAs={as}
         {...rest}
+        ref={setRootElement}
         aria-pressed={as === 'button' ? withinMenu : undefined}
         as={as}
         // data-pressed={as !== 'button' ? withinMenu : undefined}
         // data-selected={!withinMenu && active ? '' : undefined}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        onMouseEnter={handleMouseEnter}
         radius={radius}
-        ref={setRootElement}
         selected={withinMenu}
         tabIndex={-1}
         tone={tone}
         type={as === 'button' ? 'button' : undefined}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={handleMouseEnter}
       >
         <Flex gap={gap} padding={padding}>
           {IconComponent && (

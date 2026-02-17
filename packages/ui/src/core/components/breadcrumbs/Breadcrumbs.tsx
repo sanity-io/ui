@@ -133,27 +133,27 @@ function useItems({
     return [
       ...rawItems.slice(0, beforeLength - 1),
       <Popover
+        key="button"
+        ref={popoverElementRef}
         constrainSize
         content={
           <Stack as="ol" gap={gapY} overflow="auto">
             {rawItems.slice(beforeLength - 1, len - afterLength)}
           </Stack>
         }
-        key="button"
         open={open}
         padding={2}
         placement="top"
         portal
-        ref={popoverElementRef}
       >
         <Button
           mode="bleed"
           padding={0}
           text="…"
           {...expandButtonProps}
-          onClick={open ? collapse : expand}
           ref={expandElementRef}
           selected={open}
+          onClick={open ? collapse : expand}
         />
       </Popover>,
       ...rawItems.slice(len - afterLength),

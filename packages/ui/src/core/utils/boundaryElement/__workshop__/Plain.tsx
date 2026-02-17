@@ -5,7 +5,7 @@ export default function PlainStory(): React.JSX.Element {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
   return (
-    <Card padding={7} ref={setBoundaryElement}>
+    <Card ref={setBoundaryElement} padding={7}>
       <BoundaryElementProvider element={boundaryElement}>
         <Tooltip
           content={<Text size={1}>Test aldsakm alkdmal dmalskdm alkdmlakds</Text>}

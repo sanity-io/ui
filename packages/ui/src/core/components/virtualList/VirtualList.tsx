@@ -165,7 +165,7 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
   const wrapperStyle: CSSProperties = useMemo(() => ({height}), [height])
 
   return (
-    <Box data-ui="VirtualList" {...rest} as={as} position="relative" ref={ref}>
+    <Box data-ui="VirtualList" {...rest} ref={ref} as={as} position="relative">
       <div ref={wrapperRef} style={wrapperStyle}>
         {children}
       </div>
@@ -200,13 +200,13 @@ function useChildren({
     return [
       <>
         <Box
+          key={0}
           ref={(el) => {
             if (el) setItemHeight(el.offsetHeight)
           }}
-          insetTop={0}
           insetLeft={0}
           insetRight={0}
-          key={0}
+          insetTop={0}
           position="absolute"
         >
           {renderItem(items[0])}
@@ -228,9 +228,9 @@ function useChildren({
 
     return (
       <Box
+        key={key}
         insetLeft={0}
         insetRight={0}
-        key={key}
         position="absolute"
         style={{top: itemIndex * (itemHeight + gapValue)}}
       >

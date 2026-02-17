@@ -75,30 +75,30 @@ export function TooltipLayer(props: TooltipLayerProps): React.JSX.Element {
     <Layer
       data-ui="Tooltip__layer"
       {...rest}
+      animate={animate ? ['visible', 'scaleIn'] : undefined}
       as={motion.div}
       data-animate={animate ? '' : undefined}
       data-placement={placement}
+      exit={animate ? ['hidden', 'scaleOut'] : undefined}
+      initial={animate ? ['hidden', 'initial'] : undefined}
       padding={padding}
       radius={radius}
       scheme={scheme}
       shadow={shadow}
       style={rootStyle}
-      variants={POPOVER_MOTION_PROPS.card}
-      transition={POPOVER_MOTION_PROPS.transition}
-      initial={animate ? ['hidden', 'initial'] : undefined}
-      animate={animate ? ['visible', 'scaleIn'] : undefined}
-      exit={animate ? ['hidden', 'scaleOut'] : undefined}
       tone={tone}
+      transition={POPOVER_MOTION_PROPS.transition}
+      variants={POPOVER_MOTION_PROPS.card}
     >
       {children}
 
       {arrow && (
         <Arrow
           ref={arrowRef}
-          style={arrowStyle}
-          width={DEFAULT_TOOLTIP_ARROW_WIDTH}
           height={DEFAULT_TOOLTIP_ARROW_HEIGHT}
           radius={DEFAULT_TOOLTIP_ARROW_RADIUS}
+          style={arrowStyle}
+          width={DEFAULT_TOOLTIP_ARROW_WIDTH}
         />
       )}
     </Layer>

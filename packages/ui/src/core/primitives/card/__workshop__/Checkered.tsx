@@ -7,9 +7,9 @@ export default function CheckeredStory(): React.JSX.Element {
       <Stack gap={1}>
         {CARD_TONES.map((tone) => (
           <Card
+            key={tone}
             __unstable_checkered
             border
-            key={tone}
             padding={3}
             sizing="border"
             style={{width: 120, height: 60}}

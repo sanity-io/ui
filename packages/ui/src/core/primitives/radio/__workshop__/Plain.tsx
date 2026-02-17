@@ -18,10 +18,10 @@ export default function PlainStory(): React.JSX.Element {
         disabled={disabled}
         id={id}
         name={name}
+        readOnly={readOnly}
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}
-        readOnly={readOnly}
       />
     </Flex>
   )

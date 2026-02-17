@@ -53,8 +53,8 @@ export const Default: Story = {
               <MenuDivider />
               <MenuGroup
                 id="menu-item-2"
-                text="Menu item with submenu"
                 popover={{placement: 'right'}}
+                text="Menu item with submenu"
               >
                 <MenuItem id="menu-item-2-1" text="Menu item" />
                 <MenuItem id="menu-item-2-2" text="Menu item" />
@@ -82,7 +82,7 @@ export const MenuItemsVariants: Story = {
 
       return (
         <MenuItem disabled={disabled} id="menu-item-1" tone={tone}>
-          <Flex as="span" gap={3} align="center">
+          <Flex align="center" as="span" gap={3}>
             {(text || subText) && (
               <Stack flex={1} gap={2}>
                 {text && (
@@ -91,7 +91,7 @@ export const MenuItemsVariants: Story = {
                   </Text>
                 )}
                 {subText && (
-                  <Text size={fontSize} textOverflow="ellipsis" weight={'regular'} muted>
+                  <Text muted size={fontSize} textOverflow="ellipsis" weight={'regular'}>
                     {subText}
                   </Text>
                 )}
@@ -127,29 +127,29 @@ export const MenuItemsVariants: Story = {
             />
             <MenuItem
               disabled={props.disabled}
+              hotkeys={['Cmd', 'Alt', 'D']}
               icon={CircleIcon}
               id="menu-item-4"
               text="With hotkeys"
-              hotkeys={['Cmd', 'Alt', 'D']}
             />
             <LargeMenuItem
               disabled={props.disabled}
               id="menu-item-5"
-              text="Menu item title"
               subText="Menu item subtitle"
+              text="Menu item title"
             />
             <LargeMenuItem
+              badgeText="Badge"
               disabled={props.disabled}
               id="menu-item-6"
-              text="Menu item title"
               subText="Menu item subtitle"
-              badgeText="Badge"
+              text="Menu item title"
             />
             <MenuGroup
-              id="menu-group"
-              text="Menu item with submenu"
-              popover={{placement: 'right'}}
               disabled={props.disabled}
+              id="menu-group"
+              popover={{placement: 'right'}}
+              text="Menu item with submenu"
             >
               <MenuItem id="menu-group-1" text="Menu item" />
             </MenuGroup>
@@ -157,53 +157,53 @@ export const MenuItemsVariants: Story = {
             <MenuItem
               disabled={props.disabled}
               id="menu-item-1-critical"
-              tone="critical"
               text="Menu item title"
+              tone="critical"
             />
             <MenuItem
               disabled={props.disabled}
               icon={CircleIcon}
               id="menu-item-2-critical"
-              tone="critical"
               text="With icon"
+              tone="critical"
             />
             <MenuItem
               disabled={props.disabled}
               icon={CircleIcon}
               iconRight={CircleIcon}
               id="menu-item-3-critical"
-              tone="critical"
               text="With icon and right icon"
+              tone="critical"
             />
             <MenuItem
               disabled={props.disabled}
+              hotkeys={['Cmd', 'Alt', 'D']}
               icon={CircleIcon}
               id="menu-item-4-critical"
-              tone="critical"
               text="With hotkeys"
-              hotkeys={['Cmd', 'Alt', 'D']}
+              tone="critical"
             />
             <LargeMenuItem
               disabled={props.disabled}
               id="menu-item-5-critical"
-              tone="critical"
-              text="Menu item title"
               subText="Menu item subtitle"
+              text="Menu item title"
+              tone="critical"
             />
             <LargeMenuItem
+              badgeText="Badge"
               disabled={props.disabled}
               id="menu-item-6-critical"
-              tone="critical"
-              text="Menu item title"
               subText="Menu item subtitle"
-              badgeText="Badge"
+              text="Menu item title"
+              tone="critical"
             />
             <MenuGroup
-              tone="critical"
               disabled={props.disabled}
               id="menu-group"
-              text="Menu item with submenu"
               popover={{placement: 'right'}}
+              text="Menu item with submenu"
+              tone="critical"
             >
               <MenuItem id="menu-group-1" text="Menu item" />
             </MenuGroup>
@@ -233,24 +233,24 @@ export const WithSubMenu: Story = {
               <MenuItem id="menu-item-1" text="Menu item" />
               <MenuGroup
                 id="menu-item-2"
-                text="Menu item with submenu"
                 popover={{placement: 'right'}}
+                text="Menu item with submenu"
               >
                 <MenuItem id="menu-item-2-1" text="Menu item" />
                 <MenuGroup
                   id="menu-item-2-2"
-                  text="Menu item with submenu"
                   popover={{placement: 'right'}}
+                  text="Menu item with submenu"
                 >
                   <MenuItem id="menu-item-2-2-1" text="Menu item" />
                   <MenuItem id="menu-item-2-2-2" text="Menu item" />
                 </MenuGroup>
               </MenuGroup>
               <MenuGroup
-                id="menu-item-2"
-                text="Menu item with submenu"
                 disabled
+                id="menu-item-2"
                 popover={{placement: 'right'}}
+                text="Menu item with submenu"
               >
                 <MenuItem id="menu-item-2-1" text="Menu item" />
               </MenuGroup>

@@ -53,10 +53,10 @@ export const WithIcons: Story = {
   render: (props) => {
     return (
       <Tree {...props}>
-        <TreeItem icon={TrolleyIcon} key="Item1" text="Item 1" expanded>
-          <TreeItem text="Item 1.1" icon={IceCreamIcon} />
-          <TreeItem text="Item 1.2" icon={LemonIcon} />
-          <TreeItem text="Item 1.3" icon={BottleIcon} />
+        <TreeItem key="Item1" expanded icon={TrolleyIcon} text="Item 1">
+          <TreeItem icon={IceCreamIcon} text="Item 1.1" />
+          <TreeItem icon={LemonIcon} text="Item 1.2" />
+          <TreeItem icon={BottleIcon} text="Item 1.3" />
         </TreeItem>
       </Tree>
     )

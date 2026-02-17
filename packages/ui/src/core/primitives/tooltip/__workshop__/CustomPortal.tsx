@@ -44,9 +44,9 @@ export default function CustomPortalStory(): React.JSX.Element {
       <Flex align="center" height="fill" justify="center">
         <BoundaryElementProvider element={useBoundaryElement ? boundaryElement : null}>
           <Card
+            ref={setBoundaryElement}
             border
             padding={4}
-            ref={setBoundaryElement}
             style={{
               height: 'calc(100vh - 100px)',
               position: 'relative',
@@ -75,10 +75,10 @@ export default function CustomPortalStory(): React.JSX.Element {
       </Flex>
 
       <Card
+        ref={setPortal1Element}
         border
         margin={4}
         padding={4}
-        ref={setPortal1Element}
         style={{
           left: 0,
           position: 'absolute',

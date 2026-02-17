@@ -21,7 +21,7 @@ export default function ConstrainedHeightStory(): React.JSX.Element {
   return (
     <Card height="fill" tone="transparent">
       <Container height="fill" padding={3} sizing="border" width={1}>
-        <Card height="fill" ref={setBoundaryElement} radius={4} shadow={3} tone="default">
+        <Card ref={setBoundaryElement} height="fill" radius={4} shadow={3} tone="default">
           <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
             <Stack gap={5}>
               <BoundaryElementProvider element={boundaryElement}>
@@ -49,13 +49,13 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   const renderOption = useCallback((option: ExampleOption) => {
     return (
       <Card
+        key={option.value}
         as="a"
         data-qa={`option-${option.value}`}
         href="#"
-        key={option.value}
-        onClick={(event) => event.preventDefault()}
         padding={3}
         radius={2}
+        onClick={(event) => event.preventDefault()}
       >
         <Text textOverflow="ellipsis">{option.title}</Text>
       </Card>
@@ -90,6 +90,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
       return (
         <Popover
           {...rest}
+          ref={popoverRef}
           arrow={false}
           constrainSize
           matchReferenceWidth
@@ -98,7 +99,6 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           placement="bottom-start"
           portal
           radius={3}
-          ref={popoverRef}
           referenceElement={inputElement}
         />
       )
@@ -115,7 +115,6 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
         <Autocomplete
           filterOption={filterOption}
           id={id}
-          onChange={setValue}
           openButton
           options={options}
           placeholder="Search"
@@ -124,6 +123,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           renderPopover={renderPopover}
           renderValue={renderValue}
           value={value}
+          onChange={setValue}
         />
       </LayerProvider>
     </Stack>

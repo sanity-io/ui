@@ -31,7 +31,7 @@ function DialogButton(props: {level: number}) {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} ref={buttonRef} text={`Open dialog ${level + 1}`} />
+      <Button ref={buttonRef} text={`Open dialog ${level + 1}`} onClick={() => setOpen(true)} />
 
       {open && (
         <WrappedDialog
@@ -72,5 +72,5 @@ function WrappedDialog(props: DialogProps & {children?: ReactNode}) {
     }
   }, [isTopLayer, lastFocusedElement])
 
-  return <Dialog {...props} data-size={layer.size} onFocus={handleContentFocus} ref={dialogRef} />
+  return <Dialog {...props} ref={dialogRef} data-size={layer.size} onFocus={handleContentFocus} />
 }

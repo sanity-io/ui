@@ -101,7 +101,7 @@ export default function ConstrainedInBoundaryStory(): React.JSX.Element {
           <Card flex={1} padding={4}>
             <Text>Pane</Text>
           </Card>
-          <Card borderLeft flex={1} padding={2} ref={setBoundaryElement}>
+          <Card ref={setBoundaryElement} borderLeft flex={1} padding={2}>
             <Flex>
               <Box flex={1} padding={3}>
                 <Text>Pane</Text>

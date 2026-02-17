@@ -16,8 +16,8 @@ export default function StatesStory(): React.JSX.Element {
             <TextInput
               customValidity={invalid ? 'invalid' : undefined}
               id="enabled-example"
-              onChange={onChange}
               value="This is some text"
+              onChange={onChange}
             />
           </Stack>
 
@@ -29,8 +29,8 @@ export default function StatesStory(): React.JSX.Element {
               customValidity={invalid ? 'invalid' : undefined}
               disabled
               id="disabled-example"
-              onChange={onChange}
               value="This is some text"
+              onChange={onChange}
             />
           </Stack>
 
@@ -42,8 +42,8 @@ export default function StatesStory(): React.JSX.Element {
               customValidity={invalid ? 'invalid' : undefined}
               id="read-only-example"
               readOnly
-              onChange={onChange}
               value="This is some text"
+              onChange={onChange}
             />
           </Stack>
         </Stack>

@@ -1,6 +1,7 @@
 import {Root, usePrefersDark} from '@sanity/ui'
-import {useEffect, useRef, useState, startTransition} from 'react'
 import type {ColorScheme} from '@sanity/ui/theme'
+import {startTransition, useEffect, useRef, useState} from 'react'
+
 import {AppRouter} from './AppRouter'
 
 export function App() {

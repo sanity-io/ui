@@ -15,8 +15,8 @@ export default function ColoredTextStory(): React.JSX.Element {
       <Text
         align="center"
         size={4}
-        weight="bold"
         style={assignInlineVars({[vars.color.fg]: vars.color.avatar[color].bg})}
+        weight="bold"
       >
         {color}
       </Text>

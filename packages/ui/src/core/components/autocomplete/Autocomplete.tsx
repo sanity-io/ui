@@ -551,18 +551,18 @@ export function Autocomplete<
     return (
       <Box
         data-ui="AutoComplete__results"
-        onKeyDown={handleListBoxKeyDown}
         padding={1}
+        onKeyDown={handleListBoxKeyDown}
         {...listBox}
         tabIndex={-1}
       >
         <Stack
-          as="ul"
+          ref={listBoxElementRef}
           aria-multiselectable={false}
+          as="ul"
           data-ui="AutoComplete__resultsList"
           gap={1}
           id={listBoxId}
-          ref={listBoxElementRef}
           role="listbox"
         >
           {filteredOptions.map((option) => {
@@ -571,11 +571,11 @@ export function Autocomplete<
 
             return (
               <AutocompleteOption
-                id={`${id}-option-${option.value}`}
                 key={option.value}
-                onSelect={handleOptionSelect}
+                id={`${id}-option-${option.value}`}
                 selected={active}
                 value={option.value}
+                onSelect={handleOptionSelect}
               >
                 {cloneElement(renderOption(option), {
                   disabled: loading,
@@ -609,10 +609,10 @@ export function Autocomplete<
           content={content}
           hidden={!expanded}
           inputElement={inputElement}
+          renderPopover={renderPopover}
+          resultsPopoverElementRef={resultsPopoverElementRef}
           onMouseEnter={handlePopoverMouseEnter}
           onMouseLeave={handlePopoverMouseLeave}
-          resultsPopoverElementRef={resultsPopoverElementRef}
-          renderPopover={renderPopover}
         />
       )
     }
@@ -623,20 +623,20 @@ export function Autocomplete<
 
     return (
       <Popover
+        ref={resultsPopoverElementRef}
         arrow={false}
         constrainSize
         content={content}
         fallbackPlacements={AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS}
         matchReferenceWidth
-        onMouseEnter={handlePopoverMouseEnter}
-        onMouseLeave={handlePopoverMouseLeave}
         open={expanded}
         overflow="auto"
         placement={AUTOCOMPLETE_POPOVER_PLACEMENT}
         portal
         radius={3}
-        ref={resultsPopoverElementRef}
         referenceElement={inputElement}
+        onMouseEnter={handlePopoverMouseEnter}
+        onMouseLeave={handlePopoverMouseLeave}
         {...popover}
       />
     )
@@ -654,22 +654,23 @@ export function Autocomplete<
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
+      ref={rootElementRef}
       data-ui="Autocomplete"
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
       onKeyDown={handleRootKeyDown}
-      ref={rootElementRef}
     >
       <TextInput
         {...rest}
+        ref={setInputElement}
         aria-activedescendant={activeItemId}
         aria-autocomplete="list"
         aria-expanded={expanded}
         aria-owns={listBoxId}
+        as={as}
         autoCapitalize="off"
         autoComplete="off"
         autoCorrect="off"
-        as={as}
         border={border}
         clearButton={clearButton}
         customValidity={customValidity}
@@ -679,18 +680,17 @@ export function Autocomplete<
         iconRight={loading && AnimatedSpinnerIcon}
         id={id}
         inputMode="search"
-        onChange={handleInputChange}
-        onClear={handleClearButtonClick}
-        onFocus={handleInputFocus}
         padding={padding}
         prefix={prefix}
         radius={radius}
         readOnly={readOnly}
-        ref={setInputElement}
         role="combobox"
         spellCheck={false}
         suffix={suffix || openButtonNode}
         value={inputValue}
+        onChange={handleInputChange}
+        onClear={handleClearButtonClick}
+        onFocus={handleInputFocus}
       />
       {results}
     </div>

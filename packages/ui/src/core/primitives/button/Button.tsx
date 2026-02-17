@@ -1,13 +1,14 @@
-import type {
-  BoxStyleProps,
-  ButtonStyleProps,
-  DisplayStyleProps,
-  GapStyleProps,
-  PaddingStyleProps,
-  ResponsiveProp,
-  Width,
+import {
+  type BoxStyleProps,
+  button,
+  buttonLoadingBox,
+  type ButtonStyleProps,
+  type DisplayStyleProps,
+  type GapStyleProps,
+  type PaddingStyleProps,
+  type ResponsiveProp,
+  type Width,
 } from '@sanity/ui/css'
-import {button, buttonLoadingBox} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 import {isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
@@ -136,12 +137,12 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
           gapY={gapY}
           justifyContent={justify}
           padding={padding}
-          paddingX={paddingX}
-          paddingY={paddingY}
-          paddingTop={paddingTop}
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
+          paddingTop={paddingTop}
+          paddingX={paddingX}
+          paddingY={paddingY}
         >
           {IconComponent && (
             <Text as="span" flex="none" muted size={fontSize}>
@@ -179,12 +180,12 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
           as="span"
           flex={1}
           padding={padding}
-          paddingX={paddingX}
-          paddingY={paddingY}
-          paddingTop={paddingTop}
           paddingBottom={paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
+          paddingTop={paddingTop}
+          paddingX={paddingX}
+          paddingY={paddingY}
         >
           {children}
         </Box>
