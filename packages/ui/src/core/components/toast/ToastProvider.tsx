@@ -105,17 +105,17 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
       {children}
       {mounted && (
         <LayerProvider zOffset={zOffset}>
-          <ToastLayer padding={padding} paddingX={paddingX} paddingY={paddingY} gap={gap}>
+          <ToastLayer gap={gap} padding={padding} paddingX={paddingX} paddingY={paddingY}>
             <AnimatePresence initial={false} mode="popLayout">
               {state.map(({dismiss, id, params}) => (
                 <Toast
                   key={id}
                   closable={params.closable}
                   description={params.description}
-                  onClose={dismiss}
+                  duration={params.duration}
                   status={params.status}
                   title={params.title}
-                  duration={params.duration}
+                  onClose={dismiss}
                 />
               ))}
             </AnimatePresence>

@@ -1,8 +1,8 @@
 import {Badge, Box, Button, Card, Heading, Menu, MenuButton, MenuItem, useToast} from '@sanity/ui'
 
-import type {Route} from './+types/home'
+// import type {Route} from './+types/home'
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   return [{title: 'Sanity UI in React Router'}]
 }
 
@@ -26,9 +26,9 @@ export default function Home() {
 
         <Button
           mode="ghost"
-          onClick={() => toast.push({title: 'Hello, world'})}
-          width="min"
           text="Push message to toast stack"
+          width="min"
+          onClick={() => toast.push({title: 'Hello, world'})}
         />
 
         <MenuButton

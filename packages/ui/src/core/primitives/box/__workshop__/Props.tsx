@@ -11,9 +11,9 @@ export default function PropsStory(): React.JSX.Element {
     <Box padding={[4, 5, 6]}>
       <Card border tone="inherit">
         <Box
-          onClick={useAction('onClick')}
           // @ts-expect-error - TODO: fix this
           padding={padding}
+          onClick={useAction('onClick')}
         >
           <Text>
             Box with <code>padding={padding}</code>

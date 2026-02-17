@@ -277,6 +277,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
       <PopoverLayer
         {...rest}
+        ref={setFloating}
         __unstable_margins={margins}
         animate={animate}
         arrow={arrowProp}
@@ -287,17 +288,16 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
         className={popoverCss({className})}
         hidden={referenceHidden}
         maxWidth={widthProp}
+        originX={originX}
+        originY={originY}
         overflow={overflow}
         padding={padding}
         placement={placement}
         radius={radius}
-        ref={setFloating}
         scheme={scheme}
         shadow={shadow}
-        originX={originX}
-        originY={originY}
-        tone={tone}
         strategy={strategy}
+        tone={tone}
         x={x}
         y={y}
         zOffset={zOffset}
@@ -319,7 +319,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
     children = (
       <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
-        <CardProvider tone={resolvedTone} scheme={scheme ?? 'light'}>
+        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone}>
           {node}
         </CardProvider>
       </Portal>

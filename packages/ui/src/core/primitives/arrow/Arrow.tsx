@@ -62,9 +62,9 @@ export function Arrow<E extends ArrowElementType = typeof DEFAULT_ARROW_ELEMENT>
         ...assignInlineVars({[vars.arrow.size]: `${w}px`}),
       }}
     >
-      <svg className={_arrowSvg()} width={w} height={w} viewBox={`0 0 ${w} ${w}`}>
+      <svg className={_arrowSvg()} height={w} viewBox={`0 0 ${w} ${w}`} width={w}>
         <mask id="stroke-mask">
-          <rect className={_arrowStrokeMask()} x={0} width={w} height={w} fill="white" />
+          <rect className={_arrowStrokeMask()} fill="white" height={w} width={w} x={0} />
         </mask>
         <path className={_arrowStroke()} d={strokePath} mask="url(#stroke-mask)" />
         <path className={_arrowShape()} d={fillPath} />

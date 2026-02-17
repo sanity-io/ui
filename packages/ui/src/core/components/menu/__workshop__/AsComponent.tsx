@@ -9,7 +9,7 @@ const CustomLink = forwardRef(function CustomLink(
 
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a data-required={req} {...rest} href="#" ref={ref}>
+    <a data-required={req} {...rest} ref={ref} href="#">
       {children}
     </a>
   )

@@ -235,11 +235,11 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
         as="ul"
         data-ui="Tree"
         {...rest}
+        ref={ref}
         gap={gap}
+        role="tree"
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
-        ref={ref}
-        role="tree"
       >
         {children}
       </Stack>

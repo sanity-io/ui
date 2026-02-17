@@ -194,13 +194,13 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
         data-ui="Dialog"
         display="flex"
         id={id}
-        onActivate={onActivate}
-        onClick={handleRootClick}
-        onFocus={handleFocus}
         padding={padding}
         position={position}
         role="dialog"
         zOffset={zOffset}
+        onActivate={onActivate}
+        onClick={handleRootClick}
+        onFocus={handleFocus}
       >
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div ref={preDivRef} tabIndex={0} />
@@ -208,27 +208,27 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
           alignItems="center"
           className={dialogContainer()}
           data-ui="DialogCard"
-          flexDirection="column"
           display="flex"
+          flexDirection="column"
           justifyContent="center"
           width={width}
         >
           <DialogCard
+            ref={cardRef}
             __unstable_autoFocus={autoFocus}
             __unstable_hideCloseButton={hideCloseButton}
             contentRef={contentRef}
             footer={footer}
             header={header}
             id={id}
-            onClickOutside={onClickOutside}
-            onClose={onClose}
             portal={portalProp}
             radius={cardRadius}
-            ref={cardRef}
             scheme={scheme}
             shadow={cardShadow}
             tone={tone}
             width={width}
+            onClickOutside={onClickOutside}
+            onClose={onClose}
           >
             {children}
           </DialogCard>

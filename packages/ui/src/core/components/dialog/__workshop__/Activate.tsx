@@ -23,9 +23,9 @@ export default function LayeringFocusStory(): React.JSX.Element {
       <Flex align="center" height="fill" justify="center">
         <Layer onActivate={({activeElement}) => activeElement?.focus()}>
           <Button
+            id="open-dialog-1-button"
             text="Open dialog 1"
             onClick={() => setFirstDialogOpen(true)}
-            id="open-dialog-1-button"
           />
 
           {firstDialogOpen && (
@@ -37,22 +37,22 @@ export default function LayeringFocusStory(): React.JSX.Element {
             >
               <Stack gap={2} padding={3}>
                 <Button
-                  mode="ghost"
-                  text="Open dialog 2"
-                  onClick={() => setSecondDialogOpen(true)}
                   id="open-dialog-2-button-1"
-                />
-                <Button
                   mode="ghost"
                   text="Open dialog 2"
                   onClick={() => setSecondDialogOpen(true)}
+                />
+                <Button
                   id="open-dialog-2-button-2"
-                />
-                <Button
                   mode="ghost"
                   text="Open dialog 2"
                   onClick={() => setSecondDialogOpen(true)}
+                />
+                <Button
                   id="open-dialog-2-button-3"
+                  mode="ghost"
+                  text="Open dialog 2"
+                  onClick={() => setSecondDialogOpen(true)}
                 />
               </Stack>
 
@@ -65,22 +65,22 @@ export default function LayeringFocusStory(): React.JSX.Element {
                 >
                   <Stack gap={2} padding={3}>
                     <Button
-                      mode="ghost"
-                      text="Open dialog 3"
-                      onClick={() => setThirdDialogOpen(true)}
                       id="open-dialog-3-button-1"
-                    />
-                    <Button
                       mode="ghost"
                       text="Open dialog 3"
                       onClick={() => setThirdDialogOpen(true)}
+                    />
+                    <Button
                       id="open-dialog-3-button-2"
-                    />
-                    <Button
                       mode="ghost"
                       text="Open dialog 3"
                       onClick={() => setThirdDialogOpen(true)}
+                    />
+                    <Button
                       id="open-dialog-3-button-3"
+                      mode="ghost"
+                      text="Open dialog 3"
+                      onClick={() => setThirdDialogOpen(true)}
                     />
                   </Stack>
 
@@ -93,10 +93,10 @@ export default function LayeringFocusStory(): React.JSX.Element {
                     >
                       <Stack gap={2} padding={3}>
                         <MenuButton
-                          id="menu"
                           button={
-                            <Button mode="ghost" text="Open menu" id="open-dialog-4-menu-button" />
+                            <Button id="open-dialog-4-menu-button" mode="ghost" text="Open menu" />
                           }
+                          id="menu"
                           menu={
                             <Menu>
                               <MenuItem

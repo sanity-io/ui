@@ -2,6 +2,7 @@
 
 import type {FigmaSanityUIColorVariable} from './types'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parseColor = (_color: any) => ({r: 0, g: 0, b: 0, a: 1})
 
 export function getOrCreateColorVariableCollection(name: string): VariableCollection {
@@ -39,6 +40,7 @@ export function setColorVariable(
     const figmaVariable = getOrCreateColorVariable(collection, figmaVariables, key)
 
     if (typeof variable.value !== 'string') {
+      // eslint-disable-next-line no-console
       console.warn(`invalid color value for ${key}[${modeId}]: ${variable.value}`)
 
       return
@@ -53,7 +55,9 @@ export function setColorVariable(
 
     return key
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('variable', variable)
+    // eslint-disable-next-line no-console
     console.error(err)
 
     return undefined

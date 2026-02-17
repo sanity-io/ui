@@ -78,11 +78,11 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
     >
       <Element
         {...rest}
+        ref={ref}
         className={_inputElement()}
         data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
         disabled={disabled}
         readOnly={readOnly}
-        ref={ref}
       />
       <span className={_inputPresentation()} />
     </span>

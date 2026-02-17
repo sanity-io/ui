@@ -51,10 +51,10 @@ export function Stack<E extends StackElementType = typeof DEFAULT_STACK_ELEMENT>
       data-ui="Stack"
       {...rest}
       as={as}
-      gridAutoRows="min"
       className={stack({className})}
       display="grid"
       gap={gap}
+      gridAutoRows="min"
     />
   )
 }

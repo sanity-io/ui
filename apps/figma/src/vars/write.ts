@@ -12,6 +12,7 @@ export function writeVars(config: WriteConfig): void {
   const figmaVariables = getFigmaVariables(collection)
   const variables = prepareSanityUIColorVariables(config)
 
+  // eslint-disable-next-line no-console
   console.log('# of variables', variables.length)
 
   // make sure modes exist
@@ -28,6 +29,7 @@ export function writeVars(config: WriteConfig): void {
   const colorVariableNames: string[] = []
 
   for (const variable of variables) {
+    // eslint-disable-next-line no-console
     console.log('set', variable.scheme, `${variable.tone}/${variable.key}`, variable.value)
 
     const name = setColorVariable(
@@ -50,6 +52,7 @@ export function writeVars(config: WriteConfig): void {
 
     if (!colorVariableNames.includes(variable.name)) {
       if (config.dryRun) {
+        // eslint-disable-next-line no-console
         console.log('remove', variable.name)
       } else {
         variable.remove()

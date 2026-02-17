@@ -76,9 +76,9 @@ export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_E
       {...rest}
       as={as}
       gap={gap}
-      onKeyDown={handleKeyDown}
       role="tablist"
       wrap={wrap}
+      onKeyDown={handleKeyDown}
     >
       {tabs}
     </Flex>

@@ -61,11 +61,11 @@ export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEME
     <span className={_switch({className})} data-ui="Switch">
       <Element
         {...rest}
+        ref={ref}
         className={_switchElement()}
         data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         type="checkbox"
-        ref={ref}
       />
       <span aria-hidden className={_switchPresentation()}>
         <span className={_switchTrack()} />

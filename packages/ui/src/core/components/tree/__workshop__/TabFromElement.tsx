@@ -38,43 +38,43 @@ export default function BasicStory(): React.JSX.Element {
       </Box>
       <Wrapper>
         <TextInput />
-        <Tree gap={1} onFocus={handleFocus} ref={ref}>
-          <TreeItem data-testid="fruit" onClick={handleClick} expanded text="Fruit">
+        <Tree ref={ref} gap={1} onFocus={handleFocus}>
+          <TreeItem data-testid="fruit" expanded text="Fruit" onClick={handleClick}>
             <TreeItem
               data-testid="oranges"
-              onClick={handleClick}
               selected={id === 'oranges'}
               text="Oranges"
+              onClick={handleClick}
             />
             <TreeItem
               data-testid="pineapples"
-              onClick={handleClick}
-              text="Pineapples"
               selected={id === 'pineapples'}
+              text="Pineapples"
+              onClick={handleClick}
             />
-            <TreeItem data-testid="apples" onClick={handleClick} text="Apples">
+            <TreeItem data-testid="apples" text="Apples" onClick={handleClick}>
               <TreeItem
                 data-testid="apples/macintosh"
-                onClick={handleClick}
                 href="/apples/macintosh"
                 icon={LinkIcon}
                 text="Macintosh"
+                onClick={handleClick}
               />
               <TreeItem
                 data-testid="apples/granny-smith"
-                onClick={handleClick}
                 text="Granny Smith"
+                onClick={handleClick}
               />
-              <TreeItem data-testid="apples/fuji" onClick={handleClick} text="Fuji" />
+              <TreeItem data-testid="apples/fuji" text="Fuji" onClick={handleClick} />
             </TreeItem>
-            <TreeItem data-testid="bananas" onClick={handleClick} text="Bananas" />
-            <TreeItem data-testid="pears" onClick={handleClick} text="Pears">
-              <TreeItem data-testid="pears/anjou" onClick={handleClick} text="Anjou" />
-              <TreeItem data-testid="pears/bartlett" onClick={handleClick} text="Bartlett" />
-              <TreeItem data-testid="pears/bosc" onClick={handleClick} text="Bosc" />
-              <TreeItem data-testid="pears/concorde" onClick={handleClick} text="Concorde" />
-              <TreeItem data-testid="pears/seckel" onClick={handleClick} text="Seckel" />
-              <TreeItem data-testid="pears/starkrimson" onClick={handleClick} text="Starkrimson" />
+            <TreeItem data-testid="bananas" text="Bananas" onClick={handleClick} />
+            <TreeItem data-testid="pears" text="Pears" onClick={handleClick}>
+              <TreeItem data-testid="pears/anjou" text="Anjou" onClick={handleClick} />
+              <TreeItem data-testid="pears/bartlett" text="Bartlett" onClick={handleClick} />
+              <TreeItem data-testid="pears/bosc" text="Bosc" onClick={handleClick} />
+              <TreeItem data-testid="pears/concorde" text="Concorde" onClick={handleClick} />
+              <TreeItem data-testid="pears/seckel" text="Seckel" onClick={handleClick} />
+              <TreeItem data-testid="pears/starkrimson" text="Starkrimson" onClick={handleClick} />
             </TreeItem>
           </TreeItem>
         </Tree>

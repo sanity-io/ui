@@ -13,13 +13,13 @@ export default function FocusAndBlurStory(): React.JSX.Element {
       <Stack gap={3}>
         <Autocomplete
           id="focus-and-blur"
-          onBlur={handleBlur}
-          onChange={setValue}
-          onFocus={handleFocus}
           openButton
           options={[{value: 'foo'}, {value: 'bar'}]}
           placeholder="Search"
           value={value}
+          onBlur={handleBlur}
+          onChange={setValue}
+          onFocus={handleFocus}
         />
         <Stack gap={3}>
           <Box muted overflow="auto" padding={3} radius={2}>
@@ -28,7 +28,7 @@ export default function FocusAndBlurStory(): React.JSX.Element {
             </Code>
           </Box>
 
-          <Button id="focus-and-blur-clear-btn" mode="ghost" onClick={handleClear} text="Clear" />
+          <Button id="focus-and-blur-clear-btn" mode="ghost" text="Clear" onClick={handleClear} />
         </Stack>
       </Stack>
     </Box>

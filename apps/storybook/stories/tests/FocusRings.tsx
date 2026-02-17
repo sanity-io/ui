@@ -62,7 +62,7 @@ export function FocusRings(): ReactNode {
             </Wrapper>
             <Wrapper title="Buttons">
               {ELEMENT_TONES.map((tone) => (
-                <Flex gap={3} key={tone} wrap="wrap">
+                <Flex key={tone} gap={3} wrap="wrap">
                   <Button text="Button" tone={tone} />
                   <Button mode="bleed" text="Button" tone={tone} />
                   <Button mode="ghost" text="Button" tone={tone} />
@@ -72,7 +72,7 @@ export function FocusRings(): ReactNode {
             <Wrapper title="Card (as button)">
               <Flex gap={3} wrap="wrap">
                 {CARD_TONES.map((tone) => (
-                  <Card __unstable_focusRing as="button" key={tone} padding={3} tone={tone}>
+                  <Card key={tone} __unstable_focusRing as="button" padding={3} tone={tone}>
                     <Text>{tone}</Text>
                   </Card>
                 ))}
@@ -135,15 +135,15 @@ export function FocusRings(): ReactNode {
             <Heading>Components</Heading>
             <Wrapper title="Autocomplete">
               <Autocomplete
-                id="autocomplete"
                 icon={SearchIcon}
+                id="autocomplete"
                 options={[{value: 'foo'}, {value: 'bar'}, {value: 'baz'}]}
                 placeholder="Search..."
               />
             </Wrapper>
             <Wrapper title="Menu Button">
               <MenuButton
-                button={<Button tone="primary" text="Open" />}
+                button={<Button text="Open" tone="primary" />}
                 id="menuButton"
                 menu={
                   <Menu>
@@ -159,27 +159,27 @@ export function FocusRings(): ReactNode {
             <Wrapper title="TabList">
               <TabList gap={2}>
                 <Tab
+                  key="foo"
                   aria-controls="example-panel-foo"
                   icon={SunIcon}
                   id="foo"
                   label="Foo"
-                  key="foo"
                   selected
                 />
                 <Tab
+                  key="bar"
                   aria-controls="example-panel-bar"
                   icon={RocketIcon}
                   id="bar"
                   label="Bar"
-                  key="bar"
                   selected
                 />
                 <Tab
+                  key="baz"
                   aria-controls="example-panel-baz"
                   icon={OkHandIcon}
                   id="baz"
                   label="Baz"
-                  key="baz"
                   selected
                 />
               </TabList>

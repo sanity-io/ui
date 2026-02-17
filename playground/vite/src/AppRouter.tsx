@@ -20,9 +20,9 @@ export function AppRouter() {
 
         <Button
           mode="ghost"
-          onClick={() => toast.push({title: 'Hello, world'})}
-          width="min"
           text="Push message to toast stack"
+          width="min"
+          onClick={() => toast.push({title: 'Hello, world'})}
         />
 
         <MenuButton

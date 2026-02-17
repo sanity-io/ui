@@ -61,13 +61,13 @@ export const Radius: Story = {
 }
 
 export const Controlled: Story = {
-  render: (props) => {
+  render: function Controlled(props) {
     const [open, setOpen] = useState(false)
 
     return (
       <Card padding={6}>
         <Popover {...props} open={open}>
-          <Button onClick={() => setOpen(!open)} text="Toggle popover" />
+          <Button text="Toggle popover" onClick={() => setOpen(!open)} />
         </Popover>
       </Card>
     )
@@ -83,7 +83,7 @@ export const Placements: Story = {
       wordBreak: 'break-all',
     },
   },
-  render: (props) => {
+  render: function Placements(props) {
     const [open, setOpen] = useState(false)
 
     return (
@@ -92,7 +92,7 @@ export const Placements: Story = {
           gap: 9,
           renderItem: ({index, value}) => (
             <Popover {...props} key={index} open={open} placement={value}>
-              <Button onClick={() => setOpen(!open)} text={value} />
+              <Button text={value} onClick={() => setOpen(!open)} />
             </Popover>
           ),
           rows: PLACEMENT_OPTIONS,
@@ -103,15 +103,15 @@ export const Placements: Story = {
 }
 
 export const DefaultOpen: Story = {
-  render: () => {
+  render: function DefaultOpen() {
     return (
       <Box padding={4} style={{textAlign: 'center'}}>
         <Popover
           content={<Text size={[2, 2, 3, 4]}>Hello, world</Text>}
+          open
           padding={4}
           placement="top"
           portal
-          open
         >
           <Button mode="ghost" padding={[3, 3, 4]} text="Reference" />
         </Popover>
@@ -121,7 +121,7 @@ export const DefaultOpen: Story = {
 }
 
 export const WithReferenceElement: Story = {
-  render: () => {
+  render: function WithReferenceElement() {
     const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null)
 
     return (
@@ -131,11 +131,11 @@ export const WithReferenceElement: Story = {
         </Box>
         <Popover
           content={<Text size={[2, 2, 3, 4]}>Hello, world</Text>}
+          open
           padding={4}
           placement="top"
-          referenceElement={referenceElement}
           portal
-          open
+          referenceElement={referenceElement}
         >
           <Button
             mode="ghost"
@@ -165,7 +165,7 @@ export const PlacementStrategy: Story = {
       include: ['fallbackPlacements', 'placement', 'placementStrategy'],
     },
   },
-  render: (props) => {
+  render: function PlacementStrategy(props) {
     const [height, setHeight] = useState(100)
 
     const handleUpdate = useCallback(() => {
@@ -192,7 +192,7 @@ export const PlacementStrategy: Story = {
           {...props}
           content={
             <Card style={{height: `${height}px`, resize: 'vertical'}}>
-              <Flex align="center" justify="center" height="fill">
+              <Flex align="center" height="fill" justify="center">
                 <Text>Popover content</Text>
               </Flex>
             </Card>

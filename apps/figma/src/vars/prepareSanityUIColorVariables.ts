@@ -44,6 +44,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
           scheme,
           tone,
           key,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           value: get(toneColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
         })
       }

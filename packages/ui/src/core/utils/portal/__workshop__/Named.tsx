@@ -22,7 +22,7 @@ export default function NamedStory(): React.JSX.Element {
             <Text size={1} weight="medium">
               Portal 1
             </Text>
-            <Card border padding={3} ref={setPortal1Element} />
+            <Card ref={setPortal1Element} border padding={3} />
           </Stack>
         </Card>
         <Card height="fill" padding={4}>
@@ -30,7 +30,7 @@ export default function NamedStory(): React.JSX.Element {
             <Text size={1} weight="medium">
               Portal 2
             </Text>
-            <Card border padding={3} ref={setPortal2Element} />
+            <Card ref={setPortal2Element} border padding={3} />
           </Stack>
         </Card>
         <Card height="fill" padding={4}>
@@ -38,7 +38,7 @@ export default function NamedStory(): React.JSX.Element {
             <Text size={1} weight="medium">
               Portal 3
             </Text>
-            <Card border padding={3} ref={setPortal3Element} />
+            <Card ref={setPortal3Element} border padding={3} />
           </Stack>
         </Card>
       </Container>

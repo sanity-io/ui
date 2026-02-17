@@ -22,10 +22,10 @@ const FirstRow = <Rows extends string[], Cols extends string[]>({
         <Text weight="semibold">{title}</Text>
       </Flex>
       {columns.map((column) => (
-        <Flex align={'center'} key={column + 'head'}>
+        <Flex key={column + 'head'} align={'center'}>
           <Text
-            weight="semibold"
             style={{textTransform: 'capitalize', textAlign: 'center', width: '100%'}}
+            weight="semibold"
           >
             {column}
           </Text>
@@ -67,7 +67,7 @@ const Table = <Rows extends string[], Cols extends string[]>({
   subHeader,
 }: TableProps<Rows, Cols>) => {
   return (
-    <Card scheme={scheme} padding={4} border radius={2}>
+    <Card border padding={4} radius={2} scheme={scheme}>
       <Grid
         gapX={3}
         gapY={2}
@@ -77,7 +77,7 @@ const Table = <Rows extends string[], Cols extends string[]>({
         }}
       >
         {/* First row, columns titles */}
-        <FirstRow title={title} columns={columns} />
+        <FirstRow columns={columns} title={title} />
         {subHeader}
         {/* Rows titles and items */}
         {children}
@@ -99,9 +99,9 @@ export function matrixBuilder<Rows extends string[], Cols extends string[]>({
   subHeader,
 }: MatrixBuilderProps<Rows, Cols>): React.JSX.Element {
   return (
-    <Table scheme={scheme} columns={columns} rows={rows} title={title} subHeader={subHeader}>
+    <Table columns={columns} rows={rows} scheme={scheme} subHeader={subHeader} title={title}>
       {rows.map((row) => (
-        <Row row={row} key={row}>
+        <Row key={row} row={row}>
           {columns.map((column) => renderItem({row, column}))}
         </Row>
       ))}

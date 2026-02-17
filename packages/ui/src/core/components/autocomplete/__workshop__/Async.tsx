@@ -10,7 +10,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {startTransition, useCallback, useEffect, useRef, useState} from 'react'
 
 import {countriesStore} from './mock/apiStore'
 
@@ -70,8 +70,10 @@ export default function AsyncStory(): React.JSX.Element {
         setLoadingCurrentRef,
       )
     } else {
-      setOptionTitle(null)
-      setLoadingCurrentRef(false)
+      startTransition(() => {
+        setOptionTitle(null)
+        setLoadingCurrentRef(false)
+      })
     }
   }, [value])
 
@@ -92,14 +94,14 @@ export default function AsyncStory(): React.JSX.Element {
             icon={value ? EarthAmericasIcon : SearchIcon}
             id="async"
             loading={loading}
-            onChange={setValue}
-            onQueryChange={handleQueryChange}
             openButton={{onClick: handleOpenButtonClick}}
             options={options}
             placeholder="Search"
             renderOption={renderOption}
             renderValue={renderValue}
             value={value}
+            onChange={setValue}
+            onQueryChange={handleQueryChange}
           />
         </LayerProvider>
 

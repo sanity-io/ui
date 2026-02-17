@@ -21,7 +21,7 @@ export default function TonesStory(): React.JSX.Element {
         >
           <Menu>
             {ELEMENT_TONES.map((tone) => (
-              <MenuItem disabled={disabled} icon={CubeIcon} key={tone} text={tone} tone={tone} />
+              <MenuItem key={tone} disabled={disabled} icon={CubeIcon} text={tone} tone={tone} />
             ))}
           </Menu>
         </Card>

@@ -10,7 +10,7 @@ export const UIDecorator: Decorator = (storyFn, context) => {
 
   return (
     <PortalProvider element={portalElement}>
-      <Root as="div" padding={4} scheme={scheme} tone="default" style={{height: '100vh'}}>
+      <Root as="div" padding={4} scheme={scheme} style={{height: '100vh'}} tone="default">
         {storyFn()}
         <div ref={setPortalElement} />
       </Root>

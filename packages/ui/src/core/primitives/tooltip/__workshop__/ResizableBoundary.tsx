@@ -20,8 +20,8 @@ export default function ResizableBoundaryStory(): React.JSX.Element {
     <Flex align="center" height="fill" justify="center">
       <BoundaryElementProvider element={useBoundaryElement ? boundaryElement : null}>
         <Card
-          border
           ref={setBoundaryElement}
+          border
           style={{
             height: 'calc(100vh - 100px)',
             overflow: 'hidden',

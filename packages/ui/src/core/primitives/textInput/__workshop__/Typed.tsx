@@ -18,10 +18,10 @@ export default function TypedStory(): React.JSX.Element {
     <Box padding={4}>
       <Container width={1}>
         <TextInput
-          onChange={handleChange}
           // @ts-expect-error - TODO: fix this
           type={type}
           value={value}
+          onChange={handleChange}
         />
       </Container>
     </Box>

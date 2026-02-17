@@ -43,7 +43,7 @@ import {type ReactNode, useState} from 'react'
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (
   <Stack gap={2}>
     <Box marginBottom={3}>
-      <Text weight="semibold" size={1}>
+      <Text size={1} weight="semibold">
         {title}
       </Text>
     </Box>
@@ -55,22 +55,22 @@ const SkeletonComponent = () => (
   <Box>
     <Container width={1}>
       <Flex align="center">
-        <Grid gap={2} columns={2} marginRight={3}>
-          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
-          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
-          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
-          <Skeleton style={{width: 40, height: 40}} radius={2} animated />
+        <Grid columns={2} gap={2} marginRight={3}>
+          <Skeleton animated radius={2} style={{width: 40, height: 40}} />
+          <Skeleton animated radius={2} style={{width: 40, height: 40}} />
+          <Skeleton animated radius={2} style={{width: 40, height: 40}} />
+          <Skeleton animated radius={2} style={{width: 40, height: 40}} />
         </Grid>
-        <Stack gap={2} flex={1}>
-          <HeadingSkeleton style={{width: '100%'}} radius={1} animated />
-          <TextSkeleton style={{width: '100%'}} radius={1} animated />
-          <LabelSkeleton style={{width: '100%'}} radius={1} animated />
-          <CodeSkeleton style={{width: '100%'}} radius={1} animated />
+        <Stack flex={1} gap={2}>
+          <HeadingSkeleton animated radius={1} style={{width: '100%'}} />
+          <TextSkeleton animated radius={1} style={{width: '100%'}} />
+          <LabelSkeleton animated radius={1} style={{width: '100%'}} />
+          <CodeSkeleton animated radius={1} style={{width: '100%'}} />
         </Stack>
       </Flex>
       <Flex marginTop={2}>
-        <Skeleton style={{height: 50}} flex={1} marginRight={1} radius={2} animated />
-        <Skeleton style={{height: 50}} flex={1} marginLeft={1} radius={2} animated />
+        <Skeleton animated flex={1} marginRight={1} radius={2} style={{height: 50}} />
+        <Skeleton animated flex={1} marginLeft={1} radius={2} style={{height: 50}} />
       </Flex>
     </Container>
   </Box>
@@ -82,10 +82,10 @@ const PopoverExample = () => {
   return (
     <Popover
       content={<Text size={2}>I'm a popover with a different tone than my parent card</Text>}
+      open={isOpen}
       padding={4}
       placement="top"
       portal
-      open={isOpen}
       tone="critical"
     >
       <Button
@@ -135,14 +135,14 @@ export function Tones(): ReactNode {
                 <Wrapper title="Avatar">
                   <Flex gap={2} wrap={'wrap'}>
                     <Avatar initials="AB" />
-                    <Avatar initials="AB" color="blue" />
-                    <Avatar initials="AB" color="purple" />
-                    <Avatar initials="AB" color="magenta" />
-                    <Avatar initials="AB" color="red" />
-                    <Avatar initials="AB" color="orange" />
-                    <Avatar initials="AB" color="yellow" />
-                    <Avatar initials="AB" color="green" />
-                    <Avatar initials="AB" color="cyan" />
+                    <Avatar color="blue" initials="AB" />
+                    <Avatar color="purple" initials="AB" />
+                    <Avatar color="magenta" initials="AB" />
+                    <Avatar color="red" initials="AB" />
+                    <Avatar color="orange" initials="AB" />
+                    <Avatar color="yellow" initials="AB" />
+                    <Avatar color="green" initials="AB" />
+                    <Avatar color="cyan" initials="AB" />
                   </Flex>
                 </Wrapper>
                 <Wrapper title="Badge">
@@ -152,19 +152,19 @@ export function Tones(): ReactNode {
                 </Wrapper>
                 <Wrapper title="Button">
                   <Button text={tone} />
-                  <Button text={tone} mode="bleed" />
-                  <Button text={tone + '-muted'} muted mode="bleed" />
-                  <Button text={tone} mode="ghost" />
-                  <Button text={tone + '-muted'} muted mode="ghost" />
+                  <Button mode="bleed" text={tone} />
+                  <Button mode="bleed" muted text={tone + '-muted'} />
+                  <Button mode="ghost" text={tone} />
+                  <Button mode="ghost" muted text={tone + '-muted'} />
                 </Wrapper>
                 <Wrapper title="Card as button (Tone inherit)">
-                  <Card tone="inherit" shadow={1} as="button" padding={2} radius={2}>
+                  <Card as="button" padding={2} radius={2} shadow={1} tone="inherit">
                     <Text>Enabled</Text>
                   </Card>
-                  <Card tone="inherit" disabled shadow={1} as="button" padding={2} radius={2}>
+                  <Card as="button" disabled padding={2} radius={2} shadow={1} tone="inherit">
                     <Text>Disabled</Text>
                   </Card>
-                  <Card tone="inherit" selected shadow={1} as="button" padding={2} radius={2}>
+                  <Card as="button" padding={2} radius={2} selected shadow={1} tone="inherit">
                     <Text>Selected</Text>
                   </Card>
                 </Wrapper>
@@ -176,10 +176,10 @@ export function Tones(): ReactNode {
                   </Flex>
                 </Wrapper>
                 <Wrapper title="Code">
-                  <Code size={2} language="javascript">
+                  <Code language="javascript" size={2}>
                     console.log('Hello, world')
                   </Code>
-                  <Flex gap={2} align={'center'} marginTop={1}>
+                  <Flex align={'center'} gap={2} marginTop={1}>
                     <Text muted size={1}>
                       Text element with {`<code>`}
                     </Text>
@@ -289,8 +289,8 @@ export function Tones(): ReactNode {
                 </Wrapper>
                 <Wrapper title="Tab / TabList">
                   <TabList gap={2}>
-                    <Tab label="Content" selected id={''} aria-controls={''} />
-                    <Tab label="Preview" aria-controls={''} id={''} />
+                    <Tab aria-controls={''} id={''} label="Content" selected />
+                    <Tab aria-controls={''} id={''} label="Preview" />
                   </TabList>
                 </Wrapper>
                 <Wrapper title="Text / TextArea / TextInput ">
