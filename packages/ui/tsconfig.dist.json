@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.settings",
+  "extends": "@repo/typescript-config/base.json",
   "include": ["./exports", "./package.json", "./src", "./typings"],
   "exclude": [
     "./src/**/__fixtures__",
@@ -9,7 +9,6 @@
     "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
-    "jsx": "preserve",
     "resolveJsonModule": true,
     "sourceMap": true,
     "noEmit": false,
