@@ -24,13 +24,13 @@ export default function PropsStory(): React.JSX.Element {
   return (
     <Card height="fill">
       <Flex
-        height="fill"
         align="center"
+        direction="column"
+        gap={4}
+        height="fill"
         justify="center"
         padding={8}
         sizing="border"
-        direction="column"
-        gap={4}
       >
         <Stack
           gap={4}
@@ -43,18 +43,18 @@ export default function PropsStory(): React.JSX.Element {
           <Flex align="center" justify="center" padding={4} sizing="border">
             <Tooltip
               arrow={arrow}
+              // @ts-expect-error - TODO: fix this
               content={<Text size={1}>{content}</Text>}
-              // @ts-expect-error - TODO: fix this
-              padding={padding}
-              // @ts-expect-error - TODO: fix this
-              placement={placement}
-              portal={portal}
-              // @ts-expect-error - TODO: fix this
-              shadow={shadow}
               delay={{
                 open: openDelay,
                 close: closeDelay,
               }}
+              // @ts-expect-error - TODO: fix this
+              padding={padding}
+              placement={placement}
+              portal={portal}
+              // @ts-expect-error - TODO: fix this
+              shadow={shadow}
             >
               <Button mode="bleed" text="Hover me" />
             </Tooltip>
@@ -72,7 +72,7 @@ export default function PropsStory(): React.JSX.Element {
             All tooltip delays are set to 1ms after the first tooltip within a DelayGroupProvider
             opens.
           </Text>
-          <Flex align="center" justify="center" padding={4} sizing="border" gap={4}>
+          <Flex align="center" gap={4} justify="center" padding={4} sizing="border">
             <TooltipDelayGroupProvider
               delay={{
                 open: openDelay,
@@ -82,14 +82,14 @@ export default function PropsStory(): React.JSX.Element {
               <Tooltip
                 arrow={arrow}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
+                // @ts-expect-error - TODO: fix this
+                content={<Text size={1}>{content}</Text>}
                 delay={{
                   open: 100,
                   close: 100,
                 }}
-                content={<Text size={1}>{content}</Text>}
                 // @ts-expect-error - TODO: fix this
                 padding={padding}
-                // @ts-expect-error - TODO: fix this
                 placement={placement}
                 portal={portal}
                 // @ts-expect-error - TODO: fix this
@@ -99,13 +99,13 @@ export default function PropsStory(): React.JSX.Element {
               </Tooltip>
               <Tooltip
                 arrow={arrow}
+                // @ts-expect-error - TODO: fix this
+                content={<Text size={1}>{content}</Text>}
                 // This is overridden by the group delay, kept here intentionally for testing purposes.
                 delay={{
                   open: 100,
                   close: 100,
                 }}
-                content={<Text size={1}>{content}</Text>}
-                // @ts-expect-error - TODO: fix this
                 padding={padding}
                 // @ts-expect-error - TODO: fix this
                 placement={placement}

@@ -34,7 +34,6 @@ export default function PropsStory(): React.JSX.Element {
         as={as}
         border={border}
         muted={muted}
-        onClick={useAction('onClick')}
         // @ts-expect-error - TODO: fix this
         padding={padding}
         pressed={pressed}
@@ -43,8 +42,9 @@ export default function PropsStory(): React.JSX.Element {
         selected={selected}
         // @ts-expect-error - TODO: fix this
         shadow={shadow}
-        // @ts-expect-error - TODO: fix this
         tone={tone}
+        // @ts-expect-error - TODO: fix this
+        onClick={useAction('onClick')}
       >
         <Stack gap={3}>
           <Text size={1}>

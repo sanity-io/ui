@@ -47,8 +47,8 @@ export const Radius: Story = {
         renderItem: ({value, index}) => (
           <Autocomplete
             {...props}
-            id="autocomplete"
             key={index}
+            id="autocomplete"
             placeholder={String(value)}
             radius={value}
           />

@@ -48,8 +48,8 @@ export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>
       {...rest}
       as={as}
       className={badge({className, tone})}
-      flex={flex}
       display="flex"
+      flex={flex}
       maxWidth="fill"
       padding={padding}
       radius={radius}

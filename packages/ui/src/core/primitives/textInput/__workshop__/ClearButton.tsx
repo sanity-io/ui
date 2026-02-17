@@ -20,10 +20,10 @@ export default function ClearButtonStory(): React.JSX.Element {
       <TextInput
         clearButton
         customValidity={customValidity}
-        onChange={handleChange}
-        onClear={handleClear}
         placeholder="Enter text"
         value={value}
+        onChange={handleChange}
+        onClear={handleClear}
       />
     </Box>
   )

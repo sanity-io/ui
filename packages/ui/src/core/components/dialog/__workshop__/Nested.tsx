@@ -20,44 +20,44 @@ export default function NestedStory(): React.JSX.Element {
   return (
     <LayerProvider>
       {open1 && (
-        <Dialog animate shadow={1} header="Dialog 1" id="dialog1">
+        <Dialog animate header="Dialog 1" id="dialog1" shadow={1}>
           <Box padding={4}>
-            <Button onClick={() => setOpen2(true)} ref={dialog2Button} text="Open Dialog 2" />
+            <Button ref={dialog2Button} text="Open Dialog 2" onClick={() => setOpen2(true)} />
           </Box>
 
           {open2 && (
             <Dialog
               animate
-              shadow={2}
               header="Dialog 2"
               id="dialog2"
-              onClose={() => setOpen2(false)}
+              shadow={2}
               onClickOutside={() => setOpen2(false)}
+              onClose={() => setOpen2(false)}
             >
               <Box padding={4}>
-                <Button onClick={() => setOpen3(true)} ref={dialog3Button} text="Open Dialog 3" />
+                <Button ref={dialog3Button} text="Open Dialog 3" onClick={() => setOpen3(true)} />
               </Box>
 
               {open3 && (
                 <Dialog
                   animate
-                  shadow={4}
                   header="Dialog 3"
                   id="dialog3"
-                  onClose={() => setOpen3(false)}
+                  shadow={4}
                   onClickOutside={() => setOpen3(false)}
+                  onClose={() => setOpen3(false)}
                 >
                   <Box padding={4}>
                     <MenuButton
                       button={<Button text="Test" />}
                       id="menu3"
-                      popover={{animate: true, portal: true}}
                       menu={
                         <Menu>
                           <MenuItem text="Test" />
                           <MenuItem text="Test" />
                         </Menu>
                       }
+                      popover={{animate: true, portal: true}}
                     />
                   </Box>
                 </Dialog>

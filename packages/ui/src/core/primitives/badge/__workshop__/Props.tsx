@@ -15,13 +15,14 @@ export default function PropsStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center">
       <Badge
-        onClick={useAction('onClick')}
         // @ts-expect-error - TODO: fix this
         paddingX={paddingX}
         // @ts-expect-error - TODO: fix this
         paddingY={paddingY}
         // @ts-expect-error - TODO: fix this
         tone={tone}
+        // @ts-expect-error - TODO: fix this
+        onClick={useAction('onClick')}
       >
         {textProp}
       </Badge>

@@ -88,22 +88,22 @@ export function Tab<E extends TabElementType = typeof DEFAULT_TAB_ELEMENT>(
     <Button
       data-ui="Tab"
       {...rest}
+      ref={ref}
       aria-selected={selected ? 'true' : 'false'}
       as={as}
       fontSize={fontSize}
       icon={icon}
       id={id}
       mode="bleed"
-      onClick={onClick}
-      onBlur={handleBlur}
-      onFocus={handleFocus}
       padding={padding}
-      ref={ref}
       role="tab"
       selected={selected}
       tabIndex={selected ? 0 : -1}
       text={label}
       type="button"
+      onBlur={handleBlur}
+      onClick={onClick}
+      onFocus={handleFocus}
     />
   )
 }

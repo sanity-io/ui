@@ -18,24 +18,24 @@ export default function ExampleStory(): React.JSX.Element {
           icon={SunIcon}
           id="example-tab-foo"
           label="Foo"
-          onClick={() => setTab('foo')}
           selected={tab === 'foo'}
+          onClick={() => setTab('foo')}
         />
         <Tab
           aria-controls="example-panel-bar"
           icon={RocketIcon}
           id="example-tab-bar"
           label="Bar"
-          onClick={() => setTab('bar')}
           selected={tab === 'bar'}
+          onClick={() => setTab('bar')}
         />
         <Tab
           aria-controls="example-panel-baz"
           icon={OkHandIcon}
           id="example-tab-baz"
           label={useLongTitle ? longTitle : 'Baz'}
-          onClick={() => setTab('baz')}
           selected={tab === 'baz'}
+          onClick={() => setTab('baz')}
         />
       </TabList>
       <TabPanel

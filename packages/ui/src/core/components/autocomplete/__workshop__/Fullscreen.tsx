@@ -17,7 +17,7 @@ import {
   useToast,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {countriesStore} from './mock/apiStore'
 
@@ -94,11 +94,11 @@ export default function FullscreenStory(): React.JSX.Element {
         return (
           <Portal>
             <Card
-              onMouseEnter={props.onMouseEnter}
-              onMouseLeave={props.onMouseLeave}
               padding={4}
               style={{position: 'absolute', inset: '0 0 0 0'}}
               tone="critical"
+              onMouseEnter={props.onMouseEnter}
+              onMouseLeave={props.onMouseLeave}
             >
               <Flex align="center" height="fill" justify="center">
                 <Text align="center" muted>
@@ -114,10 +114,10 @@ export default function FullscreenStory(): React.JSX.Element {
         return (
           <Portal>
             <Card
-              onMouseEnter={props.onMouseEnter}
-              onMouseLeave={props.onMouseLeave}
               padding={4}
               style={{position: 'absolute', inset: '0 0 0 0'}}
+              onMouseEnter={props.onMouseEnter}
+              onMouseLeave={props.onMouseLeave}
             >
               <Flex align="center" height="fill" justify="center">
                 <Text align="center" muted>
@@ -132,10 +132,10 @@ export default function FullscreenStory(): React.JSX.Element {
       return (
         <Portal>
           <Card
+            ref={ref}
             hidden={props.hidden}
             onMouseEnter={props.onMouseEnter}
             onMouseLeave={props.onMouseLeave}
-            ref={ref}
           >
             {props.content}
           </Card>
@@ -168,8 +168,10 @@ export default function FullscreenStory(): React.JSX.Element {
         setLoadingCurrentRef,
       )
     } else {
-      setOptionTitle(null)
-      setLoadingCurrentRef(false)
+      startTransition(() => {
+        setOptionTitle(null)
+        setLoadingCurrentRef(false)
+      })
     }
   }, [value])
 
@@ -180,29 +182,27 @@ export default function FullscreenStory(): React.JSX.Element {
           <Flex align="center">
             <Box flex={1} />
             <Button
+              ref={openSearchButtonElementRef}
               aria-label="Open search"
               icon={SearchIcon}
               mode="bleed"
               onClick={handleOpen}
-              ref={openSearchButtonElementRef}
             />
           </Flex>
         </Card>
         <Layer hidden={!open} style={{position: 'sticky', top: 0}}>
           <Card padding={2} shadow={1}>
             <Autocomplete
+              ref={inputRef}
               filterOption={filterOption}
               fontSize={1}
               icon={SearchIcon}
               id="fullsceen-example"
               listBox={{padding: 2}}
               loading={loading}
-              onQueryChange={handleQueryChange}
-              onSelect={handleSelect}
               options={options}
               placeholder="Search"
               radius={2}
-              ref={inputRef}
               relatedElements={relatedElements}
               renderOption={renderOption}
               renderPopover={renderPopover}
@@ -210,20 +210,22 @@ export default function FullscreenStory(): React.JSX.Element {
               suffix={
                 <Box padding={1}>
                   <Button
+                    ref={setCloseSearchButtonElement}
                     aria-label="Close search"
                     icon={CloseIcon}
-                    onClick={handleClose}
-                    padding={2}
                     mode="bleed"
-                    ref={setCloseSearchButtonElement}
+                    padding={2}
+                    onClick={handleClose}
                   />
                 </Box>
               }
               value={value}
+              onQueryChange={handleQueryChange}
+              onSelect={handleSelect}
             />
           </Card>
         </Layer>
-        <Card flex={1} hidden={!open} position="relative" ref={setPortalElement} />
+        <Card ref={setPortalElement} flex={1} hidden={!open} position="relative" />
         <Box flex={1} hidden={open} padding={4}>
           <Heading>Welcome to this app</Heading>
         </Box>

@@ -26,48 +26,48 @@ export default function SkeletonDelayStory(): React.JSX.Element {
         <Text muted>Delayed by 2000ms</Text>
         <Card
           // @ts-expect-error - TODO: fix this
-          tone={tone}
+          border
           marginTop={4}
           padding={2}
           radius={2}
-          border
+          tone={tone}
         >
           <Flex align="center">
             <Skeleton
-              style={{width: 90, height: 90}}
-              radius={2}
               animated={animated}
-              marginRight={3}
               delay={1000}
+              marginRight={3}
+              radius={2}
+              style={{width: 90, height: 90}}
             />
             <Stack flex={1} gap={2}>
               <HeadingSkeleton
+                animated={animated}
+                delay={1000}
+                radius={1}
                 size={4}
                 style={{width: '100%'}}
-                radius={1}
-                animated={animated}
-                delay={1000}
               />
               <TextSkeleton
-                size={1}
-                style={{width: '100%'}}
-                radius={1}
                 animated={animated}
                 delay={1000}
+                radius={1}
+                size={1}
+                style={{width: '100%'}}
               />
               <LabelSkeleton
-                size={1}
-                style={{width: '100%'}}
-                radius={1}
                 animated={animated}
                 delay={1000}
+                radius={1}
+                size={1}
+                style={{width: '100%'}}
               />
               <CodeSkeleton
-                size={1}
-                style={{width: '100%'}}
-                radius={1}
                 animated={animated}
                 delay={1000}
+                radius={1}
+                size={1}
+                style={{width: '100%'}}
               />
             </Stack>
           </Flex>

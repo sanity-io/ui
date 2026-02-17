@@ -7,8 +7,8 @@ export default function SanityUploadButtonWorkaroundStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center">
       <Button
-        className={sanityUploadButton}
         as="label"
+        className={sanityUploadButton}
         htmlFor="file"
         icon={UploadIcon}
         tabIndex={0}

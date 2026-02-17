@@ -23,10 +23,10 @@ export default function PropsStory(): React.JSX.Element {
     <LayerProvider>
       <Box padding={[4, 5, 6]}>
         <Button
-          id="open-dialog-button"
-          onClick={() => setOpen(true)}
           ref={buttonRef}
+          id="open-dialog-button"
           text="Open dialog"
+          onClick={() => setOpen(true)}
         />
 
         {open && (
@@ -35,11 +35,11 @@ export default function PropsStory(): React.JSX.Element {
             animate={animate}
             header={header}
             id="dialog"
-            onClickOutside={onClickOutside ? handleClose : undefined}
-            onClose={handleClose}
             open={open}
             // @ts-expect-error - TODO: fix this
             width={width}
+            onClickOutside={onClickOutside ? handleClose : undefined}
+            onClose={handleClose}
           >
             <Box padding={4}>
               <Stack gap={4}>

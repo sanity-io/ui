@@ -81,23 +81,24 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
 
   return (
     <TextInput
+      ref={ref}
       border={border}
       customValidity={customValidity}
       disabled={disabled}
-      // @ts-expect-error - TODO: fix this
       fontSize={fontSize}
       // @ts-expect-error - TODO: fix this
       gap={gap}
-      // @ts-expect-error - TODO: fix this
       icon={icon && icons[icon]}
-      // @ts-expect-error - TODO: fix this
       iconRight={iconRight && icons[iconRight]}
       id="text-input-example"
+
+      // @ts-expect-error - TODO: fix this
       name="test"
-      onChange={handleChange}
       // @ts-expect-error - TODO: fix this
       padding={padding}
+      // @ts-expect-error - TODO: fix this
       placeholder={placeholder}
+      // @ts-expect-error - TODO: fix this
       prefix={
         prefix && (
           <Box
@@ -113,10 +114,9 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
           </Box>
         )
       }
-      // @ts-expect-error - TODO: fix this
       radius={radius}
+      // @ts-expect-error - TODO: fix this
       readOnly={readOnly}
-      ref={ref}
       suffix={
         suffix && (
           <Box
@@ -135,6 +135,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       value={value}
       // @ts-expect-error - TODO: fix this
       weight={weight}
+      onChange={handleChange}
     />
   )
 }

@@ -172,11 +172,11 @@ export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIAL
   return (
     <Card
       {...rest}
+      ref={ref}
       as={as}
       className={dialogCard()}
       display="flex"
       flexDirection="column"
-      ref={ref}
     >
       {showHeader && (
         <Flex align="flex-start" className={dialogHeader()} padding={3} position="relative">
@@ -195,8 +195,8 @@ export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIAL
                 disabled={!onClose}
                 icon={CloseIcon}
                 mode="bleed"
-                onClick={onClose}
                 padding={2}
+                onClick={onClose}
               />
             </Box>
           )}
@@ -211,7 +211,7 @@ export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIAL
           />
         )}
 
-        <Box className={dialogScroller()} overflow="auto" ref={contentRef}>
+        <Box ref={contentRef} className={dialogScroller()} overflow="auto">
           {children}
         </Box>
 

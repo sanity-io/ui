@@ -15,14 +15,14 @@ export default function UploadButtonStory(): React.JSX.Element {
       <Button
         as="label"
         htmlFor="file"
-        onKeyDown={handleKeyDown}
         tabIndex={0}
         text={
           <>
             Upload
-            <input id="file" ref={inputRef} type="file" style={{display: 'none'}} />
+            <input ref={inputRef} id="file" style={{display: 'none'}} type="file" />
           </>
         }
+        onKeyDown={handleKeyDown}
       />
     </Flex>
   )

@@ -7,9 +7,9 @@ import {OVERFLOW_CONTROLS, SPACE_CONTROLS} from '../controls'
 const meta: Meta<typeof TabList> = {
   args: {
     children: [
-      <Tab aria-controls="example-panel-foo" icon={SunIcon} key="foo" id="foo" label="Foo" />,
-      <Tab aria-controls="example-panel-bar" icon={RocketIcon} key="bar" id="bar" label="Bar" />,
-      <Tab aria-controls="example-panel-baz" icon={OkHandIcon} key="baz" id="baz" label="Baz" />,
+      <Tab key="foo" aria-controls="example-panel-foo" icon={SunIcon} id="foo" label="Foo" />,
+      <Tab key="bar" aria-controls="example-panel-bar" icon={RocketIcon} id="bar" label="Bar" />,
+      <Tab key="baz" aria-controls="example-panel-baz" icon={OkHandIcon} id="baz" label="Baz" />,
     ],
   },
   argTypes: {
@@ -47,25 +47,25 @@ export const LongLabels: Story = {
   args: {
     children: [
       <Tab
+        key="foo"
         aria-controls="example-panel-foo"
         icon={SunIcon}
         id="foo"
         label="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce gravida, tellus non dictum cursus, augue tortor viverra lacus, id rhoncus ipsum mi vitae elit. Suspendisse mollis risus sollicitudin, scelerisque augue placerat, porttitor lectus. "
-        key="foo"
       />,
       <Tab
+        key="bar"
         aria-controls="example-panel-bar"
         icon={RocketIcon}
         id="bar"
         label="Ut nec dui est. Curabitur pulvinar euismod porta. Suspendisse finibus leo id mauris pretium, at luctus quam eleifend. "
-        key="bar"
       />,
       <Tab
+        key="baz"
         aria-controls="example-panel-baz"
         icon={OkHandIcon}
         id="baz"
         label="Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam varius sodales arcu sed ultrices. "
-        key="baz"
       />,
     ],
   },

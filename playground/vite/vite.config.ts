@@ -1,7 +1,7 @@
-import path from 'path'
-import {defineConfig} from 'vite'
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import react from '@vitejs/plugin-react'
+import path from 'path'
+import {defineConfig} from 'vite'
 
 const features = {
   dist: process.env.FEATURE_DIST === 'on',

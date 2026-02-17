@@ -166,17 +166,17 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       <span className={textInputElement()}>
         <Element
           {...rest}
+          ref={ref}
           className={_inputElement()}
           data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
           disabled={disabled}
           readOnly={readOnly}
-          ref={ref}
           type={type}
         />
 
         <span className={_inputPresentation()}>
           {IconComponent && (
-            <Box as="span" padding={padding} position="absolute" insetTop={0} insetLeft={0}>
+            <Box as="span" insetLeft={0} insetTop={0} padding={padding} position="absolute">
               <Text as="span" size={fontSize}>
                 {isValidElement(IconComponent) && IconComponent}
                 {isValidElementType(IconComponent) && <IconComponent />}
@@ -185,7 +185,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
           )}
 
           {!withClearButton && IconRightComponent && (
-            <Box as="span" padding={padding} position="absolute" insetTop={0} insetRight={0}>
+            <Box as="span" insetRight={0} insetTop={0} padding={padding} position="absolute">
               <Text as="span" size={fontSize}>
                 {isValidElement(IconRightComponent) && IconRightComponent}
                 {isValidElementType(IconRightComponent) && <IconRightComponent />}
@@ -196,12 +196,12 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
 
         {!disabled && !readOnly && clearButton && (
           <ClearButton
-            fontSize={fontSize}
-            radius={radius}
             clearButtonProps={isRecord(clearButton) ? clearButton : EMPTY_RECORD}
+            fontSize={fontSize}
             handleClearClick={handleClearClick}
             handleClearMouseDown={handleClearMouseDown}
             padding={responsivePadding}
+            radius={radius}
           />
         )}
       </span>
@@ -255,8 +255,8 @@ function ClearButton({
   return (
     <Box
       as="span"
-      insetTop={0}
       insetRight={0}
+      insetTop={0}
       padding={clearButtonBoxPadding}
       position="absolute"
       style={{zIndex: 2}}

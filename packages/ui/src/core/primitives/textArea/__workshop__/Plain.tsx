@@ -52,7 +52,6 @@ export default function PlainStory(): React.JSX.Element {
             // @ts-expect-error - TODO: fix this
             fontSize={fontSize}
             id="text-area-example"
-            onChange={(e) => setValue(e.target.value)}
             // @ts-expect-error - TODO: fix this
             padding={padding}
             placeholder={placeholder}
@@ -61,6 +60,7 @@ export default function PlainStory(): React.JSX.Element {
             readOnly={readOnly}
             rows={10}
             value={value}
+            onChange={(e) => setValue(e.target.value)}
           />
         </Stack>
       </Container>

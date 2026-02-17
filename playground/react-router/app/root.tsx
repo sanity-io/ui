@@ -1,6 +1,8 @@
 import '@sanity/ui/css/index.css'
 
 import {Box, Card, Code, Heading, Root, Text, usePrefersDark} from '@sanity/ui'
+import type {ColorScheme} from '@sanity/ui/theme'
+import {startTransition, useEffect, useRef, useState} from 'react'
 import {
   isRouteErrorResponse,
   Links,
@@ -12,9 +14,8 @@ import {
 } from 'react-router'
 
 import type {Route} from './+types/root'
-import type {ColorScheme} from '@sanity/ui/theme'
-import {useEffect, useRef, useState} from 'react'
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const headers: Route.HeadersFunction = () => {
   return {
     'Accept-CH': 'Sec-CH-Prefers-Color-Scheme',
@@ -23,6 +24,7 @@ export const headers: Route.HeadersFunction = () => {
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const links: Route.LinksFunction = () => [
   {
     rel: 'preconnect',
@@ -31,6 +33,7 @@ export const links: Route.LinksFunction = () => [
   },
 ]
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const loader = async ({request}: Route.LoaderArgs) => {
   const prefersDarkScheme = request.headers.get('Sec-CH-Prefers-Color-Scheme')
 
@@ -57,15 +60,17 @@ export function Layout({children}: {children: React.ReactNode}) {
       return
     }
 
-    setScheme(prefersDark ? 'dark' : 'light')
+    startTransition(() => {
+      setScheme(prefersDark ? 'dark' : 'light')
+    })
   }, [prefersDark])
 
   return (
     <Root lang="en" scheme={scheme}>
       <meta charSet="utf-8" />
       <meta
-        name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+        name="viewport"
       />
       <Meta />
       <Links />

@@ -50,7 +50,7 @@ export const AsLink: Story = {
 
 export const UploadButton: Story = {
   render: () => (
-    <Button className={sanityUploadButton} as="label" icon={UploadIcon} tabIndex={0} text="Upload">
+    <Button as="label" className={sanityUploadButton} icon={UploadIcon} tabIndex={0} text="Upload">
       <input type="file" />
     </Button>
   ),
@@ -138,34 +138,34 @@ export const MultipleStyles: Story = {
       <>
         <div />
         <Grid gap={2} marginY={2}>
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             Default
           </Text>
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             Size small
           </Text>
         </Grid>
         <Grid gap={3} marginY={2}>
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             Default
           </Text>
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             Muted
           </Text>
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             {' '}
             Size small
           </Text>
         </Grid>
         <Grid gap={3} marginY={2}>
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             Default
           </Text>
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             Muted
           </Text>
 
-          <Text size={0} align={'center'}>
+          <Text align={'center'} size={0}>
             {' '}
             Size small
           </Text>
@@ -175,7 +175,7 @@ export const MultipleStyles: Story = {
 
     return (
       <Stack gap={3}>
-        <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
+        <Flex align={'center'} direction={'row'} gap={4} wrap={'wrap'}>
           {matrixBuilder({
             scheme: 'light',
             columns: [...BUTTON_MODES],
@@ -183,14 +183,14 @@ export const MultipleStyles: Story = {
             title: 'Tone / Mode',
             subHeader: <SubHeader />,
             renderItem: ({row, column}) => (
-              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
-                <Button {...props} tone={row} mode={column} text={props.text} />
+              <Flex key={`${row}-${column}`} align={'center'} gap={1} justify={'center'}>
+                <Button {...props} mode={column} text={props.text} tone={row} />
 
                 {column !== 'default' && (
-                  <Button {...props} tone={row} mode={column} text={props.text} muted />
+                  <Button {...props} mode={column} muted text={props.text} tone={row} />
                 )}
                 {/* Small button */}
-                <Button {...props} gap={2} padding={2} tone={row} mode={column} text={props.text} />
+                <Button {...props} gap={2} mode={column} padding={2} text={props.text} tone={row} />
               </Flex>
             ),
           })}
@@ -202,14 +202,14 @@ export const MultipleStyles: Story = {
             subHeader: <SubHeader />,
 
             renderItem: ({row, column}) => (
-              <Flex align={'center'} gap={1} justify={'center'} key={`${row}-${column}`}>
-                <Button {...props} tone={row} mode={column} text={props.text} />
+              <Flex key={`${row}-${column}`} align={'center'} gap={1} justify={'center'}>
+                <Button {...props} mode={column} text={props.text} tone={row} />
 
                 {column !== 'default' && (
-                  <Button {...props} tone={row} mode={column} text={props.text} muted />
+                  <Button {...props} mode={column} muted text={props.text} tone={row} />
                 )}
                 {/* Small button */}
-                <Button {...props} gap={2} padding={2} tone={row} mode={column} text={props.text} />
+                <Button {...props} gap={2} mode={column} padding={2} text={props.text} tone={row} />
               </Flex>
             ),
           })}
@@ -226,7 +226,7 @@ export const CustomButton: Story = {
         <Stack gap={2}>
           <Grid columns={ELEMENT_TONES.length} gap={1}>
             {ELEMENT_TONES.map((tone) => (
-              <Button {...props} key={tone} mode="bleed" padding={3} tone={tone} text={undefined}>
+              <Button {...props} key={tone} mode="bleed" padding={3} text={undefined} tone={tone}>
                 <Stack gap={2}>
                   <Text>Text ({tone})</Text>
                   <Text muted>Muted</Text>
@@ -240,7 +240,7 @@ export const CustomButton: Story = {
           </Grid>
           <Grid columns={ELEMENT_TONES.length} gap={1}>
             {ELEMENT_TONES.map((tone) => (
-              <Button {...props} key={tone} mode="ghost" padding={3} tone={tone} text={undefined}>
+              <Button {...props} key={tone} mode="ghost" padding={3} text={undefined} tone={tone}>
                 <Stack gap={2}>
                   <Text>Text: ({tone})</Text>
                   <Text muted>Muted</Text>
@@ -255,7 +255,7 @@ export const CustomButton: Story = {
 
           <Grid columns={ELEMENT_TONES.length} gap={1}>
             {ELEMENT_TONES.map((tone) => (
-              <Button {...props} key={tone} mode="default" padding={3} tone={tone} text={undefined}>
+              <Button {...props} key={tone} mode="default" padding={3} text={undefined} tone={tone}>
                 <Stack gap={2}>
                   <Text>Text: ({tone})</Text>
                   <Text muted>Muted</Text>

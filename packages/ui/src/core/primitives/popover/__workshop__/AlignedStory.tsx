@@ -52,7 +52,7 @@ export default function AlignedStory(): React.JSX.Element {
 
   return (
     <Card height="fill" padding={[4, 5, 6]} sizing="border" tone="transparent">
-      <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
+      <Card ref={setBoundaryElement} height="fill" padding={2} shadow={1} sizing="border">
         <Flex
           // @ts-expect-error - TODO: fix this
           align={flexAlign}
@@ -61,25 +61,25 @@ export default function AlignedStory(): React.JSX.Element {
           justify={flexJustify}
         >
           <Popover
+            ref={popoverElementRef}
             constrainSize={constrainSize}
             content={content}
             floatingBoundary={boundaryElement}
             open={open}
             overflow="auto"
             padding={3}
-            portal={portal}
             // @ts-expect-error - TODO: fix this
             placement={placement}
-            ref={popoverElementRef}
+            portal={portal}
             // @ts-expect-error - TODO: fix this
             width={width}
           >
             <Button
+              ref={buttonElementRef}
               icon={EllipsisVerticalIcon}
               mode="bleed"
-              onClick={handleToggleOpen}
-              ref={buttonElementRef}
               selected={open}
+              onClick={handleToggleOpen}
             />
           </Popover>
         </Flex>

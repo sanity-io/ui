@@ -1,4 +1,5 @@
-import type {Placement, PopoverMargins} from '@sanity/ui'
+import type {Placement} from '../../types'
+import type {PopoverMargins} from './types'
 
 export const DEFAULT_POPOVER_DISTANCE = 4
 export const DEFAULT_POPOVER_PADDING = 4

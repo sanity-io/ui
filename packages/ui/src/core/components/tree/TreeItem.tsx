@@ -171,26 +171,26 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
         data-tree-key={itemKey}
         data-ui="TreeItem"
         {...(rest as BoxProps<'li'>)}
+        ref={setRootElement}
         as="li"
         className={treeItem({className})}
-        onClick={handleClick}
-        ref={setRootElement}
         role="none"
+        onClick={handleClick}
       >
         <Selectable
+          ref={treeitemRef}
           aria-expanded={expanded}
           as={linkAs}
           // data-pressed={selected ? '' : undefined}
           data-ui="TreeItem__box"
           href={href}
           radius={radius}
-          ref={treeitemRef}
           role="treeitem"
           selected={selected}
-          tabIndex={tabIndex}
           style={{
             paddingLeft: `calc(${vars.space[2]} * ${tree.level})`,
           }}
+          tabIndex={tabIndex}
         >
           {content}
         </Selectable>
@@ -204,19 +204,19 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
 
   return (
     <Box
+      // @ts-expect-error - TODO: fix this
+      ref={setRootElement}
       data-selected={selected ? '' : undefined}
-      data-ui="TreeItem"
       data-tree-id={id}
       data-tree-key={itemKey}
+      data-ui="TreeItem"
       {...(rest as BoxProps<'a'>)}
       aria-expanded={expanded}
       className={treeItem({className})}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      // @ts-expect-error - TODO: fix this
-      ref={setRootElement}
       role="treeitem"
       tabIndex={tabIndex}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
     >
       <Selectable
         as="button"

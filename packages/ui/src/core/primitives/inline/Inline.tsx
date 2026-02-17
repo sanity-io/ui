@@ -54,8 +54,8 @@ export function Inline<E extends InlineElementType = typeof DEFAULT_INLINE_ELEME
       alignItems="center"
       as={as}
       display="flex"
-      gap={gap}
       flexWrap="wrap"
+      gap={gap}
     >
       {children}
     </Box>

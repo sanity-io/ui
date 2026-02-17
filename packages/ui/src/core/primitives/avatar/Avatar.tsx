@@ -115,7 +115,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
       title={title}
     >
       <span className={avatarArrow()}>
-        <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
+        <svg fill="none" height="7" viewBox="0 0 11 7" width="11">
           <path
             d="M6.67948 1.50115L11 7L0 7L4.32052 1.50115C4.92109 0.736796 6.07891 0.736795 6.67948 1.50115Z"
             fill={color}
@@ -128,9 +128,9 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
         as="span"
         className={avatarInitials()}
         display="flex"
+        inset={0}
         justifyContent="center"
         position="absolute"
-        inset={0}
       >
         <Label align="center" as="span" size={initialsSize} weight="medium">
           {initials}
@@ -139,7 +139,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
 
       {src && (
         <Box className={avatarImage()} inset={0} position="absolute">
-          <img alt={initials} onError={handleImageError} src={src} />
+          <img alt={initials} src={src} onError={handleImageError} />
           <span className={avatarImageOutline()} />
         </Box>
       )}

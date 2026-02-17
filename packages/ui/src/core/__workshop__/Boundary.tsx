@@ -22,7 +22,7 @@ function Layout() {
         within the root element.
       </Text>
 
-      <Button onClick={() => toast.push({title: 'Hello!'})} text="Push toast message" width="min" />
+      <Button text="Push toast message" width="min" onClick={() => toast.push({title: 'Hello!'})} />
     </Stack>
   )
 }

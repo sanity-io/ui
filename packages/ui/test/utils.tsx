@@ -1,7 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
-
-import {Root} from '@sanity/ui'
-import {type ColorScheme} from '@sanity/ui/theme'
 import {
   render as _testRender,
   type RenderOptions as _TestRenderOptions,
@@ -9,11 +5,15 @@ import {
 } from '@testing-library/react'
 import {Fragment, type ReactNode, StrictMode} from 'react'
 
+import {Root} from '../src/core'
+import type {ColorScheme} from '../src/theme'
+
 export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ColorScheme
   strict?: boolean
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function DefaultWrapper({children}: {children?: ReactNode}) {
   return <main>{children}</main>
 }

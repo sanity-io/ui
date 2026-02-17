@@ -36,15 +36,15 @@ export default function StackedStory(): React.JSX.Element {
   return (
     <Card height="fill">
       <Flex align="center" height="fill" justify="center">
-        <Container width={0} style={{textAlign: 'center'}}>
+        <Container style={{textAlign: 'center'}} width={0}>
           <Box padding={4}>
             <Stack gap={1}>
               {tones.map(([title, tone]) => (
                 <Button
+                  key={tone}
                   disabled={disabled}
                   // @ts-expect-error - TODO: fix this
                   fontSize={fontSize}
-                  // @ts-expect-error - TODO: fix this
                   gap={gap}
                   // @ts-expect-error - TODO: fix this
                   icon={icon && icons[icon]}
@@ -52,17 +52,17 @@ export default function StackedStory(): React.JSX.Element {
                   iconRight={iconRight && icons[iconRight]}
                   // @ts-expect-error - TODO: fix this
                   justify={justify}
-                  key={tone}
                   // @ts-expect-error - TODO: fix this
                   mode={mode}
-                  onClick={onClick}
                   // @ts-expect-error - TODO: fix this
                   paddingX={paddingX}
-                  // @ts-expect-error - TODO: fix this
                   paddingY={paddingY}
+                  // @ts-expect-error - TODO: fix this
                   selected={selected}
                   text={title}
+                  // @ts-expect-error - TODO: fix this
                   tone={tone}
+                  onClick={onClick}
                 />
               ))}
             </Stack>

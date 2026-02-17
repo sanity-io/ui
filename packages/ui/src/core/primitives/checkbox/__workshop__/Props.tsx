@@ -19,10 +19,10 @@ export default function PropsStory(): React.JSX.Element {
           customValidity={invalid ? 'Invalid' : undefined}
           disabled={disabled}
           indeterminate={indeterminate}
+          readOnly={readOnly}
+          onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
-          onBlur={onBlur}
-          readOnly={readOnly}
         />
         <Box marginLeft={2}>
           <Text size={1} weight="medium">

@@ -79,7 +79,7 @@ const meta: Meta<typeof Dialog> = {
               <Story />
             </PortalProvider>
           </BoundaryElementProvider>
-          <div data-portal="" ref={setPortalElement} />
+          <div ref={setPortalElement} data-portal="" />
         </Card>
       )
     },
@@ -99,7 +99,7 @@ export default meta
 type Story = StoryObj<typeof Dialog>
 
 export const Default: Story = {
-  render: (props) => {
+  render: function Default(props) {
     return <Dialog {...props} />
   },
 }
@@ -114,27 +114,27 @@ export const WithoutClose: Story = {
 }
 
 export const OpenDialogWithButton: Story = {
-  render: (props) => {
+  render: function OpenDialogWithButton(props) {
     const [open, setOpen] = useState(false)
     const onClose = useCallback(() => setOpen(false), [])
     const onOpen = useCallback(() => setOpen(true), [])
 
     return (
       <>
-        <Button onClick={onOpen} text="Open dialog" />
+        <Button text="Open dialog" onClick={onOpen} />
         {open && (
           <Dialog
             animate
             {...props}
-            onClose={onClose}
             footer={
               <Card padding={3} style={{textAlign: 'right'}}>
                 <Inline>
-                  <Button onClick={onClose} mode="bleed" text="Close" />
+                  <Button mode="bleed" text="Close" onClick={onClose} />
                 </Inline>
               </Card>
             }
             open={open}
+            onClose={onClose}
           />
         )}
       </>
@@ -143,7 +143,7 @@ export const OpenDialogWithButton: Story = {
 }
 
 export const DynamicContent: Story = {
-  render: (props) => {
+  render: function DynamicContent(props) {
     const [numParagraphs, setNumParagraphs] = useState(1)
 
     return (
@@ -152,20 +152,20 @@ export const DynamicContent: Story = {
         footer={
           <Flex gap={2} justify="flex-end" padding={3}>
             <Button
-              onClick={() => setNumParagraphs((prev) => prev + 1)}
               text="Add paragraph"
               tone="primary"
+              onClick={() => setNumParagraphs((prev) => prev + 1)}
             />
             <Button
               disabled={numParagraphs === 0}
-              onClick={() => setNumParagraphs((prev) => (prev > 0 ? prev - 1 : 0))}
               text="Remove paragraph"
               tone="critical"
+              onClick={() => setNumParagraphs((prev) => (prev > 0 ? prev - 1 : 0))}
             />
           </Flex>
         }
       >
-        <Stack padding={4} gap={4}>
+        <Stack gap={4} padding={4}>
           {numParagraphs === 0 && (
             <Text muted size={1}>
               (No content)
@@ -197,7 +197,7 @@ export const Positioning: Story = {
     children: null,
     footer: null,
   },
-  render: (props) => {
+  render: function Positioning(props) {
     return (
       <Box>
         <Stack gap={3} style={{padding: 'calc(100vh - 100px) 0 '}}>
@@ -216,27 +216,27 @@ export const Positioning: Story = {
 }
 
 export const DeleteDocumentDialog: Story = {
-  render: (props) => {
+  render: function DeleteDocumentDialog(props) {
     const [open, setOpen] = useState(true)
     const onClose = useCallback(() => setOpen(false), [])
     const onOpen = useCallback(() => setOpen(true), [])
 
     return (
       <>
-        <Button onClick={onOpen} text="Open dialog" />
+        <Button text="Open dialog" onClick={onOpen} />
         {open && (
           <Dialog
             {...props}
-            onClose={onClose}
-            header="Delete document"
-            padding={3}
             footer={
-              <Flex width="fill" gap={3} justify={'flex-end'} padding={3}>
-                <Button onClick={onClose} mode="bleed" text="Cancel" tone="default" />
-                <Button onClick={onClose} mode="default" text="Close" tone="critical" />
+              <Flex gap={3} justify={'flex-end'} padding={3} width="fill">
+                <Button mode="bleed" text="Cancel" tone="default" onClick={onClose} />
+                <Button mode="default" text="Close" tone="critical" onClick={onClose} />
               </Flex>
             }
+            header="Delete document"
             open={open}
+            padding={3}
+            onClose={onClose}
           >
             <Box padding={4}>
               <Text size={1}>Are you sure you want to delete “Untitled”?</Text>

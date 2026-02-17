@@ -8,6 +8,8 @@ export default function HookStory(): React.JSX.Element {
       <Box padding={[4, 5, 6]}>
         <Inline gap={2}>
           <Button
+            text="Push info"
+            tone="neutral"
             onClick={() =>
               toast.push({
                 id: 'status',
@@ -23,11 +25,11 @@ export default function HookStory(): React.JSX.Element {
                 ),
               })
             }
-            text="Push info"
-            tone="neutral"
           />
 
           <Button
+            text="Push warning"
+            tone="caution"
             onClick={() =>
               toast.push({
                 id: 'status',
@@ -36,11 +38,11 @@ export default function HookStory(): React.JSX.Element {
                 status: 'warning',
               })
             }
-            text="Push warning"
-            tone="caution"
           />
 
           <Button
+            text="Push error"
+            tone="critical"
             onClick={() =>
               toast.push({
                 id: 'status',
@@ -49,11 +51,10 @@ export default function HookStory(): React.JSX.Element {
                 status: 'error',
               })
             }
-            text="Push error"
-            tone="critical"
           />
 
           <Button
+            text="Push some message"
             onClick={() =>
               toast.push({
                 // id: 'status',
@@ -62,7 +63,6 @@ export default function HookStory(): React.JSX.Element {
                 // status: 'error',
               })
             }
-            text="Push some message"
           />
         </Inline>
       </Box>
