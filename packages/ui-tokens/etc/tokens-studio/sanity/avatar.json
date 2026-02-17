@@ -1,0 +1,63 @@
+{
+  "avatar": {
+    "outline": {
+      "$type": "boxShadow",
+      "$value": [
+        {
+          "type": "dropShadow",
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": "{border.1}",
+          "color": "{color.bg}"
+        }
+      ]
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.full}"
+    },
+    "scale": {
+      "0": {
+        "distance": {
+          "$type": "dimension",
+          "$value": "-2px"
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "19px"
+        }
+      },
+      "1": {
+        "distance": {
+          "$type": "dimension",
+          "$value": "-4px"
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "25px"
+        }
+      },
+      "2": {
+        "distance": {
+          "$type": "dimension",
+          "$value": "-8px"
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "33px"
+        }
+      },
+      "3": {
+        "distance": {
+          "$type": "dimension",
+          "$value": "-8px"
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "49px"
+        }
+      }
+    }
+  }
+}

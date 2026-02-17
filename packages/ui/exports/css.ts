@@ -1,1 +1,1 @@
-export * from '../src/css'
+export * from '@sanity/ui-css'

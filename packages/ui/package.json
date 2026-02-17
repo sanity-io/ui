@@ -86,6 +86,8 @@
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.4",
+    "@sanity/ui-css": "workspace:*",
+    "@sanity/ui-tokens": "workspace:*",
     "@vanilla-extract/dynamic": "^2.1.5",
     "csstype": "^3.2.3",
     "motion": "^12.34.3",

@@ -1,0 +1,16 @@
+{
+  "border": {
+    "0": {
+      "$type": "dimension",
+      "$value": "0px"
+    },
+    "1": {
+      "$type": "dimension",
+      "$value": "0.5px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "1px"
+    }
+  }
+}

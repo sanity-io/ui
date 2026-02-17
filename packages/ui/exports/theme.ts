@@ -1,1 +1,1 @@
-export * from '../src/theme'
+export * from '@sanity/ui-tokens'

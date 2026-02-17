@@ -1,0 +1,10 @@
+{
+  "corner": {
+    "shape": {
+      "squircle": {
+        "$type": "number",
+        "$value": 1.36
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "input": {
+    "border": {
+      "width": {
+        "$type": "dimension",
+        "$value": "{border.2}"
+      }
+    },
+    "checkbox": {
+      "size": {
+        "$type": "dimension",
+        "$value": "17px"
+      }
+    },
+    "radio": {
+      "size": {
+        "$type": "dimension",
+        "$value": "17px"
+      },
+      "markSize": {
+        "$type": "dimension",
+        "$value": "9px"
+      }
+    },
+    "select": {},
+    "switch": {
+      "width": {
+        "$type": "dimension",
+        "$value": "25px"
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "17px"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "4px"
+      },
+      "transitionDurationMs": {
+        "$type": "string",
+        "$value": "150ms"
+      },
+      "transitionTimingFunction": {
+        "$type": "text",
+        "$value": "ease-out"
+      }
+    },
+    "text": {}
+  }
+}
