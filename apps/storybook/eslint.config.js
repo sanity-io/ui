@@ -1,7 +1,8 @@
 import {defineConfig} from '@repo/eslint-config'
+import storybook from 'eslint-plugin-storybook'
 
 export default defineConfig(import.meta.dirname, [
   {
-    ignores: ['.turbo', 'dist', 'tmp'],
+    ignores: ['.turbo', 'dist', 'storybook-static', 'tmp'],
   },
 ])
