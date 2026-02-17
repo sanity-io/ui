@@ -20,6 +20,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
     "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@storybook/addon-a11y": "^10.1.4",
     "@storybook/addon-docs": "^10.1.4",
     "@storybook/addon-themes": "^10.1.4",

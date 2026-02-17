@@ -26,6 +26,7 @@
     "@babel/plugin-transform-object-rest-spread": "^7.28.4",
     "@figma/plugin-typings": "^1.117.0",
     "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@sanity/color": "^3.0.6",
     "@sanity/ui": "workspace:*",
     "eslint": "^9.39.2",
