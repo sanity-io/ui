@@ -42,8 +42,8 @@ export default function PropsStory(): React.JSX.Element {
         selected={selected}
         // @ts-expect-error - TODO: fix this
         shadow={shadow}
-        tone={tone}
         // @ts-expect-error - TODO: fix this
+        tone={tone}
         onClick={useAction('onClick')}
       >
         <Stack gap={3}>
