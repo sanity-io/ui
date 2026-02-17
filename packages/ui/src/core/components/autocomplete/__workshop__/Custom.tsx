@@ -29,15 +29,15 @@ export default function CustomStory(): React.JSX.Element {
   const renderOption = useCallback(
     (option: ExampleOption) => (
       <Card
+        key={option.value}
         as="a"
         data-qa={`option-${option.value}`}
         href="#"
-        key={option.value}
-        onClick={(event) => event.preventDefault()}
-        // @ts-expect-error - TODO: fix this
         padding={padding}
         // @ts-expect-error - TODO: fix this
         radius={Math.max((radius ?? 0) - 1, 0) as Radius}
+        // @ts-expect-error - TODO: fix this
+        onClick={(event) => event.preventDefault()}
       >
         <Text
           // @ts-expect-error - TODO: fix this
@@ -76,7 +76,6 @@ export default function CustomStory(): React.JSX.Element {
               // @ts-expect-error - TODO: fix this
               fontSize={fontSize}
               id="custom"
-              onChange={setValue}
               openButton={openButton}
               options={options}
               // @ts-expect-error - TODO: fix this
@@ -88,6 +87,7 @@ export default function CustomStory(): React.JSX.Element {
               renderOption={renderOption}
               renderValue={renderValue}
               value={value}
+              onChange={setValue}
             />
           </Stack>
 
@@ -95,7 +95,7 @@ export default function CustomStory(): React.JSX.Element {
             <Code size={1}>{JSON.stringify(value)}</Code>
           </Box>
           <Box>
-            <Button id="set-value-btn" onClick={() => setValue('NO')} text="Set to NO" />
+            <Button id="set-value-btn" text="Set to NO" onClick={() => setValue('NO')} />
           </Box>
         </Stack>
       </Container>

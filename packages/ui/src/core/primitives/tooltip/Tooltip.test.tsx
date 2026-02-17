@@ -49,8 +49,8 @@ describe('Tooltip', () => {
       render(
         <Tooltip
           content={<Text size={1}>{'Tooltip content'}</Text>}
-          placement={'top'}
           delay={delay}
+          placement={'top'}
         >
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
@@ -86,11 +86,11 @@ describe('Tooltip', () => {
       render(
         <Tooltip
           content={<Text size={1}>{'Tooltip content'}</Text>}
-          placement={'top'}
           delay={{
             open: openDelay,
             close: closeDelay,
           }}
+          placement={'top'}
         >
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
@@ -127,13 +127,13 @@ describe('Tooltip', () => {
       vi.useFakeTimers()
       render(
         <TooltipDelayGroupProvider delay={delay}>
-          <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} placement={'top'} delay={400}>
+          <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} delay={400} placement={'top'}>
             <Button mode="bleed" text="Button 1" />
           </Tooltip>
           <Tooltip
             content={<Text size={1}>{'Tooltip 2'}</Text>}
-            placement={'top'}
             delay={400} // This should be overridden by the group delay
+            placement={'top'}
           >
             <Button mode="bleed" text="Button 2" />
           </Tooltip>
@@ -203,13 +203,13 @@ describe('Tooltip', () => {
             close: closeDelay,
           }}
         >
-          <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} placement={'top'} delay={400}>
+          <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} delay={400} placement={'top'}>
             <Button mode="bleed" text="Button 1" />
           </Tooltip>
           <Tooltip
             content={<Text size={1}>{'Tooltip 2'}</Text>}
-            placement={'top'}
             delay={400} // This should be overridden by the group delay
+            placement={'top'}
           >
             <Button mode="bleed" text="Button 2" />
           </Tooltip>
@@ -278,8 +278,8 @@ describe('Tooltip', () => {
       render(
         <Tooltip
           content={<Text size={1}>{'Tooltip content'}</Text>}
-          placement={'top'}
           delay={delay}
+          placement={'top'}
         >
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
@@ -310,8 +310,8 @@ describe('Tooltip', () => {
         <TooltipDelayGroupProvider delay={{close: delay}}>
           <Tooltip
             content={<Text size={1}>{'Tooltip content'}</Text>}
-            placement={'top'}
             delay={{close: delay}}
+            placement={'top'}
           >
             <Button mode="bleed" text="Hover me" />
           </Tooltip>
@@ -405,13 +405,13 @@ describe('Tooltip', () => {
           <Button
             data-testid="btn"
             mode="bleed"
+            text="Hover me"
             onBlur={handleBlur}
             onClick={handleClick}
             onContextMenu={handleContextMenu}
             onFocus={handleFocus}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            text="Hover me"
           />
         </Tooltip>,
       )

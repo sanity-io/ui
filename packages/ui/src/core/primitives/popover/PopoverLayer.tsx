@@ -106,22 +106,22 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
       className={popoverCard()}
       data-ui="Popover"
       {...rest}
+      animate={animate ? ['visible', 'scaleIn'] : undefined}
       as={motion.div}
       data-context-tone={tone}
       data-placement={placement}
-      flexDirection="column"
       display="flex"
+      exit={animate ? ['hidden', 'scaleOut'] : undefined}
+      flexDirection="column"
+      initial={animate ? ['hidden', 'initial'] : undefined}
       position={strategy}
       radius={radius}
       shadow={shadow}
       sizing="border"
       style={rootStyle}
       tone={tone}
-      variants={POPOVER_MOTION_PROPS.card}
       transition={POPOVER_MOTION_PROPS.transition}
-      initial={animate ? ['hidden', 'initial'] : undefined}
-      animate={animate ? ['visible', 'scaleIn'] : undefined}
-      exit={animate ? ['hidden', 'scaleOut'] : undefined}
+      variants={POPOVER_MOTION_PROPS.card}
     >
       <Flex
         data-ui="Popover__wrapper"
@@ -138,10 +138,10 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
       {arrow && (
         <Arrow
           ref={arrowRef}
-          style={arrowStyle}
-          width={DEFAULT_POPOVER_ARROW_WIDTH}
           height={DEFAULT_POPOVER_ARROW_HEIGHT}
           radius={DEFAULT_POPOVER_ARROW_RADIUS}
+          style={arrowStyle}
+          width={DEFAULT_POPOVER_ARROW_WIDTH}
         />
       )}
     </Layer>

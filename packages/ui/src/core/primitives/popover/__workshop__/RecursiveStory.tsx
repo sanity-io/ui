@@ -49,8 +49,8 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
 
   return (
     <Popover
-      fallbackPlacements={fallbackPlacements}
       content={<RecursiveExample onClose={handleClose} />}
+      fallbackPlacements={fallbackPlacements}
       open={open}
       padding={1}
       placement={fallbackPlacements[3]}
@@ -58,11 +58,11 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       tone={CARD_TONES[seed]}
     >
       <Button
-        mode="bleed"
-        onKeyDown={handleKeyDown}
-        onClick={handleOpen}
         ref={buttonRef}
+        mode="bleed"
         text="Open"
+        onClick={handleOpen}
+        onKeyDown={handleKeyDown}
       />
     </Popover>
   )

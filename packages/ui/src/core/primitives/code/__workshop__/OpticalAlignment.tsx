@@ -7,7 +7,7 @@ export default function OpticalAlignment(): React.JSX.Element {
   return (
     <Stack gap={3} padding={[4, 5, 6]}>
       {FONT_CODE_SIZE.map((size) => (
-        <Box display="flex" gap={2} key={size}>
+        <Box key={size} display="flex" gap={2}>
           <div style={{outline: `0.5px solid ${vars.color.tinted.suggest.border[4]}`}}>
             <Code size={size}>
               <CropIcon />

@@ -35,10 +35,10 @@ export const TreeGroup = function TreeGroup(
       as="ul"
       data-ui="TreeGroup"
       {...rest}
+      gap={tree.gap}
       hidden={!expanded}
       marginTop={tree.gap}
       role="group"
-      gap={tree.gap}
     >
       {children}
     </Stack>

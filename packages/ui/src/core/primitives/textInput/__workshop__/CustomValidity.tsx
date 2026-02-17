@@ -5,7 +5,7 @@ export default function CustomValidityStory(): React.JSX.Element {
   const customValidity = useText('Custom validity', 'Invalid value') || undefined
 
   return (
-    <Container as="form" onSubmit={(event) => event.preventDefault()} width={0}>
+    <Container as="form" width={0} onSubmit={(event) => event.preventDefault()}>
       <Card padding={4}>
         <Stack gap={4}>
           <TextInput customValidity={customValidity} />

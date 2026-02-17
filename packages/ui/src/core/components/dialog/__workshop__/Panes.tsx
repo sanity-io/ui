@@ -18,7 +18,7 @@ export default function PanesStory(): React.JSX.Element {
   return (
     <Flex height="fill">
       <Pane id="A" />
-      <Pane id="B" borderLeft />
+      <Pane borderLeft id="B" />
     </Flex>
   )
 }
@@ -36,21 +36,21 @@ function Pane(props: {borderLeft?: boolean; id: string}) {
   return (
     <BoundaryElementProvider element={element}>
       <PortalProvider element={portalElement}>
-        <Card className={paneRoot} borderLeft={borderLeft} flex={1} ref={setElement}>
+        <Card ref={setElement} borderLeft={borderLeft} className={paneRoot} flex={1}>
           <Box padding={4}>
-            <Button onClick={() => setDialogOpen(true)} selected={dialogOpen} text="Open dialog" />
+            <Button selected={dialogOpen} text="Open dialog" onClick={() => setDialogOpen(true)} />
           </Box>
 
-          <div className={panePortal} ref={setPortalElement} />
+          <div ref={setPortalElement} className={panePortal} />
         </Card>
 
         {dialogOpen && (
           <Dialog
             header={`Dialog ${id}`}
             id={id}
+            position="absolute"
             onClickOutside={handleClose}
             onClose={handleClose}
-            position="absolute"
           >
             <Box padding={4}>
               <MenuButton

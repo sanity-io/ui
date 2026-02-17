@@ -27,7 +27,7 @@ export const Controlled: Story = {
       include: ['customValidity', 'indeterminate'],
     },
   },
-  render: (props) => {
+  render: function Controlled(props) {
     const [selected, setChecked] = useState(false)
 
     const handleChange = useCallback(() => {
@@ -47,7 +47,7 @@ export const InputStates: Story = {
   render: (props) => {
     return (
       <Stack gap={3}>
-        <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
+        <Flex align={'center'} direction={'row'} gap={4} wrap={'wrap'}>
           {matrixBuilder({
             scheme: 'light',
             columns: ['default', 'indeterminate', 'checked'],
@@ -58,12 +58,12 @@ export const InputStates: Story = {
                 <Flex justify="center" marginTop={2}>
                   <Checkbox
                     {...props}
+                    key={row + column}
+                    customValidity={row === 'customValidity' ? 'error' : undefined}
                     defaultChecked={column === 'checked'}
                     disabled={row === 'disabled'}
                     indeterminate={column === 'indeterminate'}
                     readOnly={row === 'readOnly'}
-                    customValidity={row === 'customValidity' ? 'error' : undefined}
-                    key={row + column}
                   />
                 </Flex>
               )
@@ -79,12 +79,12 @@ export const InputStates: Story = {
                 <Flex justify="center" marginTop={2}>
                   <Checkbox
                     {...props}
+                    key={row + column}
+                    customValidity={row === 'customValidity' ? 'error' : undefined}
                     defaultChecked={column === 'checked'}
                     disabled={row === 'disabled'}
                     indeterminate={column === 'indeterminate'}
                     readOnly={row === 'readOnly'}
-                    customValidity={row === 'customValidity' ? 'error' : undefined}
-                    key={row + column}
                   />
                 </Flex>
               )

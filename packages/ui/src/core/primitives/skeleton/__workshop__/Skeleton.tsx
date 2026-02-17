@@ -27,40 +27,40 @@ export default function SkeletonStory(): React.JSX.Element {
           {[1, 2, 3].map((item) => (
             <Card
               key={item}
-              // @ts-expect-error - TODO: fix this
-              tone={tone}
+              border
               padding={2}
               radius={2}
-              border
+              // @ts-expect-error - TODO: fix this
+              tone={tone}
             >
               <Flex align="center">
                 <Grid gap={2} gridTemplateColumns={2} marginRight={3}>
-                  <Skeleton style={{width: 40, height: 40}} radius={2} animated={animated} />
-                  <Skeleton style={{width: 40, height: 40}} radius={2} animated={animated} />
-                  <Skeleton style={{width: 40, height: 40}} radius={2} animated={animated} />
-                  <Skeleton style={{width: 40, height: 40}} radius={2} animated={animated} />
+                  <Skeleton animated={animated} radius={2} style={{width: 40, height: 40}} />
+                  <Skeleton animated={animated} radius={2} style={{width: 40, height: 40}} />
+                  <Skeleton animated={animated} radius={2} style={{width: 40, height: 40}} />
+                  <Skeleton animated={animated} radius={2} style={{width: 40, height: 40}} />
                 </Grid>
-                <Stack gap={2} flex={1}>
-                  <HeadingSkeleton style={{width: '100%'}} radius={1} animated={animated} />
-                  <TextSkeleton style={{width: '100%'}} radius={1} animated={animated} />
-                  <LabelSkeleton style={{width: '100%'}} radius={1} animated={animated} />
-                  <CodeSkeleton style={{width: '100%'}} radius={1} animated={animated} />
+                <Stack flex={1} gap={2}>
+                  <HeadingSkeleton animated={animated} radius={1} style={{width: '100%'}} />
+                  <TextSkeleton animated={animated} radius={1} style={{width: '100%'}} />
+                  <LabelSkeleton animated={animated} radius={1} style={{width: '100%'}} />
+                  <CodeSkeleton animated={animated} radius={1} style={{width: '100%'}} />
                 </Stack>
               </Flex>
               <Flex marginTop={2}>
                 <Skeleton
-                  style={{height: 50}}
+                  animated={animated}
                   flex={1}
                   marginRight={1}
                   radius={2}
-                  animated={animated}
+                  style={{height: 50}}
                 />
                 <Skeleton
-                  style={{height: 50}}
+                  animated={animated}
                   flex={1}
                   marginLeft={1}
                   radius={2}
-                  animated={animated}
+                  style={{height: 50}}
                 />
               </Flex>
             </Card>

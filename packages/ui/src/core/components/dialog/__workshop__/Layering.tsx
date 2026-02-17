@@ -5,12 +5,12 @@ export default function LayeringStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <LayerProvider>
-        <Layer zOffset={10} id="a">
+        <Layer id="a" zOffset={10}>
           <Card padding={2} shadow={2}>
             <DebugLayer />
           </Card>
         </Layer>
-        <Layer zOffset={10} id="b">
+        <Layer id="b" zOffset={10}>
           <Card padding={2} shadow={2}>
             <DebugLayer />
           </Card>
@@ -18,8 +18,8 @@ export default function LayeringStory(): React.JSX.Element {
         <Dialog
           header="Layering example"
           id="layering-example"
-          onClose={useAction('onEscape')}
           zOffset={100}
+          onClose={useAction('onEscape')}
         >
           <Box padding={4}>
             <DebugLayer />

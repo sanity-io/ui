@@ -29,8 +29,8 @@ export default function OverflowingBoundaryStory(): React.JSX.Element {
     <Flex align="center" height="fill" justify="center" style={{height: '200vh'}}>
       <BoundaryElementProvider element={useBoundaryElement ? boundaryElement : null}>
         <Card
-          border
           ref={setBoundaryElement}
+          border
           style={{
             height: 'calc(100vh - 100px)',
             overflow: 'hidden',
@@ -46,8 +46,8 @@ export default function OverflowingBoundaryStory(): React.JSX.Element {
                 <Button
                   disabled={buttonsVisible}
                   fontSize={1}
-                  onClick={handleShowButtons}
                   text="Show buttons"
+                  onClick={handleShowButtons}
                 />
               </Stack>
             </Flex>
@@ -63,9 +63,9 @@ export default function OverflowingBoundaryStory(): React.JSX.Element {
             >
               <Button
                 mode="bleed"
-                onClick={handleHideButtons}
                 style={{position: 'absolute', top: 10, right: 10}}
                 text="Tooltip"
+                onClick={handleHideButtons}
               />
             </Tooltip>
           )}

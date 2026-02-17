@@ -362,6 +362,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     <TooltipLayer
       data-ui="Tooltip"
       {...rest}
+      ref={setFloating}
       animate={animate}
       arrow={arrowProp}
       arrowRef={setArrow}
@@ -374,7 +375,6 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       padding={padding}
       placement={placement}
       radius={radius}
-      ref={setFloating}
       scheme={scheme}
       shadow={shadow}
       style={{
@@ -400,7 +400,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
 
     children = (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        <CardProvider tone={resolvedTone} scheme={scheme ?? 'light'}>
+        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone}>
           {node}
         </CardProvider>
       </Portal>

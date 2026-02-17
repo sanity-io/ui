@@ -4,7 +4,7 @@ import '@sanity/ui/css/index.css'
 
 import {Root, usePrefersDark} from '@sanity/ui'
 import {ColorScheme} from '@sanity/ui/theme'
-import {ReactNode, useEffect, useRef, useState} from 'react'
+import {ReactNode, startTransition, useEffect, useRef, useState} from 'react'
 
 export function AppRoot(props: {children: ReactNode; initialPrefersDark: boolean}) {
   const {children, initialPrefersDark} = props
@@ -20,12 +20,16 @@ export function AppRoot(props: {children: ReactNode; initialPrefersDark: boolean
 
     if (document.startViewTransition) {
       document.startViewTransition(() => {
-        setScheme(prefersDark ? 'dark' : 'light')
+        startTransition(() => {
+          setScheme(prefersDark ? 'dark' : 'light')
+        })
       })
       return
     }
 
-    setScheme(prefersDark ? 'dark' : 'light')
+    startTransition(() => {
+      setScheme(prefersDark ? 'dark' : 'light')
+    })
   }, [prefersDark])
 
   return (

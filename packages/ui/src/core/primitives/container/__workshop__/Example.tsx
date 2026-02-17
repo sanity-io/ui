@@ -10,9 +10,9 @@ export default function PlainStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container
-        onClick={useAction('onClick')}
         // @ts-expect-error - TODO: fix this
         width={width}
+        onClick={useAction('onClick')}
       >
         <Card padding={4} shadow={1}>
           <Text size={1}>

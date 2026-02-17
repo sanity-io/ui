@@ -66,7 +66,7 @@ export const Radius: Story = {
 }
 
 export const WithClearButton: Story = {
-  render: (props) => {
+  render: function WithClearButton(props) {
     const [value, setValue] = useState('')
 
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,10 +84,10 @@ export const WithClearButton: Story = {
             {...props}
             clearButton
             customValidity={props.customValidity}
-            onChange={handleChange}
-            onClear={handleClear}
             placeholder={props['placeholder']}
             value={value}
+            onChange={handleChange}
+            onClear={handleClear}
           />
         </Box>
       </Container>
@@ -101,10 +101,10 @@ export const InputStates: Story = {
       include: [],
     },
   },
-  render: (props) => {
+  render: function InputStates(props) {
     return (
       <Grid columns={[1, 1, 4]} gapX={3} gapY={5}>
-        <Box columnStart={1} columnEnd={[1, 1, 5]}>
+        <Box columnEnd={[1, 1, 5]} columnStart={1}>
           <Text weight="medium">Without error</Text>
         </Box>
 
@@ -134,7 +134,7 @@ export const InputStates: Story = {
           <TextInput {...props} defaultValue="Existing value" disabled readOnly />
         </FieldWrapper>
 
-        <Box columnStart={1} columnEnd={[1, 1, 5]}>
+        <Box columnEnd={[1, 1, 5]} columnStart={1}>
           <Text weight="medium">With error</Text>
         </Box>
 

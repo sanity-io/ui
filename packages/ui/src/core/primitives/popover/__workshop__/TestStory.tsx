@@ -40,7 +40,7 @@ export default function TestStory(): React.JSX.Element {
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
 
   const button = (
-    <Button text="reference" selected style={{width: referenceWide ? 300 : undefined}} />
+    <Button selected style={{width: referenceWide ? 300 : undefined}} text="reference" />
   )
 
   return (
@@ -56,8 +56,8 @@ export default function TestStory(): React.JSX.Element {
       }}
     >
       <div
-        data-portal=""
         ref={setPortalElement}
+        data-portal=""
         style={{
           position: 'absolute',
           top: 0,
@@ -77,8 +77,8 @@ export default function TestStory(): React.JSX.Element {
               {mount && (
                 <Popover
                   arrow={arrow}
-                  content={<Text size={1}>{text}</Text>}
                   constrainSize={constrainSize}
+                  content={<Text size={1}>{text}</Text>}
                   fallbackPlacements={['left', 'bottom', 'right', 'top']}
                   matchReferenceWidth={matchReferenceWidth}
                   open={open}

@@ -17,10 +17,10 @@ export default function ToastStory(): React.JSX.Element {
         <Toast
           closable={closable}
           description={description}
-          onClose={handleClose}
           // @ts-expect-error - TODO: fix this
           status={status}
           title={title}
+          onClose={handleClose}
         />
       </Container>
     </Box>

@@ -157,15 +157,15 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
       <Box
         data-ui="Menu"
         {...rest}
+        ref={handleRefChange}
         as={as}
         className={menu({className})}
-        onKeyDown={handleKeyDown}
-        overflow="auto"
         outline="none"
+        overflow="auto"
         padding={padding}
-        ref={handleRefChange}
         role="menu"
         tabIndex={-1}
+        onKeyDown={handleKeyDown}
       >
         <Stack gap={gap}>{children}</Stack>
       </Box>

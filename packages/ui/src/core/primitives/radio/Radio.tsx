@@ -50,12 +50,12 @@ export function Radio<E extends RadioElementType = typeof DEFAULT_RADIO_ELEMENT>
     <span className={radio({className})} data-ui="Radio" style={style}>
       <Element
         {...rest}
+        ref={ref}
         className={radioInput()}
         data-invalid={customValidity ? '' : undefined}
         data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         readOnly={readOnly}
-        ref={ref}
         type="radio"
       />
       <span className={radioPresentation()} />

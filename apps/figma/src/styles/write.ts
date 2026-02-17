@@ -1,13 +1,14 @@
 import {
   CARD_TONES,
+  type CardColorTokens,
   COLOR_SCHEMES,
   SHADOW,
-  type CardColorTokens,
   type ShadowProperties,
 } from '@sanity/ui/theme'
 
 import {theme} from '../theme'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parseColor = (_color: any) => ({r: 0, g: 0, b: 0, a: 1})
 
 export function writeStyles(): void {

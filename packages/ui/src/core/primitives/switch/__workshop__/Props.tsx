@@ -13,8 +13,8 @@ export default function PropsStory(): React.JSX.Element {
       <Switch
         checked={checked}
         indeterminate={indeterminate}
-        onChange={handleChange}
         readOnly={readOnly}
+        onChange={handleChange}
       />
     </Flex>
   )

@@ -64,7 +64,7 @@ export const InputStates: Story = {
   render: (props) => {
     return (
       <Stack gap={3}>
-        <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
+        <Flex align={'center'} direction={'row'} gap={4} wrap={'wrap'}>
           {matrixBuilder({
             scheme: 'light',
             columns: ['default', 'checked'],
@@ -75,10 +75,10 @@ export const InputStates: Story = {
                 <Flex justify="center" marginTop={2}>
                   <ControlledSwitch
                     {...props}
+                    key={row + column}
                     defaultChecked={column === 'checked'}
                     disabled={row === 'disabled'}
                     readOnly={row === 'readOnly'}
-                    key={row + column}
                   />
                 </Flex>
               )
@@ -94,10 +94,10 @@ export const InputStates: Story = {
                 <Flex justify="center" marginTop={2}>
                   <ControlledSwitch
                     {...props}
+                    key={row + column}
                     defaultChecked={column === 'checked'}
                     disabled={row === 'disabled'}
                     readOnly={row === 'readOnly'}
-                    key={row + column}
                   />
                 </Flex>
               )

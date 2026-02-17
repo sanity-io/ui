@@ -34,7 +34,7 @@ export const WithHook: Story = {
       },
     },
   },
-  render: () => {
+  render: function WithHook() {
     const toast = useToast()
     const id1 = useId()
     const id2 = useId()
@@ -67,6 +67,8 @@ export const WithHook: Story = {
           <Heading>Default duration</Heading>
           <Inline gap={2}>
             <Button
+              text="Push info"
+              tone="primary"
               onClick={() =>
                 toast.push({
                   id: id1,
@@ -82,10 +84,10 @@ export const WithHook: Story = {
                   ),
                 })
               }
-              text="Push info"
-              tone="primary"
             />
             <Button
+              text="Push warning"
+              tone="caution"
               onClick={() =>
                 toast.push({
                   id: id1,
@@ -94,10 +96,10 @@ export const WithHook: Story = {
                   status: 'warning',
                 })
               }
-              text="Push warning"
-              tone="caution"
             />
             <Button
+              text="Push error"
+              tone="critical"
               onClick={() =>
                 toast.push({
                   id: id1,
@@ -106,17 +108,15 @@ export const WithHook: Story = {
                   status: 'error',
                 })
               }
-              text="Push error"
-              tone="critical"
             />
             <Button
+              text="Push some message"
               onClick={() =>
                 toast.push({
                   closable: true,
                   title: 'Some message',
                 })
               }
-              text="Push some message"
             />
           </Inline>
         </Grid>
@@ -124,6 +124,8 @@ export const WithHook: Story = {
           <Heading>10s duration</Heading>
           <Inline gap={2}>
             <Button
+              text="Push info"
+              tone="primary"
               onClick={() =>
                 toast.push({
                   id: id2,
@@ -140,10 +142,10 @@ export const WithHook: Story = {
                   duration: 10_000,
                 })
               }
-              text="Push info"
-              tone="primary"
             />
             <Button
+              text="Push warning"
+              tone="caution"
               onClick={() =>
                 toast.push({
                   id: id2,
@@ -153,10 +155,10 @@ export const WithHook: Story = {
                   duration: 10_000,
                 })
               }
-              text="Push warning"
-              tone="caution"
             />
             <Button
+              text="Push error"
+              tone="critical"
               onClick={() =>
                 toast.push({
                   id: id2,
@@ -166,10 +168,9 @@ export const WithHook: Story = {
                   duration: 10_000,
                 })
               }
-              text="Push error"
-              tone="critical"
             />
             <Button
+              text="Push some message"
               onClick={() =>
                 toast.push({
                   closable: true,
@@ -177,7 +178,6 @@ export const WithHook: Story = {
                   duration: 10_000,
                 })
               }
-              text="Push some message"
             />
           </Inline>
         </Grid>
@@ -185,6 +185,8 @@ export const WithHook: Story = {
           <Heading>Infinite duration</Heading>
           <Inline gap={2}>
             <Button
+              text="Push info"
+              tone="primary"
               onClick={() =>
                 toast.push({
                   id: id3,
@@ -201,10 +203,10 @@ export const WithHook: Story = {
                   duration: Infinity,
                 })
               }
-              text="Push info"
-              tone="primary"
             />
             <Button
+              text="Push warning"
+              tone="caution"
               onClick={() =>
                 toast.push({
                   id: id3,
@@ -214,10 +216,10 @@ export const WithHook: Story = {
                   duration: Infinity,
                 })
               }
-              text="Push warning"
-              tone="caution"
             />
             <Button
+              text="Push error"
+              tone="critical"
               onClick={() =>
                 toast.push({
                   id: id3,
@@ -227,10 +229,9 @@ export const WithHook: Story = {
                   duration: Infinity,
                 })
               }
-              text="Push error"
-              tone="critical"
             />
             <Button
+              text="Push some message"
               onClick={() =>
                 toast.push({
                   closable: true,
@@ -238,7 +239,6 @@ export const WithHook: Story = {
                   duration: Infinity,
                 })
               }
-              text="Push some message"
             />
           </Inline>
         </Grid>
@@ -246,6 +246,8 @@ export const WithHook: Story = {
           <Heading>Sanity Studio patterns</Heading>
           <Inline gap={2}>
             <Button
+              text="New package available"
+              tone="primary"
               onClick={() =>
                 toast.push({
                   // Based on https://github.com/sanity-io/sanity/blob/4945f0ad8a07a916d717cc4024179362edf73118/packages/sanity/src/core/studio/packageVersionStatus/PackageVersionStatusProvider.tsx#L31-L53
@@ -256,9 +258,9 @@ export const WithHook: Story = {
                       <Button
                         gap={3}
                         padding={3}
-                        onClick={() => window.location.reload()}
                         text="Push to reload"
                         tone="primary"
+                        onClick={() => window.location.reload()}
                       />
                     </Box>
                   ),
@@ -267,10 +269,10 @@ export const WithHook: Story = {
                   duration: 1000 * 60 * 60 * 24 * 24,
                 })
               }
-              text="New package available"
-              tone="primary"
             />
             <Button
+              text="Sync before publish"
+              tone="caution"
               onClick={async () => {
                 const hide = syncLockToast()
 
@@ -283,10 +285,10 @@ export const WithHook: Story = {
                   status: 'success',
                 })
               }}
-              text="Sync before publish"
-              tone="caution"
             />
             <Button
+              text="Sync eventually fails"
+              tone="critical"
               onClick={async () => {
                 const hide = syncLockToast()
 
@@ -300,10 +302,9 @@ export const WithHook: Story = {
                   duration: 10_000,
                 })
               }}
-              text="Sync eventually fails"
-              tone="critical"
             />
             <Button
+              text="Publish right away"
               onClick={() => {
                 const hide = syncLockToast()
 
@@ -315,7 +316,6 @@ export const WithHook: Story = {
                   status: 'success',
                 })
               }}
-              text="Publish right away"
             />
           </Inline>
         </Grid>

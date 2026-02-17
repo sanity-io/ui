@@ -41,11 +41,11 @@ export function ToastLayer<E extends ToastLayerElementType = typeof DEFAULT_TOAS
       as={as}
       className={toastLayer()}
       data-ui="ToastProvider"
+      gap={gap}
+      gridTemplateColumns={1}
       padding={padding}
       paddingX={paddingX}
       paddingY={paddingY}
-      gap={gap}
-      gridTemplateColumns={1}
       style={{zIndex}}
     >
       {children}

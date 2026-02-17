@@ -63,13 +63,13 @@ export function Checkbox<E extends CheckboxElementType = typeof DEFAULT_CHECKBOX
     <span className={checkbox({className})} data-ui="Checkbox" style={style}>
       <Element
         {...rest}
+        ref={ref}
         className={checkboxInput()}
         data-invalid={customValidity ? '' : undefined}
         data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
-        type="checkbox"
         readOnly={readOnly}
-        ref={ref}
+        type="checkbox"
       />
       <span className={checkboxPresentation()}>
         <CheckmarkIcon />

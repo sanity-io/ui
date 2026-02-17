@@ -12,7 +12,7 @@ export function ColorPalette(): ReactNode {
     <Card scheme="light" tone="default">
       <Grid columns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
         {HUES.map((hue) => (
-          <ColorHuePreview hue={hue} key={hue} />
+          <ColorHuePreview key={hue} hue={hue} />
         ))}
       </Grid>
     </Card>

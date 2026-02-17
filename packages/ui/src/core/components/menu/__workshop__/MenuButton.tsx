@@ -36,7 +36,7 @@ export default function MenuButtonStory(): React.JSX.Element {
       tone={layoutTone}
     >
       <Box padding={[4, 5, 6]}>
-        <Grid gridTemplateColumns={3} gap={2}>
+        <Grid gap={2} gridTemplateColumns={3}>
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>
             <MenuButton
@@ -47,37 +47,37 @@ export default function MenuButtonStory(): React.JSX.Element {
                   <MenuItem
                     icon={SearchIcon}
                     id="menu-item-1"
-                    onClick={useAction('Search')}
                     text="Search"
+                    onClick={useAction('Search')}
                   />
                   <MenuItem
                     icon={ClockIcon}
                     id="menu-item-2"
-                    onClick={useAction('Clock')}
                     text="Clock"
+                    onClick={useAction('Clock')}
                   />
                   <MenuItem
                     disabled
                     icon={CommentIcon}
                     id="menu-item-3"
-                    onClick={useAction('Comment')}
                     text="Comment"
+                    onClick={useAction('Comment')}
                   />
                   <MenuDivider />
                   <MenuItem
                     icon={ExpandIcon}
                     id="menu-item-4"
-                    onClick={useAction('Expand')}
                     text="Expand"
+                    onClick={useAction('Expand')}
                   />
                 </Menu>
               }
+              popover={popover}
               onClose={useAction('onClose')}
               onOpen={useAction('onOpen')}
-              popover={popover}
             />
           </LayerProvider>
-          <Button mode="ghost" id="next-button" text="Next" />
+          <Button id="next-button" mode="ghost" text="Next" />
         </Grid>
       </Box>
     </Card>

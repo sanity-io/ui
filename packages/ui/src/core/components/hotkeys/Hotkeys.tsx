@@ -51,7 +51,7 @@ export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_EL
   return (
     <Box as={as} data-ui="Hotkeys" {...rest} display="flex" gap={gap} gapX={gapX} gapY={gapY}>
       {keys.map((key, i) => (
-        <KBD fontSize={fontSize} key={i} padding={padding} radius={radius}>
+        <KBD key={i} fontSize={fontSize} padding={padding} radius={radius}>
           {key}
         </KBD>
       ))}

@@ -51,26 +51,26 @@ export default function ButtonStory(): React.JSX.Element {
         gap={gap}
         // @ts-expect-error - TODO: fix this
         icon={icon && icons[icon]}
-        // @ts-expect-error - TODO: fix this
         iconRight={iconRight && icons[iconRight]}
         // @ts-expect-error - TODO: fix this
         justify={justify}
         loading={loading}
         // @ts-expect-error - TODO: fix this
         mode={mode}
-        onClick={useAction('onClick')}
         // @ts-expect-error - TODO: fix this
         paddingX={paddingX}
         // @ts-expect-error - TODO: fix this
         paddingY={paddingY}
         selected={selected}
+        text={textProp}
         // @ts-expect-error - TODO: fix this
         textAlign={textAlign}
-        text={textProp}
         // @ts-expect-error - TODO: fix this
         textWeight={textWeight}
         // @ts-expect-error - TODO: fix this
         tone={tone}
+        // @ts-expect-error - TODO: fix this
+        onClick={useAction('onClick')}
       />
     </Flex>
   )

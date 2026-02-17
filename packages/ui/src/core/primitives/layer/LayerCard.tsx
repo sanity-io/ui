@@ -78,11 +78,11 @@ export function LayerCard<E extends LayerCardElementType = typeof DEFAULT_LAYER_
     <Card
       data-ui="Layer"
       {...rest}
-      as={as as CardElementType}
-      onFocus={handleFocus}
-      position={position}
       ref={ref}
+      as={as as CardElementType}
+      position={position}
       style={{...style, zIndex}}
+      onFocus={handleFocus}
     >
       {children}
     </Card>
