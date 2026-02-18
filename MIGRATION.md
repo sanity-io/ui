@@ -11,12 +11,12 @@ Version 3.0.0 of `@sanity/ui` includes important dependency upgrades that addres
 ### 1. Node.js Version Requirement
 
 **v2:** Node.js >= 14.0.0  
-**v3:** Node.js >= 20.19 (20.x series) or >= 22.12 (22.x series)
+**v3:** Node.js >= 20.19.0 in the 20.x series, or >= 22.12.0 in the 22.x series
 
 > **Note**: Node.js versions 22.0 through 22.11 are not supported. If using Node.js 22, you must be on version 22.12 or later.
 
 **Action Required:**
-- Upgrade your Node.js version to meet the v3 requirements. We recommend using the latest LTS version (20.x or 22.x)
+- Upgrade your Node.js version to meet the v3 requirements. We recommend using the latest LTS version
 
 ```bash
 # Check your current Node.js version
@@ -98,7 +98,7 @@ function MyComponent() {
 
 1. **Verify Node.js version:**
    ```bash
-   node --version  # Should be >= 20.19 (20.x series) or >= 22.12 (22.x series)
+   node --version  # Should be >= 20.19.0 (20.x series) or >= 22.12.0 (22.x series)
    ```
 
 2. **Update @sanity/ui:**
