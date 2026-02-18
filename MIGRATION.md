@@ -11,10 +11,10 @@ Version 3.0.0 of `@sanity/ui` includes important dependency upgrades that addres
 ### 1. Node.js Version Requirement
 
 **v2:** Node.js >= 14.0.0  
-**v3:** Node.js >= 20.19 (or >= 22.12)
+**v3:** Node.js >= 20.19 (but < 22) or >= 22.12
 
 **Action Required:**
-- Upgrade your Node.js version to at least 20.19 before upgrading to v3
+- Upgrade your Node.js version to meet the v3 requirements. We recommend using the latest LTS version (20.x or 22.x)
 
 ```bash
 # Check your current Node.js version
@@ -96,7 +96,7 @@ function MyComponent() {
 
 1. **Verify Node.js version:**
    ```bash
-   node --version  # Should be >= 20.19
+   node --version  # Should be >= 20.19 (but < 22) or >= 22.12
    ```
 
 2. **Update @sanity/ui:**
@@ -128,6 +128,6 @@ If you encounter issues during the upgrade:
 
 ## Benefits of Upgrading
 
-- **Security**: Addresses CVE-2024-53382 in the prism.js dependency
+- **Security**: Addresses CVE-2024-53382 in the Prism dependency
 - **Modern Node.js**: Takes advantage of newer Node.js features and improved performance
 - **Updated dependencies**: Ensures compatibility with the latest ecosystem tools
