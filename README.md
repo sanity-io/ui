@@ -11,6 +11,10 @@ npm install react react-dom styled-components
 
 [![npm version](https://img.shields.io/npm/v/@sanity/ui.svg?style=flat-square)](https://www.npmjs.com/package/@sanity/ui)
 
+## Migration
+
+Upgrading from v2? See the [Migration Guide](./MIGRATION.md) for detailed upgrade instructions.
+
 ## Usage
 
 ```jsx
