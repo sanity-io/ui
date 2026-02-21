@@ -4,15 +4,7 @@ import {defineConfig} from '@repo/eslint-config'
 
 export default defineConfig(import.meta.dirname, [
   {
-    ignores: [
-      '.turbo',
-      '.workshop',
-      'dist',
-      'src/main/system.ts', // auto-generated file
-      'test-results',
-      'playwright-report',
-      'tmp',
-    ],
+    ignores: ['.turbo', '.workshop', 'dist', 'test-results', 'playwright-report', 'tmp'],
   },
 
   // boundaries
@@ -31,7 +23,7 @@ export default defineConfig(import.meta.dirname, [
         unresolvableAlias: true,
         inNodeModules: true,
         outsideRootPath: false,
-        customSourcePatterns: [],
+        customSourcePatterns: ['@sanity/ui-css', '@sanity/ui-tokens', '@sanity/ui-workshop'],
       },
 
       'boundaries/elements': [
