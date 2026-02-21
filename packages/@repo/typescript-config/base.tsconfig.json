@@ -9,6 +9,7 @@
     "allowImportingTsExtensions": false,
     "exactOptionalPropertyTypes": false,
     "noEmit": false,
-    "noUncheckedIndexedAccess": false
+    "noUncheckedIndexedAccess": false,
+    "noUnusedLocals": true
   }
 }
