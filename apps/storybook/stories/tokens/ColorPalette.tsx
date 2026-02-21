@@ -1,5 +1,5 @@
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '@sanity/ui'
-import {_paletteVars, vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui/css'
 import {HUES, TINTS} from '@sanity/ui/theme'
 import type {ReactNode} from 'react'
 
@@ -51,8 +51,8 @@ function ColorTintPreview(props: {hue: (typeof HUES)[number]; tint: (typeof TINT
       as="button"
       radius={2}
       style={{
-        [vars.color.bg]: _paletteVars[hue][tint],
-        [vars.color.fg]: Number(tint) < 500 ? _paletteVars.black : _paletteVars.white,
+        [vars.color.bg]: vars.palette[hue][tint],
+        [vars.color.fg]: Number(tint) < 500 ? vars.palette.black : vars.palette.white,
       }}
     >
       <Flex padding={3}>
@@ -63,7 +63,7 @@ function ColorTintPreview(props: {hue: (typeof HUES)[number]; tint: (typeof TINT
         </Box>
         <Box>
           <Code size={1} style={{color: 'inherit'}}>
-            {_paletteVars[hue][tint]}
+            {vars.palette[hue][tint]}
           </Code>
         </Box>
       </Flex>
