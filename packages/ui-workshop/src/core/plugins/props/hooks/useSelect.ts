@@ -1,4 +1,5 @@
 import {useEffect} from 'react'
+
 import type {SelectPropOptionsProp, SelectPropValue} from '../types'
 import {useProps} from '../useProps'
 

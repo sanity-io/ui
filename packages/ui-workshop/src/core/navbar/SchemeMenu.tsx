@@ -1,6 +1,7 @@
 import {MoonIcon, SunIcon} from '@sanity/icons'
 import {Button} from '@sanity/ui'
 import {memo, useCallback} from 'react'
+
 import {startViewTransition} from '../lib/startViewTransition'
 import {useWorkshop} from '../useWorkshop'
 
@@ -26,8 +27,8 @@ const SchemeMenuView = memo(function SchemeMenuView(props: {
       fontSize={1}
       icon={dark ? MoonIcon : SunIcon}
       mode="bleed"
-      onClick={onToggleScheme}
       padding={2}
+      onClick={onToggleScheme}
     />
   )
 })

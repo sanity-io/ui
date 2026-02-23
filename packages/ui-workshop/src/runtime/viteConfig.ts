@@ -1,5 +1,5 @@
-import path from 'path'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 import type {UserConfig} from 'vite'
 
 /** @internal */

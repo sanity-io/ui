@@ -1,4 +1,5 @@
 import type {ColorScheme} from '@sanity/ui/theme'
+
 import type {WorkshopQuery} from './location'
 import type {WorkshopPayload} from './state'
 

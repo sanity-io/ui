@@ -2,6 +2,7 @@ import {Box, Flex, Root, useMediaIndex} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
 import debounce from 'lodash/debounce'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
 import type {WorkshopConfig} from './config/types'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector/WorkshopInspector'
@@ -205,9 +206,9 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
 
   return (
     <WorkshopProvider
-      config={config}
       broadcast={broadcast}
       channel={channel}
+      config={config}
       frameReady={frameReady}
       origin="main"
       path={path}

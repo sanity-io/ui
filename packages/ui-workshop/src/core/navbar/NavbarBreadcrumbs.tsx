@@ -1,5 +1,6 @@
 import {Breadcrumbs, Text} from '@sanity/ui'
 import {memo, useCallback} from 'react'
+
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
@@ -16,10 +17,10 @@ export function NavbarBreadcrumbs(): React.ReactNode {
 
   return (
     <NavbarBreadcrumbsView
-      onHomeClick={handleHomeClick}
       scopeTitle={scope?.title}
       storyTitle={story?.title}
       title={title}
+      onHomeClick={handleHomeClick}
     />
   )
 }
@@ -42,7 +43,7 @@ const NavbarBreadcrumbsView = memo(function NavbarBreadcrumbsView(props: {
       }
     >
       <Text size={[2, 2, 1]} weight="bold">
-        <a href="/" onClick={onHomeClick} style={{color: 'inherit'}}>
+        <a href="/" style={{color: 'inherit'}} onClick={onHomeClick}>
           {title}
         </a>
       </Text>

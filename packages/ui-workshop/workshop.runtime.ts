@@ -1,7 +1,7 @@
-import path from 'path'
-import {fileURLToPath} from 'url'
 import {defineRuntime} from '@sanity/ui-workshop/runtime'
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
+import path from 'path'
+import {fileURLToPath} from 'url'
 import {mergeConfig} from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))

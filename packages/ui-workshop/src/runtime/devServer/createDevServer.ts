@@ -7,6 +7,7 @@ import {
   type UserConfig,
   type ViteDevServer,
 } from 'vite'
+
 import type {WorkshopRuntimeOptions} from '../types'
 import {createViteConfig} from '../viteConfig'
 

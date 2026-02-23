@@ -1,7 +1,7 @@
+export * from './cli/defineConfig'
 export * from './config/defineScope'
 export * from './config/types'
 export * from './constants'
-export * from './cli/defineConfig'
 export * from './frame/WorkshopFrame'
 export type {Pubsub} from './lib/pubsub'
 export * from './location/LocationStore'
