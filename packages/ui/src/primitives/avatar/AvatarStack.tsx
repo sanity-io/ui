@@ -1,10 +1,9 @@
+import {_getResponsiveProp, type ComponentType, type Props} from '@sanity/ui/core'
 import {avatar_stack, type ResponsiveProp} from '@sanity/ui/css'
-import type {AvatarSize} from '@sanity/ui/tokens'
+import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
+import type {AvatarSize} from '@sanity/ui/theme'
 import {Children, cloneElement, Fragment, isValidElement, type ReactElement} from 'react'
 
-import {_getResponsiveProp} from '../../helpers/props'
-import type {ComponentType, Props} from '../../types'
-import {Box, type BoxOwnProps} from '../box/Box'
 import type {AvatarProps} from './Avatar'
 import {AvatarCounter} from './AvatarCounter'
 

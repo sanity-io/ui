@@ -1,7 +1,7 @@
 import {Flex, Spinner} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '$workshop'
 
 export default function Props(): React.JSX.Element {
   const muted = useBoolean('Muted', false)

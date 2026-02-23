@@ -1,6 +1,24 @@
 import {ChevronDownIcon} from '@sanity/icons'
+import {
+  _getResponsiveProp,
+  _hasFocus,
+  _raf,
+  type ComponentType,
+  EMPTY_ARRAY,
+  EMPTY_RECORD,
+  focusFirstDescendant,
+  type Props,
+} from '@sanity/ui/core'
 import type {ResponsiveProp} from '@sanity/ui/css'
-import type {Radius, Space} from '@sanity/ui/tokens'
+import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
+import {Selectable} from '@sanity/ui/primitives/selectable'
+import {AnimatedSpinnerIcon} from '@sanity/ui/primitives/spinner'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
+import {TextInput, type TextInputOwnProps} from '@sanity/ui/primitives/text-input'
+import type {Radius, Space} from '@sanity/ui/theme'
 import {
   type ChangeEvent,
   cloneElement,
@@ -17,19 +35,6 @@ import {
   useState,
 } from 'react'
 
-import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
-import {_raf} from '../../helpers/animation'
-import {_hasFocus, focusFirstDescendant} from '../../helpers/focus'
-import {_getResponsiveProp} from '../../helpers/props'
-import {Box, type BoxOwnProps} from '../../primitives/box/Box'
-import {Button} from '../../primitives/button/Button'
-import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
-import {Selectable} from '../../primitives/selectable/Selectable'
-import {AnimatedSpinnerIcon} from '../../primitives/spinner/AnimatedSpinnerIcon'
-import {Stack} from '../../primitives/stack/Stack'
-import {Text} from '../../primitives/text/Text'
-import {TextInput, type TextInputOwnProps} from '../../primitives/textInput/TextInput'
-import type {ComponentType, Props} from '../../types'
 import {AutocompleteOption} from './AutocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {

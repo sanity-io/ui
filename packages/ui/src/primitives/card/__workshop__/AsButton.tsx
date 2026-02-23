@@ -1,6 +1,6 @@
 import {Box, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 export default function AsButtonStory(): React.JSX.Element {
   const tones = Object.entries(WORKSHOP_CARD_TONE_OPTIONS)
@@ -8,17 +8,17 @@ export default function AsButtonStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Container>
-        <Grid gridTemplateColumns={3} gap={1}>
+        <Grid gap={1} gridTemplateColumns={3}>
           <Box>
             <Text align="center" size={1} weight="medium">
               Enabled
             </Text>
-            <Stack marginTop={3} gap={1}>
+            <Stack gap={1} marginTop={3}>
               {tones.map(([title, tone]) => (
                 <Card
+                  key={tone}
                   __unstable_focusRing
                   as="button"
-                  key={tone}
                   padding={3}
                   style={{textAlign: 'center'}}
                   tone={tone}
@@ -43,13 +43,13 @@ export default function AsButtonStory(): React.JSX.Element {
             <Text align="center" size={1} weight="medium">
               Disabled
             </Text>
-            <Stack marginTop={3} gap={1}>
+            <Stack gap={1} marginTop={3}>
               {tones.map(([title, tone]) => (
                 <Card
+                  key={tone}
                   __unstable_focusRing
                   as="button"
                   disabled
-                  key={tone}
                   padding={3}
                   style={{textAlign: 'center'}}
                   tone={tone}
@@ -58,7 +58,7 @@ export default function AsButtonStory(): React.JSX.Element {
                     <Text size={1} weight="medium">
                       {title}
                     </Text>
-                    <Text size={1} muted>
+                    <Text muted size={1}>
                       Muted
                     </Text>
                     <Text size={1}>
@@ -74,12 +74,12 @@ export default function AsButtonStory(): React.JSX.Element {
             <Text align="center" size={1} weight="medium">
               Selected
             </Text>
-            <Stack marginTop={3} gap={1}>
+            <Stack gap={1} marginTop={3}>
               {tones.map(([title, tone]) => (
                 <Card
+                  key={tone}
                   __unstable_focusRing
                   as="button"
-                  key={tone}
                   padding={3}
                   selected
                   style={{textAlign: 'center'}}
@@ -89,7 +89,7 @@ export default function AsButtonStory(): React.JSX.Element {
                     <Text size={1} weight="medium">
                       {title}
                     </Text>
-                    <Text size={1} muted>
+                    <Text muted size={1}>
                       Muted
                     </Text>
                     <Text size={1}>

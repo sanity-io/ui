@@ -1,3 +1,4 @@
+import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {
   text,
   TEXT_STYLE_PROP_KEYS,
@@ -5,9 +6,6 @@ import {
   type TextOverflowStyleProps,
   type TextStyleProps,
 } from '@sanity/ui/css'
-
-import {_splitKeys} from '../../_keys'
-import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_TEXT_ELEMENT = 'div'

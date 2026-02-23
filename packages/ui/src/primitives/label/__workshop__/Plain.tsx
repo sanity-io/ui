@@ -6,7 +6,7 @@ import {
   WORKSHOP_LABEL_FONT_SIZE_OPTIONS,
   WORKSHOP_TEXT_ALIGN_OPTIONS,
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
-} from '../../../../../workshop'
+} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   const align = useSelect('Align', WORKSHOP_TEXT_ALIGN_OPTIONS)

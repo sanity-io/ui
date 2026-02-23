@@ -2,7 +2,7 @@ import {Switch} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import {useCallback} from 'react'
 
-import {CardWrapper} from '../../../../../workshop'
+import {CardWrapper} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const checked = useBoolean('Checked', false)
@@ -15,8 +15,8 @@ export default function PropsStory(): React.JSX.Element {
       <Switch
         checked={checked}
         indeterminate={indeterminate}
-        onChange={handleChange}
         readOnly={readOnly}
+        onChange={handleChange}
       />
     </CardWrapper>
   )

@@ -9,7 +9,7 @@ import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../../../workshop'
+} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div')
@@ -32,13 +32,13 @@ export default function PropsStory(): React.JSX.Element {
         border={border}
         borderWidth={borderWidth}
         muted={muted}
-        onClick={useAction('onClick')}
         padding={padding}
         pressed={pressed}
         radius={radius}
         selected={selected}
         shadow={shadow}
         tone={tone}
+        onClick={useAction('onClick')}
       >
         <Stack gap={3}>
           <Text size={1}>

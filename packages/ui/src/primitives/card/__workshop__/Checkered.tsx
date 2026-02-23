@@ -1,5 +1,5 @@
 import {Card, Flex, Stack, Text} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/tokens'
+import {CARD_TONES} from '@sanity/ui/theme'
 
 export default function CheckeredStory(): React.JSX.Element {
   return (

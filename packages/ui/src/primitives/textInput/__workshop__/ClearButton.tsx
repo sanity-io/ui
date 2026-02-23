@@ -2,7 +2,7 @@ import {TextInput} from '@sanity/ui'
 import {useText} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
-import {CardWrapper} from '../../../../../workshop'
+import {CardWrapper} from '$workshop'
 
 export default function ClearButtonStory(): React.JSX.Element {
   const customValidity = useText('Custom validitiy')
@@ -22,10 +22,10 @@ export default function ClearButtonStory(): React.JSX.Element {
       <TextInput
         clearButton
         customValidity={customValidity}
-        onChange={handleChange}
-        onClear={handleClear}
         placeholder="Enter text"
         value={value}
+        onChange={handleChange}
+        onClear={handleClear}
       />
     </CardWrapper>
   )

@@ -1,13 +1,12 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {menu, type PaddingStyleProps, type ResponsiveProp} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui-tokens/system'
+import {useClickOutsideEvent, useGlobalKeyDown} from '@sanity/ui/hooks'
+import {Box} from '@sanity/ui/primitives/box'
+import {useLayer} from '@sanity/ui/primitives/layer'
+import {Stack} from '@sanity/ui/primitives/stack'
+import type {Space} from '@sanity/ui/theme'
 import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 
-import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
-import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
-import {Box} from '../../primitives/box/Box'
-import {useLayer} from '../../primitives/layer/useLayer'
-import {Stack} from '../../primitives/stack/Stack'
-import type {ComponentType, Props} from '../../types'
 import {MenuContext, type MenuContextValue} from './MenuContext'
 import {useMenuController} from './useMenuController'
 
@@ -157,15 +156,15 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
       <Box
         data-ui="Menu"
         {...rest}
+        ref={handleRefChange}
         as={as}
         className={menu({className})}
-        onKeyDown={handleKeyDown}
-        overflow="auto"
         outline="none"
+        overflow="auto"
         padding={padding}
-        ref={handleRefChange}
         role="menu"
         tabIndex={-1}
+        onKeyDown={handleKeyDown}
       >
         <Stack gap={gap}>{children}</Stack>
       </Box>

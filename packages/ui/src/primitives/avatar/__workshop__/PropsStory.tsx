@@ -1,5 +1,5 @@
 import {Avatar, Box} from '@sanity/ui'
-import {AVATAR_SIZE} from '@sanity/ui/tokens'
+import {AVATAR_SIZE} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useString} from '@sanity/ui-workshop'
 
 import {WORKSHOP_AVATAR_SRC} from '$workshop'

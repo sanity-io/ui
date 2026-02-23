@@ -9,15 +9,19 @@
     "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
+    "module": "ESNext",
+    "rootDir": ".",
+    "outDir": "./dist",
+
     "resolveJsonModule": true,
     "sourceMap": true,
     "noEmit": false,
-    "rootDir": ".",
-    "outDir": "./dist",
+
     "noCheck": true,
+
     "paths": {
-      "@sanity/ui/*": ["./exports/*.ts"],
-      "@sanity/ui": ["./exports/index.ts"]
+      "@sanity/ui": ["./dist/exports/index.ts"],
+      "@sanity/ui/*": ["./dist/exports/*"]
     }
   }
 }

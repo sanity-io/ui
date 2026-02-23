@@ -1,7 +1,7 @@
 import {Card, Flex, Inline, Text} from '@sanity/ui'
 import {useAction, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_SPACE_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_SPACE_OPTIONS} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   return (

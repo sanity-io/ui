@@ -1,9 +1,15 @@
-import {_arrow, _arrow_shape, _arrow_stroke, _arrow_strokeMask, _arrow_svg} from '@sanity/ui/css'
-import {_arrowVars} from '@sanity/ui-css'
+import type {ComponentType, Props} from '@sanity/ui/core'
+import {
+  _arrow,
+  _arrow_shape,
+  _arrow_stroke,
+  _arrow_strokeMask,
+  _arrow_svg,
+  _arrowVars,
+} from '@sanity/ui/css'
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {useMemo} from 'react'
 
-import type {ComponentType, Props} from '../../types'
 import {compileCommands, getRoundedCommands, type Point} from './cmds'
 
 /** @internal */

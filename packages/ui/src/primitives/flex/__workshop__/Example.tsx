@@ -1,7 +1,7 @@
 import {Card, Code, Flex} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_FLEX_DIRECTION_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_FLEX_DIRECTION_OPTIONS} from '$workshop'
 
 import {debugCard} from './styles.css'
 

@@ -1,5 +1,5 @@
 import {Badge, Flex} from '@sanity/ui'
-import {RADIUS} from '@sanity/ui-tokens/system'
+import {RADIUS} from '@sanity/ui/theme'
 import {useAction, useSelect, useText} from '@sanity/ui-workshop'
 
 import {WORKSHOP_ELEMENT_TONE_OPTIONS, WORKSHOP_SPACE_OPTIONS} from '$workshop'

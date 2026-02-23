@@ -1,7 +1,7 @@
+import type {Props} from '@sanity/ui/core'
 import {type ResponsiveProp, text_skeleton} from '@sanity/ui/css'
-import type {FontTextSize} from '@sanity/ui/tokens'
+import type {FontTextSize} from '@sanity/ui/theme'
 
-import type {Props} from '../../types'
 import {Skeleton, type SkeletonElementType, type SkeletonOwnProps} from './Skeleton'
 
 /** @beta */

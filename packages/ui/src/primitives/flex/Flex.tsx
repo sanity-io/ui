@@ -1,8 +1,6 @@
-import {flex, FLEX_STYLE_PROP_KEYS, type FlexStyleProps} from '@sanity/ui-css'
-
-import {_splitKeys} from '../../_keys'
-import type {Props} from '../../types'
-import {type BoxElementType} from '../box/Box'
+import {_splitKeys, type Props} from '@sanity/ui/core'
+import {flex, FLEX_STYLE_PROP_KEYS, type FlexStyleProps} from '@sanity/ui/css'
+import {type BoxElementType} from '@sanity/ui/primitives/box'
 
 /** @public */
 export const DEFAULT_FLEX_ELEMENT = 'div'

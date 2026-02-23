@@ -1,6 +1,12 @@
 import {ChevronRightIcon} from '@sanity/icons'
+import type {ComponentType, Props} from '@sanity/ui/core'
 import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import type {ElementTone, FontTextSize, Space} from '@sanity/ui-tokens/system'
+import {Box} from '@sanity/ui/primitives/box'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
+import {Selectable} from '@sanity/ui/primitives/selectable'
+import {Text} from '@sanity/ui/primitives/text'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
   isValidElement,
@@ -13,12 +19,6 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import {Box} from '../../primitives/box/Box'
-import {Flex} from '../../primitives/flex/Flex'
-import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
-import {Selectable} from '../../primitives/selectable/Selectable'
-import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
 import {DEFAULT_MENU_ELEMENT, Menu, type MenuProps} from './Menu'
 import {useMenu} from './useMenu'
 
@@ -165,13 +165,13 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
   const childMenu = (
     <Menu
       {...menuProps}
+      registerElement={registerElement}
+      shouldFocus={shouldFocus}
       onClickOutside={onClickOutside}
       onEscape={onEscape}
       onItemClick={handleChildItemClick}
       onKeyDown={handleMenuKeyDown}
       onMouseEnter={handleMenuMouseEnter}
-      registerElement={registerElement}
-      shouldFocus={shouldFocus}
     >
       {children}
     </Menu>
@@ -204,17 +204,17 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
       <Selectable
         data-ui="MenuGroup"
         {...rest}
+        ref={setRootElement}
         aria-pressed={as === 'button' ? withinMenu : undefined}
         as={as}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        onMouseEnter={handleMouseEnter}
         radius={radius}
-        ref={setRootElement}
         selected={withinMenu}
         tabIndex={-1}
         tone={tone}
         type={as === 'button' ? 'button' : undefined}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={handleMouseEnter}
       >
         <Flex gap={gap} padding={padding}>
           {IconComponent && (

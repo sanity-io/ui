@@ -1,8 +1,8 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {BREAKPOINTS} from '@sanity/ui/css'
+import {useElementSize} from '@sanity/ui/hooks'
 import {useImperativeHandle, useMemo, useState} from 'react'
 
-import {useElementSize} from '../../hooks/useElementSize'
-import type {ComponentType, Props} from '../../types'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
 /** @beta */
@@ -68,7 +68,7 @@ export function ElementQuery<
   ])
 
   return (
-    <Element data-ui="ElementQuery" {...rest} data-eq-max={max} data-eq-min={min} ref={setElement}>
+    <Element data-ui="ElementQuery" {...rest} ref={setElement} data-eq-max={max} data-eq-min={min}>
       {children}
     </Element>
   )

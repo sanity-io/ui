@@ -8,7 +8,7 @@ import {
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
   WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '../../../../../workshop'
+} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const border = useBoolean('Border', true)
@@ -38,13 +38,13 @@ export default function PropsStory(): React.JSX.Element {
           fontSize={fontSize}
           fontWeight={fontWeight}
           id="text-area-example"
-          onChange={(e) => setValue(e.target.value)}
           padding={padding}
           placeholder={placeholder}
           radius={radius}
           readOnly={readOnly}
           rows={10}
           value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
       </Stack>
     </CardWrapper>

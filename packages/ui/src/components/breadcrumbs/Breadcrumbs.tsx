@@ -1,4 +1,12 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {type GapStyleProps} from '@sanity/ui/css'
+import {useClickOutsideEvent} from '@sanity/ui/hooks'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button, type ButtonProps} from '@sanity/ui/primitives/button'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Popover} from '@sanity/ui/primitives/popover'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import {
   Children,
   Fragment,
@@ -9,15 +17,6 @@ import {
   useRef,
   useState,
 } from 'react'
-
-import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
-import {Box} from '../../primitives/box/Box'
-import {Button, type ButtonProps} from '../../primitives/button/Button'
-import {Flex} from '../../primitives/flex/Flex'
-import {Popover} from '../../primitives/popover/Popover'
-import {Stack} from '../../primitives/stack/Stack'
-import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
 
 /** @beta */
 export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'

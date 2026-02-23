@@ -1,4 +1,4 @@
-import {_syntax} from '@sanity/ui-css'
+import {_syntax} from '@sanity/ui/css'
 import {hasLanguage, Refractor} from 'react-refractor'
 
 export default function LazySyntax(

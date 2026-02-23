@@ -1,19 +1,18 @@
+import {_getResponsiveProp, type ComponentType, type Props} from '@sanity/ui/core'
 import {
   avatar,
   avatar_arrow,
+  avatar_arrowSvg,
   avatar_image,
   avatar_imageOutline,
   avatar_initials,
   type ResponsiveProp,
 } from '@sanity/ui/css'
-import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/tokens'
-import {avatar_arrowSvg} from '@sanity/ui-css'
+import {Box} from '@sanity/ui/primitives/box'
+import {Label} from '@sanity/ui/primitives/label'
+import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/theme'
 import {useCallback, useEffect, useMemo, useState} from 'react'
 
-import {_getResponsiveProp} from '../../helpers/props'
-import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/Box'
-import {Label} from '../label/Label'
 import type {AvatarPosition} from './types'
 
 /** @public */

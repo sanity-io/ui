@@ -1,13 +1,12 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {
   textArea,
   textArea_element,
   textArea_presentation,
   type TextAreaStyleProps,
 } from '@sanity/ui/css'
+import {useCustomValidity} from '@sanity/ui/hooks'
 import {useImperativeHandle, useRef} from 'react'
-
-import {useCustomValidity} from '../../hooks/useCustomValidity'
-import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_TEXT_AREA_ELEMENT = 'textarea'

@@ -1,6 +1,6 @@
 import {SearchIcon} from '@sanity/icons'
 import {Autocomplete, Box, Button, Code, Selectable, Stack, Text} from '@sanity/ui'
-import type {Radius} from '@sanity/ui/tokens'
+import type {Radius} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 

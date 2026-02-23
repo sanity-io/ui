@@ -1,6 +1,6 @@
 import {Selectable, Stack, Text} from '@sanity/ui'
 
-import {CardWrapper} from '../../../../../workshop'
+import {CardWrapper} from '$workshop'
 
 export default function DataPropsStory(): React.JSX.Element {
   return (

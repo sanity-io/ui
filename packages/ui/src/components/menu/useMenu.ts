@@ -1,6 +1,6 @@
+import {isRecord} from '@sanity/ui/core'
 import {use} from 'react'
 
-import {isRecord} from '../../lib/isRecord'
 import {MenuContext, type MenuContextValue} from './MenuContext'
 
 export function useMenu(): MenuContextValue {

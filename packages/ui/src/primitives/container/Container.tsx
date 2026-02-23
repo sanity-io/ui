@@ -1,14 +1,17 @@
-import {container, CONTAINER_STYLE_PROP_KEYS, type ContainerStyleProps} from '@sanity/ui/css'
-
-import {_splitKeys} from '../../_keys'
-import type {Props} from '../../types'
-import {type BoxElementType, type BoxOwnProps} from '../box/Box'
+import {_splitKeys, type Props} from '@sanity/ui/core'
+import {
+  type BoxStyleProps,
+  container,
+  CONTAINER_STYLE_PROP_KEYS,
+  type ContainerStyleProps,
+} from '@sanity/ui/css'
+import {type BoxElementType} from '@sanity/ui/primitives/box'
 
 /** @public */
 export const DEFAULT_CONTAINER_ELEMENT = 'div'
 
 /** @public */
-export type ContainerOwnProps = Omit<BoxOwnProps, 'width'> & ContainerStyleProps
+export type ContainerOwnProps = Omit<BoxStyleProps, 'width'> & ContainerStyleProps
 
 /** @public */
 export type ContainerElementType = BoxElementType

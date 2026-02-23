@@ -1,0 +1,5 @@
+export * from '../../src/components/dialog/Dialog'
+export * from '../../src/components/dialog/DialogContext'
+export * from '../../src/components/dialog/DialogProvider'
+export * from '../../src/components/dialog/types'
+export * from '../../src/components/dialog/useDialog'

@@ -1,10 +1,12 @@
-import {badge, BADGE_STYLE_PROP_KEYS, type BadgeStyleProps} from '@sanity/ui/css'
-import type {ResponsiveProp} from '@sanity/ui-css'
-import type {FontTextSize} from '@sanity/ui-tokens/system'
-
-import {_splitKeys} from '../../_keys'
-import type {ComponentType, Props} from '../../types'
-import {Text} from '../text/Text'
+import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
+import {
+  badge,
+  BADGE_STYLE_PROP_KEYS,
+  type BadgeStyleProps,
+  type ResponsiveProp,
+} from '@sanity/ui/css'
+import {Text} from '@sanity/ui/primitives/text'
+import type {FontTextSize} from '@sanity/ui/theme'
 
 /** @public */
 export const DEFAULT_BADGE_ELEMENT = 'span'

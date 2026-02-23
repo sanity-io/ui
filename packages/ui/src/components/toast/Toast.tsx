@@ -1,16 +1,15 @@
 import {CloseIcon} from '@sanity/icons'
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {type RadiusStyleProps, toast} from '@sanity/ui/css'
+import {usePrefersReducedMotion} from '@sanity/ui/hooks'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card} from '@sanity/ui/primitives/card'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import {motion, type Variant, type Variants} from 'motion/react'
 import {type ReactNode} from 'react'
-
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box} from '../../primitives/box/Box'
-import {Button} from '../../primitives/button/Button'
-import {Card} from '../../primitives/card/Card'
-import {Flex} from '../../primitives/flex/Flex'
-import {Stack} from '../../primitives/stack/Stack'
-import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
 
 /** @internal */
 export const DEFAULT_TOAST_ELEMENT = 'li'
@@ -101,20 +100,20 @@ export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>
       data-ui="Toast"
       role={role}
       {...rest}
+      animate={animate}
       custom={visualDuration}
       data-has-duration={hasDuration ? '' : undefined}
+      exit={exit}
+      initial={initial}
+      layout="position"
+      position="relative"
       radius={radius}
       shadow={2}
       tone={cardTone}
-      layout="position"
-      variants={container}
-      initial={initial}
-      animate={animate}
-      exit={exit}
       transition={transition}
-      position="relative"
+      variants={container}
     >
-      <MotionFlex align="flex-start" variants={content} transition={transition}>
+      <MotionFlex align="flex-start" transition={transition} variants={content}>
         <Flex flex={1} overflowX="auto" padding={3}>
           <Stack gap={3}>
             {title && (
@@ -123,7 +122,7 @@ export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>
               </Text>
             )}
             {description && (
-              <MotionText muted size={1} variants={content} transition={transition}>
+              <MotionText muted size={1} transition={transition} variants={content}>
                 {description}
               </MotionText>
             )}
@@ -137,9 +136,9 @@ export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>
               icon={CloseIcon}
               mode="bleed"
               padding={2}
+              style={{verticalAlign: 'top'}}
               tone={buttonTone}
               onClick={onClose}
-              style={{verticalAlign: 'top'}}
             />
           </Box>
         )}

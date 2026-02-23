@@ -31,7 +31,7 @@ import {
   type Shadow,
   SPACE,
   type Space,
-} from '@sanity/ui/tokens'
+} from '@sanity/ui'
 
 function fromEntries<K extends string | number | symbol, V>(entries: [K, V][]) {
   return Object.fromEntries(entries) as Record<K, V>

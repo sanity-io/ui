@@ -7,7 +7,7 @@ import {
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
-} from '../../../../../workshop'
+} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', true)

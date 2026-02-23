@@ -1,6 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Box, Button, Container, Flex, Stack} from '@sanity/ui'
-import {ELEMENT_TONES} from '@sanity/ui-tokens/system'
+import {ELEMENT_TONES} from '@sanity/ui/theme'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {

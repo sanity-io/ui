@@ -1,10 +1,9 @@
 import {SelectIcon} from '@sanity/icons'
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {_input_element, select, select_presentation, type SelectStyleProps} from '@sanity/ui/css'
+import {useCustomValidity} from '@sanity/ui/hooks'
+import {Text} from '@sanity/ui/primitives/text'
 import {useImperativeHandle, useRef} from 'react'
-
-import {useCustomValidity} from '../../hooks/useCustomValidity'
-import type {ComponentType, Props} from '../../types'
-import {Text} from '../text/Text'
 
 /** @public */
 export const DEFAULT_SELECT_ELEMENT = 'select'

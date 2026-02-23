@@ -6,7 +6,7 @@ import {
 } from '@testing-library/react'
 import {Fragment, type ReactNode, StrictMode} from 'react'
 
-import {Root} from '../src/core'
+import {Root} from '../src/root/Root'
 
 export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ColorScheme

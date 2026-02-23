@@ -1,11 +1,7 @@
 import {Select, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {
-  CardWrapper,
-  WORKSHOP_RADIUS_OPTIONS,
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '../../../../../workshop'
+import {CardWrapper, WORKSHOP_RADIUS_OPTIONS, WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   const border = useBoolean('Border', true)

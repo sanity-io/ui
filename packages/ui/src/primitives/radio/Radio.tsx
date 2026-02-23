@@ -1,8 +1,7 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {radio, radio_input, radio_presentation} from '@sanity/ui/css'
+import {useCustomValidity} from '@sanity/ui/hooks'
 import {useImperativeHandle, useRef} from 'react'
-
-import {useCustomValidity} from '../../hooks/useCustomValidity'
-import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_RADIO_ELEMENT = 'input'

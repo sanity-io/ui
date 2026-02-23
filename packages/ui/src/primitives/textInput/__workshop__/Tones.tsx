@@ -1,8 +1,8 @@
 import {Box, Card, Text, TextInput} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui-tokens/system'
+import {CARD_TONES} from '@sanity/ui/theme'
 import {useBoolean} from '@sanity/ui-workshop'
 
-import {CardWrapper} from '../../../../../workshop'
+import {CardWrapper} from '$workshop'
 
 export default function TonesStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled', false)

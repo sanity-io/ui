@@ -1,9 +1,9 @@
 import {Box, Button, Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
-import {CARD_TONES, COLOR_SCHEMES} from '@sanity/ui/tokens'
+import {CARD_TONES, COLOR_SCHEMES} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useCallback, useRef, useState} from 'react'
 
-import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const animate = useBoolean('Animate', false)

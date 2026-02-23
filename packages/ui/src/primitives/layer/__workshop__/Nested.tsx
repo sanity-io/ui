@@ -30,7 +30,7 @@ function Root() {
         <Box padding={3}>
           <Stack gap={3}>
             <LayerDebugInfo id="layer-debug-info-1" />
-            <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
+            <Button id="open-layer-1" mode="ghost" text="Open layer 1" onClick={handleOpen} />
             {open && (
               <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <Layer1 onClose={handleClose} />
@@ -57,13 +57,13 @@ function Layer1({onClose}: {onClose: () => void}) {
           </Text>
         </Box>
         <Box padding={1}>
-          <Button icon={CloseIcon} mode="bleed" onClick={onClose} padding={2} />
+          <Button icon={CloseIcon} mode="bleed" padding={2} onClick={onClose} />
         </Box>
       </Flex>
       <Box padding={3}>
         <Stack gap={3}>
           <LayerDebugInfo />
-          <Button id="open-layer-2" mode="ghost" onClick={handleOpen} text="Open layer 2" />
+          <Button id="open-layer-2" mode="ghost" text="Open layer 2" onClick={handleOpen} />
           {open && (
             <Layer style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <Layer2 onClose={handleClose} />
@@ -85,7 +85,7 @@ function Layer2({onClose}: {onClose: () => void}) {
           </Text>
         </Box>
         <Box padding={1}>
-          <Button icon={CloseIcon} mode="bleed" onClick={onClose} padding={2} />
+          <Button icon={CloseIcon} mode="bleed" padding={2} onClick={onClose} />
         </Box>
       </Flex>
       <Box padding={3}>

@@ -1,6 +1,5 @@
+import {EMPTY_ARRAY} from '@sanity/ui/core'
 import {useDebugValue, useEffect, useEffectEvent} from 'react'
-
-import {EMPTY_ARRAY} from '../constants'
 
 /** @public */
 export type ClickOutsideEventListener = (event: MouseEvent) => void

@@ -1,7 +1,7 @@
 import {Box, Button, Container, Flex, Popover, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
 export default function MatchReferenceWidthStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', true)

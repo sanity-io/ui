@@ -1,4 +1,5 @@
 import {CloseIcon} from '@sanity/icons'
+import {focusFirstDescendant, type Props} from '@sanity/ui/core'
 import {
   dialog_card,
   dialog_content,
@@ -8,6 +9,15 @@ import {
   dialog_scrollerShadowBottom,
   dialog_scrollerShadowTop,
 } from '@sanity/ui/css'
+import {useClickOutsideEvent, useGlobalKeyDown} from '@sanity/ui/hooks'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card, type CardElementType, type CardOwnProps} from '@sanity/ui/primitives/card'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {useLayer} from '@sanity/ui/primitives/layer'
+import {Text} from '@sanity/ui/primitives/text'
+import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
+import {usePortal} from '@sanity/ui/utils/portal'
 import {
   type ForwardedRef,
   type ReactNode,
@@ -19,18 +29,6 @@ import {
   useState,
 } from 'react'
 
-import {focusFirstDescendant} from '../../helpers/focus'
-import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
-import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
-import {Box} from '../../primitives/box/Box'
-import {Button} from '../../primitives/button/Button'
-import {Card, type CardElementType, type CardOwnProps} from '../../primitives/card/Card'
-import {Flex} from '../../primitives/flex/Flex'
-import {useLayer} from '../../primitives/layer/useLayer'
-import {Text} from '../../primitives/text/Text'
-import type {Props} from '../../types'
-import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {usePortal} from '../../utils/portal/usePortal'
 import {isTargetWithinScope} from './isTargetWithinScope'
 
 /** @internal */

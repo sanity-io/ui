@@ -14,9 +14,8 @@ npm install react react-dom react-is
 ## Usage
 
 ```jsx
-import '@sanity/ui/css/index.css'
-
-import {Button, Root} from '@sanity/ui'
+import {Button} from '@sanity/ui/primitives/button'
+import {Root} from '@sanity/ui/root'
 import {createRoot} from 'react-dom/client'
 
 createRoot(document).render(

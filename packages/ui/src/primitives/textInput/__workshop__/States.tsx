@@ -1,7 +1,7 @@
 import {Stack, Text, TextInput} from '@sanity/ui'
 import {useAction, useBoolean} from '@sanity/ui-workshop'
 
-import {CardWrapper} from '../../../../../workshop'
+import {CardWrapper} from '$workshop'
 
 export default function StatesStory(): React.JSX.Element {
   const invalid = useBoolean('Invalid', false)
@@ -17,8 +17,8 @@ export default function StatesStory(): React.JSX.Element {
           <TextInput
             customValidity={invalid ? 'invalid' : undefined}
             id="enabled-example"
-            onChange={onChange}
             value="This is some text"
+            onChange={onChange}
           />
         </Stack>
 
@@ -30,8 +30,8 @@ export default function StatesStory(): React.JSX.Element {
             customValidity={invalid ? 'invalid' : undefined}
             disabled
             id="disabled-example"
-            onChange={onChange}
             value="This is some text"
+            onChange={onChange}
           />
         </Stack>
 
@@ -43,8 +43,8 @@ export default function StatesStory(): React.JSX.Element {
             customValidity={invalid ? 'invalid' : undefined}
             id="read-only-example"
             readOnly
-            onChange={onChange}
             value="This is some text"
+            onChange={onChange}
           />
         </Stack>
       </Stack>

@@ -1,9 +1,7 @@
+import {containsOrEqualsElement, EMPTY_RECORD, isHTMLElement, type Props} from '@sanity/ui/core'
+import {Card, type CardElementType} from '@sanity/ui/primitives/card'
 import {type FocusEvent, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 
-import {EMPTY_RECORD} from '../../constants'
-import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
-import {Card, type CardElementType} from '../../primitives/card/Card'
-import type {Props} from '../../types'
 import type {LayerElementType, LayerOwnProps} from './Layer'
 import {useLayer} from './useLayer'
 

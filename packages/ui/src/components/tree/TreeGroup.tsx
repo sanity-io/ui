@@ -1,5 +1,6 @@
-import {Stack} from '../../primitives/stack/Stack'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '@sanity/ui/core'
+import {Stack} from '@sanity/ui/primitives/stack'
+
 import {useTree} from './useTree'
 
 /** @public */

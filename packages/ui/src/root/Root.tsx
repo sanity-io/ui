@@ -1,9 +1,9 @@
+import type {Props} from '@sanity/ui/core'
 import {box, root, type RootStyleProps} from '@sanity/ui/css'
+import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
 import {useCallback, useImperativeHandle, useRef, useState} from 'react'
 
-import {Box, type BoxOwnProps} from './primitives/box/Box'
 import {RootProvider} from './RootProvider'
-import type {Props} from './types'
 
 /** @public */
 export const DEFAULT_ROOT_ELEMENT = 'html'

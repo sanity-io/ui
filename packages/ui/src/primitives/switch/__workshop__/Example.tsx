@@ -1,7 +1,7 @@
 import {Box, Flex, Switch, Text} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
-import {CardWrapper} from '../../../../../workshop'
+import {CardWrapper} from '$workshop'
 
 export default function ExampleStory(): React.JSX.Element {
   const [checked, setChecked] = useState<boolean | undefined>(undefined)

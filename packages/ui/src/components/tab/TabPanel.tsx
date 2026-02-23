@@ -1,5 +1,5 @@
-import {Box, type BoxOwnProps} from '../../primitives/box/Box'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '@sanity/ui/core'
+import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
 
 /** @public */
 export const DEFAULT_TAB_PANEL_ELEMENT = 'div'

@@ -1,14 +1,12 @@
+import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {
   hotkeys,
   HOTKEYS_STYLE_PROP_KEYS,
   type HotkeysStyleProps,
-  type ResponsiveProp,
+  // type ResponsiveProp,
 } from '@sanity/ui/css'
-import type {FontTextSize} from '@sanity/ui-tokens/system'
-
-import {_splitKeys} from '../../_keys'
-import {KBD} from '../../primitives/kbd/Kbd'
-import type {ComponentType, Props} from '../../types'
+import {KBD} from '@sanity/ui/primitives/kbd'
+// import type {FontTextSize} from '@sanity/ui/theme'
 
 /** @public */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
@@ -16,7 +14,7 @@ export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
 /** @public */
 export interface HotkeysOwnProps extends HotkeysStyleProps {
   /** @deprecated - no longer supported */
-  fontSize?: ResponsiveProp<FontTextSize>
+  fontSize?: never // ResponsiveProp<FontTextSize>
   keys: string[]
 }
 

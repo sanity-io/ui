@@ -1,7 +1,6 @@
+import {_splitKeys} from '@sanity/ui/core'
+import {Syntax} from '@sanity/ui/primitives/_syntax'
 import {Suspense} from 'react'
-
-import {_splitKeys} from '../../_keys'
-import {Syntax} from '../_syntax/Syntax'
 
 /** @public */
 export const DEFAULT_INLINE_CODE_ELEMENT = 'code'

@@ -5,10 +5,10 @@ export default function ResponsiveStory(): React.JSX.Element {
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width="auto">
         <Grid
-          id="responsive-grid"
           gap={[0, 1, 2, 3, 4, 5, 6]}
           gridTemplateColumns={[1, 2, 3, 4, 5, 6, 7]}
           gridTemplateRows={[1, 2, 3, 4, 5, 6, 7]}
+          id="responsive-grid"
           style={{textAlign: 'center'}}
         >
           <Card padding={[1, 2, 3]} tone="neutral">

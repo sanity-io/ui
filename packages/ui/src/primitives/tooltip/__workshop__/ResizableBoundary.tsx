@@ -2,7 +2,7 @@ import {BoundaryElementProvider, Button, Card, Code, Flex, Text, Tooltip} from '
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useState} from 'react'
 
-import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
 export default function ResizableBoundaryStory(): React.JSX.Element {
   const content = useText(

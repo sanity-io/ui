@@ -2,7 +2,7 @@ import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
 import {Box, Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_DIALOG_POSITION_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_DIALOG_POSITION_OPTIONS} from '$workshop'
 
 export default function PositionStory(): React.JSX.Element {
   const open = useBoolean('Open', true)

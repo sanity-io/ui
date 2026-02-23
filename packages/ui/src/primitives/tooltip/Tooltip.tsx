@@ -7,9 +7,28 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {type RadiusStyleProps, type ShadowStyleProps, tooltip} from '@sanity/ui/css'
-import type {ResponsiveProp} from '@sanity/ui-css'
-import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui-tokens/system'
+import {Hotkeys} from '@sanity/ui/components/hotkeys'
+import {
+  _getResponsiveProp,
+  type ComponentType,
+  type Delay,
+  getElementRef,
+  type Placement,
+  type Props,
+  Z_OFFSETS,
+} from '@sanity/ui/core'
+import {
+  type RadiusStyleProps,
+  type ResponsiveProp,
+  type ShadowStyleProps,
+  tooltip,
+} from '@sanity/ui/css'
+import {usePrefersReducedMotion, useUnique} from '@sanity/ui/hooks'
+import type {LayerOwnProps} from '@sanity/ui/primitives/layer'
+import {Text} from '@sanity/ui/primitives/text'
+import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui/theme'
+import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
+import {assertPortalContext, Portal, PortalContext} from '@sanity/ui/utils/portal'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -26,23 +45,7 @@ import {
   useState,
 } from 'react'
 
-import {Hotkeys} from '../../components/hotkeys/Hotkeys'
-import {Z_OFFSETS} from '../../constants'
-import {_getResponsiveProp} from '../../helpers/props'
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {useUnique} from '../../hooks/useUnique'
 import {origin} from '../../middleware/origin'
-import type {ComponentType, Delay, Placement, Props} from '../../types'
-import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {getElementRef} from '../../utils/getElementRef'
-import {Portal} from '../../utils/portal/Portal'
-import {PortalContext} from '../../utils/portal/PortalContext'
-import {assertPortalContext} from '../../utils/portal/usePortal'
-// import {CardContext} from '../card/CardContext'
-// import {CardProvider} from '../card/CardProvider'
-// import {assertCardContext} from '../card/useCard'
-import type {LayerOwnProps} from '../layer/Layer'
-import {Text} from '../text/Text'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DELAY,

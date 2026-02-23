@@ -1,22 +1,25 @@
 import {
+  type ComponentType,
+  focusFirstDescendant,
+  focusLastDescendant,
+  isHTMLElement,
+  type Props,
+  Z_OFFSETS,
+} from '@sanity/ui/core'
+import {
   type ContainerStyleProps,
   dialog,
   dialog_container,
   type ResponsiveProp,
 } from '@sanity/ui/css'
-import type {ColorScheme, Radius, Shadow} from '@sanity/ui-tokens/system'
+import {usePrefersReducedMotion} from '@sanity/ui/hooks'
+import {Container} from '@sanity/ui/primitives/container'
+import {Layer, type LayerOwnProps, type LayerProps} from '@sanity/ui/primitives/layer'
+import type {Radius, Shadow} from '@sanity/ui/theme'
+import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
+import {Portal, usePortal} from '@sanity/ui/utils/portal'
 import {type FocusEvent, type ForwardedRef, type ReactNode, use, useCallback, useRef} from 'react'
 
-import {Z_OFFSETS} from '../../constants'
-import {isHTMLElement} from '../../helpers/element'
-import {focusFirstDescendant, focusLastDescendant} from '../../helpers/focus'
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Container} from '../../primitives/container/Container'
-import {Layer, type LayerOwnProps, type LayerProps} from '../../primitives/layer/Layer'
-import type {ComponentType, Props} from '../../types'
-import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {Portal} from '../../utils/portal/Portal'
-import {usePortal} from '../../utils/portal/usePortal'
 import {DialogCard} from './DialogCard'
 import {isTargetWithinScope} from './isTargetWithinScope'
 import type {DialogPosition} from './types'
@@ -27,7 +30,9 @@ export const DEFAULT_DIALOG_ELEMENT = 'div'
 
 /** @public */
 export interface DialogOwnProps
-  extends Omit<ContainerStyleProps, 'tone'>, Omit<LayerOwnProps, 'shadow' | 'width'> {
+  extends
+    Omit<ContainerStyleProps, 'id' | 'position' | 'radius' | 'shadow'>,
+    Omit<LayerOwnProps, 'id' | 'position' | 'radius' | 'shadow' | 'width'> {
   /**
    * @beta
    */
@@ -55,7 +60,7 @@ export interface DialogOwnProps
   open?: boolean
   portal?: string
   position?: ResponsiveProp<DialogPosition>
-  scheme?: ColorScheme
+  // scheme?: ColorScheme
   /**
    * @deprecated Not in use – will be removed in the next major version.
    */

@@ -1,8 +1,5 @@
-import {kbd, KBD_STYLE_PROP_KEYS} from '@sanity/ui/css'
-import type {KBDStyleProps} from '@sanity/ui-css'
-
-import {_splitKeys} from '../../_keys'
-import type {ComponentType, Props} from '../../types'
+import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
+import {kbd, KBD_STYLE_PROP_KEYS, type KBDStyleProps} from '@sanity/ui/css'
 
 /** @public */
 export const DEFAULT_KBD_ELEMENT = 'kbd'

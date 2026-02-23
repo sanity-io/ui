@@ -9,11 +9,11 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import type {CardTone} from '@sanity/ui/tokens'
+import type {CardTone} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 const SIDE_PANEL_WIDTH = {
   sm: 300,
@@ -40,7 +40,7 @@ export default function SidePanelStory(): React.JSX.Element {
         </Box>
       </Card>
       <BoundaryElementProvider element={sidePanel}>
-        <Card borderLeft flex="none" ref={setSidePanel} style={{width: sidePanelWidth}} width={0}>
+        <Card ref={setSidePanel} borderLeft flex="none" style={{width: sidePanelWidth}} width={0}>
           <Stack gap={5} padding={4}>
             <Text muted size={1}>
               Click the <code>reference</code> text below to toggle the popover.
@@ -68,6 +68,7 @@ function InlineObject(props: {tone: CardTone | 'inherit'; updateRef?: PopoverPro
 
   return (
     <Popover
+      constrainSize
       content={
         <Box padding={3}>
           <Text size={1}>
@@ -81,13 +82,12 @@ function InlineObject(props: {tone: CardTone | 'inherit'; updateRef?: PopoverPro
           </Text>
         </Box>
       }
-      constrainSize
       open={open}
       overflow="auto"
       portal
       tone={tone}
-      width={0}
       updateRef={updateRef}
+      width={0}
     >
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <code onClick={handleClick}>reference</code>

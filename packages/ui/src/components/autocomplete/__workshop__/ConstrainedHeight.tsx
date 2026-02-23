@@ -10,7 +10,8 @@ import {
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
-import {CardWrapper} from '../../../../../workshop'
+import {CardWrapper} from '$workshop'
+
 import {countries} from './mock/countries'
 import type {ExampleOption} from './types'
 

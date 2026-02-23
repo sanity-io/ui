@@ -1,5 +1,12 @@
 import {CloseIcon} from '@sanity/icons'
 import {
+  _getResponsiveProp,
+  type ComponentType,
+  EMPTY_RECORD,
+  isRecord,
+  type Props,
+} from '@sanity/ui/core'
+import {
   _input_element,
   _input_presentation,
   type InputStyleProps,
@@ -9,7 +16,11 @@ import {
   textInput_prefix,
   textInput_suffix,
 } from '@sanity/ui/css'
-import type {FontWeight, Space} from '@sanity/ui-tokens/system'
+import {useCustomValidity} from '@sanity/ui/hooks'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button, type ButtonProps} from '@sanity/ui/primitives/button'
+import {Text} from '@sanity/ui/primitives/text'
+import type {FontWeight, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
   isValidElement,
@@ -21,15 +32,6 @@ import {
   useRef,
 } from 'react'
 import {isValidElementType} from 'react-is'
-
-import {EMPTY_RECORD} from '../../constants'
-import {_getResponsiveProp} from '../../helpers/props'
-import {useCustomValidity} from '../../hooks/useCustomValidity'
-import {isRecord} from '../../lib/isRecord'
-import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/Box'
-import {Button, type ButtonProps} from '../button/Button'
-import {Text} from '../text/Text'
 
 /** @public */
 export const DEFAULT_TEXT_INPUT_ELEMENT = 'input'

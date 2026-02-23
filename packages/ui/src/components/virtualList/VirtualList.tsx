@@ -1,5 +1,7 @@
+import {_isScrollable, _ResizeObserver, type ComponentType, type Props} from '@sanity/ui/core'
 import {vars} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/tokens'
+import {Box} from '@sanity/ui/primitives/box'
+import type {Space} from '@sanity/ui/theme'
 import {
   type CSSProperties,
   type ReactNode,
@@ -10,11 +12,6 @@ import {
   useRef,
   useState,
 } from 'react'
-
-import {_isScrollable} from '../../helpers/scroll'
-import {_ResizeObserver} from '../../observers/resize'
-import {Box} from '../../primitives/box/Box'
-import type {ComponentType, Props} from '../../types'
 
 /** @beta */
 export const DEFAULT_VIRTUAL_LIST_ELEMENT = 'div'

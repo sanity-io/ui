@@ -1,0 +1,5 @@
+export * from '../../src/primitives/skeleton/CodeSkeleton'
+export * from '../../src/primitives/skeleton/HeadingSkeleton'
+export * from '../../src/primitives/skeleton/LabelSkeleton'
+export * from '../../src/primitives/skeleton/Skeleton'
+export * from '../../src/primitives/skeleton/TextSkeleton'

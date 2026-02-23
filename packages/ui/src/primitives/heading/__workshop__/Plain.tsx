@@ -5,7 +5,7 @@ import {
   WORKSHOP_FONT_WEIGHT_OPTIONS,
   WORKSHOP_HEADING_FONT_SIZE_OPTIONS,
   WORKSHOP_TEXT_OVERFLOW_OPTIONS,
-} from '../../../../../workshop'
+} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   const muted = useBoolean('Muted', false)

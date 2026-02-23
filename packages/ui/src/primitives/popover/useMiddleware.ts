@@ -7,11 +7,10 @@ import {
   type RootBoundary,
   shift as shiftMiddleware,
 } from '@floating-ui/react-dom'
+import {_getResponsiveProp, type Placement} from '@sanity/ui/core'
 import {useMemo} from 'react'
 
-import {_getResponsiveProp} from '../../helpers/props'
 import {origin} from '../../middleware/origin'
-import type {Placement} from '../../types'
 import {DEFAULT_POPOVER_PADDING} from './constants'
 import {size} from './floating-ui/size'
 

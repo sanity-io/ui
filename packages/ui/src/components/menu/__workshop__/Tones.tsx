@@ -1,9 +1,9 @@
 import {CubeIcon} from '@sanity/icons'
 import {Box, Card, LayerProvider, Menu, MenuItem} from '@sanity/ui'
-import {ELEMENT_TONES} from '@sanity/ui/tokens'
+import {ELEMENT_TONES} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 export default function TonesStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled', false)
@@ -15,7 +15,7 @@ export default function TonesStory(): React.JSX.Element {
         <Card radius={3} shadow={3} tone={parentTone}>
           <Menu>
             {ELEMENT_TONES.map((tone) => (
-              <MenuItem disabled={disabled} icon={CubeIcon} key={tone} text={tone} tone={tone} />
+              <MenuItem key={tone} disabled={disabled} icon={CubeIcon} text={tone} tone={tone} />
             ))}
           </Menu>
         </Card>

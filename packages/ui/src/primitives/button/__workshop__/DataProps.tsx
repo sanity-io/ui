@@ -1,5 +1,5 @@
 import {Button} from '@sanity/ui'
-import {BUTTON_MODES, ELEMENT_TONES} from '@sanity/ui-tokens/system'
+import {BUTTON_MODES, ELEMENT_TONES} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'
