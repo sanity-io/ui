@@ -16,6 +16,7 @@ import ts from 'typescript-eslint'
 export function defineConfig(root, ...configs) {
   return ts.config(
     [
+      // _import.flatConfigs.recommended,
       {
         extends: [js.configs.recommended, ...ts.configs.recommended],
         files: ['**/*.{ts,tsx}'],
@@ -36,6 +37,7 @@ export function defineConfig(root, ...configs) {
           'simple-import-sort': simpleImportSort,
         },
         rules: {
+          // 'import/no-duplicates': ['error', {'prefer-inline': true}],
           'import/no-unresolved': 'off',
           'no-console': 'error',
           'no-duplicate-imports': 'error',
