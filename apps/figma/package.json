@@ -1,6 +1,5 @@
 {
-  "name": "figma-plugin-sanity-ui",
-  "version": "1.0.0",
+  "name": "figma-sanity-ui-tokens-sync",
   "private": true,
   "description": "",
   "license": "MIT",
@@ -10,26 +9,44 @@
   "exports": {
     ".": {
       "source": "./src/index.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "pkg build --strict && pkg --strict",
+    "build": "rimraf dist && pkg build --strict",
     "lint": "eslint .",
+    "typecheck": "tsc --build",
     "watch": "pkg watch --strict"
   },
+  "browserslist": "extends @sanity/browserslist-config",
   "devDependencies": {
+    "@babel/plugin-transform-async-to-generator": "^7.28.6",
+    "@babel/plugin-transform-class-properties": "^7.28.6",
+    "@babel/plugin-transform-logical-assignment-operators": "^7.28.6",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.28.6",
     "@babel/plugin-transform-object-rest-spread": "^7.28.6",
+    "@babel/plugin-transform-optional-catch-binding": "^7.28.6",
+    "@babel/plugin-transform-optional-chaining": "^7.28.6",
+    "@figma/eslint-plugin-figma-plugins": "^1.0.0",
     "@figma/plugin-typings": "^1.123.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@sanity/color": "^3.0.6",
-    "@sanity/ui": "workspace:*",
-    "eslint": "^9.39.3",
-    "segmented-property": "^4.0.0"
+    "@sanity/browserslist-config": "^1.0.5",
+    "@sanity/pkg-utils": "^10.4.4",
+    "@sanity/ui-tokens": "workspace:*"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
   }
 }

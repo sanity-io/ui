@@ -1,0 +1,5 @@
+export type {SanityFigmaColor, SanityFigmaColorAlias} from './color'
+export type {SanityFigmaNumber, SanityFigmaNumberAlias} from './number'
+export type {SanityFigmaString, SanityFigmaStringAlias} from './string'
+export type {SanityFigmaStyle} from './styles'
+export type {Alias, SanityFigmaVar} from './variables'
