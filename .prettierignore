@@ -1,5 +1,8 @@
 .next
+.react-router
 .workshop
+build
 dist
+next-env.d.ts
 pnpm-lock.yaml
 storybook-static
