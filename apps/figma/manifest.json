@@ -1,12 +1,13 @@
 {
-  "name": "Sanity UI",
+  "name": "Sanity UI tokens sync",
   "id": "1308127102029904003",
   "api": "1.0.0",
   "main": "dist/index.js",
   "capabilities": [],
   "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
   "editorType": ["figma"],
-  "ui": "src/index.html",
+  "ui": "src/ui.html",
   "networkAccess": {
     "allowedDomains": [
       "https://static.figma.com",
