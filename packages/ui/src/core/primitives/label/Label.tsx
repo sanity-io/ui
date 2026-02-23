@@ -7,13 +7,49 @@ import {
 
 import type {ComponentType, Props} from '../../types'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Label} component.
+ *
+ * @public
+ */
 export const DEFAULT_LABEL_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Label} component.
+ *
+ * @remarks
+ * Combines {@link LabelStyleProps} and {@link TextOverflowStyleProps} to provide
+ * typographic control and text truncation capabilities for label elements.
+ *
+ * Inherited from {@link LabelStyleProps}:
+ * - `align` – Sets horizontal text alignment (`"left"` | `"right"` | `"center"` | `"justify"` | `"initial"`).
+ * - `muted` – When `true`, applies a muted foreground color.
+ * - `size` – Sets the font size using the theme's label size scale (`0 | 1 | 2 | 3 | 4 | 5`). Defaults to `1`.
+ * - `weight` – Sets the font weight (`"regular"` | `"medium"` | `"semibold"` | `"bold"`). Defaults to `"regular"`.
+ * - `flex` – Controls flex grow/shrink behavior within a flex container.
+ * - `margin`, `marginX`, `marginY`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft` – Outer margin props.
+ * - `maxWidth` – Constrains the maximum width of the element.
+ *
+ * Inherited from {@link TextOverflowStyleProps}:
+ * - `textOverflow` – Controls how overflowing text is treated (`"ellipsis"` | `"clip"`).
+ *
+ * @public
+ */
 export type LabelOwnProps = LabelStyleProps & TextOverflowStyleProps
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Label} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Label`.
+ * Choose an element type that is semantically appropriate for the content.
+ *
+ * Accepted values:
+ * `"div"` | `"h1"` | `"h2"` | `"h3"` | `"h4"` | `"h5"` | `"h6"` |
+ * `"label"` | `"li"` | `"p"` | `"span"` | `ComponentType`
+ *
+ * @public
+ */
 export type LabelElementType =
   | 'div'
   | 'h1'
@@ -28,11 +64,46 @@ export type LabelElementType =
   | 'span'
   | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Label} component.
+ *
+ * @remarks
+ * Combines {@link LabelOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link LabelElementType}.
+ *
+ * @public
+ */
 export type LabelProps<E extends LabelElementType = LabelElementType> = Props<LabelOwnProps, E>
 
 /**
- * Typographic labels.
+ * A typographic label component for rendering short descriptive text such as
+ * form field labels, section headers, or UI annotations.
+ *
+ * @remarks
+ * The `Label` component renders text using the theme's label typography scale,
+ * which is distinct from the body text and heading scales. Label text is typically
+ * rendered in uppercase or small-caps depending on the theme, and is designed for
+ * short, descriptive content rather than long-form prose.
+ *
+ * The component wraps its children in a `<span>` element that applies text
+ * overflow behavior when the `textOverflow` prop is set.
+ *
+ * ### Props
+ *
+ * | Prop | Type | Default | Required | Description |
+ * |------|------|---------|----------|-------------|
+ * | `as` | `LabelElementType` | `"div"` | No | The HTML element or component type to render. |
+ * | `align` | `TextAlign` | `undefined` | No | Sets the horizontal text alignment. |
+ * | `muted` | `boolean` | `false` | No | Applies a muted foreground color. |
+ * | `size` | `ResponsiveProp<FontLabelSize>` | `1` | No | Sets the label font size (`0 \| 1 \| 2 \| 3 \| 4 \| 5`). |
+ * | `weight` | `FontWeight` | `"regular"` | No | Sets the font weight (`"regular"` \| `"medium"` \| `"semibold"` \| `"bold"`). |
+ * | `textOverflow` | `TextOverflow` | `undefined` | No | Controls how overflowing text is treated (`"ellipsis"` \| `"clip"`). |
+ * | `flex` | `ResponsiveProp<Flex>` | `undefined` | No | Controls flex grow/shrink behavior. |
+ * | `margin` | `ResponsiveProp<Margin>` | `undefined` | No | Sets outer margin on all sides. |
+ * | `maxWidth` | `ResponsiveProp<MaxWidth>` | `undefined` | No | Constrains the maximum width of the element. |
  *
  * @public
  */

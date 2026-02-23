@@ -5,23 +5,113 @@ import {useMemo} from 'react'
 import type {ComponentType, Props} from '../../types'
 import {compileCommands, getRoundedCommands, type Point} from './cmds'
 
-/** @internal */
+/**
+ * The default HTML element type rendered by the {@link Arrow} component.
+ *
+ * @internal
+ */
 export const DEFAULT_ARROW_ELEMENT = 'div'
 
-/** @internal */
+/**
+ * Own props for the {@link Arrow} component.
+ *
+ * @remarks
+ * Defines the dimensions and corner rounding of the SVG arrow shape used
+ * internally by floating UI components such as {@link Popover} and {@link Tooltip}.
+ *
+ * @internal
+ */
 export type ArrowOwnProps = {
+  /**
+   * Sets the width of the arrow shape in pixels.
+   *
+   * @remarks
+   * Determines the horizontal size of the rendered SVG arrow element.
+   * The SVG viewBox is sized to match this value.
+   *
+   * @type {number}
+   * @required
+   */
   width: number
+
+  /**
+   * Sets the height of the arrow shape in pixels.
+   *
+   * @remarks
+   * Determines the vertical extent of the arrow's triangular point.
+   * The actual SVG element height is equal to the `width` value; the
+   * `height` controls how far the triangular point extends downward
+   * within that space.
+   *
+   * @type {number}
+   * @required
+   */
   height: number
+
+  /**
+   * Sets the corner radius for the arrow's triangular point in pixels.
+   *
+   * @remarks
+   * Controls how rounded the corners of the triangular arrow shape are.
+   * A value of `0` produces sharp corners.
+   *
+   * @type {number}
+   * @defaultValue 0
+   * @optional
+   */
   radius?: number
 }
 
-/** @internal */
+/**
+ * Accepted values for the `as` prop of the {@link Arrow} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Arrow`.
+ *
+ * Accepted values: `"div"` | `"span"` | `ComponentType`
+ *
+ * @internal
+ */
 export type ArrowElementType = 'div' | 'span' | ComponentType
 
-/** @internal */
+/**
+ * Props for the {@link Arrow} component.
+ *
+ * @remarks
+ * Combines {@link ArrowOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link ArrowElementType}.
+ *
+ * @internal
+ */
 export type ArrowProps<E extends ArrowElementType = ArrowElementType> = Props<ArrowOwnProps, E>
 
-/** @internal */
+/**
+ * Renders an SVG arrow shape used as a directional indicator by floating UI
+ * components such as {@link Popover} and {@link Tooltip}.
+ *
+ * @remarks
+ * The `Arrow` component generates a triangular SVG path with optional rounded
+ * corners, a filled shape, and a stroke outline controlled by an SVG mask. The
+ * arrow's size is set via a CSS custom property (`--arrow-size`) using
+ * `@vanilla-extract/dynamic`.
+ *
+ * This component is not intended for direct use by consumers. It is used
+ * internally by floating UI primitives.
+ *
+ * ### Default prop values
+ *
+ * | Prop | Type | Default | Required | Description |
+ * |------|------|---------|----------|-------------|
+ * | `as` | `ArrowElementType` | `"div"` | No | The HTML element or component type to render. |
+ * | `width` | `number` | — | Yes | The width of the arrow shape in pixels. |
+ * | `height` | `number` | — | Yes | The height of the arrow's triangular point in pixels. |
+ * | `radius` | `number` | `0` | No | The corner radius of the arrow point in pixels. |
+ *
+ * @internal
+ */
 export function Arrow<E extends ArrowElementType = typeof DEFAULT_ARROW_ELEMENT>(
   props: ArrowProps<E>,
 ): React.JSX.Element {

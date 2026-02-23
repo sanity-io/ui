@@ -31,48 +31,272 @@ import {Box} from '../box/Box'
 import {Button, type ButtonProps} from '../button/Button'
 import {Text} from '../text/Text'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link TextInput} component.
+ *
+ * @public
+ */
 export const DEFAULT_TEXT_INPUT_ELEMENT = 'input'
 
-/** @public */
+/**
+ * Props accepted by the clear button rendered inside the {@link TextInput} component.
+ *
+ * @remarks
+ * Extends {@link ButtonProps} for a `<button>` element with `as`, `onClick`, and
+ * `onMouseDown` omitted because they are managed internally by the `TextInput`.
+ *
+ * @public
+ */
 export type TextInputClearButtonProps = Omit<
   ButtonProps<'button'>,
   'as' | 'onClick' | 'onMouseDown'
 >
 
-/** @public */
+/**
+ * Own props for the {@link TextInput} component.
+ *
+ * @remarks
+ * Extends {@link InputStyleProps} to provide shared input styling capabilities
+ * (border, fontSize, gap, padding, flex, radius, width) alongside text-input-specific
+ * properties.
+ *
+ * Inherited from {@link InputStyleProps}:
+ * - `border` (`boolean`) – Renders a visible border around the input. Default: `true`.
+ * - `fontSize` (`ResponsiveProp<FontTextSize>`) – Sets the font size. Accepted values: `0 | 1 | 2 | 3 | 4`. Default: `2`.
+ * - `gap` (`ResponsiveProp<Space>`) – Gap between internal elements (icons and text). Accepted values: `0`–`9`. Default: `3`.
+ * - `padding` (`ResponsiveProp<Space>`) – Inner padding. Accepted values: `0`–`9`. Default: `3`.
+ * - `flex` (`ResponsiveProp<Flex>`) – Flex grow/shrink behavior.
+ * - `radius` (`ResponsiveProp<Radius | 'full'>`) – Border radius. Default: `2`.
+ * - `width` (`ResponsiveProp<Width>`) – Width of the input container.
+ *
+ * In addition to the props listed below, all standard HTML `<input>` attributes
+ * (e.g. `type`, `value`, `defaultValue`, `placeholder`, `disabled`, `readOnly`,
+ * `name`, `onChange`, `onBlur`, `onFocus`, `ref`, etc.) are forwarded to the
+ * underlying element.
+ *
+ * @public
+ */
 export type TextInputOwnProps = InputStyleProps & {
   /**
-   * @beta
+   * When `true`, disables the focus ring visual indicator on the input element.
+   *
+   * @beta Do not use in production.
+   *
+   * @type {boolean}
+   * @defaultValue undefined
+   * @optional
    */
   __unstable_disableFocusRing?: boolean
+
   /**
-   * @beta
+   * Controls the visibility and configuration of a clear button rendered inside
+   * the input, on the trailing (right) side.
+   *
+   * @remarks
+   * When set to `true`, renders a default clear button with a close icon.
+   * When set to a {@link TextInputClearButtonProps} object, renders a clear button
+   * with the specified custom props (e.g. custom `aria-label`). When `false` or
+   * `undefined`, no clear button is rendered.
+   *
+   * The clear button is only rendered when the input is neither `disabled` nor
+   * `readOnly`. When a clear button is displayed, the `iconRight` prop is ignored.
+   *
+   * Clicking the clear button invokes the {@link TextInputOwnProps.onClear | onClear}
+   * callback and refocuses the input element.
+   *
+   * @beta Do not use in production.
+   *
+   * @type {boolean | TextInputClearButtonProps}
+   * @defaultValue undefined
+   * @optional
    */
   clearButton?: boolean | TextInputClearButtonProps
-  customValidity?: string
-  icon?: ElementType | ReactNode
-  iconRight?: ElementType | ReactNode
+
   /**
-   * @beta
+   * Sets a custom validation message on the input element.
+   *
+   * @remarks
+   * When a non-empty string is provided, the input is marked as invalid via
+   * the Constraint Validation API (`setCustomValidity`), and the `data-invalid`
+   * attribute is applied to the wrapper element for styling purposes.
+   *
+   * Set to an empty string `""` or `undefined` to clear the validation error.
+   *
+   * @type {string}
+   * @defaultValue undefined
+   * @optional
+   */
+  customValidity?: string
+
+  /**
+   * An icon to render on the leading (left) side of the input.
+   *
+   * @remarks
+   * Accepts either a React component type (rendered as `<IconComponent />`) or
+   * a React element (rendered as-is). The icon is positioned absolutely inside
+   * the input presentation layer.
+   *
+   * @type {ElementType | ReactNode}
+   * @defaultValue undefined
+   * @optional
+   */
+  icon?: ElementType | ReactNode
+
+  /**
+   * An icon to render on the trailing (right) side of the input.
+   *
+   * @remarks
+   * Accepts either a React component type (rendered as `<IconComponent />`) or
+   * a React element (rendered as-is). The icon is positioned absolutely inside
+   * the input presentation layer.
+   *
+   * Note: When `clearButton` is enabled, the `iconRight` is not rendered to
+   * avoid overlap with the clear button.
+   *
+   * @type {ElementType | ReactNode}
+   * @defaultValue undefined
+   * @optional
+   */
+  iconRight?: ElementType | ReactNode
+
+  /**
+   * Callback fired when the clear button is clicked.
+   *
+   * @remarks
+   * Only invoked when the `clearButton` prop is enabled. After the callback
+   * fires, the input element is refocused. Use this callback to clear the
+   * controlled input value in the parent component.
+   *
+   * @beta Do not use in production.
+   *
+   * @type {() => void}
+   * @defaultValue undefined
+   * @optional
    */
   onClear?: () => void
+
+  /**
+   * Content rendered before (to the left of) the input element, outside the
+   * input's border.
+   *
+   * @remarks
+   * The prefix is rendered in a separate container adjacent to the input.
+   * Typically used for labels, icons, or short text that should appear
+   * visually attached to the input.
+   *
+   * @type {ReactNode}
+   * @defaultValue undefined
+   * @optional
+   */
   prefix?: ReactNode
+
+  /**
+   * Content rendered after (to the right of) the input element, outside the
+   * input's border.
+   *
+   * @remarks
+   * The suffix is rendered in a separate container adjacent to the input.
+   * Typically used for units, labels, or action buttons that should appear
+   * visually attached to the input.
+   *
+   * @type {ReactNode}
+   * @defaultValue undefined
+   * @optional
+   */
   suffix?: ReactNode
+
+  /**
+   * Sets the font weight of the input text.
+   *
+   * @remarks
+   * Accepted values: `"regular"` | `"medium"` | `"semibold"` | `"bold"`
+   *
+   * @type {FontWeight}
+   * @defaultValue undefined
+   * @optional
+   */
   weight?: FontWeight
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link TextInput} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `TextInput`.
+ *
+ * Accepted values: `"input"` | `ComponentType`
+ *
+ * @public
+ */
 export type TextInputElementType = 'input' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link TextInput} component.
+ *
+ * @remarks
+ * Combines {@link TextInputOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<input>` element by default.
+ *
+ * Standard HTML `<input>` attributes supported include:
+ * - `type` (`string`) – The input type (e.g. `"text"`, `"email"`, `"password"`, `"number"`, `"search"`, `"url"`, `"tel"`). Default: `"text"`.
+ * - `value` (`string`) – The controlled value of the input.
+ * - `defaultValue` (`string`) – The initial value for uncontrolled usage.
+ * - `placeholder` (`string`) – Placeholder text shown when the input is empty.
+ * - `disabled` (`boolean`) – When `true`, disables the input and prevents interaction. Default: `false`.
+ * - `readOnly` (`boolean`) – When `true`, prevents user changes while keeping the input focusable.
+ * - `name` (`string`) – The form field name for the input.
+ * - `onChange` (`ChangeEventHandler<HTMLInputElement>`) – Callback fired when the value changes.
+ * - `onBlur` (`FocusEventHandler<HTMLInputElement>`) – Callback fired when the input loses focus.
+ * - `onFocus` (`FocusEventHandler<HTMLInputElement>`) – Callback fired when the input gains focus.
+ * - `ref` (`Ref<HTMLInputElement>`) – A ref forwarded to the underlying `<input>` element.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TextInputElementType}.
+ *
+ * @public
+ */
 export type TextInputProps<E extends TextInputElementType = TextInputElementType> = Props<
   TextInputOwnProps,
   E
 >
 
 /**
- * Single line text input.
+ * A single-line text input component with support for icons, prefix/suffix
+ * elements, a clear button, and custom validation.
+ *
+ * @remarks
+ * The `TextInput` component renders an `<input>` element by default, wrapped
+ * in a presentational container that provides themed styling, optional border,
+ * and support for leading/trailing icons, prefix/suffix content, and a clear
+ * button.
+ *
+ * When `readOnly` is `true`, the input is visually enabled but functionally
+ * disabled. A `data-read-only` attribute is applied for styling differentiation.
+ *
+ * When `customValidity` is set to a non-empty string, the input is marked as
+ * invalid via the Constraint Validation API and the `data-invalid` attribute
+ * is applied to the wrapper element.
+ *
+ * ### Default prop values
+ *
+ * | Prop | Type | Default | Required | Description |
+ * |------|------|---------|----------|-------------|
+ * | `as` | `TextInputElementType` | `"input"` | No | The HTML element or component type to render. |
+ * | `border` | `boolean` | `true` | No | When `true`, renders a visible border around the input. |
+ * | `disabled` | `boolean` | `false` | No | Disables the input, preventing user interaction. |
+ * | `fontSize` | `ResponsiveProp<FontTextSize>` | `2` | No | Sets the font size of the input text. Accepted values: `0 \| 1 \| 2 \| 3 \| 4`. |
+ * | `gap` | `ResponsiveProp<Space>` | `3` | No | Gap between internal elements. Accepted values: `0`–`9`. |
+ * | `padding` | `ResponsiveProp<Space>` | `3` | No | Inner padding. Accepted values: `0`–`9`. |
+ * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `2` | No | Border radius. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| "full"`. |
+ * | `type` | `string` | `"text"` | No | The HTML input type attribute. |
+ * | `icon` | `ElementType \| ReactNode` | `undefined` | No | An icon on the leading (left) side of the input. |
+ * | `iconRight` | `ElementType \| ReactNode` | `undefined` | No | An icon on the trailing (right) side of the input. |
+ * | `clearButton` | `boolean \| TextInputClearButtonProps` | `undefined` | No | Renders a clear button inside the input. |
+ * | `onClear` | `() => void` | `undefined` | No | Callback fired when the clear button is clicked. |
+ * | `customValidity` | `string` | `undefined` | No | A custom validation message for the input. |
+ * | `prefix` | `ReactNode` | `undefined` | No | Content rendered before the input, outside the border. |
+ * | `suffix` | `ReactNode` | `undefined` | No | Content rendered after the input, outside the border. |
+ * | `weight` | `FontWeight` | `undefined` | No | Sets the font weight of the input text. |
  *
  * @public
  */

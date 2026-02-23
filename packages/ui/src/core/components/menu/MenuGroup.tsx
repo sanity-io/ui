@@ -22,15 +22,96 @@ import type {ComponentType, Props} from '../../types'
 import {DEFAULT_MENU_ELEMENT, Menu, type MenuProps} from './Menu'
 import {useMenu} from './useMenu'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link MenuGroup} component.
+ *
+ * @public
+ */
 export const DEFAULT_MENU_GROUP_ELEMENT = 'button'
 
-/** @public */
+/**
+ * Own props for the {@link MenuGroup} component.
+ *
+ * @remarks
+ * Extends {@link RadiusStyleProps} to provide border radius control alongside
+ * menu-group-specific properties for rendering a submenu trigger within a
+ * {@link Menu}.
+ *
+ * Inherited from {@link RadiusStyleProps}:
+ * - `radius` (`ResponsiveProp<Radius | 'full'>`) – Sets the border radius of the selectable area. Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | "full"`. Default: `2`.
+ *
+ * @public
+ */
 export type MenuGroupOwnProps = RadiusStyleProps & {
+  /**
+   * When `true`, disables the menu group trigger, preventing user interaction
+   * and applying a disabled visual state.
+   *
+   * @type {boolean}
+   * @defaultValue undefined
+   * @optional
+   */
   disabled?: boolean
+
+  /**
+   * Sets the font size of the menu group's text and icon content.
+   *
+   * @remarks
+   * Uses the text font size scale defined by the theme. Supports responsive values.
+   *
+   * Accepted values: `0 | 1 | 2 | 3 | 4`
+   *
+   * @type {ResponsiveProp\<FontTextSize\>}
+   * @defaultValue 1
+   * @optional
+   */
   fontSize?: ResponsiveProp<FontTextSize>
+
+  /**
+   * Sets the gap between the icon, text, and chevron elements inside the
+   * menu group trigger.
+   *
+   * @remarks
+   * Uses the spacing scale defined by the theme. Supports responsive values.
+   *
+   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
+   *
+   * @type {ResponsiveProp\<Space\>}
+   * @defaultValue 3
+   * @optional
+   */
   gap?: ResponsiveProp<Space>
+
+  /**
+   * An icon to render on the leading (left) side of the menu group trigger.
+   *
+   * @remarks
+   * Accepts either a React component type (rendered as `<IconComponent />`) or
+   * a React element (rendered as-is).
+   *
+   * @type {ElementType | ReactNode}
+   * @defaultValue undefined
+   * @optional
+   */
   icon?: ElementType | ReactNode
+
+  /**
+   * Props forwarded to the child {@link Menu} rendered inside the submenu
+   * popover.
+   *
+   * @remarks
+   * Accepts all {@link MenuProps} except `onClickOutside`, `onEscape`,
+   * `onItemClick`, `onKeyDown`, `onMouseEnter`, `registerElement`,
+   * `shouldFocus`, and `onBlurCapture`, which are managed internally by the
+   * `MenuGroup` component.
+   *
+   * Use this to configure the child menu's `gap`, `padding`, or other layout
+   * props.
+   *
+   * @type {Omit\<MenuProps\<'div'\>, 'onClickOutside' | 'onEscape' | 'onItemClick' | 'onKeyDown' | 'onMouseEnter' | 'registerElement' | 'shouldFocus' | 'onBlurCapture'\>}
+   * @defaultValue undefined
+   * @optional
+   */
   menu?: Omit<
     MenuProps<typeof DEFAULT_MENU_ELEMENT>,
     | 'onClickOutside'
@@ -42,22 +123,134 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
     | 'shouldFocus'
     | 'onBlurCapture'
   >
+
+  /**
+   * Sets the inner padding of the menu group trigger element.
+   *
+   * @remarks
+   * Uses the spacing scale defined by the theme. Supports responsive values.
+   *
+   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
+   *
+   * @type {ResponsiveProp\<Space\>}
+   * @defaultValue 3
+   * @optional
+   */
   padding?: ResponsiveProp<Space>
+
+  /**
+   * Props forwarded to the underlying {@link Popover} component that wraps
+   * the child submenu.
+   *
+   * @remarks
+   * Accepts all {@link PopoverProps} except `content` and `open`, which are
+   * managed internally. Use this to control popover placement, portal
+   * behavior, boundary elements, and other positioning options.
+   *
+   * @type {Omit\<PopoverProps\<'div'\>, 'content' | 'open'\>}
+   * @defaultValue undefined
+   * @optional
+   */
   popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
+
+  /**
+   * The text label displayed inside the menu group trigger.
+   *
+   * @remarks
+   * Rendered inside a {@link Text} component with `textOverflow="ellipsis"`
+   * and `weight="medium"`.
+   *
+   * @type {ReactNode}
+   * @defaultValue undefined
+   * @optional
+   */
   text?: ReactNode
+
+  /**
+   * Sets the color tone of the menu group trigger, which determines the
+   * color scheme applied to its hover, focus, and active states.
+   *
+   * @remarks
+   * Accepted values:
+   * - `"default"` – Neutral default tone.
+   * - `"neutral"` – Neutral emphasis tone.
+   * - `"primary"` – Primary action tone.
+   * - `"suggest"` – Suggestive or informational tone.
+   * - `"positive"` – Positive or success tone.
+   * - `"caution"` – Warning or caution tone.
+   * - `"critical"` – Destructive or critical action tone.
+   *
+   * @type {ElementTone}
+   * @defaultValue `"default"`
+   * @optional
+   */
   tone?: ElementTone
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link MenuGroup} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `MenuGroup`.
+ *
+ * Accepted values: `"button"` | `ComponentType`
+ *
+ * @public
+ */
 export type MenuGroupElementType = 'button' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link MenuGroup} component.
+ *
+ * @remarks
+ * Combines {@link MenuGroupOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<button>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link MenuGroupElementType}.
+ *
+ * @public
+ */
 export type MenuGroupProps<E extends MenuGroupElementType = MenuGroupElementType> = Props<
   MenuGroupOwnProps,
   E
 >
 
-/** @public */
+/**
+ * A submenu trigger item within a {@link Menu} that opens a nested child
+ * menu in a {@link Popover} on hover or click.
+ *
+ * @remarks
+ * The `MenuGroup` component renders a {@link Selectable} element styled as a
+ * menu item with a trailing chevron icon. When the user hovers over or clicks
+ * the item, a child {@link Menu} is displayed in a {@link Popover} adjacent
+ * to the trigger.
+ *
+ * The component integrates with the parent menu's context for keyboard
+ * navigation, focus management, and click-outside handling. ArrowRight opens
+ * the submenu and focuses its first item; ArrowLeft closes the submenu and
+ * returns focus to the trigger.
+ *
+ * The `children` prop is rendered inside the child menu, allowing nested
+ * {@link MenuItem}, {@link MenuDivider}, and further {@link MenuGroup} elements.
+ *
+ * ### Default prop values
+ *
+ * | Prop | Type | Default | Required | Description |
+ * |------|------|---------|----------|-------------|
+ * | `as` | `MenuGroupElementType` | `"button"` | No | The HTML element or component type to render. |
+ * | `fontSize` | `ResponsiveProp<FontTextSize>` | `1` | No | Font size of the trigger text. Accepted values: `0 \| 1 \| 2 \| 3 \| 4`. |
+ * | `gap` | `ResponsiveProp<Space>` | `3` | No | Gap between icon, text, and chevron. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
+ * | `padding` | `ResponsiveProp<Space>` | `3` | No | Inner padding of the trigger element. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
+ * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `2` | No | Border radius of the selectable area. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| "full"`. |
+ * | `tone` | `ElementTone` | `"default"` | No | Color tone for interactive states. |
+ * | `icon` | `ElementType \| ReactNode` | `undefined` | No | Icon on the leading side of the trigger. |
+ * | `text` | `ReactNode` | `undefined` | No | Text label inside the trigger. |
+ * | `menu` | `Omit<MenuProps, ...>` | `undefined` | No | Props forwarded to the child submenu. |
+ * | `popover` | `Omit<PopoverProps, ...>` | `undefined` | No | Props forwarded to the submenu popover. |
+ *
+ * @public
+ */
 export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_GROUP_ELEMENT>(
   props: MenuGroupProps<E>,
 ): React.JSX.Element {

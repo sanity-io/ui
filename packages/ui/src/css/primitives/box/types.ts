@@ -33,7 +33,39 @@ import type {ShadowStyleProps} from '../../props/shadow/types'
 import type {TextAlignStyleProps} from '../../props/textAlign/types'
 import type {WidthStyleProps} from '../../props/width/types'
 
-/** @public */
+/**
+ * Composite style props for the {@link Box} component.
+ *
+ * @remarks
+ * `BoxStyleProps` combines all foundational CSS utility style prop interfaces into a
+ * single type. It serves as the base style prop interface for layout primitives such as
+ * `Box`, `Card`, `Flex`, `Grid`, `Stack`, and others.
+ *
+ * Inherited style prop groups:
+ * - **Alignment:** {@link AlignItemsStyleProps}
+ * - **Border:** {@link BorderStyleProps}
+ * - **Display:** {@link DisplayStyleProps}
+ * - **Flex:** {@link FlexStyleProps}, {@link FlexDirectionStyleProps}, {@link FlexWrapStyleProps}
+ * - **Gap:** {@link GapStyleProps}
+ * - **Grid:** {@link GridAutoColumnsStyleProps}, {@link GridAutoFlowStyleProps}, {@link GridAutoRowsStyleProps},
+ *   {@link GridColumnStyleProps}, {@link GridColumnStartStyleProps}, {@link GridColumnEndStyleProps},
+ *   {@link GridRowStyleProps}, {@link GridRowStartStyleProps}, {@link GridRowEndStyleProps},
+ *   {@link GridTemplateColumnsStyleProps}, {@link GridTemplateRowsStyleProps}
+ * - **Sizing:** {@link HeightStyleProps}, {@link MaxWidthStyleProps}, {@link MinHeightStyleProps},
+ *   {@link MinWidthStyleProps}, {@link WidthStyleProps}
+ * - **Inset:** {@link InsetStyleProps}
+ * - **Justify:** {@link JustifyContentStyleProps}
+ * - **Margin:** {@link MarginStyleProps}
+ * - **Overflow:** {@link OverflowStyleProps}
+ * - **Padding:** {@link PaddingStyleProps}
+ * - **Pointer Events:** {@link PointerEventsStyleProps}
+ * - **Position:** {@link PositionStyleProps}
+ * - **Radius:** {@link RadiusStyleProps}
+ * - **Shadow:** {@link ShadowStyleProps}
+ * - **Text Align:** {@link TextAlignStyleProps}
+ *
+ * @public
+ */
 export interface BoxStyleProps
   extends AlignItemsStyleProps,
     BorderStyleProps,
@@ -68,8 +100,52 @@ export interface BoxStyleProps
     ShadowStyleProps,
     TextAlignStyleProps,
     WidthStyleProps {
+  /**
+   * A custom CSS class name to append to the element.
+   *
+   * @type {string}
+   * @defaultValue undefined
+   * @optional
+   */
   className?: string
+
+  /**
+   * When `true`, reduces the visual prominence of the element by applying
+   * a muted foreground color from the theme.
+   *
+   * @type {boolean}
+   * @defaultValue undefined
+   * @optional
+   */
   muted?: boolean
+
+  /**
+   * Removes the default focus outline from the element.
+   *
+   * @remarks
+   * The only accepted value is `"none"`, which sets `outline: none` on the element.
+   *
+   * Accepted values: `"none"`
+   *
+   * @type {'none'}
+   * @defaultValue undefined
+   * @optional
+   */
   outline?: 'none'
+
+  /**
+   * Controls how the total width and height of the element are calculated.
+   *
+   * @remarks
+   * A convenience alias for the CSS `box-sizing` property.
+   *
+   * Accepted values:
+   * - `"content"` – Width and height apply only to the content area, excluding padding and border (`content-box`).
+   * - `"border"` – Width and height include padding and border, but not margin (`border-box`).
+   *
+   * @type {BoxSizing}
+   * @defaultValue undefined
+   * @optional
+   */
   sizing?: BoxSizingStyleProps['boxSizing']
 }

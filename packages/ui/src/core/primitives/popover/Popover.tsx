@@ -48,84 +48,352 @@ import {size} from './floating-ui/size'
 import {PopoverLayer} from './PopoverLayer'
 import type {PopoverMargins, PopoverUpdateCallback} from './types'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Popover} component.
+ *
+ * @public
+ */
 export const DEFAULT_POPOVER_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Popover} component.
+ *
+ * @remarks
+ * Extends {@link LayerOwnProps} (with `maxWidth` omitted) to inherit all card, box,
+ * and layer stacking props. Adds floating-UI-specific properties for positioning,
+ * overflow handling, animation, and portal rendering.
+ *
+ * Inherited from {@link LayerOwnProps} (via {@link CardOwnProps} and {@link BoxOwnProps}):
+ * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
+ * - All spacing props: `margin`, `padding`, and per-side variants.
+ * - All sizing props: `width`, `height`, `minWidth`, `minHeight`.
+ * - All position props: `position`, `inset`, and per-side inset variants.
+ * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
+ * - Card-specific props: `scheme`, `tone`.
+ * - Layer-specific props: `onActivate`, `zOffset`.
+ *
+ * @public
+ */
 export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
-  /** @beta */
-  __unstable_margins?: PopoverMargins
   /**
-   * Whether the popover should animate in and out.
+   * Custom margin offsets applied when computing the available space for
+   * the popover within its boundary.
+   *
+   * @remarks
+   * Provided as a four-element tuple `[top, right, bottom, left]` in pixels.
+   * These margins shrink the effective boundary area used by the size and
+   * shift middleware.
+   *
+   * @beta Do not use in production.
+   *
+   * @type {PopoverMargins}
+   * @defaultValue `[0, 0, 0, 0]`
+   * @optional
+   */
+  __unstable_margins?: PopoverMargins
+
+  /**
+   * When `true`, the popover animates in and out using a scale/opacity
+   * transition powered by `motion/react` (`AnimatePresence`).
+   *
+   * @remarks
+   * Animation is automatically disabled when the user's operating system
+   * indicates a preference for reduced motion (`prefers-reduced-motion: reduce`).
    *
    * @beta
+   *
+   * @type {boolean}
    * @defaultValue false
+   * @optional
    */
   animate?: boolean
-  arrow?: boolean
-  children?: ReactElement<{ref: ForwardedRef<HTMLElement>}>
+
   /**
-   * When `true`, prevent overflow within the current boundary:
-   * - by flipping on its side axis
-   * - by resizing
+   * When `true`, renders a directional arrow element that points from the
+   * popover toward its reference element.
    *
-   * Note that:
-   * - setting `preventOverflow` to `true` also prevents overflow on its side axis
-   * - setting `matchReferenceWidth` to `true` also causes the popover to resize
-   *
+   * @type {boolean}
    * @defaultValue false
+   * @optional
+   */
+  arrow?: boolean
+
+  /**
+   * The reference element that the popover is anchored to.
+   *
+   * @remarks
+   * Must be a single React element that accepts a `ref` prop. The `Popover`
+   * clones this element and attaches a ref to measure its position and size
+   * for floating-UI calculations. If `referenceElement` is provided instead,
+   * this child is rendered as-is without ref cloning.
+   *
+   * @type {ReactElement<\{ ref: ForwardedRef<HTMLElement> \}>}
+   * @defaultValue undefined
+   * @optional
+   */
+  children?: ReactElement<{ref: ForwardedRef<HTMLElement>}>
+
+  /**
+   * When `true`, prevents the popover from overflowing the current boundary
+   * by flipping on its side axis and resizing to fit within the available space.
+   *
+   * @remarks
+   * Uses the Floating UI `flip` (or `autoPlacement`) and `size` middleware.
+   *
+   * Note:
+   * - Setting `preventOverflow` to `true` also prevents overflow on the side axis.
+   * - Setting `matchReferenceWidth` to `true` also causes the popover to resize.
+   *
+   * @type {boolean}
+   * @defaultValue false
+   * @optional
    */
   constrainSize?: boolean
-  content?: ReactNode
-  disabled?: boolean
-  fallbackPlacements?: Placement[]
-  floatingBoundary?: HTMLElement | null
+
   /**
-   * When `true`, set the maximum width to match the reference element, and also prevent overflow within
-   * the current boundary by resizing.
+   * The content to render inside the popover floating element.
    *
-   * Note that setting `constrainSize` to `true` also causes the popover to resize
+   * @remarks
+   * This is the primary content slot. It is rendered inside a styled
+   * {@link PopoverLayer} card when the popover is open.
    *
+   * @type {ReactNode}
+   * @defaultValue undefined
+   * @optional
+   */
+  content?: ReactNode
+
+  /**
+   * When `true`, disables the popover entirely. The `children` element is
+   * rendered as-is without any floating behavior or popover content.
+   *
+   * @type {boolean}
+   * @defaultValue undefined
+   * @optional
+   */
+  disabled?: boolean
+
+  /**
+   * An ordered list of alternative placements to try when the popover
+   * cannot fit in its preferred `placement`.
+   *
+   * @remarks
+   * Used by the Floating UI `flip` middleware. If not provided, a default
+   * set of fallback placements is derived from the `placement` prop.
+   *
+   * Accepted values (each element): `"top"` | `"top-start"` | `"top-end"` |
+   * `"right"` | `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
+   * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
+   *
+   * @type {Placement[]}
+   * @defaultValue (derived from `placement`)
+   * @optional
+   */
+  fallbackPlacements?: Placement[]
+
+  /**
+   * An HTML element used as the clipping boundary for the floating element.
+   *
+   * @remarks
+   * Determines the area within which the popover's `flip`, `shift`, and `size`
+   * middleware operate. When not provided, the nearest boundary element from
+   * the `BoundaryElementContext` is used.
+   *
+   * @type {HTMLElement | null}
+   * @defaultValue (from BoundaryElementContext)
+   * @optional
+   */
+  floatingBoundary?: HTMLElement | null
+
+  /**
+   * When `true`, sets the popover's maximum width to match the reference
+   * element's width, and prevents overflow within the current boundary
+   * by resizing.
+   *
+   * @remarks
+   * Uses the Floating UI `size` middleware. Note that setting `constrainSize`
+   * to `true` also causes the popover to resize.
+   *
+   * @type {boolean}
    * @defaultValue false
+   * @optional
    */
   matchReferenceWidth?: boolean
+
   /**
-   * When true, blocks all pointer interaction with elements beneath the popover until closed.
+   * When `true`, renders a transparent full-viewport overlay beneath the
+   * popover that blocks all pointer interaction with elements behind it
+   * until the popover is closed.
    *
    * @beta
+   *
+   * @type {boolean}
    * @defaultValue false
+   * @optional
    */
   modal?: boolean
-  open?: boolean
-  placement?: Placement
+
   /**
-   * When 'flip' (default), the placement is determined from the initial placement and the
-   * fallback placements in order. Whichever fits in the viewport first.
+   * Controls whether the popover is currently visible.
    *
-   * When 'autoPlacement', the initial placement and all fallback placements are evaluated
-   * and the placement with the most viewport space available.
+   * @remarks
+   * When `true`, the popover content is rendered and positioned relative to
+   * the reference element. When `false` or `undefined`, the popover content
+   * is not rendered (the `children` reference element is still rendered).
    *
-   * Option is only relevant if either `constrainSize` or `preventOverflow` is `true`
+   * @type {boolean}
+   * @defaultValue undefined
+   * @optional
+   */
+  open?: boolean
+
+  /**
+   * Sets the preferred placement of the popover relative to its reference element.
+   *
+   * @remarks
+   * The popover will attempt to render at this placement first. If it does not
+   * fit, it falls back to the `fallbackPlacements` according to the
+   * `placementStrategy`.
+   *
+   * Accepted values: `"top"` | `"top-start"` | `"top-end"` | `"right"` |
+   * `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
+   * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
+   *
+   * @type {Placement}
+   * @defaultValue `"bottom"`
+   * @optional
+   */
+  placement?: Placement
+
+  /**
+   * Controls the strategy used to determine the final placement when the
+   * popover does not fit in the preferred position.
+   *
+   * @remarks
+   * Only relevant when `constrainSize` or `preventOverflow` is `true`.
+   *
+   * Accepted values:
+   * - `"flip"` – Evaluates the initial placement and fallback placements in order; uses the first one that fits in the viewport.
+   * - `"autoPlacement"` – Evaluates all allowed placements and picks the one with the most available viewport space.
+   *
+   * @type {'flip' | 'autoPlacement'}
+   * @defaultValue `"flip"`
+   * @optional
    */
   placementStrategy?: 'flip' | 'autoPlacement'
-  /** Whether or not to render the popover in a portal element. */
-  portal?: boolean | string
-  preventOverflow?: boolean
-  referenceBoundary?: HTMLElement | null
+
   /**
-   * When defined, the popover will be positioned relative to this element.
-   * The children of the popover won't be rendered.
+   * Controls whether the popover content is rendered inside a portal element.
+   *
+   * @remarks
+   * When `true`, the popover is rendered into the default portal element
+   * registered with the nearest `PortalProvider`. When a string is provided,
+   * it is used as the name of a named portal element. When `false` or
+   * `undefined`, the popover is rendered in place.
+   *
+   * @type {boolean | string}
+   * @defaultValue undefined
+   * @optional
+   */
+  portal?: boolean | string
+
+  /**
+   * When `true`, shifts the popover along its side axis so it remains within
+   * the boundary element, and flips it when it would otherwise overflow.
+   *
+   * @remarks
+   * Uses the Floating UI `shift` middleware (and `flip` when combined with
+   * `constrainSize`).
+   *
+   * @type {boolean}
+   * @defaultValue true
+   * @optional
+   */
+  preventOverflow?: boolean
+
+  /**
+   * An HTML element used as the clipping boundary for detecting whether the
+   * reference element is hidden (scrolled out of view).
+   *
+   * @remarks
+   * When the reference element is scrolled outside of this boundary, the
+   * popover is hidden via the Floating UI `hide` middleware. When not
+   * provided, the nearest boundary element from the `BoundaryElementContext`
+   * is used.
+   *
+   * @type {HTMLElement | null}
+   * @defaultValue (from BoundaryElementContext)
+   * @optional
+   */
+  referenceBoundary?: HTMLElement | null
+
+  /**
+   * When provided, the popover is positioned relative to this DOM element
+   * instead of its `children` element.
+   *
+   * @remarks
+   * When a `referenceElement` is specified, the `children` element is still
+   * rendered but is not used for positioning. The popover measures and tracks
+   * the `referenceElement` for all Floating UI calculations.
+   *
+   * @type {HTMLElement | null}
+   * @defaultValue undefined
+   * @optional
    */
   referenceElement?: HTMLElement | null
-  /** @beta */
+
+  /**
+   * A ref that receives the Floating UI `update` function, allowing the
+   * consumer to imperatively recompute the popover's position.
+   *
+   * @beta Do not use in production.
+   *
+   * @type {Ref<PopoverUpdateCallback | undefined>}
+   * @defaultValue undefined
+   * @optional
+   */
   updateRef?: Ref<PopoverUpdateCallback | undefined>
+
+  /**
+   * Sets the maximum width of the popover content area.
+   *
+   * @remarks
+   * Uses the container width scale from the theme, plus the special values
+   * `"auto"` and `"fill"`. Supports responsive values.
+   *
+   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | "auto" | "fill"`
+   *
+   * @type {ResponsiveProp\<MaxWidth\>}
+   * @defaultValue `"auto"`
+   * @optional
+   */
   width?: ResponsiveProp<MaxWidth>
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Popover} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Popover`.
+ *
+ * Accepted values: `"div"` | `ComponentType`
+ *
+ * @public
+ */
 export type PopoverElementType = 'div' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Popover} component.
+ *
+ * @remarks
+ * Combines {@link PopoverOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link PopoverElementType}.
+ *
+ * @public
+ */
 export type PopoverProps<E extends PopoverElementType = PopoverElementType> = Props<
   PopoverOwnProps,
   E
@@ -148,7 +416,43 @@ function ViewportOverlay() {
 }
 
 /**
- * The `Popover` component is used to display some content on top of another.
+ * Displays floating content anchored to a reference element, with automatic
+ * positioning, overflow handling, and optional arrow indicators.
+ *
+ * @remarks
+ * The `Popover` component uses Floating UI to position a content overlay relative
+ * to a reference element (its `children` or a separately provided `referenceElement`).
+ * It supports flipping, shifting, resizing to fit within boundaries, arrow rendering,
+ * entrance/exit animation, portal rendering, and modal overlay behavior.
+ *
+ * The popover renders as a {@link Layer}-based card and participates in the design
+ * system's managed stacking context. It inherits all visual and layout props from
+ * {@link Card} and {@link Box} via {@link LayerOwnProps}.
+ *
+ * When `open` is `true`, the popover content is rendered and positioned. When
+ * `disabled` is `true`, the popover is completely bypassed and only the `children`
+ * reference element is rendered.
+ *
+ * ### Default prop values
+ *
+ * | Prop | Type | Default | Required | Description |
+ * |------|------|---------|----------|-------------|
+ * | `as` | `PopoverElementType` | `"div"` | No | The HTML element or component type to render. |
+ * | `__unstable_margins` | `PopoverMargins` | `[0, 0, 0, 0]` | No | Custom margin offsets for boundary calculations. |
+ * | `animate` | `boolean` | `false` | No | Enables scale/opacity entrance and exit animation. |
+ * | `arrow` | `boolean` | `false` | No | Renders a directional arrow pointing at the reference element. |
+ * | `constrainSize` | `boolean` | `false` | No | Prevents overflow by flipping and resizing the popover. |
+ * | `matchReferenceWidth` | `boolean` | `false` | No | Constrains the popover's max width to the reference element's width. |
+ * | `modal` | `boolean` | `false` | No | Renders a viewport overlay blocking pointer events beneath the popover. |
+ * | `overflow` | `ResponsiveProp<Overflow>` | `"hidden"` | No | Controls overflow behavior on the popover card. |
+ * | `placement` | `Placement` | `"bottom"` | No | Preferred placement relative to the reference element. |
+ * | `placementStrategy` | `'flip' \| 'autoPlacement'` | `"flip"` | No | Strategy used when the preferred placement does not fit. |
+ * | `preventOverflow` | `boolean` | `true` | No | Shifts the popover to remain within the boundary element. |
+ * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `3` | No | Border radius of the popover card. |
+ * | `shadow` | `ResponsiveProp<Shadow>` | `3` | No | Box shadow elevation of the popover card. |
+ * | `tone` | `CardTone \| 'inherit'` | `"inherit"` | No | Color tone of the popover card. |
+ * | `width` | `ResponsiveProp<MaxWidth>` | `"auto"` | No | Maximum width of the popover content area. |
+ * | `zOffset` | `ResponsiveProp<number>` | `Z_OFFSETS.popover` | No | Z-index offset for the popover layer. |
  *
  * @public
  */

@@ -31,52 +31,330 @@ import {isTargetWithinScope} from './isTargetWithinScope'
 import type {DialogPosition} from './types'
 import {useDialog} from './useDialog'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Dialog} component.
+ *
+ * @public
+ */
 export const DEFAULT_DIALOG_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Dialog} component.
+ *
+ * @remarks
+ * Extends {@link ContainerStyleProps} and {@link LayerOwnProps} (with `width` omitted)
+ * to combine container width control with layer stacking capabilities.
+ *
+ * Inherited from {@link ContainerStyleProps}:
+ * - `width` – Sets the maximum width of the dialog container using the theme's container width scale.
+ *
+ * Inherited from {@link LayerOwnProps} (via {@link CardOwnProps} and {@link BoxOwnProps}):
+ * - All layout, spacing, sizing, position, and visual style props from `Box`.
+ * - `onActivate` – Fires when the dialog becomes the topmost layer.
+ * - `zOffset` – Controls the z-index offset of the dialog layer.
+ *
+ * @public
+ */
 export type DialogOwnProps = ContainerStyleProps &
   Omit<LayerOwnProps, 'width'> & {
     /**
-     * @beta
+     * When `true`, the dialog automatically moves focus to its first focusable
+     * descendant on mount. When `false`, the dialog does not manage initial focus.
+     *
+     * @beta Do not use in production.
+     *
+     * @type {boolean}
+     * @defaultValue true
+     * @optional
      */
     __unstable_autoFocus?: boolean
+
     /**
-     * @beta
+     * When `true`, hides the close button in the dialog header.
+     *
+     * @beta Do not use in production.
+     *
+     * @type {boolean}
+     * @defaultValue false
+     * @optional
      */
     __unstable_hideCloseButton?: boolean
+
     /**
-     * Whether the dialog should animate in on mount.
+     * When `true`, the dialog animates into view on mount.
+     *
+     * @remarks
+     * Animation is automatically disabled when the user's operating system
+     * indicates a preference for reduced motion (`prefers-reduced-motion: reduce`).
      *
      * @beta
+     *
+     * @type {boolean}
      * @defaultValue false
+     * @optional
      */
     animate?: boolean
+
+    /**
+     * Sets the border radius of the dialog card.
+     *
+     * @remarks
+     * Uses the radius scale defined by the theme. Supports responsive values.
+     *
+     * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6`
+     *
+     * @type {ResponsiveProp\<Radius\>}
+     * @defaultValue 4
+     * @optional
+     */
     cardRadius?: ResponsiveProp<Radius>
+
+    /**
+     * A ref forwarded to the dialog's scrollable content container element.
+     *
+     * @remarks
+     * Provides a reference to the inner `<div>` that wraps the dialog's
+     * children content. Useful for controlling scroll position programmatically.
+     *
+     * @type {ForwardedRef\<HTMLDivElement\>}
+     * @defaultValue undefined
+     * @optional
+     */
     contentRef?: ForwardedRef<HTMLDivElement>
+
+    /**
+     * Content rendered in the footer area of the dialog, below the main content.
+     *
+     * @remarks
+     * When provided, the footer is rendered inside the dialog card at the bottom.
+     * Typically used for action buttons (e.g. "Save", "Cancel").
+     *
+     * @type {ReactNode}
+     * @defaultValue undefined
+     * @optional
+     */
     footer?: ReactNode
+
+    /**
+     * Content rendered in the header area of the dialog.
+     *
+     * @remarks
+     * When provided, a header bar is rendered at the top of the dialog card.
+     * Typically a string title, but accepts any React node. The header also
+     * receives a close button unless `__unstable_hideCloseButton` is `true`.
+     *
+     * The `id` prop is used to generate an `aria-labelledby` association
+     * between the dialog and its header element.
+     *
+     * @type {ReactNode}
+     * @defaultValue undefined
+     * @optional
+     */
     header?: ReactNode
+
+    /**
+     * A unique identifier for the dialog element.
+     *
+     * @remarks
+     * Used as the `id` attribute on the rendered dialog element, and to
+     * generate the `aria-labelledby` reference that associates the dialog
+     * with its header. This value must be unique within the document.
+     *
+     * @type {string}
+     * @required
+     */
     id: string
-    /** A callback that fires when the dialog becomes the top layer when it was not the top layer before. */
+
+    /**
+     * Callback fired when the dialog layer becomes the topmost active layer
+     * after not previously being the top layer.
+     *
+     * @remarks
+     * Receives an object containing the `activeElement` at the time of activation.
+     * Useful for managing focus or performing side effects when the dialog
+     * gains prominence in a multi-layer stack.
+     *
+     * @type {LayerProps['onActivate']}
+     * @defaultValue undefined
+     * @optional
+     */
     onActivate?: LayerProps['onActivate']
+
+    /**
+     * Callback fired when the user clicks outside the dialog card.
+     *
+     * @remarks
+     * Typically used to close the dialog when the user clicks on the
+     * overlay/backdrop area surrounding the dialog card.
+     *
+     * @type {() => void}
+     * @defaultValue undefined
+     * @optional
+     */
     onClickOutside?: () => void
+
+    /**
+     * Callback fired when the dialog requests to be closed.
+     *
+     * @remarks
+     * Triggered when the user clicks the close button in the dialog header.
+     * The dialog does not close automatically; the consumer must update state
+     * to unmount the dialog in response to this callback.
+     *
+     * @type {() => void}
+     * @defaultValue undefined
+     * @optional
+     */
     onClose?: () => void
+
+    /**
+     * Controls whether the dialog is currently visible.
+     *
+     * @remarks
+     * When `true`, the dialog is rendered and visible. When `false` or
+     * `undefined`, the dialog is not rendered.
+     *
+     * Note: The `Dialog` component is always rendered into a portal
+     * regardless of this prop. To fully unmount the dialog, remove
+     * the `<Dialog>` element from the component tree.
+     *
+     * @type {boolean}
+     * @defaultValue undefined
+     * @optional
+     */
     open?: boolean
+
+    /**
+     * The name of a named portal element to render the dialog into.
+     *
+     * @remarks
+     * When specified, the dialog is rendered into the named portal
+     * registered with the nearest {@link PortalProvider}. When omitted,
+     * the dialog renders into the default portal element.
+     *
+     * @type {string}
+     * @defaultValue undefined
+     * @optional
+     */
     portal?: string
+
+    /**
+     * Controls the CSS positioning scheme of the dialog overlay.
+     *
+     * @remarks
+     * Determines how the dialog is positioned relative to the viewport or
+     * a positioned ancestor. Supports responsive values.
+     *
+     * Accepted values:
+     * - `"absolute"` – Positions the dialog relative to its nearest positioned ancestor.
+     * - `"fixed"` – Positions the dialog relative to the viewport.
+     *
+     * @type {ResponsiveProp\<DialogPosition\>}
+     * @defaultValue `"fixed"` (or the value from DialogContext if available)
+     * @optional
+     */
     position?: ResponsiveProp<DialogPosition>
+
+    /**
+     * Sets the color scheme of the dialog card.
+     *
+     * @remarks
+     * Determines whether the dialog renders in a light or dark color mode.
+     * Child components inherit this scheme unless they specify their own.
+     *
+     * Accepted values: `"light"` | `"dark"`
+     *
+     * @type {ColorScheme}
+     * @defaultValue undefined
+     * @optional
+     */
     scheme?: ColorScheme
+
+    /**
+     * Sets the color tone of the dialog card.
+     *
+     * @remarks
+     * Controls the background and foreground colors applied to the dialog card.
+     *
+     * Accepted values:
+     * - `"transparent"` | `"default"` | `"neutral"` | `"primary"` | `"suggest"` | `"positive"` | `"caution"` | `"critical"` – A specific card tone from the theme.
+     * - `"inherit"` – Inherits the tone from the nearest parent `Card` context.
+     *
+     * @type {CardTone | 'inherit'}
+     * @defaultValue undefined
+     * @optional
+     */
     tone?: CardTone | 'inherit'
+
+    /**
+     * Controls the z-index offset of the dialog layer.
+     *
+     * @remarks
+     * Used to determine the stacking order of the dialog relative to other
+     * layers in the application. Higher values place the dialog above lower ones.
+     * Supports responsive values via an array.
+     *
+     * @type {number | number[]}
+     * @defaultValue Z_OFFSETS.dialog (from DialogContext if available)
+     * @optional
+     */
     zOffset?: number | number[]
   }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Dialog} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Dialog`.
+ *
+ * Accepted values: `"div"` | `"span"` | `ComponentType`
+ *
+ * @public
+ */
 export type DialogElementType = 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Dialog} component.
+ *
+ * @remarks
+ * Combines {@link DialogOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link DialogElementType}.
+ *
+ * @public
+ */
 export type DialogProps<E extends DialogElementType = DialogElementType> = Props<DialogOwnProps, E>
 
 /**
- * The Dialog component.
+ * A modal dialog component that renders content in a portal layer above
+ * the rest of the application.
+ *
+ * @remarks
+ * The `Dialog` component creates an accessible modal dialog following WAI-ARIA
+ * patterns. It renders into a portal, manages focus trapping between sentinel
+ * elements, and supports stacking with other dialogs and layers via the
+ * {@link Layer} system.
+ *
+ * The dialog consists of a container with optional `header`, `footer`, and
+ * children content areas. A close button is rendered in the header by default
+ * unless `__unstable_hideCloseButton` is `true`.
+ *
+ * ### Default prop values
+ *
+ * | Prop | Default |
+ * |------|---------|
+ * | `as` | `"div"` |
+ * | `__unstable_autoFocus` | `true` |
+ * | `__unstable_hideCloseButton` | `false` |
+ * | `animate` | `false` |
+ * | `cardRadius` | `4` |
+ * | `padding` | `3` |
+ * | `position` | `"fixed"` |
+ * | `shadow` | `4` |
+ * | `width` | `0` |
+ * | `zOffset` | `Z_OFFSETS.dialog` |
  *
  * @public
  */
