@@ -1,4 +1,5 @@
 import type {ColorScheme} from '@sanity/ui/theme'
+
 import type {WorkshopScope, WorkshopStory} from './config/types'
 
 /** @internal */

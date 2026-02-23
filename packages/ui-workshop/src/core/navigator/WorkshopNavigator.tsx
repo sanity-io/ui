@@ -2,8 +2,10 @@ import {SearchIcon} from '@sanity/icons'
 import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
 import type {ResponsiveProp} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
-import {workshopNavigator} from '#styles'
 import {memo, useCallback, useMemo, useState} from 'react'
+
+import {workshopNavigator} from '#styles'
+
 import type {WorkshopScope, WorkshopStory} from '../config/types'
 import {EMPTY_ARRAY} from '../constants'
 import {useWorkshop} from '../useWorkshop'
@@ -72,10 +74,10 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
       expanded={expanded}
       matches={matches}
       menu={menu}
+      query={query}
       onSearchQueryChange={handleSearchQueryChange}
       onSearchQueryClear={handleSearchQueryClear}
       onStoryClick={handleStoryClick}
-      query={query}
     />
   )
 })
@@ -107,12 +109,12 @@ const NavigatorView = memo(function NavigatorView(props: {
               fontSize={textInputFontSize}
               gap={2}
               icon={SearchIcon}
-              onChange={onSearchQueryChange}
-              onClear={onSearchQueryClear}
               padding={2}
               placeholder="Stories"
               radius={2}
               value={query}
+              onChange={onSearchQueryChange}
+              onClear={onSearchQueryClear}
             />
           </Card>
         </Layer>

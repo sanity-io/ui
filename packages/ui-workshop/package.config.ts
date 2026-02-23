@@ -1,6 +1,7 @@
+import {defineConfig} from '@sanity/pkg-utils'
 import path from 'path'
 import {env} from 'process'
-import {defineConfig} from '@sanity/pkg-utils'
+
 import {optimizeCss} from './rollup/optimize-css'
 import {vanillaExtractPlugin} from './rollup/vanilla-extract'
 

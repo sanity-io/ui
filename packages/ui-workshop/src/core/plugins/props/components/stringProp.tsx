@@ -1,5 +1,6 @@
 import {Box, Text, TextInput} from '@sanity/ui'
 import {memo} from 'react'
+
 import type {StringPropSchema} from '../types'
 import {useProps} from '../useProps'
 
@@ -19,9 +20,9 @@ export const StringProp = memo(function StringProp(props: {
       <Box marginTop={2}>
         <TextInput
           fontSize={[2, 2, 1]}
-          onChange={(event) => setPropValue(schema.name, event.currentTarget.value)}
           padding={2}
           value={value || ''}
+          onChange={(event) => setPropValue(schema.name, event.currentTarget.value)}
         />
       </Box>
     </Box>

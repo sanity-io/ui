@@ -1,6 +1,6 @@
-import {posix} from 'path'
 import {cssFileFilter} from '@vanilla-extract/integration'
 import MagicString, {Bundle as MagicStringBundle} from 'magic-string'
+import {posix} from 'path'
 import type {ModuleInfo, PluginContext} from 'rollup'
 
 /** Generate a CSS bundle from Rollup context */

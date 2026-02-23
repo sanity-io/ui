@@ -1,4 +1,5 @@
 import type {ElementTone} from '@sanity/ui/theme'
+
 import type {WorkshopPlugin} from '../config/types'
 
 export interface InspectorTab {

@@ -1,6 +1,7 @@
 import {SelectIcon} from '@sanity/icons'
-import {Button, Menu, MenuButton, MenuItem, type MenuButtonProps} from '@sanity/ui'
+import {Button, Menu, MenuButton, type MenuButtonProps, MenuItem} from '@sanity/ui'
 import {memo, useCallback} from 'react'
+
 import {ZOOM_OPTIONS} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 
@@ -46,12 +47,12 @@ const ZoomMenuView = memo(function ZoomMenuView(props: {
         <Menu>
           {ZOOM_OPTIONS.map((option) => (
             <MenuItem
-              fontSize={1}
               key={option.value}
-              onClick={() => setZoom(option.value)}
+              fontSize={1}
               padding={2}
               selected={option.value === zoom}
               text={option.title}
+              onClick={() => setZoom(option.value)}
             />
           ))}
         </Menu>

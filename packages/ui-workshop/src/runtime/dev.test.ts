@@ -2,6 +2,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import type {UserConfig} from 'vite'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
+
 import {dev} from './dev'
 
 /**

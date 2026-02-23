@@ -1,5 +1,6 @@
 import type {ColorScheme} from '@sanity/ui/theme'
 import {memo, useMemo} from 'react'
+
 import type {WorkshopConfig, WorkshopPlugin} from './config/types'
 import {EMPTY_ARRAY, EMPTY_RECORD} from './constants'
 import {resolveLocation} from './helpers'

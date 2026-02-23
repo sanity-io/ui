@@ -1,6 +1,7 @@
 import {Root, usePrefersDark} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
 import {memo, useCallback, useEffect, useReducer, useState} from 'react'
+
 import type {WorkshopConfig} from '../config/types'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'
@@ -68,8 +69,8 @@ export const WorkshopFrame = memo(function WorkshopFrame(
   return (
     <WorkshopProvider
       broadcast={broadcast}
-      config={config}
       channel={channel}
+      config={config}
       frameReady={frameReady}
       origin="frame"
       path={path}
