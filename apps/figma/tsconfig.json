@@ -1,15 +1,13 @@
 {
   "extends": "@repo/typescript-config/base.json",
-  "include": ["../exports", "../src", "../typings", "./src"],
+  "include": ["./src", "./package.config.ts"],
   "compilerOptions": {
-    "composite": true,
-    "rootDir": "..",
-    "outDir": "./dist/types",
     "target": "ES6",
-    "lib": ["ES2020"],
-    "paths": {
-      "@sanity/ui/*": ["../exports/*"],
-      "@sanity/ui": ["../exports/index.ts"]
-    }
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "noEmit": true,
+    "rootDir": ".",
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
   }
 }

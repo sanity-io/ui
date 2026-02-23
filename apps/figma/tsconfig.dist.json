@@ -1,13 +1,12 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "include": ["./src"],
-  "exclude": ["./src/**/*.test.ts"],
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist",
     "target": "ES6",
-    "lib": ["ES2020"],
-    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
-    "resolveJsonModule": true
+    "lib": ["ES2022", "DOM"],
+    "noCheck": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"]
   }
 }
