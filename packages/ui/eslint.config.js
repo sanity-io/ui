@@ -61,6 +61,11 @@ export default defineConfig(import.meta.dirname, [
 
         // configs
         {
+          type: 'configs/vanilla-extract',
+          pattern: ['vanilla-extract/**/*'],
+          mode: 'full',
+        },
+        {
           type: 'configs',
           pattern: [
             'cypress.config.ts',
@@ -124,7 +129,7 @@ export default defineConfig(import.meta.dirname, [
         {
           default: 'disallow',
           rules: [
-            {from: 'configs', allow: ['configs', 'package']},
+            {from: 'configs', allow: ['configs', 'configs/vanilla-extract', 'package']},
 
             {from: '@sanity/ui', allow: ['src/core']},
             {from: '@sanity/ui/css', allow: ['src/css']},
