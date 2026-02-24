@@ -1,4 +1,4 @@
-import {Box, Text, TextInput} from '@sanity/ui'
+import {Stack, Text, TextInput} from '@sanity/ui'
 import {useState} from 'react'
 
 import type {NumberPropSchema} from '../types'
@@ -9,37 +9,34 @@ export function NumberProp(props: {schema: NumberPropSchema; value?: number}) {
   const {schema, value} = props
   const {setPropValue} = useProps()
 
-  const [tempValue, setTempValue] = useState<string | undefined>(
-    typeof value === 'number' ? String(value) : undefined,
-  )
+  const [tempValue, setTempValue] = useState<string | undefined>(String(value))
+  const parsedValue = Number(tempValue)
 
   return (
-    <Box padding={3}>
-      <Text size={1} weight="semibold">
+    <Stack gap={3}>
+      <Text size={1} weight="medium">
         {schema.name}
       </Text>
-      <Box marginTop={2}>
-        <TextInput
-          customValidity={tempValue === undefined ? undefined : 'Not a number'}
-          fontSize={[2, 2, 1]}
-          padding={2}
-          value={tempValue ?? (typeof value === 'number' ? String(value) : '')}
-          onChange={(event) => {
-            const valueString = event.currentTarget.value
 
-            const valueNumber = Number(valueString)
+      <TextInput
+        customValidity={isNaN(parsedValue) ? 'Not a number' : undefined}
+        fontSize={[2, 2, 1]}
+        padding={2}
+        value={tempValue ?? (typeof value === 'number' ? String(value) : '')}
+        onChange={(event) => {
+          const valueString = event.currentTarget.value
 
-            if (isNaN(valueNumber)) {
-              setPropValue(schema.name, undefined)
-              setTempValue(valueString)
-              return
-            }
+          setTempValue(valueString)
 
-            setPropValue(schema.name, valueNumber)
-            setTempValue(undefined)
-          }}
-        />
-      </Box>
-    </Box>
+          const valueNumber = Number(valueString)
+
+          if (isNaN(valueNumber)) {
+            return
+          }
+
+          setPropValue(schema.name, valueNumber)
+        }}
+      />
+    </Stack>
   )
 }

@@ -43,6 +43,7 @@ function ViewportMenuView(props: {
           mode="ghost"
           padding={2}
           text={VIEWPORT_OPTIONS.find((o) => o.name === viewport)?.title}
+          tooltip={{text: 'Viewport'}}
         />
       }
       id="viewport-menu"
@@ -53,6 +54,7 @@ function ViewportMenuView(props: {
               key={option.name}
               fontSize={1}
               padding={2}
+              pressed={option.name === viewport}
               selected={option.name === viewport}
               text={option.title}
               onClick={() => setViewport(option.name)}

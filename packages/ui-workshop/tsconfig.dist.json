@@ -1,6 +1,6 @@
 {
   "extends": "@repo/typescript-config/base.json",
-  "include": ["./exports", "./package.json", "./src", "./typings"],
+  "include": ["./exports", "./package.json", "./src"],
   "exclude": [
     "../ui/exports",
     "../ui/src",
@@ -13,6 +13,7 @@
   "compilerOptions": {
     "rootDir": "..",
     "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/tsconfig.dist.tsbuildinfo",
 
     "noCheck": true,
 

@@ -16,7 +16,7 @@ export function InspectorHeader(props: {
       flex="none"
       insetTop={0}
       justifyContent={['center', 'center', 'flex-start']}
-      padding={2}
+      padding={3}
       position="sticky"
       shadow={1}
     >

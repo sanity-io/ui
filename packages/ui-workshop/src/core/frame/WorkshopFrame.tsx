@@ -44,7 +44,6 @@ export function WorkshopFrame(props: WorkshopFrameProps) {
   const broadcast = useCallback(
     (msg: WorkshopMsg) => {
       channel.publish(msg)
-
       main.message.publish(msg)
     },
     [channel, main],
@@ -77,7 +76,7 @@ export function WorkshopFrame(props: WorkshopFrameProps) {
       viewport={viewport}
       zoom={zoom}
     >
-      <Root height="fill" overflow="auto" scheme={scheme}>
+      <Root height="fill" lang="en" overflow="auto" scheme={scheme}>
         <WorkshopCanvas />
       </Root>
     </WorkshopProvider>

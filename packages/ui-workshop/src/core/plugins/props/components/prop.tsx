@@ -1,4 +1,4 @@
-import {Box, Text} from '@sanity/ui'
+import {Text} from '@sanity/ui'
 
 import type {PropSchema} from '../types'
 import {BooleanProp} from './booleanProp'
@@ -57,13 +57,11 @@ export function Prop(props: {schema: PropSchema; value: unknown}) {
   }
 
   return (
-    <Box padding={2}>
-      <Text size={1} weight="semibold">
-        Unknown property type:{' '}
-        <code>
-          {(schema as PropSchema).name}: {(schema as PropSchema).type}
-        </code>
-      </Text>
-    </Box>
+    <Text size={1} weight="semibold">
+      Unknown property type:{' '}
+      <code>
+        {(schema as PropSchema).name}: {(schema as PropSchema).type}
+      </code>
+    </Text>
   )
 }

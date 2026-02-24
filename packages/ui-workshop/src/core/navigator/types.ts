@@ -24,9 +24,9 @@ export interface MenuScope {
   scope: WorkshopScope
 }
 
-/** @internal */
-export interface MenuCollection {
-  name?: string
-  title?: string
-  children?: MenuCollection[]
-}
+// /** @internal */
+// export interface MenuCollection {
+//   name?: string
+//   title?: string
+//   children?: MenuCollection[]
+// }

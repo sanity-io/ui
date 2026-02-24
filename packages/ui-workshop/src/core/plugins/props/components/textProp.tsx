@@ -1,4 +1,4 @@
-import {Box, Text, TextArea} from '@sanity/ui'
+import {Stack, Text, TextArea} from '@sanity/ui'
 
 import type {TextPropSchema} from '../types'
 import {useProps} from '../useProps'
@@ -9,18 +9,17 @@ export function TextProp(props: {schema: TextPropSchema; value?: string}) {
   const {setPropValue} = useProps()
 
   return (
-    <Box padding={3}>
-      <Text size={1} weight="semibold">
+    <Stack gap={3}>
+      <Text size={1} weight="medium">
         {schema.name}
       </Text>
-      <Box marginTop={2}>
-        <TextArea
-          fontSize={[2, 2, 1]}
-          rows={4}
-          value={value || ''}
-          onChange={(event) => setPropValue(schema.name, event.currentTarget.value)}
-        />
-      </Box>
-    </Box>
+
+      <TextArea
+        fontSize={[2, 2, 1]}
+        rows={4}
+        value={value}
+        onChange={(event) => setPropValue(schema.name, event.currentTarget.value)}
+      />
+    </Stack>
   )
 }

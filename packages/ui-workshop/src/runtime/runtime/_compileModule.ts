@@ -3,7 +3,8 @@ export function _compileModule(paths: string[]): string {
     return `// THIS FILE IS AUTO-GENERATED\n\nexport const scopes = []\n`
   }
 
-  const sortedPaths = paths.sort()
+  const sortedPaths = paths.slice(0)
+  sortedPaths.sort()
   const imports = sortedPaths
     .map((p, idx) => `import _${idx} from '${_sanitizeModulePath(p)}'`)
     .join('\n')

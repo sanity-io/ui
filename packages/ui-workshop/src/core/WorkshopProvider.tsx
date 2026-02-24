@@ -7,7 +7,7 @@ import {CommandsProvider} from './lib/commands'
 import type {Pubsub} from './lib/pubsub'
 import {propsPlugin} from './plugins/props/plugin'
 import type {WorkshopMsg} from './types/msg'
-import {type WorkshopColorScheme,WorkshopContext} from './WorkshopContext'
+import {type WorkshopColorScheme, WorkshopContext} from './WorkshopContext'
 
 /** @internal */
 export interface WorkshopProviderProps {

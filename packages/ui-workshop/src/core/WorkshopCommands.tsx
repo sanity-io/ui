@@ -1,4 +1,4 @@
-import {type RefObject,useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {type RefObject, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {CommandPalette} from './commandPalette'
 import {VIEWPORT_OPTIONS, ZOOM_OPTIONS} from './constants'

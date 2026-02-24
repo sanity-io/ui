@@ -42,11 +42,6 @@ export function PropsProvider(props: {children?: React.ReactNode}) {
     [broadcast],
   )
 
-  const ctx: PropsContextValue = useMemo(
-    () => ({registerProp, schemas, setPropValue, unregisterProp, value}),
-    [registerProp, schemas, setPropValue, unregisterProp, value],
-  )
-
   // Subscribe to global messages
   useEffect(
     () =>
@@ -80,6 +75,11 @@ export function PropsProvider(props: {children?: React.ReactNode}) {
       })
     }
   }, [broadcast, value])
+
+  const ctx: PropsContextValue = useMemo(
+    () => ({registerProp, schemas, setPropValue, unregisterProp, value}),
+    [registerProp, schemas, setPropValue, unregisterProp, value],
+  )
 
   return <PropsContext.Provider value={ctx}>{children}</PropsContext.Provider>
 }

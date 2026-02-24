@@ -23,6 +23,7 @@ export function SchemeMenu() {
         mode="bleed"
         padding={2}
         selected={scheme === 'system'}
+        tooltip={{text: 'System'}}
         onClick={() => setScheme('system')}
       />
       <Button
@@ -30,6 +31,7 @@ export function SchemeMenu() {
         mode="bleed"
         padding={2}
         selected={scheme === 'light'}
+        tooltip={{text: 'Light'}}
         onClick={() => setScheme('light')}
       />
       <Button
@@ -37,6 +39,7 @@ export function SchemeMenu() {
         mode="bleed"
         padding={2}
         selected={scheme === 'dark'}
+        tooltip={{text: 'Dark'}}
         onClick={() => setScheme('dark')}
       />
     </Flex>

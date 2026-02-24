@@ -38,6 +38,7 @@ function ZoomMenuView(props: {disabled: boolean; setZoom: (z: number) => void; z
           mode="ghost"
           padding={2}
           text={ZOOM_OPTIONS.find((o) => o.value === zoom)?.title}
+          tooltip={{text: 'Zoom'}}
         />
       }
       id="zoom-menu"
@@ -48,6 +49,7 @@ function ZoomMenuView(props: {disabled: boolean; setZoom: (z: number) => void; z
               key={option.value}
               fontSize={1}
               padding={2}
+              pressed={option.value === zoom}
               selected={option.value === zoom}
               text={option.title}
               onClick={() => setZoom(option.value)}
