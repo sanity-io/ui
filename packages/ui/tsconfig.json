@@ -8,6 +8,7 @@
     "./src",
     "./test",
     "./typings",
+    "./vanilla-extract",
     "./vitest.config.ts",
     "./workshop",
     "./workshop.config.ts",
